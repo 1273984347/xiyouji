@@ -4,13 +4,28 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W544），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W546），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.145（2026-09-05）：W546 迁移阶段 3 — Vite 8.2（rolldown）+ plugin-react 6·engines 收紧
+
+> **来源**：评估单 §三 阶段 3（构建层）——Vite 8 + @vitejs/plugin-react 6（基线已先行至 6.4.3，见 W539/W540）。
+> - **执行**：vite ^6.4.3→^8.2.2（rolldown 内核）、@vitejs/plugin-react ^4.2.1→^6.1.1；engines 收紧为 ^20.19.0 || >=22.12.0（vite 8 Node 下限）；config 零改动兼容（rolldownOptions 提示为新增可选项）。CI node 20 浮动版满足 ^20.19.0。
+> - **验证**：npm run build 通过；tsc -b 通过；npm audit 0；verify_delivery 全绿。
+> - **文件**：xiyouji-agent-web/package.json、package-lock.json、六文档 + 旁文档版本行、site 四页脚。
+> - **状态**：已落地（本批随 W546 提交并 push origin/main）。
+
+### v2.3.144（2026-09-05）：W545 热修复补记 — batch_cascade.py _root 未定义（ruff F521→F821）
+
+> **来源**：W544 批次提交后远端 CI 红灯——batch_cascade.py 内联路径钳制引用了未定义的 `_root`（多轮编辑中断致模块级定义行丢失），ruff F821 ×2。
+> - **执行**：`_root = os.path.realpath(ROOT)` 一行模块级定义补回，行为零变更。
+> - **验证**：ruff check scripts/ 全绿；远端 CI 1m1s 绿。
+> - **状态**：已落地（3c61beb）。
 
 ### v2.3.143（2026-09-05）：W544 agent-web 迁移阶段 2 — TypeScript 7 + @types/react 19 类型基线归零
 

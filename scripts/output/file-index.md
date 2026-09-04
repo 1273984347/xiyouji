@@ -11,7 +11,27 @@
 ---
 
 
-## W544 W544 agent-web 迁移阶段 2（2026-09-05·v2.3.143）
+## W546 迁移阶段 3（2026-09-05·v2.3.145）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/package.json | W546 | 修改·迁移阶段 3：vite ^8.2.2（rolldown）/ @vitejs/plugin-react ^6.1.1 + engines 收紧 ^20.19.0 || >=22.12.0 |
+| xiyouji-agent-web/package-lock.json | W546 | 修改·阶段 3 锁文件更新 |
+| CHANGELOG.md | W546 | 新增·W546 版段 + 编号规则上限 W001-W546 + W545 热修复补记段 |
+| 交接文档.md | W546 | 修改·头尾「最后更新」prepend W546 + 头链 3 批自动淘汰 + 里程碑概要滚动淘汰 W535 块 + 当前 HEAD 句更新 + 当前进度标题更新 |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W546 | 修改·版本行同步 v2.3.145（2026-09-05） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W546 | 修改·四页脚链首 prepend W546 |
+| .github/workflows/README.md | W546 | 修改·旁文档同步（头部版本行 + 里程碑行上限 W450-W546） |
+| AGENTS.md | W546 | 修改·版本脚注追加 W545/W546 条目 |
+| scripts/output/file-index.md | W546 | 新增·W546 段（本段） |
+
+## W545 热修复补记（2026-09-05·v2.3.144）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_cascade.py | W545 | 修改·补 _root = os.path.realpath(ROOT) 模块级定义一行（W544 内联钳制引用未定义名——ruff F821 ×2 红灯·行为零变更） |
+
+## W544 agent-web 迁移阶段 2（2026-09-05·v2.3.143）
 
 | 文件 | W | 说明 |
 |---|---|---|
@@ -27,7 +47,7 @@
 | AGENTS.md | W544 | 修改·版本脚注追加 W544 条目 |
 | scripts/output/file-index.md | W544 | 新增·W544 段（本段·batch_cascade.py 执行） |
 
-## W543 W543 agent-web 迁移阶段 1（2026-09-05·v2.3.142）
+## W543 agent-web 迁移阶段 1（2026-09-05·v2.3.142）
 
 | 文件 | W | 说明 |
 |---|---|---|
@@ -42,7 +62,7 @@
 | AGENTS.md | W543 | 修改·版本脚注追加 W543 条目 |
 | scripts/output/file-index.md | W543 | 新增·W543 段（本段·batch_cascade.py 执行） |
 
-## W542 W542 交付效率工具化（2026-09-05·v2.3.141）
+## W542 交付效率工具化（2026-09-05·v2.3.141）
 
 | 文件 | W | 说明 |
 |---|---|---|

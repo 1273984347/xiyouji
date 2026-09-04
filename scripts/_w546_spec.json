@@ -1,0 +1,23 @@
+{
+ "batch": "W546",
+ "version": "v2.3.143",
+ "date": "2026-09-05",
+ "title": "W546 迁移阶段 3 — Vite 8.2（rolldown）+ plugin-react 6·engines 收紧",
+ "desc": "迁移阶段 3（Vite 8 + plugin-react 6）",
+ "head_entry": "2026-09-05（v2.3.143 W546 迁移阶段 3：Vite 8.2（rolldown）+ plugin-react 6·engines 收紧）",
+ "head_sentence": "迁移阶段 3——Vite 8.2 + plugin-react 6·engines 收紧",
+ "changelog_body": "\n\n> **来源**：评估单 §三 阶段 3（构建层）——Vite 8 + @vitejs/plugin-react 6（基线已先行至 6.4.3，见 W539/W540）。\n> - **执行**：vite ^6.4.3→^8.2.2（rolldown 内核）、@vitejs/plugin-react ^4.2.1→^6.1.1；engines 收紧为 ^20.19.0 || >=22.12.0（vite 8 Node 下限）；config 零改动兼容（rolldownOptions 提示为新增可选项）。\n> - **验证**：npm run build 通过（rolldown 构建·chunk 提示为可选优化）；tsc -b 通过；npm audit 0；verify_delivery 全绿。CI node 20 浮动版满足 ^20.19.0。\n> - **文件**：xiyouji-agent-web/package.json、package-lock.json、六文档 + 旁文档版本行、site 四页脚。\n> - **状态**：已落地（本批随 W546 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.143 W546 迁移阶段 3（2026-09-05）**：\n  - vite 6.4.3→8.2.2（rolldown 内核）+ @vitejs/plugin-react 4.7→6.1.1——config 零改动兼容，build 通过\n  - engines 收紧 ^20.19.0 || >=22.12.0（vite 8 Node 下限）；CI node 20 浮动版满足",
+ "agents_note": "2026-09-05（v2.3.143 W546）迁移阶段 3：Vite 8.2（rolldown）+ plugin-react 6·engines 收紧（^20.19.0 || >=22.12.0），仅版本脚注同步",
+ "file_index_rows": [
+  "| xiyouji-agent-web/package.json | W546 | 修改·迁移阶段 3：vite ^8.2.2 / @vitejs/plugin-react ^6.1.1 + engines 收紧（^20.19.0 || >=22.12.0） |",
+  "| xiyouji-agent-web/package-lock.json | W546 | 修改·阶段 3 锁文件更新 |",
+  "| CHANGELOG.md | W546 | 新增·W546 版段 + 编号规则上限 W001-W546 |",
+  "| 交接文档.md | W546 | 修改·头尾「最后更新」prepend W546 + 头链 3 批自动淘汰 + 里程碑概要滚动淘汰最老块 + HEAD 句/标题更新（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W546 | 修改·版本行同步 v2.3.143（2026-09-05·batch_cascade.py 执行） |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W546 | 修改·四页脚链首 prepend W546（batch_cascade.py 执行） |",
+  "| .github/workflows/README.md | W546 | 修改·旁文档同步（batch_cascade.py 执行） |",
+  "| AGENTS.md | W546 | 修改·版本脚注追加 W546 条目 |",
+  "| scripts/output/file-index.md | W546 | 新增·W546 段（本段·batch_cascade.py 执行） |"
+ ]
+}
