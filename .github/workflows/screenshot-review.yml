@@ -114,7 +114,7 @@ jobs:
                 SCOPE=full
                 ;;
               # 非可视化变更 → 免审
-              scripts/*|docs/*|source/*|dataset/*|references/*|timeline/*|tools/*|mcp-server/*|xiyouji-agent-web/*|hyperframes/*|tests/*|.github/*|*.md|Makefile|LICENSE*|CITATION.cff|CONTRIBUTING.md|pyproject.toml|pytest.ini|mypy.ini|.gitignore|.pre-commit-config.yaml|.eslintrc.json|.env.example)
+              scripts/*|docs/*|source/*|dataset/*|references/*|timeline/*|tools/*|mcp-server/*|xiyouji-agent-web/*|hyperframes/*|tests/*|.github/*|*.md|Makefile|LICENSE*|CITATION.cff|CONTRIBUTING.md|pyproject.toml|pytest.ini|mypy.ini|.gitignore|.pre-commit-config.yaml|.eslintrc.json|eslint.config.mjs|.env.example)
                 ;;
               # 未知路径：保守全量
               *)

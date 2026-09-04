@@ -9,6 +9,14 @@ import re
 import os
 import glob
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 DOCS_DIR = r"d:\1\xiyouji\docs\01-全书逐回解读"
 
 # 1. 收集所有章节文件，提取章节号
@@ -63,7 +71,7 @@ for i, ch in enumerate(sorted_chapters):
 
     # 如果内容有变化，写回
     if content != original_content:
-        with open(filepath, 'w', encoding='utf-8') as f:
+        with _w536_guard_open(filepath, 'w', encoding='utf-8') as f:
             f.write(content)
         changes.append((filename, file_changes))
         print(f"✓ {filename}: {'; '.join(file_changes)}")

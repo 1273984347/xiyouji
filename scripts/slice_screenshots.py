@@ -7,6 +7,14 @@ import os
 
 from PIL import Image
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_OUT = os.path.join(ROOT, 'scripts', 'output', 'screenshots')
 DEFAULT_SLICE_HEIGHT = 800
@@ -84,7 +92,7 @@ def main():
         report.append('')
 
     index_path = os.path.join(output_dir, 'slice-index.md')
-    with open(index_path, 'w', encoding='utf-8') as f:
+    with _w536_guard_open(index_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(report))
     print(f'Slice index written to {index_path}')
 

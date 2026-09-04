@@ -15,6 +15,14 @@
 import os
 import re
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 _ROOT = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(_ROOT, ".."))
 SRC_DIR = os.path.join(ROOT, "docs", "01-全书逐回解读")
@@ -115,7 +123,7 @@ def process():
         footer = "\n> 关联分析：" + links + "\n"
         pos = anchor_insert_pos(text)
         new_text = text[:pos] + footer + text[pos:]
-        with open(path, "w", encoding="utf-8") as f:
+        with _w536_guard_open(path, "w", encoding="utf-8") as f:
             f.write(new_text)
         changed += 1
         print("  + %s -> %d chars (%s)" % (fn, len(matched), " ".join(d for d, _ in matched)))

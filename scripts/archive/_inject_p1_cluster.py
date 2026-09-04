@@ -6,6 +6,14 @@
 """
 import os
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 TARGETS = {
     "site/data/guanyin-six-roles-network.html": "type",
     "site/data/monster-hierarchy-network.html": "type",
@@ -52,7 +60,7 @@ def inject(path, field):
             continue
         out_lines.append(" " * base + bl[8:])
     new_lines = lines[:idx+1] + [""] + out_lines + lines[idx+1:]
-    open(path, "w", encoding="utf-8").write("\n".join(new_lines))
+    _w536_guard_open(path, "w", encoding="utf-8").write("\n".join(new_lines))
     print(f"✓ 注入完成: {path}  ({field}, +{(len(out_lines))} 行)")
 
 if __name__ == "__main__":

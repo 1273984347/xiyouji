@@ -24,6 +24,14 @@ import os
 import re
 import sys
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AUTH = os.path.join(ROOT, "scripts", "output", "data", "hardships_81.json")
 TEXT_SEARCH = os.path.join(ROOT, "dataset", "text-search.json")
@@ -145,7 +153,7 @@ def main():
 
     if apply:
         existing["hardships"] = hardships
-        json.dump(existing, open(OUT, "w", encoding="utf-8"),
+        json.dump(existing, _w536_guard_open(OUT, "w", encoding="utf-8"),
                   ensure_ascii=False, indent=2)
         print(f"\n✓ 已写入 {OUT}（hardships={len(hardships)}，聚合轴校验通过）")
     else:

@@ -1,3 +1,4 @@
+import os
 # -*- coding: utf-8 -*-
 """D 类标签重叠清零：注入 audit-contentavoid 运行时脚本。
 - 热力图列标签(.heat-col-label)旋转 -42° 保留可见
@@ -5,6 +6,14 @@
 作用于 10 个 content 重叠页面。幂等（已注入则跳过）。
 """
 import os, re
+
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TARGET_PAGES = [
@@ -75,7 +84,7 @@ def inject(page):
     if "</body>" not in s:
         return f"skip {page} (no </body>)"
     s = s.replace("</body>", SCRIPT + "\n</body>", 1)
-    open(p, "w", encoding="utf-8").write(s)
+    _w536_guard_open(p, "w", encoding="utf-8").write(s)
     return f"ok {page}"
 
 if __name__ == "__main__":

@@ -19,6 +19,14 @@ import re
 import glob
 from collections import Counter
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHENDU = os.path.join(ROOT, "source", "原文", "shendu")
 REPORT = os.path.join(ROOT, ".workbuddy", "sd_scan_v2.md")
@@ -230,7 +238,7 @@ def main():
                      + " ".join(f"第{c}={n}" for c, n in r["top5"]))
 
     os.makedirs(os.path.dirname(REPORT), exist_ok=True)
-    with open(REPORT, "w", encoding="utf-8") as f:
+    with _w536_guard_open(REPORT, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
     print(f"切片:{len(results)} | strong:{len(strong)} | likely:{len(likely)} | check:{len(check)}")

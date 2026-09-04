@@ -32,6 +32,19 @@ updates:
         dependency-type: "production"
       development-deps:
         dependency-type: "development"
+    # W536 新增：主版本升级单独排队，不并入每周自动更新。
+    # 原因（实证）：2026-08 两个 major PR（#9 dev-deps、#11 prod-deps）CI 红灯——
+    #   #9  typescript 5→7 · vite 5→8 · tailwindcss 3→4 · @types/node 20→26
+    #   #11 react/react-dom 18→19 · express 4→5 · uuid 11→14 · better-sqlite3 12→13
+    # 这些是框架级破坏性变更（Tailwind v4 改 CSS-first 配置、Express 5 改路由语义、
+    # uuid 14 转 ESM-only、React 19 改 ref 类型），不是「改几处类型错误」能吸收的，
+    # 需专项迁移批次。评估见 docs/10-方法论沉淀/agent-web技术栈迁移评估.md。
+    # 解除条件：完成对应栈的迁移并在本地 + CI 验证通过后，删除本 ignore 段。
+    # 注意：本规则不影响 minor/patch 更新；若某包出现 Dependabot 安全告警（security alert），
+    # 需人工判断是否临时解除 ignore 直接升到修漏洞的 major 版本。
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "pip"
     directory: "/scripts"

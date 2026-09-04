@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """P2 延伸：将可选多类饼图改为矩形树图(treemap)。
@@ -7,6 +8,14 @@
 注入守卫版 renderTreemap 助手(含根节点守卫) + 自包含 .tm-tooltip 样式与容器。幂等。
 """
 import io, sys, re
+
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
@@ -154,6 +163,6 @@ for f, items in REPL.items():
             continue
         s = ns
         changed.append(name)
-    open(f, 'w', encoding='utf-8').write(s)
+    _w536_guard_open(f, 'w', encoding='utf-8').write(s)
     print(f"OK {f}: 替换 {changed} ; renderTreemap={'已有' if 'function renderTreemap(' in s else '已注入'} ; tooltip={'已有' if 'id=\"tm-tooltip\"' in s else '已注入'}")
 print("完成。")

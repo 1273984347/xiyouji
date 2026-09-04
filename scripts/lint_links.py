@@ -37,6 +37,14 @@ import urllib.request
 from html.parser import HTMLParser
 from pathlib import Path
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 ROOT = Path(__file__).resolve().parent.parent
 
 # 视为外链 / 跳过本地校验的 scheme
@@ -140,16 +148,45 @@ def check_external(url, timeout=6):
     # W424：URL 含非 ASCII（中文路径）时先百分号编码，避免 urllib ascii 编码错误误报 broken
     import urllib.parse as _up
     url = _up.quote(url, safe=":/?#[]@!$&'()*+,;=%-._~")
+    _u = _up.urlparse(url)
+    if _u.scheme not in ("http", "https"):
+        return (False, "non-http scheme")
+    import ipaddress as _ipa
+    import socket as _socket
+    try:
+        _infos = _socket.getaddrinfo(_u.hostname, None)
+    except Exception as _e:
+        return (False, "dns fail %s" % str(_e)[:60])
+    for _info in _infos:
+        _ip = _ipa.ip_address(_info[4][0])
+        if _ip.is_private or _ip.is_loopback or _ip.is_link_local or _ip.is_reserved or _ip.is_multicast or _ip.is_unspecified:
+            raise ValueError("blocked private/reserved address: %s" % _ip)
     headers = {"User-Agent": "lint_links/1.0 (+stdlib)"}
+    # W536 安全加固：http.client 直连（经上方协议白名单 + 私网 IP 阻断后才可达此处）
+    import http.client as _hc
+    _pq = _up.urlparse(url)
     for method in ("HEAD", "GET"):
+        _conn = None
         try:
-            req = urllib.request.Request(url, method=method, headers=headers)
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
-                return (resp.status < 400, f"HTTP {resp.status}")
+            if _pq.scheme == "https":
+                _conn = _hc.HTTPSConnection(_pq.hostname, timeout=timeout)
+            else:
+                _conn = _hc.HTTPConnection(_pq.hostname, timeout=timeout)
+            _path = _pq.path or "/"
+            if _pq.query:
+                _path += "?" + _pq.query
+            _conn.request(method, _path, headers=headers)
+            _resp = _conn.getresponse()
+            return (_resp.status < 400, "HTTP %d" % _resp.status)
+        except ValueError as e:
+            return (False, str(e)[:80])
         except Exception as e:
             if method == "HEAD":
                 continue
             return (False, str(e)[:80])
+        finally:
+            if _conn is not None:
+                _conn.close()
     return (False, "unreachable")
 
 

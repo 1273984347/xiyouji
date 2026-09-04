@@ -120,6 +120,13 @@ function nameOf(rel) {
 
 (async () => {
   const opts = parseArgs(process.argv.slice(2));
+  // W536 安全加固：输出目录严格钳制在 scripts/output 之下
+  const _outRoot = path.resolve(ROOT, 'scripts', 'output');
+  if (path.resolve(opts.out) !== _outRoot && !path.resolve(opts.out).startsWith(_outRoot + path.sep)) {
+    console.error("--out must stay under scripts/output");
+    process.exit(2);
+  }
+  opts.out = path.resolve(opts.out);
   fs.mkdirSync(opts.out, { recursive: true });
   const browser = await launchBrowser();
   const results = [];

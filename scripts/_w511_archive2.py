@@ -1,7 +1,16 @@
+import os
 #!/usr/bin/env python3
 """W511 二次归档：CHANGELOG 剩余最旧段（W464/W478/W477/W476/W463-W449）迁移至 archive，
 使 CHANGELOG ≤ 50KB（W417 先例：136KB→39KB）。"""
 import re
+
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
 
 path = "CHANGELOG.md"
 lines = open(path, encoding="utf-8").read().splitlines()
@@ -31,7 +40,7 @@ assert m_first and m_last
 range_title = "## W511 归档段-2（2026-08-25）：v%s-v%s（W%s-W%s）" % (
     m_last.group(1), m_first.group(1), m_last.group(2), m_first.group(2))
 
-open(path, "w", encoding="utf-8", newline="\n").write("\n".join(kept) + "\n")
+_w536_guard_open(path, "w", encoding="utf-8", newline="\n").write("\n".join(kept) + "\n")
 with open("CHANGELOG-ARCHIVE.md", "a", encoding="utf-8", newline="\n") as f:
     f.write("\n\n---\n\n" + range_title + "\n\n")
     f.write("\n".join(migrated) + "\n")

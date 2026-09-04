@@ -15,6 +15,14 @@ docs/01-全书逐回解读/第001回-灵根育孕源流出.md 的 ## 深度解�
 """
 import os
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 # 正确的第1回（灵根育孕源流出 心性修持大道生）深度解读 body。
@@ -67,7 +75,7 @@ def fix_sd_source():
     end = s.index("\n", i)          # 注释行结束
     head = s[: end + 1]
     out = head + "\n\n" + NEW_BODY + "\n"
-    with open(p, "w", encoding="utf-8") as f:
+    with _w536_guard_open(p, "w", encoding="utf-8") as f:
         f.write(out)
     return p
 
@@ -83,7 +91,7 @@ def fix_docs_chapter():
     sep = s.index("\n---\n", nl)     # 标题之后第一个 --- 分隔符（原文全文之前）
     tail = s[sep:]                   # 从 --- 起全部保留
     out = head + "\n" + NEW_BODY + "\n" + tail
-    with open(p, "w", encoding="utf-8") as f:
+    with _w536_guard_open(p, "w", encoding="utf-8") as f:
         f.write(out)
     return p
 

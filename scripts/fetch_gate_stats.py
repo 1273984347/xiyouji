@@ -29,9 +29,18 @@ import json
 import os
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 from datetime import date, timedelta
 from pathlib import Path
+
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
 
 ROOT = Path(__file__).resolve().parent.parent
 ENV_FILE = ROOT / ".env"
@@ -105,6 +114,15 @@ def http_error_msg(code: int, body: str) -> str:
 
 
 def http_json(url: str, token: str) -> dict:
+    _u = urllib.parse.urlparse(url)
+    if _u.scheme != "https" or not (_u.hostname or "").endswith(".goatcounter.com"):
+        raise ValueError("W536 guard: unexpected endpoint: %s" % url)
+    import ipaddress as _ipa
+    import socket
+    for _info in socket.getaddrinfo(_u.hostname, None):
+        _ip = _ipa.ip_address(_info[4][0])
+        if _ip.is_private or _ip.is_loopback or _ip.is_link_local or _ip.is_reserved or _ip.is_multicast or _ip.is_unspecified:
+            raise ValueError("W536 guard: endpoint resolves to private address: %s" % _ip)
     req = urllib.request.Request(
         url,
         headers={"Content-Type": "application/json", "Authorization": f"Bearer {token}"},

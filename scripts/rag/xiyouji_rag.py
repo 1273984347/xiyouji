@@ -44,6 +44,14 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 # ---- 路径（相对本脚本：scripts/rag/xiyouji_rag.py → 项目根 = ../../）----
 _HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(_HERE, "..", ".."))
@@ -273,7 +281,7 @@ def build_index(force=False):
         "avgdl": (sum(lengths.values()) / N) if N else 0.0,
     }
     try:
-        with open(INDEX_CACHE, "w", encoding="utf-8") as f:
+        with _w536_guard_open(INDEX_CACHE, "w", encoding="utf-8") as f:
             json.dump(index, f, ensure_ascii=False)
     except Exception:
         pass

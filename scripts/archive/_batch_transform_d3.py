@@ -1,3 +1,4 @@
+import os
 # -*- coding: utf-8 -*-
 """Batch-apply the D3 force-graph perf fix to all ANTIPATTERN files.
 Converts per-tick geometry-attribute writes (cx/cy, x/y) into composited
@@ -5,6 +6,14 @@ Converts per-tick geometry-attribute writes (cx/cy, x/y) into composited
 expression (e.g. `d.x || 0`, `d.x + 8`). Idempotent + only edits files that
 actually match the anti-pattern. Injects `will-change: transform` CSS."""
 import re, os
+
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
 
 DATA = r'D:/1/xiyouji/site/data'
 BATCH = [
@@ -61,5 +70,5 @@ for name in BATCH:
     if '</style>' in txt and 'will-change: transform' not in txt:
         txt = txt.replace('</style>', css_rule + '</style>', 1)
         css_injected = True
-    open(path, 'w', encoding='utf-8').write(txt)
+    _w536_guard_open(path, 'w', encoding='utf-8').write(txt)
     print('OK   %-42s nodeSubs=%d labelSubs=%d simSubs=%d css=%s' % (name, n_node, n_label, n_sim, css_injected))

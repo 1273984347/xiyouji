@@ -22,6 +22,14 @@ import os
 import re
 import sys
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 _HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(_HERE, ".."))
 DOCS = os.path.join(ROOT, "docs")
@@ -99,7 +107,7 @@ def main():
                 if apply and can_apply:
                     new_lines = [ln.replace(pat, rep) for ln in lines]
                     if new_lines != lines:
-                        with open(fp, "w", encoding="utf-8") as f:
+                        with _w536_guard_open(fp, "w", encoding="utf-8") as f:
                             f.writelines(new_lines)
                         lines = new_lines
                 results.setdefault((rel, pat, rep), []).extend(hits)
@@ -109,7 +117,7 @@ def main():
             for tc, sc in TRAD_CHAR.items():
                 new_lines = [ln.replace(tc, sc) for ln in new_lines]
             if new_lines != lines:
-                with open(fp, "w", encoding="utf-8") as f:
+                with _w536_guard_open(fp, "w", encoding="utf-8") as f:
                     f.writelines(new_lines)
                 lines = new_lines
 
@@ -130,7 +138,7 @@ def main():
 
     # ---- 写报告 ----
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    with open(OUT, "w", encoding="utf-8") as f:
+    with _w536_guard_open(OUT, "w", encoding="utf-8") as f:
         f.write("# 术语统一审计报告\n\n")
         f.write("> 生成：%s | 模式：%s\n\n" % (
             "apply" if apply else "report-only",

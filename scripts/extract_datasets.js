@@ -7,8 +7,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const SITE_DATA = path.join(__dirname, '..', 'site', 'data');
-const OUT_DIR = path.join(__dirname, '..', 'dataset');
+const SITE_DATA = path.join(path.dirname(__dirname), 'site', 'data');
+const OUT_DIR = path.join(path.dirname(__dirname), 'dataset');
 
 // 确保输出目录存在
 if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -38,15 +38,15 @@ for (const file of files) {
     continue;
   }
   
-  // 尝试用 Function 构造器安全求值（比 eval 略安全）
+  // JSON 解析数据字面量（尾逗号自动修复；不再动态执行代码）
   let data;
   try {
-    data = new Function('return (' + dataStr + ')')();
+    data = JSON.parse(dataStr);
   } catch (e) {
     // 尝试修复常见问题：尾逗号
     try {
       const fixed = dataStr.replace(/,\s*([}\]])/g, '$1');
-      data = new Function('return (' + fixed + ')')();
+      data = JSON.parse(fixed);
     } catch (e2) {
       console.log(`  PARSE_ERROR: ${file} — ${e2.message.slice(0, 60)}`);
       skipped++;
@@ -60,7 +60,9 @@ for (const file of files) {
   }
   
   const outName = file.replace('.html', '.json');
+  if (!/^[A-Za-z0-9._-]+\.json$/.test(outName)) { skipped++; continue; }
   const outPath = path.join(OUT_DIR, outName);
+  if (!path.resolve(outPath).startsWith(OUT_DIR + path.sep)) { skipped++; continue; }
   fs.writeFileSync(outPath, JSON.stringify(data, null, 2), 'utf-8');
   
   const keys = Object.keys(data);

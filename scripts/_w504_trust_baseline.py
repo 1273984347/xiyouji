@@ -10,6 +10,14 @@ import os
 import re
 import sys
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT_DIRS = [
     "01-全书逐回解读", "02-人物深度分析", "03-主题与情节专题",
@@ -49,7 +57,7 @@ def process(path):
         lines.insert(h1 + 1, "")
         lines.insert(h1 + 2, FIELD)
 
-    with open(path, "w", encoding="utf-8", newline="\n") as f:
+    with _w536_guard_open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines))
     return "added"
 

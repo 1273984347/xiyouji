@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -10,6 +11,14 @@
 幂等：文件已含 sentinel 注释则跳过。仅处理 CROSS 列表中的 28 篇。
 """
 import os, re, glob
+
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 SHENDU = os.path.join(ROOT, "source", "原文", "shendu")
@@ -115,7 +124,7 @@ def main():
             lines.pop()
         lines.append("")
         lines.append(footer)
-        open(p, "w", encoding="utf-8").write("\n".join(lines) + "\n")
+        _w536_guard_open(p, "w", encoding="utf-8").write("\n".join(lines) + "\n")
         applied.append((sd, footer.count("](")))
 
     print(f"已补 footer: {len(applied)} 篇")
