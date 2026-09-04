@@ -1,0 +1,22 @@
+{
+ "batch": "W542",
+ "version": "v2.3.141",
+ "date": "2026-09-05",
+ "title": "W542 交付效率工具化 — batch_cascade.py 级联脚本 + 冒烟清单固化",
+ "desc": "交付效率工具化（batch_cascade.py + 冒烟固化④）",
+ "head_entry": "2026-09-05（v2.3.141 W542 交付效率工具化：batch_cascade.py 级联脚本常驻化 + AGENTS 三新规④真实参数冒烟）",
+ "head_sentence": "交付效率工具化——batch_cascade.py 级联脚本 + 三新规④真实参数冒烟",
+ "changelog_body": "\n\n> **来源**：W536-W540 五批次实测——文档级联为每批 6-8 次手工工具调用的瓶颈面（W536 手工轮次 4 次失败重试），且 W537 白名单形状回归证明 node --check 不覆盖运行时。\n> - **执行（级联脚本）**：新建 scripts/batch_cascade.py（常驻工具）——输入 spec JSON 自动完成 9 个面的断言与改写（CHANGELOG 现役段+规则上限/三版本行/交接文档头尾链+3 批自动淘汰+里程碑滚动+HEAD 句/workflows/四页脚/AGENTS 脚注/file-index），两阶段设计（先全内存断言后统一落盘·零落盘中止），内置双括号自检；本批自身级联即由本脚本 dry-run+apply 完成（dogfood）。\n> - **执行（冒烟固化）**：AGENTS §4.3 三新规增补④——JS/工具脚本改动推送前必须以真实参数冒烟一次（node --check 不覆盖运行时；W537/W538 白名单形状回归实证）。\n> - **验证**：batch_cascade dry-run+apply 双跑通过；node --check + ruff + 真实 spec 冒烟；verify_delivery 全绿；pytest 302 passed。\n> - **文件**：scripts/batch_cascade.py（新建）、AGENTS.md、六文档 + 旁文档版本行、site 四页脚。\n> - **状态**：已落地（本批随 W542 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.141 W542 交付效率工具化（2026-09-05）**：\n  - 新建 scripts/batch_cascade.py：spec 驱动的 9 面级联脚本（两阶段·先全内存断言后统一落盘·双括号自检·头链 3 批自动淘汰），本批自身级联 dogfood 实测\n  - AGENTS §4.3 三新规增补④：JS/工具脚本推送前真实参数冒烟（W537/W538 形状回归实证）",
+ "agents_note": "2026-09-05（v2.3.141 W542）交付效率工具化：新增 batch_cascade.py 级联脚本常驻化（§4.3 三新规④配套工具）·§4.3 三新规增补④（JS/工具脚本推送前真实参数冒烟）·本批级联由本脚本 dogfood 完成，仅版本脚注同步",
+ "file_index_rows": [
+  "| scripts/batch_cascade.py | W542 | 新建·spec 驱动的批次级联常驻脚本（9 面：CHANGELOG/三版本行/交接文档头尾链+3 批自动淘汰+里程碑滚动+HEAD 句/workflows/四页脚/AGENTS 脚注/file-index；两阶段先断言后落盘·双括号自检·本批自身级联 dogfood 实测） |",
+  "| AGENTS.md | W542 | 修改·§4.3 三新规增补④（真实参数冒烟）+ 版本脚注追加 W542 条目 |",
+  "| CHANGELOG.md | W542 | 新增·W542 版段 + 编号规则上限 W001-W542 |",
+  "| 交接文档.md | W542 | 修改·头尾「最后更新」prepend W542 + 头链 3 批自动淘汰 + 里程碑概要滚动淘汰最老块 + 当前 HEAD 句更新 + 当前进度标题更新（全部由 batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W542 | 修改·版本行同步 v2.3.141（2026-09-05·batch_cascade.py 执行） |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W542 | 修改·四页脚链首 prepend W542（batch_cascade.py 执行） |",
+  "| .github/workflows/README.md | W542 | 修改·旁文档同步（batch_cascade.py 执行） |",
+  "| scripts/output/file-index.md | W542 | 新增·W542 段（本段·batch_cascade.py 执行） |"
+ ]
+}
