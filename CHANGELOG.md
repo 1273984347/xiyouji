@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W543），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W544），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,13 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.143（2026-09-05）：W544 agent-web 迁移阶段 2 — TypeScript 7 + @types/react 19 类型基线归零
+
+> **来源**：评估单 §三 阶段 2（类型层）——TypeScript 7 + @types/react 19 先行建立 0 error 类型基线（React 19 本体在阶段 5）。
+> - **执行**：typescript ^5.3.2→^7.0.2、@types/react ^18.2.43→^19.2.18、@types/react-dom→^19；TS2882（CSS side-effect import）以新建 src/vite-env.d.ts（vite/client 引用）修复；TS2322 以 ChatMessages messagesEndRef prop 放宽为 RefObject<HTMLDivElement | null> 修复（React 19 useRef 语义）。
+> - **验证**：tsc -b 0 error（类型基线归零）；npm run build 26.67s；npm audit --omit=dev 0；verify_delivery 全绿。
+> - **文件**：xiyouji-agent-web/package.json、package-lock.json、src/vite-env.d.ts（新建）、src/components/ChatMessages.tsx、六文档 + 旁文档版本行、site 四页脚。
+> - **状态**：已落地（本批随 W544 提交并 push origin/main）。
 ### v2.3.142（2026-09-05）：W543 agent-web 迁移阶段 1 — Express 5 / uuid 14 / dotenv 17 / better-sqlite3 13 落地
 
 > **来源**：用户指令按优先级执行五项——第 4 项 agent-web 迁移阶段 1（评估单 §三：dotenv/uuid/Express 5/@types/node 四个低风险包）。
