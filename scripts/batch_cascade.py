@@ -173,7 +173,7 @@ def main():
     s, nl = load(p)
     mm = re.search(r"## (W\d+) ", s)
     assert mm, "file-index 未找到最新段"
-    rows = nl.join(["## {} {}（{}·{}）".format(batch, spec["title"].split(" — ")[0].split("（")[0], date, ver),
+    rows = nl.join(["## {} {}（{}·{}）".format(batch, re.sub(r"\W\d+ ", "", spec["title"].split(" — ")[0].split("（")[0]), date, ver),
                     "", "| 文件 | W | 说明 |", "|---|---|---|"] + spec["file_index_rows"] + ["", ""])
     pend.append((p, s.replace(mm.group(0), rows + mm.group(0), 1), nl))
 
