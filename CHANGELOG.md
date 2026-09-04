@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W542），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W543），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.142（2026-09-05）：W543 agent-web 迁移阶段 1 — Express 5 / uuid 14 / dotenv 17 / better-sqlite3 13 落地
+
+> **来源**：用户指令按优先级执行五项——第 4 项 agent-web 迁移阶段 1（评估单 §三：dotenv/uuid/Express 5/@types/node 四个低风险包）。
+> - **执行**：express 4.22→5.2、uuid 11→14.0.2（ESM-only·服务端 tsx 与前端 Vite 均兼容）、dotenv 16→17、@types/node 20→26、better-sqlite3 12→13（本地 Node 24 ABI 预编译——评估「未验证项」转已验证）。
+> - **运行冒烟**：tsx server/index.ts 限期启动——API 服务器 127.0.0.1:3000 启动成功（Express 5 运行实录）。
+> - **验证**：npm audit 0 vulnerabilities；npm run build 29.41s；tsc -b 通过；verify_delivery 全绿。
+> - **文件**：xiyouji-agent-web/package.json、package-lock.json、docs/10-方法论沉淀/agent-web技术栈迁移评估.md、六文档 + 旁文档版本行、site 四页脚。
+> - **状态**：已落地（本批随 W543 提交并 push origin/main）。剩余阶段：TS 7 / React 19 / Tailwind v4 / Vite 8（评估单 §三 阶段 2-5）。
 ### v2.3.141（2026-09-05）：W542 交付效率工具化 — batch_cascade.py 级联脚本 + 冒烟清单固化
 
 > **来源**：W536-W540 五批次实测——文档级联为每批 6-8 次手工工具调用的瓶颈面（W536 手工轮次 4 次失败重试），且 W537 白名单形状回归证明 node --check 不覆盖运行时。

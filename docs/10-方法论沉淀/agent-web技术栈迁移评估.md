@@ -35,7 +35,7 @@
 - Vite 8 对 `vite.config.ts` 及 Node 版本下限的要求
 - React 19 与 `tdesign-react` 1.18 / `@tdesign-react/chat` 的运行时兼容性
 - Tailwind v4 下现有 `theme.extend` 自定义项（颜色/圆角/阴影等）的等价迁移写法
-- better-sqlite3 13 的 Node ABI 与预编译产物可用性
+- better-sqlite3 13 的 Node ABI 与预编译产物可用性（W543 已验证：Node 24 预编译安装成功·运行冒烟通过）
 
 ---
 

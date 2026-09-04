@@ -11,6 +11,21 @@
 ---
 
 
+## W543 W543 agent-web 迁移阶段 1（2026-09-05·v2.3.142）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/package.json | W543 | 修改·迁移阶段 1：express ^5 / uuid ^14 / dotenv ^17 / @types/node 26 / better-sqlite3 13（评估未验证项转已验证） |
+| xiyouji-agent-web/package-lock.json | W543 | 修改·阶段 1 锁文件更新 |
+| docs/10-方法论沉淀/agent-web技术栈迁移评估.md | W543 | 修改·better-sqlite3 13 未验证项标注已验证（Node 24 预编译·运行冒烟通过） |
+| CHANGELOG.md | W543 | 新增·W543 版段 + 编号规则上限 W001-W543 |
+| 交接文档.md | W543 | 修改·头尾「最后更新」prepend W543 + 头链 3 批自动淘汰 + 里程碑概要滚动淘汰最老块 + HEAD 句/标题更新（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W543 | 修改·版本行同步 v2.3.142（2026-09-05·batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W543 | 修改·四页脚链首 prepend W543（batch_cascade.py 执行） |
+| .github/workflows/README.md | W543 | 修改·旁文档同步（batch_cascade.py 执行） |
+| AGENTS.md | W543 | 修改·版本脚注追加 W543 条目 |
+| scripts/output/file-index.md | W543 | 新增·W543 段（本段·batch_cascade.py 执行） |
+
 ## W542 W542 交付效率工具化（2026-09-05·v2.3.141）
 
 | 文件 | W | 说明 |
