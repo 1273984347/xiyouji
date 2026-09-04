@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W547），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W548），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.148（2026-09-05）：W548 迁移阶段 5 + 闭环 — React 19 + TDesign 1.18·dependabot ignore 解除
+
+> **来源**：评估单 §三 阶段 5（UI 层）+ 迁移闭环（§四 解除条件达成）。
+> - **执行（React 19）**：react/react-dom 18.2→19.2（@types 已在 W544 先行）——TS2322 的 ref 类型已在 W544 放宽，createRoot 写法无需改；build 通过、audit 0。
+> - **执行（TDesign）**：tdesign-react 1.12→1.18、tdesign-icons-react 0.5→0.6。运行时与视觉兼容性需人工走查（聊天页明/暗两态 + 消息渲染 + 权限弹层），为评估单既定的人工确认项。
+> - **执行（迁移闭环）**：删除 .github/dependabot.yml agent-web 段 ignore semver-major（W536 设置的解除条件已达成：五阶段全部落地）——dependabot 主版本升级恢复正常排队。
+> - **验证**：npm run build 通过；tsc -b 通过；npm audit 0；verify_delivery 全绿；pytest 302 passed。
+> - **文件**：xiyouji-agent-web/package.json、package-lock.json、.github/dependabot.yml、六文档 + 旁文档版本行、site 四页脚。
+> - **状态**：已落地（本批随 W548 提交并 push origin/main）。agent-web 主版本迁移五阶段闭环（W543 阶段 1 / W544 阶段 2 / W546 阶段 3 / W547 阶段 4 / W548 阶段 5）。
 ### v2.3.146（2026-09-05）：W547 迁移阶段 4 — Tailwind v4 范式迁移
 
 > **来源**：评估单 §三 阶段 4（样式层，成本最高）——Tailwind v4 配置范式迁移。
