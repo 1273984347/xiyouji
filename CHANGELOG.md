@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W546），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W547），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,13 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.146（2026-09-05）：W547 迁移阶段 4 — Tailwind v4 范式迁移
+
+> **来源**：评估单 §三 阶段 4（样式层，成本最高）——Tailwind v4 配置范式迁移。
+> - **执行**：tailwindcss ^3.4.17→^4.3.3 + @tailwindcss/postcss（v4 内置前缀，autoprefixer 移除）；postcss.config.js 插件替换为 @tailwindcss/postcss；index.css 三行 @tailwind 改 @import "tailwindcss" + @config（JS 主题配置兼容加载）+ @custom-variant dark（class 暗色模式 v4 写法）；tailwind.config.js 零改动经 @config 兼容。
+> - **验证**：npm run build 通过；产物 CSS 实测含主题工具类（bg-background/--td-brand-color/--color-background）与 dark 变体；tsc -b 通过；npm audit --omit=dev 0；verify_delivery 全绿。人工走查建议：聊天页明/暗两态各看一眼（视觉回归人工确认项）。
+> - **文件**：xiyouji-agent-web/package.json、package-lock.json、postcss.config.js、src/index.css、六文档 + 旁文档版本行、site 四页脚。
+> - **状态**：已落地（本批随 W547 提交并 push origin/main）。
 ### v2.3.145（2026-09-05）：W546 迁移阶段 3 — Vite 8.2（rolldown）+ plugin-react 6·engines 收紧
 
 > **来源**：评估单 §三 阶段 3（构建层）——Vite 8 + @vitejs/plugin-react 6（基线已先行至 6.4.3，见 W539/W540）。

@@ -1,0 +1,25 @@
+{
+ "batch": "W547",
+ "version": "v2.3.146",
+ "date": "2026-09-05",
+ "title": "W547 迁移阶段 4 — Tailwind v4 范式迁移",
+ "desc": "迁移阶段 4（Tailwind v4）",
+ "head_entry": "2026-09-05（v2.3.146 W547 迁移阶段 4：Tailwind v4 范式迁移·autoprefixer 移除·dark 变体声明）",
+ "head_sentence": "迁移阶段 4——Tailwind v4 范式迁移",
+ "changelog_body": "\n\n> **来源**：评估单 §三 阶段 4（样式层，成本最高）——Tailwind v4 配置范式迁移。\n> - **执行**：tailwindcss ^3.4.17→^4.3.3 + @tailwindcss/postcss（v4 内置前缀，autoprefixer 移除）；postcss.config.js 插件替换为 @tailwindcss/postcss；index.css 三行 @tailwind 改 @import \"tailwindcss\" + @config（JS 主题配置兼容加载）+ @custom-variant dark（class 暗色模式 v4 写法）；tailwind.config.js 零改动经 @config 兼容。\n> - **验证**：npm run build 通过；产物 CSS 实测含主题工具类（bg-background/--td-brand-color/--color-background）与 dark 变体；tsc -b 通过；npm audit --omit=dev 0；verify_delivery 全绿。人工走查建议：聊天页明/暗两态各看一眼（视觉回归人工确认项）。\n> - **文件**：xiyouji-agent-web/package.json、package-lock.json、postcss.config.js、src/index.css、六文档 + 旁文档版本行、site 四页脚。\n> - **状态**：已落地（本批随 W547 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.146 W547 迁移阶段 4（2026-09-05）**：\n  - Tailwind 3.4→4.3：@tailwindcss/postcss 替代 tailwindcss+autoprefixer；index.css 改 @import \"tailwindcss\" + @config 兼容 JS 主题 + @custom-variant dark；build 通过·产物含主题工具类",
+ "agents_note": "2026-09-05（v2.3.146 W547）迁移阶段 4：Tailwind v4 范式迁移（@tailwindcss/postcss + @config 兼容 + dark 变体），仅版本脚注同步",
+ "file_index_rows": [
+  "| xiyouji-agent-web/package.json | W547 | 修改·tailwindcss ^4.3.3 + @tailwindcss/postcss 新增·autoprefixer 移除 |",
+  "| xiyouji-agent-web/postcss.config.js | W547 | 修改·插件替换为 @tailwindcss/postcss |",
+  "| xiyouji-agent-web/src/index.css | W547 | 修改·@import \"tailwindcss\" + @config + @custom-variant dark |",
+  "| xiyouji-agent-web/package-lock.json | W547 | 修改·阶段 4 锁文件更新 |",
+  "| CHANGELOG.md | W547 | 新增·W547 版段 + 编号规则上限 W001-W547 |",
+  "| 交接文档.md | W547 | 修改·头尾「最后更新」prepend W547 + 头链 3 批自动淘汰 + 里程碑概要滚动淘汰最老块 + HEAD 句/标题更新（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W547 | 修改·版本行同步 v2.3.146（2026-09-05·batch_cascade.py 执行） |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W547 | 修改·四页脚链首 prepend W547（batch_cascade.py 执行） |",
+  "| .github/workflows/README.md | W547 | 修改·旁文档同步（batch_cascade.py 执行） |",
+  "| AGENTS.md | W547 | 修改·版本脚注追加 W547 条目 |",
+  "| scripts/output/file-index.md | W547 | 新增·W547 段（本段·batch_cascade.py 执行） |"
+ ]
+}
