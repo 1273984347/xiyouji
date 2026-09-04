@@ -11,6 +11,21 @@
 ---
 
 
+## W539 遗留收尾（2026-09-05·v2.3.138）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/package.json | W539 | 修改·vite ^5.0.10→^6.4.3（devDep 漏洞清零·esbuild 随升·plugin-react 4.7.0 peer 兼容·build 34.88s）+ dompurify 直接依赖 ^3.4.13→^3.4.14 |
+| xiyouji-agent-web/package.json | W539 | 修改·移除 W410 dompurify override（直接依赖+传递依赖同名场景的结构性冲突——Dependabot recreate 整组卡死根因·cherry-markdown 传递 ^3.2.6 可满足） |
+| xiyouji-agent-web/package-lock.json | W539 | 修改·vite/dompurify 升级与 dedupe |
+| CHANGELOG.md | W539 | 新增·W539 版段 + 编号规则上限 W001-W539 |
+| 交接文档.md | W539 | 修改·头尾「最后更新」prepend W539 + 里程碑概要滚动淘汰 W534 块（保 5 版）+ 当前 HEAD 句更新 + 当前进度标题更新 + 尾链双括号修正 |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W539 | 修改·版本行同步 v2.3.138（2026-09-05·含项目说明 L47 W536 陈旧描述一并校正） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W539 | 修改·四页脚链首 prepend W539 |
+| .github/workflows/README.md | W539 | 修改·旁文档同步（头部版本行 + 里程碑行上限 W450-W539） |
+| AGENTS.md | W539 | 修改·版本脚注追加 W539 条目 |
+| scripts/output/file-index.md | W539 | 新增·W539 段（本段） |
+
 ## W538 CI 红灯热修复（2026-09-05·v2.3.137）
 
 | 文件 | W | 说明 |

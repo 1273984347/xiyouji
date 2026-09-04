@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W538），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W539），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.138（2026-09-05）：W539 遗留收尾 — vite 5→6.4.3 清零 devDep 漏洞 + dompurify 3.4.14 根治 Dependabot 冲突
+
+> **来源**：用户指令解决两项遗留——① vite devDep 漏洞（advisory 范围 ≤6.4.2 全覆盖，npm 只有 8.2.2 一个 fixAvailable 大版本）；② Dependabot 分组更新 job 失败（日志实证：`Override for dompurify@3.4.14 conflicts with direct dependency`——W410 的 dompurify override 与直接依赖在 latest 前进后结构性撞车，recreate 整组卡死）。
+> - **执行（vite 5→6.4.3）**：`npm install -D vite@^6.4.3`（esbuild ≤0.24.2 随升）——advisory 双双出清；plugin-react 4.7.0 peer 兼容 vite 6；`npm run build` 34.88s 通过、tsc -b 通过。原评估单把「Vite 5→8」列专项：实测 6.4.3 即清零审计，5→8 的完整迁移仍按原五阶段计划另行推进。
+> - **执行（Dependabot 冲突根治）**：dompurify 直接依赖 ^3.4.13→^3.4.14，并移除 W410 的 dompurify override——cherry-markdown 传递范围 ^3.2.6 可满足，全树 dedupe 至 3.4.14；override 对「直接依赖 + 传递依赖同名」的结构性冲突即告消除，下一轮 Dependabot recreate 不再卡死。
+> - **验证**：npm audit 全量 0 vulnerabilities、npm audit --omit=dev 0；npm run build ✓；tsc -b ✓；verify_delivery 全绿。
+> - **文件**：xiyouji-agent-web/package.json、xiyouji-agent-web/package-lock.json、六文档 + 旁文档版本行、site 四页脚。
+> - **状态**：已落地（本批随 W539 提交并 push origin/main）。
 
 ### v2.3.137（2026-09-05）：W538 CI 红灯热修复 — Screenshot Review 白名单形状回归 + agent-web 依赖 overrides
 
