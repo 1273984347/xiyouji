@@ -121,11 +121,11 @@ app.get("/api/check-login", async (req, res) => {
     response.envConfigured = true;
     // 脱敏显示
     if (apiKey) {
-      response.envVars!.apiKey = apiKey.slice(0, 8) + '****' + apiKey.slice(-4);
+      response.envVars!.apiKey = '****' + apiKey.slice(-4); // W537 脱敏收敛：不再回显前 8 位
       response.apiKey = response.envVars!.apiKey;
     }
     if (authToken) {
-      response.envVars!.authToken = authToken.slice(0, 8) + '****' + authToken.slice(-4);
+      response.envVars!.authToken = '****' + authToken.slice(-4);
     }
     if (internetEnv) {
       response.envVars!.internetEnv = internetEnv;
@@ -529,7 +529,7 @@ app.post("/api/chat", async (req, res) => {
 - 涉及诗词、术语时参考 source/ 与 docs/00-导读/术语表.md。
 - 文件操作前先确认意图；写入新内容遵循项目文档规范。
 - 语气可带古典雅致，但表达务必清晰、准确、可操作。
-- 当前项目版本 v2.3.26（详见 README.md 顶部与 CHANGELOG.md）。`;
+- 项目版本、门禁与统计口径以仓库 README.md 顶部与 CHANGELOG.md 现役段为准，勿依赖本提示内嵌版本号。`;
 
   // 工作目录：已由 W536 内联钳制净化（realpath 规范化，仅 PROJECT_CWD 内）
 

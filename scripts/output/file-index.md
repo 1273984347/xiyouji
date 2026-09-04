@@ -11,6 +11,24 @@
 ---
 
 
+## W537 全仓对抗性审查修复（2026-09-05·v2.3.136）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| Makefile | W537 | 修改·audit 引用已归档脚本改指 scripts/archive/ 路径（W447 起潜伏 89 批）+ test 目标 fail-open 改 fail-closed（pytest 失败不再被吞） |
+| mcp-server/xiyouji_mcp.py | W537 | 修改·xiyouji_docs_index 诚实化（docstring 假校验纠正 + content_checked 字段 + message 指向权威链路 docs_index.py --check） |
+| 新Agent启动Prompt.md | W537 | 修改·py -3 规则条件化（消除与提交流程示例的自相矛盾） |
+| AGENTS.md | W537 | 修改·§4.4 权限默认值校正（bypassPermissions→default+env 开关）+ §4.3 sync 指引补 MIRROR_SKILLS 例外交叉引用 + §4.3 新增 W537 三新规 + 版本脚注 |
+| skills/xiyouji-drift-audit/SKILL.md | W537 | 修改·v1.3.0 增「AGENTS 关键事实断言抽查」维度·sync 双轨一致 |
+| .eslintrc.json | W537 | 删除·ESLint 9+ 失效死配置（被 eslint.config.mjs 取代） |
+| xiyouji-agent-web/server/index.ts | W537 | 修改·sysprompt 去硬编码版本号（v2.3.26 滞后 109 批）+ check-login 脱敏收敛（不再回显 apiKey/authToken 前 8 位） |
+| CHANGELOG.md | W537 | 新增·W537 版段 + 编号规则上限 W001-W537 + W536 段数字更正注记（71/58 系首轮数字，实际 77 处/60 余文件） |
+| 交接文档.md | W537 | 修改·头尾「最后更新」prepend W537 + 里程碑概要滚动淘汰 W532 块（保 5 版）+ 当前进度标题更新 |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W537 | 修改·版本行同步 v2.3.136（2026-09-05） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W537 | 修改·四页脚链首 prepend W537 |
+| .github/workflows/README.md | W537 | 修改·旁文档同步（头部版本行 + 里程碑行上限 W450-W537） |
+| scripts/output/file-index.md | W537 | 新增·W537 段（本段）+ 补记 W536 第二轮 Mimosa 修复的索引注记（render_check/batch_screenshots 钳制、test_graph 字面量化、server index.ts 工作目录钳制与权限存储无原型化） |
+
 ## W536 依赖积压治理（2026-09-02·v2.3.135）
 
 | 文件 | W | 说明 |

@@ -40,7 +40,7 @@ audit: ## 表格无容器扫描 + JS 语法检查 + SVG 负宽度检查（dry-ru
 	@echo "==> audit: 表格无容器 / JS 语法 / SVG 负宽度"
 	python scripts/detect_unwrapped_tables.py
 	python scripts/check_js_syntax.py --all
-	python scripts/fix_svg_negative_widths.py --dry-run
+	python scripts/archive/fix_svg_negative_widths.py --dry-run
 	@echo "==> audit 完成"
 
 lint: ## ruff + eslint（如配置存在）— 跨平台兼容
@@ -65,7 +65,7 @@ docs-index: ## 生成/更新 docs/INDEX.md（321 篇文档索引）
 
 test: ## pytest（python -m pytest tests/）— 跨平台兼容
 	@echo "==> test: pytest"
-	@python -c "from pathlib import Path; import sys; sys.exit(0 if Path('tests').is_dir() else 2)" && python -m pytest tests/ -q || python -c "print('  [skip] tests/ 目录不存在或测试失败')"
+	@python -c "from pathlib import Path; import subprocess, sys; sys.exit(subprocess.run([sys.executable, '-m', 'pytest', 'tests/', '-q']).returncode if Path('tests').is_dir() else (print('  [skip] tests/ 目录不存在'), 0)[1])"
 	@echo "==> test 完成"
 
 ci: ## CI 本地预跑 = lint + test + audit + links + data-validate + docs-index

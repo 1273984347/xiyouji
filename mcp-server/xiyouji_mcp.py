@@ -315,9 +315,9 @@ def xiyouji_data_validate(
 def xiyouji_docs_index(
     include_dev: bool = False,
 ) -> dict[str, Any]:
-    """校验 docs/INDEX.md 是否过期（只读 --check 模式，不修改文件）。
+    """检查 docs/INDEX.md 是否存在并统计文档规模（只读，不修改文件）。
 
-    扫描 docs/ 下所有 .md 文件，与现有 INDEX.md 对比，返回是否过期。
+    W537 诚实化：本工具只做存在性检查与规模统计，不做内容级过期比对（历史 docstring 声称「与现有 INDEX.md 对比返回是否过期」但实现从未比对——假校验已纠正）。过期判定的权威链路是 `python scripts/docs_index.py --check`（CI 同款）。
 
     Args:
         include_dev: 是否包含 _dev 等下划线开头目录。
@@ -381,7 +381,8 @@ def xiyouji_docs_index(
         "total_files": total_files,
         "sections": sections,
         "outdated": False,
-        "message": f"索引已最新（{total_files} 篇文档，{len(sections)} 个子目录）",
+        "content_checked": False,
+        "message": f"仅存在性检查：INDEX.md 存在（{total_files} 篇文档，{len(sections)} 个子目录）；过期判定请运行 python scripts/docs_index.py --check",
     }
 
 

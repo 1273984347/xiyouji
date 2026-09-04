@@ -120,6 +120,15 @@ function nameOf(rel) {
 
 (async () => {
   const opts = parseArgs(process.argv.slice(2));
+  // W537 安全加固：页面路径白名单——必须是项目根内的 .html（防 argv 路径越界）
+  const _rootSep = path.resolve(ROOT) + path.sep;
+  for (const _pg of opts.page) {
+    const _r = path.resolve(ROOT, _pg);
+    if (!_r.startsWith(_rootSep) || !_r.endsWith('.html')) {
+      console.error('page must be an .html file under project root: ' + _pg);
+      process.exit(2);
+    }
+  }
   // W536 安全加固：输出目录严格钳制在 scripts/output 之下
   const _outRoot = path.resolve(ROOT, 'scripts', 'output');
   if (path.resolve(opts.out) !== _outRoot && !path.resolve(opts.out).startsWith(_outRoot + path.sep)) {
