@@ -284,13 +284,22 @@ async function capture(browser, pageInfo, viewportName, viewports, outDirs) {
 
 async function main() {
   const config = parseArgs(process.argv);
-  // W537 安全加固：页面名白名单——禁止相对越界与绝对路径
-  for (const _op of (config.onlyPages || []).concat(config.extraPages || [])) {
-    if (_op.includes('..') || path.isAbsolute(_op)) {
-      console.error('page name must be relative without ..');
-      process.exit(2);
-    }
-  }
+  // W538 安全加固：页面名白名单——兼容两种形态（字符串页名 / {file,dir} 对象），禁止相对越界；dir 钳制在项目根内
+  const _cleanPages = function (_list) {
+    return (_list || []).map(function (_op) {
+      if (typeof _op === 'string') {
+        if (_op.includes('..') || path.isAbsolute(_op)) { console.error('page name must be relative without ..'); process.exit(2); }
+        return _op;
+      }
+      const _name = _op && _op.file;
+      if (typeof _name !== 'string' || _name.includes('..') || path.isAbsolute(_name)) { console.error('invalid page entry'); process.exit(2); }
+      let _dir = _op.dir;
+      if (_dir) { _dir = path.resolve(_dir); if (_dir !== ROOT && !_dir.startsWith(ROOT + path.sep)) { console.error('extra page dir must stay under project root'); process.exit(2); } }
+      return { file: _name, dir: _dir };
+    });
+  };
+  config.onlyPages = _cleanPages(config.onlyPages);
+  config.extraPages = _cleanPages(config.extraPages);
   // W536 安全加固：输出目录严格钳制在 scripts/output 之下
   const _outRoot = path.resolve(ROOT, 'scripts', 'output');
   if (path.resolve(config.outputDir) !== _outRoot && !path.resolve(config.outputDir).startsWith(_outRoot + path.sep)) {
