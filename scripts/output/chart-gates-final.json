@@ -1,0 +1,943 @@
+{
+ "generatedAt": "2026-09-05T16:37:18.269Z",
+ "total": 234,
+ "failed": 0,
+ "results": [
+  {
+   "rel": "_template.html",
+   "fails": []
+  },
+  {
+   "rel": "data/_shell.html",
+   "fails": []
+  },
+  {
+   "rel": "dashboard.html",
+   "fails": []
+  },
+  {
+   "rel": "curated.html",
+   "fails": []
+  },
+  {
+   "rel": "data/81-hardships-view.html",
+   "fails": []
+  },
+  {
+   "rel": "data/81-hardships.html",
+   "fails": []
+  },
+  {
+   "rel": "data/aesthetics.html",
+   "fails": []
+  },
+  {
+   "rel": "data/ai-dialogue.html",
+   "fails": []
+  },
+  {
+   "rel": "data/business-model.html",
+   "fails": []
+  },
+  {
+   "rel": "data/century-dialogue.html",
+   "fails": []
+  },
+  {
+   "rel": "data/cave-estate.html",
+   "fails": []
+  },
+  {
+   "rel": "data/chapter-stats.html",
+   "fails": []
+  },
+  {
+   "rel": "data/chapter-structure-graph.html",
+   "fails": []
+  },
+  {
+   "rel": "data/character-appearance.html",
+   "fails": []
+  },
+  {
+   "rel": "data/character-dynamic-network.html",
+   "fails": []
+  },
+  {
+   "rel": "data/character-presence-timeline.html",
+   "fails": []
+  },
+  {
+   "rel": "data/character-relationship-3d-view.html",
+   "fails": []
+  },
+  {
+   "rel": "data/character-relationship-3d.html",
+   "fails": []
+  },
+  {
+   "rel": "data/character-semantic-network.html",
+   "fails": []
+  },
+  {
+   "rel": "data/character-sentiment-arc.html",
+   "fails": []
+  },
+  {
+   "rel": "data/chart-design.html",
+   "fails": []
+  },
+  {
+   "rel": "data/concept-device.html",
+   "fails": []
+  },
+  {
+   "rel": "data/cognitive-psychology.html",
+   "fails": []
+  },
+  {
+   "rel": "data/counterfactual.html",
+   "fails": []
+  },
+  {
+   "rel": "data/cross-time-danmaku.html",
+   "fails": []
+  },
+  {
+   "rel": "data/criticism-history.html",
+   "fails": []
+  },
+  {
+   "rel": "data/cultural-misreading.html",
+   "fails": []
+  },
+  {
+   "rel": "data/customs-pass-route.html",
+   "fails": []
+  },
+  {
+   "rel": "data/data-explorer.html",
+   "fails": []
+  },
+  {
+   "rel": "data/deconstruction.html",
+   "fails": []
+  },
+  {
+   "rel": "data/dialogue-sentiment.html",
+   "fails": []
+  },
+  {
+   "rel": "data/ecology.html",
+   "fails": []
+  },
+  {
+   "rel": "data/emotional-heatmap.html",
+   "fails": []
+  },
+  {
+   "rel": "data/famous-time-travel.html",
+   "fails": []
+  },
+  {
+   "rel": "data/ethics-consumption.html",
+   "fails": []
+  },
+  {
+   "rel": "data/four-dimensional-research-network.html",
+   "fails": []
+  },
+  {
+   "rel": "data/four-heavenly-kings-artifacts.html",
+   "fails": []
+  },
+  {
+   "rel": "data/game-webnovel.html",
+   "fails": []
+  },
+  {
+   "rel": "data/global-pattern.html",
+   "fails": []
+  },
+  {
+   "rel": "data/graph-explorer.html",
+   "fails": []
+  },
+  {
+   "rel": "data/guanyin-six-roles-network.html",
+   "fails": []
+  },
+  {
+   "rel": "data/hardship-heatmap.html",
+   "fails": []
+  },
+  {
+   "rel": "data/hardship-difficulty-heatmap.html",
+   "fails": []
+  },
+  {
+   "rel": "data/heaven-power-network.html",
+   "fails": []
+  },
+  {
+   "rel": "data/intertextuality-network.html",
+   "fails": []
+  },
+  {
+   "rel": "data/journey-geo-3d.html",
+   "fails": []
+  },
+  {
+   "rel": "data/journey-geo-semiotics.html",
+   "fails": []
+  },
+  {
+   "rel": "data/journey-map-interactive.html",
+   "fails": []
+  },
+  {
+   "rel": "data/journey-route.html",
+   "fails": []
+  },
+  {
+   "rel": "data/journey-spacetime.html",
+   "fails": []
+  },
+  {
+   "rel": "data/jurisprudence.html",
+   "fails": []
+  },
+  {
+   "rel": "data/karma-reincarnation.html",
+   "fails": []
+  },
+  {
+   "rel": "data/language-style-radar.html",
+   "fails": []
+  },
+  {
+   "rel": "data/linguistics.html",
+   "fails": []
+  },
+  {
+   "rel": "data/magic-system.html",
+   "fails": []
+  },
+  {
+   "rel": "data/material-archaeology.html",
+   "fails": []
+  },
+  {
+   "rel": "data/mbti-evolution.html",
+   "fails": []
+  },
+  {
+   "rel": "data/ming-political-thought-comparison.html",
+   "fails": []
+  },
+  {
+   "rel": "data/methodology-matrix.html",
+   "fails": []
+  },
+  {
+   "rel": "data/monster-background.html",
+   "fails": []
+  },
+  {
+   "rel": "data/monster-capability-radar.html",
+   "fails": []
+  },
+  {
+   "rel": "data/monster-ecology-network.html",
+   "fails": []
+  },
+  {
+   "rel": "data/monster-female-network.html",
+   "fails": []
+  },
+  {
+   "rel": "data/monster-hierarchy-network.html",
+   "fails": []
+  },
+  {
+   "rel": "data/monster-sociology.html",
+   "fails": []
+  },
+  {
+   "rel": "data/monster-victims-network.html",
+   "fails": []
+  },
+  {
+   "rel": "data/music-structure.html",
+   "fails": []
+  },
+  {
+   "rel": "data/narrative-experiment.html",
+   "fails": []
+  },
+  {
+   "rel": "data/narrative-rhythm-curve.html",
+   "fails": []
+  },
+  {
+   "rel": "data/narratology-12d-network.html",
+   "fails": []
+  },
+  {
+   "rel": "data/narratology-13d-network.html",
+   "fails": []
+  },
+  {
+   "rel": "data/perf-canvas-rendering.html",
+   "fails": []
+  },
+  {
+   "rel": "data/philosophy.html",
+   "fails": []
+  },
+  {
+   "rel": "data/pilgrim-team-dynamic-network.html",
+   "fails": []
+  },
+  {
+   "rel": "data/pilgrim-team-psychology-arc.html",
+   "fails": []
+  },
+  {
+   "rel": "data/poetry-rhythm-analysis.html",
+   "fails": []
+  },
+  {
+   "rel": "data/power-resources.html",
+   "fails": []
+  },
+  {
+   "rel": "data/relationships.html",
+   "fails": []
+  },
+  {
+   "rel": "data/risk-project.html",
+   "fails": []
+  },
+  {
+   "rel": "data/search.html",
+   "fails": []
+  },
+  {
+   "rel": "data/six-senses-narratology-network.html",
+   "fails": []
+  },
+  {
+   "rel": "data/tag-cloud.html",
+   "fails": []
+  },
+  {
+   "rel": "data/social-media.html",
+   "fails": []
+  },
+  {
+   "rel": "data/text-evolution.html",
+   "fails": []
+  },
+  {
+   "rel": "data/text-search.html",
+   "fails": []
+  },
+  {
+   "rel": "data/timeline.html",
+   "fails": []
+  },
+  {
+   "rel": "data/theological-intervention-network.html",
+   "fails": []
+  },
+  {
+   "rel": "data/underworld-power-network.html",
+   "fails": []
+  },
+  {
+   "rel": "data/visual-art.html",
+   "fails": []
+  },
+  {
+   "rel": "data/workplace.html",
+   "fails": []
+  },
+  {
+   "rel": "dukou-engine.html",
+   "fails": []
+  },
+  {
+   "rel": "en/81-hardships-view.html",
+   "fails": []
+  },
+  {
+   "rel": "en/81-hardships.html",
+   "fails": []
+  },
+  {
+   "rel": "en/academic-papers.html",
+   "fails": []
+  },
+  {
+   "rel": "en/aesthetics.html",
+   "fails": []
+  },
+  {
+   "rel": "en/ai-dialogue.html",
+   "fails": []
+  },
+  {
+   "rel": "en/bestiary.html",
+   "fails": []
+  },
+  {
+   "rel": "en/business-model.html",
+   "fails": []
+  },
+  {
+   "rel": "en/century-dialogue.html",
+   "fails": []
+  },
+  {
+   "rel": "en/cave-estate.html",
+   "fails": []
+  },
+  {
+   "rel": "en/chapter-stats.html",
+   "fails": []
+  },
+  {
+   "rel": "en/chapter-structure-graph.html",
+   "fails": []
+  },
+  {
+   "rel": "en/chapters-map.html",
+   "fails": []
+  },
+  {
+   "rel": "en/character-appearance.html",
+   "fails": []
+  },
+  {
+   "rel": "en/character-bailongma.html",
+   "fails": []
+  },
+  {
+   "rel": "en/character-bajie.html",
+   "fails": []
+  },
+  {
+   "rel": "en/character-dynamic-network.html",
+   "fails": []
+  },
+  {
+   "rel": "en/character-presence-timeline.html",
+   "fails": []
+  },
+  {
+   "rel": "en/character-relationship-3d-view.html",
+   "fails": []
+  },
+  {
+   "rel": "en/character-relationship-3d.html",
+   "fails": []
+  },
+  {
+   "rel": "en/character-semantic-network.html",
+   "fails": []
+  },
+  {
+   "rel": "en/character-sentiment-arc.html",
+   "fails": []
+  },
+  {
+   "rel": "en/character-shaseng.html",
+   "fails": []
+  },
+  {
+   "rel": "en/character-tangseng.html",
+   "fails": []
+  },
+  {
+   "rel": "en/character-wukong.html",
+   "fails": []
+  },
+  {
+   "rel": "en/characters.html",
+   "fails": []
+  },
+  {
+   "rel": "en/chart-design.html",
+   "fails": []
+  },
+  {
+   "rel": "en/cognitive-psychology.html",
+   "fails": []
+  },
+  {
+   "rel": "en/concept-device.html",
+   "fails": []
+  },
+  {
+   "rel": "en/counterfactual.html",
+   "fails": []
+  },
+  {
+   "rel": "en/criticism-history.html",
+   "fails": []
+  },
+  {
+   "rel": "en/cross-time-danmaku.html",
+   "fails": []
+  },
+  {
+   "rel": "en/cultural-misreading.html",
+   "fails": []
+  },
+  {
+   "rel": "en/customs-pass-route.html",
+   "fails": []
+  },
+  {
+   "rel": "en/dashboard.html",
+   "fails": []
+  },
+  {
+   "rel": "en/data-explorer.html",
+   "fails": []
+  },
+  {
+   "rel": "en/deconstruction.html",
+   "fails": []
+  },
+  {
+   "rel": "en/dialogue-sentiment.html",
+   "fails": []
+  },
+  {
+   "rel": "en/dukou-engine.html",
+   "fails": []
+  },
+  {
+   "rel": "en/ecology.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-ai-era.html",
+   "fails": []
+  },
+  {
+   "rel": "en/emotional-heatmap.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-buddhist-chan.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-chapter-couplets.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-character-fu.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-cipai-linjiangxian.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-cipai-mantingfang.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-cipai-shuidiaogetou.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-cipai-xijiangyue.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-composition-origins.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-divine-bureaucracy.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-folk-belief.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-historical-xuanzang.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-information-cocoon.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-ming-economy.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-ming-examination.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-ming-garrison.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-ming-intellectual-history.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-ming-judiciary.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-ming-literary-thought.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-ming-maritime-ban.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-ming-metaphor.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-ming-military.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-ming-politics.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-ming-religion.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-ming-social-customs.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-modern-management.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-original-poetry.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-poetry-imagery.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-poetry-opening.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-quanzhen-daoism.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-rhythm-analysis.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-thematic-poetry.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-scenery-poems.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-three-teachings.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-version-evolution.html",
+   "fails": []
+  },
+  {
+   "rel": "en/essay-zen-koan-vs-neidan.html",
+   "fails": []
+  },
+  {
+   "rel": "en/ethics-consumption.html",
+   "fails": []
+  },
+  {
+   "rel": "en/famous-time-travel.html",
+   "fails": []
+  },
+  {
+   "rel": "en/four-dimensional-research-network.html",
+   "fails": []
+  },
+  {
+   "rel": "en/four-heavenly-kings-artifacts.html",
+   "fails": []
+  },
+  {
+   "rel": "en/game-webnovel.html",
+   "fails": []
+  },
+  {
+   "rel": "en/global-pattern.html",
+   "fails": []
+  },
+  {
+   "rel": "en/graph-explorer.html",
+   "fails": []
+  },
+  {
+   "rel": "en/guanyin-six-roles-network.html",
+   "fails": []
+  },
+  {
+   "rel": "en/guide.html",
+   "fails": []
+  },
+  {
+   "rel": "en/hardship-difficulty-heatmap.html",
+   "fails": []
+  },
+  {
+   "rel": "en/hardship-heatmap.html",
+   "fails": []
+  },
+  {
+   "rel": "en/heaven-power-network.html",
+   "fails": []
+  },
+  {
+   "rel": "en/index.html",
+   "fails": []
+  },
+  {
+   "rel": "en/intertextuality-network.html",
+   "fails": []
+  },
+  {
+   "rel": "en/journey-geo-semiotics.html",
+   "fails": []
+  },
+  {
+   "rel": "en/journey-map-interactive.html",
+   "fails": []
+  },
+  {
+   "rel": "en/journey-route.html",
+   "fails": []
+  },
+  {
+   "rel": "en/journey-spacetime.html",
+   "fails": []
+  },
+  {
+   "rel": "en/jurisprudence.html",
+   "fails": []
+  },
+  {
+   "rel": "en/language-style-radar.html",
+   "fails": []
+  },
+  {
+   "rel": "en/karma-reincarnation.html",
+   "fails": []
+  },
+  {
+   "rel": "en/linguistics.html",
+   "fails": []
+  },
+  {
+   "rel": "en/magic-system.html",
+   "fails": []
+  },
+  {
+   "rel": "en/material-archaeology.html",
+   "fails": []
+  },
+  {
+   "rel": "en/mbti-evolution.html",
+   "fails": []
+  },
+  {
+   "rel": "en/methodology-matrix.html",
+   "fails": []
+  },
+  {
+   "rel": "en/methodology.html",
+   "fails": []
+  },
+  {
+   "rel": "en/ming-political-thought-comparison.html",
+   "fails": []
+  },
+  {
+   "rel": "en/monster-background.html",
+   "fails": []
+  },
+  {
+   "rel": "en/monster-capability-radar.html",
+   "fails": []
+  },
+  {
+   "rel": "en/monster-ecology-network.html",
+   "fails": []
+  },
+  {
+   "rel": "en/monster-female-network.html",
+   "fails": []
+  },
+  {
+   "rel": "en/monster-hierarchy-network.html",
+   "fails": []
+  },
+  {
+   "rel": "en/monster-sociology.html",
+   "fails": []
+  },
+  {
+   "rel": "en/monster-victims-network.html",
+   "fails": []
+  },
+  {
+   "rel": "en/music-structure.html",
+   "fails": []
+  },
+  {
+   "rel": "en/narrative-experiment.html",
+   "fails": []
+  },
+  {
+   "rel": "en/narrative-rhythm-curve.html",
+   "fails": []
+  },
+  {
+   "rel": "en/narratology-12d-network.html",
+   "fails": []
+  },
+  {
+   "rel": "en/narratology-13d-network.html",
+   "fails": []
+  },
+  {
+   "rel": "en/perf-canvas-rendering.html",
+   "fails": []
+  },
+  {
+   "rel": "en/philosophy.html",
+   "fails": []
+  },
+  {
+   "rel": "en/pilgrim-team-dynamic-network.html",
+   "fails": []
+  },
+  {
+   "rel": "en/pilgrim-team-psychology-arc.html",
+   "fails": []
+  },
+  {
+   "rel": "en/poetry-rhythm-analysis.html",
+   "fails": []
+  },
+  {
+   "rel": "en/power-resources.html",
+   "fails": []
+  },
+  {
+   "rel": "en/relationships.html",
+   "fails": []
+  },
+  {
+   "rel": "en/search.html",
+   "fails": []
+  },
+  {
+   "rel": "en/risk-project.html",
+   "fails": []
+  },
+  {
+   "rel": "en/site-map.html",
+   "fails": []
+  },
+  {
+   "rel": "en/six-senses-narratology-network.html",
+   "fails": []
+  },
+  {
+   "rel": "en/tag-cloud.html",
+   "fails": []
+  },
+  {
+   "rel": "en/social-media.html",
+   "fails": []
+  },
+  {
+   "rel": "en/text-evolution.html",
+   "fails": []
+  },
+  {
+   "rel": "en/text-search.html",
+   "fails": []
+  },
+  {
+   "rel": "en/timeline.html",
+   "fails": []
+  },
+  {
+   "rel": "en/theological-intervention-network.html",
+   "fails": []
+  },
+  {
+   "rel": "en/tribulations.html",
+   "fails": []
+  },
+  {
+   "rel": "en/underworld-power-network.html",
+   "fails": []
+  },
+  {
+   "rel": "en/visualizations.html",
+   "fails": []
+  },
+  {
+   "rel": "en/visual-art.html",
+   "fails": []
+  },
+  {
+   "rel": "en/workplace.html",
+   "fails": []
+  },
+  {
+   "rel": "guide.html",
+   "fails": []
+  },
+  {
+   "rel": "mobile-index.html",
+   "fails": []
+  },
+  {
+   "rel": "rum-viewer.html",
+   "fails": []
+  },
+  {
+   "rel": "index.html",
+   "fails": []
+  },
+  {
+   "rel": "visit-viewer.html",
+   "fails": []
+  }
+ ]
+}

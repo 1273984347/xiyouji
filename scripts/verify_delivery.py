@@ -575,6 +575,21 @@ def main():
             fail("原著引文未命中/格式错误（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
     except Exception as e:
         warn("原著引文核验门禁执行异常（W503）: %s" % e)
+    # ---- 图表静态自洽门禁（W551：W550 全站截图审查实证三类批量图表缺陷——10 页桑基缺引用 /
+    # 4 组饼图措辞×树图实现错配——均为门禁盲区积累数月后人工清账。本门禁文本层拦同类复发；
+    # 需真实渲染的遮挡/空带/溢出/桑基运行时由 check_screenshot_gates.js（screenshot-review
+    # workflow 动态步）覆盖）----
+    cgd_py = os.path.join(_HERE, "check_chart_data.py")
+    try:
+        r = subprocess.run([sys.executable, cgd_py], capture_output=True, text=True, timeout=120)
+        tail = (r.stdout.splitlines()[-2:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("图表静态自洽门禁通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("图表静态自洽异常（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+    except Exception as e:
+        warn("图表静态自洽门禁执行异常（W551）: %s" % e)
+
 
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:

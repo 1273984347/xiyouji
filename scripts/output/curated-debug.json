@@ -1,0 +1,13 @@
+{
+ "generatedAt": "2026-09-05T16:25:42.887Z",
+ "total": 1,
+ "failed": 1,
+ "results": [
+  {
+   "rel": "curated.html",
+   "fails": [
+    "G4 reveal-in 未全部触发 2/3"
+   ]
+  }
+ ]
+}
