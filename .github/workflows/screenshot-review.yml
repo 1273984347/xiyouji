@@ -5,6 +5,7 @@ name: Screenshot Review
 # 将三个截图审查脚本纳入 GitHub Actions CI：
 #   1. detect_unwrapped_tables.py — 静态扫描 HTML，检测未包裹 table（阻断）
 #   2. batch_screenshots.js        — Playwright 批量截图 + 布局断言 + 控制台异常（--fail-on-issues 阻断）
+#   2.5 check_screenshot_gates.js — 动态渲染门禁（W551）：sankey 运行时/画布遮挡/溢出/reveal（阻断）
 #   3. slice_screenshots.py        — 截图切片为 800px 块，供像素级人工复核（非阻断，仅产物）
 #
 # 触发：
@@ -208,6 +209,19 @@ jobs:
           fi
 
           echo "✓ 无新增未包裹 table 文件（baseline 内历史问题 $(echo "$KNOWN" | wc -l) 个留待单独修复）。"
+
+      - name: Chart render gates (sankey runtime / canvas occlusion / overflow / reveal, blocking)
+        id: chart-gates
+        if: steps.scope.outputs.needed == 'true'
+        uses: nick-fields/retry@v4
+        with:
+          max_attempts: 2
+          timeout_minutes: 15
+          command: |
+            # W551：动态渲染门禁——W550 全站截图审查实证四类批量缺陷的机器绊线：
+            # pageerror / d3.sankey 运行时缺失 / 桌面横向溢出 / reveal 未触发 / link-canvas 画布被遮挡。
+            # file:// 自包含，与 batch_screenshots 同口径；定向 scope 时仅跑变更相关页面（近似：全量 4 worker 约需数分钟，直接全量）。
+            node scripts/check_screenshot_gates.js --json scripts/output/chart-gates.json
 
       - name: Run batch screenshots (Playwright + layout assertions, blocking)
         id: batch-screenshots
