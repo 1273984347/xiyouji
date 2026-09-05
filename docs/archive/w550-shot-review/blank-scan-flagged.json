@@ -1,0 +1,45 @@
+{
+ "note": "W552 归档精简版：仅含空带命中的截图",
+ "total": 468,
+ "flagged": [
+  {
+   "width": 1280,
+   "height": 4718,
+   "bands": [
+    {
+     "y0": 2088,
+     "y1": 4477,
+     "height": 2389,
+     "color": "rgb(250,247,240)"
+    }
+   ],
+   "shot": "desktop/curated.png"
+  },
+  {
+   "width": 1280,
+   "height": 4452,
+   "bands": [
+    {
+     "y0": 902,
+     "y1": 3169,
+     "height": 2266,
+     "color": "rgb(250,247,240)"
+    }
+   ],
+   "shot": "desktop/index.png"
+  },
+  {
+   "width": 375,
+   "height": 6827,
+   "bands": [
+    {
+     "y0": 1131,
+     "y1": 5034,
+     "height": 3903,
+     "color": "rgb(250,247,240)"
+    }
+   ],
+   "shot": "mobile/index.png"
+  }
+ ]
+}

@@ -1,0 +1,268 @@
+{"group":"G01","page":"_template.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G01","page":"curated.html","viewport":"desktop","verdict":"warn","issues":["格2/格3内容稀疏：卡片网格结束后大片空白，三按钮行疑似出现两次（pass2 改判 pass：reveal 伪影+切片重叠伪影）"]}
+{"group":"G01","page":"dashboard.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G01","page":"data/_shell.html","viewport":"desktop","verdict":"warn","issues":["数据模板壳：未填充占位符与示例内容（模板壳按预期放行）"]}
+{"group":"G01","page":"data/81-hardships-view.html","viewport":"desktop","verdict":"warn","issues":["页首疑有多余上边距（pass2 改判 pass：短页信箱留白伪影）"]}
+{"group":"G01","page":"data/81-hardships.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G01","page":"data/aesthetics.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G01","page":"data/ai-dialogue.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G01","page":"data/business-model.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G01","page":"data/cave-estate.html","viewport":"desktop","verdict":"warn","issues":["页脚后约两屏无内容区域（pass2 改判 pass：怀疑清除，页尾仅正常段距）"]}
+{"group":"G01","page":"data/century-dialogue.html","viewport":"desktop","verdict":"warn","issues":["面板下半大片空白、讨论数据疑未完全渲染（pass2 改判 pass：怀疑清除，圆形落座布局边距）"]}
+{"group":"G01","page":"data/chapter-stats.html","viewport":"desktop","verdict":"warn","issues":["格2上部大片空白、末段图表疑只剩标题（pass2 改判 pass：怀疑清除）"]}
+{"group":"G01","page":"data/chapter-structure-graph.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G01","page":"data/character-appearance.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G01","page":"data/character-dynamic-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G02","page":"data/character-presence-timeline.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G02","page":"data/character-relationship-3d-view.html","viewport":"desktop","verdict":"warn","issues":["页首空白带+内容稀疏（pass2 改判 pass：设计内离线降级，表格容器内滚动）"]}
+{"group":"G02","page":"data/character-relationship-3d.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G02","page":"data/character-semantic-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G02","page":"data/character-sentiment-arc.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G02","page":"data/chart-design.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G02","page":"data/cognitive-psychology.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G02","page":"data/concept-device.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G02","page":"data/counterfactual.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G02","page":"data/criticism-history.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G02","page":"data/cross-time-danmaku.html","viewport":"desktop","verdict":"warn","issues":["末格页尾留白+页脚疑似重复+弹幕画布极淡（pass2 改判 pass：地图底衬+单页脚+动态中间态）"]}
+{"group":"G02","page":"data/cultural-misreading.html","viewport":"desktop","verdict":"warn","issues":["洞察后约一屏空白（空白怀疑清除；新发现：国家分布饼图实为 treemap，保留 warn）"]}
+{"group":"G02","page":"data/customs-pass-route.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G02","page":"data/data-explorer.html","viewport":"desktop","verdict":"warn","issues":["页头缺失+内容稀疏（pass2 改判 pass：信箱留白伪影+设计内离线示例模式）"]}
+{"group":"G02","page":"data/deconstruction.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G03","page":"data/dialogue-sentiment.html","viewport":"desktop","verdict":"warn","issues":["格4顶部1/3空白带疑夹空内容块（其余图表正常；未进入 pass2，保留初审观察）"]}
+{"group":"G03","page":"data/ecology.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G03","page":"data/emotional-heatmap.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G03","page":"data/ethics-consumption.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G03","page":"data/famous-time-travel.html","viewport":"desktop","verdict":"warn","issues":["格1顶部1/3空白疑插画区未渲染（en 镜像 pass2 未见异常；中文页未单独复核，保留初审观察）"]}
+{"group":"G03","page":"data/four-dimensional-research-network.html","viewport":"desktop","verdict":"warn","issues":["格3顶部1/3空白疑径向图主体未渲染（未进入 pass2，保留初审观察）"]}
+{"group":"G03","page":"data/four-heavenly-kings-artifacts.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G03","page":"data/game-webnovel.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G03","page":"data/global-pattern.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G03","page":"data/graph-explorer.html","viewport":"desktop","verdict":"warn","issues":["顶部1/4空白+无站点页脚（全屏应用型工具页；未进入 pass2，保留初审观察）"]}
+{"group":"G03","page":"data/guanyin-six-roles-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G03","page":"data/hardship-difficulty-heatmap.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G03","page":"data/hardship-heatmap.html","viewport":"desktop","verdict":"warn","issues":["标题与正文间1/5空白带疑夹空块（未进入 pass2，保留初审观察）"]}
+{"group":"G03","page":"data/heaven-power-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G03","page":"data/intertextuality-network.html","viewport":"desktop","verdict":"fail","issues":["桑基图容器空渲染，仅一行提示文字——根因坐实：缺 d3-sankey.min.js 引用"]}
+{"group":"G04","page":"data/journey-geo-3d.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G04","page":"data/journey-geo-semiotics.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G04","page":"data/journey-map-interactive.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G04","page":"data/journey-route.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G04","page":"data/journey-spacetime.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G04","page":"data/jurisprudence.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G04","page":"data/karma-reincarnation.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G04","page":"data/language-style-radar.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G04","page":"data/linguistics.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G04","page":"data/magic-system.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G04","page":"data/material-archaeology.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G04","page":"data/mbti-evolution.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G04","page":"data/methodology-matrix.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G04","page":"data/ming-political-thought-comparison.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G04","page":"data/monster-background.html","viewport":"desktop","verdict":"warn","issues":["末格页脚上方近空白横带（未进入 pass2，保留初审观察）"]}
+{"group":"G05","page":"data/monster-capability-radar.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G05","page":"data/monster-ecology-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G05","page":"data/monster-female-network.html","viewport":"desktop","verdict":"fail","issues":["桑基图空渲染（缺 d3-sankey 引用）+pass2 确证力导向图连线不可见（三连线图层默认 display:none）"]}
+{"group":"G05","page":"data/monster-hierarchy-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G05","page":"data/monster-sociology.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G05","page":"data/monster-victims-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G05","page":"data/music-structure.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G05","page":"data/narrative-experiment.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G05","page":"data/narrative-rhythm-curve.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G05","page":"data/narratology-12d-network.html","viewport":"desktop","verdict":"fail","issues":["桑基图空渲染（缺 d3-sankey 引用）+pass2 确证力导向连线不可见"]}
+{"group":"G05","page":"data/narratology-13d-network.html","viewport":"desktop","verdict":"fail","issues":["桑基图空渲染（缺 d3-sankey 引用）；连线不可见疑似同 12d（未单独复核）"]}
+{"group":"G05","page":"data/perf-canvas-rendering.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G05","page":"data/philosophy.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G05","page":"data/pilgrim-team-dynamic-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G05","page":"data/pilgrim-team-psychology-arc.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G06","page":"data/poetry-rhythm-analysis.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G06","page":"data/power-resources.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G06","page":"data/relationships.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G06","page":"data/risk-project.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G06","page":"data/search.html","viewport":"desktop","verdict":"warn","issues":["页头缺失+大面积留白（pass2 改判 pass：信箱留白伪影+未检索空态正常）"]}
+{"group":"G06","page":"data/six-senses-narratology-network.html","viewport":"desktop","verdict":"fail","issues":["桑基图容器空渲染，仅居中提示文字——缺 d3-sankey 引用坐实"]}
+{"group":"G06","page":"data/social-media.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G06","page":"data/tag-cloud.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G06","page":"data/text-evolution.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G06","page":"data/text-search.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G06","page":"data/theological-intervention-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G06","page":"data/timeline.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G06","page":"data/underworld-power-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G06","page":"data/visual-art.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G06","page":"data/workplace.html","viewport":"desktop","verdict":"warn","issues":["效能曲线仅左端线段（pass2 改判 pass：曲线完整贯穿四分区；保留轻微瑕疵：搬救兵行标签贴边）"]}
+{"group":"G07","page":"dukou-engine.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G07","page":"en/81-hardships-view.html","viewport":"desktop","verdict":"warn","issues":["顶部约1/4空白带（短页信箱留白伪影，与中文镜像同模式）"]}
+{"group":"G07","page":"en/81-hardships.html","viewport":"desktop","verdict":"fail","issues":["pass2 确证：81 难清单表格初始渲染 0/0 空状态（筛选/初始化 bug），而同页树图/桑基均正常渲染 81 条"]}
+{"group":"G07","page":"en/academic-papers.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G07","page":"en/aesthetics.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G07","page":"en/ai-dialogue.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G07","page":"en/bestiary.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G07","page":"en/business-model.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G07","page":"en/cave-estate.html","viewport":"desktop","verdict":"warn","issues":["Luxury Distribution 呈极窄单列+Minion Count 行标疑被裁（未进入 pass2，保留初审观察）"]}
+{"group":"G07","page":"en/century-dialogue.html","viewport":"desktop","verdict":"warn","issues":["三方讲者卡疑缺第三张（中文镜像 pass2 改判 pass，en 未单独复核）"]}
+{"group":"G07","page":"en/chapter-stats.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G07","page":"en/chapter-structure-graph.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G07","page":"en/chapters-map.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G07","page":"en/character-appearance.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G07","page":"en/character-bailongma.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G08","page":"en/character-bajie.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G08","page":"en/character-dynamic-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G08","page":"en/character-presence-timeline.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G08","page":"en/character-relationship-3d-view.html","viewport":"desktop","verdict":"fail","issues":["pass2 改判 pass：画布区即页面自述的离线降级数据表视图，与设计一致，非缺陷"]}
+{"group":"G08","page":"en/character-relationship-3d.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G08","page":"en/character-semantic-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G08","page":"en/character-sentiment-arc.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G08","page":"en/character-shaseng.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G08","page":"en/character-tangseng.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G08","page":"en/character-wukong.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G08","page":"en/characters.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G08","page":"en/chart-design.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G08","page":"en/cognitive-psychology.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G08","page":"en/concept-device.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G08","page":"en/counterfactual.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G09","page":"en/criticism-history.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G09","page":"en/cross-time-danmaku.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G09","page":"en/cultural-misreading.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G09","page":"en/customs-pass-route.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G09","page":"en/dashboard.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G09","page":"en/data-explorer.html","viewport":"desktop","verdict":"warn","issues":["红框告警盒（降级声明，设计内）+无标准页脚（与中文镜像同模式）"]}
+{"group":"G09","page":"en/deconstruction.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G09","page":"en/dialogue-sentiment.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G09","page":"en/dukou-engine.html","viewport":"desktop","verdict":"warn","issues":["顶部空白带（短页信箱留白伪影模式）"]}
+{"group":"G09","page":"en/ecology.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G09","page":"en/emotional-heatmap.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G09","page":"en/essay-ai-era.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G09","page":"en/essay-buddhist-chan.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G09","page":"en/essay-chapter-couplets.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G09","page":"en/essay-character-fu.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G10","page":"en/essay-cipai-linjiangxian.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G10","page":"en/essay-cipai-mantingfang.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G10","page":"en/essay-cipai-shuidiaogetou.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G10","page":"en/essay-cipai-xijiangyue.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G10","page":"en/essay-composition-origins.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G10","page":"en/essay-divine-bureaucracy.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G10","page":"en/essay-folk-belief.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G10","page":"en/essay-historical-xuanzang.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G10","page":"en/essay-information-cocoon.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G10","page":"en/essay-ming-economy.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G10","page":"en/essay-ming-examination.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G10","page":"en/essay-ming-garrison.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G10","page":"en/essay-ming-intellectual-history.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G10","page":"en/essay-ming-judiciary.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G10","page":"en/essay-ming-literary-thought.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G11","page":"en/essay-ming-maritime-ban.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G11","page":"en/essay-ming-metaphor.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G11","page":"en/essay-ming-military.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G11","page":"en/essay-ming-politics.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G11","page":"en/essay-ming-religion.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G11","page":"en/essay-ming-social-customs.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G11","page":"en/essay-modern-management.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G11","page":"en/essay-original-poetry.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G11","page":"en/essay-poetry-imagery.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G11","page":"en/essay-poetry-opening.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G11","page":"en/essay-quanzhen-daoism.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G11","page":"en/essay-rhythm-analysis.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G11","page":"en/essay-scenery-poems.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G11","page":"en/essay-thematic-poetry.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G11","page":"en/essay-three-teachings.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G12","page":"en/essay-version-evolution.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G12","page":"en/essay-zen-koan-vs-neidan.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G12","page":"en/ethics-consumption.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G12","page":"en/famous-time-travel.html","viewport":"desktop","verdict":"warn","issues":["pass2：插画卡渲染正常、'Please refresh' 未复现；新发现钱锺书信件文字右缘裁切（保留 warn）"]}
+{"group":"G12","page":"en/four-dimensional-research-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G12","page":"en/four-heavenly-kings-artifacts.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G12","page":"en/game-webnovel.html","viewport":"desktop","verdict":"warn","issues":["pass2 升级 fail：Pie/Donut 标题实渲染 treemap+标签裁切+残留中文『被动』"]}
+{"group":"G12","page":"en/global-pattern.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G12","page":"en/graph-explorer.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G12","page":"en/guanyin-six-roles-network.html","viewport":"desktop","verdict":"warn","issues":["页脚出现两次（sticky 页脚截图伪影，非缺陷）"]}
+{"group":"G12","page":"en/guide.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G12","page":"en/hardship-difficulty-heatmap.html","viewport":"desktop","verdict":"fail","issues":["pass2 确证：Rescue Count Distribution 子图仅坐标轴无柱形，而统计表救援数非零"]}
+{"group":"G12","page":"en/hardship-heatmap.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G12","page":"en/heaven-power-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G12","page":"en/index.html","viewport":"desktop","verdict":"warn","issues":["两张卡片同题 'The Novel's Own Verse'（全文 2 次，未深究）"]}
+{"group":"G13","page":"en/intertextuality-network.html","viewport":"desktop","verdict":"fail","issues":["桑基图容器空渲染（缺 d3-sankey 引用，中文镜像同根因）"]}
+{"group":"G13","page":"en/journey-geo-semiotics.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G13","page":"en/journey-map-interactive.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G13","page":"en/journey-route.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G13","page":"en/journey-spacetime.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G13","page":"en/jurisprudence.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G13","page":"en/karma-reincarnation.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G13","page":"en/language-style-radar.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G13","page":"en/linguistics.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G13","page":"en/magic-system.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G13","page":"en/material-archaeology.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G13","page":"en/mbti-evolution.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G13","page":"en/methodology-matrix.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G13","page":"en/methodology.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G13","page":"en/ming-political-thought-comparison.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G14","page":"en/monster-background.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G14","page":"en/monster-capability-radar.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G14","page":"en/monster-ecology-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G14","page":"en/monster-female-network.html","viewport":"desktop","verdict":"warn","issues":["桑基空渲染同中文镜像（fail 级）+力导向连线不可见（中文版 pass2 已确证同根因）"]}
+{"group":"G14","page":"en/monster-hierarchy-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G14","page":"en/monster-sociology.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G14","page":"en/monster-victims-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G14","page":"en/music-structure.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G14","page":"en/narrative-experiment.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G14","page":"en/narrative-rhythm-curve.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G14","page":"en/narratology-12d-network.html","viewport":"desktop","verdict":"fail","issues":["桑基空渲染+连线不可见（中文版 pass2 已确证）"]}
+{"group":"G14","page":"en/narratology-13d-network.html","viewport":"desktop","verdict":"fail","issues":["桑基空渲染+连线不可见（疑似同根因，未单独复核）"]}
+{"group":"G14","page":"en/perf-canvas-rendering.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G14","page":"en/philosophy.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G14","page":"en/pilgrim-team-dynamic-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G15","page":"en/pilgrim-team-psychology-arc.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G15","page":"en/poetry-rhythm-analysis.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G15","page":"en/power-resources.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G15","page":"en/relationships.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G15","page":"en/risk-project.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G15","page":"en/search.html","viewport":"desktop","verdict":"warn","issues":["顶部空白带+极稀疏（短页信箱留白伪影+未检索空态模式，与中文镜像一致）"]}
+{"group":"G15","page":"en/site-map.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G15","page":"en/six-senses-narratology-network.html","viewport":"desktop","verdict":"fail","issues":["桑基容器空渲染，提示 'Sankey init failed (check ../../static/js/sankey.min.js)'——缺 d3-sankey 引用坐实"]}
+{"group":"G15","page":"en/social-media.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G15","page":"en/tag-cloud.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G15","page":"en/text-evolution.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G15","page":"en/text-search.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G15","page":"en/theological-intervention-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G15","page":"en/timeline.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G15","page":"en/tribulations.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G16","page":"en/underworld-power-network.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G16","page":"en/visual-art.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G16","page":"en/visualizations.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G16","page":"en/workplace.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G16","page":"guide.html","viewport":"desktop","verdict":"warn","issues":["格2上半空白（pass2 改判 pass：reveal-in 伪影，重截后 7 张路径卡完整）"]}
+{"group":"G16","page":"index.html","viewport":"desktop","verdict":"warn","issues":["格1/格2空白（pass2 确认伪影）；真实发现：统计带 611 篇为旧口径，应 615"]}
+{"group":"G16","page":"mobile-index.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G16","page":"rum-viewer.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G16","page":"visit-viewer.html","viewport":"desktop","verdict":"pass","issues":[]}
+{"group":"G17","page":"_template.html","viewport":"mobile","verdict":"pass","issues":[]}
+{"group":"G17","page":"curated.html","viewport":"mobile","verdict":"fail","issues":["pass2 改判 pass：主列表区 6400px 空白为 reveal-in 伪影，重截后 13 随笔+15 专题完整渲染"]}
+{"group":"G17","page":"dashboard.html","viewport":"mobile","verdict":"pass","issues":[]}
+{"group":"G17","page":"dukou-engine.html","viewport":"mobile","verdict":"pass","issues":[]}
+{"group":"G17","page":"en/chapters-map.html","viewport":"mobile","verdict":"warn","issues":["表格超宽断言：贴边但无截断、布局未破坏"]}
+{"group":"G17","page":"en/essay-buddhist-chan.html","viewport":"mobile","verdict":"warn","issues":["表格超宽断言：贴边但内容完整无截断"]}
+{"group":"G17","page":"en/essay-character-fu.html","viewport":"mobile","verdict":"warn","issues":["表格超宽断言：贴边但内容完整无截断"]}
+{"group":"G17","page":"en/essay-cipai-linjiangxian.html","viewport":"mobile","verdict":"warn","issues":["表格超宽断言：贴边但内容完整无截断"]}
+{"group":"G17","page":"en/essay-cipai-mantingfang.html","viewport":"mobile","verdict":"warn","issues":["表格超宽断言：贴边但内容完整无截断"]}
+{"group":"G17","page":"en/essay-cipai-shuidiaogetou.html","viewport":"mobile","verdict":"warn","issues":["表格超宽断言：两表贴边但内容完整无截断"]}
+{"group":"G17","page":"en/essay-cipai-xijiangyue.html","viewport":"mobile","verdict":"warn","issues":["表格超宽断言：贴边但内容完整无截断"]}
+{"group":"G17","page":"en/essay-composition-origins.html","viewport":"mobile","verdict":"warn","issues":["两表贴边但内容完整换行无截断"]}
+{"group":"G17","page":"en/essay-folk-belief.html","viewport":"mobile","verdict":"warn","issues":["表格贴边但内容完整无截断"]}
+{"group":"G17","page":"en/essay-historical-xuanzang.html","viewport":"mobile","verdict":"warn","issues":["表格贴边但内容完整无截断"]}
+{"group":"G17","page":"en/essay-ming-economy.html","viewport":"mobile","verdict":"warn","issues":["表格贴边但内容完整无截断"]}
+{"group":"G18","page":"en/essay-ming-intellectual-history.html","viewport":"mobile","verdict":"warn","issues":["pass2 升级 fail：hero 下百分号编码中文文件名原样印出（不可读）+页面撑宽约2.3倍+Four Case Mappings 表右缘超视口"]}
+{"group":"G18","page":"en/essay-ming-literary-thought.html","viewport":"mobile","verdict":"warn","issues":["pass2 升级 fail：同型编码文件名缺陷+页面撑宽+两表右缘远超视口"]}
+{"group":"G18","page":"en/essay-ming-metaphor.html","viewport":"mobile","verdict":"pass","issues":[]}
+{"group":"G18","page":"en/essay-ming-military.html","viewport":"mobile","verdict":"pass","issues":[]}
+{"group":"G18","page":"en/essay-ming-politics.html","viewport":"mobile","verdict":"pass","issues":[]}
+{"group":"G18","page":"en/essay-ming-religion.html","viewport":"mobile","verdict":"pass","issues":[]}
+{"group":"G18","page":"en/essay-ming-social-customs.html","viewport":"mobile","verdict":"pass","issues":[]}
+{"group":"G18","page":"en/essay-original-poetry.html","viewport":"mobile","verdict":"pass","issues":[]}
+{"group":"G18","page":"en/essay-poetry-imagery.html","viewport":"mobile","verdict":"warn","issues":["表格右缘超正文栏约一倍（贴边扩展，内容完整、未撑破）"]}
+{"group":"G18","page":"en/essay-poetry-opening.html","viewport":"mobile","verdict":"pass","issues":[]}
+{"group":"G18","page":"en/essay-quanzhen-daoism.html","viewport":"mobile","verdict":"pass","issues":[]}
+{"group":"G18","page":"en/essay-rhythm-analysis.html","viewport":"mobile","verdict":"warn","issues":["Four Rhythm Theorists 表右缘超正文栏约1/3（贴边扩展，内容完整）"]}
+{"group":"G18","page":"en/essay-three-teachings.html","viewport":"mobile","verdict":"pass","issues":[]}
+{"group":"G18","page":"en/tribulations.html","viewport":"mobile","verdict":"warn","issues":["pass2：81 清单为限高滚动容器（内容在 DOM，第05行徽章在容器底被裁、无滚动提示）；Cause×Outcome 矩阵右缘溢出视口（约660/375）"]}
+{"group":"G18","page":"guide.html","viewport":"mobile","verdict":"fail","issues":["pass2 改判 pass：中段约3000px空白为 reveal-in 伪影，重截后身份路径卡+术语表完整"]}
+{"group":"G19","page":"index.html","viewport":"mobile","verdict":"warn","issues":["格1-2近全空白（pass2 确认 reveal 伪影）；统计带 611 篇旧口径（应 615）；页脚版本长文移动端为密集文字墙（轻微）"]}
+{"group":"G19","page":"mobile-index.html","viewport":"mobile","verdict":"pass","issues":[]}
+{"group":"G19","page":"rum-viewer.html","viewport":"mobile","verdict":"pass","issues":[]}
+{"group":"G19","page":"visit-viewer.html","viewport":"mobile","verdict":"pass","issues":[]}

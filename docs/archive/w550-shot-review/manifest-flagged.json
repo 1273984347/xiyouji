@@ -1,0 +1,715 @@
+{
+ "note": "W552 归档精简版：仅保留 error/告警条目；全量 468 条原始数据随 tmpe/ 删除",
+ "totalTasks": 468,
+ "flaggedCount": 30,
+ "flagged": [
+  {
+   "rel": "dashboard.html",
+   "viewport": "desktop",
+   "png": "screenshots/desktop/dashboard.png",
+   "ms": 3047,
+   "title": "详解西游记 · 数据仪表盘",
+   "textLen": 5997,
+   "svgCount": 7,
+   "canvasCount": 0,
+   "scrollHeight": 7433,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [
+    "http://127.0.0.1:8777/health"
+   ],
+   "layoutIssues": []
+  },
+  {
+   "rel": "dashboard.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/dashboard.png",
+   "ms": 2723,
+   "title": "详解西游记 · 数据仪表盘",
+   "textLen": 5977,
+   "svgCount": 7,
+   "canvasCount": 0,
+   "scrollHeight": 17192,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [
+    "http://127.0.0.1:8777/health"
+   ],
+   "layoutIssues": []
+  },
+  {
+   "rel": "en/chapters-map.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/chapters-map.png",
+   "ms": 2801,
+   "title": "100 Chapters Map — Annotated English Edition",
+   "textLen": 20894,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 25496,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 330,
+     "parentWidth": 327,
+     "parentTag": "article"
+    },
+    {
+     "type": "table-overflow",
+     "selector": "table[2]",
+     "tableWidth": 349,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-buddhist-chan.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-buddhist-chan.png",
+   "ms": 2492,
+   "title": "Chan Buddhism in the Journey to the West — Annotated English Edition",
+   "textLen": 4706,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 6092,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 470,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-character-fu.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-character-fu.png",
+   "ms": 2261,
+   "title": "Portrait Poems — Fu as Character-Making",
+   "textLen": 4488,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 5086,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 431,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-cipai-linjiangxian.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-cipai-linjiangxian.png",
+   "ms": 2464,
+   "title": "Linjiangxian: The Fisherman-Oxherd's Hidden Realm — Annotated English Edition",
+   "textLen": 4885,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 6236,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 406,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-cipai-mantingfang.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-cipai-mantingfang.png",
+   "ms": 2553,
+   "title": "Mantingfang: The Only Named Tune in the Book — Annotated English Edition",
+   "textLen": 5070,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 6184,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 466,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-cipai-shuidiaogetou.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-cipai-shuidiaogetou.png",
+   "ms": 3113,
+   "title": "Shuidiaogetou: The Long Lyric of Becoming — Annotated English Edition",
+   "textLen": 4856,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 6290,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 407,
+     "parentWidth": 327,
+     "parentTag": "article"
+    },
+    {
+     "type": "table-overflow",
+     "selector": "table[1]",
+     "tableWidth": 413,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-cipai-xijiangyue.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-cipai-xijiangyue.png",
+   "ms": 3036,
+   "title": "Xijiangyue: A Tiny Meter for Four Great Moments — Annotated English Edition",
+   "textLen": 5339,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 6786,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 405,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-composition-origins.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-composition-origins.png",
+   "ms": 2659,
+   "title": "The Making of the Novel: Authorship, Texts, and the Ming World — Annotated English Edition",
+   "textLen": 6080,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 7855,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[1]",
+     "tableWidth": 385,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-folk-belief.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-folk-belief.png",
+   "ms": 2392,
+   "title": "Popular Religion in the Journey to the West — Annotated English Edition",
+   "textLen": 4008,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 5568,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 448,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-historical-xuanzang.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-historical-xuanzang.png",
+   "ms": 2572,
+   "title": "The Historical and the Fictional Xuanzang — Annotated English Edition",
+   "textLen": 4210,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 4734,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 429,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-ming-economy.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-ming-economy.png",
+   "ms": 2617,
+   "title": "Heaven's Ledger — The Economic Mirror · Annotated English Edition",
+   "textLen": 5150,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 5509,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 468,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-ming-intellectual-history.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-ming-intellectual-history.png",
+   "ms": 2681,
+   "title": "The Mind as Cosmos — Ming Intellectual History · Annotated English Edition",
+   "textLen": 6086,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 7513,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 383,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-ming-literary-thought.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-ming-literary-thought.png",
+   "ms": 2610,
+   "title": "From Archaism to Xinling — Ming Literary Thought · Annotated English Edition",
+   "textLen": 5737,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 6419,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 528,
+     "parentWidth": 327,
+     "parentTag": "article"
+    },
+    {
+     "type": "table-overflow",
+     "selector": "table[1]",
+     "tableWidth": 499,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-ming-metaphor.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-ming-metaphor.png",
+   "ms": 2641,
+   "title": "The Ming in Disguise: Six Layers of Social Satire — Annotated English Edition",
+   "textLen": 5296,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 7110,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 365,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-ming-military.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-ming-military.png",
+   "ms": 2559,
+   "title": "The Heavenly Army Was a Wei-so Regiment — The Military Mirror · Annotated English Edition",
+   "textLen": 6057,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 6534,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 427,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-ming-politics.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-ming-politics.png",
+   "ms": 2720,
+   "title": "Heaven Is a Ming Court — The Political Mirror · Annotated English Edition",
+   "textLen": 4973,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 5485,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 399,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-ming-religion.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-ming-religion.png",
+   "ms": 2716,
+   "title": "Ordination by Decree — The Religious Mirror · Annotated English Edition",
+   "textLen": 6754,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 7105,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 406,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-ming-social-customs.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-ming-social-customs.png",
+   "ms": 2406,
+   "title": "Customs as Governance — Ming Social Mores · Annotated English Edition",
+   "textLen": 6883,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 7355,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 452,
+     "parentWidth": 327,
+     "parentTag": "article"
+    },
+    {
+     "type": "table-overflow",
+     "selector": "table[1]",
+     "tableWidth": 457,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-original-poetry.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-original-poetry.png",
+   "ms": 2447,
+   "title": "The Novel's Own Verse — Eight Hundred Poems in a Hundred Chapters",
+   "textLen": 4155,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 5094,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 355,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-poetry-imagery.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-poetry-imagery.png",
+   "ms": 2650,
+   "title": "An Imagery Lineage — Stone, Peach, Bone, Sutra",
+   "textLen": 5789,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 6049,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 677,
+     "parentWidth": 327,
+     "parentTag": "article"
+    },
+    {
+     "type": "table-overflow",
+     "selector": "table[1]",
+     "tableWidth": 389,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-poetry-opening.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-poetry-opening.png",
+   "ms": 2548,
+   "title": "The Opening Verse — Poetics of the Frame",
+   "textLen": 7074,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 7551,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 394,
+     "parentWidth": 327,
+     "parentTag": "article"
+    },
+    {
+     "type": "table-overflow",
+     "selector": "table[2]",
+     "tableWidth": 410,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-quanzhen-daoism.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-quanzhen-daoism.png",
+   "ms": 2693,
+   "title": "Quanzhen Daoism in the Journey to the West — Annotated English Edition",
+   "textLen": 4808,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 6393,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 428,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-rhythm-analysis.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-rhythm-analysis.png",
+   "ms": 2379,
+   "title": "The Music of the Verse — Four Dimensions of Sound-Law",
+   "textLen": 4138,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 4566,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 458,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/essay-three-teachings.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/essay-three-teachings.png",
+   "ms": 2556,
+   "title": "Three Teachings, One Journey: Buddhist, Daoist, and Confucian Thought — Annotated English Edition",
+   "textLen": 5287,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 6687,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 413,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "en/tribulations.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/en/tribulations.png",
+   "ms": 2302,
+   "title": "The Eighty-One Tribulations — Annotated English Edition",
+   "textLen": 11824,
+   "svgCount": 2,
+   "canvasCount": 0,
+   "scrollHeight": 3811,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 613,
+     "parentWidth": 327,
+     "parentTag": "article"
+    }
+   ]
+  },
+  {
+   "rel": "index.html",
+   "viewport": "desktop",
+   "png": "screenshots/desktop/index.png",
+   "ms": 2691,
+   "title": "详解西游记 · 项目导航",
+   "textLen": 3004,
+   "svgCount": 4,
+   "canvasCount": 0,
+   "scrollHeight": 4452,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [
+    "http://127.0.0.1:8777/health"
+   ],
+   "layoutIssues": []
+  },
+  {
+   "rel": "index.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/index.png",
+   "ms": 2675,
+   "title": "详解西游记 · 项目导航",
+   "textLen": 2954,
+   "svgCount": 4,
+   "canvasCount": 0,
+   "scrollHeight": 6827,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [
+    "http://127.0.0.1:8777/health"
+   ],
+   "layoutIssues": []
+  },
+  {
+   "rel": "rum-viewer.html",
+   "viewport": "mobile",
+   "png": "screenshots/mobile/rum-viewer.png",
+   "ms": 2202,
+   "title": "埋点数据查看 · 详解西游记",
+   "textLen": 325,
+   "svgCount": 0,
+   "canvasCount": 0,
+   "scrollHeight": 834,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "externalRequests": [],
+   "layoutIssues": [
+    {
+     "type": "table-overflow",
+     "selector": "table[0]",
+     "tableWidth": 450,
+     "parentWidth": 327,
+     "parentTag": "div"
+    }
+   ]
+  }
+ ]
+}
