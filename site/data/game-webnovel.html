@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-KqCgpJYWO8GVhUNqdhLHMlzwuA7qeSj8+xdPGBA5hNY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-/SgMCd/XW1oSKu2CyCJuK3+mbqP2Zx5TbNOMcV3vYQA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>游戏网文 · 角色卡牌战力系统 · 详解西游记</title>
@@ -1583,6 +1583,7 @@ td.num, th.num {
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+@media (max-width: 768px){ .chart-wrap { overflow-x: auto; } #power-bar-svg { min-width: 760px; } }
 </style>
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
@@ -1656,8 +1657,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
         <!-- 板块 2：稀有度分布饼图 -->
         <section class="section">
-            <h2 class="section-title">稀有度分布饼图</h2>
-            <div class="section-sub">12 张卡牌按 UR/SSR/SR/R/N 数量分布，中心显示总数。</div>
+            <h2 class="section-title">稀有度分布矩形树图</h2>
+            <div class="section-sub">12 张卡牌按 UR/SSR/SR/R/N 数量分布，以矩形面积表示占比。</div>
             <div class="pie-wrap">
                 <div class="chart-wrap" style="position:relative;">
                     <svg id="rarity-pie-svg"></svg>
@@ -1681,7 +1682,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
         <!-- 板块 4：元素分布圆环图 -->
         <section class="section">
-            <h2 class="section-title">元素分布圆环图</h2>
+            <h2 class="section-title">元素分布矩形树图</h2>
             <div class="section-sub">12 张卡牌按 10 种元素（金木水火土雷风光暗心）分布。</div>
             <div class="pie-wrap">
                 <div class="chart-wrap" style="position:relative;">
@@ -1798,7 +1799,7 @@ function renderTreemap(opts){
     .on('mouseover',function(ev,d){d3.select(this).attr('opacity',.85);tip.style('opacity',1).style('position','fixed').html(opts.htmlOf(d.data.d,total));})
     .on('mousemove',function(ev){tip.style('left',(ev.clientX+14)+'px').style('top',(ev.clientY-10)+'px');})
     .on('mouseout',function(){d3.select(this).attr('opacity',1);tip.style('opacity',0);});
-  cell.append('text').attr('x',6).attr('y',16).style('font-size','0.74rem').style('fill','#fff').style('pointer-events','none').style('font-weight','600')
+  cell.append('text').attr('x',6).attr('y',16).style('font-size','0.74rem').style('fill',function(d){var c=d3.color(opts.colorOf(d.data.d));var l=0.299*c.r/255+0.587*c.g/255+0.114*c.b/255;return l>0.60?'#23201A':'#fff';}).style('pointer-events','none').style('font-weight','600')
     .each(function(d){
       var w=d.x1-d.x0,h=d.y1-d.y0,pct=opts.valueOf(d.data.d)/total*100;
       if(w>60&&h>32){

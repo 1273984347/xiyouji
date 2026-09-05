@@ -36,7 +36,7 @@ import os
 import re
 import sys
 
-_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 def _w536_guard_open(path, *a, **k):
     _real = os.path.realpath(path)

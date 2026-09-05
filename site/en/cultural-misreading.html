@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-2U+sQvD8SFZepfI3hS2qelOoVI7hWlmG5kUt1ull8aY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-obRS9T+6Np9lLirrdQGIBdQ/ACvrctR/FrMnyvOYcVo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Cultural Misreading Map · Annotated Journey to the West</title>
@@ -1484,9 +1484,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="legend" id="heat-legend"></div>
         </section>
 
-        <!-- 图表 4：Country Distribution Pie Chart -->
+        <!-- 图表 4：Country Distribution Tree Map -->
         <section class="section">
-            <h2 class="section-title">Country Distribution Pie Chart</h2>
+            <h2 class="section-title">Country Distribution Tree Map</h2>
             <div class="section-sub">The share of works by country across 6 countries, reflecting the density of localized adaptations of Journey to the West in each region.</div>
             <div class="chart-row">
                 <div class="chart-block">
@@ -1557,7 +1557,7 @@ function renderTreemap(opts){
     .on('mouseover',function(ev,d){d3.select(this).attr('opacity',.85);tip.style('opacity',1).style('position','fixed').html(opts.htmlOf(d.data.d,total));})
     .on('mousemove',function(ev){tip.style('left',(ev.clientX+14)+'px').style('top',(ev.clientY-10)+'px');})
     .on('mouseout',function(){d3.select(this).attr('opacity',1);tip.style('opacity',0);});
-  cell.append('text').attr('x',6).attr('y',16).style('font-size','0.74rem').style('fill','#fff').style('pointer-events','none').style('font-weight','600')
+  cell.append('text').attr('x',6).attr('y',16).style('font-size','0.74rem').style('fill',function(d){var c=d3.color(opts.colorOf(d.data.d));var l=0.299*c.r/255+0.587*c.g/255+0.114*c.b/255;return l>0.62?'#23201A':'#fff';}).style('pointer-events','none').style('font-weight','600')
     .each(function(d){
       var w=d.x1-d.x0,h=d.y1-d.y0,pct=opts.valueOf(d.data.d)/total*100;
       if(w>60&&h>32){
@@ -2003,7 +2003,7 @@ function renderTreemap(opts){
             .html(d => `<span class="legend-swatch" style="background:${d.color}"></span><span>${d.label}</span>`);
     }
 
-    // ========== Render: Country Distribution Pie Chart ==========
+    // ========== Render: Country Distribution Tree Map ==========
     function renderPie(data){
   var counts={}; data.forEach(d=>{counts[d.country]=(counts[d.country]||0)+1;});
   var ordered=COUNTRY_ORDER.filter(c=>counts[c]).map(c=>({country:c,count:counts[c]}));

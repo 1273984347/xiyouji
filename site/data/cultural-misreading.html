@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-ptZecUKdQ3AI102KiDM1zIxXo8BnX2PoJ77MElpS24k=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-3qvoaeLsCBFW04s6HSHhbkhvSD+zFkTvbgxVw+c7K00=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>文化错位与误读地图 · 详解西游记</title>
@@ -1473,9 +1473,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="legend" id="heat-legend"></div>
         </section>
 
-        <!-- 图表 4：国家分布饼图 -->
+        <!-- 图表 4：国家分布矩形树图 -->
         <section class="section">
-            <h2 class="section-title">国家分布饼图</h2>
+            <h2 class="section-title">国家分布矩形树图</h2>
             <div class="section-sub">6 国作品数占比，反映各地区对西游记的本土化改编密度。</div>
             <div class="chart-row">
                 <div class="chart-block">
@@ -1552,7 +1552,7 @@ function renderTreemap(opts){
     .on('mouseover',function(ev,d){d3.select(this).attr('opacity',.85);tip.style('opacity',1).style('position','fixed').html(opts.htmlOf(d.data.d,total));})
     .on('mousemove',function(ev){tip.style('left',(ev.clientX+14)+'px').style('top',(ev.clientY-10)+'px');})
     .on('mouseout',function(){d3.select(this).attr('opacity',1);tip.style('opacity',0);});
-  cell.append('text').attr('x',6).attr('y',16).style('font-size','0.74rem').style('fill','#fff').style('pointer-events','none').style('font-weight','600')
+  cell.append('text').attr('x',6).attr('y',16).style('font-size','0.74rem').style('fill',function(d){var c=d3.color(opts.colorOf(d.data.d));var l=0.299*c.r/255+0.587*c.g/255+0.114*c.b/255;return l>0.62?'#23201A':'#fff';}).style('pointer-events','none').style('font-weight','600')
     .each(function(d){
       var w=d.x1-d.x0,h=d.y1-d.y0,pct=opts.valueOf(d.data.d)/total*100;
       if(w>60&&h>32){
@@ -1998,7 +1998,7 @@ function renderTreemap(opts){
             .html(d => `<span class="legend-swatch" style="background:${d.color}"></span><span>${d.label}</span>`);
     }
 
-    // ========== 渲染：国家分布饼图 ==========
+    // ========== 渲染：国家分布矩形树图 ==========
     function renderPie(data){
   var counts={}; data.forEach(d=>{counts[d.country]=(counts[d.country]||0)+1;});
   var ordered=COUNTRY_ORDER.filter(c=>counts[c]).map(c=>({country:c,count:counts[c]}));

@@ -2,11 +2,12 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-qKyHvZ4U91UZhd7R7OzHY2nUNqH6zM5LH76c68F+Hpg=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-xWLae9HOTm5emYPDRtpvlxzxq5Gk+4EjVNPbXrX8GlQ=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
-    <title>十七维叙事学关系图谱 · W191 · 详解西游记</title>
+    <title>十六维叙事学关系图谱 · W191 · 详解西游记</title>
     <script src="../static/js/d3.v7.min.js"></script>
+    <script src="../static/js/d3-sankey.min.js"></script>
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
@@ -1297,6 +1298,8 @@ header.hero .meta {
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+
+canvas[class*="link-canvas"] + svg { background: transparent !important; }
 </style>
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
@@ -1320,10 +1323,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </header>
 
     <section class="hero">
-        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 十七维叙事学关系图谱</p>
+        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 十六维叙事学关系图谱</p>
         <p class="kicker">数据可视化</p>
-        <h1>十七维叙事学关系图谱</h1>
-        <p class="subtitle">NARRATOLOGY 17-DIMENSION NETWORK</p>
+        <h1>十六维叙事学关系图谱</h1>
+        <p class="subtitle">NARRATOLOGY 16-DIMENSION NETWORK</p>
     </section>
 
 <main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
@@ -1337,7 +1340,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 </nav>
 
 <div class="kpi-row">
-  <div class="kpi-card"><div class="kpi-value">17</div><div class="kpi-label">叙事学维度</div></div>
+  <div class="kpi-card"><div class="kpi-value">16</div><div class="kpi-label">叙事学维度</div></div>
   <div class="kpi-card"><div class="kpi-value">64</div><div class="kpi-label">关联理论家</div></div>
   <div class="kpi-card"><div class="kpi-value">28</div><div class="kpi-label">维度关联边</div></div>
   <div class="kpi-card"><div class="kpi-value">7</div><div class="kpi-label">维度类别</div></div>
@@ -1347,23 +1350,23 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <!-- Section 1: 概览 -->
 <section class="section" id="overview">
-  <h2 class="section-title">壹 · 十三维叙事学框架总览</h2>
-  <div class="section-sub">OVERVIEW: 13-DIMENSION NARRATOLOGY FRAMEWORK</div>
+  <h2 class="section-title">壹 · 十六维叙事学框架总览</h2>
+  <div class="section-sub">OVERVIEW: 16-DIMENSION NARRATOLOGY FRAMEWORK</div>
   <div class="definition">
-    <strong>定义：</strong>十三维叙事学关系图谱整合 W161-W174 十二维叙事学专题与 W182-W185 新增四维（情感叙事学、历史叙事学、元叙事学、不可靠叙述），将《西游记》叙事学研究划分为十六个相互关联的维度，归属七大类别：七感叙事学（时/空/听/嗅/触/视/味）、文本叙事学（互文/修辞/认知）、性别叙事学、文化叙事学、情感叙事学、历史叙事学、元叙事学（元叙事/不可靠叙述）。承接 W168 六感叙事学与 W175 十二维叙事学，实现「七感→十二维→十三维」的理论扩展，构建覆盖时空、感官、互文、修辞、认知、性别、后殖民、情感、历史、元叙事的完整叙事学分析网络。
+    <strong>定义：</strong>十六维叙事学关系图谱整合 W161-W174 十二维叙事学专题与 W182-W185 新增四维（情感叙事学、历史叙事学、元叙事学、不可靠叙述），将《西游记》叙事学研究划分为十六个相互关联的维度，归属七大类别：七感叙事学（时/空/听/嗅/触/视/味）、文本叙事学（互文/修辞/认知）、性别叙事学、文化叙事学、情感叙事学、历史叙事学、元叙事学（元叙事/不可靠叙述）。承接 W168 六感叙事学与 W175 十二维叙事学，实现「七感→十二维→十六维」的理论扩展，构建覆盖时空、感官、互文、修辞、认知、性别、后殖民、情感、历史、元叙事的完整叙事学分析网络。
   </div>
   <div class="dims-grid" id="dims-grid"></div>
 </section>
 
 <!-- Section 2: 力导向图 -->
 <section class="section" id="force">
-  <h2 class="section-title alt">贰 · 十三维叙事学力导向关系图</h2>
+  <h2 class="section-title alt">贰 · 十六维叙事学力导向关系图</h2>
   <div class="section-sub">FORCE-DIRECTED GRAPH: 16 DIMENSIONS &amp; 28 INTER-DIMENSION EDGES</div>
   <div class="definition">
-    <strong>定义：</strong>力导向图以十六个叙事学维度为节点，节点颜色区分七大类别（七感钢蓝/文本橄榄绿/性别暮紫/文化赭橙/情感朱红/历史深栗/元叙事深靛），节点大小反映学术价值。维度间关联边标注关系类型（时空感官/理论文本/扩展跨域），边粗细对应关联强度。揭示十三维叙事学的内部结构——七感维度紧密抱团，文本理论横向连接，W182-W185 新增四维形成「情感→历史→元叙事→不可靠」纵向延伸链。
+    <strong>定义：</strong>力导向图以十六个叙事学维度为节点，节点颜色区分七大类别（七感钢蓝/文本橄榄绿/性别暮紫/文化赭橙/情感朱红/历史深栗/元叙事深靛），节点大小反映学术价值。维度间关联边标注关系类型（时空感官/理论文本/扩展跨域），边粗细对应关联强度。揭示十六维叙事学的内部结构——七感维度紧密抱团，文本理论横向连接，W182-W185 新增四维形成「情感→历史→元叙事→不可靠」纵向延伸链。
   </div>
   <div class="chart-block">
-    <div class="chart-title">十三维叙事学力导向图（16 维度节点 + 28 关联边 · 可拖拽）</div>
+    <div class="chart-title">十六维叙事学力导向图（16 维度节点 + 28 关联边 · 可拖拽）</div>
     <div class="chart-caption">节点颜色：维度类别 · 节点大小=学术影响 · 边颜色=关联类型 · 边粗细=关联强度</div>
     <svg id="chart-force" class="chart-svg" width="100%" height="680"></svg>
     <div class="legend-row" id="force-legend"></div>
@@ -1387,10 +1390,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <!-- Section 4: 雷达图 -->
 <section class="section" id="radar">
-  <h2 class="section-title">肆 · 十三维叙事学雷达图（4 指标）</h2>
+  <h2 class="section-title">肆 · 十六维叙事学雷达图（4 指标）</h2>
   <div class="section-sub">RADAR: 16 DIMENSIONS × 4 METRICS</div>
   <div class="definition">
-    <strong>定义：</strong>雷达图从四个指标评估每个叙事学维度：理论深度（理论体系成熟度）、西游应用（西游记文本分析覆盖面）、术语数（核心术语规模）、学术影响（研究贡献与影响力）。雷达面积越大，该维度在十三维叙事学框架中的综合地位越强。互文性（文）、时间叙事学（时）、不可靠叙述综合表现最强，触觉与嗅觉维度为新兴增长点。
+    <strong>定义：</strong>雷达图从四个指标评估每个叙事学维度：理论深度（理论体系成熟度）、西游应用（西游记文本分析覆盖面）、术语数（核心术语规模）、学术影响（研究贡献与影响力）。雷达面积越大，该维度在十六维叙事学框架中的综合地位越强。互文性（文）、时间叙事学（时）、不可靠叙述综合表现最强，触觉与嗅觉维度为新兴增长点。
   </div>
   <div class="chart-block">
     <div class="chart-title">十六维度×四指标雷达图（理论深度+西游应用+术语数+学术影响）</div>
@@ -1417,10 +1420,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <!-- Section 6: 汇总表 -->
 <section class="section" id="summary">
-  <h2 class="section-title alt-2">陆 · 十三维叙事学完整信息汇总表</h2>
+  <h2 class="section-title alt-2">陆 · 十六维叙事学完整信息汇总表</h2>
   <div class="section-sub">SUMMARY: 16-DIMENSION NARRATOLOGY TABLE</div>
   <div class="definition">
-    <strong>定义：</strong>汇总十六个叙事学维度的完整数据——编号、维度名称、英文全称、类别、关联理论家、术语数、应用案例、四指标评分（理论深度/西游应用/术语数/学术影响）。下方列出按学派分组的理论家清单，构成 W186 十三维叙事学关系图谱的完整知识网络。表格表头可点击排序，对应 W161-W185 叙事学专题。
+    <strong>定义：</strong>汇总十六个叙事学维度的完整数据——编号、维度名称、英文全称、类别、关联理论家、术语数、应用案例、四指标评分（理论深度/西游应用/术语数/学术影响）。下方列出按学派分组的理论家清单，构成 W186 十六维叙事学关系图谱的完整知识网络。表格表头可点击排序，对应 W161-W185 叙事学专题。
   </div>
   <div class="chart-block">
     <div class="chart-title">十六维度完整信息汇总表（点击表头排序）</div>
@@ -1451,7 +1454,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <script>
 // ============================================================
-// EMBEDDED DATA —— 十三维叙事学关系图谱数据（W186）
+// EMBEDDED DATA —— 十六维叙事学关系图谱数据（W186）
 // 整合 W161-W174 十二维 + W182-W185 新增四维 = 16 维度
 // ============================================================
 const EMBEDDED_DATA = {
@@ -1597,7 +1600,7 @@ const EMBEDDED_DATA = {
       { 编号: "W183", 维度: "历史", 专题: "历史叙事学", 类型: "专题", 类别: "历史叙事学", 学术影响: 9, 日期: "2026-06-22", 日期戳: 20260622, color: "#7a4a2a" },
       { 编号: "W184", 维度: "元叙事", 专题: "元叙事学", 类型: "专题", 类别: "元叙事学", 学术影响: 8, 日期: "2026-06-29", 日期戳: 20260629, color: "#2a3a5a" },
       { 编号: "W185", 维度: "不可靠", 专题: "不可靠叙述", 类型: "专题", 类别: "元叙事学", 学术影响: 9, 日期: "2026-07-05", 日期戳: 20260705, color: "#3a4a6a" },
-      { 编号: "W186", 维度: "十三维", 专题: "十三维叙事学关系图谱", 类型: "可视化", 类别: "集成", 学术影响: 10, 日期: "2026-07-28", 日期戳: 20260728, color: "#8b4513" }
+      { 编号: "W186", 维度: "十六维", 专题: "十六维叙事学关系图谱", 类型: "可视化", 类别: "集成", 学术影响: 10, 日期: "2026-07-28", 日期戳: 20260728, color: "#8b4513" }
     ]
   }
 };
@@ -2364,7 +2367,7 @@ function renderTimeline(timelineData) {
     .attr('text-anchor', 'middle')
     .attr('font-size', '11px')
     .attr('fill', '#8a7a5a')
-    .text('创建时间（W161 时 → W186 十三维集成 · 七感奠基→理论扩展→交叉融合→四维新增）');
+    .text('创建时间（W161 时 → W186 十六维集成 · 七感奠基→理论扩展→交叉融合→四维新增）');
   g.append('text')
     .attr('transform', 'rotate(-90)')
     .attr('x', -innerH / 2).attr('y', -50)

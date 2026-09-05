@@ -7,6 +7,7 @@
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster Female Network · W181 · Annotated Journey to the West</title>
     <script src="../static/js/d3.v7.min.js"></script>
+    <script src="../static/js/d3-sankey.min.js"></script>
     <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
     
     
@@ -1178,6 +1179,8 @@ header.hero .meta {
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+
+canvas[class*="link-canvas"] + svg { background: transparent !important; }
 </style>
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
