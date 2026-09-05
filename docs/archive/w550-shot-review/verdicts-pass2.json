@@ -1,0 +1,38 @@
+{
+  "说明": "pass2 复核（滚动穿透重截 + 全分辨率切片 + 代码取证）对 pass1 告警页的定案。artifact_confirmed=true 表示 pass1 怀疑为审查伪影。",
+  "复核结果": [
+    {"page": "curated.html", "viewport": "desktop", "final": "pass", "artifact_confirmed": true, "note": "页头/13随笔+15专题卡/HOW TO USE/按钮行/页脚全部实存；按钮行重复为切片重叠伪影"},
+    {"page": "guide.html", "viewport": "desktop", "final": "pass", "artifact_confirmed": true, "note": "7 条身份路径卡+术语约定表+页脚齐全"},
+    {"page": "index.html", "viewport": "desktop", "final": "warn", "artifact_confirmed": true, "note": "空白为动画伪影；统计带 611 篇为旧口径（应 615）"},
+    {"page": "data/search.html", "viewport": "desktop", "final": "pass", "artifact_confirmed": true, "note": "短页信箱留白伪影；离线空态正常"},
+    {"page": "data/data-explorer.html", "viewport": "desktop", "final": "pass", "artifact_confirmed": true, "note": "设计内离线示例模式"},
+    {"page": "data/character-relationship-3d-view.html", "viewport": "desktop", "final": "pass", "artifact_confirmed": true, "note": "设计内离线数据表降级；22 行中可视 11 行为容器内滚动"},
+    {"page": "en/character-relationship-3d-view.html", "viewport": "desktop", "final": "pass", "artifact_confirmed": true, "note": "同上，离线降级与页面自述一致"},
+    {"page": "data/cave-estate.html", "viewport": "desktop", "final": "pass", "artifact_confirmed": false, "note": "页尾空白怀疑清除"},
+    {"page": "data/century-dialogue.html", "viewport": "desktop", "final": "pass", "artifact_confirmed": false, "note": "面板/圆桌内容完整，留白属圆形布局边距"},
+    {"page": "data/chapter-stats.html", "viewport": "desktop", "final": "pass", "artifact_confirmed": false, "note": "全部图表有数据"},
+    {"page": "data/cultural-misreading.html", "viewport": "desktop", "final": "warn", "artifact_confirmed": false, "note": "空白怀疑清除；新发现：国家分布饼图实为 treemap"},
+    {"page": "data/workplace.html", "viewport": "desktop", "final": "pass", "artifact_confirmed": false, "note": "效能曲线完整贯穿四分区（5→4→8→10）"},
+    {"page": "data/cross-time-danmaku.html", "viewport": "desktop", "final": "pass", "artifact_confirmed": false, "note": "淡多边形为世界地图底衬；页脚仅一份"},
+    {"page": "en/81-hardships.html", "viewport": "desktop", "final": "fail", "evidence": "'No matches, or data not loaded (run via http server).' + 'Showing 0/0 trials'，筛选全 All 下 0/0；同页树图/桑基渲染 81 条（27+28+16+10）", "root_cause": "筛选/初始化 bug，数据已内嵌"},
+    {"page": "en/hardship-difficulty-heatmap.html", "viewport": "desktop", "final": "fail", "evidence": "Rescue Count Distribution 子图仅坐标轴（y 0-1.0）无柱形；统计表 Avg. Rescue Count 非零（0.15/0.45/1.21/2.75）"},
+    {"page": "en/famous-time-travel.html", "viewport": "desktop", "final": "warn", "evidence": "'Please refresh' 未复现（pass1 误读）；新发现钱锺书信件文字右缘裁切，落款 'Respectfully, Qian Zhor' 截断"},
+    {"page": "en/game-webnovel.html", "viewport": "desktop", "final": "fail", "evidence": "Rarity Pie / Element Donut 均渲染为矩形 treemap，无饼形、无中心总数；次要：稀有度标签裁切（'5SR'）、y 轴标签裁切、卡片残留中文『被动』"},
+    {"page": "curated.html", "viewport": "mobile", "final": "pass", "artifact_confirmed": true, "note": "随笔01-13、专题01-15、HOW TO USE、页脚完整"},
+    {"page": "guide.html", "viewport": "mobile", "final": "pass", "artifact_confirmed": true, "note": "中段空白消除，内容连续"},
+    {"page": "index.html", "viewport": "mobile", "final": "warn", "artifact_confirmed": true, "note": "伪影确认；移动端同样显示 611（应 615）"},
+    {"page": "en/essay-ming-intellectual-history.html", "viewport": "mobile", "final": "fail", "evidence": "hero 下 'A summary translation of' 后为整行 %E6%98%8E…%E9%A2%98.md 百分号编码串（非豆腐块），长 token 撑宽 scrollWidth 约 2.3 倍；Four Case Mappings 表右缘超视口", "root_cause": "源文件锚文本未解码；全 en 站仅此页（3 处）与 ming-literary-thought（4 处）"},
+    {"page": "en/essay-ming-literary-thought.html", "viewport": "mobile", "final": "fail", "evidence": "同型编码文件名缺陷 + Two 表右缘远超卡右边框与 375 视口"},
+    {"page": "en/tribulations.html", "viewport": "mobile", "final": "warn", "evidence": "81 清单实为 max-height:520px overflow-y:auto 滚动容器（代码核实 .scroll-wrap），第 05 行徽章在容器底边被裁、无滚动提示；Cause×Outcome 矩阵右缘约 660px 超出 375 视口；数据自洽（27+28+16+10=81）"},
+    {"page": "data/monster-female-network.html", "viewport": "desktop", "final": "fail", "evidence": "力导向 17 节点无任何可见连线（与 '17 NODES × 32 EDGES' 及边色图例矛盾）；桑基空渲染", "root_cause": "kinship/rival/taming 三连线图层均默认 style('display','none')（代码核实 3 处）"},
+    {"page": "data/narratology-12d-network.html", "viewport": "desktop", "final": "fail", "evidence": "力导向 12 节点无连线（与 '12 节点 + 22 关联边'矛盾）；桑基空渲染", "root_cause": "同上模式；narratology-13d 与 en/monster-female 未单独复核，疑似同根因"}
+  ],
+  "代码级核验": {
+    "d3-sankey 缺引用页面（10）": ["data/intertextuality-network.html", "data/monster-female-network.html", "data/narratology-12d-network.html", "data/narratology-13d-network.html", "data/six-senses-narratology-network.html", "en/intertextuality-network.html", "en/monster-female-network.html", "en/narratology-12d-network.html", "en/narratology-13d-network.html", "en/six-senses-narratology-network.html"],
+    "对照正常页": ["data/81-hardships.html（1 处引用）", "data/monster-hierarchy-network.html（1 处引用）"],
+    "index.html 611 旧口径": "硬编码 <div class=\"num\">611</div>（桌面+移动同源），当前口径应为 615",
+    "饼图标题 treemap 实现": "data/cultural-misreading.html（treemap 3 处，无 pie/arc）；en/game-webnovel.html（treemap 4 处 + Pie/Donut 标题 7 处）",
+    "en/index 重复卡片标题": "'The Novel's Own Verse' 全文出现 2 次",
+    "tribulations 滚动容器": ".scroll-wrap { max-height: 520px; overflow-y: auto; }"
+  }
+}

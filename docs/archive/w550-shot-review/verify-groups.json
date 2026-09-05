@@ -1,0 +1,451 @@
+[
+ [
+  {
+   "page": "index.html",
+   "viewport": "desktop",
+   "crit": "统计带应显示 615 篇（原 611）",
+   "slices": [
+    "screenshots/verify-slices/desktop/index_000.png",
+    "screenshots/verify-slices/desktop/index_001.png",
+    "screenshots/verify-slices/desktop/index_002.png"
+   ]
+  },
+  {
+   "page": "dashboard.html",
+   "viewport": "desktop",
+   "crit": "矩阵区应为「共 615 篇文档」「A3 人物分析 215 篇」（原 611/211）",
+   "slices": [
+    "screenshots/verify-slices/desktop/dashboard_000.png",
+    "screenshots/verify-slices/desktop/dashboard_001.png",
+    "screenshots/verify-slices/desktop/dashboard_002.png",
+    "screenshots/verify-slices/desktop/dashboard_003.png",
+    "screenshots/verify-slices/desktop/dashboard_004.png"
+   ]
+  },
+  {
+   "page": "data/intertextuality-network.html",
+   "viewport": "desktop",
+   "crit": "桑基图应出现彩色流带（原先空白+提示文字）；力导向图节点间应可见连线（2 个连线层改为默认显示）",
+   "slices": [
+    "screenshots/verify-slices/desktop/data/intertextuality-network_000.png",
+    "screenshots/verify-slices/desktop/data/intertextuality-network_001.png",
+    "screenshots/verify-slices/desktop/data/intertextuality-network_002.png",
+    "screenshots/verify-slices/desktop/data/intertextuality-network_003.png",
+    "screenshots/verify-slices/desktop/data/intertextuality-network_004.png",
+    "screenshots/verify-slices/desktop/data/intertextuality-network_005.png"
+   ]
+  }
+ ],
+ [
+  {
+   "page": "data/monster-female-network.html",
+   "viewport": "desktop",
+   "crit": "桑基流带；力导向 17 节点间三类连线（姐妹亲情/敌对/收编虚线）可见",
+   "slices": [
+    "screenshots/verify-slices/desktop/data/monster-female-network_000.png",
+    "screenshots/verify-slices/desktop/data/monster-female-network_001.png",
+    "screenshots/verify-slices/desktop/data/monster-female-network_002.png",
+    "screenshots/verify-slices/desktop/data/monster-female-network_003.png",
+    "screenshots/verify-slices/desktop/data/monster-female-network_004.png",
+    "screenshots/verify-slices/desktop/data/monster-female-network_005.png"
+   ]
+  },
+  {
+   "page": "data/narratology-12d-network.html",
+   "viewport": "desktop",
+   "crit": "三层桑基流带；12 节点 22 边连线可见",
+   "slices": [
+    "screenshots/verify-slices/desktop/data/narratology-12d-network_000.png",
+    "screenshots/verify-slices/desktop/data/narratology-12d-network_001.png",
+    "screenshots/verify-slices/desktop/data/narratology-12d-network_002.png",
+    "screenshots/verify-slices/desktop/data/narratology-12d-network_003.png",
+    "screenshots/verify-slices/desktop/data/narratology-12d-network_004.png",
+    "screenshots/verify-slices/desktop/data/narratology-12d-network_005.png"
+   ]
+  }
+ ],
+ [
+  {
+   "page": "data/narratology-13d-network.html",
+   "viewport": "desktop",
+   "crit": "三层桑基流带；13 节点连线可见",
+   "slices": [
+    "screenshots/verify-slices/desktop/data/narratology-13d-network_000.png",
+    "screenshots/verify-slices/desktop/data/narratology-13d-network_001.png",
+    "screenshots/verify-slices/desktop/data/narratology-13d-network_002.png",
+    "screenshots/verify-slices/desktop/data/narratology-13d-network_003.png",
+    "screenshots/verify-slices/desktop/data/narratology-13d-network_004.png",
+    "screenshots/verify-slices/desktop/data/narratology-13d-network_005.png"
+   ]
+  },
+  {
+   "page": "data/six-senses-narratology-network.html",
+   "viewport": "desktop",
+   "crit": "感官-结构桑基流带；连线可见",
+   "slices": [
+    "screenshots/verify-slices/desktop/data/six-senses-narratology-network_000.png",
+    "screenshots/verify-slices/desktop/data/six-senses-narratology-network_001.png",
+    "screenshots/verify-slices/desktop/data/six-senses-narratology-network_002.png",
+    "screenshots/verify-slices/desktop/data/six-senses-narratology-network_003.png",
+    "screenshots/verify-slices/desktop/data/six-senses-narratology-network_004.png"
+   ]
+  }
+ ],
+ [
+  {
+   "page": "data/relationships.html",
+   "viewport": "desktop",
+   "crit": "35 节点 329 共现边等三个连线层默认可见（原先全部隐藏）",
+   "slices": [
+    "screenshots/verify-slices/desktop/data/relationships_000.png",
+    "screenshots/verify-slices/desktop/data/relationships_001.png",
+    "screenshots/verify-slices/desktop/data/relationships_002.png",
+    "screenshots/verify-slices/desktop/data/relationships_003.png",
+    "screenshots/verify-slices/desktop/data/relationships_004.png",
+    "screenshots/verify-slices/desktop/data/relationships_005.png",
+    "screenshots/verify-slices/desktop/data/relationships_006.png",
+    "screenshots/verify-slices/desktop/data/relationships_007.png",
+    "screenshots/verify-slices/desktop/data/relationships_008.png",
+    "screenshots/verify-slices/desktop/data/relationships_009.png",
+    "screenshots/verify-slices/desktop/data/relationships_010.png",
+    "screenshots/verify-slices/desktop/data/relationships_011.png"
+   ]
+  }
+ ],
+ [
+  {
+   "page": "data/cultural-misreading.html",
+   "viewport": "desktop",
+   "crit": "标题应为「国家分布矩形树图」（原「国家分布饼图」），treemap 图形正常",
+   "slices": [
+    "screenshots/verify-slices/desktop/data/cultural-misreading_000.png",
+    "screenshots/verify-slices/desktop/data/cultural-misreading_001.png",
+    "screenshots/verify-slices/desktop/data/cultural-misreading_002.png",
+    "screenshots/verify-slices/desktop/data/cultural-misreading_003.png",
+    "screenshots/verify-slices/desktop/data/cultural-misreading_004.png"
+   ]
+  },
+  {
+   "page": "data/deconstruction.html",
+   "viewport": "desktop",
+   "crit": "h3 标题应为「国家分布矩形树图」（原「国家分布饼图」）",
+   "slices": [
+    "screenshots/verify-slices/desktop/data/deconstruction_000.png",
+    "screenshots/verify-slices/desktop/data/deconstruction_001.png",
+    "screenshots/verify-slices/desktop/data/deconstruction_002.png",
+    "screenshots/verify-slices/desktop/data/deconstruction_003.png"
+   ]
+  },
+  {
+   "page": "data/game-webnovel.html",
+   "viewport": "desktop",
+   "crit": "标题应为「稀有度分布矩形树图」+副题「以矩形面积表示占比」（原「饼图/中心显示总数」）",
+   "slices": [
+    "screenshots/verify-slices/desktop/data/game-webnovel_000.png",
+    "screenshots/verify-slices/desktop/data/game-webnovel_001.png",
+    "screenshots/verify-slices/desktop/data/game-webnovel_002.png",
+    "screenshots/verify-slices/desktop/data/game-webnovel_003.png",
+    "screenshots/verify-slices/desktop/data/game-webnovel_004.png",
+    "screenshots/verify-slices/desktop/data/game-webnovel_005.png"
+   ]
+  }
+ ],
+ [
+  {
+   "page": "data/jurisprudence.html",
+   "viewport": "desktop",
+   "crit": "图 2.2 应为「5 种产权类型分布（矩形树图）」（原「环形图」）；图 3.2 饼图为真饼图应正常",
+   "slices": [
+    "screenshots/verify-slices/desktop/data/jurisprudence_000.png",
+    "screenshots/verify-slices/desktop/data/jurisprudence_001.png",
+    "screenshots/verify-slices/desktop/data/jurisprudence_002.png",
+    "screenshots/verify-slices/desktop/data/jurisprudence_003.png",
+    "screenshots/verify-slices/desktop/data/jurisprudence_004.png",
+    "screenshots/verify-slices/desktop/data/jurisprudence_005.png",
+    "screenshots/verify-slices/desktop/data/jurisprudence_006.png",
+    "screenshots/verify-slices/desktop/data/jurisprudence_007.png"
+   ]
+  },
+  {
+   "page": "en/intertextuality-network.html",
+   "viewport": "desktop",
+   "crit": "同中文镜像：桑基流带 + 连线可见",
+   "slices": [
+    "screenshots/verify-slices/desktop/en/intertextuality-network_000.png",
+    "screenshots/verify-slices/desktop/en/intertextuality-network_001.png",
+    "screenshots/verify-slices/desktop/en/intertextuality-network_002.png",
+    "screenshots/verify-slices/desktop/en/intertextuality-network_003.png",
+    "screenshots/verify-slices/desktop/en/intertextuality-network_004.png",
+    "screenshots/verify-slices/desktop/en/intertextuality-network_005.png"
+   ]
+  }
+ ],
+ [
+  {
+   "page": "en/monster-female-network.html",
+   "viewport": "desktop",
+   "crit": "同中文镜像",
+   "slices": [
+    "screenshots/verify-slices/desktop/en/monster-female-network_000.png",
+    "screenshots/verify-slices/desktop/en/monster-female-network_001.png",
+    "screenshots/verify-slices/desktop/en/monster-female-network_002.png",
+    "screenshots/verify-slices/desktop/en/monster-female-network_003.png",
+    "screenshots/verify-slices/desktop/en/monster-female-network_004.png",
+    "screenshots/verify-slices/desktop/en/monster-female-network_005.png"
+   ]
+  },
+  {
+   "page": "en/narratology-12d-network.html",
+   "viewport": "desktop",
+   "crit": "同中文镜像",
+   "slices": [
+    "screenshots/verify-slices/desktop/en/narratology-12d-network_000.png",
+    "screenshots/verify-slices/desktop/en/narratology-12d-network_001.png",
+    "screenshots/verify-slices/desktop/en/narratology-12d-network_002.png",
+    "screenshots/verify-slices/desktop/en/narratology-12d-network_003.png",
+    "screenshots/verify-slices/desktop/en/narratology-12d-network_004.png",
+    "screenshots/verify-slices/desktop/en/narratology-12d-network_005.png",
+    "screenshots/verify-slices/desktop/en/narratology-12d-network_006.png"
+   ]
+  }
+ ],
+ [
+  {
+   "page": "en/narratology-13d-network.html",
+   "viewport": "desktop",
+   "crit": "同中文镜像",
+   "slices": [
+    "screenshots/verify-slices/desktop/en/narratology-13d-network_000.png",
+    "screenshots/verify-slices/desktop/en/narratology-13d-network_001.png",
+    "screenshots/verify-slices/desktop/en/narratology-13d-network_002.png",
+    "screenshots/verify-slices/desktop/en/narratology-13d-network_003.png",
+    "screenshots/verify-slices/desktop/en/narratology-13d-network_004.png",
+    "screenshots/verify-slices/desktop/en/narratology-13d-network_005.png",
+    "screenshots/verify-slices/desktop/en/narratology-13d-network_006.png"
+   ]
+  },
+  {
+   "page": "en/six-senses-narratology-network.html",
+   "viewport": "desktop",
+   "crit": "同中文镜像",
+   "slices": [
+    "screenshots/verify-slices/desktop/en/six-senses-narratology-network_000.png",
+    "screenshots/verify-slices/desktop/en/six-senses-narratology-network_001.png",
+    "screenshots/verify-slices/desktop/en/six-senses-narratology-network_002.png",
+    "screenshots/verify-slices/desktop/en/six-senses-narratology-network_003.png",
+    "screenshots/verify-slices/desktop/en/six-senses-narratology-network_004.png"
+   ]
+  }
+ ],
+ [
+  {
+   "page": "en/relationships.html",
+   "viewport": "desktop",
+   "crit": "同中文镜像",
+   "slices": [
+    "screenshots/verify-slices/desktop/en/relationships_000.png",
+    "screenshots/verify-slices/desktop/en/relationships_001.png",
+    "screenshots/verify-slices/desktop/en/relationships_002.png",
+    "screenshots/verify-slices/desktop/en/relationships_003.png",
+    "screenshots/verify-slices/desktop/en/relationships_004.png",
+    "screenshots/verify-slices/desktop/en/relationships_005.png",
+    "screenshots/verify-slices/desktop/en/relationships_006.png",
+    "screenshots/verify-slices/desktop/en/relationships_007.png",
+    "screenshots/verify-slices/desktop/en/relationships_008.png",
+    "screenshots/verify-slices/desktop/en/relationships_009.png",
+    "screenshots/verify-slices/desktop/en/relationships_010.png",
+    "screenshots/verify-slices/desktop/en/relationships_011.png",
+    "screenshots/verify-slices/desktop/en/relationships_012.png",
+    "screenshots/verify-slices/desktop/en/relationships_013.png"
+   ]
+  }
+ ],
+ [
+  {
+   "page": "en/cultural-misreading.html",
+   "viewport": "desktop",
+   "crit": "标题应为 Country Distribution Tree Map（原 Pie Chart）",
+   "slices": [
+    "screenshots/verify-slices/desktop/en/cultural-misreading_000.png",
+    "screenshots/verify-slices/desktop/en/cultural-misreading_001.png",
+    "screenshots/verify-slices/desktop/en/cultural-misreading_002.png",
+    "screenshots/verify-slices/desktop/en/cultural-misreading_003.png",
+    "screenshots/verify-slices/desktop/en/cultural-misreading_004.png"
+   ]
+  },
+  {
+   "page": "en/deconstruction.html",
+   "viewport": "desktop",
+   "crit": "标题应为 Country Distribution Tree Map（原 Pie Chart）",
+   "slices": [
+    "screenshots/verify-slices/desktop/en/deconstruction_000.png",
+    "screenshots/verify-slices/desktop/en/deconstruction_001.png",
+    "screenshots/verify-slices/desktop/en/deconstruction_002.png",
+    "screenshots/verify-slices/desktop/en/deconstruction_003.png"
+   ]
+  },
+  {
+   "page": "en/game-webnovel.html",
+   "viewport": "desktop",
+   "crit": "两个标题应为 Tree Map（原 Pie/Donut Chart），副题不再提 center total",
+   "slices": [
+    "screenshots/verify-slices/desktop/en/game-webnovel_000.png",
+    "screenshots/verify-slices/desktop/en/game-webnovel_001.png",
+    "screenshots/verify-slices/desktop/en/game-webnovel_002.png",
+    "screenshots/verify-slices/desktop/en/game-webnovel_003.png",
+    "screenshots/verify-slices/desktop/en/game-webnovel_004.png",
+    "screenshots/verify-slices/desktop/en/game-webnovel_005.png",
+    "screenshots/verify-slices/desktop/en/game-webnovel_006.png"
+   ]
+  }
+ ],
+ [
+  {
+   "page": "en/jurisprudence.html",
+   "viewport": "desktop",
+   "crit": "Figure 2.2 应为 (tree map)（原 donut chart）；Figure 3.2 pie chart 为真饼图",
+   "slices": [
+    "screenshots/verify-slices/desktop/en/jurisprudence_000.png",
+    "screenshots/verify-slices/desktop/en/jurisprudence_001.png",
+    "screenshots/verify-slices/desktop/en/jurisprudence_002.png",
+    "screenshots/verify-slices/desktop/en/jurisprudence_003.png",
+    "screenshots/verify-slices/desktop/en/jurisprudence_004.png",
+    "screenshots/verify-slices/desktop/en/jurisprudence_005.png",
+    "screenshots/verify-slices/desktop/en/jurisprudence_006.png",
+    "screenshots/verify-slices/desktop/en/jurisprudence_007.png",
+    "screenshots/verify-slices/desktop/en/jurisprudence_008.png"
+   ]
+  },
+  {
+   "page": "en/essay-ming-intellectual-history.html",
+   "viewport": "desktop",
+   "crit": "hero 下源文档链接应显示 Ming Intellectual History Comparison (essay, Chinese)，不再有 %E6 编码串；页面不应被撑宽",
+   "slices": [
+    "screenshots/verify-slices/desktop/en/essay-ming-intellectual-history_000.png",
+    "screenshots/verify-slices/desktop/en/essay-ming-intellectual-history_001.png",
+    "screenshots/verify-slices/desktop/en/essay-ming-intellectual-history_002.png"
+   ]
+  },
+  {
+   "page": "en/essay-ming-literary-thought.html",
+   "viewport": "desktop",
+   "crit": "同上：Ming Literary-Thought Comparison (essay, Chinese)，无编码串",
+   "slices": [
+    "screenshots/verify-slices/desktop/en/essay-ming-literary-thought_000.png",
+    "screenshots/verify-slices/desktop/en/essay-ming-literary-thought_001.png",
+    "screenshots/verify-slices/desktop/en/essay-ming-literary-thought_002.png"
+   ]
+  }
+ ],
+ [
+  {
+   "page": "dashboard.html",
+   "viewport": "mobile",
+   "crit": "矩阵区应为「共 615 篇文档」「A3 人物分析 215 篇」（原 611/211）",
+   "slices": [
+    "screenshots/verify-slices/mobile/dashboard_000.png",
+    "screenshots/verify-slices/mobile/dashboard_001.png",
+    "screenshots/verify-slices/mobile/dashboard_002.png",
+    "screenshots/verify-slices/mobile/dashboard_003.png",
+    "screenshots/verify-slices/mobile/dashboard_004.png",
+    "screenshots/verify-slices/mobile/dashboard_005.png",
+    "screenshots/verify-slices/mobile/dashboard_006.png",
+    "screenshots/verify-slices/mobile/dashboard_007.png",
+    "screenshots/verify-slices/mobile/dashboard_008.png",
+    "screenshots/verify-slices/mobile/dashboard_009.png",
+    "screenshots/verify-slices/mobile/dashboard_010.png",
+    "screenshots/verify-slices/mobile/dashboard_011.png"
+   ]
+  }
+ ],
+ [
+  {
+   "page": "data/intertextuality-network.html",
+   "viewport": "mobile",
+   "crit": "桑基图应出现彩色流带（原先空白+提示文字）；力导向图节点间应可见连线（2 个连线层改为默认显示）",
+   "slices": [
+    "screenshots/verify-slices/mobile/data/intertextuality-network_000.png",
+    "screenshots/verify-slices/mobile/data/intertextuality-network_001.png",
+    "screenshots/verify-slices/mobile/data/intertextuality-network_002.png",
+    "screenshots/verify-slices/mobile/data/intertextuality-network_003.png",
+    "screenshots/verify-slices/mobile/data/intertextuality-network_004.png",
+    "screenshots/verify-slices/mobile/data/intertextuality-network_005.png",
+    "screenshots/verify-slices/mobile/data/intertextuality-network_006.png"
+   ]
+  },
+  {
+   "page": "data/monster-female-network.html",
+   "viewport": "mobile",
+   "crit": "桑基流带；力导向 17 节点间三类连线（姐妹亲情/敌对/收编虚线）可见",
+   "slices": [
+    "screenshots/verify-slices/mobile/data/monster-female-network_000.png",
+    "screenshots/verify-slices/mobile/data/monster-female-network_001.png",
+    "screenshots/verify-slices/mobile/data/monster-female-network_002.png",
+    "screenshots/verify-slices/mobile/data/monster-female-network_003.png",
+    "screenshots/verify-slices/mobile/data/monster-female-network_004.png",
+    "screenshots/verify-slices/mobile/data/monster-female-network_005.png",
+    "screenshots/verify-slices/mobile/data/monster-female-network_006.png"
+   ]
+  }
+ ],
+ [
+  {
+   "page": "data/relationships.html",
+   "viewport": "mobile",
+   "crit": "35 节点 329 共现边等三个连线层默认可见（原先全部隐藏）",
+   "slices": [
+    "screenshots/verify-slices/mobile/data/relationships_000.png",
+    "screenshots/verify-slices/mobile/data/relationships_001.png",
+    "screenshots/verify-slices/mobile/data/relationships_002.png",
+    "screenshots/verify-slices/mobile/data/relationships_003.png",
+    "screenshots/verify-slices/mobile/data/relationships_004.png",
+    "screenshots/verify-slices/mobile/data/relationships_005.png",
+    "screenshots/verify-slices/mobile/data/relationships_006.png",
+    "screenshots/verify-slices/mobile/data/relationships_007.png",
+    "screenshots/verify-slices/mobile/data/relationships_008.png",
+    "screenshots/verify-slices/mobile/data/relationships_009.png",
+    "screenshots/verify-slices/mobile/data/relationships_010.png",
+    "screenshots/verify-slices/mobile/data/relationships_011.png",
+    "screenshots/verify-slices/mobile/data/relationships_012.png",
+    "screenshots/verify-slices/mobile/data/relationships_013.png",
+    "screenshots/verify-slices/mobile/data/relationships_014.png",
+    "screenshots/verify-slices/mobile/data/relationships_015.png"
+   ]
+  }
+ ],
+ [
+  {
+   "page": "en/game-webnovel.html",
+   "viewport": "mobile",
+   "crit": "两个标题应为 Tree Map（原 Pie/Donut Chart），副题不再提 center total",
+   "slices": [
+    "screenshots/verify-slices/mobile/en/game-webnovel_000.png",
+    "screenshots/verify-slices/mobile/en/game-webnovel_001.png",
+    "screenshots/verify-slices/mobile/en/game-webnovel_002.png",
+    "screenshots/verify-slices/mobile/en/game-webnovel_003.png",
+    "screenshots/verify-slices/mobile/en/game-webnovel_004.png",
+    "screenshots/verify-slices/mobile/en/game-webnovel_005.png",
+    "screenshots/verify-slices/mobile/en/game-webnovel_006.png",
+    "screenshots/verify-slices/mobile/en/game-webnovel_007.png",
+    "screenshots/verify-slices/mobile/en/game-webnovel_008.png",
+    "screenshots/verify-slices/mobile/en/game-webnovel_009.png",
+    "screenshots/verify-slices/mobile/en/game-webnovel_010.png",
+    "screenshots/verify-slices/mobile/en/game-webnovel_011.png"
+   ]
+  }
+ ],
+ [
+  {
+   "page": "en/essay-ming-intellectual-history.html",
+   "viewport": "mobile",
+   "crit": "hero 下源文档链接应显示 Ming Intellectual History Comparison (essay, Chinese)，不再有 %E6 编码串；页面不应被撑宽",
+   "slices": [
+    "screenshots/verify-slices/mobile/en/essay-ming-intellectual-history_000.png",
+    "screenshots/verify-slices/mobile/en/essay-ming-intellectual-history_001.png",
+    "screenshots/verify-slices/mobile/en/essay-ming-intellectual-history_002.png",
+    "screenshots/verify-slices/mobile/en/essay-ming-intellectual-history_003.png",
+    "screenshots/verify-slices/mobile/en/essay-ming-intellectual-history_004.png"
+   ]
+  }
+ ]
+]

@@ -1,0 +1,1599 @@
+[
+ {
+  "viewport": "desktop",
+  "rel": "index.html",
+  "png": "screenshots/verify/desktop/index.png",
+  "scrollHeight": 4452,
+  "revealTotal": 4,
+  "revealShown": 4,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/index_000.png",
+   "screenshots/verify-slices/desktop/index_001.png",
+   "screenshots/verify-slices/desktop/index_002.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "dashboard.html",
+  "png": "screenshots/verify/desktop/dashboard.png",
+  "scrollHeight": 7433,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/dashboard_000.png",
+   "screenshots/verify-slices/desktop/dashboard_001.png",
+   "screenshots/verify-slices/desktop/dashboard_002.png",
+   "screenshots/verify-slices/desktop/dashboard_003.png",
+   "screenshots/verify-slices/desktop/dashboard_004.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "data/intertextuality-network.html",
+  "png": "screenshots/verify/desktop/data/intertextuality-network.png",
+  "scrollHeight": 7934,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/data/intertextuality-network_000.png",
+   "screenshots/verify-slices/desktop/data/intertextuality-network_001.png",
+   "screenshots/verify-slices/desktop/data/intertextuality-network_002.png",
+   "screenshots/verify-slices/desktop/data/intertextuality-network_003.png",
+   "screenshots/verify-slices/desktop/data/intertextuality-network_004.png",
+   "screenshots/verify-slices/desktop/data/intertextuality-network_005.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "data/monster-female-network.html",
+  "png": "screenshots/verify/desktop/data/monster-female-network.png",
+  "scrollHeight": 7619,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/data/monster-female-network_000.png",
+   "screenshots/verify-slices/desktop/data/monster-female-network_001.png",
+   "screenshots/verify-slices/desktop/data/monster-female-network_002.png",
+   "screenshots/verify-slices/desktop/data/monster-female-network_003.png",
+   "screenshots/verify-slices/desktop/data/monster-female-network_004.png",
+   "screenshots/verify-slices/desktop/data/monster-female-network_005.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "data/narratology-12d-network.html",
+  "png": "screenshots/verify/desktop/data/narratology-12d-network.png",
+  "scrollHeight": 8260,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/data/narratology-12d-network_000.png",
+   "screenshots/verify-slices/desktop/data/narratology-12d-network_001.png",
+   "screenshots/verify-slices/desktop/data/narratology-12d-network_002.png",
+   "screenshots/verify-slices/desktop/data/narratology-12d-network_003.png",
+   "screenshots/verify-slices/desktop/data/narratology-12d-network_004.png",
+   "screenshots/verify-slices/desktop/data/narratology-12d-network_005.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "data/narratology-13d-network.html",
+  "png": "screenshots/verify/desktop/data/narratology-13d-network.png",
+  "scrollHeight": 9002,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/data/narratology-13d-network_000.png",
+   "screenshots/verify-slices/desktop/data/narratology-13d-network_001.png",
+   "screenshots/verify-slices/desktop/data/narratology-13d-network_002.png",
+   "screenshots/verify-slices/desktop/data/narratology-13d-network_003.png",
+   "screenshots/verify-slices/desktop/data/narratology-13d-network_004.png",
+   "screenshots/verify-slices/desktop/data/narratology-13d-network_005.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "data/six-senses-narratology-network.html",
+  "png": "screenshots/verify/desktop/data/six-senses-narratology-network.png",
+  "scrollHeight": 7302,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/data/six-senses-narratology-network_000.png",
+   "screenshots/verify-slices/desktop/data/six-senses-narratology-network_001.png",
+   "screenshots/verify-slices/desktop/data/six-senses-narratology-network_002.png",
+   "screenshots/verify-slices/desktop/data/six-senses-narratology-network_003.png",
+   "screenshots/verify-slices/desktop/data/six-senses-narratology-network_004.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "data/relationships.html",
+  "png": "screenshots/verify/desktop/data/relationships.png",
+  "scrollHeight": 17517,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/data/relationships_000.png",
+   "screenshots/verify-slices/desktop/data/relationships_001.png",
+   "screenshots/verify-slices/desktop/data/relationships_002.png",
+   "screenshots/verify-slices/desktop/data/relationships_003.png",
+   "screenshots/verify-slices/desktop/data/relationships_004.png",
+   "screenshots/verify-slices/desktop/data/relationships_005.png",
+   "screenshots/verify-slices/desktop/data/relationships_006.png",
+   "screenshots/verify-slices/desktop/data/relationships_007.png",
+   "screenshots/verify-slices/desktop/data/relationships_008.png",
+   "screenshots/verify-slices/desktop/data/relationships_009.png",
+   "screenshots/verify-slices/desktop/data/relationships_010.png",
+   "screenshots/verify-slices/desktop/data/relationships_011.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "data/cultural-misreading.html",
+  "png": "screenshots/verify/desktop/data/cultural-misreading.png",
+  "scrollHeight": 6155,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/data/cultural-misreading_000.png",
+   "screenshots/verify-slices/desktop/data/cultural-misreading_001.png",
+   "screenshots/verify-slices/desktop/data/cultural-misreading_002.png",
+   "screenshots/verify-slices/desktop/data/cultural-misreading_003.png",
+   "screenshots/verify-slices/desktop/data/cultural-misreading_004.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "data/deconstruction.html",
+  "png": "screenshots/verify/desktop/data/deconstruction.png",
+  "scrollHeight": 4878,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/data/deconstruction_000.png",
+   "screenshots/verify-slices/desktop/data/deconstruction_001.png",
+   "screenshots/verify-slices/desktop/data/deconstruction_002.png",
+   "screenshots/verify-slices/desktop/data/deconstruction_003.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "data/game-webnovel.html",
+  "png": "screenshots/verify/desktop/data/game-webnovel.png",
+  "scrollHeight": 9059,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/data/game-webnovel_000.png",
+   "screenshots/verify-slices/desktop/data/game-webnovel_001.png",
+   "screenshots/verify-slices/desktop/data/game-webnovel_002.png",
+   "screenshots/verify-slices/desktop/data/game-webnovel_003.png",
+   "screenshots/verify-slices/desktop/data/game-webnovel_004.png",
+   "screenshots/verify-slices/desktop/data/game-webnovel_005.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "data/jurisprudence.html",
+  "png": "screenshots/verify/desktop/data/jurisprudence.png",
+  "scrollHeight": 11046,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/data/jurisprudence_000.png",
+   "screenshots/verify-slices/desktop/data/jurisprudence_001.png",
+   "screenshots/verify-slices/desktop/data/jurisprudence_002.png",
+   "screenshots/verify-slices/desktop/data/jurisprudence_003.png",
+   "screenshots/verify-slices/desktop/data/jurisprudence_004.png",
+   "screenshots/verify-slices/desktop/data/jurisprudence_005.png",
+   "screenshots/verify-slices/desktop/data/jurisprudence_006.png",
+   "screenshots/verify-slices/desktop/data/jurisprudence_007.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "en/intertextuality-network.html",
+  "png": "screenshots/verify/desktop/en/intertextuality-network.png",
+  "scrollHeight": 8593,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/en/intertextuality-network_000.png",
+   "screenshots/verify-slices/desktop/en/intertextuality-network_001.png",
+   "screenshots/verify-slices/desktop/en/intertextuality-network_002.png",
+   "screenshots/verify-slices/desktop/en/intertextuality-network_003.png",
+   "screenshots/verify-slices/desktop/en/intertextuality-network_004.png",
+   "screenshots/verify-slices/desktop/en/intertextuality-network_005.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "en/monster-female-network.html",
+  "png": "screenshots/verify/desktop/en/monster-female-network.png",
+  "scrollHeight": 8424,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/en/monster-female-network_000.png",
+   "screenshots/verify-slices/desktop/en/monster-female-network_001.png",
+   "screenshots/verify-slices/desktop/en/monster-female-network_002.png",
+   "screenshots/verify-slices/desktop/en/monster-female-network_003.png",
+   "screenshots/verify-slices/desktop/en/monster-female-network_004.png",
+   "screenshots/verify-slices/desktop/en/monster-female-network_005.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "en/narratology-12d-network.html",
+  "png": "screenshots/verify/desktop/en/narratology-12d-network.png",
+  "scrollHeight": 9307,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/en/narratology-12d-network_000.png",
+   "screenshots/verify-slices/desktop/en/narratology-12d-network_001.png",
+   "screenshots/verify-slices/desktop/en/narratology-12d-network_002.png",
+   "screenshots/verify-slices/desktop/en/narratology-12d-network_003.png",
+   "screenshots/verify-slices/desktop/en/narratology-12d-network_004.png",
+   "screenshots/verify-slices/desktop/en/narratology-12d-network_005.png",
+   "screenshots/verify-slices/desktop/en/narratology-12d-network_006.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "en/narratology-13d-network.html",
+  "png": "screenshots/verify/desktop/en/narratology-13d-network.png",
+  "scrollHeight": 10501,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/en/narratology-13d-network_000.png",
+   "screenshots/verify-slices/desktop/en/narratology-13d-network_001.png",
+   "screenshots/verify-slices/desktop/en/narratology-13d-network_002.png",
+   "screenshots/verify-slices/desktop/en/narratology-13d-network_003.png",
+   "screenshots/verify-slices/desktop/en/narratology-13d-network_004.png",
+   "screenshots/verify-slices/desktop/en/narratology-13d-network_005.png",
+   "screenshots/verify-slices/desktop/en/narratology-13d-network_006.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "en/six-senses-narratology-network.html",
+  "png": "screenshots/verify/desktop/en/six-senses-narratology-network.png",
+  "scrollHeight": 7499,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/en/six-senses-narratology-network_000.png",
+   "screenshots/verify-slices/desktop/en/six-senses-narratology-network_001.png",
+   "screenshots/verify-slices/desktop/en/six-senses-narratology-network_002.png",
+   "screenshots/verify-slices/desktop/en/six-senses-narratology-network_003.png",
+   "screenshots/verify-slices/desktop/en/six-senses-narratology-network_004.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "en/relationships.html",
+  "png": "screenshots/verify/desktop/en/relationships.png",
+  "scrollHeight": 20317,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/en/relationships_000.png",
+   "screenshots/verify-slices/desktop/en/relationships_001.png",
+   "screenshots/verify-slices/desktop/en/relationships_002.png",
+   "screenshots/verify-slices/desktop/en/relationships_003.png",
+   "screenshots/verify-slices/desktop/en/relationships_004.png",
+   "screenshots/verify-slices/desktop/en/relationships_005.png",
+   "screenshots/verify-slices/desktop/en/relationships_006.png",
+   "screenshots/verify-slices/desktop/en/relationships_007.png",
+   "screenshots/verify-slices/desktop/en/relationships_008.png",
+   "screenshots/verify-slices/desktop/en/relationships_009.png",
+   "screenshots/verify-slices/desktop/en/relationships_010.png",
+   "screenshots/verify-slices/desktop/en/relationships_011.png",
+   "screenshots/verify-slices/desktop/en/relationships_012.png",
+   "screenshots/verify-slices/desktop/en/relationships_013.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "en/cultural-misreading.html",
+  "png": "screenshots/verify/desktop/en/cultural-misreading.png",
+  "scrollHeight": 6406,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/en/cultural-misreading_000.png",
+   "screenshots/verify-slices/desktop/en/cultural-misreading_001.png",
+   "screenshots/verify-slices/desktop/en/cultural-misreading_002.png",
+   "screenshots/verify-slices/desktop/en/cultural-misreading_003.png",
+   "screenshots/verify-slices/desktop/en/cultural-misreading_004.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "en/deconstruction.html",
+  "png": "screenshots/verify/desktop/en/deconstruction.png",
+  "scrollHeight": 5173,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/en/deconstruction_000.png",
+   "screenshots/verify-slices/desktop/en/deconstruction_001.png",
+   "screenshots/verify-slices/desktop/en/deconstruction_002.png",
+   "screenshots/verify-slices/desktop/en/deconstruction_003.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "en/game-webnovel.html",
+  "png": "screenshots/verify/desktop/en/game-webnovel.png",
+  "scrollHeight": 9964,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/en/game-webnovel_000.png",
+   "screenshots/verify-slices/desktop/en/game-webnovel_001.png",
+   "screenshots/verify-slices/desktop/en/game-webnovel_002.png",
+   "screenshots/verify-slices/desktop/en/game-webnovel_003.png",
+   "screenshots/verify-slices/desktop/en/game-webnovel_004.png",
+   "screenshots/verify-slices/desktop/en/game-webnovel_005.png",
+   "screenshots/verify-slices/desktop/en/game-webnovel_006.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "en/jurisprudence.html",
+  "png": "screenshots/verify/desktop/en/jurisprudence.png",
+  "scrollHeight": 13149,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/en/jurisprudence_000.png",
+   "screenshots/verify-slices/desktop/en/jurisprudence_001.png",
+   "screenshots/verify-slices/desktop/en/jurisprudence_002.png",
+   "screenshots/verify-slices/desktop/en/jurisprudence_003.png",
+   "screenshots/verify-slices/desktop/en/jurisprudence_004.png",
+   "screenshots/verify-slices/desktop/en/jurisprudence_005.png",
+   "screenshots/verify-slices/desktop/en/jurisprudence_006.png",
+   "screenshots/verify-slices/desktop/en/jurisprudence_007.png",
+   "screenshots/verify-slices/desktop/en/jurisprudence_008.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "en/essay-ming-intellectual-history.html",
+  "png": "screenshots/verify/desktop/en/essay-ming-intellectual-history.png",
+  "scrollHeight": 3862,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-ming-intellectual-history_000.png",
+   "screenshots/verify-slices/desktop/en/essay-ming-intellectual-history_001.png",
+   "screenshots/verify-slices/desktop/en/essay-ming-intellectual-history_002.png"
+  ]
+ },
+ {
+  "viewport": "desktop",
+  "rel": "en/essay-ming-literary-thought.html",
+  "png": "screenshots/verify/desktop/en/essay-ming-literary-thought.png",
+  "scrollHeight": 3532,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-ming-literary-thought_000.png",
+   "screenshots/verify-slices/desktop/en/essay-ming-literary-thought_001.png",
+   "screenshots/verify-slices/desktop/en/essay-ming-literary-thought_002.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "index.html",
+  "png": "screenshots/verify/mobile/index.png",
+  "scrollHeight": 6827,
+  "revealTotal": 4,
+  "revealShown": 4,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/index_000.png",
+   "screenshots/verify-slices/mobile/index_001.png",
+   "screenshots/verify-slices/mobile/index_002.png",
+   "screenshots/verify-slices/mobile/index_003.png",
+   "screenshots/verify-slices/mobile/index_004.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "dashboard.html",
+  "png": "screenshots/verify/mobile/dashboard.png",
+  "scrollHeight": 17192,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/dashboard_000.png",
+   "screenshots/verify-slices/mobile/dashboard_001.png",
+   "screenshots/verify-slices/mobile/dashboard_002.png",
+   "screenshots/verify-slices/mobile/dashboard_003.png",
+   "screenshots/verify-slices/mobile/dashboard_004.png",
+   "screenshots/verify-slices/mobile/dashboard_005.png",
+   "screenshots/verify-slices/mobile/dashboard_006.png",
+   "screenshots/verify-slices/mobile/dashboard_007.png",
+   "screenshots/verify-slices/mobile/dashboard_008.png",
+   "screenshots/verify-slices/mobile/dashboard_009.png",
+   "screenshots/verify-slices/mobile/dashboard_010.png",
+   "screenshots/verify-slices/mobile/dashboard_011.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "data/intertextuality-network.html",
+  "png": "screenshots/verify/mobile/data/intertextuality-network.png",
+  "scrollHeight": 10132,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/data/intertextuality-network_000.png",
+   "screenshots/verify-slices/mobile/data/intertextuality-network_001.png",
+   "screenshots/verify-slices/mobile/data/intertextuality-network_002.png",
+   "screenshots/verify-slices/mobile/data/intertextuality-network_003.png",
+   "screenshots/verify-slices/mobile/data/intertextuality-network_004.png",
+   "screenshots/verify-slices/mobile/data/intertextuality-network_005.png",
+   "screenshots/verify-slices/mobile/data/intertextuality-network_006.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "data/monster-female-network.html",
+  "png": "screenshots/verify/mobile/data/monster-female-network.png",
+  "scrollHeight": 9922,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/data/monster-female-network_000.png",
+   "screenshots/verify-slices/mobile/data/monster-female-network_001.png",
+   "screenshots/verify-slices/mobile/data/monster-female-network_002.png",
+   "screenshots/verify-slices/mobile/data/monster-female-network_003.png",
+   "screenshots/verify-slices/mobile/data/monster-female-network_004.png",
+   "screenshots/verify-slices/mobile/data/monster-female-network_005.png",
+   "screenshots/verify-slices/mobile/data/monster-female-network_006.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "data/narratology-12d-network.html",
+  "png": "screenshots/verify/mobile/data/narratology-12d-network.png",
+  "scrollHeight": 12173,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/data/narratology-12d-network_000.png",
+   "screenshots/verify-slices/mobile/data/narratology-12d-network_001.png",
+   "screenshots/verify-slices/mobile/data/narratology-12d-network_002.png",
+   "screenshots/verify-slices/mobile/data/narratology-12d-network_003.png",
+   "screenshots/verify-slices/mobile/data/narratology-12d-network_004.png",
+   "screenshots/verify-slices/mobile/data/narratology-12d-network_005.png",
+   "screenshots/verify-slices/mobile/data/narratology-12d-network_006.png",
+   "screenshots/verify-slices/mobile/data/narratology-12d-network_007.png",
+   "screenshots/verify-slices/mobile/data/narratology-12d-network_008.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "data/narratology-13d-network.html",
+  "png": "screenshots/verify/mobile/data/narratology-13d-network.png",
+  "scrollHeight": 14939,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/data/narratology-13d-network_000.png",
+   "screenshots/verify-slices/mobile/data/narratology-13d-network_001.png",
+   "screenshots/verify-slices/mobile/data/narratology-13d-network_002.png",
+   "screenshots/verify-slices/mobile/data/narratology-13d-network_003.png",
+   "screenshots/verify-slices/mobile/data/narratology-13d-network_004.png",
+   "screenshots/verify-slices/mobile/data/narratology-13d-network_005.png",
+   "screenshots/verify-slices/mobile/data/narratology-13d-network_006.png",
+   "screenshots/verify-slices/mobile/data/narratology-13d-network_007.png",
+   "screenshots/verify-slices/mobile/data/narratology-13d-network_008.png",
+   "screenshots/verify-slices/mobile/data/narratology-13d-network_009.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "data/six-senses-narratology-network.html",
+  "png": "screenshots/verify/mobile/data/six-senses-narratology-network.png",
+  "scrollHeight": 10255,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/data/six-senses-narratology-network_000.png",
+   "screenshots/verify-slices/mobile/data/six-senses-narratology-network_001.png",
+   "screenshots/verify-slices/mobile/data/six-senses-narratology-network_002.png",
+   "screenshots/verify-slices/mobile/data/six-senses-narratology-network_003.png",
+   "screenshots/verify-slices/mobile/data/six-senses-narratology-network_004.png",
+   "screenshots/verify-slices/mobile/data/six-senses-narratology-network_005.png",
+   "screenshots/verify-slices/mobile/data/six-senses-narratology-network_006.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "data/relationships.html",
+  "png": "screenshots/verify/mobile/data/relationships.png",
+  "scrollHeight": 23711,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/data/relationships_000.png",
+   "screenshots/verify-slices/mobile/data/relationships_001.png",
+   "screenshots/verify-slices/mobile/data/relationships_002.png",
+   "screenshots/verify-slices/mobile/data/relationships_003.png",
+   "screenshots/verify-slices/mobile/data/relationships_004.png",
+   "screenshots/verify-slices/mobile/data/relationships_005.png",
+   "screenshots/verify-slices/mobile/data/relationships_006.png",
+   "screenshots/verify-slices/mobile/data/relationships_007.png",
+   "screenshots/verify-slices/mobile/data/relationships_008.png",
+   "screenshots/verify-slices/mobile/data/relationships_009.png",
+   "screenshots/verify-slices/mobile/data/relationships_010.png",
+   "screenshots/verify-slices/mobile/data/relationships_011.png",
+   "screenshots/verify-slices/mobile/data/relationships_012.png",
+   "screenshots/verify-slices/mobile/data/relationships_013.png",
+   "screenshots/verify-slices/mobile/data/relationships_014.png",
+   "screenshots/verify-slices/mobile/data/relationships_015.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "data/cultural-misreading.html",
+  "png": "screenshots/verify/mobile/data/cultural-misreading.png",
+  "scrollHeight": 5671,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/data/cultural-misreading_000.png",
+   "screenshots/verify-slices/mobile/data/cultural-misreading_001.png",
+   "screenshots/verify-slices/mobile/data/cultural-misreading_002.png",
+   "screenshots/verify-slices/mobile/data/cultural-misreading_003.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "data/deconstruction.html",
+  "png": "screenshots/verify/mobile/data/deconstruction.png",
+  "scrollHeight": 5813,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/data/deconstruction_000.png",
+   "screenshots/verify-slices/mobile/data/deconstruction_001.png",
+   "screenshots/verify-slices/mobile/data/deconstruction_002.png",
+   "screenshots/verify-slices/mobile/data/deconstruction_003.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "data/game-webnovel.html",
+  "png": "screenshots/verify/mobile/data/game-webnovel.png",
+  "scrollHeight": 14829,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/data/game-webnovel_000.png",
+   "screenshots/verify-slices/mobile/data/game-webnovel_001.png",
+   "screenshots/verify-slices/mobile/data/game-webnovel_002.png",
+   "screenshots/verify-slices/mobile/data/game-webnovel_003.png",
+   "screenshots/verify-slices/mobile/data/game-webnovel_004.png",
+   "screenshots/verify-slices/mobile/data/game-webnovel_005.png",
+   "screenshots/verify-slices/mobile/data/game-webnovel_006.png",
+   "screenshots/verify-slices/mobile/data/game-webnovel_007.png",
+   "screenshots/verify-slices/mobile/data/game-webnovel_008.png",
+   "screenshots/verify-slices/mobile/data/game-webnovel_009.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "data/jurisprudence.html",
+  "png": "screenshots/verify/mobile/data/jurisprudence.png",
+  "scrollHeight": 17016,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/data/jurisprudence_000.png",
+   "screenshots/verify-slices/mobile/data/jurisprudence_001.png",
+   "screenshots/verify-slices/mobile/data/jurisprudence_002.png",
+   "screenshots/verify-slices/mobile/data/jurisprudence_003.png",
+   "screenshots/verify-slices/mobile/data/jurisprudence_004.png",
+   "screenshots/verify-slices/mobile/data/jurisprudence_005.png",
+   "screenshots/verify-slices/mobile/data/jurisprudence_006.png",
+   "screenshots/verify-slices/mobile/data/jurisprudence_007.png",
+   "screenshots/verify-slices/mobile/data/jurisprudence_008.png",
+   "screenshots/verify-slices/mobile/data/jurisprudence_009.png",
+   "screenshots/verify-slices/mobile/data/jurisprudence_010.png",
+   "screenshots/verify-slices/mobile/data/jurisprudence_011.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "en/intertextuality-network.html",
+  "png": "screenshots/verify/mobile/en/intertextuality-network.png",
+  "scrollHeight": 11447,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/en/intertextuality-network_000.png",
+   "screenshots/verify-slices/mobile/en/intertextuality-network_001.png",
+   "screenshots/verify-slices/mobile/en/intertextuality-network_002.png",
+   "screenshots/verify-slices/mobile/en/intertextuality-network_003.png",
+   "screenshots/verify-slices/mobile/en/intertextuality-network_004.png",
+   "screenshots/verify-slices/mobile/en/intertextuality-network_005.png",
+   "screenshots/verify-slices/mobile/en/intertextuality-network_006.png",
+   "screenshots/verify-slices/mobile/en/intertextuality-network_007.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "en/monster-female-network.html",
+  "png": "screenshots/verify/mobile/en/monster-female-network.png",
+  "scrollHeight": 11239,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/en/monster-female-network_000.png",
+   "screenshots/verify-slices/mobile/en/monster-female-network_001.png",
+   "screenshots/verify-slices/mobile/en/monster-female-network_002.png",
+   "screenshots/verify-slices/mobile/en/monster-female-network_003.png",
+   "screenshots/verify-slices/mobile/en/monster-female-network_004.png",
+   "screenshots/verify-slices/mobile/en/monster-female-network_005.png",
+   "screenshots/verify-slices/mobile/en/monster-female-network_006.png",
+   "screenshots/verify-slices/mobile/en/monster-female-network_007.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "en/narratology-12d-network.html",
+  "png": "screenshots/verify/mobile/en/narratology-12d-network.png",
+  "scrollHeight": 14063,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/en/narratology-12d-network_000.png",
+   "screenshots/verify-slices/mobile/en/narratology-12d-network_001.png",
+   "screenshots/verify-slices/mobile/en/narratology-12d-network_002.png",
+   "screenshots/verify-slices/mobile/en/narratology-12d-network_003.png",
+   "screenshots/verify-slices/mobile/en/narratology-12d-network_004.png",
+   "screenshots/verify-slices/mobile/en/narratology-12d-network_005.png",
+   "screenshots/verify-slices/mobile/en/narratology-12d-network_006.png",
+   "screenshots/verify-slices/mobile/en/narratology-12d-network_007.png",
+   "screenshots/verify-slices/mobile/en/narratology-12d-network_008.png",
+   "screenshots/verify-slices/mobile/en/narratology-12d-network_009.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "en/narratology-13d-network.html",
+  "png": "screenshots/verify/mobile/en/narratology-13d-network.png",
+  "scrollHeight": 16381,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/en/narratology-13d-network_000.png",
+   "screenshots/verify-slices/mobile/en/narratology-13d-network_001.png",
+   "screenshots/verify-slices/mobile/en/narratology-13d-network_002.png",
+   "screenshots/verify-slices/mobile/en/narratology-13d-network_003.png",
+   "screenshots/verify-slices/mobile/en/narratology-13d-network_004.png",
+   "screenshots/verify-slices/mobile/en/narratology-13d-network_005.png",
+   "screenshots/verify-slices/mobile/en/narratology-13d-network_006.png",
+   "screenshots/verify-slices/mobile/en/narratology-13d-network_007.png",
+   "screenshots/verify-slices/mobile/en/narratology-13d-network_008.png",
+   "screenshots/verify-slices/mobile/en/narratology-13d-network_009.png",
+   "screenshots/verify-slices/mobile/en/narratology-13d-network_010.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "en/six-senses-narratology-network.html",
+  "png": "screenshots/verify/mobile/en/six-senses-narratology-network.png",
+  "scrollHeight": 10792,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/en/six-senses-narratology-network_000.png",
+   "screenshots/verify-slices/mobile/en/six-senses-narratology-network_001.png",
+   "screenshots/verify-slices/mobile/en/six-senses-narratology-network_002.png",
+   "screenshots/verify-slices/mobile/en/six-senses-narratology-network_003.png",
+   "screenshots/verify-slices/mobile/en/six-senses-narratology-network_004.png",
+   "screenshots/verify-slices/mobile/en/six-senses-narratology-network_005.png",
+   "screenshots/verify-slices/mobile/en/six-senses-narratology-network_006.png",
+   "screenshots/verify-slices/mobile/en/six-senses-narratology-network_007.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "en/relationships.html",
+  "png": "screenshots/verify/mobile/en/relationships.png",
+  "scrollHeight": 31064,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/en/relationships_000.png",
+   "screenshots/verify-slices/mobile/en/relationships_001.png",
+   "screenshots/verify-slices/mobile/en/relationships_002.png",
+   "screenshots/verify-slices/mobile/en/relationships_003.png",
+   "screenshots/verify-slices/mobile/en/relationships_004.png",
+   "screenshots/verify-slices/mobile/en/relationships_005.png",
+   "screenshots/verify-slices/mobile/en/relationships_006.png",
+   "screenshots/verify-slices/mobile/en/relationships_007.png",
+   "screenshots/verify-slices/mobile/en/relationships_008.png",
+   "screenshots/verify-slices/mobile/en/relationships_009.png",
+   "screenshots/verify-slices/mobile/en/relationships_010.png",
+   "screenshots/verify-slices/mobile/en/relationships_011.png",
+   "screenshots/verify-slices/mobile/en/relationships_012.png",
+   "screenshots/verify-slices/mobile/en/relationships_013.png",
+   "screenshots/verify-slices/mobile/en/relationships_014.png",
+   "screenshots/verify-slices/mobile/en/relationships_015.png",
+   "screenshots/verify-slices/mobile/en/relationships_016.png",
+   "screenshots/verify-slices/mobile/en/relationships_017.png",
+   "screenshots/verify-slices/mobile/en/relationships_018.png",
+   "screenshots/verify-slices/mobile/en/relationships_019.png",
+   "screenshots/verify-slices/mobile/en/relationships_020.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "en/cultural-misreading.html",
+  "png": "screenshots/verify/mobile/en/cultural-misreading.png",
+  "scrollHeight": 7166,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/en/cultural-misreading_000.png",
+   "screenshots/verify-slices/mobile/en/cultural-misreading_001.png",
+   "screenshots/verify-slices/mobile/en/cultural-misreading_002.png",
+   "screenshots/verify-slices/mobile/en/cultural-misreading_003.png",
+   "screenshots/verify-slices/mobile/en/cultural-misreading_004.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "en/deconstruction.html",
+  "png": "screenshots/verify/mobile/en/deconstruction.png",
+  "scrollHeight": 7406,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/en/deconstruction_000.png",
+   "screenshots/verify-slices/mobile/en/deconstruction_001.png",
+   "screenshots/verify-slices/mobile/en/deconstruction_002.png",
+   "screenshots/verify-slices/mobile/en/deconstruction_003.png",
+   "screenshots/verify-slices/mobile/en/deconstruction_004.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "en/game-webnovel.html",
+  "png": "screenshots/verify/mobile/en/game-webnovel.png",
+  "scrollHeight": 17525,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/en/game-webnovel_000.png",
+   "screenshots/verify-slices/mobile/en/game-webnovel_001.png",
+   "screenshots/verify-slices/mobile/en/game-webnovel_002.png",
+   "screenshots/verify-slices/mobile/en/game-webnovel_003.png",
+   "screenshots/verify-slices/mobile/en/game-webnovel_004.png",
+   "screenshots/verify-slices/mobile/en/game-webnovel_005.png",
+   "screenshots/verify-slices/mobile/en/game-webnovel_006.png",
+   "screenshots/verify-slices/mobile/en/game-webnovel_007.png",
+   "screenshots/verify-slices/mobile/en/game-webnovel_008.png",
+   "screenshots/verify-slices/mobile/en/game-webnovel_009.png",
+   "screenshots/verify-slices/mobile/en/game-webnovel_010.png",
+   "screenshots/verify-slices/mobile/en/game-webnovel_011.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "en/jurisprudence.html",
+  "png": "screenshots/verify/mobile/en/jurisprudence.png",
+  "scrollHeight": 20412,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/en/jurisprudence_000.png",
+   "screenshots/verify-slices/mobile/en/jurisprudence_001.png",
+   "screenshots/verify-slices/mobile/en/jurisprudence_002.png",
+   "screenshots/verify-slices/mobile/en/jurisprudence_003.png",
+   "screenshots/verify-slices/mobile/en/jurisprudence_004.png",
+   "screenshots/verify-slices/mobile/en/jurisprudence_005.png",
+   "screenshots/verify-slices/mobile/en/jurisprudence_006.png",
+   "screenshots/verify-slices/mobile/en/jurisprudence_007.png",
+   "screenshots/verify-slices/mobile/en/jurisprudence_008.png",
+   "screenshots/verify-slices/mobile/en/jurisprudence_009.png",
+   "screenshots/verify-slices/mobile/en/jurisprudence_010.png",
+   "screenshots/verify-slices/mobile/en/jurisprudence_011.png",
+   "screenshots/verify-slices/mobile/en/jurisprudence_012.png",
+   "screenshots/verify-slices/mobile/en/jurisprudence_013.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "en/essay-ming-intellectual-history.html",
+  "png": "screenshots/verify/mobile/en/essay-ming-intellectual-history.png",
+  "scrollHeight": 7538,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-ming-intellectual-history_000.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-intellectual-history_001.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-intellectual-history_002.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-intellectual-history_003.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-intellectual-history_004.png"
+  ]
+ },
+ {
+  "viewport": "mobile",
+  "rel": "en/essay-ming-literary-thought.html",
+  "png": "screenshots/verify/mobile/en/essay-ming-literary-thought.png",
+  "scrollHeight": 6419,
+  "revealTotal": 0,
+  "revealShown": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-ming-literary-thought_000.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-literary-thought_001.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-literary-thought_002.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-literary-thought_003.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-literary-thought_004.png"
+  ]
+ },
+ {
+  "rel": "en/essay-buddhist-chan.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-buddhist-chan_000.png",
+   "screenshots/verify-slices/desktop/en/essay-buddhist-chan_001.png"
+  ]
+ },
+ {
+  "rel": "en/essay-character-fu.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-character-fu_000.png",
+   "screenshots/verify-slices/desktop/en/essay-character-fu_001.png"
+  ]
+ },
+ {
+  "rel": "en/essay-cipai-linjiangxian.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-cipai-linjiangxian_000.png",
+   "screenshots/verify-slices/desktop/en/essay-cipai-linjiangxian_001.png"
+  ]
+ },
+ {
+  "rel": "en/essay-cipai-mantingfang.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-cipai-mantingfang_000.png",
+   "screenshots/verify-slices/desktop/en/essay-cipai-mantingfang_001.png",
+   "screenshots/verify-slices/desktop/en/essay-cipai-mantingfang_002.png"
+  ]
+ },
+ {
+  "rel": "en/essay-cipai-shuidiaogetou.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-cipai-shuidiaogetou_000.png",
+   "screenshots/verify-slices/desktop/en/essay-cipai-shuidiaogetou_001.png",
+   "screenshots/verify-slices/desktop/en/essay-cipai-shuidiaogetou_002.png"
+  ]
+ },
+ {
+  "rel": "en/essay-cipai-xijiangyue.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-cipai-xijiangyue_000.png",
+   "screenshots/verify-slices/desktop/en/essay-cipai-xijiangyue_001.png",
+   "screenshots/verify-slices/desktop/en/essay-cipai-xijiangyue_002.png"
+  ]
+ },
+ {
+  "rel": "en/essay-composition-origins.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-composition-origins_000.png",
+   "screenshots/verify-slices/desktop/en/essay-composition-origins_001.png",
+   "screenshots/verify-slices/desktop/en/essay-composition-origins_002.png"
+  ]
+ },
+ {
+  "rel": "en/essay-folk-belief.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-folk-belief_000.png",
+   "screenshots/verify-slices/desktop/en/essay-folk-belief_001.png"
+  ]
+ },
+ {
+  "rel": "en/essay-historical-xuanzang.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-historical-xuanzang_000.png",
+   "screenshots/verify-slices/desktop/en/essay-historical-xuanzang_001.png"
+  ]
+ },
+ {
+  "rel": "en/essay-ming-economy.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-ming-economy_000.png",
+   "screenshots/verify-slices/desktop/en/essay-ming-economy_001.png"
+  ]
+ },
+ {
+  "rel": "en/essay-ming-metaphor.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-ming-metaphor_000.png",
+   "screenshots/verify-slices/desktop/en/essay-ming-metaphor_001.png",
+   "screenshots/verify-slices/desktop/en/essay-ming-metaphor_002.png"
+  ]
+ },
+ {
+  "rel": "en/essay-ming-military.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-ming-military_000.png",
+   "screenshots/verify-slices/desktop/en/essay-ming-military_001.png",
+   "screenshots/verify-slices/desktop/en/essay-ming-military_002.png"
+  ]
+ },
+ {
+  "rel": "en/essay-ming-politics.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-ming-politics_000.png",
+   "screenshots/verify-slices/desktop/en/essay-ming-politics_001.png"
+  ]
+ },
+ {
+  "rel": "en/essay-ming-religion.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-ming-religion_000.png",
+   "screenshots/verify-slices/desktop/en/essay-ming-religion_001.png",
+   "screenshots/verify-slices/desktop/en/essay-ming-religion_002.png"
+  ]
+ },
+ {
+  "rel": "en/essay-ming-social-customs.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-ming-social-customs_000.png",
+   "screenshots/verify-slices/desktop/en/essay-ming-social-customs_001.png",
+   "screenshots/verify-slices/desktop/en/essay-ming-social-customs_002.png"
+  ]
+ },
+ {
+  "rel": "en/essay-original-poetry.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-original-poetry_000.png",
+   "screenshots/verify-slices/desktop/en/essay-original-poetry_001.png"
+  ]
+ },
+ {
+  "rel": "en/essay-poetry-imagery.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-poetry-imagery_000.png",
+   "screenshots/verify-slices/desktop/en/essay-poetry-imagery_001.png",
+   "screenshots/verify-slices/desktop/en/essay-poetry-imagery_002.png"
+  ]
+ },
+ {
+  "rel": "en/essay-poetry-opening.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-poetry-opening_000.png",
+   "screenshots/verify-slices/desktop/en/essay-poetry-opening_001.png",
+   "screenshots/verify-slices/desktop/en/essay-poetry-opening_002.png"
+  ]
+ },
+ {
+  "rel": "en/essay-quanzhen-daoism.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-quanzhen-daoism_000.png",
+   "screenshots/verify-slices/desktop/en/essay-quanzhen-daoism_001.png"
+  ]
+ },
+ {
+  "rel": "en/essay-rhythm-analysis.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-rhythm-analysis_000.png",
+   "screenshots/verify-slices/desktop/en/essay-rhythm-analysis_001.png"
+  ]
+ },
+ {
+  "rel": "en/essay-three-teachings.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/essay-three-teachings_000.png",
+   "screenshots/verify-slices/desktop/en/essay-three-teachings_001.png",
+   "screenshots/verify-slices/desktop/en/essay-three-teachings_002.png"
+  ]
+ },
+ {
+  "rel": "en/tribulations.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/tribulations_000.png",
+   "screenshots/verify-slices/desktop/en/tribulations_001.png"
+  ]
+ },
+ {
+  "rel": "en/chapters-map.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/chapters-map_000.png",
+   "screenshots/verify-slices/desktop/en/chapters-map_001.png",
+   "screenshots/verify-slices/desktop/en/chapters-map_002.png",
+   "screenshots/verify-slices/desktop/en/chapters-map_003.png",
+   "screenshots/verify-slices/desktop/en/chapters-map_004.png",
+   "screenshots/verify-slices/desktop/en/chapters-map_005.png"
+  ]
+ },
+ {
+  "rel": "en/social-media.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/social-media_000.png",
+   "screenshots/verify-slices/desktop/en/social-media_001.png",
+   "screenshots/verify-slices/desktop/en/social-media_002.png",
+   "screenshots/verify-slices/desktop/en/social-media_003.png"
+  ]
+ },
+ {
+  "rel": "en/global-pattern.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/global-pattern_000.png",
+   "screenshots/verify-slices/desktop/en/global-pattern_001.png",
+   "screenshots/verify-slices/desktop/en/global-pattern_002.png",
+   "screenshots/verify-slices/desktop/en/global-pattern_003.png",
+   "screenshots/verify-slices/desktop/en/global-pattern_004.png"
+  ]
+ },
+ {
+  "rel": "en/theological-intervention-network.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/theological-intervention-network_000.png",
+   "screenshots/verify-slices/desktop/en/theological-intervention-network_001.png",
+   "screenshots/verify-slices/desktop/en/theological-intervention-network_002.png"
+  ]
+ },
+ {
+  "rel": "rum-viewer.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify/desktop/rum-viewer.png"
+  ]
+ },
+ {
+  "rel": "en/hardship-heatmap.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/hardship-heatmap_000.png",
+   "screenshots/verify-slices/desktop/en/hardship-heatmap_001.png",
+   "screenshots/verify-slices/desktop/en/hardship-heatmap_002.png"
+  ]
+ },
+ {
+  "rel": "en/text-evolution.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/text-evolution_000.png",
+   "screenshots/verify-slices/desktop/en/text-evolution_001.png",
+   "screenshots/verify-slices/desktop/en/text-evolution_002.png",
+   "screenshots/verify-slices/desktop/en/text-evolution_003.png",
+   "screenshots/verify-slices/desktop/en/text-evolution_004.png",
+   "screenshots/verify-slices/desktop/en/text-evolution_005.png"
+  ]
+ },
+ {
+  "rel": "data/pilgrim-team-dynamic-network.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/data/pilgrim-team-dynamic-network_000.png",
+   "screenshots/verify-slices/desktop/data/pilgrim-team-dynamic-network_001.png",
+   "screenshots/verify-slices/desktop/data/pilgrim-team-dynamic-network_002.png",
+   "screenshots/verify-slices/desktop/data/pilgrim-team-dynamic-network_003.png"
+  ]
+ },
+ {
+  "rel": "en/pilgrim-team-dynamic-network.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/pilgrim-team-dynamic-network_000.png",
+   "screenshots/verify-slices/desktop/en/pilgrim-team-dynamic-network_001.png",
+   "screenshots/verify-slices/desktop/en/pilgrim-team-dynamic-network_002.png",
+   "screenshots/verify-slices/desktop/en/pilgrim-team-dynamic-network_003.png"
+  ]
+ },
+ {
+  "rel": "data/cross-time-danmaku.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/data/cross-time-danmaku_000.png",
+   "screenshots/verify-slices/desktop/data/cross-time-danmaku_001.png",
+   "screenshots/verify-slices/desktop/data/cross-time-danmaku_002.png"
+  ]
+ },
+ {
+  "rel": "en/cross-time-danmaku.html",
+  "viewport": "desktop",
+  "slices": [
+   "screenshots/verify-slices/desktop/en/cross-time-danmaku_000.png",
+   "screenshots/verify-slices/desktop/en/cross-time-danmaku_001.png",
+   "screenshots/verify-slices/desktop/en/cross-time-danmaku_002.png"
+  ]
+ },
+ {
+  "rel": "en/essay-buddhist-chan.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-buddhist-chan_000.png",
+   "screenshots/verify-slices/mobile/en/essay-buddhist-chan_001.png",
+   "screenshots/verify-slices/mobile/en/essay-buddhist-chan_002.png",
+   "screenshots/verify-slices/mobile/en/essay-buddhist-chan_003.png"
+  ]
+ },
+ {
+  "rel": "en/essay-character-fu.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-character-fu_000.png",
+   "screenshots/verify-slices/mobile/en/essay-character-fu_001.png",
+   "screenshots/verify-slices/mobile/en/essay-character-fu_002.png",
+   "screenshots/verify-slices/mobile/en/essay-character-fu_003.png"
+  ]
+ },
+ {
+  "rel": "en/essay-cipai-linjiangxian.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-cipai-linjiangxian_000.png",
+   "screenshots/verify-slices/mobile/en/essay-cipai-linjiangxian_001.png",
+   "screenshots/verify-slices/mobile/en/essay-cipai-linjiangxian_002.png",
+   "screenshots/verify-slices/mobile/en/essay-cipai-linjiangxian_003.png",
+   "screenshots/verify-slices/mobile/en/essay-cipai-linjiangxian_004.png"
+  ]
+ },
+ {
+  "rel": "en/essay-cipai-mantingfang.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-cipai-mantingfang_000.png",
+   "screenshots/verify-slices/mobile/en/essay-cipai-mantingfang_001.png",
+   "screenshots/verify-slices/mobile/en/essay-cipai-mantingfang_002.png",
+   "screenshots/verify-slices/mobile/en/essay-cipai-mantingfang_003.png",
+   "screenshots/verify-slices/mobile/en/essay-cipai-mantingfang_004.png"
+  ]
+ },
+ {
+  "rel": "en/essay-cipai-shuidiaogetou.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-cipai-shuidiaogetou_000.png",
+   "screenshots/verify-slices/mobile/en/essay-cipai-shuidiaogetou_001.png",
+   "screenshots/verify-slices/mobile/en/essay-cipai-shuidiaogetou_002.png",
+   "screenshots/verify-slices/mobile/en/essay-cipai-shuidiaogetou_003.png",
+   "screenshots/verify-slices/mobile/en/essay-cipai-shuidiaogetou_004.png"
+  ]
+ },
+ {
+  "rel": "en/essay-cipai-xijiangyue.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-cipai-xijiangyue_000.png",
+   "screenshots/verify-slices/mobile/en/essay-cipai-xijiangyue_001.png",
+   "screenshots/verify-slices/mobile/en/essay-cipai-xijiangyue_002.png",
+   "screenshots/verify-slices/mobile/en/essay-cipai-xijiangyue_003.png",
+   "screenshots/verify-slices/mobile/en/essay-cipai-xijiangyue_004.png"
+  ]
+ },
+ {
+  "rel": "en/essay-composition-origins.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-composition-origins_000.png",
+   "screenshots/verify-slices/mobile/en/essay-composition-origins_001.png",
+   "screenshots/verify-slices/mobile/en/essay-composition-origins_002.png",
+   "screenshots/verify-slices/mobile/en/essay-composition-origins_003.png",
+   "screenshots/verify-slices/mobile/en/essay-composition-origins_004.png",
+   "screenshots/verify-slices/mobile/en/essay-composition-origins_005.png"
+  ]
+ },
+ {
+  "rel": "en/essay-folk-belief.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-folk-belief_000.png",
+   "screenshots/verify-slices/mobile/en/essay-folk-belief_001.png",
+   "screenshots/verify-slices/mobile/en/essay-folk-belief_002.png",
+   "screenshots/verify-slices/mobile/en/essay-folk-belief_003.png"
+  ]
+ },
+ {
+  "rel": "en/essay-historical-xuanzang.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-historical-xuanzang_000.png",
+   "screenshots/verify-slices/mobile/en/essay-historical-xuanzang_001.png",
+   "screenshots/verify-slices/mobile/en/essay-historical-xuanzang_002.png",
+   "screenshots/verify-slices/mobile/en/essay-historical-xuanzang_003.png"
+  ]
+ },
+ {
+  "rel": "en/essay-ming-economy.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-ming-economy_000.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-economy_001.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-economy_002.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-economy_003.png"
+  ]
+ },
+ {
+  "rel": "en/essay-ming-metaphor.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-ming-metaphor_000.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-metaphor_001.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-metaphor_002.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-metaphor_003.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-metaphor_004.png"
+  ]
+ },
+ {
+  "rel": "en/essay-ming-military.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-ming-military_000.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-military_001.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-military_002.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-military_003.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-military_004.png"
+  ]
+ },
+ {
+  "rel": "en/essay-ming-politics.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-ming-politics_000.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-politics_001.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-politics_002.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-politics_003.png"
+  ]
+ },
+ {
+  "rel": "en/essay-ming-religion.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-ming-religion_000.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-religion_001.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-religion_002.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-religion_003.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-religion_004.png"
+  ]
+ },
+ {
+  "rel": "en/essay-ming-social-customs.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-ming-social-customs_000.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-social-customs_001.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-social-customs_002.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-social-customs_003.png",
+   "screenshots/verify-slices/mobile/en/essay-ming-social-customs_004.png"
+  ]
+ },
+ {
+  "rel": "en/essay-original-poetry.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-original-poetry_000.png",
+   "screenshots/verify-slices/mobile/en/essay-original-poetry_001.png",
+   "screenshots/verify-slices/mobile/en/essay-original-poetry_002.png",
+   "screenshots/verify-slices/mobile/en/essay-original-poetry_003.png"
+  ]
+ },
+ {
+  "rel": "en/essay-poetry-imagery.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-poetry-imagery_000.png",
+   "screenshots/verify-slices/mobile/en/essay-poetry-imagery_001.png",
+   "screenshots/verify-slices/mobile/en/essay-poetry-imagery_002.png",
+   "screenshots/verify-slices/mobile/en/essay-poetry-imagery_003.png"
+  ]
+ },
+ {
+  "rel": "en/essay-poetry-opening.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-poetry-opening_000.png",
+   "screenshots/verify-slices/mobile/en/essay-poetry-opening_001.png",
+   "screenshots/verify-slices/mobile/en/essay-poetry-opening_002.png",
+   "screenshots/verify-slices/mobile/en/essay-poetry-opening_003.png",
+   "screenshots/verify-slices/mobile/en/essay-poetry-opening_004.png"
+  ]
+ },
+ {
+  "rel": "en/essay-quanzhen-daoism.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-quanzhen-daoism_000.png",
+   "screenshots/verify-slices/mobile/en/essay-quanzhen-daoism_001.png",
+   "screenshots/verify-slices/mobile/en/essay-quanzhen-daoism_002.png",
+   "screenshots/verify-slices/mobile/en/essay-quanzhen-daoism_003.png",
+   "screenshots/verify-slices/mobile/en/essay-quanzhen-daoism_004.png"
+  ]
+ },
+ {
+  "rel": "en/essay-rhythm-analysis.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-rhythm-analysis_000.png",
+   "screenshots/verify-slices/mobile/en/essay-rhythm-analysis_001.png",
+   "screenshots/verify-slices/mobile/en/essay-rhythm-analysis_002.png"
+  ]
+ },
+ {
+  "rel": "en/essay-three-teachings.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/essay-three-teachings_000.png",
+   "screenshots/verify-slices/mobile/en/essay-three-teachings_001.png",
+   "screenshots/verify-slices/mobile/en/essay-three-teachings_002.png",
+   "screenshots/verify-slices/mobile/en/essay-three-teachings_003.png",
+   "screenshots/verify-slices/mobile/en/essay-three-teachings_004.png"
+  ]
+ },
+ {
+  "rel": "en/tribulations.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/tribulations_000.png",
+   "screenshots/verify-slices/mobile/en/tribulations_001.png",
+   "screenshots/verify-slices/mobile/en/tribulations_002.png"
+  ]
+ },
+ {
+  "rel": "en/chapters-map.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/chapters-map_000.png",
+   "screenshots/verify-slices/mobile/en/chapters-map_001.png",
+   "screenshots/verify-slices/mobile/en/chapters-map_002.png",
+   "screenshots/verify-slices/mobile/en/chapters-map_003.png",
+   "screenshots/verify-slices/mobile/en/chapters-map_004.png",
+   "screenshots/verify-slices/mobile/en/chapters-map_005.png",
+   "screenshots/verify-slices/mobile/en/chapters-map_006.png",
+   "screenshots/verify-slices/mobile/en/chapters-map_007.png",
+   "screenshots/verify-slices/mobile/en/chapters-map_008.png",
+   "screenshots/verify-slices/mobile/en/chapters-map_009.png",
+   "screenshots/verify-slices/mobile/en/chapters-map_010.png",
+   "screenshots/verify-slices/mobile/en/chapters-map_011.png",
+   "screenshots/verify-slices/mobile/en/chapters-map_012.png",
+   "screenshots/verify-slices/mobile/en/chapters-map_013.png",
+   "screenshots/verify-slices/mobile/en/chapters-map_014.png",
+   "screenshots/verify-slices/mobile/en/chapters-map_015.png",
+   "screenshots/verify-slices/mobile/en/chapters-map_016.png"
+  ]
+ },
+ {
+  "rel": "en/social-media.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/social-media_000.png",
+   "screenshots/verify-slices/mobile/en/social-media_001.png",
+   "screenshots/verify-slices/mobile/en/social-media_002.png",
+   "screenshots/verify-slices/mobile/en/social-media_003.png",
+   "screenshots/verify-slices/mobile/en/social-media_004.png",
+   "screenshots/verify-slices/mobile/en/social-media_005.png",
+   "screenshots/verify-slices/mobile/en/social-media_006.png"
+  ]
+ },
+ {
+  "rel": "en/global-pattern.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/global-pattern_000.png",
+   "screenshots/verify-slices/mobile/en/global-pattern_001.png",
+   "screenshots/verify-slices/mobile/en/global-pattern_002.png",
+   "screenshots/verify-slices/mobile/en/global-pattern_003.png",
+   "screenshots/verify-slices/mobile/en/global-pattern_004.png",
+   "screenshots/verify-slices/mobile/en/global-pattern_005.png",
+   "screenshots/verify-slices/mobile/en/global-pattern_006.png"
+  ]
+ },
+ {
+  "rel": "en/theological-intervention-network.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/theological-intervention-network_000.png",
+   "screenshots/verify-slices/mobile/en/theological-intervention-network_001.png",
+   "screenshots/verify-slices/mobile/en/theological-intervention-network_002.png",
+   "screenshots/verify-slices/mobile/en/theological-intervention-network_003.png",
+   "screenshots/verify-slices/mobile/en/theological-intervention-network_004.png"
+  ]
+ },
+ {
+  "rel": "rum-viewer.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify/mobile/rum-viewer.png"
+  ]
+ },
+ {
+  "rel": "en/hardship-heatmap.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/hardship-heatmap_000.png",
+   "screenshots/verify-slices/mobile/en/hardship-heatmap_001.png",
+   "screenshots/verify-slices/mobile/en/hardship-heatmap_002.png",
+   "screenshots/verify-slices/mobile/en/hardship-heatmap_003.png"
+  ]
+ },
+ {
+  "rel": "en/text-evolution.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/text-evolution_000.png",
+   "screenshots/verify-slices/mobile/en/text-evolution_001.png",
+   "screenshots/verify-slices/mobile/en/text-evolution_002.png",
+   "screenshots/verify-slices/mobile/en/text-evolution_003.png",
+   "screenshots/verify-slices/mobile/en/text-evolution_004.png",
+   "screenshots/verify-slices/mobile/en/text-evolution_005.png",
+   "screenshots/verify-slices/mobile/en/text-evolution_006.png",
+   "screenshots/verify-slices/mobile/en/text-evolution_007.png"
+  ]
+ },
+ {
+  "rel": "data/pilgrim-team-dynamic-network.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/data/pilgrim-team-dynamic-network_000.png",
+   "screenshots/verify-slices/mobile/data/pilgrim-team-dynamic-network_001.png",
+   "screenshots/verify-slices/mobile/data/pilgrim-team-dynamic-network_002.png",
+   "screenshots/verify-slices/mobile/data/pilgrim-team-dynamic-network_003.png"
+  ]
+ },
+ {
+  "rel": "en/pilgrim-team-dynamic-network.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/pilgrim-team-dynamic-network_000.png",
+   "screenshots/verify-slices/mobile/en/pilgrim-team-dynamic-network_001.png",
+   "screenshots/verify-slices/mobile/en/pilgrim-team-dynamic-network_002.png",
+   "screenshots/verify-slices/mobile/en/pilgrim-team-dynamic-network_003.png",
+   "screenshots/verify-slices/mobile/en/pilgrim-team-dynamic-network_004.png"
+  ]
+ },
+ {
+  "rel": "data/cross-time-danmaku.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/data/cross-time-danmaku_000.png",
+   "screenshots/verify-slices/mobile/data/cross-time-danmaku_001.png",
+   "screenshots/verify-slices/mobile/data/cross-time-danmaku_002.png",
+   "screenshots/verify-slices/mobile/data/cross-time-danmaku_003.png"
+  ]
+ },
+ {
+  "rel": "en/cross-time-danmaku.html",
+  "viewport": "mobile",
+  "slices": [
+   "screenshots/verify-slices/mobile/en/cross-time-danmaku_000.png",
+   "screenshots/verify-slices/mobile/en/cross-time-danmaku_001.png",
+   "screenshots/verify-slices/mobile/en/cross-time-danmaku_002.png",
+   "screenshots/verify-slices/mobile/en/cross-time-danmaku_003.png"
+  ]
+ }
+]

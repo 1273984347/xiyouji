@@ -1,0 +1,1705 @@
+[
+ {
+  "kind": "desktop",
+  "items": [
+   {
+    "page": "_template.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/_template.png",
+    "flag": false
+   },
+   {
+    "page": "curated.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/curated.png",
+    "flag": false
+   },
+   {
+    "page": "dashboard.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/dashboard.png",
+    "flag": true
+   },
+   {
+    "page": "data/_shell.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/_shell.png",
+    "flag": false
+   },
+   {
+    "page": "data/81-hardships-view.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/81-hardships-view.png",
+    "flag": false
+   },
+   {
+    "page": "data/81-hardships.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/81-hardships.png",
+    "flag": false
+   },
+   {
+    "page": "data/aesthetics.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/aesthetics.png",
+    "flag": false
+   },
+   {
+    "page": "data/ai-dialogue.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/ai-dialogue.png",
+    "flag": false
+   },
+   {
+    "page": "data/business-model.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/business-model.png",
+    "flag": false
+   },
+   {
+    "page": "data/cave-estate.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/cave-estate.png",
+    "flag": false
+   },
+   {
+    "page": "data/century-dialogue.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/century-dialogue.png",
+    "flag": false
+   },
+   {
+    "page": "data/chapter-stats.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/chapter-stats.png",
+    "flag": false
+   },
+   {
+    "page": "data/chapter-structure-graph.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/chapter-structure-graph.png",
+    "flag": false
+   },
+   {
+    "page": "data/character-appearance.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/character-appearance.png",
+    "flag": false
+   },
+   {
+    "page": "data/character-dynamic-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/character-dynamic-network.png",
+    "flag": false
+   }
+  ]
+ },
+ {
+  "kind": "desktop",
+  "items": [
+   {
+    "page": "data/character-presence-timeline.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/character-presence-timeline.png",
+    "flag": false
+   },
+   {
+    "page": "data/character-relationship-3d-view.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/character-relationship-3d-view.png",
+    "flag": false
+   },
+   {
+    "page": "data/character-relationship-3d.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/character-relationship-3d.png",
+    "flag": false
+   },
+   {
+    "page": "data/character-semantic-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/character-semantic-network.png",
+    "flag": false
+   },
+   {
+    "page": "data/character-sentiment-arc.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/character-sentiment-arc.png",
+    "flag": false
+   },
+   {
+    "page": "data/chart-design.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/chart-design.png",
+    "flag": false
+   },
+   {
+    "page": "data/cognitive-psychology.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/cognitive-psychology.png",
+    "flag": false
+   },
+   {
+    "page": "data/concept-device.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/concept-device.png",
+    "flag": false
+   },
+   {
+    "page": "data/counterfactual.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/counterfactual.png",
+    "flag": false
+   },
+   {
+    "page": "data/criticism-history.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/criticism-history.png",
+    "flag": false
+   },
+   {
+    "page": "data/cross-time-danmaku.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/cross-time-danmaku.png",
+    "flag": false
+   },
+   {
+    "page": "data/cultural-misreading.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/cultural-misreading.png",
+    "flag": false
+   },
+   {
+    "page": "data/customs-pass-route.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/customs-pass-route.png",
+    "flag": false
+   },
+   {
+    "page": "data/data-explorer.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/data-explorer.png",
+    "flag": false
+   },
+   {
+    "page": "data/deconstruction.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/deconstruction.png",
+    "flag": false
+   }
+  ]
+ },
+ {
+  "kind": "desktop",
+  "items": [
+   {
+    "page": "data/dialogue-sentiment.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/dialogue-sentiment.png",
+    "flag": false
+   },
+   {
+    "page": "data/ecology.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/ecology.png",
+    "flag": false
+   },
+   {
+    "page": "data/emotional-heatmap.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/emotional-heatmap.png",
+    "flag": false
+   },
+   {
+    "page": "data/ethics-consumption.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/ethics-consumption.png",
+    "flag": false
+   },
+   {
+    "page": "data/famous-time-travel.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/famous-time-travel.png",
+    "flag": false
+   },
+   {
+    "page": "data/four-dimensional-research-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/four-dimensional-research-network.png",
+    "flag": false
+   },
+   {
+    "page": "data/four-heavenly-kings-artifacts.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/four-heavenly-kings-artifacts.png",
+    "flag": false
+   },
+   {
+    "page": "data/game-webnovel.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/game-webnovel.png",
+    "flag": false
+   },
+   {
+    "page": "data/global-pattern.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/global-pattern.png",
+    "flag": false
+   },
+   {
+    "page": "data/graph-explorer.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/graph-explorer.png",
+    "flag": false
+   },
+   {
+    "page": "data/guanyin-six-roles-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/guanyin-six-roles-network.png",
+    "flag": false
+   },
+   {
+    "page": "data/hardship-difficulty-heatmap.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/hardship-difficulty-heatmap.png",
+    "flag": false
+   },
+   {
+    "page": "data/hardship-heatmap.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/hardship-heatmap.png",
+    "flag": false
+   },
+   {
+    "page": "data/heaven-power-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/heaven-power-network.png",
+    "flag": false
+   },
+   {
+    "page": "data/intertextuality-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/intertextuality-network.png",
+    "flag": false
+   }
+  ]
+ },
+ {
+  "kind": "desktop",
+  "items": [
+   {
+    "page": "data/journey-geo-3d.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/journey-geo-3d.png",
+    "flag": false
+   },
+   {
+    "page": "data/journey-geo-semiotics.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/journey-geo-semiotics.png",
+    "flag": false
+   },
+   {
+    "page": "data/journey-map-interactive.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/journey-map-interactive.png",
+    "flag": false
+   },
+   {
+    "page": "data/journey-route.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/journey-route.png",
+    "flag": false
+   },
+   {
+    "page": "data/journey-spacetime.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/journey-spacetime.png",
+    "flag": false
+   },
+   {
+    "page": "data/jurisprudence.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/jurisprudence.png",
+    "flag": false
+   },
+   {
+    "page": "data/karma-reincarnation.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/karma-reincarnation.png",
+    "flag": false
+   },
+   {
+    "page": "data/language-style-radar.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/language-style-radar.png",
+    "flag": false
+   },
+   {
+    "page": "data/linguistics.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/linguistics.png",
+    "flag": false
+   },
+   {
+    "page": "data/magic-system.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/magic-system.png",
+    "flag": false
+   },
+   {
+    "page": "data/material-archaeology.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/material-archaeology.png",
+    "flag": false
+   },
+   {
+    "page": "data/mbti-evolution.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/mbti-evolution.png",
+    "flag": false
+   },
+   {
+    "page": "data/methodology-matrix.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/methodology-matrix.png",
+    "flag": false
+   },
+   {
+    "page": "data/ming-political-thought-comparison.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/ming-political-thought-comparison.png",
+    "flag": false
+   },
+   {
+    "page": "data/monster-background.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/monster-background.png",
+    "flag": false
+   }
+  ]
+ },
+ {
+  "kind": "desktop",
+  "items": [
+   {
+    "page": "data/monster-capability-radar.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/monster-capability-radar.png",
+    "flag": false
+   },
+   {
+    "page": "data/monster-ecology-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/monster-ecology-network.png",
+    "flag": false
+   },
+   {
+    "page": "data/monster-female-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/monster-female-network.png",
+    "flag": false
+   },
+   {
+    "page": "data/monster-hierarchy-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/monster-hierarchy-network.png",
+    "flag": false
+   },
+   {
+    "page": "data/monster-sociology.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/monster-sociology.png",
+    "flag": false
+   },
+   {
+    "page": "data/monster-victims-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/monster-victims-network.png",
+    "flag": false
+   },
+   {
+    "page": "data/music-structure.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/music-structure.png",
+    "flag": false
+   },
+   {
+    "page": "data/narrative-experiment.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/narrative-experiment.png",
+    "flag": false
+   },
+   {
+    "page": "data/narrative-rhythm-curve.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/narrative-rhythm-curve.png",
+    "flag": false
+   },
+   {
+    "page": "data/narratology-12d-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/narratology-12d-network.png",
+    "flag": false
+   },
+   {
+    "page": "data/narratology-13d-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/narratology-13d-network.png",
+    "flag": false
+   },
+   {
+    "page": "data/perf-canvas-rendering.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/perf-canvas-rendering.png",
+    "flag": false
+   },
+   {
+    "page": "data/philosophy.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/philosophy.png",
+    "flag": false
+   },
+   {
+    "page": "data/pilgrim-team-dynamic-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/pilgrim-team-dynamic-network.png",
+    "flag": false
+   },
+   {
+    "page": "data/pilgrim-team-psychology-arc.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/pilgrim-team-psychology-arc.png",
+    "flag": false
+   }
+  ]
+ },
+ {
+  "kind": "desktop",
+  "items": [
+   {
+    "page": "data/poetry-rhythm-analysis.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/poetry-rhythm-analysis.png",
+    "flag": false
+   },
+   {
+    "page": "data/power-resources.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/power-resources.png",
+    "flag": false
+   },
+   {
+    "page": "data/relationships.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/relationships.png",
+    "flag": false
+   },
+   {
+    "page": "data/risk-project.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/risk-project.png",
+    "flag": false
+   },
+   {
+    "page": "data/search.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/search.png",
+    "flag": false
+   },
+   {
+    "page": "data/six-senses-narratology-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/six-senses-narratology-network.png",
+    "flag": false
+   },
+   {
+    "page": "data/social-media.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/social-media.png",
+    "flag": false
+   },
+   {
+    "page": "data/tag-cloud.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/tag-cloud.png",
+    "flag": false
+   },
+   {
+    "page": "data/text-evolution.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/text-evolution.png",
+    "flag": false
+   },
+   {
+    "page": "data/text-search.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/text-search.png",
+    "flag": false
+   },
+   {
+    "page": "data/theological-intervention-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/theological-intervention-network.png",
+    "flag": false
+   },
+   {
+    "page": "data/timeline.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/timeline.png",
+    "flag": false
+   },
+   {
+    "page": "data/underworld-power-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/underworld-power-network.png",
+    "flag": false
+   },
+   {
+    "page": "data/visual-art.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/visual-art.png",
+    "flag": false
+   },
+   {
+    "page": "data/workplace.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/data/workplace.png",
+    "flag": false
+   }
+  ]
+ },
+ {
+  "kind": "desktop",
+  "items": [
+   {
+    "page": "dukou-engine.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/dukou-engine.png",
+    "flag": false
+   },
+   {
+    "page": "en/81-hardships-view.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/81-hardships-view.png",
+    "flag": false
+   },
+   {
+    "page": "en/81-hardships.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/81-hardships.png",
+    "flag": false
+   },
+   {
+    "page": "en/academic-papers.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/academic-papers.png",
+    "flag": false
+   },
+   {
+    "page": "en/aesthetics.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/aesthetics.png",
+    "flag": false
+   },
+   {
+    "page": "en/ai-dialogue.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/ai-dialogue.png",
+    "flag": false
+   },
+   {
+    "page": "en/bestiary.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/bestiary.png",
+    "flag": false
+   },
+   {
+    "page": "en/business-model.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/business-model.png",
+    "flag": false
+   },
+   {
+    "page": "en/cave-estate.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/cave-estate.png",
+    "flag": false
+   },
+   {
+    "page": "en/century-dialogue.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/century-dialogue.png",
+    "flag": false
+   },
+   {
+    "page": "en/chapter-stats.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/chapter-stats.png",
+    "flag": false
+   },
+   {
+    "page": "en/chapter-structure-graph.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/chapter-structure-graph.png",
+    "flag": false
+   },
+   {
+    "page": "en/chapters-map.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/chapters-map.png",
+    "flag": false
+   },
+   {
+    "page": "en/character-appearance.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/character-appearance.png",
+    "flag": false
+   },
+   {
+    "page": "en/character-bailongma.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/character-bailongma.png",
+    "flag": false
+   }
+  ]
+ },
+ {
+  "kind": "desktop",
+  "items": [
+   {
+    "page": "en/character-bajie.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/character-bajie.png",
+    "flag": false
+   },
+   {
+    "page": "en/character-dynamic-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/character-dynamic-network.png",
+    "flag": false
+   },
+   {
+    "page": "en/character-presence-timeline.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/character-presence-timeline.png",
+    "flag": false
+   },
+   {
+    "page": "en/character-relationship-3d-view.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/character-relationship-3d-view.png",
+    "flag": false
+   },
+   {
+    "page": "en/character-relationship-3d.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/character-relationship-3d.png",
+    "flag": false
+   },
+   {
+    "page": "en/character-semantic-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/character-semantic-network.png",
+    "flag": false
+   },
+   {
+    "page": "en/character-sentiment-arc.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/character-sentiment-arc.png",
+    "flag": false
+   },
+   {
+    "page": "en/character-shaseng.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/character-shaseng.png",
+    "flag": false
+   },
+   {
+    "page": "en/character-tangseng.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/character-tangseng.png",
+    "flag": false
+   },
+   {
+    "page": "en/character-wukong.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/character-wukong.png",
+    "flag": false
+   },
+   {
+    "page": "en/characters.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/characters.png",
+    "flag": false
+   },
+   {
+    "page": "en/chart-design.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/chart-design.png",
+    "flag": false
+   },
+   {
+    "page": "en/cognitive-psychology.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/cognitive-psychology.png",
+    "flag": false
+   },
+   {
+    "page": "en/concept-device.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/concept-device.png",
+    "flag": false
+   },
+   {
+    "page": "en/counterfactual.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/counterfactual.png",
+    "flag": false
+   }
+  ]
+ },
+ {
+  "kind": "desktop",
+  "items": [
+   {
+    "page": "en/criticism-history.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/criticism-history.png",
+    "flag": false
+   },
+   {
+    "page": "en/cross-time-danmaku.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/cross-time-danmaku.png",
+    "flag": false
+   },
+   {
+    "page": "en/cultural-misreading.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/cultural-misreading.png",
+    "flag": false
+   },
+   {
+    "page": "en/customs-pass-route.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/customs-pass-route.png",
+    "flag": false
+   },
+   {
+    "page": "en/dashboard.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/dashboard.png",
+    "flag": false
+   },
+   {
+    "page": "en/data-explorer.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/data-explorer.png",
+    "flag": false
+   },
+   {
+    "page": "en/deconstruction.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/deconstruction.png",
+    "flag": false
+   },
+   {
+    "page": "en/dialogue-sentiment.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/dialogue-sentiment.png",
+    "flag": false
+   },
+   {
+    "page": "en/dukou-engine.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/dukou-engine.png",
+    "flag": false
+   },
+   {
+    "page": "en/ecology.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/ecology.png",
+    "flag": false
+   },
+   {
+    "page": "en/emotional-heatmap.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/emotional-heatmap.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-ai-era.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-ai-era.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-buddhist-chan.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-buddhist-chan.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-chapter-couplets.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-chapter-couplets.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-character-fu.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-character-fu.png",
+    "flag": false
+   }
+  ]
+ },
+ {
+  "kind": "desktop",
+  "items": [
+   {
+    "page": "en/essay-cipai-linjiangxian.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-cipai-linjiangxian.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-cipai-mantingfang.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-cipai-mantingfang.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-cipai-shuidiaogetou.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-cipai-shuidiaogetou.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-cipai-xijiangyue.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-cipai-xijiangyue.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-composition-origins.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-composition-origins.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-divine-bureaucracy.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-divine-bureaucracy.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-folk-belief.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-folk-belief.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-historical-xuanzang.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-historical-xuanzang.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-information-cocoon.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-information-cocoon.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-ming-economy.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-ming-economy.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-ming-examination.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-ming-examination.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-ming-garrison.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-ming-garrison.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-ming-intellectual-history.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-ming-intellectual-history.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-ming-judiciary.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-ming-judiciary.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-ming-literary-thought.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-ming-literary-thought.png",
+    "flag": false
+   }
+  ]
+ },
+ {
+  "kind": "desktop",
+  "items": [
+   {
+    "page": "en/essay-ming-maritime-ban.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-ming-maritime-ban.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-ming-metaphor.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-ming-metaphor.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-ming-military.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-ming-military.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-ming-politics.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-ming-politics.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-ming-religion.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-ming-religion.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-ming-social-customs.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-ming-social-customs.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-modern-management.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-modern-management.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-original-poetry.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-original-poetry.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-poetry-imagery.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-poetry-imagery.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-poetry-opening.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-poetry-opening.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-quanzhen-daoism.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-quanzhen-daoism.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-rhythm-analysis.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-rhythm-analysis.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-scenery-poems.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-scenery-poems.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-thematic-poetry.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-thematic-poetry.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-three-teachings.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-three-teachings.png",
+    "flag": false
+   }
+  ]
+ },
+ {
+  "kind": "desktop",
+  "items": [
+   {
+    "page": "en/essay-version-evolution.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-version-evolution.png",
+    "flag": false
+   },
+   {
+    "page": "en/essay-zen-koan-vs-neidan.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/essay-zen-koan-vs-neidan.png",
+    "flag": false
+   },
+   {
+    "page": "en/ethics-consumption.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/ethics-consumption.png",
+    "flag": false
+   },
+   {
+    "page": "en/famous-time-travel.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/famous-time-travel.png",
+    "flag": false
+   },
+   {
+    "page": "en/four-dimensional-research-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/four-dimensional-research-network.png",
+    "flag": false
+   },
+   {
+    "page": "en/four-heavenly-kings-artifacts.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/four-heavenly-kings-artifacts.png",
+    "flag": false
+   },
+   {
+    "page": "en/game-webnovel.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/game-webnovel.png",
+    "flag": false
+   },
+   {
+    "page": "en/global-pattern.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/global-pattern.png",
+    "flag": false
+   },
+   {
+    "page": "en/graph-explorer.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/graph-explorer.png",
+    "flag": false
+   },
+   {
+    "page": "en/guanyin-six-roles-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/guanyin-six-roles-network.png",
+    "flag": false
+   },
+   {
+    "page": "en/guide.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/guide.png",
+    "flag": false
+   },
+   {
+    "page": "en/hardship-difficulty-heatmap.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/hardship-difficulty-heatmap.png",
+    "flag": false
+   },
+   {
+    "page": "en/hardship-heatmap.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/hardship-heatmap.png",
+    "flag": false
+   },
+   {
+    "page": "en/heaven-power-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/heaven-power-network.png",
+    "flag": false
+   },
+   {
+    "page": "en/index.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/index.png",
+    "flag": false
+   }
+  ]
+ },
+ {
+  "kind": "desktop",
+  "items": [
+   {
+    "page": "en/intertextuality-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/intertextuality-network.png",
+    "flag": false
+   },
+   {
+    "page": "en/journey-geo-semiotics.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/journey-geo-semiotics.png",
+    "flag": false
+   },
+   {
+    "page": "en/journey-map-interactive.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/journey-map-interactive.png",
+    "flag": false
+   },
+   {
+    "page": "en/journey-route.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/journey-route.png",
+    "flag": false
+   },
+   {
+    "page": "en/journey-spacetime.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/journey-spacetime.png",
+    "flag": false
+   },
+   {
+    "page": "en/jurisprudence.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/jurisprudence.png",
+    "flag": false
+   },
+   {
+    "page": "en/karma-reincarnation.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/karma-reincarnation.png",
+    "flag": false
+   },
+   {
+    "page": "en/language-style-radar.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/language-style-radar.png",
+    "flag": false
+   },
+   {
+    "page": "en/linguistics.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/linguistics.png",
+    "flag": false
+   },
+   {
+    "page": "en/magic-system.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/magic-system.png",
+    "flag": false
+   },
+   {
+    "page": "en/material-archaeology.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/material-archaeology.png",
+    "flag": false
+   },
+   {
+    "page": "en/mbti-evolution.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/mbti-evolution.png",
+    "flag": false
+   },
+   {
+    "page": "en/methodology-matrix.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/methodology-matrix.png",
+    "flag": false
+   },
+   {
+    "page": "en/methodology.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/methodology.png",
+    "flag": false
+   },
+   {
+    "page": "en/ming-political-thought-comparison.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/ming-political-thought-comparison.png",
+    "flag": false
+   }
+  ]
+ },
+ {
+  "kind": "desktop",
+  "items": [
+   {
+    "page": "en/monster-background.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/monster-background.png",
+    "flag": false
+   },
+   {
+    "page": "en/monster-capability-radar.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/monster-capability-radar.png",
+    "flag": false
+   },
+   {
+    "page": "en/monster-ecology-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/monster-ecology-network.png",
+    "flag": false
+   },
+   {
+    "page": "en/monster-female-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/monster-female-network.png",
+    "flag": false
+   },
+   {
+    "page": "en/monster-hierarchy-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/monster-hierarchy-network.png",
+    "flag": false
+   },
+   {
+    "page": "en/monster-sociology.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/monster-sociology.png",
+    "flag": false
+   },
+   {
+    "page": "en/monster-victims-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/monster-victims-network.png",
+    "flag": false
+   },
+   {
+    "page": "en/music-structure.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/music-structure.png",
+    "flag": false
+   },
+   {
+    "page": "en/narrative-experiment.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/narrative-experiment.png",
+    "flag": false
+   },
+   {
+    "page": "en/narrative-rhythm-curve.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/narrative-rhythm-curve.png",
+    "flag": false
+   },
+   {
+    "page": "en/narratology-12d-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/narratology-12d-network.png",
+    "flag": false
+   },
+   {
+    "page": "en/narratology-13d-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/narratology-13d-network.png",
+    "flag": false
+   },
+   {
+    "page": "en/perf-canvas-rendering.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/perf-canvas-rendering.png",
+    "flag": false
+   },
+   {
+    "page": "en/philosophy.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/philosophy.png",
+    "flag": false
+   },
+   {
+    "page": "en/pilgrim-team-dynamic-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/pilgrim-team-dynamic-network.png",
+    "flag": false
+   }
+  ]
+ },
+ {
+  "kind": "desktop",
+  "items": [
+   {
+    "page": "en/pilgrim-team-psychology-arc.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/pilgrim-team-psychology-arc.png",
+    "flag": false
+   },
+   {
+    "page": "en/poetry-rhythm-analysis.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/poetry-rhythm-analysis.png",
+    "flag": false
+   },
+   {
+    "page": "en/power-resources.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/power-resources.png",
+    "flag": false
+   },
+   {
+    "page": "en/relationships.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/relationships.png",
+    "flag": false
+   },
+   {
+    "page": "en/risk-project.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/risk-project.png",
+    "flag": false
+   },
+   {
+    "page": "en/search.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/search.png",
+    "flag": false
+   },
+   {
+    "page": "en/site-map.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/site-map.png",
+    "flag": false
+   },
+   {
+    "page": "en/six-senses-narratology-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/six-senses-narratology-network.png",
+    "flag": false
+   },
+   {
+    "page": "en/social-media.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/social-media.png",
+    "flag": false
+   },
+   {
+    "page": "en/tag-cloud.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/tag-cloud.png",
+    "flag": false
+   },
+   {
+    "page": "en/text-evolution.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/text-evolution.png",
+    "flag": false
+   },
+   {
+    "page": "en/text-search.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/text-search.png",
+    "flag": false
+   },
+   {
+    "page": "en/theological-intervention-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/theological-intervention-network.png",
+    "flag": false
+   },
+   {
+    "page": "en/timeline.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/timeline.png",
+    "flag": false
+   },
+   {
+    "page": "en/tribulations.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/tribulations.png",
+    "flag": false
+   }
+  ]
+ },
+ {
+  "kind": "desktop",
+  "items": [
+   {
+    "page": "en/underworld-power-network.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/underworld-power-network.png",
+    "flag": false
+   },
+   {
+    "page": "en/visual-art.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/visual-art.png",
+    "flag": false
+   },
+   {
+    "page": "en/visualizations.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/visualizations.png",
+    "flag": false
+   },
+   {
+    "page": "en/workplace.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/en/workplace.png",
+    "flag": false
+   },
+   {
+    "page": "guide.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/guide.png",
+    "flag": false
+   },
+   {
+    "page": "index.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/index.png",
+    "flag": true
+   },
+   {
+    "page": "mobile-index.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/mobile-index.png",
+    "flag": false
+   },
+   {
+    "page": "rum-viewer.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/rum-viewer.png",
+    "flag": false
+   },
+   {
+    "page": "visit-viewer.html",
+    "viewport": "desktop",
+    "sheet": "screenshots/sheets/desktop/visit-viewer.png",
+    "flag": false
+   }
+  ]
+ },
+ {
+  "kind": "mobile",
+  "items": [
+   {
+    "page": "_template.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/_template.png",
+    "flag": false
+   },
+   {
+    "page": "curated.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/curated.png",
+    "flag": false
+   },
+   {
+    "page": "dashboard.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/dashboard.png",
+    "flag": true
+   },
+   {
+    "page": "dukou-engine.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/dukou-engine.png",
+    "flag": false
+   },
+   {
+    "page": "en/chapters-map.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/chapters-map.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-buddhist-chan.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-buddhist-chan.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-character-fu.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-character-fu.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-cipai-linjiangxian.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-cipai-linjiangxian.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-cipai-mantingfang.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-cipai-mantingfang.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-cipai-shuidiaogetou.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-cipai-shuidiaogetou.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-cipai-xijiangyue.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-cipai-xijiangyue.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-composition-origins.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-composition-origins.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-folk-belief.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-folk-belief.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-historical-xuanzang.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-historical-xuanzang.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-ming-economy.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-ming-economy.png",
+    "flag": true
+   }
+  ]
+ },
+ {
+  "kind": "mobile",
+  "items": [
+   {
+    "page": "en/essay-ming-intellectual-history.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-ming-intellectual-history.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-ming-literary-thought.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-ming-literary-thought.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-ming-metaphor.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-ming-metaphor.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-ming-military.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-ming-military.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-ming-politics.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-ming-politics.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-ming-religion.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-ming-religion.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-ming-social-customs.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-ming-social-customs.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-original-poetry.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-original-poetry.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-poetry-imagery.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-poetry-imagery.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-poetry-opening.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-poetry-opening.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-quanzhen-daoism.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-quanzhen-daoism.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-rhythm-analysis.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-rhythm-analysis.png",
+    "flag": true
+   },
+   {
+    "page": "en/essay-three-teachings.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/essay-three-teachings.png",
+    "flag": true
+   },
+   {
+    "page": "en/tribulations.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/en/tribulations.png",
+    "flag": true
+   },
+   {
+    "page": "guide.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/guide.png",
+    "flag": false
+   }
+  ]
+ },
+ {
+  "kind": "mobile",
+  "items": [
+   {
+    "page": "index.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/index.png",
+    "flag": true
+   },
+   {
+    "page": "mobile-index.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/mobile-index.png",
+    "flag": false
+   },
+   {
+    "page": "rum-viewer.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/rum-viewer.png",
+    "flag": true
+   },
+   {
+    "page": "visit-viewer.html",
+    "viewport": "mobile",
+    "sheet": "screenshots/sheets/mobile/visit-viewer.png",
+    "flag": false
+   }
+  ]
+ }
+]

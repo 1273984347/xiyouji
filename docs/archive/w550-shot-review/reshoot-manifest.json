@@ -1,0 +1,48 @@
+{
+  "results": [
+    {
+      "viewport": "desktop",
+      "rel": "en/social-media.html",
+      "png": "screenshots/verify/desktop/en/social-media.png",
+      "scrollHeight": 3261,
+      "revealTotal": 0,
+      "revealShown": 0,
+      "consoleErrors": [
+        "Executing inline script violates the following Content Security Policy directive 'script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-+MQVqtFuOwB1opCxGnstE3+Li4NqBDZBXDs4khYBX4g=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=''. Either the 'unsafe-inline' keyword, a hash ('sha256-x65d2ofEIdymkrTCDfBf82o6roLRwnr5UQGGPCoIHbs='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked."
+      ],
+      "pageErrors": []
+    },
+    {
+      "viewport": "desktop",
+      "rel": "en/text-evolution.html",
+      "png": "screenshots/verify/desktop/en/text-evolution.png",
+      "scrollHeight": 7662,
+      "revealTotal": 0,
+      "revealShown": 0,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "viewport": "mobile",
+      "rel": "en/social-media.html",
+      "png": "screenshots/verify/mobile/en/social-media.png",
+      "scrollHeight": 3287,
+      "revealTotal": 0,
+      "revealShown": 0,
+      "consoleErrors": [
+        "Executing inline script violates the following Content Security Policy directive 'script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-+MQVqtFuOwB1opCxGnstE3+Li4NqBDZBXDs4khYBX4g=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=''. Either the 'unsafe-inline' keyword, a hash ('sha256-x65d2ofEIdymkrTCDfBf82o6roLRwnr5UQGGPCoIHbs='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked."
+      ],
+      "pageErrors": []
+    },
+    {
+      "viewport": "mobile",
+      "rel": "en/text-evolution.html",
+      "png": "screenshots/verify/mobile/en/text-evolution.png",
+      "scrollHeight": 11765,
+      "revealTotal": 0,
+      "revealShown": 0,
+      "consoleErrors": [],
+      "pageErrors": []
+    }
+  ]
+}
