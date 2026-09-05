@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-y1K39kTG3Q9hzAQVbu3e5akcGlVeYdzHHk1vNPJ+lPU=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-9uEOWlJR0DrbEFCVmaWK39wI4/NGaMM0XlWtaxQclTk=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-h4TblNBNkpJUYWhpatHS9yCb+FfRxaOt5g6RQo7VzPs=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-9uEOWlJR0DrbEFCVmaWK39wI4/NGaMM0XlWtaxQclTk=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Six-Senses Narratology Network · W168 · Annotated Journey to the West</title>
     <script src="../static/js/d3.v7.min.js"></script>
+    <script src="../static/js/d3-sankey.min.js"></script>
     <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
     
     
@@ -1249,6 +1250,8 @@ header.hero .meta {
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+
+canvas[class*="link-canvas"] + svg { background: transparent !important; }
 </style>
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
@@ -1281,7 +1284,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <div class="kpi-card"><div class="kpi-value">7</div><div class="kpi-label">Sensory Dimensions</div></div>
   <div class="kpi-card"><div class="kpi-value">196</div><div class="kpi-label">Total Terms (28×7)</div></div>
   <div class="kpi-card"><div class="kpi-value">28</div><div class="kpi-label">Theorists</div></div>
-  <div class="kpi-card"><div class="kpi-value">35</div><div class="kpi-label">Journey Cases</div></div>
+  <div class="kpi-card"><div class="kpi-value">28</div><div class="kpi-label">Journey Cases</div></div>
   <div class="kpi-card"><div class="kpi-value">4</div><div class="kpi-label">Four-Layer Structures</div></div>
 </div>
 
@@ -1290,7 +1293,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <h2 class="section-title">I · Six-Senses Narratology Overview</h2>
   <div class="section-sub">SIX-SENSES NARRATOLOGY OVERVIEW</div>
   <div class="definition">
-    <strong>Definition:</strong>Six-senses narratology uses seven sensory dimensions — time, space, hearing, smell, touch, sight, and taste — as coordinates to construct a perception-narrative mapping system for Journey to the West. Each sensory dimension corresponds to one topic (W161-W167), encompassing 28 core terms, 4 theorists, 5 Journey cases, and 4 layers of narrative structure. Together, the seven senses form a four-layer narratological analytical framework of perception–narrative–structure–case.
+    <strong>Definition:</strong>Six-senses narratology uses seven sensory dimensions — time, space, hearing, smell, touch, sight, and taste — as coordinates to construct a perception-narrative mapping system for Journey to the West. Each sensory dimension corresponds to one topic (W161-W167), encompassing 28 core terms, 4 theorists, 4 Journey cases, and 4 layers of narrative structure. Together, the seven senses form a four-layer narratological analytical framework of perception–narrative–structure–case.
   </div>
   <div class="senses-grid" id="senses-grid"></div>
 </section>
@@ -1394,23 +1397,23 @@ const EMBEDDED_DATA = {
   sixSenses: {
     // Seven sense nodes
     senses: [
-      { id: "time", name: "Temporal Narratology", sense: "Time", color: "#8B4513", Topic: "W161", Theorists: 4, Terms: 28, Cases: 5, Citations: 85, Era: "4th–20th century CE" },
-      { id: "space", name: "Spatial Narratology", sense: "Space", color: "#A0522D", Topic: "W162", Theorists: 4, Terms: 28, Cases: 5, Citations: 88, Era: "1974-1996" },
-      { id: "auditory", name: "Auditory Narratology", sense: "Hearing", color: "#CD853F", Topic: "W163", Theorists: 4, Terms: 28, Cases: 5, Citations: 82, Era: "1972-1998" },
-      { id: "olfactory", name: "Olfactory Narratology", sense: "Smell", color: "#DAA520", Topic: "W164", Theorists: 4, Terms: 28, Cases: 5, Citations: 78, Era: "1798-2002" },
-      { id: "tactile", name: "Tactile Narratology", sense: "Touch", color: "#B8860B", Topic: "W165", Theorists: 4, Terms: 28, Cases: 5, Citations: 80, Era: "1945-2008" },
-      { id: "visual", name: "Visual Narratology", sense: "Sight", color: "#D2691E", Topic: "W166", Theorists: 4, Terms: 28, Cases: 5, Citations: 90, Era: "1972-1994" },
-      { id: "gustatory", name: "Gustatory Narratology", sense: "Taste", color: "#BC8F8F", Topic: "W167", Theorists: 4, Terms: 28, Cases: 5, Citations: 75, Era: "1999-2012" }
+      { id: "time", name: "Temporal Narratology", sense: "Time", color: "#8B4513", Topic: "W161", Theorists: 4, Terms: 28, Cases: 4, Citations: 85, Era: "4th–20th century CE" },
+      { id: "space", name: "Spatial Narratology", sense: "Space", color: "#A0522D", Topic: "W162", Theorists: 4, Terms: 28, Cases: 4, Citations: 88, Era: "1974-1996" },
+      { id: "auditory", name: "Auditory Narratology", sense: "Hearing", color: "#CD853F", Topic: "W163", Theorists: 4, Terms: 28, Cases: 4, Citations: 82, Era: "1972-1998" },
+      { id: "olfactory", name: "Olfactory Narratology", sense: "Smell", color: "#DAA520", Topic: "W164", Theorists: 4, Terms: 28, Cases: 4, Citations: 78, Era: "1798-2002" },
+      { id: "tactile", name: "Tactile Narratology", sense: "Touch", color: "#B8860B", Topic: "W165", Theorists: 4, Terms: 28, Cases: 4, Citations: 80, Era: "1945-2008" },
+      { id: "visual", name: "Visual Narratology", sense: "Sight", color: "#D2691E", Topic: "W166", Theorists: 4, Terms: 28, Cases: 4, Citations: 90, Era: "1972-1994" },
+      { id: "gustatory", name: "Gustatory Narratology", sense: "Taste", color: "#BC8F8F", Topic: "W167", Theorists: 4, Terms: 28, Cases: 4, Citations: 75, Era: "1999-2012" }
     ],
     nodes: [
       // 7 sense nodes
-      { id: "time", name: "Temporal Narratology", sense: "Time", color: "#8B4513", Topic: "W161", Theorists: 4, Terms: 28, Cases: 5 },
-      { id: "space", name: "Spatial Narratology", sense: "Space", color: "#A0522D", Topic: "W162", Theorists: 4, Terms: 28, Cases: 5 },
-      { id: "auditory", name: "Auditory Narratology", sense: "Hearing", color: "#CD853F", Topic: "W163", Theorists: 4, Terms: 28, Cases: 5 },
-      { id: "olfactory", name: "Olfactory Narratology", sense: "Smell", color: "#DAA520", Topic: "W164", Theorists: 4, Terms: 28, Cases: 5 },
-      { id: "tactile", name: "Tactile Narratology", sense: "Touch", color: "#B8860B", Topic: "W165", Theorists: 4, Terms: 28, Cases: 5 },
-      { id: "visual", name: "Visual Narratology", sense: "Sight", color: "#D2691E", Topic: "W166", Theorists: 4, Terms: 28, Cases: 5 },
-      { id: "gustatory", name: "Gustatory Narratology", sense: "Taste", color: "#BC8F8F", Topic: "W167", Theorists: 4, Terms: 28, Cases: 5 },
+      { id: "time", name: "Temporal Narratology", sense: "Time", color: "#8B4513", Topic: "W161", Theorists: 4, Terms: 28, Cases: 4 },
+      { id: "space", name: "Spatial Narratology", sense: "Space", color: "#A0522D", Topic: "W162", Theorists: 4, Terms: 28, Cases: 4 },
+      { id: "auditory", name: "Auditory Narratology", sense: "Hearing", color: "#CD853F", Topic: "W163", Theorists: 4, Terms: 28, Cases: 4 },
+      { id: "olfactory", name: "Olfactory Narratology", sense: "Smell", color: "#DAA520", Topic: "W164", Theorists: 4, Terms: 28, Cases: 4 },
+      { id: "tactile", name: "Tactile Narratology", sense: "Touch", color: "#B8860B", Topic: "W165", Theorists: 4, Terms: 28, Cases: 4 },
+      { id: "visual", name: "Visual Narratology", sense: "Sight", color: "#D2691E", Topic: "W166", Theorists: 4, Terms: 28, Cases: 4 },
+      { id: "gustatory", name: "Gustatory Narratology", sense: "Taste", color: "#BC8F8F", Topic: "W167", Theorists: 4, Terms: 28, Cases: 4 },
       // Theorist nodes (4 per sense, 28 total)
       // Temporal narratology theorists
       { id: "t1", name: "Augustine", parent: "time", type: "theorist" },
@@ -1466,13 +1469,13 @@ const EMBEDDED_DATA = {
       { source: "gustatory", target: "g1" }, { source: "gustatory", target: "g2" }, { source: "gustatory", target: "g3" }, { source: "gustatory", target: "g4" }
     ],
     radar: [
-      { sense: "Time", Terms: 28, Cases: 5, Theorists: 4, Citations: 85 },
-      { sense: "Space", Terms: 28, Cases: 5, Theorists: 4, Citations: 88 },
-      { sense: "Hearing", Terms: 28, Cases: 5, Theorists: 4, Citations: 82 },
-      { sense: "Smell", Terms: 28, Cases: 5, Theorists: 4, Citations: 78 },
-      { sense: "Touch", Terms: 28, Cases: 5, Theorists: 4, Citations: 80 },
-      { sense: "Sight", Terms: 28, Cases: 5, Theorists: 4, Citations: 90 },
-      { sense: "Taste", Terms: 28, Cases: 5, Theorists: 4, Citations: 75 }
+      { sense: "Time", Terms: 28, Cases: 4, Theorists: 4, Citations: 85 },
+      { sense: "Space", Terms: 28, Cases: 4, Theorists: 4, Citations: 88 },
+      { sense: "Hearing", Terms: 28, Cases: 4, Theorists: 4, Citations: 82 },
+      { sense: "Smell", Terms: 28, Cases: 4, Theorists: 4, Citations: 78 },
+      { sense: "Touch", Terms: 28, Cases: 4, Theorists: 4, Citations: 80 },
+      { sense: "Sight", Terms: 28, Cases: 4, Theorists: 4, Citations: 90 },
+      { sense: "Taste", Terms: 28, Cases: 4, Theorists: 4, Citations: 75 }
     ],
     sankey: [
       // Sense → four-layer structure
@@ -1516,7 +1519,24 @@ const EMBEDDED_DATA = {
       { source: "Immortal Elixir", target: "Peach Banquet", value: 2 },
       { source: "Ginseng Fruit", target: "Great Immortal Zhenyuan", value: 2 },
       { source: "Vegetarian Meal", target: "Daily Cultivation", value: 2 },
-      { source: "Demonic Food", target: "Tang Sanzang’s Flesh", value: 2 }
+      { source: "Demonic Food", target: "Tang Sanzang’s Flesh", value: 2 },
+      // W550: Time/Space/Smell/Touch term-to-case links (close the three-layer flow)
+      { source: "Cyclic Structure", target: "Reincarnation Cycle", value: 2 },
+      { source: "Linear Structure", target: "The Journey West", value: 2 },
+      { source: "Eternal Structure", target: "Five Hundred Years Under the Mountain", value: 2 },
+      { source: "Instant Structure", target: "Somersault Cloud", value: 2 },
+      { source: "Vertical Structure", target: "Heaven and the Underworld", value: 2 },
+      { source: "Horizontal Structure", target: "Ten-Thousand-Li March", value: 2 },
+      { source: "Closed Structure", target: "The Bottomless Pit", value: 2 },
+      { source: "Open Structure", target: "Flower-Fruit Mountain", value: 2 },
+      { source: "Immortal Aura", target: "Peach Banquet", value: 2 },
+      { source: "Demonic Wind", target: "Yellow Wind Demon", value: 2 },
+      { source: "Smoke and Fire", target: "Flaming Mountain", value: 2 },
+      { source: "Medicinal Aroma", target: "Purple-Gold Red Gourd", value: 2 },
+      { source: "Golden Fillet", target: "The Tightening Spell", value: 2 },
+      { source: "Weapons", target: "Nine-Toothed Rake", value: 2 },
+      { source: "Skin", target: "Thorn Ridge", value: 2 },
+      { source: "Ritual Artifact", target: "Purple-Gold Bells", value: 2 }
     ],
     timeline: [
       { Topic: "W161", Sense: "Time", Theorists: "Augustine/Heidegger/Ricoeur/Bakhtin", Created: "2026-07-28", Era: "4th–20th century CE", eraStart: 4, eraEnd: 1990 },

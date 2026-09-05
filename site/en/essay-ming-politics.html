@@ -1084,7 +1084,8 @@ td.num, th.num {
         footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
         footer a:hover { text-decoration: underline; }
         .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
-    </style>
+    @media (max-width: 768px){ table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; } }
+</style>
 
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>

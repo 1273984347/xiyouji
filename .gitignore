@@ -115,3 +115,6 @@ xiyouji-agent-web/*.tsbuildinfo
 # 安全审计报告（加密归档·2026-08-09 W412·明文已删除）
 SECURITY-AUDIT-2026-08-09.7z
 SECURITY-AUDIT-2026-08-09.password
+
+# 全站截图审查产物（W550·884MB 截图/切片/报告，本地保留不入库）
+tmpe/

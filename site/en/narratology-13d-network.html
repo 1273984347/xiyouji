@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-S2EwDO8Nu4zFT4ijUr/+EtS6S25+W8orXn6y+3/gn1s=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-wBwtP8ygr0eozvPlxAYdHWjomE7MjJXNG+E/qF7Atog=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
-    <title>Seventeen-Dimension Narratology Network · W191 · Annotated Journey to the West</title>
+    <title>Sixteen-Dimension Narratology Network · W191 · Annotated Journey to the West</title>
     <script src="../static/js/d3.v7.min.js"></script>
+    <script src="../static/js/d3-sankey.min.js"></script>
     <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
     
     
@@ -1309,6 +1310,8 @@ header.hero .meta {
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+
+canvas[class*="link-canvas"] + svg { background: transparent !important; }
 </style>
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
@@ -1329,10 +1332,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </header>
 
     <section class="hero">
-        <p class="breadcrumb"><a href="../index.html">EN Home</a> / <a href="../dashboard.html">Dashboard</a> / Seventeen-Dimension Narratology Network</p>
+        <p class="breadcrumb"><a href="../index.html">EN Home</a> / <a href="../dashboard.html">Dashboard</a> / Sixteen-Dimension Narratology Network</p>
         <p class="kicker">Data Visualization</p>
-        <h1>Seventeen-Dimension Narratology Network</h1>
-        <p class="subtitle">NARRATOLOGY 17-DIMENSION NETWORK</p>
+        <h1>Sixteen-Dimension Narratology Network</h1>
+        <p class="subtitle">NARRATOLOGY 16-DIMENSION NETWORK</p>
     </section>
 
 <main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
@@ -1346,7 +1349,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 </nav>
 
 <div class="kpi-row">
-  <div class="kpi-card"><div class="kpi-value">17</div><div class="kpi-label">Narratology Dimensions</div></div>
+  <div class="kpi-card"><div class="kpi-value">16</div><div class="kpi-label">Narratology Dimensions</div></div>
   <div class="kpi-card"><div class="kpi-value">64</div><div class="kpi-label">Related Theorists</div></div>
   <div class="kpi-card"><div class="kpi-value">28</div><div class="kpi-label">Dimension Links</div></div>
   <div class="kpi-card"><div class="kpi-value">7</div><div class="kpi-label">Dimension Categories</div></div>
@@ -1356,23 +1359,23 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <!-- Section 1: 概览 -->
 <section class="section" id="overview">
-  <h2 class="section-title">I · Thirteen-Dimension Narratology Framework Overview</h2>
-  <div class="section-sub">OVERVIEW: 13-DIMENSION NARRATOLOGY FRAMEWORK</div>
+  <h2 class="section-title">I · Sixteen-Dimension Narratology Framework Overview</h2>
+  <div class="section-sub">OVERVIEW: 16-DIMENSION NARRATOLOGY FRAMEWORK</div>
   <div class="definition">
-    <strong>Definition:</strong>The thirteen-dimension narratology network integrates the W161–W174 twelve-dimension narratology topics with the four new W182–W185 dimensions (Affective Narratology, Historical Narratology, Meta-Narratology, Unreliable Narration), dividing the narratological study of Journey to the West into sixteen interrelated dimensions grouped under seven categories: Seven-Sense Narratology (Time/Space/Auditory/Olfactory/Tactile/Visual/Gustatory), Textual Narratology (Intertext/Rhetoric/Cognitive), Gender Narratology, Cultural Narratology, Affective Narratology, Historical Narratology, and Meta-Narratology (Metanarrative/Unreliable). It builds on the W168 Six-Senses Narratology and the W175 Twelve-Dimension Narratology to realize the theoretical expansion "seven senses → twelve dimensions → thirteen dimensions", constructing a complete narratological analysis network covering space-time, the senses, intertextuality, rhetoric, cognition, gender, the postcolonial, affect, history, and metanarrative.
+    <strong>Definition:</strong>The thirteen-dimension narratology network integrates the W161–W174 twelve-dimension narratology topics with the four new W182–W185 dimensions (Affective Narratology, Historical Narratology, Meta-Narratology, Unreliable Narration), dividing the narratological study of Journey to the West into sixteen interrelated dimensions grouped under seven categories: Seven-Sense Narratology (Time/Space/Auditory/Olfactory/Tactile/Visual/Gustatory), Textual Narratology (Intertext/Rhetoric/Cognitive), Gender Narratology, Cultural Narratology, Affective Narratology, Historical Narratology, and Meta-Narratology (Metanarrative/Unreliable). It builds on the W168 Six-Senses Narratology and the W175 Twelve-Dimension Narratology to realize the theoretical expansion "seven senses → twelve dimensions → sixteen dimensions", constructing a complete narratological analysis network covering space-time, the senses, intertextuality, rhetoric, cognition, gender, the postcolonial, affect, history, and metanarrative.
   </div>
   <div class="dims-grid" id="dims-grid"></div>
 </section>
 
 <!-- Section 2: 力导向图 -->
 <section class="section" id="force">
-  <h2 class="section-title alt">II · Thirteen-Dimension Narratology Force-Directed Graph</h2>
+  <h2 class="section-title alt">II · Sixteen-Dimension Narratology Force-Directed Graph</h2>
   <div class="section-sub">FORCE-DIRECTED GRAPH: 16 DIMENSIONS &amp; 28 INTER-DIMENSION EDGES</div>
   <div class="definition">
     <strong>Definition:</strong>The force-directed graph takes the sixteen narratology dimensions as nodes; node color distinguishes the seven categories (seven-sense steel blue / textual olive green / gender twilight purple / cultural ochre orange / affective vermilion / historical deep chestnut / metanarrative deep indigo), and node size reflects academic value. Edges between dimensions are labeled with relation type (Spatio-Sensory / Theoretical-Textual / Cross-Domain), and edge thickness corresponds to connection strength. It reveals the internal structure of thirteen-dimension narratology — the seven-sense dimensions cluster tightly, the textual-theoretical dimensions connect laterally, and the four new W182–W185 dimensions form a vertical chain "Affective → Historical → Metanarrative → Unreliable".
   </div>
   <div class="chart-block">
-    <div class="chart-title">Thirteen-Dimension Narratology Force-Directed Graph (16 dimension nodes + 28 edges · draggable)</div>
+    <div class="chart-title">Sixteen-Dimension Narratology Force-Directed Graph (16 dimension nodes + 28 edges · draggable)</div>
     <div class="chart-caption">Node color: dimension category · node size = academic impact · edge color = relation type · edge thickness = connection strength</div>
     <svg id="chart-force" class="chart-svg" width="100%" height="680"></svg>
     <div class="legend-row" id="force-legend"></div>
@@ -1396,7 +1399,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <!-- Section 4: 雷达图 -->
 <section class="section" id="radar">
-  <h2 class="section-title">IV · Thirteen-Dimension Narratology Radar Chart (4 Metrics)</h2>
+  <h2 class="section-title">IV · Sixteen-Dimension Narratology Radar Chart (4 Metrics)</h2>
   <div class="section-sub">RADAR: 16 DIMENSIONS × 4 METRICS</div>
   <div class="definition">
     <strong>Definition:</strong>The radar chart evaluates each narratology dimension on four metrics: theoretical depth (maturity of the theoretical system), JTTW application (coverage of Journey to the West textual analysis), term count (size of the core terminology), and academic impact (research contribution and influence). The larger the radar area, the stronger the dimension’s overall standing in the thirteen-dimension narratology framework. Intertextuality (Intertext), Temporal Narratology (Time), and Unreliable Narration perform most strongly overall, while the tactile and olfactory dimensions are emerging growth points.
@@ -1426,7 +1429,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <!-- Section 6: 汇总表 -->
 <section class="section" id="summary">
-  <h2 class="section-title alt-2">VI · Thirteen-Dimension Narratology Full Summary Table</h2>
+  <h2 class="section-title alt-2">VI · Sixteen-Dimension Narratology Full Summary Table</h2>
   <div class="section-sub">SUMMARY: 16-DIMENSION NARRATOLOGY TABLE</div>
   <div class="definition">
     <strong>Definition:</strong>Summarizes complete data for the sixteen narratology dimensions — number, dimension name, English full name, category, related theorists, term count, application cases, and four-metric scores (theoretical depth / JTTW application / term count / academic impact). Below is the theorist list grouped by school, forming the complete knowledge network of the W186 thirteen-dimension narratology network. Table headers are clickable to sort, corresponding to the W161–W185 narratology topics.
@@ -1603,7 +1606,7 @@ const EMBEDDED_DATA = {
       { 编号: "W183", dim: "Historical", 专题: "Historical Narratology", 类型: "Topic", 类别: "Historical Narratology", academicValue: 9, 日期: "2026-06-22", 日期戳: 20260622, color: "#7a4a2a" },
       { 编号: "W184", dim: "Metanarrative", 专题: "Meta-Narratology", 类型: "Topic", 类别: "Meta-Narratology", academicValue: 8, 日期: "2026-06-29", 日期戳: 20260629, color: "#2a3a5a" },
       { 编号: "W185", dim: "Unreliable", 专题: "Unreliable Narration", 类型: "Topic", 类别: "Meta-Narratology", academicValue: 9, 日期: "2026-07-05", 日期戳: 20260705, color: "#3a4a6a" },
-      { 编号: "W186", dim: "Thirteen-Dim", 专题: "Thirteen-Dimension Narratology Network", 类型: "Visualization", 类别: "Integration", academicValue: 10, 日期: "2026-07-28", 日期戳: 20260728, color: "#8b4513" }
+      { 编号: "W186", dim: "Thirteen-Dim", 专题: "Sixteen-Dimension Narratology Network", 类型: "Visualization", 类别: "Integration", academicValue: 10, 日期: "2026-07-28", 日期戳: 20260728, color: "#8b4513" }
     ]
   }
 };
@@ -2375,7 +2378,7 @@ function renderTimeline(timelineData) {
     .attr('text-anchor', 'middle')
     .attr('font-size', '11px')
     .attr('fill', '#8a7a5a')
-    .text('Creation time (W161 Time → W186 Thirteen-Dimension synthesis · seven-sense foundation → theoretical expansion → cross-fertilization → four new dimensions)');
+    .text('Creation time (W161 Time → W186 Sixteen-Dimension synthesis · seven-sense foundation → theoretical expansion → cross-fertilization → four new dimensions)');
   g.append('text')
     .attr('transform', 'rotate(-90)')
     .attr('x', -innerH / 2).attr('y', -50)

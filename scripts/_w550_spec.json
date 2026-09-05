@@ -1,0 +1,24 @@
+{
+  "batch": "W550",
+  "version": "v2.3.150",
+  "date": "2026-09-05",
+  "title": "全站截图审查与修复闭环 — 234 页两级审查·五类缺陷修复·遗留清单清零",
+  "desc": "全站截图审查与修复闭环",
+  "head_entry": "2026-09-05（v2.3.150 W550 全站截图审查与修复闭环：234 页两级审查·五类缺陷修复·遗留清单清零·产物存 tmpe）",
+  "head_sentence": "W550 全站截图审查与修复闭环——234 页审查·五类缺陷修复·遗留清零",
+  "changelog_body": "\r\n\r\n> **来源**：用户指令三连——「对每个前端页面进行截图审查，不漏掉任何角落」→「先修已坐实的这批，修完重截复查」→「§8.3 遗留清单也解决」。\r\n> - **执行（审查）**：234 页 × 双视口 Playwright 全量采集（0 capture error / 0 pageerror）+ 布局断言 + DOM 文本扫描 + 像素空带扫描 + 19 个初审代理（联络表）+ 11 个复核/终审代理（全分辨率切片）；报告与全部产物存 tmpe/（未 git add）。\r\n> - **执行（修复，站点 HTML 57 文件 + scripts/generate_csp.py）**：① 10 页补 d3-sankey.min.js 引用（桑基空白渲染）② 12 页连线画布可见性（真根因：边绘制在 canvas.link-canvas 层、被后置 svg 不透明背景遮挡——修复 = canvas[class*=\"link-canvas\"] + svg { background: transparent !important; }）③ 9 文件「饼图/环形图/圆环图」标题→矩形树图口径（含 jurisprudence 图 2.2；全站「可见饼图措辞 × 无弧形实现」清零）④ 2 页百分号编码锚文本→英文标题 ⑤ index/dashboard 旧口径 611→615、211→215 ⑥ six-senses 桑基补 16 条「术语→案例」链（三层结构闭环·中英）+ 案例数 5→4 ⑦ relationships 文案对齐图表（88/78·中英）⑧ narratology-13d 中英口径统一 16 维 ⑨ 8 页树图标签亮度自适应填色（浅格深字）⑩ 三处标签裁切（热力矩阵左边距 250 / 势力图边距 150·210 / Power Ranking 横滚容器）⑪ 34 页横向溢出归零（移动端表格块级滚动 / 图表容器横滚 / main overflow-x:clip / 弹幕 track 裁剪）。\r\n> - **执行（工具）**：generate_csp.py W536 写路径守卫根目录误算修复（scripts/→仓库根；重生成模式自 W536 起必然自阻，CI 仅跑只读 --check 故未暴露）。\r\n> - **验证**：修复后重截 50 页 × 双视口；连线 A/B 像素差 12/12 显形；textscan 受影响 67 页溢出 0/134；generate_csp --check 233 页 0 漂移；check_js_syntax / check_structure 通过；verify_delivery 核心全部通过；judge 终审（桑基流带/连线/树图口径/数字/锚文本）全部 yes。\r\n> - **文件**：站点 HTML 57 个、scripts/generate_csp.py、tmpe/（审查与验证产物，未 git add）、六文档 + 旁文档版本行、site 四页脚（本段级联由 batch_cascade.py 执行）。\r\n> - **状态**：已落地（工作区就绪，随本批提交 push origin/main 后对账）。",
+  "milestone_block": "- **v2.3.150 W550 全站截图审查与修复闭环**：234 页 × 双视口审查（0 pageerror）→ 五类缺陷修复（桑基引用 10 页 / 连线画布可见性 12 页 / 树图口径 9 文件 / 编码锚文本 2 页 / 旧口径 615·215）→ 遗留清零（six-senses 桑基补链 16 条 / relationships 文案 88·78 / 13d 口径 16 维 / 树图亮度填色 8 页 / 三处标签裁切 / 34 页溢出归零）→ 修复后重截 + judge 终审全 yes；产物存 tmpe/（未入库）。",
+  "agents_note": "2026-09-05（v2.3.150 W550）全站截图审查与修复闭环：§4.3 补录「扫描关键字须穷尽同义变体」规则（圆环图变体漏网教训）·审查报告与全部验证产物存 tmpe/（未入库）·generate_csp.py W536 写路径守卫根目录误算修复",
+  "file_index_rows": [
+    "| 站点 HTML 57 个（10 桑基引用 + 12 连线可见性 + 9 树图口径 + 2 编码锚文本 + 2 旧口径 + 2 桑基补链 + 2 文案对齐 + 2 13d 口径 + 8 树图填色 + 3 裁切边距 + 34 溢出修复，部分文件重叠） | W550 | 修改·全站截图审查缺陷修复（详见 tmpe/report/shot-review-report.md §八） |",
+    "| scripts/generate_csp.py | W550 | 修改·W536 写路径守卫根目录 scripts/→仓库根（重生成模式自阻 bug 修复） |",
+    "| tmpe/ | W550 | 新增·全站截图审查与验证产物（截图/切片/联络表/报告，未 git add） |",
+    "| CHANGELOG.md | W550 | 新增·W550 版段 + 编号规则上限 W001-W550 |",
+    "| 交接文档.md | W550 | 修改·骨架修复（重建被误吞的「一、当前进度」章）+ 头尾链去重 + prepend W550 |",
+    "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W550 | 修改·版本行同步 v2.3.150（2026-09-05·batch_cascade.py 执行） |",
+    "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W550 | 修改·四页脚链首 prepend W550（batch_cascade.py 执行） |",
+    "| .github/workflows/README.md | W550 | 修改·旁文档同步（batch_cascade.py 执行） |",
+    "| AGENTS.md | W550 | 修改·§4.3 补录变体穷尽规则 + 版本脚注追加 W550 条目 |",
+    "| scripts/output/file-index.md | W550 | 新增·W550 段（本段·batch_cascade.py 执行） |"
+  ]
+}

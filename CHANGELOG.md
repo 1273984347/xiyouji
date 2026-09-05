@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W549），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W550），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.150（2026-09-05）：W550 全站截图审查与修复闭环 — 234 页两级审查·五类缺陷修复·遗留清单清零
+
+> **来源**：用户指令三连——「对每个前端页面进行截图审查，不漏掉任何角落」→「先修已坐实的这批，修完重截复查」→「§8.3 遗留清单也解决」。
+> - **执行（审查）**：234 页 × 双视口 Playwright 全量采集（0 capture error / 0 pageerror）+ 布局断言 + DOM 文本扫描 + 像素空带扫描 + 19 个初审代理（联络表）+ 11 个复核/终审代理（全分辨率切片）；报告与全部产物存 tmpe/（未 git add）。
+> - **执行（修复，站点 HTML 57 文件 + scripts/generate_csp.py）**：① 10 页补 d3-sankey.min.js 引用（桑基空白渲染）② 12 页连线画布可见性（真根因：边绘制在 canvas.link-canvas 层、被后置 svg 不透明背景遮挡——修复 = canvas[class*="link-canvas"] + svg { background: transparent !important; }）③ 9 文件「饼图/环形图/圆环图」标题→矩形树图口径（含 jurisprudence 图 2.2；全站「可见饼图措辞 × 无弧形实现」清零）④ 2 页百分号编码锚文本→英文标题 ⑤ index/dashboard 旧口径 611→615、211→215 ⑥ six-senses 桑基补 16 条「术语→案例」链（三层结构闭环·中英）+ 案例数 5→4 ⑦ relationships 文案对齐图表（88/78·中英）⑧ narratology-13d 中英口径统一 16 维 ⑨ 8 页树图标签亮度自适应填色（浅格深字）⑩ 三处标签裁切（热力矩阵左边距 250 / 势力图边距 150·210 / Power Ranking 横滚容器）⑪ 34 页横向溢出归零（移动端表格块级滚动 / 图表容器横滚 / main overflow-x:clip / 弹幕 track 裁剪）。
+> - **执行（工具）**：generate_csp.py W536 写路径守卫根目录误算修复（scripts/→仓库根；重生成模式自 W536 起必然自阻，CI 仅跑只读 --check 故未暴露）。
+> - **验证**：修复后重截 50 页 × 双视口；连线 A/B 像素差 12/12 显形；textscan 受影响 67 页溢出 0/134；generate_csp --check 233 页 0 漂移；check_js_syntax / check_structure 通过；verify_delivery 核心全部通过；judge 终审（桑基流带/连线/树图口径/数字/锚文本）全部 yes。
+> - **文件**：站点 HTML 57 个、scripts/generate_csp.py、tmpe/（审查与验证产物，未 git add）、六文档 + 旁文档版本行、site 四页脚（本段级联由 batch_cascade.py 执行）。
+> - **状态**：已落地（本批随 W550 提交并 push origin/main）。
 ### v2.3.149（2026-09-05）：W549 复盘报告后记 — WBS 5/5 完成对账与迁移闭环补记
 
 > **来源**：W548 迁移闭环后，用户确认复盘报告需同步更新（§7.2 五项 WBS 此后全部执行完毕）。

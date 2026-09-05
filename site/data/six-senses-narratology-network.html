@@ -2,11 +2,12 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-4RlnRML0dFvw2Db4OsALjpb6/1CTQR11U6+xmcctgo8=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-zH2xt4UuhLbEF/XvEjkwQH7srg+EPoFQxQvupEax8pc=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>六感叙事学关系图谱 · W168 · 详解西游记</title>
     <script src="../static/js/d3.v7.min.js"></script>
+    <script src="../static/js/d3-sankey.min.js"></script>
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
@@ -1239,6 +1240,8 @@ header.hero .meta {
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+
+canvas[class*="link-canvas"] + svg { background: transparent !important; }
 </style>
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
@@ -1274,7 +1277,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <div class="kpi-card"><div class="kpi-value">7</div><div class="kpi-label">感官维度</div></div>
   <div class="kpi-card"><div class="kpi-value">196</div><div class="kpi-label">术语总量（28×7）</div></div>
   <div class="kpi-card"><div class="kpi-value">28</div><div class="kpi-label">理论家数</div></div>
-  <div class="kpi-card"><div class="kpi-value">35</div><div class="kpi-label">西游案例</div></div>
+  <div class="kpi-card"><div class="kpi-value">28</div><div class="kpi-label">西游案例</div></div>
   <div class="kpi-card"><div class="kpi-value">4</div><div class="kpi-label">四层结构</div></div>
 </div>
 
@@ -1283,7 +1286,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <h2 class="section-title">壹 · 六感叙事学概览</h2>
   <div class="section-sub">SIX-SENSES NARRATOLOGY OVERVIEW</div>
   <div class="definition">
-    <strong>定义：</strong>六感叙事学以时间、空间、听觉、嗅觉、触觉、视觉、味觉七大感官维度为坐标，构建《西游记》的感知-叙事映射体系。每个感官维度对应一个专题（W161-W167），下辖 28 个核心术语、4 位理论家、5 个西游案例与 4 层叙事结构。七大感官共同构成「感知—叙事—结构—案例」四层叙事学分析框架。
+    <strong>定义：</strong>六感叙事学以时间、空间、听觉、嗅觉、触觉、视觉、味觉七大感官维度为坐标，构建《西游记》的感知-叙事映射体系。每个感官维度对应一个专题（W161-W167），下辖 28 个核心术语、4 位理论家、4 个西游案例与 4 层叙事结构。七大感官共同构成「感知—叙事—结构—案例」四层叙事学分析框架。
   </div>
   <div class="senses-grid" id="senses-grid"></div>
 </section>
@@ -1390,23 +1393,23 @@ const EMBEDDED_DATA = {
   sixSenses: {
     // 七感官主节点
     senses: [
-      { id: "time", name: "时间叙事学", sense: "时间", color: "#8B4513", 专题: "W161", 理论家数: 4, 术语数: 28, 案例数: 5, 引用度: 85, 理论年代: "公元4世纪-20世纪" },
-      { id: "space", name: "空间叙事学", sense: "空间", color: "#A0522D", 专题: "W162", 理论家数: 4, 术语数: 28, 案例数: 5, 引用度: 88, 理论年代: "1974-1996" },
-      { id: "auditory", name: "听觉叙事学", sense: "听觉", color: "#CD853F", 专题: "W163", 理论家数: 4, 术语数: 28, 案例数: 5, 引用度: 82, 理论年代: "1972-1998" },
-      { id: "olfactory", name: "嗅觉叙事学", sense: "嗅觉", color: "#DAA520", 专题: "W164", 理论家数: 4, 术语数: 28, 案例数: 5, 引用度: 78, 理论年代: "1798-2002" },
-      { id: "tactile", name: "触觉叙事学", sense: "触觉", color: "#B8860B", 专题: "W165", 理论家数: 4, 术语数: 28, 案例数: 5, 引用度: 80, 理论年代: "1945-2008" },
-      { id: "visual", name: "视觉叙事学", sense: "视觉", color: "#D2691E", 专题: "W166", 理论家数: 4, 术语数: 28, 案例数: 5, 引用度: 90, 理论年代: "1972-1994" },
-      { id: "gustatory", name: "味觉叙事学", sense: "味觉", color: "#BC8F8F", 专题: "W167", 理论家数: 4, 术语数: 28, 案例数: 5, 引用度: 75, 理论年代: "1999-2012" }
+      { id: "time", name: "时间叙事学", sense: "时间", color: "#8B4513", 专题: "W161", 理论家数: 4, 术语数: 28, 案例数: 4, 引用度: 85, 理论年代: "公元4世纪-20世纪" },
+      { id: "space", name: "空间叙事学", sense: "空间", color: "#A0522D", 专题: "W162", 理论家数: 4, 术语数: 28, 案例数: 4, 引用度: 88, 理论年代: "1974-1996" },
+      { id: "auditory", name: "听觉叙事学", sense: "听觉", color: "#CD853F", 专题: "W163", 理论家数: 4, 术语数: 28, 案例数: 4, 引用度: 82, 理论年代: "1972-1998" },
+      { id: "olfactory", name: "嗅觉叙事学", sense: "嗅觉", color: "#DAA520", 专题: "W164", 理论家数: 4, 术语数: 28, 案例数: 4, 引用度: 78, 理论年代: "1798-2002" },
+      { id: "tactile", name: "触觉叙事学", sense: "触觉", color: "#B8860B", 专题: "W165", 理论家数: 4, 术语数: 28, 案例数: 4, 引用度: 80, 理论年代: "1945-2008" },
+      { id: "visual", name: "视觉叙事学", sense: "视觉", color: "#D2691E", 专题: "W166", 理论家数: 4, 术语数: 28, 案例数: 4, 引用度: 90, 理论年代: "1972-1994" },
+      { id: "gustatory", name: "味觉叙事学", sense: "味觉", color: "#BC8F8F", 专题: "W167", 理论家数: 4, 术语数: 28, 案例数: 4, 引用度: 75, 理论年代: "1999-2012" }
     ],
     nodes: [
       // 7 个感官主节点
-      { id: "time", name: "时间叙事学", sense: "时间", color: "#8B4513", 专题: "W161", 理论家数: 4, 术语数: 28, 案例数: 5 },
-      { id: "space", name: "空间叙事学", sense: "空间", color: "#A0522D", 专题: "W162", 理论家数: 4, 术语数: 28, 案例数: 5 },
-      { id: "auditory", name: "听觉叙事学", sense: "听觉", color: "#CD853F", 专题: "W163", 理论家数: 4, 术语数: 28, 案例数: 5 },
-      { id: "olfactory", name: "嗅觉叙事学", sense: "嗅觉", color: "#DAA520", 专题: "W164", 理论家数: 4, 术语数: 28, 案例数: 5 },
-      { id: "tactile", name: "触觉叙事学", sense: "触觉", color: "#B8860B", 专题: "W165", 理论家数: 4, 术语数: 28, 案例数: 5 },
-      { id: "visual", name: "视觉叙事学", sense: "视觉", color: "#D2691E", 专题: "W166", 理论家数: 4, 术语数: 28, 案例数: 5 },
-      { id: "gustatory", name: "味觉叙事学", sense: "味觉", color: "#BC8F8F", 专题: "W167", 理论家数: 4, 术语数: 28, 案例数: 5 },
+      { id: "time", name: "时间叙事学", sense: "时间", color: "#8B4513", 专题: "W161", 理论家数: 4, 术语数: 28, 案例数: 4 },
+      { id: "space", name: "空间叙事学", sense: "空间", color: "#A0522D", 专题: "W162", 理论家数: 4, 术语数: 28, 案例数: 4 },
+      { id: "auditory", name: "听觉叙事学", sense: "听觉", color: "#CD853F", 专题: "W163", 理论家数: 4, 术语数: 28, 案例数: 4 },
+      { id: "olfactory", name: "嗅觉叙事学", sense: "嗅觉", color: "#DAA520", 专题: "W164", 理论家数: 4, 术语数: 28, 案例数: 4 },
+      { id: "tactile", name: "触觉叙事学", sense: "触觉", color: "#B8860B", 专题: "W165", 理论家数: 4, 术语数: 28, 案例数: 4 },
+      { id: "visual", name: "视觉叙事学", sense: "视觉", color: "#D2691E", 专题: "W166", 理论家数: 4, 术语数: 28, 案例数: 4 },
+      { id: "gustatory", name: "味觉叙事学", sense: "味觉", color: "#BC8F8F", 专题: "W167", 理论家数: 4, 术语数: 28, 案例数: 4 },
       // 理论家节点（每个感官 4 个，共 28 个）
       // 时间叙事学理论家
       { id: "t1", name: "奥古斯丁", parent: "time", type: "theorist" },
@@ -1462,13 +1465,13 @@ const EMBEDDED_DATA = {
       { source: "gustatory", target: "g1" }, { source: "gustatory", target: "g2" }, { source: "gustatory", target: "g3" }, { source: "gustatory", target: "g4" }
     ],
     radar: [
-      { sense: "时间", 术语数: 28, 案例数: 5, 理论家数: 4, 引用度: 85 },
-      { sense: "空间", 术语数: 28, 案例数: 5, 理论家数: 4, 引用度: 88 },
-      { sense: "听觉", 术语数: 28, 案例数: 5, 理论家数: 4, 引用度: 82 },
-      { sense: "嗅觉", 术语数: 28, 案例数: 5, 理论家数: 4, 引用度: 78 },
-      { sense: "触觉", 术语数: 28, 案例数: 5, 理论家数: 4, 引用度: 80 },
-      { sense: "视觉", 术语数: 28, 案例数: 5, 理论家数: 4, 引用度: 90 },
-      { sense: "味觉", 术语数: 28, 案例数: 5, 理论家数: 4, 引用度: 75 }
+      { sense: "时间", 术语数: 28, 案例数: 4, 理论家数: 4, 引用度: 85 },
+      { sense: "空间", 术语数: 28, 案例数: 4, 理论家数: 4, 引用度: 88 },
+      { sense: "听觉", 术语数: 28, 案例数: 4, 理论家数: 4, 引用度: 82 },
+      { sense: "嗅觉", 术语数: 28, 案例数: 4, 理论家数: 4, 引用度: 78 },
+      { sense: "触觉", 术语数: 28, 案例数: 4, 理论家数: 4, 引用度: 80 },
+      { sense: "视觉", 术语数: 28, 案例数: 4, 理论家数: 4, 引用度: 90 },
+      { sense: "味觉", 术语数: 28, 案例数: 4, 理论家数: 4, 引用度: 75 }
     ],
     sankey: [
       // 感官 → 四层结构
@@ -1512,7 +1515,24 @@ const EMBEDDED_DATA = {
       { source: "仙丹", target: "蟠桃宴", value: 2 },
       { source: "人参果", target: "镇元大仙", value: 2 },
       { source: "素斋", target: "日常修行", value: 2 },
-      { source: "妖食", target: "唐僧肉", value: 2 }
+      { source: "妖食", target: "唐僧肉", value: 2 },
+      // W550 补全：时间/空间/嗅觉/触觉 术语→案例（三层结构闭环）
+      { source: "循环结构", target: "轮回转世", value: 2 },
+      { source: "线性结构", target: "取经历程", value: 2 },
+      { source: "永恒结构", target: "五行山五百年", value: 2 },
+      { source: "瞬间结构", target: "筋斗云", value: 2 },
+      { source: "垂直结构", target: "天宫地府", value: 2 },
+      { source: "水平结构", target: "西行万里", value: 2 },
+      { source: "封闭结构", target: "无底洞", value: 2 },
+      { source: "开放结构", target: "花果山", value: 2 },
+      { source: "仙气", target: "蟠桃宴", value: 2 },
+      { source: "妖风", target: "黄风怪", value: 2 },
+      { source: "烟火", target: "火焰山", value: 2 },
+      { source: "药香", target: "紫金红葫芦", value: 2 },
+      { source: "金箍", target: "紧箍咒", value: 2 },
+      { source: "兵器", target: "九齿钉钯", value: 2 },
+      { source: "肌肤", target: "荆棘岭", value: 2 },
+      { source: "法器", target: "紫金铃", value: 2 }
     ],
     timeline: [
       { 专题: "W161", 感官: "时间", 理论家: "奥古斯丁/海德格尔/利科/巴赫金", 创建: "2026-07-28", 理论年代: "公元4世纪-20世纪", 年代起点: 4, 年代终点: 1990 },
