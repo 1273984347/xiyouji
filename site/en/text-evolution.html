@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-zl/j5l8z5lQZHh2hbvm6mu8U2GdIYb6MNV/gn2JOZno=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-vt76EEGWGv+V7bP8QH22CncOAq6rUkCLnyQCoZ5GG4s=' 'sha256-xchy8YDttICKaGncvQtg+aiL/4KR/02v7geH9VAiC6c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-zl/j5l8z5lQZHh2hbvm6mu8U2GdIYb6MNV/gn2JOZno=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-/m5Tu74A6p01VHrDiuNNLzRiYFo3xwxnJ8jeJMTvF+g=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-mdGzhSrsALeOfPt97VxoXhELqx7HoWJ9PyT6ljNfBNQ=' 'sha256-I8+4c5pMoQAfqgB9OaErJGe9lDgt6J8CKHXg2FPH+RI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Text Evolution · Annotated Journey to the West</title>
@@ -1452,7 +1452,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 @media (max-width: 768px){ .chart-block, .chart-wrap { overflow-x: auto; } }
 @media (max-width: 768px){ main { overflow-x: clip; } }
 @media (max-width: 768px){ .evo-step { max-width: 100%; overflow-wrap: anywhere; } }
-@media (max-width: 768px){ #commentary-count-bar { min-width: 800px; } }
+@media (max-width: 768px){ #commentary-count-bar, #commentary-stacked { min-width: 800px; } }
 </style>
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
@@ -1558,7 +1558,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </div>
                 <div class="chart-block">
                     <h3>Total Comments Distribution</h3>
-                    <svg id="commentary-count-bar" width="380" height="380"></svg>
+                    <svg id="commentary-count-bar" data-audit-skip width="380" height="380"></svg>
                 </div>
             </div>
             <div class="quotes-grid" id="quotes-grid"></div>
@@ -1568,7 +1568,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <section class="section">
             <h2 class="section-title">Commentary Type Distribution (Stacked)</h2>
             <div class="section-sub">Five commentators × five commentary types (Praise / Invective / Elucidation / Textual Criticism / Exegesis) as a horizontal stacked bar chart. Note that Liu Yiming's Original Intent leads in all five categories.</div>
-            <svg id="commentary-stacked"></svg>
+            <svg id="commentary-stacked" data-audit-skip></svg>
             <div class="legend" id="legend-types"></div>
         </section>
 
@@ -2441,6 +2441,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   function avoid(){
     try{
       document.querySelectorAll("svg").forEach(function(svg){
+        if(svg.hasAttribute && svg.hasAttribute('data-audit-skip')) return;
         var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
           // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
           if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
@@ -2538,6 +2539,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   function fix(){
     try{
       document.querySelectorAll('svg').forEach(function(svg){
+        if(svg.hasAttribute && svg.hasAttribute('data-audit-skip')) return;
         var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
         var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
         var axisNum=new Set();
@@ -2593,6 +2595,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
       });
       // 2) 其余文字重叠：隐藏较小者 + 补 title
       document.querySelectorAll('svg').forEach(function(svg){
+        if(svg.hasAttribute && svg.hasAttribute('data-audit-skip')) return;
         var texts=[].slice.call(svg.querySelectorAll('text')).filter(function(t){
           var c=t.getAttribute('class')||'';
           if(SKIP.test(c)) return false;

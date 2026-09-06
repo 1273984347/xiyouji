@@ -1,0 +1,28 @@
+{
+  "batch": "W553",
+  "version": "v2.3.153",
+  "date": "2026-09-06",
+  "title": "W553 低危视觉细节批次 — 方案A四项标签缺陷修复·audit补丁幻影隐藏根因·data-audit-skip豁免机制",
+  "desc": "低危视觉细节批次",
+  "head_entry": "2026-09-06（v2.3.153 W553 低危视觉细节批次：A-1..A-4 四项标签缺陷修复·实证 W550 audit 补丁 contentavoid getBBox 局部坐标系幻影隐藏根因·建立 data-audit-skip 图表级豁免机制·judge 两轮复核全过）",
+  "head_sentence": "W553 低危视觉细节批次——方案A四项修复·幻影隐藏根因·豁免机制",
+  "changelog_body": "\r\n\r\n> **来源**：W552 入档的三项可选改进批次计划（docs/superpowers/plans/2026-09-06-w552-three-optional-batches-plans.md）方案 A（建议批号 W553）当批执行——四项「机器门禁拦不住」的低危视觉缺陷，逐项「探针取证→修复→机判→judge 复核」闭环。\r\n> - **根因发现（本批最大产出）**：A-1 取证实证 W550 批量部署的 audit-contentavoid 补丁用 `getBBox()`（元素局部坐标系）比较不同 `<g>` 内文本 bbox——所有轴刻度文本局部 bbox 几乎相同 → 大量幻影重叠 → `display:none` 隐藏未重叠标签（text-evolution 单页隐藏 65 个，countBar 16 文本被藏 8）。「行标签缺失」类缺陷的真正根因是补丁遮蔽而非布局；monster-female 页 7 个 fate 标签零尺寸幽灵 rect 同源。\r\n> - **处置（data-audit-skip 豁免机制）**：本批修复的 5 张图表 svg 挂 `data-audit-skip`，4 个隐藏型补丁（axisfix4 / contentavoid / labelavoid / labelavoid-all）在 svg 级循环加一行守卫跳过；旋转型补丁（axisfix1/2/3）不动，保持 W550 已验收外观。**系统性风险登记**：其余约 228 页的 contentavoid 幻影隐藏仍维持 W550 验收态，全站级「getBBox→getBoundingClientRect」修复留待方案 B 全站复审时统一评估。\r\n> - **A-1 en/text-evolution.html**：count-bar/stacked 挂豁免 + 移动端 min-width 800 滚动容器扩展到 stacked（对齐 W550 Power Ranking 先例）——375px 视口两图 5/5 行名全部可见且容器可横向滚动（修复前仅 1/5）。\r\n> - **A-2 en/intertextuality-network.html**：节点标签 >14 字符按词界折行（≤16 字符/行，不设上限——judge 首轮证 3 行上限丢 \"Temple\" 末词）+ `<title>` 全名保留 + forceCollide 24→34 + sim.end 收敛后相交对上移让位兜底——12 标签两两零相交，4 行长名 \"Biography of the Tripitaka Master of Great Ci'en Temple\" 完整显示。\r\n> - **A-3 monster-female 中英两页**：fate 标签短文案（EN 去 \"Destroyed by (the )\" 前缀 / ZH 去「消灭」尾）+ 超长折两行（tspan 显式继承 text 的 x——tspan x=0 在 x 属性定位 text 中是 g 原点绝对坐标，首轮实证四标签塌缩）+ 同回同结局去重（蜘蛛精七姐妹保留首个，title 全名）+ 行内水平不足 8px 错行；名字标签同回纵向最小间距 13px + 整组居中（judge 首轮证七姐妹名字交叠）——中英 fate 间距 ≥8px 全过、名字标签 14+14 两两零相交。\r\n> - **A-4 en/social-media.html**：renderFitChart 左边距自适应——svg 内隐藏探针 text `getComputedTextLength()` 量测最长行标（canvas.measureText 字体拼装比真实渲染窄 ~9%，首轮实证漏判）——margin.left 150→173，\"White Dragon Horse\" 完整可见。\r\n> - **验证（当批实跑）**：scripts/_w553_probe.js（新建，6 项断言）ALL PASS；check_screenshot_gates 定向 8 页 FAIL 0；generate_csp --check 233 页 1189 哈希 0 漂移；verify_delivery 核心全绿（含第 24 门禁）；judge 视觉复核两轮（12 图首轮 → A-2/A-3 返工 → 复核全 PASS，残留 3 条不阻断小瑕疵记录于 CHANGELOG 存档）。\r\n> - **文件**：site/en/text-evolution.html、site/en/intertextuality-network.html、site/en/monster-female-network.html、site/data/monster-female-network.html、site/en/social-media.html（5 页 210 行，194+/16-）；scripts/_w553_probe.js、scripts/_w553_shots.js（新建，验收探针 + 前后截图采集，`_` 前缀不入门禁）；六文档 + 旁文档版本行 + site 四页脚（级联由 batch_cascade.py 执行）；AGENTS §4.3 补录 SVG 标签量测四坑。\r\n> - **状态**：已落地（本批随 W553 提交并 push origin/main）。",
+  "milestone_block": "- **v2.3.153 W553 低危视觉细节批次**：方案 A 四项标签缺陷修复（移动端行标签/力导向折行/时间线 fate 短文案/自适应左边距）全过探针与 judge 双验收；实证 W550 audit 补丁 contentavoid getBBox 局部坐标系幻影隐藏根因（单页隐藏 65 文本），建立 data-audit-skip 图表级豁免机制。",
+  "agents_note": "2026-09-06（v2.3.153 W553）低危视觉细节批次：§4.3 补录 SVG 标签量测四坑（getBBox 局部坐标系跨组比较幻影重叠 / tspan 显式 x 在 x 定位 text 中是 g 原点绝对坐标 / selection.text() 抹子元素 / canvas 量测比真实渲染窄 9% 须 svg 探针 getComputedTextLength）·data-audit-skip 豁免机制",
+  "file_index_rows": [
+    "| site/en/text-evolution.html | W553 | 修改·A-1 行标签修复（2 svg 挂 data-audit-skip + 3 隐藏型补丁守卫 + min-width 滚动容器扩展） |",
+    "| site/en/intertextuality-network.html | W553 | 修改·A-2 力导向标签折行+title+collide 34+收敛让位（svg 挂豁免 + 3 补丁守卫） |",
+    "| site/en/monster-female-network.html | W553 | 修改·A-3 fate 短文案/折行/去重/错行 + 名字标签纵向分散（svg 挂豁免 + 4 补丁守卫） |",
+    "| site/data/monster-female-network.html | W553 | 修改·A-3 中文镜像同步（同上） |",
+    "| site/en/social-media.html | W553 | 修改·A-4 行标 svg 探针量测自适应左边距（150→173） |",
+    "| scripts/_w553_probe.js | W553 | 新增·方案 A 四项验收探针（a1 行标签可见/a2 标签两两零相交/a3 fate 间距+名字标签/a4 行标自适应） |",
+    "| scripts/_w553_shots.js | W553 | 新增·修复前后截图对比采集（配 git worktree 基线） |",
+    "| AGENTS.md | W553 | 修改·§4.3 补录 SVG 标签量测四坑 + 版本脚注 |",
+    "| CHANGELOG.md | W553 | 新增·W553 版段 + 编号规则上限 W001-W553 |",
+    "| 交接文档.md | W553 | 修改·头尾「最后更新」prepend W553 + 里程碑块 + HEAD 句；头链 W552/W551 双写脏链清洗（batch_cascade.py 执行） |",
+    "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W553 | 修改·版本行同步 v2.3.153（batch_cascade.py 执行） |",
+    "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W553 | 修改·四页脚链首 prepend W553（batch_cascade.py 执行） |",
+    "| .github/workflows/README.md | W553 | 修改·旁文档同步（batch_cascade.py 执行） |",
+    "| scripts/output/file-index.md | W553 | 新增·W553 段（本段·batch_cascade.py 执行） |"
+  ]
+}

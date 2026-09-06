@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-yXhh+xQz2XKYpNMrRYcjV3U+3IMSi7gruiQGNObzHr8=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-xchy8YDttICKaGncvQtg+aiL/4KR/02v7geH9VAiC6c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-JueaRcp097opLYVynAKrDPJ3RhF2wV82EZIUm4bvTzo=' 'sha256-nRjbac60+71X7qCihZTYrhSLkLwRXcCNdMcXCWQ1OTc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-/m5Tu74A6p01VHrDiuNNLzRiYFo3xwxnJ8jeJMTvF+g=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-k9b4nad2XW00swvJQZe0rFweHpXrftK4/7JiypfZ4FA=' 'sha256-I8+4c5pMoQAfqgB9OaErJGe9lDgt6J8CKHXg2FPH+RI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪女性群体关系图 · W181 · 详解西游记</title>
@@ -1280,7 +1280,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
   <div class="chart-block">
     <div class="chart-title">女妖出场回目与命运时间线</div>
     <div class="chart-caption">X 轴：回目 · 节点大小=综合分 · 颜色=群体类型 · hover 显示命运归途</div>
-    <svg id="chart-timeline" class="chart-svg" width="100%" height="540"></svg>
+    <svg id="chart-timeline" class="chart-svg" data-audit-skip width="100%" height="540"></svg>
     <div class="legend-row" id="timeline-legend"></div>
   </div>
 </section>
@@ -2110,6 +2110,24 @@ function renderTimeline(timelineData) {
     .attr('font-weight', '600')
     .attr('fill', d => d.color)
     .text(d => d.名字);
+  // W553 A-3 复核修复：同回节点（蜘蛛精七姐妹同回）名字标签纵向最小间距 13px，整组居中避免漂移
+  {
+    const nameGroups = {};
+    g.selectAll('.text-label').each(function(d) {
+      (nameGroups[d.回目] = nameGroups[d.回目] || []).push({ el: this, y: yScale(d.综合分) - 18 });
+    });
+    Object.values(nameGroups).forEach(function(group) {
+      if (group.length < 2) return;
+      const items = group.map((o) => ({ el: o.el, y: o.y, oy: o.y })).sort((a, b) => a.y - b.y);
+      for (let i = 1; i < items.length; i++) {
+        if (items[i].y - items[i - 1].y < 13) items[i].y = items[i - 1].y + 13;
+      }
+      const oCenter = (items[0].oy + items[items.length - 1].oy) / 2;
+      const nCenter = (items[0].y + items[items.length - 1].y) / 2;
+      const shift = oCenter - nCenter;
+      items.forEach((o) => o.el.setAttribute('y', o.y + shift));
+    });
+  }
 
   // 回目标签（X 轴下方）
   g.selectAll('.chapter-label')
@@ -2125,6 +2143,11 @@ function renderTimeline(timelineData) {
     .text(d => '第' + d.回目 + '回');
 
   // 命运标签（节点下方第二行）
+  // W553 A-3：短文案（去结尾「消灭」）+ 同回同命运去重 + 行内水平不足时错行；title 保留完整命运。
+  // 隐藏型 audit 补丁对本 svg 由 data-audit-skip 跳过。
+  const fateSeen = {};
+  const fateRows = [{ y: innerH + 40, right: -1e9 }, { y: innerH + 54, right: -1e9 }];
+  const fateEls = [];
   g.selectAll('.fate-label')
     .data(sorted)
     .enter()
@@ -2135,7 +2158,25 @@ function renderTimeline(timelineData) {
     .attr('text-anchor', 'middle')
     .attr('font-size', '8px')
     .attr('fill', '#8a7a5a')
-    .text(d => d.命运);
+    .each(function(d) {
+      const el = d3.select(this);
+      const short = d.命运.replace(/消灭$/, '');
+      const key = d.回目 + '|' + short;
+      if (fateSeen[key]) { el.style('display', 'none'); return; }
+      fateSeen[key] = true;
+      el.text(short);
+      el.append('title').text(d.名字 + ' — ' + d.命运);
+      fateEls.push(this);
+    });
+  fateEls.forEach(function(t) {
+    const bb = t.getBBox(); // 同一父 g 坐标系内可比
+    const cx = bb.x + bb.width / 2;
+    const half = bb.width / 2;
+    let row = fateRows.find(function(r) { return cx - half >= r.right + 8; });
+    if (!row) row = fateRows[0];
+    t.setAttribute('y', row.y);
+    row.right = cx + half;
+  });
 
   // X 轴
   g.append('g')
@@ -2317,6 +2358,7 @@ main();
 (function(){
   function avoid(){
     document.querySelectorAll("svg").forEach(function(svg){
+      if(svg.hasAttribute && svg.hasAttribute('data-audit-skip')) return;
       var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){var r=t.getBoundingClientRect();return r.width>0&&r.height>0;});
       var R=ts.map(function(t){return t.getBoundingClientRect();});
       for(var i=0;i<ts.length;i++)for(var j=i+1;j<ts.length;j++){
@@ -2438,6 +2480,7 @@ main();
   function avoid(){
     try{
       document.querySelectorAll("svg").forEach(function(svg){
+        if(svg.hasAttribute && svg.hasAttribute('data-audit-skip')) return;
         var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
           // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
           if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
@@ -2535,6 +2578,7 @@ main();
   function fix(){
     try{
       document.querySelectorAll('svg').forEach(function(svg){
+        if(svg.hasAttribute && svg.hasAttribute('data-audit-skip')) return;
         var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
         var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
         var axisNum=new Set();
@@ -2590,6 +2634,7 @@ main();
       });
       // 2) 其余文字重叠：隐藏较小者 + 补 title
       document.querySelectorAll('svg').forEach(function(svg){
+        if(svg.hasAttribute && svg.hasAttribute('data-audit-skip')) return;
         var texts=[].slice.call(svg.querySelectorAll('text')).filter(function(t){
           var c=t.getAttribute('class')||'';
           if(SKIP.test(c)) return false;
