@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W553），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W554），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,19 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.154（2026-09-06）：W554 方案B阶段一全站复审管线 + 方案C数据内容审计全量 — 98组就绪·审计报告入档·8项修复清单
+
+> **来源**：W552 三方案计划的方案 B/C 执行批（方案 A 已于 W553 完成）。方案 B 完整 98 组 judge 审查（估 2700 万 token）超单 session 容量，本批交付其全部基建并端到端验证；方案 C 全量完成。
+> - **B 阶段一**：`scripts/_w554_review.js` 采集（232 页桌面 fullPage·file://·http(s) 拦截·**滚动穿透触发 reveal-in**）→ 切片 967 张（1280×1600 步进 1500）→ 分组 98 组（`scripts/output/review-pass3/groups.json` 入库）。试审组 1 组端到端验证（约 28 万 token/组量级）。
+> - **采集伪影教训（G4 同源二犯）**：首版无滚动穿透，试审判 curated.html「整屏空白 FAIL」，复核实证为 reveal-in 未触发伪影——补逐屏滚动后重采 232 页，同区域完整渲染，终判 3 页全 pass。教训固化进采集脚本（与 W551 G4「须逐元素触发」同源：**fullPage 截图不触发 IntersectionObserver，凡含 reveal-in 的页面截图前必须滚动穿透**）。
+> - **B 剩余量（登记恢复）**：97 组 judge 审查待做（恢复指令见 plans/2026-09-06-w554-content-audit-and-b-pipeline.md §B.5，含验收口径 verdicts.jsonl==232 页）；`.review-tmp/` 截图/切片基线保留复用（gitignored 勿删）。
+> - **C-L1 站内自洽**：`scripts/check_content_consistency.py` 新建（--self-test 对 W550 三案例负样本回放 4/4 PASS + 好样本零误报）；230 页全量扫描出 5 条，逐条人工裁决：**1 真矛盾**（relationships.html 同页「唐僧-孙悟空 88 回」vs「90 回」，页面自身 EMBEDDED weight=90，88 为旧口径残留）+ 4 误报（提取窗口歧义，逐条有据）。
+> - **C-L2 站-dataset 对账**：同名映射修正为 `dataset/<X>.json`（计划假设 scripts/output/data 同名实测仅 1 页）；17 页 EMBEDDED∩dataset 逐字段对账 **0 漂移**（其余 21 页为复杂 JS 字面量静态解析未成功，口径限制注明）。
+> - **C-L3-a 英译忠实度**：7 essays（36 篇等距 20%）+ 2 characters，共 121 段落对 + 33 事实声明：1 fail（ming-intellectual-history：客/主标注对调+术语表锚标 22↔实表 14）+ 7 warn + 1 pass；**机械 grep 复核实锤 4 类硬伤**——essay-ming-military 汉字实体错植（`&#23453;`宝 应为 `&#23663;`屯、`&#21464;`变 应为 `&#21496;`司×2）、wukong 页「行者由观音赐名」（原著第 14 回唐僧所赐）、bailongma 页「accidentally 纵火」与基准相悖且「全队极值」被自家 radar 数据证伪。系统性结论：EN 站为自注「摘要译介」分层，整节漏译是范围声明；真缺陷集中在**汉字实体错植/名实归属/锚标数字不符**三类。
+> - **C-L3-b 硬清单**：① en/81-hardships.html **重缺陷**——EMBEDDED 清单空数组 + fetch 指向 site 外路径，file:// 与 Pages 部署态双断，截图实锤「No matches, or data not loaded / Showing 0/0 trials」（违反 EMBEDDED 回退铁律；ZH 镜像正常）；② 年代抽验 2 项（2200+ 口径模糊 WARN）；③ KPI（615/86/55/100）站内自洽 PASS。
+> - **产出**：审计报告 `docs/superpowers/plans/2026-09-06-w554-content-audit-and-b-pipeline.md`（含 8 项修复清单 F1-F8 转修复批次）；L1 是否挂 verify_delivery 第 25 门禁**留待用户确认**，本批不挂载不阻断。**偏差声明**：L3-a 双模型一致率未执行（单模型判读 + 高危声明机械复核全属实）。
+> - **文件**：scripts/check_content_consistency.py、scripts/_w554_review.js、scripts/_w555_l3b.py（新建）；scripts/output/review-pass3/groups.json + verdicts-pilot.jsonl（新建·B 复审基线）；.gitignore（.review-tmp/）；审计报告；六文档 + 旁文档版本行 + site 四页脚（batch_cascade.py 级联）。
+> - **状态**：已落地（本批随 W554 提交并 push origin/main）。
 ### v2.3.153（2026-09-06）：W553 低危视觉细节批次 — 方案A四项标签缺陷修复·audit补丁幻影隐藏根因·data-audit-skip豁免机制
 
 > **来源**：W552 入档的三项可选改进批次计划（docs/superpowers/plans/2026-09-06-w552-three-optional-batches-plans.md）方案 A（建议批号 W553）当批执行——四项「机器门禁拦不住」的低危视觉缺陷，逐项「探针取证→修复→机判→judge 复核」闭环。
