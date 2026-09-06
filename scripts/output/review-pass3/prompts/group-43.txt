@@ -1,0 +1,12 @@
+GROUP 43/98
+PAGES: ["en/business-model.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__business-model__s0.png
+D:\xiyouji\.review-tmp\slices\en__business-model__s1.png
+D:\xiyouji\.review-tmp\slices\en__business-model__s2.png
+D:\xiyouji\.review-tmp\slices\en__business-model__s3.png
+D:\xiyouji\.review-tmp\slices\en__business-model__s4.png
+D:\xiyouji\.review-tmp\slices\en__business-model__s5.png
+D:\xiyouji\.review-tmp\slices\en__business-model__s6.png
+D:\xiyouji\.review-tmp\slices\en__business-model__s7.png
+D:\xiyouji\.review-tmp\slices\en__business-model__s8.png

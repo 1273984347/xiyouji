@@ -1,0 +1,15 @@
+GROUP 63/98
+PAGES: ["en/essay-zen-koan-vs-neidan.html", "en/ethics-consumption.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__essay-zen-koan-vs-neidan__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-zen-koan-vs-neidan__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-zen-koan-vs-neidan__s2.png
+D:\xiyouji\.review-tmp\slices\en__ethics-consumption__s0.png
+D:\xiyouji\.review-tmp\slices\en__ethics-consumption__s1.png
+D:\xiyouji\.review-tmp\slices\en__ethics-consumption__s2.png
+D:\xiyouji\.review-tmp\slices\en__ethics-consumption__s3.png
+D:\xiyouji\.review-tmp\slices\en__ethics-consumption__s4.png
+D:\xiyouji\.review-tmp\slices\en__ethics-consumption__s5.png
+D:\xiyouji\.review-tmp\slices\en__ethics-consumption__s6.png
+D:\xiyouji\.review-tmp\slices\en__ethics-consumption__s7.png
+D:\xiyouji\.review-tmp\slices\en__ethics-consumption__s8.png

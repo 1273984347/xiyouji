@@ -1,0 +1,12 @@
+GROUP 87/98
+PAGES: ["en/pilgrim-team-dynamic-network.html", "en/pilgrim-team-psychology-arc.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__pilgrim-team-dynamic-network__s0.png
+D:\xiyouji\.review-tmp\slices\en__pilgrim-team-dynamic-network__s1.png
+D:\xiyouji\.review-tmp\slices\en__pilgrim-team-dynamic-network__s2.png
+D:\xiyouji\.review-tmp\slices\en__pilgrim-team-dynamic-network__s3.png
+D:\xiyouji\.review-tmp\slices\en__pilgrim-team-psychology-arc__s0.png
+D:\xiyouji\.review-tmp\slices\en__pilgrim-team-psychology-arc__s1.png
+D:\xiyouji\.review-tmp\slices\en__pilgrim-team-psychology-arc__s2.png
+D:\xiyouji\.review-tmp\slices\en__pilgrim-team-psychology-arc__s3.png
+D:\xiyouji\.review-tmp\slices\en__pilgrim-team-psychology-arc__s4.png

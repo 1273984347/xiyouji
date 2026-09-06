@@ -1,0 +1,13 @@
+GROUP 61/98
+PAGES: ["en/essay-poetry-imagery.html", "en/essay-poetry-opening.html", "en/essay-quanzhen-daoism.html", "en/essay-rhythm-analysis.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__essay-poetry-imagery__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-poetry-imagery__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-poetry-imagery__s2.png
+D:\xiyouji\.review-tmp\slices\en__essay-poetry-opening__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-poetry-opening__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-poetry-opening__s2.png
+D:\xiyouji\.review-tmp\slices\en__essay-quanzhen-daoism__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-quanzhen-daoism__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-rhythm-analysis__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-rhythm-analysis__s1.png

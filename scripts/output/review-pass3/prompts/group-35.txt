@@ -1,0 +1,11 @@
+GROUP 35/98
+PAGES: ["data/power-resources.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__power-resources__s0.png
+D:\xiyouji\.review-tmp\slices\data__power-resources__s1.png
+D:\xiyouji\.review-tmp\slices\data__power-resources__s2.png
+D:\xiyouji\.review-tmp\slices\data__power-resources__s3.png
+D:\xiyouji\.review-tmp\slices\data__power-resources__s4.png
+D:\xiyouji\.review-tmp\slices\data__power-resources__s5.png
+D:\xiyouji\.review-tmp\slices\data__power-resources__s6.png
+D:\xiyouji\.review-tmp\slices\data__power-resources__s7.png

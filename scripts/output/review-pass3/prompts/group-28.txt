@@ -1,0 +1,8 @@
+GROUP 28/98
+PAGES: ["data/monster-hierarchy-network.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__monster-hierarchy-network__s0.png
+D:\xiyouji\.review-tmp\slices\data__monster-hierarchy-network__s1.png
+D:\xiyouji\.review-tmp\slices\data__monster-hierarchy-network__s2.png
+D:\xiyouji\.review-tmp\slices\data__monster-hierarchy-network__s3.png
+D:\xiyouji\.review-tmp\slices\data__monster-hierarchy-network__s4.png

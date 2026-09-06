@@ -1,0 +1,14 @@
+GROUP 64/98
+PAGES: ["en/famous-time-travel.html", "en/four-dimensional-research-network.html", "en/four-heavenly-kings-artifacts.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__famous-time-travel__s0.png
+D:\xiyouji\.review-tmp\slices\en__famous-time-travel__s1.png
+D:\xiyouji\.review-tmp\slices\en__four-dimensional-research-network__s0.png
+D:\xiyouji\.review-tmp\slices\en__four-dimensional-research-network__s1.png
+D:\xiyouji\.review-tmp\slices\en__four-dimensional-research-network__s2.png
+D:\xiyouji\.review-tmp\slices\en__four-dimensional-research-network__s3.png
+D:\xiyouji\.review-tmp\slices\en__four-heavenly-kings-artifacts__s0.png
+D:\xiyouji\.review-tmp\slices\en__four-heavenly-kings-artifacts__s1.png
+D:\xiyouji\.review-tmp\slices\en__four-heavenly-kings-artifacts__s2.png
+D:\xiyouji\.review-tmp\slices\en__four-heavenly-kings-artifacts__s3.png
+D:\xiyouji\.review-tmp\slices\en__four-heavenly-kings-artifacts__s4.png

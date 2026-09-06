@@ -1,0 +1,13 @@
+GROUP 78/98
+PAGES: ["en/ming-political-thought-comparison.html", "en/monster-background.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__ming-political-thought-comparison__s0.png
+D:\xiyouji\.review-tmp\slices\en__ming-political-thought-comparison__s1.png
+D:\xiyouji\.review-tmp\slices\en__ming-political-thought-comparison__s2.png
+D:\xiyouji\.review-tmp\slices\en__ming-political-thought-comparison__s3.png
+D:\xiyouji\.review-tmp\slices\en__ming-political-thought-comparison__s4.png
+D:\xiyouji\.review-tmp\slices\en__monster-background__s0.png
+D:\xiyouji\.review-tmp\slices\en__monster-background__s1.png
+D:\xiyouji\.review-tmp\slices\en__monster-background__s2.png
+D:\xiyouji\.review-tmp\slices\en__monster-background__s3.png
+D:\xiyouji\.review-tmp\slices\en__monster-background__s4.png

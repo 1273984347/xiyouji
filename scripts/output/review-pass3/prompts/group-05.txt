@@ -1,0 +1,12 @@
+GROUP 5/98
+PAGES: ["data/chapter-structure-graph.html", "data/character-appearance.html", "data/character-dynamic-network.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__chapter-structure-graph__s0.png
+D:\xiyouji\.review-tmp\slices\data__chapter-structure-graph__s1.png
+D:\xiyouji\.review-tmp\slices\data__chapter-structure-graph__s2.png
+D:\xiyouji\.review-tmp\slices\data__character-appearance__s0.png
+D:\xiyouji\.review-tmp\slices\data__character-appearance__s1.png
+D:\xiyouji\.review-tmp\slices\data__character-appearance__s2.png
+D:\xiyouji\.review-tmp\slices\data__character-dynamic-network__s0.png
+D:\xiyouji\.review-tmp\slices\data__character-dynamic-network__s1.png
+D:\xiyouji\.review-tmp\slices\data__character-dynamic-network__s2.png

@@ -1,0 +1,15 @@
+GROUP 6/98
+PAGES: ["data/character-presence-timeline.html", "data/character-relationship-3d-view.html", "data/character-relationship-3d.html", "data/character-semantic-network.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__character-presence-timeline__s0.png
+D:\xiyouji\.review-tmp\slices\data__character-presence-timeline__s1.png
+D:\xiyouji\.review-tmp\slices\data__character-presence-timeline__s2.png
+D:\xiyouji\.review-tmp\slices\data__character-presence-timeline__s3.png
+D:\xiyouji\.review-tmp\slices\data__character-relationship-3d-view__s0.png
+D:\xiyouji\.review-tmp\slices\data__character-relationship-3d__s0.png
+D:\xiyouji\.review-tmp\slices\data__character-relationship-3d__s1.png
+D:\xiyouji\.review-tmp\slices\data__character-semantic-network__s0.png
+D:\xiyouji\.review-tmp\slices\data__character-semantic-network__s1.png
+D:\xiyouji\.review-tmp\slices\data__character-semantic-network__s2.png
+D:\xiyouji\.review-tmp\slices\data__character-semantic-network__s3.png
+D:\xiyouji\.review-tmp\slices\data__character-semantic-network__s4.png

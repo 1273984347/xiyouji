@@ -1,0 +1,15 @@
+GROUP 40/98
+PAGES: ["data/timeline.html", "data/underworld-power-network.html", "data/visual-art.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__timeline__s0.png
+D:\xiyouji\.review-tmp\slices\data__timeline__s1.png
+D:\xiyouji\.review-tmp\slices\data__timeline__s2.png
+D:\xiyouji\.review-tmp\slices\data__underworld-power-network__s0.png
+D:\xiyouji\.review-tmp\slices\data__underworld-power-network__s1.png
+D:\xiyouji\.review-tmp\slices\data__underworld-power-network__s2.png
+D:\xiyouji\.review-tmp\slices\data__underworld-power-network__s3.png
+D:\xiyouji\.review-tmp\slices\data__underworld-power-network__s4.png
+D:\xiyouji\.review-tmp\slices\data__visual-art__s0.png
+D:\xiyouji\.review-tmp\slices\data__visual-art__s1.png
+D:\xiyouji\.review-tmp\slices\data__visual-art__s2.png
+D:\xiyouji\.review-tmp\slices\data__visual-art__s3.png

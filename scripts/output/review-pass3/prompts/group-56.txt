@@ -1,0 +1,15 @@
+GROUP 56/98
+PAGES: ["en/essay-cipai-mantingfang.html", "en/essay-cipai-shuidiaogetou.html", "en/essay-cipai-xijiangyue.html", "en/essay-composition-origins.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__essay-cipai-mantingfang__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-cipai-mantingfang__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-cipai-mantingfang__s2.png
+D:\xiyouji\.review-tmp\slices\en__essay-cipai-shuidiaogetou__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-cipai-shuidiaogetou__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-cipai-shuidiaogetou__s2.png
+D:\xiyouji\.review-tmp\slices\en__essay-cipai-xijiangyue__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-cipai-xijiangyue__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-cipai-xijiangyue__s2.png
+D:\xiyouji\.review-tmp\slices\en__essay-composition-origins__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-composition-origins__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-composition-origins__s2.png

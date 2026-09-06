@@ -1,0 +1,13 @@
+GROUP 83/98
+PAGES: ["en/narrative-experiment.html", "en/narrative-rhythm-curve.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__narrative-experiment__s0.png
+D:\xiyouji\.review-tmp\slices\en__narrative-experiment__s1.png
+D:\xiyouji\.review-tmp\slices\en__narrative-experiment__s2.png
+D:\xiyouji\.review-tmp\slices\en__narrative-experiment__s3.png
+D:\xiyouji\.review-tmp\slices\en__narrative-experiment__s4.png
+D:\xiyouji\.review-tmp\slices\en__narrative-experiment__s5.png
+D:\xiyouji\.review-tmp\slices\en__narrative-experiment__s6.png
+D:\xiyouji\.review-tmp\slices\en__narrative-rhythm-curve__s0.png
+D:\xiyouji\.review-tmp\slices\en__narrative-rhythm-curve__s1.png
+D:\xiyouji\.review-tmp\slices\en__narrative-rhythm-curve__s2.png

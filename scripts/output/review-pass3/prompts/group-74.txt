@@ -1,0 +1,10 @@
+GROUP 74/98
+PAGES: ["en/magic-system.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__magic-system__s0.png
+D:\xiyouji\.review-tmp\slices\en__magic-system__s1.png
+D:\xiyouji\.review-tmp\slices\en__magic-system__s2.png
+D:\xiyouji\.review-tmp\slices\en__magic-system__s3.png
+D:\xiyouji\.review-tmp\slices\en__magic-system__s4.png
+D:\xiyouji\.review-tmp\slices\en__magic-system__s5.png
+D:\xiyouji\.review-tmp\slices\en__magic-system__s6.png

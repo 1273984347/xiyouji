@@ -1,0 +1,13 @@
+GROUP 59/98
+PAGES: ["en/essay-ming-maritime-ban.html", "en/essay-ming-metaphor.html", "en/essay-ming-military.html", "en/essay-ming-politics.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__essay-ming-maritime-ban__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-maritime-ban__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-metaphor__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-metaphor__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-metaphor__s2.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-military__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-military__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-military__s2.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-politics__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-politics__s1.png

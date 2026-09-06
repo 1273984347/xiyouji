@@ -1,0 +1,6 @@
+GROUP 76/98
+PAGES: ["en/material-archaeology.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__material-archaeology__s12.png
+D:\xiyouji\.review-tmp\slices\en__material-archaeology__s13.png
+D:\xiyouji\.review-tmp\slices\en__material-archaeology__s14.png

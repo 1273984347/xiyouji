@@ -1,0 +1,15 @@
+GROUP 48/98
+PAGES: ["en/character-sentiment-arc.html", "en/character-shaseng.html", "en/character-tangseng.html", "en/character-wukong.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__character-sentiment-arc__s0.png
+D:\xiyouji\.review-tmp\slices\en__character-sentiment-arc__s1.png
+D:\xiyouji\.review-tmp\slices\en__character-sentiment-arc__s2.png
+D:\xiyouji\.review-tmp\slices\en__character-sentiment-arc__s3.png
+D:\xiyouji\.review-tmp\slices\en__character-sentiment-arc__s4.png
+D:\xiyouji\.review-tmp\slices\en__character-sentiment-arc__s5.png
+D:\xiyouji\.review-tmp\slices\en__character-shaseng__s0.png
+D:\xiyouji\.review-tmp\slices\en__character-shaseng__s1.png
+D:\xiyouji\.review-tmp\slices\en__character-tangseng__s0.png
+D:\xiyouji\.review-tmp\slices\en__character-tangseng__s1.png
+D:\xiyouji\.review-tmp\slices\en__character-wukong__s0.png
+D:\xiyouji\.review-tmp\slices\en__character-wukong__s1.png

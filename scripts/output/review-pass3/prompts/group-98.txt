@@ -1,0 +1,7 @@
+GROUP 98/98
+PAGES: ["mobile-index.html", "rum-viewer.html", "visit-viewer.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\mobile-index__s0.png
+D:\xiyouji\.review-tmp\slices\mobile-index__s1.png
+D:\xiyouji\.review-tmp\slices\rum-viewer__s0.png
+D:\xiyouji\.review-tmp\slices\visit-viewer__s0.png

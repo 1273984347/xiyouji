@@ -1,0 +1,13 @@
+GROUP 66/98
+PAGES: ["en/graph-explorer.html", "en/guanyin-six-roles-network.html", "en/guide.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__graph-explorer__s0.png
+D:\xiyouji\.review-tmp\slices\en__guanyin-six-roles-network__s0.png
+D:\xiyouji\.review-tmp\slices\en__guanyin-six-roles-network__s1.png
+D:\xiyouji\.review-tmp\slices\en__guanyin-six-roles-network__s2.png
+D:\xiyouji\.review-tmp\slices\en__guanyin-six-roles-network__s3.png
+D:\xiyouji\.review-tmp\slices\en__guanyin-six-roles-network__s4.png
+D:\xiyouji\.review-tmp\slices\en__guanyin-six-roles-network__s5.png
+D:\xiyouji\.review-tmp\slices\en__guide__s0.png
+D:\xiyouji\.review-tmp\slices\en__guide__s1.png
+D:\xiyouji\.review-tmp\slices\en__guide__s2.png

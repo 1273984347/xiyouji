@@ -1,0 +1,15 @@
+GROUP 46/98
+PAGES: ["en/character-bailongma.html", "en/character-bajie.html", "en/character-dynamic-network.html", "en/character-presence-timeline.html", "en/character-relationship-3d-view.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__character-bailongma__s0.png
+D:\xiyouji\.review-tmp\slices\en__character-bailongma__s1.png
+D:\xiyouji\.review-tmp\slices\en__character-bajie__s0.png
+D:\xiyouji\.review-tmp\slices\en__character-bajie__s1.png
+D:\xiyouji\.review-tmp\slices\en__character-dynamic-network__s0.png
+D:\xiyouji\.review-tmp\slices\en__character-dynamic-network__s1.png
+D:\xiyouji\.review-tmp\slices\en__character-dynamic-network__s2.png
+D:\xiyouji\.review-tmp\slices\en__character-presence-timeline__s0.png
+D:\xiyouji\.review-tmp\slices\en__character-presence-timeline__s1.png
+D:\xiyouji\.review-tmp\slices\en__character-presence-timeline__s2.png
+D:\xiyouji\.review-tmp\slices\en__character-presence-timeline__s3.png
+D:\xiyouji\.review-tmp\slices\en__character-relationship-3d-view__s0.png

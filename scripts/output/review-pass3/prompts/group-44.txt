@@ -1,0 +1,14 @@
+GROUP 44/98
+PAGES: ["en/cave-estate.html", "en/century-dialogue.html", "en/chapter-stats.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__cave-estate__s0.png
+D:\xiyouji\.review-tmp\slices\en__cave-estate__s1.png
+D:\xiyouji\.review-tmp\slices\en__cave-estate__s2.png
+D:\xiyouji\.review-tmp\slices\en__cave-estate__s3.png
+D:\xiyouji\.review-tmp\slices\en__cave-estate__s4.png
+D:\xiyouji\.review-tmp\slices\en__cave-estate__s5.png
+D:\xiyouji\.review-tmp\slices\en__century-dialogue__s0.png
+D:\xiyouji\.review-tmp\slices\en__century-dialogue__s1.png
+D:\xiyouji\.review-tmp\slices\en__chapter-stats__s0.png
+D:\xiyouji\.review-tmp\slices\en__chapter-stats__s1.png
+D:\xiyouji\.review-tmp\slices\en__chapter-stats__s2.png

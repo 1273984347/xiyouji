@@ -1,0 +1,15 @@
+GROUP 75/98
+PAGES: ["en/material-archaeology.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__material-archaeology__s0.png
+D:\xiyouji\.review-tmp\slices\en__material-archaeology__s1.png
+D:\xiyouji\.review-tmp\slices\en__material-archaeology__s2.png
+D:\xiyouji\.review-tmp\slices\en__material-archaeology__s3.png
+D:\xiyouji\.review-tmp\slices\en__material-archaeology__s4.png
+D:\xiyouji\.review-tmp\slices\en__material-archaeology__s5.png
+D:\xiyouji\.review-tmp\slices\en__material-archaeology__s6.png
+D:\xiyouji\.review-tmp\slices\en__material-archaeology__s7.png
+D:\xiyouji\.review-tmp\slices\en__material-archaeology__s8.png
+D:\xiyouji\.review-tmp\slices\en__material-archaeology__s9.png
+D:\xiyouji\.review-tmp\slices\en__material-archaeology__s10.png
+D:\xiyouji\.review-tmp\slices\en__material-archaeology__s11.png

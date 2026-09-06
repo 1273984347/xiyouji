@@ -1,0 +1,15 @@
+GROUP 10/98
+PAGES: ["data/cultural-misreading.html", "data/customs-pass-route.html", "data/data-explorer.html", "data/deconstruction.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__cultural-misreading__s0.png
+D:\xiyouji\.review-tmp\slices\data__cultural-misreading__s1.png
+D:\xiyouji\.review-tmp\slices\data__cultural-misreading__s2.png
+D:\xiyouji\.review-tmp\slices\data__cultural-misreading__s3.png
+D:\xiyouji\.review-tmp\slices\data__cultural-misreading__s4.png
+D:\xiyouji\.review-tmp\slices\data__customs-pass-route__s0.png
+D:\xiyouji\.review-tmp\slices\data__customs-pass-route__s1.png
+D:\xiyouji\.review-tmp\slices\data__data-explorer__s0.png
+D:\xiyouji\.review-tmp\slices\data__deconstruction__s0.png
+D:\xiyouji\.review-tmp\slices\data__deconstruction__s1.png
+D:\xiyouji\.review-tmp\slices\data__deconstruction__s2.png
+D:\xiyouji\.review-tmp\slices\data__deconstruction__s3.png

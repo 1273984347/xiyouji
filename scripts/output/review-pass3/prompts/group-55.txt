@@ -1,0 +1,13 @@
+GROUP 55/98
+PAGES: ["en/essay-ai-era.html", "en/essay-buddhist-chan.html", "en/essay-chapter-couplets.html", "en/essay-character-fu.html", "en/essay-cipai-linjiangxian.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__essay-ai-era__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-ai-era__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-buddhist-chan__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-buddhist-chan__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-chapter-couplets__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-chapter-couplets__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-character-fu__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-character-fu__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-cipai-linjiangxian__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-cipai-linjiangxian__s1.png

@@ -1,0 +1,15 @@
+GROUP 58/98
+PAGES: ["en/essay-ming-examination.html", "en/essay-ming-garrison.html", "en/essay-ming-intellectual-history.html", "en/essay-ming-judiciary.html", "en/essay-ming-literary-thought.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__essay-ming-examination__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-examination__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-garrison__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-garrison__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-intellectual-history__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-intellectual-history__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-intellectual-history__s2.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-judiciary__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-judiciary__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-literary-thought__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-literary-thought__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-ming-literary-thought__s2.png

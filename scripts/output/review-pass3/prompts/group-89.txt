@@ -1,0 +1,14 @@
+GROUP 89/98
+PAGES: ["en/power-resources.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__power-resources__s0.png
+D:\xiyouji\.review-tmp\slices\en__power-resources__s1.png
+D:\xiyouji\.review-tmp\slices\en__power-resources__s2.png
+D:\xiyouji\.review-tmp\slices\en__power-resources__s3.png
+D:\xiyouji\.review-tmp\slices\en__power-resources__s4.png
+D:\xiyouji\.review-tmp\slices\en__power-resources__s5.png
+D:\xiyouji\.review-tmp\slices\en__power-resources__s6.png
+D:\xiyouji\.review-tmp\slices\en__power-resources__s7.png
+D:\xiyouji\.review-tmp\slices\en__power-resources__s8.png
+D:\xiyouji\.review-tmp\slices\en__power-resources__s9.png
+D:\xiyouji\.review-tmp\slices\en__power-resources__s10.png

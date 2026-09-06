@@ -1,0 +1,13 @@
+GROUP 7/98
+PAGES: ["data/character-sentiment-arc.html", "data/chart-design.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__character-sentiment-arc__s0.png
+D:\xiyouji\.review-tmp\slices\data__character-sentiment-arc__s1.png
+D:\xiyouji\.review-tmp\slices\data__character-sentiment-arc__s2.png
+D:\xiyouji\.review-tmp\slices\data__character-sentiment-arc__s3.png
+D:\xiyouji\.review-tmp\slices\data__character-sentiment-arc__s4.png
+D:\xiyouji\.review-tmp\slices\data__chart-design__s0.png
+D:\xiyouji\.review-tmp\slices\data__chart-design__s1.png
+D:\xiyouji\.review-tmp\slices\data__chart-design__s2.png
+D:\xiyouji\.review-tmp\slices\data__chart-design__s3.png
+D:\xiyouji\.review-tmp\slices\data__chart-design__s4.png

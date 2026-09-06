@@ -1,0 +1,15 @@
+GROUP 32/98
+PAGES: ["data/narratology-12d-network.html", "data/narratology-13d-network.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__narratology-12d-network__s0.png
+D:\xiyouji\.review-tmp\slices\data__narratology-12d-network__s1.png
+D:\xiyouji\.review-tmp\slices\data__narratology-12d-network__s2.png
+D:\xiyouji\.review-tmp\slices\data__narratology-12d-network__s3.png
+D:\xiyouji\.review-tmp\slices\data__narratology-12d-network__s4.png
+D:\xiyouji\.review-tmp\slices\data__narratology-12d-network__s5.png
+D:\xiyouji\.review-tmp\slices\data__narratology-13d-network__s0.png
+D:\xiyouji\.review-tmp\slices\data__narratology-13d-network__s1.png
+D:\xiyouji\.review-tmp\slices\data__narratology-13d-network__s2.png
+D:\xiyouji\.review-tmp\slices\data__narratology-13d-network__s3.png
+D:\xiyouji\.review-tmp\slices\data__narratology-13d-network__s4.png
+D:\xiyouji\.review-tmp\slices\data__narratology-13d-network__s5.png

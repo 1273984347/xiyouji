@@ -1,0 +1,14 @@
+GROUP 8/98
+PAGES: ["data/cognitive-psychology.html", "data/concept-device.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__cognitive-psychology__s0.png
+D:\xiyouji\.review-tmp\slices\data__cognitive-psychology__s1.png
+D:\xiyouji\.review-tmp\slices\data__cognitive-psychology__s2.png
+D:\xiyouji\.review-tmp\slices\data__cognitive-psychology__s3.png
+D:\xiyouji\.review-tmp\slices\data__cognitive-psychology__s4.png
+D:\xiyouji\.review-tmp\slices\data__cognitive-psychology__s5.png
+D:\xiyouji\.review-tmp\slices\data__cognitive-psychology__s6.png
+D:\xiyouji\.review-tmp\slices\data__concept-device__s0.png
+D:\xiyouji\.review-tmp\slices\data__concept-device__s1.png
+D:\xiyouji\.review-tmp\slices\data__concept-device__s2.png
+D:\xiyouji\.review-tmp\slices\data__concept-device__s3.png

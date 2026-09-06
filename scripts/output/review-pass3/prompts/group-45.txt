@@ -1,0 +1,15 @@
+GROUP 45/98
+PAGES: ["en/chapter-structure-graph.html", "en/chapters-map.html", "en/character-appearance.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__chapter-structure-graph__s0.png
+D:\xiyouji\.review-tmp\slices\en__chapter-structure-graph__s1.png
+D:\xiyouji\.review-tmp\slices\en__chapter-structure-graph__s2.png
+D:\xiyouji\.review-tmp\slices\en__chapters-map__s0.png
+D:\xiyouji\.review-tmp\slices\en__chapters-map__s1.png
+D:\xiyouji\.review-tmp\slices\en__chapters-map__s2.png
+D:\xiyouji\.review-tmp\slices\en__chapters-map__s3.png
+D:\xiyouji\.review-tmp\slices\en__chapters-map__s4.png
+D:\xiyouji\.review-tmp\slices\en__chapters-map__s5.png
+D:\xiyouji\.review-tmp\slices\en__character-appearance__s0.png
+D:\xiyouji\.review-tmp\slices\en__character-appearance__s1.png
+D:\xiyouji\.review-tmp\slices\en__character-appearance__s2.png

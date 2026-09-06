@@ -1,0 +1,1988 @@
+[
+{
+"group": 1,
+"pages": [
+"curated.html",
+"dashboard.html",
+"data/81-hardships-view.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\curated__s0.png",
+".review-tmp\\slices\\curated__s1.png",
+".review-tmp\\slices\\curated__s2.png",
+".review-tmp\\slices\\curated__s3.png",
+".review-tmp\\slices\\dashboard__s0.png",
+".review-tmp\\slices\\dashboard__s1.png",
+".review-tmp\\slices\\dashboard__s2.png",
+".review-tmp\\slices\\dashboard__s3.png",
+".review-tmp\\slices\\dashboard__s4.png",
+".review-tmp\\slices\\data__81-hardships-view__s0.png"
+]
+},
+{
+"group": 2,
+"pages": [
+"data/81-hardships.html",
+"data/aesthetics.html",
+"data/ai-dialogue.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\data__81-hardships__s0.png",
+".review-tmp\\slices\\data__81-hardships__s1.png",
+".review-tmp\\slices\\data__81-hardships__s2.png",
+".review-tmp\\slices\\data__aesthetics__s0.png",
+".review-tmp\\slices\\data__aesthetics__s1.png",
+".review-tmp\\slices\\data__aesthetics__s2.png",
+".review-tmp\\slices\\data__aesthetics__s3.png",
+".review-tmp\\slices\\data__aesthetics__s4.png",
+".review-tmp\\slices\\data__ai-dialogue__s0.png",
+".review-tmp\\slices\\data__ai-dialogue__s1.png"
+]
+},
+{
+"group": 3,
+"pages": [
+"data/business-model.html"
+],
+"slice_count": 8,
+"paths": [
+".review-tmp\\slices\\data__business-model__s0.png",
+".review-tmp\\slices\\data__business-model__s1.png",
+".review-tmp\\slices\\data__business-model__s2.png",
+".review-tmp\\slices\\data__business-model__s3.png",
+".review-tmp\\slices\\data__business-model__s4.png",
+".review-tmp\\slices\\data__business-model__s5.png",
+".review-tmp\\slices\\data__business-model__s6.png",
+".review-tmp\\slices\\data__business-model__s7.png"
+]
+},
+{
+"group": 4,
+"pages": [
+"data/cave-estate.html",
+"data/century-dialogue.html",
+"data/chapter-stats.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\data__cave-estate__s0.png",
+".review-tmp\\slices\\data__cave-estate__s1.png",
+".review-tmp\\slices\\data__cave-estate__s2.png",
+".review-tmp\\slices\\data__cave-estate__s3.png",
+".review-tmp\\slices\\data__cave-estate__s4.png",
+".review-tmp\\slices\\data__cave-estate__s5.png",
+".review-tmp\\slices\\data__century-dialogue__s0.png",
+".review-tmp\\slices\\data__century-dialogue__s1.png",
+".review-tmp\\slices\\data__chapter-stats__s0.png",
+".review-tmp\\slices\\data__chapter-stats__s1.png",
+".review-tmp\\slices\\data__chapter-stats__s2.png"
+]
+},
+{
+"group": 5,
+"pages": [
+"data/chapter-structure-graph.html",
+"data/character-appearance.html",
+"data/character-dynamic-network.html"
+],
+"slice_count": 9,
+"paths": [
+".review-tmp\\slices\\data__chapter-structure-graph__s0.png",
+".review-tmp\\slices\\data__chapter-structure-graph__s1.png",
+".review-tmp\\slices\\data__chapter-structure-graph__s2.png",
+".review-tmp\\slices\\data__character-appearance__s0.png",
+".review-tmp\\slices\\data__character-appearance__s1.png",
+".review-tmp\\slices\\data__character-appearance__s2.png",
+".review-tmp\\slices\\data__character-dynamic-network__s0.png",
+".review-tmp\\slices\\data__character-dynamic-network__s1.png",
+".review-tmp\\slices\\data__character-dynamic-network__s2.png"
+]
+},
+{
+"group": 6,
+"pages": [
+"data/character-presence-timeline.html",
+"data/character-relationship-3d-view.html",
+"data/character-relationship-3d.html",
+"data/character-semantic-network.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\data__character-presence-timeline__s0.png",
+".review-tmp\\slices\\data__character-presence-timeline__s1.png",
+".review-tmp\\slices\\data__character-presence-timeline__s2.png",
+".review-tmp\\slices\\data__character-presence-timeline__s3.png",
+".review-tmp\\slices\\data__character-relationship-3d-view__s0.png",
+".review-tmp\\slices\\data__character-relationship-3d__s0.png",
+".review-tmp\\slices\\data__character-relationship-3d__s1.png",
+".review-tmp\\slices\\data__character-semantic-network__s0.png",
+".review-tmp\\slices\\data__character-semantic-network__s1.png",
+".review-tmp\\slices\\data__character-semantic-network__s2.png",
+".review-tmp\\slices\\data__character-semantic-network__s3.png",
+".review-tmp\\slices\\data__character-semantic-network__s4.png"
+]
+},
+{
+"group": 7,
+"pages": [
+"data/character-sentiment-arc.html",
+"data/chart-design.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\data__character-sentiment-arc__s0.png",
+".review-tmp\\slices\\data__character-sentiment-arc__s1.png",
+".review-tmp\\slices\\data__character-sentiment-arc__s2.png",
+".review-tmp\\slices\\data__character-sentiment-arc__s3.png",
+".review-tmp\\slices\\data__character-sentiment-arc__s4.png",
+".review-tmp\\slices\\data__chart-design__s0.png",
+".review-tmp\\slices\\data__chart-design__s1.png",
+".review-tmp\\slices\\data__chart-design__s2.png",
+".review-tmp\\slices\\data__chart-design__s3.png",
+".review-tmp\\slices\\data__chart-design__s4.png"
+]
+},
+{
+"group": 8,
+"pages": [
+"data/cognitive-psychology.html",
+"data/concept-device.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\data__cognitive-psychology__s0.png",
+".review-tmp\\slices\\data__cognitive-psychology__s1.png",
+".review-tmp\\slices\\data__cognitive-psychology__s2.png",
+".review-tmp\\slices\\data__cognitive-psychology__s3.png",
+".review-tmp\\slices\\data__cognitive-psychology__s4.png",
+".review-tmp\\slices\\data__cognitive-psychology__s5.png",
+".review-tmp\\slices\\data__cognitive-psychology__s6.png",
+".review-tmp\\slices\\data__concept-device__s0.png",
+".review-tmp\\slices\\data__concept-device__s1.png",
+".review-tmp\\slices\\data__concept-device__s2.png",
+".review-tmp\\slices\\data__concept-device__s3.png"
+]
+},
+{
+"group": 9,
+"pages": [
+"data/counterfactual.html",
+"data/criticism-history.html",
+"data/cross-time-danmaku.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\data__counterfactual__s0.png",
+".review-tmp\\slices\\data__counterfactual__s1.png",
+".review-tmp\\slices\\data__counterfactual__s2.png",
+".review-tmp\\slices\\data__criticism-history__s0.png",
+".review-tmp\\slices\\data__criticism-history__s1.png",
+".review-tmp\\slices\\data__criticism-history__s2.png",
+".review-tmp\\slices\\data__criticism-history__s3.png",
+".review-tmp\\slices\\data__cross-time-danmaku__s0.png",
+".review-tmp\\slices\\data__cross-time-danmaku__s1.png",
+".review-tmp\\slices\\data__cross-time-danmaku__s2.png"
+]
+},
+{
+"group": 10,
+"pages": [
+"data/cultural-misreading.html",
+"data/customs-pass-route.html",
+"data/data-explorer.html",
+"data/deconstruction.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\data__cultural-misreading__s0.png",
+".review-tmp\\slices\\data__cultural-misreading__s1.png",
+".review-tmp\\slices\\data__cultural-misreading__s2.png",
+".review-tmp\\slices\\data__cultural-misreading__s3.png",
+".review-tmp\\slices\\data__cultural-misreading__s4.png",
+".review-tmp\\slices\\data__customs-pass-route__s0.png",
+".review-tmp\\slices\\data__customs-pass-route__s1.png",
+".review-tmp\\slices\\data__data-explorer__s0.png",
+".review-tmp\\slices\\data__deconstruction__s0.png",
+".review-tmp\\slices\\data__deconstruction__s1.png",
+".review-tmp\\slices\\data__deconstruction__s2.png",
+".review-tmp\\slices\\data__deconstruction__s3.png"
+]
+},
+{
+"group": 11,
+"pages": [
+"data/dialogue-sentiment.html",
+"data/ecology.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\data__dialogue-sentiment__s0.png",
+".review-tmp\\slices\\data__dialogue-sentiment__s1.png",
+".review-tmp\\slices\\data__dialogue-sentiment__s2.png",
+".review-tmp\\slices\\data__dialogue-sentiment__s3.png",
+".review-tmp\\slices\\data__dialogue-sentiment__s4.png",
+".review-tmp\\slices\\data__ecology__s0.png",
+".review-tmp\\slices\\data__ecology__s1.png",
+".review-tmp\\slices\\data__ecology__s2.png",
+".review-tmp\\slices\\data__ecology__s3.png",
+".review-tmp\\slices\\data__ecology__s4.png",
+".review-tmp\\slices\\data__ecology__s5.png",
+".review-tmp\\slices\\data__ecology__s6.png"
+]
+},
+{
+"group": 12,
+"pages": [
+"data/emotional-heatmap.html",
+"data/ethics-consumption.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\data__emotional-heatmap__s0.png",
+".review-tmp\\slices\\data__emotional-heatmap__s1.png",
+".review-tmp\\slices\\data__emotional-heatmap__s2.png",
+".review-tmp\\slices\\data__ethics-consumption__s0.png",
+".review-tmp\\slices\\data__ethics-consumption__s1.png",
+".review-tmp\\slices\\data__ethics-consumption__s2.png",
+".review-tmp\\slices\\data__ethics-consumption__s3.png",
+".review-tmp\\slices\\data__ethics-consumption__s4.png",
+".review-tmp\\slices\\data__ethics-consumption__s5.png",
+".review-tmp\\slices\\data__ethics-consumption__s6.png",
+".review-tmp\\slices\\data__ethics-consumption__s7.png"
+]
+},
+{
+"group": 13,
+"pages": [
+"data/famous-time-travel.html",
+"data/four-dimensional-research-network.html",
+"data/four-heavenly-kings-artifacts.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\data__famous-time-travel__s0.png",
+".review-tmp\\slices\\data__famous-time-travel__s1.png",
+".review-tmp\\slices\\data__four-dimensional-research-network__s0.png",
+".review-tmp\\slices\\data__four-dimensional-research-network__s1.png",
+".review-tmp\\slices\\data__four-dimensional-research-network__s2.png",
+".review-tmp\\slices\\data__four-dimensional-research-network__s3.png",
+".review-tmp\\slices\\data__four-heavenly-kings-artifacts__s0.png",
+".review-tmp\\slices\\data__four-heavenly-kings-artifacts__s1.png",
+".review-tmp\\slices\\data__four-heavenly-kings-artifacts__s2.png",
+".review-tmp\\slices\\data__four-heavenly-kings-artifacts__s3.png"
+]
+},
+{
+"group": 14,
+"pages": [
+"data/game-webnovel.html",
+"data/global-pattern.html",
+"data/graph-explorer.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\data__game-webnovel__s0.png",
+".review-tmp\\slices\\data__game-webnovel__s1.png",
+".review-tmp\\slices\\data__game-webnovel__s2.png",
+".review-tmp\\slices\\data__game-webnovel__s3.png",
+".review-tmp\\slices\\data__game-webnovel__s4.png",
+".review-tmp\\slices\\data__game-webnovel__s5.png",
+".review-tmp\\slices\\data__global-pattern__s0.png",
+".review-tmp\\slices\\data__global-pattern__s1.png",
+".review-tmp\\slices\\data__global-pattern__s2.png",
+".review-tmp\\slices\\data__global-pattern__s3.png",
+".review-tmp\\slices\\data__graph-explorer__s0.png"
+]
+},
+{
+"group": 15,
+"pages": [
+"data/guanyin-six-roles-network.html",
+"data/hardship-difficulty-heatmap.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\data__guanyin-six-roles-network__s0.png",
+".review-tmp\\slices\\data__guanyin-six-roles-network__s1.png",
+".review-tmp\\slices\\data__guanyin-six-roles-network__s2.png",
+".review-tmp\\slices\\data__guanyin-six-roles-network__s3.png",
+".review-tmp\\slices\\data__guanyin-six-roles-network__s4.png",
+".review-tmp\\slices\\data__hardship-difficulty-heatmap__s0.png",
+".review-tmp\\slices\\data__hardship-difficulty-heatmap__s1.png",
+".review-tmp\\slices\\data__hardship-difficulty-heatmap__s2.png",
+".review-tmp\\slices\\data__hardship-difficulty-heatmap__s3.png",
+".review-tmp\\slices\\data__hardship-difficulty-heatmap__s4.png",
+".review-tmp\\slices\\data__hardship-difficulty-heatmap__s5.png"
+]
+},
+{
+"group": 16,
+"pages": [
+"data/hardship-heatmap.html",
+"data/heaven-power-network.html"
+],
+"slice_count": 9,
+"paths": [
+".review-tmp\\slices\\data__hardship-heatmap__s0.png",
+".review-tmp\\slices\\data__hardship-heatmap__s1.png",
+".review-tmp\\slices\\data__hardship-heatmap__s2.png",
+".review-tmp\\slices\\data__heaven-power-network__s0.png",
+".review-tmp\\slices\\data__heaven-power-network__s1.png",
+".review-tmp\\slices\\data__heaven-power-network__s2.png",
+".review-tmp\\slices\\data__heaven-power-network__s3.png",
+".review-tmp\\slices\\data__heaven-power-network__s4.png",
+".review-tmp\\slices\\data__heaven-power-network__s5.png"
+]
+},
+{
+"group": 17,
+"pages": [
+"data/intertextuality-network.html",
+"data/journey-geo-3d.html",
+"data/journey-geo-semiotics.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\data__intertextuality-network__s0.png",
+".review-tmp\\slices\\data__intertextuality-network__s1.png",
+".review-tmp\\slices\\data__intertextuality-network__s2.png",
+".review-tmp\\slices\\data__intertextuality-network__s3.png",
+".review-tmp\\slices\\data__intertextuality-network__s4.png",
+".review-tmp\\slices\\data__intertextuality-network__s5.png",
+".review-tmp\\slices\\data__journey-geo-3d__s0.png",
+".review-tmp\\slices\\data__journey-geo-3d__s1.png",
+".review-tmp\\slices\\data__journey-geo-semiotics__s0.png",
+".review-tmp\\slices\\data__journey-geo-semiotics__s1.png"
+]
+},
+{
+"group": 18,
+"pages": [
+"data/journey-map-interactive.html",
+"data/journey-route.html",
+"data/journey-spacetime.html"
+],
+"slice_count": 9,
+"paths": [
+".review-tmp\\slices\\data__journey-map-interactive__s0.png",
+".review-tmp\\slices\\data__journey-map-interactive__s1.png",
+".review-tmp\\slices\\data__journey-map-interactive__s2.png",
+".review-tmp\\slices\\data__journey-route__s0.png",
+".review-tmp\\slices\\data__journey-route__s1.png",
+".review-tmp\\slices\\data__journey-route__s2.png",
+".review-tmp\\slices\\data__journey-spacetime__s0.png",
+".review-tmp\\slices\\data__journey-spacetime__s1.png",
+".review-tmp\\slices\\data__journey-spacetime__s2.png"
+]
+},
+{
+"group": 19,
+"pages": [
+"data/jurisprudence.html"
+],
+"slice_count": 8,
+"paths": [
+".review-tmp\\slices\\data__jurisprudence__s0.png",
+".review-tmp\\slices\\data__jurisprudence__s1.png",
+".review-tmp\\slices\\data__jurisprudence__s2.png",
+".review-tmp\\slices\\data__jurisprudence__s3.png",
+".review-tmp\\slices\\data__jurisprudence__s4.png",
+".review-tmp\\slices\\data__jurisprudence__s5.png",
+".review-tmp\\slices\\data__jurisprudence__s6.png",
+".review-tmp\\slices\\data__jurisprudence__s7.png"
+]
+},
+{
+"group": 20,
+"pages": [
+"data/karma-reincarnation.html",
+"data/language-style-radar.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\data__karma-reincarnation__s0.png",
+".review-tmp\\slices\\data__karma-reincarnation__s1.png",
+".review-tmp\\slices\\data__karma-reincarnation__s2.png",
+".review-tmp\\slices\\data__karma-reincarnation__s3.png",
+".review-tmp\\slices\\data__karma-reincarnation__s4.png",
+".review-tmp\\slices\\data__karma-reincarnation__s5.png",
+".review-tmp\\slices\\data__karma-reincarnation__s6.png",
+".review-tmp\\slices\\data__karma-reincarnation__s7.png",
+".review-tmp\\slices\\data__language-style-radar__s0.png",
+".review-tmp\\slices\\data__language-style-radar__s1.png",
+".review-tmp\\slices\\data__language-style-radar__s2.png"
+]
+},
+{
+"group": 21,
+"pages": [
+"data/linguistics.html"
+],
+"slice_count": 9,
+"paths": [
+".review-tmp\\slices\\data__linguistics__s0.png",
+".review-tmp\\slices\\data__linguistics__s1.png",
+".review-tmp\\slices\\data__linguistics__s2.png",
+".review-tmp\\slices\\data__linguistics__s3.png",
+".review-tmp\\slices\\data__linguistics__s4.png",
+".review-tmp\\slices\\data__linguistics__s5.png",
+".review-tmp\\slices\\data__linguistics__s6.png",
+".review-tmp\\slices\\data__linguistics__s7.png",
+".review-tmp\\slices\\data__linguistics__s8.png"
+]
+},
+{
+"group": 22,
+"pages": [
+"data/magic-system.html"
+],
+"slice_count": 5,
+"paths": [
+".review-tmp\\slices\\data__magic-system__s0.png",
+".review-tmp\\slices\\data__magic-system__s1.png",
+".review-tmp\\slices\\data__magic-system__s2.png",
+".review-tmp\\slices\\data__magic-system__s3.png",
+".review-tmp\\slices\\data__magic-system__s4.png"
+]
+},
+{
+"group": 23,
+"pages": [
+"data/material-archaeology.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\data__material-archaeology__s0.png",
+".review-tmp\\slices\\data__material-archaeology__s1.png",
+".review-tmp\\slices\\data__material-archaeology__s2.png",
+".review-tmp\\slices\\data__material-archaeology__s3.png",
+".review-tmp\\slices\\data__material-archaeology__s4.png",
+".review-tmp\\slices\\data__material-archaeology__s5.png",
+".review-tmp\\slices\\data__material-archaeology__s6.png",
+".review-tmp\\slices\\data__material-archaeology__s7.png",
+".review-tmp\\slices\\data__material-archaeology__s8.png",
+".review-tmp\\slices\\data__material-archaeology__s9.png",
+".review-tmp\\slices\\data__material-archaeology__s10.png",
+".review-tmp\\slices\\data__material-archaeology__s11.png"
+]
+},
+{
+"group": 24,
+"pages": [
+"data/material-archaeology.html"
+],
+"slice_count": 1,
+"paths": [
+".review-tmp\\slices\\data__material-archaeology__s12.png"
+]
+},
+{
+"group": 25,
+"pages": [
+"data/mbti-evolution.html",
+"data/methodology-matrix.html",
+"data/ming-political-thought-comparison.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\data__mbti-evolution__s0.png",
+".review-tmp\\slices\\data__mbti-evolution__s1.png",
+".review-tmp\\slices\\data__mbti-evolution__s2.png",
+".review-tmp\\slices\\data__methodology-matrix__s0.png",
+".review-tmp\\slices\\data__methodology-matrix__s1.png",
+".review-tmp\\slices\\data__methodology-matrix__s2.png",
+".review-tmp\\slices\\data__methodology-matrix__s3.png",
+".review-tmp\\slices\\data__methodology-matrix__s4.png",
+".review-tmp\\slices\\data__ming-political-thought-comparison__s0.png",
+".review-tmp\\slices\\data__ming-political-thought-comparison__s1.png",
+".review-tmp\\slices\\data__ming-political-thought-comparison__s2.png",
+".review-tmp\\slices\\data__ming-political-thought-comparison__s3.png"
+]
+},
+{
+"group": 26,
+"pages": [
+"data/monster-background.html",
+"data/monster-capability-radar.html"
+],
+"slice_count": 9,
+"paths": [
+".review-tmp\\slices\\data__monster-background__s0.png",
+".review-tmp\\slices\\data__monster-background__s1.png",
+".review-tmp\\slices\\data__monster-background__s2.png",
+".review-tmp\\slices\\data__monster-background__s3.png",
+".review-tmp\\slices\\data__monster-background__s4.png",
+".review-tmp\\slices\\data__monster-capability-radar__s0.png",
+".review-tmp\\slices\\data__monster-capability-radar__s1.png",
+".review-tmp\\slices\\data__monster-capability-radar__s2.png",
+".review-tmp\\slices\\data__monster-capability-radar__s3.png"
+]
+},
+{
+"group": 27,
+"pages": [
+"data/monster-ecology-network.html",
+"data/monster-female-network.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\data__monster-ecology-network__s0.png",
+".review-tmp\\slices\\data__monster-ecology-network__s1.png",
+".review-tmp\\slices\\data__monster-ecology-network__s2.png",
+".review-tmp\\slices\\data__monster-ecology-network__s3.png",
+".review-tmp\\slices\\data__monster-female-network__s0.png",
+".review-tmp\\slices\\data__monster-female-network__s1.png",
+".review-tmp\\slices\\data__monster-female-network__s2.png",
+".review-tmp\\slices\\data__monster-female-network__s3.png",
+".review-tmp\\slices\\data__monster-female-network__s4.png",
+".review-tmp\\slices\\data__monster-female-network__s5.png"
+]
+},
+{
+"group": 28,
+"pages": [
+"data/monster-hierarchy-network.html"
+],
+"slice_count": 5,
+"paths": [
+".review-tmp\\slices\\data__monster-hierarchy-network__s0.png",
+".review-tmp\\slices\\data__monster-hierarchy-network__s1.png",
+".review-tmp\\slices\\data__monster-hierarchy-network__s2.png",
+".review-tmp\\slices\\data__monster-hierarchy-network__s3.png",
+".review-tmp\\slices\\data__monster-hierarchy-network__s4.png"
+]
+},
+{
+"group": 29,
+"pages": [
+"data/monster-sociology.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\data__monster-sociology__s0.png",
+".review-tmp\\slices\\data__monster-sociology__s1.png",
+".review-tmp\\slices\\data__monster-sociology__s2.png",
+".review-tmp\\slices\\data__monster-sociology__s3.png",
+".review-tmp\\slices\\data__monster-sociology__s4.png",
+".review-tmp\\slices\\data__monster-sociology__s5.png",
+".review-tmp\\slices\\data__monster-sociology__s6.png",
+".review-tmp\\slices\\data__monster-sociology__s7.png",
+".review-tmp\\slices\\data__monster-sociology__s8.png",
+".review-tmp\\slices\\data__monster-sociology__s9.png"
+]
+},
+{
+"group": 30,
+"pages": [
+"data/monster-victims-network.html",
+"data/music-structure.html"
+],
+"slice_count": 9,
+"paths": [
+".review-tmp\\slices\\data__monster-victims-network__s0.png",
+".review-tmp\\slices\\data__monster-victims-network__s1.png",
+".review-tmp\\slices\\data__monster-victims-network__s2.png",
+".review-tmp\\slices\\data__monster-victims-network__s3.png",
+".review-tmp\\slices\\data__monster-victims-network__s4.png",
+".review-tmp\\slices\\data__music-structure__s0.png",
+".review-tmp\\slices\\data__music-structure__s1.png",
+".review-tmp\\slices\\data__music-structure__s2.png",
+".review-tmp\\slices\\data__music-structure__s3.png"
+]
+},
+{
+"group": 31,
+"pages": [
+"data/narrative-experiment.html",
+"data/narrative-rhythm-curve.html"
+],
+"slice_count": 9,
+"paths": [
+".review-tmp\\slices\\data__narrative-experiment__s0.png",
+".review-tmp\\slices\\data__narrative-experiment__s1.png",
+".review-tmp\\slices\\data__narrative-experiment__s2.png",
+".review-tmp\\slices\\data__narrative-experiment__s3.png",
+".review-tmp\\slices\\data__narrative-experiment__s4.png",
+".review-tmp\\slices\\data__narrative-experiment__s5.png",
+".review-tmp\\slices\\data__narrative-rhythm-curve__s0.png",
+".review-tmp\\slices\\data__narrative-rhythm-curve__s1.png",
+".review-tmp\\slices\\data__narrative-rhythm-curve__s2.png"
+]
+},
+{
+"group": 32,
+"pages": [
+"data/narratology-12d-network.html",
+"data/narratology-13d-network.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\data__narratology-12d-network__s0.png",
+".review-tmp\\slices\\data__narratology-12d-network__s1.png",
+".review-tmp\\slices\\data__narratology-12d-network__s2.png",
+".review-tmp\\slices\\data__narratology-12d-network__s3.png",
+".review-tmp\\slices\\data__narratology-12d-network__s4.png",
+".review-tmp\\slices\\data__narratology-12d-network__s5.png",
+".review-tmp\\slices\\data__narratology-13d-network__s0.png",
+".review-tmp\\slices\\data__narratology-13d-network__s1.png",
+".review-tmp\\slices\\data__narratology-13d-network__s2.png",
+".review-tmp\\slices\\data__narratology-13d-network__s3.png",
+".review-tmp\\slices\\data__narratology-13d-network__s4.png",
+".review-tmp\\slices\\data__narratology-13d-network__s5.png"
+]
+},
+{
+"group": 33,
+"pages": [
+"data/perf-canvas-rendering.html",
+"data/philosophy.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\data__perf-canvas-rendering__s0.png",
+".review-tmp\\slices\\data__perf-canvas-rendering__s1.png",
+".review-tmp\\slices\\data__perf-canvas-rendering__s2.png",
+".review-tmp\\slices\\data__philosophy__s0.png",
+".review-tmp\\slices\\data__philosophy__s1.png",
+".review-tmp\\slices\\data__philosophy__s2.png",
+".review-tmp\\slices\\data__philosophy__s3.png",
+".review-tmp\\slices\\data__philosophy__s4.png",
+".review-tmp\\slices\\data__philosophy__s5.png",
+".review-tmp\\slices\\data__philosophy__s6.png"
+]
+},
+{
+"group": 34,
+"pages": [
+"data/pilgrim-team-dynamic-network.html",
+"data/pilgrim-team-psychology-arc.html",
+"data/poetry-rhythm-analysis.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\data__pilgrim-team-dynamic-network__s0.png",
+".review-tmp\\slices\\data__pilgrim-team-dynamic-network__s1.png",
+".review-tmp\\slices\\data__pilgrim-team-dynamic-network__s2.png",
+".review-tmp\\slices\\data__pilgrim-team-dynamic-network__s3.png",
+".review-tmp\\slices\\data__pilgrim-team-psychology-arc__s0.png",
+".review-tmp\\slices\\data__pilgrim-team-psychology-arc__s1.png",
+".review-tmp\\slices\\data__pilgrim-team-psychology-arc__s2.png",
+".review-tmp\\slices\\data__pilgrim-team-psychology-arc__s3.png",
+".review-tmp\\slices\\data__poetry-rhythm-analysis__s0.png",
+".review-tmp\\slices\\data__poetry-rhythm-analysis__s1.png",
+".review-tmp\\slices\\data__poetry-rhythm-analysis__s2.png",
+".review-tmp\\slices\\data__poetry-rhythm-analysis__s3.png"
+]
+},
+{
+"group": 35,
+"pages": [
+"data/power-resources.html"
+],
+"slice_count": 8,
+"paths": [
+".review-tmp\\slices\\data__power-resources__s0.png",
+".review-tmp\\slices\\data__power-resources__s1.png",
+".review-tmp\\slices\\data__power-resources__s2.png",
+".review-tmp\\slices\\data__power-resources__s3.png",
+".review-tmp\\slices\\data__power-resources__s4.png",
+".review-tmp\\slices\\data__power-resources__s5.png",
+".review-tmp\\slices\\data__power-resources__s6.png",
+".review-tmp\\slices\\data__power-resources__s7.png"
+]
+},
+{
+"group": 36,
+"pages": [
+"data/relationships.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\data__relationships__s0.png",
+".review-tmp\\slices\\data__relationships__s1.png",
+".review-tmp\\slices\\data__relationships__s2.png",
+".review-tmp\\slices\\data__relationships__s3.png",
+".review-tmp\\slices\\data__relationships__s4.png",
+".review-tmp\\slices\\data__relationships__s5.png",
+".review-tmp\\slices\\data__relationships__s6.png",
+".review-tmp\\slices\\data__relationships__s7.png",
+".review-tmp\\slices\\data__relationships__s8.png",
+".review-tmp\\slices\\data__relationships__s9.png",
+".review-tmp\\slices\\data__relationships__s10.png",
+".review-tmp\\slices\\data__relationships__s11.png"
+]
+},
+{
+"group": 37,
+"pages": [
+"data/risk-project.html",
+"data/search.html"
+],
+"slice_count": 9,
+"paths": [
+".review-tmp\\slices\\data__risk-project__s0.png",
+".review-tmp\\slices\\data__risk-project__s1.png",
+".review-tmp\\slices\\data__risk-project__s2.png",
+".review-tmp\\slices\\data__risk-project__s3.png",
+".review-tmp\\slices\\data__risk-project__s4.png",
+".review-tmp\\slices\\data__risk-project__s5.png",
+".review-tmp\\slices\\data__risk-project__s6.png",
+".review-tmp\\slices\\data__risk-project__s7.png",
+".review-tmp\\slices\\data__search__s0.png"
+]
+},
+{
+"group": 38,
+"pages": [
+"data/six-senses-narratology-network.html",
+"data/social-media.html",
+"data/tag-cloud.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\data__six-senses-narratology-network__s0.png",
+".review-tmp\\slices\\data__six-senses-narratology-network__s1.png",
+".review-tmp\\slices\\data__six-senses-narratology-network__s2.png",
+".review-tmp\\slices\\data__six-senses-narratology-network__s3.png",
+".review-tmp\\slices\\data__six-senses-narratology-network__s4.png",
+".review-tmp\\slices\\data__social-media__s0.png",
+".review-tmp\\slices\\data__social-media__s1.png",
+".review-tmp\\slices\\data__social-media__s2.png",
+".review-tmp\\slices\\data__social-media__s3.png",
+".review-tmp\\slices\\data__tag-cloud__s0.png",
+".review-tmp\\slices\\data__tag-cloud__s1.png"
+]
+},
+{
+"group": 39,
+"pages": [
+"data/text-evolution.html",
+"data/text-search.html",
+"data/theological-intervention-network.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\data__text-evolution__s0.png",
+".review-tmp\\slices\\data__text-evolution__s1.png",
+".review-tmp\\slices\\data__text-evolution__s2.png",
+".review-tmp\\slices\\data__text-evolution__s3.png",
+".review-tmp\\slices\\data__text-evolution__s4.png",
+".review-tmp\\slices\\data__text-search__s0.png",
+".review-tmp\\slices\\data__text-search__s1.png",
+".review-tmp\\slices\\data__theological-intervention-network__s0.png",
+".review-tmp\\slices\\data__theological-intervention-network__s1.png",
+".review-tmp\\slices\\data__theological-intervention-network__s2.png"
+]
+},
+{
+"group": 40,
+"pages": [
+"data/timeline.html",
+"data/underworld-power-network.html",
+"data/visual-art.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\data__timeline__s0.png",
+".review-tmp\\slices\\data__timeline__s1.png",
+".review-tmp\\slices\\data__timeline__s2.png",
+".review-tmp\\slices\\data__underworld-power-network__s0.png",
+".review-tmp\\slices\\data__underworld-power-network__s1.png",
+".review-tmp\\slices\\data__underworld-power-network__s2.png",
+".review-tmp\\slices\\data__underworld-power-network__s3.png",
+".review-tmp\\slices\\data__underworld-power-network__s4.png",
+".review-tmp\\slices\\data__visual-art__s0.png",
+".review-tmp\\slices\\data__visual-art__s1.png",
+".review-tmp\\slices\\data__visual-art__s2.png",
+".review-tmp\\slices\\data__visual-art__s3.png"
+]
+},
+{
+"group": 41,
+"pages": [
+"data/workplace.html",
+"dukou-engine.html",
+"en/81-hardships-view.html",
+"en/81-hardships.html",
+"en/academic-papers.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\data__workplace__s0.png",
+".review-tmp\\slices\\data__workplace__s1.png",
+".review-tmp\\slices\\data__workplace__s2.png",
+".review-tmp\\slices\\data__workplace__s3.png",
+".review-tmp\\slices\\dukou-engine__s0.png",
+".review-tmp\\slices\\dukou-engine__s1.png",
+".review-tmp\\slices\\en__81-hardships-view__s0.png",
+".review-tmp\\slices\\en__81-hardships__s0.png",
+".review-tmp\\slices\\en__81-hardships__s1.png",
+".review-tmp\\slices\\en__81-hardships__s2.png",
+".review-tmp\\slices\\en__academic-papers__s0.png",
+".review-tmp\\slices\\en__academic-papers__s1.png"
+]
+},
+{
+"group": 42,
+"pages": [
+"en/aesthetics.html",
+"en/ai-dialogue.html",
+"en/bestiary.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\en__aesthetics__s0.png",
+".review-tmp\\slices\\en__aesthetics__s1.png",
+".review-tmp\\slices\\en__aesthetics__s2.png",
+".review-tmp\\slices\\en__aesthetics__s3.png",
+".review-tmp\\slices\\en__aesthetics__s4.png",
+".review-tmp\\slices\\en__aesthetics__s5.png",
+".review-tmp\\slices\\en__ai-dialogue__s0.png",
+".review-tmp\\slices\\en__ai-dialogue__s1.png",
+".review-tmp\\slices\\en__bestiary__s0.png",
+".review-tmp\\slices\\en__bestiary__s1.png"
+]
+},
+{
+"group": 43,
+"pages": [
+"en/business-model.html"
+],
+"slice_count": 9,
+"paths": [
+".review-tmp\\slices\\en__business-model__s0.png",
+".review-tmp\\slices\\en__business-model__s1.png",
+".review-tmp\\slices\\en__business-model__s2.png",
+".review-tmp\\slices\\en__business-model__s3.png",
+".review-tmp\\slices\\en__business-model__s4.png",
+".review-tmp\\slices\\en__business-model__s5.png",
+".review-tmp\\slices\\en__business-model__s6.png",
+".review-tmp\\slices\\en__business-model__s7.png",
+".review-tmp\\slices\\en__business-model__s8.png"
+]
+},
+{
+"group": 44,
+"pages": [
+"en/cave-estate.html",
+"en/century-dialogue.html",
+"en/chapter-stats.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\en__cave-estate__s0.png",
+".review-tmp\\slices\\en__cave-estate__s1.png",
+".review-tmp\\slices\\en__cave-estate__s2.png",
+".review-tmp\\slices\\en__cave-estate__s3.png",
+".review-tmp\\slices\\en__cave-estate__s4.png",
+".review-tmp\\slices\\en__cave-estate__s5.png",
+".review-tmp\\slices\\en__century-dialogue__s0.png",
+".review-tmp\\slices\\en__century-dialogue__s1.png",
+".review-tmp\\slices\\en__chapter-stats__s0.png",
+".review-tmp\\slices\\en__chapter-stats__s1.png",
+".review-tmp\\slices\\en__chapter-stats__s2.png"
+]
+},
+{
+"group": 45,
+"pages": [
+"en/chapter-structure-graph.html",
+"en/chapters-map.html",
+"en/character-appearance.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\en__chapter-structure-graph__s0.png",
+".review-tmp\\slices\\en__chapter-structure-graph__s1.png",
+".review-tmp\\slices\\en__chapter-structure-graph__s2.png",
+".review-tmp\\slices\\en__chapters-map__s0.png",
+".review-tmp\\slices\\en__chapters-map__s1.png",
+".review-tmp\\slices\\en__chapters-map__s2.png",
+".review-tmp\\slices\\en__chapters-map__s3.png",
+".review-tmp\\slices\\en__chapters-map__s4.png",
+".review-tmp\\slices\\en__chapters-map__s5.png",
+".review-tmp\\slices\\en__character-appearance__s0.png",
+".review-tmp\\slices\\en__character-appearance__s1.png",
+".review-tmp\\slices\\en__character-appearance__s2.png"
+]
+},
+{
+"group": 46,
+"pages": [
+"en/character-bailongma.html",
+"en/character-bajie.html",
+"en/character-dynamic-network.html",
+"en/character-presence-timeline.html",
+"en/character-relationship-3d-view.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\en__character-bailongma__s0.png",
+".review-tmp\\slices\\en__character-bailongma__s1.png",
+".review-tmp\\slices\\en__character-bajie__s0.png",
+".review-tmp\\slices\\en__character-bajie__s1.png",
+".review-tmp\\slices\\en__character-dynamic-network__s0.png",
+".review-tmp\\slices\\en__character-dynamic-network__s1.png",
+".review-tmp\\slices\\en__character-dynamic-network__s2.png",
+".review-tmp\\slices\\en__character-presence-timeline__s0.png",
+".review-tmp\\slices\\en__character-presence-timeline__s1.png",
+".review-tmp\\slices\\en__character-presence-timeline__s2.png",
+".review-tmp\\slices\\en__character-presence-timeline__s3.png",
+".review-tmp\\slices\\en__character-relationship-3d-view__s0.png"
+]
+},
+{
+"group": 47,
+"pages": [
+"en/character-relationship-3d.html",
+"en/character-semantic-network.html"
+],
+"slice_count": 7,
+"paths": [
+".review-tmp\\slices\\en__character-relationship-3d__s0.png",
+".review-tmp\\slices\\en__character-relationship-3d__s1.png",
+".review-tmp\\slices\\en__character-semantic-network__s0.png",
+".review-tmp\\slices\\en__character-semantic-network__s1.png",
+".review-tmp\\slices\\en__character-semantic-network__s2.png",
+".review-tmp\\slices\\en__character-semantic-network__s3.png",
+".review-tmp\\slices\\en__character-semantic-network__s4.png"
+]
+},
+{
+"group": 48,
+"pages": [
+"en/character-sentiment-arc.html",
+"en/character-shaseng.html",
+"en/character-tangseng.html",
+"en/character-wukong.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\en__character-sentiment-arc__s0.png",
+".review-tmp\\slices\\en__character-sentiment-arc__s1.png",
+".review-tmp\\slices\\en__character-sentiment-arc__s2.png",
+".review-tmp\\slices\\en__character-sentiment-arc__s3.png",
+".review-tmp\\slices\\en__character-sentiment-arc__s4.png",
+".review-tmp\\slices\\en__character-sentiment-arc__s5.png",
+".review-tmp\\slices\\en__character-shaseng__s0.png",
+".review-tmp\\slices\\en__character-shaseng__s1.png",
+".review-tmp\\slices\\en__character-tangseng__s0.png",
+".review-tmp\\slices\\en__character-tangseng__s1.png",
+".review-tmp\\slices\\en__character-wukong__s0.png",
+".review-tmp\\slices\\en__character-wukong__s1.png"
+]
+},
+{
+"group": 49,
+"pages": [
+"en/characters.html",
+"en/chart-design.html"
+],
+"slice_count": 8,
+"paths": [
+".review-tmp\\slices\\en__characters__s0.png",
+".review-tmp\\slices\\en__characters__s1.png",
+".review-tmp\\slices\\en__chart-design__s0.png",
+".review-tmp\\slices\\en__chart-design__s1.png",
+".review-tmp\\slices\\en__chart-design__s2.png",
+".review-tmp\\slices\\en__chart-design__s3.png",
+".review-tmp\\slices\\en__chart-design__s4.png",
+".review-tmp\\slices\\en__chart-design__s5.png"
+]
+},
+{
+"group": 50,
+"pages": [
+"en/cognitive-psychology.html",
+"en/concept-device.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\en__cognitive-psychology__s0.png",
+".review-tmp\\slices\\en__cognitive-psychology__s1.png",
+".review-tmp\\slices\\en__cognitive-psychology__s2.png",
+".review-tmp\\slices\\en__cognitive-psychology__s3.png",
+".review-tmp\\slices\\en__cognitive-psychology__s4.png",
+".review-tmp\\slices\\en__cognitive-psychology__s5.png",
+".review-tmp\\slices\\en__cognitive-psychology__s6.png",
+".review-tmp\\slices\\en__cognitive-psychology__s7.png",
+".review-tmp\\slices\\en__concept-device__s0.png",
+".review-tmp\\slices\\en__concept-device__s1.png",
+".review-tmp\\slices\\en__concept-device__s2.png",
+".review-tmp\\slices\\en__concept-device__s3.png"
+]
+},
+{
+"group": 51,
+"pages": [
+"en/counterfactual.html",
+"en/criticism-history.html",
+"en/cross-time-danmaku.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\en__counterfactual__s0.png",
+".review-tmp\\slices\\en__counterfactual__s1.png",
+".review-tmp\\slices\\en__counterfactual__s2.png",
+".review-tmp\\slices\\en__counterfactual__s3.png",
+".review-tmp\\slices\\en__criticism-history__s0.png",
+".review-tmp\\slices\\en__criticism-history__s1.png",
+".review-tmp\\slices\\en__criticism-history__s2.png",
+".review-tmp\\slices\\en__criticism-history__s3.png",
+".review-tmp\\slices\\en__criticism-history__s4.png",
+".review-tmp\\slices\\en__cross-time-danmaku__s0.png",
+".review-tmp\\slices\\en__cross-time-danmaku__s1.png",
+".review-tmp\\slices\\en__cross-time-danmaku__s2.png"
+]
+},
+{
+"group": 52,
+"pages": [
+"en/cultural-misreading.html",
+"en/customs-pass-route.html",
+"en/dashboard.html",
+"en/data-explorer.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\en__cultural-misreading__s0.png",
+".review-tmp\\slices\\en__cultural-misreading__s1.png",
+".review-tmp\\slices\\en__cultural-misreading__s2.png",
+".review-tmp\\slices\\en__cultural-misreading__s3.png",
+".review-tmp\\slices\\en__cultural-misreading__s4.png",
+".review-tmp\\slices\\en__customs-pass-route__s0.png",
+".review-tmp\\slices\\en__customs-pass-route__s1.png",
+".review-tmp\\slices\\en__customs-pass-route__s2.png",
+".review-tmp\\slices\\en__dashboard__s0.png",
+".review-tmp\\slices\\en__dashboard__s1.png",
+".review-tmp\\slices\\en__data-explorer__s0.png"
+]
+},
+{
+"group": 53,
+"pages": [
+"en/deconstruction.html",
+"en/dialogue-sentiment.html",
+"en/dukou-engine.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\en__deconstruction__s0.png",
+".review-tmp\\slices\\en__deconstruction__s1.png",
+".review-tmp\\slices\\en__deconstruction__s2.png",
+".review-tmp\\slices\\en__deconstruction__s3.png",
+".review-tmp\\slices\\en__dialogue-sentiment__s0.png",
+".review-tmp\\slices\\en__dialogue-sentiment__s1.png",
+".review-tmp\\slices\\en__dialogue-sentiment__s2.png",
+".review-tmp\\slices\\en__dialogue-sentiment__s3.png",
+".review-tmp\\slices\\en__dialogue-sentiment__s4.png",
+".review-tmp\\slices\\en__dukou-engine__s0.png"
+]
+},
+{
+"group": 54,
+"pages": [
+"en/ecology.html",
+"en/emotional-heatmap.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\en__ecology__s0.png",
+".review-tmp\\slices\\en__ecology__s1.png",
+".review-tmp\\slices\\en__ecology__s2.png",
+".review-tmp\\slices\\en__ecology__s3.png",
+".review-tmp\\slices\\en__ecology__s4.png",
+".review-tmp\\slices\\en__ecology__s5.png",
+".review-tmp\\slices\\en__ecology__s6.png",
+".review-tmp\\slices\\en__ecology__s7.png",
+".review-tmp\\slices\\en__emotional-heatmap__s0.png",
+".review-tmp\\slices\\en__emotional-heatmap__s1.png",
+".review-tmp\\slices\\en__emotional-heatmap__s2.png"
+]
+},
+{
+"group": 55,
+"pages": [
+"en/essay-ai-era.html",
+"en/essay-buddhist-chan.html",
+"en/essay-chapter-couplets.html",
+"en/essay-character-fu.html",
+"en/essay-cipai-linjiangxian.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\en__essay-ai-era__s0.png",
+".review-tmp\\slices\\en__essay-ai-era__s1.png",
+".review-tmp\\slices\\en__essay-buddhist-chan__s0.png",
+".review-tmp\\slices\\en__essay-buddhist-chan__s1.png",
+".review-tmp\\slices\\en__essay-chapter-couplets__s0.png",
+".review-tmp\\slices\\en__essay-chapter-couplets__s1.png",
+".review-tmp\\slices\\en__essay-character-fu__s0.png",
+".review-tmp\\slices\\en__essay-character-fu__s1.png",
+".review-tmp\\slices\\en__essay-cipai-linjiangxian__s0.png",
+".review-tmp\\slices\\en__essay-cipai-linjiangxian__s1.png"
+]
+},
+{
+"group": 56,
+"pages": [
+"en/essay-cipai-mantingfang.html",
+"en/essay-cipai-shuidiaogetou.html",
+"en/essay-cipai-xijiangyue.html",
+"en/essay-composition-origins.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\en__essay-cipai-mantingfang__s0.png",
+".review-tmp\\slices\\en__essay-cipai-mantingfang__s1.png",
+".review-tmp\\slices\\en__essay-cipai-mantingfang__s2.png",
+".review-tmp\\slices\\en__essay-cipai-shuidiaogetou__s0.png",
+".review-tmp\\slices\\en__essay-cipai-shuidiaogetou__s1.png",
+".review-tmp\\slices\\en__essay-cipai-shuidiaogetou__s2.png",
+".review-tmp\\slices\\en__essay-cipai-xijiangyue__s0.png",
+".review-tmp\\slices\\en__essay-cipai-xijiangyue__s1.png",
+".review-tmp\\slices\\en__essay-cipai-xijiangyue__s2.png",
+".review-tmp\\slices\\en__essay-composition-origins__s0.png",
+".review-tmp\\slices\\en__essay-composition-origins__s1.png",
+".review-tmp\\slices\\en__essay-composition-origins__s2.png"
+]
+},
+{
+"group": 57,
+"pages": [
+"en/essay-divine-bureaucracy.html",
+"en/essay-folk-belief.html",
+"en/essay-historical-xuanzang.html",
+"en/essay-information-cocoon.html",
+"en/essay-ming-economy.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\en__essay-divine-bureaucracy__s0.png",
+".review-tmp\\slices\\en__essay-divine-bureaucracy__s1.png",
+".review-tmp\\slices\\en__essay-folk-belief__s0.png",
+".review-tmp\\slices\\en__essay-folk-belief__s1.png",
+".review-tmp\\slices\\en__essay-historical-xuanzang__s0.png",
+".review-tmp\\slices\\en__essay-historical-xuanzang__s1.png",
+".review-tmp\\slices\\en__essay-information-cocoon__s0.png",
+".review-tmp\\slices\\en__essay-information-cocoon__s1.png",
+".review-tmp\\slices\\en__essay-information-cocoon__s2.png",
+".review-tmp\\slices\\en__essay-ming-economy__s0.png",
+".review-tmp\\slices\\en__essay-ming-economy__s1.png"
+]
+},
+{
+"group": 58,
+"pages": [
+"en/essay-ming-examination.html",
+"en/essay-ming-garrison.html",
+"en/essay-ming-intellectual-history.html",
+"en/essay-ming-judiciary.html",
+"en/essay-ming-literary-thought.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\en__essay-ming-examination__s0.png",
+".review-tmp\\slices\\en__essay-ming-examination__s1.png",
+".review-tmp\\slices\\en__essay-ming-garrison__s0.png",
+".review-tmp\\slices\\en__essay-ming-garrison__s1.png",
+".review-tmp\\slices\\en__essay-ming-intellectual-history__s0.png",
+".review-tmp\\slices\\en__essay-ming-intellectual-history__s1.png",
+".review-tmp\\slices\\en__essay-ming-intellectual-history__s2.png",
+".review-tmp\\slices\\en__essay-ming-judiciary__s0.png",
+".review-tmp\\slices\\en__essay-ming-judiciary__s1.png",
+".review-tmp\\slices\\en__essay-ming-literary-thought__s0.png",
+".review-tmp\\slices\\en__essay-ming-literary-thought__s1.png",
+".review-tmp\\slices\\en__essay-ming-literary-thought__s2.png"
+]
+},
+{
+"group": 59,
+"pages": [
+"en/essay-ming-maritime-ban.html",
+"en/essay-ming-metaphor.html",
+"en/essay-ming-military.html",
+"en/essay-ming-politics.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\en__essay-ming-maritime-ban__s0.png",
+".review-tmp\\slices\\en__essay-ming-maritime-ban__s1.png",
+".review-tmp\\slices\\en__essay-ming-metaphor__s0.png",
+".review-tmp\\slices\\en__essay-ming-metaphor__s1.png",
+".review-tmp\\slices\\en__essay-ming-metaphor__s2.png",
+".review-tmp\\slices\\en__essay-ming-military__s0.png",
+".review-tmp\\slices\\en__essay-ming-military__s1.png",
+".review-tmp\\slices\\en__essay-ming-military__s2.png",
+".review-tmp\\slices\\en__essay-ming-politics__s0.png",
+".review-tmp\\slices\\en__essay-ming-politics__s1.png"
+]
+},
+{
+"group": 60,
+"pages": [
+"en/essay-ming-religion.html",
+"en/essay-ming-social-customs.html",
+"en/essay-modern-management.html",
+"en/essay-original-poetry.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\en__essay-ming-religion__s0.png",
+".review-tmp\\slices\\en__essay-ming-religion__s1.png",
+".review-tmp\\slices\\en__essay-ming-religion__s2.png",
+".review-tmp\\slices\\en__essay-ming-social-customs__s0.png",
+".review-tmp\\slices\\en__essay-ming-social-customs__s1.png",
+".review-tmp\\slices\\en__essay-ming-social-customs__s2.png",
+".review-tmp\\slices\\en__essay-modern-management__s0.png",
+".review-tmp\\slices\\en__essay-modern-management__s1.png",
+".review-tmp\\slices\\en__essay-modern-management__s2.png",
+".review-tmp\\slices\\en__essay-original-poetry__s0.png",
+".review-tmp\\slices\\en__essay-original-poetry__s1.png"
+]
+},
+{
+"group": 61,
+"pages": [
+"en/essay-poetry-imagery.html",
+"en/essay-poetry-opening.html",
+"en/essay-quanzhen-daoism.html",
+"en/essay-rhythm-analysis.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\en__essay-poetry-imagery__s0.png",
+".review-tmp\\slices\\en__essay-poetry-imagery__s1.png",
+".review-tmp\\slices\\en__essay-poetry-imagery__s2.png",
+".review-tmp\\slices\\en__essay-poetry-opening__s0.png",
+".review-tmp\\slices\\en__essay-poetry-opening__s1.png",
+".review-tmp\\slices\\en__essay-poetry-opening__s2.png",
+".review-tmp\\slices\\en__essay-quanzhen-daoism__s0.png",
+".review-tmp\\slices\\en__essay-quanzhen-daoism__s1.png",
+".review-tmp\\slices\\en__essay-rhythm-analysis__s0.png",
+".review-tmp\\slices\\en__essay-rhythm-analysis__s1.png"
+]
+},
+{
+"group": 62,
+"pages": [
+"en/essay-scenery-poems.html",
+"en/essay-thematic-poetry.html",
+"en/essay-three-teachings.html",
+"en/essay-version-evolution.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\en__essay-scenery-poems__s0.png",
+".review-tmp\\slices\\en__essay-scenery-poems__s1.png",
+".review-tmp\\slices\\en__essay-scenery-poems__s2.png",
+".review-tmp\\slices\\en__essay-thematic-poetry__s0.png",
+".review-tmp\\slices\\en__essay-thematic-poetry__s1.png",
+".review-tmp\\slices\\en__essay-three-teachings__s0.png",
+".review-tmp\\slices\\en__essay-three-teachings__s1.png",
+".review-tmp\\slices\\en__essay-three-teachings__s2.png",
+".review-tmp\\slices\\en__essay-version-evolution__s0.png",
+".review-tmp\\slices\\en__essay-version-evolution__s1.png",
+".review-tmp\\slices\\en__essay-version-evolution__s2.png"
+]
+},
+{
+"group": 63,
+"pages": [
+"en/essay-zen-koan-vs-neidan.html",
+"en/ethics-consumption.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\en__essay-zen-koan-vs-neidan__s0.png",
+".review-tmp\\slices\\en__essay-zen-koan-vs-neidan__s1.png",
+".review-tmp\\slices\\en__essay-zen-koan-vs-neidan__s2.png",
+".review-tmp\\slices\\en__ethics-consumption__s0.png",
+".review-tmp\\slices\\en__ethics-consumption__s1.png",
+".review-tmp\\slices\\en__ethics-consumption__s2.png",
+".review-tmp\\slices\\en__ethics-consumption__s3.png",
+".review-tmp\\slices\\en__ethics-consumption__s4.png",
+".review-tmp\\slices\\en__ethics-consumption__s5.png",
+".review-tmp\\slices\\en__ethics-consumption__s6.png",
+".review-tmp\\slices\\en__ethics-consumption__s7.png",
+".review-tmp\\slices\\en__ethics-consumption__s8.png"
+]
+},
+{
+"group": 64,
+"pages": [
+"en/famous-time-travel.html",
+"en/four-dimensional-research-network.html",
+"en/four-heavenly-kings-artifacts.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\en__famous-time-travel__s0.png",
+".review-tmp\\slices\\en__famous-time-travel__s1.png",
+".review-tmp\\slices\\en__four-dimensional-research-network__s0.png",
+".review-tmp\\slices\\en__four-dimensional-research-network__s1.png",
+".review-tmp\\slices\\en__four-dimensional-research-network__s2.png",
+".review-tmp\\slices\\en__four-dimensional-research-network__s3.png",
+".review-tmp\\slices\\en__four-heavenly-kings-artifacts__s0.png",
+".review-tmp\\slices\\en__four-heavenly-kings-artifacts__s1.png",
+".review-tmp\\slices\\en__four-heavenly-kings-artifacts__s2.png",
+".review-tmp\\slices\\en__four-heavenly-kings-artifacts__s3.png",
+".review-tmp\\slices\\en__four-heavenly-kings-artifacts__s4.png"
+]
+},
+{
+"group": 65,
+"pages": [
+"en/game-webnovel.html",
+"en/global-pattern.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\en__game-webnovel__s0.png",
+".review-tmp\\slices\\en__game-webnovel__s1.png",
+".review-tmp\\slices\\en__game-webnovel__s2.png",
+".review-tmp\\slices\\en__game-webnovel__s3.png",
+".review-tmp\\slices\\en__game-webnovel__s4.png",
+".review-tmp\\slices\\en__game-webnovel__s5.png",
+".review-tmp\\slices\\en__game-webnovel__s6.png",
+".review-tmp\\slices\\en__global-pattern__s0.png",
+".review-tmp\\slices\\en__global-pattern__s1.png",
+".review-tmp\\slices\\en__global-pattern__s2.png",
+".review-tmp\\slices\\en__global-pattern__s3.png",
+".review-tmp\\slices\\en__global-pattern__s4.png"
+]
+},
+{
+"group": 66,
+"pages": [
+"en/graph-explorer.html",
+"en/guanyin-six-roles-network.html",
+"en/guide.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\en__graph-explorer__s0.png",
+".review-tmp\\slices\\en__guanyin-six-roles-network__s0.png",
+".review-tmp\\slices\\en__guanyin-six-roles-network__s1.png",
+".review-tmp\\slices\\en__guanyin-six-roles-network__s2.png",
+".review-tmp\\slices\\en__guanyin-six-roles-network__s3.png",
+".review-tmp\\slices\\en__guanyin-six-roles-network__s4.png",
+".review-tmp\\slices\\en__guanyin-six-roles-network__s5.png",
+".review-tmp\\slices\\en__guide__s0.png",
+".review-tmp\\slices\\en__guide__s1.png",
+".review-tmp\\slices\\en__guide__s2.png"
+]
+},
+{
+"group": 67,
+"pages": [
+"en/hardship-difficulty-heatmap.html",
+"en/hardship-heatmap.html",
+"en/heaven-power-network.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\en__hardship-difficulty-heatmap__s0.png",
+".review-tmp\\slices\\en__hardship-difficulty-heatmap__s1.png",
+".review-tmp\\slices\\en__hardship-difficulty-heatmap__s2.png",
+".review-tmp\\slices\\en__hardship-heatmap__s0.png",
+".review-tmp\\slices\\en__hardship-heatmap__s1.png",
+".review-tmp\\slices\\en__hardship-heatmap__s2.png",
+".review-tmp\\slices\\en__heaven-power-network__s0.png",
+".review-tmp\\slices\\en__heaven-power-network__s1.png",
+".review-tmp\\slices\\en__heaven-power-network__s2.png",
+".review-tmp\\slices\\en__heaven-power-network__s3.png",
+".review-tmp\\slices\\en__heaven-power-network__s4.png",
+".review-tmp\\slices\\en__heaven-power-network__s5.png"
+]
+},
+{
+"group": 68,
+"pages": [
+"en/index.html",
+"en/intertextuality-network.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\en__index__s0.png",
+".review-tmp\\slices\\en__index__s1.png",
+".review-tmp\\slices\\en__index__s2.png",
+".review-tmp\\slices\\en__index__s3.png",
+".review-tmp\\slices\\en__index__s4.png",
+".review-tmp\\slices\\en__intertextuality-network__s0.png",
+".review-tmp\\slices\\en__intertextuality-network__s1.png",
+".review-tmp\\slices\\en__intertextuality-network__s2.png",
+".review-tmp\\slices\\en__intertextuality-network__s3.png",
+".review-tmp\\slices\\en__intertextuality-network__s4.png",
+".review-tmp\\slices\\en__intertextuality-network__s5.png"
+]
+},
+{
+"group": 69,
+"pages": [
+"en/journey-geo-semiotics.html",
+"en/journey-map-interactive.html",
+"en/journey-route.html",
+"en/journey-spacetime.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\en__journey-geo-semiotics__s0.png",
+".review-tmp\\slices\\en__journey-geo-semiotics__s1.png",
+".review-tmp\\slices\\en__journey-map-interactive__s0.png",
+".review-tmp\\slices\\en__journey-map-interactive__s1.png",
+".review-tmp\\slices\\en__journey-map-interactive__s2.png",
+".review-tmp\\slices\\en__journey-route__s0.png",
+".review-tmp\\slices\\en__journey-route__s1.png",
+".review-tmp\\slices\\en__journey-route__s2.png",
+".review-tmp\\slices\\en__journey-spacetime__s0.png",
+".review-tmp\\slices\\en__journey-spacetime__s1.png",
+".review-tmp\\slices\\en__journey-spacetime__s2.png"
+]
+},
+{
+"group": 70,
+"pages": [
+"en/jurisprudence.html"
+],
+"slice_count": 9,
+"paths": [
+".review-tmp\\slices\\en__jurisprudence__s0.png",
+".review-tmp\\slices\\en__jurisprudence__s1.png",
+".review-tmp\\slices\\en__jurisprudence__s2.png",
+".review-tmp\\slices\\en__jurisprudence__s3.png",
+".review-tmp\\slices\\en__jurisprudence__s4.png",
+".review-tmp\\slices\\en__jurisprudence__s5.png",
+".review-tmp\\slices\\en__jurisprudence__s6.png",
+".review-tmp\\slices\\en__jurisprudence__s7.png",
+".review-tmp\\slices\\en__jurisprudence__s8.png"
+]
+},
+{
+"group": 71,
+"pages": [
+"en/karma-reincarnation.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\en__karma-reincarnation__s0.png",
+".review-tmp\\slices\\en__karma-reincarnation__s1.png",
+".review-tmp\\slices\\en__karma-reincarnation__s2.png",
+".review-tmp\\slices\\en__karma-reincarnation__s3.png",
+".review-tmp\\slices\\en__karma-reincarnation__s4.png",
+".review-tmp\\slices\\en__karma-reincarnation__s5.png",
+".review-tmp\\slices\\en__karma-reincarnation__s6.png",
+".review-tmp\\slices\\en__karma-reincarnation__s7.png",
+".review-tmp\\slices\\en__karma-reincarnation__s8.png",
+".review-tmp\\slices\\en__karma-reincarnation__s9.png",
+".review-tmp\\slices\\en__karma-reincarnation__s10.png"
+]
+},
+{
+"group": 72,
+"pages": [
+"en/language-style-radar.html"
+],
+"slice_count": 3,
+"paths": [
+".review-tmp\\slices\\en__language-style-radar__s0.png",
+".review-tmp\\slices\\en__language-style-radar__s1.png",
+".review-tmp\\slices\\en__language-style-radar__s2.png"
+]
+},
+{
+"group": 73,
+"pages": [
+"en/linguistics.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\en__linguistics__s0.png",
+".review-tmp\\slices\\en__linguistics__s1.png",
+".review-tmp\\slices\\en__linguistics__s2.png",
+".review-tmp\\slices\\en__linguistics__s3.png",
+".review-tmp\\slices\\en__linguistics__s4.png",
+".review-tmp\\slices\\en__linguistics__s5.png",
+".review-tmp\\slices\\en__linguistics__s6.png",
+".review-tmp\\slices\\en__linguistics__s7.png",
+".review-tmp\\slices\\en__linguistics__s8.png",
+".review-tmp\\slices\\en__linguistics__s9.png"
+]
+},
+{
+"group": 74,
+"pages": [
+"en/magic-system.html"
+],
+"slice_count": 7,
+"paths": [
+".review-tmp\\slices\\en__magic-system__s0.png",
+".review-tmp\\slices\\en__magic-system__s1.png",
+".review-tmp\\slices\\en__magic-system__s2.png",
+".review-tmp\\slices\\en__magic-system__s3.png",
+".review-tmp\\slices\\en__magic-system__s4.png",
+".review-tmp\\slices\\en__magic-system__s5.png",
+".review-tmp\\slices\\en__magic-system__s6.png"
+]
+},
+{
+"group": 75,
+"pages": [
+"en/material-archaeology.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\en__material-archaeology__s0.png",
+".review-tmp\\slices\\en__material-archaeology__s1.png",
+".review-tmp\\slices\\en__material-archaeology__s2.png",
+".review-tmp\\slices\\en__material-archaeology__s3.png",
+".review-tmp\\slices\\en__material-archaeology__s4.png",
+".review-tmp\\slices\\en__material-archaeology__s5.png",
+".review-tmp\\slices\\en__material-archaeology__s6.png",
+".review-tmp\\slices\\en__material-archaeology__s7.png",
+".review-tmp\\slices\\en__material-archaeology__s8.png",
+".review-tmp\\slices\\en__material-archaeology__s9.png",
+".review-tmp\\slices\\en__material-archaeology__s10.png",
+".review-tmp\\slices\\en__material-archaeology__s11.png"
+]
+},
+{
+"group": 76,
+"pages": [
+"en/material-archaeology.html"
+],
+"slice_count": 3,
+"paths": [
+".review-tmp\\slices\\en__material-archaeology__s12.png",
+".review-tmp\\slices\\en__material-archaeology__s13.png",
+".review-tmp\\slices\\en__material-archaeology__s14.png"
+]
+},
+{
+"group": 77,
+"pages": [
+"en/mbti-evolution.html",
+"en/methodology-matrix.html",
+"en/methodology.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\en__mbti-evolution__s0.png",
+".review-tmp\\slices\\en__mbti-evolution__s1.png",
+".review-tmp\\slices\\en__mbti-evolution__s2.png",
+".review-tmp\\slices\\en__methodology-matrix__s0.png",
+".review-tmp\\slices\\en__methodology-matrix__s1.png",
+".review-tmp\\slices\\en__methodology-matrix__s2.png",
+".review-tmp\\slices\\en__methodology-matrix__s3.png",
+".review-tmp\\slices\\en__methodology-matrix__s4.png",
+".review-tmp\\slices\\en__methodology-matrix__s5.png",
+".review-tmp\\slices\\en__methodology__s0.png",
+".review-tmp\\slices\\en__methodology__s1.png"
+]
+},
+{
+"group": 78,
+"pages": [
+"en/ming-political-thought-comparison.html",
+"en/monster-background.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\en__ming-political-thought-comparison__s0.png",
+".review-tmp\\slices\\en__ming-political-thought-comparison__s1.png",
+".review-tmp\\slices\\en__ming-political-thought-comparison__s2.png",
+".review-tmp\\slices\\en__ming-political-thought-comparison__s3.png",
+".review-tmp\\slices\\en__ming-political-thought-comparison__s4.png",
+".review-tmp\\slices\\en__monster-background__s0.png",
+".review-tmp\\slices\\en__monster-background__s1.png",
+".review-tmp\\slices\\en__monster-background__s2.png",
+".review-tmp\\slices\\en__monster-background__s3.png",
+".review-tmp\\slices\\en__monster-background__s4.png"
+]
+},
+{
+"group": 79,
+"pages": [
+"en/monster-capability-radar.html",
+"en/monster-ecology-network.html"
+],
+"slice_count": 8,
+"paths": [
+".review-tmp\\slices\\en__monster-capability-radar__s0.png",
+".review-tmp\\slices\\en__monster-capability-radar__s1.png",
+".review-tmp\\slices\\en__monster-capability-radar__s2.png",
+".review-tmp\\slices\\en__monster-capability-radar__s3.png",
+".review-tmp\\slices\\en__monster-ecology-network__s0.png",
+".review-tmp\\slices\\en__monster-ecology-network__s1.png",
+".review-tmp\\slices\\en__monster-ecology-network__s2.png",
+".review-tmp\\slices\\en__monster-ecology-network__s3.png"
+]
+},
+{
+"group": 80,
+"pages": [
+"en/monster-female-network.html",
+"en/monster-hierarchy-network.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\en__monster-female-network__s0.png",
+".review-tmp\\slices\\en__monster-female-network__s1.png",
+".review-tmp\\slices\\en__monster-female-network__s2.png",
+".review-tmp\\slices\\en__monster-female-network__s3.png",
+".review-tmp\\slices\\en__monster-female-network__s4.png",
+".review-tmp\\slices\\en__monster-female-network__s5.png",
+".review-tmp\\slices\\en__monster-hierarchy-network__s0.png",
+".review-tmp\\slices\\en__monster-hierarchy-network__s1.png",
+".review-tmp\\slices\\en__monster-hierarchy-network__s2.png",
+".review-tmp\\slices\\en__monster-hierarchy-network__s3.png",
+".review-tmp\\slices\\en__monster-hierarchy-network__s4.png"
+]
+},
+{
+"group": 81,
+"pages": [
+"en/monster-sociology.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\en__monster-sociology__s0.png",
+".review-tmp\\slices\\en__monster-sociology__s1.png",
+".review-tmp\\slices\\en__monster-sociology__s2.png",
+".review-tmp\\slices\\en__monster-sociology__s3.png",
+".review-tmp\\slices\\en__monster-sociology__s4.png",
+".review-tmp\\slices\\en__monster-sociology__s5.png",
+".review-tmp\\slices\\en__monster-sociology__s6.png",
+".review-tmp\\slices\\en__monster-sociology__s7.png",
+".review-tmp\\slices\\en__monster-sociology__s8.png",
+".review-tmp\\slices\\en__monster-sociology__s9.png",
+".review-tmp\\slices\\en__monster-sociology__s10.png",
+".review-tmp\\slices\\en__monster-sociology__s11.png"
+]
+},
+{
+"group": 82,
+"pages": [
+"en/monster-victims-network.html",
+"en/music-structure.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\en__monster-victims-network__s0.png",
+".review-tmp\\slices\\en__monster-victims-network__s1.png",
+".review-tmp\\slices\\en__monster-victims-network__s2.png",
+".review-tmp\\slices\\en__monster-victims-network__s3.png",
+".review-tmp\\slices\\en__monster-victims-network__s4.png",
+".review-tmp\\slices\\en__music-structure__s0.png",
+".review-tmp\\slices\\en__music-structure__s1.png",
+".review-tmp\\slices\\en__music-structure__s2.png",
+".review-tmp\\slices\\en__music-structure__s3.png",
+".review-tmp\\slices\\en__music-structure__s4.png"
+]
+},
+{
+"group": 83,
+"pages": [
+"en/narrative-experiment.html",
+"en/narrative-rhythm-curve.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\en__narrative-experiment__s0.png",
+".review-tmp\\slices\\en__narrative-experiment__s1.png",
+".review-tmp\\slices\\en__narrative-experiment__s2.png",
+".review-tmp\\slices\\en__narrative-experiment__s3.png",
+".review-tmp\\slices\\en__narrative-experiment__s4.png",
+".review-tmp\\slices\\en__narrative-experiment__s5.png",
+".review-tmp\\slices\\en__narrative-experiment__s6.png",
+".review-tmp\\slices\\en__narrative-rhythm-curve__s0.png",
+".review-tmp\\slices\\en__narrative-rhythm-curve__s1.png",
+".review-tmp\\slices\\en__narrative-rhythm-curve__s2.png"
+]
+},
+{
+"group": 84,
+"pages": [
+"en/narratology-12d-network.html"
+],
+"slice_count": 7,
+"paths": [
+".review-tmp\\slices\\en__narratology-12d-network__s0.png",
+".review-tmp\\slices\\en__narratology-12d-network__s1.png",
+".review-tmp\\slices\\en__narratology-12d-network__s2.png",
+".review-tmp\\slices\\en__narratology-12d-network__s3.png",
+".review-tmp\\slices\\en__narratology-12d-network__s4.png",
+".review-tmp\\slices\\en__narratology-12d-network__s5.png",
+".review-tmp\\slices\\en__narratology-12d-network__s6.png"
+]
+},
+{
+"group": 85,
+"pages": [
+"en/narratology-13d-network.html",
+"en/perf-canvas-rendering.html"
+],
+"slice_count": 10,
+"paths": [
+".review-tmp\\slices\\en__narratology-13d-network__s0.png",
+".review-tmp\\slices\\en__narratology-13d-network__s1.png",
+".review-tmp\\slices\\en__narratology-13d-network__s2.png",
+".review-tmp\\slices\\en__narratology-13d-network__s3.png",
+".review-tmp\\slices\\en__narratology-13d-network__s4.png",
+".review-tmp\\slices\\en__narratology-13d-network__s5.png",
+".review-tmp\\slices\\en__narratology-13d-network__s6.png",
+".review-tmp\\slices\\en__perf-canvas-rendering__s0.png",
+".review-tmp\\slices\\en__perf-canvas-rendering__s1.png",
+".review-tmp\\slices\\en__perf-canvas-rendering__s2.png"
+]
+},
+{
+"group": 86,
+"pages": [
+"en/philosophy.html"
+],
+"slice_count": 9,
+"paths": [
+".review-tmp\\slices\\en__philosophy__s0.png",
+".review-tmp\\slices\\en__philosophy__s1.png",
+".review-tmp\\slices\\en__philosophy__s2.png",
+".review-tmp\\slices\\en__philosophy__s3.png",
+".review-tmp\\slices\\en__philosophy__s4.png",
+".review-tmp\\slices\\en__philosophy__s5.png",
+".review-tmp\\slices\\en__philosophy__s6.png",
+".review-tmp\\slices\\en__philosophy__s7.png",
+".review-tmp\\slices\\en__philosophy__s8.png"
+]
+},
+{
+"group": 87,
+"pages": [
+"en/pilgrim-team-dynamic-network.html",
+"en/pilgrim-team-psychology-arc.html"
+],
+"slice_count": 9,
+"paths": [
+".review-tmp\\slices\\en__pilgrim-team-dynamic-network__s0.png",
+".review-tmp\\slices\\en__pilgrim-team-dynamic-network__s1.png",
+".review-tmp\\slices\\en__pilgrim-team-dynamic-network__s2.png",
+".review-tmp\\slices\\en__pilgrim-team-dynamic-network__s3.png",
+".review-tmp\\slices\\en__pilgrim-team-psychology-arc__s0.png",
+".review-tmp\\slices\\en__pilgrim-team-psychology-arc__s1.png",
+".review-tmp\\slices\\en__pilgrim-team-psychology-arc__s2.png",
+".review-tmp\\slices\\en__pilgrim-team-psychology-arc__s3.png",
+".review-tmp\\slices\\en__pilgrim-team-psychology-arc__s4.png"
+]
+},
+{
+"group": 88,
+"pages": [
+"en/poetry-rhythm-analysis.html"
+],
+"slice_count": 4,
+"paths": [
+".review-tmp\\slices\\en__poetry-rhythm-analysis__s0.png",
+".review-tmp\\slices\\en__poetry-rhythm-analysis__s1.png",
+".review-tmp\\slices\\en__poetry-rhythm-analysis__s2.png",
+".review-tmp\\slices\\en__poetry-rhythm-analysis__s3.png"
+]
+},
+{
+"group": 89,
+"pages": [
+"en/power-resources.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\en__power-resources__s0.png",
+".review-tmp\\slices\\en__power-resources__s1.png",
+".review-tmp\\slices\\en__power-resources__s2.png",
+".review-tmp\\slices\\en__power-resources__s3.png",
+".review-tmp\\slices\\en__power-resources__s4.png",
+".review-tmp\\slices\\en__power-resources__s5.png",
+".review-tmp\\slices\\en__power-resources__s6.png",
+".review-tmp\\slices\\en__power-resources__s7.png",
+".review-tmp\\slices\\en__power-resources__s8.png",
+".review-tmp\\slices\\en__power-resources__s9.png",
+".review-tmp\\slices\\en__power-resources__s10.png"
+]
+},
+{
+"group": 90,
+"pages": [
+"en/relationships.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\en__relationships__s0.png",
+".review-tmp\\slices\\en__relationships__s1.png",
+".review-tmp\\slices\\en__relationships__s2.png",
+".review-tmp\\slices\\en__relationships__s3.png",
+".review-tmp\\slices\\en__relationships__s4.png",
+".review-tmp\\slices\\en__relationships__s5.png",
+".review-tmp\\slices\\en__relationships__s6.png",
+".review-tmp\\slices\\en__relationships__s7.png",
+".review-tmp\\slices\\en__relationships__s8.png",
+".review-tmp\\slices\\en__relationships__s9.png",
+".review-tmp\\slices\\en__relationships__s10.png",
+".review-tmp\\slices\\en__relationships__s11.png"
+]
+},
+{
+"group": 91,
+"pages": [
+"en/relationships.html"
+],
+"slice_count": 2,
+"paths": [
+".review-tmp\\slices\\en__relationships__s12.png",
+".review-tmp\\slices\\en__relationships__s13.png"
+]
+},
+{
+"group": 92,
+"pages": [
+"en/risk-project.html",
+"en/search.html",
+"en/site-map.html"
+],
+"slice_count": 12,
+"paths": [
+".review-tmp\\slices\\en__risk-project__s0.png",
+".review-tmp\\slices\\en__risk-project__s1.png",
+".review-tmp\\slices\\en__risk-project__s2.png",
+".review-tmp\\slices\\en__risk-project__s3.png",
+".review-tmp\\slices\\en__risk-project__s4.png",
+".review-tmp\\slices\\en__risk-project__s5.png",
+".review-tmp\\slices\\en__risk-project__s6.png",
+".review-tmp\\slices\\en__risk-project__s7.png",
+".review-tmp\\slices\\en__risk-project__s8.png",
+".review-tmp\\slices\\en__search__s0.png",
+".review-tmp\\slices\\en__site-map__s0.png",
+".review-tmp\\slices\\en__site-map__s1.png"
+]
+},
+{
+"group": 93,
+"pages": [
+"en/six-senses-narratology-network.html",
+"en/social-media.html",
+"en/tag-cloud.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\en__six-senses-narratology-network__s0.png",
+".review-tmp\\slices\\en__six-senses-narratology-network__s1.png",
+".review-tmp\\slices\\en__six-senses-narratology-network__s2.png",
+".review-tmp\\slices\\en__six-senses-narratology-network__s3.png",
+".review-tmp\\slices\\en__six-senses-narratology-network__s4.png",
+".review-tmp\\slices\\en__social-media__s0.png",
+".review-tmp\\slices\\en__social-media__s1.png",
+".review-tmp\\slices\\en__social-media__s2.png",
+".review-tmp\\slices\\en__social-media__s3.png",
+".review-tmp\\slices\\en__tag-cloud__s0.png",
+".review-tmp\\slices\\en__tag-cloud__s1.png"
+]
+},
+{
+"group": 94,
+"pages": [
+"en/text-evolution.html",
+"en/text-search.html",
+"en/theological-intervention-network.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\en__text-evolution__s0.png",
+".review-tmp\\slices\\en__text-evolution__s1.png",
+".review-tmp\\slices\\en__text-evolution__s2.png",
+".review-tmp\\slices\\en__text-evolution__s3.png",
+".review-tmp\\slices\\en__text-evolution__s4.png",
+".review-tmp\\slices\\en__text-evolution__s5.png",
+".review-tmp\\slices\\en__text-search__s0.png",
+".review-tmp\\slices\\en__text-search__s1.png",
+".review-tmp\\slices\\en__theological-intervention-network__s0.png",
+".review-tmp\\slices\\en__theological-intervention-network__s1.png",
+".review-tmp\\slices\\en__theological-intervention-network__s2.png"
+]
+},
+{
+"group": 95,
+"pages": [
+"en/timeline.html",
+"en/tribulations.html",
+"en/underworld-power-network.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\en__timeline__s0.png",
+".review-tmp\\slices\\en__timeline__s1.png",
+".review-tmp\\slices\\en__timeline__s2.png",
+".review-tmp\\slices\\en__tribulations__s0.png",
+".review-tmp\\slices\\en__tribulations__s1.png",
+".review-tmp\\slices\\en__underworld-power-network__s0.png",
+".review-tmp\\slices\\en__underworld-power-network__s1.png",
+".review-tmp\\slices\\en__underworld-power-network__s2.png",
+".review-tmp\\slices\\en__underworld-power-network__s3.png",
+".review-tmp\\slices\\en__underworld-power-network__s4.png",
+".review-tmp\\slices\\en__underworld-power-network__s5.png"
+]
+},
+{
+"group": 96,
+"pages": [
+"en/visual-art.html",
+"en/visualizations.html"
+],
+"slice_count": 9,
+"paths": [
+".review-tmp\\slices\\en__visual-art__s0.png",
+".review-tmp\\slices\\en__visual-art__s1.png",
+".review-tmp\\slices\\en__visual-art__s2.png",
+".review-tmp\\slices\\en__visual-art__s3.png",
+".review-tmp\\slices\\en__visual-art__s4.png",
+".review-tmp\\slices\\en__visualizations__s0.png",
+".review-tmp\\slices\\en__visualizations__s1.png",
+".review-tmp\\slices\\en__visualizations__s2.png",
+".review-tmp\\slices\\en__visualizations__s3.png"
+]
+},
+{
+"group": 97,
+"pages": [
+"en/workplace.html",
+"guide.html",
+"index.html"
+],
+"slice_count": 11,
+"paths": [
+".review-tmp\\slices\\en__workplace__s0.png",
+".review-tmp\\slices\\en__workplace__s1.png",
+".review-tmp\\slices\\en__workplace__s2.png",
+".review-tmp\\slices\\en__workplace__s3.png",
+".review-tmp\\slices\\en__workplace__s4.png",
+".review-tmp\\slices\\guide__s0.png",
+".review-tmp\\slices\\guide__s1.png",
+".review-tmp\\slices\\guide__s2.png",
+".review-tmp\\slices\\index__s0.png",
+".review-tmp\\slices\\index__s1.png",
+".review-tmp\\slices\\index__s2.png"
+]
+},
+{
+"group": 98,
+"pages": [
+"mobile-index.html",
+"rum-viewer.html",
+"visit-viewer.html"
+],
+"slice_count": 4,
+"paths": [
+".review-tmp\\slices\\mobile-index__s0.png",
+".review-tmp\\slices\\mobile-index__s1.png",
+".review-tmp\\slices\\rum-viewer__s0.png",
+".review-tmp\\slices\\visit-viewer__s0.png"
+]
+}
+]
