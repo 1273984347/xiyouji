@@ -11,6 +11,19 @@
 ---
 
 
+## W555 W555 工作复盘与优化分析报告（2026-09-06·v2.3.155）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-09-06.md | W555 | 新增·W550-W554 会话复盘（经验 8 项/技能 3 方案/未用技能 5 决策/场景 3 沉淀/问题 15 例/流程 -22%/WBS/自评） |
+| docs/10-方法论沉淀/README.md | W555 | 修改·方法论索引第 22 条 |
+| CHANGELOG.md | W555 | 新增·W555 版段 + 编号规则上限 W001-W555 |
+| 交接文档.md | W555 | 修改·头尾「最后更新」prepend W555 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W555 | 修改·版本行同步 v2.3.155（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W555 | 修改·四页脚链首 prepend W555（batch_cascade.py 执行） |
+| .github/workflows/README.md | W555 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W555 | 新增·W555 段（本段·batch_cascade.py 执行） |
+
 ## W554 W554 方案B阶段一全站复审管线 + 方案C数据内容审计全量（2026-09-06·v2.3.154）
 
 | 文件 | W | 说明 |
@@ -21,7 +34,7 @@
 | scripts/output/review-pass3/groups.json | W554 | 新增·B 方案 98 组分组清单（剩余 97 组审查复用） |
 | scripts/output/review-pass3/verdicts-pilot.jsonl | W554 | 新增·试审组终判存档（3 页 pass + 伪影教训注记） |
 | docs/superpowers/plans/2026-09-06-w554-content-audit-and-b-pipeline.md | W554 | 新增·审计报告与 B 恢复指令（8 项修复清单 F1-F8） |
-| .gitignore | W554 | 修改·新增 .review-tmp/（B 复审基线保留复用） |
+| .gitignore | W554 | 修改·新增 .review-tmp/（B 复审基线保留复用） |
 | scripts/_w553_jiacheck.py | W554 | 修改·级联落盘字节级核查脚本改 W554 口径（26 项断言复用） |
 | AGENTS.md | W554 | 修改·§4.3 补录滚动穿透教训 + EMBEDDED 反例 + 版本脚注 |
 | CHANGELOG.md | W554 | 新增·W554 版段 + 编号规则上限 W001-W554 |
