@@ -1,0 +1,1 @@
+{"group":1,"pages":[{"page":"curated.html","verdict":"pass","issues":[]},{"page":"dashboard.html","verdict":"pass","issues":[]},{"page":"data/81-hardships-view.html","verdict":"pass","issues":[]}],"note":"试审组（10 切片）。首判 curated FAIL 经复核实证为 reveal-in 未触发采集伪影（W550 G4 同源教训），采集脚本补滚动穿透后重采 232 页，同区域内容完整渲染，终判 3 页全 pass。","token_cost":"约 28 万","date":"2026-09-06"}

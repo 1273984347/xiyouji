@@ -1,0 +1,28 @@
+{
+  "batch": "W554",
+  "version": "v2.3.154",
+  "date": "2026-09-06",
+  "title": "W554 方案B阶段一全站复审管线 + 方案C数据内容审计全量 — 98组就绪·审计报告入档·8项修复清单",
+  "desc": "B阶段一管线+C数据审计",
+  "head_entry": "2026-09-06（v2.3.154 W554 方案B阶段一全站复审管线：232页采集/967切片/98分组·试审组端到端验证·滚动穿透伪影教训固化；方案C数据审计全量：L1 self-test 4/4·L2 17页对账0漂移·L3 九页判读121段落对+33事实声明·1真矛盾+8项修复清单出档）",
+  "head_sentence": "W554 B阶段一管线+C数据审计——98组就绪·审计报告入档",
+  "changelog_body": "\r\n\r\n> **来源**：W552 三方案计划的方案 B/C 执行批（方案 A 已于 W553 完成）。方案 B 完整 98 组 judge 审查（估 2700 万 token）超单 session 容量，本批交付其全部基建并端到端验证；方案 C 全量完成。\r\n> - **B 阶段一**：`scripts/_w554_review.js` 采集（232 页桌面 fullPage·file://·http(s) 拦截·**滚动穿透触发 reveal-in**）→ 切片 967 张（1280×1600 步进 1500）→ 分组 98 组（`scripts/output/review-pass3/groups.json` 入库）。试审组 1 组端到端验证（约 28 万 token/组量级）。\r\n> - **采集伪影教训（G4 同源二犯）**：首版无滚动穿透，试审判 curated.html「整屏空白 FAIL」，复核实证为 reveal-in 未触发伪影——补逐屏滚动后重采 232 页，同区域完整渲染，终判 3 页全 pass。教训固化进采集脚本（与 W551 G4「须逐元素触发」同源：**fullPage 截图不触发 IntersectionObserver，凡含 reveal-in 的页面截图前必须滚动穿透**）。\r\n> - **B 剩余量（登记恢复）**：97 组 judge 审查待做（恢复指令见 plans/2026-09-06-w554-content-audit-and-b-pipeline.md §B.5，含验收口径 verdicts.jsonl==232 页）；`.review-tmp/` 截图/切片基线保留复用（gitignored 勿删）。\r\n> - **C-L1 站内自洽**：`scripts/check_content_consistency.py` 新建（--self-test 对 W550 三案例负样本回放 4/4 PASS + 好样本零误报）；230 页全量扫描出 5 条，逐条人工裁决：**1 真矛盾**（relationships.html 同页「唐僧-孙悟空 88 回」vs「90 回」，页面自身 EMBEDDED weight=90，88 为旧口径残留）+ 4 误报（提取窗口歧义，逐条有据）。\r\n> - **C-L2 站-dataset 对账**：同名映射修正为 `dataset/<X>.json`（计划假设 scripts/output/data 同名实测仅 1 页）；17 页 EMBEDDED∩dataset 逐字段对账 **0 漂移**（其余 21 页为复杂 JS 字面量静态解析未成功，口径限制注明）。\r\n> - **C-L3-a 英译忠实度**：7 essays（36 篇等距 20%）+ 2 characters，共 121 段落对 + 33 事实声明：1 fail（ming-intellectual-history：客/主标注对调+术语表锚标 22↔实表 14）+ 7 warn + 1 pass；**机械 grep 复核实锤 4 类硬伤**——essay-ming-military 汉字实体错植（`&#23453;`宝 应为 `&#23663;`屯、`&#21464;`变 应为 `&#21496;`司×2）、wukong 页「行者由观音赐名」（原著第 14 回唐僧所赐）、bailongma 页「accidentally 纵火」与基准相悖且「全队极值」被自家 radar 数据证伪。系统性结论：EN 站为自注「摘要译介」分层，整节漏译是范围声明；真缺陷集中在**汉字实体错植/名实归属/锚标数字不符**三类。\r\n> - **C-L3-b 硬清单**：① en/81-hardships.html **重缺陷**——EMBEDDED 清单空数组 + fetch 指向 site 外路径，file:// 与 Pages 部署态双断，截图实锤「No matches, or data not loaded / Showing 0/0 trials」（违反 EMBEDDED 回退铁律；ZH 镜像正常）；② 年代抽验 2 项（2200+ 口径模糊 WARN）；③ KPI（615/86/55/100）站内自洽 PASS。\r\n> - **产出**：审计报告 `docs/superpowers/plans/2026-09-06-w554-content-audit-and-b-pipeline.md`（含 8 项修复清单 F1-F8 转修复批次）；L1 是否挂 verify_delivery 第 25 门禁**留待用户确认**，本批不挂载不阻断。**偏差声明**：L3-a 双模型一致率未执行（单模型判读 + 高危声明机械复核全属实）。\r\n> - **文件**：scripts/check_content_consistency.py、scripts/_w554_review.js、scripts/_w555_l3b.py（新建）；scripts/output/review-pass3/groups.json + verdicts-pilot.jsonl（新建·B 复审基线）；.gitignore（.review-tmp/）；审计报告；六文档 + 旁文档版本行 + site 四页脚（batch_cascade.py 级联）。\r\n> - **状态**：已落地（本批随 W554 提交并 push origin/main）。",
+  "milestone_block": "- **v2.3.154 W554 方案B阶段一+C数据审计**：全站复审管线交付（232页/967切片/98组·试审验证·滚动穿透伪影教训固化）·剩余97组登记恢复；数据审计全量（L1 4/4 self-test·1真矛盾、L2 17页0漂移、L3 九页121段落对+33声明·机械实锤实体错植/名实归属/锚标数字三类硬伤）·8项修复清单转修复批次·EN 81难清单空渲染重缺陷实锤。",
+  "agents_note": "2026-09-06（v2.3.154 W554）方案B阶段一+C数据审计：§4.3 补录 fullPage 截图不触发 IntersectionObserver（含 reveal-in 页面截图前必须滚动穿透·G4 教训二犯固化）·EMBEDDED_DATA 回退铁律新增部署态 fetch 外部路径反例（en/81-hardships）",
+  "file_index_rows": [
+    "| scripts/check_content_consistency.py | W554 | 新增·方案C L1/L2/self-test 数据一致性常驻工具（--self-test 4/4·--dataset 17页0漂移） |",
+    "| scripts/_w554_review.js | W554 | 新增·方案B 全站复审采集/切片/分组管线（滚动穿透固化） |",
+    "| scripts/_w555_l3b.py | W554 | 新增·L3-b KPI/年代机器核查 |",
+    "| scripts/output/review-pass3/groups.json | W554 | 新增·B 方案 98 组分组清单（剩余 97 组审查复用） |",
+    "| scripts/output/review-pass3/verdicts-pilot.jsonl | W554 | 新增·试审组终判存档（3 页 pass + 伪影教训注记） |",
+    "| docs/superpowers/plans/2026-09-06-w554-content-audit-and-b-pipeline.md | W554 | 新增·审计报告与 B 恢复指令（8 项修复清单 F1-F8） |",
+    "| .gitignore | W554 | 修改·新增 .review-tmp/（B 复审基线保留复用） |",
+    "| AGENTS.md | W554 | 修改·§4.3 补录滚动穿透教训 + EMBEDDED 反例 + 版本脚注 |",
+    "| CHANGELOG.md | W554 | 新增·W554 版段 + 编号规则上限 W001-W554 |",
+    "| 交接文档.md | W554 | 修改·头尾「最后更新」prepend W554 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |",
+    "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W554 | 修改·版本行同步 v2.3.154（batch_cascade.py 执行） |",
+    "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W554 | 修改·四页脚链首 prepend W554（batch_cascade.py 执行） |",
+    "| .github/workflows/README.md | W554 | 修改·旁文档同步（batch_cascade.py 执行） |",
+    "| scripts/output/file-index.md | W554 | 新增·W554 段（本段·batch_cascade.py 执行） |"
+  ]
+}

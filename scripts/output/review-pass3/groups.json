@@ -1,0 +1,7268 @@
+{
+ "generated": "2026-09-06",
+ "viewport": "1280x800 desktop, fullPage, 1280x1600 slice step 1500",
+ "pages": 232,
+ "slices": 967,
+ "groups": 98,
+ "items": [
+  {
+   "group": 1,
+   "slices": [
+    {
+     "page": "curated.html",
+     "slice": "curated__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "curated.html",
+     "slice": "curated__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "curated.html",
+     "slice": "curated__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "curated.html",
+     "slice": "curated__s3.png",
+     "y": 4500,
+     "h": 218,
+     "single": false
+    },
+    {
+     "page": "dashboard.html",
+     "slice": "dashboard__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "dashboard.html",
+     "slice": "dashboard__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "dashboard.html",
+     "slice": "dashboard__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "dashboard.html",
+     "slice": "dashboard__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "dashboard.html",
+     "slice": "dashboard__s4.png",
+     "y": 6000,
+     "h": 1433,
+     "single": false
+    },
+    {
+     "page": "data/81-hardships-view.html",
+     "slice": "data__81-hardships-view__s0.png",
+     "y": 0,
+     "h": 800,
+     "single": true
+    }
+   ]
+  },
+  {
+   "group": 2,
+   "slices": [
+    {
+     "page": "data/81-hardships.html",
+     "slice": "data__81-hardships__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/81-hardships.html",
+     "slice": "data__81-hardships__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/81-hardships.html",
+     "slice": "data__81-hardships__s2.png",
+     "y": 3000,
+     "h": 1317,
+     "single": false
+    },
+    {
+     "page": "data/aesthetics.html",
+     "slice": "data__aesthetics__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/aesthetics.html",
+     "slice": "data__aesthetics__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/aesthetics.html",
+     "slice": "data__aesthetics__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/aesthetics.html",
+     "slice": "data__aesthetics__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/aesthetics.html",
+     "slice": "data__aesthetics__s4.png",
+     "y": 6000,
+     "h": 866,
+     "single": false
+    },
+    {
+     "page": "data/ai-dialogue.html",
+     "slice": "data__ai-dialogue__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/ai-dialogue.html",
+     "slice": "data__ai-dialogue__s1.png",
+     "y": 1500,
+     "h": 211,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 3,
+   "slices": [
+    {
+     "page": "data/business-model.html",
+     "slice": "data__business-model__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/business-model.html",
+     "slice": "data__business-model__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/business-model.html",
+     "slice": "data__business-model__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/business-model.html",
+     "slice": "data__business-model__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/business-model.html",
+     "slice": "data__business-model__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/business-model.html",
+     "slice": "data__business-model__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/business-model.html",
+     "slice": "data__business-model__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/business-model.html",
+     "slice": "data__business-model__s7.png",
+     "y": 10500,
+     "h": 135,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 4,
+   "slices": [
+    {
+     "page": "data/cave-estate.html",
+     "slice": "data__cave-estate__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/cave-estate.html",
+     "slice": "data__cave-estate__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/cave-estate.html",
+     "slice": "data__cave-estate__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/cave-estate.html",
+     "slice": "data__cave-estate__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/cave-estate.html",
+     "slice": "data__cave-estate__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/cave-estate.html",
+     "slice": "data__cave-estate__s5.png",
+     "y": 7500,
+     "h": 1178,
+     "single": false
+    },
+    {
+     "page": "data/century-dialogue.html",
+     "slice": "data__century-dialogue__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/century-dialogue.html",
+     "slice": "data__century-dialogue__s1.png",
+     "y": 1500,
+     "h": 366,
+     "single": false
+    },
+    {
+     "page": "data/chapter-stats.html",
+     "slice": "data__chapter-stats__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/chapter-stats.html",
+     "slice": "data__chapter-stats__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/chapter-stats.html",
+     "slice": "data__chapter-stats__s2.png",
+     "y": 3000,
+     "h": 368,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 5,
+   "slices": [
+    {
+     "page": "data/chapter-structure-graph.html",
+     "slice": "data__chapter-structure-graph__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/chapter-structure-graph.html",
+     "slice": "data__chapter-structure-graph__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/chapter-structure-graph.html",
+     "slice": "data__chapter-structure-graph__s2.png",
+     "y": 3000,
+     "h": 1244,
+     "single": false
+    },
+    {
+     "page": "data/character-appearance.html",
+     "slice": "data__character-appearance__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/character-appearance.html",
+     "slice": "data__character-appearance__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/character-appearance.html",
+     "slice": "data__character-appearance__s2.png",
+     "y": 3000,
+     "h": 974,
+     "single": false
+    },
+    {
+     "page": "data/character-dynamic-network.html",
+     "slice": "data__character-dynamic-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/character-dynamic-network.html",
+     "slice": "data__character-dynamic-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/character-dynamic-network.html",
+     "slice": "data__character-dynamic-network__s2.png",
+     "y": 3000,
+     "h": 520,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 6,
+   "slices": [
+    {
+     "page": "data/character-presence-timeline.html",
+     "slice": "data__character-presence-timeline__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/character-presence-timeline.html",
+     "slice": "data__character-presence-timeline__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/character-presence-timeline.html",
+     "slice": "data__character-presence-timeline__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/character-presence-timeline.html",
+     "slice": "data__character-presence-timeline__s3.png",
+     "y": 4500,
+     "h": 1173,
+     "single": false
+    },
+    {
+     "page": "data/character-relationship-3d-view.html",
+     "slice": "data__character-relationship-3d-view__s0.png",
+     "y": 0,
+     "h": 828,
+     "single": true
+    },
+    {
+     "page": "data/character-relationship-3d.html",
+     "slice": "data__character-relationship-3d__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/character-relationship-3d.html",
+     "slice": "data__character-relationship-3d__s1.png",
+     "y": 1500,
+     "h": 829,
+     "single": false
+    },
+    {
+     "page": "data/character-semantic-network.html",
+     "slice": "data__character-semantic-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/character-semantic-network.html",
+     "slice": "data__character-semantic-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/character-semantic-network.html",
+     "slice": "data__character-semantic-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/character-semantic-network.html",
+     "slice": "data__character-semantic-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/character-semantic-network.html",
+     "slice": "data__character-semantic-network__s4.png",
+     "y": 6000,
+     "h": 796,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 7,
+   "slices": [
+    {
+     "page": "data/character-sentiment-arc.html",
+     "slice": "data__character-sentiment-arc__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/character-sentiment-arc.html",
+     "slice": "data__character-sentiment-arc__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/character-sentiment-arc.html",
+     "slice": "data__character-sentiment-arc__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/character-sentiment-arc.html",
+     "slice": "data__character-sentiment-arc__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/character-sentiment-arc.html",
+     "slice": "data__character-sentiment-arc__s4.png",
+     "y": 6000,
+     "h": 1450,
+     "single": false
+    },
+    {
+     "page": "data/chart-design.html",
+     "slice": "data__chart-design__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/chart-design.html",
+     "slice": "data__chart-design__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/chart-design.html",
+     "slice": "data__chart-design__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/chart-design.html",
+     "slice": "data__chart-design__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/chart-design.html",
+     "slice": "data__chart-design__s4.png",
+     "y": 6000,
+     "h": 1321,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 8,
+   "slices": [
+    {
+     "page": "data/cognitive-psychology.html",
+     "slice": "data__cognitive-psychology__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/cognitive-psychology.html",
+     "slice": "data__cognitive-psychology__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/cognitive-psychology.html",
+     "slice": "data__cognitive-psychology__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/cognitive-psychology.html",
+     "slice": "data__cognitive-psychology__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/cognitive-psychology.html",
+     "slice": "data__cognitive-psychology__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/cognitive-psychology.html",
+     "slice": "data__cognitive-psychology__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/cognitive-psychology.html",
+     "slice": "data__cognitive-psychology__s6.png",
+     "y": 9000,
+     "h": 370,
+     "single": false
+    },
+    {
+     "page": "data/concept-device.html",
+     "slice": "data__concept-device__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/concept-device.html",
+     "slice": "data__concept-device__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/concept-device.html",
+     "slice": "data__concept-device__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/concept-device.html",
+     "slice": "data__concept-device__s3.png",
+     "y": 4500,
+     "h": 185,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 9,
+   "slices": [
+    {
+     "page": "data/counterfactual.html",
+     "slice": "data__counterfactual__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/counterfactual.html",
+     "slice": "data__counterfactual__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/counterfactual.html",
+     "slice": "data__counterfactual__s2.png",
+     "y": 3000,
+     "h": 1509,
+     "single": false
+    },
+    {
+     "page": "data/criticism-history.html",
+     "slice": "data__criticism-history__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/criticism-history.html",
+     "slice": "data__criticism-history__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/criticism-history.html",
+     "slice": "data__criticism-history__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/criticism-history.html",
+     "slice": "data__criticism-history__s3.png",
+     "y": 4500,
+     "h": 1460,
+     "single": false
+    },
+    {
+     "page": "data/cross-time-danmaku.html",
+     "slice": "data__cross-time-danmaku__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/cross-time-danmaku.html",
+     "slice": "data__cross-time-danmaku__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/cross-time-danmaku.html",
+     "slice": "data__cross-time-danmaku__s2.png",
+     "y": 3000,
+     "h": 104,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 10,
+   "slices": [
+    {
+     "page": "data/cultural-misreading.html",
+     "slice": "data__cultural-misreading__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/cultural-misreading.html",
+     "slice": "data__cultural-misreading__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/cultural-misreading.html",
+     "slice": "data__cultural-misreading__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/cultural-misreading.html",
+     "slice": "data__cultural-misreading__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/cultural-misreading.html",
+     "slice": "data__cultural-misreading__s4.png",
+     "y": 6000,
+     "h": 155,
+     "single": false
+    },
+    {
+     "page": "data/customs-pass-route.html",
+     "slice": "data__customs-pass-route__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/customs-pass-route.html",
+     "slice": "data__customs-pass-route__s1.png",
+     "y": 1500,
+     "h": 1559,
+     "single": false
+    },
+    {
+     "page": "data/data-explorer.html",
+     "slice": "data__data-explorer__s0.png",
+     "y": 0,
+     "h": 806,
+     "single": true
+    },
+    {
+     "page": "data/deconstruction.html",
+     "slice": "data__deconstruction__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/deconstruction.html",
+     "slice": "data__deconstruction__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/deconstruction.html",
+     "slice": "data__deconstruction__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/deconstruction.html",
+     "slice": "data__deconstruction__s3.png",
+     "y": 4500,
+     "h": 378,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 11,
+   "slices": [
+    {
+     "page": "data/dialogue-sentiment.html",
+     "slice": "data__dialogue-sentiment__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/dialogue-sentiment.html",
+     "slice": "data__dialogue-sentiment__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/dialogue-sentiment.html",
+     "slice": "data__dialogue-sentiment__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/dialogue-sentiment.html",
+     "slice": "data__dialogue-sentiment__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/dialogue-sentiment.html",
+     "slice": "data__dialogue-sentiment__s4.png",
+     "y": 6000,
+     "h": 511,
+     "single": false
+    },
+    {
+     "page": "data/ecology.html",
+     "slice": "data__ecology__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/ecology.html",
+     "slice": "data__ecology__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/ecology.html",
+     "slice": "data__ecology__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/ecology.html",
+     "slice": "data__ecology__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/ecology.html",
+     "slice": "data__ecology__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/ecology.html",
+     "slice": "data__ecology__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/ecology.html",
+     "slice": "data__ecology__s6.png",
+     "y": 9000,
+     "h": 1568,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 12,
+   "slices": [
+    {
+     "page": "data/emotional-heatmap.html",
+     "slice": "data__emotional-heatmap__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/emotional-heatmap.html",
+     "slice": "data__emotional-heatmap__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/emotional-heatmap.html",
+     "slice": "data__emotional-heatmap__s2.png",
+     "y": 3000,
+     "h": 1201,
+     "single": false
+    },
+    {
+     "page": "data/ethics-consumption.html",
+     "slice": "data__ethics-consumption__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/ethics-consumption.html",
+     "slice": "data__ethics-consumption__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/ethics-consumption.html",
+     "slice": "data__ethics-consumption__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/ethics-consumption.html",
+     "slice": "data__ethics-consumption__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/ethics-consumption.html",
+     "slice": "data__ethics-consumption__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/ethics-consumption.html",
+     "slice": "data__ethics-consumption__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/ethics-consumption.html",
+     "slice": "data__ethics-consumption__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/ethics-consumption.html",
+     "slice": "data__ethics-consumption__s7.png",
+     "y": 10500,
+     "h": 946,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 13,
+   "slices": [
+    {
+     "page": "data/famous-time-travel.html",
+     "slice": "data__famous-time-travel__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/famous-time-travel.html",
+     "slice": "data__famous-time-travel__s1.png",
+     "y": 1500,
+     "h": 443,
+     "single": false
+    },
+    {
+     "page": "data/four-dimensional-research-network.html",
+     "slice": "data__four-dimensional-research-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/four-dimensional-research-network.html",
+     "slice": "data__four-dimensional-research-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/four-dimensional-research-network.html",
+     "slice": "data__four-dimensional-research-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/four-dimensional-research-network.html",
+     "slice": "data__four-dimensional-research-network__s3.png",
+     "y": 4500,
+     "h": 564,
+     "single": false
+    },
+    {
+     "page": "data/four-heavenly-kings-artifacts.html",
+     "slice": "data__four-heavenly-kings-artifacts__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/four-heavenly-kings-artifacts.html",
+     "slice": "data__four-heavenly-kings-artifacts__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/four-heavenly-kings-artifacts.html",
+     "slice": "data__four-heavenly-kings-artifacts__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/four-heavenly-kings-artifacts.html",
+     "slice": "data__four-heavenly-kings-artifacts__s3.png",
+     "y": 4500,
+     "h": 1423,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 14,
+   "slices": [
+    {
+     "page": "data/game-webnovel.html",
+     "slice": "data__game-webnovel__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/game-webnovel.html",
+     "slice": "data__game-webnovel__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/game-webnovel.html",
+     "slice": "data__game-webnovel__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/game-webnovel.html",
+     "slice": "data__game-webnovel__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/game-webnovel.html",
+     "slice": "data__game-webnovel__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/game-webnovel.html",
+     "slice": "data__game-webnovel__s5.png",
+     "y": 7500,
+     "h": 1559,
+     "single": false
+    },
+    {
+     "page": "data/global-pattern.html",
+     "slice": "data__global-pattern__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/global-pattern.html",
+     "slice": "data__global-pattern__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/global-pattern.html",
+     "slice": "data__global-pattern__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/global-pattern.html",
+     "slice": "data__global-pattern__s3.png",
+     "y": 4500,
+     "h": 946,
+     "single": false
+    },
+    {
+     "page": "data/graph-explorer.html",
+     "slice": "data__graph-explorer__s0.png",
+     "y": 0,
+     "h": 800,
+     "single": true
+    }
+   ]
+  },
+  {
+   "group": 15,
+   "slices": [
+    {
+     "page": "data/guanyin-six-roles-network.html",
+     "slice": "data__guanyin-six-roles-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/guanyin-six-roles-network.html",
+     "slice": "data__guanyin-six-roles-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/guanyin-six-roles-network.html",
+     "slice": "data__guanyin-six-roles-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/guanyin-six-roles-network.html",
+     "slice": "data__guanyin-six-roles-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/guanyin-six-roles-network.html",
+     "slice": "data__guanyin-six-roles-network__s4.png",
+     "y": 6000,
+     "h": 1205,
+     "single": false
+    },
+    {
+     "page": "data/hardship-difficulty-heatmap.html",
+     "slice": "data__hardship-difficulty-heatmap__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/hardship-difficulty-heatmap.html",
+     "slice": "data__hardship-difficulty-heatmap__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/hardship-difficulty-heatmap.html",
+     "slice": "data__hardship-difficulty-heatmap__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/hardship-difficulty-heatmap.html",
+     "slice": "data__hardship-difficulty-heatmap__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/hardship-difficulty-heatmap.html",
+     "slice": "data__hardship-difficulty-heatmap__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/hardship-difficulty-heatmap.html",
+     "slice": "data__hardship-difficulty-heatmap__s5.png",
+     "y": 7500,
+     "h": 573,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 16,
+   "slices": [
+    {
+     "page": "data/hardship-heatmap.html",
+     "slice": "data__hardship-heatmap__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/hardship-heatmap.html",
+     "slice": "data__hardship-heatmap__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/hardship-heatmap.html",
+     "slice": "data__hardship-heatmap__s2.png",
+     "y": 3000,
+     "h": 826,
+     "single": false
+    },
+    {
+     "page": "data/heaven-power-network.html",
+     "slice": "data__heaven-power-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/heaven-power-network.html",
+     "slice": "data__heaven-power-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/heaven-power-network.html",
+     "slice": "data__heaven-power-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/heaven-power-network.html",
+     "slice": "data__heaven-power-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/heaven-power-network.html",
+     "slice": "data__heaven-power-network__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/heaven-power-network.html",
+     "slice": "data__heaven-power-network__s5.png",
+     "y": 7500,
+     "h": 487,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 17,
+   "slices": [
+    {
+     "page": "data/intertextuality-network.html",
+     "slice": "data__intertextuality-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/intertextuality-network.html",
+     "slice": "data__intertextuality-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/intertextuality-network.html",
+     "slice": "data__intertextuality-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/intertextuality-network.html",
+     "slice": "data__intertextuality-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/intertextuality-network.html",
+     "slice": "data__intertextuality-network__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/intertextuality-network.html",
+     "slice": "data__intertextuality-network__s5.png",
+     "y": 7500,
+     "h": 434,
+     "single": false
+    },
+    {
+     "page": "data/journey-geo-3d.html",
+     "slice": "data__journey-geo-3d__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/journey-geo-3d.html",
+     "slice": "data__journey-geo-3d__s1.png",
+     "y": 1500,
+     "h": 727,
+     "single": false
+    },
+    {
+     "page": "data/journey-geo-semiotics.html",
+     "slice": "data__journey-geo-semiotics__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/journey-geo-semiotics.html",
+     "slice": "data__journey-geo-semiotics__s1.png",
+     "y": 1500,
+     "h": 387,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 18,
+   "slices": [
+    {
+     "page": "data/journey-map-interactive.html",
+     "slice": "data__journey-map-interactive__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/journey-map-interactive.html",
+     "slice": "data__journey-map-interactive__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/journey-map-interactive.html",
+     "slice": "data__journey-map-interactive__s2.png",
+     "y": 3000,
+     "h": 215,
+     "single": false
+    },
+    {
+     "page": "data/journey-route.html",
+     "slice": "data__journey-route__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/journey-route.html",
+     "slice": "data__journey-route__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/journey-route.html",
+     "slice": "data__journey-route__s2.png",
+     "y": 3000,
+     "h": 731,
+     "single": false
+    },
+    {
+     "page": "data/journey-spacetime.html",
+     "slice": "data__journey-spacetime__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/journey-spacetime.html",
+     "slice": "data__journey-spacetime__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/journey-spacetime.html",
+     "slice": "data__journey-spacetime__s2.png",
+     "y": 3000,
+     "h": 388,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 19,
+   "slices": [
+    {
+     "page": "data/jurisprudence.html",
+     "slice": "data__jurisprudence__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/jurisprudence.html",
+     "slice": "data__jurisprudence__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/jurisprudence.html",
+     "slice": "data__jurisprudence__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/jurisprudence.html",
+     "slice": "data__jurisprudence__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/jurisprudence.html",
+     "slice": "data__jurisprudence__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/jurisprudence.html",
+     "slice": "data__jurisprudence__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/jurisprudence.html",
+     "slice": "data__jurisprudence__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/jurisprudence.html",
+     "slice": "data__jurisprudence__s7.png",
+     "y": 10500,
+     "h": 546,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 20,
+   "slices": [
+    {
+     "page": "data/karma-reincarnation.html",
+     "slice": "data__karma-reincarnation__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/karma-reincarnation.html",
+     "slice": "data__karma-reincarnation__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/karma-reincarnation.html",
+     "slice": "data__karma-reincarnation__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/karma-reincarnation.html",
+     "slice": "data__karma-reincarnation__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/karma-reincarnation.html",
+     "slice": "data__karma-reincarnation__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/karma-reincarnation.html",
+     "slice": "data__karma-reincarnation__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/karma-reincarnation.html",
+     "slice": "data__karma-reincarnation__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/karma-reincarnation.html",
+     "slice": "data__karma-reincarnation__s7.png",
+     "y": 10500,
+     "h": 747,
+     "single": false
+    },
+    {
+     "page": "data/language-style-radar.html",
+     "slice": "data__language-style-radar__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/language-style-radar.html",
+     "slice": "data__language-style-radar__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/language-style-radar.html",
+     "slice": "data__language-style-radar__s2.png",
+     "y": 3000,
+     "h": 477,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 21,
+   "slices": [
+    {
+     "page": "data/linguistics.html",
+     "slice": "data__linguistics__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/linguistics.html",
+     "slice": "data__linguistics__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/linguistics.html",
+     "slice": "data__linguistics__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/linguistics.html",
+     "slice": "data__linguistics__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/linguistics.html",
+     "slice": "data__linguistics__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/linguistics.html",
+     "slice": "data__linguistics__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/linguistics.html",
+     "slice": "data__linguistics__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/linguistics.html",
+     "slice": "data__linguistics__s7.png",
+     "y": 10500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/linguistics.html",
+     "slice": "data__linguistics__s8.png",
+     "y": 12000,
+     "h": 738,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 22,
+   "slices": [
+    {
+     "page": "data/magic-system.html",
+     "slice": "data__magic-system__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/magic-system.html",
+     "slice": "data__magic-system__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/magic-system.html",
+     "slice": "data__magic-system__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/magic-system.html",
+     "slice": "data__magic-system__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/magic-system.html",
+     "slice": "data__magic-system__s4.png",
+     "y": 6000,
+     "h": 802,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 23,
+   "slices": [
+    {
+     "page": "data/material-archaeology.html",
+     "slice": "data__material-archaeology__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/material-archaeology.html",
+     "slice": "data__material-archaeology__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/material-archaeology.html",
+     "slice": "data__material-archaeology__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/material-archaeology.html",
+     "slice": "data__material-archaeology__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/material-archaeology.html",
+     "slice": "data__material-archaeology__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/material-archaeology.html",
+     "slice": "data__material-archaeology__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/material-archaeology.html",
+     "slice": "data__material-archaeology__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/material-archaeology.html",
+     "slice": "data__material-archaeology__s7.png",
+     "y": 10500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/material-archaeology.html",
+     "slice": "data__material-archaeology__s8.png",
+     "y": 12000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/material-archaeology.html",
+     "slice": "data__material-archaeology__s9.png",
+     "y": 13500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/material-archaeology.html",
+     "slice": "data__material-archaeology__s10.png",
+     "y": 15000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/material-archaeology.html",
+     "slice": "data__material-archaeology__s11.png",
+     "y": 16500,
+     "h": 1600,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 24,
+   "slices": [
+    {
+     "page": "data/material-archaeology.html",
+     "slice": "data__material-archaeology__s12.png",
+     "y": 18000,
+     "h": 703,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 25,
+   "slices": [
+    {
+     "page": "data/mbti-evolution.html",
+     "slice": "data__mbti-evolution__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/mbti-evolution.html",
+     "slice": "data__mbti-evolution__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/mbti-evolution.html",
+     "slice": "data__mbti-evolution__s2.png",
+     "y": 3000,
+     "h": 932,
+     "single": false
+    },
+    {
+     "page": "data/methodology-matrix.html",
+     "slice": "data__methodology-matrix__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/methodology-matrix.html",
+     "slice": "data__methodology-matrix__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/methodology-matrix.html",
+     "slice": "data__methodology-matrix__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/methodology-matrix.html",
+     "slice": "data__methodology-matrix__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/methodology-matrix.html",
+     "slice": "data__methodology-matrix__s4.png",
+     "y": 6000,
+     "h": 1194,
+     "single": false
+    },
+    {
+     "page": "data/ming-political-thought-comparison.html",
+     "slice": "data__ming-political-thought-comparison__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/ming-political-thought-comparison.html",
+     "slice": "data__ming-political-thought-comparison__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/ming-political-thought-comparison.html",
+     "slice": "data__ming-political-thought-comparison__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/ming-political-thought-comparison.html",
+     "slice": "data__ming-political-thought-comparison__s3.png",
+     "y": 4500,
+     "h": 1261,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 26,
+   "slices": [
+    {
+     "page": "data/monster-background.html",
+     "slice": "data__monster-background__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-background.html",
+     "slice": "data__monster-background__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-background.html",
+     "slice": "data__monster-background__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-background.html",
+     "slice": "data__monster-background__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-background.html",
+     "slice": "data__monster-background__s4.png",
+     "y": 6000,
+     "h": 289,
+     "single": false
+    },
+    {
+     "page": "data/monster-capability-radar.html",
+     "slice": "data__monster-capability-radar__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-capability-radar.html",
+     "slice": "data__monster-capability-radar__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-capability-radar.html",
+     "slice": "data__monster-capability-radar__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-capability-radar.html",
+     "slice": "data__monster-capability-radar__s3.png",
+     "y": 4500,
+     "h": 1029,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 27,
+   "slices": [
+    {
+     "page": "data/monster-ecology-network.html",
+     "slice": "data__monster-ecology-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-ecology-network.html",
+     "slice": "data__monster-ecology-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-ecology-network.html",
+     "slice": "data__monster-ecology-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-ecology-network.html",
+     "slice": "data__monster-ecology-network__s3.png",
+     "y": 4500,
+     "h": 696,
+     "single": false
+    },
+    {
+     "page": "data/monster-female-network.html",
+     "slice": "data__monster-female-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-female-network.html",
+     "slice": "data__monster-female-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-female-network.html",
+     "slice": "data__monster-female-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-female-network.html",
+     "slice": "data__monster-female-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-female-network.html",
+     "slice": "data__monster-female-network__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-female-network.html",
+     "slice": "data__monster-female-network__s5.png",
+     "y": 7500,
+     "h": 119,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 28,
+   "slices": [
+    {
+     "page": "data/monster-hierarchy-network.html",
+     "slice": "data__monster-hierarchy-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-hierarchy-network.html",
+     "slice": "data__monster-hierarchy-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-hierarchy-network.html",
+     "slice": "data__monster-hierarchy-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-hierarchy-network.html",
+     "slice": "data__monster-hierarchy-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-hierarchy-network.html",
+     "slice": "data__monster-hierarchy-network__s4.png",
+     "y": 6000,
+     "h": 1105,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 29,
+   "slices": [
+    {
+     "page": "data/monster-sociology.html",
+     "slice": "data__monster-sociology__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-sociology.html",
+     "slice": "data__monster-sociology__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-sociology.html",
+     "slice": "data__monster-sociology__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-sociology.html",
+     "slice": "data__monster-sociology__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-sociology.html",
+     "slice": "data__monster-sociology__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-sociology.html",
+     "slice": "data__monster-sociology__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-sociology.html",
+     "slice": "data__monster-sociology__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-sociology.html",
+     "slice": "data__monster-sociology__s7.png",
+     "y": 10500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-sociology.html",
+     "slice": "data__monster-sociology__s8.png",
+     "y": 12000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-sociology.html",
+     "slice": "data__monster-sociology__s9.png",
+     "y": 13500,
+     "h": 179,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 30,
+   "slices": [
+    {
+     "page": "data/monster-victims-network.html",
+     "slice": "data__monster-victims-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-victims-network.html",
+     "slice": "data__monster-victims-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-victims-network.html",
+     "slice": "data__monster-victims-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-victims-network.html",
+     "slice": "data__monster-victims-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/monster-victims-network.html",
+     "slice": "data__monster-victims-network__s4.png",
+     "y": 6000,
+     "h": 848,
+     "single": false
+    },
+    {
+     "page": "data/music-structure.html",
+     "slice": "data__music-structure__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/music-structure.html",
+     "slice": "data__music-structure__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/music-structure.html",
+     "slice": "data__music-structure__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/music-structure.html",
+     "slice": "data__music-structure__s3.png",
+     "y": 4500,
+     "h": 1573,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 31,
+   "slices": [
+    {
+     "page": "data/narrative-experiment.html",
+     "slice": "data__narrative-experiment__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/narrative-experiment.html",
+     "slice": "data__narrative-experiment__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/narrative-experiment.html",
+     "slice": "data__narrative-experiment__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/narrative-experiment.html",
+     "slice": "data__narrative-experiment__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/narrative-experiment.html",
+     "slice": "data__narrative-experiment__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/narrative-experiment.html",
+     "slice": "data__narrative-experiment__s5.png",
+     "y": 7500,
+     "h": 1433,
+     "single": false
+    },
+    {
+     "page": "data/narrative-rhythm-curve.html",
+     "slice": "data__narrative-rhythm-curve__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/narrative-rhythm-curve.html",
+     "slice": "data__narrative-rhythm-curve__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/narrative-rhythm-curve.html",
+     "slice": "data__narrative-rhythm-curve__s2.png",
+     "y": 3000,
+     "h": 1081,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 32,
+   "slices": [
+    {
+     "page": "data/narratology-12d-network.html",
+     "slice": "data__narratology-12d-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/narratology-12d-network.html",
+     "slice": "data__narratology-12d-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/narratology-12d-network.html",
+     "slice": "data__narratology-12d-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/narratology-12d-network.html",
+     "slice": "data__narratology-12d-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/narratology-12d-network.html",
+     "slice": "data__narratology-12d-network__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/narratology-12d-network.html",
+     "slice": "data__narratology-12d-network__s5.png",
+     "y": 7500,
+     "h": 760,
+     "single": false
+    },
+    {
+     "page": "data/narratology-13d-network.html",
+     "slice": "data__narratology-13d-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/narratology-13d-network.html",
+     "slice": "data__narratology-13d-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/narratology-13d-network.html",
+     "slice": "data__narratology-13d-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/narratology-13d-network.html",
+     "slice": "data__narratology-13d-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/narratology-13d-network.html",
+     "slice": "data__narratology-13d-network__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/narratology-13d-network.html",
+     "slice": "data__narratology-13d-network__s5.png",
+     "y": 7500,
+     "h": 1502,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 33,
+   "slices": [
+    {
+     "page": "data/perf-canvas-rendering.html",
+     "slice": "data__perf-canvas-rendering__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/perf-canvas-rendering.html",
+     "slice": "data__perf-canvas-rendering__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/perf-canvas-rendering.html",
+     "slice": "data__perf-canvas-rendering__s2.png",
+     "y": 3000,
+     "h": 928,
+     "single": false
+    },
+    {
+     "page": "data/philosophy.html",
+     "slice": "data__philosophy__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/philosophy.html",
+     "slice": "data__philosophy__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/philosophy.html",
+     "slice": "data__philosophy__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/philosophy.html",
+     "slice": "data__philosophy__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/philosophy.html",
+     "slice": "data__philosophy__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/philosophy.html",
+     "slice": "data__philosophy__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/philosophy.html",
+     "slice": "data__philosophy__s6.png",
+     "y": 9000,
+     "h": 1324,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 34,
+   "slices": [
+    {
+     "page": "data/pilgrim-team-dynamic-network.html",
+     "slice": "data__pilgrim-team-dynamic-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/pilgrim-team-dynamic-network.html",
+     "slice": "data__pilgrim-team-dynamic-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/pilgrim-team-dynamic-network.html",
+     "slice": "data__pilgrim-team-dynamic-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/pilgrim-team-dynamic-network.html",
+     "slice": "data__pilgrim-team-dynamic-network__s3.png",
+     "y": 4500,
+     "h": 245,
+     "single": false
+    },
+    {
+     "page": "data/pilgrim-team-psychology-arc.html",
+     "slice": "data__pilgrim-team-psychology-arc__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/pilgrim-team-psychology-arc.html",
+     "slice": "data__pilgrim-team-psychology-arc__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/pilgrim-team-psychology-arc.html",
+     "slice": "data__pilgrim-team-psychology-arc__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/pilgrim-team-psychology-arc.html",
+     "slice": "data__pilgrim-team-psychology-arc__s3.png",
+     "y": 4500,
+     "h": 1390,
+     "single": false
+    },
+    {
+     "page": "data/poetry-rhythm-analysis.html",
+     "slice": "data__poetry-rhythm-analysis__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/poetry-rhythm-analysis.html",
+     "slice": "data__poetry-rhythm-analysis__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/poetry-rhythm-analysis.html",
+     "slice": "data__poetry-rhythm-analysis__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/poetry-rhythm-analysis.html",
+     "slice": "data__poetry-rhythm-analysis__s3.png",
+     "y": 4500,
+     "h": 900,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 35,
+   "slices": [
+    {
+     "page": "data/power-resources.html",
+     "slice": "data__power-resources__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/power-resources.html",
+     "slice": "data__power-resources__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/power-resources.html",
+     "slice": "data__power-resources__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/power-resources.html",
+     "slice": "data__power-resources__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/power-resources.html",
+     "slice": "data__power-resources__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/power-resources.html",
+     "slice": "data__power-resources__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/power-resources.html",
+     "slice": "data__power-resources__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/power-resources.html",
+     "slice": "data__power-resources__s7.png",
+     "y": 10500,
+     "h": 1078,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 36,
+   "slices": [
+    {
+     "page": "data/relationships.html",
+     "slice": "data__relationships__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/relationships.html",
+     "slice": "data__relationships__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/relationships.html",
+     "slice": "data__relationships__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/relationships.html",
+     "slice": "data__relationships__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/relationships.html",
+     "slice": "data__relationships__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/relationships.html",
+     "slice": "data__relationships__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/relationships.html",
+     "slice": "data__relationships__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/relationships.html",
+     "slice": "data__relationships__s7.png",
+     "y": 10500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/relationships.html",
+     "slice": "data__relationships__s8.png",
+     "y": 12000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/relationships.html",
+     "slice": "data__relationships__s9.png",
+     "y": 13500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/relationships.html",
+     "slice": "data__relationships__s10.png",
+     "y": 15000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/relationships.html",
+     "slice": "data__relationships__s11.png",
+     "y": 16500,
+     "h": 1017,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 37,
+   "slices": [
+    {
+     "page": "data/risk-project.html",
+     "slice": "data__risk-project__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/risk-project.html",
+     "slice": "data__risk-project__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/risk-project.html",
+     "slice": "data__risk-project__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/risk-project.html",
+     "slice": "data__risk-project__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/risk-project.html",
+     "slice": "data__risk-project__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/risk-project.html",
+     "slice": "data__risk-project__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/risk-project.html",
+     "slice": "data__risk-project__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/risk-project.html",
+     "slice": "data__risk-project__s7.png",
+     "y": 10500,
+     "h": 452,
+     "single": false
+    },
+    {
+     "page": "data/search.html",
+     "slice": "data__search__s0.png",
+     "y": 0,
+     "h": 800,
+     "single": true
+    }
+   ]
+  },
+  {
+   "group": 38,
+   "slices": [
+    {
+     "page": "data/six-senses-narratology-network.html",
+     "slice": "data__six-senses-narratology-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/six-senses-narratology-network.html",
+     "slice": "data__six-senses-narratology-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/six-senses-narratology-network.html",
+     "slice": "data__six-senses-narratology-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/six-senses-narratology-network.html",
+     "slice": "data__six-senses-narratology-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/six-senses-narratology-network.html",
+     "slice": "data__six-senses-narratology-network__s4.png",
+     "y": 6000,
+     "h": 1302,
+     "single": false
+    },
+    {
+     "page": "data/social-media.html",
+     "slice": "data__social-media__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/social-media.html",
+     "slice": "data__social-media__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/social-media.html",
+     "slice": "data__social-media__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/social-media.html",
+     "slice": "data__social-media__s3.png",
+     "y": 4500,
+     "h": 661,
+     "single": false
+    },
+    {
+     "page": "data/tag-cloud.html",
+     "slice": "data__tag-cloud__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/tag-cloud.html",
+     "slice": "data__tag-cloud__s1.png",
+     "y": 1500,
+     "h": 361,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 39,
+   "slices": [
+    {
+     "page": "data/text-evolution.html",
+     "slice": "data__text-evolution__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/text-evolution.html",
+     "slice": "data__text-evolution__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/text-evolution.html",
+     "slice": "data__text-evolution__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/text-evolution.html",
+     "slice": "data__text-evolution__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/text-evolution.html",
+     "slice": "data__text-evolution__s4.png",
+     "y": 6000,
+     "h": 543,
+     "single": false
+    },
+    {
+     "page": "data/text-search.html",
+     "slice": "data__text-search__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/text-search.html",
+     "slice": "data__text-search__s1.png",
+     "y": 1500,
+     "h": 884,
+     "single": false
+    },
+    {
+     "page": "data/theological-intervention-network.html",
+     "slice": "data__theological-intervention-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/theological-intervention-network.html",
+     "slice": "data__theological-intervention-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/theological-intervention-network.html",
+     "slice": "data__theological-intervention-network__s2.png",
+     "y": 3000,
+     "h": 1138,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 40,
+   "slices": [
+    {
+     "page": "data/timeline.html",
+     "slice": "data__timeline__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/timeline.html",
+     "slice": "data__timeline__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/timeline.html",
+     "slice": "data__timeline__s2.png",
+     "y": 3000,
+     "h": 162,
+     "single": false
+    },
+    {
+     "page": "data/underworld-power-network.html",
+     "slice": "data__underworld-power-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/underworld-power-network.html",
+     "slice": "data__underworld-power-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/underworld-power-network.html",
+     "slice": "data__underworld-power-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/underworld-power-network.html",
+     "slice": "data__underworld-power-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/underworld-power-network.html",
+     "slice": "data__underworld-power-network__s4.png",
+     "y": 6000,
+     "h": 1409,
+     "single": false
+    },
+    {
+     "page": "data/visual-art.html",
+     "slice": "data__visual-art__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/visual-art.html",
+     "slice": "data__visual-art__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/visual-art.html",
+     "slice": "data__visual-art__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/visual-art.html",
+     "slice": "data__visual-art__s3.png",
+     "y": 4500,
+     "h": 1398,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 41,
+   "slices": [
+    {
+     "page": "data/workplace.html",
+     "slice": "data__workplace__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/workplace.html",
+     "slice": "data__workplace__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/workplace.html",
+     "slice": "data__workplace__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "data/workplace.html",
+     "slice": "data__workplace__s3.png",
+     "y": 4500,
+     "h": 1572,
+     "single": false
+    },
+    {
+     "page": "dukou-engine.html",
+     "slice": "dukou-engine__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "dukou-engine.html",
+     "slice": "dukou-engine__s1.png",
+     "y": 1500,
+     "h": 1505,
+     "single": false
+    },
+    {
+     "page": "en/81-hardships-view.html",
+     "slice": "en__81-hardships-view__s0.png",
+     "y": 0,
+     "h": 800,
+     "single": true
+    },
+    {
+     "page": "en/81-hardships.html",
+     "slice": "en__81-hardships__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/81-hardships.html",
+     "slice": "en__81-hardships__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/81-hardships.html",
+     "slice": "en__81-hardships__s2.png",
+     "y": 3000,
+     "h": 850,
+     "single": false
+    },
+    {
+     "page": "en/academic-papers.html",
+     "slice": "en__academic-papers__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/academic-papers.html",
+     "slice": "en__academic-papers__s1.png",
+     "y": 1500,
+     "h": 197,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 42,
+   "slices": [
+    {
+     "page": "en/aesthetics.html",
+     "slice": "en__aesthetics__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/aesthetics.html",
+     "slice": "en__aesthetics__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/aesthetics.html",
+     "slice": "en__aesthetics__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/aesthetics.html",
+     "slice": "en__aesthetics__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/aesthetics.html",
+     "slice": "en__aesthetics__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/aesthetics.html",
+     "slice": "en__aesthetics__s5.png",
+     "y": 7500,
+     "h": 372,
+     "single": false
+    },
+    {
+     "page": "en/ai-dialogue.html",
+     "slice": "en__ai-dialogue__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ai-dialogue.html",
+     "slice": "en__ai-dialogue__s1.png",
+     "y": 1500,
+     "h": 398,
+     "single": false
+    },
+    {
+     "page": "en/bestiary.html",
+     "slice": "en__bestiary__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/bestiary.html",
+     "slice": "en__bestiary__s1.png",
+     "y": 1500,
+     "h": 1387,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 43,
+   "slices": [
+    {
+     "page": "en/business-model.html",
+     "slice": "en__business-model__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/business-model.html",
+     "slice": "en__business-model__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/business-model.html",
+     "slice": "en__business-model__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/business-model.html",
+     "slice": "en__business-model__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/business-model.html",
+     "slice": "en__business-model__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/business-model.html",
+     "slice": "en__business-model__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/business-model.html",
+     "slice": "en__business-model__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/business-model.html",
+     "slice": "en__business-model__s7.png",
+     "y": 10500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/business-model.html",
+     "slice": "en__business-model__s8.png",
+     "y": 12000,
+     "h": 985,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 44,
+   "slices": [
+    {
+     "page": "en/cave-estate.html",
+     "slice": "en__cave-estate__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cave-estate.html",
+     "slice": "en__cave-estate__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cave-estate.html",
+     "slice": "en__cave-estate__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cave-estate.html",
+     "slice": "en__cave-estate__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cave-estate.html",
+     "slice": "en__cave-estate__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cave-estate.html",
+     "slice": "en__cave-estate__s5.png",
+     "y": 7500,
+     "h": 1410,
+     "single": false
+    },
+    {
+     "page": "en/century-dialogue.html",
+     "slice": "en__century-dialogue__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/century-dialogue.html",
+     "slice": "en__century-dialogue__s1.png",
+     "y": 1500,
+     "h": 366,
+     "single": false
+    },
+    {
+     "page": "en/chapter-stats.html",
+     "slice": "en__chapter-stats__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/chapter-stats.html",
+     "slice": "en__chapter-stats__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/chapter-stats.html",
+     "slice": "en__chapter-stats__s2.png",
+     "y": 3000,
+     "h": 328,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 45,
+   "slices": [
+    {
+     "page": "en/chapter-structure-graph.html",
+     "slice": "en__chapter-structure-graph__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/chapter-structure-graph.html",
+     "slice": "en__chapter-structure-graph__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/chapter-structure-graph.html",
+     "slice": "en__chapter-structure-graph__s2.png",
+     "y": 3000,
+     "h": 1242,
+     "single": false
+    },
+    {
+     "page": "en/chapters-map.html",
+     "slice": "en__chapters-map__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/chapters-map.html",
+     "slice": "en__chapters-map__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/chapters-map.html",
+     "slice": "en__chapters-map__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/chapters-map.html",
+     "slice": "en__chapters-map__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/chapters-map.html",
+     "slice": "en__chapters-map__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/chapters-map.html",
+     "slice": "en__chapters-map__s5.png",
+     "y": 7500,
+     "h": 510,
+     "single": false
+    },
+    {
+     "page": "en/character-appearance.html",
+     "slice": "en__character-appearance__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-appearance.html",
+     "slice": "en__character-appearance__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-appearance.html",
+     "slice": "en__character-appearance__s2.png",
+     "y": 3000,
+     "h": 1025,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 46,
+   "slices": [
+    {
+     "page": "en/character-bailongma.html",
+     "slice": "en__character-bailongma__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-bailongma.html",
+     "slice": "en__character-bailongma__s1.png",
+     "y": 1500,
+     "h": 706,
+     "single": false
+    },
+    {
+     "page": "en/character-bajie.html",
+     "slice": "en__character-bajie__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-bajie.html",
+     "slice": "en__character-bajie__s1.png",
+     "y": 1500,
+     "h": 565,
+     "single": false
+    },
+    {
+     "page": "en/character-dynamic-network.html",
+     "slice": "en__character-dynamic-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-dynamic-network.html",
+     "slice": "en__character-dynamic-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-dynamic-network.html",
+     "slice": "en__character-dynamic-network__s2.png",
+     "y": 3000,
+     "h": 798,
+     "single": false
+    },
+    {
+     "page": "en/character-presence-timeline.html",
+     "slice": "en__character-presence-timeline__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-presence-timeline.html",
+     "slice": "en__character-presence-timeline__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-presence-timeline.html",
+     "slice": "en__character-presence-timeline__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-presence-timeline.html",
+     "slice": "en__character-presence-timeline__s3.png",
+     "y": 4500,
+     "h": 1302,
+     "single": false
+    },
+    {
+     "page": "en/character-relationship-3d-view.html",
+     "slice": "en__character-relationship-3d-view__s0.png",
+     "y": 0,
+     "h": 852,
+     "single": true
+    }
+   ]
+  },
+  {
+   "group": 47,
+   "slices": [
+    {
+     "page": "en/character-relationship-3d.html",
+     "slice": "en__character-relationship-3d__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-relationship-3d.html",
+     "slice": "en__character-relationship-3d__s1.png",
+     "y": 1500,
+     "h": 829,
+     "single": false
+    },
+    {
+     "page": "en/character-semantic-network.html",
+     "slice": "en__character-semantic-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-semantic-network.html",
+     "slice": "en__character-semantic-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-semantic-network.html",
+     "slice": "en__character-semantic-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-semantic-network.html",
+     "slice": "en__character-semantic-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-semantic-network.html",
+     "slice": "en__character-semantic-network__s4.png",
+     "y": 6000,
+     "h": 1075,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 48,
+   "slices": [
+    {
+     "page": "en/character-sentiment-arc.html",
+     "slice": "en__character-sentiment-arc__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-sentiment-arc.html",
+     "slice": "en__character-sentiment-arc__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-sentiment-arc.html",
+     "slice": "en__character-sentiment-arc__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-sentiment-arc.html",
+     "slice": "en__character-sentiment-arc__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-sentiment-arc.html",
+     "slice": "en__character-sentiment-arc__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-sentiment-arc.html",
+     "slice": "en__character-sentiment-arc__s5.png",
+     "y": 7500,
+     "h": 344,
+     "single": false
+    },
+    {
+     "page": "en/character-shaseng.html",
+     "slice": "en__character-shaseng__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-shaseng.html",
+     "slice": "en__character-shaseng__s1.png",
+     "y": 1500,
+     "h": 421,
+     "single": false
+    },
+    {
+     "page": "en/character-tangseng.html",
+     "slice": "en__character-tangseng__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-tangseng.html",
+     "slice": "en__character-tangseng__s1.png",
+     "y": 1500,
+     "h": 925,
+     "single": false
+    },
+    {
+     "page": "en/character-wukong.html",
+     "slice": "en__character-wukong__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/character-wukong.html",
+     "slice": "en__character-wukong__s1.png",
+     "y": 1500,
+     "h": 945,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 49,
+   "slices": [
+    {
+     "page": "en/characters.html",
+     "slice": "en__characters__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/characters.html",
+     "slice": "en__characters__s1.png",
+     "y": 1500,
+     "h": 1157,
+     "single": false
+    },
+    {
+     "page": "en/chart-design.html",
+     "slice": "en__chart-design__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/chart-design.html",
+     "slice": "en__chart-design__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/chart-design.html",
+     "slice": "en__chart-design__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/chart-design.html",
+     "slice": "en__chart-design__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/chart-design.html",
+     "slice": "en__chart-design__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/chart-design.html",
+     "slice": "en__chart-design__s5.png",
+     "y": 7500,
+     "h": 825,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 50,
+   "slices": [
+    {
+     "page": "en/cognitive-psychology.html",
+     "slice": "en__cognitive-psychology__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cognitive-psychology.html",
+     "slice": "en__cognitive-psychology__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cognitive-psychology.html",
+     "slice": "en__cognitive-psychology__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cognitive-psychology.html",
+     "slice": "en__cognitive-psychology__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cognitive-psychology.html",
+     "slice": "en__cognitive-psychology__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cognitive-psychology.html",
+     "slice": "en__cognitive-psychology__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cognitive-psychology.html",
+     "slice": "en__cognitive-psychology__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cognitive-psychology.html",
+     "slice": "en__cognitive-psychology__s7.png",
+     "y": 10500,
+     "h": 888,
+     "single": false
+    },
+    {
+     "page": "en/concept-device.html",
+     "slice": "en__concept-device__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/concept-device.html",
+     "slice": "en__concept-device__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/concept-device.html",
+     "slice": "en__concept-device__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/concept-device.html",
+     "slice": "en__concept-device__s3.png",
+     "y": 4500,
+     "h": 715,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 51,
+   "slices": [
+    {
+     "page": "en/counterfactual.html",
+     "slice": "en__counterfactual__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/counterfactual.html",
+     "slice": "en__counterfactual__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/counterfactual.html",
+     "slice": "en__counterfactual__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/counterfactual.html",
+     "slice": "en__counterfactual__s3.png",
+     "y": 4500,
+     "h": 940,
+     "single": false
+    },
+    {
+     "page": "en/criticism-history.html",
+     "slice": "en__criticism-history__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/criticism-history.html",
+     "slice": "en__criticism-history__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/criticism-history.html",
+     "slice": "en__criticism-history__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/criticism-history.html",
+     "slice": "en__criticism-history__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/criticism-history.html",
+     "slice": "en__criticism-history__s4.png",
+     "y": 6000,
+     "h": 820,
+     "single": false
+    },
+    {
+     "page": "en/cross-time-danmaku.html",
+     "slice": "en__cross-time-danmaku__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cross-time-danmaku.html",
+     "slice": "en__cross-time-danmaku__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cross-time-danmaku.html",
+     "slice": "en__cross-time-danmaku__s2.png",
+     "y": 3000,
+     "h": 289,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 52,
+   "slices": [
+    {
+     "page": "en/cultural-misreading.html",
+     "slice": "en__cultural-misreading__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cultural-misreading.html",
+     "slice": "en__cultural-misreading__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cultural-misreading.html",
+     "slice": "en__cultural-misreading__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cultural-misreading.html",
+     "slice": "en__cultural-misreading__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/cultural-misreading.html",
+     "slice": "en__cultural-misreading__s4.png",
+     "y": 6000,
+     "h": 406,
+     "single": false
+    },
+    {
+     "page": "en/customs-pass-route.html",
+     "slice": "en__customs-pass-route__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/customs-pass-route.html",
+     "slice": "en__customs-pass-route__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/customs-pass-route.html",
+     "slice": "en__customs-pass-route__s2.png",
+     "y": 3000,
+     "h": 420,
+     "single": false
+    },
+    {
+     "page": "en/dashboard.html",
+     "slice": "en__dashboard__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/dashboard.html",
+     "slice": "en__dashboard__s1.png",
+     "y": 1500,
+     "h": 480,
+     "single": false
+    },
+    {
+     "page": "en/data-explorer.html",
+     "slice": "en__data-explorer__s0.png",
+     "y": 0,
+     "h": 804,
+     "single": true
+    }
+   ]
+  },
+  {
+   "group": 53,
+   "slices": [
+    {
+     "page": "en/deconstruction.html",
+     "slice": "en__deconstruction__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/deconstruction.html",
+     "slice": "en__deconstruction__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/deconstruction.html",
+     "slice": "en__deconstruction__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/deconstruction.html",
+     "slice": "en__deconstruction__s3.png",
+     "y": 4500,
+     "h": 673,
+     "single": false
+    },
+    {
+     "page": "en/dialogue-sentiment.html",
+     "slice": "en__dialogue-sentiment__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/dialogue-sentiment.html",
+     "slice": "en__dialogue-sentiment__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/dialogue-sentiment.html",
+     "slice": "en__dialogue-sentiment__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/dialogue-sentiment.html",
+     "slice": "en__dialogue-sentiment__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/dialogue-sentiment.html",
+     "slice": "en__dialogue-sentiment__s4.png",
+     "y": 6000,
+     "h": 801,
+     "single": false
+    },
+    {
+     "page": "en/dukou-engine.html",
+     "slice": "en__dukou-engine__s0.png",
+     "y": 0,
+     "h": 800,
+     "single": true
+    }
+   ]
+  },
+  {
+   "group": 54,
+   "slices": [
+    {
+     "page": "en/ecology.html",
+     "slice": "en__ecology__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ecology.html",
+     "slice": "en__ecology__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ecology.html",
+     "slice": "en__ecology__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ecology.html",
+     "slice": "en__ecology__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ecology.html",
+     "slice": "en__ecology__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ecology.html",
+     "slice": "en__ecology__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ecology.html",
+     "slice": "en__ecology__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ecology.html",
+     "slice": "en__ecology__s7.png",
+     "y": 10500,
+     "h": 1392,
+     "single": false
+    },
+    {
+     "page": "en/emotional-heatmap.html",
+     "slice": "en__emotional-heatmap__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/emotional-heatmap.html",
+     "slice": "en__emotional-heatmap__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/emotional-heatmap.html",
+     "slice": "en__emotional-heatmap__s2.png",
+     "y": 3000,
+     "h": 1564,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 55,
+   "slices": [
+    {
+     "page": "en/essay-ai-era.html",
+     "slice": "en__essay-ai-era__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ai-era.html",
+     "slice": "en__essay-ai-era__s1.png",
+     "y": 1500,
+     "h": 1522,
+     "single": false
+    },
+    {
+     "page": "en/essay-buddhist-chan.html",
+     "slice": "en__essay-buddhist-chan__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-buddhist-chan.html",
+     "slice": "en__essay-buddhist-chan__s1.png",
+     "y": 1500,
+     "h": 1536,
+     "single": false
+    },
+    {
+     "page": "en/essay-chapter-couplets.html",
+     "slice": "en__essay-chapter-couplets__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-chapter-couplets.html",
+     "slice": "en__essay-chapter-couplets__s1.png",
+     "y": 1500,
+     "h": 639,
+     "single": false
+    },
+    {
+     "page": "en/essay-character-fu.html",
+     "slice": "en__essay-character-fu__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-character-fu.html",
+     "slice": "en__essay-character-fu__s1.png",
+     "y": 1500,
+     "h": 1360,
+     "single": false
+    },
+    {
+     "page": "en/essay-cipai-linjiangxian.html",
+     "slice": "en__essay-cipai-linjiangxian__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-cipai-linjiangxian.html",
+     "slice": "en__essay-cipai-linjiangxian__s1.png",
+     "y": 1500,
+     "h": 1546,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 56,
+   "slices": [
+    {
+     "page": "en/essay-cipai-mantingfang.html",
+     "slice": "en__essay-cipai-mantingfang__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-cipai-mantingfang.html",
+     "slice": "en__essay-cipai-mantingfang__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-cipai-mantingfang.html",
+     "slice": "en__essay-cipai-mantingfang__s2.png",
+     "y": 3000,
+     "h": 268,
+     "single": false
+    },
+    {
+     "page": "en/essay-cipai-shuidiaogetou.html",
+     "slice": "en__essay-cipai-shuidiaogetou__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-cipai-shuidiaogetou.html",
+     "slice": "en__essay-cipai-shuidiaogetou__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-cipai-shuidiaogetou.html",
+     "slice": "en__essay-cipai-shuidiaogetou__s2.png",
+     "y": 3000,
+     "h": 295,
+     "single": false
+    },
+    {
+     "page": "en/essay-cipai-xijiangyue.html",
+     "slice": "en__essay-cipai-xijiangyue__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-cipai-xijiangyue.html",
+     "slice": "en__essay-cipai-xijiangyue__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-cipai-xijiangyue.html",
+     "slice": "en__essay-cipai-xijiangyue__s2.png",
+     "y": 3000,
+     "h": 311,
+     "single": false
+    },
+    {
+     "page": "en/essay-composition-origins.html",
+     "slice": "en__essay-composition-origins__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-composition-origins.html",
+     "slice": "en__essay-composition-origins__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-composition-origins.html",
+     "slice": "en__essay-composition-origins__s2.png",
+     "y": 3000,
+     "h": 843,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 57,
+   "slices": [
+    {
+     "page": "en/essay-divine-bureaucracy.html",
+     "slice": "en__essay-divine-bureaucracy__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-divine-bureaucracy.html",
+     "slice": "en__essay-divine-bureaucracy__s1.png",
+     "y": 1500,
+     "h": 758,
+     "single": false
+    },
+    {
+     "page": "en/essay-folk-belief.html",
+     "slice": "en__essay-folk-belief__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-folk-belief.html",
+     "slice": "en__essay-folk-belief__s1.png",
+     "y": 1500,
+     "h": 1259,
+     "single": false
+    },
+    {
+     "page": "en/essay-historical-xuanzang.html",
+     "slice": "en__essay-historical-xuanzang__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-historical-xuanzang.html",
+     "slice": "en__essay-historical-xuanzang__s1.png",
+     "y": 1500,
+     "h": 1267,
+     "single": false
+    },
+    {
+     "page": "en/essay-information-cocoon.html",
+     "slice": "en__essay-information-cocoon__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-information-cocoon.html",
+     "slice": "en__essay-information-cocoon__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-information-cocoon.html",
+     "slice": "en__essay-information-cocoon__s2.png",
+     "y": 3000,
+     "h": 780,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-economy.html",
+     "slice": "en__essay-ming-economy__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-economy.html",
+     "slice": "en__essay-ming-economy__s1.png",
+     "y": 1500,
+     "h": 1560,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 58,
+   "slices": [
+    {
+     "page": "en/essay-ming-examination.html",
+     "slice": "en__essay-ming-examination__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-examination.html",
+     "slice": "en__essay-ming-examination__s1.png",
+     "y": 1500,
+     "h": 1216,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-garrison.html",
+     "slice": "en__essay-ming-garrison__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-garrison.html",
+     "slice": "en__essay-ming-garrison__s1.png",
+     "y": 1500,
+     "h": 918,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-intellectual-history.html",
+     "slice": "en__essay-ming-intellectual-history__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-intellectual-history.html",
+     "slice": "en__essay-ming-intellectual-history__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-intellectual-history.html",
+     "slice": "en__essay-ming-intellectual-history__s2.png",
+     "y": 3000,
+     "h": 862,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-judiciary.html",
+     "slice": "en__essay-ming-judiciary__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-judiciary.html",
+     "slice": "en__essay-ming-judiciary__s1.png",
+     "y": 1500,
+     "h": 996,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-literary-thought.html",
+     "slice": "en__essay-ming-literary-thought__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-literary-thought.html",
+     "slice": "en__essay-ming-literary-thought__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-literary-thought.html",
+     "slice": "en__essay-ming-literary-thought__s2.png",
+     "y": 3000,
+     "h": 532,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 59,
+   "slices": [
+    {
+     "page": "en/essay-ming-maritime-ban.html",
+     "slice": "en__essay-ming-maritime-ban__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-maritime-ban.html",
+     "slice": "en__essay-ming-maritime-ban__s1.png",
+     "y": 1500,
+     "h": 889,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-metaphor.html",
+     "slice": "en__essay-ming-metaphor__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-metaphor.html",
+     "slice": "en__essay-ming-metaphor__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-metaphor.html",
+     "slice": "en__essay-ming-metaphor__s2.png",
+     "y": 3000,
+     "h": 594,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-military.html",
+     "slice": "en__essay-ming-military__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-military.html",
+     "slice": "en__essay-ming-military__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-military.html",
+     "slice": "en__essay-ming-military__s2.png",
+     "y": 3000,
+     "h": 667,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-politics.html",
+     "slice": "en__essay-ming-politics__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-politics.html",
+     "slice": "en__essay-ming-politics__s1.png",
+     "y": 1500,
+     "h": 1558,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 60,
+   "slices": [
+    {
+     "page": "en/essay-ming-religion.html",
+     "slice": "en__essay-ming-religion__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-religion.html",
+     "slice": "en__essay-ming-religion__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-religion.html",
+     "slice": "en__essay-ming-religion__s2.png",
+     "y": 3000,
+     "h": 762,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-social-customs.html",
+     "slice": "en__essay-ming-social-customs__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-social-customs.html",
+     "slice": "en__essay-ming-social-customs__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-ming-social-customs.html",
+     "slice": "en__essay-ming-social-customs__s2.png",
+     "y": 3000,
+     "h": 977,
+     "single": false
+    },
+    {
+     "page": "en/essay-modern-management.html",
+     "slice": "en__essay-modern-management__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-modern-management.html",
+     "slice": "en__essay-modern-management__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-modern-management.html",
+     "slice": "en__essay-modern-management__s2.png",
+     "y": 3000,
+     "h": 974,
+     "single": false
+    },
+    {
+     "page": "en/essay-original-poetry.html",
+     "slice": "en__essay-original-poetry__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-original-poetry.html",
+     "slice": "en__essay-original-poetry__s1.png",
+     "y": 1500,
+     "h": 1411,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 61,
+   "slices": [
+    {
+     "page": "en/essay-poetry-imagery.html",
+     "slice": "en__essay-poetry-imagery__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-poetry-imagery.html",
+     "slice": "en__essay-poetry-imagery__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-poetry-imagery.html",
+     "slice": "en__essay-poetry-imagery__s2.png",
+     "y": 3000,
+     "h": 574,
+     "single": false
+    },
+    {
+     "page": "en/essay-poetry-opening.html",
+     "slice": "en__essay-poetry-opening__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-poetry-opening.html",
+     "slice": "en__essay-poetry-opening__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-poetry-opening.html",
+     "slice": "en__essay-poetry-opening__s2.png",
+     "y": 3000,
+     "h": 1087,
+     "single": false
+    },
+    {
+     "page": "en/essay-quanzhen-daoism.html",
+     "slice": "en__essay-quanzhen-daoism__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-quanzhen-daoism.html",
+     "slice": "en__essay-quanzhen-daoism__s1.png",
+     "y": 1500,
+     "h": 1598,
+     "single": false
+    },
+    {
+     "page": "en/essay-rhythm-analysis.html",
+     "slice": "en__essay-rhythm-analysis__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-rhythm-analysis.html",
+     "slice": "en__essay-rhythm-analysis__s1.png",
+     "y": 1500,
+     "h": 1149,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 62,
+   "slices": [
+    {
+     "page": "en/essay-scenery-poems.html",
+     "slice": "en__essay-scenery-poems__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-scenery-poems.html",
+     "slice": "en__essay-scenery-poems__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-scenery-poems.html",
+     "slice": "en__essay-scenery-poems__s2.png",
+     "y": 3000,
+     "h": 394,
+     "single": false
+    },
+    {
+     "page": "en/essay-thematic-poetry.html",
+     "slice": "en__essay-thematic-poetry__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-thematic-poetry.html",
+     "slice": "en__essay-thematic-poetry__s1.png",
+     "y": 1500,
+     "h": 1151,
+     "single": false
+    },
+    {
+     "page": "en/essay-three-teachings.html",
+     "slice": "en__essay-three-teachings__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-three-teachings.html",
+     "slice": "en__essay-three-teachings__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-three-teachings.html",
+     "slice": "en__essay-three-teachings__s2.png",
+     "y": 3000,
+     "h": 299,
+     "single": false
+    },
+    {
+     "page": "en/essay-version-evolution.html",
+     "slice": "en__essay-version-evolution__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-version-evolution.html",
+     "slice": "en__essay-version-evolution__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-version-evolution.html",
+     "slice": "en__essay-version-evolution__s2.png",
+     "y": 3000,
+     "h": 561,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 63,
+   "slices": [
+    {
+     "page": "en/essay-zen-koan-vs-neidan.html",
+     "slice": "en__essay-zen-koan-vs-neidan__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-zen-koan-vs-neidan.html",
+     "slice": "en__essay-zen-koan-vs-neidan__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/essay-zen-koan-vs-neidan.html",
+     "slice": "en__essay-zen-koan-vs-neidan__s2.png",
+     "y": 3000,
+     "h": 423,
+     "single": false
+    },
+    {
+     "page": "en/ethics-consumption.html",
+     "slice": "en__ethics-consumption__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ethics-consumption.html",
+     "slice": "en__ethics-consumption__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ethics-consumption.html",
+     "slice": "en__ethics-consumption__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ethics-consumption.html",
+     "slice": "en__ethics-consumption__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ethics-consumption.html",
+     "slice": "en__ethics-consumption__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ethics-consumption.html",
+     "slice": "en__ethics-consumption__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ethics-consumption.html",
+     "slice": "en__ethics-consumption__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ethics-consumption.html",
+     "slice": "en__ethics-consumption__s7.png",
+     "y": 10500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ethics-consumption.html",
+     "slice": "en__ethics-consumption__s8.png",
+     "y": 12000,
+     "h": 836,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 64,
+   "slices": [
+    {
+     "page": "en/famous-time-travel.html",
+     "slice": "en__famous-time-travel__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/famous-time-travel.html",
+     "slice": "en__famous-time-travel__s1.png",
+     "y": 1500,
+     "h": 491,
+     "single": false
+    },
+    {
+     "page": "en/four-dimensional-research-network.html",
+     "slice": "en__four-dimensional-research-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/four-dimensional-research-network.html",
+     "slice": "en__four-dimensional-research-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/four-dimensional-research-network.html",
+     "slice": "en__four-dimensional-research-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/four-dimensional-research-network.html",
+     "slice": "en__four-dimensional-research-network__s3.png",
+     "y": 4500,
+     "h": 649,
+     "single": false
+    },
+    {
+     "page": "en/four-heavenly-kings-artifacts.html",
+     "slice": "en__four-heavenly-kings-artifacts__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/four-heavenly-kings-artifacts.html",
+     "slice": "en__four-heavenly-kings-artifacts__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/four-heavenly-kings-artifacts.html",
+     "slice": "en__four-heavenly-kings-artifacts__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/four-heavenly-kings-artifacts.html",
+     "slice": "en__four-heavenly-kings-artifacts__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/four-heavenly-kings-artifacts.html",
+     "slice": "en__four-heavenly-kings-artifacts__s4.png",
+     "y": 6000,
+     "h": 371,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 65,
+   "slices": [
+    {
+     "page": "en/game-webnovel.html",
+     "slice": "en__game-webnovel__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/game-webnovel.html",
+     "slice": "en__game-webnovel__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/game-webnovel.html",
+     "slice": "en__game-webnovel__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/game-webnovel.html",
+     "slice": "en__game-webnovel__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/game-webnovel.html",
+     "slice": "en__game-webnovel__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/game-webnovel.html",
+     "slice": "en__game-webnovel__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/game-webnovel.html",
+     "slice": "en__game-webnovel__s6.png",
+     "y": 9000,
+     "h": 964,
+     "single": false
+    },
+    {
+     "page": "en/global-pattern.html",
+     "slice": "en__global-pattern__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/global-pattern.html",
+     "slice": "en__global-pattern__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/global-pattern.html",
+     "slice": "en__global-pattern__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/global-pattern.html",
+     "slice": "en__global-pattern__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/global-pattern.html",
+     "slice": "en__global-pattern__s4.png",
+     "y": 6000,
+     "h": 430,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 66,
+   "slices": [
+    {
+     "page": "en/graph-explorer.html",
+     "slice": "en__graph-explorer__s0.png",
+     "y": 0,
+     "h": 800,
+     "single": true
+    },
+    {
+     "page": "en/guanyin-six-roles-network.html",
+     "slice": "en__guanyin-six-roles-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/guanyin-six-roles-network.html",
+     "slice": "en__guanyin-six-roles-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/guanyin-six-roles-network.html",
+     "slice": "en__guanyin-six-roles-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/guanyin-six-roles-network.html",
+     "slice": "en__guanyin-six-roles-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/guanyin-six-roles-network.html",
+     "slice": "en__guanyin-six-roles-network__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/guanyin-six-roles-network.html",
+     "slice": "en__guanyin-six-roles-network__s5.png",
+     "y": 7500,
+     "h": 130,
+     "single": false
+    },
+    {
+     "page": "en/guide.html",
+     "slice": "en__guide__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/guide.html",
+     "slice": "en__guide__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/guide.html",
+     "slice": "en__guide__s2.png",
+     "y": 3000,
+     "h": 465,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 67,
+   "slices": [
+    {
+     "page": "en/hardship-difficulty-heatmap.html",
+     "slice": "en__hardship-difficulty-heatmap__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/hardship-difficulty-heatmap.html",
+     "slice": "en__hardship-difficulty-heatmap__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/hardship-difficulty-heatmap.html",
+     "slice": "en__hardship-difficulty-heatmap__s2.png",
+     "y": 3000,
+     "h": 938,
+     "single": false
+    },
+    {
+     "page": "en/hardship-heatmap.html",
+     "slice": "en__hardship-heatmap__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/hardship-heatmap.html",
+     "slice": "en__hardship-heatmap__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/hardship-heatmap.html",
+     "slice": "en__hardship-heatmap__s2.png",
+     "y": 3000,
+     "h": 1020,
+     "single": false
+    },
+    {
+     "page": "en/heaven-power-network.html",
+     "slice": "en__heaven-power-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/heaven-power-network.html",
+     "slice": "en__heaven-power-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/heaven-power-network.html",
+     "slice": "en__heaven-power-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/heaven-power-network.html",
+     "slice": "en__heaven-power-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/heaven-power-network.html",
+     "slice": "en__heaven-power-network__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/heaven-power-network.html",
+     "slice": "en__heaven-power-network__s5.png",
+     "y": 7500,
+     "h": 1404,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 68,
+   "slices": [
+    {
+     "page": "en/index.html",
+     "slice": "en__index__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/index.html",
+     "slice": "en__index__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/index.html",
+     "slice": "en__index__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/index.html",
+     "slice": "en__index__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/index.html",
+     "slice": "en__index__s4.png",
+     "y": 6000,
+     "h": 912,
+     "single": false
+    },
+    {
+     "page": "en/intertextuality-network.html",
+     "slice": "en__intertextuality-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/intertextuality-network.html",
+     "slice": "en__intertextuality-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/intertextuality-network.html",
+     "slice": "en__intertextuality-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/intertextuality-network.html",
+     "slice": "en__intertextuality-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/intertextuality-network.html",
+     "slice": "en__intertextuality-network__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/intertextuality-network.html",
+     "slice": "en__intertextuality-network__s5.png",
+     "y": 7500,
+     "h": 1093,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 69,
+   "slices": [
+    {
+     "page": "en/journey-geo-semiotics.html",
+     "slice": "en__journey-geo-semiotics__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/journey-geo-semiotics.html",
+     "slice": "en__journey-geo-semiotics__s1.png",
+     "y": 1500,
+     "h": 512,
+     "single": false
+    },
+    {
+     "page": "en/journey-map-interactive.html",
+     "slice": "en__journey-map-interactive__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/journey-map-interactive.html",
+     "slice": "en__journey-map-interactive__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/journey-map-interactive.html",
+     "slice": "en__journey-map-interactive__s2.png",
+     "y": 3000,
+     "h": 243,
+     "single": false
+    },
+    {
+     "page": "en/journey-route.html",
+     "slice": "en__journey-route__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/journey-route.html",
+     "slice": "en__journey-route__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/journey-route.html",
+     "slice": "en__journey-route__s2.png",
+     "y": 3000,
+     "h": 830,
+     "single": false
+    },
+    {
+     "page": "en/journey-spacetime.html",
+     "slice": "en__journey-spacetime__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/journey-spacetime.html",
+     "slice": "en__journey-spacetime__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/journey-spacetime.html",
+     "slice": "en__journey-spacetime__s2.png",
+     "y": 3000,
+     "h": 695,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 70,
+   "slices": [
+    {
+     "page": "en/jurisprudence.html",
+     "slice": "en__jurisprudence__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/jurisprudence.html",
+     "slice": "en__jurisprudence__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/jurisprudence.html",
+     "slice": "en__jurisprudence__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/jurisprudence.html",
+     "slice": "en__jurisprudence__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/jurisprudence.html",
+     "slice": "en__jurisprudence__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/jurisprudence.html",
+     "slice": "en__jurisprudence__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/jurisprudence.html",
+     "slice": "en__jurisprudence__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/jurisprudence.html",
+     "slice": "en__jurisprudence__s7.png",
+     "y": 10500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/jurisprudence.html",
+     "slice": "en__jurisprudence__s8.png",
+     "y": 12000,
+     "h": 1149,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 71,
+   "slices": [
+    {
+     "page": "en/karma-reincarnation.html",
+     "slice": "en__karma-reincarnation__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/karma-reincarnation.html",
+     "slice": "en__karma-reincarnation__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/karma-reincarnation.html",
+     "slice": "en__karma-reincarnation__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/karma-reincarnation.html",
+     "slice": "en__karma-reincarnation__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/karma-reincarnation.html",
+     "slice": "en__karma-reincarnation__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/karma-reincarnation.html",
+     "slice": "en__karma-reincarnation__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/karma-reincarnation.html",
+     "slice": "en__karma-reincarnation__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/karma-reincarnation.html",
+     "slice": "en__karma-reincarnation__s7.png",
+     "y": 10500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/karma-reincarnation.html",
+     "slice": "en__karma-reincarnation__s8.png",
+     "y": 12000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/karma-reincarnation.html",
+     "slice": "en__karma-reincarnation__s9.png",
+     "y": 13500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/karma-reincarnation.html",
+     "slice": "en__karma-reincarnation__s10.png",
+     "y": 15000,
+     "h": 1209,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 72,
+   "slices": [
+    {
+     "page": "en/language-style-radar.html",
+     "slice": "en__language-style-radar__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/language-style-radar.html",
+     "slice": "en__language-style-radar__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/language-style-radar.html",
+     "slice": "en__language-style-radar__s2.png",
+     "y": 3000,
+     "h": 501,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 73,
+   "slices": [
+    {
+     "page": "en/linguistics.html",
+     "slice": "en__linguistics__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/linguistics.html",
+     "slice": "en__linguistics__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/linguistics.html",
+     "slice": "en__linguistics__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/linguistics.html",
+     "slice": "en__linguistics__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/linguistics.html",
+     "slice": "en__linguistics__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/linguistics.html",
+     "slice": "en__linguistics__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/linguistics.html",
+     "slice": "en__linguistics__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/linguistics.html",
+     "slice": "en__linguistics__s7.png",
+     "y": 10500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/linguistics.html",
+     "slice": "en__linguistics__s8.png",
+     "y": 12000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/linguistics.html",
+     "slice": "en__linguistics__s9.png",
+     "y": 13500,
+     "h": 1291,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 74,
+   "slices": [
+    {
+     "page": "en/magic-system.html",
+     "slice": "en__magic-system__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/magic-system.html",
+     "slice": "en__magic-system__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/magic-system.html",
+     "slice": "en__magic-system__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/magic-system.html",
+     "slice": "en__magic-system__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/magic-system.html",
+     "slice": "en__magic-system__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/magic-system.html",
+     "slice": "en__magic-system__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/magic-system.html",
+     "slice": "en__magic-system__s6.png",
+     "y": 9000,
+     "h": 505,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 75,
+   "slices": [
+    {
+     "page": "en/material-archaeology.html",
+     "slice": "en__material-archaeology__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "slice": "en__material-archaeology__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "slice": "en__material-archaeology__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "slice": "en__material-archaeology__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "slice": "en__material-archaeology__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "slice": "en__material-archaeology__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "slice": "en__material-archaeology__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "slice": "en__material-archaeology__s7.png",
+     "y": 10500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "slice": "en__material-archaeology__s8.png",
+     "y": 12000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "slice": "en__material-archaeology__s9.png",
+     "y": 13500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "slice": "en__material-archaeology__s10.png",
+     "y": 15000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "slice": "en__material-archaeology__s11.png",
+     "y": 16500,
+     "h": 1600,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 76,
+   "slices": [
+    {
+     "page": "en/material-archaeology.html",
+     "slice": "en__material-archaeology__s12.png",
+     "y": 18000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "slice": "en__material-archaeology__s13.png",
+     "y": 19500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "slice": "en__material-archaeology__s14.png",
+     "y": 21000,
+     "h": 254,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 77,
+   "slices": [
+    {
+     "page": "en/mbti-evolution.html",
+     "slice": "en__mbti-evolution__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/mbti-evolution.html",
+     "slice": "en__mbti-evolution__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/mbti-evolution.html",
+     "slice": "en__mbti-evolution__s2.png",
+     "y": 3000,
+     "h": 1034,
+     "single": false
+    },
+    {
+     "page": "en/methodology-matrix.html",
+     "slice": "en__methodology-matrix__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/methodology-matrix.html",
+     "slice": "en__methodology-matrix__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/methodology-matrix.html",
+     "slice": "en__methodology-matrix__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/methodology-matrix.html",
+     "slice": "en__methodology-matrix__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/methodology-matrix.html",
+     "slice": "en__methodology-matrix__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/methodology-matrix.html",
+     "slice": "en__methodology-matrix__s5.png",
+     "y": 7500,
+     "h": 1455,
+     "single": false
+    },
+    {
+     "page": "en/methodology.html",
+     "slice": "en__methodology__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/methodology.html",
+     "slice": "en__methodology__s1.png",
+     "y": 1500,
+     "h": 1143,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 78,
+   "slices": [
+    {
+     "page": "en/ming-political-thought-comparison.html",
+     "slice": "en__ming-political-thought-comparison__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ming-political-thought-comparison.html",
+     "slice": "en__ming-political-thought-comparison__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ming-political-thought-comparison.html",
+     "slice": "en__ming-political-thought-comparison__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ming-political-thought-comparison.html",
+     "slice": "en__ming-political-thought-comparison__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/ming-political-thought-comparison.html",
+     "slice": "en__ming-political-thought-comparison__s4.png",
+     "y": 6000,
+     "h": 298,
+     "single": false
+    },
+    {
+     "page": "en/monster-background.html",
+     "slice": "en__monster-background__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-background.html",
+     "slice": "en__monster-background__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-background.html",
+     "slice": "en__monster-background__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-background.html",
+     "slice": "en__monster-background__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-background.html",
+     "slice": "en__monster-background__s4.png",
+     "y": 6000,
+     "h": 853,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 79,
+   "slices": [
+    {
+     "page": "en/monster-capability-radar.html",
+     "slice": "en__monster-capability-radar__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-capability-radar.html",
+     "slice": "en__monster-capability-radar__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-capability-radar.html",
+     "slice": "en__monster-capability-radar__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-capability-radar.html",
+     "slice": "en__monster-capability-radar__s3.png",
+     "y": 4500,
+     "h": 1418,
+     "single": false
+    },
+    {
+     "page": "en/monster-ecology-network.html",
+     "slice": "en__monster-ecology-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-ecology-network.html",
+     "slice": "en__monster-ecology-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-ecology-network.html",
+     "slice": "en__monster-ecology-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-ecology-network.html",
+     "slice": "en__monster-ecology-network__s3.png",
+     "y": 4500,
+     "h": 948,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 80,
+   "slices": [
+    {
+     "page": "en/monster-female-network.html",
+     "slice": "en__monster-female-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-female-network.html",
+     "slice": "en__monster-female-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-female-network.html",
+     "slice": "en__monster-female-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-female-network.html",
+     "slice": "en__monster-female-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-female-network.html",
+     "slice": "en__monster-female-network__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-female-network.html",
+     "slice": "en__monster-female-network__s5.png",
+     "y": 7500,
+     "h": 924,
+     "single": false
+    },
+    {
+     "page": "en/monster-hierarchy-network.html",
+     "slice": "en__monster-hierarchy-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-hierarchy-network.html",
+     "slice": "en__monster-hierarchy-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-hierarchy-network.html",
+     "slice": "en__monster-hierarchy-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-hierarchy-network.html",
+     "slice": "en__monster-hierarchy-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-hierarchy-network.html",
+     "slice": "en__monster-hierarchy-network__s4.png",
+     "y": 6000,
+     "h": 1534,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 81,
+   "slices": [
+    {
+     "page": "en/monster-sociology.html",
+     "slice": "en__monster-sociology__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-sociology.html",
+     "slice": "en__monster-sociology__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-sociology.html",
+     "slice": "en__monster-sociology__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-sociology.html",
+     "slice": "en__monster-sociology__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-sociology.html",
+     "slice": "en__monster-sociology__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-sociology.html",
+     "slice": "en__monster-sociology__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-sociology.html",
+     "slice": "en__monster-sociology__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-sociology.html",
+     "slice": "en__monster-sociology__s7.png",
+     "y": 10500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-sociology.html",
+     "slice": "en__monster-sociology__s8.png",
+     "y": 12000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-sociology.html",
+     "slice": "en__monster-sociology__s9.png",
+     "y": 13500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-sociology.html",
+     "slice": "en__monster-sociology__s10.png",
+     "y": 15000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-sociology.html",
+     "slice": "en__monster-sociology__s11.png",
+     "y": 16500,
+     "h": 1370,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 82,
+   "slices": [
+    {
+     "page": "en/monster-victims-network.html",
+     "slice": "en__monster-victims-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-victims-network.html",
+     "slice": "en__monster-victims-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-victims-network.html",
+     "slice": "en__monster-victims-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-victims-network.html",
+     "slice": "en__monster-victims-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/monster-victims-network.html",
+     "slice": "en__monster-victims-network__s4.png",
+     "y": 6000,
+     "h": 1453,
+     "single": false
+    },
+    {
+     "page": "en/music-structure.html",
+     "slice": "en__music-structure__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/music-structure.html",
+     "slice": "en__music-structure__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/music-structure.html",
+     "slice": "en__music-structure__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/music-structure.html",
+     "slice": "en__music-structure__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/music-structure.html",
+     "slice": "en__music-structure__s4.png",
+     "y": 6000,
+     "h": 569,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 83,
+   "slices": [
+    {
+     "page": "en/narrative-experiment.html",
+     "slice": "en__narrative-experiment__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narrative-experiment.html",
+     "slice": "en__narrative-experiment__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narrative-experiment.html",
+     "slice": "en__narrative-experiment__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narrative-experiment.html",
+     "slice": "en__narrative-experiment__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narrative-experiment.html",
+     "slice": "en__narrative-experiment__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narrative-experiment.html",
+     "slice": "en__narrative-experiment__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narrative-experiment.html",
+     "slice": "en__narrative-experiment__s6.png",
+     "y": 9000,
+     "h": 1287,
+     "single": false
+    },
+    {
+     "page": "en/narrative-rhythm-curve.html",
+     "slice": "en__narrative-rhythm-curve__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narrative-rhythm-curve.html",
+     "slice": "en__narrative-rhythm-curve__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narrative-rhythm-curve.html",
+     "slice": "en__narrative-rhythm-curve__s2.png",
+     "y": 3000,
+     "h": 1174,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 84,
+   "slices": [
+    {
+     "page": "en/narratology-12d-network.html",
+     "slice": "en__narratology-12d-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narratology-12d-network.html",
+     "slice": "en__narratology-12d-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narratology-12d-network.html",
+     "slice": "en__narratology-12d-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narratology-12d-network.html",
+     "slice": "en__narratology-12d-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narratology-12d-network.html",
+     "slice": "en__narratology-12d-network__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narratology-12d-network.html",
+     "slice": "en__narratology-12d-network__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narratology-12d-network.html",
+     "slice": "en__narratology-12d-network__s6.png",
+     "y": 9000,
+     "h": 307,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 85,
+   "slices": [
+    {
+     "page": "en/narratology-13d-network.html",
+     "slice": "en__narratology-13d-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narratology-13d-network.html",
+     "slice": "en__narratology-13d-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narratology-13d-network.html",
+     "slice": "en__narratology-13d-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narratology-13d-network.html",
+     "slice": "en__narratology-13d-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narratology-13d-network.html",
+     "slice": "en__narratology-13d-network__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narratology-13d-network.html",
+     "slice": "en__narratology-13d-network__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/narratology-13d-network.html",
+     "slice": "en__narratology-13d-network__s6.png",
+     "y": 9000,
+     "h": 1401,
+     "single": false
+    },
+    {
+     "page": "en/perf-canvas-rendering.html",
+     "slice": "en__perf-canvas-rendering__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/perf-canvas-rendering.html",
+     "slice": "en__perf-canvas-rendering__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/perf-canvas-rendering.html",
+     "slice": "en__perf-canvas-rendering__s2.png",
+     "y": 3000,
+     "h": 1081,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 86,
+   "slices": [
+    {
+     "page": "en/philosophy.html",
+     "slice": "en__philosophy__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/philosophy.html",
+     "slice": "en__philosophy__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/philosophy.html",
+     "slice": "en__philosophy__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/philosophy.html",
+     "slice": "en__philosophy__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/philosophy.html",
+     "slice": "en__philosophy__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/philosophy.html",
+     "slice": "en__philosophy__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/philosophy.html",
+     "slice": "en__philosophy__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/philosophy.html",
+     "slice": "en__philosophy__s7.png",
+     "y": 10500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/philosophy.html",
+     "slice": "en__philosophy__s8.png",
+     "y": 12000,
+     "h": 1272,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 87,
+   "slices": [
+    {
+     "page": "en/pilgrim-team-dynamic-network.html",
+     "slice": "en__pilgrim-team-dynamic-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/pilgrim-team-dynamic-network.html",
+     "slice": "en__pilgrim-team-dynamic-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/pilgrim-team-dynamic-network.html",
+     "slice": "en__pilgrim-team-dynamic-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/pilgrim-team-dynamic-network.html",
+     "slice": "en__pilgrim-team-dynamic-network__s3.png",
+     "y": 4500,
+     "h": 510,
+     "single": false
+    },
+    {
+     "page": "en/pilgrim-team-psychology-arc.html",
+     "slice": "en__pilgrim-team-psychology-arc__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/pilgrim-team-psychology-arc.html",
+     "slice": "en__pilgrim-team-psychology-arc__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/pilgrim-team-psychology-arc.html",
+     "slice": "en__pilgrim-team-psychology-arc__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/pilgrim-team-psychology-arc.html",
+     "slice": "en__pilgrim-team-psychology-arc__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/pilgrim-team-psychology-arc.html",
+     "slice": "en__pilgrim-team-psychology-arc__s4.png",
+     "y": 6000,
+     "h": 246,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 88,
+   "slices": [
+    {
+     "page": "en/poetry-rhythm-analysis.html",
+     "slice": "en__poetry-rhythm-analysis__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/poetry-rhythm-analysis.html",
+     "slice": "en__poetry-rhythm-analysis__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/poetry-rhythm-analysis.html",
+     "slice": "en__poetry-rhythm-analysis__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/poetry-rhythm-analysis.html",
+     "slice": "en__poetry-rhythm-analysis__s3.png",
+     "y": 4500,
+     "h": 1201,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 89,
+   "slices": [
+    {
+     "page": "en/power-resources.html",
+     "slice": "en__power-resources__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/power-resources.html",
+     "slice": "en__power-resources__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/power-resources.html",
+     "slice": "en__power-resources__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/power-resources.html",
+     "slice": "en__power-resources__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/power-resources.html",
+     "slice": "en__power-resources__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/power-resources.html",
+     "slice": "en__power-resources__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/power-resources.html",
+     "slice": "en__power-resources__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/power-resources.html",
+     "slice": "en__power-resources__s7.png",
+     "y": 10500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/power-resources.html",
+     "slice": "en__power-resources__s8.png",
+     "y": 12000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/power-resources.html",
+     "slice": "en__power-resources__s9.png",
+     "y": 13500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/power-resources.html",
+     "slice": "en__power-resources__s10.png",
+     "y": 15000,
+     "h": 289,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 90,
+   "slices": [
+    {
+     "page": "en/relationships.html",
+     "slice": "en__relationships__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/relationships.html",
+     "slice": "en__relationships__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/relationships.html",
+     "slice": "en__relationships__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/relationships.html",
+     "slice": "en__relationships__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/relationships.html",
+     "slice": "en__relationships__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/relationships.html",
+     "slice": "en__relationships__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/relationships.html",
+     "slice": "en__relationships__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/relationships.html",
+     "slice": "en__relationships__s7.png",
+     "y": 10500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/relationships.html",
+     "slice": "en__relationships__s8.png",
+     "y": 12000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/relationships.html",
+     "slice": "en__relationships__s9.png",
+     "y": 13500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/relationships.html",
+     "slice": "en__relationships__s10.png",
+     "y": 15000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/relationships.html",
+     "slice": "en__relationships__s11.png",
+     "y": 16500,
+     "h": 1600,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 91,
+   "slices": [
+    {
+     "page": "en/relationships.html",
+     "slice": "en__relationships__s12.png",
+     "y": 18000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/relationships.html",
+     "slice": "en__relationships__s13.png",
+     "y": 19500,
+     "h": 817,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 92,
+   "slices": [
+    {
+     "page": "en/risk-project.html",
+     "slice": "en__risk-project__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/risk-project.html",
+     "slice": "en__risk-project__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/risk-project.html",
+     "slice": "en__risk-project__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/risk-project.html",
+     "slice": "en__risk-project__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/risk-project.html",
+     "slice": "en__risk-project__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/risk-project.html",
+     "slice": "en__risk-project__s5.png",
+     "y": 7500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/risk-project.html",
+     "slice": "en__risk-project__s6.png",
+     "y": 9000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/risk-project.html",
+     "slice": "en__risk-project__s7.png",
+     "y": 10500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/risk-project.html",
+     "slice": "en__risk-project__s8.png",
+     "y": 12000,
+     "h": 388,
+     "single": false
+    },
+    {
+     "page": "en/search.html",
+     "slice": "en__search__s0.png",
+     "y": 0,
+     "h": 800,
+     "single": true
+    },
+    {
+     "page": "en/site-map.html",
+     "slice": "en__site-map__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/site-map.html",
+     "slice": "en__site-map__s1.png",
+     "y": 1500,
+     "h": 1594,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 93,
+   "slices": [
+    {
+     "page": "en/six-senses-narratology-network.html",
+     "slice": "en__six-senses-narratology-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/six-senses-narratology-network.html",
+     "slice": "en__six-senses-narratology-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/six-senses-narratology-network.html",
+     "slice": "en__six-senses-narratology-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/six-senses-narratology-network.html",
+     "slice": "en__six-senses-narratology-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/six-senses-narratology-network.html",
+     "slice": "en__six-senses-narratology-network__s4.png",
+     "y": 6000,
+     "h": 1499,
+     "single": false
+    },
+    {
+     "page": "en/social-media.html",
+     "slice": "en__social-media__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/social-media.html",
+     "slice": "en__social-media__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/social-media.html",
+     "slice": "en__social-media__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/social-media.html",
+     "slice": "en__social-media__s3.png",
+     "y": 4500,
+     "h": 1244,
+     "single": false
+    },
+    {
+     "page": "en/tag-cloud.html",
+     "slice": "en__tag-cloud__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/tag-cloud.html",
+     "slice": "en__tag-cloud__s1.png",
+     "y": 1500,
+     "h": 616,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 94,
+   "slices": [
+    {
+     "page": "en/text-evolution.html",
+     "slice": "en__text-evolution__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/text-evolution.html",
+     "slice": "en__text-evolution__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/text-evolution.html",
+     "slice": "en__text-evolution__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/text-evolution.html",
+     "slice": "en__text-evolution__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/text-evolution.html",
+     "slice": "en__text-evolution__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/text-evolution.html",
+     "slice": "en__text-evolution__s5.png",
+     "y": 7500,
+     "h": 162,
+     "single": false
+    },
+    {
+     "page": "en/text-search.html",
+     "slice": "en__text-search__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/text-search.html",
+     "slice": "en__text-search__s1.png",
+     "y": 1500,
+     "h": 884,
+     "single": false
+    },
+    {
+     "page": "en/theological-intervention-network.html",
+     "slice": "en__theological-intervention-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/theological-intervention-network.html",
+     "slice": "en__theological-intervention-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/theological-intervention-network.html",
+     "slice": "en__theological-intervention-network__s2.png",
+     "y": 3000,
+     "h": 1302,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 95,
+   "slices": [
+    {
+     "page": "en/timeline.html",
+     "slice": "en__timeline__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/timeline.html",
+     "slice": "en__timeline__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/timeline.html",
+     "slice": "en__timeline__s2.png",
+     "y": 3000,
+     "h": 653,
+     "single": false
+    },
+    {
+     "page": "en/tribulations.html",
+     "slice": "en__tribulations__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/tribulations.html",
+     "slice": "en__tribulations__s1.png",
+     "y": 1500,
+     "h": 1057,
+     "single": false
+    },
+    {
+     "page": "en/underworld-power-network.html",
+     "slice": "en__underworld-power-network__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/underworld-power-network.html",
+     "slice": "en__underworld-power-network__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/underworld-power-network.html",
+     "slice": "en__underworld-power-network__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/underworld-power-network.html",
+     "slice": "en__underworld-power-network__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/underworld-power-network.html",
+     "slice": "en__underworld-power-network__s4.png",
+     "y": 6000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/underworld-power-network.html",
+     "slice": "en__underworld-power-network__s5.png",
+     "y": 7500,
+     "h": 634,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 96,
+   "slices": [
+    {
+     "page": "en/visual-art.html",
+     "slice": "en__visual-art__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/visual-art.html",
+     "slice": "en__visual-art__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/visual-art.html",
+     "slice": "en__visual-art__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/visual-art.html",
+     "slice": "en__visual-art__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/visual-art.html",
+     "slice": "en__visual-art__s4.png",
+     "y": 6000,
+     "h": 1156,
+     "single": false
+    },
+    {
+     "page": "en/visualizations.html",
+     "slice": "en__visualizations__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/visualizations.html",
+     "slice": "en__visualizations__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/visualizations.html",
+     "slice": "en__visualizations__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/visualizations.html",
+     "slice": "en__visualizations__s3.png",
+     "y": 4500,
+     "h": 1406,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 97,
+   "slices": [
+    {
+     "page": "en/workplace.html",
+     "slice": "en__workplace__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/workplace.html",
+     "slice": "en__workplace__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/workplace.html",
+     "slice": "en__workplace__s2.png",
+     "y": 3000,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/workplace.html",
+     "slice": "en__workplace__s3.png",
+     "y": 4500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "en/workplace.html",
+     "slice": "en__workplace__s4.png",
+     "y": 6000,
+     "h": 909,
+     "single": false
+    },
+    {
+     "page": "guide.html",
+     "slice": "guide__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "guide.html",
+     "slice": "guide__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "guide.html",
+     "slice": "guide__s2.png",
+     "y": 3000,
+     "h": 346,
+     "single": false
+    },
+    {
+     "page": "index.html",
+     "slice": "index__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "index.html",
+     "slice": "index__s1.png",
+     "y": 1500,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "index.html",
+     "slice": "index__s2.png",
+     "y": 3000,
+     "h": 1473,
+     "single": false
+    }
+   ]
+  },
+  {
+   "group": 98,
+   "slices": [
+    {
+     "page": "mobile-index.html",
+     "slice": "mobile-index__s0.png",
+     "y": 0,
+     "h": 1600,
+     "single": false
+    },
+    {
+     "page": "mobile-index.html",
+     "slice": "mobile-index__s1.png",
+     "y": 1500,
+     "h": 566,
+     "single": false
+    },
+    {
+     "page": "rum-viewer.html",
+     "slice": "rum-viewer__s0.png",
+     "y": 0,
+     "h": 800,
+     "single": true
+    },
+    {
+     "page": "visit-viewer.html",
+     "slice": "visit-viewer__s0.png",
+     "y": 0,
+     "h": 800,
+     "single": true
+    }
+   ]
+  }
+ ]
+}

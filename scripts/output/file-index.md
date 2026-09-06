@@ -11,6 +11,26 @@
 ---
 
 
+## W554 W554 方案B阶段一全站复审管线 + 方案C数据内容审计全量（2026-09-06·v2.3.154）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_content_consistency.py | W554 | 新增·方案C L1/L2/self-test 数据一致性常驻工具（--self-test 4/4·--dataset 17页0漂移） |
+| scripts/_w554_review.js | W554 | 新增·方案B 全站复审采集/切片/分组管线（滚动穿透固化） |
+| scripts/_w555_l3b.py | W554 | 新增·L3-b KPI/年代机器核查 |
+| scripts/output/review-pass3/groups.json | W554 | 新增·B 方案 98 组分组清单（剩余 97 组审查复用） |
+| scripts/output/review-pass3/verdicts-pilot.jsonl | W554 | 新增·试审组终判存档（3 页 pass + 伪影教训注记） |
+| docs/superpowers/plans/2026-09-06-w554-content-audit-and-b-pipeline.md | W554 | 新增·审计报告与 B 恢复指令（8 项修复清单 F1-F8） |
+| .gitignore | W554 | 修改·新增 .review-tmp/（B 复审基线保留复用） |
+| scripts/_w553_jiacheck.py | W554 | 修改·级联落盘字节级核查脚本改 W554 口径（26 项断言复用） |
+| AGENTS.md | W554 | 修改·§4.3 补录滚动穿透教训 + EMBEDDED 反例 + 版本脚注 |
+| CHANGELOG.md | W554 | 新增·W554 版段 + 编号规则上限 W001-W554 |
+| 交接文档.md | W554 | 修改·头尾「最后更新」prepend W554 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W554 | 修改·版本行同步 v2.3.154（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W554 | 修改·四页脚链首 prepend W554（batch_cascade.py 执行） |
+| .github/workflows/README.md | W554 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W554 | 新增·W554 段（本段·batch_cascade.py 执行） |
+
 ## W553 W553 低危视觉细节批次（2026-09-06·v2.3.153）
 
 | 文件 | W | 说明 |
@@ -21,7 +41,7 @@
 | site/data/monster-female-network.html | W553 | 修改·A-3 中文镜像同步（同上） |
 | site/en/social-media.html | W553 | 修改·A-4 行标 svg 探针量测自适应左边距（150→173） |
 | scripts/_w553_probe.js | W553 | 新增·方案 A 四项验收探针（a1 行标签可见/a2 标签两两零相交/a3 fate 间距+名字标签/a4 行标自适应） |
-| scripts/_w553_shots.js | W553 | 新增·修复前后截图对比采集（配 git worktree 基线） |
+| scripts/_w553_shots.js | W553 | 新增·修复前后截图对比采集（配 git worktree 基线） |
 | scripts/_w553_jiacheck.py | W553 | 新增·batch_cascade 落盘字节级核查（行尾 CR 收敛/链唯一性/26 项断言） |
 | AGENTS.md | W553 | 修改·§4.3 补录 SVG 标签量测四坑 + 版本脚注 |
 | CHANGELOG.md | W553 | 新增·W553 版段 + 编号规则上限 W001-W553 |
