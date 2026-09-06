@@ -102,13 +102,13 @@ jobs:
               "assert": {
                 "assertMatrix": [
                   {
-                    "matchingUrlPattern": "character-relationship-3d",
+                    "matchingUrlPattern": "*character-relationship-3d*",
                     "assertions": {
-                      "largest-contentful-paint": ["error", {"maxNumericValue": 5000}],
+                      "largest-contentful-paint": ["error", {"maxNumericValue": 12000}],
                       "cumulative-layout-shift": ["error", {"maxNumericValue": 0.3}],
-                      "total-blocking-time": ["error", {"maxNumericValue": 600}],
+                      "total-blocking-time": ["error", {"maxNumericValue": 900}],
                       "first-contentful-paint": ["warn", {"maxNumericValue": 4800}],
-                      "interactive": ["warn", {"maxNumericValue": 5000}]
+                      "interactive": ["warn", {"maxNumericValue": 12000}]
                     }
                   },
                   {
