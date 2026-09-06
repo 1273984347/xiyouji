@@ -125,7 +125,7 @@ def claims(text: str) -> list[tuple[int, str, str, str]]:
     for m in re.finditer(r"(\d{1,5})\s*(" + COUNTER + r")\s*([0-9A-Za-z一-鿿]{0,8})", text):
         if int(m.group(1)) >= 1000 and not m.group(2).endswith("年"):
             continue  # 年份/ID 类大数非计数声明
-        subj = re.split(SUBJ_CUT, m.group(3), 1)[0]
+        subj = re.split(SUBJ_CUT, m.group(3), maxsplit=1)[0]
         if subj.isascii() and (len(subj) > 8 or subj[:1].isupper()):
             continue  # visible_text 拼接伪影
         s_ = max(0, m.start() - 20)
@@ -214,7 +214,7 @@ def check_page(path: Path) -> list[str]:
     # 规则 4：单 links 数组页，案例/流程类声明数 vs 实际边数
     if len(link_arrays) == 1:
         n_links = len(link_arrays[0])
-        for num, cnt, subj, ctx in claims(text):
+        for num, _cnt, subj, ctx in claims(text):
             if subj in ("案例", "流程", "链路", "分支", "flows", "cases", "scene", "scenes") and num != n_links:
                 fails.append(f"规则4 案例数矛盾：文案 {num} vs links 数组 {n_links}（…{ctx}…）")
     return fails
@@ -317,7 +317,7 @@ def l2() -> int:
                     mism.append(f"{key}: 页 {len(ev)} 项 vs dataset {len(sv)} 项")
                     checked += 1
                     continue
-                for i, (a, b) in enumerate(zip(ev, sv)):
+                for i, (a, b) in enumerate(zip(ev, sv, strict=False)):
                     if isinstance(a, dict) and isinstance(b, dict):
                         for k in list(a)[:6]:
                             if k in b and a[k] != b[k]:
