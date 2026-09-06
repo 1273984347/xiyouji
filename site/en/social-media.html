@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-x65d2ofEIdymkrTCDfBf82o6roLRwnr5UQGGPCoIHbs=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-ccL6bhyDu90K/IUFYkxkW2WDrj8LIQ1zN7aebJHdQpQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Social Media Persona · MBTI Personality Map · Annotated Journey to the West</title>
@@ -2083,7 +2083,20 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const svg = d3.select("#fit-svg");
         svg.selectAll("*").remove();
         const el = document.getElementById("fit-svg");
-        const margin = { top: 24, right: 180, bottom: 30, left: 150 };
+        // W553 A-4：用 svg 内隐藏探针文本按真实渲染量测最长行标签（canvas 估测偏窄 ~9%），自适应左边距（保底 150）
+        const probeText = svg.append("text")
+            .style("font-size", "0.92rem")
+            .style("font-weight", "600")
+            .style("visibility", "hidden")
+            .text("");
+        const maxLabelW = mbtiList.length
+            ? Math.max(...mbtiList.map(m => {
+                probeText.text(m.character);
+                return probeText.node().getComputedTextLength();
+              }))
+            : 0;
+        probeText.remove();
+        const margin = { top: 24, right: 180, bottom: 30, left: Math.max(150, Math.ceil(maxLabelW) + 20) };
         const w = Math.max(el.clientWidth || 1100, margin.left + margin.right + 120);
         const h = 420;
         svg.attr("viewBox", `0 0 ${w} ${h}`);
