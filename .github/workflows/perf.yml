@@ -100,16 +100,27 @@ jobs:
                 }
               },
               "assert": {
-                "assertions": {
-                  "largest-contentful-paint": ["error", {"maxNumericValue": 5000}],
-                  "cumulative-layout-shift": ["error", {"maxNumericValue": 0.3}],
-                  "total-blocking-time": ["error", {"maxNumericValue": 300}],
-                  "first-contentful-paint": ["warn", {"maxNumericValue": 4800}],
-                  "interactive": ["warn", {"maxNumericValue": 5000}],
-                  "http://localhost:8000/data/character-relationship-3d.html": {
-                    "total-blocking-time": ["error", {"maxNumericValue": 600}]
+                "assertMatrix": [
+                  {
+                    "matchingUrlPattern": "character-relationship-3d",
+                    "assertions": {
+                      "largest-contentful-paint": ["error", {"maxNumericValue": 5000}],
+                      "cumulative-layout-shift": ["error", {"maxNumericValue": 0.3}],
+                      "total-blocking-time": ["error", {"maxNumericValue": 600}],
+                      "first-contentful-paint": ["warn", {"maxNumericValue": 4800}],
+                      "interactive": ["warn", {"maxNumericValue": 5000}]
+                    }
+                  },
+                  {
+                    "assertions": {
+                      "largest-contentful-paint": ["error", {"maxNumericValue": 5000}],
+                      "cumulative-layout-shift": ["error", {"maxNumericValue": 0.3}],
+                      "total-blocking-time": ["error", {"maxNumericValue": 300}],
+                      "first-contentful-paint": ["warn", {"maxNumericValue": 4800}],
+                      "interactive": ["warn", {"maxNumericValue": 5000}]
+                    }
                   }
-                }
+                ]
               },
               "upload": {
                 "target": "temporary-public-storage",
