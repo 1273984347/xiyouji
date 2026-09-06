@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-KrBTuyHEluwTPz1nS8cn+/iS/k6heCw0uVJrIR5sQEU=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-wc2MzWKekMbjSlOAbPqK7iEZqn1ZyVYBq0qzZXlx48E=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>关系网络 · 详解西游记</title>
@@ -1434,7 +1434,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
                 <div class="map-card alt">
                     <div class="map-label" style="color:var(--accent-4);">LENS 5</div>
                     <div class="map-title">人物共现 · Co-occurrence</div>
-                    <div class="map-row">35 节点 329 边：取经四众 + 观音构成核心·唐僧-悟空 90 回共现最强·核心-卫星结构。</div>
+                    <div class="map-row">35 节点 329 边：取经四众 + 观音构成核心·唐僧-悟空 89 回共现最强·核心-卫星结构。</div>
                 </div>
             </div>
             <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:8px;">
@@ -1467,7 +1467,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
             <div class="kpi-card">
                 <div class="label">COOCCURRENCE · 共现网络</div>
                 <div class="value">35</div>
-                <div class="desc">35 节点 · 329 共现边 · 唐僧-悟空 90 回最强 · 核心-卫星结构</div>
+                <div class="desc">35 节点 · 329 共现边 · 唐僧-悟空 89 回最强 · 核心-卫星结构</div>
             </div>
         </div>
 
@@ -1727,7 +1727,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
                 <strong>NLP 抽取方法：</strong>基于零依赖纯标准库 pipeline（character_nlp.py）·
                 使用人物别名词典（41 主人物 + 100+ 别名）+ 正则模式匹配引语归属与场景边界。
                 <strong style="color:var(--accent-2);">取经团队四众 + 观音</strong>构成网络核心·
-                <strong style="color:var(--accent);">唐僧-孙悟空</strong>以 90 回共现位居关系强度榜首。
+                <strong style="color:var(--accent);">唐僧-孙悟空</strong>以 89 回共现位居关系强度榜首。
             </p>
 
             <div class="chart-block">
@@ -1798,7 +1798,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
                 <strong>数据基础：</strong>由 character_nlp.py 的 build_cooccurrence_timeline 函数生成·
                 从 100 回原文中按回提取出场人物·构建分回共现矩阵·
                 输出 per_chapter（100 回）+ cumulative_snapshots（10 个 10 回累积快照）+ binned（10 个 10 回分桶）+ top_pairs_curve（Top 10 关系对按回共现曲线）四组数据。
-                <strong style="color:var(--accent-2);">唐僧-孙悟空</strong>以 88 回共现位居演化曲线榜首·
+                <strong style="color:var(--accent-2);">唐僧-孙悟空</strong>以 89 回共现位居演化曲线榜首·
                 <strong style="color:var(--accent);">猪八戒-沙僧</strong>以 78 回共现居第二。
             </p>
 
@@ -2215,7 +2215,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
                         {
                                 "source": "唐僧",
                                 "target": "孙悟空",
-                                "weight": 90
+                                "weight": 89
                         },
                         {
                                 "source": "唐僧",

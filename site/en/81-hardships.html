@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-N8id+K8Jt9LlG4NewgCxrIdJtwoNdS7qhkopcwy0PvM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-HGNumJA93wEbY7/8Gnlyk3pq+OcR5h0YxbI9zaudLvk=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Eighty-One Hardships · In-Depth Statistics — Annotated Journey to the West</title>
@@ -1342,9 +1342,91 @@ function renderTreemap(opts){
             "Heavenly / Western steeds incarnate": {"Rescued (with backing)": 16, "Killed (no backing)": 0, "Subdued": 0},
             "Inner demonic obstacles": {"Rescued (with backing)": 4, "Killed (no backing)": 6, "Subdued": 0}
         },
-        // 81 难完整清单：默认为空，由 ../scripts/output/data/hardships_81.json 提供
+        // 81 难完整清单（英译名 + 英文标签，W555 F1 内嵌；聚合与下方 by_* 断言一致）
         // 字段：n/name/chapter/cause/ending/difficulty
-        hardships: []
+        hardships: [
+            {"n": 1, "name": "The Golden Cicada Banished", "chapter": "Prologue", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 2, "name": "Nearly Killed at Birth", "chapter": "Prologue", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 3, "name": "Cast Adrift on the River", "chapter": "Prologue", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 4, "name": "Seeking Kin, Redressing Wrong", "chapter": "Prologue", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 5, "name": "A Tiger at the City Gate", "chapter": "13", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Wukong solved alone"},
+            {"n": 6, "name": "Escort Lost in the Pit", "chapter": "13", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Wukong solved alone"},
+            {"n": 7, "name": "On Twin Fork Ridge", "chapter": "13", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Wukong solved alone"},
+            {"n": 8, "name": "At the Boundary Ridge", "chapter": "14", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 9, "name": "A New Horse at the Ravine", "chapter": "15", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 10, "name": "Fire in the Night", "chapter": "16", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Wukong solved alone"},
+            {"n": 11, "name": "The Stolen Cassock", "chapter": "16", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Needed reinforcements"},
+            {"n": 12, "name": "Zhu Bajie Taken In", "chapter": "19", "cause": "Tathāgata / Guanyin arranged", "ending": "Subdued", "difficulty": "Wukong solved alone"},
+            {"n": 13, "name": "Blocked by Yellow Wind", "chapter": "21", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Needed reinforcements"},
+            {"n": 14, "name": "Seeking Lingji's Aid", "chapter": "21", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 15, "name": "The Flowing Sands Barrier", "chapter": "22", "cause": "Tathāgata / Guanyin arranged", "ending": "Subdued", "difficulty": "Wukong solved alone"},
+            {"n": 16, "name": "Sha Wujing Taken In", "chapter": "22", "cause": "Tathāgata / Guanyin arranged", "ending": "Subdued", "difficulty": "Wukong solved alone"},
+            {"n": 17, "name": "The Four Sages Manifest", "chapter": "23", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 18, "name": "Ordeal at Wuzhuang Temple", "chapter": "24", "cause": "True wild demons", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 19, "name": "Reviving the Ginseng Tree", "chapter": "26", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 20, "name": "The Mind-Monkey Dismissed", "chapter": "27", "cause": "Inner demonic obstacles", "ending": "Killed (no backing)", "difficulty": "Wukong solved alone"},
+            {"n": 21, "name": "Lost in Black Pine Forest", "chapter": "28", "cause": "Inner demonic obstacles", "ending": "Killed (no backing)", "difficulty": "Wukong solved alone"},
+            {"n": 22, "name": "A Letter from Baoxiang", "chapter": "29", "cause": "Inner demonic obstacles", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 23, "name": "Turned Tiger in Court", "chapter": "30", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Needed reinforcements"},
+            {"n": 24, "name": "Demons of Flat-Top Mountain", "chapter": "32", "cause": "Heavenly / Western steeds incarnate", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 25, "name": "Honoring Buddha in Wuji", "chapter": "36", "cause": "Heavenly / Western steeds incarnate", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 26, "name": "The Demon's Disguise", "chapter": "37", "cause": "Heavenly / Western steeds incarnate", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 27, "name": "Monster of Numbered Hill", "chapter": "40", "cause": "True wild demons", "ending": "Subdued", "difficulty": "Needed reinforcements"},
+            {"n": 28, "name": "The Monk Whirled Away", "chapter": "41", "cause": "True wild demons", "ending": "Subdued", "difficulty": "Needed reinforcements"},
+            {"n": 29, "name": "The Mind-Monkey Afflicted", "chapter": "41", "cause": "True wild demons", "ending": "Subdued", "difficulty": "Needed reinforcements"},
+            {"n": 30, "name": "Invoking the Sage's Aid", "chapter": "42", "cause": "Tathāgata / Guanyin arranged", "ending": "Subdued", "difficulty": "Needed reinforcements"},
+            {"n": 31, "name": "Sunk in the Black River", "chapter": "43", "cause": "True wild demons", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 32, "name": "Hauling Carts in Chechi", "chapter": "44", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Wukong solved alone"},
+            {"n": 33, "name": "The Great Contest", "chapter": "45", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Wukong solved alone"},
+            {"n": 34, "name": "Daoists Out, Monks In", "chapter": "46", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Wukong solved alone"},
+            {"n": 35, "name": "The Great Flood on the Road", "chapter": "47", "cause": "Heavenly / Western steeds incarnate", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 36, "name": "Sunk in the Heavenly River", "chapter": "47", "cause": "Heavenly / Western steeds incarnate", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 37, "name": "The Fish-Basket Revelation", "chapter": "49", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 38, "name": "Demon of Golden Hat Mountain", "chapter": "50", "cause": "Heavenly / Western steeds incarnate", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 39, "name": "Heaven's Host Cannot Subdue", "chapter": "52", "cause": "Heavenly / Western steeds incarnate", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 40, "name": "Asking Buddha the Origin", "chapter": "52", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 41, "name": "Sick from the River Water", "chapter": "53", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Needed reinforcements"},
+            {"n": 42, "name": "Held in Marriage at West Liang", "chapter": "54", "cause": "Inner demonic obstacles", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 43, "name": "Torment in the Pipa Cave", "chapter": "55", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Needed reinforcements"},
+            {"n": 44, "name": "The Mind-Monkey Dismissed Again", "chapter": "57", "cause": "Inner demonic obstacles", "ending": "Killed (no backing)", "difficulty": "Wukong solved alone"},
+            {"n": 45, "name": "Telling the False Monkey", "chapter": "58", "cause": "Inner demonic obstacles", "ending": "Killed (no backing)", "difficulty": "Needed reinforcements"},
+            {"n": 46, "name": "Blocked at Flaming Mountain", "chapter": "59", "cause": "True wild demons", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 47, "name": "Seeking the Palm-Leaf Fan", "chapter": "59", "cause": "True wild demons", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 48, "name": "Binding the Bull Demon King", "chapter": "61", "cause": "True wild demons", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 49, "name": "Sweeping the Pagoda", "chapter": "62", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Wukong solved alone"},
+            {"n": 50, "name": "Demon at the Precious Grove", "chapter": "65", "cause": "Heavenly / Western steeds incarnate", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 51, "name": "The Holy Monk Captured", "chapter": "65", "cause": "Heavenly / Western steeds incarnate", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 52, "name": "The Persimmon Lane", "chapter": "67", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Wukong solved alone"},
+            {"n": 53, "name": "Medicine in Zhuzi Kingdom", "chapter": "68", "cause": "True wild demons", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 54, "name": "Rescuing the Stolen Queen", "chapter": "71", "cause": "Heavenly / Western steeds incarnate", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 55, "name": "Subduing the Demon, Recovering the Queen", "chapter": "71", "cause": "Heavenly / Western steeds incarnate", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 56, "name": "Bajie Carried Away", "chapter": "72", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Wukong solved alone"},
+            {"n": 57, "name": "In the Silk-Spinning Cave", "chapter": "72", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Needed reinforcements"},
+            {"n": 58, "name": "Bajie at the Cleansing Spring", "chapter": "72", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Wukong solved alone"},
+            {"n": 59, "name": "The Great Sage Banished", "chapter": "76", "cause": "Inner demonic obstacles", "ending": "Killed (no backing)", "difficulty": "Wukong solved alone"},
+            {"n": 60, "name": "Blocked at Lion-Camel Ridge", "chapter": "74", "cause": "Heavenly / Western steeds incarnate", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 61, "name": "Gloom over the City", "chapter": "75", "cause": "Heavenly / Western steeds incarnate", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 62, "name": "Golden Clangs in the Void", "chapter": "75", "cause": "Heavenly / Western steeds incarnate", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 63, "name": "Saving the Boys of Biqiu", "chapter": "78", "cause": "Heavenly / Western steeds incarnate", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 64, "name": "Telling Demon from Man", "chapter": "79", "cause": "Heavenly / Western steeds incarnate", "ending": "Rescued (with backing)", "difficulty": "Needed reinforcements"},
+            {"n": 65, "name": "Chasing the Rhinoceros Demons", "chapter": "91", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Needed reinforcements"},
+            {"n": 66, "name": "A Marriage Proposal in India", "chapter": "93", "cause": "Inner demonic obstacles", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 67, "name": "Detained at Tongtai", "chapter": "97", "cause": "Inner demonic obstacles", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 68, "name": "Reborn at Cloud-Reaching Ford", "chapter": "98", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 69, "name": "Scriptures Incomplete", "chapter": "98", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 70, "name": "Pearls Hung Aloft", "chapter": "98", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 71, "name": "Taking Color and Form", "chapter": "99", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 72, "name": "Meeting Fierce Beasts", "chapter": "99", "cause": "True wild demons", "ending": "Killed (no backing)", "difficulty": "Wukong solved alone"},
+            {"n": 73, "name": "Wind, Snow and Ice", "chapter": "99", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 74, "name": "Into the Turtle's Depths", "chapter": "99", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 75, "name": "The Dark Demon's Mischief", "chapter": "99", "cause": "Inner demonic obstacles", "ending": "Killed (no backing)", "difficulty": "Wukong solved alone"},
+            {"n": 76, "name": "The Old Turtle Sinks", "chapter": "99", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 77, "name": "The Canon Not Yet Whole", "chapter": "99", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 78, "name": "Thunderclap in the Buddha's Land", "chapter": "98", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 79, "name": "Scriptures Spread Abroad", "chapter": "100", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 80, "name": "The Road Home from India", "chapter": "100", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"},
+            {"n": 81, "name": "The Five Sages Made Perfect", "chapter": "100", "cause": "Tathāgata / Guanyin arranged", "ending": "Rescued (with backing)", "difficulty": "Wukong solved alone"}
+        ]
     };
 
     // 配色（与 dashboard.html 一致）
@@ -1600,19 +1682,11 @@ function renderTreemap(opts){
         });
     }
 
-    // 加载数据（fetch 失败则用嵌入数据）
+    // 加载数据（W555 F1：清单已内嵌，直用嵌入数据——原 fetch 指向 site 外路径，file:// 与 Pages 部署态双断，且中文码数据会覆盖本页英文标签）
     async function loadData() {
-        try {
-            const response = await fetch('../../scripts/output/data/hardships_81.json');
-            if (!response.ok) throw new Error('fetch failed');
-            const data = await response.json();
-            document.getElementById('dataSource').innerHTML =
-                'Data source: loaded live from <code>scripts/output/data/hardships_81.json</code> (http server mode)';
-            return data;
-        } catch (e) {
-            console.warn('[INFO] using embedded data:', e.message);
-            return EMBEDDED_DATA;
-        }
+        document.getElementById('dataSource').innerHTML =
+            'Data source: embedded full list (works offline / file:// / GitHub Pages)';
+        return EMBEDDED_DATA;
     }
 
     // 主流程

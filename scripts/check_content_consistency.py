@@ -29,6 +29,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 DS_DIR = ROOT / "dataset"
+BASELINE = ROOT / "scripts" / "content-consistency-baseline.txt"
 
 # 计数词（中英）
 COUNTER = r"(?:回|次|条|个|篇|维|层|类|项|种|页|座|位|名|nodes?|links?|edges?|dimensions?|cases?|chapters?|works?|types?)"
@@ -265,10 +266,24 @@ def self_test() -> int:
     return rc
 
 
-def l1() -> int:
+def load_baseline() -> set[str]:
+    """基线冻结名单：`page::message`（页相对路径 / 归一）。存量误报冻结豁免，只拦新增。"""
+    if not BASELINE.exists():
+        return set()
+    out = set()
+    for line in BASELINE.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#"):
+            out.add(line)
+    return out
+
+
+def l1(gate: bool = False) -> int:
     pages = sorted(SITE.rglob("*.html"))
     # _template/_shell 模板壳；dukou-engine 为 Agent 控制台元页面（全文是开发术语，非内容声明页）
     pages = [p for p in pages if p.stem not in ("_template", "_shell", "dukou-engine")]
+    baseline = load_baseline() if gate else set()
+    frozen = []
     all_fails = {}
     for p in pages:
         try:
@@ -277,12 +292,22 @@ def l1() -> int:
             fails = [f"解析异常: {e}"]
         if fails:
             all_fails[str(p.relative_to(ROOT))[:60]] = fails
-    n = sum(len(v) for v in all_fails.values())
+    n_new = 0
     for page, fails in all_fails.items():
+        key_norm = page.replace("\\", "/")
         for f in fails:
+            full = f"{key_norm} :: {f}"
+            if gate and full in baseline:
+                frozen.append(full)
+                continue
+            n_new += 1
             print(f"FAIL {page} :: {f}")
-    print(f"---- L1 扫描 {len(pages)} 页 · 矛盾 {n} 条（{len(all_fails)} 页） ----")
-    return 1 if n else 0
+    for line in frozen:
+        print(f"FROZEN（基线冻结存量误报，豁免）{line.split(' :: ', 1)[-1][:0]}{line}")
+    print(f"---- L1 扫描 {len(pages)} 页 · 矛盾 {n_new + len(frozen)} 条 · 新增 {n_new} · 基线冻结 {len(frozen)} ----")
+    if gate:
+        return 1 if n_new else 0
+    return 1 if (n_new + len(frozen)) else 0
 
 
 def l2() -> int:
@@ -346,12 +371,15 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--self-test", action="store_true")
     ap.add_argument("--dataset", action="store_true", help="L2 站-dataset 对账模式")
+    ap.add_argument("--gate", action="store_true", help="门禁模式（W555 第 25 门禁：基线冻结存量、只拦新增）")
     ap.add_argument("--json", dest="json_out", help="机器可读输出路径")
     args = ap.parse_args()
 
     if args.self_test:
         return self_test()
-    return l2() if args.dataset else l1()
+    if args.dataset:
+        return l2()
+    return l1(gate=args.gate)
 
 
 if __name__ == "__main__":

@@ -11,6 +11,32 @@
 ---
 
 
+## W556 W556 审计修复批次F1-F8 + 数据内容一致性挂载第25门禁（2026-09-06·v2.3.156）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/81-hardshots.html | W556 | 修改·F1 八十一难 81 行英译清单内嵌 + 移除越界 fetch（聚合断言对齐 KPI） |
+| site/data/relationships.html | W556 | 修改·F3 唐僧-孙悟空 共现声明统一 89（文案×3 + 边权 90→89） |
+| site/en/relationships.html | W556 | 修改·F3 英文镜像同步（文案×4 + 边权 90→89） |
+| site/en/essay-ming-military.html | W556 | 修改·F2 汉字实体纠错 土司×2/军屯×1 + 兵制译名 |
+| site/en/essay-ming-intellectual-history.html | W556 | 修改·F4 客主标注对调修正 + 术语表锚标 14 of 22 |
+| site/en/character-wukong.html | W556 | 修改·F5 行者赐名归属改唐僧（第 14 回） |
+| site/en/character-bailongma.html | W556 | 修改·F6 纵火定性 + 全队极值声明改如实表述 |
+| site/en/essay-thematic-poetry.html | W556 | 修改·F7 七律体式译名 regulated verse |
+| site/en/essay-folk-belief.html | W556 | 修改·F8 三位学者生年删注改通称 |
+| scripts/check_content_consistency.py | W556 | 修改·--gate 门禁模式（基线装载/冻结豁免/新增拦截） |
+| scripts/content-consistency-baseline.txt | W556 | 新增·第 25 门禁基线（冻结 W554 裁决 4 误报） |
+| scripts/verify_delivery.py | W556 | 修改·挂载第 25 门禁（经用户确认，py_compile + 全量跑通） |
+| scripts/_w556_f1.py / _w556_f1check.js / _w556_f3.py | W556 | 新增·F1 生成器/F1 渲染探针/F3 批量修复器（归档） |
+| AGENTS.md | W556 | 修改·§4.2 补录第 25 门禁 + 版本脚注 |
+| docs/00-导读/文档规范.md | W556 | 修改·§8 门禁表 23→25 项 |
+| CHANGELOG.md | W556 | 新增·W556 版段 + 编号规则上限 W001-W556 |
+| 交接文档.md | W556 | 修改·头尾「最后更新」prepend W556 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W556 | 修改·版本行同步 v2.3.156（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W556 | 修改·四页脚链首 prepend W556（batch_cascade.py 执行） |
+| .github/workflows/README.md | W556 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W556 | 新增·W556 段（本段·batch_cascade.py 执行） |
+
 ## W555 W555 工作复盘与优化分析报告（2026-09-06·v2.3.155）
 
 | 文件 | W | 说明 |
