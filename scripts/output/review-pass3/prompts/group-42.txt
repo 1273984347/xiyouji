@@ -1,0 +1,13 @@
+GROUP 42/98
+PAGES: ["en/aesthetics.html", "en/ai-dialogue.html", "en/bestiary.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__aesthetics__s0.png
+D:\xiyouji\.review-tmp\slices\en__aesthetics__s1.png
+D:\xiyouji\.review-tmp\slices\en__aesthetics__s2.png
+D:\xiyouji\.review-tmp\slices\en__aesthetics__s3.png
+D:\xiyouji\.review-tmp\slices\en__aesthetics__s4.png
+D:\xiyouji\.review-tmp\slices\en__aesthetics__s5.png
+D:\xiyouji\.review-tmp\slices\en__ai-dialogue__s0.png
+D:\xiyouji\.review-tmp\slices\en__ai-dialogue__s1.png
+D:\xiyouji\.review-tmp\slices\en__bestiary__s0.png
+D:\xiyouji\.review-tmp\slices\en__bestiary__s1.png

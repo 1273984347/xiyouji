@@ -1,0 +1,11 @@
+GROUP 79/98
+PAGES: ["en/monster-capability-radar.html", "en/monster-ecology-network.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__monster-capability-radar__s0.png
+D:\xiyouji\.review-tmp\slices\en__monster-capability-radar__s1.png
+D:\xiyouji\.review-tmp\slices\en__monster-capability-radar__s2.png
+D:\xiyouji\.review-tmp\slices\en__monster-capability-radar__s3.png
+D:\xiyouji\.review-tmp\slices\en__monster-ecology-network__s0.png
+D:\xiyouji\.review-tmp\slices\en__monster-ecology-network__s1.png
+D:\xiyouji\.review-tmp\slices\en__monster-ecology-network__s2.png
+D:\xiyouji\.review-tmp\slices\en__monster-ecology-network__s3.png

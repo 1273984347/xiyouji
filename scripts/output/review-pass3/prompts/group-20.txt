@@ -1,0 +1,14 @@
+GROUP 20/98
+PAGES: ["data/karma-reincarnation.html", "data/language-style-radar.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__karma-reincarnation__s0.png
+D:\xiyouji\.review-tmp\slices\data__karma-reincarnation__s1.png
+D:\xiyouji\.review-tmp\slices\data__karma-reincarnation__s2.png
+D:\xiyouji\.review-tmp\slices\data__karma-reincarnation__s3.png
+D:\xiyouji\.review-tmp\slices\data__karma-reincarnation__s4.png
+D:\xiyouji\.review-tmp\slices\data__karma-reincarnation__s5.png
+D:\xiyouji\.review-tmp\slices\data__karma-reincarnation__s6.png
+D:\xiyouji\.review-tmp\slices\data__karma-reincarnation__s7.png
+D:\xiyouji\.review-tmp\slices\data__language-style-radar__s0.png
+D:\xiyouji\.review-tmp\slices\data__language-style-radar__s1.png
+D:\xiyouji\.review-tmp\slices\data__language-style-radar__s2.png

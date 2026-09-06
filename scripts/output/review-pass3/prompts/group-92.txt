@@ -1,0 +1,15 @@
+GROUP 92/98
+PAGES: ["en/risk-project.html", "en/search.html", "en/site-map.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__risk-project__s0.png
+D:\xiyouji\.review-tmp\slices\en__risk-project__s1.png
+D:\xiyouji\.review-tmp\slices\en__risk-project__s2.png
+D:\xiyouji\.review-tmp\slices\en__risk-project__s3.png
+D:\xiyouji\.review-tmp\slices\en__risk-project__s4.png
+D:\xiyouji\.review-tmp\slices\en__risk-project__s5.png
+D:\xiyouji\.review-tmp\slices\en__risk-project__s6.png
+D:\xiyouji\.review-tmp\slices\en__risk-project__s7.png
+D:\xiyouji\.review-tmp\slices\en__risk-project__s8.png
+D:\xiyouji\.review-tmp\slices\en__search__s0.png
+D:\xiyouji\.review-tmp\slices\en__site-map__s0.png
+D:\xiyouji\.review-tmp\slices\en__site-map__s1.png

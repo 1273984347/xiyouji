@@ -1,0 +1,12 @@
+GROUP 26/98
+PAGES: ["data/monster-background.html", "data/monster-capability-radar.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__monster-background__s0.png
+D:\xiyouji\.review-tmp\slices\data__monster-background__s1.png
+D:\xiyouji\.review-tmp\slices\data__monster-background__s2.png
+D:\xiyouji\.review-tmp\slices\data__monster-background__s3.png
+D:\xiyouji\.review-tmp\slices\data__monster-background__s4.png
+D:\xiyouji\.review-tmp\slices\data__monster-capability-radar__s0.png
+D:\xiyouji\.review-tmp\slices\data__monster-capability-radar__s1.png
+D:\xiyouji\.review-tmp\slices\data__monster-capability-radar__s2.png
+D:\xiyouji\.review-tmp\slices\data__monster-capability-radar__s3.png

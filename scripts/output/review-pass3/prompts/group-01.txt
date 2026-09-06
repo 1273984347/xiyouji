@@ -1,0 +1,13 @@
+GROUP 1/98
+PAGES: ["curated.html", "dashboard.html", "data/81-hardships-view.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\curated__s0.png
+D:\xiyouji\.review-tmp\slices\curated__s1.png
+D:\xiyouji\.review-tmp\slices\curated__s2.png
+D:\xiyouji\.review-tmp\slices\curated__s3.png
+D:\xiyouji\.review-tmp\slices\dashboard__s0.png
+D:\xiyouji\.review-tmp\slices\dashboard__s1.png
+D:\xiyouji\.review-tmp\slices\dashboard__s2.png
+D:\xiyouji\.review-tmp\slices\dashboard__s3.png
+D:\xiyouji\.review-tmp\slices\dashboard__s4.png
+D:\xiyouji\.review-tmp\slices\data__81-hardships-view__s0.png

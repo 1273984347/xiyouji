@@ -1,0 +1,14 @@
+GROUP 95/98
+PAGES: ["en/timeline.html", "en/tribulations.html", "en/underworld-power-network.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__timeline__s0.png
+D:\xiyouji\.review-tmp\slices\en__timeline__s1.png
+D:\xiyouji\.review-tmp\slices\en__timeline__s2.png
+D:\xiyouji\.review-tmp\slices\en__tribulations__s0.png
+D:\xiyouji\.review-tmp\slices\en__tribulations__s1.png
+D:\xiyouji\.review-tmp\slices\en__underworld-power-network__s0.png
+D:\xiyouji\.review-tmp\slices\en__underworld-power-network__s1.png
+D:\xiyouji\.review-tmp\slices\en__underworld-power-network__s2.png
+D:\xiyouji\.review-tmp\slices\en__underworld-power-network__s3.png
+D:\xiyouji\.review-tmp\slices\en__underworld-power-network__s4.png
+D:\xiyouji\.review-tmp\slices\en__underworld-power-network__s5.png

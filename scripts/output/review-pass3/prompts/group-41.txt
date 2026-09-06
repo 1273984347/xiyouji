@@ -1,0 +1,15 @@
+GROUP 41/98
+PAGES: ["data/workplace.html", "dukou-engine.html", "en/81-hardships-view.html", "en/81-hardships.html", "en/academic-papers.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__workplace__s0.png
+D:\xiyouji\.review-tmp\slices\data__workplace__s1.png
+D:\xiyouji\.review-tmp\slices\data__workplace__s2.png
+D:\xiyouji\.review-tmp\slices\data__workplace__s3.png
+D:\xiyouji\.review-tmp\slices\dukou-engine__s0.png
+D:\xiyouji\.review-tmp\slices\dukou-engine__s1.png
+D:\xiyouji\.review-tmp\slices\en__81-hardships-view__s0.png
+D:\xiyouji\.review-tmp\slices\en__81-hardships__s0.png
+D:\xiyouji\.review-tmp\slices\en__81-hardships__s1.png
+D:\xiyouji\.review-tmp\slices\en__81-hardships__s2.png
+D:\xiyouji\.review-tmp\slices\en__academic-papers__s0.png
+D:\xiyouji\.review-tmp\slices\en__academic-papers__s1.png

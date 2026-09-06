@@ -117,7 +117,16 @@ def main():
     bm_start = tgt[0].start()
     eidx = s.find(f"> 历史概要（W{oldest_w} 及更早）的详细记录见", bm_start)
     assert eidx != -1
-    s = s[:bm_start] + s[eidx:]
+    # W557 修复：仅淘汰最老块本身。旧实现从块起点整段删到指针，当块区漂移到
+    # 「零、当前阻塞」HEAD 句之前时会连正文一起吞掉（W557 dry-run 实证）。
+    # 终点取（下一块起点 / 下一引用行 / 下一标题行 / 指针 / 块行行尾）中最先出现者。
+    cands = [eidx]
+    for _pat in ("\n- **", "\n>", "\n#", "\n"):
+        _j = s.find(_pat, bm_start + 1)
+        if _j != -1:
+            cands.append(_j)
+    _end = min(cands)
+    s = s[:bm_start] + s[_end:]
     s = s.replace(f"> 历史概要（W{oldest_w} 及更早）的详细记录见",
                   f"> 历史概要（W{new_w} 及更早）的详细记录见", 1)
     hs = re.search(r"当前 HEAD = v[\d.]+ W\d+（[^）]*；详见 CHANGELOG）", s)

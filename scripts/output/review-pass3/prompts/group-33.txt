@@ -1,0 +1,13 @@
+GROUP 33/98
+PAGES: ["data/perf-canvas-rendering.html", "data/philosophy.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__perf-canvas-rendering__s0.png
+D:\xiyouji\.review-tmp\slices\data__perf-canvas-rendering__s1.png
+D:\xiyouji\.review-tmp\slices\data__perf-canvas-rendering__s2.png
+D:\xiyouji\.review-tmp\slices\data__philosophy__s0.png
+D:\xiyouji\.review-tmp\slices\data__philosophy__s1.png
+D:\xiyouji\.review-tmp\slices\data__philosophy__s2.png
+D:\xiyouji\.review-tmp\slices\data__philosophy__s3.png
+D:\xiyouji\.review-tmp\slices\data__philosophy__s4.png
+D:\xiyouji\.review-tmp\slices\data__philosophy__s5.png
+D:\xiyouji\.review-tmp\slices\data__philosophy__s6.png

@@ -11,6 +11,26 @@
 ---
 
 
+## W557 W557 全站复审完成（2026-09-06·v2.3.157）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/ 156 页（20 页 contentavoid getBBox→getBoundingClientRect + 136 页 kpi-row 基类注入，含重叠） | W557 | 修改·两项类级根因修复（探针验证） |
+| scripts/output/review-pass3/verdicts.jsonl | W557 | 新增·98 组组级判定（151 条） |
+| scripts/output/review-pass3/verdicts-page.jsonl | W557 | 新增·232 页页级合并判定（含证据切片号） |
+| scripts/output/review-pass3/final-summary.json | W557 | 新增·覆盖率对账与计数（pass93/warn62/fail77） |
+| scripts/output/review-pass3/prompts/ | W557 | 新增·98 组切片清单（复现用） |
+| scripts/_w557_plan.py / _w557_prompts.py / _w557_consolidate.py | W557 | 新增·复审编排与合并工具 |
+| scripts/_w557_fix_contentavoid.py / _w557_fix_kpirow.py / _w557_verify_fix.js / _w557_kpirow_check.js | W557 | 新增·两项类级修复器与验证探针 |
+| docs/superpowers/plans/2026-09-06-w557-full-site-review-pass3-report.md | W557 | 新增·审查报告 + W558 五类逐项修复清单 |
+| AGENTS.md | W557 | 修改·§4.3 两条经验 + 版本脚注 |
+| CHANGELOG.md | W557 | 新增·W557 版段 + 编号规则上限 W001-W557 |
+| 交接文档.md | W557 | 修改·头尾「最后更新」prepend W557 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W557 | 修改·版本行同步 v2.3.157（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W557 | 修改·四页脚链首 prepend W557（batch_cascade.py 执行） |
+| .github/workflows/README.md | W557 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W557 | 新增·W557 段（本段·batch_cascade.py 执行） |
+
 ## W556 W556 审计修复批次F1-F8 + 数据内容一致性挂载第25门禁（2026-09-06·v2.3.156）
 
 | 文件 | W | 说明 |

@@ -1,0 +1,15 @@
+GROUP 65/98
+PAGES: ["en/game-webnovel.html", "en/global-pattern.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__game-webnovel__s0.png
+D:\xiyouji\.review-tmp\slices\en__game-webnovel__s1.png
+D:\xiyouji\.review-tmp\slices\en__game-webnovel__s2.png
+D:\xiyouji\.review-tmp\slices\en__game-webnovel__s3.png
+D:\xiyouji\.review-tmp\slices\en__game-webnovel__s4.png
+D:\xiyouji\.review-tmp\slices\en__game-webnovel__s5.png
+D:\xiyouji\.review-tmp\slices\en__game-webnovel__s6.png
+D:\xiyouji\.review-tmp\slices\en__global-pattern__s0.png
+D:\xiyouji\.review-tmp\slices\en__global-pattern__s1.png
+D:\xiyouji\.review-tmp\slices\en__global-pattern__s2.png
+D:\xiyouji\.review-tmp\slices\en__global-pattern__s3.png
+D:\xiyouji\.review-tmp\slices\en__global-pattern__s4.png

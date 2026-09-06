@@ -1,0 +1,13 @@
+GROUP 85/98
+PAGES: ["en/narratology-13d-network.html", "en/perf-canvas-rendering.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__narratology-13d-network__s0.png
+D:\xiyouji\.review-tmp\slices\en__narratology-13d-network__s1.png
+D:\xiyouji\.review-tmp\slices\en__narratology-13d-network__s2.png
+D:\xiyouji\.review-tmp\slices\en__narratology-13d-network__s3.png
+D:\xiyouji\.review-tmp\slices\en__narratology-13d-network__s4.png
+D:\xiyouji\.review-tmp\slices\en__narratology-13d-network__s5.png
+D:\xiyouji\.review-tmp\slices\en__narratology-13d-network__s6.png
+D:\xiyouji\.review-tmp\slices\en__perf-canvas-rendering__s0.png
+D:\xiyouji\.review-tmp\slices\en__perf-canvas-rendering__s1.png
+D:\xiyouji\.review-tmp\slices\en__perf-canvas-rendering__s2.png

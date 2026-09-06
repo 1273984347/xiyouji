@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W556），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W557），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.157（2026-09-06）：W557 全站复审完成（232页·98组）— pass93/warn62/fail77·contentavoid幻影隐藏全局根治·kpi-row基类补齐136页
+
+> **来源**：方案 B 剩余审查量一次性执行完毕（承接 W554 阶段一管线与恢复指令），用户确认启动。232 页 × 98 组 judge 审读（8 判据·3 并发·逐批落盘）。
+> - **结果**：页级判定 pass 93 / warn 62 / fail 77（worst-of 合并）；覆盖率对账 232/232（missing=[]，final-summary.json）。
+> - **类级修复一（contentavoid 幻影隐藏全局根治）**：W553 实证的 getBBox 局部坐标系幻影重叠隐藏标签缺陷在其余 15 页持续发作（页面级 data-audit-skip≠类绝迹）——20 页 contentavoid 补丁内 getBBox→getBoundingClientRect 全局根治，探针验证 4 样本页可见 svg 文本 97-152（修复前行标签仅 1 条），残余 display:none 为真实重叠合规隐藏。
+> - **类级修复二（统计条纵向裸排基类补齐）**：30+ 页「KPI 统计条纵向纯文本堆叠」同源——页面用 .kpi-row/.kpi-card/.label/.value/.desc 标记但基类布局规则历史丢失（仅剩 alt-* 变体）；136 缺失页注入 7 行基类 CSS（纯 token 引用），11 已有页跳过；探针验证渲染为 6 列卡片网格。
+> - **登记 W558**：其余 FAIL 按根因分类登记逐项修复清单（桑基节点几何/轴边距裁切/标签无避让/数据渲染缺失/表格挤压五类，约 55 页，证据切片号存 verdicts-page.jsonl），报告 §4 给出按类批量修的执行口径建议。
+> - **验证（当批实跑）**：check_screenshot_gates 全量 234 页 FAIL 0；verify_delivery 25 门禁核心全绿；check_js_syntax 232 文件全过；CSP 0 漂移；两项修复各配渲染探针。
+> - **文件**：site/ 156 页（20 页 contentavoid 修复 + 136 页 kpi-row 注入，含重叠）；scripts/_w557_*（复审编排/合并/修复/验证工具 7 件）；scripts/output/review-pass3/verdicts.jsonl + verdicts-page.jsonl + final-summary.json + prompts/（审查档案入库）；docs/superpowers/plans/2026-09-06-w557-full-site-review-pass3-report.md（审查报告 + W558 清单）；AGENTS §4.3 两条经验；六文档 + 旁文档版本行 + site 四页脚（batch_cascade.py 级联）。
+> - **状态**：已落地（本批随 W557 提交并 push origin/main）。
 ### v2.3.156（2026-09-06）：W556 审计修复批次F1-F8 + 数据内容一致性挂载第25门禁 — EN八十一难清单复活·中英共现数统一89·基线冻结4误报
 
 > **来源**：W554 数据审计报告 8 项修复清单（F1-F8）当批执行 + 用户确认三项决策（修 F1-F8 / L1 挂第 25 门禁 / B 剩余复审另行启动）。批号说明：W555 已被复盘报告批次（f0407db）先行领取，本批按现役 max+1 实领 W556。

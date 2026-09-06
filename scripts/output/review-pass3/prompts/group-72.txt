@@ -1,0 +1,6 @@
+GROUP 72/98
+PAGES: ["en/language-style-radar.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__language-style-radar__s0.png
+D:\xiyouji\.review-tmp\slices\en__language-style-radar__s1.png
+D:\xiyouji\.review-tmp\slices\en__language-style-radar__s2.png

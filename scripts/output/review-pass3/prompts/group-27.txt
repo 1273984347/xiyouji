@@ -1,0 +1,13 @@
+GROUP 27/98
+PAGES: ["data/monster-ecology-network.html", "data/monster-female-network.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__monster-ecology-network__s0.png
+D:\xiyouji\.review-tmp\slices\data__monster-ecology-network__s1.png
+D:\xiyouji\.review-tmp\slices\data__monster-ecology-network__s2.png
+D:\xiyouji\.review-tmp\slices\data__monster-ecology-network__s3.png
+D:\xiyouji\.review-tmp\slices\data__monster-female-network__s0.png
+D:\xiyouji\.review-tmp\slices\data__monster-female-network__s1.png
+D:\xiyouji\.review-tmp\slices\data__monster-female-network__s2.png
+D:\xiyouji\.review-tmp\slices\data__monster-female-network__s3.png
+D:\xiyouji\.review-tmp\slices\data__monster-female-network__s4.png
+D:\xiyouji\.review-tmp\slices\data__monster-female-network__s5.png

@@ -1,0 +1,15 @@
+GROUP 25/98
+PAGES: ["data/mbti-evolution.html", "data/methodology-matrix.html", "data/ming-political-thought-comparison.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__mbti-evolution__s0.png
+D:\xiyouji\.review-tmp\slices\data__mbti-evolution__s1.png
+D:\xiyouji\.review-tmp\slices\data__mbti-evolution__s2.png
+D:\xiyouji\.review-tmp\slices\data__methodology-matrix__s0.png
+D:\xiyouji\.review-tmp\slices\data__methodology-matrix__s1.png
+D:\xiyouji\.review-tmp\slices\data__methodology-matrix__s2.png
+D:\xiyouji\.review-tmp\slices\data__methodology-matrix__s3.png
+D:\xiyouji\.review-tmp\slices\data__methodology-matrix__s4.png
+D:\xiyouji\.review-tmp\slices\data__ming-political-thought-comparison__s0.png
+D:\xiyouji\.review-tmp\slices\data__ming-political-thought-comparison__s1.png
+D:\xiyouji\.review-tmp\slices\data__ming-political-thought-comparison__s2.png
+D:\xiyouji\.review-tmp\slices\data__ming-political-thought-comparison__s3.png

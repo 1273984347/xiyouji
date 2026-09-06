@@ -1,0 +1,10 @@
+GROUP 47/98
+PAGES: ["en/character-relationship-3d.html", "en/character-semantic-network.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__character-relationship-3d__s0.png
+D:\xiyouji\.review-tmp\slices\en__character-relationship-3d__s1.png
+D:\xiyouji\.review-tmp\slices\en__character-semantic-network__s0.png
+D:\xiyouji\.review-tmp\slices\en__character-semantic-network__s1.png
+D:\xiyouji\.review-tmp\slices\en__character-semantic-network__s2.png
+D:\xiyouji\.review-tmp\slices\en__character-semantic-network__s3.png
+D:\xiyouji\.review-tmp\slices\en__character-semantic-network__s4.png

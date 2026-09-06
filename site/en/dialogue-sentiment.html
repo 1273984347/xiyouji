@@ -1031,6 +1031,12 @@ td.num, th.num {
         max-width: 220px;
     }
 }
+            /* W557: kpi-row 基类补齐（标记存在但基类规则缺失致统计条纵向裸排） */
+        .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin: 18px 0; }
+        .kpi-row .kpi-card { background: var(--paper-warm); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 10px; padding: 14px 16px; }
+        .kpi-row .kpi-card .label { font-size: 0.78rem; color: var(--ink-soft); letter-spacing: 0.04em; }
+        .kpi-row .kpi-card .value { font-size: 1.9rem; font-weight: 700; color: var(--accent); font-family: var(--font-mono, monospace); line-height: 1.15; }
+        .kpi-row .kpi-card .desc { font-size: 0.8rem; color: var(--ink-soft); margin-top: 4px; }
     </style>
 <style>
         /* e-track-exempt: chart-data-colors 5 处 */

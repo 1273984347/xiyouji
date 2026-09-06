@@ -1,0 +1,14 @@
+GROUP 62/98
+PAGES: ["en/essay-scenery-poems.html", "en/essay-thematic-poetry.html", "en/essay-three-teachings.html", "en/essay-version-evolution.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__essay-scenery-poems__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-scenery-poems__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-scenery-poems__s2.png
+D:\xiyouji\.review-tmp\slices\en__essay-thematic-poetry__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-thematic-poetry__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-three-teachings__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-three-teachings__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-three-teachings__s2.png
+D:\xiyouji\.review-tmp\slices\en__essay-version-evolution__s0.png
+D:\xiyouji\.review-tmp\slices\en__essay-version-evolution__s1.png
+D:\xiyouji\.review-tmp\slices\en__essay-version-evolution__s2.png

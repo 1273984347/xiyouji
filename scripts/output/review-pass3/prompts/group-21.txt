@@ -1,0 +1,12 @@
+GROUP 21/98
+PAGES: ["data/linguistics.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__linguistics__s0.png
+D:\xiyouji\.review-tmp\slices\data__linguistics__s1.png
+D:\xiyouji\.review-tmp\slices\data__linguistics__s2.png
+D:\xiyouji\.review-tmp\slices\data__linguistics__s3.png
+D:\xiyouji\.review-tmp\slices\data__linguistics__s4.png
+D:\xiyouji\.review-tmp\slices\data__linguistics__s5.png
+D:\xiyouji\.review-tmp\slices\data__linguistics__s6.png
+D:\xiyouji\.review-tmp\slices\data__linguistics__s7.png
+D:\xiyouji\.review-tmp\slices\data__linguistics__s8.png

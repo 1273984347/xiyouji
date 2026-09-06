@@ -1,0 +1,8 @@
+GROUP 22/98
+PAGES: ["data/magic-system.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__magic-system__s0.png
+D:\xiyouji\.review-tmp\slices\data__magic-system__s1.png
+D:\xiyouji\.review-tmp\slices\data__magic-system__s2.png
+D:\xiyouji\.review-tmp\slices\data__magic-system__s3.png
+D:\xiyouji\.review-tmp\slices\data__magic-system__s4.png

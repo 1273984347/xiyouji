@@ -1,0 +1,232 @@
+{"page": "curated.html", "verdict": "pass", "issues": [], "groups": [1]}
+{"page": "dashboard.html", "verdict": "pass", "issues": [], "groups": [1]}
+{"page": "data/81-hardships-view.html", "verdict": "pass", "issues": [], "groups": [1]}
+{"page": "data/81-hardships.html", "verdict": "warn", "issues": ["s2: 清单表计数 81/81 但仅渲染 1-13 行即结束——疑 fullPage 滚动加载伪影，W557 批末统一复截复核"], "groups": [2]}
+{"page": "data/aesthetics.html", "verdict": "pass", "issues": [], "groups": [2]}
+{"page": "data/ai-dialogue.html", "verdict": "pass", "issues": [], "groups": [2]}
+{"page": "data/business-model.html", "verdict": "pass", "issues": [], "groups": [3]}
+{"page": "data/cave-estate.html", "verdict": "fail", "issues": ["s2-s4: 豪华度分布与小妖数量两张条形图行标签几乎全部缺失（仅 1 条悬浮可见），地区柱图柱底无地区名——疑似 audit 补丁隐藏类缺陷（W553 contentavoid 同类），转修复"], "groups": [4]}
+{"page": "data/century-dialogue.html", "verdict": "warn", "issues": ["s0: 会谈卡片引文行顶到红色右边框；角色圆桌区左侧大片空白、圆桌席位疑似未渲染（待复核）"], "groups": [4]}
+{"page": "data/chapter-stats.html", "verdict": "pass", "issues": [], "groups": [4]}
+{"page": "data/chapter-structure-graph.html", "verdict": "pass", "issues": [], "groups": [5]}
+{"page": "data/character-appearance.html", "verdict": "pass", "issues": [], "groups": [5]}
+{"page": "data/character-dynamic-network.html", "verdict": "pass", "issues": [], "groups": [5]}
+{"page": "data/character-presence-timeline.html", "verdict": "pass", "issues": [], "groups": [6]}
+{"page": "data/character-relationship-3d-view.html", "verdict": "pass", "issues": [], "groups": [6]}
+{"page": "data/character-relationship-3d.html", "verdict": "pass", "issues": [], "groups": [6]}
+{"page": "data/character-semantic-network.html", "verdict": "warn", "issues": ["s3: 四子网络交互热力图取经团队行 2 格数值显示为模糊白块，其余 8 格清晰"], "groups": [6]}
+{"page": "data/character-sentiment-arc.html", "verdict": "pass", "issues": [], "groups": [7]}
+{"page": "data/chart-design.html", "verdict": "pass", "issues": [], "groups": [7]}
+{"page": "data/cognitive-psychology.html", "verdict": "pass", "issues": [], "groups": [8]}
+{"page": "data/concept-device.html", "verdict": "pass", "issues": [], "groups": [8]}
+{"page": "data/counterfactual.html", "verdict": "pass", "issues": [], "groups": [9]}
+{"page": "data/criticism-history.html", "verdict": "warn", "issues": ["s3: 祛魅图解『神魔皆有人情』与『精魅亦通世故』零间距连读；灰色『神魔小说』标注对比度极低且被剖线穿过"], "groups": [9]}
+{"page": "data/cross-time-danmaku.html", "verdict": "warn", "issues": ["s1: 名人卡国家代码 US/AR/JP 首字母被卡片左缘裁切约半字；全球改编行首枚芯片前缀 jp 同样左裁切"], "groups": [9]}
+{"page": "data/cultural-misreading.html", "verdict": "fail", "issues": ["s0: 顶部 KPI 统计带（4 组指标）渲染为无样式纵向纯文本堆叠，无卡片容器/层级，与同页精样式区块断裂——三页同款系统性缺陷"], "groups": [10]}
+{"page": "data/customs-pass-route.html", "verdict": "fail", "issues": ["s0: 页首统计带（15/9/3/1）无样式纵向纯文本堆叠，同款系统性缺陷"], "groups": [10]}
+{"page": "data/data-explorer.html", "verdict": "pass", "issues": [], "groups": [10]}
+{"page": "data/deconstruction.html", "verdict": "fail", "issues": ["s0: 顶部 KPI 统计带无样式纵向堆叠（同款系统性缺陷）", "s2: 作品表声明 16 部仅渲染 8 行（1979-2004），2005-2024 不可见，行下有裁断标签碎片"], "groups": [10]}
+{"page": "data/dialogue-sentiment.html", "verdict": "pass", "issues": [], "groups": [11]}
+{"page": "data/ecology.html", "verdict": "warn", "issues": ["s2-s3: 散点图点位标签省略号横向截断（金兜山·金…等 7 处），完整名仅在下方表格"], "groups": [11]}
+{"page": "data/emotional-heatmap.html", "verdict": "warn", "issues": ["s1: 8 张学者卡右上角生卒年小字被横线穿过呈删除线状（8 卡一致）"], "groups": [12]}
+{"page": "data/ethics-consumption.html", "verdict": "warn", "issues": ["s4-s6: 5 张 IPO 卡头部右侧元信息顶到卡片右缘末字被裁；s3: 狮驼岭最大IPO绶带压住头部元信息尾部（同根因）"], "groups": [12]}
+{"page": "data/famous-time-travel.html", "verdict": "pass", "issues": [], "groups": [13]}
+{"page": "data/four-dimensional-research-network.html", "verdict": "fail", "issues": ["s1-s3: 系统性标签渲染故障——力导向仅蓝色权力政治节点有标签、堆叠面积图例仅蓝色带文字、极坐标红金徽章白字叠影糊化、热力图列表头白字叠影、极坐标荣格/弗洛伊德轴标签叠压连读"], "groups": [13]}
+{"page": "data/four-heavenly-kings-artifacts.html", "verdict": "pass", "issues": [], "groups": [13]}
+{"page": "data/game-webnovel.html", "verdict": "warn", "issues": ["s2-s3: 稀有度/元素两张 treemap 小格两行标签纵向挤压粘连（N 8.3% 成墨团）", "s4: 法宝天梯散点左上三气泡完全重叠标签竖排叠压、左下两标签叠压"], "groups": [14]}
+{"page": "data/global-pattern.html", "verdict": "warn", "issues": ["s2: 8 文化圈 treemap 全部单元格名称与百分比行粘连叠压；格列佛游记注释与刻度叠压连读 1591726"], "groups": [14]}
+{"page": "data/graph-explorer.html", "verdict": "pass", "issues": [], "groups": [14]}
+{"page": "data/guanyin-six-roles-network.html", "verdict": "pass", "issues": [], "groups": [15]}
+{"page": "data/hardship-difficulty-heatmap.html", "verdict": "fail", "issues": ["s1: 求助次数分布柱状图空数据渲染（无柱体、类目全 0），与页内 47 求助总次数声明矛盾（同节其余三图正常）"], "groups": [15]}
+{"page": "data/hardship-heatmap.html", "verdict": "pass", "issues": [], "groups": [16]}
+{"page": "data/heaven-power-network.html", "verdict": "pass", "issues": [], "groups": [16]}
+{"page": "data/intertextuality-network.html", "verdict": "warn", "issues": ["s3: 互文时间线散点图 x 轴最左端刻度标签叠压连读（公元前6前500），其余刻度间距正常"], "groups": [17]}
+{"page": "data/journey-geo-3d.html", "verdict": "pass", "issues": [], "groups": [17]}
+{"page": "data/journey-geo-semiotics.html", "verdict": "pass", "issues": [], "groups": [17]}
+{"page": "data/journey-map-interactive.html", "verdict": "pass", "issues": [], "groups": [18]}
+{"page": "data/journey-route.html", "verdict": "warn", "issues": ["s1: 环形图蓝色水扇区缺白色百分比标签，橙寺/绿山均有——读数不对称"], "groups": [18]}
+{"page": "data/journey-spacetime.html", "verdict": "pass", "issues": [], "groups": [18]}
+{"page": "data/jurisprudence.html", "verdict": "warn", "issues": ["s3: 图2.2 treemap 绿块标签叠印乱字形；图2.1 条形图 Y 轴长类目名尾部疑被绘图区遮挡；图3.2 环形图图例第二行被卡片底边竖裁（信息副标题有重复）"], "groups": [19]}
+{"page": "data/karma-reincarnation.html", "verdict": "fail", "issues": ["s3: 桑基图右侧 6 个 rebirth_destination 节点渲染为横贯 2/3 宽的空心矩形（无填充无标签），去向小色块挤在左侧，右半近空白——节点宽度错误缩放", "s0: 页首统计条 4 组指标纵向纯文本堆叠（同 W557 KPI 带系统性缺陷形态）"], "groups": [20]}
+{"page": "data/language-style-radar.html", "verdict": "warn", "issues": ["s0: 页首统计条 5 组指标纵向纯文本堆叠（同款系统性缺陷）", "s1: PCA 散点实际 7 色但图例仅 3 色可解码——唐僧红/观音蓝无归属"], "groups": [20]}
+{"page": "data/linguistics.html", "verdict": "pass", "issues": [], "groups": [21]}
+{"page": "data/magic-system.html", "verdict": "fail", "issues": ["s1: 能耗榜 TOP6 行标签左端首字被裁（净瓶杨柳水缺净/牛魔王缺牛/大鹏缺大/悟空缺悟）", "s3: 两环形图弧上白字 N·NN% 越出色带落到白底不可见，计数可被误读", "s0: 页首统计条纵向堆叠（系统性另案）"], "groups": [22]}
+{"page": "data/material-archaeology.html", "verdict": "fail", "issues": ["s0-s1+s6+s9-s10: 条形图类目标签系统性缺失（硬度 8 条仅 1 有标签、阶段 4 条仅 1、建筑 5 条仅 1、洞府 14 条仅 1）——W553 contentavoid 同类；s6: 饼图仅 1 扇区有数值标签", "s0: 页首统计条纵向堆叠（系统性另案）"], "groups": [23]}
+{"page": "data/mbti-evolution.html", "verdict": "warn", "issues": ["s1-s2: 热力图多个极值深红单元格数值显示为白色斑块非数字（孙悟空 J-P 格、唐僧末格、猪八戒 1/3/4 格、沙僧多格、白龙马首格）", "s0: 统计条纵向堆叠（另案）"], "groups": [25]}
+{"page": "data/methodology-matrix.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [25]}
+{"page": "data/ming-political-thought-comparison.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [25]}
+{"page": "data/monster-background.html", "verdict": "pass", "issues": [], "groups": [26]}
+{"page": "data/monster-capability-radar.html", "verdict": "fail", "issues": ["s2: ④妖怪分类桑基图节点标签被容器左右裁切（左侧只显庭/界/司/生，右侧只显收/打/逃/借次字）", "s0: 统计条纵向堆叠（另案）"], "groups": [26]}
+{"page": "data/monster-ecology-network.html", "verdict": "fail", "issues": ["s1: 桑基图 5 节点中 4 个标签叠压重影不可辨读，红/深色节点标签横向溢出色块压流带", "s0: 统计条纵向堆叠（另案）"], "groups": [27]}
+{"page": "data/monster-female-network.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）；其余力导向/桑基/雷达/时间线/汇总表均正常"], "groups": [27]}
+{"page": "data/monster-hierarchy-network.html", "verdict": "warn", "issues": ["s0+s3-s4: 页首与仪表盘统计条纵向纯文本堆叠（系统性另案）；图表本体全正常"], "groups": [28]}
+{"page": "data/monster-sociology.html", "verdict": "warn", "issues": ["s1: 统计条纵向堆叠（另案）"], "groups": [29]}
+{"page": "data/monster-victims-network.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [30]}
+{"page": "data/music-structure.html", "verdict": "fail", "issues": ["s0: 章回节奏折线图右缘标签裁切（尾声·第98-10 缺 0）", "s0: 统计条纵向堆叠（另案）"], "groups": [30]}
+{"page": "data/narrative-experiment.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [31]}
+{"page": "data/narrative-rhythm-curve.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [31]}
+{"page": "data/narratology-12d-network.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [32]}
+{"page": "data/narratology-13d-network.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [32]}
+{"page": "data/perf-canvas-rendering.html", "verdict": "fail", "issues": ["s0-s1: 渲染时间占比可视化条段图形完全未渲染（仅标题与文字，缺图）", "s0: 统计条纵向堆叠（另案）"], "groups": [33]}
+{"page": "data/philosophy.html", "verdict": "fail", "issues": ["s2: 心性热力图 5 行仅末行有行标签、6 列表头全缺、下方注释被裁；说明行列方向与实际相反", "s4: 环形饼图 8 图例仅 1 个有文字；条形图 8 类目轴标签仅末条显示", "s0: 统计条纵向堆叠（另案）"], "groups": [33]}
+{"page": "data/pilgrim-team-dynamic-network.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [34]}
+{"page": "data/pilgrim-team-psychology-arc.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [34]}
+{"page": "data/poetry-rhythm-analysis.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [34]}
+{"page": "data/power-resources.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）", "s5: 长生资源散点两点标签省略号截断（蟠桃（9000…/镇元大仙人参果…）"], "groups": [35]}
+{"page": "data/relationships.html", "verdict": "warn", "issues": ["s0-s1: 统计条纵向堆叠（另案）；F3 修复后各图表渲染正常"], "groups": [36]}
+{"page": "data/risk-project.html", "verdict": "fail", "issues": ["s0+s6: DIMENSION/FINDING 卡片正文首行顶部被容器削切（次行完整，非切片边界）", "s0: 统计条纵向堆叠（另案）"], "groups": [37]}
+{"page": "data/search.html", "verdict": "pass", "issues": [], "groups": [37]}
+{"page": "data/six-senses-narratology-network.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [38]}
+{"page": "data/social-media.html", "verdict": "fail", "issues": ["s2: 职场适配图右上配色图例与条形注释同行互相压叠连读（总设计师×I系/技术负责人×E系）", "s0: 统计条纵向堆叠（另案）"], "groups": [38]}
+{"page": "data/tag-cloud.html", "verdict": "pass", "issues": [], "groups": [38]}
+{"page": "data/text-evolution.html", "verdict": "fail", "issues": ["s2: 评论总数分布条形图纵轴类目名整体缺失（W553 contentavoid 同类——W553 只修了 EN 镜像，ZH 页未挂 data-audit-skip）", "s3: 堆叠图五行行标缺失仅剩 1 条 + 段内白字竖排不可读", "s0: 进化树约 12 节点仅 3 个带文字标注", "s1: 进化树层 1/3-7 色条无层名标注", "s0: 统计条纵向堆叠（另案）"], "groups": [39]}
+{"page": "data/text-search.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [39]}
+{"page": "data/theological-intervention-network.html", "verdict": "fail", "issues": ["s1: 五型干预桑基图全部节点白字标签叠压成乱块不可读，太上老君四字横向溢出节点边框"], "groups": [39]}
+{"page": "data/timeline.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [40]}
+{"page": "data/underworld-power-network.html", "verdict": "warn", "issues": ["s0+s4: 统计条纵向堆叠（另案）"], "groups": [40]}
+{"page": "data/visual-art.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）", "s2: 气味卡 No.3/7/8 标题首字紧贴色条疑被裁切（其余卡正常，待放大复核）"], "groups": [40]}
+{"page": "data/workplace.html", "verdict": "fail", "issues": ["s2: 技能条形图搬救兵行说明文字与大师徽标叠印成乱串", "s3: 黑话词典 15 卡首字符被左缘红竖条裁切（对齐→寸齐等），西游用法引文行首同症", "s0: 统计条纵向堆叠（另案）"], "groups": [41]}
+{"page": "dukou-engine.html", "verdict": "pass", "issues": [], "groups": [41]}
+{"page": "en/81-hardships-view.html", "verdict": "fail", "issues": ["s0: 条形图行标签被条形覆盖截断（Arranged by Tathāga…/Heavenly Western st…/Demon born of the h…），表格同键有全名"], "groups": [41]}
+{"page": "en/81-hardships.html", "verdict": "warn", "issues": ["s0: By Cause treemap 绿小格标签 mid-word 裁切（完整名见图例）；treemap/桑基白描边略糊可辨"], "groups": [41]}
+{"page": "en/academic-papers.html", "verdict": "pass", "issues": [], "groups": [41]}
+{"page": "en/aesthetics.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [42]}
+{"page": "en/ai-dialogue.html", "verdict": "pass", "issues": [], "groups": [42]}
+{"page": "en/bestiary.html", "verdict": "pass", "issues": [], "groups": [42]}
+{"page": "en/business-model.html", "verdict": "fail", "issues": ["s5: IPO 失败饼图扇区白标签与中心注释重叠连读（2 companie100% companies），红扇区数字被覆盖", "s0-s1: 统计条纵向堆叠（另案）"], "groups": [43]}
+{"page": "en/cave-estate.html", "verdict": "fail", "issues": ["s1+s3: 豪华度/小妖数条形图行标签系统性缺失（仅残片 of Thunder-Hoard Mountain/der-Hoard Mountain），顶端两条数值标签右缘截断 48,00/47,00，地区柱图无地区名——与 ZH 镜像同病", "s0: 统计条纵向堆叠（另案）"], "groups": [44]}
+{"page": "en/century-dialogue.html", "verdict": "fail", "issues": ["s0: 毛泽东卡与李卓吾卡右下角重叠相交，毛卡引文行在深色面板底边被截断——与 ZH 镜像同病"], "groups": [44]}
+{"page": "en/chapter-stats.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [44]}
+{"page": "en/chapter-structure-graph.html", "verdict": "fail", "issues": ["s0: Chapter Cluster Tree 叶子标签右缘裁切 6 处（Early Journey (13…/Ascension to Bud…等，图例有全文）", "s1: Couplet Matrix x 轴刻度无间隔连读 Upper·1Upper·2…（y 轴正常）", "s0: 统计条纵向堆叠（另案）"], "groups": [45]}
+{"page": "en/chapters-map.html", "verdict": "pass", "issues": [], "groups": [45]}
+{"page": "en/character-appearance.html", "verdict": "fail", "issues": ["s0-s1: 两图 y 轴人物标签残缺 he Dragon Horse（应为 White Dragon Horse，与 ZH 同类 A-4 缺陷）", "s1: 热力图渐变图例裁为 Mention coun", "s0: 统计条纵向堆叠（另案）"], "groups": [45]}
+{"page": "en/character-bailongma.html", "verdict": "pass", "issues": [], "groups": [46]}
+{"page": "en/character-bajie.html", "verdict": "pass", "issues": [], "groups": [46]}
+{"page": "en/character-dynamic-network.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [46]}
+{"page": "en/character-presence-timeline.html", "verdict": "fail", "issues": ["s1-s3: 多图 y 轴行标签左缘裁切（te Dragon Horse/ite Bone Demon/ow Wind Demon/en-Winged Peng/ine-Headed Bird，同一根因多处）"], "groups": [46]}
+{"page": "en/character-relationship-3d-view.html", "verdict": "pass", "issues": [], "groups": [46]}
+{"page": "en/character-relationship-3d.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）；hero 提示胶囊贴顶半截（采集伪影）；s1 3D 最右节点 Samantabhadra 越出画布标签裁成 SamanLabha（3D 投影、交互可旋转，轻微软性）"], "groups": [47]}
+{"page": "en/character-semantic-network.html", "verdict": "fail", "issues": ["s2: Demon-Faction 力导向 Gold Horn 与 White Elephant 标签零间距连读"], "groups": [47]}
+{"page": "en/character-sentiment-arc.html", "verdict": "fail", "issues": ["s3: 雷达图右轴标签右缘裁切 Negative (inv", "s0: 统计条纵向堆叠（另案）"], "groups": [48]}
+{"page": "en/character-shaseng.html", "verdict": "pass", "issues": [], "groups": [48]}
+{"page": "en/character-tangseng.html", "verdict": "pass", "issues": [], "groups": [48]}
+{"page": "en/character-wukong.html", "verdict": "pass", "issues": [], "groups": [48]}
+{"page": "en/characters.html", "verdict": "pass", "issues": [], "groups": [49]}
+{"page": "en/chart-design.html", "verdict": "fail", "issues": ["s3: 六张 sundial 卡彩色弧段锚定左上角被上/左边框裁切仅剩约四分之一扇区，12 时辰标签圈心空置——与文案 circular sundial chart 矛盾", "s4: 散点 White Bone Spirit 标签右缘裁切剩 White Bone Spi", "s0: 统计条纵向堆叠（另案）"], "groups": [49]}
+{"page": "en/cognitive-psychology.html", "verdict": "fail", "issues": ["s4: 6 维评分对比表末列表头右缘截断仅剩 Flexib", "s0: 统计条纵向堆叠（另案）"], "groups": [50]}
+{"page": "en/concept-device.html", "verdict": "pass", "issues": [], "groups": [50]}
+{"page": "en/counterfactual.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [51]}
+{"page": "en/criticism-history.html", "verdict": "fail", "issues": ["s3: 祛魅手术图三段文字叠压连读（Gods and demons…fe × A work of play × Words that bring…）；金丹道标题与说明行横向溢出横穿文本框", "s1: 三教三角顶点标签压节点圆、左右注释块被容器边缘裁切（e = the elixir field 行首丢失/spirits to ki 行尾截断）", "s0: 统计条纵向堆叠（另案）"], "groups": [51]}
+{"page": "en/cross-time-danmaku.html", "verdict": "warn", "issues": ["s0-s1: 多卡与芯片内容贴死左缘被裁（→Dragon Ball/kr Korean/us Forbidden Kingdom 首字符削半，名人卡正文行首同症）——与 ZH 镜像同病"], "groups": [51]}
+{"page": "en/cultural-misreading.html", "verdict": "fail", "issues": ["s1: Cultural Gap 条形图轴标签左缘裁切（ind Monkey and Will Horse 缺 M）；六条 gap=9 数值被高亮带遮半", "s2: 热力图行标签 outh Korea 缺 S", "s0: 统计条纵向堆叠（另案）"], "groups": [52]}
+{"page": "en/customs-pass-route.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [52]}
+{"page": "en/dashboard.html", "verdict": "pass", "issues": [], "groups": [52]}
+{"page": "en/data-explorer.html", "verdict": "fail", "issues": ["s0: by_caused 条形图四条类目标签词中截断（下方表格同键完整证实）"], "groups": [52]}
+{"page": "en/deconstruction.html", "verdict": "fail", "issues": ["s0: 象限图角标被裁（bversive·Entertainment 缺 Su；Faithful·Serio 右缘截断）", "s0: 统计条纵向堆叠（另案）"], "groups": [53]}
+{"page": "en/dialogue-sentiment.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [53]}
+{"page": "en/dukou-engine.html", "verdict": "pass", "issues": [], "groups": [53]}
+{"page": "en/ecology.html", "verdict": "fail", "issues": ["s0-s1: Chart1 柱状图 7 根仅 1 根有残缺标签（Demon (Kui Wood Wolf) 缺前缀且有横线贯穿）", "s1: Chart2 散点右缘截断 Yellow Robe Demon (Kui W", "s2-s5: 两柱状图旋转 x 轴标签斜穿压柱", "s3: 散点 9 点标签省略号截断至 4-5 字符不可辨", "s6: 营养金字塔右侧注释多处词中截断", "s0+s3: 统计条纵向堆叠（另案）"], "groups": [54]}
+{"page": "en/emotional-heatmap.html", "verdict": "fail", "issues": ["s0-s1: 热力图行标签左缘裁切（in Shengtan/un Zhongshu 缺首字母）", "s1: Sentiment Curves 末端标签 Qian Zhongs 右缘截断", "s0: 统计条纵向堆叠（另案）"], "groups": [54]}
+{"page": "en/essay-ai-era.html", "verdict": "pass", "issues": [], "groups": [55]}
+{"page": "en/essay-buddhist-chan.html", "verdict": "pass", "issues": [], "groups": [55]}
+{"page": "en/essay-chapter-couplets.html", "verdict": "pass", "issues": [], "groups": [55]}
+{"page": "en/essay-character-fu.html", "verdict": "pass", "issues": [], "groups": [55]}
+{"page": "en/essay-cipai-linjiangxian.html", "verdict": "pass", "issues": [], "groups": [55]}
+{"page": "en/essay-cipai-mantingfang.html", "verdict": "pass", "issues": [], "groups": [56]}
+{"page": "en/essay-cipai-shuidiaogetou.html", "verdict": "pass", "issues": [], "groups": [56]}
+{"page": "en/essay-cipai-xijiangyue.html", "verdict": "pass", "issues": [], "groups": [56]}
+{"page": "en/essay-composition-origins.html", "verdict": "pass", "issues": [], "groups": [56]}
+{"page": "en/essay-divine-bureaucracy.html", "verdict": "pass", "issues": [], "groups": [57]}
+{"page": "en/essay-folk-belief.html", "verdict": "pass", "issues": [], "groups": [57]}
+{"page": "en/essay-historical-xuanzang.html", "verdict": "pass", "issues": [], "groups": [57]}
+{"page": "en/essay-information-cocoon.html", "verdict": "pass", "issues": [], "groups": [57]}
+{"page": "en/essay-ming-economy.html", "verdict": "pass", "issues": [], "groups": [57]}
+{"page": "en/essay-ming-examination.html", "verdict": "pass", "issues": [], "groups": [58]}
+{"page": "en/essay-ming-garrison.html", "verdict": "pass", "issues": [], "groups": [58]}
+{"page": "en/essay-ming-intellectual-history.html", "verdict": "pass", "issues": [], "groups": [58]}
+{"page": "en/essay-ming-judiciary.html", "verdict": "pass", "issues": [], "groups": [58]}
+{"page": "en/essay-ming-literary-thought.html", "verdict": "pass", "issues": [], "groups": [58]}
+{"page": "en/essay-ming-maritime-ban.html", "verdict": "pass", "issues": [], "groups": [59]}
+{"page": "en/essay-ming-metaphor.html", "verdict": "pass", "issues": [], "groups": [59]}
+{"page": "en/essay-ming-military.html", "verdict": "pass", "issues": [], "groups": [59]}
+{"page": "en/essay-ming-politics.html", "verdict": "pass", "issues": [], "groups": [59]}
+{"page": "en/essay-ming-religion.html", "verdict": "pass", "issues": [], "groups": [60]}
+{"page": "en/essay-ming-social-customs.html", "verdict": "pass", "issues": [], "groups": [60]}
+{"page": "en/essay-modern-management.html", "verdict": "pass", "issues": [], "groups": [60]}
+{"page": "en/essay-original-poetry.html", "verdict": "pass", "issues": [], "groups": [60]}
+{"page": "en/essay-poetry-imagery.html", "verdict": "warn", "issues": ["h2 标题右侧小注记被标题下划横线穿过（模板级，可读）"], "groups": [61]}
+{"page": "en/essay-poetry-opening.html", "verdict": "warn", "issues": ["s2: 标题注记被下划线穿过（模板级）"], "groups": [61]}
+{"page": "en/essay-quanzhen-daoism.html", "verdict": "warn", "issues": ["s1: 标题注记被下划线穿过；s0 长注记折行散落（可读）"], "groups": [61]}
+{"page": "en/essay-rhythm-analysis.html", "verdict": "warn", "issues": ["s0-s1: 标题注记被下划线穿过（模板级）"], "groups": [61]}
+{"page": "en/essay-scenery-poems.html", "verdict": "pass", "issues": [], "groups": [62]}
+{"page": "en/essay-thematic-poetry.html", "verdict": "pass", "issues": [], "groups": [62]}
+{"page": "en/essay-three-teachings.html", "verdict": "pass", "issues": [], "groups": [62]}
+{"page": "en/essay-version-evolution.html", "verdict": "pass", "issues": [], "groups": [62]}
+{"page": "en/essay-zen-koan-vs-neidan.html", "verdict": "pass", "issues": [], "groups": [63]}
+{"page": "en/ethics-consumption.html", "verdict": "fail", "issues": ["s3: 条形图 y 轴标签左缘截断（mple, Vulture Peak/Temple, Chang'an/yal Palace, Tianzhu/ave of Silken Webs）", "s4: 狮驼岭 IPO 卡金丝带遮盖页眉年份尾部——与 ZH 镜像同病", "s0: 统计条纵向堆叠（另案）"], "groups": [63]}
+{"page": "en/famous-time-travel.html", "verdict": "fail", "issues": ["s0-s1: 钱锺书信笺落款卡片右缘截断 Respectfully, Qian Zhor"], "groups": [64]}
+{"page": "en/four-dimensional-research-network.html", "verdict": "fail", "issues": ["s2-s3: 极坐标四轴标题色块内白字裁切糊读（er-Politi/ne-Memor 等）、理论家黑字与色块叠压连读", "s2: 堆叠面积图例红蓝色块无文字", "s1: 热力图图例 Contributio 缺 n——与 ZH 镜像同病", "s0: 统计条纵向堆叠（另案）"], "groups": [64]}
+{"page": "en/four-heavenly-kings-artifacts.html", "verdict": "fail", "issues": ["s3: Wound Timeline 四轨道 Y 轴国王名全部裁切仅剩尾部 eavenly King)", "s0: 统计条纵向堆叠（另案）"], "groups": [64]}
+{"page": "en/game-webnovel.html", "verdict": "fail", "issues": ["s2: Power Ranking 纵轴长标签首字母被切（lang Shen Yang Jian/uanyin Bodhisattva）", "s2-s3: 两 treemap 单元格首行上缘被顶边裁平", "s5: 网文人气榜纵轴省略号过短（设计性，轻）", "s0: 统计条纵向堆叠（另案）"], "groups": [65]}
+{"page": "en/global-pattern.html", "verdict": "fail", "issues": ["s2: Composition Timeline 标签叠印连读（JatGreat'Tang Records…/1591726）+ 右上末字符裁切；treemap 首行上缘裁平——与 ZH 镜像同病", "s0: 统计条纵向堆叠（另案）"], "groups": [65]}
+{"page": "en/graph-explorer.html", "verdict": "warn", "issues": ["s0: 中心区多条边标签挤团重叠（力导向静态截图固有，交互可拖拽）"], "groups": [66]}
+{"page": "en/guanyin-six-roles-network.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [66]}
+{"page": "en/guide.html", "verdict": "pass", "issues": [], "groups": [66]}
+{"page": "en/hardship-difficulty-heatmap.html", "verdict": "fail", "issues": ["s1: Rescue Count Distribution 空图（四柱全 0）与 47 求助总数矛盾——与 ZH 镜像同病", "s1: 四张分布柱状图 x 轴类目标签各只剩 1 个", "s0: 热力图 y 轴行标签与旋转轴标题叠压连读", "s0: 统计条纵向堆叠（另案）"], "groups": [67]}
+{"page": "en/hardship-heatmap.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [67]}
+{"page": "en/heaven-power-network.html", "verdict": "fail", "issues": ["s4: 时间线三轨道标签左缘裁切（nnesty/onflict/ilution track）", "s5: Power Top5 条形图 y 轴标签左裁（n Mother of the West/aring Heavenly King）", "s1: 力导向 WenquStar 与二十八宿标签黏连；六张势力卡眉标签被横线穿字", "s0+s4: 统计条纵向堆叠（另案）"], "groups": [67]}
+{"page": "en/index.html", "verdict": "warn", "issues": ["s3-s4: E34-E37 四张卡片各重复出现两次（内容重复，非 8 判据硬伤）"], "groups": [68]}
+{"page": "en/intertextuality-network.html", "verdict": "fail", "issues": ["s1-s2: 热力矩阵行标签左缘裁切（3reat Tang…/f the Tripitaka Master…）", "s3: 时间线节点标签多对叠印连读 + 646668 刻度碰撞", "s4-s5: 汇总表最右列表头截断 Language Citatio", "s0: 统计条纵向堆叠（另案）"], "groups": [68]}
+{"page": "en/journey-geo-semiotics.html", "verdict": "pass", "issues": [], "groups": [69]}
+{"page": "en/journey-map-interactive.html", "verdict": "fail", "issues": ["s1: 路线图两端节点标签被容器裁切（on-Camel Ridge/Dou…/Two-Boundaries…）", "s0: 统计条纵向堆叠（另案）"], "groups": [69]}
+{"page": "en/journey-route.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [69]}
+{"page": "en/journey-spacetime.html", "verdict": "fail", "issues": ["s1: 双轴轨迹图 y 轴竖排标题压刻度标签、部分长标签 svg 左缘被裁", "s0: 统计条纵向堆叠（另案）"], "groups": [69]}
+{"page": "en/jurisprudence.html", "verdict": "fail", "issues": ["s1: Figure 1.2 双轴柱状图 x 轴长斜排案例标签互相叠写连读（第 5-8 案区间）", "s6: Figure 3.2 环形图底部红色标签行被容器底边横裁只剩上半截——与 ZH 镜像同病", "s0: 统计条纵向堆叠（另案）"], "groups": [70]}
+{"page": "en/karma-reincarnation.html", "verdict": "fail", "issues": ["s1: 时间轴 x 轴第 7/8 刻度案例名标签相撞连读 + 斜排小标签与 Ch.N 叠印", "s5: 桑基右侧 rebirth_destination 节点空描边矩形、目的地标签画在左列叠印成乱文——与 ZH 镜像同病", "s7-s8: 金字塔图 Pilgrim team 注记与红色标签相撞、Lv1 注记右缘截断", "s0/s3/s7: 卡片眉标 DIMENSION/TYPE/DESTINATION 上半部被容器上缘裁切", "s0: 统计条纵向堆叠（另案）"], "groups": [71]}
+{"page": "en/language-style-radar.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [72]}
+{"page": "en/linguistics.html", "verdict": "fail", "issues": ["s1/s7/s4: 三张堆叠/条形图 x 轴旋转标签被容器裁成无省略号片段（Golden Hoop/Tang San/Sun Wuko…）", "s0/s1+s3+s9: 统计条纵向堆叠（另案）"], "groups": [73]}
+{"page": "en/magic-system.html", "verdict": "fail", "issues": ["s0: 桑基左右节点标签被页面边缘词中截断（ortality·Queen Mother/nseng Fruit 等）", "s1: 年预算行标签左缘截断（ual Revenue/nual Expense）+ Top6 消费行标签截断 + 右注释右缘截断——与 ZH 镜像同病", "s0: 统计条纵向堆叠（另案）"], "groups": [74]}
+{"page": "en/material-archaeology.html", "verdict": "fail", "issues": ["条形图类目标签系统性缺失/截断（硬度 8 仅 1、阶段 4 仅 1（ng Sanzang）、建筑 5 仅 1、洞府 14 仅 1（.ittle Thunderclap））+ 散点右缘截断 + 旋转纵轴标题与标签叠压——与 ZH 镜像同病", "s0: 统计条纵向堆叠（另案）", "组76仅页面尾切片（与组75的 FAIL 合并为页级 fail）"], "groups": [75, 76]}
+{"page": "en/mbti-evolution.html", "verdict": "fail", "issues": ["s1-s2: Panel3 热力图行标签左缘裁切（n Wukong/g Sanzang/ha Wujing/gon Horse）+ 最右列右缘截断半格——与 ZH 镜像同病", "s0: 统计条纵向堆叠（另案）"], "groups": [77]}
+{"page": "en/methodology-matrix.html", "verdict": "fail", "issues": ["s0: 散点四标签交错连读成乱串；大鹏紫点压象限注释（●staphysical）；s1 Red Boy 与 Rat Demon 叠压", "s0: 统计条纵向堆叠（另案）"], "groups": [77]}
+{"page": "en/methodology.html", "verdict": "pass", "issues": [], "groups": [77]}
+{"page": "en/ming-political-thought-comparison.html", "verdict": "fail", "issues": ["s1: 三雷达图轴标签横向裁切（monstrance Tradition/Art of Governan）；九维热力图行标签左裁+旋转轴标题叠连", "s2: 时间线最右事件标签截断；桑基两侧节点标签首尾被裁（ang Wenzhong/Mind-Nature Th）", "s3: 极区图相邻子图标签叠连且尾部缺失", "s0: 统计条纵向堆叠（另案）"], "groups": [78]}
+{"page": "en/monster-background.html", "verdict": "warn", "issues": ["s1: 生存率柱白副标签骑柱顶边，短柱处 33 demons 半段落浅底近乎不可见"], "groups": [78]}
+{"page": "en/monster-capability-radar.html", "verdict": "fail", "issues": ["s2: 桑基两侧节点标签被容器裁切成尾部碎片（n (7)/m (5)/R (5)/K (5)），与正文全名对不上——与 ZH 镜像同病", "s0: 统计条纵向堆叠（另案）"], "groups": [79]}
+{"page": "en/monster-ecology-network.html", "verdict": "fail", "issues": ["s0-s1: 力导向节点标签叠连（Sun Wu..×(Bull Demon King/Princess Iron Fan 前叠 (AF 碎片）", "s1: 桑基末级白标签溢出被截 + 注释行双向截断", "s2: 人口时间线气泡标签横截残词（Four D/Gold a/Red Bo 等）", "s0: 统计条纵向堆叠（另案）"], "groups": [79]}
+{"page": "en/monster-female-network.html", "verdict": "fail", "issues": ["s4: Timeline Ch.72 七个 Spider Sister 标签纵向挤叠压字（Sixth/Fifth/Seventh 重叠连读）——W553 A-3 名字纵向分散修的是 ZH 页，EN 镜像未同步", "s0: 统计条纵向堆叠（另案）"], "groups": [80]}
+{"page": "en/monster-hierarchy-network.html", "verdict": "fail", "issues": ["s1: 力导向多处标签叠连（Tiger/Deer-Strength 压字、Roc×Laozi 相撞、Samantabhadra×Manjushri 首尾相接）", "s4: Top5 条形图首行 y 标签左缘裁切（lden-Winged Roc）", "s0: 统计条纵向堆叠（另案）"], "groups": [80]}
+{"page": "en/monster-sociology.html", "verdict": "fail", "issues": ["s6-s8: 十次坐骑离弃详表末列被挤成 1 字符宽逐字符竖排不可读", "s1: 统计条纵向堆叠（另案）"], "groups": [81]}
+{"page": "en/monster-victims-network.html", "verdict": "fail", "issues": ["s3: 四受害者时间轴 y 轴行标签左端裁断词（lver Horn Kings/lden Sage Lady/illage Boy & Girl）+ 最右 x 轴标签截断", "s3: 雷达图例第 4 项无可见色块（白色色块白底不可见）", "s0: 统计条纵向堆叠（另案）"], "groups": [82]}
+{"page": "en/music-structure.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）；其余图表正常（ZH 镜像的折线右缘裁切在 EN 页未见同类报告，待修复时并查）"], "groups": [82]}
+{"page": "en/narrative-experiment.html", "verdict": "fail", "issues": ["s1: 三段流程行超出页面可视宽度被左右两缘裁切（…paration Phase/Settlement Ph）", "s0: 统计条纵向堆叠（另案）"], "groups": [83]}
+{"page": "en/narrative-rhythm-curve.html", "verdict": "fail", "issues": ["s1: Rhythm Heatmap 行标签左缘裁切（emon Realm/nlightenment）+ 竖排轴题穿过标签区连读粘连", "s0: 统计条纵向堆叠（另案）"], "groups": [83]}
+{"page": "en/narratology-12d-network.html", "verdict": "fail", "issues": ["s4-s5: Section VI 摘要表横向截断（表头 Cross-Topic L 裁半词、第 4 指标列 Academic Value 全页不可见）", "s0: 统计条纵向堆叠（另案）"], "groups": [84]}
+{"page": "en/narratology-13d-network.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）", "s1: 16 节点圆内名称下均有空白白色小块（疑空徽标）", "s4: 时间线底部节点标签与旋转刻度叠压", "s5: 16 维汇总表右端裁切（JTTW Appl 词中截断、其后得分列不可见）"], "groups": [85]}
+{"page": "en/perf-canvas-rendering.html", "verdict": "fail", "issues": ["s1: 渲染时间占比条段图形缺失（与 ZH 镜像同病）", "s0: 统计条纵向堆叠（另案）"], "groups": [85]}
+{"page": "en/philosophy.html", "verdict": "fail", "issues": ["s2: 热力图 5 行仅末行有行标签、阶段列标签斜排下缘被裁", "s4-s5: 条形图 y 轴 8 类仅 1 可见；环形图 8 图例仅 1 有文字——与 ZH 镜像同病", "s1: 统计条纵向堆叠（另案）"], "groups": [86]}
+{"page": "en/pilgrim-team-dynamic-network.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [87]}
+{"page": "en/pilgrim-team-psychology-arc.html", "verdict": "fail", "issues": ["s2: 凝聚力热力图第 5 行 White Dragon Horse 左端裁切剩 te Dragon Horse（A-4 同类）", "s0: 统计条纵向堆叠（另案）"], "groups": [87]}
+{"page": "en/poetry-rhythm-analysis.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [88]}
+{"page": "en/power-resources.html", "verdict": "fail", "issues": ["s4: 晋升渠道柱状图右侧四条时长标签互相搭接连成难读文字带", "s6: 资源散点 7 点标签全部省略号截断（Taishan…/Tang Sa…）——与 ZH 镜像同病", "s0: 统计条纵向堆叠（另案）"], "groups": [89]}
+{"page": "en/relationships.html", "verdict": "fail", "issues": ["s3: 8 artifacts 径向图节点圆点压自身标签（G●rd）", "s5+s9+s11: 三处力导向标签无避让叠连（Li JingJde Emperor/atha gata 等）", "s7: Belbin 5 成员表横向溢出视口，Specialist/Coordinator 两列整体不可见", "s0+s1: 统计条纵向堆叠（另案）", "组91为页面尾两切片（s12-s13 文本区），页级 verdict 以组90 的 fail 为准"], "groups": [90, 91]}
+{"page": "en/risk-project.html", "verdict": "fail", "issues": ["s3: Fig.3 时间线两缘节点标签裁切断词（Departure · Zheng/Recruit Wukong · recruit White Dragon H/project con）", "s0+s7: DIMENSION/FINDING 卡文字块紧贴色条内边距为 0，眉标首字母被轻微压裁", "s0: 统计条纵向堆叠（另案）"], "groups": [92]}
+{"page": "en/search.html", "verdict": "pass", "issues": [], "groups": [92]}
+{"page": "en/site-map.html", "verdict": "pass", "issues": [], "groups": [92]}
+{"page": "en/six-senses-narratology-network.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）", "s3: 时间线 W161 时代标注与 y 轴刻度 2000 CE 叠压连读"], "groups": [93]}
+{"page": "en/social-media.html", "verdict": "fail", "issues": ["s2: Workplace Fit 条形图 8 根条的分数标签双重绘制叠压发花（10/10 与错位副本叠印）", "s2: Color legend 图例块压住首条角色注释 chief architect——与 ZH 镜像同病", "s0: 统计条纵向堆叠（另案）"], "groups": [93]}
+{"page": "en/tag-cloud.html", "verdict": "pass", "issues": [], "groups": [93]}
+{"page": "en/text-evolution.html", "verdict": "fail", "issues": ["s3: Share of Comments 环形扇区内白标签 Zhang Shushen/1500·30% 首行被上下裁切", "s0: 统计条纵向堆叠（另案）"], "groups": [94]}
+{"page": "en/text-search.html", "verdict": "warn", "issues": ["s0: 统计条纵向堆叠（另案）"], "groups": [94]}
+{"page": "en/theological-intervention-network.html", "verdict": "fail", "issues": ["s1: 桑基节点白名竖向裁切半截（Guanyin/Tathāgata 等）——与 ZH 镜像同病；时间轴最右卡片横向截断", "s2: 三轴光谱两端斜体注释被裁（uddhist…/dominan）", "s0: 力导向 Enlightenment×Ordination 相碰、边标签压 Taishang Laojun", "s0: 统计条纵向堆叠（另案）"], "groups": [94]}
+{"page": "en/timeline.html", "verdict": "fail", "issues": ["s0: 时代带标签连读 Qing DynastyRepublicContemporary；Version Evolution 轨年份连读 1920195019802020；Cultural Influence 轨 1941198012；左端 629645 连读", "s0: 统计条纵向堆叠（另案）"], "groups": [95]}
+{"page": "en/tribulations.html", "verdict": "warn", "issues": ["s1: 八十一难表仅列 01-08 即收尾，与来源说明 81-row ledger verbatim 矛盾（渲染整洁无切断痕迹，疑伪影或截断，待复核）"], "groups": [95]}
+{"page": "en/underworld-power-network.html", "verdict": "fail", "issues": ["s3-s4: 事件时间轴第二轨标签左裁（mmunication）；Power Top5 条形图左裁（ṣitigarbha/e Welcoming Buddha）——与 ZH 镜像同病", "s0+s4: 统计条纵向堆叠（另案）"], "groups": [95]}
+{"page": "en/visual-art.html", "verdict": "fail", "issues": ["s3: 气味流图左缘节点标签裁开头（ower-Fruit Mountain）、右缘两节点截断", "s0: 心经卡等宽重复标题上半被裁横线穿字（s2 同款卡正常）", "s0: 统计条纵向堆叠（另案）"], "groups": [96]}
+{"page": "en/visualizations.html", "verdict": "pass", "issues": [], "groups": [96]}
+{"page": "en/workplace.html", "verdict": "fail", "issues": ["s0: Milestone Timeline 首尾节点说明横向裁切（inguanl Year 13/inzang Commissioned/Five Saints Attain Budc）", "s2-s3: Skills 条形图纵轴行标签左端裁切（y Transformations/g Reinforcements/den-Banded Staff）——与 ZH 镜像同病", "s3: Stress-Interview 卡问题文字与 emoji 装饰叠压（How do🤔u assess）", "s3: 黑话词典 15 卡标题首字母被红色饰条裁切——与 ZH 镜像同病", "s0: 统计条纵向堆叠（另案）"], "groups": [97]}
+{"page": "guide.html", "verdict": "pass", "issues": [], "groups": [97]}
+{"page": "index.html", "verdict": "pass", "issues": [], "groups": [97]}
+{"page": "mobile-index.html", "verdict": "pass", "issues": [], "groups": [98]}
+{"page": "rum-viewer.html", "verdict": "pass", "issues": [], "groups": [98]}
+{"page": "visit-viewer.html", "verdict": "pass", "issues": [], "groups": [98]}

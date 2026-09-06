@@ -1,0 +1,14 @@
+GROUP 69/98
+PAGES: ["en/journey-geo-semiotics.html", "en/journey-map-interactive.html", "en/journey-route.html", "en/journey-spacetime.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__journey-geo-semiotics__s0.png
+D:\xiyouji\.review-tmp\slices\en__journey-geo-semiotics__s1.png
+D:\xiyouji\.review-tmp\slices\en__journey-map-interactive__s0.png
+D:\xiyouji\.review-tmp\slices\en__journey-map-interactive__s1.png
+D:\xiyouji\.review-tmp\slices\en__journey-map-interactive__s2.png
+D:\xiyouji\.review-tmp\slices\en__journey-route__s0.png
+D:\xiyouji\.review-tmp\slices\en__journey-route__s1.png
+D:\xiyouji\.review-tmp\slices\en__journey-route__s2.png
+D:\xiyouji\.review-tmp\slices\en__journey-spacetime__s0.png
+D:\xiyouji\.review-tmp\slices\en__journey-spacetime__s1.png
+D:\xiyouji\.review-tmp\slices\en__journey-spacetime__s2.png

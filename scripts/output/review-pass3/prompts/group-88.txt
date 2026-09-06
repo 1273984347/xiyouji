@@ -1,0 +1,7 @@
+GROUP 88/98
+PAGES: ["en/poetry-rhythm-analysis.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__poetry-rhythm-analysis__s0.png
+D:\xiyouji\.review-tmp\slices\en__poetry-rhythm-analysis__s1.png
+D:\xiyouji\.review-tmp\slices\en__poetry-rhythm-analysis__s2.png
+D:\xiyouji\.review-tmp\slices\en__poetry-rhythm-analysis__s3.png

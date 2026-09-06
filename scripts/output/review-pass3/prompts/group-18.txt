@@ -1,0 +1,12 @@
+GROUP 18/98
+PAGES: ["data/journey-map-interactive.html", "data/journey-route.html", "data/journey-spacetime.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\data__journey-map-interactive__s0.png
+D:\xiyouji\.review-tmp\slices\data__journey-map-interactive__s1.png
+D:\xiyouji\.review-tmp\slices\data__journey-map-interactive__s2.png
+D:\xiyouji\.review-tmp\slices\data__journey-route__s0.png
+D:\xiyouji\.review-tmp\slices\data__journey-route__s1.png
+D:\xiyouji\.review-tmp\slices\data__journey-route__s2.png
+D:\xiyouji\.review-tmp\slices\data__journey-spacetime__s0.png
+D:\xiyouji\.review-tmp\slices\data__journey-spacetime__s1.png
+D:\xiyouji\.review-tmp\slices\data__journey-spacetime__s2.png

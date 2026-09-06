@@ -1,0 +1,15 @@
+GROUP 51/98
+PAGES: ["en/counterfactual.html", "en/criticism-history.html", "en/cross-time-danmaku.html"]
+SLICES:
+D:\xiyouji\.review-tmp\slices\en__counterfactual__s0.png
+D:\xiyouji\.review-tmp\slices\en__counterfactual__s1.png
+D:\xiyouji\.review-tmp\slices\en__counterfactual__s2.png
+D:\xiyouji\.review-tmp\slices\en__counterfactual__s3.png
+D:\xiyouji\.review-tmp\slices\en__criticism-history__s0.png
+D:\xiyouji\.review-tmp\slices\en__criticism-history__s1.png
+D:\xiyouji\.review-tmp\slices\en__criticism-history__s2.png
+D:\xiyouji\.review-tmp\slices\en__criticism-history__s3.png
+D:\xiyouji\.review-tmp\slices\en__criticism-history__s4.png
+D:\xiyouji\.review-tmp\slices\en__cross-time-danmaku__s0.png
+D:\xiyouji\.review-tmp\slices\en__cross-time-danmaku__s1.png
+D:\xiyouji\.review-tmp\slices\en__cross-time-danmaku__s2.png
