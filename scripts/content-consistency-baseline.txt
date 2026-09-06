@@ -1,0 +1,8 @@
+# content-consistency-baseline.txt — W555 第 25 门禁基线冻结名单
+# 格式：<page>::<矛盾描述>（与 check_content_consistency.py --gate 输出逐字匹配，页路径 / 归一）
+# 冻结口径：W554 全量审计逐条人工裁决的 4 条启发式误报（提取窗口歧义），存量豁免、只拦新增。
+# 追加冻结须先人工裁决并在 CHANGELOG 登记理由；修复页面后可删除对应行。
+site/data/character-sentiment-arc.html :: 规则3 同主语计数矛盾：「回分桶」出现多个值 [10, 100]
+site/data/pilgrim-team-psychology-arc.html :: 规则3 实体对计数矛盾：「个体-团」出现多个值 [31, 100]
+site/data/power-resources.html :: 规则3 实体对计数矛盾：「种稀缺资源与拥」出现多个值 [8, 10]
+site/en/perf-canvas-rendering.html :: 规则3 实体对计数矛盾：「exc」出现多个值 [300, 1000]

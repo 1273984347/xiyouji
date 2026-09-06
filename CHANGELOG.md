@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W555），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W556），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,18 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.156（2026-09-06）：W556 审计修复批次F1-F8 + 数据内容一致性挂载第25门禁 — EN八十一难清单复活·中英共现数统一89·基线冻结4误报
+
+> **来源**：W554 数据审计报告 8 项修复清单（F1-F8）当批执行 + 用户确认三项决策（修 F1-F8 / L1 挂第 25 门禁 / B 剩余复审另行启动）。批号说明：W555 已被复盘报告批次（f0407db）先行领取，本批按现役 max+1 实领 W556。
+> - **F1（最重）en/81-hardshots 八十一难清单复活**：EMBEDDED `hardships: []` 内嵌 81 行完整清单（中文名英译 + 码值→英文标签映射：cause arranged/wild/mount/mind、ending taken/killed/recruited、difficulty solo/rescue，对齐页内 CAUSE/ENDING/DIFFICULTY_COLORS 键），chapter 前传→Prologue；**移除越界 fetch**（原指 site 外 scripts/output/data，file:// 与 Pages 双断，且中文码数据在线模式会覆盖英文标签）；聚合断言 by_cause/by_ending/by_difficulty/cross_cause_ending 与页内 KPI 逐项相等后才落盘；Playwright 实测表格 81 行、筛选器 5/4/3 项、离线渲染。
+> - **F3 relationships 共现数统一 89（中英各 5 处）**：审计后深挖数据定权威值——per_chapter 逐回出场数据实算 89 回、top_pairs_curve.total_cooccurrences=89、cumulative_snapshots 末值 89，而网络边 weight=90 与文案 88 均为漂移值（W554 审计报告原定「88→90」修复方向据此纠正为统一到 89）；修 ZH（90×2 文案+88×1 文案+边权 90→89）与 EN（90×3+88×1+边权 90→89）共 10 处，L1 复扫该页 0 矛盾。
+> - **F2 military 汉字实体纠错**：`&#21464;`(变)→`&#21496;`(司)×2（土司）、`&#23453;`(宝)→`&#23663;`(屯)（军屯）；「the ordnance evolved」兵制误译→「the military system evolved from the guard-battalion system」。
+> - **F4 intellectual-history**：君客主标注对调修正——Jade Emperor (guest/ruler)+Buddha (host/spirit) → Jade Emperor (ruler/jun)+Buddha (guest/ke); the people are the host (zhu)（对齐源文档：君=玉帝行政权/客=如来精神权/主=众生）；术语表锚标 22 terms→「14 of 22 terms」（双真：实表 14 行、源文档 22 条）。
+> - **F5/F6/F7/F8**：wukong「Pilgrim imposed by Guanyin」→「named by Tang Seng (ch. 14)」；bailongma「accidentally burning」→蓄意骄纵表述 + 全队极值声明改写为数据如实表述（自家 radar 证伪项）；thematic-poetry 七律「seven-character quatrain」→「seven-character regulated verse (lüshi)」；folk-belief 三位学者生年（源外添注且存疑）删年号改通称 anthropologist。
+> - **第 25 门禁挂载（经用户确认，同 W551 先例）**：verify_delivery.py 挂 check_content_consistency.py --gate——L1 四规则（同实体对/同主语多值、图注数 vs 数组字面长、桑基去重节点数、案例数 vs 边数）+ scripts/content-consistency-baseline.txt 冻结 W554 逐条人工裁决的 4 条启发式误报（提取窗口歧义）只拦新增；--self-test 负样本 4/4；新增矛盾临时页实测 exit 1、清除后 exit 0；py_compile + verify 全量 25 门禁全绿。默认无参模式仍为报告型（不阻断）。
+> - **验证（当批实跑）**：verify_delivery 25 门禁核心全绿；check_screenshot_gates 定向 9 页 FAIL 0；generate_csp --check 0 漂移；F1 渲染探针 81 行实锤。
+> - **文件**：site/en/81-hardshots.html 等 9 页（F1-F8）、scripts/check_content_consistency.py（--gate + 基线装载）、scripts/content-consistency-baseline.txt（新建）、scripts/verify_delivery.py（挂载第 25 门禁）、scripts/_w556_f1.py/_w556_f1check.js/_w556_f3.py（修复生成器与验证探针归档）、AGENTS §4.2 补第 25 门禁、文档规范 §8 门禁表 23→25 项、六文档 + 旁文档版本行 + site 四页脚（batch_cascade.py 级联）。
+> - **状态**：已落地（本批随 W556 提交并 push origin/main）。B 方案剩余 98 组全分辨率复审由 W557 批次承接（修复后重采集）。
 ### v2.3.155（2026-09-06）：W555 工作复盘与优化分析报告（W550-W554） — 经验复用8项·技能优化3方案·问题15例闭环·两流程-22%方案
 
 > **来源**：用户点单「七维度工作复盘与优化分析」；分析对象为 W550-W554（8 天窗口）Agent 协作交付体系运行实况，全部指标取自会话实测（12 次 judge 委托 token/时长、探针/级联/门禁运行记录）与仓库事实（git/CI/verify 输出）。方法论文档入库 docs/10-方法论沉淀（前序 2026-09-05 报告的续篇）。

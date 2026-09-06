@@ -590,6 +590,21 @@ def main():
     except Exception as e:
         warn("图表静态自洽门禁执行异常（W551）: %s" % e)
 
+    # ---- 数据内容一致性门禁（W555：方案 C L1 站内自洽常驻化，经用户确认挂载为第 25 门禁。
+    # 源自 W550 实证三类同页数字矛盾（relationships 89/88、narratology-13d 13/16/17、six-senses 5/4）。
+    # --gate 模式：content-consistency-baseline.txt 冻结存量误报（W554 逐条人工裁决 4 条），
+    # 新增矛盾 = FAIL 阻断。L2 对账 / L3 语义判读不在本门禁范围（报告型，见 W554 审计报告））----
+    cct_py = os.path.join(_HERE, "check_content_consistency.py")
+    try:
+        r = subprocess.run([sys.executable, cct_py, "--gate"], capture_output=True, text=True, timeout=180)
+        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("数据内容一致性门禁通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("数据内容一致性异常（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+    except Exception as e:
+        warn("数据内容一致性门禁执行异常（W555）: %s" % e)
+
 
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:
