@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-MgdqboOcoFISaFPr/JG1/ZtH+LoNR/y9axA12wdzAqE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-3QMHG8ZTO+rWsDrotqQ3kpspKgwzUnJoVNxaCsOgVRs=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>法术阵法体系 · 详解西游记</title>
@@ -1064,7 +1064,7 @@ td.num, th.num {
             background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border-left: 4px solid var(--gold);
             padding: 14px 18px;
-            border-radius: var(--radius-md)
+            border-radius: var(--radius-md);
             margin-bottom: 18px;
             font-size: 0.92rem;
             color: var(--accent-3);
@@ -1211,7 +1211,7 @@ td.num, th.num {
         .tag {
             display: inline-block;
             padding: 2px 8px;
-            border-radius: var(--radius-lg)
+            border-radius: var(--radius-lg);
             font-size: 0.75rem;
             font-weight: 500;
             color: var(--paper);
@@ -1220,7 +1220,7 @@ td.num, th.num {
         .rank-badge {
             display: inline-block;
             padding: 2px 10px;
-            border-radius: var(--radius-md)
+            border-radius: var(--radius-md);
             font-size: 0.78rem;
             font-weight: 700;
             font-family: "JetBrains Mono", monospace;
@@ -1232,7 +1232,7 @@ td.num, th.num {
         .intensity-bar {
             display: inline-block;
             height: 8px;
-            border-radius: var(--radius-sm)
+            border-radius: var(--radius-sm);
             vertical-align: middle;
             margin-right: 6px;
         }
@@ -1276,7 +1276,7 @@ td.num, th.num {
             background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border-left: 4px solid var(--accent);
             padding: 20px 24px;
-            border-radius: var(--radius-md)
+            border-radius: var(--radius-md);
             margin-top: 16px;
         }
         .insight-box h4 {
@@ -1301,7 +1301,7 @@ td.num, th.num {
         .notice {
             background: var(--paper-warm);
             border: 1px solid var(--accent-soft);
-            border-radius: var(--radius-md)
+            border-radius: var(--radius-md);
             padding: 10px 14px;
             font-size: 0.82rem;
             color: var(--accent-3);
@@ -1310,7 +1310,7 @@ td.num, th.num {
         .notice code {
             background: var(--accent-tint);
             padding: 1px 5px;
-            border-radius: var(--radius-sm)
+            border-radius: var(--radius-sm);
             font-size: 0.85rem;
         }
         .two-col-grid {
@@ -1339,6 +1339,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <script defer src="../js/rum.js"></script>
   <script defer src="../js/visit-log.js"></script>
   <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+<style>/* W558: chart svg overflow visible——探针实测标签越出视口被裁（见 .review-tmp/w558-detect.json） */main svg{overflow:visible}</style>
 </head>
 <body>
     <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
@@ -1914,7 +1915,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         svg.selectAll("*").remove();
 
         const containerEl = document.getElementById("consumers-chart");
-        const margin = {top: 16, right: 180, bottom: 24, left: 130};
+        const margin = {top: 16, right: 180, bottom: 24, left: 200};
         const width = Math.max(containerEl.clientWidth || 900, margin.left + margin.right + 100);
         const height = 260;
         svg.attr("viewBox", `0 0 ${width} ${height}`);

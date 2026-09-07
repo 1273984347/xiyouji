@@ -11,6 +11,25 @@
 ---
 
 
+## W558 W558 五类残留缺陷修复（2026-09-07·v2.3.158）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/ 约 170 页 | W558 | 修改·五类修复（分号 130 页/overflow 47 页/margin 21 处/桑基 8 页/字段映射 2 页/表格 4 页，含重叠） |
+| scripts/_w558_detect.js | W558 | 新增·svg 文本越界/表格挤压通用检测器 |
+| scripts/_w558_fix_semicolons.py | W558 | 新增·全站 CSS 缺分号机械修复器（130 页 1006 处） |
+| scripts/_w558_inject_overflow.py | W558 | 新增·chart svg overflow visible 注入器（47 页） |
+| scripts/_w558_fix_margins.py | W558 | 新增·margin 加性扩边修补器（v3 幂等强制设值版） |
+| scripts/_w558_fix_meco_order.py / _w558_shots.js / _w558_probe_tables.js / _w558_count_works.py / _w557_plan.py / _w557_prompts.py / _w557_consolidate.py | W558 | 新增·绘制顺序修复/验收截图/表格探针/数据计数/复审编排合并工具 |
+| docs/superpowers/plans/2026-09-07-w558-five-class-remediation-report.md | W558 | 新增·五类修复执行报告 |
+| AGENTS.md | W558 | 修改·§4.3 补录 CSS 缺分号条目 + 版本脚注 |
+| CHANGELOG.md | W558 | 新增·W558 版段 + 编号规则上限 W001-W558 |
+| 交接文档.md | W558 | 修改·头尾「最后更新」prepend W558 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W558 | 修改·版本行同步 v2.3.158（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W558 | 修改·四页脚链首 prepend W558（batch_cascade.py 执行） |
+| .github/workflows/README.md | W558 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W558 | 新增·W558 段（本段·batch_cascade.py 执行） |
+
 ## W557 W557 全站复审完成（2026-09-06·v2.3.157）
 
 | 文件 | W | 说明 |

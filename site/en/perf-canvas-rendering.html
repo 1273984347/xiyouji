@@ -134,6 +134,7 @@
 
     /* —— 圆角 / 边框 —— */
     --radius-sm: 2px;  --radius-md: 6px;  --radius-lg: 10px;  --radius-pill: 999px;
+    --svg-color: #c8463a;  --canvas-color: #3a6b8c;  /* W558: 补定义——被 bar-seg/图例引用但从未定义，分段透明不可见 */
     --border-hairline: 1px solid var(--line);
     --border-accent: 1px solid var(--accent);
 
@@ -1091,7 +1092,7 @@ header.hero .meta {
   justify-content: center;
   background: var(--paper);
   padding: 14px;
-  border-radius: var(--radius-md)
+  border-radius: var(--radius-md);
   margin-bottom: 18px;
   border: 1px solid var(--border);
 }
@@ -1103,7 +1104,7 @@ header.hero .meta {
   background: var(--paper);
   color: var(--ink);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md)
+  border-radius: var(--radius-md);
   cursor: pointer;
 }
 .controls button {
@@ -1134,7 +1135,7 @@ header.hero .meta {
 .render-pane {
   background: var(--paper);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md)
+  border-radius: var(--radius-md);
   padding: 14px;
   display: flex;
   flex-direction: column;
@@ -1155,7 +1156,7 @@ header.hero .meta {
 .pane-badge {
   font-size: 0.76em;
   padding: 2px 8px;
-  border-radius: var(--radius-lg)
+  border-radius: var(--radius-lg);
   letter-spacing: 0.5px;
   font-family: "JetBrains Mono", "Consolas", monospace;
 }
@@ -1177,7 +1178,7 @@ header.hero .meta {
   margin: 0 auto;
   background: var(--paper);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md)
+  border-radius: var(--radius-md);
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -1187,7 +1188,7 @@ header.hero .meta {
 .time-bar {
   background: var(--paper);
   padding: 16px;
-  border-radius: var(--radius-md)
+  border-radius: var(--radius-md);
   border: 1px solid var(--border);
   margin-top: 16px;
 }
@@ -1200,7 +1201,7 @@ header.hero .meta {
 .bar-track {
   display: flex;
   height: 28px;
-  border-radius: var(--radius-md)
+  border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border);
   margin-bottom: 8px;
@@ -1232,7 +1233,7 @@ header.hero .meta {
 .tech-list {
   background: var(--paper);
   padding: 18px 20px;
-  border-radius: var(--radius-md)
+  border-radius: var(--radius-md);
   border-left: 4px solid var(--accent-3);
   margin-top: 18px;
 }
@@ -1240,7 +1241,7 @@ header.hero .meta {
   margin: 12px 0;
   padding: 10px 14px;
   background: var(--paper);
-  border-radius: var(--radius-md)
+  border-radius: var(--radius-md);
   border-left: 3px solid var(--accent);
   font-size: 0.92em;
 }
@@ -1256,7 +1257,7 @@ header.hero .meta {
   background: var(--ink);
   color: #f5f0e6;
   padding: 8px 12px;
-  border-radius: var(--radius-sm)
+  border-radius: var(--radius-sm);
   font-family: "JetBrains Mono", "Consolas", monospace;
   font-size: 0.84em;
   margin-top: 6px;
@@ -1279,7 +1280,7 @@ header.hero .meta {
   background: var(--tooltip-bg);
   color: var(--paper);
   padding: 8px 12px;
-  border-radius: var(--radius-md)
+  border-radius: var(--radius-md);
   font-size: 0.84em;
   pointer-events: none;
   z-index: 100;

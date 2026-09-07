@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W557），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W558），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,18 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.158（2026-09-07）：W558 五类残留缺陷修复 — 全站CSS缺分号1006处根治·桑基几何5页·轴边距21处·overflow可见47页
+
+> **来源**：W557 报告 §4 登记的五类逐项修复清单当批执行（用户点单「解决遗留」）。
+> - **系统性发现（本批最大产出）**：全站 CSS 缺分号——`: var(--xxx)` 后无分号直接换行跟下一属性，CSS 解析将两条声明并为一条非法声明整体丢弃（每处静默丢 2 个属性）；全站扫描 130 页命中 1006 处，恰与多个无法解释的视觉 FAIL 重合（ethics-consumption 21 处/narrative-experiment 22 处/concept-device 19 处）。`_w558_fix_semicolons.py` 机械补分号全量根治，check_structure/a11y/token 门禁复跑全绿。
+> - **A 桑基几何（8 页）**：karma ZH/EN 右列节点 rect 画在 x=0 的错位修正（移至右缘 w-110）+ 右列标签外置深色（EN 长名截断 22 字符 + title）+ `.sankey-link{fill:none}` 压制丝带填充的 CSS 移除（丝带空心→实色）；monster-capability ZH/EN margin 20→150；monster-ecology ZH/EN 节点纵向 20px 叠压改 80px 间距 + 丝带层改到节点层之下（白字涂抹根因）+ 浅金节点深色字 + 去白色描边晕；EN magic-system extent 140→300。
+> - **B 轴边距（21 处 + 47 页）**：检测器驱动 margin 加性扩边（cave-estate EN luxury 180→300 + 长名截断 30 字符含 title；four-heavenly-kings timeline 100→330；jurisprudence sentencing-bar 60→240 等）+ 全站 47 页 chart svg `overflow: visible`（小缺口由页边距承接）。**附带发现**：无 width 属性的 svg 读自身 clientWidth 得到默认 300 → viewBox 压瘪（cave-en luxury 独立 bug），改读父容器宽度。
+> - **D 数据渲染缺失（4 页）**：hardship-difficulty ZH/EN 求助次数空图 = 统计字段 `rescue` vs 数据字段 `rescueCount` 错位 → DIM_CONFIG 补 field 映射（柱体 36/29/10/6 复活）；perf-canvas ZH/EN 时间占比条不可见 = `--svg-color/--canvas-color` 被引用从未定义 + `.bar-track` 缺分号 → 补变量定义（分段 95%/5% 复活）。
+> - **E 表格挤压（4 页）**：monster-sociology/cognitive-psychology/relationships/narratology-12d 注入 `data-table` 横向滚动 + 单行不折；deconstruction 16 行全渲染与 narratology-12d 11 列（含 Academic Value）经探针确认为 W557 contentavoid/分号修复顺带解决。
+> - **验证（当批实跑）**：check_screenshot_gates 全量 234 页 FAIL 0；verify_delivery 25 门禁核心全绿；check_js_syntax 232 文件全过；CSP 0 漂移；judge 抽检 10 项复核全过（karma-en/meco-zh/cave-en 三项返工后复验通过）；检测器复测大缺口（>100px）清零，残余 D1 为 overflow 已绘制可读状态的几何标记（口径注记）。
+> - **登记维持**：力导向交互图静态截图标签挤团（交互可拖拽）；弹幕滚动瞬间左缘裁切（截图状态）。
+> - **文件**：site/ 约 170 页（分号 130/overflow 47/margin 21 处/桑基等专项约 12 页，含重叠）；scripts/_w558_* 工具 8 件（检测器/注入器/边距修补器/分号修复器/绘制顺序修复/截图/探针）；AGENTS §4.3 补录「CSS 缺分号整条丢弃」；W558 报告 docs/superpowers/plans/2026-09-07-w558-five-class-remediation-report.md；六文档 + 旁文档版本行 + site 四页脚（batch_cascade.py 级联）。
+> - **状态**：已落地（本批随 W558 提交并 push origin/main）。
 ### v2.3.157（2026-09-06）：W557 全站复审完成（232页·98组）— pass93/warn62/fail77·contentavoid幻影隐藏全局根治·kpi-row基类补齐136页
 
 > **来源**：方案 B 剩余审查量一次性执行完毕（承接 W554 阶段一管线与恢复指令），用户确认启动。232 页 × 98 组 judge 审读（8 判据·3 并发·逐批落盘）。
