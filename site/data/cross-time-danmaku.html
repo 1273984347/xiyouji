@@ -15,7 +15,7 @@
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
  * ----------------------------------------------
- * v2.3.157 · W557 全站复审完成+类级修复 · v2.3.156 · W556 审计修复+第25门禁 · v2.3.155 · W555 工作复盘与优化分析报告 · v2.3.154 · W554 B阶段一管线+C数据审计 · v2.3.153 · W553 低危视觉细节批次 · v2.3.152 · W552 三项可选批次计划 · v2.3.151 · W551 图表门禁常驻化 · v2.3.150 · W550 全站截图审查与修复闭环 · v2.3.149 · W549 复盘报告后记（WBS 对账） · v2.3.148 · W548 迁移阶段 5 + 闭环（React 19 + TDesign 1.18） · v2.3.146 · W547 迁移阶段 4（Tailwind v4） · v2.3.145 · W546 迁移阶段 3 · v2.3.143 · W544 迁移阶段 2（TS 7 + types 19） · v2.3.142 · W543 迁移阶段 1（Express 5 + uuid 14 + dotenv 17 + bs3 13） · v2.3.141 · W542 交付效率工具化（batch_cascade.py + 冒烟固化④） · v3 · W476 纸感轻立体（在 v2/W334 基础上增层 · 见 DESIGN.md §4A）
+ * v2.3.158 · W558 五类残留缺陷修复 · v2.3.157 · W557 全站复审完成+类级修复 · v2.3.156 · W556 审计修复+第25门禁 · v2.3.155 · W555 工作复盘与优化分析报告 · v2.3.154 · W554 B阶段一管线+C数据审计 · v2.3.153 · W553 低危视觉细节批次 · v2.3.152 · W552 三项可选批次计划 · v2.3.151 · W551 图表门禁常驻化 · v2.3.150 · W550 全站截图审查与修复闭环 · v2.3.149 · W549 复盘报告后记（WBS 对账） · v2.3.148 · W548 迁移阶段 5 + 闭环（React 19 + TDesign 1.18） · v2.3.146 · W547 迁移阶段 4（Tailwind v4） · v2.3.145 · W546 迁移阶段 3 · v2.3.143 · W544 迁移阶段 2（TS 7 + types 19） · v2.3.142 · W543 迁移阶段 1（Express 5 + uuid 14 + dotenv 17 + bs3 13） · v2.3.141 · W542 交付效率工具化（batch_cascade.py + 冒烟固化④） · v3 · W476 纸感轻立体（在 v2/W334 基础上增层 · 见 DESIGN.md §4A）
  * 全站统一设计令牌 + 字体分层 + hero 覆写层。
  *
  * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
@@ -1040,7 +1040,7 @@ td.num, th.num {
         .notice {
             background: var(--paper-warm);
             border: 1px solid var(--accent-soft);
-            border-radius: var(--radius-md)
+            border-radius: var(--radius-md);
             padding: 10px 14px;
             font-size: 0.82rem;
             color: var(--accent-3);
@@ -1050,14 +1050,14 @@ td.num, th.num {
             font-family: "JetBrains Mono", monospace;
             background: var(--paper-warm);
             padding: 1px 5px;
-            border-radius: var(--radius-sm)
+            border-radius: var(--radius-sm);
             font-size: 0.85em;
         }
 
         .device {
             background: var(--paper);
             border: 1px solid var(--line);
-            border-radius: var(--radius-lg)
+            border-radius: var(--radius-lg);
             padding: 32px 30px;
             box-shadow: var(--shadow);
             margin-bottom: 28px;
@@ -1072,14 +1072,14 @@ td.num, th.num {
 
         /* 年龄段 tab */
         .age-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-        .age-tab { padding: 8px 16px; border: 1px solid var(--line); border-radius: var(--radius-md)
+        .age-tab { padding: 8px 16px; border: 1px solid var(--line); border-radius: var(--radius-md);
                    cursor: pointer; background: var(--paper); transition: all var(--dur-base); }
         .age-tab.active { background: var(--accent); color: var(--paper-warm); border-color: var(--accent); }
 
         /* 弹幕卡片网格 */
         .danmaku-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
                         gap: 16px; }
-        .danmaku-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md)
+        .danmaku-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md);
                         padding: 16px; box-shadow: var(--shadow); transition: transform 0.18s; }
         .danmaku-card:hover { transform: translateY(-3px); border-color: var(--accent); }
         .danmaku-card .celebrity { font-weight: 600; color: var(--accent); margin-bottom: 4px; }
@@ -1107,7 +1107,7 @@ td.num, th.num {
 
         /* 国际名人弹幕组 */
         .intl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 16px; margin-bottom: 20px; }
-        .intl-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md)
+        .intl-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md);
                      padding: 18px; border-top: 3px solid var(--accent-4); }
         .intl-card .i-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
         .intl-card .i-flag { font-size: 1.2rem; }
@@ -1122,7 +1122,7 @@ td.num, th.num {
         .adaptation-chip .a-flag { margin-right: 4px; }
 
         /* 留言博物馆 */
-        .message-museum { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg)
+        .message-museum { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg);
                           padding: 24px; margin-top: 28px; }
         .message-form { display: grid; gap: 10px; margin-bottom: 20px; }
         .message-form textarea { width: 100%; min-height: 80px; padding: 10px; border: 1px solid var(--line);
@@ -1154,7 +1154,7 @@ td.num, th.num {
             position: absolute;
             background: var(--dark);
             border: 1px solid var(--accent-soft);
-            border-radius: var(--radius-md)
+            border-radius: var(--radius-md);
             padding: 12px 16px;
             max-width: 375px;
             font-size: 0.84rem;
@@ -1175,7 +1175,7 @@ td.num, th.num {
             position: relative;
             height: 340px;
             background: linear-gradient(180deg, var(--dark) 0%, #2a1f18 100%);
-            border-radius: var(--radius-lg)
+            border-radius: var(--radius-lg);
             overflow: hidden;
             border: 1px solid var(--line);
         }
@@ -1242,7 +1242,7 @@ td.num, th.num {
             position: relative;
             height: 360px;
             background: linear-gradient(160deg, #f5efe6 0%, #ede4d3 100%);
-            border-radius: var(--radius-lg)
+            border-radius: var(--radius-lg);
             border: 1px solid var(--line);
             overflow: hidden;
             margin-bottom: 20px;
@@ -1257,7 +1257,7 @@ td.num, th.num {
             position: absolute;
             background: var(--paper);
             border: 1px solid var(--accent-4);
-            border-radius: var(--radius-md)
+            border-radius: var(--radius-md);
             padding: 14px 16px;
             max-width: 375px;
             font-size: 0.84rem;

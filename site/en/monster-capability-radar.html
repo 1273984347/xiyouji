@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-fjYzW1xLQ3HF540mLdo6aODkv4AnCehb8gIkYW4kQFU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-VBYPuLCfhJsDOUfCL27g6uTiJ+96Loz9Zf7TnKF41pE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster Capability Radar · Annotated Journey to the West</title>
@@ -1065,7 +1065,7 @@ td.num, th.num {
         .breadcrumb .sep { margin: 0 6px; color: var(--line); }
         .cross-page-nav {
             background: var(--paper-warm); border: 1px solid var(--line); border-left: 4px solid var(--accent);
-            padding: 10px 16px; margin-bottom: 24px; font-size: 0.86em; border-radius: var(--radius-md)
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.86em; border-radius: var(--radius-md);
             color: var(--ink-soft); line-height: 1.9;
         }
         .cross-page-nav a { color: var(--accent-2); text-decoration: none; padding: 2px 4px; border-radius: var(--radius-sm) }
@@ -1786,7 +1786,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const height = 460;
         svg.attr("viewBox", `0 0 ${width} ${height}`);
 
-        const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+        const margin = { top: 20, right: 150, bottom: 20, left: 150 };
         const innerW = width - margin.left - margin.right;
         const innerH = height - margin.top - margin.bottom;
         const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
