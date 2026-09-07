@@ -102,7 +102,7 @@ jobs:
               "assert": {
                 "assertMatrix": [
                   {
-                    "matchingUrlPattern": "*character-relationship-3d*",
+                    "matchingUrlPattern": "character-relationship-3d",
                     "assertions": {
                       "largest-contentful-paint": ["error", {"maxNumericValue": 12000}],
                       "cumulative-layout-shift": ["error", {"maxNumericValue": 0.3}],
