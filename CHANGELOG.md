@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W560），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W561），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.161（2026-09-08）：W561 残余几何越界收敛（>60px 38→9处） — S1验收第2批零人工修复· minions/luxury width父容器修复·11处边距扩边
+
+> **来源**：W559 复盘 WBS 第 4 项（残余 >60px 几何越界逐页收敛）+ S1 验收第 2 批（用户点单「开始」）。
+> - **检测器驱动**：复测（W558 修复后基线）出 >60px 缺口 38 处；分类后 v4 增量边距修补器（读当前值 + min(deficit+20, 340)）扩边 11 处，手工修 4 页（chart-minions 三件套/triangle 登记维持/journey-map 地图投影类/chart-area）。
+> - **重要发现**：W558 的 width 父容器修复只做了 chart-luxury——同页 chart-minions 同病（无边 width svg clientWidth=300 → viewBox 压瘪）漏网，本批补齐（parentElement.clientWidth + margin 420 + 刻度截断 30 字符 + title）。教训：**「同文件同模式」修复时必须全文件排查同款，而非仅报告指名处**（AGENTS §4.3「同文案多页同病」的文件内变体）。
+> - **结果**：>60px 缺口 38→9 处（-76%）；en/cave-estate chart-minions/luxury/region、material-archaeology costume-line/scatter、ecology foodweb/invasive-bar、intertextuality matrix、magic-system consumers、mbti/chapter-structure/journey-map/narrative-rhythm 全部收敛；残余 9 处为登记维持类（triangle 手工注记/地图投影标签/ costume-line 左右内容超宽待单独重构）。
+> - **S1 级联验收第 2 批：apply 后写后自检全部通过、零人工修复——S1 验收达成（连续 2 批：W560 + W561），P05 关闭。**
+> - **验证（当批实跑）**：CSP 守卫在检测器启动时拦获 1 次 W561 修复后的真实漂移（按指引重生成后放行——守卫常态化有效二次实证）；verify_delivery 核心全绿；检测器复测口径如上。
+> - **文件**：site/en/cave-estate.html、site/en/mbti-evolution.html、site/en/chapter-structure-graph.html、site/en/journey-map-interactive.html、site/en/narrative-rhythm-curve.html、site/en/material-archaeology.html、site/data/material-archaeology.html（边距/截断/width 修复）；scripts/batch_cascade.py（S1 本体收尾，W560 已提交后本批零改动复用）；六文档 + 旁文档版本行 + site 四页脚（batch_cascade.py 级联）。
+> - **状态**：已落地（本批随 W561 提交并 push origin/main）。
 ### v2.3.160（2026-09-08）：W560 工具链收尾批次 — batch_cascade写后自检自愈·CSP守卫接入9脚本·L2运行时对账39/39（W559-WBS 3项全落地）
 
 > **来源**：W559 复盘报告 WBS 三项（S1 级联本体收尾 / S2 CSP 自检 / S3 U1 运行时提取）当批执行（用户点单「开始」）。本批登记自身即 S1 的 dogfood 验证（首用收尾后的级联）。

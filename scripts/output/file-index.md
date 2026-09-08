@@ -11,6 +11,25 @@
 ---
 
 
+## W561 W561 残余几何越界收敛（2026-09-08·v2.3.161）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/cave-estate.html | W561 | 修改·chart-minions width 父容器 + margin 420 + 刻度截断（W558 同款陷阱补齐） |
+| site/en/mbti-evolution.html | W561 | 修改·热力图 marginLeft 70→200→回退 70（右侧溢出更差，维持 W557 登记态） |
+| site/en/chapter-structure-graph.html | W561 | 修改·cluster 树 margin right 30→180 |
+| site/en/journey-map-interactive.html | W561 | 修改·地图 margin left 50→160/right 30→150 |
+| site/en/narrative-rhythm-curve.html | W561 | 修改·chart-area margin right 30→150 |
+| site/en/material-archaeology.html | W561 | 修改·costume-line margin 平衡 380→170（左右取舍）+ scatter 标签钳位截断 |
+| site/data/material-archaeology.html | W561 | 修改·costume-line margin 平衡（同 EN 镜像） |
+| scripts/batch_cascade.py | W561 | 复用·S1 收尾后首次第二批次应用（零人工修复，P05 关闭依据） |
+| CHANGELOG.md | W561 | 新增·W561 版段 + 编号规则上限 W001-W561 |
+| 交接文档.md | W561 | 修改·头尾「最后更新」prepend W561 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W561 | 修改·版本行同步 v2.3.161（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W561 | 修改·四页脚链首 prepend W561（batch_cascade.py 执行） |
+| .github/workflows/README.md | W561 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W561 | 新增·W561 段（本段·batch_cascade.py 执行） |
+
 ## W560 W560 工具链收尾批次（2026-09-08·v2.3.160）
 
 | 文件 | W | 说明 |

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-i5v5To9jpTfWzEhpt1LWymt1Sr7ykQuijDlECx2OBn4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-zl9abf1A6YAB9SwqYEE9QmzYvhUJSbDIQK4U3ghWQMI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Material Archaeology · Artifact Materials · Costume Evolution · Cave Architecture | Annotated Journey to the West · Annotated Journey to the West</title>
@@ -2051,7 +2051,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const container = d3.select('#chart-scatter');
         container.selectAll('*').remove();
         const cw = Math.min(820, container.node().clientWidth || 820);
-        const margin = { top: 20, right: 30, bottom: 60, left: 60 };
+        const margin = { top: 20, right: 295, bottom: 60, left: 60 };
         const w = cw - margin.left - margin.right;
         const h = 420 - margin.top - margin.bottom;
 
@@ -2098,9 +2098,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         // Name labels
         svg.selectAll('.dot-label').data(data).enter()
             .append('text').attr('class', 'dot-label')
-            .attr('x', d => x(d.hardness) + r(d.value) + 2)
+            .attr('x', d => Math.min(x(d.hardness) + r(d.value) + 2, (svg.node().clientWidth || 900) - 130))
             .attr('y', d => y(d.density) + 3)
             .style('font-size', '0.76rem').style('fill', 'var(--ink)')
+            .text(d => d.name.length > 20 ? d.name.slice(0, 19) + '…' : d.name)
+            .append('title')
             .text(d => d.name);
 
         // Legend
@@ -2203,7 +2205,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const container = d3.select('#chart-costume-line');
         container.selectAll('*').remove();
         const cw = Math.min(880, container.node().clientWidth || 880);
-        const margin = { top: 20, right: 200, bottom: 60, left: 60 };
+        const margin = { top: 20, right: 200, bottom: 60, left: 170 };  /* W561: 平衡左右（380 挤压绘图区致右侧注记溢出 355）；残留登记待单独重构 */
         const w = cw - margin.left - margin.right;
         const h = 440 - margin.top - margin.bottom;
 
@@ -2596,7 +2598,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
         const container = d3.select('#chart-cave-rank');
         container.selectAll('*').remove();
-        const margin = { top: 20, right: 30, bottom: 50, left: 110 };
+        const margin = { top: 20, right: 30, bottom: 50, left: 245 };
         const w = 500 - margin.left - margin.right;
         const h = 500 - margin.top - margin.bottom;
         const g = container.attr('viewBox', '0 0 500 500')

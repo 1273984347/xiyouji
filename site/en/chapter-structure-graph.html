@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-toyNk6VcxJAAYD4cGsTt6HDf9e9LQrR8zYvP3HU2rPQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-bKRf0KZywdjOxYWnIi9JhBYQSn3TS+/Vwc8hnNTYnD8=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Chapter Structure Graph · Annotated Journey to the West</title>
@@ -1316,7 +1316,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
     // 通用：构建图表的 margin / 宽高
     function makeChart(svgId, width, height) {
-        const margin = { top: 24, right: 30, bottom: 50, left: 60 };
+        const margin = { top: 24, right: 180, bottom: 50, left: 60 };
         const innerW = width - margin.left - margin.right;
         const innerH = height - margin.top - margin.bottom;
         const svg = d3.select("#" + svgId);
@@ -1342,7 +1342,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     // ============= 图1：聚类树状图 d3.cluster =============
     function renderCluster(data) {
         const width = 1150, height = 460;
-        const margin = { top: 30, right: 200, bottom: 30, left: 120 };
+        const margin = { top: 30, right: 330, bottom: 30, left: 120 };
         const innerW = width - margin.left - margin.right;
         const innerH = height - margin.top - margin.bottom;
 

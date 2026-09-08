@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-v8q2SWA4PjK2m0fvcwgJT1uGHivAmYmdEeCFv+hXUIo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-JOGyEQg6ni+rQgMBAkbBBgVjOsaxsi/TzxJ9cP93Wlw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Pilgrimage Team MBTI Evolution · Annotated Journey to the West</title>
@@ -1494,7 +1494,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             card.append("span").attr("class", "sm-mbti").text(char.mbti);
 
             const svg = card.append("svg").attr("viewBox", "0 0 240 160");
-            const margin = { top: 12, right: 12, bottom: 28, left: 28 };
+            const margin = { top: 12, right: 12, bottom: 28, left: 170 };
             const w = 240 - margin.left - margin.right;
             const h = 160 - margin.top - margin.bottom;
             const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
@@ -1559,7 +1559,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const svg = d3.select("#heatmap-svg");
         const el = document.getElementById("heatmap-svg");
         const w = Math.max(el.clientWidth || 700, 580);
-        const marginLeft = 70, marginTop = 60, cellGap = 2;
+        const marginLeft = 70, marginTop = 60, cellGap = 2;  /* W561: 行标签（White Dragon Horse 等）越出左缘 127px → 加宽 */
         const nStages = 4, nPairs = 4;
         const nCols = nStages * nPairs;
         const cellW = Math.max((w - marginLeft - 20) / nCols, 24);
