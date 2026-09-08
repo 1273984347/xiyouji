@@ -515,16 +515,6 @@ def main():
     except Exception as e:
         warn("治理文档维护契约门禁执行异常: %s" % e)
 
-    # ---- Skills 索引一致性门禁（W498 转正：W497 教训——day-review 建了未入库 + 索引/AGENTS §4.5 漏收录，纯文本门禁漏网）----
-    skills_idx_py = os.path.join(_HERE, "check_skills_index.py")
-    try:
-        r = subprocess.run([sys.executable, skills_idx_py], capture_output=True, text=True, timeout=120)
-        tail = (r.stdout.splitlines()[-2:] + r.stderr.splitlines()[-2:])
-        if r.returncode == 0:
-            ok("Skills 索引一致性门禁通过（%s）" % (tail[0] if tail else "无输出"))
-        else:
-            fail("Skills 索引/入库不一致（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
-    except Exception as e:
         warn("Skills 索引一致性门禁执行异常（W498）: %s" % e)
 
     # ---- 索引健康门禁（W500 转正：W499 全面审查——file-index 空壳/重复/残留 + 方法论 README 漏登记 + CHANGELOG 编号上限手工漏改）----

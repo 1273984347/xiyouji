@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W561），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W562），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.162（2026-09-08）：W562 skills/ 目录退役（19技能·运行时零引用） — 第16门禁/sync_skills同步退役·AGENTS§4.5移除
+
+> **来源**：用户明示「这些 skills 我其实觉得没什么用处」+ 认可退役方案（事实核查：仓库 19 技能中 15 个 xiyouji-* 在任何运行时不可见，4 个通用会话技能为用户级 junction 指向 D:\open-source 独立源库，与仓库无关）。
+> - **删除**：skills/ 目录（19 技能）；scripts/check_skills_index.py；scripts/sync_skills.py（含 MIRROR_SKILLS 归属策略——W531 降级保护/W533 归属策略的历史使命随载体退役终结，git 历史永久可回溯）；tests/test_skills_reference_integrity.py（check_skills_index 专属测试）。
+> - **门禁**：verify_delivery 移除第 16 门禁（Skills 索引一致性）挂载块——AGENTS §4.2 与文档规范 §8 编号保留（标 W562 退役），门禁计数 25→24、verify 挂载 check_* 17→16（索引健康门禁动态计数自动收敛）。
+> - **文档**：AGENTS §4.5 整节移除、目录树行/门禁条目/sync 指引退役化；文档规范 §8 门禁表 24 项 + 行更新；README 目录树行与 STRUCTURE 表行删除；交接文档 §5 skills 小节退役化（历史条目按「历史段不改写」保留）。
+> - **不受影响**：用户级 `~/.zcode/skills/`（4 个通用会话技能 junction → D:\open-source，运行时仍加载）；`~/.qwenworkcn/`（另一运行时）；AGENTS §4.3 / 报告 / memory 中沉淀的操作知识（合法载体三件套）。
+> - **验证（当批实跑）**：verify_delivery 核心全绿（24 门禁）；check_index_health 动态计数收敛（16 个全存在）并正确拦截删除后的文档残留引用（修复后放行）；check_structure / a11y / token 全绿。
+> - **文件**：skills/（删）、scripts/check_skills_index.py + sync_skills.py + tests/test_skills_reference_integrity.py（删）、scripts/verify_delivery.py（门禁移除）、AGENTS.md、docs/00-导读/文档规范.md、README.md、STRUCTURE.md、交接文档.md、六文档 + 旁文档版本行 + site 四页脚（batch_cascade.py 级联）。
+> - **状态**：已落地（本批随 W562 提交并 push origin/main）。
 ### v2.3.161（2026-09-08）：W561 残余几何越界收敛（>60px 38→9处） — S1验收第2批零人工修复· minions/luxury width父容器修复·11处边距扩边
 
 > **来源**：W559 复盘 WBS 第 4 项（残余 >60px 几何越界逐页收敛）+ S1 验收第 2 批（用户点单「开始」）。
