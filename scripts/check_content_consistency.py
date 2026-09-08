@@ -367,16 +367,73 @@ def l2() -> int:
     return 1 if drift else 0
 
 
+def l2_runtime(runtime_dir: Path) -> int:
+    """L2 运行时版（W560 U1）：对账 <runtime_dir>/<X>.json（Playwright 提取的页面
+    实际 EMBEDDED_DATA）vs dataset/<X>.json。覆盖不受静态解析限制，目标 38/38。"""
+    drift = []
+    n_pages = 0
+    for rj in sorted(runtime_dir.glob("*.json")):
+        stem = rj.stem
+        src = DS_DIR / (stem + ".json")
+        if not src.exists():
+            continue
+        try:
+            embedded = json.loads(rj.read_text(encoding="utf-8"))
+            source = json.loads(src.read_text(encoding="utf-8"))
+        except Exception as e:  # noqa: BLE001
+            drift.append(f"{stem}: JSON 解析失败 {e}")
+            continue
+        n_pages += 1
+        mism = []
+        checked = 0
+        for key, ev in embedded.items():
+            if key not in source or checked >= 8:
+                continue
+            sv = source[key]
+            if isinstance(ev, list) and isinstance(sv, list):
+                if len(ev) != len(sv):
+                    mism.append(f"{key}: 页 {len(ev)} 项 vs dataset {len(sv)} 项")
+                    checked += 1
+                    continue
+                for i, (a, b) in enumerate(zip(ev, sv, strict=False)):
+                    if isinstance(a, dict) and isinstance(b, dict):
+                        for k in list(a)[:6]:
+                            if k in b and a[k] != b[k]:
+                                mism.append(f"{key}[{i}].{k}: 页 {a[k]!r} vs dataset {b[k]!r}")
+                                break
+                    elif a != b:
+                        mism.append(f"{key}[{i}]: 页 {a!r} vs dataset {b!r}")
+                    checked += 1
+                    if checked >= 8:
+                        break
+            elif isinstance(ev, dict) and isinstance(sv, dict):
+                for k in list(ev)[:6]:
+                    if k in sv and ev[k] != sv[k]:
+                        mism.append(f"{key}.{k}: 页 {ev[k]!r} vs dataset {sv[k]!r}")
+                        break
+                checked += 1
+        if mism:
+            drift.append(f"{stem}.html: " + "；".join(mism[:4]))
+    for d in drift:
+        print("DRIFT", d)
+    print(f"---- L2 运行时对账 {n_pages} 页 · 漂移 {len(drift)} 页 ----")
+    return 1 if drift else 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--self-test", action="store_true")
     ap.add_argument("--dataset", action="store_true", help="L2 站-dataset 对账模式")
+    ap.add_argument("--dataset-runtime", dest="dataset_runtime", metavar="DIR",
+                    help="L2 运行时对账模式（DIR 为 _w560_runtime_extract.js 的输出目录）")
     ap.add_argument("--gate", action="store_true", help="门禁模式（W555 第 25 门禁：基线冻结存量、只拦新增）")
     ap.add_argument("--json", dest="json_out", help="机器可读输出路径")
     args = ap.parse_args()
 
     if args.self_test:
         return self_test()
+    if args.dataset_runtime:
+        return l2_runtime(Path(args.dataset_runtime))
     if args.dataset:
         return l2()
     return l1(gate=args.gate)

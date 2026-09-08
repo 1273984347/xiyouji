@@ -1,5 +1,6 @@
 // _w558_shots.js — W558 修复验收截图（10 个代表页的修复区域截图）
 const { chromium } = require('playwright');
+require('./_csp_guard').guard();
 const path = require('path');
 const fs = require('fs');
 

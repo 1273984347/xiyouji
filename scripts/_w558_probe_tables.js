@@ -1,5 +1,6 @@
 // _w558_probe_decon.js — deconstruction 表行数 + narratology-12d 表列宽运行时探针
 const { chromium } = require('playwright');
+require('./_csp_guard').guard();
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 

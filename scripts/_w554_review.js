@@ -13,6 +13,7 @@
  * - 分组每组 ≤12 张切片且单页切片不跨组。
  */
 const { chromium } = require('playwright');
+require('./_csp_guard').guard();
 const fs = require('fs');
 const path = require('path');
 

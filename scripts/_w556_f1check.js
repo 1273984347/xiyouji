@@ -1,5 +1,6 @@
 // _w555_f1check.js — F1 验证：en/81-hardships 表格 81 行 + 筛选器英文标签
 const { chromium } = require('playwright');
+require('./_csp_guard').guard();
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 (async () => {

@@ -11,6 +11,7 @@
  * 输出：每页 {page, d1:[{svg,text,side,deficit}], d2:[{table,colWidths}]}
  */
 const { chromium } = require('playwright');
+require('./_csp_guard').guard();
 const fs = require('fs');
 const path = require('path');
 
