@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-IPWBHMZBOm/L8GbQ/OWS6VTopPwYIar3Ir2OaCf+cpc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-LUlPGqX9zq+RSQA1TWX7CrIhTRE1XhJjW11mW1jtHBk=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Cave Estate Archive · Annotated Journey to the West</title>
@@ -1670,7 +1670,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
         const width = +svg.attr("width");
         const height = +svg.attr("height");
-        const margin = { top: 16, right: 24, bottom: 90, left: 24 };
+        const margin = { top: 16, right: 181, bottom: 90, left: 24 };
         const innerW = width - margin.left - margin.right;
         const innerH = height - margin.top - margin.bottom;
 
@@ -1765,8 +1765,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         svg.selectAll("*").remove();
 
         const containerEl = document.getElementById("chart-minions");
-        const width = Math.min(containerEl.clientWidth || 1100, 1180);
-        const margin = { top: 24, right: 40, bottom: 90, left: 80 };
+        const width = Math.min(containerEl.parentElement.clientWidth || 1100, 1180);
+        const margin = { top: 24, right: 40, bottom: 90, left: 420 };
         const height = 560;
         const innerW = width - margin.left - margin.right;
         const innerH = height - margin.top - margin.bottom;
@@ -1820,7 +1820,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .call(gn => gn.select(".domain").remove())
             .selectAll("text")
             .style("font-size", "0.78rem")
-            .style("fill", "#23201A");
+            .style("fill", "#23201A")
+            .text(d => String(d).length > 30 ? String(d).slice(0, 29) + "…" : d)
+            .append("title")
+            .text(d => d);
 
         // Bars (0 values use a 1px starting mark)
         g.selectAll(".bar")
