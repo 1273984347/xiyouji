@@ -11,6 +11,24 @@
 ---
 
 
+## W562 W562 skills/ 目录退役（2026-09-08·v2.3.162）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| skills/（19 技能目录） | W562 | 删除·经用户确认退役（运行时零加载；历史见 git） |
+| scripts/check_skills_index.py | W562 | 删除·第 16 门禁本体随载体退役 |
+| scripts/sync_skills.py | W562 | 删除·MIRROR_SKILLS 归属策略随载体退役（W531/W533 历史保留 CHANGELOG） |
+| tests/test_skills_reference_integrity.py | W562 | 删除·check_skills_index 专属测试 |
+| scripts/verify_delivery.py | W562 | 修改·移除第 16 门禁挂载块（编号保留） |
+| AGENTS.md | W562 | 修改·§4.5 移除 + §4.2 条目退役标记 + 版本脚注 |
+| docs/00-导读/文档规范.md | W562 | 修改·§8 门禁表 24 项 + check_skills_index 行退役注记 |
+| CHANGELOG.md | W562 | 新增·W562 版段 + 编号规则上限 W001-W562 |
+| 交接文档.md | W562 | 修改·头尾「最后更新」prepend W562 + 里程碑块 + HEAD 句 + §5 skills 小节退役化（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W562 | 修改·版本行同步 v2.3.162 + skills 行/表删除（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W562 | 修改·四页脚链首 prepend W562（batch_cascade.py 执行） |
+| .github/workflows/README.md | W562 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W562 | 新增·W562 段（本段·batch_cascade.py 执行） |
+
 ## W561 W561 残余几何越界收敛（2026-09-08·v2.3.161）
 
 | 文件 | W | 说明 |

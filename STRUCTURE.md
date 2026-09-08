@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.3.161（2026-09-08）— W561 残余几何越界收敛 — A1-A6 共 615 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前版本：v2.3.162（2026-09-08）— W562 skills目录退役 — A1-A6 共 615 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构
@@ -17,7 +17,6 @@
 | `references/` | 参考文献索引 |
 | `tools/` | 辅助工具脚本（章节切分等） |
 | `xiyouji-agent-web/` | Web Agent「西游记·渡口问津」·CodeBuddy Agent SDK·`PROJECT_CWD=D:/1/xiyouji` 直接对话/检索 docs/ + 跑 scripts/ + 写 dataset/·凭证 `CODEBUDDY_API_KEY`（与 scripts/rag 档B 检索式生成并行·详见其 README） |
-| `skills/` | 项目级 playbook skill（19 个：5 单人角色 / character-content / characters-knowledge / version-bump / s4-submission / en-translation / day-review / drift-audit / agent-session-loop / deep-review-loop / mem-wrap-up / self-evolution / visual-batch / plan-authoring / plan-review），详见 [skills/](skills/) |
 | `README.md` | 项目说明 |
 | `STRUCTURE.md` | 本文件 |
 | `CHANGELOG.md` | 更新日志 |
