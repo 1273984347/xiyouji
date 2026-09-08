@@ -11,6 +11,24 @@
 ---
 
 
+## W560 W560 工具链收尾批次（2026-09-08·v2.3.160）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_cascade.py | W560 | 修改·S1 收尾：写盘 newline="" 根因修复 + 尾链 rfind 锚定/≤3 条 + 写后自检自愈（_cascade_fix.py 并入） |
+| scripts/_csp_guard.js | W560 | 新增·CSP 漂移守卫（探针/截图脚本启动自检·Windows python 候选探测） |
+| scripts/_w554_review.js 等 9 脚本 | W560 | 修改·接入 CSP 守卫行 |
+| scripts/_cascade_fix.py | W560 | 修改·标记废弃（功能并入 batch_cascade 写后自检） |
+| scripts/_w560_runtime_extract.js | W560 | 新增·U1 运行时 EMBEDDED_DATA 提取器（d3 变异规范化） |
+| scripts/check_content_consistency.py | W560 | 修改·--dataset-runtime 运行时对账模式 |
+| AGENTS.md | W560 | 修改·版本脚注（W559 WBS 三项落地） |
+| CHANGELOG.md | W560 | 新增·W560 版段 + 编号规则上限 W001-W560 |
+| 交接文档.md | W560 | 修改·头尾「最后更新」prepend W560 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W560 | 修改·版本行同步 v2.3.160（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W560 | 修改·四页脚链首 prepend W560（batch_cascade.py 执行） |
+| .github/workflows/README.md | W560 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W560 | 新增·W560 段（本段·batch_cascade.py 执行） |
+
 ## W559 W559 工作复盘与优化分析报告（2026-09-08·v2.3.159）
 
 | 文件 | W | 说明 |

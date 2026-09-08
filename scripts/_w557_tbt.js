@@ -1,5 +1,6 @@
 // _w557_tbt.js — 用 PerformanceObserver 长任务近似量化 TBT（50ms 以上任务计入阻塞近似值）
 const { chromium } = require('playwright');
+require('./_csp_guard').guard();
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 

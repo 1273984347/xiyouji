@@ -19,6 +19,7 @@
  * 任一断言 FAIL → exit 1。
  */
 const { chromium } = require('playwright');
+require('./_csp_guard').guard();
 const fs = require('fs');
 const path = require('path');
 

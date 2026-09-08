@@ -1,5 +1,6 @@
 // _w557_kpirow_check.js — 验证 kpi-row 注入后渲染为卡片网格
 const { chromium } = require('playwright');
+require('./_csp_guard').guard();
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 (async () => {

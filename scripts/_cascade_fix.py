@@ -1,3 +1,5 @@
+# [W560 已废弃] 本脚本功能已并入 batch_cascade.py 写后自检+自愈（CR 收敛/头链核查/尾链≤3），
+# 新批次无需再手工调用本文件——保留仅作历史参照。
 # _cascade_fix.py — batch_cascade 落盘通用修复（CR 收敛 + 头链去重 + 尾链裁 3 条）
 # 用法：python scripts/_cascade_fix.py scripts/_w55X_spec.json
 # 配套核查：scripts/_w553_jiacheck.py（改批号）；本脚本为 O1 工具补丁落地前的过渡件。

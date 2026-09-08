@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W559），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W560），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.160（2026-09-08）：W560 工具链收尾批次 — batch_cascade写后自检自愈·CSP守卫接入9脚本·L2运行时对账39/39（W559-WBS 3项全落地）
+
+> **来源**：W559 复盘报告 WBS 三项（S1 级联本体收尾 / S2 CSP 自检 / S3 U1 运行时提取）当批执行（用户点单「开始」）。本批登记自身即 S1 的 dogfood 验证（首用收尾后的级联）。
+> - **S1 batch_cascade 本体收尾**：① 写盘根因修复——CRLF 文件 `newline=nl` 使 io 层对既有 \r\n 的 \n 二次翻译 → CR 翻倍（累计实测 4×CR），改 newline 恒为 ""；② 尾链 prepend 根因修复——旧 `s.replace("最后更新：", ..., 1)` 命中头链首处 → 头链 entry 双写「E；E·」（三批实证），改 rfind 锚定文末行；③ 尾链维持 ≤3 条（维护契约②）并入工具；④ 写后自检+自愈——CR 串收敛（自愈）、头链首条/尾链首条==本批、尾链 ≤3、九段完整性（并入 _cascade_fix.py 要点，该文件标记废弃）。**S1 验收线：连续 2 批 apply 后零人工修复（本批为第 1 批）。**
+> - **S2 CSP 守卫**：`scripts/_csp_guard.js` 新建（实跑 generate_csp --check，漂移即打印修复指引并 exit 1；CSP_GUARD=off 可跳过；Windows python 命令候选探测）；接入 9 个探针/截图脚本。**首跑即拦获真实漂移 1 次**（monster-ecology 对照度修复后未重生成）——按设计把「截图空白假象」的 5-10 分钟误诊前置为秒级拦截。
+> - **S3 U1 运行时提取（连续两期登记项出清）**：`scripts/_w560_runtime_extract.js` 遍历 EMBEDDED∩dataset 同名页，运行时取 `EMBEDDED_DATA`（含 d3.forceLink 变异规范化：source/target 解引用回 id、剥离 x/y/vx/vy/index 模拟态、link index 运行时键剥离）；`check_content_consistency.py` 新增 `--dataset-runtime` 模式。**结果：对账覆盖 17/38 → 39/39**；发现 2 项——81-hardships chapter「前传 vs 0」为页内展示形态差异（非漂移，登记豁免）；six-senses 案例数 页 EMBEDDED=4 vs dataset=5 为 W550 已冻结分歧的 dataset 侧印证（维持冻结裁决，待内容侧统一时一并修）。
+> - **验证（当批实跑）**：py_compile 通过；CSP 守卫实跑拦截测试通过；提取 39/39 零失败；check_structure/a11y/token 复跑全绿；verify_delivery 核心全绿；本批级联由收尾后的 batch_cascade 执行并以写后自检替代人工修复（dogfood 第 1 批）。
+> - **文件**：scripts/batch_cascade.py（写盘/尾链/自检三处修复）、scripts/_csp_guard.js（新建）、9 个探针/截图脚本（接入守卫行）、scripts/_cascade_fix.py（标记废弃）、scripts/_w560_runtime_extract.js（新建）、scripts/check_content_consistency.py（--dataset-runtime 模式）、六文档 + 旁文档版本行 + site 四页脚（batch_cascade.py 级联）。
+> - **状态**：已落地（本批随 W560 提交并 push origin/main）。
 ### v2.3.159（2026-09-08）：W559 工作复盘与优化分析报告（W553-W558） — 经验复用9项·CSS缺分号等两大系统性根因闭环·115次judge编排实录·WBS计划
 
 > **来源**：用户指令「写这次的工作复盘与优化分析报告」；分析对象为 W553–W558 五批交付（方案 A/B/C 全落地 + 五类残留修复）的 Agent 协作交付体系运行实况。方法论文档入库 docs/10-方法论沉淀（续 2026-09-05/2026-09-06 两篇）。

@@ -3,6 +3,7 @@
 //   node scripts/_w553_shots.js D:/xiyouji before   # 修复前（git worktree 检出 HEAD）
 //   node scripts/_w553_shots.js D:/xiyouji after    # 修复后（工作区）
 const { chromium } = require('playwright');
+require('./_csp_guard').guard();
 const path = require('path');
 const fs = require('fs');
 

@@ -132,11 +132,18 @@ def main():
     hs = re.search(r"当前 HEAD = v[\d.]+ W\d+（[^）]*；详见 CHANGELOG）", s)
     assert hs, "未找到当前 HEAD 句"
     s = s[:hs.start()] + "当前 HEAD = {} {}（{}；详见 CHANGELOG）".format(ver, batch, spec["head_sentence"]) + s[hs.end():]
-    s = s.replace("最后更新：", "最后更新：" + entry + "；", 1)
-    # 尾链（文末「最后更新」历史链）同步 prepend——头链已占第一个命中，此处取最后一个命中
-    last_idx = s.rfind("最后更新：")
-    if last_idx != -1 and entry + "；" not in s[last_idx:last_idx + len(entry) + 2]:
-        s = s[:last_idx] + "最后更新：" + entry + "；" + s[last_idx + len("最后更新："):]
+    # W560 修复：尾链 prepend 必须锚定文末行（旧实现 s.replace("最后更新：", ..., 1) 命中的是
+    # 头链首处 → 头链 entry 双写「E；E·」，W556/W557/W558 三批实证）。改用 rfind 定位文末行。
+    tail_idx = s.rfind("最后更新：")
+    assert tail_idx != -1, "未找到文末「最后更新」历史链"
+    if entry + "；" not in s[tail_idx : tail_idx + len(entry) + 2]:
+        s = s[:tail_idx] + "最后更新：" + entry + "；" + s[tail_idx + len("最后更新："):]
+    # W560: 尾链维持 ≤3 条（交接文档维护契约②）
+    tline_end = s.find(nl, tail_idx)
+    tline = s[tail_idx:tline_end]
+    tparts = re.split("；(?=20\\d{2}-)", tline)
+    if len(tparts) > 3:
+        s = s[:tail_idx] + "；".join(tparts[:3]) + s[tline_end:]
     assert s.count("））；") == 0, "写入后出现双括号 ））；"
     pend.append((p, s, nl))
 
@@ -190,15 +197,44 @@ def main():
     if not args.apply:
         print(f"[DRY-RUN] 9 个面断言与改写全部通过：{batch}（规则 {new_rule}）。加 --apply 落盘。")
         return 0
-    for path, content, nl in pend:
+    # W560 修复：newline 恒为 ""——旧实现对 CRLF 文件传 newline=nl，io 层把 content 中
+    # 既有 \r\n 的每个 \n 再翻译一次 → \r 翻倍（实测累计至 4×CR，全页视觉损毁）。
+    for path, content, _nl in pend:
         _real = os.path.realpath(os.path.join(ROOT, path))
         if not (_real == _root or _real.startswith(_root + os.sep)):
             raise SystemExit("path escapes project root: %s" % path)
-        if nl is None:
-            open(_real, "w", encoding="utf-8", newline="").write(content)
-        else:
-            open(_real, "w", encoding="utf-8", newline=nl).write(content)
-    print(f"[APPLY] 级联完成：{batch} / {new_rule}，共 {len(pend)} 个文件")
+        with open(_real, "w", encoding="utf-8", newline="") as f:
+            f.write(content)
+
+    # ---------- 写后自检 + 自愈（W560：并入 _cascade_fix.py 与 jiacheck 要点） ----------
+    selfcheck = []
+    for path, _, _nl in pend:
+        _real = os.path.realpath(os.path.join(ROOT, path))
+        data = open(_real, "rb").read()
+        if b"\r\r" in data:
+            out = []
+            for line in data.split(b"\n"):
+                out.append(line.rstrip(b"\r") + b"\r" if line else b"")
+            data = b"\n".join(out)
+            with open(_real, "wb") as f:
+                f.write(data)
+            selfcheck.append(f"{path}: CR 串已收敛（自愈）")
+        if path == "交接文档.md":
+            txt = data.decode("utf-8")
+            sep = "\r\n" if "\r\n" in txt else "\n"
+            head_line = txt.split(sep)[6]
+            head_entries = re.findall(r"v2\.3\.1\d\d (W\d+)", head_line)
+            if not head_entries or head_entries[0] != batch:
+                selfcheck.append(f"交接文档: 头链首条非 {batch}（{head_entries[:3]}）——需人工核查")
+            tail_txt = txt[txt.rfind("最后更新："):]
+            tail_entries = re.findall(r"v2\.3\.1\d\d (W\d+)", tail_txt)
+            if tail_txt.count("2026-") > 3 or not tail_entries or tail_entries[0] != batch:
+                selfcheck.append(f"交接文档: 尾链异常（{tail_entries[:3]}）——需人工核查")
+            if "## 九、使用说明" not in txt:
+                selfcheck.append("交接文档: 「九、使用说明」段缺失——需人工核查")
+    for line in selfcheck:
+        print("[SELF-CHECK]", line)
+    print(f"[APPLY] 级联完成：{batch} / {new_rule}，共 {len(pend)} 个文件；写后自检 {'发现 %d 项' % len(selfcheck) if selfcheck else '全部通过'}")
     return 0
 
 
