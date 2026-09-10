@@ -24,6 +24,7 @@
 > - **A-4 修正为无操作**：xiyouji-agent-web/vite.config.js|.d.ts 实际从未入库（初稿 F17 系误读 grep -n 行号），根 .gitignore 110/111 行已覆盖——方案项作废，零仓库改动。
 > - **验证（当批实跑）**：verify_delivery 核心全绿（动态死链门禁当批拦获本批注释中「第*.md」字面量 1 次，改写措辞后放行——门禁实战有效性再实证）；截图门禁 234 页 FAIL 0（147s）；CSP 重生成 111 页后 --check 0 漂移；部署态冒烟（http.server + Playwright 6 页）无 4xx/无 pageerror；副本对账 47/47。
 > - **文件**：详见 scripts/output/file-index.md W563 段（227 个 HTML、sw.js、pages.yml、inline_css.py、check_data_drift.js、text_loader.py、AGENTS.md、方案档、7 个一次性脚本、47 个副本、2 个再生成 JSON）。
+> - **CI 补记（同日）**：ci.yml 在 verify 前以 run_all.py 现场再生成全部原件（生成物不入库）——门禁 9 副本对账首战即拦获副本快照过期（story_generator/villain_matrix 系 loader 修复后再生成内容变化）；已本地 run_all 后全量刷新 47 副本、对账 0 差异（11 个副本随再生成更新）并补提交。Lighthouse CI 绿（预算内；逐 URL 实测值因 report 走 temporary-public-storage 未落 artifact，归 C-3 批次正式测定）；Deploy Pages 41s 绿，线上 sw.js 缓存名=xiyouji-shell-22ad0f0 与提交 SHA 一致（A-2 生产态验证）。
 > - **状态**：已落地（本批随 W563 提交并 push origin/main）。
 ### v2.3.162（2026-09-08）：W562 skills/ 目录退役（19技能·运行时零引用） — 第16门禁/sync_skills同步退役·AGENTS§4.5移除
 
