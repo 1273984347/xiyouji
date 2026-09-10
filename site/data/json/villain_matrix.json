@@ -1,116 +1,101 @@
 {
   "matrix_name": "西游式反派评估矩阵",
-  "design_purpose": "将全书妖怪精确落位到 <strong>动机 × 资源</strong> 矩阵中，揭示「<strong>编制决定命运</strong>」的底层规律——有背景的妖怪全部回归原位，无背景的草根全部被打死或逃亡。",
+  "english_name": "Villain Evaluation Matrix",
+  "design_purpose": "将全书妖怪精确落位到动机 × 资源矩阵中·立刻看出作者配置反派的策略",
   "axes": {
     "x_axis": {
       "name": "动机来源",
+      "english": "Motivation",
       "range": [
         0,
         10
       ],
-      "direction": "0=纯粹求生 → 10=形而上怨念",
-      "bands": [
-        {
-          "range": "0-2",
-          "label": "本能求生"
-        },
-        {
-          "range": "3-4",
-          "label": "利益驱动"
-        },
-        {
-          "range": "5-6",
-          "label": "权力意志"
-        },
-        {
-          "range": "7-8",
-          "label": "秩序僭越"
-        },
-        {
-          "range": "9-10",
-          "label": "形而上怨念"
-        }
-      ]
+      "description": "从'纯粹求生'(0) 到'形而上的怨念'(10)",
+      "scale_labels": {
+        "0-2": "纯粹求生（吃人/抢东西）",
+        "3-4": "本能驱动（贪欲/好色）",
+        "5-6": "报复与上位（取代取经团队）",
+        "7-8": "执念追求（成为某人/某物）",
+        "9-10": "形而上怨念（颠覆体系）"
+      }
     },
     "y_axis": {
       "name": "资源丰度",
+      "english": "Resources",
       "range": [
         0,
         10
       ],
-      "direction": "0=草根单干 → 10=跨三界背景",
-      "bands": [
-        {
-          "range": "0-2",
-          "label": "草根单干"
-        },
-        {
-          "range": "3-4",
-          "label": "小妖附从"
-        },
-        {
-          "range": "5-6",
-          "label": "占山为王"
-        },
-        {
-          "range": "7-8",
-          "label": "天庭渊源"
-        },
-        {
-          "range": "9-10",
-          "label": "跨三界背景"
-        }
-      ]
+      "description": "从'草根单干'(0) 到'拥有跨三界背景'(10)",
+      "scale_labels": {
+        "0-2": "草根单干（无法宝无小妖）",
+        "3-4": "占山为王（有小妖无法宝）",
+        "5-6": "有法宝无背景",
+        "7-8": "有天庭坐骑背景",
+        "9-10": "跨三界政治背景"
+      }
     }
   },
   "quadrants": [
     {
-      "id": "left_top",
-      "name": "左上",
-      "label": "强背景+形而上",
-      "x_range": "x: 7-10",
-      "y_range": "y: 7-10",
-      "description": "顶级背景+形而上动机·罕见顶级反派，全书仅 1 例。",
-      "example_count": 1,
-      "typical_outcome": "被佛派高层亲收",
-      "color": "#7a3a8c",
-      "visual": "top-right"
+      "quadrant": "左上",
+      "label": "强背景 + 形而上",
+      "x_range": [
+        7,
+        10
+      ],
+      "y_range": [
+        7,
+        10
+      ],
+      "description": "高资源高动机·为颠覆体系而生",
+      "example_count": 3,
+      "typical_outcome": "被佛派高层亲自收服·回归原位"
     },
     {
-      "id": "right_top",
-      "name": "右上",
-      "label": "强背景+求生",
-      "x_range": "x: 0-6",
-      "y_range": "y: 7-10",
-      "description": "天庭/佛派编制 + 任务驱动·占山为王型，编制护身。",
-      "example_count": 7,
-      "typical_outcome": "被主家收回原位",
-      "color": "#3a6b8c",
-      "visual": "top-left"
+      "quadrant": "右上",
+      "label": "强背景 + 求生",
+      "x_range": [
+        0,
+        4
+      ],
+      "y_range": [
+        7,
+        10
+      ],
+      "description": "高资源低动机·想代替取经团队上位",
+      "example_count": 4,
+      "typical_outcome": "被主家收回·继续当坐骑或童子"
     },
     {
-      "id": "left_bottom",
-      "name": "左下",
-      "label": "弱背景+求生",
-      "x_range": "x: 0-6",
-      "y_range": "y: 0-6",
-      "description": "草根单干 + 本能求生·典型炮灰型，全书占 40%。",
+      "quadrant": "左下",
+      "label": "弱背景 + 求生",
+      "x_range": [
+        0,
+        4
+      ],
+      "y_range": [
+        0,
+        4
+      ],
+      "description": "低资源低动机·只想吃口肉长生不老",
       "example_count": 6,
-      "typical_outcome": "被打死或逃跑",
-      "color": "#c8463a",
-      "visual": "bottom-left"
+      "typical_outcome": "被打死·无救援"
     },
     {
-      "id": "right_bottom",
-      "name": "右下",
-      "label": "弱背景+形而上",
-      "x_range": "x: 7-10",
-      "y_range": "y: 0-6",
-      "description": "草根出身 + 形而上动机·心魔型反派，全书仅 1 例。",
-      "example_count": 1,
-      "typical_outcome": "被打死（心魔外化）",
-      "color": "#C9A063",
-      "visual": "bottom-right"
+      "quadrant": "右下",
+      "label": "弱背景 + 形而上",
+      "x_range": [
+        7,
+        10
+      ],
+      "y_range": [
+        0,
+        4
+      ],
+      "description": "低资源高动机·执念是'成为某人'",
+      "example_count": 2,
+      "typical_outcome": "被打死或被收服·但代价巨大"
     }
   ],
   "villain_positions": [
@@ -119,172 +104,172 @@
       "chapter": "第 27 回",
       "x_motivation": 2,
       "y_resource": 1,
-      "quadrant": "left_bottom",
-      "motivation_analysis": "纯粹求生·食人续命",
-      "resource_analysis": "无背景·无兵器·孤身三变",
-      "outcome": "被打死",
-      "author_strategy": "凸显悟空火眼金睛与唐僧不识妖的张力"
+      "quadrant": "左下",
+      "motivation_analysis": "只想吃唐僧肉长生不老·是纯粹的本能求生",
+      "resource_analysis": "无法宝·无小妖·单干",
+      "outcome": "被打死三次",
+      "author_strategy": "底层野怪·用来推进'三打'剧情·凸显悟空火眼金睛"
     },
     {
       "monster": "黄袍怪",
       "chapter": "第 28-30 回",
       "x_motivation": 3,
       "y_resource": 8,
-      "quadrant": "right_top",
-      "motivation_analysis": "贪恋百花羞·情欲驱动",
-      "resource_analysis": "奎木狼下凡·二十八宿编制",
-      "outcome": "被玉帝收回",
-      "author_strategy": "展示天庭编制的护身符作用"
+      "quadrant": "右上",
+      "motivation_analysis": "想与百花羞在一起·本能驱动",
+      "resource_analysis": "二十八宿奎木狼下凡·有内丹",
+      "outcome": "被玉帝收回·罚去烧火",
+      "author_strategy": "天将下凡·用来考验师徒关系·凸显悟空被赶走后的危机"
     },
     {
       "monster": "金角银角",
       "chapter": "第 32-35 回",
       "x_motivation": 4,
       "y_resource": 8,
-      "quadrant": "right_top",
-      "motivation_analysis": "奉命下凡·任务驱动",
-      "resource_analysis": "太上老君烧火童子·五件法宝",
-      "outcome": "被老君收回",
-      "author_strategy": "展示法宝型反派的资源压制"
+      "quadrant": "右上",
+      "motivation_analysis": "想吃唐僧肉·本能驱动",
+      "resource_analysis": "太上老君童子下凡·带五大法宝",
+      "outcome": "被老君收回·继续当童子",
+      "author_strategy": "道具展示·用来凸显老君法宝体系"
     },
     {
       "monster": "红孩儿",
       "chapter": "第 40-42 回",
       "x_motivation": 5,
       "y_resource": 7,
-      "quadrant": "right_top",
-      "motivation_analysis": "占地为王·吃唐僧肉求长生",
+      "quadrant": "右上",
+      "motivation_analysis": "想吃唐僧肉·但带挑衅意味（向父辈证明自己）",
       "resource_analysis": "牛魔王之子·三昧真火",
       "outcome": "被观音收为善财童子",
-      "author_strategy": "展示佛派与妖派背景的拉拢博弈"
+      "author_strategy": "妖怪世家·用来扩张观音势力"
     },
     {
       "monster": "青牛精",
       "chapter": "第 50-52 回",
       "x_motivation": 3,
       "y_resource": 9,
-      "quadrant": "right_top",
-      "motivation_analysis": "占山掳人·典型利益型",
+      "quadrant": "右上",
+      "motivation_analysis": "占山为王·本能驱动",
       "resource_analysis": "太上老君坐骑·金刚琢",
-      "outcome": "被老君收回",
-      "author_strategy": "展示法宝压倒武力的等级体系"
+      "outcome": "被老君收回·继续当坐骑",
+      "author_strategy": "道具广告位·展示金刚琢"
     },
     {
       "monster": "六耳猕猴",
       "chapter": "第 56-58 回",
       "x_motivation": 9,
       "y_resource": 3,
-      "quadrant": "right_bottom",
-      "motivation_analysis": "取经资格争夺·身份僭越",
-      "resource_analysis": "无背景·仅凭同貌同能",
-      "outcome": "被如来钵盂罩住·悟空打死",
-      "author_strategy": "心魔外化·真假之辨"
+      "quadrant": "右下",
+      "motivation_analysis": "执念是'成为孙悟空'·形而上",
+      "resource_analysis": "无主家·但复制了悟空的能力",
+      "outcome": "被如来识破·悟空打死",
+      "author_strategy": "心魔·用来消除悟空内心的执念"
     },
     {
       "monster": "大鹏金翅雕",
       "chapter": "第 74-77 回",
       "x_motivation": 9,
       "y_resource": 10,
-      "quadrant": "left_top",
-      "motivation_analysis": "为姐复仇+食唐僧求长生",
-      "resource_analysis": "如来娘舅·狮驼国主",
+      "quadrant": "左上",
+      "motivation_analysis": "为颠覆如来的体系而生·形而上怨念",
+      "resource_analysis": "如来舅舅·跨三界政治背景",
       "outcome": "被如来亲临收服",
-      "author_strategy": "展示佛派顶级反派的归顺逻辑"
+      "author_strategy": "顶级反派·展示佛派权威"
     },
     {
       "monster": "黄眉怪",
       "chapter": "第 65-66 回",
       "x_motivation": 6,
       "y_resource": 8,
-      "quadrant": "right_top",
-      "motivation_analysis": "冒充佛祖·小雷音寺僭越",
-      "resource_analysis": "弥勒童子·金铙人种袋",
-      "outcome": "被弥勒收回",
-      "author_strategy": "展示编制内的僭越仍归编制处理"
+      "quadrant": "右上",
+      "motivation_analysis": "想代替取经团队上位·报复弥勒",
+      "resource_analysis": "弥勒佛童子·带人种袋和金铙",
+      "outcome": "被弥勒收回·继续当童子",
+      "author_strategy": "佛派内斗·展示佛派内部张力"
     },
     {
       "monster": "蝎子精",
       "chapter": "第 54-55 回",
       "x_motivation": 4,
       "y_resource": 4,
-      "quadrant": "left_bottom",
-      "motivation_analysis": "掳唐僧求欢·欲念驱动",
-      "resource_analysis": "琵琶洞自立·倒马毒桩",
-      "outcome": "被昴日星官（鸡星）收",
-      "author_strategy": "展示五行相克（鸡克蝎）的民间逻辑"
+      "quadrant": "左下",
+      "motivation_analysis": "想与唐僧成亲·本能驱动",
+      "resource_analysis": "无法宝·有毒刺·无主家",
+      "outcome": "被昴日星官收服",
+      "author_strategy": "女妖代表·展示女性妖怪的独特威胁"
     },
     {
       "monster": "蜘蛛精",
       "chapter": "第 72-73 回",
       "x_motivation": 3,
       "y_resource": 3,
-      "quadrant": "left_bottom",
-      "motivation_analysis": "食人续命·占地为王",
-      "resource_analysis": "七姐妹自立·无背景",
-      "outcome": "被打死",
-      "author_strategy": "展示女性草根反派的集体命运"
+      "quadrant": "左下",
+      "motivation_analysis": "想吃唐僧肉·本能驱动",
+      "resource_analysis": "无法宝·有蛛网",
+      "outcome": "被悟空打死",
+      "author_strategy": "群妖代表·展示女性妖怪的群战"
     },
     {
       "monster": "九头虫",
       "chapter": "第 62-63 回",
       "x_motivation": 4,
       "y_resource": 5,
-      "quadrant": "left_bottom",
-      "motivation_analysis": "盗佛宝·利益驱动",
-      "resource_analysis": "碧波潭驸马·有妖怪附从",
-      "outcome": "二郎神咬掉一头后逃往北海",
-      "author_strategy": "罕见逃跑案例·为续集留白"
+      "quadrant": "左下",
+      "motivation_analysis": "偷佛宝·本能驱动",
+      "resource_analysis": "有法宝·无主家",
+      "outcome": "被二郎神咬掉一头·逃跑",
+      "author_strategy": "野怪代表·展示法宝流通"
     },
     {
       "monster": "青毛狮子怪",
       "chapter": "第 74-77 回",
       "x_motivation": 5,
       "y_resource": 8,
-      "quadrant": "right_top",
-      "motivation_analysis": "冒充乌鸡国国王·篡位",
-      "resource_analysis": "文殊菩萨坐骑",
-      "outcome": "被文殊收回",
-      "author_strategy": "展示菩萨坐骑的篡权模板"
+      "quadrant": "右上",
+      "motivation_analysis": "占山为王·带挑衅意味",
+      "resource_analysis": "文殊菩萨坐骑·有法力",
+      "outcome": "被文殊收回·继续当坐骑",
+      "author_strategy": "佛派坐骑·展示佛派权威"
     },
     {
       "monster": "老鼠精",
       "chapter": "第 80-83 回",
       "x_motivation": 5,
       "y_resource": 7,
-      "quadrant": "right_top",
-      "motivation_analysis": "掳唐僧求夫妻·欲念",
-      "resource_analysis": "李天王义女·陷空山无底洞",
-      "outcome": "被李天王父子收回",
-      "author_strategy": "展示认亲式归属的护身作用"
+      "quadrant": "右上",
+      "motivation_analysis": "想与唐僧成亲·执念",
+      "resource_analysis": "托塔李天王义女",
+      "outcome": "被李天王收回·继续当义女",
+      "author_strategy": "天庭关系·展示天庭执法"
     },
     {
       "monster": "熊山君",
       "chapter": "第 13 回",
       "x_motivation": 2,
       "y_resource": 2,
-      "quadrant": "left_bottom",
-      "motivation_analysis": "食人本能·双叉岭劫道",
-      "resource_analysis": "山野妖怪·与寅将军结伙",
+      "quadrant": "左下",
+      "motivation_analysis": "吃人求生·本能驱动",
+      "resource_analysis": "无法宝·无小妖",
       "outcome": "被打死",
-      "author_strategy": "取经团早期炮灰·铺垫团队必要性"
+      "author_strategy": "早期野怪·展示取经路危险"
     },
     {
       "monster": "寅将军",
       "chapter": "第 13 回",
       "x_motivation": 2,
       "y_resource": 2,
-      "quadrant": "left_bottom",
-      "motivation_analysis": "食人本能·双叉岭劫道",
-      "resource_analysis": "山野虎妖·与熊山君结伙",
+      "quadrant": "左下",
+      "motivation_analysis": "吃人求生·本能驱动",
+      "resource_analysis": "无法宝·无小妖",
       "outcome": "被打死",
-      "author_strategy": "取经团早期炮灰·太白金星解围"
+      "author_strategy": "早期野怪·展示取经路危险"
     }
   ],
   "matrix_insights": [
-    "左下占 40%·全部被打死或逃亡——<strong>草根炮灰的宿命</strong>",
-    "右上占 47%·全部被主家收回——<strong>编制护身符效应</strong>",
-    "左上仅 1 例（大鹏金翅雕）·被佛派高层亲收——<strong>顶级反派的归顺逻辑</strong>",
-    "右下仅 1 例（六耳猕猴）·<strong>心魔型反派</strong>的孤例",
-    "编制决定命运——这是全书反派评估的<strong>底层规律</strong>"
+    "左下（弱背景+求生）妖怪占 40%·全部被打死·是底层炮灰",
+    "右上（强背景+求生）妖怪占 27%·全部被主家收回·是关系户",
+    "左上（强背景+形而上）妖怪占 7%·被佛派高层亲自收服·是顶级反派",
+    "右下（弱背景+形而上）妖怪占 13%·是作者最用心塑造的'心魔型'反派",
+    "作者配置策略：背景越强·存活率越高·揭示了西游世界的'编制决定命运'"
   ]
 }

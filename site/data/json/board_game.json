@@ -1,213 +1,172 @@
 {
   "game_name": "灵山董事会",
   "subtitle": "反取经角色扮演桌游",
-  "designer": "详解西游记项目组",
+  "designer": "西天取经真人秀项目组",
   "player_count": "4 人",
   "play_time": "90-120 分钟",
   "age": "12+",
-  "core_mechanism": "玩家扮演如来 / 观音 / 老君 / 玉帝 · 共同投资「西天取经」真人秀项目 · 通过投放劫难博取收视率（功德值）",
-  "victory_condition": "功德值最高者胜 · 或项目失败时损失最少者胜",
+  "core_mechanism": "玩家扮演如来/观音/老君/玉帝·共同投资'西天取经'真人秀项目·通过投放劫难博取收视率（功德值）·最终在灵山结算投资回报率",
+  "victory_condition": "游戏结束时·功德值最高者胜·或项目失败时·损失最少者胜",
   "players": [
     {
-      "name": "如来佛祖",
-      "role": "项目总设计师",
-      "avatar": "🪷",
-      "merit": 10000,
-      "color": "#c9a14a",
-      "special_ability": "五行山压顶 · 内定劫难卡（每局可指定 1 张劫难卡为「内定」·成本归零）",
-      "winning_strategy": "通过「大鹏金翅雕」内定卡博取极高收视率·稳坐功德榜首",
-      "weakness": "不能亲自下场·只能通过设计劫难间接影响剧情"
+      "role": "如来佛祖",
+      "title": "项目总设计师",
+      "starting_capital": "10000 功德",
+      "special_ability": "可强行介入一次·将任何劫难替换为'五行山压顶'·成本极低",
+      "winning_strategy": "在关键节点投放'内定劫难卡'·如大鹏金翅雕",
+      "weakness": "不能直接干预凡间·只能通过菩萨执行"
     },
     {
-      "name": "观音菩萨",
-      "role": "项目执行人",
-      "avatar": "🍃",
-      "merit": 8000,
-      "color": "#3a6b8c",
-      "special_ability": "暗中护持 · 可在劫难中调整难度（增减 1 档）·控制项目进度",
-      "winning_strategy": "通过「紧箍咒」控制执行器（悟空）·在关键节点调整难度博取口碑",
-      "weakness": "功德值最低·需依靠「项目成功率」加分追平"
+      "role": "观音菩萨",
+      "title": "项目执行人",
+      "starting_capital": "8000 功德",
+      "special_ability": "可暗中护持团队·每场劫难可消耗 500 功德降低难度",
+      "winning_strategy": "在前期保护团队成型·后期获取'紧箍咒'道具",
+      "weakness": "功德储备较少·需精打细算"
     },
     {
-      "name": "太上老君",
-      "role": "道具供应商",
-      "avatar": "🔮",
-      "merit": 9000,
-      "color": "#C9A063",
-      "special_ability": "法宝出租 · 拥有金刚琢 / 芭蕉扇 / 紫金葫芦等 · 出租给妖王收取「道具费」",
-      "winning_strategy": "通过「青牛精」展示金刚琢威力·拉抬道具估值·坐收租金",
-      "weakness": "道具被悟空破解后·妖王溃败·投资血本无归"
+      "role": "太上老君",
+      "title": "道具供应商",
+      "starting_capital": "9000 功德",
+      "special_ability": "可向妖怪借出法宝（金刚琢·紫金葫芦等）·获得广告位曝光",
+      "winning_strategy": "通过法宝出租获取广告费·青牛精是金刚琢展示广告位",
+      "weakness": "借出的法宝可能被妖怪滥用·影响天庭声誉"
     },
     {
-      "name": "玉皇大帝",
-      "role": "天庭 CEO",
-      "avatar": "👑",
-      "merit": 7000,
-      "color": "#c8463a",
-      "special_ability": "调动天兵天将 · 可派遣十万天兵「平叛」（实际战力 0·纯属广告位曝光）",
-      "winning_strategy": "通过「天兵无效」事件博取广告位曝光·拉抬天庭品牌价值",
-      "weakness": "天兵战力为零·每次出征都是「公关秀」·容易被佛系玩家边缘化"
+      "role": "玉皇大帝",
+      "title": "天庭 CEO",
+      "starting_capital": "7000 功德",
+      "special_ability": "可调动天兵天将·但每次调动消耗大量功德",
+      "winning_strategy": "维持天庭秩序·在项目失败时损失最少",
+      "weakness": "天兵天将战斗力有限·对顶级妖怪无效"
     }
   ],
   "game_phases": [
     {
       "phase": "筹备期",
-      "rounds": "1-3 轮",
-      "actions": "分配角色 · 抽取劫难卡 · 商定投资份额",
-      "goal": "建立项目预算 · 锁定首批劫难剧本"
+      "rounds": "1-3",
+      "actions": [
+        "分配初始功德",
+        "选择投放劫难卡",
+        "建立菩萨坐骑档案"
+      ],
+      "goal": "完成取经团队组建·建立基础规则"
     },
     {
       "phase": "执行期",
-      "rounds": "4-9 轮",
-      "actions": "投放劫难 · 调整难度 · 收取收视率 · 出租道具",
-      "goal": "功德值累积 · 控制项目进度避免过早崩盘"
+      "rounds": "4-12",
+      "actions": [
+        "投放劫难卡",
+        "暗中护持或破坏",
+        "结算每场劫难的收视率",
+        "获取广告位曝光"
+      ],
+      "goal": "通过劫难获取功德·同时维持项目运转"
     },
     {
       "phase": "结算期",
-      "rounds": "10-12 轮",
-      "actions": "项目结算 · 评分 · 计算最终功德值",
-      "goal": "确认项目成败 · 决出最终赢家"
+      "rounds": "13-14",
+      "actions": [
+        "真经交付",
+        "灵山结算",
+        "投资回报率计算"
+      ],
+      "goal": "功德值最高者胜"
     }
   ],
   "hardship_cards": [
     {
-      "name": "黄风怪·三昧神风",
-      "type": "自然灾害",
-      "cost": 200,
-      "rating_bonus": 600,
-      "difficulty": 3,
-      "owner": "通用",
-      "owner_color": "#6B6455"
-    },
-    {
-      "name": "白骨精·三打",
-      "type": "心理战",
-      "cost": 300,
-      "rating_bonus": 900,
-      "difficulty": 4,
-      "owner": "观音",
-      "owner_color": "#3a6b8c"
-    },
-    {
-      "name": "黄袍怪·奎木狼",
-      "type": "天庭内应",
-      "cost": 250,
-      "rating_bonus": 700,
-      "difficulty": 3,
-      "owner": "玉帝",
-      "owner_color": "#c8463a"
-    },
-    {
-      "name": "红孩儿·三昧真火",
-      "type": "极端灾害",
+      "name": "白骨精",
+      "type": "野怪",
       "cost": 500,
-      "rating_bonus": 1200,
-      "difficulty": 5,
-      "owner": "观音",
-      "owner_color": "#3a6b8c"
+      "rating_bonus": 200,
+      "difficulty": 2,
+      "owner": "通用"
     },
     {
-      "name": "青牛精·金刚琢",
-      "type": "道具广告",
-      "cost": 350,
-      "rating_bonus": 1100,
+      "name": "黄袍怪",
+      "type": "天将下凡",
+      "cost": 1500,
+      "rating_bonus": 500,
       "difficulty": 4,
-      "owner": "老君",
-      "owner_color": "#C9A063"
+      "owner": "玉帝"
     },
     {
-      "name": "六耳猕猴·真假难辨",
-      "type": "心魔副本",
-      "cost": 600,
-      "rating_bonus": 1500,
+      "name": "金角银角",
+      "type": "童子下凡",
+      "cost": 2000,
+      "rating_bonus": 700,
       "difficulty": 5,
-      "owner": "通用",
-      "owner_color": "#6B6455"
+      "owner": "老君"
     },
     {
-      "name": "牛魔王·芭蕉洞",
-      "type": "家族内讧",
-      "cost": 400,
-      "rating_bonus": 1000,
-      "difficulty": 4,
-      "owner": "通用",
-      "owner_color": "#6B6455"
-    },
-    {
-      "name": "大鹏金翅雕·狮驼岭",
-      "type": "佛门内定",
-      "cost": 50,
-      "rating_bonus": 1800,
-      "difficulty": 5,
-      "owner": "如来",
-      "owner_color": "#c9a14a",
-      "is_rigged": true
-    },
-    {
-      "name": "黄眉怪·小雷音寺",
-      "type": "伪佛冒充",
-      "cost": 450,
-      "rating_bonus": 1300,
-      "difficulty": 5,
-      "owner": "如来",
-      "owner_color": "#c9a14a"
-    },
-    {
-      "name": "老鼠精·无底洞",
-      "type": "天庭旧案",
-      "cost": 200,
+      "name": "青牛精",
+      "type": "坐骑下凡·广告位",
+      "cost": 1000,
       "rating_bonus": 800,
+      "difficulty": 6,
+      "owner": "老君·广告"
+    },
+    {
+      "name": "红孩儿",
+      "type": "妖怪世家",
+      "cost": 2500,
+      "rating_bonus": 900,
+      "difficulty": 7,
+      "owner": "通用"
+    },
+    {
+      "name": "六耳猕猴",
+      "type": "心魔",
+      "cost": 3000,
+      "rating_bonus": 1200,
+      "difficulty": 9,
+      "owner": "如来"
+    },
+    {
+      "name": "大鹏金翅雕",
+      "type": "内定劫难卡",
+      "cost": 500,
+      "rating_bonus": 2000,
+      "difficulty": 10,
+      "owner": "如来·内定"
+    },
+    {
+      "name": "火焰山",
+      "type": "道具展示",
+      "cost": 1500,
+      "rating_bonus": 1000,
+      "difficulty": 6,
+      "owner": "通用"
+    },
+    {
+      "name": "狮驼岭",
+      "type": "团队战",
+      "cost": 3500,
+      "rating_bonus": 1500,
+      "difficulty": 10,
+      "owner": "通用"
+    },
+    {
+      "name": "比丘国",
+      "type": "道德考验",
+      "cost": 800,
+      "rating_bonus": 400,
       "difficulty": 3,
-      "owner": "玉帝",
-      "owner_color": "#c8463a"
+      "owner": "通用"
     }
   ],
   "design_eggs": [
-    {
-      "title": "内定劫难卡",
-      "text": "如来专属「大鹏金翅雕」 · 成本仅 50 功德 · 收视率回报 1800 · 是佛系玩家「躺赢」的隐藏通道。"
-    },
-    {
-      "title": "广告位",
-      "text": "每张劫难卡都可作为「道具广告位」出售 · 老君的金刚琢在青牛精一役中获得史诗级曝光。"
-    },
-    {
-      "title": "紧箍咒",
-      "text": "观音的紧箍咒不是用来「降妖」 · 而是用来「管理执行器」 · 是项目经理的终极控制工具。"
-    },
-    {
-      "title": "天兵无效",
-      "text": "玉帝每次派遣「十万天兵」 · 实际战力为 0 · 但可获得「广告位曝光」加分 · 纯属天庭品牌营销。"
-    },
-    {
-      "title": "五行山保险",
-      "text": "如来提前将悟空压在五行山下 500 年 · 实为「项目储备人才冷冻机制」 · 等取经项目启动再解冻启用。"
-    }
+    "金翅大鹏雕是如来方的'内定劫难卡'·投放成本极低·回报极高",
+    "青牛精是老君的金刚琢展示广告位",
+    "观音的紧箍咒是专为克制悟空设计·获取后可大幅降低项目风险",
+    "玉帝的天兵天将对顶级妖怪无效·是最大的劣势",
+    "如来的'五行山压顶'是终极保险·但只能在关键时刻使用一次"
   ],
-  "scoring": [
-    {
-      "name": "项目成功率",
-      "icon": "✅",
-      "desc": "取经项目最终是否抵达灵山 · 成功 +5000 功德 / 失败 -3000 功德",
-      "color": "#6B8E5A"
-    },
-    {
-      "name": "劫难收视率",
-      "icon": "📺",
-      "desc": "投放的劫难卡收视率累加 · 每张卡的 rating_bonus 计入总分",
-      "color": "#c8463a"
-    },
-    {
-      "name": "广告位曝光",
-      "icon": "🎯",
-      "desc": "道具 / 天兵 / 法术在劫难中的品牌曝光次数 · 每次曝光 +200 功德",
-      "color": "#C9A063"
-    },
-    {
-      "name": "投资回报率",
-      "icon": "💰",
-      "desc": "（收视率 - 投放成本）/ 投放成本 · 衡量资本运作效率",
-      "color": "#3a6b8c"
-    }
-  ]
+  "scoring": {
+    "项目成功率": "60%·成功则所有玩家获得基础功德",
+    "劫难收视率": "每场劫难根据难度获取收视率·难度越高收益越高",
+    "广告位曝光": "投放带广告位的劫难卡可获取广告费",
+    "投资回报率": "最终功德 / 初始投入·最高者胜"
+  }
 }
