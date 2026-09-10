@@ -1,0 +1,1336 @@
+{
+  "total_places": 53,
+  "total_regions": 26,
+  "chapter_range": {
+    "start": 12,
+    "end": 100
+  },
+  "places": [
+    {
+      "n": 1,
+      "chapter": 12,
+      "place": "长安化生寺",
+      "region": "大唐",
+      "type": "temple",
+      "event": "水陆大会，受命西行"
+    },
+    {
+      "n": 2,
+      "chapter": 13,
+      "place": "法门寺",
+      "region": "大唐",
+      "type": "temple",
+      "event": "众僧相送"
+    },
+    {
+      "n": 3,
+      "chapter": 13,
+      "place": "双叉岭",
+      "region": "大唐边境",
+      "type": "mountain",
+      "event": "遇寅将军（虎精）"
+    },
+    {
+      "n": 4,
+      "chapter": 13,
+      "place": "两界山（五行山）",
+      "region": "大唐边境",
+      "type": "mountain",
+      "event": "收孙悟空"
+    },
+    {
+      "n": 5,
+      "chapter": 15,
+      "place": "蛇盘山鹰愁涧",
+      "region": "西番哈必国",
+      "type": "water",
+      "event": "收白龙马"
+    },
+    {
+      "n": 6,
+      "chapter": 16,
+      "place": "观音院",
+      "region": "西番哈必国",
+      "type": "temple",
+      "event": "失袈裟"
+    },
+    {
+      "n": 7,
+      "chapter": 17,
+      "place": "黑风山黑风洞",
+      "region": "西番哈必国",
+      "type": "cave",
+      "event": "大战黑熊精"
+    },
+    {
+      "n": 8,
+      "chapter": 18,
+      "place": "乌斯藏国高老庄",
+      "region": "乌斯藏国",
+      "type": "city",
+      "event": "收猪八戒"
+    },
+    {
+      "n": 9,
+      "chapter": 20,
+      "place": "浮屠山",
+      "region": "乌斯藏国",
+      "type": "mountain",
+      "event": "遇乌巢禅师授心经"
+    },
+    {
+      "n": 10,
+      "chapter": 20,
+      "place": "黄风岭",
+      "region": "西番哈必国",
+      "type": "mountain",
+      "event": "黄风怪"
+    },
+    {
+      "n": 11,
+      "chapter": 22,
+      "place": "流沙河",
+      "region": "西番哈必国",
+      "type": "water",
+      "event": "收沙僧"
+    },
+    {
+      "n": 12,
+      "chapter": 23,
+      "place": "莫家庄",
+      "region": "西番哈必国",
+      "type": "city",
+      "event": "四圣试禅心"
+    },
+    {
+      "n": 13,
+      "chapter": 24,
+      "place": "万寿山五庄观",
+      "region": "万寿山",
+      "type": "temple",
+      "event": "镇元子人参果"
+    },
+    {
+      "n": 14,
+      "chapter": 27,
+      "place": "白虎岭",
+      "region": "西番哈必国",
+      "type": "mountain",
+      "event": "三打白骨精"
+    },
+    {
+      "n": 15,
+      "chapter": 28,
+      "place": "黑松林",
+      "region": "西番哈必国",
+      "type": "mountain",
+      "event": "黄袍怪"
+    },
+    {
+      "n": 16,
+      "chapter": 29,
+      "place": "宝象国",
+      "region": "宝象国",
+      "type": "country",
+      "event": "送书信，救公主"
+    },
+    {
+      "n": 17,
+      "chapter": 32,
+      "place": "平顶山莲花洞",
+      "region": "宝象国",
+      "type": "cave",
+      "event": "金角银角"
+    },
+    {
+      "n": 18,
+      "chapter": 36,
+      "place": "乌鸡国",
+      "region": "乌鸡国",
+      "type": "country",
+      "event": "救国王，辨真假"
+    },
+    {
+      "n": 19,
+      "chapter": 39,
+      "place": "号山火云洞",
+      "region": "号山",
+      "type": "cave",
+      "event": "大战红孩儿"
+    },
+    {
+      "n": 20,
+      "chapter": 43,
+      "place": "黑水河",
+      "region": "西番哈必国",
+      "type": "water",
+      "event": "鼍龙怪"
+    },
+    {
+      "n": 21,
+      "chapter": 44,
+      "place": "车迟国",
+      "region": "车迟国",
+      "type": "country",
+      "event": "斗三大仙"
+    },
+    {
+      "n": 22,
+      "chapter": 47,
+      "place": "通天河陈家庄",
+      "region": "车迟国",
+      "type": "water",
+      "event": "金鱼精"
+    },
+    {
+      "n": 23,
+      "chapter": 50,
+      "place": "金兜山金兜洞",
+      "region": "金兜山",
+      "type": "cave",
+      "event": "青牛精"
+    },
+    {
+      "n": 24,
+      "chapter": 53,
+      "place": "女儿国子母河",
+      "region": "西梁女国",
+      "type": "country",
+      "event": "女王逼婚"
+    },
+    {
+      "n": 25,
+      "chapter": 55,
+      "place": "毒敌山琵琶洞",
+      "region": "西梁女国",
+      "type": "cave",
+      "event": "蝎子精"
+    },
+    {
+      "n": 26,
+      "chapter": 57,
+      "place": "花果山",
+      "region": "东胜神洲",
+      "type": "mountain",
+      "event": "真假美猴王"
+    },
+    {
+      "n": 27,
+      "chapter": 59,
+      "place": "翠云山芭蕉洞",
+      "region": "翠云山",
+      "type": "cave",
+      "event": "三借芭蕉扇"
+    },
+    {
+      "n": 28,
+      "chapter": 59,
+      "place": "火焰山",
+      "region": "西番哈必国",
+      "type": "mountain",
+      "event": "过火焰山"
+    },
+    {
+      "n": 29,
+      "chapter": 62,
+      "place": "祭赛国金光寺",
+      "region": "祭赛国",
+      "type": "country",
+      "event": "佛宝失窃"
+    },
+    {
+      "n": 30,
+      "chapter": 63,
+      "place": "碧波潭",
+      "region": "祭赛国",
+      "type": "water",
+      "event": "九头虫盗宝"
+    },
+    {
+      "n": 31,
+      "chapter": 65,
+      "place": "小雷音寺",
+      "region": "西番哈必国",
+      "type": "temple",
+      "event": "黄眉童子"
+    },
+    {
+      "n": 32,
+      "chapter": 67,
+      "place": "七绝山稀柿衕",
+      "region": "驼罗庄",
+      "type": "mountain",
+      "event": "蟒蛇精"
+    },
+    {
+      "n": 33,
+      "chapter": 68,
+      "place": "朱紫国",
+      "region": "朱紫国",
+      "type": "country",
+      "event": "行医救国王"
+    },
+    {
+      "n": 34,
+      "chapter": 70,
+      "place": "麒麟山獬豸洞",
+      "region": "朱紫国",
+      "type": "cave",
+      "event": "赛太岁（金毛犼）"
+    },
+    {
+      "n": 35,
+      "chapter": 72,
+      "place": "盘丝岭盘丝洞",
+      "region": "西番哈必国",
+      "type": "cave",
+      "event": "蜘蛛精"
+    },
+    {
+      "n": 36,
+      "chapter": 73,
+      "place": "黄花观",
+      "region": "西番哈必国",
+      "type": "temple",
+      "event": "蜈蚣精"
+    },
+    {
+      "n": 37,
+      "chapter": 74,
+      "place": "狮驼岭狮驼洞",
+      "region": "狮驼国",
+      "type": "cave",
+      "event": "三魔王"
+    },
+    {
+      "n": 38,
+      "chapter": 78,
+      "place": "比丘国",
+      "region": "比丘国",
+      "type": "country",
+      "event": "救小儿"
+    },
+    {
+      "n": 39,
+      "chapter": 79,
+      "place": "清华仙洞",
+      "region": "比丘国",
+      "type": "cave",
+      "event": "白鹿精"
+    },
+    {
+      "n": 40,
+      "chapter": 80,
+      "place": "黑松林镇海禅林寺",
+      "region": "西番哈必国",
+      "type": "temple",
+      "event": "老鼠精"
+    },
+    {
+      "n": 41,
+      "chapter": 82,
+      "place": "陷空山无底洞",
+      "region": "陷空山",
+      "type": "cave",
+      "event": "金鼻白毛老鼠精"
+    },
+    {
+      "n": 42,
+      "chapter": 84,
+      "place": "灭法国",
+      "region": "灭法国",
+      "type": "country",
+      "event": "国王发愿杀僧"
+    },
+    {
+      "n": 43,
+      "chapter": 86,
+      "place": "隐雾山折岳连环洞",
+      "region": "隐雾山",
+      "type": "cave",
+      "event": "艾叶花皮豹子精"
+    },
+    {
+      "n": 44,
+      "chapter": 87,
+      "place": "凤仙郡",
+      "region": "天竺国外郡",
+      "type": "city",
+      "event": "求雨"
+    },
+    {
+      "n": 45,
+      "chapter": 88,
+      "place": "玉华州玉华城",
+      "region": "玉华州",
+      "type": "city",
+      "event": "收徒传艺"
+    },
+    {
+      "n": 46,
+      "chapter": 90,
+      "place": "豹头山虎口洞",
+      "region": "玉华州",
+      "type": "cave",
+      "event": "黄狮精"
+    },
+    {
+      "n": 47,
+      "chapter": 91,
+      "place": "金平府慈云寺",
+      "region": "金平府",
+      "type": "temple",
+      "event": "犀牛精"
+    },
+    {
+      "n": 48,
+      "chapter": 93,
+      "place": "天竺国",
+      "region": "天竺国",
+      "type": "country",
+      "event": "真假公主"
+    },
+    {
+      "n": 49,
+      "chapter": 95,
+      "place": "毛颖山",
+      "region": "天竺国",
+      "type": "mountain",
+      "event": "玉兔精"
+    },
+    {
+      "n": 50,
+      "chapter": 96,
+      "place": "铜台府地灵县",
+      "region": "天竺国",
+      "type": "city",
+      "event": "寇员外家"
+    },
+    {
+      "n": 51,
+      "chapter": 98,
+      "place": "灵山雷音寺",
+      "region": "西牛贺洲",
+      "type": "temple",
+      "event": "取得真经"
+    },
+    {
+      "n": 52,
+      "chapter": 99,
+      "place": "通天河（返程）",
+      "region": "车迟国",
+      "type": "water",
+      "event": "老鼋落水"
+    },
+    {
+      "n": 53,
+      "chapter": 100,
+      "place": "长安（归来）",
+      "region": "大唐",
+      "type": "city",
+      "event": "径回东土，五圣成真"
+    }
+  ],
+  "segments": [
+    {
+      "from_n": 1,
+      "to_n": 2,
+      "from_place": "长安化生寺",
+      "to_place": "法门寺",
+      "from_chapter": 12,
+      "to_chapter": 13,
+      "from_region": "大唐",
+      "to_region": "大唐"
+    },
+    {
+      "from_n": 2,
+      "to_n": 3,
+      "from_place": "法门寺",
+      "to_place": "双叉岭",
+      "from_chapter": 13,
+      "to_chapter": 13,
+      "from_region": "大唐",
+      "to_region": "大唐边境"
+    },
+    {
+      "from_n": 3,
+      "to_n": 4,
+      "from_place": "双叉岭",
+      "to_place": "两界山（五行山）",
+      "from_chapter": 13,
+      "to_chapter": 13,
+      "from_region": "大唐边境",
+      "to_region": "大唐边境"
+    },
+    {
+      "from_n": 4,
+      "to_n": 5,
+      "from_place": "两界山（五行山）",
+      "to_place": "蛇盘山鹰愁涧",
+      "from_chapter": 13,
+      "to_chapter": 15,
+      "from_region": "大唐边境",
+      "to_region": "西番哈必国"
+    },
+    {
+      "from_n": 5,
+      "to_n": 6,
+      "from_place": "蛇盘山鹰愁涧",
+      "to_place": "观音院",
+      "from_chapter": 15,
+      "to_chapter": 16,
+      "from_region": "西番哈必国",
+      "to_region": "西番哈必国"
+    },
+    {
+      "from_n": 6,
+      "to_n": 7,
+      "from_place": "观音院",
+      "to_place": "黑风山黑风洞",
+      "from_chapter": 16,
+      "to_chapter": 17,
+      "from_region": "西番哈必国",
+      "to_region": "西番哈必国"
+    },
+    {
+      "from_n": 7,
+      "to_n": 8,
+      "from_place": "黑风山黑风洞",
+      "to_place": "乌斯藏国高老庄",
+      "from_chapter": 17,
+      "to_chapter": 18,
+      "from_region": "西番哈必国",
+      "to_region": "乌斯藏国"
+    },
+    {
+      "from_n": 8,
+      "to_n": 9,
+      "from_place": "乌斯藏国高老庄",
+      "to_place": "浮屠山",
+      "from_chapter": 18,
+      "to_chapter": 20,
+      "from_region": "乌斯藏国",
+      "to_region": "乌斯藏国"
+    },
+    {
+      "from_n": 9,
+      "to_n": 10,
+      "from_place": "浮屠山",
+      "to_place": "黄风岭",
+      "from_chapter": 20,
+      "to_chapter": 20,
+      "from_region": "乌斯藏国",
+      "to_region": "西番哈必国"
+    },
+    {
+      "from_n": 10,
+      "to_n": 11,
+      "from_place": "黄风岭",
+      "to_place": "流沙河",
+      "from_chapter": 20,
+      "to_chapter": 22,
+      "from_region": "西番哈必国",
+      "to_region": "西番哈必国"
+    },
+    {
+      "from_n": 11,
+      "to_n": 12,
+      "from_place": "流沙河",
+      "to_place": "莫家庄",
+      "from_chapter": 22,
+      "to_chapter": 23,
+      "from_region": "西番哈必国",
+      "to_region": "西番哈必国"
+    },
+    {
+      "from_n": 12,
+      "to_n": 13,
+      "from_place": "莫家庄",
+      "to_place": "万寿山五庄观",
+      "from_chapter": 23,
+      "to_chapter": 24,
+      "from_region": "西番哈必国",
+      "to_region": "万寿山"
+    },
+    {
+      "from_n": 13,
+      "to_n": 14,
+      "from_place": "万寿山五庄观",
+      "to_place": "白虎岭",
+      "from_chapter": 24,
+      "to_chapter": 27,
+      "from_region": "万寿山",
+      "to_region": "西番哈必国"
+    },
+    {
+      "from_n": 14,
+      "to_n": 15,
+      "from_place": "白虎岭",
+      "to_place": "黑松林",
+      "from_chapter": 27,
+      "to_chapter": 28,
+      "from_region": "西番哈必国",
+      "to_region": "西番哈必国"
+    },
+    {
+      "from_n": 15,
+      "to_n": 16,
+      "from_place": "黑松林",
+      "to_place": "宝象国",
+      "from_chapter": 28,
+      "to_chapter": 29,
+      "from_region": "西番哈必国",
+      "to_region": "宝象国"
+    },
+    {
+      "from_n": 16,
+      "to_n": 17,
+      "from_place": "宝象国",
+      "to_place": "平顶山莲花洞",
+      "from_chapter": 29,
+      "to_chapter": 32,
+      "from_region": "宝象国",
+      "to_region": "宝象国"
+    },
+    {
+      "from_n": 17,
+      "to_n": 18,
+      "from_place": "平顶山莲花洞",
+      "to_place": "乌鸡国",
+      "from_chapter": 32,
+      "to_chapter": 36,
+      "from_region": "宝象国",
+      "to_region": "乌鸡国"
+    },
+    {
+      "from_n": 18,
+      "to_n": 19,
+      "from_place": "乌鸡国",
+      "to_place": "号山火云洞",
+      "from_chapter": 36,
+      "to_chapter": 39,
+      "from_region": "乌鸡国",
+      "to_region": "号山"
+    },
+    {
+      "from_n": 19,
+      "to_n": 20,
+      "from_place": "号山火云洞",
+      "to_place": "黑水河",
+      "from_chapter": 39,
+      "to_chapter": 43,
+      "from_region": "号山",
+      "to_region": "西番哈必国"
+    },
+    {
+      "from_n": 20,
+      "to_n": 21,
+      "from_place": "黑水河",
+      "to_place": "车迟国",
+      "from_chapter": 43,
+      "to_chapter": 44,
+      "from_region": "西番哈必国",
+      "to_region": "车迟国"
+    },
+    {
+      "from_n": 21,
+      "to_n": 22,
+      "from_place": "车迟国",
+      "to_place": "通天河陈家庄",
+      "from_chapter": 44,
+      "to_chapter": 47,
+      "from_region": "车迟国",
+      "to_region": "车迟国"
+    },
+    {
+      "from_n": 22,
+      "to_n": 23,
+      "from_place": "通天河陈家庄",
+      "to_place": "金兜山金兜洞",
+      "from_chapter": 47,
+      "to_chapter": 50,
+      "from_region": "车迟国",
+      "to_region": "金兜山"
+    },
+    {
+      "from_n": 23,
+      "to_n": 24,
+      "from_place": "金兜山金兜洞",
+      "to_place": "女儿国子母河",
+      "from_chapter": 50,
+      "to_chapter": 53,
+      "from_region": "金兜山",
+      "to_region": "西梁女国"
+    },
+    {
+      "from_n": 24,
+      "to_n": 25,
+      "from_place": "女儿国子母河",
+      "to_place": "毒敌山琵琶洞",
+      "from_chapter": 53,
+      "to_chapter": 55,
+      "from_region": "西梁女国",
+      "to_region": "西梁女国"
+    },
+    {
+      "from_n": 25,
+      "to_n": 26,
+      "from_place": "毒敌山琵琶洞",
+      "to_place": "花果山",
+      "from_chapter": 55,
+      "to_chapter": 57,
+      "from_region": "西梁女国",
+      "to_region": "东胜神洲"
+    },
+    {
+      "from_n": 26,
+      "to_n": 27,
+      "from_place": "花果山",
+      "to_place": "翠云山芭蕉洞",
+      "from_chapter": 57,
+      "to_chapter": 59,
+      "from_region": "东胜神洲",
+      "to_region": "翠云山"
+    },
+    {
+      "from_n": 27,
+      "to_n": 28,
+      "from_place": "翠云山芭蕉洞",
+      "to_place": "火焰山",
+      "from_chapter": 59,
+      "to_chapter": 59,
+      "from_region": "翠云山",
+      "to_region": "西番哈必国"
+    },
+    {
+      "from_n": 28,
+      "to_n": 29,
+      "from_place": "火焰山",
+      "to_place": "祭赛国金光寺",
+      "from_chapter": 59,
+      "to_chapter": 62,
+      "from_region": "西番哈必国",
+      "to_region": "祭赛国"
+    },
+    {
+      "from_n": 29,
+      "to_n": 30,
+      "from_place": "祭赛国金光寺",
+      "to_place": "碧波潭",
+      "from_chapter": 62,
+      "to_chapter": 63,
+      "from_region": "祭赛国",
+      "to_region": "祭赛国"
+    },
+    {
+      "from_n": 30,
+      "to_n": 31,
+      "from_place": "碧波潭",
+      "to_place": "小雷音寺",
+      "from_chapter": 63,
+      "to_chapter": 65,
+      "from_region": "祭赛国",
+      "to_region": "西番哈必国"
+    },
+    {
+      "from_n": 31,
+      "to_n": 32,
+      "from_place": "小雷音寺",
+      "to_place": "七绝山稀柿衕",
+      "from_chapter": 65,
+      "to_chapter": 67,
+      "from_region": "西番哈必国",
+      "to_region": "驼罗庄"
+    },
+    {
+      "from_n": 32,
+      "to_n": 33,
+      "from_place": "七绝山稀柿衕",
+      "to_place": "朱紫国",
+      "from_chapter": 67,
+      "to_chapter": 68,
+      "from_region": "驼罗庄",
+      "to_region": "朱紫国"
+    },
+    {
+      "from_n": 33,
+      "to_n": 34,
+      "from_place": "朱紫国",
+      "to_place": "麒麟山獬豸洞",
+      "from_chapter": 68,
+      "to_chapter": 70,
+      "from_region": "朱紫国",
+      "to_region": "朱紫国"
+    },
+    {
+      "from_n": 34,
+      "to_n": 35,
+      "from_place": "麒麟山獬豸洞",
+      "to_place": "盘丝岭盘丝洞",
+      "from_chapter": 70,
+      "to_chapter": 72,
+      "from_region": "朱紫国",
+      "to_region": "西番哈必国"
+    },
+    {
+      "from_n": 35,
+      "to_n": 36,
+      "from_place": "盘丝岭盘丝洞",
+      "to_place": "黄花观",
+      "from_chapter": 72,
+      "to_chapter": 73,
+      "from_region": "西番哈必国",
+      "to_region": "西番哈必国"
+    },
+    {
+      "from_n": 36,
+      "to_n": 37,
+      "from_place": "黄花观",
+      "to_place": "狮驼岭狮驼洞",
+      "from_chapter": 73,
+      "to_chapter": 74,
+      "from_region": "西番哈必国",
+      "to_region": "狮驼国"
+    },
+    {
+      "from_n": 37,
+      "to_n": 38,
+      "from_place": "狮驼岭狮驼洞",
+      "to_place": "比丘国",
+      "from_chapter": 74,
+      "to_chapter": 78,
+      "from_region": "狮驼国",
+      "to_region": "比丘国"
+    },
+    {
+      "from_n": 38,
+      "to_n": 39,
+      "from_place": "比丘国",
+      "to_place": "清华仙洞",
+      "from_chapter": 78,
+      "to_chapter": 79,
+      "from_region": "比丘国",
+      "to_region": "比丘国"
+    },
+    {
+      "from_n": 39,
+      "to_n": 40,
+      "from_place": "清华仙洞",
+      "to_place": "黑松林镇海禅林寺",
+      "from_chapter": 79,
+      "to_chapter": 80,
+      "from_region": "比丘国",
+      "to_region": "西番哈必国"
+    },
+    {
+      "from_n": 40,
+      "to_n": 41,
+      "from_place": "黑松林镇海禅林寺",
+      "to_place": "陷空山无底洞",
+      "from_chapter": 80,
+      "to_chapter": 82,
+      "from_region": "西番哈必国",
+      "to_region": "陷空山"
+    },
+    {
+      "from_n": 41,
+      "to_n": 42,
+      "from_place": "陷空山无底洞",
+      "to_place": "灭法国",
+      "from_chapter": 82,
+      "to_chapter": 84,
+      "from_region": "陷空山",
+      "to_region": "灭法国"
+    },
+    {
+      "from_n": 42,
+      "to_n": 43,
+      "from_place": "灭法国",
+      "to_place": "隐雾山折岳连环洞",
+      "from_chapter": 84,
+      "to_chapter": 86,
+      "from_region": "灭法国",
+      "to_region": "隐雾山"
+    },
+    {
+      "from_n": 43,
+      "to_n": 44,
+      "from_place": "隐雾山折岳连环洞",
+      "to_place": "凤仙郡",
+      "from_chapter": 86,
+      "to_chapter": 87,
+      "from_region": "隐雾山",
+      "to_region": "天竺国外郡"
+    },
+    {
+      "from_n": 44,
+      "to_n": 45,
+      "from_place": "凤仙郡",
+      "to_place": "玉华州玉华城",
+      "from_chapter": 87,
+      "to_chapter": 88,
+      "from_region": "天竺国外郡",
+      "to_region": "玉华州"
+    },
+    {
+      "from_n": 45,
+      "to_n": 46,
+      "from_place": "玉华州玉华城",
+      "to_place": "豹头山虎口洞",
+      "from_chapter": 88,
+      "to_chapter": 90,
+      "from_region": "玉华州",
+      "to_region": "玉华州"
+    },
+    {
+      "from_n": 46,
+      "to_n": 47,
+      "from_place": "豹头山虎口洞",
+      "to_place": "金平府慈云寺",
+      "from_chapter": 90,
+      "to_chapter": 91,
+      "from_region": "玉华州",
+      "to_region": "金平府"
+    },
+    {
+      "from_n": 47,
+      "to_n": 48,
+      "from_place": "金平府慈云寺",
+      "to_place": "天竺国",
+      "from_chapter": 91,
+      "to_chapter": 93,
+      "from_region": "金平府",
+      "to_region": "天竺国"
+    },
+    {
+      "from_n": 48,
+      "to_n": 49,
+      "from_place": "天竺国",
+      "to_place": "毛颖山",
+      "from_chapter": 93,
+      "to_chapter": 95,
+      "from_region": "天竺国",
+      "to_region": "天竺国"
+    },
+    {
+      "from_n": 49,
+      "to_n": 50,
+      "from_place": "毛颖山",
+      "to_place": "铜台府地灵县",
+      "from_chapter": 95,
+      "to_chapter": 96,
+      "from_region": "天竺国",
+      "to_region": "天竺国"
+    },
+    {
+      "from_n": 50,
+      "to_n": 51,
+      "from_place": "铜台府地灵县",
+      "to_place": "灵山雷音寺",
+      "from_chapter": 96,
+      "to_chapter": 98,
+      "from_region": "天竺国",
+      "to_region": "西牛贺洲"
+    },
+    {
+      "from_n": 51,
+      "to_n": 52,
+      "from_place": "灵山雷音寺",
+      "to_place": "通天河（返程）",
+      "from_chapter": 98,
+      "to_chapter": 99,
+      "from_region": "西牛贺洲",
+      "to_region": "车迟国"
+    },
+    {
+      "from_n": 52,
+      "to_n": 53,
+      "from_place": "通天河（返程）",
+      "to_place": "长安（归来）",
+      "from_chapter": 99,
+      "to_chapter": 100,
+      "from_region": "车迟国",
+      "to_region": "大唐"
+    }
+  ],
+  "by_region": {
+    "大唐": [
+      {
+        "n": 1,
+        "chapter": 12,
+        "place": "长安化生寺",
+        "event": "水陆大会，受命西行"
+      },
+      {
+        "n": 2,
+        "chapter": 13,
+        "place": "法门寺",
+        "event": "众僧相送"
+      },
+      {
+        "n": 53,
+        "chapter": 100,
+        "place": "长安（归来）",
+        "event": "径回东土，五圣成真"
+      }
+    ],
+    "大唐边境": [
+      {
+        "n": 3,
+        "chapter": 13,
+        "place": "双叉岭",
+        "event": "遇寅将军（虎精）"
+      },
+      {
+        "n": 4,
+        "chapter": 13,
+        "place": "两界山（五行山）",
+        "event": "收孙悟空"
+      }
+    ],
+    "西番哈必国": [
+      {
+        "n": 5,
+        "chapter": 15,
+        "place": "蛇盘山鹰愁涧",
+        "event": "收白龙马"
+      },
+      {
+        "n": 6,
+        "chapter": 16,
+        "place": "观音院",
+        "event": "失袈裟"
+      },
+      {
+        "n": 7,
+        "chapter": 17,
+        "place": "黑风山黑风洞",
+        "event": "大战黑熊精"
+      },
+      {
+        "n": 10,
+        "chapter": 20,
+        "place": "黄风岭",
+        "event": "黄风怪"
+      },
+      {
+        "n": 11,
+        "chapter": 22,
+        "place": "流沙河",
+        "event": "收沙僧"
+      },
+      {
+        "n": 12,
+        "chapter": 23,
+        "place": "莫家庄",
+        "event": "四圣试禅心"
+      },
+      {
+        "n": 14,
+        "chapter": 27,
+        "place": "白虎岭",
+        "event": "三打白骨精"
+      },
+      {
+        "n": 15,
+        "chapter": 28,
+        "place": "黑松林",
+        "event": "黄袍怪"
+      },
+      {
+        "n": 20,
+        "chapter": 43,
+        "place": "黑水河",
+        "event": "鼍龙怪"
+      },
+      {
+        "n": 28,
+        "chapter": 59,
+        "place": "火焰山",
+        "event": "过火焰山"
+      },
+      {
+        "n": 31,
+        "chapter": 65,
+        "place": "小雷音寺",
+        "event": "黄眉童子"
+      },
+      {
+        "n": 35,
+        "chapter": 72,
+        "place": "盘丝岭盘丝洞",
+        "event": "蜘蛛精"
+      },
+      {
+        "n": 36,
+        "chapter": 73,
+        "place": "黄花观",
+        "event": "蜈蚣精"
+      },
+      {
+        "n": 40,
+        "chapter": 80,
+        "place": "黑松林镇海禅林寺",
+        "event": "老鼠精"
+      }
+    ],
+    "乌斯藏国": [
+      {
+        "n": 8,
+        "chapter": 18,
+        "place": "乌斯藏国高老庄",
+        "event": "收猪八戒"
+      },
+      {
+        "n": 9,
+        "chapter": 20,
+        "place": "浮屠山",
+        "event": "遇乌巢禅师授心经"
+      }
+    ],
+    "万寿山": [
+      {
+        "n": 13,
+        "chapter": 24,
+        "place": "万寿山五庄观",
+        "event": "镇元子人参果"
+      }
+    ],
+    "宝象国": [
+      {
+        "n": 16,
+        "chapter": 29,
+        "place": "宝象国",
+        "event": "送书信，救公主"
+      },
+      {
+        "n": 17,
+        "chapter": 32,
+        "place": "平顶山莲花洞",
+        "event": "金角银角"
+      }
+    ],
+    "乌鸡国": [
+      {
+        "n": 18,
+        "chapter": 36,
+        "place": "乌鸡国",
+        "event": "救国王，辨真假"
+      }
+    ],
+    "号山": [
+      {
+        "n": 19,
+        "chapter": 39,
+        "place": "号山火云洞",
+        "event": "大战红孩儿"
+      }
+    ],
+    "车迟国": [
+      {
+        "n": 21,
+        "chapter": 44,
+        "place": "车迟国",
+        "event": "斗三大仙"
+      },
+      {
+        "n": 22,
+        "chapter": 47,
+        "place": "通天河陈家庄",
+        "event": "金鱼精"
+      },
+      {
+        "n": 52,
+        "chapter": 99,
+        "place": "通天河（返程）",
+        "event": "老鼋落水"
+      }
+    ],
+    "金兜山": [
+      {
+        "n": 23,
+        "chapter": 50,
+        "place": "金兜山金兜洞",
+        "event": "青牛精"
+      }
+    ],
+    "西梁女国": [
+      {
+        "n": 24,
+        "chapter": 53,
+        "place": "女儿国子母河",
+        "event": "女王逼婚"
+      },
+      {
+        "n": 25,
+        "chapter": 55,
+        "place": "毒敌山琵琶洞",
+        "event": "蝎子精"
+      }
+    ],
+    "东胜神洲": [
+      {
+        "n": 26,
+        "chapter": 57,
+        "place": "花果山",
+        "event": "真假美猴王"
+      }
+    ],
+    "翠云山": [
+      {
+        "n": 27,
+        "chapter": 59,
+        "place": "翠云山芭蕉洞",
+        "event": "三借芭蕉扇"
+      }
+    ],
+    "祭赛国": [
+      {
+        "n": 29,
+        "chapter": 62,
+        "place": "祭赛国金光寺",
+        "event": "佛宝失窃"
+      },
+      {
+        "n": 30,
+        "chapter": 63,
+        "place": "碧波潭",
+        "event": "九头虫盗宝"
+      }
+    ],
+    "驼罗庄": [
+      {
+        "n": 32,
+        "chapter": 67,
+        "place": "七绝山稀柿衕",
+        "event": "蟒蛇精"
+      }
+    ],
+    "朱紫国": [
+      {
+        "n": 33,
+        "chapter": 68,
+        "place": "朱紫国",
+        "event": "行医救国王"
+      },
+      {
+        "n": 34,
+        "chapter": 70,
+        "place": "麒麟山獬豸洞",
+        "event": "赛太岁（金毛犼）"
+      }
+    ],
+    "狮驼国": [
+      {
+        "n": 37,
+        "chapter": 74,
+        "place": "狮驼岭狮驼洞",
+        "event": "三魔王"
+      }
+    ],
+    "比丘国": [
+      {
+        "n": 38,
+        "chapter": 78,
+        "place": "比丘国",
+        "event": "救小儿"
+      },
+      {
+        "n": 39,
+        "chapter": 79,
+        "place": "清华仙洞",
+        "event": "白鹿精"
+      }
+    ],
+    "陷空山": [
+      {
+        "n": 41,
+        "chapter": 82,
+        "place": "陷空山无底洞",
+        "event": "金鼻白毛老鼠精"
+      }
+    ],
+    "灭法国": [
+      {
+        "n": 42,
+        "chapter": 84,
+        "place": "灭法国",
+        "event": "国王发愿杀僧"
+      }
+    ],
+    "隐雾山": [
+      {
+        "n": 43,
+        "chapter": 86,
+        "place": "隐雾山折岳连环洞",
+        "event": "艾叶花皮豹子精"
+      }
+    ],
+    "天竺国外郡": [
+      {
+        "n": 44,
+        "chapter": 87,
+        "place": "凤仙郡",
+        "event": "求雨"
+      }
+    ],
+    "玉华州": [
+      {
+        "n": 45,
+        "chapter": 88,
+        "place": "玉华州玉华城",
+        "event": "收徒传艺"
+      },
+      {
+        "n": 46,
+        "chapter": 90,
+        "place": "豹头山虎口洞",
+        "event": "黄狮精"
+      }
+    ],
+    "金平府": [
+      {
+        "n": 47,
+        "chapter": 91,
+        "place": "金平府慈云寺",
+        "event": "犀牛精"
+      }
+    ],
+    "天竺国": [
+      {
+        "n": 48,
+        "chapter": 93,
+        "place": "天竺国",
+        "event": "真假公主"
+      },
+      {
+        "n": 49,
+        "chapter": 95,
+        "place": "毛颖山",
+        "event": "玉兔精"
+      },
+      {
+        "n": 50,
+        "chapter": 96,
+        "place": "铜台府地灵县",
+        "event": "寇员外家"
+      }
+    ],
+    "西牛贺洲": [
+      {
+        "n": 51,
+        "chapter": 98,
+        "place": "灵山雷音寺",
+        "event": "取得真经"
+      }
+    ]
+  },
+  "by_type": {
+    "洞": 13,
+    "山": 10,
+    "寺/观": 9,
+    "国": 9,
+    "水": 6,
+    "城": 6
+  }
+}

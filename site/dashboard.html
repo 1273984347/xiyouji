@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-sILJ15JjtkTpEcv7ggjP7U7nRqEFpSybqmeJopdb7bc=' 'sha256-3n/F5uZoTM4IxXitt62hJihxxn2yg5vTgnSBWal1bYU=' 'sha256-q7LG17eNbkTgHcLtuMzSofYDhc3pVbJFXTUuTkrUnG0=' 'sha256-nsjePmNyGGyziIf7KpNVlHlF9qJt+NoRNjkysCSjQIQ=' 'sha256-aKYxxXWAhk9f+XLz7xp5ZJBqjq9Lg87Yp7hZxOyeYvw=' 'sha256-o+QSXoQ5VFi4ItDsbcfyzUpLgyGVt92M5zj8wsRF4js='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777 https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-sILJ15JjtkTpEcv7ggjP7U7nRqEFpSybqmeJopdb7bc=' 'sha256-3n/F5uZoTM4IxXitt62hJihxxn2yg5vTgnSBWal1bYU=' 'sha256-bawIYnlA2InOUDxUDetNG+vX0psoKmiGP+uTBCLszxo=' 'sha256-nsjePmNyGGyziIf7KpNVlHlF9qJt+NoRNjkysCSjQIQ=' 'sha256-aKYxxXWAhk9f+XLz7xp5ZJBqjq9Lg87Yp7hZxOyeYvw=' 'sha256-o+QSXoQ5VFi4ItDsbcfyzUpLgyGVt92M5zj8wsRF4js='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777 https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
       // 夜读模式（W488）：首屏防 FOUC
@@ -1276,11 +1276,11 @@
     // 加载数据（fetch 失败则用嵌入数据）
     async function loadData() {
         try {
-            const response = await fetch('../scripts/output/data/hardships_81.json');
+            const response = await fetch('./data/json/hardships_81.json');
             if (!response.ok) throw new Error('fetch failed');
             const data = await response.json();
             document.getElementById('dataSource').innerHTML =
-                '数据源：实时加载自 <code>scripts/output/data/hardships_81.json</code>（运行于 http server 模式）';
+                '数据源：实时加载自 <code>./data/json/hardships_81.json</code>（运行于 http server 模式）';
             return data;
         } catch (e) {
             console.log('[INFO] 使用嵌入数据：', e.message);

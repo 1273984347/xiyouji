@@ -5,7 +5,8 @@
  *     字体、图标、核心 JS。让用户首次在线访问后即可离线打开骨架。
  *   - fetch：
  *       * 导航请求（HTML）→ 网络优先，失败回退到缓存的首页/移动端页（离线可用）
- *       * 静态资源（css/js/fonts/images）→ 缓存优先（稳定资产，秒开）
+ *       * 静态资源（css/js/fonts/images）→ stale-while-revalidate（W563：
+ *         命中缓存秒回 + 后台刷新，兼顾秒开与更新时效）
  *       * 数据/API（dataset/ 与 /query、/datasets、/search）→ 网络优先，
  *         失败时回退到缓存（若有）。RAG 与数据 API 本就需服务端，离线仅尽力而为。
  *   - activate：清理旧版本缓存。
@@ -13,7 +14,7 @@
  * 注意：Service Worker 仅在 http(s) 或 localhost 生效；file:// 下不注册
  *（见 index.html / mobile-index.html 中的 http 协议守卫）。
  */
-const CACHE = "xiyouji-shell-v1";
+const CACHE = "xiyouji-shell-v2";
 const SHELL = [
   "./",
   "./index.html",
@@ -25,7 +26,6 @@ const SHELL = [
   "./static/js/rag-chat.js",
   "./static/fonts/NotoSansSC-Regular.woff2",
   "./static/fonts/NotoSansSC-Medium.woff2",
-  "./static/fonts/NotoSerifSC-VF.woff2",
   "./static/images/ink-mountains-hero.webp",
   "./static/icons/icon-192.png",
   "./static/icons/icon-512.png"
@@ -79,14 +79,18 @@ self.addEventListener("fetch", function (e) {
     return;
   }
   if (isStatic(req)) {
+    // W563：cache-first 改为 stale-while-revalidate——命中缓存立即返回、
+    // 同时后台刷新，外链 JS/字体更新后老访客最迟下次访问拿到新版，
+    // 不再依赖手工 bump 缓存版本号。缓存未命中且网络失败时错误照常传播。
     e.respondWith(
       caches.match(req).then(function (hit) {
-        if (hit) return hit;
-        return fetch(req).then(function (res) {
+        var fetched = fetch(req).then(function (res) {
           var copy = res.clone();
           caches.open(CACHE).then(function (c) { c.put(req, copy); });
           return res;
         });
+        fetched.catch(function () { /* 后台刷新失败静默（离线时命中缓存无感） */ });
+        return hit || fetched;
       })
     );
     return;

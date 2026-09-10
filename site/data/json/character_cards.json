@@ -1,0 +1,410 @@
+[
+  {
+    "character": "孙悟空",
+    "title": "齐天大圣·斗战胜佛",
+    "rarity": "UR",
+    "element": "金",
+    "power": 9800,
+    "hp": 9500,
+    "atk": 9800,
+    "def": 8500,
+    "spd": 9900,
+    "skills": [
+      {
+        "name": "七十二变",
+        "cost": 5,
+        "effect": "变形·回避率+50%·持续 3 回合",
+        "type": "buff"
+      },
+      {
+        "name": "筋斗云",
+        "cost": 3,
+        "effect": "先手·无视地形·必中",
+        "type": "move"
+      },
+      {
+        "name": "如意金箍棒·定海神针",
+        "cost": 8,
+        "effect": "物理伤害×3·破防",
+        "type": "attack"
+      },
+      {
+        "name": "火眼金睛",
+        "cost": 2,
+        "effect": "识破·看穿一切伪装与幻术",
+        "type": "skill"
+      }
+    ],
+    "passive": "大闹天宫——首次受击免疫·每场战斗 1 次",
+    "acquisition": "限定卡池·五行山封印解除纪念",
+    "lore": "花果山灵石育孕·大闹天宫·护送取经·终成斗战胜佛"
+  },
+  {
+    "character": "如来佛祖",
+    "title": "西天极乐世界·最高主宰",
+    "rarity": "UR",
+    "element": "光",
+    "power": 10000,
+    "hp": 9999,
+    "atk": 9500,
+    "def": 9999,
+    "spd": 7000,
+    "skills": [
+      {
+        "name": "五行山压顶",
+        "cost": 10,
+        "effect": "无视对方防御·直接剥夺回合数 500 年",
+        "type": "attack"
+      },
+      {
+        "name": "佛法无边",
+        "cost": 8,
+        "effect": "全场净化·解除一切 buff/debuff",
+        "type": "buff"
+      },
+      {
+        "name": "掌中佛国",
+        "cost": 6,
+        "effect": "将目标封入掌中·无法行动",
+        "type": "control"
+      }
+    ],
+    "passive": "规则系——所有战斗结果由如来判定",
+    "acquisition": "灵山最高祭祀·全服仅 1 张",
+    "lore": "西天极乐世界最高主宰·九九八十一难总设计师"
+  },
+  {
+    "character": "观音菩萨",
+    "title": "南海普陀·大慈大悲",
+    "rarity": "SSR",
+    "element": "水",
+    "power": 8200,
+    "hp": 8500,
+    "atk": 7800,
+    "def": 8800,
+    "spd": 8000,
+    "skills": [
+      {
+        "name": "净瓶甘露",
+        "cost": 5,
+        "effect": "群体回复 50% HP·解除负面",
+        "type": "heal"
+      },
+      {
+        "name": "紧箍咒",
+        "cost": 4,
+        "effect": "对单体的 ENTP 类角色强制控制 3 回合",
+        "type": "control"
+      },
+      {
+        "name": "三根救命毫毛",
+        "cost": 3,
+        "effect": "赋予队友复活道具·可使用 3 次",
+        "type": "buff"
+      }
+    ],
+    "passive": "暗中护持——队友 HP < 30% 时自动触发护盾",
+    "acquisition": "南海普陀限定卡池",
+    "lore": "大慈大悲观世音菩萨·取经项目暗中投资人"
+  },
+  {
+    "character": "二郎神杨戬",
+    "title": "显圣二郎真君",
+    "rarity": "SSR",
+    "element": "雷",
+    "power": 8800,
+    "hp": 8200,
+    "atk": 9000,
+    "def": 8000,
+    "spd": 9200,
+    "skills": [
+      {
+        "name": "天眼通",
+        "cost": 4,
+        "effect": "看穿一切伪装与变化·持续 5 回合",
+        "type": "skill"
+      },
+      {
+        "name": "八九玄功",
+        "cost": 6,
+        "effect": "七十二变之敌·附带雷属性伤害",
+        "type": "attack"
+      },
+      {
+        "name": "哮天犬",
+        "cost": 3,
+        "effect": "召唤哮天犬咬住目标·无法行动 2 回合",
+        "type": "control"
+      }
+    ],
+    "passive": "天庭最强战神——对妖怪类敌人伤害+30%",
+    "acquisition": "灌江口限定·天庭军团卡池",
+    "lore": "玉帝外甥·曾与悟空大战三百回合不分胜负"
+  },
+  {
+    "character": "唐三藏",
+    "title": "旃檀功德佛·金蝉子转世",
+    "rarity": "SR",
+    "element": "心",
+    "power": 1500,
+    "hp": 1500,
+    "atk": 800,
+    "def": 1200,
+    "spd": 3000,
+    "skills": [
+      {
+        "name": "紧箍咒念诵",
+        "cost": 2,
+        "effect": "对悟空类角色强制控制·但伤害为 0",
+        "type": "control"
+      },
+      {
+        "name": "诵读多心经",
+        "cost": 3,
+        "effect": "净化全场负面·但需吟唱 1 回合",
+        "type": "heal"
+      },
+      {
+        "name": "/demo 求助观音",
+        "cost": 5,
+        "effect": "召唤观音救场·冷却 5 回合",
+        "type": "summon"
+      }
+    ],
+    "passive": "金蝉子转世——被妖怪击败时 100% 触发剧情救援",
+    "acquisition": "默认卡·开局赠送",
+    "lore": "金蝉子转世·14 年徒步取经·终成旃檀功德佛"
+  },
+  {
+    "character": "猪八戒",
+    "title": "天蓬元帅·净坛使者",
+    "rarity": "SR",
+    "element": "土",
+    "power": 4200,
+    "hp": 6000,
+    "atk": 4500,
+    "def": 5500,
+    "spd": 3000,
+    "skills": [
+      {
+        "name": "三十六变",
+        "cost": 3,
+        "effect": "变形·但失败率 50%",
+        "type": "buff"
+      },
+      {
+        "name": "九齿钉耙",
+        "cost": 4,
+        "effect": "物理伤害×1.5·对女性妖怪伤害-50%",
+        "type": "attack"
+      },
+      {
+        "name": "高老庄红烧肉",
+        "cost": 2,
+        "effect": "回复 30% HP·但攻击力-20%·持续 3 回合",
+        "type": "heal"
+      }
+    ],
+    "passive": "天蓬元帅——遇到女性妖怪时 50% 概率叛变",
+    "acquisition": "高老庄剧情解锁",
+    "lore": "前天蓬元帅·调戏嫦娥被贬·后成取经团队气氛组"
+  },
+  {
+    "character": "沙悟净",
+    "title": "卷帘大将·金身罗汉",
+    "rarity": "R",
+    "element": "水",
+    "power": 3200,
+    "hp": 4500,
+    "atk": 3200,
+    "def": 5000,
+    "spd": 3500,
+    "skills": [
+      {
+        "name": "降妖宝杖",
+        "cost": 3,
+        "effect": "稳定物理伤害×1.2",
+        "type": "attack"
+      },
+      {
+        "name": "挑担术",
+        "cost": 1,
+        "effect": "提升团队负重上限·但无战斗效果",
+        "type": "buff"
+      },
+      {
+        "name": "'师父被妖怪抓走了'",
+        "cost": 2,
+        "effect": "通知全队·但无实际伤害",
+        "type": "skill"
+      }
+    ],
+    "passive": "默默奉献——每回合稳定回复 5% HP",
+    "acquisition": "流沙河剧情解锁",
+    "lore": "前卷帘大将·打破琉璃盏被贬·默默挑担 14 年"
+  },
+  {
+    "character": "白龙马",
+    "title": "西海龙王三太子·八部天龙",
+    "rarity": "R",
+    "element": "水",
+    "power": 3800,
+    "hp": 5000,
+    "atk": 3500,
+    "def": 4500,
+    "spd": 4000,
+    "skills": [
+      {
+        "name": "化身白马",
+        "cost": 0,
+        "effect": "成为唐僧坐骑·无法战斗",
+        "type": "passive"
+      },
+      {
+        "name": "踹一脚",
+        "cost": 5,
+        "effect": "关键时刻救场·对黄袍怪伤害×3",
+        "type": "attack"
+      },
+      {
+        "name": "龙吟",
+        "cost": 3,
+        "effect": "威吓低级妖怪 2 回合",
+        "type": "control"
+      }
+    ],
+    "passive": "关键时刻救场——剧情触发时强制激活",
+    "acquisition": "鹰愁涧剧情解锁",
+    "lore": "西海龙王三太子·因纵火烧殿上明珠被贬·化为白马驮唐僧"
+  },
+  {
+    "character": "牛魔王",
+    "title": "平天大圣·七大圣之首",
+    "rarity": "SSR",
+    "element": "土",
+    "power": 8500,
+    "hp": 9500,
+    "atk": 8800,
+    "def": 8500,
+    "spd": 6000,
+    "skills": [
+      {
+        "name": "七十二变（牛版）",
+        "cost": 5,
+        "effect": "变形·与悟空同级",
+        "type": "buff"
+      },
+      {
+        "name": "混铁棍",
+        "cost": 6,
+        "effect": "物理伤害×2.5·破防",
+        "type": "attack"
+      },
+      {
+        "name": "芭蕉扇·借",
+        "cost": 8,
+        "effect": "需先借到·否则无效",
+        "type": "attack"
+      }
+    ],
+    "passive": "七大圣之首——对悟空类角色伤害+50%",
+    "acquisition": "火焰山剧情限定",
+    "lore": "悟空结拜大哥·平天大圣·最终被哪吒收服"
+  },
+  {
+    "character": "红孩儿",
+    "title": "圣婴大王·善财童子",
+    "rarity": "SSR",
+    "element": "火",
+    "power": 7800,
+    "hp": 6500,
+    "atk": 8500,
+    "def": 6000,
+    "spd": 8800,
+    "skills": [
+      {
+        "name": "三昧真火",
+        "cost": 6,
+        "effect": "持续燃烧伤害 5 回合·对悟空特效",
+        "type": "attack"
+      },
+      {
+        "name": "火云枪",
+        "cost": 4,
+        "effect": "物理+火属性伤害×1.8",
+        "type": "attack"
+      },
+      {
+        "name": "变身小郎君",
+        "cost": 3,
+        "effect": "伪装·骗取敌方信任",
+        "type": "control"
+      }
+    ],
+    "passive": "三昧真火——免疫一切火系伤害·对悟空类伤害+30%",
+    "acquisition": "号山火云洞限定",
+    "lore": "牛魔王与铁扇公主之子·三昧真火无人能敌·终被观音收服"
+  },
+  {
+    "character": "六耳猕猴",
+    "title": "假美猴王·心魔",
+    "rarity": "SSR",
+    "element": "暗",
+    "power": 9700,
+    "hp": 9400,
+    "atk": 9700,
+    "def": 8500,
+    "spd": 9900,
+    "skills": [
+      {
+        "name": "七十二变（复制）",
+        "cost": 5,
+        "effect": "完全复制目标技能",
+        "type": "buff"
+      },
+      {
+        "name": "如意金箍棒（伪）",
+        "cost": 8,
+        "effect": "物理伤害×3·但伤害 90%",
+        "type": "attack"
+      },
+      {
+        "name": "谛听难辨",
+        "cost": 4,
+        "effect": "伪装·识破率-50%",
+        "type": "control"
+      }
+    ],
+    "passive": "心魔——对悟空类角色伤害+50%·且免疫紧箍咒",
+    "acquisition": "真假美猴王剧情限定",
+    "lore": "悟空心魔化身·与悟空一模一样·终被如来识破"
+  },
+  {
+    "character": "白骨精",
+    "title": "白骨夫人·野怪",
+    "rarity": "N",
+    "element": "暗",
+    "power": 800,
+    "hp": 500,
+    "atk": 900,
+    "def": 400,
+    "spd": 1500,
+    "skills": [
+      {
+        "name": "三变（少女/老妇/老翁）",
+        "cost": 2,
+        "effect": "伪装·识破率 30%",
+        "type": "control"
+      },
+      {
+        "name": "解尸法",
+        "cost": 1,
+        "effect": "假死逃脱·实际无伤害",
+        "type": "skill"
+      }
+    ],
+    "passive": "野怪——被悟空一击秒杀（但悟空会被赶走）",
+    "acquisition": "白虎岭剧情·新手教程",
+    "lore": "白虎岭野怪·想吃唐僧肉长生不老·三次变化被悟空识破"
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "total_deconstruction_works": 7,
+  "total_east_asia_receptions": 9,
+  "countries_involved": [
+    "越南",
+    "韩国",
+    "中国香港",
+    "中国",
+    "日本",
+    "美国",
+    "澳大利亚"
+  ],
+  "media_types": [
+    "电视剧",
+    "美剧",
+    "电影·喜剧",
+    "动画电影",
+    "戏剧·说唱",
+    "小说",
+    "成人漫画",
+    "电子游戏",
+    "漫画·动画",
+    "儿童漫画",
+    "电影",
+    "网络小说"
+  ],
+  "amplified_elements_count": 51,
+  "most_amplified": "热血",
+  "year_range": [
+    1979,
+    2024
+  ]
+}

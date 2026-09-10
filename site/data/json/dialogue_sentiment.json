@@ -1,0 +1,4810 @@
+{
+  "total_dialogues": 6565,
+  "analyzed_dialogues": 6565,
+  "sentiment_distribution": {
+    "positive": 821,
+    "neutral": 3800,
+    "negative": 1944
+  },
+  "speaker_sentiment": [
+    {
+      "speaker": "孙悟空",
+      "total": 3521,
+      "positive": 454,
+      "neutral": 1970,
+      "negative": 1097,
+      "positive_ratio": 0.1289,
+      "neutral_ratio": 0.5595,
+      "negative_ratio": 0.3116,
+      "avg_sentiment": -0.47,
+      "top_positive_words": [
+        {
+          "word": "圣",
+          "count": 281
+        },
+        {
+          "word": "救",
+          "count": 180
+        },
+        {
+          "word": "化",
+          "count": 138
+        },
+        {
+          "word": "功",
+          "count": 79
+        },
+        {
+          "word": "善",
+          "count": 70
+        },
+        {
+          "word": "护",
+          "count": 69
+        },
+        {
+          "word": "贤",
+          "count": 54
+        },
+        {
+          "word": "信",
+          "count": 52
+        },
+        {
+          "word": "恩",
+          "count": 38
+        },
+        {
+          "word": "喜",
+          "count": 34
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "妖",
+          "count": 420
+        },
+        {
+          "word": "打",
+          "count": 397
+        },
+        {
+          "word": "怪",
+          "count": 344
+        },
+        {
+          "word": "难",
+          "count": 148
+        },
+        {
+          "word": "魔",
+          "count": 137
+        },
+        {
+          "word": "死",
+          "count": 126
+        },
+        {
+          "word": "怕",
+          "count": 103
+        },
+        {
+          "word": "罪",
+          "count": 90
+        },
+        {
+          "word": "杀",
+          "count": 73
+        },
+        {
+          "word": "苦",
+          "count": 68
+        }
+      ]
+    },
+    {
+      "speaker": "唐僧",
+      "total": 1153,
+      "positive": 162,
+      "neutral": 697,
+      "negative": 294,
+      "positive_ratio": 0.1405,
+      "neutral_ratio": 0.6045,
+      "negative_ratio": 0.255,
+      "avg_sentiment": -0.2706,
+      "top_positive_words": [
+        {
+          "word": "救",
+          "count": 59
+        },
+        {
+          "word": "圣",
+          "count": 46
+        },
+        {
+          "word": "化",
+          "count": 40
+        },
+        {
+          "word": "善",
+          "count": 40
+        },
+        {
+          "word": "恩",
+          "count": 30
+        },
+        {
+          "word": "喜",
+          "count": 19
+        },
+        {
+          "word": "贤",
+          "count": 16
+        },
+        {
+          "word": "功",
+          "count": 15
+        },
+        {
+          "word": "善哉",
+          "count": 14
+        },
+        {
+          "word": "护",
+          "count": 12
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "妖",
+          "count": 69
+        },
+        {
+          "word": "怪",
+          "count": 63
+        },
+        {
+          "word": "打",
+          "count": 61
+        },
+        {
+          "word": "死",
+          "count": 49
+        },
+        {
+          "word": "苦",
+          "count": 32
+        },
+        {
+          "word": "难",
+          "count": 30
+        },
+        {
+          "word": "魔",
+          "count": 30
+        },
+        {
+          "word": "罪",
+          "count": 30
+        },
+        {
+          "word": "怕",
+          "count": 29
+        },
+        {
+          "word": "杀",
+          "count": 29
+        }
+      ]
+    },
+    {
+      "speaker": "猪八戒",
+      "total": 1138,
+      "positive": 104,
+      "neutral": 670,
+      "negative": 364,
+      "positive_ratio": 0.0914,
+      "neutral_ratio": 0.5888,
+      "negative_ratio": 0.3199,
+      "avg_sentiment": -0.4947,
+      "top_positive_words": [
+        {
+          "word": "化",
+          "count": 54
+        },
+        {
+          "word": "救",
+          "count": 32
+        },
+        {
+          "word": "圣",
+          "count": 20
+        },
+        {
+          "word": "信",
+          "count": 14
+        },
+        {
+          "word": "福",
+          "count": 13
+        },
+        {
+          "word": "善",
+          "count": 11
+        },
+        {
+          "word": "护",
+          "count": 10
+        },
+        {
+          "word": "功",
+          "count": 9
+        },
+        {
+          "word": "果然",
+          "count": 8
+        },
+        {
+          "word": "恩",
+          "count": 7
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "打",
+          "count": 129
+        },
+        {
+          "word": "妖",
+          "count": 111
+        },
+        {
+          "word": "怪",
+          "count": 69
+        },
+        {
+          "word": "难",
+          "count": 53
+        },
+        {
+          "word": "死",
+          "count": 49
+        },
+        {
+          "word": "怕",
+          "count": 40
+        },
+        {
+          "word": "哭",
+          "count": 32
+        },
+        {
+          "word": "杀",
+          "count": 27
+        },
+        {
+          "word": "破",
+          "count": 19
+        },
+        {
+          "word": "鬼",
+          "count": 17
+        }
+      ]
+    },
+    {
+      "speaker": "沙僧",
+      "total": 318,
+      "positive": 24,
+      "neutral": 210,
+      "negative": 84,
+      "positive_ratio": 0.0755,
+      "neutral_ratio": 0.6604,
+      "negative_ratio": 0.2642,
+      "avg_sentiment": -0.4277,
+      "top_positive_words": [
+        {
+          "word": "救",
+          "count": 18
+        },
+        {
+          "word": "化",
+          "count": 13
+        },
+        {
+          "word": "功",
+          "count": 8
+        },
+        {
+          "word": "护",
+          "count": 6
+        },
+        {
+          "word": "贤",
+          "count": 4
+        },
+        {
+          "word": "圣",
+          "count": 4
+        },
+        {
+          "word": "妙",
+          "count": 4
+        },
+        {
+          "word": "有理",
+          "count": 3
+        },
+        {
+          "word": "吉",
+          "count": 2
+        },
+        {
+          "word": "信",
+          "count": 2
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "妖",
+          "count": 41
+        },
+        {
+          "word": "打",
+          "count": 32
+        },
+        {
+          "word": "怪",
+          "count": 16
+        },
+        {
+          "word": "怕",
+          "count": 10
+        },
+        {
+          "word": "死",
+          "count": 8
+        },
+        {
+          "word": "胡",
+          "count": 7
+        },
+        {
+          "word": "惊",
+          "count": 7
+        },
+        {
+          "word": "魔",
+          "count": 7
+        },
+        {
+          "word": "难",
+          "count": 7
+        },
+        {
+          "word": "破",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "speaker": "观音",
+      "total": 189,
+      "positive": 26,
+      "neutral": 121,
+      "negative": 42,
+      "positive_ratio": 0.1376,
+      "neutral_ratio": 0.6402,
+      "negative_ratio": 0.2222,
+      "avg_sentiment": -0.2646,
+      "top_positive_words": [
+        {
+          "word": "救",
+          "count": 22
+        },
+        {
+          "word": "善",
+          "count": 17
+        },
+        {
+          "word": "圣",
+          "count": 16
+        },
+        {
+          "word": "度",
+          "count": 8
+        },
+        {
+          "word": "功",
+          "count": 7
+        },
+        {
+          "word": "寿",
+          "count": 6
+        },
+        {
+          "word": "慈",
+          "count": 5
+        },
+        {
+          "word": "祥",
+          "count": 4
+        },
+        {
+          "word": "喜",
+          "count": 3
+        },
+        {
+          "word": "护",
+          "count": 3
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "打",
+          "count": 19
+        },
+        {
+          "word": "罪",
+          "count": 16
+        },
+        {
+          "word": "难",
+          "count": 15
+        },
+        {
+          "word": "妖",
+          "count": 12
+        },
+        {
+          "word": "怪",
+          "count": 10
+        },
+        {
+          "word": "死",
+          "count": 10
+        },
+        {
+          "word": "灾",
+          "count": 8
+        },
+        {
+          "word": "苦",
+          "count": 7
+        },
+        {
+          "word": "魔",
+          "count": 6
+        },
+        {
+          "word": "失",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "speaker": "如来",
+      "total": 58,
+      "positive": 13,
+      "neutral": 20,
+      "negative": 25,
+      "positive_ratio": 0.2241,
+      "neutral_ratio": 0.3448,
+      "negative_ratio": 0.431,
+      "avg_sentiment": -0.7759,
+      "top_positive_words": [
+        {
+          "word": "功",
+          "count": 8
+        },
+        {
+          "word": "圣",
+          "count": 7
+        },
+        {
+          "word": "善",
+          "count": 5
+        },
+        {
+          "word": "化",
+          "count": 5
+        },
+        {
+          "word": "护",
+          "count": 5
+        },
+        {
+          "word": "乐",
+          "count": 3
+        },
+        {
+          "word": "喜",
+          "count": 3
+        },
+        {
+          "word": "德",
+          "count": 2
+        },
+        {
+          "word": "慈",
+          "count": 1
+        },
+        {
+          "word": "妙",
+          "count": 1
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "妖",
+          "count": 14
+        },
+        {
+          "word": "打",
+          "count": 13
+        },
+        {
+          "word": "非",
+          "count": 11
+        },
+        {
+          "word": "怪",
+          "count": 9
+        },
+        {
+          "word": "魔",
+          "count": 5
+        },
+        {
+          "word": "罪",
+          "count": 4
+        },
+        {
+          "word": "苦",
+          "count": 3
+        },
+        {
+          "word": "恶",
+          "count": 3
+        },
+        {
+          "word": "破",
+          "count": 3
+        },
+        {
+          "word": "鬼",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "speaker": "李靖",
+      "total": 53,
+      "positive": 13,
+      "neutral": 28,
+      "negative": 12,
+      "positive_ratio": 0.2453,
+      "neutral_ratio": 0.5283,
+      "negative_ratio": 0.2264,
+      "avg_sentiment": -0.0755,
+      "top_positive_words": [
+        {
+          "word": "圣",
+          "count": 7
+        },
+        {
+          "word": "功",
+          "count": 2
+        },
+        {
+          "word": "救",
+          "count": 2
+        },
+        {
+          "word": "妙",
+          "count": 2
+        },
+        {
+          "word": "护",
+          "count": 2
+        },
+        {
+          "word": "善",
+          "count": 1
+        },
+        {
+          "word": "喜",
+          "count": 1
+        },
+        {
+          "word": "德",
+          "count": 1
+        },
+        {
+          "word": "信",
+          "count": 1
+        },
+        {
+          "word": "领旨",
+          "count": 1
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "妖",
+          "count": 5
+        },
+        {
+          "word": "罪",
+          "count": 3
+        },
+        {
+          "word": "打",
+          "count": 2
+        },
+        {
+          "word": "败",
+          "count": 2
+        },
+        {
+          "word": "杀",
+          "count": 2
+        },
+        {
+          "word": "混",
+          "count": 1
+        },
+        {
+          "word": "妖魔",
+          "count": 1
+        },
+        {
+          "word": "魔",
+          "count": 1
+        },
+        {
+          "word": "瞒",
+          "count": 1
+        },
+        {
+          "word": "非",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "speaker": "玉帝",
+      "total": 48,
+      "positive": 11,
+      "neutral": 29,
+      "negative": 8,
+      "positive_ratio": 0.2292,
+      "neutral_ratio": 0.6042,
+      "negative_ratio": 0.1667,
+      "avg_sentiment": 0.125,
+      "top_positive_words": [
+        {
+          "word": "圣",
+          "count": 13
+        },
+        {
+          "word": "恩",
+          "count": 3
+        },
+        {
+          "word": "慈",
+          "count": 3
+        },
+        {
+          "word": "护",
+          "count": 3
+        },
+        {
+          "word": "化",
+          "count": 2
+        },
+        {
+          "word": "喜",
+          "count": 2
+        },
+        {
+          "word": "欢",
+          "count": 2
+        },
+        {
+          "word": "功",
+          "count": 2
+        },
+        {
+          "word": "善",
+          "count": 2
+        },
+        {
+          "word": "贤",
+          "count": 1
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "妖",
+          "count": 10
+        },
+        {
+          "word": "死",
+          "count": 4
+        },
+        {
+          "word": "罪",
+          "count": 3
+        },
+        {
+          "word": "妖魔",
+          "count": 2
+        },
+        {
+          "word": "魔",
+          "count": 2
+        },
+        {
+          "word": "非",
+          "count": 2
+        },
+        {
+          "word": "邪",
+          "count": 1
+        },
+        {
+          "word": "损",
+          "count": 1
+        },
+        {
+          "word": "打",
+          "count": 1
+        },
+        {
+          "word": "负",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "speaker": "太上老君",
+      "total": 27,
+      "positive": 1,
+      "neutral": 20,
+      "negative": 6,
+      "positive_ratio": 0.037,
+      "neutral_ratio": 0.7407,
+      "negative_ratio": 0.2222,
+      "avg_sentiment": -0.3333,
+      "top_positive_words": [
+        {
+          "word": "功",
+          "count": 3
+        },
+        {
+          "word": "圣",
+          "count": 2
+        },
+        {
+          "word": "化",
+          "count": 2
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "打",
+          "count": 3
+        },
+        {
+          "word": "魔",
+          "count": 3
+        },
+        {
+          "word": "怪",
+          "count": 2
+        },
+        {
+          "word": "胡",
+          "count": 2
+        },
+        {
+          "word": "妖魔",
+          "count": 1
+        },
+        {
+          "word": "妖",
+          "count": 1
+        },
+        {
+          "word": "错",
+          "count": 1
+        },
+        {
+          "word": "难",
+          "count": 1
+        },
+        {
+          "word": "胡说",
+          "count": 1
+        },
+        {
+          "word": "怕",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "speaker": "哪吒",
+      "total": 14,
+      "positive": 2,
+      "neutral": 9,
+      "negative": 3,
+      "positive_ratio": 0.1429,
+      "neutral_ratio": 0.6429,
+      "negative_ratio": 0.2143,
+      "avg_sentiment": -0.2857,
+      "top_positive_words": [
+        {
+          "word": "善",
+          "count": 2
+        },
+        {
+          "word": "功",
+          "count": 2
+        },
+        {
+          "word": "恩",
+          "count": 2
+        },
+        {
+          "word": "福",
+          "count": 1
+        },
+        {
+          "word": "圣",
+          "count": 1
+        },
+        {
+          "word": "喜",
+          "count": 1
+        },
+        {
+          "word": "奉旨",
+          "count": 1
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "妖",
+          "count": 4
+        },
+        {
+          "word": "怪",
+          "count": 2
+        },
+        {
+          "word": "怕",
+          "count": 1
+        },
+        {
+          "word": "难",
+          "count": 1
+        },
+        {
+          "word": "混",
+          "count": 1
+        },
+        {
+          "word": "恼",
+          "count": 1
+        },
+        {
+          "word": "败",
+          "count": 1
+        },
+        {
+          "word": "死",
+          "count": 1
+        },
+        {
+          "word": "打",
+          "count": 1
+        },
+        {
+          "word": "非",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "chapter_sentiment": [
+    {
+      "chapter": 1,
+      "total": 4,
+      "positive": 2,
+      "neutral": 1,
+      "negative": 1,
+      "positive_ratio": 0.5,
+      "negative_ratio": 0.25,
+      "avg_sentiment": 0.5
+    },
+    {
+      "chapter": 2,
+      "total": 28,
+      "positive": 0,
+      "neutral": 22,
+      "negative": 6,
+      "positive_ratio": 0.0,
+      "negative_ratio": 0.2143,
+      "avg_sentiment": -0.3929
+    },
+    {
+      "chapter": 3,
+      "total": 9,
+      "positive": 2,
+      "neutral": 6,
+      "negative": 1,
+      "positive_ratio": 0.2222,
+      "negative_ratio": 0.1111,
+      "avg_sentiment": 0.5556
+    },
+    {
+      "chapter": 4,
+      "total": 40,
+      "positive": 8,
+      "neutral": 24,
+      "negative": 8,
+      "positive_ratio": 0.2,
+      "negative_ratio": 0.2,
+      "avg_sentiment": 0.05
+    },
+    {
+      "chapter": 5,
+      "total": 40,
+      "positive": 12,
+      "neutral": 18,
+      "negative": 10,
+      "positive_ratio": 0.3,
+      "negative_ratio": 0.25,
+      "avg_sentiment": -0.25
+    },
+    {
+      "chapter": 6,
+      "total": 43,
+      "positive": 8,
+      "neutral": 24,
+      "negative": 11,
+      "positive_ratio": 0.186,
+      "negative_ratio": 0.2558,
+      "avg_sentiment": -0.0698
+    },
+    {
+      "chapter": 7,
+      "total": 25,
+      "positive": 6,
+      "neutral": 14,
+      "negative": 5,
+      "positive_ratio": 0.24,
+      "negative_ratio": 0.2,
+      "avg_sentiment": -0.24
+    },
+    {
+      "chapter": 8,
+      "total": 39,
+      "positive": 7,
+      "neutral": 21,
+      "negative": 11,
+      "positive_ratio": 0.1795,
+      "negative_ratio": 0.2821,
+      "avg_sentiment": -0.359
+    },
+    {
+      "chapter": 12,
+      "total": 36,
+      "positive": 11,
+      "neutral": 20,
+      "negative": 5,
+      "positive_ratio": 0.3056,
+      "negative_ratio": 0.1389,
+      "avg_sentiment": 0.1944
+    },
+    {
+      "chapter": 13,
+      "total": 25,
+      "positive": 4,
+      "neutral": 11,
+      "negative": 10,
+      "positive_ratio": 0.16,
+      "negative_ratio": 0.4,
+      "avg_sentiment": -0.4
+    },
+    {
+      "chapter": 14,
+      "total": 99,
+      "positive": 11,
+      "neutral": 59,
+      "negative": 29,
+      "positive_ratio": 0.1111,
+      "negative_ratio": 0.2929,
+      "avg_sentiment": -0.4242
+    },
+    {
+      "chapter": 15,
+      "total": 85,
+      "positive": 12,
+      "neutral": 52,
+      "negative": 21,
+      "positive_ratio": 0.1412,
+      "negative_ratio": 0.2471,
+      "avg_sentiment": -0.1882
+    },
+    {
+      "chapter": 16,
+      "total": 79,
+      "positive": 10,
+      "neutral": 50,
+      "negative": 19,
+      "positive_ratio": 0.1266,
+      "negative_ratio": 0.2405,
+      "avg_sentiment": -0.2278
+    },
+    {
+      "chapter": 17,
+      "total": 71,
+      "positive": 8,
+      "neutral": 42,
+      "negative": 21,
+      "positive_ratio": 0.1127,
+      "negative_ratio": 0.2958,
+      "avg_sentiment": -0.6901
+    },
+    {
+      "chapter": 18,
+      "total": 70,
+      "positive": 4,
+      "neutral": 43,
+      "negative": 23,
+      "positive_ratio": 0.0571,
+      "negative_ratio": 0.3286,
+      "avg_sentiment": -0.7571
+    },
+    {
+      "chapter": 19,
+      "total": 64,
+      "positive": 5,
+      "neutral": 36,
+      "negative": 23,
+      "positive_ratio": 0.0781,
+      "negative_ratio": 0.3594,
+      "avg_sentiment": -0.7344
+    },
+    {
+      "chapter": 20,
+      "total": 73,
+      "positive": 6,
+      "neutral": 42,
+      "negative": 25,
+      "positive_ratio": 0.0822,
+      "negative_ratio": 0.3425,
+      "avg_sentiment": -0.8356
+    },
+    {
+      "chapter": 21,
+      "total": 74,
+      "positive": 14,
+      "neutral": 38,
+      "negative": 22,
+      "positive_ratio": 0.1892,
+      "negative_ratio": 0.2973,
+      "avg_sentiment": -0.3108
+    },
+    {
+      "chapter": 22,
+      "total": 75,
+      "positive": 4,
+      "neutral": 35,
+      "negative": 36,
+      "positive_ratio": 0.0533,
+      "negative_ratio": 0.48,
+      "avg_sentiment": -1.0933
+    },
+    {
+      "chapter": 23,
+      "total": 85,
+      "positive": 12,
+      "neutral": 56,
+      "negative": 17,
+      "positive_ratio": 0.1412,
+      "negative_ratio": 0.2,
+      "avg_sentiment": -0.1176
+    },
+    {
+      "chapter": 24,
+      "total": 87,
+      "positive": 9,
+      "neutral": 58,
+      "negative": 20,
+      "positive_ratio": 0.1034,
+      "negative_ratio": 0.2299,
+      "avg_sentiment": -0.2759
+    },
+    {
+      "chapter": 25,
+      "total": 69,
+      "positive": 2,
+      "neutral": 40,
+      "negative": 27,
+      "positive_ratio": 0.029,
+      "negative_ratio": 0.3913,
+      "avg_sentiment": -0.5942
+    },
+    {
+      "chapter": 26,
+      "total": 77,
+      "positive": 16,
+      "neutral": 47,
+      "negative": 14,
+      "positive_ratio": 0.2078,
+      "negative_ratio": 0.1818,
+      "avg_sentiment": -0.1039
+    },
+    {
+      "chapter": 27,
+      "total": 77,
+      "positive": 12,
+      "neutral": 34,
+      "negative": 31,
+      "positive_ratio": 0.1558,
+      "negative_ratio": 0.4026,
+      "avg_sentiment": -0.9351
+    },
+    {
+      "chapter": 28,
+      "total": 40,
+      "positive": 6,
+      "neutral": 23,
+      "negative": 11,
+      "positive_ratio": 0.15,
+      "negative_ratio": 0.275,
+      "avg_sentiment": -0.625
+    },
+    {
+      "chapter": 29,
+      "total": 44,
+      "positive": 7,
+      "neutral": 19,
+      "negative": 18,
+      "positive_ratio": 0.1591,
+      "negative_ratio": 0.4091,
+      "avg_sentiment": -0.3864
+    },
+    {
+      "chapter": 30,
+      "total": 50,
+      "positive": 10,
+      "neutral": 30,
+      "negative": 10,
+      "positive_ratio": 0.2,
+      "negative_ratio": 0.2,
+      "avg_sentiment": -0.34
+    },
+    {
+      "chapter": 31,
+      "total": 118,
+      "positive": 14,
+      "neutral": 43,
+      "negative": 61,
+      "positive_ratio": 0.1186,
+      "negative_ratio": 0.5169,
+      "avg_sentiment": -1.0
+    },
+    {
+      "chapter": 32,
+      "total": 106,
+      "positive": 8,
+      "neutral": 64,
+      "negative": 34,
+      "positive_ratio": 0.0755,
+      "negative_ratio": 0.3208,
+      "avg_sentiment": -0.7642
+    },
+    {
+      "chapter": 33,
+      "total": 99,
+      "positive": 12,
+      "neutral": 72,
+      "negative": 15,
+      "positive_ratio": 0.1212,
+      "negative_ratio": 0.1515,
+      "avg_sentiment": -0.1515
+    },
+    {
+      "chapter": 34,
+      "total": 68,
+      "positive": 7,
+      "neutral": 49,
+      "negative": 12,
+      "positive_ratio": 0.1029,
+      "negative_ratio": 0.1765,
+      "avg_sentiment": -0.1471
+    },
+    {
+      "chapter": 35,
+      "total": 40,
+      "positive": 3,
+      "neutral": 17,
+      "negative": 20,
+      "positive_ratio": 0.075,
+      "negative_ratio": 0.5,
+      "avg_sentiment": -0.875
+    },
+    {
+      "chapter": 36,
+      "total": 84,
+      "positive": 5,
+      "neutral": 53,
+      "negative": 26,
+      "positive_ratio": 0.0595,
+      "negative_ratio": 0.3095,
+      "avg_sentiment": -0.4167
+    },
+    {
+      "chapter": 37,
+      "total": 100,
+      "positive": 15,
+      "neutral": 53,
+      "negative": 32,
+      "positive_ratio": 0.15,
+      "negative_ratio": 0.32,
+      "avg_sentiment": -0.55
+    },
+    {
+      "chapter": 38,
+      "total": 115,
+      "positive": 14,
+      "neutral": 68,
+      "negative": 33,
+      "positive_ratio": 0.1217,
+      "negative_ratio": 0.287,
+      "avg_sentiment": -0.3478
+    },
+    {
+      "chapter": 39,
+      "total": 105,
+      "positive": 12,
+      "neutral": 55,
+      "negative": 38,
+      "positive_ratio": 0.1143,
+      "negative_ratio": 0.3619,
+      "avg_sentiment": -0.5524
+    },
+    {
+      "chapter": 40,
+      "total": 75,
+      "positive": 6,
+      "neutral": 39,
+      "negative": 30,
+      "positive_ratio": 0.08,
+      "negative_ratio": 0.4,
+      "avg_sentiment": -0.7333
+    },
+    {
+      "chapter": 41,
+      "total": 79,
+      "positive": 11,
+      "neutral": 37,
+      "negative": 31,
+      "positive_ratio": 0.1392,
+      "negative_ratio": 0.3924,
+      "avg_sentiment": -0.5949
+    },
+    {
+      "chapter": 42,
+      "total": 107,
+      "positive": 12,
+      "neutral": 75,
+      "negative": 20,
+      "positive_ratio": 0.1121,
+      "negative_ratio": 0.1869,
+      "avg_sentiment": -0.1963
+    },
+    {
+      "chapter": 43,
+      "total": 82,
+      "positive": 10,
+      "neutral": 43,
+      "negative": 29,
+      "positive_ratio": 0.122,
+      "negative_ratio": 0.3537,
+      "avg_sentiment": -0.4512
+    },
+    {
+      "chapter": 44,
+      "total": 116,
+      "positive": 15,
+      "neutral": 74,
+      "negative": 27,
+      "positive_ratio": 0.1293,
+      "negative_ratio": 0.2328,
+      "avg_sentiment": -0.2845
+    },
+    {
+      "chapter": 45,
+      "total": 54,
+      "positive": 12,
+      "neutral": 37,
+      "negative": 5,
+      "positive_ratio": 0.2222,
+      "negative_ratio": 0.0926,
+      "avg_sentiment": 0.0741
+    },
+    {
+      "chapter": 46,
+      "total": 91,
+      "positive": 5,
+      "neutral": 66,
+      "negative": 20,
+      "positive_ratio": 0.0549,
+      "negative_ratio": 0.2198,
+      "avg_sentiment": -0.2088
+    },
+    {
+      "chapter": 47,
+      "total": 134,
+      "positive": 16,
+      "neutral": 96,
+      "negative": 22,
+      "positive_ratio": 0.1194,
+      "negative_ratio": 0.1642,
+      "avg_sentiment": -0.1343
+    },
+    {
+      "chapter": 48,
+      "total": 63,
+      "positive": 4,
+      "neutral": 43,
+      "negative": 16,
+      "positive_ratio": 0.0635,
+      "negative_ratio": 0.254,
+      "avg_sentiment": -0.3016
+    },
+    {
+      "chapter": 49,
+      "total": 96,
+      "positive": 15,
+      "neutral": 54,
+      "negative": 27,
+      "positive_ratio": 0.1562,
+      "negative_ratio": 0.2812,
+      "avg_sentiment": -0.3854
+    },
+    {
+      "chapter": 50,
+      "total": 66,
+      "positive": 16,
+      "neutral": 28,
+      "negative": 22,
+      "positive_ratio": 0.2424,
+      "negative_ratio": 0.3333,
+      "avg_sentiment": -0.3485
+    },
+    {
+      "chapter": 51,
+      "total": 71,
+      "positive": 14,
+      "neutral": 35,
+      "negative": 22,
+      "positive_ratio": 0.1972,
+      "negative_ratio": 0.3099,
+      "avg_sentiment": -0.5915
+    },
+    {
+      "chapter": 52,
+      "total": 69,
+      "positive": 6,
+      "neutral": 45,
+      "negative": 18,
+      "positive_ratio": 0.087,
+      "negative_ratio": 0.2609,
+      "avg_sentiment": -0.4493
+    },
+    {
+      "chapter": 53,
+      "total": 98,
+      "positive": 8,
+      "neutral": 67,
+      "negative": 23,
+      "positive_ratio": 0.0816,
+      "negative_ratio": 0.2347,
+      "avg_sentiment": -0.2551
+    },
+    {
+      "chapter": 54,
+      "total": 64,
+      "positive": 8,
+      "neutral": 46,
+      "negative": 10,
+      "positive_ratio": 0.125,
+      "negative_ratio": 0.1562,
+      "avg_sentiment": -0.125
+    },
+    {
+      "chapter": 55,
+      "total": 101,
+      "positive": 12,
+      "neutral": 54,
+      "negative": 35,
+      "positive_ratio": 0.1188,
+      "negative_ratio": 0.3465,
+      "avg_sentiment": -0.5149
+    },
+    {
+      "chapter": 56,
+      "total": 98,
+      "positive": 7,
+      "neutral": 54,
+      "negative": 37,
+      "positive_ratio": 0.0714,
+      "negative_ratio": 0.3776,
+      "avg_sentiment": -0.5102
+    },
+    {
+      "chapter": 57,
+      "total": 62,
+      "positive": 15,
+      "neutral": 33,
+      "negative": 14,
+      "positive_ratio": 0.2419,
+      "negative_ratio": 0.2258,
+      "avg_sentiment": -0.3065
+    },
+    {
+      "chapter": 58,
+      "total": 46,
+      "positive": 4,
+      "neutral": 27,
+      "negative": 15,
+      "positive_ratio": 0.087,
+      "negative_ratio": 0.3261,
+      "avg_sentiment": -1.3913
+    },
+    {
+      "chapter": 59,
+      "total": 96,
+      "positive": 13,
+      "neutral": 64,
+      "negative": 19,
+      "positive_ratio": 0.1354,
+      "negative_ratio": 0.1979,
+      "avg_sentiment": -0.125
+    },
+    {
+      "chapter": 60,
+      "total": 37,
+      "positive": 8,
+      "neutral": 16,
+      "negative": 13,
+      "positive_ratio": 0.2162,
+      "negative_ratio": 0.3514,
+      "avg_sentiment": -0.4054
+    },
+    {
+      "chapter": 61,
+      "total": 48,
+      "positive": 7,
+      "neutral": 31,
+      "negative": 10,
+      "positive_ratio": 0.1458,
+      "negative_ratio": 0.2083,
+      "avg_sentiment": -0.0417
+    },
+    {
+      "chapter": 62,
+      "total": 73,
+      "positive": 8,
+      "neutral": 39,
+      "negative": 26,
+      "positive_ratio": 0.1096,
+      "negative_ratio": 0.3562,
+      "avg_sentiment": -0.4384
+    },
+    {
+      "chapter": 63,
+      "total": 47,
+      "positive": 4,
+      "neutral": 21,
+      "negative": 22,
+      "positive_ratio": 0.0851,
+      "negative_ratio": 0.4681,
+      "avg_sentiment": -0.7447
+    },
+    {
+      "chapter": 64,
+      "total": 54,
+      "positive": 10,
+      "neutral": 29,
+      "negative": 15,
+      "positive_ratio": 0.1852,
+      "negative_ratio": 0.2778,
+      "avg_sentiment": -0.1667
+    },
+    {
+      "chapter": 65,
+      "total": 39,
+      "positive": 5,
+      "neutral": 19,
+      "negative": 15,
+      "positive_ratio": 0.1282,
+      "negative_ratio": 0.3846,
+      "avg_sentiment": -0.641
+    },
+    {
+      "chapter": 66,
+      "total": 37,
+      "positive": 10,
+      "neutral": 11,
+      "negative": 16,
+      "positive_ratio": 0.2703,
+      "negative_ratio": 0.4324,
+      "avg_sentiment": -0.4595
+    },
+    {
+      "chapter": 67,
+      "total": 107,
+      "positive": 5,
+      "neutral": 59,
+      "negative": 43,
+      "positive_ratio": 0.0467,
+      "negative_ratio": 0.4019,
+      "avg_sentiment": -0.6636
+    },
+    {
+      "chapter": 68,
+      "total": 87,
+      "positive": 4,
+      "neutral": 61,
+      "negative": 22,
+      "positive_ratio": 0.046,
+      "negative_ratio": 0.2529,
+      "avg_sentiment": -0.4023
+    },
+    {
+      "chapter": 69,
+      "total": 114,
+      "positive": 13,
+      "neutral": 81,
+      "negative": 20,
+      "positive_ratio": 0.114,
+      "negative_ratio": 0.1754,
+      "avg_sentiment": -0.1228
+    },
+    {
+      "chapter": 70,
+      "total": 60,
+      "positive": 7,
+      "neutral": 29,
+      "negative": 24,
+      "positive_ratio": 0.1167,
+      "negative_ratio": 0.4,
+      "avg_sentiment": -0.5667
+    },
+    {
+      "chapter": 71,
+      "total": 54,
+      "positive": 6,
+      "neutral": 26,
+      "negative": 22,
+      "positive_ratio": 0.1111,
+      "negative_ratio": 0.4074,
+      "avg_sentiment": -1.1481
+    },
+    {
+      "chapter": 72,
+      "total": 74,
+      "positive": 10,
+      "neutral": 35,
+      "negative": 29,
+      "positive_ratio": 0.1351,
+      "negative_ratio": 0.3919,
+      "avg_sentiment": -0.5
+    },
+    {
+      "chapter": 73,
+      "total": 67,
+      "positive": 10,
+      "neutral": 29,
+      "negative": 28,
+      "positive_ratio": 0.1493,
+      "negative_ratio": 0.4179,
+      "avg_sentiment": -0.6269
+    },
+    {
+      "chapter": 74,
+      "total": 108,
+      "positive": 4,
+      "neutral": 65,
+      "negative": 39,
+      "positive_ratio": 0.037,
+      "negative_ratio": 0.3611,
+      "avg_sentiment": -0.8981
+    },
+    {
+      "chapter": 75,
+      "total": 65,
+      "positive": 5,
+      "neutral": 38,
+      "negative": 22,
+      "positive_ratio": 0.0769,
+      "negative_ratio": 0.3385,
+      "avg_sentiment": -0.4615
+    },
+    {
+      "chapter": 76,
+      "total": 78,
+      "positive": 13,
+      "neutral": 40,
+      "negative": 25,
+      "positive_ratio": 0.1667,
+      "negative_ratio": 0.3205,
+      "avg_sentiment": -0.359
+    },
+    {
+      "chapter": 77,
+      "total": 80,
+      "positive": 10,
+      "neutral": 37,
+      "negative": 33,
+      "positive_ratio": 0.125,
+      "negative_ratio": 0.4125,
+      "avg_sentiment": -0.6
+    },
+    {
+      "chapter": 78,
+      "total": 60,
+      "positive": 13,
+      "neutral": 29,
+      "negative": 18,
+      "positive_ratio": 0.2167,
+      "negative_ratio": 0.3,
+      "avg_sentiment": -0.5
+    },
+    {
+      "chapter": 79,
+      "total": 46,
+      "positive": 8,
+      "neutral": 17,
+      "negative": 21,
+      "positive_ratio": 0.1739,
+      "negative_ratio": 0.4565,
+      "avg_sentiment": -0.5435
+    },
+    {
+      "chapter": 80,
+      "total": 83,
+      "positive": 16,
+      "neutral": 44,
+      "negative": 23,
+      "positive_ratio": 0.1928,
+      "negative_ratio": 0.2771,
+      "avg_sentiment": -0.2289
+    },
+    {
+      "chapter": 81,
+      "total": 97,
+      "positive": 4,
+      "neutral": 58,
+      "negative": 35,
+      "positive_ratio": 0.0412,
+      "negative_ratio": 0.3608,
+      "avg_sentiment": -0.6392
+    },
+    {
+      "chapter": 82,
+      "total": 105,
+      "positive": 13,
+      "neutral": 57,
+      "negative": 35,
+      "positive_ratio": 0.1238,
+      "negative_ratio": 0.3333,
+      "avg_sentiment": -0.4381
+    },
+    {
+      "chapter": 83,
+      "total": 82,
+      "positive": 9,
+      "neutral": 46,
+      "negative": 27,
+      "positive_ratio": 0.1098,
+      "negative_ratio": 0.3293,
+      "avg_sentiment": -0.4268
+    },
+    {
+      "chapter": 84,
+      "total": 76,
+      "positive": 2,
+      "neutral": 59,
+      "negative": 15,
+      "positive_ratio": 0.0263,
+      "negative_ratio": 0.1974,
+      "avg_sentiment": -0.3553
+    },
+    {
+      "chapter": 85,
+      "total": 73,
+      "positive": 5,
+      "neutral": 48,
+      "negative": 20,
+      "positive_ratio": 0.0685,
+      "negative_ratio": 0.274,
+      "avg_sentiment": -0.4658
+    },
+    {
+      "chapter": 86,
+      "total": 70,
+      "positive": 6,
+      "neutral": 37,
+      "negative": 27,
+      "positive_ratio": 0.0857,
+      "negative_ratio": 0.3857,
+      "avg_sentiment": -0.7286
+    },
+    {
+      "chapter": 87,
+      "total": 77,
+      "positive": 22,
+      "neutral": 45,
+      "negative": 10,
+      "positive_ratio": 0.2857,
+      "negative_ratio": 0.1299,
+      "avg_sentiment": 0.3247
+    },
+    {
+      "chapter": 88,
+      "total": 54,
+      "positive": 8,
+      "neutral": 36,
+      "negative": 10,
+      "positive_ratio": 0.1481,
+      "negative_ratio": 0.1852,
+      "avg_sentiment": -0.0556
+    },
+    {
+      "chapter": 89,
+      "total": 50,
+      "positive": 3,
+      "neutral": 30,
+      "negative": 17,
+      "positive_ratio": 0.06,
+      "negative_ratio": 0.34,
+      "avg_sentiment": -0.66
+    },
+    {
+      "chapter": 90,
+      "total": 30,
+      "positive": 7,
+      "neutral": 15,
+      "negative": 8,
+      "positive_ratio": 0.2333,
+      "negative_ratio": 0.2667,
+      "avg_sentiment": 0.1
+    },
+    {
+      "chapter": 91,
+      "total": 60,
+      "positive": 9,
+      "neutral": 36,
+      "negative": 15,
+      "positive_ratio": 0.15,
+      "negative_ratio": 0.25,
+      "avg_sentiment": -0.25
+    },
+    {
+      "chapter": 92,
+      "total": 56,
+      "positive": 10,
+      "neutral": 27,
+      "negative": 19,
+      "positive_ratio": 0.1786,
+      "negative_ratio": 0.3393,
+      "avg_sentiment": -0.2679
+    },
+    {
+      "chapter": 93,
+      "total": 83,
+      "positive": 11,
+      "neutral": 59,
+      "negative": 13,
+      "positive_ratio": 0.1325,
+      "negative_ratio": 0.1566,
+      "avg_sentiment": -0.1325
+    },
+    {
+      "chapter": 94,
+      "total": 33,
+      "positive": 2,
+      "neutral": 23,
+      "negative": 8,
+      "positive_ratio": 0.0606,
+      "negative_ratio": 0.2424,
+      "avg_sentiment": -0.3939
+    },
+    {
+      "chapter": 95,
+      "total": 32,
+      "positive": 3,
+      "neutral": 21,
+      "negative": 8,
+      "positive_ratio": 0.0938,
+      "negative_ratio": 0.25,
+      "avg_sentiment": -0.5
+    },
+    {
+      "chapter": 96,
+      "total": 38,
+      "positive": 3,
+      "neutral": 22,
+      "negative": 13,
+      "positive_ratio": 0.0789,
+      "negative_ratio": 0.3421,
+      "avg_sentiment": -0.3421
+    },
+    {
+      "chapter": 97,
+      "total": 47,
+      "positive": 6,
+      "neutral": 25,
+      "negative": 16,
+      "positive_ratio": 0.1277,
+      "negative_ratio": 0.3404,
+      "avg_sentiment": -0.4681
+    },
+    {
+      "chapter": 98,
+      "total": 39,
+      "positive": 8,
+      "neutral": 22,
+      "negative": 9,
+      "positive_ratio": 0.2051,
+      "negative_ratio": 0.2308,
+      "avg_sentiment": -0.1282
+    },
+    {
+      "chapter": 99,
+      "total": 16,
+      "positive": 2,
+      "neutral": 12,
+      "negative": 2,
+      "positive_ratio": 0.125,
+      "negative_ratio": 0.125,
+      "avg_sentiment": 0.125
+    },
+    {
+      "chapter": 100,
+      "total": 18,
+      "positive": 5,
+      "neutral": 10,
+      "negative": 3,
+      "positive_ratio": 0.2778,
+      "negative_ratio": 0.1667,
+      "avg_sentiment": 0.5556
+    }
+  ],
+  "speaker_chapter_curve": [
+    {
+      "speaker": "孙悟空",
+      "chapters": [
+        {
+          "chapter": 1,
+          "count": 4,
+          "avg_sentiment": 0.5
+        },
+        {
+          "chapter": 2,
+          "count": 28,
+          "avg_sentiment": -0.3929
+        },
+        {
+          "chapter": 3,
+          "count": 6,
+          "avg_sentiment": 0.1667
+        },
+        {
+          "chapter": 4,
+          "count": 17,
+          "avg_sentiment": 0.2353
+        },
+        {
+          "chapter": 5,
+          "count": 31,
+          "avg_sentiment": -0.4194
+        },
+        {
+          "chapter": 6,
+          "count": 6,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 7,
+          "count": 6,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 8,
+          "count": 6,
+          "avg_sentiment": 0.6667
+        },
+        {
+          "chapter": 9,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 10,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 11,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 12,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 13,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 14,
+          "count": 43,
+          "avg_sentiment": -0.3023
+        },
+        {
+          "chapter": 15,
+          "count": 46,
+          "avg_sentiment": -0.3261
+        },
+        {
+          "chapter": 16,
+          "count": 45,
+          "avg_sentiment": -0.2889
+        },
+        {
+          "chapter": 17,
+          "count": 43,
+          "avg_sentiment": -0.7442
+        },
+        {
+          "chapter": 18,
+          "count": 62,
+          "avg_sentiment": -0.8548
+        },
+        {
+          "chapter": 19,
+          "count": 28,
+          "avg_sentiment": -1.3929
+        },
+        {
+          "chapter": 20,
+          "count": 38,
+          "avg_sentiment": -0.8947
+        },
+        {
+          "chapter": 21,
+          "count": 51,
+          "avg_sentiment": -0.2353
+        },
+        {
+          "chapter": 22,
+          "count": 30,
+          "avg_sentiment": -0.9333
+        },
+        {
+          "chapter": 23,
+          "count": 28,
+          "avg_sentiment": -0.0714
+        },
+        {
+          "chapter": 24,
+          "count": 37,
+          "avg_sentiment": -0.1622
+        },
+        {
+          "chapter": 25,
+          "count": 32,
+          "avg_sentiment": -0.5312
+        },
+        {
+          "chapter": 26,
+          "count": 46,
+          "avg_sentiment": -0.1522
+        },
+        {
+          "chapter": 27,
+          "count": 31,
+          "avg_sentiment": -1.0323
+        },
+        {
+          "chapter": 28,
+          "count": 16,
+          "avg_sentiment": -1.0625
+        },
+        {
+          "chapter": 29,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 30,
+          "count": 19,
+          "avg_sentiment": 0.0526
+        },
+        {
+          "chapter": 31,
+          "count": 74,
+          "avg_sentiment": -1.0811
+        },
+        {
+          "chapter": 32,
+          "count": 58,
+          "avg_sentiment": -0.7586
+        },
+        {
+          "chapter": 33,
+          "count": 70,
+          "avg_sentiment": -0.1714
+        },
+        {
+          "chapter": 34,
+          "count": 51,
+          "avg_sentiment": -0.1176
+        },
+        {
+          "chapter": 35,
+          "count": 27,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 36,
+          "count": 32,
+          "avg_sentiment": -0.6562
+        },
+        {
+          "chapter": 37,
+          "count": 30,
+          "avg_sentiment": -0.5667
+        },
+        {
+          "chapter": 38,
+          "count": 51,
+          "avg_sentiment": -0.4314
+        },
+        {
+          "chapter": 39,
+          "count": 67,
+          "avg_sentiment": -0.6269
+        },
+        {
+          "chapter": 40,
+          "count": 49,
+          "avg_sentiment": -0.7959
+        },
+        {
+          "chapter": 41,
+          "count": 41,
+          "avg_sentiment": -0.5854
+        },
+        {
+          "chapter": 42,
+          "count": 70,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 43,
+          "count": 46,
+          "avg_sentiment": -0.3696
+        },
+        {
+          "chapter": 44,
+          "count": 100,
+          "avg_sentiment": -0.3
+        },
+        {
+          "chapter": 45,
+          "count": 45,
+          "avg_sentiment": 0.0222
+        },
+        {
+          "chapter": 46,
+          "count": 49,
+          "avg_sentiment": -0.3061
+        },
+        {
+          "chapter": 47,
+          "count": 61,
+          "avg_sentiment": -0.0164
+        },
+        {
+          "chapter": 48,
+          "count": 25,
+          "avg_sentiment": -0.36
+        },
+        {
+          "chapter": 49,
+          "count": 43,
+          "avg_sentiment": -0.2326
+        },
+        {
+          "chapter": 50,
+          "count": 38,
+          "avg_sentiment": -0.4737
+        },
+        {
+          "chapter": 51,
+          "count": 58,
+          "avg_sentiment": -0.7759
+        },
+        {
+          "chapter": 52,
+          "count": 53,
+          "avg_sentiment": -0.4906
+        },
+        {
+          "chapter": 53,
+          "count": 61,
+          "avg_sentiment": -0.2131
+        },
+        {
+          "chapter": 54,
+          "count": 23,
+          "avg_sentiment": -0.6522
+        },
+        {
+          "chapter": 55,
+          "count": 42,
+          "avg_sentiment": -0.5238
+        },
+        {
+          "chapter": 56,
+          "count": 38,
+          "avg_sentiment": -0.3684
+        },
+        {
+          "chapter": 57,
+          "count": 12,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 58,
+          "count": 8,
+          "avg_sentiment": -2.625
+        },
+        {
+          "chapter": 59,
+          "count": 69,
+          "avg_sentiment": -0.1014
+        },
+        {
+          "chapter": 60,
+          "count": 35,
+          "avg_sentiment": -0.4286
+        },
+        {
+          "chapter": 61,
+          "count": 24,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 62,
+          "count": 27,
+          "avg_sentiment": -0.4815
+        },
+        {
+          "chapter": 63,
+          "count": 26,
+          "avg_sentiment": -0.3462
+        },
+        {
+          "chapter": 64,
+          "count": 12,
+          "avg_sentiment": -0.4167
+        },
+        {
+          "chapter": 65,
+          "count": 25,
+          "avg_sentiment": -0.8
+        },
+        {
+          "chapter": 66,
+          "count": 24,
+          "avg_sentiment": -0.2083
+        },
+        {
+          "chapter": 67,
+          "count": 72,
+          "avg_sentiment": -0.6667
+        },
+        {
+          "chapter": 68,
+          "count": 40,
+          "avg_sentiment": -0.425
+        },
+        {
+          "chapter": 69,
+          "count": 73,
+          "avg_sentiment": -0.1918
+        },
+        {
+          "chapter": 70,
+          "count": 56,
+          "avg_sentiment": -0.6071
+        },
+        {
+          "chapter": 71,
+          "count": 44,
+          "avg_sentiment": -1.2727
+        },
+        {
+          "chapter": 72,
+          "count": 36,
+          "avg_sentiment": -0.5556
+        },
+        {
+          "chapter": 73,
+          "count": 51,
+          "avg_sentiment": -0.7255
+        },
+        {
+          "chapter": 74,
+          "count": 79,
+          "avg_sentiment": -0.8481
+        },
+        {
+          "chapter": 75,
+          "count": 60,
+          "avg_sentiment": -0.4833
+        },
+        {
+          "chapter": 76,
+          "count": 45,
+          "avg_sentiment": -0.7556
+        },
+        {
+          "chapter": 77,
+          "count": 30,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 78,
+          "count": 26,
+          "avg_sentiment": -0.4615
+        },
+        {
+          "chapter": 79,
+          "count": 35,
+          "avg_sentiment": -0.5429
+        },
+        {
+          "chapter": 80,
+          "count": 27,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 81,
+          "count": 63,
+          "avg_sentiment": -0.619
+        },
+        {
+          "chapter": 82,
+          "count": 46,
+          "avg_sentiment": -0.6739
+        },
+        {
+          "chapter": 83,
+          "count": 44,
+          "avg_sentiment": -0.2955
+        },
+        {
+          "chapter": 84,
+          "count": 55,
+          "avg_sentiment": -0.2364
+        },
+        {
+          "chapter": 85,
+          "count": 32,
+          "avg_sentiment": -0.6562
+        },
+        {
+          "chapter": 86,
+          "count": 42,
+          "avg_sentiment": -0.6667
+        },
+        {
+          "chapter": 87,
+          "count": 49,
+          "avg_sentiment": 0.3673
+        },
+        {
+          "chapter": 88,
+          "count": 13,
+          "avg_sentiment": 0.0769
+        },
+        {
+          "chapter": 89,
+          "count": 32,
+          "avg_sentiment": -0.875
+        },
+        {
+          "chapter": 90,
+          "count": 23,
+          "avg_sentiment": 0.1739
+        },
+        {
+          "chapter": 91,
+          "count": 24,
+          "avg_sentiment": -0.6667
+        },
+        {
+          "chapter": 92,
+          "count": 37,
+          "avg_sentiment": -0.4324
+        },
+        {
+          "chapter": 93,
+          "count": 27,
+          "avg_sentiment": -0.5185
+        },
+        {
+          "chapter": 94,
+          "count": 17,
+          "avg_sentiment": -0.1765
+        },
+        {
+          "chapter": 95,
+          "count": 26,
+          "avg_sentiment": -0.6154
+        },
+        {
+          "chapter": 96,
+          "count": 6,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 97,
+          "count": 28,
+          "avg_sentiment": -0.7143
+        },
+        {
+          "chapter": 98,
+          "count": 14,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 99,
+          "count": 3,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 100,
+          "count": 3,
+          "avg_sentiment": 0.0
+        }
+      ]
+    },
+    {
+      "speaker": "唐僧",
+      "chapters": [
+        {
+          "chapter": 1,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 2,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 3,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 4,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 5,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 6,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 7,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 8,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 9,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 10,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 11,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 12,
+          "count": 9,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 13,
+          "count": 25,
+          "avg_sentiment": -0.4
+        },
+        {
+          "chapter": 14,
+          "count": 54,
+          "avg_sentiment": -0.5185
+        },
+        {
+          "chapter": 15,
+          "count": 27,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 16,
+          "count": 29,
+          "avg_sentiment": -0.3103
+        },
+        {
+          "chapter": 17,
+          "count": 11,
+          "avg_sentiment": -0.8182
+        },
+        {
+          "chapter": 18,
+          "count": 8,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 19,
+          "count": 25,
+          "avg_sentiment": -0.12
+        },
+        {
+          "chapter": 20,
+          "count": 17,
+          "avg_sentiment": -0.7059
+        },
+        {
+          "chapter": 21,
+          "count": 1,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 22,
+          "count": 13,
+          "avg_sentiment": -0.6923
+        },
+        {
+          "chapter": 23,
+          "count": 15,
+          "avg_sentiment": 0.2
+        },
+        {
+          "chapter": 24,
+          "count": 21,
+          "avg_sentiment": -0.7619
+        },
+        {
+          "chapter": 25,
+          "count": 17,
+          "avg_sentiment": -0.8235
+        },
+        {
+          "chapter": 26,
+          "count": 6,
+          "avg_sentiment": 0.1667
+        },
+        {
+          "chapter": 27,
+          "count": 33,
+          "avg_sentiment": -0.5758
+        },
+        {
+          "chapter": 28,
+          "count": 4,
+          "avg_sentiment": -1.5
+        },
+        {
+          "chapter": 29,
+          "count": 21,
+          "avg_sentiment": -0.4286
+        },
+        {
+          "chapter": 30,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 31,
+          "count": 1,
+          "avg_sentiment": 2.0
+        },
+        {
+          "chapter": 32,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 33,
+          "count": 13,
+          "avg_sentiment": 0.3846
+        },
+        {
+          "chapter": 34,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 35,
+          "count": 2,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 36,
+          "count": 42,
+          "avg_sentiment": -0.3571
+        },
+        {
+          "chapter": 37,
+          "count": 65,
+          "avg_sentiment": -0.6154
+        },
+        {
+          "chapter": 38,
+          "count": 14,
+          "avg_sentiment": -0.4286
+        },
+        {
+          "chapter": 39,
+          "count": 11,
+          "avg_sentiment": 0.1818
+        },
+        {
+          "chapter": 40,
+          "count": 10,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 41,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 42,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 43,
+          "count": 8,
+          "avg_sentiment": -0.375
+        },
+        {
+          "chapter": 44,
+          "count": 3,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 45,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 46,
+          "count": 24,
+          "avg_sentiment": -0.25
+        },
+        {
+          "chapter": 47,
+          "count": 26,
+          "avg_sentiment": -0.3846
+        },
+        {
+          "chapter": 48,
+          "count": 17,
+          "avg_sentiment": -0.2941
+        },
+        {
+          "chapter": 49,
+          "count": 5,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 50,
+          "count": 15,
+          "avg_sentiment": -0.6667
+        },
+        {
+          "chapter": 51,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 52,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 53,
+          "count": 12,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 54,
+          "count": 28,
+          "avg_sentiment": 0.3214
+        },
+        {
+          "chapter": 55,
+          "count": 17,
+          "avg_sentiment": -0.5294
+        },
+        {
+          "chapter": 56,
+          "count": 34,
+          "avg_sentiment": -0.5294
+        },
+        {
+          "chapter": 57,
+          "count": 7,
+          "avg_sentiment": -0.1429
+        },
+        {
+          "chapter": 58,
+          "count": 5,
+          "avg_sentiment": -1.2
+        },
+        {
+          "chapter": 59,
+          "count": 11,
+          "avg_sentiment": 0.3636
+        },
+        {
+          "chapter": 60,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 61,
+          "count": 4,
+          "avg_sentiment": 0.5
+        },
+        {
+          "chapter": 62,
+          "count": 30,
+          "avg_sentiment": -0.4667
+        },
+        {
+          "chapter": 63,
+          "count": 4,
+          "avg_sentiment": -0.25
+        },
+        {
+          "chapter": 64,
+          "count": 30,
+          "avg_sentiment": 0.0333
+        },
+        {
+          "chapter": 65,
+          "count": 6,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 66,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 67,
+          "count": 8,
+          "avg_sentiment": -0.375
+        },
+        {
+          "chapter": 68,
+          "count": 19,
+          "avg_sentiment": -0.3684
+        },
+        {
+          "chapter": 69,
+          "count": 6,
+          "avg_sentiment": 0.6667
+        },
+        {
+          "chapter": 70,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 71,
+          "count": 1,
+          "avg_sentiment": 3.0
+        },
+        {
+          "chapter": 72,
+          "count": 8,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 73,
+          "count": 8,
+          "avg_sentiment": -0.25
+        },
+        {
+          "chapter": 74,
+          "count": 6,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 75,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 76,
+          "count": 5,
+          "avg_sentiment": 2.8
+        },
+        {
+          "chapter": 77,
+          "count": 4,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 78,
+          "count": 23,
+          "avg_sentiment": -0.4783
+        },
+        {
+          "chapter": 79,
+          "count": 3,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 80,
+          "count": 41,
+          "avg_sentiment": -0.1951
+        },
+        {
+          "chapter": 81,
+          "count": 19,
+          "avg_sentiment": -0.1579
+        },
+        {
+          "chapter": 82,
+          "count": 26,
+          "avg_sentiment": -0.1154
+        },
+        {
+          "chapter": 83,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 84,
+          "count": 9,
+          "avg_sentiment": -1.3333
+        },
+        {
+          "chapter": 85,
+          "count": 16,
+          "avg_sentiment": -0.25
+        },
+        {
+          "chapter": 86,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 87,
+          "count": 11,
+          "avg_sentiment": 0.4545
+        },
+        {
+          "chapter": 88,
+          "count": 18,
+          "avg_sentiment": -0.1111
+        },
+        {
+          "chapter": 89,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 90,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 91,
+          "count": 27,
+          "avg_sentiment": 0.2593
+        },
+        {
+          "chapter": 92,
+          "count": 7,
+          "avg_sentiment": 0.2857
+        },
+        {
+          "chapter": 93,
+          "count": 40,
+          "avg_sentiment": 0.025
+        },
+        {
+          "chapter": 94,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 95,
+          "count": 4,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 96,
+          "count": 21,
+          "avg_sentiment": -0.381
+        },
+        {
+          "chapter": 97,
+          "count": 9,
+          "avg_sentiment": 0.2222
+        },
+        {
+          "chapter": 98,
+          "count": 12,
+          "avg_sentiment": -0.6667
+        },
+        {
+          "chapter": 99,
+          "count": 4,
+          "avg_sentiment": 0.25
+        },
+        {
+          "chapter": 100,
+          "count": 9,
+          "avg_sentiment": 0.0
+        }
+      ]
+    },
+    {
+      "speaker": "猪八戒",
+      "chapters": [
+        {
+          "chapter": 1,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 2,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 3,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 4,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 5,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 6,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 7,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 8,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 9,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 10,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 11,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 12,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 13,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 14,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 15,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 16,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 17,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 18,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 19,
+          "count": 11,
+          "avg_sentiment": -0.4545
+        },
+        {
+          "chapter": 20,
+          "count": 18,
+          "avg_sentiment": -0.8333
+        },
+        {
+          "chapter": 21,
+          "count": 20,
+          "avg_sentiment": -0.3
+        },
+        {
+          "chapter": 22,
+          "count": 30,
+          "avg_sentiment": -1.5
+        },
+        {
+          "chapter": 23,
+          "count": 37,
+          "avg_sentiment": -0.2703
+        },
+        {
+          "chapter": 24,
+          "count": 18,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 25,
+          "count": 18,
+          "avg_sentiment": -0.5556
+        },
+        {
+          "chapter": 26,
+          "count": 10,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 27,
+          "count": 12,
+          "avg_sentiment": -1.6667
+        },
+        {
+          "chapter": 28,
+          "count": 10,
+          "avg_sentiment": -0.1
+        },
+        {
+          "chapter": 29,
+          "count": 19,
+          "avg_sentiment": -0.4737
+        },
+        {
+          "chapter": 30,
+          "count": 31,
+          "avg_sentiment": -0.5806
+        },
+        {
+          "chapter": 31,
+          "count": 26,
+          "avg_sentiment": -1.3077
+        },
+        {
+          "chapter": 32,
+          "count": 35,
+          "avg_sentiment": -1.1143
+        },
+        {
+          "chapter": 33,
+          "count": 5,
+          "avg_sentiment": -0.6
+        },
+        {
+          "chapter": 34,
+          "count": 10,
+          "avg_sentiment": -0.3
+        },
+        {
+          "chapter": 35,
+          "count": 7,
+          "avg_sentiment": -0.1429
+        },
+        {
+          "chapter": 36,
+          "count": 8,
+          "avg_sentiment": 0.125
+        },
+        {
+          "chapter": 37,
+          "count": 4,
+          "avg_sentiment": 0.5
+        },
+        {
+          "chapter": 38,
+          "count": 50,
+          "avg_sentiment": -0.24
+        },
+        {
+          "chapter": 39,
+          "count": 17,
+          "avg_sentiment": -0.8235
+        },
+        {
+          "chapter": 40,
+          "count": 13,
+          "avg_sentiment": -0.4615
+        },
+        {
+          "chapter": 41,
+          "count": 21,
+          "avg_sentiment": -0.5238
+        },
+        {
+          "chapter": 42,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 43,
+          "count": 7,
+          "avg_sentiment": -0.8571
+        },
+        {
+          "chapter": 44,
+          "count": 10,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 45,
+          "count": 7,
+          "avg_sentiment": 0.4286
+        },
+        {
+          "chapter": 46,
+          "count": 13,
+          "avg_sentiment": 0.2308
+        },
+        {
+          "chapter": 47,
+          "count": 44,
+          "avg_sentiment": -0.1364
+        },
+        {
+          "chapter": 48,
+          "count": 17,
+          "avg_sentiment": -0.2353
+        },
+        {
+          "chapter": 49,
+          "count": 25,
+          "avg_sentiment": -0.36
+        },
+        {
+          "chapter": 50,
+          "count": 10,
+          "avg_sentiment": 0.2
+        },
+        {
+          "chapter": 51,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 52,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 53,
+          "count": 15,
+          "avg_sentiment": -0.2667
+        },
+        {
+          "chapter": 54,
+          "count": 7,
+          "avg_sentiment": -0.2857
+        },
+        {
+          "chapter": 55,
+          "count": 28,
+          "avg_sentiment": -0.3929
+        },
+        {
+          "chapter": 56,
+          "count": 23,
+          "avg_sentiment": -0.7391
+        },
+        {
+          "chapter": 57,
+          "count": 13,
+          "avg_sentiment": 0.0769
+        },
+        {
+          "chapter": 58,
+          "count": 9,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 59,
+          "count": 13,
+          "avg_sentiment": -0.6154
+        },
+        {
+          "chapter": 60,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 61,
+          "count": 14,
+          "avg_sentiment": -0.2857
+        },
+        {
+          "chapter": 62,
+          "count": 14,
+          "avg_sentiment": -0.3571
+        },
+        {
+          "chapter": 63,
+          "count": 16,
+          "avg_sentiment": -1.25
+        },
+        {
+          "chapter": 64,
+          "count": 10,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 65,
+          "count": 4,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 66,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 67,
+          "count": 24,
+          "avg_sentiment": -0.7083
+        },
+        {
+          "chapter": 68,
+          "count": 25,
+          "avg_sentiment": -0.44
+        },
+        {
+          "chapter": 69,
+          "count": 26,
+          "avg_sentiment": -0.1538
+        },
+        {
+          "chapter": 70,
+          "count": 3,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 71,
+          "count": 3,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 72,
+          "count": 23,
+          "avg_sentiment": -0.6957
+        },
+        {
+          "chapter": 73,
+          "count": 4,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 74,
+          "count": 22,
+          "avg_sentiment": -1.2273
+        },
+        {
+          "chapter": 75,
+          "count": 2,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 76,
+          "count": 26,
+          "avg_sentiment": -0.2308
+        },
+        {
+          "chapter": 77,
+          "count": 21,
+          "avg_sentiment": -0.619
+        },
+        {
+          "chapter": 78,
+          "count": 6,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 79,
+          "count": 6,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 80,
+          "count": 11,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 81,
+          "count": 14,
+          "avg_sentiment": -1.2143
+        },
+        {
+          "chapter": 82,
+          "count": 31,
+          "avg_sentiment": -0.3871
+        },
+        {
+          "chapter": 83,
+          "count": 9,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 84,
+          "count": 11,
+          "avg_sentiment": -0.1818
+        },
+        {
+          "chapter": 85,
+          "count": 22,
+          "avg_sentiment": -0.5455
+        },
+        {
+          "chapter": 86,
+          "count": 22,
+          "avg_sentiment": -0.6364
+        },
+        {
+          "chapter": 87,
+          "count": 7,
+          "avg_sentiment": -0.1429
+        },
+        {
+          "chapter": 88,
+          "count": 16,
+          "avg_sentiment": -0.25
+        },
+        {
+          "chapter": 89,
+          "count": 10,
+          "avg_sentiment": -0.9
+        },
+        {
+          "chapter": 90,
+          "count": 3,
+          "avg_sentiment": -0.6667
+        },
+        {
+          "chapter": 91,
+          "count": 5,
+          "avg_sentiment": -0.8
+        },
+        {
+          "chapter": 92,
+          "count": 6,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 93,
+          "count": 13,
+          "avg_sentiment": 0.1538
+        },
+        {
+          "chapter": 94,
+          "count": 10,
+          "avg_sentiment": -0.7
+        },
+        {
+          "chapter": 95,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 96,
+          "count": 6,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 97,
+          "count": 6,
+          "avg_sentiment": -1.1667
+        },
+        {
+          "chapter": 98,
+          "count": 6,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 99,
+          "count": 3,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 100,
+          "count": 3,
+          "avg_sentiment": -0.3333
+        }
+      ]
+    },
+    {
+      "speaker": "沙僧",
+      "chapters": [
+        {
+          "chapter": 1,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 2,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 3,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 4,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 5,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 6,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 7,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 8,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 9,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 10,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 11,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 12,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 13,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 14,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 15,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 16,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 17,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 18,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 19,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 20,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 21,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 22,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 23,
+          "count": 5,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 24,
+          "count": 10,
+          "avg_sentiment": -0.1
+        },
+        {
+          "chapter": 25,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 26,
+          "count": 1,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 27,
+          "count": 1,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 28,
+          "count": 10,
+          "avg_sentiment": -0.1
+        },
+        {
+          "chapter": 29,
+          "count": 4,
+          "avg_sentiment": 0.25
+        },
+        {
+          "chapter": 30,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 31,
+          "count": 9,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 32,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 33,
+          "count": 5,
+          "avg_sentiment": -1.8
+        },
+        {
+          "chapter": 34,
+          "count": 7,
+          "avg_sentiment": -0.1429
+        },
+        {
+          "chapter": 35,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 36,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 37,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 38,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 39,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 40,
+          "count": 3,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 41,
+          "count": 17,
+          "avg_sentiment": -0.7059
+        },
+        {
+          "chapter": 42,
+          "count": 4,
+          "avg_sentiment": -0.25
+        },
+        {
+          "chapter": 43,
+          "count": 20,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 44,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 45,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 46,
+          "count": 5,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 47,
+          "count": 3,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 48,
+          "count": 4,
+          "avg_sentiment": -0.25
+        },
+        {
+          "chapter": 49,
+          "count": 18,
+          "avg_sentiment": -1.0556
+        },
+        {
+          "chapter": 50,
+          "count": 3,
+          "avg_sentiment": 1.0
+        },
+        {
+          "chapter": 51,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 52,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 53,
+          "count": 10,
+          "avg_sentiment": -0.8
+        },
+        {
+          "chapter": 54,
+          "count": 6,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 55,
+          "count": 11,
+          "avg_sentiment": -0.4545
+        },
+        {
+          "chapter": 56,
+          "count": 3,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 57,
+          "count": 15,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 58,
+          "count": 11,
+          "avg_sentiment": -1.3636
+        },
+        {
+          "chapter": 59,
+          "count": 3,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 60,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 61,
+          "count": 2,
+          "avg_sentiment": 1.0
+        },
+        {
+          "chapter": 62,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 63,
+          "count": 1,
+          "avg_sentiment": -5.0
+        },
+        {
+          "chapter": 64,
+          "count": 2,
+          "avg_sentiment": -1.5
+        },
+        {
+          "chapter": 65,
+          "count": 3,
+          "avg_sentiment": -0.6667
+        },
+        {
+          "chapter": 66,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 67,
+          "count": 3,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 68,
+          "count": 3,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 69,
+          "count": 9,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 70,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 71,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 72,
+          "count": 7,
+          "avg_sentiment": -0.1429
+        },
+        {
+          "chapter": 73,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 74,
+          "count": 1,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 75,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 76,
+          "count": 2,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 77,
+          "count": 6,
+          "avg_sentiment": -0.1667
+        },
+        {
+          "chapter": 78,
+          "count": 5,
+          "avg_sentiment": -0.8
+        },
+        {
+          "chapter": 79,
+          "count": 2,
+          "avg_sentiment": -1.5
+        },
+        {
+          "chapter": 80,
+          "count": 4,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 81,
+          "count": 1,
+          "avg_sentiment": -3.0
+        },
+        {
+          "chapter": 82,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 83,
+          "count": 6,
+          "avg_sentiment": -0.6667
+        },
+        {
+          "chapter": 84,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 85,
+          "count": 3,
+          "avg_sentiment": 1.0
+        },
+        {
+          "chapter": 86,
+          "count": 5,
+          "avg_sentiment": -1.8
+        },
+        {
+          "chapter": 87,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 88,
+          "count": 7,
+          "avg_sentiment": 0.2857
+        },
+        {
+          "chapter": 89,
+          "count": 8,
+          "avg_sentiment": 0.5
+        },
+        {
+          "chapter": 90,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 91,
+          "count": 4,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 92,
+          "count": 4,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 93,
+          "count": 3,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 94,
+          "count": 5,
+          "avg_sentiment": -0.6
+        },
+        {
+          "chapter": 95,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 96,
+          "count": 5,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 97,
+          "count": 3,
+          "avg_sentiment": -1.3333
+        },
+        {
+          "chapter": 98,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 99,
+          "count": 4,
+          "avg_sentiment": -0.25
+        },
+        {
+          "chapter": 100,
+          "count": 0,
+          "avg_sentiment": 0
+        }
+      ]
+    },
+    {
+      "speaker": "观音",
+      "chapters": [
+        {
+          "chapter": 1,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 2,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 3,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 4,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 5,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 6,
+          "count": 9,
+          "avg_sentiment": -0.5556
+        },
+        {
+          "chapter": 7,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 8,
+          "count": 30,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 9,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 10,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 11,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 12,
+          "count": 27,
+          "avg_sentiment": 0.3704
+        },
+        {
+          "chapter": 13,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 14,
+          "count": 2,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 15,
+          "count": 12,
+          "avg_sentiment": -0.0833
+        },
+        {
+          "chapter": 16,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 17,
+          "count": 17,
+          "avg_sentiment": -0.4706
+        },
+        {
+          "chapter": 18,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 19,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 20,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 21,
+          "count": 2,
+          "avg_sentiment": -2.0
+        },
+        {
+          "chapter": 22,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 23,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 24,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 25,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 26,
+          "count": 12,
+          "avg_sentiment": 0.1667
+        },
+        {
+          "chapter": 27,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 28,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 29,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 30,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 31,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 32,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 33,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 34,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 35,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 36,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 37,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 38,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 39,
+          "count": 3,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 40,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 41,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 42,
+          "count": 33,
+          "avg_sentiment": -0.1818
+        },
+        {
+          "chapter": 43,
+          "count": 1,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 44,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 45,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 46,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 47,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 48,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 49,
+          "count": 4,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 50,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 51,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 52,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 53,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 54,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 55,
+          "count": 3,
+          "avg_sentiment": -1.6667
+        },
+        {
+          "chapter": 56,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 57,
+          "count": 13,
+          "avg_sentiment": -1.3077
+        },
+        {
+          "chapter": 58,
+          "count": 5,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 59,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 60,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 61,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 62,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 63,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 64,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 65,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 66,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 67,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 68,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 69,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 70,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 71,
+          "count": 6,
+          "avg_sentiment": -1.5
+        },
+        {
+          "chapter": 72,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 73,
+          "count": 3,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 74,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 75,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 76,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 77,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 78,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 79,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 80,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 81,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 82,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 83,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 84,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 85,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 86,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 87,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 88,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 89,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 90,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 91,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 92,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 93,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 94,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 95,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 96,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 97,
+          "count": 1,
+          "avg_sentiment": 7.0
+        },
+        {
+          "chapter": 98,
+          "count": 1,
+          "avg_sentiment": 2.0
+        },
+        {
+          "chapter": 99,
+          "count": 2,
+          "avg_sentiment": 1.5
+        },
+        {
+          "chapter": 100,
+          "count": 0,
+          "avg_sentiment": 0
+        }
+      ]
+    }
+  ],
+  "top_sentiment_words": {
+    "positive": [
+      {
+        "word": "圣",
+        "count": 407
+      },
+      {
+        "word": "救",
+        "count": 314
+      },
+      {
+        "word": "化",
+        "count": 257
+      },
+      {
+        "word": "善",
+        "count": 151
+      },
+      {
+        "word": "功",
+        "count": 138
+      },
+      {
+        "word": "护",
+        "count": 111
+      },
+      {
+        "word": "恩",
+        "count": 85
+      },
+      {
+        "word": "贤",
+        "count": 83
+      },
+      {
+        "word": "信",
+        "count": 83
+      },
+      {
+        "word": "喜",
+        "count": 70
+      },
+      {
+        "word": "慈",
+        "count": 59
+      },
+      {
+        "word": "寿",
+        "count": 55
+      },
+      {
+        "word": "妙",
+        "count": 48
+      },
+      {
+        "word": "果然",
+        "count": 43
+      },
+      {
+        "word": "度",
+        "count": 42
+      },
+      {
+        "word": "福",
+        "count": 40
+      },
+      {
+        "word": "德",
+        "count": 39
+      },
+      {
+        "word": "怜",
+        "count": 32
+      },
+      {
+        "word": "乐",
+        "count": 29
+      },
+      {
+        "word": "吉",
+        "count": 29
+      },
+      {
+        "word": "欢",
+        "count": 24
+      },
+      {
+        "word": "有理",
+        "count": 24
+      },
+      {
+        "word": "善哉",
+        "count": 20
+      },
+      {
+        "word": "义",
+        "count": 19
+      },
+      {
+        "word": "甚好",
+        "count": 15
+      },
+      {
+        "word": "祥",
+        "count": 15
+      },
+      {
+        "word": "奉旨",
+        "count": 9
+      },
+      {
+        "word": "好说",
+        "count": 8
+      },
+      {
+        "word": "欢喜",
+        "count": 6
+      },
+      {
+        "word": "忠",
+        "count": 6
+      },
+      {
+        "word": "好个",
+        "count": 5
+      },
+      {
+        "word": "允了",
+        "count": 3
+      },
+      {
+        "word": "笑道",
+        "count": 3
+      },
+      {
+        "word": "甚妙",
+        "count": 2
+      },
+      {
+        "word": "遵命",
+        "count": 2
+      },
+      {
+        "word": "恩德",
+        "count": 2
+      },
+      {
+        "word": "护佑",
+        "count": 2
+      },
+      {
+        "word": "佑",
+        "count": 2
+      },
+      {
+        "word": "妙哉",
+        "count": 2
+      },
+      {
+        "word": "功德",
+        "count": 2
+      },
+      {
+        "word": "喜悦",
+        "count": 1
+      },
+      {
+        "word": "庇",
+        "count": 1
+      },
+      {
+        "word": "领旨",
+        "count": 1
+      },
+      {
+        "word": "救护",
+        "count": 1
+      },
+      {
+        "word": "领命",
+        "count": 1
+      },
+      {
+        "word": "甚善",
+        "count": 1
+      }
+    ],
+    "negative": [
+      {
+        "word": "妖",
+        "count": 689
+      },
+      {
+        "word": "打",
+        "count": 661
+      },
+      {
+        "word": "怪",
+        "count": 520
+      },
+      {
+        "word": "难",
+        "count": 259
+      },
+      {
+        "word": "死",
+        "count": 249
+      },
+      {
+        "word": "魔",
+        "count": 209
+      },
+      {
+        "word": "怕",
+        "count": 188
+      },
+      {
+        "word": "罪",
+        "count": 160
+      },
+      {
+        "word": "杀",
+        "count": 138
+      },
+      {
+        "word": "苦",
+        "count": 132
+      },
+      {
+        "word": "鬼",
+        "count": 83
+      },
+      {
+        "word": "胡",
+        "count": 78
+      },
+      {
+        "word": "哭",
+        "count": 77
+      },
+      {
+        "word": "破",
+        "count": 75
+      },
+      {
+        "word": "邪",
+        "count": 74
+      },
+      {
+        "word": "凶",
+        "count": 73
+      },
+      {
+        "word": "妖魔",
+        "count": 69
+      },
+      {
+        "word": "恼",
+        "count": 65
+      },
+      {
+        "word": "惊",
+        "count": 62
+      },
+      {
+        "word": "瞒",
+        "count": 58
+      },
+      {
+        "word": "恶",
+        "count": 58
+      },
+      {
+        "word": "非",
+        "count": 58
+      },
+      {
+        "word": "失",
+        "count": 50
+      },
+      {
+        "word": "灭",
+        "count": 47
+      },
+      {
+        "word": "骂",
+        "count": 47
+      },
+      {
+        "word": "败",
+        "count": 47
+      },
+      {
+        "word": "悲",
+        "count": 46
+      },
+      {
+        "word": "欺",
+        "count": 46
+      },
+      {
+        "word": "毒",
+        "count": 46
+      },
+      {
+        "word": "祸",
+        "count": 46
+      },
+      {
+        "word": "错",
+        "count": 46
+      },
+      {
+        "word": "灾",
+        "count": 45
+      },
+      {
+        "word": "坏",
+        "count": 45
+      },
+      {
+        "word": "胡说",
+        "count": 43
+      },
+      {
+        "word": "打杀",
+        "count": 37
+      },
+      {
+        "word": "痛",
+        "count": 34
+      },
+      {
+        "word": "妖邪",
+        "count": 31
+      },
+      {
+        "word": "逃",
+        "count": 28
+      },
+      {
+        "word": "恨",
+        "count": 28
+      },
+      {
+        "word": "骗",
+        "count": 24
+      },
+      {
+        "word": "负",
+        "count": 23
+      },
+      {
+        "word": "混",
+        "count": 22
+      },
+      {
+        "word": "损",
+        "count": 21
+      },
+      {
+        "word": "喝",
+        "count": 18
+      },
+      {
+        "word": "否",
+        "count": 17
+      },
+      {
+        "word": "惧",
+        "count": 16
+      },
+      {
+        "word": "险",
+        "count": 16
+      },
+      {
+        "word": "怒",
+        "count": 16
+      },
+      {
+        "word": "慌",
+        "count": 15
+      },
+      {
+        "word": "怨",
+        "count": 15
+      }
+    ]
+  }
+}

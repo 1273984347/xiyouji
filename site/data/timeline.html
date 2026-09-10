@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-etG7TVB7oQNaV5AZuTRCI9Xa4o7vMpjlpUAEqRyoJNc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-BVG9Pafrt3dnKBWbMU5XdDlu77X/UJYSFgtydAXxwIE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>交互式时间线 · 详解西游记</title>
@@ -10,7 +10,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -37,35 +37,35 @@
     font-style: normal;
     font-weight: 200 900;
     font-display: optional;
-    src: url('static/fonts/noto-serif-sc-shared.woff2') format('woff2-variations');
+    src: url('../static/fonts/noto-serif-sc-shared.woff2') format('woff2-variations');
 }
 @font-face {
     font-family: 'Noto Sans SC';
     font-style: normal;
     font-weight: 400;
     font-display: optional;
-    src: url('static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
 }
 @font-face {
     font-family: 'Noto Sans SC';
     font-style: normal;
     font-weight: 500;
     font-display: optional;
-    src: url('static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
 }
 @font-face {
     font-family: 'JetBrains Mono';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
 }
 @font-face {
     font-family: 'JetBrains Mono';
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url('static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
 }
 
 :root {
@@ -386,7 +386,7 @@ h4 { font-size: 18px; font-weight: 500; }
 /* ===== Hero（数据页通用） ===== */
 .hero {
     background: var(--dark);
-    background-image: url('static/images/ink-mountains-hero.webp');
+    background-image: url('../static/images/ink-mountains-hero.webp');
     background-size: cover;
     background-position: center 70%;
     background-blend-mode: soft-light;
@@ -1031,12 +1031,6 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-            /* W557: kpi-row 基类补齐（标记存在但基类规则缺失致统计条纵向裸排） */
-        .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin: 18px 0; }
-        .kpi-row .kpi-card { background: var(--paper-warm); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 10px; padding: 14px 16px; }
-        .kpi-row .kpi-card .label { font-size: 0.78rem; color: var(--ink-soft); letter-spacing: 0.04em; }
-        .kpi-row .kpi-card .value { font-size: 1.9rem; font-weight: 700; color: var(--accent); font-family: var(--font-mono, monospace); line-height: 1.15; }
-        .kpi-row .kpi-card .desc { font-size: 0.8rem; color: var(--ink-soft); margin-top: 4px; }
     </style>
 <style>
         /* e-track-exempt: chart-data-colors 1 处 */
@@ -1529,11 +1523,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     }
 
     async function loadData() {
-        const base = '../../scripts/output/data/';
+        const base = 'json/';
         const timeline = await fetchJson(base + 'timeline_events.json', 'timeline');
         if (fetchStatus.anyFetched) {
             document.getElementById('dataSource').innerHTML =
-                '数据源：实时加载自 <code>scripts/output/data/</code>（运行于 http server 模式）';
+                '数据源：实时加载自 <code>json/</code>（运行于 http server 模式）';
         }
         return Array.isArray(timeline) ? timeline : (timeline.timeline || EMBEDDED_DATA.timeline);
     }

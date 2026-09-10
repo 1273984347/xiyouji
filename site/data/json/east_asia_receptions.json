@@ -1,0 +1,149 @@
+[
+  {
+    "country": "日本",
+    "title": "《最游记》（峰仓かずや）",
+    "year": 1997,
+    "author": "峰仓かずや",
+    "medium": "漫画·动画",
+    "amplified_elements": [
+      "美少年化",
+      "现代背景",
+      "耽美基情",
+      "热血"
+    ],
+    "axis_loyalty": 2,
+    "axis_seriousness": 6,
+    "feature": "将悟空/八戒/沙僧/三藏全部美少年化·现代异界设定·BL风",
+    "influence": "日本少女漫西游代表·影响中国同人圈"
+  },
+  {
+    "country": "日本",
+    "title": "《龙珠》（鸟山明）",
+    "year": 1984,
+    "author": "鸟山明",
+    "medium": "漫画·动画",
+    "amplified_elements": [
+      "热血",
+      "战斗力数值化",
+      "赛亚人",
+      "宇宙扩展"
+    ],
+    "axis_loyalty": 2,
+    "axis_seriousness": 5,
+    "feature": "借用悟空/筋斗云/如意棒设定·完全宇宙热血化",
+    "influence": "全球影响最大的西游衍生作品·日本国民级漫画"
+  },
+  {
+    "country": "日本",
+    "title": "《大猿王》（日本成人向）",
+    "year": 2001,
+    "author": "山田一巳",
+    "medium": "成人漫画",
+    "amplified_elements": [
+      "情色",
+      "暴力",
+      "暗黑"
+    ],
+    "axis_loyalty": 1,
+    "axis_seriousness": 3,
+    "feature": "日本成人向解构·情色暴力化",
+    "influence": "成人向西游解构"
+  },
+  {
+    "country": "韩国",
+    "title": "《魔法千字文》（韩国漫画）",
+    "year": 2004,
+    "author": "韩国漫画家",
+    "medium": "儿童漫画",
+    "amplified_elements": [
+      "教育",
+      "汉字学习",
+      "儿童向"
+    ],
+    "axis_loyalty": 5,
+    "axis_seriousness": 4,
+    "feature": "以西游为框架·韩国儿童汉字学习漫画",
+    "influence": "韩国本土化教育应用"
+  },
+  {
+    "country": "韩国",
+    "title": "《花游记》（韩国电视剧）",
+    "year": 2017,
+    "author": "朴洪均",
+    "medium": "电视剧",
+    "amplified_elements": [
+      "爱情",
+      "现代都市",
+      "奇幻",
+      "三角恋"
+    ],
+    "axis_loyalty": 2,
+    "axis_seriousness": 5,
+    "feature": "现代都市爱情奇幻·悟空与三藏女体化的爱情线",
+    "influence": "韩国爱情奇幻剧代表作"
+  },
+  {
+    "country": "越南",
+    "title": "《西游记》（越南本土改编）",
+    "year": "1990s",
+    "author": "越南本土化",
+    "medium": "戏剧·说唱",
+    "amplified_elements": [
+      "本土化",
+      "幽默",
+      "越南民俗"
+    ],
+    "axis_loyalty": 7,
+    "axis_seriousness": 4,
+    "feature": "越南本地戏曲改编·融入越南民俗与幽默",
+    "influence": "东南亚西游文化接受"
+  },
+  {
+    "country": "美国",
+    "title": "《美猴王传奇》（美国改编）",
+    "year": 2023,
+    "author": "Netflix·周星驰监制",
+    "medium": "动画电影",
+    "amplified_elements": [
+      "美式动画",
+      "英语配音",
+      "简化叙事"
+    ],
+    "axis_loyalty": 5,
+    "axis_seriousness": 4,
+    "feature": "Netflix面向全球·美式动画简化叙事",
+    "influence": "西方主流流媒体西游尝试"
+  },
+  {
+    "country": "美国",
+    "title": "《荒原》（AMC美剧）",
+    "year": 2015,
+    "author": "AMC",
+    "medium": "美剧",
+    "amplified_elements": [
+      "后启示录",
+      "武打",
+      "西方视角"
+    ],
+    "axis_loyalty": 3,
+    "axis_seriousness": 6,
+    "feature": "后启示录背景下·借西游之名·实为美式武打剧",
+    "influence": "美剧对西游的西式重构"
+  },
+  {
+    "country": "澳大利亚",
+    "title": "《猴》（ABC改编剧）",
+    "year": 1979,
+    "author": "ABC",
+    "medium": "电视剧",
+    "amplified_elements": [
+      "英语",
+      "幽默",
+      "本土化"
+    ],
+    "axis_loyalty": 4,
+    "axis_seriousness": 3,
+    "feature": "ABC改编剧·英语·幽默化·影响澳洲英语圈",
+    "influence": "西方早期西游接受"
+  }
+]

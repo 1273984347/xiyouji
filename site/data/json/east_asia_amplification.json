@@ -1,0 +1,86 @@
+[
+  {
+    "country": "日本",
+    "element": "美少年化",
+    "intensity": 10,
+    "representative_work": "《最游记》",
+    "feature": "将师徒四人全部美少年化·BL耽美风·现代都市背景"
+  },
+  {
+    "country": "日本",
+    "element": "热血战斗",
+    "intensity": 10,
+    "representative_work": "《龙珠》",
+    "feature": "完全宇宙化热血·战斗力数值化·影响全球"
+  },
+  {
+    "country": "日本",
+    "element": "暗黑解构",
+    "intensity": 7,
+    "representative_work": "《大猿王》",
+    "feature": "成人向·情色暴力·日本成人化西游"
+  },
+  {
+    "country": "韩国",
+    "element": "爱情化",
+    "intensity": 9,
+    "representative_work": "《花游记》",
+    "feature": "现代都市爱情·悟空与女三藏的爱情线"
+  },
+  {
+    "country": "韩国",
+    "element": "教育化",
+    "intensity": 8,
+    "representative_work": "《魔法千字文》",
+    "feature": "儿童汉字学习·以西游为框架"
+  },
+  {
+    "country": "越南",
+    "element": "本土化幽默",
+    "intensity": 7,
+    "representative_work": "越南本土戏剧",
+    "feature": "融入越南民俗·幽默化·本土戏曲改编"
+  },
+  {
+    "country": "中国",
+    "element": "暗黑解构",
+    "intensity": 8,
+    "representative_work": "《黑神话：悟空》《西游·降魔篇》",
+    "feature": "近年最严肃暗黑的本土解构"
+  },
+  {
+    "country": "中国",
+    "element": "网络文学热血",
+    "intensity": 9,
+    "representative_work": "《悟空传》《大猿王》",
+    "feature": "网络文学反西游·热血玄幻"
+  },
+  {
+    "country": "中国",
+    "element": "忠于原著",
+    "intensity": 10,
+    "representative_work": "央视1986版",
+    "feature": "最忠于原著·影响几代华人认知"
+  },
+  {
+    "country": "美国",
+    "element": "简化叙事",
+    "intensity": 8,
+    "representative_work": "Netflix《美猴王传奇》",
+    "feature": "面向英语主流·美式动画简化叙事"
+  },
+  {
+    "country": "美国",
+    "element": "西方视角重构",
+    "intensity": 7,
+    "representative_work": "AMC《荒原》",
+    "feature": "后启示录·借名不借魂·西方武打"
+  },
+  {
+    "country": "澳大利亚",
+    "element": "本土化幽默",
+    "intensity": 6,
+    "representative_work": "ABC《猴》",
+    "feature": "英语·幽默化·影响澳洲英语圈"
+  }
+]

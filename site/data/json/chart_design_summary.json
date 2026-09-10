@@ -1,0 +1,12 @@
+{
+  "domino_chains": 5,
+  "domino_total": 16,
+  "spiral_stages": 5,
+  "max_wukong_offset": 1.5,
+  "max_tang_offset": 0.4,
+  "monster_schedules": 6,
+  "avg_stress": 6.08,
+  "avg_ease": 5.33,
+  "most_stressed": "白骨精",
+  "most_ease": "青牛精"
+}

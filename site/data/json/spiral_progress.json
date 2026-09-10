@@ -1,0 +1,89 @@
+{
+  "design_name": "螺旋式修心进度条",
+  "design_principle": "阿基米德螺旋线·圆心是启程·外圈是成佛·每一圈代表一个心性阶段·轨迹偏移表示心性波动",
+  "core_insight": "将'心猿意马'的抽象概念·转化为可量化的视觉轨迹",
+  "spiral_stages": [
+    {
+      "stage_id": "S1",
+      "stage_name": "启程期·心猿初动",
+      "chapter_range": "第 1-13 回",
+      "loop_number": 1,
+      "wukong_emotion": "躁动·桀骜",
+      "tang_monk_emotion": "虔诚·谨慎",
+      "wukong_offset": 0.8,
+      "tang_monk_offset": 0.2,
+      "key_events": [
+        "五行山下·皈依佛门",
+        "收白龙马",
+        "收八戒沙僧"
+      ],
+      "stage_summary": "悟空刚开始收敛心性·但桀骜未改"
+    },
+    {
+      "stage_id": "S2",
+      "stage_name": "风暴期·心猿意马",
+      "chapter_range": "第 14-30 回",
+      "loop_number": 2,
+      "wukong_emotion": "怒火·傲慢",
+      "tang_monk_emotion": "失望·摇摆",
+      "wukong_offset": 1.5,
+      "tang_monk_offset": 0.4,
+      "key_events": [
+        "三打白骨精·被赶走",
+        "黄袍怪事件·回归"
+      ],
+      "stage_summary": "悟空被赶走·心性剧烈波动·是螺旋的最大偏移点之一"
+    },
+    {
+      "stage_id": "S3",
+      "stage_name": "规范期·心猿初定",
+      "chapter_range": "第 31-58 回",
+      "loop_number": 3,
+      "wukong_emotion": "克制·谨慎",
+      "tang_monk_emotion": "信任·稳定",
+      "wukong_offset": 0.6,
+      "tang_monk_offset": 0.3,
+      "key_events": [
+        "红孩儿事件",
+        "车迟国斗法",
+        "真假美猴王"
+      ],
+      "stage_summary": "六耳猕猴被打死后·悟空心魔被消除·心性稳定"
+    },
+    {
+      "stage_id": "S4",
+      "stage_name": "成熟期·心猿归正",
+      "chapter_range": "第 59-77 回",
+      "loop_number": 4,
+      "wukong_emotion": "平和·智慧",
+      "tang_monk_emotion": "依赖·平和",
+      "wukong_offset": 0.3,
+      "tang_monk_offset": 0.2,
+      "key_events": [
+        "火焰山借扇",
+        "狮驼岭大战",
+        "比丘国救小孩"
+      ],
+      "stage_summary": "悟空心性趋于平和·团队进入最佳状态"
+    },
+    {
+      "stage_id": "S5",
+      "stage_name": "表现期·心猿成佛",
+      "chapter_range": "第 78-100 回",
+      "loop_number": 5,
+      "wukong_emotion": "圆满·觉悟",
+      "tang_monk_emotion": "圆满·觉悟",
+      "wukong_offset": 0.1,
+      "tang_monk_offset": 0.1,
+      "key_events": [
+        "无底洞老鼠精",
+        "玉华州传艺",
+        "凌云渡脱胎·成佛"
+      ],
+      "stage_summary": "师徒皆成正果·螺旋到达最外圈·心性归零"
+    }
+  ],
+  "max_offset_wukong": 1.5,
+  "max_offset_tang": 0.4,
+  "design_innovation": "心电图与曼陀罗的结合·用极简黑白线条·螺旋线上点缀情节符号"
+}

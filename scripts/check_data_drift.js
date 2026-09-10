@@ -126,6 +126,9 @@ function main() {
         candidates.add(path.join(ROOT, ref));
       } else if (ref.startsWith('dataset/')) {
         candidates.add(path.join(ROOT, ref));
+      } else if (/^(?:\.\.\/)?(?:\.\/)?data\/json\/[A-Za-z0-9_/.-]+\.json$/.test(ref) || /^json\/[A-Za-z0-9_/.-]+\.json$/.test(ref)) {
+        // W563：A-3 改写后的部署副本形态（site/data/json/）→ 对账回原件
+        candidates.add(path.join(OUT_DATA_DIR, ref.split('/').pop()));
       } else if (ref.includes('/')) {
         // 相对引用（如 ../../scripts/output/data/xxx.json 或 output/data/xxx.json）
         const cleaned = ref.replace(/^\.\.\/\.\.\//, '').replace(/^\.\.\//, '').replace(/^output\/data\//, 'scripts/output/data/');
@@ -137,6 +140,11 @@ function main() {
     const name = pg.replace(/-view\.html$/, '').replace(/\.html$/, '');
     const dset = path.join(DATASET_DIR, name + '.json');
     if (fs.existsSync(dset)) candidates.add(dset);
+    // W563：EMBEDDED 单源页（无 fetch）回退——页名 kebab→snake 同名原件存在即纳入对账
+    if (!candidates.size || ![...candidates].some((p) => p.startsWith(OUT_DATA_DIR))) {
+      const snake = path.join(OUT_DATA_DIR, name.replace(/-/g, '_') + '.json');
+      if (fs.existsSync(snake)) candidates.add(snake);
+    }
 
     const jsons = [...candidates].filter((p) => fs.existsSync(p));
     if (!jsons.length) {
@@ -173,6 +181,42 @@ function main() {
   if (skips.length && process.env.DEBUG) {
     skips.forEach((s) => console.log('  -', s));
   }
+
+  // W563（D1-a）：部署副本对账——site/data/json/ ↔ scripts/output/data/ 逐字节相等，
+  // 且页面引用的每个副本目标必须存在（防「新增 fetch 目标但漏复制」的静默 404）。
+  const copiesDir = path.join(ROOT, 'site', 'data', 'json');
+  const copyIssues = [];
+  if (fs.existsSync(copiesDir)) {
+    const copies = fs.readdirSync(copiesDir).filter((f) => f.endsWith('.json'));
+    const copySet = new Set(copies);
+    for (const f of copies) {
+      const orig = path.join(OUT_DATA_DIR, f);
+      if (!fs.existsSync(orig)) {
+        copyIssues.push(`副本无原件: ${f}`);
+      } else if (!fs.readFileSync(path.join(copiesDir, f)).equals(fs.readFileSync(orig))) {
+        copyIssues.push(`副本内容漂移: ${f}`);
+      }
+    }
+    if (copies.length !== 47) {
+      copyIssues.push(`副本数 ${copies.length} != 47（新增 fetch 目标须同步副本后更新该基线）`);
+    }
+    const copyRefRe = /['"](?:\.\.\/)*(?:\.\/)?(?:data\/)?json\/([A-Za-z0-9_/.-]+\.json)['"]/g;
+    for (const pg of pages) {
+      const html = fs.readFileSync(path.join(DATA_DIR, pg), 'utf-8');
+      for (const m of html.matchAll(copyRefRe)) {
+        if (!copySet.has(m[1])) {
+          copyIssues.push(`${pg} 引用的副本不存在: ${m[1]}`);
+        }
+      }
+    }
+  }
+
+  if (copyIssues.length) {
+    console.log('副本对账异常：');
+    copyIssues.forEach((i) => console.log('  ✗', i));
+    process.exit(1);
+  }
+  console.log(`副本对账 ✓（site/data/json 47 个与原件字节相等 · 页面引用无缺失）`);
   if (allIssues.length) {
     console.log('发现漂移：');
     allIssues.forEach((i) => console.log('  ✗', i));

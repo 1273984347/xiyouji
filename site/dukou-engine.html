@@ -16,6 +16,1028 @@
   })();
 </script>
 <title>西游·渡口 — 无我写作引擎（原型）</title>
+    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v3 · W476 纸感轻立体（在 v2/W334 基础上增层 · 见 DESIGN.md §4A）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 小圆角 + 四级纸感海拔（v3）· 1px 发丝线分隔 · 大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('static/fonts/noto-serif-sc-shared.woff2') format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+    --shadow-lift: 0 2px 6px rgba(35, 32, 26, 0.08), 0 8px 24px rgba(35, 32, 26, 0.08);
+
+    /* —— 动效令牌（W460 墨韵动效体系：时长三级 + 缓动三系） —— */
+    /* 时长：fast 即时反馈 / base 状态变化 / slow 入场编排（克制雅致，不上弹跳） */
+    --dur-fast: 150ms;        /* 按压、toggle、色彩切换 */
+    --dur-base: 250ms;        /* hover、行高亮、tooltip */
+    --dur-slow: 500ms;        /* 卡片入场、区块 reveal */
+    /* 缓动：内容抵达用 ease-out 系；弃用裸 ease 关键字 */
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);      /* 均匀精致·默认 */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);       /* 果断自信·大位移入场 */
+    --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);   /* 往返对称·展开收起 */
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== v3 · W476 纸感轻立体令牌层（DESIGN.md §4A） ===== */
+/* 断点常量：640/768/1024/1280/1536 · 最小验收 375 */
+:root {
+    /* —— 四级海拔（hover +1 档 · 悬浮 ≥3 · 禁硬编码阴影） —— */
+    --elev-0: none;
+    --elev-1: var(--shadow);
+    --elev-2: var(--shadow-lift);
+    --elev-3: 0 4px 10px rgba(35, 32, 26, 0.10), 0 12px 32px rgba(35, 32, 26, 0.12);
+    --elev-4: 0 8px 18px rgba(35, 32, 26, 0.14), 0 24px 56px rgba(35, 32, 26, 0.16);
+
+    /* —— 圆角 / 边框 —— */
+    --radius-sm: 2px;  --radius-md: 6px;  --radius-lg: 10px;  --radius-pill: 999px;
+    --border-hairline: 1px solid var(--line);
+    --border-accent: 1px solid var(--accent);
+
+    /* —— 色阶派生（深档 hex 兜底 · 浅档 color-mix 优雅降级） —— */
+    --accent-deep: #AF3F34;  /* 700 档：active/按钮渐变终点 */
+    --accent-tint: color-mix(in srgb, var(--accent) 10%, var(--paper));  /* 100 档选中底 */
+    --accent-wash: color-mix(in srgb, var(--accent) 5%, var(--bg));      /* 050 档 band 底 */
+    --ink-tint: color-mix(in srgb, var(--ink) 5%, var(--bg));            /* 极浅墨 band 底 */
+
+    /* —— 语义功能色（底/边/字三件套） —— */
+    --ok: var(--accent-4);      --ok-bg: color-mix(in srgb, var(--accent-4) 10%, var(--paper));
+    --warn: var(--accent-3);    --warn-bg: color-mix(in srgb, var(--accent-3) 10%, var(--paper));
+    --danger: var(--rebel);     --danger-bg: color-mix(in srgb, var(--rebel) 8%, var(--paper));
+    --info: var(--accent-2);    --info-bg: color-mix(in srgb, var(--accent-2) 10%, var(--paper));
+
+    /* —— 排版阶梯（1.25 · 0 正文 → 5 hero/KPI） —— */
+    --text-step-0: 1rem;       --text-step-1: 1.25rem;    --text-step-2: 1.5625rem;
+    --text-step-3: 1.953rem;   --text-step-4: 2.441rem;   --text-step-5: 3.052rem;
+    --text-hero: clamp(1.75rem, 1.2rem + 2.5vw, 2.75rem);
+    --leading-tight: 1.3;  --leading-heading: 1.4;  --leading-body: 1.75;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/* ===== 夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载 ===== */
+html[data-theme="dark"] {
+    --bg: #221D16;
+    --ink: #F2EBDC;
+    --ink-soft: #CBBFA9;
+    --ink-faint: #8F8674;
+    --paper: #2B2419;
+    --paper-warm: #33291B;
+    --line: rgba(242, 235, 220, 0.14);
+    --accent: #E0604F;
+    --accent-deep: #C94F3F;
+    --accent-soft: #E8A99F;
+    --accent-tint: rgba(224, 96, 79, 0.14);
+    --accent-wash: rgba(224, 96, 79, 0.08);
+    --accent-2: #7FA8C9;
+    --accent-3: #C9A96B;
+    --accent-4: #9DB98A;
+    --ok: #8FBF7F;
+    --warn: #D0A35C;
+    --danger: #D96C5C;
+    --info: #7FA8C9;
+    --elev-0: none;
+    --elev-1: 0 1px 3px rgba(0, 0, 0, 0.40), 0 4px 12px rgba(0, 0, 0, 0.30);
+    --elev-2: 0 2px 6px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
+    --elev-3: 0 4px 10px rgba(0, 0, 0, 0.50), 0 12px 32px rgba(0, 0, 0, 0.45);
+    --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
+    color-scheme: dark;
+}
+html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
+html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
+/* 图表深色适配（通用）：SVG 数据色温和提亮，tooltip 边框跟随令牌 */
+html[data-theme="dark"] svg path[fill^="#"],
+html[data-theme="dark"] svg circle[fill^="#"],
+html[data-theme="dark"] svg rect[fill^="#"] { filter: brightness(1.12) saturate(1.05); }
+html[data-theme="dark"] .chart-tooltip { border-color: var(--line); }
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * v2 · W477 Phase E1（纸感海拔接入 + 交互组件五态 + 微交互工具类 · DESIGN.md §4A）
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: var(--leading-body);
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+    position: relative;
+}
+.topnav nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-base) var(--ease-out-quart);
+}
+.topnav nav a:hover::after,
+.topnav nav a.active::after,
+.topnav nav a.nav-strong::after,
+.topnav nav a[aria-current="page"]::after { transform: scaleX(1); }
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    box-shadow: var(--elev-1);
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color var(--dur-base) var(--ease-out-quart),
+                transform var(--dur-base) var(--ease-out-quart),
+                box-shadow var(--dur-base) var(--ease-out-quart);
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
+                var(--elev-2);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    box-shadow: var(--elev-1);
+    padding: 20px;
+    transition: border-color var(--dur-base) var(--ease-out-quart),
+                transform var(--dur-base) var(--ease-out-quart),
+                box-shadow var(--dur-base) var(--ease-out-quart);
+}
+.kpi:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
+                var(--elev-2);
+}
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    box-shadow: var(--elev-1);
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+/* —— 墨韵动效（W460）：行 hover 暖纸底 + 左缘朱砂指示条 + 数字列加深 —— */
+tbody tr td { transition: background-color var(--dur-fast) var(--ease-out-quart); }
+tbody tr:hover td { background: color-mix(in srgb, var(--paper-warm) 60%, transparent); }
+tbody tr:hover td:first-child { box-shadow: inset 2px 0 0 0 var(--accent); }
+tbody tr:hover td.num { color: var(--accent-3); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* —— 墨韵动效（W460）：opt-in 行入场 stagger（.table-anim，仅静态表格） —— */
+/* --row-i 由页面静态 <tr> 写入；min() 封顶第 12 行起延迟 220ms，总时长 ≤ 470ms */
+/* fail-open：calc/min 不支持时整条 animation 声明被丢弃，行直接可见 */
+.table-anim tbody tr {
+    animation: row-in var(--dur-base) var(--ease-out-quart) both;
+    animation-delay: calc(min(var(--row-i, 0), 11) * 20ms);
+}
+@keyframes row-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: none; }
+}
+/* opt-in sticky 表头（.table-wrap--sticky，仅行数 > 30 的表格） */
+.table-wrap--sticky { max-height: 65vh; overflow: auto; }
+.table-wrap--sticky thead th { position: sticky; top: 0; background: var(--paper-warm); z-index: 1; }
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* —— 墨韵动效（W460）：正文链接下划线生长（opt-in 类 .link-ink，禁止 blanket a） —— */
+.link-ink {
+    background: linear-gradient(var(--accent), var(--accent)) no-repeat 0 100% / 0% 1px;
+    transition: background-size var(--dur-base) var(--ease-out-quart);
+}
+.link-ink:hover { background-size: 100% 1px; }
+
+/* —— 墨韵动效（W460）：图表 tooltip 全站统一样式（P1 批次逐页采用） —— */
+.chart-tooltip {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 8px 12px;
+    max-width: 280px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink);
+    box-shadow: var(--elev-3);
+    opacity: 0;
+    transition: opacity var(--dur-base) var(--ease-out-quart);
+}
+.chart-tooltip.visible { opacity: 1; }
+
+/* —— 墨韵（W463）：fetch loading 骨架态（仅 fetch 主导页接入·EMBEDDED 同步页不接防闪烁） —— */
+.chart-loading {
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--ink-faint);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    background:
+        linear-gradient(100deg, transparent 40%, rgba(107, 100, 85, 0.08) 50%, transparent 60%)
+        var(--paper-warm);
+    background-size: 200% 100%, auto;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    animation: chart-loading-breath 1.2s var(--ease-in-out-soft) infinite;
+}
+.chart-loading::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--line);
+    border-top-color: var(--accent);
+    animation: chart-loading-spin 0.8s linear infinite;
+}
+@keyframes chart-loading-breath {
+    0%, 100% { background-position: 120% 0, 0 0; }
+    50% { background-position: -20% 0, 0 0; }
+}
+@keyframes chart-loading-spin {
+    to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .chart-loading { animation: none; }
+    .chart-loading::before { animation-duration: 2s; }
+}
+
+/* —— 墨韵（W463）：3D/canvas 图表一次性首帧淡入（three 容器/canvas 元素挂载·RM 停帧直接可见） —— */
+.chart-fade-in {
+    animation: chart-fade-in var(--dur-slow) var(--ease-out-quart) both;
+}
+@keyframes chart-fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .chart-fade-in { animation: none; }
+}
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                background var(--dur-fast) var(--ease-out-quart),
+                color var(--dur-fast) var(--ease-out-quart),
+                transform var(--dur-fast) var(--ease-out-quart),
+                box-shadow var(--dur-fast) var(--ease-out-quart);
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: var(--elev-1); }
+.btn:active { transform: scale(0.97); box-shadow: none; }
+.btn:disabled, .btn[aria-disabled="true"] {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.btn-primary {
+    background: linear-gradient(180deg, var(--accent), var(--accent-deep));
+    border-color: var(--accent-deep);
+    color: #fff;
+}
+.btn-primary:hover { background: var(--accent-deep); color: #fff; box-shadow: var(--elev-2); }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: color-mix(in srgb, var(--paper) 70%, var(--bg)); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                background var(--dur-fast) var(--ease-out-quart),
+                color var(--dur-fast) var(--ease-out-quart);
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-wash); }
+.filter-tab:active { transform: scale(0.97); }
+.filter-tab:disabled { opacity: 0.45; cursor: not-allowed; }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                box-shadow var(--dur-fast) var(--ease-out-quart);
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 微交互工具类（W477 Phase E1 · DESIGN.md §4A.7 · 时长取 §5 契约档） ===== */
+/* 通用浮起：任意可点击卡片/条目 hover 升海拔（页面自定义结构复用，勿用于 .card/.kpi 已有实现） */
+.u-lift {
+    transition: transform var(--dur-base) var(--ease-out-quart),
+                box-shadow var(--dur-base) var(--ease-out-quart),
+                border-color var(--dur-base) var(--ease-out-quart);
+}
+.u-lift:hover { transform: translateY(-2px); box-shadow: var(--elev-2); }
+/* 按压反馈：按钮/标签类 active 微缩 */
+.u-press:active { transform: scale(0.98); }
+/* 滚动显现：fail-open——仅 JS 在 <html> 挂 .js-reveal 后启用（E5 接入）；无 JS 内容直接可见 */
+.js-reveal .reveal-in {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity var(--dur-slow) var(--ease-out-quart),
+                transform var(--dur-slow) var(--ease-out-quart);
+}
+.js-reveal .reveal-in.in-view { opacity: 1; transform: none; }
+/* 数字对齐 */
+.u-tabular { font-variant-numeric: tabular-nums; }
+/* 语义色文本（v3 令牌·低饱和雅集色相） */
+.text-ok { color: var(--ok); }
+.text-warn { color: var(--warn); }
+.text-danger { color: var(--danger); }
+.text-info { color: var(--info); }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav:not(:has(.nav-toggle)) nav { display: none; }
+}
+
+/* ===== 导航抽屉（W492）：≤768px 根页 topnav 折叠为滑出抽屉（仅 .nav-toggle 存在时启用） ===== */
+.nav-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin-left: 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--paper);
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                color var(--dur-fast) var(--ease-out-quart),
+                transform var(--dur-fast) var(--ease-out-quart);
+}
+.nav-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.nav-toggle:active { transform: scale(0.94); }
+.nav-mask {
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: rgba(35, 32, 26, 0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-base) var(--ease-out-quart);
+}
+.nav-mask.open { opacity: 1; pointer-events: auto; }
+@media (max-width: 768px) {
+    .nav-toggle { display: inline-flex; }
+    .topnav:has(.nav-toggle) nav {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 60;
+        width: min(78vw, 320px);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 22px;
+        padding: 72px 26px;
+        background: var(--paper);
+        border-left: 1px solid var(--line);
+        box-shadow: var(--elev-4);
+        transform: translateX(100%);
+        transition: transform var(--dur-base) var(--ease-out-quart);
+    }
+    .topnav:has(.nav-toggle) nav.open { transform: translateX(0); }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+
+/* ===== 图表移动端降级（W494）：≤640px 图例纵排/文字缩小/tooltip 收窄——CSS 显示层降级，D3 渲染不变 ===== */
+@media (max-width: 640px) {
+    .legend,
+    .chart-legend,
+    .legend-inline,
+    .legend-row {
+        flex-direction: column;
+        gap: 6px;
+        align-items: flex-start;
+    }
+    .legend-item,
+    .legend-cell,
+    .legend-label {
+        font-size: 11px;
+    }
+    .chart-block svg text,
+    .chart-wrap svg text,
+    .chart-container svg text,
+    svg.vis text {
+        font-size: 10px;
+    }
+    .chart-block,
+    .chart-wrap,
+    .chart-container {
+        padding: 12px;
+    }
+    .chart-tooltip {
+        max-width: 220px;
+    }
+}
+    </style>
 <style>
         /* e-track-exempt: chart-data-colors 4 处 */
 :root{
@@ -149,7 +1171,7 @@
     <div id="graphBox"></div>
   </div>
 </main>
-<footer>佛法=AI · 缘起即算法 · v2.3.162 W562 skills目录退役（W562 skills目录退役） · v2.3.161 W561 残余几何越界收敛（W561 残余几何越界收敛） · v2.3.160 W560 工具链收尾批次（W560 工具链收尾） · v2.3.159 W559 工作复盘与优化分析报告（W559 工作复盘报告） · v2.3.158 W558 五类残留缺陷修复（W558 五类修复） · v2.3.157 W557 全站复审完成+类级修复（W557 全站复审完成） · v2.3.156 W556 审计修复+第25门禁（W556 审计修复F1-F8+第25门禁） · v2.3.155 W555 工作复盘与优化分析报告（W555 工作复盘报告） · v2.3.154 W554 B阶段一管线+C数据审计（W554 B阶段一管线+C数据审计） · v2.3.153 W553 低危视觉细节批次（W553 低危视觉细节批次） · v2.3.152 W552 三项可选批次计划（W552 三项可选批次计划） · v2.3.151 W551 图表门禁常驻化（W551 图表门禁常驻化） · v2.3.150 W550 全站截图审查与修复闭环（W550 全站截图审查与修复闭环） · v2.3.149 W549 复盘报告后记（WBS 对账）（复盘报告后记） · v2.3.148 W548 迁移阶段 5 + 闭环（React 19 + TDesign 1.18）（迁移阶段 5 + 闭环） · v2.3.146 W547 迁移阶段 4（Tailwind v4）（迁移阶段 4） · v2.3.145 W546 迁移阶段 3（Vite 8.2 rolldown + plugin-react 6·engines 收紧） · v2.3.143 W544 迁移阶段 2（TS 7 + types 19）（迁移阶段 2） · v2.3.142 W543 迁移阶段 1（Express 5 + uuid 14 + dotenv 17 + bs3 13）（迁移阶段 1） · v2.3.141 W542 交付效率工具化（batch_cascade.py + 冒烟固化④）（交付效率工具化） · v2.3.140 W541 复盘报告归档（工作复盘与优化分析报告入册 docs/10） · v2.3.139 W540 迁移评估基线更新（评估文档 vite 基线 6.4.3 注记） · v2.3.138 W539 遗留收尾（vite 5→6.4.3 清零 devDep 漏洞·dompurify 3.4.14·移除 dompurify override） · v2.3.137 W538 CI 红灯热修复（batch_screenshots 白名单形状回归 + agent-web 依赖 overrides 归零生产审计） · v2.3.136 W537 全仓对抗性审查修复（W536 收尾欠账清零 + Mimosa 提交闸门 77 高危清零：Python 写路径守卫 ×54/JS 去动态执行/请求边界加固/server 工作目录钳制 + 存量缺陷 7 项处置） · v2.3.135 W536 依赖积压治理（6 个 dependabot PR 清零：绿灯 3 合并 + 冲突 1 手工落地 + 红灯 2 转专项·dependabot.yml 加 ignore semver-major；新建 eslint.config.mjs 修复「.eslintrc.json 自 ESLint 9 起失效」隐患·9/10 双版本 0 error；迁移评估出档） · v2.3.134 W535 决策闸门取数自动化（fetch_gate_stats.py 新建·GoatCounter API v0 拉近 7/30 日 UV·负样本自测 14/14） · v2.3.133 W534 治理文档递增数字字面量修复（交接文档「接续 W 编号」改引用式·W520 递增数字禁字面量规则外存量 1 处治愈） · v2.3.132 W533 skills 归属策略显式化 + 坑④入 playbook（agent-session-loop / deep-review-loop / mem-wrap-up / self-evolution master 定全局·仓库为受控镜像，MIRROR_SKILLS 禁 --sync/--force；version-bump v1.2.0 收录坑④） · v2.3.131 W532 交接文档最后更新滚动链裁剪回契约上限（交接文档第 7 行 9 批→3 批回契约上限·删 6 批逐批断言 CHANGELOG 有段） · v2.3.130 W531 skills 部署全查 + 三真源降级保护（sync_skills 方向判定+降级拦截 · 四通用技能回写全局真源版） · v2.3.129 W530 决策闸门工程落地（judge_gate.py 新建·判定优先级定案（30日<30 归档优先消除冲突歧义）·读者数据复盘模板 + 方法论索引登记——UV 数据待用户后台回填后执行判定）· v2.3.128 W529 R6 拦截落地 + 方案 v7 回填（决策闸门前置·goatcounter 污染实测修正——CI 访问原假设不成立·拦截按纵深防御落地 5 点 + W464 方案 12 处表述具体化）· v2.3.127 W528 存量漂移点统一修复（skills 17→19·A3 211→215·学术索引 50→55·site/data 46→86·D3 本地化口径·README 索引去版本号——9 处对齐现役口径）· v2.3.126 W527 drift-audit 技能补漏维度（步骤 3 段缺失双向核对 + 豁免区外新增乱序 P1 判级——W525 实证对齐·v1.2.0）· v2.3.125 W526 索引健康门禁盲区封堵（check_index_health 新增段倒序断言 + 段缺失检测（对照 CHANGELOG）·verify_delivery 新增第 23 门禁旁文档同步——workflows/README.md 头部版本行与里程碑行上限纳入校验·W525 实证三项漏网全堵）· v2.3.124 W525 漂移审查修复（drift-audit 全仓体检：file-index W504 段缺失补建 + W522-W524 尾部追加重排归位·workflows README 同步至 W524·文档规范 §8 门禁表对齐 AGENTS §4.2 补学术轨/回退两项）· v2.3.123 W524 bump 追加污染坑位补记（--note 同样追加污染——AGENTS §4.3 坑②扩为 --desc/--note 双触发 + file-index 空壳段现象补记）· v2.3.122 W523 截图审查恒全量根因修复（scope diff 三处加 -c core.quotePath=false——中文路径八进制转义致 case 免审失配恒落保守全量 ~11min·本地 Git Bash 双向模拟验证 skip）· v2.3.121 W522 CI 红灯修复（E41 发现本地 main ahead 25 未推 + 远端最后 CI（W503）红——scripts/ ruff 16 错误清零：inject_goatcounter.py:68 字符串未闭合根因 + 12 lint 机械清理 7 文件·行为零变更）· v2.3.120 W521 存量裸字面量清剿 + W463 三坑补登记（DRL F2 15 文件三分类裁决——现状声明改引用式 6 处 + 口径/指引加注 5 处 + 门禁模板豁免·交接文档「三」补 W463 段 E45 编号空间完整化·sync 10 文件双轨一致）· v2.3.119 W520 递增数字禁字面量 + skills 内文数字比对维度（plan-authoring 去模糊化标准⑤ + day-review 步骤 4 第 8 条 + drift-audit 步骤 5 第 4 条固化 + reference 命令/案例扩展 + 三 skill 自体病例治愈 + DRL 复验修复 8 项·E46 登记交接文档「三」，E45 已被 W460-W463 三坑占用顺延）· v2.3.118 W519 Skills 全目录审查与 SKILL.md 内容优化（A 类计数漂移 14 处 + B 类门禁数去硬编码 8 处 + AGENTS 树注释 17→19 + D 类 7 skill 补 frontmatter version·sync 双轨一致）· v2.3.117 W518 期望版本动态化 + 尾页脚新鲜度门禁（verify_delivery 六文档期望版本动态取自 CHANGELOG 现役段·dukou-engine 页脚降级为新鲜度 WARN + check_governance_docs 检查 7「最后更新」头尾两处链首现役校验（finditer 全量）+ day-review SKILL.md 步骤 4 第 7 条）· v2.3.116 W517 共享机制载体铁律（仓库内文件为真源·禁只写全局路径·改 skill 后 sync_skills 同步全局）· v2.3.115 W516 经验上移机制固化（mem-wrap-up Step 5 上移检查子步骤：上移映射表 + 强制登记交接文档「三」·E44/E34/E41/E36-42 五组经验补上移）· v2.3.114 W515 渲染抽查常驻化 + 门禁正文引用存在性检查（skills 引用资产磁盘断言·堵 _shot_check.js 式失效指针）· v2.3.113 W514 治理文档口径修复（五元文档数字校正 611→615·A3 211→215·AGENTS §4.2 补录第 21/22 门禁登记）· v2.3.112 W513 归档二级归档（方案 A：CHANGELOG-ARCHIVE 917→150KB·W001-W399 下移 docs/archive/tier2·归档三件套 >1MB 触发规则入文档规范）· v2.3.111 W512 CI 安全批次（security_scan pip-audit 超时 120→300s·DEP-001 误报归零·真实依赖漏洞=0）· v2.3.107 W508 复盘剩余项收口（管线协议去重：creative-methods 方法四指向 SKILL 管线章节为单一事实源 + _check_pipeline_consistency.py 管线一致性轻量校验：生成来源须 创意三明治管线@·引文 ≥3）· v2.3.106 W507 复盘沉淀落地（引文探针 _cite_probe.py 永久化：写引文前从 text-search.json 提取候选·禁凭记忆编造 + day-review 步骤 4 新增归档/删除脚本查 tests/ 引用规则）· v2.3.105 W506 处置遗留（删除失锚测试 test_fix_svg_negative_widths.py：W447 归档 fix_svg_negative_widths.py 时漏删配套测试·pytest 全量恢复 282 passed）· v2.3.104 W505 创意流程闭环落地（创意三明治管线四步流程入 character-content skill + 4 篇试点方向二深化：菩提祖师/黑熊精/金角银角/高翠兰·各含 3 条精确引文·可信度轨收官）· v2.3.103 W504 存量核验状态基线 + 学术轨 105 篇引文核验（A+ 路径：611 篇核验状态全覆盖·学术轨 105/105 绿标·引文 411 条 100% 命中·content-trust-report 产出）· v2.3.102 W503 原著引文硬验证（第 20 门禁 check_citations.py 挂载：原文引文行对 text-search.json 精确命中·防 AI 幻觉引文·文档规范 §4.8）· v2.3.101 W502 术语一致性门禁（第 19 门禁 check_glossary.py 挂载：术语库 6 组 59 条类型化·称谓组规范词锚定·基线豁免 303 篇 383 条）· v2.3.100 W501 元信息块 v2（第 18 门禁 check_frontmatter.py 挂载：新文件血缘+核验状态 4 字段必填·基线豁免 611 篇·文档规范 §4.6 + character-content skill 模板同步）· v2.3.99 W500 索引健康门禁（第 17 门禁 check_index_health.py 转正：file-index 段完整性/唯一性/最新段残留 + 方法论 README 双向覆盖 + CHANGELOG 编号上限·豁免 W449-463 损坏区 + bump_version 次级版本行增强）· v2.3.98 W499 GitHub 协作模板 + 创意方法论沉淀（.github issue/PR 模板 5 个·创意三明治/人机创意方法论 2 篇·character-content 创意方法引用·方法论 README 索引修复·file-index W449-463 结构注记）· v2.3.97 W498 防漂移门禁（第 16 门禁 check_skills_index.py 转正：skills 目录==README 索引==AGENTS §4.5 + 全文件 git tracked + name==目录名·配套 _sync_skills.py 仓库→全局同步·18 skill 全量部署全局版）· v2.3.96 W497 skills 治理同步（visual-batch 同步全局版 v1.2.0：W478 脚本迁移六规则+W488 可感知验收/暗色夜读·plan-authoring 同步 v1.1.0：验收三段式+§10 落地回写·day-review 收录入库（AGENTS §4.5+README 索引 18 个）·characters-knowledge 修 text-search 失效引用→dataset/text-search.json·version-bump 补收尾三同步（AGENTS 脚注/路线图回写/方案档回填）·四会话 skill 补子代理不可用降级+闭环单一事实源护栏·_check_skills.py 自检 18 全过）· v2.3.95 W496 优化收尾（data/EN 225 页夜读浮动切换钮（theme-init 注入·根页自有切换器跳过）·test_smoke 检查 6 样式生效断言固化·acceptance_snapshot 验收现测工具+禁跨批复制铁律·V2 fps 遗留实测关闭）· v2.3.94 W495 P0 热修复（W493 回归处置：inline_css --force 恢复 224 页 INLINED CSS + 修 --force 的 skip-no-link 短路缺陷·新增 check_inlined_css.py 门禁转正（块≥20KB 断言+负样本自测）·7 视口×7 页样式/溢出/pageerror 三重回归 ALL PASS·baseline_snapshot.py 补入库 + 5 方案档落地状态回填）· v2.3.93 W494 Phase E 遗留收尾（断点常量规范化 380 处→白名单·图表 ≤640px CSS 降级·tag-cloud/81-hardships 存量溢出修复·字体切片判定关闭：内联架构+VF 特性双根因·CSP 归零·5 视口 0 溢出）· v2.3.92 W493 Phase E6 验收收口（三门禁转正挂 verify_delivery：token 覆盖率/动效禁止清单/a11y 对比度·负样本自测全过·私有块 UI 裸色 1193→246 全豁免登记·263 裸阴影映射 elev·10 处 infinite 改一次性·M1-M7 全达标·Phase E 主线收官）· v2.3.91 W492 Phase E5 响应式+微交互（导航抽屉 4 根页：display:none 关闭态+双帧过渡+遮罩+ESC+RM·dashboard 补 system.css link·375px 关闭态零溢出·数据页/EN 无回归·图标收尾 emoji=0·ask-chip 触摸目标修复·字体切片/断点/图表降级显式推迟 W493）· v2.3.90 W491 Phase E4 EN 站同步（85 同名可视化页六规则令牌化·validate_en 85/85 过·CN/EN 10 页对照目视一致·85 页 pageerror=0·门禁全绿）· v2.3.89 W490 Phase E3 CN 可视化页传播 II（30 页全量令牌化：86−E2 56 余量·复用六规则迁移·3D 2 页 canvas 断言过·30 页 pageerror=0·M2 严格清零移 E6 收口·门禁全绿）· v2.3.88 W489 全站暗色模式（dark 令牌组迁入 tokens.css 全局化·inline_css --force 225 页传播（data+EN 全获 dark UI 适配）·新增 js/theme-init.js 同步防 FOUC 并插入 226 页 head·5 根页内联 dark 令牌去重 1170B/页·SVG 数据色暗色提亮 filter·全站 12 页 dark 冒烟 pageerror=0 FOUC=0·内联 CSS 28385B ≤33KB·门禁全绿）· v2.3.87 W488 根页视觉重设计+夜读模式（6 用户可见根页可感知升级：hero/KPI 数字朱砂强调·卡片 hover 朱砂描边上浮 -3px·emoji→朱砂线条 SVG 图标·导航 active 指示条·reveal-in JS 接入（IO+RM 守卫）·暗色夜读模式（xy-theme localStorage+防 FOUC+dark 覆盖走页内联不落全局·M-A1 前后对比像素率 6/6≥1%+目视清单 6×3 处·门禁全绿）· v2.3.86 W487 四会话 skill 二轮同步（DRL 未安装降级声明 + experience-capture 格式规范 + 触发词扩充：记住这个/capture/经验沉淀）· v2.3.85 W486 四会话 skill 协议同步（verdict 7 词全序 / R0 4 件套 / 过拟合警报增强版 / P2 残留规则 / work-log 路径 / bridge_note 定义 / 整合版协调声明，同步自上游 GitHub 四仓库）· v2.3.84 W485 收录三项目 playbook（visual-batch / plan-authoring / plan-review：Phase E 视觉批次执行 + W 批次方案撰写 + 方案评估）· v2.3.83 W484 Skills 目录治理（14 个 skill 审查修复：openai.yaml 占位符还原 + TRAE skill 平台适配 + agent-session-loop 精简注记 + 六文档同步 + skills/README + _check_skills.py）· v2.3.82 W464 Phase 3 观测基线确立（baseline_snapshot.py 入库·观测基线快照.md 自动生成：611/86/138/228 计数 + 5 核心页 LCP/CLS/TBT 实测全过阈值 + UV 手填栏待后台回填 + 决策闸门阈值登记；perf-baseline.json 更新 W464 实测；GoatCounter 链路核验：count.js async 三类页 + visit-log defer + 计数端点可达）· v2.3.81 W478 Phase E2 CN 可视化页传播 I（56 页全量令牌化：试点 3 页人工 + 剩余 53 页 _w478_migrate.py 按范式迁移——R-SHADOW 硬编码阴影→elev 令牌/R-RADIUS 1-3→sm·4-8→md·9-12→lg/R-TRANS 时长令牌化/R-FOCUS color-mix 派生/裸色白名单→paper·paper-warm·ink·ink-soft + R-EXEMPT 图表数据色逐页登记 + tooltip 暗底金违规收编；全批 56 页 Playwright pageerror=0 + 截图目视无破坏 + M5 净 +102 行（豁免登记注释）+ check_structure/CSP/范围 53 页精确）· v2.3.80 W477 Phase E1 组件层 v2 + 根页模板化（system.css v2：card/kpi/chart-block 接 elev-1 默认海拔 + hover elev-2·btn 五态完备 + 朱砂微渐变白名单·filter-tab/badge/search 转 pill·tooltip 升 elev-3·topnav/table/index-row 颜色令牌化·新增微交互工具类 u-lift/u-press/reveal-in fail-open/语义色文本·+2455B 预算内 + 根页：index 提问框全令牌化·dashboard footer 统一 site-footer + 陈旧版本修正 + 两处 focus 令牌派生统一·curated/guide 卡片海拔化·mobile-index nav-card/kpi-item 令牌化·text-search 主搜索框 focus 缺陷修复（--focus-ring 未定义）+ Noto Sans SC 子集化（9340 字·771→755KB·unicode-range 切片登记后续专项）+ inline_css --force 225 页；Playwright 6 页抽查 pageerror=0 + 样式断言生效 + 门禁全绿）· v2.3.79 W476 Phase E0 纸感轻立体宪改 + tokens v3（视觉高级感升级方案三问已决：纸感轻立体方向/暗色模式纳入 E7/归档冻结 E1 + E0 探针报告 P1-P6：裸色 16322 处/var(--dur)1568 vs 裸 1452/组件选择器重复 224-227 页/根页 8 页异质/Noto Sans 未子集化候选 + DESIGN.md §4A 新立：四级海拔/渐变白名单三处/排版阶梯 1.25/圆角边框/断点五档/微交互清单/体积预算红线 + tokens.css v2→v3 令牌层：--elev-0~4/--radius-sm~pill/--border-hairline/--accent-deep~wash 色阶派生/--ok~info 语义色/--text-step-0~5+--text-hero/--leading×3·增量 +2035B 预算内 + inline_css --force 同步 225 页；check_structure 232 文件 + JS 语法 + CSP 1173 哈希 0 漂移 + lint_links 4122 链接 0 broken + verify 核心全绿；Phase E W476-W483 预排编号·与 Phase 3 并行轨）· v2.3.78 W463 墨韵 W-g 收尾固化 + W-f 扫尾批【墨韵系列收官】（DESIGN.md §5 重写为九节强制契约：时长三档预算反馈≤150/状态≤250/入场≤600 + 白名单仅 hero 600/count-up 900 + RM 双守卫调用点级与 prototype 级 + tooltip 契约宣纸底语义色 + count-up fail-open 铁律 + fetch loading 态 EMBEDDED 同步页禁接入 + 性能红线 transform/opacity only + system.css 新增 .chart-loading 呼吸骨架与 .chart-fade-in 首帧淡入 inline_css 同步 225 页 + P2-1 loading 接入 6 页：容器形态 4 + svg 兄弟形态 2·MutationObserver 自移除 + 8s 超时兜底·search 空态语义不符回退 + W-f fade-in 3 页 three×2/canvas×1 + text-search 豁免——86 页动效全覆盖覆盖等式归零；两 bug 断言驱动修复：svg 兄弟方向 nextElementSibling + microtask 时序 observer 注册前初始检查；CSP 1173 哈希 0 漂移 + 6 loading 页骨架全移除 + 3 fade 页动画终态 + RM 停帧直达 + verify 全绿·墨韵 W460→W463 四批收官）· v2.3.77 W462 墨韵 W-d/W-e 统计页批（66 剩余页按实现证据分型：37 transition 页调用点级 RM 守卫·141 duration+21 delay+59 裸 transition 包裹 MOYUN_RM?0:N·>600 全归一 600 全站清零 + 7 页表达式形态 prototype 级守卫 patch d3.transition.prototype·浏览器实测 7000ms 组合 1ms 达终态 + tooltip 收编 11 页：A 组 four-heavenly-kings 22 edits + C 组 10 静态页 div 换类/宣纸底重映射/.classed('visible') + count-up 18 页探针接入 + 卫生项全站尾部重复 </body></html> 去重 154 页 CN77+EN77·count-up 断言意外发现的历史模板缺陷；57 页 pageerror=0 + RM 6/6 + tip 5/5 + CSP 1167 哈希 0 漂移 + verify 全绿·W-f 9 页非 D3 + W-g 待续）· v2.3.76 W461 墨韵 W-c 网络页批（16 个 forceSimulation 网络页 tooltip 分四型收编：A 组 10 页 d3 动态/B 组 1 页变体/C 组 2 页静态 div 改 .chart-tooltip + .classed('visible') 显隐·C 组宣纸底配色重映射·D 组 3 页豁免 + P2-2 KPI count-up 两页：chapter-stats 千分位/character-appearance 文本值过滤·轮询等待 async renderKPI 建元素·P2-1 fetch loading 态边际收益评估延期至 W-g；Playwright 48/48 断言 + 3 页性能基线零回归 + CSP 1149 哈希 0 漂移 + verify 核心全绿·W-d/e~W-g 待续）· v2.3.75 W460 墨韵全站动效体系 P0+样板批（tokens.css 动效令牌 --dur×3+缓动三系+--shadow-lift·system.css 表格 hover 朱砂指示条+opt-in 行入场 .table-anim+sticky+.btn 按压+.kpi/.card 浮起+.link-ink+.chart-tooltip 统一类·inline_css --force 同步 225 页含 EN 138·index/dashboard count-up·4 图表页 D3 编排统一 轴200→网格100+300→标记500 stagger 封顶 400·tooltip 全面收编·ANIMATE 首帧门控 resize 不重播+reduced-motion 双守卫·Playwright 断言 20/20·critique 33/40·W-c~f 推广 78 页待续）· v2.3.74 W459 V2 审查收尾（D2 回目跳转死链修复：A1_DOC_MAP 内嵌 100 条真实文件名映射·check_dynamic_links.py 动态链接门禁挂 verify_delivery·tag-cloud dashboard 死链 + EN source_doc 虚构路径修复·V2 方案文档回写·首页精选补 geo-3d 入口）· v2.3.73 W458 防回归门禁体系落地（check_structure.py + check_js_syntax.js + 样式生效断言 + 诊断SOP）· v2.3.72 W457 全站白屏根因修复（CSS url 括号笔误 222 页 + EN 引号腐蚀 7 页）· v2.3.71 W456 全站 D3/Three 本地化 + 白屏根因修复（d3js.org/cdnjs 外域 CDN 单点消除：d3.v7.min.js+three.r128.min.js 落 site/static/js/·163 处 script src 按目录深度改写+_shell 模板同步；7 个陈旧 JSON 从 EMBEDDED 回写对齐 + 两页防御容错；CSP 重哈希·http 模式 94 页复扫 0 白屏·lint_links 4123 链接 0 broken·verify 核心全绿）· v2.3.70 W455 方案 B/C/D 三个可视化深化（character-dynamic-network 1-100 回目进度条播放关系边 + 邻域模式 + 边权重双编码；hardship-difficulty-heatmap 单元格钻取 + 表↔热力图双向联动 + 难度/章节/结局三排序；journey-spacetime 双轴联动 + 节点跳转 A1 回目解读 + 段路耗时刻度）· v2.3.69 W454 方案 A 西游地理 3D 可视化（journey-geo-3d.html 新建：Three.js r128 + 手动 setupOrbitControls + 程序化示意地形 + 17 节点 Sphere + CatmullRom 路线 Tube + 河流 Tube + 路线高亮/地形透明切换 + file:// 可用 + EMBEDDED 回退 + journey_geo_3d.json 数据 + tag-cloud/sitemap 登记 + _smoke_geo3d 脚本；EN 版默认跳过记录"EN 暂缓"）· v2.3.68 W453 移除外部锐评原始文本（评论.txt·结论已沉淀于 CHANGELOG）· v2.3.67 W452 学术研究显式引用补齐（105 篇头部 > 引用 + verify 门禁）· v2.3.66 W451 学术研究引用审计（105 篇保留 · 9 篇降教学讲解）· v2.3.65 W450 统计口径统一与轨标体系（统计口径说明 + 首页精选必看 + 33 篇跨界趣谈 + 纯AI输出披露）· v2.3.64 W449 冗余文档清理（git rm 删除项目概览/项目认知总览/项目交接参考手册 + 依赖清理 README/文档规范/file-index + verify 全绿）· v2.3.63 W448 外部锐评回应治理（STRUCTURE 版本里程碑归档 110→43KB + README 版本号语义说明 + LICENSE-CONTENT AI 生成方式披露）· v2.3.62 W447 工具目录治理（英化工具链转正 + 45 脚本归档 + README）· v2.3.61 W446 英文站旧页 CJK 残留清理（52 页全过·138 页真正闭环）· v2.3.60 W445 英文站续译 relationships（全站英文化收官·86 页全部完成）· v2.3.59 W444 英文站续译 tag-cloud（全站标签云导航页）· v2.3.58 W443 英文站续译 batch21（并行 subagent 新增 3 页：narratology-13d-network/emotional-heatmap/material-archaeology）· v2.3.57 W442 英文站续译 batch20（并行 subagent 新增 5 页：poetry-rhythm-analysis/customs-pass-route/pilgrim-team-psychology-arc/jurisprudence/linguistics）· v2.3.56 W441 英文站续译 batch19（并行 subagent 新增 5 页：ethics-consumption/monster-hierarchy-network/music-structure/heaven-power-network/ai-dialogue）· v2.3.55 W440 英文站续译 batch18（并行 subagent 新增 5 页：karma-reincarnation/underworld-power-network/graph-explorer/narratology-12d-network/chart-design）· v2.3.54 W439 英文站续译 batch17（并行 subagent 新增 5 页：dialogue-sentiment/monster-female-network/ecology/game-webnovel/monster-sociology）· v2.3.53 W438 英文站续译 batch16（并行 subagent 新增 5 页：hardship-difficulty-heatmap/aesthetics/magic-system/visual-art/guanyin-six-roles-network）· v2.3.52 W437 英文站续译 batch15（并行 subagent 新增 5 页：business-model/intertextuality-network/risk-project/power-resources/cave-estate）· v2.3.51 W436 英文站续译 batch14（并行 subagent 新增 5 页：narrative-experiment/journey-spacetime/methodology-matrix/workplace/text-evolution）· v2.3.50 W435 英文站续译 batch13（并行 subagent 新增 5 页：deconstruction/six-senses-narratology-network/monster-victims-network/social-media/cognitive-psychology）· v2.3.49 W434 英文站续译 batch12（并行 subagent 新增 5 页：theological-intervention-network/criticism-history/global-pattern/cross-time-danmaku/character-dynamic-network）· v2.3.48 W433 英文站续译 batch11（并行 subagent 新增 5 页：four-dimensional-research-network/four-heavenly-kings-artifacts/monster-ecology-network/philosophy/concept-device）· v2.3.47 W432 英文站续译 batch10（并行 subagent 新增 5 页：pilgrim-team-dynamic-network/counterfactual/ming-political-thought-comparison/monster-background/cultural-misreading）· v2.3.46 W431 英文站续译 batch9（并行 subagent 新增 4 页：timeline/monster-capability-radar/journey-map-interactive/character-relationship-3d-view）· v2.3.45 W430 英文站续译 batch8（新增 1 页：perf-canvas-rendering）· v2.3.44 W429 英文站续译 batch7（新增 3 页：text-search/81-hardships-view/mbti-evolution）· v2.3.43 W428 英文站续译 batch6（新增 5 页：century-dialogue/data-explorer/language-style-radar/famous-time-travel/search）· v2.3.42 W427 内容质量残留清理（A4/A5 轨标补齐 78 篇 + BOM 清理 21 文件 + 陈旧产物处置）· v2.3.41 W426 GoatCounter 自托管修复（gc.zgo.at 大陆 DNS 污染 → count.js 本地自托管 + 计数回传 goatcounter.com + CSP 白名单更新 + verify_delivery 全绿）· v2.3.40 W425 GoatCounter 真实跨访客统计接入（全站 160 页注入计数脚本 + generate_csp 白名单 gc.zgo.at/1273984347.goatcounter.com + _headers 同步 + verify_delivery 全绿）· v2.3.39 W424 对抗性审查修正与全仓整理（A4 门禁校准 209·3D/EN 页修复·security 门禁修复·CI 文档同步·产物清理）· v2.3.37 W422 全量治理（P1-P3 优化：perf.yml 触发修复 + verify 四门禁 + 文档归档 + 双索引校准 + Dependabot）· v2.3.36 W421 Screenshot Review 提速优化（改动范围判定：页脚/文档-only 跳过·data 页定向截图·浏览器缓存）· v2.3.35 W420 A1 内容质量深化（深度解读 100/100 补全：第038/039回新增 SD102/SD103·56 回对应原著/数据指标元数据补齐·99 回导航上一回/下一回错链修复·10 回 sd-crossref 死链修复·docs/01 1715 链接 0 broken）· v2.3.34 W419 修复 A1 深度解读 SD 错位（22 篇 SD 编号≠真实回号归位：SD038-052/056-062 按正文真实回号移动·范围式复制 40-72 回全覆盖（原 63-72 十连回空白消除）·源文件 24 篇元数据/H1/正文内嵌/关联行修正·第 56 回补写 SD101（草寇之死）·lint_links 2629 链接 0 broken）· v2.3.33 W418 内容质量深化（全站死链巡检：site/en/ 4 文件 29 broken 链接修复——EN 版存在指向同目录/无 EN 版回退中文原版 ../data/*.html 加 lang="zh-CN" 标注·与 visualizations.html 惯例一致；docs/ 全量 4784 链接 0 broken·A1 逐回解读 23 回补 > 导航： 引用行（返回导读/上一回/下一回/站点首页/通用可视化·原 13 回完全无导航 + 10 回仅段落式）——100 回导航全覆盖 100/100）· v2.3.32 W417 文档健康治理（P0-P2 全优先级处置：CHANGELOG/file-index/交接文档归档精简降达标·verify_delivery 新增 A1-A6 真实计数校验 611==611·actions 升级消除 Node 20 deprecation·RAG 索引重建演练通过·bump_version 增强（--desc/W 范围锚点/页脚同步）·LICENSE 双协议边界补强·sitemap 补全 154 页）· v2.3.31 W416 文件管控清单标注（多 session/Agent 协作：文档规范 §11 必同步 11.1/禁擅自修改 11.2 显式化·交接文档接续流程新增文件管控步骤）· v2.3.30 W415 README 视觉引导增量（徽章区 3 枚 shields.io：在线访问/双协议授权/部署状态 + 🎁 图标化速览 8 条 + 首页预览截图 + 💬 反馈与建议）· v2.3.29 W414 README 用户手册改造（普通读者入口 + 开发者分区两级引导：GitHub Pages 在线站点一键直达 https://1273984347.github.io/xiyouji/·内容导航表·数据维度全景·目标读者清单·工程维护内容收进 details 折叠）· v2.3.28 W413 仓库文件策略审查（严格审查入库边界：6 个个人文档——交接文档×2/项目交接参考手册/项目概览/项目认知总览/项目GitHub参考调研报告 + docs/_dev/_templates/superpowers + docs/10-方法论沉淀 均无敏感内容·全部恢复入库·仅硬性排除 .env 密钥/审计档/依赖/构建产物/可重建产物·assets/fonts/source 字体源入库 +24MB·verify_delivery 恢复交接文档核心硬门禁）· v2.3.27 W412 安全审计剩余项处置（P0-2 禁运行时覆盖 CODEBUDDY_API_KEY/BASE_URL 防密钥劫持+SSRF·P1-2 静态站 XSS 转义 escapeHtml/escapeAttr 6 页·P1-3 security_scan 新增 SEC-005 sk- 扫描·P2-1 RAG top_k/hops/history 参数钳制·P2-2 LLM 端点校验禁内网 SSRF·P2-3 SSE 断开清理+10 分钟超时·P2-6 ChatMarkdown DOMPurify 消毒·P2-7 依赖版本锁定·P3 日志收敛/CORS 白名单/死代码/版本漂移）· v2.3.26 W411 安全审计 P0-1/P1-1 处置（Web Agent 鉴权加固：可选 AGENT_WEB_TOKEN 认证 + 权限白名单禁外部 bypass + cwd 越界回落 PROJECT_CWD + 仅回环监听 127.0.0.1·MCP 路径白名单：4 工具 _resolve_within is_relative_to 拒越界）· v2.3.25 W410 npm 依赖审计补充（agent-web 纳入 CI audit：security.yml npm-audit 扩至双目录 scripts/ + xiyouji-agent-web/·依赖链 overrides 修复 cherry-markdown 0.11.9/mermaid 11.16.1/dompurify 3.4.13·uuid 9→11·lucide-react 0.563→1.31·双目录 audit 0 漏洞）· v2.3.24 W409 文档同步刷新（交接文档内容纠偏 + 五文档版本叙述校准）· v2.3.23 W408 修 static 资源路径（P2 续）：site/data/*.html 内联 CSS 的 @font-face url('static/fonts/...') 与 hero background url('static/images/...') 改 ../static/（从 site/data/ 上溯到 site/static，file:// 与 http 部署均正确；原 86 页×6 处=516 静态资源 404 归零）· W407 修数据路径代码异味（P2）：dialogue-sentiment 补 ../../ + 两 -view 页 file:// 跳过 /dataset/ 死 fetch（W407）· 截图审查纳入发布流程（W406）· CI/安全 workflow 转绿（W400）· 工程化收口部署+埋点（W390）· 首页问渡口+渡口引擎离线（W391）· 站点导读层+修死链（W392）· 降级六文档同步·bump_version（W393）</footer>
+<footer>佛法=AI · 缘起即算法 · v2.3.163 W563 前端关键路径与部署正确性（W563 前端关键路径与部署正确性） · v2.3.162 W562 skills目录退役（W562 skills目录退役） · v2.3.161 W561 残余几何越界收敛（W561 残余几何越界收敛） · v2.3.160 W560 工具链收尾批次（W560 工具链收尾） · v2.3.159 W559 工作复盘与优化分析报告（W559 工作复盘报告） · v2.3.158 W558 五类残留缺陷修复（W558 五类修复） · v2.3.157 W557 全站复审完成+类级修复（W557 全站复审完成） · v2.3.156 W556 审计修复+第25门禁（W556 审计修复F1-F8+第25门禁） · v2.3.155 W555 工作复盘与优化分析报告（W555 工作复盘报告） · v2.3.154 W554 B阶段一管线+C数据审计（W554 B阶段一管线+C数据审计） · v2.3.153 W553 低危视觉细节批次（W553 低危视觉细节批次） · v2.3.152 W552 三项可选批次计划（W552 三项可选批次计划） · v2.3.151 W551 图表门禁常驻化（W551 图表门禁常驻化） · v2.3.150 W550 全站截图审查与修复闭环（W550 全站截图审查与修复闭环） · v2.3.149 W549 复盘报告后记（WBS 对账）（复盘报告后记） · v2.3.148 W548 迁移阶段 5 + 闭环（React 19 + TDesign 1.18）（迁移阶段 5 + 闭环） · v2.3.146 W547 迁移阶段 4（Tailwind v4）（迁移阶段 4） · v2.3.145 W546 迁移阶段 3（Vite 8.2 rolldown + plugin-react 6·engines 收紧） · v2.3.143 W544 迁移阶段 2（TS 7 + types 19）（迁移阶段 2） · v2.3.142 W543 迁移阶段 1（Express 5 + uuid 14 + dotenv 17 + bs3 13）（迁移阶段 1） · v2.3.141 W542 交付效率工具化（batch_cascade.py + 冒烟固化④）（交付效率工具化） · v2.3.140 W541 复盘报告归档（工作复盘与优化分析报告入册 docs/10） · v2.3.139 W540 迁移评估基线更新（评估文档 vite 基线 6.4.3 注记） · v2.3.138 W539 遗留收尾（vite 5→6.4.3 清零 devDep 漏洞·dompurify 3.4.14·移除 dompurify override） · v2.3.137 W538 CI 红灯热修复（batch_screenshots 白名单形状回归 + agent-web 依赖 overrides 归零生产审计） · v2.3.136 W537 全仓对抗性审查修复（W536 收尾欠账清零 + Mimosa 提交闸门 77 高危清零：Python 写路径守卫 ×54/JS 去动态执行/请求边界加固/server 工作目录钳制 + 存量缺陷 7 项处置） · v2.3.135 W536 依赖积压治理（6 个 dependabot PR 清零：绿灯 3 合并 + 冲突 1 手工落地 + 红灯 2 转专项·dependabot.yml 加 ignore semver-major；新建 eslint.config.mjs 修复「.eslintrc.json 自 ESLint 9 起失效」隐患·9/10 双版本 0 error；迁移评估出档） · v2.3.134 W535 决策闸门取数自动化（fetch_gate_stats.py 新建·GoatCounter API v0 拉近 7/30 日 UV·负样本自测 14/14） · v2.3.133 W534 治理文档递增数字字面量修复（交接文档「接续 W 编号」改引用式·W520 递增数字禁字面量规则外存量 1 处治愈） · v2.3.132 W533 skills 归属策略显式化 + 坑④入 playbook（agent-session-loop / deep-review-loop / mem-wrap-up / self-evolution master 定全局·仓库为受控镜像，MIRROR_SKILLS 禁 --sync/--force；version-bump v1.2.0 收录坑④） · v2.3.131 W532 交接文档最后更新滚动链裁剪回契约上限（交接文档第 7 行 9 批→3 批回契约上限·删 6 批逐批断言 CHANGELOG 有段） · v2.3.130 W531 skills 部署全查 + 三真源降级保护（sync_skills 方向判定+降级拦截 · 四通用技能回写全局真源版） · v2.3.129 W530 决策闸门工程落地（judge_gate.py 新建·判定优先级定案（30日<30 归档优先消除冲突歧义）·读者数据复盘模板 + 方法论索引登记——UV 数据待用户后台回填后执行判定）· v2.3.128 W529 R6 拦截落地 + 方案 v7 回填（决策闸门前置·goatcounter 污染实测修正——CI 访问原假设不成立·拦截按纵深防御落地 5 点 + W464 方案 12 处表述具体化）· v2.3.127 W528 存量漂移点统一修复（skills 17→19·A3 211→215·学术索引 50→55·site/data 46→86·D3 本地化口径·README 索引去版本号——9 处对齐现役口径）· v2.3.126 W527 drift-audit 技能补漏维度（步骤 3 段缺失双向核对 + 豁免区外新增乱序 P1 判级——W525 实证对齐·v1.2.0）· v2.3.125 W526 索引健康门禁盲区封堵（check_index_health 新增段倒序断言 + 段缺失检测（对照 CHANGELOG）·verify_delivery 新增第 23 门禁旁文档同步——workflows/README.md 头部版本行与里程碑行上限纳入校验·W525 实证三项漏网全堵）· v2.3.124 W525 漂移审查修复（drift-audit 全仓体检：file-index W504 段缺失补建 + W522-W524 尾部追加重排归位·workflows README 同步至 W524·文档规范 §8 门禁表对齐 AGENTS §4.2 补学术轨/回退两项）· v2.3.123 W524 bump 追加污染坑位补记（--note 同样追加污染——AGENTS §4.3 坑②扩为 --desc/--note 双触发 + file-index 空壳段现象补记）· v2.3.122 W523 截图审查恒全量根因修复（scope diff 三处加 -c core.quotePath=false——中文路径八进制转义致 case 免审失配恒落保守全量 ~11min·本地 Git Bash 双向模拟验证 skip）· v2.3.121 W522 CI 红灯修复（E41 发现本地 main ahead 25 未推 + 远端最后 CI（W503）红——scripts/ ruff 16 错误清零：inject_goatcounter.py:68 字符串未闭合根因 + 12 lint 机械清理 7 文件·行为零变更）· v2.3.120 W521 存量裸字面量清剿 + W463 三坑补登记（DRL F2 15 文件三分类裁决——现状声明改引用式 6 处 + 口径/指引加注 5 处 + 门禁模板豁免·交接文档「三」补 W463 段 E45 编号空间完整化·sync 10 文件双轨一致）· v2.3.119 W520 递增数字禁字面量 + skills 内文数字比对维度（plan-authoring 去模糊化标准⑤ + day-review 步骤 4 第 8 条 + drift-audit 步骤 5 第 4 条固化 + reference 命令/案例扩展 + 三 skill 自体病例治愈 + DRL 复验修复 8 项·E46 登记交接文档「三」，E45 已被 W460-W463 三坑占用顺延）· v2.3.118 W519 Skills 全目录审查与 SKILL.md 内容优化（A 类计数漂移 14 处 + B 类门禁数去硬编码 8 处 + AGENTS 树注释 17→19 + D 类 7 skill 补 frontmatter version·sync 双轨一致）· v2.3.117 W518 期望版本动态化 + 尾页脚新鲜度门禁（verify_delivery 六文档期望版本动态取自 CHANGELOG 现役段·dukou-engine 页脚降级为新鲜度 WARN + check_governance_docs 检查 7「最后更新」头尾两处链首现役校验（finditer 全量）+ day-review SKILL.md 步骤 4 第 7 条）· v2.3.116 W517 共享机制载体铁律（仓库内文件为真源·禁只写全局路径·改 skill 后 sync_skills 同步全局）· v2.3.115 W516 经验上移机制固化（mem-wrap-up Step 5 上移检查子步骤：上移映射表 + 强制登记交接文档「三」·E44/E34/E41/E36-42 五组经验补上移）· v2.3.114 W515 渲染抽查常驻化 + 门禁正文引用存在性检查（skills 引用资产磁盘断言·堵 _shot_check.js 式失效指针）· v2.3.113 W514 治理文档口径修复（五元文档数字校正 611→615·A3 211→215·AGENTS §4.2 补录第 21/22 门禁登记）· v2.3.112 W513 归档二级归档（方案 A：CHANGELOG-ARCHIVE 917→150KB·W001-W399 下移 docs/archive/tier2·归档三件套 >1MB 触发规则入文档规范）· v2.3.111 W512 CI 安全批次（security_scan pip-audit 超时 120→300s·DEP-001 误报归零·真实依赖漏洞=0）· v2.3.107 W508 复盘剩余项收口（管线协议去重：creative-methods 方法四指向 SKILL 管线章节为单一事实源 + _check_pipeline_consistency.py 管线一致性轻量校验：生成来源须 创意三明治管线@·引文 ≥3）· v2.3.106 W507 复盘沉淀落地（引文探针 _cite_probe.py 永久化：写引文前从 text-search.json 提取候选·禁凭记忆编造 + day-review 步骤 4 新增归档/删除脚本查 tests/ 引用规则）· v2.3.105 W506 处置遗留（删除失锚测试 test_fix_svg_negative_widths.py：W447 归档 fix_svg_negative_widths.py 时漏删配套测试·pytest 全量恢复 282 passed）· v2.3.104 W505 创意流程闭环落地（创意三明治管线四步流程入 character-content skill + 4 篇试点方向二深化：菩提祖师/黑熊精/金角银角/高翠兰·各含 3 条精确引文·可信度轨收官）· v2.3.103 W504 存量核验状态基线 + 学术轨 105 篇引文核验（A+ 路径：611 篇核验状态全覆盖·学术轨 105/105 绿标·引文 411 条 100% 命中·content-trust-report 产出）· v2.3.102 W503 原著引文硬验证（第 20 门禁 check_citations.py 挂载：原文引文行对 text-search.json 精确命中·防 AI 幻觉引文·文档规范 §4.8）· v2.3.101 W502 术语一致性门禁（第 19 门禁 check_glossary.py 挂载：术语库 6 组 59 条类型化·称谓组规范词锚定·基线豁免 303 篇 383 条）· v2.3.100 W501 元信息块 v2（第 18 门禁 check_frontmatter.py 挂载：新文件血缘+核验状态 4 字段必填·基线豁免 611 篇·文档规范 §4.6 + character-content skill 模板同步）· v2.3.99 W500 索引健康门禁（第 17 门禁 check_index_health.py 转正：file-index 段完整性/唯一性/最新段残留 + 方法论 README 双向覆盖 + CHANGELOG 编号上限·豁免 W449-463 损坏区 + bump_version 次级版本行增强）· v2.3.98 W499 GitHub 协作模板 + 创意方法论沉淀（.github issue/PR 模板 5 个·创意三明治/人机创意方法论 2 篇·character-content 创意方法引用·方法论 README 索引修复·file-index W449-463 结构注记）· v2.3.97 W498 防漂移门禁（第 16 门禁 check_skills_index.py 转正：skills 目录==README 索引==AGENTS §4.5 + 全文件 git tracked + name==目录名·配套 _sync_skills.py 仓库→全局同步·18 skill 全量部署全局版）· v2.3.96 W497 skills 治理同步（visual-batch 同步全局版 v1.2.0：W478 脚本迁移六规则+W488 可感知验收/暗色夜读·plan-authoring 同步 v1.1.0：验收三段式+§10 落地回写·day-review 收录入库（AGENTS §4.5+README 索引 18 个）·characters-knowledge 修 text-search 失效引用→dataset/text-search.json·version-bump 补收尾三同步（AGENTS 脚注/路线图回写/方案档回填）·四会话 skill 补子代理不可用降级+闭环单一事实源护栏·_check_skills.py 自检 18 全过）· v2.3.95 W496 优化收尾（data/EN 225 页夜读浮动切换钮（theme-init 注入·根页自有切换器跳过）·test_smoke 检查 6 样式生效断言固化·acceptance_snapshot 验收现测工具+禁跨批复制铁律·V2 fps 遗留实测关闭）· v2.3.94 W495 P0 热修复（W493 回归处置：inline_css --force 恢复 224 页 INLINED CSS + 修 --force 的 skip-no-link 短路缺陷·新增 check_inlined_css.py 门禁转正（块≥20KB 断言+负样本自测）·7 视口×7 页样式/溢出/pageerror 三重回归 ALL PASS·baseline_snapshot.py 补入库 + 5 方案档落地状态回填）· v2.3.93 W494 Phase E 遗留收尾（断点常量规范化 380 处→白名单·图表 ≤640px CSS 降级·tag-cloud/81-hardships 存量溢出修复·字体切片判定关闭：内联架构+VF 特性双根因·CSP 归零·5 视口 0 溢出）· v2.3.92 W493 Phase E6 验收收口（三门禁转正挂 verify_delivery：token 覆盖率/动效禁止清单/a11y 对比度·负样本自测全过·私有块 UI 裸色 1193→246 全豁免登记·263 裸阴影映射 elev·10 处 infinite 改一次性·M1-M7 全达标·Phase E 主线收官）· v2.3.91 W492 Phase E5 响应式+微交互（导航抽屉 4 根页：display:none 关闭态+双帧过渡+遮罩+ESC+RM·dashboard 补 system.css link·375px 关闭态零溢出·数据页/EN 无回归·图标收尾 emoji=0·ask-chip 触摸目标修复·字体切片/断点/图表降级显式推迟 W493）· v2.3.90 W491 Phase E4 EN 站同步（85 同名可视化页六规则令牌化·validate_en 85/85 过·CN/EN 10 页对照目视一致·85 页 pageerror=0·门禁全绿）· v2.3.89 W490 Phase E3 CN 可视化页传播 II（30 页全量令牌化：86−E2 56 余量·复用六规则迁移·3D 2 页 canvas 断言过·30 页 pageerror=0·M2 严格清零移 E6 收口·门禁全绿）· v2.3.88 W489 全站暗色模式（dark 令牌组迁入 tokens.css 全局化·inline_css --force 225 页传播（data+EN 全获 dark UI 适配）·新增 js/theme-init.js 同步防 FOUC 并插入 226 页 head·5 根页内联 dark 令牌去重 1170B/页·SVG 数据色暗色提亮 filter·全站 12 页 dark 冒烟 pageerror=0 FOUC=0·内联 CSS 28385B ≤33KB·门禁全绿）· v2.3.87 W488 根页视觉重设计+夜读模式（6 用户可见根页可感知升级：hero/KPI 数字朱砂强调·卡片 hover 朱砂描边上浮 -3px·emoji→朱砂线条 SVG 图标·导航 active 指示条·reveal-in JS 接入（IO+RM 守卫）·暗色夜读模式（xy-theme localStorage+防 FOUC+dark 覆盖走页内联不落全局·M-A1 前后对比像素率 6/6≥1%+目视清单 6×3 处·门禁全绿）· v2.3.86 W487 四会话 skill 二轮同步（DRL 未安装降级声明 + experience-capture 格式规范 + 触发词扩充：记住这个/capture/经验沉淀）· v2.3.85 W486 四会话 skill 协议同步（verdict 7 词全序 / R0 4 件套 / 过拟合警报增强版 / P2 残留规则 / work-log 路径 / bridge_note 定义 / 整合版协调声明，同步自上游 GitHub 四仓库）· v2.3.84 W485 收录三项目 playbook（visual-batch / plan-authoring / plan-review：Phase E 视觉批次执行 + W 批次方案撰写 + 方案评估）· v2.3.83 W484 Skills 目录治理（14 个 skill 审查修复：openai.yaml 占位符还原 + TRAE skill 平台适配 + agent-session-loop 精简注记 + 六文档同步 + skills/README + _check_skills.py）· v2.3.82 W464 Phase 3 观测基线确立（baseline_snapshot.py 入库·观测基线快照.md 自动生成：611/86/138/228 计数 + 5 核心页 LCP/CLS/TBT 实测全过阈值 + UV 手填栏待后台回填 + 决策闸门阈值登记；perf-baseline.json 更新 W464 实测；GoatCounter 链路核验：count.js async 三类页 + visit-log defer + 计数端点可达）· v2.3.81 W478 Phase E2 CN 可视化页传播 I（56 页全量令牌化：试点 3 页人工 + 剩余 53 页 _w478_migrate.py 按范式迁移——R-SHADOW 硬编码阴影→elev 令牌/R-RADIUS 1-3→sm·4-8→md·9-12→lg/R-TRANS 时长令牌化/R-FOCUS color-mix 派生/裸色白名单→paper·paper-warm·ink·ink-soft + R-EXEMPT 图表数据色逐页登记 + tooltip 暗底金违规收编；全批 56 页 Playwright pageerror=0 + 截图目视无破坏 + M5 净 +102 行（豁免登记注释）+ check_structure/CSP/范围 53 页精确）· v2.3.80 W477 Phase E1 组件层 v2 + 根页模板化（system.css v2：card/kpi/chart-block 接 elev-1 默认海拔 + hover elev-2·btn 五态完备 + 朱砂微渐变白名单·filter-tab/badge/search 转 pill·tooltip 升 elev-3·topnav/table/index-row 颜色令牌化·新增微交互工具类 u-lift/u-press/reveal-in fail-open/语义色文本·+2455B 预算内 + 根页：index 提问框全令牌化·dashboard footer 统一 site-footer + 陈旧版本修正 + 两处 focus 令牌派生统一·curated/guide 卡片海拔化·mobile-index nav-card/kpi-item 令牌化·text-search 主搜索框 focus 缺陷修复（--focus-ring 未定义）+ Noto Sans SC 子集化（9340 字·771→755KB·unicode-range 切片登记后续专项）+ inline_css --force 225 页；Playwright 6 页抽查 pageerror=0 + 样式断言生效 + 门禁全绿）· v2.3.79 W476 Phase E0 纸感轻立体宪改 + tokens v3（视觉高级感升级方案三问已决：纸感轻立体方向/暗色模式纳入 E7/归档冻结 E1 + E0 探针报告 P1-P6：裸色 16322 处/var(--dur)1568 vs 裸 1452/组件选择器重复 224-227 页/根页 8 页异质/Noto Sans 未子集化候选 + DESIGN.md §4A 新立：四级海拔/渐变白名单三处/排版阶梯 1.25/圆角边框/断点五档/微交互清单/体积预算红线 + tokens.css v2→v3 令牌层：--elev-0~4/--radius-sm~pill/--border-hairline/--accent-deep~wash 色阶派生/--ok~info 语义色/--text-step-0~5+--text-hero/--leading×3·增量 +2035B 预算内 + inline_css --force 同步 225 页；check_structure 232 文件 + JS 语法 + CSP 1173 哈希 0 漂移 + lint_links 4122 链接 0 broken + verify 核心全绿；Phase E W476-W483 预排编号·与 Phase 3 并行轨）· v2.3.78 W463 墨韵 W-g 收尾固化 + W-f 扫尾批【墨韵系列收官】（DESIGN.md §5 重写为九节强制契约：时长三档预算反馈≤150/状态≤250/入场≤600 + 白名单仅 hero 600/count-up 900 + RM 双守卫调用点级与 prototype 级 + tooltip 契约宣纸底语义色 + count-up fail-open 铁律 + fetch loading 态 EMBEDDED 同步页禁接入 + 性能红线 transform/opacity only + system.css 新增 .chart-loading 呼吸骨架与 .chart-fade-in 首帧淡入 inline_css 同步 225 页 + P2-1 loading 接入 6 页：容器形态 4 + svg 兄弟形态 2·MutationObserver 自移除 + 8s 超时兜底·search 空态语义不符回退 + W-f fade-in 3 页 three×2/canvas×1 + text-search 豁免——86 页动效全覆盖覆盖等式归零；两 bug 断言驱动修复：svg 兄弟方向 nextElementSibling + microtask 时序 observer 注册前初始检查；CSP 1173 哈希 0 漂移 + 6 loading 页骨架全移除 + 3 fade 页动画终态 + RM 停帧直达 + verify 全绿·墨韵 W460→W463 四批收官）· v2.3.77 W462 墨韵 W-d/W-e 统计页批（66 剩余页按实现证据分型：37 transition 页调用点级 RM 守卫·141 duration+21 delay+59 裸 transition 包裹 MOYUN_RM?0:N·>600 全归一 600 全站清零 + 7 页表达式形态 prototype 级守卫 patch d3.transition.prototype·浏览器实测 7000ms 组合 1ms 达终态 + tooltip 收编 11 页：A 组 four-heavenly-kings 22 edits + C 组 10 静态页 div 换类/宣纸底重映射/.classed('visible') + count-up 18 页探针接入 + 卫生项全站尾部重复 </body></html> 去重 154 页 CN77+EN77·count-up 断言意外发现的历史模板缺陷；57 页 pageerror=0 + RM 6/6 + tip 5/5 + CSP 1167 哈希 0 漂移 + verify 全绿·W-f 9 页非 D3 + W-g 待续）· v2.3.76 W461 墨韵 W-c 网络页批（16 个 forceSimulation 网络页 tooltip 分四型收编：A 组 10 页 d3 动态/B 组 1 页变体/C 组 2 页静态 div 改 .chart-tooltip + .classed('visible') 显隐·C 组宣纸底配色重映射·D 组 3 页豁免 + P2-2 KPI count-up 两页：chapter-stats 千分位/character-appearance 文本值过滤·轮询等待 async renderKPI 建元素·P2-1 fetch loading 态边际收益评估延期至 W-g；Playwright 48/48 断言 + 3 页性能基线零回归 + CSP 1149 哈希 0 漂移 + verify 核心全绿·W-d/e~W-g 待续）· v2.3.75 W460 墨韵全站动效体系 P0+样板批（tokens.css 动效令牌 --dur×3+缓动三系+--shadow-lift·system.css 表格 hover 朱砂指示条+opt-in 行入场 .table-anim+sticky+.btn 按压+.kpi/.card 浮起+.link-ink+.chart-tooltip 统一类·inline_css --force 同步 225 页含 EN 138·index/dashboard count-up·4 图表页 D3 编排统一 轴200→网格100+300→标记500 stagger 封顶 400·tooltip 全面收编·ANIMATE 首帧门控 resize 不重播+reduced-motion 双守卫·Playwright 断言 20/20·critique 33/40·W-c~f 推广 78 页待续）· v2.3.74 W459 V2 审查收尾（D2 回目跳转死链修复：A1_DOC_MAP 内嵌 100 条真实文件名映射·check_dynamic_links.py 动态链接门禁挂 verify_delivery·tag-cloud dashboard 死链 + EN source_doc 虚构路径修复·V2 方案文档回写·首页精选补 geo-3d 入口）· v2.3.73 W458 防回归门禁体系落地（check_structure.py + check_js_syntax.js + 样式生效断言 + 诊断SOP）· v2.3.72 W457 全站白屏根因修复（CSS url 括号笔误 222 页 + EN 引号腐蚀 7 页）· v2.3.71 W456 全站 D3/Three 本地化 + 白屏根因修复（d3js.org/cdnjs 外域 CDN 单点消除：d3.v7.min.js+three.r128.min.js 落 site/static/js/·163 处 script src 按目录深度改写+_shell 模板同步；7 个陈旧 JSON 从 EMBEDDED 回写对齐 + 两页防御容错；CSP 重哈希·http 模式 94 页复扫 0 白屏·lint_links 4123 链接 0 broken·verify 核心全绿）· v2.3.70 W455 方案 B/C/D 三个可视化深化（character-dynamic-network 1-100 回目进度条播放关系边 + 邻域模式 + 边权重双编码；hardship-difficulty-heatmap 单元格钻取 + 表↔热力图双向联动 + 难度/章节/结局三排序；journey-spacetime 双轴联动 + 节点跳转 A1 回目解读 + 段路耗时刻度）· v2.3.69 W454 方案 A 西游地理 3D 可视化（journey-geo-3d.html 新建：Three.js r128 + 手动 setupOrbitControls + 程序化示意地形 + 17 节点 Sphere + CatmullRom 路线 Tube + 河流 Tube + 路线高亮/地形透明切换 + file:// 可用 + EMBEDDED 回退 + journey_geo_3d.json 数据 + tag-cloud/sitemap 登记 + _smoke_geo3d 脚本；EN 版默认跳过记录"EN 暂缓"）· v2.3.68 W453 移除外部锐评原始文本（评论.txt·结论已沉淀于 CHANGELOG）· v2.3.67 W452 学术研究显式引用补齐（105 篇头部 > 引用 + verify 门禁）· v2.3.66 W451 学术研究引用审计（105 篇保留 · 9 篇降教学讲解）· v2.3.65 W450 统计口径统一与轨标体系（统计口径说明 + 首页精选必看 + 33 篇跨界趣谈 + 纯AI输出披露）· v2.3.64 W449 冗余文档清理（git rm 删除项目概览/项目认知总览/项目交接参考手册 + 依赖清理 README/文档规范/file-index + verify 全绿）· v2.3.63 W448 外部锐评回应治理（STRUCTURE 版本里程碑归档 110→43KB + README 版本号语义说明 + LICENSE-CONTENT AI 生成方式披露）· v2.3.62 W447 工具目录治理（英化工具链转正 + 45 脚本归档 + README）· v2.3.61 W446 英文站旧页 CJK 残留清理（52 页全过·138 页真正闭环）· v2.3.60 W445 英文站续译 relationships（全站英文化收官·86 页全部完成）· v2.3.59 W444 英文站续译 tag-cloud（全站标签云导航页）· v2.3.58 W443 英文站续译 batch21（并行 subagent 新增 3 页：narratology-13d-network/emotional-heatmap/material-archaeology）· v2.3.57 W442 英文站续译 batch20（并行 subagent 新增 5 页：poetry-rhythm-analysis/customs-pass-route/pilgrim-team-psychology-arc/jurisprudence/linguistics）· v2.3.56 W441 英文站续译 batch19（并行 subagent 新增 5 页：ethics-consumption/monster-hierarchy-network/music-structure/heaven-power-network/ai-dialogue）· v2.3.55 W440 英文站续译 batch18（并行 subagent 新增 5 页：karma-reincarnation/underworld-power-network/graph-explorer/narratology-12d-network/chart-design）· v2.3.54 W439 英文站续译 batch17（并行 subagent 新增 5 页：dialogue-sentiment/monster-female-network/ecology/game-webnovel/monster-sociology）· v2.3.53 W438 英文站续译 batch16（并行 subagent 新增 5 页：hardship-difficulty-heatmap/aesthetics/magic-system/visual-art/guanyin-six-roles-network）· v2.3.52 W437 英文站续译 batch15（并行 subagent 新增 5 页：business-model/intertextuality-network/risk-project/power-resources/cave-estate）· v2.3.51 W436 英文站续译 batch14（并行 subagent 新增 5 页：narrative-experiment/journey-spacetime/methodology-matrix/workplace/text-evolution）· v2.3.50 W435 英文站续译 batch13（并行 subagent 新增 5 页：deconstruction/six-senses-narratology-network/monster-victims-network/social-media/cognitive-psychology）· v2.3.49 W434 英文站续译 batch12（并行 subagent 新增 5 页：theological-intervention-network/criticism-history/global-pattern/cross-time-danmaku/character-dynamic-network）· v2.3.48 W433 英文站续译 batch11（并行 subagent 新增 5 页：four-dimensional-research-network/four-heavenly-kings-artifacts/monster-ecology-network/philosophy/concept-device）· v2.3.47 W432 英文站续译 batch10（并行 subagent 新增 5 页：pilgrim-team-dynamic-network/counterfactual/ming-political-thought-comparison/monster-background/cultural-misreading）· v2.3.46 W431 英文站续译 batch9（并行 subagent 新增 4 页：timeline/monster-capability-radar/journey-map-interactive/character-relationship-3d-view）· v2.3.45 W430 英文站续译 batch8（新增 1 页：perf-canvas-rendering）· v2.3.44 W429 英文站续译 batch7（新增 3 页：text-search/81-hardships-view/mbti-evolution）· v2.3.43 W428 英文站续译 batch6（新增 5 页：century-dialogue/data-explorer/language-style-radar/famous-time-travel/search）· v2.3.42 W427 内容质量残留清理（A4/A5 轨标补齐 78 篇 + BOM 清理 21 文件 + 陈旧产物处置）· v2.3.41 W426 GoatCounter 自托管修复（gc.zgo.at 大陆 DNS 污染 → count.js 本地自托管 + 计数回传 goatcounter.com + CSP 白名单更新 + verify_delivery 全绿）· v2.3.40 W425 GoatCounter 真实跨访客统计接入（全站 160 页注入计数脚本 + generate_csp 白名单 gc.zgo.at/1273984347.goatcounter.com + _headers 同步 + verify_delivery 全绿）· v2.3.39 W424 对抗性审查修正与全仓整理（A4 门禁校准 209·3D/EN 页修复·security 门禁修复·CI 文档同步·产物清理）· v2.3.37 W422 全量治理（P1-P3 优化：perf.yml 触发修复 + verify 四门禁 + 文档归档 + 双索引校准 + Dependabot）· v2.3.36 W421 Screenshot Review 提速优化（改动范围判定：页脚/文档-only 跳过·data 页定向截图·浏览器缓存）· v2.3.35 W420 A1 内容质量深化（深度解读 100/100 补全：第038/039回新增 SD102/SD103·56 回对应原著/数据指标元数据补齐·99 回导航上一回/下一回错链修复·10 回 sd-crossref 死链修复·docs/01 1715 链接 0 broken）· v2.3.34 W419 修复 A1 深度解读 SD 错位（22 篇 SD 编号≠真实回号归位：SD038-052/056-062 按正文真实回号移动·范围式复制 40-72 回全覆盖（原 63-72 十连回空白消除）·源文件 24 篇元数据/H1/正文内嵌/关联行修正·第 56 回补写 SD101（草寇之死）·lint_links 2629 链接 0 broken）· v2.3.33 W418 内容质量深化（全站死链巡检：site/en/ 4 文件 29 broken 链接修复——EN 版存在指向同目录/无 EN 版回退中文原版 ../data/*.html 加 lang="zh-CN" 标注·与 visualizations.html 惯例一致；docs/ 全量 4784 链接 0 broken·A1 逐回解读 23 回补 > 导航： 引用行（返回导读/上一回/下一回/站点首页/通用可视化·原 13 回完全无导航 + 10 回仅段落式）——100 回导航全覆盖 100/100）· v2.3.32 W417 文档健康治理（P0-P2 全优先级处置：CHANGELOG/file-index/交接文档归档精简降达标·verify_delivery 新增 A1-A6 真实计数校验 611==611·actions 升级消除 Node 20 deprecation·RAG 索引重建演练通过·bump_version 增强（--desc/W 范围锚点/页脚同步）·LICENSE 双协议边界补强·sitemap 补全 154 页）· v2.3.31 W416 文件管控清单标注（多 session/Agent 协作：文档规范 §11 必同步 11.1/禁擅自修改 11.2 显式化·交接文档接续流程新增文件管控步骤）· v2.3.30 W415 README 视觉引导增量（徽章区 3 枚 shields.io：在线访问/双协议授权/部署状态 + 🎁 图标化速览 8 条 + 首页预览截图 + 💬 反馈与建议）· v2.3.29 W414 README 用户手册改造（普通读者入口 + 开发者分区两级引导：GitHub Pages 在线站点一键直达 https://1273984347.github.io/xiyouji/·内容导航表·数据维度全景·目标读者清单·工程维护内容收进 details 折叠）· v2.3.28 W413 仓库文件策略审查（严格审查入库边界：6 个个人文档——交接文档×2/项目交接参考手册/项目概览/项目认知总览/项目GitHub参考调研报告 + docs/_dev/_templates/superpowers + docs/10-方法论沉淀 均无敏感内容·全部恢复入库·仅硬性排除 .env 密钥/审计档/依赖/构建产物/可重建产物·assets/fonts/source 字体源入库 +24MB·verify_delivery 恢复交接文档核心硬门禁）· v2.3.27 W412 安全审计剩余项处置（P0-2 禁运行时覆盖 CODEBUDDY_API_KEY/BASE_URL 防密钥劫持+SSRF·P1-2 静态站 XSS 转义 escapeHtml/escapeAttr 6 页·P1-3 security_scan 新增 SEC-005 sk- 扫描·P2-1 RAG top_k/hops/history 参数钳制·P2-2 LLM 端点校验禁内网 SSRF·P2-3 SSE 断开清理+10 分钟超时·P2-6 ChatMarkdown DOMPurify 消毒·P2-7 依赖版本锁定·P3 日志收敛/CORS 白名单/死代码/版本漂移）· v2.3.26 W411 安全审计 P0-1/P1-1 处置（Web Agent 鉴权加固：可选 AGENT_WEB_TOKEN 认证 + 权限白名单禁外部 bypass + cwd 越界回落 PROJECT_CWD + 仅回环监听 127.0.0.1·MCP 路径白名单：4 工具 _resolve_within is_relative_to 拒越界）· v2.3.25 W410 npm 依赖审计补充（agent-web 纳入 CI audit：security.yml npm-audit 扩至双目录 scripts/ + xiyouji-agent-web/·依赖链 overrides 修复 cherry-markdown 0.11.9/mermaid 11.16.1/dompurify 3.4.13·uuid 9→11·lucide-react 0.563→1.31·双目录 audit 0 漏洞）· v2.3.24 W409 文档同步刷新（交接文档内容纠偏 + 五文档版本叙述校准）· v2.3.23 W408 修 static 资源路径（P2 续）：site/data/*.html 内联 CSS 的 @font-face url('static/fonts/...') 与 hero background url('static/images/...') 改 ../static/（从 site/data/ 上溯到 site/static，file:// 与 http 部署均正确；原 86 页×6 处=516 静态资源 404 归零）· W407 修数据路径代码异味（P2）：dialogue-sentiment 补 ../../ + 两 -view 页 file:// 跳过 /dataset/ 死 fetch（W407）· 截图审查纳入发布流程（W406）· CI/安全 workflow 转绿（W400）· 工程化收口部署+埋点（W390）· 首页问渡口+渡口引擎离线（W391）· 站点导读层+修死链（W392）· 降级六文档同步·bump_version（W393）</footer>
 
 <script>
 // ---- 渡口知识库（抽取自项目西游渡·翻面方法论）----

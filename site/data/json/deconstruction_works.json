@@ -1,0 +1,127 @@
+[
+  {
+    "title": "《悟空传》（今何在）",
+    "year": 2000,
+    "author": "今何在",
+    "country": "中国",
+    "medium": "网络小说",
+    "axis_loyalty": 3,
+    "axis_seriousness": 8,
+    "quadrant": "颠覆-严肃",
+    "amplified_elements": [
+      "反抗",
+      "宿命",
+      "悲剧",
+      "网络文学语言"
+    ],
+    "feature": "重构悟空前世今生·'我要这天再遮不住我眼'·网络文学反西游代表",
+    "influence": "影响一代网络文学·西游解构符号"
+  },
+  {
+    "title": "《大话西游》（电影）",
+    "year": 1995,
+    "author": "刘镇伟·周星驰",
+    "country": "中国香港",
+    "medium": "电影·喜剧",
+    "axis_loyalty": 4,
+    "axis_seriousness": 5,
+    "quadrant": "颠覆-中庸",
+    "amplified_elements": [
+      "爱情",
+      "穿越",
+      "无厘头",
+      "悲剧底色"
+    ],
+    "feature": "至尊宝·紫霞仙子·'一万年'爱情台词·后现代解构经典",
+    "influence": "影响中国一代观众对西游的认知·解构时代标杆"
+  },
+  {
+    "title": "《西游记》（央视1986版）",
+    "year": 1986,
+    "author": "杨洁导演",
+    "country": "中国",
+    "medium": "电视剧",
+    "axis_loyalty": 9,
+    "axis_seriousness": 7,
+    "quadrant": "忠于原著-严肃",
+    "amplified_elements": [
+      "音乐",
+      "视觉经典化",
+      "唐僧师徒形象定型"
+    ],
+    "feature": "六小龄童孙悟空·最经典影视化版本·影响几代华人",
+    "influence": "孙悟空形象标准化·音乐影响深远"
+  },
+  {
+    "title": "《西游·降魔篇》（周星驰）",
+    "year": 2013,
+    "author": "周星驰",
+    "country": "中国香港",
+    "medium": "电影",
+    "axis_loyalty": 3,
+    "axis_seriousness": 6,
+    "quadrant": "颠覆-中庸",
+    "amplified_elements": [
+      "暗黑",
+      "血腥",
+      "玄奘设定",
+      "佛魔二元"
+    ],
+    "feature": "玄奘为驱魔人·悟空为妖王·暗黑化解构",
+    "influence": "周星驰西游宇宙·暗黑风潮"
+  },
+  {
+    "title": "《黑神话：悟空》",
+    "year": 2024,
+    "author": "游戏科学·冯骥",
+    "country": "中国",
+    "medium": "电子游戏",
+    "axis_loyalty": 7,
+    "axis_seriousness": 8,
+    "quadrant": "忠于原著-严肃",
+    "amplified_elements": [
+      "视觉冲击",
+      "美术考据",
+      "暗黑西游",
+      "动作游戏"
+    ],
+    "feature": "以悟空为主角·3A级国产游戏·考据与重构并存",
+    "influence": "国产3A里程碑·西游文化输出新载体"
+  },
+  {
+    "title": "《悟空》（阿城）",
+    "year": 2005,
+    "author": "阿城",
+    "country": "中国",
+    "medium": "小说",
+    "axis_loyalty": 5,
+    "axis_seriousness": 9,
+    "quadrant": "颠覆-严肃",
+    "amplified_elements": [
+      "文人化",
+      "寓言",
+      "性",
+      "戏仿"
+    ],
+    "feature": "阿城文人式重写·戏仿与寓言并存",
+    "influence": "严肃文学对西游的再创作"
+  },
+  {
+    "title": "《大猿王》（小说）",
+    "year": 2008,
+    "author": "网络作者",
+    "country": "中国",
+    "medium": "网络小说",
+    "axis_loyalty": 2,
+    "axis_seriousness": 3,
+    "quadrant": "颠覆-娱乐",
+    "amplified_elements": [
+      "玄幻",
+      "热血",
+      "升级流",
+      "异界"
+    ],
+    "feature": "玄幻升级流·完全娱乐化·网文套路",
+    "influence": "网文西游变体的娱乐化代表"
+  }
+]
