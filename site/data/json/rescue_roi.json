@@ -1,0 +1,268 @@
+{
+  "analysis_name": "搬救兵的投资回报率分析",
+  "formula": "ROI = (解决问题效率 × 人情消耗 × 下次求助的边际成本) / (耗时 × 自身威望折损)",
+  "components": [
+    {
+      "key": "efficiency",
+      "name": "解决问题效率",
+      "range": "0-10",
+      "description": "救兵到位后解决妖怪的效率·10=秒杀·1=反复拉锯",
+      "type": "numerator"
+    },
+    {
+      "key": "favor_cost",
+      "name": "人情消耗",
+      "range": "0-10",
+      "description": "动用的人情资源规模·10=顶级菩萨/天尊亲临·1=小神小仙",
+      "type": "numerator"
+    },
+    {
+      "key": "marginal_cost",
+      "name": "下次求助边际成本",
+      "range": "0-10",
+      "description": "建立长期合作的可能性·10=可持续求助·1=一次性消耗",
+      "type": "numerator"
+    },
+    {
+      "key": "time_cost",
+      "name": "耗时",
+      "range": "0-10",
+      "description": "从决定求助到问题解决的时间成本·10=耗时极长·1=秒决",
+      "type": "denominator"
+    },
+    {
+      "key": "reputation_loss",
+      "name": "自身威望折损",
+      "range": "0-10",
+      "description": "求救对个人威望的折损·10=威望大损·1=无损",
+      "type": "denominator"
+    }
+  ],
+  "rescue_cases": [
+    {
+      "n": 1,
+      "monster": "黑熊精",
+      "chapter": "第 17 回",
+      "rescuer": "观音",
+      "rescue_phase": "早期·本能型",
+      "components": {
+        "efficiency": 8,
+        "favor_cost": 9,
+        "marginal_cost": 4,
+        "time_cost": 8,
+        "reputation_loss": 9
+      },
+      "roi_score": 2.4,
+      "roi_interpretation": "动用观音亲临成本过高·威望折损严重",
+      "analysis": "首次搬救兵即动用观音亲临·效率高但成本极高·且观音此后成为常驻依赖。"
+    },
+    {
+      "n": 2,
+      "monster": "黄风怪",
+      "chapter": "第 21 回",
+      "rescuer": "灵吉",
+      "rescue_phase": "早期·本能型",
+      "components": {
+        "efficiency": 9,
+        "favor_cost": 4,
+        "marginal_cost": 7,
+        "time_cost": 3,
+        "reputation_loss": 3
+      },
+      "roi_score": 5.25,
+      "roi_interpretation": "对症下药·小成本解决大问题",
+      "analysis": "灵吉菩萨专克黄风·对症下药·时间成本低威望折损小·ROI 最高。"
+    },
+    {
+      "n": 3,
+      "monster": "红孩儿",
+      "chapter": "第 42 回",
+      "rescuer": "观音",
+      "rescue_phase": "中期·学习型",
+      "components": {
+        "efficiency": 9,
+        "favor_cost": 8,
+        "marginal_cost": 6,
+        "time_cost": 5,
+        "reputation_loss": 5
+      },
+      "roi_score": 4.17,
+      "roi_interpretation": "首次主动求观音·建立长期合作",
+      "analysis": "悟空学会主动求助·观音收红孩儿为善财童子·建立长期合作。"
+    },
+    {
+      "n": 4,
+      "monster": "青牛精",
+      "chapter": "第 52 回",
+      "rescuer": "老君",
+      "rescue_phase": "中期·学习型",
+      "components": {
+        "efficiency": 7,
+        "favor_cost": 10,
+        "marginal_cost": 3,
+        "time_cost": 9,
+        "reputation_loss": 8
+      },
+      "roi_score": 2.68,
+      "roi_interpretation": "动用顶级资源解决老君自家坐骑",
+      "analysis": "金刚琢套尽诸神兵器·最终需老君亲降·威望折损严重。"
+    },
+    {
+      "n": 5,
+      "monster": "蝎子精",
+      "chapter": "第 55 回",
+      "rescuer": "昴日星官",
+      "rescue_phase": "中期·学习型",
+      "components": {
+        "efficiency": 8,
+        "favor_cost": 5,
+        "marginal_cost": 7,
+        "time_cost": 4,
+        "reputation_loss": 5
+      },
+      "roi_score": 3.5,
+      "roi_interpretation": "五行相克·精准匹配",
+      "analysis": "观音指路·昴日星官鸡克蝎·五行相克精准匹配。"
+    },
+    {
+      "n": 6,
+      "monster": "牛魔王",
+      "chapter": "第 61 回",
+      "rescuer": "哪吒+天兵",
+      "rescue_phase": "中期·学习型",
+      "components": {
+        "efficiency": 7,
+        "favor_cost": 10,
+        "marginal_cost": 2,
+        "time_cost": 10,
+        "reputation_loss": 9
+      },
+      "roi_score": 1.8,
+      "roi_interpretation": "旧友反目·天庭围剿·成本最高",
+      "analysis": "三调芭蕉扇+天庭围剿·旧友反目·耗时最长威望折损最大。"
+    },
+    {
+      "n": 7,
+      "monster": "黄眉怪",
+      "chapter": "第 66 回",
+      "rescuer": "弥勒",
+      "rescue_phase": "后期·精算师型",
+      "components": {
+        "efficiency": 8,
+        "favor_cost": 8,
+        "marginal_cost": 5,
+        "time_cost": 5,
+        "reputation_loss": 5
+      },
+      "roi_score": 3.75,
+      "roi_interpretation": "佛派内部事务·闭环处理",
+      "analysis": "弥勒佛亲自来收·佛派内部闭环处理·悟空学会找对人。"
+    },
+    {
+      "n": 8,
+      "monster": "狮驼岭三妖",
+      "chapter": "第 77 回",
+      "rescuer": "如来",
+      "rescue_phase": "后期·精算师型",
+      "components": {
+        "efficiency": 10,
+        "favor_cost": 9,
+        "marginal_cost": 5,
+        "time_cost": 2,
+        "reputation_loss": 4
+      },
+      "roi_score": 5,
+      "roi_interpretation": "顶级资源解决顶级危机·效率极高",
+      "analysis": "如来佛祖亲临·三妖皆收·效率最高的顶级危机解决方案。"
+    },
+    {
+      "n": 9,
+      "monster": "老鼠精",
+      "chapter": "第 83 回",
+      "rescuer": "李天王",
+      "rescue_phase": "后期·精算师型",
+      "components": {
+        "efficiency": 8,
+        "favor_cost": 7,
+        "marginal_cost": 6,
+        "time_cost": 5,
+        "reputation_loss": 5
+      },
+      "roi_score": 3.33,
+      "roi_interpretation": "义女归父·天庭家事",
+      "analysis": "李天王义女归父·认亲式归属的典型案例。"
+    },
+    {
+      "n": 10,
+      "monster": "九灵元圣",
+      "chapter": "第 90 回",
+      "rescuer": "太乙",
+      "rescue_phase": "后期·精算师型",
+      "components": {
+        "efficiency": 9,
+        "favor_cost": 7,
+        "marginal_cost": 6,
+        "time_cost": 4,
+        "reputation_loss": 6
+      },
+      "roi_score": 3.33,
+      "roi_interpretation": "九灵元圣听主人召唤·无抵抗",
+      "analysis": "太乙救苦天尊一声呼唤即降·无抵抗·效率高。"
+    }
+  ],
+  "phase_analysis": [
+    {
+      "phase": "早期·本能型",
+      "chapter_range": "第 13-22 回",
+      "characteristic": "先打再说·打不过才求助",
+      "avg_roi": 3.83,
+      "rescue_count": 2,
+      "insight": "本能型求助·动用顶级资源但成本意识弱"
+    },
+    {
+      "phase": "中期·学习型",
+      "chapter_range": "第 40-61 回",
+      "characteristic": "开始精准匹配·但仍有大成本案例",
+      "avg_roi": 3.04,
+      "rescue_count": 4,
+      "insight": "学习型求助·开始计算 ROI 但不熟练"
+    },
+    {
+      "phase": "后期·精算师型",
+      "chapter_range": "第 65-90 回",
+      "characteristic": "对症下药·ROI 稳定",
+      "avg_roi": 3.85,
+      "rescue_count": 4,
+      "insight": "精算师型求助·ROI 稳定·资源调度成熟"
+    }
+  ],
+  "roi_insights": [
+    "<strong>黄风怪案例</strong>证明：对症下药 > 资源等级·小菩萨也能秒杀大妖怪",
+    "<strong>牛魔王案例</strong>证明：旧友反目 + 天庭围剿 = 最高成本·情感成本最贵",
+    "<strong>后期 ROI 反弹</strong>：悟空从 1.8（牛魔王）学会精算·升至 5.0（狮驼岭）",
+    "<strong>观音成为常驻救兵</strong>：边际成本递减·首次 2.4 → 二次 4.17 → 三次直接收编",
+    "<strong>狮驼岭案例</strong>：顶级危机 + 顶级救兵 = 最高效率·如来亲临秒收三妖"
+  ],
+  "application_scenarios": [
+    {
+      "scenario": "《哈利·波特》",
+      "icon": "⚡",
+      "description": "哈利的<strong>邓布利多求助模式</strong>：每次都需校长亲自解决，但校长离世后哈利必须独立面对伏地魔。ROI 从早期最高到末期归零。"
+    },
+    {
+      "scenario": "《魔戒》",
+      "icon": "💍",
+      "description": "弗罗多的<strong>甘道夫求助模式</strong>：甘道夫只在关键时刻介入，弗罗多需独立完成主要任务。ROI 平衡最佳。"
+    },
+    {
+      "scenario": "职场 · 向上管理",
+      "icon": "💼",
+      "description": "<strong>向上管理资源</strong>：精准匹配问题与上级能力域，避免动用顶级资源解决小问题，构建可持续求助关系。"
+    },
+    {
+      "scenario": "创业 · 投资人支持",
+      "icon": "🚀",
+      "description": "<strong>寻求投资人支持</strong>：早期投资人在后续轮次有持续价值，建立长期合作优于一次性求助，边际成本递减。"
+    }
+  ]
+}

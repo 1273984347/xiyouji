@@ -30,6 +30,13 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v6
 
+      # W563：部署期把 SW 缓存名戳上 commit SHA——每次部署缓存名必变，
+      # activate 自动清旧缓存，SHELL 变更必然生效；sed 只改 CI 工作副本不污染仓库。
+      - name: Stamp SW cache version with commit SHA
+        run: |
+          sed -i "s/const CACHE = \"xiyouji-shell-[^\"]*\"/const CACHE = \"xiyouji-shell-${GITHUB_SHA::7}\"/" site/sw.js
+          grep -q "xiyouji-shell-${GITHUB_SHA::7}" site/sw.js
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:

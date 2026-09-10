@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-Pb9tMUAYoTqazNy8+O6a9bYBsxpThd2gMWmwxYY+X7c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-7b135K7VLrTR19iXv6XOUkfJmu1KF87MlfQaCAlX260='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>西游地理 3D · 详解西游记</title>
@@ -12,7 +12,7 @@
         <!-- SHARED CSS · 单一事实源: site/tokens.css, site/system.css -->
     
     
-                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -39,35 +39,35 @@
     font-style: normal;
     font-weight: 200 900;
     font-display: optional;
-    src: url('static/fonts/noto-serif-sc-shared.woff2') format('woff2-variations');
+    src: url('../static/fonts/noto-serif-sc-shared.woff2') format('woff2-variations');
 }
 @font-face {
     font-family: 'Noto Sans SC';
     font-style: normal;
     font-weight: 400;
     font-display: optional;
-    src: url('static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
 }
 @font-face {
     font-family: 'Noto Sans SC';
     font-style: normal;
     font-weight: 500;
     font-display: optional;
-    src: url('static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
 }
 @font-face {
     font-family: 'JetBrains Mono';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
 }
 @font-face {
     font-family: 'JetBrains Mono';
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url('static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
 }
 
 :root {
@@ -388,7 +388,7 @@ h4 { font-size: 18px; font-weight: 500; }
 /* ===== Hero（数据页通用） ===== */
 .hero {
     background: var(--dark);
-    background-image: url('static/images/ink-mountains-hero.webp');
+    background-image: url('../static/images/ink-mountains-hero.webp');
     background-size: cover;
     background-position: center 70%;
     background-blend-mode: soft-light;
@@ -1535,7 +1535,7 @@ td.num, th.num {
 
     window.addEventListener('load', function () {
         // fetch + EMBEDDED 回退（file:// 或 GitHub Pages 下 scripts/ 不可达 → 自动回退）
-        fetch('../../scripts/output/data/journey_geo_3d.json')
+        fetch('json/journey_geo_3d.json')
             .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
             .then(function (d) {
                 if (d && Array.isArray(d.nodes) && d.nodes.length > 0) {

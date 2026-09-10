@@ -11,6 +11,36 @@
 ---
 
 
+## W563 W563 前端关键路径与部署正确性批次（2026-09-10·v2.3.163）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/superpowers/plans/2026-09-08-frontend-perf-and-deploy-correctness-plans.md | W563 | 新增·方案档（A/B/C 三方案+复审修订+执行实录） |
+| scripts/inline_css.py | W563 | 修改·B-0 按页深度 url 重写 + W536 写守卫根目录同款修复 |
+| scripts/_fix_d3_position.py | W563 | 新增·一次性：154 页 d3.v7+d3-sankey 移位+preload（CRLF 安全+安全阀） |
+| scripts/_font_probe.js | W563 | 新增·一次性：file:// 字体加载探针（3 页 3/3） |
+| scripts/_fix_oob_fetch.py | W563 | 新增·一次性：越界 fetch 前缀改写（两步替换）+副本复制 |
+| scripts/_embed_chapter_stats.py | W563 | 新增·一次性：chapter-stats 中英页 EMBEDDED_DATA 嵌入 |
+| scripts/_fix_semiotics_embed.py | W563 | 新增·一次性：journey-geo-semiotics 中英页单源化 |
+| scripts/_check_json_copies.py | W563 | 新增·批内自检：47 副本逐字节对账 |
+| scripts/_deploy_smoke.js | W563 | 新增·一次性：部署态 6 页 4xx/pageerror 冒烟 |
+| scripts/check_data_drift.js | W563 | 修改·门禁 9 扩展：副本对账+引用存在性+副本路径解析+页名回退（46 页/74 项） |
+| scripts/utils/text_loader.py | W563 | 修改·load_all_chapters 兼容 第*.md（曾只匹配 .txt 致分析器全空转） |
+| scripts/output/data/chapter_stats.json / character_appearance.json | W563 | 再生成·loader 修复后首次真实数据（22.6KB/59KB） |
+| site/data/json/*.json（47 个） | W563 | 新增·部署副本（与原件逐字节相等，门禁 9 对账） |
+| site/data+en+根 227 个 HTML | W563 | 修改·226 页重内联（字体 url）+154 页 D3 移位+107 页 fetch 治理+4 页单源化（有交叠） |
+| site/_template.html | W563 | 修改·D3 引用改正确蓝图形态（head preload + body 移位） |
+| site/sw.js | W563 | 修改·SHELL 摘 VF 3.5MB·cache v2·静态分支 SWR |
+| .github/workflows/pages.yml | W563 | 修改·部署期 SW 缓存名 SHA 版本戳（步内 grep 断言） |
+| assets/fonts/source/NotoSerifSC-VF.woff2 | W563 | git mv·自 site/static/fonts/ 归档（全站 0 引用死重） |
+| AGENTS.md | W563 | 修改·§4.2 第 9 门禁条目补记 D1-a 扩展 |
+| CHANGELOG.md | W563 | 新增·W563 版段 + 编号规则上限 W001-W563 |
+| 交接文档.md | W563 | 修改·头尾「最后更新」prepend W563 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W563 | 修改·版本行同步 v2.3.163（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W563 | 修改·四页脚链首 prepend W563（batch_cascade.py 执行） |
+| .github/workflows/README.md | W563 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W563 | 新增·W563 段（本段·batch_cascade.py 执行） |
+
 ## W562 W562 skills/ 目录退役（2026-09-08·v2.3.162）
 
 | 文件 | W | 说明 |

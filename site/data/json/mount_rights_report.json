@@ -1,0 +1,128 @@
+{
+  "organization_name": "三界坐骑权益保护协会",
+  "founded_year": "大唐贞观年间",
+  "annual_report_year": "贞观 27 年",
+  "ceo": "原天庭御马监正",
+  "mission": "保护三界坐骑免受妖魔霸占·推动坐骑劳动权益立法",
+  "key_findings": [
+    {
+      "finding_id": "F001",
+      "title": "甲级战犯当宠物养",
+      "description": "妖魔长期霸占天庭坐骑·将甲级战犯（如青牛精·九灵元圣）当宠物养·严重违反坐骑自主意愿",
+      "implicated_monsters": [
+        "青牛精（太上老君坐骑）",
+        "九灵元圣（太乙救苦天尊坐骑）",
+        "黄牙老象（普贤菩萨坐骑）",
+        "金毛犼（观音坐骑）"
+      ],
+      "severity": "高",
+      "duration_years": "平均 3-50 年"
+    },
+    {
+      "finding_id": "F002",
+      "title": "强迫劳动与剥削",
+      "description": "坐骑被妖怪用于巡山·守门·运送掠夺物资·无休息日·无报酬·工作时间严重超标",
+      "implicated_monsters": [
+        "白龙马（被鹰愁涧强迫驮唐僧）",
+        "青毛狮子怪（狮驼岭）"
+      ],
+      "severity": "高",
+      "duration_years": "全程"
+    },
+    {
+      "finding_id": "F003",
+      "title": "身份盗用",
+      "description": "妖怪冒用坐骑身份混入凡间·造成天庭坐骑名誉受损·部分坐骑被天庭追责",
+      "implicated_monsters": [
+        "黄袍怪（二十八宿奎木狼下凡）",
+        "金鱼精（观音莲花池逃出）"
+      ],
+      "severity": "中",
+      "duration_years": "1-3 年"
+    },
+    {
+      "finding_id": "F004",
+      "title": "薪资与福利缺失",
+      "description": "天庭坐骑下凡后·工资停发·社保断缴·回归天庭后无法补缴·影响退休待遇",
+      "implicated_monsters": [
+        "全部下凡坐骑"
+      ],
+      "severity": "中",
+      "duration_years": "全程"
+    },
+    {
+      "finding_id": "F005",
+      "title": "精神伤害与创伤",
+      "description": "部分坐骑被妖怪用于不正当目的（如诱拐儿童·吃人）·回归天庭后需长期心理辅导",
+      "implicated_monsters": [
+        "青毛狮子怪（吃人）",
+        "黄牙老象（吃人）",
+        "大鹏金翅雕（吃人）"
+      ],
+      "severity": "极高",
+      "duration_years": "长期不可逆"
+    }
+  ],
+  "case_studies": [
+    {
+      "case_id": "C001",
+      "mount": "青牛精",
+      "original_owner": "太上老君",
+      "incident": "青牛趁童子睡着偷跑下凡·占山为王·用金刚琢收取一切兵器",
+      "duration": "约 3 年",
+      "victims": "悟空·天兵天将·多方神仙兵器",
+      "resolution": "太上老君亲临·用芭蕉扇收回",
+      "compensation_claim": "天庭应承担监管责任·补偿受害凡间百姓",
+      "outcome": "青牛回归天庭·继续当坐骑·无实质处罚"
+    },
+    {
+      "case_id": "C002",
+      "mount": "九灵元圣",
+      "original_owner": "太乙救苦天尊",
+      "incident": "九灵元圣下凡·收服六个狮孙·与玉华州发生冲突",
+      "duration": "约 1 年",
+      "victims": "玉华州百姓·悟空师徒",
+      "resolution": "太乙救苦天尊亲临收回",
+      "compensation_claim": "九灵元圣本身不吃人·但纵容狮孙作恶·应承担连带责任",
+      "outcome": "九灵元圣回归天庭·六狮被打死"
+    },
+    {
+      "case_id": "C003",
+      "mount": "金毛犼",
+      "original_owner": "观音菩萨",
+      "incident": "金毛犼下凡为妖·抢走朱紫国皇后·三年未归",
+      "duration": "3 年",
+      "victims": "朱紫国皇后·朱紫国百姓",
+      "resolution": "观音亲临收回",
+      "compensation_claim": "观音应承担管教不严责任·朱紫国应获国家赔偿",
+      "outcome": "金毛犼回归南海·继续当坐骑·无实质处罚"
+    },
+    {
+      "case_id": "C004",
+      "mount": "白龙马",
+      "original_owner": "西海龙王（之父）",
+      "incident": "西海龙王三太子因纵火烧殿上明珠被贬·化为白马驮唐僧 14 年",
+      "duration": "14 年",
+      "victims": "无（自愿赎罪）",
+      "resolution": "终成八部天龙·终归菩萨之位",
+      "compensation_claim": "白龙马是少数自愿当坐骑的案例·但 14 年无薪·应补发工资",
+      "outcome": "白龙马获封八部天龙·恢复龙身"
+    }
+  ],
+  "recommendations": [
+    "天庭应建立坐骑档案系统·记录每只坐骑的下凡/回归情况",
+    "坐骑下凡需提前报备·并佩戴 GPS 定位装置",
+    "坐骑下凡期间工资照发·社保继续缴纳",
+    "妖怪冒用坐骑身份造成损害·由天庭先行赔付·再向妖怪追偿",
+    "建立坐骑心理辅导机制·回归天庭后强制进行心理评估"
+  ],
+  "statistics": {
+    "total_mounts_recorded": 16,
+    "mounts_descended": 16,
+    "mounts_returned": 16,
+    "mounts_punished": 0,
+    "average_descent_duration_years": 5.2,
+    "total_victims_estimate": "约 12000 人",
+    "compensation_paid": "0 元"
+  }
+}

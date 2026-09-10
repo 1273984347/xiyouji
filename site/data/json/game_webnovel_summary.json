@@ -1,0 +1,37 @@
+{
+  "total_cards": 12,
+  "total_artifacts": 10,
+  "total_webnovels": 9,
+  "rarity_distribution": {
+    "UR": 2,
+    "SSR": 5,
+    "SR": 2,
+    "R": 2,
+    "N": 1
+  },
+  "element_distribution": {
+    "金": 1,
+    "光": 1,
+    "水": 3,
+    "雷": 1,
+    "心": 1,
+    "土": 2,
+    "火": 1,
+    "暗": 2
+  },
+  "avg_power": 6358.3,
+  "max_power": 10000,
+  "min_power": 800,
+  "webnovel_genres": [
+    "赘婿流",
+    "退队流",
+    "心声流",
+    "系统流",
+    "重生流",
+    "反派流",
+    "后宫流",
+    "无敌流",
+    "无限流"
+  ],
+  "best_webnovel": "取经？不干了，我猴哥只想躺平"
+}

@@ -1,0 +1,231 @@
+[
+  {
+    "location": "长安化生寺",
+    "chapter": "第 12 回",
+    "restaurant_type": "皇家斋宴",
+    "signature_dish": "金汁香菇豆腐",
+    "rating": 9.5,
+    "tang_monk_review": "皇室斋宴·食材精挑·烹饪讲究·但略显奢华·违背苦行僧本意",
+    "price_level": "¥¥¥¥¥",
+    "vegetarian_friendly": true,
+    "monks_present": 1200,
+    "tags": [
+      "皇家",
+      "斋宴",
+      "高端",
+      "出发前"
+    ],
+    "photo_count": 12,
+    "vlog_views": "89w"
+  },
+  {
+    "location": "双叉岭猎户家",
+    "chapter": "第 13 回",
+    "restaurant_type": "凡间民居",
+    "signature_dish": "山野菌菇汤（被迫食荤）",
+    "rating": 2.0,
+    "tang_monk_review": "猎户强劝荤食·家人们·这是斋戒破戒现场·零分",
+    "price_level": "¥",
+    "vegetarian_friendly": false,
+    "monks_present": 0,
+    "tags": [
+      "破戒",
+      "猎户",
+      "凡间",
+      "早期"
+    ],
+    "photo_count": 3,
+    "vlog_views": "45w"
+  },
+  {
+    "location": "五庄观",
+    "chapter": "第 24-26 回",
+    "restaurant_type": "道家仙馆",
+    "signature_dish": "人参果（草还丹）",
+    "rating": 10.0,
+    "tang_monk_review": "镇元大仙人参果宴·万年一熟·闻一闻延寿 360 岁·吃一颗 47000 岁·但贫僧不敢食",
+    "price_level": "无价",
+    "vegetarian_friendly": true,
+    "monks_present": 2,
+    "tags": [
+      "道家",
+      "仙果",
+      "镇元子",
+      "高规格"
+    ],
+    "photo_count": 8,
+    "vlog_views": "320w"
+  },
+  {
+    "location": "宝象国皇宫",
+    "chapter": "第 29-30 回",
+    "restaurant_type": "异国皇宫",
+    "signature_dish": "西域胡饼（素版）",
+    "rating": 7.5,
+    "tang_monk_review": "异国风味·胡饼配葡萄·别有风味·但缺乏禅意",
+    "price_level": "¥¥¥¥",
+    "vegetarian_friendly": true,
+    "monks_present": 0,
+    "tags": [
+      "异国",
+      "皇宫",
+      "胡饼",
+      "西域"
+    ],
+    "photo_count": 5,
+    "vlog_views": "67w"
+  },
+  {
+    "location": "高老庄",
+    "chapter": "第 18-19 回",
+    "restaurant_type": "民间婚宴",
+    "signature_dish": "高老庄红烧肉复刻（素版）",
+    "rating": 5.0,
+    "tang_monk_review": "高太公热情·但全庄都吃红烧肉·素版复刻油脂感略重·2 星",
+    "price_level": "¥¥",
+    "vegetarian_friendly": true,
+    "monks_present": 0,
+    "tags": [
+      "民间",
+      "婚宴",
+      "素版复刻",
+      "中等"
+    ],
+    "photo_count": 4,
+    "vlog_views": "120w"
+  },
+  {
+    "location": "盘丝洞",
+    "chapter": "第 72-73 回",
+    "restaurant_type": "妖怪餐厅",
+    "signature_dish": "蜘蛛精虫草人肉包子",
+    "rating": 0.0,
+    "tang_monk_review": "家人们·这绝对踩到了我的红线·今天这家店零分·人肉包子·还是蜘蛛精做的·彻底破戒·立刻报警",
+    "price_level": "¥¥¥",
+    "vegetarian_friendly": false,
+    "monks_present": 0,
+    "tags": [
+      "妖怪",
+      "人肉",
+      "破戒",
+      "零分",
+      "报警"
+    ],
+    "photo_count": 0,
+    "vlog_views": "580w"
+  },
+  {
+    "location": "比丘国",
+    "chapter": "第 78-79 回",
+    "restaurant_type": "妖魔药膳",
+    "signature_dish": "小孩心肝做药引",
+    "rating": 0.0,
+    "tang_monk_review": "家人们·这绝对踩到了我的红线·今天这家店零分·用小孩心肝做药引·毫无人性·必须取缔",
+    "price_level": "¥¥¥¥",
+    "vegetarian_friendly": false,
+    "monks_present": 0,
+    "tags": [
+      "妖魔",
+      "药引",
+      "小孩",
+      "零分",
+      "必须取缔"
+    ],
+    "photo_count": 0,
+    "vlog_views": "890w"
+  },
+  {
+    "location": "灭法国",
+    "chapter": "第 84 回",
+    "restaurant_type": "凡间官府",
+    "signature_dish": "灭法国宫廷素宴",
+    "rating": 7.0,
+    "tang_monk_review": "国王悔悟后设斋答谢·素宴讲究·但仍是被迫·缺乏诚意",
+    "price_level": "¥¥¥",
+    "vegetarian_friendly": true,
+    "monks_present": 0,
+    "tags": [
+      "悔悟",
+      "宫廷素宴",
+      "凡间"
+    ],
+    "photo_count": 4,
+    "vlog_views": "34w"
+  },
+  {
+    "location": "天竺国皇宫",
+    "chapter": "第 93-95 回",
+    "restaurant_type": "天竺皇宫",
+    "signature_dish": "天竺咖喱素菜",
+    "rating": 8.5,
+    "tang_monk_review": "接近灵山·天竺风味·咖喱素菜·香气扑鼻·终于吃到正宗素食",
+    "price_level": "¥¥¥¥",
+    "vegetarian_friendly": true,
+    "monks_present": 0,
+    "tags": [
+      "天竺",
+      "咖喱",
+      "皇宫",
+      "近灵山"
+    ],
+    "photo_count": 7,
+    "vlog_views": "210w"
+  },
+  {
+    "location": "灵山雷音寺",
+    "chapter": "第 98 回",
+    "restaurant_type": "佛国仙斋",
+    "signature_dish": "佛祖赐斋·盂兰盆供",
+    "rating": 10.0,
+    "tang_monk_review": "终于到灵山·佛祖亲赐盂兰盆供·14 年苦行终结·完美收官",
+    "price_level": "无价",
+    "vegetarian_friendly": true,
+    "monks_present": 500,
+    "tags": [
+      "佛国",
+      "仙斋",
+      "圆满",
+      "灵山"
+    ],
+    "photo_count": 15,
+    "vlog_views": "1500w"
+  },
+  {
+    "location": "无底洞",
+    "chapter": "第 80-83 回",
+    "restaurant_type": "妖魔洞府",
+    "signature_dish": "老鼠精逼婚宴",
+    "rating": 0.0,
+    "tang_monk_review": "家人们·老鼠精逼婚·这是逼婚不是吃饭·零分·且报警",
+    "price_level": "¥",
+    "vegetarian_friendly": false,
+    "monks_present": 0,
+    "tags": [
+      "妖魔",
+      "逼婚",
+      "零分",
+      "报警"
+    ],
+    "photo_count": 0,
+    "vlog_views": "420w"
+  },
+  {
+    "location": "朱紫国",
+    "chapter": "第 68-71 回",
+    "restaurant_type": "异国宫廷",
+    "signature_dish": "朱紫国王病后调养素羹",
+    "rating": 6.5,
+    "tang_monk_review": "国王病愈后赐素羹·清淡养胃·但宫廷素菜缺乏民间烟火气",
+    "price_level": "¥¥¥",
+    "vegetarian_friendly": true,
+    "monks_present": 0,
+    "tags": [
+      "异国",
+      "宫廷",
+      "病愈",
+      "素羹"
+    ],
+    "photo_count": 5,
+    "vlog_views": "56w"
+  }
+]

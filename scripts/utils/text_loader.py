@@ -29,9 +29,14 @@ def load_chapter(input_dir: Path, chapter_num: int) -> str:
 
 def load_all_chapters(input_dir: Path) -> list[tuple[str, str]]:
     """加载所有分回文本，按回目顺序返回 [(回目名, 文本)]。"""
+    # W563 修复：分回文件实为 第*.md（曾只匹配 第*.txt 致全部分析器加载 0 文件、
+    # chapter_stats.json 长期为全零空壳）。兼容两种扩展名，同名回目 .md 优先。
+    md_paths = {p.stem: p for p in input_dir.glob("第*.md")}
+    txt_paths = {p.stem: p for p in input_dir.glob("第*.txt")}
     chapters = []
-    for path in sorted(input_dir.glob("第*.txt")):
-        chapters.append((path.stem, load_text(path)))
+    for stem in sorted(set(md_paths) | set(txt_paths)):
+        path = md_paths.get(stem) or txt_paths[stem]
+        chapters.append((stem, load_text(path)))
     return chapters
 
 

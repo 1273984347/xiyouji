@@ -1,0 +1,139 @@
+{
+  "project_name": "心经的物质形态",
+  "english_name": "Material Form of the Heart Sutra",
+  "art_form": "抽象数据雕塑·装置艺术",
+  "core_concept": "统计《西游记》全文中唐僧诵读《多心经》的次数·场景·前后情节的情绪波动·用一根极细的金线·在展墙上以波浪形态呈现",
+  "design_principle": "波峰代表诵经后心安的平缓·波谷代表诵经前后遭遇的极度恐惧·金线最终蜿蜒成一个巨大的'心'字空洞投影",
+  "deeper_meaning": "这是一个关于'信仰如何对抗外界震荡'的物理模型",
+  "sutra_chanting_records": [
+    {
+      "n": 1,
+      "chapter": "第 19 回",
+      "location": "浮屠山",
+      "context": "乌巢禅师传授《多心经》给唐僧·首次接触",
+      "pre_emotion": "期待·好奇",
+      "post_emotion": "震撼·觉醒",
+      "wave_amplitude": 0.3,
+      "wave_direction": "上升",
+      "key_phrase": "色不异空·空不异色"
+    },
+    {
+      "n": 2,
+      "chapter": "第 20 回",
+      "location": "黄风岭",
+      "context": "遇黄风怪·悟空眼伤·唐僧诵经祈求",
+      "pre_emotion": "恐惧·担忧",
+      "post_emotion": "稍安·仍忧",
+      "wave_amplitude": 0.7,
+      "wave_direction": "波谷",
+      "key_phrase": "心无挂碍·无挂碍故"
+    },
+    {
+      "n": 3,
+      "chapter": "第 27 回",
+      "location": "白虎岭",
+      "context": "三打白骨精·悟空被赶走·唐僧孤独诵经",
+      "pre_emotion": "愤怒·悲伤",
+      "post_emotion": "懊悔·孤独",
+      "wave_amplitude": 1.0,
+      "wave_direction": "深谷",
+      "key_phrase": "无有恐怖·远离颠倒梦想"
+    },
+    {
+      "n": 4,
+      "chapter": "第 36 回",
+      "location": "乌鸡国",
+      "context": "救乌鸡国王·夜宿宝林寺·唐僧诵经安抚",
+      "pre_emotion": "焦虑·疲惫",
+      "post_emotion": "平静·坚定",
+      "wave_amplitude": 0.4,
+      "wave_direction": "上升",
+      "key_phrase": "究竟涅槃"
+    },
+    {
+      "n": 5,
+      "chapter": "第 47 回",
+      "location": "通天河",
+      "context": "通天河遇阻·夜宿陈家庄·唐僧诵经求渡",
+      "pre_emotion": "焦虑·无助",
+      "post_emotion": "稍安·期待",
+      "wave_amplitude": 0.6,
+      "wave_direction": "波谷",
+      "key_phrase": "般若波罗蜜多"
+    },
+    {
+      "n": 6,
+      "chapter": "第 62 回",
+      "location": "祭赛国",
+      "context": "祭赛国扫塔·夜半诵经·遇九头虫",
+      "pre_emotion": "庄严·平静",
+      "post_emotion": "惊扰·警觉",
+      "wave_amplitude": 0.5,
+      "wave_direction": "上升后下落",
+      "key_phrase": "三世诸佛·依般若波罗蜜多故"
+    },
+    {
+      "n": 7,
+      "chapter": "第 78 回",
+      "location": "比丘国",
+      "context": "救小孩心肝·唐僧愤怒诵经",
+      "pre_emotion": "愤怒·悲悯",
+      "post_emotion": "坚定·悲悯",
+      "wave_amplitude": 1.2,
+      "wave_direction": "深谷后高峰",
+      "key_phrase": "无苦集灭道·无智亦无得"
+    },
+    {
+      "n": 8,
+      "chapter": "第 85 回",
+      "location": "灭法国",
+      "context": "灭法国杀和尚·唐僧伪装·夜诵心经",
+      "pre_emotion": "恐惧·伪装",
+      "post_emotion": "平静·祈愿",
+      "wave_amplitude": 0.9,
+      "wave_direction": "波谷",
+      "key_phrase": "心无挂碍·无挂碍故"
+    },
+    {
+      "n": 9,
+      "chapter": "第 93 回",
+      "location": "天竺国",
+      "context": "近灵山·天竺公主招亲·唐僧诵经定心",
+      "pre_emotion": "动摇·疲惫",
+      "post_emotion": "坚定·圆满",
+      "wave_amplitude": 0.3,
+      "wave_direction": "上升",
+      "key_phrase": "阿耨多罗三藐三菩提"
+    },
+    {
+      "n": 10,
+      "chapter": "第 98 回",
+      "location": "灵山雷音寺",
+      "context": "到达灵山·凌云渡脱胎·唐僧最后一次诵经",
+      "pre_emotion": "圆满·感动",
+      "post_emotion": "成佛·无我",
+      "wave_amplitude": 0.0,
+      "wave_direction": "归零",
+      "key_phrase": "揭谛揭谛·波罗揭谛"
+    }
+  ],
+  "wave_statistics": {
+    "total_chantings": 10,
+    "max_amplitude": 1.2,
+    "min_amplitude": 0.0,
+    "avg_amplitude": 0.59,
+    "deepest_valley": "比丘国·救小孩心肝",
+    "highest_peak": "灵山·成佛归零",
+    "trend": "波动逐渐平缓·最终归零·体现心性成熟"
+  },
+  "sculpture_design": {
+    "material": "极细金线（直径 0.5mm）",
+    "wall_size": "12m × 4m 展墙",
+    "wave_length": "每段约 1.2m·对应一次诵经",
+    "color": "纯金·光泽度 95%",
+    "lighting": "顶光 + 侧光·让金线产生微弱阴影",
+    "projection": "金线最终蜿蜒成'心'字空洞·投影至地面",
+    "interaction": "观众靠近时·心形空洞呼吸式闪烁"
+  },
+  "artistic_statement": "信仰不是一成不变的平静·而是在恐惧与安定之间的反复拉锯·金线的波动是这拉锯的物质化"
+}

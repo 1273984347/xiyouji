@@ -25,8 +25,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>页面标题 · 详解西游记</title>
-    <!-- D3.js 本地引用（如改用 CDN：https://d3js.org/d3.v7.min.js） -->
-    <script src="d3.v7.min.js"></script>
+    <!-- D3.js 本地引用（如改用 CDN：https://d3js.org/d3.v7.min.js）·W563 起 head 仅保留 preload，执行引用移至 body 首个内联脚本前 -->
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     <!-- 公共设计令牌：配色 / 字体 / 图表色板（W334 集中化） -->
     <link rel="stylesheet" href="tokens.css">
@@ -326,6 +325,8 @@
       W334 图表配色速查：
         const CHART = ['#C8463A', '#3A6B8C', '#C9A063', '#6B8E5A', '#D8CFBC', '#8A6D3B'];
     -->
+    <!-- W563：D3 执行引用置于首个内联脚本之前（head 内为 preload），保证 d3 先于图表代码可用 -->
+    <script src="../static/js/d3.v7.min.js"></script>
     <script>
         // ===== EMBEDDED_DATA：页面内嵌数据 fallback =====
         const EMBEDDED_DATA = [

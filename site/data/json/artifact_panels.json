@@ -1,0 +1,174 @@
+[
+  {
+    "name": "金刚琢",
+    "english_name": "Golden Ring",
+    "rarity": "SSR",
+    "owner": "太上老君→青牛精",
+    "element": "金",
+    "stats": {
+      "atk": 0,
+      "def": 0,
+      "control": 9999
+    },
+    "effect": "可收取对方一切攻击性法宝与兵器·但对芭蕉扇无效",
+    "counter": "芭蕉扇（克制）",
+    "background": "太上老君化胡时期锻造·锟钢抟炼",
+    "battle_impact": "天庭战斗格局变化：单体法宝流被废·需群体战术",
+    "popularity": "普及后所有依赖单法宝的妖怪集体失业"
+  },
+  {
+    "name": "金箍棒·如意",
+    "english_name": "Ruyi Jingu Bang",
+    "rarity": "UR",
+    "owner": "大禹→东海龙王→孙悟空",
+    "element": "金",
+    "stats": {
+      "atk": 9800,
+      "def": 0,
+      "control": 0
+    },
+    "effect": "物理伤害×3·可大可小·重一万三千五百斤",
+    "counter": "无（但被金刚琢收取）",
+    "background": "大禹治水时定海神针·后存于东海龙宫",
+    "battle_impact": "单体近战最强武器·远距离无解",
+    "popularity": "悟空专属·无法复制"
+  },
+  {
+    "name": "芭蕉扇（阳）",
+    "english_name": "Banana Fan (Yang)",
+    "rarity": "SSR",
+    "owner": "铁扇公主",
+    "element": "风",
+    "stats": {
+      "atk": 0,
+      "def": 0,
+      "control": 9500
+    },
+    "effect": "一扇扇出八万四千里·无物可挡·对金刚琢特攻",
+    "counter": "定风丹（一次性克制）",
+    "background": "昆仑山后自混沌开辟时产生的一缕太阴之叶",
+    "battle_impact": "群体位移流核心·可改变战场地形",
+    "popularity": "依赖持扇者法力·普及率低"
+  },
+  {
+    "name": "紫金红葫芦",
+    "english_name": "Purple Gold Gourd",
+    "rarity": "SSR",
+    "owner": "太上老君→金角银角",
+    "element": "暗",
+    "stats": {
+      "atk": 0,
+      "def": 0,
+      "control": 9000
+    },
+    "effect": "呼名即应·一时三刻化为脓水",
+    "counter": "假名（如'孙行者''者行孙'）",
+    "background": "老君化胡途中·葫芦发出来的金气所凝",
+    "battle_impact": "单体必杀·但需知道真名",
+    "popularity": "天庭内部流通·妖怪获取需偷盗"
+  },
+  {
+    "name": "阴阳二气瓶",
+    "english_name": "Yin-Yang Bottle",
+    "rarity": "SSR",
+    "owner": "大鹏金翅雕",
+    "element": "光",
+    "stats": {
+      "atk": 0,
+      "def": 0,
+      "control": 9300
+    },
+    "effect": "装入瓶中·一时三刻化为浆水·悟空需用观音三根毫毛破解",
+    "counter": "观音救命毫毛（一次性破解）",
+    "background": "阴阳二气所凝·大鹏金翅雕专属",
+    "battle_impact": "单体必杀·但对顶级 UR 卡效果减半",
+    "popularity": "妖怪独占·普及率为 0"
+  },
+  {
+    "name": "九齿钉耙",
+    "english_name": "Nine-Tooth Rake",
+    "rarity": "SR",
+    "owner": "猪八戒",
+    "element": "土",
+    "stats": {
+      "atk": 4500,
+      "def": 0,
+      "control": 0
+    },
+    "effect": "物理伤害×1.5·对女性妖怪伤害-50%",
+    "counter": "无",
+    "background": "天庭神锤所锻·原为天蓬元帅兵符",
+    "battle_impact": "稳定输出·但情感干扰严重",
+    "popularity": "八戒专属·无法流通"
+  },
+  {
+    "name": "降妖宝杖",
+    "english_name": "Demon-Subduing Staff",
+    "rarity": "R",
+    "owner": "沙悟净",
+    "element": "水",
+    "stats": {
+      "atk": 3200,
+      "def": 0,
+      "control": 0
+    },
+    "effect": "物理伤害×1.2·稳定输出无变化",
+    "counter": "无",
+    "background": "吴刚伐桂所出·鲁班所制",
+    "battle_impact": "稳定·但缺乏爆发力",
+    "popularity": "沙僧专属"
+  },
+  {
+    "name": "紧箍咒",
+    "english_name": "Golden Hoop Mantra",
+    "rarity": "UR",
+    "owner": "观音→唐僧",
+    "element": "心",
+    "stats": {
+      "atk": 0,
+      "def": 0,
+      "control": 10000
+    },
+    "effect": "对 ENTP 类角色（悟空）100% 控制·无法抵抗",
+    "counter": "无（除非远离唐僧 100 里）",
+    "background": "观音赐予·专为控制悟空设计",
+    "battle_impact": "颠覆团队权力结构·唐僧从弱势变强势",
+    "popularity": "管理神器·但全三界仅 1 个"
+  },
+  {
+    "name": "火眼金睛",
+    "english_name": "Fiery Golden Eyes",
+    "rarity": "SSR",
+    "owner": "孙悟空",
+    "element": "火",
+    "stats": {
+      "atk": 0,
+      "def": 0,
+      "control": 0,
+      "perception": 9500
+    },
+    "effect": "识破一切幻术与变化·但对烟熏敏感",
+    "counter": "烟熏（如红孩儿三昧真火的烟）",
+    "background": "八卦炉中炼七七四十九日所得·副作用是畏烟",
+    "battle_impact": "情报流核心·改变战场信息透明度",
+    "popularity": "悟空专属·不可复制"
+  },
+  {
+    "name": "三根救命毫毛",
+    "english_name": "Three Life-Saving Hairs",
+    "rarity": "SR",
+    "owner": "观音→孙悟空",
+    "element": "心",
+    "stats": {
+      "atk": 0,
+      "def": 0,
+      "control": 0,
+      "rescue": 3
+    },
+    "effect": "可变化任意物品·共 3 次",
+    "counter": "无",
+    "background": "观音赐予的紧急救援道具",
+    "battle_impact": "保命道具·但使用次数有限",
+    "popularity": "限定·全三界仅 3 根"
+  }
+]

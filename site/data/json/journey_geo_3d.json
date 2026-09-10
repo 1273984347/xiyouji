@@ -1,0 +1,27 @@
+{
+  "meta": {
+    "title": "西游地理 3D 路线节点数据",
+    "generated": "2026-08-16",
+    "source": "journey-map-interactive.html 既有 17 节点经纬度 + 分类标注",
+    "note": "坐标为近似示意（非真实地理精度）；分类按该地主导势力归属：人间=世俗自然、妖界=占山妖魔、天庭=受天庭册封的仙家/星宿体系、灵山=佛教圣地"
+  },
+  "nodes": [
+    {"id": 0, "name": "长安", "lon": 108.9, "lat": 34.3, "category": "人间", "chapter": "第12回", "duration": 0, "desc": "取经起点，唐王送行之处。"},
+    {"id": 1, "name": "双叉岭", "lon": 107.5, "lat": 33.8, "category": "人间", "chapter": "第13回", "duration": 1, "desc": "唐僧首难，被寅将军擒获。"},
+    {"id": 2, "name": "两界山", "lon": 106.0, "lat": 33.5, "category": "人间", "chapter": "第14回", "duration": 1, "desc": "收孙悟空，五行山改名。"},
+    {"id": 3, "name": "鹰愁涧", "lon": 104.0, "lat": 33.0, "category": "天庭", "chapter": "第15回", "duration": 1, "desc": "收白龙马，西海龙宫三太子化马。"},
+    {"id": 4, "name": "观音院", "lon": 102.0, "lat": 32.5, "category": "人间", "chapter": "第16-17回", "duration": 2, "desc": "黑熊精偷袈裟，观音收妖。"},
+    {"id": 5, "name": "高老庄", "lon": 100.0, "lat": 32.0, "category": "妖界", "chapter": "第18-19回", "duration": 1, "desc": "收猪八戒，庄主招亲。"},
+    {"id": 6, "name": "流沙河", "lon": 98.0, "lat": 31.5, "category": "妖界", "chapter": "第22回", "duration": 2, "desc": "收沙悟净，八百里流沙七日难渡。"},
+    {"id": 7, "name": "五庄观", "lon": 96.0, "lat": 31.0, "category": "天庭", "chapter": "第24-26回", "duration": 2, "desc": "镇元大仙，人参果事件。"},
+    {"id": 8, "name": "白虎岭", "lon": 94.0, "lat": 30.5, "category": "妖界", "chapter": "第27回", "duration": 1, "desc": "三打白骨精，师徒离心。"},
+    {"id": 9, "name": "黑松林", "lon": 92.0, "lat": 30.0, "category": "天庭", "chapter": "第28-31回", "duration": 3, "desc": "黄袍怪（奎木狼下凡）擒唐僧。"},
+    {"id": 10, "name": "平顶山", "lon": 90.0, "lat": 29.5, "category": "妖界", "chapter": "第32-35回", "duration": 2, "desc": "金角银角大王，五件法宝。"},
+    {"id": 11, "name": "号山", "lon": 88.0, "lat": 29.0, "category": "妖界", "chapter": "第40-42回", "duration": 3, "desc": "红孩儿三昧真火。"},
+    {"id": 12, "name": "通天河", "lon": 86.0, "lat": 28.5, "category": "妖界", "chapter": "第47-49回", "duration": 2, "desc": "灵感大王，老鼋驮渡。"},
+    {"id": 13, "name": "火焰山", "lon": 84.0, "lat": 28.0, "category": "妖界", "chapter": "第59-61回", "duration": 3, "desc": "三调芭蕉扇，八百里火焰山。"},
+    {"id": 14, "name": "小雷音寺", "lon": 82.0, "lat": 27.5, "category": "妖界", "chapter": "第65-66回", "duration": 2, "desc": "黄眉大王假佛设局。"},
+    {"id": 15, "name": "狮驼岭", "lon": 80.0, "lat": 27.0, "category": "妖界", "chapter": "第74-77回", "duration": 4, "desc": "三大魔王，悟空最险一战。"},
+    {"id": 16, "name": "灵山", "lon": 78.0, "lat": 26.5, "category": "灵山", "chapter": "第98回", "duration": 1, "desc": "西天雷音寺，取经终点。"}
+  ]
+}

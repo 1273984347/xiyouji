@@ -1,0 +1,238 @@
+{
+  "project_name": "西游记气味地图",
+  "english_name": "Scent Map of Journey to the West",
+  "art_form": "感官地图·嗅觉艺术",
+  "core_concept": "为取经路径上的关键地点设计独特的气味·这是一次极其独特的感官阅读体验",
+  "presentation_method": "一张长卷地图·每个地点旁边有一块可摩擦的香片·或一个二维码链接的定制香氛配方",
+  "locations": [
+    {
+      "n": 1,
+      "location": "花果山",
+      "chapter": "第 1 回",
+      "geography": "东胜神洲·海中名山",
+      "scent_profile": "水汽·桃子的甜腻·猴群的动物体味",
+      "scent_notes": [
+        "海水咸味",
+        "熟桃甜香",
+        "猿猴体味",
+        "晨露清新"
+      ],
+      "intensity": 4,
+      "mood": "生机勃勃·原始野性",
+      "key_description": "刚出世的孙悟空·与万猴嬉戏·水帘洞飞瀑·桃花漫山",
+      "fragrance_formula": {
+        "top_note": "海风·桃香",
+        "middle_note": "猕猴体味·青草",
+        "base_note": "湿润岩石"
+      }
+    },
+    {
+      "n": 2,
+      "location": "五行山",
+      "chapter": "第 14 回",
+      "geography": "西牛贺洲·两界山",
+      "scent_profile": "岩石冷硬·尘土·500 年的孤寂",
+      "scent_notes": [
+        "冰冷岩石",
+        "尘土",
+        "铁锈",
+        "枯草"
+      ],
+      "intensity": 3,
+      "mood": "压抑·孤寂·等待",
+      "key_description": "悟空被压 500 年·只有铁丸铜汁·风沙漫天",
+      "fragrance_formula": {
+        "top_note": "尘土·寒风",
+        "middle_note": "岩石·铁锈",
+        "base_note": "枯草·枯寂"
+      }
+    },
+    {
+      "n": 3,
+      "location": "流沙河",
+      "chapter": "第 22 回",
+      "geography": "西牛贺洲·800 里流沙",
+      "scent_profile": "浑浊河水·沙土·湿气",
+      "scent_notes": [
+        "浑浊水汽",
+        "湿沙",
+        "鱼腥",
+        "河泥"
+      ],
+      "intensity": 3,
+      "mood": "荒凉·危险",
+      "key_description": "沙僧盘踞·水深仅 1m 但充满陷阱",
+      "fragrance_formula": {
+        "top_note": "湿沙·河风",
+        "middle_note": "鱼腥·河泥",
+        "base_note": "腐草"
+      }
+    },
+    {
+      "n": 4,
+      "location": "五庄观",
+      "chapter": "第 24-26 回",
+      "geography": "万寿山·五庄观",
+      "scent_profile": "仙草·人参果·道观檀香",
+      "scent_notes": [
+        "道观檀香",
+        "人参果甜香",
+        "仙草",
+        "清露"
+      ],
+      "intensity": 5,
+      "mood": "仙境·庄严",
+      "key_description": "镇元子的道观·万年人参果树·仙气盎然",
+      "fragrance_formula": {
+        "top_note": "人参果·清露",
+        "middle_note": "道观檀香·仙草",
+        "base_note": "云雾·沉香"
+      }
+    },
+    {
+      "n": 5,
+      "location": "白虎岭",
+      "chapter": "第 27 回",
+      "geography": "西牛贺洲·荒山",
+      "scent_profile": "枯骨·腐朽·阴风",
+      "scent_notes": [
+        "枯骨",
+        "腐肉",
+        "阴风",
+        "荒草"
+      ],
+      "intensity": 5,
+      "mood": "恐怖·阴森",
+      "key_description": "白骨精的领地·遍地白骨·阴风阵阵",
+      "fragrance_formula": {
+        "top_note": "阴风·腐草",
+        "middle_note": "枯骨·腐肉",
+        "base_note": "黄泉气息"
+      }
+    },
+    {
+      "n": 6,
+      "location": "火焰山",
+      "chapter": "第 59-61 回",
+      "geography": "西牛贺洲·800 里火焰",
+      "scent_profile": "灼热矿物质焦味·汗味·风干热浪",
+      "scent_notes": [
+        "焦土",
+        "硫磺",
+        "汗味",
+        "热浪"
+      ],
+      "intensity": 5,
+      "mood": "灼热·焦灼·渴望",
+      "key_description": "800 里火焰·寸草不生·行者三调芭蕉扇",
+      "fragrance_formula": {
+        "top_note": "热浪·焦土",
+        "middle_note": "硫磺·矿物",
+        "base_note": "汗味·烟熏"
+      }
+    },
+    {
+      "n": 7,
+      "location": "盘丝洞",
+      "chapter": "第 72-73 回",
+      "geography": "西牛贺洲·盘丝岭",
+      "scent_profile": "潮湿泥土腥气·昆虫信息素的微甜·腐化的丝绸味",
+      "scent_notes": [
+        "潮湿泥土",
+        "昆虫信息素",
+        "腐丝",
+        "蛛网"
+      ],
+      "intensity": 4,
+      "mood": "诡异·诱惑·危险",
+      "key_description": "七个蜘蛛精的洞府·丝网密布·湿气浓重",
+      "fragrance_formula": {
+        "top_note": "蛛网·湿气",
+        "middle_note": "昆虫信息素·腐丝",
+        "base_note": "泥土腥气"
+      }
+    },
+    {
+      "n": 8,
+      "location": "狮驼岭",
+      "chapter": "第 74-77 回",
+      "geography": "西牛贺洲·800 里狮驼岭",
+      "scent_profile": "血腥·骨头·恐怖",
+      "scent_notes": [
+        "血腥",
+        "人骨",
+        "腐肉",
+        "兵器铁锈"
+      ],
+      "intensity": 5,
+      "mood": "恐怖·死亡·绝望",
+      "key_description": "三妖吃人 800 里·人骨成山·血腥冲天",
+      "fragrance_formula": {
+        "top_note": "血腥·腐臭",
+        "middle_note": "人骨·兵器铁锈",
+        "base_note": "死亡气息"
+      }
+    },
+    {
+      "n": 9,
+      "location": "无底洞",
+      "chapter": "第 80-83 回",
+      "geography": "西牛贺洲·陷空山",
+      "scent_profile": "潮湿·花香·老鼠·地下深处的霉味",
+      "scent_notes": [
+        "霉味",
+        "老鼠体味",
+        "花香（伪装）",
+        "湿气"
+      ],
+      "intensity": 4,
+      "mood": "诡谲·诱骗·逼婚",
+      "key_description": "老鼠精的洞府·花香伪装·内里潮湿霉腐",
+      "fragrance_formula": {
+        "top_note": "花香·甜腻",
+        "middle_note": "湿气·老鼠体味",
+        "base_note": "霉腐"
+      }
+    },
+    {
+      "n": 10,
+      "location": "灵山雷音寺",
+      "chapter": "第 98 回",
+      "geography": "西牛贺洲·灵山",
+      "scent_profile": "檀香·贝叶经的草本味·一种'无'的洁净气味",
+      "scent_notes": [
+        "檀香",
+        "贝叶草本",
+        "金粉",
+        "纯净空气"
+      ],
+      "intensity": 5,
+      "mood": "庄严·圆满·无我",
+      "key_description": "佛国圣地·贝叶经香·金粉闪耀·空气纯净至极",
+      "fragrance_formula": {
+        "top_note": "檀香·贝叶",
+        "middle_note": "金粉·纯净空气",
+        "base_note": "无·洁净"
+      }
+    }
+  ],
+  "scent_categories": {
+    "仙境型": [
+      "花果山",
+      "五庄观",
+      "灵山雷音寺"
+    ],
+    "危险型": [
+      "白虎岭",
+      "火焰山",
+      "盘丝洞",
+      "狮驼岭",
+      "无底洞"
+    ],
+    "荒凉型": [
+      "五行山",
+      "流沙河"
+    ]
+  },
+  "presentation_innovation": "可摩擦香片 + 二维码香氛配方·让读者通过嗅觉进入西游世界"
+}

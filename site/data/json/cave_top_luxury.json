@@ -1,0 +1,178 @@
+[
+  {
+    "rank": 1,
+    "name": "小雷音寺",
+    "owner": "黄眉童子",
+    "luxury": 10,
+    "chapter": 65,
+    "feature": "弥勒佛司磬童子下凡，伪雷音寺规模最大"
+  },
+  {
+    "rank": 2,
+    "name": "狮驼洞",
+    "owner": "青狮·白象·大鹏",
+    "luxury": 10,
+    "chapter": 74,
+    "feature": "三魔王集团，狮驼国一国妖氛，规模空前"
+  },
+  {
+    "rank": 3,
+    "name": "平顶山莲花洞",
+    "owner": "金角大王·银角大王",
+    "luxury": 9,
+    "chapter": 33,
+    "feature": "太上老君炼丹童子下凡，法宝配置最豪华"
+  },
+  {
+    "rank": 4,
+    "name": "翠云山芭蕉洞",
+    "owner": "铁扇公主·牛魔王",
+    "luxury": 9,
+    "chapter": 59,
+    "feature": "罗刹女所有，扇灭火焰山大火"
+  },
+  {
+    "rank": 5,
+    "name": "乱石山碧波潭",
+    "owner": "九头驸马·万圣龙王",
+    "luxury": 9,
+    "chapter": 62,
+    "feature": "龙宫式洞府，万圣公主盗佛宝舍利"
+  },
+  {
+    "rank": 6,
+    "name": "金兜洞",
+    "owner": "独角兕大王",
+    "luxury": 8,
+    "chapter": 50,
+    "feature": "太上老君青牛下凡，金刚琢套尽诸神兵器"
+  },
+  {
+    "rank": 7,
+    "name": "积雷山摩云洞",
+    "owner": "牛魔王·玉面公主",
+    "luxury": 8,
+    "chapter": 60,
+    "feature": "牛魔王外室，'万岁狐王'遗产"
+  },
+  {
+    "rank": 8,
+    "name": "九曲盘桓洞",
+    "owner": "九灵元圣",
+    "luxury": 8,
+    "chapter": 89,
+    "feature": "太乙救苦天尊坐骑九头狮子，'九灵元圣'号令群妖"
+  },
+  {
+    "rank": 9,
+    "name": "水帘洞",
+    "owner": "孙悟空",
+    "luxury": 7,
+    "chapter": 1,
+    "feature": "天生石洞，齐天大圣发迹之地"
+  },
+  {
+    "rank": 10,
+    "name": "号山火云洞",
+    "owner": "红孩儿",
+    "luxury": 7,
+    "chapter": 41,
+    "feature": "牛魔王之子，幼龄妖王，能放三昧真火"
+  },
+  {
+    "rank": 11,
+    "name": "陷空山无底洞",
+    "owner": "金鼻白毛老鼠精",
+    "luxury": 7,
+    "chapter": 82,
+    "feature": "托塔李天王义女，灵山偷食琉璃灯油"
+  },
+  {
+    "rank": 12,
+    "name": "青龙山玄英洞",
+    "owner": "辟寒·辟暑·辟尘",
+    "luxury": 7,
+    "chapter": 91,
+    "feature": "三只犀牛精假扮佛祖偷香油，每年耗油五万斤"
+  },
+  {
+    "rank": 13,
+    "name": "黑风洞",
+    "owner": "黑熊精",
+    "luxury": 6,
+    "chapter": 17,
+    "feature": "妖王中少有的'修禅'型，能论道谈经"
+  },
+  {
+    "rank": 14,
+    "name": "通天河水鼋之第",
+    "owner": "灵感大王",
+    "luxury": 6,
+    "chapter": 47,
+    "feature": "观音莲池金鱼，要吃童男童女"
+  },
+  {
+    "rank": 15,
+    "name": "比丘国柳树坡清华洞",
+    "owner": "鹿精·比丘国丈",
+    "luxury": 6,
+    "chapter": 78,
+    "feature": "南极寿星坐骑白鹿下凡，欲用1111小儿心肝"
+  },
+  {
+    "rank": 16,
+    "name": "黄风洞",
+    "owner": "黄风怪",
+    "luxury": 5,
+    "chapter": 21,
+    "feature": "灵山脚下得道黄毛貂鼠，与佛门有渊源"
+  },
+  {
+    "rank": 17,
+    "name": "白虎洞",
+    "owner": "黄袍怪",
+    "luxury": 5,
+    "chapter": 29,
+    "feature": "天庭奎木狼下凡，有'公主'宝象国王女为妻"
+  },
+  {
+    "rank": 18,
+    "name": "琵琶洞",
+    "owner": "蝎子精",
+    "luxury": 5,
+    "chapter": 54,
+    "feature": "毒敌蝎子精，蛰过佛祖，连观音都不敢近"
+  },
+  {
+    "rank": 19,
+    "name": "盘丝洞",
+    "owner": "蜘蛛精·七女",
+    "luxury": 5,
+    "chapter": 72,
+    "feature": "七女共居，与黄花观多目怪为同门"
+  },
+  {
+    "rank": 20,
+    "name": "隐雾山折岳连环洞",
+    "owner": "艾叶花皮豹子精",
+    "luxury": 5,
+    "chapter": 85,
+    "feature": "南山隐豹，用'分瓣梅花计'诈败悟空"
+  },
+  {
+    "rank": 21,
+    "name": "毛颖山·兔穴",
+    "owner": "玉兔精",
+    "luxury": 3,
+    "chapter": 95,
+    "feature": "广寒宫玉兔，欲招唐僧为偶"
+  },
+  {
+    "rank": 22,
+    "name": "驼罗庄陀罗寺",
+    "owner": "蟒蛇精",
+    "luxury": 2,
+    "chapter": 67,
+    "feature": "未修成人形的大蟒，'稀柿衕'恶臭难当"
+  }
+]

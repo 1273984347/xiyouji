@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W562），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W563），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,19 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.163（2026-09-10）：W563 前端关键路径与部署正确性批次 — D3 head阻塞154→0·字体路径修复225页·越界fetch清零107页·SW治理·门禁9扩展
+
+> **来源**：方案档 docs/superpowers/plans/2026-09-08-frontend-perf-and-deploy-correctness-plans.md（对抗性复审后定稿；用户裁决 D1-a 并入门禁 9、B-0 提前，随「按顺序开始执行」落地）。
+> - **B-0 字体路径修复（正确性缺陷）**：225 个 INLINED 子页面 @font-face url('static/…') 以文档为基解析到 site/data|en/static/（不存在）——自定义字体从未加载过。inline_css.py 增加按页深度 url 重写 + W536 写路径守卫根目录同款修复（dirname 少算一层，W536 后首次 --force 即实证，W550 generate_csp.py 同款先例）；--force 重内联 226 页（1 个旧格式块一并标准化），验收 grep 正确 226/错误 0，Playwright fonts 探针 3/3 页 Noto Serif/Sans loaded。
+> - **A-1 D3 加载移位**：154 页（data 77 + en 76 + _template）head 内同步 d3.v7 与 24 页 d3-sankey（链式依赖，24/24 位于其后，必须同移）移至 body 首个内联脚本前 + head preload；不采用 defer——仅 22/153 页有 DOMContentLoaded 包裹，defer 化会令 132 页 d3 未定义。SYNC_HEAD 154→0、SYNC_BODY 156、sankey 链序保持；_fix_d3_position.py 安全阀拦下 _template.html（占位字面量形态不符），手工改为正确蓝图。
+> - **A-2 Service Worker**：摘除预缓存中全站 0 引用的 NotoSerifSC-VF.woff2 3.5MB（git mv → assets/fonts/source/ 归档）；静态资源 cache-first → stale-while-revalidate（后台刷新挂 no-op catch）；pages.yml 部署期以 sed 把 commit SHA 戳入缓存名（步内 grep 断言），SHELL 变更必然生效、activate 自动清旧缓存。
+> - **A-3 越界 fetch 全树清零**：F8 口径 37 页实扩为 **107 页**——F8 正则只识别「带引号+文件名」形态，漏 baseUrl 变量赋值（如 const DATA_DIR='../../scripts/output/data/'）与徽标/注释/文案变体（教训：枚举须先以「包含子串」广扫再按上下文分级）；site/data/json/ 47 个部署副本与原件逐字节相等；chapter-stats 中英两页内嵌真实 EMBEDDED_DATA 单源（此前生产态展示 mock 假数据）；journey-geo-semiotics 中英两页单源化（目标 JSON 无生成器、从未存在，删死路径）；character-appearance 中英两页经 B_人物/character_appearance.py 生成真实数据（59KB，生成器存在——此前仅顶层 grep 漏检）后改站内 fetch。site 全树 scripts/output/data 残留 0。
+> - **计划外工具链 bug 顺手根治**：scripts/utils/text_loader.py 只匹配 第*.txt 而分回实为 第*.md——全部分析器加载 0 文件、chapter_stats.json 长期全零空壳；修复（兼容双扩展名、同名 .md 优先）后首次产出真实数据（chapter_stats 100 回 · 740,093 字 · 22.6KB；character_appearance 59KB）。
+> - **D1-a 门禁 9 扩展（用户确认）**：check_data_drift.js 新增 site/data/json 副本逐字节对账（47 副本基线）+ 页面副本引用存在性 + 副本路径形态解析回原件 + EMBEDDED 单源页页名↔同名原件回退；对账面 44→46 页/71→74 项、零漂移；负样本冒烟（篡改副本 1 字节 → FAIL → 还原 → 绿）通过。
+> - **A-4 修正为无操作**：xiyouji-agent-web/vite.config.js|.d.ts 实际从未入库（初稿 F17 系误读 grep -n 行号），根 .gitignore 110/111 行已覆盖——方案项作废，零仓库改动。
+> - **验证（当批实跑）**：verify_delivery 核心全绿（动态死链门禁当批拦获本批注释中「第*.md」字面量 1 次，改写措辞后放行——门禁实战有效性再实证）；截图门禁 234 页 FAIL 0（147s）；CSP 重生成 111 页后 --check 0 漂移；部署态冒烟（http.server + Playwright 6 页）无 4xx/无 pageerror；副本对账 47/47。
+> - **文件**：详见 scripts/output/file-index.md W563 段（227 个 HTML、sw.js、pages.yml、inline_css.py、check_data_drift.js、text_loader.py、AGENTS.md、方案档、7 个一次性脚本、47 个副本、2 个再生成 JSON）。
+> - **状态**：已落地（本批随 W563 提交并 push origin/main）。
 ### v2.3.162（2026-09-08）：W562 skills/ 目录退役（19技能·运行时零引用） — 第16门禁/sync_skills同步退役·AGENTS§4.5移除
 
 > **来源**：用户明示「这些 skills 我其实觉得没什么用处」+ 认可退役方案（事实核查：仓库 19 技能中 15 个 xiyouji-* 在任何运行时不可见，4 个通用会话技能为用户级 junction 指向 D:\open-source 独立源库，与仓库无关）。

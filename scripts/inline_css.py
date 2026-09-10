@@ -20,7 +20,9 @@ import os
 import re
 import sys
 
-_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+# W550 同款修复（generate_csp.py 先例）：根目录必须是项目根而非 scripts/，
+# 否则写 site/ 下任何页面都会被本守卫误拒（W536 后首次 --force 实证）。
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 def _w536_guard_open(path, *a, **k):
     _real = os.path.realpath(path)
@@ -67,6 +69,16 @@ def process(path, force, dry):
         '    <!-- %s (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->\n'
         '    <style>\n%s\n\n%s\n    </style>\n' % (MARKER, tokens, system)
     )
+
+    # B-0（W563）：内联块的相对 url 以文档为基解析（无 <base>），子目录页的
+    # url('static/…') 会解析到 site/data/static/、site/en/static/ 等不存在路径。
+    # 按页面相对 site/ 的深度补 ../ 前缀；tokens.css / system.css 源文件不动
+    # （对根级 <link> 页与根级 INLINED 页本就正确）。
+    _depth = os.path.relpath(path, SITE_DIR).count(os.sep)
+    if _depth:
+        _prefix = "../" * _depth
+        inlined = inlined.replace("url('static/", "url('%sstatic/" % _prefix)
+        inlined = inlined.replace('url("static/', 'url("%sstatic/' % _prefix)
 
     html = html.replace(LINK_TOKENS, "")
     html = html.replace(LINK_SYSTEM, "")

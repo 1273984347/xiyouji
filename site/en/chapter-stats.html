@@ -2,15 +2,14 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-ep5DEMGbfghcip0a/xTt15y9XnKmoM5TE2a9gIcGdbc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-1GsvPk33qmptpFIwpcnnr44aPcuD8KQ8CdMQ4d4u7CE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Chapter Length & Dialogue Stats · 详解西游记</title>
-    <script src="../static/js/d3.v7.min.js"></script>
     <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
     
     
-                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -37,35 +36,35 @@
     font-style: normal;
     font-weight: 200 900;
     font-display: optional;
-    src: url('static/fonts/noto-serif-sc-shared.woff2') format('woff2-variations');
+    src: url('../static/fonts/noto-serif-sc-shared.woff2') format('woff2-variations');
 }
 @font-face {
     font-family: 'Noto Sans SC';
     font-style: normal;
     font-weight: 400;
     font-display: optional;
-    src: url('static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
 }
 @font-face {
     font-family: 'Noto Sans SC';
     font-style: normal;
     font-weight: 500;
     font-display: optional;
-    src: url('static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
 }
 @font-face {
     font-family: 'JetBrains Mono';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
 }
 @font-face {
     font-family: 'JetBrains Mono';
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url('static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
 }
 
 :root {
@@ -386,7 +385,7 @@ h4 { font-size: 18px; font-weight: 500; }
 /* ===== Hero（数据页通用） ===== */
 .hero {
     background: var(--dark);
-    background-image: url('static/images/ink-mountains-hero.webp');
+    background-image: url('../static/images/ink-mountains-hero.webp');
     background-size: cover;
     background-position: center 70%;
     background-blend-mode: soft-light;
@@ -1031,12 +1030,6 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-            /* W557: kpi-row 基类补齐（标记存在但基类规则缺失致统计条纵向裸排） */
-        .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin: 18px 0; }
-        .kpi-row .kpi-card { background: var(--paper-warm); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 10px; padding: 14px 16px; }
-        .kpi-row .kpi-card .label { font-size: 0.78rem; color: var(--ink-soft); letter-spacing: 0.04em; }
-        .kpi-row .kpi-card .value { font-size: 1.9rem; font-weight: 700; color: var(--accent); font-family: var(--font-mono, monospace); line-height: 1.15; }
-        .kpi-row .kpi-card .desc { font-size: 0.8rem; color: var(--ink-soft); margin-top: 4px; }
     </style>
 <style>
         /* e-track-exempt: chart-data-colors 1 处 */
@@ -1174,6 +1167,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <script defer src="../js/rum.js"></script>
   <script defer src="../js/visit-log.js"></script>
   <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+<link rel="preload" href="../static/js/d3.v7.min.js" as="script" />
 </head>
 <body>
     <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
@@ -1260,6 +1254,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
 <div class="tooltip" id="tooltip"></div>
 
+        <script src="../static/js/d3.v7.min.js"></script>
     <script>
     // 配色
     const COLOR_NARRATIVE = "#3a6b8c";  // 叙述字数（深蓝）
@@ -1638,22 +1633,931 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         }).on("mouseleave", hideTooltip);
     }
 
-    // 加载数据（fetch 失败则用 mock 数据 + 提示）
+    // W563: EMBEDDED single source. chapter_stats generator produced real data
+    // only after the text_loader chapter-filename extension fix; the page used to fetch
+    // the old out-of-site relative path (always 404 in deploy, deploy
+    // root = site/) and fall back to mock because that JSON was an all-zero stub.
+    const EMBEDDED_DATA = {
+  "total_chapters": 100,
+  "total_chars": 740093,
+  "total_dialogue_chars": 350447,
+  "total_poems": 19,
+  "avg_chars_per_chapter": 7400.9,
+  "avg_dialogue_ratio": 0.4735,
+  "longest_chapter": "第031回",
+  "shortest_chapter": "第007回",
+  "per_chapter": [
+    {
+      "chapter": "第001回",
+      "total_chars": 7288,
+      "chinese_chars": 5729,
+      "dialogue_chars": 2451,
+      "narrative_chars": 4837,
+      "dialogue_ratio": 0.3363,
+      "poem_count": 2
+    },
+    {
+      "chapter": "第002回",
+      "total_chars": 7397,
+      "chinese_chars": 5720,
+      "dialogue_chars": 3760,
+      "narrative_chars": 3637,
+      "dialogue_ratio": 0.5083,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第003回",
+      "total_chars": 7051,
+      "chinese_chars": 5500,
+      "dialogue_chars": 2989,
+      "narrative_chars": 4062,
+      "dialogue_ratio": 0.4239,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第004回",
+      "total_chars": 7087,
+      "chinese_chars": 5613,
+      "dialogue_chars": 2667,
+      "narrative_chars": 4420,
+      "dialogue_ratio": 0.3763,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第005回",
+      "total_chars": 6669,
+      "chinese_chars": 5318,
+      "dialogue_chars": 2367,
+      "narrative_chars": 4302,
+      "dialogue_ratio": 0.3549,
+      "poem_count": 1
+    },
+    {
+      "chapter": "第006回",
+      "total_chars": 6967,
+      "chinese_chars": 5552,
+      "dialogue_chars": 2632,
+      "narrative_chars": 4335,
+      "dialogue_ratio": 0.3778,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第007回",
+      "total_chars": 5162,
+      "chinese_chars": 4126,
+      "dialogue_chars": 1640,
+      "narrative_chars": 3522,
+      "dialogue_ratio": 0.3177,
+      "poem_count": 5
+    },
+    {
+      "chapter": "第008回",
+      "total_chars": 6641,
+      "chinese_chars": 5271,
+      "dialogue_chars": 2810,
+      "narrative_chars": 3831,
+      "dialogue_ratio": 0.4231,
+      "poem_count": 5
+    },
+    {
+      "chapter": "第009回",
+      "total_chars": 6060,
+      "chinese_chars": 4821,
+      "dialogue_chars": 3329,
+      "narrative_chars": 2731,
+      "dialogue_ratio": 0.5493,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第010回",
+      "total_chars": 6759,
+      "chinese_chars": 5392,
+      "dialogue_chars": 2500,
+      "narrative_chars": 4259,
+      "dialogue_ratio": 0.3699,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第011回",
+      "total_chars": 7197,
+      "chinese_chars": 5762,
+      "dialogue_chars": 2923,
+      "narrative_chars": 4274,
+      "dialogue_ratio": 0.4061,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第012回",
+      "total_chars": 6391,
+      "chinese_chars": 5091,
+      "dialogue_chars": 2581,
+      "narrative_chars": 3810,
+      "dialogue_ratio": 0.4038,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第013回",
+      "total_chars": 6597,
+      "chinese_chars": 5303,
+      "dialogue_chars": 1970,
+      "narrative_chars": 4627,
+      "dialogue_ratio": 0.2986,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第014回",
+      "total_chars": 8802,
+      "chinese_chars": 6962,
+      "dialogue_chars": 4516,
+      "narrative_chars": 4286,
+      "dialogue_ratio": 0.5131,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第015回",
+      "total_chars": 7482,
+      "chinese_chars": 6021,
+      "dialogue_chars": 3880,
+      "narrative_chars": 3602,
+      "dialogue_ratio": 0.5186,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第016回",
+      "total_chars": 7934,
+      "chinese_chars": 6340,
+      "dialogue_chars": 3405,
+      "narrative_chars": 4529,
+      "dialogue_ratio": 0.4292,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第017回",
+      "total_chars": 8608,
+      "chinese_chars": 6955,
+      "dialogue_chars": 4081,
+      "narrative_chars": 4527,
+      "dialogue_ratio": 0.4741,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第018回",
+      "total_chars": 6039,
+      "chinese_chars": 4813,
+      "dialogue_chars": 3246,
+      "narrative_chars": 2793,
+      "dialogue_ratio": 0.5375,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第019回",
+      "total_chars": 6969,
+      "chinese_chars": 5592,
+      "dialogue_chars": 3830,
+      "narrative_chars": 3139,
+      "dialogue_ratio": 0.5496,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第020回",
+      "total_chars": 7256,
+      "chinese_chars": 5756,
+      "dialogue_chars": 3531,
+      "narrative_chars": 3725,
+      "dialogue_ratio": 0.4866,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第021回",
+      "total_chars": 7295,
+      "chinese_chars": 5828,
+      "dialogue_chars": 3189,
+      "narrative_chars": 4106,
+      "dialogue_ratio": 0.4371,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第022回",
+      "total_chars": 7009,
+      "chinese_chars": 5636,
+      "dialogue_chars": 3711,
+      "narrative_chars": 3298,
+      "dialogue_ratio": 0.5295,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第023回",
+      "total_chars": 7548,
+      "chinese_chars": 6003,
+      "dialogue_chars": 4136,
+      "narrative_chars": 3412,
+      "dialogue_ratio": 0.548,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第024回",
+      "total_chars": 7398,
+      "chinese_chars": 5886,
+      "dialogue_chars": 3578,
+      "narrative_chars": 3820,
+      "dialogue_ratio": 0.4836,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第025回",
+      "total_chars": 7872,
+      "chinese_chars": 6245,
+      "dialogue_chars": 3663,
+      "narrative_chars": 4209,
+      "dialogue_ratio": 0.4653,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第026回",
+      "total_chars": 7048,
+      "chinese_chars": 5635,
+      "dialogue_chars": 3363,
+      "narrative_chars": 3685,
+      "dialogue_ratio": 0.4772,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第027回",
+      "total_chars": 7366,
+      "chinese_chars": 5889,
+      "dialogue_chars": 4008,
+      "narrative_chars": 3358,
+      "dialogue_ratio": 0.5441,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第028回",
+      "total_chars": 6636,
+      "chinese_chars": 5343,
+      "dialogue_chars": 2444,
+      "narrative_chars": 4192,
+      "dialogue_ratio": 0.3683,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第029回",
+      "total_chars": 6642,
+      "chinese_chars": 5312,
+      "dialogue_chars": 3526,
+      "narrative_chars": 3116,
+      "dialogue_ratio": 0.5309,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第030回",
+      "total_chars": 8385,
+      "chinese_chars": 6739,
+      "dialogue_chars": 4087,
+      "narrative_chars": 4298,
+      "dialogue_ratio": 0.4874,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第031回",
+      "total_chars": 9041,
+      "chinese_chars": 7243,
+      "dialogue_chars": 5290,
+      "narrative_chars": 3751,
+      "dialogue_ratio": 0.5851,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第032回",
+      "total_chars": 8288,
+      "chinese_chars": 6536,
+      "dialogue_chars": 4646,
+      "narrative_chars": 3642,
+      "dialogue_ratio": 0.5606,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第033回",
+      "total_chars": 8210,
+      "chinese_chars": 6450,
+      "dialogue_chars": 4674,
+      "narrative_chars": 3536,
+      "dialogue_ratio": 0.5693,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第034回",
+      "total_chars": 8406,
+      "chinese_chars": 6613,
+      "dialogue_chars": 3643,
+      "narrative_chars": 4763,
+      "dialogue_ratio": 0.4334,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第035回",
+      "total_chars": 7069,
+      "chinese_chars": 5711,
+      "dialogue_chars": 2530,
+      "narrative_chars": 4539,
+      "dialogue_ratio": 0.3579,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第036回",
+      "total_chars": 7393,
+      "chinese_chars": 5879,
+      "dialogue_chars": 3878,
+      "narrative_chars": 3515,
+      "dialogue_ratio": 0.5246,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第037回",
+      "total_chars": 8266,
+      "chinese_chars": 6584,
+      "dialogue_chars": 5089,
+      "narrative_chars": 3177,
+      "dialogue_ratio": 0.6157,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第038回",
+      "total_chars": 7752,
+      "chinese_chars": 6105,
+      "dialogue_chars": 4184,
+      "narrative_chars": 3568,
+      "dialogue_ratio": 0.5397,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第039回",
+      "total_chars": 8098,
+      "chinese_chars": 6455,
+      "dialogue_chars": 4391,
+      "narrative_chars": 3707,
+      "dialogue_ratio": 0.5422,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第040回",
+      "total_chars": 7863,
+      "chinese_chars": 6358,
+      "dialogue_chars": 4192,
+      "narrative_chars": 3671,
+      "dialogue_ratio": 0.5331,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第041回",
+      "total_chars": 8115,
+      "chinese_chars": 6506,
+      "dialogue_chars": 3526,
+      "narrative_chars": 4589,
+      "dialogue_ratio": 0.4345,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第042回",
+      "total_chars": 8485,
+      "chinese_chars": 6717,
+      "dialogue_chars": 4517,
+      "narrative_chars": 3968,
+      "dialogue_ratio": 0.5324,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第043回",
+      "total_chars": 8199,
+      "chinese_chars": 6562,
+      "dialogue_chars": 4171,
+      "narrative_chars": 4028,
+      "dialogue_ratio": 0.5087,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第044回",
+      "total_chars": 8231,
+      "chinese_chars": 6543,
+      "dialogue_chars": 4595,
+      "narrative_chars": 3636,
+      "dialogue_ratio": 0.5583,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第045回",
+      "total_chars": 7415,
+      "chinese_chars": 5861,
+      "dialogue_chars": 3326,
+      "narrative_chars": 4089,
+      "dialogue_ratio": 0.4486,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第046回",
+      "total_chars": 8148,
+      "chinese_chars": 6406,
+      "dialogue_chars": 3872,
+      "narrative_chars": 4276,
+      "dialogue_ratio": 0.4752,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第047回",
+      "total_chars": 8056,
+      "chinese_chars": 6303,
+      "dialogue_chars": 4548,
+      "narrative_chars": 3508,
+      "dialogue_ratio": 0.5645,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第048回",
+      "total_chars": 6749,
+      "chinese_chars": 5372,
+      "dialogue_chars": 3127,
+      "narrative_chars": 3622,
+      "dialogue_ratio": 0.4633,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第049回",
+      "total_chars": 7858,
+      "chinese_chars": 6257,
+      "dialogue_chars": 4168,
+      "narrative_chars": 3690,
+      "dialogue_ratio": 0.5304,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第050回",
+      "total_chars": 6848,
+      "chinese_chars": 5522,
+      "dialogue_chars": 3086,
+      "narrative_chars": 3762,
+      "dialogue_ratio": 0.4506,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第051回",
+      "total_chars": 7216,
+      "chinese_chars": 5799,
+      "dialogue_chars": 3093,
+      "narrative_chars": 4123,
+      "dialogue_ratio": 0.4286,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第052回",
+      "total_chars": 7862,
+      "chinese_chars": 6329,
+      "dialogue_chars": 3511,
+      "narrative_chars": 4351,
+      "dialogue_ratio": 0.4466,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第053回",
+      "total_chars": 8097,
+      "chinese_chars": 6459,
+      "dialogue_chars": 3662,
+      "narrative_chars": 4435,
+      "dialogue_ratio": 0.4523,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第054回",
+      "total_chars": 7331,
+      "chinese_chars": 5862,
+      "dialogue_chars": 3527,
+      "narrative_chars": 3804,
+      "dialogue_ratio": 0.4811,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第055回",
+      "total_chars": 7824,
+      "chinese_chars": 6198,
+      "dialogue_chars": 3407,
+      "narrative_chars": 4417,
+      "dialogue_ratio": 0.4355,
+      "poem_count": 1
+    },
+    {
+      "chapter": "第056回",
+      "total_chars": 7896,
+      "chinese_chars": 6188,
+      "dialogue_chars": 3762,
+      "narrative_chars": 4134,
+      "dialogue_ratio": 0.4764,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第057回",
+      "total_chars": 6958,
+      "chinese_chars": 5596,
+      "dialogue_chars": 3640,
+      "narrative_chars": 3318,
+      "dialogue_ratio": 0.5231,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第058回",
+      "total_chars": 6761,
+      "chinese_chars": 5469,
+      "dialogue_chars": 3162,
+      "narrative_chars": 3599,
+      "dialogue_ratio": 0.4677,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第059回",
+      "total_chars": 7720,
+      "chinese_chars": 6120,
+      "dialogue_chars": 3906,
+      "narrative_chars": 3814,
+      "dialogue_ratio": 0.506,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第060回",
+      "total_chars": 7299,
+      "chinese_chars": 5839,
+      "dialogue_chars": 3749,
+      "narrative_chars": 3550,
+      "dialogue_ratio": 0.5136,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第061回",
+      "total_chars": 7941,
+      "chinese_chars": 6427,
+      "dialogue_chars": 3032,
+      "narrative_chars": 4909,
+      "dialogue_ratio": 0.3818,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第062回",
+      "total_chars": 7044,
+      "chinese_chars": 5620,
+      "dialogue_chars": 3409,
+      "narrative_chars": 3635,
+      "dialogue_ratio": 0.484,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第063回",
+      "total_chars": 7235,
+      "chinese_chars": 5819,
+      "dialogue_chars": 3341,
+      "narrative_chars": 3894,
+      "dialogue_ratio": 0.4618,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第064回",
+      "total_chars": 7214,
+      "chinese_chars": 5712,
+      "dialogue_chars": 3862,
+      "narrative_chars": 3352,
+      "dialogue_ratio": 0.5353,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第065回",
+      "total_chars": 6598,
+      "chinese_chars": 5311,
+      "dialogue_chars": 1778,
+      "narrative_chars": 4820,
+      "dialogue_ratio": 0.2695,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第066回",
+      "total_chars": 6763,
+      "chinese_chars": 5447,
+      "dialogue_chars": 2928,
+      "narrative_chars": 3835,
+      "dialogue_ratio": 0.4329,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第067回",
+      "total_chars": 7340,
+      "chinese_chars": 5799,
+      "dialogue_chars": 3932,
+      "narrative_chars": 3408,
+      "dialogue_ratio": 0.5357,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第068回",
+      "total_chars": 7227,
+      "chinese_chars": 5720,
+      "dialogue_chars": 3926,
+      "narrative_chars": 3301,
+      "dialogue_ratio": 0.5432,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第069回",
+      "total_chars": 8513,
+      "chinese_chars": 6704,
+      "dialogue_chars": 4028,
+      "narrative_chars": 4485,
+      "dialogue_ratio": 0.4732,
+      "poem_count": 2
+    },
+    {
+      "chapter": "第070回",
+      "total_chars": 7249,
+      "chinese_chars": 5817,
+      "dialogue_chars": 3578,
+      "narrative_chars": 3671,
+      "dialogue_ratio": 0.4936,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第071回",
+      "total_chars": 7831,
+      "chinese_chars": 6297,
+      "dialogue_chars": 3646,
+      "narrative_chars": 4185,
+      "dialogue_ratio": 0.4656,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第072回",
+      "total_chars": 8083,
+      "chinese_chars": 6452,
+      "dialogue_chars": 3162,
+      "narrative_chars": 4921,
+      "dialogue_ratio": 0.3912,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第073回",
+      "total_chars": 8319,
+      "chinese_chars": 6664,
+      "dialogue_chars": 3874,
+      "narrative_chars": 4445,
+      "dialogue_ratio": 0.4657,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第074回",
+      "total_chars": 8186,
+      "chinese_chars": 6524,
+      "dialogue_chars": 4811,
+      "narrative_chars": 3375,
+      "dialogue_ratio": 0.5877,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第075回",
+      "total_chars": 8009,
+      "chinese_chars": 6346,
+      "dialogue_chars": 3833,
+      "narrative_chars": 4176,
+      "dialogue_ratio": 0.4786,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第076回",
+      "total_chars": 8290,
+      "chinese_chars": 6592,
+      "dialogue_chars": 3912,
+      "narrative_chars": 4378,
+      "dialogue_ratio": 0.4719,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第077回",
+      "total_chars": 8370,
+      "chinese_chars": 6644,
+      "dialogue_chars": 3728,
+      "narrative_chars": 4642,
+      "dialogue_ratio": 0.4454,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第078回",
+      "total_chars": 6475,
+      "chinese_chars": 5155,
+      "dialogue_chars": 3297,
+      "narrative_chars": 3178,
+      "dialogue_ratio": 0.5092,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第079回",
+      "total_chars": 6499,
+      "chinese_chars": 5165,
+      "dialogue_chars": 2275,
+      "narrative_chars": 4224,
+      "dialogue_ratio": 0.3501,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第080回",
+      "total_chars": 7212,
+      "chinese_chars": 5751,
+      "dialogue_chars": 4244,
+      "narrative_chars": 2968,
+      "dialogue_ratio": 0.5885,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第081回",
+      "total_chars": 7501,
+      "chinese_chars": 5936,
+      "dialogue_chars": 3986,
+      "narrative_chars": 3515,
+      "dialogue_ratio": 0.5314,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第082回",
+      "total_chars": 7896,
+      "chinese_chars": 6209,
+      "dialogue_chars": 3746,
+      "narrative_chars": 4150,
+      "dialogue_ratio": 0.4744,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第083回",
+      "total_chars": 7161,
+      "chinese_chars": 5725,
+      "dialogue_chars": 3192,
+      "narrative_chars": 3969,
+      "dialogue_ratio": 0.4457,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第084回",
+      "total_chars": 7620,
+      "chinese_chars": 6027,
+      "dialogue_chars": 3478,
+      "narrative_chars": 4142,
+      "dialogue_ratio": 0.4564,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第085回",
+      "total_chars": 7861,
+      "chinese_chars": 6245,
+      "dialogue_chars": 4304,
+      "narrative_chars": 3557,
+      "dialogue_ratio": 0.5475,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第086回",
+      "total_chars": 7963,
+      "chinese_chars": 6361,
+      "dialogue_chars": 3606,
+      "narrative_chars": 4357,
+      "dialogue_ratio": 0.4528,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第087回",
+      "total_chars": 6906,
+      "chinese_chars": 5482,
+      "dialogue_chars": 3348,
+      "narrative_chars": 3558,
+      "dialogue_ratio": 0.4848,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第088回",
+      "total_chars": 6811,
+      "chinese_chars": 5486,
+      "dialogue_chars": 2788,
+      "narrative_chars": 4023,
+      "dialogue_ratio": 0.4093,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第089回",
+      "total_chars": 6541,
+      "chinese_chars": 5263,
+      "dialogue_chars": 3207,
+      "narrative_chars": 3334,
+      "dialogue_ratio": 0.4903,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第090回",
+      "total_chars": 6979,
+      "chinese_chars": 5678,
+      "dialogue_chars": 2250,
+      "narrative_chars": 4729,
+      "dialogue_ratio": 0.3224,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第091回",
+      "total_chars": 7168,
+      "chinese_chars": 5760,
+      "dialogue_chars": 3039,
+      "narrative_chars": 4129,
+      "dialogue_ratio": 0.424,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第092回",
+      "total_chars": 7486,
+      "chinese_chars": 6017,
+      "dialogue_chars": 3395,
+      "narrative_chars": 4091,
+      "dialogue_ratio": 0.4535,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第093回",
+      "total_chars": 6778,
+      "chinese_chars": 5367,
+      "dialogue_chars": 3528,
+      "narrative_chars": 3250,
+      "dialogue_ratio": 0.5205,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第094回",
+      "total_chars": 5906,
+      "chinese_chars": 4688,
+      "dialogue_chars": 2521,
+      "narrative_chars": 3385,
+      "dialogue_ratio": 0.4269,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第095回",
+      "total_chars": 6676,
+      "chinese_chars": 5438,
+      "dialogue_chars": 2843,
+      "narrative_chars": 3833,
+      "dialogue_ratio": 0.4259,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第096回",
+      "total_chars": 6310,
+      "chinese_chars": 5042,
+      "dialogue_chars": 2705,
+      "narrative_chars": 3605,
+      "dialogue_ratio": 0.4287,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第097回",
+      "total_chars": 8992,
+      "chinese_chars": 7237,
+      "dialogue_chars": 4781,
+      "narrative_chars": 4211,
+      "dialogue_ratio": 0.5317,
+      "poem_count": 0
+    },
+    {
+      "chapter": "第098回",
+      "total_chars": 7749,
+      "chinese_chars": 6140,
+      "dialogue_chars": 2945,
+      "narrative_chars": 4804,
+      "dialogue_ratio": 0.38,
+      "poem_count": 1
+    },
+    {
+      "chapter": "第099回",
+      "total_chars": 5943,
+      "chinese_chars": 4829,
+      "dialogue_chars": 3349,
+      "narrative_chars": 2594,
+      "dialogue_ratio": 0.5635,
+      "poem_count": 2
+    },
+    {
+      "chapter": "第100回",
+      "total_chars": 6439,
+      "chinese_chars": 5187,
+      "dialogue_chars": 3155,
+      "narrative_chars": 3284,
+      "dialogue_ratio": 0.49,
+      "poem_count": 0
+    }
+  ]
+};
     async function loadData() {
-        try {
-            const response = await fetch('../../scripts/output/data/chapter_stats.json');
-            if (!response.ok) throw new Error('fetch failed: ' + response.status);
-            const data = await response.json();
-            if (!data || !data.per_chapter || data.per_chapter.length === 0) {
-                throw new Error('empty data');
-            }
-            document.getElementById('dataSource').innerHTML =
-                'Data source: live from <code>../../scripts/output/data/chapter_stats.json</code> (http server mode) · <strong>' + data.total_chapters + '</strong> chapters';
-            return { data, isMock: false };
-        } catch (e) {
-            console.log('[INFO] using mock data:', e.message);
+        const data = EMBEDDED_DATA;
+        if (!data || !data.per_chapter || data.per_chapter.length === 0) {
+            console.log('[INFO] using mock data: EMBEDDED_DATA is empty');
             return { data: MOCK_DATA, isMock: true };
         }
+        document.getElementById('dataSource').innerHTML =
+            'Data source: embedded chapter_stats.json (EMBEDDED single source · W563) · <strong>' + data.total_chapters + '</strong> chapters';
+        return { data, isMock: false };
     }
 
     // 主流程

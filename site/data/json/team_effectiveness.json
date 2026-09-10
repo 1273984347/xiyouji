@@ -1,0 +1,80 @@
+{
+  "phases": [
+    {
+      "phase": "Forming·初建期",
+      "chapter_range": "12-22",
+      "effectiveness": 5,
+      "feature": "组建团队·各成员带病入伙·磨合中",
+      "key_events": [
+        "收悟空（14回）",
+        "收白龙（15回）",
+        "收八戒（19回）",
+        "收沙僧（22回）"
+      ]
+    },
+    {
+      "phase": "Storming·风暴期",
+      "chapter_range": "23-58",
+      "effectiveness": 4,
+      "feature": "三打白骨精·悟空被逐·真假美猴王·团队信任危机",
+      "key_events": [
+        "三打白骨精（27回）",
+        "悟空被逐·黄袍怪（29-30回）",
+        "真假美猴王（57-58回）"
+      ],
+      "post_crisis_spike": "真假美猴王后·团队信任重塑·协作飙升 +3"
+    },
+    {
+      "phase": "Norming·规范期",
+      "chapter_range": "59-90",
+      "effectiveness": 8,
+      "feature": "火焰山·小雷音·狮驼岭·团队协作成熟化",
+      "key_events": [
+        "三借芭蕉扇（59-61回）",
+        "小雷音寺（65-66回）",
+        "狮驼岭（74-77回）",
+        "比丘国（78-79回）"
+      ],
+      "post_crisis_spike": "狮驼岭后·团队默契达到顶峰·协作 +5"
+    },
+    {
+      "phase": "Performing·表现期",
+      "chapter_range": "91-100",
+      "effectiveness": 10,
+      "feature": "青龙山·天竺·凌云渡·五圣成真",
+      "key_events": [
+        "青龙山三犀牛（91-92回）",
+        "天竺玉兔（94-95回）",
+        "凌云渡脱胎（98回）",
+        "径回东土（100回）"
+      ],
+      "post_crisis_spike": "凌云渡脱胎·团队心性圆满·协作 +10"
+    }
+  ],
+  "spike_points": [
+    {
+      "chapter": 30,
+      "event": "悟空回救·唐僧化虎",
+      "spike": 2,
+      "note": "Storming 后的首次回归·信任重建"
+    },
+    {
+      "chapter": 58,
+      "event": "真假美猴王辨明",
+      "spike": 3,
+      "note": "Storming 结束·进入 Norming"
+    },
+    {
+      "chapter": 77,
+      "event": "狮驼岭·如来亲降",
+      "spike": 5,
+      "note": "Performing 入门·团队默契顶峰"
+    },
+    {
+      "chapter": 98,
+      "event": "凌云渡·脱胎换骨",
+      "spike": 10,
+      "note": "Performing 顶峰·五圣成真"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+[
+  {
+    "n": 5,
+    "hardship": "出城逢虎",
+    "location": "双叉岭",
+    "alert_level": "黄",
+    "weather": "山林·虎啸",
+    "remark": "建议发放山林补贴",
+    "delay_days": 1
+  },
+  {
+    "n": 11,
+    "hardship": "失却袈裟",
+    "location": "观音禅院·黑风山",
+    "alert_level": "橙",
+    "weather": "夜火·妖气",
+    "remark": "设备（袈裟）遗失，建议购买保险",
+    "delay_days": 3
+  },
+  {
+    "n": 17,
+    "hardship": "黑熊精阻路",
+    "location": "黑风洞",
+    "alert_level": "橙",
+    "weather": "黑气弥漫",
+    "remark": "需观音姐姐亲临协调",
+    "delay_days": 2
+  },
+  {
+    "n": 27,
+    "hardship": "三打白骨精",
+    "location": "白虎岭",
+    "alert_level": "红",
+    "weather": "白骨阴气",
+    "remark": "团队内讧·执行器被驱逐",
+    "delay_days": 7
+  },
+  {
+    "n": 41,
+    "hardship": "红孩儿·三昧真火",
+    "location": "号山火云洞",
+    "alert_level": "红·极端高温",
+    "weather": "极端高温红色预警",
+    "remark": "建议发放高温补贴",
+    "delay_days": 5
+  },
+  {
+    "n": 47,
+    "hardship": "通天河·金鱼精",
+    "location": "通天河",
+    "alert_level": "红·洪水",
+    "weather": "冰面行走·后遇洪水",
+    "remark": "遭遇不可抗力（洪水），行程延误",
+    "delay_days": 4
+  },
+  {
+    "n": 50,
+    "hardship": "金兜洞·金刚琢",
+    "location": "金兜山",
+    "alert_level": "红",
+    "weather": "金光万道",
+    "remark": "诸神兵器被套·需老君亲降",
+    "delay_days": 6
+  },
+  {
+    "n": 59,
+    "hardship": "三借芭蕉扇",
+    "location": "火焰山·芭蕉洞",
+    "alert_level": "红·极端高温",
+    "weather": "八百里火焰山",
+    "remark": "极端高温·建议发放高温补贴+防暑用品",
+    "delay_days": 8
+  },
+  {
+    "n": 65,
+    "hardship": "小雷音寺·黄眉怪",
+    "location": "小西天",
+    "alert_level": "红·伪佛",
+    "weather": "伪佛光",
+    "remark": "诸神皆入人种袋·需弥勒亲降",
+    "delay_days": 7
+  },
+  {
+    "n": 74,
+    "hardship": "狮驼岭三魔王",
+    "location": "狮驼岭·狮驼国",
+    "alert_level": "SSS·全城紧急",
+    "weather": "骷髅若岭",
+    "remark": "全城进入紧急状态·警报级别 SSS 级·如来亲降",
+    "delay_days": 12
+  },
+  {
+    "n": 82,
+    "hardship": "无底洞·老鼠精",
+    "location": "陷空山",
+    "alert_level": "红",
+    "weather": "黑气漫山",
+    "remark": "李天王义女·需父女牌位协调",
+    "delay_days": 4
+  },
+  {
+    "n": 91,
+    "hardship": "青龙山·三犀牛",
+    "location": "青龙山",
+    "alert_level": "橙",
+    "weather": "寒光凛凛",
+    "remark": "偷香油 5 万斤·需四星收服",
+    "delay_days": 5
+  }
+]
