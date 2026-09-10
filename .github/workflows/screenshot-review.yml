@@ -103,6 +103,10 @@ jobs:
               # 页脚版本号免审（版本 bump 常态；真实布局改动由每周全量 + PR 兜底）
               site/dukou-engine.html|site/index.html|site/data/cross-time-danmaku.html|site/data/tag-cloud.html)
                 ;;
+              # W563：site/data/json/ 为部署数据副本（fetch 目标），非页面——免审
+              # （页面本身变更时按其页面路径另行触发定向截图）
+              site/data/json/*)
+                ;;
               # 可视化数据页变更 → 定向截图（变更页 + 入口页）
               site/data/*)
                 NEEDED=true
