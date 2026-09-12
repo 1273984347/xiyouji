@@ -11,6 +11,29 @@
 ---
 
 
+## W564 W564 字体字节治理（2026-09-10·v2.3.164）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/fonts/NotoSansSC-Regular.subset.woff2 | W564 | 新增·754→605KB（4925 字字符集子集） |
+| site/static/fonts/NotoSansSC-Medium.subset.woff2 | W564 | 新增·765→614KB |
+| site/static/fonts/noto-serif-sc-shared.subset.woff2 | W564 | 新增·414→405KB（源 1499 字形已与站内字符集一致，fvar 保留） |
+| site/tokens.css | W564 | 修改·三行 @font-face url 指向 .subset.woff2 |
+| site/data+en 226 个 HTML | W564 | 修改·--force 重内联（url 切换）+ 主字体 preload 注入 2 行/页 |
+| site/sw.js | W564 | 修改·SHELL 三字体切换 subset + 补 serif 一行（离线完整性）·CACHE v3 |
+| scripts/requirements.txt | W564 | 修改·追加 fonttools/brotli（子集化管线依赖，入 pip-audit） |
+| scripts/_gen_font_charset.py | W564 | 新增·一次性：字符集提取（site HTML 完整原文+双 JSON+ASCII） |
+| scripts/_check_font_coverage.py | W564 | 新增·常驻守卫：零回归覆盖 100% + serif fvar 断言（新增内容批次收尾重跑） |
+| scripts/_add_font_preload.py | W564 | 新增·一次性：226 页 preload 注入（幂等 + CRLF + <body> 回退锚点） |
+| scripts/_font_request_probe.js | W564 | 新增·一次性：部署态 woff2 请求数探针（每字体恰 1 次） |
+| scripts/output/font-charset.txt | W564 | 新增·子集字符集（4925 字，不参与部署） |
+| CHANGELOG.md | W564 | 新增·W564 版段 + 编号规则上限 W001-W564 |
+| 交接文档.md | W564 | 修改·头尾「最后更新」prepend W564 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W564 | 修改·版本行同步 v2.3.164（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W564 | 修改·四页脚链首 prepend W564（batch_cascade.py 执行） |
+| .github/workflows/README.md | W564 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W564 | 新增·W564 段（本段·batch_cascade.py 执行） |
+
 ## W563 W563 前端关键路径与部署正确性批次（2026-09-10·v2.3.163）
 
 | 文件 | W | 说明 |

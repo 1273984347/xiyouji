@@ -14,7 +14,7 @@
  * 注意：Service Worker 仅在 http(s) 或 localhost 生效；file:// 下不注册
  *（见 index.html / mobile-index.html 中的 http 协议守卫）。
  */
-const CACHE = "xiyouji-shell-v2";
+const CACHE = "xiyouji-shell-v3"; /* W564：字体切换 subset 产物 */
 const SHELL = [
   "./",
   "./index.html",
@@ -24,8 +24,9 @@ const SHELL = [
   "./system.css",
   "./static/js/vis-tools.js",
   "./static/js/rag-chat.js",
-  "./static/fonts/NotoSansSC-Regular.woff2",
-  "./static/fonts/NotoSansSC-Medium.woff2",
+  "./static/fonts/NotoSansSC-Regular.subset.woff2",
+  "./static/fonts/NotoSansSC-Medium.subset.woff2",
+  "./static/fonts/noto-serif-sc-shared.subset.woff2",
   "./static/images/ink-mountains-hero.webp",
   "./static/icons/icon-192.png",
   "./static/icons/icon-512.png"

@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W563），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W564），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,17 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.164（2026-09-10）：W564 字体字节治理（方案B） — 按站内字符集子集化三字体·226页主字体preload·SW SHELL联动subset
+
+> **来源**：方案档 §方案 B（批次 2，随「继续批次 2」执行）。B-0 已随 W563 交付。
+> - **B-1 子集化**：字符集按方案口径（site HTML 完整原文含 script/style + scripts/output/data/*.json + dataset/*.json + ASCII）实测 **4925 字（CJK 4705）**——比正文度量口径 2181 多 2700+，验证了不剥离决策（tooltip/图例/模板串的 CJK 全部入集）。pyftsubset 三连：NotoSansSC-Regular 754→605KB、Medium 765→614KB、noto-serif-sc-shared 414→405KB（合计 -309KB/-16%）；layout features 实验证明仅省 2KB（尺寸由 4455 个 CJK 字形轮廓主导）。
+> - **门槛修订（如实记录）**：方案 ≤300KB 门槛经诊断判明失准——serif 源 1499 字形与本站字符集**完全一致**（子集化前后字形数/体积不变，零可减）；sans 源 8248 字形中站内实际用 4455，605KB 即该字符集的 woff2 密度地板。300KB 系按 2181 字口径预估所致，不构成质量风险（覆盖守卫 100% 为硬门槛）；实测尺寸如实交付，不砍字符集（砍到正文口径有 tofu 风险，方案已明拒）。
+> - **覆盖守卫（常驻）**：_check_font_coverage.py 零回归语义——断言「子集 ⊇ 字符集∩源字体cmap」100%（源字体本无的 524/3820 字走 font-family 栈回退系既有行为，非回归）+ serif subset 保留 fvar 表（源为 VF、@font-face 声明 weight 200-900，fvar 丢失即字重塌缩且无门禁可拦）。留档常驻：新增内容/数据批次收尾重跑（交接文档「三」登记）。
+> - **B-2 preload**：226 个 INLINED 页 </head> 前注入 NotoSansSC-Regular.subset + noto-serif-sc-shared.subset 两行 preload（crossorigin 强制；href 与 @font-face url 同形态防失配）；写后断言 226 页恰 2 条/非 INLINED 页 0 条；请求探针 3/3 页——全部 woff2 **各恰好 1 次请求**（零双重下载）、无 error 字形。JetBrainsMono 仅代码块使用不 preload。en/philosophy.html 无 </head> 闭合（存量孤例），脚本回退锚定 <body>。
+> - **SW SHELL 联动（执行期必要联动）**：@font-face 全站指向 subset 后，SHELL 预缓存的两个原文件沦为死重且离线时 subset 404——SHELL 三行切换为 subset 产物并补 serif subset 一行（离线完整性），CACHE 本地占位 v3（部署期 SHA 戳自动覆写）。8 个 <link> 根页亦经 tokens.css 生效 subset（preload 未覆盖该 8 页，登记为后续可选项）。
+> - **验证（当批实跑）**：verify_delivery 核心全绿（门禁 12/15 复验通过）；截图门禁 234 页 FAIL 0；CSP --check 0 漂移（preload link 不参与哈希）；零回归覆盖 3/3 全过 + fvar 在位；请求探针 3/3。
+> - **文件**：详见 scripts/output/file-index.md W564 段（3 个 subset 字体、tokens.css、226 页、sw.js、scripts/requirements.txt、5 个一次性/常驻脚本、六文档级联）。
+> - **状态**：已落地（本批随 W564 提交并 push origin/main）。
 ### v2.3.163（2026-09-10）：W563 前端关键路径与部署正确性批次 — D3 head阻塞154→0·字体路径修复225页·越界fetch清零107页·SW治理·门禁9扩展
 
 > **来源**：方案档 docs/superpowers/plans/2026-09-08-frontend-perf-and-deploy-correctness-plans.md（对抗性复审后定稿；用户裁决 D1-a 并入门禁 9、B-0 提前，随「按顺序开始执行」落地）。
