@@ -102,6 +102,218 @@
     "第099回",
     "第100回"
   ],
+  "characters": [
+    {
+      "name": "孙悟空",
+      "first_chapter": 1,
+      "appearances": 96,
+      "mentions": 6197
+    },
+    {
+      "name": "唐僧",
+      "first_chapter": 7,
+      "appearances": 92,
+      "mentions": 2726
+    },
+    {
+      "name": "猪八戒",
+      "first_chapter": 8,
+      "appearances": 83,
+      "mentions": 2384
+    },
+    {
+      "name": "沙僧",
+      "first_chapter": 8,
+      "appearances": 78,
+      "mentions": 928
+    },
+    {
+      "name": "观音",
+      "first_chapter": 1,
+      "appearances": 72,
+      "mentions": 906
+    },
+    {
+      "name": "如来",
+      "first_chapter": 7,
+      "appearances": 54,
+      "mentions": 318
+    },
+    {
+      "name": "玉帝",
+      "first_chapter": 1,
+      "appearances": 41,
+      "mentions": 227
+    },
+    {
+      "name": "白龙马",
+      "first_chapter": 8,
+      "appearances": 40,
+      "mentions": 93
+    },
+    {
+      "name": "太上老君",
+      "first_chapter": 5,
+      "appearances": 30,
+      "mentions": 122
+    },
+    {
+      "name": "李靖",
+      "first_chapter": 4,
+      "appearances": 26,
+      "mentions": 236
+    },
+    {
+      "name": "哪吒",
+      "first_chapter": 4,
+      "appearances": 17,
+      "mentions": 110
+    },
+    {
+      "name": "王母",
+      "first_chapter": 5,
+      "appearances": 17,
+      "mentions": 49
+    },
+    {
+      "name": "牛魔王",
+      "first_chapter": 3,
+      "appearances": 12,
+      "mentions": 49
+    },
+    {
+      "name": "太白金星",
+      "first_chapter": 3,
+      "appearances": 10,
+      "mentions": 31
+    },
+    {
+      "name": "红孩儿",
+      "first_chapter": 40,
+      "appearances": 10,
+      "mentions": 31
+    },
+    {
+      "name": "菩提祖师",
+      "first_chapter": 1,
+      "appearances": 10,
+      "mentions": 18
+    },
+    {
+      "name": "白鹿精",
+      "first_chapter": 1,
+      "appearances": 8,
+      "mentions": 11
+    },
+    {
+      "name": "二郎神",
+      "first_chapter": 6,
+      "appearances": 7,
+      "mentions": 51
+    },
+    {
+      "name": "大鹏",
+      "first_chapter": 12,
+      "appearances": 6,
+      "mentions": 12
+    },
+    {
+      "name": "青毛狮子",
+      "first_chapter": 39,
+      "appearances": 6,
+      "mentions": 7
+    },
+    {
+      "name": "黄风怪",
+      "first_chapter": 20,
+      "appearances": 5,
+      "mentions": 9
+    },
+    {
+      "name": "铁扇公主",
+      "first_chapter": 40,
+      "appearances": 4,
+      "mentions": 31
+    },
+    {
+      "name": "黄袍怪",
+      "first_chapter": 29,
+      "appearances": 4,
+      "mentions": 13
+    },
+    {
+      "name": "镇元子",
+      "first_chapter": 24,
+      "appearances": 3,
+      "mentions": 18
+    },
+    {
+      "name": "弥勒佛",
+      "first_chapter": 36,
+      "appearances": 3,
+      "mentions": 16
+    },
+    {
+      "name": "金鱼精",
+      "first_chapter": 47,
+      "appearances": 3,
+      "mentions": 4
+    },
+    {
+      "name": "白象",
+      "first_chapter": 21,
+      "appearances": 3,
+      "mentions": 3
+    },
+    {
+      "name": "银角大王",
+      "first_chapter": 32,
+      "appearances": 2,
+      "mentions": 11
+    },
+    {
+      "name": "金角大王",
+      "first_chapter": 32,
+      "appearances": 2,
+      "mentions": 9
+    },
+    {
+      "name": "青牛精",
+      "first_chapter": 50,
+      "appearances": 2,
+      "mentions": 5
+    },
+    {
+      "name": "蝎子精",
+      "first_chapter": 55,
+      "appearances": 2,
+      "mentions": 4
+    },
+    {
+      "name": "白骨精",
+      "first_chapter": 27,
+      "appearances": 2,
+      "mentions": 2
+    },
+    {
+      "name": "黄眉童子",
+      "first_chapter": 65,
+      "appearances": 2,
+      "mentions": 2
+    },
+    {
+      "name": "蜘蛛精",
+      "first_chapter": 73,
+      "appearances": 1,
+      "mentions": 7
+    },
+    {
+      "name": "六耳猕猴",
+      "first_chapter": 58,
+      "appearances": 1,
+      "mentions": 5
+    }
+  ],
   "ranking": [
     {
       "character": "孙悟空",

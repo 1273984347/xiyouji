@@ -149,6 +149,7 @@ jobs:
         with:
           name: lighthouse-report
           path: |
+            lighthouseci/
             .lighthouseci/
             lighthouse-report.json
             lighthouse-report.html

@@ -11,6 +11,26 @@
 ---
 
 
+## W565 W565 EMBEDDED单源化与预算收紧前置（2026-09-12·v2.3.165）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/relationships.html + site/en/relationships.html | W565 | 修改·C-2 单源化（loadJson 直返+调用直传文件名+badge/说明文案） |
+| site/data/character-appearance.html + site/en/character-appearance.html | W565 | 修改·loadData 派生 timeline（真实 matrix 优先） |
+| scripts/B_人物/character_appearance.py | W565 | 修改·补 characters 数组（页面契约字段+first_chapter 数字化） |
+| site/data/json/character_appearance.json | W565 | 再生成·含 characters 键（35 角色） |
+| .github/workflows/perf.yml | W565 | 修改·artifact path 补无点 lighthouseci/（根因修复） |
+| scripts/_enum_dual_source.py | W565 | 新增·一次性：双源页枚举（C-1） |
+| scripts/_fix_relationships_embed.py | W565 | 新增·一次性：relationships 单源化锚点替换 |
+| scripts/_deploy_smoke.js | W565 | 修改·常驻化：部署态 6 页 4xx/pageerror 回归探针 |
+| scripts/output/dual-source-pages.txt | W565 | 新增·双源页清单（17 页·15 页保留裁决登记） |
+| CHANGELOG.md | W565 | 新增·W565 版段 + 编号规则上限 W001-W565 |
+| 交接文档.md | W565 | 修改·头尾「最后更新」prepend W565 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W565 | 修改·版本行同步 v2.3.165（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W565 | 修改·四页脚链首 prepend W565（batch_cascade.py 执行） |
+| .github/workflows/README.md | W565 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W565 | 新增·W565 段（本段·batch_cascade.py 执行） |
+
 ## W564 W564 字体字节治理（2026-09-10·v2.3.164）
 
 | 文件 | W | 说明 |

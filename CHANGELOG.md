@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W564），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W565），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,17 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.165（2026-09-12）：W565 EMBEDDED单源化与预算收紧前置（方案C） — relationships双源消除·部署态冒烟抓出2个真崩溃并根治·LHCI artifact修复
+
+> **来源**：方案档 §方案 C（批次 3，随「继续批次 3」执行）。
+> - **C-1 枚举**：_enum_dual_source.py 判定「const EMBEDDED + 站内 fetch 形态」，修正两处正则盲区（块尾分号缺失致非贪婪提前截断——relationships 225.6KB 被误计 2.5KB；fetch 变量拼接形态经 loadJson 调用+json/ 赋值识别）后实数 **17 页 / EMBEDDED 合计 412KB**，清单入 scripts/output/dual-source-pages.txt。
+> - **C-2 处置**：relationships 中英两页单源化（部署态省 6 请求/~465KB 双传输；loadJson 直返 fallback、六处调用改直传文件名、badge「fetch + EMBEDDED fallback」→「EMBEDDED 内嵌单源」、说明文案修正「4 份 JSON」陈旧口径为 6 组数据）。**其余 15 页裁决保留 fetch**：EMBEDDED 仅 2-20KB/页，单源化收益微小且失去数据独立更新能力（方案预留的登记口径，逐行见 dual-source-pages.txt）。
+> - **部署态冒烟抓出 2 个真崩溃（本批最有价值的意外收获）**：① relationships `baseUrl is not defined`——方案「baseUrl 为死变量可删」判断有误，六处 loadJson 调用参数即引用之；改为直传文件名消除引用。② character-appearance `undefined.reduce`——**生产环境自 W563 起实际崩溃**（file:// 走 mock 路径故截图审查从未暴露）：页面契约需 data.characters 数组（name/first_chapter/appearances/mentions），而生成器产出为 ranking/matrix 形状；根治=B_人物/character_appearance.py 补 characters 键（含 first_chapter 数字化）+ 两页 loadData 派生 timeline（优先真实逐回分布 matrix，缺省退回钟形近似）+ 副本再刷新。教训：**file:// 冒烟与部署态（fetch 成功）路径覆盖不同，截图审查通过 ≠ 部署态无恙**；_deploy_smoke.js 为部署态回归的常驻手段。
+> - **L2 运行时对账（首跑）**：39 页中 2 页存量漂移（81-hardships chapter 标签 vs 数字、six-senses 案例数 4 vs 5——后者为 W555 已知矛盾类），均不在本批改动面（两页 W565 零改动），登记后续数据批次裁决。
+> - **C-3 前置**：perf.yml artifact path 修复——lhci autorun 输出目录为无点 `lighthouseci/`，原 `.lighthouseci/` 永不匹配、被 if-no-files-found: ignore 静默吞掉（W563/W564 逐 URL 实测值不可回溯的根因）。阈值收紧待本批 CI artifact 出实测 LCP 后按方案规则（4 个非 3D URL p75 全部 ≤4000ms）二次提交。
+> - **验证（当批实跑）**：verify_delivery 核心全绿；截图门禁 234 页 FAIL 0；定向 gates --only relationships 2 页 FAIL 0；部署态冒烟 6/6；CSP 两轮重生成 0 漂移；L1 漂移门禁 46 页/74 项不变（relationships 本就在 L1 比对面外，无覆盖回归）。
+> - **文件**：详见 scripts/output/file-index.md W565 段（relationships 中英两页、character-appearance 中英两页、character_appearance.json 生成器+副本、perf.yml、5 个一次性脚本、dual-source-pages.txt 清单、六文档级联）。
+> - **状态**：已落地（本批随 W565 提交并 push origin/main）。
 ### v2.3.164（2026-09-10）：W564 字体字节治理（方案B） — 按站内字符集子集化三字体·226页主字体preload·SW SHELL联动subset
 
 > **来源**：方案档 §方案 B（批次 2，随「继续批次 2」执行）。B-0 已随 W563 交付。

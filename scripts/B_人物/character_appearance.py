@@ -17,6 +17,7 @@ character_appearance.py — 《西游记》人物出场频次统计
     py B_人物/character_appearance.py --input ../source/原文/示例-两回.txt --output output/data/character_appearance_sample.json
 """
 
+import re
 import sys
 from pathlib import Path
 
@@ -95,9 +96,22 @@ def aggregate(per_chapter: list, characters: dict) -> dict:
         if sum(row) > 0:
             matrix[char] = row
 
+    # W565：补 characters 数组（页面渲染契约：name/first_chapter/appearances/mentions；
+    # timeline 由页面侧从 matrix 派生真实分布）。first_chapter 转数字（"第001回"→1）。
+    characters_out = [
+        {
+            "name": r["character"],
+            "first_chapter": int(re.match(r"第(\d+)回", r["first_appear"]).group(1)),
+            "appearances": r["appear_chapters"],
+            "mentions": r["total_mentions"],
+        }
+        for r in ranking
+    ]
+
     return {
         "total_chapters": len(per_chapter),
         "chapter_labels": [ch["chapter"] for ch in per_chapter],
+        "characters": characters_out,
         "ranking": ranking,
         "matrix": matrix,
         "appear_in_chapters": {c: appear_in_chapters[c] for c in characters if appear_in_chapters[c]},
