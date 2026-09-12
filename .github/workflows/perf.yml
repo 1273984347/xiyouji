@@ -143,6 +143,14 @@ jobs:
         run: |
           if [ -f server.pid ]; then kill "$(cat server.pid)" || true; fi
 
+      # W565：诊断 artifact 缺失——列出版本目录实际内容并改为 warn（不再静默 ignore）
+      - name: Inspect lighthouse output dirs
+        if: always()
+        run: |
+          echo "--- pwd: $(pwd)"
+          ls -la lighthouseci .lighthouseci 2>/dev/null || echo "(两个目录均不存在)"
+          find . -maxdepth 2 -name '*lighthouseci*' -o -maxdepth 2 -name 'lhr-*.json' 2>/dev/null | head -8
+
       - name: Upload Lighthouse report artifact
         if: always()
         uses: actions/upload-artifact@v7
@@ -153,7 +161,7 @@ jobs:
             .lighthouseci/
             lighthouse-report.json
             lighthouse-report.html
-          if-no-files-found: ignore
+          if-no-files-found: warn
           retention-days: 30
 
       - name: Summary

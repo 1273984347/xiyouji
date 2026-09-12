@@ -22,6 +22,7 @@
 > - **C-3 前置**：perf.yml artifact path 修复——lhci autorun 输出目录为无点 `lighthouseci/`，原 `.lighthouseci/` 永不匹配、被 if-no-files-found: ignore 静默吞掉（W563/W564 逐 URL 实测值不可回溯的根因）。阈值收紧待本批 CI artifact 出实测 LCP 后按方案规则（4 个非 3D URL p75 全部 ≤4000ms）二次提交。
 > - **验证（当批实跑）**：verify_delivery 核心全绿；截图门禁 234 页 FAIL 0；定向 gates --only relationships 2 页 FAIL 0；部署态冒烟 6/6；CSP 两轮重生成 0 漂移；L1 漂移门禁 46 页/74 项不变（relationships 本就在 L1 比对面外，无覆盖回归）。
 > - **文件**：详见 scripts/output/file-index.md W565 段（relationships 中英两页、character-appearance 中英两页、character_appearance.json 生成器+副本、perf.yml、5 个一次性脚本、dual-source-pages.txt 清单、六文档级联）。
+> - **C-3 数字登记（本地实测，CI 数据暂缺）**：artifact 修复后 W565 轮仍未产出（upload 步骤零输出、artifact 计数 0——已加目录自检步 + ignore→warn，下一轮暴露真相）。改以本地同版本 lhci 0.13 + 同配置实测（desktop 预设、3 runs 中位）：dashboard 2352ms / index 1945ms / timeline 2163ms / text-search 3599ms——4 个非 3D URL 全部 ≤4000ms。因 CI runner 较本地慢（text-search 类 JS 重页存在 1.4× 恶化可能、届时将超 4000），按方案裁决口径「测量源须为 CI」暂缓收紧 5000→4000：待 artifact 产出的 CI 实测数字落袋后，若全部 ≤4000 即以最小提交收紧，否则维持并登记。三页 CLS 本地值 text-search 0.386 超 0.3（本地 Chrome 版本差异所致，CI 三轮均绿），一并记录。
 > - **状态**：已落地（本批随 W565 提交并 push origin/main）。
 ### v2.3.164（2026-09-10）：W564 字体字节治理（方案B） — 按站内字符集子集化三字体·226页主字体preload·SW SHELL联动subset
 
