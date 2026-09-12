@@ -11,6 +11,23 @@
 ---
 
 
+## W566 W566 遗留三项裁决与收口（2026-09-13·v2.3.166）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| dataset/81-hardships.json | W566 | 修改·chapter 0→前传 4 处（向站侧对齐） |
+| dataset/six-senses-narratology-network.json | W566 | 修改·整体同步页侧运行时数据（sankey 40→56·案例数 5→4） |
+| site/data/81-hardships.html | W566 | 修改·EMBEDDED 数据码→标签 9 类（渲染层键一致性修复） |
+| site/data/text-search.html | W566 | 修改·late 注入容器 min-height 占位（CLS 0.315→0.075） |
+| site/curated.html + dashboard.html + guide.html + index.html + mobile-index.html + rum-viewer.html | W566 | 修改·主字体 preload 2 行/页（link 页补全） |
+| scripts/_add_preload_link_pages.py | W566 | 新增·一次性：link 页 preload 注入（模板/无 tokens 跳过） |
+| CHANGELOG.md | W566 | 新增·W566 版段 + 编号规则上限 W001-W566 |
+| 交接文档.md | W566 | 修改·头尾「最后更新」prepend W566 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W566 | 修改·版本行同步 v2.3.166（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W566 | 修改·四页脚链首 prepend W566（batch_cascade.py 执行） |
+| .github/workflows/README.md | W566 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W566 | 新增·W566 段（本段·batch_cascade.py 执行） |
+
 ## W565 W565 EMBEDDED单源化与预算收紧前置（2026-09-12·v2.3.165）
 
 | 文件 | W | 说明 |

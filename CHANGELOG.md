@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W565），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W566），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.166（2026-09-13）：W566 遗留三项裁决与收口 — L2存量漂移清零·dataset向站侧对齐·81-hardships码标签渲染修复·text-search CLS占位·link页preload补全
+
+> **来源**：W565 收官遗留三项（用户「现在处理」）。批号按现役段 max+1 领取（并行方案档 W566-571 为未执行占位号，以实际领取为准）。
+> - **① L2 存量漂移裁决（39 页→0 漂移）**：dataset 向站侧对齐——dataset/81-hardships.json chapter 0→「前传」4 处（页/服务副本/EN 管线全用标签形，dataset 的 0 是唯一异类）；dataset/six-senses-narratology-network.json 整体同步页侧运行时数据（页面经 W555 修正后 sankey 56 链·案例数 4，dataset 停留在修正前快照 40 链·案例数 5）。裁决依据：dataset 是外部消费镜像，站点数据才是经修正的活体。
+> - **② 顺藤根治真渲染缺陷**：修 dataset 过程中发现 81-hardships CN 页 EMBEDDED 数据为英文码（arranged/taken/solo），而自身 CAUSE_COLORS/ENDING_COLORS/DIFFICULTY_COLORS 渲染键全为中文标签——CAUSE_COLORS[码] 恒 undefined，用户一直看到灰色英文码标签。码→标签 9 类映射替换（计数自检 27/28/16/10·49/25/7·42/39 与聚合声明完全一致）；EN 页数据与渲染键同为英文标签自洽、无需动。教训：**「数据用码+渲染用标签」的页内双轨会在渲染层静默降级**，对账层（L2）比对的是数据层，两类缺陷要分开抓。
+> - **③ text-search CLS 复核**：本地 LH 两次一致 0.315（>0.3，CI 三轮绿系 CI/本地字体与 Chrome 版本差异）；layout-shift-elements 定位主源为 text-search-app.js load 后注入容器的 late layout（主检索区块 0.234）。在门禁同款视口（1350×940）量得填充后高度（315/272/112px），页面注入等值 min-height 占位——复测 CLS 0.075（良好区间）·LCP 不变 3605ms。修复收益双向：本地余量扩大 + CI 环境漂移时的阈值安全垫。
+> - **④ link 页 preload 补全**：W564 只覆盖 226 个 INLINED 页；6 个 <link> 引 tokens 的根级正式页（curated/dashboard/guide/index/mobile-index/rum-viewer）补 2 行 preload（href 同 tokens.css 解析形态 static/fonts/）；visit-viewer（无 tokens 引用）、_template.html（模板）按规则跳过。写后断言 6 页恰 2 条。
+> - **验证（当批实跑）**：L2 运行时对账 39 页/0 漂移；verify_delivery 核心全绿；截图门禁 234 页 FAIL 0；CSP 重生成后 --check 0 漂移；text-search 本地 LH 复测 CLS 0.075/LCP 3605ms（4000 预算内）。
+> - **文件**：详见 scripts/output/file-index.md W566 段（2 个 dataset、81-hardships CN 页、text-search 页、6 个 link 页、1 个一次性脚本、六文档级联）。
+> - **状态**：已落地（本批随 W566 提交并 push origin/main）。
 ### v2.3.165（2026-09-12）：W565 EMBEDDED单源化与预算收紧前置（方案C） — relationships双源消除·部署态冒烟抓出2个真崩溃并根治·LHCI artifact修复
 
 > **来源**：方案档 §方案 C（批次 3，随「继续批次 3」执行）。
