@@ -11,6 +11,19 @@
 ---
 
 
+## W567 W567 工作复盘与优化分析报告（2026-09-13·v2.3.167）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-09-13.md | W567 | 新增·W563-W566 会话复盘（E18-E26·P01-P19·WBS 与自评） |
+| docs/10-方法论沉淀/README.md | W567 | 修改·方法论索引第 24 条（门禁 17 双向覆盖） |
+| CHANGELOG.md | W567 | 新增·W567 版段 + 编号规则上限 W001-W567 |
+| 交接文档.md | W567 | 修改·头尾「最后更新」prepend W567 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W567 | 修改·版本行同步 v2.3.167（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W567 | 修改·四页脚链首 prepend W567（batch_cascade.py 执行） |
+| .github/workflows/README.md | W567 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W567 | 新增·W567 段（本段·batch_cascade.py 执行） |
+
 ## W566 W566 遗留三项裁决与收口（2026-09-13·v2.3.166）
 
 | 文件 | W | 说明 |
