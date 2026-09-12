@@ -46,7 +46,7 @@ concurrency:
 
 jobs:
   lighthouse-ci:
-    name: Lighthouse CI (LCP < 5.0s / CLS < 0.3 / TBT < 300ms)
+    name: Lighthouse CI (LCP < 4.0s / CLS < 0.3 / TBT < 300ms)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -114,11 +114,11 @@ jobs:
                   {
                     "matchingUrlPattern": "^(?!.*character-relationship-3d)",
                     "assertions": {
-                      "largest-contentful-paint": ["error", {"maxNumericValue": 5000}],
+                      "largest-contentful-paint": ["error", {"maxNumericValue": 4000}],
                       "cumulative-layout-shift": ["error", {"maxNumericValue": 0.3}],
                       "total-blocking-time": ["error", {"maxNumericValue": 300}],
                       "first-contentful-paint": ["warn", {"maxNumericValue": 4800}],
-                      "interactive": ["warn", {"maxNumericValue": 5000}]
+                      "interactive": ["warn", {"maxNumericValue": 4000}]
                     }
                   }
                 ]
@@ -171,7 +171,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| 指标 | 阈值 | 来源 |" >> $GITHUB_STEP_SUMMARY
           echo "|------|------|------|" >> $GITHUB_STEP_SUMMARY
-          echo "| LCP  | < 5000 ms | W424 实测校准（首跑 4 页 4.73-4.87s·性能债登记） |" >> $GITHUB_STEP_SUMMARY
+          echo "| LCP  | < 4000 ms | W565 实测校准（D3 移位后 4 URL p75 1979-3628ms·CI 中位 LHR） |" >> $GITHUB_STEP_SUMMARY
           echo "| CLS  | < 0.3     | W424 实测校准（load 修复后 timeline 0.235·W422 基线） |" >> $GITHUB_STEP_SUMMARY
           echo "| TBT  | < 300 ms  | WCAG / web.dev |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
