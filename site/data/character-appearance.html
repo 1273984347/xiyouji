@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-w3GKySi/Cq3HwU05UZNC/XyvDfPVAMfRGMlazG9CDYs=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-GWFOpcFYZLzmVAsOv6200w28CVQXQ5hZSVtFbclCfiE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>详解西游记 · 人物出场频次与戏份分析 · 详解西游记</title>
@@ -1889,6 +1889,16 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             const data = await response.json();
             document.getElementById('dataSource').innerHTML =
                 '数据源：实时加载自 <code>json/character_appearance.json</code>（http server 模式）';
+            // W565：派生 timeline（优先真实逐回分布 matrix，缺省退回钟形近似）
+            if (Array.isArray(data.characters)) {
+                data.characters.forEach((c) => {
+                    if (c.timeline) return;
+                    const row = data.matrix && data.matrix[c.name];
+                    c.timeline = row
+                        ? row.map((m, i) => ({ chapter: i + 1, mentions: m })).filter((t) => t.mentions > 0)
+                        : makeTimeline(c.first_chapter, c.appearances, c.mentions);
+                });
+            }
             return data;
         } catch (e) {
             console.log('[INFO] 使用嵌入式 mock 数据：', e.message);

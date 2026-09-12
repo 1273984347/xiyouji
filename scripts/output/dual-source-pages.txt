@@ -1,0 +1,17 @@
+site\data\relationships.html	231011	7
+site\en\cave-estate.html	19969	4
+site\data\linguistics.html	17192	5
+site\data\jurisprudence.html	16693	5
+site\data\power-resources.html	16308	5
+site\data\material-archaeology.html	16149	5
+site\data\ecology.html	14615	6
+site\data\business-model.html	14058	5
+site\data\karma-reincarnation.html	12551	5
+site\data\monster-sociology.html	12185	5
+site\data\cave-estate.html	9785	4
+site\data\risk-project.html	9777	5
+site\data\81-hardships.html	9378	1
+site\data\cognitive-psychology.html	8822	5
+site\data\philosophy.html	6363	4
+site\data\monster-background.html	5760	5
+site\dashboard.html	1024	1
