@@ -11,6 +11,20 @@
 ---
 
 
+## W568 W568 聊天页视觉走查与错误链路双重断裂根治（2026-09-13·v2.3.168）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/index.ts | W568 | 修改·SSE 断开清理改挂 res close（req close 语义陷阱根治） |
+| xiyouji-agent-web/src/hooks/useChat.ts | W568 | 修改·SSE error 分支补全 + reader 循环先解析后退出 |
+| AGENTS.md | W568 | 修改·§4.3 落载体五条（收尾七步/取证三陷阱/部署态冒烟/close 语义陷阱） |
+| CHANGELOG.md | W568 | 新增·W568 版段 + 编号规则上限 W001-W568 |
+| 交接文档.md | W568 | 修改·头尾「最后更新」prepend W568 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W568 | 修改·版本行同步 v2.3.168（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W568 | 修改·四页脚链首 prepend W568（batch_cascade.py 执行） |
+| .github/workflows/README.md | W568 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W568 | 新增·W568 段（本段·batch_cascade.py 执行） |
+
 ## W567 W567 工作复盘与优化分析报告（2026-09-13·v2.3.167）
 
 | 文件 | W | 说明 |
