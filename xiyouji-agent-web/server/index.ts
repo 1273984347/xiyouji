@@ -504,7 +504,10 @@ app.post("/api/chat", async (req, res) => {
     }
     try { res.end(); } catch { /* 已断开 */ }
   };
-  req.on("close", abortStream);
+  // W568 修复：Express 5 / Node 20+ 下 req 的 'close' 在「请求体读取完毕」即触发（并非连接断开），
+  // abortStream 会立刻 res.end() 吞掉后续全部 SSE 事件（实证：init 之后 error 事件整段丢失）。
+  // 改挂 res 'close'——仅在客户端提前断开或响应正常完成时触发；完成态重复 res.end() 为无害空操作。
+  res.on("close", abortStream);
 
   // 默认系统提示词（适配「详解西游记」xiyouji 项目）
   const defaultSystemPrompt = `你是「详解西游记」项目的专属智能助手，代号「渡口问津」。

@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W567），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W568），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.168（2026-09-13）：W568 聊天页视觉走查与错误链路双重断裂根治 — SSE close语义修复+前端error分支+末chunk丢弃修复·清单落载体
+
+> **来源**：W566 收官三项遗留之①②③（用户确认执行）——聊天页明暗两态视觉走查（W548 遗留人工项，五阶段迁移后首次）+ 收尾/取证清单落载体 + 本地预检纪律。
+> - **走查结论（明暗两态）**：浏览器自动化实测——深色（默认）与浅色态的侧栏/Agent 选择卡/工作目录输入/会话列表/消息气泡/模型与权限选择器渲染全部正常；会话列表含历史记录（hi/hi2）可打开、消息气泡与模型标签渲染正确。发现 1 个 P1 级功能缺陷（见下）。
+> - **P1 根治：agent 错误链路双重断裂（「错误链路无感」总根因）**：① 服务端——Express 5/Node 20+ 下 `req.on('close')` 在请求体读取完毕即触发（并非连接断开），W5xx P2-3 断开清理据此 `res.end()` 吞掉 init 之后全部 SSE 事件（含 error）；改挂 `res.on('close')`（wire 级 curl 实证：init+error 完整到达）。② 前端——useChat SSE 处理无 error 分支（错误事件静默丢弃）+ reader 循环 `if (done) break` 丢弃与 EOF 合并的末 chunk；补 error 分支（⚠️ 前缀渲染错误消息）+ 先解析后退出。修复前任何后端错误（含 spawn ENOENT 类环境错误）均表现为「思考中…」永久挂起。
+> - **环境事实登记**：本机 CodeBuddy/WorkBuddy CLI 已删除（用户确认），聊天功能在本机只能走错误路径——这正是走查能立即暴露错误链路缺陷的原因；修复后错误以 ⚠️ 气泡明确呈现，不再无感。
+> - **② 清单落载体**：AGENTS §4.3 新增五条——W 批次收尾七步清单（含本地预检：新增/修改 Python 脚本跑 ruff check）、取证枚举三陷阱、部署态冒烟与 file:// 审查双覆盖面、Express5 req close 语义陷阱。
+> - **验证（当批实跑）**：agent-web `npx tsc -b` 0 error + vite build 通过；wire 级 curl 实证 init+error 完整到达；浏览器走查截图（深色/浅色/会话/消息）留档会话记录；site 站门禁不受本批影响（verify_delivery 全绿基线延续）。
+> - **文件**：xiyouji-agent-web/server/index.ts（close 语义修复）、xiyouji-agent-web/src/hooks/useChat.ts（error 分支+末 chunk 修复）、AGENTS.md（§4.3 五条）、六文档级联。
+> - **状态**：已落地（本批随 W568 提交并 push origin/main）。
 ### v2.3.167（2026-09-13）：W567 工作复盘与优化分析报告（W563-W566 前端治理会话）入库
 
 > **来源**：W563-W566 四批交付后的会话复盘，按前序三篇格式（2026-09-05/06/08）撰写并入库 docs/10-方法论沉淀/。

@@ -159,9 +159,10 @@ export function useChat(options: UseChatOptions) {
       if (reader) {
         while (true) {
           const { done, value } = await reader.read();
-          if (done) break;
+          // W568：先解析后退出——错误事件与 EOF 常合并在最后一个 chunk（done=true 且 value 非空），
+          // 旧写法 if (done) break 会把该 chunk 丢弃，导致「思考中…」永久挂起
+          const chunk = decoder.decode(value, { stream: !done });
 
-          const chunk = decoder.decode(value);
           const lines = chunk.split('\n');
 
           for (const line of lines) {
@@ -297,6 +298,22 @@ export function useChat(options: UseChatOptions) {
                     }
                     return s;
                   }));
+                } else if (data.type === 'error') {
+                  // W568：SSE error 事件此前被静默丢弃，前端「思考中…」永久挂起（后端 catch 路径实际有推送）
+                  const errorMessage: string = data.message || '处理请求时发生错误';
+                  setSessions(prev => prev.map(s => {
+                    if (s.id === realSessionId) {
+                      return {
+                        ...s,
+                        messages: s.messages.map(m =>
+                          m.id === realAssistantMessageId
+                            ? { ...m, content: `⚠️ ${errorMessage}`, isStreaming: false }
+                            : m
+                        )
+                      };
+                    }
+                    return s;
+                  }));
                 } else if (data.type === 'permission_request') {
                   console.log('[Permission] Request received:', data);
                   setPermissionRequest({
@@ -313,6 +330,8 @@ export function useChat(options: UseChatOptions) {
               }
             }
           }
+
+          if (done) break;
         }
       }
     } catch (error) {
