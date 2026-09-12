@@ -4,7 +4,7 @@ jieba==0.42.1
 Pillow==12.3.0
 
 # dev dependencies
-ruff==0.16.5
+ruff==0.16.6
 pytest==9.1.1
 fonttools>=4.50
 brotli>=1.1
