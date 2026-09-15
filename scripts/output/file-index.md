@@ -11,6 +11,23 @@
 ---
 
 
+## W569 W569 渲染状态全站审计与图表暗色适配 v2（2026-09-16·v2.3.169）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/tokens.css | W569 | 修改·暗色块图表文字反白规则 v2（!important 压 attr/内联填充） |
+| site/data+en 226 个 HTML | W569 | 修改·--force 重内联（暗色适配层分发） |
+| site/data+en methodology-matrix/narrative-experiment 4 页 | W569 | 修改·pageerror 契约错位修复（quadrant 回退/bands 守卫/difficulty 钳位/scoring 字典化/merit 回退/components 守卫） |
+| scripts/_audit_render_states.js | W569 | 新增·常驻：全站渲染状态审计器（3 态机判） |
+| scripts/output/render-state-audit-2026-09-13.jsonl | W569 | 新增·基线清单（696 行·暗色缺陷 1590 基线） |
+| scripts/output/render-state-audit.jsonl | W569 | 更新·修复后复测（464 行·302） |
+| CHANGELOG.md | W569 | 新增·W569 版段 + 编号规则上限 W001-W569 |
+| 交接文档.md | W569 | 修改·头尾「最后更新」prepend W569 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W569 | 修改·版本行同步 v2.3.169（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W569 | 修改·四页脚链首 prepend W569（batch_cascade.py 执行） |
+| .github/workflows/README.md | W569 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W569 | 新增·W569 段（本段·batch_cascade.py 执行） |
+
 ## W568 W568 聊天页视觉走查与错误链路双重断裂根治（2026-09-13·v2.3.168）
 
 | 文件 | W | 说明 |
