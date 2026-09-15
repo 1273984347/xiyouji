@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-iW/7/EPCNtvPxz/WkkhmfKxtVQJxVi+dXSQf8zHBWnc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-Vhh3ugqsqGnScUGT9NJEO5ACS0WdoW5heb3CPtcGQGo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Narrative Experiment · Board Game & Card Mechanics · Annotated Journey to the West</title>
@@ -2818,16 +2818,17 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 "Data source: embedded fallback data (file:// protocol compatible · double-click the HTML file to open directly)";
         }
 
-        renderBoardMeta(data.board_game);
-        renderPlayers(data.board_game.players);
-        renderPhaseFlow(data.board_game.game_phases);
-        renderHardship(data.board_game.hardship_cards);
-        renderEggs(data.board_game.design_eggs);
-        renderScoring(data.board_game.scoring);
-        renderNarrativeCards(data.narrative_cards);
-        renderStories(data.narrative_cards.example_combinations);
-        renderGenerator(data.story_generator);
-        renderComboViz(data.narrative_cards);
+        const safe = (name, fn) => { try { fn(); } catch (e) { console.error("[render] " + name + ":", e.message); } };
+        safe("renderBoardMeta", () => renderBoardMeta(data.board_game));
+        safe("renderPlayers", () => renderPlayers(data.board_game.players));
+        safe("renderPhaseFlow", () => renderPhaseFlow(data.board_game.game_phases));
+        safe("renderHardship", () => renderHardship(data.board_game.hardship_cards));
+        safe("renderEggs", () => renderEggs(data.board_game.design_eggs));
+        safe("renderScoring", () => renderScoring(data.board_game.scoring));
+        safe("renderNarrativeCards", () => renderNarrativeCards(data.narrative_cards));
+        safe("renderStories", () => renderStories(data.narrative_cards.example_combinations));
+        safe("renderGenerator", () => renderGenerator(data.story_generator));
+        safe("renderComboViz", () => renderComboViz(data.narrative_cards));
         renderInsights();
 
         // 生成时间

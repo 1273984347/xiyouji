@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-+aq1+FKPODqZz6SDSdoQaPU76+T0Mkyszbfzeb22yJo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-A6/L9JNAs8eGjdDf7Zl31L7NqD+ZkDqHVxz7FjODhrY=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-C1syOltZZXtdu505TRsaeEFrh2gNCFozXhGXxZjfwWk=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-A6/L9JNAs8eGjdDf7Zl31L7NqD+ZkDqHVxz7FjODhrY=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Methodology Matrix · Villain Evaluation &amp; Rescue ROI · Annotated Journey to the West</title>
@@ -2707,20 +2707,21 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 "Data source: loaded live from <code>../data/json/</code> (running in http server mode)";
         }
 
-        renderDesignPurpose(data.villain_matrix.design_purpose);
-        renderAxes(data.villain_matrix.axes);
-        renderMatrix(data.villain_matrix);
-        renderQuadrantCards(data.villain_matrix.quadrants);
-        renderMatrixInsights(data.villain_matrix.matrix_insights);
-        renderVillainTable(data.villain_matrix.villain_positions);
+        const safe = (name, fn) => { try { fn(); } catch (e) { console.error("[render] " + name + ":", e.message); } };
+        safe("renderDesignPurpose", () => renderDesignPurpose(data.villain_matrix.design_purpose));
+        safe("renderAxes", () => renderAxes(data.villain_matrix.axes));
+        safe("renderMatrix", () => renderMatrix(data.villain_matrix));
+        safe("renderQuadrantCards", () => renderQuadrantCards(data.villain_matrix.quadrants));
+        safe("renderMatrixInsights", () => renderMatrixInsights(data.villain_matrix.matrix_insights));
+        safe("renderVillainTable", () => renderVillainTable(data.villain_matrix.villain_positions));
 
-        renderComponents(data.rescue_roi.components);
-        renderRoiTable(data.rescue_roi.rescue_cases);
-        renderRoiTrend(data.rescue_roi.rescue_cases, data.rescue_roi.phase_analysis);
-        renderPhaseCards(data.rescue_roi.phase_analysis);
-        renderRoiInsights(data.rescue_roi.roi_insights);
+        safe("renderComponents", () => renderComponents(data.rescue_roi.components));
+        safe("renderRoiTable", () => renderRoiTable(data.rescue_roi.rescue_cases));
+        safe("renderRoiTrend", () => renderRoiTrend(data.rescue_roi.rescue_cases, data.rescue_roi.phase_analysis));
+        safe("renderPhaseCards", () => renderPhaseCards(data.rescue_roi.phase_analysis));
+        safe("renderRoiInsights", () => renderRoiInsights(data.rescue_roi.roi_insights));
 
-        renderScenarios(data.rescue_roi.application_scenarios);
+        safe("renderScenarios", () => renderScenarios(data.rescue_roi.application_scenarios));
         renderKeyInsights();
 
         // generation time

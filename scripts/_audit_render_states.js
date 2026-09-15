@@ -130,7 +130,8 @@ const PAGE_ANALYSIS_FN = `(() => {
 const STATES_ALL = [
   { id: 'S1-desktop-light', colorScheme: 'light', viewport: { width: 1440, height: 900 } },
   { id: 'S2-desktop-dark', colorScheme: 'dark', viewport: { width: 1440, height: 900 } },
-  { id: 'S3-mobile-dark', colorScheme: 'dark', viewport: { width: 375, height: 812 } }
+  { id: 'S3-mobile-dark', colorScheme: 'dark', viewport: { width: 375, height: 812 } },
+  { id: 'S4-mobile-light', colorScheme: 'light', viewport: { width: 375, height: 812 } }
 ];
 const STATES = (() => {
   const i = process.argv.indexOf('--states');
