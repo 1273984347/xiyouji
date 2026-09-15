@@ -11,6 +11,21 @@
 ---
 
 
+## W571 W571 复审修正（2026-09-16·v2.3.171）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/tokens.css | W571 | 修改·v2 反白规则精修 :not(:has(#audit-halo)) 豁免光晕页 |
+| site/en/narrative-experiment.html | W571 | 修改·difficulty 钳位补齐（W569 遗漏） |
+| scripts/_audit_render_states.js | W571 | 修改·光晕感知（paint-order:stroke 文字不计缺陷） |
+| scripts/output/render-state-audit.jsonl | W571 | 更新·光晕感知诚实基线（S2 318 处/S4 32 处） |
+| CHANGELOG.md | W571 | 新增·W571 版段 + 编号规则上限 W001-W571 |
+| 交接文档.md | W571 | 修改·头尾「最后更新」prepend W571 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W571 | 修改·版本行同步 v2.3.171（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W571 | 修改·四页脚链首 prepend W571（batch_cascade.py 执行） |
+| .github/workflows/README.md | W571 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W571 | 新增·W571 段（本段·batch_cascade.py 执行） |
+
 ## W570 W570 审计矩阵补全与图表页容错封装（2026-09-16·v2.3.170）
 
 | 文件 | W | 说明 |

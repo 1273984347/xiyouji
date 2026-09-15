@@ -97,6 +97,9 @@ const PAGE_ANALYSIS_FN = `(() => {
     const txt = (t.textContent || '').trim();
     if (!txt) return;
     const cs = getComputedStyle(t);
+    // W570：光晕感知——paint-order:stroke + 可见描边（白晕）时，深浅填充均双主题可读，不计缺陷
+    const halo = (cs.paintOrder || '').includes('stroke') && parseFloat(cs.strokeWidth) >= 1 && cs.stroke !== 'none';
+    if (halo) return;
     const fillL = lum(cs.fill);
     const cr = contrast(fillL, bgL);
     if (cr !== null && cr < 3 && out.lowContrastText.length < 12) {

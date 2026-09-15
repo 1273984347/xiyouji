@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W570），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W571），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,17 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.171（2026-09-16）：W571 复审修正 — W569一刀切反白误伤光晕页回归修复·审计器光晕感知·en/ne钳位补齐·诚实基线修正
+
+> **来源**：W569/W570 交付后的对抗性复审（用户「review 一遍」→「确定都做完了吗」→「继续」），按保真度地图逐项取证。
+> - **回归发现与修正（本批核心）**：W569 v2 文字反白规则（`svg text{fill:var(--ink)!important}`）一刀切误伤光晕页——168 页（data+en 各 84）存在 W553 注入的 `#audit-halo` 光晕块（`paint-order:stroke` + 白 3px 描边 + 墨褐填充），该设计在任何底色上可读；被强制反白后变成「白晕+浅字」涂抹块（hardship-heatmap 热力图 tick 实拍实证）。修正：tokens 规则精修为 `:not(:has(#audit-halo))` 豁免，光晕页保持 W553 设计态（实拍复验 tick 恢复 #6B6455 墨褐），非光晕页（57 页）保留反白。
+> - **流程教训（本批最重）**：tokens.css 精修后 **漏跑 inline_css --force**——226 页内联副本停留在旧版未豁免规则上，:has 豁免只存在于 tokens 源未分发（hardship-heatmap tick 实测 #F2EBDC 揭示）。补跑 --force 后 tick 恢复 #6B6455。教训：改 tokens/system 后的 --force 分发是规则生效的必要步骤，与 generate_csp 同级。
+> - **en/ne 钳位补齐**：W569 第二轮契约修复脚本因 merit 锚点过期中止时，同文件的 difficulty 钳位未落（后续 safe() 容错把崩溃吞掉掩盖了这一点——容错组件在，缺陷组件也在）。已补。
+> - **审计器光晕感知**：paint-order:stroke + 可见描边（≥1px 非 none）的文字判定为光晕可读，不计低对比缺陷。**诚实基线修正**：W569 的「暗色缺陷 1590→302（-81%）」表述撤回——1590 基线含大量光晕页假阳性（审计器不识别光晕），302 亦混入反白误伤后的假阴性。光晕感知后的真实暗色基线：**318 处/44 页**（真实待适配面），S4 移动浅色 32 处/4 页，pageerror 全零。
+> - **canvas 暗色扩样**：+3 页（character-dynamic/monster-ecology/heaven-power）累计 5/5 可读（3 优 2 良）——canvas 类无系统性暗色问题，41 页清单降级低风险。
+> - **验证（当批实跑）**：hardship-heatmap 深色实拍 tick 恢复 #6B6455+白晕（光晕豁免生效）；en/ne 滚动穿透 0 pageerror；4 页 safe 封装 resize 路径 OK；渲染状态审计（光晕感知）S2 318 处/S4 32 处；verify_delivery 核心全绿；CSP 0 漂移。
+> - **文件**：详见 scripts/output/file-index.md W571 段（tokens.css、en/narrative-experiment、审计器、render-state-audit.jsonl、六文档级联）。
+> - **状态**：已落地（本批随 W571 提交并 push origin/main）。
 ### v2.3.170（2026-09-16）：W570 审计矩阵补全与图表页容错封装 — S4移动浅色基线·渲染调用safe包裹（44处）·pageerror清零
 
 > **来源**：W569 收尾三项（用户「继续」）——审计矩阵补全（移动浅色）+ ⚠️ 气泡定格 + canvas 扩样。
