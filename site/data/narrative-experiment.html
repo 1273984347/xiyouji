@@ -2,14 +2,14 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-8Q6A2XWGebOq9GmzM1EGBTL4bepRmojCySgDr5es9fo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-uX90TOtAkAcKGMk+PCKwj/CgohDqBCOx1GaGJUXVtPo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>叙事实验 · 桌游与卡牌机制 · 详解西游记</title>
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -215,6 +215,11 @@ html[data-theme="dark"] svg path[fill^="#"],
 html[data-theme="dark"] svg circle[fill^="#"],
 html[data-theme="dark"] svg rect[fill^="#"] { filter: brightness(1.12) saturate(1.05); }
 html[data-theme="dark"] .chart-tooltip { border-color: var(--line); }
+/* W569：图表暗色适配 v2——数据页图表按宣纸浅色调色板生成，深色下 svg 文字保持墨色填充不可读
+   （全站审计 232 页实证：暗色低对比文字 1298 处）。文字/tspan 反白；形状明度由上方亮度滤波提升。
+   !important 用于压过 d3 .attr('fill')（表现属性）与 .style('fill')（内联）；全站无 fill="none" 文本（实证）。 */
+html[data-theme="dark"] svg text,
+html[data-theme="dark"] svg tspan { fill: var(--ink) !important; }
 
 /*
  * system.css — 详解西游记 · 全站组件设计系统
@@ -2384,7 +2389,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             s2.append("div").attr("class", "sv").text("+" + c.rating_bonus);
 
             const diff = card.append("div").attr("class", "hc-diff");
-            diff.html("难度：<span class='stars'>" + "★".repeat(c.difficulty) + "☆".repeat(5 - c.difficulty) + "</span>");
+            diff.html("难度：<span class='stars'>" + "★".repeat(Math.min(5, Math.max(0, +c.difficulty || 0))) + "☆".repeat(5 - Math.min(5, Math.max(0, +c.difficulty || 0))) + "</span>");
 
             card.append("span").attr("class", "hc-owner")
                 .style("background", c.owner_color)
@@ -2407,9 +2412,11 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     function renderScoring(scoring) {
         const sel = d3.select("#scoring-grid");
         sel.selectAll("*").remove();
-        scoring.forEach(s => {
+        // W569：再生成 scoring 为 {名称: 说明} 字典（原数组形态含 icon/color），归一化兼容两态
+        const sc = Array.isArray(scoring) ? scoring : Object.entries(scoring || {}).map(([name, desc]) => ({ name, desc, icon: "★" }));
+        sc.forEach(s => {
             const card = sel.append("div").attr("class", "score-card");
-            card.append("div").attr("class", "sc-icon").text(s.icon);
+            card.append("div").attr("class", "sc-icon").text(s.icon || "★");
             card.append("div").attr("class", "sc-name").style("color", s.color).text(s.name);
             card.append("div").attr("class", "sc-desc").text(s.desc);
         });

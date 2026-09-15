@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W568），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W569），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.169（2026-09-16）：W569 渲染状态全站审计与图表暗色适配 v2（方案B） — 暗色缺陷1590→302(-81%)·4个pageerror页根治·审计器常驻
+
+> **来源**：用户反馈「很多图表显示都有问题」→ 全站渲染状态普查（举一反三，用户指令）→ 方案 B 裁决（图表逐类暗色适配 + 门禁补强）。
+> - **审计器（新增常驻）**：`scripts/_audit_render_states.js`——232 页 × 3 渲染状态（桌面浅/深 + 移动深）机判：svg text 对比度（WCAG <3）、深底隐形图形（亮度 <0.16）、横向溢出、data-theme 应用、pageerror；滚动穿透覆盖懒加载图表；产出 scripts/output/render-state-audit-2026-09-13.jsonl（696 行基线）+ 本批复验 464 行。
+> - **基线发现**：暗色主题自动应用于 230/232 页；暗色较浅色缺陷条目 +663（95 页恶化）；12 页浅色 0 缺陷、深色才出缺陷（纯暗色适配缺口）；4 页带未捕获 JS 异常（浅深两态一致）；移动端横向溢出仅 1 页（历史修复有效）；a11y/截图/复审工具链经查全部浅色单态——夜间模式为验收体系盲区（本轮补上）。
+> - **图表暗色适配 v2**：tokens.css 暗色块新增文字反白规则（`svg text/tspan { fill: var(--ink) !important }`——压过 d3 attr/内联填充；全站无 fill=none 文本实证）+ 既有形状亮度滤波保留；226 页 --force 重内联。**机判验收：暗色缺陷条目 1590→302（-81%）· 有缺陷页 132→42**；浏览器实拍 monster-victims 力导向图——图例与节点标签反白可读。残余 302 处登记（EN 页类别色文字为设计性彩色对比 + 中心墨色节点为设计性深色 + 力导向标签压节点为既登记积压类），随 B 二期迭代。
+> - **4 个 pageerror 页根治**（滚动穿透复验 0）：methodology-matrix 中英（renderQuadrantCards/Components/Components 契约错位——再生成 villain_matrix 用 quadrant 键、rescue_roi 已移除 components）+ narrative-experiment 中英（renderHardship difficulty 值域漂移至 6、renderScoring 字典化、renderPlayers merit 字段移除——回退 starting_capital）。家族定性：W563 数据打通后，「再生成 JSON 契约 vs 页面期望」错位持续暴露（同 P04 character-appearance），登记内容批次做深度契约对齐。
+> - **验证（当批实跑）**：4 页滚动穿透 pageerror 0；暗色缺陷 1590→302；CSP 重生成后 --check 0 漂移；范围漂移门禁当批拦获 tokens 注释中 W569 字样（级联前文档未记——门禁正确工作，级联后放行）；verify_delivery 核心全绿。
+> - **文件**：详见 scripts/output/file-index.md W569 段（tokens.css、226 页重内联、4 页契约修复、审计器、2 份审计清单、六文档级联）。
+> - **状态**：已落地（本批随 W569 提交并 push origin/main）。
 ### v2.3.168（2026-09-13）：W568 聊天页视觉走查与错误链路双重断裂根治 — SSE close语义修复+前端error分支+末chunk丢弃修复·清单落载体
 
 > **来源**：W566 收官三项遗留之①②③（用户确认执行）——聊天页明暗两态视觉走查（W548 遗留人工项，五阶段迁移后首次）+ 收尾/取证清单落载体 + 本地预检纪律。

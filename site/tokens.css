@@ -202,3 +202,8 @@ html[data-theme="dark"] svg path[fill^="#"],
 html[data-theme="dark"] svg circle[fill^="#"],
 html[data-theme="dark"] svg rect[fill^="#"] { filter: brightness(1.12) saturate(1.05); }
 html[data-theme="dark"] .chart-tooltip { border-color: var(--line); }
+/* W569：图表暗色适配 v2——数据页图表按宣纸浅色调色板生成，深色下 svg 文字保持墨色填充不可读
+   （全站审计 232 页实证：暗色低对比文字 1298 处）。文字/tspan 反白；形状明度由上方亮度滤波提升。
+   !important 用于压过 d3 .attr('fill')（表现属性）与 .style('fill')（内联）；全站无 fill="none" 文本（实证）。 */
+html[data-theme="dark"] svg text,
+html[data-theme="dark"] svg tspan { fill: var(--ink) !important; }

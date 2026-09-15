@@ -1,0 +1,26 @@
+{
+  "batch": "W569",
+  "version": "v2.3.169",
+  "date": "2026-09-16",
+  "title": "W569 渲染状态全站审计与图表暗色适配 v2（方案B） — 暗色缺陷1590→302(-81%)·4个pageerror页根治·审计器常驻",
+  "desc": "渲染状态审计与图表暗色适配",
+  "head_entry": "2026-09-16（v2.3.169 W569 渲染状态全站审计与图表暗色适配 v2（方案B，用户裁决）：新增 _audit_render_states.js 全站渲染状态审计器（232 页 × 桌面浅/深 + 移动深 3 态 = 696 行机判：svg 文字对比度/隐形图形/横向溢出/主题应用）——实证暗色模式自动应用于 230 页且缺陷条目较浅色 +663；tokens.css 暗色块补图表文字反白规则（v2，!important 压 d3 attr/内联填充）后 226 页重内联，暗色缺陷条目 1590→302（-81%·有缺陷页 132→42）；根治 4 个 pageerror 页（methodology-matrix 中英·narrative-experiment 中英——再生成 JSON 契约错位家族：quadrant/name·merit 缺失·scoring 字典化·difficulty 值域漂移·components 移除，滚动穿透复验 0 pageerror）；残余 42 页 302 处登记（EN 页类别色文字 + 中心墨色节点设计性深色）",
+  "head_sentence": "W569 渲染状态审计与图表暗色适配v2——缺陷-81%·4页契约错位根治",
+  "changelog_body": "\r\n\r\n> **来源**：用户反馈「很多图表显示都有问题」→ 全站渲染状态普查（举一反三，用户指令）→ 方案 B 裁决（图表逐类暗色适配 + 门禁补强）。\r\n> - **审计器（新增常驻）**：`scripts/_audit_render_states.js`——232 页 × 3 渲染状态（桌面浅/深 + 移动深）机判：svg text 对比度（WCAG <3）、深底隐形图形（亮度 <0.16）、横向溢出、data-theme 应用、pageerror；滚动穿透覆盖懒加载图表；产出 scripts/output/render-state-audit-2026-09-13.jsonl（696 行基线）+ 本批复验 464 行。\r\n> - **基线发现**：暗色主题自动应用于 230/232 页；暗色较浅色缺陷条目 +663（95 页恶化）；12 页浅色 0 缺陷、深色才出缺陷（纯暗色适配缺口）；4 页带未捕获 JS 异常（浅深两态一致）；移动端横向溢出仅 1 页（历史修复有效）；a11y/截图/复审工具链经查全部浅色单态——夜间模式为验收体系盲区（本轮补上）。\r\n> - **图表暗色适配 v2**：tokens.css 暗色块新增文字反白规则（`svg text/tspan { fill: var(--ink) !important }`——压过 d3 attr/内联填充；全站无 fill=none 文本实证）+ 既有形状亮度滤波保留；226 页 --force 重内联。**机判验收：暗色缺陷条目 1590→302（-81%）· 有缺陷页 132→42**；浏览器实拍 monster-victims 力导向图——图例与节点标签反白可读。残余 302 处登记（EN 页类别色文字为设计性彩色对比 + 中心墨色节点为设计性深色 + 力导向标签压节点为既登记积压类），随 B 二期迭代。\r\n> - **4 个 pageerror 页根治**（滚动穿透复验 0）：methodology-matrix 中英（renderQuadrantCards/Components/Components 契约错位——再生成 villain_matrix 用 quadrant 键、rescue_roi 已移除 components）+ narrative-experiment 中英（renderHardship difficulty 值域漂移至 6、renderScoring 字典化、renderPlayers merit 字段移除——回退 starting_capital）。家族定性：W563 数据打通后，「再生成 JSON 契约 vs 页面期望」错位持续暴露（同 P04 character-appearance），登记内容批次做深度契约对齐。\r\n> - **验证（当批实跑）**：4 页滚动穿透 pageerror 0；暗色缺陷 1590→302；CSP 重生成后 --check 0 漂移；范围漂移门禁当批拦获 tokens 注释中 W569 字样（级联前文档未记——门禁正确工作，级联后放行）；verify_delivery 核心全绿。\r\n> - **文件**：详见 scripts/output/file-index.md W569 段（tokens.css、226 页重内联、4 页契约修复、审计器、2 份审计清单、六文档级联）。\r\n> - **状态**：已落地（本批随 W569 提交并 push origin/main）。",
+  "milestone_block": "- **v2.3.169 W569 渲染状态全站审计与图表暗色适配 v2（方案B）**：新增渲染状态审计器（232页×3态机判·夜间模式盲区补上）·图表文字反白规则入 tokens 暗色块（暗色缺陷 1590→302 -81%·132→42 页）·4 个 pageerror 页契约错位根治（滚动穿透复验 0）·残余 302 处登记 B 二期。",
+  "agents_note": "2026-09-16（v2.3.169 W569）渲染状态全站审计与图表暗色适配 v2：审计器常驻（232页×3态·夜间模式盲区补上·暗色自动应用 230 页）·tokens 暗色块文字反白（暗色缺陷 1590→302 -81%·132→42 页）·4 个 pageerror 页契约错位根治（W563 数据打通暴露家族·滚动穿透复验 0）",
+  "file_index_rows": [
+    "| site/tokens.css | W569 | 修改·暗色块图表文字反白规则 v2（!important 压 attr/内联填充） |",
+    "| site/data+en 226 个 HTML | W569 | 修改·--force 重内联（暗色适配层分发） |",
+    "| site/data+en methodology-matrix/narrative-experiment 4 页 | W569 | 修改·pageerror 契约错位修复（quadrant 回退/bands 守卫/difficulty 钳位/scoring 字典化/merit 回退/components 守卫） |",
+    "| scripts/_audit_render_states.js | W569 | 新增·常驻：全站渲染状态审计器（3 态机判） |",
+    "| scripts/output/render-state-audit-2026-09-13.jsonl | W569 | 新增·基线清单（696 行·暗色缺陷 1590 基线） |",
+    "| scripts/output/render-state-audit.jsonl | W569 | 更新·修复后复测（464 行·302） |",
+    "| CHANGELOG.md | W569 | 新增·W569 版段 + 编号规则上限 W001-W569 |",
+    "| 交接文档.md | W569 | 修改·头尾「最后更新」prepend W569 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |",
+    "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W569 | 修改·版本行同步 v2.3.169（batch_cascade.py 执行） |",
+    "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W569 | 修改·四页脚链首 prepend W569（batch_cascade.py 执行） |",
+    "| .github/workflows/README.md | W569 | 修改·旁文档同步（batch_cascade.py 执行） |",
+    "| scripts/output/file-index.md | W569 | 新增·W569 段（本段·batch_cascade.py 执行） |"
+  ]
+}
