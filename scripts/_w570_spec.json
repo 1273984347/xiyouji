@@ -1,0 +1,23 @@
+{
+  "batch": "W570",
+  "version": "v2.3.170",
+  "date": "2026-09-16",
+  "title": "W570 审计矩阵补全与图表页容错封装 — S4移动浅色基线·渲染调用safe包裹（44处）·pageerror清零",
+  "desc": "审计矩阵补全与容错封装",
+  "head_entry": "2026-09-16（v2.3.170 W570 审计矩阵补全与图表页容错封装：审计器补 S4-mobile-light 态（主题×视口 2×2 矩阵完整·S4 基线 1064 处/131 页与 S1 桌面浅色高度一致——视口非变量）；4 个契约错位页渲染调用 safe() 函数级容错封装（44 处——桌面/移动双分支的成片契约错位点经函数级隔离后单区块崩溃降级为 console 留证，滚动穿透复验 pageerror 0）；⚠️ 错误气泡定格截图留证（上轮验证局限补上）；canvas 暗色扩样 5/5 可读）",
+  "head_sentence": "W570 审计矩阵补全——S4基线·safe容错封装·pageerror清零",
+  "changelog_body": "\r\n\r\n> **来源**：W569 收尾三项（用户「继续」）——审计矩阵补全（移动浅色）+ ⚠️ 气泡定格 + canvas 扩样。\r\n> - **S4 移动浅色基线**：审计器补第 4 态（主题×视口 2×2 矩阵完整）。基线：缺陷条目 1064/131 页——与 S1 桌面浅色（1069/131）高度一致，**视口不是低对比缺陷的变量**（变量是主题与图表校准色）；横向溢出仅 visit-viewer 1 页；深色误应用 0。\r\n> - **safe() 容错封装**：4 个契约错位页的渲染调用序列（mm 12 处×2/ne 10 处×2，合计 44 处）逐调用包裹 `safe(name, fn)`——单区块崩溃降级为 console 留证 + 该区块留空，不再中断后续图表渲染（桌面/移动双分支全覆盖）。滚动穿透复验 4 页 pageerror 0。设计取舍：函数级隔离是遏制手段，字段级契约对齐仍登记内容批次（防御性修复之下的字段错位已在 console 可见）。\r\n> - **⚠️ 错误气泡定格**：前后端重启后实测——发送消息后助手侧渲染「⚠️ CLI process spawn error: spawn node ENOENT → …」错误气泡（W568 修复的端到端留证补上，上轮因采集工具故障未定格）。环境事实重申：本机 CLI 已删除，错误路径即本机唯一路径，气泡呈现符合预期。\r\n> - **canvas 暗色扩样**：+3 页（character-dynamic/monster-ecology/heaven-power）累计 5/5 可读（3 优 2 良）——canvas 类无系统性暗色问题，41 页清单降级为低风险登记。\r\n> - **验证（当批实跑）**：4 页滚动穿透 pageerror 0；CSP 重生成 0 漂移；审计器 --states 参数化（S4 单态跑批 8 分钟）；verify_delivery 核心全绿。\r\n> - **文件**：详见 scripts/output/file-index.md W570 段（审计器、4 页、render-state-audit.jsonl S4 基线、六文档级联）。\r\n> - **状态**：已落地（本批随 W570 提交并 push origin/main）。",
+  "milestone_block": "- **v2.3.170 W570 审计矩阵补全与图表页容错封装**：审计器补 S4 移动浅色（2×2 矩阵完整·基线与桌面浅色一致证实视口非变量）·4 个契约错位页 44 处渲染调用 safe() 容错封装（pageerror 清零）·⚠️ 错误气泡定格留证·canvas 暗色扩样 5/5 可读。",
+  "agents_note": "2026-09-16（v2.3.170 W570）审计矩阵补全与图表页容错封装：审计器补 S4 移动浅色（2×2 完整·S4 与 S1 基线一致证实视口非低对比变量）·4 页 44 处渲染调用 safe() 容错封装（单区块崩溃不再杀整页·pageerror 清零）·⚠️ 错误气泡定格留证·canvas 暗色扩样 5/5 可读",
+  "file_index_rows": [
+    "| scripts/_audit_render_states.js | W570 | 修改·补 S4-mobile-light 态（2×2 矩阵完整）+ --states 参数化 |",
+    "| scripts/output/render-state-audit.jsonl | W570 | 更新·S4 移动浅色基线（232 行·1064 处/131 页） |",
+    "| site/data+en methodology-matrix/narrative-experiment 4 页 | W570 | 修改·渲染调用 safe() 函数级容错封装（44 处） |",
+    "| CHANGELOG.md | W570 | 新增·W570 版段 + 编号规则上限 W001-W570 |",
+    "| 交接文档.md | W570 | 修改·头尾「最后更新」prepend W570 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |",
+    "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W570 | 修改·版本行同步 v2.3.170（batch_cascade.py 执行） |",
+    "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W570 | 修改·四页脚链首 prepend W570（batch_cascade.py 执行） |",
+    "| .github/workflows/README.md | W570 | 修改·旁文档同步（batch_cascade.py 执行） |",
+    "| scripts/output/file-index.md | W570 | 新增·W570 段（本段·batch_cascade.py 执行） |"
+  ]
+}

@@ -11,6 +11,20 @@
 ---
 
 
+## W570 W570 审计矩阵补全与图表页容错封装（2026-09-16·v2.3.170）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_audit_render_states.js | W570 | 修改·补 S4-mobile-light 态（2×2 矩阵完整）+ --states 参数化 |
+| scripts/output/render-state-audit.jsonl | W570 | 更新·S4 移动浅色基线（232 行·1064 处/131 页） |
+| site/data+en methodology-matrix/narrative-experiment 4 页 | W570 | 修改·渲染调用 safe() 函数级容错封装（44 处） |
+| CHANGELOG.md | W570 | 新增·W570 版段 + 编号规则上限 W001-W570 |
+| 交接文档.md | W570 | 修改·头尾「最后更新」prepend W570 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W570 | 修改·版本行同步 v2.3.170（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W570 | 修改·四页脚链首 prepend W570（batch_cascade.py 执行） |
+| .github/workflows/README.md | W570 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W570 | 新增·W570 段（本段·batch_cascade.py 执行） |
+
 ## W569 W569 渲染状态全站审计与图表暗色适配 v2（2026-09-16·v2.3.169）
 
 | 文件 | W | 说明 |
