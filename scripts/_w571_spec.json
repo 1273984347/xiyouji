@@ -1,0 +1,24 @@
+{
+  "batch": "W571",
+  "version": "v2.3.171",
+  "date": "2026-09-16",
+  "title": "W571 复审修正 — W569一刀切反白误伤光晕页回归修复·审计器光晕感知·en/ne钳位补齐·诚实基线修正",
+  "desc": "复审修正与光晕感知",
+  "head_entry": "2026-09-16（v2.3.171 W571 复审修正：① W569 v2 文字反白规则一刀切误伤光晕页——168 页（data+en 各 84）的 W553 注入式 #audit-halo 光晕（墨字+白晕 paint-order:stroke）本就双主题可读，被强制反白成白晕+浅字涂抹块；tokens 规则精修为 :not(:has(#audit-halo)) 豁免——光晕页保持 W553 设计态（实拍复验），非光晕页保留反白；② en/narrative-experiment difficulty 钳位补齐（W569 第二轮脚本因 merit 锚点过期中止时遗漏·safe 容错曾掩盖）；③ 审计器光晕感知（paint-order:stroke+可见描边的文字不计缺陷）——诚实基线修正：暗色真实缺陷 318 处/44 页（原 1590 基线含大量光晕假阳性·-81% 表述撤回），S4 移动浅色 32 处/4 页）",
+  "head_sentence": "W571 复审修正——光晕页豁免·钳位补齐·诚实基线",
+  "changelog_body": "\r\n\r\n> **来源**：W569/W570 交付后的对抗性复审（用户「review 一遍」→「确定都做完了吗」→「继续」），按保真度地图逐项取证。\r\n> - **回归发现与修正（本批核心）**：W569 v2 文字反白规则（`svg text{fill:var(--ink)!important}`）一刀切误伤光晕页——168 页（data+en 各 84）存在 W553 注入的 `#audit-halo` 光晕块（`paint-order:stroke` + 白 3px 描边 + 墨褐填充），该设计在任何底色上可读；被强制反白后变成「白晕+浅字」涂抹块（hardship-heatmap 热力图 tick 实拍实证）。修正：tokens 规则精修为 `:not(:has(#audit-halo))` 豁免，光晕页保持 W553 设计态（实拍复验 tick 恢复 #6B6455 墨褐），非光晕页（57 页）保留反白。\r\n> - **流程教训（本批最重）**：tokens.css 精修后 **漏跑 inline_css --force**——226 页内联副本停留在旧版未豁免规则上，:has 豁免只存在于 tokens 源未分发（hardship-heatmap tick 实测 #F2EBDC 揭示）。补跑 --force 后 tick 恢复 #6B6455。教训：改 tokens/system 后的 --force 分发是规则生效的必要步骤，与 generate_csp 同级。\r\n> - **en/ne 钳位补齐**：W569 第二轮契约修复脚本因 merit 锚点过期中止时，同文件的 difficulty 钳位未落（后续 safe() 容错把崩溃吞掉掩盖了这一点——容错组件在，缺陷组件也在）。已补。\r\n> - **审计器光晕感知**：paint-order:stroke + 可见描边（≥1px 非 none）的文字判定为光晕可读，不计低对比缺陷。**诚实基线修正**：W569 的「暗色缺陷 1590→302（-81%）」表述撤回——1590 基线含大量光晕页假阳性（审计器不识别光晕），302 亦混入反白误伤后的假阴性。光晕感知后的真实暗色基线：**318 处/44 页**（真实待适配面），S4 移动浅色 32 处/4 页，pageerror 全零。\r\n> - **canvas 暗色扩样**：+3 页（character-dynamic/monster-ecology/heaven-power）累计 5/5 可读（3 优 2 良）——canvas 类无系统性暗色问题，41 页清单降级低风险。\r\n> - **验证（当批实跑）**：hardship-heatmap 深色实拍 tick 恢复 #6B6455+白晕（光晕豁免生效）；en/ne 滚动穿透 0 pageerror；4 页 safe 封装 resize 路径 OK；渲染状态审计（光晕感知）S2 318 处/S4 32 处；verify_delivery 核心全绿；CSP 0 漂移。\r\n> - **文件**：详见 scripts/output/file-index.md W571 段（tokens.css、en/narrative-experiment、审计器、render-state-audit.jsonl、六文档级联）。\r\n> - **状态**：已落地（本批随 W571 提交并 push origin/main）。",
+  "milestone_block": "- **v2.3.171 W571 复审修正**：W569 一刀切反白误伤 168 个光晕页回归修正（tokens 规则 :not(:has(#audit-halo)) 豁免·实拍复验）·en/ne 难度钳位补齐·审计器光晕感知（诚实基线：暗色 318 处/44 页·原 1590 含光晕假阳性·-81% 表述撤回）。",
+  "agents_note": "2026-09-16（v2.3.171 W571）复审修正：W569 一刀切反白误伤 168 光晕页（墨字白晕本双主题可读）→ tokens 规则 :not(:has(#audit-halo)) 豁免；en/ne 钳位补齐；审计器光晕感知——暗色真实基线 318 处/44 页（原 1590 含光晕假阳性）",
+  "file_index_rows": [
+    "| site/tokens.css | W571 | 修改·v2 反白规则精修 :not(:has(#audit-halo)) 豁免光晕页 |",
+    "| site/en/narrative-experiment.html | W571 | 修改·difficulty 钳位补齐（W569 遗漏） |",
+    "| scripts/_audit_render_states.js | W571 | 修改·光晕感知（paint-order:stroke 文字不计缺陷） |",
+    "| scripts/output/render-state-audit.jsonl | W571 | 更新·光晕感知诚实基线（S2 318 处/S4 32 处） |",
+    "| CHANGELOG.md | W571 | 新增·W571 版段 + 编号规则上限 W001-W571 |",
+    "| 交接文档.md | W571 | 修改·头尾「最后更新」prepend W571 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |",
+    "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W571 | 修改·版本行同步 v2.3.171（batch_cascade.py 执行） |",
+    "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W571 | 修改·四页脚链首 prepend W571（batch_cascade.py 执行） |",
+    "| .github/workflows/README.md | W571 | 修改·旁文档同步（batch_cascade.py 执行） |",
+    "| scripts/output/file-index.md | W571 | 新增·W571 段（本段·batch_cascade.py 执行） |"
+  ]
+}
