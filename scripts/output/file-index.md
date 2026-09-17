@@ -11,6 +11,19 @@
 ---
 
 
+## W575 W575 可视化页触屏tooltip全量推开（2026-09-18·v2.3.175）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/（批量61页） | W575 | 更新·方案H全量推开 touchstart 委托同构注入（20行独立script块·</body>前·幂等标记） |
+| site/data/81-hardships.html | W575 | 修复·tipNode 静态快照空选区改惰性取用（桌面tooltip同步根治） |
+| site/data/ecology.html | W575 | 修复·tooltip门面补 move 方法（8处直调 .style 抛TypeError根治） |
+| site/data/global-pattern.html | W575 | 修复·补缺失 #tooltip 容器元素（d3空选区静默no-op·置于捕获脚本前） |
+| site/data/cross-time-danmaku.html | W575 | 修复·补缺失 #hero-tooltip 元素（星图mouseover TypeError·池外同族静态扫描发现） |
+| scripts/_w575_inject_touchtip.py | W575 | 新增·方案H同构注入器（池枚举·幂等标记·dry-run/apply） |
+| scripts/_w575_touchtip_e2e.js | W575 | 新增·逐页触屏tooltip e2e（5断言×61页·探针与注入路径1:1同构·三轮候选+滚动探测+活点重解析） |
+| scripts/_w575_pool_scan.py | W575 | 新增·池枚举与形态盘点（只读） |
+
 ## W574 W574 可视化页触屏tooltip试点（2026-09-18·v2.3.174）
 
 | 文件 | W | 说明 |
