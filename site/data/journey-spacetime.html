@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-BBtqTcp5akh2/4xXftIXtbwEMK8SuyCdRaKYAihNuz0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-uLwwcIxpdFYgY9s46NWq+iNw1KHaKEVTwaVHZgziyIc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经路线时空双轴可视化 · 详解西游记</title>
@@ -1334,7 +1334,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="../dashboard.html">看板</a>
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
-        </nav>
+        
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener">反馈</a></nav>
     </footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
@@ -1548,7 +1549,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         const n = Math.max(1, Math.min(100, +ch || 1));
         const f = A1_DOC_MAP[String(n)];
         // 页面位于 site/data/，上溯两级到仓库根（file:// 与本地 http 模式均有效；Pages 仅部署 site/，docs 直链为本地模式特性，与 dashboard 既有口径一致）
-        return f ? "../../docs/01-全书逐回解读/" + f : "../../docs/01-全书逐回解读/";
+        return f ? "https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/" + f : "https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/";
     }
     // 从 data-chapter（第12回 / 第15回 / 第47-49回）提取首数字回号 N
     function chapterNumFromDataChapter(s) {
