@@ -1,0 +1,22 @@
+{
+  "batch": "W578",
+  "version": "v2.3.178",
+  "date": "2026-09-18",
+  "title": "W578 复盘报告 WBS 落地① — AGENTS §4.3 补齐 W571 两条教训·O2 暗色门禁挂载方案入档",
+  "desc": "复盘 WBS 落地与教训条目补全",
+  "head_entry": "2026-09-18（v2.3.178 W578 复盘报告 WBS 落地①：AGENTS §4.3 补齐 W571 两条教训条目——全局批量规则前置「设计惯例三查」+ 改 tokens/system 后必跑 inline_css --force 分发（W571 报告 E28/E29 声称已入而实际仅级联脚注的声明≠落地缺口补齐）；O2 暗色门禁常驻化挂载方案入档 docs/superpowers/plans/2026-09-18-dark-state-gate-plan.md——复用审计器 S2 单态·基线 318 只拦新增·CI +8-10 分钟·三待决点供用户裁决）",
+  "head_sentence": "W578 复盘 WBS 落地①——教训条目补齐·暗色门禁方案入档",
+  "changelog_body": "\r\n\r\n> **来源**：W572 入库报告（2026-09-16）§7.2 WBS 逐项对账（用户问「需要优化的和需要沉淀的内容都做了吗？需要预防的呢」→ 对账发现两处缺口当批补齐）。\r\n> - **对账结论**：报告承诺项中——沉淀类（审计器常驻/4 态基线/光晕感知判据/修复模式/报告本体）全部落地；优化类（暗色适配 v2/4 页契约修复/pageerror 清零）全部落地；**未落地两项**：① E29 声称「教训入 AGENTS §4.3」实际仅级联版本脚注、§4.3 规则表未补（声明≠落地，三新规①同类违反）；② E28 三查前置未入 §4.3。另 WBS 1（O2 方案入档）、WBS 2/3/4 未到期或待用户决策。\r\n> - **本批落地**：① AGENTS §4.3 补两条——「全局批量规则前置设计惯例三查」（三查内容+光晕实证）与「改 tokens/system 后必跑 inline_css.py --force 分发」（tick #F2EBDC 实证·与 generate_csp 同级）；② O2 暗色门禁常驻化挂载方案入档 docs/superpowers/plans/2026-09-18-dark-state-gate-plan.md（复用 _audit_render_states.js S2 单态·图表页约 120 页·基线 318 处只拦新增·CI +8-10 分钟·三待决点：是否挂载/抽查范围/基线更新责任）。\r\n> - **验证（当批实跑）**：verify_delivery 核心全绿。\r\n> - **文件**：详见 scripts/output/file-index.md W578 段（AGENTS.md、O2 方案档、六文档级联）。\r\n> - **状态**：已落地（本批随 W578 提交并 push origin/main）。",
+  "milestone_block": "- **v2.3.178 W578 复盘报告 WBS 落地①**：AGENTS §4.3 补齐 W571 两条教训（设计惯例三查/tokens 修改必跑 --force 分发——声明≠落地缺口补齐）·O2 暗色门禁挂载方案入档（318 基线只拦新增·三待决点供用户裁决）。",
+  "agents_note": "2026-09-18（v2.3.178 W578）复盘报告 WBS 落地①：AGENTS §4.3 补齐 W571 两条教训条目（全局批量规则前置设计惯例三查/tokens 修改必跑 inline_css --force 分发——声明≠落地缺口补齐）·O2 暗色门禁常驻化挂载方案入档",
+  "file_index_rows": [
+    "| AGENTS.md | W578 | 修改·§4.3 补两条 W571 教训（三查前置/--force 分发） |",
+    "| docs/superpowers/plans/2026-09-18-dark-state-gate-plan.md | W578 | 新增·O2 暗色门禁常驻化挂载方案（含基线阈值与三待决点） |",
+    "| CHANGELOG.md | W578 | 新增·W578 版段 + 编号规则上限 W001-W578 |",
+    "| 交接文档.md | W578 | 修改·头尾「最后更新」prepend W578 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |",
+    "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W578 | 修改·版本行同步 v2.3.178（batch_cascade.py 执行） |",
+    "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W578 | 修改·四页脚链首 prepend W578（batch_cascade.py 执行） |",
+    "| .github/workflows/README.md | W578 | 修改·旁文档同步（batch_cascade.py 执行） |",
+    "| scripts/output/file-index.md | W578 | 新增·W578 段（本段·batch_cascade.py 执行） |"
+  ]
+}
