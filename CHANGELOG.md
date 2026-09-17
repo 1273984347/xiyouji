@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W579），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W580），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.180（2026-09-18）：W580 CI 红灯热修复 — dark-state-gate 浅克隆 git diff 128（Checkout 补 fetch-depth: 0）
+
+> **来源**：W579 dark-state-gate 首跑 CI 红灯（run 35280503565）热修复。
+> - **根因**：dark-state-gate job 的 Checkout 未设 `fetch-depth: 0`——actions/checkout 默认浅克隆（depth 1），「Skip if footer-only push」步骤的 `git diff "$BEFORE" "$SHA"` 因 before 对象不存在报 **exit 128**，job 失败（门禁逻辑本身未及执行；同 run 的主截图 job success）。
+> - **修法**：Checkout 补 `fetch-depth: 0` 一行（与主截图 job 同构），并注明首跑实证。
+> - **验证**：修复后 dark-state-gate 首个全流程运行（本批 push 触发）通过为准；门禁判定逻辑已由本地三层验证兜底（self-test 5/5·双跑零差异·实弹篡改 FAIL/还原 PASS）。
+> - **文件**：详见 scripts/output/file-index.md W580 段。
+> - **状态**：已落地（本批随 W580 提交并 push origin/main）。
 ### v2.3.179（2026-09-18）：W579 暗色态门禁常驻化挂载（O2·W578方案获批实施） — S2×163图表页基线318处/44页对账W571·只增即FAIL·独立job并行
 
 > **来源**：方案档《暗色态门禁常驻化方案（O2 挂载评估）》（docs/superpowers/plans/2026-09-18-dark-state-gate-plan.md，W578 入档），2026-09-18 用户裁决「挂载」。

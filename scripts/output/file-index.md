@@ -11,6 +11,12 @@
 ---
 
 
+## W580 W580 CI 红灯热修复（2026-09-18·v2.3.180）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/screenshot-review.yml | W580 | 热修复·dark-state-gate Checkout 补 fetch-depth: 0（浅克隆 git diff 128·首跑实证） |
+
 ## W579 W579 暗色态门禁常驻化挂载（2026-09-18·v2.3.179）
 
 | 文件 | W | 说明 |
