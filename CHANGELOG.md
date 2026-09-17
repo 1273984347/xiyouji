@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W574），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W575），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,17 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.175（2026-09-18）：W575 可视化页触屏tooltip全量推开（方案H） — 61页同构注入touchstart委托·e2e 61/61·同族潜伏tooltip缺陷4页根治
+
+> **来源**：方案档《AI 产品运维——体验与服务优化计划（方案 D/E/F/G/H）》§方案 H 全量推开（docs/superpowers/plans/2026-09-09-service-experience-and-agent-ops-plans.md；W574 试点批「全量 62 页推开建议出档」的执行批）。
+> - **推开范围**：W574 试点后 mouseover-无-touch 池余 61 页（site/data/*.html），`scripts/_w575_inject_touchtip.py` 同构注入 W574 验收形态的 touchstart 委托 IIFE（20 行独立 `<script>` 块插 `</body>` 前·幂等标记「W575 touch tooltip」·纯 document 级合成派发不引用页面级函数名·mouseover 路径零改动·桌面环境 touchstart 不触发行为零变更）；至此 62 页池清零，**方案 H 全量关闭**。
+> - **e2e（`scripts/_w575_touchtip_e2e.js`，5 断言 × 61 页 = 305 项）61/61 PASS**：① tap 图表→tooltip 触发（隐藏显隐型=vis 翻转 / 常显换内容型=内容变化，双语义统一）；② tap 空白→与真实鼠标路径行为一致（≡mouse 经验参照，持久显示型与重置型页面各自对齐）；③ 重复 tap→再触发；④ mouse.move 回归→再触发（mouseover 路径不变）；⑤ 无 pageerror。取点探针与注入路径 1:1 同构（对 elementFromPoint 命中者合成派发 mouseover/mousemove，以显隐实效定点——「有 cursor」≠「有处理器」）；三轮候选（svg 非链接→svg 全部→HTML 交互元素）+ 折叠下滚动分步探测（触发 reveal）+ 力导向图 D 阶段活点重解析（节点漂移）。
+> - **同族潜伏缺陷根治 4 页（e2e pageerror 断言与探针副作用暴露·桌面鼠标同样受害）**：① 81-hardships `tipNode` 静态快照——`d3.select("#tm-tooltip")` 于元素声明前执行成永久空选区，tipMove 读 `node().offsetWidth` 抛 TypeError → 改惰性取用；② ecology tooltip 门面对象（仅 show/hide）被 8 处 mousemove/mouseout 直调 `.style` 抛 `tooltip.style is not a function` → 门面补 move 方法；③ global-pattern 缺失 `#tooltip` 容器元素（tipId 指向不存在节点·d3 空选区静默 no-op）→ W460 标准形态补元素于捕获脚本之前；④ cross-time-danmaku 缺失 `#hero-tooltip`（星图 mouseover 抛 TypeError·池外页·静态扫描发现）→ 补元素。全池静态扫描（select 行号 vs 元素行号）确认无第 5 例。
+> - **边界（如实）**：EN 站 62 页同形态镜像页不在方案 H 池定义（glob site/data/*.html），登记为后续批次候选；工作区另含 W574 版本页脚滚动链 4 文件未提交改动（index/dukou-engine/cross-time-danmaku/tag-cloud），随本批页脚推进一并收敛入库；另发现 bump_version.py 的 W536 写路径守卫根目录误算（守卫根=scripts/ 而文档路径相对 CWD 解析→自 W536 起任何调用必误判，与 W550 修复的 generate_csp 同款；本批辅助 4 由 batch_cascade 覆盖未受影响）——属禁擅改清单，登记待用户裁决。
+> - **机判工程教训五条（沉淀 AGENTS §4.3）**：① tooltip 显隐多带 CSS transition，合成派发后同步读 computedOpacity 恒为过渡起始值——探针以「预清空 tip 内容→派发→内容非空」同步信号判定（stash/restore 防污染页面状态）；② 快照键不可含显隐态 class（`chart-tooltip visible` 翻转致键漂移、跨快照失配）——用元素 id 或顶层序号；③ Chrome 在 touchend 后把 hover 同步回真实鼠标位置并补发 mouseout——e2e 中一旦先动过真实鼠标，后续 tap 的 compat mouseout 会杀掉 tooltip 显示态（浏览器行为非页面缺陷），触屏断言须全部先于鼠标动作完成；④ 泛选择器 `[class*="tip"]` 误伤 `small-multiple`（子串撞车）与 tooltip 内层元素（容器 opacity:0 隐藏时内层 computed opacity 仍 1）——精确化（tooltip 子串/tip 结尾）+ 顶层容器过滤；⑤ 常显换内容型面板（concept-device prismTooltip）无隐藏态——隐藏断言以「触屏≡鼠标」对照替代硬编码 hidden 期望。
+> - **验证**：e2e 61/61（`node scripts/_w575_touchtip_e2e.js --all`）；generate_csp 重生成 234 页哈希 1189→1250、--check 0 漂移；check_js_syntax --all 233 文件通过；check_structure 233 文件通过；check_screenshot_gates 全站 235 页 FAIL 0（鼠标路径回归）；ruff scripts/ 0 违规；verify_delivery 核心全绿。线上触屏体验为部署后人工验证（真机 tap 任一可视化页图表元素）。
+> - **文件**：详见 scripts/output/file-index.md W575 段。
+> - **状态**：已落地（本批随 W575 提交并 push origin/main）。
 ### v2.3.174（2026-09-18）：W574 可视化页触屏tooltip试点（方案H） — language-style-radar touchstart委托复用既有tooltip·6/6机判·全量62页推开建议出档
 
 > **来源**：方案档《AI 产品运维——体验与服务优化计划（方案 D/E/F/G/H）》§方案 H（docs/superpowers/plans/2026-09-09-service-experience-and-agent-ops-plans.md）。

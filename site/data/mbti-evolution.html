@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-ViYgo2lcI2fWyutplUX2MgKRFc/Cvrt3xAmkQwV3zlI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-ViYgo2lcI2fWyutplUX2MgKRFc/Cvrt3xAmkQwV3zlI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-s/eOdhskdb6EAD0f/SDDWOfoT0iyGvaIMxXc/Sg1xzw='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经团队 MBTI 动态演变图 · 详解西游记</title>
@@ -2000,5 +2000,24 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
 })();
 </script>
 
+<script>/* W575 touch tooltip（方案H全量推开·同构注入·复用既有tooltip处理器） */
+(function () {
+    var prev = null;
+    document.addEventListener('touchstart', function (e) {
+        if (!e.touches || !e.touches.length) return;
+        var t = e.touches[0];
+        var el = document.elementFromPoint(t.clientX, t.clientY);
+        if (prev && prev !== el) { prev.dispatchEvent(new MouseEvent('mouseout')); prev = null; }
+        if (el) {
+            el.dispatchEvent(new MouseEvent('mouseover', { clientX: t.clientX, clientY: t.clientY }));
+            el.dispatchEvent(new MouseEvent('mousemove', { clientX: t.clientX, clientY: t.clientY }));
+            prev = el;
+        }
+    }, { passive: true });
+    document.addEventListener('touchmove', function () {
+        if (prev) { prev.dispatchEvent(new MouseEvent('mouseout')); prev = null; }
+    }, { passive: true });
+})();
+</script>
 </body>
 </html>
