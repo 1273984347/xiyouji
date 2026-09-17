@@ -11,6 +11,16 @@
 ---
 
 
+## W579 W579 暗色态门禁常驻化挂载（2026-09-18·v2.3.179）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/screenshot-review.yml | W579 | 挂载·dark-state-gate独立job（S2×图表页只增即FAIL·页脚-only跳过·失败上传产物）+paths补两脚本与基线 |
+| scripts/check_dark_state_gate.js | W579 | 新增·暗色态门禁对比器（三类型只增即FAIL+暗色未应用回归+--self-test 5负样本+--update-baseline） |
+| scripts/_audit_render_states.js | W579 | 更新·新增--scope charts参数（全站svg页163页机判口径单一来源） |
+| scripts/output/render-state-audit-baseline.jsonl | W579 | 新增·S2-desktop-dark×163页基线快照（318处/44页·与W571诚实基线对账一致） |
+| docs/superpowers/plans/2026-09-18-dark-state-gate-plan.md | W579 | 更新·§5落地状态回填（三待决点裁决+偏离声明+验证记录） |
+
 ## W578 W578 复盘报告 WBS 落地①（2026-09-18·v2.3.178）
 
 | 文件 | W | 说明 |

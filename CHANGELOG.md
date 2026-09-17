@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W578），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W579），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,17 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.179（2026-09-18）：W579 暗色态门禁常驻化挂载（O2·W578方案获批实施） — S2×163图表页基线318处/44页对账W571·只增即FAIL·独立job并行
+
+> **来源**：方案档《暗色态门禁常驻化方案（O2 挂载评估）》（docs/superpowers/plans/2026-09-18-dark-state-gate-plan.md，W578 入档），2026-09-18 用户裁决「挂载」。
+> - **实施**：screenshot-review workflow 新增独立 `dark-state-gate` job——与主截图 job 并行（不延长发布墙钟），页脚版本号 bump/数据副本/纯文档 push 跳过，失败时上传审计产物 artifact；本地复跑同命令。
+> - **审计范围**：`--scope charts`（本批新增参数）= 全站含 `<svg` 页面 **163 页**（site/data 78 + en 79 + 站点根 6；方案估 120 为低估）——机判口径单一来源，替代方案原 `--pages <清单>` 形态。
+> - **基线**：`scripts/output/render-state-audit-baseline.jsonl`（S2-desktop-dark × 163 页快照入库）——**318 处/44 页，与 W571 暗色诚实基线完全对账**（lowContrast 16 + invisible 302 + pageError 0）；暗色已应用 163/163。此后任何暗色新增缺陷在 CI 拦截，存量不追溯；基线刷新仅限修复批缺陷下降后 `node scripts/check_dark_state_gate.js --update-baseline` 手动执行（防锁死）。
+> - **判定口径**：同页同类型（pageError / lowContrast / invisible）缺陷数只增即 FAIL；另含「暗色未应用」回归拦截（基线行暗色已应用而当前未应用 → 自动暗色机制退化）。**对方案的偏离（如实声明）**：hOverflow 不入本门禁——视口相关非主题相关，S1 截图门禁已覆盖，双门禁并存徒增抖动误报面。
+> - **验证**：`--self-test` 5 负样本 5/5（新增拦截/下降放行/持平放行/基线外新页拦截/暗色未应用拦截）；同环境双跑 163 页计数零差异（判定类型均字体无关·跨环境确定性）；实弹篡改验证（当前输出 +1 lowContrast → FAIL 定位到页/类型/增量，还原 → PASS）；verify_delivery 核心全绿。CI 首跑见本批五工作流。
+> - **批号说明**：W577/W578 已被并行会话（复盘入库/WBS 落地①）占用，本批顺延 W579（E41 跨 session 对账例行）。
+> - **文件**：详见 scripts/output/file-index.md W579 段。
+> - **状态**：已落地（本批随 W579 提交并 push origin/main）。
 ### v2.3.178（2026-09-18）：W578 复盘报告 WBS 落地① — AGENTS §4.3 补齐 W571 两条教训·O2 暗色门禁挂载方案入档
 
 > **来源**：W572 入库报告（2026-09-16）§7.2 WBS 逐项对账（用户问「需要优化的和需要沉淀的内容都做了吗？需要预防的呢」→ 对账发现两处缺口当批补齐）。

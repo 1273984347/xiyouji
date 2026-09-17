@@ -49,6 +49,12 @@ function listPages() {
   return out.sort();
 }
 
+// W579：--scope charts = 全站含 <svg 的页面（中英合计，机判口径单一来源；约 163 页）
+const scopeCharts = (() => {
+  const i = process.argv.indexOf('--scope');
+  return i > -1 && process.argv[i + 1] === 'charts';
+})();
+
 // 相对亮度（WCAG）
 function lum(cssColor) {
   const m = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(cssColor || '');
@@ -173,8 +179,12 @@ async function auditState(context, pageRel, state) {
 }
 
 async function main() {
-  const pages = listPages().slice(0, limit);
-  console.log(`pages=${pages.length} states=${STATES.length}`);
+  let pages = listPages();
+  if (scopeCharts) {
+    pages = pages.filter(p => fs.readFileSync(path.join(SITE, p), 'utf8').includes('<svg'));
+  }
+  pages = pages.slice(0, limit);
+  console.log(`pages=${pages.length} states=${STATES.length}${scopeCharts ? ' scope=charts' : ''}`);
   const browser = await chromium.launch();
   const out = fs.createWriteStream(OUT, { encoding: 'utf-8' });
   let n = 0;
