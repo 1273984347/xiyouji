@@ -11,6 +11,19 @@
 ---
 
 
+## W578 W578 复盘报告 WBS 落地①（2026-09-18·v2.3.178）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W578 | 修改·§4.3 补两条 W571 教训（三查前置/--force 分发） |
+| docs/superpowers/plans/2026-09-18-dark-state-gate-plan.md | W578 | 新增·O2 暗色门禁常驻化挂载方案（含基线阈值与三待决点） |
+| CHANGELOG.md | W578 | 新增·W578 版段 + 编号规则上限 W001-W578 |
+| 交接文档.md | W578 | 修改·头尾「最后更新」prepend W578 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W578 | 修改·版本行同步 v2.3.178（batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W578 | 修改·四页脚链首 prepend W578（batch_cascade.py 执行） |
+| .github/workflows/README.md | W578 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W578 | 新增·W578 段（本段·batch_cascade.py 执行） |
+
 ## W577 W577 工作复盘与优化分析报告（2026-09-18·v2.3.177）
 
 | 文件 | W | 说明 |
