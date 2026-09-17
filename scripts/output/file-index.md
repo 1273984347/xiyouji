@@ -11,6 +11,16 @@
 ---
 
 
+## W573 W573 站内检索服务化与RUM改道（2026-09-18·v2.3.173）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_gen_search_index.py | W573 | 新增·全站目录索引生成器（常驻·772docs+233pages 内嵌 search 两页） |
+| scripts/_check_search_rum_e2e.js | W573 | 新增·E-1/E-2 file:// 机判 e2e（11 断言） |
+| site/js/rum.js | W573 | 更新·E-2 上报改道（isHttp 闸门+GoatCounter __rum__ 单事件+回退） |
+| site/data/search.html | W573 | 更新·E-1 索引内嵌+renderOffline 打分重写+banner 文案清除 |
+| site/en/search.html | W573 | 更新·E-1 同法（英文 UI+中文标题说明） |
+
 ## W572 W572 站点可达性与信任信号（2026-09-18·v2.3.172）
 
 | 文件 | W | 说明 |

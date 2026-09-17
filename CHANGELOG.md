@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W572），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W573），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.173（2026-09-18）：W573 站内检索服务化与RUM改道（方案E） — 772篇文档+233页面全站目录索引离线可搜·search两页开发者文案清除·rum.js改道GoatCounter单事件
+
+> **来源**：方案档《AI 产品运维——体验与服务优化计划（方案 D/E/F/G/H）》§方案 E（docs/superpowers/plans/2026-09-09-service-experience-and-agent-ops-plans.md）。
+> - **E-1 全站目录索引**：`scripts/_gen_search_index.py`（常驻留档，内容批次收尾重跑）按 771 口径（剔除 /_dev/ /_templates/ /archive /superpowers/）实跑 **docs=772**（+1 系 W567 新增复盘报告，当批实测）+ **pages=233**（235−2 模板壳，含自产 404.html），单份索引 302,786B ≤500KB、两页同一常量字节差 0、合计增量 ~606KB ≤1MB；以幂等标记对内嵌 site/data/search.html 与 site/en/search.html（file:// 铁律：内嵌常量无 fetch）。renderOffline 重写：打分标题×5/分类×2/摘要×1 取前 50，结果行渲染类型（文档/页面）/标题/分类/摘要 + `data-search-top1/count` 机判锚点，drill 内「打开 →」链接（页面条目按 search 页位置加 ../ 前缀）。
+> - **开发者文案清除**：zh/en 两页 banner 与 onRowClick 的「启动 python scripts/api/api_server.py」指引全部替换为用户向文案（en 加「文档标题为中文原文」说明）；审计复跑 S13 api_server zh/en 归 0。
+> - **E-2 RUM 改道 GoatCounter**：rum.js sendPayload 增加协议闸门——`isHttp` 为 false（file://）零网络请求（仅 rum_queue 本地备援）；http(s) 且 `window.goatcounter.count` 在位时发**单事件** `__rum__`（每 PV 恰 1 条，title 携 lcp/cls/inp 三档位 good/needs-improvement/poor，阈值 2.5s/0.2s/0.1 同文件头）；GoatCounter 不在位回退原 POST /api/rum（本地 dev 后端回流）。grep 断言 goatcounter ≥2 / location.protocol ≥1 / node --check 通过。
+> - **验证**：e2e `scripts/_check_search_rum_e2e.js` **11/11 PASS**（zh 派生词×3 + en×1：原始标题前缀+全索引唯一性推导，断言 top1=来源条目；rum file:// 零 /api/rum 请求 + rum_queue 写入 282B）——首轮 7/10 的 3 FAIL 均为测试推导缺陷（标题去空格失配/共享子串多命中/断言结构未跟随），非产品缺陷，测试修正后全过；生成器首轮 bug 如实记录：页面 url/category 曾用仓库相对路径（site/ 前缀）→ 改站点根相对 + drill 链接 ../ 前缀修正；generate_csp 重生成 234 页 1189 哈希 0 漂移（**e2e 首跑抓出注入后哈希失配致整段内联脚本被 CSP 拒执行——先 regen 再 e2e 的顺序教训**）；ruff All checks passed；check_screenshot_gates 全站 235 FAIL 0；verify_delivery 核心全绿；GoatCounter 后台 __rum__ 事件与线上搜索体验为部署后人工验证。
+> - **文件**：详见 scripts/output/file-index.md W573 段。
+> - **状态**：已落地（本批随 W573 提交并 push origin/main）。
 ### v2.3.172（2026-09-18）：W572 站点可达性与信任信号（方案D） — 越界锚链接264→0改写GitHub blob/tree·自定义404页·全站反馈入口235/235·首页页脚收敛
 
 > **来源**：方案档《AI 产品运维——体验与服务优化计划（方案 D/E/F/G/H）》§方案 D（docs/superpowers/plans/2026-09-09-service-experience-and-agent-ops-plans.md，本批随批入库）；方案 R 档（agent-web 重设计 v2，2026-09-18 暂停中，随批入库）。

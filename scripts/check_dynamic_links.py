@@ -62,14 +62,19 @@ def check_literal(lit, page_path, doc_names):
         target = os.path.normpath(os.path.join(os.path.dirname(page_path), clean))
         if os.path.isfile(target):
             return True
-        # 不含 ../ 的字面量允许按仓库根解析（meta.source_doc 等元数据惯例）
+        # 不含 ../ 的字面量允许按仓库根解析（meta.source_doc 等元数据惯例），
+        # 再按部署根 site/ 回退解析（W573：站点根相对形态合法化，如全站目录索引的页面 url）
         if not clean.startswith("../"):
-            return os.path.isfile(os.path.normpath(os.path.join(ROOT, clean)))
+            if os.path.isfile(os.path.normpath(os.path.join(ROOT, clean))):
+                return True
+            return os.path.isfile(os.path.normpath(os.path.join(ROOT, "site", clean)))
         return False
     if clean.endswith(".md"):
         return clean in doc_names
-    # 裸 .html 文件名：页面同目录（tag-cloud/导航条目惯例）
-    return os.path.isfile(os.path.join(os.path.dirname(page_path), clean))
+    # 裸 .html 文件名：页面同目录（tag-cloud/导航条目惯例），再按部署根 site/ 回退（W573 索引页面 url）
+    if os.path.isfile(os.path.join(os.path.dirname(page_path), clean)):
+        return True
+    return os.path.isfile(os.path.join(ROOT, "site", clean))
 
 
 def scan_file(page_path, doc_names, html_text=None):
