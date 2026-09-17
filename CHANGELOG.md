@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W575），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W576），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.176（2026-09-18）：W576 bump_version.py W536写路径守卫根目录误算修复（经用户批准） — 守卫根scripts/→项目根一行修复·真实参数冒烟通过·顺手收敛两处W001-W536存量范围漂移与交接文档孤立\r损伤
+
+> **来源**：W575 批收尾时发现并登记的 bump_version.py W536 写路径守卫根目录误算（CHANGELOG W575 段边界条目），2026-09-18 用户批准修复。
+> - **根因**：`_W536_ROOT = realpath(dirname(abspath(__file__)))` 把守卫根算成 `scripts/` 自身，而 `AUX_VERSION_DOCS`（README.md 等）为仓库根相对路径——`realpath` 后不落在 `scripts/` 前缀内 → 守卫恒判「path escapes project root」拒写。与 W550 修复的 generate_csp.py W536 守卫根目录误算同款（复制面同源）。
+> - **修法（一行）**：守卫根改为项目根（`dirname(__file__)/..` 的 realpath）+ 注释注明 W576 修复与同款关联。ruff 通过。
+> - **真实参数冒烟（W537 新规④·无参读页脚形态）**：守卫放行，幂等同步无重复条目；且暴露三处既有损伤被其 W417 特性顺手收敛、随本批入库——① README 目录树「更新日志（W001-W536）」→ W575（该行 batch_cascade 不覆盖·存量漂移自 W536 起累积）；② 交接文档 CHANGELOG 范围行「正向时间线，W001-W536；」→ W575（同上）；③ 交接文档第 38 行以孤立 `\r` 充当行分隔的历史损伤归一（上一行 mega-line 拆分，「历史概要」块quote 恢复真正换行渲染；该孤立 \r 亦是交接文档 index blob 曾被判 `-text` 二进制的元凶——修复后 blob 回归文本态）。以上均经字节级核验（`\r\r` 0、孤立 \r 1→0、归一化行对比仅上述三处）。
+> - **使用姿态（AGENTS §4.3 已补记）**：日常每批辅助 4 同步仍由 batch_cascade 覆盖；bump_version 为里程碑/页脚前进工具，其范围替换面（README 目录树/交接范围行）为级联外的存量漂移收敛手段。三个已知坑①②③维持不变。
+> - **验证**：`python scripts/bump_version.py` 无参冒烟通过（守卫放行·幂等）；`python -m ruff check scripts/bump_version.py` 0 违规；改动字节级核验如上；verify_delivery 核心全绿。
+> - **文件**：详见 scripts/output/file-index.md W576 段。
+> - **状态**：已落地（本批随 W576 提交并 push origin/main）。
 ### v2.3.175（2026-09-18）：W575 可视化页触屏tooltip全量推开（方案H） — 61页同构注入touchstart委托·e2e 61/61·同族潜伏tooltip缺陷4页根治
 
 > **来源**：方案档《AI 产品运维——体验与服务优化计划（方案 D/E/F/G/H）》§方案 H 全量推开（docs/superpowers/plans/2026-09-09-service-experience-and-agent-ops-plans.md；W574 试点批「全量 62 页推开建议出档」的执行批）。
