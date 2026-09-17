@@ -28,8 +28,9 @@
  *       <script defer src="js/rum.js"></script>            （站点根页）
  *       <script defer src="../js/rum.js"></script>         （data/ en/ 等子目录页）
  *       可通过 window.__RUM_CONFIG__ 覆盖默认配置。
- * 注意：GitHub Pages 无后端，/api/rum 会 404；开启 storeLocal 后数据
- *       落 localStorage（rum_queue），可用于本地验证，未来接后端改 endpoint 即回流。
+ * 上报通道（W573 E-2）：http(s) 且 GoatCounter 在位 → 单事件 __rum__（每 PV 恰 1 条，title 携
+ *       带 lcp/cls/inp 三档位）；file:// 零网络请求（仅 rum_queue 本地备援）；GoatCounter 不在
+ *       位回退 POST /api/rum（本地 dev 后端回流）。storeLocal 恒启用为备援。
  */
 (function (window, document) {
   'use strict';
@@ -291,6 +292,14 @@
     }
   }
 
+  // W573 E-2：CWV 档位（阈值同文件头：LCP 2.5s / INP 200ms / CLS 0.1）
+  function bucket(kind, v) {
+    if (typeof v !== 'number' || isNaN(v)) { return 'na'; }
+    var th = { lcp: [2.5, 4.0], inp: [0.2, 0.5], cls: [0.1, 0.25] }[kind];
+    if (!th) { return 'na'; }
+    return v <= th[0] ? 'good' : (v <= th[1] ? 'needs-improvement' : 'poor');
+  }
+
   function sendPayload(payload) {
     if (reported) {
       return;
@@ -299,6 +308,25 @@
 
     // 1) 本地备援优先（即使上报失败也不丢数据）
     storeLocal(payload);
+
+    // W573 E-2：上报通道改道——http(s) 且 GoatCounter 在位时走单事件（每 PV 恰 1 条），
+    // file:// 零网络请求（仅 rum_queue 本地备援）；GoatCounter 不在位回退原 /api/rum POST。
+    var isHttp = /^https?:$/.test(location.protocol);
+    if (!isHttp) {
+      return;
+    }
+    if (window.goatcounter && typeof window.goatcounter.count === 'function') {
+      try {
+        window.goatcounter.count({
+          path: '__rum__',
+          title: 'lcp:' + bucket('lcp', payload.metrics.lcp) +
+                 ' cls:' + bucket('cls', payload.metrics.cls) +
+                 ' inp:' + bucket('inp', payload.metrics.inp),
+          event: true
+        });
+      } catch (e) { /* 静默失败 */ }
+      return;
+    }
 
     if (config.debug) {
       console.log('[RUM] send payload:', payload);
