@@ -292,6 +292,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0  # W580 热修复：浅克隆下 git diff $BEFORE $SHA 报 128（首跑实证）
 
       # 页脚版本号 bump / 数据副本 / 纯文档改动跳过（暗色门禁为内容面）
       - name: Skip if footer-only push
