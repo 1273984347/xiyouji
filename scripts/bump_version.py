@@ -26,7 +26,9 @@ import os
 import re
 import sys
 
-_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+# W576 修复（经用户批准）：守卫根此前误算为 scripts/ 自身（与 W550 修复的 generate_csp 同款），
+# 而 AUX_VERSION_DOCS 为仓库根相对路径 → 任何调用必误判「越界」。守卫根应为项目根。
+_W536_ROOT = os.path.realpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
 def _w536_guard_open(path, *a, **k):
     _real = os.path.realpath(path)
