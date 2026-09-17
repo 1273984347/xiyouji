@@ -11,6 +11,13 @@
 ---
 
 
+## W574 W574 可视化页触屏tooltip试点（2026-09-18·v2.3.174）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/language-style-radar.html | W574 | 更新·H试点 touchstart 委托注入 25 行（复用既有 show/hide·零逻辑复制） |
+| scripts/_check_touch_tooltip_e2e.js | W574 | 新增·触屏/鼠标 tooltip 验收 e2e（6 断言） |
+
 ## W573 W573 站内检索服务化与RUM改道（2026-09-18·v2.3.173）
 
 | 文件 | W | 说明 |

@@ -1,0 +1,16 @@
+{
+  "batch": "W574",
+  "version": "v2.3.174",
+  "date": "2026-09-18",
+  "title": "W574 可视化页触屏tooltip试点（方案H） — language-style-radar touchstart委托复用既有tooltip·6/6机判·全量62页推开建议出档",
+  "desc": "可视化页触屏tooltip试点",
+  "head_entry": "2026-09-18（v2.3.174 W574 可视化页触屏tooltip试点（方案H）：机判选最小页 language-style-radar.html（66.6KB/62页池）——touchstart 委托注入 25 行：合成派发 mouseover/mousemove 到 elementFromPoint 命中元素、前触目标派发 mouseout、touchmove 隐藏，复用页面既有 showTooltip/moveTooltip/hideTooltip（零逻辑复制·不改 mouseover 路径·passive 不影响滚动）；e2e 6/6 PASS（tap 图表→tooltip 可见 92 字符·tap 空白→隐藏·重复 tap→重现·鼠标回归不变）；教训三条：改内联脚本必先重生成 CSP 再跑 e2e、星形多边形 bbox 中心可能不在填充区需顶点→重心 50% 取点、命中测试需视口内坐标（视口加高 1700px）；全量 62 页推开建议入档）",
+  "head_sentence": "W574 触屏tooltip试点——委托注入复用既有tooltip·6/6机判·推开建议出档",
+  "changelog_body": "\r\n\r\n> **来源**：方案档《AI 产品运维——体验与服务优化计划（方案 D/E/F/G/H）》§方案 H（docs/superpowers/plans/2026-09-09-service-experience-and-agent-ops-plans.md）。\r\n> - **试点页（机判选取）**：62 页 mouseover-无-touch 池中文件最小者 = site/data/language-style-radar.html（66,600B）。该页 tooltip API 干净（showTooltip/moveTooltip/hideTooltip，:1233-1241），但内容在渲染闭包内（非 datum）——委托方案调整为合成事件派发：touchstart 时 elementFromPoint 取命中元素，合成派发 mouseover/mousemove（闭包处理器原样触发，零逻辑复制），前触目标派发 mouseout、touchmove 隐藏；passive 监听不影响滚动；桌面鼠标环境 touchstart 不触发（行为零变更）。\r\n> - **注入**：25 行 IIFE，hideTooltip 定义后同作用域；mouseover 路径未动一字。\r\n> - **验收（e2e `scripts/_check_touch_tooltip_e2e.js`，6/6 PASS）**：① 触屏 tap 角色多边形 → tooltip visible 且内容 92 字符；② tap 空白区 → 隐藏；③ 再次 tap → 重现；④ mouse.move 回归 → 可见（mouseover 路径未变）。取点算法：多边形顶点→重心 50% 处 + getScreenCTM 换算视口坐标 + elementFromPoint 命中 cursor:pointer 断言（星形 bbox 中心不可靠）。\r\n> - **教训三条（如实）**：① 改内联脚本后必须先 generate_csp 重生成再跑 e2e——本批首跑即因哈希失配整段脚本被 CSP 拒（W573 同款教训二犯）；② 星形多边形 bbox 中心可能落在填充区外，确定性取点须用顶点→重心插值；③ 命中测试坐标必须在视口内（y=1217 > 视口 1000 时 elementFromPoint 返回 null）——e2e 视口加高至 1700px。\r\n> - **推开建议（方案 H 全量 62 页）**：注入本身可复制（同一 IIFE 形态），但各页 tooltip 函数名/元素 id 存在差异（W462 统一样式后多数同名 showTooltip/hideTooltip，执行时逐页确认），单页实测 = 注入 1 次 Edit（约 3 分钟）+ e2e 适配取点选择器（约 7-12 分钟/页，图形元素差异）≈ 10-15 分钟/页，62 页 ≈ 1.5-2 个工作日，建议单批次批量执行 + 逐页 e2e 断言。\r\n> - **验证**：generate_csp 重生成 234 页 1189 哈希 0 漂移；check_screenshot_gates 全站 235 FAIL 0；verify_delivery 核心全绿；线上触屏体验为部署后人工验证（真机访问该页 tap 图形元素）。\r\n> - **文件**：详见 scripts/output/file-index.md W574 段。\r\n> - **状态**：已落地（本批随 W574 提交并 push origin/main）。",
+  "milestone_block": "- **v2.3.174 W574 可视化页触屏tooltip试点**：62 页池最小页 language-style-radar——touchstart 委托 25 行复用既有 tooltip（合成 mouseover/mouseout·零逻辑复制·passive）·e2e 6/6（tap 显隐/重复 tap/鼠标回归）·全量推开建议 10-15 分钟/页 ×62 页入档。",
+  "agents_note": "2026-09-18（v2.3.174 W574）可视化页触屏tooltip试点：无 § 结构性变更（方案H 试点——language-style-radar touchstart 委托 25 行复用既有 show/hide·e2e 6/6·教训三条：CSP 先 regen 再 e2e/星形多边形顶点→重心取点/命中测试需视口内坐标），仅版本脚注同步",
+  "file_index_rows": [
+    "| site/data/language-style-radar.html | W574 | 更新·H试点 touchstart 委托注入 25 行（复用既有 show/hide·零逻辑复制） |",
+    "| scripts/_check_touch_tooltip_e2e.js | W574 | 新增·触屏/鼠标 tooltip 验收 e2e（6 断言） |"
+  ]
+}

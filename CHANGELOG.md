@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W573），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W574），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,17 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.174（2026-09-18）：W574 可视化页触屏tooltip试点（方案H） — language-style-radar touchstart委托复用既有tooltip·6/6机判·全量62页推开建议出档
+
+> **来源**：方案档《AI 产品运维——体验与服务优化计划（方案 D/E/F/G/H）》§方案 H（docs/superpowers/plans/2026-09-09-service-experience-and-agent-ops-plans.md）。
+> - **试点页（机判选取）**：62 页 mouseover-无-touch 池中文件最小者 = site/data/language-style-radar.html（66,600B）。该页 tooltip API 干净（showTooltip/moveTooltip/hideTooltip，:1233-1241），但内容在渲染闭包内（非 datum）——委托方案调整为合成事件派发：touchstart 时 elementFromPoint 取命中元素，合成派发 mouseover/mousemove（闭包处理器原样触发，零逻辑复制），前触目标派发 mouseout、touchmove 隐藏；passive 监听不影响滚动；桌面鼠标环境 touchstart 不触发（行为零变更）。
+> - **注入**：25 行 IIFE，hideTooltip 定义后同作用域；mouseover 路径未动一字。
+> - **验收（e2e `scripts/_check_touch_tooltip_e2e.js`，6/6 PASS）**：① 触屏 tap 角色多边形 → tooltip visible 且内容 92 字符；② tap 空白区 → 隐藏；③ 再次 tap → 重现；④ mouse.move 回归 → 可见（mouseover 路径未变）。取点算法：多边形顶点→重心 50% 处 + getScreenCTM 换算视口坐标 + elementFromPoint 命中 cursor:pointer 断言（星形 bbox 中心不可靠）。
+> - **教训三条（如实）**：① 改内联脚本后必须先 generate_csp 重生成再跑 e2e——本批首跑即因哈希失配整段脚本被 CSP 拒（W573 同款教训二犯）；② 星形多边形 bbox 中心可能落在填充区外，确定性取点须用顶点→重心插值；③ 命中测试坐标必须在视口内（y=1217 > 视口 1000 时 elementFromPoint 返回 null）——e2e 视口加高至 1700px。
+> - **推开建议（方案 H 全量 62 页）**：注入本身可复制（同一 IIFE 形态），但各页 tooltip 函数名/元素 id 存在差异（W462 统一样式后多数同名 showTooltip/hideTooltip，执行时逐页确认），单页实测 = 注入 1 次 Edit（约 3 分钟）+ e2e 适配取点选择器（约 7-12 分钟/页，图形元素差异）≈ 10-15 分钟/页，62 页 ≈ 1.5-2 个工作日，建议单批次批量执行 + 逐页 e2e 断言。
+> - **验证**：generate_csp 重生成 234 页 1189 哈希 0 漂移；check_screenshot_gates 全站 235 FAIL 0；verify_delivery 核心全绿；线上触屏体验为部署后人工验证（真机访问该页 tap 图形元素）。
+> - **文件**：详见 scripts/output/file-index.md W574 段。
+> - **状态**：已落地（本批随 W574 提交并 push origin/main）。
 ### v2.3.173（2026-09-18）：W573 站内检索服务化与RUM改道（方案E） — 772篇文档+233页面全站目录索引离线可搜·search两页开发者文案清除·rum.js改道GoatCounter单事件
 
 > **来源**：方案档《AI 产品运维——体验与服务优化计划（方案 D/E/F/G/H）》§方案 E（docs/superpowers/plans/2026-09-09-service-experience-and-agent-ops-plans.md）。
