@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>404 · 此页不在航线上 — 详解西游记</title>
+<!--
+  W572 D-2 自定义 404 页（GitHub Pages 站点根 404.html 约定）
+  自包含：内联样式（tokens 字面值 --paper-warm #F1EBDD / --ink #23201A / --ink-soft #6B6455 / --accent #C8463A），
+  零 JS、零外域、零图片；入口四链接（首页/数据看板/标签云/全文检索）。
+-->
+<style>
+  /* e-track-exempt: chart-data-colors 9 处 —— W572 D-2 自包含 404 页（无 tokens.css 链接，字面值为 tokens.css 三色直译，有意设计） */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F1EBDD;
+    color: #23201A;
+    font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
+    padding: 24px;
+  }
+  .card {
+    max-width: 560px;
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #E3DBC8;
+    border-radius: 8px;
+    padding: 48px 40px;
+    text-align: center;
+  }
+  .code {
+    font-size: 64px;
+    font-weight: 700;
+    color: #C8463A;
+    letter-spacing: 4px;
+    line-height: 1.2;
+  }
+  h1 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 16px 0 8px;
+  }
+  p { font-size: 14px; color: #6B6455; line-height: 1.8; }
+  .entries {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  .entries a {
+    display: inline-block;
+    padding: 9px 18px;
+    border: 1px solid #C8463A;
+    border-radius: 999px;
+    color: #C8463A;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .entries a:hover { background: #C8463A; color: #FFFFFF; }
+  .foot { margin-top: 24px; font-size: 12px; color: #6B6455; }
+</style>
+</head>
+<body>
+  <main class="card">
+    <div class="code">404</div>
+    <h1>此页不在航线上</h1>
+    <p>你要找的页面不存在，或已随版本更迭迁往他处。<br>可从下列入口继续取经之旅。</p>
+    <nav class="entries">
+      <a href="index.html">首页</a>
+      <a href="dashboard.html">数据看板</a>
+      <a href="data/tag-cloud.html">标签云</a>
+      <a href="data/text-search.html">全文检索</a>
+    </nav>
+    <p class="foot">详解西游记 · 一源多形数字人文可视化解读</p>
+  </main>
+
+<div style="padding:16px 8px;text-align:center"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener">反馈</a></div>
+</body>
+</html>

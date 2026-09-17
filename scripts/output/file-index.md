@@ -11,6 +11,25 @@
 ---
 
 
+## W572 W572 站点可达性与信任信号（2026-09-18·v2.3.172）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/superpowers/plans/2026-09-09-service-experience-and-agent-ops-plans.md | W572 | 新增·体验与服务优化计划（方案D-H v2+方案R占位·三问已裁决） |
+| docs/superpowers/plans/2026-09-17-agent-web-redesign-plan.md | W572 | 新增·agent-web重设计方案R v2（自研单引擎·2026-09-18暂停） |
+| scripts/_audit_service_experience.py | W572 | 新增·体验与服务基线审计（只读·S/A键值） |
+| scripts/_audit_agentweb_baseline.py | W572 | 新增·agent-web重设计基线审计（只读·B键值） |
+| scripts/_fix_site_links.py | W572 | 新增·D-1越界锚链接改写（262处/132文件+A1_DOC_MAP前缀+手工清单裁决） |
+| scripts/_add_feedback_link.py | W572 | 新增·D-3反馈入口四类形态注入（A85/B59/C77/D14） |
+| scripts/_collapse_index_footer.py | W572 | 新增·D-4首页页脚收敛（bump正则兼容形态） |
+| site/404.html | W572 | 新增·自定义404页（自包含·四入口·零JS零外域） |
+| site/sitemap.xml | W572 | 更新·追加404.html（228→229条） |
+| site/index.html | W572 | 更新·D-3反馈入口+D-4页脚40版本号收敛为1组 |
+| site/data/journey-spacetime.html | W572 | 更新·D-1 A1_DOC_MAP消费点前缀改写（:1551×2） |
+| site/_template.html | W572 | 更新·D-1手工清单2项改站内路径 |
+| site/（批量133文件） | W572 | 更新·D-1越界锚链接改写为GitHub blob/tree |
+| site/（批量235文件） | W572 | 更新·D-3页脚反馈入口注入 |
+
 ## W571 W571 复审修正（2026-09-16·v2.3.171）
 
 | 文件 | W | 说明 |

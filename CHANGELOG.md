@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W571），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W572），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.172（2026-09-18）：W572 站点可达性与信任信号（方案D） — 越界锚链接264→0改写GitHub blob/tree·自定义404页·全站反馈入口235/235·首页页脚收敛
+
+> **来源**：方案档《AI 产品运维——体验与服务优化计划（方案 D/E/F/G/H）》§方案 D（docs/superpowers/plans/2026-09-09-service-experience-and-agent-ops-plans.md，本批随批入库）；方案 R 档（agent-web 重设计 v2，2026-09-18 暂停中，随批入库）。
+> - **D-1 越界锚链接 264→0**：审计脚本 S02 实测 264 处/133 文件（根 CHANGELOG.md 56 + scripts/output/ 54 + docs/ 各目录 + 模板壳）——部署根是 site/，线上全部 404；漏网根因：第 21 门禁断言根是仓库而非部署根语义。处置：262 处/132 文件机械改写为 GitHub blob/tree（当前页跳转，循 curated.html 先例 57 条），journey-spacetime.html A1_DOC_MAP 消费点前缀字面量（:1551）×2 改写（完整 URL 使第 21 门禁按 http 前缀跳过、保持绿），手工清单 2 项裁决（_template.html ../index.html、../dashboard.html → 站内相对路径）。审计复跑 S02=0。
+> - **D-2 自定义 404 页**：site/404.html 新增（自包含内联 tokens 字面值样式、零 JS 零外域、四入口链接：首页/看板/标签云/全文检索），sitemap.xml 追加至 229 条（第 7 门禁差集口径，verify_delivery 禁改故走 sitemap 而非豁免）；线上呈现待部署后人工验证。
+> - **D-3 全站页脚反馈入口**：四类形态分派 A=85（页脚导航 nav）/B=59（en .footer-index）/C=77（其他页脚容器）/D=14（无页脚 </body> 前一行注入），**235/235 全覆盖**（含新增 404.html，较方案基线 234 多 1 页系本批自产）；指向既有 issue 模板（W499 bug_report/feature_request/question）。审计复跑 S06 /issues=235。
+> - **D-4 首页页脚收敛**：index.html footer-meta（40 版本号 + 46 W 号工程日志，v2.3.34 以来长链）收敛为「v2.3.172 · W572 + 完整更新日志链接（GitHub blob）」——保留「vX.Y.Z · W###」链首形态，bump_version.py:150-151 替换正则兼容（禁改门禁脚本约束）；en/index.html 1 token 无长链按条件跳过（登记）。
+> - **验证**：generate_csp 重生成 234 页 1189 哈希 0 漂移（journey-spacetime 内联 JS 已变）；ruff 5 个新脚本 All checks passed；审计复跑 S02=0/S06=235/S11 version_tokens=1；check_screenshot_gates 全站 235/235 FAIL 0（148s）；lint_links 全仓 10691 链接 130 broken 均为存量（CHANGELOG-ARCHIVE/docs-archive 相对路径与 skills/ 退役遗留——与 W572 改动面零交集 0 新增；方案 D-1 验收「0 broken」系对第 6 门禁 docs/01 口径误引，如实修正为「0 新增」）；verify_delivery 核心全绿；改写 URL 线上可达性（5 条 curl）与 404 呈现因本地沙箱无外网出口（curl 000/WebFetch TLS 失败）转部署后人工验证。
+> - **文件**：详见 scripts/output/file-index.md W572 段。
+> - **状态**：已落地（本批随 W572 提交并 push origin/main）。
 ### v2.3.171（2026-09-16）：W571 复审修正 — W569一刀切反白误伤光晕页回归修复·审计器光晕感知·en/ne钳位补齐·诚实基线修正
 
 > **来源**：W569/W570 交付后的对抗性复审（用户「review 一遍」→「确定都做完了吗」→「继续」），按保真度地图逐项取证。
