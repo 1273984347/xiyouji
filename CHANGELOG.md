@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W581），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W582），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.182（2026-09-19）：W582 暗色存量修复阶段一 — 24种离散hex填充映射（1148实例覆盖）·lowContrast 16→0·invisible 302→259
+
+> **来源**：W579 暗色门禁基线 318 处/44 页存量的修复批（用户「按顺序做」指令第 2 项）。
+> - **修法（设计三查合规·W571）**：tokens.css 暗色段新增 24 种离散 hex 填充→暖纸调亮映射——① 属性选择器 `svg [fill="<原值>" i]` 精确匹配（fill=none/渐变 url() 不受影响）；② 仅 `html[data-theme="dark"]` 生效·浅色零改动；③ 逐色独立映射非一刀切，向暖白 (242,235,220) 二分混合至目标亮度 0.30·保色相。
+> - **实测**：invisible 302→259、lowContrast 16→0（全清零）、缺陷页 44→37；属性精确匹配实际覆盖 1148 处实例（审计样本计 302 有上限）；残余 259=连续色阶插值页（relationships/heatmaps 族·每 t 值一色串·CSS 逐值不可覆盖）——登记**阶段二按页调尺设计批**（需逐图保序调映射·设计敏感）。
+> - **基线**：check_dark_state_gate --update-baseline 刷新至修复后状态（163 行·只增即 FAIL 守住改善面）；暗色门禁 OK。
+> - **验证**：generate_csp --check 0 漂移（CSS 分发不动脚本哈希）；inline_css --force 226 页分发；verify_delivery 核心全绿；check_screenshot_gates 235 页 FAIL 0。
+> - **文件**：详见 scripts/output/file-index.md W582 段。
+> - **状态**：已落地（本批随 W582 提交并 push origin/main）。
 ### v2.3.181（2026-09-19）：W581 触屏tooltip EN镜像62页推开+注入捕获阶段升级 — d3.drag stopImmediatePropagation免疫·TouchEvent确定性e2e·同族潜伏缺陷2页根治
 
 > **来源**：W575 批登记的 EN 站 62 镜像页边界（方案 H 收尾批），2026-09-19 用户裁决按序执行。

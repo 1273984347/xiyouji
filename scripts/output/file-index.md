@@ -11,6 +11,16 @@
 ---
 
 
+## W582 W582 暗色存量修复阶段一（2026-09-19·v2.3.182）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/tokens.css | W582 | 更新·暗色段24种离散hex填充→暖纸调亮映射（属性精确匹配·保色相） |
+| site/（批量226页·inline_css分发） | W582 | 更新·tokens暗色映射内联分发 |
+| scripts/output/render-state-audit-baseline.jsonl | W582 | 更新·基线刷新至修复后状态（invisible 259/37页·lowContrast 0） |
+| scripts/_w582_scan_attrs.js | W582 | 新增·44缺陷页暗色fill属性值收集器 |
+| scripts/_w582_gen_css.py | W582 | 新增·暗色映射CSS生成器（二分混合至目标亮度·保色相） |
+
 ## W581 W581 触屏tooltip EN镜像62页推开+注入捕获阶段升级（2026-09-19·v2.3.181）
 
 | 文件 | W | 说明 |
