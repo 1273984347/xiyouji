@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W583），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W584），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.184（2026-09-19）：W584 O1审计器并行化 — state内3 worker并发共享context·S2×163实测2m41s（原约12min·4.5×）·163页与基线零差异
+
+> **来源**：W577 复盘报告 WBS 表 O1「审计器跑批并行化（3 context 并行）」，2026-09-19 用户「按顺序做」指令第 4 项。
+> - **实现（约 10 行）**：`_audit_render_states.js` 在每个 state 内以 `--conc`（缺省 3）个并发 worker 共享同一 context 多 page 并行审计；jsonl 行顺序无关（消费方均按键读取）；`--conc 1` 等价旧串行。state 间仍串行（每态一次 emulateMedia/viewport 切换）。
+> - **等价性验证**：S2-desktop-dark × 163 图表页并发跑批与基线逐页对账（pageerror/lowContrast/invisible/isDarkBg 四元组）**零差异**。
+> - **实测**：2m41s（原串行同口径约 12min·4.5×）；全量 4 态 652 行审计成本同比约 35min→8min。
+> - **文件**：详见 scripts/output/file-index.md W584 段。
+> - **状态**：已落地（本批随 W584 提交并 push origin/main）。
 ### v2.3.183（2026-09-19）：W583 O3契约对账门禁评估落地 — 运行时产量冒烟file://路径·P04类拦截·自测6/6+实弹负样本实证
 
 > **来源**：W577 复盘报告 WBS 表 O3「契约对账门禁评估（生成器 schema vs 页面消费字段的字段级对账并入第 25 门禁或新门禁）」，2026-09-19 用户「按顺序做」指令第 3 项。
