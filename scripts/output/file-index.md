@@ -11,6 +11,21 @@
 ---
 
 
+## W581 W581 触屏tooltip EN镜像62页推开+注入捕获阶段升级（2026-09-19·v2.3.181）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/（批量62页） | W581 | 更新·方案H EN镜像推开 touchstart 委托注入（幂等标记 W581）+capture 升级 |
+| site/en/ecology.html | W581 | 修复·tooltip门面补 move 方法（8处直调 .style·zh 同款镜像） |
+| site/en/81-hardships.html | W581 | 修复·动态选择器空选区（tip元素搬至捕获脚本前）+W558家族CSS缺分号 |
+| site/en/global-pattern.html | W581 | 修复·补缺失 #tooltip 容器元素（zh 同款） |
+| site/data/（批量61页） | W581 | 更新·注入捕获阶段升级（d3.drag stopImmediatePropagation 免疫） |
+| site/data/language-style-radar.html | W581 | 更新·W574试点块捕获阶段升级（8空格缩进变体） |
+| scripts/_w581_inject_touchtip.py | W581 | 新增·EN池同构注入器（幂等标记 W581） |
+| scripts/_w581_pool_scan.py | W581 | 新增·EN池枚举+同族静态扫描（含动态选择器变体盲区教训） |
+| scripts/_w581_upgrade_capture.py | W581 | 新增·124页注入捕获阶段统一升级（多行锚点精确替换） |
+| scripts/_w575_touchtip_e2e.js | W581 | 更新·e2e 语义升级（TouchEvent 同 tick 确定性驱动+--dir/--marker 参数+W575_EVENTS 事件流取证钩子） |
+
 ## W580 W580 CI 红灯热修复（2026-09-18·v2.3.180）
 
 | 文件 | W | 说明 |
