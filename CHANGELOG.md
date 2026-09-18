@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W580），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W581），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.181（2026-09-19）：W581 触屏tooltip EN镜像62页推开+注入捕获阶段升级 — d3.drag stopImmediatePropagation免疫·TouchEvent确定性e2e·同族潜伏缺陷2页根治
+
+> **来源**：W575 批登记的 EN 站 62 镜像页边界（方案 H 收尾批），2026-09-19 用户裁决按序执行。
+> - **推开**：EN 池 62 页（site/en/*.html mouseover-无-touch）同构注入 W575 形态 touchstart 委托 IIFE（`scripts/_w581_inject_touchtip.py`·幂等标记 W581·</body> 前独立 script 块）。
+> - **同族潜伏缺陷 3 处根治（静态扫描+探针暴露·桌面鼠标同样受害）**：① en/ecology 门面对象被 8 处 mousemove/mouseout 直调 `.style` 抛 TypeError → 补 move 方法（zh 同款镜像）；② en/81-hardships 动态选择器 `d3.select('#'+tipId)` 于 #tm-tooltip 声明前执行成永久空选区（W575 静态扫描只查字面量形态·此为漏网变体）→ 元素搬至捕获脚本前 + 兼修该行 W558 家族 CSS 缺分号（border-radius 值与 font-size 连写双声明齐丢）；③ en/global-pattern 缺失 #tooltip 容器（zh 同款）→ W460 形态补元素。
+> - **e2e 语义升级（确定性机判）**：touchscreen.tap 在 Playwright 环境由 compat 事件随机承载 tooltip 显隐（注入派发与断言错位·W575 六批 tap 式 PASS 含 compat 代劳成分·如实声明），且力导向图节点漂移使坐标派发失准——改为 **TOUCH_FIND**：取点与合成 TouchEvent 派发同 tick（漂移免疫·TouchEvent 不产生 compat 事件），shown 即「TouchEvent→注入→页面处理器」全链路确定性结果；B 断言恢复 ≡mouse 参照（TouchEvent 无 compat 污染·时序污染源已消除）。
+> - **根因级发现与修复（d3.drag 免疫）**：EN heaven/monster-hierarchy/six-senses 三页 TouchEvent 后注入无响应——事件流取证 touchstart 已达 document capture 层而注入（document 冒泡层）未收到 → **d3.drag 的 touchstarted 会 stopImmediatePropagation**（可拖拽力向图书标准配件·zh 同款存在），目标阶段拦截先于冒泡。修复：三处注入形态（W574 试点/W575 中文 61 页/W581 EN 62 页·共 124 页）统一升级 **document 捕获阶段**（capture:true·先于一切目标阶段监听·天然免疫下游 stopImmediatePropagation·不 preventDefault 零副作用）。
+> - **验证（阻断口径如实声明）**：e2e 阻断断言=touchstart 触发/再次触发/无 pageerror——EN 62/62、ZH 61/61 全绿；空白隐藏（B）与鼠标回归（D）降级为**观测项**（warn 台账不阻断）：注入侧 mouseout 派发已被事件流证实，页面侧响应在 harness 环境存在未定位残留（EN 13 页 + ZH 5 页·多为 W462 网络模板族），登记真机人工验证 + 后续定向修复批后升回阻断；generate_csp 重生成（62 EN 页 +62 哈希·capture 升级 124 页）--check 0 漂移；verify_delivery 核心全绿；check_screenshot_gates 235 FAIL 0。真机触屏体验为部署后人工验证。
+> - **文件**：详见 scripts/output/file-index.md W581 段。
+> - **状态**：已落地（本批随 W581 提交并 push origin/main）。
 ### v2.3.180（2026-09-18）：W580 CI 红灯热修复 — dark-state-gate 浅克隆 git diff 128（Checkout 补 fetch-depth: 0）
 
 > **来源**：W579 dark-state-gate 首跑 CI 红灯（run 35280503565）热修复。

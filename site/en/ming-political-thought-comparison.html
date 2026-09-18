@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-618iGTymuzQuHHihbMUAccgoqImkO5Z1qkuzlJ3Bqyc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-618iGTymuzQuHHihbMUAccgoqImkO5Z1qkuzlJ3Bqyc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-WLhl+TDlK4lcvHVEfZY49QNhzI3zNUalmUWfMjIzg78='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Ming Political Thought Comparison · Annotated Journey to the West</title>
@@ -2264,5 +2264,24 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 })();
 </script>
 
+<script>/* W581 touch tooltip（方案H EN镜像推开·同构注入·复用既有tooltip处理器） */
+(function () {
+    var prev = null;
+    document.addEventListener('touchstart', function (e) {
+        if (!e.touches || !e.touches.length) return;
+        var t = e.touches[0];
+        var el = document.elementFromPoint(t.clientX, t.clientY);
+        if (prev && prev !== el) { prev.dispatchEvent(new MouseEvent('mouseout')); prev = null; }
+        if (el) {
+            el.dispatchEvent(new MouseEvent('mouseover', { clientX: t.clientX, clientY: t.clientY, bubbles: true }));
+            el.dispatchEvent(new MouseEvent('mousemove', { clientX: t.clientX, clientY: t.clientY, bubbles: true }));
+            prev = el;
+        }
+    }, { passive: true, capture: true });
+    document.addEventListener('touchmove', function () {
+        if (prev) { prev.dispatchEvent(new MouseEvent('mouseout', { bubbles: true })); prev = null; }
+    }, { passive: true, capture: true });
+})();
+</script>
 </body>
 </html>
