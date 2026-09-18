@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W582），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W583），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.183（2026-09-19）：W583 O3契约对账门禁评估落地 — 运行时产量冒烟file://路径·P04类拦截·自测6/6+实弹负样本实证
+
+> **来源**：W577 复盘报告 WBS 表 O3「契约对账门禁评估（生成器 schema vs 页面消费字段的字段级对账并入第 25 门禁或新门禁）」，2026-09-19 用户「按顺序做」指令第 3 项。
+> - **评估结论**：字段级静态对账否决（W560 实证静态解析仅 17/38 页可解析·动态访问与可选链误报面不可控·且与第 25 门禁的静态确定性口径冲突）；运行时字段级对账列远期（全局变量名不统一·EMBEDDED_DATA 仅 46/86 页使用）；**采纳「运行时产量冒烟」**——file:// 加载全部含 svg 页面，pageerror==0 + 图形产量 ≥基线×50% 双阻断，端到端覆盖契约错位的两种症状（运行时 TypeError、静默零渲染）。
+> - **实现**：`scripts/check_contract_smoke.js`（163 页 zh+en 含 svg 口径·滚动穿透·基线 `contract-smoke-baseline.jsonl`·--update-baseline/--self-test）；挂 dark-state-gate job 新 step（file:// 无需 server·与暗色门禁 http 路径互补成双路径覆盖——W565 教训「部署 fetch 与 file:// 是两条独立覆盖面」的守门化）。
+> - **验证**：--self-test 6 负样本 6/6；实弹负样本（临时页 EMBEDDED_DATA.config 缺失→pageerror→门禁 FAIL→移除复绿）；全量 163 页基线生成并全绿。评估档：docs/superpowers/plans/2026-09-19-o3-contract-gate-evaluation.md。
+> - **文件**：详见 scripts/output/file-index.md W583 段。
+> - **状态**：已落地（本批随 W583 提交并 push origin/main）。
 ### v2.3.182（2026-09-19）：W582 暗色存量修复阶段一 — 24种离散hex填充映射（1148实例覆盖）·lowContrast 16→0·invisible 302→259
 
 > **来源**：W579 暗色门禁基线 318 处/44 页存量的修复批（用户「按顺序做」指令第 2 项）。
