@@ -353,6 +353,11 @@ jobs:
         if: steps.scope.outputs.run != 'false'
         run: node scripts/check_dark_state_gate.js
 
+      # W583 契约冒烟：file:// EMBEDDED 路径（与暗色门禁的 http 路径互补）——P04 类契约错位拦截
+      - name: Contract smoke (file:// EMBEDDED path)
+        if: steps.scope.outputs.run != 'false'
+        run: node scripts/check_contract_smoke.js
+
       - name: Summarize dark gate
         if: always() && steps.scope.outputs.run != 'false'
         run: |

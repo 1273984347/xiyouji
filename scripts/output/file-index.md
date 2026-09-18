@@ -11,6 +11,15 @@
 ---
 
 
+## W583 W583 O3契约对账门禁评估落地（2026-09-19·v2.3.183）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_contract_smoke.js | W583 | 新增·契约冒烟门禁（file://EMBEDDED路径·pageerror+图形产量双阻断·--self-test 6/6+--update-baseline） |
+| scripts/output/contract-smoke-baseline.jsonl | W583 | 新增·163页图形产量基线 |
+| .github/workflows/screenshot-review.yml | W583 | 挂载·dark-state-gate job 增 Contract smoke step（file://互补http路径） |
+| docs/superpowers/plans/2026-09-19-o3-contract-gate-evaluation.md | W583 | 新增·O3评估档（三方案对比·采纳C运行时产量冒烟·残余边界） |
+
 ## W582 W582 暗色存量修复阶段一（2026-09-19·v2.3.182）
 
 | 文件 | W | 说明 |
