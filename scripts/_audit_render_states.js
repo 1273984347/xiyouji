@@ -55,6 +55,12 @@ const scopeCharts = (() => {
   return i > -1 && process.argv[i + 1] === 'charts';
 })();
 
+// W584 O1：state 内并发 worker 数（默认 3——3 个 page 并行共享 context·1 等价旧串行）
+const CONC = (() => {
+  const i = process.argv.indexOf('--conc');
+  return i > -1 ? Math.max(1, parseInt(process.argv[i + 1], 10) || 3) : 3;
+})();
+
 // 相对亮度（WCAG）
 function lum(cssColor) {
   const m = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(cssColor || '');
@@ -184,20 +190,26 @@ async function main() {
     pages = pages.filter(p => fs.readFileSync(path.join(SITE, p), 'utf8').includes('<svg'));
   }
   pages = pages.slice(0, limit);
-  console.log(`pages=${pages.length} states=${STATES.length}${scopeCharts ? ' scope=charts' : ''}`);
+  console.log(`pages=${pages.length} states=${STATES.length}${scopeCharts ? ' scope=charts' : ''} conc=${CONC}`);
   const browser = await chromium.launch();
   const out = fs.createWriteStream(OUT, { encoding: 'utf-8' });
   let n = 0;
   for (const state of STATES) {
     const context = await browser.newContext({ viewport: state.viewport });
-    await context.emulateMedia?.({ colorScheme: state.colorScheme }).catch?.(() => {});
     try { await context.emulateMedia({ colorScheme: state.colorScheme }); } catch {}
-    for (const pageRel of pages) {
-      const row = await auditState(context, pageRel, state);
-      out.write(JSON.stringify(row) + '\n');
-      n++;
-      if (n % 100 === 0) console.log(`  ${n} 行完成`);
-    }
+    // W584 O1：state 内 CONC 个并发 worker 共享 context（多 page 并行·jsonl 行顺序无关）
+    let idx = 0;
+    const worker = async () => {
+      while (true) {
+        const i = idx++;
+        if (i >= pages.length) break;
+        const row = await auditState(context, pages[i], state);
+        out.write(JSON.stringify(row) + '\n');
+        n++;
+        if (n % 100 === 0) console.log(`  ${n} 行完成`);
+      }
+    };
+    await Promise.all(Array.from({ length: Math.min(CONC, pages.length) }, worker));
     await context.close();
   }
   out.end();
