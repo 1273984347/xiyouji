@@ -1,0 +1,20 @@
+{
+  "batch": "W582",
+  "version": "v2.3.182",
+  "date": "2026-09-19",
+  "title": "W582 暗色存量修复阶段一 — 24种离散hex填充映射（1148实例覆盖）·lowContrast 16→0·invisible 302→259",
+  "desc": "暗色存量修复阶段一",
+  "head_entry": "2026-09-19（v2.3.182 W582 暗色存量修复阶段一：tokens.css 暗色段新增 24 种离散 hex 填充→暖纸调亮映射（属性选择器精确匹配 fill 值·向暖白混合二分求解至目标亮度 0.30·保色相·fill=none/渐变/连续色阶不受影响·浅色零改动）·inline_css --force 分发 226 页；实测 invisible 302→259·lowContrast 16→0 全清零·缺陷页 44→37（残余 259=连续色阶插值页·登记阶段二按页调尺设计批）；审计基线刷新至修复后状态（只增即 FAIL 守住改善面）；暗色门禁 OK）",
+  "head_sentence": "W582 暗色存量修复阶段一——24种hex映射·lowContrast清零·invisible 302→259",
+  "milestone_block": "- **v2.3.182 W582 暗色存量修复阶段一**：tokens.css 暗色段 24 种离散 hex 填充映射（属性精确匹配·保色相调亮）·lowContrast 16→0·invisible 302→259·缺陷页 44→37（残余=连续色阶页·阶段二登记）·基线刷新守住改善面。",
+  "agents_note": "2026-09-19（v2.3.182 W582）暗色存量修复阶段一：无 § 结构性变更（tokens.css 暗色段 24 种离散 hex 填充映射——属性精确匹配·保色相调亮·浅色零改动；lowContrast 16→0·invisible 302→259·残余连续色阶页登记阶段二·基线刷新），仅版本脚注同步",
+  "changelog_body": "\r\n\r\n> **来源**：W579 暗色门禁基线 318 处/44 页存量的修复批（用户「按顺序做」指令第 2 项）。\r\n> - **修法（设计三查合规·W571）**：tokens.css 暗色段新增 24 种离散 hex 填充→暖纸调亮映射——① 属性选择器 `svg [fill=\"<原值>\" i]` 精确匹配（fill=none/渐变 url() 不受影响）；② 仅 `html[data-theme=\"dark\"]` 生效·浅色零改动；③ 逐色独立映射非一刀切，向暖白 (242,235,220) 二分混合至目标亮度 0.30·保色相。\r\n> - **实测**：invisible 302→259、lowContrast 16→0（全清零）、缺陷页 44→37；属性精确匹配实际覆盖 1148 处实例（审计样本计 302 有上限）；残余 259=连续色阶插值页（relationships/heatmaps 族·每 t 值一色串·CSS 逐值不可覆盖）——登记**阶段二按页调尺设计批**（需逐图保序调映射·设计敏感）。\r\n> - **基线**：check_dark_state_gate --update-baseline 刷新至修复后状态（163 行·只增即 FAIL 守住改善面）；暗色门禁 OK。\r\n> - **验证**：generate_csp --check 0 漂移（CSS 分发不动脚本哈希）；inline_css --force 226 页分发；verify_delivery 核心全绿；check_screenshot_gates 235 页 FAIL 0。\r\n> - **文件**：详见 scripts/output/file-index.md W582 段。\r\n> - **状态**：已落地（本批随 W582 提交并 push origin/main）。",
+  "agents_note_x": "",
+  "file_index_rows": [
+    "| site/tokens.css | W582 | 更新·暗色段24种离散hex填充→暖纸调亮映射（属性精确匹配·保色相） |",
+    "| site/（批量226页·inline_css分发） | W582 | 更新·tokens暗色映射内联分发 |",
+    "| scripts/output/render-state-audit-baseline.jsonl | W582 | 更新·基线刷新至修复后状态（invisible 259/37页·lowContrast 0） |",
+    "| scripts/_w582_scan_attrs.js | W582 | 新增·44缺陷页暗色fill属性值收集器 |",
+    "| scripts/_w582_gen_css.py | W582 | 新增·暗色映射CSS生成器（二分混合至目标亮度·保色相） |"
+  ]
+}

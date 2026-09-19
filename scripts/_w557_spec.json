@@ -1,0 +1,29 @@
+{
+  "batch": "W557",
+  "version": "v2.3.157",
+  "date": "2026-09-06",
+  "title": "W557 全站复审完成（232页·98组）— pass93/warn62/fail77·contentavoid幻影隐藏全局根治·kpi-row基类补齐136页",
+  "desc": "全站复审完成+类级修复",
+  "head_entry": "2026-09-06（v2.3.157 W557 全站复审完成：232 页 98 组 judge 审查全量覆盖（pass 93/warn 62/fail 77）；两项类级根因修复——contentavoid getBBox 幻影隐藏全局根治 20 页（探针验证行标签复活）+ kpi-row 统计条基类补齐 136 页；其余 FAIL 逐项登记 W558 修复清单）",
+  "head_sentence": "W557 全站复审完成——232页全量·两类根因修复·W558清单",
+  "changelog_body": "\r\n\r\n> **来源**：方案 B 剩余审查量一次性执行完毕（承接 W554 阶段一管线与恢复指令），用户确认启动。232 页 × 98 组 judge 审读（8 判据·3 并发·逐批落盘）。\r\n> - **结果**：页级判定 pass 93 / warn 62 / fail 77（worst-of 合并）；覆盖率对账 232/232（missing=[]，final-summary.json）。\r\n> - **类级修复一（contentavoid 幻影隐藏全局根治）**：W553 实证的 getBBox 局部坐标系幻影重叠隐藏标签缺陷在其余 15 页持续发作（页面级 data-audit-skip≠类绝迹）——20 页 contentavoid 补丁内 getBBox→getBoundingClientRect 全局根治，探针验证 4 样本页可见 svg 文本 97-152（修复前行标签仅 1 条），残余 display:none 为真实重叠合规隐藏。\r\n> - **类级修复二（统计条纵向裸排基类补齐）**：30+ 页「KPI 统计条纵向纯文本堆叠」同源——页面用 .kpi-row/.kpi-card/.label/.value/.desc 标记但基类布局规则历史丢失（仅剩 alt-* 变体）；136 缺失页注入 7 行基类 CSS（纯 token 引用），11 已有页跳过；探针验证渲染为 6 列卡片网格。\r\n> - **登记 W558**：其余 FAIL 按根因分类登记逐项修复清单（桑基节点几何/轴边距裁切/标签无避让/数据渲染缺失/表格挤压五类，约 55 页，证据切片号存 verdicts-page.jsonl），报告 §4 给出按类批量修的执行口径建议。\r\n> - **验证（当批实跑）**：check_screenshot_gates 全量 234 页 FAIL 0；verify_delivery 25 门禁核心全绿；check_js_syntax 232 文件全过；CSP 0 漂移；两项修复各配渲染探针。\r\n> - **文件**：site/ 156 页（20 页 contentavoid 修复 + 136 页 kpi-row 注入，含重叠）；scripts/_w557_*（复审编排/合并/修复/验证工具 7 件）；scripts/output/review-pass3/verdicts.jsonl + verdicts-page.jsonl + final-summary.json + prompts/（审查档案入库）；docs/superpowers/plans/2026-09-06-w557-full-site-review-pass3-report.md（审查报告 + W558 清单）；AGENTS §4.3 两条经验；六文档 + 旁文档版本行 + site 四页脚（batch_cascade.py 级联）。\r\n> - **状态**：已落地（本批随 W557 提交并 push origin/main）。",
+  "milestone_block": "- **v2.3.157 W557 全站复审完成**：232 页 98 组 judge 全量（pass 93/warn 62/fail 77）·contentavoid getBBox 幻影隐藏全局根治（20 页·探针验证）·kpi-row 基类补齐（136 页·统计条纵向裸排绝迹）·其余 FAIL 五类登记 W558 逐项修复清单。",
+  "agents_note": "2026-09-06（v2.3.157 W557）全站复审完成：§4.3 补录 contentavoid 全局根治（getBBox→getBoundingClientRect·页面级豁免≠类绝迹）与「标记与 CSS 演化脱节查基类」两条经验",
+  "file_index_rows": [
+    "| site/ 156 页（20 页 contentavoid getBBox→getBoundingClientRect + 136 页 kpi-row 基类注入，含重叠） | W557 | 修改·两项类级根因修复（探针验证） |",
+    "| scripts/output/review-pass3/verdicts.jsonl | W557 | 新增·98 组组级判定（151 条） |",
+    "| scripts/output/review-pass3/verdicts-page.jsonl | W557 | 新增·232 页页级合并判定（含证据切片号） |",
+    "| scripts/output/review-pass3/final-summary.json | W557 | 新增·覆盖率对账与计数（pass93/warn62/fail77） |",
+    "| scripts/output/review-pass3/prompts/ | W557 | 新增·98 组切片清单（复现用） |",
+    "| scripts/_w557_plan.py / _w557_prompts.py / _w557_consolidate.py | W557 | 新增·复审编排与合并工具 |",
+    "| scripts/_w557_fix_contentavoid.py / _w557_fix_kpirow.py / _w557_verify_fix.js / _w557_kpirow_check.js | W557 | 新增·两项类级修复器与验证探针 |",
+    "| docs/superpowers/plans/2026-09-06-w557-full-site-review-pass3-report.md | W557 | 新增·审查报告 + W558 五类逐项修复清单 |",
+    "| AGENTS.md | W557 | 修改·§4.3 两条经验 + 版本脚注 |",
+    "| CHANGELOG.md | W557 | 新增·W557 版段 + 编号规则上限 W001-W557 |",
+    "| 交接文档.md | W557 | 修改·头尾「最后更新」prepend W557 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |",
+    "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W557 | 修改·版本行同步 v2.3.157（batch_cascade.py 执行） |",
+    "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W557 | 修改·四页脚链首 prepend W557（batch_cascade.py 执行） |",
+    "| .github/workflows/README.md | W557 | 修改·旁文档同步（batch_cascade.py 执行） |",
+    "| scripts/output/file-index.md | W557 | 新增·W557 段（本段·batch_cascade.py 执行） |"
+  ]
+}

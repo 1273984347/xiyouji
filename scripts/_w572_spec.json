@@ -1,0 +1,28 @@
+{
+  "batch": "W572",
+  "version": "v2.3.172",
+  "date": "2026-09-18",
+  "title": "W572 站点可达性与信任信号（方案D） — 越界锚链接264→0改写GitHub blob/tree·自定义404页·全站反馈入口235/235·首页页脚收敛",
+  "desc": "站点可达性与信任信号",
+  "head_entry": "2026-09-18（v2.3.172 W572 站点可达性与信任信号：D-1 越界锚链接 264→0——262 处/132 文件机械改写 GitHub blob/tree（循 curated 先例）+ journey-spacetime A1_DOC_MAP 消费点前缀 :1551×2 + 模板壳 2 项手工裁决改站内路径；D-2 site/404.html 自定义 404 页（自包含零 JS）+ sitemap 228→229；D-3 页脚反馈入口四类形态 A85/B59/C77/D14 全站 235/235 指向既有 issue 模板；D-4 首页 footer-meta 40 版本号+46 W 号收敛为「v2.3.172 · W572 + 完整更新日志链接」保留 bump_version 正则兼容形态；方案 D/R 档与 2 个基线审计脚本随批入库）",
+  "head_sentence": "W572 站点可达性与信任信号——死链清零·404页·反馈入口235页·页脚收敛",
+  "changelog_body": "\r\n\r\n> **来源**：方案档《AI 产品运维——体验与服务优化计划（方案 D/E/F/G/H）》§方案 D（docs/superpowers/plans/2026-09-09-service-experience-and-agent-ops-plans.md，本批随批入库）；方案 R 档（agent-web 重设计 v2，2026-09-18 暂停中，随批入库）。\r\n> - **D-1 越界锚链接 264→0**：审计脚本 S02 实测 264 处/133 文件（根 CHANGELOG.md 56 + scripts/output/ 54 + docs/ 各目录 + 模板壳）——部署根是 site/，线上全部 404；漏网根因：第 21 门禁断言根是仓库而非部署根语义。处置：262 处/132 文件机械改写为 GitHub blob/tree（当前页跳转，循 curated.html 先例 57 条），journey-spacetime.html A1_DOC_MAP 消费点前缀字面量（:1551）×2 改写（完整 URL 使第 21 门禁按 http 前缀跳过、保持绿），手工清单 2 项裁决（_template.html ../index.html、../dashboard.html → 站内相对路径）。审计复跑 S02=0。\r\n> - **D-2 自定义 404 页**：site/404.html 新增（自包含内联 tokens 字面值样式、零 JS 零外域、四入口链接：首页/看板/标签云/全文检索），sitemap.xml 追加至 229 条（第 7 门禁差集口径，verify_delivery 禁改故走 sitemap 而非豁免）；线上呈现待部署后人工验证。\r\n> - **D-3 全站页脚反馈入口**：四类形态分派 A=85（页脚导航 nav）/B=59（en .footer-index）/C=77（其他页脚容器）/D=14（无页脚 </body> 前一行注入），**235/235 全覆盖**（含新增 404.html，较方案基线 234 多 1 页系本批自产）；指向既有 issue 模板（W499 bug_report/feature_request/question）。审计复跑 S06 /issues=235。\r\n> - **D-4 首页页脚收敛**：index.html footer-meta（40 版本号 + 46 W 号工程日志，v2.3.34 以来长链）收敛为「v2.3.172 · W572 + 完整更新日志链接（GitHub blob）」——保留「vX.Y.Z · W###」链首形态，bump_version.py:150-151 替换正则兼容（禁改门禁脚本约束）；en/index.html 1 token 无长链按条件跳过（登记）。\r\n> - **验证**：generate_csp 重生成 234 页 1189 哈希 0 漂移（journey-spacetime 内联 JS 已变）；ruff 5 个新脚本 All checks passed；审计复跑 S02=0/S06=235/S11 version_tokens=1；check_screenshot_gates 全站 235/235 FAIL 0（148s）；lint_links 全仓 10691 链接 130 broken 均为存量（CHANGELOG-ARCHIVE/docs-archive 相对路径与 skills/ 退役遗留——与 W572 改动面零交集 0 新增；方案 D-1 验收「0 broken」系对第 6 门禁 docs/01 口径误引，如实修正为「0 新增」）；verify_delivery 核心全绿；改写 URL 线上可达性（5 条 curl）与 404 呈现因本地沙箱无外网出口（curl 000/WebFetch TLS 失败）转部署后人工验证。\r\n> - **文件**：详见 scripts/output/file-index.md W572 段。\r\n> - **状态**：已落地（本批随 W572 提交并 push origin/main）。",
+  "milestone_block": "- **v2.3.172 W572 站点可达性与信任信号**：越界锚链接 264→0（262 处改写 GitHub blob/tree + A1_DOC_MAP 前缀 + 模板壳 2 项裁决）·自定义 404 页入 sitemap（229 条）·全站页脚反馈入口 235/235（A85/B59/C77/D14 四类形态）·首页页脚 40 版本号收敛为 1 组（bump 正则兼容）。",
+  "agents_note": "2026-09-18（v2.3.172 W572）站点可达性与信任信号：无 § 结构性变更（D-1 越界锚链接 264→0 改写 GitHub blob/tree·D-2 自定义 404 页·D-3 全站页脚反馈入口 235/235·D-4 首页页脚收敛保留 bump 正则兼容形态），仅版本脚注同步",
+  "file_index_rows": [
+    "| docs/superpowers/plans/2026-09-09-service-experience-and-agent-ops-plans.md | W572 | 新增·体验与服务优化计划（方案D-H v2+方案R占位·三问已裁决） |",
+    "| docs/superpowers/plans/2026-09-17-agent-web-redesign-plan.md | W572 | 新增·agent-web重设计方案R v2（自研单引擎·2026-09-18暂停） |",
+    "| scripts/_audit_service_experience.py | W572 | 新增·体验与服务基线审计（只读·S/A键值） |",
+    "| scripts/_audit_agentweb_baseline.py | W572 | 新增·agent-web重设计基线审计（只读·B键值） |",
+    "| scripts/_fix_site_links.py | W572 | 新增·D-1越界锚链接改写（262处/132文件+A1_DOC_MAP前缀+手工清单裁决） |",
+    "| scripts/_add_feedback_link.py | W572 | 新增·D-3反馈入口四类形态注入（A85/B59/C77/D14） |",
+    "| scripts/_collapse_index_footer.py | W572 | 新增·D-4首页页脚收敛（bump正则兼容形态） |",
+    "| site/404.html | W572 | 新增·自定义404页（自包含·四入口·零JS零外域） |",
+    "| site/sitemap.xml | W572 | 更新·追加404.html（228→229条） |",
+    "| site/index.html | W572 | 更新·D-3反馈入口+D-4页脚40版本号收敛为1组 |",
+    "| site/data/journey-spacetime.html | W572 | 更新·D-1 A1_DOC_MAP消费点前缀改写（:1551×2） |",
+    "| site/_template.html | W572 | 更新·D-1手工清单2项改站内路径 |",
+    "| site/（批量133文件） | W572 | 更新·D-1越界锚链接改写为GitHub blob/tree |",
+    "| site/（批量235文件） | W572 | 更新·D-3页脚反馈入口注入 |"
+  ]
+}

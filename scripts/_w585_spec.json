@@ -1,0 +1,19 @@
+{
+  "batch": "W585",
+  "version": "v2.3.185",
+  "date": "2026-09-19",
+  "title": "W585 注入头行mouseout补bubbles+断言等待对齐动效上限 — B/D观测项升回阻断·EN 59/62+ZH 58/61（余6页页面级残留登记）",
+  "desc": "注入头行mouseout补bubbles与断言等待对齐",
+  "head_entry": "2026-09-19（v2.3.185 W585 注入头行 mouseout 补 bubbles + 断言等待对齐动效上限：升级②只覆盖了 touchmove 变体的 mouseout 行，头行 `if (prev && prev !== el) { prev.dispatchEvent(new MouseEvent('mouseout')) }` 124 页全量漏网——非冒派发到命中子元素即止，g 包装层 hideTip 不触发（geo 实证·正是 B 观测项失败分布的成因：hide 绑定在命中元素本层的页无恙）；修复后 geo/试验页 B 清零；另查明 B/D 其余「残留」主因=页面 hide/show transition 可达 400ms（动效契约合规）而断言只等 300ms——等待对齐 650ms 并将 B/D 升回阻断断言；终验 EN 59/62 + ZH 58/61（余 3+3 页为页面级 tooltip 生命周期个性残留：deconstruction 族 show 绑 mousemove+opacity hide、cultural 族 D 断言 keys=[]——A/C 核心断言全过·登记真机验证+定向修复）；教训：动效等待须盖过 transition 上限·批量升级须穷尽同型行）",
+  "head_sentence": "W585 头行mouseout补bubbles+等待对齐动效上限——B/D升回阻断·余6页登记",
+  "milestone_block": "- **v2.3.185 W585 注入头行mouseout补bubbles**：升级②漏网的 124 页头行（geo 实证 g 包装层 hideTip 不触发）·断言等待 300→650ms 对齐动效上限·B/D 升回阻断·EN 59/62+ZH 58/61（余 3+3 页页面级残留登记）。",
+  "agents_note": "2026-09-19（v2.3.185 W585）注入头行mouseout补bubbles：无 § 结构性变更（升级②漏网的头行 124 页补 bubbles——非冒派发到命中子元素即止 g 包装层 hideTip 不触发·geo 实证；断言等待 300→650ms 对齐动效上限 400ms hide transition·B/D 升回阻断·终验 EN 59/62+ZH 58/61 余 6 页页面级残留登记），仅版本脚注同步",
+  "changelog_body": "\r\n\r\n> **来源**：W581 批 B/D 观测项（EN 13+ZH 5 页）的定向修复（用户指出「你自己用电脑不能操作吗」——残留在本机即可深挖，无需真机）。\r\n> - **根因一（注入头行漏网）**：W581 升级②的 bubbles 只覆盖了 touchmove 变体的 mouseout 行，头行 `if (prev && prev !== el) { prev.dispatchEvent(new MouseEvent('mouseout')) }` 在 124 页全量漏网——非冒派发到命中子元素（如 circle）即止，绑定在 g 包装层的 hideTip 不触发（journey-geo-semiotics 实证：修复后该页 B 清零）——恰好解释观测项失败分布（hide 绑在命中元素本层的页无恙）。修复：124 页头行统一补 bubbles。\r\n> - **根因二（断言等待短于页面动效）**：heaven/deconstruction/six-senses 族 hide 走 `tooltip.transition().duration(400).style('opacity',0)`——400ms 过渡合规（动效契约 ≤600ms）而断言只等 300ms，读到的 opacity 尚在过渡中——等待对齐 650ms 后三页 B 清零。教训：**涉及显隐的断言等待须盖过页面动效上限，而非经验值 300ms**。\r\n> - **B/D 升回阻断**：上述两根因修复后终验 EN 59/62 + ZH 58/61（阻断=A/B/C/D+pageerror 全链）。\r\n> - **余 6 页页面级残留（如实登记）**：deconstruction（zh+en）散点图 show 绑 mousemove（非 mouseover）+opacity hide 的生命周期形态、cultural-misreading（zh+en）D 断言 keys=[]、concept-device（zh）D——A/C 核心断言（触屏触发/再触发）全过，残余为 B/D 语义在页面个性实现下的 harness 语境差异，登记真机验证 + 定向修复批。\r\n> - **验证**：generate_csp 重生成 --check 0 漂移；verify_delivery 核心全绿；check_screenshot_gates 235 页 FAIL 0；check_contract_smoke 全绿。\r\n> - **文件**：详见 scripts/output/file-index.md W585 段。\r\n> - **状态**：已落地（本批随 W585 提交并 push origin/main）。",
+  "file_index_rows": [
+    "| site/data/（批量61页） | W585 | 更新·注入头行mouseout补bubbles（升级②漏网·g包装层hideTip触发修复） |",
+    "| site/en/（批量62页） | W585 | 更新·同上 |",
+    "| site/data/language-style-radar.html | W585 | 更新·W574试点块头行同步补bubbles |",
+    "| scripts/_w585_upgrade_headout.py | W585 | 新增·头行mouseout升级器（124页·每页恰1处断言） |",
+    "| scripts/_w575_touchtip_e2e.js | W585 | 更新·断言等待300→650ms对齐动效上限+B/D升回阻断+隐藏判定重构 |"
+  ]
+}

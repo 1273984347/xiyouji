@@ -1,0 +1,17 @@
+{
+  "batch": "W576",
+  "version": "v2.3.176",
+  "date": "2026-09-18",
+  "title": "W576 bump_version.py W536写路径守卫根目录误算修复（经用户批准） — 守卫根scripts/→项目根一行修复·真实参数冒烟通过·顺手收敛两处W001-W536存量范围漂移与交接文档孤立\\r损伤",
+  "desc": "bump_version.py 守卫根目录误算修复",
+  "head_entry": "2026-09-18（v2.3.176 W576 bump_version.py W536写路径守卫根目录误算修复（经用户批准）：守卫根 _W536_ROOT 此前误算为 scripts/ 自身而 AUX_VERSION_DOCS 为仓库根相对路径 → 自 W536 起任何调用必误判「越界」拒写（与 W550 修复的 generate_csp 同款·一行修复为项目根）；修复后真实参数（无参读页脚）冒烟通过且暴露三处既有损伤一并收敛——① README 目录树「更新日志（W001-W536）」与 ② 交接文档 CHANGELOG 范围行两处存量漂移修至 W575（bump「全文件 W001-W### 范围替换」覆盖 batch_cascade 不触及的面·W417 特性恢复生效）· ③ 交接文档第 38 行以孤立 \\r 充当行分隔的历史损伤归一（「历史概要」块quote 恢复真正换行渲染·亦为该文件 index blob 曾被判 -text 二进制的元凶）；§4.3 bump_version 条目补记修复一笔；日常辅助 4 同步仍以 batch_cascade 为主、bump 为里程碑工具）",
+  "head_sentence": "W576 bump_version守卫误算修复——经用户批准·冒烟通过·收敛存量范围漂移与孤立\\r损伤",
+  "changelog_body": "\r\n\r\n> **来源**：W575 批收尾时发现并登记的 bump_version.py W536 写路径守卫根目录误算（CHANGELOG W575 段边界条目），2026-09-18 用户批准修复。\r\n> - **根因**：`_W536_ROOT = realpath(dirname(abspath(__file__)))` 把守卫根算成 `scripts/` 自身，而 `AUX_VERSION_DOCS`（README.md 等）为仓库根相对路径——`realpath` 后不落在 `scripts/` 前缀内 → 守卫恒判「path escapes project root」拒写。与 W550 修复的 generate_csp.py W536 守卫根目录误算同款（复制面同源）。\r\n> - **修法（一行）**：守卫根改为项目根（`dirname(__file__)/..` 的 realpath）+ 注释注明 W576 修复与同款关联。ruff 通过。\r\n> - **真实参数冒烟（W537 新规④·无参读页脚形态）**：守卫放行，幂等同步无重复条目；且暴露三处既有损伤被其 W417 特性顺手收敛、随本批入库——① README 目录树「更新日志（W001-W536）」→ W575（该行 batch_cascade 不覆盖·存量漂移自 W536 起累积）；② 交接文档 CHANGELOG 范围行「正向时间线，W001-W536；」→ W575（同上）；③ 交接文档第 38 行以孤立 `\\r` 充当行分隔的历史损伤归一（上一行 mega-line 拆分，「历史概要」块quote 恢复真正换行渲染；该孤立 \\r 亦是交接文档 index blob 曾被判 `-text` 二进制的元凶——修复后 blob 回归文本态）。以上均经字节级核验（`\\r\\r` 0、孤立 \\r 1→0、归一化行对比仅上述三处）。\r\n> - **使用姿态（AGENTS §4.3 已补记）**：日常每批辅助 4 同步仍由 batch_cascade 覆盖；bump_version 为里程碑/页脚前进工具，其范围替换面（README 目录树/交接范围行）为级联外的存量漂移收敛手段。三个已知坑①②③维持不变。\r\n> - **验证**：`python scripts/bump_version.py` 无参冒烟通过（守卫放行·幂等）；`python -m ruff check scripts/bump_version.py` 0 违规；改动字节级核验如上；verify_delivery 核心全绿。\r\n> - **文件**：详见 scripts/output/file-index.md W576 段。\r\n> - **状态**：已落地（本批随 W576 提交并 push origin/main）。",
+  "milestone_block": "- **v2.3.176 W576 bump_version.py 守卫误算修复**：W536 写路径守卫根 scripts/→项目根（经用户批准·一行·与 W550 generate_csp 同款）·真实参数冒烟通过·顺手收敛 README/交接两处 W001-W536 存量范围漂移与交接孤立 \\r 行分隔损伤（blob 回归文本态）。",
+  "agents_note": "2026-09-18（v2.3.176 W576）bump_version.py 守卫误算修复：§4.3 bump_version 条目补记一笔（W536 写路径守卫根目录误算经用户批准修复为项目根·与 W550 generate_csp 同款·工具恢复可用·范围替换面为级联外的存量漂移收敛手段），仅版本脚注同步",
+  "file_index_rows": [
+    "| scripts/bump_version.py | W576 | 修复·W536写路径守卫根目录误算（守卫根scripts/→项目根·一行·经用户批准·与W550 generate_csp同款） |",
+    "| README.md | W576 | 更新·目录树「更新日志（W001-W536）」存量漂移修至W575（bump范围替换恢复生效） |",
+    "| 交接文档.md | W576 | 更新·CHANGELOG范围行W536→W575 + 第38行孤立\\r行分隔损伤归一（历史概要块quote恢复渲染·blob回归文本态） |"
+  ]
+}

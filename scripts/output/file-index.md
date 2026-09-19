@@ -11,6 +11,16 @@
 ---
 
 
+## W585 W585 注入头行mouseout补bubbles+断言等待对齐动效上限（2026-09-19·v2.3.185）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/（批量61页） | W585 | 更新·注入头行mouseout补bubbles（升级②漏网·g包装层hideTip触发修复） |
+| site/en/（批量62页） | W585 | 更新·同上 |
+| site/data/language-style-radar.html | W585 | 更新·W574试点块头行同步补bubbles |
+| scripts/_w585_upgrade_headout.py | W585 | 新增·头行mouseout升级器（124页·每页恰1处断言） |
+| scripts/_w575_touchtip_e2e.js | W585 | 更新·断言等待300→650ms对齐动效上限+B/D升回阻断+隐藏判定重构 |
+
 ## W584 W584 O1审计器并行化（2026-09-19·v2.3.184）
 
 | 文件 | W | 说明 |

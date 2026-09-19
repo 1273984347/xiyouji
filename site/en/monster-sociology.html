@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-tKB0F8+m9LnX38oGZ3xQzWr+2zDp5SmabpcTQQqGD1w=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-XuMGOAIJ1zxhhpTHMX2BOTxs3kVjh/8em4eCMyupjo0=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-WLhl+TDlK4lcvHVEfZY49QNhzI3zNUalmUWfMjIzg78='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-tKB0F8+m9LnX38oGZ3xQzWr+2zDp5SmabpcTQQqGD1w=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-XuMGOAIJ1zxhhpTHMX2BOTxs3kVjh/8em4eCMyupjo0=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-WLwfMVWY3iSccphw/EsPW4nufPrucLyuBMyDtfm/+4E='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster Sociology · Annotated Journey to the West</title>
@@ -2908,7 +2908,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
         if (!e.touches || !e.touches.length) return;
         var t = e.touches[0];
         var el = document.elementFromPoint(t.clientX, t.clientY);
-        if (prev && prev !== el) { prev.dispatchEvent(new MouseEvent('mouseout')); prev = null; }
+        if (prev && prev !== el) { prev.dispatchEvent(new MouseEvent('mouseout', { bubbles: true })); prev = null; }
         if (el) {
             el.dispatchEvent(new MouseEvent('mouseover', { clientX: t.clientX, clientY: t.clientY, bubbles: true }));
             el.dispatchEvent(new MouseEvent('mousemove', { clientX: t.clientX, clientY: t.clientY, bubbles: true }));

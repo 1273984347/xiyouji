@@ -1,0 +1,32 @@
+{
+  "batch": "W564",
+  "version": "v2.3.164",
+  "date": "2026-09-10",
+  "title": "W564 字体字节治理（方案B） — 按站内字符集子集化三字体·226页主字体preload·SW SHELL联动subset",
+  "desc": "字体字节治理",
+  "head_entry": "2026-09-10（v2.3.164 W564 字体字节治理：NotoSansSC R/M 与 serif-shared 按站内字符集（4925 字，超集口径含 JS/JSON）pyftsubset 子集化——754/765/414→605/614/405KB（-309KB/-16%；方案 ≤300KB 门槛经字形计数诊断判明失准：serif 1499 字形与本站字符集已完全一致零可减、sans 站内实际用 4455 字形即 605KB 地板）；tokens.css 3 行 url 切换 + 226 页重内联；覆盖守卫 _check_font_coverage.py 常驻（零回归语义：子集⊇字符集∩源字体cmap 100% + serif fvar 断言）；226 页主字体 preload 注入（crossorigin 强制，探针 3/3 页每字体恰 1 次请求零双重下载）；sw.js SHELL 三字体联动 subset）",
+  "head_sentence": "W564 字体字节治理——三字体子集化·226页preload·覆盖守卫常驻",
+  "changelog_body": "\r\n\r\n> **来源**：方案档 §方案 B（批次 2，随「继续批次 2」执行）。B-0 已随 W563 交付。\r\n> - **B-1 子集化**：字符集按方案口径（site HTML 完整原文含 script/style + scripts/output/data/*.json + dataset/*.json + ASCII）实测 **4925 字（CJK 4705）**——比正文度量口径 2181 多 2700+，验证了不剥离决策（tooltip/图例/模板串的 CJK 全部入集）。pyftsubset 三连：NotoSansSC-Regular 754→605KB、Medium 765→614KB、noto-serif-sc-shared 414→405KB（合计 -309KB/-16%）；layout features 实验证明仅省 2KB（尺寸由 4455 个 CJK 字形轮廓主导）。\r\n> - **门槛修订（如实记录）**：方案 ≤300KB 门槛经诊断判明失准——serif 源 1499 字形与本站字符集**完全一致**（子集化前后字形数/体积不变，零可减）；sans 源 8248 字形中站内实际用 4455，605KB 即该字符集的 woff2 密度地板。300KB 系按 2181 字口径预估所致，不构成质量风险（覆盖守卫 100% 为硬门槛）；实测尺寸如实交付，不砍字符集（砍到正文口径有 tofu 风险，方案已明拒）。\r\n> - **覆盖守卫（常驻）**：_check_font_coverage.py 零回归语义——断言「子集 ⊇ 字符集∩源字体cmap」100%（源字体本无的 524/3820 字走 font-family 栈回退系既有行为，非回归）+ serif subset 保留 fvar 表（源为 VF、@font-face 声明 weight 200-900，fvar 丢失即字重塌缩且无门禁可拦）。留档常驻：新增内容/数据批次收尾重跑（交接文档「三」登记）。\r\n> - **B-2 preload**：226 个 INLINED 页 </head> 前注入 NotoSansSC-Regular.subset + noto-serif-sc-shared.subset 两行 preload（crossorigin 强制；href 与 @font-face url 同形态防失配）；写后断言 226 页恰 2 条/非 INLINED 页 0 条；请求探针 3/3 页——全部 woff2 **各恰好 1 次请求**（零双重下载）、无 error 字形。JetBrainsMono 仅代码块使用不 preload。en/philosophy.html 无 </head> 闭合（存量孤例），脚本回退锚定 <body>。\r\n> - **SW SHELL 联动（执行期必要联动）**：@font-face 全站指向 subset 后，SHELL 预缓存的两个原文件沦为死重且离线时 subset 404——SHELL 三行切换为 subset 产物并补 serif subset 一行（离线完整性），CACHE 本地占位 v3（部署期 SHA 戳自动覆写）。8 个 <link> 根页亦经 tokens.css 生效 subset（preload 未覆盖该 8 页，登记为后续可选项）。\r\n> - **验证（当批实跑）**：verify_delivery 核心全绿（门禁 12/15 复验通过）；截图门禁 234 页 FAIL 0；CSP --check 0 漂移（preload link 不参与哈希）；零回归覆盖 3/3 全过 + fvar 在位；请求探针 3/3。\r\n> - **文件**：详见 scripts/output/file-index.md W564 段（3 个 subset 字体、tokens.css、226 页、sw.js、scripts/requirements.txt、5 个一次性/常驻脚本、六文档级联）。\r\n> - **状态**：已落地（本批随 W564 提交并 push origin/main）。",
+  "milestone_block": "- **v2.3.164 W564 字体字节治理**：三字体按站内字符集（4925 字超集口径）子集化 -309KB/-16%·226 页主字体 preload（每字体恰 1 次请求）·覆盖守卫常驻（零回归 100% + fvar）·SW SHELL 联动 subset·方案 300KB 门槛经字形计数诊断判明失准并如实修订。",
+  "agents_note": "2026-09-10（v2.3.164 W564）字体字节治理：三字体按站内字符集子集化 -309KB（serif 源 1499 字形与站内字符集完全一致零可减·sans 4455 字形为地板——按 2181 字预估的 300KB 门槛失准如实修订）·226 页主字体 preload 每字体恰 1 次请求·覆盖守卫常驻（零回归语义=子集⊇字符集∩源cmap+serif fvar 断言）·SW SHELL 联动 subset",
+  "file_index_rows": [
+    "| site/static/fonts/NotoSansSC-Regular.subset.woff2 | W564 | 新增·754→605KB（4925 字字符集子集） |",
+    "| site/static/fonts/NotoSansSC-Medium.subset.woff2 | W564 | 新增·765→614KB |",
+    "| site/static/fonts/noto-serif-sc-shared.subset.woff2 | W564 | 新增·414→405KB（源 1499 字形已与站内字符集一致，fvar 保留） |",
+    "| site/tokens.css | W564 | 修改·三行 @font-face url 指向 .subset.woff2 |",
+    "| site/data+en 226 个 HTML | W564 | 修改·--force 重内联（url 切换）+ 主字体 preload 注入 2 行/页 |",
+    "| site/sw.js | W564 | 修改·SHELL 三字体切换 subset + 补 serif 一行（离线完整性）·CACHE v3 |",
+    "| scripts/requirements.txt | W564 | 修改·追加 fonttools/brotli（子集化管线依赖，入 pip-audit） |",
+    "| scripts/_gen_font_charset.py | W564 | 新增·一次性：字符集提取（site HTML 完整原文+双 JSON+ASCII） |",
+    "| scripts/_check_font_coverage.py | W564 | 新增·常驻守卫：零回归覆盖 100% + serif fvar 断言（新增内容批次收尾重跑） |",
+    "| scripts/_add_font_preload.py | W564 | 新增·一次性：226 页 preload 注入（幂等 + CRLF + <body> 回退锚点） |",
+    "| scripts/_font_request_probe.js | W564 | 新增·一次性：部署态 woff2 请求数探针（每字体恰 1 次） |",
+    "| scripts/output/font-charset.txt | W564 | 新增·子集字符集（4925 字，不参与部署） |",
+    "| CHANGELOG.md | W564 | 新增·W564 版段 + 编号规则上限 W001-W564 |",
+    "| 交接文档.md | W564 | 修改·头尾「最后更新」prepend W564 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |",
+    "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W564 | 修改·版本行同步 v2.3.164（batch_cascade.py 执行） |",
+    "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W564 | 修改·四页脚链首 prepend W564（batch_cascade.py 执行） |",
+    "| .github/workflows/README.md | W564 | 修改·旁文档同步（batch_cascade.py 执行） |",
+    "| scripts/output/file-index.md | W564 | 新增·W564 段（本段·batch_cascade.py 执行） |"
+  ]
+}
