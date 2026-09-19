@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-UvGPv/9hfR3HgvC/uk3fdFWQnn0ELu1j5V9I2uNJbiI=' 'sha256-q8M2It1mbVHcePdq+IbbtDfMKyB8DkqVLaWsojlGNGQ='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777 https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-UvGPv/9hfR3HgvC/uk3fdFWQnn0ELu1j5V9I2uNJbiI=' 'sha256-n4SCVjDX/ymksVsnERtsQiNo0iM/1+hQ9yzHwEvkGys='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777 https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ferry Crossing · Journey to the West — Self-less Writing Engine (prototype)</title>
                                                                     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1447,11 +1447,11 @@ document.getElementById('graphReset').onclick = resetGraph;
   } catch (e) { /* silently ignore if URLSearchParams unsupported */ }
 })();
 </script>
-<script>/* W587 dark lift（暗色阶段二·运行时填充亮度提升·浅色零改动） */
+<script>/* W588 dark lift v2（暗色阶段二·MutationObserver 无竞态·浅色零改动） */
 (function () {
     try {
     if (!window.matchMedia || !window.matchMedia('(prefers-color-scheme: dark)').matches) return;
-    var TH = 0.16, TARGET = 0.22;
+    var TH = 0.16, TARGET = 0.22, timer = null;
     function lum(r, g, b) {
         function f(c) { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }
         return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
@@ -1460,7 +1460,6 @@ document.getElementById('graphReset').onclick = resetGraph;
         var els = document.querySelectorAll('svg rect, svg circle, svg path, svg polygon, svg ellipse');
         for (var i = 0; i < els.length; i++) {
             var el = els[i];
-            if (el.dataset.w587 === '1') continue;
             var cf = getComputedStyle(el).fill;
             if (cf.indexOf('rgb') !== 0) continue;
             var m = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(cf);
@@ -1476,11 +1475,15 @@ document.getElementById('graphReset').onclick = resetGraph;
                 if (lum(rr, gg, bb) >= TARGET) break;
             }
             el.style.fill = 'rgb(' + rr + ',' + gg + ',' + bb + ')';
-            el.dataset.w587 = '1';
         }
     }
-    [0, 700, 2000, 4000].forEach(function (d) { setTimeout(liftOnce, d); });
-    } catch (e) { /* fail-open：提升失败不影响页面 */ }
+    function schedule() { if (timer) return; timer = setTimeout(function () { timer = null; liftOnce(); }, 80); }
+    [0, 500, 1500, 3000, 5000].forEach(function (d) { setTimeout(liftOnce, d); });
+    if (window.MutationObserver) {
+        var mo = new MutationObserver(schedule);
+        mo.observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['fill', 'style'] });
+    }
+    } catch (e) { /* fail-open */ }
 })();
 </script>
 </body>
