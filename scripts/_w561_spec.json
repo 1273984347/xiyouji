@@ -1,0 +1,28 @@
+{
+  "batch": "W561",
+  "version": "v2.3.161",
+  "date": "2026-09-08",
+  "title": "W561 残余几何越界收敛（>60px 38→9处） — S1验收第2批零人工修复· minions/luxury width父容器修复·11处边距扩边",
+  "desc": "残余几何越界收敛",
+  "head_entry": "2026-09-08（v2.3.161 W561 残余几何越界收敛：检测器复测 >60px 缺口 38→9 处——en/cave-estate chart-minions 补 W558 width 父容器同款修复（无边 width svg clientWidth=300 陷阱的第二处）+ margin 420 + 刻度截断；v4 增量边距修补器扩边 11 处（costume-line/region/invasive-bar/foodweb/matrix/consumers/scatter/cave-rank）+ 手工修 mbti 热力图/chapter-structure/journey-map/narrative-rhythm；S1 级联验收第 2 批零人工修复达成）",
+  "head_sentence": "W561 残余几何越界收敛——38→9处·S1验收达成",
+  "changelog_body": "\r\n\r\n> **来源**：W559 复盘 WBS 第 4 项（残余 >60px 几何越界逐页收敛）+ S1 验收第 2 批（用户点单「开始」）。\r\n> - **检测器驱动**：复测（W558 修复后基线）出 >60px 缺口 38 处；分类后 v4 增量边距修补器（读当前值 + min(deficit+20, 340)）扩边 11 处，手工修 4 页（chart-minions 三件套/triangle 登记维持/journey-map 地图投影类/chart-area）。\r\n> - **重要发现**：W558 的 width 父容器修复只做了 chart-luxury——同页 chart-minions 同病（无边 width svg clientWidth=300 → viewBox 压瘪）漏网，本批补齐（parentElement.clientWidth + margin 420 + 刻度截断 30 字符 + title）。教训：**「同文件同模式」修复时必须全文件排查同款，而非仅报告指名处**（AGENTS §4.3「同文案多页同病」的文件内变体）。\r\n> - **结果**：>60px 缺口 38→9 处（-76%）；en/cave-estate chart-minions/luxury/region、material-archaeology costume-line/scatter、ecology foodweb/invasive-bar、intertextuality matrix、magic-system consumers、mbti/chapter-structure/journey-map/narrative-rhythm 全部收敛；残余 9 处为登记维持类（triangle 手工注记/地图投影标签/ costume-line 左右内容超宽待单独重构）。\r\n> - **S1 级联验收第 2 批：apply 后写后自检全部通过、零人工修复——S1 验收达成（连续 2 批：W560 + W561），P05 关闭。**\r\n> - **验证（当批实跑）**：CSP 守卫在检测器启动时拦获 1 次 W561 修复后的真实漂移（按指引重生成后放行——守卫常态化有效二次实证）；verify_delivery 核心全绿；检测器复测口径如上。\r\n> - **文件**：site/en/cave-estate.html、site/en/mbti-evolution.html、site/en/chapter-structure-graph.html、site/en/journey-map-interactive.html、site/en/narrative-rhythm-curve.html、site/en/material-archaeology.html、site/data/material-archaeology.html（边距/截断/width 修复）；scripts/batch_cascade.py（S1 本体收尾，W560 已提交后本批零改动复用）；六文档 + 旁文档版本行 + site 四页脚（batch_cascade.py 级联）。\r\n> - **状态**：已落地（本批随 W561 提交并 push origin/main）。",
+  "milestone_block": "- **v2.3.161 W561 残余几何越界收敛**：>60px 缺口 38→9 处（-76%）·chart-minions 同款 width 陷阱补齐·11 处边距扩边 + 4 页手工修；S1 级联验收第 2 批零人工修复达成（P05 关闭）。",
+  "agents_note": "2026-09-08（v2.3.161 W561）残余几何越界收敛：>60px 38→9 处（chart-minions 同款 width 陷阱补齐——同文件同模式修复须全文件排查）；S1 级联验收连续 2 批零人工修复达成（P05 关闭）",
+  "file_index_rows": [
+    "| site/en/cave-estate.html | W561 | 修改·chart-minions width 父容器 + margin 420 + 刻度截断（W558 同款陷阱补齐） |",
+    "| site/en/mbti-evolution.html | W561 | 修改·热力图 marginLeft 70→200→回退 70（右侧溢出更差，维持 W557 登记态） |",
+    "| site/en/chapter-structure-graph.html | W561 | 修改·cluster 树 margin right 30→180 |",
+    "| site/en/journey-map-interactive.html | W561 | 修改·地图 margin left 50→160/right 30→150 |",
+    "| site/en/narrative-rhythm-curve.html | W561 | 修改·chart-area margin right 30→150 |",
+    "| site/en/material-archaeology.html | W561 | 修改·costume-line margin 平衡 380→170（左右取舍）+ scatter 标签钳位截断 |",
+    "| site/data/material-archaeology.html | W561 | 修改·costume-line margin 平衡（同 EN 镜像） |",
+    "| scripts/batch_cascade.py | W561 | 复用·S1 收尾后首次第二批次应用（零人工修复，P05 关闭依据） |",
+    "| CHANGELOG.md | W561 | 新增·W561 版段 + 编号规则上限 W001-W561 |",
+    "| 交接文档.md | W561 | 修改·头尾「最后更新」prepend W561 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |",
+    "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W561 | 修改·版本行同步 v2.3.161（batch_cascade.py 执行） |",
+    "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W561 | 修改·四页脚链首 prepend W561（batch_cascade.py 执行） |",
+    "| .github/workflows/README.md | W561 | 修改·旁文档同步（batch_cascade.py 执行） |",
+    "| scripts/output/file-index.md | W561 | 新增·W561 段（本段·batch_cascade.py 执行） |"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "batch": "W583",
+  "version": "v2.3.183",
+  "date": "2026-09-19",
+  "title": "W583 O3契约对账门禁评估落地 — 运行时产量冒烟file://路径·P04类拦截·自测6/6+实弹负样本实证",
+  "desc": "O3契约对账门禁评估落地",
+  "head_entry": "2026-09-19（v2.3.183 W583 O3 契约对账门禁评估落地（W577 复盘报告 WBS O3·评估+实施）：方案对比后采纳「运行时产量冒烟」为独立 CI step 挂 dark-state-gate job——字段级静态对账否决（W560 实证静态解析仅 17/38 页可解析·动态访问误报面不可控），运行时字段级对账列远期（全局变量名不统一）；check_contract_smoke.js = file:// EMBEDDED 路径加载 163 页（zh+en 含 svg）·pageerror==0 + 图形产量 ≥基线×50% 双阻断——与暗色门禁的 http 路径互补成双路径覆盖（W565 character-appearance 教训：部署 fetch 与 file:// 是独立覆盖面）；验证=self-test 6/6 + 实弹负样本（EMBEDDED_DATA.config 缺失→pageerror→FAIL→移除）+ 全量 163 页绿）",
+  "head_sentence": "W583 O3契约冒烟门禁——file://路径·P04拦截·双路径覆盖",
+  "milestone_block": "- **v2.3.183 W583 O3 契约对账门禁评估落地**：运行时产量冒烟（pageerror==0 + 图形产量≥基线×50%）file:// EMBEDDED 路径 163 页·独立 CI step 挂 dark-state-gate job·与暗色门禁 http 路径互补·self-test 6/6+实弹负样本实证·字段级静态对账否决入档。",
+  "agents_note": "2026-09-19（v2.3.183 W583）O3 契约对账门禁评估落地：无 § 结构性变更（运行时产量冒烟独立 CI step 挂 dark-state-gate job·file:// EMBEDDED 路径与暗色门禁 http 路径互补·P04 类契约错位拦截·字段级静态对账否决入档 docs/superpowers/plans/2026-09-19-o3-contract-gate-evaluation.md），仅版本脚注同步",
+  "changelog_body": "\r\n\r\n> **来源**：W577 复盘报告 WBS 表 O3「契约对账门禁评估（生成器 schema vs 页面消费字段的字段级对账并入第 25 门禁或新门禁）」，2026-09-19 用户「按顺序做」指令第 3 项。\r\n> - **评估结论**：字段级静态对账否决（W560 实证静态解析仅 17/38 页可解析·动态访问与可选链误报面不可控·且与第 25 门禁的静态确定性口径冲突）；运行时字段级对账列远期（全局变量名不统一·EMBEDDED_DATA 仅 46/86 页使用）；**采纳「运行时产量冒烟」**——file:// 加载全部含 svg 页面，pageerror==0 + 图形产量 ≥基线×50% 双阻断，端到端覆盖契约错位的两种症状（运行时 TypeError、静默零渲染）。\r\n> - **实现**：`scripts/check_contract_smoke.js`（163 页 zh+en 含 svg 口径·滚动穿透·基线 `contract-smoke-baseline.jsonl`·--update-baseline/--self-test）；挂 dark-state-gate job 新 step（file:// 无需 server·与暗色门禁 http 路径互补成双路径覆盖——W565 教训「部署 fetch 与 file:// 是两条独立覆盖面」的守门化）。\r\n> - **验证**：--self-test 6 负样本 6/6；实弹负样本（临时页 EMBEDDED_DATA.config 缺失→pageerror→门禁 FAIL→移除复绿）；全量 163 页基线生成并全绿。评估档：docs/superpowers/plans/2026-09-19-o3-contract-gate-evaluation.md。\r\n> - **文件**：详见 scripts/output/file-index.md W583 段。\r\n> - **状态**：已落地（本批随 W583 提交并 push origin/main）。",
+  "file_index_rows": [
+    "| scripts/check_contract_smoke.js | W583 | 新增·契约冒烟门禁（file://EMBEDDED路径·pageerror+图形产量双阻断·--self-test 6/6+--update-baseline） |",
+    "| scripts/output/contract-smoke-baseline.jsonl | W583 | 新增·163页图形产量基线 |",
+    "| .github/workflows/screenshot-review.yml | W583 | 挂载·dark-state-gate job 增 Contract smoke step（file://互补http路径） |",
+    "| docs/superpowers/plans/2026-09-19-o3-contract-gate-evaluation.md | W583 | 新增·O3评估档（三方案对比·采纳C运行时产量冒烟·残余边界） |"
+  ]
+}

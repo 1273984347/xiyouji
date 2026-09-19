@@ -1,0 +1,15 @@
+{
+  "batch": "W584",
+  "version": "v2.3.184",
+  "date": "2026-09-19",
+  "title": "W584 O1审计器并行化 — state内3 worker并发共享context·S2×163实测2m41s（原约12min·4.5×）·163页与基线零差异",
+  "desc": "审计器并行化",
+  "head_entry": "2026-09-19（v2.3.184 W584 O1 审计器并行化（W577 复盘报告 WBS O1·约 10 行）：_audit_render_states.js state 内 3 个并发 worker 共享 context 多 page 并行（--conc 参数化·缺省 3·1 等价旧串行·jsonl 行顺序无关）；实测 S2×163 页 2m41s（原串行约 12min·4.5×）·与基线 163 页逐页零差异（等价性实证）；全量 4 态审计成本同比约 35min→8min）",
+  "head_sentence": "W584 审计器并行化——3 worker·S2×163 实测 4.5×·零差异",
+  "milestone_block": "- **v2.3.184 W584 O1 审计器并行化**：state 内 3 并发 worker 共享 context（--conc 参数化）·S2×163 实测 2m41s（原约 12min·4.5×）·163 页与基线零差异。",
+  "agents_note": "2026-09-19（v2.3.184 W584）O1 审计器并行化：无 § 结构性变更（_audit_render_states.js state 内 3 并发 worker 共享 context·--conc 参数化·S2×163 实测 4.5×·与基线零差异），仅版本脚注同步",
+  "changelog_body": "\r\n\r\n> **来源**：W577 复盘报告 WBS 表 O1「审计器跑批并行化（3 context 并行）」，2026-09-19 用户「按顺序做」指令第 4 项。\r\n> - **实现（约 10 行）**：`_audit_render_states.js` 在每个 state 内以 `--conc`（缺省 3）个并发 worker 共享同一 context 多 page 并行审计；jsonl 行顺序无关（消费方均按键读取）；`--conc 1` 等价旧串行。state 间仍串行（每态一次 emulateMedia/viewport 切换）。\r\n> - **等价性验证**：S2-desktop-dark × 163 图表页并发跑批与基线逐页对账（pageerror/lowContrast/invisible/isDarkBg 四元组）**零差异**。\r\n> - **实测**：2m41s（原串行同口径约 12min·4.5×）；全量 4 态 652 行审计成本同比约 35min→8min。\r\n> - **文件**：详见 scripts/output/file-index.md W584 段。\r\n> - **状态**：已落地（本批随 W584 提交并 push origin/main）。",
+  "file_index_rows": [
+    "| scripts/_audit_render_states.js | W584 | 更新·O1并行化（state内3并发worker共享context·--conc参数化·jsonl顺序无关） |"
+  ]
+}

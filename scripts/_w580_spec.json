@@ -1,0 +1,15 @@
+{
+  "batch": "W580",
+  "version": "v2.3.180",
+  "date": "2026-09-18",
+  "title": "W580 CI 红灯热修复 — dark-state-gate 浅克隆 git diff 128（Checkout 补 fetch-depth: 0）",
+  "desc": "dark-state-gate 浅克隆热修复",
+  "head_entry": "2026-09-18（v2.3.180 W580 CI 红灯热修复：W579 dark-state-gate 首跑失败——Checkout 未设 fetch-depth: 0，浅克隆下「Skip if footer-only push」的 git diff $BEFORE $SHA 报 exit 128（对象不存在），主截图 job 有设而新 job 漏配；补 fetch-depth: 0 一行（与主 job 同构）；主 job 本跑 success、门禁逻辑未及执行，修复后由下一 push/周检首跑验证）",
+  "head_sentence": "W580 CI热修复——dark-state-gate补fetch-depth:0（浅克隆git diff 128）",
+  "changelog_body": "\r\n\r\n> **来源**：W579 dark-state-gate 首跑 CI 红灯（run 35280503565）热修复。\r\n> - **根因**：dark-state-gate job 的 Checkout 未设 `fetch-depth: 0`——actions/checkout 默认浅克隆（depth 1），「Skip if footer-only push」步骤的 `git diff \"$BEFORE\" \"$SHA\"` 因 before 对象不存在报 **exit 128**，job 失败（门禁逻辑本身未及执行；同 run 的主截图 job success）。\r\n> - **修法**：Checkout 补 `fetch-depth: 0` 一行（与主截图 job 同构），并注明首跑实证。\r\n> - **验证**：修复后 dark-state-gate 首个全流程运行（本批 push 触发）通过为准；门禁判定逻辑已由本地三层验证兜底（self-test 5/5·双跑零差异·实弹篡改 FAIL/还原 PASS）。\r\n> - **文件**：详见 scripts/output/file-index.md W580 段。\r\n> - **状态**：已落地（本批随 W580 提交并 push origin/main）。",
+  "milestone_block": "- **v2.3.180 W580 CI 红灯热修复**：dark-state-gate Checkout 补 fetch-depth: 0（浅克隆 git diff $BEFORE $SHA 报 128·首跑实证·主 job 同构）。",
+  "agents_note": "2026-09-18（v2.3.180 W580）CI 红灯热修复：无 § 结构性变更（dark-state-gate Checkout 补 fetch-depth: 0——浅克隆下 git diff $BEFORE $SHA 报 128·首跑实证），仅版本脚注同步",
+  "file_index_rows": [
+    "| .github/workflows/screenshot-review.yml | W580 | 热修复·dark-state-gate Checkout 补 fetch-depth: 0（浅克隆 git diff 128·首跑实证） |"
+  ]
+}

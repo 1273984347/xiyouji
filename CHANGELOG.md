@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W584），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W585），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.185（2026-09-19）：W585 注入头行mouseout补bubbles+断言等待对齐动效上限 — B/D观测项升回阻断·EN 59/62+ZH 58/61（余6页页面级残留登记）
+
+> **来源**：W581 批 B/D 观测项（EN 13+ZH 5 页）的定向修复（用户指出「你自己用电脑不能操作吗」——残留在本机即可深挖，无需真机）。
+> - **根因一（注入头行漏网）**：W581 升级②的 bubbles 只覆盖了 touchmove 变体的 mouseout 行，头行 `if (prev && prev !== el) { prev.dispatchEvent(new MouseEvent('mouseout')) }` 在 124 页全量漏网——非冒派发到命中子元素（如 circle）即止，绑定在 g 包装层的 hideTip 不触发（journey-geo-semiotics 实证：修复后该页 B 清零）——恰好解释观测项失败分布（hide 绑在命中元素本层的页无恙）。修复：124 页头行统一补 bubbles。
+> - **根因二（断言等待短于页面动效）**：heaven/deconstruction/six-senses 族 hide 走 `tooltip.transition().duration(400).style('opacity',0)`——400ms 过渡合规（动效契约 ≤600ms）而断言只等 300ms，读到的 opacity 尚在过渡中——等待对齐 650ms 后三页 B 清零。教训：**涉及显隐的断言等待须盖过页面动效上限，而非经验值 300ms**。
+> - **B/D 升回阻断**：上述两根因修复后终验 EN 59/62 + ZH 58/61（阻断=A/B/C/D+pageerror 全链）。
+> - **余 6 页页面级残留（如实登记）**：deconstruction（zh+en）散点图 show 绑 mousemove（非 mouseover）+opacity hide 的生命周期形态、cultural-misreading（zh+en）D 断言 keys=[]、concept-device（zh）D——A/C 核心断言（触屏触发/再触发）全过，残余为 B/D 语义在页面个性实现下的 harness 语境差异，登记真机验证 + 定向修复批。
+> - **验证**：generate_csp 重生成 --check 0 漂移；verify_delivery 核心全绿；check_screenshot_gates 235 页 FAIL 0；check_contract_smoke 全绿。
+> - **文件**：详见 scripts/output/file-index.md W585 段。
+> - **状态**：已落地（本批随 W585 提交并 push origin/main）。
 ### v2.3.184（2026-09-19）：W584 O1审计器并行化 — state内3 worker并发共享context·S2×163实测2m41s（原约12min·4.5×）·163页与基线零差异
 
 > **来源**：W577 复盘报告 WBS 表 O1「审计器跑批并行化（3 context 并行）」，2026-09-19 用户「按顺序做」指令第 4 项。
