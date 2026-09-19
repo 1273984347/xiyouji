@@ -1,0 +1,19 @@
+{
+  "batch": "W586",
+  "version": "v2.3.186",
+  "date": "2026-09-19",
+  "title": "W586 注入hide分支祖先链mouseleave+e2e动效等待与判定语义定型 — B/D全阻断·EN 62/62+ZH 61/61全绿·warn=0",
+  "desc": "注入祖先链mouseleave与e2e定型",
+  "head_entry": "2026-09-19（v2.3.186 W586 注入 hide 分支祖先链 mouseleave + e2e 定型（用户「继续」·B/D 残留 6 页定向修复完成·零页面源码改动）：升级⑤=hide 分支沿 prev→documentElement 祖先链派发 mouseleave（真实指针离开语义——cultural-misreading 的 cellG/散点图的 mouseleave 型 hide 均需祖先链才能命中·升级④的本体直派不够）；e2e 三处定型——① hide/show 等待 650ms 盖过动效上限（页面 transition 400ms 合规）；② 鼠标参照 refBlank 在全视口触控垫在位时拍摄（pad 移除后 Chrome 重算 hover 会重新命中图表元素污染基线）；③ D 断言增「与探针预期内容一致」判定（持久显示型页面——concept-device 光束 mouseout 不重置为页面设计）；终验 B/D 全阻断下 EN 62/62 + ZH 61/61 全绿 warn=0）",
+  "head_sentence": "W586 注入祖先链mouseleave+e2e定型——B/D全阻断·双池全绿warn=0",
+  "milestone_block": "- **v2.3.186 W586 注入祖先链 mouseleave + e2e 定型**：hide 分支沿祖先链派发 mouseleave（mouseleave 型 hide 页覆盖）·e2e 等待 650ms/全视口触控垫/内容匹配判定三处定型·B/D 全阻断下 EN 62/62+ZH 61/61 全绿 warn=0。",
+  "agents_note": "2026-09-19（v2.3.186 W586）注入祖先链 mouseleave+e2e 定型：无 § 结构性变更（hide 分支沿 prev→documentElement 祖先链派发 mouseleave——mouseleave 型 hide 页需祖先链命中·e2e 等待对齐动效上限/refBlank 触控垫在位拍摄/持久型内容匹配判定三处定型·B/D 全阻断 EN 62/62+ZH 61/61 warn=0），仅版本脚注同步",
+  "changelog_body": "\r\n\r\n> **来源**：W585 批余 6 页（B/D 页面级残留）定向修复（用户「继续」指令）。\r\n> - **注入升级⑤（124 页+试点页·零页面源码改动）**：hide 分支沿 `prev → documentElement` 祖先链逐级派发 `mouseleave`——真实指针离开即沿祖先链触发 leave，mouseleave 型 hide 页（cultural-misreading 的 cellG、deconstruction 散点）在祖先绑定的处理器由此命中；mouseout(bubbles) 保持不变。\r\n> - **e2e 三处定型**：① hide/show 等待 300→650ms——页面 hide transition 可达 400ms（动效契约合规）而断言等待须盖过动效上限；② 鼠标参照 refBlank 在全视口触控垫**在位时**拍摄（pad 移除后 Chrome 重算 hover 会重新命中图表元素污染基线；全视口保证指针任何移动必离开原元素）；③ D 断言增「与探针预期内容一致」判定——持久显示型页面（concept-device 光束 mouseout 不重置为页面设计）的再显内容与探针预期相同即通过。\r\n> - **终验**：B/D 全阻断下 **EN 62/62 + ZH 61/61 全绿（warn=0·全部 5 断言）**；generate_csp --check 0 漂移；verify_delivery 核心全绿。\r\n> - **文件**：详见 scripts/output/file-index.md W586 段。\r\n> - **状态**：已落地（本批随 W586 提交并 push origin/main）。",
+  "file_index_rows": [
+    "| site/data/（批量61页） | W586 | 更新·注入hide分支祖先链mouseleave（mouseleave型hide页覆盖） |",
+    "| site/en/（批量62页） | W586 | 更新·同上 |",
+    "| scripts/_w586_upgrade_leave.py | W586 | 新增·leave本体直派升级器（升级④） |",
+    "| scripts/_w586_upgrade_ancestors.py | W586 | 新增·祖先链leave升级器（升级⑤·124页） |",
+    "| scripts/_w575_touchtip_e2e.js | W586 | 更新·等待650ms/全视口触控垫/refBlank在位拍摄/D内容匹配判定四项定型 |"
+  ]
+}

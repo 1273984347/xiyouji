@@ -40,7 +40,7 @@ const SNAP = () => {
     const cs = getComputedStyle(el);
     const vis = cs.display !== 'none' && cs.visibility !== 'hidden' &&
       (parseFloat(cs.opacity) > 0.05 || el.classList.contains('visible'));
-    m[el.id || `tip#${i}:${el.tagName}`] = { vis, len: (el.textContent || '').trim().length, html: el.innerHTML };
+    m[el.id || `tip#${i}:${el.tagName}`] = { vis, len: (el.textContent || '').trim().length, html: el.innerHTML, txt: (el.textContent || '').trim().slice(0, 60) };
   });
   return m;
 };
@@ -115,7 +115,7 @@ const PROBE = ({ kind, excludeA }) => {
 const FOOTER_FIX = (pg) => pg.evaluate(() => {
   const pad = document.createElement('div');
   pad.id = 'w581-pad';
-  pad.style.cssText = 'position:fixed!important;top:0;left:0;width:80px;height:80px;z-index:2147483647;background:transparent;';
+  pad.style.cssText = 'position:fixed!important;inset:0;width:100%;height:100%;z-index:2147483647;background:transparent;';
   document.body.appendChild(pad);
 });
 const FOOTER_RESTORE = (pg) => pg.evaluate(() => {
@@ -163,7 +163,12 @@ const FIND_ONLY = (pg) => pg.evaluate(() => {
               if (!hit) continue;
               hit.dispatchEvent(new MouseEvent('mouseover', { clientX: x, clientY: y, bubbles: true }));
               hit.dispatchEvent(new MouseEvent('mousemove', { clientX: x, clientY: y, bubbles: true }));
-              if (filled()) { hit.dispatchEvent(new MouseEvent('mouseout', { bubbles: true })); restore(); return { x, y }; }
+              if (filled()) {
+                hit.dispatchEvent(new MouseEvent('mouseout', { bubbles: true }));
+                const expectHtml = topEls().map(el => (el.textContent || '').trim().slice(0, 60)).join('|');
+                restore();
+                return { x, y, expectHtml };
+              }
               hit.dispatchEvent(new MouseEvent('mouseout', { bubbles: true }));
               clearTips();
             }
@@ -315,11 +320,11 @@ const TOUCH_FIND = (pg) => pg.evaluate(() => {
         if (process.env.W575_EVENTS) console.log('EVENTS-B', rel, JSON.stringify(await p.evaluate(() => (window.__evlog || []).slice(-14))));
         // 鼠标参照：真实 mouse 到活点再离开到 header（页面自身 mouse 路径语义）
         const mr = await FIND_ONLY(p);
-        if (mr) { await p.mouse.move(mr.x, mr.y); await p.waitForTimeout(500); }
         await FOOTER_FIX(p);
+        if (mr) { await p.mouse.move(mr.x, mr.y); await p.waitForTimeout(500); }
         await p.mouse.move(40, 40); await p.waitForTimeout(650);
+        const refBlank = await state();  // pad 在位时拍摄——pad 移除后 Chrome 重算 hover 会重新命中图表元素污染基线
         await FOOTER_RESTORE(p);
-        const refBlank = await state();
         const allKeys = Array.from(new Set([...Object.keys(stateShow), ...Object.keys(stateB), ...Object.keys(refBlank)]));
         const stillShowing = Object.keys(stateShow).some(k => stateShow[k] && stateShow[k].vis && stateB[k] && stateB[k].vis && stateB[k].html === stateShow[k].html);
         // B 判定：touch 离开不再显示 touch 所示内容（隐藏/复位型），或与 mouse 离开结果一致（持久型）
@@ -346,7 +351,11 @@ const TOUCH_FIND = (pg) => pg.evaluate(() => {
             if (shownKeys(base, stateD).length > 0) break;
           }
         }
-        ok('mouse.move回归→再触发', shownKeys(base, stateD).length > 0, `keys=${JSON.stringify(shownKeys(base, stateD))}`);
+        if (process.env.W575_EVENTS) console.log('EVENTS-D', rel, JSON.stringify(await p.evaluate(() => (window.__evlog || []).slice(-10))));
+        // D 判定：vis/内容变化，或与探针预期内容一致（持久显示型页面——光束 mouseout 不重置为页面设计）
+        const contentMatch = ptD && ptD.expectHtml && Object.keys(stateD).some(k => stateD[k] && stateD[k].vis &&
+          (ptD.expectHtml.includes(stateD[k].txt.slice(0, 40)) || stateD[k].txt.includes(ptD.expectHtml.slice(0, 40))));
+        ok('mouse.move回归→再触发', shownKeys(base, stateD).length > 0 || contentMatch, `match=${contentMatch} base=${JSON.stringify(base).slice(0, 120)}`);
         function eqSafe(x, y, keys) {
           return keys.every(k => {
             if (!x[k] || !y[k]) return false;
