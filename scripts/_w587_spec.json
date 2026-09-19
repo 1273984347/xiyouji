@@ -1,0 +1,19 @@
+{
+  "batch": "W587",
+  "version": "v2.3.187",
+  "date": "2026-09-20",
+  "title": "W587 暗色存量修复阶段二 — 运行时填充亮度提升器163页·invisible 259→0·缺陷页37→0全清零·浅色零改动",
+  "desc": "暗色存量修复阶段二",
+  "head_entry": "2026-09-20（v2.3.187 W587 暗色存量修复阶段二（连续色阶插值页 259 处收口）：注入「运行时填充亮度提升器」163 页（zh+en 含 svg·幂等标记 W587 dark lift·独立 script 块）——matchMedia dark 门控浅色零改动·计算填充 rgb() 且亮度 <0.16 的 svg 形状（fill=none/渐变 url() 不碰·文字不碰·尺寸≥3px）沿暖白二分混合至亮度 ≥0.22（审计阈值留裕量·保色相）·dataset 标记防重复·多时点采样（0/700/2000/4000ms）覆盖延迟渲染·fail-open 异常不伤页面；实测 invisible 259→0·缺陷页 37→0·pageerror 0——暗色不可读图形全量清零（阶段一 302→259+阶段二 259→0·自 W569 基线 1590 起的暗色治理全链闭环）；审计基线刷新至零缺陷状态（只增即 FAIL）；实拍复核 relationships 条形图 7 色全可见、mbti 雷达图多边形分明）",
+  "head_sentence": "W587 暗色阶段二——运行时亮度提升器·invisible清零·浅色零改动",
+  "milestone_block": "- **v2.3.187 W587 暗色存量修复阶段二**：运行时填充亮度提升器 163 页（dark 门控·亮度 <0.16 向暖白混合至 ≥0.22·保色相·fill=none/渐变不碰）·invisible 259→0·缺陷页 37→0 全清零·基线刷新至零缺陷（自 W569 基线 1590 起暗色治理全链闭环）。",
+  "agents_note": "2026-09-20（v2.3.187 W587）暗色存量修复阶段二：无 § 结构性变更（运行时填充亮度提升器 163 页——dark 门控·亮度 <0.16 混合至 ≥0.22 保色相·fill=none/渐变/文字不碰·多时点采样·fail-open；invisible 259→0·缺陷页 37→0·基线刷新至零缺陷·暗色治理全链闭环），仅版本脚注同步",
+  "changelog_body": "\r\n\r\n> **来源**：W582 阶段一登记的连续色阶插值页残余（259 处·CSS 逐值不可覆盖），2026-09-19 用户「继续」指令。\r\n> - **修法（设计三查合规·W571）**：注入「运行时填充亮度提升器」至 163 页（zh+en 含 svg 口径）——① `matchMedia('(prefers-color-scheme: dark)')` 门控·浅色主题零改动；② 仅处理计算填充为 `rgb()` 的 svg 形状（fill=none/渐变 url() 不碰·文字元素不碰——文字低对比已由 W569/W582 覆盖）；③ 亮度 <0.16 者沿暖白 (242,235,220) 二分混合至 ≥0.22（审计阈值留裕量）·色相保持；④ `dataset.w587` 标记防重复·多时点采样（0/700/2000/4000ms）覆盖延迟渲染·fail-open（异常不伤页面）。\r\n> - **实测**：invisible 259→**0**、缺陷页 37→**0**、pageerror 0——暗色不可读图形全量清零。**自 W569 基线 1590（含光晕假阳性）/W571 诚实基线 318 起的暗色治理全链闭环**（W572 暗色文字反白→W582 离散 hex 映射→W587 连续色阶运行时提升）。\r\n> - **基线**：check_dark_state_gate --update-baseline 刷新至零缺陷状态（163 行·只增即 FAIL 守住清零面）；暗色门禁 OK·契约冒烟 OK。\r\n> - **视觉复核（实拍）**：relationships 势力条形图 7 色全可见、mbti-evolution 雷达图多边形分明——截图存 scripts/output/screenshots/_w587/（before/after 各 3 页）。\r\n> - **验证**：generate_csp 重生成 --check 0 漂移（+163 哈希）；check_screenshot_gates 235 页 FAIL 0（鼠标路径回归）；check_contract_smoke 全绿；verify_delivery 核心全绿。\r\n> - **文件**：详见 scripts/output/file-index.md W587 段。\r\n> - **状态**：已落地（本批随 W587 提交并 push origin/main）。",
+  "file_index_rows": [
+    "| site/（批量163页·zh+en含svg） | W587 | 更新·注入运行时填充亮度提升器（dark门控·亮度<0.16混合至≥0.22·幂等标记） |",
+    "| scripts/output/render-state-audit-baseline.jsonl | W587 | 更新·基线刷新至零缺陷状态（invisible 0·缺陷页 0） |",
+    "| scripts/_w587_inject_darklift.py | W587 | 新增·暗色亮度提升器注入器（三查合规·fail-open） |",
+    "| scripts/_w587_shots.js | W587 | 新增·修复前后暗色实拍（before/after×3页） |",
+    "| scripts/_w587_shots2.js | W587 | 新增·图表区域元素级特写拍摄 |"
+  ]
+}

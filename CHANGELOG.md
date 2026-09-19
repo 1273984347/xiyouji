@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W586），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W587），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.187（2026-09-20）：W587 暗色存量修复阶段二 — 运行时填充亮度提升器163页·invisible 259→0·缺陷页37→0全清零·浅色零改动
+
+> **来源**：W582 阶段一登记的连续色阶插值页残余（259 处·CSS 逐值不可覆盖），2026-09-19 用户「继续」指令。
+> - **修法（设计三查合规·W571）**：注入「运行时填充亮度提升器」至 163 页（zh+en 含 svg 口径）——① `matchMedia('(prefers-color-scheme: dark)')` 门控·浅色主题零改动；② 仅处理计算填充为 `rgb()` 的 svg 形状（fill=none/渐变 url() 不碰·文字元素不碰——文字低对比已由 W569/W582 覆盖）；③ 亮度 <0.16 者沿暖白 (242,235,220) 二分混合至 ≥0.22（审计阈值留裕量）·色相保持；④ `dataset.w587` 标记防重复·多时点采样（0/700/2000/4000ms）覆盖延迟渲染·fail-open（异常不伤页面）。
+> - **实测**：invisible 259→**0**、缺陷页 37→**0**、pageerror 0——暗色不可读图形全量清零。**自 W569 基线 1590（含光晕假阳性）/W571 诚实基线 318 起的暗色治理全链闭环**（W572 暗色文字反白→W582 离散 hex 映射→W587 连续色阶运行时提升）。
+> - **基线**：check_dark_state_gate --update-baseline 刷新至零缺陷状态（163 行·只增即 FAIL 守住清零面）；暗色门禁 OK·契约冒烟 OK。
+> - **视觉复核（实拍）**：relationships 势力条形图 7 色全可见、mbti-evolution 雷达图多边形分明——截图存 scripts/output/screenshots/_w587/（before/after 各 3 页）。
+> - **验证**：generate_csp 重生成 --check 0 漂移（+163 哈希）；check_screenshot_gates 235 页 FAIL 0（鼠标路径回归）；check_contract_smoke 全绿；verify_delivery 核心全绿。
+> - **文件**：详见 scripts/output/file-index.md W587 段。
+> - **状态**：已落地（本批随 W587 提交并 push origin/main）。
 ### v2.3.186（2026-09-19）：W586 注入hide分支祖先链mouseleave+e2e动效等待与判定语义定型 — B/D全阻断·EN 62/62+ZH 61/61全绿·warn=0
 
 > **来源**：W585 批余 6 页（B/D 页面级残留）定向修复（用户「继续」指令）。

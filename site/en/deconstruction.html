@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-Kg5qEDzwmK3sCc551tDowfcuj9AjtJYSxDXDH47xkcE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-Kg5qEDzwmK3sCc551tDowfcuj9AjtJYSxDXDH47xkcE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg=' 'sha256-q8M2It1mbVHcePdq+IbbtDfMKyB8DkqVLaWsojlGNGQ='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Deconstruction and East Asian Re-creations · Annotated Journey to the West</title>
@@ -2560,6 +2560,42 @@ function renderTreemap(opts){
     document.addEventListener('touchmove', function () {
         if (prev) { prev.dispatchEvent(new MouseEvent('mouseout', { bubbles: true })); var ln2 = prev; while (ln2 && ln2 !== document.documentElement) { ln2.dispatchEvent(new MouseEvent('mouseleave')); ln2 = ln2.parentNode; } prev = null; }
     }, { passive: true, capture: true });
+})();
+</script>
+<script>/* W587 dark lift（暗色阶段二·运行时填充亮度提升·浅色零改动） */
+(function () {
+    try {
+    if (!window.matchMedia || !window.matchMedia('(prefers-color-scheme: dark)').matches) return;
+    var TH = 0.16, TARGET = 0.22;
+    function lum(r, g, b) {
+        function f(c) { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }
+        return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+    }
+    function liftOnce() {
+        var els = document.querySelectorAll('svg rect, svg circle, svg path, svg polygon, svg ellipse');
+        for (var i = 0; i < els.length; i++) {
+            var el = els[i];
+            if (el.dataset.w587 === '1') continue;
+            var cf = getComputedStyle(el).fill;
+            if (cf.indexOf('rgb') !== 0) continue;
+            var m = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(cf);
+            if (!m) continue;
+            var r = +m[1], g = +m[2], b = +m[3];
+            if (lum(r, g, b) >= TH) continue;
+            var rect = el.getBoundingClientRect();
+            if (rect.width < 3 || rect.height < 3) continue;
+            var rr = r, gg = g, bb = b;
+            for (var k = 1; k <= 20; k++) {
+                var a = k / 20;
+                rr = Math.round(r + (242 - r) * a); gg = Math.round(g + (235 - g) * a); bb = Math.round(b + (220 - b) * a);
+                if (lum(rr, gg, bb) >= TARGET) break;
+            }
+            el.style.fill = 'rgb(' + rr + ',' + gg + ',' + bb + ')';
+            el.dataset.w587 = '1';
+        }
+    }
+    [0, 700, 2000, 4000].forEach(function (d) { setTimeout(liftOnce, d); });
+    } catch (e) { /* fail-open：提升失败不影响页面 */ }
 })();
 </script>
 </body>
