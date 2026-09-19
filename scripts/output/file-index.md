@@ -11,6 +11,16 @@
 ---
 
 
+## W586 W586 注入hide分支祖先链mouseleave+e2e动效等待与判定语义定型（2026-09-19·v2.3.186）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/（批量61页） | W586 | 更新·注入hide分支祖先链mouseleave（mouseleave型hide页覆盖） |
+| site/en/（批量62页） | W586 | 更新·同上 |
+| scripts/_w586_upgrade_leave.py | W586 | 新增·leave本体直派升级器（升级④） |
+| scripts/_w586_upgrade_ancestors.py | W586 | 新增·祖先链leave升级器（升级⑤·124页） |
+| scripts/_w575_touchtip_e2e.js | W586 | 更新·等待650ms/全视口触控垫/refBlank在位拍摄/D内容匹配判定四项定型 |
+
 ## W585 W585 注入头行mouseout补bubbles+断言等待对齐动效上限（2026-09-19·v2.3.185）
 
 | 文件 | W | 说明 |

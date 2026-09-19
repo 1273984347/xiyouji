@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W585），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W586），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.186（2026-09-19）：W586 注入hide分支祖先链mouseleave+e2e动效等待与判定语义定型 — B/D全阻断·EN 62/62+ZH 61/61全绿·warn=0
+
+> **来源**：W585 批余 6 页（B/D 页面级残留）定向修复（用户「继续」指令）。
+> - **注入升级⑤（124 页+试点页·零页面源码改动）**：hide 分支沿 `prev → documentElement` 祖先链逐级派发 `mouseleave`——真实指针离开即沿祖先链触发 leave，mouseleave 型 hide 页（cultural-misreading 的 cellG、deconstruction 散点）在祖先绑定的处理器由此命中；mouseout(bubbles) 保持不变。
+> - **e2e 三处定型**：① hide/show 等待 300→650ms——页面 hide transition 可达 400ms（动效契约合规）而断言等待须盖过动效上限；② 鼠标参照 refBlank 在全视口触控垫**在位时**拍摄（pad 移除后 Chrome 重算 hover 会重新命中图表元素污染基线；全视口保证指针任何移动必离开原元素）；③ D 断言增「与探针预期内容一致」判定——持久显示型页面（concept-device 光束 mouseout 不重置为页面设计）的再显内容与探针预期相同即通过。
+> - **终验**：B/D 全阻断下 **EN 62/62 + ZH 61/61 全绿（warn=0·全部 5 断言）**；generate_csp --check 0 漂移；verify_delivery 核心全绿。
+> - **文件**：详见 scripts/output/file-index.md W586 段。
+> - **状态**：已落地（本批随 W586 提交并 push origin/main）。
 ### v2.3.185（2026-09-19）：W585 注入头行mouseout补bubbles+断言等待对齐动效上限 — B/D观测项升回阻断·EN 59/62+ZH 58/61（余6页页面级残留登记）
 
 > **来源**：W581 批 B/D 观测项（EN 13+ZH 5 页）的定向修复（用户指出「你自己用电脑不能操作吗」——残留在本机即可深挖，无需真机）。
