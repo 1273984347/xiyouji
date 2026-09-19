@@ -1,0 +1,16 @@
+{
+  "batch": "W588",
+  "version": "v2.3.188",
+  "date": "2026-09-20",
+  "title": "W588 暗色提升器v2（Observer无竞态） — CI实证31项渲染时序竞态根治·MutationObserver+80ms防抖·163页本地复验invisible 0",
+  "desc": "暗色提升器v2无竞态化",
+  "head_entry": "2026-09-20（v2.3.188 W588 暗色提升器 v2（CI 实证修复）：W587 的定时采样版（0/700/2000/4000ms）在 CI 慢环境与审计评估时窗竞态——dark-state-gate 实报 31 项 invisible 新增（本地快渲染 700ms 即覆盖·CI 渲染落在 2000-4000ms 间·评估时窗内未及提升）；v2 改 **MutationObserver**（childList+subtree+fill/style 属性过滤·80ms 防抖）+ 定时兜底 + **去标记化幂等**（按当前计算填充实时判定·变亮即自然收敛·无标记卡死问题）；163 页升级后本地复验 invisible 0·缺陷页 0·门禁绿；另查明同期 Security 工作流红灯为 npm registry 维护·npm registry 503 外部故障·恢复后重跑全绿）",
+  "head_sentence": "W588 暗色提升器v2——Observer无竞态·CI 31项竞态根治",
+  "milestone_block": "- **v2.3.188 W588 暗色提升器 v2**：定时采样→MutationObserver+80ms 防抖+去标记化幂等（CI 实证 31 项渲染时序竞态根治·本地复验 invisible 0）·同期 Security 红灯=npm registry 维护外部故障（重跑绿）。",
+  "agents_note": "2026-09-20（v2.3.188 W588）暗色提升器 v2：无 § 结构性变更（定时采样→MutationObserver+防抖+去标记化幂等——CI 慢环境渲染时序竞态 31 项根治·本地复验 invisible 0·门禁绿），仅版本脚注同步",
+  "changelog_body": "\r\n\r\n> **来源**：W587 推送后 dark-state-gate CI 实报 31 项 invisible 新增（本地为 0）的环境差异修复。\r\n> - **根因（竞态）**：W587 定时采样提升器（0/700/2000/4000ms）与图表渲染时序竞态——CI 机器较慢，形状渲染落在 2000-4000ms 区间，而审计在 ~2.5s 评估，采样末次（4000ms）尚未执行 → 已渲染形状未被提升。本地快渲染 700ms 首采样即覆盖故为 0。该竞态对真实用户同样是体验缺口（慢设备 2-4s 内图表不可见）。\r\n> - **v2 修法**：**MutationObserver**（documentElement childList+subtree+attributeFilter ['fill','style']）+ 80ms 防抖调度 + 定时兜底（0/500/1500/3000/5000ms）+ **去标记化幂等**（按当前计算填充实时判定——提升后变亮自然收敛，替代 dataset 标记避免「页面重设暗色时标记卡死不再提升」的死角）。形状一出现/一变暗即提升，与时序彻底解耦。\r\n> - **同批如实记录**：W587 推送同期 Security 工作流红灯=npm registry 维护（503 Service Unavailable·本地同口径复现确诊·registry 恢复后重跑 success·非本批改动所致）。\r\n> - **验证**：163 页升级后本地重审计 invisible 0·缺陷页 0；check_dark_state_gate OK；verify_delivery 核心全绿。CI dark-state-gate 复跑以本批为准。\r\n> - **文件**：详见 scripts/output/file-index.md W588 段。\r\n> - **状态**：已落地（本批随 W588 提交并 push origin/main）。",
+  "file_index_rows": [
+    "| site/（批量163页·zh+en含svg） | W588 | 更新·暗色提升器v2（MutationObserver+80ms防抖+去标记化幂等·定时兜底） |",
+    "| scripts/_w588_upgrade_observer.py | W588 | 新增·v2升级器（163页块替换·幂等锚点） |"
+  ]
+}

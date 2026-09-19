@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-Y1IluSfkn6ANWY6GKhULChQkqU/Oh5c0cqNebmUlWns=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI=' 'sha256-q8M2It1mbVHcePdq+IbbtDfMKyB8DkqVLaWsojlGNGQ='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-Y1IluSfkn6ANWY6GKhULChQkqU/Oh5c0cqNebmUlWns=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI=' 'sha256-n4SCVjDX/ymksVsnERtsQiNo0iM/1+hQ9yzHwEvkGys='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>文化错位与误读地图 · 详解西游记</title>
@@ -2452,11 +2452,11 @@ function renderTreemap(opts){
     }, { passive: true, capture: true });
 })();
 </script>
-<script>/* W587 dark lift（暗色阶段二·运行时填充亮度提升·浅色零改动） */
+<script>/* W588 dark lift v2（暗色阶段二·MutationObserver 无竞态·浅色零改动） */
 (function () {
     try {
     if (!window.matchMedia || !window.matchMedia('(prefers-color-scheme: dark)').matches) return;
-    var TH = 0.16, TARGET = 0.22;
+    var TH = 0.16, TARGET = 0.22, timer = null;
     function lum(r, g, b) {
         function f(c) { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }
         return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
@@ -2465,7 +2465,6 @@ function renderTreemap(opts){
         var els = document.querySelectorAll('svg rect, svg circle, svg path, svg polygon, svg ellipse');
         for (var i = 0; i < els.length; i++) {
             var el = els[i];
-            if (el.dataset.w587 === '1') continue;
             var cf = getComputedStyle(el).fill;
             if (cf.indexOf('rgb') !== 0) continue;
             var m = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(cf);
@@ -2481,11 +2480,15 @@ function renderTreemap(opts){
                 if (lum(rr, gg, bb) >= TARGET) break;
             }
             el.style.fill = 'rgb(' + rr + ',' + gg + ',' + bb + ')';
-            el.dataset.w587 = '1';
         }
     }
-    [0, 700, 2000, 4000].forEach(function (d) { setTimeout(liftOnce, d); });
-    } catch (e) { /* fail-open：提升失败不影响页面 */ }
+    function schedule() { if (timer) return; timer = setTimeout(function () { timer = null; liftOnce(); }, 80); }
+    [0, 500, 1500, 3000, 5000].forEach(function (d) { setTimeout(liftOnce, d); });
+    if (window.MutationObserver) {
+        var mo = new MutationObserver(schedule);
+        mo.observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['fill', 'style'] });
+    }
+    } catch (e) { /* fail-open */ }
 })();
 </script>
 </body>

@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W587），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W588），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.188（2026-09-20）：W588 暗色提升器v2（Observer无竞态） — CI实证31项渲染时序竞态根治·MutationObserver+80ms防抖·163页本地复验invisible 0
+
+> **来源**：W587 推送后 dark-state-gate CI 实报 31 项 invisible 新增（本地为 0）的环境差异修复。
+> - **根因（竞态）**：W587 定时采样提升器（0/700/2000/4000ms）与图表渲染时序竞态——CI 机器较慢，形状渲染落在 2000-4000ms 区间，而审计在 ~2.5s 评估，采样末次（4000ms）尚未执行 → 已渲染形状未被提升。本地快渲染 700ms 首采样即覆盖故为 0。该竞态对真实用户同样是体验缺口（慢设备 2-4s 内图表不可见）。
+> - **v2 修法**：**MutationObserver**（documentElement childList+subtree+attributeFilter ['fill','style']）+ 80ms 防抖调度 + 定时兜底（0/500/1500/3000/5000ms）+ **去标记化幂等**（按当前计算填充实时判定——提升后变亮自然收敛，替代 dataset 标记避免「页面重设暗色时标记卡死不再提升」的死角）。形状一出现/一变暗即提升，与时序彻底解耦。
+> - **同批如实记录**：W587 推送同期 Security 工作流红灯=npm registry 维护（503 Service Unavailable·本地同口径复现确诊·registry 恢复后重跑 success·非本批改动所致）。
+> - **验证**：163 页升级后本地重审计 invisible 0·缺陷页 0；check_dark_state_gate OK；verify_delivery 核心全绿。CI dark-state-gate 复跑以本批为准。
+> - **文件**：详见 scripts/output/file-index.md W588 段。
+> - **状态**：已落地（本批随 W588 提交并 push origin/main）。
 ### v2.3.187（2026-09-20）：W587 暗色存量修复阶段二 — 运行时填充亮度提升器163页·invisible 259→0·缺陷页37→0全清零·浅色零改动
 
 > **来源**：W582 阶段一登记的连续色阶插值页残余（259 处·CSS 逐值不可覆盖），2026-09-19 用户「继续」指令。
