@@ -11,6 +11,16 @@
 ---
 
 
+## W587 W587 暗色存量修复阶段二（2026-09-20·v2.3.187）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/（批量163页·zh+en含svg） | W587 | 更新·注入运行时填充亮度提升器（dark门控·亮度<0.16混合至≥0.22·幂等标记） |
+| scripts/output/render-state-audit-baseline.jsonl | W587 | 更新·基线刷新至零缺陷状态（invisible 0·缺陷页 0） |
+| scripts/_w587_inject_darklift.py | W587 | 新增·暗色亮度提升器注入器（三查合规·fail-open） |
+| scripts/_w587_shots.js | W587 | 新增·修复前后暗色实拍（before/after×3页） |
+| scripts/_w587_shots2.js | W587 | 新增·图表区域元素级特写拍摄 |
+
 ## W586 W586 注入hide分支祖先链mouseleave+e2e动效等待与判定语义定型（2026-09-19·v2.3.186）
 
 | 文件 | W | 说明 |
