@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W588），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W589），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.189（2026-09-20）：W589 暗色审计读数语义修正+映射合并重建 — computed读数/透明与var豁免/alpha split判定·W582+W588b两代映射合并·残余48/7登记（数据驱动角色色）
+
+> **来源**：W587/W588 运行时提升器与审计读数的交互之谜收口（用户「继续」指令·B/D 残留与暗色阶段二定向收口）。
+> - **审计读数语义修正（本 arc 多轮假象的共同成因）**：invisible 判定原为 `getAttribute('fill') || computed`——属性优先读的是**页面意图串**：CSS !important 映射生效后渲染已亮，但属性串仍是旧暗值 → 审计持续误计；改读 **computed（渲染事实）**。配套两项豁免：alpha<0.1 透明命中层（设计产物·rgba(0,0,0,0) 悬浮交互层非内容·split 判定免模板转义层）+ var() 引用型填充（面板底色/绘图区·主题自适应设计产物）。
+> - **映射合并重建**：W582 hex 24 条 + W588b 全量 rgb 37 条合并为统一映射段（中途一次块替换误删 W582 块致 895 回潮·即发现即复原）；W587/W588 的 JS 亮度提升器（163 页脚本块）**撤除**——CSS !important 持续压制对动画重设型页面稳定占优、无竞态无时序问题，脚本方案整体让位。
+> - **实测（诚实）**：invisible 48/7 页（ rgb(0,0,0)×46=数据驱动角色主题色如黑·需逐页数据级设计决策 + 零星散值）——较 W569 基线 1590/W571 诚实基线 318 仍为大幅改善；残余登记**暗色阶段三设计批**（数据级角色色调色）。审计基线刷新至 48/7（只增即 FAIL）。
+> - **验证**：generate_csp --check 0 漂移；check_dark_state_gate OK；check_contract_smoke OK；check_screenshot_gates 235 页 FAIL 0；verify_delivery 核心全绿。
+> - **文件**：详见 scripts/output/file-index.md W589 段。
+> - **状态**：已落地（本批随 W589 提交并 push origin/main）。
 ### v2.3.188（2026-09-20）：W588 暗色提升器v2（Observer无竞态） — CI实证31项渲染时序竞态根治·MutationObserver+80ms防抖·163页本地复验invisible 0
 
 > **来源**：W587 推送后 dark-state-gate CI 实报 31 项 invisible 新增（本地为 0）的环境差异修复。

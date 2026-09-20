@@ -1,0 +1,2439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-AUo/sRJ/cs6OYH0HMiNEW3CBo1Svc0qOl4fw2AM7YKA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-n4SCVjDX/ymksVsnERtsQiNo0iM/1+hQ9yzHwEvkGys='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>洞府房产档案 · 详解西游记</title>
+    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    
+    
+                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v3 · W476 纸感轻立体（在 v2/W334 基础上增层 · 见 DESIGN.md §4A）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 小圆角 + 四级纸感海拔（v3）· 1px 发丝线分隔 · 大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.subset.woff2') format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.subset.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.subset.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+    --shadow-lift: 0 2px 6px rgba(35, 32, 26, 0.08), 0 8px 24px rgba(35, 32, 26, 0.08);
+
+    /* —— 动效令牌（W460 墨韵动效体系：时长三级 + 缓动三系） —— */
+    /* 时长：fast 即时反馈 / base 状态变化 / slow 入场编排（克制雅致，不上弹跳） */
+    --dur-fast: 150ms;        /* 按压、toggle、色彩切换 */
+    --dur-base: 250ms;        /* hover、行高亮、tooltip */
+    --dur-slow: 500ms;        /* 卡片入场、区块 reveal */
+    /* 缓动：内容抵达用 ease-out 系；弃用裸 ease 关键字 */
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);      /* 均匀精致·默认 */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);       /* 果断自信·大位移入场 */
+    --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);   /* 往返对称·展开收起 */
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== v3 · W476 纸感轻立体令牌层（DESIGN.md §4A） ===== */
+/* 断点常量：640/768/1024/1280/1536 · 最小验收 375 */
+:root {
+    /* —— 四级海拔（hover +1 档 · 悬浮 ≥3 · 禁硬编码阴影） —— */
+    --elev-0: none;
+    --elev-1: var(--shadow);
+    --elev-2: var(--shadow-lift);
+    --elev-3: 0 4px 10px rgba(35, 32, 26, 0.10), 0 12px 32px rgba(35, 32, 26, 0.12);
+    --elev-4: 0 8px 18px rgba(35, 32, 26, 0.14), 0 24px 56px rgba(35, 32, 26, 0.16);
+
+    /* —— 圆角 / 边框 —— */
+    --radius-sm: 2px;  --radius-md: 6px;  --radius-lg: 10px;  --radius-pill: 999px;
+    --border-hairline: 1px solid var(--line);
+    --border-accent: 1px solid var(--accent);
+
+    /* —— 色阶派生（深档 hex 兜底 · 浅档 color-mix 优雅降级） —— */
+    --accent-deep: #AF3F34;  /* 700 档：active/按钮渐变终点 */
+    --accent-tint: color-mix(in srgb, var(--accent) 10%, var(--paper));  /* 100 档选中底 */
+    --accent-wash: color-mix(in srgb, var(--accent) 5%, var(--bg));      /* 050 档 band 底 */
+    --ink-tint: color-mix(in srgb, var(--ink) 5%, var(--bg));            /* 极浅墨 band 底 */
+
+    /* —— 语义功能色（底/边/字三件套） —— */
+    --ok: var(--accent-4);      --ok-bg: color-mix(in srgb, var(--accent-4) 10%, var(--paper));
+    --warn: var(--accent-3);    --warn-bg: color-mix(in srgb, var(--accent-3) 10%, var(--paper));
+    --danger: var(--rebel);     --danger-bg: color-mix(in srgb, var(--rebel) 8%, var(--paper));
+    --info: var(--accent-2);    --info-bg: color-mix(in srgb, var(--accent-2) 10%, var(--paper));
+
+    /* —— 排版阶梯（1.25 · 0 正文 → 5 hero/KPI） —— */
+    --text-step-0: 1rem;       --text-step-1: 1.25rem;    --text-step-2: 1.5625rem;
+    --text-step-3: 1.953rem;   --text-step-4: 2.441rem;   --text-step-5: 3.052rem;
+    --text-hero: clamp(1.75rem, 1.2rem + 2.5vw, 2.75rem);
+    --leading-tight: 1.3;  --leading-heading: 1.4;  --leading-body: 1.75;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/* ===== 夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载 ===== */
+html[data-theme="dark"] {
+    --bg: #221D16;
+    --ink: #F2EBDC;
+    --ink-soft: #CBBFA9;
+    --ink-faint: #8F8674;
+    --paper: #2B2419;
+    --paper-warm: #33291B;
+    --line: rgba(242, 235, 220, 0.14);
+    --accent: #E0604F;
+    --accent-deep: #C94F3F;
+    --accent-soft: #E8A99F;
+    --accent-tint: rgba(224, 96, 79, 0.14);
+    --accent-wash: rgba(224, 96, 79, 0.08);
+    --accent-2: #7FA8C9;
+    --accent-3: #C9A96B;
+    --accent-4: #9DB98A;
+    --ok: #8FBF7F;
+    --warn: #D0A35C;
+    --danger: #D96C5C;
+    --info: #7FA8C9;
+    --elev-0: none;
+    --elev-1: 0 1px 3px rgba(0, 0, 0, 0.40), 0 4px 12px rgba(0, 0, 0, 0.30);
+    --elev-2: 0 2px 6px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
+    --elev-3: 0 4px 10px rgba(0, 0, 0, 0.50), 0 12px 32px rgba(0, 0, 0, 0.45);
+    --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
+    color-scheme: dark;
+}
+html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
+html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
+/* 图表深色适配（通用）：SVG 数据色温和提亮，tooltip 边框跟随令牌 */
+html[data-theme="dark"] svg path[fill^="#"],
+html[data-theme="dark"] svg circle[fill^="#"],
+html[data-theme="dark"] svg rect[fill^="#"] { filter: brightness(1.12) saturate(1.05); }
+html[data-theme="dark"] .chart-tooltip { border-color: var(--line); }
+/* W569：图表暗色适配 v2——数据页图表按宣纸浅色调色板生成，深色下 svg 文字保持墨色填充不可读
+   （全站审计 232 页实证：暗色低对比文字 1298 处）。文字/tspan 反白；形状明度由上方亮度滤波提升。
+   !important 用于压过 d3 .attr('fill')（表现属性）与 .style('fill')（内联）；全站无 fill="none" 文本（实证）。 */
+html[data-theme="dark"]:not(:has(#audit-halo)) svg text,
+html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !important; }
+/* 有 #audit-halo 光晕的页（168 页）：墨字+白晕本就双主题可读，文字填充保持原样（W553 设计） */
+
+  /* —— W582 阶段一：暗色图表填充可读性映射（离散 hex 字面量·逐色独立·非一刀切）——
+     审计基线 render-state-audit-baseline 亮度<0.16 不可读填充的离散部分；
+     仅精确匹配 fill 属性值（fill=none/渐变/连续色阶不受影响）；浅色主题零改动。—— */
+  html[data-theme="dark"] svg [fill="#3a6b8c" i] { fill: #7d99a9; }  /* ×526 L<0.16 */
+  html[data-theme="dark"] svg [fill="#6b3a8c" i] { fill: #a88bb0; }  /* ×130 L<0.16 */
+  html[data-theme="dark"] svg [fill="#8c3a6b" i] { fill: #b8879c; }  /* ×110 L<0.16 */
+  html[data-theme="dark"] svg [fill="#8c2a2a" i] { fill: #be8880; }  /* ×76 L<0.16 */
+  html[data-theme="dark"] svg [fill="#6B6455" i] { fill: #9c9586; }  /* ×50 L<0.16 */
+  html[data-theme="dark"] svg [fill="#c8392c" i] { fill: #d87c6e; }  /* ×46 L<0.16 */
+  html[data-theme="dark"] svg [fill="#2c5f7c" i] { fill: #7f99a4; }  /* ×46 L<0.16 */
+  html[data-theme="dark"] svg [fill="#8b4513" i] { fill: #b78d6a; }  /* ×26 L<0.16 */
+  html[data-theme="dark"] svg [fill="#6b4226" i] { fill: #aa907b; }  /* ×26 L<0.16 */
+  html[data-theme="dark"] svg [fill="#A0522D" i] { fill: #be8a6c; }  /* ×20 L<0.16 */
+  html[data-theme="dark"] svg [fill="#5a4030" i] { fill: #a39383; }  /* ×18 L<0.16 */
+  html[data-theme="dark"] svg [fill="#8B4513" i] { fill: #b78d6a; }  /* ×16 L<0.16 */
+  html[data-theme="dark"] svg [fill="#a04060" i] { fill: #c18492; }  /* ×10 L<0.16 */
+  html[data-theme="dark"] svg [fill="#4a3a6b" i] { fill: #9c91a2; }  /* ×10 L<0.16 */
+  html[data-theme="dark"] svg [fill="#2c3e50" i] { fill: #919697; }  /* ×6 L<0.16 */
+  html[data-theme="dark"] svg [fill="#5a3828" i] { fill: #a69182; }  /* ×6 L<0.16 */
+  html[data-theme="dark"] svg [fill="#d62728" i] { fill: #e17670; }  /* ×4 L<0.16 */
+  html[data-theme="dark"] svg [fill="#8c564b" i] { fill: #b28d80; }  /* ×4 L<0.16 */
+  html[data-theme="dark"] svg [fill="#a8362e" i] { fill: #c88479; }  /* ×4 L<0.16 */
+  html[data-theme="dark"] svg [fill="#7a1f12" i] { fill: #b98b7c; }  /* ×4 L<0.16 */
+  html[data-theme="dark"] svg [fill="#6b4a8c" i] { fill: #a48dae; }  /* ×4 L<0.16 */
+  html[data-theme="dark"] svg [fill="#2c2416" i] { fill: #9c9486; }  /* ×2 L<0.16 */
+  html[data-theme="dark"] svg [fill="#7a3a8c" i] { fill: #af89af; }  /* ×2 L<0.16 */
+  html[data-theme="dark"] svg [fill="#23201A" i] { fill: #9a9489; }  /* ×2 L<0.16 */
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * v2 · W477 Phase E1（纸感海拔接入 + 交互组件五态 + 微交互工具类 · DESIGN.md §4A）
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: var(--leading-body);
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+    position: relative;
+}
+.topnav nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-base) var(--ease-out-quart);
+}
+.topnav nav a:hover::after,
+.topnav nav a.active::after,
+.topnav nav a.nav-strong::after,
+.topnav nav a[aria-current="page"]::after { transform: scaleX(1); }
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    box-shadow: var(--elev-1);
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color var(--dur-base) var(--ease-out-quart),
+                transform var(--dur-base) var(--ease-out-quart),
+                box-shadow var(--dur-base) var(--ease-out-quart);
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
+                var(--elev-2);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    box-shadow: var(--elev-1);
+    padding: 20px;
+    transition: border-color var(--dur-base) var(--ease-out-quart),
+                transform var(--dur-base) var(--ease-out-quart),
+                box-shadow var(--dur-base) var(--ease-out-quart);
+}
+.kpi:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
+                var(--elev-2);
+}
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    box-shadow: var(--elev-1);
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+/* —— 墨韵动效（W460）：行 hover 暖纸底 + 左缘朱砂指示条 + 数字列加深 —— */
+tbody tr td { transition: background-color var(--dur-fast) var(--ease-out-quart); }
+tbody tr:hover td { background: color-mix(in srgb, var(--paper-warm) 60%, transparent); }
+tbody tr:hover td:first-child { box-shadow: inset 2px 0 0 0 var(--accent); }
+tbody tr:hover td.num { color: var(--accent-3); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* —— 墨韵动效（W460）：opt-in 行入场 stagger（.table-anim，仅静态表格） —— */
+/* --row-i 由页面静态 <tr> 写入；min() 封顶第 12 行起延迟 220ms，总时长 ≤ 470ms */
+/* fail-open：calc/min 不支持时整条 animation 声明被丢弃，行直接可见 */
+.table-anim tbody tr {
+    animation: row-in var(--dur-base) var(--ease-out-quart) both;
+    animation-delay: calc(min(var(--row-i, 0), 11) * 20ms);
+}
+@keyframes row-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: none; }
+}
+/* opt-in sticky 表头（.table-wrap--sticky，仅行数 > 30 的表格） */
+.table-wrap--sticky { max-height: 65vh; overflow: auto; }
+.table-wrap--sticky thead th { position: sticky; top: 0; background: var(--paper-warm); z-index: 1; }
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* —— 墨韵动效（W460）：正文链接下划线生长（opt-in 类 .link-ink，禁止 blanket a） —— */
+.link-ink {
+    background: linear-gradient(var(--accent), var(--accent)) no-repeat 0 100% / 0% 1px;
+    transition: background-size var(--dur-base) var(--ease-out-quart);
+}
+.link-ink:hover { background-size: 100% 1px; }
+
+/* —— 墨韵动效（W460）：图表 tooltip 全站统一样式（P1 批次逐页采用） —— */
+.chart-tooltip {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 8px 12px;
+    max-width: 280px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink);
+    box-shadow: var(--elev-3);
+    opacity: 0;
+    transition: opacity var(--dur-base) var(--ease-out-quart);
+}
+.chart-tooltip.visible { opacity: 1; }
+
+/* —— 墨韵（W463）：fetch loading 骨架态（仅 fetch 主导页接入·EMBEDDED 同步页不接防闪烁） —— */
+.chart-loading {
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--ink-faint);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    background:
+        linear-gradient(100deg, transparent 40%, rgba(107, 100, 85, 0.08) 50%, transparent 60%)
+        var(--paper-warm);
+    background-size: 200% 100%, auto;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    animation: chart-loading-breath 1.2s var(--ease-in-out-soft) infinite;
+}
+.chart-loading::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--line);
+    border-top-color: var(--accent);
+    animation: chart-loading-spin 0.8s linear infinite;
+}
+@keyframes chart-loading-breath {
+    0%, 100% { background-position: 120% 0, 0 0; }
+    50% { background-position: -20% 0, 0 0; }
+}
+@keyframes chart-loading-spin {
+    to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .chart-loading { animation: none; }
+    .chart-loading::before { animation-duration: 2s; }
+}
+
+/* —— 墨韵（W463）：3D/canvas 图表一次性首帧淡入（three 容器/canvas 元素挂载·RM 停帧直接可见） —— */
+.chart-fade-in {
+    animation: chart-fade-in var(--dur-slow) var(--ease-out-quart) both;
+}
+@keyframes chart-fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .chart-fade-in { animation: none; }
+}
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                background var(--dur-fast) var(--ease-out-quart),
+                color var(--dur-fast) var(--ease-out-quart),
+                transform var(--dur-fast) var(--ease-out-quart),
+                box-shadow var(--dur-fast) var(--ease-out-quart);
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: var(--elev-1); }
+.btn:active { transform: scale(0.97); box-shadow: none; }
+.btn:disabled, .btn[aria-disabled="true"] {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.btn-primary {
+    background: linear-gradient(180deg, var(--accent), var(--accent-deep));
+    border-color: var(--accent-deep);
+    color: #fff;
+}
+.btn-primary:hover { background: var(--accent-deep); color: #fff; box-shadow: var(--elev-2); }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: color-mix(in srgb, var(--paper) 70%, var(--bg)); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                background var(--dur-fast) var(--ease-out-quart),
+                color var(--dur-fast) var(--ease-out-quart);
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-wash); }
+.filter-tab:active { transform: scale(0.97); }
+.filter-tab:disabled { opacity: 0.45; cursor: not-allowed; }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                box-shadow var(--dur-fast) var(--ease-out-quart);
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 微交互工具类（W477 Phase E1 · DESIGN.md §4A.7 · 时长取 §5 契约档） ===== */
+/* 通用浮起：任意可点击卡片/条目 hover 升海拔（页面自定义结构复用，勿用于 .card/.kpi 已有实现） */
+.u-lift {
+    transition: transform var(--dur-base) var(--ease-out-quart),
+                box-shadow var(--dur-base) var(--ease-out-quart),
+                border-color var(--dur-base) var(--ease-out-quart);
+}
+.u-lift:hover { transform: translateY(-2px); box-shadow: var(--elev-2); }
+/* 按压反馈：按钮/标签类 active 微缩 */
+.u-press:active { transform: scale(0.98); }
+/* 滚动显现：fail-open——仅 JS 在 <html> 挂 .js-reveal 后启用（E5 接入）；无 JS 内容直接可见 */
+.js-reveal .reveal-in {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity var(--dur-slow) var(--ease-out-quart),
+                transform var(--dur-slow) var(--ease-out-quart);
+}
+.js-reveal .reveal-in.in-view { opacity: 1; transform: none; }
+/* 数字对齐 */
+.u-tabular { font-variant-numeric: tabular-nums; }
+/* 语义色文本（v3 令牌·低饱和雅集色相） */
+.text-ok { color: var(--ok); }
+.text-warn { color: var(--warn); }
+.text-danger { color: var(--danger); }
+.text-info { color: var(--info); }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav:not(:has(.nav-toggle)) nav { display: none; }
+}
+
+/* ===== 导航抽屉（W492）：≤768px 根页 topnav 折叠为滑出抽屉（仅 .nav-toggle 存在时启用） ===== */
+.nav-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin-left: 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--paper);
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                color var(--dur-fast) var(--ease-out-quart),
+                transform var(--dur-fast) var(--ease-out-quart);
+}
+.nav-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.nav-toggle:active { transform: scale(0.94); }
+.nav-mask {
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: rgba(35, 32, 26, 0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-base) var(--ease-out-quart);
+}
+.nav-mask.open { opacity: 1; pointer-events: auto; }
+@media (max-width: 768px) {
+    .nav-toggle { display: inline-flex; }
+    .topnav:has(.nav-toggle) nav {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 60;
+        width: min(78vw, 320px);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 22px;
+        padding: 72px 26px;
+        background: var(--paper);
+        border-left: 1px solid var(--line);
+        box-shadow: var(--elev-4);
+        transform: translateX(100%);
+        transition: transform var(--dur-base) var(--ease-out-quart);
+    }
+    .topnav:has(.nav-toggle) nav.open { transform: translateX(0); }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+
+/* ===== 图表移动端降级（W494）：≤640px 图例纵排/文字缩小/tooltip 收窄——CSS 显示层降级，D3 渲染不变 ===== */
+@media (max-width: 640px) {
+    .legend,
+    .chart-legend,
+    .legend-inline,
+    .legend-row {
+        flex-direction: column;
+        gap: 6px;
+        align-items: flex-start;
+    }
+    .legend-item,
+    .legend-cell,
+    .legend-label {
+        font-size: 11px;
+    }
+    .chart-block svg text,
+    .chart-wrap svg text,
+    .chart-container svg text,
+    svg.vis text {
+        font-size: 10px;
+    }
+    .chart-block,
+    .chart-wrap,
+    .chart-container {
+        padding: 12px;
+    }
+    .chart-tooltip {
+        max-width: 220px;
+    }
+}
+    </style>
+<style>
+        /* e-track-exempt: chart-data-colors 1 处 */
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current {
+            color: var(--ink-soft);
+        }
+        .notice {
+            background: var(--paper-warm);
+            border: 1px solid var(--accent-soft);
+            border-radius: var(--radius-md);
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        
+        @media (max-width: 768px) {
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+        .chart-block {
+            text-align: center;
+        }
+        .chart-block h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .chart-full {
+            margin-top: 8px;
+        }
+        .chart-full svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: var(--radius-sm)
+        }
+        .insight-box {
+            background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: var(--radius-md);
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        /* Data table */
+        .table-wrap {
+            overflow-x: auto;
+            max-height: 640px;
+            overflow-y: auto;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md)
+        }
+        .table-wrap::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .table-wrap::-webkit-scrollbar-thumb {
+            background: var(--accent-soft);
+            border-radius: var(--radius-md)
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+        }
+        .data-table thead th {
+            background: var(--dark);
+            color: var(--paper-warm);
+            padding: 10px 12px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+        }
+        .data-table thead th.sortable:hover {
+            color: var(--accent-soft);
+        }
+        .data-table thead th .sort-ind {
+            font-size: 0.7rem;
+            margin-left: 4px;
+            color: var(--accent-soft);
+        }
+        .data-table thead th.no-sort {
+            cursor: default;
+        }
+        .data-table tbody tr {
+            border-bottom: 1px solid var(--line);
+        }
+        .data-table tbody tr:nth-child(even) {
+            background: var(--bg);
+        }
+        .data-table tbody tr:hover {
+            background: var(--paper-warm);
+        }
+        .data-table td {
+            padding: 8px 12px;
+            vertical-align: top;
+        }
+        .data-table td.num {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--accent-3);
+            text-align: right;
+            white-space: nowrap;
+        }
+        .data-table td.chapter {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--ink-soft);
+            text-align: center;
+            white-space: nowrap;
+        }
+        .data-table td.luxury-cell {
+            text-align: center;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .luxury-bar {
+            display: inline-block;
+            width: 38px;
+            height: 8px;
+            border-radius: var(--radius-sm);
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: var(--radius-lg);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--paper);
+            white-space: nowrap;
+        }
+        .tag.king { background: var(--accent); }
+        .tag.general { background: var(--accent-2); }
+        .tag.feature {
+            background: transparent;
+            color: var(--ink-soft);
+            border: 1px dashed var(--line);
+            font-size: 0.74rem;
+        }
+        
+        
+        
+        .footer-meta {
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            opacity: 0.7;
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script src="../js/theme-init.js"></script>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+<style>/* W558: chart svg overflow visible——探针实测标签越出视口被裁（见 .review-tmp/w558-detect.json） */main svg{overflow:visible}</style>
+<link rel="preload" href="../static/js/d3.v7.min.js" as="script" />
+<link rel="preload" href="../static/fonts/NotoSansSC-Regular.subset.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../static/fonts/noto-serif-sc-shared.subset.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
+
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="主导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">数据看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 洞府房产档案</p>
+        <p class="kicker">M · 洞府房产</p>
+        <h1>洞府房产档案</h1>
+        <p class="subtitle">CAVE ESTATE · JOURNEY TO THE WEST</p>
+        <p class="tagline">22 处洞府 · 110,010 小妖 · 妖王级 19 · 中将级 3</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>xiyouji/</code> 目录运行 <code>py -m http.server 8000</code>，访问 <code>http://localhost:8000/site/data/cave-estate.html</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">TOTAL · 洞府总数</div>
+                <div class="value">22</div>
+                <div class="desc">遍布 22 个地区，每地 1 处</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">LUXURY · 豪华度均值</div>
+                <div class="value">6.68</div>
+                <div class="desc">满分 10，中位值 7</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">MINIONS · 小妖总数</div>
+                <div class="value">110,010</div>
+                <div class="desc">狮驼洞独占 48,000（43.6%）</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">MAX · 满分洞府</div>
+                <div class="value">2</div>
+                <div class="desc">小雷音寺 · 狮驼洞并列豪华度 10</div>
+            </div>
+        </div>
+
+        <!-- 图表 1：豪华度分布 -->
+        <section class="section">
+            <h2 class="section-title">豪华度分布</h2>
+            <div class="section-sub">22 处洞府按豪华度降序排列，颜色越深红表示豪华度越高。</div>
+            <div class="chart-full">
+                <svg id="chart-luxury"></svg>
+            </div>
+            <div class="legend" id="legend-luxury"></div>
+        </section>
+
+        <!-- 图表 2 & 3：洞主修为饼图 + 地区分布 -->
+        <section class="section">
+            <h2 class="section-title">洞主修为 · 地区分布</h2>
+            <div class="section-sub">左：妖王级与中将级洞主占比；右：各地区洞府豪华度（每地区 1 处洞府，柱长=豪华度）。</div>
+            <div class="chart-row">
+                <div class="chart-block">
+                    <h3>洞主修为占比</h3>
+                    <svg id="chart-rank" width="360" height="360"></svg>
+                    <div class="legend" id="legend-rank"></div>
+                </div>
+                <div class="chart-block">
+                    <h3>各地区洞府豪华度</h3>
+                    <svg id="chart-region" width="640" height="540"></svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- 图表 4：小妖数量对比 -->
+        <section class="section">
+            <h2 class="section-title">小妖数量对比（对数刻度）</h2>
+            <div class="section-sub">由于狮驼洞 48,000 与兔穴 0 差距悬殊，采用 log10 刻度。0 值以单独标记呈现。</div>
+            <div class="chart-full">
+                <svg id="chart-minions"></svg>
+            </div>
+        </section>
+
+        <!-- 洞府详情表格 -->
+        <section class="section">
+            <h2 class="section-title">洞府详情档案</h2>
+            <div class="section-sub">点击表头可按该列排序（支持 回目 / 豪华度 / 小妖数 排序，再次点击切换升降序）。</div>
+            <div class="table-wrap">
+                <table class="data-table" id="cave-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-key="chapter" role="button" tabindex="0">回目<span class="sort-ind"></span></th>
+                            <th class="no-sort">洞府</th>
+                            <th class="no-sort">洞主</th>
+                            <th class="no-sort">修为</th>
+                            <th class="no-sort">地区</th>
+                            <th class="no-sort">势力范围</th>
+                            <th class="sortable" data-key="minions_count" role="button" tabindex="0">小妖数<span class="sort-ind"></span></th>
+                            <th class="sortable" data-key="luxury" role="button" tabindex="0">豪华度<span class="sort-ind"></span></th>
+                            <th class="no-sort">特色</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cave-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="insight-box">
+                <h4>洞府即家底</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · 数据可视化 · <a href="https://github.com/1273984347/xiyouji/blob/main/docs/02-人物深度分析/妖怪谱系深度分析.md">妖怪谱系深度分析</a></div>
+        </div>
+        <nav aria-label="页脚导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener">反馈</a></nav>
+    </footer>
+
+<script src="../static/js/d3.v7.min.js"></script>
+<script>
+/* 墨韵（W462）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+
+    // ===== 嵌入式 fallback 数据（fetch 失败时使用，内容来自 json/*.json） =====
+    const EMBEDDED_DATA = {
+        caves: [
+            { "name": "水帘洞", "owner": "孙悟空", "owner_rank": "king", "chapter": 1, "region": "东胜神洲·花果山", "location": "花果山正顶", "environment": "瀑布遮门，石碣镌'花果山福地，水帘洞洞天'，内有石座石床、石锅石灶", "furnishings": "石座、石床、石凳、石盆、石碗，天然生成", "treasures": "石碣、铁板桥、瀑布天帘", "minions_count": 47000, "subordinates": ["四健将·马流二元帅", "七十二洞妖王"], "territory": "花果山全域", "luxury": 7, "feature": "天生石洞，齐天大圣发迹之地" },
+            { "name": "黑风洞", "owner": "黑熊精", "owner_rank": "king", "chapter": 17, "region": "乌斯藏国·黑风山", "location": "黑风山黑风洞", "environment": "山高涧深，黑气弥漫，松柏成林", "furnishings": "洞中宽敞，设有石凳、禅榻", "treasures": "锦襕袈裟（盗自观音禅院）", "minions_count": 200, "subordinates": ["白衣秀士·蛇精", "凌虚子·狼精"], "territory": "黑风山周边百里", "luxury": 6, "feature": "妖王中少有的'修禅'型，能论道谈经" },
+            { "name": "黄风洞", "owner": "黄风怪", "owner_rank": "king", "chapter": 21, "region": "黄风岭·黄风洞", "location": "黄风岭深山", "environment": "黄沙蔽日，怪石嶙峋", "furnishings": "洞府深邃，设有妖王宝座", "treasures": "三昧神风（法术非宝物）", "minions_count": 500, "subordinates": ["虎先锋"], "territory": "黄风岭", "luxury": 5, "feature": "灵山脚下得道黄毛貂鼠，与佛门有渊源" },
+            { "name": "波月洞", "owner": "黄袍怪", "owner_rank": "king", "chapter": 29, "region": "碗子山·波月洞", "location": "碗子山深山", "environment": "虎踞山形，月映波光", "furnishings": "洞府华丽，有'百花亭'", "treasures": "无（依附天庭背景）", "minions_count": 50, "subordinates": ["群妖兵"], "territory": "碗子山", "luxury": 5, "feature": "天庭奎木狼下凡，有'公主'宝象国王女为妻" },
+            { "name": "平顶山莲花洞", "owner": "金角大王·银角大王", "owner_rank": "king", "chapter": 33, "region": "平顶山·莲花洞", "location": "平顶山绝顶", "environment": "山形如覆莲，云雾常锁", "furnishings": "洞府宏阔，'红漆木凳'、'金漆台桌'", "treasures": "紫金红葫芦、羊脂玉净瓶、七星剑、芭蕉扇、幌金绳", "minions_count": 800, "subordinates": ["精细鬼·伶俐虫", "巴山虎·倚海龙", "老妖婆"], "territory": "平顶山全域", "luxury": 9, "feature": "太上老君炼丹童子下凡，法宝配置最豪华" },
+            { "name": "号山火云洞", "owner": "红孩儿", "owner_rank": "king", "chapter": 41, "region": "号山·枯松涧·火云洞", "location": "号山枯松涧", "environment": "松枯涧涸，火气蒸腾", "furnishings": "洞中赤红如火烧", "treasures": "三昧真火（先天法术）", "minions_count": 100, "subordinates": ["六健将·云里雾·雾里云"], "territory": "号山六百里", "luxury": 7, "feature": "牛魔王之子，幼龄妖王，能放三昧真火" },
+            { "name": "通天河水鼋之第", "owner": "灵感大王", "owner_rank": "king", "chapter": 47, "region": "通天河·水鼋之第", "location": "通天河底", "environment": "水晶宫阙，水波为顶", "furnishings": "水晶宝座、珊瑚树", "treasures": "九瓣铜锤", "minions_count": 300, "subordinates": ["斑衣鳜婆"], "territory": "通天河全域", "luxury": 6, "feature": "观音莲池金鱼，要吃童男童女" },
+            { "name": "金兜洞", "owner": "独角兕大王", "owner_rank": "king", "chapter": 50, "region": "金兜山·金兜洞", "location": "金兜山阳面", "environment": "金光万道，瑞气千条", "furnishings": "洞府如金铸", "treasures": "金刚琢（太上老君法宝）", "minions_count": 50, "subordinates": [], "territory": "金兜山", "luxury": 8, "feature": "太上老君青牛下凡，金刚琢套尽诸神兵器" },
+            { "name": "琵琶洞", "owner": "蝎子精", "owner_rank": "king", "chapter": 54, "region": "女儿国·琵琶洞", "location": "女儿国都城外西梁山上", "environment": "毒气氤氲，洞形如琵琶", "furnishings": "华丽如宫闱", "treasures": "三股钢叉·倒马毒桩（先天法术）", "minions_count": 30, "subordinates": ["女校尉·丫鬟"], "territory": "女儿国外围", "luxury": 5, "feature": "毒敌蝎子精，蛰过佛祖，连观音都不敢近" },
+            { "name": "翠云山芭蕉洞", "owner": "铁扇公主·牛魔王", "owner_rank": "king", "chapter": 59, "region": "翠云山·芭蕉洞", "location": "翠云山顶", "environment": "翠色满山，云雾缭绕", "furnishings": "洞府幽深，'朱红格子'、'金漆台凳'", "treasures": "芭蕉扇（一扇八万四千里）", "minions_count": 200, "subordinates": ["女童"], "territory": "翠云山+火焰山八百里", "luxury": 9, "feature": "罗刹女所有，扇灭火焰山大火" },
+            { "name": "积雷山摩云洞", "owner": "牛魔王·玉面公主", "owner_rank": "king", "chapter": 60, "region": "积雷山·摩云洞", "location": "积雷山顶", "environment": "摩云入汉，积雷成峰", "furnishings": "万圣公主遗物珠玉满堂", "treasures": "牛王金睛兽", "minions_count": 300, "subordinates": ["玉面狐狸·群妖"], "territory": "积雷山", "luxury": 8, "feature": "牛魔王外室，'万岁狐王'遗产" },
+            { "name": "乱石山碧波潭", "owner": "九头驸马·万圣龙王", "owner_rank": "king", "chapter": 62, "region": "乱石山·碧波潭", "location": "乱石山下潭底", "environment": "潭深水碧，珍珠万斛", "furnishings": "水晶宫殿，珊瑚栏楯", "treasures": "佛宝舍利子·九叶灵芝草", "minions_count": 500, "subordinates": ["奔儿巴·霸波儿奔"], "territory": "乱石山潭底", "luxury": 9, "feature": "龙宫式洞府，万圣公主盗佛宝舍利" },
+            { "name": "小雷音寺", "owner": "黄眉童子", "owner_rank": "king", "chapter": 65, "region": "小西天·小雷音寺", "location": "小西天伪佛地", "environment": "寺貌庄严，伪佛像林立", "furnishings": "伪雷音寺宝殿", "treasures": "金铙·人种袋·狼牙棒", "minions_count": 5000, "subordinates": ["小妖五千"], "territory": "小西天百里", "luxury": 10, "feature": "弥勒佛司磬童子下凡，伪雷音寺规模最大" },
+            { "name": "稀柿衕", "owner": "蟒蛇精", "owner_rank": "general", "chapter": 67, "region": "七绝山·稀柿衕", "location": "稀柿衕深处", "environment": "柿臭熏天，蛇蟒盘踞", "furnishings": "无（野蛇为穴）", "treasures": "无", "minions_count": 0, "subordinates": [], "territory": "七绝山稀柿衕", "luxury": 2, "feature": "未修成人形的大蟒，'稀柿衕'恶臭难当" },
+            { "name": "盘丝洞", "owner": "蜘蛛精·七女", "owner_rank": "general", "chapter": 72, "region": "盘丝岭·盘丝洞", "location": "盘丝岭浓荫处", "environment": "丝网漫天，阴气森森", "furnishings": "石桌石凳，'濯垢泉'浴池", "treasures": "蛛丝法网", "minions_count": 30, "subordinates": ["七子·蜜蜂·蚂蜂·蠦蜂"], "territory": "盘丝岭黄花观", "luxury": 5, "feature": "七女共居，与黄花观多目怪为同门" },
+            { "name": "狮驼洞", "owner": "青狮·白象·大鹏", "owner_rank": "king", "chapter": 74, "region": "狮驼岭·狮驼洞·狮驼国", "location": "狮驼岭八百里", "environment": "'骷髅若岭，骸骨如林'，血腥冲天", "furnishings": "'人肉为食，人骨为柴'", "treasures": "阴阳二气瓶（大鹏）", "minions_count": 48000, "subordinates": ["四万七八千小妖·百十精灵"], "territory": "狮驼岭八百里+狮驼国", "luxury": 10, "feature": "三魔王集团，狮驼国一国妖氛，规模空前" },
+            { "name": "清华庄", "owner": "鹿精·比丘国丈", "owner_rank": "king", "chapter": 78, "region": "比丘国·清华庄", "location": "比丘国都城外", "environment": "柳树成荫，清幽如仙", "furnishings": "仙府般清雅", "treasures": "蟠龙拐杖", "minions_count": 50, "subordinates": [], "territory": "比丘国都城", "luxury": 6, "feature": "南极寿星坐骑白鹿下凡，欲用1111小儿心肝" },
+            { "name": "陷空山无底洞", "owner": "金鼻白毛老鼠精", "owner_rank": "king", "chapter": 82, "region": "陷空山·无底洞", "location": "陷空山深底", "environment": "'黑气漫山，无底可测'", "furnishings": "洞中又有'洞天'，设牌位供李天王父女", "treasures": "无（依灵山背景）", "minions_count": 200, "subordinates": ["小妖若干"], "territory": "陷空山", "luxury": 7, "feature": "托塔李天王义女，灵山偷食琉璃灯油" },
+            { "name": "隐雾山折岳连环洞", "owner": "艾叶花皮豹子精", "owner_rank": "king", "chapter": 85, "region": "隐雾山·折岳连环洞", "location": "隐雾山深处", "environment": "雾气终年不散", "furnishings": "六门连环，机关重重", "treasures": "假人头（诈降诡计）", "minions_count": 200, "subordinates": ["铁背苍狼·小妖"], "territory": "隐雾山", "luxury": 5, "feature": "南山隐豹，用'分瓣梅花计'诈败悟空" },
+            { "name": "九曲盘桓洞", "owner": "九灵元圣", "owner_rank": "king", "chapter": 89, "region": "竹节山·九曲盘桓洞", "location": "竹节山巅", "environment": "竹影婆娑，洞府九曲", "furnishings": "九曲连环，深不可测", "treasures": "九头法身", "minions_count": 6000, "subordinates": ["黄狮·狻狮·狻猊·抟象·白泽·伏狸·猱狮·雪狮·抟狮"], "territory": "竹节山·玉华州", "luxury": 8, "feature": "太乙救苦天尊坐骑九头狮子，'九灵元圣'号令群妖" },
+            { "name": "青龙山玄英洞", "owner": "辟寒·辟暑·辟尘", "owner_rank": "king", "chapter": 91, "region": "青龙山·玄英洞", "location": "青龙山阳面", "environment": "玄色山岩，寒光凛凛", "furnishings": "洞府如犀角宫", "treasures": "犀牛角（香油食源）", "minions_count": 500, "subordinates": ["群妖·小妖"], "territory": "青龙山·金平府", "luxury": 7, "feature": "三只犀牛精假扮佛祖偷香油，每年耗油五万斤" },
+            { "name": "毛颖山·兔穴", "owner": "玉兔精", "owner_rank": "general", "chapter": 95, "region": "毛颖山·三处兔穴", "location": "毛颖山五顶三穴", "environment": "山形如兔，五顶三穴", "furnishings": "无（兔穴天然）", "treasures": "捣药杵", "minions_count": 0, "subordinates": [], "territory": "毛颖山", "luxury": 3, "feature": "广寒宫玉兔，欲招唐僧为偶" }
+        ],
+        by_owner_rank: [
+            { "rank": "king", "label": "妖王级", "count": 19 },
+            { "rank": "general", "label": "中将级", "count": 3 }
+        ],
+        by_region: [
+            { "region": "东胜神洲·花果山", "luxury": 7, "name": "水帘洞" },
+            { "region": "乌斯藏国·黑风山", "luxury": 6, "name": "黑风洞" },
+            { "region": "黄风岭·黄风洞", "luxury": 5, "name": "黄风洞" },
+            { "region": "碗子山·波月洞", "luxury": 5, "name": "波月洞" },
+            { "region": "平顶山·莲花洞", "luxury": 9, "name": "平顶山莲花洞" },
+            { "region": "号山·枯松涧·火云洞", "luxury": 7, "name": "号山火云洞" },
+            { "region": "通天河·水鼋之第", "luxury": 6, "name": "通天河水鼋之第" },
+            { "region": "金兜山·金兜洞", "luxury": 8, "name": "金兜洞" },
+            { "region": "女儿国·琵琶洞", "luxury": 5, "name": "琵琶洞" },
+            { "region": "翠云山·芭蕉洞", "luxury": 9, "name": "翠云山芭蕉洞" },
+            { "region": "积雷山·摩云洞", "luxury": 8, "name": "积雷山摩云洞" },
+            { "region": "乱石山·碧波潭", "luxury": 9, "name": "乱石山碧波潭" },
+            { "region": "小西天·小雷音寺", "luxury": 10, "name": "小雷音寺" },
+            { "region": "七绝山·稀柿衕", "luxury": 2, "name": "稀柿衕" },
+            { "region": "盘丝岭·盘丝洞", "luxury": 5, "name": "盘丝洞" },
+            { "region": "狮驼岭·狮驼洞·狮驼国", "luxury": 10, "name": "狮驼洞" },
+            { "region": "比丘国·清华庄", "luxury": 6, "name": "清华庄" },
+            { "region": "陷空山·无底洞", "luxury": 7, "name": "陷空山无底洞" },
+            { "region": "隐雾山·折岳连环洞", "luxury": 5, "name": "隐雾山折岳连环洞" },
+            { "region": "竹节山·九曲盘桓洞", "luxury": 8, "name": "九曲盘桓洞" },
+            { "region": "青龙山·玄英洞", "luxury": 7, "name": "青龙山玄英洞" },
+            { "region": "毛颖山·三处兔穴", "luxury": 3, "name": "毛颖山·兔穴" }
+        ],
+        top_luxury: [
+            { "rank": 1, "name": "小雷音寺", "owner": "黄眉童子", "luxury": 10, "chapter": 65, "feature": "弥勒佛司磬童子下凡，伪雷音寺规模最大" },
+            { "rank": 2, "name": "狮驼洞", "owner": "青狮·白象·大鹏", "luxury": 10, "chapter": 74, "feature": "三魔王集团，狮驼国一国妖氛，规模空前" },
+            { "rank": 3, "name": "平顶山莲花洞", "owner": "金角大王·银角大王", "luxury": 9, "chapter": 33, "feature": "太上老君炼丹童子下凡，法宝配置最豪华" },
+            { "rank": 4, "name": "翠云山芭蕉洞", "owner": "铁扇公主·牛魔王", "luxury": 9, "chapter": 59, "feature": "罗刹女所有，扇灭火焰山大火" },
+            { "rank": 5, "name": "乱石山碧波潭", "owner": "九头驸马·万圣龙王", "luxury": 9, "chapter": 62, "feature": "龙宫式洞府，万圣公主盗佛宝舍利" }
+        ]
+    };
+
+    // ===== 配色 =====
+    const RANK_COLORS = {
+        "king": "#c8463a",
+        "general": "#3a6b8c"
+    };
+    const RANK_LABEL = {
+        "king": "妖王级",
+        "general": "中将级"
+    };
+
+    // 豪华度颜色梯度（2 → 10，由浅至深红）
+    const LUXURY_COLOR = d3.scaleLinear()
+        .domain([2, 5, 7, 9, 10])
+        .range(["#e9b885", "#d9a168", "#c8463a", "#8b0000", "#5c0000"])
+        .interpolate(d3.interpolateRgb);
+
+    // ===== 工具函数 =====
+    function formatNum(n) {
+        return d3.format(",")(n);
+    }
+
+    // ===== 图表 1：豪华度分布水平柱状图 =====
+    function renderLuxuryChart(caves) {
+        const svg = d3.select("#chart-luxury");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("chart-luxury");
+        const width = Math.min(containerEl.clientWidth || 1100, 1180);
+        const barH = 26;
+        const barGap = 4;
+        const margin = { top: 16, right: 80, bottom: 36, left: 180 };
+        const height = caves.length * (barH + barGap) + margin.top + margin.bottom;
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const data = caves.slice().sort((a, b) => b.luxury - a.luxury);
+
+        const x = d3.scaleLinear()
+            .domain([0, 10])
+            .range([0, innerW]);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        // X 轴
+        g.append("g")
+            .attr("transform", `translate(0, ${innerH})`)
+            .call(d3.axisBottom(x).ticks(10).tickSize(-innerH).tickPadding(8))
+            .call(gn => gn.select(".domain").remove())
+            .call(gn => gn.selectAll(".tick line").attr("stroke", "#d9cdb8").attr("stroke-dasharray", "2,3"))
+            .selectAll("text")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6B6455");
+
+        // X 轴标题
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 30)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6B6455")
+            .text("豪华度（满分 10）");
+
+        // 柱
+        const bars = g.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("g")
+            .attr("transform", (d, i) => `translate(0, ${i * (barH + barGap)})`);
+
+        bars.append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width",0)
+            .attr("height", barH)
+            .attr("fill", d => LUXURY_COLOR(d.luxury))
+            .attr("rx", 3)
+            .style("opacity", 0.92)
+            .transition()
+            .duration(MOYUN_RM?0:600)
+            .delay((d, i) => i * 30)
+            .attr("width",d => Math.max(0, Math.max(2, x(d.luxury))));
+
+        // 洞府名（左侧标签）
+        bars.append("text")
+            .attr("x", -8)
+            .attr("y", barH / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", "end")
+            .style("font-size", "0.82rem")
+            .style("fill", "#23201A")
+            .text(d => d.name);
+
+        // 数值标签
+        bars.append("text")
+            .attr("x", d => x(d.luxury) + 6)
+            .attr("y", barH / 2)
+            .attr("dy", "0.35em")
+            .style("font-size", "0.78rem")
+            .style("font-weight", "600")
+            .style("fill", "#C9A063")
+            .style("font-family", "JetBrains Mono, monospace")
+            .text(d => d.luxury);
+
+        // tooltip
+        bars.append("title")
+            .text(d => `${d.name}（第${d.chapter}回）\n洞主：${d.owner}\n豪华度：${d.luxury}/10\n小妖：${formatNum(d.minions_count)}`);
+
+        // 图例
+        const legend = d3.select("#legend-luxury");
+        legend.selectAll("*").remove();
+        const legendData = [
+            { label: "低（2-4）", color: LUXURY_COLOR(3) },
+            { label: "中（5-6）", color: LUXURY_COLOR(5) },
+            { label: "高（7-8）", color: LUXURY_COLOR(7) },
+            { label: "极高（9）", color: LUXURY_COLOR(9) },
+            { label: "满分（10）", color: LUXURY_COLOR(10) }
+        ];
+        legend.selectAll(".legend-item")
+            .data(legendData)
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `<span class="legend-swatch" style="background:${d.color}"></span><span>${d.label}</span>`);
+    }
+
+    // ===== 图表 2：洞主修为饼图 =====
+    function renderRankPie(rankData) {
+        const svg = d3.select("#chart-rank");
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const radius = Math.max(0, Math.min(width, height) / 2 - 14);
+
+        svg.selectAll("*").remove();
+        const g = svg.append("g")
+            .attr("transform", `translate(${width/2}, ${height/2})`);
+
+        const pie = d3.pie().value(d => d.count).sort(null);
+        const arc = d3.arc()
+            .innerRadius(radius * 0.58)
+            .outerRadius(radius)
+            .cornerRadius(3);
+        const labelArc = d3.arc()
+            .innerRadius(radius * 0.82)
+            .outerRadius(radius * 0.82);
+
+        const arcs = pie(rankData);
+
+        g.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("fill", d => RANK_COLORS[d.data.rank] || "#999")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .attr("d", arc)
+            .style("opacity", 0)
+            .transition()
+            .duration(MOYUN_RM?0:600)
+            .delay((d, i) => i * 120)
+            .style("opacity", 1);
+
+        // 中心数字
+        const total = d3.sum(rankData, d => d.count);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "0.35em")
+            .style("font-size", "1.8rem")
+            .style("font-weight", "600")
+            .style("fill", "#23201A")
+            .text(total);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "2em")
+            .style("font-size", "0.72rem")
+            .style("fill", "#6B6455")
+            .text("洞府总数");
+
+        // 切片标签
+        g.selectAll("text.label")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.88rem")
+            .style("font-weight", "600")
+            .style("fill", "#fff")
+            .text(d => `${d.data.count} · ${(d.data.count / total * 100).toFixed(0)}%`);
+
+        // 图例
+        const legend = d3.select("#legend-rank");
+        legend.selectAll("*").remove();
+        legend.selectAll(".legend-item")
+            .data(rankData)
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `<span class="legend-swatch" style="background:${RANK_COLORS[d.rank]}"></span><span>${d.label}：${d.count} 处</span>`);
+    }
+
+    // ===== 图表 3：各地区洞府豪华度 =====
+    function renderRegionChart(regionData) {
+        const svg = d3.select("#chart-region");
+        svg.selectAll("*").remove();
+
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const margin = { top: 16, right: 164, bottom: 90, left: 24 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        // 按豪华度降序
+        const data = regionData.slice().sort((a, b) => b.luxury - a.luxury);
+
+        const x = d3.scaleBand()
+            .domain(data.map(d => d.region))
+            .range([0, innerW])
+            .padding(0.25);
+
+        const y = d3.scaleLinear()
+            .domain([0, 10])
+            .range([innerH, 0]);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        // Y 轴
+        g.append("g")
+            .call(d3.axisLeft(y).ticks(5).tickSize(-innerW).tickPadding(6))
+            .call(gn => gn.select(".domain").remove())
+            .call(gn => gn.selectAll(".tick line").attr("stroke", "#d9cdb8").attr("stroke-dasharray", "2,3"))
+            .selectAll("text")
+            .style("font-size", "0.74rem")
+            .style("fill", "#6B6455");
+
+        // 柱
+        g.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("x", d => x(d.region))
+            .attr("y", innerH)
+            .attr("width",Math.max(0, x.bandwidth()))
+            .attr("height", 0)
+            .attr("fill", d => LUXURY_COLOR(d.luxury))
+            .attr("rx", 2)
+            .style("opacity", 0.92)
+            .transition()
+            .duration(MOYUN_RM?0:600)
+            .delay((d, i) => i * 25)
+            .attr("y", d => y(d.luxury))
+            .attr("height", d => innerH - y(d.luxury));
+
+        // 数值标签
+        g.selectAll(".val")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "val")
+            .attr("x", d => x(d.region) + x.bandwidth() / 2)
+            .attr("y", d => y(d.luxury) - 4)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.7rem")
+            .style("font-weight", "600")
+            .style("fill", "#C9A063")
+            .style("font-family", "JetBrains Mono, monospace")
+            .text(d => d.luxury);
+
+        // X 轴标签（旋转）
+        g.append("g")
+            .attr("transform", `translate(0, ${innerH})`)
+            .call(d3.axisBottom(x).tickSize(0))
+            .call(gn => gn.select(".domain").remove())
+            .selectAll("text")
+            .style("font-size", "0.66rem")
+            .style("fill", "#6B6455")
+            .attr("transform", "rotate(-55)")
+            .style("text-anchor", "end")
+            .text(d => { const p = String(d).split("·")[0]; return p.length > 4 ? p.slice(0, 4) + "…" : p; });
+
+        // tooltip
+        g.selectAll(".tip")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "tip")
+            .attr("x", d => x(d.region))
+            .attr("y", d => y(d.luxury))
+            .attr("width",Math.max(0, x.bandwidth()))
+            .attr("height", d => innerH - y(d.luxury))
+            .attr("fill", "transparent")
+            .style("pointer-events", "all")
+            .append("title")
+            .text(d => `${d.region}\n洞府：${d.name}\n豪华度：${d.luxury}/10`);
+    }
+
+    // ===== 图表 4：小妖数量对比（log scale） =====
+    function renderMinionsChart(caves) {
+        const svg = d3.select("#chart-minions");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("chart-minions");
+        const width = Math.min(containerEl.clientWidth || 1100, 1180);
+        const margin = { top: 24, right: 40, bottom: 90, left: 80 };
+        const height = 560;
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const data = caves.slice().sort((a, b) => b.minions_count - a.minions_count);
+
+        // log scale：把 0 当作 0.5 处理
+        const maxVal = d3.max(data, d => d.minions_count) || 1;
+        const x = d3.scaleLog()
+            .domain([1, maxVal * 1.1])
+            .range([0, innerW])
+            .clamp(true);
+
+        const y = d3.scaleBand()
+            .domain(data.map(d => d.name))
+            .range([0, innerH])
+            .padding(0.2);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        // 网格线 + X 轴
+        const tickVals = [1, 10, 100, 1000, 10000, 50000];
+        g.append("g")
+            .attr("transform", `translate(0, ${innerH})`)
+            .call(d3.axisBottom(x)
+                .tickValues(tickVals)
+                .tickFormat(d => formatNum(+d))
+                .tickSize(-innerH)
+                .tickPadding(8))
+            .call(gn => gn.select(".domain").remove())
+            .call(gn => gn.selectAll(".tick line").attr("stroke", "#d9cdb8").attr("stroke-dasharray", "2,3"))
+            .selectAll("text")
+            .style("font-size", "0.74rem")
+            .style("fill", "#6B6455")
+            .style("font-family", "JetBrains Mono, monospace");
+
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 56)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6B6455")
+            .text("小妖数量（对数刻度 log10）");
+
+        // Y 轴
+        g.append("g")
+            .call(d3.axisLeft(y).tickSize(0))
+            .call(gn => gn.select(".domain").remove())
+            .selectAll("text")
+            .style("font-size", "0.78rem")
+            .style("fill", "#23201A");
+
+        // 柱（0 值用 1px 起点标记）
+        g.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("x", 1)
+            .attr("y", d => y(d.name))
+            .attr("width",0)
+            .attr("height", y.bandwidth())
+            .attr("fill", d => d.minions_count === 0 ? "#d9cdb8" : LUXURY_COLOR(d.luxury))
+            .attr("rx", 2)
+            .style("opacity", 0.9)
+            .transition()
+            .duration(MOYUN_RM?0:600)
+            .delay((d, i) => i * 25)
+            .attr("width",d => Math.max(0, d.minions_count === 0 ? 3 : Math.max(2, x(d.minions_count) - 1)));
+
+        // 数值标签
+        g.selectAll(".val")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "val")
+            .attr("x", d => d.minions_count === 0 ? 8 : x(d.minions_count) + 6)
+            .attr("y", d => y(d.name) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .style("font-size", "0.74rem")
+            .style("font-weight", "600")
+            .style("fill", "#C9A063")
+            .style("font-family", "JetBrains Mono, monospace")
+            .text(d => d.minions_count === 0 ? "0（无小妖）" : formatNum(d.minions_count));
+
+        // tooltip
+        g.selectAll(".tip")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "tip")
+            .attr("x", 0)
+            .attr("y", d => y(d.name))
+            .attr("width",Math.max(0, innerW))
+            .attr("height", y.bandwidth())
+            .attr("fill", "transparent")
+            .style("pointer-events", "all")
+            .append("title")
+            .text(d => `${d.name}（第${d.chapter}回）\n洞主：${d.owner}\n小妖：${formatNum(d.minions_count)}`);
+    }
+
+    // ===== 表格渲染与排序 =====
+    let tableState = {
+        key: "luxury",
+        dir: "desc"
+    };
+
+    function renderTable(caves) {
+        const sortKeys = ["chapter", "luxury", "minions_count"];
+        const headers = d3.selectAll("#cave-table thead th.sortable");
+
+        // 更新排序指示
+        headers.each(function() {
+            const th = d3.select(this);
+            const key = th.attr("data-key");
+            const ind = th.select(".sort-ind");
+            if (key === tableState.key) {
+                ind.text(tableState.dir === "asc" ? "▲" : "▼");
+            } else {
+                ind.text("");
+            }
+        });
+
+        const sorted = caves.slice().sort((a, b) => {
+            const dir = tableState.dir === "asc" ? 1 : -1;
+            const av = a[tableState.key];
+            const bv = b[tableState.key];
+            if (typeof av === "number" && typeof bv === "number") {
+                return (av - bv) * dir;
+            }
+            return String(av).localeCompare(String(bv), "zh-CN") * dir;
+        });
+
+        const tbody = d3.select("#cave-tbody");
+        tbody.selectAll("*").remove();
+
+        sorted.forEach(c => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "chapter").text(`第${c.chapter}回`);
+            tr.append("td").style("font-weight", "600").text(c.name);
+            tr.append("td").text(c.owner);
+            tr.append("td").html(`<span class="tag ${c.owner_rank}">${RANK_LABEL[c.owner_rank]}</span>`);
+            tr.append("td").text(c.region);
+            tr.append("td").text(c.territory);
+            tr.append("td").attr("class", "num").text(c.minions_count === 0 ? "0" : formatNum(c.minions_count));
+            tr.append("td").attr("class", "luxury-cell")
+                .html(() => {
+                    const w = (c.luxury / 10) * 38;
+                    return `<span class="luxury-bar" style="width:${w}px;background:${LUXURY_COLOR(c.luxury)}"></span>${c.luxury}/10`;
+                });
+            tr.append("td").html(`<span class="tag feature">${c.feature}</span>`);
+        });
+
+        // 表头点击排序
+        d3.selectAll("#cave-table thead th.sortable").on("click", function() {
+            const key = d3.select(this).attr("data-key");
+            if (tableState.key === key) {
+                tableState.dir = tableState.dir === "asc" ? "desc" : "asc";
+            } else {
+                tableState.key = key;
+                tableState.dir = key === "chapter" ? "asc" : "desc";
+            }
+            renderTable(caves);
+        }).on("keydown", function(event) {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                this.click();
+            }
+        });
+    }
+
+    // ===== 关键洞察 =====
+    function renderInsights(caves) {
+        const totalMinions = d3.sum(caves, d => d.minions_count);
+        const topLuxury = caves.filter(c => c.luxury === 10);
+        const topCave = caves.find(c => c.name === "狮驼洞");
+        const pingding = caves.find(c => c.name === "平顶山莲花洞");
+
+        const insights = [
+            `豪华度满分（10）洞府仅 <strong>2 处</strong>：<strong>小雷音寺</strong>（弥勒童子伪佛地）与<strong>狮驼洞</strong>（三魔王集团）并列，二者皆为"神佛座下下凡"背景。`,
+            `<strong>狮驼洞小妖 48,000</strong>，占全部 110,010 小妖的 <strong>43.6%</strong>，规模空前——"骷髅若岭，骸骨如林"非虚言；连同水帘洞 47,000，两洞合计占 86.7%。`,
+            `<strong>平顶山莲花洞法宝最豪华</strong>：紫金红葫芦、羊脂玉净瓶、七星剑、芭蕉扇、幌金绳五件齐备，太上老君炼丹童子下凡，配置冠绝全书。`,
+            `小妖数两极分化严重：<strong>4 处洞府（蟒蛇精、玉兔精）小妖为 0</strong>，而 <strong>5 处洞府小妖超千</strong>（狮驼洞、水帘洞、九曲盘桓洞、小雷音寺）——妖王势力半径差异极大。`,
+            `<strong>妖王级洞主 19 处 vs 中将级仅 3 处</strong>（蟒蛇精、蜘蛛精、玉兔精），西游洞府基本被"妖王级"垄断；中将级多为"未修成人形"或"群居精怪"。`,
+            `22 处洞府分布在 <strong>22 个不同地区</strong>，无一地区聚集多处洞府——西游记的妖王们"划地为王"，各占山头。`
+        ];
+
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(text => {
+            ul.append("li").html(text);
+        });
+    }
+
+    // ===== 数据加载（fetch 失败用嵌入数据） =====
+    async function loadData() {
+        try {
+            const [caveRes, regionRes, rankRes, luxuryRes] = await Promise.all([
+                fetch('json/cave_estate.json'),
+                fetch('json/cave_by_region.json'),
+                fetch('json/cave_by_owner_rank.json'),
+                fetch('json/cave_top_luxury.json')
+            ]);
+            if (!caveRes.ok) throw new Error('fetch failed');
+            const caves = await caveRes.json();
+            const by_region_raw = await regionRes.json();
+            const by_owner_rank = await rankRes.json();
+            const top_luxury = await luxuryRes.json();
+
+            // 把 by_region 转为 [{region, luxury, name}] 形式
+            const by_region = by_region_raw.map(g => ({
+                region: g.region,
+                luxury: g.caves[0].luxury,
+                name: g.caves[0].name
+            }));
+
+            document.getElementById('dataSource').innerHTML =
+                '数据源：实时加载自 <code>json/cave_*.json</code>（http server 模式）';
+            return { caves, by_region, by_owner_rank, top_luxury };
+        } catch (e) {
+            console.warn('[INFO] 使用嵌入数据：', e.message);
+            return EMBEDDED_DATA;
+        }
+    }
+
+    // ===== 主流程 =====
+    async function main() {
+        const data = await loadData();
+        window.__lastData = data;
+
+        renderLuxuryChart(data.caves);
+        renderRankPie(data.by_owner_rank);
+        renderRegionChart(data.by_region);
+        renderMinionsChart(data.caves);
+        renderTable(data.caves);
+        renderInsights(data.caves);
+
+        // footer meta
+        const meta = document.getElementById('footer-meta'); if (!meta) return;
+        if (data.caves && data.caves.length) {
+            meta.textContent = `数据生成时间：嵌入版本 · cave_estate.json · ${data.caves.length} 处洞府`;
+        }
+    }
+
+    // 响应式重绘
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) {
+                renderLuxuryChart(window.__lastData.caves);
+                renderMinionsChart(window.__lastData.caves);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+<script id="audit-contentavoid">
+(function(){
+  var SKIP=/(tick|legend|title|axis|domain|cell|tooltip|axisfix|dark-halo|subtitle|grid|background|heat-col-label|heat-row-label)/i;
+  function fix(){
+    try{
+      // 1) 热力图列标签旋转 -42°（保留可见）
+      document.querySelectorAll('svg text.heat-col-label').forEach(function(t){
+        var x=+t.getAttribute('x')||0, y=+t.getAttribute('y')||0;
+        t.setAttribute('transform','rotate(-42 '+x+' '+y+')');
+        t.setAttribute('text-anchor','end');
+      });
+      // 2) 其余文字重叠：隐藏较小者 + 补 title
+      document.querySelectorAll('svg').forEach(function(svg){
+        var texts=[].slice.call(svg.querySelectorAll('text')).filter(function(t){
+          var c=t.getAttribute('class')||'';
+          if(SKIP.test(c)) return false;
+          var b=t.getBoundingClientRect(); return b.width>0 && b.height>0;
+        });
+        for(var i=0;i<texts.length;i++){
+          for(var j=i+1;j<texts.length;j++){
+            var a=texts[i],b=texts[j];
+            var ra=a.getBoundingClientRect(),rb=b.getBoundingClientRect();
+            var ix=Math.max(0,Math.min(ra.x+ra.width,rb.x+rb.width)-Math.max(ra.x,rb.x));
+            var iy=Math.max(0,Math.min(ra.y+ra.height,rb.y+rb.height)-Math.max(ra.y,rb.y));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(), tb=(b.textContent||'').trim();
+            if(ta===tb){ // 完全重复：隐藏其一
+              if(a.style.display!=='none'){ a.setAttribute('data-cavoid','1'); if(!a.getAttribute('title')) a.setAttribute('title',ta); a.style.display='none'; }
+              continue;
+            }
+            var hide=(ra.width*ra.height<=rb.width*rb.height)?a:b;
+            var keep=(hide===a)?b:a;
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-cavoid','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000,14000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run(); else window.addEventListener('load',run);
+})();
+</script>
+
+<script>
+// 墨韵动效（W462）：KPI 数字 count-up（900ms easeOutExpo·IO 触发一次·白名单例外②；支持千分位格式）
+// fail-open：元素已含终值；浮点/文本型 value 与 reduced-motion / IO 不可用 / 异常时保持终值
+// 注意：KPI 元素多在 loadData() 之后才建，须轮询等待（上限 5s）
+(function () {
+    var reduced = false;
+    try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (_) {}
+    if (reduced || !('IntersectionObserver' in window) || !window.requestAnimationFrame) return;
+    var t0 = Date.now();
+    (function waitEls() {
+        var els = Array.prototype.filter.call(
+            document.querySelectorAll('.kpi-card .value'),
+            function (el) { return /^[\d,]+$/.test((el.textContent || '').trim()); }
+        );
+        if (!els.length) {
+            if (Date.now() - t0 < 5000) return setTimeout(waitEls, 100);
+            return;
+        }
+        try {
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (!e.isIntersecting) return;
+                    io.unobserve(e.target);
+                    var el = e.target;
+                    var raw = el.textContent.trim();
+                    var target = parseInt(raw.replace(/,/g, ''), 10) || 0;
+                    var s0 = null, DUR = 900;
+                    function frame(ts) {
+                        if (s0 === null) s0 = ts;
+                        var t = Math.min((ts - s0) / DUR, 1);
+                        var v = (t >= 1) ? target : Math.round(target * (1 - Math.pow(2, -10 * t)));
+                        el.textContent = v.toLocaleString("zh-CN");
+                        if (t < 1) requestAnimationFrame(frame);
+                        else el.textContent = raw;
+                    }
+                    requestAnimationFrame(frame);
+                });
+            }, { threshold: 0.5 });
+            els.forEach(function (el) { io.observe(el); });
+        } catch (_) { /* fail-open：保持终值 */ }
+    })();
+})();
+</script>
+<script>/* W588 dark lift v2（暗色阶段二·MutationObserver 无竞态·浅色零改动） */
+(function () {
+    try {
+    if (!window.matchMedia || !window.matchMedia('(prefers-color-scheme: dark)').matches) return;
+    var TH = 0.16, TARGET = 0.22, timer = null;
+    function lum(r, g, b) {
+        function f(c) { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }
+        return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+    }
+    function liftOnce() {
+        var els = document.querySelectorAll('svg rect, svg circle, svg path, svg polygon, svg ellipse');
+        for (var i = 0; i < els.length; i++) {
+            var el = els[i];
+            var cf = getComputedStyle(el).fill;
+            if (cf.indexOf('rgb') !== 0) continue;
+            var m = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(cf);
+            if (!m) continue;
+            var r = +m[1], g = +m[2], b = +m[3];
+            if (lum(r, g, b) >= TH) continue;
+            var rect = el.getBoundingClientRect();
+            if (rect.width < 3 || rect.height < 3) continue;
+            var rr = r, gg = g, bb = b;
+            for (var k = 1; k <= 20; k++) {
+                var a = k / 20;
+                rr = Math.round(r + (242 - r) * a); gg = Math.round(g + (235 - g) * a); bb = Math.round(b + (220 - b) * a);
+                if (lum(rr, gg, bb) >= TARGET) break;
+            }
+            el.style.fill = 'rgb(' + rr + ',' + gg + ',' + bb + ')';
+        }
+    }
+    function schedule() { if (timer) return; timer = setTimeout(function () { timer = null; liftOnce(); }, 80); }
+    [0, 500, 1500, 3000, 5000].forEach(function (d) { setTimeout(liftOnce, d); });
+    if (window.MutationObserver) {
+        var mo = new MutationObserver(schedule);
+        mo.observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['fill', 'style'] });
+    }
+    } catch (e) { /* fail-open */ }
+})();
+</script>
+</body>
+</html>

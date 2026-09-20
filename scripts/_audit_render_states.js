@@ -60,6 +60,11 @@ const CONC = (() => {
   const i = process.argv.indexOf('--conc');
   return i > -1 ? Math.max(1, parseInt(process.argv[i + 1], 10) || 3) : 3;
 })();
+// W588：--proto file|http（缺省 http 兼容旧流程）——file 走 EMBEDDED 主路径且免 SW/服务器
+const PROTO = (() => {
+  const i = process.argv.indexOf('--proto');
+  return i > -1 && process.argv[i + 1] === 'file' ? 'file' : 'http';
+})();
 
 // 相对亮度（WCAG）
 function lum(cssColor) {
@@ -95,6 +100,10 @@ const PAGE_ANALYSIS_FN = `(() => {
   const bgL = lum(bodyBg);
   const isDarkBg = bgL !== null && bgL < 0.2;
   const out = {
+    w588init: window.__w588init || 0,
+    mmDark: window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)').matches : null,
+    w588err: window.__w588err || null,
+    hasV2: document.documentElement.outerHTML.includes('W588 dark lift v2'),
     dataTheme: document.documentElement.getAttribute('data-theme') || '(none)',
     bodyBg,
     isDarkBg,
@@ -124,7 +133,15 @@ const PAGE_ANALYSIS_FN = `(() => {
   });
   document.querySelectorAll('svg circle, svg rect').forEach(el => {
     if (out.invisibleShapes.length >= 10) return;
-    const fill = el.getAttribute('fill') || getComputedStyle(el).fill;
+    // W588b：读 computed（渲染事实）——getAttribute 是页面意图串，CSS !important 覆盖后属性串仍是旧暗值
+    // 但 var() 引用型填充为主题自适应设计产物（面板底色等·暗色下解析为暗色是设计）——豁免
+    const attrFill = el.getAttribute('fill');
+    if (attrFill && (attrFill.startsWith('var(') || /^none$/i.test(attrFill))) return;
+    const cfill = getComputedStyle(el).fill;
+    // W588b：alpha<0.1 的透明命中层是设计产物（非可读性缺陷）——跳过（split 判定·免正则转义层）
+    const parts = cfill.split(',');
+    if (parts.length >= 4 && parseFloat(parts[parts.length - 1]) < 0.1) return;
+    const fill = cfill;
     const l = lum(fill);
     if (l !== null && isDarkBg && l < 0.16) {
       const r = el.getBoundingClientRect();
@@ -159,7 +176,9 @@ async function auditState(context, pageRel, state) {
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', e => errors.push(String(e.message).slice(0, 80)));
-  const url = 'http://127.0.0.1:8000/' + pageRel.split('/').map(encodeURIComponent).join('/');
+  const url = PROTO === 'file'
+    ? 'file:///' + path.join(SITE, pageRel).replace(/\\/g, '/')
+    : 'http://127.0.0.1:8000/' + pageRel.split('/').map(encodeURIComponent).join('/');
   let result;
   try {
     await page.emulateMedia({ colorScheme: state.colorScheme });
@@ -175,8 +194,14 @@ async function auditState(context, pageRel, state) {
       }
       window.scrollTo(0, 0);
     });
-    await page.waitForTimeout(600);
+    // W588：600ms 短于懒构建图表的重绘+暗色提升耗时（实测约 1s）——等待 1500ms 使评估采样于沉降后状态
+    await page.waitForTimeout(1500);
     result = await page.evaluate(PAGE_ANALYSIS_FN);
+    if ((result.invisibleShapes || []).length) {
+      // W588 判别：2 秒后复检——晚提升（复检归零）还是从未提升（复检仍高）
+      await page.waitForTimeout(2000);
+      result.reCheck = await page.evaluate(PAGE_ANALYSIS_FN);
+    }
   } catch (e) {
     result = { fatal: String(e.message).slice(0, 100) };
   }
@@ -190,7 +215,7 @@ async function main() {
     pages = pages.filter(p => fs.readFileSync(path.join(SITE, p), 'utf8').includes('<svg'));
   }
   pages = pages.slice(0, limit);
-  console.log(`pages=${pages.length} states=${STATES.length}${scopeCharts ? ' scope=charts' : ''} conc=${CONC}`);
+  console.log(`pages=${pages.length} states=${STATES.length}${scopeCharts ? ' scope=charts' : ''} conc=${CONC} proto=${PROTO}`);
   const browser = await chromium.launch();
   const out = fs.createWriteStream(OUT, { encoding: 'utf-8' });
   let n = 0;

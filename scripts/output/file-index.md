@@ -11,6 +11,22 @@
 ---
 
 
+## W589 W589 暗色审计读数语义修正+映射合并重建（2026-09-20·v2.3.189）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/tokens.css | W589 | 更新·W582+W588b 两代映射合并重建（W582 hex 24+全量 rgb 37·61 条） |
+| site/（批量226页·inline_css分发） | W589 | 更新·合并映射分发 |
+| site/（批量163页） | W589 | 回退·W587/W588 JS 亮度提升器撤除（CSS !important 持续压制方案胜出） |
+| scripts/_audit_render_states.js | W589 | 更新·invisible 判定读数语义修正（computed+透明豁免+var豁免+hasV2/w588init/mmDark 诊断字段） |
+| scripts/output/render-state-audit-baseline.jsonl | W589 | 更新·基线刷新至 48/7（残余=数据驱动角色色·登记阶段三设计批） |
+| scripts/_w586_upgrade_leave.py | W589 | 新增·leave 本体直派升级器（升级④·W586 内容随批补登） |
+| scripts/_w586_upgrade_ancestors.py | W589 | 新增·祖先链 leave 升级器（升级⑤·W586 内容随批补登） |
+| scripts/_w588_upgrade_observer.py | W589 | 新增·暗色提升器 v2 升级器（W588 内容随批补登·后由 W589 撤除） |
+| scripts/_w588b_upgrade_v3.py | W589 | 新增·v3 合体升级器（同上·后由 W589 撤除） |
+| scripts/_w588b_gen_full.py | W589 | 新增·全量 rgb 映射生成器 |
+| scripts/_w588b_scan_full.js | W589 | 新增·54 缺陷页暗填充源串全量扫描器 |
+
 ## W588 W588 暗色提升器v2（2026-09-20·v2.3.188）
 
 | 文件 | W | 说明 |

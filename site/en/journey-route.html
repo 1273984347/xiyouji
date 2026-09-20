@@ -2,14 +2,14 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-EMSkqtNPDwu1Bau7KHEMdd2ppcq3wi1LSWtc4qwNymI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg=' 'sha256-n4SCVjDX/ymksVsnERtsQiNo0iM/1+hQ9yzHwEvkGys='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-EMSkqtNPDwu1Bau7KHEMdd2ppcq3wi1LSWtc4qwNymI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Journey Route Map · 详解西游记</title>
     <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render the charts.</p></noscript>
     
     
-                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -222,9 +222,7 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg text,
 html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !important; }
 /* 有 #audit-halo 光晕的页（168 页）：墨字+白晕本就双主题可读，文字填充保持原样（W553 设计） */
 
-  /* —— W582 阶段一：暗色图表填充可读性映射（离散 hex 字面量·逐色独立·非一刀切）——
-     审计基线 render-state-audit-baseline 亮度<0.16 不可读填充的离散部分；
-     仅精确匹配 fill 属性值（fill=none/渐变/连续色阶不受影响）；浅色主题零改动。—— */
+  /* —— W588b：暗色图表填充 CSS 强制映射（W582 hex 24 条 + 全量 rgb 37 条·var() 引用豁免）—— */
   html[data-theme="dark"] svg [fill="#3a6b8c" i] { fill: #7d99a9; }  /* ×526 L<0.16 */
   html[data-theme="dark"] svg [fill="#6b3a8c" i] { fill: #a88bb0; }  /* ×130 L<0.16 */
   html[data-theme="dark"] svg [fill="#8c3a6b" i] { fill: #b8879c; }  /* ×110 L<0.16 */
@@ -249,6 +247,92 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
   html[data-theme="dark"] svg [fill="#2c2416" i] { fill: #9c9486; }  /* ×2 L<0.16 */
   html[data-theme="dark"] svg [fill="#7a3a8c" i] { fill: #af89af; }  /* ×2 L<0.16 */
   html[data-theme="dark"] svg [fill="#23201A" i] { fill: #9a9489; }  /* ×2 L<0.16 */
+  html[data-theme="dark"] svg [fill="#5a4a6b" i] { fill: #9e919d !important; }  /* ×112 */
+  html[data-theme="dark"] svg [fill="#8b3a2a" i] { fill: #ba8a7a !important; }  /* ×56 */
+  html[data-theme="dark"] svg [fill="#1e3a8a" i] { fill: #8a94b4 !important; }  /* ×42 */
+  html[data-theme="dark"] svg [fill="#7a4a2a" i] { fill: #ae9077 !important; }  /* ×36 */
+  html[data-theme="dark"] svg [fill="#4a6b8a" i] { fill: #8497a7 !important; }  /* ×36 */
+  html[data-theme="dark"] svg [fill="#a83232" i] { fill: #c8837d !important; }  /* ×26 */
+  html[data-theme="dark"] svg [fill="#7a4a7a" i] { fill: #ab8ba2 !important; }  /* ×18 */
+  html[data-theme="dark"] svg [fill="#9a3a3a" i] { fill: #c08680 !important; }  /* ×18 */
+  html[data-theme="dark"] svg [fill="#2a3a5a" i] { fill: #91959d !important; }  /* ×18 */
+  html[data-theme="dark"] svg [fill="#3a4a6a" i] { fill: #90969f !important; }  /* ×18 */
+  html[data-theme="dark"] svg [fill="#2d6a4f" i] { fill: #7a9d86 !important; }  /* ×18 */
+  html[data-theme="dark"] svg [fill="#8B0000" i] { fill: #c5857c !important; }  /* ×16 */
+  html[data-theme="dark"] svg [fill="#A52A2A" i] { fill: #c9837c !important; }  /* ×16 */
+  html[data-theme="dark"] svg [fill="#B22222" i] { fill: #d08079 !important; }  /* ×16 */
+  html[data-theme="dark"] svg [fill="#800080" i] { fill: #bf81b3 !important; }  /* ×16 */
+  html[data-theme="dark"] svg [fill="#696969" i] { fill: #97958f !important; }  /* ×16 */
+  html[data-theme="dark"] svg [fill="#8c4a6b" i] { fill: #b48a98 !important; }  /* ×16 */
+  html[data-theme="dark"] svg [fill="#4a6b8c" i] { fill: #8497a8 !important; }  /* ×16 */
+  html[data-theme="dark"] svg [fill="#a8542a" i] { fill: #c18867 !important; }  /* ×16 */
+  html[data-theme="dark"] svg [fill="#8a5a8a" i] { fill: #ad8aa5 !important; }  /* ×16 */
+  html[data-theme="dark"] svg [fill="#1a1410" i] { fill: #9b958a !important; }  /* ×13 */
+  html[data-theme="dark"] svg [fill="#3a2820" i] { fill: #9f9388 !important; }  /* ×10 */
+  html[data-theme="dark"] svg [fill="#a85a3a" i] { fill: #c0886e !important; }  /* ×10 */
+  html[data-theme="dark"] svg [fill="#a8362f" i] { fill: #c88479 !important; }  /* ×8 */
+  html[data-theme="dark"] svg [fill="#9c5a4a" i] { fill: #b98a7b !important; }  /* ×6 */
+  html[data-theme="dark"] svg [fill="#8c5e4d" i] { fill: #af8f7e !important; }  /* ×6 */
+  html[data-theme="dark"] svg [fill="#7a4a8c" i] { fill: #aa8bac !important; }  /* ×4 */
+  html[data-theme="dark"] svg [fill="#9c3a2e" i] { fill: #c18679 !important; }  /* ×4 */
+  html[data-theme="dark"] svg [fill="#2c5573" i] { fill: #8498a2 !important; }  /* ×4 */
+  html[data-theme="dark"] svg [fill="#6b4030" i] { fill: #aa8f80 !important; }  /* ×4 */
+  html[data-theme="dark"] svg [fill="#4a6a2a" i] { fill: #8a9c6e !important; }  /* ×4 */
+  html[data-theme="dark"] svg [fill="#8a3a3a" i] { fill: #b98983 !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="#a8556a" i] { fill: #c0858f !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="#2a1a10" i] { fill: #9e9387 !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="#7a2818" i] { fill: #b78c7c !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="#8b0000" i] { fill: #c5857c !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="rgb(190, 24, 39)" i] { fill: #d67b7c !important; }  /* ×1 */
+  html[data-theme="dark"] svg [fill="rgb(128, 0, 38)" i] { fill: #c1858d !important; }  /* ×82 */
+  html[data-theme="dark"] svg [fill="rgb(165, 0, 38)" i] { fill: #ce7e88 !important; }  /* ×42 */
+  html[data-theme="dark"] svg [fill="rgb(175, 2, 37)" i] { fill: #d27c85 !important; }  /* ×32 */
+  html[data-theme="dark"] svg [fill="rgb(211, 17, 33)" i] { fill: #e17576 !important; }  /* ×30 */
+  html[data-theme="dark"] svg [fill="rgb(139, 0, 0)" i] { fill: #c5857c !important; }  /* ×18 */
+  html[data-theme="dark"] svg [fill="rgb(170, 35, 29)" i] { fill: #cc8277 !important; }  /* ×18 */
+  html[data-theme="dark"] svg [fill="rgb(139, 69, 19)" i] { fill: #b78d6a !important; }  /* ×16 */
+  html[data-theme="dark"] svg [fill="rgb(170, 56, 50)" i] { fill: #c8837a !important; }  /* ×14 */
+  html[data-theme="dark"] svg [fill="rgb(92, 0, 0)" i] { fill: #b58c83 !important; }  /* ×12 */
+  html[data-theme="dark"] svg [fill="rgb(217, 22, 32)" i] { fill: #e47473 !important; }  /* ×12 */
+  html[data-theme="dark"] svg [fill="rgb(140, 26, 16)" i] { fill: #c1867a !important; }  /* ×12 */
+  html[data-theme="dark"] svg [fill="rgb(180, 3, 37)" i] { fill: #d47c84 !important; }  /* ×10 */
+  html[data-theme="dark"] svg [fill="rgb(140, 42, 42)" i] { fill: #be8880 !important; }  /* ×10 */
+  html[data-theme="dark"] svg [fill="rgb(0, 104, 55)" i] { fill: #69a17f !important; }  /* ×9 */
+  html[data-theme="dark"] svg [fill="rgb(140, 58, 10)" i] { fill: #bb8b6a !important; }  /* ×8 */
+  html[data-theme="dark"] svg [fill="rgb(160, 91, 38)" i] { fill: #bb8b63 !important; }  /* ×6 */
+  html[data-theme="dark"] svg [fill="rgb(155, 82, 31)" i] { fill: #bc8b66 !important; }  /* ×6 */
+  html[data-theme="dark"] svg [fill="rgb(161, 51, 38)" i] { fill: #c58578 !important; }  /* ×6 */
+  html[data-theme="dark"] svg [fill="rgb(122, 31, 18)" i] { fill: #b98b7c !important; }  /* ×6 */
+  html[data-theme="dark"] svg [fill="rgb(175, 62, 54)" i] { fill: #ca8278 !important; }  /* ×6 */
+  html[data-theme="dark"] svg [fill="rgb(157, 87, 35)" i] { fill: #bb8b65 !important; }  /* ×4 */
+  html[data-theme="dark"] svg [fill="rgb(200,57,44)" i] { fill: #d87c6e !important; }  /* ×4 */
+  html[data-theme="dark"] svg [fill="rgb(44,95,124)" i] { fill: #7f99a4 !important; }  /* ×4 */
+  html[data-theme="dark"] svg [fill="rgb(142, 61, 12)" i] { fill: #bb8b69 !important; }  /* ×4 */
+  html[data-theme="dark"] svg [fill="rgb(158, 51, 47)" i] { fill: #c4857d !important; }  /* ×4 */
+  html[data-theme="dark"] svg [fill="rgb(150, 42, 37)" i] { fill: #c2867d !important; }  /* ×4 */
+  html[data-theme="dark"] svg [fill="rgb(147, 40, 36)" i] { fill: #c1877d !important; }  /* ×4 */
+  html[data-theme="dark"] svg [fill="rgb(145, 66, 17)" i] { fill: #bb8b68 !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="rgb(150, 74, 24)" i] { fill: #bb8a67 !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="rgb(207, 44, 42)" i] { fill: #dd7971 !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="rgb(65,110,135)" i] { fill: #7e99a5 !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="rgb(152, 79, 28)" i] { fill: #bb8c66 !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="rgb(159, 90, 38)" i] { fill: #bb8c64 !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="rgb(58, 107, 140)" i] { fill: #7d99a9 !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="rgb(91, 107, 113)" i] { fill: #8e9795 !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="rgb(122, 26, 26)" i] { fill: #ba8a81 !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="rgb(168, 52, 45)" i] { fill: #c88479 !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="rgb(157, 46, 40)" i] { fill: #c4857b !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="rgb(161, 48, 42)" i] { fill: #c6857a !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="rgb(165, 50, 44)" i] { fill: #c7837a !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="rgb(173, 55, 47)" i] { fill: #ca8378 !important; }  /* ×2 */
+  html[data-theme="dark"] svg [fill="rgb(200, 36, 40)" i] { fill: #da7975 !important; }  /* ×1 */
+  html[data-theme="dark"] svg [fill="rgb(191, 26, 39)" i] { fill: #d77a7b !important; }  /* ×1 */
+  html[data-theme="dark"] svg [fill="rgb(182, 16, 39)" i] { fill: #d47c81 !important; }  /* ×1 */
+  html[data-theme="dark"] svg [fill="rgb(201, 37, 41)" i] { fill: #da7975 !important; }  /* ×1 */
+  html[data-theme="dark"] svg [fill="rgb(195, 31, 40)" i] { fill: #d87b79 !important; }  /* ×1 */
+  html[data-theme="dark"] svg [fill="rgb(208, 45, 42)" i] { fill: #dd7871 !important; }  /* ×1 */
+  html[data-theme="dark"] svg [fill="rgb(205, 41, 41)" i] { fill: #dc7872 !important; }  /* ×1 */
+  html[data-theme="dark"] svg [fill="rgb(199, 35, 40)" i] { fill: #da7976 !important; }  /* ×1 */
 
 /*
  * system.css — 详解西游记 · 全站组件设计系统
@@ -2305,45 +2389,6 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     document.addEventListener('touchmove', function () {
         if (prev) { prev.dispatchEvent(new MouseEvent('mouseout', { bubbles: true })); var ln2 = prev; while (ln2 && ln2 !== document.documentElement) { ln2.dispatchEvent(new MouseEvent('mouseleave')); ln2 = ln2.parentNode; } prev = null; }
     }, { passive: true, capture: true });
-})();
-</script>
-<script>/* W588 dark lift v2（暗色阶段二·MutationObserver 无竞态·浅色零改动） */
-(function () {
-    try {
-    if (!window.matchMedia || !window.matchMedia('(prefers-color-scheme: dark)').matches) return;
-    var TH = 0.16, TARGET = 0.22, timer = null;
-    function lum(r, g, b) {
-        function f(c) { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }
-        return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
-    }
-    function liftOnce() {
-        var els = document.querySelectorAll('svg rect, svg circle, svg path, svg polygon, svg ellipse');
-        for (var i = 0; i < els.length; i++) {
-            var el = els[i];
-            var cf = getComputedStyle(el).fill;
-            if (cf.indexOf('rgb') !== 0) continue;
-            var m = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(cf);
-            if (!m) continue;
-            var r = +m[1], g = +m[2], b = +m[3];
-            if (lum(r, g, b) >= TH) continue;
-            var rect = el.getBoundingClientRect();
-            if (rect.width < 3 || rect.height < 3) continue;
-            var rr = r, gg = g, bb = b;
-            for (var k = 1; k <= 20; k++) {
-                var a = k / 20;
-                rr = Math.round(r + (242 - r) * a); gg = Math.round(g + (235 - g) * a); bb = Math.round(b + (220 - b) * a);
-                if (lum(rr, gg, bb) >= TARGET) break;
-            }
-            el.style.fill = 'rgb(' + rr + ',' + gg + ',' + bb + ')';
-        }
-    }
-    function schedule() { if (timer) return; timer = setTimeout(function () { timer = null; liftOnce(); }, 80); }
-    [0, 500, 1500, 3000, 5000].forEach(function (d) { setTimeout(liftOnce, d); });
-    if (window.MutationObserver) {
-        var mo = new MutationObserver(schedule);
-        mo.observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['fill', 'style'] });
-    }
-    } catch (e) { /* fail-open */ }
 })();
 </script>
 </body>
