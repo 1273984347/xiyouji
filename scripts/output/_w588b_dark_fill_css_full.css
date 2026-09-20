@@ -1,0 +1,4 @@
+  /* —— W588b：暗色图表填充 CSS 强制映射（全量源值·!important 压制页面内联/属性重设·替换 W582/W588b 部分版）——
+     值来源：暗色审计运行时扫描（54 缺陷页全量·43 种源值·1887 实例）；
+     新增暗填充值时须在此补映射（check_dark_state_gate 只增即 FAIL 会提示）。—— */
+  html[data-theme="dark"] svg [fill="rgb(190, 24, 39)" i] { fill: #d67b7c !important; }

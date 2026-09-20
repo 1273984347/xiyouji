@@ -1,0 +1,25 @@
+{
+  "batch": "W589",
+  "version": "v2.3.189",
+  "date": "2026-09-20",
+  "title": "W589 暗色审计读数语义修正+映射合并重建 — computed读数/透明与var豁免/alpha split判定·W582+W588b两代映射合并·残余48/7登记（数据驱动角色色）",
+  "desc": "暗色审计读数语义修正与映射合并",
+  "head_entry": "2026-09-20（v2.3.189 W589 暗色审计读数语义修正+映射合并重建：①审计 invisible 判定改读 computed（渲染事实）——原 getAttribute 优先读的是页面意图串，CSS !important 覆盖后属性串仍是旧暗值（本 arc 多轮「修不掉」假象的共同成因）；②透明豁免 alpha<0.1（rgba(0,0,0,0) 命中层×40 为设计产物·split 判定免模板转义层）；③var() 引用型填充豁免（面板底色/绘图区·主题自适应设计产物——computed 读数曾误伤计数）；④W582 hex 24 条 + W588b 全量 rgb 37 条两代映射合并重建（中途一次块替换误删 W582 块致 895 回潮·已复原）；⑤JS 亮度提升器（W587/W588）撤除——CSS !important 持续压制对动画重设型页面稳定占优、无竞态；实测残余 invisible 48/7 页（数据驱动角色主题色如黑=特定角色设定色·需逐页数据级设计决策·登记设计批）·审计基线刷新至 48/7；暗色门禁/契约冒烟/截图门禁/verify 全绿）",
+  "head_sentence": "W589 审计读数语义修正+映射合并——残余48/7登记数据驱动设计批",
+  "milestone_block": "- **v2.3.189 W589 暗色审计读数语义修正**：invisible 判定改读 computed+透明豁免+var() 豁免·W582/W588b 两代映射合并重建（一次误删致 895 回潮已复原）·JS 提升器撤除（CSS !important 持续压制胜出）·残余 48/7 页（数据驱动角色色·登记设计批）·基线刷新。",
+  "agents_note": "2026-09-20（v2.3.189 W589）暗色审计读数语义修正：无 § 结构性变更（invisible 判定改读 computed+透明 alpha<0.1 豁免+var() 引用豁免——原 getAttribute 优先读页面意图串致 CSS 覆盖后仍计旧暗值·两代映射合并重建·JS 提升器撤除·残余 48/7 页数据驱动角色色登记设计批），仅版本脚注同步",
+  "changelog_body": "\r\n\r\n> **来源**：W587/W588 运行时提升器与审计读数的交互之谜收口（用户「继续」指令·B/D 残留与暗色阶段二定向收口）。\r\n> - **审计读数语义修正（本 arc 多轮假象的共同成因）**：invisible 判定原为 `getAttribute('fill') || computed`——属性优先读的是**页面意图串**：CSS !important 映射生效后渲染已亮，但属性串仍是旧暗值 → 审计持续误计；改读 **computed（渲染事实）**。配套两项豁免：alpha<0.1 透明命中层（设计产物·rgba(0,0,0,0) 悬浮交互层非内容·split 判定免模板转义层）+ var() 引用型填充（面板底色/绘图区·主题自适应设计产物）。\r\n> - **映射合并重建**：W582 hex 24 条 + W588b 全量 rgb 37 条合并为统一映射段（中途一次块替换误删 W582 块致 895 回潮·即发现即复原）；W587/W588 的 JS 亮度提升器（163 页脚本块）**撤除**——CSS !important 持续压制对动画重设型页面稳定占优、无竞态无时序问题，脚本方案整体让位。\r\n> - **实测（诚实）**：invisible 48/7 页（ rgb(0,0,0)×46=数据驱动角色主题色如黑·需逐页数据级设计决策 + 零星散值）——较 W569 基线 1590/W571 诚实基线 318 仍为大幅改善；残余登记**暗色阶段三设计批**（数据级角色色调色）。审计基线刷新至 48/7（只增即 FAIL）。\r\n> - **验证**：generate_csp --check 0 漂移；check_dark_state_gate OK；check_contract_smoke OK；check_screenshot_gates 235 页 FAIL 0；verify_delivery 核心全绿。\r\n> - **文件**：详见 scripts/output/file-index.md W589 段。\r\n> - **状态**：已落地（本批随 W589 提交并 push origin/main）。",
+  "file_index_rows": [
+    "| site/tokens.css | W589 | 更新·W582+W588b 两代映射合并重建（W582 hex 24+全量 rgb 37·61 条） |",
+    "| site/（批量226页·inline_css分发） | W589 | 更新·合并映射分发 |",
+    "| site/（批量163页） | W589 | 回退·W587/W588 JS 亮度提升器撤除（CSS !important 持续压制方案胜出） |",
+    "| scripts/_audit_render_states.js | W589 | 更新·invisible 判定读数语义修正（computed+透明豁免+var豁免+hasV2/w588init/mmDark 诊断字段） |",
+    "| scripts/output/render-state-audit-baseline.jsonl | W589 | 更新·基线刷新至 48/7（残余=数据驱动角色色·登记阶段三设计批） |",
+    "| scripts/_w586_upgrade_leave.py | W589 | 新增·leave 本体直派升级器（升级④·W586 内容随批补登） |",
+    "| scripts/_w586_upgrade_ancestors.py | W589 | 新增·祖先链 leave 升级器（升级⑤·W586 内容随批补登） |",
+    "| scripts/_w588_upgrade_observer.py | W589 | 新增·暗色提升器 v2 升级器（W588 内容随批补登·后由 W589 撤除） |",
+    "| scripts/_w588b_upgrade_v3.py | W589 | 新增·v3 合体升级器（同上·后由 W589 撤除） |",
+    "| scripts/_w588b_gen_full.py | W589 | 新增·全量 rgb 映射生成器 |",
+    "| scripts/_w588b_scan_full.js | W589 | 新增·54 缺陷页暗填充源串全量扫描器 |"
+  ]
+}
