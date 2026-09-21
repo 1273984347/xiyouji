@@ -389,6 +389,6 @@ B14 WP-L  信任字段补全
 | WP-H1 | ⏸ | — | — | — |
 | WP-H2 | ⏸ | — | — | — |
 | WP-I | ⏸ | — | — | — |
-| WP-J | ✅ 2026-09-21（W596） | W596 | 待提交 | 偏差①：Docker 镜像构建未完成验证——本机 Docker Hub 拉取 node:22-alpine 受限且用户指示「先不用 Docker」，Dockerfile/.dockerignore/DEPLOYMENT.md 已入库，条件具备后补验（方案口径：如实标注禁假收敛）；偏差②：`/api/health` 健康探针为既有路由（102 行实测），HEALTHCHECK 合法；偏差③：脏路径活面清零含级联脚本 winpath 根因修复（旧值每批续写 workflows README·修文档不改脚本必回潮）；豁免域 21 文件登记（CHANGELOG 历史段禁改/.workbuddy 会话记忆/docs/_dev/历史方案档/scripts/output 产物/检测器 `_audit_agentweb_baseline.py`（搜索模式即旧路径·设计保留）/gitignore 产物 index.js） |
-| WP-K | ⏸ | — | — | — |
+| WP-J | ✅ 2026-09-21（W596） | W596 | e0ee2a9 | 偏差①：Docker 镜像构建未完成验证——本机 Docker Hub 拉取 node:22-alpine 受限且用户指示「先不用 Docker」，Dockerfile/.dockerignore/DEPLOYMENT.md 已入库，条件具备后补验（方案口径：如实标注禁假收敛）；偏差②：`/api/health` 健康探针为既有路由（102 行实测），HEALTHCHECK 合法；偏差③：脏路径活面清零含级联脚本 winpath 根因修复（旧值每批续写 workflows README·修文档不改脚本必回潮）；豁免域 21 文件登记（CHANGELOG 历史段禁改/.workbuddy 会话记忆/docs/_dev/历史方案档/scripts/output 产物/检测器 `_audit_agentweb_baseline.py`（搜索模式即旧路径·设计保留）/gitignore 产物 index.js） |
+| WP-K | ✅ 2026-09-21（W597） | W597 | 待提交 | 偏差①：90 天年龄规则在两个月龄仓库产出 0，执行期修订为 ≥45 天（=半个项目生命周期·实扫 25 项迁移）；偏差②：pyproject ruff 排除未新增——W400 已有 **/_*.py 排除且 _attic 迁移物全为 js/md/json（一次误写坏 toml 当场 git checkout 还原；教训：双引号 python -c 内含反引号路径触发 bash 命令替换，回归 Write 临时文件铁律）；未跟踪 42 项全部零引用删除（含 _w597_scan 扫描器自身与 W593 漏删的 _w593_edits.py） |
 | WP-L | ⏸ | — | — | — |

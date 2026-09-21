@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W596），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W597），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.197（2026-09-21）：W597 一次性脚本治理 — 未跟踪42清零+_attic收档25+需求侧批次配额（WP-K）
+
+> **来源**：W590 主计划 WP-K——scripts/ tracked 275 个 `_` 前缀文件占全部脚本的绝对多数、工作区另有 42 个未跟踪诊断残留（近 20 批会话产物）。
+> - **执行（未跟踪清零）**：42 项逐个引用判定（治理文档+全部 docs md+tests/.github/mcp-server/非 `_` 脚本语料 grep 文件名）——0 项被引用，全部删除（含 W593 漏删的 _w593_edits.py 与本批扫描器自身）；收尾 git status 无未跟踪残留。
+> - **执行（_attic 收档）**：新建 scripts/_attic/（README 一行规则：仅收档·禁新增引用·复用先移回）；25 项零引用且最后提交 ≥45 天的 `_` 文件 git mv 收档（保历史）；**偏差声明：方案 90 天规则在两个月龄仓库实扫产出 0，修订为 ≥45 天（=半个项目生命周期），25/155 零引用项收档，其余 130 项为近期会话诊断按规则留原位**。
+> - **执行（需求侧批次配额）**：交接文档「二、下一步方向」头部立规则——每连续 3 个 W 批至少 1 批投向需求侧（主计划 WP 队列），直至 WP-A 判定完成且 WP-B/D/F/G 落地。
+> - **偏差声明（教训）**：pyproject ruff 排除未新增——核实 W400 已有 `**/_*.py` 排除且 _attic 迁移物全为 js/md/json；执行中一次把 toml 写坏当场 git checkout 还原（根因：双引号 python -c 内含反引号路径触发 bash 命令替换，AGENTS「Write 临时文件」铁律的四犯，此教训并入本批登记）。
+> - **验证**：git status --porcelain 0 未跟踪；_attic 25 项 git mv 保历史；五处引用扫描 0 缺失（收档者零引用·留位者有引用）；ruff 全量过；verify_delivery 核心全绿。
+> - **文件**：scripts/_attic/（25 项迁移+README）、42 项未跟踪删除、交接文档配额规则、pyproject 还原无净变更、方案档落地状态、scripts/_w597_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批随 W597 提交并 push origin/main）。
 ### v2.3.196（2026-09-21）：W596 Agent 运行卫生 — PROJECT_CWD 自动解析+Docker三件套+双副本脏路径活面清零（WP-J）
 
 > **来源**：W590 主计划 WP-J——实测 `D:/1/xiyouji` 副本不存在而 agent-web 默认 PROJECT_CWD 指向它（悬空默认·Agent 全部工具调用落空）；且全仓 14 个活面文件残留双副本脏路径，其中级联脚本 winpath 硬编码**每批续写**进 workflows README（修文档不改脚本必回潮）。

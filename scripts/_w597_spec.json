@@ -1,0 +1,27 @@
+{
+ "batch": "W597",
+ "version": "v2.3.197",
+ "date": "2026-09-21",
+ "title": "W597 一次性脚本治理 — 未跟踪42清零+_attic收档25+需求侧批次配额（WP-K）",
+ "desc": "一次性脚本治理与需求侧配额",
+ "head_entry": "2026-09-21（v2.3.197 W597 一次性脚本治理：未跟踪 42 项零引用清零、scripts/_attic 收档 25 项（五处引用扫描零命中+≥45 天）、交接文档立需求侧批次配额规则, WP-K 验收达成）",
+ "head_sentence": "一次性脚本治理——_attic 收档+未跟踪清零+需求侧配额",
+ "changelog_body": "\n\n> **来源**：W590 主计划 WP-K——scripts/ tracked 275 个 `_` 前缀文件占全部脚本的绝对多数、工作区另有 42 个未跟踪诊断残留（近 20 批会话产物）。\n> - **执行（未跟踪清零）**：42 项逐个引用判定（治理文档+全部 docs md+tests/.github/mcp-server/非 `_` 脚本语料 grep 文件名）——0 项被引用，全部删除（含 W593 漏删的 _w593_edits.py 与本批扫描器自身）；收尾 git status 无未跟踪残留。\n> - **执行（_attic 收档）**：新建 scripts/_attic/（README 一行规则：仅收档·禁新增引用·复用先移回）；25 项零引用且最后提交 ≥45 天的 `_` 文件 git mv 收档（保历史）；**偏差声明：方案 90 天规则在两个月龄仓库实扫产出 0，修订为 ≥45 天（=半个项目生命周期），25/155 零引用项收档，其余 130 项为近期会话诊断按规则留原位**。\n> - **执行（需求侧批次配额）**：交接文档「二、下一步方向」头部立规则——每连续 3 个 W 批至少 1 批投向需求侧（主计划 WP 队列），直至 WP-A 判定完成且 WP-B/D/F/G 落地。\n> - **偏差声明（教训）**：pyproject ruff 排除未新增——核实 W400 已有 `**/_*.py` 排除且 _attic 迁移物全为 js/md/json；执行中一次把 toml 写坏当场 git checkout 还原（根因：双引号 python -c 内含反引号路径触发 bash 命令替换，AGENTS「Write 临时文件」铁律的四犯，此教训并入本批登记）。\n> - **验证**：git status --porcelain 0 未跟踪；_attic 25 项 git mv 保历史；五处引用扫描 0 缺失（收档者零引用·留位者有引用）；ruff 全量过；verify_delivery 核心全绿。\n> - **文件**：scripts/_attic/（25 项迁移+README）、42 项未跟踪删除、交接文档配额规则、pyproject 还原无净变更、方案档落地状态、scripts/_w597_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。\n> - **状态**：已落地（本批随 W597 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.197 W597 一次性脚本治理（2026-09-21）**：\n  - scripts/_attic 收档 25 项（零引用+≥45 天·git mv 保历史）+ 未跟踪 42 项零引用清零——scripts/ 顶层 `_` 文件密度显著收敛\n  - 交接文档立需求侧批次配额（每 3 批至少 1 批需求侧·直至 WP-A 判定+B/D/F/G 落地）",
+ "agents_note": "2026-09-21（v2.3.197 W597）一次性脚本治理：无 § 结构性变更（_attic 收档 25+未跟踪 42 清零+需求侧批次配额规则·90 天规则执行期修订为 ≥45 天并登记），仅版本脚注同步",
+ "file_index_rows": [
+  "| scripts/_attic/（25 项迁移） | W597 | 新建·历史诊断脚本收档区（_audit/_chk/_diag/_shots/_trace/_verify 系列+报告·零引用≥45 天·git mv 保历史） |",
+  "| scripts/_attic/README.md | W597 | 新建·收档规则一行（仅收档禁新增引用·复用先移回） |",
+  "| 未跟踪 42 项 | W597 | 删除·零引用会话诊断残留（_w575/_w581/_w588 diag 系列+pool/en-zh summary+heatmap-dark.png+output 产物等·逐项引用判定 0 命中） |",
+  "| 交接文档.md | W597 | 修改·「二」头部需求侧批次配额规则行 |",
+  "| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W597 | 修改·WP-K 落地状态回写+W596 哈希补填 |",
+  "| scripts/_w597_spec.json | W597 | 新建·本批级联 spec |",
+  "| CHANGELOG.md | W597 | 新增·W597 版段 + 编号规则上限 W001-W597 |",
+  "| 交接文档.md | W597 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W597 | 修改·版本行同步 v2.3.197 |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W597 | 修改·四页脚链首 prepend W597 |",
+  "| .github/workflows/README.md | W597 | 修改·旁文档同步 |",
+  "| AGENTS.md | W597 | 修改·版本脚注追加 W597 |",
+  "| scripts/output/file-index.md | W597 | 新增·W597 段（本段·batch_cascade.py 执行） |"
+ ]
+}
