@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W599），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W600），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,17 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.200（2026-09-21）：W600 Agent 反馈闭环 — 👍👎/复制/重新生成+feedback表+耗时展示（WP-H2）
+
+> **来源**：W590 主计划 WP-H2——评审实证无任何反馈按钮/端点、cost/duration 载荷前端直接丢弃。
+> - **执行（数据层）**：server/db.ts 增 feedback 表（verdict CHECK up/down·(message_id,verdict) 唯一索引幂等）+ insertFeedback（INSERT OR IGNORE 返回 changes）/feedbackSummary（近 30 天计数）。
+> - **执行（API）**：POST /api/feedback（body 校验+comment 截断 500+幂等）与 GET /api/feedback/summary 两端点。
+> - **执行（前端）**：ChatMessages 非流式消息下增操作条——👍/👎（乐观态+POST·失败保本地态）/复制（clipboard）/重新生成（onRegenerate→ChatPage 取上一条用户提问经 onSendMessage 重发）；done 事件 duration 捕获为 durationSec（ms 自动换算秒）上屏。
+> - **执行（集成测试）**：server/feedback.test.mjs——独立端口真实起服→HTTP→直查 chat.db→清理测试行，5/5 过（首插 1/幂等 0/非法 400/summary/sqlite 直查）。
+> - **偏差声明**：① Playwright 点按 e2e 未做——产生 assistant 消息需 CODEBUDDY_API_KEY（用户侧凭证），UI 点按链路待凭证后补 e2e；② cost 字段 SDK 单位未确认，首版仅展示 duration（方案原文允许），cost 展示待确认启用。
+> - **验证**：集成测试 5/5；npm run build（tsc+vite）过；verify_delivery 核心全绿。
+> - **文件**：xiyouji-agent-web（server/db.ts、server/index.ts、server/feedback.test.mjs、src/types.ts、src/hooks/useChat.ts、src/components/ChatMessages.tsx、src/pages/ChatPage.tsx）、方案档落地状态、scripts/_w600_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批随 W600 提交并 push origin/main）。
 ### v2.3.199（2026-09-21）：W599 Agent 引用校验与拒答边界 — citationGuard+双提示词增补+SSE回写（WP-I）
 
 > **来源**：W590 主计划 WP-I——评审实证回答引用为纯提示词约束零校验（仓库现成 check_citations 思路未复用）、系统提示词无拒答边界。

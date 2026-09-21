@@ -101,6 +101,12 @@ export function ChatPage({
             messages={currentSession!.messages}
             models={models}
             messagesEndRef={messagesEndRef}
+            onRegenerate={(msg) => {
+              const ms = currentSession!.messages;
+              const idx = ms.findIndex(x => x.id === msg.id);
+              const prevUser = [...ms.slice(0, idx)].reverse().find(x => x.role === 'user');
+              if (prevUser) onSendMessage(prevUser.content);
+            }}
             permissionRequest={permissionRequest}
             onPermissionAllow={onPermissionAllow}
             onPermissionDeny={onPermissionDeny}

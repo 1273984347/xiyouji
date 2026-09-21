@@ -35,6 +35,8 @@ export interface Message {
   isStreaming?: boolean;
   toolCalls?: ToolCall[];  // 保留用于兼容
   contentBlocks?: ContentBlock[];  // 新增：按顺序排列的内容块
+  feedback?: 'up' | 'down';  // W600：用户反馈
+  durationSec?: number;      // W600：SDK 上报耗时（秒·一位小数）
 }
 
 export interface Session {
