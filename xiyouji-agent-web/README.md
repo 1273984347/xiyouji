@@ -1,5 +1,7 @@
 # 西游记·渡口问津（xiyouji-agent-web）
 
+> **定位**：本地工程工具，仅回环监听，不对公网开放。公网 AI 能力路线见 `docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md` WP-B-ALT（冻结预案）。
+
 基于 **CodeBuddy Agent SDK** 构建的 Web Agent 应用，**已适配本地项目 `D:\1\xiyouji`（详解西游记）**。
 
 打开浏览器即可与「渡口问津」对话：让它检索某回解读、回答佛道思想/诗词/人物问题、运行 `scripts/` 下的 Python 分析脚本、生成可视化，或协助撰写 `docs/` 文档。
