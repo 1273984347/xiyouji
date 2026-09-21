@@ -13,7 +13,7 @@
     "postinstall": "npx playwright install chromium"
   },
   "dependencies": {
-    "playwright": "^1.62.1"
+    "playwright": "^1.63.0"
   },
   "devDependencies": {
     "eslint": "^10.9"
