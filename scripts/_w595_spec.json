@@ -1,0 +1,24 @@
+{
+ "batch": "W595",
+ "version": "v2.3.195",
+ "date": "2026-09-21",
+ "title": "W595 CI 红灯热修复 — W593 sitemap.xml 漏 add 补提交（330 条含 reader 101）",
+ "desc": "sitemap 漏提交热修复",
+ "head_entry": "2026-09-21（v2.3.195 W595 CI 红灯热修复：W593 批 gen_sitemap 重生成 330 条后漏 add site/sitemap.xml，提交树残留 229 条旧版致 CI Delivery Gate 报 reader 101 缺页, 本批补提交）",
+ "head_sentence": "CI 红灯热修复——sitemap.xml 漏 add 补提交",
+ "changelog_body": "\n\n> **来源**：W593 推送后 CI Delivery Gate FAIL——「sitemap 与 site 不一致：缺 101 页（reader/ch001.html…）」；本地 verify 全绿（工作区文件为新）而提交树为旧，属「声明≠落地」的提交面变体。\n> - **根因**：W593 批 gen_sitemap.py 重生成 sitemap.xml（330 条含 reader 101）后，git add 清单未包含该文件——提交树残留 229 条旧版。W537 规则③「CHANGELOG 文件清单 ⊆ tracked」的同族变体：**重生成产物 ⊆ staged**。收尾七步⑥的 gh run list 确认在本批执行中被后批推进打断，未即时发现，W580 先例沿用热修复流程。\n> - **修复**：补提交 site/sitemap.xml（330 条·含 reader 101·lastmod ≤ 当天）；方案档 WP-C 第 5 条增补「凡跑 gen_sitemap 的批次 sitemap.xml 必须纳入 git add 清单」。\n> - **验证**：git show HEAD:site/sitemap.xml 计 330 条且含 reader 101；本地 verify 全绿；推送后 CI 五工作流全绿确认。\n> - **文件**：site/sitemap.xml、docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md、scripts/_w595_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。\n> - **状态**：已落地（本批随 W595 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.195 W595 CI 红灯热修复（2026-09-21）**：\n  - 补提交 W593 漏 add 的 site/sitemap.xml（229→330 条·reader 101 入册）——CI Delivery Gate 红灯根因为重生成产物未入 staged 清单（W537 规则③同族）",
+ "agents_note": "2026-09-21（v2.3.195 W595）CI 红灯热修复：无 § 结构性变更（W593 漏 add 的 sitemap.xml 补提交 330 条·教训登记方案 WP-C 第 5 条），仅版本脚注同步",
+ "file_index_rows": [
+  "| site/sitemap.xml | W595 | 修改·补提交 W593 漏 add 的重生成版（229→330 条·含 reader 101） |",
+  "| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W595 | 修改·WP-C 第 5 条增补 sitemap 必入提交清单教训 |",
+  "| scripts/_w595_spec.json | W595 | 新建·本批级联 spec |",
+  "| CHANGELOG.md | W595 | 新增·W595 版段 + 编号规则上限 W001-W595 |",
+  "| 交接文档.md | W595 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W595 | 修改·版本行同步 v2.3.195 |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W595 | 修改·四页脚链首 prepend W595 |",
+  "| .github/workflows/README.md | W595 | 修改·旁文档同步 |",
+  "| AGENTS.md | W595 | 修改·版本脚注追加 W595 |",
+  "| scripts/output/file-index.md | W595 | 新增·W595 段（本段·batch_cascade.py 执行） |"
+ ]
+}
