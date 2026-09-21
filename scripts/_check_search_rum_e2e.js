@@ -24,13 +24,14 @@ function ok(name, cond, detail) {
   await p1.goto(URL_ZH);
   await p1.waitForTimeout(300);
   const pick = await p1.evaluate(() => {
+    var SEARCH_IDX = (typeof SITE_SEARCH_INDEX_ZH !== "undefined") ? SITE_SEARCH_INDEX_ZH : ((typeof SITE_SEARCH_INDEX_EN !== "undefined") ? SITE_SEARCH_INDEX_EN : null);
     function derive(cands) {
       for (const d of cands) {
         const t = (d.title || '').trim();
         for (const L of [4, 6, 8, 12, 16]) {
           if (t.length < L) continue;
           const kwl = t.slice(0, L).toLowerCase();
-          const matches = SITE_SEARCH_INDEX.filter(x =>
+          const matches = SEARCH_IDX.filter(x =>
             (x.title || '').toLowerCase().includes(kwl) ||
             (x.category || '').toLowerCase().includes(kwl) ||
             (x.snippet || '').toLowerCase().includes(kwl));
@@ -39,7 +40,7 @@ function ok(name, cond, detail) {
       }
       return null;
     }
-    const docs = SITE_SEARCH_INDEX.filter(d => d.kind === 'doc' && (d.title || '').length >= 6);
+    const docs = SEARCH_IDX.filter(d => d.kind === 'doc' && (d.title || '').length >= 6);
     const picks = [];
     for (const d of docs) {
       if (picks.length >= 3) break;
@@ -47,7 +48,7 @@ function ok(name, cond, detail) {
       for (const L of [4, 6, 8, 12, 16]) {
         if (t.length < L) continue;
         const kwl = t.slice(0, L).toLowerCase();
-        const matches = SITE_SEARCH_INDEX.filter(x =>
+        const matches = SEARCH_IDX.filter(x =>
           (x.title || '').toLowerCase().includes(kwl) ||
           (x.category || '').toLowerCase().includes(kwl) ||
           (x.snippet || '').toLowerCase().includes(kwl));
@@ -76,13 +77,14 @@ function ok(name, cond, detail) {
   await p2.goto(URL_EN);
   await p2.waitForTimeout(300);
   const pe = await p2.evaluate(() => {
+    var SEARCH_IDX = (typeof SITE_SEARCH_INDEX_ZH !== "undefined") ? SITE_SEARCH_INDEX_ZH : ((typeof SITE_SEARCH_INDEX_EN !== "undefined") ? SITE_SEARCH_INDEX_EN : null);
     function derive(cands) {
       for (const d of cands) {
         const t = (d.title || '').trim();
         for (const L of [8, 12, 16, 24]) {
           if (t.length < L) continue;
           const kwl = t.slice(0, L).toLowerCase();
-          const matches = SITE_SEARCH_INDEX.filter(x =>
+          const matches = SEARCH_IDX.filter(x =>
             (x.title || '').toLowerCase().includes(kwl) ||
             (x.category || '').toLowerCase().includes(kwl) ||
             (x.snippet || '').toLowerCase().includes(kwl));
@@ -91,8 +93,8 @@ function ok(name, cond, detail) {
       }
       return null;
     }
-    const pages = SITE_SEARCH_INDEX.filter(d => d.kind === 'page' && (d.title || '').length >= 8);
-    return derive([pages[0]]);
+    const pages = SEARCH_IDX.filter(d => d.kind === 'page' && (d.title || '').length >= 8);
+    return derive(pages) || derive(SEARCH_IDX.filter(d => d.kind === 'doc' && (d.title || '').length >= 16)) || null;
   });
   {
     const kw = pe.kw;
@@ -115,6 +117,7 @@ function ok(name, cond, detail) {
   await p3.goto(URL_IDX);
   await p3.waitForTimeout(300);
   await p3.evaluate(() => {
+    var SEARCH_IDX = (typeof SITE_SEARCH_INDEX_ZH !== "undefined") ? SITE_SEARCH_INDEX_ZH : ((typeof SITE_SEARCH_INDEX_EN !== "undefined") ? SITE_SEARCH_INDEX_EN : null);
     Object.defineProperty(document, 'visibilityState', { get: () => 'hidden', configurable: true });
     document.dispatchEvent(new Event('visibilitychange'));
   });

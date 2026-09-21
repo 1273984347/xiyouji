@@ -1,0 +1,277 @@
+{
+  "generated": "2026-09-21",
+  "scoring": "title+5/category+2/snippet+1/kw+4（与 renderOffline 同步演化）",
+  "expect_rule": "top3 任一标题包含 expect 子串",
+  "cases": [
+    {
+      "page": "zh",
+      "q": "可视化维",
+      "expect": [
+        "可视化维"
+      ],
+      "src_title": "V2 可视化维度详细方案",
+      "src_url": "https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/V2可视化维度方案.md"
+    },
+    {
+      "page": "zh",
+      "q": "统计口径",
+      "expect": [
+        "统计口径"
+      ],
+      "src_title": "统计口径说明",
+      "src_url": "https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/统计口径说明.md"
+    },
+    {
+      "page": "zh",
+      "q": "取经是训",
+      "expect": [
+        "取经是训"
+      ],
+      "src_title": "第0篇 · 取经是训练，我是模型，佛法是架构",
+      "src_url": "https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/缘起总纲-取经是训练.md"
+    },
+    {
+      "page": "zh",
+      "q": "访问统计",
+      "expect": [
+        "访问统计"
+      ],
+      "src_title": "访问统计方案（GoatCounter 升级路径）",
+      "src_url": "https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/访问统计方案.md"
+    },
+    {
+      "page": "zh",
+      "q": "全书逐回",
+      "expect": [
+        "全书逐回"
+      ],
+      "src_title": "01-全书逐回解读",
+      "src_url": "https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/README.md"
+    },
+    {
+      "page": "zh",
+      "q": "灵根育孕",
+      "expect": [
+        "灵根育孕"
+      ],
+      "src_title": "第001回 灵根育孕源流出 心性修持大道生",
+      "src_url": "reader/ch001.html"
+    },
+    {
+      "page": "zh",
+      "q": "悟彻菩提",
+      "expect": [
+        "悟彻菩提"
+      ],
+      "src_title": "第 002回 悟彻菩提真妙理 断魔归本合元神",
+      "src_url": "reader/ch002.html"
+    },
+    {
+      "page": "zh",
+      "q": "四海千山",
+      "expect": [
+        "四海千山"
+      ],
+      "src_title": "第003回 四海千山皆拱伏 九幽十类尽除名",
+      "src_url": "reader/ch003.html"
+    },
+    {
+      "page": "zh",
+      "q": "官封弼马",
+      "expect": [
+        "官封弼马"
+      ],
+      "src_title": "第004回 官封弼马心何足 注名齐天意未宁",
+      "src_url": "reader/ch004.html"
+    },
+    {
+      "page": "zh",
+      "q": "乱蟠桃大",
+      "expect": [
+        "乱蟠桃大"
+      ],
+      "src_title": "第 005回 乱蟠桃大圣偷丹 反天宫诸神捉怪",
+      "src_url": "reader/ch005.html"
+    },
+    {
+      "page": "zh",
+      "q": "观音赴会",
+      "expect": [
+        "观音赴会"
+      ],
+      "src_title": "第006回 观音赴会问原因 小圣施威降大圣",
+      "src_url": "reader/ch006.html"
+    },
+    {
+      "page": "zh",
+      "q": "八卦炉中",
+      "expect": [
+        "八卦炉中"
+      ],
+      "src_title": "第 007 回 八卦炉中逃大圣 五行山下定心猿",
+      "src_url": "reader/ch007.html"
+    },
+    {
+      "page": "zh",
+      "q": "此页不在",
+      "expect": [
+        "此页不在"
+      ],
+      "src_title": "404 · 此页不在航线上 — 详解西游记",
+      "src_url": "404.html"
+    },
+    {
+      "page": "zh",
+      "q": "详解西游",
+      "expect": [
+        "详解西游"
+      ],
+      "src_title": "精选发布 · 详解西游记",
+      "src_url": "curated.html"
+    },
+    {
+      "page": "zh",
+      "q": "八十一难",
+      "expect": [
+        "八十一难"
+      ],
+      "src_title": "详解西游记 · 八十一难可交互视图",
+      "src_url": "data/81-hardships-view.html"
+    },
+    {
+      "page": "zh",
+      "q": "美学时尚",
+      "expect": [
+        "美学时尚"
+      ],
+      "src_title": "美学时尚演变 · 详解西游记",
+      "src_url": "data/aesthetics.html"
+    },
+    {
+      "page": "zh",
+      "q": "洞府房产",
+      "expect": [
+        "洞府房产"
+      ],
+      "src_title": "洞府房产档案 · 详解西游记",
+      "src_url": "data/cave-estate.html"
+    },
+    {
+      "page": "zh",
+      "q": "章节字数",
+      "expect": [
+        "章节字数"
+      ],
+      "src_title": "章节字数与对话统计 · 详解西游记",
+      "src_url": "data/chapter-stats.html"
+    },
+    {
+      "page": "zh",
+      "q": "回目结构",
+      "expect": [
+        "回目结构"
+      ],
+      "src_title": "回目结构图谱 · 详解西游记",
+      "src_url": "data/chapter-structure-graph.html"
+    },
+    {
+      "page": "zh",
+      "q": "人物出场",
+      "expect": [
+        "人物出场"
+      ],
+      "src_title": "详解西游记 · 人物出场频次与戏份分析 · 详解西游记",
+      "src_url": "data/character-appearance.html"
+    },
+    {
+      "page": "en",
+      "q": "annotated journey",
+      "expect": [
+        "annotated journey"
+      ],
+      "src_title": "Annotated Journey to the West · Eighty-One Hardships Interactive View",
+      "src_url": "en/81-hardships-view.html"
+    },
+    {
+      "page": "en",
+      "q": "aesthetic fashion",
+      "expect": [
+        "aesthetic fashion"
+      ],
+      "src_title": "Aesthetic Fashion Evolution · Annotated Journey to the West",
+      "src_url": "en/aesthetics.html"
+    },
+    {
+      "page": "en",
+      "q": "celebrity dialogue",
+      "expect": [
+        "celebrity dialogue"
+      ],
+      "src_title": "AI Celebrity Dialogue · Annotated Journey to the West",
+      "src_url": "en/ai-dialogue.html"
+    },
+    {
+      "page": "en",
+      "q": "business model",
+      "expect": [
+        "business model"
+      ],
+      "src_title": "Business Model · Annotated Journey to the West",
+      "src_url": "en/business-model.html"
+    },
+    {
+      "page": "en",
+      "q": "cave estate",
+      "expect": [
+        "cave estate"
+      ],
+      "src_title": "Cave Estate Archive · Annotated Journey to the West",
+      "src_url": "en/cave-estate.html"
+    },
+    {
+      "page": "en",
+      "q": "century dialogue",
+      "expect": [
+        "century dialogue"
+      ],
+      "src_title": "Century Dialogue · Annotated Journey to the West",
+      "src_url": "en/century-dialogue.html"
+    },
+    {
+      "page": "en",
+      "q": "chapter structure",
+      "expect": [
+        "chapter structure"
+      ],
+      "src_title": "Chapter Structure Graph · Annotated Journey to the West",
+      "src_url": "en/chapter-structure-graph.html"
+    },
+    {
+      "page": "en",
+      "q": "character appearances",
+      "expect": [
+        "character appearances"
+      ],
+      "src_title": "Character Appearances &amp; Screen Time · Annotated Journey to the West",
+      "src_url": "en/character-appearance.html"
+    },
+    {
+      "page": "en",
+      "q": "white dragon",
+      "expect": [
+        "white dragon"
+      ],
+      "src_title": "Ao Lie, the White Dragon Horse — Annotated English Edition",
+      "src_url": "en/character-bailongma.html"
+    },
+    {
+      "page": "en",
+      "q": "character relationship",
+      "expect": [
+        "character relationship"
+      ],
+      "src_title": "Character Relationship Dynamic Network · Annotated Journey to the West",
+      "src_url": "en/character-dynamic-network.html"
+    }
+  ]
+}
