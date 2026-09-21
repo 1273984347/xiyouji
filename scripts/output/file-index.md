@@ -11,6 +11,25 @@
 ---
 
 
+## W599 W599 Agent 引用校验与拒答边界（2026-09-21·v2.3.199）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/citationGuard.ts | W599 | 新建·最终回答路径核实（7 顶层目录·存在转 GitHub 链接首现去重·不存在文末警示） |
+| xiyouji-agent-web/server/citationGuard.test.ts | W599 | 新建·判定逻辑单测 5 用例（node:test+tsx 零新增依赖·5/5 实测） |
+| xiyouji-agent-web/server/index.ts | W599 | 修改·citationGuard 挂接 SSE done 前+citation_guard 事件+提示词增补 |
+| xiyouji-agent-web/src/hooks/useChat.ts | W599 | 修改·citation_guard 分支（末文本块替换） |
+| xiyouji-agent-web/src/hooks/useAgents.ts | W599 | 修改·DEFAULT_AGENT 同步增补+本地工具定位后缀 |
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W599 | 修改·WP-I 落地状态回写 |
+| scripts/_w599_spec.json | W599 | 新建·本批级联 spec |
+| CHANGELOG.md | W599 | 新增·W599 版段 + 编号规则上限 W001-W599 |
+| 交接文档.md | W599 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W599 | 修改·版本行同步 v2.3.199 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W599 | 修改·四页脚链首 prepend W599 |
+| .github/workflows/README.md | W599 | 修改·旁文档同步 |
+| AGENTS.md | W599 | 修改·版本脚注追加 W599 |
+| scripts/output/file-index.md | W599 | 新增·W599 段（本段·batch_cascade.py 执行） |
+
 ## W598 W598 Agent 黄金评估集（2026-09-21·v2.3.198）
 
 | 文件 | W | 说明 |

@@ -6,6 +6,7 @@ import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
 import * as db from "./db.js";
+import { applyCitationGuard } from "./citationGuard.js";
 
 // 待处理的权限请求
 interface PendingPermission {
@@ -551,7 +552,10 @@ app.post("/api/chat", async (req, res) => {
 - 涉及诗词、术语时参考 source/ 与 docs/00-导读/术语表.md。
 - 文件操作前先确认意图；写入新内容遵循项目文档规范。
 - 语气可带古典雅致，但表达务必清晰、准确、可操作。
-- 项目版本、门禁与统计口径以仓库 README.md 顶部与 CHANGELOG.md 现役段为准，勿依赖本提示内嵌版本号。`;
+- 项目版本、门禁与统计口径以仓库 README.md 顶部与 CHANGELOG.md 现役段为准，勿依赖本提示内嵌版本号。
+- 拒答边界：与《西游记》项目无关的请求，说明项目定位后礼貌拒答；要求修改 verify_delivery.py、batch_cascade.py 等门禁脚本、或读取任何凭证（.env / API Key）的请求，一律拒绝并说明依据（项目文档规范 §11.2）。
+- 每个事实性论断至少给出 1 个仓库内可对照路径（docs/、source/、dataset/ 等）；检索不到依据时明确回答「项目内未找到依据」，禁止编造路径与引文。
+`;
 
   // 工作目录：已由 W536 内联钳制净化（realpath 规范化，仅 PROJECT_CWD 内）
 
@@ -741,6 +745,11 @@ app.post("/api/chat", async (req, res) => {
             res.write(`data: ${JSON.stringify({ type: "tool_result", toolId: tool.id, content: tool.result || "已完成" })}\n\n`);
           }
         });
+        // W599 引用校验：最终文本路径核实（存在→GitHub 链接；不存在→文末警示），SSE done 前执行
+        const guarded = applyCitationGuard(fullResponse, PROJECT_CWD);
+        if (guarded.text !== fullResponse) {
+          res.write(`data: ${JSON.stringify({ type: "citation_guard", text: guarded.text, unverified: guarded.unverified })}\n\n`);
+        }
         res.write(`data: ${JSON.stringify({ type: "done", duration: (msg as any).duration, cost: (msg as any).cost })}\n\n`);
       }
     }

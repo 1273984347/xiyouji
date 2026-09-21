@@ -1,0 +1,28 @@
+{
+ "batch": "W599",
+ "version": "v2.3.199",
+ "date": "2026-09-21",
+ "title": "W599 Agent 引用校验与拒答边界 — citationGuard+双提示词增补+SSE回写（WP-I）",
+ "desc": "Agent 引用校验与拒答边界",
+ "head_entry": "2026-09-21（v2.3.199 W599 Agent 引用校验与拒答边界：citationGuard 最终文本路径核实（存在转 GitHub 链接·不存在文末警示）、SSE citation_guard 事件回写、双提示词同步增补拒答边界与引用量化条款、单测 5/5, WP-I 验收达成）",
+ "head_sentence": "Agent 引用校验与拒答边界——citationGuard+双提示词增补",
+ "changelog_body": "\n\n> **来源**：W590 主计划 WP-I——评审实证回答引用为纯提示词约束零校验（仓库现成 check_citations 思路未复用）、系统提示词无拒答边界。\n> - **执行（citationGuard）**：新建 server/citationGuard.ts——正则抽取回答中 7 类顶层目录的仓库相对路径候选 → realpath 存在性核实 → 存在者转 GitHub blob 链接（每条仅首现·已处于链接内不二次包装）→ 不存在者原文保留+文末「⚠️ 未能核实的引用路径」警示块；SSE done 前执行不触碰流式过程。\n> - **执行（SSE 回写）**：新增 citation_guard 事件（text+unverified+linked），前端 useChat 增分支以校验结果替换末文本块（不新增 UI 组件）。\n> - **执行（提示词增补·双处同步）**：server defaultSystemPrompt 与 useAgents DEFAULT_AGENT 各增两条——拒答边界（与项目无关说明定位后拒答·修改门禁脚本/读取凭证一律拒绝并引 §11.2）+ 引用量化（每个事实性论断至少 1 个仓库内可对照路径·检索不到明示「项目内未找到依据」禁编造）；一致性机检两串双文件各 1 次命中。\n> - **执行（单测）**：server/citationGuard.test.ts（node:test+tsx·零新增依赖）5 用例——真实路径转链/伪造路径警示保原文/无路径零改动/同路径去重/空文本安全，实测 5/5。\n> - **偏差声明**：单测运行器用 node:test+tsx 而非 vitest（agent-web 无 vitest·零新增依赖，方案原文已允许自选最小形态）。\n> - **验证**：单测 5/5；双提示词关键句一致性 grep 通过；tsc+vite build 过；verify_delivery 核心全绿。\n> - **文件**：xiyouji-agent-web/server/citationGuard.ts、citationGuard.test.ts、server/index.ts、src/hooks/useAgents.ts、src/hooks/useChat.ts、方案档落地状态、scripts/_w599_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。\n> - **状态**：已落地（本批随 W599 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.199 W599 Agent 引用校验与拒答边界（2026-09-21）**：\n  - citationGuard：最终回答仓库路径存在性核实（真实转 GitHub 链接·伪造文末警示）+ SSE citation_guard 回写 + 前端末文本块替换\n  - 双提示词同步增补：拒答边界（门禁脚本/凭证类请求一律拒绝）+ 引用量化条款（论断须带可对照路径·检索不到明示）",
+ "agents_note": "2026-09-21（v2.3.199 W599）Agent 引用校验与拒答边界：无 § 结构性变更（citationGuard+SSE 回写+双提示词拒答与引用条款·单测 5/5），仅版本脚注同步",
+ "file_index_rows": [
+  "| xiyouji-agent-web/server/citationGuard.ts | W599 | 新建·最终回答路径核实（7 顶层目录·存在转 GitHub 链接首现去重·不存在文末警示） |",
+  "| xiyouji-agent-web/server/citationGuard.test.ts | W599 | 新建·判定逻辑单测 5 用例（node:test+tsx 零新增依赖·5/5 实测） |",
+  "| xiyouji-agent-web/server/index.ts | W599 | 修改·citationGuard 挂接 SSE done 前+citation_guard 事件+提示词增补 |",
+  "| xiyouji-agent-web/src/hooks/useChat.ts | W599 | 修改·citation_guard 分支（末文本块替换） |",
+  "| xiyouji-agent-web/src/hooks/useAgents.ts | W599 | 修改·DEFAULT_AGENT 同步增补+本地工具定位后缀 |",
+  "| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W599 | 修改·WP-I 落地状态回写 |",
+  "| scripts/_w599_spec.json | W599 | 新建·本批级联 spec |",
+  "| CHANGELOG.md | W599 | 新增·W599 版段 + 编号规则上限 W001-W599 |",
+  "| 交接文档.md | W599 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W599 | 修改·版本行同步 v2.3.199 |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W599 | 修改·四页脚链首 prepend W599 |",
+  "| .github/workflows/README.md | W599 | 修改·旁文档同步 |",
+  "| AGENTS.md | W599 | 修改·版本脚注追加 W599 |",
+  "| scripts/output/file-index.md | W599 | 新增·W599 段（本段·batch_cascade.py 执行） |"
+ ]
+}
