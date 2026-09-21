@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-L8D2VJCFVkKYJPwStZTGBF0BKd+f8fb3LkeFRvKb8VM=' 'sha256-TmCeVqie4gN3Zds2o//s3gLFPYc1/7XUMfJlxgsNutE=' 'sha256-AG8dkSbIJIdoyhXBax9MotpSYlOl76kdVYHwmcZbEzI=' 'sha256-T2TkfpRzSV72cvH/xxLzhJPGdTmPpOS0th6Fzzowp6E=' 'sha256-84JVJQY3yctVmkS8rXOF6mFKtKgqxmKAQ1QLjnvwwrg=' 'sha256-G7JWRSZeN4qV3CsTmZNfFh1mJ5CqtyE1lQNIWsFMJD0=' 'sha256-o+QSXoQ5VFi4ItDsbcfyzUpLgyGVt92M5zj8wsRF4js='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777 https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-L8D2VJCFVkKYJPwStZTGBF0BKd+f8fb3LkeFRvKb8VM=' 'sha256-TmCeVqie4gN3Zds2o//s3gLFPYc1/7XUMfJlxgsNutE=' 'sha256-AG8dkSbIJIdoyhXBax9MotpSYlOl76kdVYHwmcZbEzI=' 'sha256-Zffu8DOr1R6L8RLpjdRYw2mWd42CdMbtjLLQrJPPl50=' 'sha256-84JVJQY3yctVmkS8rXOF6mFKtKgqxmKAQ1QLjnvwwrg=' 'sha256-G7JWRSZeN4qV3CsTmZNfFh1mJ5CqtyE1lQNIWsFMJD0=' 'sha256-o+QSXoQ5VFi4ItDsbcfyzUpLgyGVt92M5zj8wsRF4js='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777 https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
       // 夜读模式（W488）：首屏防 FOUC——先读 localStorage，无则跟随系统；dark 时在 body 渲染前挂 data-theme
@@ -396,21 +396,21 @@
             <path d="M0 110 L220 58 L400 105 L580 48 L780 104 L960 62 L1140 108 L1320 70 L1440 96" fill="none" stroke="var(--ink)" stroke-opacity="0.05" stroke-width="1"/>
         </svg>
 
-        <section class="ask-hero" aria-label="问渡口 · 首屏提问">
-            <p class="kicker">ASK · 渡口问津</p>
-            <h2>想问点什么？</h2>
-            <p class="ask-sub">输入任意西游人物、妖怪、器物或地名，渡口问津为你写一篇「被忽略者」的渡口档案。</p>
+        <section class="ask-hero" aria-label="站内搜索 · 首屏检索">
+            <p class="kicker">SEARCH · 站内搜索</p>
+            <h2>想查点什么？</h2>
+            <p class="ask-sub">输入任意西游人物、妖怪、器物、地名或主题，一站检索全站 772 篇解读文档与全部站内页面。</p>
             <form class="ask-form" id="askForm" autocomplete="off">
-                <input id="askInput" type="text" name="q" placeholder="例如：五行山下的牧童、紧箍咒、狮驼岭…" aria-label="提问内容">
-                <button type="submit">问渡口</button>
+                <input id="askInput" type="text" name="q" placeholder="例如：孙悟空、紧箍咒、八十一难、狮驼岭…" aria-label="搜索内容">
+                <button type="submit">站内搜索</button>
             </form>
             <div class="ask-chips" role="list">
-                <span class="ask-chip" role="listitem" data-q="五行山下的牧童">五行山下的牧童</span>
-                <span class="ask-chip" role="listitem" data-q="晾经石的裂痕">晾经石的裂痕</span>
-                <span class="ask-chip" role="listitem" data-q="陈家庄的晒经石">陈家庄的晒经石</span>
-                <span class="ask-chip" role="listitem" data-q="悟空为什么哭">悟空为什么哭</span>
+                <span class="ask-chip" role="listitem" data-q="孙悟空">孙悟空</span>
+                <span class="ask-chip" role="listitem" data-q="八十一难">八十一难</span>
+                <span class="ask-chip" role="listitem" data-q="紧箍咒">紧箍咒</span>
+                <span class="ask-chip" role="listitem" data-q="大闹天宫">大闹天宫</span>
             </div>
-            <p class="ask-note">离线也能答（模板写作引擎）· 接入本地 RAG 后更聪明 · 你的提问会记入本地以便回访</p>
+            <p class="ask-note">离线可搜（全站索引内置）· 想写「被忽略者」档案？试试 <a href="dukou-engine.html">西游·渡口写作引擎</a></p>
         </section>
 
         <section class="stats reveal-in" aria-label="项目数据概览">
@@ -592,7 +592,7 @@
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">2026 · MIT License · 持续更新中 · v2.3.191 · W591 SEO 五项硬伤清零 · v2.3.190 · W590 需求侧优化主计划入库 · v2.3.189 · W589 暗色审计读数语义修正与映射合并 · v2.3.188 · W588 暗色提升器v2无竞态化 · v2.3.187 · W587 暗色存量修复阶段二 · v2.3.186 · W586 注入祖先链mouseleave与e2e定型 · v2.3.185 · W585 注入头行mouseout补bubbles与断言等待对齐 · v2.3.184 · W584 审计器并行化 · v2.3.183 · W583 O3契约对账门禁评估落地 · v2.3.182 · W582 暗色存量修复阶段一 · v2.3.181 · W581 触屏tooltip EN镜像推开与注入升级 · v2.3.180 · W580 dark-state-gate 浅克隆热修复 · v2.3.179 · W579 暗色态门禁常驻化挂载 · v2.3.178 · W578 复盘 WBS 落地与教训条目补全 · v2.3.177 · W577 工作复盘报告入库 · v2.3.176 · W576 bump_version.py 守卫根目录误算修复 · v2.3.175 · W575 可视化页触屏tooltip全量推开 · v2.3.174 · W574 可视化页触屏tooltip试点 · v2.3.173 · W573 站内检索服务化与RUM改道 · v2.3.172 · W572 站点可达性与信任信号 · v2.3.172 · W572 站点可达性与信任信号（方案D） · <a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
+            <div class="footer-meta">2026 · MIT License · 持续更新中 · v2.3.192 · W592 AI 入口收敛 · v2.3.191 · W591 SEO 五项硬伤清零 · v2.3.190 · W590 需求侧优化主计划入库 · v2.3.189 · W589 暗色审计读数语义修正与映射合并 · v2.3.188 · W588 暗色提升器v2无竞态化 · v2.3.187 · W587 暗色存量修复阶段二 · v2.3.186 · W586 注入祖先链mouseleave与e2e定型 · v2.3.185 · W585 注入头行mouseout补bubbles与断言等待对齐 · v2.3.184 · W584 审计器并行化 · v2.3.183 · W583 O3契约对账门禁评估落地 · v2.3.182 · W582 暗色存量修复阶段一 · v2.3.181 · W581 触屏tooltip EN镜像推开与注入升级 · v2.3.180 · W580 dark-state-gate 浅克隆热修复 · v2.3.179 · W579 暗色态门禁常驻化挂载 · v2.3.178 · W578 复盘 WBS 落地与教训条目补全 · v2.3.177 · W577 工作复盘报告入库 · v2.3.176 · W576 bump_version.py 守卫根目录误算修复 · v2.3.175 · W575 可视化页触屏tooltip全量推开 · v2.3.174 · W574 可视化页触屏tooltip试点 · v2.3.173 · W573 站内检索服务化与RUM改道 · v2.3.172 · W572 站点可达性与信任信号 · v2.3.172 · W572 站点可达性与信任信号（方案D） · <a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
         </div>
         <nav aria-label="页脚导航">
             <a href="index.html">首页</a>
@@ -610,7 +610,7 @@
       }
     </script>
     <script>
-      // 首屏提问框 → 渡口问津引擎（离线可用）+ 本地反馈记录（闭环：无后端时唯一 sink）
+      // 首屏搜索框 → 站内搜索（search.html?q= 预执行·入口收敛）
       (function () {
         var form = document.getElementById('askForm');
         var box = document.getElementById('askInput');
@@ -619,13 +619,7 @@
           e.preventDefault();
           var q = (box.value || '').trim();
           if (!q) { box.focus(); return; }
-          try {
-            var arr = JSON.parse(localStorage.getItem('xiyouji_asks') || '[]');
-            arr.push({ q: q, t: Date.now() });
-            if (arr.length > 200) arr = arr.slice(-200);
-            localStorage.setItem('xiyouji_asks', JSON.stringify(arr));
-          } catch (_) {}
-          window.location.href = 'dukou-engine.html?from=home&q=' + encodeURIComponent(q);
+          window.location.href = 'data/search.html?q=' + encodeURIComponent(q);
         });
         Array.prototype.forEach.call(document.querySelectorAll('.ask-chip'), function (chip) {
           chip.addEventListener('click', function () {

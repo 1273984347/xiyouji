@@ -1,5 +1,5 @@
 /**
- * rag-chat.js — 渡口问津 · RAG 对话组件
+ * rag-chat.js — 渡口检索（本地）· RAG 对话组件
  * ----------------------------------------
  * 浮动对话窗口，调用 scripts/rag/rag_server.py 的 /query 和 /graph 端点。
  * 服务未启动时优雅降级（显示启动提示）。
@@ -110,17 +110,17 @@
   const fab = document.createElement('button');
   fab.className = 'rag-fab';
   fab.innerHTML = '问';
-  fab.setAttribute('aria-label', '渡口问津 · AI 西游助手');
-  fab.title = '渡口问津 · 问悟空、问妖怪、问任何西游';
+  fab.setAttribute('aria-label', '渡口检索 · 本地检索助手');
+  fab.title = '渡口检索（本地）· 问悟空、问妖怪、问任何西游';
 
   const panel = document.createElement('div');
   panel.className = 'rag-panel';
   panel.setAttribute('role', 'dialog');
-  panel.setAttribute('aria-label', '渡口问津对话窗口');
+  panel.setAttribute('aria-label', '渡口检索对话窗口');
   panel.innerHTML = `
     <div class="rag-header">
       <div>
-        <div class="rag-title">渡口问津</div>
+        <div class="rag-title">渡口检索（本地）</div>
         <div class="rag-status" id="rag-status">检测服务中…</div>
       </div>
       <button class="rag-close" aria-label="关闭">×</button>
@@ -393,7 +393,7 @@
   // 页面加载时静默检测服务状态（更新 fab 提示）
   checkHealth().then(() => {
     if (serviceOnline) {
-      fab.title = '渡口问津 · 服务在线 · 点击提问';
+      fab.title = '渡口检索 · 服务在线 · 点击提问';
     }
   });
 })();

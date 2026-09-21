@@ -11,6 +11,27 @@
 ---
 
 
+## W592 W592 AI 入口收敛（2026-09-21·v2.3.192）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/index.html | W592 | 修改·首屏 ask-hero 改站内搜索（提交跳 data/search.html?q=·chip 换检索词·移除 xiyouji_asks 写入） |
+| site/guide.html / site/curated.html | W592 | 修改·品牌去重 7 处（渡口问津→西游·渡口/站内搜索·问答语义链接改指 search） |
+| site/visit-viewer.html | W592 | 修改·标题去品牌（访问记录·本地埋点查看） |
+| site/data/search.html / site/en/search.html | W592 | 修改·内嵌索引同步 visit-viewer 新标题 |
+| site/static/js/rag-chat.js | W592 | 修改·浮窗 6 处改名渡口检索（本地） |
+| site/en/guide.html | W592 | 修改·2 处语义失真修正（引擎不答问题→Site Search） |
+| xiyouji-agent-web/README.md | W592 | 修改·头部定位声明（本地工程工具·不对公网开放） |
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W592 | 修改·WP-B 落地状态回写（4 项执行期偏差） |
+| scripts/_w592_spec.json | W592 | 新建·本批级联 spec |
+| CHANGELOG.md | W592 | 新增·W592 版段 + 编号规则上限 W001-W592 |
+| 交接文档.md | W592 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W592 | 修改·版本行同步 v2.3.192 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W592 | 修改·四页脚链首 prepend W592 |
+| .github/workflows/README.md | W592 | 修改·旁文档同步 |
+| AGENTS.md | W592 | 修改·版本脚注追加 W592 |
+| scripts/output/file-index.md | W592 | 新增·W592 段（本段·batch_cascade.py 执行） |
+
 ## W591 W591 SEO 五项硬伤清零（2026-09-21·v2.3.191）
 
 | 文件 | W | 说明 |

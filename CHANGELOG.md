@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W591），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W592），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.192（2026-09-21）：W592 AI 入口收敛 — 首页CTA改道站内搜索+品牌去重+agent-web定位声明（WP-B）
+
+> **来源**：W590 主计划 WP-B（用户裁决：暂不部署后端，只做入口收敛/品牌去重/文案诚实化；公网部署为冻结预案 WP-B-ALT）——评审实证「渡口问津」一名三用（RAG 浮窗/agent-web/写作引擎）且首页 AI CTA 落到模板写作引擎形成品类错配。
+> - **执行（首页 CTA 改道）**：site/index.html 首屏 ask-hero 由「ASK·渡口问津」写作引擎入口改为「SEARCH·站内搜索」——提交跳 data/search.html?q=（search.html 既有 ?q= 预执行原生承接，零新增代码）；chip 改高频检索词（孙悟空/八十一难/紧箍咒/大闹天宫）；ask-note 保留写作引擎入口（西游·渡口写作引擎·诚实命名）；移除 xiyouji_asks 本地记录（无消费方·WP-F 以搜索词记录替代）。
+> - **执行（品牌去重）**：guide/curated 顶导与正文 7 处「渡口问津」→「西游·渡口」（写作引擎本名）或「站内搜索」（问答语义链接改指 search）；visit-viewer 标题去品牌（访问记录·本地埋点查看）+ 两搜索页内嵌索引同步；rag-chat.js 浮窗 6 处改名「渡口检索（本地）」。品牌名渡口问津自公网站点全部撤下，保留给 WP-B-ALT 未来公网问答产品。
+> - **执行（定位声明）**：xiyouji-agent-web/README.md 头部加定位行（本地工程工具·仅回环监听·不对公网开放·公网路线见主计划 WP-B-ALT）。
+> - **执行期发现（较方案简化）**：①search.html ?q= 预执行为既有原生能力（前批深链功能）；②dukou-engine.html 页自身零品牌残留（改名早已完成，撞车在各页链接文案）；③EN「Ferry Crossing」本为引擎英文名无撞车——仅修 en/guide 2 处语义失真（引擎不答问题→Site Search）。
+> - **验证**：grep 渡口问津 site html（除两搜索页内嵌数据引用）== 0 且 js == 0；from=home == 0；首页 search 直连 == 1；Playwright 冒烟 2/2——首页提交跳 search.html?q=孙悟空 出 18 行结果 0 pageerror、直开 ?q=紧箍咒 预执行出 10 行结果；CSP 重生成 --check 0 漂移。
+> - **文件**：site/index.html、guide.html、curated.html、visit-viewer.html、data/search.html、en/search.html、en/guide.html、static/js/rag-chat.js、xiyouji-agent-web/README.md、方案档落地状态、scripts/_w592_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批随 W592 提交并 push origin/main）。
 ### v2.3.191（2026-09-21）：W591 SEO 五项硬伤清零 — og:image/canonical/JSON-LD内联/hreflang/sitemap 常驻化（WP-C）
 
 > **来源**：W590 需求侧优化主计划 WP-C（docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md）——评审实证 og:image 全站 0、canonical 0/235、JSON-LD src 外链写法爬虫不解析且 @id 用占位域名、hreflang 0、sitemap lastmod 滞后 5-6 周。
