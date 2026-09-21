@@ -1,0 +1,30 @@
+{
+ "batch": "W593",
+ "version": "v2.3.193",
+ "date": "2026-09-21",
+ "title": "W593 docs 站内阅读器试点 — A1 100回站内化+搜索索引reader映射（WP-D1）",
+ "desc": "docs 站内阅读器试点",
+ "head_entry": "2026-09-21（v2.3.193 W593 docs 站内阅读器试点：site/reader 101 页、A1 100 条搜索结果站内化 kind=reader、导航机判 100/100、冒烟 3/3, 读者首次可站内读完 100 回不再跳 GitHub）",
+ "head_sentence": "docs 站内阅读器试点——A1 100 回站内化+搜索 reader 映射",
+ "changelog_body": "\n\n> **来源**：W590 主计划 WP-D1——评审实证 615 篇内容读者必须跳 GitHub blob 阅读（搜索索引 doc 条目直指 blob/main/docs）、全站无上一篇/下一篇连载导航。\n> - **执行（生成器常驻化）**：新建 scripts/build_reader.py——docs/01 第NNN回 100 篇渲染为 site/reader/ch001-ch100.html+index.html（共 101 页）；链接改写三规则（章节互链→chNNN.html·site 资源→../·跨板块 md→blob·0 未识别残留）；head 内建 SEO 全套+SEO:INJECTED 标记；tokens/system 走 link、私有样式纯 token 引用；上一篇/下一篇 chNNN±1（首尾 aria-disabled 占位）；纯静态无 fetch、无内联脚本。\n> - **执行（搜索索引站内化）**：_gen_search_index.py A1 100 条映射 kind=reader·url=reader/chNNN.html，reader 页目录排除防双条目（pages 334→233）；两搜索页类型列 reader 显示「文档」、打开逻辑 reader 同 page 加 ../ 前缀（zh/en 各 2 处）。\n> - **执行（入口）**：首页顶导「逐回」改指 reader/index.html（可视化入口保留于精选卡与 dashboard）；guide 第一读者路径卡增「逐回阅读：全 100 回」。\n> - **执行（依赖与基线）**：requirements.txt 增 markdown==3.10.2（本地实测已装版本）；一致性基线冻结 +5（reader 页首次纳入 L1 扫描，docs/01 叙述性回目提及判计数矛盾——内容事实非数据错误，沿 W555 人工裁决机制）。\n> - **验证**：生成 101 页 0 残留；导航机判 100/100 全过；索引 reader 条目 100×2 页；sitemap 330 条；CSP 335 页 0 漂移；check_seo_head 334 页过；结构 334 文件过；动态链接 0 死链；lint_links 6497 链接 0 broken；一致性新增 0；ruff 过；Playwright 冒烟 3/3（搜「灵根育孕」top1=reader/ch001.html·ch001 H1/next/prevOff/源文件链全对·目录 100 链接）。\n> - **偏差声明**：blob 外跳现值 2379（基线 1717：索引 A1 站内化 -198、每页源文件链 +100、正文跨板块暂走 blob +762）——按方案 D2 收敛至 ≤1000。\n> - **文件**：scripts/build_reader.py、scripts/_gen_search_index.py、site/reader/ 101 页、两搜索页、site/index.html、guide.html、scripts/requirements.txt、scripts/content-consistency-baseline.txt、方案档落地状态、scripts/_w593_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。\n> - **状态**：已落地（本批随 W593 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.193 W593 docs 站内阅读器试点（2026-09-21）**：\n  - site/reader 101 页落地（ch001-ch100+目录·连载导航·SEO 内建·0 未识别链接）——读者首次可站内读完 100 回\n  - 搜索索引 A1 100 条站内化（kind=reader·防双条目·zh/en 打开逻辑适配）+ 首页/guide 入口\n  - 一致性基线 +5（叙述性回目提及误报冻结）·blob 外跳 2379 待 D2 收敛 ≤1000",
+ "agents_note": "2026-09-21（v2.3.193 W593）docs 站内阅读器试点：无 § 结构性变更（site/reader 101 页·A1 搜索索引站内化·导航机判 100/100·冒烟 3/3·一致性基线 +5 冻结），仅版本脚注同步",
+ "file_index_rows": [
+  "| scripts/build_reader.py | W593 | 新建·阅读器生成器（docs/01 100 篇→site/reader 101 页·链接三规则改写·SEO 内建·0 残留） |",
+  "| site/reader/（ch001-ch100+index） | W593 | 新建·101 页逐回阅读器（tokens link+纯 token 私有样式·连载导航·纯静态） |",
+  "| scripts/_gen_search_index.py | W593 | 修改·A1 100 条映射 kind=reader+reader 页排除防双计 |",
+  "| site/data/search.html / site/en/search.html | W593 | 修改·类型列与打开逻辑适配 reader（各 2 处）+ 索引重嵌 |",
+  "| site/index.html / site/guide.html | W593 | 修改·顶导逐回→reader/index + 阅读路径卡增入口 |",
+  "| scripts/requirements.txt | W593 | 修改·增 markdown==3.10.2（实测已装版本） |",
+  "| scripts/content-consistency-baseline.txt | W593 | 修改·冻结 +5（reader 页叙述性回目提及误报·W555 机制） |",
+  "| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W593 | 修改·WP-D1 落地状态回写（3 项偏差含 blob 2379 分解） |",
+  "| scripts/_w593_spec.json | W593 | 新建·本批级联 spec |",
+  "| CHANGELOG.md | W593 | 新增·W593 版段 + 编号规则上限 W001-W593 |",
+  "| 交接文档.md | W593 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W593 | 修改·版本行同步 v2.3.193 |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W593 | 修改·四页脚链首 prepend W593 |",
+  "| .github/workflows/README.md | W593 | 修改·旁文档同步 |",
+  "| AGENTS.md | W593 | 修改·版本脚注追加 W593 |",
+  "| scripts/output/file-index.md | W593 | 新增·W593 段（本段·batch_cascade.py 执行） |"
+ ]
+}

@@ -48,6 +48,11 @@ def doc_entry(p):
             snippet = clean[:100]
             break
     category = rel.split('/')[1] if '/' in rel else ''
+    # W593：A1 逐回 100 篇站内化——url 指向 reader（kind=reader，打开时同 page 加 ../ 前缀）
+    m_ch = re.match(r'docs/01-全书逐回解读/第(\d{3})回-', rel)
+    if m_ch:
+        return {'kind': 'reader', 'title': title, 'category': category,
+                'snippet': snippet, 'url': 'reader/ch%03d.html' % int(m_ch.group(1))}
     return {'kind': 'doc', 'title': title, 'category': category,
             'snippet': snippet, 'url': BLOB + rel}
 
@@ -68,7 +73,8 @@ def page_entry(p):
 doc_files = [p for p in glob.glob(os.path.join(DOCS, '**', '*.md'), recursive=True)
              if not any(x in p.replace(os.sep, '/') for x in EXCLUDE)]
 page_files = [p for p in glob.glob(os.path.join(SITE, '**', '*.html'), recursive=True)
-              if os.path.basename(p) not in ('_template.html', '_shell.html')]
+              if os.path.basename(p) not in ('_template.html', '_shell.html')
+              and '/reader/' not in p.replace(os.sep, '/')]  # W593：reader 页由 docs/01 的 kind=reader 条目承载，避免双条目
 
 index = [doc_entry(p) for p in sorted(doc_files)] + [page_entry(p) for p in sorted(page_files)]
 payload = json.dumps(index, ensure_ascii=False, separators=(',', ':'))

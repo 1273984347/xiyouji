@@ -11,6 +11,27 @@
 ---
 
 
+## W593 W593 docs 站内阅读器试点（2026-09-21·v2.3.193）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/build_reader.py | W593 | 新建·阅读器生成器（docs/01 100 篇→site/reader 101 页·链接三规则改写·SEO 内建·0 残留） |
+| site/reader/（ch001-ch100+index） | W593 | 新建·101 页逐回阅读器（tokens link+纯 token 私有样式·连载导航·纯静态） |
+| scripts/_gen_search_index.py | W593 | 修改·A1 100 条映射 kind=reader+reader 页排除防双计 |
+| site/data/search.html / site/en/search.html | W593 | 修改·类型列与打开逻辑适配 reader（各 2 处）+ 索引重嵌 |
+| site/index.html / site/guide.html | W593 | 修改·顶导逐回→reader/index + 阅读路径卡增入口 |
+| scripts/requirements.txt | W593 | 修改·增 markdown==3.10.2（实测已装版本） |
+| scripts/content-consistency-baseline.txt | W593 | 修改·冻结 +5（reader 页叙述性回目提及误报·W555 机制） |
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W593 | 修改·WP-D1 落地状态回写（3 项偏差含 blob 2379 分解） |
+| scripts/_w593_spec.json | W593 | 新建·本批级联 spec |
+| CHANGELOG.md | W593 | 新增·W593 版段 + 编号规则上限 W001-W593 |
+| 交接文档.md | W593 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W593 | 修改·版本行同步 v2.3.193 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W593 | 修改·四页脚链首 prepend W593 |
+| .github/workflows/README.md | W593 | 修改·旁文档同步 |
+| AGENTS.md | W593 | 修改·版本脚注追加 W593 |
+| scripts/output/file-index.md | W593 | 新增·W593 段（本段·batch_cascade.py 执行） |
+
 ## W592 W592 AI 入口收敛（2026-09-21·v2.3.192）
 
 | 文件 | W | 说明 |

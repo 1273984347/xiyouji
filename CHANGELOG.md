@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W592），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W593），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,17 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.193（2026-09-21）：W593 docs 站内阅读器试点 — A1 100回站内化+搜索索引reader映射（WP-D1）
+
+> **来源**：W590 主计划 WP-D1——评审实证 615 篇内容读者必须跳 GitHub blob 阅读（搜索索引 doc 条目直指 blob/main/docs）、全站无上一篇/下一篇连载导航。
+> - **执行（生成器常驻化）**：新建 scripts/build_reader.py——docs/01 第NNN回 100 篇渲染为 site/reader/ch001-ch100.html+index.html（共 101 页）；链接改写三规则（章节互链→chNNN.html·site 资源→../·跨板块 md→blob·0 未识别残留）；head 内建 SEO 全套+SEO:INJECTED 标记；tokens/system 走 link、私有样式纯 token 引用；上一篇/下一篇 chNNN±1（首尾 aria-disabled 占位）；纯静态无 fetch、无内联脚本。
+> - **执行（搜索索引站内化）**：_gen_search_index.py A1 100 条映射 kind=reader·url=reader/chNNN.html，reader 页目录排除防双条目（pages 334→233）；两搜索页类型列 reader 显示「文档」、打开逻辑 reader 同 page 加 ../ 前缀（zh/en 各 2 处）。
+> - **执行（入口）**：首页顶导「逐回」改指 reader/index.html（可视化入口保留于精选卡与 dashboard）；guide 第一读者路径卡增「逐回阅读：全 100 回」。
+> - **执行（依赖与基线）**：requirements.txt 增 markdown==3.10.2（本地实测已装版本）；一致性基线冻结 +5（reader 页首次纳入 L1 扫描，docs/01 叙述性回目提及判计数矛盾——内容事实非数据错误，沿 W555 人工裁决机制）。
+> - **验证**：生成 101 页 0 残留；导航机判 100/100 全过；索引 reader 条目 100×2 页；sitemap 330 条；CSP 335 页 0 漂移；check_seo_head 334 页过；结构 334 文件过；动态链接 0 死链；lint_links 6497 链接 0 broken；一致性新增 0；ruff 过；Playwright 冒烟 3/3（搜「灵根育孕」top1=reader/ch001.html·ch001 H1/next/prevOff/源文件链全对·目录 100 链接）。
+> - **偏差声明**：blob 外跳现值 2379（基线 1717：索引 A1 站内化 -198、每页源文件链 +100、正文跨板块暂走 blob +762）——按方案 D2 收敛至 ≤1000。
+> - **文件**：scripts/build_reader.py、scripts/_gen_search_index.py、site/reader/ 101 页、两搜索页、site/index.html、guide.html、scripts/requirements.txt、scripts/content-consistency-baseline.txt、方案档落地状态、scripts/_w593_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批随 W593 提交并 push origin/main）。
 ### v2.3.192（2026-09-21）：W592 AI 入口收敛 — 首页CTA改道站内搜索+品牌去重+agent-web定位声明（WP-B）
 
 > **来源**：W590 主计划 WP-B（用户裁决：暂不部署后端，只做入口收敛/品牌去重/文案诚实化；公网部署为冻结预案 WP-B-ALT）——评审实证「渡口问津」一名三用（RAG 浮窗/agent-web/写作引擎）且首页 AI CTA 落到模板写作引擎形成品类错配。
