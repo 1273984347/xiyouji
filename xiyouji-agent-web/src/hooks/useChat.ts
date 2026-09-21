@@ -221,6 +221,28 @@ export function useChat(options: UseChatOptions) {
                     }
                     return s;
                   }));
+                } else if (data.type === 'citation_guard') {
+                  // W599：服务端引用校验回写——最终文本块以校验结果为准（含未核实路径警示）
+                  fullContent = data.text;
+                  const lastGuardBlock = contentBlocks[contentBlocks.length - 1];
+                  if (lastGuardBlock && lastGuardBlock.type === 'text') {
+                    lastGuardBlock.text = data.text;
+                  } else if (data.text) {
+                    contentBlocks.push({ type: 'text', text: data.text });
+                  }
+                  setSessions(prev => prev.map(s => {
+                    if (s.id === realSessionId) {
+                      return {
+                        ...s,
+                        messages: s.messages.map(m =>
+                          m.id === realAssistantMessageId
+                            ? { ...m, content: fullContent, model: usedModel, toolCalls: [...currentToolCalls], contentBlocks: [...contentBlocks] }
+                            : m
+                        )
+                      };
+                    }
+                    return s;
+                  }));
                 } else if (data.type === 'tool') {
                   // 如果有累积的文本，先结束当前文本块
                   currentTextBlock = '';

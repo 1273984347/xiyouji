@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W598），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W599），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,17 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.199（2026-09-21）：W599 Agent 引用校验与拒答边界 — citationGuard+双提示词增补+SSE回写（WP-I）
+
+> **来源**：W590 主计划 WP-I——评审实证回答引用为纯提示词约束零校验（仓库现成 check_citations 思路未复用）、系统提示词无拒答边界。
+> - **执行（citationGuard）**：新建 server/citationGuard.ts——正则抽取回答中 7 类顶层目录的仓库相对路径候选 → realpath 存在性核实 → 存在者转 GitHub blob 链接（每条仅首现·已处于链接内不二次包装）→ 不存在者原文保留+文末「⚠️ 未能核实的引用路径」警示块；SSE done 前执行不触碰流式过程。
+> - **执行（SSE 回写）**：新增 citation_guard 事件（text+unverified+linked），前端 useChat 增分支以校验结果替换末文本块（不新增 UI 组件）。
+> - **执行（提示词增补·双处同步）**：server defaultSystemPrompt 与 useAgents DEFAULT_AGENT 各增两条——拒答边界（与项目无关说明定位后拒答·修改门禁脚本/读取凭证一律拒绝并引 §11.2）+ 引用量化（每个事实性论断至少 1 个仓库内可对照路径·检索不到明示「项目内未找到依据」禁编造）；一致性机检两串双文件各 1 次命中。
+> - **执行（单测）**：server/citationGuard.test.ts（node:test+tsx·零新增依赖）5 用例——真实路径转链/伪造路径警示保原文/无路径零改动/同路径去重/空文本安全，实测 5/5。
+> - **偏差声明**：单测运行器用 node:test+tsx 而非 vitest（agent-web 无 vitest·零新增依赖，方案原文已允许自选最小形态）。
+> - **验证**：单测 5/5；双提示词关键句一致性 grep 通过；tsc+vite build 过；verify_delivery 核心全绿。
+> - **文件**：xiyouji-agent-web/server/citationGuard.ts、citationGuard.test.ts、server/index.ts、src/hooks/useAgents.ts、src/hooks/useChat.ts、方案档落地状态、scripts/_w599_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批随 W599 提交并 push origin/main）。
 ### v2.3.198（2026-09-21）：W598 Agent 黄金评估集 — golden-50+校验器+判分运行器+CI validate（WP-H1）
 
 > **来源**：W590 主计划 WP-H1——评审实证全仓无任何评估集/回答质量回归手段，AI 产品零质量基线。
