@@ -11,6 +11,21 @@
 ---
 
 
+## W595 W595 CI 红灯热修复（2026-09-21·v2.3.195）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/sitemap.xml | W595 | 修改·补提交 W593 漏 add 的重生成版（229→330 条·含 reader 101） |
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W595 | 修改·WP-C 第 5 条增补 sitemap 必入提交清单教训 |
+| scripts/_w595_spec.json | W595 | 新建·本批级联 spec |
+| CHANGELOG.md | W595 | 新增·W595 版段 + 编号规则上限 W001-W595 |
+| 交接文档.md | W595 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W595 | 修改·版本行同步 v2.3.195 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W595 | 修改·四页脚链首 prepend W595 |
+| .github/workflows/README.md | W595 | 修改·旁文档同步 |
+| AGENTS.md | W595 | 修改·版本脚注追加 W595 |
+| scripts/output/file-index.md | W595 | 新增·W595 段（本段·batch_cascade.py 执行） |
+
 ## W594 W594 搜索质量与搜索词埋点（2026-09-21·v2.3.194）
 
 | 文件 | W | 说明 |

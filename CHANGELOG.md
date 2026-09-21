@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W594），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W595），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.195（2026-09-21）：W595 CI 红灯热修复 — W593 sitemap.xml 漏 add 补提交（330 条含 reader 101）
+
+> **来源**：W593 推送后 CI Delivery Gate FAIL——「sitemap 与 site 不一致：缺 101 页（reader/ch001.html…）」；本地 verify 全绿（工作区文件为新）而提交树为旧，属「声明≠落地」的提交面变体。
+> - **根因**：W593 批 gen_sitemap.py 重生成 sitemap.xml（330 条含 reader 101）后，git add 清单未包含该文件——提交树残留 229 条旧版。W537 规则③「CHANGELOG 文件清单 ⊆ tracked」的同族变体：**重生成产物 ⊆ staged**。收尾七步⑥的 gh run list 确认在本批执行中被后批推进打断，未即时发现，W580 先例沿用热修复流程。
+> - **修复**：补提交 site/sitemap.xml（330 条·含 reader 101·lastmod ≤ 当天）；方案档 WP-C 第 5 条增补「凡跑 gen_sitemap 的批次 sitemap.xml 必须纳入 git add 清单」。
+> - **验证**：git show HEAD:site/sitemap.xml 计 330 条且含 reader 101；本地 verify 全绿；推送后 CI 五工作流全绿确认。
+> - **文件**：site/sitemap.xml、docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md、scripts/_w595_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批随 W595 提交并 push origin/main）。
 ### v2.3.194（2026-09-21）：W594 搜索质量与搜索词埋点 — kw加权+黄金查询30/30+中英双索引+上报双通道（WP-F）
 
 > **来源**：W590 主计划 WP-F——评审实证搜索纯子串匹配无分词加权、en 页共用中文索引、搜索词零上报（读者诉求信号白白流失）。
