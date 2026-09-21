@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W590），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W591），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.191（2026-09-21）：W591 SEO 五项硬伤清零 — og:image/canonical/JSON-LD内联/hreflang/sitemap 常驻化（WP-C）
+
+> **来源**：W590 需求侧优化主计划 WP-C（docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md）——评审实证 og:image 全站 0、canonical 0/235、JSON-LD src 外链写法爬虫不解析且 @id 用占位域名、hreflang 0、sitemap lastmod 滞后 5-6 周。
+> - **执行（注入器常驻化）**：新建 scripts/inject_seo_head.py——233 页幂等注入（标记 SEO:INJECTED + 逐标签判重）canonical/og:title/og:description/og:type/og:url/og:image+宽高/twitter:card + hreflang 中英互链（EN 站全扁平：EN 候选=en/+ZH 去 data/ 前缀，89 对落盘 scripts/output/hreflang-pairs.json 机判锚点）；index.html JSON-LD 由 src 外链改内联。
+> - **执行（配套常驻化）**：新建 scripts/gen_og_cover.py（Pillow 生成 1200x630 og-cover.png·53KB≤300KB·可复现）；新建 scripts/gen_sitemap.py（EXCLUDE 与现役 sitemap 门禁期望集一致·229 条·lastmod 取 git log %cs）；新建 scripts/check_seo_head.py（R1 必备 head/R2 hreflang 双向一致/R3 sitemap 集合/R4 封面规格/R5 JSON-LD 有效——待用户裁决是否注册第 26 门禁）。
+> - **执行（门禁修订·经用户批准）**：scripts/check_js_syntax.js 跳过非 JS 数据块（application/ld+json 等带 type 的数据块不是可执行脚本，原实现当 JS 编译必误报）——JSON-LD 内联落地前提。
+> - **偏差声明**：sitemap 口径较方案修订 230→229（以现役 sitemap 门禁期望集为准：404.html 收录、两个 data/-view 辅助页排除）。
+> - **验证**：og:image==canonical==233、JSON-LD 内联 json.loads 通过且 example.com 0、配对 89 双向一致、sitemap 229 条 lastmod≤当天、CSP 重生成 1313 哈希 --check 0 漂移、check_js_syntax 233 文件过、check_structure 233 文件过、腐蚀 0、lint_links 4746 链接 0 broken、check_seo_head 全过、verify_delivery 核心全绿、ruff 4 新脚本 0 错。
+> - **文件**：scripts/gen_og_cover.py、inject_seo_head.py、gen_sitemap.py、check_seo_head.py、check_js_syntax.js（修订·经批准）、site/static/img/og-cover.png、site 233 页 head + structured-data.jsonld + sitemap.xml、scripts/output/hreflang-pairs.json、方案档落地状态、scripts/_w591_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批随 W591 提交并 push origin/main）。
 ### v2.3.190（2026-09-21）：W590 需求侧优化主计划入库 — 自包含13工作包方案（WP-A…WP-M）+ Mode B 自审修正回填
 
 > **来源**：2026-09-21 全项目产品评审（三路并行取证：站点 UX/i18n/SEO、agent-web 源码级、埋点/反馈/内容运营源码级）+ 用户双裁决（AI 公网路径=暂不部署后端；成本预算=免费额度+硬配额 200 次/日·10 次/时/IP·超限降级检索模板）。

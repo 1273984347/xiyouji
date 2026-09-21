@@ -1,0 +1,31 @@
+{
+ "batch": "W591",
+ "version": "v2.3.191",
+ "date": "2026-09-21",
+ "title": "W591 SEO 五项硬伤清零 — og:image/canonical/JSON-LD内联/hreflang/sitemap 常驻化（WP-C）",
+ "desc": "SEO 五项硬伤清零",
+ "head_entry": "2026-09-21（v2.3.191 W591 SEO 五项硬伤清零：og:image 与 canonical 各 233 页、JSON-LD 内联、hreflang 89 对、sitemap 229 条门禁对齐, check_js_syntax 经用户批准跳过非 JS 数据块, WP-C 全项验收达成）",
+ "head_sentence": "SEO 五项硬伤清零——og/canonical/JSON-LD/hreflang/sitemap 常驻化",
+ "changelog_body": "\n\n> **来源**：W590 需求侧优化主计划 WP-C（docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md）——评审实证 og:image 全站 0、canonical 0/235、JSON-LD src 外链写法爬虫不解析且 @id 用占位域名、hreflang 0、sitemap lastmod 滞后 5-6 周。\n> - **执行（注入器常驻化）**：新建 scripts/inject_seo_head.py——233 页幂等注入（标记 SEO:INJECTED + 逐标签判重）canonical/og:title/og:description/og:type/og:url/og:image+宽高/twitter:card + hreflang 中英互链（EN 站全扁平：EN 候选=en/+ZH 去 data/ 前缀，89 对落盘 scripts/output/hreflang-pairs.json 机判锚点）；index.html JSON-LD 由 src 外链改内联。\n> - **执行（配套常驻化）**：新建 scripts/gen_og_cover.py（Pillow 生成 1200x630 og-cover.png·53KB≤300KB·可复现）；新建 scripts/gen_sitemap.py（EXCLUDE 与现役 sitemap 门禁期望集一致·229 条·lastmod 取 git log %cs）；新建 scripts/check_seo_head.py（R1 必备 head/R2 hreflang 双向一致/R3 sitemap 集合/R4 封面规格/R5 JSON-LD 有效——待用户裁决是否注册第 26 门禁）。\n> - **执行（门禁修订·经用户批准）**：scripts/check_js_syntax.js 跳过非 JS 数据块（application/ld+json 等带 type 的数据块不是可执行脚本，原实现当 JS 编译必误报）——JSON-LD 内联落地前提。\n> - **偏差声明**：sitemap 口径较方案修订 230→229（以现役 sitemap 门禁期望集为准：404.html 收录、两个 data/-view 辅助页排除）。\n> - **验证**：og:image==canonical==233、JSON-LD 内联 json.loads 通过且 example.com 0、配对 89 双向一致、sitemap 229 条 lastmod≤当天、CSP 重生成 1313 哈希 --check 0 漂移、check_js_syntax 233 文件过、check_structure 233 文件过、腐蚀 0、lint_links 4746 链接 0 broken、check_seo_head 全过、verify_delivery 核心全绿、ruff 4 新脚本 0 错。\n> - **文件**：scripts/gen_og_cover.py、inject_seo_head.py、gen_sitemap.py、check_seo_head.py、check_js_syntax.js（修订·经批准）、site/static/img/og-cover.png、site 233 页 head + structured-data.jsonld + sitemap.xml、scripts/output/hreflang-pairs.json、方案档落地状态、scripts/_w591_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。\n> - **状态**：已落地（本批随 W591 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.191 W591 SEO 五项硬伤清零（2026-09-21）**：\n  - og:image/canonical 各 233 页、JSON-LD 内联（占位域名 6 处替换）、hreflang 89 对中英互链、sitemap 229 条全量刷新（lastmod 滞后 5-6 周归零）——注入器/生成器/检查脚本三件常驻化\n  - check_js_syntax.js 经用户批准修订：非 JS 数据块（ld+json 等）不参与编译；check_seo_head.py 待裁决注册第 26 门禁",
+ "agents_note": "2026-09-21（v2.3.191 W591）SEO 五项硬伤清零：无 § 结构性变更（og/canonical/JSON-LD/hreflang/sitemap 全达标+三件常驻脚本·check_js_syntax 经批准跳过数据块·check_seo_head 待裁决挂第 26 门禁），仅版本脚注同步",
+ "file_index_rows": [
+  "| scripts/inject_seo_head.py | W591 | 新建·全站 SEO head 注入器（233 页幂等·canonical/og 全套+hreflang 89 对+JSON-LD 内联·逐标签判重） |",
+  "| scripts/gen_og_cover.py | W591 | 新建·og 封面生成（Pillow 1200x630·53KB·可复现） |",
+  "| scripts/gen_sitemap.py | W591 | 新建·sitemap 生成器（229 条·EXCLUDE=门禁期望集·lastmod 取 git %cs） |",
+  "| scripts/check_seo_head.py | W591 | 新建·SEO head 常驻检查（R1-R5·待裁决注册第 26 门禁） |",
+  "| scripts/check_js_syntax.js | W591 | 修改·经用户批准：非 JS 数据块（ld+json 等）跳过编译（数据块非可执行脚本） |",
+  "| site/static/img/og-cover.png | W591 | 新建·社交分享封面 1200x630 |",
+  "| site/ 233 页 head + structured-data.jsonld + sitemap.xml | W591 | 修改·SEO 注入全量落地（canonical/og:image 计数 233·占位域名 6 处替换·sitemap 229 条刷新） |",
+  "| scripts/output/hreflang-pairs.json | W591 | 新建·中英配对清单机判锚点（89 对） |",
+  "| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W591 | 修改·WP-C 落地状态回写+sitemap 口径执行期修订（230→229） |",
+  "| scripts/_w591_spec.json | W591 | 新建·本批级联 spec |",
+  "| CHANGELOG.md | W591 | 新增·W591 版段 + 编号规则上限 W001-W591 |",
+  "| 交接文档.md | W591 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W591 | 修改·版本行同步 v2.3.191 |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W591 | 修改·四页脚链首 prepend W591 |",
+  "| .github/workflows/README.md | W591 | 修改·旁文档同步 |",
+  "| AGENTS.md | W591 | 修改·版本脚注追加 W591 |",
+  "| scripts/output/file-index.md | W591 | 新增·W591 段（本段·batch_cascade.py 执行） |"
+ ]
+}

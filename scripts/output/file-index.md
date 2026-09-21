@@ -11,6 +11,28 @@
 ---
 
 
+## W591 W591 SEO 五项硬伤清零（2026-09-21·v2.3.191）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/inject_seo_head.py | W591 | 新建·全站 SEO head 注入器（233 页幂等·canonical/og 全套+hreflang 89 对+JSON-LD 内联·逐标签判重） |
+| scripts/gen_og_cover.py | W591 | 新建·og 封面生成（Pillow 1200x630·53KB·可复现） |
+| scripts/gen_sitemap.py | W591 | 新建·sitemap 生成器（229 条·EXCLUDE=门禁期望集·lastmod 取 git %cs） |
+| scripts/check_seo_head.py | W591 | 新建·SEO head 常驻检查（R1-R5·待裁决注册第 26 门禁） |
+| scripts/check_js_syntax.js | W591 | 修改·经用户批准：非 JS 数据块（ld+json 等）跳过编译（数据块非可执行脚本） |
+| site/static/img/og-cover.png | W591 | 新建·社交分享封面 1200x630 |
+| site/ 233 页 head + structured-data.jsonld + sitemap.xml | W591 | 修改·SEO 注入全量落地（canonical/og:image 计数 233·占位域名 6 处替换·sitemap 229 条刷新） |
+| scripts/output/hreflang-pairs.json | W591 | 新建·中英配对清单机判锚点（89 对） |
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W591 | 修改·WP-C 落地状态回写+sitemap 口径执行期修订（230→229） |
+| scripts/_w591_spec.json | W591 | 新建·本批级联 spec |
+| CHANGELOG.md | W591 | 新增·W591 版段 + 编号规则上限 W001-W591 |
+| 交接文档.md | W591 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W591 | 修改·版本行同步 v2.3.191 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W591 | 修改·四页脚链首 prepend W591 |
+| .github/workflows/README.md | W591 | 修改·旁文档同步 |
+| AGENTS.md | W591 | 修改·版本脚注追加 W591 |
+| scripts/output/file-index.md | W591 | 新增·W591 段（本段·batch_cascade.py 执行） |
+
 ## W590 W590 需求侧优化主计划入库（2026-09-21·v2.3.190）
 
 | 文件 | W | 说明 |

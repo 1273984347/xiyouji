@@ -37,6 +37,12 @@ function checkFile(file) {
   SCRIPT_RE.lastIndex = 0;
   while ((m = SCRIPT_RE.exec(html))) {
     idx++;
+    // W591（经用户批准）：非 JS 数据块（application/ld+json、application/json、importmap 等）
+    // 不是可执行脚本，不参与语法编译——原实现把 <script type> 数据块当 JS 编译必误报
+    const openTag = m[0].slice(0, m[0].indexOf('>') + 1);
+    const tm = openTag.match(/\btype\s*=\s*"([^"]*)"/i) || openTag.match(/\btype\s*=\s*'([^']*)'/i);
+    const stype = tm ? tm[1].trim().toLowerCase() : '';
+    if (stype && stype !== 'text/javascript' && stype !== 'application/javascript' && stype !== 'module') continue;
     const code = m[1].replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
     if (!code.trim()) continue;
     try { new vm.Script(code); }

@@ -53,7 +53,7 @@ ls "D:/1/xiyouji" >/dev/null 2>&1 && echo EXISTS || echo MISSING
 
 - 站点 HTML 总数 **235** = 根目录 10 + `site/data/` 87 + `site/en/` 138。
 - **SEO 注入面 = 233 页**：排除模板壳 `site/_template.html` 与 `site/data/_shell.html`。
-- **sitemap 收录 = 230 页**：233 页再排除 `rum-viewer.html`、`visit-viewer.html`（本地工具页，不对外索引）与 `404.html`（4xx 页不应入 sitemap）；完整排除清单固化为 `gen_sitemap.py` 单一常量 `EXCLUDE`（WP-C 第 5 步，别处只引用不重复定义）。
+- **sitemap 收录 = 229 页**（执行期修订 W591：以 verify_delivery 现役 sitemap 门禁期望集为准）：233 页再排除 `rum-viewer.html`、`visit-viewer.html`（本地工具页）与 `data/81-hardships-view.html`、`data/character-relationship-3d-view.html`（辅助视图页）；`404.html` 按门禁要求收录。排除清单固化为 `gen_sitemap.py` 单一常量 `EXCLUDE`（WP-C 第 5 步）。
 - 可视化页口径 86（`site/data/` 87 减 `_shell.html`）。
 
 ---
@@ -153,7 +153,7 @@ ls "D:/1/xiyouji" >/dev/null 2>&1 && echo EXISTS || echo MISSING
    - 注入位置：`</title>` 之后统一插入，块级标记包裹。**先 5 页试跑 → `git diff` 人工审查 → 再全量**（批量注入防护，AGENTS.md §4.3 同文件串行与 spot-check 惯例）。
 3. **JSON-LD 修复**：`site/index.html` 的 `<script type="application/ld+json" src="structured-data.jsonld">`（外链 src 写法爬虫不解析）改为**内联**：注入器读取 `site/structured-data.jsonld` 的 `@graph` 内容内联进 index.html；同时把该 .jsonld 文件内所有 `https://xiyouji.example.com/` 占位域名替换为部署基 URL。内联后跑 `generate_csp.py`（若其把 JSON-LD 数据块计入哈希则随册；若忽略亦不报错，以 `--check` 0 漂移为准）。
 4. **hreflang 配对**：注入器机械推导配对。**EN 站为全扁平结构（2026-09-21 实测：`site/en/` 下 138 个 HTML、无任何子目录）**，故 EN 候选路径 = `site/en/` +（ZH 相对路径 p 去掉 `data/` 前缀，根页同名）——如 `data/emotional-heatmap.html` ↔ `en/emotional-heatmap.html`、`index.html` ↔ `en/index.html`、`data/81-hardships-view.html` ↔ `en/81-hardships-view.html`（配对样本已实测存在）；候选存在即为中英对。输出 `scripts/output/hreflang-pairs.json`（入库，作为后续机判锚点）。每对两页各注入 `<link rel="alternate" hreflang="zh-CN" href=ZH绝对URL>` + `hreflang="en" href=EN绝对URL`；ZH 页另加 `hreflang="x-default"` 指向 ZH。未配对页不注入。
-5. **sitemap 生成器** `scripts/gen_sitemap.py`：按排除常量 `EXCLUDE = ["site/_template.html", "site/data/_shell.html", "site/rum-viewer.html", "site/visit-viewer.html", "site/404.html"]` 遍历产出 `site/sitemap.xml`；`<lastmod>` 取 `git log -1 --format=%cs -- <file>`（无历史回落当批日期）。本批全量重生成一次（当前 229 条、lastmod 滞后 5-6 周 → **230 条**、全部 ≤ 当批日期）。**此后凡页面增删/改标题的批次，收尾步骤加跑本脚本**（写入当批收尾清单，不改 AGENTS.md）。
+5. **sitemap 生成器** `scripts/gen_sitemap.py`：按排除常量 `EXCLUDE`（与 verify_delivery 现役 sitemap 门禁期望集一致：`_template.html`、`data/_shell.html`、`rum-viewer.html`、`visit-viewer.html`、`data/81-hardships-view.html`、`data/character-relationship-3d-view.html`）遍历产出 `site/sitemap.xml`；`<lastmod>` 取 `git log -1 --format=%cs -- <file>`（无历史回落当批日期）。本批全量重生成一次（当前 229 条、lastmod 滞后 5-6 周 → **229 条全量刷新**、全部 ≤ 当批日期）。**此后凡页面增删/改标题的批次，收尾步骤加跑本脚本**（写入当批收尾清单，不改 AGENTS.md）。
 6. **SEO 常驻检查脚本** `scripts/check_seo_head.py`（独立可跑，`--check` 供门禁调用）：对 233 页断言 canonical/og:title/og:image/og:url/viewport 存在且 URL 形态正确；hreflang 与 `hreflang-pairs.json` 双向一致；sitemap 与磁盘集合一致。**是否注册为 verify_delivery 第 26 门禁由用户在验收会话裁决**（verify_delivery.py 属禁擅改清单，沿 W551/W579「方案+基线→用户明示」先例）；未挂载期间脚本独立跑，进当批验证清单。
 
 **机判验收**（数值按 §0.3 口径 233）：
@@ -161,7 +161,7 @@ ls "D:/1/xiyouji" >/dev/null 2>&1 && echo EXISTS || echo MISSING
 - `grep -rln 'rel="canonical"' site --include="*.html" | wc -l` == `233`。
 - `grep -c 'application/ld+json" src' site/index.html` == `0`；`grep -c 'example.com' site/structured-data.jsonld` == `0`；Python `json.loads` 解析 index.html 内联 JSON-LD 成功（退出码 0）。
 - `python -c "from PIL import Image; im=Image.open('site/static/img/og-cover.png'); assert im.size==(1200,630)"` 退出码 0；文件 ≤ 300 KB。
-- `python scripts/gen_sitemap.py` 后 `grep -c '<loc>' site/sitemap.xml` == `230`，且 `grep -o '<lastmod>[^<]*' site/sitemap.xml | sort -r | head -1` ≤ 当批日期。
+- `python scripts/gen_sitemap.py` 后 `grep -c '<loc>' site/sitemap.xml` == `229`（门禁期望集口径），且 `grep -o '<lastmod>[^<]*' site/sitemap.xml | sort -r | head -1` ≤ 当批日期。
 - `python scripts/check_seo_head.py` 违例 `0`；`python scripts/generate_csp.py --check` 0 漂移；`verify_delivery` 全绿。
 
 **回归面**：235 页批量改 head → `check_structure.py`、`check_corruption.py`、INLINED CSS 完整性门禁必跑；截图抽查 5 页（含 1 EN 页）确认渲染无变化。
@@ -287,7 +287,7 @@ ls "D:/1/xiyouji" >/dev/null 2>&1 && echo EXISTS || echo MISSING
 ### WP-M 死角清理（并入 WP-C 与 WP-E 执行，不单独立批）
 
 - 删除空遗留目录 `site/chapters/`、`site/characters/`、`site/themes/`（各仅含 0 字节 .gitkeep，全站引用计数 0 已实扫）；AGENTS.md 铁律 6 的禁区文字**保留**（禁入规则不因目录删除失效）。机判：`ls site/chapters 2>/dev/null` 非零退出。
-- sitemap 229→230 收敛由 `gen_sitemap.py` 的 `EXCLUDE` 常量规则性消除（清单以 WP-C 第 5 步为唯一来源，此处不重复定义）。
+- sitemap 收敛由 `gen_sitemap.py` 的 `EXCLUDE` 常量规则性消除（口径 = verify_delivery 现役 sitemap 门禁期望集，见 WP-C 第 5 步）。
 
 ---
 
@@ -321,7 +321,7 @@ B14 WP-L  信任字段补全
 | 2 | `grep -rln 'rel="canonical"' site --include="*.html" \| wc -l` | == 233 | C |
 | 3 | `grep -c 'example.com' site/structured-data.jsonld` | == 0 | C |
 | 4 | `python scripts/check_seo_head.py` | 违例 0 | C |
-| 5 | `grep -c '<loc>' site/sitemap.xml` | == 230（EXCLUDE 五项规则口径） | C |
+| 5 | `grep -c '<loc>' site/sitemap.xml` | == 229（门禁期望集口径，W591 修订） | C |
 | 6 | `grep -rl '渡口问津' site --include='*.html' \| wc -l` | == 0 | B |
 | 7 | search `?q=` e2e | 结果 ≥1 行 | B/F |
 | 8 | `ls site/reader/ch*.html \| wc -l` | == 100 | D1 |
@@ -380,7 +380,7 @@ B14 WP-L  信任字段补全
 |---|---|---|---|---|
 | WP-A | 🔄 自测 14/14 过（2026-09-21）；取数/judge_gate 待用户配 `GOATCOUNTER_API_TOKEN` | — | — | 用户动作未完成 |
 | WP-B | ⏸ | — | — | — |
-| WP-C | ⏸ | — | — | — |
+| WP-C | ✅ 2026-09-21（W591） | W591 | 待提交 | 偏差①：sitemap 口径 230→229（以现役 sitemap 门禁期望集为准·404 收录·两个 data/-view 排除）；偏差②：check_js_syntax.js 经用户批准修改——非 JS 数据块（ld+json 等）不编译（原实现把数据块当 JS 必误报）；其余验收全达（og:image 233/canonical 233/JSON-LD 内联 0 example.com/配对 89/CSP 0 漂移） |
 | WP-D1 | ⏸ | — | — | — |
 | WP-D2 | ⏸ | — | — | — |
 | WP-E | ⏸ | — | — | — |

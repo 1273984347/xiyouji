@@ -4,12 +4,12 @@
   "@graph": [
     {
       "@type": "Book",
-      "@id": "https://xiyouji.example.com/#book",
+      "@id": "https://1273984347.github.io/xiyouji/#book",
       "name": "西游记",
       "alternateName": "西游释厄传",
       "author": {
         "@type": "Person",
-        "@id": "https://xiyouji.example.com/#author-wuchengen",
+        "@id": "https://1273984347.github.io/xiyouji/#author-wuchengen",
         "name": "吴承恩",
         "nationality": "明·中国",
         "birthDate": "1501",
@@ -138,16 +138,16 @@
     },
     {
       "@type": "CreativeWork",
-      "@id": "https://xiyouji.example.com/#site",
+      "@id": "https://1273984347.github.io/xiyouji/#site",
       "name": "详解西游记 · 多维研究项目",
       "creator": {
-        "@id": "https://xiyouji.example.com/#author-wuchengen"
+        "@id": "https://1273984347.github.io/xiyouji/#author-wuchengen"
       },
       "inLanguage": "zh-CN",
       "about": "西游记文本的多维度学术研究与可视化分析项目，覆盖人物、情节、主题、文化背景、诗词等十大维度。",
-      "isPartOf": { "@id": "https://xiyouji.example.com/#book" },
+      "isPartOf": { "@id": "https://1273984347.github.io/xiyouji/#book" },
       "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
-      "url": "https://xiyouji.example.com/"
+      "url": "https://1273984347.github.io/xiyouji/"
     }
   ]
 }

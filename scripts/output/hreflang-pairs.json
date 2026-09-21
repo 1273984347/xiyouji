@@ -1,0 +1,363 @@
+{
+  "base": "https://1273984347.github.io/xiyouji/",
+  "generated": "2026-09-21",
+  "rule": "en_candidate = en/ + zh_rel 去 data/ 前缀",
+  "pairs": [
+    {
+      "zh": "dashboard.html",
+      "en": "en/dashboard.html"
+    },
+    {
+      "zh": "data/81-hardships-view.html",
+      "en": "en/81-hardships-view.html"
+    },
+    {
+      "zh": "data/81-hardships.html",
+      "en": "en/81-hardships.html"
+    },
+    {
+      "zh": "data/aesthetics.html",
+      "en": "en/aesthetics.html"
+    },
+    {
+      "zh": "data/ai-dialogue.html",
+      "en": "en/ai-dialogue.html"
+    },
+    {
+      "zh": "data/business-model.html",
+      "en": "en/business-model.html"
+    },
+    {
+      "zh": "data/cave-estate.html",
+      "en": "en/cave-estate.html"
+    },
+    {
+      "zh": "data/century-dialogue.html",
+      "en": "en/century-dialogue.html"
+    },
+    {
+      "zh": "data/chapter-stats.html",
+      "en": "en/chapter-stats.html"
+    },
+    {
+      "zh": "data/chapter-structure-graph.html",
+      "en": "en/chapter-structure-graph.html"
+    },
+    {
+      "zh": "data/character-appearance.html",
+      "en": "en/character-appearance.html"
+    },
+    {
+      "zh": "data/character-dynamic-network.html",
+      "en": "en/character-dynamic-network.html"
+    },
+    {
+      "zh": "data/character-presence-timeline.html",
+      "en": "en/character-presence-timeline.html"
+    },
+    {
+      "zh": "data/character-relationship-3d-view.html",
+      "en": "en/character-relationship-3d-view.html"
+    },
+    {
+      "zh": "data/character-relationship-3d.html",
+      "en": "en/character-relationship-3d.html"
+    },
+    {
+      "zh": "data/character-semantic-network.html",
+      "en": "en/character-semantic-network.html"
+    },
+    {
+      "zh": "data/character-sentiment-arc.html",
+      "en": "en/character-sentiment-arc.html"
+    },
+    {
+      "zh": "data/chart-design.html",
+      "en": "en/chart-design.html"
+    },
+    {
+      "zh": "data/cognitive-psychology.html",
+      "en": "en/cognitive-psychology.html"
+    },
+    {
+      "zh": "data/concept-device.html",
+      "en": "en/concept-device.html"
+    },
+    {
+      "zh": "data/counterfactual.html",
+      "en": "en/counterfactual.html"
+    },
+    {
+      "zh": "data/criticism-history.html",
+      "en": "en/criticism-history.html"
+    },
+    {
+      "zh": "data/cross-time-danmaku.html",
+      "en": "en/cross-time-danmaku.html"
+    },
+    {
+      "zh": "data/cultural-misreading.html",
+      "en": "en/cultural-misreading.html"
+    },
+    {
+      "zh": "data/customs-pass-route.html",
+      "en": "en/customs-pass-route.html"
+    },
+    {
+      "zh": "data/data-explorer.html",
+      "en": "en/data-explorer.html"
+    },
+    {
+      "zh": "data/deconstruction.html",
+      "en": "en/deconstruction.html"
+    },
+    {
+      "zh": "data/dialogue-sentiment.html",
+      "en": "en/dialogue-sentiment.html"
+    },
+    {
+      "zh": "data/ecology.html",
+      "en": "en/ecology.html"
+    },
+    {
+      "zh": "data/emotional-heatmap.html",
+      "en": "en/emotional-heatmap.html"
+    },
+    {
+      "zh": "data/ethics-consumption.html",
+      "en": "en/ethics-consumption.html"
+    },
+    {
+      "zh": "data/famous-time-travel.html",
+      "en": "en/famous-time-travel.html"
+    },
+    {
+      "zh": "data/four-dimensional-research-network.html",
+      "en": "en/four-dimensional-research-network.html"
+    },
+    {
+      "zh": "data/four-heavenly-kings-artifacts.html",
+      "en": "en/four-heavenly-kings-artifacts.html"
+    },
+    {
+      "zh": "data/game-webnovel.html",
+      "en": "en/game-webnovel.html"
+    },
+    {
+      "zh": "data/global-pattern.html",
+      "en": "en/global-pattern.html"
+    },
+    {
+      "zh": "data/graph-explorer.html",
+      "en": "en/graph-explorer.html"
+    },
+    {
+      "zh": "data/guanyin-six-roles-network.html",
+      "en": "en/guanyin-six-roles-network.html"
+    },
+    {
+      "zh": "data/hardship-difficulty-heatmap.html",
+      "en": "en/hardship-difficulty-heatmap.html"
+    },
+    {
+      "zh": "data/hardship-heatmap.html",
+      "en": "en/hardship-heatmap.html"
+    },
+    {
+      "zh": "data/heaven-power-network.html",
+      "en": "en/heaven-power-network.html"
+    },
+    {
+      "zh": "data/intertextuality-network.html",
+      "en": "en/intertextuality-network.html"
+    },
+    {
+      "zh": "data/journey-geo-semiotics.html",
+      "en": "en/journey-geo-semiotics.html"
+    },
+    {
+      "zh": "data/journey-map-interactive.html",
+      "en": "en/journey-map-interactive.html"
+    },
+    {
+      "zh": "data/journey-route.html",
+      "en": "en/journey-route.html"
+    },
+    {
+      "zh": "data/journey-spacetime.html",
+      "en": "en/journey-spacetime.html"
+    },
+    {
+      "zh": "data/jurisprudence.html",
+      "en": "en/jurisprudence.html"
+    },
+    {
+      "zh": "data/karma-reincarnation.html",
+      "en": "en/karma-reincarnation.html"
+    },
+    {
+      "zh": "data/language-style-radar.html",
+      "en": "en/language-style-radar.html"
+    },
+    {
+      "zh": "data/linguistics.html",
+      "en": "en/linguistics.html"
+    },
+    {
+      "zh": "data/magic-system.html",
+      "en": "en/magic-system.html"
+    },
+    {
+      "zh": "data/material-archaeology.html",
+      "en": "en/material-archaeology.html"
+    },
+    {
+      "zh": "data/mbti-evolution.html",
+      "en": "en/mbti-evolution.html"
+    },
+    {
+      "zh": "data/methodology-matrix.html",
+      "en": "en/methodology-matrix.html"
+    },
+    {
+      "zh": "data/ming-political-thought-comparison.html",
+      "en": "en/ming-political-thought-comparison.html"
+    },
+    {
+      "zh": "data/monster-background.html",
+      "en": "en/monster-background.html"
+    },
+    {
+      "zh": "data/monster-capability-radar.html",
+      "en": "en/monster-capability-radar.html"
+    },
+    {
+      "zh": "data/monster-ecology-network.html",
+      "en": "en/monster-ecology-network.html"
+    },
+    {
+      "zh": "data/monster-female-network.html",
+      "en": "en/monster-female-network.html"
+    },
+    {
+      "zh": "data/monster-hierarchy-network.html",
+      "en": "en/monster-hierarchy-network.html"
+    },
+    {
+      "zh": "data/monster-sociology.html",
+      "en": "en/monster-sociology.html"
+    },
+    {
+      "zh": "data/monster-victims-network.html",
+      "en": "en/monster-victims-network.html"
+    },
+    {
+      "zh": "data/music-structure.html",
+      "en": "en/music-structure.html"
+    },
+    {
+      "zh": "data/narrative-experiment.html",
+      "en": "en/narrative-experiment.html"
+    },
+    {
+      "zh": "data/narrative-rhythm-curve.html",
+      "en": "en/narrative-rhythm-curve.html"
+    },
+    {
+      "zh": "data/narratology-12d-network.html",
+      "en": "en/narratology-12d-network.html"
+    },
+    {
+      "zh": "data/narratology-13d-network.html",
+      "en": "en/narratology-13d-network.html"
+    },
+    {
+      "zh": "data/perf-canvas-rendering.html",
+      "en": "en/perf-canvas-rendering.html"
+    },
+    {
+      "zh": "data/philosophy.html",
+      "en": "en/philosophy.html"
+    },
+    {
+      "zh": "data/pilgrim-team-dynamic-network.html",
+      "en": "en/pilgrim-team-dynamic-network.html"
+    },
+    {
+      "zh": "data/pilgrim-team-psychology-arc.html",
+      "en": "en/pilgrim-team-psychology-arc.html"
+    },
+    {
+      "zh": "data/poetry-rhythm-analysis.html",
+      "en": "en/poetry-rhythm-analysis.html"
+    },
+    {
+      "zh": "data/power-resources.html",
+      "en": "en/power-resources.html"
+    },
+    {
+      "zh": "data/relationships.html",
+      "en": "en/relationships.html"
+    },
+    {
+      "zh": "data/risk-project.html",
+      "en": "en/risk-project.html"
+    },
+    {
+      "zh": "data/search.html",
+      "en": "en/search.html"
+    },
+    {
+      "zh": "data/six-senses-narratology-network.html",
+      "en": "en/six-senses-narratology-network.html"
+    },
+    {
+      "zh": "data/social-media.html",
+      "en": "en/social-media.html"
+    },
+    {
+      "zh": "data/tag-cloud.html",
+      "en": "en/tag-cloud.html"
+    },
+    {
+      "zh": "data/text-evolution.html",
+      "en": "en/text-evolution.html"
+    },
+    {
+      "zh": "data/text-search.html",
+      "en": "en/text-search.html"
+    },
+    {
+      "zh": "data/theological-intervention-network.html",
+      "en": "en/theological-intervention-network.html"
+    },
+    {
+      "zh": "data/timeline.html",
+      "en": "en/timeline.html"
+    },
+    {
+      "zh": "data/underworld-power-network.html",
+      "en": "en/underworld-power-network.html"
+    },
+    {
+      "zh": "data/visual-art.html",
+      "en": "en/visual-art.html"
+    },
+    {
+      "zh": "data/workplace.html",
+      "en": "en/workplace.html"
+    },
+    {
+      "zh": "dukou-engine.html",
+      "en": "en/dukou-engine.html"
+    },
+    {
+      "zh": "guide.html",
+      "en": "en/guide.html"
+    },
+    {
+      "zh": "index.html",
+      "en": "en/index.html"
+    }
+  ]
+}
