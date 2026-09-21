@@ -11,6 +11,25 @@
 ---
 
 
+## W598 W598 Agent 黄金评估集（2026-09-21·v2.3.198）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/evals/golden-50.jsonl | W598 | 新建·50 条黄金问答（chapter15/character10/theme10/dataset10/ops5·构造时全路径磁盘验证） |
+| xiyouji-agent-web/evals/validate.mjs | W598 | 新建·结构与真实性校验器（无 LLM·CI agent-web-build 挂载·50/50 实测） |
+| xiyouji-agent-web/evals/run_eval.mjs | W598 | 新建·评估运行器（--self-check 4/4/--limit/全量·三规则机判·results 输出） |
+| .github/workflows/ci.yml | W598 | 修改·agent-web-build 增 golden evals validate 步骤 |
+| xiyouji-agent-web/README.md | W598 | 修改·evals 使用文档章节 |
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W598 | 修改·WP-H1 落地状态回写 |
+| scripts/_w598_spec.json | W598 | 新建·本批级联 spec |
+| CHANGELOG.md | W598 | 新增·W598 版段 + 编号规则上限 W001-W598 |
+| 交接文档.md | W598 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W598 | 修改·版本行同步 v2.3.198 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W598 | 修改·四页脚链首 prepend W598 |
+| .github/workflows/README.md | W598 | 修改·旁文档同步 |
+| AGENTS.md | W598 | 修改·版本脚注追加 W598 |
+| scripts/output/file-index.md | W598 | 新增·W598 段（本段·batch_cascade.py 执行） |
+
 ## W597 W597 一次性脚本治理（2026-09-21·v2.3.197）
 
 | 文件 | W | 说明 |

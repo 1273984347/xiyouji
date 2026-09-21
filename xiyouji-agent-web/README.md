@@ -19,6 +19,13 @@
 - 前端：React 18 + Vite + TDesign React + Tailwind
 - AI：CodeBuddy Agent SDK（`@tencent-ai/agent-sdk`）
 
+## 黄金评估集（evals/，W598）
+
+- `evals/golden-50.jsonl`：50 条黄金问答（逐回 15 / 人物 10 / 主题 10 / 数据查询 10 / 工程操作 5），每条含 expect_source_paths（构造时已验证磁盘真实存在）/must_mention/forbid。
+- `node evals/validate.mjs`：结构与真实性校验（无 LLM，CI 已挂 agent-web-build job）。
+- `node evals/run_eval.mjs --self-check`：判分器自检（无 LLM）。
+- `node evals/run_eval.mjs [--limit N]`：真跑评估（需 .env CODEBUDDY_API_KEY），输出 evals/results-<日期>.json；首跑仅建基线不设阈值，连续两批 score 下降 ≥10 个百分点为回归告警。
+
 ## 快速开始
 
 ### 1. 安装依赖

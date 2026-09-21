@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W597），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W598），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,17 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.198（2026-09-21）：W598 Agent 黄金评估集 — golden-50+校验器+判分运行器+CI validate（WP-H1）
+
+> **来源**：W590 主计划 WP-H1——评审实证全仓无任何评估集/回答质量回归手段，AI 产品零质量基线。
+> - **执行（评估集）**：新建 xiyouji-agent-web/evals/golden-50.jsonl——构造器数据驱动生成（章节 15 取 docs/01 真实文件名、人物 10/主题 10 取 docs/02-03 实际文件、数据查询 10 的 must_mention 数值实取 dataset/*.json、工程操作 5 对应真实脚本），**构造时全路径过磁盘存在性验证——评估集自身不允许幻觉**。
+> - **执行（校验器）**：evals/validate.mjs——50 条/分类配比/id 唯一/schema 完整/路径磁盘真实，无 LLM 可进 CI；实测 50/50 过。
+> - **执行（运行器）**：evals/run_eval.mjs——三模式（--self-check 判分器自检 4/4 过：正反斜杠路径/缺路径拒判/forbid 拒判；--limit N；全量真跑），判分三规则=expect 路径全提及且磁盘存在+must_mention 全命中+forbid 零命中；输出 evals/results-<日期>.json；基线规则=首跑仅建基线·连续两批下降 ≥10pp 告警。
+> - **执行（CI）**：ci.yml agent-web-build 增 validate 步骤（无 LLM 不跑真评估·成本稳定性考量）。
+> - **偏差声明**：本地 LLM 基线跑未执行——xiyouji-agent-web/.env 无 CODEBUDDY_API_KEY（用户侧凭证·与 WP-A 同因），凭证具备后 `--limit 5` 起步补基线。
+> - **验证**：validate 50/50；self-check 4/4；路径真实性 100%；ci.yml 语法随 CI 运行确认。
+> - **文件**：xiyouji-agent-web/evals/（golden-50.jsonl、validate.mjs、run_eval.mjs）、.github/workflows/ci.yml、xiyouji-agent-web/README.md、方案档落地状态、scripts/_w598_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批随 W598 提交并 push origin/main）。
 ### v2.3.197（2026-09-21）：W597 一次性脚本治理 — 未跟踪42清零+_attic收档25+需求侧批次配额（WP-K）
 
 > **来源**：W590 主计划 WP-K——scripts/ tracked 275 个 `_` 前缀文件占全部脚本的绝对多数、工作区另有 42 个未跟踪诊断残留（近 20 批会话产物）。
