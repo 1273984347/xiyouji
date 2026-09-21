@@ -11,6 +11,25 @@
 ---
 
 
+## W600 W600 Agent 反馈闭环（2026-09-21·v2.3.200）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/db.ts | W600 | 修改·feedback 表（幂等唯一索引）+ insertFeedback/feedbackSummary |
+| xiyouji-agent-web/server/index.ts | W600 | 修改·POST /api/feedback + GET /api/feedback/summary |
+| xiyouji-agent-web/server/feedback.test.mjs | W600 | 新建·集成测试（真实起服→HTTP→sqlite 直查→清理·5/5） |
+| xiyouji-agent-web/src/types.ts / src/hooks/useChat.ts | W600 | 修改·Message 增 feedback/durationSec·done 捕获耗时 |
+| xiyouji-agent-web/src/components/ChatMessages.tsx / src/pages/ChatPage.tsx | W600 | 修改·操作条四按钮+耗时 footer+onRegenerate 接线 |
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W600 | 修改·WP-H2 落地状态回写 |
+| scripts/_w600_spec.json | W600 | 新建·本批级联 spec |
+| CHANGELOG.md | W600 | 新增·W600 版段 + 编号规则上限 W001-W600 |
+| 交接文档.md | W600 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W600 | 修改·版本行同步 v2.3.200 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W600 | 修改·四页脚链首 prepend W600 |
+| .github/workflows/README.md | W600 | 修改·旁文档同步 |
+| AGENTS.md | W600 | 修改·版本脚注追加 W600 |
+| scripts/output/file-index.md | W600 | 新增·W600 段（本段·batch_cascade.py 执行） |
+
 ## W599 W599 Agent 引用校验与拒答边界（2026-09-21·v2.3.199）
 
 | 文件 | W | 说明 |

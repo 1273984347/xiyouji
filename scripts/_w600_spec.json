@@ -1,0 +1,28 @@
+{
+ "batch": "W600",
+ "version": "v2.3.200",
+ "date": "2026-09-21",
+ "title": "W600 Agent 反馈闭环 — 👍👎/复制/重新生成+feedback表+耗时展示（WP-H2）",
+ "desc": "Agent 反馈闭环与耗时展示",
+ "head_entry": "2026-09-21（v2.3.200 W600 Agent 反馈闭环：消息操作条 👍/👎/复制/重新生成、feedback 表（message+verdict 唯一幂等）、POST /api/feedback + summary 端点、done 耗时上屏、集成测试 5/5, WP-H2 验收达成）",
+ "head_sentence": "Agent 反馈闭环——操作条+feedback表+耗时展示",
+ "changelog_body": "\n\n> **来源**：W590 主计划 WP-H2——评审实证无任何反馈按钮/端点、cost/duration 载荷前端直接丢弃。\n> - **执行（数据层）**：server/db.ts 增 feedback 表（verdict CHECK up/down·(message_id,verdict) 唯一索引幂等）+ insertFeedback（INSERT OR IGNORE 返回 changes）/feedbackSummary（近 30 天计数）。\n> - **执行（API）**：POST /api/feedback（body 校验+comment 截断 500+幂等）与 GET /api/feedback/summary 两端点。\n> - **执行（前端）**：ChatMessages 非流式消息下增操作条——👍/👎（乐观态+POST·失败保本地态）/复制（clipboard）/重新生成（onRegenerate→ChatPage 取上一条用户提问经 onSendMessage 重发）；done 事件 duration 捕获为 durationSec（ms 自动换算秒）上屏。\n> - **执行（集成测试）**：server/feedback.test.mjs——独立端口真实起服→HTTP→直查 chat.db→清理测试行，5/5 过（首插 1/幂等 0/非法 400/summary/sqlite 直查）。\n> - **偏差声明**：① Playwright 点按 e2e 未做——产生 assistant 消息需 CODEBUDDY_API_KEY（用户侧凭证），UI 点按链路待凭证后补 e2e；② cost 字段 SDK 单位未确认，首版仅展示 duration（方案原文允许），cost 展示待确认启用。\n> - **验证**：集成测试 5/5；npm run build（tsc+vite）过；verify_delivery 核心全绿。\n> - **文件**：xiyouji-agent-web（server/db.ts、server/index.ts、server/feedback.test.mjs、src/types.ts、src/hooks/useChat.ts、src/components/ChatMessages.tsx、src/pages/ChatPage.tsx）、方案档落地状态、scripts/_w600_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。\n> - **状态**：已落地（本批随 W600 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.200 W600 Agent 反馈闭环（2026-09-21）**：\n  - 消息操作条 👍/👎/复制/重新生成 + feedback 表（幂等唯一索引）+ POST /api/feedback 与 summary 端点 + done 耗时上屏\n  - 集成测试 5/5（真实起服→HTTP→sqlite 直查→清理）；Playwright 点按链路待用户凭证后补",
+ "agents_note": "2026-09-21（v2.3.200 W600）Agent 反馈闭环：无 § 结构性变更（操作条四按钮+feedback 幂等表+两端点+耗时展示·集成测试 5/5·UI 点按 e2e 待凭证），仅版本脚注同步",
+ "file_index_rows": [
+  "| xiyouji-agent-web/server/db.ts | W600 | 修改·feedback 表（幂等唯一索引）+ insertFeedback/feedbackSummary |",
+  "| xiyouji-agent-web/server/index.ts | W600 | 修改·POST /api/feedback + GET /api/feedback/summary |",
+  "| xiyouji-agent-web/server/feedback.test.mjs | W600 | 新建·集成测试（真实起服→HTTP→sqlite 直查→清理·5/5） |",
+  "| xiyouji-agent-web/src/types.ts / src/hooks/useChat.ts | W600 | 修改·Message 增 feedback/durationSec·done 捕获耗时 |",
+  "| xiyouji-agent-web/src/components/ChatMessages.tsx / src/pages/ChatPage.tsx | W600 | 修改·操作条四按钮+耗时 footer+onRegenerate 接线 |",
+  "| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W600 | 修改·WP-H2 落地状态回写 |",
+  "| scripts/_w600_spec.json | W600 | 新建·本批级联 spec |",
+  "| CHANGELOG.md | W600 | 新增·W600 版段 + 编号规则上限 W001-W600 |",
+  "| 交接文档.md | W600 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W600 | 修改·版本行同步 v2.3.200 |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W600 | 修改·四页脚链首 prepend W600 |",
+  "| .github/workflows/README.md | W600 | 修改·旁文档同步 |",
+  "| AGENTS.md | W600 | 修改·版本脚注追加 W600 |",
+  "| scripts/output/file-index.md | W600 | 新增·W600 段（本段·batch_cascade.py 执行） |"
+ ]
+}

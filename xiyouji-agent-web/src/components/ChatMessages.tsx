@@ -1,6 +1,7 @@
 import { Loading } from 'tdesign-react';
 import { ChatMarkdown } from '@tdesign-react/chat';
-import { User, Bot } from 'lucide-react';
+import { User, Bot, ThumbsUp, ThumbsDown, Copy, RotateCcw } from 'lucide-react';
+import { useState } from 'react';
 import DOMPurify from 'dompurify'; // P2-6：ChatMarkdown 内部 html:true + unsafeHTML 无消毒，渲染前净化
 import { Message, Model, PermissionRequest, ContentBlock } from '../types';
 import { ToolCallsCollapse } from './ToolCallsCollapse';
@@ -10,6 +11,7 @@ interface ChatMessagesProps {
   messages: Message[];
   models: Model[];
   messagesEndRef: React.RefObject<HTMLDivElement | null>;
+  onRegenerate?: (message: Message) => void;
   // 内联权限确认相关
   permissionRequest?: PermissionRequest | null;
   onPermissionAllow?: () => void;
@@ -20,10 +22,22 @@ export function ChatMessages({
   messages, 
   models, 
   messagesEndRef,
+  onRegenerate,
   permissionRequest,
   onPermissionAllow,
   onPermissionDeny
 }: ChatMessagesProps) {
+  const [feedbacks, setFeedbacks] = useState<Record<string, 'up' | 'down'>>({});
+  const handleFeedback = (messageId: string, verdict: 'up' | 'down') => {
+    if (feedbacks[messageId]) return;
+    setFeedbacks(prev => ({ ...prev, [messageId]: verdict }));
+    fetch('/api/feedback', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messageId, verdict }) }).catch(() => { });
+  };
+  const handleCopy = (message: Message) => {
+    const text = message.content || (message.contentBlocks || []).filter(b => b.type === 'text').map(b => (b as { text: string }).text).join('\n');
+    navigator.clipboard?.writeText(text).catch(() => { });
+  };
+
   const formatModelName = (modelId: string) => {
     const model = models.find(m => m.modelId === modelId);
     const name = model?.name || modelId;
@@ -163,6 +177,16 @@ export function ChatMessages({
             
             {/* 助手消息 - 按顺序渲染内容块 */}
             {message.role === 'assistant' && renderAssistantContent(message)}
+
+            {message.role === 'assistant' && !message.isStreaming && (
+              <div className="flex items-center gap-3 px-1 text-xs" style={{ color: 'var(--td-text-color-placeholder)' }}>
+                <button title="赞" className="flex items-center gap-1" onClick={() => handleFeedback(message.id, 'up')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: feedbacks[message.id] === 'up' ? 'var(--td-brand-color)' : 'var(--td-text-color-placeholder)' }}><ThumbsUp size={13} /> 赞</button>
+                <button title="踩" className="flex items-center gap-1" onClick={() => handleFeedback(message.id, 'down')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: feedbacks[message.id] === 'down' ? 'var(--td-danger-color)' : 'var(--td-text-color-placeholder)' }}><ThumbsDown size={13} /> 踩</button>
+                <button title="复制全文" className="flex items-center gap-1" onClick={() => handleCopy(message)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--td-text-color-placeholder)' }}><Copy size={13} /> 复制</button>
+                {onRegenerate && <button title="按上一条提问重新生成" className="flex items-center gap-1" onClick={() => onRegenerate(message)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--td-text-color-placeholder)' }}><RotateCcw size={13} /> 重新生成</button>}
+                {typeof message.durationSec === 'number' && <span>· {message.durationSec}s</span>}
+              </div>
+            )}
             
             {/* 思考中状态（没有任何内容时显示） */}
             {message.role === 'assistant' && message.isStreaming && 

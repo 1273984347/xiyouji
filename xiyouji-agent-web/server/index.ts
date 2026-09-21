@@ -100,6 +100,21 @@ let cachedModels: Array<{ modelId: string; name: string; description?: string }>
 const defaultModel = "claude-sonnet-4";
 
 // 健康检查
+// W600 反馈闭环
+app.post("/api/feedback", (req, res) => {
+  const { sessionId, messageId, verdict, comment } = (req.body || {}) as Record<string, unknown>;
+  if (typeof sessionId !== "string" || typeof messageId !== "string" || (verdict !== "up" && verdict !== "down")) {
+    return res.status(400).json({ error: "invalid body" });
+  }
+  const c = typeof comment === "string" ? comment.slice(0, 500) : "";
+  const inserted = db.insertFeedback({ id: uuidv4(), session_id: sessionId, message_id: messageId, verdict, comment: c });
+  res.json({ ok: true, inserted });
+});
+
+app.get("/api/feedback/summary", (_req, res) => {
+  res.json({ ok: true, ...db.feedbackSummary(30) });
+});
+
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });

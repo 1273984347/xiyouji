@@ -313,7 +313,7 @@ export function useChat(options: UseChatOptions) {
                         ...s,
                         messages: s.messages.map(m => 
                           m.id === realAssistantMessageId 
-                            ? { ...m, isStreaming: false }
+                            ? { ...m, isStreaming: false, durationSec: typeof data.duration === 'number' ? Math.round((data.duration / 1000) * 10) / 10 : undefined }
                             : m
                         )
                       };

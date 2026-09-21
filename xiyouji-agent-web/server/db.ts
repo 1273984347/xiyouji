@@ -47,6 +47,18 @@ db.exec(`
 
   -- 为会话 ID 创建索引
   CREATE INDEX IF NOT EXISTS idx_messages_session_id ON messages(session_id);
+
+  -- 反馈表（W600 H2）
+  CREATE TABLE IF NOT EXISTS feedback (
+    id TEXT PRIMARY KEY,
+    session_id TEXT NOT NULL,
+    message_id TEXT NOT NULL,
+    verdict TEXT NOT NULL CHECK (verdict IN ('up', 'down')),
+    comment TEXT,
+    created_at TEXT NOT NULL
+  );
+  -- 同一消息同一 verdict 幂等
+  CREATE UNIQUE INDEX IF NOT EXISTS idx_feedback_message_verdict ON feedback(message_id, verdict);
 `);
 
 // 数据库迁移：添加 sdk_session_id 列（如果不存在）
@@ -59,6 +71,28 @@ try {
   }
 } catch (e) {
   // 忽略错误（列可能已存在）
+}
+
+// 反馈（W600）
+export interface DbFeedback {
+  id: string;
+  session_id: string;
+  message_id: string;
+  verdict: string;
+  comment: string | null;
+  created_at: string;
+}
+
+export function insertFeedback(f: Omit<DbFeedback, 'created_at'>): number {
+  const r = db.prepare("INSERT OR IGNORE INTO feedback (id, session_id, message_id, verdict, comment, created_at) VALUES (?, ?, ?, ?, ?, ?)")
+    .run(f.id, f.session_id, f.message_id, f.verdict, f.comment ?? null, new Date().toISOString());
+  return r.changes;
+}
+
+export function feedbackSummary(days = 30): { up: number; down: number } {
+  const since = new Date(Date.now() - days * 86400000).toISOString();
+  const rows = db.prepare("SELECT verdict, COUNT(*) AS n FROM feedback WHERE created_at >= ? GROUP BY verdict").all(since) as Array<{ verdict: string; n: number }>;
+  return { up: rows.find((r) => r.verdict === 'up')?.n ?? 0, down: rows.find((r) => r.verdict === 'down')?.n ?? 0 };
 }
 
 // 类型定义
