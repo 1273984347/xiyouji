@@ -32,9 +32,28 @@ const app = express();
 const PORT: number = Number(process.env.PORT) || 3000;
 
 // 适配项目：详解西游记（xiyouji）
-// 默认工作目录指向项目根，Agent 可在其上读取 docs/、运行 scripts/、写入 dataset/ 等。
+// 默认工作目录=仓库根：向上探测「AGENTS.md + site/tokens.css」锚点自动解析。
+// （W596：旧实现写死已不存在的双副本绝对路径，默认值悬空。）
 // 可用环境变量 PROJECT_CWD 覆盖（如指向其他副本）。
-const PROJECT_CWD = process.env.PROJECT_CWD || 'D:/1/xiyouji';
+function resolveProjectCwd(): string {
+  if (process.env.PROJECT_CWD) return process.env.PROJECT_CWD;
+  let dir = path.resolve(__dirname);
+  for (let i = 0; i < 6; i++) {
+    if (fs.existsSync(path.join(dir, "AGENTS.md")) && fs.existsSync(path.join(dir, "site", "tokens.css"))) {
+      return dir;
+    }
+    const parent = path.dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  return path.resolve(__dirname, "..", "..");
+}
+const PROJECT_CWD = resolveProjectCwd();
+if (!fs.existsSync(PROJECT_CWD)) {
+  console.error(`[FATAL] PROJECT_CWD 不存在: ${PROJECT_CWD}（请用环境变量 PROJECT_CWD 指向有效仓库副本）`);
+  process.exit(1);
+}
+console.log(`[boot] PROJECT_CWD = ${PROJECT_CWD}`);
 
 // Middleware
 app.use(express.json());

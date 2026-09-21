@@ -379,16 +379,16 @@ B14 WP-L  信任字段补全
 | WP | 状态（⏸未启动/🔄进行中/✅完成/⏸️暂停） | 批次/W 号 | commit | 偏差记录 |
 |---|---|---|---|---|
 | WP-A | 🔄 自测 14/14 过（2026-09-21）；取数/judge_gate 待用户配 `GOATCOUNTER_API_TOKEN` | — | — | 用户动作未完成 |
-| WP-B | ✅ 2026-09-21（W592） | W592 | 待提交 | 偏差①：`?q=` 预执行为 search.html 既有原生能力（前批深链功能），无需新增；偏差②：品牌验收口径细化——两搜索页内嵌索引数据引用 agent-web 工具名保留（文档事实描述非品牌使用），UI 品牌面 0 命中；偏差③：dukou-engine 页自身零品牌残留（改名早已完成，撞车在各页链接文案）；偏差④：EN「Ferry Crossing」本为引擎英文名无撞车，仅修 2 处语义失真（引擎不答问题→站内搜索）；首页 `xiyouji_asks` 本地记录随改道移除（无消费方·WP-F 以搜索词记录替代） |
-| WP-C | ✅ 2026-09-21（W591） | W591 | 待提交 | 偏差①：sitemap 口径 230→229（以现役 sitemap 门禁期望集为准·404 收录·两个 data/-view 排除）；偏差②：check_js_syntax.js 经用户批准修改——非 JS 数据块（ld+json 等）不编译（原实现把数据块当 JS 必误报）；其余验收全达（og:image 233/canonical 233/JSON-LD 内联 0 example.com/配对 89/CSP 0 漂移） |
-| WP-D1 | ✅ 2026-09-21（W593） | W593 | 待提交 | 偏差①：reader 页无版本页脚（不参与新鲜度耦合面，替代原「对齐 bump_version 正则」设计）；偏差②：blob 外跳 D1 后临时升至 2379（1717-198 索引 A1 站内化+100 源文件链+762 正文跨板块暂走 blob·按方案 D2 收敛至 ≤1000）；偏差③：一致性门禁新增 5 条叙述性回目提及误报已冻结基线（W555 机制） |
+| WP-B | ✅ 2026-09-21（W592） | W592 | 7f326bc | 偏差①：`?q=` 预执行为 search.html 既有原生能力（前批深链功能），无需新增；偏差②：品牌验收口径细化——两搜索页内嵌索引数据引用 agent-web 工具名保留（文档事实描述非品牌使用），UI 品牌面 0 命中；偏差③：dukou-engine 页自身零品牌残留（改名早已完成，撞车在各页链接文案）；偏差④：EN「Ferry Crossing」本为引擎英文名无撞车，仅修 2 处语义失真（引擎不答问题→站内搜索）；首页 `xiyouji_asks` 本地记录随改道移除（无消费方·WP-F 以搜索词记录替代） |
+| WP-C | ✅ 2026-09-21（W591·sitemap 补全 W595） | W591/W595 | 9392459/a85608b | 偏差①：sitemap 口径 230→229（以现役 sitemap 门禁期望集为准·404 收录·两个 data/-view 排除）；偏差②：check_js_syntax.js 经用户批准修改——非 JS 数据块（ld+json 等）不编译（原实现把数据块当 JS 必误报）；偏差③：W593 批漏 add sitemap.xml 致 CI 红灯，W595 热修复补提交；其余验收全达（og:image 233/canonical 233/JSON-LD 内联 0 example.com/配对 89/CSP 0 漂移） |
+| WP-D1 | ✅ 2026-09-21（W593） | W593 | b507944 | 偏差①：reader 页无版本页脚（不参与新鲜度耦合面，替代原「对齐 bump_version 正则」设计）；偏差②：blob 外跳 D1 后临时升至 2379（1717-198 索引 A1 站内化+100 源文件链+762 正文跨板块暂走 blob·按方案 D2 收敛至 ≤1000）；偏差③：一致性门禁新增 5 条叙述性回目提及误报已冻结基线（W555 机制） |
 | WP-D2 | ⏸ | — | — | — |
 | WP-E | ⏸ | — | — | — |
-| WP-F | ✅ 2026-09-21（W594） | W594 | 待提交 | 偏差①：黄金查询由构建时 python 同款评分模拟预验证（确定性·无抽样）+ 常驻 e2e `_check_search_golden_e2e.js` 双层把守；偏差②：rum e2e 需 shim 适配 ZH/EN 双常量 + en 段候选回退加固（原实现只试 pages[0] 单候选）；偏差③：EN 索引仍含 docs 条目（中文标题·kind 标注保留）——docs 内容本为中文，符合方案「docs 条目标注 zh 原文」口径 |
+| WP-F | ✅ 2026-09-21（W594） | W594 | d8e10fe | 偏差①：黄金查询由构建时 python 同款评分模拟预验证（确定性·无抽样）+ 常驻 e2e `_check_search_golden_e2e.js` 双层把守；偏差②：rum e2e 需 shim 适配 ZH/EN 双常量 + en 段候选回退加固（原实现只试 pages[0] 单候选）；偏差③：EN 索引仍含 docs 条目（中文标题·kind 标注保留）——docs 内容本为中文，符合方案「docs 条目标注 zh 原文」口径 |
 | WP-G | ⏸ | — | — | — |
 | WP-H1 | ⏸ | — | — | — |
 | WP-H2 | ⏸ | — | — | — |
 | WP-I | ⏸ | — | — | — |
-| WP-J | ⏸ | — | — | — |
+| WP-J | ✅ 2026-09-21（W596） | W596 | 待提交 | 偏差①：Docker 镜像构建未完成验证——本机 Docker Hub 拉取 node:22-alpine 受限且用户指示「先不用 Docker」，Dockerfile/.dockerignore/DEPLOYMENT.md 已入库，条件具备后补验（方案口径：如实标注禁假收敛）；偏差②：`/api/health` 健康探针为既有路由（102 行实测），HEALTHCHECK 合法；偏差③：脏路径活面清零含级联脚本 winpath 根因修复（旧值每批续写 workflows README·修文档不改脚本必回潮）；豁免域 21 文件登记（CHANGELOG 历史段禁改/.workbuddy 会话记忆/docs/_dev/历史方案档/scripts/output 产物/检测器 `_audit_agentweb_baseline.py`（搜索模式即旧路径·设计保留）/gitignore 产物 index.js） |
 | WP-K | ⏸ | — | — | — |
 | WP-L | ⏸ | — | — | — |

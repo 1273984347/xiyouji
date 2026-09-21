@@ -151,7 +151,7 @@ def main():
     p = ".github/workflows/README.md"
     s, nl = load(p)
     BS = chr(92)
-    winpath = "`d:" + BS + "1" + BS + "xiyouji`"
+    winpath = "`D:" + BS + "xiyouji`"  # W596：旧值为已不存在的双副本路径，曾每批续写进 workflows README
     pat_wf = re.compile(r"→ W450-W\d+\*\* — 西游记解读项目（" + re.escape(winpath) + r"，v[\d.]+ W\d+）的 GitHub Actions 工作流层。")
     repl_wf = f"→ W450-W{new_w}** — 西游记解读项目（{winpath}，{ver} {batch}）的 GitHub Actions 工作流层。"
     out = pat_wf.sub(lambda m: repl_wf, s, count=1)

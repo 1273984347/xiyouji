@@ -1,0 +1,30 @@
+{
+ "batch": "W596",
+ "version": "v2.3.196",
+ "date": "2026-09-21",
+ "title": "W596 Agent 运行卫生 — PROJECT_CWD 自动解析+Docker三件套+双副本脏路径活面清零（WP-J）",
+ "desc": "Agent 运行卫生与脏路径清零",
+ "head_entry": "2026-09-21（v2.3.196 W596 Agent 运行卫生：PROJECT_CWD 仓库根自动解析+启动 fail-fast、Dockerfile/.dockerignore/DEPLOYMENT.md 入库、双副本脏路径活面清零 14 文件、级联 winpath 根因修复, WP-J 验收达成）",
+ "head_sentence": "Agent 运行卫生——PROJECT_CWD 自动解析+脏路径活面清零",
+ "changelog_body": "\n\n> **来源**：W590 主计划 WP-J——实测 `D:/1/xiyouji` 副本不存在而 agent-web 默认 PROJECT_CWD 指向它（悬空默认·Agent 全部工具调用落空）；且全仓 14 个活面文件残留双副本脏路径，其中级联脚本 winpath 硬编码**每批续写**进 workflows README（修文档不改脚本必回潮）。\n> - **执行（PROJECT_CWD 自动解析）**：server/index.ts 默认值改为向上探测「AGENTS.md + site/tokens.css」锚点自动解析仓库根（env 覆盖优先），启动打印 `[boot] PROJECT_CWD=...` 且目录不存在 FATAL 退出（fail-fast）；实测启动打印正确仓库根。\n> - **执行（Docker 三件套）**：Dockerfile（node:22-alpine·与 engines≥20 对齐·HEALTHCHECK 探既有 /api/health·容器内 PROJECT_CWD=/workspace 配合挂载）+ .dockerignore（排除 .env/data/dist）+ DEPLOYMENT.md（本地/Docker 运行指南·Negative Scope 明示不做公网）；DEVELOPMENT.md 旧 node:18 Dockerfile 示例段删除（与 engines 矛盾）。\n> - **执行（脏路径活面清零）**：14 文件 24 处——workflows README/AGENTS §4.4/STRUCTURE/交接文档×3/新Agent启动Prompt/mcp-server README（JSON 占位符+file:/// 死链改仓库相对+.trae-cn 全局死链行移除）/agent-web README×4/useAgents（路径+悬空版本串 v2.3.9）/scripts utils/aliases·optimize-html-size·font-subset-guide/site/en README/法宝政治学专题来源行/batch_cascade winpath 根因。\n> - **执行（豁免登记）**：21 文件保留——CHANGELOG 历史段（禁改）/.workbuddy 会话记忆/docs/_dev/历史方案档/scripts/output 诊断产物/检测器 `_audit_agentweb_baseline.py`（其搜索模式即旧路径·设计保留）/gitignore 编译产物 index.js。\n> - **偏差声明**：Docker 镜像构建未完成验证——本机 Docker Hub 拉取 node:22-alpine 受限，且用户指示「先不用 Docker」；三件套已入库，条件具备后补验（如实登记·禁假收敛）。\n> - **验证**：tsc+vite build 过；启动冒烟打印 `[boot] PROJECT_CWD = D:\\xiyouji`（实测）；活面脏路径终扫 0 文件；ruff 过（batch_cascade/utils/aliases/optimize-html-size）；verify_delivery 核心全绿。\n> - **文件**：xiyouji-agent-web（server/index.ts、src/hooks/useAgents.ts、README、DEVELOPMENT.md、Dockerfile、.dockerignore、DEPLOYMENT.md）、scripts/batch_cascade.py、scripts/utils/aliases.py、scripts/optimize-html-size.py、scripts/font-subset-guide.md、site/en/README.md、docs/03/法宝政治学专题.md、.github/workflows/README.md、AGENTS.md、STRUCTURE.md、交接文档.md、新Agent启动Prompt.md、mcp-server/README.md、方案档落地状态、scripts/_w596_spec.json、六文档、四页脚、file-index。\n> - **状态**：已落地（本批随 W596 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.196 W596 Agent 运行卫生（2026-09-21）**：\n  - PROJECT_CWD 仓库根自动解析+启动 fail-fast（旧值指向已不存在的 D:/1 副本·悬空默认根治）\n  - 双副本脏路径活面清零 14 文件（含 batch_cascade winpath 根因——每批续写 workflows README 的源头）+ Docker 三件套入库（镜像构建待补验·用户指示先不用 Docker）",
+ "agents_note": "2026-09-21（v2.3.196 W596）Agent 运行卫生：无 § 结构性变更（§4.4 PROJECT_CWD 表述更新·脏路径活面清零 14 文件·PROJECT_CWD 自动解析+fail-fast·Docker 三件套入库待补验），仅版本脚注同步",
+ "file_index_rows": [
+  "| xiyouji-agent-web/server/index.ts | W596 | 修改·PROJECT_CWD 仓库根自动解析（锚点探测）+启动 fail-fast+boot 日志 |",
+  "| xiyouji-agent-web/src/hooks/useAgents.ts | W596 | 修改·系统提示词去写死路径与悬空版本串 v2.3.9 |",
+  "| xiyouji-agent-web/Dockerfile / .dockerignore / DEPLOYMENT.md | W596 | 新建·容器三件套（node:22-alpine·HEALTHCHECK /api/health·镜像构建待补验） |",
+  "| xiyouji-agent-web/README.md / DEVELOPMENT.md | W596 | 修改·定位与路径表述更新·旧 node:18 Docker 段删除 |",
+  "| scripts/batch_cascade.py | W596 | 修改·winpath 根因修复（旧值每批续写 workflows README） |",
+  "| .github/workflows/README.md / AGENTS.md / STRUCTURE.md / 交接文档.md / 新Agent启动Prompt.md / mcp-server/README.md | W596 | 修改·双副本脏路径清零（级联续写面+治理文档现役段） |",
+  "| scripts/utils/aliases.py / scripts/optimize-html-size.py / scripts/font-subset-guide.md / site/en/README.md / docs/03/法宝政治学专题.md | W596 | 修改·杂面脏路径清零 |",
+  "| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W596 | 修改·WP-J 落地状态回写+W591-W595 哈希补填 |",
+  "| scripts/_w596_spec.json | W596 | 新建·本批级联 spec |",
+  "| CHANGELOG.md | W596 | 新增·W596 版段 + 编号规则上限 W001-W596 |",
+  "| 交接文档.md | W596 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W596 | 修改·版本行同步 v2.3.196 |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W596 | 修改·四页脚链首 prepend W596 |",
+  "| .github/workflows/README.md | W596 | 修改·旁文档同步（batch_cascade.py 执行） |",
+  "| AGENTS.md | W596 | 修改·版本脚注追加 W596 |",
+  "| scripts/output/file-index.md | W596 | 新增·W596 段（本段·batch_cascade.py 执行） |"
+ ]
+}

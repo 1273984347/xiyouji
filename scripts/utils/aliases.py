@@ -7,7 +7,7 @@ aliases.py — 《西游记》人物别名表（单一数据源）
     各自维护别名表的重复代码。
 
 数据来源：
-    d:\1\xiyouji\scripts\B_人物\character_nlp.py 中的 CHARACTERS 字典
+    scripts\B_人物\character_nlp.py 中的 CHARACTERS 字典
     （基于 character_appearance.py + 扩展别名，35 人物别名表）
 
 注意：

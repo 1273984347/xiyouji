@@ -110,7 +110,7 @@ font-family:
 
 ```bash
 # 进入项目根
-cd d:/1/xiyouji
+cd <仓库根>
 
 # 安装 fontmin（一次性）
 npm install -g fontmin
@@ -206,7 +206,7 @@ glyphhanger http://localhost:8000/ \
     --output=assets/fonts/subset/
 
 # 从本地 HTML 文件抓取
-glyphhanger --spider=file:///d:/1/xiyouji/site/data/index.html \
+glyphhanger --spider=file:///<仓库根>/site/data/index.html \
     --subset=assets/fonts/NotoSerifSC-Regular.otf \
     --formats=woff2 \
     --output=assets/fonts/subset/

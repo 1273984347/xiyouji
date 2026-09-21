@@ -356,7 +356,7 @@ def render_report(results: list[FileMetrics]) -> str:
     lines.append("")
     lines.append("```bash")
     lines.append("# 进入项目根")
-    lines.append("cd d:/1/xiyouji")
+    lines.append("cd <仓库根>")
     lines.append("")
     lines.append("# 运行脚本（标准库即可，无需额外依赖）")
     lines.append("python scripts/optimize-html-size.py")

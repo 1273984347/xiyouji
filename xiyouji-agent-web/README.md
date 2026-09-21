@@ -2,13 +2,13 @@
 
 > **定位**：本地工程工具，仅回环监听，不对公网开放。公网 AI 能力路线见 `docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md` WP-B-ALT（冻结预案）。
 
-基于 **CodeBuddy Agent SDK** 构建的 Web Agent 应用，**已适配本地项目 `D:\1\xiyouji`（详解西游记）**。
+基于 **CodeBuddy Agent SDK** 构建的 Web Agent 应用，**适配本仓库（详解西游记）**——后端启动时自动解析仓库根为工作目录，无需写死路径。
 
 打开浏览器即可与「渡口问津」对话：让它检索某回解读、回答佛道思想/诗词/人物问题、运行 `scripts/` 下的 Python 分析脚本、生成可视化，或协助撰写 `docs/` 文档。
 
 ## 它和原模板有何不同（适配点）
 
-- **默认工作目录**：后端 `PROJECT_CWD` 与前端「新对话」输入框默认指向 `D:/1/xiyouji`，Agent 直接在该项目上读写与执行。
+- **默认工作目录**：后端 `PROJECT_CWD` 默认自动解析为仓库根（向上探测 AGENTS.md + site/tokens.css；可用环境变量覆盖），Agent 直接在该项目上读写与执行。
 - **专属 Agent**：默认 Agent「西游记·渡口问津」内置项目结构说明与行为准则的系统提示词（sysprompt），开箱即用，无需手动配置。
 - **默认权限模式**：`acceptEdits`（W411 安全加固：默认不做 bypassPermissions，文件编辑自动批准、Bash 等高风险操作仍需人工确认）。新对话时可在底部切换；`bypassPermissions` 需服务端显式 `AGENT_WEB_ALLOW_BYPASS=1` 才生效。
 - **界面标识**：应用名「西游记·渡口问津」、Logo「西」、主题色取项目古典红 `#c8463a`。
@@ -23,7 +23,7 @@
 
 ### 1. 安装依赖
 ```bash
-cd D:/1/xiyouji/xiyouji-agent-web
+cd xiyouji-agent-web   # 仓库根下的本子目录
 npm install
 ```
 
@@ -43,7 +43,7 @@ npm run dev
 ## 使用建议
 
 - **问答 / 检索**：直接问「第 27 回讲了什么」「孙悟空与菩提祖师的关系」「心猿指什么」，Agent 会引用 `docs/`、`source/` 路径。
-- **运行分析**：「用 scripts/B_人物 下的共现脚本分析前 20 回人物关系」，Agent 会在 `D:/1/xiyouji` 下执行并把结果写入 `dataset/`。
+- **运行分析**：「用 scripts/B_人物 下的共现脚本分析前 20 回人物关系」，Agent 会在仓库根下执行并把结果写入 `dataset/`。
 - **写文档**：「给 03-主题与情节专题 补一篇关于‘紧箍咒’的短文」，Agent 会遵循 `docs/00-导读/文档规范.md`。
 - **工作目录**：新建对话时可指定 `PROJECT_CWD` **内的子目录**（W411 起仅允许项目根内，防目录穿越）；项目外目录不受支持，需改 `.env` 的 `PROJECT_CWD` 后重启。
 
