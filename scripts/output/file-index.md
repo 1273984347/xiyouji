@@ -11,6 +11,20 @@
 ---
 
 
+## W590 W590 需求侧优化主计划入库（2026-09-21·v2.3.190）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W590 | 新建·需求侧优化主计划（13 工作包 WP-A…WP-M·约 14 批·机判验收+回归面·§0.2 基线命令·§6 总验收 22 条·WP-B-ALT 冻结预案·§8 Mode B 自审 8 项修正+落地状态表） |
+| scripts/_w590_spec.json | W590 | 新建·本批级联 spec |
+| CHANGELOG.md | W590 | 新增·W590 版段 + 编号规则上限 W001-W590 |
+| 交接文档.md | W590 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句 + 零段补 W590 主计划句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W590 | 修改·版本行同步 v2.3.190 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W590 | 修改·四页脚链首 prepend W590 |
+| .github/workflows/README.md | W590 | 修改·旁文档同步 |
+| AGENTS.md | W590 | 修改·版本脚注追加 W590 |
+| scripts/output/file-index.md | W590 | 新增·W590 段（本段·batch_cascade.py 执行） |
+
 ## W589 W589 暗色审计读数语义修正+映射合并重建（2026-09-20·v2.3.189）
 
 | 文件 | W | 说明 |
