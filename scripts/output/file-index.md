@@ -11,6 +11,24 @@
 ---
 
 
+## W597 W597 一次性脚本治理（2026-09-21·v2.3.197）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_attic/（25 项迁移） | W597 | 新建·历史诊断脚本收档区（_audit/_chk/_diag/_shots/_trace/_verify 系列+报告·零引用≥45 天·git mv 保历史） |
+| scripts/_attic/README.md | W597 | 新建·收档规则一行（仅收档禁新增引用·复用先移回） |
+| 未跟踪 42 项 | W597 | 删除·零引用会话诊断残留（_w575/_w581/_w588 diag 系列+pool/en-zh summary+heatmap-dark.png+output 产物等·逐项引用判定 0 命中） |
+| 交接文档.md | W597 | 修改·「二」头部需求侧批次配额规则行 |
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W597 | 修改·WP-K 落地状态回写+W596 哈希补填 |
+| scripts/_w597_spec.json | W597 | 新建·本批级联 spec |
+| CHANGELOG.md | W597 | 新增·W597 版段 + 编号规则上限 W001-W597 |
+| 交接文档.md | W597 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W597 | 修改·版本行同步 v2.3.197 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W597 | 修改·四页脚链首 prepend W597 |
+| .github/workflows/README.md | W597 | 修改·旁文档同步 |
+| AGENTS.md | W597 | 修改·版本脚注追加 W597 |
+| scripts/output/file-index.md | W597 | 新增·W597 段（本段·batch_cascade.py 执行） |
+
 ## W596 W596 Agent 运行卫生（2026-09-21·v2.3.196）
 
 | 文件 | W | 说明 |
