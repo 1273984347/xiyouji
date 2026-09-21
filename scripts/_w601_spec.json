@@ -1,0 +1,25 @@
+{
+ "batch": "W601",
+ "version": "v2.3.201",
+ "date": "2026-09-21",
+ "title": "W601 EN 站治理 — 中英页脚互链89对+内部泄露清理+subset量化（WP-G）",
+ "desc": "EN 站治理",
+ "head_entry": "2026-09-21（v2.3.201 W601 EN 站治理：配对页页脚双向语言链接 89/89（ZH 侧 English·EN 侧 中文）、en/index 内部批次记录句改写读者视角、subset 句量化 138 of 235, WP-G 验收达成）",
+ "head_sentence": "EN 站治理——双向互链89对+泄露清理+量化声明",
+ "changelog_body": "\n\n> **来源**：W590 主计划 WP-G——评审实证 ZH 数据页 0 个 EN 回链（互链不对称）、en 页正文向用户播报内部变更记录（batch adds/repaired to point）、subset 句无量化。\n> - **执行（双向互链）**：按 hreflang-pairs.json（W591 机判锚点）89 对配对页，ZH 侧页脚导航插 `English`（hreflang=en·相对路径 data/x→../en/x）、EN 侧插 `中文`（lang=zh-CN）；注入锚点为 W572 统一反馈链接（ZH 反馈/EN Feedback），-view 辅助页无该锚点者兜底 `</footer>` 前插。\n> - **执行（泄露清理）**：en/index.html「English Pages」段内部批次记录句（This batch adds…/repaired to point…E32/E33）改写为读者视角要点句；本批全站 grep batch adds|repaired to point 归零。\n> - **执行（量化声明）**：en/index subset 句补「— 138 of the site's 235 pages」（数字与 §0.3 口径一致）。\n> - **偏差声明**：可见互链落位为页脚导航而非方案原文「顶导推广」——各页顶导结构不一无统一锚点，页脚导航为 W572 已验证的全站统一注入面（偏离已登记方案 §8.3）。\n> - **验证**：ZH 侧 EN 链接 89/89、EN 侧中文链接 89/89（机判·相对路径逐对核验）；泄露 grep 归零；量化句在位；lint_links 0 broken；verify_delivery 核心全绿。\n> - **文件**：site 配对页 178 处页脚注入（89 对）、site/en/index.html、方案档落地状态、scripts/_w601_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。\n> - **状态**：已落地（本批随 W601 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.201 W601 EN 站治理（2026-09-21）**：\n  - 配对页页脚双向语言链接 89/89（复用 W572 反馈链接统一锚点）——ZH 读者首次可一键切 EN 镜像\n  - en/index 内部批次记录句改写读者视角 + subset 量化（138 of 235）",
+ "agents_note": "2026-09-21（v2.3.201 W601）EN 站治理：无 § 结构性变更（页脚双向互链 89/89·泄露清理·subset 量化·互链落位页脚为登记偏离），仅版本脚注同步",
+ "file_index_rows": [
+  "| site 配对页 178 处页脚注入（89 对） | W601 | 修改·页脚导航双向语言链接（ZH 侧 English/EN 侧 中文·W572 反馈锚点+footer 兜底） |",
+  "| site/en/index.html | W601 | 修改·English Pages 段内部批次记录句改写读者视角 + subset 量化句（138 of 235） |",
+  "| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W601 | 修改·WP-G 落地状态回写（落位页脚为登记偏离） |",
+  "| scripts/_w601_spec.json | W601 | 新建·本批级联 spec |",
+  "| CHANGELOG.md | W601 | 新增·W601 版段 + 编号规则上限 W001-W601 |",
+  "| 交接文档.md | W601 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W601 | 修改·版本行同步 v2.3.201 |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W601 | 修改·四页脚链首 prepend W601 |",
+  "| .github/workflows/README.md | W601 | 修改·旁文档同步 |",
+  "| AGENTS.md | W601 | 修改·版本脚注追加 W601 |",
+  "| scripts/output/file-index.md | W601 | 新增·W601 段（本段·batch_cascade.py 执行） |"
+ ]
+}

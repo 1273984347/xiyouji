@@ -385,7 +385,7 @@ B14 WP-L  信任字段补全
 | WP-D2 | ⏸ | — | — | — |
 | WP-E | ⏸ | — | — | — |
 | WP-F | ✅ 2026-09-21（W594） | W594 | d8e10fe | 偏差①：黄金查询由构建时 python 同款评分模拟预验证（确定性·无抽样）+ 常驻 e2e `_check_search_golden_e2e.js` 双层把守；偏差②：rum e2e 需 shim 适配 ZH/EN 双常量 + en 段候选回退加固（原实现只试 pages[0] 单候选）；偏差③：EN 索引仍含 docs 条目（中文标题·kind 标注保留）——docs 内容本为中文，符合方案「docs 条目标注 zh 原文」口径 |
-| WP-G | ⏸ | — | — | — |
+| WP-G | ✅ 2026-09-21（W601） | W601 | 待提交 | 偏差①：可见互链落位为页脚导航（W572 反馈链接 235/235 统一锚点前插），非方案原文的「顶导推广」——各页顶导结构不一无统一锚点；偏差②：内部信息泄露实测仅 en/index.html 1 处（36 篇随笔句），已改写为读者视角并补 subset 量化句（138 of 235） |
 | WP-H1 | ✅ 2026-09-21（W598） | W598 | 待提交 | 偏差：本地 LLM 基线跑未执行——xiyouji-agent-web/.env 无 CODEBUDDY_API_KEY（用户侧凭证·与 WP-A 同因），判分逻辑以 --self-check 4/4 替代性机检，凭证具备后 --limit 5 起步补基线；golden-50 由构造器数据驱动生成（真实文件名/dataset 实值·构造时全路径过磁盘验证），非人工手写 |
 | WP-H2 | ✅ 2026-09-21（W600） | W600 | 待提交 | 偏差①：Playwright 点按 e2e 未做——产生 assistant 消息需 CODEBUDDY_API_KEY（用户侧凭证·与 WP-A 同因），以「真实起服 HTTP 集成测试 5/5（首插 1/幂等 0/400 校验/summary/sqlite 直查恰 1 行）」替代核心机判，UI 点按链路待凭证补 e2e；偏差②：cost 字段单位未确认——首版仅展示 duration（秒·ms 自动换算），cost 展示待 SDK 单位确认后启用（方案原文允许该取舍）；偏差③：sessionId 入参由前端透传（DB 外键未约束 sessions 存在性——容错设计，离线历史消息仍可反馈） |
 | WP-I | ✅ 2026-09-21（W599） | W599 | 待提交 | 偏差①：单测用 node:test + tsx 运行（agent-web 无 vitest·零新增依赖·5/5 过）；偏差②：citationGuard 以 SSE 新事件 citation_guard 回写最终文本（前端 useChat 替换末文本块），替代方案原设想的文内标注 ✓——避免流式过程被改写；已链接/未核实计数随事件下发便于前端扩展 |

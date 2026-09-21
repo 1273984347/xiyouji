@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W600），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W601），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.201（2026-09-21）：W601 EN 站治理 — 中英页脚互链89对+内部泄露清理+subset量化（WP-G）
+
+> **来源**：W590 主计划 WP-G——评审实证 ZH 数据页 0 个 EN 回链（互链不对称）、en 页正文向用户播报内部变更记录（batch adds/repaired to point）、subset 句无量化。
+> - **执行（双向互链）**：按 hreflang-pairs.json（W591 机判锚点）89 对配对页，ZH 侧页脚导航插 `English`（hreflang=en·相对路径 data/x→../en/x）、EN 侧插 `中文`（lang=zh-CN）；注入锚点为 W572 统一反馈链接（ZH 反馈/EN Feedback），-view 辅助页无该锚点者兜底 `</footer>` 前插。
+> - **执行（泄露清理）**：en/index.html「English Pages」段内部批次记录句（This batch adds…/repaired to point…E32/E33）改写为读者视角要点句；本批全站 grep batch adds|repaired to point 归零。
+> - **执行（量化声明）**：en/index subset 句补「— 138 of the site's 235 pages」（数字与 §0.3 口径一致）。
+> - **偏差声明**：可见互链落位为页脚导航而非方案原文「顶导推广」——各页顶导结构不一无统一锚点，页脚导航为 W572 已验证的全站统一注入面（偏离已登记方案 §8.3）。
+> - **验证**：ZH 侧 EN 链接 89/89、EN 侧中文链接 89/89（机判·相对路径逐对核验）；泄露 grep 归零；量化句在位；lint_links 0 broken；verify_delivery 核心全绿。
+> - **文件**：site 配对页 178 处页脚注入（89 对）、site/en/index.html、方案档落地状态、scripts/_w601_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批随 W601 提交并 push origin/main）。
 ### v2.3.200（2026-09-21）：W600 Agent 反馈闭环 — 👍👎/复制/重新生成+feedback表+耗时展示（WP-H2）
 
 > **来源**：W590 主计划 WP-H2——评审实证无任何反馈按钮/端点、cost/duration 载荷前端直接丢弃。

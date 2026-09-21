@@ -11,6 +11,22 @@
 ---
 
 
+## W601 W601 EN 站治理（2026-09-21·v2.3.201）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site 配对页 178 处页脚注入（89 对） | W601 | 修改·页脚导航双向语言链接（ZH 侧 English/EN 侧 中文·W572 反馈锚点+footer 兜底） |
+| site/en/index.html | W601 | 修改·English Pages 段内部批次记录句改写读者视角 + subset 量化句（138 of 235） |
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W601 | 修改·WP-G 落地状态回写（落位页脚为登记偏离） |
+| scripts/_w601_spec.json | W601 | 新建·本批级联 spec |
+| CHANGELOG.md | W601 | 新增·W601 版段 + 编号规则上限 W001-W601 |
+| 交接文档.md | W601 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W601 | 修改·版本行同步 v2.3.201 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W601 | 修改·四页脚链首 prepend W601 |
+| .github/workflows/README.md | W601 | 修改·旁文档同步 |
+| AGENTS.md | W601 | 修改·版本脚注追加 W601 |
+| scripts/output/file-index.md | W601 | 新增·W601 段（本段·batch_cascade.py 执行） |
+
 ## W600 W600 Agent 反馈闭环（2026-09-21·v2.3.200）
 
 | 文件 | W | 说明 |
