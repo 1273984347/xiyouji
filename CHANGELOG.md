@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W602），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W603），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.203（2026-09-21）：W603 计划外·CI 热修复 — LHCI a11y 回归：brand 无障碍名+页脚链接点击目标全站补齐
+
+> **来源**：W600-W602 三批 CI Lighthouse 硬门槛红灯（Accessibility 0.920 < 0.95·dashboard.html）——本地同参数复测 0.96 且三项 fail audits 仅新增两审计，定位为 lhci 0.13.x 浮动捆绑的 lighthouse 版本前移新增审计（target-size / label-content-name-mismatch），暴露既有问题而非本批回归。
+> - **执行（brand 无障碍名）**：dashboard 等 4 页顶导 `<a class=brand>` 摘除 aria-label="详解西游记首页"——可见文本（详/解/详解西游记）为中文无空格分词，与 aria-label 全串 token 比对必判 mismatch；摘除后无障碍名即元素文本，语义无损。
+> - **执行（点击目标 ≥24px）**：页脚反馈链接 235 处（反馈 97+Feedback 138）与 W601 语言链接 217 处（English 88+中文 129）统一补 `display:inline-block;padding:6px 4px`（13px 文本+12px ≈ 25px 高）。
+> - **验证**：本地 Lighthouse（同 preset desktop·onlyCategories=accessibility）dashboard 修复前 0.920（color-contrast 66+target-size 1+label-mismatch 1）→ 修复后 0.96（仅剩存量 color-contrast——W571 tokens 设计批登记域）；verify_delivery 核心全绿；CSP 无脚本变更 0 漂移。
+> - **文件**：site 235 页（brand 4 处 aria-label 摘除+反馈/Feedback/English/中文 四类链接 padding）、方案档 W603 行、scripts/_w603_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批随 W603 提交并 push origin/main）。
 ### v2.3.202（2026-09-21）：W602 A1 信任字段补全 — 100篇元信息四字段+引文机检空真登记（WP-L）
 
 > **来源**：W590 主计划 WP-L——评审实证 A1 100 篇（内容质量核心盘）仅含核验状态行、缺生成来源/模型/日期三字段，披露框架覆盖偏薄。
