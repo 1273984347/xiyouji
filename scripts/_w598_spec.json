@@ -1,0 +1,28 @@
+{
+ "batch": "W598",
+ "version": "v2.3.198",
+ "date": "2026-09-21",
+ "title": "W598 Agent 黄金评估集 — golden-50+校验器+判分运行器+CI validate（WP-H1）",
+ "desc": "Agent 黄金评估集",
+ "head_entry": "2026-09-21（v2.3.198 W598 Agent 黄金评估集：evals/golden-50.jsonl 50 条（逐回15/人物10/主题10/数据10/工程5·构造时全路径磁盘验证）、validate.mjs 50/50、run_eval 判分器自检 4/4、CI agent-web-build 挂 validate, WP-H1 验收达成）",
+ "head_sentence": "Agent 黄金评估集——golden-50+校验器+判分运行器",
+ "changelog_body": "\n\n> **来源**：W590 主计划 WP-H1——评审实证全仓无任何评估集/回答质量回归手段，AI 产品零质量基线。\n> - **执行（评估集）**：新建 xiyouji-agent-web/evals/golden-50.jsonl——构造器数据驱动生成（章节 15 取 docs/01 真实文件名、人物 10/主题 10 取 docs/02-03 实际文件、数据查询 10 的 must_mention 数值实取 dataset/*.json、工程操作 5 对应真实脚本），**构造时全路径过磁盘存在性验证——评估集自身不允许幻觉**。\n> - **执行（校验器）**：evals/validate.mjs——50 条/分类配比/id 唯一/schema 完整/路径磁盘真实，无 LLM 可进 CI；实测 50/50 过。\n> - **执行（运行器）**：evals/run_eval.mjs——三模式（--self-check 判分器自检 4/4 过：正反斜杠路径/缺路径拒判/forbid 拒判；--limit N；全量真跑），判分三规则=expect 路径全提及且磁盘存在+must_mention 全命中+forbid 零命中；输出 evals/results-<日期>.json；基线规则=首跑仅建基线·连续两批下降 ≥10pp 告警。\n> - **执行（CI）**：ci.yml agent-web-build 增 validate 步骤（无 LLM 不跑真评估·成本稳定性考量）。\n> - **偏差声明**：本地 LLM 基线跑未执行——xiyouji-agent-web/.env 无 CODEBUDDY_API_KEY（用户侧凭证·与 WP-A 同因），凭证具备后 `--limit 5` 起步补基线。\n> - **验证**：validate 50/50；self-check 4/4；路径真实性 100%；ci.yml 语法随 CI 运行确认。\n> - **文件**：xiyouji-agent-web/evals/（golden-50.jsonl、validate.mjs、run_eval.mjs）、.github/workflows/ci.yml、xiyouji-agent-web/README.md、方案档落地状态、scripts/_w598_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。\n> - **状态**：已落地（本批随 W598 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.198 W598 Agent 黄金评估集（2026-09-21）**：\n  - evals/ 三件套落地：golden-50（构造时全路径磁盘验证·防评估集自身幻觉）+ validate.mjs（50/50·CI 挂载·无 LLM）+ run_eval.mjs（--self-check 4/4·--limit·全量真跑三模式）\n  - 判分三规则机判：expect 路径提及且存在+must_mention 全命中+forbid 零命中；LLM 基线待用户凭证",
+ "agents_note": "2026-09-21（v2.3.198 W598）Agent 黄金评估集：无 § 结构性变更（evals 三件套·CI validate 挂载·50/50+4/4 机检·LLM 基线待凭证），仅版本脚注同步",
+ "file_index_rows": [
+  "| xiyouji-agent-web/evals/golden-50.jsonl | W598 | 新建·50 条黄金问答（chapter15/character10/theme10/dataset10/ops5·构造时全路径磁盘验证） |",
+  "| xiyouji-agent-web/evals/validate.mjs | W598 | 新建·结构与真实性校验器（无 LLM·CI agent-web-build 挂载·50/50 实测） |",
+  "| xiyouji-agent-web/evals/run_eval.mjs | W598 | 新建·评估运行器（--self-check 4/4/--limit/全量·三规则机判·results 输出） |",
+  "| .github/workflows/ci.yml | W598 | 修改·agent-web-build 增 golden evals validate 步骤 |",
+  "| xiyouji-agent-web/README.md | W598 | 修改·evals 使用文档章节 |",
+  "| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W598 | 修改·WP-H1 落地状态回写 |",
+  "| scripts/_w598_spec.json | W598 | 新建·本批级联 spec |",
+  "| CHANGELOG.md | W598 | 新增·W598 版段 + 编号规则上限 W001-W598 |",
+  "| 交接文档.md | W598 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W598 | 修改·版本行同步 v2.3.198 |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W598 | 修改·四页脚链首 prepend W598 |",
+  "| .github/workflows/README.md | W598 | 修改·旁文档同步 |",
+  "| AGENTS.md | W598 | 修改·版本脚注追加 W598 |",
+  "| scripts/output/file-index.md | W598 | 新增·W598 段（本段·batch_cascade.py 执行） |"
+ ]
+}

@@ -373,6 +373,9 @@ jobs:
       - name: Build (tsc -b && vite build)
         run: npm --prefix xiyouji-agent-web run build
 
+      - name: Golden evals validate (W598·schema+路径真实性·无 LLM)
+        run: node xiyouji-agent-web/evals/validate.mjs
+
       - name: Upload build artifact
         if: always()
         uses: actions/upload-artifact@v7

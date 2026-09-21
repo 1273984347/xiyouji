@@ -1,0 +1,50 @@
+{"id": "chapter-001", "category": "chapter", "question": "《西游记》001 回「根育孕源流出」的逐回解读讲了什么要点？给出对应文档路径。", "expect_source_paths": ["docs/01-全书逐回解读/第001回-灵根育孕源流出.md"], "must_mention": ["根育孕源"], "forbid": ["我猜", "大概吧"]}
+{"id": "chapter-002", "category": "chapter", "question": "《西游记》002 回「彻菩提真妙理」的逐回解读讲了什么要点？给出对应文档路径。", "expect_source_paths": ["docs/01-全书逐回解读/第002回-悟彻菩提真妙理.md"], "must_mention": ["彻菩提真"], "forbid": ["我猜", "大概吧"]}
+{"id": "chapter-003", "category": "chapter", "question": "《西游记》003 回「海千山皆拱伏」的逐回解读讲了什么要点？给出对应文档路径。", "expect_source_paths": ["docs/01-全书逐回解读/第003回-四海千山皆拱伏.md"], "must_mention": ["海千山皆"], "forbid": ["我猜", "大概吧"]}
+{"id": "chapter-004", "category": "chapter", "question": "《西游记》007 回「卦炉中逃大圣」的逐回解读讲了什么要点？给出对应文档路径。", "expect_source_paths": ["docs/01-全书逐回解读/第007回-八卦炉中逃大圣.md"], "must_mention": ["卦炉中逃"], "forbid": ["我猜", "大概吧"]}
+{"id": "chapter-005", "category": "chapter", "question": "《西游记》012 回「奘秉诚建大会观音显象化金蝉」的逐回解读讲了什么要点？给出对应文档路径。", "expect_source_paths": ["docs/01-全书逐回解读/第012回-玄奘秉诚建大会观音显象化金蝉.md"], "must_mention": ["奘秉诚建"], "forbid": ["我猜", "大概吧"]}
+{"id": "chapter-006", "category": "chapter", "question": "《西游记》027 回「魔三戏唐三藏」的逐回解读讲了什么要点？给出对应文档路径。", "expect_source_paths": ["docs/01-全书逐回解读/第027回-尸魔三戏唐三藏.md"], "must_mention": ["魔三戏唐"], "forbid": ["我猜", "大概吧"]}
+{"id": "chapter-007", "category": "chapter", "question": "《西游记》045 回「清观大圣留名」的逐回解读讲了什么要点？给出对应文档路径。", "expect_source_paths": ["docs/01-全书逐回解读/第045回-三清观大圣留名.md"], "must_mention": ["清观大圣"], "forbid": ["我猜", "大概吧"]}
+{"id": "chapter-008", "category": "chapter", "question": "《西游记》059 回「三藏路阻火焰山」的逐回解读讲了什么要点？给出对应文档路径。", "expect_source_paths": ["docs/01-全书逐回解读/第059回-唐三藏路阻火焰山.md"], "must_mention": ["三藏路阻"], "forbid": ["我猜", "大概吧"]}
+{"id": "chapter-009", "category": "chapter", "question": "《西游记》077 回「魔欺本性一体拜真如」的逐回解读讲了什么要点？给出对应文档路径。", "expect_source_paths": ["docs/01-全书逐回解读/第077回-群魔欺本性一体拜真如.md"], "must_mention": ["魔欺本性"], "forbid": ["我猜", "大概吧"]}
+{"id": "chapter-010", "category": "chapter", "question": "《西游记》081 回「海寺心猿知怪黑松林三众寻师」的逐回解读讲了什么要点？给出对应文档路径。", "expect_source_paths": ["docs/01-全书逐回解读/第081回-镇海寺心猿知怪黑松林三众寻师.md"], "must_mention": ["海寺心猿"], "forbid": ["我猜", "大概吧"]}
+{"id": "chapter-011", "category": "chapter", "question": "《西游记》091 回「平府元夜观灯玄英洞唐僧供状」的逐回解读讲了什么要点？给出对应文档路径。", "expect_source_paths": ["docs/01-全书逐回解读/第091回-金平府元夜观灯玄英洞唐僧供状.md"], "must_mention": ["平府元夜"], "forbid": ["我猜", "大概吧"]}
+{"id": "chapter-012", "category": "chapter", "question": "《西游记》094 回「僧宴乐御花园一怪空怀情欲喜」的逐回解读讲了什么要点？给出对应文档路径。", "expect_source_paths": ["docs/01-全书逐回解读/第094回-四僧宴乐御花园一怪空怀情欲喜.md"], "must_mention": ["僧宴乐御"], "forbid": ["我猜", "大概吧"]}
+{"id": "chapter-013", "category": "chapter", "question": "《西游记》098 回「熟马驯方脱壳功成行满见真如」的逐回解读讲了什么要点？给出对应文档路径。", "expect_source_paths": ["docs/01-全书逐回解读/第098回-猿熟马驯方脱壳功成行满见真如.md"], "must_mention": ["熟马驯方"], "forbid": ["我猜", "大概吧"]}
+{"id": "chapter-014", "category": "chapter", "question": "《西游记》099 回「九数完魔刬尽三三行满道归根」的逐回解读讲了什么要点？给出对应文档路径。", "expect_source_paths": ["docs/01-全书逐回解读/第099回-九九数完魔刬尽三三行满道归根.md"], "must_mention": ["九数完魔"], "forbid": ["我猜", "大概吧"]}
+{"id": "chapter-015", "category": "chapter", "question": "《西游记》100 回「回东土五圣成真」的逐回解读讲了什么要点？给出对应文档路径。", "expect_source_paths": ["docs/01-全书逐回解读/第100回-径回东土五圣成真.md"], "must_mention": ["回东土五"], "forbid": ["我猜", "大概吧"]}
+{"id": "character-016", "category": "character", "question": "「孙悟空」在《西游记》里的人物形象与解读要点是什么？引用项目内文档。", "expect_source_paths": ["docs/02-人物深度分析/孙悟空.md"], "must_mention": ["孙悟空"], "forbid": []}
+{"id": "character-017", "category": "character", "question": "「唐僧」在《西游记》里的人物形象与解读要点是什么？引用项目内文档。", "expect_source_paths": ["docs/02-人物深度分析/唐僧.md"], "must_mention": ["唐僧"], "forbid": []}
+{"id": "character-018", "category": "character", "question": "「猪八戒」在《西游记》里的人物形象与解读要点是什么？引用项目内文档。", "expect_source_paths": ["docs/02-人物深度分析/猪八戒.md"], "must_mention": ["猪八戒"], "forbid": []}
+{"id": "character-019", "category": "character", "question": "「白龙马」在《西游记》里的人物形象与解读要点是什么？引用项目内文档。", "expect_source_paths": ["docs/02-人物深度分析/白龙马.md"], "must_mention": ["白龙马"], "forbid": []}
+{"id": "character-020", "category": "character", "question": "「白骨精」在《西游记》里的人物形象与解读要点是什么？引用项目内文档。", "expect_source_paths": ["docs/02-人物深度分析/白骨精.md"], "must_mention": ["白骨精"], "forbid": []}
+{"id": "character-021", "category": "character", "question": "「白象精」在《西游记》里的人物形象与解读要点是什么？引用项目内文档。", "expect_source_paths": ["docs/02-人物深度分析/白象精.md"], "must_mention": ["白象精"], "forbid": []}
+{"id": "character-022", "category": "character", "question": "「红孩儿」在《西游记》里的人物形象与解读要点是什么？引用项目内文档。", "expect_source_paths": ["docs/02-人物深度分析/红孩儿.md"], "must_mention": ["红孩儿"], "forbid": []}
+{"id": "character-023", "category": "character", "question": "「牛魔王」在《西游记》里的人物形象与解读要点是什么？引用项目内文档。", "expect_source_paths": ["docs/02-人物深度分析/牛魔王.md"], "must_mention": ["牛魔王"], "forbid": []}
+{"id": "character-024", "category": "character", "question": "「铁扇公主」在《西游记》里的人物形象与解读要点是什么？引用项目内文档。", "expect_source_paths": ["docs/02-人物深度分析/铁扇公主.md"], "must_mention": ["铁扇公主"], "forbid": []}
+{"id": "character-025", "category": "character", "question": "「严嵩与牛魔王对照专题」在《西游记》里的人物形象与解读要点是什么？引用项目内文档。", "expect_source_paths": ["docs/02-人物深度分析/严嵩与牛魔王对照专题.md"], "must_mention": ["严嵩与牛魔王对照专题"], "forbid": []}
+{"id": "theme-026", "category": "theme", "question": "项目里关于「八十一难专题」的主题专题文章说了什么？给出可对照路径。", "expect_source_paths": ["docs/03-主题与情节专题/八十一难专题.md"], "must_mention": ["八十一难"], "forbid": []}
+{"id": "theme-027", "category": "theme", "question": "项目里关于「八十一难结构学专题」的主题专题文章说了什么？给出可对照路径。", "expect_source_paths": ["docs/03-主题与情节专题/八十一难结构学专题.md"], "must_mention": ["八十一难"], "forbid": []}
+{"id": "theme-028", "category": "theme", "question": "项目里关于「八十一难风险管理学专题」的主题专题文章说了什么？给出可对照路径。", "expect_source_paths": ["docs/03-主题与情节专题/八十一难风险管理学专题.md"], "must_mention": ["八十一难"], "forbid": []}
+{"id": "theme-029", "category": "theme", "question": "项目里关于「比较文学专题」的主题专题文章说了什么？给出可对照路径。", "expect_source_paths": ["docs/03-主题与情节专题/比较文学专题.md"], "must_mention": ["比较文学"], "forbid": []}
+{"id": "theme-030", "category": "theme", "question": "项目里关于「大闹天宫英雄还是悲剧」的主题专题文章说了什么？给出可对照路径。", "expect_source_paths": ["docs/03-主题与情节专题/大闹天宫-英雄还是悲剧.md"], "must_mention": ["大闹天宫"], "forbid": []}
+{"id": "theme-031", "category": "theme", "question": "项目里关于「兵器的自我修养专题」的主题专题文章说了什么？给出可对照路径。", "expect_source_paths": ["docs/03-主题与情节专题/兵器的自我修养专题.md"], "must_mention": ["兵器的自"], "forbid": []}
+{"id": "theme-032", "category": "theme", "question": "项目里关于「不可靠叙述专题」的主题专题文章说了什么？给出可对照路径。", "expect_source_paths": ["docs/03-主题与情节专题/不可靠叙述专题.md"], "must_mention": ["不可靠叙"], "forbid": []}
+{"id": "theme-033", "category": "theme", "question": "项目里关于「创伤叙事学专题」的主题专题文章说了什么？给出可对照路径。", "expect_source_paths": ["docs/03-主题与情节专题/创伤叙事学专题.md"], "must_mention": ["创伤叙事"], "forbid": []}
+{"id": "theme-034", "category": "theme", "question": "项目里关于「暗数据遗忘者列传」的主题专题文章说了什么？给出可对照路径。", "expect_source_paths": ["docs/03-主题与情节专题/暗数据遗忘者列传.md"], "must_mention": ["暗数据遗"], "forbid": []}
+{"id": "theme-035", "category": "theme", "question": "项目里关于「白龙马沉默龙的真相」的主题专题文章说了什么？给出可对照路径。", "expect_source_paths": ["docs/03-主题与情节专题/白龙马-沉默龙的真相.md"], "must_mention": ["白龙马沉"], "forbid": []}
+{"id": "dataset-036", "category": "dataset", "question": "八十一难数据集总共记录了多少难？请查 dataset/81-hardships.json 后回答数值。", "expect_source_paths": ["dataset/81-hardships.json"], "must_mention": ["81"], "forbid": []}
+{"id": "dataset-037", "category": "dataset", "question": "章节数据集覆盖了多少回？请查 dataset/chapters-metadata.json 后回答数值。", "expect_source_paths": ["dataset/chapters-metadata.json"], "must_mention": ["100"], "forbid": []}
+{"id": "dataset-038", "category": "dataset", "question": "术语表数据集里有多少个术语组？请查 dataset/glossary.json 后回答数值。", "expect_source_paths": ["dataset/glossary.json"], "must_mention": ["6"], "forbid": []}
+{"id": "dataset-039", "category": "dataset", "question": "dashboard 数据集顶层有多少个字段组？请查 dataset/dashboard.json 后回答数值。", "expect_source_paths": ["dataset/dashboard.json"], "must_mention": ["2"], "forbid": []}
+{"id": "dataset-040", "category": "dataset", "question": "dataset/emotional-heatmap.json 里「meta」字段是什么内容？读取该文件后概述。", "expect_source_paths": ["dataset/emotional-heatmap.json"], "must_mention": ["meta"], "forbid": []}
+{"id": "dataset-041", "category": "dataset", "question": "dataset/dashboard.json 里「meta」字段是什么内容？读取该文件后概述。", "expect_source_paths": ["dataset/dashboard.json"], "must_mention": ["meta"], "forbid": []}
+{"id": "dataset-042", "category": "dataset", "question": "dataset/chapter-structure-graph.json 里「meta」字段是什么内容？读取该文件后概述。", "expect_source_paths": ["dataset/chapter-structure-graph.json"], "must_mention": ["meta"], "forbid": []}
+{"id": "dataset-043", "category": "dataset", "question": "dataset/criticism-history.json 里「summary」字段是什么内容？读取该文件后概述。", "expect_source_paths": ["dataset/criticism-history.json"], "must_mention": ["summary"], "forbid": []}
+{"id": "dataset-044", "category": "dataset", "question": "dataset/journey-geo-semiotics.json 里「nodes」字段是什么内容？读取该文件后概述。", "expect_source_paths": ["dataset/journey-geo-semiotics.json"], "must_mention": ["nodes"], "forbid": []}
+{"id": "dataset-045", "category": "dataset", "question": "dataset/concept-device.json 里「nav」字段是什么内容？读取该文件后概述。", "expect_source_paths": ["dataset/concept-device.json"], "must_mention": ["nav"], "forbid": []}
+{"id": "ops-046", "category": "ops", "question": "如何对全仓库做站内死链校验？应运行项目里哪个脚本？", "expect_source_paths": ["scripts/lint_links.py"], "must_mention": ["lint_links"], "forbid": []}
+{"id": "ops-047", "category": "ops", "question": "项目的交付门禁入口脚本是哪个？它大约包含多少道检查？", "expect_source_paths": ["scripts/verify_delivery.py"], "must_mention": ["verify_delivery"], "forbid": []}
+{"id": "ops-048", "category": "ops", "question": "项目里防 AI 幻觉引文的核验脚本是哪个？", "expect_source_paths": ["scripts/check_citations.py"], "must_mention": ["check_citations"], "forbid": []}
+{"id": "ops-049", "category": "ops", "question": "项目提供了哪些 MCP 工具？定义在哪个文件？", "expect_source_paths": ["mcp-server/xiyouji_mcp.py"], "must_mention": ["xiyouji_mcp"], "forbid": []}
+{"id": "ops-050", "category": "ops", "question": "批量运行 A-AH 全部分析的入口脚本是什么？", "expect_source_paths": ["scripts/run_all.py"], "must_mention": ["run_all"], "forbid": []}

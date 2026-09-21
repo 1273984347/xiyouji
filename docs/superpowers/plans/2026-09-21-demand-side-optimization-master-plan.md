@@ -386,7 +386,7 @@ B14 WP-L  信任字段补全
 | WP-E | ⏸ | — | — | — |
 | WP-F | ✅ 2026-09-21（W594） | W594 | d8e10fe | 偏差①：黄金查询由构建时 python 同款评分模拟预验证（确定性·无抽样）+ 常驻 e2e `_check_search_golden_e2e.js` 双层把守；偏差②：rum e2e 需 shim 适配 ZH/EN 双常量 + en 段候选回退加固（原实现只试 pages[0] 单候选）；偏差③：EN 索引仍含 docs 条目（中文标题·kind 标注保留）——docs 内容本为中文，符合方案「docs 条目标注 zh 原文」口径 |
 | WP-G | ⏸ | — | — | — |
-| WP-H1 | ⏸ | — | — | — |
+| WP-H1 | ✅ 2026-09-21（W598） | W598 | 待提交 | 偏差：本地 LLM 基线跑未执行——xiyouji-agent-web/.env 无 CODEBUDDY_API_KEY（用户侧凭证·与 WP-A 同因），判分逻辑以 --self-check 4/4 替代性机检，凭证具备后 --limit 5 起步补基线；golden-50 由构造器数据驱动生成（真实文件名/dataset 实值·构造时全路径过磁盘验证），非人工手写 |
 | WP-H2 | ⏸ | — | — | — |
 | WP-I | ⏸ | — | — | — |
 | WP-J | ✅ 2026-09-21（W596） | W596 | e0ee2a9 | 偏差①：Docker 镜像构建未完成验证——本机 Docker Hub 拉取 node:22-alpine 受限且用户指示「先不用 Docker」，Dockerfile/.dockerignore/DEPLOYMENT.md 已入库，条件具备后补验（方案口径：如实标注禁假收敛）；偏差②：`/api/health` 健康探针为既有路由（102 行实测），HEALTHCHECK 合法；偏差③：脏路径活面清零含级联脚本 winpath 根因修复（旧值每批续写 workflows README·修文档不改脚本必回潮）；豁免域 21 文件登记（CHANGELOG 历史段禁改/.workbuddy 会话记忆/docs/_dev/历史方案档/scripts/output 产物/检测器 `_audit_agentweb_baseline.py`（搜索模式即旧路径·设计保留）/gitignore 产物 index.js） |
