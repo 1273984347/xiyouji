@@ -1,0 +1,24 @@
+{
+ "batch": "W602",
+ "version": "v2.3.202",
+ "date": "2026-09-21",
+ "title": "W602 A1 信任字段补全 — 100篇元信息四字段+引文机检空真登记（WP-L）",
+ "desc": "A1 信任字段补全",
+ "head_entry": "2026-09-21（v2.3.202 W602 A1 信任字段补全：100 篇逐回解读补生成来源/生成模型（未记录）/生成日期（git 首次提交日机器取值）三字段、核验状态受空真防护保持未核验（A1 实测 0 条引文行）, WP-L 验收达成）",
+ "head_sentence": "A1 信任字段补全——100篇元信息四字段+空真登记",
+ "changelog_body": "\n\n> **来源**：W590 主计划 WP-L——评审实证 A1 100 篇（内容质量核心盘）仅含核验状态行、缺生成来源/模型/日期三字段，披露框架覆盖偏薄。\n> - **执行**：100 篇逐回解读在既有核验状态行前补三字段——生成来源=「初始批量导入（W602 溯源回填·首次提交 <git %as 日期>）」（机器取值非编造）、生成模型=「未记录」（合法值）、生成日期=git 首次提交日期。\n> - **偏差声明**：核验状态升级为 no-op——check_citations --dir docs/01 实测 0 条引文行，受「0 条引文禁止标引文已核验」空真防护（文档规范 §4.6），100 篇保持未核验并如实登记；其余 511 篇不批量补生成模型的否决维持（基线冻结冻结扰动风险大于收益）。\n> - **验证**：grep -L 生成日期/生成模型 均 0；核验状态 100/100 在位；check_citations 101 文件过；verify_delivery 核心全绿。\n> - **文件**：docs/01-全书逐回解读/ 100 篇、方案档落地状态、scripts/_w602_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。\n> - **状态**：已落地（本批随 W602 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.202 W602 A1 信任字段补全（2026-09-21）**：\n  - A1 100 篇补生成来源/生成模型（未记录）/生成日期（git 首次提交日）三字段——披露框架覆盖内容核心盘\n  - 核验状态空真防护如实登记：A1 0 条引文行·全部保持未核验",
+ "agents_note": "2026-09-21（v2.3.202 W602）A1 信任字段补全：无 § 结构性变更（100 篇三字段回填·git 日期机器取值·核验状态空真防护登记·511 篇否决维持），仅版本脚注同步",
+ "file_index_rows": [
+  "| docs/01-全书逐回解读/ 100 篇 | W602 | 修改·补生成来源/生成模型/生成日期三字段（日期取 git 首次提交·核验状态空真防护保持未核验） |",
+  "| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W602 | 修改·WP-L 落地状态回写 |",
+  "| scripts/_w602_spec.json | W602 | 新建·本批级联 spec |",
+  "| CHANGELOG.md | W602 | 新增·W602 版段 + 编号规则上限 W001-W602 |",
+  "| 交接文档.md | W602 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W602 | 修改·版本行同步 v2.3.202 |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W602 | 修改·四页脚链首 prepend W602 |",
+  "| .github/workflows/README.md | W602 | 修改·旁文档同步 |",
+  "| AGENTS.md | W602 | 修改·版本脚注追加 W602 |",
+  "| scripts/output/file-index.md | W602 | 新增·W602 段（本段·batch_cascade.py 执行） |"
+ ]
+}

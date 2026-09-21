@@ -11,6 +11,21 @@
 ---
 
 
+## W602 W602 A1 信任字段补全（2026-09-21·v2.3.202）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/01-全书逐回解读/ 100 篇 | W602 | 修改·补生成来源/生成模型/生成日期三字段（日期取 git 首次提交·核验状态空真防护保持未核验） |
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W602 | 修改·WP-L 落地状态回写 |
+| scripts/_w602_spec.json | W602 | 新建·本批级联 spec |
+| CHANGELOG.md | W602 | 新增·W602 版段 + 编号规则上限 W001-W602 |
+| 交接文档.md | W602 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W602 | 修改·版本行同步 v2.3.202 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W602 | 修改·四页脚链首 prepend W602 |
+| .github/workflows/README.md | W602 | 修改·旁文档同步 |
+| AGENTS.md | W602 | 修改·版本脚注追加 W602 |
+| scripts/output/file-index.md | W602 | 新增·W602 段（本段·batch_cascade.py 执行） |
+
 ## W601 W601 EN 站治理（2026-09-21·v2.3.201）
 
 | 文件 | W | 说明 |
