@@ -11,6 +11,21 @@
 ---
 
 
+## W603 W603 计划外·CI 热修复（2026-09-21·v2.3.203）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site 235 页 | W603 | 修改·brand aria-label 摘除（4 页）+页脚反馈/Feedback/English/中文链接 padding 补齐（点击目标 ≥24px） |
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W603 | 修改·W603 计划外热修复行登记 + WP-L 哈希补填 |
+| scripts/_w603_spec.json | W603 | 新建·本批级联 spec |
+| CHANGELOG.md | W603 | 新增·W603 版段 + 编号规则上限 W001-W603 |
+| 交接文档.md | W603 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W603 | 修改·版本行同步 v2.3.203 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W603 | 修改·四页脚链首 prepend W603 |
+| .github/workflows/README.md | W603 | 修改·旁文档同步 |
+| AGENTS.md | W603 | 修改·版本脚注追加 W603 |
+| scripts/output/file-index.md | W603 | 新增·W603 段（本段·batch_cascade.py 执行） |
+
 ## W602 W602 A1 信任字段补全（2026-09-21·v2.3.202）
 
 | 文件 | W | 说明 |
