@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W593），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W594），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.194（2026-09-21）：W594 搜索质量与搜索词埋点 — kw加权+黄金查询30/30+中英双索引+上报双通道（WP-F）
+
+> **来源**：W590 主计划 WP-F——评审实证搜索纯子串匹配无分词加权、en 页共用中文索引、搜索词零上报（读者诉求信号白白流失）。
+> - **执行（索引增强）**：_gen_search_index.py 每条目增 kw 字段——jieba 中文切词/英文词干拆分（≤12 个·jieba 缺失降级逐字不失败）；中英双索引分离：docs 773 条两份共用、site 页面 zh 版收 95 页/en 版收 138 页（zh 319KB/en 333KB 均≤500KB 预算）；常量名区分为 SITE_SEARCH_INDEX_ZH/_EN。
+> - **执行（前端评分）**：两搜索页 renderOffline 增 kw 加权——query 整体命中任一 kw 或 kw 为 query 前缀时 +4（原 title+5/category+2/snippet+1 不变）；doSearch 增上报双通道——goatcounter.count({path:'search',title:'q: '+q.slice(0,80),event:true})（对齐 rum.js 318-326 既有形态）+ localStorage xiyouji_search_log（FIFO 200 条·file:// 兜底）。
+> - **执行（黄金查询回归）**：scripts/output/search-golden.json 30 条（zh 20+en 10）构建时经 python 同款评分模拟逐条预验证（确定性）；新建常驻 scripts/_check_search_golden_e2e.js 真浏览器复检（--quick 冒烟模式）。
+> - **执行（e2e 适配）**：_check_search_rum_e2e.js SEARCH_IDX shim ×3 适配双常量（const 不挂 window 的坑·typeof 词法探测+null 容缺）；en 段单候选改候选回退（原只试 pages[0] 全索引唯一·索引扩容后脆弱）。
+> - **验证**：黄金查询 e2e 30/30；rum e2e 11/11；上报冒烟——mock 下 count 恰 1 次（path=search·event=true）+xiyouji_search_log 写入+结果 21 行；CSP 重生成 0 漂移；ruff 过；verify_delivery 核心全绿。
+> - **文件**：scripts/_gen_search_index.py、scripts/_check_search_rum_e2e.js、scripts/_check_search_golden_e2e.js（新建）、scripts/output/search-golden.json（新建）、site/data/search.html、site/en/search.html、方案档落地状态、scripts/_w594_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批随 W594 提交并 push origin/main）。
 ### v2.3.193（2026-09-21）：W593 docs 站内阅读器试点 — A1 100回站内化+搜索索引reader映射（WP-D1）
 
 > **来源**：W590 主计划 WP-D1——评审实证 615 篇内容读者必须跳 GitHub blob 阅读（搜索索引 doc 条目直指 blob/main/docs）、全站无上一篇/下一篇连载导航。

@@ -1,0 +1,28 @@
+{
+ "batch": "W594",
+ "version": "v2.3.194",
+ "date": "2026-09-21",
+ "title": "W594 搜索质量与搜索词埋点 — kw加权+黄金查询30/30+中英双索引+上报双通道（WP-F）",
+ "desc": "搜索质量与搜索词埋点",
+ "head_entry": "2026-09-21（v2.3.194 W594 搜索质量与搜索词埋点：jieba kw 加权+4、黄金查询 e2e 30/30、中英双索引分离（zh 319KB/en 333KB）、搜索词上报双通道（GoatCounter event+localStorage）, WP-F 验收达成）",
+ "head_sentence": "搜索质量与搜索词埋点——kw加权+黄金查询+双索引+上报",
+ "changelog_body": "\n\n> **来源**：W590 主计划 WP-F——评审实证搜索纯子串匹配无分词加权、en 页共用中文索引、搜索词零上报（读者诉求信号白白流失）。\n> - **执行（索引增强）**：_gen_search_index.py 每条目增 kw 字段——jieba 中文切词/英文词干拆分（≤12 个·jieba 缺失降级逐字不失败）；中英双索引分离：docs 773 条两份共用、site 页面 zh 版收 95 页/en 版收 138 页（zh 319KB/en 333KB 均≤500KB 预算）；常量名区分为 SITE_SEARCH_INDEX_ZH/_EN。\n> - **执行（前端评分）**：两搜索页 renderOffline 增 kw 加权——query 整体命中任一 kw 或 kw 为 query 前缀时 +4（原 title+5/category+2/snippet+1 不变）；doSearch 增上报双通道——goatcounter.count({path:'search',title:'q: '+q.slice(0,80),event:true})（对齐 rum.js 318-326 既有形态）+ localStorage xiyouji_search_log（FIFO 200 条·file:// 兜底）。\n> - **执行（黄金查询回归）**：scripts/output/search-golden.json 30 条（zh 20+en 10）构建时经 python 同款评分模拟逐条预验证（确定性）；新建常驻 scripts/_check_search_golden_e2e.js 真浏览器复检（--quick 冒烟模式）。\n> - **执行（e2e 适配）**：_check_search_rum_e2e.js SEARCH_IDX shim ×3 适配双常量（const 不挂 window 的坑·typeof 词法探测+null 容缺）；en 段单候选改候选回退（原只试 pages[0] 全索引唯一·索引扩容后脆弱）。\n> - **验证**：黄金查询 e2e 30/30；rum e2e 11/11；上报冒烟——mock 下 count 恰 1 次（path=search·event=true）+xiyouji_search_log 写入+结果 21 行；CSP 重生成 0 漂移；ruff 过；verify_delivery 核心全绿。\n> - **文件**：scripts/_gen_search_index.py、scripts/_check_search_rum_e2e.js、scripts/_check_search_golden_e2e.js（新建）、scripts/output/search-golden.json（新建）、site/data/search.html、site/en/search.html、方案档落地状态、scripts/_w594_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。\n> - **状态**：已落地（本批随 W594 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.194 W594 搜索质量与搜索词埋点（2026-09-21）**：\n  - kw 离线切词加权（jieba/词干·+4）+ 中英双索引分离（docs 共用·页面按语言归侧）+ 黄金查询 30 条常驻回归（构建时模拟预验证+真浏览器 e2e 双层）\n  - 搜索词上报双通道（GoatCounter search event + localStorage 200 上限）——读者搜索诉求首次可回收",
+ "agents_note": "2026-09-21（v2.3.194 W594）搜索质量与搜索词埋点：无 § 结构性变更（kw 加权+4·双索引分离·黄金查询 30/30·上报双通道·rum e2e 适配 11/11），仅版本脚注同步",
+ "file_index_rows": [
+  "| scripts/_gen_search_index.py | W594 | 修改·kw 字段（jieba/词干≤12·缺失降级）+ 中英双索引分离 + 常量名 ZH/EN |",
+  "| scripts/_check_search_golden_e2e.js | W594 | 新建·黄金查询常驻 e2e（30 条·--quick 冒烟模式） |",
+  "| scripts/output/search-golden.json | W594 | 新建·黄金查询集（zh20+en10·构建时模拟预验证） |",
+  "| scripts/_check_search_rum_e2e.js | W594 | 修改·SEARCH_IDX shim ×3 适配双常量 + en 段候选回退加固 |",
+  "| site/data/search.html / site/en/search.html | W594 | 修改·kw 评分 +4、doSearch 上报双通道、索引重嵌（双常量） |",
+  "| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W594 | 修改·WP-F 落地状态回写（3 项偏差） |",
+  "| scripts/_w594_spec.json | W594 | 新建·本批级联 spec |",
+  "| CHANGELOG.md | W594 | 新增·W594 版段 + 编号规则上限 W001-W594 |",
+  "| 交接文档.md | W594 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W594 | 修改·版本行同步 v2.3.194 |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W594 | 修改·四页脚链首 prepend W594 |",
+  "| .github/workflows/README.md | W594 | 修改·旁文档同步 |",
+  "| AGENTS.md | W594 | 修改·版本脚注追加 W594 |",
+  "| scripts/output/file-index.md | W594 | 新增·W594 段（本段·batch_cascade.py 执行） |"
+ ]
+}

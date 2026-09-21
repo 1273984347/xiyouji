@@ -11,6 +11,25 @@
 ---
 
 
+## W594 W594 搜索质量与搜索词埋点（2026-09-21·v2.3.194）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_gen_search_index.py | W594 | 修改·kw 字段（jieba/词干≤12·缺失降级）+ 中英双索引分离 + 常量名 ZH/EN |
+| scripts/_check_search_golden_e2e.js | W594 | 新建·黄金查询常驻 e2e（30 条·--quick 冒烟模式） |
+| scripts/output/search-golden.json | W594 | 新建·黄金查询集（zh20+en10·构建时模拟预验证） |
+| scripts/_check_search_rum_e2e.js | W594 | 修改·SEARCH_IDX shim ×3 适配双常量 + en 段候选回退加固 |
+| site/data/search.html / site/en/search.html | W594 | 修改·kw 评分 +4、doSearch 上报双通道、索引重嵌（双常量） |
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W594 | 修改·WP-F 落地状态回写（3 项偏差） |
+| scripts/_w594_spec.json | W594 | 新建·本批级联 spec |
+| CHANGELOG.md | W594 | 新增·W594 版段 + 编号规则上限 W001-W594 |
+| 交接文档.md | W594 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W594 | 修改·版本行同步 v2.3.194 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W594 | 修改·四页脚链首 prepend W594 |
+| .github/workflows/README.md | W594 | 修改·旁文档同步 |
+| AGENTS.md | W594 | 修改·版本脚注追加 W594 |
+| scripts/output/file-index.md | W594 | 新增·W594 段（本段·batch_cascade.py 执行） |
+
 ## W593 W593 docs 站内阅读器试点（2026-09-21·v2.3.193）
 
 | 文件 | W | 说明 |
