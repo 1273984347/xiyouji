@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W595），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W596），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,17 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.196（2026-09-21）：W596 Agent 运行卫生 — PROJECT_CWD 自动解析+Docker三件套+双副本脏路径活面清零（WP-J）
+
+> **来源**：W590 主计划 WP-J——实测 `D:/1/xiyouji` 副本不存在而 agent-web 默认 PROJECT_CWD 指向它（悬空默认·Agent 全部工具调用落空）；且全仓 14 个活面文件残留双副本脏路径，其中级联脚本 winpath 硬编码**每批续写**进 workflows README（修文档不改脚本必回潮）。
+> - **执行（PROJECT_CWD 自动解析）**：server/index.ts 默认值改为向上探测「AGENTS.md + site/tokens.css」锚点自动解析仓库根（env 覆盖优先），启动打印 `[boot] PROJECT_CWD=...` 且目录不存在 FATAL 退出（fail-fast）；实测启动打印正确仓库根。
+> - **执行（Docker 三件套）**：Dockerfile（node:22-alpine·与 engines≥20 对齐·HEALTHCHECK 探既有 /api/health·容器内 PROJECT_CWD=/workspace 配合挂载）+ .dockerignore（排除 .env/data/dist）+ DEPLOYMENT.md（本地/Docker 运行指南·Negative Scope 明示不做公网）；DEVELOPMENT.md 旧 node:18 Dockerfile 示例段删除（与 engines 矛盾）。
+> - **执行（脏路径活面清零）**：14 文件 24 处——workflows README/AGENTS §4.4/STRUCTURE/交接文档×3/新Agent启动Prompt/mcp-server README（JSON 占位符+file:/// 死链改仓库相对+.trae-cn 全局死链行移除）/agent-web README×4/useAgents（路径+悬空版本串 v2.3.9）/scripts utils/aliases·optimize-html-size·font-subset-guide/site/en README/法宝政治学专题来源行/batch_cascade winpath 根因。
+> - **执行（豁免登记）**：21 文件保留——CHANGELOG 历史段（禁改）/.workbuddy 会话记忆/docs/_dev/历史方案档/scripts/output 诊断产物/检测器 `_audit_agentweb_baseline.py`（其搜索模式即旧路径·设计保留）/gitignore 编译产物 index.js。
+> - **偏差声明**：Docker 镜像构建未完成验证——本机 Docker Hub 拉取 node:22-alpine 受限，且用户指示「先不用 Docker」；三件套已入库，条件具备后补验（如实登记·禁假收敛）。
+> - **验证**：tsc+vite build 过；启动冒烟打印 `[boot] PROJECT_CWD = D:\xiyouji`（实测）；活面脏路径终扫 0 文件；ruff 过（batch_cascade/utils/aliases/optimize-html-size）；verify_delivery 核心全绿。
+> - **文件**：xiyouji-agent-web（server/index.ts、src/hooks/useAgents.ts、README、DEVELOPMENT.md、Dockerfile、.dockerignore、DEPLOYMENT.md）、scripts/batch_cascade.py、scripts/utils/aliases.py、scripts/optimize-html-size.py、scripts/font-subset-guide.md、site/en/README.md、docs/03/法宝政治学专题.md、.github/workflows/README.md、AGENTS.md、STRUCTURE.md、交接文档.md、新Agent启动Prompt.md、mcp-server/README.md、方案档落地状态、scripts/_w596_spec.json、六文档、四页脚、file-index。
+> - **状态**：已落地（本批随 W596 提交并 push origin/main）。
 ### v2.3.195（2026-09-21）：W595 CI 红灯热修复 — W593 sitemap.xml 漏 add 补提交（330 条含 reader 101）
 
 > **来源**：W593 推送后 CI Delivery Gate FAIL——「sitemap 与 site 不一致：缺 101 页（reader/ch001.html…）」；本地 verify 全绿（工作区文件为新）而提交树为旧，属「声明≠落地」的提交面变体。

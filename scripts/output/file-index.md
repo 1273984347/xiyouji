@@ -11,6 +11,27 @@
 ---
 
 
+## W596 W596 Agent 运行卫生（2026-09-21·v2.3.196）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/index.ts | W596 | 修改·PROJECT_CWD 仓库根自动解析（锚点探测）+启动 fail-fast+boot 日志 |
+| xiyouji-agent-web/src/hooks/useAgents.ts | W596 | 修改·系统提示词去写死路径与悬空版本串 v2.3.9 |
+| xiyouji-agent-web/Dockerfile / .dockerignore / DEPLOYMENT.md | W596 | 新建·容器三件套（node:22-alpine·HEALTHCHECK /api/health·镜像构建待补验） |
+| xiyouji-agent-web/README.md / DEVELOPMENT.md | W596 | 修改·定位与路径表述更新·旧 node:18 Docker 段删除 |
+| scripts/batch_cascade.py | W596 | 修改·winpath 根因修复（旧值每批续写 workflows README） |
+| .github/workflows/README.md / AGENTS.md / STRUCTURE.md / 交接文档.md / 新Agent启动Prompt.md / mcp-server/README.md | W596 | 修改·双副本脏路径清零（级联续写面+治理文档现役段） |
+| scripts/utils/aliases.py / scripts/optimize-html-size.py / scripts/font-subset-guide.md / site/en/README.md / docs/03/法宝政治学专题.md | W596 | 修改·杂面脏路径清零 |
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W596 | 修改·WP-J 落地状态回写+W591-W595 哈希补填 |
+| scripts/_w596_spec.json | W596 | 新建·本批级联 spec |
+| CHANGELOG.md | W596 | 新增·W596 版段 + 编号规则上限 W001-W596 |
+| 交接文档.md | W596 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W596 | 修改·版本行同步 v2.3.196 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W596 | 修改·四页脚链首 prepend W596 |
+| .github/workflows/README.md | W596 | 修改·旁文档同步（batch_cascade.py 执行） |
+| AGENTS.md | W596 | 修改·版本脚注追加 W596 |
+| scripts/output/file-index.md | W596 | 新增·W596 段（本段·batch_cascade.py 执行） |
+
 ## W595 W595 CI 红灯热修复（2026-09-21·v2.3.195）
 
 | 文件 | W | 说明 |

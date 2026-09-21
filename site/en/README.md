@@ -11,7 +11,7 @@ This subproject was created in W234-E4 (v2.2.40) as part of the AVES (Academic /
 
 ## File list (51 files)
 
-All files live under `d:\1\xiyouji\site\en\`.
+All files live under `site/en/` (repository-relative).
 
 | # | File | Lines | Purpose |
 |---|---|---|---|

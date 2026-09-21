@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.3.195（2026-09-21）— W595 sitemap 漏提交热修复 — A1-A6 共 615 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前版本：v2.3.196（2026-09-21）— W596 Agent 运行卫生与脏路径清零 — A1-A6 共 615 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构
@@ -16,7 +16,7 @@
 | `assets/` | 图片、地图、字体等静态资源 |
 | `references/` | 参考文献索引 |
 | `tools/` | 辅助工具脚本（章节切分等） |
-| `xiyouji-agent-web/` | Web Agent「西游记·渡口问津」·CodeBuddy Agent SDK·`PROJECT_CWD=D:/1/xiyouji` 直接对话/检索 docs/ + 跑 scripts/ + 写 dataset/·凭证 `CODEBUDDY_API_KEY`（与 scripts/rag 档B 检索式生成并行·详见其 README） |
+| `xiyouji-agent-web/` | Web Agent「西游记·渡口问津」·CodeBuddy Agent SDK·`PROJECT_CWD`=仓库根（自动解析）直接对话/检索 docs/ + 跑 scripts/ + 写 dataset/·凭证 `CODEBUDDY_API_KEY`（与 scripts/rag 档B 检索式生成并行·详见其 README） |
 | `README.md` | 项目说明 |
 | `STRUCTURE.md` | 本文件 |
 | `CHANGELOG.md` | 更新日志 |

@@ -52,8 +52,8 @@ xiyouji-mcp
   "mcpServers": {
     "xiyouji-mcp": {
       "command": "python",
-      "args": ["d:/1/xiyouji/mcp-server/xiyouji_mcp.py"],
-      "cwd": "d:/1/xiyouji"
+      "args": ["<仓库根绝对路径>/mcp-server/xiyouji_mcp.py"],
+      "cwd": "<仓库根绝对路径>"
     }
   }
 }
@@ -150,7 +150,6 @@ pytest tests/test_xiyouji_mcp.py -v
 
 ## 关联文档
 
-- [mcp-builder skill](file:///c:/Users/12739/.trae-cn/skills/mcp-builder/SKILL.md)
-- [DRL真循环.md](file:///d:/1/xiyouji/docs/10-方法论沉淀/DRL真循环.md)
-- [E1铁律.md](file:///d:/1/xiyouji/docs/10-方法论沉淀/E1铁律.md)
-- [CHANGELOG.md](file:///d:/1/xiyouji/CHANGELOG.md) v2.2.24 W201 段
+- [DRL真循环.md](../docs/10-方法论沉淀/DRL真循环.md)
+- [E1铁律.md](../docs/10-方法论沉淀/E1铁律.md)
+- [CHANGELOG.md](../CHANGELOG.md) v2.2.24 W201 段

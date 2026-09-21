@@ -1312,31 +1312,7 @@ pm2 logs web-agent
 
 ### 3. 使用 Docker 部署
 
-创建 `Dockerfile`:
-
-```dockerfile
-FROM node:18-alpine
-
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm ci --production
-
-COPY . .
-RUN npm run build
-
-EXPOSE 3000
-
-CMD ["npm", "start"]
-```
-
-构建和运行:
-
-```bash
-docker build -t web-agent .
-docker run -p 3000:3000 -v $(pwd)/data:/app/data web-agent
-```
-
+见 [DEPLOYMENT.md](DEPLOYMENT.md)（W596 起：node:22-alpine，与 engines ≥20 对齐；旧 node:18 示例已删除）。
 ### 4. 环境变量配置
 
 在生产环境中使用环境变量:
