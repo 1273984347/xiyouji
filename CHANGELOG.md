@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W589），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W590），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.190（2026-09-21）：W590 需求侧优化主计划入库 — 自包含13工作包方案（WP-A…WP-M）+ Mode B 自审修正回填
+
+> **来源**：2026-09-21 全项目产品评审（三路并行取证：站点 UX/i18n/SEO、agent-web 源码级、埋点/反馈/内容运营源码级）+ 用户双裁决（AI 公网路径=暂不部署后端；成本预算=免费额度+硬配额 200 次/日·10 次/时/IP·超限降级检索模板）。
+> - **执行（方案入库）**：新建 docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md——13 工作包（WP-A 度量闭环激活/WP-B AI 入口收敛/WP-C SEO 五项硬伤清零/WP-D 站内阅读器两批/WP-E 内容发现架构/WP-F 搜索质量与埋点/WP-G EN 站治理/WP-H 评估集与反馈闭环/WP-I 引用校验与拒答边界/WP-J 运行卫生/WP-K 一次性脚本治理/WP-L A1 信任字段补全/WP-M 死角清理）·约 14 批·每包机判验收+回归面·§0.2 基线命令 7 组·§6 总验收 22 条·WP-B-ALT 公网 RAG 部署冻结预案（触发条件+参数集写死）。
+> - **执行（Mode B 自审）**：plan-authoring-review 流程——82 个路径 token 穷尽核对（31 实体引用全存在·17 声明新建全不存在·0 真缺失）；8 项缺陷当场修正（2 高危：hreflang 规则与 EN 扁平结构失实、hub 分组依据失实；1 中高：blob 阈值 700 假 FAIL 校准 1000+四路分拆；余 5 项中低危详见方案 §8.2）。
+> - **执行（B01 先行）**：fetch_gate_stats --self-test 14/14 通过；取数与 judge_gate 裁决待用户配置 GOATCOUNTER_API_TOKEN 入 .env（方案 §8.1 启动前三问之二）。
+> - **验证**：82 token 引用核对 + self-test 14/14 + 六板块目录实测存在；级联后 verify_delivery 全绿。
+> - **文件**：docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md（新建）、scripts/_w590_spec.json（新建）、六文档版本行、四页脚、workflows README、file-index、AGENTS 脚注。
+> - **状态**：已落地（本批随 W590 提交并 push origin/main）。
 ### v2.3.189（2026-09-20）：W589 暗色审计读数语义修正+映射合并重建 — computed读数/透明与var豁免/alpha split判定·W582+W588b两代映射合并·残余48/7登记（数据驱动角色色）
 
 > **来源**：W587/W588 运行时提升器与审计读数的交互之谜收口（用户「继续」指令·B/D 残留与暗色阶段二定向收口）。
