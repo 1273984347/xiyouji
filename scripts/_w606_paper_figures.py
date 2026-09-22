@@ -111,39 +111,57 @@ fig.savefig(OUT + r"\图2-令牌三层模型.png", bbox_inches="tight", facecolo
 plt.close(fig)
 print("图 2 完成")
 
-# ---------------- 图 6 用户研究结果（示意） ----------------
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12.8, 5.4), dpi=200)
+# ---------------- 图 6 用户研究设计示意（W609：结果示意改设计示意·双盲风险消除） ----------------
+fig, ax = plt.subplots(figsize=(12.8, 6.4), dpi=200)
+ax.set_xlim(0, 1)
+ax.set_ylim(0, 1)
+ax.axis("off")
 
-# H1 审美偏好
-vals = [4.2, 3.1]
-errs = [0.35, 0.35]
-bars = ax1.bar(["条件 A\n新中式", "条件 B\n通用模板"], vals, yerr=errs, capsize=6,
-               color=[CINNABAR, INDIGO], width=0.52,
-               error_kw={"ecolor": INK, "elinewidth": 1.4})
-ax1.axhline(3.0, color=SOFT, linestyle="--", linewidth=1, alpha=0.6)
-ax1.set_ylim(0, 5)
-ax1.set_ylabel("审美偏好均值（5 点 Likert）", fontsize=11.5, color=INK)
-ax1.set_title("H1 审美偏好（示意 · 待执行）", fontsize=12.5, color=INK, pad=10)
-ax1.tick_params(labelsize=11, colors=INK)
-ax1.spines[["top", "right"]].set_visible(False)
-ax1.grid(axis="y", alpha=0.3)
 
-# H2 任务效率
-pages = ["P1 网络图", "P2 热力图", "P3 路线图"]
-a_times = [18.2, 19.5, 16.8]
-b_times = [19.0, 20.1, 17.5]
-ax2.plot(pages, a_times, "-o", color=CINNABAR, linewidth=2.2, markersize=8, label="条件 A 新中式")
-ax2.plot(pages, b_times, "--s", color=INDIGO, linewidth=2.2, markersize=8, label="条件 B 通用模板")
-ax2.set_ylabel("任务完成时间（秒）", fontsize=11.5, color=INK)
-ax2.set_title("H2 任务效率（示意 · 等效预期）", fontsize=12.5, color=INK, pad=10)
-ax2.tick_params(labelsize=11, colors=INK)
-ax2.legend(fontsize=10.5, framealpha=0.9)
-ax2.spines[["top", "right"]].set_visible(False)
-ax2.grid(alpha=0.3)
+def band_box(x, y, w, h, title, desc, face, tc, ts=12.5, ds=10.5):
+    box(ax, x, y, w, h, face)
+    ax.text(x + w / 2, y + h * 0.64, title, ha="center", va="center",
+            fontsize=ts, color=tc, fontweight="bold")
+    ax.text(x + w / 2, y + h * 0.26, desc, ha="center", va="center",
+            fontsize=ds, color=tc)
 
-fig.suptitle("用户研究结果（示意图——正式数据待协议执行后回填）",
-             fontsize=13, color=INK, y=0.99)
-fig.tight_layout(rect=(0, 0, 1, 0.94))
-fig.savefig(OUT + r"\图6-用户研究结果-示意.png", bbox_inches="tight", facecolor="white")
+
+# 第一带：被试与设计
+band_box(0.14, 0.885, 0.72, 0.095,
+         "被试 10–20 名 · 设计 / 文学背景各半 · 被试内设计 · 拉丁方平衡",
+         "", PAPER, INK, ts=12)
+
+# 第二带：双条件
+band_box(0.14, 0.635, 0.34, 0.145, "条件 A：新中式系统", "现行页面 · 完整设计令牌",
+         CINNABAR, "white")
+band_box(0.52, 0.635, 0.34, 0.145, "条件 B：通用模板", "同数据同布局 · 蓝灰仪表盘",
+         RICEGREY, INK)
+arrow_v(ax, 0.31, 0.885 - 0.006, 0.635 + 0.145 + 0.006)
+arrow_v(ax, 0.69, 0.885 - 0.006, 0.635 + 0.145 + 0.006)
+
+# 第三带：三任务
+tasks = [
+    ("P1 人物语义网络", "找出妖怪群体任两角色"),
+    ("P2 难度热力图", "指出最高难度及其阶段"),
+    ("P3 取经路线图", "灵山事件与对应回目"),
+]
+tx = [0.14, 0.395, 0.65]
+for (tt, dd), x in zip(tasks, tx):
+    band_box(x, 0.375, 0.21, 0.145, tt, dd, PAPER, INK, ts=11.5, ds=10)
+arrow_v(ax, 0.31, 0.635 - 0.006, 0.375 + 0.145 + 0.006)
+arrow_v(ax, 0.69, 0.635 - 0.006, 0.375 + 0.145 + 0.006)
+
+# 第四带：三指标
+metrics = [
+    ("H1 审美偏好", "5 点 Likert × 6 项"),
+    ("H2 任务效率", "完成时间 · TOST 等效"),
+    ("H3 对比度自评", "2 项自我报告"),
+]
+for (mt, md_), x in zip(metrics, tx):
+    band_box(x, 0.115, 0.21, 0.145, mt, md_, PAPER, INK, ts=11.5, ds=10)
+for x in tx:
+    arrow_v(ax, x + 0.105, 0.375 - 0.006, 0.115 + 0.145 + 0.006)
+
+fig.savefig(OUT + r"\图6-用户研究设计.png", bbox_inches="tight", facecolor="white")
 plt.close(fig)
-print("图 6 完成")
+print("图 6 完成（研究设计示意）")

@@ -11,6 +11,31 @@
 ---
 
 
+## W609 W609 外部审读采纳四项（2026-09-23·v2.3.209）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W609 | 修改·审读采纳 8 处+瘦身 6 处+字数回填（正文 6,458/词计 9,984） |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W609 | 修改·同投稿版镜像 |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集.md | W609 | 修改·完整稿 4 处（荣誉提名奖×2+中文化+协议措辞） |
+| docs/S4-学术投稿/图表/图6-用户研究设计.png | W609 | 新建·研究设计示意四层结构图（替代旧结果示意） |
+| docs/S4-学术投稿/图表/图6-用户研究结果-示意.png | W609 | 删除·易被读作预期当结果（W609 废弃） |
+| docs/S4-学术投稿/图表_清单.md | W609 | 修改·图 6 行与状态说明同步 |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W609 | 修改·重生成（postcheck 9/9·Word 渲染复验通过） |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W609 | 修改·重生成（同管线） |
+| docs/S4-学术投稿/B轨论文文献-Zotero导入.json | W609 | 修改·⑥补 URL/引用日期/提名奖·⑧升级期刊条目 |
+| scripts/_w606_paper_figures.py | W609 | 修改·图 6 段重写为设计示意图 |
+| scripts/_w607_md2docx.js | W609 | 修改·图 6 路径与图注同步 |
+| scripts/_w607_zotero_export.py | W609 | 修改·⑥⑧条目更新 |
+| CHANGELOG.md | W609 | 新增·W609 版段 + 编号规则上限 W001-W609 |
+| 交接文档.md | W609 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W609 | 修改·版本行同步 v2.3.209 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W609 | 修改·四页脚链首 prepend W609 |
+| .github/workflows/README.md | W609 | 修改·旁文档同步 |
+| AGENTS.md | W609 | 修改·版本脚注追加 W609 |
+| scripts/output/file-index.md | W609 | 新增·W609 段（本段·batch_cascade.py 执行） |
+| scripts/_w609_spec.json | W609 | 新建·本批级联 spec |
+
 ## W608 W608 匿名稿图双盲脱敏（2026-09-23·v2.3.208）
 
 | 文件 | W | 说明 |
