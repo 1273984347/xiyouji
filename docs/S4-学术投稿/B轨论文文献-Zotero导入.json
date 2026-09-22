@@ -59,7 +59,16 @@
         "literal": "详解西游记项目"
       }
     ],
-    "URL": "https://github.com/1273984347/xiyouji"
+    "URL": "https://github.com/1273984347/xiyouji",
+    "accessed": {
+      "date-parts": [
+        [
+          2026,
+          9,
+          23
+        ]
+      ]
+    }
   },
   {
     "id": "cooper2010",
@@ -415,6 +424,15 @@
       "date-parts": [
         [
           2023
+        ]
+      ]
+    },
+    "accessed": {
+      "date-parts": [
+        [
+          2026,
+          9,
+          23
         ]
       ]
     }
