@@ -11,6 +11,26 @@
 ---
 
 
+## W607 W607 S4 论文 Word 化与文献库（2026-09-22·v2.3.207）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W607 | 新建·Word 投稿稿（13 页·图 1-6 嵌入·Word COM 渲染验收通过） |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W607 | 新建·双盲匿名 Word 稿（同管线产出） |
+| docs/S4-学术投稿/B轨论文文献-Zotero导入.json | W607 | 新建·CSL JSON 21 条（DOI 仅带已核验 3 条） |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W607 | 修改·图注引用补全 3 处+字数重测回填（正文 6,438） |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W607 | 修改·图注引用同步 3 处 |
+| scripts/_w607_md2docx.js | W607 | 新建·md→docx 转换器（运行时解析·图高 800px 上限） |
+| scripts/_w607_zotero_export.py | W607 | 新建·文献库 CSL JSON 导出（宁缺勿造纪律） |
+| CHANGELOG.md | W607 | 新增·W607 版段 + 编号规则上限 W001-W607 |
+| 交接文档.md | W607 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W607 | 修改·版本行同步 v2.3.207 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W607 | 修改·四页脚链首 prepend W607 |
+| .github/workflows/README.md | W607 | 修改·旁文档同步 |
+| AGENTS.md | W607 | 修改·版本脚注追加 W607 |
+| scripts/output/file-index.md | W607 | 新增·W607 段（本段·batch_cascade.py 执行） |
+| scripts/_w607_spec.json | W607 | 新建·本批级联 spec |
+
 ## W606 W606 S4 论文语域专业化（2026-09-22·v2.3.206）
 
 | 文件 | W | 说明 |

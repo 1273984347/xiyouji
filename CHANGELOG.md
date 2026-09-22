@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W606），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W607），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.207（2026-09-22）：W607 S4 论文 Word 化与文献库 — 投稿版/匿名稿 docx 生成 + Zotero 文献 JSON（Word COM 渲染验收）
+
+> **来源**：用户接续「GitHub 论文写作工具」选型讨论——按既定建议落地「Markdown 单源 → 投稿 Word + 文献库」管线；用户指定渲染验证用本机 Microsoft Word（不用 LibreOffice），遵照执行。
+> - **执行（docx 生成管线）**：scripts/_w607_md2docx.js——运行时直接解析论文 md 源（不在 JS 内嵌中文文本·规避引号转义·论文每次改动可一键重出 Word），产出格式：标题黑体小二居中/节标题黑体四号/正文宋体小四 1.5 倍距两端对齐首行缩进两字符/表 1 三线表（表题上方 keepNext）/图 1-6 嵌入（图注下方「图 N　图名（来源）」格式·图 3-5 用浅色截图）/注释①-⑯与参考文献[1]-[5]悬挂缩进五号/页脚居中页码。docx npm 包装于 tmpe/w607_docxgen（DOCX_NM 环境变量引入·不入仓库依赖）。
+> - **执行（渲染验收·用户指定 Word）**：postcheck.py 机检两稿 9/9 全过；渲染走 PowerShell + Microsoft Word COM（ExportAsFixedFormat 导出 PDF·非 LibreOffice）→ PyMuPDF 逐页 PNG → documents:visual-judge 验收：首轮 11/13——图 5（2640×6422 长条整页截图）540 宽等比缩放达 1314px 高致图侵页脚区页码缺失、图注跨页两处 fail；修复=生成器加图高 800px 上限（图 5 等比缩至 337×800）重新生成重渲染，复验 6/6 pass（页码链恢复·图注同页·缩窄后区块结构可辨）。终态 13/13。
+> - **执行（图注引用补全）**：图 1/2/6 原正文零引用（违反论文自述的图表引用规范），正文补 3 处锚点——§3「把文学母题转译成设计变量（图 1）」「三层模型解决不漂移（图 2）」、§5「预期结果示意见图 6」；两稿同步；字数当批重测回填页脚（正文 6,438 字·全稿 10,563 字符·英文按词计 9,919——8000-10000 区间内）。
+> - **执行（文献库）**：scripts/_w607_zotero_export.py 产出 B轨论文文献-Zotero导入.json（CSL JSON 21 条=注释 16+参考文献 5·中文作者 literal 字段·DOI 仅带 W604/W605 联网核验过的 3 条：①10.1353/ks.2023.a908620/⑫10.1093/llc/fqad085/⑮10.1145/3769534.3769615——其余宁缺勿造·知网级复核后再补）。
+> - **验证**：docx-js postcheck 两稿 9/9；Word COM 渲染 visual-judge 终态 13/13 pass；lint_links 68 链接 0 broken；verify_delivery 核心全绿；Zotero JSON 21 条解析校验过。
+> - **文件**：docs/S4-学术投稿/ 5 文件（投稿版.docx/匿名稿.docx/Zotero JSON 新建·两 md 补图注引用）、scripts/_w607_md2docx.js、scripts/_w607_zotero_export.py、scripts/_w607_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批随 W607 提交并 push origin/main）。
 ### v2.3.206（2026-09-22）：W606 S4 论文语域专业化 — 去博客腔+参考文献激活+配图重绘（图1/2硬伤根治·图6统一）
 
 > **来源**：用户审读论文后反馈「感觉不够专业」——逐句体检定位表达层三块短板（文字博客腔/自绘图排版硬伤/参考文献死表），用户批准三件套修法后执行。
