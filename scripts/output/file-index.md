@@ -11,6 +11,27 @@
 ---
 
 
+## W610 W610 第二份外部审读分级采纳（2026-09-23·v2.3.210）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W610 | 修改·表 2/表 3 插入+三小修+注③⑯引用日期+字数口径回填 |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W610 | 修改·同投稿版镜像（注③除外） |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集.md | W610 | 修改·往往反复+检查项措辞 |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W610 | 修改·重生成（14 页·postcheck 9/9·Word 渲染复验通过） |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W610 | 修改·重生成（同管线） |
+| docs/S4-学术投稿/B轨论文文献-Zotero导入.json | W610 | 修改·③⑯加 accessed 字段 |
+| scripts/_w607_md2docx.js | W610 | 修改·表格列宽按列数泛化 |
+| scripts/_w607_zotero_export.py | W610 | 修改·③⑯accessed 字段 |
+| CHANGELOG.md | W610 | 新增·W610 版段 + 编号规则上限 W001-W610 |
+| 交接文档.md | W610 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W610 | 修改·版本行同步 v2.3.210 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W610 | 修改·四页脚链首 prepend W610 |
+| .github/workflows/README.md | W610 | 修改·旁文档同步 |
+| AGENTS.md | W610 | 修改·版本脚注追加 W610 |
+| scripts/output/file-index.md | W610 | 新增·W610 段（本段·batch_cascade.py 执行） |
+| scripts/_w610_spec.json | W610 | 新建·本批级联 spec |
+
 ## W609 W609 外部审读采纳四项（2026-09-23·v2.3.209）
 
 | 文件 | W | 说明 |

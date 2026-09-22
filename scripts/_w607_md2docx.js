@@ -151,7 +151,9 @@ function captionPara(text) {
 }
 
 function threeLineTable(rows) {
-  const widths = [16, 30, 26, 28]; // 表 1 四列：文化层/令牌/值/语义角色
+  // 列宽按列数取：表1/表3 四列、表2 三列（色值列最宽）
+  const W = { 3: [34, 22, 44], 4: [15, 30, 29, 26] };
+  const widths = W[rows[0].length] || rows[0].map(() => Math.floor(100 / rows[0].length));
   const NB = { style: BorderStyle.NONE };
   const mkCell = (text, isHeader, colIdx) => new TableCell({
     borders: {
