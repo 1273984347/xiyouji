@@ -27,7 +27,7 @@
 | 编号 | 引用（GB/T 7714） | 与本项目关系 | 核验状态 |
 |---|---|---|---|
 | A1 | WALL B, LEE D M. Stability in Variation: Visualizing the Actantial Core of *The Journey to the West*[J]. Korean Studies, 2023. DOI:10.1353/ks.2023.a908620. | **国际最直接同行**：以行动元模型（actantial model）量化可视西游叙事核心结构，与本项目「十七维叙事学框架」「人物语义网络」同方法论赛道。相关工作章必须正面对话。 | 已核验（OpenAlex DOI） |
-| A2 | 竺洪波, 张培恒. 西游记数字人文研究：以百回本回目字频为中心[J]. 文学遗产, 2021(3). | 国内西游数字人文先例（项目索引 N02），字频层面；B 轨论文定位「结构×设计」而非「字频」以错位。 | 已核验（项目索引） |
+| A2 | ~~竺洪波, 张培恒. 西游记数字人文研究：以百回本回目字频为中心[J]. 文学遗产, 2021(3).~~ | **已证实为幻觉条目并全仓清除（2026-09-22 W605 联网核验）**：原行以「项目索引 N02」为核验依据属**循环核验**（索引与底稿同源生成）——教训：核验必须锚定外部权威源（DOI/出版社页/CNKI），仓库内自源材料不得互证；B 轨参考文献[5]已换真实存在的竺洪波《西游学十二讲》（中华书局 2018），A 轨驿递两稿改引 Ping & Wang 2024 + Jia 2026（均联网确证）。 | 已核验为幻觉（W605 清除） |
 | A3 | CHEN Z, XIE A, LIU Y. From Myth to Interface: An AI-Augmented Interactive Visual System for Exploring Artifact Interactions in Journey to the West[C]//International Symposium on Visual Information Communication and Interaction (VINCI). ACM, 2025. DOI:10.1145/3769534.3769615. | 国际西游×AI×交互可视化作品型论文（法宝交互系统），与本项目「AI 名人对话」「器物维度可视化」接近。 | 已核验（Semantic Scholar/ACM DOI） |
 | A4 | 燕道成, 彭天媛. 多模态叙事视阈下传统文化符号的跨媒介转化与传播——从《西游记》到《黑神话：悟空》[J]. 传媒, 2026(3): 43-45. | 西游 IP 跨媒介符号转译（CSSCI），文化传播视角，可引作「西游视觉转译」背景。 | 已核验（维普出版页） |
 | A5 | 郭城. 地方文化符号动漫化转译与旅游IP构建的联动机制研究——以《黑神话：悟空》为例[J]. 艺术科技, 2025(13): 172-174,222. | 西游文化符号数字呈现（普刊），佐证「传统文化数字化呈现」话题活跃。 | 已核验（维普出版页） |
