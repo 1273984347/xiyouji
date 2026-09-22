@@ -379,37 +379,6 @@
     "page": "798"
   },
   {
-    "id": "chen2025",
-    "type": "paper-conference",
-    "citekey": "⑮",
-    "title": "From Myth to Interface: An AI-Augmented Interactive Visual System for Exploring Artifact Interactions in Journey to the West",
-    "author": [
-      {
-        "family": "Chen",
-        "given": "Z."
-      },
-      {
-        "family": "Xie",
-        "given": "A."
-      },
-      {
-        "family": "Liu",
-        "given": "Y."
-      }
-    ],
-    "container-title": "International Symposium on Visual Information Communication and Interaction (VINCI)",
-    "publisher": "ACM",
-    "issued": {
-      "date-parts": [
-        [
-          2025
-        ]
-      ]
-    },
-    "page": "58:1-58:8",
-    "DOI": "10.1145/3769534.3769615"
-  },
-  {
     "id": "wcag22",
     "type": "standard",
     "citekey": "⑯",

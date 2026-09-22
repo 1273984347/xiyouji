@@ -49,10 +49,8 @@ const FIGS = {
     cap: "图 4\u3000八十一难难度热力图·浅色主题（来源：项目页面截图）" },
   "5": { file: FIG5, w: 540,
     cap: "图 5\u3000取经路线图·浅色主题（来源：项目页面截图）" },
-  "6": { file: FIGDIR + "/图6-用户研究设计.png", w: 540,
-    cap: "图 6\u3000用户研究设计示意（来源：作者自绘）" },
 };
-const SECTION_FIGS = { "3": ["1", "2"], "5": ["3", "4", "5", "6"] };
+const SECTION_FIGS = { "3": ["1", "2"], "5": ["3", "4", "5"] };
 
 function pngSize(buf) {
   return { w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) };
