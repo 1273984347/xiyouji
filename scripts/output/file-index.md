@@ -11,6 +11,28 @@
 ---
 
 
+## W613 W613 S4 三线推进（2026-09-23·v2.3.213）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/S4-学术投稿/B轨投稿辅助-确认邮件与投稿信.md | W613 | 新建·政策确认邮件四问+投稿信+AI 披露三草稿 |
+| docs/S4-学术投稿/学术论文-西游记驿递交通书写的数字人文研究.md | W613 | 修改·A 轨强化（数据 15→30·正文 12,012·两脉络·引文行 3 条） |
+| docs/S4-学术投稿/学术论文-西游记驿递交通书写的数字人文研究-匿名稿.md | W613 | 修改·11 处镜像同步 |
+| docs/S4-学术投稿/学术投稿规划-三路线论文选题大纲与目标刊分级.md | W613 | 修改·第四节标记强化六项落地 |
+| docs/S4-学术投稿/C轨论文三大纲-可验证性基础设施.md | W613 | 新建·C 轨六章大纲+材料清单+待办 |
+| docs/S4-学术投稿/图表/A-图1-驿路时间线-灰度.png | W613 | 新建·印刷态灰度图（15 节点时间线） |
+| docs/S4-学术投稿/图表/A-图2-明代驿递制度对照-灰度.png | W613 | 新建·印刷态灰度图（制度×西游对照表） |
+| scripts/_w613_a_track.py | W613 | 新建·A 轨强化编辑脚本 |
+| scripts/_w613_a_anon.py | W613 | 新建·匿名稿镜像脚本 |
+| CHANGELOG.md | W613 | 新增·W613 版段 + 编号规则上限 W001-W613 |
+| 交接文档.md | W613 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W613 | 修改·版本行同步 v2.3.213 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W613 | 修改·四页脚链首 prepend W613 |
+| .github/workflows/README.md | W613 | 修改·旁文档同步 |
+| AGENTS.md | W613 | 修改·版本脚注追加 W613 |
+| scripts/output/file-index.md | W613 | 新增·W613 段（本段·batch_cascade.py 执行） |
+| scripts/_w613_spec.json | W613 | 新建·本批级联 spec |
+
 ## W612 W612 用户研究整体删除（2026-09-23·v2.3.212）
 
 | 文件 | W | 说明 |
