@@ -1,0 +1,507 @@
+[
+  {
+    "id": "wall2023",
+    "type": "article-journal",
+    "citekey": "①",
+    "title": "Stability in Variation: Visualizing the Actantial Core of The Journey to the West",
+    "author": [
+      {
+        "family": "Wall",
+        "given": "B."
+      },
+      {
+        "family": "Lee",
+        "given": "D. M."
+      }
+    ],
+    "container-title": "Korean Studies",
+    "issued": {
+      "date-parts": [
+        [
+          2023
+        ]
+      ]
+    },
+    "volume": "47",
+    "issue": "1",
+    "page": "117-144",
+    "DOI": "10.1353/ks.2023.a908620"
+  },
+  {
+    "id": "drucker2011",
+    "type": "article-journal",
+    "citekey": "②",
+    "title": "Humanities Approaches to Graphical Display",
+    "author": [
+      {
+        "family": "Drucker",
+        "given": "J."
+      }
+    ],
+    "container-title": "Digital Humanities Quarterly",
+    "issued": {
+      "date-parts": [
+        [
+          2011
+        ]
+      ]
+    },
+    "volume": "5",
+    "issue": "1"
+  },
+  {
+    "id": "xiyouji-project",
+    "type": "webpage",
+    "citekey": "③",
+    "title": "详解西游记",
+    "author": [
+      {
+        "literal": "详解西游记项目"
+      }
+    ],
+    "URL": "https://github.com/1273984347/xiyouji"
+  },
+  {
+    "id": "cooper2010",
+    "type": "article-journal",
+    "citekey": "④",
+    "title": "Mapping the English Lake District: a literary GIS",
+    "author": [
+      {
+        "family": "Cooper",
+        "given": "D."
+      },
+      {
+        "family": "Gregory",
+        "given": "I."
+      }
+    ],
+    "container-title": "Transactions of the Institute of British Geographers",
+    "issued": {
+      "date-parts": [
+        [
+          2010
+        ]
+      ]
+    },
+    "volume": "36",
+    "issue": "1",
+    "page": "89-108"
+  },
+  {
+    "id": "bushell2022",
+    "type": "article-journal",
+    "citekey": "⑤",
+    "title": "Digital Literary Mapping: I. Visualizing and Reading Graph Topologies as Maps for Literature",
+    "author": [
+      {
+        "family": "Bushell",
+        "given": "S."
+      },
+      {
+        "family": "Butler",
+        "given": "J. O."
+      },
+      {
+        "family": "Hay",
+        "given": "D."
+      }
+    ],
+    "container-title": "Cartographica",
+    "issued": {
+      "date-parts": [
+        [
+          2022
+        ]
+      ]
+    },
+    "volume": "57",
+    "issue": "1",
+    "page": "11-36"
+  },
+  {
+    "id": "ecnu2023",
+    "type": "webpage",
+    "citekey": "⑥",
+    "title": "《西游记》文学探索地图（2023 CaGIS 学生组 Arthur Robinson 荣誉奖）",
+    "author": [
+      {
+        "literal": "华东师范大学地理科学学院"
+      }
+    ]
+  },
+  {
+    "id": "shizhuo2023",
+    "type": "article-journal",
+    "citekey": "⑦",
+    "title": "基于知识图谱的文学叙事可视化研究",
+    "author": [
+      {
+        "literal": "史卓"
+      },
+      {
+        "literal": "王萌"
+      },
+      {
+        "literal": "曾树珍"
+      }
+    ],
+    "container-title": "中国科技论文",
+    "issued": {
+      "date-parts": [
+        [
+          2023
+        ]
+      ]
+    },
+    "volume": "18",
+    "issue": "11",
+    "page": "1230-1235,1243"
+  },
+  {
+    "id": "zhaowei",
+    "type": "webpage",
+    "citekey": "⑧",
+    "title": "李劼人《大波》人物网络分析（社会网络分析案例）",
+    "author": [
+      {
+        "literal": "赵薇"
+      }
+    ],
+    "publisher": "北京大学数字人文导航"
+  },
+  {
+    "id": "windhager2018",
+    "type": "article-journal",
+    "citekey": "⑨",
+    "title": "Visualization of Cultural Heritage Collection Data: State of the Art and Future Challenges",
+    "author": [
+      {
+        "family": "Windhager",
+        "given": "F."
+      },
+      {
+        "family": "Federico",
+        "given": "P."
+      },
+      {
+        "family": "Schreder",
+        "given": "G."
+      }
+    ],
+    "container-title": "IEEE Transactions on Visualization and Computer Graphics",
+    "issued": {
+      "date-parts": [
+        [
+          2018
+        ]
+      ]
+    },
+    "volume": "25",
+    "issue": "6",
+    "page": "2311-2330"
+  },
+  {
+    "id": "trocchianesi2023",
+    "type": "article-journal",
+    "citekey": "⑩",
+    "title": "Design, Digital Humanities, and Information Visualization for Cultural Heritage",
+    "author": [
+      {
+        "family": "Trocchianesi",
+        "given": "R."
+      },
+      {
+        "family": "Bollini",
+        "given": "L."
+      }
+    ],
+    "container-title": "Multimodal Technologies and Interaction",
+    "issued": {
+      "date-parts": [
+        [
+          2023
+        ]
+      ]
+    },
+    "volume": "7",
+    "issue": "11",
+    "page": "102"
+  },
+  {
+    "id": "jia2026",
+    "type": "article-journal",
+    "citekey": "⑪",
+    "title": "Overseas reception of English translations of Journey to the West: Temporal dynamics, cross-platform sentiment patterns, and topic modeling",
+    "author": [
+      {
+        "family": "Jia",
+        "given": "N."
+      },
+      {
+        "family": "Xin",
+        "given": "J."
+      },
+      {
+        "family": "Wang",
+        "given": "Y."
+      }
+    ],
+    "container-title": "PLOS ONE",
+    "issued": {
+      "date-parts": [
+        [
+          2026
+        ]
+      ]
+    }
+  },
+  {
+    "id": "ping2024",
+    "type": "article-journal",
+    "citekey": "⑫",
+    "title": "Retranslated Chinese classical canon Journey to the West: a stylometric comparison between Julia Lovell's retranslation and Arthur Waley's translation",
+    "author": [
+      {
+        "family": "Ping",
+        "given": "Y."
+      },
+      {
+        "family": "Wang",
+        "given": "B."
+      }
+    ],
+    "container-title": "Digital Scholarship in the Humanities",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "volume": "39",
+    "issue": "1",
+    "page": "308-320",
+    "DOI": "10.1093/llc/fqad085"
+  },
+  {
+    "id": "fan2020",
+    "type": "article-journal",
+    "citekey": "⑬",
+    "title": "Visual order of Chinese ink paintings",
+    "author": [
+      {
+        "family": "Fan",
+        "given": "Z. B."
+      },
+      {
+        "family": "Zhang",
+        "given": "K."
+      }
+    ],
+    "container-title": "Visual Computing for Industry, Biomedicine, and Art",
+    "issued": {
+      "date-parts": [
+        [
+          2020
+        ]
+      ]
+    },
+    "volume": "3",
+    "issue": "1",
+    "page": "23"
+  },
+  {
+    "id": "yang2019",
+    "type": "article-journal",
+    "citekey": "⑭",
+    "title": "Aesthetic Experiences Across Cultures: Neural Correlates When Viewing Traditional Eastern or Western Landscape Paintings",
+    "author": [
+      {
+        "family": "Yang",
+        "given": "T."
+      },
+      {
+        "family": "Silveira",
+        "given": "S."
+      },
+      {
+        "family": "Formuli",
+        "given": "A."
+      }
+    ],
+    "container-title": "Frontiers in Psychology",
+    "issued": {
+      "date-parts": [
+        [
+          2019
+        ]
+      ]
+    },
+    "volume": "10",
+    "page": "798"
+  },
+  {
+    "id": "chen2025",
+    "type": "paper-conference",
+    "citekey": "⑮",
+    "title": "From Myth to Interface: An AI-Augmented Interactive Visual System for Exploring Artifact Interactions in Journey to the West",
+    "author": [
+      {
+        "family": "Chen",
+        "given": "Z."
+      },
+      {
+        "family": "Xie",
+        "given": "A."
+      },
+      {
+        "family": "Liu",
+        "given": "Y."
+      }
+    ],
+    "container-title": "International Symposium on Visual Information Communication and Interaction (VINCI)",
+    "publisher": "ACM",
+    "issued": {
+      "date-parts": [
+        [
+          2025
+        ]
+      ]
+    },
+    "page": "58:1-58:8",
+    "DOI": "10.1145/3769534.3769615"
+  },
+  {
+    "id": "wcag22",
+    "type": "standard",
+    "citekey": "⑯",
+    "title": "Web Content Accessibility Guidelines (WCAG) 2.2",
+    "author": [
+      {
+        "literal": "W3C"
+      }
+    ],
+    "URL": "https://www.w3.org/TR/WCAG22/",
+    "issued": {
+      "date-parts": [
+        [
+          2023
+        ]
+      ]
+    }
+  },
+  {
+    "id": "arnheim1998",
+    "type": "book",
+    "citekey": "[1]",
+    "title": "艺术与视知觉",
+    "author": [
+      {
+        "literal": "鲁道夫·阿恩海姆"
+      }
+    ],
+    "translator": [
+      {
+        "literal": "滕守尧"
+      },
+      {
+        "literal": "朱疆源"
+      }
+    ],
+    "publisher": "四川人民出版社",
+    "publisher-place": "成都",
+    "issued": {
+      "date-parts": [
+        [
+          1998
+        ]
+      ]
+    }
+  },
+  {
+    "id": "puandi1993",
+    "type": "book",
+    "citekey": "[2]",
+    "title": "明代小说四大奇书",
+    "author": [
+      {
+        "literal": "蒲安迪"
+      }
+    ],
+    "translator": [
+      {
+        "literal": "沈亨寿"
+      }
+    ],
+    "publisher": "中国和平出版社",
+    "publisher-place": "北京",
+    "issued": {
+      "date-parts": [
+        [
+          1993
+        ]
+      ]
+    }
+  },
+  {
+    "id": "wangshouzhi2002",
+    "type": "book",
+    "citekey": "[3]",
+    "title": "世界现代设计史",
+    "author": [
+      {
+        "literal": "王受之"
+      }
+    ],
+    "publisher": "中国青年出版社",
+    "publisher-place": "北京",
+    "issued": {
+      "date-parts": [
+        [
+          2002
+        ]
+      ]
+    }
+  },
+  {
+    "id": "liyanzu2009",
+    "type": "book",
+    "citekey": "[4]",
+    "title": "设计学概论",
+    "author": [
+      {
+        "literal": "李砚祖"
+      }
+    ],
+    "publisher": "湖北美术出版社",
+    "publisher-place": "武汉",
+    "issued": {
+      "date-parts": [
+        [
+          2009
+        ]
+      ]
+    }
+  },
+  {
+    "id": "zhuhongbo2018",
+    "type": "book",
+    "citekey": "[5]",
+    "title": "西游学十二讲",
+    "author": [
+      {
+        "literal": "竺洪波"
+      }
+    ],
+    "publisher": "中华书局",
+    "publisher-place": "北京",
+    "issued": {
+      "date-parts": [
+        [
+          2018
+        ]
+      ]
+    }
+  }
+]

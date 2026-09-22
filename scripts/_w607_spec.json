@@ -1,0 +1,29 @@
+{
+ "batch": "W607",
+ "version": "v2.3.207",
+ "date": "2026-09-22",
+ "title": "W607 S4 论文 Word 化与文献库 — 投稿版/匿名稿 docx 生成 + Zotero 文献 JSON（Word COM 渲染验收）",
+ "desc": "S4 投稿交付物生成",
+ "head_entry": "2026-09-22（v2.3.207 W607 S4 论文 Word 化与文献库：①投稿版/匿名稿 .docx 生成（scripts/_w607_md2docx.js 运行时解析 md——黑体标题/宋体正文 1.5 倍距/三线表/图 1-6 嵌入带《装饰》图注/注释参考文献悬挂缩进·图高 800px 上限修复图 5 长条截图跨页两处 fail·docx-js postcheck 9/9·Microsoft Word COM 导出 PDF 渲染 visual-judge 验收 13/13 页 pass）；②正文补图注引用 3 处（图 1/2/6 原正文零引用）+字数重测回填（正文 6,438 字/全稿 10,563 字符·词计 9,919）；③文献库 Zotero 可导入 CSL JSON 21 条=注释 16+参考文献 5·DOI 仅带联网核验过的 3 条·宁缺勿造——其余条目待知网级复核后再补）",
+ "head_sentence": "S4 论文 Word 化——投稿 docx 双稿生成与 Zotero 文献库",
+ "changelog_body": "\n\n> **来源**：用户接续「GitHub 论文写作工具」选型讨论——按既定建议落地「Markdown 单源 → 投稿 Word + 文献库」管线；用户指定渲染验证用本机 Microsoft Word（不用 LibreOffice），遵照执行。\n> - **执行（docx 生成管线）**：scripts/_w607_md2docx.js——运行时直接解析论文 md 源（不在 JS 内嵌中文文本·规避引号转义·论文每次改动可一键重出 Word），产出格式：标题黑体小二居中/节标题黑体四号/正文宋体小四 1.5 倍距两端对齐首行缩进两字符/表 1 三线表（表题上方 keepNext）/图 1-6 嵌入（图注下方「图 N　图名（来源）」格式·图 3-5 用浅色截图）/注释①-⑯与参考文献[1]-[5]悬挂缩进五号/页脚居中页码。docx npm 包装于 tmpe/w607_docxgen（DOCX_NM 环境变量引入·不入仓库依赖）。\n> - **执行（渲染验收·用户指定 Word）**：postcheck.py 机检两稿 9/9 全过；渲染走 PowerShell + Microsoft Word COM（ExportAsFixedFormat 导出 PDF·非 LibreOffice）→ PyMuPDF 逐页 PNG → documents:visual-judge 验收：首轮 11/13——图 5（2640×6422 长条整页截图）540 宽等比缩放达 1314px 高致图侵页脚区页码缺失、图注跨页两处 fail；修复=生成器加图高 800px 上限（图 5 等比缩至 337×800）重新生成重渲染，复验 6/6 pass（页码链恢复·图注同页·缩窄后区块结构可辨）。终态 13/13。\n> - **执行（图注引用补全）**：图 1/2/6 原正文零引用（违反论文自述的图表引用规范），正文补 3 处锚点——§3「把文学母题转译成设计变量（图 1）」「三层模型解决不漂移（图 2）」、§5「预期结果示意见图 6」；两稿同步；字数当批重测回填页脚（正文 6,438 字·全稿 10,563 字符·英文按词计 9,919——8000-10000 区间内）。\n> - **执行（文献库）**：scripts/_w607_zotero_export.py 产出 B轨论文文献-Zotero导入.json（CSL JSON 21 条=注释 16+参考文献 5·中文作者 literal 字段·DOI 仅带 W604/W605 联网核验过的 3 条：①10.1353/ks.2023.a908620/⑫10.1093/llc/fqad085/⑮10.1145/3769534.3769615——其余宁缺勿造·知网级复核后再补）。\n> - **验证**：docx-js postcheck 两稿 9/9；Word COM 渲染 visual-judge 终态 13/13 pass；lint_links 68 链接 0 broken；verify_delivery 核心全绿；Zotero JSON 21 条解析校验过。\n> - **文件**：docs/S4-学术投稿/ 5 文件（投稿版.docx/匿名稿.docx/Zotero JSON 新建·两 md 补图注引用）、scripts/_w607_md2docx.js、scripts/_w607_zotero_export.py、scripts/_w607_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。\n> - **状态**：已落地（本批随 W607 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.207 W607 S4 论文 Word 化与文献库（2026-09-22）**：\n  - 投稿版/匿名稿 .docx 生成（md 运行时解析·三线表·图 1-6 嵌入·图高上限修复跨页 fail·Word COM 渲染 visual-judge 13/13 pass）\n  - 文献库 Zotero CSL JSON 21 条（DOI 仅带已核验 3 条·宁缺勿造）·正文补图注引用 3 处",
+ "agents_note": "2026-09-22（v2.3.207 W607）S4 论文 Word 化与文献库：无 § 结构性变更（投稿 docx 双稿生成·Word COM 渲染验收 13/13·Zotero 文献 JSON 21 条·图注引用补全），仅版本脚注同步",
+ "file_index_rows": [
+  "| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W607 | 新建·Word 投稿稿（13 页·图 1-6 嵌入·Word COM 渲染验收通过） |",
+  "| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W607 | 新建·双盲匿名 Word 稿（同管线产出） |",
+  "| docs/S4-学术投稿/B轨论文文献-Zotero导入.json | W607 | 新建·CSL JSON 21 条（DOI 仅带已核验 3 条） |",
+  "| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W607 | 修改·图注引用补全 3 处+字数重测回填（正文 6,438） |",
+  "| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W607 | 修改·图注引用同步 3 处 |",
+  "| scripts/_w607_md2docx.js | W607 | 新建·md→docx 转换器（运行时解析·图高 800px 上限） |",
+  "| scripts/_w607_zotero_export.py | W607 | 新建·文献库 CSL JSON 导出（宁缺勿造纪律） |",
+  "| CHANGELOG.md | W607 | 新增·W607 版段 + 编号规则上限 W001-W607 |",
+  "| 交接文档.md | W607 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W607 | 修改·版本行同步 v2.3.207 |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W607 | 修改·四页脚链首 prepend W607 |",
+  "| .github/workflows/README.md | W607 | 修改·旁文档同步 |",
+  "| AGENTS.md | W607 | 修改·版本脚注追加 W607 |",
+  "| scripts/output/file-index.md | W607 | 新增·W607 段（本段·batch_cascade.py 执行） |",
+  "| scripts/_w607_spec.json | W607 | 新建·本批级联 spec |"
+ ]
+}
