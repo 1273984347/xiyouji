@@ -11,6 +11,28 @@
 ---
 
 
+## W606 W606 S4 论文语域专业化（2026-09-22·v2.3.206）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W606 | 修改·v2.3 语域专业化 24 处+文献激活 [1]-[5]+跨稿残留修复+字数重测回填 |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W606 | 修改·自 v2.3 脚本化重建（正文 diff 仅 1 行预期脱敏点） |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集.md | W606 | 修改·完整稿语域修正 15 处+我们→本文×18 |
+| docs/S4-学术投稿/图表_清单.md | W606 | 修改·自绘示意图条目补重绘脚本指针 |
+| docs/S4-学术投稿/图表/图1-文化母题转译流程.png | W606 | 修改·重绘（盒标题裁切根治·文字盒内居中） |
+| docs/S4-学术投稿/图表/图2-令牌三层模型.png | W606 | 修改·重绘（箭头穿字根治·箭头走层间空隙+侧注） |
+| docs/S4-学术投稿/图表/图6-用户研究结果-示意.png | W606 | 修改·风格统一（标题改墨色·令牌配色） |
+| scripts/_w606_prose_polish.py | W606 | 新建·语域批量修正脚本（逐处断言·一次性） |
+| scripts/_w606_paper_figures.py | W606 | 新建·配图重绘脚本（常驻可复现） |
+| CHANGELOG.md | W606 | 新增·W606 版段 + 编号规则上限 W001-W606 |
+| 交接文档.md | W606 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W606 | 修改·版本行同步 v2.3.206 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W606 | 修改·四页脚链首 prepend W606 |
+| .github/workflows/README.md | W606 | 修改·旁文档同步 |
+| AGENTS.md | W606 | 修改·版本脚注追加 W606 |
+| scripts/output/file-index.md | W606 | 新增·W606 段（本段·batch_cascade.py 执行） |
+| scripts/_w606_spec.json | W606 | 新建·本批级联 spec |
+
 ## W605 W605 S4 学术核查修正（2026-09-22·v2.3.205）
 
 | 文件 | W | 说明 |
