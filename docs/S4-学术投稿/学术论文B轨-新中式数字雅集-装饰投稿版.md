@@ -19,7 +19,7 @@
 
 **Abstract**: Digital-humanities visualization tends to be "dashboard-ized": data is disciplined into statistical charts of Western templates, divorcing the visual language of cultural motifs from their textual cores, leaving motion without cultural semantics and accessibility ungoverned. Taking 86 interactive visualizations of *Journey to the West*, this paper proposes a replicable "New-Chinese Digital Elegance" design system: rice-paper, ink and cinnabar tokens encode cultural semantics and distribute across 233 pages through a three-tier architecture; a three-tier duration and easing contract governs motion; dual CSS/JS guards build in accessibility; a one-source-multi-form pipeline secures reproducibility. The practice shows that local aesthetics can be written into design tokens, motion specifications, and verification gates as a transferable design methodology for classical Chinese literature.
 
-**Keywords**: digital humanities; data visualization; design system; Chinese aesthetics; Journey to the West
+**Keywords**: digital humanities; data visualization; design system; Chinese aesthetics; *Journey to the West*
 
 ---
 
@@ -60,7 +60,7 @@ RQ1 回答"令牌从何而来"。方法概括为：**把文学母题转译成设
 
 **双重约束**调和"文化语义"与"数据编码"：图表雅集系列色板（表 2）全取自同一水墨矿物色族保证多系列统一，语义色（accent/rebel/ok/warn/danger）与之错开。经典用例是八十一难难度热力图（详见案例二）以"米白→暗朱"五级色阶替代红绿渐变：五个锚点明度单调递减，色弱读者靠明度即可区分，且色相始终不脱离水墨矿物色族，与文本气质一致。
 
-**表 2　雅集系列色板（--chart-1..6）**
+**表 2　雅集系列色板（--chart-1 至 --chart-6）**
 
 | 令牌 | 色名 | 值 |
 |---|---|---|
@@ -164,5 +164,5 @@ RQ3 的完整问题是可复制性。系统的价值不在单个页面的视觉�
 
 ---
 
-> 本稿为《装饰》投稿版 v2.3。**字数为当批实测**（2026-09-22·去 Markdown 记号后非空白字符）：中文摘要 220 字；正文 1-8 节 6,791 字（官网口径「正文不超 10000 字」内）；全稿含中英文摘要、注释与参考文献 10,324 字符（英文摘要按字母计·按词计约 9,680）——处于官网 8000-10000 字区间。字数按投稿稿件口径实测（题名至参考文献·不含仓库内部注记）——处于官网 8000-10000 字（含注释参考文献）区间。配套图表 9 张见 [图表目录](图表_清单.md)（图 1/2/6 重绘与风格统一见 scripts/_w606_paper_figures.py）。完整论证见 [完整稿](学术论文B轨-新中式数字雅集.md)。
+> 本稿为《装饰》投稿版 v2.3。**字数为当批实测**（2026-09-22·去 Markdown 记号后非空白字符）：中文摘要 220 字；正文 1-8 节 6,795 字（官网口径「正文不超 10000 字」内）；全稿含中英文摘要、注释与参考文献 10,328 字符（英文摘要按字母计·按词计约 9,684）——处于官网 8000-10000 字区间。字数按投稿稿件口径实测（题名至参考文献·不含仓库内部注记）——处于官网 8000-10000 字（含注释参考文献）区间。配套图表 9 张见 [图表目录](图表_清单.md)（图 1/2/6 重绘与风格统一见 scripts/_w606_paper_figures.py）。完整论证见 [完整稿](学术论文B轨-新中式数字雅集.md)。
 > 待办：投稿前 48 小时按 [政策核查](装饰投稿政策核查-2026-09.md) 复核最新投稿须知与 AI 政策；逐期调阅近三年目录核实"设计实践"栏目口味；执行用户研究回填图 6 正式数据；图注与注释页码最终核对。

@@ -11,6 +11,23 @@
 ---
 
 
+## W611 W611 第三份审读微采纳（2026-09-23·v2.3.211）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W611 | 修改·表 2 题注写法+英文关键词斜体+字数回填 |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W611 | 修改·同投稿版镜像 |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W611 | 修改·重生成（postcheck 9/9·斜体渲染验证） |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W611 | 修改·重生成（同管线） |
+| CHANGELOG.md | W611 | 新增·W611 版段 + 编号规则上限 W001-W611 |
+| 交接文档.md | W611 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W611 | 修改·版本行同步 v2.3.211 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W611 | 修改·四页脚链首 prepend W611 |
+| .github/workflows/README.md | W611 | 修改·旁文档同步 |
+| AGENTS.md | W611 | 修改·版本脚注追加 W611 |
+| scripts/output/file-index.md | W611 | 新增·W611 段（本段·batch_cascade.py 执行） |
+| scripts/_w611_spec.json | W611 | 新建·本批级联 spec |
+
 ## W610 W610 第二份外部审读分级采纳（2026-09-23·v2.3.210）
 
 | 文件 | W | 说明 |
