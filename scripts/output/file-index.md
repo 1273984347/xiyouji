@@ -11,6 +11,23 @@
 ---
 
 
+## W608 W608 匿名稿图双盲脱敏（2026-09-23·v2.3.208）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W608 | 修改·图 5 品牌栏裁除变体重生成（postcheck 9/9·Word 渲染复验 8/8） |
+| docs/S4-学术投稿/图表_清单.md | W608 | 修改·匿名衍生图说明（裁剪脚本+管线入口） |
+| scripts/_w608_crop_fig5.py | W608 | 新建·图 5 顶栏脱敏裁剪（尺寸断言+三级实测） |
+| scripts/_w607_md2docx.js | W608 | 修改·FIG5_OVERRIDE 环境变量（仅匿名稿引用裁除变体） |
+| CHANGELOG.md | W608 | 新增·W608 版段 + 编号规则上限 W001-W608 |
+| 交接文档.md | W608 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W608 | 修改·版本行同步 v2.3.208 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W608 | 修改·四页脚链首 prepend W608 |
+| .github/workflows/README.md | W608 | 修改·旁文档同步 |
+| AGENTS.md | W608 | 修改·版本脚注追加 W608 |
+| scripts/output/file-index.md | W608 | 新增·W608 段（本段·batch_cascade.py 执行） |
+| scripts/_w608_spec.json | W608 | 新建·本批级联 spec |
+
 ## W607 W607 S4 论文 Word 化与文献库（2026-09-22·v2.3.207）
 
 | 文件 | W | 说明 |

@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W607），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W608），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.208（2026-09-23）：W608 匿名稿图 5 双盲脱敏 — 品牌栏裁除变体重生成 docx（Word 渲染复验 8/8 pass）
+
+> **来源**：W607 交付说明中登记的双盲风险点（匿名稿 docx 内嵌图 5 截图顶栏含站点品牌栏）——用户裁决「重新生成」，执行脱敏裁除路线。
+> - **执行（脱敏核查）**：逐张核查图 3-5 浅色截图——图 3（2044×1278 纯网络图白底）/图 4（2296×842 纯热力图宣纸底）均无品牌栏与导航，无需处理；图 5（2640×6422 整页截图）顶栏含红色 logo 块「西游记·详解」+「详解西游记」文字+首页/数据看板/标签云/全文检索导航——为唯一去匿名化风险面。
+> - **执行（裁剪）**：scripts/_w608_crop_fig5.py（PIL·尺寸断言防源图变更后裁错位）——裁剪量三级实测：110px 余 logo 残角、160px 顶缘仍余 logo 底尖红线、175px 净；程序化校验顶部 20 行红色像素采样 0；衍生图产 tmpe/w607_docxgen（不入仓库图表目录·仅匿名稿引用·源图不动）。
+> - **执行（管线）**：_w607_md2docx.js 加 FIG5_OVERRIDE 环境变量——仅匿名稿生成时指向裁除变体，投稿版生成路径不动（非匿名面）；匿名稿 docx 重生成（1.08MB·postcheck 9/9 全过）。
+> - **验证**：Microsoft Word COM 导出 PDF（13 页）→ PyMuPDF 渲染 → documents:visual-judge 聚焦复验 8/8 pass——p9 图 5 截图顶部以 PLACES 统计列表开头，无 logo/站名/导航残留；图注同页、环形图正圆无变形、页码 1/7-13 连续、p1 无作者信息。
+> - **文件**：docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx（修改·脱敏重生成）、docs/S4-学术投稿/图表_清单.md（修改·匿名衍生图说明）、scripts/_w608_crop_fig5.py（新建）、scripts/_w607_md2docx.js（修改·FIG5_OVERRIDE）、scripts/_w608_spec.json（新建）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批随 W608 提交并 push origin/main）。
 ### v2.3.207（2026-09-22）：W607 S4 论文 Word 化与文献库 — 投稿版/匿名稿 docx 生成 + Zotero 文献 JSON（Word COM 渲染验收）
 
 > **来源**：用户接续「GitHub 论文写作工具」选型讨论——按既定建议落地「Markdown 单源 → 投稿 Word + 文献库」管线；用户指定渲染验证用本机 Microsoft Word（不用 LibreOffice），遵照执行。

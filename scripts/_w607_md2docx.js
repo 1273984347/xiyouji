@@ -29,6 +29,8 @@ if (!inputMd || !outputDocx) {
 
 const ROOT = "D:/xiyouji";
 const FIGDIR = ROOT + "/docs/S4-学术投稿/图表";
+// FIG5_OVERRIDE：匿名稿用顶栏裁除变体（scripts/_w608_crop_fig5.py 产出·双盲脱敏）
+const FIG5 = process.env.FIG5_OVERRIDE || FIGDIR + "/图5-取经路线图-浅.png";
 
 // ---------- 字体/版式常量（学术场景·纯黑正文） ----------
 const F_BODY = { ascii: "Times New Roman", eastAsia: "SimSun" };
@@ -45,7 +47,7 @@ const FIGS = {
     cap: "图 3\u3000人物语义网络页·浅色主题（来源：项目页面截图）" },
   "4": { file: FIGDIR + "/图4-八十一难难度热力图-浅.png", w: 540,
     cap: "图 4\u3000八十一难难度热力图·浅色主题（来源：项目页面截图）" },
-  "5": { file: FIGDIR + "/图5-取经路线图-浅.png", w: 540,
+  "5": { file: FIG5, w: 540,
     cap: "图 5\u3000取经路线图·浅色主题（来源：项目页面截图）" },
   "6": { file: FIGDIR + "/图6-用户研究结果-示意.png", w: 540,
     cap: "图 6\u3000用户研究结果·示意数据（来源：作者自绘，正式数据待研究执行后回填）" },

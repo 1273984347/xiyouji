@@ -1,0 +1,26 @@
+{
+ "batch": "W608",
+ "version": "v2.3.208",
+ "date": "2026-09-23",
+ "title": "W608 匿名稿图 5 双盲脱敏 — 品牌栏裁除变体重生成 docx（Word 渲染复验 8/8 pass）",
+ "desc": "匿名稿图 5 品牌栏脱敏",
+ "head_entry": "2026-09-23（v2.3.208 W608 匿名稿图 5 双盲脱敏：图 5 整页截图顶栏含站点品牌「详解西游记」logo+四项导航——双盲评审去匿名化风险面；新增 scripts/_w608_crop_fig5.py 裁品牌栏 175px（110/160 两级残留红线·175 净·程序化采样 0 红残留）产 tmpe 衍生图·生成器加 FIG5_OVERRIDE 环境变量仅匿名稿引用·匿名稿 docx 重生成（postcheck 9/9）·Microsoft Word COM 渲染 visual-judge 复验 8/8 pass（品牌痕迹清零·图注同页·无变形·页码连续）·图 3/图 4 经核查为纯图表无品牌栏无需处理·投稿版 docx 非匿名面不动）",
+ "head_sentence": "匿名稿图 5 品牌栏脱敏重生成——双盲风险面清零",
+ "changelog_body": "\n\n> **来源**：W607 交付说明中登记的双盲风险点（匿名稿 docx 内嵌图 5 截图顶栏含站点品牌栏）——用户裁决「重新生成」，执行脱敏裁除路线。\n> - **执行（脱敏核查）**：逐张核查图 3-5 浅色截图——图 3（2044×1278 纯网络图白底）/图 4（2296×842 纯热力图宣纸底）均无品牌栏与导航，无需处理；图 5（2640×6422 整页截图）顶栏含红色 logo 块「西游记·详解」+「详解西游记」文字+首页/数据看板/标签云/全文检索导航——为唯一去匿名化风险面。\n> - **执行（裁剪）**：scripts/_w608_crop_fig5.py（PIL·尺寸断言防源图变更后裁错位）——裁剪量三级实测：110px 余 logo 残角、160px 顶缘仍余 logo 底尖红线、175px 净；程序化校验顶部 20 行红色像素采样 0；衍生图产 tmpe/w607_docxgen（不入仓库图表目录·仅匿名稿引用·源图不动）。\n> - **执行（管线）**：_w607_md2docx.js 加 FIG5_OVERRIDE 环境变量——仅匿名稿生成时指向裁除变体，投稿版生成路径不动（非匿名面）；匿名稿 docx 重生成（1.08MB·postcheck 9/9 全过）。\n> - **验证**：Microsoft Word COM 导出 PDF（13 页）→ PyMuPDF 渲染 → documents:visual-judge 聚焦复验 8/8 pass——p9 图 5 截图顶部以 PLACES 统计列表开头，无 logo/站名/导航残留；图注同页、环形图正圆无变形、页码 1/7-13 连续、p1 无作者信息。\n> - **文件**：docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx（修改·脱敏重生成）、docs/S4-学术投稿/图表_清单.md（修改·匿名衍生图说明）、scripts/_w608_crop_fig5.py（新建）、scripts/_w607_md2docx.js（修改·FIG5_OVERRIDE）、scripts/_w608_spec.json（新建）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。\n> - **状态**：已落地（本批随 W608 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.208 W608 匿名稿图 5 双盲脱敏（2026-09-23）**：\n  - 图 5 截图品牌栏裁除 175px（三级实测+红色像素采样 0）·FIG5_OVERRIDE 管线仅匿名稿引用\n  - 匿名稿 docx 重生成·Word COM 渲染 visual-judge 复验 8/8 pass——双盲风险面清零",
+ "agents_note": "2026-09-23（v2.3.208 W608）匿名稿图 5 双盲脱敏：无 § 结构性变更（品牌栏裁除 175px·衍生图仅匿名稿引用·docx 重生成 Word 渲染复验 8/8 pass），仅版本脚注同步",
+ "file_index_rows": [
+  "| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W608 | 修改·图 5 品牌栏裁除变体重生成（postcheck 9/9·Word 渲染复验 8/8） |",
+  "| docs/S4-学术投稿/图表_清单.md | W608 | 修改·匿名衍生图说明（裁剪脚本+管线入口） |",
+  "| scripts/_w608_crop_fig5.py | W608 | 新建·图 5 顶栏脱敏裁剪（尺寸断言+三级实测） |",
+  "| scripts/_w607_md2docx.js | W608 | 修改·FIG5_OVERRIDE 环境变量（仅匿名稿引用裁除变体） |",
+  "| CHANGELOG.md | W608 | 新增·W608 版段 + 编号规则上限 W001-W608 |",
+  "| 交接文档.md | W608 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W608 | 修改·版本行同步 v2.3.208 |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W608 | 修改·四页脚链首 prepend W608 |",
+  "| .github/workflows/README.md | W608 | 修改·旁文档同步 |",
+  "| AGENTS.md | W608 | 修改·版本脚注追加 W608 |",
+  "| scripts/output/file-index.md | W608 | 新增·W608 段（本段·batch_cascade.py 执行） |",
+  "| scripts/_w608_spec.json | W608 | 新建·本批级联 spec |"
+ ]
+}
