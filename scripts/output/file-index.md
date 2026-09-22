@@ -11,6 +11,33 @@
 ---
 
 
+## W612 W612 用户研究整体删除（2026-09-23·v2.3.212）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/S4-学术投稿/B轨论文-用户研究协议.md | W612 | 删除·用户研究整体移除（git 历史可溯） |
+| docs/S4-学术投稿/图表/图6-用户研究设计.png | W612 | 删除·随用户研究移除 |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W612 | 修改·用户研究段/局限其一/注⑮删除·⑯→⑮·字数回填 |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W612 | 修改·同投稿版镜像 |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集.md | W612 | 修改·4.6 节删除+局限/路线图清理+[15]Chen 删+[16]→[15] |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-大纲.md | W612 | 修改·4.4 用户研究小节+图 6 行删除 |
+| docs/S4-学术投稿/图表_清单.md | W612 | 修改·图 6 行/状态说明删除·标题 9→8 张 |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W612 | 修改·重生成（12 页·postcheck 9/9） |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W612 | 修改·重生成（同管线） |
+| docs/S4-学术投稿/B轨论文文献-Zotero导入.json | W612 | 修改·21→20 条（Chen 移除） |
+| scripts/_w607_md2docx.js | W612 | 修改·图 6 配置删除+§5 图列表 [3,4,5] |
+| scripts/_w607_zotero_export.py | W612 | 修改·Chen 条目移除 |
+| scripts/_w612_remove_user_study.py | W612 | 新建·删除手术脚本（完整稿部分） |
+| scripts/_w612b_finish.py | W612 | 新建·删除收尾脚本（投稿版/匿名稿/大纲/清单·CRLF 适配+幂等） |
+| CHANGELOG.md | W612 | 新增·W612 版段 + 编号规则上限 W001-W612 |
+| 交接文档.md | W612 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W612 | 修改·版本行同步 v2.3.212 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W612 | 修改·四页脚链首 prepend W612 |
+| .github/workflows/README.md | W612 | 修改·旁文档同步 |
+| AGENTS.md | W612 | 修改·版本脚注追加 W612 |
+| scripts/output/file-index.md | W612 | 新增·W612 段（本段·batch_cascade.py 执行） |
+| scripts/_w612_spec.json | W612 | 新建·本批级联 spec |
+
 ## W611 W611 第三份审读微采纳（2026-09-23·v2.3.211）
 
 | 文件 | W | 说明 |
