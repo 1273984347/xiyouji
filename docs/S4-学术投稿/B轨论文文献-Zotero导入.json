@@ -123,12 +123,22 @@
     "id": "ecnu2023",
     "type": "webpage",
     "citekey": "⑥",
-    "title": "《西游记》文学探索地图（2023 CaGIS 学生组 Arthur Robinson 荣誉奖）",
+    "title": "《西游记》文学探索地图（2023 CaGIS 年度地图设计大赛学生组 Arthur Robinson 荣誉提名奖）",
     "author": [
       {
         "literal": "华东师范大学地理科学学院"
       }
-    ]
+    ],
+    "URL": "https://geo.ecnu.edu.cn",
+    "accessed": {
+      "date-parts": [
+        [
+          2026,
+          9,
+          23
+        ]
+      ]
+    }
   },
   {
     "id": "shizhuo2023",
@@ -159,16 +169,34 @@
     "page": "1230-1235,1243"
   },
   {
-    "id": "zhaowei",
-    "type": "webpage",
+    "id": "zhaowei2018",
+    "type": "article-journal",
     "citekey": "⑧",
-    "title": "李劼人《大波》人物网络分析（社会网络分析案例）",
+    "title": "社会网络分析与\"《大波》三部曲\"的人物功能",
     "author": [
       {
         "literal": "赵薇"
       }
     ],
-    "publisher": "北京大学数字人文导航"
+    "container-title": "山东社会科学",
+    "issued": {
+      "date-parts": [
+        [
+          2018
+        ]
+      ]
+    },
+    "issue": "9",
+    "URL": "https://nav.pkudh.org",
+    "accessed": {
+      "date-parts": [
+        [
+          2026,
+          9,
+          23
+        ]
+      ]
+    }
   },
   {
     "id": "windhager2018",
