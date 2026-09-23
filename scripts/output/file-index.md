@@ -11,6 +11,24 @@
 ---
 
 
+## W616 W616 《装饰》投稿包独立文件夹迁移（2026-09-24·v2.3.216）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/S4-学术投稿/装饰投稿/（目录·12 文件） | W616 | 迁入·B 轨《装饰》投稿包独立储存（三稿+docx+大纲+两调研+政策核查+投稿辅助+Zotero+图表清单·自 S4 根 git mv） |
+| docs/S4-学术投稿/装饰投稿/图表/（图1-5 浅暗 9 PNG） | W616 | 迁入·B 轨配套图随包（自 S4/图表/ git mv） |
+| docs/S4-学术投稿/图表/（A-图×3） | W616 | 留守·A 轨灰度图路径不变 |
+| scripts/_w616_zhuangshi_folder.py | W616 | 新建·迁移链接/脚本路径修复器（链接自检断言+双形态规则+幂等） |
+| scripts/ 9 个 _w6 脚本 | W616 | 修改·路径常量迁新址（_w606×2/_w607×2/_w608/_w612×2/_w614/_w615·FIGDIR/Zotero out） |
+| CHANGELOG.md | W616 | 新增·W616 版段 + 编号规则上限 W001-W616 |
+| 交接文档.md | W616 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W616 | 修改·版本行同步 v2.3.216 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W616 | 修改·四页脚链首 prepend W616 |
+| .github/workflows/README.md | W616 | 修改·旁文档同步 |
+| AGENTS.md | W616 | 修改·版本脚注追加 W616 |
+| scripts/output/file-index.md | W616 | 新增·W616 段（本段·batch_cascade.py 执行） |
+| scripts/_w616_spec.json | W616 | 新建·本批级联 spec |
+
 ## W615 W615 官网体例定稿（2026-09-23·v2.3.215）
 
 | 文件 | W | 说明 |

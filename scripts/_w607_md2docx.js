@@ -28,7 +28,7 @@ if (!inputMd || !outputDocx) {
 }
 
 const ROOT = "D:/xiyouji";
-const FIGDIR = ROOT + "/docs/S4-学术投稿/图表";
+const FIGDIR = ROOT + "/docs/S4-学术投稿/装饰投稿/图表";
 // FIG5_OVERRIDE：匿名稿用顶栏裁除变体（scripts/_w608_crop_fig5.py 产出·双盲脱敏）
 const FIG5 = process.env.FIG5_OVERRIDE || FIGDIR + "/图5-取经路线图-浅.png";
 

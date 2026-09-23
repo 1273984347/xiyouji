@@ -9,11 +9,11 @@
 """
 import io
 
-SUB = "docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md"
-ANON = "docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md"
-FULL = "docs/S4-学术投稿/学术论文B轨-新中式数字雅集.md"
-OUTLINE = "docs/S4-学术投稿/学术论文B轨-新中式数字雅集-大纲.md"
-LIST = "docs/S4-学术投稿/图表_清单.md"
+SUB = "docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md"
+ANON = "docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-匿名稿.md"
+FULL = "docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集.md"
+OUTLINE = "docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-大纲.md"
+LIST = "docs/S4-学术投稿/装饰投稿/图表_清单.md"
 
 
 def load(p):

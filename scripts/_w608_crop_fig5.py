@@ -8,7 +8,7 @@
 from PIL import Image
 import os
 
-SRC = r"D:\xiyouji\docs\S4-学术投稿\图表\图5-取经路线图-浅.png"
+SRC = r"D:\xiyouji\docs\S4-学术投稿\装饰投稿\图表\图5-取经路线图-浅.png"
 OUT = r"D:\xiyouji\tmpe\w607_docxgen\图5-取经路线图-浅-匿名.png"
 CROP_TOP = 175  # 品牌栏高（160px 时顶缘仍余 logo 底尖红线·175px 净·KPI 区自 y≈235 起）
 

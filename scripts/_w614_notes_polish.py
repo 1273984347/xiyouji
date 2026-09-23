@@ -14,9 +14,9 @@
 import sys
 
 ROOT = r"D:\xiyouji"
-SUB = ROOT + r"\docs\S4-学术投稿\学术论文B轨-新中式数字雅集-装饰投稿版.md"
-ANON = ROOT + r"\docs\S4-学术投稿\学术论文B轨-新中式数字雅集-匿名稿.md"
-POLICY = ROOT + r"\docs\S4-学术投稿\装饰投稿政策核查-2026-09.md"
+SUB = ROOT + r"\docs\S4-学术投稿\装饰投稿\学术论文B轨-新中式数字雅集-装饰投稿版.md"
+ANON = ROOT + r"\docs\S4-学术投稿\装饰投稿\学术论文B轨-新中式数字雅集-匿名稿.md"
+POLICY = ROOT + r"\docs\S4-学术投稿\装饰投稿\装饰投稿政策核查-2026-09.md"
 
 # ---------- 两稿共用替换（old, new, 次数） ----------
 COMMON = [
