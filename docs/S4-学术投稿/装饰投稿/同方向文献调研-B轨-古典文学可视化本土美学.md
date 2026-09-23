@@ -5,7 +5,7 @@
 > 生成模型：DeepSeek-V4-Flash（主代理执笔·开放源 API 元数据核验）
 > 生成日期：2026-09-22
 > 核验状态：元数据级已核验（OpenAlex/Crossref/出版页）；全文级待知网查重
-> 关联：[学术投稿规划-三路线论文选题大纲与目标刊分级](学术投稿规划-三路线论文选题大纲与目标刊分级.md) · [S2 学术投稿候选](../S2-学术投稿/) · [学术论文索引](../../source/引用与网络解读/学术论文索引.md)
+> 关联：[学术投稿规划-三路线论文选题大纲与目标刊分级](../学术投稿规划-三路线论文选题大纲与目标刊分级.md) · [S2 学术投稿候选](../../S2-学术投稿/) · [学术论文索引](../../../source/引用与网络解读/学术论文索引.md)
 
 ---
 
@@ -16,7 +16,7 @@
 **检索方法**：
 - 首选 Giiisp/集思谱论文检索接口（skill：giiisp-paper-search-apis）——本机未配置 `GIIISP_AUTH_TOKEN`，按 skill 规则标记 **接口受限**，仅完成 dry-run 请求体构造（POST https://giiisp.com/first/paper/searchArxivByTitle），未真实调用。
 - **开放源回退**（skill 规定动作）：OpenAlex API（10 路检索词 × 每路 6 条）+ Semantic Scholar（首轮 4 路被 429 限流，转 OpenAlex）+ arXiv API（406/超时受限）+ 公开网页检索（维普/知网门户/出版社页）。
-- 结合 2026-09-22 规划文档第三节既有调研与项目 [学术论文索引](../../source/引用与网络解读/学术论文索引.md)（55 条·GB/T 7714）。
+- 结合 2026-09-22 规划文档第三节既有调研与项目 [学术论文索引](../../../source/引用与网络解读/学术论文索引.md)（55 条·GB/T 7714）。
 
 **检索词**：Journey to the West visualization / literary text visualization narrative / knowledge graph literature visualization / digital humanities visualization design / classical Chinese literature digital humanities / Eastern aesthetic data visualization design / literary map visualization / Chinese ink painting digital art visualization / cultural heritage data visualization design aesthetics / Storyline visualization narrative events。
 
@@ -81,4 +81,4 @@
 
 ---
 
-> 导航：[返回 S4 学术投稿](../S4-学术投稿/) · [学术投稿规划](学术投稿规划-三路线论文选题大纲与目标刊分级.md) · [学术论文索引](../../source/引用与网络解读/学术论文索引.md)
+> 导航：[返回 S4 学术投稿](../) · [学术投稿规划](../学术投稿规划-三路线论文选题大纲与目标刊分级.md) · [学术论文索引](../../../source/引用与网络解读/学术论文索引.md)

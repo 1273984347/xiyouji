@@ -11,9 +11,9 @@ import io
 import sys
 
 ROOT = r"D:\xiyouji"
-SUB = ROOT + r"\docs\S4-学术投稿\学术论文B轨-新中式数字雅集-装饰投稿版.md"
-FULL = ROOT + r"\docs\S4-学术投稿\学术论文B轨-新中式数字雅集.md"
-ANON = ROOT + r"\docs\S4-学术投稿\学术论文B轨-新中式数字雅集-匿名稿.md"
+SUB = ROOT + r"\docs\S4-学术投稿\装饰投稿\学术论文B轨-新中式数字雅集-装饰投稿版.md"
+FULL = ROOT + r"\docs\S4-学术投稿\装饰投稿\学术论文B轨-新中式数字雅集.md"
+ANON = ROOT + r"\docs\S4-学术投稿\装饰投稿\学术论文B轨-新中式数字雅集-匿名稿.md"
 
 
 def apply_pairs(path, pairs, tag):

@@ -122,7 +122,7 @@ ITEMS = [
      "issued": {"date-parts": [[2018]]}},
 ]
 
-out = r"D:\xiyouji\docs\S4-学术投稿\B轨论文文献-Zotero导入.json"
+out = r"D:\xiyouji\docs\S4-学术投稿\装饰投稿\B轨论文文献-Zotero导入.json"
 open(out, "w", encoding="utf-8", newline="").write(
     json.dumps(ITEMS, ensure_ascii=False, indent=2))
 print("written:", out, len(ITEMS), "items")
