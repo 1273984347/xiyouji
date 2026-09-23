@@ -11,6 +11,25 @@
 ---
 
 
+## W615 W615 官网体例定稿（2026-09-23·v2.3.215）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W615 | 修改·v2.5 官网体例重排+AI 文末声明+瘦身 548 字符+页脚实测回填+头注三重复修复 |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W615 | 修改·同款镜像（③佚名保持·双盲不变式断言过） |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W615 | 重生成·88 blocks·9,986 字符达标·13 页 |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W615 | 重生成·9,971 字符·图 5 脱敏变体 |
+| docs/S4-学术投稿/装饰投稿政策核查-2026-09.md | W615 | 修改·官网直采升级（来源行/定案段/清单 3·6·8 项） |
+| scripts/_w615_official_format.py | W615 | 新建·官网体例落地脚本（引号归一+幂等守卫+双盲断言） |
+| CHANGELOG.md | W615 | 新增·W615 版段 + 编号规则上限 W001-W615 |
+| 交接文档.md | W615 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W615 | 修改·版本行同步 v2.3.215 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W615 | 修改·四页脚链首 prepend W615 |
+| .github/workflows/README.md | W615 | 修改·旁文档同步 |
+| AGENTS.md | W615 | 修改·版本脚注追加 W615 |
+| scripts/output/file-index.md | W615 | 新增·W615 段（本段·batch_cascade.py 执行） |
+| scripts/_w615_spec.json | W615 | 新建·本批级联 spec |
+
 ## W614 W614 第四份外部审读分级采纳（2026-09-23·v2.3.214）
 
 | 文件 | W | 说明 |
