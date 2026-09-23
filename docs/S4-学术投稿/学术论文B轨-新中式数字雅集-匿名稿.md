@@ -1,7 +1,7 @@
 # 新中式·数字雅集：古典文学数据可视化的本土美学系统——以《西游记》86 幅交互可视化为例
 
 > 匿名稿 · 投稿用 · 不含作者信息与项目自指
-> 双盲评审改编自《装饰》投稿版 v2.3（2026-09-22·语域专业化与参考文献激活同步）
+> 双盲评审改编自《装饰》投稿版 v2.4（2026-09-23·文献体例与英文摘要微调同步镜像）
 > 投稿目标：装饰（设计实践栏目，首投天花板）
 > 写法依据：设计实践四段式（描述问题→分析问题→形成方案→成果验证）× DH 理论缺口
 
@@ -17,7 +17,7 @@
 
 **English Title**: New-Chinese Digital Elegance: A Local Aesthetic System for Classical Literature Data Visualization—A Case Study of 86 Interactive Visualizations of *Journey to the West*
 
-**Abstract**: Digital-humanities visualization tends to be "dashboard-ized": data is disciplined into statistical charts of Western templates, divorcing the visual language of cultural motifs from their textual cores, leaving motion without cultural semantics and accessibility ungoverned. Taking 86 interactive visualizations of *Journey to the West*, this paper proposes a replicable "New-Chinese Digital Elegance" design system: rice-paper, ink and cinnabar tokens encode cultural semantics and distribute across 233 pages through a three-tier architecture; a three-tier duration and easing contract governs motion; dual CSS/JS guards build in accessibility; a one-source-multi-form pipeline secures reproducibility. The practice shows that local aesthetics can be written into design tokens, motion specifications, and verification gates as a transferable design methodology for classical Chinese literature.
+**Abstract**: Digital-humanities visualization tends to be "dashboardized": data is disciplined into statistical charts of Western templates, divorcing the visual language of cultural motifs from their textual cores, leaving motion without cultural semantics and accessibility ungoverned. Taking 86 interactive visualizations of *Journey to the West* as an empirical case, this paper proposes a replicable "New-Chinese Digital Elegance" design system: rice-paper, ink and cinnabar tokens encode cultural semantics and are distributed across 233 pages through a three-tier architecture; a three-tier duration and easing contract governs motion; dual CSS/JS guards build in accessibility; a one-source-multi-form pipeline secures reproducibility. The practice shows that local aesthetics can be written into design tokens, motion specifications, and verification gates as a transferable design methodology for classical Chinese literature.
 
 **Keywords**: digital humanities; data visualization; design system; Chinese aesthetics; *Journey to the West*
 
@@ -135,26 +135,26 @@ RQ3 的完整问题是可复制性。系统的价值不在单个页面的视觉�
 
 ## 注释
 
-① Wall B, Lee D M. Stability in Variation: Visualizing the Actantial Core of *The Journey to the West*[J]. Korean Studies, 2023, 47(1): 117-144.
-② Drucker J. Humanities Approaches to Graphical Display[J]. Digital Humanities Quarterly, 2011, 5(1).
+① Wall B, Lee D M. Stability in Variation: Visualizing the Actantial Core of *The Journey to the West*[J]. *Korean Studies*, 2023, 47(1): 117-144.
+② Drucker J. Humanities Approaches to Graphical Display[J]. *Digital Humanities Quarterly*, 2011, 5(1).
 ③ 佚名. 以《西游记》为对象的数字人文可视化项目[EB/OL].（匿名：项目信息投稿时随作者信息一并提供）
-④ Cooper D, Gregory I. Mapping the English Lake District: a literary GIS[J]. Transactions of the Institute of British Geographers, 2010, 36(1): 89-108.
-⑤ Bushell S, Butler J O, Hay D, et al. Digital Literary Mapping: I. Visualizing and Reading Graph Topologies as Maps for Literature[J]. Cartographica, 2022, 57(1): 11-36.
+④ Cooper D, Gregory I. Mapping the English Lake District: a literary GIS[J]. *Transactions of the Institute of British Geographers*, 2010, 36(1): 89-108.
+⑤ Bushell S, Butler J O, Hay D, et al. Digital Literary Mapping: I. Visualizing and Reading Graph Topologies as Maps for Literature[J]. *Cartographica*, 2022, 57(1): 11-36.
 ⑥ 华东师范大学地理科学学院. 《西游记》文学探索地图[EB/OL]. 2023 CaGIS 年度地图设计大赛学生组 Arthur Robinson 荣誉提名奖. https://geo.ecnu.edu.cn［2026-09-23 引用］.
 ⑦ 史卓, 王萌, 曾树珍, 等. 基于知识图谱的文学叙事可视化研究[J]. 中国科技论文, 2023, 18(11): 1230-1235,1243.
-⑧ 赵薇. 社会网络分析与"《大波》三部曲"的人物功能[J]. 山东社会科学, 2018(9).
-⑨ Windhager F, Federico P, Schreder G, et al. Visualization of Cultural Heritage Collection Data: State of the Art and Future Challenges[J]. IEEE Transactions on Visualization and Computer Graphics, 2018, 25(6): 2311-2330.
-⑩ Trocchianesi R, Bollini L. Design, Digital Humanities, and Information Visualization for Cultural Heritage[J]. Multimodal Technologies and Interaction, 2023, 7(11): 102.
-⑪ Jia N, Xin J, Wang Y. Overseas reception of English translations of *Journey to the West*: Temporal dynamics, cross-platform sentiment patterns, and topic modeling[J]. PLOS ONE, 2026.
-⑫ Ping Y, Wang B. Retranslated Chinese classical canon *Journey to the West*: a stylometric comparison between Julia Lovell's retranslation and Arthur Waley's translation[J]. Digital Scholarship in the Humanities, 2024, 39(1): 308-320.
-⑬ Fan Z B, Zhang K. Visual order of Chinese ink paintings[J]. Visual Computing for Industry, Biomedicine, and Art, 2020, 3(1): 23.
-⑭ Yang T, Silveira S, Formuli A, et al. Aesthetic Experiences Across Cultures: Neural Correlates When Viewing Traditional Eastern or Western Landscape Paintings[J]. Frontiers in Psychology, 2019, 10: 798.
+⑧ 赵薇. 社会网络分析与"《大波》三部曲"的人物功能[J]. 山东社会科学, 2018(9): 50-64.
+⑨ Windhager F, Federico P, Schreder G, et al. Visualization of Cultural Heritage Collection Data: State of the Art and Future Challenges[J]. *IEEE Transactions on Visualization and Computer Graphics*, 2018, 25(6): 2311-2330.
+⑩ Trocchianesi R, Bollini L. Design, Digital Humanities, and Information Visualization for Cultural Heritage[J]. *Multimodal Technologies and Interaction*, 2023, 7(11): 102.
+⑪ Jia N, Xin J, Wang Y. Overseas reception of English translations of *Journey to the West*: Temporal dynamics, cross-platform sentiment patterns, and topic modeling[J]. *PLOS ONE*, 2026, 21(4): e0347253.
+⑫ Ping Y, Wang B. Retranslated Chinese classical canon *Journey to the West*: a stylometric comparison between Julia Lovell's retranslation and Arthur Waley's translation[J]. *Digital Scholarship in the Humanities*, 2024, 39(1): 308-320.
+⑬ Fan Z B, Zhang K. Visual order of Chinese ink paintings[J]. *Visual Computing for Industry, Biomedicine, and Art*, 2020, 3(1): 23.
+⑭ Yang T, Silveira S, Formuli A, et al. Aesthetic Experiences Across Cultures: Neural Correlates When Viewing Traditional Eastern or Western Landscape Paintings[J]. *Frontiers in Psychology*, 2019, 10: 798.
 ⑮ W3C. Web Content Accessibility Guidelines (WCAG) 2.2[S/OL]. https://www.w3.org/TR/WCAG22/［2026-09-23 引用］.
 
 ## 参考文献
 
-[1] 鲁道夫·阿恩海姆. 艺术与视知觉[M]. 滕守尧, 朱疆源, 译. 成都: 四川人民出版社, 1998.
-[2] 蒲安迪. 明代小说四大奇书[M]. 沈亨寿, 译. 北京: 中国和平出版社, 1993.
+[1] [美]鲁道夫·阿恩海姆. 艺术与视知觉[M]. 滕守尧, 朱疆源, 译. 成都: 四川人民出版社, 1998.
+[2] [美]蒲安迪. 明代小说四大奇书[M]. 沈亨寿, 译. 北京: 中国和平出版社, 1993.
 [3] 王受之. 世界现代设计史[M]. 北京: 中国青年出版社, 2002.
 [4] 李砚祖. 设计学概论[M]. 武汉: 湖北美术出版社, 2009.
 [5] 竺洪波. 西游学十二讲[M]. 北京: 中华书局, 2018.

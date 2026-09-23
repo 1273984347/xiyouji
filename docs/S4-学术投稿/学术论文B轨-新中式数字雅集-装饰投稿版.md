@@ -1,7 +1,7 @@
 # 新中式·数字雅集：古典文学数据可视化的本土美学系统——以《西游记》86 幅交互可视化为例
 
-> S4 学术论文（B 轨）·《装饰》投稿版 v2.3 · 2026-09-22
-> 创建于 2026-09-22（由 [完整稿](学术论文B轨-新中式数字雅集.md) 按《装饰》官网最新投稿须知（2026-07-02 版）改写：篇幅 8000-10000 字 · 摘要 ~200 字 · 关键词 4-5 个 · 注释与参考文献并行尾注制 · 中图分类号/文献标识码；据 2026-09-22 政策核查扩充正文与案例细节）；v2.1 摘要收敛至 220 字·字数声明改当批实测；v2.2 学术核查修正（幻觉文献替换·真实色阶·规则数实测·元数据修正·雅集定义段）；v2.3 语域专业化（去博客腔·节题降调·人称统一）+ 参考文献激活（正文补 [1]-[5] 引用锚点）+ 跨稿结构残留修复（W606）
+> S4 学术论文（B 轨）·《装饰》投稿版 v2.4 · 2026-09-23
+> 创建于 2026-09-22（由 [完整稿](学术论文B轨-新中式数字雅集.md) 按《装饰》官网最新投稿须知（2026-07-02 版）改写：篇幅 8000-10000 字 · 摘要 ~200 字 · 关键词 4-5 个 · 注释与参考文献并行尾注制 · 中图分类号/文献标识码；据 2026-09-22 政策核查扩充正文与案例细节）；v2.1 摘要收敛至 220 字·字数声明改当批实测；v2.2 学术核查修正（幻觉文献替换·真实色阶·规则数实测·元数据修正·雅集定义段）；v2.3 语域专业化（去博客腔·节题降调·人称统一）+ 参考文献激活（正文补 [1]-[5] 引用锚点）+ 跨稿结构残留修复（W606）；v2.4 文献体例与英文摘要微调（外文刊名斜体·⑧⑪卷期页码补全·译著[美]国别·英文摘要三处语病——第四份外部审读分级采纳）；v2.4 文献体例与英文摘要微调（外文刊名斜体·⑧⑪卷期页码补全·译著[美]国别·英文摘要三处语病——第四份外部审读分级采纳）；v2.4 文献体例与英文摘要微调（外文刊名斜体·⑧⑪卷期页码补全·译著[美]国别·英文摘要三处语病——第四份外部审读分级采纳）
 > 投稿目标：装饰（设计实践栏目，首投天花板）
 > 写法依据：设计实践四段式（描述问题→分析问题→形成方案→成果验证）× DH 理论缺口
 
@@ -17,7 +17,7 @@
 
 **English Title**: New-Chinese Digital Elegance: A Local Aesthetic System for Classical Literature Data Visualization—A Case Study of 86 Interactive Visualizations of *Journey to the West*
 
-**Abstract**: Digital-humanities visualization tends to be "dashboard-ized": data is disciplined into statistical charts of Western templates, divorcing the visual language of cultural motifs from their textual cores, leaving motion without cultural semantics and accessibility ungoverned. Taking 86 interactive visualizations of *Journey to the West*, this paper proposes a replicable "New-Chinese Digital Elegance" design system: rice-paper, ink and cinnabar tokens encode cultural semantics and distribute across 233 pages through a three-tier architecture; a three-tier duration and easing contract governs motion; dual CSS/JS guards build in accessibility; a one-source-multi-form pipeline secures reproducibility. The practice shows that local aesthetics can be written into design tokens, motion specifications, and verification gates as a transferable design methodology for classical Chinese literature.
+**Abstract**: Digital-humanities visualization tends to be "dashboardized": data is disciplined into statistical charts of Western templates, divorcing the visual language of cultural motifs from their textual cores, leaving motion without cultural semantics and accessibility ungoverned. Taking 86 interactive visualizations of *Journey to the West* as an empirical case, this paper proposes a replicable "New-Chinese Digital Elegance" design system: rice-paper, ink and cinnabar tokens encode cultural semantics and are distributed across 233 pages through a three-tier architecture; a three-tier duration and easing contract governs motion; dual CSS/JS guards build in accessibility; a one-source-multi-form pipeline secures reproducibility. The practice shows that local aesthetics can be written into design tokens, motion specifications, and verification gates as a transferable design methodology for classical Chinese literature.
 
 **Keywords**: digital humanities; data visualization; design system; Chinese aesthetics; *Journey to the West*
 
@@ -135,31 +135,31 @@ RQ3 的完整问题是可复制性。系统的价值不在单个页面的视觉�
 
 ## 注释
 
-① Wall B, Lee D M. Stability in Variation: Visualizing the Actantial Core of *The Journey to the West*[J]. Korean Studies, 2023, 47(1): 117-144.
-② Drucker J. Humanities Approaches to Graphical Display[J]. Digital Humanities Quarterly, 2011, 5(1).
+① Wall B, Lee D M. Stability in Variation: Visualizing the Actantial Core of *The Journey to the West*[J]. *Korean Studies*, 2023, 47(1): 117-144.
+② Drucker J. Humanities Approaches to Graphical Display[J]. *Digital Humanities Quarterly*, 2011, 5(1).
 ③ 详解西游记项目. 详解西游记[EB/OL]. https://github.com/1273984347/xiyouji［2026-09-23 引用］.
-④ Cooper D, Gregory I. Mapping the English Lake District: a literary GIS[J]. Transactions of the Institute of British Geographers, 2010, 36(1): 89-108.
-⑤ Bushell S, Butler J O, Hay D, et al. Digital Literary Mapping: I. Visualizing and Reading Graph Topologies as Maps for Literature[J]. Cartographica, 2022, 57(1): 11-36.
+④ Cooper D, Gregory I. Mapping the English Lake District: a literary GIS[J]. *Transactions of the Institute of British Geographers*, 2010, 36(1): 89-108.
+⑤ Bushell S, Butler J O, Hay D, et al. Digital Literary Mapping: I. Visualizing and Reading Graph Topologies as Maps for Literature[J]. *Cartographica*, 2022, 57(1): 11-36.
 ⑥ 华东师范大学地理科学学院. 《西游记》文学探索地图[EB/OL]. 2023 CaGIS 年度地图设计大赛学生组 Arthur Robinson 荣誉提名奖. https://geo.ecnu.edu.cn［2026-09-23 引用］.
 ⑦ 史卓, 王萌, 曾树珍, 等. 基于知识图谱的文学叙事可视化研究[J]. 中国科技论文, 2023, 18(11): 1230-1235,1243.
-⑧ 赵薇. 社会网络分析与"《大波》三部曲"的人物功能[J]. 山东社会科学, 2018(9).
-⑨ Windhager F, Federico P, Schreder G, et al. Visualization of Cultural Heritage Collection Data: State of the Art and Future Challenges[J]. IEEE Transactions on Visualization and Computer Graphics, 2018, 25(6): 2311-2330.
-⑩ Trocchianesi R, Bollini L. Design, Digital Humanities, and Information Visualization for Cultural Heritage[J]. Multimodal Technologies and Interaction, 2023, 7(11): 102.
-⑪ Jia N, Xin J, Wang Y. Overseas reception of English translations of *Journey to the West*: Temporal dynamics, cross-platform sentiment patterns, and topic modeling[J]. PLOS ONE, 2026.
-⑫ Ping Y, Wang B. Retranslated Chinese classical canon *Journey to the West*: a stylometric comparison between Julia Lovell's retranslation and Arthur Waley's translation[J]. Digital Scholarship in the Humanities, 2024, 39(1): 308-320.
-⑬ Fan Z B, Zhang K. Visual order of Chinese ink paintings[J]. Visual Computing for Industry, Biomedicine, and Art, 2020, 3(1): 23.
-⑭ Yang T, Silveira S, Formuli A, et al. Aesthetic Experiences Across Cultures: Neural Correlates When Viewing Traditional Eastern or Western Landscape Paintings[J]. Frontiers in Psychology, 2019, 10: 798.
+⑧ 赵薇. 社会网络分析与"《大波》三部曲"的人物功能[J]. 山东社会科学, 2018(9): 50-64.
+⑨ Windhager F, Federico P, Schreder G, et al. Visualization of Cultural Heritage Collection Data: State of the Art and Future Challenges[J]. *IEEE Transactions on Visualization and Computer Graphics*, 2018, 25(6): 2311-2330.
+⑩ Trocchianesi R, Bollini L. Design, Digital Humanities, and Information Visualization for Cultural Heritage[J]. *Multimodal Technologies and Interaction*, 2023, 7(11): 102.
+⑪ Jia N, Xin J, Wang Y. Overseas reception of English translations of *Journey to the West*: Temporal dynamics, cross-platform sentiment patterns, and topic modeling[J]. *PLOS ONE*, 2026, 21(4): e0347253.
+⑫ Ping Y, Wang B. Retranslated Chinese classical canon *Journey to the West*: a stylometric comparison between Julia Lovell's retranslation and Arthur Waley's translation[J]. *Digital Scholarship in the Humanities*, 2024, 39(1): 308-320.
+⑬ Fan Z B, Zhang K. Visual order of Chinese ink paintings[J]. *Visual Computing for Industry, Biomedicine, and Art*, 2020, 3(1): 23.
+⑭ Yang T, Silveira S, Formuli A, et al. Aesthetic Experiences Across Cultures: Neural Correlates When Viewing Traditional Eastern or Western Landscape Paintings[J]. *Frontiers in Psychology*, 2019, 10: 798.
 ⑮ W3C. Web Content Accessibility Guidelines (WCAG) 2.2[S/OL]. https://www.w3.org/TR/WCAG22/［2026-09-23 引用］.
 
 ## 参考文献
 
-[1] 鲁道夫·阿恩海姆. 艺术与视知觉[M]. 滕守尧, 朱疆源, 译. 成都: 四川人民出版社, 1998.
-[2] 蒲安迪. 明代小说四大奇书[M]. 沈亨寿, 译. 北京: 中国和平出版社, 1993.
+[1] [美]鲁道夫·阿恩海姆. 艺术与视知觉[M]. 滕守尧, 朱疆源, 译. 成都: 四川人民出版社, 1998.
+[2] [美]蒲安迪. 明代小说四大奇书[M]. 沈亨寿, 译. 北京: 中国和平出版社, 1993.
 [3] 王受之. 世界现代设计史[M]. 北京: 中国青年出版社, 2002.
 [4] 李砚祖. 设计学概论[M]. 武汉: 湖北美术出版社, 2009.
 [5] 竺洪波. 西游学十二讲[M]. 北京: 中华书局, 2018.
 
 ---
 
-> 本稿为《装饰》投稿版 v2.3。**字数为当批实测**（2026-09-22·去 Markdown 记号后非空白字符）：中文摘要 220 字；正文 1-8 节 6,484 字（官网口径「正文不超 10000 字」内）；全稿含中英文摘要、注释与参考文献 9,794 字符（英文摘要按字母计·按词计约 9,150）——处于官网 8000-10000 字区间。字数按投稿稿件口径实测（题名至参考文献·不含仓库内部注记）——处于官网 8000-10000 字（含注释参考文献）区间。配套图表 9 张见 [图表目录](图表_清单.md)（图 1/2/6 重绘与风格统一见 scripts/_w606_paper_figures.py）。完整论证见 [完整稿](学术论文B轨-新中式数字雅集.md)。
+> 本稿为《装饰》投稿版 v2.4。**字数为当批实测**（2026-09-23·Microsoft Word 对投稿 docx 统计——与编辑部计数工具同源，替代 W610/W612 的仓库端估算口径）：中文摘要 220 字（v2.1 收敛后未变）；全稿（题名至参考文献，含图注）Word「字数」6,639（中文字符+英文单词）、「字符数(不计空格)」10,304、中文字符 5,689、正文 12 页。官网 8000-10000 字要求的计数口径未明（Word 字数口径低于下限/字符口径略超上限）——已列投稿前编辑部确认邮件第二问（[B轨投稿辅助-确认邮件与投稿信.md](B轨投稿辅助-确认邮件与投稿信.md)），以编辑部答复为准，必要时按答复微扩或微缩。配套图表 9 张见 [图表目录](图表_清单.md)（图 1/2/6 重绘与风格统一见 scripts/_w606_paper_figures.py）。完整论证见 [完整稿](学术论文B轨-新中式数字雅集.md)。
 > 待办：投稿前 48 小时按 [政策核查](装饰投稿政策核查-2026-09.md) 复核最新投稿须知与 AI 政策；逐期调阅近三年目录核实"设计实践"栏目口味；图注与注释页码最终核对。
