@@ -11,6 +11,27 @@
 ---
 
 
+## W614 W614 第四份外部审读分级采纳（2026-09-23·v2.3.214）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W614 | 修改·v2.4 文献体例与英文摘要微调+字数口径 Word 实测回填 |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W614 | 修改·同款镜像（③佚名脱敏保持·双盲不变式断言过） |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W614 | 重生成·86 blocks·斜体 run 16·Word 统计 6,639 字/12 页 |
+| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W614 | 重生成·图 5 脱敏变体·86 blocks |
+| docs/S4-学术投稿/装饰投稿政策核查-2026-09.md | W614 | 修改·清单第 8 项挂载+篇幅条目口径修正 |
+| docs/S4-学术投稿/B轨论文文献-Zotero导入.json | W614 | 修改·⑧ page 50-64/⑪ 卷期页码+DOI/⑯→⑮ |
+| scripts/_w614_notes_polish.py | W614 | 新建·采纳面编辑脚本（E1 断言+双盲不变式） |
+| scripts/_w607_zotero_export.py | W614 | 修改·文献数据增补+citekey 重排修复 |
+| CHANGELOG.md | W614 | 新增·W614 版段 + 编号规则上限 W001-W614 |
+| 交接文档.md | W614 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W614 | 修改·版本行同步 v2.3.214 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W614 | 修改·四页脚链首 prepend W614 |
+| .github/workflows/README.md | W614 | 修改·旁文档同步 |
+| AGENTS.md | W614 | 修改·版本脚注追加 W614 |
+| scripts/output/file-index.md | W614 | 新增·W614 段（本段·batch_cascade.py 执行） |
+| scripts/_w614_spec.json | W614 | 新建·本批级联 spec |
+
 ## W613 W613 S4 三线推进（2026-09-23·v2.3.213）
 
 | 文件 | W | 说明 |

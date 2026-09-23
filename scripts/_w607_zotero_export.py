@@ -1,11 +1,11 @@
-"""_w607_zotero_export.py — W607 B 轨论文文献库 → Zotero 可导入 CSL JSON（一次性）
+"""_w607_zotero_export.py — W607 B 轨论文文献库 → Zotero 可导入 CSL JSON（一次性·可重复执行）
 
-21 条 = 注释 ①-⑯ + 参考文献 [1]-[5]。
-纪律：DOI 仅收录本会话联网核验过的 3 条（① OpenAlex / ⑫ 规划档核验 / ⑮ ACM DL）；
+20 条 = 注释 ①-⑮ + 参考文献 [1]-[5]（W612 删 Chen 后 21→20；citekey ⑯→⑮ 随稿重排于 W614 修复）。
+纪律：DOI 仅收录联网核验过的条目（① OpenAlex / ⑫ 规划档核验 / ⑪ W614 Crossref / ⑮ ACM DL）；
 其余条目一律留空——宁缺勿造（W605 幻觉引文教训）。核验状态追踪以调研档为准。
+W614 增补：⑧ page 50-64（观其大较 dhcn.cn+维普两源一致·知网终验挂 48h）；⑪ 卷期页码+DOI+刊出日（Crossref 定版）。
 """
 import json
-import io
 
 
 def latin(family, given):
@@ -55,7 +55,7 @@ ITEMS = [
      "title": "社会网络分析与\"《大波》三部曲\"的人物功能",
      "author": [cjk("赵薇")],
      "container-title": "山东社会科学", "issued": {"date-parts": [[2018]]},
-     "issue": "9",
+     "issue": "9", "page": "50-64",
      "URL": "https://nav.pkudh.org", "accessed": {"date-parts": [[2026, 9, 23]]}},
     {"id": "windhager2018", "type": "article-journal", "citekey": "⑨",
      "title": "Visualization of Cultural Heritage Collection Data: State of the Art and Future Challenges",
@@ -70,7 +70,8 @@ ITEMS = [
     {"id": "jia2026", "type": "article-journal", "citekey": "⑪",
      "title": "Overseas reception of English translations of Journey to the West: Temporal dynamics, cross-platform sentiment patterns, and topic modeling",
      "author": [latin("Jia", "N."), latin("Xin", "J."), latin("Wang", "Y.")],
-     "container-title": "PLOS ONE", "issued": {"date-parts": [[2026]]}},
+     "container-title": "PLOS ONE", "issued": {"date-parts": [[2026, 4, 21]]},
+     "volume": "21", "issue": "4", "page": "e0347253", "DOI": "10.1371/journal.pone.0347253"},
     {"id": "ping2024", "type": "article-journal", "citekey": "⑫",
      "title": "Retranslated Chinese classical canon Journey to the West: a stylometric comparison between Julia Lovell's retranslation and Arthur Waley's translation",
      "author": [latin("Ping", "Y."), latin("Wang", "B.")],
@@ -87,7 +88,7 @@ ITEMS = [
      "author": [latin("Yang", "T."), latin("Silveira", "S."), latin("Formuli", "A.")],
      "container-title": "Frontiers in Psychology", "issued": {"date-parts": [[2019]]},
      "volume": "10", "page": "798"},
-    {"id": "wcag22", "type": "standard", "citekey": "⑯",
+    {"id": "wcag22", "type": "standard", "citekey": "⑮",
      "title": "Web Content Accessibility Guidelines (WCAG) 2.2",
      "author": [{"literal": "W3C"}],
      "URL": "https://www.w3.org/TR/WCAG22/", "issued": {"date-parts": [[2023]]},
@@ -122,6 +123,6 @@ ITEMS = [
 ]
 
 out = r"D:\xiyouji\docs\S4-学术投稿\B轨论文文献-Zotero导入.json"
-io.open(out, "w", encoding="utf-8", newline="").write(
+open(out, "w", encoding="utf-8", newline="").write(
     json.dumps(ITEMS, ensure_ascii=False, indent=2))
 print("written:", out, len(ITEMS), "items")

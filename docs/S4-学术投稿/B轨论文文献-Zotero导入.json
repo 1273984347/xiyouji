@@ -196,6 +196,7 @@
       ]
     },
     "issue": "9",
+    "page": "50-64",
     "URL": "https://nav.pkudh.org",
     "accessed": {
       "date-parts": [
@@ -288,10 +289,16 @@
     "issued": {
       "date-parts": [
         [
-          2026
+          2026,
+          4,
+          21
         ]
       ]
-    }
+    },
+    "volume": "21",
+    "issue": "4",
+    "page": "e0347253",
+    "DOI": "10.1371/journal.pone.0347253"
   },
   {
     "id": "ping2024",
@@ -381,7 +388,7 @@
   {
     "id": "wcag22",
     "type": "standard",
-    "citekey": "⑯",
+    "citekey": "⑮",
     "title": "Web Content Accessibility Guidelines (WCAG) 2.2",
     "author": [
       {
