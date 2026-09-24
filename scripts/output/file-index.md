@@ -11,6 +11,24 @@
 ---
 
 
+## W617 W617 投稿版全文人文化改写（2026-09-24·v2.3.217）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W617 | 修改·v2.6 全文人文化改写（降 AI 检测特征·事实冻结·9,971 达标） |
+| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W617 | 修改·同款镜像（项目命名段独立变体·双盲不变式过） |
+| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W617 | 重生成·94 blocks·9,971 字符·14 页·探针 15/15 |
+| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W617 | 重生成·9,956 字符·图 5 脱敏变体 |
+| scripts/_w617_humanize.py | W617 | 新建·人化改写脚本（分节替换+冻结面断言+序区回填修复） |
+| CHANGELOG.md | W617 | 新增·W617 版段 + 编号规则上限 W001-W617 |
+| 交接文档.md | W617 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W617 | 修改·版本行同步 v2.3.217 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W617 | 修改·四页脚链首 prepend W617 |
+| .github/workflows/README.md | W617 | 修改·旁文档同步 |
+| AGENTS.md | W617 | 修改·版本脚注追加 W617 |
+| scripts/output/file-index.md | W617 | 新增·W617 段（本段·batch_cascade.py 执行） |
+| scripts/_w617_spec.json | W617 | 新建·本批级联 spec |
+
 ## W616 W616 《装饰》投稿包独立文件夹迁移（2026-09-24·v2.3.216）
 
 | 文件 | W | 说明 |
