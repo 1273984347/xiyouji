@@ -11,6 +11,24 @@
 ---
 
 
+## W619 W619 官方投稿须知全文终验（2026-09-24·v2.3.219）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W619 | 修改·v2.8 声明补流程句+头注作者信息占位+9 处微剪（9,986 守位） |
+| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W619 | 修改·同款镜像（不含作者信息占位） |
+| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W619 | 重生成·94 blocks·9,986 字符·探针 6/6 |
+| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W619 | 重生成·9,971 字符 |
+| docs/S4-学术投稿/装饰投稿/装饰投稿政策核查-2026-09.md | W619 | 修改·W619 终验段+清单第 9/10 项（作者信息·公开仓库风险） |
+| CHANGELOG.md | W619 | 新增·W619 版段 + 编号规则上限 W001-W619 |
+| 交接文档.md | W619 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W619 | 修改·版本行同步 v2.3.219 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W619 | 修改·四页脚链首 prepend W619 |
+| .github/workflows/README.md | W619 | 修改·旁文档同步 |
+| AGENTS.md | W619 | 修改·版本脚注追加 W619 |
+| scripts/output/file-index.md | W619 | 新增·W619 段（本段·batch_cascade.py 执行） |
+| scripts/_w619_spec.json | W619 | 新建·本批级联 spec |
+
 ## W618 W618 图片 AI 率处置（2026-09-24·v2.3.218）
 
 | 文件 | W | 说明 |
