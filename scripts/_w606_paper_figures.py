@@ -1,18 +1,19 @@
 """_w606_paper_figures.py — W606 S4 论文配图重绘（一次性·可重复执行）
 
-修复 W604 图 1/图 2 的排版硬伤（盒标题悬空被裁切、箭头穿过文字），并统一图 6 风格：
+修复 W604 图 1/图 2 的排版硬伤（盒标题悬空被裁切、箭头穿过文字）：
 - 图 1 文化母题转译流程：四盒横排，文字盒内居中，箭头走盒间空隙
 - 图 2 令牌三层模型：三层纵叠，箭头只画在层间空隙，附侧注
-- 图 6 用户研究结果（示意）：标题改墨色、去红、系列色用令牌色，风格与图 1/2 统一
+- 图 6 已随 W612 用户研究删除移除（W618 起重跑不再生成，防止复活已删配图）
 
-输出：docs/S4-学术投稿/装饰投稿/图表/图1/图2/图6（覆盖原 PNG，200dpi）
+输出：docs/S4-学术投稿/装饰投稿/图表/图1/图2（覆盖原 PNG，200dpi·W616 目录迁移后新址）
+配套：图1/图2-重绘底稿.svg 为作者手工重绘底稿（降图片 AI 检测特征·W618）
 运行：python scripts/_w606_paper_figures.py
 """
 import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 
 plt.rcParams["font.family"] = ["Microsoft YaHei", "SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
@@ -25,7 +26,7 @@ OCHRE = "#C9A063"
 RICEGREY = "#D8CFBC"
 SOFT = "#6B6455"
 
-OUT = r"D:\xiyouji\docs\S4-学术投稿\图表"
+OUT = r"D:\xiyouji\docs\S4-学术投稿\装饰投稿\图表"
 
 
 def box(ax, x, y, w, h, face, edge=INK, lw=1.6):
@@ -91,7 +92,7 @@ layers = [
     {"y": 0.695, "h": 0.23, "face": RICEGREY, "tc": INK,
      "title": "页面内联 <style>（图表样式层）", "desc": "233 页图表特有样式 · 只覆盖图表"},
 ]
-for i, L in enumerate(layers):
+for L in layers:
     box(ax, bx, L["y"], bw, L["h"], L["face"])
     ax.text(bx + bw / 2, L["y"] + L["h"] * 0.62, L["title"],
             ha="center", va="center", fontsize=15, color=L["tc"], fontweight="bold")
@@ -111,57 +112,5 @@ fig.savefig(OUT + r"\图2-令牌三层模型.png", bbox_inches="tight", facecolo
 plt.close(fig)
 print("图 2 完成")
 
-# ---------------- 图 6 用户研究设计示意（W609：结果示意改设计示意·双盲风险消除） ----------------
-fig, ax = plt.subplots(figsize=(12.8, 6.4), dpi=200)
-ax.set_xlim(0, 1)
-ax.set_ylim(0, 1)
-ax.axis("off")
-
-
-def band_box(x, y, w, h, title, desc, face, tc, ts=12.5, ds=10.5):
-    box(ax, x, y, w, h, face)
-    ax.text(x + w / 2, y + h * 0.64, title, ha="center", va="center",
-            fontsize=ts, color=tc, fontweight="bold")
-    ax.text(x + w / 2, y + h * 0.26, desc, ha="center", va="center",
-            fontsize=ds, color=tc)
-
-
-# 第一带：被试与设计
-band_box(0.14, 0.885, 0.72, 0.095,
-         "被试 10–20 名 · 设计 / 文学背景各半 · 被试内设计 · 拉丁方平衡",
-         "", PAPER, INK, ts=12)
-
-# 第二带：双条件
-band_box(0.14, 0.635, 0.34, 0.145, "条件 A：新中式系统", "现行页面 · 完整设计令牌",
-         CINNABAR, "white")
-band_box(0.52, 0.635, 0.34, 0.145, "条件 B：通用模板", "同数据同布局 · 蓝灰仪表盘",
-         RICEGREY, INK)
-arrow_v(ax, 0.31, 0.885 - 0.006, 0.635 + 0.145 + 0.006)
-arrow_v(ax, 0.69, 0.885 - 0.006, 0.635 + 0.145 + 0.006)
-
-# 第三带：三任务
-tasks = [
-    ("P1 人物语义网络", "找出妖怪群体任两角色"),
-    ("P2 难度热力图", "指出最高难度及其阶段"),
-    ("P3 取经路线图", "灵山事件与对应回目"),
-]
-tx = [0.14, 0.395, 0.65]
-for (tt, dd), x in zip(tasks, tx):
-    band_box(x, 0.375, 0.21, 0.145, tt, dd, PAPER, INK, ts=11.5, ds=10)
-arrow_v(ax, 0.31, 0.635 - 0.006, 0.375 + 0.145 + 0.006)
-arrow_v(ax, 0.69, 0.635 - 0.006, 0.375 + 0.145 + 0.006)
-
-# 第四带：三指标
-metrics = [
-    ("H1 审美偏好", "5 点 Likert × 6 项"),
-    ("H2 任务效率", "完成时间 · TOST 等效"),
-    ("H3 对比度自评", "2 项自我报告"),
-]
-for (mt, md_), x in zip(metrics, tx):
-    band_box(x, 0.115, 0.21, 0.145, mt, md_, PAPER, INK, ts=11.5, ds=10)
-for x in tx:
-    arrow_v(ax, x + 0.105, 0.375 - 0.006, 0.115 + 0.145 + 0.006)
-
-fig.savefig(OUT + r"\图6-用户研究设计.png", bbox_inches="tight", facecolor="white")
-plt.close(fig)
-print("图 6 完成（研究设计示意）")
+# ---------------- 图 6 已随 W612 用户研究删除移除（防止误重跑复活已删配图） ----------------
+print("图 6 跳过（W612 已删除）")
