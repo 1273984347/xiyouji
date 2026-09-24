@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 700" font-family="Microsoft YaHei, SimHei, sans-serif">
+  <!-- 图 2 重绘底稿：令牌三层模型（供作者在 PPT / Illustrator 中手工重绘·文字均可编辑） -->
+  <!-- 内容与论文 §3 对应：三层纵叠（下→上 tokens→system→页面内联）+ 两箭头侧注 + 顶部说明句 -->
+  <rect x="170" y="500" width="760" height="130" rx="12" fill="#C8463A" stroke="#23201A" stroke-width="2.5"/>
+  <text x="550" y="555" text-anchor="middle" font-size="27" font-weight="bold" fill="#FFFFFF">tokens.css（单一事实源）</text>
+  <text x="550" y="600" text-anchor="middle" font-size="20" fill="#FFFFFF">纸 / 墨 / 朱 三元令牌 · 缓动三系 · 暗色组</text>
+
+  <rect x="170" y="290" width="760" height="120" rx="12" fill="#C9A063" stroke="#23201A" stroke-width="2.5"/>
+  <text x="550" y="340" text-anchor="middle" font-size="27" font-weight="bold" fill="#23201A">system.css（组件层）</text>
+  <text x="550" y="383" text-anchor="middle" font-size="20" fill="#23201A">消费变量 · 不写死值 · 交互五态 · 动效契约</text>
+
+  <rect x="170" y="80" width="760" height="130" rx="12" fill="#D8CFBC" stroke="#23201A" stroke-width="2.5"/>
+  <text x="550" y="135" text-anchor="middle" font-size="27" font-weight="bold" fill="#23201A">页面内联 &lt;style&gt;（图表样式层）</text>
+  <text x="550" y="180" text-anchor="middle" font-size="20" fill="#23201A">233 页图表特有样式 · 只覆盖图表</text>
+
+  <g stroke="#C8463A" stroke-width="4" fill="#C8463A">
+    <line x1="550" y1="494" x2="550" y2="424"/><polygon points="542,424 550,408 558,424"/>
+    <line x1="550" y1="284" x2="550" y2="224"/><polygon points="542,224 550,208 558,224"/>
+  </g>
+  <text x="575" y="465" font-size="19" fill="#6B6455">变量消费</text>
+  <text x="575" y="255" font-size="19" fill="#6B6455">内联分发</text>
+
+  <text x="550" y="40" text-anchor="middle" font-size="23" fill="#C8463A">改一处 · 全站同步 · 双主题（亮 / 暗）共用同一语义系统</text>
+</svg>

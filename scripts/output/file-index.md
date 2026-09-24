@@ -11,6 +11,26 @@
 ---
 
 
+## W618 W618 图片 AI 率处置（2026-09-24·v2.3.218）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W618 | 修改·v2.7 声明补图源+微剪守位 9,975 |
+| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W618 | 修改·同款镜像 |
+| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W618 | 重生成·94 blocks·9,975 字符·探针 7/7 |
+| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W618 | 重生成·9,960 字符 |
+| docs/S4-学术投稿/装饰投稿/图表/图1-重绘底稿.svg | W618 | 新建·作者手工重绘底稿（可编辑） |
+| docs/S4-学术投稿/装饰投稿/图表/图2-重绘底稿.svg | W618 | 新建·作者手工重绘底稿（可编辑） |
+| scripts/_w606_paper_figures.py | W618 | 修改·OUT 迁移后新址+图 6 复活块移除+ruff 清零+冒烟 |
+| CHANGELOG.md | W618 | 新增·W618 版段 + 编号规则上限 W001-W618 |
+| 交接文档.md | W618 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W618 | 修改·版本行同步 v2.3.218 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W618 | 修改·四页脚链首 prepend W618 |
+| .github/workflows/README.md | W618 | 修改·旁文档同步 |
+| AGENTS.md | W618 | 修改·版本脚注追加 W618 |
+| scripts/output/file-index.md | W618 | 新增·W618 段（本段·batch_cascade.py 执行） |
+| scripts/_w618_spec.json | W618 | 新建·本批级联 spec |
+
 ## W617 W617 投稿版全文人文化改写（2026-09-24·v2.3.217）
 
 | 文件 | W | 说明 |
