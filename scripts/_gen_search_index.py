@@ -20,7 +20,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, 'site')
 DOCS = os.path.join(ROOT, 'docs')
 BLOB = 'https://github.com/1273984347/xiyouji/blob/main/'
-EXCLUDE = ('/_dev/', '/_templates/', '/archive', '/superpowers/')
+EXCLUDE = ('/_dev/', '/_templates/', '/archive', '/superpowers/',
+            'S2-学术投稿', 'S2-外部分享', 'S3-方法论外部分享', 'S4-学术投稿')  # W620：四目录移出公开仓库，不入搜索索引
 BEGIN = '/* SEARCH_INDEX:BEGIN */'
 END = '/* SEARCH_INDEX:END */'
 
