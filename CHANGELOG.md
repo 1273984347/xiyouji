@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W619），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W620），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.220（2026-09-24）：W620 装饰投稿包五图 SVG 重绘 — 数据忠实矢量图替代 matplotlib/截图（图1/2 成品化+图3 力导向+图4 热力图+图5 时间轴·visual-judge 5/5）
+
+> **来源**：用户裁决「把装饰投稿里面的所有图表都用 SVG 重新画」（B 轨投稿搁置期）。**追记：chore 提交 400c3e7（四目录移出公开仓库·untrack+gitignore·搜索索引收缩 771→671·CSP 零漂移）未走级联无版段，本版段一并登记**。
+> - **数据忠实纪律**：重绘不许目测截图——图 3/4/5 全部从三个页面的内嵌数据提取（character-semantic-network EMBEDDED、hardship-heatmap EMBEDDED_DATA 81 条、journey-route EMBEDDED_MOCK 5 地）；journey_route.json 实测为空数组，图 5 忠实于 5 地 4 域并在图内注记数据源——**不虚构完整路线**；图 3 判定为页面实际渲染的「神佛体系」子图（与截图逐节点对齐：玉帝/如来红=顶层、观音/太上老君/王母娘娘蓝=中层、余褐=底层），按页面 renderForce 同款过滤逻辑取 7 边。
+> - **执行（五图）**：图 1/2 成品 SVG（W618 底稿转正·底稿移除）；图 3 纯 Python 弹簧布局（420 轮·向心力 0.02·点云 bbox 居中·节点半径随度数）；图 4 五级线性色标 Python 复刻+对比度自动选字色（score≥6 白字）；图 5 地域色带+等距时间轴+上下交替标签。
+> - **渲染**：Playwright Chromium deviceScaleFactor=2 截图（_w621_render_png.js）；**坑**：Windows 下 Playwright 对 CJK 路径 PNG 写出报 UNKNOWN（errno -4094）——经 ASCII 临时名渲染后 Python 复制回正式名。
+> - **验收**：visual-judge 首轮 2/5（图1/2 pass；图3 fail=节点贴边+标签压注释、图4 fail=右缘截断、图5 fail=首字裁切+刻度叠印）——修复（向心力+点云居中/注释并底行/等距布点+逐点回目）后复验 **5/5 pass**。
+> - **口径同步**：转换器图注 ×3 改「据项目数据重绘」；两稿 AI 声明改写（图 1 至图 5 均据项目实测数据与页面内容重绘·SVG 源文件随项目存档·不含 AI 生成图像）；匿名稿弃用 FIG5_OVERRIDE（重绘图无品牌栏）；Word 实测 9,981≤10,000（匿名稿 9,966·12 页）·docx 探针 5/5 双稿+旧口径清零。
+> - **文件**：scripts/_w621_svg_figures.py（新建·数据提取+五图 SVG）、scripts/_w621_render_png.js（新建·渲染）、scripts/_w607_md2docx.js（图注×3）、六文档、四页脚、workflows README、AGENTS 脚注、file-index；装饰投稿包（SVG/PNG/md/docx）为本地交付不入库（W620 出库）。
+> - **状态**：已落地（本批随 W620 提交并 push origin/main）。
 ### v2.3.219（2026-09-24）：W619 官方投稿须知全文终验 — AI 声明补齐四要素之具体流程句 + 作者信息占位挂载 + 注释格式官方示例逐字同构确认 + 公开仓库预发表风险挂用户裁决（字符口径 9,986 守位）
 
 > **来源**：用户提供《装饰》官方投稿须知全文（2026-07-02 版）——逐字对表现稿后执行增量项。
