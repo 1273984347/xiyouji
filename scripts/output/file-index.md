@@ -11,6 +11,22 @@
 ---
 
 
+## W620 W620 装饰投稿包五图 SVG 重绘（2026-09-24·v2.3.220）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_w621_svg_figures.py | W620 | 新建·五图数据提取+SVG 生成（图3 弹簧布局/图4 五级线性色标/图5 时间轴） |
+| scripts/_w621_render_png.js | W620 | 新建·Playwright SVG→PNG 2x 渲染（CJK 路径 ASCII 中转） |
+| scripts/_w607_md2docx.js | W620 | 修改·图 3/4/5 图注改「据项目数据重绘」 |
+| CHANGELOG.md | W620 | 新增·W620 版段 + 编号规则上限 W001-W620 |
+| 交接文档.md | W620 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W620 | 修改·版本行同步 v2.3.220 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W620 | 修改·四页脚链首 prepend W620 |
+| .github/workflows/README.md | W620 | 修改·旁文档同步 |
+| AGENTS.md | W620 | 修改·版本脚注追加 W620 |
+| scripts/output/file-index.md | W620 | 新增·W620 段（本段·batch_cascade.py 执行） |
+| scripts/_w621_spec.json | W620 | 新建·本批级联 spec |
+
 ## W619 W619 官方投稿须知全文终验（2026-09-24·v2.3.219）
 
 | 文件 | W | 说明 |

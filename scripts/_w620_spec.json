@@ -1,0 +1,25 @@
+{
+ "batch": "W620",
+ "version": "v2.3.220",
+ "date": "2026-09-24",
+ "title": "W620 装饰投稿包五图 SVG 重绘 — 数据忠实矢量图替代 matplotlib/截图（图1/2 成品化+图3 力导向+图4 热力图+图5 时间轴·visual-judge 5/5）",
+ "desc": "S4 B 轨全图 SVG 重绘（用户裁决·投稿搁置期）",
+ "head_entry": "2026-09-24（v2.3.220 W620 装饰投稿包五图 SVG 重绘：用户裁决「把装饰投稿里面的所有图表都用 SVG 重新画」——①数据忠实原则：图 3 忠实重绘页面实际渲染的「神佛体系」子图（EMBEDDED 12 节点三层着色 顶层主权/中层执行/底层差遣+divine_edges 过滤后 7 边·纯 Python 弹簧布局向心力+点云居中）、图 4 复刻 EMBEDDED_DATA 81 难实测记录与 d3.scaleLinear domain [1,3,6,8,10] 五级线性插值（9×9 回目序·格内难名/编号/起因阶段角标·深格白字浅格墨字·右侧渐变色标）、图 5 忠实于页面当前数据源 EMBEDDED_MOCK 5 地 4 域（journey_route.json 为空·不虚构完整路线·等距布点逐点回目标注）、图 1/2 由 W618 底稿升级成品（底稿文件移除）；②渲染链：Playwright Chromium deviceScaleFactor 2（scripts/_w621_render_png.js·Windows CJK 目标路径写失败坑经 ASCII 临时名中转）；③visual-judge 5/5 pass——首轮图3/4/5 fail（力导向贴边失衡/色标注释右缘截断/时间轴标签叠印）经向心力+居中+注释改排+等距布点修复后复验全过；④口径同步：转换器图注「项目页面截图」→「据项目数据重绘」×3、两稿 AI 声明改「图 1 至图 5 均据项目实测数据与页面内容重绘（SVG 矢量源文件随项目存档）」、匿名稿弃用图 5 裁剪变体（重绘图无品牌栏·双盲天然安全）、字符口径 9,981≤10,000（12 页）；⑤投稿包已搁置出库（W620），本批产物为本地交付·入库面仅生成器脚本）",
+ "head_sentence": "装饰投稿包五图 SVG 重绘——数据忠实·visual-judge 5/5·口径同步",
+ "changelog_body": "\n\n> **来源**：用户裁决「把装饰投稿里面的所有图表都用 SVG 重新画」（B 轨投稿搁置期）。**追记：chore 提交 400c3e7（四目录移出公开仓库·untrack+gitignore·搜索索引收缩 771→671·CSP 零漂移）未走级联无版段，本版段一并登记**。\n> - **数据忠实纪律**：重绘不许目测截图——图 3/4/5 全部从三个页面的内嵌数据提取（character-semantic-network EMBEDDED、hardship-heatmap EMBEDDED_DATA 81 条、journey-route EMBEDDED_MOCK 5 地）；journey_route.json 实测为空数组，图 5 忠实于 5 地 4 域并在图内注记数据源——**不虚构完整路线**；图 3 判定为页面实际渲染的「神佛体系」子图（与截图逐节点对齐：玉帝/如来红=顶层、观音/太上老君/王母娘娘蓝=中层、余褐=底层），按页面 renderForce 同款过滤逻辑取 7 边。\n> - **执行（五图）**：图 1/2 成品 SVG（W618 底稿转正·底稿移除）；图 3 纯 Python 弹簧布局（420 轮·向心力 0.02·点云 bbox 居中·节点半径随度数）；图 4 五级线性色标 Python 复刻+对比度自动选字色（score≥6 白字）；图 5 地域色带+等距时间轴+上下交替标签。\n> - **渲染**：Playwright Chromium deviceScaleFactor=2 截图（_w621_render_png.js）；**坑**：Windows 下 Playwright 对 CJK 路径 PNG 写出报 UNKNOWN（errno -4094）——经 ASCII 临时名渲染后 Python 复制回正式名。\n> - **验收**：visual-judge 首轮 2/5（图1/2 pass；图3 fail=节点贴边+标签压注释、图4 fail=右缘截断、图5 fail=首字裁切+刻度叠印）——修复（向心力+点云居中/注释并底行/等距布点+逐点回目）后复验 **5/5 pass**。\n> - **口径同步**：转换器图注 ×3 改「据项目数据重绘」；两稿 AI 声明改写（图 1 至图 5 均据项目实测数据与页面内容重绘·SVG 源文件随项目存档·不含 AI 生成图像）；匿名稿弃用 FIG5_OVERRIDE（重绘图无品牌栏）；Word 实测 9,981≤10,000（匿名稿 9,966·12 页）·docx 探针 5/5 双稿+旧口径清零。\n> - **文件**：scripts/_w621_svg_figures.py（新建·数据提取+五图 SVG）、scripts/_w621_render_png.js（新建·渲染）、scripts/_w607_md2docx.js（图注×3）、六文档、四页脚、workflows README、AGENTS 脚注、file-index；装饰投稿包（SVG/PNG/md/docx）为本地交付不入库（W620 出库）。\n> - **状态**：已落地（本批随 W620 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.220 W620 装饰投稿包五图 SVG 重绘（2026-09-24）**：\n  - 图 1-5 数据忠实重绘（神佛子图 12 节点 7 边/81 难五级线性色标/5 地 4 域）+ SVG 源+2x PNG\n  - visual-judge 5/5 pass（图3/4/5 一轮布局修复后）·Playwright CJK 路径坑中转方案\n  - 图注与 AI 声明改「据项目数据重绘」口径·匿名稿弃用图 5 裁剪变体·9,981≤10,000",
+ "agents_note": "2026-09-24（v2.3.220 W620）装饰投稿包五图 SVG 重绘：无 § 结构性变更（B 轨图源升级·生成器入库·投稿包本地交付），仅版本脚注同步",
+ "file_index_rows": [
+  "| scripts/_w621_svg_figures.py | W620 | 新建·五图数据提取+SVG 生成（图3 弹簧布局/图4 五级线性色标/图5 时间轴） |",
+  "| scripts/_w621_render_png.js | W620 | 新建·Playwright SVG→PNG 2x 渲染（CJK 路径 ASCII 中转） |",
+  "| scripts/_w607_md2docx.js | W620 | 修改·图 3/4/5 图注改「据项目数据重绘」 |",
+  "| CHANGELOG.md | W620 | 新增·W620 版段 + 编号规则上限 W001-W620 |",
+  "| 交接文档.md | W620 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W620 | 修改·版本行同步 v2.3.220 |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W620 | 修改·四页脚链首 prepend W620 |",
+  "| .github/workflows/README.md | W620 | 修改·旁文档同步 |",
+  "| AGENTS.md | W620 | 修改·版本脚注追加 W620 |",
+  "| scripts/output/file-index.md | W620 | 新增·W620 段（本段·batch_cascade.py 执行） |",
+  "| scripts/_w621_spec.json | W620 | 新建·本批级联 spec |"
+ ]
+}
