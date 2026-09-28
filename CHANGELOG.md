@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W621），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W622），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.222（2026-09-29）：W622 触屏 tooltip 真机验证收口 + en 人物页部署态名字英化 — W585 残留登记关闭（harness 5+2 全 5/5 + computer-use 真实鼠标 4 页实操）·35 人 ZH2EN 全量归一
+
+> **来源**：W621 登记两笔遗留的用户「继续打磨」指令——①W585 触屏 tooltip 余 6 页页面级残留（登记为真机验证+定向修复批）；②en 页部署态怪物/角色名显示中文。真机验证经 computer-use 真实浏览器（OS 级鼠标输入·非合成事件）完成。
+> - **①W585 残留收口（实为已愈合·登记过时）**：复跑 W575 harness——deconstruction zh+en/cultural-misreading zh+en/concept-device zh 全部 5/5 warn=0（W586 祖先链 mouseleave 升级已把 B/D harness 语境差异消掉·W585 登记被其覆盖）；真机实操 4 页全过——deconstruction 散点 tooltip 真实指针触发+移开消失、cultural-misreading 热力图单元格高亮+tooltip（中国·跟随结构 8/10）、concept-device 光诸卡片悬停面板切换（鲁迅·大闹天宫）、en 人物页条形 tooltip（Sha Wukong 系全英文）。
+> - **②en 人物页名字英化**：W621 的 6 人 ZH2EN_NAME 扩为部署数据 35 人全量 map（译文对齐页内 MOCK 英文名）；main() 加载后一次性归一 characters[].name+matrix 键+first_appearance——条形轴/热力图/图例/洞察/KPI 显示面全覆盖（此前 insights 的 Sun Wukong find 失败显示「—」一并修复·42.3% 真实占比回归）；EMBEDDED 英文名全透传；顺序上先于按名对色块执行。
+> - **验证**：harness 5+2 页 5/5（0 fail 0 warn）；Playwright 探针——热力图/洞察 0 CJK·15 条形·475 时间线点·0 pageerror；真机 a11y 树取证 Key Insights 全英文（Spider Spirit 等）+ 时间线六人行标签英文；verify 核心全绿·CSP 0 漂移（1 页哈希更新）。
+> - **文件**：site/en/character-appearance.html（map 扩量+归一块）、scripts/_w622_probe_en_names.js（探针）、docs/superpowers/plans/2026-09-29-en-data-i18n-display-plan.md（其余 EN 页数据显示面 i18n 两路线评估入档）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。剩余 i18n 显示面按 plans 梯队：快赢层（methodology/chart-design 枚举名别名）+根治层（en/json 数据副本·随 WP-C）。
 ### v2.3.221（2026-09-28）：W621 暗色阶段三收口 — 数据驱动角色色 48/7 清零 + fetch/EMBEDDED 双路径契约归一四族（appearance 色表兜底解耦·matrix 象限/阶段别名·chart-design 怪物别名·journey 标记属性化·阶段卡与 en 时间线部署态复活·visual-judge 9/9）
 
 > **来源**：W589 登记遗留「暗色阶段三设计批」（数据驱动角色色 48 处/7 页暗色不可见）+ 用户「继续打磨前端网页 UI/UX 的显示效果」指令。取证：W589 基线逐页明细复跑核对（48/7 逐数复现）+ 实弹探针（computed 低亮度全量枚举，7 页 545 处形态·含基线未计的 timeline 圆点/ROI 点）。

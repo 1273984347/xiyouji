@@ -1,0 +1,7 @@
+docs(w622): 触屏 tooltip 真机验证收口 + en 人物页部署态名字英化 — W585 残留登记关闭（harness 5+2 全 5/5 + computer-use 真实鼠标 4 页实操）·W621 两笔遗留第一笔闭环
+
+- ① W585 触屏 tooltip 余 6 页登记收口（实为 W586 祖先链升级已愈合·登记过时）：复跑 harness deconstruction/cultural-misreading/concept-device zh+en 全 5/5 warn=0；computer-use 真实浏览器（OS 级鼠标输入）4 页实操全过——deconstruction 散点 tooltip 真实指针触发+移开消失、cultural-misreading 热力图单元格高亮+tooltip（中国·跟随结构 8/10）、concept-device 光诸卡片悬停面板切换（鲁迅·大闹天宫）、en 人物页条形 tooltip 全英文弹出（Sha Wujing/Appearances 78 ch）
+- ② en 人物页名字英化：W621 的 6 人 ZH2EN_NAME 扩为部署数据 35 人全量 map（译文对齐页内 MOCK）；main() 加载后一次性归一 characters[].name+matrix 键+first_appearance——条形轴/热力图/图例/洞察/KPI 显示面全覆盖；顺带修复 insights 的 Sun Wukong find 失败显示「—」（42.3% 真实占比回归）；EMBEDDED 英文名全透传；a11y 树取证 Key Insights 全英文（Spider Spirit 等）+时间线六人行标签英文
+- 验证：harness 5+2 页 5/5（0 fail 0 warn）·Playwright 探针热力图/洞察 0 CJK·15 条形·475 点·0 pageerror·verify 核心全绿·CSP 0 漂移（1 页）·级联 12 文件+链条目带版本前缀
+- 登记入档：docs/superpowers/plans/2026-09-29-en-data-i18n-display-plan.md——其余 EN 页数据显示面 i18n 两路线评估（快赢层=methodology/chart-design 枚举名别名；根治层=en/json 数据副本随 WP-C）
+- 遗留收敛：W621 两笔遗留全部闭环（①本批关闭·②人物页已修+其余按 plans 梯队）

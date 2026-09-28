@@ -11,6 +11,14 @@
 ---
 
 
+## W622 W622 触屏 tooltip 真机验证收口 + en 人物页部署态名字英化（2026-09-29·v2.3.222）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/character-appearance.html | W622 | 更新·35 人 ZH2EN 全量 map+加载后归一（显示面英文化·修复 insights find 失败） |
+| docs/superpowers/plans/2026-09-29-en-data-i18n-display-plan.md | W622 | 新增·EN 数据显示面 i18n 两路线评估（快赢层/根治层梯队） |
+| scripts/_w622_probe_en_names.js | W622 | 新增·en 人物页名字英化探针（CJK 密度+图表在位断言） |
+
 ## W621 W621 暗色阶段三收口（2026-09-28·v2.3.221）
 
 | 文件 | W | 说明 |
