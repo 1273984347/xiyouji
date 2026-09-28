@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-37S9k3Bhvo3xZ00XRzHSyzgvbxE0NgjhqbjDjtQAYqw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-hve4xM2uJY9NFMyQ8ny9ESuZm/c8NP6guP3igv3PoKk=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Chart Design · Annotated Journey to the West</title>
@@ -20,7 +20,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
     
     
-                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -258,6 +258,7 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
   html[data-theme="dark"] svg [fill="#2c2416" i] { fill: #9c9486; }  /* ×2 L<0.16 */
   html[data-theme="dark"] svg [fill="#7a3a8c" i] { fill: #af89af; }  /* ×2 L<0.16 */
   html[data-theme="dark"] svg [fill="#23201A" i] { fill: #9a9489; }  /* ×2 L<0.16 */
+  html[data-theme="dark"] svg [fill="#7a5230" i] { fill: #bb9070; }  /* narrative-experiment 部署数据组色·暗色提亮 */
   html[data-theme="dark"] svg [fill="#5a4a6b" i] { fill: #9e919d !important; }  /* ×112 */
   html[data-theme="dark"] svg [fill="#8b3a2a" i] { fill: #ba8a7a !important; }  /* ×56 */
   html[data-theme="dark"] svg [fill="#1e3a8a" i] { fill: #8a94b4 !important; }  /* ×42 */
@@ -2060,6 +2061,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         "Six-Eared Macaque": "#8A6D3B",
         "Great Peng Golden-Winged Eagle": "#3a6b8c"
     };
+    // W621：怪物名双形态兼容——部署 JSON 为中文名，页面色表键为英文名
+    const MONSTER_KEY = d => ({ "白骨精": "White Bone Spirit", "青牛精": "Green Ox Spirit", "黄袍怪": "Yellow-Robed Monster", "红孩儿": "Red Boy", "六耳猕猴": "Six-Eared Macaque", "大鹏金翅雕": "Great Peng Golden-Winged Eagle" }[d.monster] || d.monster);
     // Activity type colors
     const ACTIVITY_COLORS = {
         cultivate: "#8A6D3B",  // cultivation · purple
@@ -2688,7 +2691,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("cy", d => y(d.ease_index))
             .attr("r", d => (d.monster === "White Bone Spirit" || d.monster === "Green Ox Spirit") ? 16 : 0)
             .attr("fill", "none")
-            .attr("stroke", d => MONSTER_COLORS[d.monster])
+            .attr("stroke", d => MONSTER_COLORS[MONSTER_KEY(d)])
             .attr("stroke-width", 1.5)
             .attr("stroke-dasharray", "3,2")
             .attr("opacity", 0)
@@ -2700,7 +2703,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("cx", d => x(d.stress_index))
             .attr("cy", d => y(d.ease_index))
             .attr("r", 0)
-            .attr("fill", d => MONSTER_COLORS[d.monster])
+            .attr("fill", d => MONSTER_COLORS[MONSTER_KEY(d)])
             .attr("stroke", "#fff").attr("stroke-width", 2)
             .transition().delay((d, i) => 200 + i * 120).duration(500)
             .ease(d3.easeBackOut)
@@ -2736,7 +2739,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("y", d => y(d.ease_index) + 4)
             .style("font-size", "0.82rem")
             .style("font-weight", "600")
-            .style("fill", d => MONSTER_COLORS[d.monster])
+            .style("fill", d => MONSTER_COLORS[MONSTER_KEY(d)])
             .style("opacity", 0)
             .text(d => d.monster)
             .transition().delay((d, i) => 600 + i * 120).duration(400)

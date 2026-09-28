@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-/PWQo881wjMYr5/yW8Gn2fU4MtVtvDLHRLvgpmNdAwg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-q++DDn8QegeoK2r/Rsq6Jz+bUMUK1WocbuSGNjzXAz0='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>通关文牒·取经驿路图 · 详解西游记</title>
@@ -21,7 +21,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -259,6 +259,7 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
   html[data-theme="dark"] svg [fill="#2c2416" i] { fill: #9c9486; }  /* ×2 L<0.16 */
   html[data-theme="dark"] svg [fill="#7a3a8c" i] { fill: #af89af; }  /* ×2 L<0.16 */
   html[data-theme="dark"] svg [fill="#23201A" i] { fill: #9a9489; }  /* ×2 L<0.16 */
+  html[data-theme="dark"] svg [fill="#7a5230" i] { fill: #bb9070; }  /* narrative-experiment 部署数据组色·暗色提亮 */
   html[data-theme="dark"] svg [fill="#5a4a6b" i] { fill: #9e919d !important; }  /* ×112 */
   html[data-theme="dark"] svg [fill="#8b3a2a" i] { fill: #ba8a7a !important; }  /* ×56 */
   html[data-theme="dark"] svg [fill="#1e3a8a" i] { fill: #8a94b4 !important; }  /* ×42 */
@@ -1339,20 +1340,20 @@ td.num, th.num {
 // 数据源：W370 明代驿递交通对照专题 + 原著 text-search.html（line 号已 line_check.py 验证）
 const STATIONS = [
   { ch:12, name:"长安·大唐", status:"issue", pill:"发牒", cite:"第12回 line 51", note:"太宗化生寺赐通关文牒" },
-  { ch:29, name:"宝象国", status:"pass", pill:"验讫", cite:"第29回 line 3", note:"呈递关文遇黄袍怪之乱" },
-  { ch:37, name:"乌鸡国", status:"pass", pill:"验讫", cite:"第37回 line 11", note:"乌鸡国倒换关文" },
-  { ch:45, name:"车迟国", status:"pass", pill:"验讫", cite:"第44回 line 15·45回 line 43", note:"斗法祈雨后倒换关文" },
-  { ch:54, name:"女儿国", status:"pass", pill:"验讫", cite:"第54回 line 13", note:"女王欲留婚，关文先验" },
+  { ch:29, name:"宝象国", status:"pass", pill:"验讫", cite:"第29回 line 19", note:"呈递关文遇黄袍怪之乱" },
+  { ch:37, name:"乌鸡国", status:"pass", pill:"验讫", cite:"第39回 line 31", note:"乌鸡国倒换关文" },
+  { ch:45, name:"车迟国", status:"pass", pill:"验讫", cite:"第45回 line 69", note:"斗法祈雨后倒换关文" },
+  { ch:54, name:"女儿国", status:"pass", pill:"验讫", cite:"第54回 line 17", note:"女王欲留婚，关文先验" },
   { ch:62, name:"祭赛国", status:"pass", pill:"验讫", cite:"第62回 line 21", note:"扫塔辨冤后倒换关文" },
-  { ch:68, name:"朱紫国", status:"pass", pill:"验讫", cite:"第68回 line 3", note:"行医悬丝诊脉，倒换关文" },
-  { ch:74, name:"狮驼国", status:"unv", pill:"未验·国破", cite:"第74回 line 41", note:"大鹏占城，文牒无处可验" },
+  { ch:68, name:"朱紫国", status:"pass", pill:"验讫", cite:"第68回 line 21", note:"行医悬丝诊脉，倒换关文" },
+  { ch:74, name:"狮驼国", status:"unv", pill:"未验·国破", cite:"第74回 line 19", note:"大鹏占城，文牒无处可验" },
   { ch:78, name:"比丘国", status:"pass", pill:"验讫", cite:"第78回 line 3", note:"救小儿剖心之灾后倒换" },
-  { ch:84, name:"灭法国", status:"unv", pill:"未验·改容", cite:"第84回 line 3·line 17", note:"杀僧诏下，剃发改名混出" },
-  { ch:88, name:"玉华县", status:"pass", pill:"州郡·验讫", cite:"第88回 line 9", note:"玉华王处验引、传艺三徒" },
+  { ch:84, name:"灭法国", status:"unv", pill:"未验·改容", cite:"第84回 line 3·line 63", note:"杀僧诏下，剃发改名混出" },
+  { ch:88, name:"玉华县", status:"pass", pill:"州郡·验讫", cite:"第88回 line 15", note:"玉华王处验引、传艺三徒" },
   { ch:91, name:"金平府", status:"unv", pill:"未验·灯节", cite:"第91回 line 7", note:"慈云寺观灯被犀精所掳" },
-  { ch:93, name:"天竺国", status:"pass", pill:"验讫", cite:"第93回 line 3", note:"假公主招亲，辨明后倒换" },
-  { ch:96, name:"铜台府", status:"trouble", pill:"波折", cite:"第96回 line 5·97回 line 31/67", note:"寇员外案，报官递解" },
-  { ch:98, name:"灵山", status:"sutra", pill:"传经不验", cite:"第98回 line 1/43·100回 line 7/45", note:"无字真经，五圣成真" }
+  { ch:93, name:"天竺国", status:"pass", pill:"验讫", cite:"第93回 line 41", note:"假公主招亲，辨明后倒换" },
+  { ch:96, name:"铜台府", status:"trouble", pill:"波折", cite:"第96回 line 5·97回 line 31/75", note:"寇员外案，报官递解" },
+  { ch:98, name:"灵山", status:"sutra", pill:"传经不验", cite:"第98回 line 43·100回 line 19", note:"无字真经，五圣成真" }
 ];
 const COLOR = { issue:"var(--chart-2)", pass:"var(--chart-4)", unv:"var(--chart-3)", trouble:"var(--accent-3)", sutra:"var(--rebel)" };
 const MING = [
@@ -1360,7 +1361,7 @@ const MING = [
   { sys:"递（水驿）", fn:"水路漕运·官船渡口", xy:"通天河/流沙河渡口", cite:"第22回 line 7 流沙河" },
   { sys:"铺（急递铺）", fn:"公文飞报·昼夜接力", xy:"传旨飞报·妖怪哨探", cite:"第32回 line 57 巡山谎报" },
   { sys:"勘合·火牌", fn:"出使凭证·验放通行", xy:"通关文牒·倒换关文", cite:"第12回 line 51 太宗赐牒" },
-  { sys:"验引", fn:"州县验引·放行出境", xy:"各国倒换关文仪式", cite:"第54回 line 13 女儿国" }
+  { sys:"验引", fn:"州县验引·放行出境", xy:"各国倒换关文仪式", cite:"第54回 line 17 女儿国" }
 ];
 
 function renderTimeline(){

@@ -1,0 +1,19 @@
+{
+  "batch": "W621",
+  "version": "v2.3.221",
+  "date": "2026-09-28",
+  "title": "W621 暗色阶段三收口 — 数据驱动角色色 48/7 清零 + fetch/EMBEDDED 双路径契约归一四族（appearance 色表兜底解耦·matrix 象限/阶段别名·chart-design 怪物别名·journey 标记属性化·阶段卡与 en 时间线部署态复活·visual-judge 9/9）",
+  "desc": "暗色数据色收口与双路径契约归一",
+  "head_entry": "2026-09-28（v2.3.221 W621 暗色阶段三收口：数据驱动角色色 48/7 清零·四族双路径契约归一·阶段卡与 en 时间线部署态复活）",
+  "head_sentence": "W621 暗色阶段三收口——数据驱动角色色 48/7 清零 + 四族双路径契约归一",
+  "changelog_body": "\n\n> **来源**：W589 登记遗留「暗色阶段三设计批」（数据驱动角色色 48 处/7 页暗色不可见）+ 用户「继续打磨前端网页 UI/UX 的显示效果」指令。取证：W589 基线逐页明细复跑核对（48/7 逐数复现）+ 实弹探针（computed 低亮度全量枚举，7 页 545 处形态·含基线未计的 timeline 圆点/ROI 点）。\n> - **四族根因（均 fetch(部署)/EMBEDDED(file://) 双路径失配·W565 同族家族）**：① appearance zh+en——W565 timeline 派生使「!characters[0].timeline」的 color 兜底分支被短路，部署数据无 color 字段 → SVG 默认黑（Top15 条形 + timeline 圆点 475）；② methodology-matrix zh+en——部署 JSON 象限为中文名（「左下」）、页面查表键为英文 id → 散点黑 ×15；③ en matrix/chart-design——阶段名与怪物名同理中英失配（ROI 色带/圆点/表徽章黑 + 散点黑 ×6），且部署 JSON phase_analysis 为字典（EMBEDDED 为数组）→ forEach 抛错被 safe() 静默吞掉·阶段对比卡部署态整节缺失（zh/en 同病）；④ journey-spacetime 轴 hover 标记为 CSS 类上色（fill 属性映射打不中）+ en narrative-experiment 部署数据组色 #7a5230 过暗（不在 W582 映射 24 值内）。\n> - **执行（页面数据层归一·EMBEDDED 路径全透传）**：color 兜底与 timeline 派生解耦（按 MOCK 角色名对齐配色+调色板轮转·两主题恢复设计意图彩色）；QUADRANT_KEY/PHASE_KEY/MONSTER_KEY 别名键（中文部署值→英文键·双向兼容）；phase_analysis 字典→数组归一；en 时间线过滤/显示前中文角色名→英文归一（475 点复活·y 轴/图例英文）；journey 标记补 fill 属性（暗色由既有 #3a6b8c→#7d99a9 映射接管·浅色仍由类规则着色零变化）；tokens 暗色映射 +1（#7a5230→#bb9070·注释遵循既有映射不带 W 号惯例防范围漂移门禁误伤）。\n> - **验证**：全量暗色审计 163 页 0 缺陷行（基线刷新 48/7→0/0·只增即 FAIL）；实弹探针 7 页 0 低亮度图形；内容在位探针 13/13（条形 15/时间线 475/象限点 15/阶段卡 3/ROI 点 10/散点 13/标记 1——防「语法错→整块不渲染→探针假 0」盲区·过程中真实拦截一次补丁脚本重放致 const 双声明）；契约冒烟 file:// 路径通过（pageerror 0）；visual-judge 9/9（首轮 8/9·en 时间线空渲染 fail→归一修复后复拍复验 pass）；verify 核心全绿·CSP 0 漂移（6 页哈希更新）·ruff 0 错。\n> - **文件**：site/tokens.css（映射+1）、7 页面（appearance/matrix zh+en·chart-design en·journey-spacetime·customs-pass-route 附带前批引文行号实测修正入库——第45回 line 69「倒换关文」等逐字抽查命中）、327 页 INLINED 重分发、scripts/_w621_dark_data_colors_fix.py（补丁记录）+ 取证链 4 件（probe/content_probe/capture/reshoot）、scripts/output/render-state-audit(-baseline).jsonl（刷新 0/0）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。\n> - **状态**：已落地（本批提交并 push origin/main）。遗留登记：① W585 触屏 tooltip 余 6 页页面级残留（真机验证+定向修复批）；② en 页部署态怪物名/角色名中文显示（i18n 数据面·本批仅修色不改文案）。",
+  "milestone_block": "- **v2.3.221 W621 暗色阶段三收口（2026-09-28）**：\n  - W589 登记批清零：数据驱动角色色 48 处/7 页→0（暗色审计 163 页 0 缺陷行·基线刷新 0/0 只增即 FAIL）\n  - 四族根因均 fetch/EMBEDDED 双路径失配（W565 同族）：color 兜底被 timeline 派生短路·象限/阶段/怪物名中英失配·phase_analysis 字典形状\n  - 修复全在页面数据层（EMBEDDED 全透传）：MOCK 配色对齐/别名键/形状归一/fill 属性化/tokens 映射 +1\n  - 部署态两处静默缺失复活：阶段对比卡（safe() 吞错家族）+ en 时间线（475 点）·visual-judge 9/9·内容在位探针 13/13",
+  "agents_note": "2026-09-28（v2.3.221 W621）暗色阶段三收口：无 § 结构性变更（页面数据层契约归一四族 + tokens 暗色映射 +1·基线刷新 0/0·visual-judge 9/9），仅版本脚注同步",
+  "file_index_rows": [
+    "| site/tokens.css | W621 | 更新·暗色映射+1（#7a5230→#bb9070·narrative-experiment 部署数据组色） |",
+    "| site/data+en（7 页修复·327 页 INLINED 分发） | W621 | 更新·appearance/matrix zh+en 契约归一·chart-design en 怪物别名·journey 标记 fill 属性化·customs-pass-route 附带前批引文行号修正 |",
+    "| scripts/output/render-state-audit-baseline.jsonl | W621 | 更新·暗色基线刷新 48/7→0/0（只增即 FAIL） |",
+    "| scripts/_w621_dark_data_colors_fix.py | W621 | 新增·四族契约归一补丁记录（精确匹配断言式） |",
+    "| scripts/_w621_probe_dark_fills.js 等 4 件 | W621 | 新增·取证链（低亮度探针/内容在位断言/暗色实拍复拍） |"
+  ]
+}

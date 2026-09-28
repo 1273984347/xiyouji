@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W620），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W621），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.221（2026-09-28）：W621 暗色阶段三收口 — 数据驱动角色色 48/7 清零 + fetch/EMBEDDED 双路径契约归一四族（appearance 色表兜底解耦·matrix 象限/阶段别名·chart-design 怪物别名·journey 标记属性化·阶段卡与 en 时间线部署态复活·visual-judge 9/9）
+
+> **来源**：W589 登记遗留「暗色阶段三设计批」（数据驱动角色色 48 处/7 页暗色不可见）+ 用户「继续打磨前端网页 UI/UX 的显示效果」指令。取证：W589 基线逐页明细复跑核对（48/7 逐数复现）+ 实弹探针（computed 低亮度全量枚举，7 页 545 处形态·含基线未计的 timeline 圆点/ROI 点）。
+> - **四族根因（均 fetch(部署)/EMBEDDED(file://) 双路径失配·W565 同族家族）**：① appearance zh+en——W565 timeline 派生使「!characters[0].timeline」的 color 兜底分支被短路，部署数据无 color 字段 → SVG 默认黑（Top15 条形 + timeline 圆点 475）；② methodology-matrix zh+en——部署 JSON 象限为中文名（「左下」）、页面查表键为英文 id → 散点黑 ×15；③ en matrix/chart-design——阶段名与怪物名同理中英失配（ROI 色带/圆点/表徽章黑 + 散点黑 ×6），且部署 JSON phase_analysis 为字典（EMBEDDED 为数组）→ forEach 抛错被 safe() 静默吞掉·阶段对比卡部署态整节缺失（zh/en 同病）；④ journey-spacetime 轴 hover 标记为 CSS 类上色（fill 属性映射打不中）+ en narrative-experiment 部署数据组色 #7a5230 过暗（不在 W582 映射 24 值内）。
+> - **执行（页面数据层归一·EMBEDDED 路径全透传）**：color 兜底与 timeline 派生解耦（按 MOCK 角色名对齐配色+调色板轮转·两主题恢复设计意图彩色）；QUADRANT_KEY/PHASE_KEY/MONSTER_KEY 别名键（中文部署值→英文键·双向兼容）；phase_analysis 字典→数组归一；en 时间线过滤/显示前中文角色名→英文归一（475 点复活·y 轴/图例英文）；journey 标记补 fill 属性（暗色由既有 #3a6b8c→#7d99a9 映射接管·浅色仍由类规则着色零变化）；tokens 暗色映射 +1（#7a5230→#bb9070·注释遵循既有映射不带 W 号惯例防范围漂移门禁误伤）。
+> - **验证**：全量暗色审计 163 页 0 缺陷行（基线刷新 48/7→0/0·只增即 FAIL）；实弹探针 7 页 0 低亮度图形；内容在位探针 13/13（条形 15/时间线 475/象限点 15/阶段卡 3/ROI 点 10/散点 13/标记 1——防「语法错→整块不渲染→探针假 0」盲区·过程中真实拦截一次补丁脚本重放致 const 双声明）；契约冒烟 file:// 路径通过（pageerror 0）；visual-judge 9/9（首轮 8/9·en 时间线空渲染 fail→归一修复后复拍复验 pass）；verify 核心全绿·CSP 0 漂移（6 页哈希更新）·ruff 0 错。
+> - **文件**：site/tokens.css（映射+1）、7 页面（appearance/matrix zh+en·chart-design en·journey-spacetime·customs-pass-route 附带前批引文行号实测修正入库——第45回 line 69「倒换关文」等逐字抽查命中）、327 页 INLINED 重分发、scripts/_w621_dark_data_colors_fix.py（补丁记录）+ 取证链 4 件（probe/content_probe/capture/reshoot）、scripts/output/render-state-audit(-baseline).jsonl（刷新 0/0）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。遗留登记：① W585 触屏 tooltip 余 6 页页面级残留（真机验证+定向修复批）；② en 页部署态怪物名/角色名中文显示（i18n 数据面·本批仅修色不改文案）。
 ### v2.3.220（2026-09-24）：W620 装饰投稿包五图 SVG 重绘 — 数据忠实矢量图替代 matplotlib/截图（图1/2 成品化+图3 力导向+图4 热力图+图5 时间轴·visual-judge 5/5）
 
 > **来源**：用户裁决「把装饰投稿里面的所有图表都用 SVG 重新画」（B 轨投稿搁置期）。**追记：chore 提交 400c3e7（四目录移出公开仓库·untrack+gitignore·搜索索引收缩 771→671·CSP 零漂移）未走级联无版段，本版段一并登记**。
