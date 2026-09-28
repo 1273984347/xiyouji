@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-xc/bDUkB8CrpcFzAFQW8wn5w02JIZFUVbNDSL9oiW3I=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-LSL2bwg6mxdrmOqaqGhhfWFZin48H5MNc9YoNTsCu9A=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Character Appearances &amp; Screen Time · Annotated Journey to the West</title>
@@ -1459,7 +1459,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     const MAIN_CHARACTERS = ["Sun Wukong", "Tang Sanzang", "Zhu Bajie", "Sha Wujing", "Guanyin", "Tathāgata"];
     // W621：部署 fetch 数据角色名为中文（EMBEDDED 为英文）——时间线过滤/显示前归一，
     // 否则英文页部署态过滤得 0 行、整图空渲染（visual-judge 实拍实证）
-    const ZH2EN_NAME = { "孙悟空": "Sun Wukong", "唐僧": "Tang Sanzang", "猪八戒": "Zhu Bajie", "沙僧": "Sha Wujing", "观音": "Guanyin", "如来": "Tathāgata" };
+    // W622：扩为部署数据 35 人全量 map——main() 加载后一次性归一 characters[].name/matrix 键，
+    // 条形轴/热力图/图例/洞察/KPI 显示面全覆盖（EMBEDDED 英文名透传）
+    const ZH2EN_NAME = { "孙悟空": "Sun Wukong", "唐僧": "Tang Sanzang", "猪八戒": "Zhu Bajie", "沙僧": "Sha Wujing", "观音": "Guanyin", "如来": "Tathāgata", "玉帝": "Jade Emperor", "白龙马": "White Dragon Horse", "太上老君": "Taishang Laojun", "李靖": "Li Jing", "哪吒": "Nezha", "王母": "Queen Mother", "牛魔王": "Bull Demon King", "太白金星": "Taibai Jinxing", "红孩儿": "Red Boy", "菩提祖师": "Patriarch Bodhi", "白鹿精": "White Deer Spirit", "二郎神": "Erlang Shen", "大鹏": "Great Peng", "青毛狮子": "Azure Lion", "黄风怪": "Yellow Wind Demon", "铁扇公主": "Princess Iron Fan", "黄袍怪": "Yellow-Robed Demon", "镇元子": "Zhenyuan Daxian", "弥勒佛": "Maitreya Buddha", "金鱼精": "Goldfish Spirit", "白象": "White Elephant", "银角大王": "Silver-Horned King", "金角大王": "Golden-Horned King", "青牛精": "Azure Ox Spirit", "蝎子精": "Scorpion Spirit", "白骨精": "White Bone Spirit", "黄眉童子": "Yellow-Browed Boy", "蜘蛛精": "Spider Spirit", "六耳猕猴": "Six-Eared Macaque" };
 
     // 确定性时间线生成（避免随机抖动，保证每次渲染一致）
     function makeTimeline(firstCh, appearances, mentions) {
@@ -2039,6 +2041,20 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 ...c,
                 timeline: makeTimeline(c.first_chapter || 1, c.appearances || 0, c.mentions || 0)
             }));
+        }
+        // W622：部署 fetch 数据角色名为中文（EMBEDDED 为英文）——加载后一次性归一
+        // characters[].name 与 matrix 键/first_appearance：条形轴、热力图、图例、洞察、KPI
+        // 显示面全覆盖；EMBEDDED 英文名全透传（须先于下方按名对色的兜底块执行）
+        if (data.characters && data.characters[0]) {
+            data.characters = data.characters.map(c => ({ ...c, name: ZH2EN_NAME[c.name] || c.name }));
+            if (data.matrix) {
+                const mx622 = {};
+                Object.keys(data.matrix).forEach(k => { mx622[ZH2EN_NAME[k] || k] = data.matrix[k]; });
+                data.matrix = mx622;
+            }
+            if (data.first_appearance && data.first_appearance.name) {
+                data.first_appearance.name = ZH2EN_NAME[data.first_appearance.name] || data.first_appearance.name;
+            }
         }
         // W621：颜色兜底与 timeline 派生解耦——部署 fetch 数据无 color 字段，此前兜底
         // 分支被「timeline 已派生」短路，fill 落回 SVG 默认黑（暗色下不可见）；

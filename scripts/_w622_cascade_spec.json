@@ -1,0 +1,17 @@
+{
+  "batch": "W622",
+  "version": "v2.3.222",
+  "date": "2026-09-29",
+  "title": "W622 触屏 tooltip 真机验证收口 + en 人物页部署态名字英化 — W585 残留登记关闭（harness 5+2 全 5/5 + computer-use 真实鼠标 4 页实操）·35 人 ZH2EN 全量归一",
+  "desc": "触屏tooltip真机收口与en人名英化",
+  "head_entry": "2026-09-29（v2.3.222 W622 触屏 tooltip 真机验证收口：W585 残留登记关闭·en 人物页 35 人名字英化）",
+  "head_sentence": "W622 触屏 tooltip 真机验证收口 + en 人物页名字英化",
+  "changelog_body": "\n\n> **来源**：W621 登记两笔遗留的用户「继续打磨」指令——①W585 触屏 tooltip 余 6 页页面级残留（登记为真机验证+定向修复批）；②en 页部署态怪物/角色名显示中文。真机验证经 computer-use 真实浏览器（OS 级鼠标输入·非合成事件）完成。\n> - **①W585 残留收口（实为已愈合·登记过时）**：复跑 W575 harness——deconstruction zh+en/cultural-misreading zh+en/concept-device zh 全部 5/5 warn=0（W586 祖先链 mouseleave 升级已把 B/D harness 语境差异消掉·W585 登记被其覆盖）；真机实操 4 页全过——deconstruction 散点 tooltip 真实指针触发+移开消失、cultural-misreading 热力图单元格高亮+tooltip（中国·跟随结构 8/10）、concept-device 光诸卡片悬停面板切换（鲁迅·大闹天宫）、en 人物页条形 tooltip（Sha Wukong 系全英文）。\n> - **②en 人物页名字英化**：W621 的 6 人 ZH2EN_NAME 扩为部署数据 35 人全量 map（译文对齐页内 MOCK 英文名）；main() 加载后一次性归一 characters[].name+matrix 键+first_appearance——条形轴/热力图/图例/洞察/KPI 显示面全覆盖（此前 insights 的 Sun Wukong find 失败显示「—」一并修复·42.3% 真实占比回归）；EMBEDDED 英文名全透传；顺序上先于按名对色块执行。\n> - **验证**：harness 5+2 页 5/5（0 fail 0 warn）；Playwright 探针——热力图/洞察 0 CJK·15 条形·475 时间线点·0 pageerror；真机 a11y 树取证 Key Insights 全英文（Spider Spirit 等）+ 时间线六人行标签英文；verify 核心全绿·CSP 0 漂移（1 页哈希更新）。\n> - **文件**：site/en/character-appearance.html（map 扩量+归一块）、scripts/_w622_probe_en_names.js（探针）、docs/superpowers/plans/2026-09-29-en-data-i18n-display-plan.md（其余 EN 页数据显示面 i18n 两路线评估入档）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。\n> - **状态**：已落地（本批提交并 push origin/main）。剩余 i18n 显示面按 plans 梯队：快赢层（methodology/chart-design 枚举名别名）+根治层（en/json 数据副本·随 WP-C）。",
+  "milestone_block": "- **v2.3.222 W622 触屏 tooltip 真机验证收口 + en 人物页名字英化（2026-09-29）**：\n  - W585 残留登记关闭：harness 5+2 页全 5/5 warn=0（W586 升级已覆盖）+ computer-use 真实鼠标 4 页实操全过\n  - en 人物页 35 人 ZH2EN 全量归一（name/matrix/首现）——条形/热力/图例/洞察/KPI 显示面英文化\n  - EN 数据显示面 i18n 两路线评估入档 plans（快赢层别名/根治层 en 副本随 WP-C）",
+  "agents_note": "2026-09-29（v2.3.222 W622）触屏 tooltip 真机验证收口 + en 人物页名字英化：无 § 结构性变更（W585 残留登记关闭·单页数据归一·plans 入档），仅版本脚注同步",
+  "file_index_rows": [
+    "| site/en/character-appearance.html | W622 | 更新·35 人 ZH2EN 全量 map+加载后归一（显示面英文化·修复 insights find 失败） |",
+    "| docs/superpowers/plans/2026-09-29-en-data-i18n-display-plan.md | W622 | 新增·EN 数据显示面 i18n 两路线评估（快赢层/根治层梯队） |",
+    "| scripts/_w622_probe_en_names.js | W622 | 新增·en 人物页名字英化探针（CJK 密度+图表在位断言） |"
+  ]
+}
