@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-MbKHSjV5zZCl3XErHX7GFoR7odUe+0ecEvSaHEkjQ7I=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-xc/bDUkB8CrpcFzAFQW8wn5w02JIZFUVbNDSL9oiW3I=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Character Appearances &amp; Screen Time · Annotated Journey to the West</title>
@@ -20,7 +20,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
     
     
-                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -258,6 +258,7 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
   html[data-theme="dark"] svg [fill="#2c2416" i] { fill: #9c9486; }  /* ×2 L<0.16 */
   html[data-theme="dark"] svg [fill="#7a3a8c" i] { fill: #af89af; }  /* ×2 L<0.16 */
   html[data-theme="dark"] svg [fill="#23201A" i] { fill: #9a9489; }  /* ×2 L<0.16 */
+  html[data-theme="dark"] svg [fill="#7a5230" i] { fill: #bb9070; }  /* narrative-experiment 部署数据组色·暗色提亮 */
   html[data-theme="dark"] svg [fill="#5a4a6b" i] { fill: #9e919d !important; }  /* ×112 */
   html[data-theme="dark"] svg [fill="#8b3a2a" i] { fill: #ba8a7a !important; }  /* ×56 */
   html[data-theme="dark"] svg [fill="#1e3a8a" i] { fill: #8a94b4 !important; }  /* ×42 */
@@ -1456,6 +1457,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
     // 时间分布图主要人物
     const MAIN_CHARACTERS = ["Sun Wukong", "Tang Sanzang", "Zhu Bajie", "Sha Wujing", "Guanyin", "Tathāgata"];
+    // W621：部署 fetch 数据角色名为中文（EMBEDDED 为英文）——时间线过滤/显示前归一，
+    // 否则英文页部署态过滤得 0 行、整图空渲染（visual-judge 实拍实证）
+    const ZH2EN_NAME = { "孙悟空": "Sun Wukong", "唐僧": "Tang Sanzang", "猪八戒": "Zhu Bajie", "沙僧": "Sha Wujing", "观音": "Guanyin", "如来": "Tathāgata" };
 
     // 确定性时间线生成（避免随机抖动，保证每次渲染一致）
     function makeTimeline(firstCh, appearances, mentions) {
@@ -1818,7 +1822,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     // 渲染：主要人物出场时间分布（圆点散点图）
     // ============================================================
     function renderTimeline(data) {
-        const main = data.characters.filter(c => MAIN_CHARACTERS.includes(c.name));
+        const main = data.characters
+            .map(c => ({ ...c, name: ZH2EN_NAME[c.name] || c.name }))
+            .filter(c => MAIN_CHARACTERS.includes(c.name));
         // 按 MAIN_CHARACTERS 顺序排序
         main.sort((a, b) => MAIN_CHARACTERS.indexOf(a.name) - MAIN_CHARACTERS.indexOf(b.name));
 
@@ -2031,8 +2037,17 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         if (data.characters && data.characters[0] && !data.characters[0].timeline) {
             data.characters = data.characters.map(c => ({
                 ...c,
-                timeline: makeTimeline(c.first_chapter || 1, c.appearances || 0, c.mentions || 0),
-                color: c.color || "#c8463a"
+                timeline: makeTimeline(c.first_chapter || 1, c.appearances || 0, c.mentions || 0)
+            }));
+        }
+        // W621：颜色兜底与 timeline 派生解耦——部署 fetch 数据无 color 字段，此前兜底
+        // 分支被「timeline 已派生」短路，fill 落回 SVG 默认黑（暗色下不可见）；
+        // 按角色名对齐 MOCK 配色，其余角色按 MOCK 调色板轮转
+        if (data.characters && data.characters[0]) {
+            const nameColors = Object.fromEntries(MOCK_CHARACTERS.map(c => [c.name, c.color]));
+            data.characters = data.characters.map((c, i) => ({
+                ...c,
+                color: c.color || nameColors[c.name] || MOCK_CHARACTERS[i % MOCK_CHARACTERS.length].color
             }));
         }
         if (!data.first_appearance) {

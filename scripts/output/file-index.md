@@ -11,6 +11,16 @@
 ---
 
 
+## W621 W621 暗色阶段三收口（2026-09-28·v2.3.221）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/tokens.css | W621 | 更新·暗色映射+1（#7a5230→#bb9070·narrative-experiment 部署数据组色） |
+| site/data+en（7 页修复·327 页 INLINED 分发） | W621 | 更新·appearance/matrix zh+en 契约归一·chart-design en 怪物别名·journey 标记 fill 属性化·customs-pass-route 附带前批引文行号修正 |
+| scripts/output/render-state-audit-baseline.jsonl | W621 | 更新·暗色基线刷新 48/7→0/0（只增即 FAIL） |
+| scripts/_w621_dark_data_colors_fix.py | W621 | 新增·四族契约归一补丁记录（精确匹配断言式） |
+| scripts/_w621_probe_dark_fills.js 等 4 件 | W621 | 新增·取证链（低亮度探针/内容在位断言/暗色实拍复拍） |
+
 ## W620 W620 装饰投稿包五图 SVG 重绘（2026-09-24·v2.3.220）
 
 | 文件 | W | 说明 |
