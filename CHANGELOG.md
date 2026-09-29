@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W626），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W627），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.227（2026-09-30）：W627 i18n 根治层路线 B — EN 数据副本 site/en/json/ 七文件（EMBEDDED×部署 JSON 机械配对生成·零新增翻译资产）·两 EN 页 fetch 切换·探针边界反转 30/30×2·parity 检查器常驻
+> **来源**：W622 入档 i18n 方案梯队②根治层（原「随 WP-C」钩子因 W591 已完成而独立立项）——归档裁决下唯一在队的 P1 工程批。快赢层（W625）只英化枚举名，长文本层（15 妖×4 分析句/10 案解读/6 妖日程/insights/场景卡）本批根治。
+> - **生成链（零新增翻译资产）**：`_w627_extract_embedded.js`（Node 原生 eval 解析两 EN 页 EMBEDDED——它本身就是全套英文含长文本，规避正则解析 JS 字面量被字符串冒号炸毁的坑）→ `_w627_gen_en_data.py`（EN 值优先合并：非 CJK 判定·缺失回退 zh 如实计数；形状差异取 EMBEDDED 侧——phase_analysis 字典→数组、scenarios 字符串→对象，页内 W621/W625 shim 随之自然空转；schedule 时辰键×拼音键集不相交等长→按插入序位置配对；zip strict=True）→ 产出 `site/en/json/` 七文件（含 chart 页独取的 domino_causality/spiral_progress——不生成则 fetch 切换后部署态 404 触发冒烟门禁）。产出对账：EN 字段 65-192/文件·CJK 残留合计 17（villain axes 子树等 zh 独有·如实回退）。
+> - **fetch 切换**：两 EN 页 7 处 `../data/json/` → `../en/json/`（部署根内·check_dynamic_links 面内）；file:// 路径不受影响（fetch 失败走 EMBEDDED 英文回退·两路径语言首次归一）。
+> - **探针边界反转**：`_w625_probe_en_i18n.js` 两条「长文本保持中文」断言更新为「长文本应已英化」（matrix.boundary.longtext-en / chart.boundary.analysis-en）——双路径 30/30×2。
+> - **常驻检查器**：`_check_en_json_parity.py`（按需·非 verify 门禁）：记录数对账（15/10/6 护栏同款）+ CJK 残留不增（基线 17）+ 可解析；zh 源重生成（run_all）后的再生成链已写入脚本头与 CHANGELOG：`node _w627_extract_embedded.js && python _w627_gen_en_data.py`（记录数护栏会在 zh 增删记录时当场 assert）。
+> - **范围声明**：本批仅覆盖快赢层同款两页七文件；其余 EN 页（journey-route 系地名等）维持 zh 数据现状登记——根治层扩展需逐页补 EMBEDDED 英文对，归档模式下不主动扩。
+> - **验证**：探针双路径 30/30×2（http 态长文本非 CJK 实证）；parity 检查器全过；CSP 0 漂移（2 页哈希更新）；ruff 0 错·node --check 过；verify_delivery 核心全绿。
+> - **文件**：site/en/json/ 七文件（新增）、site/en/methodology-matrix.html、site/en/chart-design.html（fetch 路径+CSP）、scripts/_w627_extract_embedded.js、scripts/_w627_gen_en_data.py、scripts/_check_en_json_parity.py、scripts/_w627_inspect_embedded.py（取证·均新增）、scripts/_w625_probe_en_i18n.js（边界反转）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 ### v2.3.226（2026-09-30）：W626 WP-A 度量闭环正式判定 — GoatCounter 令牌实操配置（computer-use UI 生成+剪贴板零转录入 .env）·fetch_gate_stats 实测 uv7=1/uv30=24·judge_gate 判定归档分支（冻结内容扩容·转工程批）·复盘回填+阻塞区更新·附带 942c64e 追记登记
 > **来源**：用户裁决执行 WP-A（2026-09-29 选收行动清单三件套·2026-09-30 computer-use 实操完成 token 配置）——W530 决策闸门自 W535 取数自动化后悬置的最后一环（生成 API 令牌）闭环，正式判定落地。
 > - **①token 实操（computer-use 驱动用户 Edge）**：GoatCounter 令牌入口实际为 用户名→API（/user/api·非方案所记 Settings 路径）；首枚令牌误选 Read sites 权限（表单复选框行内布局误读）→删除重建为 **Read statistics**；令牌明文 GoatCounter 仅存于表格 show 链接 data-show 属性（页面 JS 展开处理器被翻译扩展环境破坏未生效）→ 经 view-source + Ctrl+F 定位 + 三击整行复制→剪贴板正则提取直写 .env（零人工转录——人工转录曾实错 2 字符被 API 401 当场拦下）。.env 已确认 gitignore。

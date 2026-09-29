@@ -1,0 +1,173 @@
+{
+ "design_name": "Eighty-One Hardships Causal Domino Array",
+ "design_principle": "Not arranged in chronological order · linked by butterfly effect · each fallen domino triggers the next · forming a complete causal chain",
+ "core_insight": "The whole pilgrimage project is a precisely designed 'causal machine'",
+ "domino_chains": [
+  {
+   "chain_id": "C1",
+   "chain_name": "The Kasaya Incident Chain · The Birth of the Golden Fillet Spell",
+   "dominos": [
+    {
+     "n": 1,
+     "title": "Elder Jinchi Covets the Kasaya",
+     "hardship": "The Lost Kasaya",
+     "chapter": "Ch. 16",
+     "direct_cause": "Elder Jinchi covets the kasaya and sets fire to the monastery",
+     "domino_effect": "Guanyin subdues the Black Bear Spirit and obtains field-test data for the Golden Fillet Spell"
+    },
+    {
+     "n": 2,
+     "title": "Guanyin Subdues the Black Bear Spirit",
+     "hardship": "—",
+     "chapter": "Ch. 17",
+     "direct_cause": "Wukong seeks Guanyin's help; Guanyin subdues the Black Bear Spirit with the Golden Fillet Spell",
+     "domino_effect": "Provides the basis for the Tight-Fillet Spell's later effectiveness, proving the Golden Fillet Spell can control demons"
+    },
+    {
+     "n": 3,
+     "title": "The Tight-Fillet Spell Controls Wukong",
+     "hardship": "The Banished Mind-Monkey",
+     "chapter": "Ch. 27",
+     "direct_cause": "Tang Sanzang uses the Tight-Fillet Spell to control and dismiss Wukong",
+     "domino_effect": "After Wukong is dismissed, Tang Sanzang meets the Yellow-Robed Monster and falls into danger"
+    },
+    {
+     "n": 4,
+     "title": "The Yellow-Robed Monster Incident",
+     "hardship": "The Letter to Precious Elephant Kingdom · The Tiger in the Golden Throne Hall",
+     "chapter": "Ch. 28-30",
+     "direct_cause": "Tang Sanzang is captured by the Yellow-Robed Monster; Zhu Bajie goes to Flower-Fruit Mountain to bring Wukong back",
+     "domino_effect": "Wukong returns; the team establishes a new power balance; the Tight-Fillet Spell becomes Wukong's 'contract'"
+    }
+   ],
+   "chain_insight": "A single moment of greed by Elder Jinchi ultimately shaped the pilgrimage team's core management tool"
+  },
+  {
+   "chain_id": "C2",
+   "chain_name": "The Wuzhuang Temple Incident Chain · The Daoist-Buddhist Alliance",
+   "dominos": [
+    {
+     "n": 1,
+     "title": "Wukong Topples the Ginseng Fruit Tree",
+     "hardship": "In Wuzhuang Temple · The Ginseng That Is Hard to Revive",
+     "chapter": "Ch. 24-26",
+     "direct_cause": "Goaded by Bajie, Wukong topples the Ginseng Fruit Tree",
+     "domino_effect": "Zhenyuanzi detains Tang Sanzang; Wukong seeks Guanyin to heal the tree"
+    },
+    {
+     "n": 2,
+     "title": "Guanyin Revives the Ginseng Fruit Tree",
+     "hardship": "—",
+     "chapter": "Ch. 26",
+     "direct_cause": "Guanyin revives the Ginseng Fruit Tree with sweet-dew water",
+     "domino_effect": "Zhenyuanzi and Wukong become sworn brothers; the Daoists and Buddhists form a formal alliance"
+    },
+    {
+     "n": 3,
+     "title": "Zhenyuanzi Forms an Alliance",
+     "hardship": "—",
+     "chapter": "Ch. 26",
+     "direct_cause": "Zhenyuanzi and Wukong become sworn brothers",
+     "domino_effect": "Lays the foundation for later Daoist support of the pilgrimage project; the Daoists assist in the Crow-cock Kingdom incident"
+    }
+   ],
+   "chain_insight": "A childish prank ultimately forged a strategic alliance between Daoism and Buddhism"
+  },
+  {
+   "chain_id": "C3",
+   "chain_name": "The Red Boy Incident Chain · Guanyin's Expanding Influence",
+   "dominos": [
+    {
+     "n": 1,
+     "title": "Red Boy Seizes Tang Sanzang",
+     "hardship": "The Monster at Mount Hao · The Mind-Monkey Harmed",
+     "chapter": "Ch. 40-42",
+     "direct_cause": "Hearing that Tang Sanzang's flesh grants immortality, Red Boy captures him",
+     "domino_effect": "Wukong seeks Guanyin; Guanyin takes Red Boy as the Boy of Good Wealth"
+    },
+    {
+     "n": 2,
+     "title": "Guanyin Subdues Red Boy",
+     "hardship": "—",
+     "chapter": "Ch. 42",
+     "direct_cause": "Guanyin subdues Red Boy with the lotus platform and the Golden Fillet Spell",
+     "domino_effect": "Guanyin's influence extends to Fiery Cloud Cave, and then to 600 li of Mount Hao"
+    },
+    {
+     "n": 3,
+     "title": "Guanyin's Lotus Pond Expands",
+     "hardship": "—",
+     "chapter": "—",
+     "direct_cause": "Red Boy is taken as the Boy of Good Wealth; Mount Hao is brought into Guanyin's sphere of influence",
+     "domino_effect": "Foreshadows the later Goldfish Spirit incident at Tongtian River (the Goldfish Spirit escaped from Guanyin's lotus pond)"
+    }
+   ],
+   "chain_insight": "A single demon attack ultimately gave Guanyin the opportunity to expand her influence"
+  },
+  {
+   "chain_id": "C4",
+   "chain_name": "The Six-Eared Macaque Incident Chain · Discerning True from False",
+   "dominos": [
+    {
+     "n": 1,
+     "title": "Wukong Is Dismissed Again",
+     "hardship": "—",
+     "chapter": "Ch. 56-58",
+     "direct_cause": "Wukong kills the bandits; Tang Sanzang dismisses Wukong again",
+     "domino_effect": "Wukong harbors resentment; the Six-Eared Macaque seizes the opening"
+    },
+    {
+     "n": 2,
+     "title": "The Six-Eared Macaque Appears",
+     "hardship": "—",
+     "chapter": "Ch. 58",
+     "direct_cause": "The Six-Eared Macaque impersonates Wukong, wounds Tang Sanzang, and steals the luggage",
+     "domino_effect": "The true-and-false Monkey King incident; even Diting cannot tell them apart, and the Buddha finally exposes the impostor"
+    },
+    {
+     "n": 3,
+     "title": "The Buddha Exposes the Six-Eared Macaque",
+     "hardship": "—",
+     "chapter": "Ch. 58",
+     "direct_cause": "The Buddha exposes the Six-Eared Macaque, and Wukong kills him with a single blow",
+     "domino_effect": "Wukong's inner demon is eliminated; he is never dismissed again, and team relations stabilize"
+    }
+   ],
+   "chain_insight": "The Six-Eared Macaque is Wukong's inner demon; after his death, the pilgrimage team enters a new phase of the 'mind-monkey returning to order'"
+  },
+  {
+   "chain_id": "C5",
+   "chain_name": "The Lion-Camel Ridge Incident Chain · The Buddhist-Daoist Contest",
+   "dominos": [
+    {
+     "n": 1,
+     "title": "The Green Lion Spirit Swallows Wukong",
+     "hardship": "Lion-Camel Ridge",
+     "chapter": "Ch. 74-77",
+     "direct_cause": "The Green Lion Spirit swallows Wukong, who wreaks havoc inside his belly",
+     "domino_effect": "The three demons attack the pilgrimage team with full force; Wukong seeks the Buddha's help"
+    },
+    {
+     "n": 2,
+     "title": "The Buddha Comes in Person to Subdue the Demons",
+     "hardship": "—",
+     "chapter": "Ch. 77",
+     "direct_cause": "The Great Peng Golden-Winged Eagle is the Buddha's uncle, so the Buddha comes in person to subdue it",
+     "domino_effect": "Manjushri and Samantabhadra take back the Green Lion and White Elephant; the Buddha captures the Great Peng; the Buddhist faction wins a great victory"
+    },
+    {
+     "n": 3,
+     "title": "The Buddhist Faction Expands",
+     "hardship": "—",
+     "chapter": "—",
+     "direct_cause": "The three demons of Lion-Camel Ridge are subdued; the Buddhist faction takes over Lion-Camel Ridge",
+     "domino_effect": "Foreshadows later Buddhist events such as the Kingdom of Dharma-Destruction and the Bhikshu Kingdom"
+    }
+   ],
+   "chain_insight": "The Battle of Lion-Camel Ridge let the Buddhist faction thoroughly suppress the Daoists, laying the foundation for Lingshan to take over the Western Cattle-Gift Continent"
+  }
+ ],
+ "total_chains": 5,
+ "total_dominos": 16,
+ "design_innovation": "The chart is itself an installation · information flow equals physical linkage"
+}

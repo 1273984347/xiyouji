@@ -65,8 +65,8 @@ const base = mode === "http"
         check("matrix.phase-badge", noCjk(data.cells.phaseBadges), data.cells.phaseBadges.slice(0, 3).join("|"));
         check("matrix.svg.villain-label", noCjk(data.cells.villainLabels), data.cells.villainLabels.slice(0, 3).join("|"));
         check("matrix.svg.roi-trend", !CJK.test(data.cells.roiSvg), data.cells.roiSvg.match(CJK) ? data.cells.roiSvg.match(CJK).input.slice(0, 80) : "");
-        // 边界（仅 fetch 路径有意义）：部署 JSON 长文本保持原语；EMBEDDED 路径本就英文
-        check("matrix.boundary.longtext-zh", mode === "http" ? CJK.test(data.cells.villainTbodyAll) : !CJK.test(data.cells.villainTbodyAll), "分析列长文本：http=保持原语 / file=EMBEDDED 本就英文");
+        // W627 起边界反转：http 态 fetch 走 ../en/json/（EN 长文本），EMBEDDED 本就英文——两路径都应非 CJK
+        check("matrix.boundary.longtext-en", !CJK.test(data.cells.villainTbodyAll), "分析列长文本应已英化（en/json 副本）");
         // W625 补收断言：Use Cases 卡部署态非空（形状归一后）+ 场景卡内容在位
         const scenOk = await page.evaluate(() => {
             const cards = [...document.querySelectorAll("#scenario-grid .scenario-card")];
@@ -111,7 +111,7 @@ const base = mode === "http"
         check("chart.sundial-bg", noCjk(data.sundialBg), data.sundialBg.slice(0, 2).join("|"));
         check("chart.sundial-svg.text", noCjk(data.sundialSvgText), data.sundialSvgText.map(t => (t.match(CJK) || [""])[0]).join("|"));
         check("chart.scatter-svg.text", !CJK.test(data.scatterSvg), (data.scatterSvg.match(CJK) || { input: "" }).input.slice(0, 80));
-        check("chart.boundary.analysis-zh", mode === "http" ? (data.sundialAnalysis.length > 0 && data.sundialAnalysis.every(t => CJK.test(t))) : data.sundialAnalysis.length > 0, "analysis 长文本：http=保持原语 / file=EMBEDDED 本就英文");
+        check("chart.boundary.analysis-en", data.sundialAnalysis.length > 0 && data.sundialAnalysis.every(t => !CJK.test(t)), "analysis 长文本应已英化（en/json 副本）");
         // W625 补收断言：KPI 条 Tightest/Easiest 英文（summary.most_stressed/most_ease 归一后）
         const summ = await page.evaluate(() => ((window.__data || {}).summary || {}));
         check("chart.kpi-summary-en", summ.most_stressed === "White Bone Spirit" && summ.most_ease === "Green Ox Spirit", summ.most_stressed + "/" + summ.most_ease);

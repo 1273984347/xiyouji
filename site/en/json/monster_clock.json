@@ -1,0 +1,196 @@
+{
+ "design_name": "The Demon Twelve Double-Hours Sandtable",
+ "design_principle": "A circular sundial chart · the rim shows the twelve double-hours, the inner ring the demon's daily time allocation · each demon's schedule differs",
+ "core_insight": "Reads villain strategy through 'time budgets', revealing the 'involution' of low-ranking demons and the 'sense of ease' of well-connected demons",
+ "twelve_hours": [
+  {
+   "hour": "Zi(23-1)",
+   "activity_general": "Cultivation · Meditation"
+  },
+  {
+   "hour": "Chou(1-3)",
+   "activity_general": "Deep Cultivation"
+  },
+  {
+   "hour": "Yin(3-5)",
+   "activity_general": "Morning Cultivation · Breathing Exercises"
+  },
+  {
+   "hour": "Mao(5-7)",
+   "activity_general": "Breakfast · Council"
+  },
+  {
+   "hour": "Chen(7-9)",
+   "activity_general": "Training Minor Demons"
+  },
+  {
+   "hour": "Si(9-11)",
+   "activity_general": "Mountain Patrol · Reconnaissance"
+  },
+  {
+   "hour": "Wu(11-13)",
+   "activity_general": "Noon Rest · Banquet"
+  },
+  {
+   "hour": "Wei(13-15)",
+   "activity_general": "Council · Planning"
+  },
+  {
+   "hour": "Shen(15-17)",
+   "activity_general": "Deployment · Positioning"
+  },
+  {
+   "hour": "You(17-19)",
+   "activity_general": "Banquet · Pleasure"
+  },
+  {
+   "hour": "Xu(19-21)",
+   "activity_general": "Night Watch · Guard Duty"
+  },
+  {
+   "hour": "Hai(21-23)",
+   "activity_general": "Door Broken by Wukong · Battle"
+  }
+ ],
+ "monster_schedules": [
+  {
+   "monster": "White Bone Spirit",
+   "category": "Wild Monster · Low-Ranking Demon",
+   "background": "No Backing",
+   "resource": "No Magic Treasure · No Minor Demons",
+   "schedule": {
+    "Zi": "Disguise Practice",
+    "Chou": "Disguise Practice",
+    "Yin": "Scouting Tang Sanzang's Movements",
+    "Mao": "Devising a Disguise Plan",
+    "Chen": "Waiting for an Opportunity",
+    "Si": "Disguising as a Maiden",
+    "Wu": "Luring Tang Sanzang",
+    "Wei": "Failure · Retreat",
+    "Shen": "Disguising Again",
+    "You": "Disguising as an Old Woman",
+    "Xu": "Failing Again",
+    "Hai": "Disguising as an Old Man · Killed by Wukong"
+   },
+   "stress_index": 9.5,
+   "ease_index": 1,
+   "analysis": "White Bone Spirit's schedule is all reconnaissance, disguise, and waiting — with extremely high opportunity cost, the typical 'involution' of a low-ranking demon"
+  },
+  {
+   "monster": "Green Ox Spirit",
+   "category": "A Mount Descended to Earth · Well-Connected Demon",
+   "background": "Taishang Laojun's Mount",
+   "resource": "The Diamond Bracelet · Held Exclusively",
+   "schedule": {
+    "Zi": "Drinking Tea",
+    "Chou": "Sleeping",
+    "Yin": "Sleeping",
+    "Mao": "Morning Tea",
+    "Chen": "Training Minor Demons",
+    "Si": "Mountain Patrol (delegated to minor demons)",
+    "Wu": "Banquet · Eating Mortals",
+    "Wei": "Tea · Chess",
+    "Shen": "Collecting Tribute from the Mortal World",
+    "You": "Banquet · Eating Mortals",
+    "Xu": "Sleeping",
+    "Hai": "Sleeping · Just Toss the Bracelet"
+   },
+   "stress_index": 2,
+   "ease_index": 9.5,
+   "analysis": "Green Ox Spirit spends most of its time drinking tea, playing chess, and sleeping — just toss the bracelet and it's done, the typical 'sense of ease' of a well-connected demon"
+  },
+  {
+   "monster": "Yellow-Robed Monster",
+   "category": "A Heavenly General Descended to Earth · Well-Connected Demon",
+   "background": "Kui Wood Wolf of the Twenty-Eight Constellations",
+   "resource": "Heavenly General's Magic · Internal Elixir",
+   "schedule": {
+    "Zi": "Cultivation · Breathing",
+    "Chou": "Cultivation · Breathing",
+    "Yin": "Cultivation · Breathing",
+    "Mao": "Rising · Time with Baihuaxiu",
+    "Chen": "Training Minor Demons",
+    "Si": "Mountain Patrol",
+    "Wu": "Banquet · Eating Palace Maids",
+    "Wei": "Council · Consulting Minor Demons",
+    "Shen": "Deploying Defenses · Setting Checkpoints",
+    "You": "Banquet · Eating Palace Maids",
+    "Xu": "Night Watch",
+    "Hai": "Door Broken by Wukong · Battle"
+   },
+   "stress_index": 5,
+   "ease_index": 6.5,
+   "analysis": "The Yellow-Robed Monster is a heavenly general descended to earth; life is relatively leisurely, but its heavenly connections remain — relatively relaxed"
+  },
+  {
+   "monster": "Red Boy",
+   "category": "A Demon Aristocrat · Well-Connected Demon",
+   "background": "Son of the Bull Demon King and Princess Iron Fan",
+   "resource": "Samadhi True Fire · Fiery-Cloud Spear",
+   "schedule": {
+    "Zi": "Cultivating Samadhi True Fire",
+    "Chou": "Cultivating Samadhi True Fire",
+    "Yin": "Rising · Training",
+    "Mao": "Breakfast · Eating Mortal Children",
+    "Chen": "Training Minor Demons",
+    "Si": "Mountain Patrol · Scouting Tang Sanzang",
+    "Wu": "Banquet · Eating Children",
+    "Wei": "Council · Planning to Capture Tang Sanzang",
+    "Shen": "Carrying Out the Capture Plan",
+    "You": "Eating Tang Sanzang's Flesh (Failed)",
+    "Xu": "Subdued by Guanyin",
+    "Hai": "—"
+   },
+   "stress_index": 7,
+   "ease_index": 5,
+   "analysis": "Red Boy is a scion of a demon clan; life is relatively leisurely, but with parents absent it must operate independently — relatively tense"
+  },
+  {
+   "monster": "Six-Eared Macaque",
+   "category": "Inner Demon · Formless Demon",
+   "background": "Wukong's Inner-Demon Incarnation",
+   "resource": "Seventy-Two Transformations · Fake Golden-Banded Staff",
+   "schedule": {
+    "Zi": "Disguising as Wukong",
+    "Chou": "Disguising as Wukong",
+    "Yin": "Disguising as Wukong",
+    "Mao": "Wounding Tang Sanzang · Stealing Luggage",
+    "Chen": "Building a Fake Flower-Fruit Mountain",
+    "Si": "Recruiting Troops · Taking Fake Minor Demons",
+    "Wu": "Setting Up a Fake Pilgrimage Team",
+    "Wei": "Exposed by Diting · Fleeing",
+    "Shen": "Seeking the Buddha's Help · Exposed",
+    "You": "Killed by Wukong",
+    "Xu": "—",
+    "Hai": "—"
+   },
+   "stress_index": 9,
+   "ease_index": 2,
+   "analysis": "The Six-Eared Macaque's schedule is all disguise, flight, and survival — the typical 'involution' of an 'impersonator' demon"
+  },
+  {
+   "monster": "Great Peng Golden-Winged Eagle",
+   "category": "Buddhist Backing · Well-Connected Demon",
+   "background": "The Buddha's Uncle",
+   "resource": "The Yin-Yang Two-Qi Vase · Buddhist Backing",
+   "schedule": {
+    "Zi": "Council · Consulting the Green Lion and White Elephant",
+    "Chou": "Sleeping",
+    "Yin": "Sleeping",
+    "Mao": "Rising · Eating People",
+    "Chen": "Training Demon Soldiers",
+    "Si": "Mountain Patrol · Scouting the Pilgrimage Team",
+    "Wu": "Banquet · Eating People",
+    "Wei": "Council",
+    "Shen": "Deployment · Setting Traps",
+    "You": "Banquet · Eating People",
+    "Xu": "Night Watch",
+    "Hai": "Subdued by the Buddha"
+   },
+   "stress_index": 4,
+   "ease_index": 8,
+   "analysis": "With the Buddha as its uncle, the Great Peng Golden-Winged Eagle lives extremely leisurely — eating people is routine, until the Buddha arrives in person"
+  }
+ ],
+ "design_innovation": "Reads villain strategy through 'time budgets', revealing the 'involution' of low-ranking demons and the 'sense of ease' of well-connected demons"
+}

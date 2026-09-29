@@ -1,0 +1,270 @@
+{
+ "analysis_name": "Return on Investment of Calling for Reinforcements",
+ "english_name": "Rescue ROI Analysis",
+ "methodology": "建立一套公式·量化悟空从'先打再说'到'秒变跑腿找菩萨'的精算师模式",
+ "formula": "ROI = (Problem-solving efficiency × Favor spent × Marginal cost of the next request) / (Time spent × Reputation loss)",
+ "rescue_cases": [
+  {
+   "n": 1,
+   "monster": "Black Bear Demon",
+   "chapter": "Ch. 17",
+   "rescuer": "Guanyin",
+   "rescue_phase": "Early · instinctive",
+   "components": {
+    "efficiency": 8,
+    "favor_cost": 9,
+    "marginal_cost": 4,
+    "time_cost": 8,
+    "reputation_loss": 9
+   },
+   "roi_score": 2.4,
+   "roi_interpretation": "Deploying Guanyin in person was too costly · severe loss of prestige",
+   "analysis": "The very first request for reinforcements summoned Guanyin in person · highly efficient but extremely costly · and Guanyin became a standing dependency thereafter."
+  },
+  {
+   "n": 2,
+   "monster": "Yellow Wind Demon",
+   "chapter": "Ch. 21",
+   "rescuer": "Lingji",
+   "rescue_phase": "Early · instinctive",
+   "components": {
+    "efficiency": 9,
+    "favor_cost": 4,
+    "marginal_cost": 7,
+    "time_cost": 3,
+    "reputation_loss": 3
+   },
+   "roi_score": 5.25,
+   "roi_interpretation": "The right remedy · a small cost solves a big problem",
+   "analysis": "Bodhisattva Lingji is the specific counter to Yellow Wind · the right remedy · low time cost and small reputation loss · the highest ROI."
+  },
+  {
+   "n": 3,
+   "monster": "Red Boy",
+   "chapter": "Ch. 42",
+   "rescuer": "Guanyin",
+   "rescue_phase": "Middle · learning",
+   "components": {
+    "efficiency": 9,
+    "favor_cost": 8,
+    "marginal_cost": 6,
+    "time_cost": 5,
+    "reputation_loss": 5
+   },
+   "roi_score": 4.17,
+   "roi_interpretation": "First proactive request to Guanyin · establishes long-term cooperation",
+   "analysis": "Wukong learns to ask for help proactively · Guanyin takes Red Boy as the Boy of Good Wealth · a long-term partnership is built."
+  },
+  {
+   "n": 4,
+   "monster": "Green Ox Demon",
+   "chapter": "Ch. 52",
+   "rescuer": "Laojun",
+   "rescue_phase": "Middle · learning",
+   "components": {
+    "efficiency": 7,
+    "favor_cost": 10,
+    "marginal_cost": 3,
+    "time_cost": 9,
+    "reputation_loss": 8
+   },
+   "roi_score": 2.68,
+   "roi_interpretation": "Deploys top-tier resources to handle Laojun's own mount",
+   "analysis": "The Diamond Snare stole every deity's weapon · ultimately Laojun had to descend in person · severe loss of prestige."
+  },
+  {
+   "n": 5,
+   "monster": "Scorpion Demon",
+   "chapter": "Ch. 55",
+   "rescuer": "Mao Sun Star Officer",
+   "rescue_phase": "Middle · learning",
+   "components": {
+    "efficiency": 8,
+    "favor_cost": 5,
+    "marginal_cost": 7,
+    "time_cost": 4,
+    "reputation_loss": 5
+   },
+   "roi_score": 3.5,
+   "roi_interpretation": "Five-Phase countering · precise matching",
+   "analysis": "Guanyin points the way · the Mao Sun Star Officer's rooster conquers the scorpion · precise Five-Phase matching."
+  },
+  {
+   "n": 6,
+   "monster": "Bull Demon King",
+   "chapter": "Ch. 61",
+   "rescuer": "Nezha + heavenly troops",
+   "rescue_phase": "Middle · learning",
+   "components": {
+    "efficiency": 7,
+    "favor_cost": 10,
+    "marginal_cost": 2,
+    "time_cost": 10,
+    "reputation_loss": 9
+   },
+   "roi_score": 1.8,
+   "roi_interpretation": "Old friends turned foes · heavenly siege · the highest cost",
+   "analysis": "Three attempts at the Plantain Fan plus a heavenly siege · old friends turned foes · the longest time and greatest prestige loss."
+  },
+  {
+   "n": 7,
+   "monster": "Yellow-Browed Demon",
+   "chapter": "Ch. 66",
+   "rescuer": "Maitreya",
+   "rescue_phase": "Late · actuary",
+   "components": {
+    "efficiency": 8,
+    "favor_cost": 8,
+    "marginal_cost": 5,
+    "time_cost": 5,
+    "reputation_loss": 5
+   },
+   "roi_score": 3.75,
+   "roi_interpretation": "An internal Buddhist matter · handled in a closed loop",
+   "analysis": "Maitreya Buddha came in person to reclaim him · handled internally within the Buddhist camp · Wukong learns to find the right person."
+  },
+  {
+   "n": 8,
+   "monster": "The Three Demons of Lion-Camel Ridge",
+   "chapter": "Ch. 77",
+   "rescuer": "the Tathagata",
+   "rescue_phase": "Late · actuary",
+   "components": {
+    "efficiency": 10,
+    "favor_cost": 9,
+    "marginal_cost": 5,
+    "time_cost": 2,
+    "reputation_loss": 4
+   },
+   "roi_score": 5,
+   "roi_interpretation": "Top-tier resources resolve a top-tier crisis · extremely efficient",
+   "analysis": "Tathagata Buddha came in person · all three demons were taken · the most efficient solution to a top-tier crisis."
+  },
+  {
+   "n": 9,
+   "monster": "Rat Demon",
+   "chapter": "Ch. 83",
+   "rescuer": "Heavenly King Li",
+   "rescue_phase": "Late · actuary",
+   "components": {
+    "efficiency": 8,
+    "favor_cost": 7,
+    "marginal_cost": 6,
+    "time_cost": 5,
+    "reputation_loss": 5
+   },
+   "roi_score": 3.33,
+   "roi_interpretation": "An adopted daughter returns to her father · a heavenly family matter",
+   "analysis": "Heavenly King Li's adopted daughter returns to her father · a classic case of kinship-based affiliation."
+  },
+  {
+   "n": 10,
+   "monster": "Nine-Headed Lion",
+   "chapter": "Ch. 90",
+   "rescuer": "Taiyi",
+   "rescue_phase": "Late · actuary",
+   "components": {
+    "efficiency": 9,
+    "favor_cost": 7,
+    "marginal_cost": 6,
+    "time_cost": 4,
+    "reputation_loss": 6
+   },
+   "roi_score": 3.33,
+   "roi_interpretation": "Nine-Headed Lion answers his master's call · no resistance",
+   "analysis": "One call from Taiyi the Merciful Celestial and he submits · no resistance · high efficiency."
+  }
+ ],
+ "phase_analysis": [
+  {
+   "phase": "Early · instinctive",
+   "chapter_range": "Ch. 13–22",
+   "characteristic": "Fight first, ask only when losing",
+   "avg_roi": 3.83,
+   "rescue_count": 2,
+   "insight": "Instinctive requests · draws on top-tier resources but with weak cost awareness"
+  },
+  {
+   "phase": "Middle · learning",
+   "chapter_range": "Ch. 40–61",
+   "characteristic": "Begins precise matching · but still has costly cases",
+   "avg_roi": 3.04,
+   "rescue_count": 4,
+   "insight": "Learning requests · starts calculating ROI but is not yet adept"
+  },
+  {
+   "phase": "Late · actuary",
+   "chapter_range": "Ch. 65–90",
+   "characteristic": "The right remedy · stable ROI",
+   "avg_roi": 3.85,
+   "rescue_count": 4,
+   "insight": "Actuary-style requests · stable ROI · mature resource management"
+  }
+ ],
+ "roi_insights": [
+  "<strong>The Yellow Wind Demon case</strong> proves: the right remedy beats resource rank · even a minor bodhisattva can instantly dispatch a great demon",
+  "<strong>The Bull Demon King case</strong> proves: old friends turned foes + a heavenly siege = the highest cost · the emotional cost is the dearest",
+  "<strong>A late-stage ROI rebound</strong>: Wukong rises from 1.8 (Bull Demon King) to 5.0 (Lion-Camel Ridge) as he learns to calculate",
+  "<strong>Guanyin becomes the standing rescuer</strong>: diminishing marginal cost · first 2.4 → second 4.17 → third outright recruitment",
+  "<strong>The Lion-Camel Ridge case</strong>: a top-tier crisis + top-tier reinforcements = peak efficiency · the Tathagata arrives in person and instantly takes all three demons"
+ ],
+ "application_scenarios": [
+  {
+   "scenario": "Harry Potter",
+   "icon": "⚡",
+   "description": "Harry's <strong>Dumbledore help-seeking pattern</strong>: every problem requires the headmaster himself, but after his death Harry must face Voldemort alone. ROI starts at its peak and ends at zero."
+  },
+  {
+   "scenario": "The Lord of the Rings",
+   "icon": "💍",
+   "description": "Frodo's <strong>Gandalf help-seeking pattern</strong>: Gandalf intervenes only at critical moments, and Frodo must complete the main task on his own. The most balanced ROI."
+  },
+  {
+   "scenario": "Workplace · managing up",
+   "icon": "💼",
+   "description": "<strong>Managing upward resources</strong>: precisely match problems to a superior's domain of competence, avoid deploying top-tier resources on small problems, and build a sustainable help-seeking relationship."
+  },
+  {
+   "scenario": "Startup · investor support",
+   "icon": "🚀",
+   "description": "<strong>Seeking investor support</strong>: early investors retain value in later rounds, and long-term partnership beats a one-off ask · diminishing marginal cost."
+  }
+ ],
+ "components": [
+  {
+   "key": "efficiency",
+   "name": "Problem-solving efficiency",
+   "range": "0-10",
+   "description": "How efficiently the reinforcements dispatch the demon · 10=instant kill · 1=long back-and-forth",
+   "type": "numerator"
+  },
+  {
+   "key": "favor_cost",
+   "name": "Favor spent",
+   "range": "0-10",
+   "description": "The scale of favors drawn on · 10=a top bodhisattva or celestial in person · 1=minor deities",
+   "type": "numerator"
+  },
+  {
+   "key": "marginal_cost",
+   "name": "Marginal cost of next request",
+   "range": "0-10",
+   "description": "Prospects for long-term cooperation · 10=sustainable requests · 1=one-off expenditure",
+   "type": "numerator"
+  },
+  {
+   "key": "time_cost",
+   "name": "Time spent",
+   "range": "0-10",
+   "description": "The time cost from deciding to ask for help to resolving the problem · 10=extremely long · 1=instant",
+   "type": "denominator"
+  },
+  {
+   "key": "reputation_loss",
+   "name": "Reputation loss",
+   "range": "0-10",
+   "description": "How much asking for help damages one's prestige · 10=severe loss · 1=none",
+   "type": "denominator"
+  }
+ ]
+}
