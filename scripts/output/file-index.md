@@ -11,6 +11,16 @@
 ---
 
 
+## W624 W624 交接里程碑块级联根治（2026-09-29·v2.3.224）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_cascade.py | W624 | 更新·删除逻辑提取 drop_block() 整块淘汰（W557 只删标题行缺陷修复·6 例单测护栏） |
+| 交接文档.md | W624 | 更新·里程碑区 33 组孤儿+空行 debris 清债 130 行（内容均在 CHANGELOG·回归单块稳态） |
+| scripts/_w624_inspect_milestone.py | W624 | 新增·里程碑区结构盘点（组分类/异物标记/行数分布） |
+| scripts/_w624_repair_milestone.py | W624 | 新增·孤儿债务一次性清理（删除区异物护栏断言·130 行） |
+| scripts/_w624_cascade_block_test.py | W624 | 新增·drop_block 6 例单测（含真实文件整块淘汰与稳态模拟） |
+
 ## W623 W623 README 补 AI 生成声明（2026-09-29·v2.3.223）
 
 | 文件 | W | 说明 |

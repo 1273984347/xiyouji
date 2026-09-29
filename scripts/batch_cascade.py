@@ -30,6 +30,20 @@ def load(path):
     return s, ("\r\n" if "\r\n" in s else "\n")
 
 
+def drop_block(s, bm_start, nl):
+    """淘汰一个里程碑块：标题行 + 其后连续 bullet 行（W624 提取·整块删除）。
+
+    bullet 行=「  - 」前缀（spec milestone_block 唯一形状）；其余任何行
+    （空行/新组标题/章节标题/引用行/非 bullet 正文）即消费终点——有界于块自身，
+    不越过分隔空行、不吞正文。单块滚动制下每批整块移除最老块。
+    """
+    seg = s[bm_start:].split(nl)
+    j = 1  # seg[0] = 标题行
+    while j < len(seg) and seg[j].startswith("  - "):
+        j += 1
+    return s[:bm_start] + s[bm_start + len(nl.join(seg[:j]) + nl):]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--spec", required=True)
@@ -117,16 +131,12 @@ def main():
     bm_start = tgt[0].start()
     eidx = s.find(f"> 历史概要（W{oldest_w} 及更早）的详细记录见", bm_start)
     assert eidx != -1
-    # W557 修复：仅淘汰最老块本身。旧实现从块起点整段删到指针，当块区漂移到
-    # 「零、当前阻塞」HEAD 句之前时会连正文一起吞掉（W557 dry-run 实证）。
-    # 终点取（下一块起点 / 下一引用行 / 下一标题行 / 指针 / 块行行尾）中最先出现者。
-    cands = [eidx]
-    for _pat in ("\n- **", "\n>", "\n#", "\n"):
-        _j = s.find(_pat, bm_start + 1)
-        if _j != -1:
-            cands.append(_j)
-    _end = min(cands)
-    s = s[:bm_start] + s[_end:]
+    # W624 修复：整块淘汰 = 标题行 + 其后连续 bullet 行（至空行/新组/标题/引用行止）。
+    # W557 版候选表里的裸 "\n" 命中标题行自身行尾 → 每批只删标题行文本，bullets 留成
+    # 无标题组、残留换行累积成空行串（W623 实证 33 组孤儿 + 14 行 debris，_w624 批清债）。
+    # W557 前的旧实现从块起点整段删到指针，块区漂移时会连正文吞掉（W557 dry-run 实证）——
+    # 本实现消费终点有界于块自身行，两个历史缺陷闭合。
+    s = drop_block(s, bm_start, nl)
     s = s.replace(f"> 历史概要（W{oldest_w} 及更早）的详细记录见",
                   f"> 历史概要（W{new_w} 及更早）的详细记录见", 1)
     hs = re.search(r"当前 HEAD = v[\d.]+ W\d+（[^）]*；详见 CHANGELOG）", s)

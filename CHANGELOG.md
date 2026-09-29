@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W623），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W624），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.224（2026-09-29）：W624 交接里程碑块级联根治 — batch_cascade W557 删除终点缺陷修复（整块淘汰=标题+连续 bullets·drop_block 提取 6 例单测）+ 33 组孤儿债务清理
+> **来源**：2026-09-29 用户选收 W623 交付报告观察项「交接文档里程碑区历史块标题正被逐批消耗」——裁决立项根治批（batch_cascade 不在文档规范禁改清单·已核）。
+> - **取证（_w624_inspect_milestone.py）**：里程碑区 34 组=有标题组仅 1（W623）+ 无标题组 33（L6-119·孤儿 bullet 82 行）+ 标题残留换行累积的空行 debris（L120-134·14 行）；机理=batch_cascade W557 版删除候选表的裸 "\n" 命中标题行自身行尾→每批只删标题行文本，bullets 留成无标题组、残留空行逐批累积（文档规范 L286「单块滚动制」语义下内容均已归档 CHANGELOG·指针「W623 及更早详见 CHANGELOG」一致）。
+> - **修复（batch_cascade.py）**：删除逻辑提取为 drop_block()——消费终点=标题行+连续「  - 」bullet 行（空行/新组/标题/引用行/非 bullet 正文即止·有界不越空行），整块淘汰；W557 前旧实现（删到指针吞正文）与 W557 版（只删标题）双历史缺陷闭合。开发中单测真实拦截一次过宽消费规则（非 bullet 正文行会被误吞）后收紧为 bullet 前缀判定。
+> - **清债（_w624_repair_milestone.py）**：一次性删除 33 组孤儿+空行 debris 共 130 行（护栏=删除区仅允许空行与 "  - " bullet、异物即中止；孤儿内容均在 CHANGELOG 现役归档）；行数 773→644，里程碑区回归 W623 单块+空行+文档标题。
+> - **验证**：_w624_cascade_block_test.py 6 例单测全过（常规块/无 bullet 块/后随指针/后随有标题块/真实文件 W623 整块淘汰/稳态模拟）；ruff 0 错；本批级联 apply 即真实端到端验证（drop_block 淘汰 W623 块·里程碑区进入单块稳态）；verify_delivery 核心全绿。
+> - **文件**：scripts/batch_cascade.py（drop_block 提取+调用点）、交接文档.md（清债+本批块）、scripts/_w624_inspect_milestone.py、scripts/_w624_repair_milestone.py、scripts/_w624_cascade_block_test.py（均新增）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 ### v2.3.223（2026-09-29）：W623 README 补 AI 生成声明 — 第三方审查唯一幸存实质缺口收口（口径对齐 CONTRIBUTING/元信息块/学术 AI 声明）·附带积压 dependabot PR triage 7 合 1 挂
 > **来源**：2026-09-29 用户选收「真正剩下的行动清单」（三方审查裁决后的遗留四项）——①README AI 声明（第三方审查 10 条实证主张中唯一幸存实质缺口）+ ②积压 dependabot PR triage + ④两项评估（Three r128/UP031）；③GoatCounter token 为用户侧动作（WP-A 前置·本批不涉）。
 > - **①AI 生成说明**：README「贡献方式」与「授权」之间新增一节——AI 代理协作+人工审定模式·元信息块四字段口径（未记录如实标注·禁编造）·引文硬验证（对原著数据集逐字匹配·防幻觉）·25 项门禁概述·责任边界；不点名具体模型（以各篇元信息块为准）。透明度其余三面已在位（CONTRIBUTING 首段 AI 代理协作模式/内容元信息块/学术稿官方口径 AI 声明）。
