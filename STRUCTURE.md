@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.3.227（2026-09-30）— W627 i18n根治层EN数据副本 — A1-A6 共 615 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前版本：v2.3.228（2026-09-30）— W628 叙述面漂移清零与第27门禁 — A1-A6 共 615 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构
@@ -271,7 +271,7 @@
 
 ## 版本变更
 
-完整版本变更历史见 [CHANGELOG.md](CHANGELOG.md)（唯一事实源·文档规范 §3：本文件禁止写 W### 细节）。v0.1-v2.3.17（W001-W399）已归档至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；v0.1-v2.2.48（W001-W272）的旧版逐版本里程碑描述已迁至 [STRUCTURE-archive.md](STRUCTURE-archive.md)（2026-08-16 W448）。
+完整版本变更历史见 [CHANGELOG.md](CHANGELOG.md)（唯一事实源·文档规范 §3：本文件禁止写 W### 细节）。历史段按三段式归档（口径以 CHANGELOG 头部为准）：W001-W399 → docs/archive/CHANGELOG-ARCHIVE-tier2.md；W400-W416、W417-W464+W484 段 → CHANGELOG-ARCHIVE.md（W422/W511）；现役 v2.3.84+（W485+）。另 v0.1-v2.2.48（W001-W272）的旧版逐版本里程碑描述已迁至 [STRUCTURE-archive.md](STRUCTURE-archive.md)（2026-08-16 W448）。
 
 **主要阶段概要**（细节见 CHANGELOG 对应版本段）：
 

@@ -595,6 +595,19 @@ def main():
     except Exception as e:
         warn("数据内容一致性门禁执行异常（W555）: %s" % e)
 
+    # ---- W 号区间字面量门禁（W628 挂载·第 27 门禁·经用户指令防复发：现役叙述面
+    # 「W001-Wxxx」覆盖上限字面量终点须等于现役 max W + CITATION.cff 版本同步）----
+    wrl_py = os.path.join(_HERE, "check_w_range_literal.py")
+    try:
+        r = subprocess.run([sys.executable, wrl_py], capture_output=True, text=True, timeout=60)
+        tail = (r.stdout.splitlines()[-2:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("W 号区间字面量门禁通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("W 号区间字面量漂移（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+    except Exception as e:
+        warn("W 号区间字面量门禁执行异常（W628）: %s" % e)
+
 
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:

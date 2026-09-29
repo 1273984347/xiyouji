@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W627），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W628），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.228（2026-09-30）：W628 叙述面内容漂移清零 + 第 27 门禁防复发 — W628 审计 9 处真漂移全清（README W575 字面量×2/方法论 W529/文档规范 W423/CITATION 2.2.15/STRUCTURE 归档旧口径/workflows 17 项门禁快照/方法论当前版本 v2.0.60）·check_w_range_literal.py 挂载
+> **来源**：用户提供外部项目综述（照抄 README 叙事）——裁决为高保真但唯一事实错误「CHANGELOG 记录到 W575」恰源自 README 自身过期字面量；用户裁决「全部清，并且防止以后重复出现」。W628 审计脚本（_w628_drift_audit.py）扫描现役叙述面 10 文件四类漂移（W 区间字面量/时效版本断言/门禁数声明/CITATION 版本），命中 30+ 经逐条裁决：**9 处真漂移 + 其余为合法历史引用**（历史批次区间叙述/编号映射规则/归档指针）。
+> - **9 处全清（引用式化为主·W520 精神）**：①README:132 目录树 ②README:171 正向索引 ③方法论 README:109 变更日志指针——三处「（W001-W575/W529）」改「编号上限见现役版段」；④方法论 README:4「当前版本 v2.0.60（W087）」删快照改随批登记口径；⑤文档规范:240 管控清单「（W001-W423）」改「归档口径见 CHANGELOG 头部」；⑥STRUCTURE:274 归档描述对齐三段式现行口径（tier2/W400-416/W417-464+W484/现役 W485+）；⑦workflows README:90「17 项门禁」W500 快照（含已退役 skills 索引）改引用 verify_delivery 现役；⑧CITATION.cff version 2.2.15→2.3.227 + date-released→2026-09-30（外部学术引用面）；⑨README:204「25 项门禁」经第 27 门禁挂载后回到活跃口径自洽（不动）。
+> - **第 27 门禁（防复发·经用户指令挂载）**：`check_w_range_literal.py`——现役叙述面 10 文件中「W001-Wxxx」覆盖上限字面量终点必须等于 CHANGELOG 现役 max W（动态解析·零硬编码；「对应」映射规则与「tier2」归档描述豁免·非 001 起始历史区间不在范围）+ CITATION.cff version 与现役版本同步；--self-test 负样本 4/4。**建置即实弹**：修复前运行 FAIL 7 处（真漂移全数拦截·并当场抓出门禁自身 cff-version 误匹配缺陷修正）→ 修复后转绿。挂载 verify_delivery 最小 diff 单注册块（verify_delivery 在禁擅改清单·本批挂载经用户明确指令）。
+> - **编号口径**：新门禁取第 27 号（26 按 W591 预留 check_seo_head）；活跃门禁 25 项（编号至 27·16/26 预留退役）——README AI 声明「25 项」回归自洽。AGENTS §4.2 增第 27 项、文档规范 §8 行同步。
+> - **验证**：门禁实弹红→绿全程留痕；--self-test 4/4；verify_delivery 全量核心全绿（27 门禁首跑）；ruff 0 错。
+> - **级联面扩容（本批）**：batch_cascade.py 增 CITATION.cff 第 10 面（version/date-released 随批同步）——挂载门禁 R2 后级联首跑即被拦（2.3.227≠2.3.228），证明 R2 有效并倒逼自动化闭环；> - **文件**：scripts/check_w_range_literal.py（新增）、scripts/batch_cascade.py（+CITATION 第 10 面）、scripts/verify_delivery.py（挂载·禁擅改清单内经用户指令）、scripts/_w628_drift_audit.py（取证·新增）、README.md、CITATION.cff、STRUCTURE.md、docs/00-导读/文档规范.md、docs/10-方法论沉淀/README.md、.github/workflows/README.md、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 ### v2.3.227（2026-09-30）：W627 i18n 根治层路线 B — EN 数据副本 site/en/json/ 七文件（EMBEDDED×部署 JSON 机械配对生成·零新增翻译资产）·两 EN 页 fetch 切换·探针边界反转 30/30×2·parity 检查器常驻
 > **来源**：W622 入档 i18n 方案梯队②根治层（原「随 WP-C」钩子因 W591 已完成而独立立项）——归档裁决下唯一在队的 P1 工程批。快赢层（W625）只英化枚举名，长文本层（15 妖×4 分析句/10 案解读/6 妖日程/insights/场景卡）本批根治。
 > - **生成链（零新增翻译资产）**：`_w627_extract_embedded.js`（Node 原生 eval 解析两 EN 页 EMBEDDED——它本身就是全套英文含长文本，规避正则解析 JS 字面量被字符串冒号炸毁的坑）→ `_w627_gen_en_data.py`（EN 值优先合并：非 CJK 判定·缺失回退 zh 如实计数；形状差异取 EMBEDDED 侧——phase_analysis 字典→数组、scenarios 字符串→对象，页内 W621/W625 shim 随之自然空转；schedule 时辰键×拼音键集不相交等长→按插入序位置配对；zip strict=True）→ 产出 `site/en/json/` 七文件（含 chart 页独取的 domino_causality/spiral_progress——不生成则 fetch 切换后部署态 404 触发冒烟门禁）。产出对账：EN 字段 65-192/文件·CJK 残留合计 17（villain axes 子树等 zh 独有·如实回退）。
