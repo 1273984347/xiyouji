@@ -11,6 +11,18 @@
 ---
 
 
+## W627 W627 i18n 根治层路线 B（2026-09-30·v2.3.227）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/json/（7 文件） | W627 | 新增·EN 数据副本（villain_matrix/rescue_roi/methodology_summary/monster_clock/chart_design_summary/domino_causality/spiral_progress） |
+| site/en/methodology-matrix.html | W627 | 更新·fetch 切换 ../en/json/（3 处·含 CSP） |
+| site/en/chart-design.html | W627 | 更新·fetch 切换 ../en/json/（4 处·含 CSP） |
+| scripts/_w627_extract_embedded.js | W627 | 新增·Node 原生解析提取两页 EMBEDDED 为 JSON |
+| scripts/_w627_gen_en_data.py | W627 | 新增·EN 优先合并生成器（形状取 EMBEDDED·schedule 位置配对·记录数护栏） |
+| scripts/_check_en_json_parity.py | W627 | 新增·en/json 对账检查器（记录数/CJK 残留基线/可解析·按需） |
+| scripts/_w625_probe_en_i18n.js | W627 | 更新·长文本边界断言反转为应已英化 |
+
 ## W626 W626 WP-A 度量闭环正式判定（2026-09-30·v2.3.226）
 
 | 文件 | W | 说明 |

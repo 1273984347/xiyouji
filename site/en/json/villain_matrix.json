@@ -1,0 +1,313 @@
+{
+ "matrix_name": "Journey to the West Villain Evaluation Matrix",
+ "english_name": "Villain Evaluation Matrix",
+ "design_purpose": "Plots every monster in the book precisely onto a <strong>motivation × resources</strong> matrix, revealing the underlying law that <strong>affiliation decides fate</strong>: monsters with backing all return to their posts, while rootless nobodies are all killed or flee.",
+ "axes": {
+  "x_axis": {
+   "name": "Source of motivation",
+   "english": "Motivation",
+   "range": [
+    0,
+    10
+   ],
+   "description": "从'纯粹求生'(0) 到'形而上的怨念'(10)",
+   "scale_labels": {
+    "0-2": "纯粹求生（吃人/抢东西）",
+    "3-4": "本能驱动（贪欲/好色）",
+    "5-6": "报复与上位（取代取经团队）",
+    "7-8": "执念追求（成为某人/某物）",
+    "9-10": "形而上怨念（颠覆体系）"
+   },
+   "direction": "0=pure survival → 10=metaphysical grudge",
+   "bands": [
+    {
+     "range": "0-2",
+     "label": "Instinctive survival"
+    },
+    {
+     "range": "3-4",
+     "label": "Profit-driven"
+    },
+    {
+     "range": "5-6",
+     "label": "Will to power"
+    },
+    {
+     "range": "7-8",
+     "label": "Usurping the order"
+    },
+    {
+     "range": "9-10",
+     "label": "Metaphysical grudge"
+    }
+   ]
+  },
+  "y_axis": {
+   "name": "Resource abundance",
+   "english": "Resources",
+   "range": [
+    0,
+    10
+   ],
+   "description": "从'草根单干'(0) 到'拥有跨三界背景'(10)",
+   "scale_labels": {
+    "0-2": "草根单干（无法宝无小妖）",
+    "3-4": "占山为王（有小妖无法宝）",
+    "5-6": "有法宝无背景",
+    "7-8": "有天庭坐骑背景",
+    "9-10": "跨三界政治背景"
+   },
+   "direction": "0=lone rootless operator → 10=cross-realm backing",
+   "bands": [
+    {
+     "range": "0-2",
+     "label": "Rootless lone operator"
+    },
+    {
+     "range": "3-4",
+     "label": "Minor-demon followers"
+    },
+    {
+     "range": "5-6",
+     "label": "Mountain warlord"
+    },
+    {
+     "range": "7-8",
+     "label": "Heavenly-court ties"
+    },
+    {
+     "range": "9-10",
+     "label": "Cross-realm backing"
+    }
+   ]
+  }
+ },
+ "quadrants": [
+  {
+   "quadrant": "左上",
+   "label": "Strong backing + metaphysical",
+   "x_range": "x: 7-10",
+   "y_range": "y: 7-10",
+   "description": "Top-tier backing + metaphysical motive — a rare top-tier villain, the only one in the book.",
+   "example_count": 1,
+   "typical_outcome": "Taken in personally by senior Buddhist figures",
+   "id": "left_top",
+   "name": "Top-left",
+   "color": "#7a3a8c",
+   "visual": "top-right"
+  },
+  {
+   "quadrant": "右上",
+   "label": "Strong backing + survival",
+   "x_range": "x: 0-6",
+   "y_range": "y: 7-10",
+   "description": "Heavenly/Buddhist establishment + mission-driven — a mountain-warlord type shielded by affiliation.",
+   "example_count": 7,
+   "typical_outcome": "Reclaimed by their patron and restored to their post",
+   "id": "right_top",
+   "name": "Top-right",
+   "color": "#3a6b8c",
+   "visual": "top-left"
+  },
+  {
+   "quadrant": "左下",
+   "label": "Weak backing + survival",
+   "x_range": "x: 0-6",
+   "y_range": "y: 0-6",
+   "description": "Rootless lone operator + instinctive survival — the classic cannon fodder, 40% of the book.",
+   "example_count": 6,
+   "typical_outcome": "Killed or driven to flee",
+   "id": "left_bottom",
+   "name": "Bottom-left",
+   "color": "#c8463a",
+   "visual": "bottom-left"
+  },
+  {
+   "quadrant": "右下",
+   "label": "Weak backing + metaphysical",
+   "x_range": "x: 7-10",
+   "y_range": "y: 0-6",
+   "description": "Rootless origin + metaphysical motive — an inner-demon villain, the only one in the book.",
+   "example_count": 1,
+   "typical_outcome": "Killed (externalized inner demon)",
+   "id": "right_bottom",
+   "name": "Bottom-right",
+   "color": "#C9A063",
+   "visual": "bottom-right"
+  }
+ ],
+ "villain_positions": [
+  {
+   "monster": "White Bone Demon",
+   "chapter": "Ch. 27",
+   "x_motivation": 2,
+   "y_resource": 1,
+   "quadrant": "left_bottom",
+   "motivation_analysis": "Pure survival · cannibalism to extend life",
+   "resource_analysis": "No backing · no weapon · three lone transformations",
+   "outcome": "Killed",
+   "author_strategy": "Highlights the tension between Wukong's discerning eyes and Tang Sanzang's failure to see through the demon"
+  },
+  {
+   "monster": "Yellow Robe Demon",
+   "chapter": "Ch. 28–30",
+   "x_motivation": 3,
+   "y_resource": 8,
+   "quadrant": "right_top",
+   "motivation_analysis": "Covets Baihuaxiu · driven by lust",
+   "resource_analysis": "Kui Wood Wolf descended to earth · a member of the 28 Mansions",
+   "outcome": "Reclaimed by the Jade Emperor",
+   "author_strategy": "Shows the protective power of heavenly-court affiliation"
+  },
+  {
+   "monster": "Gold Horn & Silver Horn",
+   "chapter": "Ch. 32–35",
+   "x_motivation": 4,
+   "y_resource": 8,
+   "quadrant": "right_top",
+   "motivation_analysis": "Sent down on orders · mission-driven",
+   "resource_analysis": "Taishang Laojun's furnace boys · five magic treasures",
+   "outcome": "Reclaimed by Laojun",
+   "author_strategy": "Shows how treasure-wielding villains overpower by resources"
+  },
+  {
+   "monster": "Red Boy",
+   "chapter": "Ch. 40–42",
+   "x_motivation": 5,
+   "y_resource": 7,
+   "quadrant": "right_top",
+   "motivation_analysis": "Carved out a territory · seeks immortality by eating Tang Sanzang",
+   "resource_analysis": "Son of the Bull Demon King · Samadhi Fire",
+   "outcome": "Taken by Guanyin as the Boy of Good Wealth",
+   "author_strategy": "Shows the rivalry between Buddhist and demon backing in winning him over"
+  },
+  {
+   "monster": "Green Ox Demon",
+   "chapter": "Ch. 50–52",
+   "x_motivation": 3,
+   "y_resource": 9,
+   "quadrant": "right_top",
+   "motivation_analysis": "Seized the mountain and kidnapped people · classic profit type",
+   "resource_analysis": "Taishang Laojun's mount · the Diamond Snare",
+   "outcome": "Reclaimed by Laojun",
+   "author_strategy": "Shows a hierarchy where treasures trump martial force"
+  },
+  {
+   "monster": "Six-Eared Macaque",
+   "chapter": "Ch. 56–58",
+   "x_motivation": 9,
+   "y_resource": 3,
+   "quadrant": "right_bottom",
+   "motivation_analysis": "Contends for the pilgrimage · usurps identity",
+   "resource_analysis": "No backing · relies only on identical appearance and skill",
+   "outcome": "Trapped under the Buddha's alms bowl · beaten to death by Wukong",
+   "author_strategy": "Externalized inner demon · the true-false distinction"
+  },
+  {
+   "monster": "Great Peng, the Golden-Winged Roc",
+   "chapter": "Ch. 74–77",
+   "x_motivation": 9,
+   "y_resource": 10,
+   "quadrant": "left_top",
+   "motivation_analysis": "Avenges his sister + seeks immortality by eating Tang Sanzang",
+   "resource_analysis": "The Buddha's uncle · ruler of Lion-Camel Kingdom",
+   "outcome": "Subdued by the Buddha in person",
+   "author_strategy": "Shows the logic by which a top-tier Buddhist villain submits"
+  },
+  {
+   "monster": "Yellow-Browed Demon",
+   "chapter": "Ch. 65–66",
+   "x_motivation": 6,
+   "y_resource": 8,
+   "quadrant": "right_top",
+   "motivation_analysis": "Impersonates the Buddha · usurps at Little Thunderclap Temple",
+   "resource_analysis": "Maitreya's boy · the Golden Cymbals and the Human-Seed Pouch",
+   "outcome": "Reclaimed by Maitreya",
+   "author_strategy": "Shows that usurpers within the establishment are still handled by it"
+  },
+  {
+   "monster": "Scorpion Demon",
+   "chapter": "Ch. 54–55",
+   "x_motivation": 4,
+   "y_resource": 4,
+   "quadrant": "left_bottom",
+   "motivation_analysis": "Abducts Tang Sanzang for pleasure · driven by desire",
+   "resource_analysis": "Independent at Pipa Cave · the Horse-Felling Sting",
+   "outcome": "Taken by the Mao Sun Star Officer (the Rooster Star)",
+   "author_strategy": "Shows the folk logic of the Five Phases (rooster conquers scorpion)"
+  },
+  {
+   "monster": "Spider Demons",
+   "chapter": "Ch. 72–73",
+   "x_motivation": 3,
+   "y_resource": 3,
+   "quadrant": "left_bottom",
+   "motivation_analysis": "Cannibalism to extend life · hold the mountain as their own",
+   "resource_analysis": "Seven sisters on their own · no backing",
+   "outcome": "Killed",
+   "author_strategy": "Shows the collective fate of female rootless villains"
+  },
+  {
+   "monster": "Nine-Headed Bug",
+   "chapter": "Ch. 62–63",
+   "x_motivation": 4,
+   "y_resource": 5,
+   "quadrant": "left_bottom",
+   "motivation_analysis": "Steals the Buddha's relic · profit-driven",
+   "resource_analysis": "Consort of Bibo Lake · has demon followers",
+   "outcome": "Fled to the North Sea after Erlang Shen bit off one of its heads",
+   "author_strategy": "A rare escape case · leaves room for a sequel"
+  },
+  {
+   "monster": "Green-Maned Lion Demon",
+   "chapter": "Ch. 74–77",
+   "x_motivation": 5,
+   "y_resource": 8,
+   "quadrant": "right_top",
+   "motivation_analysis": "Impersonates the King of Crow-Rooster · usurps the throne",
+   "resource_analysis": "Manjushri's mount",
+   "outcome": "Reclaimed by Manjushri",
+   "author_strategy": "Shows the usurpation template of a bodhisattva's mount"
+  },
+  {
+   "monster": "Rat Demon",
+   "chapter": "Ch. 80–83",
+   "x_motivation": 5,
+   "y_resource": 7,
+   "quadrant": "right_top",
+   "motivation_analysis": "Abducts Tang Sanzang to be her husband · desire",
+   "resource_analysis": "Adopted daughter of Heavenly King Li · the Bottomless Cave of Sunken Void Mountain",
+   "outcome": "Reclaimed by Heavenly King Li and his sons",
+   "author_strategy": "Shows the protective role of kinship-based affiliation"
+  },
+  {
+   "monster": "Bear Mountain Lord",
+   "chapter": "Ch. 13",
+   "x_motivation": 2,
+   "y_resource": 2,
+   "quadrant": "left_bottom",
+   "motivation_analysis": "Cannibal instinct · waylays at Twin-Fork Ridge",
+   "resource_analysis": "A mountain demon · partners with General Tiger",
+   "outcome": "Killed",
+   "author_strategy": "Early cannon fodder for the pilgrimage party · foreshadows the need for a team"
+  },
+  {
+   "monster": "General Tiger",
+   "chapter": "Ch. 13",
+   "x_motivation": 2,
+   "y_resource": 2,
+   "quadrant": "left_bottom",
+   "motivation_analysis": "Cannibal instinct · waylays at Twin-Fork Ridge",
+   "resource_analysis": "A mountain tiger demon · partners with Bear Mountain Lord",
+   "outcome": "Killed",
+   "author_strategy": "Early cannon fodder for the pilgrimage party · rescued by Taibai Jinxing"
+  }
+ ],
+ "matrix_insights": [
+  "Bottom-left holds 40% · all killed or driven to flee — <strong>the fate of rootless cannon fodder</strong>",
+  "Top-right holds 47% · all reclaimed by their patrons — <strong>the affiliation-as-amulet effect</strong>",
+  "Top-left has just 1 case (Great Peng, the Golden-Winged Roc) · taken in by senior Buddhists — <strong>the submission logic of a top-tier villain</strong>",
+  "Bottom-right has just 1 case (Six-Eared Macaque) · the lone example of an <strong>inner-demon villain</strong>",
+  "Affiliation decides fate — this is the <strong>underlying law</strong> of the book's villain evaluation"
+ ]
+}

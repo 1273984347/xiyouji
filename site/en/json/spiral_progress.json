@@ -1,0 +1,89 @@
+{
+ "design_name": "Spiral Mind-Cultivation Progress Bar",
+ "design_principle": "An Archimedean spiral · the center is departure, the outer ring is Buddhahood · each turn represents a stage of mind-cultivation · the trajectory offset shows mind fluctuation",
+ "core_insight": "Transforms the abstract concept of the 'unsettled mind-monkey and galloping ideas' into a quantifiable visual trajectory",
+ "spiral_stages": [
+  {
+   "stage_id": "S1",
+   "stage_name": "Departure · The Mind-Monkey First Stirs",
+   "chapter_range": "Ch. 1-13",
+   "loop_number": 1,
+   "wukong_emotion": "Restless · Untamed",
+   "tang_monk_emotion": "Devout · Cautious",
+   "wukong_offset": 0.8,
+   "tang_monk_offset": 0.2,
+   "key_events": [
+    "Beneath Five Elements Mountain · Taking Refuge in Buddhism",
+    "Taking the White Dragon Horse",
+    "Taking Bajie and Sha Wujing"
+   ],
+   "stage_summary": "Wukong begins to rein in his nature, but his untamed spirit remains"
+  },
+  {
+   "stage_id": "S2",
+   "stage_name": "Storm · Mind-Monkey and Galloping Ideas",
+   "chapter_range": "Ch. 14-30",
+   "loop_number": 2,
+   "wukong_emotion": "Fury · Arrogance",
+   "tang_monk_emotion": "Disappointment · Vacillation",
+   "wukong_offset": 1.5,
+   "tang_monk_offset": 0.4,
+   "key_events": [
+    "Three Strikes at the White Bone Spirit · Dismissed",
+    "Yellow-Robed Monster Incident · Return"
+   ],
+   "stage_summary": "Wukong is dismissed; his mind fluctuates violently — one of the spiral's greatest offset points"
+  },
+  {
+   "stage_id": "S3",
+   "stage_name": "Discipline · The Mind-Monkey Settles",
+   "chapter_range": "Ch. 31-58",
+   "loop_number": 3,
+   "wukong_emotion": "Restraint · Prudence",
+   "tang_monk_emotion": "Trust · Stability",
+   "wukong_offset": 0.6,
+   "tang_monk_offset": 0.3,
+   "key_events": [
+    "The Red Boy Incident",
+    "The Contest of Magic in Cart-Slow Kingdom",
+    "The True-and-False Monkey King"
+   ],
+   "stage_summary": "After the Six-Eared Macaque is killed, Wukong's inner demon is eliminated and his mind stabilizes"
+  },
+  {
+   "stage_id": "S4",
+   "stage_name": "Maturity · The Mind-Monkey Returns to Order",
+   "chapter_range": "Ch. 59-77",
+   "loop_number": 4,
+   "wukong_emotion": "Serenity · Wisdom",
+   "tang_monk_emotion": "Reliance · Serenity",
+   "wukong_offset": 0.3,
+   "tang_monk_offset": 0.2,
+   "key_events": [
+    "Borrowing the Fan at Flaming Mountain",
+    "The Great Battle of Lion-Camel Ridge",
+    "Saving the Children in Bhikshu Kingdom"
+   ],
+   "stage_summary": "Wukong's mind tends toward serenity; the team enters its best state"
+  },
+  {
+   "stage_id": "S5",
+   "stage_name": "Realization · The Mind-Monkey Attains Buddhahood",
+   "chapter_range": "Ch. 78-100",
+   "loop_number": 5,
+   "wukong_emotion": "Perfection · Enlightenment",
+   "tang_monk_emotion": "Perfection · Enlightenment",
+   "wukong_offset": 0.1,
+   "tang_monk_offset": 0.1,
+   "key_events": [
+    "The Rat Spirit of Bottomless Cave",
+    "Passing on Arts in Yuhua Prefecture",
+    "Shedding the Mortal Body at Lingyun Ferry · Attaining Buddhahood"
+   ],
+   "stage_summary": "Master and disciples all attain the right fruit; the spiral reaches its outermost ring and the mind returns to zero"
+  }
+ ],
+ "max_offset_wukong": 1.5,
+ "max_offset_tang": 0.4,
+ "design_innovation": "A fusion of ECG and mandala · minimalist black-and-white lines with plot symbols dotted along the spiral"
+}
