@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W624），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W625），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.225（2026-09-29）：W625 EN 页数据显示面枚举名快赢英化 — methodology-matrix/chart-design 双页归一（ZHIR2EN 映射生成器机械配对·四轮 visual-judge 迭代·ROI 标题界内与免 resize 截图两教训）·顺带修复象限 undefined/scenarios 形状/散点标签重叠三案
+> **来源**：W622 入档 EN 数据 i18n 方案梯队①快赢层（用户批准开工·2026-09-29）——en/methodology-matrix + en/chart-design 显示面枚举名英化；长文本层归根治层（WP-C en 数据副本）。
+> - **映射生成器（_w625_build_zh2en_maps.py）**：从页面 EMBEDDED（英）×部署 JSON（中）按下标机械配对生成 ZH2EN 表（禁手抄）——产出 monster 双表发现：同一中文名在 villain 表/rescue 表英译不同（白骨精→White Bone Demon/White Bone Spirit），拆 MONSTER_EN/RMONSTER_EN 两表各用各源；SACT 用「时辰|活动」复合键（裸活动值多妖共串不唯一）；zip strict=True 配对纪律。script snippet 落盘仅供复查，页面以内联为准。
+> - **执行（两页 main 内加载后归一·EMBEDDED 路径恒等零波及）**：methodology——monster/chapter（第N回→Ch. N）/rescuer/phase/quadrant（zh→英文 id）；chart-design——monster/category/background/resource/时辰键值/activity_general/schedule 复合键+summary 妖名漏网补收（Tightest/Easiest KPI 条）。
+> - **顺带修复（同图三案）**：①QUADRANT_LABELS[zh 部署值] 恒 undefined（象限徽章/tooltip 空）——quadrant 归一为英文 id 后通；②部署 application_scenarios 为纯字符串数组×EMBEDDED 对象数组形状失配（W621 pa621 家族第三例）→ Use Cases 2×2 卡部署态整节空——加载后形状归一；③英化后长英文标签致散点同带重叠+ROI 刻度穿轴标题——同 y 带 x 序奇偶交替上下放置+刻度截断 18 字符。
+> - **四轮 visual-judge 迭代（三轮 fail 全数闭合）**：一轮揪出 SACT 复合键查找 bug（真缺陷·探针同步拦截）与 summary 漏网卡+scenarios 空卡；二轮揪出 ROI 标题裁切真硬伤；三轮证伪我的 h 420→470 修复（算术自败：标题 svg y = h − bottom + offset，offset 92 > bottom 70 恒越界）——改 bottom margin 70→110 落 h−18 恒在界内（程序化断言 bbox [396,416] ⊂ [0,470]）；「散点空白」伪影根因=fullPage 截图采集瞬间 resize 触发 250ms debounce 重绘重放入场动画、静置覆盖不了——截图法根治为「先扩视口至全页高→静置 3.5s→免 fullPage 截视口」（W554 家族新亚型）。
+> - **登记（不动）**：Great Peng 数据点 (9.9,10) 遮角注「…metaphysical」的「me」（judge 四轮 minor·轴极端数据点类·图例下有全文）；domino/spiral 段中文枚举与两页长文本（根治层 WP-C）。
+> - **验证**：_w625_probe_en_i18n.js 双路径（http=fetch/file=EMBEDDED）30/30×2；visual-judge 四轮 pass/pass（Fix1 散点交替 confirmed·ROI 标题可见·page2 无回归）；CSP 0 漂移（2 页哈希更新）；ruff 0 错；verify 核心全绿。
+> - **文件**：site/en/methodology-matrix.html、site/en/chart-design.html（含 CSP）、scripts/_w625_build_zh2en_maps.py、scripts/_w625_probe_en_i18n.js、scripts/_w625_capture.js（均新增）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 ### v2.3.224（2026-09-29）：W624 交接里程碑块级联根治 — batch_cascade W557 删除终点缺陷修复（整块淘汰=标题+连续 bullets·drop_block 提取 6 例单测）+ 33 组孤儿债务清理
 > **来源**：2026-09-29 用户选收 W623 交付报告观察项「交接文档里程碑区历史块标题正被逐批消耗」——裁决立项根治批（batch_cascade 不在文档规范禁改清单·已核）。
 > - **取证（_w624_inspect_milestone.py）**：里程碑区 34 组=有标题组仅 1（W623）+ 无标题组 33（L6-119·孤儿 bullet 82 行）+ 标题残留换行累积的空行 debris（L120-134·14 行）；机理=batch_cascade W557 版删除候选表的裸 "\n" 命中标题行自身行尾→每批只删标题行文本，bullets 留成无标题组、残留空行逐批累积（文档规范 L286「单块滚动制」语义下内容均已归档 CHANGELOG·指针「W623 及更早详见 CHANGELOG」一致）。

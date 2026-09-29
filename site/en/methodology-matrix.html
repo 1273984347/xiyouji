@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-gqYNGsMxmtyv+slhTv0m9XhpHwdmueXPwwp0ibSBRak=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-A6/L9JNAs8eGjdDf7Zl31L7NqD+ZkDqHVxz7FjODhrY=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-UJ8l8lhYzNMVvGu+Mtr3GZx3o0XZXmXcvTqFv5T5xbc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-A6/L9JNAs8eGjdDf7Zl31L7NqD+ZkDqHVxz7FjODhrY=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Methodology Matrix · Villain Evaluation &amp; Rescue ROI · Annotated Journey to the West</title>
@@ -1509,7 +1509,7 @@ td.num, th.num {
         /* ROI 折线图 */
         #roi-trend-svg {
             width: 100%;
-            height: 420px;
+            height: 470px;  /* W625：420→470 容纳下移后的 x 轴标题（g 系 innerH+92 → svg 442） */
             display: block;
         }
         .roi-tip {
@@ -2152,6 +2152,14 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     };
     // W621：阶段字段双形态兼容——部署 JSON 用中文阶段名，EMBEDDED/代码键为英文
     const PHASE_KEY = p => ({ "早期·本能型": "Early · instinctive", "中期·学习型": "Middle · learning", "后期·精算师型": "Late · actuary" }[p] || p);
+    // W625 快赢层：部署 JSON 为 zh 原语，显示面枚举名归一为英文——映射由 scripts/_w625_build_zh2en_maps.py
+    // 从 EMBEDDED（英）×部署 JSON（中）机械配对生成，勿手改；EMBEDDED 路径本就英文，归一恒等。
+    // 长文本（analysis/insight 类）保持原语，归根治层（WP-C 的 en 数据副本）。
+    const MONSTER_EN = { "九头虫": "Nine-Headed Bug", "六耳猕猴": "Six-Eared Macaque", "大鹏金翅雕": "Great Peng, the Golden-Winged Roc", "寅将军": "General Tiger", "熊山君": "Bear Mountain Lord", "白骨精": "White Bone Demon", "红孩儿": "Red Boy", "老鼠精": "Rat Demon", "蜘蛛精": "Spider Demons", "蝎子精": "Scorpion Demon", "金角银角": "Gold Horn & Silver Horn", "青毛狮子怪": "Green-Maned Lion Demon", "青牛精": "Green Ox Demon", "黄眉怪": "Yellow-Browed Demon", "黄袍怪": "Yellow Robe Demon" };
+    const RMONSTER_EN = { "九灵元圣": "Nine-Headed Lion", "牛魔王": "Bull Demon King", "狮驼岭三妖": "The Three Demons of Lion-Camel Ridge", "红孩儿": "Red Boy", "老鼠精": "Rat Demon", "蝎子精": "Scorpion Demon", "青牛精": "Green Ox Demon", "黄眉怪": "Yellow-Browed Demon", "黄风怪": "Yellow Wind Demon", "黑熊精": "Black Bear Demon" };
+    const RESCUER_EN = { "哪吒 + 天兵天将": "Nezha + heavenly troops", "太上老君": "Laojun", "太乙救苦天尊": "Taiyi", "如来佛祖": "the Tathagata", "弥勒佛": "Maitreya", "托塔李天王": "Heavenly King Li", "昴日星官": "Mao Sun Star Officer", "灵吉菩萨": "Lingji", "观音菩萨": "Guanyin" };
+    const PHASE_EN = { "中期·学习型": "Middle · learning", "后期·精算师型": "Late · actuary", "早期·本能型": "Early · instinctive" };
+    const QUADRANT_ID = { "右上": "right_top", "右下": "right_bottom", "左上": "left_top", "左下": "left_bottom" };
 
     // ===== Render: design purpose =====
     function renderDesignPurpose(purpose) {
@@ -2325,6 +2333,17 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             positionMap[key].push(v);
         });
         const offsetted = [];
+        // W625：长英文标签避让——同 y 带内按 x 排序奇偶交替标签置于点上/下方（中文名短无需此处理）
+        const byRow = {};
+        data.villain_positions.forEach(v => {
+            (byRow[v.y_resource] = byRow[v.y_resource] || []).push(v);
+        });
+        const labelDy = new Map();
+        Object.values(byRow).forEach(row => {
+            row.slice().sort((a, b) => a.x_motivation - b.x_motivation).forEach((v, i) => {
+                labelDy.set(v, i % 2 === 0 ? -14 : 20);
+            });
+        });
         data.villain_positions.forEach(v => {
             const key = v.x_motivation + "-" + v.y_resource;
             const group = positionMap[key];
@@ -2334,7 +2353,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             offsetted.push({
                 ...v,
                 _x: v.x_motivation + offset,
-                _y: v.y_resource + (idx % 2 === 0 ? 0 : -0.18)
+                _y: v.y_resource + (idx % 2 === 0 ? 0 : -0.18),
+                _ldy: labelDy.get(v)
             });
         });
 
@@ -2363,7 +2383,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .append("text")
             .attr("class", "villain-label")
             .attr("x", d => x(d._x))
-            .attr("y", d => y(d._y) - 14)
+            .attr("y", d => y(d._y) + (d._ldy || -14))
             .attr("text-anchor", "middle")
             .style("font-size", "0.76rem")
             .style("font-weight", "600")
@@ -2513,10 +2533,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         svg.selectAll("*").remove();
         const el = document.getElementById("roi-trend-svg");
         const w = Math.max(200, el.clientWidth || 1100);
-        const h = 420;
+        const h = 470;  // W625：与 CSS #roi-trend-svg 高度同步——标题 innerH+92 的 svg 坐标 442 须在界内
         svg.attr("viewBox", `0 0 ${w} ${h}`);
 
-        const margin = { top: 40, right: 50, bottom: 70, left: 60 };
+        // W625：bottom 70→110——标题 g 系 innerH+92 的 svg y = h − bottom + 92，bottom 须 > 92 才在界内
+        const margin = { top: 40, right: 50, bottom: 110, left: 60 };
         const innerW = w - margin.left - margin.right;
         const innerH = h - margin.top - margin.bottom;
 
@@ -2557,7 +2578,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .call(d3.axisBottom(x).ticks(cases.length).tickFormat(d => {
                 const idx = Math.round(d) - 1;
                 if (idx < 0 || idx >= cases.length) return "";
-                return cases[idx].monster;
+                const nm = cases[idx].monster;  // W625：长英文刻度截断防穿轴标题（全名见表格/tooltip）
+                return nm.length > 18 ? nm.slice(0, 17) + "…" : nm;
             }))
             .selectAll("text")
             .style("font-size", "0.72rem")
@@ -2583,7 +2605,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
         g.append("text")
             .attr("x", innerW / 2)
-            .attr("y", innerH + 58)
+            .attr("y", innerH + 92)  // W625：下移避让旋转刻度的垂直延伸（截断后最深 ~87px）
             .attr("text-anchor", "middle")
             .style("font-size", "0.86rem")
             .style("font-weight", "600")
@@ -2835,6 +2857,43 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const pa621 = data.rescue_roi && data.rescue_roi.phase_analysis;
         if (pa621 && !Array.isArray(pa621)) {
             data.rescue_roi.phase_analysis = Object.entries(pa621).map(([phase, v]) => ({ phase, ...v }));
+        }
+
+        // W625：枚举名归一（monster/rescuer/phase/quadrant/chapter）。quadrant 归一为英文 id 同时
+        // 修复部署态 QUADRANT_LABELS[zh] 恒 undefined 的缺陷（颜色键 W621 已兼容·标签键此处起通）。
+        const nrm = (s, map) => (map[s] !== undefined ? map[s] : s);
+        const chapterEn = ch => (ch || "").replace(/第 (\d+)(?:-(\d+))? 回/, (m, a, b) => (b ? `Ch. ${a}–${b}` : `Ch. ${a}`));
+        if (data.villain_matrix && Array.isArray(data.villain_matrix.villain_positions)) {
+            data.villain_matrix.villain_positions.forEach(v => {
+                v.monster = nrm(v.monster, MONSTER_EN);
+                v.quadrant = nrm(v.quadrant, QUADRANT_ID);
+                v.chapter = chapterEn(v.chapter);
+            });
+            (data.villain_matrix.quadrants || []).forEach(q => {
+                q.quadrant = nrm(q.quadrant, QUADRANT_ID);
+                q.label = QUADRANT_LABELS[q.quadrant] || q.label;
+            });
+        }
+        if (data.rescue_roi && Array.isArray(data.rescue_roi.rescue_cases)) {
+            data.rescue_roi.rescue_cases.forEach(c => {
+                c.monster = nrm(c.monster, RMONSTER_EN);
+                c.rescuer = nrm(c.rescuer, RESCUER_EN);
+                c.rescue_phase = nrm(c.rescue_phase, PHASE_EN);
+                c.chapter = chapterEn(c.chapter);
+            });
+        }
+        if (Array.isArray(data.rescue_roi && data.rescue_roi.phase_analysis)) {
+            data.rescue_roi.phase_analysis.forEach(p => { p.phase = nrm(p.phase, PHASE_EN); });
+        }
+        // W625 同族形状归一（W621 pa621 模式）：部署 application_scenarios 为纯字符串数组，
+        // EMBEDDED 为 {scenario,icon,description} 对象数组——不归一则 renderScenarios 读 undefined
+        // 字段、Use Cases 2×2 卡部署态全空。描述为长文本保持原语（根治层译）。
+        if (data.rescue_roi && Array.isArray(data.rescue_roi.application_scenarios)) {
+            data.rescue_roi.application_scenarios = data.rescue_roi.application_scenarios.map(s =>
+                typeof s === "string"
+                    ? { scenario: s.split("：")[0] || s, description: s.split("：").slice(1).join("："), icon: "📌" }
+                    : s
+            );
         }
 
         // detect whether data is embedded
