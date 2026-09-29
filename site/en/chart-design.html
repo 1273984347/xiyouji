@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-hve4xM2uJY9NFMyQ8ny9ESuZm/c8NP6guP3igv3PoKk=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-NtlhIYe087jg98wHGc5pFzzCSl5AGbUyDaIteJ+DotU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Chart Design · Annotated Journey to the West</title>
@@ -2063,6 +2063,14 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     };
     // W621：怪物名双形态兼容——部署 JSON 为中文名，页面色表键为英文名
     const MONSTER_KEY = d => ({ "白骨精": "White Bone Spirit", "青牛精": "Green Ox Spirit", "黄袍怪": "Yellow-Robed Monster", "红孩儿": "Red Boy", "六耳猕猴": "Six-Eared Macaque", "大鹏金翅雕": "Great Peng Golden-Winged Eagle" }[d.monster] || d.monster);
+    // W625 快赢层：部署 monster_clock.json 为 zh 原语，显示面归一英文——映射由 scripts/_w625_build_zh2en_maps.py
+    // 从 EMBEDDED（英）×部署 JSON（中）机械配对生成，勿手改；EMBEDDED 路径本就英文，归一恒等。
+    // analysis 长文本（6 段）保持原语归根治层；SACT 键=「时辰|活动」复合。
+    const HOUR_EN = { "丑时(1-3)": "Chou(1-3)", "亥时(21-23)": "Hai(21-23)", "午时(11-13)": "Wu(11-13)", "卯时(5-7)": "Mao(5-7)", "子时(23-1)": "Zi(23-1)", "寅时(3-5)": "Yin(3-5)", "巳时(9-11)": "Si(9-11)", "戌时(19-21)": "Xu(19-21)", "未时(13-15)": "Wei(13-15)", "申时(15-17)": "Shen(15-17)", "辰时(7-9)": "Chen(7-9)", "酉时(17-19)": "You(17-19)" };
+    const ACTGEN_EN = { "修炼·冥想": "Cultivation · Meditation", "午休·设宴": "Noon Rest · Banquet", "夜巡·守卫": "Night Watch · Guard Duty", "巡山·侦查": "Mountain Patrol · Reconnaissance", "早餐·议事": "Breakfast · Council", "晨起修炼·调息": "Morning Cultivation · Breathing Exercises", "深度修炼": "Deep Cultivation", "被悟空破门·战斗": "Door Broken by Wukong · Battle", "训练小妖": "Training Minor Demons", "议事·策划": "Council · Planning", "设宴·享乐": "Banquet · Pleasure", "部署·布局": "Deployment · Positioning" };
+    const MSTATE_EN = { "六耳猕猴": "Six-Eared Macaque", "大鹏金翅雕": "Great Peng Golden-Winged Eagle", "白骨精": "White Bone Spirit", "红孩儿": "Red Boy", "青牛精": "Green Ox Spirit", "黄袍怪": "Yellow-Robed Monster", "佛派背景·有背景妖怪": "Buddhist Backing · Well-Connected Demon", "坐骑下凡·有背景妖怪": "A Mount Descended to Earth · Well-Connected Demon", "天将下凡·有背景妖怪": "A Heavenly General Descended to Earth · Well-Connected Demon", "妖怪世家·有背景妖怪": "A Demon Aristocrat · Well-Connected Demon", "心魔·无形妖怪": "Inner Demon · Formless Demon", "野怪·底层妖怪": "Wild Monster · Low-Ranking Demon", "二十八宿奎木狼": "Kui Wood Wolf of the Twenty-Eight Constellations", "太上老君坐骑": "Taishang Laojun's Mount", "如来舅舅": "The Buddha's Uncle", "悟空心魔化身": "Wukong's Inner-Demon Incarnation", "无背景": "No Backing", "牛魔王与铁扇公主之子": "Son of the Bull Demon King and Princess Iron Fan", "七十二变·伪金箍棒": "Seventy-Two Transformations · Fake Golden-Banded Staff", "三昧真火·火云枪": "Samadhi True Fire · Fiery-Cloud Spear", "天将法力·内丹": "Heavenly General's Magic · Internal Elixir", "无法宝·无小妖": "No Magic Treasure · No Minor Demons", "金刚琢·独占": "The Diamond Bracelet · Held Exclusively", "阴阳二气瓶·佛派背景": "The Yin-Yang Two-Qi Vase · Buddhist Backing" };
+    const SKEY_EN = { "丑时": "Chou", "亥时": "Hai", "午时": "Wu", "卯时": "Mao", "子时": "Zi", "寅时": "Yin", "巳时": "Si", "戌时": "Xu", "未时": "Wei", "申时": "Shen", "辰时": "Chen", "酉时": "You" };
+    const SACT_EN = { "丑时|伪装成悟空": "Disguising as Wukong", "丑时|伪装练习": "Disguise Practice", "丑时|修炼·调息": "Cultivation · Breathing", "丑时|修炼三昧真火": "Cultivating Samadhi True Fire", "丑时|睡觉": "Sleeping", "亥时|—": "—", "亥时|伪装成老翁·被悟空打死": "Disguising as an Old Man · Killed by Wukong", "亥时|睡觉·圈子一扔即可": "Sleeping · Just Toss the Bracelet", "亥时|被如来收服": "Subdued by the Buddha", "亥时|被悟空破门·战斗": "Door Broken by Wukong · Battle", "午时|设宴·吃人": "Banquet · Eating People", "午时|设宴·吃凡人": "Banquet · Eating Mortals", "午时|设宴·吃宫女": "Banquet · Eating Palace Maids", "午时|设宴·吃小孩": "Banquet · Eating Children", "午时|设立假取经团队": "Setting Up a Fake Pilgrimage Team", "午时|诱骗唐僧": "Luring Tang Sanzang", "卯时|制定伪装方案": "Devising a Disguise Plan", "卯时|打伤唐僧·抢行李": "Wounding Tang Sanzang · Stealing Luggage", "卯时|早餐·吃凡间小孩": "Breakfast · Eating Mortal Children", "卯时|晨起·与百花羞共度": "Rising · Time with Baihuaxiu", "卯时|晨起·吃人": "Rising · Eating People", "卯时|晨起喝茶": "Morning Tea", "子时|伪装成悟空": "Disguising as Wukong", "子时|伪装练习": "Disguise Practice", "子时|修炼·调息": "Cultivation · Breathing", "子时|修炼三昧真火": "Cultivating Samadhi True Fire", "子时|喝茶": "Drinking Tea", "子时|议事·与青狮白象商讨": "Council · Consulting the Green Lion and White Elephant", "寅时|伪装成悟空": "Disguising as Wukong", "寅时|侦查唐僧动向": "Scouting Tang Sanzang's Movements", "寅时|修炼·调息": "Cultivation · Breathing", "寅时|晨起·训练": "Rising · Training", "寅时|睡觉": "Sleeping", "巳时|伪装成少女": "Disguising as a Maiden", "巳时|巡山": "Mountain Patrol", "巳时|巡山·侦查取经团队": "Mountain Patrol · Scouting the Pilgrimage Team", "巳时|巡山·侦查唐僧": "Mountain Patrol · Scouting Tang Sanzang", "巳时|巡山（小妖代劳）": "Mountain Patrol (delegated to minor demons)", "巳时|招兵买马·收假小妖": "Recruiting Troops · Taking Fake Minor Demons", "戌时|—": "—", "戌时|再次失败": "Failing Again", "戌时|夜巡": "Night Watch", "戌时|睡觉": "Sleeping", "戌时|被观音收服": "Subdued by Guanyin", "未时|喝茶·下棋": "Tea · Chess", "未时|失败·撤退": "Failure · Retreat", "未时|被谛听识破·逃": "Exposed by Diting · Fleeing", "未时|议事": "Council", "未时|议事·与小妖商讨": "Council · Consulting Minor Demons", "未时|议事·制定抓唐僧计划": "Council · Planning to Capture Tang Sanzang", "申时|向凡间收贡品": "Collecting Tribute from the Mortal World", "申时|实施抓捕计划": "Carrying Out the Capture Plan", "申时|布防·设关卡": "Deploying Defenses · Setting Checkpoints", "申时|求助如来·被识破": "Seeking the Buddha's Help · Exposed", "申时|部署·设陷阱": "Deployment · Setting Traps", "申时|重新伪装": "Disguising Again", "辰时|建立假花果山": "Building a Fake Flower-Fruit Mountain", "辰时|等待机会": "Waiting for an Opportunity", "辰时|训练妖兵": "Training Demon Soldiers", "辰时|训练小妖": "Training Minor Demons", "酉时|伪装成老妇": "Disguising as an Old Woman", "酉时|吃唐僧肉（失败）": "Eating Tang Sanzang's Flesh (Failed)", "酉时|被悟空打死": "Killed by Wukong", "酉时|设宴·吃人": "Banquet · Eating People", "酉时|设宴·吃凡人": "Banquet · Eating Mortals", "酉时|设宴·吃宫女": "Banquet · Eating Palace Maids" };
     // Activity type colors
     const ACTIVITY_COLORS = {
         cultivate: "#8A6D3B",  // cultivation · purple
@@ -2823,6 +2831,37 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     async function main() {
         const data = await loadAll();
         window.__data = data;
+
+        // W625：monster_clock 显示面枚举名/短语归一英文（monster/category/background/resource/
+        // 时辰键值/activity_general）——schedule 键归一后与 hourNames（split("(")[0]）同键；
+        // analysis 长文本保持原语（sundial-analysis 与 scatter tooltip 内·归根治层）。
+        const nrm = (s, map) => (map[s] !== undefined ? map[s] : s);
+        if (data.monster && Array.isArray(data.monster.monster_schedules)) {
+            data.monster.monster_schedules.forEach(m => {
+                m.monster = nrm(m.monster, MSTATE_EN);
+                m.category = nrm(m.category, MSTATE_EN);
+                m.background = nrm(m.background, MSTATE_EN);
+                m.resource = nrm(m.resource, MSTATE_EN);
+                const sched = {};
+                Object.entries(m.schedule || {}).forEach(([k, v]) => {
+                    const hit = SACT_EN[k + "|" + v];  // 复合键=「时辰|活动」——裸活动值不唯一（多妖共串）
+                    sched[nrm(k, SKEY_EN)] = hit !== undefined ? hit : v;
+                });
+                m.schedule = sched;
+            });
+        }
+        if (data.monster && Array.isArray(data.monster.twelve_hours)) {
+            data.monster.twelve_hours.forEach(h => {
+                h.hour = nrm(h.hour, HOUR_EN);
+                h.activity_general = nrm(h.activity_general, ACTGEN_EN);
+            });
+        }
+        // W625 漏网补收：KPI 条的 Tightest/Easiest 取自 chart_design_summary.json（zh 原语）——
+        // EMBEDDED.summary 本就英文，归一恒等
+        if (data.summary && data.summary.most_stressed) {
+            data.summary.most_stressed = nrm(data.summary.most_stressed, MSTATE_EN);
+            data.summary.most_ease = nrm(data.summary.most_ease, MSTATE_EN);
+        }
 
         // Update data source notice
         const noticeEl = document.getElementById("dataSource");

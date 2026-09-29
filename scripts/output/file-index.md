@@ -11,6 +11,16 @@
 ---
 
 
+## W625 W625 EN 页数据显示面枚举名快赢英化（2026-09-29·v2.3.225）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/methodology-matrix.html | W625 | 更新·枚举名归一+象限 undefined/scenarios 形状修复+标签交替/刻度截断/margin 110 |
+| site/en/chart-design.html | W625 | 更新·枚举名归一（monster/时辰/schedule 复合键/summary 妖名） |
+| scripts/_w625_build_zh2en_maps.py | W625 | 新增·ZH2EN 映射生成器（EMBEDDED×部署 JSON 机械配对·双译名拆表·SACT 复合键） |
+| scripts/_w625_probe_en_i18n.js | W625 | 新增·双路径探针 30 断言（枚举名 0 CJK+长文本边界+scenarios/KPI 补收） |
+| scripts/_w625_capture.js | W625 | 新增·免 resize 截图法（扩视口至全页高→静置 3.5s→免 fullPage） |
+
 ## W624 W624 交接里程碑块级联根治（2026-09-29·v2.3.224）
 
 | 文件 | W | 说明 |
