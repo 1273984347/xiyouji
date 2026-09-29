@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W625），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W626），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.226（2026-09-30）：W626 WP-A 度量闭环正式判定 — GoatCounter 令牌实操配置（computer-use UI 生成+剪贴板零转录入 .env）·fetch_gate_stats 实测 uv7=1/uv30=24·judge_gate 判定归档分支（冻结内容扩容·转工程批）·复盘回填+阻塞区更新·附带 942c64e 追记登记
+> **来源**：用户裁决执行 WP-A（2026-09-29 选收行动清单三件套·2026-09-30 computer-use 实操完成 token 配置）——W530 决策闸门自 W535 取数自动化后悬置的最后一环（生成 API 令牌）闭环，正式判定落地。
+> - **①token 实操（computer-use 驱动用户 Edge）**：GoatCounter 令牌入口实际为 用户名→API（/user/api·非方案所记 Settings 路径）；首枚令牌误选 Read sites 权限（表单复选框行内布局误读）→删除重建为 **Read statistics**；令牌明文 GoatCounter 仅存于表格 show 链接 data-show 属性（页面 JS 展开处理器被翻译扩展环境破坏未生效）→ 经 view-source + Ctrl+F 定位 + 三击整行复制→剪贴板正则提取直写 .env（零人工转录——人工转录曾实错 2 字符被 API 401 当场拦下）。.env 已确认 gitignore。
+> - **②实测与判定**：fetch_gate_stats --json 实测 uv7=1 / uv30=24；judge_gate --uv7 1 --uv30 24 --report 判定输出分支 **归档**（阈值：30 日<30）→ 复盘 5 格全部回填实数或如实标注平台不提供（API 无 referrer/跳出率口径·total 与逐日分布不一致为实例行为）；交接文档阻塞区写明裁决：冻结 WP-D2 及一切内容扩容批，仅推进 P0/P1 工程批。
+> - **③知识沉淀（GoatCounter API 实证）**：错误 token=401 unknown token·权限不足=403 requires X permissions·路由不匹配=404 not found（handlers/api.go 源码实证）；fetch_gate_stats 自测 13/14——唯一 FAIL 为「缺令牌」负样本，因 .env 已配令牌无法触发（预期环境现象·非缺陷）。
+> - **追记：chore 942c64e（#26 actions/upload-artifact v4→v7 squash 合并·CI 与 Screenshot Review 两条重度消耗工作流实战验证 success）未走级联无版段，本段一并登记**；同批先前 5 枚 dependabot minor/patch squash 已于 W623 段登记。
+> - **验证**：API 真实调用 200（me/stats/total·token 有效）；fetch_gate_stats --json uv7=1/uv30=24；judge_gate 判定已追加复盘；`grep -c 待回填 复盘` = 0；verify_delivery 核心全绿。
+> - **文件**：docs/10-方法论沉淀/读者数据复盘.md（回填+判定记录）、交接文档.md（阻塞区裁决）、.env（gitignore 不入库）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。作者侧待办新增：UV 曲线/来源占比后台截图人工核（复盘 §一/§二）。
 ### v2.3.225（2026-09-29）：W625 EN 页数据显示面枚举名快赢英化 — methodology-matrix/chart-design 双页归一（ZHIR2EN 映射生成器机械配对·四轮 visual-judge 迭代·ROI 标题界内与免 resize 截图两教训）·顺带修复象限 undefined/scenarios 形状/散点标签重叠三案
 > **来源**：W622 入档 EN 数据 i18n 方案梯队①快赢层（用户批准开工·2026-09-29）——en/methodology-matrix + en/chart-design 显示面枚举名英化；长文本层归根治层（WP-C en 数据副本）。
 > - **映射生成器（_w625_build_zh2en_maps.py）**：从页面 EMBEDDED（英）×部署 JSON（中）按下标机械配对生成 ZH2EN 表（禁手抄）——产出 monster 双表发现：同一中文名在 villain 表/rescue 表英译不同（白骨精→White Bone Demon/White Bone Spirit），拆 MONSTER_EN/RMONSTER_EN 两表各用各源；SACT 用「时辰|活动」复合键（裸活动值多妖共串不唯一）；zip strict=True 配对纪律。script snippet 落盘仅供复查，页面以内联为准。
