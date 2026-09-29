@@ -1,7 +1,7 @@
 # 方法论沉淀
 
 > 本目录沉淀 xiyouji 项目过程中积累的可复利方法论经验。
-> 创建于 2026-07-26（v2.0.43 W070 落地）·当前版本 v2.0.60（W087 落地）
+> 创建于 2026-07-26（v2.0.43 W070 落地）·条目随批登记（项目现役版本见 CHANGELOG 现役版段）
 > 与 [项目根目录 README.md](../../README.md) / [STRUCTURE.md](../../STRUCTURE.md) / [CHANGELOG.md](../../CHANGELOG.md) / [交接文档.md](../../交接文档.md) 配套使用。
 > **维护契约**：本文件是方法论目录索引——新增方法论须登记条目并与交接文档「三、方法论沉淀」同步；「当前版本」行是目录建立快照，不代表项目版本。
 
@@ -106,6 +106,6 @@ skill 文件是**协议层**（约束 + 流程定义），本目录是**案例�
 
 - [../../README.md](../../README.md)：项目说明（版本行由 bump 维护·以文件头部为准）
 - [../../STRUCTURE.md](../../STRUCTURE.md)：目录结构
-- [../../CHANGELOG.md](../../CHANGELOG.md)：变更日志（W001-W529）
+- [../../CHANGELOG.md](../../CHANGELOG.md)：变更日志（编号上限见现役版段）
 - [../../交接文档.md](../../交接文档.md)：跨 session 交接
 - [../../scripts/output/file-index.md](../../scripts/output/file-index.md)：反向文件索引

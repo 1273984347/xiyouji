@@ -5,7 +5,7 @@
   python scripts/batch_cascade.py --spec <spec.json>             # dry-run：全部断言跑通但不写盘
   python scripts/batch_cascade.py --spec <spec.json> --apply     # 断言全过后统一落盘
 
-两阶段设计：第一阶段在内存中对全部 9 个面做断言与改写，任何锚点失配立即中止（零落盘）；
+两阶段设计：第一阶段在内存中对全部 10 个面做断言与改写（W628 起 +CITATION.cff），任何锚点失配立即中止（零落盘）；
 第二阶段仅在 --apply 时统一写入。写入后自检交接文档无 `））；` 双括号。
 
 spec 字段见文末说明（JSON）。
@@ -194,6 +194,14 @@ def main():
     s = s.replace(tail, "；{}。如与上述权威文档冲突，以权威文档为准。*".format(spec["agents_note"]), 1)
     pend.append((p, s, nl))
 
+    # ---------- CITATION.cff（W628 起第 10 面：version/date-released 随批同步——第 27 门禁 R2 面） ----------
+    p = "CITATION.cff"
+    s, nl = load(p)
+    out = re.sub(r'(?m)^version:\s*"[^"]+"', 'version: "{}"'.format(ver.lstrip("v")), s, count=1)
+    out = re.sub(r'(?m)^date-released:\s*"[^"]+"', f'date-released: "{date}"', out, count=1)
+    assert out != s, "CITATION.cff 版本/日期行未变化"
+    pend.append((p, out, nl))
+
     # ---------- file-index ----------
     p = "scripts/output/file-index.md"
     s, nl = load(p)
@@ -205,7 +213,7 @@ def main():
 
     # ---------- 落盘 ----------
     if not args.apply:
-        print(f"[DRY-RUN] 9 个面断言与改写全部通过：{batch}（规则 {new_rule}）。加 --apply 落盘。")
+        print(f"[DRY-RUN] 10 个面断言与改写全部通过：{batch}（规则 {new_rule}）。加 --apply 落盘。")
         return 0
     # W560 修复：newline 恒为 ""——旧实现对 CRLF 文件传 newline=nl，io 层把 content 中
     # 既有 \r\n 的每个 \n 再翻译一次 → \r 翻倍（实测累计至 4×CR，全页视觉损毁）。

@@ -11,6 +11,21 @@
 ---
 
 
+## W628 W628 叙述面内容漂移清零 + 第门禁防复发（2026-09-30·v2.3.228）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_w_range_literal.py | W628 | 新增·第 27 门禁（叙述面 W001-Wxxx 终点==现役 max+CITATION 同步·self-test 4/4） |
+| scripts/batch_cascade.py | W628 | 更新·+CITATION.cff 第 10 面（version/date-released 随批同步·第 27 门禁 R2 倒逼） |
+| scripts/verify_delivery.py | W628 | 更新·挂载第 27 门禁单注册块（禁擅改清单内·经用户指令防复发） |
+| scripts/_w628_drift_audit.py | W628 | 新增·叙述面漂移取证脚本（四类扫描·30+ 命中逐条裁决 9 真漂移） |
+| CITATION.cff | W628 | 更新·version 2.2.15→2.3.227 + date-released 同步（外部引用面） |
+| README.md | W628 | 更新·W001-W575 字面量×2 引用式化（外部综述错误源头根治） |
+| STRUCTURE.md | W628 | 更新·归档描述对齐三段式现行口径 |
+| docs/00-导读/文档规范.md | W628 | 更新·管控清单 W423 引用式化 + §8 行补第 27 门禁与活跃口径 |
+| docs/10-方法论沉淀/README.md | W628 | 更新·W529 引用式化 + 当前版本快照改随批登记口径 |
+| .github/workflows/README.md | W628 | 更新·17 项门禁 W500 快照改引用 verify_delivery 现役 |
+
 ## W627 W627 i18n 根治层路线 B（2026-09-30·v2.3.227）
 
 | 文件 | W | 说明 |
