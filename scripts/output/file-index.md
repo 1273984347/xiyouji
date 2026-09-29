@@ -11,6 +11,16 @@
 ---
 
 
+## W623 W623 README 补 AI 生成声明（2026-09-29·v2.3.223）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| README.md | W623 | 更新·AI 生成说明节（AI 代理协作+人工审定·元信息块四字段口径·引文硬验证防幻觉·25 门禁·责任边界） |
+| pyproject.toml | W623 | 更新·UP031 注释复测校真（34→213 处·维持 ignore 裁决不变） |
+| xiyouji-agent-web/package-lock.json | W623 | 更新·dependabot 组合并（生产 8 更新含 dotenv 18·开发 9 更新含 @types express5/uuid11/better-sqlite3 9） |
+| scripts/package-lock.json | W623 | 更新·dependabot 组合并（playwright 1.63.0/eslint 10.11.0） |
+| scripts/requirements.txt | W623 | 更新·dependabot 区间合并（ruff 0.16.9/brotli ≥1.2/fonttools ≥4.66） |
+
 ## W622 W622 触屏 tooltip 真机验证收口 + en 人物页部署态名字英化（2026-09-29·v2.3.222）
 
 | 文件 | W | 说明 |

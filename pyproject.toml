@@ -12,8 +12,8 @@ extend-exclude = [
 select = ["E", "F", "W", "I", "UP", "B"]
 ignore = [
     "E501",  # 行长由 line-length 控制
-    "UP031",  # W400 修复：printf 风格 `%` 格式化在存量脚本中大量使用（34 处历史代码），
-    # 非错误且改 f-string 存在 % 转义语义风险；作为可选风格升级不阻断 CI 门禁
+    "UP031",  # W400 修复：printf 风格 `%` 格式化在存量脚本中大量使用（W623 复测 213 处·
+    # 非错误且改 f-string 存在 % 转义语义风险，其中 119 处属 unsafe fix）；作为可选风格升级不阻断 CI 门禁
 ]
 
 [tool.ruff.lint.per-file-ignores]

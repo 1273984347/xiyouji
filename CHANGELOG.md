@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W622），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W623），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.223（2026-09-29）：W623 README 补 AI 生成声明 — 第三方审查唯一幸存实质缺口收口（口径对齐 CONTRIBUTING/元信息块/学术 AI 声明）·附带积压 dependabot PR triage 7 合 1 挂
+> **来源**：2026-09-29 用户选收「真正剩下的行动清单」（三方审查裁决后的遗留四项）——①README AI 声明（第三方审查 10 条实证主张中唯一幸存实质缺口）+ ②积压 dependabot PR triage + ④两项评估（Three r128/UP031）；③GoatCounter token 为用户侧动作（WP-A 前置·本批不涉）。
+> - **①AI 生成说明**：README「贡献方式」与「授权」之间新增一节——AI 代理协作+人工审定模式·元信息块四字段口径（未记录如实标注·禁编造）·引文硬验证（对原著数据集逐字匹配·防幻觉）·25 项门禁概述·责任边界；不点名具体模型（以各篇元信息块为准）。透明度其余三面已在位（CONTRIBUTING 首段 AI 代理协作模式/内容元信息块/学术稿官方口径 AI 声明）。
+> - **②dependabot triage（8 个积压 PR·全部 CI 全绿）**：合并 7（squash·#23/#28 与兄弟 PR 同目录冲突经 @dependabot rebase 后复验 20 检查全绿）——scripts playwright 1.63.0/eslint 10.11.0·pip ruff 0.16.9/brotli ≥1.2/fonttools ≥4.66·agent-web 生产组 8 更新（含 dotenv 17→18 major）+开发组 9 更新（@types/express 5·@types/uuid 11·@types/better-sqlite3 9·concurrently 10）；#26 upload-artifact 4→7 major 按 W536 隔离策略继续挂（CI 亦绿·待专项确认）。
+> - **②冒烟（W537 规则④）**：tsc -b && vite build 全过（@types 三大版本吸收）·dotenv 18.0.4/express 5.2.1 运行时探针通过。**环境发现（预存·与本批合并无关）**：better-sqlite3 13.0.3 无 node v24（ABI v137）win32-x64 预编译包（v12.12.0 反而有）+本机无 VS 工具链 → 本地 npm ci 无法重建原生模块（prebuild 下载另须 NODE_OPTIONS=--use-system-ca 过本机 TLS 证书链拦截·与 curl --ssl-no-revoke 同族）；13.0.3 由 W543 引入、本批未触碰版本·修复三径（装 VS Build Tools/项目锁 node 22/等上游补 v137 预编译）挂作者裁决·本地 dev/server 受阻待解。
+> - **④评估结论（均不立项）**：Three.js r128 全站仅 4 页使用且已 vendored（上游停维护不影响 file:// 直开·升级须换 ESM 装载×4 页·仅新增 3D 功能时再议）；UP031 维持 ignore——ruff 复测实为 213 处（非 W400 注释所记 34 处·pyproject 注释已校真）·unsafe fix 119 处含 % 转义语义风险·零功能收益不值得动 34+ 门禁脚本。
+> - **验证**：agent-web tsc+build 全过·dotenv/express 运行时探针 2/2；verify_delivery 核心全绿（README 版本行级联同步）。
+> - **文件**：README.md、pyproject.toml（注释校真）、依赖文件 8 个（随 dependabot squash 提交先行入库·本段登记）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 ### v2.3.222（2026-09-29）：W622 触屏 tooltip 真机验证收口 + en 人物页部署态名字英化 — W585 残留登记关闭（harness 5+2 全 5/5 + computer-use 真实鼠标 4 页实操）·35 人 ZH2EN 全量归一
 
 > **来源**：W621 登记两笔遗留的用户「继续打磨」指令——①W585 触屏 tooltip 余 6 页页面级残留（登记为真机验证+定向修复批）；②en 页部署态怪物/角色名显示中文。真机验证经 computer-use 真实浏览器（OS 级鼠标输入·非合成事件）完成。
