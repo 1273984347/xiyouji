@@ -11,6 +11,12 @@
 ---
 
 
+## W639 W639 Backlog B数据质量修复登记（2026-10-01·v2.3.239）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W639 | 更新·B-8 数据质量修复登记（appearance 消歧+dialogue 变体·生成器层·第九份全保真分析） |
+
 ## W638 W638 Backlog B存档注记（2026-10-01·v2.3.238）
 
 | 文件 | W | 说明 |
