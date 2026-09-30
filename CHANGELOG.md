@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W630），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W631），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.231（2026-09-30）：W631 门禁脚本加固落库 — 09-27 S4 会话两笔未提交加固收口（check_citations 防静默跳过堵「报 100% 实为空真」盲区+line_check 语料迁移路径修正+双 --self-test）·工作树=提交库对齐（消除门禁运行态与版本态偏差）
+> **来源**：S4 残留治理取证（用户选收卫生项）——`git diff` 实证两门禁脚本的未提交改动为 2026-09-27 A 轨审查会话的**真实加固**（非垃圾）：当日会话改完未提交即中断，工作树版本此后一直在 verify 中生效而提交库停留旧版（运行态≠版本态的隐性偏差）。
+> - **check_citations.py（第 20 门禁脚本）**：①防静默跳过——凡以「原文引文」起始却不匹配规范语法的行一律 FAIL（SUSPECT_RE 容忍 `>原文引文`/`> **原文引文` 漂移前缀），堵死「格式漂移整行不进分母、报 100% 实为空真」盲区（实证：匿名稿 3 条引文因回目号带空格+半角引号曾长期被跳过）；②`--self-test` 内存正负样本 4/4。
+> - **scripts/audit/line_check.py**（引文行号取证工具）：①数据源指向修正——语料 W424 起迁至 site/static/js/text-search-app.js，旧脚本指向 text-search.html 已失效（该类静默失效曾实际发生且多时未察觉）；②语料缺失/格式漂移显式报错；③`--self-test` 100 回全解析+正样本 4/负样本 1。
+> - **落库意义**：verify_delivery 每次提交跑的是工作树脚本——本批使提交库=运行态，消除「回退/换机后门禁静默降级回有盲区版本」的隐患；两笔加固各自带自测（4/4·105/105）。
+> - **S4 其余残留裁决（如实登记）**：5 个已暂存脚本+约 30 个未跟踪 `_` 诊断脚本+3 个 S4 工具脚本改动（_w607×2/_w621）——均为 09-27 前后冻结轨工作产物，**未满 W597 ≥45 天归档规则**，维持现状待下一治理批（S4 重启或到期归档）；.zcodeignore/_w575_e2e_result.json 同上。
+> - **验证**：check_citations --self-test 4/4；line_check --self-test 105/105；verify_delivery 全量核心全绿（第 20 门禁含加固逻辑首跑）。
+> - **文件**：scripts/check_citations.py、scripts/audit/line_check.py（均落库既有加固·新增 --self-test）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 ### v2.3.230（2026-09-30）：W630 第 26 门禁 SEO head 挂载 — check_seo_head.py 挂载 verify_delivery（slot 自 W591 预留·用户裁决挂载）·334 页 og/canonical/JSON-LD/hreflang/sitemap 集合一致·README 门禁口径 25→26·AGENTS/文档规范同步
 > **来源**：W628 漂移清零后维护态盘点——check_seo_head.py 自 W591 建置后「待用户裁决挂载」悬置 9 天；W629 同日演示了静默腐烂面的代价（W575 字面量腐烂 52 批无人察觉），用户裁决「挂」。
 > - **挂载**：verify_delivery.py 增第 26 门禁单注册块（复制 W628 模式·subprocess+exit code 裁决）——check_seo_head.py 扫 334 页：og:image/canonical 覆盖·JSON-LD 内联有效（example.com 占位 0）·hreflang 89 对·sitemap 集合一致；首跑全绿零基线风险（脚本 9 天来持续手跑绿）。

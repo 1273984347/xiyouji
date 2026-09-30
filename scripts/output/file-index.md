@@ -11,6 +11,13 @@
 ---
 
 
+## W631 W631 门禁脚本加固落库（2026-09-30·v2.3.231）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_citations.py | W631 | 落库·09-27 加固（SUSPECT_RE 防静默跳过+--self-test 4/4·第 20 门禁脚本运行态=版本态） |
+| scripts/audit/line_check.py | W631 | 落库·09-27 加固（语料路径修正 text-search-app.js+--self-test 105/105） |
+
 ## W630 W630 第门禁 SEO head 挂载（2026-09-30·v2.3.230）
 
 | 文件 | W | 说明 |
