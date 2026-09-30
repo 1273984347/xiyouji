@@ -1,0 +1,1043 @@
+{
+ "methodology": {
+  "villain_matrix": {
+   "matrix_name": "Journey to the West Villain Evaluation Matrix",
+   "design_purpose": "Plots every monster in the book precisely onto a <strong>motivation × resources</strong> matrix, revealing the underlying law that <strong>affiliation decides fate</strong>: monsters with backing all return to their posts, while rootless nobodies are all killed or flee.",
+   "axes": {
+    "x_axis": {
+     "name": "Source of motivation",
+     "range": [
+      0,
+      10
+     ],
+     "direction": "0=pure survival → 10=metaphysical grudge",
+     "bands": [
+      {
+       "range": "0-2",
+       "label": "Instinctive survival"
+      },
+      {
+       "range": "3-4",
+       "label": "Profit-driven"
+      },
+      {
+       "range": "5-6",
+       "label": "Will to power"
+      },
+      {
+       "range": "7-8",
+       "label": "Usurping the order"
+      },
+      {
+       "range": "9-10",
+       "label": "Metaphysical grudge"
+      }
+     ]
+    },
+    "y_axis": {
+     "name": "Resource abundance",
+     "range": [
+      0,
+      10
+     ],
+     "direction": "0=lone rootless operator → 10=cross-realm backing",
+     "bands": [
+      {
+       "range": "0-2",
+       "label": "Rootless lone operator"
+      },
+      {
+       "range": "3-4",
+       "label": "Minor-demon followers"
+      },
+      {
+       "range": "5-6",
+       "label": "Mountain warlord"
+      },
+      {
+       "range": "7-8",
+       "label": "Heavenly-court ties"
+      },
+      {
+       "range": "9-10",
+       "label": "Cross-realm backing"
+      }
+     ]
+    }
+   },
+   "quadrants": [
+    {
+     "id": "left_top",
+     "name": "Top-left",
+     "label": "Strong backing + metaphysical",
+     "x_range": "x: 7-10",
+     "y_range": "y: 7-10",
+     "description": "Top-tier backing + metaphysical motive — a rare top-tier villain, the only one in the book.",
+     "example_count": 1,
+     "typical_outcome": "Taken in personally by senior Buddhist figures",
+     "color": "#7a3a8c",
+     "visual": "top-right"
+    },
+    {
+     "id": "right_top",
+     "name": "Top-right",
+     "label": "Strong backing + survival",
+     "x_range": "x: 0-6",
+     "y_range": "y: 7-10",
+     "description": "Heavenly/Buddhist establishment + mission-driven — a mountain-warlord type shielded by affiliation.",
+     "example_count": 7,
+     "typical_outcome": "Reclaimed by their patron and restored to their post",
+     "color": "#3a6b8c",
+     "visual": "top-left"
+    },
+    {
+     "id": "left_bottom",
+     "name": "Bottom-left",
+     "label": "Weak backing + survival",
+     "x_range": "x: 0-6",
+     "y_range": "y: 0-6",
+     "description": "Rootless lone operator + instinctive survival — the classic cannon fodder, 40% of the book.",
+     "example_count": 6,
+     "typical_outcome": "Killed or driven to flee",
+     "color": "#c8463a",
+     "visual": "bottom-left"
+    },
+    {
+     "id": "right_bottom",
+     "name": "Bottom-right",
+     "label": "Weak backing + metaphysical",
+     "x_range": "x: 7-10",
+     "y_range": "y: 0-6",
+     "description": "Rootless origin + metaphysical motive — an inner-demon villain, the only one in the book.",
+     "example_count": 1,
+     "typical_outcome": "Killed (externalized inner demon)",
+     "color": "#C9A063",
+     "visual": "bottom-right"
+    }
+   ],
+   "villain_positions": [
+    {
+     "monster": "White Bone Demon",
+     "chapter": "Ch. 27",
+     "x_motivation": 2,
+     "y_resource": 1,
+     "quadrant": "left_bottom",
+     "motivation_analysis": "Pure survival · cannibalism to extend life",
+     "resource_analysis": "No backing · no weapon · three lone transformations",
+     "outcome": "Killed",
+     "author_strategy": "Highlights the tension between Wukong's discerning eyes and Tang Sanzang's failure to see through the demon"
+    },
+    {
+     "monster": "Yellow Robe Demon",
+     "chapter": "Ch. 28–30",
+     "x_motivation": 3,
+     "y_resource": 8,
+     "quadrant": "right_top",
+     "motivation_analysis": "Covets Baihuaxiu · driven by lust",
+     "resource_analysis": "Kui Wood Wolf descended to earth · a member of the 28 Mansions",
+     "outcome": "Reclaimed by the Jade Emperor",
+     "author_strategy": "Shows the protective power of heavenly-court affiliation"
+    },
+    {
+     "monster": "Gold Horn & Silver Horn",
+     "chapter": "Ch. 32–35",
+     "x_motivation": 4,
+     "y_resource": 8,
+     "quadrant": "right_top",
+     "motivation_analysis": "Sent down on orders · mission-driven",
+     "resource_analysis": "Taishang Laojun's furnace boys · five magic treasures",
+     "outcome": "Reclaimed by Laojun",
+     "author_strategy": "Shows how treasure-wielding villains overpower by resources"
+    },
+    {
+     "monster": "Red Boy",
+     "chapter": "Ch. 40–42",
+     "x_motivation": 5,
+     "y_resource": 7,
+     "quadrant": "right_top",
+     "motivation_analysis": "Carved out a territory · seeks immortality by eating Tang Sanzang",
+     "resource_analysis": "Son of the Bull Demon King · Samadhi Fire",
+     "outcome": "Taken by Guanyin as the Boy of Good Wealth",
+     "author_strategy": "Shows the rivalry between Buddhist and demon backing in winning him over"
+    },
+    {
+     "monster": "Green Ox Demon",
+     "chapter": "Ch. 50–52",
+     "x_motivation": 3,
+     "y_resource": 9,
+     "quadrant": "right_top",
+     "motivation_analysis": "Seized the mountain and kidnapped people · classic profit type",
+     "resource_analysis": "Taishang Laojun's mount · the Diamond Snare",
+     "outcome": "Reclaimed by Laojun",
+     "author_strategy": "Shows a hierarchy where treasures trump martial force"
+    },
+    {
+     "monster": "Six-Eared Macaque",
+     "chapter": "Ch. 56–58",
+     "x_motivation": 9,
+     "y_resource": 3,
+     "quadrant": "right_bottom",
+     "motivation_analysis": "Contends for the pilgrimage · usurps identity",
+     "resource_analysis": "No backing · relies only on identical appearance and skill",
+     "outcome": "Trapped under the Buddha's alms bowl · beaten to death by Wukong",
+     "author_strategy": "Externalized inner demon · the true-false distinction"
+    },
+    {
+     "monster": "Great Peng, the Golden-Winged Roc",
+     "chapter": "Ch. 74–77",
+     "x_motivation": 9,
+     "y_resource": 10,
+     "quadrant": "left_top",
+     "motivation_analysis": "Avenges his sister + seeks immortality by eating Tang Sanzang",
+     "resource_analysis": "The Buddha's uncle · ruler of Lion-Camel Kingdom",
+     "outcome": "Subdued by the Buddha in person",
+     "author_strategy": "Shows the logic by which a top-tier Buddhist villain submits"
+    },
+    {
+     "monster": "Yellow-Browed Demon",
+     "chapter": "Ch. 65–66",
+     "x_motivation": 6,
+     "y_resource": 8,
+     "quadrant": "right_top",
+     "motivation_analysis": "Impersonates the Buddha · usurps at Little Thunderclap Temple",
+     "resource_analysis": "Maitreya's boy · the Golden Cymbals and the Human-Seed Pouch",
+     "outcome": "Reclaimed by Maitreya",
+     "author_strategy": "Shows that usurpers within the establishment are still handled by it"
+    },
+    {
+     "monster": "Scorpion Demon",
+     "chapter": "Ch. 54–55",
+     "x_motivation": 4,
+     "y_resource": 4,
+     "quadrant": "left_bottom",
+     "motivation_analysis": "Abducts Tang Sanzang for pleasure · driven by desire",
+     "resource_analysis": "Independent at Pipa Cave · the Horse-Felling Sting",
+     "outcome": "Taken by the Mao Sun Star Officer (the Rooster Star)",
+     "author_strategy": "Shows the folk logic of the Five Phases (rooster conquers scorpion)"
+    },
+    {
+     "monster": "Spider Demons",
+     "chapter": "Ch. 72–73",
+     "x_motivation": 3,
+     "y_resource": 3,
+     "quadrant": "left_bottom",
+     "motivation_analysis": "Cannibalism to extend life · hold the mountain as their own",
+     "resource_analysis": "Seven sisters on their own · no backing",
+     "outcome": "Killed",
+     "author_strategy": "Shows the collective fate of female rootless villains"
+    },
+    {
+     "monster": "Nine-Headed Bug",
+     "chapter": "Ch. 62–63",
+     "x_motivation": 4,
+     "y_resource": 5,
+     "quadrant": "left_bottom",
+     "motivation_analysis": "Steals the Buddha's relic · profit-driven",
+     "resource_analysis": "Consort of Bibo Lake · has demon followers",
+     "outcome": "Fled to the North Sea after Erlang Shen bit off one of its heads",
+     "author_strategy": "A rare escape case · leaves room for a sequel"
+    },
+    {
+     "monster": "Green-Maned Lion Demon",
+     "chapter": "Ch. 74–77",
+     "x_motivation": 5,
+     "y_resource": 8,
+     "quadrant": "right_top",
+     "motivation_analysis": "Impersonates the King of Crow-Rooster · usurps the throne",
+     "resource_analysis": "Manjushri's mount",
+     "outcome": "Reclaimed by Manjushri",
+     "author_strategy": "Shows the usurpation template of a bodhisattva's mount"
+    },
+    {
+     "monster": "Rat Demon",
+     "chapter": "Ch. 80–83",
+     "x_motivation": 5,
+     "y_resource": 7,
+     "quadrant": "right_top",
+     "motivation_analysis": "Abducts Tang Sanzang to be her husband · desire",
+     "resource_analysis": "Adopted daughter of Heavenly King Li · the Bottomless Cave of Sunken Void Mountain",
+     "outcome": "Reclaimed by Heavenly King Li and his sons",
+     "author_strategy": "Shows the protective role of kinship-based affiliation"
+    },
+    {
+     "monster": "Bear Mountain Lord",
+     "chapter": "Ch. 13",
+     "x_motivation": 2,
+     "y_resource": 2,
+     "quadrant": "left_bottom",
+     "motivation_analysis": "Cannibal instinct · waylays at Twin-Fork Ridge",
+     "resource_analysis": "A mountain demon · partners with General Tiger",
+     "outcome": "Killed",
+     "author_strategy": "Early cannon fodder for the pilgrimage party · foreshadows the need for a team"
+    },
+    {
+     "monster": "General Tiger",
+     "chapter": "Ch. 13",
+     "x_motivation": 2,
+     "y_resource": 2,
+     "quadrant": "left_bottom",
+     "motivation_analysis": "Cannibal instinct · waylays at Twin-Fork Ridge",
+     "resource_analysis": "A mountain tiger demon · partners with Bear Mountain Lord",
+     "outcome": "Killed",
+     "author_strategy": "Early cannon fodder for the pilgrimage party · rescued by Taibai Jinxing"
+    }
+   ],
+   "matrix_insights": [
+    "Bottom-left holds 40% · all killed or driven to flee — <strong>the fate of rootless cannon fodder</strong>",
+    "Top-right holds 47% · all reclaimed by their patrons — <strong>the affiliation-as-amulet effect</strong>",
+    "Top-left has just 1 case (Great Peng, the Golden-Winged Roc) · taken in by senior Buddhists — <strong>the submission logic of a top-tier villain</strong>",
+    "Bottom-right has just 1 case (Six-Eared Macaque) · the lone example of an <strong>inner-demon villain</strong>",
+    "Affiliation decides fate — this is the <strong>underlying law</strong> of the book's villain evaluation"
+   ]
+  },
+  "rescue_roi": {
+   "analysis_name": "Return on Investment of Calling for Reinforcements",
+   "formula": "ROI = (Problem-solving efficiency × Favor spent × Marginal cost of the next request) / (Time spent × Reputation loss)",
+   "components": [
+    {
+     "key": "efficiency",
+     "name": "Problem-solving efficiency",
+     "range": "0-10",
+     "description": "How efficiently the reinforcements dispatch the demon · 10=instant kill · 1=long back-and-forth",
+     "type": "numerator"
+    },
+    {
+     "key": "favor_cost",
+     "name": "Favor spent",
+     "range": "0-10",
+     "description": "The scale of favors drawn on · 10=a top bodhisattva or celestial in person · 1=minor deities",
+     "type": "numerator"
+    },
+    {
+     "key": "marginal_cost",
+     "name": "Marginal cost of next request",
+     "range": "0-10",
+     "description": "Prospects for long-term cooperation · 10=sustainable requests · 1=one-off expenditure",
+     "type": "numerator"
+    },
+    {
+     "key": "time_cost",
+     "name": "Time spent",
+     "range": "0-10",
+     "description": "The time cost from deciding to ask for help to resolving the problem · 10=extremely long · 1=instant",
+     "type": "denominator"
+    },
+    {
+     "key": "reputation_loss",
+     "name": "Reputation loss",
+     "range": "0-10",
+     "description": "How much asking for help damages one's prestige · 10=severe loss · 1=none",
+     "type": "denominator"
+    }
+   ],
+   "rescue_cases": [
+    {
+     "n": 1,
+     "monster": "Black Bear Demon",
+     "chapter": "Ch. 17",
+     "rescuer": "Guanyin",
+     "rescue_phase": "Early · instinctive",
+     "components": {
+      "efficiency": 8,
+      "favor_cost": 9,
+      "marginal_cost": 4,
+      "time_cost": 8,
+      "reputation_loss": 9
+     },
+     "roi_score": 2.4,
+     "roi_interpretation": "Deploying Guanyin in person was too costly · severe loss of prestige",
+     "analysis": "The very first request for reinforcements summoned Guanyin in person · highly efficient but extremely costly · and Guanyin became a standing dependency thereafter."
+    },
+    {
+     "n": 2,
+     "monster": "Yellow Wind Demon",
+     "chapter": "Ch. 21",
+     "rescuer": "Lingji",
+     "rescue_phase": "Early · instinctive",
+     "components": {
+      "efficiency": 9,
+      "favor_cost": 4,
+      "marginal_cost": 7,
+      "time_cost": 3,
+      "reputation_loss": 3
+     },
+     "roi_score": 5.25,
+     "roi_interpretation": "The right remedy · a small cost solves a big problem",
+     "analysis": "Bodhisattva Lingji is the specific counter to Yellow Wind · the right remedy · low time cost and small reputation loss · the highest ROI."
+    },
+    {
+     "n": 3,
+     "monster": "Red Boy",
+     "chapter": "Ch. 42",
+     "rescuer": "Guanyin",
+     "rescue_phase": "Middle · learning",
+     "components": {
+      "efficiency": 9,
+      "favor_cost": 8,
+      "marginal_cost": 6,
+      "time_cost": 5,
+      "reputation_loss": 5
+     },
+     "roi_score": 4.17,
+     "roi_interpretation": "First proactive request to Guanyin · establishes long-term cooperation",
+     "analysis": "Wukong learns to ask for help proactively · Guanyin takes Red Boy as the Boy of Good Wealth · a long-term partnership is built."
+    },
+    {
+     "n": 4,
+     "monster": "Green Ox Demon",
+     "chapter": "Ch. 52",
+     "rescuer": "Laojun",
+     "rescue_phase": "Middle · learning",
+     "components": {
+      "efficiency": 7,
+      "favor_cost": 10,
+      "marginal_cost": 3,
+      "time_cost": 9,
+      "reputation_loss": 8
+     },
+     "roi_score": 2.68,
+     "roi_interpretation": "Deploys top-tier resources to handle Laojun's own mount",
+     "analysis": "The Diamond Snare stole every deity's weapon · ultimately Laojun had to descend in person · severe loss of prestige."
+    },
+    {
+     "n": 5,
+     "monster": "Scorpion Demon",
+     "chapter": "Ch. 55",
+     "rescuer": "Mao Sun Star Officer",
+     "rescue_phase": "Middle · learning",
+     "components": {
+      "efficiency": 8,
+      "favor_cost": 5,
+      "marginal_cost": 7,
+      "time_cost": 4,
+      "reputation_loss": 5
+     },
+     "roi_score": 3.5,
+     "roi_interpretation": "Five-Phase countering · precise matching",
+     "analysis": "Guanyin points the way · the Mao Sun Star Officer's rooster conquers the scorpion · precise Five-Phase matching."
+    },
+    {
+     "n": 6,
+     "monster": "Bull Demon King",
+     "chapter": "Ch. 61",
+     "rescuer": "Nezha + heavenly troops",
+     "rescue_phase": "Middle · learning",
+     "components": {
+      "efficiency": 7,
+      "favor_cost": 10,
+      "marginal_cost": 2,
+      "time_cost": 10,
+      "reputation_loss": 9
+     },
+     "roi_score": 1.8,
+     "roi_interpretation": "Old friends turned foes · heavenly siege · the highest cost",
+     "analysis": "Three attempts at the Plantain Fan plus a heavenly siege · old friends turned foes · the longest time and greatest prestige loss."
+    },
+    {
+     "n": 7,
+     "monster": "Yellow-Browed Demon",
+     "chapter": "Ch. 66",
+     "rescuer": "Maitreya",
+     "rescue_phase": "Late · actuary",
+     "components": {
+      "efficiency": 8,
+      "favor_cost": 8,
+      "marginal_cost": 5,
+      "time_cost": 5,
+      "reputation_loss": 5
+     },
+     "roi_score": 3.75,
+     "roi_interpretation": "An internal Buddhist matter · handled in a closed loop",
+     "analysis": "Maitreya Buddha came in person to reclaim him · handled internally within the Buddhist camp · Wukong learns to find the right person."
+    },
+    {
+     "n": 8,
+     "monster": "The Three Demons of Lion-Camel Ridge",
+     "chapter": "Ch. 77",
+     "rescuer": "the Tathagata",
+     "rescue_phase": "Late · actuary",
+     "components": {
+      "efficiency": 10,
+      "favor_cost": 9,
+      "marginal_cost": 5,
+      "time_cost": 2,
+      "reputation_loss": 4
+     },
+     "roi_score": 5,
+     "roi_interpretation": "Top-tier resources resolve a top-tier crisis · extremely efficient",
+     "analysis": "Tathagata Buddha came in person · all three demons were taken · the most efficient solution to a top-tier crisis."
+    },
+    {
+     "n": 9,
+     "monster": "Rat Demon",
+     "chapter": "Ch. 83",
+     "rescuer": "Heavenly King Li",
+     "rescue_phase": "Late · actuary",
+     "components": {
+      "efficiency": 8,
+      "favor_cost": 7,
+      "marginal_cost": 6,
+      "time_cost": 5,
+      "reputation_loss": 5
+     },
+     "roi_score": 3.33,
+     "roi_interpretation": "An adopted daughter returns to her father · a heavenly family matter",
+     "analysis": "Heavenly King Li's adopted daughter returns to her father · a classic case of kinship-based affiliation."
+    },
+    {
+     "n": 10,
+     "monster": "Nine-Headed Lion",
+     "chapter": "Ch. 90",
+     "rescuer": "Taiyi",
+     "rescue_phase": "Late · actuary",
+     "components": {
+      "efficiency": 9,
+      "favor_cost": 7,
+      "marginal_cost": 6,
+      "time_cost": 4,
+      "reputation_loss": 6
+     },
+     "roi_score": 3.33,
+     "roi_interpretation": "Nine-Headed Lion answers his master's call · no resistance",
+     "analysis": "One call from Taiyi the Merciful Celestial and he submits · no resistance · high efficiency."
+    }
+   ],
+   "phase_analysis": [
+    {
+     "phase": "Early · instinctive",
+     "chapter_range": "Ch. 13–22",
+     "characteristic": "Fight first, ask only when losing",
+     "avg_roi": 3.83,
+     "rescue_count": 2,
+     "insight": "Instinctive requests · draws on top-tier resources but with weak cost awareness"
+    },
+    {
+     "phase": "Middle · learning",
+     "chapter_range": "Ch. 40–61",
+     "characteristic": "Begins precise matching · but still has costly cases",
+     "avg_roi": 3.04,
+     "rescue_count": 4,
+     "insight": "Learning requests · starts calculating ROI but is not yet adept"
+    },
+    {
+     "phase": "Late · actuary",
+     "chapter_range": "Ch. 65–90",
+     "characteristic": "The right remedy · stable ROI",
+     "avg_roi": 3.85,
+     "rescue_count": 4,
+     "insight": "Actuary-style requests · stable ROI · mature resource management"
+    }
+   ],
+   "roi_insights": [
+    "<strong>The Yellow Wind Demon case</strong> proves: the right remedy beats resource rank · even a minor bodhisattva can instantly dispatch a great demon",
+    "<strong>The Bull Demon King case</strong> proves: old friends turned foes + a heavenly siege = the highest cost · the emotional cost is the dearest",
+    "<strong>A late-stage ROI rebound</strong>: Wukong rises from 1.8 (Bull Demon King) to 5.0 (Lion-Camel Ridge) as he learns to calculate",
+    "<strong>Guanyin becomes the standing rescuer</strong>: diminishing marginal cost · first 2.4 → second 4.17 → third outright recruitment",
+    "<strong>The Lion-Camel Ridge case</strong>: a top-tier crisis + top-tier reinforcements = peak efficiency · the Tathagata arrives in person and instantly takes all three demons"
+   ],
+   "application_scenarios": [
+    {
+     "scenario": "Harry Potter",
+     "icon": "⚡",
+     "description": "Harry's <strong>Dumbledore help-seeking pattern</strong>: every problem requires the headmaster himself, but after his death Harry must face Voldemort alone. ROI starts at its peak and ends at zero."
+    },
+    {
+     "scenario": "The Lord of the Rings",
+     "icon": "💍",
+     "description": "Frodo's <strong>Gandalf help-seeking pattern</strong>: Gandalf intervenes only at critical moments, and Frodo must complete the main task on his own. The most balanced ROI."
+    },
+    {
+     "scenario": "Workplace · managing up",
+     "icon": "💼",
+     "description": "<strong>Managing upward resources</strong>: precisely match problems to a superior's domain of competence, avoid deploying top-tier resources on small problems, and build a sustainable help-seeking relationship."
+    },
+    {
+     "scenario": "Startup · investor support",
+     "icon": "🚀",
+     "description": "<strong>Seeking investor support</strong>: early investors retain value in later rounds, and long-term partnership beats a one-off ask · diminishing marginal cost."
+    }
+   ]
+  },
+  "summary": {
+   "villain_count": 15,
+   "quadrant_count": 4,
+   "left_bottom_count": 6,
+   "right_top_count": 7,
+   "rescue_cases": 10,
+   "avg_roi": 3.52,
+   "max_roi": 5.25
+  }
+ },
+ "chart": {
+  "domino_causality": {
+   "design_name": "Eighty-One Hardships Causal Domino Array",
+   "design_principle": "Not arranged in chronological order · linked by butterfly effect · each fallen domino triggers the next · forming a complete causal chain",
+   "core_insight": "The whole pilgrimage project is a precisely designed 'causal machine'",
+   "domino_chains": [
+    {
+     "chain_id": "C1",
+     "chain_name": "The Kasaya Incident Chain · The Birth of the Golden Fillet Spell",
+     "dominos": [
+      {
+       "n": 1,
+       "title": "Elder Jinchi Covets the Kasaya",
+       "hardship": "The Lost Kasaya",
+       "chapter": "Ch. 16",
+       "direct_cause": "Elder Jinchi covets the kasaya and sets fire to the monastery",
+       "domino_effect": "Guanyin subdues the Black Bear Spirit and obtains field-test data for the Golden Fillet Spell"
+      },
+      {
+       "n": 2,
+       "title": "Guanyin Subdues the Black Bear Spirit",
+       "hardship": "—",
+       "chapter": "Ch. 17",
+       "direct_cause": "Wukong seeks Guanyin's help; Guanyin subdues the Black Bear Spirit with the Golden Fillet Spell",
+       "domino_effect": "Provides the basis for the Tight-Fillet Spell's later effectiveness, proving the Golden Fillet Spell can control demons"
+      },
+      {
+       "n": 3,
+       "title": "The Tight-Fillet Spell Controls Wukong",
+       "hardship": "The Banished Mind-Monkey",
+       "chapter": "Ch. 27",
+       "direct_cause": "Tang Sanzang uses the Tight-Fillet Spell to control and dismiss Wukong",
+       "domino_effect": "After Wukong is dismissed, Tang Sanzang meets the Yellow-Robed Monster and falls into danger"
+      },
+      {
+       "n": 4,
+       "title": "The Yellow-Robed Monster Incident",
+       "hardship": "The Letter to Precious Elephant Kingdom · The Tiger in the Golden Throne Hall",
+       "chapter": "Ch. 28-30",
+       "direct_cause": "Tang Sanzang is captured by the Yellow-Robed Monster; Zhu Bajie goes to Flower-Fruit Mountain to bring Wukong back",
+       "domino_effect": "Wukong returns; the team establishes a new power balance; the Tight-Fillet Spell becomes Wukong's 'contract'"
+      }
+     ],
+     "chain_insight": "A single moment of greed by Elder Jinchi ultimately shaped the pilgrimage team's core management tool"
+    },
+    {
+     "chain_id": "C2",
+     "chain_name": "The Wuzhuang Temple Incident Chain · The Daoist-Buddhist Alliance",
+     "dominos": [
+      {
+       "n": 1,
+       "title": "Wukong Topples the Ginseng Fruit Tree",
+       "hardship": "In Wuzhuang Temple · The Ginseng That Is Hard to Revive",
+       "chapter": "Ch. 24-26",
+       "direct_cause": "Goaded by Bajie, Wukong topples the Ginseng Fruit Tree",
+       "domino_effect": "Zhenyuanzi detains Tang Sanzang; Wukong seeks Guanyin to heal the tree"
+      },
+      {
+       "n": 2,
+       "title": "Guanyin Revives the Ginseng Fruit Tree",
+       "hardship": "—",
+       "chapter": "Ch. 26",
+       "direct_cause": "Guanyin revives the Ginseng Fruit Tree with sweet-dew water",
+       "domino_effect": "Zhenyuanzi and Wukong become sworn brothers; the Daoists and Buddhists form a formal alliance"
+      },
+      {
+       "n": 3,
+       "title": "Zhenyuanzi Forms an Alliance",
+       "hardship": "—",
+       "chapter": "Ch. 26",
+       "direct_cause": "Zhenyuanzi and Wukong become sworn brothers",
+       "domino_effect": "Lays the foundation for later Daoist support of the pilgrimage project; the Daoists assist in the Crow-cock Kingdom incident"
+      }
+     ],
+     "chain_insight": "A childish prank ultimately forged a strategic alliance between Daoism and Buddhism"
+    },
+    {
+     "chain_id": "C3",
+     "chain_name": "The Red Boy Incident Chain · Guanyin's Expanding Influence",
+     "dominos": [
+      {
+       "n": 1,
+       "title": "Red Boy Seizes Tang Sanzang",
+       "hardship": "The Monster at Mount Hao · The Mind-Monkey Harmed",
+       "chapter": "Ch. 40-42",
+       "direct_cause": "Hearing that Tang Sanzang's flesh grants immortality, Red Boy captures him",
+       "domino_effect": "Wukong seeks Guanyin; Guanyin takes Red Boy as the Boy of Good Wealth"
+      },
+      {
+       "n": 2,
+       "title": "Guanyin Subdues Red Boy",
+       "hardship": "—",
+       "chapter": "Ch. 42",
+       "direct_cause": "Guanyin subdues Red Boy with the lotus platform and the Golden Fillet Spell",
+       "domino_effect": "Guanyin's influence extends to Fiery Cloud Cave, and then to 600 li of Mount Hao"
+      },
+      {
+       "n": 3,
+       "title": "Guanyin's Lotus Pond Expands",
+       "hardship": "—",
+       "chapter": "—",
+       "direct_cause": "Red Boy is taken as the Boy of Good Wealth; Mount Hao is brought into Guanyin's sphere of influence",
+       "domino_effect": "Foreshadows the later Goldfish Spirit incident at Tongtian River (the Goldfish Spirit escaped from Guanyin's lotus pond)"
+      }
+     ],
+     "chain_insight": "A single demon attack ultimately gave Guanyin the opportunity to expand her influence"
+    },
+    {
+     "chain_id": "C4",
+     "chain_name": "The Six-Eared Macaque Incident Chain · Discerning True from False",
+     "dominos": [
+      {
+       "n": 1,
+       "title": "Wukong Is Dismissed Again",
+       "hardship": "—",
+       "chapter": "Ch. 56-58",
+       "direct_cause": "Wukong kills the bandits; Tang Sanzang dismisses Wukong again",
+       "domino_effect": "Wukong harbors resentment; the Six-Eared Macaque seizes the opening"
+      },
+      {
+       "n": 2,
+       "title": "The Six-Eared Macaque Appears",
+       "hardship": "—",
+       "chapter": "Ch. 58",
+       "direct_cause": "The Six-Eared Macaque impersonates Wukong, wounds Tang Sanzang, and steals the luggage",
+       "domino_effect": "The true-and-false Monkey King incident; even Diting cannot tell them apart, and the Buddha finally exposes the impostor"
+      },
+      {
+       "n": 3,
+       "title": "The Buddha Exposes the Six-Eared Macaque",
+       "hardship": "—",
+       "chapter": "Ch. 58",
+       "direct_cause": "The Buddha exposes the Six-Eared Macaque, and Wukong kills him with a single blow",
+       "domino_effect": "Wukong's inner demon is eliminated; he is never dismissed again, and team relations stabilize"
+      }
+     ],
+     "chain_insight": "The Six-Eared Macaque is Wukong's inner demon; after his death, the pilgrimage team enters a new phase of the 'mind-monkey returning to order'"
+    },
+    {
+     "chain_id": "C5",
+     "chain_name": "The Lion-Camel Ridge Incident Chain · The Buddhist-Daoist Contest",
+     "dominos": [
+      {
+       "n": 1,
+       "title": "The Green Lion Spirit Swallows Wukong",
+       "hardship": "Lion-Camel Ridge",
+       "chapter": "Ch. 74-77",
+       "direct_cause": "The Green Lion Spirit swallows Wukong, who wreaks havoc inside his belly",
+       "domino_effect": "The three demons attack the pilgrimage team with full force; Wukong seeks the Buddha's help"
+      },
+      {
+       "n": 2,
+       "title": "The Buddha Comes in Person to Subdue the Demons",
+       "hardship": "—",
+       "chapter": "Ch. 77",
+       "direct_cause": "The Great Peng Golden-Winged Eagle is the Buddha's uncle, so the Buddha comes in person to subdue it",
+       "domino_effect": "Manjushri and Samantabhadra take back the Green Lion and White Elephant; the Buddha captures the Great Peng; the Buddhist faction wins a great victory"
+      },
+      {
+       "n": 3,
+       "title": "The Buddhist Faction Expands",
+       "hardship": "—",
+       "chapter": "—",
+       "direct_cause": "The three demons of Lion-Camel Ridge are subdued; the Buddhist faction takes over Lion-Camel Ridge",
+       "domino_effect": "Foreshadows later Buddhist events such as the Kingdom of Dharma-Destruction and the Bhikshu Kingdom"
+      }
+     ],
+     "chain_insight": "The Battle of Lion-Camel Ridge let the Buddhist faction thoroughly suppress the Daoists, laying the foundation for Lingshan to take over the Western Cattle-Gift Continent"
+    }
+   ],
+   "total_chains": 5,
+   "total_dominos": 16,
+   "design_innovation": "The chart is itself an installation · information flow equals physical linkage"
+  },
+  "spiral_progress": {
+   "design_name": "Spiral Mind-Cultivation Progress Bar",
+   "design_principle": "An Archimedean spiral · the center is departure, the outer ring is Buddhahood · each turn represents a stage of mind-cultivation · the trajectory offset shows mind fluctuation",
+   "core_insight": "Transforms the abstract concept of the 'unsettled mind-monkey and galloping ideas' into a quantifiable visual trajectory",
+   "spiral_stages": [
+    {
+     "stage_id": "S1",
+     "stage_name": "Departure · The Mind-Monkey First Stirs",
+     "chapter_range": "Ch. 1-13",
+     "loop_number": 1,
+     "wukong_emotion": "Restless · Untamed",
+     "tang_monk_emotion": "Devout · Cautious",
+     "wukong_offset": 0.8,
+     "tang_monk_offset": 0.2,
+     "key_events": [
+      "Beneath Five Elements Mountain · Taking Refuge in Buddhism",
+      "Taking the White Dragon Horse",
+      "Taking Bajie and Sha Wujing"
+     ],
+     "stage_summary": "Wukong begins to rein in his nature, but his untamed spirit remains"
+    },
+    {
+     "stage_id": "S2",
+     "stage_name": "Storm · Mind-Monkey and Galloping Ideas",
+     "chapter_range": "Ch. 14-30",
+     "loop_number": 2,
+     "wukong_emotion": "Fury · Arrogance",
+     "tang_monk_emotion": "Disappointment · Vacillation",
+     "wukong_offset": 1.5,
+     "tang_monk_offset": 0.4,
+     "key_events": [
+      "Three Strikes at the White Bone Spirit · Dismissed",
+      "Yellow-Robed Monster Incident · Return"
+     ],
+     "stage_summary": "Wukong is dismissed; his mind fluctuates violently — one of the spiral's greatest offset points"
+    },
+    {
+     "stage_id": "S3",
+     "stage_name": "Discipline · The Mind-Monkey Settles",
+     "chapter_range": "Ch. 31-58",
+     "loop_number": 3,
+     "wukong_emotion": "Restraint · Prudence",
+     "tang_monk_emotion": "Trust · Stability",
+     "wukong_offset": 0.6,
+     "tang_monk_offset": 0.3,
+     "key_events": [
+      "The Red Boy Incident",
+      "The Contest of Magic in Cart-Slow Kingdom",
+      "The True-and-False Monkey King"
+     ],
+     "stage_summary": "After the Six-Eared Macaque is killed, Wukong's inner demon is eliminated and his mind stabilizes"
+    },
+    {
+     "stage_id": "S4",
+     "stage_name": "Maturity · The Mind-Monkey Returns to Order",
+     "chapter_range": "Ch. 59-77",
+     "loop_number": 4,
+     "wukong_emotion": "Serenity · Wisdom",
+     "tang_monk_emotion": "Reliance · Serenity",
+     "wukong_offset": 0.3,
+     "tang_monk_offset": 0.2,
+     "key_events": [
+      "Borrowing the Fan at Flaming Mountain",
+      "The Great Battle of Lion-Camel Ridge",
+      "Saving the Children in Bhikshu Kingdom"
+     ],
+     "stage_summary": "Wukong's mind tends toward serenity; the team enters its best state"
+    },
+    {
+     "stage_id": "S5",
+     "stage_name": "Realization · The Mind-Monkey Attains Buddhahood",
+     "chapter_range": "Ch. 78-100",
+     "loop_number": 5,
+     "wukong_emotion": "Perfection · Enlightenment",
+     "tang_monk_emotion": "Perfection · Enlightenment",
+     "wukong_offset": 0.1,
+     "tang_monk_offset": 0.1,
+     "key_events": [
+      "The Rat Spirit of Bottomless Cave",
+      "Passing on Arts in Yuhua Prefecture",
+      "Shedding the Mortal Body at Lingyun Ferry · Attaining Buddhahood"
+     ],
+     "stage_summary": "Master and disciples all attain the right fruit; the spiral reaches its outermost ring and the mind returns to zero"
+    }
+   ],
+   "max_offset_wukong": 1.5,
+   "max_offset_tang": 0.4,
+   "design_innovation": "A fusion of ECG and mandala · minimalist black-and-white lines with plot symbols dotted along the spiral"
+  },
+  "monster_clock": {
+   "design_name": "The Demon Twelve Double-Hours Sandtable",
+   "design_principle": "A circular sundial chart · the rim shows the twelve double-hours, the inner ring the demon's daily time allocation · each demon's schedule differs",
+   "core_insight": "Reads villain strategy through 'time budgets', revealing the 'involution' of low-ranking demons and the 'sense of ease' of well-connected demons",
+   "twelve_hours": [
+    {
+     "hour": "Zi(23-1)",
+     "activity_general": "Cultivation · Meditation"
+    },
+    {
+     "hour": "Chou(1-3)",
+     "activity_general": "Deep Cultivation"
+    },
+    {
+     "hour": "Yin(3-5)",
+     "activity_general": "Morning Cultivation · Breathing Exercises"
+    },
+    {
+     "hour": "Mao(5-7)",
+     "activity_general": "Breakfast · Council"
+    },
+    {
+     "hour": "Chen(7-9)",
+     "activity_general": "Training Minor Demons"
+    },
+    {
+     "hour": "Si(9-11)",
+     "activity_general": "Mountain Patrol · Reconnaissance"
+    },
+    {
+     "hour": "Wu(11-13)",
+     "activity_general": "Noon Rest · Banquet"
+    },
+    {
+     "hour": "Wei(13-15)",
+     "activity_general": "Council · Planning"
+    },
+    {
+     "hour": "Shen(15-17)",
+     "activity_general": "Deployment · Positioning"
+    },
+    {
+     "hour": "You(17-19)",
+     "activity_general": "Banquet · Pleasure"
+    },
+    {
+     "hour": "Xu(19-21)",
+     "activity_general": "Night Watch · Guard Duty"
+    },
+    {
+     "hour": "Hai(21-23)",
+     "activity_general": "Door Broken by Wukong · Battle"
+    }
+   ],
+   "monster_schedules": [
+    {
+     "monster": "White Bone Spirit",
+     "category": "Wild Monster · Low-Ranking Demon",
+     "background": "No Backing",
+     "resource": "No Magic Treasure · No Minor Demons",
+     "schedule": {
+      "Zi": "Disguise Practice",
+      "Chou": "Disguise Practice",
+      "Yin": "Scouting Tang Sanzang's Movements",
+      "Mao": "Devising a Disguise Plan",
+      "Chen": "Waiting for an Opportunity",
+      "Si": "Disguising as a Maiden",
+      "Wu": "Luring Tang Sanzang",
+      "Wei": "Failure · Retreat",
+      "Shen": "Disguising Again",
+      "You": "Disguising as an Old Woman",
+      "Xu": "Failing Again",
+      "Hai": "Disguising as an Old Man · Killed by Wukong"
+     },
+     "stress_index": 9.5,
+     "ease_index": 1,
+     "analysis": "White Bone Spirit's schedule is all reconnaissance, disguise, and waiting — with extremely high opportunity cost, the typical 'involution' of a low-ranking demon"
+    },
+    {
+     "monster": "Green Ox Spirit",
+     "category": "A Mount Descended to Earth · Well-Connected Demon",
+     "background": "Taishang Laojun's Mount",
+     "resource": "The Diamond Bracelet · Held Exclusively",
+     "schedule": {
+      "Zi": "Drinking Tea",
+      "Chou": "Sleeping",
+      "Yin": "Sleeping",
+      "Mao": "Morning Tea",
+      "Chen": "Training Minor Demons",
+      "Si": "Mountain Patrol (delegated to minor demons)",
+      "Wu": "Banquet · Eating Mortals",
+      "Wei": "Tea · Chess",
+      "Shen": "Collecting Tribute from the Mortal World",
+      "You": "Banquet · Eating Mortals",
+      "Xu": "Sleeping",
+      "Hai": "Sleeping · Just Toss the Bracelet"
+     },
+     "stress_index": 2,
+     "ease_index": 9.5,
+     "analysis": "Green Ox Spirit spends most of its time drinking tea, playing chess, and sleeping — just toss the bracelet and it's done, the typical 'sense of ease' of a well-connected demon"
+    },
+    {
+     "monster": "Yellow-Robed Monster",
+     "category": "A Heavenly General Descended to Earth · Well-Connected Demon",
+     "background": "Kui Wood Wolf of the Twenty-Eight Constellations",
+     "resource": "Heavenly General's Magic · Internal Elixir",
+     "schedule": {
+      "Zi": "Cultivation · Breathing",
+      "Chou": "Cultivation · Breathing",
+      "Yin": "Cultivation · Breathing",
+      "Mao": "Rising · Time with Baihuaxiu",
+      "Chen": "Training Minor Demons",
+      "Si": "Mountain Patrol",
+      "Wu": "Banquet · Eating Palace Maids",
+      "Wei": "Council · Consulting Minor Demons",
+      "Shen": "Deploying Defenses · Setting Checkpoints",
+      "You": "Banquet · Eating Palace Maids",
+      "Xu": "Night Watch",
+      "Hai": "Door Broken by Wukong · Battle"
+     },
+     "stress_index": 5,
+     "ease_index": 6.5,
+     "analysis": "The Yellow-Robed Monster is a heavenly general descended to earth; life is relatively leisurely, but its heavenly connections remain — relatively relaxed"
+    },
+    {
+     "monster": "Red Boy",
+     "category": "A Demon Aristocrat · Well-Connected Demon",
+     "background": "Son of the Bull Demon King and Princess Iron Fan",
+     "resource": "Samadhi True Fire · Fiery-Cloud Spear",
+     "schedule": {
+      "Zi": "Cultivating Samadhi True Fire",
+      "Chou": "Cultivating Samadhi True Fire",
+      "Yin": "Rising · Training",
+      "Mao": "Breakfast · Eating Mortal Children",
+      "Chen": "Training Minor Demons",
+      "Si": "Mountain Patrol · Scouting Tang Sanzang",
+      "Wu": "Banquet · Eating Children",
+      "Wei": "Council · Planning to Capture Tang Sanzang",
+      "Shen": "Carrying Out the Capture Plan",
+      "You": "Eating Tang Sanzang's Flesh (Failed)",
+      "Xu": "Subdued by Guanyin",
+      "Hai": "—"
+     },
+     "stress_index": 7,
+     "ease_index": 5,
+     "analysis": "Red Boy is a scion of a demon clan; life is relatively leisurely, but with parents absent it must operate independently — relatively tense"
+    },
+    {
+     "monster": "Six-Eared Macaque",
+     "category": "Inner Demon · Formless Demon",
+     "background": "Wukong's Inner-Demon Incarnation",
+     "resource": "Seventy-Two Transformations · Fake Golden-Banded Staff",
+     "schedule": {
+      "Zi": "Disguising as Wukong",
+      "Chou": "Disguising as Wukong",
+      "Yin": "Disguising as Wukong",
+      "Mao": "Wounding Tang Sanzang · Stealing Luggage",
+      "Chen": "Building a Fake Flower-Fruit Mountain",
+      "Si": "Recruiting Troops · Taking Fake Minor Demons",
+      "Wu": "Setting Up a Fake Pilgrimage Team",
+      "Wei": "Exposed by Diting · Fleeing",
+      "Shen": "Seeking the Buddha's Help · Exposed",
+      "You": "Killed by Wukong",
+      "Xu": "—",
+      "Hai": "—"
+     },
+     "stress_index": 9,
+     "ease_index": 2,
+     "analysis": "The Six-Eared Macaque's schedule is all disguise, flight, and survival — the typical 'involution' of an 'impersonator' demon"
+    },
+    {
+     "monster": "Great Peng Golden-Winged Eagle",
+     "category": "Buddhist Backing · Well-Connected Demon",
+     "background": "The Buddha's Uncle",
+     "resource": "The Yin-Yang Two-Qi Vase · Buddhist Backing",
+     "schedule": {
+      "Zi": "Council · Consulting the Green Lion and White Elephant",
+      "Chou": "Sleeping",
+      "Yin": "Sleeping",
+      "Mao": "Rising · Eating People",
+      "Chen": "Training Demon Soldiers",
+      "Si": "Mountain Patrol · Scouting the Pilgrimage Team",
+      "Wu": "Banquet · Eating People",
+      "Wei": "Council",
+      "Shen": "Deployment · Setting Traps",
+      "You": "Banquet · Eating People",
+      "Xu": "Night Watch",
+      "Hai": "Subdued by the Buddha"
+     },
+     "stress_index": 4,
+     "ease_index": 8,
+     "analysis": "With the Buddha as its uncle, the Great Peng Golden-Winged Eagle lives extremely leisurely — eating people is routine, until the Buddha arrives in person"
+    }
+   ],
+   "design_innovation": "Reads villain strategy through 'time budgets', revealing the 'involution' of low-ranking demons and the 'sense of ease' of well-connected demons"
+  },
+  "summary": {
+   "domino_chains": 5,
+   "domino_total": 16,
+   "spiral_stages": 5,
+   "max_wukong_offset": 1.5,
+   "max_tang_offset": 0.4,
+   "monster_schedules": 6,
+   "avg_stress": 6.08,
+   "avg_ease": 5.33,
+   "most_stressed": "White Bone Spirit",
+   "most_ease": "Green Ox Spirit"
+  }
+ }
+}
