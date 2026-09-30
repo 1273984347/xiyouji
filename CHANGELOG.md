@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W633），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W634），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.234（2026-09-30）：W634 外部路线图保真度裁决入档 — 40+ Issue 提案逐条取证（P0 13 项：8 完成/3 大半/2 增量·第四份 W575 时代旧快照审读）·5 项真增量登记维护态 Backlog（RSS/CodeQL/CoC/Three.js 懒加载/实体字段扩展·登记不开工·重启触发）
+> **来源**：用户提入外部「项目优化路线图」（P0/P1/P2 40+ Issue playbook）——逐条对仓库取证后用户裁决采纳建议：**不建 40 个 Issue，仅登记 5 项真增量**（登记≠开工）。
+> - **裁决结论**：路线图快照停在 W575 时代（本日第四份旧快照审读·提案 ~80% 重复或倒退）——P0 13 项：8 项已完成或被超越（死链双门禁/a11y 6 矩阵/LHCI 预算/设计 token 体系/SEO 五项+第 26 门禁/CITATION+CONTRIBUTING/暗色全链/Pagefind 被 W573 零外域检索超越）、3 项大半完成（**A1 chapter-meta 100/100 已内嵌结构化元数据**——外部「补 frontmatter」P0 实为大半完成/JSON Schema 有漂移+一致性门禁等价/Three.js 有独立预算缺懒加载）、2 项真增量（markdownlint/CODE_OF_CONDUCT）。
+> - **Backlog 登记（docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md·五项含执行要点·登记不开工）**：B-1 RSS（仿 gen_sitemap）；B-2 CodeQL（security.yml）；B-3 CODE_OF_CONDUCT（微）；B-4 Three.js 懒加载+静态回退（4 页·LHCI 3D 预算复验）；B-5 A1 chapter-meta 扩 monsters/treasures/themes/related + entities.json 聚合器（**属内容标注·须归档解除或用户点名**；聚合器可先行）。
+> - **已否决不再议**：社区/众包/商业化（在先裁决）·内容扩容类（W626 归档冻结）·Astro/云迁移（file:// 与零外域铁律）。
+> - **验证**：backlog 档案入库且五项均含执行要点与量级；无代码改动·verify_delivery 核心全绿。
+> - **文件**：docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md（新增）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 ### v2.3.233（2026-09-30）：W633 CI ruff 红灯热修复 — W631 落库两脚本文件尾缺换行（W292×2·09-27 会话保存缺陷随落库带入·落库前 lint 漏项教训）·check_citations/line_check 补尾换行
 > **来源**：W632 推送后 CI Code Quality (ruff) failure 取证——W292×2（No newline at end of file）：check_citations.py/audit/line_check.py 文件尾缺换行，系 09-27 会话保存缺陷、随 W631 落库带入 CI；**W631 落库前自测跑了、lint 漏了**（收尾七步②执行不完整——落库既有改动也须过 ruff）。
 > - **修复**：两文件补尾换行（ruff --fix 同款）；`ruff check scripts/` 全量绿。
