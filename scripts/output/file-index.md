@@ -11,6 +11,12 @@
 ---
 
 
+## W640 W640 Backlog B追加（2026-10-01·v2.3.240）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W640 | 更新·B-8 追加跨文件一致性裁决（appear_in_chapters 空字段实测新增+缺失维度提案冻结） |
+
 ## W639 W639 Backlog B数据质量修复登记（2026-10-01·v2.3.239）
 
 | 文件 | W | 说明 |

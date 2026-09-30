@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W639），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W640），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.240（2026-10-01）：W640 Backlog B-8 追加 — 第十份跨文件一致性分析裁决入档（数字排名类大半命中·「跨文件矛盾」三连不成立：cave 实测 19/3 一致与第九份互矛盾/speaker 实为 10/appear_in_chapters 编造 96vs93）·实测新增 appear_in_chapters 全空字段缺口·缺失维度类提案登记归档冻结
+> **来源**：用户提入第十份外部分析（跨文件一致性+缺失数据清单）——逐条机检后用户批准 B-8 追加两件。
+> - **裁决（第十份·保真度第二）**：数字与排名类主张大半命中（avg_sentiment 排名逐值吻合·唐僧 92/2726 等五人对照全对·平顶山 hardship 32 vs cave 33 差 1 回属实·rescue_roi U 型 3.83/3.04/3.85 逐字吻合）；但**「跨文件矛盾」类主张三连不成立**：①cave_estate 实测 19 king+3 general（两文件一致）——与第九份「应 20/2」互矛盾且 general 名单编错（实为陀罗寺/盘丝洞/毛颖山兔穴）；②speaker_sentiment 实为 10 非其声称 11；③「悟空 appear_in_chapters 96 vs matrix 93」编造差异——实测 appear_in_chapters 为**空列表**。规律确认：外部分析抄数字准、发现一致性问题的步骤在编。
+> - **B-8 追加两件**：③appear_in_chapters 全空字段缺口（抽样 5 人长度均 0·疑似生成器漏填或废弃字段——实测新增·真缺口）；④「缺失维度」类提案（difficulty 1-10 评分/ending 扩 6-8 类/timeline.json/53 地点经纬度/poetry.json）=新数据生产·**归档冻结**·随 B-5 一并考虑。
+> - **重复项维持**：first_chapter 修正（B-8 已登记）·cave 删除（重构冻结）·hardships→mind（奎木狼反证维持不采纳）。
+> - **验证**：B-8 追加落位；verify_delivery 核心全绿。
+> - **文件**：docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md（B-8 行追加）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 ### v2.3.239（2026-10-01）：W639 Backlog B-8 数据质量修复登记 — 第九份数据质量分析裁决入档（九份首个全保真：46/46 文件存在·白鹿精 first_chapter=1 等四项数值逐字验证·dialogue 6565 条/如来 58 条实测·并纠出本仓 journey_route 过期记录已勘误）·生成器层修复登记不直改 JSON·hardships 重分类不采纳为机械修复（奎木狼反证）
 > **来源**：用户提入第九份外部分析（自称「基于实际内容」的数据资产分级+质量修正清单）——**逐条机检后裁决为九份首个全保真分析**：A/B/C 三级点名的 46 个数据文件全部存在；character_appearance 四人物（白鹿精 first_chapter=1·大鹏=12·白象=21·青毛狮子=39）、dialogue_sentiment（total=6565·如来 58 条 negative_ratio 0.431·玉帝 48 条）、悟空 96 回/6197 次提及、白龙马 40 回/93——全部与文件逐字吻合。并**纠出本仓过期记录**：journey_route.json 在 W620 时代实测为空，现已被重生成（53 地点×26 区域·chapter 12-100）——本仓 memory 已勘误。
 > - **裁决（发现属实·修复方式分化）**：①character_appearance 专名消歧（「白鹿」「大鹏」等普通名词早期出现被误计为角色首秀）与②dialogue 说话人变体补充（如来仅统计部分称呼）——**修复须走生成器层**（直改 scripts/output/data JSON 会被 run_all 覆盖·且级联 site/data/json 副本与 EN fetch 链同步），登记 **B-8**（工程批允许类·中量级·含重生成后受影响页面回归）；③hardships_81 三条重分类（五庄观/难活人参/金銮殿变虎→「人心自生」）**不采纳为机械修复**——属学术解释，且「金銮殿变虎→人心自生」与奎木狼下凡原文矛盾（现行 wild 亦存疑：黄袍怪有天庭背景）——须作者学术裁决；④cave 三文件合并/fun/ 迁移/每数据文件 CITATION——重构冻结维持，且 cave「两文件不一致」主张被证伪（实测双 19/3 一致）。
