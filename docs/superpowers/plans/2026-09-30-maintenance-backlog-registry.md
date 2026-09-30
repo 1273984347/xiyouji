@@ -33,7 +33,7 @@
 | B-2 | **CodeQL job**（security.yml 增 analyze） | 小 | js/python 两矩阵；注意 runner 时长（security 现有 job 数分钟量级） |
 | B-3 | **CODE_OF_CONDUCT.md** | 微小 | Contributor Covenant 中文版即可；README「贡献方式」节加链接 |
 | B-4 | **Three.js 懒加载+静态回退**（4 页：relationship-3d ×2/journey-geo-3d/dukou-engine） | 中 | 动态 import() 三脚本（同 W627 fetch 切换模式）；回退=首帧 canvas 截图 or SVG 占位；LHCI 3D 预算（LCP12000/TBT900）复验 |
-| B-5 | **A1 chapter-meta 扩字段 + entities.json 聚合**（monsters/treasures/themes/related ×100 篇实体标注；聚合器读 chapter-meta 出 entities/*.json） | 中 | **属内容标注工作·须归档裁决解除或用户点名**；聚合器可先行（纯机械·读 100/100 现有 meta 出 characters/locations 两类）；Schema 沿用 chapter-meta 现有键风格 |
+| B-5 | **A1 chapter-meta 扩字段 + entities.json 聚合**（monsters/treasures/themes/related ×100 篇实体标注；聚合器读 chapter-meta 出 entities/*.json） | 中 | **属内容标注工作·须归档裁决解除或用户点名**；聚合器可先行（纯机械·读 100/100 现有 meta 出 characters/locations 两类）；Schema 沿用 chapter-meta 现有键风格。**重启后学术增强子项（W635 登记·来源=外部 FAIR/学术化分析裁决）**：Wikidata QID 对齐（实体消歧入开放知识生态）→ 领域本体（人物关系类型/事件因果链/劫难分类体系）→ Zenodo DOI + OSF 存档（长期保存独立入口）；安全响应头（XFO/HSTS）同属此类但受 GitHub Pages 平台限制·需 Cloudflare 前置 |
 
 ## 三、已否决（与冻结裁决冲突·不再议）
 

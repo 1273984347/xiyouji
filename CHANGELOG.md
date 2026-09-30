@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W634），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W635），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,13 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.235（2026-09-30）：W635 Backlog B-5 追加学术增强子项 — 外部 FAIR/学术化分析裁决入档（Wikidata QID 对齐→领域本体→Zenodo/OSF 存档·均以 B-5 实体库为前置·重启触发）·安全响应头=平台受限登记（GitHub Pages 不支持自定义头·需 Cloudflare 前置）·其余各节（CSP/反馈/搜索/构建缓存/内容日历等）裁决为已完成或与冻结裁决冲突不采纳
+> **来源**：用户提入第五份外部「数字人文学术化/可持续性」分析（FAIR/Wikidata/PID/本体/Zenodo/社区）——逐节对仓库与冻结裁决裁决后用户批准唯一动作：B-5 追加学术增强子项。
+> - **裁决摘要（第五份·方向型非事实型）**：①数据治理=项目已有事实治理更硬（元信息块 v2+术语一致性+引文硬验证+27 门禁）；②Wikidata 对齐/本体/Zenodo+OSF=真增量但全以 B-5 实体库为前置→登记为重启后子项；③安全=「安全响应头」为唯一真缺口但 GitHub Pages 不支持自定义头（需 Cloudflare 前置·平台受限登记）；CSP 已强于建议（335 页 meta+1313 哈希+漂移门禁）；④内容运营节与 W626 归档裁决正面冲突最多（内容日历=直接违反停止内容生产·社区/Discussions=在先否决）；「用户反馈闭环」已存在两套（W572 页脚入口 235/235+W600 Agent 反馈）；⑤工程节三处误读（CSP 已在/CI 已并行/无构建步骤不存在 Astro 缓存可优化）+「已有 CodeQL」与上份路线图互矛盾；⑥学术规范=S4 已实证四轮外部审读（W609-614）·页面级引用格式为小增量不入档。
+> - **执行**：backlog 登记文件 B-5 行追加重启后学术增强子项（Wikidata QID 对齐→领域本体→Zenodo/OSF·安全响应头平台受限附注）——登记不开工，其余不采纳。
+> - **验证**：backlog 文件 B-5 行更新落位；verify_delivery 核心全绿。
+> - **文件**：docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md（B-5 行追加）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 ### v2.3.234（2026-09-30）：W634 外部路线图保真度裁决入档 — 40+ Issue 提案逐条取证（P0 13 项：8 完成/3 大半/2 增量·第四份 W575 时代旧快照审读）·5 项真增量登记维护态 Backlog（RSS/CodeQL/CoC/Three.js 懒加载/实体字段扩展·登记不开工·重启触发）
 > **来源**：用户提入外部「项目优化路线图」（P0/P1/P2 40+ Issue playbook）——逐条对仓库取证后用户裁决采纳建议：**不建 40 个 Issue，仅登记 5 项真增量**（登记≠开工）。
 > - **裁决结论**：路线图快照停在 W575 时代（本日第四份旧快照审读·提案 ~80% 重复或倒退）——P0 13 项：8 项已完成或被超越（死链双门禁/a11y 6 矩阵/LHCI 预算/设计 token 体系/SEO 五项+第 26 门禁/CITATION+CONTRIBUTING/暗色全链/Pagefind 被 W573 零外域检索超越）、3 项大半完成（**A1 chapter-meta 100/100 已内嵌结构化元数据**——外部「补 frontmatter」P0 实为大半完成/JSON Schema 有漂移+一致性门禁等价/Three.js 有独立预算缺懒加载）、2 项真增量（markdownlint/CODE_OF_CONDUCT）。

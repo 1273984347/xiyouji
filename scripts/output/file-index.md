@@ -11,6 +11,12 @@
 ---
 
 
+## W635 W635 Backlog B追加学术增强子项（2026-09-30·v2.3.235）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W635 | 更新·B-5 追加重启后学术增强子项（Wikidata→本体→Zenodo/OSF·安全响应头平台受限附注） |
+
 ## W634 W634 外部路线图保真度裁决入档（2026-09-30·v2.3.234）
 
 | 文件 | W | 说明 |
