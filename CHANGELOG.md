@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W632），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W633），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,12 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.233（2026-09-30）：W633 CI ruff 红灯热修复 — W631 落库两脚本文件尾缺换行（W292×2·09-27 会话保存缺陷随落库带入·落库前 lint 漏项教训）·check_citations/line_check 补尾换行
+> **来源**：W632 推送后 CI Code Quality (ruff) failure 取证——W292×2（No newline at end of file）：check_citations.py/audit/line_check.py 文件尾缺换行，系 09-27 会话保存缺陷、随 W631 落库带入 CI；**W631 落库前自测跑了、lint 漏了**（收尾七步②执行不完整——落库既有改动也须过 ruff）。
+> - **修复**：两文件补尾换行（ruff --fix 同款）；`ruff check scripts/` 全量绿。
+> - **验证**：ruff 全量 0 错；verify_delivery 核心全绿；CI 预期转绿（推送后确认）。
+> - **文件**：scripts/check_citations.py、scripts/audit/line_check.py（各 +1 字节）、六文档、四页脚、workflows README、AGENTS 脚注、file-index、CITATION.cff（第 10 面随批·W632 教训在位）。
+> - **状态**：已落地（本批提交并 push origin/main）。
 ### v2.3.232（2026-09-30）：W632 CITATION.cff 级联面漏提交热修复 — W629/W630/W631 三批 scoped 清单连续缺 CITATION（级联第 10 面 W628 新增）→ CI Delivery Gate 红灯而本地全绿（检出树≠工作树·W595 同族三连犯）·修复=补提交+教训升级
 > **来源**：W629 CI Delivery Gate failure 取证——根因=第 27 门禁 R2 在 CI 检出树上如实拦截：W629/W630/W631 三批的 scoped 提交清单**连续漏掉 CITATION.cff**（级联第 10 面·W628 新增），检出树 CITATION 停在 2.3.227 而现役 W631/v2.3.231；本地 verify 全绿因工作树已同步（声明≠落地的 CI 版：提交树≠工作树）。**第 27 门禁建置同日即实战拦截自身批次流程缺陷——门禁有效的最强实证**。
 > - **修复**：本批级联后 CITATION.cff（2.3.232）随 scoped 清单**显式提交**；教训升级进 memory（⑨扩展：级联 10 面输出全量 ⊆ add 清单——第 10 面 CITATION 为 W628 新增高危漏项）。

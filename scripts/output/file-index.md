@@ -11,6 +11,13 @@
 ---
 
 
+## W633 W633 CI ruff 红灯热修复（2026-09-30·v2.3.233）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_citations.py | W633 | 热修复·文件尾补换行（W292·CI ruff 拦截） |
+| scripts/audit/line_check.py | W633 | 热修复·文件尾补换行（W292·CI ruff 拦截） |
+
 ## W632 W632 CITATION.cff 级联面漏提交热修复（2026-09-30·v2.3.232）
 
 | 文件 | W | 说明 |
