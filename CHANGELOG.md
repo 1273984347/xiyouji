@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W631），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W632），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,12 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.232（2026-09-30）：W632 CITATION.cff 级联面漏提交热修复 — W629/W630/W631 三批 scoped 清单连续缺 CITATION（级联第 10 面 W628 新增）→ CI Delivery Gate 红灯而本地全绿（检出树≠工作树·W595 同族三连犯）·修复=补提交+教训升级
+> **来源**：W629 CI Delivery Gate failure 取证——根因=第 27 门禁 R2 在 CI 检出树上如实拦截：W629/W630/W631 三批的 scoped 提交清单**连续漏掉 CITATION.cff**（级联第 10 面·W628 新增），检出树 CITATION 停在 2.3.227 而现役 W631/v2.3.231；本地 verify 全绿因工作树已同步（声明≠落地的 CI 版：提交树≠工作树）。**第 27 门禁建置同日即实战拦截自身批次流程缺陷——门禁有效的最强实证**。
+> - **修复**：本批级联后 CITATION.cff（2.3.232）随 scoped 清单**显式提交**；教训升级进 memory（⑨扩展：级联 10 面输出全量 ⊆ add 清单——第 10 面 CITATION 为 W628 新增高危漏项）。
+> - **验证**：check_w_range_literal 绿（CITATION==现役）；verify_delivery 全量核心全绿；后续 CI Delivery Gate 预期转绿（本批推送后确认）。
+> - **文件**：CITATION.cff（补提交·版本已随 W629-W631 级联前进）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 ### v2.3.231（2026-09-30）：W631 门禁脚本加固落库 — 09-27 S4 会话两笔未提交加固收口（check_citations 防静默跳过堵「报 100% 实为空真」盲区+line_check 语料迁移路径修正+双 --self-test）·工作树=提交库对齐（消除门禁运行态与版本态偏差）
 > **来源**：S4 残留治理取证（用户选收卫生项）——`git diff` 实证两门禁脚本的未提交改动为 2026-09-27 A 轨审查会话的**真实加固**（非垃圾）：当日会话改完未提交即中断，工作树版本此后一直在 verify 中生效而提交库停留旧版（运行态≠版本态的隐性偏差）。
 > - **check_citations.py（第 20 门禁脚本）**：①防静默跳过——凡以「原文引文」起始却不匹配规范语法的行一律 FAIL（SUSPECT_RE 容忍 `>原文引文`/`> **原文引文` 漂移前缀），堵死「格式漂移整行不进分母、报 100% 实为空真」盲区（实证：匿名稿 3 条引文因回目号带空格+半角引号曾长期被跳过）；②`--self-test` 内存正负样本 4/4。
