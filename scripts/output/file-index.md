@@ -11,6 +11,12 @@
 ---
 
 
+## W637 W637 Backlog B门禁升级路径 + B脚本打包登记（2026-10-01·v2.3.237）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W637 | 更新·B-6 门禁升级路径注记（第 28 门禁 WARN+基线）+B-7 脚本 pip 打包登记 |
+
 ## W636 W636 Backlog B登记 + 新增可视化九问评审清单（2026-09-30·v2.3.236）
 
 | 文件 | W | 说明 |
