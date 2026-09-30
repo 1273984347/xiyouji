@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W629），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W630），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,13 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.230（2026-09-30）：W630 第 26 门禁 SEO head 挂载 — check_seo_head.py 挂载 verify_delivery（slot 自 W591 预留·用户裁决挂载）·334 页 og/canonical/JSON-LD/hreflang/sitemap 集合一致·README 门禁口径 25→26·AGENTS/文档规范同步
+> **来源**：W628 漂移清零后维护态盘点——check_seo_head.py 自 W591 建置后「待用户裁决挂载」悬置 9 天；W629 同日演示了静默腐烂面的代价（W575 字面量腐烂 52 批无人察觉），用户裁决「挂」。
+> - **挂载**：verify_delivery.py 增第 26 门禁单注册块（复制 W628 模式·subprocess+exit code 裁决）——check_seo_head.py 扫 334 页：og:image/canonical 覆盖·JSON-LD 内联有效（example.com 占位 0）·hreflang 89 对·sitemap 集合一致；首跑全绿零基线风险（脚本 9 天来持续手跑绿）。
+> - **口径同步**：README AI 声明「25 项」→「26 项」（活跃门禁=26：编号至 27·16 退役·26=SEO head·27=W 字面量）；AGENTS §4.2 第 26 项补录（W630 挂载条目）+ 第 27 项「26 预留」措辞更新；文档规范 §8 行同步（25 项活跃→26 项·补 SEO head 描述）。
+> - **验证**：check_seo_head 单独运行绿；verify_delivery 全量核心全绿（26 门禁挂载后首跑）；ruff 0 错。
+> - **文件**：scripts/verify_delivery.py（挂载·禁擅改清单内经用户裁决）、README.md（口径 25→26）、docs/00-导读/文档规范.md（§8）、AGENTS.md（§4.2 第 26/27 项）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 ### v2.3.229（2026-09-30）：W629 作者侧待办收口 — 读者数据截图留档入库（dashboard-top/pages×2·computer-use 驱动真实浏览器）+ UV 曲线 API 逐日 SVG 生成（逐日和=31 与 total 一致）+ 复盘 §一/§二 回填与口径备注（仪表盘 35 visits vs API 31 时区语义差）
 > **来源**：W626 复盘登记的作者侧待办（UV 曲线/来源占比后台截图人工核）——用户裁决由 computer-use 驱动真实浏览器代执行（2026-09-30·用户 Edge 实操·直播窗口零扰动）。
 > - **截图×2 入库（docs/10-方法论沉淀/读者数据截图/）**：①dashboard-top-2026-09-30.png（报告头+周期选择器 09-01~09-30+仪表盘上部）；②dashboard-pages-2026-09-30.png（页面级访问分布：dashboard 4·relationship-3d 4(+300%)·essay-buddhist-chan/chapter-stats/philosophy/graph-explorer 各 2·/xiyouji 2(−33%)）。采集方式：新开独立 Edge 窗口（直播标签零扰动）+ a11y AXScrollIntoView 滚动（免键盘免焦点——raw 事件被 frontmost_pid_mismatch 拦·W622 教训复用）+ getScreenshot 字节直写盘。

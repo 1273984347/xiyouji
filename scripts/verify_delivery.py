@@ -608,6 +608,19 @@ def main():
     except Exception as e:
         warn("W 号区间字面量门禁执行异常（W628）: %s" % e)
 
+    # ---- SEO head 门禁（W630 挂载·第 26 门禁·slot 自 W591 预留：og/canonical/JSON-LD/
+    # hreflang/sitemap 集合一致——SEO head 为静默腐烂面·经用户裁决挂载）----
+    seo_py = os.path.join(_HERE, "check_seo_head.py")
+    try:
+        r = subprocess.run([sys.executable, seo_py], capture_output=True, text=True, timeout=120)
+        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("SEO head 门禁通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("SEO head 异常（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+    except Exception as e:
+        warn("SEO head 门禁执行异常（W630）: %s" % e)
+
 
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:
