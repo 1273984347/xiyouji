@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W628），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W629），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.229（2026-09-30）：W629 作者侧待办收口 — 读者数据截图留档入库（dashboard-top/pages×2·computer-use 驱动真实浏览器）+ UV 曲线 API 逐日 SVG 生成（逐日和=31 与 total 一致）+ 复盘 §一/§二 回填与口径备注（仪表盘 35 visits vs API 31 时区语义差）
+> **来源**：W626 复盘登记的作者侧待办（UV 曲线/来源占比后台截图人工核）——用户裁决由 computer-use 驱动真实浏览器代执行（2026-09-30·用户 Edge 实操·直播窗口零扰动）。
+> - **截图×2 入库（docs/10-方法论沉淀/读者数据截图/）**：①dashboard-top-2026-09-30.png（报告头+周期选择器 09-01~09-30+仪表盘上部）；②dashboard-pages-2026-09-30.png（页面级访问分布：dashboard 4·relationship-3d 4(+300%)·essay-buddhist-chan/chapter-stats/philosophy/graph-explorer 各 2·/xiyouji 2(−33%)）。采集方式：新开独立 Edge 窗口（直播标签零扰动）+ a11y AXScrollIntoView 滚动（免键盘免焦点——raw 事件被 frontmost_pid_mismatch 拦·W622 教训复用）+ getScreenshot 字节直写盘。
+> - **UV 曲线 SVG**：API /api/v0/stats/total 逐日 `daily` 字段生成（uv-curve-2026-09.svg·纯手写 SVG 零依赖）——逐日和=31 与 total 一致（W626 复盘时「逐日全 0」系探错字段名·本批勘误并留档曲线：09-01 起 4,1,0,1,1,0,0,1,0,0,0,0,2,0,1,0,1,4,7,3,2,0,1,0,0,2,0,0,0,4）。
+> - **口径备注（新发现如实记录）**：后台仪表盘同周期显示「Totals 35 visits」vs API total=31——时区差（仪表盘 Asia/Shanghai 本地日界 vs API UTC 日界）+ visits/pageviews 语义差；判定口径以 fetch_gate_stats（API·UTC）为准，截图仅作留档。
+> - **来源占比仍需人工**：后台 Top referrers 小部件在自动化环境持续 Loading 不渲染（GoatCounter 文本视图无 referrer 明细）——直达路径已写入复盘（仪表盘 period 选 30 日·Top referrers 小部件人工截图）；页面级分布截图已作替代留档。
+> - **验证**：截图文件入库（2 PNG+1 SVG）且复盘 §一/§二 引用闭合（相对链接）；UV 曲线逐日和=31=total 交叉验证；`grep -c 待回填 复盘` = 0；verify_delivery 核心全绿。
+> - **文件**：docs/10-方法论沉淀/读者数据截图/ 3 文件（新增）、docs/10-方法论沉淀/读者数据复盘.md（§一/§二 回填+口径备注）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。剩余作者侧：来源占比人工截图（唯一）。
 ### v2.3.228（2026-09-30）：W628 叙述面内容漂移清零 + 第 27 门禁防复发 — W628 审计 9 处真漂移全清（README W575 字面量×2/方法论 W529/文档规范 W423/CITATION 2.2.15/STRUCTURE 归档旧口径/workflows 17 项门禁快照/方法论当前版本 v2.0.60）·check_w_range_literal.py 挂载
 > **来源**：用户提供外部项目综述（照抄 README 叙事）——裁决为高保真但唯一事实错误「CHANGELOG 记录到 W575」恰源自 README 自身过期字面量；用户裁决「全部清，并且防止以后重复出现」。W628 审计脚本（_w628_drift_audit.py）扫描现役叙述面 10 文件四类漂移（W 区间字面量/时效版本断言/门禁数声明/CITATION 版本），命中 30+ 经逐条裁决：**9 处真漂移 + 其余为合法历史引用**（历史批次区间叙述/编号映射规则/归档指针）。
 > - **9 处全清（引用式化为主·W520 精神）**：①README:132 目录树 ②README:171 正向索引 ③方法论 README:109 变更日志指针——三处「（W001-W575/W529）」改「编号上限见现役版段」；④方法论 README:4「当前版本 v2.0.60（W087）」删快照改随批登记口径；⑤文档规范:240 管控清单「（W001-W423）」改「归档口径见 CHANGELOG 头部」；⑥STRUCTURE:274 归档描述对齐三段式现行口径（tier2/W400-416/W417-464+W484/现役 W485+）；⑦workflows README:90「17 项门禁」W500 快照（含已退役 skills 索引）改引用 verify_delivery 现役；⑧CITATION.cff version 2.2.15→2.3.227 + date-released→2026-09-30（外部学术引用面）；⑨README:204「25 项门禁」经第 27 门禁挂载后回到活跃口径自洽（不动）。
