@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W640），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W641），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,16 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.241（2026-10-01）：W641 全站 meta description 注入 229 页 + title 清理 44 行 — 第十一份 HTML 页面层评审的可检主张落地（description 缺口实测 231/235 扩大到全站·inject_descriptions.py h2 序列推导·第 26 门禁 R1 扩 description 必备项防复发·双「详解西游记」×2 与 W 编号 title ×10 清零）
+> **来源**：第十一份外部 HTML 页面层评审（真读页面·工程信号强）——可检主张逐条对证后用户批准落地低垂项。**裁决对照**：误读 5（CSP 哈希=generate_csp 自动化非手贴·nonce 纯静态不可行·SEO:INJECTED 为幂等标记非未填充·hreflang 指向的 site/en 140 文件真实存在·pilgrim-team 2019 行完整非截断=样本被截）；命中若干（**meta description 全站 0 覆盖**·title 双后缀×2·W 编号泄漏×10·audit-* 85/86 页·EMBEDDED 命名分裂 46vs26·Math.random 力导向×5·--ink-faint 对比度存疑）。
+> - **description 注入（inject_descriptions.py 新增）**：缺口实测扩到全站 231/235（不止数据页）——推导链=h2.section-title 序列（去「壹 · 」序数前缀·取前 3 拼接·zh/en 页同构有效）→首 个 section-sub→title 兜底·截 158 字符；注入位=SEO:INJECTED 标记后（head 尾兜底）；og:description 在 EN 页随批注入；幂等（已有即跳过）。**实测：注入 229 页·跳过已有 4 页·抽样 zh/en/根三页内容语义合格**。
+> - **title 清理 44 行**：双「详解西游记 · 详解西游记」×2（material-archaeology/search）+W 编号中缀×10 页（含 og:title 同步）——diff 抽查零误伤（footer/FILE_INDEX 注释/中文正文均未动·搜索页内联索引 title 同步清理为改进）。
+> - **第 26 门禁扩防**：check_seo_head.py R1 必备项增 description——注入后全量绿（334 页）·今后 description 漂移即 FAIL。
+> - **CSP 重生成**：搜索页内联索引 title 字符串变更→哈希更新（1313 个·0 漂移）；check_js_syntax 334 文件过。
+> - **登记不开工项**：audit-* 合并（85/86 页·中大型重构）·D3 色值→CSS 变量删 140 条映射·确定性种子×5 页·--ink-faint 门禁口径核查·表格 caption/topnav 入口/主题切换入口——随 W642 backlog 批登记。
+> - **验证**：check_seo_head 绿（R1 含 description）；CSP 0 漂移；ruff 0 错；verify_delivery 核心全绿。
+> - **文件**：scripts/inject_descriptions.py（新增）、scripts/check_seo_head.py（R1 扩）、site/ 229 页（description+title+CSP）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 ### v2.3.240（2026-10-01）：W640 Backlog B-8 追加 — 第十份跨文件一致性分析裁决入档（数字排名类大半命中·「跨文件矛盾」三连不成立：cave 实测 19/3 一致与第九份互矛盾/speaker 实为 10/appear_in_chapters 编造 96vs93）·实测新增 appear_in_chapters 全空字段缺口·缺失维度类提案登记归档冻结
 > **来源**：用户提入第十份外部分析（跨文件一致性+缺失数据清单）——逐条机检后用户批准 B-8 追加两件。
 > - **裁决（第十份·保真度第二）**：数字与排名类主张大半命中（avg_sentiment 排名逐值吻合·唐僧 92/2726 等五人对照全对·平顶山 hardship 32 vs cave 33 差 1 回属实·rescue_roi U 型 3.83/3.04/3.85 逐字吻合）；但**「跨文件矛盾」类主张三连不成立**：①cave_estate 实测 19 king+3 general（两文件一致）——与第九份「应 20/2」互矛盾且 general 名单编错（实为陀罗寺/盘丝洞/毛颖山兔穴）；②speaker_sentiment 实为 10 非其声称 11；③「悟空 appear_in_chapters 96 vs matrix 93」编造差异——实测 appear_in_chapters 为**空列表**。规律确认：外部分析抄数字准、发现一致性问题的步骤在编。

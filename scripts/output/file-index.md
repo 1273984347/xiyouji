@@ -11,6 +11,14 @@
 ---
 
 
+## W641 W641 全站 meta description 注入页 + title 清理行（2026-10-01·v2.3.241）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/inject_descriptions.py | W641 | 新增·全站 meta description 注入器（h2 序列推导·幂等·title 清理同批） |
+| scripts/check_seo_head.py | W630/W641 | 更新·R1 必备项增 description（第 26 门禁防复发扩展） |
+| site/ 229 页 | W641 | 更新·meta description+og:description 注入与 title/og:title 清理（含 CSP 哈希更新） |
+
 ## W640 W640 Backlog B追加（2026-10-01·v2.3.240）
 
 | 文件 | W | 说明 |
