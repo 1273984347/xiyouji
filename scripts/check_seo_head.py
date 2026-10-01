@@ -76,6 +76,7 @@ def main() -> bool:
         head = s[:s.find("</head>")] if "</head>" in s else s
         checks = [
             ('name="viewport"', "viewport"),
+            ('name="description"', "description"),
             (f'<link rel="canonical" href="{url}">', "canonical"),
             ('property="og:title"', "og:title"),
             (f'<meta property="og:image" content="{OG_IMAGE}">', "og:image"),
