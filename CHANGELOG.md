@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W641），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W642），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,13 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.242（2026-10-01）：W642 Backlog B-9 登记 — 第十一份 HTML 页面层评审裁决收尾（11 份首个真读页面·命中与误读参半）·工程债聚合登记（audit 六族合并/色值→CSS 变量删 140 映射/确定性种子/EMBEDDED 命名统一/z-index token 化/表格 caption 等·中大·维护态按需逐项）·--ink-faint 先决核查注记·误读五项不采纳
+> **来源**：第十一份 HTML 页面层评审的登记项收尾（低垂项已于 W641 落地：description 229 页+title 清理+R1 扩展）——剩余可取项聚合登记为 B-9。
+> - **裁决回顾**：11 份外部分析首个真读页面的（引用具体 HTML/CSS/JS）·命中与误读参半——误读五项不采纳（CSP 哈希改 nonce/ESBuild：纯静态无构建且 generate_csp 全自动；hreflang 死链：site/en 140 文件在位且第 26 门禁验 89 对；SEO:INJECTED=幂等标记非未填充；pilgrim-team 截断=其样本被截，仓库 2019 行完整；暗色无开关=半错，index 有 15 处命中而数据子页缺入口）。
+> - **B-9 登记（聚合六子项·中大·维护态按需逐项·登记不开工）**：①audit-* 六族补丁合并单模块渲染后一次执行（85/86 页·每页省 300-500 行）；②D3 字面色值→CSS 变量·删 140 条暗色 fill 硬编码映射（技术债化石）；③力导向确定性种子（Math.random×5 页·学术图表可复现）；④EMBEDDED/EMBEDDED_DATA 命名统一（46vs26 页分裂）；⑤z-index token 化（tooltip z-10<topnav z-50 遮挡隐患）；⑥表格 caption/noscript 内容 fallback/skip-link inline style 收编。**先决核查**：--ink-faint 2.7:1 主张 vs a11y 门禁 E2-2 恒绿的扫描口径差（先查扫描范围再定是否真缺口）。
+> - **验证**：B-9 行落位；verify_delivery 核心全绿。
+> - **文件**：docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md（B-9 行）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 ### v2.3.241（2026-10-01）：W641 全站 meta description 注入 229 页 + title 清理 44 行 — 第十一份 HTML 页面层评审的可检主张落地（description 缺口实测 231/235 扩大到全站·inject_descriptions.py h2 序列推导·第 26 门禁 R1 扩 description 必备项防复发·双「详解西游记」×2 与 W 编号 title ×10 清零）
 > **来源**：第十一份外部 HTML 页面层评审（真读页面·工程信号强）——可检主张逐条对证后用户批准落地低垂项。**裁决对照**：误读 5（CSP 哈希=generate_csp 自动化非手贴·nonce 纯静态不可行·SEO:INJECTED 为幂等标记非未填充·hreflang 指向的 site/en 140 文件真实存在·pilgrim-team 2019 行完整非截断=样本被截）；命中若干（**meta description 全站 0 覆盖**·title 双后缀×2·W 编号泄漏×10·audit-* 85/86 页·EMBEDDED 命名分裂 46vs26·Math.random 力导向×5·--ink-faint 对比度存疑）。
 > - **description 注入（inject_descriptions.py 新增）**：缺口实测扩到全站 231/235（不止数据页）——推导链=h2.section-title 序列（去「壹 · 」序数前缀·取前 3 拼接·zh/en 页同构有效）→首 个 section-sub→title 兜底·截 158 字符；注入位=SEO:INJECTED 标记后（head 尾兜底）；og:description 在 EN 页随批注入；幂等（已有即跳过）。**实测：注入 229 页·跳过已有 4 页·抽样 zh/en/根三页内容语义合格**。
