@@ -11,6 +11,25 @@
 ---
 
 
+## W648 W648 读者数据来源占比人工截图留档（2026-10-02·v2.3.248）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/10-方法论沉淀/读者数据截图/dashboard-top-2026-10-02.png | W648 | 新增·30 日周期页头留档（Pages 26/30） |
+| docs/10-方法论沉淀/读者数据截图/dashboard-topref-2026-10-02.png | W648 | 新增·Top referrers=Nothing to display 特写留档 |
+| docs/10-方法论沉淀/读者数据复盘.md | W648 | 更新·§一来源占比回填+头部链注记+§二 Loading 根因备注 |
+
+## W647 W647 Backlog 微件三连 + 工作复盘报告入库（2026-10-01·v2.3.247）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CODE_OF_CONDUCT.md | W647 | 新增·Contributor Covenant 2.1 中文版（B-3） |
+| .github/workflows/security.yml | W647 | 更新·增 CodeQL job（js/py 双矩阵·B-2） |
+| scripts/gen_rss.py | W647 | 新增·RSS 生成器（CHANGELOG 现役段 20 条·B-1） |
+| site/rss.xml | W647 | 新增·RSS feed（首发生成） |
+| site/index.html | W647 | 更新·head 挂 RSS alternate link |
+| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-01.md | W647 | 新增·七维度工作复盘报告（19 批实测数据·11 份外部分析总表） |
+
 ## W646 W646 Backlog BThree.js 静态回退（2026-10-01·v2.3.246）
 
 | 文件 | W | 说明 |

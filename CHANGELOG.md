@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W646），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W648），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,25 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.248（2026-10-02）：W648 读者数据来源占比人工截图留档 — 后台真实答案=Nothing to display（无外部来源·全部直接访问）+「持续 Loading」根因=static.zgo.at DNS 污染
+> **来源**：用户指令收口作者侧唯一剩余项（来源占比人工截图·直达路径写在复盘 §一）——computer-use 驱动真实 Edge 登后台取证。
+> - **结论**：来源占比=**无外部来源（全部直接访问）**——后台 Top referrers 小部件（30 日窗 2026-09-03~10-02）服务端真实答案=Nothing to display；Campaigns/Browsers/Systems/Locations/Languages/Sizes 同为空。30 访客全部直接流量，与「约 8 个月未主动分发」及 W629 归档判定自洽。
+> - **根因（「持续 Loading」真因纠正）**：后台小部件加载器 backend.js 托管于 static.zgo.at——该域遭 DNS 污染（假 IP=Facebook/Dropbox 段；本地 DNS、AliDNS DoH、权威 NS UDP 直查全中毒·TCP 53 被 RST）→ 加载器永不就位→全部小部件永久 Loading。W629 所记「自动化环境持续 Loading 不渲染」实为该网络层根因，非自动化环境特有。主域 goatcounter.com 未被污染，API 取数链路不受影响。
+> - **取证方法**：DevTools 控制台手工复刻加载契约——同源 GET /load-widget?widget=N&period-start=… 返回 JSON.html 注入对应容器（端点经 404/405 探测+Wayback 快照核对源码定位；POST=405、GET=200）。
+> - **留档**：读者数据截图/ 新增 dashboard-top-2026-10-02.png（周期页头·Pages 26/30）+ dashboard-topref-2026-10-02.png（Top referrers 特写）；读者数据复盘.md §一来源占比行回填+头部链注记+§二新增根因备注。
+> - **验证**：截图落盘核验（93,361B/75,292B）；复盘文档三处 Edit Grep 复核落地；verify_delivery 核心全绿。
+> - **文件**：docs/10-方法论沉淀/读者数据截图/dashboard-top-2026-10-02.png、docs/10-方法论沉淀/读者数据截图/dashboard-topref-2026-10-02.png（均新增）、docs/10-方法论沉淀/读者数据复盘.md、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。作者侧剩余项清零。
+
+### v2.3.247（2026-10-01）：W647 Backlog 微件三连 + 工作复盘报告入库 — B-3 CODE_OF_CONDUCT.md（Contributor Covenant 2.1 中文版）+ B-2 CodeQL job（security.yml js/py 双矩阵）+ B-1 RSS feed（gen_rss.py 从 CHANGELOG 现役段生成 site/rss.xml 20 条+首页 link）+ 《工作复盘与优化分析报告-2026-10-01.md》入库（七维度·19 批实测数据·11 份外部分析保真度总表）
+> **来源**：用户裁决「全部开始」Backlog 可开工项+提供工作复盘系统提示词——第一组基建微件+复盘报告产出。
+> - **B-3 CoC**：CODE_OF_CONDUCT.md（Contributor Covenant 2.1 中文版·执行/适用范围/署名完整）+ README 贡献方式节链接。
+> - **B-2 CodeQL**：security.yml 增 codeql job（js/python 双矩阵 fail-fast:false·init/autobuild/analyze v3·security-events 写权限）——与既有 npm-audit/pip-audit/csp-check/xss-scan 四轨并行。
+> - **B-1 RSS**：gen_rss.py 从 CHANGELOG 现役版段解析最近 20 条（标题/日期·RFC822 pubDate·链接统一指 CHANGELOG 主文件规避中文锚点不稳定）生成 site/rss.xml（XML 合法性已验）+ 首页 head 挂 alternate link。
+> - **复盘报告入库**：docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-01.md——七维度全覆盖（经验复用 10 项量化排序/技能矩阵 3 项待优化/未用技能 5 项决策/场景沉淀 8 项评估/问题清单 10 例+根因聚类/工作流优化 4 建议/计划制定含自评）——**全部数据源自 19 批实测 CI/commit/gate 输出**，无假设性数值。
+> - **验证**：rss.xml minidom 解析合法 20 条；security.yml YAML 解析过；ruff 0 错；verify_delivery 核心全绿。
+> - **文件**：CODE_OF_CONDUCT.md、scripts/gen_rss.py、site/rss.xml、docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-01.md（均新增）、.github/workflows/security.yml、site/index.html（RSS link）、README.md（贡献节）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 ### v2.3.246（2026-10-01）：W646 Backlog B-4 Three.js 静态回退 — 三页 WebGL 不可用 try-catch+webgl-fallback 块（zh/en relationship-3d 回退 2D 语义网络·journey-geo-3d 回退 2D 路线图）·双态探针（WebGL 正常=canvas/禁用=回退块·均 0 pageerror）·DPR 已有封顶确认（min(dpr,2)/移动 1.5）·懒加载不立项（defer 已在位）
 > **来源**：用户裁决「全部开始」Backlog——B-4 现状取证后收窄：Three.js 已 defer（懒加载不立项）·DPR 已封顶（min(dpr,2)/移动 1.5）·粒子数无失控页——**剩余真缺口=WebGL 不可用时整段初始化死亡**（new THREE.WebGLRenderer 无 try-catch·无回退 UI）。dukou-engine 无 THREE 引用（纯 CSS 3D）不属本批。
 > - **修复**：三页（zh/en relationship-3d·journey-geo-3d）renderer 初始化包 try-catch，catch 中注入 `.webgl-fallback` 回退块（zh 版指向 2D 语义网络/2D 路线图·EN 版指向 EN 2D network——回退目标均真实存在）+各页私有 style 块补回退样式（token 引用无裸色）。**过程纠错**：journey-geo-3d 首次替换打在赋值表达式中段（`renderer = try {` 语法错·check_js_syntax 当场拦）→改为 try 块内赋给外层 var 声明的 renderer。
