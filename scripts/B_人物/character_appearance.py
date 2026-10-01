@@ -25,6 +25,16 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from utils.aliases import CHARACTER_ALIASES as CHARACTERS
 from utils.analyzer_base import run_analyzer
 
+# W643 专名消歧：白鹿/大鹏/白象为普通名词（散文诗词中作动物义远早于角色剧情出现，
+# 如第 1 回「白鹿」），字面首回误计为角色首秀——按原著剧情首秀覆盖：
+# 白鹿精=比丘国第 78 回·大鹏/白象=狮驼岭第 74 回；青毛狮子第 39 回（乌鸡国
+# 假国王）本就是该角色首秀，无需覆盖。mentions/matrix 保持词频统计口径不变。
+FIRST_APPEAR_OVERRIDE = {
+    "白鹿精": 78,
+    "大鹏": 74,
+    "白象": 74,
+}
+
 
 def count_mentions(text: str, aliases: list) -> int:
     """统计文本中某人物所有别名的总出现次数。"""
@@ -101,7 +111,10 @@ def aggregate(per_chapter: list, characters: dict) -> dict:
     characters_out = [
         {
             "name": r["character"],
-            "first_chapter": int(re.match(r"第(\d+)回", r["first_appear"]).group(1)),
+            "first_chapter": FIRST_APPEAR_OVERRIDE.get(
+                r["character"],
+                int(re.match(r"第(\d+)回", r["first_appear"]).group(1)),
+            ),
             "appearances": r["appear_chapters"],
             "mentions": r["total_mentions"],
         }

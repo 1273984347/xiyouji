@@ -11,6 +11,16 @@
 ---
 
 
+## W643 W643 Backlog B数据质量修复落地（2026-10-01·v2.3.243）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/B_人物/character_appearance.py | W643 | 更新·FIRST_APPEAR_OVERRIDE 剧情首秀覆盖表（三妖 first_chapter 勘正·差分外科手术级） |
+| site/data/json/character_appearance.json | W643 | 同步·三妖 first_chapter 勘正（78/74/74·重生成+部署副本一致） |
+| site/data/json/character_appearance.json | W643 | 同步·部署副本（漂移门禁 47 副本一致） |
+| scripts/_w643_probe_appearance.js | W643 | 新增·appearance 双路径回归探针（http 双页 PASS） |
+| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W643 | 更新·B-8 ①修复②撤销③勘误④语料漂移登记 |
+
 ## W642 W642 Backlog B登记（2026-10-01·v2.3.242）
 
 | 文件 | W | 说明 |

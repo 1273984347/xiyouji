@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W642），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W643），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.243（2026-10-01）：W643 Backlog B-8 数据质量修复落地 — character_appearance 专名消歧（FIRST_APPEAR_OVERRIDE 剧情首秀覆盖表：白鹿精 1→78·大鹏 12→74·白象 21→74·差分外科手术级仅三字段）·W640 结论勘误（appear_in_chapters 顶层已填实）·dialogue 变体已满足撤销·青毛狮子 74 主张否决（39 乌鸡国即首秀）
+> **来源**：用户裁决开工 B-8（W639/W640 登记的数据质量修复·九/十份外部分析的唯一属实未修项）。
+> - **诊断**：根因=utils/aliases.py 裸名词别名（白鹿/大鹏/白象）——分回语料中这些词作为普通动物远早于角色剧情出现（第 1 回实有「白鹿」1 次·生成器语料=分回 md 而非 text-search.json）；生成器 substring 匹配「alias in text」首回即误计。**临时删裸别名实证不可行**：白象/白鹿精整体从统计消失（分回文本以裸名词指称三妖·删除即失去召回）。
+> - **修复（character_appearance.py）**：`FIRST_APPEAR_OVERRIDE` 剧情首秀覆盖表——白鹿精→78（比丘国）·大鹏→74（狮驼岭）·白象→74（狮驼岭）；mentions/matrix/appear_in_chapters 保持词频统计口径不变；青毛狮子 39（乌鸡国假国王）为正确首秀不加覆盖——**第十份「青毛狮子→74」主张否决**。差分外科手术级：全 JSON 仅三妖 first_chapter 三字段变化（matrix/appear_in_chapters/ranking 零变化）。
+> - **W640 结论勘误（如实）**：③「appear_in_chapters 字段全空」系我探错位置（characters[].None 而非顶层字段）——顶层 matrix/appear_in_chapters 均已填实（35 人物·悟空 96 非零回·与 appear_in_chapters 一致）；第十份「matrix 93 回」为编造。②「dialogue 变体补充」撤销——utils.aliases 如来别名本就含 佛祖/世尊·58 条为真实语料量。新增登记：④对话重生成语料漂移（分回语料悟空 3516 vs 现网 3521）=数据重生成债·随 run_all 下一轮自然消化。
+> - **验证**：部署副本 site/data/json 同步（78/74/74）；数据漂移门禁 47 副本一致；探针 _w643_probe_appearance.js http 双页 PASS（白鹿精=78·大鹏=74·35 人·0 pageerror；appearance 为 fetch 主导页·file:// 无数据系既有特征非本批引入）；ruff 0 错；verify_delivery 核心全绿。
+> - **文件**：scripts/utils/aliases.py（还原·未改）、scripts/B_人物/character_appearance.py（覆盖表）、site/data/json/character_appearance.json（重生成+同步·scripts/output/data 为 gitignore 生成物不入库）、scripts/_w643_probe_appearance.js（新增）、docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md（B-8 勘误）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 ### v2.3.242（2026-10-01）：W642 Backlog B-9 登记 — 第十一份 HTML 页面层评审裁决收尾（11 份首个真读页面·命中与误读参半）·工程债聚合登记（audit 六族合并/色值→CSS 变量删 140 映射/确定性种子/EMBEDDED 命名统一/z-index token 化/表格 caption 等·中大·维护态按需逐项）·--ink-faint 先决核查注记·误读五项不采纳
 > **来源**：第十一份 HTML 页面层评审的登记项收尾（低垂项已于 W641 落地：description 229 页+title 清理+R1 扩展）——剩余可取项聚合登记为 B-9。
 > - **裁决回顾**：11 份外部分析首个真读页面的（引用具体 HTML/CSS/JS）·命中与误读参半——误读五项不采纳（CSP 哈希改 nonce/ESBuild：纯静态无构建且 generate_csp 全自动；hreflang 死链：site/en 140 文件在位且第 26 门禁验 89 对；SEO:INJECTED=幂等标记非未填充；pilgrim-team 截断=其样本被截，仓库 2019 行完整；暗色无开关=半错，index 有 15 处命中而数据子页缺入口）。
