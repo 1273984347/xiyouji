@@ -1,0 +1,17 @@
+{
+  "batch": "W648",
+  "version": "v2.3.248",
+  "date": "2026-10-02",
+  "desc": "读者数据来源占比人工截图留档",
+  "title": "W648 读者数据来源占比人工截图留档 — 后台真实答案=Nothing to display（无外部来源·全部直接访问）+「持续 Loading」根因=static.zgo.at DNS 污染",
+  "head_entry": "2026-10-02（v2.3.248 W648）来源占比人工截图留档——Top referrers 后台真实答案=Nothing to display（无外部来源·全部直接访问），「持续 Loading」根因=static.zgo.at DNS 污染致加载器不可达，截图×2 入库读者数据截图/）",
+  "changelog_body": "\n> **来源**：用户指令收口作者侧唯一剩余项（来源占比人工截图·直达路径写在复盘 §一）——computer-use 驱动真实 Edge 登后台取证。\n> - **结论**：来源占比=**无外部来源（全部直接访问）**——后台 Top referrers 小部件（30 日窗 2026-09-03~10-02）服务端真实答案=Nothing to display；Campaigns/Browsers/Systems/Locations/Languages/Sizes 同为空。30 访客全部直接流量，与「约 8 个月未主动分发」及 W629 归档判定自洽。\n> - **根因（「持续 Loading」真因纠正）**：后台小部件加载器 backend.js 托管于 static.zgo.at——该域遭 DNS 污染（假 IP=Facebook/Dropbox 段；本地 DNS、AliDNS DoH、权威 NS UDP 直查全中毒·TCP 53 被 RST）→ 加载器永不就位→全部小部件永久 Loading。W629 所记「自动化环境持续 Loading 不渲染」实为该网络层根因，非自动化环境特有。主域 goatcounter.com 未被污染，API 取数链路不受影响。\n> - **取证方法**：DevTools 控制台手工复刻加载契约——同源 GET /load-widget?widget=N&period-start=… 返回 JSON.html 注入对应容器（端点经 404/405 探测+Wayback 快照核对源码定位；POST=405、GET=200）。\n> - **留档**：读者数据截图/ 新增 dashboard-top-2026-10-02.png（周期页头·Pages 26/30）+ dashboard-topref-2026-10-02.png（Top referrers 特写）；读者数据复盘.md §一来源占比行回填+头部链注记+§二新增根因备注。\n> - **验证**：截图落盘核验（93,361B/75,292B）；复盘文档三处 Edit Grep 复核落地；verify_delivery 核心全绿。\n> - **文件**：docs/10-方法论沉淀/读者数据截图/dashboard-top-2026-10-02.png、docs/10-方法论沉淀/读者数据截图/dashboard-topref-2026-10-02.png（均新增）、docs/10-方法论沉淀/读者数据复盘.md、六文档、四页脚、workflows README、AGENTS 脚注、file-index。\n> - **状态**：已落地（本批提交并 push origin/main）。作者侧剩余项清零。\n",
+  "milestone_block": "- **v2.3.248 W648 读者数据来源占比人工截图留档**：\n  - 来源占比=无外部来源（全部直接访问）：Top referrers 30 日窗服务端真实答案=Nothing to display，其余六小部件同为空——与 W629 归档判定自洽\n  - 「持续 Loading」根因纠正：static.zgo.at DNS 污染致加载器不可达（非自动化环境特有）·主域 goatcounter.com 与 API 链路不受影响\n  - 截图×2 入库读者数据截图/+复盘 §一/§二 回填·作者侧剩余项清零\n",
+  "head_sentence": "来源占比留档收口（Nothing to display=无外部来源·zgo.at DNS 污染=Loading 真因）",
+  "agents_note": "2026-10-02（v2.3.248 W648）读者数据来源占比留档：无 § 结构性变更（Top referrers 真实答案=Nothing to display·「持续 Loading」根因=static.zgo.at DNS 污染·截图×2 入库+复盘回填），仅版本脚注同步",
+  "file_index_rows": [
+    "| docs/10-方法论沉淀/读者数据截图/dashboard-top-2026-10-02.png | W648 | 新增·30 日周期页头留档（Pages 26/30） |",
+    "| docs/10-方法论沉淀/读者数据截图/dashboard-topref-2026-10-02.png | W648 | 新增·Top referrers=Nothing to display 特写留档 |",
+    "| docs/10-方法论沉淀/读者数据复盘.md | W648 | 更新·§一来源占比回填+头部链注记+§二 Loading 根因备注 |"
+  ]
+}
