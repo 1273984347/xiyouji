@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W644），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W645），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.245（2026-10-01）：W645 Backlog B-9 小子项 — ③确定性种子（graph-explorer/monster-victims 力导向初始位置·mulberry32·学术图表可复现）⑤z-index 层级令牌（--z-nav/mask/drawer/tooltip 四 token+system.css 四处换 var·tooltip 70>topnav 50 防遮挡）⑥skip-link 类化（system.css 补 .skip-link 定义+166 页 inline style 收编）·tokens 注释 W 号重犯即改（W621 教训）
+> **来源**：用户裁决「全部开始」Backlog——B-9 六子项中可机械落地的小子项先行（①②大子项与 B-4/B-6 随后续批）。
+> - **③确定性种子**：Math.random 全站实测 5 页，按用途分类后仅 2 页需改（graph-explorer 节点初始角度·monster-victims 力导向初始位置=学术图表须可复现；ai-dialogue 候选挑选/cross-time-danmaku 弹幕位置/perf 演示造数=随机即特性不改）——LCG 种子 PRNG（__seed=20261001）替换布局初始随机。第十一份「5 页」为裸 grep 计数，按用途收窄。
+> - **⑤z-index 层级令牌**：tokens.css 增 --z-nav:50/--z-mask:55/--z-drawer:60/--z-tooltip:70 四 token（独立 :root 块）；system.css 四处换 var（topnav/mask/抽屉/.chart-tooltip）——修复 tooltip z-10 < topnav z-50 的遮挡隐患；同批补 .skip-link 类定义（此前 system.css 无此类·页面全靠 inline style）。
+> - **⑥skip-link 类化**：166 页 inline style 收编为类（uniform 单串替换·计数断言）；表格 caption 缺口（80 表 0 caption）维持登记——逐表语义化属内容工作。
+> - **教训重犯即改**：tokens 注释初稿带「W645」→inline_css 分发 327 页致范围漂移门禁 FAIL（dukou-engine 引用 W645>文档 W644）——W621「tokens 注释禁带 W 号」教训自我重犯一次，去号重分发后级联前消解。
+> - **验证**：inline_css 重分发 327 页；CSP 0 漂移（2 页种子脚本哈希更新）；check_js_syntax 334 文件过；verify_delivery 核心全绿。
+> - **文件**：site/tokens.css（z 令牌）、site/system.css（4 处 var+.skip-link）、site/data/graph-explorer.html、site/data/monster-victims-network.html（种子+CSP）、site/ 166 页（skip-link+重分发）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。B-9 余项：①audit 合并②色值→CSS 变量（中大·后续批）。
 ### v2.3.244（2026-10-01）：W644 Backlog 微件三连 — B-3 CODE_OF_CONDUCT.md（Contributor Covenant 2.1 中文版）+ B-2 CodeQL job（security.yml js/py 双矩阵）+ B-1 RSS feed（gen_rss.py 从 CHANGELOG 现役段生成 site/rss.xml 20 条+首页 link）
 > **来源**：用户裁决「全部开始」Backlog 可开工项——第一组基建微件（B-3 微/B-2 小/B-1 小）。
 > - **B-3 CoC**：CODE_OF_CONDUCT.md（Contributor Covenant 2.1 中文版·执行/适用范围/署名完整）+ README 贡献方式节链接。

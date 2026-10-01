@@ -11,6 +11,15 @@
 ---
 
 
+## W645 W645 Backlog B小子项（2026-10-01·v2.3.245）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/tokens.css | W645 | 更新·z-index 层级四令牌（--z-nav/mask/drawer/tooltip） |
+| site/system.css | W645 | 更新·四处 z-index 换 var+补 .skip-link 类定义 |
+| site/data/graph-explorer.html | W645 | 更新·力导向确定性种子（LCG） |
+| site/data/monster-victims-network.html | W645 | 更新·力导向确定性种子（LCG） |
+
 ## W644 W644 Backlog 微件三连（2026-10-01·v2.3.244）
 
 | 文件 | W | 说明 |

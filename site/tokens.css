@@ -321,3 +321,11 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
   html[data-theme="dark"] svg [fill="rgb(208, 45, 42)" i] { fill: #dd7871 !important; }  /* ×1 */
   html[data-theme="dark"] svg [fill="rgb(205, 41, 41)" i] { fill: #dc7872 !important; }  /* ×1 */
   html[data-theme="dark"] svg [fill="rgb(199, 35, 40)" i] { fill: #da7976 !important; }  /* ×1 */
+
+/* ── z-index 层级令牌：topnav/遮罩/抽屉/tooltip 统一层级（tooltip 高于 topnav 防遮挡） ── */
+:root {
+  --z-nav: 50;
+  --z-mask: 55;
+  --z-drawer: 60;
+  --z-tooltip: 70;
+}
