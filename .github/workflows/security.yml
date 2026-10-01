@@ -143,4 +143,25 @@ jobs:
               raise SystemExit(1)
           print(f"[E8 XSS] high 级别问题数：{high}，通过")
           PY
+  # B-2 CodeQL 静态分析（js/py 双矩阵·W644 登记）
+  codeql:
+    name: CodeQL 静态分析 (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [javascript, python]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+      - uses: github/codeql-action/autobuild@v3
+      - uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"
+
 # FILE_INDEX: .github/workflows/security.yml | W236-E | E8 安全工作流

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>详解西游记 · 更新动态</title>
+    <link>https://1273984347.github.io/xiyouji/</link>
+    <description>一源多形 · 数字人文可视化解读《西游记》100 回——版本发布批次动态（W### 编号·详见 CHANGELOG）。</description>
+    <language>zh-CN</language>
+    <item>
+      <title>v2.3.243 W643 Backlog B-8 数据质量修复落地 — character_appearance 专名消歧（FIRST_APPEAR_OVERRIDE 剧情首秀覆盖表：白鹿精 1→78·大鹏 12→74·白象 21→74·差分外科手术级仅三字段）·W640 结论勘误（appear_in_chapters 顶层已填实）·dialogue 变体已满足撤销·青毛狮子 74 主张否决（39 乌鸡国即首秀）</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.243</guid>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.242 W642 Backlog B-9 登记 — 第十一份 HTML 页面层评审裁决收尾（11 份首个真读页面·命中与误读参半）·工程债聚合登记（audit 六族合并/色值→CSS 变量删 140 映射/确定性种子/EMBEDDED 命名统一/z-index token 化/表格 caption 等·中大·维护态按需逐项）·--ink-faint 先决核查注记·误读五项不采纳</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.242</guid>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.241 W641 全站 meta description 注入 229 页 + title 清理 44 行 — 第十一份 HTML 页面层评审的可检主张落地（description 缺口实测 231/235 扩大到全站·inject_descriptions.py h2 序列推导·第 26 门禁 R1 扩 description 必备项防复发·双「详解西游记」×2 与 W 编号 title ×10 清零）</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.241</guid>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.240 W640 Backlog B-8 追加 — 第十份跨文件一致性分析裁决入档（数字排名类大半命中·「跨文件矛盾」三连不成立：cave 实测 19/3 一致与第九份互矛盾/speaker 实为 10/appear_in_chapters 编造 96vs93）·实测新增 appear_in_chapters 全空字段缺口·缺失维度类提案登记归档冻结</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.240</guid>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.239 W639 Backlog B-8 数据质量修复登记 — 第九份数据质量分析裁决入档（九份首个全保真：46/46 文件存在·白鹿精 first_chapter=1 等四项数值逐字验证·dialogue 6565 条/如来 58 条实测·并纠出本仓 journey_route 过期记录已勘误）·生成器层修复登记不直改 JSON·hardships 重分类不采纳为机械修复（奎木狼反证）</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.239</guid>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.238 W638 Backlog B-6 存档注记 — 第八份分析裁决入档（86 页二维矩阵+可引用性门禁规范草案·存在性零幻觉但分级未经验证抽查 2 硬伤·阻断式门禁即挂即全红须降级 WARN+基线·叙事脚本 2.6 万字违反归档裁决不执行·§2.2 出处四字段收编为第 28 门禁参考）</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.238</guid>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.237 W637 Backlog B-6 门禁升级路径 + B-7 脚本打包登记 — 第七份外部分析裁决入档（七份首个零幻觉·A 级 7 页/关系类 23 页全实证·「可引用性升级为门禁」采纳=WARN+基线只增策略·「pip 打包」登记 B-7 大型重启项）</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.237</guid>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.236 W636 Backlog B-6 登记 + 新增可视化九问评审清单 — 第六份外部可视化哲学分析裁决（六病灶两反两半·「砍到 20 个」核心建议否决=横跨 EN 镜像/搜索索引/47 副本/学术引用链的多月战役且与归档裁决冲突·仅取可引用性缺口与编辑清单两件·登记不开工）</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.236</guid>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.235 W635 Backlog B-5 追加学术增强子项 — 外部 FAIR/学术化分析裁决入档（Wikidata QID 对齐→领域本体→Zenodo/OSF 存档·均以 B-5 实体库为前置·重启触发）·安全响应头=平台受限登记（GitHub Pages 不支持自定义头·需 Cloudflare 前置）·其余各节（CSP/反馈/搜索/构建缓存/内容日历等）裁决为已完成或与冻结裁决冲突不采纳</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.235</guid>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.234 W634 外部路线图保真度裁决入档 — 40+ Issue 提案逐条取证（P0 13 项：8 完成/3 大半/2 增量·第四份 W575 时代旧快照审读）·5 项真增量登记维护态 Backlog（RSS/CodeQL/CoC/Three.js 懒加载/实体字段扩展·登记不开工·重启触发）</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.234</guid>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.233 W633 CI ruff 红灯热修复 — W631 落库两脚本文件尾缺换行（W292×2·09-27 会话保存缺陷随落库带入·落库前 lint 漏项教训）·check_citations/line_check 补尾换行</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.233</guid>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.232 W632 CITATION.cff 级联面漏提交热修复 — W629/W630/W631 三批 scoped 清单连续缺 CITATION（级联第 10 面 W628 新增）→ CI Delivery Gate 红灯而本地全绿（检出树≠工作树·W595 同族三连犯）·修复=补提交+教训升级</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.232</guid>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.231 W631 门禁脚本加固落库 — 09-27 S4 会话两笔未提交加固收口（check_citations 防静默跳过堵「报 100% 实为空真」盲区+line_check 语料迁移路径修正+双 --self-test）·工作树=提交库对齐（消除门禁运行态与版本态偏差）</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.231</guid>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.230 W630 第 26 门禁 SEO head 挂载 — check_seo_head.py 挂载 verify_delivery（slot 自 W591 预留·用户裁决挂载）·334 页 og/canonical/JSON-LD/hreflang/sitemap 集合一致·README 门禁口径 25→26·AGENTS/文档规范同步</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.230</guid>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.229 W629 作者侧待办收口 — 读者数据截图留档入库（dashboard-top/pages×2·computer-use 驱动真实浏览器）+ UV 曲线 API 逐日 SVG 生成（逐日和=31 与 total 一致）+ 复盘 §一/§二 回填与口径备注（仪表盘 35 visits vs API 31 时区语义差）</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.229</guid>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.228 W628 叙述面内容漂移清零 + 第 27 门禁防复发 — W628 审计 9 处真漂移全清（README W575 字面量×2/方法论 W529/文档规范 W423/CITATION 2.2.15/STRUCTURE 归档旧口径/workflows 17 项门禁快照/方法论当前版本 v2.0.60）·check_w_range_literal.py 挂载</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.228</guid>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.227 W627 i18n 根治层路线 B — EN 数据副本 site/en/json/ 七文件（EMBEDDED×部署 JSON 机械配对生成·零新增翻译资产）·两 EN 页 fetch 切换·探针边界反转 30/30×2·parity 检查器常驻</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.227</guid>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.226 W626 WP-A 度量闭环正式判定 — GoatCounter 令牌实操配置（computer-use UI 生成+剪贴板零转录入 .env）·fetch_gate_stats 实测 uv7=1/uv30=24·judge_gate 判定归档分支（冻结内容扩容·转工程批）·复盘回填+阻塞区更新·附带 942c64e 追记登记</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.226</guid>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.225 W625 EN 页数据显示面枚举名快赢英化 — methodology-matrix/chart-design 双页归一（ZHIR2EN 映射生成器机械配对·四轮 visual-judge 迭代·ROI 标题界内与免 resize 截图两教训）·顺带修复象限 undefined/scenarios 形状/散点标签重叠三案</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.225</guid>
+      <pubDate>Tue, 29 Sep 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>v2.3.224 W624 交接里程碑块级联根治 — batch_cascade W557 删除终点缺陷修复（整块淘汰=标题+连续 bullets·drop_block 提取 6 例单测）+ 33 组孤儿债务清理</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-v2.3.224</guid>
+      <pubDate>Tue, 29 Sep 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+  </channel>
+</rss>
