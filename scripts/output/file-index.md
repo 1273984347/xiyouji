@@ -11,6 +11,12 @@
 ---
 
 
+## W642 W642 Backlog B登记（2026-10-01·v2.3.242）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W642 | 更新·B-9 工程债聚合登记（audit 合并/色值→变量/种子/命名/z-index/语义化·第十一份评审收尾） |
+
 ## W641 W641 全站 meta description 注入页 + title 清理行（2026-10-01·v2.3.241）
 
 | 文件 | W | 说明 |
