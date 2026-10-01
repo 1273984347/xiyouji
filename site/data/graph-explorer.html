@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-yCXTnUMkHSnCvwT+endQT4WorLN/5SUrQzccMO16IZg=' 'sha256-1LzCWuOhmQ1UzBsRTh0OaEq6h6UoleGO/xjkF5nvPTA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-yCXTnUMkHSnCvwT+endQT4WorLN/5SUrQzccMO16IZg=' 'sha256-E0QrnuhX4Ex2ukEJ3V+qPx9Pdti9gCsZGxTCmr4qrwo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>知识图谱探索器 · 详解西游记</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/data/graph-explorer.html">
@@ -1446,6 +1446,7 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph", "title": "佛法=AI=西游 三元�
     return vis;
   }
   function layout(ids, edges){
+    var W=900,H=560,cx=W/2,cy=H/2;
     var __seed = 20261001; var __rand = function(){ __seed = (__seed * 1664525 + 1013904223) >>> 0; return __seed / 4294967296; };
     var k=0;
     ids.forEach(function(id){
