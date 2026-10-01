@@ -11,6 +11,14 @@
 ---
 
 
+## W646 W646 Backlog BThree.js 静态回退（2026-10-01·v2.3.246）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/character-relationship-3d.html | W646 | 更新·WebGL 不可用 try-catch+webgl-fallback 回退 2D 语义网络 |
+| site/en/character-relationship-3d.html | W646 | 更新·同上（EN 版·回退 EN 2D network） |
+| site/data/journey-geo-3d.html | W646 | 更新·同上（回退 2D 路线图） |
+
 ## W645 W645 Backlog B小子项（2026-10-01·v2.3.245）
 
 | 文件 | W | 说明 |

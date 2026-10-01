@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W645），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W646），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,13 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.246（2026-10-01）：W646 Backlog B-4 Three.js 静态回退 — 三页 WebGL 不可用 try-catch+webgl-fallback 块（zh/en relationship-3d 回退 2D 语义网络·journey-geo-3d 回退 2D 路线图）·双态探针（WebGL 正常=canvas/禁用=回退块·均 0 pageerror）·DPR 已有封顶确认（min(dpr,2)/移动 1.5）·懒加载不立项（defer 已在位）
+> **来源**：用户裁决「全部开始」Backlog——B-4 现状取证后收窄：Three.js 已 defer（懒加载不立项）·DPR 已封顶（min(dpr,2)/移动 1.5）·粒子数无失控页——**剩余真缺口=WebGL 不可用时整段初始化死亡**（new THREE.WebGLRenderer 无 try-catch·无回退 UI）。dukou-engine 无 THREE 引用（纯 CSS 3D）不属本批。
+> - **修复**：三页（zh/en relationship-3d·journey-geo-3d）renderer 初始化包 try-catch，catch 中注入 `.webgl-fallback` 回退块（zh 版指向 2D 语义网络/2D 路线图·EN 版指向 EN 2D network——回退目标均真实存在）+各页私有 style 块补回退样式（token 引用无裸色）。**过程纠错**：journey-geo-3d 首次替换打在赋值表达式中段（`renderer = try {` 语法错·check_js_syntax 当场拦）→改为 try 块内赋给外层 var 声明的 renderer。
+> - **双态验证**：WebGL 禁用环境（--disable-webgl）三页 fallback 块在位·0 pageerror；正常 WebGL 环境三页 canvas 在位·fallback 误现=否·0 pageerror。
+> - **验证**：CSP 重生成 0 漂移；check_js_syntax 334 文件过；verify_delivery 核心全绿。
+> - **文件**：site/data/character-relationship-3d.html、site/en/character-relationship-3d.html、site/data/journey-geo-3d.html（try-catch+回退块+样式+CSP）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。B-4 关闭（DPR/懒加载确认既有覆盖或不需要）。
 ### v2.3.245（2026-10-01）：W645 Backlog B-9 小子项 — ③确定性种子（graph-explorer/monster-victims 力导向初始位置·mulberry32·学术图表可复现）⑤z-index 层级令牌（--z-nav/mask/drawer/tooltip 四 token+system.css 四处换 var·tooltip 70>topnav 50 防遮挡）⑥skip-link 类化（system.css 补 .skip-link 定义+166 页 inline style 收编）·tokens 注释 W 号重犯即改（W621 教训）
 > **来源**：用户裁决「全部开始」Backlog——B-9 六子项中可机械落地的小子项先行（①②大子项与 B-4/B-6 随后续批）。
 > - **③确定性种子**：Math.random 全站实测 5 页，按用途分类后仅 2 页需改（graph-explorer 节点初始角度·monster-victims 力导向初始位置=学术图表须可复现；ai-dialogue 候选挑选/cross-time-danmaku 弹幕位置/perf 演示造数=随机即特性不改）——LCG 种子 PRNG（__seed=20261001）替换布局初始随机。第十一份「5 页」为裸 grep 计数，按用途收窄。
