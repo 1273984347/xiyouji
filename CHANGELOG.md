@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W643），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W644），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.244（2026-10-01）：W644 Backlog 微件三连 — B-3 CODE_OF_CONDUCT.md（Contributor Covenant 2.1 中文版）+ B-2 CodeQL job（security.yml js/py 双矩阵）+ B-1 RSS feed（gen_rss.py 从 CHANGELOG 现役段生成 site/rss.xml 20 条+首页 link）
+> **来源**：用户裁决「全部开始」Backlog 可开工项——第一组基建微件（B-3 微/B-2 小/B-1 小）。
+> - **B-3 CoC**：CODE_OF_CONDUCT.md（Contributor Covenant 2.1 中文版·执行/适用范围/署名完整）+ README 贡献方式节链接。
+> - **B-2 CodeQL**：security.yml 增 codeql job（js/python 双矩阵 fail-fast:false·init/autobuild/analyze v3·security-events 写权限）——与既有 npm-audit/pip-audit/csp-check/xss-scan 四轨并行。
+> - **B-1 RSS**：gen_rss.py 从 CHANGELOG 现役版段解析最近 20 条（标题/日期·RFC822 pubDate·链接统一指 CHANGELOG 主文件规避中文锚点不稳定）生成 site/rss.xml（XML 合法性已验）+ 首页 head 挂 alternate link。
+> - **验证**：rss.xml minidom 解析合法 20 条；security.yml YAML 解析过；ruff 0 错；verify_delivery 核心全绿。
+> - **文件**：CODE_OF_CONDUCT.md、scripts/gen_rss.py、site/rss.xml（均新增）、.github/workflows/security.yml、site/index.html（RSS link）、README.md（贡献节）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。Backlog 剩 B-4/B-5/B-6/B-7/B-9。
 ### v2.3.243（2026-10-01）：W643 Backlog B-8 数据质量修复落地 — character_appearance 专名消歧（FIRST_APPEAR_OVERRIDE 剧情首秀覆盖表：白鹿精 1→78·大鹏 12→74·白象 21→74·差分外科手术级仅三字段）·W640 结论勘误（appear_in_chapters 顶层已填实）·dialogue 变体已满足撤销·青毛狮子 74 主张否决（39 乌鸡国即首秀）
 > **来源**：用户裁决开工 B-8（W639/W640 登记的数据质量修复·九/十份外部分析的唯一属实未修项）。
 > - **诊断**：根因=utils/aliases.py 裸名词别名（白鹿/大鹏/白象）——分回语料中这些词作为普通动物远早于角色剧情出现（第 1 回实有「白鹿」1 次·生成器语料=分回 md 而非 text-search.json）；生成器 substring 匹配「alias in text」首回即误计。**临时删裸别名实证不可行**：白象/白鹿精整体从统计消失（分回文本以裸名词指称三妖·删除即失去召回）。

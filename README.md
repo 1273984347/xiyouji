@@ -2,7 +2,7 @@
 
 > 一源多形 · 数字人文可视化解读《西游记》100 回 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
 >
-> **当前版本 v2.3.243（2026-10-01）**： W643 B8数据质量修复落地 ·A1-A6 共 615 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> **当前版本 v2.3.244（2026-10-01）**： W644 Backlog微件三连B123 ·A1-A6 共 615 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 >
 > **版本号说明**：本项目的 `vX.Y.Z` 是**内容发布批次编号，不适用 SemVer 兼容性承诺**——站点无 API、无下游依赖方，每个发布批次（W###）递增 patch 位。MAJOR/MINOR 位对应内容阶段（v2.x = 内容体系成熟期）。判断"这个版本改了什么"请看 [CHANGELOG.md](CHANGELOG.md)，不要从版本号推断兼容性。
 >
@@ -193,7 +193,7 @@ python detect_unwrapped_tables.py   # 静态表格扫描（双轨之二）
 
 ## 贡献方式
 
-见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+见 [CONTRIBUTING.md](CONTRIBUTING.md)；参与即表示同意 [行为准则](CODE_OF_CONDUCT.md)。更新动态可订阅 [RSS](site/rss.xml)。
 
 ## AI 生成说明
 

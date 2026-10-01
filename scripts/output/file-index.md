@@ -11,6 +11,16 @@
 ---
 
 
+## W644 W644 Backlog 微件三连（2026-10-01·v2.3.244）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CODE_OF_CONDUCT.md | W644 | 新增·Contributor Covenant 2.1 中文版（B-3） |
+| .github/workflows/security.yml | W644 | 更新·增 CodeQL job（js/py 双矩阵·B-2） |
+| scripts/gen_rss.py | W644 | 新增·RSS 生成器（CHANGELOG 现役段 20 条·B-1） |
+| site/rss.xml | W644 | 新增·RSS feed（首发生成） |
+| site/index.html | W644 | 更新·head 挂 RSS alternate link |
+
 ## W643 W643 Backlog B数据质量修复落地（2026-10-01·v2.3.243）
 
 | 文件 | W | 说明 |
