@@ -1,5 +1,5 @@
 {
- "scan_date": "2026-10-02",
+ "scan_date": "2026-10-03",
  "scope": "site/data (D1: 不含 EN 镜像)",
  "pages": 86,
  "items": [
@@ -10,7 +10,7 @@
  ],
  "pass_rate": {
   "C1": "2/86",
-  "C2": "9/86",
+  "C2": "8/86",
   "C3": "1/86",
   "C4": "6/86"
  },
@@ -858,8 +858,8 @@
      "reason": "no-path"
     },
     "C2": {
-     "status": "ok",
-     "reason": ""
+     "status": "missing",
+     "reason": "no-params"
     },
     "C3": {
      "status": "missing",

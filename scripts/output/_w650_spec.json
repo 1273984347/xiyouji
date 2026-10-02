@@ -1,0 +1,22 @@
+{
+  "batch": "W650",
+  "version": "v2.3.250",
+  "date": "2026-10-02",
+  "desc": "第 28 门禁加固与 PRD 出库",
+  "title": "W650 第 28 门禁三项加固（C2 判据收紧+基线刷新·wrapper 防静默跳过·docstring 校正）+ PRD 移出公开仓库（真名防泄漏·用户裁决）+ workflows README 累积链瘦身",
+  "head_entry": "2026-10-02（v2.3.250 W650）第 28 门禁三项加固（C2 判据收紧+基线刷新 326→327·wrapper 防静默跳过 crash 即拦·docstring 校正），两份 PRD 移出公开仓库（真名防泄漏·本地留存·registry 引用改本地留存说明），workflows README 累积链瘦身 5590→305 字符保留实质批次清单）",
+  "changelog_body": "\n> **来源**：W649 落地后全量审查（用户发起）发现一项 P1 与四项小项，用户裁决处置——PRD 整份移出公开仓库 + 四项全修。\n> - **P1·PRD 出库**：W649 入库的两份第 28 门禁 PRD（_dev 副本+plans 权威版）含项目 Owner 真实姓名，系全仓首次出现（此前 CITATION.cff/LICENSE/git 作者均刻意不用真名）——`git rm --cached` 出库+gitignore（W620 出库先例）·本地文件保留·registry 引用改「本地留存未入公开仓库」说明。git 历史仍含（f5b20ea 已公开·不可变），当前文件面已清。\n> - **C2 判据收紧**：路径含子目录不再视为「有参数/口径说明」，须命中参数提示词（生成/参数/口径/阈值/样本/语料/模型/权重/归一）——否则仅写裸脚本路径的页假通过；实测翻转 1 页（hardship-heatmap）→ 基线刷新 missing 326→327（C2 9/86→8/86）·门禁绿·self-test 6/6。\n> - **wrapper 防静默跳过（对齐 W631）**：verify_delivery 第 28 门禁执行异常由 WARN 升 FAIL（crash 即拦不静默放过）+ exit 0 但输出缺「---- 第 28 门禁：」汇总行判 FAIL（防未真正扫描的空真）。\n> - **docstring 校正**：check_citability.py 头部自检说明「4 负样本+1 正样本」→「6 例：4 负样本+1 正样本+1 构建工具回归」（与实际用例数对齐·W649 审查发现）。\n> - **workflows README 累积链瘦身**：级联每批追加的「无 workflow 结构改动」链已膨胀至 5590 字符（150+ 批挤一行）——重写为实质批次清单（git log 排除 README.md 实测仅 W523/W536/W563/W571/W578 五批实质改动 workflow 文件+W464 perf 基线单列）+「其余各批无 workflow 结构改动·明细见 CHANGELOG」；级联三锚点（W450-W 前缀/单次 marker/首行版本）全保留实测兼容。\n> - **验证**：ruff 0 错；check_citability --self-test 6/6；基线刷新后 --gate 基线外违规 0；verify_delivery 核心全绿（第 28 门禁含新汇总行校验）；级联 dry-run→apply 10 面断言过。\n> - **文件**：scripts/check_citability.py、scripts/verify_delivery.py、.gitignore、docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md、.github/workflows/README.md、scripts/output/citability-baseline.txt（刷新）、citability-report.json（刷新）、两份 PRD（出库·git rm --cached）、scripts/output/_cascade_files_W650.txt、六文档、四页脚、CITATION、file-index。\n> - **状态**：已落地（本批提交并 push origin/main）。\n",
+  "milestone_block": "- **v2.3.250 W650 第 28 门禁三项加固+PRD 出库**：\n  - C2 判据收紧（路径含子目录≠有参数说明·须命中提示词）+基线刷新 326→327（C2 9/86→8/86）·wrapper 防静默跳过（crash 即拦+汇总行校验）·docstring 校正\n  - 两份第 28 门禁 PRD 移出公开仓库（Owner 真名防泄漏·git rm --cached+gitignore·本地留存·registry 引用改说明）\n  - workflows README 累积链瘦身 5590→305 字符（实质批次清单化·级联三锚点保留实测兼容）\n",
+  "head_sentence": "第 28 门禁三项加固+PRD 出库+workflow 链瘦身",
+  "agents_note": "2026-10-02（v2.3.250 W650）第 28 门禁三项加固与 PRD 出库：无 § 结构性变更（C2 判据收紧+基线刷新 326→327·wrapper crash 即拦+汇总行校验·两份 PRD 真名防泄漏出库本地留存·workflows README 累积链瘦身保留级联锚点），仅版本脚注同步",
+  "file_index_rows": [
+    "| scripts/check_citability.py | W650 | 更新·C2 判据收紧（子目录≠参数提示）+docstring 自检数校正 |",
+    "| scripts/verify_delivery.py | W650 | 更新·第 28 门禁 wrapper 防静默跳过（异常升 FAIL+汇总行校验） |",
+    "| scripts/output/citability-baseline.txt | W650 | 刷新·判据收紧后 missing 326→327（C2 9/86→8/86） |",
+    "| .gitignore | W650 | 更新·两份第 28 门禁 PRD 出库（真名防泄漏·本地留存） |",
+    "| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W650 | 更新·B-6 PRD 引用改本地留存说明 |",
+    "| .github/workflows/README.md | W650 | 瘦身·累积链 5590→305 字符（实质批次清单化·级联锚点保留） |",
+    "| docs/_dev/产品管理套件应用-2026-10-02/03-PRD-*.md 与 plans/gate28-citability-prd.md | W650 | 出库·git rm --cached（W649 曾入库） |",
+    "| scripts/output/_cascade_files_W650.txt | W650 | 新增·级联落盘清单 |"
+  ]
+}

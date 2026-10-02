@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W649），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W650），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.250（2026-10-02）：W650 第 28 门禁三项加固（C2 判据收紧+基线刷新·wrapper 防静默跳过·docstring 校正）+ PRD 移出公开仓库（真名防泄漏·用户裁决）+ workflows README 累积链瘦身
+> **来源**：W649 落地后全量审查（用户发起）发现一项 P1 与四项小项，用户裁决处置——PRD 整份移出公开仓库 + 四项全修。
+> - **P1·PRD 出库**：W649 入库的两份第 28 门禁 PRD（_dev 副本+plans 权威版）含项目 Owner 真实姓名，系全仓首次出现（此前 CITATION.cff/LICENSE/git 作者均刻意不用真名）——`git rm --cached` 出库+gitignore（W620 出库先例）·本地文件保留·registry 引用改「本地留存未入公开仓库」说明。git 历史仍含（f5b20ea 已公开·不可变），当前文件面已清。
+> - **C2 判据收紧**：路径含子目录不再视为「有参数/口径说明」，须命中参数提示词（生成/参数/口径/阈值/样本/语料/模型/权重/归一）——否则仅写裸脚本路径的页假通过；实测翻转 1 页（hardship-heatmap）→ 基线刷新 missing 326→327（C2 9/86→8/86）·门禁绿·self-test 6/6。
+> - **wrapper 防静默跳过（对齐 W631）**：verify_delivery 第 28 门禁执行异常由 WARN 升 FAIL（crash 即拦不静默放过）+ exit 0 但输出缺「---- 第 28 门禁：」汇总行判 FAIL（防未真正扫描的空真）。
+> - **docstring 校正**：check_citability.py 头部自检说明「4 负样本+1 正样本」→「6 例：4 负样本+1 正样本+1 构建工具回归」（与实际用例数对齐·W649 审查发现）。
+> - **workflows README 累积链瘦身**：级联每批追加的「无 workflow 结构改动」链已膨胀至 5590 字符（150+ 批挤一行）——重写为实质批次清单（git log 排除 README.md 实测仅 W523/W536/W563/W571/W578 五批实质改动 workflow 文件+W464 perf 基线单列）+「其余各批无 workflow 结构改动·明细见 CHANGELOG」；级联三锚点（W450-W 前缀/单次 marker/首行版本）全保留实测兼容。
+> - **验证**：ruff 0 错；check_citability --self-test 6/6；基线刷新后 --gate 基线外违规 0；verify_delivery 核心全绿（第 28 门禁含新汇总行校验）；级联 dry-run→apply 10 面断言过。
+> - **文件**：scripts/check_citability.py、scripts/verify_delivery.py、.gitignore、docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md、.github/workflows/README.md、scripts/output/citability-baseline.txt（刷新）、citability-report.json（刷新）、两份 PRD（出库·git rm --cached）、scripts/output/_cascade_files_W650.txt、六文档、四页脚、CITATION、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 
 ### v2.3.249（2026-10-02）：W649 第 28 门禁可视化可引用性挂载落地（check_citability·WARN+基线 344/326 冻结·B-6 第一步反转裁决）+ 产品管理套件文档入库 + chore 7b27cf1 对账追记 + partial commit 三犯根治
 > **来源**：用户裁决反转 B-6「登记不开工」批准第 28 门禁开工（产品管理套件应用产出 PRD·v1.1 判据经 86 页 markup 实测校准·排除构建工具引用假阳性源）；并行会话暂存批次由本批接续落地；chore 7b27cf1（未走级联）版段对账追记。
