@@ -622,6 +622,23 @@ def main():
         warn("SEO head 门禁执行异常（W630）: %s" % e)
 
 
+    # ---- 可视化可引用性门禁（2026-10-02 用户裁决挂载·第 28 门禁·B-6 第一步：slot 自 W638 预留。
+    # 来源=W636 缺口发现 / W637 门禁升级路径（WARN+基线只增·W555 先例）/ W638 出处四字段收编。
+    # 经用户批准开工=反转 B-6 三次「登记不开工」裁决（registry 已记账）。
+    # 基线 scripts/output/citability-baseline.txt 冻结存量 326 项缺口（86 页×4 项=344·D1 裁决仅 site/data）；
+    # 基线外新增违规 = FAIL 阻断；存量 WARN 面转 FAIL 的时点=D4 裁决「missing 收敛至阈值以下」，不预设日期）----
+    cit_py = os.path.join(_HERE, "check_citability.py")
+    try:
+        r = subprocess.run([sys.executable, cit_py, "--gate"], capture_output=True, text=True, timeout=120)
+        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("可视化可引用性门禁通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("可引用性基线外违规（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+    except Exception as e:
+        warn("可视化可引用性门禁执行异常（第 28 门禁）: %s" % e)
+
+
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:
         try:

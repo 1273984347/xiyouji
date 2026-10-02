@@ -1,0 +1,1911 @@
+{
+ "scan_date": "2026-10-02",
+ "scope": "site/data (D1: 不含 EN 镜像)",
+ "pages": 86,
+ "items": [
+  "C1",
+  "C2",
+  "C3",
+  "C4"
+ ],
+ "pass_rate": {
+  "C1": "2/86",
+  "C2": "9/86",
+  "C3": "1/86",
+  "C4": "6/86"
+ },
+ "detail": {
+  "site/data/81-hardships-view.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/81-hardships.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-version"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/aesthetics.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/ai-dialogue.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/business-model.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/cave-estate.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/century-dialogue.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/chapter-stats.html": {
+   "items": {
+    "C1": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "ok",
+     "reason": ""
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/chapter-structure-graph.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/character-appearance.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-version"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/character-dynamic-network.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/character-presence-timeline.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/character-relationship-3d-view.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/character-relationship-3d.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/character-semantic-network.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/character-sentiment-arc.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/chart-design.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-version"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "ok",
+     "reason": ""
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/cognitive-psychology.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/concept-device.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/counterfactual.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/criticism-history.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": true
+  },
+  "site/data/cross-time-danmaku.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/cultural-misreading.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/customs-pass-route.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/data-explorer.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/deconstruction.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/dialogue-sentiment.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/ecology.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/emotional-heatmap.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/ethics-consumption.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/famous-time-travel.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/four-dimensional-research-network.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/four-heavenly-kings-artifacts.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/game-webnovel.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/global-pattern.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/graph-explorer.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "ok",
+     "reason": ""
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/guanyin-six-roles-network.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/hardship-difficulty-heatmap.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/hardship-heatmap.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/heaven-power-network.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/intertextuality-network.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L2",
+   "has_anchor": false
+  },
+  "site/data/journey-geo-3d.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/journey-geo-semiotics.html": {
+   "items": {
+    "C1": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "ok",
+     "reason": ""
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/journey-map-interactive.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/journey-route.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-version"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/journey-spacetime.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/jurisprudence.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/karma-reincarnation.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/language-style-radar.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/linguistics.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": false
+  },
+  "site/data/magic-system.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/material-archaeology.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/mbti-evolution.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/methodology-matrix.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/ming-political-thought-comparison.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": false
+  },
+  "site/data/monster-background.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/monster-capability-radar.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": false
+  },
+  "site/data/monster-ecology-network.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": false
+  },
+  "site/data/monster-female-network.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/monster-hierarchy-network.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/monster-sociology.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/monster-victims-network.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/music-structure.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/narrative-experiment.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/narrative-rhythm-curve.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/narratology-12d-network.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": false
+  },
+  "site/data/narratology-13d-network.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": false
+  },
+  "site/data/perf-canvas-rendering.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/philosophy.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": false
+  },
+  "site/data/pilgrim-team-dynamic-network.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/pilgrim-team-psychology-arc.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": false
+  },
+  "site/data/poetry-rhythm-analysis.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": false
+  },
+  "site/data/power-resources.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/relationships.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "gitignore-target"
+    },
+    "C2": {
+     "status": "ok",
+     "reason": ""
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/risk-project.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": false
+  },
+  "site/data/search.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": false
+  },
+  "site/data/six-senses-narratology-network.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/social-media.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/tag-cloud.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": false
+  },
+  "site/data/text-evolution.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/text-search.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-version"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "ok",
+     "reason": ""
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/theological-intervention-network.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-region"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/timeline.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  },
+  "site/data/underworld-power-network.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": false
+  },
+  "site/data/visual-art.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-version"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "ok",
+     "reason": ""
+    }
+   },
+   "cite_grade": "L3",
+   "has_anchor": true
+  },
+  "site/data/workplace.html": {
+   "items": {
+    "C1": {
+     "status": "missing",
+     "reason": "no-path"
+    },
+    "C2": {
+     "status": "missing",
+     "reason": "no-script"
+    },
+    "C3": {
+     "status": "missing",
+     "reason": "no-cite"
+    },
+    "C4": {
+     "status": "missing",
+     "reason": "no-download"
+    }
+   },
+   "cite_grade": "L0",
+   "has_anchor": true
+  }
+ }
+}
