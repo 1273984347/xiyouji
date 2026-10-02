@@ -11,6 +11,21 @@
 ---
 
 
+## W649 W649 第门禁可视化可引用性挂载落地（2026-10-02·v2.3.249）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_citability.py | W649 | 新增·第 28 门禁可视化可引用性（四判据·WARN+基线冻结·self-test 6 例） |
+| scripts/verify_delivery.py | W649 | 更新·挂第 28 门禁（基线外新增 FAIL） |
+| scripts/output/citability-baseline.txt | W649 | 新增·基线冻结（344 行/missing 326） |
+| scripts/output/citability-report.json | W649 | 新增·首跑报告 |
+| docs/_dev/产品管理套件应用-2026-10-02/×6 | W649 | 新增·路线图/ICE 矩阵/PRD-第 28 门禁/产品脑暴/用户反馈分析/产品指标复盘 |
+| docs/superpowers/plans/2026-10-02-gate28-citability-prd.md | W649 | 新增·第 28 门禁 PRD（v1.1 判据实测校准） |
+| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W649 | 更新·B-6 裁决变更记账（第一步开工·第二步仍登记） |
+| docs/10-方法论沉淀/读者数据复盘.md | W649 | 更新·第零·二 页面级读数与三源同采法 |
+| scripts/output/_cascade_files_W649.txt | W649 | 新增·级联落盘清单（partial commit 三犯根治首用） |
+| scripts/batch_cascade.py 等 35 文件 | W649 | chore 7b27cf1 对账追记·S4/审计脚本清账+落盘清单加固 |
+
 ## W648 W648 读者数据来源占比人工截图留档（2026-10-02·v2.3.248）
 
 | 文件 | W | 说明 |

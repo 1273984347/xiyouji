@@ -4,13 +4,25 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W648），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W649），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.249（2026-10-02）：W649 第 28 门禁可视化可引用性挂载落地（check_citability·WARN+基线 344/326 冻结·B-6 第一步反转裁决）+ 产品管理套件文档入库 + chore 7b27cf1 对账追记 + partial commit 三犯根治
+> **来源**：用户裁决反转 B-6「登记不开工」批准第 28 门禁开工（产品管理套件应用产出 PRD·v1.1 判据经 86 页 markup 实测校准·排除构建工具引用假阳性源）；并行会话暂存批次由本批接续落地；chore 7b27cf1（未走级联）版段对账追记。
+> - **第 28 门禁挂载**：verify_delivery 增「可视化可引用性」（check_citability.py --gate·slot 自 W638 预留）——扫描区=`<div id="dataSource">` ∪ 含「数据源：」的字符串字面量（fetch/EMBEDDED 双态都收）；四判据 C1 数据路径+版本 / C2 生成脚本+参数（排除 inline_css.py·w334_font_subset.py 构建工具假阳性）/ C3 引用格式任一锚点 / C4 下载入口或 EMBEDDED 声明；D1 范围仅 site/data 86 页；形态=WARN+基线冻结（citability-baseline.txt 首跑 344 行/missing 326·C1 2/86 C2 9/86 C3 1/86 C4 6/86）·基线外新增违规=FAIL·存量转 FAIL 时点=D4「missing 收敛至阈值以下」不预设日期；--self-test 6 例含构建工具回归用例（PASS）。**实证 W638「86 页无一页满足四项」结论成立**。
+> - **registry 裁决变更记账**：B-6 第一步（第 28 门禁）已开工（本批）；第二步（86 页引用组件 APA/MLA/BibTeX+PNG/SVG 导出）仍维持「登记不开工」另立 PRD 再裁。
+> - **产品管理套件文档入库**：docs/_dev/产品管理套件应用-2026-10-02/ 六件（01 路线图更新报告/02 需求优先级 ICE 矩阵/03 PRD-第 28 门禁/04 产品脑暴-归档态价值与解冻弹药/05 用户反馈分析-通路盘点与代理语料/06 产品指标复盘-季度快照与页面级读数）+ plans/2026-10-02-gate28-citability-prd.md。
+> - **读者数据复盘增补**：第零·二「页面级读数与三源同采法」——Pages N/M 读数语义（26/30≈三成路径有访问）、基数 <5 环比属噪声、rum 信标行剔出页面榜、三源清单（API 判定/后台截图留档/GitHub Traffic API 第二源）与 clones uniques 不可换算读者数警告（225 vs 3 差值=CI/机器人拉取）·Traffic 14 日窗须定期快照。
+> - **AGENTS §4.2/§4.3 补录**：第 28 门禁条目；取证枚举升四陷阱（④判定文件在库与否必须核 git ls-files·磁盘存在≠跟踪——W649 实证 S4 目录误判三份分析产物失真）；partial commit 三犯根治条目（级联落盘清单 _cascade_files_<批号>.txt 按清单 add·chore 对账追记规则·并行批次 pathspec 提交互斥）。
+> - **chore 7b27cf1 对账追记**：S4/审计一次性脚本清账 35 文件入库（tracked 3 真实修正+未跟踪 32·`_` 前缀 ruff exclude 不入 CI）+batch_cascade.py --apply 落盘清单防复发——未走级联，本段追记对账。
+> - **验证**：check_citability --self-test 6/6 PASS；ruff 0 错；verify_delivery 核心全绿（第 28 门禁 WARN 基线模式实测）；级联 dry-run→apply 10 面断言过；前批 chore CI/Security 已绿。
+> - **文件**：scripts/check_citability.py、scripts/output/citability-baseline.txt、scripts/output/citability-report.json、scripts/verify_delivery.py（挂载）、AGENTS.md（§4.2/§4.3 补录）、docs/10-方法论沉淀/读者数据复盘.md（第零·二）、docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md（B-6 记账）、docs/_dev/产品管理套件应用-2026-10-02/×6（新增）、docs/superpowers/plans/2026-10-02-gate28-citability-prd.md（新增）、scripts/output/_cascade_files_W649.txt（新增）、六文档、四页脚、workflows README、CITATION、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 
 ### v2.3.248（2026-10-02）：W648 读者数据来源占比人工截图留档 — 后台真实答案=Nothing to display（无外部来源·全部直接访问）+「持续 Loading」根因=static.zgo.at DNS 污染
 > **来源**：用户指令收口作者侧唯一剩余项（来源占比人工截图·直达路径写在复盘 §一）——computer-use 驱动真实 Edge 登后台取证。
