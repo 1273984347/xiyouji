@@ -630,13 +630,16 @@ def main():
     cit_py = os.path.join(_HERE, "check_citability.py")
     try:
         r = subprocess.run([sys.executable, cit_py, "--gate"], capture_output=True, text=True, timeout=120)
-        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
-        if r.returncode == 0:
-            ok("可视化可引用性门禁通过（%s）" % (tail[0] if tail else "无输出"))
-        else:
-            fail("可引用性基线外违规（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
     except Exception as e:
-        warn("可视化可引用性门禁执行异常（第 28 门禁）: %s" % e)
+        fail("可视化可引用性门禁执行异常（第 28 门禁·crash 即拦不静默放过·W650 对齐 W631 防静默跳过）: %s" % e)
+    else:
+        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
+        if r.returncode != 0:
+            fail("可引用性基线外违规（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+        elif "---- 第 28 门禁：" not in r.stdout:
+            fail("可引用性门禁输出缺汇总行（疑似未真正扫描·防静默跳过 W650）：%r" % r.stdout[-160:])
+        else:
+            ok("可视化可引用性门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
 
 
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----

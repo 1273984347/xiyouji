@@ -20,7 +20,7 @@
 用法：
   python scripts/check_citability.py --generate-baseline   # 首跑冻结存量
   python scripts/check_citability.py --gate                # 门禁模式（verify_delivery 调用）
-  python scripts/check_citability.py --self-test           # 4 负样本 + 1 正样本自检
+  python scripts/check_citability.py --self-test           # 6 例自检：4 负样本 + 1 正样本 + 1 构建工具回归
   python scripts/check_citability.py                       # 报告模式（不判退出码）
 
 退出码：0=通过 / 1=存在基线外违规（或报告模式下存在违规）/ 2=self-test 断言失败
@@ -125,11 +125,11 @@ def check_page(page: Path) -> dict[str, tuple[str, str]]:
     else:
         c1 = ("ok", "")
 
-    # ---- C2 生成脚本 + 参数（排除构建工具）----
+    # ---- C2 生成脚本 + 参数（排除构建工具；W650 收紧：路径含子目录不再视为「有参数/口径说明」，
+    # 须命中参数提示词——否则仅写裸脚本路径的页会假通过）----
     scripts = [s for s in RE_SCRIPT_PATH.findall(region) if not s.endswith(BUILD_TOOLS)]
     if scripts:
-        hinted = bool(RE_PARAM_HINT.search(region)) or any("/" in s.split("scripts/", 1)[-1] for s in scripts)
-        c2 = ("ok", "") if hinted else ("missing", "no-params")
+        c2 = ("ok", "") if RE_PARAM_HINT.search(region) else ("missing", "no-params")
     elif RE_SCRIPT_PATH.search(region):
         c2 = ("missing", "build-tool-only")
     else:

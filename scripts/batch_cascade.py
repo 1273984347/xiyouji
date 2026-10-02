@@ -174,7 +174,7 @@ def main():
                  f"> **W450-W{new_w}**：verify 门禁体系扩展", out, count=1)
     marker = "无 workflow 结构改动）。"
     assert out.count(marker) == 1, f"里程碑尾标记出现 {out.count(marker)} 次"
-    out = out.replace(marker, f"无 workflow 结构改动）+ {new_w} {desc}·无 workflow 结构改动）。", 1)
+    out = out.replace(marker, f"无 workflow 结构改动）+ W{new_w} {desc}·无 workflow 结构改动）。", 1)
     pend.append((p, out, nl))
 
     # ---------- 四页脚 ----------

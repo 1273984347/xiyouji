@@ -11,6 +11,19 @@
 ---
 
 
+## W650 W650 第门禁三项加固（2026-10-02·v2.3.250）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_citability.py | W650 | 更新·C2 判据收紧（子目录≠参数提示）+docstring 自检数校正 |
+| scripts/verify_delivery.py | W650 | 更新·第 28 门禁 wrapper 防静默跳过（异常升 FAIL+汇总行校验） |
+| scripts/output/citability-baseline.txt | W650 | 刷新·判据收紧后 missing 326→327（C2 9/86→8/86） |
+| .gitignore | W650 | 更新·两份第 28 门禁 PRD 出库（真名防泄漏·本地留存） |
+| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W650 | 更新·B-6 PRD 引用改本地留存说明 |
+| .github/workflows/README.md | W650 | 瘦身·累积链 5590→305 字符（实质批次清单化·级联锚点保留） |
+| docs/_dev/产品管理套件应用-2026-10-02/03-PRD-*.md 与 plans/gate28-citability-prd.md | W650 | 出库·git rm --cached（W649 曾入库） |
+| scripts/output/_cascade_files_W650.txt | W650 | 新增·级联落盘清单 |
+
 ## W649 W649 第门禁可视化可引用性挂载落地（2026-10-02·v2.3.249）
 
 | 文件 | W | 说明 |
