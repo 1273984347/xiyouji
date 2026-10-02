@@ -1,0 +1,5553 @@
+{
+  "summary": {
+    "generated_at": "2026-09-30T01:05:42+08:00",
+    "pages_scanned": 86,
+    "pages_with_strong_signature": 63,
+    "pages_without_strong_signature": 23,
+    "encoding_type_distribution": {
+      "折线": 31,
+      "饼/环形": 21,
+      "力导向网络": 19,
+      "桑基流向": 12,
+      "连续色阶/热力": 11,
+      "层次树": 10,
+      "矩形树图": 8,
+      "面积": 8,
+      "堆叠": 6,
+      "3D(Three)": 2,
+      "打包/分区": 1,
+      "弦图": 1,
+      "地理投影": 1
+    },
+    "path_signature_distribution": {
+      "雷达图(命名)": 30,
+      "Canvas2D": 25
+    },
+    "encoding_types_per_page_buckets": {
+      "0": 23,
+      "1": 23,
+      "2": 21,
+      "3": 12,
+      "4+": 7
+    },
+    "avg_distinct_encoding_types_per_page": 1.52,
+    "max_encoding_types_on_one_page": 6,
+    "token_used_in_js_pages": {
+      "chart-2": 1,
+      "chart-3": 1,
+      "chart-4": 1
+    },
+    "token_defined_in_page_pages": {
+      "chart-1": 86,
+      "chart-2": 86,
+      "chart-3": 86,
+      "chart-4": 86,
+      "chart-5": 86,
+      "chart-6": 86
+    },
+    "js_channel_pages": {
+      "hover绑定": 68,
+      "tooltip运行时": 30
+    },
+    "html_channel_pages": {
+      "可达性属性": 86,
+      "筛选控件": 26,
+      "键盘绑定": 24
+    },
+    "hardcoded_fill_pages": 45,
+    "hardcoded_fill_occurrences": 341,
+    "hardcoded_fill_distinct_values": 32,
+    "hardcoded_fill_top_values": {
+      "#FFF": 19,
+      "#23201A": 17,
+      "#C8463A": 16,
+      "#6B6455": 12,
+      "#3A6B8C": 11,
+      "#C9A063": 9,
+      "#1A1410": 7,
+      "#E9B885": 5,
+      "#8A7A5A": 5,
+      "#8B4513": 5,
+      "#FAF7F2": 3,
+      "#8A7A6A": 3,
+      "#FFF8E7": 3,
+      "#8A7C6A": 3,
+      "#5A3828": 3
+    },
+    "data_keys_proxy_total": 1148,
+    "naive_three_false_positive": 84,
+    "sq4_ladder": {
+      "静态编码+交互承载": 19,
+      "静态编码+仅控件承载": 12,
+      "静态编码·无任何承载": 32,
+      "仅交互承载·无静态签名": 1,
+      "仅控件承载·无静态签名": 11,
+      "静态签名未覆盖·且无承载标记": 11
+    },
+    "sq4_ladder_broad": {
+      "静态编码+交互承载": 40,
+      "静态编码+仅控件承载": 10,
+      "静态编码·无任何承载": 13,
+      "仅交互承载·无静态签名": 10,
+      "仅控件承载·无静态签名": 6,
+      "静态签名未覆盖·且无承载标记": 7
+    },
+    "sq4_ladder_pages": {
+      "静态编码+交互承载": [
+        "81-hardships.html",
+        "business-model.html",
+        "cognitive-psychology.html",
+        "cultural-misreading.html",
+        "deconstruction.html",
+        "dialogue-sentiment.html",
+        "ecology.html",
+        "global-pattern.html",
+        "journey-route.html",
+        "jurisprudence.html",
+        "karma-reincarnation.html",
+        "linguistics.html",
+        "magic-system.html",
+        "monster-sociology.html",
+        "philosophy.html",
+        "power-resources.html",
+        "relationships.html",
+        "risk-project.html",
+        "text-evolution.html"
+      ],
+      "静态编码+仅控件承载": [
+        "character-dynamic-network.html",
+        "cross-time-danmaku.html",
+        "hardship-heatmap.html",
+        "journey-geo-3d.html",
+        "journey-map-interactive.html",
+        "journey-spacetime.html",
+        "mbti-evolution.html",
+        "monster-ecology-network.html",
+        "narrative-rhythm-curve.html",
+        "pilgrim-team-dynamic-network.html",
+        "pilgrim-team-psychology-arc.html",
+        "poetry-rhythm-analysis.html"
+      ],
+      "静态编码·无任何承载": [
+        "aesthetics.html",
+        "chapter-stats.html",
+        "chapter-structure-graph.html",
+        "character-appearance.html",
+        "character-presence-timeline.html",
+        "character-relationship-3d.html",
+        "character-semantic-network.html",
+        "character-sentiment-arc.html",
+        "chart-design.html",
+        "counterfactual.html",
+        "criticism-history.html",
+        "four-dimensional-research-network.html",
+        "four-heavenly-kings-artifacts.html",
+        "game-webnovel.html",
+        "guanyin-six-roles-network.html",
+        "heaven-power-network.html",
+        "intertextuality-network.html",
+        "journey-geo-semiotics.html",
+        "material-archaeology.html",
+        "methodology-matrix.html",
+        "monster-background.html",
+        "monster-female-network.html",
+        "monster-hierarchy-network.html",
+        "monster-victims-network.html",
+        "music-structure.html",
+        "narratology-12d-network.html",
+        "narratology-13d-network.html",
+        "six-senses-narratology-network.html",
+        "theological-intervention-network.html",
+        "underworld-power-network.html",
+        "visual-art.html",
+        "workplace.html"
+      ],
+      "仅交互承载·无静态签名": [
+        "ethics-consumption.html"
+      ],
+      "仅控件承载·无静态签名": [
+        "81-hardships-view.html",
+        "ai-dialogue.html",
+        "character-relationship-3d-view.html",
+        "concept-device.html",
+        "data-explorer.html",
+        "graph-explorer.html",
+        "hardship-difficulty-heatmap.html",
+        "perf-canvas-rendering.html",
+        "search.html",
+        "tag-cloud.html",
+        "text-search.html"
+      ],
+      "静态签名未覆盖·且无承载标记": [
+        "cave-estate.html",
+        "century-dialogue.html",
+        "customs-pass-route.html",
+        "emotional-heatmap.html",
+        "famous-time-travel.html",
+        "language-style-radar.html",
+        "ming-political-thought-comparison.html",
+        "monster-capability-radar.html",
+        "narrative-experiment.html",
+        "social-media.html",
+        "timeline.html"
+      ]
+    },
+    "sq4_encoding_pages": 63,
+    "sq4_static_only_pages": 32,
+    "sq4_static_only_pages_broad": 13,
+    "sq4_encoding_pages_without_payload_ratio": 0.508,
+    "sq4_encoding_pages_without_payload_ratio_broad": 0.206,
+    "sq4_pages_with_interactive_payload": 20,
+    "sq4_pages_with_interactive_payload_broad": 50,
+    "sq4_interactive_field_median": 5.5,
+    "sq4_interactive_field_median_broad": 2.5,
+    "sq4_interactive_field_max": 34,
+    "sq4_hover_but_no_payload": 26,
+    "sq4_tip_block_total": 1436,
+    "sq4_tip_text_chars_total": 45966,
+    "sq4_control_pages": 26
+  },
+  "pages": [
+    {
+      "page": "81-hardships-view.html",
+      "encodings": [],
+      "path_signatures": [
+        "Canvas2D"
+      ],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 7,
+      "tip_blocks": 0,
+      "tip_text_chars": 0,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "meta",
+        "title"
+      ],
+      "broad_field_count": 2,
+      "control_count": 3,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "81-hardships.html",
+      "encodings": [
+        "层次树",
+        "桑基流向",
+        "矩形树图"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 3,
+      "encoding_hits": {
+        "桑基流向": 1,
+        "矩形树图": 1,
+        "层次树": 1
+      },
+      "weak_signatures": [
+        "矩形元素"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 7,
+      "tip_blocks": 7,
+      "tip_text_chars": 130,
+      "interactive_field_refs": [
+        "name"
+      ],
+      "interactive_field_count": 1,
+      "broad_field_refs": [
+        "cause",
+        "chapter",
+        "difficulty",
+        "ending",
+        "name",
+        "start"
+      ],
+      "broad_field_count": 6,
+      "control_count": 4,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "aesthetics.html",
+      "encodings": [
+        "层次树",
+        "折线",
+        "矩形树图",
+        "连续色阶/热力"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 4,
+      "encoding_hits": {
+        "矩形树图": 1,
+        "层次树": 1,
+        "折线": 1,
+        "连续色阶/热力": 2
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 0,
+      "tip_blocks": 13,
+      "tip_text_chars": 909,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "ai-dialogue.html",
+      "encodings": [],
+      "path_signatures": [],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 1,
+      "tip_blocks": 11,
+      "tip_text_chars": 85,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "true"
+      ],
+      "broad_field_count": 1,
+      "control_count": 1,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "business-model.html",
+      "encodings": [
+        "折线",
+        "饼/环形"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "饼/环形": 4,
+        "折线": 2
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 14,
+      "hardcoded_fill_hex_values": [
+        "#23201A",
+        "#3A6B8C",
+        "#6B6455",
+        "#C8463A",
+        "#C9A063",
+        "#E9B885",
+        "#FFF"
+      ],
+      "data_keys_proxy": 83,
+      "tip_blocks": 23,
+      "tip_text_chars": 324,
+      "interactive_field_refs": [
+        "CEO",
+        "CTO",
+        "career_level",
+        "satisfaction"
+      ],
+      "interactive_field_count": 4,
+      "broad_field_refs": [
+        "CEO",
+        "CMO",
+        "CTO",
+        "achievements",
+        "acquired_before_ipo",
+        "acquirers",
+        "acquisition_rate",
+        "avg_satisfaction",
+        "better_culture",
+        "business_lessons",
+        "business_model",
+        "career_insights",
+        "career_level",
+        "career_peak",
+        "career_stages",
+        "career_stats",
+        "career_trough",
+        "chapter",
+        "company_name",
+        "comparison_dimensions",
+        "comparison_matrix",
+        "concept_list",
+        "concept_name",
+        "core_business",
+        "cross_concept_insight",
+        "culture",
+        "data_files",
+        "decision_making",
+        "definition",
+        "efficiency",
+        "employee_benefits",
+        "employee_count",
+        "employees",
+        "employer",
+        "end",
+        "english_name",
+        "exit_outcome",
+        "funding_rounds",
+        "highest_satisfaction",
+        "innovation",
+        "ipo_failure_root_cause",
+        "ipo_matrix",
+        "ipo_status",
+        "ipo_ticker",
+        "key_findings",
+        "key_insights",
+        "key_pattern",
+        "kpi",
+        "larger_scale",
+        "leadership",
+        "leaving_reason",
+        "lowest_satisfaction",
+        "monster_business",
+        "monster_business_insights",
+        "monster_companies",
+        "more_bureaucratic",
+        "more_efficient",
+        "more_innovative",
+        "more_transparent",
+        "name",
+        "org_structure",
+        "organization_comparison",
+        "organizations",
+        "revenue",
+        "revenue_model",
+        "risk_factors",
+        "salary",
+        "satisfaction",
+        "stage",
+        "stronger_leadership",
+        "successfully_ipo",
+        "summary",
+        "title",
+        "total_companies",
+        "total_concepts",
+        "total_data_points",
+        "total_stages",
+        "total_years_in_pilgrim",
+        "transparency",
+        "valuation",
+        "vision",
+        "wukong_career",
+        "years_under_mountain"
+      ],
+      "broad_field_count": 83,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "cave-estate.html",
+      "encodings": [],
+      "path_signatures": [],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 0,
+      "tip_blocks": 0,
+      "tip_text_chars": 0,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "century-dialogue.html",
+      "encodings": [],
+      "path_signatures": [],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 0,
+      "tip_blocks": 4,
+      "tip_text_chars": 18,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "chapter-stats.html",
+      "encodings": [
+        "折线"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "折线": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 15,
+      "tip_blocks": 5,
+      "tip_text_chars": 199,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "avg_chars_per_chapter",
+        "avg_dialogue_ratio",
+        "chapter",
+        "chinese_chars",
+        "dialogue_chars",
+        "dialogue_ratio",
+        "longest_chapter",
+        "narrative_chars",
+        "per_chapter",
+        "poem_count",
+        "shortest_chapter",
+        "total_chapters",
+        "total_chars",
+        "total_dialogue_chars",
+        "total_poems"
+      ],
+      "broad_field_count": 15,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "chapter-structure-graph.html",
+      "encodings": [
+        "层次树"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "层次树": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 1,
+      "tip_blocks": 8,
+      "tip_text_chars": 305,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "end"
+      ],
+      "broad_field_count": 1,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "character-appearance.html",
+      "encodings": [
+        "连续色阶/热力"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "连续色阶/热力": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 1,
+      "hardcoded_fill_hex_values": [
+        "#C8463A"
+      ],
+      "data_keys_proxy": 0,
+      "tip_blocks": 12,
+      "tip_text_chars": 113,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "character-dynamic-network.html",
+      "encodings": [
+        "力导向网络"
+      ],
+      "path_signatures": [
+        "Canvas2D"
+      ],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "力导向网络": 3
+      },
+      "weak_signatures": [
+        "圆元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 0,
+      "tip_blocks": 6,
+      "tip_text_chars": 934,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 9,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "character-presence-timeline.html",
+      "encodings": [
+        "折线"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "折线": 2
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 0,
+      "tip_blocks": 4,
+      "tip_text_chars": 144,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "character-relationship-3d-view.html",
+      "encodings": [],
+      "path_signatures": [
+        "Canvas2D"
+      ],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 13,
+      "tip_blocks": 0,
+      "tip_text_chars": 0,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "desc",
+        "group",
+        "id",
+        "importance",
+        "links",
+        "meta",
+        "name",
+        "nodes",
+        "note",
+        "source",
+        "target",
+        "title",
+        "type"
+      ],
+      "broad_field_count": 13,
+      "control_count": 3,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "character-relationship-3d.html",
+      "encodings": [
+        "3D(Three)"
+      ],
+      "path_signatures": [
+        "Canvas2D"
+      ],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "3D(Three)": 28
+      },
+      "weak_signatures": [],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 2,
+      "tip_blocks": 0,
+      "tip_text_chars": 0,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "pointer",
+        "x"
+      ],
+      "broad_field_count": 2,
+      "control_count": 0,
+      "loads_three_lib": true,
+      "naive_three_hit": true
+    },
+    {
+      "page": "character-semantic-network.html",
+      "encodings": [
+        "力导向网络",
+        "连续色阶/热力",
+        "饼/环形"
+      ],
+      "path_signatures": [
+        "Canvas2D"
+      ],
+      "n_encoding_types": 3,
+      "encoding_hits": {
+        "力导向网络": 3,
+        "饼/环形": 2,
+        "连续色阶/热力": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 1,
+      "hardcoded_fill_hex_values": [
+        "#FFF"
+      ],
+      "data_keys_proxy": 0,
+      "tip_blocks": 3,
+      "tip_text_chars": 98,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "character-sentiment-arc.html",
+      "encodings": [
+        "折线",
+        "面积"
+      ],
+      "path_signatures": [
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "折线": 4,
+        "面积": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 3,
+      "hardcoded_fill_hex_values": [
+        "#C8463A"
+      ],
+      "data_keys_proxy": 0,
+      "tip_blocks": 11,
+      "tip_text_chars": 688,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "chart-design.html",
+      "encodings": [
+        "折线",
+        "饼/环形"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "饼/环形": 2,
+        "折线": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 5,
+      "tip_blocks": 22,
+      "tip_text_chars": 452,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "broad_field_count": 5,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "cognitive-psychology.html",
+      "encodings": [
+        "折线",
+        "面积"
+      ],
+      "path_signatures": [
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "折线": 3,
+        "面积": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 12,
+      "hardcoded_fill_hex_values": [
+        "#23201A",
+        "#3A6B8C",
+        "#6B6455",
+        "#C8463A",
+        "#C9A063",
+        "#E9B885"
+      ],
+      "data_keys_proxy": 71,
+      "tip_blocks": 21,
+      "tip_text_chars": 387,
+      "interactive_field_refs": [
+        "avg_intensity",
+        "success_rate",
+        "suspicion_level",
+        "team_avg_flexibility",
+        "trust_wukong"
+      ],
+      "interactive_field_count": 5,
+      "broad_field_refs": [
+        "activation_method",
+        "actual",
+        "amygdala",
+        "availability_cases",
+        "availability_phases",
+        "avg_intensity",
+        "case",
+        "cbt",
+        "chapter",
+        "chapter_range",
+        "chapters",
+        "character",
+        "characteristic",
+        "cognitive_bias",
+        "cognitive_definition",
+        "cognitive_error",
+        "cognitive_insights",
+        "cognitive_profile",
+        "cognitive_team_members",
+        "comparative_cases",
+        "concept_name",
+        "consequence",
+        "context",
+        "core_case",
+        "dimensions",
+        "early_phase",
+        "english_name",
+        "executive_control_insights",
+        "flexibility_insights",
+        "flexibility_score",
+        "function",
+        "highest_flexibility",
+        "judgment_correct",
+        "key_quote",
+        "key_strength",
+        "key_weakness",
+        "late_phase",
+        "limbic_inhibition",
+        "limbic_system",
+        "lowest_flexibility",
+        "mantra_cases",
+        "mantra_evolution",
+        "mantra_intensity",
+        "mantra_phases",
+        "meditation",
+        "middle_phase",
+        "modern_parallel",
+        "neurofeedback",
+        "neuroscience_mapping",
+        "outcome",
+        "phase",
+        "prefrontal_activation",
+        "prefrontal_cortex",
+        "regulation",
+        "representative_case",
+        "representative_event",
+        "success_rate",
+        "suspicion_level",
+        "tang_monk_evolution",
+        "tang_monk_judgment",
+        "team_avg_flexibility",
+        "team_members",
+        "trigger",
+        "trigger_event",
+        "trust_wukong",
+        "wukong_case",
+        "wukong_emotion",
+        "wukong_equivalent",
+        "wukong_judgment"
+      ],
+      "broad_field_count": 69,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "concept-device.html",
+      "encodings": [],
+      "path_signatures": [],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 9,
+      "hardcoded_fill_hex_values": [
+        "#23201A",
+        "#3A6B8C",
+        "#C8463A",
+        "#C9A063",
+        "#FFF8EC",
+        "#FFFFFF"
+      ],
+      "data_keys_proxy": 0,
+      "tip_blocks": 17,
+      "tip_text_chars": 479,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 1,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "counterfactual.html",
+      "encodings": [
+        "饼/环形"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "饼/环形": 3
+      },
+      "weak_signatures": [
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 2,
+      "tip_blocks": 5,
+      "tip_text_chars": 308,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "high",
+        "medium"
+      ],
+      "broad_field_count": 2,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "criticism-history.html",
+      "encodings": [
+        "折线"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "折线": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 5,
+      "hardcoded_fill_hex_values": [
+        "#E8E8E8",
+        "#FFF",
+        "#FFFDF8"
+      ],
+      "data_keys_proxy": 0,
+      "tip_blocks": 16,
+      "tip_text_chars": 1001,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "cross-time-danmaku.html",
+      "encodings": [
+        "力导向网络"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "力导向网络": 2
+      },
+      "weak_signatures": [
+        "圆元素"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 0,
+      "tip_blocks": 14,
+      "tip_text_chars": 209,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 1,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "cultural-misreading.html",
+      "encodings": [
+        "层次树",
+        "矩形树图",
+        "连续色阶/热力"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 3,
+      "encoding_hits": {
+        "矩形树图": 1,
+        "层次树": 1,
+        "连续色阶/热力": 1
+      },
+      "weak_signatures": [
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 22,
+      "tip_blocks": 8,
+      "tip_text_chars": 555,
+      "interactive_field_refs": [
+        "country",
+        "element",
+        "feature",
+        "intensity",
+        "representative_work"
+      ],
+      "interactive_field_count": 5,
+      "broad_field_refs": [
+        "alt_translations",
+        "amplification_elements",
+        "chapter_first",
+        "chinese",
+        "chinese_connotation",
+        "core_conclusion",
+        "countries",
+        "country",
+        "cultural_gap_level",
+        "element",
+        "english_common",
+        "english_reader_image",
+        "feature",
+        "high_cultural_gap_terms",
+        "intensity",
+        "pinyin",
+        "representative_work",
+        "semantic_loss",
+        "total_amplifications",
+        "total_translation_bias"
+      ],
+      "broad_field_count": 20,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "customs-pass-route.html",
+      "encodings": [],
+      "path_signatures": [],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [
+        "圆元素"
+      ],
+      "token_used_in_js": [
+        "chart-2",
+        "chart-3",
+        "chart-4"
+      ],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 0,
+      "tip_blocks": 0,
+      "tip_text_chars": 0,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "data-explorer.html",
+      "encodings": [],
+      "path_signatures": [
+        "Canvas2D"
+      ],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 0,
+      "tip_blocks": 0,
+      "tip_text_chars": 0,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 4,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "deconstruction.html",
+      "encodings": [
+        "层次树",
+        "矩形树图",
+        "连续色阶/热力"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 3,
+      "encoding_hits": {
+        "矩形树图": 1,
+        "层次树": 1,
+        "连续色阶/热力": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 19,
+      "tip_blocks": 7,
+      "tip_text_chars": 1426,
+      "interactive_field_refs": [
+        "amplified_elements",
+        "author",
+        "axis_loyalty",
+        "axis_seriousness",
+        "country",
+        "feature",
+        "influence",
+        "medium",
+        "quadrant",
+        "title",
+        "year"
+      ],
+      "interactive_field_count": 11,
+      "broad_field_refs": [
+        "amplified_elements",
+        "amplified_elements_count",
+        "author",
+        "axis_loyalty",
+        "axis_seriousness",
+        "countries_involved",
+        "country",
+        "feature",
+        "influence",
+        "media_types",
+        "medium",
+        "most_amplified",
+        "quadrant",
+        "start",
+        "title",
+        "total_deconstruction_works",
+        "total_east_asia_receptions",
+        "year",
+        "year_range"
+      ],
+      "broad_field_count": 19,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "dialogue-sentiment.html",
+      "encodings": [
+        "堆叠",
+        "层次树",
+        "打包/分区",
+        "折线",
+        "连续色阶/热力",
+        "饼/环形"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 6,
+      "encoding_hits": {
+        "层次树": 1,
+        "饼/环形": 4,
+        "折线": 1,
+        "堆叠": 1,
+        "连续色阶/热力": 1,
+        "打包/分区": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 7,
+      "hardcoded_fill_hex_values": [
+        "#23201A",
+        "#6B6455",
+        "#FFF"
+      ],
+      "data_keys_proxy": 22,
+      "tip_blocks": 18,
+      "tip_text_chars": 416,
+      "interactive_field_refs": [
+        "avg_sentiment",
+        "speaker",
+        "total"
+      ],
+      "interactive_field_count": 3,
+      "broad_field_refs": [
+        "analyzed_dialogues",
+        "avg_sentiment",
+        "chapter",
+        "chapter_sentiment",
+        "chapters",
+        "count",
+        "negative",
+        "negative_ratio",
+        "neutral",
+        "neutral_ratio",
+        "positive",
+        "positive_ratio",
+        "sentiment_distribution",
+        "speaker",
+        "speaker_chapter_curve",
+        "speaker_sentiment",
+        "top_negative_words",
+        "top_positive_words",
+        "top_sentiment_words",
+        "total",
+        "total_dialogues",
+        "word"
+      ],
+      "broad_field_count": 22,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "ecology.html",
+      "encodings": [
+        "折线",
+        "面积"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "折线": 3,
+        "面积": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 91,
+      "tip_blocks": 25,
+      "tip_text_chars": 921,
+      "interactive_field_refs": [
+        "biodiversity_index",
+        "biomass_share",
+        "damage_level",
+        "ecosystem_balance",
+        "energy_source",
+        "invasion_duration_years",
+        "level",
+        "members",
+        "monkey_population",
+        "monster_count",
+        "name",
+        "prey_count_estimated",
+        "pulse_duration_days",
+        "pulse_intensity",
+        "removal_mechanism",
+        "top_predator",
+        "vegetation_cover"
+      ],
+      "interactive_field_count": 17,
+      "broad_field_refs": [
+        "after_invasion",
+        "avg_invasion_duration_years",
+        "avg_monsters_per_pulse",
+        "avg_pulse_duration_days",
+        "avg_pulse_intensity",
+        "before_invasion",
+        "biodiversity_index",
+        "biomass_share",
+        "chapter",
+        "characteristics",
+        "concept_name",
+        "core_case",
+        "damage_level",
+        "disturbance_event",
+        "during_invasion",
+        "ecological_definition",
+        "ecological_description",
+        "ecological_insights",
+        "ecological_niche",
+        "ecological_response",
+        "ecosystem_balance",
+        "efficiency",
+        "energy_flow",
+        "energy_source",
+        "english_name",
+        "food_web_insights",
+        "forest_fire_succession",
+        "from",
+        "highest_competition",
+        "human_interference",
+        "invasion_advantage",
+        "invasion_duration_years",
+        "invasion_location",
+        "invasion_pattern_insights",
+        "invasion_success_rate",
+        "invasive_impact",
+        "invasive_species_characteristics",
+        "invasive_species_count",
+        "invasive_species_list",
+        "island_ecology",
+        "key_species",
+        "keystone_species",
+        "level",
+        "local_predators",
+        "location",
+        "longest_pulse",
+        "lowest_population",
+        "max_damage_species",
+        "max_monsters_pulse",
+        "members",
+        "modern_parallel",
+        "monkey_population",
+        "monster_count",
+        "monster_names",
+        "most_intense_pulse",
+        "name",
+        "native_species_characteristics",
+        "native_vs_invasive_comparison",
+        "original_habitat",
+        "outcome",
+        "owner",
+        "peak_population",
+        "population_decline_percent",
+        "prey_count_estimated",
+        "prey_count_note",
+        "pulse_analysis",
+        "pulse_cases",
+        "pulse_duration_days",
+        "pulse_intensity",
+        "removal_mechanism",
+        "resource_competition",
+        "resource_pulse_events",
+        "species",
+        "stability",
+        "stage",
+        "succession_insights",
+        "succession_stages",
+        "survival_rate_invasive",
+        "survival_rate_native",
+        "to",
+        "top_predator",
+        "total_prey_estimated",
+        "total_pulse_events",
+        "trophic_levels",
+        "vegetation_cover",
+        "wukong_as_keystone",
+        "year_range",
+        "yellowstone_wolves"
+      ],
+      "broad_field_count": 88,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "emotional-heatmap.html",
+      "encodings": [],
+      "path_signatures": [],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 0,
+      "tip_blocks": 16,
+      "tip_text_chars": 537,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "ethics-consumption.html",
+      "encodings": [],
+      "path_signatures": [],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 1,
+      "hardcoded_fill_hex_values": [
+        "#FAF7F2"
+      ],
+      "data_keys_proxy": 2,
+      "tip_blocks": 35,
+      "tip_text_chars": 1024,
+      "interactive_field_refs": [
+        "k"
+      ],
+      "interactive_field_count": 1,
+      "broad_field_refs": [
+        "k"
+      ],
+      "broad_field_count": 1,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "famous-time-travel.html",
+      "encodings": [],
+      "path_signatures": [],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 0,
+      "tip_blocks": 3,
+      "tip_text_chars": 17,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "four-dimensional-research-network.html",
+      "encodings": [
+        "力导向网络",
+        "堆叠",
+        "面积"
+      ],
+      "path_signatures": [
+        "Canvas2D",
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 3,
+      "encoding_hits": {
+        "力导向网络": 3,
+        "面积": 1,
+        "堆叠": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 19,
+      "hardcoded_fill_hex_values": [
+        "#2C2416",
+        "#6B6455",
+        "#C89B3C",
+        "#F5E9D4",
+        "#FFF"
+      ],
+      "data_keys_proxy": 0,
+      "tip_blocks": 8,
+      "tip_text_chars": 61,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "four-heavenly-kings-artifacts.html",
+      "encodings": [
+        "弦图",
+        "折线",
+        "饼/环形"
+      ],
+      "path_signatures": [
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 3,
+      "encoding_hits": {
+        "弦图": 1,
+        "饼/环形": 1,
+        "折线": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 8,
+      "hardcoded_fill_hex_values": [
+        "#23201A",
+        "#8A7A6A",
+        "#F5EFE4",
+        "#FFF"
+      ],
+      "data_keys_proxy": 1,
+      "tip_blocks": 35,
+      "tip_text_chars": 116,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "end"
+      ],
+      "broad_field_count": 1,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "game-webnovel.html",
+      "encodings": [
+        "层次树",
+        "矩形树图"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "矩形树图": 1,
+        "层次树": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 0,
+      "tip_blocks": 16,
+      "tip_text_chars": 535,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "global-pattern.html",
+      "encodings": [
+        "层次树",
+        "矩形树图"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "矩形树图": 1,
+        "层次树": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 20,
+      "tip_blocks": 14,
+      "tip_text_chars": 458,
+      "interactive_field_refs": [
+        "author",
+        "companions",
+        "country",
+        "destination",
+        "duration",
+        "goal",
+        "guide",
+        "meaning",
+        "name",
+        "node",
+        "symbolic_meaning",
+        "trials",
+        "work",
+        "year"
+      ],
+      "interactive_field_count": 14,
+      "broad_field_refs": [
+        "author",
+        "companions",
+        "country",
+        "destination",
+        "divine_comedy",
+        "duration",
+        "goal",
+        "guide",
+        "gulliver",
+        "influence",
+        "meaning",
+        "name",
+        "node",
+        "odyssey",
+        "pilgrims_progress",
+        "symbolic_meaning",
+        "trials",
+        "work",
+        "xiyou",
+        "year"
+      ],
+      "broad_field_count": 20,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "graph-explorer.html",
+      "encodings": [],
+      "path_signatures": [
+        "Canvas2D"
+      ],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 26,
+      "tip_blocks": 0,
+      "tip_text_chars": 0,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "AI",
+        "aliases",
+        "desc",
+        "dimensions",
+        "edge_count",
+        "group",
+        "group_colors",
+        "id",
+        "label",
+        "meta",
+        "name",
+        "node_count",
+        "nodes",
+        "note",
+        "online",
+        "property",
+        "schema",
+        "target",
+        "title",
+        "value"
+      ],
+      "broad_field_count": 20,
+      "control_count": 6,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "guanyin-six-roles-network.html",
+      "encodings": [
+        "力导向网络",
+        "折线",
+        "桑基流向",
+        "面积"
+      ],
+      "path_signatures": [
+        "Canvas2D",
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 4,
+      "encoding_hits": {
+        "力导向网络": 3,
+        "桑基流向": 1,
+        "折线": 2,
+        "面积": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 16,
+      "hardcoded_fill_hex_values": [
+        "#23201A",
+        "#8A7A6A",
+        "#C8463A",
+        "#FFF"
+      ],
+      "data_keys_proxy": 1,
+      "tip_blocks": 45,
+      "tip_text_chars": 163,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "start"
+      ],
+      "broad_field_count": 1,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "hardship-difficulty-heatmap.html",
+      "encodings": [],
+      "path_signatures": [],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 1,
+      "hardcoded_fill_hex_values": [
+        "#FFF8E7"
+      ],
+      "data_keys_proxy": 0,
+      "tip_blocks": 6,
+      "tip_text_chars": 1385,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 8,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "hardship-heatmap.html",
+      "encodings": [
+        "堆叠"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "堆叠": 1
+      },
+      "weak_signatures": [
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 0,
+      "tip_blocks": 6,
+      "tip_text_chars": 1279,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 6,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "heaven-power-network.html",
+      "encodings": [
+        "力导向网络",
+        "折线",
+        "桑基流向",
+        "饼/环形"
+      ],
+      "path_signatures": [
+        "Canvas2D",
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 4,
+      "encoding_hits": {
+        "力导向网络": 3,
+        "桑基流向": 1,
+        "饼/环形": 3,
+        "折线": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 18,
+      "hardcoded_fill_hex_values": [
+        "#1A1410",
+        "#3A6B8C",
+        "#8A7C6A",
+        "#C8463A",
+        "#FFF"
+      ],
+      "data_keys_proxy": 2,
+      "tip_blocks": 47,
+      "tip_text_chars": 178,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "none",
+        "start"
+      ],
+      "broad_field_count": 2,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "intertextuality-network.html",
+      "encodings": [
+        "力导向网络",
+        "桑基流向",
+        "连续色阶/热力"
+      ],
+      "path_signatures": [
+        "Canvas2D",
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 3,
+      "encoding_hits": {
+        "力导向网络": 3,
+        "桑基流向": 1,
+        "连续色阶/热力": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 17,
+      "hardcoded_fill_hex_values": [
+        "#1A1410",
+        "#5A3828",
+        "#8A7A5A",
+        "#8B4513"
+      ],
+      "data_keys_proxy": 1,
+      "tip_blocks": 64,
+      "tip_text_chars": 342,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "start"
+      ],
+      "broad_field_count": 1,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "journey-geo-3d.html",
+      "encodings": [
+        "3D(Three)"
+      ],
+      "path_signatures": [
+        "Canvas2D"
+      ],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "3D(Three)": 34
+      },
+      "weak_signatures": [],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 1,
+      "tip_blocks": 0,
+      "tip_text_chars": 0,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "pointer"
+      ],
+      "broad_field_count": 1,
+      "control_count": 2,
+      "loads_three_lib": true,
+      "naive_three_hit": true
+    },
+    {
+      "page": "journey-geo-semiotics.html",
+      "encodings": [
+        "力导向网络"
+      ],
+      "path_signatures": [
+        "Canvas2D"
+      ],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "力导向网络": 3
+      },
+      "weak_signatures": [
+        "圆元素"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 5,
+      "tip_blocks": 12,
+      "tip_text_chars": 474,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "arrival",
+        "return",
+        "transit"
+      ],
+      "broad_field_count": 3,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "journey-map-interactive.html",
+      "encodings": [
+        "地理投影",
+        "折线"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "折线": 1,
+        "地理投影": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件"
+      ],
+      "hardcoded_fill_hex_count": 2,
+      "hardcoded_fill_hex_values": [
+        "#8C7050",
+        "#D4C8A8"
+      ],
+      "data_keys_proxy": 0,
+      "tip_blocks": 7,
+      "tip_text_chars": 145,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 3,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "journey-route.html",
+      "encodings": [
+        "饼/环形"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "饼/环形": 3
+      },
+      "weak_signatures": [
+        "圆元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 3,
+      "tip_blocks": 16,
+      "tip_text_chars": 1441,
+      "interactive_field_refs": [
+        "desc"
+      ],
+      "interactive_field_count": 1,
+      "broad_field_refs": [
+        "desc"
+      ],
+      "broad_field_count": 1,
+      "control_count": 1,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "journey-spacetime.html",
+      "encodings": [
+        "折线"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "折线": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件"
+      ],
+      "hardcoded_fill_hex_count": 1,
+      "hardcoded_fill_hex_values": [
+        "#3A6B8C"
+      ],
+      "data_keys_proxy": 0,
+      "tip_blocks": 9,
+      "tip_text_chars": 879,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 4,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "jurisprudence.html",
+      "encodings": [
+        "层次树",
+        "矩形树图",
+        "饼/环形"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 3,
+      "encoding_hits": {
+        "矩形树图": 1,
+        "层次树": 1,
+        "饼/环形": 3
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 14,
+      "hardcoded_fill_hex_values": [
+        "#3A6B8C",
+        "#6B6455",
+        "#6B8E5A",
+        "#C8463A",
+        "#C9A063"
+      ],
+      "data_keys_proxy": 88,
+      "tip_blocks": 21,
+      "tip_text_chars": 262,
+      "interactive_field_refs": [
+        "crime_severity",
+        "disparity_score",
+        "n",
+        "property_clarity",
+        "sentence_severity",
+        "severity"
+      ],
+      "interactive_field_count": 6,
+      "broad_field_refs": [
+        "actual_property_type",
+        "actual_sentence",
+        "admin_override",
+        "artifact_count",
+        "artifact_inventory",
+        "artifact_name",
+        "audit_coverage",
+        "audit_log",
+        "audit_trail",
+        "audit_trail_coverage",
+        "authorized_incidents",
+        "avg_crime_severity",
+        "avg_property_clarity",
+        "avg_sentence_severity",
+        "case_name",
+        "chapter",
+        "claimed_owner",
+        "compensation_paid",
+        "compensation_total",
+        "concept_name",
+        "core_case",
+        "core_finding",
+        "core_question",
+        "creation_context",
+        "crime",
+        "crime_severity",
+        "criminal",
+        "data_affected",
+        "data_governance_assessment",
+        "data_governance_failure",
+        "data_governance_insights",
+        "data_incidents",
+        "data_integrity",
+        "data_integrity_failures",
+        "data_volume",
+        "database_security",
+        "definition",
+        "delegated_use",
+        "disparity_analysis",
+        "disparity_pattern",
+        "disparity_reason",
+        "disparity_score",
+        "english_name",
+        "event",
+        "identity",
+        "incident_name",
+        "incident_type",
+        "insider_threat",
+        "institutional_protection",
+        "legal_risk",
+        "max_disparity",
+        "max_disparity_case",
+        "min_disparity_case",
+        "mixed_ownership",
+        "modern_parallel",
+        "n",
+        "owner_present",
+        "perpetrator",
+        "perpetrator_identity",
+        "political_interference",
+        "private_pure",
+        "property_clarity",
+        "property_dispute",
+        "property_rights_insights",
+        "property_rights_types",
+        "public_pure",
+        "rank",
+        "sentence_severity",
+        "sentencing_cases",
+        "sentencing_insights",
+        "severity",
+        "total_cases",
+        "total_incidents",
+        "type",
+        "unauthorized_access",
+        "unauthorized_incidents",
+        "usage_history",
+        "usucaption",
+        "vulnerability",
+        "vulnerability_categories",
+        "white_collar_vs_blue_collar"
+      ],
+      "broad_field_count": 81,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "karma-reincarnation.html",
+      "encodings": [
+        "折线",
+        "面积",
+        "饼/环形"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 3,
+      "encoding_hits": {
+        "饼/环形": 4,
+        "折线": 1,
+        "面积": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 2,
+      "hardcoded_fill_hex_values": [
+        "#C8463A",
+        "#E9B885"
+      ],
+      "data_keys_proxy": 67,
+      "tip_blocks": 30,
+      "tip_text_chars": 524,
+      "interactive_field_refs": [
+        "impact_severity",
+        "karma_type",
+        "rebirth_destination"
+      ],
+      "interactive_field_count": 3,
+      "broad_field_refs": [
+        "actual_fate",
+        "baoxiang_kingdom_years",
+        "case_name",
+        "cases",
+        "cause",
+        "chapter",
+        "character",
+        "characteristics",
+        "child_sacrifices_per_year_tongtian_river",
+        "common_pattern",
+        "concept_list",
+        "concept_name",
+        "core_principle",
+        "cross_concept_insight",
+        "data_volume_affected",
+        "definition",
+        "duration",
+        "effect",
+        "english_name",
+        "entry_criteria",
+        "escape_paths",
+        "evil_realms",
+        "exit_criteria",
+        "good_realms",
+        "governance_gap",
+        "impact_severity",
+        "in_pilgrim_team",
+        "karma_balance",
+        "karma_cases",
+        "karma_insights",
+        "karma_principle",
+        "karma_stats",
+        "karma_type",
+        "karma_type_distribution",
+        "key_findings",
+        "key_numbers",
+        "li_shimin_extended_years",
+        "life_death_cases",
+        "long_term_consequence",
+        "modifier",
+        "modifying_party",
+        "n",
+        "name",
+        "neutral_realm",
+        "original_fate",
+        "pilgrim_team_distribution",
+        "population",
+        "realms",
+        "rebirth_destination",
+        "rebirth_destinations",
+        "registry_insights",
+        "registry_stats",
+        "samsara_insights",
+        "samsara_realms",
+        "samsara_stats",
+        "tampering_types",
+        "tang_monk_incarnations",
+        "thematic_summary",
+        "total_cases",
+        "total_concepts",
+        "total_data_points",
+        "total_realms",
+        "wujing_flying_sword_cycle_days",
+        "wukong_age_at_death",
+        "wukong_mountain_years"
+      ],
+      "broad_field_count": 65,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "language-style-radar.html",
+      "encodings": [],
+      "path_signatures": [
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [
+        "圆元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 0,
+      "tip_blocks": 4,
+      "tip_text_chars": 217,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "linguistics.html",
+      "encodings": [
+        "堆叠",
+        "折线",
+        "饼/环形"
+      ],
+      "path_signatures": [
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 3,
+      "encoding_hits": {
+        "饼/环形": 3,
+        "折线": 1,
+        "堆叠": 2
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 9,
+      "hardcoded_fill_hex_values": [
+        "#23201A"
+      ],
+      "data_keys_proxy": 93,
+      "tip_blocks": 28,
+      "tip_text_chars": 4561,
+      "interactive_field_refs": [
+        "buddhist_term_proportion",
+        "character",
+        "classical_chinese_proportion",
+        "cultural_identity",
+        "english_name",
+        "evolution_pattern",
+        "formality",
+        "identity_score_buddhist",
+        "identity_score_confucian",
+        "identity_score_daoist",
+        "identity_score_folk",
+        "incantation_name",
+        "language_classification",
+        "language_features",
+        "language_identity",
+        "language_source",
+        "linguistic_features",
+        "listener",
+        "meaning",
+        "ming_colloquial_proportion",
+        "n",
+        "phonetic_analysis",
+        "phonetic_features",
+        "politeness_level",
+        "power_distance",
+        "power_distance_reflected",
+        "raw_text",
+        "relationship",
+        "representative_vocabulary",
+        "sanskrit_loanword_proportion",
+        "speaker",
+        "taoist_term_proportion",
+        "target",
+        "user"
+      ],
+      "interactive_field_count": 34,
+      "broad_field_refs": [
+        "ENTP_悟空",
+        "ESFP_八戒",
+        "INFJ_唐僧",
+        "ISFJ_沙僧",
+        "avg_classical_chinese_proportion",
+        "avg_ming_colloquial_proportion",
+        "avg_sanskrit_proportion",
+        "avg_taoist_proportion",
+        "bajie_speech",
+        "buddhist_dominant",
+        "buddhist_term_proportion",
+        "chapter",
+        "character",
+        "character_language_profiles",
+        "character_profiles",
+        "chinese_original",
+        "chinese_transliteration",
+        "classical_chinese",
+        "classical_chinese_dominant",
+        "classical_chinese_proportion",
+        "concept_name",
+        "confucian_dominant",
+        "context",
+        "core_finding",
+        "cultural_identity",
+        "cultural_significance",
+        "daoist_dominant",
+        "definition",
+        "dialogue_pairs",
+        "english_name",
+        "evolution_pattern",
+        "folk_dominant",
+        "formality",
+        "function_mechanism",
+        "identity_score_buddhist",
+        "identity_score_confucian",
+        "identity_score_daoist",
+        "identity_score_folk",
+        "incantation_name",
+        "incantations",
+        "language_classification",
+        "language_classification_stats",
+        "language_features",
+        "language_identity",
+        "language_identity_insights",
+        "language_proportion",
+        "language_source",
+        "language_source_stats",
+        "language_sources",
+        "linguistic_features",
+        "linguistic_insights",
+        "linguistic_strategy_by_mbti",
+        "listener",
+        "meaning",
+        "ming_colloquial",
+        "ming_colloquial_dominant",
+        "ming_colloquial_proportion",
+        "mixed",
+        "n",
+        "phonetic_analysis",
+        "phonetic_features",
+        "politeness_level",
+        "power_distance",
+        "power_distance_insights",
+        "power_distance_reflected",
+        "raw_text",
+        "relationship",
+        "religious_origin",
+        "representative_dialogues",
+        "representative_vocabulary",
+        "sanskrit_dominant",
+        "sanskrit_loanword",
+        "sanskrit_loanword_proportion",
+        "sanskrit_original",
+        "shaseng_speech",
+        "speaker",
+        "tang_monk_speech",
+        "taoist_dominant",
+        "taoist_term",
+        "taoist_term_proportion",
+        "target",
+        "total_characters",
+        "total_incantations",
+        "total_representative_dialogues",
+        "user",
+        "wukong_speech"
+      ],
+      "broad_field_count": 86,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "magic-system.html",
+      "encodings": [
+        "桑基流向",
+        "饼/环形"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "桑基流向": 1,
+        "饼/环形": 3
+      },
+      "weak_signatures": [
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 47,
+      "tip_blocks": 13,
+      "tip_text_chars": 508,
+      "interactive_field_refs": [
+        "act",
+        "amount",
+        "category",
+        "consumer",
+        "consumption_per_act",
+        "name",
+        "note",
+        "rank",
+        "source",
+        "target",
+        "unit",
+        "value"
+      ],
+      "interactive_field_count": 12,
+      "broad_field_refs": [
+        "act",
+        "alias",
+        "amount",
+        "category",
+        "chapter",
+        "chapter_first",
+        "cons",
+        "consumer",
+        "consumption_per_act",
+        "count",
+        "energy_law",
+        "evidence",
+        "expense",
+        "feature",
+        "intensity",
+        "kills",
+        "links",
+        "name",
+        "nature",
+        "nodes",
+        "note",
+        "origin",
+        "owner",
+        "philosophy",
+        "power_source",
+        "practitioner",
+        "principle",
+        "pros",
+        "range",
+        "rank",
+        "result",
+        "revenue",
+        "rival",
+        "source",
+        "start",
+        "structure",
+        "surplus",
+        "surplus_unit",
+        "target",
+        "tianting_budget",
+        "title",
+        "top_consumers",
+        "type",
+        "unit",
+        "user_driven",
+        "value",
+        "weakness"
+      ],
+      "broad_field_count": 47,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "material-archaeology.html",
+      "encodings": [
+        "折线",
+        "饼/环形"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "饼/环形": 4,
+        "折线": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 0,
+      "tip_blocks": 34,
+      "tip_text_chars": 1514,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "mbti-evolution.html",
+      "encodings": [
+        "折线",
+        "连续色阶/热力"
+      ],
+      "path_signatures": [
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "折线": 1,
+        "连续色阶/热力": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 0,
+      "tip_blocks": 6,
+      "tip_text_chars": 183,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 4,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "methodology-matrix.html",
+      "encodings": [
+        "折线"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "折线": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 6,
+      "tip_blocks": 22,
+      "tip_text_chars": 750,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "left_bottom",
+        "left_top",
+        "right_bottom",
+        "right_top"
+      ],
+      "broad_field_count": 4,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "ming-political-thought-comparison.html",
+      "encodings": [],
+      "path_signatures": [
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 2,
+      "tip_blocks": 12,
+      "tip_text_chars": 2030,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "end",
+        "start"
+      ],
+      "broad_field_count": 2,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "monster-background.html",
+      "encodings": [
+        "饼/环形"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "饼/环形": 3
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 9,
+      "hardcoded_fill_hex_values": [
+        "#23201A",
+        "#6B6455",
+        "#C9A063",
+        "#FFF"
+      ],
+      "data_keys_proxy": 1,
+      "tip_blocks": 15,
+      "tip_text_chars": 584,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "survived"
+      ],
+      "broad_field_count": 1,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "monster-capability-radar.html",
+      "encodings": [],
+      "path_signatures": [
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 3,
+      "hardcoded_fill_hex_values": [
+        "#3A6B8C",
+        "#C8463A",
+        "#C9A063"
+      ],
+      "data_keys_proxy": 1,
+      "tip_blocks": 14,
+      "tip_text_chars": 1855,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "none"
+      ],
+      "broad_field_count": 1,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "monster-ecology-network.html",
+      "encodings": [
+        "力导向网络"
+      ],
+      "path_signatures": [
+        "Canvas2D",
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "力导向网络": 3
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件"
+      ],
+      "hardcoded_fill_hex_count": 9,
+      "hardcoded_fill_hex_values": [
+        "#23201A",
+        "#6B6455"
+      ],
+      "data_keys_proxy": 0,
+      "tip_blocks": 6,
+      "tip_text_chars": 448,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 4,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "monster-female-network.html",
+      "encodings": [
+        "力导向网络",
+        "桑基流向"
+      ],
+      "path_signatures": [
+        "Canvas2D",
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "力导向网络": 3,
+        "桑基流向": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 12,
+      "hardcoded_fill_hex_values": [
+        "#1A1410",
+        "#5A3828",
+        "#8A7A5A",
+        "#8B4513"
+      ],
+      "data_keys_proxy": 1,
+      "tip_blocks": 40,
+      "tip_text_chars": 203,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "start"
+      ],
+      "broad_field_count": 1,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "monster-hierarchy-network.html",
+      "encodings": [
+        "力导向网络",
+        "折线",
+        "桑基流向",
+        "饼/环形"
+      ],
+      "path_signatures": [
+        "Canvas2D",
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 4,
+      "encoding_hits": {
+        "力导向网络": 3,
+        "桑基流向": 1,
+        "饼/环形": 3,
+        "折线": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 18,
+      "hardcoded_fill_hex_values": [
+        "#2C2820",
+        "#6B8E6F",
+        "#8A7C6A",
+        "#8B3A2A",
+        "#FFF"
+      ],
+      "data_keys_proxy": 2,
+      "tip_blocks": 45,
+      "tip_text_chars": 170,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "none",
+        "start"
+      ],
+      "broad_field_count": 2,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "monster-sociology.html",
+      "encodings": [
+        "饼/环形"
+      ],
+      "path_signatures": [
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "饼/环形": 4
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 11,
+      "hardcoded_fill_hex_values": [
+        "#23201A",
+        "#3A6B8C",
+        "#6B6455",
+        "#E9B885",
+        "#FFF"
+      ],
+      "data_keys_proxy": 71,
+      "tip_blocks": 28,
+      "tip_text_chars": 564,
+      "interactive_field_refs": [
+        "count",
+        "success_rate",
+        "survival_probability"
+      ],
+      "interactive_field_count": 3,
+      "broad_field_refs": [
+        "active",
+        "active_methods",
+        "avg_effectiveness",
+        "avg_sentence_severity",
+        "avg_success_rate",
+        "avg_survival_probability",
+        "best_method",
+        "by_type",
+        "cases",
+        "chapter",
+        "concept_list",
+        "concept_name",
+        "count",
+        "crime_types",
+        "crimes_committed",
+        "cross_concept_insight",
+        "definition",
+        "descent_reason",
+        "desertion_cases",
+        "desertion_insights",
+        "desertion_stats",
+        "detection_difficulty",
+        "effectiveness",
+        "english_name",
+        "external",
+        "external_methods",
+        "fastest_response",
+        "final_outcome",
+        "harm_severity",
+        "highest_difficulty",
+        "highest_severity",
+        "key_findings",
+        "key_insight",
+        "legal_analysis",
+        "legal_bias",
+        "lowest_severity",
+        "mechanism",
+        "method",
+        "methodology_note",
+        "most_common",
+        "most_dangerous",
+        "name",
+        "original_owner",
+        "owner_influence",
+        "owner_rank",
+        "owners_distribution",
+        "passive",
+        "passive_methods",
+        "pattern_insights",
+        "pattern_stats",
+        "representative_cases",
+        "response_time_hours",
+        "sentence_severity",
+        "signal_methods",
+        "signal_stats",
+        "slowest_response",
+        "success_rate",
+        "survival_insights",
+        "survival_probability",
+        "target_pattern",
+        "time_on_earth_years",
+        "total_cases",
+        "total_concepts",
+        "total_data_points",
+        "total_methods",
+        "type",
+        "typical_chapters",
+        "verdict",
+        "verdict_pattern",
+        "worst_method"
+      ],
+      "broad_field_count": 70,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "monster-victims-network.html",
+      "encodings": [
+        "力导向网络",
+        "折线",
+        "桑基流向"
+      ],
+      "path_signatures": [
+        "Canvas2D",
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 3,
+      "encoding_hits": {
+        "力导向网络": 3,
+        "桑基流向": 1,
+        "折线": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 12,
+      "hardcoded_fill_hex_values": [
+        "#23201A",
+        "#8A7A6A",
+        "#C8463A",
+        "#F5EFE4",
+        "#FFF"
+      ],
+      "data_keys_proxy": 1,
+      "tip_blocks": 46,
+      "tip_text_chars": 168,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "start"
+      ],
+      "broad_field_count": 1,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "music-structure.html",
+      "encodings": [
+        "折线"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "折线": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 1,
+      "hardcoded_fill_hex_values": [
+        "#F5E9D4"
+      ],
+      "data_keys_proxy": 0,
+      "tip_blocks": 16,
+      "tip_text_chars": 1150,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "narrative-experiment.html",
+      "encodings": [],
+      "path_signatures": [],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [
+        "圆元素"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 1,
+      "hardcoded_fill_hex_values": [
+        "#6B8E5A"
+      ],
+      "data_keys_proxy": 0,
+      "tip_blocks": 24,
+      "tip_text_chars": 377,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "narrative-rhythm-curve.html",
+      "encodings": [
+        "折线",
+        "面积"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "折线": 1,
+        "面积": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件"
+      ],
+      "hardcoded_fill_hex_count": 2,
+      "hardcoded_fill_hex_values": [
+        "#C8463A"
+      ],
+      "data_keys_proxy": 0,
+      "tip_blocks": 7,
+      "tip_text_chars": 453,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 3,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "narratology-12d-network.html",
+      "encodings": [
+        "力导向网络",
+        "桑基流向"
+      ],
+      "path_signatures": [
+        "Canvas2D",
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "力导向网络": 3,
+        "桑基流向": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 14,
+      "hardcoded_fill_hex_values": [
+        "#1A1410",
+        "#8A7A5A",
+        "#8B4513",
+        "#FFF"
+      ],
+      "data_keys_proxy": 1,
+      "tip_blocks": 54,
+      "tip_text_chars": 284,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "start"
+      ],
+      "broad_field_count": 1,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "narratology-13d-network.html",
+      "encodings": [
+        "力导向网络",
+        "桑基流向"
+      ],
+      "path_signatures": [
+        "Canvas2D",
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "力导向网络": 3,
+        "桑基流向": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 14,
+      "hardcoded_fill_hex_values": [
+        "#1A1410",
+        "#8A7A5A",
+        "#8B4513",
+        "#C76838",
+        "#FFF"
+      ],
+      "data_keys_proxy": 1,
+      "tip_blocks": 57,
+      "tip_text_chars": 313,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "start"
+      ],
+      "broad_field_count": 1,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "perf-canvas-rendering.html",
+      "encodings": [],
+      "path_signatures": [
+        "Canvas2D"
+      ],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [
+        "圆元素"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 0,
+      "tip_blocks": 0,
+      "tip_text_chars": 0,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 2,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "philosophy.html",
+      "encodings": [
+        "折线",
+        "饼/环形"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "饼/环形": 4,
+        "折线": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 3,
+      "hardcoded_fill_hex_values": [
+        "#23201A",
+        "#C9A063",
+        "#E9B885"
+      ],
+      "data_keys_proxy": 53,
+      "tip_blocks": 15,
+      "tip_text_chars": 303,
+      "interactive_field_refs": [
+        "count"
+      ],
+      "interactive_field_count": 1,
+      "broad_field_refs": [
+        "allegory_categories",
+        "allegory_meaning",
+        "allegory_pattern",
+        "allegory_summary",
+        "allegory_symbol",
+        "anger_level",
+        "anger_management",
+        "anger_pattern",
+        "buddhist_counterpart",
+        "category",
+        "chapter",
+        "concept_list",
+        "concept_name",
+        "core_findings",
+        "core_insight",
+        "count",
+        "cultivation_goal",
+        "curve_analysis",
+        "definition",
+        "ego_dissolution",
+        "english_name",
+        "external_to_internal",
+        "greed_level",
+        "heart_sutra_connection",
+        "key_event",
+        "key_findings",
+        "key_quote",
+        "least_frequent_test",
+        "mind_obstacle",
+        "mind_state",
+        "modern_parallel",
+        "most_frequent_test",
+        "phase",
+        "philosophical_core",
+        "philosophical_insights",
+        "pride_level",
+        "pride_pattern",
+        "representative_hardships",
+        "restraint_level",
+        "restraint_pattern",
+        "six_phases",
+        "start",
+        "sutra_chapter",
+        "sutra_name",
+        "sutra_role",
+        "total_categories",
+        "total_concepts",
+        "total_data_points",
+        "total_hardships_mapped",
+        "total_phases",
+        "turning_point",
+        "wisdom_level",
+        "wisdom_pattern"
+      ],
+      "broad_field_count": 53,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "pilgrim-team-dynamic-network.html",
+      "encodings": [
+        "力导向网络"
+      ],
+      "path_signatures": [
+        "Canvas2D",
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "力导向网络": 3
+      },
+      "weak_signatures": [
+        "圆元素"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 3,
+      "hardcoded_fill_hex_values": [
+        "#23201A",
+        "#6B6455",
+        "#FFF"
+      ],
+      "data_keys_proxy": 0,
+      "tip_blocks": 5,
+      "tip_text_chars": 730,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 4,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "pilgrim-team-psychology-arc.html",
+      "encodings": [
+        "折线",
+        "连续色阶/热力"
+      ],
+      "path_signatures": [
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "折线": 1,
+        "连续色阶/热力": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 1,
+      "tip_blocks": 16,
+      "tip_text_chars": 2211,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "none"
+      ],
+      "broad_field_count": 1,
+      "control_count": 4,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "poetry-rhythm-analysis.html",
+      "encodings": [
+        "堆叠",
+        "层次树",
+        "矩形树图",
+        "连续色阶/热力"
+      ],
+      "path_signatures": [
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 4,
+      "encoding_hits": {
+        "矩形树图": 1,
+        "层次树": 1,
+        "堆叠": 1,
+        "连续色阶/热力": 1
+      },
+      "weak_signatures": [
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件"
+      ],
+      "hardcoded_fill_hex_count": 1,
+      "hardcoded_fill_hex_values": [
+        "#FFF8E7"
+      ],
+      "data_keys_proxy": 0,
+      "tip_blocks": 13,
+      "tip_text_chars": 1761,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 4,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "power-resources.html",
+      "encodings": [
+        "饼/环形"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "饼/环形": 5
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 10,
+      "hardcoded_fill_hex_values": [
+        "#23201A",
+        "#3A6B8C",
+        "#6B6455",
+        "#C8463A",
+        "#C9A063",
+        "#FFF"
+      ],
+      "data_keys_proxy": 67,
+      "tip_blocks": 28,
+      "tip_text_chars": 632,
+      "interactive_field_refs": [
+        "access_level",
+        "color",
+        "efficacy",
+        "scarcity",
+        "success_rate",
+        "tier"
+      ],
+      "interactive_field_count": 6,
+      "broad_field_refs": [
+        "T0",
+        "T1",
+        "T2",
+        "access_level",
+        "actual_power",
+        "alternative_path",
+        "avg_access_level",
+        "avg_efficacy",
+        "avg_scarcity",
+        "balance_pattern",
+        "biggest_power_gap",
+        "cases",
+        "chapter",
+        "color",
+        "concept_list",
+        "concept_name",
+        "cross_concept_insight",
+        "definition",
+        "duration",
+        "effect",
+        "efficacy",
+        "english_name",
+        "factions",
+        "hardest_access",
+        "highest_success_rate",
+        "influence",
+        "key_findings",
+        "leader",
+        "lowest_success_rate",
+        "mainstream_path",
+        "most_efficient",
+        "most_overhyped",
+        "name",
+        "nominal_power",
+        "owner",
+        "path",
+        "power_gap",
+        "promotion_insights",
+        "promotion_paths",
+        "promotion_stats",
+        "rarest_resource",
+        "rarity_reason",
+        "requirement",
+        "resource_control",
+        "resource_insights",
+        "resource_owner_distribution",
+        "resource_stats",
+        "resources",
+        "scarcity",
+        "scoring_criteria",
+        "smallest_power_gap",
+        "start",
+        "structural_insight",
+        "structure_analysis",
+        "structure_insights",
+        "success_rate",
+        "t0_factions",
+        "t1_factions",
+        "t2_factions",
+        "tier",
+        "tier_distribution",
+        "tier_target",
+        "total_concepts",
+        "total_data_points",
+        "total_factions",
+        "total_paths",
+        "total_resources"
+      ],
+      "broad_field_count": 67,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "relationships.html",
+      "encodings": [
+        "力导向网络",
+        "折线",
+        "连续色阶/热力"
+      ],
+      "path_signatures": [
+        "Canvas2D",
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 3,
+      "encoding_hits": {
+        "力导向网络": 9,
+        "折线": 1,
+        "连续色阶/热力": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件"
+      ],
+      "hardcoded_fill_hex_count": 6,
+      "hardcoded_fill_hex_values": [
+        "#23201A",
+        "#6B6455"
+      ],
+      "data_keys_proxy": 84,
+      "tip_blocks": 26,
+      "tip_text_chars": 714,
+      "interactive_field_refs": [
+        "chapter_level",
+        "chapter_range",
+        "color",
+        "count",
+        "id",
+        "influence",
+        "source",
+        "target",
+        "team_balance",
+        "team_score",
+        "total_cooccurrences"
+      ],
+      "interactive_field_count": 11,
+      "broad_field_refs": [
+        "artifact",
+        "avg_cost",
+        "avg_efficiency",
+        "balance_analysis",
+        "balance_insight",
+        "balance_pattern",
+        "belbin_insights",
+        "best_balance",
+        "best_roi",
+        "binned",
+        "bucket",
+        "buddha",
+        "can_collect",
+        "case",
+        "chapter",
+        "chapter_level",
+        "chapter_range",
+        "chapters",
+        "character",
+        "color",
+        "concept_name",
+        "core_members",
+        "cost",
+        "count",
+        "counter_chain",
+        "counter_matrix",
+        "counter_mechanism",
+        "countered_by",
+        "covered_roles",
+        "cumulative_snapshots",
+        "definition",
+        "dominant_factions",
+        "edges",
+        "efficiency",
+        "english_name",
+        "external_rescues",
+        "faction_insights",
+        "factions",
+        "highest_cost",
+        "id",
+        "influence",
+        "leader",
+        "members_count",
+        "missing_roles",
+        "most_called_target",
+        "name",
+        "nine_roles",
+        "nodes",
+        "owner",
+        "per_chapter",
+        "pilgrim_alignment",
+        "pilgrim_team",
+        "present_characters",
+        "present_count",
+        "primary_role",
+        "relationship_to_pilgrim",
+        "rescue_cases",
+        "rescue_pattern",
+        "rescue_stats",
+        "resources",
+        "role_fit",
+        "scene_level",
+        "secondary_role",
+        "self",
+        "self_resolved",
+        "source",
+        "specialist",
+        "strongest_artifact",
+        "target",
+        "team_balance",
+        "team_score",
+        "team_value",
+        "top_pairs_curve",
+        "total_artifacts",
+        "total_cooccurrences",
+        "total_counter_relations",
+        "total_factions",
+        "total_rescues",
+        "weak_link",
+        "weakness",
+        "weakness_pattern",
+        "weight"
+      ],
+      "broad_field_count": 82,
+      "control_count": 3,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "risk-project.html",
+      "encodings": [
+        "折线",
+        "饼/环形"
+      ],
+      "path_signatures": [
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "饼/环形": 3,
+        "折线": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 7,
+      "hardcoded_fill_hex_values": [
+        "#23201A",
+        "#3A6B8C",
+        "#6B6455",
+        "#C8463A",
+        "#C9A063"
+      ],
+      "data_keys_proxy": 89,
+      "tip_blocks": 22,
+      "tip_text_chars": 372,
+      "interactive_field_refs": [
+        "avg_fit_score",
+        "count",
+        "impact",
+        "mbti_stats",
+        "probability",
+        "score",
+        "year"
+      ],
+      "interactive_field_count": 7,
+      "broad_field_refs": [
+        "E",
+        "F",
+        "I",
+        "J",
+        "N",
+        "P",
+        "S",
+        "T",
+        "actual",
+        "auto",
+        "avg_fit_score",
+        "best_fit",
+        "category",
+        "chapter",
+        "character",
+        "character_mbti",
+        "concept_list",
+        "concept_name",
+        "count",
+        "crisis",
+        "definition",
+        "description",
+        "dimension",
+        "dimensions",
+        "english_name",
+        "finish",
+        "fit_score",
+        "full",
+        "high_probability_high_impact",
+        "high_probability_low_impact",
+        "impact",
+        "key_findings",
+        "key_risk_realized",
+        "key_success_factor",
+        "kpi_name",
+        "kpis",
+        "lessons_learned",
+        "low_probability_high_impact",
+        "low_probability_low_impact",
+        "mbti_dimensions",
+        "mbti_stats",
+        "mbti_type",
+        "milestone",
+        "milestones",
+        "missing_types",
+        "on_budget",
+        "on_scope",
+        "on_time",
+        "overall_risk_score",
+        "overall_status",
+        "prob",
+        "probability",
+        "progress",
+        "project_basics",
+        "project_budget",
+        "project_duration",
+        "project_manager",
+        "project_name",
+        "project_scope",
+        "project_sponsor",
+        "project_summary",
+        "project_team",
+        "rank",
+        "representative_cases",
+        "response_strategy",
+        "risk",
+        "risk_categories",
+        "risk_insights",
+        "risk_management_verdict",
+        "risk_matrix",
+        "score",
+        "status",
+        "strength_in_team",
+        "target",
+        "team",
+        "team_composition",
+        "top_risks",
+        "total_characters",
+        "total_concepts",
+        "total_data_points",
+        "type_name",
+        "worst_fit",
+        "year"
+      ],
+      "broad_field_count": 83,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "search.html",
+      "encodings": [],
+      "path_signatures": [
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 7,
+      "tip_blocks": 0,
+      "tip_text_chars": 0,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "category",
+        "kind",
+        "kw",
+        "name",
+        "snippet",
+        "title",
+        "url"
+      ],
+      "broad_field_count": 7,
+      "control_count": 1,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "six-senses-narratology-network.html",
+      "encodings": [
+        "力导向网络",
+        "桑基流向"
+      ],
+      "path_signatures": [
+        "Canvas2D",
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "力导向网络": 3,
+        "桑基流向": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 12,
+      "hardcoded_fill_hex_values": [
+        "#1A1410",
+        "#5A3828",
+        "#8A7A5A",
+        "#8B4513"
+      ],
+      "data_keys_proxy": 1,
+      "tip_blocks": 51,
+      "tip_text_chars": 240,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "start"
+      ],
+      "broad_field_count": 1,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "social-media.html",
+      "encodings": [],
+      "path_signatures": [
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 2,
+      "hardcoded_fill_hex_values": [
+        "#C8463A",
+        "#FAF7F2"
+      ],
+      "data_keys_proxy": 2,
+      "tip_blocks": 9,
+      "tip_text_chars": 227,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "B站",
+        "none"
+      ],
+      "broad_field_count": 2,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "tag-cloud.html",
+      "encodings": [],
+      "path_signatures": [
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 6,
+      "tip_blocks": 6,
+      "tip_text_chars": 72,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 7,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "text-evolution.html",
+      "encodings": [
+        "堆叠",
+        "饼/环形"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "饼/环形": 3,
+        "堆叠": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 1,
+      "hardcoded_fill_hex_values": [
+        "#FFF"
+      ],
+      "data_keys_proxy": 28,
+      "tip_blocks": 15,
+      "tip_text_chars": 639,
+      "interactive_field_refs": [
+        "chapter_first",
+        "commentary_count",
+        "evolution",
+        "match_score",
+        "name",
+        "version",
+        "year"
+      ],
+      "interactive_field_count": 7,
+      "broad_field_refs": [
+        "archaeological_layer",
+        "candidate",
+        "chapter_first",
+        "chapters",
+        "classic_quotes",
+        "commentary_count",
+        "commentary_types",
+        "current_status",
+        "element",
+        "evidence_against",
+        "evidence_for",
+        "evolution",
+        "evolution_path",
+        "feature",
+        "first_appear",
+        "identity",
+        "key_change",
+        "key_role_introduction",
+        "layer",
+        "lifetime",
+        "match_score",
+        "missing_elements",
+        "name",
+        "social_network",
+        "type",
+        "version",
+        "work",
+        "year"
+      ],
+      "broad_field_count": 28,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "text-search.html",
+      "encodings": [],
+      "path_signatures": [],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性",
+        "筛选控件"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 0,
+      "tip_blocks": 0,
+      "tip_text_chars": 0,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 4,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "theological-intervention-network.html",
+      "encodings": [
+        "力导向网络"
+      ],
+      "path_signatures": [
+        "Canvas2D",
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "力导向网络": 3
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 10,
+      "hardcoded_fill_hex_values": [
+        "#23201A",
+        "#5C4A35",
+        "#FFF",
+        "#FFF8E7"
+      ],
+      "data_keys_proxy": 0,
+      "tip_blocks": 4,
+      "tip_text_chars": 42,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "timeline.html",
+      "encodings": [],
+      "path_signatures": [],
+      "n_encoding_types": 0,
+      "encoding_hits": {},
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 0,
+      "hardcoded_fill_hex_values": [],
+      "data_keys_proxy": 1,
+      "tip_blocks": 15,
+      "tip_text_chars": 97,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "true"
+      ],
+      "broad_field_count": 1,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "underworld-power-network.html",
+      "encodings": [
+        "力导向网络",
+        "折线",
+        "桑基流向",
+        "饼/环形"
+      ],
+      "path_signatures": [
+        "Canvas2D",
+        "雷达图(命名)"
+      ],
+      "n_encoding_types": 4,
+      "encoding_hits": {
+        "力导向网络": 3,
+        "桑基流向": 1,
+        "饼/环形": 3,
+        "折线": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "比例尺Band/Ordinal",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定",
+        "tooltip运行时"
+      ],
+      "html_channels": [
+        "可达性属性",
+        "键盘绑定"
+      ],
+      "hardcoded_fill_hex_count": 18,
+      "hardcoded_fill_hex_values": [
+        "#1A1410",
+        "#3A6B8C",
+        "#8A7C6A",
+        "#C8463A",
+        "#FFF"
+      ],
+      "data_keys_proxy": 2,
+      "tip_blocks": 45,
+      "tip_text_chars": 174,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [
+        "none",
+        "start"
+      ],
+      "broad_field_count": 2,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "visual-art.html",
+      "encodings": [
+        "折线",
+        "面积"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 2,
+      "encoding_hits": {
+        "折线": 3,
+        "面积": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 1,
+      "hardcoded_fill_hex_values": [
+        "#D4AF37"
+      ],
+      "data_keys_proxy": 2,
+      "tip_blocks": 26,
+      "tip_text_chars": 1109,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    },
+    {
+      "page": "workplace.html",
+      "encodings": [
+        "折线"
+      ],
+      "path_signatures": [],
+      "n_encoding_types": 1,
+      "encoding_hits": {
+        "折线": 1
+      },
+      "weak_signatures": [
+        "圆元素",
+        "矩形元素",
+        "线性比例尺"
+      ],
+      "token_used_in_js": [],
+      "token_defined_in_page": [
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "chart-4",
+        "chart-5",
+        "chart-6"
+      ],
+      "js_channels": [
+        "hover绑定"
+      ],
+      "html_channels": [
+        "可达性属性"
+      ],
+      "hardcoded_fill_hex_count": 1,
+      "hardcoded_fill_hex_values": [
+        "#FAF7F2"
+      ],
+      "data_keys_proxy": 0,
+      "tip_blocks": 19,
+      "tip_text_chars": 390,
+      "interactive_field_refs": [],
+      "interactive_field_count": 0,
+      "broad_field_refs": [],
+      "broad_field_count": 0,
+      "control_count": 0,
+      "loads_three_lib": false,
+      "naive_three_hit": true
+    }
+  ]
+}

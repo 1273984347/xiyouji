@@ -6,7 +6,8 @@
   python scripts/batch_cascade.py --spec <spec.json> --apply     # 断言全过后统一落盘
 
 两阶段设计：第一阶段在内存中对全部 10 个面做断言与改写（W628 起 +CITATION.cff），任何锚点失配立即中止（零落盘）；
-第二阶段仅在 --apply 时统一写入。写入后自检交接文档无 `））；` 双括号。
+第二阶段仅在 --apply 时统一写入。写入后自检交接文档无 `））；` 双括号。--apply 落盘后输出级联文件清单
+（scripts/output/_cascade_files_<批号>.txt，W649 起——防 partial commit 漏级联面：提交时按清单 git add）。
 
 spec 字段见文末说明（JSON）。
 """
@@ -223,6 +224,16 @@ def main():
             raise SystemExit("path escapes project root: %s" % path)
         with open(_real, "w", encoding="utf-8", newline="") as f:
             f.write(content)
+
+    # ---------- 级联落盘清单（W649 防复发：W595/W632/W647 三次 partial commit 漏级联面——
+    # 提交时按本清单逐面 git add，杜绝「级联落盘了但没进提交」的检出树≠工作树脱节） ----------
+    manifest = f"scripts/output/_cascade_files_{batch}.txt"
+    _real_m = os.path.realpath(os.path.join(ROOT, manifest))
+    if not (_real_m == _root or _real_m.startswith(_root + os.sep)):
+        raise SystemExit("path escapes project root: %s" % manifest)
+    with open(_real_m, "w", encoding="utf-8", newline="") as f:
+        f.write("\n".join(p for p, _, _ in pend) + "\n")
+    print(f"[MANIFEST] 级联落盘清单 {len(pend)} 个文件 → {manifest}（提交时按清单 git add；清单本身随批入库）")
 
     # ---------- 写后自检 + 自愈（W560：并入 _cascade_fix.py 与 jiacheck 要点） ----------
     selfcheck = []
