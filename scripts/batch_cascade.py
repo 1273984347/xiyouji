@@ -55,6 +55,9 @@ def main():
     desc = spec["desc"]
     entry = spec["head_entry"]
     assert entry.endswith("）"), "head_entry 必须以闭合括号结尾"
+    assert "（" not in spec["head_sentence"] and "）" not in spec["head_sentence"], (
+        "head_sentence 禁含全角括号——会破坏下一批「当前 HEAD 句」断言的 [^）]* 匹配（W649 实证：W648 嵌套括号致本批断言 FAIL，交接文档已手工修复）"
+    )
     pend = []  # (path, content, nl)
 
     # ---------- CHANGELOG ----------
