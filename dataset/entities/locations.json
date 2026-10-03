@@ -1,0 +1,854 @@
+{
+ "title": "A1 chapter-meta 实体聚合（locations）",
+ "w_id": "W651",
+ "generated": "2026-10-03",
+ "source": "docs/01-全书逐回解读/ 100 回 chapter-meta 注释（agg_entities.py 纯聚合·零新造事实·不做别名归并）",
+ "method": "按 main_characters/locations 逐回列表聚合：出场回数/回目列表/首秀回",
+ "count": 61,
+ "entities": [
+  {
+   "name": "大唐",
+   "chapters": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    19,
+    20,
+    21,
+    23,
+    24,
+    25,
+    28,
+    29,
+    30,
+    35,
+    36,
+    37,
+    39,
+    41,
+    42,
+    44,
+    45,
+    47,
+    48,
+    49,
+    50,
+    52,
+    53,
+    54,
+    56,
+    57,
+    62,
+    68,
+    70,
+    72,
+    73,
+    74,
+    75,
+    78,
+    80,
+    85,
+    86,
+    87,
+    88,
+    89,
+    91,
+    92,
+    93,
+    96,
+    98
+   ],
+   "count": 55,
+   "first_chapter": 8
+  },
+  {
+   "name": "花果山",
+   "chapters": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    14,
+    17,
+    19,
+    20,
+    27,
+    28,
+    30,
+    33,
+    35,
+    57,
+    58,
+    63,
+    67,
+    74,
+    77,
+    81,
+    82,
+    83,
+    86,
+    94,
+    100
+   ],
+   "count": 28,
+   "first_chapter": 1
+  },
+  {
+   "name": "南海",
+   "chapters": [
+    3,
+    6,
+    8,
+    12,
+    14,
+    15,
+    17,
+    22,
+    23,
+    34,
+    36,
+    39,
+    41,
+    42,
+    49,
+    52,
+    54,
+    55,
+    58,
+    59,
+    62,
+    65,
+    71,
+    75,
+    83,
+    84
+   ],
+   "count": 26,
+   "first_chapter": 3
+  },
+  {
+   "name": "灵山",
+   "chapters": [
+    8,
+    15,
+    21,
+    24,
+    26,
+    29,
+    35,
+    38,
+    52,
+    57,
+    65,
+    75,
+    77,
+    81,
+    83,
+    85,
+    87,
+    90,
+    91,
+    93,
+    96,
+    97,
+    98,
+    100
+   ],
+   "count": 24,
+   "first_chapter": 8
+  },
+  {
+   "name": "水帘洞",
+   "chapters": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    17,
+    19,
+    27,
+    28,
+    30,
+    31,
+    35,
+    52,
+    57,
+    58,
+    63,
+    74,
+    82,
+    94,
+    100
+   ],
+   "count": 22,
+   "first_chapter": 1
+  },
+  {
+   "name": "长安",
+   "chapters": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    16,
+    27,
+    32,
+    36,
+    37,
+    47,
+    56,
+    68,
+    76,
+    81,
+    82,
+    88,
+    92,
+    96,
+    100
+   ],
+   "count": 21,
+   "first_chapter": 8
+  },
+  {
+   "name": "雷音寺",
+   "chapters": [
+    12,
+    16,
+    37,
+    52,
+    55,
+    61,
+    65,
+    66,
+    68,
+    70,
+    73,
+    80,
+    85,
+    87,
+    91,
+    93,
+    98
+   ],
+   "count": 17,
+   "first_chapter": 12
+  },
+  {
+   "name": "天竺",
+   "chapters": [
+    12,
+    14,
+    57,
+    70,
+    77,
+    80,
+    85,
+    86,
+    87,
+    88,
+    91,
+    93,
+    95
+   ],
+   "count": 13,
+   "first_chapter": 12
+  },
+  {
+   "name": "东胜神洲",
+   "chapters": [
+    1,
+    2,
+    6,
+    19,
+    20,
+    40,
+    54,
+    57,
+    58,
+    94,
+    96,
+    100
+   ],
+   "count": 12,
+   "first_chapter": 1
+  },
+  {
+   "name": "南赡部洲",
+   "chapters": [
+    1,
+    10,
+    29,
+    39,
+    45,
+    62,
+    65,
+    66,
+    93,
+    96,
+    98
+   ],
+   "count": 11,
+   "first_chapter": 1
+  },
+  {
+   "name": "西海",
+   "chapters": [
+    3,
+    15,
+    23,
+    30,
+    41,
+    43,
+    48,
+    59,
+    69,
+    92
+   ],
+   "count": 10,
+   "first_chapter": 3
+  },
+  {
+   "name": "流沙河",
+   "chapters": [
+    8,
+    22,
+    23,
+    32,
+    43,
+    75,
+    82,
+    94,
+    99,
+    100
+   ],
+   "count": 10,
+   "first_chapter": 8
+  },
+  {
+   "name": "西牛贺洲",
+   "chapters": [
+    1,
+    2,
+    24,
+    26,
+    40,
+    54,
+    66,
+    68,
+    96
+   ],
+   "count": 9,
+   "first_chapter": 1
+  },
+  {
+   "name": "地府",
+   "chapters": [
+    10,
+    19,
+    21,
+    40,
+    58,
+    75,
+    81,
+    85
+   ],
+   "count": 8,
+   "first_chapter": 10
+  },
+  {
+   "name": "东海",
+   "chapters": [
+    3,
+    13,
+    16,
+    20,
+    26,
+    69,
+    87
+   ],
+   "count": 7,
+   "first_chapter": 3
+  },
+  {
+   "name": "灵霄宝殿",
+   "chapters": [
+    4,
+    6,
+    7,
+    39,
+    51,
+    58,
+    92
+   ],
+   "count": 7,
+   "first_chapter": 4
+  },
+  {
+   "name": "北海",
+   "chapters": [
+    3,
+    34,
+    41,
+    46,
+    63,
+    77
+   ],
+   "count": 6,
+   "first_chapter": 3
+  },
+  {
+   "name": "兜率宫",
+   "chapters": [
+    5,
+    7,
+    31,
+    52,
+    60,
+    71
+   ],
+   "count": 6,
+   "first_chapter": 5
+  },
+  {
+   "name": "傲来国",
+   "chapters": [
+    6,
+    19,
+    20,
+    54,
+    74,
+    94
+   ],
+   "count": 6,
+   "first_chapter": 6
+  },
+  {
+   "name": "五行山",
+   "chapters": [
+    7,
+    8,
+    14,
+    17,
+    60,
+    94
+   ],
+   "count": 6,
+   "first_chapter": 7
+  },
+  {
+   "name": "高老庄",
+   "chapters": [
+    18,
+    23,
+    30,
+    32,
+    75,
+    82
+   ],
+   "count": 6,
+   "first_chapter": 18
+  },
+  {
+   "name": "龙宫",
+   "chapters": [
+    14,
+    62,
+    63,
+    65,
+    70
+   ],
+   "count": 5,
+   "first_chapter": 14
+  },
+  {
+   "name": "宝林寺",
+   "chapters": [
+    36,
+    37,
+    38,
+    39,
+    40
+   ],
+   "count": 5,
+   "first_chapter": 36
+  },
+  {
+   "name": "通天河",
+   "chapters": [
+    47,
+    48,
+    49,
+    50,
+    99
+   ],
+   "count": 5,
+   "first_chapter": 47
+  },
+  {
+   "name": "天庭",
+   "chapters": [
+    15,
+    43,
+    49,
+    56
+   ],
+   "count": 4,
+   "first_chapter": 15
+  },
+  {
+   "name": "平顶山",
+   "chapters": [
+    32,
+    34,
+    35,
+    99
+   ],
+   "count": 4,
+   "first_chapter": 32
+  },
+  {
+   "name": "莲花洞",
+   "chapters": [
+    32,
+    33,
+    34,
+    35
+   ],
+   "count": 4,
+   "first_chapter": 32
+  },
+  {
+   "name": "乌鸡国",
+   "chapters": [
+    37,
+    38,
+    39,
+    40
+   ],
+   "count": 4,
+   "first_chapter": 37
+  },
+  {
+   "name": "火焰山",
+   "chapters": [
+    40,
+    59,
+    60,
+    61
+   ],
+   "count": 4,
+   "first_chapter": 40
+  },
+  {
+   "name": "陈家庄",
+   "chapters": [
+    47,
+    48,
+    49,
+    99
+   ],
+   "count": 4,
+   "first_chapter": 47
+  },
+  {
+   "name": "西梁女国",
+   "chapters": [
+    48,
+    53,
+    54,
+    55
+   ],
+   "count": 4,
+   "first_chapter": 48
+  },
+  {
+   "name": "朱紫国",
+   "chapters": [
+    68,
+    70,
+    71,
+    72
+   ],
+   "count": 4,
+   "first_chapter": 68
+  },
+  {
+   "name": "比丘国",
+   "chapters": [
+    78,
+    79,
+    80,
+    88
+   ],
+   "count": 4,
+   "first_chapter": 78
+  },
+  {
+   "name": "蟠桃园",
+   "chapters": [
+    4,
+    5,
+    7
+   ],
+   "count": 3,
+   "first_chapter": 4
+  },
+  {
+   "name": "黄风岭",
+   "chapters": [
+    20,
+    22,
+    59
+   ],
+   "count": 3,
+   "first_chapter": 20
+  },
+  {
+   "name": "车迟国",
+   "chapters": [
+    44,
+    45,
+    47
+   ],
+   "count": 3,
+   "first_chapter": 44
+  },
+  {
+   "name": "芭蕉洞",
+   "chapters": [
+    59,
+    60,
+    61
+   ],
+   "count": 3,
+   "first_chapter": 59
+  },
+  {
+   "name": "祭赛国",
+   "chapters": [
+    62,
+    63,
+    64
+   ],
+   "count": 3,
+   "first_chapter": 62
+  },
+  {
+   "name": "麒麟山",
+   "chapters": [
+    69,
+    70,
+    71
+   ],
+   "count": 3,
+   "first_chapter": 69
+  },
+  {
+   "name": "无底洞",
+   "chapters": [
+    81,
+    82,
+    83
+   ],
+   "count": 3,
+   "first_chapter": 81
+  },
+  {
+   "name": "北俱芦洲",
+   "chapters": [
+    1,
+    66
+   ],
+   "count": 2,
+   "first_chapter": 1
+  },
+  {
+   "name": "黑水河",
+   "chapters": [
+    43,
+    44
+   ],
+   "count": 2,
+   "first_chapter": 43
+  },
+  {
+   "name": "积雷山",
+   "chapters": [
+    60,
+    61
+   ],
+   "count": 2,
+   "first_chapter": 60
+  },
+  {
+   "name": "金光寺",
+   "chapters": [
+    62,
+    63
+   ],
+   "count": 2,
+   "first_chapter": 62
+  },
+  {
+   "name": "小雷音寺",
+   "chapters": [
+    65,
+    66
+   ],
+   "count": 2,
+   "first_chapter": 65
+  },
+  {
+   "name": "濯垢泉",
+   "chapters": [
+    72,
+    73
+   ],
+   "count": 2,
+   "first_chapter": 72
+  },
+  {
+   "name": "盘丝洞",
+   "chapters": [
+    72,
+    73
+   ],
+   "count": 2,
+   "first_chapter": 72
+  },
+  {
+   "name": "狮驼国",
+   "chapters": [
+    74,
+    77
+   ],
+   "count": 2,
+   "first_chapter": 74
+  },
+  {
+   "name": "狮驼岭",
+   "chapters": [
+    74,
+    85
+   ],
+   "count": 2,
+   "first_chapter": 74
+  },
+  {
+   "name": "玉华州",
+   "chapters": [
+    89,
+    90
+   ],
+   "count": 2,
+   "first_chapter": 89
+  },
+  {
+   "name": "慈云寺",
+   "chapters": [
+    91,
+    92
+   ],
+   "count": 2,
+   "first_chapter": 91
+  },
+  {
+   "name": "金平府",
+   "chapters": [
+    91,
+    92
+   ],
+   "count": 2,
+   "first_chapter": 91
+  },
+  {
+   "name": "凌云渡",
+   "chapters": [
+    98,
+    99
+   ],
+   "count": 2,
+   "first_chapter": 98
+  },
+  {
+   "name": "玉真观",
+   "chapters": [
+    98,
+    99
+   ],
+   "count": 2,
+   "first_chapter": 98
+  },
+  {
+   "name": "斜月三星洞",
+   "chapters": [
+    2
+   ],
+   "count": 1,
+   "first_chapter": 2
+  },
+  {
+   "name": "灵台方寸山",
+   "chapters": [
+    2
+   ],
+   "count": 1,
+   "first_chapter": 2
+  },
+  {
+   "name": "鹰愁涧",
+   "chapters": [
+    15
+   ],
+   "count": 1,
+   "first_chapter": 15
+  },
+  {
+   "name": "三清观",
+   "chapters": [
+    44
+   ],
+   "count": 1,
+   "first_chapter": 44
+  },
+  {
+   "name": "灭法国",
+   "chapters": [
+    84
+   ],
+   "count": 1,
+   "first_chapter": 84
+  },
+  {
+   "name": "隐雾山",
+   "chapters": [
+    86
+   ],
+   "count": 1,
+   "first_chapter": 86
+  },
+  {
+   "name": "凤仙郡",
+   "chapters": [
+    87
+   ],
+   "count": 1,
+   "first_chapter": 87
+  }
+ ]
+}

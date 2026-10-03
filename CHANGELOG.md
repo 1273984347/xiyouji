@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W653），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W654），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.254（2026-10-03）：W654 PD-1b 图表选型章与降级门禁 — DESIGN.md §4B 九族 45 格（并行会话实现·本批接续收尾）+ check_chart_degrade 挂第 30 槽（86 页 chart-degrade 声明全落）+ check_chart_data R3/spec-check/自检 6 例 + R3 力导向签名补自定义力布局 + B-5 聚合器与 entities 两 JSON 同批入账
+> **来源**：全量启动队列第三批（依赖序：PD-5 真值→PD-1a 色盲门禁已就位）——PD-1b 按适用性方案 §3 执行；并行会话已完成 §4B 选型章与 check_chart_data 主体（未提交·本批接续收尾并同批入账，跨批协作二次实践）。
+> - **DESIGN.md §4B 图表选型与数据契约**（D-2 裁决 (a) §4A 插章先例）：9 族 × 5 字段（数据形态约束→图型→禁用条件→站内代表页→窄屏降级方案）45 格零空格（AC-4：--spec-check 表体行 9·空单元格 0）；每格锚真实页面（git ls-files 核对）。
+> - **第 30 门禁挂载**：check_chart_degrade.py（静态解析不启浏览器·D-5 只 site/data 86 页·_shell/_template 跳过同口径）——页内 `<!-- chart-degrade: stacked|scroll-x|simplified|n/a -->` 声明缺失/非法=FAIL；86 页声明按 §4B 族签名推导全落（stacked/simplified/scroll-x/n-a 按视觉主导族）·wrapper 防静默跳过同前（AC-3 未声明页==0）。
+> - **check_chart_data 扩充**：R3 措辞×实现错配（§4B 词表联动·辖区 site/data·自定义实现以关键词在位为准）；--spec-check 子命令；--self-test 3→6 例（R1/R2/R3 负样本+好样本+R3 正样本）。**R3 首跑抓 2 页真错配并同批处置**：graph-explorer/character-relationship-3d 页面写「力导向」但无 d3.force 签名——诊断为手写迭代力布局（nodePos/iters 收敛/velocity 积分·非 d3.force），R3 力导向实现签名补自定义力布局标记（nodePos|iters=）后两页正确识别为力导向（非误报非漏报）。
+> - **B-5 聚合器先行同批入账**：scripts/agg_entities.py 读 docs/01 100 回 chapter-meta 注释 → dataset/entities/characters.json（56 名·悟空 96/唐僧 92/沙僧 76）+ locations.json（61 处）——100/100 覆盖断言·纯聚合零新造事实·不做别名归并（学术裁决面）·drift 门禁绿（未被 fetch 的新文件不触发 47 副本基线）。
+> - **AC 对照**：AC-1 扫描 86==N-DATA ✓；AC-2 self-test 6/6 ✓；AC-3 未声明 0 ✓；AC-4 行 9 格 0 ✓；AC-5 verify 核心全绿+两新门禁在输出 ✓；AC-6 CSP 335 页 0 漂移（页改动仅 HTML 注释·非渲染面）✓；AC-7 暗色——页改动为零渲染面注释（bite-level 论证）·CI Screenshot Review 定向截图兜底 ✓。
+> - **验证**：ruff 全部 0 错；check_chart_data 三模式（gate/spec-check/self-test）全过；check_chart_degrade 86/86 声明；verify_delivery 核心全绿（第 29/30 门禁实测）；级联 dry-run→apply 10 面断言过。
+> - **文件**：DESIGN.md（§4B）、scripts/check_chart_data.py（R3/spec-check/自检）、scripts/check_chart_degrade.py（新增）、scripts/verify_delivery.py（挂第 30 槽）、site/data 86 页（chart-degrade 声明注释）、scripts/agg_entities.py、dataset/entities/characters.json、dataset/entities/locations.json（B-5·均新增）、scripts/output/_cascade_files_W654.txt、六文档、四页脚、CITATION、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 
 ### v2.3.253（2026-10-03）：W653 PD-1a 图表配色色盲安全门禁 — check_chart_colorblind（Machado 二型模拟+CIEDE2000·ΔE<10·WARN+基线 17428 对冻结）挂第 29 槽 + 形态普查 + 口径偏差入账（light 静态·暗色归 PD-4）
 > **来源**：全量启动队列第二批（依赖序：PD-5 真值清单已就位）——PD-1a 按适用性方案 §3 执行（PD-1b §4B 选型章+降级门禁+R3 留 W654）。

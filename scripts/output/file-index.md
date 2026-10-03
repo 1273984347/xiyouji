@@ -11,6 +11,20 @@
 ---
 
 
+## W654 W654 PD-1b 图表选型章与降级门禁（2026-10-03·v2.3.254）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| DESIGN.md | W654 | 更新·§4B 图表选型与数据契约（九族 45 格·与 §6 响应式配套） |
+| scripts/check_chart_data.py | W654 | 更新·R3 措辞×实现错配+spec-check+自检 6 例（3→6） |
+| scripts/check_chart_degrade.py | W654 | 新增·第 30 门禁窄屏降级声明（四值枚举·静态解析） |
+| scripts/verify_delivery.py | W654 | 更新·挂第 30 槽降级声明门禁 |
+| site/data/*.html ×86 | W654 | 更新·chart-degrade 降级形态声明注释（族签名推导） |
+| scripts/agg_entities.py | W654 | 新增·B-5 聚合器（chapter-meta→entities·100/100 覆盖断言） |
+| dataset/entities/characters.json | W654 | 新增·56 名角色聚合（出场回数/回目列表/首秀回） |
+| dataset/entities/locations.json | W654 | 新增·61 处地点聚合 |
+| scripts/output/_cascade_files_W654.txt | W654 | 新增·级联落盘清单 |
+
 ## W653 W653 PD-1a 图表配色色盲安全门禁（2026-10-03·v2.3.253）
 
 | 文件 | W | 说明 |

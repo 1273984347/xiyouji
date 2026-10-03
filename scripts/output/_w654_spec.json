@@ -1,0 +1,23 @@
+{
+  "batch": "W654",
+  "version": "v2.3.254",
+  "date": "2026-10-03",
+  "desc": "PD-1b 选型章与降级门禁",
+  "title": "W654 PD-1b 图表选型章与降级门禁 — DESIGN.md §4B 九族 45 格（并行会话实现·本批接续收尾）+ check_chart_degrade 挂第 30 槽（86 页 chart-degrade 声明全落）+ check_chart_data R3/spec-check/自检 6 例 + R3 力导向签名补自定义力布局 + B-5 聚合器与 entities 两 JSON 同批入账",
+  "head_entry": "2026-10-03（v2.3.254 W654）PD-1b 图表选型章与降级门禁——DESIGN.md §4B 九族 45 格落位（并行会话实现·本批接续收尾），check_chart_degrade 挂第 30 槽（86 页 chart-degrade 声明全落·未声明 0），check_chart_data 增 R3 措辞×实现错配/spec-check/自检扩 6 例，R3 力导向签名补自定义力布局标记（graph-explorer/relationship-3d 两页真错配排除），B-5 聚合器 agg_entities.py 与 dataset/entities 两 JSON 同批入账）",
+  "changelog_body": "\n> **来源**：全量启动队列第三批（依赖序：PD-5 真值→PD-1a 色盲门禁已就位）——PD-1b 按适用性方案 §3 执行；并行会话已完成 §4B 选型章与 check_chart_data 主体（未提交·本批接续收尾并同批入账，跨批协作二次实践）。\n> - **DESIGN.md §4B 图表选型与数据契约**（D-2 裁决 (a) §4A 插章先例）：9 族 × 5 字段（数据形态约束→图型→禁用条件→站内代表页→窄屏降级方案）45 格零空格（AC-4：--spec-check 表体行 9·空单元格 0）；每格锚真实页面（git ls-files 核对）。\n> - **第 30 门禁挂载**：check_chart_degrade.py（静态解析不启浏览器·D-5 只 site/data 86 页·_shell/_template 跳过同口径）——页内 `<!-- chart-degrade: stacked|scroll-x|simplified|n/a -->` 声明缺失/非法=FAIL；86 页声明按 §4B 族签名推导全落（stacked/simplified/scroll-x/n-a 按视觉主导族）·wrapper 防静默跳过同前（AC-3 未声明页==0）。\n> - **check_chart_data 扩充**：R3 措辞×实现错配（§4B 词表联动·辖区 site/data·自定义实现以关键词在位为准）；--spec-check 子命令；--self-test 3→6 例（R1/R2/R3 负样本+好样本+R3 正样本）。**R3 首跑抓 2 页真错配并同批处置**：graph-explorer/character-relationship-3d 页面写「力导向」但无 d3.force 签名——诊断为手写迭代力布局（nodePos/iters 收敛/velocity 积分·非 d3.force），R3 力导向实现签名补自定义力布局标记（nodePos|iters=）后两页正确识别为力导向（非误报非漏报）。\n> - **B-5 聚合器先行同批入账**：scripts/agg_entities.py 读 docs/01 100 回 chapter-meta 注释 → dataset/entities/characters.json（56 名·悟空 96/唐僧 92/沙僧 76）+ locations.json（61 处）——100/100 覆盖断言·纯聚合零新造事实·不做别名归并（学术裁决面）·drift 门禁绿（未被 fetch 的新文件不触发 47 副本基线）。\n> - **AC 对照**：AC-1 扫描 86==N-DATA ✓；AC-2 self-test 6/6 ✓；AC-3 未声明 0 ✓；AC-4 行 9 格 0 ✓；AC-5 verify 核心全绿+两新门禁在输出 ✓；AC-6 CSP 335 页 0 漂移（页改动仅 HTML 注释·非渲染面）✓；AC-7 暗色——页改动为零渲染面注释（bite-level 论证）·CI Screenshot Review 定向截图兜底 ✓。\n> - **验证**：ruff 全部 0 错；check_chart_data 三模式（gate/spec-check/self-test）全过；check_chart_degrade 86/86 声明；verify_delivery 核心全绿（第 29/30 门禁实测）；级联 dry-run→apply 10 面断言过。\n> - **文件**：DESIGN.md（§4B）、scripts/check_chart_data.py（R3/spec-check/自检）、scripts/check_chart_degrade.py（新增）、scripts/verify_delivery.py（挂第 30 槽）、site/data 86 页（chart-degrade 声明注释）、scripts/agg_entities.py、dataset/entities/characters.json、dataset/entities/locations.json（B-5·均新增）、scripts/output/_cascade_files_W654.txt、六文档、四页脚、CITATION、file-index。\n> - **状态**：已落地（本批提交并 push origin/main）。\n",
+  "milestone_block": "- **v2.3.254 W654 PD-1b 选型章与降级门禁**：\n  - DESIGN.md §4B 九族 45 格（并行会话实现接续收尾）·第 30 门禁 check_chart_degrade 挂载（86 页声明全落·未声明 0）\n  - check_chart_data R3 措辞×实现错配+spec-check+自检 6 例·力导向签名补自定义力布局（2 页真错配排除）\n  - B-5 聚合器 agg_entities.py+dataset/entities 两 JSON 同批入账（56 名 61 处·100/100 覆盖）\n",
+  "head_sentence": "PD-1b 选型章+第 30 门禁降级声明+B-5 聚合器",
+  "agents_note": "2026-10-03（v2.3.254 W654）PD-1b 图表选型章与降级门禁：无 § 结构性变更（DESIGN.md §4B 九族 45 格·第 30 门禁 check_chart_degrade 挂载 86 页声明全落·check_chart_data R3/spec-check/自检 6 例·力导向签名补自定义力布局·B-5 聚合器同批入账），仅版本脚注同步",
+  "file_index_rows": [
+    "| DESIGN.md | W654 | 更新·§4B 图表选型与数据契约（九族 45 格·与 §6 响应式配套） |",
+    "| scripts/check_chart_data.py | W654 | 更新·R3 措辞×实现错配+spec-check+自检 6 例（3→6） |",
+    "| scripts/check_chart_degrade.py | W654 | 新增·第 30 门禁窄屏降级声明（四值枚举·静态解析） |",
+    "| scripts/verify_delivery.py | W654 | 更新·挂第 30 槽降级声明门禁 |",
+    "| site/data/*.html ×86 | W654 | 更新·chart-degrade 降级形态声明注释（族签名推导） |",
+    "| scripts/agg_entities.py | W654 | 新增·B-5 聚合器（chapter-meta→entities·100/100 覆盖断言） |",
+    "| dataset/entities/characters.json | W654 | 新增·56 名角色聚合（出场回数/回目列表/首秀回） |",
+    "| dataset/entities/locations.json | W654 | 新增·61 处地点聚合 |",
+    "| scripts/output/_cascade_files_W654.txt | W654 | 新增·级联落盘清单 |"
+  ]
+}
