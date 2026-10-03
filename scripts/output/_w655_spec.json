@@ -1,0 +1,20 @@
+{
+  "batch": "W655",
+  "version": "v2.3.255",
+  "date": "2026-10-04",
+  "desc": "B-9 之一 D3 色值变量化",
+  "title": "W655 B-9② D3 字面色值→CSS 变量 — 405 处 var 化（46 页·attr→style 230+style→var 175）+ 暗块补 chart 系列暗值 4 行（对齐 accent 暗值零新色）+ 全量暗色审计",
+  "head_entry": "2026-10-03（v2.3.255 W655）B-9② D3 字面色值→CSS 变量——405 处 var 化（46 页·attr→style 230+style→var 175·design-tokens 真值精确匹配）+ 暗块补 chart 系列暗值 4 行（chart-1/2/4/6 对齐 accent 系暗值零新色·chart-3/5 亮度可读继承）+ 暗色审计全量 86 页 4 态零回归）",
+  "changelog_body": "\n> **来源**：全量启动队列第四批（依赖序：PD-5 design-tokens.json 真值已就位·PD-1 触页批已错批）——B-9② 按 registry 登记「D3 字面色值改读 CSS 变量·删暗色 fill 硬编码映射」执行。\n> - **转换**：405 处 var 化（attr→style 230 + style 字面量→var 175·触及 46 页）——赋值语境（.attr/.style 的 fill/stroke/color）精确匹配 design-tokens light 值（大小写不敏感）→ var(--token)；chart-N 同值令牌优先用于 fill/stroke（系列语义）·color 语境用语义令牌（accent/ink）。**attr→style 转换为必要形态**：SVG 表现属性不支持 var() 替换——这正是 140 条属性选择器映射存在的历史根因。\n> - **暗块补系列暗值 4 行**：--chart-1 #E0604F/--chart-2 #7FA8C9/--chart-4 #9DB98A/--chart-6 #C9A96B（全部对齐既有 accent 系暗值·零新色发明·W587 亮度规则核算 chart-2 L=0.133 需提亮/chart-1 0.170 与 chart-6 0.167 边界一并对齐）；chart-3/5 亮度可读（0.385/0.629）继承不覆写。\n> - **映射清理实况（如实）**：140 条属性选择器映射本轮删除 0 条——余下映射的 literal 仍以运行时形态存在（colorMap/EMBEDDED 驱动的属性赋值·删则破坏那些图的暗色渲染）；其退场路径=相关页色板 token 化（B-5/B-6 后续批）·非本批一刀切。\n> - **暗色审计**：86 页×4 态全量（_audit_render_states·W584 并行化）——invisible/lowContrast/缺陷页 0（var 化+暗值对齐后三态零回归）。\n> - **验证**：ruff 0 错；色盲门禁基线外 0（存量 17428→17417·转换消解 11 对·var 解析路径语义不变）；drift/第 26-30 门禁全过；verify_delivery 核心全绿；CSP 重生成 0 漂移；inline_css --force 327 页重分发。\n> - **文件**：site/tokens.css（暗块+4）、site/data 46 页（var 化）、scripts/output/design-tokens.json 与 docs/00-导读/design.md（97 键重导出）、scripts/output/_w655_literal_to_var.py（转换脚本存档）、六文档、四页脚、CITATION、file-index。\n> - **状态**：已落地（本批提交并 push origin/main）。\n",
+  "milestone_block": "- **v2.3.255 W655 B-9② D3 色值→CSS 变量**：\n  - 405 处 var 化（46 页·attr→style 230+style→var 175·design-tokens 精确匹配·chart-N 系列语义优先）\n  - 暗块补 chart 系列暗值 4 行（对齐 accent 暗值零新色·W587 亮度规则）·暗色审计 86 页 4 态零回归\n  - 映射清理如实入账：本轮删 0 条（运行时 literal 仍在·退场路径=色板 token 化后续批）\n",
+  "head_sentence": "B-9② 色值变量化 405 处+暗色审计零回归",
+  "agents_note": "2026-10-04（v2.3.255 W655）B-9② D3 字面色值→CSS 变量：无 § 结构性变更（405 处 var 化 46 页·attr→style 230+style→var 175·暗块补 chart 系列暗值 4 行对齐 accent 暗值·暗色审计 86 页 4 态零回归·映射删 0 如实入账），仅版本脚注同步",
+  "file_index_rows": [
+    "| site/tokens.css | W655 | 更新·暗块补 chart 系列暗值 4 行（chart-1/2/4/6 对齐 accent 系） |",
+    "| site/data/*.html ×46 | W655 | 更新·赋值语境字面色值→var(--token) 405 处（attr→style 230+style→var 175） |",
+    "| scripts/output/design-tokens.json | W655 | 刷新·97 键（暗块 +4 chart 暗值） |",
+    "| docs/00-导读/design.md | W655 | 刷新·dark 段 +4 行 |",
+    "| scripts/output/_w655_literal_to_var.py | W655 | 新增·转换脚本存档（token 精确匹配+attr→style 形态转换） |",
+    "| scripts/output/_cascade_files_W655.txt | W655 | 新增·级联落盘清单 |"
+  ]
+}

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-dDSRsfWW3yX4Vr3bKEWI6wb22NEZsfeSr0d2oOyLvzs=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-3Edr8NLs29AK7L2eqlroX4ApY/1yHBI1zd4BoEsW6Eo=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>西游四维研究网络图谱 · 详解西游记</title>
@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -211,6 +211,10 @@ html[data-theme="dark"] {
     --accent-2: #7FA8C9;
     --accent-3: #C9A96B;
     --accent-4: #9DB98A;
+    --chart-1: #E0604F;
+    --chart-2: #7FA8C9;
+    --chart-4: #9DB98A;
+    --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
     --danger: #D96C5C;
@@ -1595,13 +1599,13 @@ const EMBEDDED_DATA = {
         .attr("x", cx).attr("y", cy - 6)
         .attr("text-anchor", "middle")
         .attr("font-size", "11px")
-        .attr("fill", "#6B6455")
+        .style("fill", "var(ink-soft)")
         .text("四维雷达");
     svg.append("text")
         .attr("x", cx).attr("y", cy + 10)
         .attr("text-anchor", "middle")
         .attr("font-size", "10px")
-        .attr("fill", "#6B6455")
+        .style("fill", "var(ink-soft)")
         .attr("font-family", "JetBrains Mono, monospace")
         .text("5 indicators × 4 dims");
 })();
@@ -1695,7 +1699,7 @@ const EMBEDDED_DATA = {
     svg.append("text")
         .attr("x", padL).attr("y", legendY)
         .attr("font-size", "11px")
-        .attr("fill", "#6B6455")
+        .style("fill", "var(ink-soft)")
         .text("贡献度：");
     [0, 2, 4, 6, 8, 10].forEach((v, i) => {
         const x = padL + 60 + i * 30;
@@ -1709,7 +1713,7 @@ const EMBEDDED_DATA = {
             .attr("x", x + 13).attr("y", legendY - 16)
             .attr("text-anchor", "middle")
             .attr("font-size", "9px")
-            .attr("fill", "#6B6455")
+            .style("fill", "var(ink-soft)")
             .text(v);
     });
 })();
@@ -1874,13 +1878,13 @@ const link = svg.append("g").selectAll("line")
         .attr("y", height - 8)
         .attr("text-anchor", "middle")
         .attr("font-size", "11px")
-        .attr("fill", "#6B6455")
+        .style("fill", "var(ink-soft)")
         .text("回目（取经路线时序）");
     svg.append("text")
         .attr("x", 16).attr("y", pad.t + innerH / 2)
         .attr("text-anchor", "middle")
         .attr("font-size", "11px")
-        .attr("fill", "#6B6455")
+        .style("fill", "var(ink-soft)")
         .attr("transform", `rotate(-90,16,${pad.t + innerH / 2})`)
         .text("四维强度堆叠值");
 
@@ -1951,7 +1955,7 @@ const link = svg.append("g").selectAll("line")
         svg.append("text")
             .attr("x", cx + 4).attr("y", cy - r * scale + 12)
             .attr("font-size", "9px")
-            .attr("fill", "#6B6455")
+            .style("fill", "var(ink-soft)")
             .attr("font-family", "JetBrains Mono, monospace")
             .text((scale * 10).toFixed(1));
     });
@@ -2035,7 +2039,7 @@ const link = svg.append("g").selectAll("line")
     svg.append("text")
         .attr("x", legX).attr("y", legY)
         .attr("font-size", "10px")
-        .attr("fill", "#6B6455")
+        .style("fill", "var(ink-soft)")
         .text("辐射圈 = 跨维度呼应度");
     [5, 7, 9].forEach((v, i) => {
         const x = legX + 130 + i * 50;
@@ -2048,7 +2052,7 @@ const link = svg.append("g").selectAll("line")
         svg.append("text")
             .attr("x", x + 22).attr("y", legY)
             .attr("font-size", "10px")
-            .attr("fill", "#6B6455")
+            .style("fill", "var(ink-soft)")
             .text(v);
     });
 })();

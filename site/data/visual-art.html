@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-pG2TPW/ebAUF4IjgYjula4/ywb4LlkG6jmg+9tMEKyw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-60/jZwvo6rj1Jrysi2vJcycHIZDAVnf96VmOfmGCYgw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>视觉艺术 · 心经物质形态与气味地图 · 详解西游记</title>
@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -211,6 +211,10 @@ html[data-theme="dark"] {
     --accent-2: #7FA8C9;
     --accent-3: #C9A96B;
     --accent-4: #9DB98A;
+    --chart-1: #E0604F;
+    --chart-2: #7FA8C9;
+    --chart-4: #9DB98A;
+    --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
     --danger: #D96C5C;
@@ -2320,7 +2324,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("y", d => d._y - 14)
             .attr("text-anchor", "middle")
             .style("font-size", "0.72rem")
-            .style("fill", "#e9b885")
+            .style("fill", "var(accent-soft)")
             .style("font-family", "'JetBrains Mono', monospace")
             .style("opacity", 0)
             .text(d => d.chapter.replace("第 ", "").replace(" 回", ""))
@@ -2349,7 +2353,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("y", innerH + 70)
             .attr("text-anchor", "middle")
             .style("font-size", "0.78rem")
-            .style("fill", "#e9b885")
+            .style("fill", "var(accent-soft)")
             .style("letter-spacing", "0.05em")
             .text("诵经次序（按章节回目）→ 心形空洞投影");
 
@@ -2360,7 +2364,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("y", -42)
             .attr("text-anchor", "middle")
             .style("font-size", "0.78rem")
-            .style("fill", "#e9b885")
+            .style("fill", "var(accent-soft)")
             .style("letter-spacing", "0.05em")
             .text("Wave Amplitude 波幅（深谷=恐惧·平缓=心安）");
 
@@ -2371,7 +2375,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr("y", y(v) + 4)
                 .attr("text-anchor", "end")
                 .style("font-size", "0.7rem")
-                .style("fill", "#e9b885")
+                .style("fill", "var(accent-soft)")
                 .style("font-family", "'JetBrains Mono', monospace")
                 .text(v.toFixed(1));
             g.append("line")
@@ -2389,7 +2393,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr("y", deepest._y + 36)
                 .attr("text-anchor", "middle")
                 .style("font-size", "0.7rem")
-                .style("fill", "#c8463a")
+                .style("fill", "var(chart-1)")
                 .style("font-style", "italic")
                 .style("opacity", 0)
                 .text("↓ 最深波谷")

@@ -11,6 +11,17 @@
 ---
 
 
+## W655 W655 B-9② D3 字面色值→CSS 变量（2026-10-04·v2.3.255）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/tokens.css | W655 | 更新·暗块补 chart 系列暗值 4 行（chart-1/2/4/6 对齐 accent 系） |
+| site/data/*.html ×46 | W655 | 更新·赋值语境字面色值→var(--token) 405 处（attr→style 230+style→var 175） |
+| scripts/output/design-tokens.json | W655 | 刷新·97 键（暗块 +4 chart 暗值） |
+| docs/00-导读/design.md | W655 | 刷新·dark 段 +4 行 |
+| scripts/output/_w655_literal_to_var.py | W655 | 新增·转换脚本存档（token 精确匹配+attr→style 形态转换） |
+| scripts/output/_cascade_files_W655.txt | W655 | 新增·级联落盘清单 |
+
 ## W654 W654 PD-1b 图表选型章与降级门禁（2026-10-03·v2.3.254）
 
 | 文件 | W | 说明 |

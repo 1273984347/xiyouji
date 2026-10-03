@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-qutT9C8blJk4L3Owo+uLjk0GT7qFYATI+ha6DVBZSgY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-irIUsVge3BmbYtTUlpcfY/Fz8DMWV7tU7YhHh+pbEko=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经团队心理变化曲线 · 详解西游记</title>
@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -211,6 +211,10 @@ html[data-theme="dark"] {
     --accent-2: #7FA8C9;
     --accent-3: #C9A96B;
     --accent-4: #9DB98A;
+    --chart-1: #E0604F;
+    --chart-2: #7FA8C9;
+    --chart-4: #9DB98A;
+    --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
     --danger: #D96C5C;
@@ -1686,7 +1690,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .attr("dominant-baseline", "middle")
                 .style("font-size", "0.95rem")
                 .style("font-weight", "700")
-                .style("fill", "#C9A063")
+                .style("fill", "var(chart-3)")
                 .text(axis.label);
             // 刻度
             for (let lv = 1; lv <= levels; lv++) {
@@ -1791,22 +1795,22 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         g.append("g")
             .attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(xScale).ticks(20).tickFormat(d => `第${d}回`))
-            .selectAll("text").style("font-size", "0.7rem").style("fill", "#6B6455");
+            .selectAll("text").style("font-size", "0.7rem").style("fill", "var(ink-soft)");
         g.append("g")
             .call(d3.axisLeft(yScale).ticks(5))
-            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(ink-soft)");
 
         // 轴标题
         g.append("text")
             .attr("x", innerW / 2).attr("y", innerH + 44)
             .attr("text-anchor", "middle")
-            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .style("font-size", "0.85rem").style("fill", "var(chart-3)")
             .text("回目（时间轴）");
         g.append("text")
             .attr("x", -innerH / 2).attr("y", -38)
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .style("font-size", "0.85rem").style("fill", "var(chart-3)")
             .text("心理综合分（0-10）");
 
         // 网格
@@ -1822,13 +1826,13 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         g.append("line")
             .attr("x1", xScale(maxChapter)).attr("x2", xScale(maxChapter))
             .attr("y1", 0).attr("y2", innerH)
-            .attr("stroke", "#c8463a").attr("stroke-width", 2)
+            .style("stroke", "var(chart-1)").attr("stroke-width", 2)
             .attr("stroke-dasharray", "5,3").attr("opacity", 0.7);
         g.append("text")
             .attr("x", xScale(maxChapter)).attr("y", -8)
             .attr("text-anchor", "middle")
             .style("font-size", "0.78rem").style("font-weight", "600")
-            .style("fill", "#c8463a")
+            .style("fill", "var(chart-1)")
             .text(`第 ${maxChapter} 回`);
 
         // 转折点背景标注
@@ -1894,7 +1898,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             g.append("line")
                 .attr("x1", xScale(t.chapter)).attr("x2", xScale(t.chapter))
                 .attr("y1", 0).attr("y2", innerH)
-                .attr("stroke", "#C9A063")
+                .style("stroke", "var(chart-3)")
                 .attr("stroke-width", 0.8)
                 .attr("stroke-dasharray", "3,4")
                 .attr("opacity", 0.35);
@@ -1946,11 +1950,11 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         g.append("g")
             .attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(xScale).tickFormat(d => COHESION_CHAPTERS.find(c => c.key === d).label))
-            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(ink-soft)");
         // Y 轴
         g.append("g")
             .call(d3.axisLeft(yScale))
-            .selectAll("text").style("font-size", "0.9rem").style("fill", "#23201A").style("font-weight", "600");
+            .selectAll("text").style("font-size", "0.9rem").style("fill", "var(ink)").style("font-weight", "600");
 
         const tip = d3.select("#coh-tip");
         const wrapEl = wrap.parentElement;
@@ -1968,7 +1972,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                     .style("opacity", 0)
                     .style("cursor", "pointer")
                     .on("mouseover", function(event) {
-                        d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2);
+                        d3.select(this).style("stroke", "var(ink)").attr("stroke-width", 2);
                         tip.style("opacity", 1)
                             .html(`<div class="tip-title">${row.character} · ${col.label}</div>
                                 <div class="tip-row">凝聚力：<strong style="color:#e9b885">${val} / 10</strong></div>
@@ -2031,13 +2035,13 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         g.append("line")
             .attr("x1", 0).attr("x2", innerW)
             .attr("y1", innerH / 2).attr("y2", innerH / 2)
-            .attr("stroke", "#C9A063").attr("stroke-width", 3).attr("stroke-linecap", "round");
+            .style("stroke", "var(chart-3)").attr("stroke-width", 3).attr("stroke-linecap", "round");
 
         // X 轴刻度
         g.append("g")
             .attr("transform", `translate(0,${innerH / 2 + 30})`)
             .call(d3.axisBottom(xScale).ticks(10).tickFormat(d => `第${d}回`))
-            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6B6455");
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "var(ink-soft)");
 
         // 交替放置转折点
         const tip = d3.select("#tl-tip");
@@ -2101,7 +2105,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .style("font-size", "0.72rem")
                 .style("font-weight", "700")
                 .style("font-family", "JetBrains Mono, monospace")
-                .style("fill", "#C9A063")
+                .style("fill", "var(chart-3)")
                 .style("opacity", 0)
                 .text(`第${t.chapter}回`)
                 .transition().duration(DUR).delay(i * 80 + 250).style("opacity", 1);
@@ -2140,21 +2144,21 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         g.append("g")
             .attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(xScale))
-            .selectAll("text").style("font-size", "0.92rem").style("fill", "#23201A").style("font-weight", "600");
+            .selectAll("text").style("font-size", "0.92rem").style("fill", "var(ink)").style("font-weight", "600");
         g.append("g")
             .call(d3.axisLeft(yScale).ticks(5))
-            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(ink-soft)");
 
         g.append("text")
             .attr("x", innerW / 2).attr("y", innerH + 46)
             .attr("text-anchor", "middle")
-            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .style("font-size", "0.85rem").style("fill", "var(chart-3)")
             .text("角色");
         g.append("text")
             .attr("x", -innerH / 2).attr("y", -38)
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .style("font-size", "0.85rem").style("fill", "var(chart-3)")
             .text("心理综合分（0-10）");
 
         const tip = d3.select("#bp-tip");

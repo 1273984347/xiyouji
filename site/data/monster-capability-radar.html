@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-4mwQqqpzVSeYb+8GJoAb7v7x94iYIEXqD2jT2RIC4BQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-dEKXU//LMBmkltUkSNrkeNxSzkF4P5jfgvrHID8O5YQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪能力雷达图 · 详解西游记</title>
@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -211,6 +211,10 @@ html[data-theme="dark"] {
     --accent-2: #7FA8C9;
     --accent-3: #C9A96B;
     --accent-4: #9DB98A;
+    --chart-1: #E0604F;
+    --chart-2: #7FA8C9;
+    --chart-4: #9DB98A;
+    --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
     --danger: #D96C5C;
@@ -1602,7 +1606,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             svg.append("polygon")
                 .attr("points", pts.map(p => p.join(",")).join(" "))
                 .attr("fill", "none")
-                .attr("stroke", "#e9b885")
+                .style("stroke", "var(accent-soft)")
                 .attr("stroke-width", 0.6)
                 .attr("stroke-dasharray", i === levels ? "none" : "2,3")
                 .attr("opacity", 0.5);
@@ -1634,7 +1638,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         // 中心点
         svg.append("circle")
             .attr("cx", cx).attr("cy", cy).attr("r", 2)
-            .attr("fill", "#C9A063");
+            .style("fill", "var(chart-3)");
 
         // 15 妖怪多边形叠加
         const tip = d3.select("#radar-tip");
@@ -1746,14 +1750,14 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         // 轴
         g.append("g").attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(x0))
-            .selectAll("text").style("font-size", "0.88rem").style("fill", "#23201A").style("font-weight", "600");
+            .selectAll("text").style("font-size", "0.88rem").style("fill", "var(ink)").style("font-weight", "600");
         g.append("g").call(d3.axisLeft(y).ticks(10))
-            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(ink-soft)");
 
         g.append("text")
             .attr("x", innerW / 2).attr("y", innerH + 50)
             .attr("text-anchor", "middle")
-            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .style("font-size", "0.85rem").style("fill", "var(chart-3)")
             .text("能力维度");
 
         // 柱
@@ -1773,7 +1777,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                     .attr("stroke", "#fff")
                     .attr("stroke-width", 1)
                     .on("mouseover", function(event) {
-                        d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 1.5);
+                        d3.select(this).style("stroke", "var(ink)").attr("stroke-width", 1.5);
                         tip.style("opacity", 1)
                             .html(`<div class="tip-title">${d.dimension} · ${k === "max" ? "最高分" : "平均分"}</div>
                                 <div class="tip-row">数值：<strong style="color:#e9b885">${val}/10</strong></div>
@@ -1800,7 +1804,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .attr("x", x0(d.dimension) + x1("max") + x1.bandwidth() / 2)
                 .attr("y", y(d.max) - 6)
                 .attr("text-anchor", "middle")
-                .style("font-size", "0.78rem").style("font-weight", "700").style("fill", "#c8463a")
+                .style("font-size", "0.78rem").style("font-weight", "700").style("fill", "var(chart-1)")
                 .style("opacity", 0)
                 .text(d.max)
                 .transition().duration(DUR).delay(data.indexOf(d) * 80 + 300).style("opacity", 1);
@@ -1808,17 +1812,17 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .attr("x", x0(d.dimension) + x1("avg") + x1.bandwidth() / 2)
                 .attr("y", y(d.avg) - 6)
                 .attr("text-anchor", "middle")
-                .style("font-size", "0.78rem").style("font-weight", "700").style("fill", "#3a6b8c")
+                .style("font-size", "0.78rem").style("font-weight", "700").style("fill", "var(chart-2)")
                 .style("opacity", 0)
                 .text(d.avg)
                 .transition().duration(DUR).delay(data.indexOf(d) * 80 + 360).style("opacity", 1);
         });
 
         // 图例
-        g.append("rect").attr("x", innerW - 140).attr("y", 0).attr("width", 14).attr("height", 14).attr("fill", "#c8463a");
-        g.append("text").attr("x", innerW - 120).attr("y", 11).style("font-size", "0.82rem").style("fill", "#23201A").text("最高分");
-        g.append("rect").attr("x", innerW - 70).attr("y", 0).attr("width", 14).attr("height", 14).attr("fill", "#3a6b8c");
-        g.append("text").attr("x", innerW - 50).attr("y", 11).style("font-size", "0.82rem").style("fill", "#23201A").text("平均分");
+        g.append("rect").attr("x", innerW - 140).attr("y", 0).attr("width", 14).attr("height", 14).style("fill", "var(chart-1)");
+        g.append("text").attr("x", innerW - 120).attr("y", 11).style("font-size", "0.82rem").style("fill", "var(ink)").text("最高分");
+        g.append("rect").attr("x", innerW - 70).attr("y", 0).attr("width", 14).attr("height", 14).style("fill", "var(chart-2)");
+        g.append("text").attr("x", innerW - 50).attr("y", 11).style("font-size", "0.82rem").style("fill", "var(ink)").text("平均分");
     }
 
     // ============= Section 3：散点图 =============
@@ -1842,20 +1846,20 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         // 轴
         g.append("g").attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(x).ticks(8).tickFormat(d => d))
-            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(ink-soft)");
         g.append("g").call(d3.axisLeft(y).ticks(7))
-            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(ink-soft)");
 
         g.append("text")
             .attr("x", innerW / 2).attr("y", innerH + 44)
             .attr("text-anchor", "middle")
-            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .style("font-size", "0.85rem").style("fill", "var(chart-3)")
             .text("法力（1-10）");
         g.append("text")
             .attr("x", -innerH / 2).attr("y", -42)
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .style("font-size", "0.85rem").style("fill", "var(chart-3)")
             .text("结局（1-10）");
 
         // 结局均值参考线
@@ -1863,14 +1867,14 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         g.append("line")
             .attr("x1", 0).attr("x2", innerW)
             .attr("y1", y(avgEnding)).attr("y2", y(avgEnding))
-            .attr("stroke", "#c8463a")
+            .style("stroke", "var(chart-1)")
             .attr("stroke-dasharray", "5,4")
             .attr("stroke-width", 1.5)
             .attr("opacity", 0.6);
         g.append("text")
             .attr("x", innerW - 4).attr("y", y(avgEnding) - 6)
             .attr("text-anchor", "end")
-            .style("font-size", "0.74rem").style("fill", "#c8463a").style("font-weight", "600")
+            .style("font-size", "0.74rem").style("fill", "var(chart-1)").style("font-weight", "600")
             .text(`结局均值 ${avgEnding}`);
 
         // 散点
@@ -1890,7 +1894,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             .attr("stroke-width", 1.5)
             .style("cursor", "pointer")
             .on("mouseover", function(event, d) {
-                d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2.5).attr("r", 9);
+                d3.select(this).style("stroke", "var(ink)").attr("stroke-width", 2.5).attr("r", 9);
                 tip.style("opacity", 1)
                     .html(`<div class="tip-title">${d.monster}</div>
                         <div class="tip-row">法力：<strong style="color:#e9b885">${d.magic}/10</strong></div>
@@ -1922,7 +1926,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             .attr("y", d => y(d.ending) - 12)
             .attr("text-anchor", "middle")
             .style("font-size", "0.72rem")
-            .style("fill", "#23201A")
+            .style("fill", "var(ink)")
             .style("font-weight", "600")
             .style("opacity", 0)
             .text(d => d.monster)
@@ -2043,7 +2047,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .attr("x", n.x - 8).attr("y", n.y + n.h / 2 + 16)
                 .attr("text-anchor", "end")
                 .style("font-size", "0.74rem")
-                .style("fill", "#6B6455")
+                .style("fill", "var(ink-soft)")
                 .style("font-family", "JetBrains Mono, monospace")
                 .text(`(${nodeFlow[n.name]})`);
         });
@@ -2067,7 +2071,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .attr("x", n.x + n.w + 8).attr("y", n.y + n.h / 2 + 16)
                 .attr("text-anchor", "start")
                 .style("font-size", "0.74rem")
-                .style("fill", "#6B6455")
+                .style("fill", "var(ink-soft)")
                 .style("font-family", "JetBrains Mono, monospace")
                 .text(`(${nodeFlow[n.name]})`);
         });
@@ -2076,7 +2080,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         g.append("text")
             .attr("x", 0).attr("y", -6)
             .style("font-size", "0.85rem")
-            .style("fill", "#C9A063")
+            .style("fill", "var(chart-3)")
             .style("font-weight", "700")
             .text("来历（左）→ 结局（右）");
     }

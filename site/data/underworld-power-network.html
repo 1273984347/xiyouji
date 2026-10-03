@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-1Vwwhrk6heytUdU9YoMVUw7deqLnAxq5Gy1rcfdAfZw=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-s8Hg+7AYfId8/H2gP1SpjT6SGhgIYK9mMQ/zehFp864=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>地府权力关系图 - 西游数据可视化 · 详解西游记</title>
@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -211,6 +211,10 @@ html[data-theme="dark"] {
     --accent-2: #7FA8C9;
     --accent-3: #C9A96B;
     --accent-4: #9DB98A;
+    --chart-1: #E0604F;
+    --chart-2: #7FA8C9;
+    --chart-4: #9DB98A;
+    --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
     --danger: #D96C5C;
@@ -2018,7 +2022,7 @@ const link = svg.append('g').selectAll('line')
     .attr('stroke-width', 2)
     .attr('tabindex', 0)
     .on('mouseover', function(e, d) {
-      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 3);
+      d3.select(this).style('stroke', 'var(chart-1)').attr('stroke-width', 3);
       tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.id + '</strong>');
@@ -2109,7 +2113,7 @@ function renderSankey(sankeyData) {
     return;
   }
   if (typeof d3.sankey === 'undefined') {
-    svg.append('text').attr('x', 200).attr('y', 260).attr('fill', '#c8463a')
+    svg.append('text').attr('x', 200).attr('y', 260).style('fill', 'var(chart-1)')
       .text('d3-sankey 未加载，请检查网络');
     return;
   }
@@ -2182,7 +2186,7 @@ function renderSankey(sankeyData) {
     .attr('stroke', '#fff')
     .attr('stroke-width', 1)
     .on('mouseover', function(e, d) {
-      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 2);
+      d3.select(this).style('stroke', 'var(chart-1)').attr('stroke-width', 2);
       tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.name + '</strong>');
@@ -2212,12 +2216,12 @@ function renderSankey(sankeyData) {
   svg.append('text')
     .attr('x', margin.left + 4).attr('y', 18)
     .attr('font-size', '13px').attr('font-weight', '700')
-    .attr('fill', '#c8463a').text('地府体系角色');
+    .style('fill', 'var(chart-1)').text('地府体系角色');
   svg.append('text')
     .attr('x', width - margin.right - 4).attr('y', 18)
     .attr('text-anchor', 'end')
     .attr('font-size', '13px').attr('font-weight', '700')
-    .attr('fill', '#3a6b8c').text('对接三界体系');
+    .style('fill', 'var(chart-2)').text('对接三界体系');
 
   // 图例
   const legend = d3.select('#sankey-legend');

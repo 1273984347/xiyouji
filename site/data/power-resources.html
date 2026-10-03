@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-LjaUK3xKfb1PjCJOic2etNofwb9YE5TWehCGo70uaMg=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-Gn396/2Yf/7isqQ2HFIkPzR/3HfK7q8PSnotsICeAjg=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>权力与资源 · 详解西游记</title>
@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -211,6 +211,10 @@ html[data-theme="dark"] {
     --accent-2: #7FA8C9;
     --accent-3: #C9A96B;
     --accent-4: #9DB98A;
+    --chart-1: #E0604F;
+    --chart-2: #7FA8C9;
+    --chart-4: #9DB98A;
+    --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
     --danger: #D96C5C;
@@ -2477,7 +2481,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('x', d => x(Math.max(d.actual_power, d.nominal_power)) + 32)
             .attr('y', d => y0.bandwidth() / 2 + 3)
             .style('font-size', '10px')
-            .attr('fill', '#C9A063')
+            .style('fill', 'var(chart-3)')
             .style('font-style', 'italic')
             .text(d => '差 ' + Math.abs(d.actual_power - d.nominal_power));
     }
@@ -2558,7 +2562,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('transform', 'rotate(-90)')
             .attr('x', -h/2).attr('y', -44)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#3a6b8c')
+            .style('fill', 'var(chart-2)')
             .text('success_rate 成功率 (0-100%)');
 
         // 颜色：按成功率渐变（高=accent-2·低=accent-3）
@@ -2597,7 +2601,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('text-anchor', 'middle')
             .style('font-size', '11px')
             .style('font-weight', '600')
-            .attr('fill', '#3a6b8c')
+            .style('fill', 'var(chart-2)')
             .text(d => (d.success_rate * 100).toFixed(0) + '%');
 
         // duration 标注（柱底下方）
@@ -2608,7 +2612,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('y', d => y(d.success_rate) - 22)
             .attr('text-anchor', 'middle')
             .style('font-size', '9px')
-            .style('fill', '#C9A063')
+            .style('fill', 'var(chart-3)')
             .style('font-style', 'italic')
             .text(d => d.duration);
     }
@@ -2693,13 +2697,13 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         g.append('text').attr('class', 'axis-label')
             .attr('x', w / 2).attr('y', h + 42)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#c8463a')
+            .style('fill', 'var(chart-1)')
             .text('scarcity 稀缺度 (0-10)');
         g.append('text').attr('class', 'axis-label')
             .attr('transform', 'rotate(-90)')
             .attr('x', -h/2).attr('y', -42)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#3a6b8c')
+            .style('fill', 'var(chart-2)')
             .text('efficacy 效力 (0-10)');
 
         // 点
@@ -2736,7 +2740,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('text-anchor', 'middle')
             .style('font-size', '10px')
             .style('font-weight', '600')
-            .attr('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text(d => d.name.length > 8 ? d.name.slice(0, 7) + '…' : d.name);
 
         // access_level 图例（右下角小注）
@@ -2745,7 +2749,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('text-anchor', 'end')
             .style('font-size', '10px')
             .style('font-style', 'italic')
-            .attr('fill', '#6B6455')
+            .style('fill', 'var(ink-soft)')
             .text('圆点半径 ∝ access_level 获取难度');
     }
 
@@ -2835,14 +2839,14 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('text-anchor', 'middle')
             .attr('dy', -34)
             .style('font-size', '14px')
-            .attr('fill', '#6B6455')
+            .style('fill', 'var(ink-soft)')
             .text('总资源');
         g.append('text')
             .attr('text-anchor', 'middle')
             .attr('dy', 22)
             .style('font-size', '32px')
             .style('font-weight', '700')
-            .attr('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text(total);
     }
 

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-gpPO4+L8XsTj2hkUoNJMrDhXiQs/d3ja3p2l39Mih74=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-C2Y5mJ+kDTU25LZevYjXCUHt4BeNwGPJ1bC5Spx6ado=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>语言学 · 详解西游记</title>
@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -211,6 +211,10 @@ html[data-theme="dark"] {
     --accent-2: #7FA8C9;
     --accent-3: #C9A96B;
     --accent-4: #9DB98A;
+    --chart-1: #E0604F;
+    --chart-2: #7FA8C9;
+    --chart-4: #9DB98A;
+    --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
     --danger: #D96C5C;
@@ -2242,12 +2246,12 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('transform', 'rotate(-90)')
             .attr('x', -h/2).attr('y', -42)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text('语言来源占比');
         g.append('text').attr('class', 'axis-label')
             .attr('x', w/2).attr('y', h + 60)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text('咒语名称');
 
         // stacked bars
@@ -2334,13 +2338,13 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('y', -8)
             .style('font-size', '14px')
             .style('font-weight', '600')
-            .style('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text('8 咒语');
         g.append('text')
             .attr('text-anchor', 'middle')
             .attr('y', 12)
             .style('font-size', '11px')
-            .style('fill', '#6B6455')
+            .style('fill', 'var(ink-soft)')
             .text('4 类来源均势');
 
         // 标注
@@ -2475,12 +2479,12 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('transform', 'rotate(-90)')
             .attr('x', -h/2).attr('y', -42)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text('power_distance 权力距离 (0-10)');
         g.append('text').attr('class', 'axis-label')
             .attr('x', w/2).attr('y', h + 50)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text('对话对（speaker → listener）');
 
         // bars
@@ -2515,7 +2519,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('text-anchor', 'middle')
             .style('font-size', '12px')
             .style('font-weight', '600')
-            .attr('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text(d => d.power_distance);
     }
 
@@ -2563,12 +2567,12 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('transform', 'rotate(-90)')
             .attr('x', -h/2).attr('y', -42)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text('power_distance_reflected 权力距离反映 (0-10)');
         g.append('text').attr('class', 'axis-label')
             .attr('x', w/2).attr('y', h + 50)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text('演变阶段（代表性对话按章节顺序）');
 
         // lines
@@ -2693,7 +2697,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr('y', -r)
                 .attr('text-anchor', 'end')
                 .style('font-size', '9px')
-                .style('fill', '#6B6455')
+                .style('fill', 'var(ink-soft)')
                 .text((lv * 2).toString());
         }
         // 轴线
@@ -2713,7 +2717,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr('dy', '0.35em')
                 .style('font-size', '13px')
                 .style('font-weight', '600')
-                .style('fill', '#23201A')
+                .style('fill', 'var(ink)')
                 .text(dimLabels[i]);
         });
 
@@ -2804,12 +2808,12 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('transform', 'rotate(-90)')
             .attr('x', -h/2).attr('y', -42)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text('语言来源占比');
         g.append('text').attr('class', 'axis-label')
             .attr('x', w/2).attr('y', h + 60)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text('角色');
 
         g.append('g').selectAll('g')

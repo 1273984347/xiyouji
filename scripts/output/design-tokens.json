@@ -1,18 +1,18 @@
 {
  "meta": {
   "generator": "scripts/export_design_tokens.py",
-  "generated": "2026-10-03",
+  "generated": "2026-10-04",
   "source": [
    "site/tokens.css",
    "site/system.css"
   ],
   "spec": "W3C Design Tokens 风格（DTCG 简化：$value/$type/$description + group/line 元数据）",
   "counts": {
-   "declarations": 93,
-   "tokens": 93,
+   "declarations": 97,
+   "tokens": 97,
    "themes": {
     "light": 69,
-    "dark": 24
+    "dark": 28
    },
    "sections": 4
   },
@@ -659,13 +659,45 @@
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
    "line": 186
   },
+  "dark/chart-1": {
+   "$value": "#E0604F",
+   "$type": "color",
+   "$description": "",
+   "name": "--chart-1",
+   "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
+   "line": 187
+  },
+  "dark/chart-2": {
+   "$value": "#7FA8C9",
+   "$type": "color",
+   "$description": "",
+   "name": "--chart-2",
+   "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
+   "line": 188
+  },
+  "dark/chart-4": {
+   "$value": "#9DB98A",
+   "$type": "color",
+   "$description": "",
+   "name": "--chart-4",
+   "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
+   "line": 189
+  },
+  "dark/chart-6": {
+   "$value": "#C9A96B",
+   "$type": "color",
+   "$description": "",
+   "name": "--chart-6",
+   "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
+   "line": 190
+  },
   "dark/ok": {
    "$value": "#8FBF7F",
    "$type": "color",
    "$description": "",
    "name": "--ok",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 187
+   "line": 191
   },
   "dark/warn": {
    "$value": "#D0A35C",
@@ -673,7 +705,7 @@
    "$description": "",
    "name": "--warn",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 188
+   "line": 192
   },
   "dark/danger": {
    "$value": "#D96C5C",
@@ -681,7 +713,7 @@
    "$description": "",
    "name": "--danger",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 189
+   "line": 193
   },
   "dark/info": {
    "$value": "#7FA8C9",
@@ -689,7 +721,7 @@
    "$description": "",
    "name": "--info",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 190
+   "line": 194
   },
   "dark/elev-0": {
    "$value": "none",
@@ -697,7 +729,7 @@
    "$description": "",
    "name": "--elev-0",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 191
+   "line": 195
   },
   "dark/elev-1": {
    "$value": "0 1px 3px rgba(0, 0, 0, 0.40), 0 4px 12px rgba(0, 0, 0, 0.30)",
@@ -705,7 +737,7 @@
    "$description": "",
    "name": "--elev-1",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 192
+   "line": 196
   },
   "dark/elev-2": {
    "$value": "0 2px 6px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35)",
@@ -713,7 +745,7 @@
    "$description": "",
    "name": "--elev-2",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 193
+   "line": 197
   },
   "dark/elev-3": {
    "$value": "0 4px 10px rgba(0, 0, 0, 0.50), 0 12px 32px rgba(0, 0, 0, 0.45)",
@@ -721,7 +753,7 @@
    "$description": "",
    "name": "--elev-3",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 194
+   "line": 198
   },
   "dark/elev-4": {
    "$value": "0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50)",
@@ -729,7 +761,7 @@
    "$description": "",
    "name": "--elev-4",
    "group": "夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载",
-   "line": 195
+   "line": 199
   },
   "light/z-nav": {
    "$value": "50",
@@ -737,7 +769,7 @@
    "$description": "",
    "name": "--z-nav",
    "group": "z-index 层级令牌：topnav/遮罩/抽屉/tooltip 统一层级（tooltip 高于 topnav 防遮挡）",
-   "line": 327
+   "line": 331
   },
   "light/z-mask": {
    "$value": "55",
@@ -745,7 +777,7 @@
    "$description": "",
    "name": "--z-mask",
    "group": "z-index 层级令牌：topnav/遮罩/抽屉/tooltip 统一层级（tooltip 高于 topnav 防遮挡）",
-   "line": 328
+   "line": 332
   },
   "light/z-drawer": {
    "$value": "60",
@@ -753,7 +785,7 @@
    "$description": "",
    "name": "--z-drawer",
    "group": "z-index 层级令牌：topnav/遮罩/抽屉/tooltip 统一层级（tooltip 高于 topnav 防遮挡）",
-   "line": 329
+   "line": 333
   },
   "light/z-tooltip": {
    "$value": "70",
@@ -761,7 +793,7 @@
    "$description": "",
    "name": "--z-tooltip",
    "group": "z-index 层级令牌：topnav/遮罩/抽屉/tooltip 统一层级（tooltip 高于 topnav 防遮挡）",
-   "line": 330
+   "line": 334
   }
  }
 }

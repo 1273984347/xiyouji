@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-uIkBbXcacobKmzGbIWdX3G0OJJf8E5IDSFZQwIKSvHo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-5+aw1TVtNEaskFHg39n7CM3Y9kbtz7Y4wZF1RAafGTA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>详解西游记 · 人物出场频次与戏份分析 · 详解西游记</title>
@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -211,6 +211,10 @@ html[data-theme="dark"] {
     --accent-2: #7FA8C9;
     --accent-3: #C9A96B;
     --accent-4: #9DB98A;
+    --chart-1: #E0604F;
+    --chart-2: #7FA8C9;
+    --chart-4: #9DB98A;
+    --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
     --danger: #D96C5C;
@@ -1839,18 +1843,18 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         lg.append("text")
             .attr("x", 0).attr("y", legendH + 14)
             .style("font-size", "10px")
-            .style("fill", "#6B6455")
+            .style("fill", "var(ink-soft)")
             .text("0");
         lg.append("text")
             .attr("x", legendW).attr("y", legendH + 14)
             .attr("text-anchor", "end")
             .style("font-size", "10px")
-            .style("fill", "#6B6455")
+            .style("fill", "var(ink-soft)")
             .text(`${maxVal} 次`);
         lg.append("text")
             .attr("x", legendW + 8).attr("y", legendH + 2)
             .style("font-size", "11px")
-            .style("fill", "#C9A063")
+            .style("fill", "var(chart-3)")
             .text("提及次数");
     }
 
@@ -1995,12 +1999,12 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr("cx", r(d.value) + 2)
                 .attr("cy", r(d.value) + 2)
                 .attr("r", r(d.value))
-                .attr("fill", "#c8463a")
+                .style("fill", "var(chart-1)")
                 .attr("opacity", 0.75);
             item.append("span").text(`${d.label}（${d.value} 次）`);
         });
         // 附加人物色图例
-        legend.append("span").style("margin-left", "12px").style("color", "#6B6455").text("｜ 人物色：");
+        legend.append("span").style("margin-left", "12px").style("color", "var(ink-soft)").text("｜ 人物色：");
         main.forEach(c => {
             const item = legend.append("div").attr("class", "legend-item");
             item.append("span").attr("class", "legend-swatch").style("background", c.color);

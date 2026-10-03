@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-ESnsudwvdcuJ5swFSFP+bt0AIzhdojwupI6jI1QfpC0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-fG44luA9AMECbW+baicVo3931lvpgdMDkSFXsOZjHDQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经路线交互式地图 · 详解西游记</title>
@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -211,6 +211,10 @@ html[data-theme="dark"] {
     --accent-2: #7FA8C9;
     --accent-3: #C9A96B;
     --accent-4: #9DB98A;
+    --chart-1: #E0604F;
+    --chart-2: #7FA8C9;
+    --chart-4: #9DB98A;
+    --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
     --danger: #D96C5C;
@@ -1455,7 +1459,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr("x", m.cx).attr("y", m.cy + m.r + 14)
                 .attr("text-anchor", "middle")
                 .style("font-size", "10px")
-                .style("fill", "#6B6455")
+                .style("fill", "var(ink-soft)")
                 .style("font-style", "italic")
                 .text(m.name);
         });
@@ -1487,7 +1491,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const pathG = g.append("path")
             .attr("d", lineGen(projected))
             .attr("fill", "none")
-            .attr("stroke", "#3a6b8c")
+            .style("stroke", "var(chart-2)")
             .attr("stroke-width", 2.5)
             .attr("stroke-dasharray", "6,4")
             .attr("opacity", 0.7);
@@ -1556,7 +1560,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("id", "current-marker")
             .attr("r", 14)
             .attr("fill", "none")
-            .attr("stroke", "#C9A063")
+            .style("stroke", "var(chart-3)")
             .attr("stroke-width", 3)
             .attr("opacity", 0)
             .attr("transform", `translate(${projected[0].px},${projected[0].py})`);
@@ -1566,14 +1570,14 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("x", projected[0].px).attr("y", projected[0].py + 30)
             .attr("text-anchor", "middle")
             .style("font-size", "11px")
-            .style("fill", "#6B8E5A")
+            .style("fill", "var(chart-4)")
             .style("font-weight", "600")
             .text("【起点】");
         g.append("text")
             .attr("x", projected[16].px).attr("y", projected[16].py + 30)
             .attr("text-anchor", "middle")
             .style("font-size", "11px")
-            .style("fill", "#6B8E5A")
+            .style("fill", "var(chart-4)")
             .style("font-weight", "600")
             .text("【终点】");
 

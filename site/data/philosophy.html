@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-IX6Hpec2t14f0kVPIV1z0VMEHCobrPuOKYvOR8oQgLw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-P69++SWJJnYBbRV9EXdmuRhGM2tS3rq4nRKlAP9YJJU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>哲学与心性 · 详解西游记</title>
@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -211,6 +211,10 @@ html[data-theme="dark"] {
     --accent-2: #7FA8C9;
     --accent-3: #C9A96B;
     --accent-4: #9DB98A;
+    --chart-1: #E0604F;
+    --chart-2: #7FA8C9;
+    --chart-4: #9DB98A;
+    --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
     --danger: #D96C5C;
@@ -2305,11 +2309,11 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             g.append('rect')
                 .attr('x', tx - 30).attr('y', -8)
                 .attr('width', 60).attr('height', h + 16)
-                .attr('fill', '#e9b885').attr('opacity', 0.2);
+                .style('fill', 'var(accent-soft)').attr('opacity', 0.2);
             g.append('text')
                 .attr('x', tx).attr('y', -14)
                 .attr('text-anchor', 'middle')
-                .attr('fill', '#C9A063')
+                .style('fill', 'var(chart-3)')
                 .style('font-size', '10px').style('font-weight', '600')
                 .text('▼ 六耳猕猴转折');
         }
@@ -2534,7 +2538,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('dominant-baseline', 'middle')
             .style('font-size', '11px')
             .style('font-weight', '600')
-            .attr('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text(d => d.count + ' · ' + d.mind_obstacle);
     }
 
@@ -2601,14 +2605,14 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('text-anchor', 'middle')
             .attr('y', -14)
             .style('font-size', '14px')
-            .style('fill', '#6B6455')
+            .style('fill', 'var(ink-soft)')
             .text('八十一难');
         g.append('text')
             .attr('text-anchor', 'middle')
             .attr('y', 22)
             .style('font-size', '24px')
             .style('font-weight', '700')
-            .style('fill', '#c8463a')
+            .style('fill', 'var(chart-1)')
             .text('81');
 
         // slice 标签
@@ -2625,7 +2629,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 return mid < Math.PI ? 'start' : 'end';
             })
             .style('font-size', '11px')
-            .style('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text(d => d.data.count);
 
         // 自定义 legend（右侧）
@@ -2648,7 +2652,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         legendG.selectAll('.leg-item').append('text')
             .attr('x', 20).attr('y', 11)
             .style('font-size', '11px')
-            .style('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text(d => d.label);
     }
 
