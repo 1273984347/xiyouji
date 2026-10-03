@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W650），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W651），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.251（2026-10-03）：W651 全量启动裁决入档 — B-5/B-6 第二步/B-7/B-9①②/WP-D2/WP-E 六项启动（用户「全部启动」·排除 Docker 验证与 B 轨《装饰》投稿）+ PD 档 D-1…D-7 批复 + Traffic API 快照机制首采 + master plan/交接陈旧状态修正
+> **来源**：用户盘点「记录了但没做」全清单后裁决「全部启动·不做 Docker 和 B 轨《装饰》投稿」——本批为启动裁决入档+快速项落地，工程批次按依赖序随后展开（PD-5→PD-1→B-9②→B-9①→B-6 第二步→B-5→B-7→WP-D2→WP-E）。
+> - **六项启动**：B-5（聚合器先行·扩字段与学术梯队随批）、B-6 第二步（86 页引用组件+PNG/SVG 导出·免另立 PRD）、B-7（脚本解耦+pip 打包）、B-9①（audit-* 六族补丁合并）、B-9②（D3 色值→CSS 变量·先决核查 --ink-faint 扫描口径）、WP-D2/WP-E（reader 扩量 515 篇+发现架构——工程呈现层非内容生产·用户点名解除 W626 冻结）。registry 四行+master plan §8.3 两行启动注记。
+> - **明确排除**：Docker 镜像验证、B 轨《装饰》投稿（用户点名不做）；WP-B-ALT 维持冻结（触发条件未满足·部署需用户平台与密钥决策）；B-8 hardships 重分类维持待作者学术裁决。
+> - **PD 档 D-1…D-7 批复**（用户「全部启动」总批复·落档内默认项）：D-1 (b) 口径行维持+差额查因并入 PD-1a；D-2 (a) §4B 插章；D-3 (a) 2 页；D-4 (a) docs/00-导读；D-5 (a) 只 site/data；D-6 (a) WARN+基线；D-7 (a) PD-1…PD-5 按 §7 队列开工。已记入 PD 档 §10.1。
+> - **Traffic API 快照机制首采**：scripts/_traffic_snapshot.py 新增（gh api 四端点·14 日窗防过期不可回溯）+ 首采 scripts/output/traffic-snapshots/traffic-snapshot-2026-10-03.json（views 5/4·clones 2623/231·referrers Nothing to display 与后台一致）。
+> - **master plan/交接陈旧修正**：§8.3 WP-A 行 🔄→✅（W626 终态回写·原系回写滞后）；交接文档两笔陈旧勾选补 [x]（agent-web 迁移 W543-W548 已完成+走查关闭；真实读者量验证 W425/W426+W626 已完成）。
+> - **验证**：快照脚本实跑出盘；verify_delivery 核心全绿；级联 dry-run→apply 10 面断言过。
+> - **文件**：scripts/_traffic_snapshot.py（新增）、scripts/output/traffic-snapshots/traffic-snapshot-2026-10-03.json（新增）、PD 档（§10.1）、registry（四行）、master plan（三行）、交接文档（两笔）、六文档、四页脚、CITATION、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 
 ### v2.3.250（2026-10-02）：W650 第 28 门禁三项加固（C2 判据收紧+基线刷新·wrapper 防静默跳过·docstring 校正）+ PRD 移出公开仓库（真名防泄漏·用户裁决）+ workflows README 累积链瘦身
 > **来源**：W649 落地后全量审查（用户发起）发现一项 P1 与四项小项，用户裁决处置——PRD 整份移出公开仓库 + 四项全修。

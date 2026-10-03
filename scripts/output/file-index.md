@@ -11,6 +11,17 @@
 ---
 
 
+## W651 W651 全量启动裁决入档（2026-10-03·v2.3.251）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_traffic_snapshot.py | W651 | 新增·GitHub Traffic API 快照工具（14 日窗四端点·周期落盘） |
+| scripts/output/traffic-snapshots/traffic-snapshot-2026-10-03.json | W651 | 新增·首采（views 5/4·clones 2623/231·referrers 空） |
+| docs/superpowers/plans/2026-10-02-product-design-suite-applicability-plan.md | W651 | 更新·§10.1 批复记录（D-1…D-7 落默认项） |
+| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W651 | 更新·B-5/B-6 第二步/B-7/B-9①② 启动注记 |
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W651 | 更新·§8.3 WP-A 终态回写+WP-D2/E 解冻启动 |
+| 交接文档.md | W651 | 更新·两笔陈旧勾选修正（迁移/读者量验证实际已完成） |
+
 ## W650 W650 第门禁三项加固（2026-10-02·v2.3.250）
 
 | 文件 | W | 说明 |
