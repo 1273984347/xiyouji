@@ -678,6 +678,23 @@ def main():
             ok("色盲安全门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
 
 
+    # ---- 窄屏降级声明门禁（第 30 槽·PD-1b·W654：§4B 选型章配套——site/data 每页须声明
+    # chart-degrade: stacked|scroll-x|simplified|n/a（静态解析不启浏览器）·wrapper 防静默跳过同前）----
+    dg_py = os.path.join(_HERE, "check_chart_degrade.py")
+    try:
+        r = subprocess.run([sys.executable, dg_py], capture_output=True, text=True, timeout=120)
+    except Exception as e:
+        fail("降级声明门禁执行异常（第 30 槽·crash 即拦）: %s" % e)
+    else:
+        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
+        if r.returncode != 0:
+            fail("降级声明缺失/非法（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+        elif "---- 第 30 门禁 降级声明：" not in r.stdout:
+            fail("降级声明门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
+        else:
+            ok("降级声明门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
+
+
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:
         try:

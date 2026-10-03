@@ -428,6 +428,23 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 
 ---
 
+## 4B. 图表选型与数据契约（PD-1b · W654 入档）
+
+> 本章为 §6 响应式的图表侧配套：每族一行五字段（数据形态约束 → 该图型 → 禁用条件 → 站内代表页 → 窄屏降级方案），共 9 族 45 格。
+> 机判三件套：`python scripts/check_chart_data.py --spec-check DESIGN.md`（表体行 9·空单元格 0）；措辞↔实现错配由第 24 门禁 R3 拦截；窄屏形态声明由第 30 门禁 check_chart_degrade 校验（页面注释 `chart-degrade: 四值枚举`）。
+
+| 数据形态约束 | 该图型 | 禁用条件 | 站内代表页 | 窄屏降级方案 |
+|---|---|---|---|---|
+| 分类型频次/计数对比（类别 ≤20·单值） | 柱/条形图（d3 rect+scaleBand） | 类别为连续数值区间时禁用（改面积/折线）；标签超 8 字横排禁用 | site/data/character-presence-timeline.html | degrade: stacked |
+| 连续时序/有序维度趋势（≥2 序列） | 折线图（d3.line） | 无序类别维度禁用；单点数据禁用 | site/data/aesthetics.html | degrade: simplified |
+| 占比构成（部分与整体·类别 ≤8） | 弧形图（d3.pie+d3.arc·含环形） | 类别 >8 禁用（改条形）；负值/零值占比禁用；多环嵌套禁用 | site/data/character-semantic-network.html | degrade: stacked |
+| 多分类网络关系（节点 20-200·边有语义） | 力导向图（d3.forceSimulation） | 节点 >200 禁用（改分层分页）；纯层级数据禁用（改树图） | site/data/character-dynamic-network.html | degrade: simplified |
+| 多源汇聚-分发流量（左中右分层·无环路） | 桑基图（d3.sankey+插件脚本） | 环路数据禁用；节点 >60 禁用（窄屏不可读） | site/data/guanyin-six-roles-network.html | degrade: scroll-x |
+| 时序强度叠加（连续量·需趋势强调） | 面积图（d3.area） | 多序列重叠 >3 层禁用（透明度不可辨） | site/data/cognitive-psychology.html | degrade: simplified |
+| 层级包含关系 + 数值面积编码 | 矩形树图（d3.treemap） | 层级 >3 层禁用（标签放不下）；要求精确数值对比禁用 | site/data/aesthetics.html | degrade: scroll-x |
+| 双向成对关系矩阵（实体 × 实体对称流量） | 和弦图（d3.chord） | 实体 >30 禁用（弧重叠）；非对称关系禁用 | site/data/four-heavenly-kings-artifacts.html | degrade: scroll-x |
+| 三维场景 / 高密度边渲染（性能兜底） | 画布 / 3D（canvas 2D + THREE.WebGL） | WebGL 不可用必须回退（三页先例）；无交互需求禁用（改 SVG） | site/data/character-relationship-3d.html | degrade: simplified |
+
 ## 4A. 纸感轻立体体系（Phase E · W476 宪改）
 
 > 本章为 Phase E 视觉高级感升级（W476–W483）的**宪法层**，2026-08-18 经用户确认三项前提：① 采纳「纸感轻立体」方向 ② 暗色模式纳入 E7 ③ 归档闸门冻结边界 E1。
