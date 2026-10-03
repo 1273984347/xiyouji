@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-F5QImJRu24J7M5C6OLw1XVIoXZHRi9KJ12n8fYwcJI8=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-pHf49ttfGNfE3K9BinRvELHlaLsB/s/xaUuzqeP3rZM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>法理经济 · 详解西游记</title>
@@ -2229,12 +2229,12 @@ function renderTreemap(opts){
         g.append('line')
             .attr('x1', x(0)).attr('y1', y(0))
             .attr('x2', x(11)).attr('y2', y(11))
-            .style('stroke', 'var(chart-3)')
+            .style('stroke', 'var(--chart-3)')
             .attr('stroke-dasharray', '6,4')
             .attr('stroke-width', 1.5);
         g.append('text')
             .attr('x', x(8.5)).attr('y', y(9.2))
-            .style('fill', 'var(chart-3)').attr('font-size', '11px')
+            .style('fill', 'var(--chart-3)').attr('font-size', '11px')
             .attr('font-style', 'italic')
             .text('理想司法线 Y=X（罪刑相适应）');
 
@@ -2288,10 +2288,10 @@ function renderTreemap(opts){
             g.append('line')
                 .attr('x1', x(maxCase.crime_severity)).attr('y1', y(maxCase.sentence_severity))
                 .attr('x2', x(maxCase.crime_severity) - 80).attr('y2', y(maxCase.sentence_severity) - 50)
-                .style('stroke', 'var(chart-1)').attr('stroke-width', 1);
+                .style('stroke', 'var(--chart-1)').attr('stroke-width', 1);
             g.append('text')
                 .attr('x', x(maxCase.crime_severity) - 80).attr('y', y(maxCase.sentence_severity) - 55)
-                .style('fill', 'var(chart-1)').attr('font-size', '11px').attr('font-weight', 600)
+                .style('fill', 'var(--chart-1)').attr('font-size', '11px').attr('font-weight', 600)
                 .attr('text-anchor', 'end')
                 .text('最大失衡：金翅大鹏雕（10→0）');
         }
@@ -2359,7 +2359,7 @@ function renderTreemap(opts){
         groups.append('rect')
             .attr('x', x1('crime')).attr('y', d => y(d.crime_severity))
             .attr('width', x1.bandwidth()).attr('height', d => h - y(d.crime_severity))
-            .style('fill', 'var(chart-3)').attr('fill-opacity', 0.85)
+            .style('fill', 'var(--chart-3)').attr('fill-opacity', 0.85)
             .style('cursor', 'pointer')
             .on('mouseover', (event, d) => {
                 tooltip.show(`<strong>${d.case_name}</strong><br>罪行严重度：${d.crime_severity} / 10<br>罪：${d.crime}`, event);
@@ -2369,7 +2369,7 @@ function renderTreemap(opts){
         groups.append('rect')
             .attr('x', x1('sentence')).attr('y', d => y(d.sentence_severity))
             .attr('width', x1.bandwidth()).attr('height', d => h - y(d.sentence_severity))
-            .style('fill', 'var(chart-1)').attr('fill-opacity', 0.85)
+            .style('fill', 'var(--chart-1)').attr('fill-opacity', 0.85)
             .style('cursor', 'pointer')
             .on('mouseover', (event, d) => {
                 tooltip.show(`<strong>${d.case_name}</strong><br>刑罚严重度：${d.sentence_severity} / 10<br>刑罚：${d.actual_sentence}<br>失衡分数：${d.disparity_score}`, event);
@@ -2387,9 +2387,9 @@ function renderTreemap(opts){
 
         // Legend
         const legend = g.append('g').attr('transform', `translate(${w - 200}, 0)`);
-        legend.append('rect').attr('width', 12).attr('height', 12).style('fill', 'var(chart-3)');
+        legend.append('rect').attr('width', 12).attr('height', 12).style('fill', 'var(--chart-3)');
         legend.append('text').attr('x', 18).attr('y', 10).attr('font-size', '11px').text('罪行严重度');
-        legend.append('rect').attr('width', 12).attr('height', 12).style('fill', 'var(chart-1)').attr('y', 18);
+        legend.append('rect').attr('width', 12).attr('height', 12).style('fill', 'var(--chart-1)').attr('y', 18);
         legend.append('text').attr('x', 18).attr('y', 28).attr('font-size', '11px').text('刑罚严重度');
     }
 
@@ -2484,7 +2484,7 @@ function renderTreemap(opts){
             .attr('x', d => x(d.property_clarity) + 6)
             .attr('y', d => y(d.artifact_name) + y.bandwidth()/2 + 4)
             .attr('font-size', '10px')
-            .style('fill', 'var(ink-soft)')
+            .style('fill', 'var(--ink-soft)')
             .text(d => d.claimed_owner + ' · ' + d.property_clarity + '/10');
 
         // Legend for clarity color
@@ -2498,7 +2498,7 @@ function renderTreemap(opts){
         legendItems.forEach((it, i) => {
             const ly = i * 22;
             legend.append('rect').attr('width', 14).attr('height', 14).attr('y', ly).attr('fill', it.c);
-            legend.append('text').attr('x', 20).attr('y', ly + 11).attr('font-size', '11px').style('fill', 'var(ink-soft)').text(it.t);
+            legend.append('text').attr('x', 20).attr('y', ly + 11).attr('font-size', '11px').style('fill', 'var(--ink-soft)').text(it.t);
         });
     }
 
@@ -2646,14 +2646,14 @@ function renderTreemap(opts){
         if (wukong) {
             g.append('text')
                 .attr('x', x(wukong.n) + 4).attr('y', y(wukong.severity) - 18)
-                .style('fill', 'var(chart-1)').attr('font-size', '11px').attr('font-weight', 600)
+                .style('fill', 'var(--chart-1)').attr('font-size', '11px').attr('font-weight', 600)
                 .text('悟空大闹地府');
         }
         const fish = incidents.find(i => i.perpetrator.indexOf('金鱼精') >= 0);
         if (fish) {
             g.append('text')
                 .attr('x', x(fish.n) + 4).attr('y', y(fish.severity) - 18)
-                .style('fill', 'var(chart-2)').attr('font-size', '11px').attr('font-weight', 600)
+                .style('fill', 'var(--chart-2)').attr('font-size', '11px').attr('font-weight', 600)
                 .text('金鱼精（数据完整性失败）');
         }
 
@@ -2715,18 +2715,18 @@ function renderTreemap(opts){
 
         // 中心文字
         g.append('text').attr('text-anchor', 'middle').attr('y', -8)
-            .attr('font-size', '24px').attr('font-weight', 600).style('fill', 'var(chart-1)')
+            .attr('font-size', '24px').attr('font-weight', 600).style('fill', 'var(--chart-1)')
             .text('37.5%');
         g.append('text').attr('text-anchor', 'middle').attr('y', 14)
-            .attr('font-size', '11px').style('fill', 'var(ink-soft)')
+            .attr('font-size', '11px').style('fill', 'var(--ink-soft)')
             .text('审计覆盖率 (3/8)');
 
         // 标注
         g.append('text').attr('x', 0).attr('y', H/2 - 10).attr('text-anchor', 'middle')
-            .attr('font-size', '11px').style('fill', 'var(chart-4)').attr('font-weight', 600)
+            .attr('font-size', '11px').style('fill', 'var(--chart-4)').attr('font-weight', 600)
             .text('有审计：3 起 · 37.5%');
         g.append('text').attr('x', 0).attr('y', H/2 + 6).attr('text-anchor', 'middle')
-            .attr('font-size', '11px').style('fill', 'var(chart-1)').attr('font-weight', 600)
+            .attr('font-size', '11px').style('fill', 'var(--chart-1)').attr('font-weight', 600)
             .text('无审计：5 起 · 62.5%');
     }
 

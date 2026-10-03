@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-uTK3k5247TGIRdkylbuDEWgkzODS9sQoVMlpO6CXuXA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-LI8iX/AyqaaO3M+nhYOS+MfSFol7x1mfMJ1ieKI0Cco=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪后台论 · 详解西游记</title>
@@ -1880,14 +1880,14 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('transform', `translate(0,${h})`)
             .call(d3.axisBottom(x).tickFormat(d => d))
             .append('text')
-            .attr('x', w / 2).attr('y', 45).style('fill', 'var(ink-soft)')
+            .attr('x', w / 2).attr('y', 45).style('fill', 'var(--ink-soft)')
             .attr('text-anchor', 'middle').attr('font-size', '0.85rem')
             .text('后台强度（1=无背景 → 10=三清/佛祖直系）');
         g.append('g')
             .call(d3.axisLeft(y).tickFormat(d => d + '%'))
             .append('text')
             .attr('transform', 'rotate(-90)')
-            .attr('x', -h / 2).attr('y', -45).style('fill', 'var(ink-soft)')
+            .attr('x', -h / 2).attr('y', -45).style('fill', 'var(--ink-soft)')
             .attr('text-anchor', 'middle').attr('font-size', '0.85rem')
             .text('存活率（%）');
 
@@ -1929,7 +1929,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('x', d => x(d.background_strength))
             .attr('y', d => y(d.survival_rate) - r(d.count) - 6)
             .attr('text-anchor', 'middle')
-            .style('fill', 'var(ink)')
+            .style('fill', 'var(--ink)')
             .attr('font-size', '0.82rem')
             .attr('font-weight', 600)
             .text(d => d.name);
@@ -2019,7 +2019,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('x', d => x(d.label) + x.bandwidth() / 2)
             .attr('y', d => y(d.value) - 8)
             .attr('text-anchor', 'middle')
-            .style('fill', 'var(ink)')
+            .style('fill', 'var(--ink)')
             .attr('font-size', '1.2rem')
             .attr('font-weight', 700)
             .text(d => d.value + '%');
@@ -2042,14 +2042,14 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('x2', x('无后台') + x.bandwidth() / 2)
             .attr('y1', y(stats.with_background_survival_rate) - 30)
             .attr('y2', y(stats.with_background_survival_rate) - 30)
-            .style('stroke', 'var(chart-3)')
+            .style('stroke', 'var(--chart-3)')
             .attr('stroke-width', 1.5)
             .attr('stroke-dasharray', '4,3');
         g.append('text')
             .attr('x', w / 2)
             .attr('y', y(stats.with_background_survival_rate) - 40)
             .attr('text-anchor', 'middle')
-            .style('fill', 'var(chart-3)')
+            .style('fill', 'var(--chart-3)')
             .attr('font-size', '0.85rem')
             .attr('font-weight', 600)
             .text(`差距 ${stats.survival_gap}x`);
@@ -2149,14 +2149,14 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         g.append('text')
             .attr('text-anchor', 'middle')
             .attr('y', -8)
-            .style('fill', 'var(ink)')
+            .style('fill', 'var(--ink)')
             .attr('font-size', '1.3rem')
             .attr('font-weight', 700)
             .text('69');
         g.append('text')
             .attr('text-anchor', 'middle')
             .attr('y', 14)
-            .style('fill', 'var(ink-soft)')
+            .style('fill', 'var(--ink-soft)')
             .attr('font-size', '0.82rem')
             .text('妖怪总数');
 

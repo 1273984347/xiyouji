@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-gQpdwNos8w5Yy89LbPYTu0aZ3BVBaCmBanE3B/mLQ4c=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-qHkR+Xark1q6Gp7+VOXX2fgUdlXl/rLu8QG/r69aubI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>明代政治思想对照图谱 · 详解西游记</title>
@@ -1591,7 +1591,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                     .attr("text-anchor", "middle")
                     .attr("dy", "0.35em")
                     .style("font-size", "0.82rem")
-                    .style("fill", "var(ink)")
+                    .style("fill", "var(--ink)")
                     .style("font-weight", "600")
                     .text(ax);
             });
@@ -1709,22 +1709,22 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         g.append("g")
             .attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(x))
-            .selectAll("text").style("font-size", "0.9rem").style("fill", "var(ink)").style("font-weight", "600");
+            .selectAll("text").style("font-size", "0.9rem").style("fill", "var(--ink)").style("font-weight", "600");
         g.append("g")
             .call(d3.axisLeft(y))
-            .selectAll("text").style("font-size", "0.88rem").style("fill", "var(ink)").style("font-weight", "600");
+            .selectAll("text").style("font-size", "0.88rem").style("fill", "var(--ink)").style("font-weight", "600");
 
         // 轴标题
         g.append("text")
             .attr("x", innerW / 2).attr("y", innerH + 44)
             .attr("text-anchor", "middle")
-            .style("font-size", "0.85rem").style("fill", "var(chart-3)")
+            .style("font-size", "0.85rem").style("fill", "var(--chart-3)")
             .text("对照维度");
         g.append("text")
             .attr("x", -innerH / 2).attr("y", -110)
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .style("font-size", "0.85rem").style("fill", "var(chart-3)")
+            .style("font-size", "0.85rem").style("fill", "var(--chart-3)")
             .text("对照组");
 
         const tip = d3.select("#heat-tip");
@@ -1742,7 +1742,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .attr("stroke-width", 2)
                 .style("opacity", 0)
                 .on("mouseover", function(event) {
-                    d3.select(this).style("stroke", "var(ink)").attr("stroke-width", 2.5);
+                    d3.select(this).style("stroke", "var(--ink)").attr("stroke-width", 2.5);
                     tip.classed("visible", true)
                         .html(`<div class="tip-title">${d.group} · ${d.dimension}</div>
                             <div class="tip-row">对照强度：<strong style="color:var(--accent)">${d.score} / 10</strong></div>
@@ -1815,13 +1815,13 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             g.append("line")
                 .attr("x1", x(yr)).attr("x2", x(yr))
                 .attr("y1", innerH / 2 - 6).attr("y2", innerH / 2 + 6)
-                .style("stroke", "var(chart-3)").attr("stroke-width", 1);
+                .style("stroke", "var(--chart-3)").attr("stroke-width", 1);
             g.append("text")
                 .attr("x", x(yr)).attr("y", innerH / 2 + 22)
                 .attr("text-anchor", "middle")
                 .style("font-size", "0.74rem")
                 .style("font-family", "JetBrains Mono, monospace")
-                .style("fill", "var(ink-soft)")
+                .style("fill", "var(--ink-soft)")
                 .text(yr);
         });
 
@@ -1849,7 +1849,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .attr("stroke-width", 2)
                 .style("cursor", "pointer")
                 .on("mouseover", function(event) {
-                    d3.select(this).style("stroke", "var(ink)").attr("stroke-width", 2.5);
+                    d3.select(this).style("stroke", "var(--ink)").attr("stroke-width", 2.5);
                     tip.classed("visible", true)
                         .html(`<div class="tip-title">${d.year} · ${d.event}</div>
                             <div class="tip-row">人物：<strong style="color:var(--accent)">${d.figure}</strong></div>
@@ -1885,7 +1885,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             .attr("y", innerH + 50)
             .attr("text-anchor", "middle")
             .style("font-size", "0.85rem")
-            .style("fill", "var(chart-3)")
+            .style("fill", "var(--chart-3)")
             .text("年份（明成化八年至万历二十年）");
 
         const legend = d3.select("#timeline-legend");
@@ -2005,7 +2005,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .attr("text-anchor", anchor)
                 .attr("dy", n.col === 1 ? 0 : "0.35em")
                 .style("font-size", "0.82rem")
-                .style("fill", "var(ink)")
+                .style("fill", "var(--ink)")
                 .style("font-weight", "600")
                 .text(n.name);
         });
@@ -2017,7 +2017,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .attr("y", -18)
                 .attr("text-anchor", "middle")
                 .style("font-size", "0.85rem")
-                .style("fill", "var(chart-3)")
+                .style("fill", "var(--chart-3)")
                 .style("font-weight", "700")
                 .text(t);
         });
@@ -2082,7 +2082,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                     .attr("text-anchor", "middle")
                     .attr("dy", "0.35em")
                     .style("font-size", "0.78rem")
-                    .style("fill", "var(ink)")
+                    .style("fill", "var(--ink)")
                     .style("font-weight", "600")
                     .text(ax);
             });

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-t4eIwCaEPEHs19s8587ChbQYaOmMIJ/RD102a3zbhiI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-pCIz3A/iHDmSArowsexiPT7VjTI8nQQ8qCrUoW1SbdU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>人物情感弧线可视化 · 详解西游记</title>
@@ -1683,7 +1683,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             const wukongData = EMBEDDED.arc_overview.map(d => [d[0], d[1]]);
             const line = d3.line().x(d => x(d[0])).y(d => y(d[1])).curve(d3.curveMonotoneX);
             g.append('path').datum(wukongData).attr('fill', 'none')
-                .style('stroke', 'var(chart-1)').attr('stroke-width', 3).attr('d', line);
+                .style('stroke', 'var(--chart-1)').attr('stroke-width', 3).attr('d', line);
 
             // Turning points
             EMBEDDED.turning_points.forEach(tp => {
@@ -1693,7 +1693,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .attr('x1', tx).attr('x2', tx).attr('y1', ty).attr('y2', height + 30);
                 // Point
                 g.append('circle').attr('cx', tx).attr('cy', ty).attr('r', 7)
-                    .style('fill', 'var(chart-1)').attr('stroke', '#fff').attr('stroke-width', 2)
+                    .style('fill', 'var(--chart-1)').attr('stroke', '#fff').attr('stroke-width', 2)
                     .style('cursor', 'pointer')
                     .on('mouseover', e => showTooltip(
                         `<strong style="color:#c8463a">第${tp.chapter}回</strong> · ${tp.event}<br>` +
@@ -1802,19 +1802,19 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             // U curve area
             const area = d3.area().x(d => x(d[0])).y0(y(0)).y1(d => y(d[1])).curve(d3.curveMonotoneX);
-            g.append('path').datum(EMBEDDED.u_curve).style('fill', 'var(chart-1)')
+            g.append('path').datum(EMBEDDED.u_curve).style('fill', 'var(--chart-1)')
                 .attr('opacity', 0.18).attr('d', area);
 
             // U curve line
             const line = d3.line().x(d => x(d[0])).y(d => y(d[1])).curve(d3.curveMonotoneX);
             g.append('path').datum(EMBEDDED.u_curve).attr('fill', 'none')
-                .style('stroke', 'var(chart-1)').attr('stroke-width', 3).attr('d', line);
+                .style('stroke', 'var(--chart-1)').attr('stroke-width', 3).attr('d', line);
 
             // Points
             g.selectAll('.u-point').data(EMBEDDED.u_curve).enter()
                 .append('circle').attr('class', 'u-point')
                 .attr('cx', d => x(d[0])).attr('cy', d => y(d[1]))
-                .attr('r', 5).style('fill', 'var(chart-1)').attr('stroke', '#fff').attr('stroke-width', 2)
+                .attr('r', 5).style('fill', 'var(--chart-1)').attr('stroke', '#fff').attr('stroke-width', 2)
                 .style('cursor', 'pointer')
                 .on('mouseover', (e, d) => showTooltip(
                     `<strong>第 ${d[0]-4}-${d[0]+5} 回</strong><br>五众均值: ${d[1].toFixed(3)}`, e))

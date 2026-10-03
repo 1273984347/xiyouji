@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-0Sw5IlNjvEY/MIQX2XCI/k/bPM1s+dt+F4/jxlOOxY0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-xIh0cMTmGDYs46w80S1qMEqC4jClYL7THiDkaYDjOCk=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>命运与轮回 · 详解西游记</title>
@@ -2144,7 +2144,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         g.append('path')
             .datum(cases)
             .attr('d', areaGen)
-            .style('fill', 'var(accent-soft)')
+            .style('fill', 'var(--accent-soft)')
             .attr('fill-opacity', 0.25);
 
         // axes
@@ -2171,7 +2171,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const line = d3.line().x(d => x('案' + d.n)).y(d => y(d.impact_severity)).curve(d3.curveMonotoneX);
         g.append('path').datum(cases)
             .attr('fill', 'none')
-            .style('stroke', 'var(chart-2)')
+            .style('stroke', 'var(--chart-2)')
             .attr('stroke-width', 2)
             .attr('stroke-dasharray', '5,3')
             .attr('d', line);
@@ -2183,7 +2183,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('cx', d => x('案' + d.n))
             .attr('cy', d => y(d.impact_severity))
             .attr('r', 9)
-            .style('fill', 'var(chart-1)')
+            .style('fill', 'var(--chart-1)')
             .attr('stroke', '#fff')
             .attr('stroke-width', 2.5)
             .style('cursor', 'pointer')
@@ -2208,7 +2208,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('y', d => y(d.impact_severity) - 16)
             .attr('text-anchor', 'middle')
             .style('font-size', '9.5px')
-            .style('fill', 'var(chart-3)')
+            .style('fill', 'var(--chart-3)')
             .style('font-weight', '600')
             .text(d => d.modifier.split('（')[0]);
 
@@ -2232,7 +2232,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('y', h + 28)
             .attr('text-anchor', 'middle')
             .style('font-size', '10px')
-            .style('fill', 'var(ink-soft)')
+            .style('fill', 'var(--ink-soft)')
             .text(d => d.chapter);
 
         // 角色名标签
@@ -2244,7 +2244,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('text-anchor', 'middle')
             .style('font-size', '10.5px')
             .style('font-weight', '600')
-            .style('fill', 'var(ink)')
+            .style('fill', 'var(--ink)')
             .text(d => d.character);
     }
 
@@ -2339,7 +2339,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('text-anchor', 'middle')
             .style('font-size', '10px')
             .style('font-weight', '600')
-            .style('fill', 'var(ink)')
+            .style('fill', 'var(--ink)')
             .text(d => d.data.karma_type)
             .style('pointer-events', 'none');
 
@@ -2349,13 +2349,13 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('y', -8)
             .style('font-size', '14px')
             .style('font-weight', '700')
-            .style('fill', 'var(chart-1)')
+            .style('fill', 'var(--chart-1)')
             .text('10 类业力');
         g.append('text')
             .attr('text-anchor', 'middle')
             .attr('y', 14)
             .style('font-size', '11px')
-            .style('fill', 'var(ink-soft)')
+            .style('fill', 'var(--ink-soft)')
             .text('每类 1 例 · 占比 10%');
 
         // legend
@@ -2415,14 +2415,14 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('text-anchor', 'start')
             .style('font-size', '12px')
             .style('font-weight', '700')
-            .style('fill', 'var(chart-1)')
+            .style('fill', 'var(--chart-1)')
             .text('左侧：karma_type 业力类型（10 种）');
         g.append('text')
             .attr('x', w).attr('y', -10)
             .attr('text-anchor', 'end')
             .style('font-size', '12px')
             .style('font-weight', '700')
-            .style('fill', 'var(chart-2)')
+            .style('fill', 'var(--chart-2)')
             .text('右侧：rebirth_destination 轮回去向（6 类）');
 
         // 链接（贝塞尔曲线）
@@ -2519,7 +2519,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('x', w / 2).attr('y', h + 22)
             .attr('text-anchor', 'middle')
             .style('font-size', '11px')
-            .style('fill', 'var(ink-soft)')
+            .style('fill', 'var(--ink-soft)')
             .style('font-style', 'italic')
             .text('每条链接 = 1 个因果案例 · 业力如何从因（karma_type）流向果（rebirth_destination）');
     }
@@ -2592,7 +2592,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('text-anchor', 'middle')
             .style('font-size', '13px')
             .style('font-weight', '700')
-            .style('fill', 'var(ink)')
+            .style('fill', 'var(--ink)')
             .text('六道层级（顶层最善 · 底层最恶）');
 
         orderedRealms.forEach((r, i) => {
@@ -2659,7 +2659,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .attr('text-anchor', 'end')
                 .style('font-size', '11px')
                 .style('font-weight', '600')
-                .style('fill', 'var(chart-3)')
+                .style('fill', 'var(--chart-3)')
                 .text('Lv ' + r.n);
 
             layerG.on('mouseover', (e) => {
@@ -2685,7 +2685,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         g.append('line')
             .attr('x1', 30).attr('x2', W - 30)
             .attr('y1', dividerY).attr('y2', dividerY)
-            .style('stroke', 'var(chart-1)')
+            .style('stroke', 'var(--chart-1)')
             .attr('stroke-dasharray', '5,3')
             .attr('stroke-width', 1)
             .attr('opacity', 0.5);
@@ -2693,7 +2693,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('x', W - 30).attr('y', dividerY - 4)
             .attr('text-anchor', 'end')
             .style('font-size', '10px')
-            .style('fill', 'var(chart-1)')
+            .style('fill', 'var(--chart-1)')
             .style('font-style', 'italic')
             .text('善恶分界线 ↓');
 
@@ -2702,7 +2702,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('x', cx).attr('y', 14)
             .attr('text-anchor', 'middle')
             .style('font-size', '10.5px')
-            .style('fill', 'var(chart-3)')
+            .style('fill', 'var(--chart-3)')
             .style('font-style', 'italic')
             .text('↑ 修行圆满可超脱轮回');
 

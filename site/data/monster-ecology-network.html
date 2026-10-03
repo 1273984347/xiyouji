@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-I79exfm6ytgbSVKlEyshrKpq+aC+2S/NckQtmnLQswg=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-eHsVOhrDLvpQatwYX1Ayf1OYPQnf0B7Nlr0s3iM6mgc=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪生态网络图谱 · 详解西游记</title>
@@ -1775,7 +1775,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .text(d => d.name)
                 .attr("font-size", d => d.size > 22 ? "11px" : "9px")
                 .attr("dx", d => d.size / 2 + 4).attr("dy", 3)
-                .style("fill", "var(ink)");
+                .style("fill", "var(--ink)");
 
             node.on("click", (e, d) => {
                 d3.select("#node-card-container").html(`
@@ -1829,7 +1829,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr("stroke", colors[l.source]).attr("stroke-width", Math.sqrt(l.value) * 2.5)
                 .attr("opacity", 0.55);
             svg.append("text").attr("x", src.x + nodeW + 10).attr("y", (sy + ty) / 2 - 6)
-                .attr("text-anchor", "middle").attr("font-size", "10px").style("fill", "var(ink-soft)")
+                .attr("text-anchor", "middle").attr("font-size", "10px").style("fill", "var(--ink-soft)")
                 .text(`${l.value}%`);
         });
 data.nodes.forEach((n, i) => {
@@ -1841,7 +1841,7 @@ data.nodes.forEach((n, i) => {
 
         
         svg.append("text").attr("x", width/2).attr("y", 30).attr("text-anchor", "middle")
-            .attr("font-size", "13px").style("fill", "var(ink-soft)")
+            .attr("font-size", "13px").style("fill", "var(--ink-soft)")
             .text("凡人精气（100%）→ 小妖消费者 → 大妖顶级捕食者 → 取经团队 → 天庭/佛界收编 · 四级能量金字塔·每级损失约 50%");
     })();
 
@@ -1872,7 +1872,7 @@ data.nodes.forEach((n, i) => {
                 .attr("x2", cx + Math.cos(a) * R).attr("y2", cy + Math.sin(a) * R)
                 .attr("stroke", "#d9cdb8");
             svg.append("text").attr("x", cx + Math.cos(a) * (R + 20)).attr("y", cy + Math.sin(a) * (R + 20))
-                .attr("text-anchor", "middle").attr("dy", 4).attr("font-size", "12px").style("fill", "var(ink-soft)")
+                .attr("text-anchor", "middle").attr("dy", 4).attr("font-size", "12px").style("fill", "var(--ink-soft)")
                 .text(dimLabels[i]);
         });
 
@@ -1892,7 +1892,7 @@ data.nodes.forEach((n, i) => {
         EMBEDDED_DATA.radar.forEach((m, idx) => {
             legendG.append("rect").attr("x", 0).attr("y", idx * 18).attr("width", 12).attr("height", 12)
                 .attr("fill", colors[idx % 10]).attr("opacity", 0.7);
-            legendG.append("text").attr("x", 18).attr("y", idx * 18 + 10).attr("font-size", "10px").style("fill", "var(ink)")
+            legendG.append("text").attr("x", 18).attr("y", idx * 18 + 10).attr("font-size", "10px").style("fill", "var(--ink)")
                 .text(`${m.monster} (${m.strategy})`);
         });
     })();
@@ -1912,19 +1912,19 @@ data.nodes.forEach((n, i) => {
 
         svg.append("g").attr("transform", `translate(0,${height - margin.bottom})`)
             .call(d3.axisBottom(x).ticks(20))
-            .append("text").attr("x", width/2).attr("y", 35).style("fill", "var(ink-soft)").attr("text-anchor", "middle").text("回目");
+            .append("text").attr("x", width/2).attr("y", 35).style("fill", "var(--ink-soft)").attr("text-anchor", "middle").text("回目");
 
         svg.append("g").attr("transform", `translate(${margin.left},0)`)
             .call(d3.axisLeft(y).ticks(5))
             .append("text").attr("transform", "rotate(-90)").attr("x", -height/2).attr("y", -35)
-            .style("fill", "var(ink-soft)").attr("text-anchor", "middle").text("妖怪数量");
+            .style("fill", "var(--ink-soft)").attr("text-anchor", "middle").text("妖怪数量");
 
         data.forEach(d => {
             svg.append("circle").attr("cx", x(d.chapter)).attr("cy", y(d.count))
                 .attr("r", Math.sqrt(d.count) * 4 + 3).attr("fill", typeColor[d.type]).attr("opacity", 0.7)
                 .attr("stroke", "#fff").attr("stroke-width", 1);
             svg.append("text").attr("x", x(d.chapter)).attr("y", y(d.count) - Math.sqrt(d.count) * 4 - 6)
-                .attr("text-anchor", "middle").attr("font-size", "9px").style("fill", "var(ink)")
+                .attr("text-anchor", "middle").attr("font-size", "9px").style("fill", "var(--ink)")
                 .text(d.monster.substring(0, 6));
         });
 
@@ -1932,7 +1932,7 @@ data.nodes.forEach((n, i) => {
         const lg = svg.append("g").attr("transform", `translate(${width - 200}, ${margin.top})`);
         Object.entries(typeLabel).forEach(([k, v], i) => {
             lg.append("circle").attr("cx", 6).attr("cy", i * 18 + 6).attr("r", 5).attr("fill", typeColor[k]);
-            lg.append("text").attr("x", 18).attr("y", i * 18 + 10).attr("font-size", "10px").style("fill", "var(ink)").text(v);
+            lg.append("text").attr("x", 18).attr("y", i * 18 + 10).attr("font-size", "10px").style("fill", "var(--ink)").text(v);
         });
     })();
     </script>

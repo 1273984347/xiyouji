@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-K8zk3b6qtsWWyunqTag7wcDAgF+QlAtSUNK6+zfS7JY=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-cCnjWHnM1s2adMeKkxi4sL/QFDHiIqaCqiADqM4hMic=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>三教神学干预网络图谱 · 详解西游记</title>
@@ -1646,7 +1646,7 @@ const link = svg.append("g").selectAll("line")
         .data(data.nodes).enter().append("circle")
         .attr("r", d => d.size / 2)
         .attr("fill", d => d.color)
-        .style("stroke", "var(ink)")
+        .style("stroke", "var(--ink)")
         .attr("stroke-width", 1.5)
         .call(d3.drag()
             .on("start", (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
@@ -1659,7 +1659,7 @@ const link = svg.append("g").selectAll("line")
         .text(d => d.id)
         .attr("font-size", d => d.type === "deity" ? "13px" : (d.type === "intervention" ? "12px" : "10px"))
         .attr("font-weight", d => d.type === "deity" ? 700 : (d.type === "intervention" ? 600 : 400))
-        .style("fill", "var(ink)")
+        .style("fill", "var(--ink)")
         .attr("text-anchor", "middle")
         .attr("dy", d => d.size / 2 + 14);
 
@@ -1777,7 +1777,7 @@ const link = svg.append("g").selectAll("line")
             .attr("text-anchor", "middle")
             .attr("font-size", "13px")
             .attr("font-weight", 600)
-            .style("fill", "var(ink)")
+            .style("fill", "var(--ink)")
             .text(ax);
     });
 
@@ -1849,7 +1849,7 @@ const link = svg.append("g").selectAll("line")
             .attr("cx", x).attr("cy", y)
             .attr("r", 6)
             .attr("fill", color)
-            .style("stroke", "var(ink)")
+            .style("stroke", "var(--ink)")
             .attr("stroke-width", 1.5);
 
         // Label box
@@ -1865,7 +1865,7 @@ const link = svg.append("g").selectAll("line")
             .attr("text-anchor", "middle")
             .attr("font-size", "10px")
             .attr("font-weight", 700)
-            .style("fill", "var(ink)")
+            .style("fill", "var(--ink)")
             .text(`${d.chapter}·${d.type}`);
         svg.append("text")
             .attr("x", x).attr("y", labelY + 8)
@@ -1903,7 +1903,7 @@ const link = svg.append("g").selectAll("line")
             .attr("cx", a.x).attr("cy", height / 2)
             .attr("r", 16)
             .attr("fill", a.color)
-            .style("stroke", "var(ink)")
+            .style("stroke", "var(--ink)")
             .attr("stroke-width", 2);
         svg.append("text")
             .attr("x", a.x).attr("y", height / 2 - 30)

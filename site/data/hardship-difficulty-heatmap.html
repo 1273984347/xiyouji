@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-tVLbkBAkaVXwJAqbdtMuriaHuqLiKy2X1clZkzZ3QVw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-YHc/fcXFPWaqwCvUwbdl84rLPCi3AJXu3duz4XeksN8=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-mnFi75u+1r7H0q4dtbzSKQ9BSrddWqtLcQx7pr9a5Uo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-YHc/fcXFPWaqwCvUwbdl84rLPCi3AJXu3duz4XeksN8=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>八十一难多维度难度热力图 · 详解西游记</title>
@@ -1668,7 +1668,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             .call(d3.axisBottom(xScale).tickValues(xTicks).tickFormat(d => `第${d}难`))
             .selectAll("text")
             .style("font-size", "0.7rem")
-            .style("fill", "var(ink-soft)");
+            .style("fill", "var(--ink-soft)");
 
         // Y 轴标签（中文）
         const yLabels = ["难度等级", "战斗时长", "求助次数", "法宝使用"];
@@ -1676,21 +1676,21 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             .call(d3.axisLeft(yScale).tickFormat((d, i) => yLabels[i]))
             .selectAll("text")
             .style("font-size", "0.82rem")
-            .style("fill", "var(ink)")
+            .style("fill", "var(--ink)")
             .style("font-weight", "600");
 
         // 轴标题
         g.append("text")
             .attr("x", innerW / 2).attr("y", innerH + 44)
             .attr("text-anchor", "middle")
-            .style("font-size", "0.85rem").style("fill", "var(chart-3)")
+            .style("font-size", "0.85rem").style("fill", "var(--chart-3)")
             .text("八十一难（按章节顺序）");
 
         g.append("text")
             .attr("x", -innerH / 2).attr("y", -90)
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .style("font-size", "0.85rem").style("fill", "var(chart-3)")
+            .style("font-size", "0.85rem").style("fill", "var(--chart-3)")
             .text("难度维度");
 
         // 高亮当前维度的行
@@ -1698,7 +1698,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             .attr("x", -6).attr("y", yScale(dim))
             .attr("width", innerW + 12).attr("height", yScale.bandwidth())
             .attr("fill", "#fff8e7")
-            .style("stroke", "var(accent-soft)")
+            .style("stroke", "var(--accent-soft)")
             .attr("stroke-dasharray", "3,3")
             .attr("opacity", 0.7);
 
@@ -1724,7 +1724,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                     .attr("stroke-width", 0.5)
                     .style("opacity", 0)
                     .on("mouseover", function(event) {
-                        d3.select(this).style("stroke", "var(ink)").attr("stroke-width", 1.5);
+                        d3.select(this).style("stroke", "var(--ink)").attr("stroke-width", 1.5);
                         const valLabel = DIM_CONFIG[d].valueLabels[val] || val;
                         tip.style("opacity", 1)
                             .html(`<div class="tip-title">第 ${item.n} 难 · ${item.name}</div>
@@ -1799,10 +1799,10 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
 
         g.append("g").attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(x))
-            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(ink-soft)");
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(--ink-soft)");
 
         g.append("g").call(d3.axisLeft(y).ticks(4))
-            .selectAll("text").style("font-size", "0.72rem").style("fill", "var(ink-soft)");
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "var(--ink-soft)");
 
         g.selectAll("rect.bar")
             .data(counts)
@@ -1832,7 +1832,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             .attr("text-anchor", "middle")
             .style("font-size", "0.82rem")
             .style("font-weight", "600")
-            .style("fill", "var(chart-1)")
+            .style("fill", "var(--chart-1)")
             .style("opacity", 0)
             .text(d => d.count)
             .transition()
