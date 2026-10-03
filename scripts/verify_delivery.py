@@ -642,6 +642,24 @@ def main():
             ok("可视化可引用性门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
 
 
+    # ---- 设计令牌文档对账门禁（PD-5·W652：design-tokens.json/design.md ↔ tokens.css 双向对账——
+    # 防 DESIGN.md §2 手写表与单一事实源静默漂移（W652 首跑实证 6 处值漂移已同步+15 页面本地令牌白名单）·
+    # wrapper 防静默跳过与第 28 门禁同款：crash 即拦+汇总行校验）----
+    pd5_py = os.path.join(_HERE, "check_design_doc_drift.py")
+    try:
+        r = subprocess.run([sys.executable, pd5_py], capture_output=True, text=True, timeout=120)
+    except Exception as e:
+        fail("设计令牌对账门禁执行异常（PD-5·crash 即拦）: %s" % e)
+    else:
+        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
+        if r.returncode != 0:
+            fail("设计令牌对账漂移（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+        elif "---- 设计令牌对账：" not in r.stdout:
+            fail("设计令牌对账输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
+        else:
+            ok("设计令牌文档对账通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
+
+
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:
         try:

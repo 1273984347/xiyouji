@@ -1,0 +1,21 @@
+{
+  "batch": "W652",
+  "version": "v2.3.252",
+  "date": "2026-10-03",
+  "desc": "PD-5 设计令牌导出与对账门禁",
+  "title": "W652 PD-5 设计令牌机器可读导出 + 文档对账门禁 — design-tokens.json（93 键·DTCG 简化·B-9② 前置真值）+ docs/00-导读/design.md（机器生成）+ check_design_doc_drift 五层检查挂 verify + DESIGN.md §2.1 六处值漂移同步",
+  "head_entry": "2026-10-03（v2.3.252 W652）PD-5 设计令牌机器可读导出与对账门禁——design-tokens.json 93 键（DTCG 简化·B-9② 前置真值清单）+ docs/00-导读/design.md 机器生成（无易变字段·反篡改字节比对）+ check_design_doc_drift 五层检查挂 verify（反篡改/覆盖/虚构/值同步/暗色计数）+ DESIGN.md §2.1 六处值漂移同步）",
+  "changelog_body": "\n> **来源**：全量启动队列第一批（依赖序首位·纯只读不改页·先于 B-9② 色值→变量拿真值）——PD-5 按适用性方案 §3 详规与 §10.1 批复（D-4 落 docs/00-导读·D-5 只 site/data）执行。\n> - **导出器**：scripts/export_design_tokens.py 解析 site/tokens.css（按「;」切分声明·一行多声明兼容·尾注释捕获为 $description·选择器推断主题 :root=light/html[data-theme=dark]=dark·节注释为 group）→ scripts/output/design-tokens.json（W3C DTCG 简化：93 键=声明 93·light 69/dark 24·$value/$type/$description+group/line）+ docs/00-导读/design.md（按主题/节分表·D-4 裁决落位）。--check-count=AC-1（93==93 PASS）。\n> - **对账门禁**：check_design_doc_drift.py 五层全机判——①反篡改（design.md 再生成逐字节比对·文档不含生成日期等易变字段保证长期成立）②覆盖（CSS 声明在 design.md 全记载==0 缺）③虚构（design.md 与 DESIGN.md §2 令牌名必须在 CSS ∪ 站点页面本地声明中存在·W610 先例·页面本地 95 名按 AC-2 白名单条款放行）④值同步（DESIGN.md §2 手写表 light 值↔CSS 主题感知比对）⑤暗色计数（JSON dark==CSS dark）。挂 verify_delivery（无编号·wrapper 防静默跳过与第 28 门禁同款：crash 即拦+汇总行校验）。\n> - **首跑实证并已同步**：DESIGN.md §2.1 六处值漂移（--ink #2c2418→#23201A·--ink-soft #6b5e4d→#6B6455·--accent-3 #7a5230→#8A6D3B·--accent-4 #5a7a3a→#6B8E5A·--line #d9cdb8→#E5DFD0·--shadow 旧 rgba(60,40,20)→现行 rgba(35,32,26)+--bg 大小写统一）——正是「源-副本一致性缺口族」活样本（W577 P1 根因同类）；§2.2 的 15 个 badge/focus/cross-table 令牌为 dashboard.html 页面本地定义（非虚构·白名单放行）。\n> - **AC-4/AC-5**：design-tokens.json json.tool 有效；check_inlined_css 224 页完整+generate_csp 0 漂移（只读批零变化实证）。\n> - **验证**：ruff 三脚本 0 错；AC-1…AC-5 全过；verify_delivery 核心全绿（新门禁含汇总行校验实测）；级联 dry-run→apply 10 面断言过。\n> - **文件**：scripts/export_design_tokens.py、scripts/check_design_doc_drift.py、scripts/verify_delivery.py（挂载）、scripts/output/design-tokens.json、docs/00-导读/design.md（均新增）、DESIGN.md（§2.1 同步）、scripts/output/_cascade_files_W652.txt、六文档、四页脚、CITATION、file-index。\n> - **状态**：已落地（本批提交并 push origin/main）。\n",
+  "milestone_block": "- **v2.3.252 W652 PD-5 设计令牌导出与对账门禁**：\n  - design-tokens.json 93 键（DTCG 简化·light 69/dark 24·B-9② 前置真值）+ docs/00-导读/design.md（机器生成·无易变字段·反篡改字节比对）\n  - check_design_doc_drift 五层检查挂 verify（反篡改/覆盖/虚构页面本地白名单/§2 值同步/暗色计数）·wrapper 防静默跳过\n  - DESIGN.md §2.1 六处值漂移同步（W577 源-副本缺口族活样本）·AC-1…AC-5 全过·只读批 CSP/INLINED 零变化\n",
+  "head_sentence": "PD-5 令牌导出与对账门禁",
+  "agents_note": "2026-10-03（v2.3.252 W652）PD-5 设计令牌导出与对账门禁：无 § 结构性变更（design-tokens.json 93 键+docs/00-导读/design.md 机器生成+check_design_doc_drift 五层检查挂 verify·DESIGN.md §2.1 六处值漂移同步），仅版本脚注同步",
+  "file_index_rows": [
+    "| scripts/export_design_tokens.py | W652 | 新增·令牌导出器（DTCG 简化 JSON+design.md·--check-count=AC-1） |",
+    "| scripts/check_design_doc_drift.py | W652 | 新增·文档对账门禁（反篡改/覆盖/虚构/值同步/暗色计数五层·挂 verify） |",
+    "| scripts/verify_delivery.py | W652 | 更新·挂设计令牌对账门禁（PD-5·wrapper 防静默跳过） |",
+    "| scripts/output/design-tokens.json | W652 | 新增·93 键令牌真值清单（B-9② 色值→变量前置） |",
+    "| docs/00-导读/design.md | W652 | 新增·令牌消费文档（机器生成勿手改·反篡改字节比对） |",
+    "| DESIGN.md | W652 | 更新·§2.1 六处值漂移同步至 tokens.css 现行值 |",
+    "| scripts/output/_cascade_files_W652.txt | W652 | 新增·级联落盘清单 |"
+  ]
+}
