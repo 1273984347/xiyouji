@@ -4,13 +4,25 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W652），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W653），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.253（2026-10-03）：W653 PD-1a 图表配色色盲安全门禁 — check_chart_colorblind（Machado 二型模拟+CIEDE2000·ΔE<10·WARN+基线 17428 对冻结）挂第 29 槽 + 形态普查 + 口径偏差入账（light 静态·暗色归 PD-4）
+> **来源**：全量启动队列第二批（依赖序：PD-5 真值清单已就位）——PD-1a 按适用性方案 §3 执行（PD-1b §4B 选型章+降级门禁+R3 留 W654）。
+> - **门禁**：check_chart_colorblind.py 挂 verify_delivery 第 29 槽（wrapper 防静默跳过同前两门禁：crash 即拦+汇总行校验）——Machado et al. 2009 deuteranopia/protanopia 矩阵（sRGB 线性域）+ CIEDE2000 纯 stdlib 实现；页内系列色板两两求 min(ΔE_deuter, ΔE_protan)<10 判违规；D-6 裁决 WARN+基线冻结（colorblind-baseline.txt·17428 对·1,059,178B）·基线外新增 FAIL·收敛后转 FAIL 不预设日期。
+> - **形态普查**（先于正则·AGENTS 第 28 项教训）：colorblind-survey.json——86 页色值书写变体 hex 22334/rgb 7915/hsl 0/var 28605/d3.scheme 2/渐变 stop 0。
+> - **抽取口径三轮迭代**（普查实证驱动）：v1 全赋值语境→命中面失控（EMBEDDED_DATA 生成期节点色混入·单页色板 190）；v2 剔除 EMBEDDED 数据块+ΔE<3 聚类去重→仍 86/86 页超阈豁免失效；v3 定稿四族系列色板（chart 变量/d3 scheme/colorMap 字面映射/fill-stroke 赋值·不含 color: 文本色）——UI 修饰色不入系列色板（色盲安全是数据系列问题）。
+> - **口径偏差入账（计划最高风险项的规避）**：静态解析限定 light 主题真值——暗色 computed 态色盲检查需 http 渲染（W589 口径），归 PD-4 异常态矩阵，本门禁输出注明口径。
+> - **首跑发现（入 PD-1b 选型章语料）**：86/86 页坍缩后仍有 25-30 族——本语料图型以高基数分类网络与连续色阶为主（66 页 scale 豁免+20 页多分类全检），ΔE 成对检查在颜色维度对高基数页不构成可行动约束，其色盲安全抓手=交互编码冗余（形状/标签）而非换色；代表性真违规对：W334 色板 --chart-1 朱砂×--chart-4 苔绿 ΔE=7.9（deuter）已在基线冻结。
+> - **性能**：模拟态 Lab 预计算缓存（每色每模拟一次·配对复用）——全量分析 4.7s（verify 120s 超时内）。
+> - **验证**：ruff 0 错；--self-test 4/4（好坏/中性/连续色阶豁免构造页）；基线冻结后 --gate 基线外违规 0；verify_delivery 核心全绿（第 29 槽含汇总行校验实测）；级联 dry-run→apply 10 面断言过。零页面改动·暗色态无回归面（AC-7 由 W650 已绿基线承接）。
+> - **文件**：scripts/check_chart_colorblind.py、scripts/verify_delivery.py（挂第 29 槽）、scripts/output/colorblind-baseline.txt（新增·冻结）、scripts/output/colorblind-survey.json（新增·普查）、scripts/output/_cascade_files_W653.txt、六文档、四页脚、CITATION、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 
 ### v2.3.252（2026-10-03）：W652 PD-5 设计令牌机器可读导出 + 文档对账门禁 — design-tokens.json（93 键·DTCG 简化·B-9② 前置真值）+ docs/00-导读/design.md（机器生成）+ check_design_doc_drift 五层检查挂 verify + DESIGN.md §2.1 六处值漂移同步
 > **来源**：全量启动队列第一批（依赖序首位·纯只读不改页·先于 B-9② 色值→变量拿真值）——PD-5 按适用性方案 §3 详规与 §10.1 批复（D-4 落 docs/00-导读·D-5 只 site/data）执行。

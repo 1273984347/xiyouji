@@ -11,6 +11,16 @@
 ---
 
 
+## W653 W653 PD-1a 图表配色色盲安全门禁（2026-10-03·v2.3.253）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_chart_colorblind.py | W653 | 新增·第 29 门禁色盲安全（Machado 二型+CIEDE2000·WARN+基线·survey/report/baseline/gate/self-test 五模式） |
+| scripts/verify_delivery.py | W653 | 更新·挂第 29 槽色盲安全门禁 |
+| scripts/output/colorblind-baseline.txt | W653 | 新增·基线冻结（17428 对·1,059,178B） |
+| scripts/output/colorblind-survey.json | W653 | 新增·86 页色值书写变体形态普查 |
+| scripts/output/_cascade_files_W653.txt | W653 | 新增·级联落盘清单 |
+
 ## W652 W652 PD设计令牌机器可读导出 + 文档对账门禁（2026-10-03·v2.3.252）
 
 | 文件 | W | 说明 |

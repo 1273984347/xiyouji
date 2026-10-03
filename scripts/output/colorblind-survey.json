@@ -1,0 +1,703 @@
+{
+ "survey_date": "2026-10-03",
+ "pages": 86,
+ "variants_total": {
+  "hex": 22334,
+  "rgb": 7915,
+  "hsl": 0,
+  "var": 28605,
+  "scheme": 2,
+  "gradient_stop": 0
+ },
+ "per_page": {
+  "site/data/81-hardships-view.html": {
+   "hex": 249,
+   "rgb": 94,
+   "hsl": 0,
+   "var": 278,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/81-hardships.html": {
+   "hex": 238,
+   "rgb": 92,
+   "hsl": 0,
+   "var": 310,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/aesthetics.html": {
+   "hex": 253,
+   "rgb": 92,
+   "hsl": 0,
+   "var": 331,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/ai-dialogue.html": {
+   "hex": 219,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 342,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/business-model.html": {
+   "hex": 258,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 392,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/cave-estate.html": {
+   "hex": 246,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 290,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/century-dialogue.html": {
+   "hex": 220,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 289,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/chapter-stats.html": {
+   "hex": 228,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 282,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/chapter-structure-graph.html": {
+   "hex": 250,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 268,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/character-appearance.html": {
+   "hex": 249,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 287,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/character-dynamic-network.html": {
+   "hex": 236,
+   "rgb": 92,
+   "hsl": 0,
+   "var": 322,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/character-presence-timeline.html": {
+   "hex": 222,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 289,
+   "scheme": 1,
+   "gradient_stop": 0
+  },
+  "site/data/character-relationship-3d-view.html": {
+   "hex": 249,
+   "rgb": 94,
+   "hsl": 0,
+   "var": 278,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/character-relationship-3d.html": {
+   "hex": 227,
+   "rgb": 94,
+   "hsl": 0,
+   "var": 273,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/character-semantic-network.html": {
+   "hex": 271,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 288,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/character-sentiment-arc.html": {
+   "hex": 264,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 295,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/chart-design.html": {
+   "hex": 261,
+   "rgb": 94,
+   "hsl": 0,
+   "var": 412,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/cognitive-psychology.html": {
+   "hex": 255,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 388,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/concept-device.html": {
+   "hex": 283,
+   "rgb": 111,
+   "hsl": 0,
+   "var": 403,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/counterfactual.html": {
+   "hex": 240,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 305,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/criticism-history.html": {
+   "hex": 243,
+   "rgb": 95,
+   "hsl": 0,
+   "var": 379,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/cross-time-danmaku.html": {
+   "hex": 222,
+   "rgb": 97,
+   "hsl": 0,
+   "var": 357,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/cultural-misreading.html": {
+   "hex": 236,
+   "rgb": 95,
+   "hsl": 0,
+   "var": 318,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/customs-pass-route.html": {
+   "hex": 220,
+   "rgb": 89,
+   "hsl": 0,
+   "var": 280,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/data-explorer.html": {
+   "hex": 249,
+   "rgb": 96,
+   "hsl": 0,
+   "var": 288,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/deconstruction.html": {
+   "hex": 259,
+   "rgb": 92,
+   "hsl": 0,
+   "var": 319,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/dialogue-sentiment.html": {
+   "hex": 258,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 324,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/ecology.html": {
+   "hex": 246,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 415,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/emotional-heatmap.html": {
+   "hex": 227,
+   "rgb": 94,
+   "hsl": 0,
+   "var": 349,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/ethics-consumption.html": {
+   "hex": 238,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 451,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/famous-time-travel.html": {
+   "hex": 242,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 288,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/four-dimensional-research-network.html": {
+   "hex": 291,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 292,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/four-heavenly-kings-artifacts.html": {
+   "hex": 249,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 292,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/game-webnovel.html": {
+   "hex": 262,
+   "rgb": 94,
+   "hsl": 0,
+   "var": 421,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/global-pattern.html": {
+   "hex": 245,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 308,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/graph-explorer.html": {
+   "hex": 295,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 306,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/guanyin-six-roles-network.html": {
+   "hex": 274,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 289,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/hardship-difficulty-heatmap.html": {
+   "hex": 256,
+   "rgb": 92,
+   "hsl": 0,
+   "var": 327,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/hardship-heatmap.html": {
+   "hex": 248,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 306,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/heaven-power-network.html": {
+   "hex": 317,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 328,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/intertextuality-network.html": {
+   "hex": 321,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 307,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/journey-geo-3d.html": {
+   "hex": 228,
+   "rgb": 90,
+   "hsl": 0,
+   "var": 275,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/journey-geo-semiotics.html": {
+   "hex": 233,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 307,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/journey-map-interactive.html": {
+   "hex": 252,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 271,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/journey-route.html": {
+   "hex": 242,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 317,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/journey-spacetime.html": {
+   "hex": 247,
+   "rgb": 93,
+   "hsl": 0,
+   "var": 332,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/jurisprudence.html": {
+   "hex": 297,
+   "rgb": 92,
+   "hsl": 0,
+   "var": 384,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/karma-reincarnation.html": {
+   "hex": 293,
+   "rgb": 92,
+   "hsl": 0,
+   "var": 397,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/language-style-radar.html": {
+   "hex": 244,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 263,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/linguistics.html": {
+   "hex": 255,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 440,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/magic-system.html": {
+   "hex": 252,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 309,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/material-archaeology.html": {
+   "hex": 266,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 387,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/mbti-evolution.html": {
+   "hex": 234,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 322,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/methodology-matrix.html": {
+   "hex": 244,
+   "rgb": 93,
+   "hsl": 0,
+   "var": 413,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/ming-political-thought-comparison.html": {
+   "hex": 285,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 302,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/monster-background.html": {
+   "hex": 255,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 329,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/monster-capability-radar.html": {
+   "hex": 290,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 324,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/monster-ecology-network.html": {
+   "hex": 259,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 295,
+   "scheme": 1,
+   "gradient_stop": 0
+  },
+  "site/data/monster-female-network.html": {
+   "hex": 323,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 287,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/monster-hierarchy-network.html": {
+   "hex": 309,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 321,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/monster-sociology.html": {
+   "hex": 280,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 415,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/monster-victims-network.html": {
+   "hex": 276,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 289,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/music-structure.html": {
+   "hex": 257,
+   "rgb": 94,
+   "hsl": 0,
+   "var": 318,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/narrative-experiment.html": {
+   "hex": 296,
+   "rgb": 96,
+   "hsl": 0,
+   "var": 428,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/narrative-rhythm-curve.html": {
+   "hex": 252,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 269,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/narratology-12d-network.html": {
+   "hex": 328,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 307,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/narratology-13d-network.html": {
+   "hex": 356,
+   "rgb": 92,
+   "hsl": 0,
+   "var": 316,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/perf-canvas-rendering.html": {
+   "hex": 230,
+   "rgb": 94,
+   "hsl": 0,
+   "var": 331,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/philosophy.html": {
+   "hex": 270,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 412,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/pilgrim-team-dynamic-network.html": {
+   "hex": 243,
+   "rgb": 92,
+   "hsl": 0,
+   "var": 324,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/pilgrim-team-psychology-arc.html": {
+   "hex": 279,
+   "rgb": 92,
+   "hsl": 0,
+   "var": 335,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/poetry-rhythm-analysis.html": {
+   "hex": 279,
+   "rgb": 92,
+   "hsl": 0,
+   "var": 344,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/power-resources.html": {
+   "hex": 253,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 394,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/relationships.html": {
+   "hex": 320,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 440,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/risk-project.html": {
+   "hex": 288,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 409,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/search.html": {
+   "hex": 222,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 281,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/six-senses-narratology-network.html": {
+   "hex": 279,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 302,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/social-media.html": {
+   "hex": 264,
+   "rgb": 94,
+   "hsl": 0,
+   "var": 363,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/tag-cloud.html": {
+   "hex": 238,
+   "rgb": 92,
+   "hsl": 0,
+   "var": 318,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/text-evolution.html": {
+   "hex": 257,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 338,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/text-search.html": {
+   "hex": 219,
+   "rgb": 92,
+   "hsl": 0,
+   "var": 330,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/theological-intervention-network.html": {
+   "hex": 266,
+   "rgb": 92,
+   "hsl": 0,
+   "var": 343,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/timeline.html": {
+   "hex": 231,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 337,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/underworld-power-network.html": {
+   "hex": 314,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 323,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/visual-art.html": {
+   "hex": 268,
+   "rgb": 94,
+   "hsl": 0,
+   "var": 418,
+   "scheme": 0,
+   "gradient_stop": 0
+  },
+  "site/data/workplace.html": {
+   "hex": 245,
+   "rgb": 91,
+   "hsl": 0,
+   "var": 380,
+   "scheme": 0,
+   "gradient_stop": 0
+  }
+ },
+ "note": "形态普查先于正则（W653）·色值书写变体：hex/rgb()/hsl()/var(--x)/d3.scheme*/渐变 stop"
+}

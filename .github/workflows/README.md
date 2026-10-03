@@ -1,6 +1,6 @@
 # CI/CD 工作流说明
 
-> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W652** — 西游记解读项目（`D:\xiyouji`，v2.3.252 W652）的 GitHub Actions 工作流层。
+> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W653** — 西游记解读项目（`D:\xiyouji`，v2.3.253 W653）的 GitHub Actions 工作流层。
 > **W399**：ci.yml 补 push main 触发（此前仅 pull_request，项目直接 push main 无 PR → CI 从未运行）；sitemap/robots 域名补全；新增 rum-viewer。
 > **W400**：CI/Security 三 workflow 转绿（ruff 424 违规清零·XSS high 归零·Lighthouse 门禁校准·a11y pip cache 修复·black 门禁移除）。
 > **W401**：ci.yml 5→7 job（pytest-unit 全量 tests/ + agent-web-build）·agent-web 源码入库·移除 3 处无 pip 安装 job 的 cache: pip 残留·build-test-deploy.yml 弃用删除。
@@ -19,7 +19,7 @@
 > **W421**：Screenshot Review 提速优化（改动范围判定：页脚/文档-only 跳过·site/data 变更定向截图·static/脚本/workflow 变更全量·schedule/dispatch 恒全量 + batch_screenshots.js --only-pages + Playwright 浏览器缓存 + checkout fetch-depth 0）。
 > **W420**：A1 内容质量深化（深度解读 100/100 补全 + 56 回元数据补齐 + 99 回导航错链修复·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W419**：修复 A1 深度解读 SD 错位（22 篇 SD 编号≠真实回号归位·40-72 回全覆盖·源文件 24 篇元数据/H1/关联行修正·第 56 回补写 SD101·无 workflow 文件改动，CI 全量验证涵盖）。
-> **W450-W652**：verify 门禁体系扩展（W458-W649 历批逐条明细见 CHANGELOG；实质改动 workflow 文件的仅 W523 diff quotePath/W536 dependabot ignore+eslint/W563 defer 与 SW 探针/W571 tokens 分发/W578 dark-state-gate 浅克隆五批，W450 前建批见 git log）+ W464 perf 基线确立（perf.yml 预算沿用 W424 校准值 LCP≤5000/CLS≤0.3/TBT≤300）+ 其余 W450-W649 各批无 workflow 结构改动）+ W650 第 28 门禁加固与 PRD 出库·无 workflow 结构改动）+ W651 全量启动裁决入档与三源快照·无 workflow 结构改动）+ W652 PD-5 设计令牌导出与对账门禁·无 workflow 结构改动）。
+> **W450-W653**：verify 门禁体系扩展（W458-W649 历批逐条明细见 CHANGELOG；实质改动 workflow 文件的仅 W523 diff quotePath/W536 dependabot ignore+eslint/W563 defer 与 SW 探针/W571 tokens 分发/W578 dark-state-gate 浅克隆五批，W450 前建批见 git log）+ W464 perf 基线确立（perf.yml 预算沿用 W424 校准值 LCP≤5000/CLS≤0.3/TBT≤300）+ 其余 W450-W649 各批无 workflow 结构改动）+ W650 第 28 门禁加固与 PRD 出库·无 workflow 结构改动）+ W651 全量启动裁决入档与三源快照·无 workflow 结构改动）+ W652 PD-5 设计令牌导出与对账门禁·无 workflow 结构改动）+ W653 PD-1a 色盲安全门禁·无 workflow 结构改动）。
 
 ## 1. 工作流列表
 
