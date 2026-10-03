@@ -660,6 +660,24 @@ def main():
             ok("设计令牌文档对账通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
 
 
+    # ---- 色盲安全门禁（第 29 槽·PD-1a·W653：D-6 裁决 WARN+基线冻结——Machado 二型模拟+CIEDE2000
+    # ΔE<10 成对检查·基线 17428 对冻结·基线外新增 FAIL·口径=light 静态（暗色 computed 态归 PD-4）·
+    # wrapper 防静默跳过与第 28 门禁同款）----
+    cb_py = os.path.join(_HERE, "check_chart_colorblind.py")
+    try:
+        r = subprocess.run([sys.executable, cb_py, "--gate"], capture_output=True, text=True, timeout=120)
+    except Exception as e:
+        fail("色盲安全门禁执行异常（第 29 槽·crash 即拦）: %s" % e)
+    else:
+        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
+        if r.returncode != 0:
+            fail("色盲安全基线外违规（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+        elif "---- 第 29 门禁 色盲安全：" not in r.stdout:
+            fail("色盲安全门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
+        else:
+            ok("色盲安全门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
+
+
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:
         try:
