@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W654），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W655），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.255（2026-10-04）：W655 B-9② D3 字面色值→CSS 变量 — 405 处 var 化（46 页·attr→style 230+style→var 175）+ 暗块补 chart 系列暗值 4 行（对齐 accent 暗值零新色）+ 全量暗色审计
+> **来源**：全量启动队列第四批（依赖序：PD-5 design-tokens.json 真值已就位·PD-1 触页批已错批）——B-9② 按 registry 登记「D3 字面色值改读 CSS 变量·删暗色 fill 硬编码映射」执行。
+> - **转换**：405 处 var 化（attr→style 230 + style 字面量→var 175·触及 46 页）——赋值语境（.attr/.style 的 fill/stroke/color）精确匹配 design-tokens light 值（大小写不敏感）→ var(--token)；chart-N 同值令牌优先用于 fill/stroke（系列语义）·color 语境用语义令牌（accent/ink）。**attr→style 转换为必要形态**：SVG 表现属性不支持 var() 替换——这正是 140 条属性选择器映射存在的历史根因。
+> - **暗块补系列暗值 4 行**：--chart-1 #E0604F/--chart-2 #7FA8C9/--chart-4 #9DB98A/--chart-6 #C9A96B（全部对齐既有 accent 系暗值·零新色发明·W587 亮度规则核算 chart-2 L=0.133 需提亮/chart-1 0.170 与 chart-6 0.167 边界一并对齐）；chart-3/5 亮度可读（0.385/0.629）继承不覆写。
+> - **映射清理实况（如实）**：140 条属性选择器映射本轮删除 0 条——余下映射的 literal 仍以运行时形态存在（colorMap/EMBEDDED 驱动的属性赋值·删则破坏那些图的暗色渲染）；其退场路径=相关页色板 token 化（B-5/B-6 后续批）·非本批一刀切。
+> - **暗色审计**：86 页×4 态全量（_audit_render_states·W584 并行化）——invisible/lowContrast/缺陷页 0（var 化+暗值对齐后三态零回归）。
+> - **验证**：ruff 0 错；色盲门禁基线外 0（存量 17428→17417·转换消解 11 对·var 解析路径语义不变）；drift/第 26-30 门禁全过；verify_delivery 核心全绿；CSP 重生成 0 漂移；inline_css --force 327 页重分发。
+> - **文件**：site/tokens.css（暗块+4）、site/data 46 页（var 化）、scripts/output/design-tokens.json 与 docs/00-导读/design.md（97 键重导出）、scripts/output/_w655_literal_to_var.py（转换脚本存档）、六文档、四页脚、CITATION、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 
 ### v2.3.254（2026-10-03）：W654 PD-1b 图表选型章与降级门禁 — DESIGN.md §4B 九族 45 格（并行会话实现·本批接续收尾）+ check_chart_degrade 挂第 30 槽（86 页 chart-degrade 声明全落）+ check_chart_data R3/spec-check/自检 6 例 + R3 力导向签名补自定义力布局 + B-5 聚合器与 entities 两 JSON 同批入账
 > **来源**：全量启动队列第三批（依赖序：PD-5 真值→PD-1a 色盲门禁已就位）——PD-1b 按适用性方案 §3 执行；并行会话已完成 §4B 选型章与 check_chart_data 主体（未提交·本批接续收尾并同批入账，跨批协作二次实践）。

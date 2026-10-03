@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-R3vqh9UrtHbE4+B7VvYL67t1ereK7KKickOUdz4mBZ8=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-KblrNei72xt8H6u+NIS1EacIGmAHbXGTDwfIt7+y2Do=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>商业模型 · 详解西游记</title>
@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -211,6 +211,10 @@ html[data-theme="dark"] {
     --accent-2: #7FA8C9;
     --accent-3: #C9A96B;
     --accent-4: #9DB98A;
+    --chart-1: #E0604F;
+    --chart-2: #7FA8C9;
+    --chart-4: #9DB98A;
+    --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
     --danger: #D96C5C;
@@ -2354,7 +2358,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('y', d => y(d.value) - 4)
             .attr('text-anchor', 'middle')
             .style('font-size', '10px')
-            .style('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .style('font-weight', '600')
             .text(d => d.value);
     }
@@ -2431,11 +2435,11 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         g.append('rect')
             .attr('x', tx - 35).attr('y', -10)
             .attr('width', 70).attr('height', h + 20)
-            .attr('fill', '#e9b885').attr('opacity', 0.2);
+            .style('fill', 'var(accent-soft)').attr('opacity', 0.2);
         g.append('text')
             .attr('x', tx).attr('y', -16)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#C9A063')
+            .style('fill', 'var(chart-3)')
             .style('font-size', '11px').style('font-weight', '600')
             .text('▼ U 型谷底');
 
@@ -2443,7 +2447,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const line = d3.line().x(d => x(d.name)).y(d => y(d.satisfaction)).curve(d3.curveMonotoneX);
         g.append('path').datum(stages)
             .attr('fill', 'none')
-            .attr('stroke', '#3a6b8c')
+            .style('stroke', 'var(chart-2)')
             .attr('stroke-width', 2.5)
             .attr('d', line);
 
@@ -2452,7 +2456,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .data(stages).enter().append('circle')
             .attr('class', 'pt-career')
             .attr('cx', d => x(d.name)).attr('cy', d => y(d.satisfaction))
-            .attr('r', 7).attr('fill', '#3a6b8c').attr('stroke', '#fff').attr('stroke-width', 2)
+            .attr('r', 7).style('fill', 'var(chart-2)').attr('stroke', '#fff').attr('stroke-width', 2)
             .style('cursor', 'pointer')
             .on('mouseover', (e, d) => {
                 tooltip.show(
@@ -2474,7 +2478,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('text-anchor', 'middle')
             .style('font-size', '10px')
             .style('font-weight', '600')
-            .attr('fill', '#c8463a')
+            .style('fill', 'var(chart-1)')
             .text(d => d.career_level.split('·')[0]);
 
         // satisfaction 数值
@@ -2486,7 +2490,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('text-anchor', 'middle')
             .style('font-size', '11px')
             .style('font-weight', '600')
-            .attr('fill', '#3a6b8c')
+            .style('fill', 'var(chart-2)')
             .text(d => d.satisfaction);
     }
 
@@ -2543,11 +2547,11 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         g.append('rect')
             .attr('x', jumpStart).attr('y', 0)
             .attr('width', jumpEnd - jumpStart).attr('height', h)
-            .attr('fill', '#e9b885').attr('opacity', 0.18);
+            .style('fill', 'var(accent-soft)').attr('opacity', 0.18);
         g.append('text')
             .attr('x', (jumpStart + jumpEnd) / 2).attr('y', 16)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#C9A063')
+            .style('fill', 'var(chart-3)')
             .style('font-size', '11px').style('font-weight', '600')
             .text('◀ 期权兑现跳跃 L3→L9 ▶');
 
@@ -2558,7 +2562,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .curve(d3.curveStepAfter);
         g.append('path').datum(stages)
             .attr('fill', 'none')
-            .attr('stroke', '#c8463a')
+            .style('stroke', 'var(chart-1)')
             .attr('stroke-width', 3)
             .attr('d', line);
 
@@ -2568,7 +2572,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('class', 'pt-stair')
             .attr('cx', (d, i) => x(labels[i]))
             .attr('cy', (d, i) => y(levels[i]))
-            .attr('r', 7).attr('fill', '#c8463a').attr('stroke', '#fff').attr('stroke-width', 2)
+            .attr('r', 7).style('fill', 'var(chart-1)').attr('stroke', '#fff').attr('stroke-width', 2)
             .style('cursor', 'pointer')
             .on('mouseover', (e, d) => {
                 const lvl = parseInt(d.career_level.match(/L(\d+)/)[1]);
@@ -2590,7 +2594,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('text-anchor', 'middle')
             .style('font-size', '12px')
             .style('font-weight', '700')
-            .attr('fill', '#c8463a')
+            .style('fill', 'var(chart-1)')
             .text((d, i) => 'L' + levels[i]);
     }
 
@@ -2701,7 +2705,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('text-anchor', d => (d.endAngle + d.startAngle) / 2 > Math.PI ? 'end' : 'start')
             .style('font-size', '11px')
             .style('font-weight', '600')
-            .attr('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text(d => d.data.key);
 
         // 中心文字
@@ -2710,13 +2714,13 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('dy', -8)
             .style('font-size', '22px')
             .style('font-weight', '700')
-            .attr('fill', '#c8463a')
+            .style('fill', 'var(chart-1)')
             .text('100%');
         g.append('text')
             .attr('text-anchor', 'middle')
             .attr('dy', 16)
             .style('font-size', '12px')
-            .attr('fill', '#6B6455')
+            .style('fill', 'var(ink-soft)')
             .text('IPO 失败率');
     }
 
@@ -2797,7 +2801,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('text-anchor', 'middle')
             .style('font-size', '13px')
             .style('font-weight', '700')
-            .attr('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text(d => MONSTER_REVENUE_SCORE[d.company_name]);
     }
 

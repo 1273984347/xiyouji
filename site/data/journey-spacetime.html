@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-+3cVYH4qACMP+kxZpWNkFgj6hRbv1HKi3IdvFHoXXd4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-LQCvPGfFQ21ohQ8eUpu7NCEwHG9ztypnKM+rmLXrq9k=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经路线时空双轴可视化 · 详解西游记</title>
@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -211,6 +211,10 @@ html[data-theme="dark"] {
     --accent-2: #7FA8C9;
     --accent-3: #C9A96B;
     --accent-4: #9DB98A;
+    --chart-1: #E0604F;
+    --chart-2: #7FA8C9;
+    --chart-4: #9DB98A;
+    --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
     --danger: #D96C5C;
@@ -1742,7 +1746,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             .attr("x", -4)
             // W621：补 fill 属性——标记原为 CSS 类上色，暗色映射（属性精确匹配）打不中；
             // 挂属性后暗色由 tokens #3a6b8c→#7d99a9 映射接管，浅色仍由类规则着色零变化
-            .attr("fill", "#3A6B8C");
+            .style("fill", "var(chart-2)");
         function showAxisHover(ch) {
             const x = xScale(ch);
             axisHoverLine.attr("x1", x).attr("x2", x).style("opacity", 0.8);
@@ -1768,12 +1772,12 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             .call(d3.axisBottom(xScale).ticks(20).tickFormat(d => `第${d}回`))
             .selectAll("text")
             .style("font-size", "0.7rem")
-            .style("fill", "#6B6455");
+            .style("fill", "var(ink-soft)");
 
         g.append("text")
             .attr("x", innerW / 2).attr("y", innerH + 44)
             .attr("text-anchor", "middle")
-            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .style("font-size", "0.85rem").style("fill", "var(chart-3)")
             .text("回目（时间轴）");
 
         // Y 轴
@@ -1781,13 +1785,13 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             .call(d3.axisLeft(yScale))
             .selectAll("text")
             .style("font-size", "0.78rem")
-            .style("fill", "#23201A");
+            .style("fill", "var(ink)");
 
         g.append("text")
             .attr("x", -innerH / 2).attr("y", -72)
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .style("font-size", "0.85rem").style("fill", "var(chart-3)")
             .text("地理位置（长安 → 灵山）");
 
         // 网格线
@@ -1806,7 +1810,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         g.append("line")
             .attr("x1", xScale(maxChapter)).attr("x2", xScale(maxChapter))
             .attr("y1", 0).attr("y2", innerH)
-            .attr("stroke", "#c8463a")
+            .style("stroke", "var(chart-1)")
             .attr("stroke-width", 2)
             .attr("stroke-dasharray", "5,3")
             .attr("opacity", 0.7);
@@ -1817,7 +1821,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             .attr("text-anchor", "middle")
             .style("font-size", "0.78rem")
             .style("font-weight", "600")
-            .style("fill", "#c8463a")
+            .style("fill", "var(chart-1)")
             .text(`第 ${maxChapter} 回`);
 
         // 取经轨迹连线（按事件顺序连接，过滤掉超过当前回目的）
@@ -1830,7 +1834,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             g.append("path")
                 .datum(visibleEvents)
                 .attr("fill", "none")
-                .attr("stroke", "#e9b885")
+                .style("stroke", "var(accent-soft)")
                 .attr("stroke-width", 1.5)
                 .attr("stroke-opacity", 0.6)
                 .attr("d", line);
@@ -1875,7 +1879,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             .attr("stroke", "#fff")
             .attr("stroke-width", 1.5)
             .on("mouseover", function(event, d) {
-                d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2);
+                d3.select(this).style("stroke", "var(ink)").attr("stroke-width", 2);
                 showAxisHover(d.ch);
                 updateChapterCorner(d.ch);
                 tip.style("opacity", 1)

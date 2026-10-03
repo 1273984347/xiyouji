@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-JWLi7ttEGNBfSQEgHaV6YOrksD1eCGAqozyJyuef+DA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-69W1sKd8R9LVaZJZn3coaB+ArTGkwfcp2GnN5R2D3DA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>八十一难难度热力图 · 详解西游记</title>
@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -211,6 +211,10 @@ html[data-theme="dark"] {
     --accent-2: #7FA8C9;
     --accent-3: #C9A96B;
     --accent-4: #9DB98A;
+    --chart-1: #E0604F;
+    --chart-2: #7FA8C9;
+    --chart-4: #9DB98A;
+    --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
     --danger: #D96C5C;
@@ -1626,26 +1630,26 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .call(d3.axisBottom(xScale).tickValues(xTicks).tickFormat(d => d === 0 ? "前传" : `第${d}回`))
             .selectAll("text")
             .style("font-size", "0.72rem")
-            .style("fill", "#6B6455");
+            .style("fill", "var(ink-soft)");
 
         g.append("g")
             .call(d3.axisLeft(yScale).ticks(10))
             .selectAll("text")
             .style("font-size", "0.78rem")
-            .style("fill", "#6B6455");
+            .style("fill", "var(ink-soft)");
 
         // 轴标题
         g.append("text")
             .attr("x", innerW / 2).attr("y", innerH + 40)
             .attr("text-anchor", "middle")
-            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .style("font-size", "0.85rem").style("fill", "var(chart-3)")
             .text("回目");
 
         g.append("text")
             .attr("x", -innerH / 2).attr("y", -38)
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .style("font-size", "0.85rem").style("fill", "var(chart-3)")
             .text("难度系数（1-10）");
 
         // 同一回目多个难时，按难度堆叠偏移
@@ -1670,7 +1674,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                     .attr("stroke-width", 1)
                     .style("opacity", 0)
                     .on("mouseover", function(event) {
-                        d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2);
+                        d3.select(this).style("stroke", "var(ink)").attr("stroke-width", 2);
         tip.classed("visible", true)
                             .html(`<div class="tip-title">第 ${d.n} 难 · ${d.name}</div>
                                 <div class="tip-row">回目：${d.chapter}</div>
@@ -1736,10 +1740,10 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
         g.append("g").attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(x))
-            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(ink-soft)");
 
         g.append("g").call(d3.axisLeft(y).ticks(5))
-            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6B6455");
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "var(ink-soft)");
 
         const tip = d3.select("#stage-bar-tip");
         g.selectAll("rect.bar")
@@ -1784,7 +1788,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("text-anchor", "middle")
             .style("font-size", "0.82rem")
             .style("font-weight", "600")
-            .style("fill", "#c8463a")
+            .style("fill", "var(chart-1)")
             .style("opacity", 0)
             .text(d => d.avg)
             .transition()
@@ -1827,16 +1831,16 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
         g.append("g").attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(x))
-            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(ink-soft)");
 
         g.append("text")
             .attr("x", innerW / 2).attr("y", innerH + 38)
             .attr("text-anchor", "middle")
-            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .style("font-size", "0.85rem").style("fill", "var(chart-3)")
             .text("难度系数");
 
         g.append("g").call(d3.axisLeft(y).ticks(4))
-            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6B6455");
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "var(ink-soft)");
 
         const tip = d3.select("#cause-bar-tip");
         const layers = g.selectAll("g.layer")

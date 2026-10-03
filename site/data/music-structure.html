@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-SLLRITUbEo6O8a+3FCvUiGuWNNftbCHVl6KoPCrEKMo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-AwqO3ku9/BOWq5lQdYmpaMhaVDmjLOkTbSos2H065Uc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>音乐声效与章回节奏 · 详解西游记</title>
@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -211,6 +211,10 @@ html[data-theme="dark"] {
     --accent-2: #7FA8C9;
     --accent-3: #C9A96B;
     --accent-4: #9DB98A;
+    --chart-1: #E0604F;
+    --chart-2: #7FA8C9;
+    --chart-4: #9DB98A;
+    --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
     --danger: #D96C5C;
@@ -1813,18 +1817,18 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .call(d3.axisBottom(x)
                 .tickValues([1, 12, 22, 32, 42, 52, 62, 72, 82, 92, 100])
                 .tickFormat(d => d + "回").tickSize(5).tickSizeOuter(0))
-            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6B6455");
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "var(ink-soft)");
         // Y 轴
         g.append("g")
             .call(d3.axisLeft(y).tickValues([1, 2, 3, 4, 5]).tickSize(5).tickSizeOuter(0))
-            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6B6455");
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "var(ink-soft)");
 
         // 轴标题
         g.append("text").attr("x", iw / 2).attr("y", ih + 38).attr("text-anchor", "middle")
-            .style("font-size", "0.8rem").style("fill", "#6B6455").text("回目");
+            .style("font-size", "0.8rem").style("fill", "var(ink-soft)").text("回目");
         g.append("text").attr("transform", "rotate(-90)")
             .attr("x", -ih / 2).attr("y", -34).attr("text-anchor", "middle")
-            .style("font-size", "0.8rem").style("fill", "#6B6455").text("节奏强度 rhythm");
+            .style("font-size", "0.8rem").style("fill", "var(ink-soft)").text("节奏强度 rhythm");
 
         // 分段折线
         const line = d3.line()
@@ -1932,7 +1936,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             }
             // 下方回目区间
             g.append("text").attr("x", (x0 + x1) / 2).attr("y", 98)
-                .attr("text-anchor", "middle").style("fill", "#6B6455")
+                .attr("text-anchor", "middle").style("fill", "var(ink-soft)")
                 .style("font-size", "0.74rem").style("font-family", "JetBrains Mono, monospace")
                 .text(mv.chapters);
         });
@@ -1984,7 +1988,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr("stroke", "#e6dcc6").attr("stroke-dasharray", "2 3")
                 .attr("stroke-width", 0.7).attr("shape-rendering", "crispEdges");
             g.append("text").attr("x", x(v)).attr("y", innerH + 14)
-                .attr("text-anchor", "middle").style("fill", "#6B6455")
+                .attr("text-anchor", "middle").style("fill", "var(ink-soft)")
                 .style("font-size", "0.7rem").style("font-family", "JetBrains Mono, monospace")
                 .text(v);
         });
@@ -2008,7 +2012,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             } else {
                 g.append("text").attr("x", -12).attr("y", yPos + rowH / 2)
                     .attr("dy", "0.35em").attr("text-anchor", "end")
-                    .style("fill", "#23201A").style("font-size", "0.82rem")
+                    .style("fill", "var(ink)").style("font-size", "0.82rem")
                     .text(r.name);
                 g.append("text").attr("x", -12).attr("y", yPos + rowH / 2 + 12)
                     .attr("dy", "0.35em").attr("text-anchor", "end")
@@ -2051,7 +2055,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
         // X 轴标题
         g.append("text").attr("x", iw / 2).attr("y", innerH + 14).attr("dy", "1.5em")
-            .attr("text-anchor", "middle").style("fill", "#6B6455")
+            .attr("text-anchor", "middle").style("fill", "var(ink-soft)")
             .style("font-size", "0.8rem").text("强度 intensity（1–10）");
 
         // 图例

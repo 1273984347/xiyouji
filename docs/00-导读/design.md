@@ -8,7 +8,7 @@
 > 再生成即覆盖。对账门禁 `check_design_doc_drift.py` 校验本文档 ↔ CSS 双向一致（PD-5·AC-2）。
 > 本文件不含生成日期等易变字段——保证「再生成逐字节一致」的反篡改比对（PD-5 检查 1）可长期成立。
 
-覆盖声明总数 **93**（light 69 / dark 24 / 其他 0）·来源节 4 个。修改令牌请改 `site/tokens.css` 后重跑导出。
+覆盖声明总数 **97**（light 69 / dark 28 / 其他 0）·来源节 4 个。修改令牌请改 `site/tokens.css` 后重跑导出。
 
 ## Light 主题（:root）
 
@@ -98,7 +98,7 @@
 
 ## Dark 主题（html[data-theme="dark"]·夜读模式）
 
-### 夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载（24）
+### 夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载（28）
 
 | 令牌 | 值 | 说明 |
 |---|---|---|
@@ -117,6 +117,10 @@
 | `--accent-2` | `#7FA8C9` |  |
 | `--accent-3` | `#C9A96B` |  |
 | `--accent-4` | `#9DB98A` |  |
+| `--chart-1` | `#E0604F` |  |
+| `--chart-2` | `#7FA8C9` |  |
+| `--chart-4` | `#9DB98A` |  |
+| `--chart-6` | `#C9A96B` |  |
 | `--ok` | `#8FBF7F` |  |
 | `--warn` | `#D0A35C` |  |
 | `--danger` | `#D96C5C` |  |

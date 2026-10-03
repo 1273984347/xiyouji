@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-hUH/x8S7/wshZkAwFHvuKaCsxFvXlID2aKQYWOt5d5o=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-TjtGJj4L9NoqDmZ4o8DB7bhcvA4aaaCAb7kLNG4VYk4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>引语情感分析 · 详解西游记</title>
@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -211,6 +211,10 @@ html[data-theme="dark"] {
     --accent-2: #7FA8C9;
     --accent-3: #C9A96B;
     --accent-4: #9DB98A;
+    --chart-1: #E0604F;
+    --chart-2: #7FA8C9;
+    --chart-4: #9DB98A;
+    --chart-6: #C9A96B;
     --ok: #8FBF7F;
     --warn: #D0A35C;
     --danger: #D96C5C;
@@ -6605,7 +6609,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('dy', '-0.3em')
             .attr('font-size', '14px')
             .attr('fill', 'var(--ink-soft)')
-            .attr('fill', '#6B6455')
+            .style('fill', 'var(ink-soft)')
             .text('总引语');
 
         g.append('text')
@@ -6613,7 +6617,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('dy', '1em')
             .attr('font-size', '20px')
             .attr('font-weight', '600')
-            .attr('fill', '#23201A')
+            .style('fill', 'var(ink)')
             .text(total);
 
         // Legend
@@ -6769,7 +6773,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         g.append('line')
             .attr('x1', 0).attr('x2', w)
             .attr('y1', y(0)).attr('y2', y(0))
-            .attr('stroke', '#6B6455')
+            .style('stroke', 'var(ink-soft)')
             .attr('stroke-width', 1.5)
             .attr('stroke-dasharray', '6,4');
 
@@ -6778,7 +6782,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('y', y(0))
             .attr('dy', '0.3em')
             .attr('font-size', '10px')
-            .attr('fill', '#6B6455')
+            .style('fill', 'var(ink-soft)')
             .text('y=0');
 
         // Axes
@@ -6898,7 +6902,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                     .attr('fill', cellColor)
                     .style('cursor', 'pointer')
                     .on('mouseover', function(event) {
-                        d3.select(this).attr('stroke', '#23201A').attr('stroke-width', 1.5);
+                        d3.select(this).style('stroke', 'var(ink)').attr('stroke-width', 1.5);
                         if (ch.count > 0) {
                             tooltip.show(
                                 `<strong>${sp.speaker}</strong> · 第 ${ch.chapter} 回<br/>avg_sentiment = ${ch.avg_sentiment.toFixed(4)}<br/>引语数：${ch.count}`,
@@ -6973,7 +6977,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('y', legendH + 12)
             .attr('text-anchor', 'middle')
             .attr('font-size', '10px')
-            .attr('fill', '#6B6455')
+            .style('fill', 'var(ink-soft)')
             .text(d => d);
 
         legendG.append('text')
@@ -6981,7 +6985,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('y', -4)
             .attr('text-anchor', 'middle')
             .attr('font-size', '10px')
-            .attr('fill', '#6B6455')
+            .style('fill', 'var(ink-soft)')
             .text('avg_sentiment');
     }
 
