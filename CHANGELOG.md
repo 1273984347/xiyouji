@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W651），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W652），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.252（2026-10-03）：W652 PD-5 设计令牌机器可读导出 + 文档对账门禁 — design-tokens.json（93 键·DTCG 简化·B-9② 前置真值）+ docs/00-导读/design.md（机器生成）+ check_design_doc_drift 五层检查挂 verify + DESIGN.md §2.1 六处值漂移同步
+> **来源**：全量启动队列第一批（依赖序首位·纯只读不改页·先于 B-9② 色值→变量拿真值）——PD-5 按适用性方案 §3 详规与 §10.1 批复（D-4 落 docs/00-导读·D-5 只 site/data）执行。
+> - **导出器**：scripts/export_design_tokens.py 解析 site/tokens.css（按「;」切分声明·一行多声明兼容·尾注释捕获为 $description·选择器推断主题 :root=light/html[data-theme=dark]=dark·节注释为 group）→ scripts/output/design-tokens.json（W3C DTCG 简化：93 键=声明 93·light 69/dark 24·$value/$type/$description+group/line）+ docs/00-导读/design.md（按主题/节分表·D-4 裁决落位）。--check-count=AC-1（93==93 PASS）。
+> - **对账门禁**：check_design_doc_drift.py 五层全机判——①反篡改（design.md 再生成逐字节比对·文档不含生成日期等易变字段保证长期成立）②覆盖（CSS 声明在 design.md 全记载==0 缺）③虚构（design.md 与 DESIGN.md §2 令牌名必须在 CSS ∪ 站点页面本地声明中存在·W610 先例·页面本地 95 名按 AC-2 白名单条款放行）④值同步（DESIGN.md §2 手写表 light 值↔CSS 主题感知比对）⑤暗色计数（JSON dark==CSS dark）。挂 verify_delivery（无编号·wrapper 防静默跳过与第 28 门禁同款：crash 即拦+汇总行校验）。
+> - **首跑实证并已同步**：DESIGN.md §2.1 六处值漂移（--ink #2c2418→#23201A·--ink-soft #6b5e4d→#6B6455·--accent-3 #7a5230→#8A6D3B·--accent-4 #5a7a3a→#6B8E5A·--line #d9cdb8→#E5DFD0·--shadow 旧 rgba(60,40,20)→现行 rgba(35,32,26)+--bg 大小写统一）——正是「源-副本一致性缺口族」活样本（W577 P1 根因同类）；§2.2 的 15 个 badge/focus/cross-table 令牌为 dashboard.html 页面本地定义（非虚构·白名单放行）。
+> - **AC-4/AC-5**：design-tokens.json json.tool 有效；check_inlined_css 224 页完整+generate_csp 0 漂移（只读批零变化实证）。
+> - **验证**：ruff 三脚本 0 错；AC-1…AC-5 全过；verify_delivery 核心全绿（新门禁含汇总行校验实测）；级联 dry-run→apply 10 面断言过。
+> - **文件**：scripts/export_design_tokens.py、scripts/check_design_doc_drift.py、scripts/verify_delivery.py（挂载）、scripts/output/design-tokens.json、docs/00-导读/design.md（均新增）、DESIGN.md（§2.1 同步）、scripts/output/_cascade_files_W652.txt、六文档、四页脚、CITATION、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 
 ### v2.3.251（2026-10-03）：W651 全量启动裁决入档 — B-5/B-6 第二步/B-7/B-9①②/WP-D2/WP-E 六项启动（用户「全部启动」·排除 Docker 验证与 B 轨《装饰》投稿）+ PD 档 D-1…D-7 批复 + Traffic API 快照机制首采 + master plan/交接陈旧状态修正
 > **来源**：用户盘点「记录了但没做」全清单后裁决「全部启动·不做 Docker 和 B 轨《装饰》投稿」——本批为启动裁决入档+快速项落地，工程批次按依赖序随后展开（PD-5→PD-1→B-9②→B-9①→B-6 第二步→B-5→B-7→WP-D2→WP-E）。
