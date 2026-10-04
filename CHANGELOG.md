@@ -4,13 +4,25 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W658），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W663），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.259（2026-10-05）：W663 治理经验移植批 — W 批次编号对账表 + doc-sync 口径体检第 31 门禁 + verify 段计数自洽锁 + CI 加固 61 处 SHA 钉（含 W659-W660 追记合并登记·D1 裁决）
+> **来源**：W659-W663 三批合并登记（D1 裁决·追记于 W663——w659/w660 提交先于版段落库、CHANGELOG 曾 0 登记的现状经 W663/T1 对账表可见化，本段一次性补录）；W663 为 GateKeeper / 绿洲共享田园 / 千问办公大赛三仓治理评阅的反向移植批（方案 docs/superpowers/plans/2026-10-05-governance-experience-transplant-plan.md·D1-D3 经用户 2026-10-05 裁决）。
+> - **W659（d733e1a）**：WP-D2 阅读器扩量启动规划批——实施蓝图入档（六板块映射 + 520 篇实测 + 链接形态普查定稿 + 实现批拆分 W660/W661/W662·验收机判表）。
+> - **W660（a8c0e47 + 288b0cb + fc14592）**：WP-D2 阅读器扩量实现——520 篇 reader 页落地（02-06 五板块·build_reader 多板块映射驱动）+ sitemap 850 条 + lastmod UTC 跨日修正 + 工作复盘与优化分析报告入库（W648-W660 全周期）。
+> - **W663/T1（b1aafb0 立项 + 5b6d410）**：docs/00-导读/W批次编号对账表.md（W648-W663 全行 hash 实证·并发认领规则三句·下一自由号标尺）+ 交接「八」雷区索引化 13 行 + 新增条目「验证：」字段纪律（权威源文档规范 §11.5）+ AGENTS §4.3 / CHANGELOG 契约④ 锚点。
+> - **W663/T2（16ededf）**：doc-sync 文档口径体检挂**第 31 门禁**（scripts/check_doc_sync.py·四类窄句式反向对拍——C1 README 抬头 / C2 交接头链 / C3 门禁清单上限 / C4 近 15 提交 W 号 ⊆ 版段 ∪ 对账表登记（D2：登记即豁免）；行级 exempt 标记·浅克隆跳过 C4·--self-test 7 例）；首跑捕获 C3 一处（AGENTS §4.2 清单止于 28 vs 实况 30）修复至 0 FAIL 并补录 §4.2 第 29/30/31 条目；留证 scripts/output/doc-sync-first-run.md。
+> - **W663/T3（763ea94 + e6d9f59）**：verify_delivery 门禁段计数自洽锁 VERIFY_SECTIONS——EXPECTED_SECTION_NAMES 36 项 + 每段 section() 上报 + 收尾缺段断言（负样本实测：注释任一上报行必红并逐名点名）；坑 #14 入册（恢复备份吞噬改动·cmp 须对改动后快照）。
+> - **W663/T4（b14b64b）**：CI 加固——5 个 workflow 61 处 uses 改 commit SHA 钉（git ls-remote 实测·「@SHA # vN」注释式·改写器 _w663_t4_shapin.py 复核 0 残留）+ 顶层 permissions: contents: read 收敛 4 文件（CodeQL job 级提权保留）+ security.yml 补 workflow_dispatch。
+> - **验证**：verify_delivery 核心全绿（36 段自洽锁 + 31 槽）；check_doc_sync --check 0 FAIL / --self-test 7/7；ruff 0 错；workflow YAML safe_load 5/5；SHA 钉残留复核 0；负样本两组（自洽锁缺段 / doc-sync 改值）实测必红、恢复必绿。
+> - **文件**：docs/superpowers/plans/2026-10-05-governance-experience-transplant-plan.md（新增）、docs/00-导读/W批次编号对账表.md（新增）、scripts/check_doc_sync.py（新增·常驻）、scripts/verify_delivery.py（第 31 槽 + 自洽锁）、scripts/output/doc-sync-first-run.md（新增留证）、scripts/output/_w663_t3_inject.py 与 _w663_t4_shapin.py（工具存档）、.github/workflows/ 5 yml、六文档、四页脚、CITATION、file-index。
+> - **状态**：已落地（本批提交并 push origin/main·CI 实跑见 gh run list）。
 
 ### v2.3.258（2026-10-04）：W658 B-7 分析方法 pip 包 0.1.0 — xiyouji-analysis（32 自包含脚本+CLI list/run/run-all+同步机制）venv 全链路冒烟 + setuptools build 缓存混包抓取
 > **来源**：全量启动队列第八批——B-7 按 registry 启动注记（「解耦与打包开工」）执行；解耦担忧经普查大幅收窄：37 个分析脚本仅 5 个耦合仓库语料（utils/+source//dataset/·jieba），32 个自包含纯 stdlib——**0.1.0 正确边界=只收 32 个零修改入包**，5 个排除登记（参数化留 0.2）。

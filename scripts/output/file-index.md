@@ -11,6 +11,20 @@
 ---
 
 
+## W663 治理经验移植批（2026-10-05·v2.3.259）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/superpowers/plans/2026-10-05-governance-experience-transplant-plan.md | W663 | 新增·三仓治理经验移植方案（现状盘点/不移植表/T1-T4·D1-D3 裁决） |
+| docs/00-导读/W批次编号对账表.md | W663 | 新增·并发认领对账唯一依据（W648-W663 hash 实证·递延豁免通道 D2） |
+| scripts/check_doc_sync.py | W663 | 新增·第 31 门禁文档口径体检（四类窄句式·--self-test 7 例） |
+| scripts/verify_delivery.py | W663 | 更新·挂第 31 槽 + VERIFY_SECTIONS 自洽锁（36 段缺段即红） |
+| scripts/output/doc-sync-first-run.md | W663 | 新增·doc-sync 首跑捕获留证（C3 一处·修复后 0 FAIL） |
+| scripts/output/_w663_t3_inject.py | W663 | 新增·自洽锁注入器（幂等守卫） |
+| scripts/output/_w663_t4_shapin.py | W663 | 新增·workflow SHA 钉改写器（ls-remote 实取·残留复核） |
+| .github/workflows/*.yml ×5 | W663 | 更新·61 处 uses SHA 钉 + 顶层 permissions 收敛 + security dispatch |
+| 交接文档.md / AGENTS.md / docs/00-导读/文档规范.md | W663 | 更新·雷区索引 13 行 + 坑 #14 + §4.2 门禁清单 29/30/31 + 契约锚点 |
+
 ## W658 W658 B分析方法 pip 包 0.1.0（2026-10-04·v2.3.258）
 
 | 文件 | W | 说明 |
