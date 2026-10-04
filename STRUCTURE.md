@@ -18,6 +18,7 @@
 | `tools/` | 辅助工具脚本（章节切分等） |
 | `xiyouji-agent-web/` | Web Agent「西游记·渡口问津」·CodeBuddy Agent SDK·`PROJECT_CWD`=仓库根（自动解析）直接对话/检索 docs/ + 跑 scripts/ + 写 dataset/·凭证 `CODEBUDDY_API_KEY`（与 scripts/rag 档B 检索式生成并行·详见其 README） |
 | `README.md` | 项目说明 |
+| `CLAUDE.md` | AI 速查层（宿主自动加载·一行规则+权威指针·禁写会漂移的数字与现役值·W664） |
 | `STRUCTURE.md` | 本文件 |
 | `CHANGELOG.md` | 更新日志 |
 | `LICENSE` | 版权声明 |
