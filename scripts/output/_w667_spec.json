@@ -1,0 +1,21 @@
+{
+  "batch": "W667",
+  "version": "v2.3.263",
+  "date": "2026-10-05",
+  "desc": "复盘三卡防漂移落地",
+  "title": "W667 复盘三卡防漂移落地 — batch_cascade 预校验 + CLAUDE.md 指针门禁第 32 槽 + doc-sync 扩面评估",
+  "head_entry": "2026-10-05（v2.3.263 W667）复盘三卡全部落地：S-01 batch_cascade spec 预校验（desc/head_sentence 字段级分隔符黑名单+title 领衔断言·历史回放 W663 拦截两处肇因字段而 W664/W666 通过）+ S-02 check_claude_md.py 挂第 32 门禁（指针存在性/锚点对拍/行数≤60/正文禁漂移值·self-test 7/7·自洽锁实战抓漏补挂 section 上报 37/37）+ S-03 扩面评估报告（近 10 批漂移 10/10 已有防线·不扩面·§4.9 前置纪律句替代）",
+  "head_sentence": "复盘三卡防漂移落地",
+  "changelog_body": "\n> **来源**：用户「全部做完」拍板启动复盘报告 §3.3 三张 skill-creator 任务卡（W667 认领）。\n> - **S-01 batch_cascade 预校验**：precheck() 在 dry-run 断言前拦截「能落盘但破坏下一批锚点正则」的 spec——desc 禁 ·；—（写入版本行）、head_sentence 禁 ；—（·实证无害·全角括号既有断言管）、title 须以 batch 领衔；**历史回放校准**：W663 spec 拦截 2 项（正是当年 W664 dry-run 失败的 desc·/head_sentence；肇因）、W664/W666 spec 预检通过。\n> - **S-02 CLAUDE.md 指针门禁（第 32 槽）**：check_claude_md.py 四查——C1 指针文件存在 / C2 章节锚点对拍（§N 标题+§N-M 条目）/ C3 行数 ≤60 / C4 正文禁漂移字面量（元信息块血缘行豁免）；--self-test 7/7（含血缘豁免正例）；AGENTS §4.2 补第 32 条目（doc-sync C3 联动·清单 32==槽位 32）；**自洽锁实战抓漏**：新槽漏挂 section 上报被 VERIFY_SECTIONS 当场点名，补挂后 37/37。\n> - **S-03 扩面评估**：近 10 批漂移实例 10/10 已有防线、裸露且高频=0 → 不扩面（白名单维持 4 类）；文档规范 §4.9 新增前置纪律句「新增当前态声明须同步纳管（白名单 or 引用式二选一）」；重开触发=下周期裸露实例 ≥1。报告 docs/superpowers/plans/2026-10-05-doc-sync-coverage-evaluation.md。\n> - **验证**：ruff 全过；verify_delivery 核心全绿（32 槽+37 段自洽锁）；三份历史 spec 回放判定全对；check_claude_md 实跑 0 FAIL。\n> - **文件**：scripts/batch_cascade.py（precheck）、scripts/check_claude_md.py（新增·常驻）、scripts/verify_delivery.py（第 32 槽+自洽锁 37）、AGENTS.md（§4.2 第 32 条目）、docs/superpowers/plans/2026-10-05-doc-sync-coverage-evaluation.md（新增）、docs/00-导读/文档规范.md（§4.9 纪律句）、docs/00-导读/W批次编号对账表.md（W667 认领+翻转）、六文档、四页脚、CITATION、file-index。\n> - **状态**：已落地（本批提交并 push origin/main）。\n",
+  "milestone_block": "- **v2.3.263 W667 复盘三卡防漂移落地**：\n  - S-01 batch_cascade 预校验（历史回放 W663 拦 2 项/W664、W666 过）\n  - S-02 CLAUDE.md 指针门禁第 32 槽（self-test 7/7·自洽锁抓漏补挂 37/37）\n  - S-03 扩面评估不扩面（10/10 已防）+ §4.9 前置纪律句\n",
+  "agents_note": "2026-10-05（v2.3.263 W667）复盘三卡防漂移落地：§4.2 补录第 32 门禁（CLAUDE.md 速查层完整性）——batch_cascade spec 预校验（历史回放校准）+ check_claude_md.py 指针/锚点/行数/禁漂移值四查（self-test 7/7·自洽锁实战抓漏）+ doc-sync 扩面评估不扩面（§4.9 前置纪律句）",
+  "file_index_rows": [
+    "| scripts/batch_cascade.py | W667 | 更新·spec 预校验 precheck（分隔符分治+title 领衔·历史回放校准） |",
+    "| scripts/check_claude_md.py | W667 | 新增·第 32 门禁 CLAUDE.md 速查层完整性（四查·self-test 7 例） |",
+    "| scripts/verify_delivery.py | W667 | 更新·挂第 32 槽+自洽锁声明 37 段 |",
+    "| docs/superpowers/plans/2026-10-05-doc-sync-coverage-evaluation.md | W667 | 新增·doc-sync 扩面评估报告（10/10 已防·不扩面） |",
+    "| AGENTS.md | W667 | 更新·§4.2 补第 32 条目 |",
+    "| docs/00-导读/文档规范.md | W667 | 更新·§4.9 前置纪律句 |",
+    "| docs/00-导读/W批次编号对账表.md | W667 | 更新·W667 认领+翻转 |"
+  ]
+}

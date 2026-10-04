@@ -11,6 +11,18 @@
 ---
 
 
+## W667 复盘三卡防漂移落地（2026-10-05·v2.3.263）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_cascade.py | W667 | 更新·spec 预校验 precheck（分隔符分治+title 领衔·历史回放校准） |
+| scripts/check_claude_md.py | W667 | 新增·第 32 门禁 CLAUDE.md 速查层完整性（四查·self-test 7 例） |
+| scripts/verify_delivery.py | W667 | 更新·挂第 32 槽+自洽锁声明 37 段 |
+| docs/superpowers/plans/2026-10-05-doc-sync-coverage-evaluation.md | W667 | 新增·doc-sync 扩面评估报告（10/10 已防·不扩面） |
+| AGENTS.md | W667 | 更新·§4.2 补第 32 条目 |
+| docs/00-导读/文档规范.md | W667 | 更新·§4.9 前置纪律句 |
+| docs/00-导读/W批次编号对账表.md | W667 | 更新·W667 认领+翻转 |
+
 ## W666 工作复盘报告入库（2026-10-05·v2.3.261）
 
 | 文件 | W | 说明 |
