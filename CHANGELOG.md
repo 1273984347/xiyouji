@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W666），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W661），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.262（2026-10-05）：W661 WP-D2 搜索索引站内化扩量 + footer-meta blob 改链收敛 + blob 预算复核（W659 蓝图预留批·含 W665 chore 版段追记）
+> **来源**：用户「开工」指令启动 W659 蓝图预留批 W661（§4 实现批拆分第三行）；W665 chore 版段随本段追记（D2 豁免通道兑现·A-02）。
+> - **搜索索引站内化**（_gen_search_index.py）：新增 02-06 五板块映射（people/themes/culture/poetry/essays）+ os.path.exists 回退——docs/02-06 515 条 kind=doc(blob)→kind=reader；docs 676 条终态 reader 615/doc 61（61=README/治理类正确回退）；site/data 与 site/en 双索引重生成（zh 234KB/en 255KB）。
+> - **footer-meta 改链**（build_reader.py ①规则）：板块内 README.md「返回本辑」blob→板块目录页 index.html；621 页全量重渲（52 页导航块变化·其余页因 CSP 重注入触达）。
+> - **blob 预算复核**：reader 全量 1428（topnav「在 GitHub 查看」源文档外链 615 为刻意源访问入口）；阅读流口径 **813 ≤1000 达标**；全量口径 1428>1000——topnav 是否计入预算属口径裁定，随批报请用户（blueprint 验收行未定义计数口径）。
+> - **CSP**：generate_csp 重注入 623 页（reader 重渲后 CSP meta 恢复+search.html 数据块哈希更新）·855 页 0 漂移。
+> - **验收机判（蓝图 §4 三条）**：黄金查询 30/30 ✓；lint_links reader 域 8818 链接 0 broken ✓；blob 阅读流 ≤1000 ✓。verify_delivery 核心全绿。
+> - **W665 追记**：chore(w665)（1650aa4·review-fix 三处）版段随本段补录——对账表 W665 行版段列同步 v2.3.262。
+> - **文件**：scripts/build_reader.py、scripts/_gen_search_index.py、site/data/search.html、site/en/search.html、site/reader/ 621 页、docs/00-导读/W批次编号对账表.md、六文档、四页脚、CITATION、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 
 ### v2.3.261（2026-10-05）：W666 工作复盘与优化分析报告（W663-W665 周期）入库 + 方法论 README 索引 28
 > **来源**：用户指令按「工作复盘与优化分析系统提示词（AI Agent 专用版）」对 W663-W665 周期出标准化复盘报告并入库（循 W660 追加批先例）。
