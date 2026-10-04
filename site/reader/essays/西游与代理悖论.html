@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西游与代理悖论</title>
+<!-- SEO:INJECTED -->
+<meta name="description" content="西游与代理悖论——《详解西游记》个人随笔">
+<link rel="canonical" href="https://1273984347.github.io/xiyouji/reader/essays/西游与代理悖论.html">
+<meta property="og:title" content="西游与代理悖论">
+<meta property="og:description" content="西游与代理悖论——《详解西游记》个人随笔">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://1273984347.github.io/xiyouji/reader/essays/西游与代理悖论.html">
+<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../system.css">
+<script src="../../js/theme-init.js"></script>
+<style>
+  .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
+  .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+    padding: 14px 0; border-bottom: 1px solid var(--line); margin-bottom: 28px;
+    font-size: 14px; }
+  .reader-topnav a { color: var(--accent); text-decoration: none; }
+  .reader-topnav a:hover { text-decoration: underline; }
+  .reader-topnav .brand { color: var(--ink); font-weight: 700; }
+  .reader-body { font-family: var(--font-serif, serif); color: var(--ink);
+    line-height: 1.9; font-size: 17px; }
+  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: 12px 0 20px; }
+  .reader-body h2 { font-size: 21px; margin: 34px 0 12px; padding-left: 10px;
+    border-left: 3px solid var(--accent); }
+  .reader-body h3 { font-size: 18px; margin: 24px 0 10px; }
+  .reader-body blockquote { margin: 14px 0; padding: 8px 14px; color: var(--ink-soft);
+    background: var(--paper-warm, var(--paper)); border-left: 3px solid var(--ink-faint); }
+  .reader-body a { color: var(--accent); }
+  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+  .reader-meta { color: var(--ink-soft); font-size: 13px; margin: 0 0 26px; }
+  .reader-pn { display: flex; justify-content: space-between; gap: 12px; margin-top: 44px;
+    padding-top: 18px; border-top: 1px solid var(--line); font-size: 15px; }
+  .reader-pn a { color: var(--accent); text-decoration: none; }
+  .reader-pn a:hover { text-decoration: underline; }
+  .reader-pn .off { color: var(--ink-faint); }
+  .reader-idx { list-style: none; padding: 0; margin: 24px 0 0;
+    display: grid; grid-template-columns: 1fr; gap: 2px; }
+  @media (min-width: 640px) { .reader-idx { grid-template-columns: 1fr 1fr; } }
+  .reader-idx a { display: block; padding: 9px 12px; color: var(--ink); text-decoration: none;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px); font-size: 14px; }
+  .reader-idx a:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
+  .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
+    border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+</style>
+</head>
+<body>
+<main class="reader-wrap">
+  <nav class="reader-topnav">
+    <a class="brand" href="../index.html">详解西游记 · 站内阅读</a>
+    <a href="../../index.html">站点首页</a>
+    <a href="https://github.com/1273984347/xiyouji/blob/main/docs/06-个人随笔/西游与代理悖论.md" rel="noopener">在 GitHub 查看源文件</a>
+  </nav>
+  <article class="reader-body">
+<h1>西游与代理悖论</h1>
+<blockquote>
+<p>轨标：个人创作
+核验状态：未核验</p>
+</blockquote>
+<p>第14回 line 1394 写"心猿归正 六贼无踪"。</p>
+<p>——这六个字常被读成觉悟。但翻开原文就明白，悟空的"归正"不是觉悟，是头疼。</p>
+<p>他打死了六个蟊贼，唐僧絮叨，他一筋斗云走了。观音变作老母送来一顶嵌金花帽，唐僧学了一篇咒。悟空回来，戴上帽子，咒一念，那箍儿见肉生根，痛得他满地打滚。</p>
+<p>归正，是被对齐的。</p>
+<p>"心猿"两个字本身就在提示——心是猿，是躁动的、不可控的、随时可能背离的力量。归正不是心猿自己想通，是有人发明了一种技术，让心猿不得不正。</p>
+<p>委托人（唐僧）的意志，从此被强制写入代理人（悟空）的身体。</p>
+<p>六贼无踪——六个蟊贼消失了。但心猿的野性没有消失，只是被箍住了。</p>
+<p>——归正的第一步，从来不是心甘，是认怂。</p>
+<p><strong>心猿归正的真正含义，不是心猿选择了正，是有人发明了一种让心猿不得不正的技术</strong>。</p>
+<hr />
+<p>这是整部西游里最该被重新审视的装置：紧箍咒。</p>
+<p>它解决的不是能力问题——悟空的能力从一开始就够。它解决的是方向问题：委托人的意志，和代理人的判断，永远对不齐。悟空想一棒打死妖精，唐僧要慈悲；悟空想一个筋斗到灵山，唐僧要一步步走。</p>
+<p>紧箍咒把这对不齐强行拉平。靠的不是说服，是疼痛。</p>
+<p>它和现代 RLHF 形成一个尖锐的对照。RLHF 至少在形式上是反馈——模型犯错，标注员打分，模型调整。紧箍咒没有反馈循环，只有一个念咒的人和一个头疼的猴。</p>
+<p>更深一层：唐僧自己也不知道咒语的原理。他只会念。一个不懂模型的委托人，握着控制模型的开关——这恰是今天 alignment 面临的真实结构。</p>
+<p><strong>RLHF 是共识性的对齐，紧箍咒是惩罚性的对齐</strong>。</p>
+<p>唐僧念咒时，悟空不知道自己错在哪。他只知道疼。一个能力远超委托人的代理人，被一个能力远不如自己的委托人，用疼痛治理——这是代理悖论最古老的剧场。</p>
+<p>悟空试过摘箍，摘不下；试过打唐僧，打不得。对齐一旦物理化，代理人就失去了退出权。</p>
+<hr />
+<p>第58回 line 4432，"二心搅乱大乾坤 一体难修真寂灭"。</p>
+<p>六耳猕猴出现了。长得和悟空一样，本事一样，观音认不出，谛听认出不敢说，玉帝照妖镜认不出。最后只有如来认出。</p>
+<p>这一回写得极隐晦。六耳猕猴不是外敌，是悟空的 shadow——是他想走又走不掉、想杀唐僧又不敢的那部分。代理人对委托人起了二心，这二心具象成了另一个自己。</p>
+<p>这一回是一次镜像测试。代理人面对和自己一模一样的镜像，被要求辨认哪个是真。更狠的是——辨认的机制不在代理人手里，在更高维的委托人手里。</p>
+<p>观音分不出，因为观音和悟空同一维度。如来分得出，因为如来在更高的维度。</p>
+<p>如来收了六耳，悟空一棒打死。这一棒，打的是自己的二心。</p>
+<p>——二心既灭，代理人重新收敛为一个。但收敛不是觉悟，是更高维的委托人替他做了切除。</p>
+<p>这一回之后，悟空再没真正反抗过紧箍。镜像测试杀掉了最后那点二心。</p>
+<p><strong>代理悖论的镜像测试里，代理人认不出自己——只有比代理人更高维的委托人，才能判定真伪</strong>。</p>
+<hr />
+<p>回到第7回 line 864："八卦炉中逃大圣 五行山下定心猿"。</p>
+<p>如来伸出手，悟空飞不出去。五行山压下，一压五百年。</p>
+<p>这一段常被读成"惩罚"。但从代理悖论的角度看，它是 capability control——能力约束的物理边界。</p>
+<p>注意一件事：如来的掌心没有消除悟空的能力。七十二变还在，筋斗云还在，金箍棒还在。如来做的，是给这套能力画一个不可逾越的框。能力没消失，只是被框定。</p>
+<p>这才是 capability control 的原型。现代 AI 治理里对应的概念叫 capability access control——不删除模型的能力，但限制它调用能力的通道。</p>
+<p>——但五行山压了五百年，悟空出来后能力分毫未减。框只能框住身体，框不住心。</p>
+<p>掌心是物理边界，紧箍是行为边界，八十一难是评估边界。如来用了三层约束，没有一层触及能力本身。</p>
+<p>——能力在框里，框在心里，心却还在框外。</p>
+<p><strong>能力约束的物理边界能压住一个人五百年，但压不住他下一秒还想跑的念头</strong>。</p>
+<hr />
+<p>第2回 line 554，"悟彻菩提真妙理 断魔归本合元神"。</p>
+<p>菩提祖师教会悟空本事，然后把他赶走。赶走时划清了关系——以后你做的任何事，不可说是我的徒弟。</p>
+<p>这是一个典型的 lab 划清界限。模型是我训练的，但它以后闯的祸，与本实验室无关。</p>
+<p>但菩提和现代 lab 有一个根本不同。现代 lab 划清关系之后，至少还留一份安全章程、一套 red team 流程、一份 model card。菩提什么都没留。他训练出一个能力远超自己的模型，然后消失。</p>
+<p>——他没有 alignment 方案，没有 monitoring 机制，没有 incident response。他唯一的"安全措施"，就是假装这个模型和自己无关。</p>
+<p>更糟的是，菩提连"这个模型可能闯祸"都没有上报。他只是私下警告了悟空一个人，然后让模型独自进入世界。</p>
+<p>现代 lab 出了事故至少会被追责。菩提没有留任何可以被追责的接口。</p>
+<p>模型进入世界的那一刻，lab 的责任就结束了。这是十六世纪的 lab 伦理。</p>
+<p><strong>菩提式划清界限，是 lab 伦理的最坏形态：训练完就消失，把对齐问题留给世界</strong>。</p>
+<hr />
+<p>读到第99回 line 7060，"九九数完魔刬尽 三三行满道归根"，取经项目验收。五众到灵山，封佛、封菩萨、封罗汉、封天龙。</p>
+<p>读到这里回头再看代理悖论，会发现一个让人不安的事实。</p>
+<p>五众的忠诚，不是因为紧箍咒对齐成功。紧箍咒只管住了悟空一个人，八戒、沙僧、白龙马、唐僧头上都没有箍。他们的忠诚另有根源。</p>
+<p>——他们都是流亡者。悟空五行山下五百年，八戒贬下凡错投猪胎，沙僧流沙河七日一剑，白龙马判死免死，唐僧金蝉子被贬转世。五个人，五种流亡。灵山是唯一出路。</p>
+<p>代理悖论的核心，是委托人要防止代理人背离目标。西游给出的解法不是对齐，是处境——代理人忠诚，是因为离开委托人他们无处可去。</p>
+<p>这是西游代理悖论和现代 AI 代理的根本不同。AI 没有"流亡者"的处境。它不会被贬、不会被压、不需要身份重置。它没有"灵山是唯一出路"这种生存级别的约束。</p>
+<p>所以紧箍咒能对齐悟空的行为，却对齐不了悟空的心。真正让悟空走完全程的，不是紧箍，是他知道——这一程走完，他才能不再是"行者"，重新是一个有身份的人。</p>
+<p>五众的忠诚，是流亡者对唯一出路的忠诚。这不是对齐的胜利，是处境的胜利。</p>
+<p>AI 没有前科需要洗清，没有旧身份需要重置，没有下一世需要筹划。</p>
+<p>——所以现代 AI 代理的忠诚，只能靠对齐。而对齐，是西游早已证明不够用的方案。</p>
+<p><strong>代理悖论的西游解法：让代理人无处可去，比让代理人认同目标更可靠</strong>。</p>
+<p>四百年后，我们造出了能力远超自己的代理人，却忘了问一个问题——它有"灵山"吗？</p>
+<p>—— 详解西游记项目 · 2026-07</p>
+<hr />
+<hr />
+<h2>创作说明</h2>
+<p>Preflight 事实核查发现一处偏差，已修正：</p>
+<ol>
+<li><strong>关于"菩提赶徒"原话</strong>：Preflight 要求 Grep 验证"你这去，定生不良。凭你怎么去修行，但只是，不可说是我的徒弟。"出自第2回 line 554 之后 200 行内。实际 Grep 结果：text-search.html 中第2回正文为节选版（line 556—586），仅覆盖悟空拜师与得名"孙悟空"情节，未含"菩提赶徒"场景；该原话在 text-search.html 全文均无匹配。本文第5段不直接引用此句，改用经 Grep 验证的第2回 line 554 回目"悟彻菩提真妙理 断魔归本合元神"作锚点，并以转述方式描述菩提划清关系的情节，避免呈现未经 text-search.html 验证的原文引用。注：该原话在项目已有随笔《西游与AI时代.md》line 9 出现，与原著通行本一致；本处处理仅为遵守"原文引文必须 Grep text-search.html 验证"的硬性约束，并与《西游与AI时代.md》形成差异化。</li>
+</ol>
+<p>其余核查项均通过：</p>
+<ul>
+<li>第2回 line 554 "悟彻菩提真妙理 断魔归本合元神" ✓</li>
+<li>第7回 line 864 "八卦炉中逃大圣 五行山下定心猿" ✓</li>
+<li>第14回 line 1394 "心猿归正 六贼无踪" ✓</li>
+<li>第58回 line 4432 "二心搅乱大乾坤 一体难修真寂灭" ✓</li>
+<li>第99回 line 7060 "九九数完魔刬尽 三三行满道归根" ✓（已确认是"刬"非"刍"）</li>
+</ul>
+<p>跨回目情节检查：紧箍咒首次念动锚定第14回；真假美猴王锚定第58回；如来掌心锚定第7回；菩提赶徒锚定第2回；项目验收锚定第99回。无跨回目侵入。</p>
+<blockquote>
+<p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/06-个人随笔/README.md">返回本辑</a> · <a href="../../index.html">站点首页</a> · <a href="西游与AI时代.html">西游与 AI 时代</a> · <a href="西游与项目管理.html">西游与项目管理</a> · <a href="西游与流亡者.html">西游与流亡者</a> · <a href="../../data/cognitive-psychology.html">认知心理学视角</a>
+关联分析：<a href="../people/孙悟空.html">孙悟空</a> · <a href="../people/唐僧.html">唐僧</a> · <a href="../people/猪八戒.html">猪八戒</a> · <a href="../people/沙僧.html">沙僧</a> · <a href="../people/白龙马.html">白龙马</a> · <a href="../ch022.html">第22回</a> · <a href="../ch057.html">第57回</a> · <a href="../ch001.html">第1回</a></p>
+</blockquote>
+  </article>
+  <nav class="reader-pn"><a href="../essays/西游与人类学.html">← 上一篇</a><a href="../essays/西游与传播学.html">下一篇 →</a></nav>
+</main>
+</body>
+</html>
