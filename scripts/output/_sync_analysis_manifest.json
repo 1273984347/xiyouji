@@ -1,0 +1,12 @@
+{
+ "sync_date": "2026-10-04",
+ "total_included": 32,
+ "excluded_coupled": [
+  "A_文本基础/chapter_stats.py",
+  "A_文本基础/word_frequency.py",
+  "B_人物/character_appearance.py",
+  "B_人物/character_nlp.py",
+  "F_时间/timeline.py"
+ ],
+ "note": "B-7 0.1.0：32 自包含纯 stdlib 脚本入包·5 coupled（utils/+仓库语料/jieba）排除·参数化留后续批"
+}
