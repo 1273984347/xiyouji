@@ -254,12 +254,13 @@ def main():
         if path == "交接文档.md":
             txt = data.decode("utf-8")
             sep = "\r\n" if "\r\n" in txt else "\n"
-            head_line = txt.split(sep)[6]
-            head_entries = re.findall(r"v2\.3\.1\d\d (W\d+)", head_line)
+            hl0 = txt.find("> 最后更新：")  # W665 修复：里程碑块置顶后「最后更新」行不再固定在 index 6
+            head_line = txt[hl0:txt.find(sep, hl0)] if hl0 != -1 else ""
+            head_entries = re.findall(r"v[\d.]+ (W\d+)", head_line)
             if not head_entries or head_entries[0] != batch:
                 selfcheck.append(f"交接文档: 头链首条非 {batch}（{head_entries[:3]}）——需人工核查")
             tail_txt = txt[txt.rfind("最后更新："):]
-            tail_entries = re.findall(r"v2\.3\.1\d\d (W\d+)", tail_txt)
+            tail_entries = re.findall(r"v[\d.]+ (W\d+)", tail_txt)
             if tail_txt.count("2026-") > 3 or not tail_entries or tail_entries[0] != batch:
                 selfcheck.append(f"交接文档: 尾链异常（{tail_entries[:3]}）——需人工核查")
             if "## 九、使用说明" not in txt:
