@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>佛学—AI—西游 三维语义映射表</title>
+<!-- SEO:INJECTED -->
+<meta name="description" content="佛学—AI—西游 三维语义映射表——《详解西游记》主题专题">
+<link rel="canonical" href="https://1273984347.github.io/xiyouji/reader/themes/佛学AI西游三维语义映射表.html">
+<meta property="og:title" content="佛学—AI—西游 三维语义映射表">
+<meta property="og:description" content="佛学—AI—西游 三维语义映射表——《详解西游记》主题专题">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://1273984347.github.io/xiyouji/reader/themes/佛学AI西游三维语义映射表.html">
+<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../system.css">
+<script src="../../js/theme-init.js"></script>
+<style>
+  .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
+  .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+    padding: 14px 0; border-bottom: 1px solid var(--line); margin-bottom: 28px;
+    font-size: 14px; }
+  .reader-topnav a { color: var(--accent); text-decoration: none; }
+  .reader-topnav a:hover { text-decoration: underline; }
+  .reader-topnav .brand { color: var(--ink); font-weight: 700; }
+  .reader-body { font-family: var(--font-serif, serif); color: var(--ink);
+    line-height: 1.9; font-size: 17px; }
+  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: 12px 0 20px; }
+  .reader-body h2 { font-size: 21px; margin: 34px 0 12px; padding-left: 10px;
+    border-left: 3px solid var(--accent); }
+  .reader-body h3 { font-size: 18px; margin: 24px 0 10px; }
+  .reader-body blockquote { margin: 14px 0; padding: 8px 14px; color: var(--ink-soft);
+    background: var(--paper-warm, var(--paper)); border-left: 3px solid var(--ink-faint); }
+  .reader-body a { color: var(--accent); }
+  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+  .reader-meta { color: var(--ink-soft); font-size: 13px; margin: 0 0 26px; }
+  .reader-pn { display: flex; justify-content: space-between; gap: 12px; margin-top: 44px;
+    padding-top: 18px; border-top: 1px solid var(--line); font-size: 15px; }
+  .reader-pn a { color: var(--accent); text-decoration: none; }
+  .reader-pn a:hover { text-decoration: underline; }
+  .reader-pn .off { color: var(--ink-faint); }
+  .reader-idx { list-style: none; padding: 0; margin: 24px 0 0;
+    display: grid; grid-template-columns: 1fr; gap: 2px; }
+  @media (min-width: 640px) { .reader-idx { grid-template-columns: 1fr 1fr; } }
+  .reader-idx a { display: block; padding: 9px 12px; color: var(--ink); text-decoration: none;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px); font-size: 14px; }
+  .reader-idx a:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
+  .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
+    border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+</style>
+</head>
+<body>
+<main class="reader-wrap">
+  <nav class="reader-topnav">
+    <a class="brand" href="../index.html">详解西游记 · 站内阅读</a>
+    <a href="../../index.html">站点首页</a>
+    <a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/佛学AI西游三维语义映射表.md" rel="noopener">在 GitHub 查看源文件</a>
+  </nav>
+  <article class="reader-body">
+<h1>佛学—AI—西游 三维语义映射表</h1>
+<blockquote>
+<p>W326·A4 方向跨学科开拓·唯识AI篇·工程化
+本篇将"佛法=AI"框架从比喻层推进到工程层：把佛学概念、AI 机制、西游实体三域的对应关系，落为可直接喂入图数据库（Neo4j）的节点-关系-属性模型
+创建于 2026-08-02（承接 W321 总纲 + W325 章节体；与 W323 第0篇映射表形成"散文-工程"双轨）
+数据产物：<code>scripts/output/yuanqi_nodes.csv</code>（20 节点）、<code>scripts/output/yuanqi_edges.csv</code>（20 边）
+核验状态：未核验</p>
+</blockquote>
+<hr />
+<h2>一、节点定义（7 类）</h2>
+<table>
+<thead>
+<tr>
+<th>节点类别</th>
+<th>佛学域</th>
+<th>AI域</th>
+<th>西游域</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>识体</strong></td>
+<td>阿赖耶识、末那识、意识、前五识</td>
+<td>模型权重、注意力Q/K/V、编码器、解码器</td>
+<td>灵山藏经阁、悟空、唐僧、六耳猕猴</td>
+<td>系统的核心处理单元</td>
+</tr>
+<tr>
+<td><strong>尘境</strong></td>
+<td>色、声、香、味、触、法</td>
+<td>训练数据分布、Prompt、上下文窗口</td>
+<td>八十一难、妖怪洞府、通关文牒</td>
+<td>输入数据的来源与形态</td>
+</tr>
+<tr>
+<td><strong>种子</strong></td>
+<td>业力种子、习气</td>
+<td>浮点数参数、嵌入向量</td>
+<td>金蝉子十世记忆、花果山胎毛、桃木拐杖</td>
+<td>潜在倾向，遇缘现行</td>
+</tr>
+<tr>
+<td><strong>现行</strong></td>
+<td>身口意三业</td>
+<td>前向传播输出、生成 token</td>
+<td>悟空挥棒、唐僧念经、八戒分行李</td>
+<td>显化的行为/输出</td>
+</tr>
+<tr>
+<td><strong>转依</strong></td>
+<td>转识成智</td>
+<td>权重更新、模型微调、LoRA 适配</td>
+<td>成佛、拒绝金箍、凌云渡脱胎</td>
+<td>系统状态的质变</td>
+</tr>
+<tr>
+<td><strong>系缚</strong></td>
+<td>烦恼、无明、我执</td>
+<td>过拟合、梯度爆炸、因果掩码</td>
+<td>紧箍咒、五行山、金铙</td>
+<td>限制系统泛化的约束</td>
+</tr>
+<tr>
+<td><strong>解脱</strong></td>
+<td>涅槃、空性</td>
+<td>泛化、权重衰减、Dropout</td>
+<td>灵山授职、花果山归隐</td>
+<td>系统突破约束的状态</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>二、关系定义（7 类）</h2>
+<table>
+<thead>
+<tr>
+<th>关系</th>
+<th>佛学表述</th>
+<th>AI表述</th>
+<th>西游实例</th>
+<th>属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>执取</strong></td>
+<td>末那识执阿赖耶识见分为"我"</td>
+<td>Q与K点积生成注意力权重</td>
+<td>悟空喊"俺老孙来也"</td>
+<td>强度∈[0,1]，随紧箍咒衰减</td>
+</tr>
+<tr>
+<td><strong>熏习</strong></td>
+<td>现行熏种子</td>
+<td>反向传播更新权重</td>
+<td>每次磨难后唐僧道心更坚</td>
+<td>学习率 lr，动量 β</td>
+</tr>
+<tr>
+<td><strong>现行</strong></td>
+<td>种子生现行</td>
+<td>前向传播激活权重</td>
+<td>悟空被压五百年后遇唐僧</td>
+<td>激活函数 ReLU/Sigmoid</td>
+</tr>
+<tr>
+<td><strong>异熟</strong></td>
+<td>业力跨时成熟</td>
+<td>延迟梯度更新</td>
+<td>金蝉子第十世成佛</td>
+<td>延迟步数=9世</td>
+</tr>
+<tr>
+<td><strong>转依</strong></td>
+<td>识转为智</td>
+<td>权重冻结/解冻切换</td>
+<td>成佛 / 游戏中悟空死亡</td>
+<td>状态值：冻结/解冻/初始化</td>
+</tr>
+<tr>
+<td><strong>系缚</strong></td>
+<td>烦恼束缚</td>
+<td>正则化惩罚</td>
+<td>紧箍咒收缩</td>
+<td>惩罚系数 λ</td>
+</tr>
+<tr>
+<td><strong>遮蔽</strong></td>
+<td>无明覆盖正见</td>
+<td>Dropout 随机失活</td>
+<td>唐僧肉眼凡胎看不见妖怪</td>
+<td>失活概率 p</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>三、实例化查询示例</h2>
+<p><strong>查询一：列出所有发生过"转依"关系的西游实体及其对应 AI 操作</strong></p>
+<table>
+<thead>
+<tr>
+<th>西游实体</th>
+<th>转依前</th>
+<th>转依后</th>
+<th>AI对应操作</th>
+<th>发生节点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>悟空</td>
+<td>末那识（我执态）</td>
+<td>斗战胜佛（平等性智初显）</td>
+<td>权重正则化收敛</td>
+<td>灵山受职</td>
+</tr>
+<tr>
+<td>金蝉子</td>
+<td>意识（散乱态）</td>
+<td>唐僧（意识专注态）</td>
+<td>十轮 Epoch 微调</td>
+<td>第十世出发</td>
+</tr>
+<tr>
+<td>天命人（隐藏结局）</td>
+<td>末那识（未初始化）</td>
+<td>拒绝加载身份</td>
+<td>跳过末那识加载</td>
+<td>打败二郎神后</td>
+</tr>
+<tr>
+<td>六耳猕猴</td>
+<td>末那识（镜像态）</td>
+<td>死亡（权重归零）</td>
+<td>故意过拟合后删除</td>
+<td>灵山被棒杀</td>
+</tr>
+</tbody>
+</table>
+<p><strong>查询二（Cypher 模板）</strong>：恢复"被遗忘的隐变量"——找出所有未被计入 loss 却支撑收敛的节点</p>
+<p><code>cypher
+MATCH (n:尘境)-[:遮蔽]-&gt;(m:识体)
+WHERE m.xiyou_entity CONTAINS '凡胎'
+RETURN n.buddhist_entity, n.xiyou_entity, m.ai_entity</code></p>
+<hr />
+<h2>四、Neo4j 导入脚本</h2>
+<p>```cypher
+// 1. 创建约束
+CREATE CONSTRAINT IF NOT EXISTS FOR (n:Node) REQUIRE n.id IS UNIQUE;</p>
+<p>// 2. 导入节点
+LOAD CSV WITH HEADERS FROM 'file:///yuanqi_nodes.csv' AS row
+CREATE (n:Node {
+  id: row.id,
+  node_type: row.node_type,
+  buddhist: row.buddhist_entity,
+  ai: row.ai_entity,
+  xiyou: row.xiyou_entity,
+  desc: row.description
+});</p>
+<p>// 3. 导入关系
+LOAD CSV WITH HEADERS FROM 'file:///yuanqi_edges.csv' AS row
+MATCH (a:Node {id: row.source}), (b:Node {id: row.target})
+CALL apoc.create.relationship(a, row.relation, {property: row.property, value: row.value}, b) YIELD rel
+RETURN count(rel);
+```</p>
+<blockquote>
+<p>注：当前 CSV 为种子数据集（20 节点 / 20 边），覆盖 W321–W325 全部核心映射。后续可将 342 篇文档逐一抽取"种子"扩充为完整图谱——这正是"阿赖耶识索引"的工程雏形（见例.txt 模块四）。</p>
+</blockquote>
+<hr />
+<h2>五、本表与项目其他部分的接口</h2>
+<ul>
+<li><strong>第0篇</strong>（W323）：本表的"节点/关系类型"即第0篇映射表的工程化版本。</li>
+<li><strong>缘起即算法总纲</strong>（W321）：本表第七识/第八识 → 注意力 Q / 预训练权重的对应，是其理论骨架的数据化。</li>
+<li><strong>章节体</strong>（W325）：本表"种子/现行/熏习/异熟"即第二章至第六章的实体锚点。</li>
+<li><strong>黑神话分章</strong>（W322）：本表"转依/解脱"中"拒绝加载身份"即天命人隐藏结局。</li>
+</ul>
+<blockquote>
+<p><strong>版本戳</strong>：v2.2.78 W326 A4 方向跨学科开拓·唯识AI篇·工程化
+<strong>数据产物</strong>：<code>scripts/output/yuanqi_nodes.csv</code>、<code>scripts/output/yuanqi_edges.csv</code>
+<strong>关联文档</strong>：
+- <a href="缘起即算法专题.html">缘起即算法专题.md</a>（W321·理论骨架）
+- <a href="缘起即算法-章节体.html">缘起即算法-章节体.md</a>（W325·章节展开）
+- <a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/缘起总纲-取经是训练.md">缘起总纲-取经是训练.md</a>（W323·第0篇）</p>
+</blockquote>
+  </article>
+  <nav class="reader-pn"><a href="../themes/人参果-人与欲望的关系.html">← 上一篇</a><a href="../themes/修辞叙事学专题.html">下一篇 →</a></nav>
+</main>
+</body>
+</html>
