@@ -28,7 +28,7 @@
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
  * ----------------------------------------------
- * v2.3.256 · W656 B-9 之一 audit 补丁合并单模块 · v2.3.255 · W655 B-9 之一 D3 色值变量化 · v3 · W476 纸感轻立体（在 v2/W334 基础上增层 · 见 DESIGN.md §4A）
+ * v2.3.257 · W657 B-6 第二步可引用性组件 · v2.3.256 · W656 B-9 之一 audit 补丁合并单模块 · v2.3.255 · W655 B-9 之一 D3 色值变量化 · v3 · W476 纸感轻立体（在 v2/W334 基础上增层 · 见 DESIGN.md §4A）
  * 全站统一设计令牌 + 字体分层 + hero 覆写层。
  *
  * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
@@ -1486,7 +1486,21 @@ main { overflow-x: clip; }
     <!-- dataSource 提示（main() 中根据 fetchStatus 更新内容） -->
     <div class="notice" id="dataSource">
         数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
-    </div>
+    <div class="cite-block" id="citeBox">
+  数据源：页面内嵌 EMBEDDED 数据（run_all 批量生成 JSON 快照于构建时嵌入·快照 2026-10-04） 由 <code>scripts/run_all.py</code> 批量生成（口径与参数见 dataset 同名 JSON 与生成脚本源）。
+  <details class="cite-details">
+  <summary>引用格式</summary>
+  <div class="cite-item"><span>APA</span><pre class="cite-text">《详解西游记》项目. (2026). 跨时空弹幕博物馆. 详解西游记可视化站点. https://1273984347.github.io/xiyouji/data/cross-time-danmaku.html（访问日期 2026-10-04）</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
+  <div class="cite-item"><span>BibTeX</span><pre class="cite-text">@misc{xiyouji_cross_time_danmaku,
+  title       = {跨时空弹幕博物馆},
+  author      = {{《详解西游记》项目}},
+  year        = {2026},
+  howpublished = {\url{https://1273984347.github.io/xiyouji/data/cross-time-danmaku.html}},
+  note        = {可视化数据可视化解读页, 访问日期 2026-10-04}
+}</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
+  </details>
+</div>
+      </div>
 
     <section class="device">
         <h2 class="device-title">四层全年龄弹幕墙</h2>
@@ -2054,5 +2068,6 @@ main();
 
 
 
+<script defer src="../static/js/cite-box.js"></script>
 </body>
 </html>
