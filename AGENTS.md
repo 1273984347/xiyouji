@@ -77,7 +77,7 @@ xiyouji/
 ├── tests/                 # pytest + Playwright E2E
 ├── assets/                # 字体源、图片
 ├── references/  timeline/  tools/  hyperframes/
-├── README.md / STRUCTURE.md / CHANGELOG.md / DESIGN.md / 交接文档.md / 新Agent启动Prompt.md
+├── README.md / STRUCTURE.md / CHANGELOG.md / DESIGN.md / 交接文档.md / 新Agent启动Prompt.md / CLAUDE.md（AI 速查层·W664）
 └── LICENSE + LICENSE-CONTENT.md  # 双协议
 ```
 
@@ -247,18 +247,19 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ## 7. 快速上手路径（新 Agent 接手）
 
-1. 读 `交接文档.md`「零、当前阻塞」+「一、当前进度」→ 当前 HEAD（vX.Y.Z W###）、下一 W 编号、遗留待办。
-2. 读 `README.md` → 项目全貌、内容规模、在线站点、双协议。
-3. 读 `docs/00-导读/文档规范.md` §11 → 文件管控清单（必同步/禁擅改/接手速查 6 步/同步核对 10 项）。
-4. 读 `交接文档.md`「三、方法论沉淀」→ 可复利经验。
-5. 深挖结构看 `STRUCTURE.md`、`scripts/output/file-index.md`（反向索引）、`CHANGELOG.md`（正向时间线）。
-6. 动手前跑 `python scripts/verify_delivery.py` 确认基线全绿。
+1. 读 `CLAUDE.md`（AI 速查层，1 分钟）→ 必守规则与常用命令速览（W664 起，宿主自动加载）。
+2. 读 `交接文档.md`「零、当前阻塞」+「一、当前进度」→ 当前 HEAD（vX.Y.Z W###）、下一 W 编号、遗留待办。
+3. 读 `README.md` → 项目全貌、内容规模、在线站点、双协议。
+4. 读 `docs/00-导读/文档规范.md` §11 → 文件管控清单（必同步/禁擅改/接手速查 6 步/同步核对 10 项）。
+5. 读 `交接文档.md`「三、方法论沉淀」→ 可复利经验。
+6. 深挖结构看 `STRUCTURE.md`、`scripts/output/file-index.md`（反向索引）、`CHANGELOG.md`（正向时间线）。
+7. 动手前跑 `python scripts/verify_delivery.py` 确认基线全绿。
 
 ---
 
 ## 8. 权威文档（冲突时以此为准）
 
-- 进度中枢 / 规则：`交接文档.md`、`新Agent启动Prompt.md`（速用精简版）
+- 进度中枢 / 规则：`交接文档.md`、`新Agent启动Prompt.md`（速用精简版）、`CLAUDE.md`（AI 速查层·W664）
 - 文档规范：`docs/00-导读/文档规范.md`（尤其 §11 文件管控）
 - 设计规范：`DESIGN.md`（§1-4 视觉 / **§5 动效契约**）
 - 目录结构：`STRUCTURE.md`
