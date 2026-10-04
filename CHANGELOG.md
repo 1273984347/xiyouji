@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W661），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W667），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.263（2026-10-05）：W667 复盘三卡防漂移落地 — batch_cascade 预校验 + CLAUDE.md 指针门禁第 32 槽 + doc-sync 扩面评估
+> **来源**：用户「全部做完」拍板启动复盘报告 §3.3 三张 skill-creator 任务卡（W667 认领）。
+> - **S-01 batch_cascade 预校验**：precheck() 在 dry-run 断言前拦截「能落盘但破坏下一批锚点正则」的 spec——desc 禁 ·；—（写入版本行）、head_sentence 禁 ；—（·实证无害·全角括号既有断言管）、title 须以 batch 领衔；**历史回放校准**：W663 spec 拦截 2 项（正是当年 W664 dry-run 失败的 desc·/head_sentence；肇因）、W664/W666 spec 预检通过。
+> - **S-02 CLAUDE.md 指针门禁（第 32 槽）**：check_claude_md.py 四查——C1 指针文件存在 / C2 章节锚点对拍（§N 标题+§N-M 条目）/ C3 行数 ≤60 / C4 正文禁漂移字面量（元信息块血缘行豁免）；--self-test 7/7（含血缘豁免正例）；AGENTS §4.2 补第 32 条目（doc-sync C3 联动·清单 32==槽位 32）；**自洽锁实战抓漏**：新槽漏挂 section 上报被 VERIFY_SECTIONS 当场点名，补挂后 37/37。
+> - **S-03 扩面评估**：近 10 批漂移实例 10/10 已有防线、裸露且高频=0 → 不扩面（白名单维持 4 类）；文档规范 §4.9 新增前置纪律句「新增当前态声明须同步纳管（白名单 or 引用式二选一）」；重开触发=下周期裸露实例 ≥1。报告 docs/superpowers/plans/2026-10-05-doc-sync-coverage-evaluation.md。
+> - **验证**：ruff 全过；verify_delivery 核心全绿（32 槽+37 段自洽锁）；三份历史 spec 回放判定全对；check_claude_md 实跑 0 FAIL。
+> - **文件**：scripts/batch_cascade.py（precheck）、scripts/check_claude_md.py（新增·常驻）、scripts/verify_delivery.py（第 32 槽+自洽锁 37）、AGENTS.md（§4.2 第 32 条目）、docs/superpowers/plans/2026-10-05-doc-sync-coverage-evaluation.md（新增）、docs/00-导读/文档规范.md（§4.9 纪律句）、docs/00-导读/W批次编号对账表.md（W667 认领+翻转）、六文档、四页脚、CITATION、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 
 ### v2.3.262（2026-10-05）：W661 WP-D2 搜索索引站内化扩量 + footer-meta blob 改链收敛 + blob 预算复核（W659 蓝图预留批·含 W665 chore 版段追记）
 > **来源**：用户「开工」指令启动 W659 蓝图预留批 W661（§4 实现批拆分第三行）；W665 chore 版段随本段追记（D2 豁免通道兑现·A-02）。
