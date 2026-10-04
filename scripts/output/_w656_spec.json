@@ -1,0 +1,20 @@
+{
+  "batch": "W656",
+  "version": "v2.3.256",
+  "date": "2026-10-04",
+  "desc": "B-9 之一 audit 补丁合并单模块",
+  "title": "W656 B-9① audit 六族补丁合并单模块 — chart-audit.js（src 加载+data-families 传参·84 页净删 20524 行）+ 等价性探针五页逐数一致 + file:// 直开验证",
+  "head_entry": "2026-10-04（v2.3.256 W656）B-9① audit 六族补丁合并单模块——chart-audit.js（六族 IIFE 合并·axisfix2/3 逐字节去重·隐藏型四族统一 data-audit-skip 豁免·旋转型不识别守卫沿 W553 决议）84 页改 1 行 defer src+data-families 传参（d3 同款 src 形态·file:// 双态验证）净删 20524 行，等价性探针五页 DOM 终态逐数一致）",
+  "changelog_body": "\n> **来源**：全量启动队列第六批——B-9① 按 registry「audit-* 六族补丁合并为单模块渲染后一次执行（85/86 页分布）」执行。\n> - **模块**：site/static/js/chart-audit.js——六族合并（axisfix 底轴旋转/axesvar 方差判轴/avoidall 全标签防重叠/numfix 数值优先/netlabels 网络标签/content 热力旋转）；**axisfix2 与 axisfix3 逐字节同逻辑仅 domain 守卫差·合并为无守卫版（=原 axisfix3 终态超集·同 800/2600/5000 时序一次执行·运行时全页扫描减半）**；隐藏型四族统一 svg[data-audit-skip] 豁免（W553 机制·原仅 monster-female-network 变体携带·旋转型不识别守卫沿 W553 决议维持 W550 已验收外观）；window.ChartAudit.run 手动 API+__avoidOverlap 兼容保留（现网 0 消费方）。\n> - **接入形态（关键裁决）**：84 页七块补丁（230-300 行/页）→ **1 行 defer src+data-families 传参**——d3 同款 src 形态（file:// 与 Pages 双态三年验证·vis-tools「内联避 404」注释系特殊预览服务器根的历史遗留非 file:// 约束）；currentScript 读 data-families（defer 时序：DOM 解析完执行·早于 load·家族时序表内 setTimeout 语义不变）。**净删 20,524 行**（84 页 +186/-20710·平均 244 行/页——registry「省 300-500 行」以 src 形态兑现·内联形态实测反而 +31 行/页已否决）。\n> - **等价性验证（本批生命线）**：playwright 探针五页（标准五族/netlabels/热力 content/skip 变体七族/var 化页）DOM 终态 before/after 逐数一致（rotatedTicks/hiddenTexts/hiddenNoTitle/heatRotated）；file:// 直开探针 rotated 39 一致；pageerrors 全程 0。过程抓取一次 CSP 未重发致模块被静默拦截（探针 ChartAudit undefined+零 pageerror 定位·AGENTS 铁律「改内联脚本必跑 generate_csp」连等价探针都被坑的现场实证——src 形态根治此类风险）。\n> - **验证**：node --check 模块+check_js_syntax 334 文件过；lint_links 1917 链接 0 broken（src 引用存在性）；第 29/30 门禁与全 verify 核心绿；CSP 重生成（84 页哈希表缩减）；drift 门禁绿。\n> - **文件**：site/static/js/chart-audit.js（新增·单一事实源）、site/data 84 页（七块→1 行 src）、scripts/output/_w656_replace_audit.py 与 _w656_src_tag.py 与 _w656_equiv_probe.js（工具存档）、scripts/output/_cascade_files_W656_pages.txt（页面清单）、六文档、四页脚、CITATION、file-index。\n> - **状态**：已落地（本批提交并 push origin/main）。\n",
+  "milestone_block": "- **v2.3.256 W656 B-9① audit 六族合并单模块**：\n  - chart-audit.js（axisfix2/3 逐字节去重·隐藏型统一 skip 豁免·ChartAudit.run+data-families 传参）·84 页 1 行 defer src（d3 同款形态）·净删 20524 行\n  - 等价性探针五页 DOM 终态逐数一致+file:// 直开验证·过程实证 CSP 铁律（未重发=模块静默拦截·src 形态根治）\n  - 运行时全页扫描减半（axesvar 合并）·单源维护（改模块免重分发）\n",
+  "head_sentence": "B-9① audit 六族合并单模块净删 20524 行",
+  "agents_note": "2026-10-04（v2.3.256 W656）B-9① audit 补丁合并单模块：无 § 结构性变更（chart-audit.js 单模块 src 加载+data-families 传参·84 页七块→1 行净删 20524 行·axisfix2/3 去重·隐藏型统一 skip 豁免·等价探针五页一致），仅版本脚注同步",
+  "file_index_rows": [
+    "| site/static/js/chart-audit.js | W656 | 新增·audit 六族统一模块（单一事实源·ChartAudit API·data-families 接入） |",
+    "| site/data/*.html ×84 | W656 | 更新·七块 audit 补丁→1 行 defer src（净删 20524 行） |",
+    "| scripts/output/_w656_replace_audit.py | W656 | 新增·内联替换工具（被 src 方案取代·存档） |",
+    "| scripts/output/_w656_src_tag.py | W656 | 新增·src 标签替换工具（含页面清单输出） |",
+    "| scripts/_w656_equiv_probe.js | W656 | 新增·等价性 DOM 终态探针（before/after 对比） |",
+    "| scripts/output/_cascade_files_W656_pages.txt | W656 | 新增·页面触达清单（非级联批量改动自带清单） |"
+  ]
+}

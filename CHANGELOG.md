@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W655），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W656），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.256（2026-10-04）：W656 B-9① audit 六族补丁合并单模块 — chart-audit.js（src 加载+data-families 传参·84 页净删 20524 行）+ 等价性探针五页逐数一致 + file:// 直开验证
+> **来源**：全量启动队列第六批——B-9① 按 registry「audit-* 六族补丁合并为单模块渲染后一次执行（85/86 页分布）」执行。
+> - **模块**：site/static/js/chart-audit.js——六族合并（axisfix 底轴旋转/axesvar 方差判轴/avoidall 全标签防重叠/numfix 数值优先/netlabels 网络标签/content 热力旋转）；**axisfix2 与 axisfix3 逐字节同逻辑仅 domain 守卫差·合并为无守卫版（=原 axisfix3 终态超集·同 800/2600/5000 时序一次执行·运行时全页扫描减半）**；隐藏型四族统一 svg[data-audit-skip] 豁免（W553 机制·原仅 monster-female-network 变体携带·旋转型不识别守卫沿 W553 决议维持 W550 已验收外观）；window.ChartAudit.run 手动 API+__avoidOverlap 兼容保留（现网 0 消费方）。
+> - **接入形态（关键裁决）**：84 页七块补丁（230-300 行/页）→ **1 行 defer src+data-families 传参**——d3 同款 src 形态（file:// 与 Pages 双态三年验证·vis-tools「内联避 404」注释系特殊预览服务器根的历史遗留非 file:// 约束）；currentScript 读 data-families（defer 时序：DOM 解析完执行·早于 load·家族时序表内 setTimeout 语义不变）。**净删 20,524 行**（84 页 +186/-20710·平均 244 行/页——registry「省 300-500 行」以 src 形态兑现·内联形态实测反而 +31 行/页已否决）。
+> - **等价性验证（本批生命线）**：playwright 探针五页（标准五族/netlabels/热力 content/skip 变体七族/var 化页）DOM 终态 before/after 逐数一致（rotatedTicks/hiddenTexts/hiddenNoTitle/heatRotated）；file:// 直开探针 rotated 39 一致；pageerrors 全程 0。过程抓取一次 CSP 未重发致模块被静默拦截（探针 ChartAudit undefined+零 pageerror 定位·AGENTS 铁律「改内联脚本必跑 generate_csp」连等价探针都被坑的现场实证——src 形态根治此类风险）。
+> - **验证**：node --check 模块+check_js_syntax 334 文件过；lint_links 1917 链接 0 broken（src 引用存在性）；第 29/30 门禁与全 verify 核心绿；CSP 重生成（84 页哈希表缩减）；drift 门禁绿。
+> - **文件**：site/static/js/chart-audit.js（新增·单一事实源）、site/data 84 页（七块→1 行 src）、scripts/output/_w656_replace_audit.py 与 _w656_src_tag.py 与 _w656_equiv_probe.js（工具存档）、scripts/output/_cascade_files_W656_pages.txt（页面清单）、六文档、四页脚、CITATION、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 
 ### v2.3.255（2026-10-04）：W655 B-9② D3 字面色值→CSS 变量 — 405 处 var 化（46 页·attr→style 230+style→var 175）+ 暗块补 chart 系列暗值 4 行（对齐 accent 暗值零新色）+ 全量暗色审计
 > **来源**：全量启动队列第四批（依赖序：PD-5 design-tokens.json 真值已就位·PD-1 触页批已错批）——B-9② 按 registry 登记「D3 字面色值改读 CSS 变量·删暗色 fill 硬编码映射」执行。
