@@ -43,6 +43,16 @@
 | .github/workflows/*.yml ×5 | W663 | 更新·61 处 uses SHA 钉 + 顶层 permissions 收敛 + security dispatch |
 | 交接文档.md / AGENTS.md / docs/00-导读/文档规范.md | W663 | 更新·雷区索引 13 行 + 坑 #14 + §4.2 门禁清单 29/30/31 + 契约锚点 |
 
+## W661 WP-D2 索引站内化+footer-meta 改链（2026-10-05·v2.3.262）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/build_reader.py | W661 | 更新·README.md ①规则 blob→板块目录页（footer-meta 改链） |
+| scripts/_gen_search_index.py | W661 | 更新·02-06 五板块 kind=reader 映射+exists 回退 |
+| site/data/search.html + site/en/search.html | W661 | 更新·双索引重生成（reader 615/doc 61） |
+| site/reader/ 621 页 | W661 | 更新·全量重渲（52 页导航块+CSP 重注入） |
+| docs/00-导读/W批次编号对账表.md | W661 | 更新·W661 认领+翻转·W665 版段列 v2.3.262 |
+
 ## W658 W658 B分析方法 pip 包 0.1.0（2026-10-04·v2.3.258）
 
 | 文件 | W | 说明 |

@@ -1,0 +1,19 @@
+{
+  "batch": "W661",
+  "version": "v2.3.262",
+  "date": "2026-10-05",
+  "desc": "WP-D2 索引站内化+footer-meta 改链",
+  "title": "W661 WP-D2 搜索索引站内化扩量 + footer-meta blob 改链收敛 + blob 预算复核（W659 蓝图预留批·含 W665 chore 版段追记）",
+  "head_entry": "2026-10-05（v2.3.262 W661）WP-D2 收尾：搜索索引站内化扩量（docs/02-06 515 条 kind=doc(blob)→kind=reader·docs 676 条中 reader 615/doc 61）+ footer-meta「返回本辑」56 处 blob→板块目录页（build_reader 源规则修改·621 页重渲）+ blob 预算复核（阅读流口径 813≤1000 达标·全量 1428·topnav 源查看 615 是否计入预算报请裁定）——W659 蓝图 W661 验收机判三条全过（黄金查询 30/30·lint_links reader 域 8818 链接 0 broken·阅读流 ≤1000）",
+  "head_sentence": "WP-D2索引站内化515条+footer-meta改链+blob预算复核",
+  "changelog_body": "\n> **来源**：用户「开工」指令启动 W659 蓝图预留批 W661（§4 实现批拆分第三行）；W665 chore 版段随本段追记（D2 豁免通道兑现·A-02）。\n> - **搜索索引站内化**（_gen_search_index.py）：新增 02-06 五板块映射（people/themes/culture/poetry/essays）+ os.path.exists 回退——docs/02-06 515 条 kind=doc(blob)→kind=reader；docs 676 条终态 reader 615/doc 61（61=README/治理类正确回退）；site/data 与 site/en 双索引重生成（zh 234KB/en 255KB）。\n> - **footer-meta 改链**（build_reader.py ①规则）：板块内 README.md「返回本辑」blob→板块目录页 index.html；621 页全量重渲（52 页导航块变化·其余页因 CSP 重注入触达）。\n> - **blob 预算复核**：reader 全量 1428（topnav「在 GitHub 查看」源文档外链 615 为刻意源访问入口）；阅读流口径 **813 ≤1000 达标**；全量口径 1428>1000——topnav 是否计入预算属口径裁定，随批报请用户（blueprint 验收行未定义计数口径）。\n> - **CSP**：generate_csp 重注入 623 页（reader 重渲后 CSP meta 恢复+search.html 数据块哈希更新）·855 页 0 漂移。\n> - **验收机判（蓝图 §4 三条）**：黄金查询 30/30 ✓；lint_links reader 域 8818 链接 0 broken ✓；blob 阅读流 ≤1000 ✓。verify_delivery 核心全绿。\n> - **W665 追记**：chore(w665)（1650aa4·review-fix 三处）版段随本段补录——对账表 W665 行版段列同步 v2.3.262。\n> - **文件**：scripts/build_reader.py、scripts/_gen_search_index.py、site/data/search.html、site/en/search.html、site/reader/ 621 页、docs/00-导读/W批次编号对账表.md、六文档、四页脚、CITATION、file-index。\n> - **状态**：已落地（本批提交并 push origin/main）。\n",
+  "milestone_block": "- **v2.3.262 W661 WP-D2 索引站内化+footer-meta 改链**：\n  - 搜索索引 515 条站内化（reader 615/doc 61）+「返回本辑」56 处改板块目录页（621 页重渲）\n  - blob 预算：阅读流 813≤1000 达标；全量 1428·topnav 615 口径报请裁定\n  - W665 chore 版段随本段追记（D2 兑现）；CSP 重注入 623 页 0 漂移\n",
+  "agents_note": "2026-10-05（v2.3.262 W661）WP-D2 索引站内化+footer-meta 改链：无 § 结构性变更（搜索索引 515 条 kind=reader+「返回本辑」56 处改目录页+621 页重渲+CSP 重注入 623 页·黄金查询 30/30·阅读流 blob 813≤1000），仅版本脚注同步",
+  "file_index_rows": [
+    "| scripts/build_reader.py | W661 | 更新·README.md ①规则 blob→板块目录页（footer-meta 改链） |",
+    "| scripts/_gen_search_index.py | W661 | 更新·02-06 五板块 kind=reader 映射+exists 回退 |",
+    "| site/data/search.html + site/en/search.html | W661 | 更新·双索引重生成（reader 615/doc 61） |",
+    "| site/reader/ 621 页 | W661 | 更新·全量重渲（52 页导航块+CSP 重注入） |",
+    "| docs/00-导读/W批次编号对账表.md | W661 | 更新·W661 认领+翻转·W665 版段列 v2.3.262 |"
+  ]
+}
