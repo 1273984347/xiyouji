@@ -86,17 +86,15 @@ def rewrite_links(md: str, docs_root: str, up: str, up2: str, up3: str) -> tuple
     ③b 非六板块 md（../x/*.md 与 ../../x.md）→ GitHub blob
     ④ http/锚点保持
     """
-    # ① 板块内 md 互链（README.md → blob·不入 reader）
+    # ① 板块内 md 互链（README.md → 板块目录页·W661 footer-meta blob 改链收敛）
     if docs_root == "01-全书逐回解读":
         md = re.sub(r"\]\(\.?/?(第\d{3}回-[^)]*\.md)\)",
                     lambda m: "](ch" + m.group(1)[1:4] + ".html)", md)
-        md = re.sub(r"\]\(\.?/?README\.md\)",
-                    lambda m: "](" + BLOB + docs_root + "/README.md)", md)
+        md = re.sub(r"\]\(\.?/?README\.md\)", "](index.html)", md)
     else:
         md = re.sub(r"\]\((\.?/?(?!README\.md)[^)/]+\.md)\)",
                     lambda m: "](" + m.group(1).lstrip("./")[:-3] + ".html)", md)
-        md = re.sub(r"\]\(\.?/?README\.md\)",
-                    lambda m: "](" + BLOB + docs_root + "/README.md)", md)
+        md = re.sub(r"\]\(\.?/?README\.md\)", "](index.html)", md)
     # ② 跨板块 md 互链（深度感知）
     def cross_cat(m: re.Match) -> str:
         d, fn = m.group(1), m.group(2)

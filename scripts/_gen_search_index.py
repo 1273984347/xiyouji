@@ -84,6 +84,15 @@ def doc_entry(p):
     if m_ch:
         return {'kind': 'reader', 'title': title, 'category': category,
                 'snippet': snippet, 'url': 'reader/ch%03d.html' % int(m_ch.group(1)), 'kw': kw}
+    # W661：02-06 板块站内化扩量——url 指向 reader/<sub>/<文件名>.html（页面不存在回退 blob）
+    m_sub = re.match(r'docs/(0[2-6]-[^/]+)/(.+)\.md$', rel)
+    if m_sub:
+        sub = {'02-人物深度分析': 'people', '03-主题与情节专题': 'themes',
+               '04-文化与历史背景': 'culture', '05-诗词歌赋': 'poetry',
+               '06-个人随笔': 'essays'}.get(m_sub.group(1))
+        if sub and os.path.exists(os.path.join(SITE, 'reader', sub, m_sub.group(2) + '.html')):
+            return {'kind': 'reader', 'title': title, 'category': category,
+                    'snippet': snippet, 'url': 'reader/%s/%s.html' % (sub, m_sub.group(2)), 'kw': kw}
     return {'kind': 'doc', 'title': title, 'category': category,
             'snippet': snippet, 'url': BLOB + rel, 'kw': kw}
 
