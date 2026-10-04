@@ -35,6 +35,47 @@ ROOT = os.path.abspath(os.path.join(_HERE, ".."))  # scripts/.. = 项目根 xiyo
 
 # 降级六文档同步（W393）：核心 2 份硬门禁，辅助 4 份仅 WARN 不阻断
 # W413 修正（2026-08-09）：严格审查后交接文档恢复入库（无敏感内容），恢复为核心硬门禁
+# 门禁段自洽锁声明（VERIFY_SECTIONS·W663/T3）：下方名单 == main() 内阻断门禁段标记，
+# 每段段首 section(name) 上报、收尾断言缺段即红——防「段被删/注释后其余全绿」的假象。
+EXPECTED_SECTION_NAMES = [
+    "期望版本",
+    "dukou页脚",
+    "六文档同步",
+    "旁文档同步",
+    "范围漂移",
+    "A4计数",
+    "A1-A6计数",
+    "学术引用",
+    "A1导航",
+    "docs01链接",
+    "sitemap覆盖",
+    "内嵌回退",
+    "双源漂移",
+    "CSP漂移",
+    "腐蚀插件",
+    "内联语法",
+    "CSS平衡",
+    "token覆盖",
+    "动效禁令",
+    "a11y对比",
+    "INLINED完整",
+    "动态链接",
+    "治理契约",
+    "索引健康",
+    "元信息块",
+    "术语一致",
+    "引文核验",
+    "图表自洽",
+    "数据一致",
+    "W区间字面量",
+    "SEOhead",
+    "可引用性",
+    "设计令牌对账",
+    "色盲安全",
+    "降级声明",
+    "文档口径",
+]
+
 CORE_DOCS = [
     "CHANGELOG.md",
     "交接文档.md",
@@ -123,6 +164,12 @@ def main():
     def ok(msg):
         print("OK    " + msg)
 
+    sections_ran = []
+
+    def section(name):
+        sections_ran.append(name)
+
+    section("期望版本")
     # ---- 期望版本动态取自 CHANGELOG 现役版段（W518；页脚为滞后型手工工件，降级为新鲜度检查）----
     ver, wnum = latest_version_from_changelog(_read(os.path.join(ROOT, "CHANGELOG.md")))
     if not (ver and wnum):
@@ -130,6 +177,7 @@ def main():
     else:
         ok("期望版本动态取自 CHANGELOG 现役段 v%s W%s" % (ver, wnum))
 
+    section("dukou页脚")
     # ---- 读取 dukou-engine.html：页脚新鲜度 + 扫描所有 W### ----
     html = _read(HTML)
     if not html:
@@ -147,6 +195,7 @@ def main():
     else:
         fail("dukou-engine.html footer 未解析出 vX.Y.Z W###")
 
+    section("六文档同步")
     # ---- 降级六文档同步校验（W393）----
     # 核心 2 份（CHANGELOG/交接文档）缺失 v/W → 阻断；
     # 辅助 4 份（README/STRUCTURE/项目说明/file-index）缺失 → WARN 不阻断。
@@ -176,6 +225,7 @@ def main():
             continue
         ok("%s 含 v%s / W%s" % (d, ver, wnum))
 
+    section("旁文档同步")
     # ---- 旁文档同步门禁（W526：workflows/README.md 头部版本行 + 里程碑行上限 == 现役 v/W，补 W525 实证盲区）----
     wf = _read(os.path.join(ROOT, ".github", "workflows", "README.md"))
     if not wf:
@@ -199,6 +249,7 @@ def main():
         else:
             fail(".github/workflows/README.md 未找到 W450-W### 里程碑行")
 
+    section("范围漂移")
     # ---- 范围漂移检测 ----
     doc_w = [int(x) for x in re.findall(r"W(\d{3})", doc_all)]
     # W417：归档文件纳入扫描——归档后旧 W### 仍可追溯，不因归档误报范围漂移
@@ -211,6 +262,7 @@ def main():
     else:
         ok("无范围漂移（html 最高 W%d ≤ 文档+归档最高 W%d）" % (max_w_html, max_w_doc))
 
+    section("A4计数")
     # ---- A4 计数一致性 ----
     miss = []
     for d in A4_DOCS:
@@ -222,6 +274,7 @@ def main():
     else:
         ok("A4 计数一致（四份文档均含 '%s'）" % EXPECT_A4)
 
+    section("A1-A6计数")
     # ---- A1-A6 真实文件计数 vs README 声明（W417 新增，防计数声明失真）----
     readme_txt = _read(os.path.join(ROOT, "README.md"))
     m_cnt = re.search(r"共\s*(\d+)\s*篇", readme_txt)
@@ -242,6 +295,7 @@ def main():
     else:
         warn("README 未找到 '共 N 篇' 声明，跳过 A1-A6 计数校验")
 
+    section("学术引用")
     # ---- 学术研究 轨显式引用门禁（W452 新增：可核查引用硬性化）----
     acad_total = 0
     acad_missing = []
@@ -264,6 +318,7 @@ def main():
     else:
         ok("学术研究 轨文档 %d 篇均含显式引用（> 引用：学术论文索引 链接）" % acad_total)
 
+    section("A1导航")
     # ---- A1 导航相邻性断言（W422 新增：W418 只保证"每回有导航行"不保证指向相邻回）----
     ch_dir = os.path.join(ROOT, "docs", "01-全书逐回解读")
     nav_fail = []
@@ -296,6 +351,7 @@ def main():
     else:
         ok("A1 导航相邻性 100/100（上一回=N-1·下一回=N+1·第1回无上/第100回全书完）")
 
+    section("docs01链接")
     # ---- docs/01 链接校验（W422：W420 曾修复 66 死链，纳入门禁防回归）----
     try:
         r = subprocess.run(
@@ -310,6 +366,7 @@ def main():
     except Exception as e:
         fail("docs/01 链接校验执行异常: %s" % e)
 
+    section("sitemap覆盖")
     # ---- sitemap 覆盖校验（W422：防新增页面漏收录，W417 曾手工补 69→154）----
     sm_txt = _read(os.path.join(ROOT, "site", "sitemap.xml"))
     site_dir = os.path.join(ROOT, "site")
@@ -345,6 +402,7 @@ def main():
     else:
         warn("sitemap.xml 或 site/ 缺失，跳过 sitemap 覆盖校验")
 
+    section("内嵌回退")
     # ---- site/data 内嵌回退模式静态检查（W422：file:// 铁律的自动验证）----
     data_dir = os.path.join(ROOT, "site", "data")
     EMB_RE = re.compile(r"EMBEDDED_DATA|const\s+EMBEDDED|FALLBACK|INLINE|MOCK_DATA|const\s+data\s*=|text-search-app")
@@ -362,6 +420,7 @@ def main():
     else:
         ok("site/data %d 页均含内嵌回退模式（EMBEDDED_DATA/EMBEDDED/FALLBACK/inline data）" % data_count)
 
+    section("双源漂移")
     # ---- M2 双源漂移检查（W424：内嵌数据 vs scripts/output/data JSON 数组长度）----
     # 防"内嵌副本为空/过期、线上 fetch 404 后回退到错误数据"（81-hardships 先例）
     drift_js = os.path.join(ROOT, "scripts", "check_data_drift.js")
@@ -377,6 +436,7 @@ def main():
     except Exception as e:
         warn("数据漂移检查执行异常（W424 M2）: %s" % e)
 
+    section("CSP漂移")
     # ---- CSP 漂移检查（W424：全站 CSP meta 必须与内联脚本哈希一致）----
     # 改任何内联脚本后未重跑 generate_csp.py 会在此拦截（页面脚本会被 CSP 拦死）
     csp_py = os.path.join(_HERE, "generate_csp.py")
@@ -394,6 +454,7 @@ def main():
     except Exception as e:
         warn("CSP 校验执行异常（W424）: %s" % e)
 
+    section("腐蚀插件")
     # ---- 腐蚀/插件引用门禁（W424 复盘沉淀：EN 腐蚀第二波 + sankey 漏引防复发）----
     corr_py = os.path.join(_HERE, "check_corruption.py")
     try:
@@ -406,6 +467,7 @@ def main():
     except Exception as e:
         warn("腐蚀/插件引用门禁执行异常（W424 复盘沉淀）: %s" % e)
 
+    section("内联语法")
     # ---- 内联脚本语法门禁（W457：EN 引号/撇号/键名腐蚀致 SyntaxError 曾 7 页漏网）----
     js_syntax_js = os.path.join(_HERE, "check_js_syntax.js")
     try:
@@ -420,6 +482,7 @@ def main():
     except Exception as e:
         warn("内联脚本语法门禁执行异常（W457）: %s" % e)
 
+    section("CSS平衡")
     # ---- CSS 结构平衡门禁（W457：url() 缺右括号致整页 CSS 裸奔白屏，222 页先例）----
     struct_py = os.path.join(_HERE, "check_structure.py")
     try:
@@ -432,6 +495,7 @@ def main():
     except Exception as e:
         warn("CSS 结构平衡门禁执行异常（W457）: %s" % e)
 
+    section("token覆盖")
     # ---- token 覆盖率门禁（W493 E6 转正：M2/M3 页面私有 <style> 裸色/裸阴影防回归）----
     tok_py = os.path.join(_HERE, "check_token_coverage.py")
     try:
@@ -444,6 +508,7 @@ def main():
     except Exception as e:
         warn("token 覆盖率门禁执行异常（W493）: %s" % e)
 
+    section("动效禁令")
     # ---- 动效禁止清单门禁（W493 E6 转正：D4 bounce/旋转/无限循环/parallax 防回归）----
     motion_py = os.path.join(_HERE, "check_motion_ban.py")
     try:
@@ -456,6 +521,7 @@ def main():
     except Exception as e:
         warn("动效禁止清单门禁执行异常（W493）: %s" % e)
 
+    section("a11y对比")
     # ---- a11y 对比度门禁（W493 E6 转正：M1 WCAG AA，P0/P1 阻断）----
     a11y_py = os.path.join(_HERE, "a11y_audit.py")
     try:
@@ -479,6 +545,7 @@ def main():
     except Exception as e:
         warn("a11y 对比度门禁执行异常（W493）: %s" % e)
 
+    section("INLINED完整")
     # ---- INLINED CSS 完整性门禁（W495 转正：W493 事故曾清空 224 页内联块而 14 门禁全绿漏网）----
     inl_py = os.path.join(_HERE, "check_inlined_css.py")
     try:
@@ -491,6 +558,7 @@ def main():
     except Exception as e:
         warn("INLINED CSS 门禁执行异常（W495）: %s" % e)
 
+    section("动态链接")
     # ---- 动态链接门禁（W459：lint_links 只扫静态 href，JS 拼接链接曾致 D2 回目跳转全 404 漏网）----
     dyn_links_py = os.path.join(_HERE, "check_dynamic_links.py")
     try:
@@ -503,6 +571,7 @@ def main():
     except Exception as e:
         warn("动态链接门禁执行异常（W459）: %s" % e)
 
+    section("治理契约")
     # ---- 治理文档维护契约门禁（2026-08-18：防追加式乱写·WARN 起步，不阻断提交）----
     gov_py = os.path.join(_HERE, "check_governance_docs.py")
     try:
@@ -517,6 +586,7 @@ def main():
 
         warn("Skills 索引一致性门禁执行异常（W498）: %s" % e)
 
+    section("索引健康")
     # ---- 索引健康门禁（W500 转正：W499 全面审查——file-index 空壳/重复/残留 + 方法论 README 漏登记 + CHANGELOG 编号上限手工漏改）----
     idx_health_py = os.path.join(_HERE, "check_index_health.py")
     try:
@@ -529,6 +599,7 @@ def main():
     except Exception as e:
         warn("索引健康门禁执行异常（W500）: %s" % e)
 
+    section("元信息块")
     # ---- 元信息块 v2 门禁（W501：内容可信度轨——新文件必须含血缘 + 核验状态 4 字段，基线豁免存量 611 篇）----
     fm_py = os.path.join(_HERE, "check_frontmatter.py")
     try:
@@ -541,6 +612,7 @@ def main():
     except Exception as e:
         warn("元信息块 v2 门禁执行异常（W501）: %s" % e)
 
+    section("术语一致")
     # ---- 术语一致性门禁（W502：术语表↔glossary.json 双向同步 + 人物称谓规范词锚定·基线豁免 383 条）----
     gl_py = os.path.join(_HERE, "check_glossary.py")
     try:
@@ -553,6 +625,7 @@ def main():
     except Exception as e:
         warn("术语一致性门禁执行异常（W502）: %s" % e)
 
+    section("引文核验")
     # ---- 原著引文硬验证门禁（W503：`> 原文引文（第N回）` 行必须对 text-search.json 精确命中，防 AI 幻觉引文）----
     cite_py = os.path.join(_HERE, "check_citations.py")
     try:
@@ -565,6 +638,7 @@ def main():
             fail("原著引文未命中/格式错误（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
     except Exception as e:
         warn("原著引文核验门禁执行异常（W503）: %s" % e)
+    section("图表自洽")
     # ---- 图表静态自洽门禁（W551：W550 全站截图审查实证三类批量图表缺陷——10 页桑基缺引用 /
     # 4 组饼图措辞×树图实现错配——均为门禁盲区积累数月后人工清账。本门禁文本层拦同类复发；
     # 需真实渲染的遮挡/空带/溢出/桑基运行时由 check_screenshot_gates.js（screenshot-review
@@ -580,6 +654,7 @@ def main():
     except Exception as e:
         warn("图表静态自洽门禁执行异常（W551）: %s" % e)
 
+    section("数据一致")
     # ---- 数据内容一致性门禁（W555：方案 C L1 站内自洽常驻化，经用户确认挂载为第 25 门禁。
     # 源自 W550 实证三类同页数字矛盾（relationships 89/88、narratology-13d 13/16/17、six-senses 5/4）。
     # --gate 模式：content-consistency-baseline.txt 冻结存量误报（W554 逐条人工裁决 4 条），
@@ -595,6 +670,7 @@ def main():
     except Exception as e:
         warn("数据内容一致性门禁执行异常（W555）: %s" % e)
 
+    section("W区间字面量")
     # ---- W 号区间字面量门禁（W628 挂载·第 27 门禁·经用户指令防复发：现役叙述面
     # 「W001-Wxxx」覆盖上限字面量终点须等于现役 max W + CITATION.cff 版本同步）----
     wrl_py = os.path.join(_HERE, "check_w_range_literal.py")
@@ -608,6 +684,7 @@ def main():
     except Exception as e:
         warn("W 号区间字面量门禁执行异常（W628）: %s" % e)
 
+    section("SEOhead")
     # ---- SEO head 门禁（W630 挂载·第 26 门禁·slot 自 W591 预留：og/canonical/JSON-LD/
     # hreflang/sitemap 集合一致——SEO head 为静默腐烂面·经用户裁决挂载）----
     seo_py = os.path.join(_HERE, "check_seo_head.py")
@@ -622,6 +699,7 @@ def main():
         warn("SEO head 门禁执行异常（W630）: %s" % e)
 
 
+    section("可引用性")
     # ---- 可视化可引用性门禁（2026-10-02 用户裁决挂载·第 28 门禁·B-6 第一步：slot 自 W638 预留。
     # 来源=W636 缺口发现 / W637 门禁升级路径（WARN+基线只增·W555 先例）/ W638 出处四字段收编。
     # 经用户批准开工=反转 B-6 三次「登记不开工」裁决（registry 已记账）。
@@ -642,6 +720,7 @@ def main():
             ok("可视化可引用性门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
 
 
+    section("设计令牌对账")
     # ---- 设计令牌文档对账门禁（PD-5·W652：design-tokens.json/design.md ↔ tokens.css 双向对账——
     # 防 DESIGN.md §2 手写表与单一事实源静默漂移（W652 首跑实证 6 处值漂移已同步+15 页面本地令牌白名单）·
     # wrapper 防静默跳过与第 28 门禁同款：crash 即拦+汇总行校验）----
@@ -660,6 +739,7 @@ def main():
             ok("设计令牌文档对账通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
 
 
+    section("色盲安全")
     # ---- 色盲安全门禁（第 29 槽·PD-1a·W653：D-6 裁决 WARN+基线冻结——Machado 二型模拟+CIEDE2000
     # ΔE<10 成对检查·基线 17428 对冻结·基线外新增 FAIL·口径=light 静态（暗色 computed 态归 PD-4）·
     # wrapper 防静默跳过与第 28 门禁同款）----
@@ -678,6 +758,7 @@ def main():
             ok("色盲安全门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
 
 
+    section("降级声明")
     # ---- 窄屏降级声明门禁（第 30 槽·PD-1b·W654：§4B 选型章配套——site/data 每页须声明
     # chart-degrade: stacked|scroll-x|simplified|n/a（静态解析不启浏览器）·wrapper 防静默跳过同前）----
     dg_py = os.path.join(_HERE, "check_chart_degrade.py")
@@ -695,6 +776,7 @@ def main():
             ok("降级声明门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
 
 
+    section("文档口径")
     # ---- 文档口径体检门禁（第 31 槽·W663：doc-sync——代码/提交真值 vs 文档当前态声明反向对拍
     # 四类窄句式（README 抬头/交接头链/门禁清单上限/提交-版段对账·D2 对账表登记即豁免）·
     # wrapper 防静默跳过与第 29/30 槽同款）----
@@ -721,6 +803,14 @@ def main():
             ok("/health 存活：%s" % body)
         except Exception as e:
             print("WARN  /health 不可达（环境项，不阻断提交）：%s" % e)
+
+    # ---- 门禁段自洽锁（VERIFY_SECTIONS·W663/T3：声明段集合 == 实跑段集合，缺段即红）----
+    missing_sections = [n for n in EXPECTED_SECTION_NAMES if n not in sections_ran]
+    if missing_sections:
+        fail("门禁段实跑 %d ≠ 声明 %d：缺 %s（VERIFY_SECTIONS 自洽锁）"
+             % (len(set(sections_ran)), len(EXPECTED_SECTION_NAMES), "、".join(missing_sections)))
+    else:
+        ok("门禁段自洽锁：实跑 %d 段 == 声明 %d 段" % (len(EXPECTED_SECTION_NAMES), len(EXPECTED_SECTION_NAMES)))
 
     print("\n==== 交付校验汇总 ====")
     if fails == 0:
