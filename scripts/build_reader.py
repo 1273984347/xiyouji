@@ -1,25 +1,18 @@
-#!/usr/bin/env python3
-"""build_reader.py — docs 站内阅读器生成器（W593 阅读器试点 WP-D1）。
+r"""
+build_reader.py — 站内阅读器渲染器（W593 单板块 → W660 多板块映射驱动）
 
-方案：docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md WP-D1。
+板块表（SECTIONS）驱动：六源目录 → reader 子目录；01 逐回保留 chNNN 命名与
+prev/next 连载语义，02-06 按文件名排序 prev/next；reader/index.html 升级六板块分组目录。
 
-输入：docs/01-全书逐回解读/第(\\d{3})回-*.md（100 篇）
-输出：site/reader/ch001.html … ch100.html + site/reader/index.html
+链接改写规则（W593 四规则 + W660 扩充·深度感知）：
+  ① 板块内 md 互链 → 同目录 .html（01 的 第NNN回-*.md → chNNN.html；README.md 除外→blob）
+  ② 跨板块 docs md → {up}{sub}/{name}.html（01 → {up}chNNN.html）
+  ③ site 资源 ../../site/… → {up}data/…
+  ③b 非六板块 docs（00-导读/07-09/10/治理/模板）→ GitHub blob（站外保留）
+  ④ http/锚点保持
+未识别 .md 链接 → 残留清单（非零退出）。
 
-链接改写规则（D1 口径）：
-  ① 同板块章节互链  第NNN回-*.md（含 ./ 前缀）      → chNNN.html
-  ② 指向 site 资源  ](../../site/X)                 → ](../X)
-  ③ 跨板块 docs md  ](../<板块>/x.md)               → GitHub blob 绝对 URL（D2 升级为站内）
-  ④ 图片：docs/01 实测 0 张，无需处理
-
-页面规格：
-  - tokens/system 走 <link>（同站根页形态）；私有 <style> 仅引用 token 变量（token 覆盖率门禁 0 裸色）
-  - head 内建 SEO 全套（canonical/og:title/og:type=article/og:url/og:image/twitter:card）+ SEO:INJECTED 标记
-  - 上一篇/下一篇：chNNN±1，ch001 无上一篇、ch100 无下一篇（aria-disabled，不渲染死链）
-  - 纯静态无 fetch（不适用 EMBEDDED 回退铁律）；无版本页脚（不参与新鲜度耦合面）
-  - 无内联脚本（CSP 由 generate_csp.py 注入空哈希 meta）
-
-用法：python scripts/build_reader.py
+用法：python scripts/build_reader.py            # 全量渲染 01-06
 """
 from __future__ import annotations
 
@@ -31,11 +24,22 @@ from pathlib import Path
 import markdown
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "docs" / "01-全书逐回解读"
 OUT = ROOT / "site" / "reader"
-BLOB = "https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/"
+BLOB = "https://github.com/1273984347/xiyouji/blob/main/docs/"
 BASE = "https://1273984347.github.io/xiyouji/"
 OG_IMAGE = BASE + "static/img/og-cover.png"
+
+# 板块表：源目录名 → (子目录, 板块标题)。01 特殊：chNNN 命名+数字 prev/next。
+SECTIONS = [
+    ("01-全书逐回解读", "", "逐回解读"),
+    ("02-人物深度分析", "people", "人物深度"),
+    ("03-主题与情节专题", "themes", "主题专题"),
+    ("04-文化与历史背景", "culture", "文化背景"),
+    ("05-诗词歌赋", "poetry", "诗词歌赋"),
+    ("06-个人随笔", "essays", "个人随笔"),
+]
+SUB = {src: sub for src, sub, _ in SECTIONS}
+BOARD_DIRS = {src for src, _, _ in SECTIONS}
 
 STYLE = """
   .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
@@ -68,19 +72,53 @@ STYLE = """
     border: 1px solid var(--line); border-radius: var(--radius-sm, 4px); font-size: 14px; }
   .reader-idx a:hover { border-color: var(--accent); color: var(--accent); }
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
+  .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
+    border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
 """
 
 
-def rewrite_links(md: str, rel_out: str) -> tuple[str, list[str]]:
-    """按 D1 三规则改写链接；返回 (新 md, 残留未识别链接清单)。"""
-    # ① 章节互链
-    md = re.sub(r"\]\(\.?/?(第\d{3}回-[^)]*\.md)\)",
-                lambda m: "](ch" + m.group(1)[1:4] + ".html)", md)
-    # ② site 资源
-    md = md.replace("](../../site/", "](../")
-    # ③ 跨板块 docs → blob
-    md = re.sub(r"\]\(\.\./([^)]+\.md)\)",
-                lambda m: "](https://github.com/1273984347/xiyouji/blob/main/docs/" + m.group(1) + ")", md)
+def rewrite_links(md: str, docs_root: str, up: str, up2: str, up3: str) -> tuple[str, list[str]]:
+    """深度感知改写。up = 页面到 reader 根的相对前缀（'' 或 '../'）。
+
+    ① 板块内 md 互链（README.md 除外→blob）
+    ② 跨板块 md → {up}{sub}/{name}.html（01 → {up}chNNN.html）
+    ③ site 资源 ../../site/… → {up}…
+    ③b 非六板块 md（../x/*.md 与 ../../x.md）→ GitHub blob
+    ④ http/锚点保持
+    """
+    # ① 板块内 md 互链（README.md → blob·不入 reader）
+    if docs_root == "01-全书逐回解读":
+        md = re.sub(r"\]\(\.?/?(第\d{3}回-[^)]*\.md)\)",
+                    lambda m: "](ch" + m.group(1)[1:4] + ".html)", md)
+        md = re.sub(r"\]\(\.?/?README\.md\)",
+                    lambda m: "](" + BLOB + docs_root + "/README.md)", md)
+    else:
+        md = re.sub(r"\]\((\.?/?(?!README\.md)[^)/]+\.md)\)",
+                    lambda m: "](" + m.group(1).lstrip("./")[:-3] + ".html)", md)
+        md = re.sub(r"\]\(\.?/?README\.md\)",
+                    lambda m: "](" + BLOB + docs_root + "/README.md)", md)
+    # ② 跨板块 md 互链（深度感知）
+    def cross_cat(m: re.Match) -> str:
+        d, fn = m.group(1), m.group(2)
+        sub = SUB.get(d)
+        if sub is None:
+            return m.group(0)
+        if d == "01-全书逐回解读":
+            return "](" + up + "ch" + fn[1:4] + ".html)"
+        return "](" + up + sub + "/" + fn[:-3] + ".html)"
+
+    md = re.sub(r"\]\(\.\./(0[1-6]-[^/]+)/([^)/]+\.md)\)", cross_cat, md)
+    # ③ site 资源（up2 由调用方传入：data 在 reader 根上一级）
+    md = md.replace("](../../site/", "](" + up2)
+    # ③c 仓库根的 scripts 引用（up3 由调用方传入）
+    md = md.replace("](../../scripts/", "](" + up3 + "scripts/")
+    # ③b 非六板块 docs → GitHub blob（单段/双段）
+    md = re.sub(r"\]\(\.\./((?!0[1-6]-)[^)/]+\.md)\)",
+                lambda m: "](" + BLOB + m.group(1) + ")", md)
+    md = re.sub(r"\]\(\.\./([^)/]+)/([^)/]+\.md)\)",
+                lambda m: "](" + BLOB + m.group(1) + "/" + m.group(2) + ")", md)
+    md = re.sub(r"\]\(\.\./\.\./((?!site/)[^)]+\.md)\)",
+                lambda m: "](" + BLOB + m.group(1) + ")", md)
     # 审计残留
     left = [u for u in re.findall(r"\]\(([^)]+)\)", md)
             if u.endswith(".md") and not u.startswith("http")]
@@ -102,7 +140,10 @@ def extract(md: str) -> tuple[str, str | None]:
 
 
 def head(rel: str, title: str, desc: str) -> str:
-    url = BASE + rel
+    # 深度按 site/reader/ 内相对路径计（剥掉 URL 用 reader/ 前缀）
+    rel_in_reader = rel[len("reader/"):] if rel.startswith("reader/") else rel
+    prefix = "../" * (rel_in_reader.count("/") + 1)
+    url = BASE + "reader/" + rel
     t = html.escape(title, quote=True)
     d = html.escape(desc, quote=True)
     return f"""<meta charset="UTF-8">
@@ -119,9 +160,9 @@ def head(rel: str, title: str, desc: str) -> str:
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../tokens.css">
-<link rel="stylesheet" href="../system.css">
-<script src="../js/theme-init.js"></script>
+<link rel="stylesheet" href="{prefix}tokens.css">
+<link rel="stylesheet" href="{prefix}system.css">
+<script src="{prefix}js/theme-init.js"></script>
 <style>{STYLE}</style>"""
 
 
@@ -141,66 +182,93 @@ def page_shell(rel: str, title: str, desc: str, body: str) -> str:
 
 
 def main() -> None:
-    files = sorted(SRC.glob("第*回-*.md"))
-    assert len(files) == 100, f"预期 100 篇，实得 {len(files)}"
+    docs = ROOT / "docs"
     OUT.mkdir(parents=True, exist_ok=True)
 
-    chapters = []  # (num, fname, h1, full_title)
-    for f in files:
-        num = int(f.name[1:4])
-        md = f.read_text(encoding="utf-8")
-        h1, full = extract(md)
-        chapters.append((num, f.name, h1, full))
+    n_pages = 0
+    sections_out: list[tuple[str, list[tuple[str, str]]]] = []
+    leftovers_all: list[str] = []
 
-    leftovers_all = []
-    for num, fname, h1, _full in chapters:
-        md = (SRC / fname).read_text(encoding="utf-8")
-        md, leftovers = rewrite_links(md, f"ch{num:03d}.html")
-        leftovers_all += [(f"ch{num:03d}", u) for u in leftovers]
-        body_html = markdown.markdown(md, extensions=["tables"])
-        title = h1 or f"第{num:03d}回"
-        desc = f"{title}——《详解西游记》逐回解读"
-        prev_html = (f'<a href="ch{num - 1:03d}.html">← 上一回（第{num - 1:03d}回）</a>'
-                     if num > 1 else '<span class="off">← 上一回（无）</span>')
-        next_html = (f'<a href="ch{num + 1:03d}.html">下一回（第{num + 1:03d}回）→</a>'
-                     if num < 100 else '<span class="off">下一回（无）→</span>')
-        body = f"""  <nav class="reader-topnav">
-    <a class="brand" href="index.html">详解西游记 · 逐回阅读</a>
-    <a href="../index.html">站点首页</a>
-    <a href="{BLOB}{fname}" rel="noopener">在 GitHub 查看源文件</a>
+    for docs_root, sub, cat_title in SECTIONS:
+        src = docs / docs_root
+        files = sorted(p for p in src.glob("*.md") if p.name != "README.md")
+        assert files, f"{docs_root} 无 md"
+
+        rendered: list[tuple[str, str, str]] = []  # (out_rel, fname, display)
+        for f in files:
+            md = f.read_text(encoding="utf-8")
+            h1, _full = extract(md)
+            out_name = f"ch{int(f.name[1:4]):03d}.html" if docs_root == "01-全书逐回解读" else f.stem + ".html"
+            out_rel = (sub + "/" + out_name) if sub else out_name
+            rendered.append((out_rel, f.name, h1 or f.stem))
+        if docs_root != "01-全书逐回解读":
+            rendered.sort(key=lambda x: x[1])
+        entries = [(rel, disp) for rel, _, disp in rendered]
+        sections_out.append((cat_title, entries))
+
+        for idx, (out_rel, fname, _disp) in enumerate(rendered):
+            depth = out_rel.count("/")
+            up = "../" * depth
+            up2 = "../" * (depth + 1)
+            up3 = "../" * (depth + 2)
+            md = (src / fname).read_text(encoding="utf-8")
+            md, leftovers = rewrite_links(md, docs_root, up, up2, up3)
+            leftovers_all += [(out_rel, u) for u in leftovers]
+            body_html = markdown.markdown(md, extensions=["tables"])
+            h1, full = extract((src / fname).read_text(encoding="utf-8"))
+            title = full or h1 or out_rel
+            desc = f"{title}——《详解西游记》{cat_title}"
+
+            prev_rel = rendered[idx - 1][0] if idx > 0 else None
+            next_rel = rendered[idx + 1][0] if idx + 1 < len(rendered) else None
+
+            def pn_html(target: str | None, label: str, dup: str) -> str:
+                if not target:
+                    return f'<span class="off">{label}（无）</span>'
+                return f'<a href="{dup}{target}">{label}</a>'
+
+            dup = depth * "../"
+            prev_html = pn_html(prev_rel, "← 上一篇", dup)
+            next_html = pn_html(next_rel, "下一篇 →", dup)
+            home = (dup + "index.html") if depth else "index.html"
+
+            blob = f"{BLOB}{docs_root}/{fname}"
+            body = f"""  <nav class="reader-topnav">
+    <a class="brand" href="{home}">详解西游记 · 站内阅读</a>
+    <a href="{up}../index.html">站点首页</a>
+    <a href="{blob}" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
   <article class="reader-body">
 {body_html}
   </article>
-  <nav class="reader-pn" aria-label="上一篇下一篇">
-    {prev_html}
-    {next_html}
-  </nav>"""
-        (OUT / f"ch{num:03d}.html").write_text(
-            page_shell(f"reader/ch{num:03d}.html", title, desc, body),
-            encoding="utf-8", newline="\n")
+  <nav class="reader-pn">{prev_html}{next_html}</nav>"""
+            (OUT / out_rel).parent.mkdir(parents=True, exist_ok=True)
+            (OUT / out_rel).write_text(
+                page_shell(out_rel, title, desc, body), encoding="utf-8", newline="\n")
+            n_pages += 1
+        # 板块目录页（02-06）——目录页位于 sub/ 内·条目链接补 ../ 前缀
+        if sub:
+            items = "\n".join(f'<li><a href="../{rel}">{disp}</a></li>' for rel, disp in entries)
+            (OUT / sub / "index.html").write_text(
+                page_shell(sub + "/index.html", f"{cat_title} · 目录",
+                           f"《详解西游记》{cat_title}目录（{len(entries)} 篇）",
+                           f'<h1 style="font-size:26px;">{cat_title}</h1>\n<ul class="reader-idx">\n{items}\n</ul>'),
+                encoding="utf-8", newline="\n")
+            n_pages += 1
 
-    # 目录页
-    items = []
-    for num, _fname, _h1, full in chapters:
-        label = full or f"第{num}回"
-        items.append(f'    <li><a href="ch{num:03d}.html">'
-                     f'<span class="no">{num:03d}</span>{html.escape(label)}</a></li>')
-    idx_body = f"""  <nav class="reader-topnav">
-    <a class="brand" href="index.html">详解西游记 · 逐回阅读</a>
-    <a href="../index.html">站点首页</a>
-  </nav>
-  <h1 style="font-size:26px;">全 100 回目录</h1>
-  <p class="reader-meta">共 100 篇 · 点击进入单回阅读；每回含上一篇/下一篇连载导航。</p>
-  <ul class="reader-idx">
-{chr(10).join(items)}
-  </ul>"""
+    # 总目录：六板块分组
+    idx_body = ""
+    for cat_title, entries in sections_out:
+        idx_body += f'<div class="reader-group">{cat_title}（{len(entries)}）</div>\n<ul class="reader-idx">\n'
+        idx_body += "\n".join(f'<li><a href="{rel}">{disp}</a></li>' for rel, disp in entries)
+        idx_body += "\n</ul>\n"
     (OUT / "index.html").write_text(
-        page_shell("reader/index.html", "全 100 回目录 · 逐回阅读",
-                   "《详解西游记》全 100 回逐回解读目录", idx_body),
+        page_shell("index.html", "站内阅读 · 全目录",
+                   "《详解西游记》站内阅读目录（六板块）", idx_body),
         encoding="utf-8", newline="\n")
+    n_pages += 1
 
-    print(f"[OK] 生成 ch001-ch100 + index 共 {101} 页 → site/reader/")
+    print(f"[OK] 生成 {n_pages} 页（含内容页/板块目录/总目录）→ site/reader/")
     if leftovers_all:
         print(f"[WARN] 未识别的 .md 链接 {len(leftovers_all)} 处：")
         for loc, u in leftovers_all[:10]:

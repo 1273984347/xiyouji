@@ -4,1184 +4,21 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>全 100 回目录 · 逐回阅读</title>
+<title>站内阅读 · 全目录</title>
 <!-- SEO:INJECTED -->
-<meta name="description" content="《详解西游记》全 100 回逐回解读目录">
+<meta name="description" content="《详解西游记》站内阅读目录（六板块）">
 <link rel="canonical" href="https://1273984347.github.io/xiyouji/reader/index.html">
-<meta property="og:title" content="全 100 回目录 · 逐回阅读">
-<meta property="og:description" content="《详解西游记》全 100 回逐回解读目录">
+<meta property="og:title" content="站内阅读 · 全目录">
+<meta property="og:description" content="《详解西游记》站内阅读目录（六板块）">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://1273984347.github.io/xiyouji/reader/index.html">
 <meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-
-
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../system.css">
 <script src="../js/theme-init.js"></script>
-                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
-    <style>
-/*
- * tokens.css — 西游记可视化站点公共设计令牌
- * ----------------------------------------------
- * v3 · W476 纸感轻立体（在 v2/W334 基础上增层 · 见 DESIGN.md §4A）
- * 全站统一设计令牌 + 字体分层 + hero 覆写层。
- *
- * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
- *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
- *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
- *
- * 设计原则：
- *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
- *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
- *   - 小圆角 + 四级纸感海拔（v3）· 1px 发丝线分隔 · 大留白
- *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
- */
-
-/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
-/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
-/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
-@font-face {
-    font-family: 'Noto Serif SC';
-    font-style: normal;
-    font-weight: 200 900;
-    font-display: optional;
-    src: url('../static/fonts/noto-serif-sc-shared.subset.woff2') format('woff2-variations');
-}
-@font-face {
-    font-family: 'Noto Sans SC';
-    font-style: normal;
-    font-weight: 400;
-    font-display: optional;
-    src: url('../static/fonts/NotoSansSC-Regular.subset.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'Noto Sans SC';
-    font-style: normal;
-    font-weight: 500;
-    font-display: optional;
-    src: url('../static/fonts/NotoSansSC-Medium.subset.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'JetBrains Mono';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'JetBrains Mono';
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
-}
-
-:root {
-    color-scheme: light;
-
-    /* —— 背景 / 纸张 —— */
-    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
-    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
-    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
-    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
-    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
-
-    /* —— 文字 —— */
-    --ink: #23201A;           /* 主文字：墨 */
-    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
-    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
-
-    /* —— 主辅配色（朱砂单点强调） —— */
-    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
-    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
-    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
-    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
-    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
-    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
-
-    /* —— 图表五色雅集色板（W334 图表规范） —— */
-    --chart-1: #C8463A;       /* 朱砂 */
-    --chart-2: #3A6B8C;       /* 靛蓝 */
-    --chart-3: #C9A063;       /* 赭金 */
-    --chart-4: #6B8E5A;       /* 苔绿 */
-    --chart-5: #D8CFBC;       /* 米灰 */
-    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
-
-    /* —— 分隔线 —— */
-    --line: #E5DFD0;          /* 发丝线：浅米褐 */
-
-    /* —— 阴影（克制，仅卡片浮起用） —— */
-    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
-    --shadow-lift: 0 2px 6px rgba(35, 32, 26, 0.08), 0 8px 24px rgba(35, 32, 26, 0.08);
-
-    /* —— 动效令牌（W460 墨韵动效体系：时长三级 + 缓动三系） —— */
-    /* 时长：fast 即时反馈 / base 状态变化 / slow 入场编排（克制雅致，不上弹跳） */
-    --dur-fast: 150ms;        /* 按压、toggle、色彩切换 */
-    --dur-base: 250ms;        /* hover、行高亮、tooltip */
-    --dur-slow: 500ms;        /* 卡片入场、区块 reveal */
-    /* 缓动：内容抵达用 ease-out 系；弃用裸 ease 关键字 */
-    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);      /* 均匀精致·默认 */
-    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);       /* 果断自信·大位移入场 */
-    --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);   /* 往返对称·展开收起 */
-
-    /* —— 字体三层分工 —— */
-    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
-    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
-}
-
-/* ===== v3 · W476 纸感轻立体令牌层（DESIGN.md §4A） ===== */
-/* 断点常量：640/768/1024/1280/1536 · 最小验收 375 */
-:root {
-    /* —— 四级海拔（hover +1 档 · 悬浮 ≥3 · 禁硬编码阴影） —— */
-    --elev-0: none;
-    --elev-1: var(--shadow);
-    --elev-2: var(--shadow-lift);
-    --elev-3: 0 4px 10px rgba(35, 32, 26, 0.10), 0 12px 32px rgba(35, 32, 26, 0.12);
-    --elev-4: 0 8px 18px rgba(35, 32, 26, 0.14), 0 24px 56px rgba(35, 32, 26, 0.16);
-
-    /* —— 圆角 / 边框 —— */
-    --radius-sm: 2px;  --radius-md: 6px;  --radius-lg: 10px;  --radius-pill: 999px;
-    --border-hairline: 1px solid var(--line);
-    --border-accent: 1px solid var(--accent);
-
-    /* —— 色阶派生（深档 hex 兜底 · 浅档 color-mix 优雅降级） —— */
-    --accent-deep: #AF3F34;  /* 700 档：active/按钮渐变终点 */
-    --accent-tint: color-mix(in srgb, var(--accent) 10%, var(--paper));  /* 100 档选中底 */
-    --accent-wash: color-mix(in srgb, var(--accent) 5%, var(--bg));      /* 050 档 band 底 */
-    --ink-tint: color-mix(in srgb, var(--ink) 5%, var(--bg));            /* 极浅墨 band 底 */
-
-    /* —— 语义功能色（底/边/字三件套） —— */
-    --ok: var(--accent-4);      --ok-bg: color-mix(in srgb, var(--accent-4) 10%, var(--paper));
-    --warn: var(--accent-3);    --warn-bg: color-mix(in srgb, var(--accent-3) 10%, var(--paper));
-    --danger: var(--rebel);     --danger-bg: color-mix(in srgb, var(--rebel) 8%, var(--paper));
-    --info: var(--accent-2);    --info-bg: color-mix(in srgb, var(--accent-2) 10%, var(--paper));
-
-    /* —— 排版阶梯（1.25 · 0 正文 → 5 hero/KPI） —— */
-    --text-step-0: 1rem;       --text-step-1: 1.25rem;    --text-step-2: 1.5625rem;
-    --text-step-3: 1.953rem;   --text-step-4: 2.441rem;   --text-step-5: 3.052rem;
-    --text-hero: clamp(1.75rem, 1.2rem + 2.5vw, 2.75rem);
-    --leading-tight: 1.3;  --leading-heading: 1.4;  --leading-body: 1.75;
-}
-
-/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
-/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
-body {
-    font-family: var(--font-sans);
-}
-h1, h2, h3, h4, h5,
-.section-title, .card h2, .chart-block h3,
-.quick-links h3, .three-layer-card h3 {
-    font-family: var(--font-serif);
-}
-
-/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
-/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
-.hero {
-    background: #221D16;
-}
-.hero::after {
-    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
-}
-
-/* ===== 选区与焦点细节 ===== */
-::selection {
-    background: rgba(200, 70, 58, 0.16);
-}
-
-/* ===== 夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载 ===== */
-html[data-theme="dark"] {
-    --bg: #221D16;
-    --ink: #F2EBDC;
-    --ink-soft: #CBBFA9;
-    --ink-faint: #8F8674;
-    --paper: #2B2419;
-    --paper-warm: #33291B;
-    --line: rgba(242, 235, 220, 0.14);
-    --accent: #E0604F;
-    --accent-deep: #C94F3F;
-    --accent-soft: #E8A99F;
-    --accent-tint: rgba(224, 96, 79, 0.14);
-    --accent-wash: rgba(224, 96, 79, 0.08);
-    --accent-2: #7FA8C9;
-    --accent-3: #C9A96B;
-    --accent-4: #9DB98A;
-    --chart-1: #E0604F;
-    --chart-2: #7FA8C9;
-    --chart-4: #9DB98A;
-    --chart-6: #C9A96B;
-    --ok: #8FBF7F;
-    --warn: #D0A35C;
-    --danger: #D96C5C;
-    --info: #7FA8C9;
-    --elev-0: none;
-    --elev-1: 0 1px 3px rgba(0, 0, 0, 0.40), 0 4px 12px rgba(0, 0, 0, 0.30);
-    --elev-2: 0 2px 6px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
-    --elev-3: 0 4px 10px rgba(0, 0, 0, 0.50), 0 12px 32px rgba(0, 0, 0, 0.45);
-    --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
-    color-scheme: dark;
-}
-html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
-html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
-/* 图表深色适配（通用）：SVG 数据色温和提亮，tooltip 边框跟随令牌 */
-html[data-theme="dark"] svg path[fill^="#"],
-html[data-theme="dark"] svg circle[fill^="#"],
-html[data-theme="dark"] svg rect[fill^="#"] { filter: brightness(1.12) saturate(1.05); }
-html[data-theme="dark"] .chart-tooltip { border-color: var(--line); }
-/* W569：图表暗色适配 v2——数据页图表按宣纸浅色调色板生成，深色下 svg 文字保持墨色填充不可读
-   （全站审计 232 页实证：暗色低对比文字 1298 处）。文字/tspan 反白；形状明度由上方亮度滤波提升。
-   !important 用于压过 d3 .attr('fill')（表现属性）与 .style('fill')（内联）；全站无 fill="none" 文本（实证）。 */
-html[data-theme="dark"]:not(:has(#audit-halo)) svg text,
-html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !important; }
-/* 有 #audit-halo 光晕的页（168 页）：墨字+白晕本就双主题可读，文字填充保持原样（W553 设计） */
-
-  /* —— W588b：暗色图表填充 CSS 强制映射（W582 hex 24 条 + 全量 rgb 37 条·var() 引用豁免）—— */
-  html[data-theme="dark"] svg [fill="#3a6b8c" i] { fill: #7d99a9; }  /* ×526 L<0.16 */
-  html[data-theme="dark"] svg [fill="#6b3a8c" i] { fill: #a88bb0; }  /* ×130 L<0.16 */
-  html[data-theme="dark"] svg [fill="#8c3a6b" i] { fill: #b8879c; }  /* ×110 L<0.16 */
-  html[data-theme="dark"] svg [fill="#8c2a2a" i] { fill: #be8880; }  /* ×76 L<0.16 */
-  html[data-theme="dark"] svg [fill="#6B6455" i] { fill: #9c9586; }  /* ×50 L<0.16 */
-  html[data-theme="dark"] svg [fill="#c8392c" i] { fill: #d87c6e; }  /* ×46 L<0.16 */
-  html[data-theme="dark"] svg [fill="#2c5f7c" i] { fill: #7f99a4; }  /* ×46 L<0.16 */
-  html[data-theme="dark"] svg [fill="#8b4513" i] { fill: #b78d6a; }  /* ×26 L<0.16 */
-  html[data-theme="dark"] svg [fill="#6b4226" i] { fill: #aa907b; }  /* ×26 L<0.16 */
-  html[data-theme="dark"] svg [fill="#A0522D" i] { fill: #be8a6c; }  /* ×20 L<0.16 */
-  html[data-theme="dark"] svg [fill="#5a4030" i] { fill: #a39383; }  /* ×18 L<0.16 */
-  html[data-theme="dark"] svg [fill="#8B4513" i] { fill: #b78d6a; }  /* ×16 L<0.16 */
-  html[data-theme="dark"] svg [fill="#a04060" i] { fill: #c18492; }  /* ×10 L<0.16 */
-  html[data-theme="dark"] svg [fill="#4a3a6b" i] { fill: #9c91a2; }  /* ×10 L<0.16 */
-  html[data-theme="dark"] svg [fill="#2c3e50" i] { fill: #919697; }  /* ×6 L<0.16 */
-  html[data-theme="dark"] svg [fill="#5a3828" i] { fill: #a69182; }  /* ×6 L<0.16 */
-  html[data-theme="dark"] svg [fill="#d62728" i] { fill: #e17670; }  /* ×4 L<0.16 */
-  html[data-theme="dark"] svg [fill="#8c564b" i] { fill: #b28d80; }  /* ×4 L<0.16 */
-  html[data-theme="dark"] svg [fill="#a8362e" i] { fill: #c88479; }  /* ×4 L<0.16 */
-  html[data-theme="dark"] svg [fill="#7a1f12" i] { fill: #b98b7c; }  /* ×4 L<0.16 */
-  html[data-theme="dark"] svg [fill="#6b4a8c" i] { fill: #a48dae; }  /* ×4 L<0.16 */
-  html[data-theme="dark"] svg [fill="#2c2416" i] { fill: #9c9486; }  /* ×2 L<0.16 */
-  html[data-theme="dark"] svg [fill="#7a3a8c" i] { fill: #af89af; }  /* ×2 L<0.16 */
-  html[data-theme="dark"] svg [fill="#23201A" i] { fill: #9a9489; }  /* ×2 L<0.16 */
-  html[data-theme="dark"] svg [fill="#7a5230" i] { fill: #bb9070; }  /* narrative-experiment 部署数据组色·暗色提亮 */
-  html[data-theme="dark"] svg [fill="#5a4a6b" i] { fill: #9e919d !important; }  /* ×112 */
-  html[data-theme="dark"] svg [fill="#8b3a2a" i] { fill: #ba8a7a !important; }  /* ×56 */
-  html[data-theme="dark"] svg [fill="#1e3a8a" i] { fill: #8a94b4 !important; }  /* ×42 */
-  html[data-theme="dark"] svg [fill="#7a4a2a" i] { fill: #ae9077 !important; }  /* ×36 */
-  html[data-theme="dark"] svg [fill="#4a6b8a" i] { fill: #8497a7 !important; }  /* ×36 */
-  html[data-theme="dark"] svg [fill="#a83232" i] { fill: #c8837d !important; }  /* ×26 */
-  html[data-theme="dark"] svg [fill="#7a4a7a" i] { fill: #ab8ba2 !important; }  /* ×18 */
-  html[data-theme="dark"] svg [fill="#9a3a3a" i] { fill: #c08680 !important; }  /* ×18 */
-  html[data-theme="dark"] svg [fill="#2a3a5a" i] { fill: #91959d !important; }  /* ×18 */
-  html[data-theme="dark"] svg [fill="#3a4a6a" i] { fill: #90969f !important; }  /* ×18 */
-  html[data-theme="dark"] svg [fill="#2d6a4f" i] { fill: #7a9d86 !important; }  /* ×18 */
-  html[data-theme="dark"] svg [fill="#8B0000" i] { fill: #c5857c !important; }  /* ×16 */
-  html[data-theme="dark"] svg [fill="#A52A2A" i] { fill: #c9837c !important; }  /* ×16 */
-  html[data-theme="dark"] svg [fill="#B22222" i] { fill: #d08079 !important; }  /* ×16 */
-  html[data-theme="dark"] svg [fill="#800080" i] { fill: #bf81b3 !important; }  /* ×16 */
-  html[data-theme="dark"] svg [fill="#696969" i] { fill: #97958f !important; }  /* ×16 */
-  html[data-theme="dark"] svg [fill="#8c4a6b" i] { fill: #b48a98 !important; }  /* ×16 */
-  html[data-theme="dark"] svg [fill="#4a6b8c" i] { fill: #8497a8 !important; }  /* ×16 */
-  html[data-theme="dark"] svg [fill="#a8542a" i] { fill: #c18867 !important; }  /* ×16 */
-  html[data-theme="dark"] svg [fill="#8a5a8a" i] { fill: #ad8aa5 !important; }  /* ×16 */
-  html[data-theme="dark"] svg [fill="#1a1410" i] { fill: #9b958a !important; }  /* ×13 */
-  html[data-theme="dark"] svg [fill="#3a2820" i] { fill: #9f9388 !important; }  /* ×10 */
-  html[data-theme="dark"] svg [fill="#a85a3a" i] { fill: #c0886e !important; }  /* ×10 */
-  html[data-theme="dark"] svg [fill="#a8362f" i] { fill: #c88479 !important; }  /* ×8 */
-  html[data-theme="dark"] svg [fill="#9c5a4a" i] { fill: #b98a7b !important; }  /* ×6 */
-  html[data-theme="dark"] svg [fill="#8c5e4d" i] { fill: #af8f7e !important; }  /* ×6 */
-  html[data-theme="dark"] svg [fill="#7a4a8c" i] { fill: #aa8bac !important; }  /* ×4 */
-  html[data-theme="dark"] svg [fill="#9c3a2e" i] { fill: #c18679 !important; }  /* ×4 */
-  html[data-theme="dark"] svg [fill="#2c5573" i] { fill: #8498a2 !important; }  /* ×4 */
-  html[data-theme="dark"] svg [fill="#6b4030" i] { fill: #aa8f80 !important; }  /* ×4 */
-  html[data-theme="dark"] svg [fill="#4a6a2a" i] { fill: #8a9c6e !important; }  /* ×4 */
-  html[data-theme="dark"] svg [fill="#8a3a3a" i] { fill: #b98983 !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="#a8556a" i] { fill: #c0858f !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="#2a1a10" i] { fill: #9e9387 !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="#7a2818" i] { fill: #b78c7c !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="#8b0000" i] { fill: #c5857c !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="rgb(190, 24, 39)" i] { fill: #d67b7c !important; }  /* ×1 */
-  html[data-theme="dark"] svg [fill="rgb(128, 0, 38)" i] { fill: #c1858d !important; }  /* ×82 */
-  html[data-theme="dark"] svg [fill="rgb(165, 0, 38)" i] { fill: #ce7e88 !important; }  /* ×42 */
-  html[data-theme="dark"] svg [fill="rgb(175, 2, 37)" i] { fill: #d27c85 !important; }  /* ×32 */
-  html[data-theme="dark"] svg [fill="rgb(211, 17, 33)" i] { fill: #e17576 !important; }  /* ×30 */
-  html[data-theme="dark"] svg [fill="rgb(139, 0, 0)" i] { fill: #c5857c !important; }  /* ×18 */
-  html[data-theme="dark"] svg [fill="rgb(170, 35, 29)" i] { fill: #cc8277 !important; }  /* ×18 */
-  html[data-theme="dark"] svg [fill="rgb(139, 69, 19)" i] { fill: #b78d6a !important; }  /* ×16 */
-  html[data-theme="dark"] svg [fill="rgb(170, 56, 50)" i] { fill: #c8837a !important; }  /* ×14 */
-  html[data-theme="dark"] svg [fill="rgb(92, 0, 0)" i] { fill: #b58c83 !important; }  /* ×12 */
-  html[data-theme="dark"] svg [fill="rgb(217, 22, 32)" i] { fill: #e47473 !important; }  /* ×12 */
-  html[data-theme="dark"] svg [fill="rgb(140, 26, 16)" i] { fill: #c1867a !important; }  /* ×12 */
-  html[data-theme="dark"] svg [fill="rgb(180, 3, 37)" i] { fill: #d47c84 !important; }  /* ×10 */
-  html[data-theme="dark"] svg [fill="rgb(140, 42, 42)" i] { fill: #be8880 !important; }  /* ×10 */
-  html[data-theme="dark"] svg [fill="rgb(0, 104, 55)" i] { fill: #69a17f !important; }  /* ×9 */
-  html[data-theme="dark"] svg [fill="rgb(140, 58, 10)" i] { fill: #bb8b6a !important; }  /* ×8 */
-  html[data-theme="dark"] svg [fill="rgb(160, 91, 38)" i] { fill: #bb8b63 !important; }  /* ×6 */
-  html[data-theme="dark"] svg [fill="rgb(155, 82, 31)" i] { fill: #bc8b66 !important; }  /* ×6 */
-  html[data-theme="dark"] svg [fill="rgb(161, 51, 38)" i] { fill: #c58578 !important; }  /* ×6 */
-  html[data-theme="dark"] svg [fill="rgb(122, 31, 18)" i] { fill: #b98b7c !important; }  /* ×6 */
-  html[data-theme="dark"] svg [fill="rgb(175, 62, 54)" i] { fill: #ca8278 !important; }  /* ×6 */
-  html[data-theme="dark"] svg [fill="rgb(157, 87, 35)" i] { fill: #bb8b65 !important; }  /* ×4 */
-  html[data-theme="dark"] svg [fill="rgb(200,57,44)" i] { fill: #d87c6e !important; }  /* ×4 */
-  html[data-theme="dark"] svg [fill="rgb(44,95,124)" i] { fill: #7f99a4 !important; }  /* ×4 */
-  html[data-theme="dark"] svg [fill="rgb(142, 61, 12)" i] { fill: #bb8b69 !important; }  /* ×4 */
-  html[data-theme="dark"] svg [fill="rgb(158, 51, 47)" i] { fill: #c4857d !important; }  /* ×4 */
-  html[data-theme="dark"] svg [fill="rgb(150, 42, 37)" i] { fill: #c2867d !important; }  /* ×4 */
-  html[data-theme="dark"] svg [fill="rgb(147, 40, 36)" i] { fill: #c1877d !important; }  /* ×4 */
-  html[data-theme="dark"] svg [fill="rgb(145, 66, 17)" i] { fill: #bb8b68 !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="rgb(150, 74, 24)" i] { fill: #bb8a67 !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="rgb(207, 44, 42)" i] { fill: #dd7971 !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="rgb(65,110,135)" i] { fill: #7e99a5 !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="rgb(152, 79, 28)" i] { fill: #bb8c66 !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="rgb(159, 90, 38)" i] { fill: #bb8c64 !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="rgb(58, 107, 140)" i] { fill: #7d99a9 !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="rgb(91, 107, 113)" i] { fill: #8e9795 !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="rgb(122, 26, 26)" i] { fill: #ba8a81 !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="rgb(168, 52, 45)" i] { fill: #c88479 !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="rgb(157, 46, 40)" i] { fill: #c4857b !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="rgb(161, 48, 42)" i] { fill: #c6857a !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="rgb(165, 50, 44)" i] { fill: #c7837a !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="rgb(173, 55, 47)" i] { fill: #ca8378 !important; }  /* ×2 */
-  html[data-theme="dark"] svg [fill="rgb(200, 36, 40)" i] { fill: #da7975 !important; }  /* ×1 */
-  html[data-theme="dark"] svg [fill="rgb(191, 26, 39)" i] { fill: #d77a7b !important; }  /* ×1 */
-  html[data-theme="dark"] svg [fill="rgb(182, 16, 39)" i] { fill: #d47c81 !important; }  /* ×1 */
-  html[data-theme="dark"] svg [fill="rgb(201, 37, 41)" i] { fill: #da7975 !important; }  /* ×1 */
-  html[data-theme="dark"] svg [fill="rgb(195, 31, 40)" i] { fill: #d87b79 !important; }  /* ×1 */
-  html[data-theme="dark"] svg [fill="rgb(208, 45, 42)" i] { fill: #dd7871 !important; }  /* ×1 */
-  html[data-theme="dark"] svg [fill="rgb(205, 41, 41)" i] { fill: #dc7872 !important; }  /* ×1 */
-  html[data-theme="dark"] svg [fill="rgb(199, 35, 40)" i] { fill: #da7976 !important; }  /* ×1 */
-
-/* ── z-index 层级令牌：topnav/遮罩/抽屉/tooltip 统一层级（tooltip 高于 topnav 防遮挡） ── */
-:root {
-  --z-nav: 50;
-  --z-mask: 55;
-  --z-drawer: 60;
-  --z-tooltip: 70;
-}
-
-/*
- * system.css — 详解西游记 · 全站组件设计系统
- * ----------------------------------------------
- * v2 · W477 Phase E1（纸感海拔接入 + 交互组件五态 + 微交互工具类 · DESIGN.md §4A）
- * 故宫数字馆藏 × Linear 信息密度
- *
- * 层级关系：
- *   tokens.css  → 设计令牌（变量层）
- *   system.css  → 组件样式（结构层）← 本文件
- *   页面内联    → 仅图表/数据特有样式
- *
- * 引用方式（放在 tokens.css 之后）：
- *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
- *   <link rel="stylesheet" href="system.css">      (site/ 根)
- */
-
-/* ===== 重置与基础 ===== */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html {
-    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--font-sans);
-    font-size: 15px;
-    line-height: var(--leading-body);
-    min-height: 100vh;
-}
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-    html { scroll-behavior: auto; }
-}
-a { color: inherit; text-decoration: none; }
-a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-    border-radius: 2px;
-}
-img, svg { display: block; max-width: 100%; }
-::selection { background: rgba(200, 70, 58, 0.14); }
-
-/* ===== 排版层级 ===== */
-h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
-h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
-h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
-h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
-h4 { font-size: 18px; font-weight: 500; }
-.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-.text-muted { color: var(--ink-soft); }
-.text-faint { color: var(--ink-faint); }
-.text-accent { color: var(--accent); }
-.text-sm { font-size: 13px; }
-.text-xs { font-size: 11px; letter-spacing: 0.04em; }
-.kicker {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-
-/* ===== 布局容器 ===== */
-.page-wrap {
-    max-width: 1320px;
-    margin: 0 auto;
-    padding: 0 clamp(24px, 6vw, 96px);
-}
-.section {
-    padding: clamp(48px, 7vw, 88px) 0;
-}
-.section + .section {
-    border-top: 1px solid var(--line);
-}
-.section-head {
-    margin-bottom: clamp(28px, 4vw, 48px);
-}
-.section-head .kicker { margin-bottom: 12px; }
-.section-head h2 { margin-bottom: 8px; }
-.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
-
-/* ===== 顶部导航 ===== */
-.topnav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px clamp(24px, 6vw, 96px);
-    border-bottom: 1px solid var(--line);
-    position: sticky;
-    top: 0;
-    background: color-mix(in srgb, var(--bg) 92%, transparent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    z-index: var(--z-nav);
-}
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-.seal {
-    width: 40px;
-    height: 40px;
-    background: var(--accent);
-    border-radius: 3px;
-    display: grid;
-    place-items: center;
-    color: #fff;
-    font-family: var(--font-serif);
-    font-weight: 700;
-    font-size: 13px;
-    line-height: 1.1;
-    text-align: center;
-    flex-shrink: 0;
-}
-.wordmark {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: 18px;
-    color: var(--ink);
-}
-.topnav nav {
-    display: flex;
-    gap: 28px;
-    align-items: center;
-}
-.topnav nav a {
-    font-size: 14px;
-    color: var(--ink-soft);
-    transition: color 0.15s;
-    white-space: nowrap;
-    position: relative;
-}
-.topnav nav a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -6px;
-    height: 2px;
-    border-radius: 2px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--dur-base) var(--ease-out-quart);
-}
-.topnav nav a:hover::after,
-.topnav nav a.active::after,
-.topnav nav a.nav-strong::after,
-.topnav nav a[aria-current="page"]::after { transform: scaleX(1); }
-.topnav nav a:hover { color: var(--accent); }
-.topnav nav a.active { color: var(--ink); font-weight: 500; }
-@media (max-width: 768px) {
-    .topnav { padding: 16px 20px; }
-    .topnav nav { gap: 16px; }
-    .topnav nav a { font-size: 13px; }
-    .wordmark { font-size: 16px; }
-}
-
-/* ===== Hero（数据页通用） ===== */
-.hero {
-    background: var(--dark);
-    background-image: url('../static/images/ink-mountains-hero.webp');
-    background-size: cover;
-    background-position: center 70%;
-    background-blend-mode: soft-light;
-    color: var(--dark-text);
-    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
-    position: relative;
-    overflow: hidden;
-}
-.hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
-    pointer-events: none;
-}
-.hero > * { position: relative; z-index: 1; }
-.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
-.hero h1 {
-    color: var(--dark-text);
-    font-size: clamp(28px, 4vw, 44px);
-    margin-bottom: 10px;
-}
-.hero .subtitle {
-    font-size: 14px;
-    color: rgba(242, 235, 220, 0.7);
-    letter-spacing: 0.06em;
-}
-.hero .tagline {
-    margin-top: 14px;
-    font-size: 13px;
-    color: rgba(242, 235, 220, 0.5);
-    font-style: italic;
-}
-/* Hero 内面包屑 */
-.hero .breadcrumb {
-    margin-bottom: 20px;
-    font-size: 12px;
-    color: rgba(242, 235, 220, 0.45);
-}
-.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
-.hero .breadcrumb a:hover { color: var(--accent-soft); }
-
-/* ===== 卡片 ===== */
-.card {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    box-shadow: var(--elev-1);
-    padding: clamp(20px, 3vw, 28px);
-    transition: border-color var(--dur-base) var(--ease-out-quart),
-                transform var(--dur-base) var(--ease-out-quart),
-                box-shadow var(--dur-base) var(--ease-out-quart);
-}
-.card:hover {
-    border-color: var(--accent);
-    transform: translateY(-3px);
-    box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
-                var(--elev-2);
-}
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-}
-.card .card-kicker {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 0.08em;
-    margin-bottom: 10px;
-}
-.card h3 { font-size: 20px; margin-bottom: 8px; }
-.card p { font-size: 14px; color: var(--ink-soft); }
-.card .card-meta {
-    margin-top: 16px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--ink-faint);
-}
-
-/* ===== KPI 数字卡 ===== */
-.kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-}
-.kpi {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    box-shadow: var(--elev-1);
-    padding: 20px;
-    transition: border-color var(--dur-base) var(--ease-out-quart),
-                transform var(--dur-base) var(--ease-out-quart),
-                box-shadow var(--dur-base) var(--ease-out-quart);
-}
-.kpi:hover {
-    border-color: var(--accent);
-    transform: translateY(-3px);
-    box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
-                var(--elev-2);
-}
-.kpi .kpi-value {
-    font-family: var(--font-mono);
-    font-size: 32px;
-    font-weight: 500;
-    color: var(--ink);
-    line-height: 1.1;
-    font-variant-numeric: tabular-nums;
-}
-.kpi .kpi-label {
-    margin-top: 8px;
-    font-size: 13px;
-    color: var(--ink-soft);
-}
-.kpi .kpi-desc {
-    margin-top: 4px;
-    font-size: 11px;
-    color: var(--ink-faint);
-}
-
-/* ===== 图表容器 ===== */
-.chart-block {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    box-shadow: var(--elev-1);
-    padding: clamp(20px, 3vw, 32px);
-    margin-bottom: 24px;
-}
-.chart-block h3 {
-    font-size: 18px;
-    margin-bottom: 6px;
-}
-.chart-block .chart-sub {
-    font-size: 13px;
-    color: var(--ink-soft);
-    margin-bottom: 20px;
-}
-.chart-block svg { width: 100%; height: auto; }
-/* 图表内 D3 元素统一样式 */
-.chart-block .axis text {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    fill: var(--ink-faint);
-}
-.chart-block .axis line,
-.chart-block .axis path {
-    stroke: var(--line);
-}
-.chart-block .grid line {
-    stroke: var(--line);
-    stroke-opacity: 0.5;
-}
-
-/* ===== 表格 ===== */
-.table-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-}
-/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
-   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
-   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
-   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
-#summary-table-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
-thead {
-    background: var(--paper-warm);
-}
-th {
-    font-family: var(--font-sans);
-    font-weight: 500;
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    color: var(--ink-soft);
-    text-align: left;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--line);
-    white-space: nowrap;
-}
-td {
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--line);
-    color: var(--ink);
-}
-tr:last-child td { border-bottom: none; }
-/* —— 墨韵动效（W460）：行 hover 暖纸底 + 左缘朱砂指示条 + 数字列加深 —— */
-tbody tr td { transition: background-color var(--dur-fast) var(--ease-out-quart); }
-tbody tr:hover td { background: color-mix(in srgb, var(--paper-warm) 60%, transparent); }
-tbody tr:hover td:first-child { box-shadow: inset 2px 0 0 0 var(--accent); }
-tbody tr:hover td.num { color: var(--accent-3); }
-td.num, th.num {
-    font-family: var(--font-mono);
-    font-variant-numeric: tabular-nums;
-    text-align: right;
-}
-
-/* —— 墨韵动效（W460）：opt-in 行入场 stagger（.table-anim，仅静态表格） —— */
-/* --row-i 由页面静态 <tr> 写入；min() 封顶第 12 行起延迟 220ms，总时长 ≤ 470ms */
-/* fail-open：calc/min 不支持时整条 animation 声明被丢弃，行直接可见 */
-.table-anim tbody tr {
-    animation: row-in var(--dur-base) var(--ease-out-quart) both;
-    animation-delay: calc(min(var(--row-i, 0), 11) * 20ms);
-}
-@keyframes row-in {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: none; }
-}
-/* opt-in sticky 表头（.table-wrap--sticky，仅行数 > 30 的表格） */
-.table-wrap--sticky { max-height: 65vh; overflow: auto; }
-.table-wrap--sticky thead th { position: sticky; top: 0; background: var(--paper-warm); z-index: 1; }
-
-/* ===== 标签/徽章 ===== */
-.badge {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    padding: 3px 10px;
-    border-radius: var(--radius-pill);
-    border: 1px solid;
-}
-.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
-.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
-.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
-.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
-
-/* —— 墨韵动效（W460）：正文链接下划线生长（opt-in 类 .link-ink，禁止 blanket a） —— */
-.link-ink {
-    background: linear-gradient(var(--accent), var(--accent)) no-repeat 0 100% / 0% 1px;
-    transition: background-size var(--dur-base) var(--ease-out-quart);
-}
-.link-ink:hover { background-size: 100% 1px; }
-
-.skip-link {
-    position: absolute;
-    left: -9999px;
-    top: 0;
-    background: var(--dark);
-    color: var(--dark-text);
-    padding: 10px 18px;
-    z-index: var(--z-tooltip);
-}
-.skip-link:focus { left: 12px; top: 12px; }
-/* —— 墨韵动效（W460）：图表 tooltip 全站统一样式（P1 批次逐页采用） —— */
-.chart-tooltip {
-    position: absolute;
-    pointer-events: none;
-    z-index: var(--z-tooltip);
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    padding: 8px 12px;
-    max-width: 280px;
-    font-family: var(--font-sans);
-    font-size: 12px;
-    line-height: 1.6;
-    color: var(--ink);
-    box-shadow: var(--elev-3);
-    opacity: 0;
-    transition: opacity var(--dur-base) var(--ease-out-quart);
-}
-.chart-tooltip.visible { opacity: 1; }
-
-/* —— 墨韵（W463）：fetch loading 骨架态（仅 fetch 主导页接入·EMBEDDED 同步页不接防闪烁） —— */
-.chart-loading {
-    min-height: 220px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    color: var(--ink-faint);
-    font-family: var(--font-sans);
-    font-size: 13px;
-    background:
-        linear-gradient(100deg, transparent 40%, rgba(107, 100, 85, 0.08) 50%, transparent 60%)
-        var(--paper-warm);
-    background-size: 200% 100%, auto;
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    animation: chart-loading-breath 1.2s var(--ease-in-out-soft) infinite;
-}
-.chart-loading::before {
-    content: "";
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: 2px solid var(--line);
-    border-top-color: var(--accent);
-    animation: chart-loading-spin 0.8s linear infinite;
-}
-@keyframes chart-loading-breath {
-    0%, 100% { background-position: 120% 0, 0 0; }
-    50% { background-position: -20% 0, 0 0; }
-}
-@keyframes chart-loading-spin {
-    to { transform: rotate(360deg); }
-}
-@media (prefers-reduced-motion: reduce) {
-    .chart-loading { animation: none; }
-    .chart-loading::before { animation-duration: 2s; }
-}
-
-/* —— 墨韵（W463）：3D/canvas 图表一次性首帧淡入（three 容器/canvas 元素挂载·RM 停帧直接可见） —— */
-.chart-fade-in {
-    animation: chart-fade-in var(--dur-slow) var(--ease-out-quart) both;
-}
-@keyframes chart-fade-in {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@media (prefers-reduced-motion: reduce) {
-    .chart-fade-in { animation: none; }
-}
-
-/* ===== 按钮 ===== */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 10px 20px;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--line);
-    background: var(--paper);
-    color: var(--ink);
-    cursor: pointer;
-    transition: border-color var(--dur-fast) var(--ease-out-quart),
-                background var(--dur-fast) var(--ease-out-quart),
-                color var(--dur-fast) var(--ease-out-quart),
-                transform var(--dur-fast) var(--ease-out-quart),
-                box-shadow var(--dur-fast) var(--ease-out-quart);
-}
-.btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: var(--elev-1); }
-.btn:active { transform: scale(0.97); box-shadow: none; }
-.btn:disabled, .btn[aria-disabled="true"] {
-    opacity: 0.45;
-    cursor: not-allowed;
-    pointer-events: none;
-}
-.btn-primary {
-    background: linear-gradient(180deg, var(--accent), var(--accent-deep));
-    border-color: var(--accent-deep);
-    color: #fff;
-}
-.btn-primary:hover { background: var(--accent-deep); color: #fff; box-shadow: var(--elev-2); }
-
-/* ===== 页脚 ===== */
-.site-footer {
-    border-top: 1px solid var(--line);
-    padding: 40px clamp(24px, 6vw, 96px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-    flex-wrap: wrap;
-}
-.site-footer .footer-brand {
-    font-family: var(--font-serif);
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--ink);
-}
-.site-footer .footer-meta {
-    font-size: 12px;
-    color: var(--ink-faint);
-}
-.site-footer nav {
-    display: flex;
-    gap: 20px;
-}
-.site-footer nav a {
-    font-size: 13px;
-    color: var(--ink-soft);
-}
-.site-footer nav a:hover { color: var(--accent); }
-
-/* ===== 深色节奏段（引文/分隔） ===== */
-.dark-band {
-    background: var(--dark);
-    color: var(--dark-text);
-    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
-    text-align: center;
-}
-.dark-band .rule {
-    width: 40px;
-    height: 2px;
-    background: var(--accent);
-    margin: 0 auto 24px;
-}
-.dark-band blockquote {
-    font-family: var(--font-serif);
-    font-weight: 500;
-    font-size: clamp(18px, 2.4vw, 26px);
-    line-height: 1.9;
-}
-.dark-band .attr {
-    margin-top: 20px;
-    font-size: 12px;
-    color: rgba(242, 235, 220, 0.5);
-    letter-spacing: 0.08em;
-}
-
-/* ===== 档案索引表（首页九卷） ===== */
-.index-table { width: 100%; }
-.index-row {
-    display: grid;
-    grid-template-columns: 32px 220px 1fr auto;
-    gap: 20px;
-    align-items: center;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--line);
-    transition: background 0.15s;
-}
-.index-row:hover { background: color-mix(in srgb, var(--paper) 70%, var(--bg)); }
-.index-row .no {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    color: var(--ink-faint);
-}
-.index-row .name {
-    font-family: var(--font-serif);
-    font-weight: 500;
-    font-size: 18px;
-}
-.index-row .desc { font-size: 14px; color: var(--ink-soft); }
-.index-row .meta {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--accent-2);
-    text-align: right;
-    white-space: nowrap;
-}
-@media (max-width: 768px) {
-    .index-row {
-        grid-template-columns: 1fr auto;
-        gap: 8px;
-    }
-    .index-row .no { display: none; }
-    .index-row .desc { grid-column: 1 / -1; }
-}
-
-/* ===== 筛选 Tab ===== */
-.filter-tabs {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 24px;
-}
-.filter-tab {
-    font-size: 13px;
-    font-weight: 500;
-    padding: 7px 16px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-pill);
-    background: transparent;
-    color: var(--ink-soft);
-    cursor: pointer;
-    transition: border-color var(--dur-fast) var(--ease-out-quart),
-                background var(--dur-fast) var(--ease-out-quart),
-                color var(--dur-fast) var(--ease-out-quart);
-}
-.filter-tab:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-wash); }
-.filter-tab:active { transform: scale(0.97); }
-.filter-tab:disabled { opacity: 0.45; cursor: not-allowed; }
-.filter-tab[aria-pressed="true"],
-.filter-tab.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-}
-
-/* ===== 搜索框 ===== */
-.search-box {
-    position: relative;
-    max-width: 400px;
-}
-.search-box input {
-    width: 100%;
-    font-size: 14px;
-    padding: 10px 16px 10px 40px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-pill);
-    background: var(--paper);
-    color: var(--ink);
-    transition: border-color var(--dur-fast) var(--ease-out-quart),
-                box-shadow var(--dur-fast) var(--ease-out-quart);
-}
-.search-box input:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
-}
-.search-box::before {
-    content: "搜";
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 13px;
-    color: var(--ink-faint);
-}
-
-/* ===== 空状态 ===== */
-.empty-state {
-    text-align: center;
-    padding: 64px 24px;
-    color: var(--ink-faint);
-}
-.empty-state .empty-icon {
-    font-size: 48px;
-    margin-bottom: 16px;
-    opacity: 0.3;
-}
-.empty-state p { font-size: 15px; }
-
-/* ===== 微交互工具类（W477 Phase E1 · DESIGN.md §4A.7 · 时长取 §5 契约档） ===== */
-/* 通用浮起：任意可点击卡片/条目 hover 升海拔（页面自定义结构复用，勿用于 .card/.kpi 已有实现） */
-.u-lift {
-    transition: transform var(--dur-base) var(--ease-out-quart),
-                box-shadow var(--dur-base) var(--ease-out-quart),
-                border-color var(--dur-base) var(--ease-out-quart);
-}
-.u-lift:hover { transform: translateY(-2px); box-shadow: var(--elev-2); }
-/* 按压反馈：按钮/标签类 active 微缩 */
-.u-press:active { transform: scale(0.98); }
-/* 滚动显现：fail-open——仅 JS 在 <html> 挂 .js-reveal 后启用（E5 接入）；无 JS 内容直接可见 */
-.js-reveal .reveal-in {
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity var(--dur-slow) var(--ease-out-quart),
-                transform var(--dur-slow) var(--ease-out-quart);
-}
-.js-reveal .reveal-in.in-view { opacity: 1; transform: none; }
-/* 数字对齐 */
-.u-tabular { font-variant-numeric: tabular-nums; }
-/* 语义色文本（v3 令牌·低饱和雅集色相） */
-.text-ok { color: var(--ok); }
-.text-warn { color: var(--warn); }
-.text-danger { color: var(--danger); }
-.text-info { color: var(--info); }
-
-/* ===== 响应式 ===== */
-@media (max-width: 768px) {
-    h1 { font-size: 28px; }
-    h2 { font-size: 24px; }
-    .card-grid { grid-template-columns: 1fr; }
-    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-    .site-footer { flex-direction: column; align-items: flex-start; }
-}
-@media (max-width: 480px) {
-    .kpi-grid { grid-template-columns: 1fr; }
-    .topnav:not(:has(.nav-toggle)) nav { display: none; }
-}
-
-/* ===== 导航抽屉（W492）：≤768px 根页 topnav 折叠为滑出抽屉（仅 .nav-toggle 存在时启用） ===== */
-.nav-toggle {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    margin-left: 10px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-pill);
-    background: var(--paper);
-    color: var(--ink-soft);
-    cursor: pointer;
-    transition: border-color var(--dur-fast) var(--ease-out-quart),
-                color var(--dur-fast) var(--ease-out-quart),
-                transform var(--dur-fast) var(--ease-out-quart);
-}
-.nav-toggle:hover { border-color: var(--accent); color: var(--accent); }
-.nav-toggle:active { transform: scale(0.94); }
-.nav-mask {
-    position: fixed;
-    inset: 0;
-    z-index: var(--z-mask);
-    background: rgba(35, 32, 26, 0.45);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--dur-base) var(--ease-out-quart);
-}
-.nav-mask.open { opacity: 1; pointer-events: auto; }
-@media (max-width: 768px) {
-    .nav-toggle { display: inline-flex; }
-    .topnav:has(.nav-toggle) nav {
-        display: none;
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        z-index: var(--z-drawer);
-        width: min(78vw, 320px);
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 22px;
-        padding: 72px 26px;
-        background: var(--paper);
-        border-left: 1px solid var(--line);
-        box-shadow: var(--elev-4);
-        transform: translateX(100%);
-        transition: transform var(--dur-base) var(--ease-out-quart);
-    }
-    .topnav:has(.nav-toggle) nav.open { transform: translateX(0); }
-}
-
-/* ===== 打印 ===== */
-@media print {
-    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
-    body { background: #fff; }
-    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
-}
-
-/* ===== 图表移动端降级（W494）：≤640px 图例纵排/文字缩小/tooltip 收窄——CSS 显示层降级，D3 渲染不变 ===== */
-@media (max-width: 640px) {
-    .legend,
-    .chart-legend,
-    .legend-inline,
-    .legend-row {
-        flex-direction: column;
-        gap: 6px;
-        align-items: flex-start;
-    }
-    .legend-item,
-    .legend-cell,
-    .legend-label {
-        font-size: 11px;
-    }
-    .chart-block svg text,
-    .chart-wrap svg text,
-    .chart-container svg text,
-    svg.vis text {
-        font-size: 10px;
-    }
-    .chart-block,
-    .chart-wrap,
-    .chart-container {
-        padding: 12px;
-    }
-    .chart-tooltip {
-        max-width: 220px;
-    }
-}
-    </style>
 <style>
   .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
@@ -1213,118 +50,646 @@ td.num, th.num {
     border: 1px solid var(--line); border-radius: var(--radius-sm, 4px); font-size: 14px; }
   .reader-idx a:hover { border-color: var(--accent); color: var(--accent); }
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
+  .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
+    border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
 </style>
 </head>
 <body>
 <main class="reader-wrap">
-  <nav class="reader-topnav">
-    <a class="brand" href="index.html">详解西游记 · 逐回阅读</a>
-    <a href="../index.html">站点首页</a>
-  </nav>
-  <h1 style="font-size:26px;">全 100 回目录</h1>
-  <p class="reader-meta">共 100 篇 · 点击进入单回阅读；每回含上一篇/下一篇连载导航。</p>
-  <ul class="reader-idx">
-    <li><a href="ch001.html"><span class="no">001</span>第1回 灵根育孕源流出 心性修持大道生</a></li>
-    <li><a href="ch002.html"><span class="no">002</span>第2回 悟彻菩提真妙理 断魔归本合元神</a></li>
-    <li><a href="ch003.html"><span class="no">003</span>第3回 四海千山皆拱伏 九幽十类尽除名</a></li>
-    <li><a href="ch004.html"><span class="no">004</span>第4回 官封弼马心何足 名注齐天意未宁</a></li>
-    <li><a href="ch005.html"><span class="no">005</span>第5回 乱蟠桃大圣偷丹 反天宫诸神捉怪</a></li>
-    <li><a href="ch006.html"><span class="no">006</span>第6回 观音赴会问原因 小圣施威降大圣</a></li>
-    <li><a href="ch007.html"><span class="no">007</span>第7回 八卦炉中逃大圣 五行山下定心猿</a></li>
-    <li><a href="ch008.html"><span class="no">008</span>第8回 我佛造经传极乐 观音奉旨上长安</a></li>
-    <li><a href="ch009.html"><span class="no">009</span>第9回 袁守诚妙算无私曲 老龙王拙计犯天条</a></li>
-    <li><a href="ch010.html"><span class="no">010</span>第10回 二将军宫门镇鬼 唐太宗地府还魂</a></li>
-    <li><a href="ch011.html"><span class="no">011</span>第十一回 还受生唐王遵善果 度孤魂萧瑀正空门</a></li>
-    <li><a href="ch012.html"><span class="no">012</span>第十二回 玄奘秉诚建大会 观音显象化金蝉</a></li>
-    <li><a href="ch013.html"><span class="no">013</span>第十三回 陷虎穴金星解厄 双叉岭伯钦留僧</a></li>
-    <li><a href="ch014.html"><span class="no">014</span>第十四回 心猿归正 六贼无踪</a></li>
-    <li><a href="ch015.html"><span class="no">015</span>第十五回 蛇盘山诸神暗佑 鹰愁涧意马收缰</a></li>
-    <li><a href="ch016.html"><span class="no">016</span>第十六回 观音院僧谋宝贝 黑风山怪窃袈裟</a></li>
-    <li><a href="ch017.html"><span class="no">017</span>第十七回 孙行者大闹黑风山 观世音收伏熊罴怪</a></li>
-    <li><a href="ch018.html"><span class="no">018</span>第十八回 观音院唐僧脱难 高老庄行者降魔</a></li>
-    <li><a href="ch019.html"><span class="no">019</span>第十九回 云栈洞悟空收八戒 浮屠山玄奘受心经</a></li>
-    <li><a href="ch020.html"><span class="no">020</span>第二十回 黄风岭唐僧有难 半山中八戒争先</a></li>
-    <li><a href="ch021.html"><span class="no">021</span>第二十一回 护法设庄留大圣 须弥灵吉定风魔</a></li>
-    <li><a href="ch022.html"><span class="no">022</span>第二十二回 八戒大战流沙河 木叉奉法收悟净</a></li>
-    <li><a href="ch023.html"><span class="no">023</span>第二十三回 三藏不忘本 四圣试禅心</a></li>
-    <li><a href="ch024.html"><span class="no">024</span>第二十四回 万寿山大仙留故友 五庄观行者窃人参</a></li>
-    <li><a href="ch025.html"><span class="no">025</span>第二十五回 镇元仙赶捉取经僧 孙行者大闹五庄观</a></li>
-    <li><a href="ch026.html"><span class="no">026</span>第二十六回 孙悟空三岛求方 观世音甘泉活树</a></li>
-    <li><a href="ch027.html"><span class="no">027</span>第二十七回 尸魔三戏唐三藏 圣僧恨逐美猴王</a></li>
-    <li><a href="ch028.html"><span class="no">028</span>第二十八回 花果山群妖聚义 黑松林三藏逢魔</a></li>
-    <li><a href="ch029.html"><span class="no">029</span>第二十九回 脱难江流来国土 承恩八戒转山林</a></li>
-    <li><a href="ch030.html"><span class="no">030</span>第三十回 邪魔侵正法 意马忆心猿</a></li>
-    <li><a href="ch031.html"><span class="no">031</span>第三十一回 猪八戒义激猴王 孙行者智降妖怪</a></li>
-    <li><a href="ch032.html"><span class="no">032</span>第三十二回 平顶山功曹传信 莲花洞木母逢灾</a></li>
-    <li><a href="ch033.html"><span class="no">033</span>第三十三回 外道迷真性 元神助本心</a></li>
-    <li><a href="ch034.html"><span class="no">034</span>第三十四回 魔王巧算困心猿 大圣腾挪骗宝贝</a></li>
-    <li><a href="ch035.html"><span class="no">035</span>第三十五回 外道施威欺正性 心猿获宝伏邪魔</a></li>
-    <li><a href="ch036.html"><span class="no">036</span>第三十六回 心猿正处诸缘伏 劈破旁门见月明</a></li>
-    <li><a href="ch037.html"><span class="no">037</span>第三十七回 鬼王夜谒唐三藏 悟空神化引婴儿</a></li>
-    <li><a href="ch038.html"><span class="no">038</span>第三十八回 婴儿问母知邪正 金木参玄见假真</a></li>
-    <li><a href="ch039.html"><span class="no">039</span>第三十九回 一粒金丹天上得 三年故主世间生</a></li>
-    <li><a href="ch040.html"><span class="no">040</span>第四十回 婴儿戏化禅心乱 猿马刀归木母空</a></li>
-    <li><a href="ch041.html"><span class="no">041</span>第四十一回 心猿遭火败 木母被魔擒</a></li>
-    <li><a href="ch042.html"><span class="no">042</span>第四十二回 大圣殷勤拜南海 观音慈善缚红孩</a></li>
-    <li><a href="ch043.html"><span class="no">043</span>第四十三回 黑河妖孽擒僧去 西洋龙子捉鼍回</a></li>
-    <li><a href="ch044.html"><span class="no">044</span>第四十四回 法身元运逢车力 心正妖邪度脊关</a></li>
-    <li><a href="ch045.html"><span class="no">045</span>第四十五回 三清观大圣留名 车迟国猴王显法</a></li>
-    <li><a href="ch046.html"><span class="no">046</span>第四十六回 外道弄强欺正法 心猿显圣灭诸邪</a></li>
-    <li><a href="ch047.html"><span class="no">047</span>第四十七回 圣僧夜阻通天水 金木垂慈救小童</a></li>
-    <li><a href="ch048.html"><span class="no">048</span>第四十八回 魔弄寒风飘大雪 僧思拜佛履层冰</a></li>
-    <li><a href="ch049.html"><span class="no">049</span>第四十九回 三藏有灾沉水宅 观音救难现鱼篮</a></li>
-    <li><a href="ch050.html"><span class="no">050</span>第五十回 情乱性从因爱欲 神昏心动遇魔头</a></li>
-    <li><a href="ch051.html"><span class="no">051</span>第五十一回 心猿空用千般计 水火无功难炼魔</a></li>
-    <li><a href="ch052.html"><span class="no">052</span>第五十二回 悟空大闹金山兜洞 如来暗示主人公</a></li>
-    <li><a href="ch053.html"><span class="no">053</span>第五十三回 禅主吞餐怀鬼孕 黄婆运水解邪胎</a></li>
-    <li><a href="ch054.html"><span class="no">054</span>第五十四回 法性西来逢女国 心猿定计脱烟花</a></li>
-    <li><a href="ch055.html"><span class="no">055</span>第五十五回 色邪淫戏唐三藏 性正修持不坏身</a></li>
-    <li><a href="ch056.html"><span class="no">056</span>第五十六回 神狂诛草寇 道昧放心猿</a></li>
-    <li><a href="ch057.html"><span class="no">057</span>第五十七回 真行者落伽山诉苦 假猴王水帘洞誊文</a></li>
-    <li><a href="ch058.html"><span class="no">058</span>第五十八回 二心搅乱大乾坤 一体难修真寂灭</a></li>
-    <li><a href="ch059.html"><span class="no">059</span>第五十九回 唐三藏路阻火焰山 孙行者一调芭蕉扇</a></li>
-    <li><a href="ch060.html"><span class="no">060</span>第六十回 牛魔王罢战赴华筵 孙行者二调芭蕉扇</a></li>
-    <li><a href="ch061.html"><span class="no">061</span>第六十一回 猪八戒助力败魔王 孙行者三调芭蕉扇</a></li>
-    <li><a href="ch062.html"><span class="no">062</span>第六十二回 涤垢洗心惟扫塔 缚魔归正乃修身</a></li>
-    <li><a href="ch063.html"><span class="no">063</span>第六十三回 二僧荡怪闹龙宫 群圣除邪获宝贝</a></li>
-    <li><a href="ch064.html"><span class="no">064</span>第六十四回 荆棘岭悟能努力 木仙庵三藏谈诗</a></li>
-    <li><a href="ch065.html"><span class="no">065</span>第六十五回 妖邪假设小雷音 四众皆遭大厄难</a></li>
-    <li><a href="ch066.html"><span class="no">066</span>第六十六回 诸神遭毒手 弥勒缚妖魔</a></li>
-    <li><a href="ch067.html"><span class="no">067</span>第六十七回 拯救驼罗禅性稳 脱离秽污道心清</a></li>
-    <li><a href="ch068.html"><span class="no">068</span>第六十八回 朱紫国唐僧论前世 孙行者施为三折肱</a></li>
-    <li><a href="ch069.html"><span class="no">069</span>第六十九回 心主夜间修药物 君王筵上论妖邪</a></li>
-    <li><a href="ch070.html"><span class="no">070</span>第七十回 妖魔宝放烟沙火 悟空计盗紫金铃</a></li>
-    <li><a href="ch071.html"><span class="no">071</span>第七十一回 行者假名降怪犼 观音现象伏妖王</a></li>
-    <li><a href="ch072.html"><span class="no">072</span>第七十二回 盘丝洞七情迷本 濯垢泉八戒忘形</a></li>
-    <li><a href="ch073.html"><span class="no">073</span>第七十三回 情因旧恨生灾毒 心主遭魔幸破光</a></li>
-    <li><a href="ch074.html"><span class="no">074</span>第七十四回 长庚传报魔头狠 行者施为变化能</a></li>
-    <li><a href="ch075.html"><span class="no">075</span>第七十五回 心猿钻透阴阳窍 魔王还归大道真</a></li>
-    <li><a href="ch076.html"><span class="no">076</span>第七十六回 心神居舍魔归性 木母同降怪体真</a></li>
-    <li><a href="ch077.html"><span class="no">077</span>第七十七回 群魔欺本性 一体拜真如</a></li>
-    <li><a href="ch078.html"><span class="no">078</span>第七十八回 比丘怜子遣阴神 金殿识魔谈道德</a></li>
-    <li><a href="ch079.html"><span class="no">079</span>第七十九回 寻洞擒妖逢老寿 当朝正主救婴儿</a></li>
-    <li><a href="ch080.html"><span class="no">080</span>第八十回 姹女育阳求配偶 心猿护主识妖邪</a></li>
-    <li><a href="ch081.html"><span class="no">081</span>第八十一回 镇海寺心猿知怪 黑松林三众寻师</a></li>
-    <li><a href="ch082.html"><span class="no">082</span>第八十二回 姹女求阳 元神护道</a></li>
-    <li><a href="ch083.html"><span class="no">083</span>第八十三回 心猿识得丹头 姹女还归本性</a></li>
-    <li><a href="ch084.html"><span class="no">084</span>第八十四回 难灭伽持圆大觉 法王成正体天然</a></li>
-    <li><a href="ch085.html"><span class="no">085</span>第八十五回 心猿妒木母 魔主计吞禅</a></li>
-    <li><a href="ch086.html"><span class="no">086</span>第八十六回 木母助威征怪物 金公施法灭妖邪</a></li>
-    <li><a href="ch087.html"><span class="no">087</span>第八十七回 凤仙郡冒天止雨 孙大圣劝善施霖</a></li>
-    <li><a href="ch088.html"><span class="no">088</span>第八十八回 禅到玉华施法会 心猿木母授门人</a></li>
-    <li><a href="ch089.html"><span class="no">089</span>第八十九回 黄狮精虚设钉钯宴 金木土计闹豹头山</a></li>
-    <li><a href="ch090.html"><span class="no">090</span>第九十回 师狮授受同归一 盗道缠禅静九灵</a></li>
-    <li><a href="ch091.html"><span class="no">091</span>第九十一回 金平府元夜观灯 玄英洞唐僧供状</a></li>
-    <li><a href="ch092.html"><span class="no">092</span>第九十二回 三僧大战青龙山 四星挟捉犀牛怪</a></li>
-    <li><a href="ch093.html"><span class="no">093</span>第九十三回 给孤园问古谈因 天竺国朝王遇偶</a></li>
-    <li><a href="ch094.html"><span class="no">094</span>第九十四回 四僧宴乐御花园 一怪空怀情欲喜</a></li>
-    <li><a href="ch095.html"><span class="no">095</span>第九十五回 假合真形擒玉兔 真阴归正会灵元</a></li>
-    <li><a href="ch096.html"><span class="no">096</span>第九十六回 寇员外喜待高僧 唐长老不贪富贵</a></li>
-    <li><a href="ch097.html"><span class="no">097</span>第九十七回 金酬外护遭魔毒 圣显幽魂救本原</a></li>
-    <li><a href="ch098.html"><span class="no">098</span>第九十八回 猿熟马驯方脱壳 功成行满见真如</a></li>
-    <li><a href="ch099.html"><span class="no">099</span>第九十九回 九九数完魔刬尽 三三行满道归根</a></li>
-    <li><a href="ch100.html"><span class="no">100</span>第一百回 径回东土 五圣成真</a></li>
-  </ul>
+<div class="reader-group">逐回解读（100）</div>
+<ul class="reader-idx">
+<li><a href="ch001.html">第001回 灵根育孕源流出 心性修持大道生</a></li>
+<li><a href="ch002.html">第 002回 悟彻菩提真妙理 断魔归本合元神</a></li>
+<li><a href="ch003.html">第003回 四海千山皆拱伏 九幽十类尽除名</a></li>
+<li><a href="ch004.html">第004回 官封弼马心何足 注名齐天意未宁</a></li>
+<li><a href="ch005.html">第 005回 乱蟠桃大圣偷丹 反天宫诸神捉怪</a></li>
+<li><a href="ch006.html">第006回 观音赴会问原因 小圣施威降大圣</a></li>
+<li><a href="ch007.html">第 007 回 八卦炉中逃大圣 五行山下定心猿</a></li>
+<li><a href="ch008.html">第008回 我佛造经传极乐 观音奉旨上长安</a></li>
+<li><a href="ch009.html">第009回 袁守诚妙算无私曲 老龙王拙计犯天条</a></li>
+<li><a href="ch010.html">第010回 二将军宫门镇鬼 唐太宗地府还魂</a></li>
+<li><a href="ch011.html">第011回 还受生唐王遵善果 度孤魂萧瑀正空门</a></li>
+<li><a href="ch012.html">第012回 玄奘秉诚建大会 观音显象化金蝉</a></li>
+<li><a href="ch013.html">第013回 陷虎穴金星解厄 双叉岭伯钦留僧</a></li>
+<li><a href="ch014.html">第014回 心猿归正 六贼无踪</a></li>
+<li><a href="ch015.html">第015回 蛇盘山诸神暗佑 鹰愁涧意马收缰</a></li>
+<li><a href="ch016.html">第016回 观音院僧谋宝贝 黑风山怪窃袈裟</a></li>
+<li><a href="ch017.html">第017回 孙行者大闹黑风山 观世音收伏熊罴怪</a></li>
+<li><a href="ch018.html">第018回 观音院唐僧脱难 高老庄行者降魔</a></li>
+<li><a href="ch019.html">第019回 云栈洞悟空收八戒 浮屠山玄奘受心经</a></li>
+<li><a href="ch020.html">第020回 黄风岭唐僧有难 半山中八戒争先</a></li>
+<li><a href="ch021.html">第021回 护法设庄留大圣 须弥灵吉定风魔</a></li>
+<li><a href="ch022.html">第022回 八戒大战流沙河 木叉奉法收悟净</a></li>
+<li><a href="ch023.html">第023回 三藏不忘本 四圣试禅心</a></li>
+<li><a href="ch024.html">第024回 万寿山大仙留故迹 五庄观行者窃人参</a></li>
+<li><a href="ch025.html">第025回 镇元仙赶捉取经僧 孙行者大闹五庄观</a></li>
+<li><a href="ch026.html">第026回 孙悟空三岛求方 观世音甘泉活树</a></li>
+<li><a href="ch027.html">第 027回 尸魔三戏唐三藏 圣僧恨逐美猴王</a></li>
+<li><a href="ch028.html">第028回 花果山群妖聚义 黑松林三藏逢魔</a></li>
+<li><a href="ch029.html">第029回 脱难江流来国土 承恩八戒转山林</a></li>
+<li><a href="ch030.html">第030回 邪魔侵正法 意马忆心猿</a></li>
+<li><a href="ch031.html">第031回 猪八戒义激猴王 孙行者智降妖怪</a></li>
+<li><a href="ch032.html">第032回 平顶山功曹传信 莲花洞木母逢灾</a></li>
+<li><a href="ch033.html">第033回 外道迷真性 元神助本心</a></li>
+<li><a href="ch034.html">第034回 魔王巧算困心猿 大圣腾挪骗宝贝</a></li>
+<li><a href="ch035.html">第035回 外道施威欺正性 心猿获宝伏邪魔</a></li>
+<li><a href="ch036.html">第036回 心猿正处诸缘伏 劈破旁门见月明</a></li>
+<li><a href="ch037.html">第037回 鬼王夜谒唐三藏 悟空神化引婴儿</a></li>
+<li><a href="ch038.html">第038回 婴儿问母知邪正 金木参玄见假真</a></li>
+<li><a href="ch039.html">第039回 一粒金丹天上得 三年故主世间生</a></li>
+<li><a href="ch040.html">第040回 婴儿戏化禅心乱 猿马刀归木母空</a></li>
+<li><a href="ch041.html">第041回 心猿遭火败 木母被魔擒</a></li>
+<li><a href="ch042.html">第042回 大圣殷勤拜南海 观音慈善缚红孩</a></li>
+<li><a href="ch043.html">第043回 黑河妖孽擒僧去 西洋龙子捉鼍回</a></li>
+<li><a href="ch044.html">第044回 法身元运逢车力 心正妖邪度脊关</a></li>
+<li><a href="ch045.html">第045回 三清观大圣留名 车迟国猴王显法</a></li>
+<li><a href="ch046.html">第046回 外道弄强欺正法 心猿显圣灭诸邪</a></li>
+<li><a href="ch047.html">第047回 圣僧夜阻通天水 金木垂慈救小童</a></li>
+<li><a href="ch048.html">第048回 魔弄寒风飘大雪 僧思拜佛履层冰</a></li>
+<li><a href="ch049.html">第049回 三藏有灾沉水宅 观音救难现鱼篮</a></li>
+<li><a href="ch050.html">第050回 情乱性从因爱欲 神昏心动遇魔头</a></li>
+<li><a href="ch051.html">第051回 心猿空用千般计 水火无功难炼魔</a></li>
+<li><a href="ch052.html">第052回 悟空大闹金山兜洞 如来暗示主人公</a></li>
+<li><a href="ch053.html">第053回 禅主吞餐怀鬼孕 黄婆运水解邪胎</a></li>
+<li><a href="ch054.html">第054回 法性西来逢女国 心猿定计脱烟花</a></li>
+<li><a href="ch055.html">第055回 色邪淫戏唐三藏 性正修持不坏身</a></li>
+<li><a href="ch056.html">第056回 神狂诛草寇 道昧放心猿</a></li>
+<li><a href="ch057.html">第057回 真行者落伽山诉苦 假猴王水帘洞誊文</a></li>
+<li><a href="ch058.html">第 058回 二心搅乱大乾坤 一体难修真寂灭</a></li>
+<li><a href="ch059.html">第 059回 唐三藏路阻火焰山 孙行者一调芭蕉扇</a></li>
+<li><a href="ch060.html">第060回 牛魔王罢战赴华筵 孙行者二调芭蕉扇</a></li>
+<li><a href="ch061.html">第061回 猪八戒助力败魔王 孙行者三调芭蕉扇</a></li>
+<li><a href="ch062.html">第062回 涤垢洗心惟扫塔 缚魔归正乃修身</a></li>
+<li><a href="ch063.html">第063回 二僧荡怪闹龙宫 群圣除邪获宝贝</a></li>
+<li><a href="ch064.html">第064回 荆棘岭悟能努力 木仙庵三藏谈诗</a></li>
+<li><a href="ch065.html">第065回 妖邪假设小雷音 四众皆遭大厄难</a></li>
+<li><a href="ch066.html">第066回 诸神遭毒手 弥勒缚妖魔</a></li>
+<li><a href="ch067.html">第067回 拯救驼罗禅性稳 脱离秽污道心清</a></li>
+<li><a href="ch068.html">第068回 朱紫国唐僧论前世 孙行者施为三折肱</a></li>
+<li><a href="ch069.html">第069回 心主夜间修药物 君王筵上论妖邪</a></li>
+<li><a href="ch070.html">第070回 妖魔宝放烟沙火 悟空计盗紫金铃</a></li>
+<li><a href="ch071.html">第七十一回 行者假名降怪犼 观音现象伏妖王</a></li>
+<li><a href="ch072.html">第072回 盘丝洞七情迷本 濯垢泉八戒忘形</a></li>
+<li><a href="ch073.html">第073回 情因旧恨生灾毒 心主遭魔幸破光</a></li>
+<li><a href="ch074.html">第 074回 长庚传报魔头狠 行者施为变化能</a></li>
+<li><a href="ch075.html">第075回 心猿钻透阴阳窍 魔王还归大道真</a></li>
+<li><a href="ch076.html">第076回 心神居舍魔归性 木母同降怪体真</a></li>
+<li><a href="ch077.html">第077回 群魔欺本性 一体拜真如</a></li>
+<li><a href="ch078.html">第078回 比丘怜子遣阴神 金殿识魔谈道德</a></li>
+<li><a href="ch079.html">第079回 寻洞擒妖逢老寿 当朝正主救婴儿</a></li>
+<li><a href="ch080.html">第080回 姹女育阳求配偶 心猿护主识妖邪</a></li>
+<li><a href="ch081.html">第081回 镇海寺心猿知怪 黑松林三众寻师</a></li>
+<li><a href="ch082.html">第082回 姹女求阳 元神护道</a></li>
+<li><a href="ch083.html">第083回 心猿识得丹头 姹女还归本性</a></li>
+<li><a href="ch084.html">第八十四回 难灭伽持圆大觉 法王成正体天然</a></li>
+<li><a href="ch085.html">第085回 心猿妒木母 魔主计吞禅</a></li>
+<li><a href="ch086.html">第086回 木母助威征怪物 金公施法灭妖邪</a></li>
+<li><a href="ch087.html">第087回 凤仙郡冒天止雨 孙大圣劝善施霖</a></li>
+<li><a href="ch088.html">第088回 禅到玉华施法会 心猿木母授门人</a></li>
+<li><a href="ch089.html">第089回 黄狮精虚设钉钯宴 金木土计闹豹头山</a></li>
+<li><a href="ch090.html">第090回 师狮授受同归一 盗道缠禅静九灵</a></li>
+<li><a href="ch091.html">第091回 金平府元夜观灯 玄英洞唐僧供状</a></li>
+<li><a href="ch092.html">第092回 三僧大战青龙山 四星挟捉犀牛怪</a></li>
+<li><a href="ch093.html">第093回 给孤园问古谈因 天竺国朝王遇偶</a></li>
+<li><a href="ch094.html">第094回 四僧宴乐御花园 一怪空怀情欲喜</a></li>
+<li><a href="ch095.html">第095回 假合真形擒玉兔 真阴归正会灵元</a></li>
+<li><a href="ch096.html">第096回 寇员外喜待高僧 唐长老不贪富贵</a></li>
+<li><a href="ch097.html">第097回 金酬外护遭魔毒 圣显幽魂救本原</a></li>
+<li><a href="ch098.html">第098回 猿熟马驯方脱壳 功成行满见真如</a></li>
+<li><a href="ch099.html">第099回 九九数完魔刬尽 三三行满道归根</a></li>
+<li><a href="ch100.html">第 100回 径回东土五圣成真</a></li>
+</ul>
+<div class="reader-group">人物深度（215）</div>
+<ul class="reader-idx">
+<li><a href="people/万圣公主外传.html">万圣公主：碧波潭里那尾没有名字的红鲤</a></li>
+<li><a href="people/严嵩与牛魔王对照专题.html">严嵩与牛魔王对照专题</a></li>
+<li><a href="people/乌巢禅师外传.html">乌巢禅师：那棵树上的袈裟</a></li>
+<li><a href="people/乌鸡国国王-方向二深化.html">乌鸡国国王：当替代品比你更称职</a></li>
+<li><a href="people/九头虫.html">九头虫</a></li>
+<li><a href="people/九头驸马外传.html">九头驸马：从暗河里逃走的偷光者</a></li>
+<li><a href="people/九灵元圣-方向二深化.html">九灵元圣：不关心正义，只关心孙子</a></li>
+<li><a href="people/二十八宿外传.html">二十八宿·外传：星图上的盲点</a></li>
+<li><a href="people/二郎神-方向二深化.html">二郎神：听调不听宣的孤独者</a></li>
+<li><a href="people/二郎神.html">二郎神</a></li>
+<li><a href="people/二郎神外传.html">二郎神：听调不听宣的人</a></li>
+<li><a href="people/二郎神深化专题.html">二郎神深化专题</a></li>
+<li><a href="people/人物分类增补专题.html">人物分类增补专题</a></li>
+<li><a href="people/人物谱系表.html">人物谱系表</a></li>
+<li><a href="people/六耳猕猴-方向二深化.html">六耳猕猴：打自己</a></li>
+<li><a href="people/六耳猕猴.html">六耳猕猴</a></li>
+<li><a href="people/六耳猕猴深化专题.html">六耳猕猴深化专题</a></li>
+<li><a href="people/刘伯钦外传.html">刘伯钦：那个不知道自己在护送的猎人</a></li>
+<li><a href="people/南极仙翁外传.html">南极仙翁：坐骑跑了，徒弟的心被换成了蜂王浆</a></li>
+<li><a href="people/卵二姐外传.html">卵二姐：猪刚鬣的第一任妻子</a></li>
+<li><a href="people/取经五众关系网络深化.html">取经五众关系网络深化</a></li>
+<li><a href="people/取经团队动力学深化专题.html">取经团队动力学深化专题</a></li>
+<li><a href="people/变的哲学-方向二深化.html">“变”的哲学：七十二变的能力边界</a></li>
+<li><a href="people/哪吒.html">哪吒</a></li>
+<li><a href="people/哪吒外传.html">哪吒：藕</a></li>
+<li><a href="people/哪吒深化专题.html">哪吒深化专题</a></li>
+<li><a href="people/唐僧-方向二深化.html">唐僧：十世轮回与佛性执念</a></li>
+<li><a href="people/唐僧.html">唐僧</a></li>
+<li><a href="people/唐僧深化专题.html">唐僧深化专题</a></li>
+<li><a href="people/四值功曹五方揭谛六丁六甲外传.html">四值功曹、五方揭谛、六丁六甲：看不见的护送队</a></li>
+<li><a href="people/四大天王合集专题.html">四大天王合集专题</a></li>
+<li><a href="people/四海龙王外传.html">四海龙王：下雨的人</a></li>
+<li><a href="people/国师王菩萨.html">国师王菩萨</a></li>
+<li><a href="people/土地公-方向二深化.html">土地公：夹缝中的眼睛</a></li>
+<li><a href="people/地府体系深化专题.html">地府体系深化专题</a></li>
+<li><a href="people/多目怪-方向二深化.html">多目怪：用毒茶留住师妹的人</a></li>
+<li><a href="people/大鹏金翅雕.html">大鹏金翅雕</a></li>
+<li><a href="people/大鹏金翅雕外传.html">大鹏金翅雕·外传：在如来的光头上盘旋</a></li>
+<li><a href="people/天庭体系深化专题.html">天庭体系深化专题</a></li>
+<li><a href="people/太上老君-方向二深化.html">太上老君：兜率宫的炼丹人</a></li>
+<li><a href="people/太上老君.html">太上老君</a></li>
+<li><a href="people/太上老君外传.html">太上老君·外传：那扇没补的炉门</a></li>
+<li><a href="people/太上老君深化专题.html">太上老君深化专题</a></li>
+<li><a href="people/太宗李世民外传.html">太宗李世民·外传：那捻土在龙案上的重量</a></li>
+<li><a href="people/太白金星-方向二深化.html">太白金星：体制内最会办事的人</a></li>
+<li><a href="people/太白金星.html">太白金星</a></li>
+<li><a href="people/奎木狼-方向二深化.html">奎木狼：“情缘”叙事如何把囚禁者包装成痴情者</a></li>
+<li><a href="people/奎木狼不负前情外传.html">奎木狼：不负前情</a></li>
+<li><a href="people/奎木狼外传.html">奎木狼·外传：兜率宫的炭火</a></li>
+<li><a href="people/女儿国国王-方向二深化.html">女儿国国王：她的问题，整本《西游记》没有人回答</a></li>
+<li><a href="people/女儿国国王.html">女儿国国王</a></li>
+<li><a href="people/女儿国国王深化专题.html">女儿国国王深化专题</a></li>
+<li><a href="people/如意真仙外传.html">如意真仙：落胎泉</a></li>
+<li><a href="people/如来.html">如来</a></li>
+<li><a href="people/如来佛祖-方向二深化.html">如来佛祖——最极致的理想主义者，还是最冷血的精算师？</a></li>
+<li><a href="people/如来佛祖-方向二深化B.html">如来佛祖：布局者的成本核算</a></li>
+<li><a href="people/妖怪群体组织形态深化.html">妖怪群体组织形态深化</a></li>
+<li><a href="people/妖怪谱系深度分析.html">妖怪谱系深度分析</a></li>
+<li><a href="people/嫦娥外传.html">嫦娥：广寒宫没有兔子</a></li>
+<li><a href="people/孙悟空-方向二深化.html">孙悟空：从石头到石头</a></li>
+<li><a href="people/孙悟空.html">孙悟空</a></li>
+<li><a href="people/孙悟空外传.html">孙悟空：成佛之后，他先摸了摸头</a></li>
+<li><a href="people/孙悟空深化专题.html">孙悟空深化专题</a></li>
+<li><a href="people/宝象国国王后外传.html">宝象国国王后：绣鞋</a></li>
+<li><a href="people/宝象国国王外传.html">宝象国国王：十三年</a></li>
+<li><a href="people/小妖外传.html">小妖：被借来的道具——西游世界里那些没有自己故事的人</a></li>
+<li><a href="people/张居正与玉帝权术对照专题.html">张居正与玉帝权术对照专题</a></li>
+<li><a href="people/弥勒佛外传.html">弥勒佛：笑和尚的布袋</a></li>
+<li><a href="people/悟空-方向二深化.html">悟空：自由的五个阶段</a></li>
+<li><a href="people/托塔李天王外传.html">托塔李天王：塔</a></li>
+<li><a href="people/扫塔人外传.html">扫塔人：扫塔</a></li>
+<li><a href="people/接引佛祖外传.html">接引佛祖：无底船</a></li>
+<li><a href="people/推云童子外传.html">推云童子：云</a></li>
+<li><a href="people/敖广外传.html">敖广：金箍棒原来是我的</a></li>
+<li><a href="people/文殊与普贤外传.html">文殊与普贤：沉默的菩萨</a></li>
+<li><a href="people/日值功曹外传.html">日值功曹：那一次，我破了例</a></li>
+<li><a href="people/明代历史原型对照专题.html">西游与明代历史原型对照专题</a></li>
+<li><a href="people/昴日星官.html">昴日星官</a></li>
+<li><a href="people/昴日星官外传.html">昴日星官：天亮的人</a></li>
+<li><a href="people/有来有去外传.html">有来有去：我领的是大王的俸禄</a></li>
+<li><a href="people/李贽与悟空对照专题.html">李贽与悟空对照专题</a></li>
+<li><a href="people/杏仙外传.html">杏仙：荆棘岭上，那个只想谈诗的女人</a></li>
+<li><a href="people/次要人物关系网络深化.html">次要人物关系网络深化</a></li>
+<li><a href="people/殷温娇外传.html">殷温娇：抛球</a></li>
+<li><a href="people/沙僧-方向二深化.html">沙僧：从不惹事的人</a></li>
+<li><a href="people/沙僧.html">沙僧</a></li>
+<li><a href="people/沙僧外传.html">沙僧·外传：吃师父的人</a></li>
+<li><a href="people/沙僧深化专题.html">沙僧深化专题</a></li>
+<li><a href="people/泥鳅外传.html">泥鳅：流沙河里的另一双眼睛</a></li>
+<li><a href="people/泾河龙王外传.html">泾河龙王：一失足成千古恨</a></li>
+<li><a href="people/海瑞与悟空直谏对照专题.html">海瑞与悟空直谏对照专题</a></li>
+<li><a href="people/火焰山土地外传.html">火焰山土地：那场火不是我放的，但我守了一辈子</a></li>
+<li><a href="people/灵吉菩萨.html">灵吉菩萨</a></li>
+<li><a href="people/灵感大王-方向二深化.html">灵感大王：当勒索被制度化以后</a></li>
+<li><a href="people/灵感大王.html">灵感大王</a></li>
+<li><a href="people/灵感大王外传.html">灵感大王·外传：冰层下面的供桌</a></li>
+<li><a href="people/燃灯古佛外传.html">燃灯古佛：过去现在未来的修补者</a></li>
+<li><a href="people/牛魔王-方向二深化.html">牛魔王：不闹天宫的悟空，后来怎样了？</a></li>
+<li><a href="people/牛魔王-方向二深化B.html">牛魔王：另一个版本的悟空</a></li>
+<li><a href="people/牛魔王.html">牛魔王</a></li>
+<li><a href="people/牛魔王深化专题.html">牛魔王深化专题</a></li>
+<li><a href="people/独角兕大王.html">独角兕大王</a></li>
+<li><a href="people/狮驼岭三魔-方向二深化.html">狮驼岭三魔：罪责的蒸发</a></li>
+<li><a href="people/猪八戒-方向二深化.html">猪八戒：那个随时准备散伙的人</a></li>
+<li><a href="people/猪八戒.html">猪八戒</a></li>
+<li><a href="people/猪八戒深化专题.html">猪八戒深化专题</a></li>
+<li><a href="people/玄奘-方向二深化.html">玄奘：凡人之躯</a></li>
+<li><a href="people/玄奘外传.html">玄奘·外传：舌苔</a></li>
+<li><a href="people/玉兔精-方向二深化.html">玉兔精：月宫太冷，所以偷跑下来</a></li>
+<li><a href="people/玉兔精.html">玉兔精</a></li>
+<li><a href="people/玉兔精深化专题.html">玉兔精深化专题</a></li>
+<li><a href="people/玉帝.html">玉帝</a></li>
+<li><a href="people/玉帝深化专题.html">玉帝深化专题</a></li>
+<li><a href="people/玉皇大帝-方向二深化.html">玉皇大帝：三界至尊的统治逻辑</a></li>
+<li><a href="people/玉皇大帝外传.html">玉皇大帝·外传：那张供桌</a></li>
+<li><a href="people/玉面狐狸深化专题.html">玉面狐狸深化专题</a></li>
+<li><a href="people/王母娘娘.html">王母娘娘</a></li>
+<li><a href="people/王母娘娘深化专题.html">王母娘娘深化专题</a></li>
+<li><a href="people/王阳明与唐僧心学对照专题.html">王阳明与唐僧心学对照专题</a></li>
+<li><a href="people/白象精.html">白象精</a></li>
+<li><a href="people/白骨精-方向二深化.html">白骨精：她变三次，每次都是你没有保护好的人</a></li>
+<li><a href="people/白骨精.html">白骨精</a></li>
+<li><a href="people/白骨精外传.html">白骨精·外传：那具白骨在遇见取经人之前</a></li>
+<li><a href="people/白骨精深化专题.html">白骨精深化专题</a></li>
+<li><a href="people/白鹿精-方向二深化.html">白鹿精：一千一百一十一个心洞</a></li>
+<li><a href="people/白龙马-方向二深化.html">白龙马：被遗忘的第五人</a></li>
+<li><a href="people/白龙马-方向二深化B.html">白龙马：被遗忘的第五人</a></li>
+<li><a href="people/白龙马.html">白龙马</a></li>
+<li><a href="people/白龙马外传.html">白龙马·外传：龙鳞</a></li>
+<li><a href="people/白龙马深化专题.html">白龙马深化专题</a></li>
+<li><a href="people/百眼魔君.html">百眼魔君</a></li>
+<li><a href="people/百眼魔君外传.html">百眼魔君：千只眼与一根针</a></li>
+<li><a href="people/百花羞-方向二深化.html">百花羞：被解救后，她去了哪里？</a></li>
+<li><a href="people/百花羞外传.html">百花羞：被解救后，她去了哪里？</a></li>
+<li><a href="people/紧箍儿的内侧-器物传记.html">紧箍儿的内侧</a></li>
+<li><a href="people/紫金铃外传.html">紫金铃：那三个铃铛，摇响的是因果</a></li>
+<li><a href="people/红孩儿-方向二深化.html">红孩儿：膝盖上的刀疤，是成佛的代价</a></li>
+<li><a href="people/红孩儿.html">红孩儿</a></li>
+<li><a href="people/红孩儿外传.html">红孩儿·外传：号山没有圣婴大王了</a></li>
+<li><a href="people/红孩儿深化专题.html">红孩儿深化专题</a></li>
+<li><a href="people/红蟒精.html">红蟒精</a></li>
+<li><a href="people/给孤独长者外传.html">给孤独长者：金砖</a></li>
+<li><a href="people/罗刹女外传.html">罗刹女：那个修成了人的女妖</a></li>
+<li><a href="people/老鼋外传.html">老鼋：问</a></li>
+<li><a href="people/老鼠精-方向二深化.html">老鼠精：被赦免但被遗忘的人</a></li>
+<li><a href="people/老鼠精.html">老鼠精（地涌夫人）</a></li>
+<li><a href="people/老鼠精深化专题.html">老鼠精深化专题</a></li>
+<li><a href="people/芭蕉扇外传.html">芭蕉扇：那把扇子扇了两次火，一次风</a></li>
+<li><a href="people/荆棘岭外传.html">荆棘岭：语言</a></li>
+<li><a href="people/菩提祖师-方向二深化.html">菩提祖师：斜月三星洞的最后一课</a></li>
+<li><a href="people/菩提祖师.html">菩提祖师</a></li>
+<li><a href="people/菩提祖师外传.html">菩提祖师·外传：方寸山的空教室</a></li>
+<li><a href="people/菩提祖师深化专题.html">菩提祖师深化专题</a></li>
+<li><a href="people/虎先锋外传.html">虎先锋：那张虎皮</a></li>
+<li><a href="people/虾兵外传.html">虾兵·外传：碧波潭的最后一条暗河</a></li>
+<li><a href="people/虾兵外传B.html">虾兵：碧波潭里那个没有名字的兵</a></li>
+<li><a href="people/蜘蛛精-方向二深化.html">蜘蛛精：七个共享同一根丝的人</a></li>
+<li><a href="people/蜘蛛精.html">蜘蛛精</a></li>
+<li><a href="people/蜘蛛精七姐妹合集专题.html">蜘蛛精七姐妹合集专题</a></li>
+<li><a href="people/蜘蛛精七姐妹深化专题.html">蜘蛛精七姐妹深化专题</a></li>
+<li><a href="people/蜘蛛精外传.html">蜘蛛精·外传：七根丝的共振频率</a></li>
+<li><a href="people/蝎子精-方向二深化.html">蝎子精：能破如来金身的野妖精，死于鸡叫</a></li>
+<li><a href="people/蝎子精.html">蝎子精</a></li>
+<li><a href="people/蝎子精深化专题.html">蝎子精深化专题</a></li>
+<li><a href="people/袁守诚外传.html">袁守诚：那张卦桌上，摆着天庭的天气预报</a></li>
+<li><a href="people/被借来的道具-方向二深化.html">被借来的道具：西游世界里那些没有自己故事的人</a></li>
+<li><a href="people/观音.html">观音</a></li>
+<li><a href="people/观音外传.html">观音：取经工程项目经理的孤独</a></li>
+<li><a href="people/观音菩萨-方向二深化.html">观音菩萨：取经工程的全项目复盘</a></li>
+<li><a href="people/观音菩萨深化专题.html">观音菩萨深化专题</a></li>
+<li><a href="people/规矩的多重面孔-方向二深化.html">“规矩”在西游世界的多重面孔</a></li>
+<li><a href="people/赛太岁-方向二深化.html">赛太岁：偷走紫金铃的人，不想再被骑</a></li>
+<li><a href="people/赛太岁.html">赛太岁</a></li>
+<li><a href="people/车迟国三国师-方向二深化.html">车迟国三国师：被抛弃的正统</a></li>
+<li><a href="people/车迟国三国师外传.html">车迟国三国师：靠技术吃饭的人，被体制扔下了</a></li>
+<li><a href="people/辟寒辟暑辟尘-方向二深化.html">辟寒、辟暑、辟尘：当抢劫变成了惯例</a></li>
+<li><a href="people/边缘神祇深化专题.html">边缘神祇深化专题</a></li>
+<li><a href="people/迦叶外传.html">迦叶：拈花的人</a></li>
+<li><a href="people/通臂猿猴外传.html">通臂猿猴：花果山上，那只最老的猴子</a></li>
+<li><a href="people/金刚琢外传.html">金刚琢·外传：被套走的一切还留在套子里</a></li>
+<li><a href="people/金圣宫娘娘-方向二深化.html">金圣宫娘娘：穿棕衣的人</a></li>
+<li><a href="people/金圣宫娘娘外传.html">金圣宫娘娘·外传：那件棕衣穿了三年的纹理</a></li>
+<li><a href="people/金圣宫娘娘深化专题.html">金圣宫娘娘深化专题</a></li>
+<li><a href="people/金池长老外传.html">金池长老：袈裟与长生</a></li>
+<li><a href="people/金箍棒-方向二深化.html">金箍棒：一万三千五百斤的孤独</a></li>
+<li><a href="people/金蝉子外传.html">金蝉子：被吃了十次的师父</a></li>
+<li><a href="people/金角大王.html">金角大王</a></li>
+<li><a href="people/金角银角-方向二深化.html">金角银角：一场被安排的劫难</a></li>
+<li><a href="people/金角银角外传.html">金角银角·外传：莲花洞的账本</a></li>
+<li><a href="people/金角银角深化专题.html">金角银角深化专题</a></li>
+<li><a href="people/铁扇公主-方向二深化.html">铁扇公主：她的拒绝，是全书最站得住脚的理由</a></li>
+<li><a href="people/铁扇公主.html">铁扇公主</a></li>
+<li><a href="people/铁扇公主深化专题.html">铁扇公主深化专题</a></li>
+<li><a href="people/铜台府外传.html">铜台府：善行翻转</a></li>
+<li><a href="people/银角大王.html">银角大王</a></li>
+<li><a href="people/镇元大仙-方向二深化.html">镇元大仙：地仙之祖的孤独</a></li>
+<li><a href="people/镇元大仙.html">镇元大仙</a></li>
+<li><a href="people/阿傩迦叶外传.html">阿傩·迦叶：伸手要钱的佛</a></li>
+<li><a href="people/陈关保外传.html">陈关保：供桌上的那一夜</a></li>
+<li><a href="people/青牛精-方向二深化.html">青牛精：金刚琢套住的，到底是谁？</a></li>
+<li><a href="people/青狮精.html">青狮精</a></li>
+<li><a href="people/驼罗庄外传.html">驼罗庄：恐惧</a></li>
+<li><a href="people/高翠兰-方向二深化.html">高翠兰：高老庄的门后</a></li>
+<li><a href="people/高翠兰外传.html">高翠兰：那个等了他一辈子的人</a></li>
+<li><a href="people/高翠兰深化专题.html">高翠兰深化专题</a></li>
+<li><a href="people/鱼篮观音外传.html">鱼篮观音：那个竹林里编竹篮的女人</a></li>
+<li><a href="people/黄眉老佛外传.html">黄眉老佛：假如灵山是假的</a></li>
+<li><a href="people/黄袍怪-方向二深化.html">黄袍怪：碗子山波月洞里的十三载日常</a></li>
+<li><a href="people/黄袍怪.html">黄袍怪</a></li>
+<li><a href="people/黄袍怪外传.html">黄袍怪：碗子山波月洞里的十三载日常</a></li>
+<li><a href="people/黄风怪-方向二深化.html">黄风怪：当一个小恶被判了重刑</a></li>
+<li><a href="people/黄风怪外传.html">黄风怪·外传：那盏被偷走的灯油，烧成了三昧神风</a></li>
+<li><a href="people/黎山老母外传.html">黎山老母：她来试你的真心，不让你知道她是谁</a></li>
+<li><a href="people/黑熊精-方向二深化.html">黑熊精：一座山的守门人</a></li>
+<li><a href="people/黑熊精.html">黑熊精</a></li>
+</ul>
+<div class="reader-group">主题专题（209）</div>
+<ul class="reader-idx">
+<li><a href="themes/不可靠叙述专题.html">不可靠叙述专题</a></li>
+<li><a href="themes/二十八星宿专题.html">二十八星宿——星图上的守望者</a></li>
+<li><a href="themes/二郎神与悟空-自由观碰撞.html">二郎神与孙悟空：那场棋逢对手的战斗，其实是两种自由观的碰撞</a></li>
+<li><a href="themes/互文性叙事学专题.html">互文性叙事学专题</a></li>
+<li><a href="themes/五方揭谛专题.html">五方揭谛——取经路上最沉默的守护者</a></li>
+<li><a href="themes/五次蜕变专题.html">五次蜕变专题</a></li>
+<li><a href="themes/人参果-人与欲望的关系.html">人参果：那颗长得像婴儿的果子，照见了人与欲望的四种关系</a></li>
+<li><a href="themes/佛学AI西游三维语义映射表.html">佛学—AI—西游 三维语义映射表</a></li>
+<li><a href="themes/修辞叙事学专题.html">修辞叙事学专题</a></li>
+<li><a href="themes/倒果为因专题.html">倒果为因——《黑神话：悟空》为什么要从成佛之后讲起</a></li>
+<li><a href="themes/元叙事学专题.html">元叙事学专题</a></li>
+<li><a href="themes/全世界重写西游记.html">为什么全世界都在重写《西游记》</a></li>
+<li><a href="themes/全球重写专题.html">全球重写专题</a></li>
+<li><a href="themes/八十一难专题.html">八十一难专题</a></li>
+<li><a href="themes/八十一难结构学专题.html">八十一难结构学专题</a></li>
+<li><a href="themes/八十一难风险管理学专题.html">八十一难风险管理学专题</a></li>
+<li><a href="themes/六丁六甲专题.html">六丁六甲——取经路上最沉默的军队</a></li>
+<li><a href="themes/兵器的自我修养专题.html">兵器的自我修养</a></li>
+<li><a href="themes/创伤叙事学专题.html">创伤叙事学专题</a></li>
+<li><a href="themes/动物研究专题.html">动物研究专题</a></li>
+<li><a href="themes/历史叙事学专题.html">历史叙事学专题</a></li>
+<li><a href="themes/反抗与束缚的永恒循环专题.html">反抗与束缚的永恒循环——《黑神话：悟空》三题</a></li>
+<li><a href="themes/取经人类学专题.html">取经人类学专题：亲属制度、宗教仪式、经济交换与文化象征的四重人类学结构</a></li>
+<li><a href="themes/取经传播学专题.html">取经传播学专题：传播者、传播内容、传播渠道与传播效果的四重传播结构</a></li>
+<li><a href="themes/取经伦理学专题.html">取经伦理学专题</a></li>
+<li><a href="themes/取经历史学专题.html">取经历史学专题：长时段、大历史、叙事史与历史记忆的四维历史结构</a></li>
+<li><a href="themes/取经叙事经济学专题.html">取经叙事经济学专题：货币流通、价值交换、劳动价值与叙事资本</a></li>
+<li><a href="themes/取经团队-凭什么走到西天.html">取经团队凭什么走到西天</a></li>
+<li><a href="themes/取经团队决策论专题.html">取经团队决策论专题：有限理性、前景与博弈的决策学</a></li>
+<li><a href="themes/取经团队动力学.html">取经团队动力学</a></li>
+<li><a href="themes/取经团队心理学专题.html">取经团队心理学专题</a></li>
+<li><a href="themes/取经团队组织学专题.html">取经团队组织学专题</a></li>
+<li><a href="themes/取经团队身体地理学专题.html">取经团队身体地理学专题</a></li>
+<li><a href="themes/取经地理学专题.html">取经地理学专题：地方感、第三空间、空间正义与全球地方感的四维地理结构</a></li>
+<li><a href="themes/取经地理批评专题.html">取经地理批评专题</a></li>
+<li><a href="themes/取经声音政治学专题.html">取经声音政治学专题：语音身份、噪音政治、沉默策略与声音规训</a></li>
+<li><a href="themes/取经媒介考古学专题.html">取经媒介考古学专题：经卷、诏书、镜像与法器的媒介谱系</a></li>
+<li><a href="themes/取经密码学专题.html">取经密码学专题：编码、解码、加密与破解的四重密码结构</a></li>
+<li><a href="themes/取经情感结构专题.html">取经情感结构专题</a></li>
+<li><a href="themes/取经拓扑学专题.html">取经拓扑学专题：空间、时间、身份与伦理的四重拓扑结构</a></li>
+<li><a href="themes/取经政治学专题.html">取经政治学专题：权力术、主权、契约与民主的四维政治结构</a></li>
+<li><a href="themes/取经教育学专题.html">取经教育学专题</a></li>
+<li><a href="themes/取经数字人文专题.html">取经数字人文专题：远读与量化西游</a></li>
+<li><a href="themes/取经气候学专题.html">取经气候学专题：气候、球体、灾难与生态的四重气候结构</a></li>
+<li><a href="themes/取经生态学专题.html">取经生态学专题：自然、伴侣、技术与熵增的四重生态谱系</a></li>
+<li><a href="themes/取经社会学专题.html">取经社会学专题：理性化、社会事实、文化悲剧与惯习的四维社会结构</a></li>
+<li><a href="themes/取经神话政治学专题.html">取经神话政治学专题：神话叙事、政治合法性、主权象征与真理事件</a></li>
+<li><a href="themes/取经空间生产专题.html">取经空间生产专题：列斐伏尔路线下的西天之路</a></li>
+<li><a href="themes/取经符号学专题.html">取经符号学专题：能指、所指、诠释与解码的四重符号机制</a></li>
+<li><a href="themes/取经网络叙事学专题.html">取经网络叙事学专题</a></li>
+<li><a href="themes/取经网络叙事学深化专题.html">取经网络叙事学深化专题</a></li>
+<li><a href="themes/取经美学专题.html">取经美学专题</a></li>
+<li><a href="themes/取经考古学专题.html">取经考古学专题：物质文化、遗址分析、文化层与器物类型学的四重考古结构</a></li>
+<li><a href="themes/取经路径地理符号学专题.html">取经路径地理符号学专题</a></li>
+<li><a href="themes/取经路线地理专题.html">取经路线地理专题</a></li>
+<li><a href="themes/取经路线社会学研究专题.html">取经路线社会学研究专题</a></li>
+<li><a href="themes/名字的政治学专题.html">名字的政治学</a></li>
+<li><a href="themes/后人类主义专题.html">后人类主义专题</a></li>
+<li><a href="themes/后殖民叙事学专题.html">后殖民叙事学专题</a></li>
+<li><a href="themes/听觉叙事学专题.html">听觉叙事学专题</a></li>
+<li><a href="themes/味觉叙事学专题.html">味觉叙事学专题</a></li>
+<li><a href="themes/唐僧-凡躯圣心.html">唐僧：凡人之躯，圣人之志</a></li>
+<li><a href="themes/嗅觉叙事学专题.html">嗅觉叙事学专题</a></li>
+<li><a href="themes/器物传记学专题.html">器物传记学专题</a></li>
+<li><a href="themes/四值功曹专题.html">四值功曹——取经工程的档案管理员</a></li>
+<li><a href="themes/增补一三十九位神祇总序与编制表专题.html">增补一：三十九位神祇总序与编制表</a></li>
+<li><a href="themes/增补七很多很多劫之后专题.html">增补七：很多很多劫之后</a></li>
+<li><a href="themes/增补三土地公与山神专题.html">增补三：土地公与山神</a></li>
+<li><a href="themes/增补二全员集结专题.html">增补二：全员集结</a></li>
+<li><a href="themes/增补五老亥的日常生活专题.html">增补五：老亥的日常生活</a></li>
+<li><a href="themes/增补八值日功曹的最后一笔专题.html">增补八：值日功曹的最后一笔</a></li>
+<li><a href="themes/增补六波罗僧揭谛的前身暗示专题.html">增补六：波罗僧揭谛的前身暗示</a></li>
+<li><a href="themes/增补四值月功曹的花册与节气专题.html">增补四：值月功曹的花册与节气</a></li>
+<li><a href="themes/大闹天宫-英雄还是悲剧.html">大闹天宫：英雄还是悲剧？</a></li>
+<li><a href="themes/大闹天宫专题.html">大闹天宫专题</a></li>
+<li><a href="themes/女性主义叙事学专题.html">女性主义叙事学专题</a></li>
+<li><a href="themes/妖怪伦理学专题.html">妖怪伦理学专题</a></li>
+<li><a href="themes/妖怪生态学专题.html">妖怪生态学专题：食物链、生态位、共生关系与种群动态的四维生态谱系</a></li>
+<li><a href="themes/妖怪经济学专题.html">妖怪经济学专题</a></li>
+<li><a href="themes/妖怪身份政治专题.html">妖怪身份政治专题：承认、标签与归化的西游身份政治</a></li>
+<li><a href="themes/妖魔谱系政治学专题.html">妖魔谱系政治学专题</a></li>
+<li><a href="themes/小妖生命史专题.html">小妖生命史专题</a></li>
+<li><a href="themes/底层叙事学专题.html">底层叙事学专题</a></li>
+<li><a href="themes/开篇诗-被跳过的总纲.html">开篇诗：那首被跳过一万次的总纲</a></li>
+<li><a href="themes/开篇诗专题.html">开篇诗专题</a></li>
+<li><a href="themes/情感叙事学专题.html">情感叙事学专题</a></li>
+<li><a href="themes/招安对比重写专题.html">招安对比重写·唯识AI框架下的双模型对照</a></li>
+<li><a href="themes/招安的两种结局专题.html">招安的两种结局——当孙悟空遇上了宋江</a></li>
+<li><a href="themes/接受美学专题.html">接受美学专题</a></li>
+<li><a href="themes/文化记忆专题.html">文化记忆专题</a></li>
+<li><a href="themes/无字真经-灵山的玩笑.html">无字真经：灵山之上，如来开了一个什么玩笑？</a></li>
+<li><a href="themes/无字真经专题.html">无字真经专题</a></li>
+<li><a href="themes/时间叙事学专题.html">时间叙事学专题</a></li>
+<li><a href="themes/时间哲学专题.html">时间哲学专题</a></li>
+<li><a href="themes/时间的政治学专题.html">时间的政治学</a></li>
+<li><a href="themes/明代司法制度镜像专题.html">明代司法制度镜像专题</a></li>
+<li><a href="themes/暗数据遗忘者列传.html">暗数据·西游宇宙遗忘者列传</a></li>
+<li><a href="themes/权力五联对照专题.html">权力五联对照专题：权力来源、制度化、工具化、空间化与谱系化的五维对照</a></li>
+<li><a href="themes/根器专题.html">根器：从妖到念的赋形——《黑神话：悟空》的妖怪改写逻辑</a></li>
+<li><a href="themes/比较文学专题.html">比较文学专题</a></li>
+<li><a href="themes/水帘洞-瀑布门的世界.html">水帘洞：那扇瀑布门背后的两个世界</a></li>
+<li><a href="themes/水帘洞专题.html">水帘洞专题</a></li>
+<li><a href="themes/沙僧-沉默者的智慧.html">沙僧：团队里最沉默的人，可能藏着最深的智慧</a></li>
+<li><a href="themes/法宝政治学专题.html">法宝政治学专题</a></li>
+<li><a href="themes/法宝系统专题.html">法宝系统专题</a></li>
+<li><a href="themes/混世四猴专题.html">混世四猴</a></li>
+<li><a href="themes/物质生态学专题.html">物质生态学专题</a></li>
+<li><a href="themes/猪八戒-不愿承认的自己.html">猪八戒：那个我们不想承认却总能看见的自己</a></li>
+<li><a href="themes/猴王到行者-五次蜕变.html">从猴王到行者：成佛之路上的五次蜕变</a></li>
+<li><a href="themes/生态批评专题.html">生态批评专题：从花果山到灵山的四层生态叙事</a></li>
+<li><a href="themes/白龙马-沉默龙的真相.html">白龙马：被骑十四年的龙，沉默背后的真相</a></li>
+<li><a href="themes/真假美猴王-二心之战.html">真假美猴王：二心之战，谁杀了谁</a></li>
+<li><a href="themes/真假美猴王专题.html">真假美猴王专题</a></li>
+<li><a href="themes/神学干预机制专题.html">神学干预机制专题：显化、点化、试炼、收服与授记的五型神学结构</a></li>
+<li><a href="themes/神话学专题.html">神话学专题</a></li>
+<li><a href="themes/空间叙事学专题.html">空间叙事学专题</a></li>
+<li><a href="themes/空间政治学专题.html">空间政治学专题</a></li>
+<li><a href="themes/筋斗云与高铁-速度焦虑.html">从筋斗云到高铁：孙悟空的速度焦虑与当代人的时间困境</a></li>
+<li><a href="themes/筋斗云专题.html">筋斗云专题</a></li>
+<li><a href="themes/紧箍儿咒-四百年回响.html">紧箍儿咒：四百年未竟的回响</a></li>
+<li><a href="themes/紧箍咒专题.html">紧箍咒专题</a></li>
+<li><a href="themes/缘起即算法-章节体.html">缘起即算法 · 章节体</a></li>
+<li><a href="themes/缘起即算法专题.html">缘起即算法专题</a></li>
+<li><a href="themes/翻译学专题.html">翻译学专题</a></li>
+<li><a href="themes/芭蕉扇-终极灭火器的关系.html">芭蕉扇：一把终极灭火器如何照见我们与世界的关系</a></li>
+<li><a href="themes/蟠桃园-体制内的秘密.html">蟠桃园：那个有三千六百株桃树的体制内，藏着什么秘密？</a></li>
+<li><a href="themes/西游与信息论专题.html">西游与信息论专题</a></li>
+<li><a href="themes/西游与全球神话比较专题.html">西游与全球神话比较专题</a></li>
+<li><a href="themes/西游与后结构主义专题.html">西游与后结构主义专题</a></li>
+<li><a href="themes/西游与复杂性科学专题.html">西游与复杂性科学专题：涌现、自组织与混沌秩序</a></li>
+<li><a href="themes/西游与媒介理论专题.html">西游与媒介理论专题：媒介即讯息的西游世界</a></li>
+<li><a href="themes/西游与媒介生态学专题.html">西游与媒介生态学专题</a></li>
+<li><a href="themes/西游与存在主义专题.html">西游与存在主义专题</a></li>
+<li><a href="themes/西游与弗洛伊德精神分析专题.html">西游与弗洛伊德精神分析专题</a></li>
+<li><a href="themes/西游与拉康精神分析专题.html">西游与拉康精神分析专题</a></li>
+<li><a href="themes/西游与政治思想史专题.html">西游与政治思想史专题：仁政、法术势、无为而治与因果轮回</a></li>
+<li><a href="themes/西游与死亡研究专题.html">西游与死亡研究专题：向死而在的西行</a></li>
+<li><a href="themes/西游与游戏学专题.html">西游与游戏学专题</a></li>
+<li><a href="themes/西游与社会理论延伸专题.html">西游与社会理论延伸专题：符号互动、常人方法、结构功能与批判理论</a></li>
+<li><a href="themes/西游与符号学专题.html">西游与符号学专题</a></li>
+<li><a href="themes/西游与系统论专题.html">西游与系统论专题</a></li>
+<li><a href="themes/西游与经济学专题.html">西游与经济学专题：资源主权、项目预算、财产权与产出核算</a></li>
+<li><a href="themes/西游与经济学派深化专题.html">西游与经济学派深化专题：自发秩序、制度演化、有限理性与纳什均衡</a></li>
+<li><a href="themes/西游与荣格分析心理学专题.html">西游与荣格分析心理学专题</a></li>
+<li><a href="themes/西游与解构主义专题.html">西游与解构主义专题</a></li>
+<li><a href="themes/西游与解释学专题.html">西游与解释学专题：理解作为存在方式的取经</a></li>
+<li><a href="themes/西游与认知科学专题.html">西游与认知科学专题</a></li>
+<li><a href="themes/西游与记忆技术专题.html">西游与记忆技术专题：记忆术、记忆之场与档案书写</a></li>
+<li><a href="themes/西游体检-你走到第几回了.html">你的西游体检：你走到第几回了？</a></li>
+<li><a href="themes/西游体检专题.html">西游体检专题</a></li>
+<li><a href="themes/西游四维研究专题.html">西游四维研究专题</a></li>
+<li><a href="themes/西游渡元定义.html">西游渡元定义</a></li>
+<li><a href="themes/西游渡第一讲专题.html">西游渡 · 第一讲</a></li>
+<li><a href="themes/西游渡第三十讲专题.html">西游渡 · 第三十讲</a></li>
+<li><a href="themes/西游渡第二十一讲专题.html">西游渡 · 第二十一讲</a></li>
+<li><a href="themes/西游渡第二十七讲专题.html">西游渡 · 第二十七讲</a></li>
+<li><a href="themes/西游渡第二十三讲专题.html">西游渡 · 第二十三讲</a></li>
+<li><a href="themes/西游渡第二十九讲专题.html">西游渡 · 第二十九讲</a></li>
+<li><a href="themes/西游渡第二十二讲专题.html">西游渡 · 第二十二讲</a></li>
+<li><a href="themes/西游渡第二十五讲专题.html">西游渡 · 第二十五讲</a></li>
+<li><a href="themes/西游渡第二十八讲专题.html">西游渡 · 第二十八讲</a></li>
+<li><a href="themes/西游渡第二十六讲专题.html">西游渡 · 第二十六讲</a></li>
+<li><a href="themes/西游渡第二十四讲专题.html">西游渡 · 第二十四讲</a></li>
+<li><a href="themes/西游渡第二十讲专题.html">西游渡 · 第二十讲</a></li>
+<li><a href="themes/西游渡第二讲专题.html">西游渡 · 第二讲</a></li>
+<li><a href="themes/西游渡第十七讲专题.html">西游渡 · 第十七讲</a></li>
+<li><a href="themes/西游渡第十九讲专题.html">西游渡 · 第十九讲</a></li>
+<li><a href="themes/西游渡第十五讲专题.html">西游渡 · 第十五讲</a></li>
+<li><a href="themes/西游渡第十八讲专题.html">西游渡 · 第十八讲</a></li>
+<li><a href="themes/西游渡第十六讲专题.html">西游渡 · 第十六讲</a></li>
+<li><a href="themes/西游职场学第一讲专题.html">西游职场学 · 第一讲</a></li>
+<li><a href="themes/西游职场学第七讲专题.html">西游职场学 · 第七讲</a></li>
+<li><a href="themes/西游职场学第三讲专题.html">西游职场学 · 第三讲</a></li>
+<li><a href="themes/西游职场学第二讲专题.html">西游职场学 · 第二讲</a></li>
+<li><a href="themes/西游职场学第五讲专题.html">西游职场学 · 第五讲</a></li>
+<li><a href="themes/西游职场学第六讲专题.html">西游职场学 · 第六讲</a></li>
+<li><a href="themes/西游职场学第四讲专题.html">西游职场学 · 第四讲</a></li>
+<li><a href="themes/西游职场学终讲专题.html">西游职场学 · 终讲</a></li>
+<li><a href="themes/西游职场学附篇专题.html">西游职场学 · 附篇</a></li>
+<li><a href="themes/西游记原著与黑神话悟空长生体系对比总结专题.html">《西游记》原著与《黑神话：悟空》长生体系对比总结</a></li>
+<li><a href="themes/西游败局第一讲专题.html">西游败局 · 第一讲</a></li>
+<li><a href="themes/西游败局第七讲专题.html">西游败局 · 第七讲</a></li>
+<li><a href="themes/西游败局第三讲专题.html">西游败局 · 第三讲</a></li>
+<li><a href="themes/西游败局第九讲专题.html">西游败局 · 第九讲</a></li>
+<li><a href="themes/西游败局第二讲专题.html">西游败局 · 第二讲</a></li>
+<li><a href="themes/西游败局第五讲专题.html">西游败局 · 第五讲</a></li>
+<li><a href="themes/西游败局第八讲专题.html">西游败局 · 第八讲</a></li>
+<li><a href="themes/西游败局第六讲专题.html">西游败局 · 第六讲</a></li>
+<li><a href="themes/西游败局第十一讲专题.html">西游败局 · 第十一讲</a></li>
+<li><a href="themes/西游败局第十二讲专题.html">西游败局 · 第十二讲</a></li>
+<li><a href="themes/西游败局第十讲专题.html">西游败局 · 第十讲</a></li>
+<li><a href="themes/西游败局第四讲专题.html">西游败局 · 第四讲</a></li>
+<li><a href="themes/西游败局终讲专题.html">西游败局 · 终讲</a></li>
+<li><a href="themes/视觉叙事学专题.html">视觉叙事学专题</a></li>
+<li><a href="themes/触觉叙事学专题.html">触觉叙事学专题</a></li>
+<li><a href="themes/认知叙事学专题.html">认知叙事学专题</a></li>
+<li><a href="themes/记忆之场专题.html">记忆之场专题</a></li>
+<li><a href="themes/记忆伦理专题.html">记忆伦理专题</a></li>
+<li><a href="themes/身体政治学专题.html">身体政治学专题</a></li>
+<li><a href="themes/金箍棒的重量-一万三千五百斤的秘密.html">金箍棒的重量：一万三千五百斤，藏着什么秘密？</a></li>
+<li><a href="themes/长生之后神仙为什么死了专题.html">长生之后，神仙为什么死了——《黑神话：悟空》的颠覆性设定</a></li>
+<li><a href="themes/长生之道专题.html">长生之道——西游世界的四种不朽密码</a></li>
+<li><a href="themes/长生之道的代价专题.html">长生之道的代价——那些被遗忘在永生链条最底端的人</a></li>
+<li><a href="themes/长生之道的政治经济学专题.html">长生之道的政治经济学——谁有资格活下去</a></li>
+<li><a href="themes/长生之道的权力谱系专题.html">长生之道的权力谱系</a></li>
+<li><a href="themes/长生之道终章专题.html">长生之道 · 终章——旧神已死，新神未生</a></li>
+<li><a href="themes/集体记忆专题.html">集体记忆专题</a></li>
+<li><a href="themes/须菩提祖师-消失的师父.html">须菩提祖师：那个教会悟空一切，却消失在故事里的人</a></li>
+<li><a href="themes/黑神话拒绝金箍专题.html">黑神话拒绝金箍专题</a></li>
+</ul>
+<div class="reader-group">文化背景（34）</div>
+<ul class="reader-idx">
+<li><a href="culture/三教合一明代思想史深化专题.html">三教合一明代思想史深化专题</a></li>
+<li><a href="culture/佛道思想.html">佛道思想</a></li>
+<li><a href="culture/历史玄奘与小说玄奘专题.html">历史玄奘与小说玄奘专题</a></li>
+<li><a href="culture/成书背景.html">成书背景</a></li>
+<li><a href="culture/明代军事制度对照专题.html">明代军事制度对照专题</a></li>
+<li><a href="culture/明代医学养生制度对照专题.html">明代医学养生制度对照专题</a></li>
+<li><a href="culture/明代卫所制度对照专题.html">明代卫所制度对照专题</a></li>
+<li><a href="culture/明代司法制度深化专题.html">明代司法制度深化专题</a></li>
+<li><a href="culture/明代婚姻家庭制度对照专题.html">明代婚姻家庭制度对照专题</a></li>
+<li><a href="culture/明代宗教制度对照专题.html">明代宗教制度对照专题</a></li>
+<li><a href="culture/明代宗教政策对照专题.html">明代宗教政策对照专题</a></li>
+<li><a href="culture/明代宫廷与宦官制度对照专题.html">明代宫廷与宦官制度对照专题</a></li>
+<li><a href="culture/明代市井百态对照专题.html">明代市井百态对照专题</a></li>
+<li><a href="culture/明代思想史对照专题.html">明代思想史对照专题</a></li>
+<li><a href="culture/明代政治制度对照专题.html">明代政治制度对照专题</a></li>
+<li><a href="culture/明代文学体裁与西游对照专题.html">明代文学体裁与西游对照专题</a></li>
+<li><a href="culture/明代文学思想对照专题.html">明代文学思想对照专题</a></li>
+<li><a href="culture/明代服饰舆服制度对照专题.html">明代服饰舆服制度对照专题</a></li>
+<li><a href="culture/明代海禁政策对照专题.html">明代海禁政策对照专题</a></li>
+<li><a href="culture/明代盐法开中制度对照专题.html">明代盐法开中制度对照专题</a></li>
+<li><a href="culture/明代社会风俗对照专题.html">明代社会风俗对照专题</a></li>
+<li><a href="culture/明代神祇官僚体系对照专题.html">明代神祇官僚体系对照专题</a></li>
+<li><a href="culture/明代科举制度对照专题.html">明代科举制度对照专题</a></li>
+<li><a href="culture/明代经济制度对照专题.html">明代经济制度对照专题</a></li>
+<li><a href="culture/明代隐喻.html">明代隐喻</a></li>
+<li><a href="culture/明代驿递交通制度对照专题.html">明代驿递交通制度对照专题</a></li>
+<li><a href="culture/版本演变.html">版本演变</a></li>
+<li><a href="culture/版本演变补遗-平话层.html">版本演变补遗：从《诗话》到世德堂本之间的"失落的平话层"</a></li>
+<li><a href="culture/西游与佛教禅宗专题.html">西游与佛教禅宗专题</a></li>
+<li><a href="culture/西游与明代商业经济专题.html">西游与明代商业经济专题</a></li>
+<li><a href="culture/西游与明代民间宗教专题.html">西游与明代民间宗教专题</a></li>
+<li><a href="culture/西游与民间信仰专题.html">西游与民间信仰专题</a></li>
+<li><a href="culture/西游与禅宗公案专题.html">西游与禅宗公案：心印不传之妙 vs 内丹修炼次第</a></li>
+<li><a href="culture/西游与道教全真派专题.html">西游与道教全真派专题</a></li>
+</ul>
+<div class="reader-group">诗词歌赋（13）</div>
+<ul class="reader-idx">
+<li><a href="poetry/主题诗词创作.html">主题诗词创作</a></li>
+<li><a href="poetry/原著人物赋诗词赏析专题.html">原著人物赋诗词赏析专题</a></li>
+<li><a href="poetry/原著景物诗分类赏析专题.html">原著景物诗分类赏析：山水禅心与旅途抒情</a></li>
+<li><a href="poetry/原著景物诗赏析专题.html">原著景物诗赏析专题</a></li>
+<li><a href="poetry/原著诗词赏析.html">原著诗词赏析</a></li>
+<li><a href="poetry/回目对联分析专题.html">回目对联分析专题</a></li>
+<li><a href="poetry/开篇诗专题深化.html">开篇诗专题深化</a></li>
+<li><a href="poetry/西游与临江仙词牌赏析专题.html">西游与临江仙词牌赏析专题</a></li>
+<li><a href="poetry/西游与水调歌头词牌赏析专题.html">西游与水调歌头词牌赏析专题</a></li>
+<li><a href="poetry/西游与满庭芳词牌赏析专题.html">西游与满庭芳词牌赏析专题</a></li>
+<li><a href="poetry/西游与西江月词牌赏析专题.html">西游与西江月词牌赏析专题</a></li>
+<li><a href="poetry/西游诗词意象谱系专题.html">西游诗词意象谱系专题</a></li>
+<li><a href="poetry/西游诗词韵律分析专题.html">西游诗词韵律分析专题</a></li>
+</ul>
+<div class="reader-group">个人随笔（44）</div>
+<ul class="reader-idx">
+<li><a href="essays/现代视角解读.html">现代视角解读</a></li>
+<li><a href="essays/西游与AI时代.html">西游与 AI 时代</a></li>
+<li><a href="essays/西游与人类学.html">西游与人类学：礼物、亲属与图腾的交换政治</a></li>
+<li><a href="essays/西游与代理悖论.html">西游与代理悖论</a></li>
+<li><a href="essays/西游与传播学.html">西游与传播学</a></li>
+<li><a href="essays/西游与伦理学.html">西游与伦理学</a></li>
+<li><a href="essays/西游与体育学.html">西游与体育学：身体、器械与权力的三角</a></li>
+<li><a href="essays/西游与信息茧房.html">西游与信息茧房</a></li>
+<li><a href="essays/西游与化学.html">西游与化学：八卦炉、铅汞论与明代炼丹术</a></li>
+<li><a href="essays/西游与医学.html">西游与医学</a></li>
+<li><a href="essays/西游与博弈论.html">西游与博弈论：策略、合作与重复博弈</a></li>
+<li><a href="essays/西游与地理学.html">西游与地理学</a></li>
+<li><a href="essays/西游与天文学.html">西游与天文学：星象、宿曜与天空的政治学</a></li>
+<li><a href="essays/西游与媒介史.html">西游与媒介史</a></li>
+<li><a href="essays/西游与宗教学.html">西游与宗教学：三教合一、二心与信仰的合流政治</a></li>
+<li><a href="essays/西游与平台经济.html">西游与平台经济</a></li>
+<li><a href="essays/西游与建筑学.html">西游与建筑学</a></li>
+<li><a href="essays/西游与心理学.html">西游与心理学</a></li>
+<li><a href="essays/西游与性别政治.html">西游与性别政治</a></li>
+<li><a href="essays/西游与情绪劳动.html">西游与情绪劳动</a></li>
+<li><a href="essays/西游与教育学.html">西游与教育学</a></li>
+<li><a href="essays/西游与数学.html">西游与数学：八十一难、五千卷经与数字的结构美学</a></li>
+<li><a href="essays/西游与明代嘉靖镜像.html">西游与明代嘉靖镜像</a></li>
+<li><a href="essays/西游与服饰学.html">西游与服饰学</a></li>
+<li><a href="essays/西游与比较文学.html">西游与比较文学</a></li>
+<li><a href="essays/西游与民俗学.html">西游与民俗学：节庆、禁忌与明代日常的政治学</a></li>
+<li><a href="essays/西游与法理政治.html">西游与法理政治</a></li>
+<li><a href="essays/西游与流亡者.html">西游与流亡者</a></li>
+<li><a href="essays/西游与演化论.html">西游与演化论：自然选择、间断平衡与超越进化</a></li>
+<li><a href="essays/西游与物理学.html">西游与物理学：原子论、热力学与生命系统</a></li>
+<li><a href="essays/西游与现代组织管理.html">西游与现代组织管理</a></li>
+<li><a href="essays/西游与生态学.html">西游与生态学</a></li>
+<li><a href="essays/西游与社会学.html">西游与社会学</a></li>
+<li><a href="essays/西游与神话学.html">西游与神话学</a></li>
+<li><a href="essays/西游与符号学.html">西游与符号学：能指、神话与拟像</a></li>
+<li><a href="essays/西游与经济学.html">西游与经济学</a></li>
+<li><a href="essays/西游与美学.html">西游与美学</a></li>
+<li><a href="essays/西游与翻译学.html">西游与翻译学</a></li>
+<li><a href="essays/西游与考古学.html">西游与考古学：器物、信仰与物质的考古政治学</a></li>
+<li><a href="essays/西游与认知科学.html">西游与认知科学：心智模块、意识流与自我隧道</a></li>
+<li><a href="essays/西游与语言学.html">西游与语言学</a></li>
+<li><a href="essays/西游与音乐学.html">西游与音乐学：声景、节奏与权力的频率</a></li>
+<li><a href="essays/西游与项目管理.html">西游与项目管理</a></li>
+<li><a href="essays/西游与饮食学.html">西游与饮食学</a></li>
+</ul>
+
 </main>
 </body>
 </html>
