@@ -11,6 +11,17 @@
 ---
 
 
+## W656 W656 B-9① audit 六族补丁合并单模块（2026-10-04·v2.3.256）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/js/chart-audit.js | W656 | 新增·audit 六族统一模块（单一事实源·ChartAudit API·data-families 接入） |
+| site/data/*.html ×84 | W656 | 更新·七块 audit 补丁→1 行 defer src（净删 20524 行） |
+| scripts/output/_w656_replace_audit.py | W656 | 新增·内联替换工具（被 src 方案取代·存档） |
+| scripts/output/_w656_src_tag.py | W656 | 新增·src 标签替换工具（含页面清单输出） |
+| scripts/_w656_equiv_probe.js | W656 | 新增·等价性 DOM 终态探针（before/after 对比） |
+| scripts/output/_cascade_files_W656_pages.txt | W656 | 新增·页面触达清单（非级联批量改动自带清单） |
+
 ## W655 W655 B-9② D3 字面色值→CSS 变量（2026-10-04·v2.3.255）
 
 | 文件 | W | 说明 |

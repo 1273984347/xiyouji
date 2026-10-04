@@ -1,0 +1,37 @@
+{
+ "data/81-hardships-view.html": {
+  "rotatedTicks": 0,
+  "hiddenTexts": 0,
+  "hiddenNoTitle": 0,
+  "heatRotated": 0,
+  "pageerrors": []
+ },
+ "data/character-dynamic-network.html": {
+  "rotatedTicks": 0,
+  "hiddenTexts": 0,
+  "hiddenNoTitle": 0,
+  "heatRotated": 0,
+  "pageerrors": []
+ },
+ "data/cave-estate.html": {
+  "rotatedTicks": 39,
+  "hiddenTexts": 15,
+  "hiddenNoTitle": 0,
+  "heatRotated": 0,
+  "pageerrors": []
+ },
+ "data/monster-female-network.html": {
+  "rotatedTicks": 8,
+  "hiddenTexts": 6,
+  "hiddenNoTitle": 6,
+  "heatRotated": 0,
+  "pageerrors": []
+ },
+ "data/poetry-rhythm-analysis.html": {
+  "rotatedTicks": 27,
+  "hiddenTexts": 0,
+  "hiddenNoTitle": 0,
+  "heatRotated": 0,
+  "pageerrors": []
+ }
+}
