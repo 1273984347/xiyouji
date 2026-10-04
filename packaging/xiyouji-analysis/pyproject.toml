@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xiyouji-analysis"
+version = "0.1.0"
+description = "《详解西游记》34 类文本分析方法工具包——把《西游记》可视化站点的分析脚本带给研究者自己的语料"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "详解西游记项目" }]
+keywords = ["journey-to-the-west", "digital-humanities", "text-analysis", "x you ji ji", "数字人文"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Text Processing :: General",
+    "Natural Language :: Chinese (Simplified)",
+]
+
+[project.scripts]
+xiyouji-analysis = "xiyouji_analysis.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+xiyouji_analysis = ["analyses/**/*.py"]

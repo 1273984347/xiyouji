@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W657），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W658），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.258（2026-10-04）：W658 B-7 分析方法 pip 包 0.1.0 — xiyouji-analysis（32 自包含脚本+CLI list/run/run-all+同步机制）venv 全链路冒烟 + setuptools build 缓存混包抓取
+> **来源**：全量启动队列第八批——B-7 按 registry 启动注记（「解耦与打包开工」）执行；解耦担忧经普查大幅收窄：37 个分析脚本仅 5 个耦合仓库语料（utils/+source//dataset/·jieba），32 个自包含纯 stdlib——**0.1.0 正确边界=只收 32 个零修改入包**，5 个排除登记（参数化留 0.2）。
+> - **包**：packaging/xiyouji-analysis/（pyproject+README+src/xiyouji_analysis/{__init__,cli}.py）——脚本以仓库原样分发（类目结构保留·零修改）；CLI `xiyouji-analysis list|run <类目/脚本>|run-all`（subprocess 透传 --output·与仓库「py 类目/xxx.py --output」用法同构）。
+> - **同步机制**：scripts/package_analysis_sync.py（单一事实源 scripts/→包 analyses/·非 _ 前缀·COUPLED 5 个排除+manifest 登记·--check 幂等核验）。
+> - **冒烟（venv 全链路）**：install→list=32→run G_哲学/philosophy OK→run Q_源流演变/text_evolution OK→输出 8 JSON 结构有效→wheel 构建成功→临时件清理。
+> - **过程抓取两个包工程坑（入册）**：①importlib.resources 对无 __init__ 目录返回 MultiplexedPath（Windows os.listdir 炸）→改 Path(__file__) 相对定位；②**setuptools build/ 目录缓存混入旧拷贝**（删 5 个 coupled 后 wheel 仍 37 个·--no-cache-dir 无效·必须删项目 build/ 目录）——README 已写警示。
+> - **验证**：ruff 0 错；sync --check 幂等；venv 冒烟全链路过；包边界核验（32 入/5 排除/0 残留）。
+> - **文件**：packaging/xiyouji-analysis/（pyproject.toml、README.md、src/xiyouji_analysis/__init__.py、cli.py、analyses/ 32 脚本）、scripts/package_analysis_sync.py（新增·常驻）、scripts/output/_sync_analysis_manifest.json、六文档、四页脚、CITATION、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 
 ### v2.3.257（2026-10-04）：W657 B-6 第二步可引用性组件 — 86 页 cite-block 静态注入（数据源+APA/BibTeX+下载）+ cite-box.js 交互模块 + 第 28 门禁基线 327→0 全量收紧（C1-C4 86/86·D4 兑现·转全量 FAIL 模式）
 > **来源**：全量启动队列第七批——B-6 第二步按 registry 启动注记（用户 2026-10-03「全部启动」·免另立 PRD）执行：86 页引用组件（APA/MLA/BibTeX 复制）+ 导出。

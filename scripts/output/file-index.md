@@ -11,6 +11,16 @@
 ---
 
 
+## W658 W658 B分析方法 pip 包 0.1.0（2026-10-04·v2.3.258）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| packaging/xiyouji-analysis/pyproject.toml | W658 | 新增·pip 包定义（xiyouji-analysis 0.1.0·CLI 入口） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/cli.py | W658 | 新增·CLI（list/run/run-all·subprocess 透传） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/ | W658 | 新增·32 个自包含分析脚本（A-H 类目结构·sync 产物） |
+| scripts/package_analysis_sync.py | W658 | 新增·包同步机制（单一事实源→analyses/·COUPLED 排除·--check 幂等） |
+| scripts/output/_sync_analysis_manifest.json | W658 | 新增·同步清单（边界与 excluded 登记） |
+
 ## W657 W657 B第二步可引用性组件（2026-10-04·v2.3.257）
 
 | 文件 | W | 说明 |
