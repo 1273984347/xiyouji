@@ -67,6 +67,10 @@ concurrency:
   group: screenshot-review-${{ github.ref }}
   cancel-in-progress: true
 
+# W663/T4 最小权限收敛：默认只读（本仓 61 处 uses 已 SHA 钉）
+permissions:
+  contents: read
+
 jobs:
   screenshot-review:
     name: Screenshot Review (Playwright + Slice + Table Scan)
@@ -74,7 +78,7 @@ jobs:
     timeout-minutes: 25
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
 
@@ -161,7 +165,7 @@ jobs:
 
       - name: Set up Node.js 20
         if: steps.scope.outputs.needed == 'true'
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
           node-version: '20'
           cache: npm
@@ -169,7 +173,7 @@ jobs:
 
       - name: Set up Python 3.12
         if: steps.scope.outputs.needed == 'true'
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
         with:
           python-version: '3.12'
           cache: pip
@@ -177,7 +181,7 @@ jobs:
 
       - name: Cache Playwright browsers (W421)
         if: steps.scope.outputs.needed == 'true'
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('scripts/package-lock.json') }}
@@ -227,7 +231,7 @@ jobs:
       - name: Chart render gates (sankey runtime / canvas occlusion / overflow / reveal, blocking)
         id: chart-gates
         if: steps.scope.outputs.needed == 'true'
-        uses: nick-fields/retry@v4
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4
         with:
           max_attempts: 2
           timeout_minutes: 15
@@ -240,7 +244,7 @@ jobs:
       - name: Run batch screenshots (Playwright + layout assertions, blocking)
         id: batch-screenshots
         if: steps.scope.outputs.needed == 'true'
-        uses: nick-fields/retry@v4
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4
         with:
           max_attempts: 2
           timeout_minutes: 20
@@ -272,7 +276,7 @@ jobs:
 
       - name: Upload screenshot artifacts
         if: failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: screenshot-review-reports-${{ github.sha }}
           path: |
@@ -291,7 +295,7 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0  # W580 热修复：浅克隆下 git diff $BEFORE $SHA 报 128（首跑实证）
 
@@ -320,7 +324,7 @@ jobs:
 
       - name: Set up Node.js 20
         if: steps.scope.outputs.run != 'false'
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
           node-version: '20'
           cache: npm
@@ -328,7 +332,7 @@ jobs:
 
       - name: Cache Playwright browsers
         if: steps.scope.outputs.run != 'false'
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('scripts/package-lock.json') }}
@@ -367,7 +371,7 @@ jobs:
 
       - name: Upload audit output on failure
         if: failure() && steps.scope.outputs.run != 'false'
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: render-state-audit-${{ github.sha }}
           path: scripts/output/render-state-audit.jsonl

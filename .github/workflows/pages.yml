@@ -25,10 +25,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Setup Pages
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
 
       # W563：部署期把 SW 缓存名戳上 commit SHA——每次部署缓存名必变，
       # activate 自动清旧缓存，SHELL 变更必然生效；sed 只改 CI 工作副本不污染仓库。
@@ -38,7 +38,7 @@ jobs:
           grep -q "xiyouji-shell-${GITHUB_SHA::7}" site/sw.js
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
           # upload-pages-artifact 默认包含点文件（.nojekyll 已随 site/ 一同上传）
           path: site
@@ -53,5 +53,5 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
 # FILE_INDEX: .github/workflows/pages.yml | W390 | P0 GitHub Pages 部署
