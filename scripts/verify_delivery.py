@@ -695,6 +695,24 @@ def main():
             ok("降级声明门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
 
 
+    # ---- 文档口径体检门禁（第 31 槽·W663：doc-sync——代码/提交真值 vs 文档当前态声明反向对拍
+    # 四类窄句式（README 抬头/交接头链/门禁清单上限/提交-版段对账·D2 对账表登记即豁免）·
+    # wrapper 防静默跳过与第 29/30 槽同款）----
+    ds_py = os.path.join(_HERE, "check_doc_sync.py")
+    try:
+        r = subprocess.run([sys.executable, ds_py], capture_output=True, text=True, timeout=120)
+    except Exception as e:
+        fail("文档口径体检执行异常（第 31 槽·crash 即拦）: %s" % e)
+    else:
+        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
+        if r.returncode != 0:
+            fail("文档口径体检失配（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+        elif "---- 第 31 门禁 文档口径体检：" not in r.stdout:
+            fail("文档口径体检输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
+        else:
+            ok("文档口径体检通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
+
+
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:
         try:
