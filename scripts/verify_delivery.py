@@ -73,7 +73,7 @@ EXPECTED_SECTION_NAMES = [
     "设计令牌对账",
     "色盲安全",
     "降级声明",
-    "文档口径",
+    "文档口径", "CLAUDE速查",
 ]
 
 CORE_DOCS = [
@@ -793,6 +793,24 @@ def main():
             fail("文档口径体检输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
         else:
             ok("文档口径体检通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
+
+
+    section("CLAUDE速查")
+    # ---- CLAUDE.md 速查层完整性门禁（第 32 槽·W667/S-02：指针存在性+章节锚点对拍+行数≤60+
+    # 正文禁漂移字面量——防速查层断链与数字腐烂·wrapper 防静默跳过与第 29/30/31 槽同款）----
+    cm_py = os.path.join(_HERE, "check_claude_md.py")
+    try:
+        r = subprocess.run([sys.executable, cm_py], capture_output=True, text=True, timeout=60)
+    except Exception as e:
+        fail("CLAUDE.md 速查层门禁执行异常（第 32 槽·crash 即拦）: %s" % e)
+    else:
+        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
+        if r.returncode != 0:
+            fail("CLAUDE.md 速查层失配（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+        elif "---- 第 32 门禁 CLAUDE.md 速查层：" not in r.stdout:
+            fail("CLAUDE.md 速查层门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
+        else:
+            ok("CLAUDE.md 速查层门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
 
 
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----

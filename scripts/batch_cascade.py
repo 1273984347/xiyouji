@@ -45,12 +45,34 @@ def drop_block(s, bm_start, nl):
     return s[:bm_start] + s[bm_start + len(nl.join(seg[:j]) + nl):]
 
 
+def precheck(spec):
+    """spec 预校验（W667/S-01）：字段级分隔符黑名单 + title 领衔断言——在 dry-run 断言之前拦截
+    「能落盘但会破坏下一批锚点正则」的 spec（W664 实证：W663 desc 含「·」致 README/项目说明锚点失配）。
+    分隔符按字段分治：desc 写入版本行（锚点 ·A1-A6 / —A1-A6 / ；详见）→ 禁 ·；—；head_sentence 进入
+    HEAD 句（锚点 ；详见）→ 禁 ；—（· 已实证无害·全角括号由既有断言管）。返回违例清单。"""
+    issues = []
+    for field, banned in (("desc", ("·", "；", "—")), ("head_sentence", ("；", "—"))):
+        for sep in banned:
+            if sep in spec.get(field, ""):
+                issues.append("spec.%s 含分隔符 %r（写入版本行/HEAD 句后将使下一批锚点正则失配）"
+                              % (field, sep))
+    if not str(spec.get("title", "")).startswith(str(spec.get("batch", ""))):
+        issues.append("spec.title 未以 batch 号领衔（现役段解析取标题首个 W###·合并段场景必须显式领衔）")
+    return issues
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--spec", required=True)
     ap.add_argument("--apply", action="store_true")
     args = ap.parse_args()
     spec = json.load(open(args.spec, encoding="utf-8"))
+    pre_issues = precheck(spec)
+    if pre_issues:
+        for it in pre_issues:
+            print("[PRECHECK-FAIL] " + it)
+        print("[PRECHECK] %d 项违例——修正 spec 后重跑（参照 AGENTS §4.3 desc 分隔符规则）" % len(pre_issues))
+        return 1
     batch, ver, date = spec["batch"], spec["version"], spec["date"]
     desc = spec["desc"]
     entry = spec["head_entry"]
