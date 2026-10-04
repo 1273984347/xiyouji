@@ -133,6 +133,7 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 29. **色盲安全**（check_chart_colorblind.py --gate，W653 挂载·PD-1a·D-6 裁决 WARN+基线冻结：Machado 二型模拟+CIEDE2000·ΔE<10 成对检查·基线 17428 对冻结、基线外新增 FAIL·口径=light 静态（暗色 computed 态归 PD-4）·wrapper 防静默跳过）
 30. **窄屏降级声明**（check_chart_degrade.py，W654 挂载·PD-1b §4B 选型章配套：site/data 每页须声明 chart-degrade: stacked|scroll-x|simplified|n/a·静态解析不启浏览器·86 页声明全落·wrapper 防静默跳过同前）
 31. **文档口径体检**（check_doc_sync.py，W663 挂载：四类窄句式反向对拍——C1 README 抬头 ≡ CHANGELOG 顶段三元组 / C2 交接头链链首 ≡ 顶段 / C3 AGENTS §4.2 门禁清单上限 == verify 实况最高槽位 / C4 近 15 提交 W 号 ⊆ 版段 ∪ 对账表登记（docs/00-导读/W批次编号对账表.md·D2 裁决：登记即豁免）；行级豁免标记 <!--doc-sync:exempt 原因-->·浅克隆跳过 C4·--self-test 7 例）
+32. **CLAUDE.md 速查层完整性**（check_claude_md.py，W667 挂载：C1 指针文件存在性 / C2 章节锚点对拍（§N 节标题 + §N-M 节内条目）/ C3 行数 ≤60 / C4 正文禁漂移字面量（现役版本/W###/W 区间·元信息块血缘行豁免）——防速查层断链与数字腐烂；--self-test 7 例）
 
 ### 4.3 脚本工具链要点
 
