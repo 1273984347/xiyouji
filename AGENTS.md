@@ -130,6 +130,9 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 26. **SEO head**（W630 挂载，经用户裁决：check_seo_head.py 第 26 门禁（slot 自 W591 预留·脚本 W591 建置）——og:image/canonical 全页覆盖·JSON-LD 内联有效·hreflang 配对（89 对）·sitemap 集合一致；334 页扫描；SEO head 属静默腐烂面（W628 实证同族：W575 字面量腐烂 52 批无人察觉））
 27. **W 号区间字面量**（W628 挂载，经用户指令防复发：check_w_range_literal.py 第 27 门禁——根因=外部综述照抄 README 过期字面量「W001-W575」（W628 审计叙述面 9 处漂移）：现役叙述面（README/STRUCTURE/CONTRIBUTING/新Agent启动Prompt/00-导读/方法论 README/workflows README/agent-web README）中「W001-Wxxx」覆盖上限字面量终点必须等于 CHANGELOG 现役 max W（含「对应」映射规则与「tier2」归档描述豁免·非 001 起始历史区间不在范围）+ CITATION.cff version 与现役版本同步；--self-test 负样本 4/4；历史段/级联自维护面豁免）
 28. **可视化可引用性**（2026-10-02 经用户裁决挂载·第 28 门禁：check_citability.py——B-6 第一步·slot 自 W638 预留·来源 W636 缺口发现/W637 升级路径/W638 出处四字段收编。**批准开工=反转 B-6 三次「登记不开工」裁决，已在 registry 记账**。扫描区=`<div id="dataSource">` ∪ 含「数据源：」的字符串字面量（fetch/EMBEDDED 两态都收）；四项判据 C1 数据路径+版本 / C2 生成脚本+参数（**排除构建工具引用 inline_css.py·w334_font_subset.py——二者在 86/86 页命中，系 v1.0 草案假阳性源**）/ C3 引用格式任一锚点（报告另分 L0-L3 级）/ C4 下载入口或 EMBEDDED 声明；D1 范围仅 site/data 86 页；形态=WARN+基线冻结（scripts/output/citability-baseline.txt·首跑 344 行/missing 326·C1 2/86 C2 9/86 C3 1/86 C4 6/86）·基线外新增违规 FAIL·存量转 FAIL 时点=D4「missing 收敛至阈值以下」不预设日期；**判据类门禁必须先跑全站形态普查再写正则**（W638「存在性对≠分级对」的门禁侧教训）·--self-test 6 例含构建工具回归用例
+29. **色盲安全**（check_chart_colorblind.py --gate，W653 挂载·PD-1a·D-6 裁决 WARN+基线冻结：Machado 二型模拟+CIEDE2000·ΔE<10 成对检查·基线 17428 对冻结、基线外新增 FAIL·口径=light 静态（暗色 computed 态归 PD-4）·wrapper 防静默跳过）
+30. **窄屏降级声明**（check_chart_degrade.py，W654 挂载·PD-1b §4B 选型章配套：site/data 每页须声明 chart-degrade: stacked|scroll-x|simplified|n/a·静态解析不启浏览器·86 页声明全落·wrapper 防静默跳过同前）
+31. **文档口径体检**（check_doc_sync.py，W663 挂载：四类窄句式反向对拍——C1 README 抬头 ≡ CHANGELOG 顶段三元组 / C2 交接头链链首 ≡ 顶段 / C3 AGENTS §4.2 门禁清单上限 == verify 实况最高槽位 / C4 近 15 提交 W 号 ⊆ 版段 ∪ 对账表登记（docs/00-导读/W批次编号对账表.md·D2 裁决：登记即豁免）；行级豁免标记 <!--doc-sync:exempt 原因-->·浅克隆跳过 C4·--self-test 7 例）
 
 ### 4.3 脚本工具链要点
 
