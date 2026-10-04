@@ -4,13 +4,20 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W664），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W666），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.261（2026-10-05）：W666 工作复盘与优化分析报告（W663-W665 周期）入库 + 方法论 README 索引 28
+> **来源**：用户指令按「工作复盘与优化分析系统提示词（AI Agent 专用版）」对 W663-W665 周期出标准化复盘报告并入库（循 W660 追加批先例）。
+> - **报告**：docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-05.md（296 行·元信息块 v2 齐备）——七维度全覆盖：经验复用 7 项综合得分排序（doc-sync 反向对拍 4.75/负样本自证 4.75/移植方案体例 4.5/指针化零漂移 4.5/对账表认领 4.25/review 保真度地图 4.25/CRLF 行级纪律 4.0）；技能矩阵按筛选规则 **0 命中**（最低效果 4 分），按「新立机制试运行护航」原则立 3 张预防性 skill-creator 任务卡（S-01 batch_cascade spec 预校验/S-02 CLAUDE.md 指针校验第 32 槽/S-03 doc-sync 扩面评估——**均待用户拍板启动**）；未用技能 4 项三态决策（引入 skill-creator/暂缓 dynamic-workflows·judge_gate/放弃 de-AI 三技能）；场景沉淀 3 项已落地；问题 10 例（P2×6/P3×4·流程 40% 文档 20% 工具 20% 环境 20%）全闭环，历史 P0/P1 家族 0 复发；工作流瓶颈=Screenshot 等待，定向截图已实测减 57%（21m13s→9m3s）；WBS 六项挂靠对账表批号。
+> - **验证**：报告全部数字取自 git log/CI 运行记录/门禁输出实测；4 组【假设】+1 组【待验证】显式标注（A-1 verify 耗时/A-2 接手成本/A-3 skill-creator 消费力/A-4 频率外推）；verify_delivery 核心全绿；方法论 README 索引 28 行在位。
+> - **文件**：docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-05.md（新增）、docs/10-方法论沉淀/README.md（索引 +1 行）、docs/00-导读/W批次编号对账表.md（W666 认领+翻转）、六文档、四页脚、CITATION、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 
 ### v2.3.260（2026-10-05）：W664 CLAUDE.md AI 速查层 + 文档规范 §4.9 写作可验证纪律（宿主自动加载·指针化零漂移设计）
 > **来源**：用户拍板建 CLAUDE.md——W663 三仓治理评阅的收尾动作；本条纪律的落点经两轮讨论裁决（生效时机决定位置：自动加载层收速查入口，正文权威归文档规范写作规则章，AGENTS.md 保持 SOP 操作层不加节）。
