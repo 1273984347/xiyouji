@@ -11,6 +11,16 @@
 ---
 
 
+## W657 W657 B第二步可引用性组件（2026-10-04·v2.3.257）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/js/cite-box.js | W657 | 新增·可引用性交互模块（复制/降级/token 样式动态注入） |
+| site/data/*.html ×86 | W657 | 更新·cite-block 静态注入（数据源+APA/BibTeX+下载）+cite-box 挂载 |
+| scripts/output/citability-baseline.txt | W657 | 刷新·missing 327→0（四项 86/86·全量 FAIL 模式） |
+| scripts/output/_w657_cite_inject.py | W657 | 新增·注入工具（真实信息零编造·页面清单输出） |
+| scripts/output/_cascade_files_W657_pages.txt | W657 | 新增·页面触达清单 |
+
 ## W656 W656 B-9① audit 六族补丁合并单模块（2026-10-04·v2.3.256）
 
 | 文件 | W | 说明 |
