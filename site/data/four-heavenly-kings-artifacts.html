@@ -21,20 +21,6 @@
     <meta name="description" content="壹 · 四器物概览 · 贰 · 四器物象征维度雷达图 · 叁 · 器物-象征-伤痕-签名对照表 · 详解西游记">
     <meta property="og:description" content="壹 · 四器物概览 · 贰 · 四器物象征维度雷达图 · 叁 · 器物-象征-伤痕-签名对照表 · 详解西游记">
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
-    <div id="dataSource" class="notice"><div class="cite-block" id="citeBox">
-  数据源：页面内嵌 EMBEDDED 数据（run_all 批量生成 JSON 快照于构建时嵌入·快照 2026-10-04） 由 <code>scripts/run_all.py</code> 批量生成（口径与参数见 dataset 同名 JSON 与生成脚本源）。
-  <details class="cite-details">
-  <summary>引用格式</summary>
-  <div class="cite-item"><span>APA</span><pre class="cite-text">《详解西游记》项目. (2026). 四大天王器物符号图谱. 详解西游记可视化站点. https://1273984347.github.io/xiyouji/data/four-heavenly-kings-artifacts.html（访问日期 2026-10-04）</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
-  <div class="cite-item"><span>BibTeX</span><pre class="cite-text">@misc{xiyouji_four_heavenly_kings_artifacts,
-  title       = {四大天王器物符号图谱},
-  author      = {{《详解西游记》项目}},
-  year        = {2026},
-  howpublished = {\url{https://1273984347.github.io/xiyouji/data/four-heavenly-kings-artifacts.html}},
-  note        = {可视化数据可视化解读页, 访问日期 2026-10-04}
-}</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
-  </details>
-</div></div>
     
     
                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1230,7 +1216,7 @@ header.hero .meta {
 /* KPI */
 
 .kpi-value { font-size: 1.7em; color: var(--accent); font-weight: 700; }
-.kpi-label { color: var(--muted); font-size: 0.84em; margin-top: 4px; }
+.kpi-label { color: var(--ink-soft); font-size: 0.84em; margin-top: 4px; }
 
 /* Overview cards */
 .kings-grid {
@@ -1241,7 +1227,7 @@ header.hero .meta {
 }
 .king-card {
   background: var(--paper);
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: var(--radius-md);
   padding: 18px 14px;
   text-align: center;
@@ -1265,7 +1251,7 @@ header.hero .meta {
 }
 .king-card .king-symbol {
   font-size: 0.88em;
-  color: var(--muted);
+  color: var(--ink-soft);
   margin-bottom: 6px;
 }
 .king-card .king-wound {
@@ -1279,7 +1265,7 @@ header.hero .meta {
   font-style: italic;
   margin-top: 8px;
   padding-top: 8px;
-  border-top: 1px dashed var(--border);
+  border-top: 1px dashed var(--line);
 }
 .swatch-bar {
   height: 4px;
@@ -1291,10 +1277,10 @@ header.hero .meta {
 /* Chart */
 .chart-block { margin: 18px 0; }
 .chart-title { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
-.chart-caption { color: var(--muted); font-size: 0.84em; margin-bottom: 12px; }
+.chart-caption { color: var(--ink-soft); font-size: 0.84em; margin-bottom: 12px; }
 .chart-svg {
   background: var(--paper);
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: var(--radius-md);
   display: block;
   margin: 0 auto;
@@ -1319,7 +1305,7 @@ table.matrix {
   font-size: 0.92em;
 }
 table.matrix th, table.matrix td {
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   padding: 10px 12px;
   text-align: left;
   vertical-align: top;
@@ -1351,7 +1337,7 @@ table.matrix td.cell-wound { color: var(--accent); }
 .empty-state {
   text-align: center;
   padding: 30px;
-  color: var(--muted);
+  color: var(--ink-soft);
   font-style: italic;
 }
 
@@ -1386,6 +1372,20 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <!-- chart-degrade: scroll-x -->
 </head>
 <body>
+    <div id="dataSource" class="notice"><div class="cite-block" id="citeBox">
+  数据源：页面内嵌 EMBEDDED 数据（run_all 批量生成 JSON 快照于构建时嵌入·快照 2026-10-04） 由 <code>scripts/run_all.py</code> 批量生成（口径与参数见 dataset 同名 JSON 与生成脚本源）。
+  <details class="cite-details">
+  <summary>引用格式</summary>
+  <div class="cite-item"><span>APA</span><pre class="cite-text">《详解西游记》项目. (2026). 四大天王器物符号图谱. 详解西游记可视化站点. https://1273984347.github.io/xiyouji/data/four-heavenly-kings-artifacts.html（访问日期 2026-10-04）</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
+  <div class="cite-item"><span>BibTeX</span><pre class="cite-text">@misc{xiyouji_four_heavenly_kings_artifacts,
+  title       = {四大天王器物符号图谱},
+  author      = {{《详解西游记》项目}},
+  year        = {2026},
+  howpublished = {\url{https://1273984347.github.io/xiyouji/data/four-heavenly-kings-artifacts.html}},
+  note        = {可视化数据可视化解读页, 访问日期 2026-10-04}
+}</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
+  </details>
+</div></div>
     <a class="skip-link" href="#main">跳到主要内容</a>
 
     <header class="topnav">

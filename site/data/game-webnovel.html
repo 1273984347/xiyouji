@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-QV8O4af0lMb1btpyBmx9BZN/8Mgr7Lu0Ifb5qo69zYA=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-pcinago8cPqvi62G0ctkKJE3kLeK5Z/MOn+PUbcX2YE=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>游戏网文 · 角色卡牌战力系统 · 详解西游记</title>
@@ -1248,20 +1248,20 @@ td.num, th.num {
             display: flex;
             flex-direction: column;
         }
-        .char-card.rarity-UR { border-color: var(--rarity-ur); box-shadow: var(--elev-1); }
-        .char-card.rarity-SSR { border-color: var(--rarity-ssr); box-shadow: var(--elev-1); }
-        .char-card.rarity-SR { border-color: var(--rarity-sr); }
-        .char-card.rarity-R { border-color: var(--rarity-r); }
-        .char-card.rarity-N { border-color: var(--rarity-n); }
+        .char-card.rarity-UR { border-color: var(--chart-3); box-shadow: var(--elev-1); }
+        .char-card.rarity-SSR { border-color: var(--accent-3); box-shadow: var(--elev-1); }
+        .char-card.rarity-SR { border-color: var(--accent-2); }
+        .char-card.rarity-R { border-color: var(--accent-4); }
+        .char-card.rarity-N { border-color: var(--ink-soft); }
         .char-card:hover {
             transform: translateY(-4px);
             box-shadow: var(--elev-2);
         }
-        .char-card.rarity-UR:hover { box-shadow: var(--elev-2); border-color: var(--rarity-ur); }
-        .char-card.rarity-SSR:hover { box-shadow: var(--elev-2); border-color: var(--rarity-ssr); }
-        .char-card.rarity-SR:hover { box-shadow: var(--elev-2); border-color: var(--rarity-sr); }
-        .char-card.rarity-R:hover { box-shadow: var(--elev-2); border-color: var(--rarity-r); }
-        .char-card.rarity-N:hover { box-shadow: var(--elev-2); border-color: var(--rarity-n); }
+        .char-card.rarity-UR:hover { box-shadow: var(--elev-2); border-color: var(--chart-3); }
+        .char-card.rarity-SSR:hover { box-shadow: var(--elev-2); border-color: var(--accent-3); }
+        .char-card.rarity-SR:hover { box-shadow: var(--elev-2); border-color: var(--accent-2); }
+        .char-card.rarity-R:hover { box-shadow: var(--elev-2); border-color: var(--accent-4); }
+        .char-card.rarity-N:hover { box-shadow: var(--elev-2); border-color: var(--ink-soft); }
         .cc-head {
             display: flex;
             justify-content: space-between;
@@ -1275,11 +1275,11 @@ td.num, th.num {
             letter-spacing: 0.08em;
             line-height: 1;
         }
-        .cc-rarity.UR { color: var(--rarity-ur); text-shadow: 0 0 6px rgba(212, 175, 55, 0.4); }
-        .cc-rarity.SSR { color: var(--rarity-ssr); }
-        .cc-rarity.SR { color: var(--rarity-sr); }
-        .cc-rarity.R { color: var(--rarity-r); }
-        .cc-rarity.N { color: var(--rarity-n); }
+        .cc-rarity.UR { color: var(--chart-3); text-shadow: 0 0 6px rgba(212, 175, 55, 0.4); }
+        .cc-rarity.SSR { color: var(--accent-3); }
+        .cc-rarity.SR { color: var(--accent-2); }
+        .cc-rarity.R { color: var(--accent-4); }
+        .cc-rarity.N { color: var(--ink-soft); }
         .cc-elem {
             display: inline-flex;
             align-items: center;
@@ -1577,10 +1577,10 @@ td.num, th.num {
         }
         .novel-card:hover {
             transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
+            box-shadow: var(--elev-2);
         }
         .novel-card.top-pick {
-            border-left-color: var(--rarity-ur);
+            border-left-color: var(--chart-3);
             background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper) 60%);
         }
         .top-badge {
@@ -2558,7 +2558,7 @@ function renderTreemap(opts){
                 .attr("x", 0).attr("y", yPos)
                 .attr("width",Math.max(0, innerW)).attr("height", barH)
                 .attr("fill", "var(--bg)")
-                .attr("stroke", isTop3 ? "var(--rarity-ur)" : "var(--line)")
+                .attr("stroke", isTop3 ? "var(--chart-3)" : "var(--line)")
                 .attr("stroke-width", isTop3 ? 1.5 : 1)
                 .attr("rx", 4);
 

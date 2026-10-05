@@ -21,20 +21,6 @@
     <meta name="description" content="壹 · 妖怪等级制度的四层结构 · 贰 · 妖怪等级力导向图 · 叁 · 妖怪-天庭关系桑基图 · 详解西游记">
     <meta property="og:description" content="壹 · 妖怪等级制度的四层结构 · 贰 · 妖怪等级力导向图 · 叁 · 妖怪-天庭关系桑基图 · 详解西游记">
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
-    <div id="dataSource" class="notice"><div class="cite-block" id="citeBox">
-  数据源：页面内嵌 EMBEDDED 数据（run_all 批量生成 JSON 快照于构建时嵌入·快照 2026-10-04） 由 <code>scripts/run_all.py</code> 批量生成（口径与参数见 dataset 同名 JSON 与生成脚本源）。
-  <details class="cite-details">
-  <summary>引用格式</summary>
-  <div class="cite-item"><span>APA</span><pre class="cite-text">《详解西游记》项目. (2026). 妖怪等级制度可视化. 详解西游记可视化站点. https://1273984347.github.io/xiyouji/data/monster-hierarchy-network.html（访问日期 2026-10-04）</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
-  <div class="cite-item"><span>BibTeX</span><pre class="cite-text">@misc{xiyouji_monster_hierarchy_network,
-  title       = {妖怪等级制度可视化},
-  author      = {{《详解西游记》项目}},
-  year        = {2026},
-  howpublished = {\url{https://1273984347.github.io/xiyouji/data/monster-hierarchy-network.html}},
-  note        = {可视化数据可视化解读页, 访问日期 2026-10-04}
-}</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
-  </details>
-</div></div>
     
     
                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1242,7 +1228,7 @@ header.hero .meta {
         .kpi-row .kpi-card .desc { font-size: 0.8rem; color: var(--ink-soft); margin-top: 4px; }
 .kpi-card.alt { border-top-color: var(--accent-2); }
 .kpi-card.alt-2 { border-top-color: var(--accent-3); }
-.kpi-card.alt-3 { border-top-color: var(--t-bureau); }
+.kpi-card.alt-3 { border-top-color: var(--t-bureau, var(--chart-2)); }
 .kpi-value {
   font-size: 1.85em;
   color: var(--accent);
@@ -1251,9 +1237,9 @@ header.hero .meta {
 }
 .kpi-card.alt .kpi-value { color: var(--accent-2); }
 .kpi-card.alt-2 .kpi-value { color: var(--accent-3); }
-.kpi-card.alt-3 .kpi-value { color: var(--t-bureau); }
+.kpi-card.alt-3 .kpi-value { color: var(--t-bureau, var(--chart-2)); }
 .kpi-label {
-  color: var(--muted);
+  color: var(--ink-soft);
   font-size: 0.84em;
   margin-top: 4px;
 }
@@ -1267,7 +1253,7 @@ header.hero .meta {
 }
 .tier-card {
   background: var(--paper);
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: var(--radius-md);
   padding: 16px 14px;
   border-top: 4px solid var(--accent);
@@ -1279,10 +1265,10 @@ header.hero .meta {
   box-shadow: var(--elev-2);
   outline: none;
 }
-.tier-card.t-lone { border-top-color: var(--t-lone); }
-.tier-card.t-family { border-top-color: var(--t-family); }
-.tier-card.t-alliance { border-top-color: var(--t-alliance); }
-.tier-card.t-bureau { border-top-color: var(--t-bureau); }
+.tier-card.t-lone { border-top-color: var(--rebel); }
+.tier-card.t-family { border-top-color: var(--chart-3); }
+.tier-card.t-alliance { border-top-color: var(--chart-4); }
+.tier-card.t-bureau { border-top-color: var(--t-bureau, var(--chart-2)); }
 .tier-card .t-name {
   font-size: 1.15em;
   font-weight: 600;
@@ -1303,10 +1289,10 @@ header.hero .meta {
 }
 .tier-card .t-ex {
   font-size: 0.82em;
-  color: var(--muted);
+  color: var(--ink-soft);
   font-style: italic;
   padding-top: 8px;
-  border-top: 1px dashed var(--border);
+  border-top: 1px dashed var(--line);
 }
 
 /* Chart */
@@ -1318,13 +1304,13 @@ header.hero .meta {
   font-size: 1.02em;
 }
 .chart-caption {
-  color: var(--muted);
+  color: var(--ink-soft);
   font-size: 0.84em;
   margin-bottom: 12px;
 }
 .chart-svg {
   background: var(--paper);
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: var(--radius-md);
   display: block;
   margin: 0 auto;
@@ -1377,7 +1363,7 @@ header.hero .meta {
 .empty-state {
   text-align: center;
   padding: 30px;
-  color: var(--muted);
+  color: var(--ink-soft);
   font-style: italic;
 }
 
@@ -1394,7 +1380,7 @@ header.hero .meta {
 }
 .dash-panel {
   background: var(--paper);
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: var(--radius-md);
   padding: 18px;
 }
@@ -1402,7 +1388,7 @@ header.hero .meta {
   font-size: 1em;
   color: var(--accent-2);
   margin-bottom: 10px;
-  border-bottom: 1px dashed var(--border);
+  border-bottom: 1px dashed var(--line);
   padding-bottom: 6px;
 }
 
@@ -1448,6 +1434,20 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
 <!-- chart-degrade: scroll-x -->
 </head>
 <body>
+    <div id="dataSource" class="notice"><div class="cite-block" id="citeBox">
+  数据源：页面内嵌 EMBEDDED 数据（run_all 批量生成 JSON 快照于构建时嵌入·快照 2026-10-04） 由 <code>scripts/run_all.py</code> 批量生成（口径与参数见 dataset 同名 JSON 与生成脚本源）。
+  <details class="cite-details">
+  <summary>引用格式</summary>
+  <div class="cite-item"><span>APA</span><pre class="cite-text">《详解西游记》项目. (2026). 妖怪等级制度可视化. 详解西游记可视化站点. https://1273984347.github.io/xiyouji/data/monster-hierarchy-network.html（访问日期 2026-10-04）</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
+  <div class="cite-item"><span>BibTeX</span><pre class="cite-text">@misc{xiyouji_monster_hierarchy_network,
+  title       = {妖怪等级制度可视化},
+  author      = {{《详解西游记》项目}},
+  year        = {2026},
+  howpublished = {\url{https://1273984347.github.io/xiyouji/data/monster-hierarchy-network.html}},
+  note        = {可视化数据可视化解读页, 访问日期 2026-10-04}
+}</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
+  </details>
+</div></div>
     <a class="skip-link" href="#main">跳到主要内容</a>
 
     <header class="topnav">

@@ -74,6 +74,7 @@ EXPECTED_SECTION_NAMES = [
     "色盲安全",
     "降级声明",
     "文档口径", "CLAUDE速查",
+    "head内容", "CSS变量引用",
 ]
 
 CORE_DOCS = [
@@ -811,6 +812,44 @@ def main():
             fail("CLAUDE.md 速查层门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
         else:
             ok("CLAUDE.md 速查层门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
+
+
+    section("head内容")
+    # ---- head 内容合法性门禁（第 33 槽·W672/WP-1.3：head 区间剥 script/style/noscript/注释后
+    # 只允许 head 合法开标签——防 W657 式注入器把 body 内容写进 </head> 之前（foster parenting
+    # 视觉侥幸、源码畸形）。wrapper 防静默跳过与第 29/30/31/32 槽同款）----
+    hc_py = os.path.join(_HERE, "check_html_head_content.py")
+    try:
+        r = subprocess.run([sys.executable, hc_py], capture_output=True, text=True, timeout=120)
+    except Exception as e:
+        fail("head 内容门禁执行异常（第 33 槽·crash 即拦）: %s" % e)
+    else:
+        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
+        if r.returncode != 0:
+            fail("head 内容违例（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+        elif "---- 第 33 门禁 head 内容：" not in r.stdout:
+            fail("head 内容门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
+        else:
+            ok("head 内容门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
+
+
+    section("CSS变量引用")
+    # ---- CSS 变量引用门禁（第 34 槽·W672/WP-1.4：style 块内每个无 fallback var(--x) 必须在
+    # 已知定义集（tokens ∪ 页内 style 块 ∪ 内联属性 ∪ JS 文本·扫描器 3 宽口径，--chain-color
+    # 运行时定义豁免）——防未定义变量 computed-value invalid 静默失效。wrapper 同款）----
+    cv_py = os.path.join(_HERE, "check_css_var_refs.py")
+    try:
+        r = subprocess.run([sys.executable, cv_py], capture_output=True, text=True, timeout=120)
+    except Exception as e:
+        fail("CSS 变量引用门禁执行异常（第 34 槽·crash 即拦）: %s" % e)
+    else:
+        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
+        if r.returncode != 0:
+            fail("CSS 变量引用违例（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+        elif "---- 第 34 门禁 CSS 变量引用：" not in r.stdout:
+            fail("CSS 变量引用门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
+        else:
+            ok("CSS 变量引用门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
 
 
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----

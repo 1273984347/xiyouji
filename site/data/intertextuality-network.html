@@ -21,20 +21,6 @@
     <meta name="description" content="壹 · 互文性关系图谱总览 · 贰 · 热奈特五类型 × 前置文本矩阵 · 叁 · 前置文本互文强度雷达图 · 详解西游记">
     <meta property="og:description" content="壹 · 互文性关系图谱总览 · 贰 · 热奈特五类型 × 前置文本矩阵 · 叁 · 前置文本互文强度雷达图 · 详解西游记">
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
-    <div id="dataSource" class="notice"><div class="cite-block" id="citeBox">
-  数据源：页面内嵌 EMBEDDED 数据（run_all 批量生成 JSON 快照于构建时嵌入·快照 2026-10-04） 由 <code>scripts/run_all.py</code> 批量生成（口径与参数见 dataset 同名 JSON 与生成脚本源）。
-  <details class="cite-details">
-  <summary>引用格式</summary>
-  <div class="cite-item"><span>APA</span><pre class="cite-text">《详解西游记》项目. (2026). 互文性关系图谱. 详解西游记可视化站点. https://1273984347.github.io/xiyouji/data/intertextuality-network.html（访问日期 2026-10-04）</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
-  <div class="cite-item"><span>BibTeX</span><pre class="cite-text">@misc{xiyouji_intertextuality_network,
-  title       = {互文性关系图谱},
-  author      = {{《详解西游记》项目}},
-  year        = {2026},
-  howpublished = {\url{https://1273984347.github.io/xiyouji/data/intertextuality-network.html}},
-  note        = {可视化数据可视化解读页, 访问日期 2026-10-04}
-}</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
-  </details>
-</div></div>
     
     
                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1209,7 +1195,7 @@ header
 header
 header
 header.hero .meta {
-  color: var(--hero-meta);
+  color: var(--ink-faint);
   font-size: 0.85em;
   margin-top: 10px;
   position: relative;
@@ -1232,7 +1218,7 @@ header.hero .meta {
 /* KPI */
 
 .kpi-value { font-size: 1.7em; color: var(--accent); font-weight: 700; }
-.kpi-label { color: var(--muted); font-size: 0.84em; margin-top: 4px; }
+.kpi-label { color: var(--ink-soft); font-size: 0.84em; margin-top: 4px; }
 
 /* 前置文本概览卡片网格 */
 .texts-grid {
@@ -1243,7 +1229,7 @@ header.hero .meta {
 }
 .text-card {
   background: var(--paper);
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: var(--radius-md);
   padding: 16px 14px;
   text-align: center;
@@ -1267,10 +1253,10 @@ header.hero .meta {
 }
 .text-card .text-stats {
   font-size: 0.82em;
-  color: var(--muted);
+  color: var(--ink-soft);
   margin-top: 6px;
   padding-top: 6px;
-  border-top: 1px dashed var(--border);
+  border-top: 1px dashed var(--line);
 }
 .swatch-bar {
   height: 4px;
@@ -1282,10 +1268,10 @@ header.hero .meta {
 /* Chart */
 .chart-block { margin: 18px 0; }
 .chart-title { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
-.chart-caption { color: var(--muted); font-size: 0.84em; margin-bottom: 12px; }
+.chart-caption { color: var(--ink-soft); font-size: 0.84em; margin-bottom: 12px; }
 .chart-svg {
   background: var(--paper);
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: var(--radius-md);
   display: block;
   margin: 0 auto;
@@ -1308,7 +1294,7 @@ header.hero .meta {
 .empty-state {
   text-align: center;
   padding: 30px;
-  color: var(--muted);
+  color: var(--ink-soft);
   font-style: italic;
 }
 
@@ -1323,10 +1309,10 @@ header.hero .meta {
   margin-top: 12px;
   font-size: 0.88em;
   background: var(--paper);
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
 }
 .summary-table th {
-  background: var(--table-header);
+  background: var(--paper-warm);
   color: var(--ink);
   padding: 10px 12px;
   text-align: left;
@@ -1338,10 +1324,10 @@ header.hero .meta {
 .summary-table th:hover { background: var(--accent-3); color: var(--paper); }
 .summary-table td {
   padding: 9px 12px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--line);
   vertical-align: top;
 }
-.summary-table tr:nth-child(even) td { background: var(--table-stripe); }
+.summary-table tr:nth-child(even) td { background: var(--paper); }
 .summary-table tr:hover td { background: var(--paper-warm); }
 .summary-table .type-dot {
   display: inline-block;
@@ -1370,11 +1356,11 @@ header.hero .meta {
   background: var(--paper);
   padding: 10px 12px;
   border-radius: var(--radius-md);
-  border-left: 3px solid var(--border);
+  border-left: 3px solid var(--line);
   font-size: 0.86em;
 }
 .theorist-item .t-name { font-weight: 600; color: var(--ink); }
-.theorist-item .t-sense { color: var(--muted); font-size: 0.9em; margin-top: 2px; }
+.theorist-item .t-sense { color: var(--ink-soft); font-size: 0.9em; margin-top: 2px; }
 .theorist-item .t-work { color: var(--accent-2); font-size: 0.85em; margin-top: 2px; }
 
 /* Matrix cell */
@@ -1428,6 +1414,20 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
 <!-- chart-degrade: scroll-x -->
 </head>
 <body>
+    <div id="dataSource" class="notice"><div class="cite-block" id="citeBox">
+  数据源：页面内嵌 EMBEDDED 数据（run_all 批量生成 JSON 快照于构建时嵌入·快照 2026-10-04） 由 <code>scripts/run_all.py</code> 批量生成（口径与参数见 dataset 同名 JSON 与生成脚本源）。
+  <details class="cite-details">
+  <summary>引用格式</summary>
+  <div class="cite-item"><span>APA</span><pre class="cite-text">《详解西游记》项目. (2026). 互文性关系图谱. 详解西游记可视化站点. https://1273984347.github.io/xiyouji/data/intertextuality-network.html（访问日期 2026-10-04）</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
+  <div class="cite-item"><span>BibTeX</span><pre class="cite-text">@misc{xiyouji_intertextuality_network,
+  title       = {互文性关系图谱},
+  author      = {{《详解西游记》项目}},
+  year        = {2026},
+  howpublished = {\url{https://1273984347.github.io/xiyouji/data/intertextuality-network.html}},
+  note        = {可视化数据可视化解读页, 访问日期 2026-10-04}
+}</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
+  </details>
+</div></div>
     <a class="skip-link" href="#main">跳到主要内容</a>
 
     <header class="topnav">

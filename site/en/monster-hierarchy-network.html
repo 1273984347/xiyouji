@@ -1227,7 +1227,7 @@ header.hero .meta {
         .kpi-row .kpi-card .desc { font-size: 0.8rem; color: var(--ink-soft); margin-top: 4px; }
 .kpi-card.alt { border-top-color: var(--accent-2); }
 .kpi-card.alt-2 { border-top-color: var(--accent-3); }
-.kpi-card.alt-3 { border-top-color: var(--t-bureau); }
+.kpi-card.alt-3 { border-top-color: var(--t-bureau, var(--chart-2)); }
 .kpi-value {
   font-size: 1.85em;
   color: var(--accent);
@@ -1236,9 +1236,9 @@ header.hero .meta {
 }
 .kpi-card.alt .kpi-value { color: var(--accent-2); }
 .kpi-card.alt-2 .kpi-value { color: var(--accent-3); }
-.kpi-card.alt-3 .kpi-value { color: var(--t-bureau); }
+.kpi-card.alt-3 .kpi-value { color: var(--t-bureau, var(--chart-2)); }
 .kpi-label {
-  color: var(--muted);
+  color: var(--ink-soft);
   font-size: 0.84em;
   margin-top: 4px;
 }
@@ -1252,7 +1252,7 @@ header.hero .meta {
 }
 .tier-card {
   background: var(--paper);
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: var(--radius-md);
   padding: 16px 14px;
   border-top: 4px solid var(--accent);
@@ -1264,10 +1264,10 @@ header.hero .meta {
   box-shadow: var(--elev-2);
   outline: none;
 }
-.tier-card.t-lone { border-top-color: var(--t-lone); }
-.tier-card.t-family { border-top-color: var(--t-family); }
-.tier-card.t-alliance { border-top-color: var(--t-alliance); }
-.tier-card.t-bureau { border-top-color: var(--t-bureau); }
+.tier-card.t-lone { border-top-color: var(--rebel); }
+.tier-card.t-family { border-top-color: var(--chart-3); }
+.tier-card.t-alliance { border-top-color: var(--chart-4); }
+.tier-card.t-bureau { border-top-color: var(--t-bureau, var(--chart-2)); }
 .tier-card .t-name {
   font-size: 1.15em;
   font-weight: 600;
@@ -1288,10 +1288,10 @@ header.hero .meta {
 }
 .tier-card .t-ex {
   font-size: 0.82em;
-  color: var(--muted);
+  color: var(--ink-soft);
   font-style: italic;
   padding-top: 8px;
-  border-top: 1px dashed var(--border);
+  border-top: 1px dashed var(--line);
 }
 
 /* Chart */
@@ -1303,13 +1303,13 @@ header.hero .meta {
   font-size: 1.02em;
 }
 .chart-caption {
-  color: var(--muted);
+  color: var(--ink-soft);
   font-size: 0.84em;
   margin-bottom: 12px;
 }
 .chart-svg {
   background: var(--paper);
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: var(--radius-md);
   display: block;
   margin: 0 auto;
@@ -1373,7 +1373,7 @@ header.hero .meta {
 .empty-state {
   text-align: center;
   padding: 30px;
-  color: var(--muted);
+  color: var(--ink-soft);
   font-style: italic;
 }
 
@@ -1390,7 +1390,7 @@ header.hero .meta {
 }
 .dash-panel {
   background: var(--paper);
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: var(--radius-md);
   padding: 18px;
 }
@@ -1398,7 +1398,7 @@ header.hero .meta {
   font-size: 1em;
   color: var(--accent-2);
   margin-bottom: 10px;
-  border-bottom: 1px dashed var(--border);
+  border-bottom: 1px dashed var(--line);
   padding-bottom: 6px;
 }
 
