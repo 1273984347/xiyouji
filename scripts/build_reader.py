@@ -19,6 +19,7 @@ from __future__ import annotations
 import html
 import json
 import re
+import sys
 from pathlib import Path
 
 import markdown
@@ -179,13 +180,58 @@ def page_shell(rel: str, title: str, desc: str, body: str) -> str:
 """
 
 
+def build_themes_hub() -> int:
+    """WP-E：A4 主题导航 hub——docs/03 前缀族机械分组（取经X / 西游与X / 其他音序平铺）。
+
+    分组依据=README 命名规范（README 无文章列表·2026-09-21 实测），不人工归类。
+    返回链接数（机判：== docs/03 当期篇数 == EXPECT_A4 同源）。
+    """
+    src = ROOT / "docs" / "03-主题与情节专题"
+    mds = sorted(p for p in src.glob("*.md") if p.name != "README.md")
+    groups: dict[str, list[tuple[str, str]]] = {"取经X学专题": [], "西游与X专题": [], "其他专题": []}
+    for p in mds:
+        name = p.stem
+        head = next((ln[2:].strip() for ln in p.read_text(encoding="utf-8").splitlines()
+                     if ln.startswith("# ")), name)
+        if name.startswith("取经"):
+            groups["取经X学专题"].append(("themes/" + name + ".html", head))
+        elif name.startswith("西游与"):
+            groups["西游与X专题"].append(("themes/" + name + ".html", head))
+        else:
+            groups["其他专题"].append(("themes/" + name + ".html", head))
+    total = sum(len(v) for v in groups.values())
+    body = ('<div class="reader-topnav">\n'
+            '    <a class="brand" href="index.html">详解西游记 · 站内阅读</a>\n'
+            '    <a href="../index.html">站点首页</a>\n'
+            '  </nav>\n  <article class="reader-body">\n'
+            '    <h1 style="font-size:26px;">主题专题导航 hub</h1>\n'
+            '    <p class="reader-meta">按 README 命名规范前缀族机械分组（共 %d 篇·不人工归类）。</p>\n' % total)
+    for gtitle, items in groups.items():
+        items = sorted(items, key=lambda x: x[1])
+        body += '<div class="reader-group">%s（%d）</div>\n<ul class="reader-idx">\n' % (gtitle, len(items))
+        body += "\n".join('<li><a href="%s">%s</a></li>' % r for r in items)
+        body += "\n</ul>\n"
+    body += "  </article>"
+    (OUT / "themes-hub.html").write_text(
+        page_shell("themes-hub.html", "主题专题导航 hub",
+                   "《西游记》主题专题导航 hub（%d 篇·前缀族机械分组）" % total, body),
+        encoding="utf-8", newline="\n")
+    return total
+
+
 def main() -> None:
     docs = ROOT / "docs"
     OUT.mkdir(parents=True, exist_ok=True)
+    hub_only = "--hub" in sys.argv
 
     n_pages = 0
     sections_out: list[tuple[str, list[tuple[str, str]]]] = []
     leftovers_all: list[str] = []
+
+    if hub_only:
+        n = build_themes_hub()
+        print(f"[OK] themes-hub 生成（{n} 链接）→ site/reader/themes-hub.html")
+        return
 
     for docs_root, sub, cat_title in SECTIONS:
         src = docs / docs_root
@@ -254,8 +300,10 @@ def main() -> None:
                 encoding="utf-8", newline="\n")
             n_pages += 1
 
-    # 总目录：六板块分组
-    idx_body = ""
+    # 总目录：六板块分组（顶部附主题 hub 入口·全量跑同步重建 hub 防重渲删页）
+    n_hub = build_themes_hub()
+    n_pages += 1
+    idx_body = '<p><a href="themes-hub.html"><strong>主题专题导航 hub</strong>（%d 篇·按族分组）</a></p>\n' % n_hub
     for cat_title, entries in sections_out:
         idx_body += f'<div class="reader-group">{cat_title}（{len(entries)}）</div>\n<ul class="reader-idx">\n'
         idx_body += "\n".join(f'<li><a href="{rel}">{disp}</a></li>' for rel, disp in entries)
