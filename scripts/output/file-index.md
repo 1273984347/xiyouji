@@ -11,6 +11,22 @@
 ---
 
 
+## W672 W672 站点质量批次一（2026-10-06·v2.3.269）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/superpowers/plans/2026-10-05-site-quality-remediation-plans.md | W672 | 新增·站点质量六批修复方案 V1.7（编号顺延更正 W672-W677） |
+| site/data/*.html ×50 | W672 | 更新·WP-1.1 dataSource 块 head→body 首子节点移位 |
+| site/data + site/en/*.html ×70 | W672 | 更新·WP-1.2/1.6 CSS 变量漂移 648 处四组映射替换 + 自引用 24 处删除 |
+| scripts/check_html_head_content.py | W672 | 新增·第 33 门禁（head 内容合法性·self-test 2 例） |
+| scripts/check_css_var_refs.py | W672 | 新增·第 34 门禁（CSS 变量引用·扫描器 3 宽口径·self-test 2 例） |
+| scripts/verify_delivery.py | W672 | 更新·挂载第 33/34 槽 + 段自洽锁 37→39 段 |
+| scripts/_w672_move_datasource.py | W672 | 新增·WP-1.1 div 嵌套平衡截块移位工具 |
+| scripts/_w672_var_drift.py | W672 | 新增·WP-1.2/1.6 四组映射 + 自引用删除工具（自断言防残留） |
+| scripts/_w672_shot_equiv.js | W672 | 新增·渲染等值验收工具（确定性口径·批次二/三复用） |
+| site/static/js/cite-box.js | W672 | 新增（补 W657 漏 add）·86 页引用的可引用性交互模块 |
+| docs/00-导读/W批次编号对账表.md | W672 | 更新·W672 认领 + 翻转 |
+
 ## W671 共享载体治理（2026-10-05·v2.3.268）
 
 | 文件 | W | 说明 |

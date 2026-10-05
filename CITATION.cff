@@ -4,8 +4,8 @@ message: "如果本项目对您的研究或写作有帮助，请按以下格式�
 type: software
 authors:
   - name: 详解西游记项目
-version: "2.3.268"
-date-released: "2026-10-05"
+version: "2.3.269"
+date-released: "2026-10-06"
 license: MIT
 license-url: https://spdx.org/licenses/MIT.html
 abstract: >-
