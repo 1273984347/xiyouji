@@ -1,0 +1,16 @@
+site/data/cave-estate.html
+site/data/mbti-evolution.html
+site/data/social-media.html
+site/data/game-webnovel.html
+site/data/narrative-experiment.html
+site/data/workplace.html
+site/data/famous-time-travel.html
+site/data/century-dialogue.html
+site/data/ai-dialogue.html
+site/data/chart-design.html
+site/data/visual-art.html
+site/data/ethics-consumption.html
+site/data/deconstruction.html
+site/data/cultural-misreading.html
+site/data/methodology-matrix.html
+site/data/risk-project.html

@@ -748,6 +748,7 @@ def build_dialogue_sentiment(
     return {
         "total_dialogues": len(all_dialogues),
         "analyzed_dialogues": len(all_dialogues),
+        "data_scope_note": "口径：带引号直引语（X道/曰/言/云+引号，含倒装式）；别名表已含佛祖/世尊/释迦牟尼/如来佛祖（utils/aliases.py 单一数据源）。间接引语与无引号讲经（韵文偈语）不在口径内——各人物条数为该口径全集而非别名缺失（W668 实测如来系原文说话模式≈别名口径上限）；如需引用请标注口径。",
         "sentiment_distribution": {
             "positive": pos_count,
             "neutral": neu_count,
