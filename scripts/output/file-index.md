@@ -11,6 +11,18 @@
 ---
 
 
+## W669 WP-E 内容发现架构（2026-10-05·v2.3.266）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/build_reader.py | W669 | 更新·--hub 模式+build_themes_hub 前缀族机械分组 |
+| scripts/_gen_search_index.py | W669 | 更新·themes-hub 入索引例外（正斜杠包含式判断） |
+| site/reader/themes-hub.html | W669 | 新增·A4 主题导航 hub（209 链接三组） |
+| site/dashboard.html | W669 | 更新·7 tab 口径对齐（全部 51） |
+| site/mobile-index.html | W669 | 删除·职能被 dashboard 覆盖（蓝图 §WP-E.3） |
+| site/sitemap.xml + search.html + 双 tag-cloud | W669 | 更新·850 净稳+索引条目增删+引用收敛 |
+| docs/00-导读/W批次编号对账表.md | W669 | 更新·W669 认领+翻转 |
+
 ## W668 数据评审裁决落地（2026-10-05·v2.3.265）
 
 | 文件 | W | 说明 |
