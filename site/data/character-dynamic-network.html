@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -652,6 +652,30 @@ h4 { font-size: 18px; font-weight: 500; }
     color: var(--ink-faint);
 }
 
+/* ===== kpi-card 全局别名基类（W673 · 方案 §四 WP-2.2：与 .kpi 平行的组件名，修 W563 洗掉
+   W557 页面级基类的 122 页裸奔；全局块 + 第 37 门禁双保险根治两类复发路径） ===== */
+.kpi-card {
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius-md);
+    box-shadow: var(--elev-1);
+    padding: 20px;
+    transition: border-color var(--dur-base) var(--ease-out-quart),
+                transform var(--dur-base) var(--ease-out-quart),
+                box-shadow var(--dur-base) var(--ease-out-quart);
+}
+.kpi-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
+                var(--elev-2);
+}
+.kpi-card .label, .kpi-card .kpi-label { margin-top: 8px; font-size: 13px; color: var(--ink-soft); }
+.kpi-card .value, .kpi-card .kpi-value { font-family: var(--font-mono); font-size: 32px; font-weight: 500; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi-card .desc, .kpi-card .kpi-desc { margin-top: 4px; font-size: 11px; color: var(--ink-faint); }
+
 /* ===== 图表容器 ===== */
 .chart-block {
     background: var(--paper);
@@ -1215,7 +1239,7 @@ td.num, th.num {
         .skip-link {
             position: absolute; top: -40px; left: 0; background: var(--accent-2);
             color: var(--paper); padding: 8px 16px; z-index: 100; text-decoration: none;
-            border-radius: 0 0 var(--radius-md) 0 transition: top var(--dur-base);
+            border-radius: 0 0 var(--radius-md) 0 ; transition: top var(--dur-base);
         }
         .skip-link:focus { top: 0; }
         
@@ -1223,7 +1247,7 @@ td.num, th.num {
         .control-row .ctrl-label { font-size: 0.88em; color: var(--ink-soft); font-weight: 600; }
         .stage-btn {
             padding: 8px 16px; border: 1px solid var(--line); background: var(--paper);
-            color: var(--ink); border-radius: var(--radius-md) cursor: pointer; font-size: 0.9em;
+            color: var(--ink); border-radius: var(--radius-md) ; cursor: pointer; font-size: 0.9em;
             font-family: inherit; transition: background var(--dur-base), color var(--dur-base), border-color var(--dur-base);
         }
         .stage-btn.active { background: var(--accent); color: var(--paper); border-color: var(--accent); }
@@ -1232,22 +1256,22 @@ td.num, th.num {
         .slider-wrap { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 240px; }
         .slider-wrap input[type=range] {
             flex: 1; height: 6px; -webkit-appearance: none; appearance: none;
-            background: var(--line); border-radius: var(--radius-sm) outline: none;
+            background: var(--line); border-radius: var(--radius-sm) ; outline: none;
         }
         .slider-wrap input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none; appearance: none;
-            width: 18px; height: 18px; background: var(--accent); border-radius: 50%
+            width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
             cursor: pointer; border: 2px solid var(--paper); box-shadow: var(--elev-1);
         }
         .slider-wrap input[type=range]::-moz-range-thumb {
-            width: 18px; height: 18px; background: var(--accent); border-radius: 50%
+            width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
             cursor: pointer; border: 2px solid var(--paper);
         }
         .stage-display { font-family: "JetBrains Mono", monospace; font-size: 0.9em; color: var(--accent); font-weight: 700; min-width: 110px; }
         .neighborhood-mode {
             position: absolute; top: 12px; right: 12px; z-index: 6;
             background: rgba(44,36,24,0.92); color: var(--paper-warm); font-size: 0.82rem;
-            padding: 8px 12px; border-radius: var(--radius-md) pointer-events: none;
+            padding: 8px 12px; border-radius: var(--radius-md) ; pointer-events: none;
             border: 1px solid var(--accent-soft); box-shadow: var(--shadow);
         }
         .chapter-ctrl .ctrl-label { min-width: 4.5em; }
@@ -1264,7 +1288,7 @@ td.num, th.num {
         #network-tip .tip-row strong { color: var(--accent-3); }
         #network-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: var(--ink-soft); margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--line); }
         .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
-        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: var(--radius-md) background: var(--paper-warm); }
+        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: var(--radius-md) ; background: var(--paper-warm); }
         .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 50% }
         .legend-row .lg-swatch.line { width: 22px; height: 3px; border-radius: var(--radius-sm) }
         .rel-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 0.88em; }
@@ -1273,7 +1297,7 @@ td.num, th.num {
         .rel-table td.num { text-align: center; font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--accent); }
         .insight-box {
             background: var(--paper-warm); border-left: 4px solid var(--accent-soft);
-            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 var(--radius-md) var(--radius-md) 0 font-size: 0.92em;
+            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 var(--radius-md) var(--radius-md) 0 ; font-size: 0.92em;
         }
         .insight-box strong { color: var(--accent); font-weight: 700; }
         .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }

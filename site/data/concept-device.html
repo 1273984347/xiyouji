@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -651,6 +651,30 @@ h4 { font-size: 18px; font-weight: 500; }
     font-size: 11px;
     color: var(--ink-faint);
 }
+
+/* ===== kpi-card 全局别名基类（W673 · 方案 §四 WP-2.2：与 .kpi 平行的组件名，修 W563 洗掉
+   W557 页面级基类的 122 页裸奔；全局块 + 第 37 门禁双保险根治两类复发路径） ===== */
+.kpi-card {
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius-md);
+    box-shadow: var(--elev-1);
+    padding: 20px;
+    transition: border-color var(--dur-base) var(--ease-out-quart),
+                transform var(--dur-base) var(--ease-out-quart),
+                box-shadow var(--dur-base) var(--ease-out-quart);
+}
+.kpi-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
+                var(--elev-2);
+}
+.kpi-card .label, .kpi-card .kpi-label { margin-top: 8px; font-size: 13px; color: var(--ink-soft); }
+.kpi-card .value, .kpi-card .kpi-value { font-family: var(--font-mono); font-size: 32px; font-weight: 500; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi-card .desc, .kpi-card .kpi-desc { margin-top: 4px; font-size: 11px; color: var(--ink-faint); }
 
 /* ===== 图表容器 ===== */
 .chart-block {
@@ -1385,7 +1409,7 @@ td.num, th.num {
         @media (max-width: 768px) { .radio-wrap { grid-template-columns: 1fr; } }
         .radio-box {
             background: linear-gradient(160deg, #8b5a3a 0%, #6b4226 100%);
-            border-radius: 14px
+            border-radius: 14px;
             padding: 24px 26px;
             box-shadow: inset 0 2px 6px rgba(255,255,255,0.12), 0 8px 20px rgba(60,30,15,0.3);
             border: 2px solid #5a3820;
@@ -1438,7 +1462,7 @@ td.num, th.num {
         }
         .knob {
             width: 52px; height: 52px;
-            border-radius: 50%
+            border-radius: 50%;
             background: radial-gradient(circle at 35% 30%, var(--line), #8a7a64 70%, #5a4a3a);
             border: 2px solid #4a3220;
             position: relative;
@@ -1496,7 +1520,7 @@ td.num, th.num {
             gap: 6px;
         }
         .on-air .dot {
-            width: 8px; height: 8px; border-radius: 50%
+            width: 8px; height: 8px; border-radius: 50%;
             background: var(--accent);
             animation: pulse 1.4s ease-in-out 1;
         }
@@ -1770,7 +1794,7 @@ td.num, th.num {
             font-size: 0.9rem;
             letter-spacing: 0.2em;
             padding: 10px;
-            border-radius: var(--radius-md) var(--radius-md) 0 0
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
             font-family: "Courier New", monospace;
         }
         .detective-banner::before { content: "🔍 "; }

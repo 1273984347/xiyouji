@@ -22,7 +22,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render the charts.</p></noscript>
     
     
-                                                                                                                                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -651,6 +651,30 @@ h4 { font-size: 18px; font-weight: 500; }
     color: var(--ink-faint);
 }
 
+/* ===== kpi-card 全局别名基类（W673 · 方案 §四 WP-2.2：与 .kpi 平行的组件名，修 W563 洗掉
+   W557 页面级基类的 122 页裸奔；全局块 + 第 37 门禁双保险根治两类复发路径） ===== */
+.kpi-card {
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius-md);
+    box-shadow: var(--elev-1);
+    padding: 20px;
+    transition: border-color var(--dur-base) var(--ease-out-quart),
+                transform var(--dur-base) var(--ease-out-quart),
+                box-shadow var(--dur-base) var(--ease-out-quart);
+}
+.kpi-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
+                var(--elev-2);
+}
+.kpi-card .label, .kpi-card .kpi-label { margin-top: 8px; font-size: 13px; color: var(--ink-soft); }
+.kpi-card .value, .kpi-card .kpi-value { font-family: var(--font-mono); font-size: 32px; font-weight: 500; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi-card .desc, .kpi-card .kpi-desc { margin-top: 4px; font-size: 11px; color: var(--ink-faint); }
+
 /* ===== 图表容器 ===== */
 .chart-block {
     background: var(--paper);
@@ -1189,11 +1213,11 @@ td.num, th.num {
         /* === 仅本页特有样式 === */
         h1 { text-align: center; color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
 .subtitle { text-align: center; color: var(--ink-soft); margin-bottom: 30px; }
-.section { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md) padding: 20px; margin: 20px 0; }
+.section { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md) ; padding: 20px; margin: 20px 0; }
 .section-title { color: var(--accent); border-left: 4px solid var(--accent); padding-left: 10px; margin-top: 0; }
 .section-title.alt { color: var(--accent-2); border-left-color: var(--accent-2); }
 .section-sub { color: var(--ink-soft); font-size: 0.9em; margin-bottom: 15px; }
-.chart-block { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-md) padding: 15px; margin: 10px 0; }
+.chart-block { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-md) ; padding: 15px; margin: 10px 0; }
 .chart-title { font-weight: bold; color: var(--ink); margin-bottom: 5px; }
 .chart-caption { color: var(--ink-soft); font-size: 0.85em; margin-bottom: 10px; }
 .chart-svg { display: block; margin: 0 auto; }
@@ -1202,7 +1226,7 @@ td.num, th.num {
 .legend-swatch { width: 12px; height: 12px; border-radius: var(--radius-sm) }
 .definition { background: var(--paper); border-left: 3px solid var(--accent-2); padding: 10px 15px; margin: 10px 0; font-size: 0.9em; }
 .kpi-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
-.kpi-card { flex: 1; min-width: 120px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md) padding: 10px; text-align: center; }
+.kpi-card { flex: 1; min-width: 120px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md) ; padding: 10px; text-align: center; }
 .kpi-value { font-size: 1.4em; font-weight: bold; color: var(--accent); }
 .kpi-label { font-size: 0.8em; color: var(--ink-soft); }
 .insight-list { background: var(--paper); padding: 15px; border-radius: var(--radius-md) }
