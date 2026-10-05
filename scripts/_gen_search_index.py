@@ -114,7 +114,7 @@ doc_files = [p for p in glob.glob(os.path.join(DOCS, '**', '*.md'), recursive=Tr
              if not any(x in p.replace(os.sep, '/') for x in EXCLUDE)]
 page_files = [p for p in glob.glob(os.path.join(SITE, '**', '*.html'), recursive=True)
               if os.path.basename(p) not in ('_template.html', '_shell.html')
-              and '/reader/' not in p.replace(os.sep, '/')]  # W593：reader 页由 docs/01 的 kind=reader 条目承载，避免双条目
+              and ('/reader/' not in p.replace(os.sep, '/') or p.replace(os.sep, '/').endswith('reader/themes-hub.html'))]  # W593：reader 页由 docs 条目承载避免双条目；W669 例外=themes-hub（无 docs 对应·导航页入索引）
 
 # W594：中英双索引分离——docs 全量两份共用；site 页面 zh 版收 zh 页、en 版收 en 页
 index_docs = [doc_entry(p) for p in sorted(doc_files)]
