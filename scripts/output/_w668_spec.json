@@ -1,0 +1,21 @@
+{
+  "batch": "W668",
+  "version": "v2.3.265",
+  "date": "2026-10-05",
+  "desc": "数据评审裁决落地",
+  "title": "W668 外部数据评审裁决落地 — hardships 三难重分类 mind + dialogue 口径注记 + B-C 级 16 页性质标注",
+  "head_entry": "2026-10-05（v2.3.265 W668）外部数据评审三项用户裁决落地：hardships 三难（五庄观中/难活人参/金銮殿变虎）cause 重分类 mind（W639 冻结解除·生成器+dataset+部署副本+EMBEDDED+页面洞察 26/26/16/13 全线一致）+ dialogue_sentiment 口径注记常驻（评审「扩别名」前提实测推翻——别名已含佛祖/世尊·如来 58 条系口径全集·输入源切权威分回路径 total 6565→6547）+ B-C 级 16 页数据性质标注（9 趣味向+7 总结展示·评审「移出目录」撞 W636 冻结后的弱形式）",
+  "head_sentence": "数据评审裁决落地三项",
+  "changelog_body": "\n> **来源**：用户转发外部数据层评审（47 个 JSON 分级 A/B/C + 修正建议）→ 本会话逐条对仓取证裁决（四主张：三妖 first_chapter 系旧快照 W643 已修/cave 两文件一致性主张误判/如来样本偏差属实但扩别名前提不成立/hardships 重分类属 W639 作者裁决项）→ 用户三项拍板后本批执行。\n> - **T1 hardships 三难重分类**：五庄观中/难活人参/金銮殿变虎 cause→mind（镇元子地仙、奎木狼天神下凡皆非野怪）；生成器 C_情节/hardships_81.py 为单一事实源，全线传播：scripts/output/data 重生成 + dataset/81-hardships.json 明细三行与聚合字段重算 + site/data/json 部署副本 + 81-hardships.html EMBEDDED 四块 + 三难明细行 + 页面 3 条洞察叙述重算（野怪 26 难中 18 被打死 69.2% / 安排 26 难 22 接走 4 收编 / 心魔 13 难 7 被打死）+ CSP 重生成；终态分布 arranged 26 / wild 26 / mount 16 / mind 13（总 81 不变·ending/difficulty 不变）。过程修正：旧 output/data 副本「明细旧聚合新」内部矛盾与重生成 cwd 默认路径坑（生成器默认相对 scripts/）如实处理。\n> - **T2 dialogue_sentiment 口径注记**：实测推翻评审「扩别名」前提——别名表已含佛祖/世尊/释迦牟尼/如来佛祖（utils/aliases.py 单源），如来 58 条为「带引号直引语」口径全集（原文如来系说话模式 51 处+倒装≈口径上限）；落地其有效部分=生成器 data_scope_note 常驻 + 输入源切换分回目录权威路径重生成（total 6565→6547、如来 58→59、孙悟空 3521→3515——系输入文本微差非规则变化）+ site/data/json 字节同步 + dialogue-sentiment.html EMBEDDED sentiment 块整体替换 + 叙述 8 处数字同步 + CSP。\n> - **T3 B/C 级性质标注**：评审「C 级 27 文件移出数据目录」撞 W636 冻结裁决（可视化砍到 20 已否决）+86 页口径门禁+B-9 登记不开工——不采纳结构重组，落地弱形式：16 页 cite-block 注入「数据性质」行（9 页趣味向：cave-estate/mbti-evolution/social-media/game-webnovel/narrative-experiment/workplace/famous-time-travel/century-dialogue/ai-dialogue；7 页方法论总结展示：chart-design/visual-art/ethics-consumption/deconstruction/cultural-misreading/methodology-matrix/risk-project）；counterfactual 主数据 A 级排除不标；纯 HTML 文本零样式零脚本（CSP 哈希不涉·token 覆盖率门禁兼容）。\n> - **验证**：ruff 全过；verify_delivery 核心全绿（32 槽+37 段锁）；CSP 855 页 0 漂移；生成器自洽断言（明细聚合==by_cause 字段）两副本全过；数据漂移门禁对账过（部署副本与生成器输出一致）。\n> - **文件**：scripts/C_情节/hardships_81.py、scripts/B_人物/character_nlp.py、dataset/81-hardships.json、site/data/json/hardships_81.json + dialogue_sentiment.json、site/data/81-hardships.html + dialogue-sentiment.html + 16 页标注、scripts/output/_w668_t3_inject.py（工具存档）、docs/00-导读/W批次编号对账表.md、六文档、四页脚、CITATION、file-index。\n> - **状态**：已落地（本批提交并 push origin/main）。\n",
+  "milestone_block": "- **v2.3.265 W668 数据评审裁决落地**：\n  - hardships 三难重分类 mind（W639 冻结解除·五面一致 26/26/16/13）\n  - dialogue 口径注记常驻（扩别名前提实测推翻·输入源切权威路径 6547）\n  - B-C 级 16 页性质标注（评审结构重组建议不采纳·弱形式落地）\n",
+  "agents_note": "2026-10-05（v2.3.265 W668）数据评审裁决落地：无 § 结构性变更（hardships 三难重分类 mind 五面一致+dialogue 口径注记+B-C 级 16 页性质标注·外部评审四主张裁决=二旧快照一误判一属裁决项），仅版本脚注同步",
+  "file_index_rows": [
+    "| scripts/C_情节/hardships_81.py | W668 | 更新·三难 cause→mind（W639 冻结解除·用户裁决） |",
+    "| scripts/B_人物/character_nlp.py | W668 | 更新·data_scope_note 口径常驻（W668 实测前提修正） |",
+    "| dataset/81-hardships.json + site/data/json/*×2 | W668 | 更新·重分类传播+口径 note（明细==聚合自洽） |",
+    "| site/data/81-hardships.html + dialogue-sentiment.html | W668 | 更新·EMBEDDED 同步+洞察/叙述重算 |",
+    "| site/data/*.html ×16 | W668 | 更新·cite-block 数据性质标注（9 趣味向+7 总结展示） |",
+    "| scripts/output/_w668_t3_inject.py | W668 | 新增·标注注入器（幂等+触达清单） |",
+    "| docs/00-导读/W批次编号对账表.md | W668 | 更新·W668 认领+翻转 |"
+  ]
+}

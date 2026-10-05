@@ -11,6 +11,18 @@
 ---
 
 
+## W668 数据评审裁决落地（2026-10-05·v2.3.265）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/C_情节/hardships_81.py | W668 | 更新·三难 cause→mind（W639 冻结解除·用户裁决） |
+| scripts/B_人物/character_nlp.py | W668 | 更新·data_scope_note 口径常驻（W668 实测前提修正） |
+| dataset/81-hardships.json + site/data/json/*×2 | W668 | 更新·重分类传播+口径 note（明细==聚合自洽） |
+| site/data/81-hardships.html + dialogue-sentiment.html | W668 | 更新·EMBEDDED 同步+洞察/叙述重算 |
+| site/data/*.html ×16 | W668 | 更新·cite-block 数据性质标注（9 趣味向+7 总结展示） |
+| scripts/output/_w668_t3_inject.py | W668 | 新增·标注注入器（幂等+触达清单） |
+| docs/00-导读/W批次编号对账表.md | W668 | 更新·W668 认领+翻转 |
+
 ## W667 复盘三卡防漂移落地（2026-10-05·v2.3.263）
 
 | 文件 | W | 说明 |
