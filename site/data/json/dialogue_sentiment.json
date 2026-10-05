@@ -1,34 +1,35 @@
 {
-  "total_dialogues": 6565,
-  "analyzed_dialogues": 6565,
+  "total_dialogues": 6547,
+  "analyzed_dialogues": 6547,
+  "data_scope_note": "口径：带引号直引语（X道/曰/言/云+引号，含倒装式）；别名表已含佛祖/世尊/释迦牟尼/如来佛祖（utils/aliases.py 单一数据源）。间接引语与无引号讲经（韵文偈语）不在口径内——各人物条数为该口径全集而非别名缺失（W668 实测如来系原文说话模式≈别名口径上限）；如需引用请标注口径。",
   "sentiment_distribution": {
-    "positive": 821,
-    "neutral": 3800,
-    "negative": 1944
+    "positive": 819,
+    "neutral": 3787,
+    "negative": 1941
   },
   "speaker_sentiment": [
     {
       "speaker": "孙悟空",
-      "total": 3521,
-      "positive": 454,
-      "neutral": 1970,
+      "total": 3515,
+      "positive": 452,
+      "neutral": 1966,
       "negative": 1097,
-      "positive_ratio": 0.1289,
-      "neutral_ratio": 0.5595,
-      "negative_ratio": 0.3116,
-      "avg_sentiment": -0.47,
+      "positive_ratio": 0.1286,
+      "neutral_ratio": 0.5593,
+      "negative_ratio": 0.3121,
+      "avg_sentiment": -0.4694,
       "top_positive_words": [
         {
           "word": "圣",
-          "count": 281
+          "count": 280
         },
         {
           "word": "救",
-          "count": 180
+          "count": 179
         },
         {
           "word": "化",
-          "count": 138
+          "count": 137
         },
         {
           "word": "功",
@@ -40,7 +41,7 @@
         },
         {
           "word": "护",
-          "count": 69
+          "count": 68
         },
         {
           "word": "贤",
@@ -48,21 +49,21 @@
         },
         {
           "word": "信",
-          "count": 52
+          "count": 51
         },
         {
           "word": "恩",
           "count": 38
         },
         {
-          "word": "喜",
+          "word": "寿",
           "count": 34
         }
       ],
       "top_negative_words": [
         {
           "word": "妖",
-          "count": 420
+          "count": 419
         },
         {
           "word": "打",
@@ -70,15 +71,15 @@
         },
         {
           "word": "怪",
-          "count": 344
+          "count": 343
         },
         {
           "word": "难",
-          "count": 148
+          "count": 147
         },
         {
           "word": "魔",
-          "count": 137
+          "count": 138
         },
         {
           "word": "死",
@@ -98,7 +99,7 @@
         },
         {
           "word": "苦",
-          "count": 68
+          "count": 69
         }
       ]
     },
@@ -199,14 +200,14 @@
     },
     {
       "speaker": "猪八戒",
-      "total": 1138,
-      "positive": 104,
+      "total": 1139,
+      "positive": 105,
       "neutral": 670,
       "negative": 364,
-      "positive_ratio": 0.0914,
-      "neutral_ratio": 0.5888,
-      "negative_ratio": 0.3199,
-      "avg_sentiment": -0.4947,
+      "positive_ratio": 0.0922,
+      "neutral_ratio": 0.5882,
+      "negative_ratio": 0.3196,
+      "avg_sentiment": -0.4934,
       "top_positive_words": [
         {
           "word": "化",
@@ -230,7 +231,7 @@
         },
         {
           "word": "善",
-          "count": 11
+          "count": 12
         },
         {
           "word": "护",
@@ -389,18 +390,18 @@
     },
     {
       "speaker": "观音",
-      "total": 189,
-      "positive": 26,
-      "neutral": 121,
-      "negative": 42,
-      "positive_ratio": 0.1376,
-      "neutral_ratio": 0.6402,
-      "negative_ratio": 0.2222,
-      "avg_sentiment": -0.2646,
+      "total": 179,
+      "positive": 25,
+      "neutral": 116,
+      "negative": 38,
+      "positive_ratio": 0.1397,
+      "neutral_ratio": 0.648,
+      "negative_ratio": 0.2123,
+      "avg_sentiment": -0.257,
       "top_positive_words": [
         {
           "word": "救",
-          "count": 22
+          "count": 20
         },
         {
           "word": "善",
@@ -408,15 +409,15 @@
         },
         {
           "word": "圣",
-          "count": 16
+          "count": 15
         },
         {
           "word": "度",
-          "count": 8
+          "count": 7
         },
         {
           "word": "功",
-          "count": 7
+          "count": 6
         },
         {
           "word": "寿",
@@ -442,15 +443,15 @@
       "top_negative_words": [
         {
           "word": "打",
-          "count": 19
-        },
-        {
-          "word": "罪",
-          "count": 16
+          "count": 17
         },
         {
           "word": "难",
           "count": 15
+        },
+        {
+          "word": "罪",
+          "count": 13
         },
         {
           "word": "妖",
@@ -462,14 +463,14 @@
         },
         {
           "word": "死",
-          "count": 10
-        },
-        {
-          "word": "灾",
-          "count": 8
+          "count": 9
         },
         {
           "word": "苦",
+          "count": 7
+        },
+        {
+          "word": "灾",
           "count": 7
         },
         {
@@ -484,14 +485,14 @@
     },
     {
       "speaker": "如来",
-      "total": 58,
+      "total": 59,
       "positive": 13,
       "neutral": 20,
-      "negative": 25,
-      "positive_ratio": 0.2241,
-      "neutral_ratio": 0.3448,
-      "negative_ratio": 0.431,
-      "avg_sentiment": -0.7759,
+      "negative": 26,
+      "positive_ratio": 0.2203,
+      "neutral_ratio": 0.339,
+      "negative_ratio": 0.4407,
+      "avg_sentiment": -0.7797,
       "top_positive_words": [
         {
           "word": "功",
@@ -502,11 +503,11 @@
           "count": 7
         },
         {
-          "word": "善",
-          "count": 5
+          "word": "化",
+          "count": 6
         },
         {
-          "word": "化",
+          "word": "善",
           "count": 5
         },
         {
@@ -545,7 +546,7 @@
         },
         {
           "word": "非",
-          "count": 11
+          "count": 12
         },
         {
           "word": "怪",
@@ -560,6 +561,10 @@
           "count": 4
         },
         {
+          "word": "混",
+          "count": 3
+        },
+        {
           "word": "苦",
           "count": 3
         },
@@ -570,23 +575,19 @@
         {
           "word": "破",
           "count": 3
-        },
-        {
-          "word": "鬼",
-          "count": 2
         }
       ]
     },
     {
       "speaker": "李靖",
-      "total": 53,
+      "total": 52,
       "positive": 13,
-      "neutral": 28,
+      "neutral": 27,
       "negative": 12,
-      "positive_ratio": 0.2453,
-      "neutral_ratio": 0.5283,
-      "negative_ratio": 0.2264,
-      "avg_sentiment": -0.0755,
+      "positive_ratio": 0.25,
+      "neutral_ratio": 0.5192,
+      "negative_ratio": 0.2308,
+      "avg_sentiment": -0.0769,
       "top_positive_words": [
         {
           "word": "圣",
@@ -674,18 +675,22 @@
     },
     {
       "speaker": "玉帝",
-      "total": 48,
+      "total": 46,
       "positive": 11,
-      "neutral": 29,
+      "neutral": 27,
       "negative": 8,
-      "positive_ratio": 0.2292,
-      "neutral_ratio": 0.6042,
-      "negative_ratio": 0.1667,
-      "avg_sentiment": 0.125,
+      "positive_ratio": 0.2391,
+      "neutral_ratio": 0.587,
+      "negative_ratio": 0.1739,
+      "avg_sentiment": 0.1522,
       "top_positive_words": [
         {
           "word": "圣",
-          "count": 13
+          "count": 11
+        },
+        {
+          "word": "化",
+          "count": 3
         },
         {
           "word": "恩",
@@ -694,14 +699,6 @@
         {
           "word": "慈",
           "count": 3
-        },
-        {
-          "word": "护",
-          "count": 3
-        },
-        {
-          "word": "化",
-          "count": 2
         },
         {
           "word": "喜",
@@ -716,11 +713,15 @@
           "count": 2
         },
         {
+          "word": "护",
+          "count": 2
+        },
+        {
           "word": "善",
           "count": 2
         },
         {
-          "word": "贤",
+          "word": "奉旨",
           "count": 1
         }
       ],
@@ -754,29 +755,29 @@
           "count": 1
         },
         {
-          "word": "损",
-          "count": 1
-        },
-        {
-          "word": "打",
-          "count": 1
-        },
-        {
           "word": "负",
+          "count": 1
+        },
+        {
+          "word": "怪",
+          "count": 1
+        },
+        {
+          "word": "错",
           "count": 1
         }
       ]
     },
     {
       "speaker": "太上老君",
-      "total": 27,
+      "total": 26,
       "positive": 1,
-      "neutral": 20,
+      "neutral": 19,
       "negative": 6,
-      "positive_ratio": 0.037,
-      "neutral_ratio": 0.7407,
-      "negative_ratio": 0.2222,
-      "avg_sentiment": -0.3333,
+      "positive_ratio": 0.0385,
+      "neutral_ratio": 0.7308,
+      "negative_ratio": 0.2308,
+      "avg_sentiment": -0.3462,
       "top_positive_words": [
         {
           "word": "功",
@@ -921,23 +922,23 @@
   "chapter_sentiment": [
     {
       "chapter": 1,
-      "total": 4,
-      "positive": 2,
-      "neutral": 1,
-      "negative": 1,
-      "positive_ratio": 0.5,
-      "negative_ratio": 0.25,
-      "avg_sentiment": 0.5
+      "total": 33,
+      "positive": 4,
+      "neutral": 20,
+      "negative": 9,
+      "positive_ratio": 0.1212,
+      "negative_ratio": 0.2727,
+      "avg_sentiment": -0.1818
     },
     {
       "chapter": 2,
-      "total": 28,
+      "total": 2,
       "positive": 0,
-      "neutral": 22,
-      "negative": 6,
+      "neutral": 1,
+      "negative": 1,
       "positive_ratio": 0.0,
-      "negative_ratio": 0.2143,
-      "avg_sentiment": -0.3929
+      "negative_ratio": 0.5,
+      "avg_sentiment": -0.5
     },
     {
       "chapter": 3,
@@ -951,13 +952,13 @@
     },
     {
       "chapter": 4,
-      "total": 40,
-      "positive": 8,
+      "total": 38,
+      "positive": 6,
       "neutral": 24,
       "negative": 8,
-      "positive_ratio": 0.2,
-      "negative_ratio": 0.2,
-      "avg_sentiment": 0.05
+      "positive_ratio": 0.1579,
+      "negative_ratio": 0.2105,
+      "avg_sentiment": 0.0
     },
     {
       "chapter": 5,
@@ -971,33 +972,33 @@
     },
     {
       "chapter": 6,
-      "total": 43,
+      "total": 42,
       "positive": 8,
-      "neutral": 24,
+      "neutral": 23,
       "negative": 11,
-      "positive_ratio": 0.186,
-      "negative_ratio": 0.2558,
-      "avg_sentiment": -0.0698
+      "positive_ratio": 0.1905,
+      "negative_ratio": 0.2619,
+      "avg_sentiment": -0.0714
     },
     {
       "chapter": 7,
-      "total": 25,
+      "total": 22,
       "positive": 6,
-      "neutral": 14,
+      "neutral": 11,
       "negative": 5,
-      "positive_ratio": 0.24,
-      "negative_ratio": 0.2,
-      "avg_sentiment": -0.24
+      "positive_ratio": 0.2727,
+      "negative_ratio": 0.2273,
+      "avg_sentiment": -0.2727
     },
     {
       "chapter": 8,
-      "total": 39,
-      "positive": 7,
-      "neutral": 21,
-      "negative": 11,
-      "positive_ratio": 0.1795,
-      "negative_ratio": 0.2821,
-      "avg_sentiment": -0.359
+      "total": 29,
+      "positive": 6,
+      "neutral": 16,
+      "negative": 7,
+      "positive_ratio": 0.2069,
+      "negative_ratio": 0.2414,
+      "avg_sentiment": -0.3448
     },
     {
       "chapter": 12,
@@ -1121,13 +1122,13 @@
     },
     {
       "chapter": 24,
-      "total": 87,
-      "positive": 9,
+      "total": 86,
+      "positive": 8,
       "neutral": 58,
       "negative": 20,
-      "positive_ratio": 0.1034,
-      "negative_ratio": 0.2299,
-      "avg_sentiment": -0.2759
+      "positive_ratio": 0.093,
+      "negative_ratio": 0.2326,
+      "avg_sentiment": -0.3023
     },
     {
       "chapter": 25,
@@ -1442,12 +1443,12 @@
     {
       "chapter": 56,
       "total": 98,
-      "positive": 7,
-      "neutral": 54,
+      "positive": 8,
+      "neutral": 53,
       "negative": 37,
-      "positive_ratio": 0.0714,
+      "positive_ratio": 0.0816,
       "negative_ratio": 0.3776,
-      "avg_sentiment": -0.5102
+      "avg_sentiment": -0.5
     },
     {
       "chapter": 57,
@@ -1581,13 +1582,13 @@
     },
     {
       "chapter": 70,
-      "total": 60,
+      "total": 58,
       "positive": 7,
-      "neutral": 29,
-      "negative": 24,
-      "positive_ratio": 0.1167,
-      "negative_ratio": 0.4,
-      "avg_sentiment": -0.5667
+      "neutral": 28,
+      "negative": 23,
+      "positive_ratio": 0.1207,
+      "negative_ratio": 0.3966,
+      "avg_sentiment": -0.569
     },
     {
       "chapter": 71,
@@ -1661,13 +1662,13 @@
     },
     {
       "chapter": 78,
-      "total": 60,
-      "positive": 13,
+      "total": 58,
+      "positive": 12,
       "neutral": 29,
-      "negative": 18,
-      "positive_ratio": 0.2167,
-      "negative_ratio": 0.3,
-      "avg_sentiment": -0.5
+      "negative": 17,
+      "positive_ratio": 0.2069,
+      "negative_ratio": 0.2931,
+      "avg_sentiment": -0.4138
     },
     {
       "chapter": 79,
@@ -1896,13 +1897,13 @@
       "chapters": [
         {
           "chapter": 1,
-          "count": 4,
-          "avg_sentiment": 0.5
+          "count": 31,
+          "avg_sentiment": -0.2581
         },
         {
           "chapter": 2,
-          "count": 28,
-          "avg_sentiment": -0.3929
+          "count": 2,
+          "avg_sentiment": -0.5
         },
         {
           "chapter": 3,
@@ -1912,7 +1913,7 @@
         {
           "chapter": 4,
           "count": 17,
-          "avg_sentiment": 0.2353
+          "avg_sentiment": 0.1765
         },
         {
           "chapter": 5,
@@ -1926,8 +1927,8 @@
         },
         {
           "chapter": 7,
-          "count": 6,
-          "avg_sentiment": -0.5
+          "count": 5,
+          "avg_sentiment": -0.4
         },
         {
           "chapter": 8,
@@ -2011,8 +2012,8 @@
         },
         {
           "chapter": 24,
-          "count": 37,
-          "avg_sentiment": -0.1622
+          "count": 35,
+          "avg_sentiment": -0.2286
         },
         {
           "chapter": 25,
@@ -2241,8 +2242,8 @@
         },
         {
           "chapter": 70,
-          "count": 56,
-          "avg_sentiment": -0.6071
+          "count": 54,
+          "avg_sentiment": -0.6111
         },
         {
           "chapter": 71,
@@ -2281,8 +2282,8 @@
         },
         {
           "chapter": 78,
-          "count": 26,
-          "avg_sentiment": -0.4615
+          "count": 24,
+          "avg_sentiment": -0.25
         },
         {
           "chapter": 79,
@@ -3021,7 +3022,7 @@
         },
         {
           "chapter": 24,
-          "count": 18,
+          "count": 19,
           "avg_sentiment": 0.0
         },
         {
@@ -3182,7 +3183,7 @@
         {
           "chapter": 56,
           "count": 23,
-          "avg_sentiment": -0.7391
+          "avg_sentiment": -0.6957
         },
         {
           "chapter": 57,
@@ -3951,8 +3952,8 @@
         },
         {
           "chapter": 8,
-          "count": 30,
-          "avg_sentiment": -0.5
+          "count": 20,
+          "avg_sentiment": -0.55
         },
         {
           "chapter": 9,
@@ -4421,27 +4422,27 @@
     "positive": [
       {
         "word": "圣",
-        "count": 407
+        "count": 403
       },
       {
         "word": "救",
-        "count": 314
+        "count": 311
       },
       {
         "word": "化",
-        "count": 257
+        "count": 258
       },
       {
         "word": "善",
-        "count": 151
+        "count": 152
       },
       {
         "word": "功",
-        "count": 138
+        "count": 137
       },
       {
         "word": "护",
-        "count": 111
+        "count": 109
       },
       {
         "word": "恩",
@@ -4453,15 +4454,15 @@
       },
       {
         "word": "信",
-        "count": 83
+        "count": 82
       },
       {
         "word": "喜",
-        "count": 70
+        "count": 69
       },
       {
         "word": "慈",
-        "count": 59
+        "count": 58
       },
       {
         "word": "寿",
@@ -4476,12 +4477,12 @@
         "count": 43
       },
       {
-        "word": "度",
+        "word": "福",
         "count": 42
       },
       {
-        "word": "福",
-        "count": 40
+        "word": "度",
+        "count": 41
       },
       {
         "word": "德",
@@ -4501,7 +4502,7 @@
       },
       {
         "word": "欢",
-        "count": 24
+        "count": 25
       },
       {
         "word": "有理",
@@ -4525,11 +4526,11 @@
       },
       {
         "word": "奉旨",
-        "count": 9
+        "count": 10
       },
       {
         "word": "好说",
-        "count": 8
+        "count": 7
       },
       {
         "word": "欢喜",
@@ -4541,7 +4542,7 @@
       },
       {
         "word": "好个",
-        "count": 5
+        "count": 4
       },
       {
         "word": "允了",
@@ -4607,27 +4608,27 @@
     "negative": [
       {
         "word": "妖",
-        "count": 689
+        "count": 688
       },
       {
         "word": "打",
-        "count": 661
+        "count": 658
       },
       {
         "word": "怪",
-        "count": 520
+        "count": 519
       },
       {
         "word": "难",
-        "count": 259
+        "count": 258
       },
       {
         "word": "死",
-        "count": 249
+        "count": 248
       },
       {
         "word": "魔",
-        "count": 209
+        "count": 210
       },
       {
         "word": "怕",
@@ -4635,15 +4636,15 @@
       },
       {
         "word": "罪",
-        "count": 160
+        "count": 157
       },
       {
         "word": "杀",
-        "count": 138
+        "count": 137
       },
       {
         "word": "苦",
-        "count": 132
+        "count": 133
       },
       {
         "word": "鬼",
@@ -4655,19 +4656,19 @@
       },
       {
         "word": "哭",
-        "count": 77
+        "count": 76
       },
       {
         "word": "破",
-        "count": 75
-      },
-      {
-        "word": "邪",
         "count": 74
       },
       {
         "word": "凶",
         "count": 73
+      },
+      {
+        "word": "邪",
+        "count": 72
       },
       {
         "word": "妖魔",
@@ -4679,7 +4680,11 @@
       },
       {
         "word": "惊",
-        "count": 62
+        "count": 61
+      },
+      {
+        "word": "非",
+        "count": 60
       },
       {
         "word": "瞒",
@@ -4690,27 +4695,19 @@
         "count": 58
       },
       {
-        "word": "非",
-        "count": 58
-      },
-      {
         "word": "失",
         "count": 50
-      },
-      {
-        "word": "灭",
-        "count": 47
-      },
-      {
-        "word": "骂",
-        "count": 47
       },
       {
         "word": "败",
         "count": 47
       },
       {
-        "word": "悲",
+        "word": "灭",
+        "count": 46
+      },
+      {
+        "word": "骂",
         "count": 46
       },
       {
@@ -4727,15 +4724,19 @@
       },
       {
         "word": "错",
-        "count": 46
+        "count": 45
       },
       {
-        "word": "灾",
+        "word": "悲",
         "count": 45
       },
       {
         "word": "坏",
         "count": 45
+      },
+      {
+        "word": "灾",
+        "count": 44
       },
       {
         "word": "胡说",
@@ -4751,7 +4752,7 @@
       },
       {
         "word": "妖邪",
-        "count": 31
+        "count": 30
       },
       {
         "word": "逃",
@@ -4775,19 +4776,19 @@
       },
       {
         "word": "损",
-        "count": 21
+        "count": 19
       },
       {
         "word": "喝",
         "count": 18
       },
       {
-        "word": "否",
+        "word": "惧",
         "count": 17
       },
       {
-        "word": "惧",
-        "count": 16
+        "word": "否",
+        "count": 17
       },
       {
         "word": "险",
