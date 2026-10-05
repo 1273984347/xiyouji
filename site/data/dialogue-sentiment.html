@@ -21,21 +21,6 @@
     <meta name="description" content="壹 · 全书情感分布 · 贰 · 人物情感分布 · 叁 · 主要人物情感曲线 · 详解西游记">
     <meta property="og:description" content="壹 · 全书情感分布 · 贰 · 人物情感分布 · 叁 · 主要人物情感曲线 · 详解西游记">
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
-    <div id="dataSource" class="notice"><div class="cite-block" id="citeBox">
-  数据源：<code>json/dialogue_sentiment.json</code>（快照 2026-10-04） 由 <code>scripts/run_all.py</code> 批量生成（口径与参数见 dataset 同名 JSON 与生成脚本源）。
-  <details class="cite-details">
-  <summary>引用格式</summary>
-  <div class="cite-item"><span>APA</span><pre class="cite-text">《详解西游记》项目. (2026). 引语情感分析. 详解西游记可视化站点. https://1273984347.github.io/xiyouji/data/dialogue-sentiment.html（访问日期 2026-10-04）</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
-  <div class="cite-item"><span>BibTeX</span><pre class="cite-text">@misc{xiyouji_dialogue_sentiment,
-  title       = {引语情感分析},
-  author      = {{《详解西游记》项目}},
-  year        = {2026},
-  howpublished = {\url{https://1273984347.github.io/xiyouji/data/dialogue-sentiment.html}},
-  note        = {可视化数据可视化解读页, 访问日期 2026-10-04}
-}</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
-  </details>
-  <a href="json/dialogue_sentiment.json" download="dialogue_sentiment.json">下载数据 JSON</a>
-</div></div>
     
     
                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1304,18 +1289,18 @@ td.num, th.num {
             text-align: center;
             box-shadow: var(--shadow);
         }
-        .stat-card.positive { border-top: 3px solid var(--pos); }
-        .stat-card.neutral { border-top: 3px solid var(--neu); }
-        .stat-card.negative { border-top: 3px solid var(--neg); }
+        .stat-card.positive { border-top: 3px solid var(--accent-4); }
+        .stat-card.neutral { border-top: 3px solid var(--accent-3); }
+        .stat-card.negative { border-top: 3px solid var(--accent); }
         .stat-card .stat-label {
             font-size: 0.78rem;
             letter-spacing: 0.15em;
             margin-bottom: 6px;
             font-family: "JetBrains Mono", "Consolas", monospace;
         }
-        .stat-card.positive .stat-label { color: var(--pos); }
-        .stat-card.neutral .stat-label { color: var(--neu); }
-        .stat-card.negative .stat-label { color: var(--neg); }
+        .stat-card.positive .stat-label { color: var(--accent-4); }
+        .stat-card.neutral .stat-label { color: var(--accent-3); }
+        .stat-card.negative .stat-label { color: var(--accent); }
         .stat-card .stat-value {
             font-size: 1.8rem;
             font-weight: 600;
@@ -1364,16 +1349,16 @@ td.num, th.num {
             border-radius: var(--radius-md);
             padding: 16px;
         }
-        .word-cloud-panel.positive { border-left: 4px solid var(--pos); }
-        .word-cloud-panel.negative { border-left: 4px solid var(--neg); }
+        .word-cloud-panel.positive { border-left: 4px solid var(--accent-4); }
+        .word-cloud-panel.negative { border-left: 4px solid var(--accent); }
         .word-cloud-panel .panel-title {
             font-size: 0.95rem;
             font-weight: 600;
             margin-bottom: 8px;
             color: var(--ink);
         }
-        .word-cloud-panel.positive .panel-title { color: var(--pos); }
-        .word-cloud-panel.negative .panel-title { color: var(--neg); }
+        .word-cloud-panel.positive .panel-title { color: var(--accent-4); }
+        .word-cloud-panel.negative .panel-title { color: var(--accent); }
         .d3-tooltip {
             position: absolute;
             padding: 8px 12px;
@@ -1464,6 +1449,21 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <!-- chart-degrade: stacked -->
 </head>
 <body>
+    <div id="dataSource" class="notice"><div class="cite-block" id="citeBox">
+  数据源：<code>json/dialogue_sentiment.json</code>（快照 2026-10-04） 由 <code>scripts/run_all.py</code> 批量生成（口径与参数见 dataset 同名 JSON 与生成脚本源）。
+  <details class="cite-details">
+  <summary>引用格式</summary>
+  <div class="cite-item"><span>APA</span><pre class="cite-text">《详解西游记》项目. (2026). 引语情感分析. 详解西游记可视化站点. https://1273984347.github.io/xiyouji/data/dialogue-sentiment.html（访问日期 2026-10-04）</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
+  <div class="cite-item"><span>BibTeX</span><pre class="cite-text">@misc{xiyouji_dialogue_sentiment,
+  title       = {引语情感分析},
+  author      = {{《详解西游记》项目}},
+  year        = {2026},
+  howpublished = {\url{https://1273984347.github.io/xiyouji/data/dialogue-sentiment.html}},
+  note        = {可视化数据可视化解读页, 访问日期 2026-10-04}
+}</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
+  </details>
+  <a href="json/dialogue_sentiment.json" download="dialogue_sentiment.json">下载数据 JSON</a>
+</div></div>
     <a class="skip-link" href="#main">跳到主要内容</a>
 
     <header class="topnav">
