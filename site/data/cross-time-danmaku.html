@@ -23,12 +23,12 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
  * ----------------------------------------------
- * v2.3.269 · W672 站点质量批次一 · v2.3.268 · W671 共享载体治理 · v2.3.267 · W670 开放项双闭与默认源治理 · v2.3.266 · W669 WP-E 内容发现架构 · v2.3.265 · W668 数据评审裁决落地 · v2.3.264 · W662 暗色审计入基线+遗漏收敛 · v2.3.263 · W667 复盘三卡防漂移落地 · v2.3.262 · W661 WP-D2 索引站内化+footer-meta 改链 · v2.3.261 · W666 工作复盘报告入库 · v2.3.260 · W664 CLAUDE.md 速查层+写作可验证纪律 · v2.3.259 · W663 治理经验移植批·W659-W663 合并登记 · v2.3.258 · W658 B-7 分析方法 pip 包 · v2.3.257 · W657 B-6 第二步可引用性组件 · v2.3.256 · W656 B-9 之一 audit 补丁合并单模块 · v2.3.255 · W655 B-9 之一 D3 色值变量化 · v3 · W476 纸感轻立体（在 v2/W334 基础上增层 · 见 DESIGN.md §4A）
+ * v2.3.270 · W673 站点质量批次二 · v3 · W476 纸感轻立体（在 v2/W334 基础上增层 · 见 DESIGN.md §4A）
  * 全站统一设计令牌 + 字体分层 + hero 覆写层。
  *
  * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
@@ -652,6 +652,30 @@ h4 { font-size: 18px; font-weight: 500; }
     color: var(--ink-faint);
 }
 
+/* ===== kpi-card 全局别名基类（W673 · 方案 §四 WP-2.2：与 .kpi 平行的组件名，修 W563 洗掉
+   W557 页面级基类的 122 页裸奔；全局块 + 第 37 门禁双保险根治两类复发路径） ===== */
+.kpi-card {
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius-md);
+    box-shadow: var(--elev-1);
+    padding: 20px;
+    transition: border-color var(--dur-base) var(--ease-out-quart),
+                transform var(--dur-base) var(--ease-out-quart),
+                box-shadow var(--dur-base) var(--ease-out-quart);
+}
+.kpi-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
+                var(--elev-2);
+}
+.kpi-card .label, .kpi-card .kpi-label { margin-top: 8px; font-size: 13px; color: var(--ink-soft); }
+.kpi-card .value, .kpi-card .kpi-value { font-family: var(--font-mono); font-size: 32px; font-weight: 500; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi-card .desc, .kpi-card .kpi-desc { margin-top: 4px; font-size: 11px; color: var(--ink-faint); }
+
 /* ===== 图表容器 ===== */
 .chart-block {
     background: var(--paper);
@@ -1244,7 +1268,7 @@ td.num, th.num {
         .mouthpiece-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 28px 0; }
         @media (max-width: 768px) { .mouthpiece-row { grid-template-columns: 1fr; } }
         .mouthpiece-card { background: linear-gradient(160deg, var(--paper-warm), var(--paper-warm)); border: 1px solid var(--accent-soft);
-                           border-radius: var(--radius-lg) padding: 24px; position: relative; }
+                           border-radius: var(--radius-lg) ; padding: 24px; position: relative; }
         .mouthpiece-card .char-name { font-size: 1.3rem; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
         .mouthpiece-card .char-role { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 12px; }
         .mouthpiece-card .quote { font-size: 1rem; color: var(--ink); line-height: 1.7; margin-bottom: 8px; }
@@ -1253,7 +1277,7 @@ td.num, th.num {
         /* 名人看当下 */
         .modern-commentary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 16px; }
         .commentary-card { background: var(--paper); border: 1px solid var(--line);
-                           border-radius: var(--radius-md) padding: 18px; border-left: 3px solid var(--accent-2); }
+                           border-radius: var(--radius-md) ; padding: 18px; border-left: 3px solid var(--accent-2); }
         .commentary-card .c-name { font-weight: 600; color: var(--accent-2); font-size: 0.95rem; }
         .commentary-card .c-topic { font-size: 0.78rem; color: var(--ink-soft); margin: 2px 0 10px; }
         .commentary-card .c-text { font-size: 0.88rem; color: var(--ink); line-height: 1.7; }
@@ -1280,9 +1304,9 @@ td.num, th.num {
                           padding: 24px; margin-top: 28px; }
         .message-form { display: grid; gap: 10px; margin-bottom: 20px; }
         .message-form textarea { width: 100%; min-height: 80px; padding: 10px; border: 1px solid var(--line);
-                                 border-radius: var(--radius-md) font-family: inherit; resize: vertical; }
+                                 border-radius: var(--radius-md) ; font-family: inherit; resize: vertical; }
         .message-form button { padding: 8px 20px; background: var(--accent); color: var(--paper-warm); border: none;
-                               border-radius: var(--radius-md) cursor: pointer; justify-self: start; }
+                               border-radius: var(--radius-md) ; cursor: pointer; justify-self: start; }
         .message-form button:hover { background: var(--accent-3); }
 
         /* ===== v0.9.1 创意升级：3 个 signature moments ===== */
@@ -1359,7 +1383,7 @@ td.num, th.num {
             color: var(--paper-warm);
             font-size: 0.9rem;
             padding: 5px 14px;
-            border-radius: 16px
+            border-radius: 16px;
             background: var(--accent-tint);
             border: 1px solid rgba(233, 184, 133, 0.25);
             animation: danmakuFly linear forwards;

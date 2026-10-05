@@ -20,7 +20,7 @@
     <meta property="og:description" content="Graph Explorer · Annotated Journey to the West">
 
 
-                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -649,6 +649,30 @@ h4 { font-size: 18px; font-weight: 500; }
     color: var(--ink-faint);
 }
 
+/* ===== kpi-card 全局别名基类（W673 · 方案 §四 WP-2.2：与 .kpi 平行的组件名，修 W563 洗掉
+   W557 页面级基类的 122 页裸奔；全局块 + 第 37 门禁双保险根治两类复发路径） ===== */
+.kpi-card {
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius-md);
+    box-shadow: var(--elev-1);
+    padding: 20px;
+    transition: border-color var(--dur-base) var(--ease-out-quart),
+                transform var(--dur-base) var(--ease-out-quart),
+                box-shadow var(--dur-base) var(--ease-out-quart);
+}
+.kpi-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
+                var(--elev-2);
+}
+.kpi-card .label, .kpi-card .kpi-label { margin-top: 8px; font-size: 13px; color: var(--ink-soft); }
+.kpi-card .value, .kpi-card .kpi-value { font-family: var(--font-mono); font-size: 32px; font-weight: 500; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi-card .desc, .kpi-card .kpi-desc { margin-top: 4px; font-size: 11px; color: var(--ink-faint); }
+
 /* ===== 图表容器 ===== */
 .chart-block {
     background: var(--paper);
@@ -1192,7 +1216,7 @@ td.num, th.num {
   header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding:14px 20px;border-bottom: 1px solid var(--line);background: var(--paper)}
   header h1{font-family:"Noto Serif SC",serif;font-size:20px;margin:0;color: var(--zhu)}
   header .sub{font-size:13px;color: var(--ink-soft)}
-  #banner{margin-left:auto;font-size:12px;padding:3px 10px;border-radius: 20pxbackground:#f0e7d6;color: var(--ink-soft)}
+  #banner{margin-left:auto;font-size:12px;padding:3px 10px;border-radius: ; 20pxbackground:#f0e7d6;color: var(--ink-soft)}
   #banner.online{background: #e3f0e8;color: #2f7d52}
   .layout{display:grid;grid-template-columns:240px 1fr 280px;gap:0;flex:1;min-height:0}
   .layout.no-drill{grid-template-columns:240px 1fr 0px}
@@ -1200,7 +1224,7 @@ td.num, th.num {
   .layout.no-side{grid-template-columns:0 1fr 280px}
   .layout.no-side.no-drill{grid-template-columns:0 1fr 0px}
   .layout.no-side .side{border-right: none;overflow:hidden}
-  #sideToggle{margin-left:10px;font-size:16px;line-height:1;padding:4px 9px;border: 1px solid var(--line);border-radius: var(--radius-md)background:var(--paper);cursor:pointer;color: var(--ink)}
+  #sideToggle{margin-left:10px;font-size:16px;line-height:1;padding:4px 9px;border: 1px solid var(--line);border-radius: var(--radius-md); background:var(--paper);cursor:pointer;color: var(--ink)}
   #sideToggle:hover{border-color: var(--zhu);color: var(--zhu)}
   .side{border-right: 1px solid var(--line);padding:14px;overflow:auto;background: var(--paper)}
   .stage{position:relative;overflow:hidden;background: radial-gradient(circle at 50% 40%,var(--paper),#f4ece0)}
@@ -1208,15 +1232,15 @@ td.num, th.num {
   .drill.show{display:block}
   .side h3{font-size:12px;letter-spacing:.08em;color: #8a7d68;margin:14px 0 6px;text-transform:uppercase}
   .side h3:first-child{margin-top:0}
-  select,input[type=text]{width:100%;padding:6px 8px;border: 1px solid var(--line);border-radius: var(--radius-md)font-size:13px;background: var(--paper);color: var(--ink)}
+  select,input[type=text]{width:100%;padding:6px 8px;border: 1px solid var(--line);border-radius: var(--radius-md); font-size:13px;background: var(--paper);color: var(--ink)}
   .grp{display:flex;align-items:center;gap:7px;font-size:13px;margin:4px 0;cursor:pointer}
   .grp input{accent-color: var(--zhu)}
-  .swatch{width:12px;height:12px;border-radius: 50%display:inline-block;border: 1px solid var(--paper)}
+  .swatch{width:12px;height:12px;border-radius: 50%; display:inline-block;border: 1px solid var(--paper)}
   .dimbtns{display:flex;gap:5px;flex-wrap:wrap}
-  .dimbtns button{flex:1;font-size:12px;padding:5px 0;border: 1px solid var(--line);background: var(--paper);border-radius: var(--radius-md)cursor:pointer;color: var(--ink)}
+  .dimbtns button{flex:1;font-size:12px;padding:5px 0;border: 1px solid var(--line);background: var(--paper);border-radius: var(--radius-md); cursor:pointer;color: var(--ink)}
   .dimbtns button.active{background: var(--qing);color: var(--paper);border-color: var(--qing)}
   .exp{display:flex;gap:6px;flex-wrap:wrap}
-  .exp button{flex:1;min-width:64px;font-size:12px;padding:6px 0;border: 1px solid var(--line);background: var(--paper);border-radius: var(--radius-md)cursor:pointer;color: var(--ink)}
+  .exp button{flex:1;min-width:64px;font-size:12px;padding:6px 0;border: 1px solid var(--line);background: var(--paper);border-radius: var(--radius-md); cursor:pointer;color: var(--ink)}
   .exp button:hover{border-color: var(--zhu);color: var(--zhu)}
   .legend{font-size:12px;color: var(--ink-soft);line-height:1.7}
   #graphBox svg{width:100%;height:100%;display:block;cursor:grab}
@@ -1225,22 +1249,22 @@ td.num, th.num {
   .gnode{cursor:pointer;user-select:none}
   .gnode:hover{opacity:.78}
   .drill h2{font-family:"Noto Serif SC",serif;font-size:18px;margin:2px 0 4px;color: var(--zhu)}
-  .drill .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius: var(--radius-lg)background:#f0e7d6;color: var(--ink-soft);margin-bottom:8px}
+  .drill .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius: var(--radius-lg); background:#f0e7d6;color: var(--ink-soft);margin-bottom:8px}
   .drill .desc{font-size:13px;line-height:1.7;color: #4a4136}
-  .drill .alias{margin:8px 0;padding:8px 10px;background: #f7f1e6;border-radius: var(--radius-md)font-size:13px}
+  .drill .alias{margin:8px 0;padding:8px 10px;background: #f7f1e6;border-radius: var(--radius-md); font-size:13px}
   .drill .alias b{color: var(--qing)}
   .drill .nbr{list-style:none;padding:0;margin:6px 0}
-  .drill .nbr li{font-size:13px;padding:6px 8px;border: 1px solid var(--line);border-radius: var(--radius-md)margin:4px 0;cursor:pointer}
+  .drill .nbr li{font-size:13px;padding:6px 8px;border: 1px solid var(--line);border-radius: var(--radius-md); margin:4px 0;cursor:pointer}
   .drill .nbr li:hover{border-color: var(--zhu)}
   .drill .nbr li .row{display:flex;justify-content:space-between;gap:8px;align-items:center}
   .drill .nbr .rel{color: #8a7d68;font-size:12px}
   .hint{font-size:12px;color: #9a8f7c;margin-top:10px;line-height:1.6}
   .edge-label{font-size:10px;pointer-events:none;font-family:"Noto Sans SC",sans-serif}
-  .relchip{display:inline-block;font-size:10px;padding:1px 6px;border-radius: var(--radius-lg)color:var(--paper);margin-left:6px;vertical-align:middle}
-  .relsum{font-size:12px;color: #5a5040;background: #f7f1e6;border-radius: var(--radius-md)padding:7px 10px;margin:8px 0;line-height:1.9}
+  .relchip{display:inline-block;font-size:10px;padding:1px 6px;border-radius: var(--radius-lg); color:var(--paper);margin-left:6px;vertical-align:middle}
+  .relsum{font-size:12px;color: #5a5040;background: #f7f1e6;border-radius: var(--radius-md); padding:7px 10px;margin:8px 0;line-height:1.9}
   .relsum b{color: var(--zhu)}
   .relsum .rs{display:inline-block;margin:0 6px 2px 0}
-  .relsum .rs i{font-style:normal;width:9px;height:9px;border-radius: 50%display:inline-block;margin-right:4px;vertical-align:middle}
+  .relsum .rs i{font-style:normal;width:9px;height:9px;border-radius: 50%; display:inline-block;margin-right:4px;vertical-align:middle}
   @media (max-width: 768px){
     body{display:block}
     .layout,.layout.no-drill,.layout.no-side,.layout.no-side.no-drill{grid-template-columns:1fr;grid-template-rows:auto 1fr auto;flex:none;height:auto}

@@ -75,6 +75,7 @@ EXPECTED_SECTION_NAMES = [
     "降级声明",
     "文档口径", "CLAUDE速查",
     "head内容", "CSS变量引用",
+    "声明分隔", "孤立选择", "kpi基类",
 ]
 
 CORE_DOCS = [
@@ -850,6 +851,61 @@ def main():
             fail("CSS 变量引用门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
         else:
             ok("CSS 变量引用门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
+
+
+    section("声明分隔")
+    # ---- 声明分隔门禁（第 35 槽·W673/WP-2.6：CSS 缺分号=整条声明静默丢弃（442 处实证 W558/W673
+    # 修复）——换行形态+同行双通道判定，剥注释后扫描·规则末条豁免。wrapper 防静默跳过同款）----
+    ds2_py = os.path.join(_HERE, "check_css_decl_separators.py")
+    try:
+        r = subprocess.run([sys.executable, ds2_py], capture_output=True, text=True, timeout=120)
+    except Exception as e:
+        fail("声明分隔门禁执行异常（第 35 槽·crash 即拦）: %s" % e)
+    else:
+        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
+        if r.returncode != 0:
+            fail("声明分隔违例（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+        elif "---- 第 35 门禁 声明分隔：" not in r.stdout:
+            fail("声明分隔门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
+        else:
+            ok("声明分隔门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
+
+
+    section("孤立选择")
+    # ---- 孤立选择器门禁（第 36 槽·W673/WP-2.6：残缀行与后继规则拼成错误后代选择器致规则静默
+    # 死亡（84 命中+130 连带=214 行实证 W673 修复）——逗号结尾合法列表豁免。wrapper 同款）----
+    os_py = os.path.join(_HERE, "check_css_orphan_selectors.py")
+    try:
+        r = subprocess.run([sys.executable, os_py], capture_output=True, text=True, timeout=120)
+    except Exception as e:
+        fail("孤立选择器门禁执行异常（第 36 槽·crash 即拦）: %s" % e)
+    else:
+        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
+        if r.returncode != 0:
+            fail("孤立选择器违例（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+        elif "---- 第 36 门禁 孤立选择器：" not in r.stdout:
+            fail("孤立选择器门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
+        else:
+            ok("孤立选择器门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
+
+
+    section("kpi基类")
+    # ---- kpi-card 基类门禁（第 37 槽·W673/WP-2.6：W557 基类被 W563 洗掉 122 页裸奔的复发防
+    # 线——C1 system.css 含全局 .kpi-card 规则 + C2 使用页 INLINED 块含该规则（link 直引豁免）。
+    # wrapper 同款）----
+    kc_py = os.path.join(_HERE, "check_kpi_card_base.py")
+    try:
+        r = subprocess.run([sys.executable, kc_py], capture_output=True, text=True, timeout=120)
+    except Exception as e:
+        fail("kpi 基类门禁执行异常（第 37 槽·crash 即拦）: %s" % e)
+    else:
+        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
+        if r.returncode != 0:
+            fail("kpi 基类违例（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+        elif "---- 第 37 门禁 kpi 基类：" not in r.stdout:
+            fail("kpi 基类门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
+        else:
+            ok("kpi 基类门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
 
 
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----

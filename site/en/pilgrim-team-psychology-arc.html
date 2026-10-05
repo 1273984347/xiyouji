@@ -22,7 +22,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
     
     
-                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -651,6 +651,30 @@ h4 { font-size: 18px; font-weight: 500; }
     color: var(--ink-faint);
 }
 
+/* ===== kpi-card 全局别名基类（W673 · 方案 §四 WP-2.2：与 .kpi 平行的组件名，修 W563 洗掉
+   W557 页面级基类的 122 页裸奔；全局块 + 第 37 门禁双保险根治两类复发路径） ===== */
+.kpi-card {
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius-md);
+    box-shadow: var(--elev-1);
+    padding: 20px;
+    transition: border-color var(--dur-base) var(--ease-out-quart),
+                transform var(--dur-base) var(--ease-out-quart),
+                box-shadow var(--dur-base) var(--ease-out-quart);
+}
+.kpi-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
+                var(--elev-2);
+}
+.kpi-card .label, .kpi-card .kpi-label { margin-top: 8px; font-size: 13px; color: var(--ink-soft); }
+.kpi-card .value, .kpi-card .kpi-value { font-family: var(--font-mono); font-size: 32px; font-weight: 500; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi-card .desc, .kpi-card .kpi-desc { margin-top: 4px; font-size: 11px; color: var(--ink-faint); }
+
 /* ===== 图表容器 ===== */
 .chart-block {
     background: var(--paper);
@@ -1236,7 +1260,7 @@ td.num, th.num {
         .skip-link {
             position: absolute; top: -40px; left: 0; background: var(--accent-2);
             color: var(--paper); padding: 8px 16px; z-index: 100; text-decoration: none;
-            border-radius: 0 0 var(--radius-md) 0 transition: top var(--dur-base);
+            border-radius: 0 0 var(--radius-md) 0 ; transition: top var(--dur-base);
         }
         .skip-link:focus { top: 0; }
         
@@ -1244,7 +1268,7 @@ td.num, th.num {
         .control-row .ctrl-label { font-size: 0.88em; color: var(--ink-soft); font-weight: 600; }
         .ctrl-btn {
             padding: 8px 16px; border: 1px solid var(--line); background: var(--paper);
-            color: var(--ink); border-radius: var(--radius-md) cursor: pointer; font-size: 0.9em;
+            color: var(--ink); border-radius: var(--radius-md) ; cursor: pointer; font-size: 0.9em;
             font-family: inherit; transition: background var(--dur-base), color var(--dur-base), border-color var(--dur-base);
         }
         .ctrl-btn:hover { background: var(--accent-soft); }
@@ -1254,36 +1278,36 @@ td.num, th.num {
         .slider-wrap { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 240px; }
         .slider-wrap input[type=range] {
             flex: 1; height: 6px; -webkit-appearance: none; appearance: none;
-            background: var(--line); border-radius: var(--radius-sm) outline: none;
+            background: var(--line); border-radius: var(--radius-sm) ; outline: none;
         }
         .slider-wrap input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none; appearance: none;
-            width: 18px; height: 18px; background: var(--accent); border-radius: 50%
+            width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
             cursor: pointer; border: 2px solid var(--paper); box-shadow: var(--elev-1);
         }
         .slider-wrap input[type=range]::-moz-range-thumb {
-            width: 18px; height: 18px; background: var(--accent); border-radius: 50%
+            width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
             cursor: pointer; border: 2px solid var(--paper);
         }
         .slider-wrap .ch-label { font-family: "JetBrains Mono", monospace; font-size: 0.85em; color: var(--accent); font-weight: 700; min-width: 78px; }
         .speed-select {
             padding: 6px 10px; border: 1px solid var(--line); background: var(--paper);
-            color: var(--ink); border-radius: var(--radius-md) cursor: pointer; font-size: 0.85em;
+            color: var(--ink); border-radius: var(--radius-md) ; cursor: pointer; font-size: 0.85em;
             font-family: inherit;
         }
-        .progress-bar { position: relative; height: 6px; background: var(--line); border-radius: var(--radius-sm) margin-top: 8px; overflow: hidden; }
+        .progress-bar { position: relative; height: 6px; background: var(--line); border-radius: var(--radius-sm) ; margin-top: 8px; overflow: hidden; }
         .progress-bar .progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--accent); width: 0%; transition: width 0.3s; }
         .chart-wrap { position: relative; overflow-x: auto; }
         #radar-svg, #arc-svg, #cohesion-svg, #timeline-svg, #boxplot-svg { display: block; }
         #arc-svg { min-width: 980px; }
         .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
-        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: var(--radius-md) background: var(--paper-warm); }
+        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: var(--radius-md) ; background: var(--paper-warm); }
         .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
         .legend-row .lg-swatch.line { width: 22px; height: 3px; border-radius: var(--radius-sm) }
         .legend-row .lg-swatch.dot { border-radius: 50% }
         .event-tip, .heat-tip {
             position: absolute; pointer-events: none; background: var(--dark);
-            color: var(--paper-warm); padding: 10px 14px; border-radius: var(--radius-md) font-size: 0.82rem;
+            color: var(--paper-warm); padding: 10px 14px; border-radius: var(--radius-md) ; font-size: 0.82rem;
             opacity: 0; transition: opacity var(--dur-base); z-index: 10; max-width: 375px;
         }
         .event-tip .tip-title, .heat-tip .tip-title { font-weight: bold; color: var(--accent-soft); margin-bottom: 6px; font-size: 0.95rem; }
@@ -1291,13 +1315,13 @@ td.num, th.num {
         .event-tip .tip-meta, .heat-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: var(--ink-faint); margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--ink-soft); }
         .insight-box {
             background: var(--paper-warm); border-left: 4px solid var(--accent-soft);
-            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 var(--radius-md) var(--radius-md) 0 font-size: 0.92em;
+            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 var(--radius-md) var(--radius-md) 0 ; font-size: 0.92em;
         }
         .insight-box strong { color: var(--accent); font-weight: 700; }
         .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
         .footer-idx { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 12px; text-align: left; }
         @media (min-width: 760px) { .footer-idx { grid-template-columns: 1fr 1fr; } }
-        .footer-idx .idx-block { background: color-mix(in srgb, var(--dark-text) 6%, transparent); border: 1px solid rgba(233,184,133,0.2); border-radius: var(--radius-md) padding: 10px 14px; }
+        .footer-idx .idx-block { background: color-mix(in srgb, var(--dark-text) 6%, transparent); border: 1px solid rgba(233,184,133,0.2); border-radius: var(--radius-md) ; padding: 10px 14px; }
         .footer-idx .idx-block h4 { color: var(--paper-warm); font-size: 0.82em; margin-bottom: 6px; font-weight: 700; }
         .footer-idx .idx-block p { color: var(--accent-soft); font-size: 0.78em; line-height: 1.6; margin: 0; }
         .footer-idx .idx-block a { color: var(--accent-soft); text-decoration: underline; }

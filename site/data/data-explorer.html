@@ -21,7 +21,7 @@
     <meta property="og:description" content="详解西游记 · 数据浏览器 · 详解西游记">
 
 
-                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -650,6 +650,30 @@ h4 { font-size: 18px; font-weight: 500; }
     color: var(--ink-faint);
 }
 
+/* ===== kpi-card 全局别名基类（W673 · 方案 §四 WP-2.2：与 .kpi 平行的组件名，修 W563 洗掉
+   W557 页面级基类的 122 页裸奔；全局块 + 第 37 门禁双保险根治两类复发路径） ===== */
+.kpi-card {
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius-md);
+    box-shadow: var(--elev-1);
+    padding: 20px;
+    transition: border-color var(--dur-base) var(--ease-out-quart),
+                transform var(--dur-base) var(--ease-out-quart),
+                box-shadow var(--dur-base) var(--ease-out-quart);
+}
+.kpi-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
+                var(--elev-2);
+}
+.kpi-card .label, .kpi-card .kpi-label { margin-top: 8px; font-size: 13px; color: var(--ink-soft); }
+.kpi-card .value, .kpi-card .kpi-value { font-family: var(--font-mono); font-size: 32px; font-weight: 500; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi-card .desc, .kpi-card .kpi-desc { margin-top: 4px; font-size: 11px; color: var(--ink-faint); }
+
 /* ===== 图表容器 ===== */
 .chart-block {
     background: var(--paper);
@@ -1195,22 +1219,22 @@ td.num, th.num {
   header.top{padding:22px 20px 14px;background: linear-gradient(135deg,var(--dark),#3a2820);color: var(--paper-warm)}
   header.top h1{margin:0;font-size:22px}
   header.top p{margin:6px 0 0;font-size:13px;opacity:.85}
-  .banner{margin:12px 16px;padding:10px 14px;border-radius: var(--radius-md)font-size:13px;border: 1px solid var(--line);background: var(--paper-warm)}
+  .banner{margin:12px 16px;padding:10px 14px;border-radius: var(--radius-md); font-size:13px;border: 1px solid var(--line);background: var(--paper-warm)}
   .banner.offline{border-color: var(--accent-3);background: var(--paper-warm)}
   .layout{display:flex;gap:16px;padding:0 16px 40px;align-items:flex-start}
-  .picker{width:230px;flex:0 0 230px;max-height:70vh;overflow:auto;border: 1px solid var(--line);border-radius: var(--radius-lg)background:var(--paper)}
+  .picker{width:230px;flex:0 0 230px;max-height:70vh;overflow:auto;border: 1px solid var(--line);border-radius: var(--radius-lg); background:var(--paper)}
   .picker .item{padding:10px 12px;border-bottom: 1px solid var(--line);cursor:pointer;font-size:14px}
   .picker .item:hover{background: rgba(200,70,58,.06)}
   .picker .item.active{background: rgba(200,70,58,.12);color: var(--accent);font-weight:600}
   .picker .item small{display:block;color: var(--ink-soft);font-size:11px}
   .main{flex:1;min-width:0}
   .keytabs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
-  .keytab{padding:6px 12px;border: 1px solid var(--line);border-radius: var(--radius-pill)cursor:pointer;font-size:13px;background: var(--paper)}
+  .keytab{padding:6px 12px;border: 1px solid var(--line);border-radius: var(--radius-pill); cursor:pointer;font-size:13px;background: var(--paper)}
   .keytab.active{background: var(--accent);color: var(--paper);border-color: var(--accent)}
-  .chartbox{margin:8px 0 14px;border: 1px solid var(--line);border-radius: var(--radius-lg)background:var(--paper);padding:10px}
+  .chartbox{margin:8px 0 14px;border: 1px solid var(--line);border-radius: var(--radius-lg); background:var(--paper);padding:10px}
   .chartbox h3{margin:4px 6px 8px;font-size:14px;color: var(--accent-2)}
   .toolbar2{display:flex;gap:8px;margin:0 0 10px;flex-wrap:wrap;align-items:center}
-  .toolbar2 .vt-btn{padding:7px 12px;border: 1px solid var(--accent-2);background: var(--accent-2);color: var(--paper);border-radius: var(--radius-md)cursor:pointer;font-size:13px}
+  .toolbar2 .vt-btn{padding:7px 12px;border: 1px solid var(--accent-2);background: var(--accent-2);color: var(--paper);border-radius: var(--radius-md); cursor:pointer;font-size:13px}
   .meta{color: var(--ink-soft);font-size:13px;margin:2px 0 8px}
   .hint{color: var(--ink-soft);font-size:12px;margin-top:8px}
   @media(max-width: 768px){.layout{flex-direction:column}.picker{width:100%;flex:none;max-height:none}}
