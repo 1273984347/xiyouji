@@ -4,13 +4,26 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W672），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W673），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.270（2026-10-06）：W673 站点质量批次二 — kpi-card 全局基类 122 页 + CSS 机械修复 526 处 + 第 35/36/37 门禁挂载
+> **来源**：站点质量修复六批方案 V1.7 批次二（§四 WP-2.1–2.6·批次一 W672 已收官）。
+> - **WP-2.1 前置审计**：有页面级 .kpi-card 私有基类的 18 页 117 条声明集提取留档（scripts/output/_w673_kpi_private_audit.csv）——私有规则零删除（页面私有 style 在 INLINED 块后加载，覆盖全局，行为不变）。
+> - **WP-2.2 全局基类 + 分发**：system.css 在 .kpi 块后新增 .kpi-card 全局别名基类（与 .kpi 平行：position:relative 宿主 + border-top:3px solid var(--accent) 恢复 W557 被洗形态 + hover 升起 elev-2 + .label/.value/.desc 与 .kpi-label/.kpi-value/.kpi-desc 双套子类名兼容 + 全 token 引用零裸色 + 时长全部 var(--dur-base) 合 DESIGN §5 预算）；inline_css.py --force 重分发 328 页（INLINED 完整性门禁 min 43137B 绿）+ CSP --check 855 页 0 漂移；aesthetics .kpi-card::before absolute 飞至文档左上（无定位宿主）随 position:relative 复位。
+> - **WP-2.3 缺分号 442 处**：_w673_fix_semicolons.py（扫描器 1 同款内核=剥注释后换行形态+同行双通道·规则末条豁免；换行形态行尾补 ;、同行形态在被吞属性名前插 ;·CRLF 保持）——实测换行 147+同行 295=442，逐文件自断言修复后残留 0（首版两坑自纠：漏剥注释 5641 假阳性、同 span 多命中互相覆盖 79 文件假残留）。
+> - **WP-2.4 孤立选择器 214 行**：_w673_fix_orphans.py——84 处扫描命中 + 130 行同文连带残缀（如 EN underworld 4 连 header 与后继规则拼成四级死后代选择器；text-search footer. 三连）共删 214 行；.detail- 族（timeline ZH/EN）按方案考古（git log -S detail-icon 仅初始提交 v2.2.42=胎带损坏无历史形态）删除孤立行含 @media 内豁免残缀。
+> - **WP-2.5 降级对齐 2 页**：chapter-stats 声明 simplified→scroll-x；两页私有块追加 .chart-block{overflow-x:auto} + .chart-block svg{max-width:none;width:auto}——width:auto 为对抗 system.css .chart-block svg{width:100%}（375 视口实测 svg 被压至 325px 容器不滚，补后 maxBlock 1174/984）。
+> - **WP-2.6 第 35/36/37 门禁**：check_css_decl_separators.py（self-test 3/3）+ check_css_orphan_selectors.py（2/2）+ check_kpi_card_base.py（C1 system.css 含基类 + C2 使用页 INLINED 含规则·link 直引 system.css 豁免·模板壳排除·2/2）挂第 35/36/37 槽（wrapper 防静默跳过同款）+ 段自洽锁 39→42 段；AGENTS §4.2 补录三条目 + 文档规范 §8 编号至第 37 门禁。
+> - **验证**：动工前基线复测 442/84/122 与冻结一致 → 修后扫描器 1/2 归零 + 三门禁首跑全零（234 页）+ verify_delivery 核心全绿（37 门禁 42 段）+ check_structure 854 文件平衡 + token 覆盖率 0 新增 + CSP 0 漂移 + Playwright 机判 _w673_verify.js 全绿（W673-VERIFY-PASS：kpi 10 页抽样 computed bg≠transparent/border-top=3px、aesthetics 左上 12×12 无 accent 像素、CSSOM 断言 .source-list 规则从损坏后代选择器复活为合法顶层规则（全站无消费元素系死规则·以规则级验证为准）、timeline .detail-icon@480 bg=rgb(241,235,221)/fs=54.4px=3.4rem（renderDetailCard(0) 触发渲染）、降级 2 页 doc=375 且容器滚到内容宽 1174/984、81-hardships .filter-row select background 复活 rgb(255,255,255)）。dark-state-gate 与 Screenshot Review 以推送后 CI 为准。
+> - **文件**：site/system.css（+kpi-card 基类块）、site 页 ×329（WP-2.3/2.4 机械修复 + aesthetics/chapter-stats 降级对齐 + 328 页 INLINED 重分发）、scripts/check_css_decl_separators.py、scripts/check_css_orphan_selectors.py、scripts/check_kpi_card_base.py、scripts/verify_delivery.py（+3 槽）、scripts/_w673_fix_semicolons.py、scripts/_w673_fix_orphans.py、scripts/_w673_kpi_audit.py、scripts/_w673_verify.js、scripts/output/_w673_kpi_private_audit.csv、AGENTS.md（§4.2 三条目）、docs/00-导读/文档规范.md（§8 编号 37）、docs/00-导读/W批次编号对账表.md（W673 认领+翻转）、六文档级联、四页脚、CITATION、file-index。
+> - **处置收尾**：批次三至六（W674-W677）按方案 §五-§八续作，批次三动工前按对账表认领 W674；方案 §四 验收「.source-list computed=8px/0.78rem」以 CSSOM 规则级断言兑现（元素全站不存在）。
+> - **状态**：已落地（随本批级联提交；CI 五工作流以推送后 gh run list 为准）。
 
 ### v2.3.269（2026-10-06）：W672 站点质量批次一 — dataSource 50 页移位 + CSS 变量漂移 648 处映射根治 + 第 33/34 门禁挂载
 > **来源**：站点质量修复六批方案 V1.7 批次一（docs/superpowers/plans/2026-10-05-site-quality-remediation-plans.md·2026-10-05/06 九轮外部审查裁决合并；W671 已被共享载体治理批占用，六批顺延 W672-W677，方案档与对账表已更正）。

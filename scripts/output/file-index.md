@@ -11,6 +11,23 @@
 ---
 
 
+## W673 W673 站点质量批次二（2026-10-06·v2.3.270）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/system.css | W673 | 更新·新增 .kpi-card 全局别名基类块（W557 形态恢复·双套子类名兼容） |
+| site 页 ×329 | W673 | 更新·WP-2.3 缺分号 442 处 + WP-2.4 孤立选择器 214 行删除 + 降级对齐 2 页 + 328 页 INLINED 重分发 |
+| scripts/check_css_decl_separators.py | W673 | 新增·第 35 门禁（声明分隔·self-test 3 例） |
+| scripts/check_css_orphan_selectors.py | W673 | 新增·第 36 门禁（孤立选择器·self-test 2 例） |
+| scripts/check_kpi_card_base.py | W673 | 新增·第 37 门禁（kpi 基类双保险·self-test 2 例） |
+| scripts/verify_delivery.py | W673 | 更新·挂载第 35/36/37 槽 + 段自洽锁 39→42 段 |
+| scripts/_w673_fix_semicolons.py | W673 | 新增·缺分号修复工具（逐文件自断言） |
+| scripts/_w673_fix_orphans.py | W673 | 新增·孤立选择器删除工具（同文连带扩展） |
+| scripts/_w673_kpi_audit.py | W673 | 新增·WP-2.1 私有基类审计工具（18 页 117 条 CSV） |
+| scripts/_w673_verify.js | W673 | 新增·批次二 Playwright 机判套件（A-E 五组） |
+| scripts/output/_w673_kpi_private_audit.csv | W673 | 新增·私有基类声明集留档 |
+| docs/00-导读/W批次编号对账表.md | W673 | 更新·W673 认领 + 翻转 |
+
 ## W672 W672 站点质量批次一（2026-10-06·v2.3.269）
 
 | 文件 | W | 说明 |
