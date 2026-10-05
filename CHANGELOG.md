@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W668），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W669），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.266（2026-10-05）：W669 WP-E 内容发现架构 — A4 主题导航 hub + dashboard tab 口径对齐 + mobile-index 退役（W651 已启动项·master plan 工程线收官）
+> **来源**：W651 全量启动裁决六项的最后一项（其余五项 B-5/B-6 第二步/B-7/B-9①②/WP-D2 已于 W655-W662 收官）——master plan §WP-E 三条 + 第 4 条否决项维持（viz 相关推荐不做·防重复评估）。
+> - **A4 主题导航 hub**：build_reader.py 新增 --hub 模式与 build_themes_hub()（全量跑同步重建防重渲删页）；分组依据=docs/03 README 命名规范前缀族（实测 README 无文章列表）：取经X 34 / 西游与X 22 / 其余 153 音序平铺；site/reader/themes-hub.html 机判 209 链接全唯一 == EXPECT_A4 同源；总目录顶部 hub 入口链接；sitemap +1（0.6）。
+> - **dashboard tab 口径对齐**：7 tab 文案按实测对齐——全部 41→**51**（全站去重 data/*.html 链接·蓝图实测口径）、A-L 8→12、M-U 9、V-AH 14、Q+ 2、Q++ 3、Q+++ 5（分类卡面去重；51 的构成=六分类 45+数据中枢 5+全站检索 1·尾差构成已注明）；口径句「41 个专题」→「51 个专题页」。
+> - **mobile-index.html 退役**：文件删除+3 处引用收敛（data/search.html 搜索索引条目删除、zh/en tag-cloud ?q= 注释来源改 dashboard；dukou-engine 历史修正叙述按「历史不改写」保留）+ gen_sitemap 重生成（**850 净稳**：+themes-hub −mobile-index）+ 搜索索引重生成（pages_zh 95：−mobile-index +themes-hub——后者按 W669 例外规则入索引补发现性）。
+> - **过程两误两获（如实）**：①页域过滤用 os.path.join 反斜杠前缀对正斜杠路径永假（本会话已文档化坑的三犯）→ 改 '/reader/' in 包含式；②最后一次索引重生成跑在 generate_csp 之后 → search.html CSP hash 过期拦内联脚本、黄金查询假象 20/30——「改内联脚本必跑 generate_csp」铁律自违自查，apply 后 30/30 恢复；generate_csp 覆盖面经查无盲区（纯流程顺序违例）。
+> - **验证**：hub 209/209；黄金查询 30/30；lint_links site 14040 链接 0 broken；CSP 855 页 0 漂移；verify_delivery 核心全绿（32 槽+37 段锁）。
+> - **文件**：scripts/build_reader.py、scripts/_gen_search_index.py、site/reader/themes-hub.html（新增）、site/reader/index.html、site/dashboard.html、site/sitemap.xml、site/data/search.html、site/data/tag-cloud.html、site/en/tag-cloud.html、site/mobile-index.html（删除）、docs/00-导读/W批次编号对账表.md、六文档、四页脚、CITATION、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 
 ### v2.3.265（2026-10-05）：W668 外部数据评审裁决落地 — hardships 三难重分类 mind + dialogue 口径注记 + B-C 级 16 页性质标注
 > **来源**：用户转发外部数据层评审（47 个 JSON 分级 A/B/C + 修正建议）→ 本会话逐条对仓取证裁决（四主张：三妖 first_chapter 系旧快照 W643 已修/cave 两文件一致性主张误判/如来样本偏差属实但扩别名前提不成立/hardships 重分类属 W639 作者裁决项）→ 用户三项拍板后本批执行。

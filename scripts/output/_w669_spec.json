@@ -1,0 +1,21 @@
+{
+  "batch": "W669",
+  "version": "v2.3.266",
+  "date": "2026-10-05",
+  "desc": "WP-E 内容发现架构",
+  "title": "W669 WP-E 内容发现架构 — A4 主题导航 hub + dashboard tab 口径对齐 + mobile-index 退役（W651 已启动项·master plan 工程线收官）",
+  "head_entry": "2026-10-05（v2.3.266 W669）WP-E 内容发现架构落地（W651 六项启动的最后一批）：A4 主题 hub（build_reader --hub·209 篇前缀族机械分组 34/22/153·机判链接==EXPECT_A4 同源）+ dashboard tab 口径对齐（全部 41→51 全站去重·分类卡面去重 12/9/14/2/3/5）+ mobile-index.html 退役（文件+3 处引用收敛+sitemap 850 净稳+索引条目删除）——黄金查询 30/30·lint 14040 链接 0 broken·CSP 0 漂移（验收全过）",
+  "head_sentence": "WP-E内容发现架构落地",
+  "changelog_body": "\n> **来源**：W651 全量启动裁决六项的最后一项（其余五项 B-5/B-6 第二步/B-7/B-9①②/WP-D2 已于 W655-W662 收官）——master plan §WP-E 三条 + 第 4 条否决项维持（viz 相关推荐不做·防重复评估）。\n> - **A4 主题导航 hub**：build_reader.py 新增 --hub 模式与 build_themes_hub()（全量跑同步重建防重渲删页）；分组依据=docs/03 README 命名规范前缀族（实测 README 无文章列表）：取经X 34 / 西游与X 22 / 其余 153 音序平铺；site/reader/themes-hub.html 机判 209 链接全唯一 == EXPECT_A4 同源；总目录顶部 hub 入口链接；sitemap +1（0.6）。\n> - **dashboard tab 口径对齐**：7 tab 文案按实测对齐——全部 41→**51**（全站去重 data/*.html 链接·蓝图实测口径）、A-L 8→12、M-U 9、V-AH 14、Q+ 2、Q++ 3、Q+++ 5（分类卡面去重；51 的构成=六分类 45+数据中枢 5+全站检索 1·尾差构成已注明）；口径句「41 个专题」→「51 个专题页」。\n> - **mobile-index.html 退役**：文件删除+3 处引用收敛（data/search.html 搜索索引条目删除、zh/en tag-cloud ?q= 注释来源改 dashboard；dukou-engine 历史修正叙述按「历史不改写」保留）+ gen_sitemap 重生成（**850 净稳**：+themes-hub −mobile-index）+ 搜索索引重生成（pages_zh 95：−mobile-index +themes-hub——后者按 W669 例外规则入索引补发现性）。\n> - **过程两误两获（如实）**：①页域过滤用 os.path.join 反斜杠前缀对正斜杠路径永假（本会话已文档化坑的三犯）→ 改 '/reader/' in 包含式；②最后一次索引重生成跑在 generate_csp 之后 → search.html CSP hash 过期拦内联脚本、黄金查询假象 20/30——「改内联脚本必跑 generate_csp」铁律自违自查，apply 后 30/30 恢复；generate_csp 覆盖面经查无盲区（纯流程顺序违例）。\n> - **验证**：hub 209/209；黄金查询 30/30；lint_links site 14040 链接 0 broken；CSP 855 页 0 漂移；verify_delivery 核心全绿（32 槽+37 段锁）。\n> - **文件**：scripts/build_reader.py、scripts/_gen_search_index.py、site/reader/themes-hub.html（新增）、site/reader/index.html、site/dashboard.html、site/sitemap.xml、site/data/search.html、site/data/tag-cloud.html、site/en/tag-cloud.html、site/mobile-index.html（删除）、docs/00-导读/W批次编号对账表.md、六文档、四页脚、CITATION、file-index。\n> - **状态**：已落地（本批提交并 push origin/main）。\n",
+  "milestone_block": "- **v2.3.266 W669 WP-E 内容发现架构**：\n  - A4 主题 hub 209 篇前缀族机械分组（机判==EXPECT_A4 同源）+ 总目录入口\n  - dashboard tab 口径对齐（全部 51·分类去重 12/9/14/2/3/5）+ mobile-index 退役（850 净稳）\n  - **master plan 六项启动线全部收官**（B-5/B-6/B-7/B-9①②/WP-D2/WP-E）\n",
+  "agents_note": "2026-10-05（v2.3.266 W669）WP-E 内容发现架构：无 § 结构性变更（A4 主题 hub 209 篇+dashboard tab 口径 51+mobile-index 退役 850 净稳——master plan 六项启动线收官），仅版本脚注同步",
+  "file_index_rows": [
+    "| scripts/build_reader.py | W669 | 更新·--hub 模式+build_themes_hub 前缀族机械分组 |",
+    "| scripts/_gen_search_index.py | W669 | 更新·themes-hub 入索引例外（正斜杠包含式判断） |",
+    "| site/reader/themes-hub.html | W669 | 新增·A4 主题导航 hub（209 链接三组） |",
+    "| site/dashboard.html | W669 | 更新·7 tab 口径对齐（全部 51） |",
+    "| site/mobile-index.html | W669 | 删除·职能被 dashboard 覆盖（蓝图 §WP-E.3） |",
+    "| site/sitemap.xml + search.html + 双 tag-cloud | W669 | 更新·850 净稳+索引条目增删+引用收敛 |",
+    "| docs/00-导读/W批次编号对账表.md | W669 | 更新·W669 认领+翻转 |"
+  ]
+}
