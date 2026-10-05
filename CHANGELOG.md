@@ -4,13 +4,21 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W670），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W671），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.268（2026-10-05）：W671 共享载体治理 — 子代理派发政策入 AGENTS §4.3 + 默认路径普查三发现入 backlog 登记档
+> **来源**：用户指出「写进私有项目记忆的内容不在项目内显示，多 Agent 协作仍会出问题」——W516/W517 载体铁律（共享机制必须写仓库 tracked 文件·禁只写全局路径）对私有记忆的同型适用；本会话两处「只写记忆」的载体错误就地落仓。
+> - **AGENTS §4.3 新增**：子代理显式派发三类场景（①独立取证扇出 ②只读调研可并行 ③长等待空档禁纯 sleep）+主 context 保留三类（裁决冻结史/串行变更链/跨步骤即时发现）+机器门禁优先于 agent review+子代理产出落仓库公共载体。
+> - **backlog 登记档第五节**：默认路径风险面普查三发现登记不开工（R-1/R-2 中级：spot_check_nlp/data_validate 默认输入依赖未 tracked 产物·管线后校验器属设计；R-3 低级：extract_datasets.js README 模板示例误导性引用）——源自 W670 Explore 子代理 420 脚本普查（544K tokens·与级联并行·风险面基本清零）。
+> - **验证**：纯文档批；verify_delivery 核心全绿（32 槽+37 段锁+doc-sync 0 FAIL）。
+> - **文件**：AGENTS.md（§4.3 新条目）、docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md（第五节）、docs/00-导读/W批次编号对账表.md（W671 认领+翻转）、六文档、四页脚、CITATION、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 
 ### v2.3.267（2026-10-05）：W670 开放项双闭 — blob 预算口径裁定落档（阅读流为准）+ character_nlp 默认源切权威分回目录
 > **来源**：用户 userselect 圈定两项开放项（W661 blob 口径登记 / W668 text-search 提取脱节登记）要求处置。
