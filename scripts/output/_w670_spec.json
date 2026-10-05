@@ -1,0 +1,16 @@
+{
+  "batch": "W670",
+  "version": "v2.3.267",
+  "date": "2026-10-05",
+  "desc": "开放项双闭与默认源治理",
+  "title": "W670 开放项双闭 — blob 预算口径裁定落档（阅读流为准）+ character_nlp 默认源切权威分回目录",
+  "head_entry": "2026-10-05（v2.3.267 W670）开放项双闭：blob 预算口径裁定（用户 userselect）——阅读流为准（排除 topnav「在 GitHub 查看」615 源访问链接·813≤1000 达标；topnav 系刻意源访问入口非阅读流漂移·W661 遗留开放项关闭）+ character_nlp 默认 --input 切权威分回目录 source/原文/分回/（text-search.html 语料已刻意迁出·旧正则恒 0 回 W668 实证；无参冒烟 100 回与显式路径零差异；verify_chapters 零接线留档不删）",
+  "head_sentence": "开放项双闭：blob口径裁定+默认源切权威",
+  "changelog_body": "\n> **来源**：用户 userselect 圈定两项开放项（W661 blob 口径登记 / W668 text-search 提取脱节登记）要求处置。\n> - **blob 预算口径裁定**：阅读流为准——预算语义=D-1「读者点内容链接不外跳」（W593），topnav「在 GitHub 查看」为刻意源访问功能不计入；阅读流 813 ≤ 1000 达标维持，全量 1428 仅作盘点参考值。历史段 W661 的「待用户裁定」开放项就此关闭（裁定记录随本段，历史段不改写）。\n> - **text-search 提取脱节处置**：character_nlp.py 默认 --input 由 site/data/text-search.html 改为 source/原文/分回/（语料迁出系历史批刻意行为·页内批注明载；旧提取正则对其恒 0 回为 W668 实证）；无参冒烟加载 100 回、输出与显式路径逐字一致；docstring/argparse help 同步；extract_chapters_from_html 兼容保留供显式旧格式输入。verify_chapters.py 盘点=无 tests/CI/run_all 接线零调用方，留档不删。\n> - **验证**：ruff 全过；无参冒烟 100 回（3515/-0.4694 与显式路径零差异）；verify_delivery 核心全绿（32 槽+37 段锁）。\n> - **文件**：scripts/B_人物/character_nlp.py、docs/00-导读/W批次编号对账表.md（W670 认领+翻转）、六文档、四页脚、CITATION、file-index。\n> - **状态**：已落地（本批提交并 push origin/main）。\n",
+  "milestone_block": "- **v2.3.267 W670 开放项双闭**：\n  - blob 预算口径裁定：阅读流为准（813≤1000 达标·topnav 源访问不计入·W661 开放项关闭）\n  - character_nlp 默认源切权威分回目录（无参冒烟 100 回零差异·verify_chapters 零接线留档）\n",
+  "agents_note": "2026-10-05（v2.3.267 W670）开放项双闭：无 § 结构性变更（blob 预算口径裁定=阅读流为准 813≤1000·character_nlp 默认源切 source/原文/分回 无参冒烟 100 回零差异·verify_chapters 零接线留档），仅版本脚注同步",
+  "file_index_rows": [
+    "| scripts/B_人物/character_nlp.py | W670 | 更新·默认 --input 切 source/原文/分回/（权威语料·旧 HTML 兼容保留） |",
+    "| docs/00-导读/W批次编号对账表.md | W670 | 更新·W670 认领+翻转 |"
+  ]
+}
