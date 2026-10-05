@@ -55,6 +55,15 @@
 | .github/workflows/*.yml ×5 | W663 | 更新·61 处 uses SHA 钉 + 顶层 permissions 收敛 + security dispatch |
 | 交接文档.md / AGENTS.md / docs/00-导读/文档规范.md | W663 | 更新·雷区索引 13 行 + 坑 #14 + §4.2 门禁清单 29/30/31 + 契约锚点 |
 
+## W662 暗色审计入基线+遗漏收敛（2026-10-05·v2.3.264）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_audit_render_states.js | W662 | 更新·新增 --prefix 页域过滤（与 --scope charts 叠加） |
+| scripts/output/render-state-audit-baseline.jsonl | W662 | 更新·基线 163→784 行（+621 reader S2 零缺陷） |
+| scripts/output/render-state-audit.jsonl | W662 | 更新·charts 163 行当前输出（gate 复验输入） |
+| docs/00-导读/W批次编号对账表.md | W662 | 更新·W662 认领+翻转 |
+
 ## W661 WP-D2 索引站内化+footer-meta 改链（2026-10-05·v2.3.262）
 
 | 文件 | W | 说明 |

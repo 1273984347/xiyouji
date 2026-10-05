@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W667），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W662），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.264（2026-10-05）：W662 暗色审计 reader 新页入基线 + 遗漏收敛（W659 蓝图预留批·WP-D2 收官批）
+> **来源**：用户「继续」启动 W659 蓝图预留批 W662（§4 实现批拆分末行·WP-D2 收官批）。
+> - **暗色审计扩样**（_audit_render_states.js 新增 --prefix 页域过滤·与 --scope charts 叠加可组合）：site/reader 621 页 × S2-desktop-dark 全量实测——fatal=0、isDarkBg=true 621/621（tokens 暗色映射对文本页全部生效）、lowContrast/invisibleShapes/canvasIssues/hOverflow/errors 四类缺陷零命中。
+> - **假 0 现场自纠**：首跑误起 8123 端口（脚本写死 8000）→ 621 行全 CONNECTION_REFUSED 且 errors=[] 呈「0 缺陷」假象——以 fatal 行数 + isDarkBg 覆盖双断言识破后 8000 复跑取真数（W569「须起 site 根 http 服务」教训的连接拒绝变体·探针 0 必须配内容在位断言的二度实证）。
+> - **基线并入**：render-state-audit-baseline.jsonl 163→784 行（+621 reader·按 page 键去重）；gate compare 只遍历 charts scope 当前输出侧，reader 行不参与比对（并入安全）；本地复验 check_dark_state_gate.js：784 基线/163 当前/零新增 OK。
+> - **Screenshot Review 定向**：paths 机制既有（site/reader 触发·W661 实证），本批无页面变更。
+> - **遗漏收敛盘点**：sitemap reader 850 条（W660）/搜索索引 reader 615 条（W661）/CSP 855 页 0 漂移/黄金查询 30/30——全 ✓；**WP-D2 六批（W659 规划 + W660/W661/W662 实现）全部收官**；唯一开放项=blob 全量口径 topnav 615 链接是否计入预算（W661 登记待用户裁定·不阻塞后续批次）。
+> - **验收机判（蓝图 §4）**：CI 五工作流绿（随本批推送验证）。
+> - **文件**：scripts/_audit_render_states.js（--prefix）、scripts/output/render-state-audit-baseline.jsonl（784 行）、scripts/output/render-state-audit.jsonl（charts 163 行当前输出）、docs/00-导读/W批次编号对账表.md（W662 认领+翻转）、六文档、四页脚、CITATION、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 
 ### v2.3.263（2026-10-05）：W667 复盘三卡防漂移落地 — batch_cascade 预校验 + CLAUDE.md 指针门禁第 32 槽 + doc-sync 扩面评估
 > **来源**：用户「全部做完」拍板启动复盘报告 §3.3 三张 skill-creator 任务卡（W667 认领）。

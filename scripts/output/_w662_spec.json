@@ -1,0 +1,18 @@
+{
+  "batch": "W662",
+  "version": "v2.3.264",
+  "date": "2026-10-05",
+  "desc": "暗色审计入基线+遗漏收敛",
+  "title": "W662 暗色审计 reader 新页入基线 + 遗漏收敛（W659 蓝图预留批·WP-D2 收官批）",
+  "head_entry": "2026-10-05（v2.3.264 W662）暗色审计 reader 621 页入基线（--prefix 页域过滤新增·S2-desktop-dark 实测 fatal=0·isDarkBg 621/621·缺陷四类全 0·首跑 8123 端口假 0 以 fatal+isDarkBg 双断言识破）+ 基线 163→784 行并入（gate 只遍历 charts scope·本地复验零新增 OK）+ 遗漏收敛盘点（sitemap/索引/CSP/黄金查询全 ✓·WP-D2 六批收官·唯一开放项=blob 全量口径 topnav 615 待裁定）",
+  "head_sentence": "暗色审计621页入基线+WP-D2收官",
+  "changelog_body": "\n> **来源**：用户「继续」启动 W659 蓝图预留批 W662（§4 实现批拆分末行·WP-D2 收官批）。\n> - **暗色审计扩样**（_audit_render_states.js 新增 --prefix 页域过滤·与 --scope charts 叠加可组合）：site/reader 621 页 × S2-desktop-dark 全量实测——fatal=0、isDarkBg=true 621/621（tokens 暗色映射对文本页全部生效）、lowContrast/invisibleShapes/canvasIssues/hOverflow/errors 四类缺陷零命中。\n> - **假 0 现场自纠**：首跑误起 8123 端口（脚本写死 8000）→ 621 行全 CONNECTION_REFUSED 且 errors=[] 呈「0 缺陷」假象——以 fatal 行数 + isDarkBg 覆盖双断言识破后 8000 复跑取真数（W569「须起 site 根 http 服务」教训的连接拒绝变体·探针 0 必须配内容在位断言的二度实证）。\n> - **基线并入**：render-state-audit-baseline.jsonl 163→784 行（+621 reader·按 page 键去重）；gate compare 只遍历 charts scope 当前输出侧，reader 行不参与比对（并入安全）；本地复验 check_dark_state_gate.js：784 基线/163 当前/零新增 OK。\n> - **Screenshot Review 定向**：paths 机制既有（site/reader 触发·W661 实证），本批无页面变更。\n> - **遗漏收敛盘点**：sitemap reader 850 条（W660）/搜索索引 reader 615 条（W661）/CSP 855 页 0 漂移/黄金查询 30/30——全 ✓；**WP-D2 六批（W659 规划 + W660/W661/W662 实现）全部收官**；唯一开放项=blob 全量口径 topnav 615 链接是否计入预算（W661 登记待用户裁定·不阻塞后续批次）。\n> - **验收机判（蓝图 §4）**：CI 五工作流绿（随本批推送验证）。\n> - **文件**：scripts/_audit_render_states.js（--prefix）、scripts/output/render-state-audit-baseline.jsonl（784 行）、scripts/output/render-state-audit.jsonl（charts 163 行当前输出）、docs/00-导读/W批次编号对账表.md（W662 认领+翻转）、六文档、四页脚、CITATION、file-index。\n> - **状态**：已落地（本批提交并 push origin/main）。\n",
+  "milestone_block": "- **v2.3.264 W662 暗色审计入基线+WP-D2 收官**：\n  - reader 621 页 S2 实测全 0 缺陷（isDarkBg 621/621）·假 0 双断言识破\n  - 基线 163→784 行（gate charts scope 比对不受影响·本地复验 OK）\n  - WP-D2 六批收官；开放项仅 blob topnav 口径待裁定\n",
+  "agents_note": "2026-10-05（v2.3.264 W662）暗色审计入基线+遗漏收敛：无 § 结构性变更（reader 621 页 S2 实测全 0·基线 163→784 行·WP-D2 六批收官·blob topnav 口径开放项维持登记），仅版本脚注同步",
+  "file_index_rows": [
+    "| scripts/_audit_render_states.js | W662 | 更新·新增 --prefix 页域过滤（与 --scope charts 叠加） |",
+    "| scripts/output/render-state-audit-baseline.jsonl | W662 | 更新·基线 163→784 行（+621 reader S2 零缺陷） |",
+    "| scripts/output/render-state-audit.jsonl | W662 | 更新·charts 163 行当前输出（gate 复验输入） |",
+    "| docs/00-导读/W批次编号对账表.md | W662 | 更新·W662 认领+翻转 |"
+  ]
+}
