@@ -28,7 +28,7 @@ DECL_RE = re.compile(r"([-\w]+)\s*:\s*")
 
 def _same_line_defect(text):
     cs = [(x.start(), x.group(1)) for x in DECL_RE.finditer(text)]
-    for (p1, n1), (p2, n2) in zip(cs, cs[1:]):
+    for (p1, _n1), (p2, _n2) in zip(cs, cs[1:], strict=False):
         seg = text[p1:p2]
         if ";" not in seg and "{" not in seg and "}" not in seg:
             return True
