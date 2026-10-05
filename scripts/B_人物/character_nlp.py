@@ -8,8 +8,8 @@ character_nlp.py — 《西游记》人物 NLP pipeline（零依赖纯标准库�
   - 人物统计：出场回数、总提及次数、首现回目、别名使用频次
 
 数据源：
-  - 默认：site/data/text-search.html（提取 EMBEDDED_DATA.chapters）
-  - 备用：--input source/原文/分回/（如已切分）
+  - 默认：source/原文/分回/（权威语料·W670 起；text-search.html 内嵌语料已迁出页面）
+  - 备用：--input 显式传旧格式 text-search.html 路径（extract_chapters_from_html 兼容保留）
 
 输出：
   - characters.json：人物统计
@@ -806,7 +806,7 @@ def main():
     )
     parser.add_argument(
         "--input",
-        help="数据源：text-search.html 路径 或 分回目录路径（默认：site/data/text-search.html）",
+        help="数据源：分回目录路径（默认：source/原文/分回/）或旧格式 text-search.html 路径",
     )
     parser.add_argument(
         "--output",
@@ -837,12 +837,19 @@ def main():
             chapters = extract_chapters_from_html(input_path)
     else:
         project_root = Path(__file__).resolve().parent.parent.parent
-        default_html = project_root / "site" / "data" / "text-search.html"
-        if not default_html.exists():
-            print(f"[ERROR] 默认数据源不存在：{default_html}", file=sys.stderr)
+        # W670：默认源切权威分回目录——text-search.html 内嵌语料已被刻意迁出页面（W563 性能批·
+        # 页内批注明载），旧 HTML 提取正则对其恒为 0 回（W668 实证）；显式 --input 传旧格式 HTML 仍可走 extract_chapters_from_html。
+        default_dir = project_root / "source" / "原文" / "分回"
+        if not default_dir.is_dir():
+            print(f"[ERROR] 默认数据源不存在：{default_dir}", file=sys.stderr)
             sys.exit(1)
-        print(f"[INFO] 从默认 HTML 提取原文：{default_html}")
-        chapters = extract_chapters_from_html(default_html)
+        print(f"[INFO] 从默认分回目录加载：{default_dir}")
+        raw_chapters = load_all_chapters(default_dir)
+        chapters = []
+        for name, text in raw_chapters:
+            m = re.search(r"第(\d+)回", name)
+            num = int(m.group(1)) if m else 0
+            chapters.append((num, name, text))
 
     print(f"[INFO] 加载了 {len(chapters)} 回")
     if not chapters:
