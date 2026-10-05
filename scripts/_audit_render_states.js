@@ -55,6 +55,12 @@ const scopeCharts = (() => {
   return i > -1 && process.argv[i + 1] === 'charts';
 })();
 
+// W662：--prefix reader = 页面相对路径前缀过滤（预留批暗色审计用·与 --scope charts 可叠加）
+const PREFIX = (() => {
+  const i = process.argv.indexOf('--prefix');
+  return i > -1 ? process.argv[i + 1] : '';
+})();
+
 // W584 O1：state 内并发 worker 数（默认 3——3 个 page 并行共享 context·1 等价旧串行）
 const CONC = (() => {
   const i = process.argv.indexOf('--conc');
@@ -213,6 +219,9 @@ async function main() {
   let pages = listPages();
   if (scopeCharts) {
     pages = pages.filter(p => fs.readFileSync(path.join(SITE, p), 'utf8').includes('<svg'));
+  }
+  if (PREFIX) {
+    pages = pages.filter(p => p.startsWith(PREFIX));
   }
   pages = pages.slice(0, limit);
   console.log(`pages=${pages.length} states=${STATES.length}${scopeCharts ? ' scope=charts' : ''} conc=${CONC} proto=${PROTO}`);
