@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W662），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W668），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.265（2026-10-05）：W668 外部数据评审裁决落地 — hardships 三难重分类 mind + dialogue 口径注记 + B-C 级 16 页性质标注
+> **来源**：用户转发外部数据层评审（47 个 JSON 分级 A/B/C + 修正建议）→ 本会话逐条对仓取证裁决（四主张：三妖 first_chapter 系旧快照 W643 已修/cave 两文件一致性主张误判/如来样本偏差属实但扩别名前提不成立/hardships 重分类属 W639 作者裁决项）→ 用户三项拍板后本批执行。
+> - **T1 hardships 三难重分类**：五庄观中/难活人参/金銮殿变虎 cause→mind（镇元子地仙、奎木狼天神下凡皆非野怪）；生成器 C_情节/hardships_81.py 为单一事实源，全线传播：scripts/output/data 重生成 + dataset/81-hardships.json 明细三行与聚合字段重算 + site/data/json 部署副本 + 81-hardships.html EMBEDDED 四块 + 三难明细行 + 页面 3 条洞察叙述重算（野怪 26 难中 18 被打死 69.2% / 安排 26 难 22 接走 4 收编 / 心魔 13 难 7 被打死）+ CSP 重生成；终态分布 arranged 26 / wild 26 / mount 16 / mind 13（总 81 不变·ending/difficulty 不变）。过程修正：旧 output/data 副本「明细旧聚合新」内部矛盾与重生成 cwd 默认路径坑（生成器默认相对 scripts/）如实处理。
+> - **T2 dialogue_sentiment 口径注记**：实测推翻评审「扩别名」前提——别名表已含佛祖/世尊/释迦牟尼/如来佛祖（utils/aliases.py 单源），如来 58 条为「带引号直引语」口径全集（原文如来系说话模式 51 处+倒装≈口径上限）；落地其有效部分=生成器 data_scope_note 常驻 + 输入源切换分回目录权威路径重生成（total 6565→6547、如来 58→59、孙悟空 3521→3515——系输入文本微差非规则变化）+ site/data/json 字节同步 + dialogue-sentiment.html EMBEDDED sentiment 块整体替换 + 叙述 8 处数字同步 + CSP。
+> - **T3 B/C 级性质标注**：评审「C 级 27 文件移出数据目录」撞 W636 冻结裁决（可视化砍到 20 已否决）+86 页口径门禁+B-9 登记不开工——不采纳结构重组，落地弱形式：16 页 cite-block 注入「数据性质」行（9 页趣味向：cave-estate/mbti-evolution/social-media/game-webnovel/narrative-experiment/workplace/famous-time-travel/century-dialogue/ai-dialogue；7 页方法论总结展示：chart-design/visual-art/ethics-consumption/deconstruction/cultural-misreading/methodology-matrix/risk-project）；counterfactual 主数据 A 级排除不标；纯 HTML 文本零样式零脚本（CSP 哈希不涉·token 覆盖率门禁兼容）。
+> - **验证**：ruff 全过；verify_delivery 核心全绿（32 槽+37 段锁）；CSP 855 页 0 漂移；生成器自洽断言（明细聚合==by_cause 字段）两副本全过；数据漂移门禁对账过（部署副本与生成器输出一致）。
+> - **文件**：scripts/C_情节/hardships_81.py、scripts/B_人物/character_nlp.py、dataset/81-hardships.json、site/data/json/hardships_81.json + dialogue_sentiment.json、site/data/81-hardships.html + dialogue-sentiment.html + 16 页标注、scripts/output/_w668_t3_inject.py（工具存档）、docs/00-导读/W批次编号对账表.md、六文档、四页脚、CITATION、file-index。
+> - **状态**：已落地（本批提交并 push origin/main）。
 
 ### v2.3.264（2026-10-05）：W662 暗色审计 reader 新页入基线 + 遗漏收敛（W659 蓝图预留批·WP-D2 收官批）
 > **来源**：用户「继续」启动 W659 蓝图预留批 W662（§4 实现批拆分末行·WP-D2 收官批）。
