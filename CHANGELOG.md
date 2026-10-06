@@ -4,13 +4,31 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W673），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W674），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.271（2026-10-06）：W674 站点质量批次三 — JS 交互缺陷 10 项修复 + D4 默认 A + 第四轮四项/P3 清理包 + e2e 补盲
+> **来源**：站点质量修复六批方案 V1.7 批次三（§五 WP-3.1–3.15·批次一/二 W672/W673 已收官）。
+> - **WP-3.1/3.2 cross-time-danmaku（ZH+EN）**：escapeHtml 从 renderHeroStarMap 提升至主脚本顶层（renderWorldMap 越界引用 ReferenceError 实证）；hero section 补 <svg id="hero-canvas">（原 d3.select 空选区·星图永不渲染——节点数 0→10 e2e 实证）；EN 镜像更重病=tooltip 挂载 div 根本不存在（JS 引用空选区·桌面同失效）随批新建。
+> - **WP-3.7 tooltip 定位三页（ZH+EN）**：criticism-history 宿主 section 补 position:relative（坐标按 stageRect 计算而 offsetParent 错位）；cross-time-danmaku #hero-tooltip 移入既有 relative 的 .hero（坐标系对齐·坐标计算不改）；chart-design sundial-tip 改 position:fixed（挂 body+视口坐标——absolute 随滚动错位·fixed 恒对视口；scatter/spiral 两处实测证伪=挂载容器内联 relative 本在位、偏差即设计偏移 +14/-10）。
+> - **WP-3.3/3.4/3.5 character-dynamic-network（ZH）**：播放边界 >=100 → >= STAGE_RANGES[currentStage].to（播放语义=播放当前阶段）；label selection 存 _labelSel 与 _nodeSel 同 dim（0.15/1）；setStage 首行调 exitNeighborhood()（切阶段清邻域残留全暗）。EN 镜像系不同代实现无此三病（已记录）。
+> - **WP-3.6/3.8 character-semantic-network（ZH+EN）**：renderForce tooltip 单例获取（3 调用+resize 重渲染原每次 append 泄漏；EN 为 .tooltip 类变体同病同修）；scaleSequential 去二次归一化（accessor 已除 maxWeight 再叠 domain 压缩——max 格色=interpolateYlOrRd(1) e2e 实证）。
+> - **WP-3.9 数据三项（ZH+EN）**：relationship-3d 度数 KPI 改「悟空/度数 12」（links 实算 12/7·CENTRALITY 同悟空不改）；图例 swatch 三处错色等量替换对齐 GROUP_COLORS（取经团 #e67e22/妖界 #5a7a3a/龙族 #7a5230）；presence-timeline 三张模拟派生图 caption 追加「出场为区间×固定密度模拟（非逐回真实数据）·曲线基于 31 个抽样回目」（EN 同步）。
+> - **WP-3.10 微优化**：relationship-3d 循环内 new Vector3 O(n²) → 顶层共享 _tmpV3（**惰性创建于 init3D：three.r128 为 defer，顶层语句时 THREE 未定义——初版顶层 new 致整块崩、e2e K9 抓获自纠**）；cross-time-danmaku loadMessages 模块级缓存+写入失效（弹幕循环每 2.5s JSON.parse）。
+> - **WP-3.11 P3**：81-hardships renderInsights 签名去参（洞察为注释性文字非派生）；concept-device commentators 9 条死数据实证 0 消费但删除与 §十一 dataset 冻结（批次一至五）+ 第 9 门禁对账冲突——让行保留、登记 Backlog 随批次六三方同步（dataset 真源+生成器+页面）；_shell.html 旧 audit 块 5 个删除（页面已是 W656 单模块）。
+> - **WP-3.13 D4 裁决默认 A（criticism-history ZH+EN）**：一次性演出语义保持+「重演」按钮（重置 animation 强制 reflow 恢复）+ reduced-motion 专项豁免（0.01ms 快进仍停「文字消失」终态——animation:none 回基础可见态）+ DESIGN.md §5 白名单登记（wordFloat 5s/bladeCut 6s/crackOpen 6s）。
+> - **WP-3.14 第四轮四项**：journey-geo-3d vertexColors:true（r128 废弃 API·EN 无此镜像页）+ WebGL catch 分支补 __geo3dStats（探针漏报防）；dialogue-sentiment KPI 实算改 819/1941/3787/3515 条 53.7%（json 真源实算·EN 回滚保持与其 EMBEDDED 旧快照自洽——EN 数据副本陈旧登记批次六）；journey-map-interactive「9 大难点」→「8 处难点」（isHardship 实测 8·文案/图例/KPI 四处·ZH+EN·FILE_INDEX 历史注释保留登记）。
+> - **WP-3.15 P3 清理包**：W042 a11y 空注释 78 文件删除（注释下方无实现·system.css 已有 :focus-visible）；game-webnovel rarity-pie-svg/element-donut-svg → rarity-treemap-svg/element-treemap-svg（ZH+EN·实渲染 treemap）；journey-spacetime 死函数 chapterNumFromDataChapter 删除；GitHub blob URL encode 维持 Backlog（方案既定不开工）。
+> - **WP-3.12 e2e 补盲**：tests/e2e/test_site_quality.js 15 断言（A1–A8+K9–K11）W674-E2E-PASS；scripts/package.json test:e2e 串联；test_smoke/test_deep 补 playwright 解析回退+字体 CORS 本地白名单（**test:e2e 套件无 CI workflow 引用（W204 时代本地套件）·本地首跑暴露 smoke/deep 存量 file:// 失败 10 项（13d tooltip/dashboard hero/quick-links/timeline hover 等——涉事页本批零改动·非本批回归·如实登记）**）。
+> - **验证**：ruff 全过；verify_delivery 核心全绿（37 门禁 42 段）；check_js_syntax 854 文件通过；三扫描器（head/缺分号/孤立）0；CSP 重生成（多轮·每改内联脚本必 regen 三度实证：探针全灭→replay 死代码→哈希失配）；e2e 15 断言全绿。dark-state-gate 与 Screenshot Review 以推送后 CI 为准。
+> - **文件**：site/data/*.html ×55、site/en/*.html ×36（JS 交互修复+镜像+清理包）、site/data/_shell.html、DESIGN.md（§5.1 白名单 +1 条）、tests/e2e/test_site_quality.js（新增）、tests/e2e/test_smoke.js、tests/e2e/test_deep.js（解析回退+白名单）、scripts/package.json（test:e2e 串联）、docs/00-导读/W批次编号对账表.md（W674 认领+翻转）、六文档级联、四页脚、CITATION、file-index。
+> - **处置收尾**：Backlog 新增两项——①concept-device commentators 三方同步（随批次六·§十一冻结让行）；②test:e2e smoke/deep 存量 file:// 失败 10 项适配（http 环境/用例更新·登记不开工）；批次四至六（W675-W677）按方案 §六-§八续作，批次四动工前按对账表认领 W675。
+> - **状态**：已落地（随本批级联提交；CI 五工作流以推送后 gh run list 为准）。
 
 ### v2.3.270（2026-10-06）：W673 站点质量批次二 — kpi-card 全局基类 122 页 + CSS 机械修复 526 处 + 第 35/36/37 门禁挂载
 > **来源**：站点质量修复六批方案 V1.7 批次二（§四 WP-2.1–2.6·批次一 W672 已收官）。
