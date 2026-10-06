@@ -9,7 +9,7 @@
     "test:deep": "node ../tests/e2e/test_deep.js",
     "test:visual": "node ../tests/e2e/test_visual.js",
     "test:visual:update": "node ../tests/e2e/test_visual.js --update-baseline",
-    "test:e2e": "node ../tests/e2e/test_smoke.js && node ../tests/e2e/test_deep.js",
+    "test:e2e": "node ../tests/e2e/test_smoke.js && node ../tests/e2e/test_deep.js && node ../tests/e2e/test_site_quality.js",
     "postinstall": "npx playwright install chromium"
   },
   "dependencies": {

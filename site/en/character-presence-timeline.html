@@ -1285,7 +1285,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <div class="definition"><strong>Definition:</strong> Characters appearing per chapter (from W100 characters.json, fields first_appear / last_appear). The curve reflects character density along the pilgrimage.</div>
   <div class="chart-block">
     <div class="chart-title">Characters per chapter (1-100)</div>
-    <div class="chart-caption">X: chapters 1-100 · Y: characters present that chapter · hover for detail</div>
+    <div class="chart-caption">X: chapters 1-100 · Y: characters present that chapter · hover for detail · presence derived from interval × fixed-density simulation (not per-chapter ground truth) · curves based on 31 sampled chapters</div>
     <svg id="chart-presence" class="chart-svg" width="100%" height="350"></svg>
   </div>
 </section>
@@ -1296,7 +1296,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <div class="definition"><strong>Definition:</strong> Heatmap of the top-15 characters' presence by chapter. Color depth = present that chapter (dark = present, light = absent), showing continuity vs. intermittence.</div>
   <div class="chart-block">
     <div class="chart-title">Top-15 presence heatmap (15 characters × 100 chapters)</div>
-    <div class="chart-caption">Rows: characters · Columns: chapters · Color: present = dark / absent = light</div>
+    <div class="chart-caption">Rows: characters · Columns: chapters · Color: present = dark / absent = light · presence derived from interval × fixed-density simulation (not per-chapter ground truth) · curves based on 31 sampled chapters</div>
     <svg id="chart-heatmap" class="chart-svg" width="100%" height="450"></svg>
   </div>
 </section>
@@ -1307,7 +1307,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <div class="definition"><strong>Definition:</strong> Growth curve of the top-10 characters by cumulative chapters present, showing each character's "accumulation speed" — steep slopes mark high-frequency periods.</div>
   <div class="chart-block">
     <div class="chart-title">Top-10 cumulative presence curve</div>
-    <div class="chart-caption">X: chapters 1-100 · Y: cumulative chapters present · one line per character</div>
+    <div class="chart-caption">X: chapters 1-100 · Y: cumulative chapters present · one line per character · presence derived from interval × fixed-density simulation (not per-chapter ground truth) · curves based on 31 sampled chapters</div>
     <svg id="chart-cumulative" class="chart-svg" width="100%" height="400"></svg>
     <div class="legend-row" id="cumulative-legend"></div>
   </div>

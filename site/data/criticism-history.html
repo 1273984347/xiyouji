@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-GitRb/Ck9icP7/Ju8Ocs1agsd0mxtUu6nRvEHzMo6G4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-GitRb/Ck9icP7/Ju8Ocs1agsd0mxtUu6nRvEHzMo6G4=' 'sha256-2YM6pkWKV9rmQSpvAfLfozX5RKKpgH9aZoUfoS0qvMQ='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>批评史长卷 · 详解西游记</title>
@@ -400,6 +400,9 @@ body {
         transition-duration: 0.01ms !important;
     }
     html { scroll-behavior: auto; }
+    /* W674 WP-3.13④：一次性演出动画（wordFloat/bladeCut/crackOpen 终态 opacity:0）
+       在 reduce 下不播放——0.01ms 快进仍会停在「文字消失」终态，直接回到基础可见态 */
+    .scalpel-word, .scalpel-blade, .text-crack { animation: none !important; }
 }
 a { color: inherit; text-decoration: none; }
 a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
@@ -1526,6 +1529,13 @@ td.num, th.num {
             line-height: 1.7;
             border-radius: 0 var(--radius-md) var(--radius-md) 0
         }
+        .scalpel-replay-row { margin-top: 12px; text-align: right; }
+        .scalpel-replay {
+            font-family: var(--font-sans); font-size: 0.85rem; color: var(--ink-soft);
+            background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-sm);
+            padding: 6px 14px; cursor: pointer;
+        }
+        .scalpel-replay:hover { border-color: var(--accent); color: var(--accent); }
         .scalpel-note strong { color: var(--accent); }
         .scalpel-note em { color: var(--accent-2); font-style: italic; }
         @keyframes wordFloat {
@@ -1603,7 +1613,6 @@ td.num, th.num {
         
         
     
-/* W042 a11y: 全局键盘焦点可见性 */
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -1688,7 +1697,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         </div>
 
         <!-- 核心可视化 1：解读河流图 -->
-        <section class="section">
+        <section class="section" style="position:relative">
             <h2 class="section-title">解读河流图 · River of Interpretations</h2>
             <div class="section-sub">
                 横轴为时间（1500s—2020s），纵轴为解读倾向：<strong>上</strong>＝证道/内丹，<strong>中</strong>＝社会批判/文学本位，<strong>下</strong>＝游戏/解构/反叛。
@@ -1756,6 +1765,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
             <div class="scalpel-stage">
                 <svg id="scalpel-svg" viewBox="0 0 900 420" preserveAspectRatio="xMidYMid meet"></svg>
+            </div>
+            <div class="scalpel-replay-row">
+                <button type="button" id="scalpel-replay" class="scalpel-replay">重演解剖动画</button>
             </div>
             <div class="scalpel-note">
                 <strong>鲁迅《中国小说史略》（1923）</strong>："<em>作者禀性，复善谐剧，故虽述变幻恍忽之事，亦每杂解颐之言，使神魔皆有人情，精魅亦通世故……</em>"
@@ -2766,6 +2778,18 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     document.addEventListener('touchmove', function () {
         if (prev) { prev.dispatchEvent(new MouseEvent('mouseout', { bubbles: true })); var ln2 = prev; while (ln2 && ln2 !== document.documentElement) { ln2.dispatchEvent(new MouseEvent('mouseleave')); ln2 = ln2.parentNode; } prev = null; }
     }, { passive: true, capture: true });
+})();
+// W674 WP-3.13（D4 裁决默认 A）：一次性演出语义保持 + 「重演」按钮
+(function () {
+    const btn = document.getElementById("scalpel-replay");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+        document.querySelectorAll(".scalpel-word, .scalpel-blade, .text-crack").forEach(function (el) {
+            el.style.animation = 'none';
+            void el.getBoundingClientRect(); // 强制 reflow 重置动画时钟
+            el.style.animation = '';
+        });
+    });
 })();
 </script>
 <script defer src="../static/js/cite-box.js"></script>

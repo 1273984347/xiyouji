@@ -535,6 +535,7 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 **白名单例外**（仅此两处，新增须走规范变更）：
 - hero 区强调动效：600ms
 - KPI count-up：900ms（`easeOutExpo`·`1 - 2^(-10t)`）
+- 一次性叙事演出（W674 登记·criticism-history 解剖剧场）：`wordFloat 5s / bladeCut 6s / crackOpen 6s`——`animation … 1` 播放一次后停在终态，非循环/交互反馈动效；配「重演」按钮（点击重置 `animation` 强制 reflow 后恢复）与 reduced-motion 专项豁免（`animation: none` 回基础可见态）。
 
 全站硬指标：`d3 .duration(N)` 数字形态 N ≤ 600（路径 draw-in 的 3000/1800/1500 旧值已全部归一，见 W462）；`.transition()` 裸调用必须显式 `.duration()`。
 

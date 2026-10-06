@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-ssHhx3a2VPJwGEwvGnlXOZSE8Al16KTlwQJffc6EU+s=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-JntU8cBapftiTk86JnXFHJnmsOkidLgFQCyWyivnWyk=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>引语情感分析 · 详解西游记</title>
@@ -1536,12 +1536,12 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
             <div class="kpi-card alt-3">
                 <div class="label">POSITIVE · 正向引语</div>
-                <div class="value">821</div>
+                <div class="value">819</div>
                 <div class="desc">占比 12.5% · 慈悲 / 救度 / 善行类引语</div>
             </div>
             <div class="kpi-card alt-4">
                 <div class="label">NEGATIVE · 负向引语</div>
-                <div class="value">1944</div>
+                <div class="value">1941</div>
                 <div class="desc">占比 29.6% · 战斗 / 妖魔 / 苦难类引语</div>
             </div>
         </div>
@@ -1557,17 +1557,17 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="stat-row">
                 <div class="stat-card positive">
                     <div class="stat-label">POSITIVE · 正向</div>
-                    <div class="stat-value">821</div>
+                    <div class="stat-value">819</div>
                     <div class="stat-pct">12.5%</div>
                 </div>
                 <div class="stat-card neutral">
                     <div class="stat-label">NEUTRAL · 中性</div>
-                    <div class="stat-value">3800</div>
-                    <div class="stat-pct">57.9%</div>
+                    <div class="stat-value">3787</div>
+                    <div class="stat-pct">57.8%</div>
                 </div>
                 <div class="stat-card negative">
                     <div class="stat-label">NEGATIVE · 负向</div>
-                    <div class="stat-value">1944</div>
+                    <div class="stat-value">1941</div>
                     <div class="stat-pct">29.6%</div>
                 </div>
             </div>
@@ -7112,13 +7112,13 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         ol.selectAll('*').remove();
 
         const insights = [
-            `<strong>全书负向引语（29.6%）高于正向引语（12.5%）</strong>，符合《西游记》打妖怪的冲突叙事特征。中性引语占比最高（57.9%），多为叙事性应答。`,
-            `<strong>孙悟空是 Top 1 说话者（3521 条 / 53.6%）</strong>，avg_sentiment = -0.47，负向偏多符合其战斗角色。其 Top 正向词为"圣/救/化"，Top 负向词为"妖/打/怪"。`,
+            `<strong>全书负向引语（29.6%）高于正向引语（12.5%）</strong>，符合《西游记》打妖怪的冲突叙事特征。中性引语占比最高（57.8%），多为叙事性应答。`,
+            `<strong>孙悟空是 Top 1 说话者（3515 条 / 53.7%）</strong>，avg_sentiment = -0.47，负向偏多符合其战斗角色。其 Top 正向词为"圣/救/化"，Top 负向词为"妖/打/怪"。`,
             `<strong>唐僧 avg_sentiment 偏正向</strong>（慈悲为怀），但遇妖怪时负向引语增多。作为取经团队的核心，其情感波动直接影响团队氛围。`,
             `<strong>猪八戒 avg_sentiment 中性偏负</strong>（呆子常被骂），引语数居 Top 3，其贪吃好色的性格特征在负向词中有所体现。`,
             `<strong>沙僧引语较少（318 条）</strong>，多为应答（中性偏正），符合其沉默寡言、忠厚老实的角色定位。`,
             `<strong>观音 avg_sentiment 正向偏多</strong>（救苦救难角色），作为取经项目的实际执行总监，其引语多体现慈悲与决断。`,
-            `<strong>中性引语占比最高（57.9%）</strong>，这与古典小说的叙事体特征一致——大量引语为信息传递性应答，而非情感表达。`,
+            `<strong>中性引语占比最高（57.8%）</strong>，这与古典小说的叙事体特征一致——大量引语为信息传递性应答，而非情感表达。`,
             `<strong>数据基于零依赖情感词典</strong>，多义词（好/是/罢了）不收入，可能低估情感极性。未来可结合上下文语义分析提升准确度。`
         ];
 

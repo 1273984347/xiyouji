@@ -1567,7 +1567,7 @@ td.num, th.num {
             text-align: left;
         }
         .sundial-tip {
-            position: absolute;
+            position: fixed; /* W674 WP-3.7：tip 挂 body 且按视口坐标（clientX/Y）定位——absolute 随滚动错位，fixed 恒对视口 */
             pointer-events: none;
             background: var(--dark);
             color: var(--paper-warm);
@@ -1705,7 +1705,6 @@ td.num, th.num {
             font-family: "JetBrains Mono", monospace;
         }
     
-/* W042 a11y: 全局键盘焦点可见性 */
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 

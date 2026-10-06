@@ -19,7 +19,13 @@
  *   2 = 脚本错误
  */
 
-const { chromium } = require('playwright');
+let chromium;
+try {
+  ({ chromium } = require('playwright'));
+} catch (e) {
+  // tests/e2e 无本地 node_modules（playwright 安装在 scripts/）——本地跑 test:e2e 时显式解析（W674）
+  ({ chromium } = require(require.resolve('playwright', { paths: [require('path').join(__dirname, '..', '..', 'scripts')] })));
+}
 const fs = require('fs');
 const path = require('path');
 
@@ -164,6 +170,8 @@ async function testPage(browser, page, pageUrl, pageName, category, timeout) {
     !msg.includes('net::ERR') &&
     !msg.includes('URL scheme "file" is not supported') &&
     !msg.includes('Fetch API cannot load')
+    // file:// 下字体按 CORS 判为跨源被拒（origin 'null'）——CI 的 http 环境不触发，属本地环境噪声（W674）
+    && !msg.includes('Access to font')
   );
 
   const passed = errors.length === 0 && blockingErrors.length === 0;

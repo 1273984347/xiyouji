@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-UWQF7Fz9M7EgKm+u69hl0cMDUEbMnwiexvP3/sZ5NN0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-MGEG/h97887IbNv38fkQODLtdL0P5W8NY49CepDqaF0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Game &amp; Web Novel · Character Card Power System · Annotated Journey to the West</title>
@@ -1456,9 +1456,9 @@ td.num, th.num {
             align-items: center;
         }
         @media (max-width: 768px) { .pie-wrap { grid-template-columns: 1fr; } }
-        #rarity-pie-svg { height: 360px; }
+        #rarity-treemap-svg { height: 360px; }
         #power-bar-svg { height: 480px; }
-        #element-donut-svg { height: 360px; }
+        #element-treemap-svg { height: 360px; }
         #artifact-scatter-svg { height: 440px; }
         #webnovel-bar-svg { height: 420px; }
         .pie-legend {
@@ -1753,7 +1753,6 @@ td.num, th.num {
             font-family: "JetBrains Mono", monospace;
         }
     
-/* W042 a11y: 全局键盘焦点可见性 */
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -1839,7 +1838,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="section-sub">12 cards distributed by UR/SSR/SR/R/N counts, shown as rectangles sized by share.</div>
             <div class="pie-wrap">
                 <div class="chart-wrap" style="position:relative;">
-                    <svg id="rarity-pie-svg"></svg>
+                    <svg id="rarity-treemap-svg"></svg>
                     <div class="chart-tip" id="rarity-tip"></div>
                 </div>
                 <div class="pie-legend" id="rarity-legend">
@@ -1864,7 +1863,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="section-sub">12 cards distributed across 10 elements (Metal Wood Water Fire Earth Thunder Wind Light Dark Heart).</div>
             <div class="pie-wrap">
                 <div class="chart-wrap" style="position:relative;">
-                    <svg id="element-donut-svg"></svg>
+                    <svg id="element-treemap-svg"></svg>
                     <div class="chart-tip" id="element-tip"></div>
                 </div>
                 <div class="pie-legend" id="element-legend">
@@ -2484,7 +2483,7 @@ function renderTreemap(opts){
     function renderRarityPie(summary){
   var data=RARITY_ORDER.filter(r=>summary.rarity_distribution[r]).map(r=>({rarity:r,count:summary.rarity_distribution[r]}));
   renderTreemap({
-    svgId:'rarity-pie-svg', data:data, legendId:'rarity-legend', tipId:'rarity-tip',
+    svgId:'rarity-treemap-svg', data:data, legendId:'rarity-legend', tipId:'rarity-tip',
     nameOf:d=>d.rarity, valueOf:d=>d.count, colorOf:d=>RARITY_COLORS[d.rarity],
     htmlOf:(d,total)=>`<div class="tip-title">${d.rarity} · Rarity</div>Count: <strong style="color:var(--accent-soft);">${d.count} cards</strong><br/>Share: ${((d.count/total)*100).toFixed(1)}%`
   });
@@ -2622,7 +2621,7 @@ function renderTreemap(opts){
     function renderElementDonut(summary){
   var data=Object.entries(summary.element_distribution).map(function(kv){return {element:kv[0],count:kv[1]};});
   renderTreemap({
-    svgId:'element-donut-svg', data:data, legendId:'element-legend', tipId:'element-tip',
+    svgId:'element-treemap-svg', data:data, legendId:'element-legend', tipId:'element-tip',
     nameOf:d=>d.element, valueOf:d=>d.count, colorOf:d=>elemColor(d.element),
     htmlOf:(d,total)=>`<div class="tip-title">${d.element} · Element</div>Count: <strong style="color:var(--accent-soft);">${d.count} cards</strong><br/>Share: ${((d.count/total)*100).toFixed(1)}%`
   });

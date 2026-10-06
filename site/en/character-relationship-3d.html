@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-fPIsUBWLEWYyQ49xciB21Psy/gYAySU4WIkZ13ZgGx8=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-bbxKaV2xV0VF5ltt2CNqt67NkpzG2dQZ8YMfSajPJcE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Character Relations 3D Network · Journey to the West Explained</title>
@@ -1301,11 +1301,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     </div>
                 </div>
                 <div class="legend">
-                    <div class="legend-item"><span class="legend-swatch" style="background:#C9A063"></span>Pilgrimage</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#e67e22"></span>Pilgrimage</div>
                     <div class="legend-item"><span class="legend-swatch" style="background:#3a6b8c"></span>Heaven</div>
                     <div class="legend-item"><span class="legend-swatch" style="background:#8c2a2a"></span>Buddhist</div>
-                    <div class="legend-item"><span class="legend-swatch" style="background:#6B8E5A"></span>Demon realm</div>
-                    <div class="legend-item"><span class="legend-swatch" style="background:#C9A063"></span>Dragon clan</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#5a7a3a"></span>Demon realm</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#7a5230"></span>Dragon clan</div>
                 </div>
             </div>
         </section>
@@ -1348,7 +1348,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             {label: "EDGES · count", value: "32", desc: "relation edges"},
             {label: "CLUSTERS · count", value: "5", desc: "faction clusters"},
             {label: "CENTRALITY · highest", value: "Wukong", desc: "degree centrality 0.78"},
-            {label: "DEGREE · highest", value: "Tripitaka", desc: "degree 9"}
+            {label: "DEGREE · highest", value: "Wukong", desc: "degree 12"}
         ],
         // 22 个角色节点：id, name, group (0=取经团,1=天庭,2=佛门,3=妖界,4=龙族), importance (1-10), desc
         nodes: [
@@ -1433,6 +1433,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     let raycaster, mouse;
     let nodePositions = [];
     let velocity = [];
+    let _tmpV3 = null; // W674 WP-3.10: shared temp vector inside loops (originally new-ed O(n^2) times per frame) - lazily created in init3D (three.r128 is deferred, THREE undefined at top level; regression caught by W674 e2e)
     let selectedNode = null;
 
     function init3D() {
@@ -1442,6 +1443,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
         // 场景
         scene = new THREE.Scene();
+        _tmpV3 = new THREE.Vector3(); // W674 WP-3.10 惰性创建
         scene.background = new THREE.Color(0x1a2530);
         scene.fog = new THREE.Fog(0x1a2530, 200, 600);
 
@@ -1704,7 +1706,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         // 节点间斥力
         for (let i = 0; i < nodePositions.length; i++) {
             for (let j = i + 1; j < nodePositions.length; j++) {
-                const diff = new THREE.Vector3().subVectors(nodePositions[i], nodePositions[j]);
+                const diff = _tmpV3.copy(nodePositions[i]).sub(nodePositions[j]); // W674 WP-3.10
                 const dist = Math.max(0.1, diff.length());
                 const force = repulsion / (dist * dist);
                 diff.normalize().multiplyScalar(force);
@@ -1717,7 +1719,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         linkLines.forEach(link => {
             const i = link.source - 1;
             const j = link.target - 1;
-            const diff = new THREE.Vector3().subVectors(nodePositions[j], nodePositions[i]);
+            const diff = _tmpV3.copy(nodePositions[j]).sub(nodePositions[i]); // W674 WP-3.10
             const dist = Math.max(0.1, diff.length());
             const force = (dist - idealLength) * attraction;
             diff.normalize().multiplyScalar(force);

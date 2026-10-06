@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-BsXk0lkq+r+TXme/BDkh/dbdObXwkBCI7TcMKjv02KE='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-lB4IaC40Z4TKuJTHpxTj28KuluF3dxlNBBB4juiCKyU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>西游地理 3D · 详解西游记</title>
@@ -1489,7 +1489,7 @@ td.num, th.num {
         geo.computeVertexNormals();
         geo.rotateX(-Math.PI / 2);
         terrainMesh = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({
-            vertexColors: THREE.VertexColors,
+            vertexColors: true, // W674 WP-3.14①：r128 移除 THREE.VertexColors 常量（布尔形态）
             side: THREE.DoubleSide
         }));
         scene.add(terrainMesh);
@@ -1709,6 +1709,7 @@ td.num, th.num {
         } catch (e) {
             // W646/B-4：WebGL 不可用（无硬件加速/被禁用）时静态回退，避免整段初始化死亡
             container.innerHTML = '<div class="webgl-fallback">3D 地理视图需要 WebGL 支持，当前环境不可用。可改用支持 WebGL 的现代浏览器，或查看<a class="fb-link" href="journey-route.html">取经路线图（2D）</a>。</div>';
+            window.__geo3dStats = {nodes: 0, route: 0, canvas: false, threeOk: true, webgl: false}; // W674 WP-3.14②：探针分支补 stats（防漏报）
             return;
         }
         renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 2));
