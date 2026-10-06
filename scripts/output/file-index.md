@@ -11,6 +11,17 @@
 ---
 
 
+## W674 W674 站点质量批次三（2026-10-06·v2.3.271）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data + site/en/*.html ×91 | W674 | 更新·WP-3.1–3.11/3.13–3.15 JS 交互修复与清理包（含 _shell.html 旧 audit 块删除） |
+| DESIGN.md | W674 | 更新·§5.1 时长白名单登记一次性叙事演出三项 |
+| tests/e2e/test_site_quality.js | W674 | 新增·批次三 e2e 套件（A1–A8+K9–K11·15 断言） |
+| tests/e2e/test_smoke.js + test_deep.js | W674 | 更新·playwright 解析回退+字体 CORS 本地白名单 |
+| scripts/package.json | W674 | 更新·test:e2e 串联 test_site_quality |
+| docs/00-导读/W批次编号对账表.md | W674 | 更新·W674 认领 + 翻转 |
+
 ## W673 W673 站点质量批次二（2026-10-06·v2.3.270）
 
 | 文件 | W | 说明 |
