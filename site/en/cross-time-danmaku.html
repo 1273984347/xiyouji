@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-hiLmVF0MgeisS+diWmcc8+QZa+sQgG8QAHuhikzkCss=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-jxn6tVsgd5nui5CFlGacC+uAKDN+wolRh0hSI0YShB0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Cross-Time Danmaku Museum · Annotated Journey to the West</title>
@@ -1459,7 +1459,6 @@ td.num, th.num {
             .intl-grid { grid-template-columns: 1fr; }
         }
     
-/* W042 a11y: 全局键盘焦点可见性 */
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -1497,6 +1496,8 @@ main { overflow-x: clip; }
         <h1>Cross-Time Danmaku Museum</h1>
         <p class="subtitle">CROSS-TIME DANMAKU MUSEUM</p>
         <p class="tagline">Five centuries of critical history · resonance across all ages · you are the critic.</p>
+        <svg id="hero-canvas" aria-label="Cross-time star map" role="img"></svg>
+        <div class="chart-tooltip" id="hero-tooltip"></div>
     </section>
 
 <main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
@@ -1792,15 +1793,25 @@ function renderInternationalCritics(criticsData, adaptationsData) {
     card.append("div").attr("class", "i-work").text(d => "Representative work: " + d.work + " · " + d.contribution);
 }
 
+// P2-5 fix: escape data-interpolated tooltip/popup strings - W674 WP-3.1
+// Hoisted to top-level script scope: renderWorldMap referenced the copy nested inside
+// renderHeroStarMap (ReferenceError at runtime).
+function escapeHtml(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+let __msgsCache = null; // W674 WP-3.10: module-level cache - danmaku loop calls loadMessages every 2.5s; original re-parsed localStorage each time
 function loadMessages() {
-    try { return JSON.parse(localStorage.getItem("xiyouji_danmaku_messages") || "[]"); }
-    catch (e) { return []; }
+    if (__msgsCache) return __msgsCache;
+    try { __msgsCache = JSON.parse(localStorage.getItem("xiyouji_danmaku_messages") || "[]"); }
+    catch (e) { __msgsCache = []; }
+    return __msgsCache;
 }
 function saveMessage(text) {
     try {
         const msgs = loadMessages();
         msgs.push({ user_content: text, timestamp: new Date().toISOString(), age_group_tag: currentAgeGroup });
         localStorage.setItem("xiyouji_danmaku_messages", JSON.stringify(msgs));
+        __msgsCache = msgs; // invalidate cache after write (W674 WP-3.10)
         return true;
     } catch (e) {
         console.warn('[WARN] localStorage write failed: ', e.message);
@@ -1816,10 +1827,6 @@ function renderHeroStarMap(profilesData) {
     const heroEl = document.querySelector(".hero");
     if (!heroEl) return;
     const svg = d3.select("#hero-canvas");
-    // P2-5 修复：tooltip/popup 数据拼串转义（name/role/quote 等来自数据文件）
-    function escapeHtml(s) {
-      return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-    }
     const tooltip = d3.select("#hero-tooltip");
     const width = heroEl.clientWidth;
     const height = heroEl.clientHeight;

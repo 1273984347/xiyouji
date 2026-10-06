@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-krmm3xtr9F3q0th/GXkS7kk5jCYl8+7paZN+/XMmCHA=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-jqa5mebxWYI3X5V2iIfeSS/sjP73lyQl4UEYhr5mS5k=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>人物关系动态网络 · 详解西游记</title>
@@ -1813,6 +1813,7 @@ const link = svg.append("g")
             .attr("text-anchor", "middle")
             .attr("dy", d => -rScale(d.freq) - 6)
             .text(d => d.id);
+        _labelSel = label; // W674 WP-3.4
 
         // 仿真 tick
         simulation.on("tick", () => {
@@ -1908,6 +1909,7 @@ const link = svg.append("g")
     // ============= 控制 =============
     function setStage(stage) {
         currentStage = +stage;
+        exitNeighborhood(); // W674 WP-3.5：切阶段先退出邻域，防残留全暗
         // 同步按钮状态
         document.querySelectorAll(".stage-btn").forEach(b => {
             if (+b.dataset.stage === currentStage) {
@@ -1946,6 +1948,7 @@ const link = svg.append("g")
     let neighborhoodNode = null;   // 邻域中心节点 id（null = 未激活）
     let playTimer = null;          // 播放定时器
     let _nodeSel = null;           // 当前节点 selection（renderNetwork 内维护）
+    let _labelSel = null;          // W674 WP-3.4：节点标签 selection（与 _nodeSel 同步 dim）
     let _linkSels = [];            // 当前边 selection 列表（Canvas 绘制用）
     let _activeEdges = [];         // 当前活跃边数据
 
@@ -2006,6 +2009,12 @@ const link = svg.append("g")
                 this.setAttribute("opacity", dim ? 0.15 : 1);
             });
         }
+        if (_labelSel) { // W674 WP-3.4：标签层与节点层同 dim（原实现只 dim 节点，标签残留高亮）
+            _labelSel.each(function(d) {
+                const dim = neighborhoodNode && !_isNeighborNode(d, neighborhoodNode);
+                this.setAttribute("opacity", dim ? 0.15 : 1);
+            });
+        }
         if (window._drawLinks) window._drawLinks();
     }
 
@@ -2048,7 +2057,7 @@ const link = svg.append("g")
     function startPlayback() {
         stopPlayback();
         playTimer = setInterval(() => {
-            if (currentChapter >= 100) {
+            if (currentChapter >= STAGE_RANGES[currentStage].to) {
                 stopPlayback();
                 return;
             }

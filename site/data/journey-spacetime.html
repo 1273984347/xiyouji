@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-Xug4taQEPJoh7Wfo0S0v+tUAOb1QoOrp0GTe4aAQBfU=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-Ih84AZ7JL5V9Fbore/8wXtlhSTkNjz7xMqxGSaooOG4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经路线时空双轴可视化 · 详解西游记</title>
@@ -1739,11 +1739,6 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         const f = A1_DOC_MAP[String(n)];
         // 页面位于 site/data/，上溯两级到仓库根（file:// 与本地 http 模式均有效；Pages 仅部署 site/，docs 直链为本地模式特性，与 dashboard 既有口径一致）
         return f ? "https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/" + f : "https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/";
-    }
-    // 从 data-chapter（第12回 / 第15回 / 第47-49回）提取首数字回号 N
-    function chapterNumFromDataChapter(s) {
-        const m = /第\s*(\d+)/.exec(String(s || ""));
-        return m ? +m[1] : null;
     }
     // 深化 D1：UI 角落显示当前激活章节
     function updateChapterCorner(ch) {

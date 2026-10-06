@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-0z93MuHNzTiLdO35Bq1o/tnvU+2Ng23h8iTsG+UlHWc=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-lxEirU1YVvrsRFcNt1C5FeEr87GGLBe48FZ1p3UP7y4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>人物语义网络可视化 · 详解西游记</title>
@@ -1580,7 +1580,10 @@ function renderForce(selector, nodes, links, colorMap, groupKey, height) {
   const width = +svg.attr('width') || 800;
   svg.attr('viewBox', `0 0 ${width} ${height}`);
   svg.selectAll('*').remove();
-  const tooltip = d3.select('body').append('div').attr('class', 'chart-tooltip');
+  // W674 WP-3.6：tooltip 单例获取（renderForce 被调用 3 次 + resize 重渲染，原实现每次 append 新 tooltip 泄漏累积）
+  const tooltip = d3.select('body').select('div.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
+    : d3.select('body').select('div.chart-tooltip');
 
   const sim = d3.forceSimulation(nodes).alphaDecay(0.08).velocityDecay(0.5)
     .force('link', d3.forceLink(links).id(d => d.id).distance(80).strength(d => 0.1 + d.weight * 0.02))
@@ -1666,7 +1669,7 @@ function renderHeatmap() {
   const maxWeight = d3.max(data, d => d.weight);
 
   const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
-  const colorScale = d3.scaleSequential(d => d3.interpolateYlOrRd(d / maxWeight)).domain([0, maxWeight]);
+  const colorScale = d3.scaleSequential(d3.interpolateYlOrRd).domain([0, maxWeight]); // W674 WP-3.8：修二次归一化（原 accessor 已除 maxWeight 再叠 domain 压缩）
 
   data.forEach(d => {
     const i = networks.indexOf(d.from);

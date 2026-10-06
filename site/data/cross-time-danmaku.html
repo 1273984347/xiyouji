@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-XzsIoGwVfF8IEJQDOApr1eeRE1/rZNpChcYmAYO+ipY='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-9OkUXteNIj8ZSMia0tipN2atSxyVs3xShe5jYms8Y54='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>跨时空弹幕博物馆 · 详解西游记</title>
@@ -28,7 +28,7 @@
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
  * ----------------------------------------------
- * v2.3.270 · W673 站点质量批次二 · v3 · W476 纸感轻立体（在 v2/W334 基础上增层 · 见 DESIGN.md §4A）
+ * v2.3.271 · W674 站点质量批次三 · v2.3.270 · W673 站点质量批次二 · v3 · W476 纸感轻立体（在 v2/W334 基础上增层 · 见 DESIGN.md §4A）
  * 全站统一设计令牌 + 字体分层 + hero 覆写层。
  *
  * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
@@ -1460,7 +1460,6 @@ td.num, th.num {
             .intl-grid { grid-template-columns: 1fr; }
         }
     
-/* W042 a11y: 全局键盘焦点可见性 */
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -1502,6 +1501,8 @@ main { overflow-x: clip; }
         <h1>跨时空弹幕博物馆</h1>
         <p class="subtitle">CROSS-TIME DANMAKU MUSEUM</p>
         <p class="tagline">五百年批评史·全年龄共鸣·你就是批评家。</p>
+        <svg id="hero-canvas" aria-label="跨时空人物星图" role="img"></svg>
+        <div class="chart-tooltip" id="hero-tooltip"></div>
     </section>
 
 <main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
@@ -1588,7 +1589,6 @@ main { overflow-x: clip; }
     </footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
-<div class="chart-tooltip" id="hero-tooltip"></div>
 <script>
 const EMBEDDED_DATA = {
     celebrity_profiles: [
@@ -1813,15 +1813,25 @@ function renderInternationalCritics(criticsData, adaptationsData) {
     card.append("div").attr("class", "i-work").text(d => "代表作：" + d.work + " · " + d.contribution);
 }
 
+// P2-5 修复：tooltip/popup 数据拼串转义（name/role/quote 等来自数据文件）——W674 WP-3.1
+// 提升至主脚本顶层：renderWorldMap 与 renderHeroStarMap 各自调用同一份（原定义嵌在
+// renderHeroStarMap 内，renderWorldMap 越界引用触发 ReferenceError）
+function escapeHtml(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+let __msgsCache = null; // W674 WP-3.10：模块级缓存——弹幕循环每 2.5s 调 loadMessages，原实现每次 JSON.parse(localStorage)
 function loadMessages() {
-    try { return JSON.parse(localStorage.getItem("xiyouji_danmaku_messages") || "[]"); }
-    catch (e) { return []; }
+    if (__msgsCache) return __msgsCache;
+    try { __msgsCache = JSON.parse(localStorage.getItem("xiyouji_danmaku_messages") || "[]"); }
+    catch (e) { __msgsCache = []; }
+    return __msgsCache;
 }
 function saveMessage(text) {
     try {
         const msgs = loadMessages();
         msgs.push({ user_content: text, timestamp: new Date().toISOString(), age_group_tag: currentAgeGroup });
         localStorage.setItem("xiyouji_danmaku_messages", JSON.stringify(msgs));
+        __msgsCache = msgs; // 写入后同步失效缓存（W674 WP-3.10）
         return true;
     } catch (e) {
         console.warn('[WARN] localStorage 写入失败：', e.message);
@@ -1837,10 +1847,6 @@ function renderHeroStarMap(profilesData) {
     const heroEl = document.querySelector(".hero");
     if (!heroEl) return;
     const svg = d3.select("#hero-canvas");
-    // P2-5 修复：tooltip/popup 数据拼串转义（name/role/quote 等来自数据文件）
-    function escapeHtml(s) {
-      return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-    }
     const tooltip = d3.select("#hero-tooltip");
     const width = heroEl.clientWidth;
     const height = heroEl.clientHeight;

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-pcinago8cPqvi62G0ctkKJE3kLeK5Z/MOn+PUbcX2YE=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-p8M58i0AK5MhBI1IxE3NsiWiEy+u0+GoQ0E6sFI5EYA=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>游戏网文 · 角色卡牌战力系统 · 详解西游记</title>
@@ -1457,9 +1457,9 @@ td.num, th.num {
             align-items: center;
         }
         @media (max-width: 768px) { .pie-wrap { grid-template-columns: 1fr; } }
-        #rarity-pie-svg { height: 360px; }
+        #rarity-treemap-svg { height: 360px; }
         #power-bar-svg { height: 480px; }
-        #element-donut-svg { height: 360px; }
+        #element-treemap-svg { height: 360px; }
         #artifact-scatter-svg { height: 440px; }
         #webnovel-bar-svg { height: 420px; }
         .pie-legend {
@@ -1754,7 +1754,6 @@ td.num, th.num {
             font-family: "JetBrains Mono", monospace;
         }
     
-/* W042 a11y: 全局键盘焦点可见性 */
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -1859,7 +1858,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="section-sub">12 张卡牌按 UR/SSR/SR/R/N 数量分布，以矩形面积表示占比。</div>
             <div class="pie-wrap">
                 <div class="chart-wrap" style="position:relative;">
-                    <svg id="rarity-pie-svg"></svg>
+                    <svg id="rarity-treemap-svg"></svg>
                     <div class="chart-tip" id="rarity-tip"></div>
                 </div>
                 <div class="pie-legend" id="rarity-legend">
@@ -1884,7 +1883,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="section-sub">12 张卡牌按 10 种元素（金木水火土雷风光暗心）分布。</div>
             <div class="pie-wrap">
                 <div class="chart-wrap" style="position:relative;">
-                    <svg id="element-donut-svg"></svg>
+                    <svg id="element-treemap-svg"></svg>
                     <div class="chart-tip" id="element-tip"></div>
                 </div>
                 <div class="pie-legend" id="element-legend">
@@ -2511,7 +2510,7 @@ function renderTreemap(opts){
     function renderRarityPie(summary){
   var data=RARITY_ORDER.filter(r=>summary.rarity_distribution[r]).map(r=>({rarity:r,count:summary.rarity_distribution[r]}));
   renderTreemap({
-    svgId:'rarity-pie-svg', data:data, legendId:'rarity-legend', tipId:'rarity-tip',
+    svgId:'rarity-treemap-svg', data:data, legendId:'rarity-legend', tipId:'rarity-tip',
     nameOf:d=>d.rarity, valueOf:d=>d.count, colorOf:d=>RARITY_COLORS[d.rarity],
     htmlOf:(d,total)=>`<div class="tip-title">${d.rarity} · 稀有度</div>数量：<strong style="color:var(--accent-soft);">${d.count} 张</strong><br/>占比：${((d.count/total)*100).toFixed(1)}%`
   });
@@ -2649,7 +2648,7 @@ function renderTreemap(opts){
     function renderElementDonut(summary){
   var data=Object.entries(summary.element_distribution).map(function(kv){return {element:kv[0],count:kv[1]};});
   renderTreemap({
-    svgId:'element-donut-svg', data:data, legendId:'element-legend', tipId:'element-tip',
+    svgId:'element-treemap-svg', data:data, legendId:'element-legend', tipId:'element-tip',
     nameOf:d=>d.element, valueOf:d=>d.count, colorOf:d=>elemColor(d.element),
     htmlOf:(d,total)=>`<div class="tip-title">${d.element} · 元素属性</div>数量：<strong style="color:var(--accent-soft);">${d.count} 张</strong><br/>占比：${((d.count/total)*100).toFixed(1)}%`
   });

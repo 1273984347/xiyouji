@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-ZNp8XEUAfNWRWaPDVrHp4TShTu8w3jL45bmRiLSBT7M=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-LSTLK4d97uMbKXHZopf6B3qlMTxso7EeaDzMt7bz0jo=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-qs+poalD+B70ZLEimbNXweBZu1fvC+u+567cGY0VkqI=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-LSTLK4d97uMbKXHZopf6B3qlMTxso7EeaDzMt7bz0jo=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Character Semantic Network · 详解西游记</title>
@@ -1567,7 +1567,10 @@ function renderForce(selector, nodes, links, colorMap, groupKey, height) {
   const width = +svg.attr('width') || 800;
   svg.attr('viewBox', `0 0 ${width} ${height}`);
   svg.selectAll('*').remove();
-  const tooltip = d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0);
+  // W674 WP-3.6: singleton tooltip (renderForce called 3x + re-render on resize; original appended a new one each time)
+  const tooltip = d3.select('body').select('div.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('body').select('div.tooltip');
 
   const sim = d3.forceSimulation(nodes).alphaDecay(0.08).velocityDecay(0.5)
     .force('link', d3.forceLink(links).id(d => d.id).distance(80).strength(d => 0.1 + d.weight * 0.02))
@@ -1653,7 +1656,7 @@ function renderHeatmap() {
   const maxWeight = d3.max(data, d => d.weight);
 
   const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
-  const colorScale = d3.scaleSequential(d => d3.interpolateYlOrRd(d / maxWeight)).domain([0, maxWeight]);
+  const colorScale = d3.scaleSequential(d3.interpolateYlOrRd).domain([0, maxWeight]); // W674 WP-3.8: fix double normalization (accessor already divided by maxWeight, domain compressed again)
 
   data.forEach(d => {
     const i = networks.indexOf(d.from);

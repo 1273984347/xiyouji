@@ -24,7 +24,13 @@
  *   2 = 脚本错误
  */
 
-const { chromium } = require('playwright');
+let chromium;
+try {
+  ({ chromium } = require('playwright'));
+} catch (e) {
+  // tests/e2e 无本地 node_modules（playwright 安装在 scripts/）——本地跑 test:e2e 时显式解析（W674）
+  ({ chromium } = require(require.resolve('playwright', { paths: [require('path').join(__dirname, '..', '..', 'scripts')] })));
+}
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');

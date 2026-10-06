@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-TjGpVOcN2aCLqdVFP4LzHxoHi849JZgPj1TXea/Uqu4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-D6VioFvWs5cKFTNL8fUwshXOjqnuJ2sEqho8ISys9HI=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经路线交互式地图 · 详解西游记</title>
@@ -1307,7 +1307,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <p class="kicker">数据可视化</p>
         <h1>取经路线交互式地图</h1>
         <p class="subtitle">JOURNEY MAP INTERACTIVE</p>
-        <p class="tagline">取经路线与中国地理的交互式映射——9 大难点标注、时间轴双轴、跨页面联动跳转。</p>
+        <p class="tagline">取经路线与中国地理的交互式映射——8 处难点标注、时间轴双轴、跨页面联动跳转。</p>
     </section>
 
 <main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
@@ -1328,12 +1328,12 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <!-- 图1：地图 -->
         <section class="section">
             <h2 class="section-title">取经路线地图</h2>
-            <div class="section-sub">基于中国地理坐标的取经路线，17 个关键节点连接成长安到灵山的完整路径。点击节点跳转相关页面（如"流沙河"跳转 journey-route.html），9 个难点可点击展开详情。</div>
+            <div class="section-sub">基于中国地理坐标的取经路线，17 个关键节点连接成长安到灵山的完整路径。点击节点跳转相关页面（如"流沙河"跳转 journey-route.html），8 处难点可点击展开详情。</div>
             <div class="chart-block">
                 <svg id="chart-map" width="1150" height="640"></svg>
                 <div class="legend">
                     <div class="legend-item"><span class="legend-swatch" style="background:#C9A063"></span>普通节点</div>
-                    <div class="legend-item"><span class="legend-swatch" style="background:#c8463a"></span>九难点（点击展开）</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#c8463a"></span>八难点（点击展开）</div>
                     <div class="legend-item"><span class="legend-swatch" style="background:#6B8E5A"></span>起点/终点</div>
                     <div class="legend-item"><span class="legend-swatch" style="background:#3a6b8c; opacity:0.6"></span>取经路线</div>
                 </div>
@@ -1395,7 +1395,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         kpi: [
             {label: "DISTANCE · 总里程", value: "10.8万里", desc: "约 5.4 万公里"},
             {label: "COUNTRIES · 途经国", value: "12", desc: "邦国/部族"},
-            {label: "HARDSHIPS · 难点", value: "9", desc: "重大难点标注"},
+            {label: "HARDSHIPS · 难点", value: "8", desc: "重大难点标注"},
             {label: "FARTHEST · 最远点", value: "灵山", desc: "西天雷音寺"},
             {label: "DURATION · 耗时", value: "14年", desc: "约 5040 日"}
         ],

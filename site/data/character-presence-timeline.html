@@ -1300,7 +1300,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <div class="definition"><strong>定义：</strong>按回统计出场人物数（基于 W100 characters.json 的 first_appear 和 last_appear 字段）。曲线反映取经路的人物密度变化。</div>
   <div class="chart-block">
     <div class="chart-title">100 回出场人物数曲线</div>
-    <div class="chart-caption">X 轴：回目 1-100 · Y 轴：该回出场人物数 · hover 显示详情</div>
+    <div class="chart-caption">X 轴：回目 1-100 · Y 轴：该回出场人物数 · hover 显示详情 · 出场为区间×固定密度模拟（非逐回真实数据）· 曲线基于 31 个抽样回目</div>
     <svg id="chart-presence" class="chart-svg" width="100%" height="350"></svg>
   </div>
 </section>
@@ -1311,7 +1311,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <div class="definition"><strong>定义：</strong>Top 15 人物按回出场情况热力图。颜色深浅表示该回是否出场（深色=出场，浅色=未出场）。反映人物的连续性与间歇性。</div>
   <div class="chart-block">
     <div class="chart-title">主要人物出场回数热力图（15 人物 × 100 回）</div>
-    <div class="chart-caption">行：人物 · 列：回目 · 颜色：出场=深色 / 未出场=浅色</div>
+    <div class="chart-caption">行：人物 · 列：回目 · 颜色：出场=深色 / 未出场=浅色 · 出场为区间×固定密度模拟（非逐回真实数据）· 曲线基于 31 个抽样回目</div>
     <svg id="chart-heatmap" class="chart-svg" width="100%" height="450"></svg>
   </div>
 </section>
@@ -1322,7 +1322,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <div class="definition"><strong>定义：</strong>Top 10 人物按累积出场回数绘制的增长曲线。反映人物的"出场累积速度"，斜率陡峭期=高频出场期。</div>
   <div class="chart-block">
     <div class="chart-title">Top 10 人物累积出场曲线</div>
-    <div class="chart-caption">X 轴：回目 1-100 · Y 轴：累积出场回数 · 每条线代表 1 个人物</div>
+    <div class="chart-caption">X 轴：回目 1-100 · Y 轴：累积出场回数 · 每条线代表 1 个人物 · 出场为区间×固定密度模拟（非逐回真实数据）· 曲线基于 31 个抽样回目</div>
     <svg id="chart-cumulative" class="chart-svg" width="100%" height="400"></svg>
     <div class="legend-row" id="cumulative-legend"></div>
   </div>

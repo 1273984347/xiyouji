@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-83ylAgRoL5gs9n6Dx1Gh8/8u9ruXyZrUjwtExlyBqXs=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-8mc8fJPbJLJO6hPpw2VNhAYFvc+YYzejeJHakh0rylE=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>八十一难深度统计 · 详解西游记</title>
@@ -1923,7 +1923,7 @@ function renderTreemap(opts){
     }
 
     // 渲染关键洞察
-    function renderInsights(data) {
+    function renderInsights() { // W674 WP-3.11①：签名去参（参数从未使用；洞察文本为数据快照的注释性文字，非自动派生）
         const insights = [
             `坐骑下凡 16 难 <strong>全部被接走</strong>，无 1 难被打死——揭示了"背景深厚"的妖怪几乎零犯罪成本。`,
             `真正野怪 26 难中 <strong>18 难被打死</strong>（69.2%），无背景的妖魔死亡率极高。`,
@@ -1970,7 +1970,7 @@ function renderTreemap(opts){
         renderCrossTable(data.cross_cause_ending);
         renderSankey(data.cross_cause_ending, animate);
         renderTable(data.hardships || []);
-        renderInsights(data);
+        renderInsights();
         ANIMATE = false;
     }
 
