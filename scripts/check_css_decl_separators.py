@@ -35,6 +35,19 @@ def _same_line_defect(text):
     return False
 
 
+VALID_NAME_RE = re.compile(r"^--[-\w]+$|^-?[A-Za-z][A-Za-z0-9-]*$")
+
+
+def _invalid_decl_name(text):
+    """W675-review：粘词残缀形态（如 `20pxbackground:#f0e7d6`）——声明名非合法 CSS
+    标识符（自定义属性或 [-?字母] 开头连字号串）。缺分号吞声明的孪生缺陷：两属性粘死。"""
+    for m in DECL_RE.finditer(text):
+        name = m.group(1)
+        if not name.startswith("--") and not VALID_NAME_RE.match(name):
+            return True
+    return False
+
+
 def block_violations(block):
     """返回 [(行号(块内 0 基), 形态)]。判定在剥注释后的文本上进行，行号与原始块对齐。"""
     def keep_nl(mm):
@@ -44,12 +57,14 @@ def block_violations(block):
     hit_lines = set()
     depth = 0
     for i, ln in enumerate(lines):
-        if depth > 0 and _same_line_defect(ln):
+        if depth > 0 and (_same_line_defect(ln) or _invalid_decl_name(ln)):
             hits.append((i, "same-line"))
             hit_lines.add(i)
-        if "{" in ln and i not in hit_lines and _same_line_defect(ln[ln.rfind("{") + 1:]):
-            hits.append((i, "same-line"))
-            hit_lines.add(i)
+        if "{" in ln and i not in hit_lines:
+            tail = ln[ln.rfind("{") + 1:]
+            if _same_line_defect(tail) or _invalid_decl_name(tail):
+                hits.append((i, "same-line"))
+                hit_lines.add(i)
         depth += ln.count("{") - ln.count("}")
     for i, ln in enumerate(lines):
         if i in hit_lines:
@@ -91,6 +106,7 @@ def run_self_test():
         ("换行形态违例", ".a {\n  color: red\n  background: blue\n}", 1),
         ("同行形态违例", ".a { color: red background: blue }", 1),
         ("规则末条缺分号合法", ".a {\n  color: red\n}", 0),
+        ("粘词残缀（无效属性名）", ".a { border-radius: 20pxbackground:#f0e7d6 }", 1),
     ]
     fails = 0
     for name, css, want in cases:
