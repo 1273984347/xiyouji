@@ -351,7 +351,7 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
   html[data-theme="dark"] svg [fill="rgb(208, 45, 42)" i] { fill: #dd7871 !important; }  /* ×1 */
   html[data-theme="dark"] svg [fill="rgb(205, 41, 41)" i] { fill: #dc7872 !important; }  /* ×1 */
   html[data-theme="dark"] svg [fill="rgb(199, 35, 40)" i] { fill: #da7976 !important; }  /* ×1 */
-  html[data-theme="dark"] svg [fill="#800026" i] { fill: #b8556a; }  /* W674 WP-3.8 连带：色标修复后 interpolateYlOrRd(1) 新出现 */
+  html[data-theme="dark"] svg [fill="rgb(128, 0, 38)" i] { fill: #b8556a; }  /* W674 连带：色标修复后 interpolateYlOrRd(1) 首次真实出现（d3 插值器输出 rgb 形态·hex 选择器不命中——W621 假 0 教训三犯） */  /* W674 WP-3.8 连带：色标修复后 interpolateYlOrRd(1) 新出现 */
 
 /* ── z-index 层级令牌：topnav/遮罩/抽屉/tooltip 统一层级（tooltip 高于 topnav 防遮挡） ── */
 :root {
