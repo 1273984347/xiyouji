@@ -88,7 +88,7 @@
 - **可视化**：D3.js（数据图表）、Three.js（3D 页面）
 - **文本分析**：Python（词频/共现/情感/术语 NLP）
 - **前端**：原生 HTML/CSS/JS（纯静态·file:// 可直接打开）
-- **Web Agent**：CodeBuddy Agent SDK（`xiyouji-agent-web/`）
+- **Web Agent**：自研 OpenAI-compatible 引擎·全主流大模型端点适配（`xiyouji-agent-web/`）
 - **CI/CD**：GitHub Actions（pytest/Playwright/Lighthouse/pip-audit/npm-audit）
 
 ## 目录结构
@@ -125,7 +125,7 @@ xiyouji/
 ├── hyperframes/           # HTML 视频实验产物（W200 遗留·待清理决策）
 ├── mcp-server/            # MCP 服务（xiyouji_drl_spotcheck 等工具）
 ├── tests/                 # pytest 测试 + Playwright E2E
-├── xiyouji-agent-web/     # Web Agent「西游记·渡口问津」（CodeBuddy Agent SDK）
+├── xiyouji-agent-web/     # Web Agent「西游记·渡口问津」（OpenAI-compatible 引擎）
 ├── .github/workflows/     # CI/Security/Deploy Pages/Lighthouse/截图审查
 ├── README.md              # 本文件（用户手册 + 开发者分区）
 ├── STRUCTURE.md           # 目录结构详细说明

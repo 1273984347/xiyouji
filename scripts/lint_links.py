@@ -254,8 +254,8 @@ def main():
     ap.add_argument(
         "--exclude",
         nargs="*",
-        default=["node_modules", ".workbuddy", "_template.html"],
-        help="排除含这些路径片段的文件/目录（默认 node_modules/.workbuddy/_template.html）",
+        default=["node_modules", "_template.html"],
+        help="排除含这些路径片段的文件/目录（默认 node_modules/_template.html）",
     )
     args = ap.parse_args()
 

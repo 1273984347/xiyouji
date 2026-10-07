@@ -99,10 +99,10 @@ EXPECT_A4 = "209 篇"  # 真实计数（W342 199→201 起步，W400 后实际 2
 # 归档文件（W417 新增）：归档后旧 W### 仍纳入范围漂移可追溯扫描，避免误报
 # W513：CHANGELOG-ARCHIVE 二级归档层（W001-W399）同纳入扫描
 ARCHIVE_DOCS = [
-    "CHANGELOG-ARCHIVE.md",
+    os.path.join("docs", "archive", "CHANGELOG-ARCHIVE.md"),
     os.path.join("docs", "archive", "CHANGELOG-ARCHIVE-tier2.md"),
     os.path.join("scripts", "output", "file-index-archive.md"),
-    "交接文档-archive.md",
+    os.path.join("docs", "archive", "交接文档-ARCHIVE.md"),
 ]
 
 # A1-A6 内容板块真实文件计数 vs README 声明（W417 新增，防计数声明失真）

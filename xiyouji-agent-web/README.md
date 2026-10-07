@@ -2,7 +2,7 @@
 
 > **定位**：本地工程工具，仅回环监听，不对公网开放。公网 AI 能力路线见 `docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md` WP-B-ALT（冻结预案）。
 
-基于 **CodeBuddy Agent SDK** 构建的 Web Agent 应用，**适配本仓库（详解西游记）**——后端启动时自动解析仓库根为工作目录，无需写死路径。
+基于**自研 OpenAI-compatible 引擎**（`server/engine/`·兼容所有主流大模型端点）构建的 Web Agent 应用，**适配本仓库（详解西游记）**——后端启动时自动解析仓库根为工作目录，无需写死路径。
 
 打开浏览器即可与「渡口问津」对话：让它检索某回解读、回答佛道思想/诗词/人物问题、运行 `scripts/` 下的 Python 分析脚本、生成可视化，或协助撰写 `docs/` 文档。
 
@@ -17,14 +17,14 @@
 
 - 后端：Node.js + Express + TypeScript（SSE 流式 + SQLite 持久化）
 - 前端：React 18 + Vite + TDesign React + Tailwind
-- AI：CodeBuddy Agent SDK（`@tencent-ai/agent-sdk`）
+- AI：自研 OpenAI-compatible 引擎（`server/engine/`·chat/completions 流式 + 工具循环）
 
 ## 黄金评估集（evals/，W598）
 
 - `evals/golden-50.jsonl`：50 条黄金问答（逐回 15 / 人物 10 / 主题 10 / 数据查询 10 / 工程操作 5），每条含 expect_source_paths（构造时已验证磁盘真实存在）/must_mention/forbid。
 - `node evals/validate.mjs`：结构与真实性校验（无 LLM，CI 已挂 agent-web-build job）。
 - `node evals/run_eval.mjs --self-check`：判分器自检（无 LLM）。
-- `node evals/run_eval.mjs [--limit N]`：真跑评估（需 .env CODEBUDDY_API_KEY），输出 evals/results-<日期>.json；首跑仅建基线不设阈值，连续两批 score 下降 ≥10 个百分点为回归告警。
+- `node evals/run_eval.mjs [--limit N]`：真跑评估（需 .env 配 LLM_API_BASE / LLM_API_KEY / LLM_MODEL），输出 evals/results-<日期>.json；首跑仅建基线不设阈值，连续两批 score 下降 ≥10 个百分点为回归告警。
 
 ## 快速开始
 
@@ -34,12 +34,12 @@ cd xiyouji-agent-web   # 仓库根下的本子目录
 npm install
 ```
 
-### 2. 配置 CodeBuddy 凭证
+### 2. 配置引擎凭证
 ```bash
 cp .env.example .env
-# 编辑 .env，填入 CODEBUDDY_API_KEY
+# 编辑 .env，填入 LLM_API_BASE / LLM_API_KEY / LLM_MODEL
 ```
-也可在应用「设置」页粘贴 API Key，或直接用 `codebuddy login` 的 CLI 登录态。
+引擎凭证仅从服务端 .env 读取（重启生效），不支持运行时覆盖。
 
 ### 3. 启动
 ```bash
@@ -74,4 +74,4 @@ npm run dev
 ## 环境要求
 
 - Node.js 20+（与 CI 构建环境对齐）
-- CodeBuddy API Key（https://www.codebuddy.cn）
+- 任一 OpenAI-compatible 端点的 API Key（GLM/DeepSeek/Kimi/Qwen/OpenAI/Gemini/ollama 等·端点预设表见 `.env.example`）

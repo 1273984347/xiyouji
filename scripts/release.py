@@ -109,7 +109,7 @@ def step4_checklist(target_version: str) -> None:
   4. [ ] git commit -m "release: {target_version}"
   5. [ ] git tag {target_version}
   6. [ ] git push && git push --tags
-  7. [ ] （可选）更新 CHANGELOG-ARCHIVE.md（如旧版本归档）
+  7. [ ] （可选）更新 docs/archive/CHANGELOG-ARCHIVE.md（如旧版本归档）
 
 可用命令：
   python scripts/sync_docs.py          # 一致性校验
