@@ -199,8 +199,9 @@ interface CaseSemanticVerdict {
 
 - **WP-1.0 已落地**（本批 W679 提交）：run_eval.mjs 头部新增 9 行 `.env` 密钥引导——只载入 `CODEBUDDY_*` 前缀变量（不碰 `PROJECT_CWD`/`PORT` 等；`.env.example` 现载 `PROJECT_CWD=D:/1/xiyouji` 为过期路径，全量载入有害）、已存在环境变量优先不覆盖、`.env` 缺失时静默跳过由 SDK 显式报鉴权错误。验收实测：`node --check` exit 0；`node evals/run_eval.mjs --self-check` 输出 `[SELF-CHECK] 4/4 通过`。
 - **密钥在位性探测已执行**（WP-1.0 验收第 3 项）：`node evals/run_eval.mjs --limit 1` → 用例 chapter-001 报 `SDK 异常: Authentication required. Please use /login command to sign in to your account`，exit 0、落盘 score 0/1（产物已删除不入库）。判定 = R3 预设场景：凭证问题非脚本缺陷。SDK 鉴权走账号登录态或 `.env` 凭证，`~/.codebuddy/` 实查为 CLI 工作目录（sessions/logs）非凭证库。
-- **P0-1 用户动作（WF-1 主跑唯一阻断）**：二选一——① `xiyouji-agent-web/.env` 写入 `CODEBUDDY_API_KEY=<真实 key>`（对照 `.env.example` 键名）；② CodeBuddy CLI 登录态可用（`/login`）。凭证就位后按 §5.3 WP-1.1 → WP-1.2 顺序继续，届时另认领 W 号。
-- **WP-1.1 未执行**（阻断于上项）：全量 timeout 值在 WP-1.1 实测前不得臆写。
+- **P0-1 处置改判（2026-10-07 用户二次裁决）**：用户裁决项目**不用 CodeBuddy**（含 CLI 与 API key 路线全部排除）且 agent-web **保留但更换驱动引擎**（三选一裁决，详见 docs/superpowers/plans/2026-10-07-agent-web-engine-swap-plan.md）→ 本节 CODEBUDDY_API_KEY 指引作废、被测对象改判；WP-1.0 的 `CODEBUDDY_*` dotenv 引导补丁随引擎批（W680）移除重写。**WF-1 改道：暂停至新引擎就位后执行（引擎方案 §五 W682）**——golden-50 用例、机判三规则、score=0 熔断守卫、WP-1.1 timeout 公式、语义判读 10 组、验收 A1-1~6 全部保留，仅运行载体从 sdkQuery 换为 engine 直调。
+- **dotenv 链路端到端验证（2026-10-07·假 key 实测·随引擎更换一并退役的结论）**：以临时假 key 写入 `.env` 跑 `--limit 1`，错误形态由「Please use /login」变为 `401 (token-type:ApiKey, token-length:37)` 且 SDK 明示 `Environment variable CODEBUDDY_API_KEY is set`——链路本身可通；该验证随 CodeBuddy 路线整体作废。
+- **WP-1.1 未执行**（阻断于引擎更换）：全量 timeout 值在 WP-1.1 实测前不得臆写。
 
 ---
 

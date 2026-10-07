@@ -1,0 +1,28 @@
+{
+  "batch": "W680",
+  "version": "v2.3.274",
+  "date": "2026-10-07",
+  "desc": "agent-web 引擎更换与全模型适配",
+  "title": "W680 agent-web 引擎更换批次一",
+  "head_entry": "2026-10-07（v2.3.274 W680）agent-web 引擎更换批次一（蓝图 docs/superpowers/plans/2026-10-07-agent-web-engine-swap-plan.md·用户裁决弃用原厂商 CLI 与凭证路线+保留渡口问津换引擎+适配所有主流大模型：新建 server/engine 四模块〔types 契约/openai-compat 流式驱动/tools 服务端六工具+权限分类/agent-loop 工具循环·协议层零厂商分支·GLM/DeepSeek/Kimi/Qwen/OpenAI/Gemini/ollama/vLLM 等 OpenAI-compatible 端点全兼容〕+ index.ts 重接线〔SSE 八事件契约与 src/ 零改动·权限桥策略保留·引擎中止信号接线〕+ run_eval 重写驱动 /api/chat 全链路〔机判三规则与产物形状不变〕+ engine.smoke.mjs 常驻冒烟 4 组机判断言全绿 + SettingsPage 凭证区改引擎配置状态 + .env.example 换 LLM 三键与九家主流端点预设表 + package.json 移除旧厂商 SDK 依赖）",
+  "head_sentence": "agent-web 引擎更换与全模型适配",
+  "changelog_body": "\n> **来源**：用户两次指令（项目弃用原厂商 CLI 与凭证路线+完全删除其全部品牌内容）与三选一裁决（agent-web 整体退役/保留换引擎/只清提及）——裁决为保留渡口问津但更换驱动引擎；蓝图 docs/superpowers/plans/2026-10-07-agent-web-engine-swap-plan.md（V1.0·集成面 826 行实读量化）。\n> - **执行（批次一·引擎替换）**：① 新建 server/engine 四模块——types.ts（契约）、openai-compat.ts（chat/completions 流式驱动：SSE 容忍 CRLF 与注释行与 usage-only chunk、tool_calls 增量按 index 装配、reasoning_content 类推理字段有意忽略、[DONE] 缺失容错）、tools.ts（服务端六工具 read_file/glob/grep/write_file/edit_file/run_command + 权限三分类 + W536/W537 同源安全：realpath 路径守卫/无 shell spawn/命令白名单/读写上限）、agent-loop.ts（maxTurns 封顶工具循环·权限桥逐调用接续）；② index.ts 重接线——SSE 八事件契约逐字段不变（src/ 零改动·前端 fullContent 追加语义实测兼容增量 delta）、权限桥策略保留（bypass 直通/read 放行/plan 只读/acceptEdits 放行写/其余走前端许可）、会话历史改从 SQLite 重建（替代旧 SDK resume·表结构零迁移）、引擎中止信号接线（客户端断开即中止 LLM 流消费）、引擎未配置 400 快速失败；③ evals/run_eval.mjs 重写——spawn 起服（W600 同款模式·AGENT_WEB_ALLOW_BYPASS=1 无人值守）驱动 /api/chat 全链路，机判三规则/self-check/产物形状不变；④ engine.smoke.mjs 常驻冒烟——mock LLM 全链路 4 组机判断言全绿（SSE 事件序列对拍 init,tool,tool_result,text,done/工具真实读盘断言/越界路径被守卫拒绝/文本增量拼接）；⑤ SettingsPage 凭证区改引擎配置状态 + .env.example 换 LLM_API_BASE/LLM_API_KEY/LLM_MODEL 三键与九家主流端点预设表；⑥ package.json 移除旧厂商 SDK 依赖（lockfile 同步）。\n> - **全主流适配口径**：引擎代码零厂商分支，端点/模型全配置化；协议层为行业事实标准 OpenAI-compatible（GLM/DeepSeek/Kimi/Qwen/OpenAI/Gemini/Claude 兼容层/ollama/vLLM 均提供该协议端点），预设表入 .env.example。\n> - **验证（当批现测）**：npm run build（tsc -b + vite build）exit 0；engine.smoke.mjs 4 组断言全绿 exit 0；feedback.test.mjs 5/5（拆卸噪声与既有先例同族·退出码 0）；run_eval --self-check 4/4；npm audit --omit=dev --audit-level=high exit 0 且 npm ls 旧 SDK 零输出；agent-web 现役面品牌引用 grep 零命中（历史段与迁移蓝图按豁免口径另见 W681）。\n> - **文件**：xiyouji-agent-web/server/engine/（新增四模块）、server/engine.smoke.mjs（新增）、server/index.ts（重接线）、server/feedback.test.mjs（注释清理）、src/components/SettingsPage.tsx（引擎配置状态）、evals/run_eval.mjs（重写）、.env.example（换键+预设表）、package.json+package-lock.json（去依赖）、.gitignore（engine 编译副产物）、docs/superpowers/plans/2026-10-07-agent-web-engine-swap-plan.md（新增蓝图）、2026-10-07-workflow-industrialization-plan.md（WF-1 改道记录）、scripts/output/_w680_brand_scrub.py（一次性）、docs/00-导读/W批次编号对账表.md、六文档级联、AGENTS 脚注、三页脚、CITATION、file-index。\n> - **处置收尾**：W681=真端点联调（用户配 LLM_API_BASE/LLM_API_KEY/LLM_MODEL 三键）+权限四模式矩阵实测+治理文档品牌引用清零（AGENTS/README/STRUCTURE/交接/Makefile/site/dukou-engine.html/agent-web 三 md）；W682=WF-1 复活（golden-50 在新引擎跑基线）。\n> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。\n",
+  "milestone_block": "- **v2.3.274 W680 agent-web 引擎更换批次一（全主流适配）**：\n  - server/engine 四模块落地（openai-compat 流式驱动/六工具集/工具循环）·SSE 八事件契约不变·src/ 零改动\n  - run_eval 重写驱动 /api/chat 全链路 + engine.smoke.mjs 常驻冒烟 4 组断言全绿\n  - .env.example 换 LLM 三键+九家端点预设表·去旧 SDK 依赖·品牌引用现役面清零（W681 治理文档清零+W682 基线复活）\n",
+  "agents_note": "2026-10-07（v2.3.274 W680）agent-web 引擎更换批次一：server/engine 四模块（OpenAI-compatible 全主流适配）+ index.ts 重接线（SSE 契约不变）+ run_eval 重写 + engine.smoke 常驻冒烟 4 组断言 + SettingsPage 与 .env.example 切换 + 去旧 SDK 依赖（蓝图 docs/superpowers/plans/2026-10-07-agent-web-engine-swap-plan.md·W681 联调清零/W682 基线复活）",
+  "file_index_rows": [
+    "| docs/superpowers/plans/2026-10-07-agent-web-engine-swap-plan.md | W680 | 新增·agent-web 引擎更换蓝图 V1.0（集成面量化/新引擎规格/三批推进） |",
+    "| docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md | W680 | 更新·WF-1 改道记录（待新引擎 W682） |",
+    "| xiyouji-agent-web/server/engine/types.ts | W680 | 新增·引擎类型契约 |",
+    "| xiyouji-agent-web/server/engine/openai-compat.ts | W680 | 新增·chat/completions 流式驱动（全厂商兼容） |",
+    "| xiyouji-agent-web/server/engine/tools.ts | W680 | 新增·服务端六工具集+权限分类+路径守卫 |",
+    "| xiyouji-agent-web/server/engine/agent-loop.ts | W680 | 新增·工具循环（maxTurns 封顶） |",
+    "| xiyouji-agent-web/server/engine.smoke.mjs | W680 | 新增·引擎全链路常驻冒烟（4 组机判断言） |",
+    "| xiyouji-agent-web/server/index.ts | W680 | 更新·引擎重接线（SSE 八事件契约不变） |",
+    "| xiyouji-agent-web/src/components/SettingsPage.tsx | W680 | 更新·凭证区改引擎配置状态 |",
+    "| xiyouji-agent-web/evals/run_eval.mjs | W680 | 重写·驱动 /api/chat 全链路（机判口径不变） |",
+    "| xiyouji-agent-web/.env.example | W680 | 更新·LLM 三键+九家主流端点预设表 |",
+    "| xiyouji-agent-web/package.json | W680 | 更新·移除旧厂商 SDK 依赖 |",
+    "| .gitignore | W680 | 更新·engine 编译副产物忽略 |",
+    "| docs/00-导读/W批次编号对账表.md | W680 | 更新·W680 认领+翻转 |"
+  ]
+}
