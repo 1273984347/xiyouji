@@ -1,0 +1,17 @@
+{
+  "batch": "W679",
+  "version": "v2.3.273",
+  "date": "2026-10-07",
+  "desc": "workflow 工业化方案入库与评估密钥引导",
+  "title": "W679 动态 Workflow 工业化方案入库",
+  "head_entry": "2026-10-07（v2.3.273 W679）动态 Workflow 工业化方案 V1.0 入库（docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md·六提案 WF-1 评估 LLM 基线/WF-2 批次修复扇出/WF-3 存量基线抽查/WF-4 复盘取证包/WF-5 外部主张裁决/WF-6 触发条件登记）+ WF-1 前置 WP-1.0 落地（run_eval.mjs .env 密钥引导补丁 9 行·W598 遗留缺口脚本不自读 .env 致评估基线建置起 0 次执行·--limit 1 探测实证 SDK 鉴权错误=凭证缺失非脚本缺陷·P0-1 用户凭证为 WF-1 主跑唯一阻断）",
+  "head_sentence": "动态 Workflow 工业化方案入库与评估密钥引导",
+  "changelog_body": "\n> **来源**：用户裁决批准《动态 Workflow 工业化方案 V1.0》（2026-10-07 全仓实测扫描·事实基线 B1-B31 逐项带取证命令）并令「开工」；本批 = 方案入库 + WF-1 前置 WP-1.0（对账表现势 W680·W676-W678 批次四~六预留不变）。\n> - **执行**：① 方案 V1.0 入库 docs/superpowers/plans/——六提案（WF-1 评估 LLM 基线〔W598 建置起唯一已立项未执行项〕/WF-2 批次修复扇出〔批次四~六 W676-W678 载体·包装站点质量方案档 §十四扇出矩阵〕/WF-3 存量冻结基线抽查〔8 份基线 19,545 行只拦新增零抽查缺口〕/WF-4 复盘报告取证包〔11 份复盘报告重复取证劳动〕/WF-5 外部输入逐条裁决〔W634 先例流水线化〕/WF-6 触发条件登记不建置）+ 运行时硬约束 9 条 + 事实基线 31 项 + 产出契约 TypeScript interface + 验收表逐条命令+期望输出 + §1.3 范围外反向清单（门禁/级联/提交链/e2e 等六类禁 workflow 化）；② WP-1.0 run_eval.mjs .env 密钥引导补丁 9 行——只载 CODEBUDDY_* 前缀变量（PROJECT_CWD 等不碰·example 内为过期路径）、已存在环境变量优先、.env 缺失静默跳过。\n> - **探测实证（当批现测）**：node --check exit 0；--self-check 输出 4/4 通过；--limit 1 探测 → 用例 chapter-001 报 SDK「Authentication required. Please use /login」+ exit 0 落盘 score 0/1（垃圾产物已删除）——凭证缺失实锤（.env 不存在 + 无全局 CODEBUDDY_API_KEY + ~/.codebuddy 实查为 CLI 工作目录非凭证库）＝方案 R3 预设场景；据此方案 WP-1.2 增补 score=0 熔断守卫（workflow 不信 exit code 单值）。\n> - **验证**：verify_delivery 核心全绿（提交前实跑·37 门禁 42 段锁）；run_eval.mjs --self-check 4/4；node --check exit 0；方案文档过第 18 门禁（4 新文件检查含本件）。\n> - **文件**：docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md（新增·方案 V1.0 六提案+执行记录 §5.6）、xiyouji-agent-web/evals/run_eval.mjs（更新·密钥引导）、docs/00-导读/W批次编号对账表.md（现势 W680 + W679 认领行）、scripts/output/_w679_spec.json（spec 档案）、六文档级联、AGENTS 脚注、三页脚、CITATION、file-index、_cascade_files_W679.txt（级联清单）。\n> - **处置收尾**：WF-1 主跑阻断于 P0-1 用户凭证（xiyouji-agent-web/.env 配 CODEBUDDY_API_KEY 或 CLI /login 二选一），凭证就位后按方案 §5.3 WP-1.1 单例实测 → WP-1.2 工作流建置继续（届时另认领 W 号）；WF-2 随站点质量批次四 W676 启用；批次四~六编号预留 W676-W678 不变。\n> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。\n",
+  "milestone_block": "- **v2.3.273 W679 动态 Workflow 工业化方案入库（六提案 + WF-1 前置）**：\n  - 方案 V1.0 六提案入库（WF-1 评估基线/WF-2 批次扇出/WF-3 基线抽查/WF-4 复盘取证/WF-5 主张裁决/WF-6 登记）\n  - run_eval.mjs .env 密钥引导补丁（W598 缺口·评估基线首跑前置）·SDK 鉴权错误实证凭证缺失\n  - WF-1 主跑待用户凭证（P0-1）·批次四~六 W676-W678 预留不变\n",
+  "agents_note": "2026-10-07（v2.3.273 W679）动态 Workflow 工业化方案 V1.0 入库：六提案（WF-1 评估基线+WF-2 批次扇出+WF-3 基线抽查+WF-4 复盘取证+WF-5 主张裁决+WF-6 登记）+ run_eval.mjs 密钥引导补丁（W598 评估基线首跑前置·SDK 鉴权错误实证凭证缺失·WF-1 主跑待用户凭证）",
+  "file_index_rows": [
+    "| docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md | W679 | 新增·动态 Workflow 工业化方案 V1.0（六提案/事实基线 B1-B31/运行时契约/执行记录） |",
+    "| xiyouji-agent-web/evals/run_eval.mjs | W679 | 更新·.env 密钥引导 9 行（W598 缺口·评估基线首跑前置） |",
+    "| docs/00-导读/W批次编号对账表.md | W679 | 更新·现势 W680 + W679 认领翻转 |"
+  ]
+}

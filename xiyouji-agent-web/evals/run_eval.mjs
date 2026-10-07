@@ -18,6 +18,17 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..', '..');
+
+// .env 密钥引导（W679 WP-1.0）：W598 遗留缺口——本脚本此前不自读 .env，
+// 头部注释声称「需 .env CODEBUDDY_API_KEY」但密钥只能靠 shell 预注入。
+// 此处从 xiyouji-agent-web/.env 载入 CODEBUDDY_* 凭证；已存在的环境变量优先，不覆盖。
+try {
+  for (const line of fs.readFileSync(path.join(HERE, '..', '.env'), 'utf-8').split(/\r?\n/)) {
+    const m = /^(CODEBUDDY_[A-Z_]+)=(.*)$/.exec(line.trim());
+    if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, '');
+  }
+} catch { /* .env 不存在：保持原状，鉴权缺失在 SDK 调用处显式暴露 */ }
+
 const CASES = fs.readFileSync(path.join(HERE, 'golden-50.jsonl'), 'utf-8')
   .split('\n').filter(l => l.trim()).map(l => JSON.parse(l));
 
