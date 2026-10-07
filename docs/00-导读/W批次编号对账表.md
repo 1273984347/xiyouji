@@ -5,7 +5,7 @@
 > **取号规则**：下一自由号 = 本表 max(W#)+1（CHANGELOG 维护契约④「Grep 现役段 max+1」在版段递延时可能滞后于已认领号——以本表为准，W659/W660 撞号险情即此产生）。
 > **生成来源**：人工撰写（Agent 起草）。**生成模型**：GLM（ZCode session 2026-10-05）。**生成日期**：2026-10-05。**核验状态**：已核验（各行 hash 经 `git log` 实证回查，取证 HEAD = b1aafb0）。
 
-## 现势：下一自由号 = **W680**（W676-W678 站点质量批次四~六预留顺延·方案 V1.7 §六；W679 已由 ZCode 2026-10-07 认领〔动态 Workflow 工业化方案批〕；W675 复盘报告批已收官）
+## 现势：下一自由号 = **W683**（W681/W682 已预留=agent-web 引擎更换批次二/三·蓝图 §五；W676-W678 站点质量批次四~六预留顺延；W679/W680 已收官）
 
 | W# | 主题 | 关联 commit | CHANGELOG 版段 | 状态 | 认领会话 |
 |----|------|------------|---------------|------|---------|
@@ -38,7 +38,9 @@
 | W674 | 站点质量修复批次三（方案 V1.7 §五·同档）：JS 交互缺陷 WP-3.1–3.11 + D4 默认 A + 第四轮四项/P3 清理包（WP-3.13–3.15）+ e2e 补盲 test_site_quality.js | 88431ce（内容批）+ 收官级联（自指免列）+ 热修 16b826c/efc5a1c/ba20dba | v2.3.271 | **已收官** | ZCode 2026-10-06 |
 | W675 | 工作复盘与优化分析报告（W666-W674 站点质量前三批周期）入库 + 方法论 README 索引第 29 行 | 内容批 + 收官级联（自指免列） | v2.3.272 | **已收官** | ZCode 2026-10-06 |
 | W679 | 动态 Workflow 工业化方案 V1.0 入库（docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md·WF-1~6 六提案）+ WF-1 前置 WP-1.0（run_eval.mjs .env 密钥引导补丁·W598 评估基线 LLM 首跑前置） | c2014b8（内容批）+ 收官级联（自指免列·_w679_close_cascade 手工 13 面·W663 先例）+ deps 热修（自指免列·上游新披露 advisory·16b826c 同族） | v2.3.273 | **已收官**（WF-1 改道待新引擎） | ZCode 2026-10-07 |
-| W680 | agent-web 引擎更换批次一（蓝图 docs/superpowers/plans/2026-10-07-agent-web-engine-swap-plan.md·用户裁决弃用原厂商引擎+保留渡口问津+全主流大模型适配）：server/engine 四模块（OpenAI-compatible）+ index.ts 重接线（SSE 八事件契约不变）+ run_eval 重写 + engine.smoke 常驻冒烟 + SettingsPage/.env.example 切换 + 去旧 SDK 依赖 | f2dcc8a（内容批）+ 收官级联（自指免列·batch_cascade 原生） | v2.3.274 | **已收官**（W681 联调清零·W682 基线复活） | ZCode 2026-10-07 |
+| W680 | agent-web 引擎更换批次一（蓝图 docs/superpowers/plans/2026-10-07-agent-web-engine-swap-plan.md·用户裁决弃用原厂商引擎+保留渡口问津+全主流大模型适配）：server/engine 四模块（OpenAI-compatible）+ index.ts 重接线（SSE 八事件契约不变）+ run_eval 重写 + engine.smoke 常驻冒烟 + SettingsPage/.env.example 切换 + 去旧 SDK 依赖 | f2dcc8a（内容批）+ 收官级联（自指免列·batch_cascade 原生） | v2.3.274 | **已收官**（独立安全审查 10 项裁决·确认项已复修） | ZCode 2026-10-07 |
+| W681 | agent-web 引擎更换批次二：真端点联调+权限四模式矩阵实测+治理文档品牌引用清零（蓝图 §五） | 3b0dfed（预留在案·W680 收官批注记） | 待批次落段 | 预留 | ZCode 2026-10-07 |
+| W682 | agent-web 引擎更换批次三：WF-1 复活（golden-50 新引擎 LLM 基线·评估集首跑） | 3b0dfed（预留在案·W680 收官批注记） | 待批次落段 | 预留 | ZCode 2026-10-07 |
 
 ## 递延批豁免登记（D2 裁决：对账表登记即可过 doc-sync 提交-版段对账）
 
