@@ -78,8 +78,8 @@ export async function* streamChat(opts: StreamChatOptions): AsyncGenerator<Strea
             type: "finish",
             reason: finishReason,
             toolCalls: [...calls.keys()].sort((a, b) => a - b).map((k) => {
-              const c = calls.get(k);
-              return { id: c!.id, name: c!.name, arguments: c!.arguments };
+              const c = calls.get(k)!;
+              return { id: c.id || `call_${k}`, name: c.name, arguments: c.arguments }; // 空 id 兜底（严格端点对空 tool_call_id 会 400）
             }),
           };
           return;
@@ -125,7 +125,7 @@ export async function* streamChat(opts: StreamChatOptions): AsyncGenerator<Strea
       reason: finishReason,
       toolCalls: [...calls.keys()].sort((a, b) => a - b).map((k) => {
         const c = calls.get(k)!;
-        return { id: c.id, name: c.name, arguments: c.arguments };
+        return { id: c.id || `call_${k}`, name: c.name, arguments: c.arguments };
       }),
     };
   } finally {

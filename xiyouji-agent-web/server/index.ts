@@ -398,6 +398,7 @@ app.post("/api/chat", async (req, res) => {
   const sseTimer = setTimeout(() => {
     if (aborted) return;
     aborted = true;
+    engineAbort.abort(); // W680 复核：超时路径同样中止引擎（与 abortStream 对齐，不再烧 token）
     for (const rid of Object.keys(pendingPermissions)) {
       const p = pendingPermissions[rid];
       if (p.sessionId === session.id) {
