@@ -43,7 +43,7 @@
 | W683 | GitHub 三 starter workflow 落地（用户圈选 dependency-review/stale/scorecard·官方模板适配·全 action SHA 钉）+ workflows README 登记 + 三首跑全绿（stale 12s/scorecard 49s/dep-review 16s——后者根因=依赖图未开启，vulnerability-alerts API 204 开启后转绿）+ scorecard 首账快修 2（SECURITY.md/stale 权限收 job 级）+ Pinned ×12 登记设计取舍不修 | bdc3fb8 + 1c8ba10 + 4b27de2 | v2.3.275（追记合并段） | **已收官** | ZCode 2026-10-07 |
 | W684 | 工作复盘与优化分析报告（治理与引擎更换周期）入库 + 方法论 README 索引 + W681 部分/W683 合并登记（级联 v2.3.275） | 7097c4d（内容批）+ 收官级联（自指免列·_w684_close_cascade 手工 13 面·第五例） | v2.3.275 | **已收官**（方法论 README 索引 31 行·并行 S4 复盘接手入库） | ZCode 2026-10-07 |
 | W685 | 复盘下半场报告（投稿体系·第二报告）入库与工具收尾批：README 索引序号 32 修位（撞号 31 消解）+ S 卡重编号 S-13~S-15 + sync_docs 校准 7 规则全绿 + visit-viewer tokens/溢出清理 + S4 收账（sweep 46+工具 24+attic 6） | 2e7bcd2（内容批）+ 收官级联（自指免列·batch_cascade 原生） | v2.3.276 | **已收官** | ZCode 2026-10-08 |
-| W686 | 动态 Workflow 工业化方案退役：方案文件删除（WF-1~6 六提案随之作废·从未建置·.zcode/workflows/ 双域实查 0 保存件）+ W682 预留作废（用户裁决「都删了·等后续再重新设计」） | （hash 待级联批转录）+ 收官级联（自指免列·batch_cascade 原生） | v2.3.277 | **进行中** | ZCode 2026-10-08 |
+| W686 | 动态 Workflow 工业化方案退役：方案文件删除（WF-1~6 六提案随之作废·从未建置·.zcode/workflows/ 双域实查 0 保存件）+ W682 预留作废（用户裁决「都删了·等后续再重新设计」） | 24ec369（内容批）+ 收官级联（自指免列·batch_cascade 原生） | v2.3.277 | **已收官** | ZCode 2026-10-08 |
 | W682 | agent-web 引擎更换批次三：WF-1 复活（golden-50 新引擎 LLM 基线·评估集首跑） | 3b0dfed（预留在案·W680 收官批注记） | 待批次落段 | **作废**（W686·用户裁决 workflow 方案退役·WF-1 复活随之取消·后续重新设计另认领新号） | ZCode 2026-10-07 |
 
 ## 递延批豁免登记（D2 裁决：对账表登记即可过 doc-sync 提交-版段对账）
