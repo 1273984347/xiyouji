@@ -37,7 +37,7 @@
 | W673 | 站点质量修复批次二（方案 V1.7 §四·同档）：kpi-card 全局基类 122 页 + CSS 机械修复 526 处（缺分号 442 + 孤立选择器 84）+ 降级声明对齐 2 页 + 第 35/36/37 门禁 | 1517cc2（内容批）+ 收官级联（自指免列） | v2.3.270 | **已收官** | ZCode 2026-10-06 |
 | W674 | 站点质量修复批次三（方案 V1.7 §五·同档）：JS 交互缺陷 WP-3.1–3.11 + D4 默认 A + 第四轮四项/P3 清理包（WP-3.13–3.15）+ e2e 补盲 test_site_quality.js | 88431ce（内容批）+ 收官级联（自指免列）+ 热修 16b826c/efc5a1c/ba20dba | v2.3.271 | **已收官** | ZCode 2026-10-06 |
 | W675 | 工作复盘与优化分析报告（W666-W674 站点质量前三批周期）入库 + 方法论 README 索引第 29 行 | 内容批 + 收官级联（自指免列） | v2.3.272 | **已收官** | ZCode 2026-10-06 |
-| W679 | 动态 Workflow 工业化方案 V1.0 入库（docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md·WF-1~6 六提案）+ WF-1 前置 WP-1.0（run_eval.mjs .env 密钥引导补丁·W598 评估基线 LLM 首跑前置） | （待提交） | v2.3.273 | 已认领 | ZCode 2026-10-07 |
+| W679 | 动态 Workflow 工业化方案 V1.0 入库（docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md·WF-1~6 六提案）+ WF-1 前置 WP-1.0（run_eval.mjs .env 密钥引导补丁·W598 评估基线 LLM 首跑前置） | c2014b8（内容批）+ 收官级联（自指免列·_w679_close_cascade 手工 13 面·W663 先例） | v2.3.273 | **已收官**（WF-1 主跑待用户凭证 P0-1） | ZCode 2026-10-07 |
 
 ## 递延批豁免登记（D2 裁决：对账表登记即可过 doc-sync 提交-版段对账）
 
