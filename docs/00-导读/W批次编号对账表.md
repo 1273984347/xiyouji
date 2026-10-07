@@ -5,7 +5,7 @@
 > **取号规则**：下一自由号 = 本表 max(W#)+1（CHANGELOG 维护契约④「Grep 现役段 max+1」在版段递延时可能滞后于已认领号——以本表为准，W659/W660 撞号险情即此产生）。
 > **生成来源**：人工撰写（Agent 起草）。**生成模型**：GLM（ZCode session 2026-10-05）。**生成日期**：2026-10-05。**核验状态**：已核验（各行 hash 经 `git log` 实证回查，取证 HEAD = b1aafb0）。
 
-## 现势：下一自由号 = **W685**（W684 已由 ZCode 2026-10-07 认领〔工作复盘报告批·治理与引擎周期〕；W683 已收官；W681 进行中/W682 预留=引擎批次；W676-W678 批次四~六预留顺延）
+## 现势：下一自由号 = **W686**（W685 已由 ZCode 2026-10-08 认领并收官〔复盘下半场入库与工具收尾批〕；W684 已收官；W681 进行中/W682 预留=引擎批次；W676-W678 批次四~六预留顺延）
 
 | W# | 主题 | 关联 commit | CHANGELOG 版段 | 状态 | 认领会话 |
 |----|------|------------|---------------|------|---------|
@@ -42,6 +42,7 @@
 | W681 | agent-web 引擎更换批次二：真端点联调+权限四模式矩阵实测+治理文档品牌引用清零+归档治理（三归档件移 docs/archive/ 并统一大写 ARCHIVE 后缀·CHANGELOG 滚动归档补课迁 W485-W649 段 166 节·文档规范 §5 固化「超限必须移 ARCHIVE+命名大写+统一 docs/archive/」+CodeQL 42 告警首账清零〔e51d067 真修 3 项：api_server realpath 边界+CORS 常量化+agent-web /api/* 限流；40 条按族 dismiss 理由随条·open=0〕） | 4801650+e51d067+82e40d0（文档清零+归档治理+CodeQL 首账·追记合并段） | v2.3.275（追记） | **进行中**（剩余=真端点联调待用户三键） | ZCode 2026-10-07 |
 | W683 | GitHub 三 starter workflow 落地（用户圈选 dependency-review/stale/scorecard·官方模板适配·全 action SHA 钉）+ workflows README 登记 + 三首跑全绿（stale 12s/scorecard 49s/dep-review 16s——后者根因=依赖图未开启，vulnerability-alerts API 204 开启后转绿）+ scorecard 首账快修 2（SECURITY.md/stale 权限收 job 级）+ Pinned ×12 登记设计取舍不修 | bdc3fb8 + 1c8ba10 + 4b27de2 | v2.3.275（追记合并段） | **已收官** | ZCode 2026-10-07 |
 | W684 | 工作复盘与优化分析报告（治理与引擎更换周期）入库 + 方法论 README 索引 + W681 部分/W683 合并登记（级联 v2.3.275） | 7097c4d（内容批）+ 收官级联（自指免列·_w684_close_cascade 手工 13 面·第五例） | v2.3.275 | **已收官**（方法论 README 索引 31 行·并行 S4 复盘接手入库） | ZCode 2026-10-07 |
+| W685 | 复盘下半场报告（投稿体系·第二报告）入库与工具收尾批：README 索引序号 32 修位（撞号 31 消解）+ S 卡重编号 S-13~S-15 + sync_docs 校准 7 规则全绿 + visit-viewer tokens/溢出清理 + S4 收账（sweep 46+工具 24+attic 6） | 2e7bcd2（内容批）+ 收官级联（自指免列·batch_cascade 原生） | v2.3.276 | **已收官** | ZCode 2026-10-08 |
 | W682 | agent-web 引擎更换批次三：WF-1 复活（golden-50 新引擎 LLM 基线·评估集首跑） | 3b0dfed（预留在案·W680 收官批注记） | 待批次落段 | 预留 | ZCode 2026-10-07 |
 
 ## 递延批豁免登记（D2 裁决：对账表登记即可过 doc-sync 提交-版段对账）
