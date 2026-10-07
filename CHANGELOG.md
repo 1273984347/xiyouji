@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W684），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W685），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.276（2026-10-08）：W685 复盘下半场报告入库与工具收尾批 — 投稿体系第二报告入库（序号 32 修位）+ sync_docs 校准 + visit-viewer 清理 + S4 收账
+
+> **来源**：用户令「全都做完」——清算 12 份工作复盘报告未竟事项中 Agent 侧全部可执行项：并行 S4 会话滞留的投稿体系下半场复盘报告入库（其自身 A-05 + W684 报告 A-06「README 索引行合并登记」一并闭环）+ sync_docs 校准（W684 P-11/A-03 存量红）+ visit-viewer 两期 Could 悬项清理 + S4 会话工作区收账。
+> - **执行（报告入库）**：docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-07-2.md（投稿体系建构与方向命名周期·第二报告）入库——方法论 README 索引第 32 行（并行在途行序号 31 与 W684 已入库行撞号→改为 32 并移至其后；S 卡号与 W684 报告 S-10~S-12 撞车→全文重编号 S-13~S-15·承接句同步对齐）。
+> - **执行（工具收尾）**：① scripts/sync_docs.py 校准——规则 2 现值化（STATIC_EXPECTED 硬编码 611 改磁盘实数·README/STRUCTURE 聚合声明与项目说明分面声明分列校验）+ 规则 3 预留号豁免（对账表登记即豁免·连续性改按版段标题 W 集合断言·file-index 对账只查主 W 号）+ 规则 5 状态标记正则收紧（只认「状态=进行中」形态）——校准前 9 处 MISMATCH 清零、7 规则全绿 exit 0、合成负样本自证真跳号仍抓获；② site/visit-viewer.html 接入 tokens.css（裸色 7 处 var 化 + fixed 表格布局 + overflow-wrap 治横向溢出——09-13/09-16 两期 Could 悬项清零）；③ scripts/_attic 收档 _w672 扫描器 6 件（第 33-37 门禁常驻后零引用）；④ S4 会话收账——46 件已跟踪脚本路径 sweep（S4 目录重组+方向改名）入账、中性一次性工具 24 件入账，期刊探针族脚本与抓取中间产物按双盲纪律保持本地不入公共库。
+> - **验证**：verify_delivery 核心全绿（42 段·内容批实跑）；generate_csp --check 855 页 0 漂移；sync_docs 7 规则 exit 0；ruff scripts/ 0 错；visit-viewer 门禁 33/34/35 口径 0 违例。
+> - **文件**：docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-07-2.md（新增）、docs/10-方法论沉淀/README.md（索引第 32 行修位）、scripts/sync_docs.py（校准）、site/visit-viewer.html（tokens+溢出）、scripts/（46 件 sweep+24 件入账）、scripts/_attic/（+6 收档）、docs/00-导读/W批次编号对账表.md（W685 认领+翻转+现势 W686）、六文档级联、AGENTS 脚注、四页脚、CITATION、file-index。
+> - **处置收尾**：批次四~六（W676-W678）维持预留——12 张 skill-creator 卡（S-04~S-09/S-10~S-12/S-13~S-15）随批次四移交；W681 真端点联调与 W682 golden-50 基线仍待用户三键；pre-10-01 复盘悬项点账结论（四项：三吸收一挂批次四）随本批入账。
+> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。
 
 ### v2.3.275（2026-10-07）：W684 工作复盘与优化分析报告入库 — 治理与引擎周期复盘（含 W681 部分/W683 合并登记）
 > **来源**：用户令按「工作复盘与优化分析系统提示词（AI Agent 专用版）」复盘；周期=2026-10-07 治理与引擎更换弧线（W679-W683·13 提交全绿）。合并登记：W681 部分（文档清零+归档治理+CodeQL 首账·联调待凭证仍进行中）与 W683（三 starter 收官）随本段补录（D1 式合并段）。
