@@ -1,0 +1,19 @@
+# W683：Dependency Review——PR 依赖变更自动审查（漏洞/许可证）·starter: actions/starter-workflows code-scanning/dependency-review.yml
+# 触发=PR 到 main（dependabot PR 即真实流量）·纯 GitHub 原生零密钥·fail-on-severity=moderate（high 及以上阻断 PR）
+name: Dependency Review
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  dependency-review:
+    name: Dependency review
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dependency Review
+        uses: actions/dependency-review-action@2031cfc080254a8a887f58cffee85186f0e49e48 # v4.9.0
+        with:
+          fail-on-severity: moderate

@@ -5,7 +5,7 @@
 > **取号规则**：下一自由号 = 本表 max(W#)+1（CHANGELOG 维护契约④「Grep 现役段 max+1」在版段递延时可能滞后于已认领号——以本表为准，W659/W660 撞号险情即此产生）。
 > **生成来源**：人工撰写（Agent 起草）。**生成模型**：GLM（ZCode session 2026-10-05）。**生成日期**：2026-10-05。**核验状态**：已核验（各行 hash 经 `git log` 实证回查，取证 HEAD = b1aafb0）。
 
-## 现势：下一自由号 = **W683**（W681/W682 已预留=agent-web 引擎更换批次二/三·蓝图 §五；W676-W678 站点质量批次四~六预留顺延；W679/W680 已收官）
+## 现势：下一自由号 = **W684**（W683 已由 ZCode 2026-10-07 认领〔三 starter workflow 批〕；W681 进行中/W682 预留=引擎批次；W676-W678 批次四~六预留顺延；W679/W680 已收官）
 
 | W# | 主题 | 关联 commit | CHANGELOG 版段 | 状态 | 认领会话 |
 |----|------|------------|---------------|------|---------|
@@ -40,6 +40,7 @@
 | W679 | 动态 Workflow 工业化方案 V1.0 入库（docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md·WF-1~6 六提案）+ WF-1 前置 WP-1.0（run_eval.mjs .env 密钥引导补丁·W598 评估基线 LLM 首跑前置） | c2014b8（内容批）+ 收官级联（自指免列·_w679_close_cascade 手工 13 面·W663 先例）+ deps 热修（自指免列·上游新披露 advisory·16b826c 同族） | v2.3.273 | **已收官**（WF-1 改道待新引擎） | ZCode 2026-10-07 |
 | W680 | agent-web 引擎更换批次一（蓝图 docs/superpowers/plans/2026-10-07-agent-web-engine-swap-plan.md·用户裁决弃用原厂商引擎+保留渡口问津+全主流大模型适配）：server/engine 四模块（OpenAI-compatible）+ index.ts 重接线（SSE 八事件契约不变）+ run_eval 重写 + engine.smoke 常驻冒烟 + SettingsPage/.env.example 切换 + 去旧 SDK 依赖 | f2dcc8a（内容批）+ 收官级联（自指免列·batch_cascade 原生） | v2.3.274 | **已收官**（独立安全审查 10 项裁决·确认项已复修） | ZCode 2026-10-07 |
 | W681 | agent-web 引擎更换批次二：真端点联调+权限四模式矩阵实测+治理文档品牌引用清零+归档治理（三归档件移 docs/archive/ 并统一大写 ARCHIVE 后缀·CHANGELOG 滚动归档补课迁 W485-W649 段 166 节·文档规范 §5 固化「超限必须移 ARCHIVE+命名大写+统一 docs/archive/」+CodeQL 42 告警首账清零〔e51d067 真修 3 项：api_server realpath 边界+CORS 常量化+agent-web /api/* 限流；40 条按族 dismiss 理由随条·open=0〕） | （本批落地·联调待用户配 LLM_* 三键） | 待批次落段 | **进行中**（文档清零+归档治理已落地·sync_docs 存量陈旧登记后续） | ZCode 2026-10-07 |
+| W683 | GitHub 三 starter workflow 落地（用户圈选 dependency-review/stale/scorecard·官方模板适配·全 action SHA 钉）+ workflows README 触发矩阵/工作流列表登记 | （本批） | 待批次落段 | 已认领 | ZCode 2026-10-07 |
 | W682 | agent-web 引擎更换批次三：WF-1 复活（golden-50 新引擎 LLM 基线·评估集首跑） | 3b0dfed（预留在案·W680 收官批注记） | 待批次落段 | 预留 | ZCode 2026-10-07 |
 
 ## 递延批豁免登记（D2 裁决：对账表登记即可过 doc-sync 提交-版段对账）

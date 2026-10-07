@@ -19,7 +19,7 @@
 > **W421**：Screenshot Review 提速优化（改动范围判定：页脚/文档-only 跳过·site/data 变更定向截图·static/脚本/workflow 变更全量·schedule/dispatch 恒全量 + batch_screenshots.js --only-pages + Playwright 浏览器缓存 + checkout fetch-depth 0）。
 > **W420**：A1 内容质量深化（深度解读 100/100 补全 + 56 回元数据补齐 + 99 回导航错链修复·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W419**：修复 A1 深度解读 SD 错位（22 篇 SD 编号≠真实回号归位·40-72 回全覆盖·源文件 24 篇元数据/H1/关联行修正·第 56 回补写 SD101·无 workflow 文件改动，CI 全量验证涵盖）。
-> **W450-W680**：verify 门禁体系扩展（W458-W649 历批逐条明细见 CHANGELOG；实质改动 workflow 文件的仅 W523 diff quotePath/W536 dependabot ignore+eslint/W563 defer 与 SW 探针/W571 tokens 分发/W578 dark-state-gate 浅克隆五批，W450 前建批见 git log）+ W464 perf 基线确立（perf.yml 预算沿用 W424 校准值 LCP≤5000/CLS≤0.3/TBT≤300）+ 其余 W450-W649 各批无 workflow 结构改动）+ W650 第 28 门禁加固与 PRD 出库·无 workflow 结构改动）+ W651 全量启动裁决入档与三源快照·无 workflow 结构改动）+ W652 PD-5 设计令牌导出与对账门禁·无 workflow 结构改动）+ W653 PD-1a 色盲安全门禁·无 workflow 结构改动）+ W654 PD-1b 选型章与降级门禁·无 workflow 结构改动）+ W655 B-9 之一 D3 色值变量化·无 workflow 结构改动）+ W656 B-9 之一 audit 补丁合并单模块·无 workflow 结构改动）+ W657 B-6 第二步可引用性组件·无 workflow 结构改动）+ W658 B-7 分析方法 pip 包·+ 663 治理经验移植批·W659-W663 合并登记·CI 加固：61 处 uses 改 SHA 钉+顶层 permissions 收敛+security dispatch·无 workflow 结构改动）+ W664 CLAUDE.md 速查层+写作可验证纪律·无 workflow 结构改动）+ W666 工作复盘报告入库·无 workflow 结构改动）+ W661 WP-D2 索引站内化+footer-meta 改链·无 workflow 结构改动）+ W667 复盘三卡防漂移落地·无 workflow 结构改动）+ W662 暗色审计入基线+遗漏收敛·无 workflow 结构改动）+ W668 数据评审裁决落地·无 workflow 结构改动）+ W669 WP-E 内容发现架构·无 workflow 结构改动）+ W670 开放项双闭与默认源治理·无 workflow 结构改动）+ W671 共享载体治理·无 workflow 结构改动）+ W672 站点质量批次一·无 workflow 结构改动）+ W673 站点质量批次二·无 workflow 结构改动）+ W674 站点质量批次三·无 workflow 结构改动）+ W675 工作复盘报告入库·无 workflow 结构改动）+ W679 workflow 工业化方案入库与评估密钥引导·无 workflow 结构改动）+ W680 agent-web 引擎更换与全模型适配·无 workflow 结构改动）。
+> **W450-W680**：verify 门禁体系扩展（W458-W649 历批逐条明细见 CHANGELOG；实质改动 workflow 文件的仅 W523 diff quotePath/W536 dependabot ignore+eslint/W563 defer 与 SW 探针/W571 tokens 分发/W578 dark-state-gate 浅克隆五批，W450 前建批见 git log）+ W464 perf 基线确立（perf.yml 预算沿用 W424 校准值 LCP≤5000/CLS≤0.3/TBT≤300）+ 其余 W450-W649 各批无 workflow 结构改动）+ W650 第 28 门禁加固与 PRD 出库·无 workflow 结构改动）+ W651 全量启动裁决入档与三源快照·无 workflow 结构改动）+ W652 PD-5 设计令牌导出与对账门禁·无 workflow 结构改动）+ W653 PD-1a 色盲安全门禁·无 workflow 结构改动）+ W654 PD-1b 选型章与降级门禁·无 workflow 结构改动）+ W655 B-9 之一 D3 色值变量化·无 workflow 结构改动）+ W656 B-9 之一 audit 补丁合并单模块·无 workflow 结构改动）+ W657 B-6 第二步可引用性组件·无 workflow 结构改动）+ W658 B-7 分析方法 pip 包·+ 663 治理经验移植批·W659-W663 合并登记·CI 加固：61 处 uses 改 SHA 钉+顶层 permissions 收敛+security dispatch·无 workflow 结构改动）+ W664 CLAUDE.md 速查层+写作可验证纪律·无 workflow 结构改动）+ W666 工作复盘报告入库·无 workflow 结构改动）+ W661 WP-D2 索引站内化+footer-meta 改链·无 workflow 结构改动）+ W667 复盘三卡防漂移落地·无 workflow 结构改动）+ W662 暗色审计入基线+遗漏收敛·无 workflow 结构改动）+ W668 数据评审裁决落地·无 workflow 结构改动）+ W669 WP-E 内容发现架构·无 workflow 结构改动）+ W670 开放项双闭与默认源治理·无 workflow 结构改动）+ W671 共享载体治理·无 workflow 结构改动）+ W672 站点质量批次一·无 workflow 结构改动）+ W673 站点质量批次二·无 workflow 结构改动）+ W674 站点质量批次三·无 workflow 结构改动）+ W675 工作复盘报告入库·无 workflow 结构改动）+ W679 workflow 工业化方案入库与评估密钥引导·无 workflow 结构改动）+ W680 agent-web 引擎更换与全模型适配·无 workflow 结构改动）+ W681 品牌清零与归档治理（三归档件移 docs/archive/·现役面无 workflow 结构改动）+ W683 新增三 starter workflow（dependency-review/stale/scorecard·全 SHA 钉）。
 
 ## 1. 工作流列表
 
@@ -30,6 +30,9 @@
 | Deploy Pages | [`pages.yml`](pages.yml) | `push` main（site/** 变更） | GitHub Pages 部署 `./site`（W401 决策：不采用 build-test-deploy.yml，避免部署竞态·已删除） |
 | Lighthouse CI | [`perf.yml`](perf.yml) | `push` main（site/**）+ `pull_request` + 每周一 + `workflow_dispatch`（W422 补 push：原仅 PR 从不运行·首跑暴露性能债后阈值已校准） | LHCI 性能预算断言（LCP≤5000ms/CLS≤0.3/TBT≤300ms，W424 实测校准） |
 | Screenshot Review | [`screenshot-review.yml`](screenshot-review.yml) | `push` main（site/** 或脚本/workflow 变更）+ `pull_request` + 每周一 + `workflow_dispatch`（W421：页脚/文档-only 跳过·data 页定向截图） | Playwright 截图 + 布局审计 |
+| Dependency Review | [`dependency-review.yml`](dependency-review.yml) | `pull_request`（main·dependabot PR 即真实流量） | 依赖变更审查：漏洞/许可证（W683·fail-on-severity=moderate） |
+| Mark Stale | [`stale.yml`](stale.yml) | 每日 01:30 UTC + `workflow_dispatch`（W683） | 陈旧 issue/PR 标记（60 天）与自动关闭（再 14 天·pinned 豁免） |
+| OpenSSF Scorecard | [`scorecard.yml`](scorecard.yml) | 每周一 03:00 UTC + `branch_protection_rule` 变更 + `workflow_dispatch`（W683） | OpenSSF 安全评分（SARIF 入 Code scanning + publish_results 徽章） |
 
 > **W400 关键教训**：ci.yml 建置时仅 `pull_request` 触发，但项目工作流是直接 push main（无 PR），**CI 从未真正运行过**。W399 补 push 触发后首次运行暴露全部存量问题。**新 workflow 必须本地语法校验 + 确认触发条件匹配真实开发流。**
 
@@ -100,6 +103,8 @@
 | `workflow_dispatch` | — | ci / pages / perf / screenshot-review | ✅ | — | ✅ | ✅ | ✅ |
 
 > `concurrency`：CI/Security/Perf 均设 `group + cancel-in-progress: true`，同 ref 后续 push 取消前次。
+
+> **W683 增补（三 starter）**：Dependency Review 仅 `pull_request`；Stale 仅 `schedule`+`workflow_dispatch`；Scorecard 仅 `schedule`+`branch_protection_rule`+`workflow_dispatch`——三者均不参与 push 门禁链。
 
 ## 4. artifact 列表
 
