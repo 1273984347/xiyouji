@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W680），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W684），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.275（2026-10-07）：W684 工作复盘与优化分析报告入库 — 治理与引擎周期复盘（含 W681 部分/W683 合并登记）
+> **来源**：用户令按「工作复盘与优化分析系统提示词（AI Agent 专用版）」复盘；周期=2026-10-07 治理与引擎更换弧线（W679-W683·13 提交全绿）。合并登记：W681 部分（文档清零+归档治理+CodeQL 首账·联调待凭证仍进行中）与 W683（三 starter 收官）随本段补录（D1 式合并段）。
+> - **执行（报告）**：docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-07-治理与引擎.md——执行摘要+九章+附录：E-01~E-10 十项经验量化排序（独立安全审查先行 5.0/手工级联复制改造 4.75/崩溃前写盘 git 重建 4.5/告警按族裁决 4.5/归档三规则 4.5 等）+S-10~S-12 三张 skill-creator 任务卡（引擎冒烟模板/告警裁决流水线/手工级联生成器·均含规格五要素与周级时间表）+U 四项三态决策（dynamic-workflows 暂缓沿用 W675 裁决等）+SC 五场景量化（跳号收官 4.40 最高）+P-01~P-14 问题登记（P0×2 已闭环：铁令跨 session 载体/引擎密钥可读）+WF 两流程（引擎更换批复盘+告警处置 ≥20% 目标）+WBS 七行动（关键路径=A-01 联调→A-02 基线·唯一外部依赖=用户三键）。
+> - **合并登记·W681 部分**（4801650+e51d067+82e40d0）：品牌现役面 31 处/10 文件清零（含 agent-web 三 md 与 .workbuddy 功能排除）+三归档件移 docs/archive/ 统一大写 ARCHIVE 后缀+CHANGELOG 滚动归档迁 W485-W649 段 166 节（1861→273 行）+文档规范 §5 固化归档三规则+CodeQL 42 告警首账清零（真修 3：api_server realpath 边界/CORS 常量化/agent-web /api/* 限流·其余按族 dismiss 理由随条）——状态=进行中（剩余=真端点联调待用户 LLM 三键+权限矩阵）。
+> - **合并登记·W683**（bdc3fb8+1c8ba10+4b27de2）：三 starter workflow（dependency-review/stale/scorecard·全 action SHA 钉）三首跑全绿+依赖图开启（vulnerability-alerts PUT 204·dep-review 首跑红根因）+SECURITY.md 新增与 stale 权限收 job 级（scorecard 首账快修 2）——状态=已收官。
+> - **验证**：verify_delivery 核心全绿（37 门禁 42 段·级联后实跑）；报告全部数字取自 git log/gh api/机判套件当批实测；假设 H-01~H-04 显式标注并给验证法；可行性自评 7/7 可行。
+> - **文件**：docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-07-治理与引擎.md（新增）、SECURITY.md（W683 追记）、.github/workflows/ 三 starter yml（W683 追记）、docs/00-导读/W批次编号对账表.md（W684 认领+W681/W683 版段列同步）、六文档级联、AGENTS 脚注、四页脚、CITATION、file-index。
+> - **处置收尾**：A-01 真端点联调（用户配 LLM_API_BASE/LLM_API_KEY/LLM_MODEL 三键·唯一外部依赖）→A-02 golden-50 基线（W682）；方法论 README 索引行随并行会话 README 批合并登记（本批不触碰该文件在途改动）；sync_docs 存量陈旧登记 A-03。
+> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。
 
 ### v2.3.274（2026-10-07）：W680 agent-web 引擎更换批次一
 > **来源**：用户两次指令（项目弃用原厂商 CLI 与凭证路线+完全删除其全部品牌内容）与三选一裁决（agent-web 整体退役/保留换引擎/只清提及）——裁决为保留渡口问津但更换驱动引擎；蓝图 docs/superpowers/plans/2026-10-07-agent-web-engine-swap-plan.md（V1.0·集成面 826 行实读量化）。

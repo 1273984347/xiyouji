@@ -1,0 +1,20 @@
+{
+  "batch": "W684",
+  "version": "v2.3.275",
+  "date": "2026-10-07",
+  "desc": "工作复盘报告入库",
+  "title": "W684 工作复盘与优化分析报告入库",
+  "head_entry": "2026-10-07（v2.3.275 W684）治理与引擎周期复盘报告入库（E 十项/S 三卡/P 十四例/WBS 七行动·含 W681 部分〔品牌 31 处清零+归档治理+CodeQL 42→0·联调待凭证〕与 W683〔三 starter 全绿+依赖图开启〕合并登记）",
+  "head_sentence": "治理与引擎周期复盘报告入库",
+  "changelog_body": "\n> **来源**：用户令按「工作复盘与优化分析系统提示词（AI Agent 专用版）」复盘；周期=2026-10-07 治理与引擎更换弧线（W679-W683·13 提交全绿）。合并登记：W681 部分（文档清零+归档治理+CodeQL 首账·联调待凭证仍进行中）与 W683（三 starter 收官）随本段补录（D1 式合并段）。\n> - **执行（报告）**：docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-07-治理与引擎.md——执行摘要+九章+附录：E-01~E-10 十项经验量化排序（独立安全审查先行 5.0/手工级联复制改造 4.75/崩溃前写盘 git 重建 4.5/告警按族裁决 4.5/归档三规则 4.5 等）+S-10~S-12 三张 skill-creator 任务卡（引擎冒烟模板/告警裁决流水线/手工级联生成器·均含规格五要素与周级时间表）+U 四项三态决策（dynamic-workflows 暂缓沿用 W675 裁决等）+SC 五场景量化（跳号收官 4.40 最高）+P-01~P-14 问题登记（P0×2 已闭环：铁令跨 session 载体/引擎密钥可读）+WF 两流程（引擎更换批复盘+告警处置 ≥20% 目标）+WBS 七行动（关键路径=A-01 联调→A-02 基线·唯一外部依赖=用户三键）。\n> - **合并登记·W681 部分**（4801650+e51d067+82e40d0）：品牌现役面 31 处/10 文件清零（含 agent-web 三 md 与 .workbuddy 功能排除）+三归档件移 docs/archive/ 统一大写 ARCHIVE 后缀+CHANGELOG 滚动归档迁 W485-W649 段 166 节（1861→273 行）+文档规范 §5 固化归档三规则+CodeQL 42 告警首账清零（真修 3：api_server realpath 边界/CORS 常量化/agent-web /api/* 限流·其余按族 dismiss 理由随条）——状态=进行中（剩余=真端点联调待用户 LLM 三键+权限矩阵）。\n> - **合并登记·W683**（bdc3fb8+1c8ba10+4b27de2）：三 starter workflow（dependency-review/stale/scorecard·全 action SHA 钉）三首跑全绿+依赖图开启（vulnerability-alerts PUT 204·dep-review 首跑红根因）+SECURITY.md 新增与 stale 权限收 job 级（scorecard 首账快修 2）——状态=已收官。\n> - **验证**：verify_delivery 核心全绿（37 门禁 42 段·级联后实跑）；报告全部数字取自 git log/gh api/机判套件当批实测；假设 H-01~H-04 显式标注并给验证法；可行性自评 7/7 可行。\n> - **文件**：docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-07-治理与引擎.md（新增）、SECURITY.md（W683 追记）、.github/workflows/ 三 starter yml（W683 追记）、docs/00-导读/W批次编号对账表.md（W684 认领+W681/W683 版段列同步）、六文档级联、AGENTS 脚注、四页脚、CITATION、file-index。\n> - **处置收尾**：A-01 真端点联调（用户配 LLM_API_BASE/LLM_API_KEY/LLM_MODEL 三键·唯一外部依赖）→A-02 golden-50 基线（W682）；方法论 README 索引行随并行会话 README 批合并登记（本批不触碰该文件在途改动）；sync_docs 存量陈旧登记 A-03。\n> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。\n",
+  "milestone_block": "- **v2.3.275 W684 工作复盘报告入库（治理与引擎周期·含 W681 部分/W683 合并登记）**：\n  - E-01~E-10 十项经验 + S-10~S-12 三卡 + P-01~P-14 登记（P0×2 闭环）+ WBS 七行动\n  - W681 部分：品牌清零+归档治理+CodeQL 42→0（联调待凭证）·W683：三 starter 首跑全绿收官\n  - 关键路径=A-01 联调（用户三键）→A-02 golden-50 基线\n",
+  "agents_note": "2026-10-07（v2.3.275 W684·合并登记 W681 部分/W683）工作复盘与优化分析报告（治理与引擎周期）入库：E-01~E-10+S-10~S-12 三卡+P-01~P-14+WBS 七行动；W681 部分=品牌清零/归档治理/CodeQL 42→0（联调待用户三键）·W683=三 starter 首跑全绿收官",
+  "file_index_rows": [
+    "| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-07-治理与引擎.md | W684 | 新增·治理与引擎周期复盘（E-01~E-10/S-10~S-12 三卡/P-01~P-14/WBS 七行动·含 W681 部分/W683 合并登记） |",
+    "| SECURITY.md | W683 | 新增·安全策略（scorecard 首账快修·报告渠道/处置口径/设计取舍） |",
+    "| .github/workflows/dependency-review.yml | W683 | 新增·PR 依赖变更审查（v4.9.0 SHA 钉·fail-on-severity=moderate） |",
+    "| .github/workflows/stale.yml | W683 | 新增·陈旧 issue/PR 自动提醒（v9·60+14 天·权限 job 级） |",
+    "| .github/workflows/scorecard.yml | W683 | 新增·OpenSSF 安全评分（v2.4.4·周评+SARIF 入 Code scanning） |",
+    "| docs/00-导读/W批次编号对账表.md | W684 | 更新·W684 认领+收官+W681/W683 版段列同步 |"
+  ]
+}

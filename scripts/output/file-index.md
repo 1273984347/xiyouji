@@ -11,6 +11,17 @@
 ---
 
 
+## W684 工作复盘报告入库（2026-10-07·v2.3.275）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-07-治理与引擎.md | W684 | 新增·治理与引擎周期复盘（E-01~E-10/S-10~S-12 三卡/P-01~P-14/WBS 七行动·含 W681 部分/W683 合并登记） |
+| SECURITY.md | W683 | 新增·安全策略（scorecard 首账快修·报告渠道/处置口径/设计取舍） |
+| .github/workflows/dependency-review.yml | W683 | 新增·PR 依赖变更审查（v4.9.0 SHA 钉·fail-on-severity=moderate） |
+| .github/workflows/stale.yml | W683 | 新增·陈旧 issue/PR 自动提醒（v9·60+14 天·权限 job 级） |
+| .github/workflows/scorecard.yml | W683 | 新增·OpenSSF 安全评分（v2.4.4·周评+SARIF 入 Code scanning） |
+| docs/00-导读/W批次编号对账表.md | W684 | 更新·W684 认领+收官+W681/W683 版段列同步 |
+
 ## W680 W680 agent-web 引擎更换批次一（2026-10-07·v2.3.274）
 
 | 文件 | W | 说明 |
