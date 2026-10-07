@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W679），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W680），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.274（2026-10-07）：W680 agent-web 引擎更换批次一
+> **来源**：用户两次指令（项目弃用原厂商 CLI 与凭证路线+完全删除其全部品牌内容）与三选一裁决（agent-web 整体退役/保留换引擎/只清提及）——裁决为保留渡口问津但更换驱动引擎；蓝图 docs/superpowers/plans/2026-10-07-agent-web-engine-swap-plan.md（V1.0·集成面 826 行实读量化）。
+> - **执行（批次一·引擎替换）**：① 新建 server/engine 四模块——types.ts（契约）、openai-compat.ts（chat/completions 流式驱动：SSE 容忍 CRLF 与注释行与 usage-only chunk、tool_calls 增量按 index 装配、reasoning_content 类推理字段有意忽略、[DONE] 缺失容错）、tools.ts（服务端六工具 read_file/glob/grep/write_file/edit_file/run_command + 权限三分类 + W536/W537 同源安全：realpath 路径守卫/无 shell spawn/命令白名单/读写上限）、agent-loop.ts（maxTurns 封顶工具循环·权限桥逐调用接续）；② index.ts 重接线——SSE 八事件契约逐字段不变（src/ 零改动·前端 fullContent 追加语义实测兼容增量 delta）、权限桥策略保留（bypass 直通/read 放行/plan 只读/acceptEdits 放行写/其余走前端许可）、会话历史改从 SQLite 重建（替代旧 SDK resume·表结构零迁移）、引擎中止信号接线（客户端断开即中止 LLM 流消费）、引擎未配置 400 快速失败；③ evals/run_eval.mjs 重写——spawn 起服（W600 同款模式·AGENT_WEB_ALLOW_BYPASS=1 无人值守）驱动 /api/chat 全链路，机判三规则/self-check/产物形状不变；④ engine.smoke.mjs 常驻冒烟——mock LLM 全链路 4 组机判断言全绿（SSE 事件序列对拍 init,tool,tool_result,text,done/工具真实读盘断言/越界路径被守卫拒绝/文本增量拼接）；⑤ SettingsPage 凭证区改引擎配置状态 + .env.example 换 LLM_API_BASE/LLM_API_KEY/LLM_MODEL 三键与九家主流端点预设表；⑥ package.json 移除旧厂商 SDK 依赖（lockfile 同步）。
+> - **全主流适配口径**：引擎代码零厂商分支，端点/模型全配置化；协议层为行业事实标准 OpenAI-compatible（GLM/DeepSeek/Kimi/Qwen/OpenAI/Gemini/Claude 兼容层/ollama/vLLM 均提供该协议端点），预设表入 .env.example。
+> - **验证（当批现测）**：npm run build（tsc -b + vite build）exit 0；engine.smoke.mjs 4 组断言全绿 exit 0；feedback.test.mjs 5/5（拆卸噪声与既有先例同族·退出码 0）；run_eval --self-check 4/4；npm audit --omit=dev --audit-level=high exit 0 且 npm ls 旧 SDK 零输出；agent-web 现役面品牌引用 grep 零命中（历史段与迁移蓝图按豁免口径另见 W681）。
+> - **文件**：xiyouji-agent-web/server/engine/（新增四模块）、server/engine.smoke.mjs（新增）、server/index.ts（重接线）、server/feedback.test.mjs（注释清理）、src/components/SettingsPage.tsx（引擎配置状态）、evals/run_eval.mjs（重写）、.env.example（换键+预设表）、package.json+package-lock.json（去依赖）、.gitignore（engine 编译副产物）、docs/superpowers/plans/2026-10-07-agent-web-engine-swap-plan.md（新增蓝图）、2026-10-07-workflow-industrialization-plan.md（WF-1 改道记录）、scripts/output/_w680_brand_scrub.py（一次性）、docs/00-导读/W批次编号对账表.md、六文档级联、AGENTS 脚注、三页脚、CITATION、file-index。
+> - **处置收尾**：W681=真端点联调（用户配 LLM_API_BASE/LLM_API_KEY/LLM_MODEL 三键）+权限四模式矩阵实测+治理文档品牌引用清零（AGENTS/README/STRUCTURE/交接/Makefile/site/dukou-engine.html/agent-web 三 md）；W682=WF-1 复活（golden-50 在新引擎跑基线）。
+> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。
 
 ### v2.3.273（2026-10-07）：W679 动态 Workflow 工业化方案入库
 > **来源**：用户裁决批准《动态 Workflow 工业化方案 V1.0》（2026-10-07 全仓实测扫描·事实基线 B1-B31 逐项带取证命令）并令「开工」；本批 = 方案入库 + WF-1 前置 WP-1.0（对账表现势 W680·W676-W678 批次四~六预留不变）。
