@@ -62,7 +62,11 @@ def _list_datasets():
 
 
 def _load_dataset(name):
-    p = os.path.join(DATASET_DIR, name + ".json")
+    root_real = os.path.realpath(DATASET_DIR)
+    p = os.path.realpath(os.path.join(root_real, name + ".json"))
+    # W681 CodeQL 处置：realpath 边界校验（防 ../ 逃逸读仓外文件）
+    if not (p == root_real or p.startswith(root_real + os.sep)) or not p.endswith(".json"):
+        return None
     if not os.path.exists(p):
         return None
     try:
@@ -187,7 +191,7 @@ class Handler(BaseHTTPRequestHandler):
         if origin == "null":
             return "null"  # file:// 场景（浏览器以字面量 "null" 发送）
         if origin in ("http://127.0.0.1:8787", "http://localhost:8787"):
-            return origin
+            return "http://127.0.0.1:8787"  # W681：回显白名单常量而非请求头原值（防头注入污点流）
         return None
 
     def _send(self, obj, code=200, ctype="application/json; charset=utf-8"):

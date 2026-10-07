@@ -61,6 +61,29 @@ console.log(`[boot] PROJECT_CWD = ${PROJECT_CWD}`);
 // Middleware
 app.use(express.json());
 
+// W681 CodeQL 处置（missing-rate-limiting）：/api/* 无依赖内存限流（每 IP 30 req/min·429）
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const RATE_LIMIT_MAX = 30;
+const rateBuckets = new Map<string, { count: number; resetAt: number }>();
+app.use("/api", (req, res, next) => {
+  const ip = req.ip || req.socket.remoteAddress || "unknown";
+  const now = Date.now();
+  const b = rateBuckets.get(ip);
+  if (!b || now >= b.resetAt) {
+    rateBuckets.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return next();
+  }
+  b.count += 1;
+  if (b.count > RATE_LIMIT_MAX) {
+    return res.status(429).json({ error: "请求过于频繁（每分钟 30 次上限），请稍后再试" });
+  }
+  next();
+});
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, b] of rateBuckets) if (now >= b.resetAt) rateBuckets.delete(ip);
+}, RATE_LIMIT_WINDOW_MS).unref();
+
 // 安全头（与 site/_headers 一致：防点击劫持 / MIME 嗅探 / Referer 泄露，P0-1 修复）
 app.use((_req, res, next) => {
   res.setHeader("X-Content-Type-Options", "nosniff");
