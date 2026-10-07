@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 
 RULES_ROOT = Path(r"c:\Users\12739\.trae-cn\plugins\trae-remote-official\tashan-research-skills\1.0.0\skills\papercheck\assets\paperchecker-rules")
-DOC = Path(r"d:\xiyouji\docs\S4-学术投稿\装饰投稿\学术论文B轨-新中式数字雅集-装饰投稿版.docx")
+DOC = Path(r"d:\xiyouji\docs\S4-学术投稿\05-投稿\装饰投稿\设计方向-装饰投稿版.docx")
 OUT = Path(r"d:\xiyouji\tmpe\papercheck_rules_submit_raw.json")
 
 sys.path.insert(0, str(RULES_ROOT))

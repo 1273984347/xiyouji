@@ -4,7 +4,7 @@
 图 C-2 锚点查询实测（line_check 真实输出转录）
 图 C-3 校验输出实测（check_citations 全量通过 + 单字改写阻断·真实输出转录）
 图 C-4 门禁运行实测（verify_delivery 输出节选·逐行取自 tmpe/_s4c_verify_final.txt）
-输出：docs/S4-学术投稿/图表/C-图*.svg + tmpe/s4c_jobs.json（供 _w621_render_png.js 2x 渲染）
+输出：docs/S4-学术投稿/07-图表/C-图*.svg + tmpe/s4c_jobs.json（供 _w621_render_png.js 2x 渲染）
 """
 import io
 import json
@@ -12,7 +12,7 @@ import os
 import sys
 
 ROOT = r"D:\xiyouji"
-FIG = os.path.join(ROOT, "docs", "S4-学术投稿", "图表")
+FIG = os.path.join(ROOT, "docs", "S4-学术投稿", "07-图表")
 VERIFY_TXT = os.path.join(ROOT, "tmpe", "_s4c_verify_final.txt")
 
 INK = "#23201A"
@@ -82,7 +82,7 @@ def fig1():
     layers = [
         (76, "锚点层｜引文在哪里", ["第 N 回 line X · 只读定位脚本 · 锚定公开底本"]),
         (222, "校验层｜引文对不对", ["去空白归一 + 精确子串命中（最小归一）", "任一未命中即失败 · 禁止省略号节引"]),
-        (368, "门禁层｜核验何时发生", ["挂在交付路径 · 提交即执行 · 24 道门禁含引文硬验证"]),
+        (368, "门禁层｜核验何时发生", ["挂在交付路径 · 提交即执行 · 36 道门禁含引文硬验证"]),
     ]
     for y, t, descs in layers:
         p.append(rect(348, y, 560, 118, WHITE))
@@ -145,7 +145,7 @@ def fig3():
     p.append(rect(40, 30, 1100, 200, WHITE, INK, 2.5, 14))
     p.append(T(76, 70, "A　全量校验：通过", 22, "#3F6E4C", FONT, "start", "bold"))
     p.append(T(76, 118, "$ python scripts/check_citations.py --dir docs", 20, INK, MONO))
-    p.append(T(76, 158, "引文核验通过：共 437 条引文行 · 命中率 100%（842 个文件扫描）", 20, INK, MONO))
+    p.append(T(76, 158, "引文核验通过：共 439 条引文行 · 命中率 100%（892 个文件扫描）", 20, INK, MONO))
     p.append(T(76, 200, "→  退出码 0 · 全库放行", 20, CINNABAR, FONT))
     # B 阻断
     p.append(rect(40, 260, 1100, 240, WHITE, INK, 2.5, 14))

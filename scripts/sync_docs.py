@@ -9,6 +9,7 @@
 退出码：0 全部一致 / 1 有不一致
 """
 import argparse
+import os
 import re
 import sys
 from pathlib import Path
@@ -28,10 +29,38 @@ FILES = {
 
 HEADER_LINES = 50  # 头部扫描行数
 
-# 统计字段静态期望值（W424 复盘沉淀：三份文档头部现为聚合式声明——
-# "A1-A6 共 N 篇 + M 可视化页（A4 K 篇 已含）"，逐类计数行已移除；
-# AGG/VIZ/A4 与真实文件计数的一致性由 verify_delivery 兜底校验）
-STATIC_EXPECTED = {"AGG": 611, "VIZ": 86, "A4": 209}
+# 统计期望值现值化（W685 校准·W684 P-11/A-03：STATIC_EXPECTED 硬编码 611 腐烂实证）——
+# AGG/A4/VIZ 改为磁盘实数动态计算，口径与 verify_delivery A1-A6 计数一致：
+# 六板块顶层 .md 排除 README.md；VIZ = site/data HTML 数减 _shell.html 模板壳。
+A_AREAS = [
+    ("A1", os.path.join("docs", "01-全书逐回解读")),
+    ("A2", os.path.join("docs", "06-个人随笔")),
+    ("A3", os.path.join("docs", "02-人物深度分析")),
+    ("A4", os.path.join("docs", "03-主题与情节专题")),
+    ("A5", os.path.join("docs", "04-文化与历史背景")),
+    ("A6", os.path.join("docs", "05-诗词歌赋")),
+]
+
+
+def _count_content_md(area_dir):
+    """统计板块顶层 .md 文件数，排除 README.md（与 verify_delivery._count_content_md 同口径）。"""
+    p = ROOT / area_dir
+    if not p.is_dir():
+        return -1
+    return sum(1 for fn in os.listdir(p)
+               if fn.endswith(".md") and fn.lower() != "readme.md")
+
+
+def disk_expected():
+    """磁盘实数统计期望（W685 现值化）。目录缺失时该键回退 0，由规则 2 报 MISMATCH。"""
+    agg = 0
+    for _, d in A_AREAS:
+        n = _count_content_md(d)
+        if n > 0:
+            agg += n
+    data_dir = ROOT / "site" / "data"
+    viz = sum(1 for fn in os.listdir(data_dir) if fn.endswith(".html")) - 1 if data_dir.is_dir() else 0
+    return {"AGG": agg, "VIZ": viz, "A4": max(_count_content_md(A_AREAS[3][1]), 0)}
 
 # CHANGELOG 最新版本段统计正则（提取最终值，支持 N→M 和 N 两种格式）
 CL_PATTERNS = {
@@ -131,18 +160,19 @@ def rule_version(latest_v, fix=False):
 
 
 def rule_stats(latest_section, fix=False):
-    """规则 2: 统计计数一致性 - 校验 README/STRUCTURE/项目说明 头部统计数字。
+    """规则 2: 统计计数一致性 - 校验 README/STRUCTURE 头部聚合声明 vs 磁盘实数（W685 现值化）。
 
     fix=True 时按 expected 值就地替换 actual（仅替换单行内首个匹配的数字）。
+    项目说明.md 的分面计数声明由 rule_xmsm_counts 单独校验（W685 校准）。
     """
     issues = []
     fixed = []
-    expected = dict(STATIC_EXPECTED)
+    expected = disk_expected()
     for key, pat in CL_PATTERNS.items():
         v = extract_final_value(pat, latest_section)
         if v is not None:
             expected[key] = v
-    for name in ["README", "STRUCTURE", "项目说明"]:
+    for name in ["README", "STRUCTURE"]:
         path = FILES[name]
         if not path.exists():
             issues.append(f"[MISSING] {name} 文件不存在")
@@ -184,6 +214,42 @@ def rule_stats(latest_section, fix=False):
     return issues
 
 
+def rule_xmsm_counts():
+    """规则 2b（W685 校准）：项目说明.md 分面计数声明 vs 磁盘实数。
+
+    项目说明现行格式为分面计数散文（「A2 随笔 44 篇…86 个 D3.js/Three.js 可视化页面」），
+    聚合式 TARGET_PATTERNS 自 W424 校准后不再命中（曾报「未找到」假红）；改为逐面对磁盘数。
+    """
+    issues = []
+    path = FILES["项目说明"]
+    if not path.exists():
+        return ["[MISSING] 项目说明 文件不存在"]
+    text = read_text(path)
+    disk = {k: max(_count_content_md(d), 0) for k, d in A_AREAS}
+    pat_map = {
+        "A1": re.compile(r"A1 方向 (\d+)/\d+"),
+        "A2": re.compile(r"A2 随笔 (\d+) 篇"),
+        "A3": re.compile(r"A3 人物(?:深化)? (\d+) 篇"),
+        "A4": re.compile(r"A4 主题专题 (\d+) 篇"),
+        "A5": re.compile(r"A5 文化 (\d+) 篇"),
+        "A6": re.compile(r"A6 诗词 (\d+) 篇"),
+    }
+    for key, pat in pat_map.items():
+        m = pat.search(text)
+        if not m:
+            issues.append(f"[MISMATCH] 项目说明 {key} 分面计数声明未找到（模式 {pat.pattern}）")
+        elif int(m.group(1)) != disk[key]:
+            issues.append(f"[MISMATCH] 项目说明 {key} 声明 {m.group(1)} vs 磁盘 {disk[key]}")
+    mv = re.search(r"(\d+) 个 D3\.js/Three\.js 可视化页", text)
+    data_dir = ROOT / "site" / "data"
+    viz = sum(1 for fn in os.listdir(data_dir) if fn.endswith(".html")) - 1 if data_dir.is_dir() else 0
+    if not mv:
+        issues.append("[MISMATCH] 项目说明 可视化页计数声明未找到")
+    elif int(mv.group(1)) != viz:
+        issues.append(f"[MISMATCH] 项目说明 可视化页 声明 {mv.group(1)} vs 磁盘 {viz}")
+    return issues
+
+
 def detect_archive_boundary(cl_text):
     """检测 CHANGELOG 归档边界（可能多段：W001-W399 与 W400-W416 均已迁移）。
     返回所有归档区间末端的最大值，未检测到返回 0。"""
@@ -192,40 +258,75 @@ def detect_archive_boundary(cl_text):
     return max(ends) if ends else 0
 
 
+LEDGER_REL = os.path.join("docs", "00-导读", "W批次编号对账表.md")
+SEG_HEADING_RE = re.compile(r"^### v[\d.]+（[^）]*）：(.*)$", re.M)
+
+
+def collect_reserved_wids():
+    """对账表登记的预留 W###（W685 校准·规则 3 预留号豁免）。
+
+    两个来源：① 表行任一单元格恰为「预留」；② 含「预留」字样行内的 Wxxx-Wyyy 区间。
+    登记即豁免（与 check_doc_sync C4「D2 裁决」同一口径）。
+    """
+    ledger = ROOT / LEDGER_REL
+    if not ledger.exists():
+        return set()
+    reserved = set()
+    for line in read_text(ledger).splitlines():
+        if "预留" not in line:
+            continue
+        for m in re.finditer(r"W(\d{3})-W(\d{3})", line):
+            reserved.update(range(int(m.group(1)), int(m.group(2)) + 1))
+        cells = [c.strip() for c in line.split("|")]
+        if any(c == "预留" for c in cells):
+            reserved.update(int(m.group(1)) for m in re.finditer(r"\bW(\d{3})\b", line))
+    return reserved
+
+
 def rule_wids(cl_text):
-    """规则 3: W### 编号连续性 - CHANGELOG 连续 + file-index 条目一致。
-    W001-WXXX 已归档至 docs/archive/CHANGELOG-ARCHIVE.md，仅检查归档边界以上的连续性。"""
+    """规则 3: W### 编号连续性 - CHANGELOG 版段连续 + file-index 条目一致（W685 校准）。
+
+    W684 P-11/A-03 双缺陷校准：
+    ① 预留号豁免——对账表登记的预留号（W676-W678/W682）不再当跳号（登记即豁免）；
+       连续性按「版段标题 W 集合」断言，正文散文提及不再参与（W676 曾因一处散文提及侥幸
+       通过、W677/W678 却报缺——同族号两种命运，判据本身失真）；
+    ② file-index 对账只查各版段「主 W 号」（合并段副号如 W659/W660/W683 系 D1 合并登记，
+       本就无独立 file-index 段，不再误报）。
+    """
     issues = []
-    cl_wids = extract_individual_wids(cl_text)
-    if not cl_wids:
-        return ["[ERROR] CHANGELOG 未找到 W### 编号"]
+    headings = SEG_HEADING_RE.findall(cl_text)
+    if not headings:
+        return ["[ERROR] CHANGELOG 未找到版本段"]
+    all_wids = set()
+    primary_wids = set()
+    for title in headings:
+        ws = [int(m) for m in re.findall(r"W(\d{3})", title)]
+        if not ws:
+            continue
+        primary_wids.add(ws[0])
+        all_wids.update(ws)
+    if not all_wids:
+        return ["[ERROR] CHANGELOG 版段未找到 W### 编号"]
     boundary = detect_archive_boundary(cl_text)
-    # 仅检查归档边界以上的 W###（W001-WXXX 已归档，CHANGELOG 仅保留 W(XXX+1)+）
-    active = [w for w in cl_wids if w > boundary]
-    if not active:
-        return ["[ERROR] CHANGELOG 未找到归档边界以上的 W### 编号"]
-    cl_min, cl_max = active[0], active[-1]
-    expected_seq = set(range(cl_min, cl_max + 1))
-    missing = sorted(expected_seq - set(active))
+    all_wids = {w for w in all_wids if w > boundary}
+    primary_wids = {w for w in primary_wids if w > boundary}
+    if not all_wids:
+        return ["[ERROR] CHANGELOG 未找到归档边界以上的版段 W###"]
+    lo, hi = min(all_wids), max(all_wids)
+    reserved = collect_reserved_wids()
+    missing = sorted(set(range(lo, hi + 1)) - all_wids - reserved)
     if missing:
         preview = ", ".join(f"W{w:03d}" for w in missing[:10])
-        issues.append(f"[MISMATCH] CHANGELOG W### 跳号 (W{cl_min:03d}-W{cl_max:03d}): 缺 {len(missing)} 个 ({preview})")
+        issues.append(f"[MISMATCH] CHANGELOG 版段跳号 (W{lo:03d}-W{hi:03d}): 缺 {len(missing)} 个 ({preview})")
     fidx_path = FILES["file-index"]
     if not fidx_path.exists():
         issues.append("[MISSING] file-index.md 不存在")
         return issues
-    fidx_text = read_text(fidx_path)
-    fidx_wids = set(extract_individual_wids(fidx_text))
-    active_fidx = {w for w in fidx_wids if w > boundary}
-    active_set = set(active)
-    missing_in_fidx = sorted(active_set - active_fidx)
+    fidx_wids = {w for w in extract_individual_wids(read_text(fidx_path)) if w > boundary}
+    missing_in_fidx = sorted(primary_wids - fidx_wids)
     if missing_in_fidx:
         preview = ", ".join(f"W{w:03d}" for w in missing_in_fidx[:10])
-        issues.append(f"[MISMATCH] file-index.md 缺少 {len(missing_in_fidx)} 个 CHANGELOG W### 条目 ({preview})")
-    cl_count = len(active_set)
-    fidx_count = len(active_fidx & active_set)
-    if fidx_count != cl_count:
-        issues.append(f"[MISMATCH] W### 条目数 (W>{boundary:03d}): CHANGELOG {cl_count} vs file-index {fidx_count}")
+        issues.append(f"[MISMATCH] file-index.md 缺少 {len(missing_in_fidx)} 个版段主 W### 条目 ({preview})")
     return issues
 
 
@@ -252,8 +353,9 @@ def rule_fileindex_latest(cl_text):
 #   - 规则 6 rule_counter_sum：计数器求和一致性（P1-6 声明数 vs 表格求和）
 #   - 规则 7 rule_file_location：文件位置规范（P1-5 S2 方向文件错位）
 
-# CHANGELOG 现役段"进行中"标记正则
-IN_PROGRESS_RE = re.compile(r"进行中")
+# CHANGELOG 现役段"进行中"标记正则（W685 校准：只认「状态=进行中」形态——
+# 散文提及如「联调待凭证仍进行中」非状态标记，不再计入）
+IN_PROGRESS_RE = re.compile(r"状态\*{0,2}\s*[=：:]\s*进行中")
 
 # README 数据维度全景段标题正则（主源：提取标题声明数）
 # W424 复盘沉淀：README 现为 `**数据维度全景（N 维）**：` 粗体段落（非 ## 标题），两种写法都接受
@@ -471,14 +573,14 @@ def main():
             print("  [OK] 4 文件头部均含最新版本号")
 
     if args.rule in (None, "stats"):
-        print("\n=== 规则 2: 统计计数一致性 ===")
-        issues = rule_stats(latest_section, fix=args.fix)
+        print("\n=== 规则 2: 统计计数一致性（磁盘实数）===")
+        issues = rule_stats(latest_section, fix=args.fix) + rule_xmsm_counts()
         if issues:
             for i in issues:
                 print(f"  {i}")
             all_ok = False
         else:
-            print("  [OK] README/STRUCTURE/项目说明 统计计数一致")
+            print("  [OK] README/STRUCTURE 聚合声明 + 项目说明分面声明 均与磁盘实数一致")
 
     if args.rule in (None, "wids"):
         print("\n=== 规则 3: W### 编号连续性 ===")

@@ -10,8 +10,8 @@
 import io
 import sys
 
-MAIN = r"D:\xiyouji\docs\S4-学术投稿\学术论文C轨-可验证性基础设施.md"
-ANON = r"D:\xiyouji\docs\S4-学术投稿\学术论文C轨-可验证性基础设施-匿名稿.md"
+MAIN = r"D:\xiyouji\docs\S4-学术投稿\可验证性方向-投稿版.md"
+ANON = r"D:\xiyouji\docs\S4-学术投稿\可验证性方向-匿名稿.md"
 
 AI_SECTION = """## AI 使用声明
 

@@ -4,8 +4,8 @@ import html
 import sys
 import xml.etree.ElementTree as ET
 
-SRC = 'D:/xiyouji/docs/S4-学术投稿/文献/_resnik.xml'
-OUT = 'D:/xiyouji/docs/S4-学术投稿/文献/_resnik.html'
+SRC = 'D:/xiyouji/docs/S4-学术投稿/06-文献/_resnik.xml'
+OUT = 'D:/xiyouji/docs/S4-学术投稿/06-文献/_resnik.html'
 
 CITATION = ('Resnik, D. B. & Hosseini, M. Hallucinated citations produced by generative '
             'artificial intelligence may constitute research misconduct when citations '
@@ -133,7 +133,7 @@ footer{{margin-top:2em;font-size:9pt;color:#555;border-top:1px solid #ccc;paddin
 <div class="abstract"><b>Abstract</b>{abstract_html}</div>
 {body_html}
 <h2>References</h2><ol class="refs">{refs_html}</ol>
-<footer>License: CC BY 4.0（https://creativecommons.org/licenses/by/4.0/）· 原文：https://pmc.ncbi.nlm.nih.gov/articles/PMC13051339/ · 本文件为项目文献存档 docs/S4-学术投稿/文献/（2026-09-26 生成）</footer>
+<footer>License: CC BY 4.0（https://creativecommons.org/licenses/by/4.0/）· 原文：https://pmc.ncbi.nlm.nih.gov/articles/PMC13051339/ · 本文件为项目文献存档 docs/S4-学术投稿/06-文献/（2026-09-26 生成）</footer>
 </body></html>"""
 
 with open(OUT, 'w', encoding='utf-8') as f:

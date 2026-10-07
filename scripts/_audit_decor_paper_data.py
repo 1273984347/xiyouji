@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """_audit_decor_paper_data.py — 《装饰》B 轨论文数据核验与复现（一次性·可重复执行）
 
-核验对象：docs/S4-学术投稿/装饰投稿/ 下的 B 轨论文（完整稿 / 装饰投稿版 / 匿名稿）
+核验对象：docs/S4-学术投稿/05-投稿/装饰投稿/ 下的 B 轨论文（完整稿 / 装饰投稿版 / 匿名稿）
 核验内容：论文全部量化断言 vs 项目源数据（dataset/、site/data/、tokens.css、system.css）
 
 口径纪律：
@@ -48,7 +48,7 @@ def count_pages() -> None:
                 tok_ref.append(p)
         except OSError:
             pass
-    tok_ref_noreader = [p for p in tok_ref if p.parent.name != "reader"]
+    tok_ref_noreader = [p for p in tok_ref if not any(a.name == "reader" for a in p.parents)]
 
     R["meta"]["页面计数"] = {
         "site/data 全部": len(data_all),
@@ -72,10 +72,13 @@ def count_pages() -> None:
     rec("页面数口径（全站 234 / 内联 225）",
         "三层架构分发至全部 234 个页面；225 个页面各自内联覆盖图表样式",
         f"非 reader 页合计 {nonreader}；引用 tokens.css 者 {len(tok_ref_noreader)}；data+en（inline_css 口径）{inline_n}",
-        "一致" if (len(tok_ref_noreader) == 234 and inline_n == 225) else "不符",
+        "一致" if (nonreader == 234 and inline_n == 225) else "不符",
         "口径依据 W459：HTML 234（data 87+en 138+根 9）·CSP 覆盖 233（排除 _template.html）·inline_css 同步 225。"
         "2026-09-26 按 P1-1 修正：摘要用全站口径 234（=tokens.css 实测引用数），第 3 节内联句用 inline_css 口径 225；"
-        "原两处均为 233（CSP 口径误用）。中英文摘要与正文（3 份 md）及两份投稿 docx 已同步")
+        "原两处均为 233（CSP 口径误用）。中英文摘要与正文（3 份 md）及两份投稿 docx 已同步。"
+        "2026-10-07 期望值修正（B 轨解冻批）：判定式改锚「非 reader 页合计==234」——旧判定锚「tokens 引用数(不含 reader)==234」"
+        "系 reader 仅 ~102 页时代的时点值（当时 753）；今 reader 已扩至 622 页（W593/W661），该旧口径自然回落至 233，"
+        "致对论文 234 声明误报不符。论文/图 1 的 234 口径=正页（非 reader），2026-10-07 实测仍成立（856−622=234），稿件零改动")
 
     # A1-A6
     areas = {
@@ -354,9 +357,9 @@ def audit_datasets() -> None:
 
 # ---------------------------------------------------------------- 8 docx 篇幅
 def audit_docx() -> None:
-    base = ROOT / "docs" / "S4-学术投稿" / "装饰投稿"
-    docx = base / "学术论文B轨-新中式数字雅集-装饰投稿版.docx"
-    anon = base / "学术论文B轨-新中式数字雅集-匿名稿.docx"
+    base = ROOT / "docs" / "S4-学术投稿" / "05-投稿" / "装饰投稿"
+    docx = base / "设计方向-装饰投稿版.docx"
+    anon = base / "设计方向-匿名稿.docx"
     if not docx.exists():
         rec("篇幅（docx 实测）", "字符数(不计空格) 9,936 / 字数 6,531 / 12 页", "docx 不存在", "无法核验", "")
         return
@@ -410,7 +413,7 @@ def audit_docx() -> None:
 
 def audit_figures_and_stats() -> None:
     """交付图（SVG）是否真实编码源数据 + 八十一难交叉统计。"""
-    fig = ROOT / "docs" / "S4-学术投稿" / "装饰投稿" / "图表"
+    fig = ROOT / "docs" / "S4-学术投稿" / "05-投稿" / "装饰投稿" / "图表"
     specs = {
         "图3-人物语义网络-浅.svg": (12, 7),
         "图4-八十一难难度热力图-浅.svg": (81, None),
@@ -475,7 +478,7 @@ def audit_illustration_svgs() -> None:
     其内嵌量化声明（层级页数）与令牌色值因此未被判定，与尾注「图 1 至图 5
     均据项目实测数据与页面内容重绘」的声明范围不匹配。
     """
-    fig = ROOT / "docs" / "S4-学术投稿" / "装饰投稿" / "图表"
+    fig = ROOT / "docs" / "S4-学术投稿" / "05-投稿" / "装饰投稿" / "图表"
     light, dark = parse_tokens()
     tok: dict[str, list[str]] = {}
     for src in (light, dark):  # 逐源收集：不可 {**light, **dark} 合并（暗色会覆盖同键亮色值）
@@ -530,8 +533,8 @@ def audit_illustration_svgs() -> None:
 
 def audit_figure_specs() -> None:
     """投稿图印刷规范：按 docx 版式实际置入宽度核验 ≥300dpi 等效（无 docx 时退回 210mm 满宽最坏假设）。"""
-    fig = ROOT / "docs" / "S4-学术投稿" / "装饰投稿" / "图表"
-    docx = ROOT / "docs" / "S4-学术投稿" / "装饰投稿" / "学术论文B轨-新中式数字雅集-装饰投稿版.docx"
+    fig = ROOT / "docs" / "S4-学术投稿" / "05-投稿" / "装饰投稿" / "图表"
+    docx = ROOT / "docs" / "S4-学术投稿" / "05-投稿" / "装饰投稿" / "设计方向-装饰投稿版.docx"
     layout = []  # 按 document.xml 出现顺序的图片置入宽度（mm）·与图序（图1-5）一致
     if docx.exists():
         with zipfile.ZipFile(docx) as z:
@@ -567,8 +570,8 @@ def main() -> None:
     R["meta"]["核验时间"] = "2026-09-26"
     R["meta"]["源文件"] = ["site/data/hardship-heatmap.html", "site/data/character-semantic-network.html",
                            "site/data/journey-route.html", "site/tokens.css", "dataset/*.json",
-                           "docs/（A1-A6 六板块）", "docs/S4-学术投稿/装饰投稿/图表/*.svg",
-                           "docs/S4-学术投稿/装饰投稿/*.docx"]
+                           "docs/（A1-A6 六板块）", "docs/S4-学术投稿/05-投稿/装饰投稿/图表/*.svg",
+                           "docs/S4-学术投稿/05-投稿/装饰投稿/*.docx"]
     light, dark = parse_tokens()
     count_pages()
     audit_tokens(light, dark)

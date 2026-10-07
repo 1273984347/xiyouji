@@ -25,7 +25,7 @@ if (!inputMd || !outputDocx) {
 }
 
 const ROOT = "D:/xiyouji";
-const FIGDIR = ROOT + "/docs/S4-学术投稿/图表";
+const FIGDIR = ROOT + "/docs/S4-学术投稿/07-图表";
 const C_FIGS = {
   1: FIGDIR + "/C-图1-三层体系.png",
   2: FIGDIR + "/C-图2-锚点查询实测.png",
@@ -125,6 +125,14 @@ function headingPara(text) {
   });
 }
 
+function heading2Para(text) {
+  return new Paragraph({
+    heading: HeadingLevel.HEADING_2,
+    spacing: { before: 280, after: 160, line: LINE },
+    children: [new TextRun({ text, bold: true, size: 26, font: F_HEAD, color: "000000" })],
+  });
+}
+
 function figureBlock(no, caption) {
   const buf = fs.readFileSync(C_FIGS[no]);
   const { w, h } = pngSize(buf);
@@ -187,6 +195,7 @@ for (let i = start + 1; i < lines.length; i++) {
   if (t === "## 注释") continue; // 脚注化后注释节不再成节
 
   if (t.startsWith("## ")) { children.push(headingPara(t.slice(3).trim())); continue; }
+  if (t.startsWith("### ")) { children.push(heading2Para(t.slice(4).trim())); continue; }
 
   const figCap = t.match(/^\*\*图 C-([1-4])　([^*]+)\*\*$/);
   if (figCap) {
@@ -225,6 +234,10 @@ const doc = new Document({
       heading1: {
         run: { font: F_HEAD, size: 28, bold: true, color: "000000" },
         paragraph: { spacing: { before: 360, after: 200, line: LINE } },
+      },
+      heading2: {
+        run: { font: F_HEAD, size: 26, bold: true, color: "000000" },
+        paragraph: { spacing: { before: 280, after: 160, line: LINE } },
       },
     },
   },

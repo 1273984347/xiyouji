@@ -5,7 +5,7 @@
 - 图 2 令牌三层模型：三层纵叠，箭头只画在层间空隙，附侧注
 - 图 6 已随 W612 用户研究删除移除（W618 起重跑不再生成，防止复活已删配图）
 
-输出：docs/S4-学术投稿/装饰投稿/图表/图1/图2（覆盖原 PNG，200dpi·W616 目录迁移后新址）
+输出：docs/S4-学术投稿/05-投稿/装饰投稿/图表/图1/图2（覆盖原 PNG，200dpi·W616 目录迁移后新址）
 配套：图1/图2-重绘底稿.svg 为作者手工重绘底稿（降图片 AI 检测特征·W618）
 运行：python scripts/_w606_paper_figures.py
 """
@@ -26,7 +26,7 @@ OCHRE = "#C9A063"
 RICEGREY = "#D8CFBC"
 SOFT = "#6B6455"
 
-OUT = r"D:\xiyouji\docs\S4-学术投稿\装饰投稿\图表"
+OUT = r"D:\xiyouji\docs\S4-学术投稿\05-投稿\装饰投稿\图表"
 
 
 def box(ax, x, y, w, h, face, edge=INK, lw=1.6):
