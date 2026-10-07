@@ -1,6 +1,6 @@
 // feedback.test.mjs — W600 反馈闭环集成测试（真实起服→HTTP POST→直查 chat.db→清理）
 // 运行：cd xiyouji-agent-web && node server/feedback.test.mjs
-// 无需 CODEBUDDY_API_KEY（不触发 LLM）。测试行用完即删，不污染真实数据。
+// 无需 LLM 凭证（不触发 LLM）。测试行用完即删，不污染真实数据。
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

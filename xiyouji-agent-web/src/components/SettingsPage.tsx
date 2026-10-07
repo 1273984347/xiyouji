@@ -31,7 +31,7 @@ interface SettingsPageProps {
   onDelete: (id: string) => void;
 }
 
-type LoginMethod = 'env' | 'cli' | 'none';
+type LoginMethod = 'env' | 'none';
 
 interface LoginStatus {
   isLoggedIn: boolean;
@@ -43,9 +43,8 @@ interface LoginStatus {
   apiKey?: string;
   envVars?: {
     apiKey?: string;
-    authToken?: string;
-    internetEnv?: string;
     baseUrl?: string;
+    model?: string;
   };
 }
 
@@ -118,21 +117,11 @@ export function SettingsPage({
     permissionMode: 'default' as PermissionMode,
   });
   
-  // 登录状态
+  // 登录状态（W680：引擎配置状态——LLM_* 由服务端 .env 提供）
   const [loginStatus, setLoginStatus] = useState<LoginStatus>({
     isLoggedIn: false,
     checking: true,
   });
-  
-  // 环境变量配置
-  const [showEnvConfig, setShowEnvConfig] = useState(false);
-  const [envConfig, setEnvConfig] = useState({
-    apiKey: '',
-    authToken: '',
-    internetEnv: '' as '' | 'internal' | 'iOA',
-    baseUrl: '',
-  });
-  const [savingEnv, setSavingEnv] = useState(false);
 
   // 检查登录状态
   const checkLoginStatus = useCallback(async () => {
@@ -161,44 +150,6 @@ export function SettingsPage({
     }
   }, []);
   
-  // 保存环境变量配置（P0-2：API_KEY/BASE_URL 由服务端 .env 配置，不在此提交）
-  const saveEnvConfig = async () => {
-    // 至少需要配置一个有效的值（Auth Token 或网络环境）
-    const hasAnyConfig = envConfig.authToken.trim() || envConfig.internetEnv;
-    if (!hasAnyConfig) {
-      MessagePlugin.warning('请至少配置 Auth Token 或网络环境');
-      return;
-    }
-    
-    setSavingEnv(true);
-    try {
-      const response = await fetch('/api/save-env-config', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          authToken: envConfig.authToken.trim() || undefined,
-          internetEnv: envConfig.internetEnv || undefined,
-        }),
-      });
-      
-      const data = await response.json();
-      
-      if (data.success) {
-        MessagePlugin.success(data.message);
-        setShowEnvConfig(false);
-        setEnvConfig({ apiKey: '', authToken: '', internetEnv: '', baseUrl: '' });
-        // 重新检查登录状态
-        checkLoginStatus();
-      } else {
-        MessagePlugin.error(data.error || '保存失败');
-      }
-    } catch (error: any) {
-      MessagePlugin.error(error?.message || '保存失败');
-    } finally {
-      setSavingEnv(false);
-    }
-  };
-
   // 初始化时检查登录状态
   useEffect(() => {
     checkLoginStatus();
@@ -283,25 +234,25 @@ export function SettingsPage({
           </p>
         </div>
 
-        {/* 登录配置 */}
+        {/* 引擎配置（W680：LLM_* 由服务端 .env 提供，兼容所有主流大模型端点） */}
         <div>
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 
+              <h2
                 className="text-lg font-medium"
                 style={{ color: 'var(--td-text-color-primary)' }}
               >
-                登录配置
+                引擎配置
               </h2>
-              <p 
+              <p
                 className="text-sm mt-1"
                 style={{ color: 'var(--td-text-color-secondary)' }}
               >
-                支持环境变量或 CodeBuddy CLI 登录
+                兼容所有主流大模型（GLM/DeepSeek/Kimi/Qwen/OpenAI/Gemini/ollama 等 OpenAI-compatible 端点）
               </p>
             </div>
-            <Button 
-              variant="text" 
+            <Button
+              variant="text"
               icon={<RefreshIcon />}
               onClick={checkLoginStatus}
               loading={loginStatus.checking}
@@ -309,30 +260,27 @@ export function SettingsPage({
               刷新
             </Button>
           </div>
-          
+
           {/* 当前状态 */}
-          <div className="flex items-center gap-3 mb-6">
+          <div className="flex items-center gap-3 mb-4">
             {loginStatus.checking ? (
               <>
                 <Loading size="small" />
                 <span style={{ color: 'var(--td-text-color-secondary)' }}>
-                  正在检查登录状态...
+                  正在检查引擎配置...
                 </span>
               </>
             ) : loginStatus.isLoggedIn ? (
               <>
-                <CheckCircleFilledIcon 
-                  size="20px" 
-                  style={{ color: 'var(--td-success-color)' }} 
+                <CheckCircleFilledIcon
+                  size="20px"
+                  style={{ color: 'var(--td-success-color)' }}
                 />
                 <span style={{ color: 'var(--td-text-color-primary)' }}>
-                  已登录
+                  已配置
                 </span>
-                <Tag size="small" variant="outline">
-                  {loginStatus.method === 'env' ? '环境变量' : 'CLI'}
-                </Tag>
-                {loginStatus.method === 'env' && loginStatus.apiKey && (
-                  <span 
+                {loginStatus.apiKey && (
+                  <span
                     className="text-sm font-mono"
                     style={{ color: 'var(--td-text-color-secondary)' }}
                   >
@@ -342,161 +290,39 @@ export function SettingsPage({
               </>
             ) : (
               <>
-                <CloseCircleFilledIcon 
-                  size="20px" 
-                  style={{ color: 'var(--td-text-color-placeholder)' }} 
+                <CloseCircleFilledIcon
+                  size="20px"
+                  style={{ color: 'var(--td-text-color-placeholder)' }}
                 />
                 <span style={{ color: 'var(--td-text-color-secondary)' }}>
-                  未登录
+                  未配置
                 </span>
               </>
             )}
           </div>
-          
-          {/* 环境变量配置 */}
-          <div className="mb-6">
-            <h3 
-              className="text-sm font-medium mb-3"
-              style={{ color: 'var(--td-text-color-secondary)' }}
-            >
-              方式一：环境变量
-            </h3>
-            
-            {showEnvConfig ? (
-              <div className="space-y-3">
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label 
-                      className="text-xs block mb-1"
-                      style={{ color: 'var(--td-text-color-placeholder)' }}
-                    >
-                      CODEBUDDY_API_KEY
-                    </label>
-                    <div 
-                      className="text-xs"
-                      style={{ color: 'var(--td-text-color-placeholder)', lineHeight: '28px' }}
-                    >
-                      由服务端 .env 配置（重启生效·P0-2 禁止运行时覆盖）
-                    </div>
-                  </div>
-                  <div>
-                    <label 
-                      className="text-xs block mb-1"
-                      style={{ color: 'var(--td-text-color-placeholder)' }}
-                    >
-                      CODEBUDDY_AUTH_TOKEN
-                    </label>
-                    <Input
-                      type="password"
-                      size="small"
-                      value={envConfig.authToken}
-                      onChange={(v) => setEnvConfig(prev => ({ ...prev, authToken: v as string }))}
-                      placeholder="认证令牌"
-                    />
-                  </div>
-                  <div>
-                    <label 
-                      className="text-xs block mb-1"
-                      style={{ color: 'var(--td-text-color-placeholder)' }}
-                    >
-                      CODEBUDDY_INTERNET_ENVIRONMENT
-                    </label>
-                    <Select
-                      size="small"
-                      value={envConfig.internetEnv}
-                      onChange={(v) => setEnvConfig(prev => ({ ...prev, internetEnv: v as any }))}
-                      placeholder="网络环境（可选）"
-                      clearable
-                      options={[
-                        { label: 'internal', value: 'internal' },
-                        { label: 'iOA', value: 'iOA' },
-                      ]}
-                    />
-                  </div>
-                  <div>
-                    <label 
-                      className="text-xs block mb-1"
-                      style={{ color: 'var(--td-text-color-placeholder)' }}
-                    >
-                      CODEBUDDY_BASE_URL
-                    </label>
-                    <div 
-                      className="text-xs"
-                      style={{ color: 'var(--td-text-color-placeholder)', lineHeight: '28px' }}
-                    >
-                      由服务端 .env 配置（重启生效·P0-2 禁止运行时覆盖）
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Button 
-                    size="small"
-                    theme="primary" 
-                    onClick={saveEnvConfig}
-                    loading={savingEnv}
-                  >
-                    保存
-                  </Button>
-                  <Button 
-                    size="small"
-                    variant="text" 
-                    onClick={() => {
-                      setShowEnvConfig(false);
-                      setEnvConfig({ apiKey: '', authToken: '', internetEnv: '', baseUrl: '' });
-                    }}
-                  >
-                    取消
-                  </Button>
-                  <span 
-                    className="text-xs"
-                    style={{ color: 'var(--td-text-color-placeholder)' }}
-                  >
-                    仅当前进程有效
-                  </span>
-                </div>
-              </div>
-            ) : (
-              <Button 
-                variant="outline" 
-                size="small"
-                onClick={() => setShowEnvConfig(true)}
-              >
-                配置环境变量
-              </Button>
-            )}
+
+          {/* 配置指引（全部由服务端 .env 提供，重启生效） */}
+          <div
+            className="text-xs space-y-1"
+            style={{ color: 'var(--td-text-color-placeholder)', lineHeight: '20px' }}
+          >
+            <div>在服务端 .env 配置以下三项后重启生效：</div>
+            <div className="font-mono">LLM_API_BASE —— 端点地址（如 https://open.bigmodel.cn/api/paas/v4）</div>
+            <div className="font-mono">LLM_API_KEY —— 端点 API Key</div>
+            <div className="font-mono">LLM_MODEL —— 模型名（可选 LLM_MODELS 逗号分隔多模型）</div>
           </div>
-          
-          {/* CLI 登录 */}
-          <div>
-            <h3 
-              className="text-sm font-medium mb-3"
-              style={{ color: 'var(--td-text-color-secondary)' }}
-            >
-              方式二：CodeBuddy CLI
-            </h3>
-            <div className="flex items-center gap-3">
-              <code 
-                className="px-3 py-1.5 rounded text-sm"
-                style={{ 
-                  backgroundColor: 'var(--td-bg-color-component)',
-                  color: 'var(--td-text-color-primary)'
-                }}
-              >
-                codebuddy
-              </code>
-              <Link 
-                href="https://www.codebuddy.ai/docs/zh/cli/settings" 
-                target="_blank"
-                theme="primary"
-                size="small"
-              >
-                查看文档
-              </Link>
+
+          {loginStatus.envVars?.baseUrl && (
+            <div className="text-xs mt-3" style={{ color: 'var(--td-text-color-secondary)' }}>
+              当前端点：<span className="font-mono">{loginStatus.envVars.baseUrl}</span>
+              {loginStatus.envVars.model && (
+                <span className="font-mono"> · 模型 {loginStatus.envVars.model}</span>
+              )}
             </div>
-          </div>
-          
+          )}
+
           {loginStatus.error && !loginStatus.isLoggedIn && (
-            <div 
+            <div
               className="text-xs mt-4"
               style={{ color: 'var(--td-text-color-placeholder)' }}
             >

@@ -1,16 +1,18 @@
 import 'dotenv/config';
 import express from "express";
-import { query as sdkQuery, unstable_v2_createSession, unstable_v2_authenticate, PermissionResult, CanUseTool, PermissionMode } from "@tencent-ai/agent-sdk";
 import { v4 as uuidv4 } from "uuid";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
 import * as db from "./db.js";
 import { applyCitationGuard } from "./citationGuard.js";
+import { runAgentTurn } from "./engine/agent-loop.js";
+import { createToolset, TOOL_PERMISSION_KIND } from "./engine/tools.js";
+import type { ChatMessage, CanUseTool, PermissionDecision } from "./engine/types.js";
 
 // 待处理的权限请求
 interface PendingPermission {
-  resolve: (result: PermissionResult) => void;
+  resolve: (result: PermissionDecision) => void;
   reject: (error: Error) => void;
   toolName: string;
   input: Record<string, unknown>;
@@ -87,17 +89,21 @@ const ALLOW_BYPASS = process.env.AGENT_WEB_ALLOW_BYPASS === "1";
 // P3-1：详细日志（工具输入/流消息）默认关闭，仅 AGENT_WEB_VERBOSE=1 时打印（防敏感信息泄露）
 const VERBOSE_LOG = process.env.AGENT_WEB_VERBOSE === "1";
 
-function sanitizePermissionMode(input: unknown): PermissionMode {
-  if (typeof input === "string" && SAFE_PERMISSION_MODES.has(input)) return input as PermissionMode;
+function sanitizePermissionMode(input: unknown): "default" | "acceptEdits" | "plan" | "bypassPermissions" {
+  if (typeof input === "string" && SAFE_PERMISSION_MODES.has(input)) return input as "default" | "acceptEdits" | "plan";
   if (ALLOW_BYPASS && input === "bypassPermissions") return "bypassPermissions";
   return "default";
 }
 
 // P0-1/W536：工作目录钳制逻辑已内联至 /api/chat 调用点（realpath 规范化 + PROJECT_CWD 前缀校验）。
 
-// 缓存可用模型列表
-let cachedModels: Array<{ modelId: string; name: string; description?: string }> = [];
-const defaultModel = "claude-sonnet-4";
+// 引擎配置（W680）：OpenAI-compatible 端点，全部由服务端 .env 提供（P0-2 同款纪律：禁运行时覆盖）。
+// 兼容所有主流大模型：GLM/DeepSeek/Kimi/Qwen/OpenAI/Gemini/Claude-compat/ollama/vLLM 等。
+const LLM_API_BASE = process.env.LLM_API_BASE || "";
+const LLM_API_KEY = process.env.LLM_API_KEY || "";
+const LLM_MODEL = process.env.LLM_MODEL || "default-model";
+const LLM_MAX_TURNS = Number(process.env.LLM_MAX_TURNS) > 0 ? Number(process.env.LLM_MAX_TURNS) : 10;
+const defaultModel = LLM_MODEL;
 
 // 健康检查
 // W600 反馈闭环
@@ -119,180 +125,56 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
-// 登录方式类型
-type LoginMethod = 'env' | 'cli' | 'none';
-
+// 引擎配置状态（W680：原厂商 CLI 登录检查退役——路径保留以免前端 404）
 interface LoginStatusResponse {
   isLoggedIn: boolean;
-  method?: LoginMethod;
+  method?: 'env' | 'none';
   envConfigured?: boolean;
   cliConfigured?: boolean;
   error?: string;
-  apiKey?: string; // 脱敏后的 API Key
+  apiKey?: string; // 脱敏后的 Key
   envVars?: {
     apiKey?: string;
-    authToken?: string;
-    internetEnv?: string;
     baseUrl?: string;
+    model?: string;
   };
 }
 
-// 检查 CodeBuddy CLI 登录状态
-app.get("/api/check-login", async (req, res) => {
+app.get("/api/check-login", (req, res) => {
   const response: LoginStatusResponse = {
-    isLoggedIn: false,
+    isLoggedIn: Boolean(LLM_API_KEY && LLM_API_BASE),
+    method: 'none',
     envConfigured: false,
     cliConfigured: false,
     envVars: {},
   };
-  
-  // 1. 检查环境变量
-  const apiKey = process.env.CODEBUDDY_API_KEY;
-  const authToken = process.env.CODEBUDDY_AUTH_TOKEN;
-  const internetEnv = process.env.CODEBUDDY_INTERNET_ENVIRONMENT;
-  const baseUrl = process.env.CODEBUDDY_BASE_URL;
-  
-  if (apiKey || authToken) {
+
+  if (LLM_API_KEY) {
     response.envConfigured = true;
-    // 脱敏显示
-    if (apiKey) {
-      response.envVars!.apiKey = '****' + apiKey.slice(-4); // W537 脱敏收敛：不再回显前 8 位
-      response.apiKey = response.envVars!.apiKey;
-    }
-    if (authToken) {
-      response.envVars!.authToken = '****' + authToken.slice(-4);
-    }
-    if (internetEnv) {
-      response.envVars!.internetEnv = internetEnv;
-    }
-    if (baseUrl) {
-      response.envVars!.baseUrl = baseUrl;
-    }
+    response.method = 'env';
+    response.apiKey = '****' + LLM_API_KEY.slice(-4); // W537 脱敏口径
+    response.envVars!.apiKey = response.apiKey;
   }
-  
-  // 2. 使用 unstable_v2_authenticate 检查登录状态（更可靠）
-  try {
-    let needsLogin = false;
-    
-    const result = await unstable_v2_authenticate({
-      environment: 'external',
-      onAuthUrl: async (authState) => {
-        // 如果执行到这个回调，说明未登录
-        needsLogin = true;
-        console.log('[Check Login] 需要登录，认证 URL:', authState.authUrl);
-        // 将认证 URL 返回给前端（如果需要）
-        response.error = '未登录，请先登录 CodeBuddy CLI';
-      }
-    });
-    
-    // 如果没有触发 onAuthUrl 回调，说明已登录
-    if (!needsLogin && result?.userinfo) {
-      response.isLoggedIn = true;
-      response.cliConfigured = true;
-      
-      // 判断登录方式
-      if (response.envConfigured) {
-        response.method = 'env';
-      } else {
-        response.method = 'cli';
-      }
-      
-      console.log('[Check Login] 已登录用户:', result.userinfo.userName);
-    } else if (!needsLogin) {
-      // result 存在但没有 userinfo，仍然认为已登录
-      response.isLoggedIn = true;
-      response.cliConfigured = true;
-      response.method = response.envConfigured ? 'env' : 'cli';
-    }
-  } catch (error: any) {
-    console.error("[Check Login] SDK Error:", error);
-    
-    // 如果有环境变量配置，仍然认为是登录状态
-    if (response.envConfigured) {
-      response.isLoggedIn = true;
-      response.method = 'env';
-    } else {
-      response.error = error?.message || String(error);
-      response.method = 'none';
-    }
+  if (LLM_API_BASE) response.envVars!.baseUrl = LLM_API_BASE;
+  if (process.env.LLM_MODEL) response.envVars!.model = LLM_MODEL;
+  if (!response.isLoggedIn) {
+    response.error = '未配置引擎：请在服务端 .env 设置 LLM_API_BASE / LLM_API_KEY / LLM_MODEL 后重启';
   }
-  
+
   res.json(response);
 });
 
-// 保存环境变量配置（P0-2 修复：禁运行时覆盖 API_KEY/BASE_URL——密钥与端点仅从服务端 .env 读取，重启生效）
-app.post("/api/save-env-config", (req, res) => {
-  const { apiKey, authToken, internetEnv, baseUrl } = req.body;
+// （W680：原 /api/save-env-config 运行时凭证配置端点随引擎更换整体退役——
+//   LLM_API_BASE / LLM_API_KEY / LLM_MODEL 仅从服务端 .env 读取，重启生效。）
 
-  // P0-2：拒绝运行时覆盖密钥/端点（防密钥劫持 + SSRF；仅从服务端 .env 读取）
-  if (apiKey || baseUrl) {
-    return res.status(400).json({
-      error: "CODEBUDDY_API_KEY / CODEBUDDY_BASE_URL 禁止运行时覆盖（P0-2）：请在服务端 .env 配置后重启生效",
-      refused: ["CODEBUDDY_API_KEY", "CODEBUDDY_BASE_URL"],
-    });
-  }
-
-  if (!authToken && !internetEnv) {
-    return res.status(400).json({ error: '请至少配置 Auth Token 或网络环境' });
-  }
-
-  const configuredVars: string[] = [];
-
-  if (authToken) {
-    process.env.CODEBUDDY_AUTH_TOKEN = authToken;
-    configuredVars.push('CODEBUDDY_AUTH_TOKEN');
-  }
-  if (internetEnv) {
-    process.env.CODEBUDDY_INTERNET_ENVIRONMENT = internetEnv;
-    configuredVars.push('CODEBUDDY_INTERNET_ENVIRONMENT');
-  }
-
-  // 清除模型缓存，以便重新获取
-  cachedModels = [];
-
-  res.json({
-    success: true,
-    message: `已设置: ${configuredVars.join(', ')}`,
-    note: '环境变量仅在当前服务器进程有效，重启后需重新设置；API_KEY/BASE_URL 由服务端 .env 配置（P0-2）'
-  });
-});
-
-// 获取可用模型列表
-app.get("/api/models", async (req, res) => {
-  try {
-    if (cachedModels.length === 0) {
-      console.log("[Models] Creating session to fetch available models...");
-      
-      const session = await unstable_v2_createSession({ 
-        cwd: process.cwd()
-      });
-      
-      console.log("[Models] Session created, calling getAvailableModels()...");
-      const models = await session.getAvailableModels();
-      console.log("[Models] Got", models.length, "models");
-      
-      if (models && Array.isArray(models)) {
-        cachedModels = models;
-      }
-    }
-    
-    res.json({ 
-      models: cachedModels.length > 0 ? cachedModels : [
-        { modelId: "claude-sonnet-4", name: "Claude Sonnet 4" }
-      ],
-      defaultModel 
-    });
-  } catch (error: any) {
-    console.error("[Models] Error:", error);
-    res.json({
-      models: [
-        { modelId: "claude-sonnet-4", name: "Claude Sonnet 4" },
-        { modelId: "claude-opus-4", name: "Claude Opus 4" }
-      ],
-      defaultModel,
-      error: error?.message || String(error)
-    });
-  }
+// 获取可用模型列表（W680：从环境变量静态读取，不再起 SDK 会话探测）
+app.get("/api/models", (req, res) => {
+  const list = (process.env.LLM_MODELS || process.env.LLM_MODEL || "default-model")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .map((id) => ({ modelId: id, name: id }));
+  res.json({ models: list, defaultModel });
 });
 
 // ============= 会话 API =============
@@ -458,6 +340,11 @@ app.post("/api/chat", async (req, res) => {
     return res.status(400).json({ error: "消息不能为空" });
   }
 
+  // W680：引擎未配置时快速失败（400 JSON，不进 SSE 流）
+  if (!LLM_API_BASE || !LLM_API_KEY) {
+    return res.status(400).json({ error: "引擎未配置：请在服务端 .env 设置 LLM_API_BASE / LLM_API_KEY / LLM_MODEL 后重启生效" });
+  }
+
   // 获取或创建会话
   let session = sessionId ? db.getSession(sessionId) : null;
   const now = new Date().toISOString();
@@ -469,18 +356,15 @@ app.post("/api/chat", async (req, res) => {
       id: sessionId || uuidv4(),
       title: message.slice(0, 30) + (message.length > 30 ? '...' : ''),
       model: model || defaultModel,
-      sdk_session_id: null,  // 稍后从 SDK 获取
+      sdk_session_id: null,  // W680：SDK resume 退役，历史从 SQLite 重建
       created_at: now,
       updated_at: now
     });
   } else {
-    console.log(`[Chat] 使用现有会话, SDK Session: ${session.sdk_session_id || 'none'}`);
+    console.log(`[Chat] 使用现有会话`);
   }
 
   const selectedModel = model || session.model;
-  
-  // 获取 SDK session ID（用于恢复对话）
-  const sdkSessionId = session.sdk_session_id;
 
   // 创建用户消息 ID 和助手消息 ID
   const userMessageId = uuidv4();
@@ -537,8 +421,10 @@ app.post("/api/chat", async (req, res) => {
         p.reject(new Error("客户端断开连接"));
       }
     }
+    engineAbort.abort(); // W680：中止引擎（终止 LLM 流消费，不再为已断开的客户端烧 token）
     try { res.end(); } catch { /* 已断开 */ }
   };
+  const engineAbort = new AbortController();
   // W568 修复：Express 5 / Node 20+ 下 req 的 'close' 在「请求体读取完毕」即触发（并非连接断开），
   // abortStream 会立刻 res.end() 吞掉后续全部 SSE 事件（实证：init 之后 error 事件整段丢失）。
   // 改挂 res 'close'——仅在客户端提前断开或响应正常完成时触发；完成态重复 res.end() 为无害空操作。
@@ -575,24 +461,41 @@ app.post("/api/chat", async (req, res) => {
   // 工作目录：已由 W536 内联钳制净化（realpath 规范化，仅 PROJECT_CWD 内）
 
   try {
-    console.log(`[Chat] 调用 SDK query...`);
+    console.log(`[Chat] 调用引擎 runAgentTurn...`);
     console.log(`[Chat] - Model: ${selectedModel}`);
-    console.log(`[Chat] - Resume: ${sdkSessionId || 'none'}`);
     console.log(`[Chat] - CWD: ${workingDir}`);
     console.log(`[Chat] - PermissionMode: ${effectivePermissionMode}`);
     
-    // 创建 canUseTool 回调
+    // 会话历史（W680：从 SQLite 重建，替代 SDK resume——消息表已存全量 user/assistant 文本）
+    const historyRows = db.getMessagesBySession(session.id);
+    const history: ChatMessage[] = [];
+    for (const m of historyRows.slice(-21)) { // 最近 20 条 + 本轮 user 消息，控 token 上限
+      if (m.role === "user" && m.content) history.push({ role: "user", content: m.content });
+      else if (m.role === "assistant" && m.content) history.push({ role: "assistant", content: m.content });
+    }
+    const toolset = createToolset(workingDir);
+
+    // 工具权限桥（策略：bypass 直通 / read 类放行 / plan 只读 / acceptEdits 放行写 / 其余走前端许可）
     const canUseTool: CanUseTool = async (toolName, input, options) => {
       console.log(`[Permission] Tool request: ${toolName}`);
       if (VERBOSE_LOG) console.log(`[Permission] Input:`, JSON.stringify(input, null, 2)); // P3-1
-      
+
       // bypassPermissions 模式直接放行（仅当 AGENT_WEB_ALLOW_BYPASS=1 时经净化可达）
       if (effectivePermissionMode === 'bypassPermissions') {
         console.log(`[Permission] Bypassing permissions for ${toolName}`);
         return { behavior: 'allow', updatedInput: input };
       }
-      
-      // 创建权限请求
+
+      const kind = TOOL_PERMISSION_KIND[toolName] ?? "command";
+      if (kind === "read") return { behavior: 'allow', updatedInput: input };
+      if (effectivePermissionMode === 'plan') {
+        return { behavior: 'deny', message: 'plan 模式为只读规划：写入与命令执行被拒绝' };
+      }
+      if (kind === "write" && effectivePermissionMode === 'acceptEdits') {
+        return { behavior: 'allow', updatedInput: input };
+      }
+
+      // default 的写操作与各模式（除 bypass）的命令执行 → 请求前端许可
       const requestId = uuidv4();
       const permissionRequest = {
         requestId,
@@ -602,15 +505,15 @@ app.post("/api/chat", async (req, res) => {
         sessionId: session.id,
         timestamp: Date.now()
       };
-      
+
       // 发送权限请求到前端
-      res.write(`data: ${JSON.stringify({ 
-        type: "permission_request", 
+      res.write(`data: ${JSON.stringify({
+        type: "permission_request",
         ...permissionRequest
       })}\n\n`);
-      
+
       // 创建 Promise 等待用户响应
-      return new Promise<PermissionResult>((resolve, reject) => {
+      return new Promise<PermissionDecision>((resolve, reject) => {
         const pending: PendingPermission = {
           resolve,
           reject,
@@ -619,10 +522,10 @@ app.post("/api/chat", async (req, res) => {
           sessionId: session.id,
           timestamp: Date.now()
         };
-        
+
         const reqKey2 = _safeKey(requestId);
         if (reqKey2) pendingPermissions[reqKey2] = pending;
-        
+
         // 设置超时
         setTimeout(() => {
           if (reqKey2 && pendingPermissions[reqKey2] !== undefined) {
@@ -637,137 +540,84 @@ app.post("/api/chat", async (req, res) => {
       });
     };
     
-    // 使用 Query API 发送消息
-    // 如果有 sdk_session_id，使用 resume 恢复对话上下文
-    const stream = sdkQuery({
-      prompt: message,
-      options: {
-        cwd: workingDir,
-        model: selectedModel,
-        maxTurns: 10,
-        systemPrompt: systemPrompt || defaultSystemPrompt,
-        permissionMode: effectivePermissionMode,
-        canUseTool,
-        ...(sdkSessionId ? { resume: sdkSessionId } : {})  // 使用 resume 恢复对话
-      }
-    });
+    // 发送会话ID和消息ID（引擎启动前，SSE 事件序契约第一事件）
+    res.write(`data: ${JSON.stringify({
+      type: "init",
+      sessionId: session.id,
+      userMessageId,
+      assistantMessageId,
+      model: selectedModel
+    })}\n\n`);
 
-    let fullResponse = "";
-    let toolCalls: Array<{ 
-      id: string; 
-      name: string; 
+    const toolCalls: Array<{
+      id: string;
+      name: string;
       input?: Record<string, unknown>;
-      status: string; 
+      status: string;
       result?: string;
       isError?: boolean;
     }> = [];
-    let newSdkSessionId: string | null = null;  // 用于存储 SDK 返回的 session_id
+    let fullResponse = "";
 
-    // 发送会话ID和消息ID
-    res.write(`data: ${JSON.stringify({ 
-      type: "init", 
-      sessionId: session.id, 
-      userMessageId, 
-      assistantMessageId,
-      model: selectedModel 
-    })}\n\n`);
-
-    // 当前正在执行的工具 ID（用于匹配 tool_result）
-    let currentToolId: string | null = null;
-
-    // 处理流式响应
-    for await (const msg of stream) {
-      if (aborted) break; // P2-3：客户端断开/超时后停止消费与写入
-      if (VERBOSE_LOG) console.log("[Stream] Message type:", msg.type, msg); // P3-1
-      
-      // 处理 system 消息，获取 SDK 的 session_id
-      if (msg.type === "system" && (msg as any).subtype === "init") {
-        newSdkSessionId = (msg as any).session_id;
-        console.log(`[Stream] Got SDK session_id: ${newSdkSessionId}`);
-        
-        // 保存 SDK session_id 到数据库（如果是新的）
-        if (newSdkSessionId && newSdkSessionId !== sdkSessionId) {
-          db.updateSession(session.id, { sdk_session_id: newSdkSessionId });
-          console.log(`[Stream] Saved SDK session_id to database`);
-        }
-      } else if (msg.type === "assistant") {
-        const content = msg.message.content;
-
-        if (typeof content === "string") {
-          fullResponse += content;
-          res.write(`data: ${JSON.stringify({ type: "text", content })}\n\n`);
-        } else if (Array.isArray(content)) {
-          for (const block of content) {
-            if (block.type === "text") {
-              fullResponse += block.text;
-              res.write(`data: ${JSON.stringify({ type: "text", content: block.text })}\n\n`);
-            } else if (block.type === "tool_use") {
-              currentToolId = block.id || uuidv4();
-              const toolInput = (block as any).input || {};
-              console.log(`[Stream] Tool use: id=${currentToolId}, name=${block.name}`);
-              if (VERBOSE_LOG) console.log(`[Stream] Tool input:`, JSON.stringify(toolInput, null, 2)); // P3-1
-              
-              const toolCall = { 
-                id: currentToolId, 
-                name: block.name, 
-                input: toolInput,
-                status: "running" 
-              };
-              toolCalls.push(toolCall);
-              res.write(`data: ${JSON.stringify({ 
-                type: "tool", 
-                id: toolCall.id,
-                name: toolCall.name,
-                input: toolCall.input,
-                status: toolCall.status
-              })}\n\n`);
-            }
-          }
-        }
-      } else if ((msg as any).type === "tool_result") {
-        // 处理工具结果（独立的消息类型）
-        const msgAny = msg as any;
-        const toolId = msgAny.tool_use_id || currentToolId;
-        const isError = msgAny.is_error || false;
-        const content = msgAny.content;
-        
-        console.log(`[Stream] Tool result: tool_use_id=${toolId}, is_error=${isError}`);
-        if (VERBOSE_LOG) { // P3-1：详细结果内容默认不打印
-          console.log(`[Stream] Tool result content type:`, typeof content);
-          console.log(`[Stream] Tool result content:`, typeof content === 'string' ? content.slice(0, 500) : JSON.stringify(content, null, 2)?.slice(0, 500));
-        }
-        
-        const tool = toolCalls.find(t => t.id === toolId) || toolCalls[toolCalls.length - 1];
-        if (tool) {
-          tool.status = isError ? "error" : "completed";
-          tool.isError = isError;
-          tool.result = typeof content === 'string' 
-            ? content 
-            : JSON.stringify(content);
-          res.write(`data: ${JSON.stringify({ 
-            type: "tool_result", 
-            toolId: tool.id, 
-            content: tool.result,
-            isError: isError
+    // W680 引擎主循环（替代 SDK query 流消费）
+    const result = await runAgentTurn({
+      config: { baseUrl: LLM_API_BASE, apiKey: LLM_API_KEY, model: selectedModel },
+      messages: [
+        { role: "system", content: systemPrompt || defaultSystemPrompt },
+        ...history,
+      ],
+      toolset,
+      canUseTool,
+      maxTurns: LLM_MAX_TURNS,
+      signal: engineAbort.signal,
+      handlers: {
+        onText: (delta) => {
+          fullResponse += delta;
+          res.write(`data: ${JSON.stringify({ type: "text", content: delta })}\n\n`);
+        },
+        onToolCall: (call) => {
+          console.log(`[Stream] Tool use: id=${call.id}, name=${call.name}`);
+          if (VERBOSE_LOG) console.log(`[Stream] Tool input:`, JSON.stringify(call.input, null, 2)); // P3-1
+          toolCalls.push({ id: call.id, name: call.name, input: call.input, status: "running" });
+          res.write(`data: ${JSON.stringify({
+            type: "tool",
+            id: call.id,
+            name: call.name,
+            input: call.input,
+            status: "running"
           })}\n\n`);
-        }
-        currentToolId = null;
-      } else if (msg.type === "result") {
-        // 完成时确保所有工具都标记为完成
-        toolCalls.forEach(tool => {
-          if (tool.status === "running") {
-            tool.status = "completed";
-            res.write(`data: ${JSON.stringify({ type: "tool_result", toolId: tool.id, content: tool.result || "已完成" })}\n\n`);
+        },
+        onToolResult: (toolId, content, isError) => {
+          console.log(`[Stream] Tool result: tool_use_id=${toolId}, is_error=${isError}`);
+          const tool = toolCalls.find((t) => t.id === toolId) ?? toolCalls[toolCalls.length - 1];
+          if (tool) {
+            tool.status = isError ? "error" : "completed";
+            tool.isError = isError;
+            tool.result = content;
           }
-        });
-        // W599 引用校验：最终文本路径核实（存在→GitHub 链接；不存在→文末警示），SSE done 前执行
-        const guarded = applyCitationGuard(fullResponse, PROJECT_CWD);
-        if (guarded.text !== fullResponse) {
-          res.write(`data: ${JSON.stringify({ type: "citation_guard", text: guarded.text, unverified: guarded.unverified })}\n\n`);
-        }
-        res.write(`data: ${JSON.stringify({ type: "done", duration: (msg as any).duration, cost: (msg as any).cost })}\n\n`);
+          res.write(`data: ${JSON.stringify({
+            type: "tool_result",
+            toolId,
+            content,
+            isError
+          })}\n\n`);
+        },
+      },
+    });
+
+    // 完成时兜底：仍未终结的工具标记完成（对齐旧 result 分支语义）
+    toolCalls.forEach((tool) => {
+      if (tool.status === "running") {
+        tool.status = "completed";
+        res.write(`data: ${JSON.stringify({ type: "tool_result", toolId: tool.id, content: tool.result || "已完成" })}\n\n`);
       }
+    });
+    // W599 引用校验：最终文本路径核实（存在→GitHub 链接；不存在→文末警示），SSE done 前执行
+    const guarded = applyCitationGuard(fullResponse, PROJECT_CWD);
+    if (guarded.text !== fullResponse) {
+      res.write(`data: ${JSON.stringify({ type: "citation_guard", text: guarded.text, unverified: guarded.unverified })}\n\n`);
     }
+    res.write(`data: ${JSON.stringify({ type: "done", duration: result.durationMs })}\n\n`);
 
     // P2-3：清理 SSE 定时器与 close 监听（正常完成路径）
     clearTimeout(sseTimer);

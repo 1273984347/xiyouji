@@ -107,6 +107,8 @@ xiyouji-agent-web/dist/
 xiyouji-agent-web/data/
 xiyouji-agent-web/server/*.js
 xiyouji-agent-web/server/*.d.ts
+xiyouji-agent-web/server/engine/*.js
+xiyouji-agent-web/server/engine/*.d.ts
 xiyouji-agent-web/vite.config.js
 xiyouji-agent-web/vite.config.d.ts
 xiyouji-agent-web/.env
