@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W685），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W686），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.277（2026-10-08）：W686 动态 Workflow 工业化方案退役 — 方案文件删除 + W682 预留作废（用户裁决等后续重新设计）
+
+> **来源**：用户裁决「把这个方案所有 workflow 都删了·等后续再重新设计」并追令「把这个计划方案也删除」——W679 入库的《动态 Workflow 工业化方案 V1.0》整体退役。
+> - **执行**：① git rm docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md（458 行）——WF-1~WF-6 六提案全部随之作废；退役前实查：方案从未建置到任何实体（.zcode/workflows/ 项目与宿主全局保存件均为 0），无 workflow 代码可删；唯一落地件 WP-1.0（run_eval dotenv 密钥引导）已于 W680 随引擎更换重写移除——零代码残留。② 对账表：W682 预留行注记作废（WF-1 复活随方案退役）、W686 认领行登记、现势翻 W687。③ 保留面：W598 评估资产三件套（golden-50.jsonl/run_eval.mjs/validate.mjs）早于本方案、服务评估基线本身，不动；方案文件头「本文件当前 untracked」过时注记（W679 入库时漏删）随删除消解。
+> - **验证**：verify_delivery 核心全绿；全仓引用扫描——活引用 0（仅 scripts/output/_w679_spec.json/_w680_spec.json 两份历史级联 spec 档案提及路径，按历史档不动）；第 31 门禁 C4 预留号拦截 W680 同族二犯实测（W685 级联提交文本「现势 W686」在进入近 15 提交窗口后被点名）并按 AGENTS 规程解除（动工前登记即豁免）。
+> - **文件**：docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md（删除）、docs/00-导读/W批次编号对账表.md（W686 认领+W682 作废+现势 W687）、六文档级联、AGENTS 脚注、四页脚、CITATION、file-index。
+> - **处置收尾**：后续 workflow 重新设计时按对账表规程另认领新号，不复活 W682；WF-2 扇出若随批次四重启亦以届时方案为准。dynamic-workflows 能力本体（宿主侧）不受影响，仅本仓方案退役。
+> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。
 
 ### v2.3.276（2026-10-08）：W685 复盘下半场报告入库与工具收尾批 — 投稿体系第二报告入库（序号 32 修位）+ sync_docs 校准 + visit-viewer 清理 + S4 收账
 
