@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W675），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W679），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.273（2026-10-07）：W679 动态 Workflow 工业化方案入库
+> **来源**：用户裁决批准《动态 Workflow 工业化方案 V1.0》（2026-10-07 全仓实测扫描·事实基线 B1-B31 逐项带取证命令）并令「开工」；本批 = 方案入库 + WF-1 前置 WP-1.0（对账表现势 W680·W676-W678 批次四~六预留不变）。
+> - **执行**：① 方案 V1.0 入库 docs/superpowers/plans/——六提案（WF-1 评估 LLM 基线〔W598 建置起唯一已立项未执行项〕/WF-2 批次修复扇出〔批次四~六 W676-W678 载体·包装站点质量方案档 §十四扇出矩阵〕/WF-3 存量冻结基线抽查〔8 份基线 19,545 行只拦新增零抽查缺口〕/WF-4 复盘报告取证包〔11 份复盘报告重复取证劳动〕/WF-5 外部输入逐条裁决〔W634 先例流水线化〕/WF-6 触发条件登记不建置）+ 运行时硬约束 9 条 + 事实基线 31 项 + 产出契约 TypeScript interface + 验收表逐条命令+期望输出 + §1.3 范围外反向清单（门禁/级联/提交链/e2e 等六类禁 workflow 化）；② WP-1.0 run_eval.mjs .env 密钥引导补丁 9 行——只载 CODEBUDDY_* 前缀变量（PROJECT_CWD 等不碰·example 内为过期路径）、已存在环境变量优先、.env 缺失静默跳过。
+> - **探测实证（当批现测）**：node --check exit 0；--self-check 输出 4/4 通过；--limit 1 探测 → 用例 chapter-001 报 SDK「Authentication required. Please use /login」+ exit 0 落盘 score 0/1（垃圾产物已删除）——凭证缺失实锤（.env 不存在 + 无全局 CODEBUDDY_API_KEY + ~/.codebuddy 实查为 CLI 工作目录非凭证库）＝方案 R3 预设场景；据此方案 WP-1.2 增补 score=0 熔断守卫（workflow 不信 exit code 单值）。
+> - **验证**：verify_delivery 核心全绿（提交前实跑·37 门禁 42 段锁）；run_eval.mjs --self-check 4/4；node --check exit 0；方案文档过第 18 门禁（4 新文件检查含本件）。
+> - **文件**：docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md（新增·方案 V1.0 六提案+执行记录 §5.6）、xiyouji-agent-web/evals/run_eval.mjs（更新·密钥引导）、docs/00-导读/W批次编号对账表.md（现势 W680 + W679 认领行）、scripts/output/_w679_spec.json（spec 档案）、六文档级联、AGENTS 脚注、三页脚、CITATION、file-index、_cascade_files_W679.txt（级联清单）。
+> - **处置收尾**：WF-1 主跑阻断于 P0-1 用户凭证（xiyouji-agent-web/.env 配 CODEBUDDY_API_KEY 或 CLI /login 二选一），凭证就位后按方案 §5.3 WP-1.1 单例实测 → WP-1.2 工作流建置继续（届时另认领 W 号）；WF-2 随站点质量批次四 W676 启用；批次四~六编号预留 W676-W678 不变。
+> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。
 
 ### v2.3.272（2026-10-06）：W675 工作复盘与优化分析报告（W666-W674 站点质量前三批周期）入库
 > **来源**：用户指令「先复盘再继续」——按 skill@工作复盘系统提示词（AI Agent 专用版）对 W672-W674 站点质量修复周期全量复盘；沿 W666 先例入库 docs/10-方法论沉淀 并登记方法论 README 索引第 29 行。

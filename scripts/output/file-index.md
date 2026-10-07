@@ -11,6 +11,14 @@
 ---
 
 
+## W679 W679 动态 Workflow 工业化方案入库（2026-10-07·v2.3.273）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md | W679 | 新增·动态 Workflow 工业化方案 V1.0（六提案/事实基线 B1-B31/运行时契约/执行记录） |
+| xiyouji-agent-web/evals/run_eval.mjs | W679 | 更新·.env 密钥引导 9 行（W598 缺口·评估基线首跑前置） |
+| docs/00-导读/W批次编号对账表.md | W679 | 更新·现势 W680 + W679 认领翻转 |
+
 ## W675 W675 工作复盘与优化分析报告（2026-10-06·v2.3.272）
 
 | 文件 | W | 说明 |
