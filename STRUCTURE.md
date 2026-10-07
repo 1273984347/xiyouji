@@ -16,7 +16,7 @@
 | `assets/` | 图片、地图、字体等静态资源 |
 | `references/` | 参考文献索引 |
 | `tools/` | 辅助工具脚本（章节切分等） |
-| `xiyouji-agent-web/` | Web Agent「西游记·渡口问津」·CodeBuddy Agent SDK·`PROJECT_CWD`=仓库根（自动解析）直接对话/检索 docs/ + 跑 scripts/ + 写 dataset/·凭证 `CODEBUDDY_API_KEY`（与 scripts/rag 档B 检索式生成并行·详见其 README） |
+| `xiyouji-agent-web/` | Web Agent「西游记·渡口问津」·自研 OpenAI-compatible 引擎（server/engine/·全主流大模型端点·W680）·`PROJECT_CWD`=仓库根（自动解析）直接对话/检索 docs/ + 跑 scripts/ + 写 dataset/·引擎三键 `LLM_API_BASE`/`LLM_API_KEY`/`LLM_MODEL` 配于服务端 .env（与 scripts/rag 检索式生成并行·详见其 README） |
 | `README.md` | 项目说明 |
 | `CLAUDE.md` | AI 速查层（宿主自动加载·一行规则+权威指针·禁写会漂移的数字与现役值·W664） |
 | `STRUCTURE.md` | 本文件 |
@@ -272,7 +272,7 @@
 
 ## 版本变更
 
-完整版本变更历史见 [CHANGELOG.md](CHANGELOG.md)（唯一事实源·文档规范 §3：本文件禁止写 W### 细节）。历史段按三段式归档（口径以 CHANGELOG 头部为准）：W001-W399 → docs/archive/CHANGELOG-ARCHIVE-tier2.md；W400-W416、W417-W464+W484 段 → CHANGELOG-ARCHIVE.md（W422/W511）；现役 v2.3.84+（W485+）。另 v0.1-v2.2.48（W001-W272）的旧版逐版本里程碑描述已迁至 [STRUCTURE-archive.md](STRUCTURE-archive.md)（2026-08-16 W448）。
+完整版本变更历史见 [CHANGELOG.md](CHANGELOG.md)（唯一事实源·文档规范 §3：本文件禁止写 W### 细节）。历史段按三段式归档（口径以 CHANGELOG 头部为准）：W001-W399 → docs/archive/CHANGELOG-ARCHIVE-tier2.md；W400-W416、W417-W464+W484 段 → docs/archive/CHANGELOG-ARCHIVE.md（W422/W511）；现役 v2.3.84+（W485+）。另 v0.1-v2.2.48（W001-W272）的旧版逐版本里程碑描述已迁至 [STRUCTURE-ARCHIVE.md](docs/archive/STRUCTURE-ARCHIVE.md)（2026-08-16 W448）。
 
 **主要阶段概要**（细节见 CHANGELOG 对应版本段）：
 

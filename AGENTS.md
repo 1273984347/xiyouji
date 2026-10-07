@@ -13,7 +13,7 @@
 - **文档（Docs）**：Markdown 写就的逐回解读、人物分析、主题专题、文化背景、诗词赏析、个人随笔。
 - **站点（Site）**：可浏览的纯静态 HTML 站点，`file://` 双击即可打开，部署于 GitHub Pages（https://1273984347.github.io/xiyouji/ ）。
 - **数据可视化**：86 个 D3.js / Three.js 可视化页（site/data/ 共 87 个 HTML，「86」不含模板壳 _shell.html），覆盖 133 个数据维度（章节统计、人物关系网络、八十一难热力图、取经路线、情感热力图、AI 对话等 34 类主题 A–AH）。
-- **可问询入口**：Web Agent「西游记·渡口问津」（xiyouji-agent-web/）——基于 CodeBuddy Agent SDK，可对话、检索 docs/source、跑脚本。
+- **可问询入口**：Web Agent「西游记·渡口问津」（xiyouji-agent-web/）——自研 OpenAI-compatible 引擎（server/engine/·W680·全主流大模型端点适配），可对话、检索 docs/source、跑脚本。
 
 **核心内容规模**：A1–A6 内容板块共 615 篇（A1 逐回 100 / A2 随笔 44 / A3 人物 215 / A4 主题 209 / A5 文化 34 / A6 诗词 13；算法与边界见 docs/00-导读/统计口径说明.md；W505 起 611→615）；英文站 site/en/ 138 页已全量英文化。
 
@@ -31,7 +31,7 @@
 | 站点 | 原生 HTML/CSS/JS，纯静态，file:// 直开，内联 tokens.css + system.css |
 | 文本分析 | Python（词频/共现/情感/术语 NLP，stdlib + 少量依赖，见 scripts/requirements.txt） |
 | 代码规范 | Ruff（pyproject.toml，line-length 120，py311）|
-| Web Agent | React 18 + Vite 5 + TypeScript + TDesign React + Express 4 + better-sqlite3 + `@tencent-ai/agent-sdk`（CodeBuddy Agent SDK） |
+| Web Agent | React 19 + Vite 8 + TypeScript + TDesign React + Express 5 + better-sqlite3 + 自研 OpenAI-compatible 引擎（server/engine/·W680） |
 | 测试 | pytest + Playwright E2E（冒烟/交互/视觉回归） |
 | CI/CD | GitHub Actions（pytest / Playwright / Lighthouse / pip-audit / npm-audit / Pages 部署 / 截图审查） |
 
@@ -178,7 +178,7 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 ### 4.4 Web Agent（xiyouji-agent-web/）
 
 - 后端 `server/index.ts`（Express + SSE 流式 + SQLite `data/chat.db`），前端 `src/`（React18 + Vite5 + TDesign）。
-- 凭证 `CODEBUDDY_API_KEY`（`.env`，由 `.env.example` 复制，已 gitignore）。
+- 引擎凭证 `LLM_API_BASE`/`LLM_API_KEY`/`LLM_MODEL`（`.env`，由 `.env.example` 复制，已 gitignore·兼容所有主流大模型 OpenAI-compatible 端点·W680）。
 - 默认 `PROJECT_CWD`=仓库根（启动时向上探测 AGENTS.md+site/tokens.css 自动解析·env 可覆盖·W596）；专属 Agent「渡口问津」内置项目 sysprompt；权限默认 `default`（UI 可切 `acceptEdits`/`plan`；`bypassPermissions` 仅当服务端 env `AGENT_WEB_ALLOW_BYPASS=1` 时放行，否则降级 default——W411 加固，W537 文档校正）。
 - 核心入口：`server/index.ts`、`src/hooks/useAgents.ts`（DEFAULT_AGENT）、`src/config.ts`（主题色 #c8463a「西」Logo）、`src/pages/ChatPage.tsx`。
 
@@ -222,7 +222,7 @@ python -m http.server 8000   # 然后访问 http://127.0.0.1:8000/site/
 cd xiyouji-agent-web
 npm install
 npm run dev          # 同时拉后端 :3000 + 前端 :5173
-# 需先复制 .env.example → .env 并填入 CODEBUDDY_API_KEY
+# 需先复制 .env.example → .env 并填入 LLM_API_BASE / LLM_API_KEY / LLM_MODEL
 ```
 
 ### 5.5 测试

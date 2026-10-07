@@ -194,7 +194,7 @@ def detect_archive_boundary(cl_text):
 
 def rule_wids(cl_text):
     """规则 3: W### 编号连续性 - CHANGELOG 连续 + file-index 条目一致。
-    W001-WXXX 已归档至 CHANGELOG-ARCHIVE.md，仅检查归档边界以上的连续性。"""
+    W001-WXXX 已归档至 docs/archive/CHANGELOG-ARCHIVE.md，仅检查归档边界以上的连续性。"""
     issues = []
     cl_wids = extract_individual_wids(cl_text)
     if not cl_wids:

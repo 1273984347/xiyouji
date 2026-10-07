@@ -1,6 +1,6 @@
 # Web Agent 二次开发指南
 
-这是一个基于 CodeBuddy Agent SDK 的完整 Web Agent 应用模板。本指南将帮助你理解项目结构并进行二次开发。
+这是一个基于自研 OpenAI-compatible 引擎（`server/engine/`·W680）的完整 Web Agent 应用。本指南将帮助你理解项目结构并进行二次开发。
 
 ## 目录
 
@@ -909,10 +909,9 @@ const stream = query({
 
 ```bash
 PORT=3000
-CODEBUDDY_API_KEY=your_api_key
-CODEBUDDY_AUTH_TOKEN=your_auth_token
-CODEBUDDY_BASE_URL=https://api.example.com
-CODEBUDDY_INTERNET_ENVIRONMENT=external
+LLM_API_BASE=https://open.bigmodel.cn/api/paas/v4
+LLM_API_KEY=your_api_key
+LLM_MODEL=glm-4.6
 ```
 
 在 `server/index.ts` 中使用:
@@ -1279,7 +1278,7 @@ console.log('[State] Messages:', currentSession?.messages);
 
 ### Q: 如何添加新的工具？
 
-A: CodeBuddy Agent SDK 的工具是由 SDK 内部管理的，无需在应用层添加。如果需要自定义工具行为，可以通过 `canUseTool` 回调进行控制。
+A: 工具由服务端工具集（`server/engine/tools.ts`）定义与执行；自定义工具行为经 canUseTool 权限桥（`server/index.ts`）控制。
 
 ---
 
@@ -1321,8 +1320,8 @@ pm2 logs web-agent
 # .env.production
 PORT=3000
 NODE_ENV=production
-CODEBUDDY_API_KEY=your_api_key
-CODEBUDDY_AUTH_TOKEN=your_auth_token
+LLM_API_KEY=your_api_key
+LLM_MODEL=glm-4.6
 ```
 
 ---
@@ -1398,7 +1397,7 @@ app.get('/api/models', async (req, res) => {
 
 ## 扩展阅读
 
-- [CodeBuddy Agent SDK 文档](https://codebuddy.tencent.com)
+- 引擎实现：`server/engine/`（types / openai-compat / tools / agent-loop）
 - [Express.js 官方文档](https://expressjs.com/)
 - [React Router 文档](https://reactrouter.com/)
 - [TDesign React 组件库](https://tdesign.tencent.com/react/)

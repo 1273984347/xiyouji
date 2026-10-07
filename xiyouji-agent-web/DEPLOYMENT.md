@@ -8,7 +8,7 @@
 ```bash
 cd xiyouji-agent-web
 npm install
-cp .env.example .env        # 填入 CODEBUDDY_API_KEY
+cp .env.example .env        # 填入 LLM_API_BASE / LLM_API_KEY / LLM_MODEL
 npm run dev                 # 后端 :3000 + 前端 :5173（concurrently）
 ```
 
