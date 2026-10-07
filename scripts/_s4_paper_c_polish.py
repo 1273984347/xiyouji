@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TARGET = ROOT / "docs" / "S4-学术投稿" / "学术论文C轨-可验证性基础设施.md"
+TARGET = ROOT / "docs" / "S4-学术投稿" / "01-论文" / "可验证性方向-投稿版.md"
 
 CIRCLED = {8: "\u2467", 9: "\u2468", 10: "\u2469", 11: "\u246a",
            12: "\u246b", 13: "\u246c", 14: "\u246d", 15: "\u246e"}

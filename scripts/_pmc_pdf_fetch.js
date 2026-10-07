@@ -1,7 +1,7 @@
 // 一次性诊断脚本 v3：PMC 文章页无拦截 → 打印为全文 PDF（Resnik 备选获取·不入库门禁）
 const { chromium } = require('playwright');
 
-const OUT = 'D:/xiyouji/docs/S4-学术投稿/文献/2026_Resnik-Hosseini_幻觉引用可构成研究不端_AccountabilityInResearch.pdf';
+const OUT = 'D:/xiyouji/docs/S4-学术投稿/06-文献/2026_Resnik-Hosseini_幻觉引用可构成研究不端_AccountabilityInResearch.pdf';
 const PAGE = 'https://pmc.ncbi.nlm.nih.gov/articles/PMC13051339/';
 
 (async () => {

@@ -9,10 +9,10 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-S = ROOT / "docs" / "S4-学术投稿" / "学术论文-西游记驿递交通书写的数字人文研究.md"
-A = ROOT / "docs" / "S4-学术投稿" / "学术论文-西游记驿递交通书写的数字人文研究-匿名稿.md"
+S = ROOT / "docs" / "S4-学术投稿" / "01-论文" / "明清小说方向-投稿版.md"
+A = ROOT / "docs" / "S4-学术投稿" / "01-论文" / "明清小说方向-匿名稿.md"
 AUDIT = ROOT / "scripts" / "_s4_audit_a_track_anchors.py"
-R = ROOT / "docs" / "S4-学术投稿" / "审查报告-A轨驿递稿-2026-09-26.md"
+R = ROOT / "docs" / "S4-学术投稿" / "审查报告-明清小说方向-2026-09-26.md"
 
 ROW74_OLD = "| 第 74 回 | 狮驼国 | 未验 | unv | line 19 八百里狮驼岭三魔头 |"
 ROW74_NEW = "| 第 74 回 | 狮驼国 | 未验 | unv | line 19 八百里狮驼岭 · 三个魔头 |"

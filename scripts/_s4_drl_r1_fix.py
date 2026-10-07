@@ -10,10 +10,10 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PAPER = ROOT / "docs" / "S4-学术投稿" / "学术论文C轨-可验证性基础设施.md"
-OUTLINE = ROOT / "docs" / "S4-学术投稿" / "C轨论文三大纲-可验证性基础设施.md"
-DECOR = ROOT / "docs" / "S4-学术投稿" / "装饰投稿" / "引用合规审计报告-2026-09-26.md"
-ATRACK = ROOT / "docs" / "S4-学术投稿" / "审查报告-A轨驿递稿-2026-09-26.md"
+PAPER = ROOT / "docs" / "S4-学术投稿" / "01-论文" / "可验证性方向-投稿版.md"
+OUTLINE = ROOT / "docs" / "S4-学术投稿" / "可验证性方向-论文三大纲.md"
+DECOR = ROOT / "docs" / "S4-学术投稿" / "05-投稿" / "装饰投稿" / "引用合规审计报告-2026-09-26.md"
+ATRACK = ROOT / "docs" / "S4-学术投稿" / "审查报告-明清小说方向-2026-09-26.md"
 
 PAPER_PAIRS = [
     # F1 + F10：文件数与耗时口径

@@ -2,7 +2,7 @@
 """一次性：C 轨可验证性基础设施稿《数据核验与复现》审计（2026-09-28）。
 
 只读审计（不改动任何源文件）：逐项核验
-docs/S4-学术投稿/学术论文C轨-可验证性基础设施.md（投稿版 + 匿名稿）
+docs/S4-学术投稿/01-论文/可验证性方向-投稿版.md（投稿版 + 匿名稿）
 的全部量化断言，对照：
 - 引文门禁 scripts/check_citations.py（--dir docs 全量实跑 ×3 + 计时；--self-test）
 - 锚点定位 scripts/audit/line_check.py（四条引文锚点 + --self-test）
@@ -26,15 +26,15 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parents[1]
 S4 = ROOT / "docs" / "S4-学术投稿"
-MD = S4 / "学术论文C轨-可验证性基础设施.md"
-MD_ANON = S4 / "学术论文C轨-可验证性基础设施-匿名稿.md"
-FIGDIR = S4 / "图表"
+MD = S4 / "01-论文" / "可验证性方向-投稿版.md"
+MD_ANON = S4 / "01-论文" / "可验证性方向-匿名稿.md"
+FIGDIR = S4 / "07-图表"
 OUT = ROOT / "tmpe" / "audit_c_track_paper_data.json"
 CHANGELOG = ROOT / "CHANGELOG.md"
 AGENTS = ROOT / "AGENTS.md"
 
 INDEX = "source/引用与网络解读/学术论文索引.md"
-A_TRACK = "docs/S4-学术投稿/学术论文-西游记驿递交通书写的数字人文研究.md"
+A_TRACK = "docs/S4-学术投稿/01-论文/明清小说方向-投稿版.md"
 
 
 def run(cmd, cwd=ROOT):

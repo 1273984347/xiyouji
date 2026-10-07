@@ -10,8 +10,8 @@ import re
 import sys
 
 ROOT = r"D:\xiyouji"
-SUB = ROOT + r"\docs\S4-学术投稿\装饰投稿\学术论文B轨-新中式数字雅集-装饰投稿版.md"
-ANON = ROOT + r"\docs\S4-学术投稿\装饰投稿\学术论文B轨-新中式数字雅集-匿名稿.md"
+SUB = ROOT + r"\docs\S4-学术投稿\05-投稿\装饰投稿\设计方向-装饰投稿版.md"
+ANON = ROOT + r"\docs\S4-学术投稿\05-投稿\装饰投稿\设计方向-匿名稿.md"
 
 ABSTRACT = (
     "把古典文学做成数据可视化，常得到一块仪表盘：白底蓝紫的图表、西式模板的版式，与文本本身无关，"

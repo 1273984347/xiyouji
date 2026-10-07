@@ -15,23 +15,25 @@
     <meta name="twitter:card" content="summary_large_image">
     <!-- SEO:INJECTED -->
     <meta name="description" content="访问记录 · 本地埋点查看 · 详解西游记">
+  <link rel="stylesheet" href="tokens.css">
   <style>
-        /* e-track-exempt: chart-data-colors 6 处 */
 :root { color-scheme: light dark; }
-    body { font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-           max-width: 768px; margin: 24px auto; padding: 0 16px; line-height: 1.6; }
+    body { font-family: var(--font-sans);
+           max-width: 768px; margin: 24px auto; padding: 0 16px; line-height: 1.6;
+           background: var(--bg); color: var(--ink); }
     h1 { font-size: 22px; margin-bottom: 4px; }
-    .sub { color: #777; font-size: 13px; margin-bottom: 16px; }
+    .sub { color: var(--ink-soft); font-size: 13px; margin-bottom: 16px; }
     .bar { margin-bottom: 14px; }
-    .bar button { margin-right: 8px; padding: 6px 14px; border: 1px solid #999; border-radius: 6px;
-                  background: transparent; cursor: pointer; }
-    .bar button:hover { background: rgba(0,0,0,.06); }
-    table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    th, td { border-bottom: 1px solid #ddd; padding: 6px 8px; text-align: left; vertical-align: top; }
-    th { position: sticky; top: 0; background: #f5f5f5; }
-    .num { color: #666; font-size: 12px; margin-top: 10px; }
-    .empty { color: #999; padding: 40px 0; text-align: center; }
-    code { background: rgba(0,0,0,.06); padding: 1px 5px; border-radius: 4px; }
+    .bar button { margin-right: 8px; padding: 6px 14px; border: 1px solid var(--ink-faint); border-radius: var(--radius-md);
+                  background: transparent; color: var(--ink); cursor: pointer; }
+    .bar button:hover { background: var(--paper-warm); }
+    table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 13px; }
+    th, td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top;
+             overflow-wrap: anywhere; }
+    th { position: sticky; top: 0; background: var(--paper-warm); }
+    .num { color: var(--ink-soft); font-size: 12px; margin-top: 10px; }
+    .empty { color: var(--ink-faint); padding: 40px 0; text-align: center; }
+    code { background: var(--paper-warm); padding: 1px 5px; border-radius: 4px; }
   </style>
   <script defer src="js/visit-log.js"></script>
   <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="static/js/goatcounter.js"></script>

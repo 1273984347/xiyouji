@@ -8,8 +8,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-S = ROOT / "docs" / "S4-学术投稿" / "学术论文-西游记驿递交通书写的数字人文研究.md"
-A = ROOT / "docs" / "S4-学术投稿" / "学术论文-西游记驿递交通书写的数字人文研究-匿名稿.md"
+S = ROOT / "docs" / "S4-学术投稿" / "01-论文" / "明清小说方向-投稿版.md"
+A = ROOT / "docs" / "S4-学术投稿" / "01-论文" / "明清小说方向-匿名稿.md"
 Q = chr(34)
 
 P_BLOCK = ("若把状态与阶段叠起来看，会浮出一条更清楚的线索：九处验讫在前半程与后半程大致均衡（第 60 回以前四处、"

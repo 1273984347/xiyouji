@@ -8,9 +8,9 @@ P2-5「核验与复现」图引范围修正（锚点实测≠全部见于图 C-2
 import io
 import sys
 
-MAIN = r"D:\xiyouji\docs\S4-学术投稿\学术论文C轨-可验证性基础设施.md"
-ANON = r"D:\xiyouji\docs\S4-学术投稿\学术论文C轨-可验证性基础设施-匿名稿.md"
-OUT = r"D:\xiyouji\docs\S4-学术投稿\C轨论文三大纲-可验证性基础设施.md"
+MAIN = r"D:\xiyouji\docs\S4-学术投稿\可验证性方向-投稿版.md"
+ANON = r"D:\xiyouji\docs\S4-学术投稿\可验证性方向-匿名稿.md"
+OUT = r"D:\xiyouji\docs\S4-学术投稿\可验证性方向-论文三大纲.md"
 PLAN = r"D:\xiyouji\docs\S4-学术投稿\学术投稿规划-三路线论文选题大纲与目标刊分级.md"
 
 

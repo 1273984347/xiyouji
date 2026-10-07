@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = ROOT / "site" / "data" / "customs-pass-route.html"
-PAPER = ROOT / "docs" / "S4-学术投稿" / "学术论文-西游记驿递交通书写的数字人文研究.md"
+PAPER = ROOT / "docs" / "S4-学术投稿" / "01-论文" / "明清小说方向-投稿版.md"
 TS = ROOT / "dataset" / "text-search.json"
 
 chapters = {int(c["num"]): c["text"] for c in json.loads(TS.read_text(encoding="utf-8"))["chapters"]}

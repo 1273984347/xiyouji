@@ -15,7 +15,7 @@
 import io
 import sys
 
-ROOT_MD = r"D:\xiyouji\docs\S4-学术投稿\学术论文C轨-可验证性基础设施.md"
+ROOT_MD = r"D:\xiyouji\docs\S4-学术投稿\可验证性方向-投稿版.md"
 
 
 def rep(s, old, new, n=1, label=""):

@@ -11,10 +11,10 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-S = ROOT / "docs" / "S4-学术投稿" / "学术论文-西游记驿递交通书写的数字人文研究.md"
-A = ROOT / "docs" / "S4-学术投稿" / "学术论文-西游记驿递交通书写的数字人文研究-匿名稿.md"
+S = ROOT / "docs" / "S4-学术投稿" / "01-论文" / "明清小说方向-投稿版.md"
+A = ROOT / "docs" / "S4-学术投稿" / "01-论文" / "明清小说方向-匿名稿.md"
 PAGE = ROOT / "site" / "data" / "customs-pass-route.html"
-R = ROOT / "docs" / "S4-学术投稿" / "审查报告-A轨驿递稿-2026-09-26.md"
+R = ROOT / "docs" / "S4-学术投稿" / "审查报告-明清小说方向-2026-09-26.md"
 Q = chr(34)
 
 SEC_OLD = ("上述数据集已实现为交互式可视化（通关文牒·取经驿路图）：30 处驿传交通节点按时间顺序排布于取经路线"

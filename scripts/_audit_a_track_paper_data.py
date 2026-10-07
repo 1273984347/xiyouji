@@ -2,7 +2,7 @@
 """一次性：A 轨驿递稿《数据核验与复现》审计（2026-09-28）。
 
 只读审计（不改动任何源文件）：逐项核验
-docs/S4-学术投稿/学术论文-西游记驿递交通书写的数字人文研究.md（投稿版 + 匿名稿）
+docs/S4-学术投稿/01-论文/明清小说方向-投稿版.md（投稿版 + 匿名稿）
 的全部量化断言，对照：
 - 底本语料行号口径 site/static/js/text-search-app.js（同 scripts/audit/line_check.py）
 - 词汇统计口径 dataset/text-search.json（同 scripts/check_citations.py）
@@ -22,13 +22,13 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parents[1]
 S4 = ROOT / "docs" / "S4-学术投稿"
-MD = S4 / "学术论文-西游记驿递交通书写的数字人文研究.md"
-MD_ANON = S4 / "学术论文-西游记驿递交通书写的数字人文研究-匿名稿.md"
+MD = S4 / "01-论文" / "明清小说方向-投稿版.md"
+MD_ANON = S4 / "01-论文" / "明清小说方向-匿名稿.md"
 TS_JS = ROOT / "site" / "static" / "js" / "text-search-app.js"
 TS_JSON = ROOT / "dataset" / "text-search.json"
 PAGE = ROOT / "site" / "data" / "customs-pass-route.html"
-FIG1 = S4 / "图表" / "A-图1-驿路时间线-灰度.png"
-FIG2 = S4 / "图表" / "A-图2-涉关文地点地理类型分布-灰度.png"
+FIG1 = S4 / "07-图表" / "A-图1-驿路时间线-灰度.png"
+FIG2 = S4 / "07-图表" / "A-图2-涉关文地点地理类型分布-灰度.png"
 OUT = ROOT / "tmpe" / "audit_a_track_paper_data.json"
 
 
