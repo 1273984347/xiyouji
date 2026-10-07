@@ -11,6 +11,25 @@
 ---
 
 
+## W680 W680 agent-web 引擎更换批次一（2026-10-07·v2.3.274）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/superpowers/plans/2026-10-07-agent-web-engine-swap-plan.md | W680 | 新增·agent-web 引擎更换蓝图 V1.0（集成面量化/新引擎规格/三批推进） |
+| docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md | W680 | 更新·WF-1 改道记录（待新引擎 W682） |
+| xiyouji-agent-web/server/engine/types.ts | W680 | 新增·引擎类型契约 |
+| xiyouji-agent-web/server/engine/openai-compat.ts | W680 | 新增·chat/completions 流式驱动（全厂商兼容） |
+| xiyouji-agent-web/server/engine/tools.ts | W680 | 新增·服务端六工具集+权限分类+路径守卫 |
+| xiyouji-agent-web/server/engine/agent-loop.ts | W680 | 新增·工具循环（maxTurns 封顶） |
+| xiyouji-agent-web/server/engine.smoke.mjs | W680 | 新增·引擎全链路常驻冒烟（4 组机判断言） |
+| xiyouji-agent-web/server/index.ts | W680 | 更新·引擎重接线（SSE 八事件契约不变） |
+| xiyouji-agent-web/src/components/SettingsPage.tsx | W680 | 更新·凭证区改引擎配置状态 |
+| xiyouji-agent-web/evals/run_eval.mjs | W680 | 重写·驱动 /api/chat 全链路（机判口径不变） |
+| xiyouji-agent-web/.env.example | W680 | 更新·LLM 三键+九家主流端点预设表 |
+| xiyouji-agent-web/package.json | W680 | 更新·移除旧厂商 SDK 依赖 |
+| .gitignore | W680 | 更新·engine 编译副产物忽略 |
+| docs/00-导读/W批次编号对账表.md | W680 | 更新·W680 认领+翻转 |
+
 ## W679 W679 动态 Workflow 工业化方案入库（2026-10-07·v2.3.273）
 
 | 文件 | W | 说明 |

@@ -38,7 +38,7 @@
 | W674 | 站点质量修复批次三（方案 V1.7 §五·同档）：JS 交互缺陷 WP-3.1–3.11 + D4 默认 A + 第四轮四项/P3 清理包（WP-3.13–3.15）+ e2e 补盲 test_site_quality.js | 88431ce（内容批）+ 收官级联（自指免列）+ 热修 16b826c/efc5a1c/ba20dba | v2.3.271 | **已收官** | ZCode 2026-10-06 |
 | W675 | 工作复盘与优化分析报告（W666-W674 站点质量前三批周期）入库 + 方法论 README 索引第 29 行 | 内容批 + 收官级联（自指免列） | v2.3.272 | **已收官** | ZCode 2026-10-06 |
 | W679 | 动态 Workflow 工业化方案 V1.0 入库（docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md·WF-1~6 六提案）+ WF-1 前置 WP-1.0（run_eval.mjs .env 密钥引导补丁·W598 评估基线 LLM 首跑前置） | c2014b8（内容批）+ 收官级联（自指免列·_w679_close_cascade 手工 13 面·W663 先例）+ deps 热修（自指免列·上游新披露 advisory·16b826c 同族） | v2.3.273 | **已收官**（WF-1 改道待新引擎） | ZCode 2026-10-07 |
-| W680 | agent-web 引擎去 CodeBuddy 化批次一（docs/superpowers/plans/2026-10-07-agent-web-engine-swap-plan.md·用户裁决不用 CodeBuddy+保留换引擎）：server/engine 四模块（OpenAI-compatible 全主流适配）+ index.ts 重接线 + run_eval 重写 + SettingsPage/.env.example 切换 + 去依赖 | （待提交） | v2.3.274 | 已认领 | ZCode 2026-10-07 |
+| W680 | agent-web 引擎更换批次一（蓝图 docs/superpowers/plans/2026-10-07-agent-web-engine-swap-plan.md·用户裁决弃用原厂商引擎+保留渡口问津+全主流大模型适配）：server/engine 四模块（OpenAI-compatible）+ index.ts 重接线（SSE 八事件契约不变）+ run_eval 重写 + engine.smoke 常驻冒烟 + SettingsPage/.env.example 切换 + 去旧 SDK 依赖 | f2dcc8a（内容批）+ 收官级联（自指免列·batch_cascade 原生） | v2.3.274 | **已收官**（W681 联调清零·W682 基线复活） | ZCode 2026-10-07 |
 
 ## 递延批豁免登记（D2 裁决：对账表登记即可过 doc-sync 提交-版段对账）
 
