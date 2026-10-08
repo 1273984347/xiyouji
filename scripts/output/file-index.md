@@ -11,6 +11,14 @@
 ---
 
 
+## W690 安全告警处置批（2026-10-08·v2.3.281）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/package.json | W690 | 更新·overrides +2（shell-quote 1.11.0/katex ^0.18.2）+ lock 同步（audit 0） |
+| scripts/package-lock.json | W690 | 更新·brace-expansion 5.0.12（npm update·audit 0） |
+| docs/00-导读/W批次编号对账表.md | W690 | 更新·W690 认领+W689 翻收官+现势 W691 |
+
 ## W689 W689 全变动对抗复审修复批—项发现闭环＋DHR 前置区重建＋明清注号重排与数据修正（2026-10-08·v2.3.280）
 
 | 文件 | W | 说明 |

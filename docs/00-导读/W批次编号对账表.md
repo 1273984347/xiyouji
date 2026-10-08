@@ -47,7 +47,7 @@
 | W687 | S4 四方向外部审读处置与投稿体系批（外部审视第五轮裁决+CNKI 核验+撞题终检+渠道要求落夹+适配版+docx+文献 md 化） | 本次提交（级联 v2.3.278） | 进行中→收官 | 一稿多投红线维持；S4 目录 gitignore 不入公开仓 |
 | W688 | 第六轮复审处置迷你批：HALLMARK 数字驳回（论文摘要 2,526 在案）+摘要/结论措辞与误报观察句+仪表盘措辞+DHR 英摘去重+HALLMARK/Resnik 建账 | 本次提交（级联 v2.3.279） | 进行中→收官 | S4 gitignore 不入公开仓 |
 | W689 | 全变动对抗复审修复批：机械扫（DHR 前置区重建+15 副本刷新+stray INDEX 清理）+对抗审读 15 项闭环（P1 文献表题名腐蚀+明清注号重排+86 回目口径+空白段/州郡县数据修正+C/B 措辞） | 本次提交（级联 v2.3.280） | 进行中→收官 | **已收官**（27f07e7） | ZCode 2026-10-08 |
-| W690 | 安全告警处置批：Dependabot 3 包真修（shell-quote 1.11.0 critical/katex 0.18.2 low/brace-expansion 5.0.12 medium）+ CodeQL 3 条 dismiss 带理由（_attic 一次性脚本 py/bad-tag-filter）+ Scorecard 18 维持登记不修 | （hash 待级联批转录）+ 收官级联（自指免列·batch_cascade 原生） | v2.3.281 | **进行中** | ZCode 2026-10-08 |
+| W690 | 安全告警处置批：Dependabot 3 包真修（shell-quote 1.11.0 critical/katex 0.18.2 low/brace-expansion 5.0.12 medium）+ CodeQL 3 条 dismiss 带理由（_attic 一次性脚本 py/bad-tag-filter）+ Scorecard 18 维持登记不修 | 6f29a26（内容批）+ 收官级联（自指免列·batch_cascade 原生） | v2.3.281 | **已收官** | ZCode 2026-10-08 |
 | W682 | agent-web 引擎更换批次三：WF-1 复活（golden-50 新引擎 LLM 基线·评估集首跑） | 3b0dfed（预留在案·W680 收官批注记） | 待批次落段 | **作废**（W686·用户裁决 workflow 方案退役·WF-1 复活随之取消·后续重新设计另认领新号） | ZCode 2026-10-07 |
 
 ## 递延批豁免登记（D2 裁决：对账表登记即可过 doc-sync 提交-版段对账）

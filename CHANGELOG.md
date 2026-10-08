@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W689），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W690），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.281（2026-10-08）：W690 安全告警处置批 — Dependabot 三包真修 + CodeQL 三条按族 dismiss + Scorecard 维持登记
+
+> **来源**：用户问「GitHub 上 Dependabot alerts 与 Code scanning 为什么还有警告」并令处置——实时取证三类账面（Dependabot 3 / CodeQL 3 / Scorecard 18）三分性裁定后全量处置。
+> - **执行（Dependabot 首账真修）**：W683 依赖图开启后首批告警（H-02 预言兑现）三包全修——shell-quote 1.9.0→1.11.0（critical·命令注入·concurrently dev 链·overrides 精确钉）/ katex ^0.16→0.18.2+（low·原型污染·cherry-markdown 与 @vscode/markdown-it-katex runtime 链·overrides）/ brace-expansion→5.0.12（medium·scripts eslint→minimatch 链·npm update 即达）——npm audit 双域 0 vulnerabilities；验证 agent-web build exit 0 + engine.smoke 12 组断言全绿。
+> - **执行（CodeQL 按族 dismiss）**：py/bad-tag-filter ×3（scripts/_attic/_w672_* 三件·W685 收档入库后被 CodeQL 首次扫描命中）——dismissed（won't fix·理由：一次性诊断脚本·五处引用零命中·无运行时路径·可重开）；2026 API 形态变证实测（键名 dismissed_reason 过去式+自然语言枚举「won't fix」·旧 dismissal_reason 键 422）。
+> - **执行（Scorecard 维持）**：18 条信息级评分条非漏洞·W683 登记裁决不动·H-01 每周 ±3 监控。
+> - **验证**：verify_delivery 核心全绿（内容批+级联批）；npm audit（agent-web + scripts）双域 0；Code scanning open 仅余 Scorecard 18（与登记账一致）。
+> - **文件**：xiyouji-agent-web/package.json（overrides +2）+ package-lock.json、scripts/package-lock.json、docs/00-导读/W批次编号对账表.md（W690 认领+W689 翻收官+现势 W691）、六文档级联、AGENTS 脚注、四页脚、CITATION、file-index。
+> - **处置收尾**：后续每次推送后照常一眼 open 数（W681 习惯）；katex override 为跨次版本强制（cherry-markdown 编辑器数学渲染若有异常先查此处·低危可回退）。
+> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。
 
 ### v2.3.280（2026-10-08）：W689 全变动对抗复审修复批——15 项发现闭环＋DHR 前置区重建＋明清注号重排与数据修正
 
