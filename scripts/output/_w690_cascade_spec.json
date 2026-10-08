@@ -1,0 +1,17 @@
+{
+  "batch": "W690",
+  "version": "v2.3.281",
+  "date": "2026-10-08",
+  "title": "W690 安全告警处置批 — Dependabot 三包真修 + CodeQL 三条按族 dismiss + Scorecard 维持登记",
+  "desc": "安全告警处置",
+  "head_entry": "2026-10-08（v2.3.281 W690 安全告警处置批）",
+  "head_sentence": "安全告警处置批",
+  "changelog_body": "\n\n> **来源**：用户问「GitHub 上 Dependabot alerts 与 Code scanning 为什么还有警告」并令处置——实时取证三类账面（Dependabot 3 / CodeQL 3 / Scorecard 18）三分性裁定后全量处置。\n> - **执行（Dependabot 首账真修）**：W683 依赖图开启后首批告警（H-02 预言兑现）三包全修——shell-quote 1.9.0→1.11.0（critical·命令注入·concurrently dev 链·overrides 精确钉）/ katex ^0.16→0.18.2+（low·原型污染·cherry-markdown 与 @vscode/markdown-it-katex runtime 链·overrides）/ brace-expansion→5.0.12（medium·scripts eslint→minimatch 链·npm update 即达）——npm audit 双域 0 vulnerabilities；验证 agent-web build exit 0 + engine.smoke 12 组断言全绿。\n> - **执行（CodeQL 按族 dismiss）**：py/bad-tag-filter ×3（scripts/_attic/_w672_* 三件·W685 收档入库后被 CodeQL 首次扫描命中）——dismissed（won't fix·理由：一次性诊断脚本·五处引用零命中·无运行时路径·可重开）；2026 API 形态变证实测（键名 dismissed_reason 过去式+自然语言枚举「won't fix」·旧 dismissal_reason 键 422）。\n> - **执行（Scorecard 维持）**：18 条信息级评分条非漏洞·W683 登记裁决不动·H-01 每周 ±3 监控。\n> - **验证**：verify_delivery 核心全绿（内容批+级联批）；npm audit（agent-web + scripts）双域 0；Code scanning open 仅余 Scorecard 18（与登记账一致）。\n> - **文件**：xiyouji-agent-web/package.json（overrides +2）+ package-lock.json、scripts/package-lock.json、docs/00-导读/W批次编号对账表.md（W690 认领+W689 翻收官+现势 W691）、六文档级联、AGENTS 脚注、四页脚、CITATION、file-index。\n> - **处置收尾**：后续每次推送后照常一眼 open 数（W681 习惯）；katex override 为跨次版本强制（cherry-markdown 编辑器数学渲染若有异常先查此处·低危可回退）。\n> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。\n",
+  "milestone_block": "- **v2.3.281 W690 安全告警处置批**：\n  - Dependabot 首账三包真修（shell-quote critical/katex low/brace-expansion medium·audit 双域 0）\n  - CodeQL 3 条按族 dismiss（_attic 一次性脚本·won't fix 带理由·可重开）·Scorecard 18 维持登记不修\n  - 2026 API 形态实证：code-scanning dismiss 键名/枚举已改（dismissed_reason + 「won't fix」）\n",
+  "agents_note": "2026-10-08（v2.3.281 W690）安全告警处置批：Dependabot 首账三包真修（shell-quote 1.11.0/katex 0.18.x/brace-expansion 5.0.12·audit 双域 0）+ CodeQL 3 条 _attic 一次性脚本按族 dismissed（won't fix 带理由·2026 API 新形态实证）+ Scorecard 18 维持 W683 登记裁决",
+  "file_index_rows": [
+    "| xiyouji-agent-web/package.json | W690 | 更新·overrides +2（shell-quote 1.11.0/katex ^0.18.2）+ lock 同步（audit 0） |",
+    "| scripts/package-lock.json | W690 | 更新·brace-expansion 5.0.12（npm update·audit 0） |",
+    "| docs/00-导读/W批次编号对账表.md | W690 | 更新·W690 认领+W689 翻收官+现势 W691 |"
+  ]
+}
