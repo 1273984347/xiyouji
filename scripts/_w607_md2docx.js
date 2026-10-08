@@ -261,7 +261,7 @@ for (let i = start + 1; i < end; i++) {
   if (/^\*\*[^*]+\*\*[：:]/.test(t) || /^\*\*(English Title|Abstract|Keywords)\*\*/.test(t)) {
     children.push(labeledPara(t)); continue;
   }
-  if (/^[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯]/.test(t) || /^\[\d+\]/.test(t) || isNoteSection) {
+  if (/^[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳]/.test(t) || /^\[\d+\]/.test(t) || isNoteSection) {
     children.push(notePara(t)); continue;
   }
   children.push(bodyPara(t));
