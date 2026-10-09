@@ -11,6 +11,25 @@
 ---
 
 
+## W691 W691 Backlog 裁决执行批（2026-10-10·v2.3.285）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| dataset/text-search.json | W691 | 更新·第 1/2/67 回自分回重建加 corpus_note（两真源单源化） |
+| scripts/utils/aliases.py | W691 | 更新·归属追踪集补袁守诚/泾河龙王/魏征/唐太宗/崔判官 |
+| scripts/B_人物/character_nlp.py | W691 | 更新·other_speakers 动态计算加注记字段生成器化 |
+| site/data/json/dialogue_sentiment.json 加 character_appearance.json | W691 | 更新·生成器链重跑（6617 条/缺回清零/40 人） |
+| site/data/dialogue-sentiment.html | W691 | 更新·内嵌 const 整块替换加 KPI 硬数字与说话者同步 |
+| docs 下 31 文件 | W691 | 更新·35 行第 1/2 回引文自节选本迁回真本（含 S4 论文七副本 md） |
+| site/data/json/character_cards.json | W691 | 更新·牛魔王卡芭蕉扇借机制 lore_note |
+| site/data/json/counterfactual_summary.json 加 domino_causality.json | W691 | 更新·性质/时点口径注记 |
+| site/data/json/journey_geo_3d.json 加 journey_route.json | W691 | 更新·到达回口径统一（两界山13/号山39/浮屠山19）加 chapter_note |
+| site/data/json/spiral_progress.json 加 team_effectiveness.json | W691 | 更新·阶段口径注记（两维度声明） |
+| site/data/json/trip_report.json | W691 | 更新·alert_level 七处统一色·标签格式 |
+| source/原文/分回/第067回.md | W691 | 更新·稀柿同误植改衕 |
+| scripts/_w691_quote_fix.py 加 _w691_bl_items.py | W691 | 入账·引文迁移与七小项一次性工具 |
+| docs/00-导读/W批次编号对账表.md | W691 | 更新·W691 认领+翻转+现势 |
+
 ## W690 安全告警处置批（2026-10-08·v2.3.281）
 
 | 文件 | W | 说明 |

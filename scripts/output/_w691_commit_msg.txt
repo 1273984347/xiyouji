@@ -1,0 +1,8 @@
+fix(w691): Backlog 裁决执行批——BL-19 两真源单源化 + BL-18 归属追踪集扩展 + 七小项注记口径落地
+
+用户 2026-10-10 圈选九项（其余十项维持登记不开工）：
+- BL-19 A+B：逐回对拍实证两源仅第 1/2 回分歧（其余 98 回一致）——text-search 第 1/2 回自分回 md 重建（1584/1467→7109/7218 字·剥「单字解释」附录）+ corpus_note 权威口径声明。下游连锁：旧节选本措辞曾被 31 文件 35 行引文引用（含 S4 论文七副本）——14 句策展映射迁回真本并勘正回目错挂（灵台方寸山等名句真本在第 1 回），引文门禁复验 486 条 100%
+- BL-18 A：根因=归属追踪集不含第 9-11 回说话人——aliases.py 补袁守诚/泾河龙王/魏征/唐太宗/崔判官五人（保守别名防泛称误归属）；character_nlp 注记字段化（other_speakers 动态/防重跑冲掉）；全链重跑 6547→6617 条、第 9/10/11 回 6/32/14 条、chapter_sentiment 100 回全覆盖（W640 缺口闭合）、other_speakers 46→62、说话者 21→23、appearance 35→40 人；dialogue-sentiment 页内嵌 const 整块替换+KPI 12 处同步
+- BL-7C 牛魔王卡借扇机制 lore_note｜BL-8B counterfactual 性质注记｜BL-9B domino 时点注记｜BL-11A 第 67 回 md 稀柿同→衕+text-search 同步重建｜BL-14A 到达回口径统一（geo_3d 两界山 13/号山 39+route 浮屠山 19+chapter_note）｜BL-15B spiral/team 阶段口径注记｜BL-16B trip alert_level 七处统一色·标签
+
+验证：verify_delivery 核心全绿（第 20 门禁 486 条 100%·第 9 门禁 47 副本对账）；check_js_syntax 854 文件过（页内嵌块替换踩旧区闭合形态，按真实字节修复后 node --check 复验）；generate_csp --check 0 漂移；e2e test_smoke 89/89；ruff 新脚本 0 错；级联 _w691_close_cascade 手工 13 面 dry+apply 自检过（头尾链直提核实 W691 领衔·已知严格正则误报放行）。过程登记：md 语料「单字解释」附录 100/100 与断行噪声维持现状；S4 论文 docx 副本含旧措辞待下次重生成同步（S4 轨遗留）。

@@ -72,7 +72,7 @@
     },
     {
       "n": 9,
-      "chapter": 20,
+      "chapter": 19,
       "place": "浮屠山",
       "region": "乌斯藏国",
       "type": "mountain",
@@ -508,7 +508,7 @@
       "from_place": "乌斯藏国高老庄",
       "to_place": "浮屠山",
       "from_chapter": 18,
-      "to_chapter": 20,
+      "to_chapter": 19,
       "from_region": "乌斯藏国",
       "to_region": "乌斯藏国"
     },
@@ -517,7 +517,7 @@
       "to_n": 10,
       "from_place": "浮屠山",
       "to_place": "黄风岭",
-      "from_chapter": 20,
+      "from_chapter": 19,
       "to_chapter": 20,
       "from_region": "乌斯藏国",
       "to_region": "西番哈必国"
@@ -1332,5 +1332,6 @@
     "国": 9,
     "水": 6,
     "城": 6
-  }
+  },
+  "chapter_note": "chapter 口径=取经队抵达该地之回目（到达回·W691 BL-14 裁决统一）"
 }

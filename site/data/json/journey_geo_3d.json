@@ -32,7 +32,7 @@
       "lon": 106.0,
       "lat": 33.5,
       "category": "人间",
-      "chapter": "第14回",
+      "chapter": "第13回",
       "duration": 1,
       "desc": "收孙悟空，五行山改名。"
     },
@@ -122,7 +122,7 @@
       "lon": 88.0,
       "lat": 29.0,
       "category": "妖界",
-      "chapter": "第40-42回",
+      "chapter": "第39回",
       "duration": 3,
       "desc": "红孩儿三昧真火。"
     },
@@ -177,5 +177,6 @@
       "desc": "西天雷音寺，取经终点。"
     }
   ],
-  "duration_note": "nodes[].duration 为两界节点间的回目停留跨度（非自然年），W678 注记"
+  "duration_note": "nodes[].duration 为两界节点间的回目停留跨度（非自然年），W678 注记",
+  "chapter_note": "chapter 口径=取经队抵达该地之回目（到达回·W691 BL-14 裁决统一）；事件跨度见 event/正文叙述"
 }

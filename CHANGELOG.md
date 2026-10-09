@@ -4,13 +4,30 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W678），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W691），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.285（2026-10-10）：W691 Backlog 裁决执行批 — BL-19 两真源单源化含下游引文迁移 + BL-18 归属追踪集扩展补提 + 七小项注记口径落地
+
+> **来源**：Backlog 裁决执行批——用户 2026-10-10 在 BL-1~BL-19 决策菜单中圈选九项（BL-19 选 A+B、BL-18 选 A、BL-7 选 C、BL-8 选 B、BL-9 选 B、BL-11 选 A、BL-14 选 A、BL-15 选 B、BL-16 选 B），其余十项维持登记不开工。认领号 W691（对账表）。
+> - **BL-19 两真源单源化（A+B）**：逐回对拍实证两源仅第 1/2 回分歧（text-search 节选本 1584/1467 字 vs 分回 md 7109/7218 字，其余 98 回一致）——text-search 第 1/2 回自分回 md 重建（剥「单字解释」附录与 H1 标题行）+ 顶层 corpus_note 权威口径声明，引文门禁与出场统计自此同源。**下游连锁修复**：旧节选本措辞曾被 31 文件 35 行引文引用（含 S4 论文七副本）——14 句策展映射全部迁回真本措辞并勘正回目错挂（「此山叫做灵台方寸山。山中有座斜月三星洞。」等名句真本在第 1 回），引文门禁复验 486 条 100%。
+> - **BL-18 缺回补提（A）**：根因=归属追踪集不含第 9-11 回说话人——utils/aliases.py 补入袁守诚/泾河龙王/魏征/唐太宗/崔判官五人（别名取保守集，不用「龙王」「判官」泛称防跨回误归属）；character_nlp 生成器注记字段化（other_speakers 动态计算/avg_sentiment_note/chapter_coverage_note——此前为部署副本后编辑、重跑即失）；全链重跑：total_dialogues 6547→6617（第 9/10/11 回 6/32/14 条）、chapter_sentiment 100 回全覆盖（W640 缺口闭合）、other_speakers 46→62、说话者 21→23、sentiment_distribution 831/3826/1960、character_appearance 35→40 人（新增五人首现回 9/9/9/10/10）；dialogue-sentiment 页内嵌 const EMBEDDED 整块替换 + KPI 硬数字与占比 12 处 + 说话者展示同步。
+> - **BL-7C**：character_cards 牛魔王卡补 lore_note（「芭蕉扇·借」机制原型=第 59-61 回三借芭蕉扇，卡面为简化口径）。
+> - **BL-8B**：counterfactual_summary 补 nature_note（架空推演性质声明·如意真仙归类等以推演逻辑为先·W668 B-C 级惯例）。
+> - **BL-9B**：domino_causality 补 timing_note（叙事因果简化建模声明）。
+> - **BL-11A**：第 67 回 md「稀柿同」误植改「衕」（同章 衕×2 混用坐实形近误植）+ text-search 第 67 回同步重建。
+> - **BL-14A**：到达回口径统一——journey_geo_3d 两界山 第14回改第13回、号山 第40-42回改第39回，journey_route 浮屠山 20 改 19（route 本系到达回口径仅此一处偏差）+ 双文件 chapter_note 口径声明。
+> - **BL-15B**：spiral_progress / team_effectiveness 各补 stage_scope_note（心性成长与团队效能系两维度，边界差异系维度本质非数据矛盾）。
+> - **BL-16B**：trip_report alert_level 七处统一「色·标签」格式（黄·虎狼之厄/橙·禅院失火/橙·黑风盗宝/红·白骨三变/红·青牛套宝/红·无底洞陷师/橙·犀牛劫）。
+> - **验证**：verify_delivery 核心全绿（含第 20 门禁 486 条 100%·第 9 门禁 47 副本对账）；check_js_syntax 854 文件过（dialogue-sentiment 页内嵌块替换一度卡旧区闭合形态，按真实字节修复后 node --check 复验）；generate_csp --check 0 漂移；e2e test_smoke 89/89；ruff 新脚本 0 错。过程发现：md 语料「单字解释」附录 100/100、正文带断行空格噪声（语料既有状态，既有 486 条引文选取均避噪）——登记不处理。
+> - **文件**：dataset/text-search.json（第 1/2/67 回重建+corpus_note）、scripts/utils/aliases.py（+5 人）、scripts/B_人物/character_nlp.py（注记字段化）、scripts/output/data 两件重生成、site/data/json 十件（dialogue_sentiment/character_appearance/character_cards/counterfactual_summary/domino_causality/journey_geo_3d/journey_route/spiral_progress/team_effectiveness/trip_report）、site/data/dialogue-sentiment.html（const 整块+KPI 同步）、source/原文/分回/第067回.md、31 文件 35 行引文迁移、scripts/_w691_quote_fix.py、scripts/_w691_bl_items.py、scripts/output/_w691_quote_table.json、六文档级联、对账表。
+> - **处置收尾**：S4 论文 docx 副本仍含旧节选本措辞（md 源 31 文件已全部迁移，docx 待下次 Word 重生成时同步——S4 轨遗留登记）；md 断行噪声与「单字解释」附录维持现状；BL-1~16/17 维持登记不开工。
+> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。
 
 ### v2.3.284（2026-10-09）：W678 站点质量修复批次六 — WP-6.1 同步断链 + WP-6.2/6.3 数据修复注记 + WP-6.4 出场管线 + WP-6.6/6.7 机械与硬伤 + 第 9 门禁对账
 
