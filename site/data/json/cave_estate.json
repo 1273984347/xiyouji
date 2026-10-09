@@ -8,7 +8,7 @@
     "location": "花果山正顶",
     "environment": "瀑布遮门，石碣镌'花果山福地，水帘洞洞天'，内有石座石床、石锅石灶",
     "furnishings": "石座、石床、石凳、石盆、石碗，天然生成",
-    "treasures": " mischief石碣、铁板桥、瀑布天帘",
+    "treasures": "石碣、铁板桥、瀑布天帘",
     "minions_count": 47000,
     "subordinates": [
       "四健将·马流二元帅",
@@ -56,7 +56,7 @@
     "feature": "灵山脚下得道黄毛貂鼠，与佛门有渊源"
   },
   {
-    "name": "白虎洞",
+    "name": "波月洞",
     "owner": "黄袍怪",
     "owner_rank": "king",
     "chapter": 29,
@@ -189,7 +189,7 @@
     "region": "积雷山·摩云洞",
     "location": "积雷山顶",
     "environment": "摩云入汉，积雷成峰",
-    "furnishings": "万圣公主遗物珠玉满堂",
+    "furnishings": "万岁狐王遗物珠玉满堂",
     "treasures": "牛王金睛兽",
     "minions_count": 300,
     "subordinates": [

@@ -85,7 +85,6 @@
   {
     "country": "越南",
     "title": "《西游记》（越南本土改编）",
-    "year": "1990s",
     "author": "越南本土化",
     "medium": "戏剧·说唱",
     "amplified_elements": [
@@ -96,7 +95,9 @@
     "axis_loyalty": 7,
     "axis_seriousness": 4,
     "feature": "越南本地戏曲改编·融入越南民俗与幽默",
-    "influence": "东南亚西游文化接受"
+    "influence": "东南亚西游文化接受",
+    "year_start": 1990,
+    "year_end": 1999
   },
   {
     "country": "美国",

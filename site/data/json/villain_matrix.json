@@ -49,7 +49,7 @@
         10
       ],
       "description": "高资源高动机·为颠覆体系而生",
-      "example_count": 3,
+      "example_count": 1,
       "typical_outcome": "被佛派高层亲自收服·回归原位"
     },
     {
@@ -57,14 +57,14 @@
       "label": "强背景 + 求生",
       "x_range": [
         0,
-        4
+        6
       ],
       "y_range": [
         7,
         10
       ],
       "description": "高资源低动机·想代替取经团队上位",
-      "example_count": 4,
+      "example_count": 7,
       "typical_outcome": "被主家收回·继续当坐骑或童子"
     },
     {
@@ -72,11 +72,11 @@
       "label": "弱背景 + 求生",
       "x_range": [
         0,
-        4
+        6
       ],
       "y_range": [
         0,
-        4
+        6
       ],
       "description": "低资源低动机·只想吃口肉长生不老",
       "example_count": 6,
@@ -91,10 +91,10 @@
       ],
       "y_range": [
         0,
-        4
+        6
       ],
       "description": "低资源高动机·执念是'成为某人'",
-      "example_count": 2,
+      "example_count": 1,
       "typical_outcome": "被打死或被收服·但代价巨大"
     }
   ],

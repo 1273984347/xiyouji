@@ -4807,5 +4807,8 @@
         "count": 15
       }
     ]
-  }
+  },
+  "avg_sentiment_note": "口径注记（W678）：avg_sentiment 为词典强度累加值（非归一化均值），个别条目可超出 [-1,1]，属口径特征非数据错误",
+  "other_speakers": 46,
+  "chapter_coverage_note": "chapter_sentiment 缺第 9/10/11 回：归属管线在该三回 0 条带引号归属语（生成器重跑确定性复现），补提需扩归属算法，属作者裁决项（W678 登记）"
 }

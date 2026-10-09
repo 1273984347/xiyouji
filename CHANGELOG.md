@@ -4,13 +4,28 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W677），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W678），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.284（2026-10-09）：W678 站点质量修复批次六 — WP-6.1 同步断链 + WP-6.2/6.3 数据修复注记 + WP-6.4 出场管线 + WP-6.6/6.7 机械与硬伤 + 第 9 门禁对账
+
+> **来源**：站点质量修复六批方案 V1.7（docs/superpowers/plans/2026-10-05-site-quality-remediation-plans.md）批次六——第七至九轮数据质量（B-8 惯例：机械/注记级直改、语义口径登记、生成器层先行）。
+> - **WP-6.1 三层断链根治**：新建 scripts/sync_data_json.py（生成器输出 scripts/output/data/ 与 部署副本 site/data/json/ 单向同步·清单制加 --dry）；cave_estate 链四层归一——生成器内嵌数据三处修正（白虎洞改波月洞/mischief 前缀清除/万圣公主遗物改万岁狐王遗物）加 dataset/cave-estate.json 真源同改（万岁狐王），重跑生成器后同步部署副本（白虎洞 1 改 0、波月洞 4）。
+> - **WP-6.2 事实错误**：character_cards /demo 求助观音调试残留删除；deconstruction_summary year_range [1979,2024] 改 [1986,2024]（works 实测 min 1986）加 east_asia_receptions_detail 关联注记（明细文件实测在位·第八轮修正后不删汇总字段）。
+> - **WP-6.3 副本质量（注记级）**：dialogue_sentiment 加 avg_sentiment_note（词典强度累加非归一化·不改正值）加 other_speakers: 46（speaker 合计 6501 与 total 6547 差值落账）加 chapter_coverage_note（缺第 9/10/11 回系归属管线 0 条带引号归属语·生成器重跑确定性复现·补提属作者裁决项登记 BL-18）；cave_by_owner_rank 中将级改妖将级。
+> - **WP-6.4 出场管线**：character_appearance 生成器两处升级——FIRST_APPEAR_OVERRIDE 增观音=6（泛称「菩萨」第 1 回猴谣误计·剧情首秀第 6 回·W643 口径续勘）加 characters[] 条目补 appear_in_chapters 字段（35/35 非空·W640 缺口闭合）；重跑生成器同步副本。**方案证据源反转裁定两条**：① 玉帝 first_chapter=1 维持不修——方案引 text-search 第 1 回为节选本（1584 字），分回 md 实有「惊动高天上圣大慈仁者玉皇大天尊」（石猴出世惊天庭即第 1 回情节），非别名误命中；② 抽样 8 角色（悟空/唐僧/八戒/沙僧/如来/黄风怪/李靖/金鱼精）以生成器别名表对分回原文实算首现全部一致，管线健康。
+> - **WP-6.6 第八轮机械五项**：monster_ipo ticker 全角冒号五处改半角；east_asia_receptions 越南 year "1990s" 改 year_start/year_end 结构化；east_asia_amplification 中国网络文学条目代表作《悟空传》《大猿王》改《悟空传》单列（日本条目《大猿王》专名保留·同名歧义消解）；heart_sutra highest_peak「灵山·成佛归零」改「灵山·最终归零」（与 wave_amplitude 语义对齐）；journey_geo_3d 加 duration_note（节点停留跨度非年）。
+> - **WP-6.7 第九轮硬伤**：villain_matrix 象限区间改连续 [0,6]/[7,10] 加 example_count 按坐标复算改 1/7/6/1（此前 5 点悬浮区间外加计数 3/4/6/2 失配——与 methodology-matrix 页内嵌副本对齐·页早经修正）；rescue_roi 加 scoring_note（主观综合评分非公式直算）；project_review「5 人晋升佛位」改「唐僧、悟空师徒二人成佛」加「贞观27年」补原著纪年注记；narrative_cards 芭蕉扇改专克火系（第 59-61 回扇灭火焰山）加九齿钉耙删性别刻板条款；webnovel 六耳「被如来一棒打死」改「被悟空一棒打杀·如来识破真身」；scent_map 流沙河「水深仅 1m」改「弱水三千鹅毛不浮」；translation_bias 美猴王 chapter_first 4 改 1（第 1 回水帘洞立王·text-search 前置实证）。「必要配乐」句复核为 B-C 级趣味文案风格保留（第九轮尺度裁定）。
+> - **暗色连带修复（W677 回归·dark gate 实抓）**：social-media 金棕色按用途拆分——图表填充（角色色图/N 轴）恢复 #e9b885，徽章底与行内文本改页内 CSS 变量 --sm-gold-ink（亮 #8a6420 对纸面 4.83:1、暗自动翻转 #e9b885，var() 形态），修复 W677 单值 #7a571b 在暗色态 6 处 invisible 回归；本地 4 态审计 ZH/EN 归零留证。
+> - **WP-6.5 Backlog**：交接文档 Backlog 段登记 BL-6 至 BL-19 十四项（三 master 表/卡池平衡/counterfactual 五处/domino/章节格式/稀柿衕/全局 ID/schema/tone 量纲/route 口径/阶段口径/合规三项/food_vlog/缺回补提/两真源分歧），全部登记不开工。
+> - **验证**：verify_delivery 核心全绿（第 9 门禁 47 副本对账含新生成两件）；generate_csp --check 0 漂移（本批零内联脚本改动）；e2e test_smoke 89/89；ruff 新脚本 0 错；batch_cascade 原生 dry+apply 自检过（file-index W678 段调至数值位满足段倒序断言）。
+> - **文件**：dataset/cave-estate.json、scripts/M_洞府房产/cave_estate.py、scripts/B_人物/character_appearance.py、scripts/sync_data_json.py（新增）、scripts/_w678_fixes.py（一次性总修）、scripts/output/data 两件、site/data/json 十六副本（cave_estate/character_appearance/character_cards/deconstruction_summary/dialogue_sentiment/cave_by_owner_rank/monster_ipo/east_asia_receptions/east_asia_amplification/heart_sutra_sculpture/journey_geo_3d/villain_matrix/rescue_roi/project_review/narrative_cards/webnovel_adaptations/scent_map/translation_bias）、交接文档.md（Backlog 十四项）、六文档级联、对账表。
+> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。
 
 ### v2.3.283（2026-10-09）：W677 站点质量修复批次五 — WP-5.1 数据破坏 + WP-5.2 JS 七项 + WP-5.3 CSS 视觉四项 + WP-5.4 P3 包
 
