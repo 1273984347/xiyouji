@@ -1,4 +1,4 @@
-"""aliases.py 测试：35 人物别名表 + resolve_alias 别名解析。
+"""aliases.py 测试：40 人物别名表 + resolve_alias 别名解析。
 
 aliases.py 仅依赖内置类型（无外部依赖），测试可独立运行。
 """
@@ -6,8 +6,8 @@ from utils.aliases import CHARACTER_ALIASES, resolve_alias
 
 
 def test_aliases_count():
-    """别名表应包含 35 位主要人物（与 character_nlp.py CHARACTERS 一致）。"""
-    assert len(CHARACTER_ALIASES) == 35
+    """别名表应包含 40 位主要人物（与 character_nlp.py CHARACTERS 一致；W691 补第 9-11 回说话人五人）。"""
+    assert len(CHARACTER_ALIASES) == 40
 
 
 def test_aliases_structure():

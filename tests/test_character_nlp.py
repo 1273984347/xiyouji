@@ -51,8 +51,8 @@ def test_alias_resolution(alias_patterns):
 
 
 def test_alias_resolution_all_canonicals_present():
-    """CHARACTERS 表应包含 35 位人物（与 aliases.py 单一数据源一致）。"""
-    assert len(CHARACTERS) == 35
+    """CHARACTERS 表应包含 40 位人物（与 aliases.py 单一数据源一致；W691 补五说话人）。"""
+    assert len(CHARACTERS) == 40
     # 每位人物的别名列表非空且包含主名自身
     for canonical, aliases in CHARACTERS.items():
         assert len(aliases) > 0
