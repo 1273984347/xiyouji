@@ -106,6 +106,33 @@
 | xiyouji-agent-web/evals/run_eval.mjs | W679 | 更新·.env 密钥引导 9 行（W598 缺口·评估基线首跑前置） |
 | docs/00-导读/W批次编号对账表.md | W679 | 更新·现势 W680 + W679 认领翻转 |
 
+## W678 W678 站点质量修复批次六（2026-10-09·v2.3.284）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/sync_data_json.py | W678 | 新增·生成器输出与部署副本单向同步（清单制·三层断链根治） |
+| scripts/M_洞府房产/cave_estate.py | W678 | 更新·内嵌数据三处修正（波月洞/mischief/万岁狐王遗物） |
+| scripts/B_人物/character_appearance.py | W678 | 更新·FIRST_APPEAR_OVERRIDE 增观音 6 加 characters 条目补 appear_in_chapters |
+| dataset/cave-estate.json | W678 | 更新·真源万岁狐王遗物同改 |
+| site/data/json/cave_estate.json 加 character_appearance.json | W678 | 更新·生成器链重跑同步（白虎洞清零加 appear 35/35 非空） |
+| site/data/json/character_cards.json | W678 | 更新·/demo 调试残留删除 |
+| site/data/json/deconstruction_summary.json | W678 | 更新·year_range 1986 加明细关联注记 |
+| site/data/json/dialogue_sentiment.json | W678 | 更新·avg_sentiment 口径注记 加 other_speakers 46 加缺回注记 |
+| site/data/json/cave_by_owner_rank.json | W678 | 更新·中将级改妖将级 |
+| site/data/json/monster_ipo.json | W678 | 更新·ticker 全角冒号五处改半角 |
+| site/data/json/east_asia_receptions.json | W678 | 更新·越南 year 字段结构化 year_start/year_end |
+| site/data/json/east_asia_amplification.json | W678 | 更新·中国条目代表作悟空传单列（同名歧义消解） |
+| site/data/json/heart_sutra_sculpture.json | W678 | 更新·highest_peak 归零语义对齐 |
+| site/data/json/journey_geo_3d.json | W678 | 更新·duration 单位注记 |
+| site/data/json/villain_matrix.json | W678 | 更新·象限区间连续化加计数复算 1/7/6/1（对齐页内嵌） |
+| site/data/json/rescue_roi.json | W678 | 更新·主观评分注记 |
+| site/data/json/project_review.json | W678 | 更新·佛位二人加贞观纪年注记 |
+| site/data/json/narrative_cards.json | W678 | 更新·芭蕉扇专克火系加钉耙删性别条款 |
+| site/data/json/webnovel_adaptations.json 加 scent_map.json 加 translation_bias.json | W678 | 更新·六耳归悟空打杀加流沙河弱水注记加美猴王首现回 1 |
+| scripts/_w678_fixes.py | W678 | 入账·批次六一次性总修工具 |
+| 交接文档.md | W678 | 更新·Backlog 段登记 BL-6 至 BL-19 十四项 |
+| docs/00-导读/W批次编号对账表.md | W678 | 更新·W678 认领+翻转+现势 |
+
 ## W677 W677 站点质量修复批次五（2026-10-09·v2.3.283）
 
 | 文件 | W | 说明 |

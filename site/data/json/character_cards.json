@@ -165,7 +165,7 @@
         "type": "heal"
       },
       {
-        "name": "/demo 求助观音",
+        "name": "求助观音",
         "cost": 5,
         "effect": "召唤观音救场·冷却 5 回合",
         "type": "summon"

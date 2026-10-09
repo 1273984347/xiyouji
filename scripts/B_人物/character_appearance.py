@@ -29,10 +29,15 @@ from utils.analyzer_base import run_analyzer
 # 如第 1 回「白鹿」），字面首回误计为角色首秀——按原著剧情首秀覆盖：
 # 白鹿精=比丘国第 78 回·大鹏/白象=狮驼岭第 74 回；青毛狮子第 39 回（乌鸡国
 # 假国王）本就是该角色首秀，无需覆盖。mentions/matrix 保持词频统计口径不变。
+# W678 续勘：观音的泛称别名「菩萨」在第 1 回猴谣「参老天，拜菩萨」中作通名，
+# 字面首回误计——剧情首秀=第 6 回（第 5 回蟠桃会名单「南极观音」系口头提及，
+# 从 W643 剧情首秀口径取 6）。玉帝 first=1 维持：分回原文第 1 回实有
+# 「惊动高天上圣大慈仁者玉皇大天尊」（石猴出世惊天庭），非别名误命中。
 FIRST_APPEAR_OVERRIDE = {
     "白鹿精": 78,
     "大鹏": 74,
     "白象": 74,
+    "观音": 6,
 }
 
 
@@ -108,6 +113,7 @@ def aggregate(per_chapter: list, characters: dict) -> dict:
 
     # W565：补 characters 数组（页面渲染契约：name/first_chapter/appearances/mentions；
     # timeline 由页面侧从 matrix 派生真实分布）。first_chapter 转数字（"第001回"→1）。
+    # W678：补 per-character appear_in_chapters（此前仅顶层聚合图，条目级字段缺失）。
     characters_out = [
         {
             "name": r["character"],
@@ -117,6 +123,7 @@ def aggregate(per_chapter: list, characters: dict) -> dict:
             ),
             "appearances": r["appear_chapters"],
             "mentions": r["total_mentions"],
+            "appear_in_chapters": appear_in_chapters.get(r["character"], []),
         }
         for r in ranking
     ]
