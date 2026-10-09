@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-eigEVBjE35tGQEc+feTxtWNuPFfJlMQuv2eKvQ0PlWw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-ABJ00jwnVPmWa+/qUPyK36IMBBnHtJSYNWe8BnsMkXQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Visual Art · The Material Form of the Heart Sutra & Scent Map · Annotated Journey to the West</title>
@@ -1801,7 +1801,8 @@ td.num, th.num {
             width: 22px; height: 3px; display: inline-block; border-radius: var(--radius-sm)
         }
     
-    </style>
+            @keyframes heart-breath { 0%, 100% { fill-opacity: 0; } 50% { fill-opacity: 0.35; } }
+</style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
 /* injected label-halo for overlap readability */
@@ -2261,15 +2262,6 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("fill-opacity", 0)
             .style("animation", "heart-breath 2.4s ease-in-out infinite");
 
-        // 添加 keyframes 心形呼吸动画
-        const styleEl = document.createElement("style");
-        styleEl.textContent = `
-            @keyframes heart-breath {
-                0%, 100% { fill-opacity: 0; }
-                50% { fill-opacity: 0.35; }
-            }
-        `;
-        document.head.appendChild(styleEl);
 
         // 心形下方标签
         g.append("text")

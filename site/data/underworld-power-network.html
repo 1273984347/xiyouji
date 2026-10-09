@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-nkYxAXDLRYFZ482BKwo473tkfUwu/ROkcRdGL1lGeIA=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-86CKwOl5bHYVQ2NIvK/xIlGyCiW7Q4JxJkXfpvdX4xA=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>地府权力关系图 - 西游数据可视化 · 详解西游记</title>
@@ -2489,25 +2489,6 @@ function renderTimeline(timelineData) {
       .attr('fill-opacity', 0.06);
   });
 
-  // 连线（同一人物事件串联）
-  const actors = Array.from(new Set(timelineData.map(d => d.actor)));
-  actors.forEach(actor => {
-    const vEvents = timelineData.filter(d => d.actor === actor).sort((a, b) => a.chapter - b.chapter);
-    if (vEvents.length > 1) {
-      const line = d3.line()
-        .x(d => xScale(d.chapter))
-        .y(d => yScale(d.stage) + yScale.bandwidth() / 2)
-        .curve(d3.curveMonotoneX);
-      g.append('path')
-        .datum(vEvents)
-        .attr('fill', 'none')
-        .attr('stroke', stageColors[vEvents[0].stage])
-        .attr('stroke-width', 1.5)
-        .attr('stroke-opacity', 0.5)
-        .attr('stroke-dasharray', '4,3')
-        .attr('d', line);
-    }
-  });
 
   // 事件节点
   g.selectAll('.event-node')

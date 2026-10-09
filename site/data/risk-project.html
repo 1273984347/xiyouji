@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-e9iJ+j2Vr/5+amYYJkTOng6VtDTH65qsrt1e5OP3bIk=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-XJTcbu8nrhVyot+6phnSmoZcoLdT4HKXwqcJldoKLZs=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>风险评估与项目管理 · 详解西游记</title>
@@ -2633,7 +2633,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             // 标签
             g.append('text')
                 .attr('x', x(d.year))
-                .attr('y', yPos + upDown * (r + 4) * (upDown < 0 ? -1 : 1))
+                .attr('y', yPos + upDown * (r + 4))
                 .attr('text-anchor', 'middle')
                 .attr('dominant-baseline', upDown < 0 ? 'auto' : 'hanging')
                 .style('font-size', '10px')

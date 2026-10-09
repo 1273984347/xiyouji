@@ -1,0 +1,10 @@
+fix(w677): 站点质量修复批次五——WP-5.1 数据破坏收口 + WP-5.2 JS 七项 + WP-5.3 视觉四项 + WP-5.4 P3 六项
+
+方案 V1.7 批次五（对账表认领）：
+- WP-5.1：relationships cooccurrence_timeline 键重复收口——ZH 两份第 7 回 present_count 10/9 不一致（份1 多计唐僧），以生成器输出对拍全等后保留生效份删除陈旧份，EN 同构，双语单键
+- WP-5.2：tag-cloud 搜索 ID 失配修复（#tag-search 改 #search-input）+ setupTouchNav 死函数与调用删除（.tag-cloud 0 命中实锤）+ 点击即跳前死渲染删除；visual-art heart-breath keyframes 移静态样式块（append 泄漏根治）；timeline 改 DOMContentLoaded + tooltip 定位父 .tl-wrap；text-search 动态注入补 onerror 兜底
+- WP-5.3：theological header{} 全局污染改 .page-head 语义类（页顶 24px 回归）；six-senses .node-label 删 CSS fill（JS attr 分型 #5a3828/#1a1410 复活）；social-media 徽章与轴文本色 #e9b885 改 #7a571b 六处（对比度 1.8:1 改 5.91:1 核算留证）+ typical_posts[0] 代表性发帖渲染补全（.pc-sample 新增）
+- WP-5.4：text-evolution tickValues 改 d3.ticks 域内动态生成；workplace viewBox 首调死代码删；social-media duration 双调用五对删前置；tag-cloud data-file 零消费删除；risk-project 里程碑标签侧别数学修正（删 upDown 反转因子·连接线不再穿字）；underworld 同人物串联死循环删除（7 事件 actor 全唯一 ZH+EN 分验）
+- EN 镜像全部同病对称修复（social-media duration 双调用 EN 已净·留档）；过程记录：setupTouchNav 删除一度误停内层括号致语法破损，git restore 后按 4 空格缩进闭合重删复验
+
+验证：verify_delivery 核心全绿；generate_csp --check 855 页 0 漂移；check_js_syntax 854 文件过；check_structure 过；e2e test_smoke 89/89；ruff 新脚本 0 错；batch_cascade 原生 dry+apply 自检过（file-index W677 段调至数值位满足段倒序断言）。

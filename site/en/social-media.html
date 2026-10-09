@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-vKrq7CTUVogz78JCp0xjyZcCQpSj1JauOb8Ld1/RZDc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-cXPeThXkgJeGJ5cvehlIj8bXhuzUuYFVrY6dJVbJajw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Social Media Persona · MBTI Personality Map · Annotated Journey to the West</title>
@@ -1318,6 +1318,12 @@ td.num, th.num {
             margin-left: 4px;
             letter-spacing: 0.1em;
         }
+        .pc-sample {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            line-height: 1.5;
+            margin: 6px 0 0;
+        }
         .pc-bio {
             font-size: 0.85rem;
             color: var(--ink);
@@ -1965,7 +1971,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     const PROFILE_BORDER = {
         "Tang Sanzang": "#c8463a",
         "Zhu Bajie": "#23201A",
-        "Sun Wukong": "#e9b885",
+        "Sun Wukong": "#7a571b",
         "Sha Wujing": "#3a6b8c",
         "White Dragon Horse": "#6B6455",
         "Guanyin": "#C9A063",
@@ -1975,7 +1981,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     const PLATFORM_BADGE = {
         "Xiaohongshu": "#c8463a",
         "Douyin": "#23201A",
-        "Weibo": "#e9b885",
+        "Weibo": "#7a571b",
         "WeChat Official Account": "#3a6b8c",
         "Late-night Alt (platform unknown)": "#6B6455",
         "Zhihu": "#C9A063",
@@ -1984,7 +1990,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     // 8 个角色雷达图配色（与卡片左边框色呼应，玉帝补一个色）
     const MBTI_COLORS = {
         "Tang Sanzang": "#c8463a",
-        "Sun Wukong": "#e9b885",
+        "Sun Wukong": "#7a571b",
         "Zhu Bajie": "#5a4030",
         "Sha Wujing": "#3a6b8c",
         "White Dragon Horse": "#6B6455",
@@ -2061,6 +2067,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             // 简介
             card.append("div").attr("class", "pc-bio").text(p.bio);
+
+      if (p.typical_posts && p.typical_posts.length) {
+          card.append("div").attr("class", "pc-sample").text('Sample post: ' + p.typical_posts[0]);
+      }
 
             // 置顶帖（SVG 图钉 + 文本）
             const pin = card.append("div").attr("class", "pc-pinned");
@@ -2141,7 +2151,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             // 配对色：E/I 红/蓝、S/N 棕/橙、T/F 灰/绿、J/P 深浅
             const axisColor = {
                 E: "#c8463a", I: "#3a6b8c",
-                N: "#e9b885", S: "#C9A063",
+                N: "#7a571b", S: "#C9A063",
                 T: "#6B6455", F: "#6B8E5A",
                 J: "#23201A", P: "#d97706"
             };
@@ -2218,7 +2228,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 tip.style("opacity", 1)
                     .html(`<div class="tip-title">${m.character} · ${m.mbti} · ${m.mbti_label}</div>` +
                           `<div>Role: ${m.role}</div>` +
-                          `<div style="margin-top:4px;color:#e9b885;font-size:0.78rem;">Hit axes: ${m.mbti.split("").join(" / ")}</div>`);
+                          `<div style="margin-top:4px;color:#7a571b;font-size:0.78rem;">Hit axes: ${m.mbti.split("").join(" / ")}</div>`);
             })
             .on("mousemove", function(e) {
                 const rect = elParent.getBoundingClientRect();
@@ -2393,7 +2403,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .html(`<div class="tip-title">${m.character} · ${m.mbti} · ${m.mbti_label}</div>` +
                           `<div>Role: ${m.role}</div>` +
                           `<div>Fit: <strong style="color:var(--accent-soft);">${val}/10</strong></div>` +
-                          `<div style="margin-top:4px;font-size:0.78rem;color:#e9b885;">${m.note}</div>`);
+                          `<div style="margin-top:4px;font-size:0.78rem;color:#7a571b;">${m.note}</div>`);
             })
             .on("mousemove", function(e) {
                 const rect = elParent.getBoundingClientRect();
