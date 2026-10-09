@@ -745,7 +745,7 @@ def build_dialogue_sentiment(
         ],
     }
 
-    return {
+    result = {
         "total_dialogues": len(all_dialogues),
         "analyzed_dialogues": len(all_dialogues),
         "data_scope_note": "口径：带引号直引语（X道/曰/言/云+引号，含倒装式）；别名表已含佛祖/世尊/释迦牟尼/如来佛祖（utils/aliases.py 单一数据源）。间接引语与无引号讲经（韵文偈语）不在口径内——各人物条数为该口径全集而非别名缺失（W668 实测如来系原文说话模式≈别名口径上限）；如需引用请标注口径。",
@@ -759,6 +759,26 @@ def build_dialogue_sentiment(
         "speaker_chapter_curve": speaker_chapter_curve,
         "top_sentiment_words": top_sentiment_words,
     }
+    # W691（BL-18）：注记字段生成器化——此前为部署副本后编辑，重跑即被冲掉
+    result["other_speakers"] = result["total_dialogues"] - sum(
+        s["total"] for s in speaker_sentiment
+    )
+    result["avg_sentiment_note"] = (
+        "口径注记（W678）：avg_sentiment 为词典强度累加值（非归一化均值），"
+        "个别条目可超出 [-1,1]，属口径特征非数据错误"
+    )
+    covered = sorted(c["chapter"] for c in chapter_sentiment)
+    missing = [c for c in range(1, 101) if c not in covered]
+    if missing:
+        result["chapter_coverage_note"] = (
+            f"chapter_sentiment 缺第 {missing} 回：该回无命中追踪集说话人的带引号直引语"
+        )
+    else:
+        result["chapter_coverage_note"] = (
+            "chapter_sentiment 全部 100 回覆盖（W691 归属追踪集扩展：袁守诚/泾河龙王/"
+            "魏征/唐太宗/崔判官补入，第 9-11 回缺口闭合）"
+        )
+    return result
 
 
 # ====================================================================
