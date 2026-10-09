@@ -4,7 +4,7 @@
  * 覆盖 5 个关键页面：
  *   1. site/dashboard.html  —— 顶层仪表盘（filter-bar + 搜索 + KPI cards）
  *   2. site/index.html      —— 项目导航（卡片网格 + quick-links）
- *   3. site/data/narratology-13d-network.html —— 力导向网络图（节点 hover/tooltip）
+ *   3. site/data/narratology-16d-network.html —— 力导向网络图（节点 hover/tooltip）
  *   4. site/data/chapter-stats.html            —— 多图表（bar + line，hover tooltip）
  *   5. site/data/timeline.html                 —— 时间线（era 过滤 + 事件 hover）
  *
@@ -151,8 +151,8 @@ const PAGE_TESTS = [
     ],
   },
   {
-    name: 'narratology-13d-network',
-    url: fileUrl(path.join(DATA_DIR, 'narratology-13d-network.html')),
+    name: 'narratology-16d-network',
+    url: fileUrl(path.join(DATA_DIR, 'narratology-16d-network.html')),
     category: 'data',
     cases: [
       {

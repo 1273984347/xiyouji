@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-+qV1GG4GB0xraY3AH+EH21OZaOjUuLQByvOtr7YuAr4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-ezg/36VwXxxvoIwhfLYUlXXVinC8xTWkAR6cSjr2pPs=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>诗词韵律分析图谱 · 详解西游记</title>
@@ -1451,13 +1451,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
         </section>
 
-        <!-- 板块 2：词牌分布饼图 -->
+        <!-- 板块 2：诗词类别分布 -->
         <section class="section" aria-labelledby="sec-pie">
-            <h2 id="sec-pie">① 词牌分布矩形树图</h2>
+            <h2 id="sec-pie">① 诗词类别分布矩形树图</h2>
             <p>将《西游记》全书诗词按 7 类划分：3 种词牌（西江月/临江仙/满庭芳）+ 开篇诗 + 回目对联（100 回）+ 人物赋 + 景物诗。回目对联数量最多（100 副），构成全书诗词骨架；词牌虽仅 3 种 3 首，却是韵律分析的核心样本。<strong>矩形树图以面积表示占比</strong>，色块越小代表该类数量越少（如 3 词牌各仅 1 首），hover 查看类别详情，图例列全部 7 类及占比。</p>
             <div class="chart-wrap">
                 <svg id="pie-svg" width="100%" height="420" role="img" aria-labelledby="pie-title pie-desc">
-                    <title id="pie-title">词牌分布矩形树图</title>
+                    <title id="pie-title">诗词类别分布矩形树图</title>
                     <desc id="pie-desc">7 类诗词的占比分布（矩形树图，面积=占比）。</desc>
                 </svg>
                 <div class="event-tip" id="pie-tip" role="tooltip"></div>
@@ -1559,7 +1559,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <li><a href="pilgrim-team-psychology-arc.html">取经团队心理 →</a><span class="desc">W233-2 · 团队心理弧线</span></li>
                 <li><a href="monster-capability-radar.html">妖怪能力雷达 →</a><span class="desc">W233-3 · 妖怪能力多维雷达</span></li>
                 <li><a href="poetry-rhythm-analysis.html">诗词韵律分析（本页）</a><span class="desc">W233-4 · 与 A6 诗词 7 篇文档双轨</span></li>
-                <li><a href="narratology-13d-network.html">W194 叙事学 13 维 →</a><span class="desc">跨文档 · 叙事学 13 维网络</span></li>
+                <li><a href="narratology-16d-network.html">W194 叙事学 13 维 →</a><span class="desc">跨文档 · 叙事学 13 维网络</span></li>
                 <li><a href="hardship-difficulty-heatmap.html">W229 V2 难度热力图 →</a><span class="desc">跨文档 · W229 V2 三页之一</span></li>
                 <li><a href="journey-spacetime.html">W229 V2 时空双轴 →</a><span class="desc">跨文档 · 本页时间轴动画参考</span></li>
                 <li><a href="character-dynamic-network.html">W229 V2 动态网络 →</a><span class="desc">跨文档 · W229 V2 三页之三</span></li>
@@ -1570,7 +1570,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">v2.2.86 · W334 · 数据可视化</div>
+            <div class="footer-meta">v2.3.282 · W676 · 数据可视化</div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../index.html">首页</a>
@@ -1658,7 +1658,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
     const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const DUR = REDUCE_MOTION ? 0 : 600;
 
-    // ============= 板块 2：词牌分布矩形树图（treemap）=============
+    // ============= 板块 2：诗词类别分布矩形树图（treemap）=============
     // P2 试点：7 类饼图 → 矩形树图，面积=占比，保留图例与 hover 占比，避免小扇区不可读
     function renderPie() {
         const svg = d3.select("#pie-svg");

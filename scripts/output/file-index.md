@@ -106,6 +106,27 @@
 | xiyouji-agent-web/evals/run_eval.mjs | W679 | 更新·.env 密钥引导 9 行（W598 缺口·评估基线首跑前置） |
 | docs/00-导读/W批次编号对账表.md | W679 | 更新·现势 W680 + W679 认领翻转 |
 
+## W676 W676 站点质量修复批次四（2026-10-09·v2.3.282）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/monster-ecology-network.html（加 EN 镜像） | W676 | 更新·links 深拷贝 加 手搓桑基重写 d3.sankey（补 d3-sankey.min.js 引用） |
+| site/data/monster-female-network.html（加 EN 镜像） | W676 | 更新·buildSankeyGraph/renderSankey/renderRadar 参数化加 loadData 死回退摘除 |
+| site/data/monster-victims-network.html（加 EN 镜像） | W676 | 更新·四渲染函数 victims 参数化（victimColors 改传入派生） |
+| site/data/monster-background.html（加 EN 镜像） | W676 | 更新·renderKPI 前置清空 加 10.7 倍表述修正 |
+| site/data/mbti-evolution.html（加 EN 镜像） | W676 | 更新·三 scale domain[0,10] 加网格圆加 aria-controls 加 2 svg 补 role=img |
+| site/data/magic-system.html（加 EN 镜像） | W676 | 更新·预算折算两 bar 删除 加 kills 改 combat_record 加表头战斗记录 |
+| site/data/narratology-16d-network.html（加 EN 镜像·改名自 13d） | W676 | 重命名·全牵连 51 处引用同步加 fetch 反转修复加 clusterOrder 局部化 |
+| site/data/poetry-rhythm-analysis.html（加 EN 镜像） | W676 | 更新·词牌分布改诗词类别分布（标题/svg title/注释） |
+| site/data 与 site/en 共 162 页 | W676 | 更新·页脚停滞 sweep（v2.2.86·W334 改 v2.3.282·W676·污染链 2 页收敛） |
+| site/sitemap.xml 加 index/dukou-engine/tag-cloud/search/perf-canvas/pilgrim-team（加 EN 镜像与 reader 主题 4 页）加 datahub-index.js | W676 | 更新·16d 改名引用面同步 |
+| scripts/output/hreflang-pairs.json | W676 | 更新·16d 配对改名同步（第 26 门禁对拍面） |
+| tests/e2e/test_narratology_render.py 加 tests/test_narratology_data.py 加 tests/e2e/test_deep.js 加 tests/e2e/test_visual.js | W676 | 更新·16d 路径同步 |
+| tests/e2e/test_site_quality.js | W676 | 更新·新增 W676 断言 5 项（monster 族数据污染与 resize 重入与 KPI 单例） |
+| scripts/_w676_*（5 件） | W676 | 入账·一次性修复工具（wp41/wp42_sankey/wp42_43/rename_16d/footer_sweep） |
+| 交接文档.md | W676 | 更新·新增 Backlog 段五条（登记不开工） |
+| docs/00-导读/W批次编号对账表.md | W676 | 更新·W676 认领翻转加现势加 W691 递延豁免登记 |
+
 ## W675 W675 工作复盘与优化分析报告（2026-10-06·v2.3.272）
 
 | 文件 | W | 说明 |

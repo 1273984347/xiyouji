@@ -1,4 +1,4 @@
-"""P1 组件测试 · 十七维叙事学关系图谱 narratology-13d-network.html
+"""P1 组件测试 · 十七维叙事学关系图谱 narratology-16d-network.html
 
 依据：docs/10-方法论沉淀/可视化测试计划-十七维叙事学图谱.md
 覆盖：渲染非空 + dim-card 交互 + summary-table 排序 + tooltip + 降级 + 响应式
@@ -14,7 +14,7 @@ import pytest
 pytest.importorskip("playwright", reason="playwright 未安装：pip install playwright pytest-playwright")
 from playwright.sync_api import Page, expect
 
-HTML_PATH = Path(__file__).resolve().parent.parent / "site" / "data" / "narratology-13d-network.html"
+HTML_PATH = Path(__file__).resolve().parent.parent / "site" / "data" / "narratology-16d-network.html"
 HTML_URL = HTML_PATH.as_uri()  # file:// 协议
 
 

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-o4T5YwsUWJzE9/Z05QrG6yO9dLG0mzR6t9sTQ9FHQCI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-HpAReYuOsxRu0TW/T7ZtRWOMBVEMNdyqWqjn1jTzZnw='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>法术阵法体系 · 详解西游记</title>
@@ -1651,7 +1651,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                             <th>强度</th>
                             <th>射程</th>
                             <th>弱点</th>
-                            <th>战绩</th>
+                            <th>战斗记录</th>
                             <th>回目</th>
                         </tr>
                     </thead>
@@ -1729,7 +1729,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">v2.2.86 · W334 · 数据可视化 · <a href="https://github.com/1273984347/xiyouji/blob/main/docs/04-文化与历史背景/佛道思想.md">佛道思想</a></div>
+            <div class="footer-meta">v2.3.282 · W676 · 数据可视化 · <a href="https://github.com/1273984347/xiyouji/blob/main/docs/04-文化与历史背景/佛道思想.md">佛道思想</a></div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../index.html">首页</a>
@@ -1757,11 +1757,11 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             {"name":"火眼金睛","alias":"火眼金睛·瞳术","practitioner":"孙悟空（八卦炉炼就）","origin":"太上老君八卦炉·巽位风烟","nature":"瞳术·识破幻象","count":1,"philosophy":"八卦炉中熏就，可识妖辨伪","pros":"看穿妖物本相","cons":"怕烟熏（红孩儿烟可致盲）","rival":"无","chapter_first":7}
         ],
         magic_fire: [
-            {"name":"三昧真火","owner":"红孩儿","origin":"先天修炼·精气神合一","intensity":10,"range":"近中程·烟伤人","weakness":"观音净瓶杨柳水·四海龙王水","kills":"无直接战绩，逼退孙悟空","chapter":41},
-            {"name":"六丁神火","owner":"太上老君·八卦炉","origin":"六丁神火·文武火","intensity":10,"range":"炉内·范围极广","weakness":"无所克制（悟空在巽位逃过）","kills":"可炼悟空七七四十九日不死","chapter":7},
-            {"name":"凡火","owner":"凡间·人间灶火","origin":"凡薪之火","intensity":1,"range":"近·限灶膛","weakness":"水即可灭","kills":"无","chapter":16},
-            {"name":"阴火","owner":"火焰山·地火","origin":"悟空踢翻八卦炉·火砖落地","intensity":8,"range":"八百里火焰山","weakness":"芭蕉扇·四十九搧","kills":"烧损人物","chapter":59},
-            {"name":"三昧神风","owner":"黄风怪","origin":"灵山得道黄毛貂鼠","intensity":7,"range":"百里·能瞎悟空眼","weakness":"灵吉菩萨定风丹·飞龙杖","kills":"无直接战绩","chapter":21}
+            {"name":"三昧真火","owner":"红孩儿","origin":"先天修炼·精气神合一","intensity":10,"range":"近中程·烟伤人","weakness":"观音净瓶杨柳水·四海龙王水","combat_record":"无直接战绩，逼退孙悟空","chapter":41},
+            {"name":"六丁神火","owner":"太上老君·八卦炉","origin":"六丁神火·文武火","intensity":10,"range":"炉内·范围极广","weakness":"无所克制（悟空在巽位逃过）","combat_record":"可炼悟空七七四十九日不死","chapter":7},
+            {"name":"凡火","owner":"凡间·人间灶火","origin":"凡薪之火","intensity":1,"range":"近·限灶膛","weakness":"水即可灭","combat_record":"无","chapter":16},
+            {"name":"阴火","owner":"火焰山·地火","origin":"悟空踢翻八卦炉·火砖落地","intensity":8,"range":"八百里火焰山","weakness":"芭蕉扇·四十九搧","combat_record":"烧损人物","chapter":59},
+            {"name":"三昧神风","owner":"黄风怪","origin":"灵山得道黄毛貂鼠","intensity":7,"range":"百里·能瞎悟空眼","weakness":"灵吉菩萨定风丹·飞龙杖","combat_record":"无直接战绩","chapter":21}
         ],
         magic_energy_sankey: {
             "nodes":[
@@ -2013,13 +2013,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const innerW = width - margin.left - margin.right;
         const innerH = height - margin.top - margin.bottom;
 
-        // 盈余率 92.49% → 推算总收支（蟠桃单位折算）
-        const totalRevenue = Math.round(budget.surplus / 0.9249);
-        const totalExpense = totalRevenue - budget.surplus;
-
         const bars = [
-            {label: "年度收入", value: totalRevenue, color: "#c8463a", unit: "蟠桃单位"},
-            {label: "年度支出", value: totalExpense, color: "#3a6b8c", unit: "蟠桃单位"},
             {label: "年度盈余", value: budget.surplus, color: "#6B8E5A", unit: "蟠桃单位"}
         ];
 
@@ -2027,7 +2021,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("transform", `translate(${margin.left},${margin.top})`);
 
         const x = d3.scaleLinear()
-            .domain([0, totalRevenue * 1.1])
+            .domain([0, budget.surplus * 1.25])
             .range([0, innerW]);
 
         const y = d3.scaleBand()
@@ -2215,7 +2209,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             intensityTd.append("span").text(" " + f.intensity + "/10");
             tr.append("td").text(f.range);
             tr.append("td").text(f.weakness);
-            tr.append("td").text(f.kills);
+            tr.append("td").text(f.combat_record);
             tr.append("td").attr("class", "num").text("第" + f.chapter + "回");
         });
     }

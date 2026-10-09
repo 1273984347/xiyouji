@@ -1659,7 +1659,7 @@ const visibleEdges = edges.filter(e =>
       <div class="insight-item"><strong>渲染机制差异：</strong>SVG 每个节点是一个真实 DOM 元素（&lt;circle&gt;），浏览器需维护事件冒泡+样式计算+布局；Canvas 全部是位图像素，绘制后无 DOM 开销。</div>
       <div class="insight-item"><strong>拐点 500：</strong>节点数 &lt; 200 时 SVG 与 Canvas 差距小（~10ms）；节点数 &gt; 500 时 SVG 耗时陡升至 100-300ms，Canvas 仍稳定在 10-30ms。</div>
       <div class="insight-item"><strong>交互取舍：</strong>SVG 自带事件绑定（每元素可 onClick），Canvas 需自行做 hit-testing（计算距离 / 四叉树）。若图交互需求高，建议 SVG &lt; 300 节点，否则转 Canvas + 自实现 hit-testing。</div>
-      <div class="insight-item"><strong>项目应用：</strong>本项目 <code>character-semantic-network.html</code> / <code>intertextuality-network.html</code> / <code>narratology-13d-network.html</code> 节点数已超 300，建议未来引入 Canvas 渲染分支；&lt; 100 节点的图（如 <code>guanyin-six-roles-network.html</code>）保留 SVG。</div>
+      <div class="insight-item"><strong>项目应用：</strong>本项目 <code>character-semantic-network.html</code> / <code>intertextuality-network.html</code> / <code>narratology-16d-network.html</code> 节点数已超 300，建议未来引入 Canvas 渲染分支；&lt; 100 节点的图（如 <code>guanyin-six-roles-network.html</code>）保留 SVG。</div>
       <div class="insight-item"><strong>动画场景：</strong>力模拟迭代期间 Canvas 优势最明显——SVG 每帧需更新 N 个 DOM 属性，Canvas 仅需重绘位图。对于本项目 timeline / sentiment-arc 等动画曲线，建议同样启用 Canvas + rAF 节流。</div>
       <div class="insight-item"><strong>移动端：</strong>iOS Safari 在 SVG 节点 &gt; 500 时滚动卡顿明显，Canvas 渲染保持 60fps。本项目 PWA 化后建议优先迁移大图至 Canvas。</div>
     </div>
@@ -1668,7 +1668,7 @@ const visibleEdges = edges.filter(e =>
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">v2.2.86 · W334 · 数据可视化</div>
+            <div class="footer-meta">v2.3.282 · W676 · 数据可视化</div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../index.html">首页</a>
