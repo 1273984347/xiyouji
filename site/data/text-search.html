@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-1VLF2tcBUWPJhhw7VjyjwLnsPL7pQ1BS4ZmIzC3frZ0='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-EGxgoN2NkhTBgO2fAlwCgzS4lxML5TxITqNF4wEWdF8='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>原著全文检索 · 详解西游记</title>
@@ -1644,6 +1644,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     window.addEventListener('load', function () {
       var s = document.createElement('script');
       s.src = '../static/js/text-search-app.js';
+      s.onerror = function () { console.warn('[text-search] text-search-app.js 加载失败，站内检索功能不可用'); };
       document.head.appendChild(s);
     });
   </script>

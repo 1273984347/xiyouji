@@ -106,6 +106,25 @@
 | xiyouji-agent-web/evals/run_eval.mjs | W679 | 更新·.env 密钥引导 9 行（W598 缺口·评估基线首跑前置） |
 | docs/00-导读/W批次编号对账表.md | W679 | 更新·现势 W680 + W679 认领翻转 |
 
+## W677 W677 站点质量修复批次五（2026-10-09·v2.3.283）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/relationships.html（加 EN 镜像） | W677 | 更新·cooccurrence_timeline 重复键收口（生成器对拍删陈旧份） |
+| site/data/tag-cloud.html（加 EN 镜像） | W677 | 更新·搜索 ID 失配修复 加 setupTouchNav 死函数删除 加点击死渲染删除 加 data-file 零消费删除 |
+| site/data/visual-art.html（加 EN 镜像） | W677 | 更新·heart-breath keyframes 移静态块（style 追加泄漏根治） |
+| site/data/timeline.html（加 EN 镜像） | W677 | 更新·DOMContentLoaded 启动 加 tooltip 定位父 .tl-wrap |
+| site/data/text-search.html（加 EN 镜像） | W677 | 更新·动态注入补 onerror 兜底 |
+| site/data/theological-intervention-network.html（加 EN 镜像） | W677 | 更新·header 全局选择器改 .page-head 语义类 |
+| site/data/six-senses-narratology-network.html（加 EN 镜像） | W677 | 更新·.node-label 删 CSS fill（JS 分型复活） |
+| site/data/social-media.html（加 EN 镜像） | W677 | 更新·徽章色对比度 5.91:1 加 typical_posts 渲染 加 duration 五对清理（ZH） |
+| site/data/text-evolution.html（加 EN 镜像） | W677 | 更新·tickValues 改 d3.ticks 域内动态 |
+| site/data/workplace.html（加 EN 镜像） | W677 | 更新·viewBox 首调死代码删除 |
+| site/data/risk-project.html（加 EN 镜像） | W677 | 更新·里程碑标签侧别数学修正 |
+| site/data/underworld-power-network.html（加 EN 镜像） | W677 | 更新·同人物串联死循环删除（actor 全唯一） |
+| scripts/_w677_fixes.py | W677 | 入账·批次五一次性修复工具（断言式） |
+| docs/00-导读/W批次编号对账表.md | W677 | 更新·W677 认领+翻转+现势 |
+
 ## W676 W676 站点质量修复批次四（2026-10-09·v2.3.282）
 
 | 文件 | W | 说明 |

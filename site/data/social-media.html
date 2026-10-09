@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-U9tzQ+REmqGiRFfgTJT4rncvEIBpTolqyChThsaBtsQ=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-jYVHUVaHSEuJzQpPTBMzjM+K3aIbyOOzqdVfipKIqR4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>社媒人设 · MBTI 人格图谱 · 详解西游记</title>
@@ -1319,6 +1319,12 @@ td.num, th.num {
             margin-left: 4px;
             letter-spacing: 0.1em;
         }
+        .pc-sample {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            line-height: 1.5;
+            margin: 6px 0 0;
+        }
         .pc-bio {
             font-size: 0.85rem;
             color: var(--ink);
@@ -1987,7 +1993,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     const PROFILE_BORDER = {
         "唐僧": "#c8463a",
         "猪八戒": "#23201A",
-        "孙悟空": "#e9b885",
+        "孙悟空": "#7a571b",
         "沙僧": "#3a6b8c",
         "白龙马": "#6B6455",
         "观音菩萨": "#C9A063",
@@ -1997,7 +2003,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     const PLATFORM_BADGE = {
         "小红书": "#c8463a",
         "抖音": "#23201A",
-        "微博": "#e9b885",
+        "微博": "#7a571b",
         "微信公众号": "#3a6b8c",
         "深夜小号（平台不详）": "#6B6455",
         "知乎": "#C9A063",
@@ -2006,7 +2012,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     // 8 个角色雷达图配色（与卡片左边框色呼应，玉帝补一个色）
     const MBTI_COLORS = {
         "唐僧": "#c8463a",
-        "孙悟空": "#e9b885",
+        "孙悟空": "#7a571b",
         "猪八戒": "#5a4030",
         "沙僧": "#3a6b8c",
         "白龙马": "#6B6455",
@@ -2083,6 +2089,10 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
             // 简介
             card.append("div").attr("class", "pc-bio").text(p.bio);
+
+      if (p.typical_posts && p.typical_posts.length) {
+          card.append("div").attr("class", "pc-sample").text('代表性发帖：' + p.typical_posts[0]);
+      }
 
             // 置顶帖（SVG 图钉 + 文本）
             const pin = card.append("div").attr("class", "pc-pinned");
@@ -2163,7 +2173,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             // 配对色：E/I 红/蓝、S/N 棕/橙、T/F 灰/绿、J/P 深浅
             const axisColor = {
                 E: "#c8463a", I: "#3a6b8c",
-                N: "#e9b885", S: "#C9A063",
+                N: "#7a571b", S: "#C9A063",
                 T: "#6B6455", F: "#6B8E5A",
                 J: "#23201A", P: "#d97706"
             };
@@ -2212,7 +2222,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("opacity", 0)
                 .attr("class", "radar-poly poly-" + idx);
 
-            poly.transition().duration(MOYUN_RM?0:250)
+            poly.transition()
                 .delay(200 + idx * 120)
                 .duration(MOYUN_RM?0:500)
                 .style("opacity", 1);
@@ -2228,7 +2238,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                         .attr("stroke", "#fff")
                         .attr("stroke-width", 1.5)
                         .style("opacity", 0)
-                        .transition().duration(MOYUN_RM?0:250)
+                        .transition()
                         .delay(500 + idx * 120)
                         .duration(MOYUN_RM?0:300)
                         .style("opacity", 1);
@@ -2240,7 +2250,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 tip.style("opacity", 1)
                     .html(`<div class="tip-title">${m.character} · ${m.mbti} · ${m.mbti_label}</div>` +
                           `<div>定位：${m.role}</div>` +
-                          `<div style="margin-top:4px;color:#e9b885;font-size:0.78rem;">命中轴：${m.mbti.split("").join(" / ")}</div>`);
+                          `<div style="margin-top:4px;color:#7a571b;font-size:0.78rem;">命中轴：${m.mbti.split("").join(" / ")}</div>`);
             })
             .on("mousemove", function(e) {
                 const rect = elParent.getBoundingClientRect();
@@ -2364,7 +2374,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("cursor", "pointer")
                 .attr("class", "fit-bar");
 
-            bar.transition().duration(MOYUN_RM?0:250)
+            bar.transition()
                 .delay(i * 100).duration(MOYUN_RM?0:600)
                 .ease(d3.easeCubicOut)
                 .attr("width",Math.max(0, x(val)));
@@ -2380,7 +2390,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("fill", "#fff")
                 .style("opacity", 0)
                 .text(m.mbti + " " + val + "/10")
-                .transition().duration(MOYUN_RM?0:250).delay(i * 100 + 600).duration(MOYUN_RM?0:400)
+                .transition().delay(i * 100 + 600).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
 
             // role 标注（条右侧）
@@ -2392,7 +2402,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 .style("font-style", "italic")
                 .style("opacity", 0)
                 .text(m.role)
-                .transition().duration(MOYUN_RM?0:250).delay(i * 100 + 700).duration(MOYUN_RM?0:400)
+                .transition().delay(i * 100 + 700).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
 
             // 交互
@@ -2402,7 +2412,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                     .html(`<div class="tip-title">${m.character} · ${m.mbti} · ${m.mbti_label}</div>` +
                           `<div>定位：${m.role}</div>` +
                           `<div>适配度：<strong style="color:var(--accent-soft);">${val}/10</strong></div>` +
-                          `<div style="margin-top:4px;font-size:0.78rem;color:#e9b885;">${m.note}</div>`);
+                          `<div style="margin-top:4px;font-size:0.78rem;color:#7a571b;">${m.note}</div>`);
             })
             .on("mousemove", function(e) {
                 const rect = elParent.getBoundingClientRect();

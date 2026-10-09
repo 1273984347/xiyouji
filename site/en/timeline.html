@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-rZgoi9kRNk8DifDfQazn2jB8YmQAwNKcaZNlDrVSYF8=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-1Zbbfk049W/0m6Z1PfzIF9+KPg9MmweJpAOB7OmtRFg=' 'sha256-G2pAcJ/K+oJWIDIPf7H8N0CMlh2MbC6HuTacmBC8aCU=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-tXG90GKlWoiBUnsROHssQp5oOdDAPUDKu/0xj3rSkoE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-1Zbbfk049W/0m6Z1PfzIF9+KPg9MmweJpAOB7OmtRFg=' 'sha256-G2pAcJ/K+oJWIDIPf7H8N0CMlh2MbC6HuTacmBC8aCU=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Interactive Timeline · Annotated Journey to the West</title>
@@ -1958,7 +1958,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         t.append('div').attr('class', 'tt-desc').text(d.desc);
     }
     function positionTooltip(event) {
-        const wrap = document.getElementById('timeline-section');
+        const wrap = document.querySelector('.tl-wrap');
         const rect = wrap.getBoundingClientRect();
         const tw = 260, th = 90;
         let px = event.clientX - rect.left + 14;
@@ -2114,7 +2114,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         }, 250);
     });
 
-    window.addEventListener('load', main);
+    window.addEventListener('DOMContentLoaded', main);
     </script>
 <script id="audit-axisfix">
 (function(){
