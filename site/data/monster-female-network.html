@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-q0igDfxRhn4kRDBWbWcb8/Jr2N7qUwtaxFBqwvgkPnI=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-tgURIpkLokf21BEoFp+mGFXsgOEiCvIWm0uqfSn4lxA=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪女性群体关系图 · 详解西游记</title>
@@ -1493,7 +1493,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">v2.2.86 · W334 · 数据可视化</div>
+            <div class="footer-meta">v2.3.282 · W676 · 数据可视化</div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../index.html">首页</a>
@@ -1668,8 +1668,8 @@ async function loadData() {
   const mf = await fetchJson(base + 'monster-female-network.json', 'monsterFemale');
   const data = mf.monsterFemale || mf;
   return {
-    nodes: data.nodes || EMBEDDED_DATA.monsterFemale.nodes,
-    network: { nodes: data.nodes || EMBEDDED_DATA.monsterFemale.nodes, links: data.links || EMBEDDED_DATA.monsterFemale.links },
+    nodes: data.nodes,
+    network: { nodes: data.nodes, links: data.links },
     sankey: data.sankey || EMBEDDED_DATA.monsterFemale.sankey,
     radar: data.radar || EMBEDDED_DATA.monsterFemale.radar,
     timeline: data.timeline || EMBEDDED_DATA.monsterFemale.timeline
@@ -1901,9 +1901,9 @@ const kinshipLink = svg.append('g').selectAll('.kin-link')
 // ============================================================
 // Section 3: 桑基图
 // ============================================================
-function buildSankeyGraph(linkData) {
+function buildSankeyGraph(linkData, monsterNodes) {
   // 三层：女妖(0) / 执行者(1) / 结局类型(2)
-  const monsterNames = EMBEDDED_DATA.monsterFemale.nodes
+  const monsterNames = monsterNodes
     .filter(n => n.type !== 'collector')
     .map(n => n.name);
   const executorNames = new Set();
@@ -1932,7 +1932,7 @@ function buildSankeyGraph(linkData) {
   };
 }
 
-function renderSankey(sankeyLinkData) {
+function renderSankey(sankeyLinkData, monsterNodes) {
   const svg = d3.select('#chart-sankey');
   svg.selectAll('*').remove();
   if (!sankeyLinkData || sankeyLinkData.length === 0) {
@@ -1953,7 +1953,7 @@ function renderSankey(sankeyLinkData) {
 
   // 节点配色：女妖按个体色，执行者按中性，结局按命运类型色
   const monsterColors = {};
-  EMBEDDED_DATA.monsterFemale.nodes.forEach(n => { monsterColors[n.name] = n.color; });
+  monsterNodes.forEach(n => { monsterColors[n.name] = n.color; });
   const executorColors = {
     '孙悟空': '#8B4513',
     '猪八戒': '#CD853F',
@@ -1976,7 +1976,7 @@ function renderSankey(sankeyLinkData) {
     return fateColors[d.name] || catColors[2];
   }
 
-  const graphData = buildSankeyGraph(sankeyLinkData);
+  const graphData = buildSankeyGraph(sankeyLinkData, monsterNodes);
   const nodes = graphData.nodes.map(d => ({ ...d }));
   const links = graphData.links.map(d => ({ ...d }));
 
@@ -2073,7 +2073,7 @@ function renderSankey(sankeyLinkData) {
 // ============================================================
 // Section 4: 雷达图（17 角色 × 4 维度）
 // ============================================================
-function renderRadar(radarData) {
+function renderRadar(radarData, monsterNodes) {
   const svg = d3.select('#chart-radar');
   svg.selectAll('*').remove();
   if (!radarData || radarData.length === 0) {
@@ -2087,7 +2087,7 @@ function renderRadar(radarData) {
 
   const dimensions = ['自主性', '战斗力', '智慧', '悲剧性'];
   const roleColors = {};
-  EMBEDDED_DATA.monsterFemale.nodes.forEach(n => { roleColors[n.name] = n.color; });
+  monsterNodes.forEach(n => { roleColors[n.name] = n.color; });
 
   const cx = width / 2;
   const cy = height / 2 + 10;
@@ -2523,8 +2523,8 @@ async function main() {
   }
 
   renderForce(data.network);
-  renderSankey(data.sankey);
-  renderRadar(data.radar);
+  renderSankey(data.sankey, data.nodes);
+  renderRadar(data.radar, data.nodes);
   renderTimeline(data.timeline);
   renderSummary(data.nodes);
 }
@@ -2537,8 +2537,8 @@ window.addEventListener('resize', () => {
     if (window.__lastData) {
       const data = window.__lastData;
       renderForce(data.network);
-      renderSankey(data.sankey);
-      renderRadar(data.radar);
+      renderSankey(data.sankey, data.nodes);
+      renderRadar(data.radar, data.nodes);
       renderTimeline(data.timeline);
       renderSummary(data.nodes);
     }

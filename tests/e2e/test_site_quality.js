@@ -211,6 +211,67 @@ function check(ok, label, detail) {
     await page.close();
   }
 
+
+  // ---------- W676 monster 族：数据不被污染 + resize 重入计数恒定 ----------
+  {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+    await page.goto(url('data/monster-ecology-network.html'), { waitUntil: 'load' });
+    await page.waitForTimeout(1200);
+    const eco = await page.evaluate(() => ({
+      pureLinks: EMBEDDED_DATA.network.links.every((l) => typeof l.source === 'string' && typeof l.target === 'string'),
+      hasSankey: typeof d3.sankey === 'function',
+      sankeyRects: document.querySelectorAll('#sankey-svg rect').length
+    }));
+    check(eco.pureLinks, 'W676 ecology EMBEDDED links 未被 forceLink 原地污染', JSON.stringify(eco));
+    check(eco.hasSankey && eco.sankeyRects === 5, 'W676 ecology 桑基改 d3.sankey 且 5 节点在位', JSON.stringify(eco));
+    await page.close();
+  }
+  {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+    await page.goto(url('data/monster-victims-network.html'), { waitUntil: 'load' });
+    await page.waitForTimeout(1500);
+    const c1 = await page.evaluate(() => ({
+      cards: document.querySelectorAll('#victims-grid > div').length,
+      nodes: document.querySelectorAll('#chart-force circle').length
+    }));
+    await page.setViewportSize({ width: 960, height: 720 });
+    await page.waitForTimeout(600);
+    await page.setViewportSize({ width: 1100, height: 760 });
+    await page.waitForTimeout(900);
+    const c2 = await page.evaluate(() => ({
+      cards: document.querySelectorAll('#victims-grid > div').length,
+      nodes: document.querySelectorAll('#chart-force circle').length
+    }));
+    check(c1.cards > 0 && c1.cards === c2.cards && c1.nodes === c2.nodes,
+      'W676 victims 连续 2 次 resize 后卡片/节点数恒定', JSON.stringify({ c1, c2 }));
+    await page.close();
+  }
+  {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+    await page.goto(url('data/monster-female-network.html'), { waitUntil: 'load' });
+    await page.waitForTimeout(1500);
+    const r1 = await page.evaluate(() => document.querySelectorAll('#summary-table-wrap tbody tr').length);
+    await page.setViewportSize({ width: 960, height: 720 });
+    await page.waitForTimeout(600);
+    await page.setViewportSize({ width: 1100, height: 760 });
+    await page.waitForTimeout(900);
+    const r2 = await page.evaluate(() => document.querySelectorAll('#summary-table-wrap tbody tr').length);
+    check(r1 > 0 && r1 === r2, 'W676 female 连续 2 次 resize 后汇总表行数恒定', r1 + ' vs ' + r2);
+    await page.close();
+  }
+  {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+    await page.goto(url('data/monster-background.html'), { waitUntil: 'load' });
+    await page.waitForTimeout(1200);
+    const bg = await page.evaluate(() => ({
+      kpi: document.querySelectorAll('#kpi-row > .kpi-card').length,
+      tips: document.querySelectorAll('#tooltip').length,
+      cases: document.querySelectorAll('#case-grid > div').length
+    }));
+    check(bg.kpi === 4 && bg.tips === 1, 'W676 background KPI 恰 4 卡 + tooltip 单例', JSON.stringify(bg));
+    await page.close();
+  }
+
   await browser.close();
   console.log(bad === 0 ? 'W674-E2E-PASS' : 'W674-E2E-FAIL: ' + bad + ' 项');
   process.exitCode = bad === 0 ? 0 : 1;

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-LI8iX/AyqaaO3M+nhYOS+MfSFol7x1mfMJ1ieKI0Cco=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-wtLyY7ra1CizGKxGMyzI8IzIl+qQcdInN8kWQTXol+s=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪后台论 · 详解西游记</title>
@@ -1613,7 +1613,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             <section class="section" aria-labelledby="sec-compare">
                 <h2 class="section-title alt-2" id="sec-compare">二、有后台 vs 无后台</h2>
-                <div class="section-sub">西游司法的二元结构 · 存活率差距 10.7 倍</div>
+                <div class="section-sub">西游司法的二元结构 · 存活率之比约 10.7</div>
                 <div class="chart-block">
                     <div class="chart-title">存活率对比柱状图</div>
                     <div class="chart-caption">有后台妖怪存活率 97.2% vs 无后台妖怪存活率 9.1%</div>
@@ -1696,7 +1696,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">v2.2.86 · W334 · 数据可视化</div>
+            <div class="footer-meta">v2.3.282 · W676 · 数据可视化</div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../index.html">首页</a>
@@ -1876,6 +1876,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             { label: "GAP · 存活率差距", value: stats.survival_gap + "x", desc: "有后台 vs 无后台", cls: "alt-4" }
         ];
         const row = d3.select('#kpi-row');
+        row.selectAll('*').remove();
         kpis.forEach(k => {
             const card = row.append('div').attr('class', 'kpi-card ' + k.cls);
             card.append('div').attr('class', 'label').text(k.label);

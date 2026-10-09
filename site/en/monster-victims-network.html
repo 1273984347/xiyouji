@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-ugSCZKSkRnflUWxo244qt/C4g+n9+azgI5iKIeQJaEM=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-n9jaJ7sH17dabr8nHGw4JcdhL4UVWCRXEw16lTBCVys=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster-Victim Network · Annotated Journey to the West</title>
@@ -1495,7 +1495,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     </main>
 
     <footer class="site-footer">
-        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization</div></div>
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.3.282 · W676 · Data Visualization</div></div>
         <nav aria-label="Footer">
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
@@ -1672,7 +1672,7 @@ async function loadData() {
   const base = '../data/json/';
   const victims = await fetchJson(base + 'monster-victims.json', 'victims');
   return {
-    victims: Array.isArray(victims) ? victims : (victims.victims || EMBEDDED_DATA.victims),
+    victims: Array.isArray(victims) ? victims : victims.victims,
     network: EMBEDDED_DATA.network,
     sankey: EMBEDDED_DATA.sankey,
     radar: EMBEDDED_DATA.radar,
@@ -1744,7 +1744,7 @@ function showVictimTooltip(event, d) {
 // ============================================================
 // Section 2: 受害者-施害者-旁观者力导向图
 // ============================================================
-function renderForce(networkData) {
+function renderForce(networkData, victims) {
   const svg = d3.select('#chart-force');
   svg.selectAll('*').remove();
   if (!networkData || !networkData.nodes || networkData.nodes.length === 0) {
@@ -1758,7 +1758,7 @@ function renderForce(networkData) {
 
   // 受害者颜色映射
   const victimColors = {};
-  EMBEDDED_DATA.victims.forEach(v => { victimColors[v.name] = v.color; });
+  victims.forEach(v => { victimColors[v.name] = v.color; });
 
   // 类型颜色
   const typeColors = {
@@ -1932,7 +1932,7 @@ const link = svg.append('g').selectAll('line')
 // ============================================================
 // Section 3: 创伤类型-受害者-施害者-旁观者桑基图
 // ============================================================
-function renderSankey(sankeyData) {
+function renderSankey(sankeyData, victims) {
   const svg = d3.select('#chart-sankey');
   svg.selectAll('*').remove();
   if (!sankeyData || !sankeyData.nodes || sankeyData.nodes.length === 0) {
@@ -1954,7 +1954,7 @@ function renderSankey(sankeyData) {
   // 颜色：按 cat 分层（0创伤类型/1受害者/2施害者/3旁观者）
   const catColors = ['#8b7355', '#c8463a', '#3a6b8c', '#8a7a6a'];
   const victimColors = {};
-  EMBEDDED_DATA.victims.forEach(v => { victimColors[v.name] = v.color; });
+  victims.forEach(v => { victimColors[v.name] = v.color; });
 
   // 深拷贝
   const nodes = sankeyData.nodes.map(d => ({ ...d }));
@@ -2059,7 +2059,7 @@ function renderSankey(sankeyData) {
 // ============================================================
 // Section 4: 四受害者创伤维度雷达图
 // ============================================================
-function renderRadar(radarData) {
+function renderRadar(radarData, victims) {
   const svg = d3.select('#chart-radar');
   svg.selectAll('*').remove();
   if (!radarData || radarData.length === 0) {
@@ -2073,7 +2073,7 @@ function renderRadar(radarData) {
 
   const dimensions = ['Body', 'Mind', 'Society', 'Law', 'Narrative'];
   const victimColors = {};
-  EMBEDDED_DATA.victims.forEach(v => { victimColors[v.name] = v.color; });
+  victims.forEach(v => { victimColors[v.name] = v.color; });
 
   const cx = width / 2;
   const cy = height / 2 + 10;
@@ -2191,7 +2191,7 @@ function renderRadar(radarData) {
 // ============================================================
 // Section 5: 受害者命运时间线
 // ============================================================
-function renderTimeline(timelineData) {
+function renderTimeline(timelineData, victims) {
   const svg = d3.select('#chart-timeline');
   svg.selectAll('*').remove();
   if (!timelineData || timelineData.length === 0) {
@@ -2203,9 +2203,9 @@ function renderTimeline(timelineData) {
   const height = 440;
   svg.attr('viewBox', `0 0 ${width} ${height}`);
 
-  const victimNames = EMBEDDED_DATA.victims.map(v => v.name);
+  const victimNames = victims.map(v => v.name);
   const victimColors = {};
-  EMBEDDED_DATA.victims.forEach(v => { victimColors[v.name] = v.color; });
+  victims.forEach(v => { victimColors[v.name] = v.color; });
 
   const margin = { top: 30, right: 40, bottom: 70, left: 110 };
   const innerW = width - margin.left - margin.right;
@@ -2396,10 +2396,10 @@ async function main() {
   }
 
   renderOverview(data.victims);
-  renderForce(data.network);
-  renderSankey(data.sankey);
-  renderRadar(data.radar);
-  renderTimeline(data.timeline);
+  renderForce(data.network, data.victims);
+  renderSankey(data.sankey, data.victims);
+  renderRadar(data.radar, data.victims);
+  renderTimeline(data.timeline, data.victims);
 }
 
 // 响应式重绘（debounce 250ms）
@@ -2410,10 +2410,10 @@ window.addEventListener('resize', () => {
     if (window.__lastData) {
       const data = window.__lastData;
       renderOverview(data.victims);
-      renderForce(data.network);
-      renderSankey(data.sankey);
-      renderRadar(data.radar);
-      renderTimeline(data.timeline);
+      renderForce(data.network, data.victims);
+      renderSankey(data.sankey, data.victims);
+      renderRadar(data.radar, data.victims);
+      renderTimeline(data.timeline, data.victims);
     }
   }, 250);
 });

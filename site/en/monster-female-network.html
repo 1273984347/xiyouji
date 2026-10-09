@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-w2U+Rvc5E1s5IJk0Yntl00FSbKWko5KEiM4f6i7sGSs=' 'sha256-nRjbac60+71X7qCihZTYrhSLkLwRXcCNdMcXCWQ1OTc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-/m5Tu74A6p01VHrDiuNNLzRiYFo3xwxnJ8jeJMTvF+g=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-k9b4nad2XW00swvJQZe0rFweHpXrftK4/7JiypfZ4FA=' 'sha256-ThY1aZ/dVICXj+uBO2mkJAx0Pyue0UsKKR6u8nrDyrM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-tjkkQVbnSrEvYVWcEEe8MFDdY82EJTYIQI5+pq8PM/U=' 'sha256-nRjbac60+71X7qCihZTYrhSLkLwRXcCNdMcXCWQ1OTc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-/m5Tu74A6p01VHrDiuNNLzRiYFo3xwxnJ8jeJMTvF+g=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-k9b4nad2XW00swvJQZe0rFweHpXrftK4/7JiypfZ4FA=' 'sha256-ThY1aZ/dVICXj+uBO2mkJAx0Pyue0UsKKR6u8nrDyrM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster Female Network · Annotated Journey to the West</title>
@@ -1482,7 +1482,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     </main>
 
     <footer class="site-footer">
-        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization</div></div>
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.3.282 · W676 · Data Visualization</div></div>
         <nav aria-label="Footer">
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
@@ -1655,8 +1655,8 @@ async function loadData() {
   const mf = await fetchJson(base + 'monster-female-network.json', 'monsterFemale');
   const data = mf.monsterFemale || mf;
   return {
-    nodes: data.nodes || EMBEDDED_DATA.monsterFemale.nodes,
-    network: { nodes: data.nodes || EMBEDDED_DATA.monsterFemale.nodes, links: data.links || EMBEDDED_DATA.monsterFemale.links },
+    nodes: data.nodes,
+    network: { nodes: data.nodes, links: data.links },
     sankey: data.sankey || EMBEDDED_DATA.monsterFemale.sankey,
     radar: data.radar || EMBEDDED_DATA.monsterFemale.radar,
     timeline: data.timeline || EMBEDDED_DATA.monsterFemale.timeline
@@ -1888,9 +1888,9 @@ const kinshipLink = svg.append('g').selectAll('.kin-link')
 // ============================================================
 // Section 3: Sankey diagram
 // ============================================================
-function buildSankeyGraph(linkData) {
+function buildSankeyGraph(linkData, monsterNodes) {
   // Three layers: female demon (0) / executor (1) / fate type (2)
-  const monsterNames = EMBEDDED_DATA.monsterFemale.nodes
+  const monsterNames = monsterNodes
     .filter(n => n.type !== 'collector')
     .map(n => n.name);
   const executorNames = new Set();
@@ -1919,7 +1919,7 @@ function buildSankeyGraph(linkData) {
   };
 }
 
-function renderSankey(sankeyLinkData) {
+function renderSankey(sankeyLinkData, monsterNodes) {
   const svg = d3.select('#chart-sankey');
   svg.selectAll('*').remove();
   if (!sankeyLinkData || sankeyLinkData.length === 0) {
@@ -1940,7 +1940,7 @@ function renderSankey(sankeyLinkData) {
 
   // Node colors: demons by individual color, executors neutral, outcomes by fate type
   const monsterColors = {};
-  EMBEDDED_DATA.monsterFemale.nodes.forEach(n => { monsterColors[n.name] = n.color; });
+  monsterNodes.forEach(n => { monsterColors[n.name] = n.color; });
   const executorColors = {
     'Sun Wukong': '#8B4513',
     'Zhu Bajie': '#CD853F',
@@ -1963,7 +1963,7 @@ function renderSankey(sankeyLinkData) {
     return fateColors[d.name] || catColors[2];
   }
 
-  const graphData = buildSankeyGraph(sankeyLinkData);
+  const graphData = buildSankeyGraph(sankeyLinkData, monsterNodes);
   const nodes = graphData.nodes.map(d => ({ ...d }));
   const links = graphData.links.map(d => ({ ...d }));
 
@@ -2060,7 +2060,7 @@ function renderSankey(sankeyLinkData) {
 // ============================================================
 // Section 4: Radar chart (17 roles × 4 dimensions)
 // ============================================================
-function renderRadar(radarData) {
+function renderRadar(radarData, monsterNodes) {
   const svg = d3.select('#chart-radar');
   svg.selectAll('*').remove();
   if (!radarData || radarData.length === 0) {
@@ -2079,7 +2079,7 @@ function renderRadar(radarData) {
     { key: 'tragedy', label: 'Tragedy' }
   ];
   const roleColors = {};
-  EMBEDDED_DATA.monsterFemale.nodes.forEach(n => { roleColors[n.name] = n.color; });
+  monsterNodes.forEach(n => { roleColors[n.name] = n.color; });
 
   const cx = width / 2;
   const cy = height / 2 + 10;
@@ -2534,8 +2534,8 @@ async function main() {
   }
 
   renderForce(data.network);
-  renderSankey(data.sankey);
-  renderRadar(data.radar);
+  renderSankey(data.sankey, data.nodes);
+  renderRadar(data.radar, data.nodes);
   renderTimeline(data.timeline);
   renderSummary(data.nodes);
 }
@@ -2548,8 +2548,8 @@ window.addEventListener('resize', () => {
     if (window.__lastData) {
       const data = window.__lastData;
       renderForce(data.network);
-      renderSankey(data.sankey);
-      renderRadar(data.radar);
+      renderSankey(data.sankey, data.nodes);
+      renderRadar(data.radar, data.nodes);
       renderTimeline(data.timeline);
       renderSummary(data.nodes);
     }

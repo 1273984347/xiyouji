@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-eHsVOhrDLvpQatwYX1Ayf1OYPQnf0B7Nlr0s3iM6mgc='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-YBn7R+h2XkSCMshLqhOeV3ccbhYtJ+/uQ5Ij403BAy0='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪生态网络图谱 · 详解西游记</title>
@@ -1555,7 +1555,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">v2.2.86 · W334 · 数据可视化</div>
+            <div class="footer-meta">v2.3.282 · W676 · 数据可视化</div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../index.html">首页</a>
@@ -1568,6 +1568,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
+<script src="../static/js/d3-sankey.min.js"></script>
 <script>
     // ============= EMBEDDED_DATA =============
     const EMBEDDED_DATA = {
@@ -1721,7 +1722,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
         let currentFilter = "all";
         let nodes = EMBEDDED_DATA.network.nodes.map(d => ({...d}));
-        let links = EMBEDDED_DATA.network.links;
+        let links = EMBEDDED_DATA.network.links.map(d => ({...d}));
 
         // P1 优化试点：按 habitat 生态位社区聚类 + 稳定收敛 + 增大碰撞半径（不改数据语义）
         const habX = {water: width * 0.28, fire: width * 0.5, mountain: width * 0.5, sky: width * 0.72};
@@ -1847,37 +1848,53 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const width = svg.node().clientWidth;
         const height = 420;
         const data = EMBEDDED_DATA.sankey;
-        const nodeW = 150, nodeH = 40;
-        const positions = [
-            {x: 40, y: 50},
-            {x: 40 + (width - 230)/4, y: 50},
-            {x: 40 + (width - 230)/2, y: 50},
-            {x: 40 + 3*(width - 230)/4, y: 50},
-            {x: width - 190, y: 50}
-        ];
         const colors = ["#6B8E5A", "#C9A063", "#c8463a", "#3a6b8c", "#23201A"];
-        const yPositions = [0, 80, 160, 240, 320];
 
-        data.links.forEach(l => {
-            const src = positions[l.source], tgt = positions[l.target];
-            const sy = src.y + yPositions[l.source]/3 + nodeH/2;
-            const ty = tgt.y + yPositions[l.target]/3 + nodeH/2;
-            const path = `M${src.x + nodeW},${sy} C${src.x + nodeW + 60},${sy} ${tgt.x - 60},${ty} ${tgt.x},${ty}`;
-            svg.append("path").attr("d", path).attr("fill", "none")
-                .attr("stroke", colors[l.source]).attr("stroke-width", Math.sqrt(l.value) * 2.5)
-                .attr("opacity", 0.55);
-            svg.append("text").attr("x", src.x + nodeW + 10).attr("y", (sy + ty) / 2 - 6)
-                .attr("text-anchor", "middle").attr("font-size", "10px").style("fill", "var(--ink-soft)")
-                .text(`${l.value}%`);
-        });
-data.nodes.forEach((n, i) => {
-            svg.append("rect").attr("x", positions[i].x).attr("y", positions[i].y + yPositions[i]/3)
-                .attr("width", nodeW).attr("height", nodeH).attr("fill", colors[i]).attr("opacity", 0.85).attr("rx", 4);
-            svg.append("text").attr("x", positions[i].x + nodeW/2).attr("y", positions[i].y + yPositions[i]/3 + 24)
-                .attr("text-anchor", "middle").attr("fill", colors[i] === "#C9A063" ? "#23201A" : "#fff").attr("font-size", "12px").text(n.name);
-        });
+        const nodes = data.nodes.map((n, i) => Object.assign({}, n, { __i: i, __color: colors[i % colors.length] }));
+        const links = data.links.map(l => Object.assign({}, l));
 
-        
+        const sankeyGen = d3.sankey()
+            .nodeId(d => d.__i)
+            .nodeWidth(24)
+            .nodePadding(24)
+            .extent([[40, 50], [width - 40, height - 30]]);
+        const graph = sankeyGen({ nodes: nodes, links: links });
+
+        svg.append("g").selectAll("path")
+            .data(graph.links)
+            .join("path")
+            .attr("d", d3.sankeyLinkHorizontal())
+            .attr("fill", "none")
+            .attr("stroke", l => l.source.__color)
+            .attr("stroke-width", l => Math.max(1, l.width))
+            .attr("opacity", 0.55)
+            .append("title").text(l => (l.source.name || "") + " -> " + (l.target.name || "") + ": " + l.value + "%");
+
+        svg.append("g").selectAll("text")
+            .data(graph.links)
+            .join("text")
+            .attr("x", l => (l.source.x1 + l.target.x0) / 2)
+            .attr("y", l => (l.y0 + l.y1) / 2 - 6)
+            .attr("text-anchor", "middle").attr("font-size", "10px").style("fill", "var(--ink-soft)")
+            .text(l => l.value + "%");
+
+        svg.append("g").selectAll("rect")
+            .data(graph.nodes)
+            .join("rect")
+            .attr("x", d => d.x0).attr("y", d => d.y0)
+            .attr("width", d => d.x1 - d.x0).attr("height", d => d.y1 - d.y0)
+            .attr("fill", d => d.__color).attr("opacity", 0.85).attr("rx", 4)
+            .append("title").text(d => d.name + "(" + d.value + ")");
+
+        svg.append("g").selectAll("text")
+            .data(graph.nodes)
+            .join("text")
+            .attr("x", d => (d.x0 + d.x1) / 2)
+            .attr("y", d => d.y0 + (d.y1 - d.y0) / 2 + 4)
+            .attr("text-anchor", "middle")
+            .attr("fill", d => d.__color === "#C9A063" ? "#23201A" : "#fff").attr("font-size", "11px")
+            .text(d => d.name);
+
         svg.append("text").attr("x", width/2).attr("y", 30).attr("text-anchor", "middle")
             .attr("font-size", "13px").style("fill", "var(--ink-soft)")
             .text("凡人精气（100%）→ 小妖消费者 → 大妖顶级捕食者 → 取经团队 → 天庭/佛界收编 · 四级能量金字塔·每级损失约 50%");

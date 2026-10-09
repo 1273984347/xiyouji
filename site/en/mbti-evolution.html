@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-JOGyEQg6ni+rQgMBAkbBBgVjOsaxsi/TzxJ9cP93Wlw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-HxID7FB8/vxzL5Qx7Tv8lA8tcgnUkr+ngmBdmTxIvTA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Pilgrimage Team MBTI Evolution · Annotated Journey to the West</title>
@@ -1356,14 +1356,14 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <h2>Panel 1 · Stage-Switching Radar</h2>
             <p>Click a button below to switch narrative stage; the five-person radar overlay smoothly transitions to that stage's personality snapshot. Defaults to "Formation".</p>
             <div class="stage-switcher" role="tablist" aria-label="阶段切换">
-                <button class="stage-btn active" data-stage="0" role="tab" aria-selected="true">Formation (Ch. 8-22)</button>
-                <button class="stage-btn" data-stage="1" role="tab" aria-selected="false">Conflict (Ch. 27-58)</button>
-                <button class="stage-btn" data-stage="2" role="tab" aria-selected="false">Harmony (Ch. 59-90)</button>
-                <button class="stage-btn" data-stage="3" role="tab" aria-selected="false">Consummation (Ch. 91-100)</button>
+                <button class="stage-btn active" data-stage="0" role="tab" aria-controls="mbti-radar-panel" aria-selected="true">Formation (Ch. 8-22)</button>
+                <button class="stage-btn" data-stage="1" role="tab" aria-controls="mbti-radar-panel" aria-selected="false">Conflict (Ch. 27-58)</button>
+                <button class="stage-btn" data-stage="2" role="tab" aria-controls="mbti-radar-panel" aria-selected="false">Harmony (Ch. 59-90)</button>
+                <button class="stage-btn" data-stage="3" role="tab" aria-controls="mbti-radar-panel" aria-selected="false">Consummation (Ch. 91-100)</button>
             </div>
-            <div class="radar-wrap">
+            <div class="radar-wrap" id="mbti-radar-panel" role="tabpanel" aria-label="Stage personality radar">
                 <div class="radar-container">
-                    <svg id="radar-svg" aria-label="5 人 MBTI 雷达叠加图"></svg>
+                    <svg id="radar-svg" role="img" aria-label="5 人 MBTI 雷达叠加图"></svg>
                     <div class="radar-tip" id="radar-tip"></div>
                 </div>
                 <div class="legend" id="radar-legend"></div>
@@ -1382,7 +1382,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <h2>Panel 3 · Stage × Dimension Heatmap</h2>
             <p>5 rows (characters) × 16 columns (4 stages × 4 dimension pairs). Color depth = absolute dimension difference: dark = strong preference, light = approaching balance. Hover for exact values.</p>
             <div class="heatmap-wrap">
-                <svg id="heatmap-svg" aria-label="阶段维度热力图"></svg>
+                <svg id="heatmap-svg" role="img" aria-label="阶段维度热力图"></svg>
                 <div class="heat-tip" id="heat-tip"></div>
             </div>
         </section>
@@ -1397,7 +1397,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">Annotated Journey to the West</div>
-            <div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/取经团队动力学.md">Pilgrimage Team Dynamics (essay, Chinese)</a></div>
+            <div class="footer-meta">v2.3.282 · W676 · Data Visualization · <a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/取经团队动力学.md">Pilgrimage Team Dynamics (essay, Chinese)</a></div>
         </div>
         <nav aria-label="Footer">
             <a href="index.html">EN Home</a>
@@ -1503,10 +1503,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const dims = EMBEDDED.dimensions;
         const n = dims.length;
         const angle = (i) => (i * 2 * Math.PI / n) - Math.PI / 2;
-        const rScale = d3.scaleLinear().domain([0, 8]).range([0, radius]);
+        const rScale = d3.scaleLinear().domain([0, 10]).range([0, radius]);
 
         // 网格圆
-        [2, 4, 6, 8].forEach(v => {
+        [2, 4, 6, 8, 10].forEach(v => {
             svg.append("circle")
                 .attr("cx", cx).attr("cy", cy).attr("r", rScale(v))
                 .attr("fill", "none").attr("stroke", "var(--line)")
@@ -1748,7 +1748,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const pairs = EMBEDDED.dimPairs;
 
         // 颜色比例：差值绝对值 0-8
-        const colorScale = d3.scaleSequential(d3.interpolateYlOrRd).domain([0, 8]);
+        const colorScale = d3.scaleSequential(d3.interpolateYlOrRd).domain([0, 10]);
 
         // 顶部阶段标签
         stages.forEach((st, si) => {
@@ -1849,7 +1849,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const legendW = 180, legendH = 10;
         const legendX = marginLeft, legendY = h - 6;
         const legendG = svg.append("g").attr("transform", `translate(${legendX},${legendY})`);
-        const legendScale = d3.scaleLinear().domain([0, 8]).range([0, legendW]);
+        const legendScale = d3.scaleLinear().domain([0, 10]).range([0, legendW]);
         const ticks = [0, 2, 4, 6, 8];
         ticks.forEach(t => {
             legendG.append("rect")

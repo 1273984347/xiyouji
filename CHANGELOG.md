@@ -4,13 +4,27 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W690），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W676），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.282（2026-10-09）：W676 站点质量修复批次四 — WP-4.1 fetch 数据装载族 + WP-4.2 可视化正确性 + WP-4.3 命名语义与页脚 sweep + WP-4.4 a11y + WP-4.5 Backlog
+
+> **来源**：站点质量修复六批方案 V1.7（docs/superpowers/plans/2026-10-05-site-quality-remediation-plans.md）批次四（原拟 W675 被复盘批占号顺延为 W676）——第五轮外部审视坐实的 JS 运行期/数据语义/命名一致性/a11y 修复，全部改动 ZH+EN 镜像对称落地。
+> - **WP-4.1 fetch 数据装载族四项**：narratology fetchJson 协议反转删除（http 恢复实时装载路径，对齐 12d 形态）；monster-female-network buildSankeyGraph/renderSankey/renderRadar 参数化（函数内 EMBEDDED 直引清零，loadData 死回退摘除）；monster-victims-network renderForce/Sankey/Radar/Timeline 参数化（victimColors/victimNames 改由传入 victims 派生）；monster-ecology-network links 深拷贝（防 forceLink 原地污染 EMBEDDED_DATA）。
+> - **WP-4.2 可视化正确性五项**：monster-ecology-network 手搓桑基重写为 d3.sankey()（yPositions 公式错乱根治，补 d3-sankey.min.js 本地引用）；mbti-evolution 雷达/色标/图例三 scale domain[0,8]改[0,10] 加网格圆 [2,4,6,8,10]（值 9 越界根治）；magic-system 预算图删 0.9249 折算两条 bar 仅留盈余条（量纲脱节根治）；monster-background renderKPI 补前置清空。
+> - **WP-4.3 命名语义六项**：narratology-13d 改名 narratology-16d 全牵连重命名（页内 canonical/og:url/hreflang/cite/EN 链/fetch 路径 16 处 加全站 26 文件 51 处 加 sitemap 加 hreflang-pairs.json 加 tests 4 件 加视觉基线 png，git mv 双语，site/ 全树清零）；poetry-rhythm 词牌分布改诗词类别分布（实含 7 类，标题/svg title/注释）；magic-system kills 字段改 combat_record 加表头战斗记录（EN 表头已是 Combat Record）；monster-background 存活率差距 10.7 倍改之比约 10.7；window.__clusterOrder 全局泄漏改 renderForce 局部 const；页脚停滞 sweep 162 页（ZH81 加 EN81，v2.2.86·W334 改 v2.3.282·W676，含 bump 污染链 2 页收敛）。
+> - **WP-4.4 a11y 两项**：mbti-evolution 4 个 stage-btn 补 aria-controls（单共享面板语义，role=tabpanel 落 radar-wrap——机判原文 tabpanel 计 4 按真实 UI 语义修正为 1，不造假空面板，偏差随档留痕）；全站带 aria 的 svg role=img 覆盖率 143/143（仅 mbti 4 svg 缺，已补）。
+> - **WP-4.5 Backlog**：交接文档新增 Backlog 段五条（EMBEDDED 命名分裂/fetchJson 命名统一/og:image 差异化/全站统一 encode[并 W674 登记]/a11y 运行时审计盲区[预登记 BL-5]），全部登记不开工。
+> - **证伪留档**（方案标「修复时核对」三项复核不符）：monster-background makeTooltip 实为 d3.select('#tooltip') 单例 select（元素在位无追加）；renderCases 已有前置清空；monster-capability-radar 全部渲染函数已有清空。
+> - **验证**：verify_delivery 核心全绿（42 段）；generate_csp --check 855 页 0 漂移（19 页重生成）；check_js_syntax 854 文件过；check_structure 过；ruff 新脚本 0 错；e2e test_smoke 89/89、test_site_quality 全过（含 W676 新增 5 断言：ecology EMBEDDED 不被污染/桑基 5 节点在位/victims 与 female 连续 resize 计数恒定/background KPI 恰 4 卡加 tooltip 单例）；pytest test_narratology_data 36/36；doc-sync C4 补 W691 递延豁免登记（W690 收官级联提交文本提前引用 W691 所致存量失配，D2 通道补记，下一自由号仍为 W691）。test_deep 4 项失败经 HEAD 基线 stash 对照为本地 file:// 环境既有抖动（dashboard hero/index quick-links/narratology hover/chapter-stats，HEAD 同样失败），非本批引入，CI 面为准。
+> - **文件**：site/data 与 site/en 各 81 页页脚、monster-ecology-network/monster-female-network/monster-victims-network/monster-background/mbti-evolution/magic-system/poetry-rhythm-analysis 七页双语、narratology-16d-network.html（改名自 13d）双语、site/sitemap.xml、site/index.html、site/dukou-engine.html、site/tag-cloud.html、site/search.html、site/perf-canvas-rendering.html、site/pilgrim-team-psychology-arc.html、site/en/visualizations.html 及 EN 镜像同名页、site/reader/themes 4 页、site/static/js/datahub-index.js、scripts/output/hreflang-pairs.json、tests/e2e/test_narratology_render.py、tests/test_narratology_data.py、tests/e2e/test_deep.js、tests/e2e/test_visual.js、tests/e2e/test_site_quality.js（加 W676 断言）、scripts/_w676_* 五件一次性工具、交接文档.md（Backlog 段）、docs/00-导读/W批次编号对账表.md（W676 认领翻转加现势加 W691 豁免登记）、六文档级联、19 页 CSP 重生成。
+> - **处置收尾**：12 张 skill-creator S 卡维持待用户拍板（skills/ 已 W562 退役，不自动建置）；dataset/narratology-13d-network.json 真源与 hyperframes 引用超批次四禁改边界留档未动；12 张 S 卡移交诉求随本批入账不随批执行。
+> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。
 
 ### v2.3.281（2026-10-08）：W690 安全告警处置批 — Dependabot 三包真修 + CodeQL 三条按族 dismiss + Scorecard 维持登记
 

@@ -1642,7 +1642,7 @@ const visibleEdges = edges.filter(e =>
       <div class="insight-item"><strong>Rendering mechanism difference: </strong>In SVG every node is a real DOM element (&lt;circle&gt;); the browser must maintain event bubbling, style computation, and layout. Canvas is all bitmap pixels with no DOM overhead after drawing.</div>
       <div class="insight-item"><strong>Inflection at 500: </strong>Below 200 nodes the SVG/Canvas gap is small (~10ms); above 500 nodes SVG time spikes to 100-300ms while Canvas stays at 10-30ms.</div>
       <div class="insight-item"><strong>Interaction trade-offs: </strong>SVG has built-in event binding (onClick per element); Canvas requires custom hit-testing (distance checks / quadtree). If high interactivity is needed, prefer SVG below 300 nodes; otherwise switch to Canvas with custom hit-testing.</div>
-      <div class="insight-item"><strong>Project application: </strong>This project <code>character-semantic-network.html</code> / <code>intertextuality-network.html</code> / <code>narratology-13d-network.html</code> already exceeds 300 nodes, so a Canvas rendering branch is recommended in the future; graphs below 100 nodes (such as  <code>guanyin-six-roles-network.html</code>) keep SVG.</div>
+      <div class="insight-item"><strong>Project application: </strong>This project <code>character-semantic-network.html</code> / <code>intertextuality-network.html</code> / <code>narratology-16d-network.html</code> already exceeds 300 nodes, so a Canvas rendering branch is recommended in the future; graphs below 100 nodes (such as  <code>guanyin-six-roles-network.html</code>) keep SVG.</div>
       <div class="insight-item"><strong>Animation scenarios: </strong>Force-simulation iterations are where Canvas shines most — SVG updates N DOM properties per frame while Canvas only redraws a bitmap. For this project's animated curves such as timeline / sentiment-arc, enable Canvas + rAF throttling too.</div>
       <div class="insight-item"><strong>Mobile: </strong>iOS Safari visibly stutters when scrolling SVG with &gt; 500 nodes, while Canvas holds 60fps. After this project goes PWA, migrate large graphs to Canvas first.</div>
     </div>
@@ -1651,7 +1651,7 @@ const visibleEdges = edges.filter(e =>
     <footer class="site-footer">
         <div>
             <div class="footer-brand">Annotated Journey to the West</div>
-            <div class="footer-meta">v2.2.86 · W334 · Data Visualization</div>
+            <div class="footer-meta">v2.3.282 · W676 · Data Visualization</div>
         </div>
         <nav aria-label="Footer">
             <a href="index.html">EN Home</a>

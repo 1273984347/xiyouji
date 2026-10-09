@@ -1,4 +1,4 @@
-"""narratology-13d-network.html 数据契约单元测试（P0）。
+"""narratology-16d-network.html 数据契约单元测试（P0）。
 
 依据 docs/10-方法论沉淀/可视化测试计划-十七维叙事学图谱.md 的 Coverage Map。
 从 HTML 内嵌的 EMBEDDED_DATA 抽取数据，纯 Python 断言，不依赖浏览器。
@@ -22,7 +22,7 @@ from pathlib import Path
 
 import pytest
 
-HTML_PATH = Path(__file__).resolve().parent.parent / "site" / "data" / "narratology-13d-network.html"
+HTML_PATH = Path(__file__).resolve().parent.parent / "site" / "data" / "narratology-16d-network.html"
 
 
 def _extract_embedded_data(html_text: str) -> dict:

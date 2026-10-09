@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-MluDaL8nVvdGgAYpP7sBaz+A99M/U/vjPQb0dKNlO2I=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-cPiuK/X6Rvz8KKeUWvgBWN5MCvHljaLrR2hfmoUDvt4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster Background Theory · Annotated Journey to the West</title>
@@ -1606,7 +1606,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             <section class="section" aria-labelledby="sec-compare">
                 <h2 class="section-title alt-2" id="sec-compare">2. Backed vs. Unbacked</h2>
-                <div class="section-sub">The dual structure of Journey to the West justice · a 10.7× survival-rate gap</div>
+                <div class="section-sub">The dual structure of Journey to the West justice · a survival-rate ratio of about 10.7</div>
                 <div class="chart-block">
                     <div class="chart-title">Survival Rate Comparison Bar Chart</div>
                     <div class="chart-caption">Backed demon survival rate 97.2% vs. unbacked demon survival rate 9.1%</div>
@@ -1687,7 +1687,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </main>
 
     <footer class="site-footer">
-        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization</div></div>
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.3.282 · W676 · Data Visualization</div></div>
         <nav aria-label="Footer">
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
@@ -1862,6 +1862,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             { label: "GAP · Survival-Rate Gap", value: stats.survival_gap + "x", desc: "Backed vs. Unbacked", cls: "alt-4" }
         ];
         const row = d3.select('#kpi-row');
+        row.selectAll('*').remove();
         kpis.forEach(k => {
             const card = row.append('div').attr('class', 'kpi-card ' + k.cls);
             card.append('div').attr('class', 'label').text(k.label);

@@ -10,7 +10,7 @@
  * 关键页面（W236-E 由 5 扩充为 10）：
  *   1. dashboard.html
  *   2. index.html
- *   3. narratology-13d-network.html
+ *   3. narratology-16d-network.html
  *   4. chapter-stats.html
  *   5. timeline.html
  *   6. 81-hardships.html                 （W236-E 新增·八十一难专题）
@@ -49,10 +49,10 @@ const fileUrl = (p) => 'file:///' + p.replace(/\\/g, '/');
 const PAGES = [
   { name: 'dashboard', url: fileUrl(path.join(SITE_DIR, 'dashboard.html')) },
   { name: 'index', url: fileUrl(path.join(SITE_DIR, 'index.html')) },
-  { name: 'narratology-13d-network', url: fileUrl(path.join(DATA_DIR, 'narratology-13d-network.html')) },
+  { name: 'narratology-16d-network', url: fileUrl(path.join(DATA_DIR, 'narratology-16d-network.html')) },
   { name: 'chapter-stats', url: fileUrl(path.join(DATA_DIR, 'chapter-stats.html')) },
   { name: 'timeline', url: fileUrl(path.join(DATA_DIR, 'timeline.html')) },
-  // W236-E 新增 5 个 baseline（narratology-13d-network 已存在，替补 character-dynamic-network 避免重复）
+  // W236-E 新增 5 个 baseline（narratology-16d-network 已存在，替补 character-dynamic-network 避免重复）
   { name: '81-hardships', url: fileUrl(path.join(DATA_DIR, '81-hardships.html')) },
   { name: 'character-sentiment-arc', url: fileUrl(path.join(DATA_DIR, 'character-sentiment-arc.html')) },
   { name: 'journey-spacetime', url: fileUrl(path.join(DATA_DIR, 'journey-spacetime.html')) },
