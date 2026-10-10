@@ -47,7 +47,7 @@ EXPECTED_SECTION_NAMES = [
     "A1-A6计数",
     "学术引用",
     "A1导航",
-    "docs01链接",
+    "docs链接",
     "sitemap覆盖",
     "内嵌回退",
     "双源漂移",
@@ -91,7 +91,7 @@ _DOC_FILES_RE = re.compile(
 _SITE_FILES_RE = re.compile(
     r"^(site/.+\.(html|css|js|xml)|dataset/.+\.json|scripts/output/data/.+\.json)$")
 SCOPE_DOCS_SECTIONS = {
-    "docs01链接", "治理契约", "索引健康", "元信息块", "术语一致", "引文核验",
+    "docs链接", "治理契约", "索引健康", "元信息块", "术语一致", "引文核验",
     "W区间字面量", "文档口径", "CLAUDE速查",
 }
 SCOPE_SITE_SECTIONS = {
@@ -479,20 +479,22 @@ def main():
     else:
         ok("A1 导航相邻性 100/100（上一回=N-1·下一回=N+1·第1回无上/第100回全书完）")
 
-    section("docs01链接")
-    # ---- docs/01 链接校验（W422：W420 曾修复 66 死链，纳入门禁防回归）----
+    section("docs链接")
+    # ---- docs 全量链接校验门禁（W422 建置 docs/01 · W699 扩为 docs 全量：
+    # 挂载即绿 5191 链接 0 broken；lint_links 内建三豁免=docs/archive 冻结档/
+    # gitignore 本地件（S4 双盲件）/fenced+inline code 去噪）----
     try:
         r = subprocess.run(
             [sys.executable, os.path.join(_HERE, "lint_links.py"),
-             "--dir", os.path.join(ROOT, "docs", "01-全书逐回解读")],
-            capture_output=True, text=True, timeout=180)
+             "--dir", os.path.join(ROOT, "docs")],
+            capture_output=True, text=True, timeout=300)
         if r.returncode == 0:
-            ok("docs/01 链接校验通过（lint_links 0 broken）")
+            ok("docs 全量链接校验通过（lint_links 0 broken）")
         else:
             tail = (r.stdout.splitlines()[-3:] + r.stderr.splitlines()[-3:])
-            fail("docs/01 存在 broken 链接（lint_links exit %d）：%s" % (r.returncode, " / ".join(tail)))
+            fail("docs 存在 broken 链接（lint_links exit %d）：%s" % (r.returncode, " / ".join(tail)))
     except Exception as e:
-        fail("docs/01 链接校验执行异常: %s" % e)
+        fail("docs 链接校验执行异常: %s" % e)
 
     section("sitemap覆盖")
     # ---- sitemap 覆盖校验（W422：防新增页面漏收录，W417 曾手工补 69→154）----

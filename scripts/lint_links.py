@@ -6,7 +6,13 @@ scripts/audit/w053_verify_links.py（Markdown [text](url)）的能力。
 
 检测范围：
   - HTML/HTM：所有 href / src 属性指向的资源
-  - Markdown：所有 [text](url) 形式的链接
+  - Markdown：所有 [text](url) 形式的链接（fenced code block 与 inline code span
+    内不提取——代码中的 [\\\"\\'](--[\\w-]+) 形态会被链接正则误判，W699 实证）
+
+豁免：
+  - gitignore 本地产物（docs/S4 双盲件、tmpe/ 等）：git check-ignore 批量判定后剔除
+  - 默认排除：node_modules / _template.html / docs/archive/（冻结历史档·禁擅改，其
+    出链不修）——排除匹配以仓库相对路径为准
 
 链接分类：
   - 站内（相对路径、纯锚点）：本地文件存在性校验
@@ -31,6 +37,7 @@ Exit code: 0 全部通过 / 1 存在 broken 链接
 import argparse
 import os
 import re
+import subprocess
 import sys
 import urllib.parse
 import urllib.request
@@ -62,6 +69,66 @@ EXTERNAL_SCHEMES = (
 
 # Markdown 链接 [text](url) 或 [text](url "title")
 MD_LINK_RE = re.compile(r"\[([^\]]*)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
+
+_FENCE_OPEN_RE = re.compile(r"^\s*(```|~~~)")
+
+
+def strip_md_code(text):
+    """剥离 fenced code block 与 inline code span（仅用于链接提取，W699）。
+
+    代码内的 `[\"\\'](--[\\w-]+)` 形态会被 MD_LINK_RE 误判为链接（W699 实证 2 例）；
+    行内 code span 中的路径/正则同样不是可点击链接。剥离以空行占位保行号。
+    """
+    out = []
+    in_fence = False
+    fence_char = ""
+    for line in text.splitlines():
+        m = _FENCE_OPEN_RE.match(line)
+        if m:
+            mark = m.group(1)
+            if not in_fence:
+                in_fence, fence_char = True, mark[0]
+                out.append("")
+                continue
+            if mark[0] == fence_char:
+                in_fence = False
+                out.append("")
+                continue
+        out.append("" if in_fence else re.sub(r"`[^`]*`", "", line))
+    return "\n".join(out)
+
+
+def filter_gitignored(files):
+    """剔除 .gitignore 排除的本地产物（W699：docs/S4 双盲件曾被扫入 102 条噪音）。
+
+    git check-ignore 批量判定；git 不可用/失败时原样返回（不阻断，CI 环境恒有 git）。
+    """
+    if not files:
+        return files
+    try:
+        # 字节流显式 UTF-8：Windows text 模式 stdin 走 GBK，中文路径（docs/S4-学术投稿）
+        # 编码错位会导致 check-ignore 永不命中（W699 实证）
+        r = subprocess.run(
+            ["git", "-c", "core.quotePath=false", "check-ignore", "--stdin"],
+            input=("\n".join(str(f) for f in files) + "\n").encode("utf-8"),
+            capture_output=True, timeout=60, cwd=str(ROOT),
+        )
+        def _norm(s):
+            # check-ignore 对绝对路径走 C 引号：包裹引号 + 内部 \ 转义为 \\（W699 实证）
+            return re.sub(r"/{2,}", "/", s.strip().strip('"').replace("\\", "/"))
+
+        ignored = {
+            _norm(ln)
+            for ln in r.stdout.decode("utf-8", "replace").splitlines()
+            if ln.strip()
+        }
+        if not ignored:
+            return files
+        kept = [f for f in files if _norm(str(f)) not in ignored]
+        print(f"[gitignore] 已排除 {len(files) - len(kept)} 个 gitignore 本地件")
+        return kept
+    except Exception:
+        return files
 
 
 class HtmlLinkExtractor(HTMLParser):
@@ -102,6 +169,10 @@ def is_skip(url):
     if not u:
         return True
     if u.startswith("#"):
+        return True
+    # POSIX 根绝对路径（W699）：Vite 工程入口（xiyouji-agent-web/index.html 的
+    # /src/main.tsx）是构建期改写形态，不适用文件系统站点存在性校验
+    if u.startswith("/"):
         return True
     return False
 
@@ -254,8 +325,11 @@ def main():
     ap.add_argument(
         "--exclude",
         nargs="*",
-        default=["node_modules", "_template.html"],
-        help="排除含这些路径片段的文件/目录（默认 node_modules/_template.html）",
+        default=["node_modules", "_template.html", "docs/archive/", "tmpe/",
+                 "_w588_ce.html"],
+        help="排除含这些路径片段的文件/目录，匹配仓库相对路径"
+             "（默认 node_modules/_template.html/docs/archive/ 冻结档/tmpe/ 临时区"
+             "/_w588_ce.html W588 渲染快照件·其出链为 site 根相对形态不适用 scripts/ 位）",
     )
     args = ap.parse_args()
 
@@ -274,11 +348,14 @@ def main():
         sys.exit(2)
 
     files = collect_files(scan_dir)
+    files = filter_gitignored(files)
     if args.exclude:
         before = len(files)
+        # W699 起：排除匹配改为仓库相对路径（扫描 --dir docs 时 "archive/" 不会再
+        # 误伤扫描根外同名片段，docs/archive/ 冻结档豁免在全目录口径下均成立）
         files = [
             f for f in files
-            if not any(tok in str(f.relative_to(scan_dir)) for tok in args.exclude)
+            if not any(tok in display_path(f) for tok in args.exclude)
         ]
         if len(files) != before:
             print(f"[exclude] 已排除 {before - len(files)} 个文件: {args.exclude}")
@@ -307,7 +384,7 @@ def main():
                 pass
             links = [(ln, url) for (ln, _, url) in ext.links]
         else:
-            links = extract_markdown_links(text)
+            links = extract_markdown_links(strip_md_code(text))
 
         pending_fixes = []  # (old_url, new_url)
 

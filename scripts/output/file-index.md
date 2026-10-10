@@ -11,6 +11,17 @@
 ---
 
 
+## W700 W700 docs全量链接门禁与断链清债批（2026-10-11·v2.3.294）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/lint_links.py | W700 | 五改：code 去噪+check-ignore+archive 排除+POSIX 跳过+快照件 |
+| scripts/verify_delivery.py | W700 | 第 6 门禁扩域 docs 全量改名 docs链接 |
+| .github/workflows/ci.yml | W700 | pages-smoke 更名去残件 |
+| docs/03-主题与情节专题 | W700 | 13d→16d 死链修复×4 |
+| docs/S2-学术投稿 | W700 | 13d→16d 死链修复×4 |
+| docs/10-方法论沉淀 | W700 | skills 去链×7+归档深度×5+决策清单去链 |
+
 ## W699 W699 三卡工具化与三报告批（2026-10-11·v2.3.293）
 
 | 文件 | W | 说明 |
