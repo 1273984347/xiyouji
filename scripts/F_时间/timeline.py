@@ -5,9 +5,11 @@ timeline.py — 《西游记》时间线数据生成
     基于分回文本与关键事件锚点表，生成故事内事件的时间线数据（JSON）。
 
 注意：
-    输出 scripts/output/data/timeline.json（分析器输出，当前无对应可视化页）。
-    site/data/timeline.html 渲染的是真实历史三轴时间线（成书史/版本演变/文化影响，
-    数据 site/data/json/timeline_events.json），与本脚本无关。
+    输出 scripts/output/data/timeline.json（故事内时间线分析器输出）；
+    site/data/story-timeline.html 以 EMBEDDED 单源形态消费其同步副本
+    （改 KEY_EVENTS 须同批重灌该页内嵌数据并重跑 generate_csp）。
+    site/data/timeline.html 渲染的是另一条真实历史三轴时间线（成书史/版本演变/
+    文化影响，数据 site/data/json/timeline_events.json），与本脚本无关。
 
 使用方式：
     # 默认跑全量分回（analyzer_base 自动定位 source/原文/分回/）

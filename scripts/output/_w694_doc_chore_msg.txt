@@ -1,0 +1,7 @@
+chore(w694): timeline 消费链口径收尾——年表与 timeline.py 的「当前无对应可视化页」表述更新为 story-timeline 页同步消费
+
+- 背景：外审第五轮（批 W694 前旧快照）再证两链不相关，其三大核心主张（年表末句失实/timeline.py 文档串失实/故事内时间线无页面）已在 W694 修复；本次收尾其落地后的衍生口径——story-timeline.html 已成为 timeline.json 的消费页，「无对应可视化页」表述过时
+- timeline.py 文档串：改为「story-timeline.html 以 EMBEDDED 单源形态消费同步副本（改 KEY_EVENTS 须同批重灌该页并重跑 generate_csp）」
+- 年表.md 时间线生成段：三行辨析（timeline.py 锚点表 / story-timeline.html=本年表可视化页 / timeline.html=另一条历史三轴线），替换原两行版
+- timeline.json 重生成冒烟 36 条逐字节未变；ruff 0 错
+- 外审其余各项裁决：修正版 timeline.py 拒收（36→30 倒退·丢 84/88/93/96·繁体魏徵偏离原著用字·删 build_timeline 接口缝）；gen-time 系守卫空转死代码登记不动；CSP d3js/cdnjs 白名单为全站口径登记待收紧批；ERAS 2035 留白与快照注释登记（后者语义准确）
