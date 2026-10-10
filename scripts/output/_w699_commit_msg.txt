@@ -1,0 +1,10 @@
+feat(w699): 三卡工具化与三报告批——S-23 原文考据对拍器 + S-24 双源发现器 + S-25 复审扫荡器 + A-01 三轴页打磨 + A-02/A-04 只读报告
+
+- S-23 scripts/source_collate.py：难簿原文序（第 099 回难簿段 80+补足 81）×回目行×dataset 三方对拍；--full/--entity/--chap/--year-table/--self-test；逗号分词+逐 token 非贪牙匹配；验收=年表 81 难表回放 11 行 0 差异+锚点 3 点+两负样本全捕获
+- S-24 scripts/check_dual_source_scan.py：生成器 default_output×EMBEDDED 页候选发现（信号收紧=.json 引用或顶层键同名·排除自身防自指）；候选 3 对=chapter_stats（真实新发现·待定做）+timeline↔story-timeline（39 门禁覆盖）+timeline↔timeline.html（键名撞名误报 1·容忍内）
+- S-25 scripts/review_sweep.py：变动类→零命中断言矩阵（R1 旧数据链/R2 计数漂移/R3 已勘误事实·排除归档/历史行/复盘合法引用/自身）；首跑 3 规则 0 命中；--range 6154137..efd03fa 回放 889 文件
+- A-01 timeline.html：x 轴 domain 数据驱动 ±15 年（消右留白）+aria 同步+1592/1663 双轴语义注记；tag-cloud 条目 desc/tags 纠偏为历史三轴语义；CSP 0 漂移
+- A-02 难簿序与 dataset 对拍报告（只读·供 BL-8）：命名一致 24/81·名异 57·ds 多出 26（后段另一套枚举）；章节锚点抽查一致；三选项供作者裁决
+- A-04 人名用字两态盘点（只读）：site 徵:征=202:112·docs/01 39:47·语料 4:42·引文行 0:1（门禁已强制语料形态·语料残留 4 处徵）；三选项建议 3+2
+- 方法论 README 索引 37/38 行；六文档级联 v2.3.293（batch_cascade 原生 dry+apply 自检过）；对账表 W699 认领翻现势 W700
+- 验证：verify_delivery 核心全绿（44 段·39/38 门禁在岗）；三器 ruff+self-test 全过；CSP 0 漂移

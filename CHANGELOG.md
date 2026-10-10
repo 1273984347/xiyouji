@@ -4,13 +4,26 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W698），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W699），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.293（2026-10-11）：W699 三卡工具化与三报告批
+
+> **来源**：用户对第四篇复盘报告三卡（S-23/24/25）与登记项（A-01/02/04）批复「开工」（W681 三键联调维持用户侧等待）。
+> - **S-23 原文考据对拍器**：scripts/source_collate.py——难簿原文序（第 099 回难簿段 80 项+补足 81 老鼋淬水）×回目行×dataset/81-hardships.json 三方对拍；模式 --full/--entity/--chap/--year-table/--self-test；解析器经逗号分词+逐 token 非贪牙匹配（初版贪牙吞「二十」二字致重号 61 项·段起点带前缀两项教训均在自检内暴露修复）；验收=年表 81 难表回放 11 行 0 差异+self-test 难簿锚点 3 点与序名错配/81 错名两负样本全捕获。
+> - **S-24 双源校验器家族化**：scripts/check_dual_source_scan.py——发现器扫「default_output 生成器×EMBEDDED 页面」候选对（信号收紧为 .json 引用或 EMBEDDED 顶层键同名，排除自身防自指覆盖）；产出候选 3 对：chapter_stats（**真实新发现·待定做**）、timeline↔story-timeline（已有第 39 门禁覆盖）、timeline↔timeline.html（键名撞名误报 1 对·在验收容忍 ≤1 内）；逐对比对沿用 check_story_timeline_sync 模板按对定做。
+> - **S-25 复审扫荡器**：scripts/review_sweep.py——变动类→零命中断言矩阵（R1 旧数据链断言/R2 现役计数漂移/R3 已勘误事实断言·含路径与行级排除面：归档/历史批次行/复盘合法引用/自身）；--range 附变更清单回放；--self-test 探针捕获自证；首跑 3 规则 0 命中·区间 6154137..efd03fa 回放 889 文件。
+> - **A-01 timeline 历史三轴页打磨包**：x 轴 domain 由硬编码 600-2040 改数据驱动 ±15 年（消右留白）+aria 文案同步+1592/1663 双轴语义注记（dataSource 内·同一事件两面：原著刊行史/评点阐释史）+tag-cloud 条目 desc/tags 纠偏为历史三轴语义；CSP 0 漂移。
+> - **A-02 难簿序与 dataset 对拍报告**（只读·供 BL-8）：docs/10-方法论沉淀/难簿序与dataset对拍报告-2026-10-11.md——命名一致 24/81·名异 57·ds 多出 26（后段系另一套枚举）；章节锚点抽查一致；三选项（重建对齐/维持加注/分段统一）供作者裁决；dataset 零改动。
+> - **A-04 人名用字两态盘点**（只读）：docs/10-方法论沉淀/人名用字两态盘点-魏征-2026-10-11.md——site 徵:征=202:112·docs/01 混用 39:47·语料 4:42·引文行 0:1（第 20 门禁已强制语料形态·语料残留 4 处徵）；三选项建议 3+2。
+> - **验证**：verify_delivery 核心全绿（44 段自洽）；三器 ruff 0 错且 self-test 全过；CSP 0 漂移；batch_cascade 原生 dry+apply 自检过。
+> - **文件**：scripts/source_collate.py、scripts/check_dual_source_scan.py、scripts/review_sweep.py（均新增）、site/data/timeline.html、site/data/tag-cloud.html、docs/10-方法论沉淀/难簿序与dataset对拍报告-2026-10-11.md（新增）、docs/10-方法论沉淀/人名用字两态盘点-魏征-2026-10-11.md（新增）、docs/10-方法论沉淀/README.md（索引 37/38）、六文档级联、对账表。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### v2.3.292（2026-10-11）：W698 门禁scope分级与提交重试批
 

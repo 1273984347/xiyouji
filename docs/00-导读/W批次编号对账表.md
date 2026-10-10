@@ -5,7 +5,7 @@
 > **取号规则**：下一自由号 = 本表 max(W#)+1（CHANGELOG 维护契约④「Grep 现役段 max+1」在版段递延时可能滞后于已认领号——以本表为准，W659/W660 撞号险情即此产生）。
 > **生成来源**：人工撰写（Agent 起草）。**生成模型**：GLM（ZCode session 2026-10-05）。**生成日期**：2026-10-05。**核验状态**：已核验（各行 hash 经 `git log` 实证回查，取证 HEAD = b1aafb0）。
 
-> ## 现势：下一自由号 = **W699**（W698 已由 ZCode 2026-10-11 认领〔门禁 scope 分级与提交重试批〕；W697 已由 ZCode 2026-10-11 认领〔复盘报告第四篇入库批〕（W696 已收官〔复盘报告第二篇〕；W695/W694/W693/W692 已收官；W686 已收官；W682 预留已作废；W681 进行中）
+> ## 现势：下一自由号 = **W701**（W700 已由 ZCode 2026-10-11 认领〔docs 全量链接门禁与断链清债批〕；W699 已由 ZCode 2026-10-11 认领〔三卡工具化与三报告批〕；W698 已收官〔门禁 scope 分级与提交重试批〕；W697 已由 ZCode 2026-10-11 认领〔复盘报告第四篇入库批〕（W696 已收官〔复盘报告第二篇〕；W695/W694/W693/W692 已收官；W686 已收官；W682 预留已作废；W681 进行中）
 
 | W# | 主题 | 关联 commit | CHANGELOG 版段 | 状态 | 认领会话 |
 |----|------|------------|---------------|------|---------|
@@ -56,8 +56,10 @@
 | W693 | 用户三裁决执行批：A-01 第 38 门禁（17 组标记·self-test·首跑拦自身注记残留）+ A-02 S 卡拍板（S-16 吸收/17-18 排期/存量 12 张关闭带吸收路径）+ A-05 S4 本地同步（md 坐标×8+图 C-2 重生成+2 docx COM 21/22 页·不入仓） | 本次提交（级联 v2.3.287·batch_cascade 原生） | v2.3.287 | **已收官** | ZCode 2026-10-10 |
 | W694 | 故事内时间线可视化页落地批（用户裁决「可以」两项）：site/data/story-timeline.html 新页（EMBEDDED 单源·36 事件回目轴五泳道·86→87 口径级联）+ 年表/timeline.py 事实勘正同步（难序/回目归属/24→36 锚点）+ _template 路径组 data-ready 化 + STRUCTURE 速记段归档 + W693 漏 add 4 页捎带 | 本次提交（级联 v2.3.288·batch_cascade 原生） | v2.3.288 | **已收官** | ZCode 2026-10-10 |
 | W695 | 用户两裁决执行批：① 校验器挂载**第 39 门禁**（check_story_timeline_sync.py·KEY_EVENTS↔EMBEDDED_DATA 逐条+phase 区间·self-test 三负样本·verify 44 段自洽）② CSP 全站收紧（EXTERNAL_SCRIPT_HOSTS 清空·script-src=self+哈希·856 页重生成·W456 后零外域引用实证） | 本次提交（级联 v2.3.289·batch_cascade 原生） | v2.3.289 | **已收官** | ZCode 2026-10-10 |
-| W698 | 门禁 scope 分级与提交重试批（用户裁决「动工」·P2 两条落地）：verify_delivery --scope full/docs/site/auto 四态（白名单路径分类·保守缺省 full·subprocess 层统一 skip+段标记兜住防静默跳过 wrapper·自洽锁按 scope 断言子集）+ scripts/safe_commit.py 提交重试（ref-lock 竞争·并行增量核对后重试·self-test）+ release.py 仓库体量体检段（count-objects·1GB 告警）+ git gc 存量回收（427→约 200MB）+ .git/hooks/pre-commit 接 --scope auto（本地件） | 本次提交（级联 v2.3.292·batch_cascade 原生） | v2.3.292 | **进行中** | ZCode 2026-10-11 |
+| W698 | 门禁 scope 分级与提交重试批（用户裁决「动工」·P2 两条落地）：verify_delivery --scope full/docs/site/auto 四态（白名单路径分类·保守缺省 full·subprocess 层统一 skip+段标记兜住防静默跳过 wrapper·自洽锁按 scope 断言子集）+ scripts/safe_commit.py 提交重试（ref-lock 竞争·并行增量核对后重试·self-test）+ release.py 仓库体量体检段（count-objects·1GB 告警）+ git gc 存量回收（427→约 200MB）+ .git/hooks/pre-commit 接 --scope auto（本地件） | 276b1f32（级联 v2.3.292·batch_cascade 原生） | v2.3.292 | **已收官** | ZCode 2026-10-11 |
 | W697 | 复盘报告第四篇入库批（用户下发复盘系统提示词）：docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-11.md（第四篇·E8 项/S 三卡 S-23~25/P16 例 FAM 六族/SC3/WF2/A4·范围=年表勘正/六轮外报/story-timeline 链/第 39 门禁/CSP 收紧/全变动复审）+ 方法论 README 索引第 36 行 | 本次提交（级联 v2.3.291·batch_cascade 原生） | v2.3.291 | **已收官** | ZCode 2026-10-11 |
+| W700 | docs 全量链接门禁与断链清债批（用户裁决「①+捎带」·挑刺 P1+P3-1/P3-2）：断链 22 修（13d→16d×8+skills 去链保文×7+并行批归档改链深度错×5+STRUCTURE 双跳出×1+决策清单去链×1）+ lint_links 五改（fenced/inline code 去噪+gitignore check-ignore 豁免〔UTF-8 字节流+C 引号归一〕+docs/archive 冻结档默认排除+POSIX 根绝对路径跳过+_w588_ce 快照件排除）+ verify 第 6 门禁 docs01链接→docs 全量改名 docs链接（挂载即绿 docs 口径 5191 链接 0 broken·全仓口径 19472 链接 0 broken）+ ci.yml screenshots-regression→pages-smoke 更名去残件（fallback/artifact 步骤删除） | 本次提交（级联 v2.3.294·batch_cascade 原生） | v2.3.294 | **进行中** | ZCode 2026-10-11 |
+| W699 | 用户裁决三卡+三登记项开工：S-23 原文考据对拍器（难簿序×回目行×dataset 三方对拍·年表回放验收）+ S-24 双源校验器家族化（py 锚点表↔页面 EMBEDDED 发现器+候选清单）+ S-25 复审扫荡器（变动类→grep 断言矩阵·六轮回放验收）+ A-01 timeline 历史三轴页打磨包 + A-02 难簿序与 dataset 全量对拍报告（供 BL-8·只读）+ A-04 人名用字两态盘点报告 | 本次提交（级联 v2.3.293·batch_cascade 原生） | v2.3.293 | **已收官** | ZCode 2026-10-11 |
 | W696 | 工作复盘与优化分析报告第二篇（W693 三裁决+W694/W695 并行周期·含 §6.1 复发预防专项 FAM 十族）入库 + 方法论 README 索引第 34 行 | 本次提交（级联 v2.3.290·batch_cascade 原生） | v2.3.290 | **已收官** | ZCode 2026-10-10 |
 | W682 | agent-web 引擎更换批次三：WF-1 复活（golden-50 新引擎 LLM 基线·评估集首跑） | 3b0dfed（预留在案·W680 收官批注记） | 待批次落段 | **作废**（W686·用户裁决 workflow 方案退役·WF-1 复活随之取消·后续重新设计另认领新号） | ZCode 2026-10-07 |
 

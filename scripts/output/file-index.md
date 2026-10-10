@@ -11,6 +11,19 @@
 ---
 
 
+## W699 W699 三卡工具化与三报告批（2026-10-11·v2.3.293）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/source_collate.py | W699 | S-23 原文考据三方对拍器 |
+| scripts/check_dual_source_scan.py | W699 | S-24 双源对发现器 |
+| scripts/review_sweep.py | W699 | S-25 复审扫荡器 |
+| site/data/timeline.html | W699 | A-01 数据驱动域+双轴注记 |
+| site/data/tag-cloud.html | W699 | A-01 timeline 条目纠偏 |
+| docs/10-方法论沉淀/难簿序与dataset对拍报告-2026-10-11.md | W699 | A-02 对拍报告（供 BL-8·只读） |
+| docs/10-方法论沉淀/人名用字两态盘点-魏征-2026-10-11.md | W699 | A-04 用字盘点（只读） |
+| docs/10-方法论沉淀/README.md | W699 | 索引 37/38 行 |
+
 ## W698 W698 门禁scope分级与提交重试批（2026-10-11·v2.3.292）
 
 | 文件 | W | 说明 |
