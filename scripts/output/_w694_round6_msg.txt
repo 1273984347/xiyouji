@@ -1,0 +1,9 @@
+fix(w694): 第六轮外审裁决批——tag-cloud 硬伤与死代码清理 + 故事内时间线三方对齐收口 + 双源同步校验器
+
+- tag-cloud.html（P0）：narratology-16d 条目 title/tags/desc 三处「13维」→「16维」（W676 改名漏网·第 38 门禁标记为 13d 字面未覆盖 13维 汉字形态）；V 方向注释 29→30
+- tag-cloud.html（P2）：stat-shown/stat-total/stat-tags 三处死代码与 countTags 空转函数移除；footer p/.footer-index/.footer-cross/.tab-row 四组死样式移除；dataSource+citeBox 块自 body 顶移至页脚前、skip-link 归位 body 首；数据源措辞据实（run_all 生成→页目元数据手工维护）+快照日期 2026-10-04→2026-10-10
+- 三方对齐（P0）：53 回锚点事件/人物与年表行对齐——「女儿国子母河[唐僧,猪八戒]」→「女儿国，蝎子精[唐僧,蝎子精]」（timeline.py + story-timeline.html 同步改·仍 36 条）；KPI 81 卡 desc 注明「非本页数据点」
+- 新增 scripts/check_story_timeline_sync.py：timeline.py KEY_EVENTS ↔ story-timeline.html EMBEDDED_DATA 逐条比对（chapter/event/characters/顺序 + phase 区间映射），--self-test 篡改/缺条/phase 三类负样本全捕获——挂载 verify 为候批事项待用户裁决
+- CHANGELOG W694 段文件清单补注：scripts/output/data/timeline.json 系 .gitignore:59 本地产物实不入仓（本轮 add 即被拦·同族分析器输出均此口径·部署真身在受跟踪的 site/data/json/）
+- 登记：CSP d3js/cdnjs 白名单全站收紧（856 页共享模板·批次级）；timeline.html 条目 desc/tags 纠偏与 ERAS 留白（历史三轴页打磨项）；tooltip clientX 化（可用但脆弱）
+- 验证：verify_delivery 核心全绿·CSP 0 漂移·js 语法/结构全绿·同步校验器正检+自检过·story 页冒烟 PASS·ruff 0 错

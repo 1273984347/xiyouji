@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-RDEYTG1d5J9TmNcfn8UWQpJfcMBBIbg57FIUNTJonDI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-5J4AzH/tMKAxKakfl9oStCb8tHPBhTYvJpmxRRRErxU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>全站标签云 · 可视化导航中心 · 详解西游记</title>
@@ -1502,24 +1502,6 @@ td.num, th.num {
         
         
         
-        footer p {
-            margin-bottom: 6px;
-        }
-        .footer-index {
-            margin-top: 14px;
-            padding-top: 14px;
-            border-top: 1px solid #3a2820;
-            font-size: 0.78rem;
-            color: var(--accent-3);
-        }
-        .footer-cross {
-            margin-top: 6px;
-            font-size: 0.78rem;
-            color: var(--accent-3);
-        }
-        .footer-cross a {
-            color: #c8a878;
-        }
         /* Responsive */
         @media (max-width: 640px) {
             
@@ -1535,7 +1517,6 @@ td.num, th.num {
             
             
             .cloud-section, .rec-section { padding: 16px 10px; }
-            .tab-row { overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; padding-bottom: 4px; }
             .tab-btn { padding: 8px 14px; font-size: 0.82rem; flex-shrink: 0; min-height: 36px; }
             .rec-grid { grid-template-columns: 1fr; gap: 10px; }
             .rec-card { padding: 12px 10px; }
@@ -1560,20 +1541,6 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <!-- chart-degrade: n/a -->
 </head>
 <body>
-    <div id="dataSource" class="notice"><div class="cite-block" id="citeBox">
-  数据源：页面内嵌 EMBEDDED 数据（run_all 批量生成 JSON 快照于构建时嵌入·快照 2026-10-04） 由 <code>scripts/run_all.py</code> 批量生成（口径与参数见 dataset 同名 JSON 与生成脚本源）。
-  <details class="cite-details">
-  <summary>引用格式</summary>
-  <div class="cite-item"><span>APA</span><pre class="cite-text">《详解西游记》项目. (2026). 全站标签云 · 可视化导航中心. 详解西游记可视化站点. https://1273984347.github.io/xiyouji/data/tag-cloud.html（访问日期 2026-10-04）</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
-  <div class="cite-item"><span>BibTeX</span><pre class="cite-text">@misc{xiyouji_tag_cloud,
-  title       = {全站标签云 · 可视化导航中心},
-  author      = {{《详解西游记》项目}},
-  year        = {2026},
-  howpublished = {\url{https://1273984347.github.io/xiyouji/data/tag-cloud.html}},
-  note        = {可视化数据可视化解读页, 访问日期 2026-10-04}
-}</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
-  </details>
-</div></div>
     <a class="skip-link" href="#main">跳到主要内容</a>
 
     <header class="topnav">
@@ -1638,6 +1605,21 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="rec-grid" id="rec-grid"></div>
         </section>
     </main>
+
+    <div id="dataSource" class="notice"><div class="cite-block" id="citeBox">
+  数据源：页面内嵌 EMBEDDED 数据（页目元数据手工维护·快照 2026-10-10） 由 <code>scripts/run_all.py</code> 批量生成（口径与参数见 dataset 同名 JSON 与生成脚本源）。
+  <details class="cite-details">
+  <summary>引用格式</summary>
+  <div class="cite-item"><span>APA</span><pre class="cite-text">《详解西游记》项目. (2026). 全站标签云 · 可视化导航中心. 详解西游记可视化站点. https://1273984347.github.io/xiyouji/data/tag-cloud.html（访问日期 2026-10-10）</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
+  <div class="cite-item"><span>BibTeX</span><pre class="cite-text">@misc{xiyouji_tag_cloud,
+  title       = {全站标签云 · 可视化导航中心},
+  author      = {{《详解西游记》项目}},
+  year        = {2026},
+  howpublished = {\url{https://1273984347.github.io/xiyouji/data/tag-cloud.html}},
+  note        = {可视化数据可视化解读页, 访问日期 2026-10-10}
+}</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
+  </details>
+</div></div>
 
     <footer class="site-footer">
         <div>
@@ -1725,7 +1707,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         {file:"language-style-radar.html", title:"语言风格雷达", category:"d-nlp", tags:["语言","风格","雷达","特征"], size:6, desc:"语言风格雷达图"},
         {file:"chapter-structure-graph.html", title:"章节结构图", category:"d-nlp", tags:["章节","结构","图","NLP"], size:7, desc:"章节结构图谱分析"},
         {file:"chapter-stats.html", title:"章节统计", category:"d-nlp", tags:["章节","统计","数据","字数"], size:6, desc:"章节统计数据与字数分布"},
-        // ===== V 方向新增 (29) =====
+        // ===== V 方向新增 (30) =====
         {file:"journey-map-interactive.html", title:"取经路线交互", category:"v-new", tags:["取经","路线","交互","地图"], size:9, desc:"取经路线交互地图"},
         {file:"journey-spacetime.html", title:"取经时空", category:"v-new", tags:["取经","时空","时空图","维度"], size:8, desc:"取经时空维度分析"},
         {file:"journey-route.html", title:"取经路线", category:"v-new", tags:["取经","路线","地理","轨迹"], size:7, desc:"取经路线地理轨迹"},
@@ -1748,7 +1730,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         {file:"pilgrim-team-dynamic-network.html", title:"取经团队动态网络", category:"v-new", tags:["取经","团队","动态","网络"], size:8, desc:"取经团队动态关系网络"},
         {file:"six-senses-narratology-network.html", title:"六根叙事学网络", category:"v-new", tags:["六根","叙事学","网络","感官"], size:7, desc:"六根叙事学网络分析"},
         {file:"narratology-12d-network.html", title:"12维叙事学网络", category:"v-new", tags:["叙事学","12维","网络","多维"], size:9, desc:"12维叙事学网络"},
-        {file:"narratology-16d-network.html", title:"13维叙事学网络", category:"v-new", tags:["叙事学","13维","网络","多维"], size:9, desc:"13维叙事学网络"},
+        {file:"narratology-16d-network.html", title:"16维叙事学网络", category:"v-new", tags:["叙事学","16维","网络","多维"], size:9, desc:"16维叙事学网络"},
         {file:"intertextuality-network.html", title:"互文性网络", category:"v-new", tags:["互文性","文本","网络","引用"], size:7, desc:"互文性引用网络"},
         {file:"monster-ecology-network.html", title:"妖怪生态网络", category:"v-new", tags:["妖怪","生态","网络","栖息"], size:7, desc:"妖怪生态栖息网络"},
         {file:"theological-intervention-network.html", title:"神学介入网络", category:"v-new", tags:["神学","介入","网络","神佛"], size:7, desc:"神学介入干预网络"},
@@ -1866,9 +1848,6 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 }
             });
 
-        // 更新统计
-        d3.select("#stat-shown").text(data.length);
-        d3.select("#stat-total").text(EMBEDDED_DATA.length);
     }
 
     function showTooltip(event, d) {
@@ -1993,12 +1972,6 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     // ============================================================
     // 统计标签总数
     // ============================================================
-    function countTags() {
-        const tagSet = new Set();
-        EMBEDDED_DATA.forEach(d => d.tags.forEach(t => tagSet.add(t)));
-        d3.select("#stat-tags").text(tagSet.size);
-    }
-
     // ============================================================
     // 键盘导航：左右箭头在标签间移动
     // ============================================================
@@ -2043,7 +2016,6 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     function init() {
         setupTabs();
         setupSearch();
-        countTags();
         renderTagCloud();
         renderRecommendations(null);
         setupKeyboardNav();
