@@ -22,7 +22,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
     
     
-                                                                                                                                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -399,9 +399,6 @@ body {
         transition-duration: 0.01ms !important;
     }
     html { scroll-behavior: auto; }
-    /* W674 WP-3.13 (D4 default A): one-shot animations (wordFloat/bladeCut/crackOpen end at opacity:0)
-       must not play under reduced motion - skip to static fully-visible state */
-    .scalpel-word, .scalpel-blade, .text-crack { animation: none !important; }
 }
 a { color: inherit; text-decoration: none; }
 a:focus-visible, button:focus-visible, [tabindex]:focus-visible {

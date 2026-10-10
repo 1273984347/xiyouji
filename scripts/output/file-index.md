@@ -11,6 +11,20 @@
 ---
 
 
+## W694 W694 故事内时间线可视化页落地批（2026-10-10·v2.3.288）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/story-timeline.html | W694 | 故事内时间线可视化页（EMBEDDED 单源·36 事件回目轴五泳道） |
+| timeline/西游记大事年表.md | W694 | 外审事实勘正（难序/回目归属/人物/数据链声明） |
+| scripts/F_时间/timeline.py | W694 | KEY_EVENTS 24→36 与年表对齐·docstring 去虚 |
+| scripts/output/data/timeline.json | W694 | 重生成（36 条） |
+| site/_template.html | W694 | 路径组 data-ready 化加禁 CDN 注记 |
+| site/data/tag-cloud.html | W694 | 页面登记（81 条） |
+| site/sitemap.xml | W694 | 851 条重生成 |
+| STRUCTURE.md | W694 | 速记段归档加子板块表述修正加 87 页 |
+| docs/archive/STRUCTURE-ARCHIVE.md | W694 | 迁入两段建置沿革 |
+
 ## W693 W693 用户三裁决执行批（2026-10-10·v2.3.287）
 
 | 文件 | W | 说明 |

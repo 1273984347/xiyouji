@@ -1,0 +1,8 @@
+fix(w694): 故事内时间线可视化页落地批——story-timeline 新页（EMBEDDED 单源·36 事件回目轴五泳道·86→87 口径级联）+ 年表/timeline.py 事实勘正同步 + _template 路径组 data-ready 化 + STRUCTURE 速记段归档 + W693 漏 add 4 页捎带
+
+- story-timeline.html：site/data 第 87 个可视化页·36 关键事件（与 F_时间/timeline.py 输出同步锚定）·阶段筛选/悬停 tooltip/点击详情/明细表/cite-block 引用格式块·色板全 token（暗色自适应）
+- 年表勘正（上批外审裁决落地）：81 难序表按第九十九回难簿重写·齐天大圣归属第 4 回·魏征袁守诚归位·灭法国 84/玉华州 88-90/天竺 93-95/寇员外 96-97·五千零四十日与一十四遍寒暑口径合一；timeline.py KEY_EVENTS 24→36 与年表对齐·docstring 数据链声明去虚·timeline.json 重生成
+- _template.html：路径组统一 data-ready（7 项整组注记）·补齐 d3 preload·CDN 示例注释改 W456 禁改用
+- STRUCTURE：两段建置沿革速记（1.0KB+6.8KB）迁 docs/archive/STRUCTURE-ARCHIVE.md·「九个子板块」改描述式·87 页口径
+- 捎带：W693 级联漏 add 4 页（index/cross-time-danmaku/tag-cloud/dukou-engine）+ inline_css --force 全站 330 页 INLINED 归一重同步
+- 验证：verify_delivery 核心全绿（43 段自洽）·pytest 293/293·CSP 856 页 0 漂移·第 28 门禁 87 页 0 违规·check_js_syntax/check_structure 全绿·ruff 0 错·新页 file:// 冒烟 PASS（36 节点/筛选/tooltip/详情/0 报错）·visual-judge 双态复验 PASS
