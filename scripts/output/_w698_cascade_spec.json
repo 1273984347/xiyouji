@@ -1,0 +1,18 @@
+{
+  "batch": "W698",
+  "version": "v2.3.292",
+  "date": "2026-10-11",
+  "desc": "门禁scope分级与提交重试批",
+  "title": "W698 门禁scope分级与提交重试批",
+  "changelog_body": "\n\n> **来源**：外部「挑刺」P2 两条经用户裁决「动工」落地（挑刺报告 2026-10-11·扫描型自评）。\n> - **scope 分级**：verify_delivery.py --scope full|docs|site|auto——11 个内联廉价段恒跑、32 个 subprocess 委托段按生效集短路（_GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper），段自洽锁非 full 档按子集断言；auto 白名单分类（越界文件与未跟踪 docs/site 内容文件一律回退 full），.git/hooks/pre-commit 传 --scope auto（本地件），CI verify-delivery job 与批收尾恒全量；实测 docs 档 2.3s vs 全量 62s（热缓存）。\n> - **提交重试**：scripts/safe_commit.py——并行会话 ref-lock 竞争核对并行增量与 pathspec 无交集后自动重试一次（self-test 4 负样本）。\n> - **体量**：release.py 步骤 3 仓库体量体检（count-objects·1GB 告警线·禁历史重写）+ git gc 存量回收（.git 427→102MB·松散 13691→0）。\n> - **验证**：verify full 44 段自洽绿（scope full/site/docs/auto 四态实跑）+ safe_commit self-test 4/4 + pytest 293 全过 + ruff 0 错。\n> - **文件**：scripts/verify_delivery.py、scripts/safe_commit.py（新增）、scripts/release.py、CLAUDE.md（第 9 条）、AGENTS.md §4.3、对账表。\n> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。\n",
+  "head_entry": "2026-10-11（v2.3.292 W698 门禁scope分级与提交重试批）",
+  "head_sentence": "门禁分级提速与提交重试与体量回收",
+  "milestone_block": "- **v2.3.292 W698 门禁scope分级与提交重试批**：\n  - verify_delivery --scope 四态（docs 档 2.3s vs 全量 62s·白名单分类保守回退 full·CI 与批收尾恒全量）\n  - safe_commit 提交重试（ref-lock 竞争·并行增量无交集才重试·self-test 4 例）\n  - release.py 步骤 3 体量体检 + git gc 回收（.git 427→102MB）\n  - worktree 每会话一树根治候选登记待裁决\n",
+  "agents_note": "2026-10-11（v2.3.292 W698）门禁scope分级与提交重试批（用户裁决「动工」·外部挑刺 P2 两条落地）：§4.3 补录 pre-commit --scope 分级与 safe_commit 提交重试条目 + release.py 步骤 3 仓库体量体检（1GB 告警）+ git gc 存量回收（.git 427→102MB）+ CLAUDE.md 第 9 条扩 safe_commit 指引，无 § 结构性变更",
+  "file_index_rows": [
+    "| scripts/verify_delivery.py | W698 | --scope full/docs/site/auto 四态分级 |",
+    "| scripts/safe_commit.py | W698 | 新增：ref-lock 竞争提交重试 |",
+    "| scripts/release.py | W698 | 步骤 3 仓库体量体检（1GB 告警） |",
+    "| CLAUDE.md | W698 | 第 9 条扩 safe_commit 指引 |"
+  ]
+}

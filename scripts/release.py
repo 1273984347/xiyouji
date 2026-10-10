@@ -39,7 +39,7 @@ def run(cmd: list[str], cwd=ROOT, check=True) -> tuple[int, str]:
 def step1_sync_docs() -> bool:
     """步骤 1：sync_docs.py 4 规则全 PASS。"""
     print("=" * 60)
-    print("步骤 1/4: 文档一致性校验 (sync_docs.py)")
+    print("步骤 1/5: 文档一致性校验 (sync_docs.py)")
     print("=" * 60)
     rc, _ = run([sys.executable, str(SCRIPTS / "sync_docs.py")], check=False)
     if rc != 0:
@@ -53,7 +53,7 @@ def step1_sync_docs() -> bool:
 def step2_git_status() -> bool:
     """步骤 2：git 状态干净（无未提交改动）。"""
     print("\n" + "=" * 60)
-    print("步骤 2/4: git 状态检查")
+    print("步骤 2/5: git 状态检查")
     print("=" * 60)
     rc, out = run(["git", "status", "--porcelain"], check=False)
     if rc != 0:
@@ -77,10 +77,48 @@ def step2_git_status() -> bool:
     return True
 
 
-def step3_pytest() -> bool:
-    """步骤 3：pytest 测试通过。"""
+def step3_repo_size() -> bool:
+    """步骤 3：仓库体量体检（W698·P2-1：count-objects 监视 + 1GB 告警线）。
+
+    背景：.git 体量曾达 427MB（其中 318MB 为未打包松散对象）；全站 sweep 批次
+    （CSP 重生成等）每次把整站页面字节写入历史。监视不阻断日常提交，只在
+    发布体检时对超线告警。处置红线：禁历史重写（裁决史以 SHA 锚定），
+    超线时走「gc 回收 / 归档治理 / 大文件增量组装」路线。
+    """
     print("\n" + "=" * 60)
-    print("步骤 3/4: 测试套件 (pytest)")
+    print("步骤 3/5: 仓库体量体检 (git count-objects)")
+    print("=" * 60)
+    rc, out = run(["git", "count-objects", "-v"], check=False)
+    if rc != 0:
+        print("[WARN] git 命令失败（可能未初始化 git），跳过体量体检")
+        return True
+    stats = {}
+    for line in out.splitlines():
+        if ":" in line:
+            k, v = line.split(":", 1)
+            try:
+                stats[k.strip()] = int(v.strip())
+            except ValueError:
+                pass
+    loose_mb = stats.get("size", 0) / 1024.0      # size 单位 KB
+    pack_mb = stats.get("size-pack", 0) / 1024.0  # size-pack 单位 KB
+    total_mb = loose_mb + pack_mb
+    print("[INFO] 松散对象 %d 个 / %.0f MB；打包 %.0f MB；合计约 %.0f MB"
+          % (stats.get("count", 0), loose_mb, pack_mb, total_mb))
+    if stats.get("count", 0) > 20000:
+        print("[INFO] 松散对象偏多，建议择机 git gc（打包后通常可缩 60%+）")
+    if total_mb > 1024:
+        print("[FAIL] 仓库体量超过 1GB 告警线（%.0f MB）——走 gc/归档/增量组装路线，"
+              "禁历史重写（裁决史 SHA 锚定）" % total_mb)
+        return False
+    print("[OK] 仓库体量在 1GB 告警线内")
+    return True
+
+
+def step4_pytest() -> bool:
+    """步骤 4：pytest 测试通过。"""
+    print("\n" + "=" * 60)
+    print("步骤 4/5: 测试套件 (pytest)")
     print("=" * 60)
     tests_dir = ROOT / "tests"
     if not tests_dir.exists():
@@ -94,10 +132,10 @@ def step3_pytest() -> bool:
     return True
 
 
-def step4_checklist(target_version: str) -> None:
-    """步骤 4：打印发布动作 checklist。"""
+def step5_checklist(target_version: str) -> None:
+    """步骤 5：打印发布动作 checklist。"""
     print("\n" + "=" * 60)
-    print(f"步骤 4/4: 发布动作 checklist (目标版本: {target_version})")
+    print(f"步骤 5/5: 发布动作 checklist (目标版本: {target_version})")
     print("=" * 60)
     print(f"""
 发布前最后动作（人工执行）：
@@ -140,8 +178,9 @@ def main():
     if not ok:
         return 1
     ok = step2_git_status() and ok
-    ok = step3_pytest() and ok
-    step4_checklist(target)
+    ok = step3_repo_size() and ok
+    ok = step4_pytest() and ok
+    step5_checklist(target)
 
     print("\n" + "=" * 60)
     if ok:

@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W697），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W698），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.292（2026-10-11）：W698 门禁scope分级与提交重试批
+
+> **来源**：外部「挑刺」P2 两条经用户裁决「动工」落地（挑刺报告 2026-10-11·扫描型自评）。
+> - **scope 分级**：verify_delivery.py --scope full|docs|site|auto——11 个内联廉价段恒跑、32 个 subprocess 委托段按生效集短路（_GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper），段自洽锁非 full 档按子集断言；auto 白名单分类（越界文件与未跟踪 docs/site 内容文件一律回退 full），.git/hooks/pre-commit 传 --scope auto（本地件），CI verify-delivery job 与批收尾恒全量；实测 docs 档 2.3s vs 全量 62s（热缓存）。
+> - **提交重试**：scripts/safe_commit.py——并行会话 ref-lock 竞争核对并行增量与 pathspec 无交集后自动重试一次（self-test 4 负样本）。
+> - **体量**：release.py 步骤 3 仓库体量体检（count-objects·1GB 告警线·禁历史重写）+ git gc 存量回收（.git 427→102MB·松散 13691→0）。
+> - **验证**：verify full 44 段自洽绿（scope full/site/docs/auto 四态实跑）+ safe_commit self-test 4/4 + pytest 293 全过 + ruff 0 错。
+> - **文件**：scripts/verify_delivery.py、scripts/safe_commit.py（新增）、scripts/release.py、CLAUDE.md（第 9 条）、AGENTS.md §4.3、对账表。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### v2.3.291（2026-10-11）：W697 复盘报告第四篇入库批
 
