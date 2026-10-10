@@ -1208,7 +1208,10 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    </style>
+        /* W674 WP-3.13 (D4 default A): one-shot animations (wordFloat/bladeCut/crackOpen end at opacity:0)
+       must not play under reduced motion - skip to static fully-visible state */
+    .scalpel-word, .scalpel-blade, .text-crack { animation: none !important; }
+</style>
 <style>
         /* e-track-exempt: chart-data-colors 5 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
