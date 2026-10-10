@@ -11,6 +11,17 @@
 ---
 
 
+## W695 W695 第门禁挂载与 CSP 全站收紧批（2026-10-10·v2.3.289）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/verify_delivery.py | W695 | 第 39 槽时间线双源挂载+自洽锁 44 段 |
+| scripts/check_story_timeline_sync.py | W695 | 门禁汇总行（38 槽同款 marker） |
+| scripts/generate_csp.py | W695 | EXTERNAL_SCRIPT_HOSTS 清空·docstring 同步 |
+| AGENTS.md | W695 | §4.2 第 39 门禁条目 |
+| docs/00-导读/文档规范.md | W695 | §8 引用式行对齐至第 39 门禁 |
+| site/ 全站 HTML | W695 | CSP script-src 收紧重生成（856 页） |
+
 ## W694 W694 故事内时间线可视化页落地批（2026-10-10·v2.3.288）
 
 | 文件 | W | 说明 |

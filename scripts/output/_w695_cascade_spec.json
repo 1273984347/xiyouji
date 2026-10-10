@@ -1,0 +1,20 @@
+{
+  "batch": "W695",
+  "version": "v2.3.289",
+  "date": "2026-10-10",
+  "desc": "第 39 门禁挂载与 CSP 全站收紧批",
+  "title": "W695 第 39 门禁挂载与 CSP 全站收紧批",
+  "changelog_body": "\n\n> **来源**：用户对第六轮外审报告两项候裁的批复——同步校验器挂载第 39 门禁；CSP 全站收紧立项。\n> - **第 39 门禁挂载**：check_story_timeline_sync.py 上岗 verify 第 39 槽——timeline.py KEY_EVENTS 与 story-timeline.html EMBEDDED_DATA 逐条比对（chapter/event/characters/顺序 + phase 区间映射），wrapper 同款（crash 即拦 + 汇总行断言防静默跳过）；--self-test 篡改/缺条/phase 三类负样本全捕获；VERIFY_SECTIONS 自洽锁 43→44 段；AGENTS §4.2 第 39 条目 + 文档规范 §8 引用式行对齐。\n> - **CSP 全站收紧**：generate_csp.py EXTERNAL_SCRIPT_HOSTS 清空——script-src 从 self+d3js.org+cdnjs.cloudflare.com 收紧为 self+内联哈希，856 页全部重生成；grep 实证 W456 禁外域 CDN 后全站零外域脚本/样式加载（唯一下划线命中为 GitHub dataset 普通链接非资源）；收紧后 story-timeline file:// 冒烟零报错（无 CSP 拒载）。\n> - **验证**：verify_delivery 核心全绿（44 段自洽·第 39 门禁上岗）；generate_csp --check 0 漂移；js 语法/CSS 结构全绿；ruff 0 错；batch_cascade 原生 dry+apply 自检过。\n> - **文件**：scripts/verify_delivery.py（第 39 槽+自洽 44）、scripts/check_story_timeline_sync.py（门禁汇总行）、scripts/generate_csp.py（白名单清空）、AGENTS.md（§4.2 第 39 条目）、docs/00-导读/文档规范.md（§8 对齐）、site/ 856 页 CSP 重生成、六文档级联、对账表。\n> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。\n",
+  "head_entry": "2026-10-10（v2.3.289 W695 第 39 门禁挂载与 CSP 全站收紧批）",
+  "head_sentence": "第 39 门禁上岗与全站 CSP 收紧落地",
+  "milestone_block": "- **v2.3.289 W695 第 39 门禁挂载与 CSP 全站收紧批**：\n  - verify 第 39 槽故事内时间线双源同步（check_story_timeline_sync.py·逐条比对+phase 区间·self-test 三负样本·自洽锁 43→44 段）\n  - CSP script-src 全站收紧为 self+哈希（EXTERNAL_SCRIPT_HOSTS 清空·856 页重生成·零外域引用实证）\n  - AGENTS §4.2 第 39 条目 + 文档规范 §8 引用式对齐",
+  "agents_note": "；2026-10-10（v2.3.289 W695）第 39 门禁挂载与 CSP 全站收紧批：verify 第 39 槽故事内时间线双源同步（check_story_timeline_sync.py·自洽锁 43→44 段）加 AGENTS §4.2 第 39 条目与文档规范 §8 对齐加 CSP script-src 全站收紧为 self 加哈希（EXTERNAL_SCRIPT_HOSTS 清空·856 页重生成·W456 后零外域引用 grep 实证）",
+  "file_index_rows": [
+    "| scripts/verify_delivery.py | W695 | 第 39 槽时间线双源挂载+自洽锁 44 段 |",
+    "| scripts/check_story_timeline_sync.py | W695 | 门禁汇总行（38 槽同款 marker） |",
+    "| scripts/generate_csp.py | W695 | EXTERNAL_SCRIPT_HOSTS 清空·docstring 同步 |",
+    "| AGENTS.md | W695 | §4.2 第 39 门禁条目 |",
+    "| docs/00-导读/文档规范.md | W695 | §8 引用式行对齐至第 39 门禁 |",
+    "| site/ 全站 HTML | W695 | CSP script-src 收紧重生成（856 页） |"
+  ]
+}

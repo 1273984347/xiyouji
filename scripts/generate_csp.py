@@ -3,7 +3,7 @@
 generate_csp.py — 全站 CSP（Content Security Policy）生成 / 注入 / 校验
 
 为 site/**/*.html 逐页生成并注入 <meta http-equiv="Content-Security-Policy">：
-  - script-src 'self' + d3js.org/cdnjs（外部脚本白名单，与 SRI 加固同源）
+  - script-src 'self'（W695 起外部脚本白名单移除——W456 禁外域 CDN 后全站零外域脚本加载，grep 实证无引用）
       + 该页全部内联 <script> 的 SHA-256 哈希（无 'unsafe-inline' / 'unsafe-eval'；
       全站 0 eval 已核；graph-explorer / mobile-index 的动态 onclick 与
       javascript: URL 已改事件绑定，脚本可严格哈希化）
@@ -47,7 +47,7 @@ def _w536_guard_open(path, *a, **k):
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 项目根
 SITE = os.path.join(ROOT, "site")
 
-EXTERNAL_SCRIPT_HOSTS = ["https://d3js.org", "https://cdnjs.cloudflare.com"]
+EXTERNAL_SCRIPT_HOSTS = []  # W695 收紧：W456 禁外域 CDN 后零引用（grep 实证），script-src 仅 self+哈希
 RAG_ORIGIN = "http://127.0.0.1:8777"
 # GoatCounter 计数端点（W425 接入真实跨访客统计）：count.js 回传 PV 到此源
 GOATCOUNTER_COUNT_ORIGIN = "https://1273984347.goatcounter.com"
