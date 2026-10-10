@@ -291,8 +291,8 @@ DRL 报告中**禁用**以下字眼：
 
 ### 项目内 DRL 历史记录
 
-- [../../scripts/output/drl-screenshot-review.md](../../scripts/output/drl-screenshot-review.md)：Phase Screenshot Review 收敛记录
-- [../../scripts/output/drl-r1-findings.md](../../scripts/output/drl-r1-findings.md)：Phase C v0.9 收敛记录
+- scripts/output/drl-screenshot-review.md：Phase Screenshot Review 收敛记录（本地产物不入仓）
+- scripts/output/drl-r1-findings.md：Phase C v0.9 收敛记录（本地产物不入仓）
 
 ### mem-wrap-up Step 4a/7a 协议联动
 
