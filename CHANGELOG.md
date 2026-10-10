@@ -4,13 +4,21 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W696），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W697），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.291（2026-10-11）：W697 复盘报告第四篇入库批
+
+> **来源**：用户下发《工作复盘与优化分析系统提示词（AI Agent 专用版）》模板，按惯例产出第四篇复盘并入库。
+> - **报告入库**：docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-11.md（第 36 篇·范围=年表勘正/六轮外报处置/story-timeline 链/第 39 门禁/CSP 收紧/全变动复审，与第二篇双会话机制面、第三篇 S4 外报面互不覆盖）——E 经验 8 项量化排序（落地前重验磁盘 4.75/双源机器防线 4.50/同类漏网扫荡矩阵 4.25/三方考据对拍 4.00 等）；S 三卡 S-23 原文考据对拍器、S-24 双源校验器家族化、S-25 复审扫荡器（待拍板）；U 3 项决策（暂缓×2/放弃×1）；SC 高优 3 场景全沉淀；P 16 例当日全闭环（P0=0·P1=2）+ FAM 六族 PRE 全配（三族已获门禁级验证）+ 复发率目标 0 与三色预警；WF-01 外报处置流六步（单轮约 -70%【假设】）+ WF-02 新页契约 18 步（附录 A）；WBS A-01~04 与可行性自评可行。+ 方法论 README 索引第 36 行。
+> - **验证**：verify_delivery 核心全绿（44 段自洽）；ruff 0 错；batch_cascade 原生 dry+apply 自检过；文档-only 批按范围判定触发 CI+Security。
+> - **文件**：docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-11.md（新增）、docs/10-方法论沉淀/README.md（索引第 36 行）、六文档级联、对账表。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### v2.3.290（2026-10-10）：W696 工作复盘与优化分析报告第二篇入库（W693 三裁决+W694/W695 并行周期·含 §6.1 同类问题复发预防专项）
 
