@@ -1,0 +1,23 @@
+{
+  "batch": "W694",
+  "version": "v2.3.288",
+  "date": "2026-10-10",
+  "desc": "故事内时间线可视化页落地批",
+  "title": "W694 故事内时间线可视化页落地批",
+  "changelog_body": "\n\n> **来源**：用户对上轮裁决报告批复「可以」——① STRUCTURE 存量速记段专项清理；② 为故事内时间线立项建可视化页。\n> - **story-timeline.html 新页落地**（site/data/ 第 87 个可视化页·EMBEDDED 单源）：36 关键事件回目轴五泳道图（阶段筛选/悬停 tooltip/点击详情/明细表），数据与 scripts/F_时间/timeline.py 输出 timeline.json 同步锚定；新页契约自查过：INLINED 双 CSS、CSP 重生成、sitemap 851 条、og/canonical（非配对页无 hreflang 合规）、chart-degrade scroll-x、可引用性四判据、.chart-tooltip 统一层、count-up 白名单、色板全 token（暗色自适应）。\n> - **年表/timeline.py 事实勘正**（上批外审裁决落地）：timeline/西游记大事年表.md 按分回回目与第九十九回难簿勘正（81 难序表重写、齐天大圣归属第 4 回、第 9-10 回魏征袁守诚归位、灭法国 84 与玉华州 88-90 与天竺 93-95 与寇员外 96-97、5040 日与 14 年口径合一）；timeline.py KEY_EVENTS 24→36 条与年表对齐（补 12 回目锚点、修 18→19 收八戒）并重生成 timeline.json；脚本 docstring 数据链声明去虚（site/data/timeline.html 系真实历史三轴页·与本脚本无关）。\n> - **_template.html 路径组根治**：模板混用 site 根与 data 两态路径（head 四脚本加面包屑为根态、d3 为 data 态）统一为 data-ready 形态（与部署页逐项对照一致），补齐自述缺失的 d3 preload，CDN 示例注释改「W456 禁改用」，路径组注记列全 7 项。\n> - **STRUCTURE 速记段归档**：两段批次沿革速记（1.0KB 加 6.8KB）迁 docs/archive/STRUCTURE-ARCHIVE.md，「九个子板块」改描述式实数。\n> - **捎带**：W693 级联漏 add 的 4 页（index/cross-time-danmaku/tag-cloud/dukou-engine）INLINED 重同步随本批入仓（W537③ 同族）；inline_css force 全站 330 页归一重同步（INLINED 标记行缩进归一）。\n> - **验证**：verify_delivery 核心全绿；generate_csp check 0 漂移（856 页）；check_js_syntax 与 check_structure 全绿；新页 file:// 冒烟（36 节点/筛选/无 pageerror）；ruff 新脚本 0 错；batch_cascade 原生 dry 加 apply 自检过。\n> - **文件**：site/data/story-timeline.html（新增）、site/data/tag-cloud.html（81 条登记）、site/sitemap.xml（851 条）、site/_template.html、timeline/西游记大事年表.md、scripts/F_时间/timeline.py、scripts/output/data/timeline.json、STRUCTURE.md、docs/archive/STRUCTURE-ARCHIVE.md、README 与项目说明与交接与 AGENTS 计数级联、六文档级联、对账表。\n> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。\n",
+  "head_entry": "2026-10-10（v2.3.288 W694 故事内时间线可视化页落地批）",
+  "head_sentence": "故事内时间线可视化页与年表勘正全落地",
+  "milestone_block": "- **v2.3.288 W694 故事内时间线可视化页落地批**：\n  - 新页 site/data/story-timeline.html（EMBEDDED 单源·36 事件回目轴五泳道·阶段筛选/tooltip/详情/明细表）·86→87 页口径级联\n  - timeline 年表勘正与 timeline.py 锚点同步（24→36）·timeline.json 重生成\n  - _template.html 路径组 data-ready 化 + STRUCTURE 速记段归档 + W693 漏 add 4 页捎带",
+  "agents_note": "；2026-10-10（v2.3.288 W694）故事内时间线可视化页落地批：site/data/story-timeline.html 新增（87 页口径级联）加 timeline 年表勘正与 timeline.py 锚点同步（24→36·重生成 json）加 _template 路径组 data-ready 化与禁 CDN 注记加 STRUCTURE 速记段归档与 86→87 计数级联（AGENTS §1/§3）",
+  "file_index_rows": [
+    "| site/data/story-timeline.html | W694 | 故事内时间线可视化页（EMBEDDED 单源·36 事件回目轴五泳道） |",
+    "| timeline/西游记大事年表.md | W694 | 外审事实勘正（难序/回目归属/人物/数据链声明） |",
+    "| scripts/F_时间/timeline.py | W694 | KEY_EVENTS 24→36 与年表对齐·docstring 去虚 |",
+    "| scripts/output/data/timeline.json | W694 | 重生成（36 条） |",
+    "| site/_template.html | W694 | 路径组 data-ready 化加禁 CDN 注记 |",
+    "| site/data/tag-cloud.html | W694 | 页面登记（81 条） |",
+    "| site/sitemap.xml | W694 | 851 条重生成 |",
+    "| STRUCTURE.md | W694 | 速记段归档加子板块表述修正加 87 页 |",
+    "| docs/archive/STRUCTURE-ARCHIVE.md | W694 | 迁入两段建置沿革 |"
+  ]
+}

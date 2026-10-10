@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-2De52xEfxtgrrOOPaoXHgbJIdiD5y3IHNNgL6JMXg9w='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-RDEYTG1d5J9TmNcfn8UWQpJfcMBBIbg57FIUNTJonDI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>全站标签云 · 可视化导航中心 · 详解西游记</title>
@@ -23,12 +23,12 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
  * ----------------------------------------------
- * v2.3.285 · W691 Backlog 裁决执行批 · v2.3.284 · W678 站点质量修复批次六 · v2.3.283 · W677 站点质量修复批次五 · v2.3.281 · W690 安全告警处置 · v2.3.280 · W689 全变动对抗复审修复批 · v2.3.279 · W688 第六轮复审处置迷你批 · v2.3.278 · W687 S4 外部审读处置与投稿体系批 · v2.3.277 · W686 工作流方案退役与预留清理 · v2.3.276 · W685 复盘下半场报告入库与工具收尾 · v2.3.275 · W684 工作复盘报告入库 · v2.3.274 · W680 agent-web 引擎更换与全模型适配 · v2.3.273 · W679 workflow 工业化方案入库与评估密钥引导 · v2.3.272 · W675 工作复盘报告入库 · v2.3.271 · W674 站点质量批次三 · v2.3.270 · W673 站点质量批次二 · v3 · W476 纸感轻立体（在 v2/W334 基础上增层 · 见 DESIGN.md §4A）
+ * v2.3.288 · W694 故事内时间线可视化页落地批 · v3 · W476 纸感轻立体（在 v2/W334 基础上增层 · 见 DESIGN.md §4A）
  * 全站统一设计令牌 + 字体分层 + hero 覆写层。
  *
  * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
@@ -1665,7 +1665,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
 
     // ============================================================
-    // EMBEDDED_DATA: site/data/ 目录下全部 79 个 HTML 页面元数据
+    // EMBEDDED_DATA: 全站可视化页元数据（81 条·含站点根仪表盘）
     // 字段: file(文件名) title(标题) category(分类) tags(标签) size(数据维度数) desc(描述)
     // ============================================================
     const EMBEDDED_DATA = [
@@ -1702,12 +1702,13 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         {file:"jurisprudence.html", title:"法理", category:"v-ah", tags:["法理","法律","正义","秩序"], size:6, desc:"法理学视角下的正义与秩序"},
         {file:"material-archaeology.html", title:"物质考古", category:"v-ah", tags:["物质","考古","文物","器物"], size:5, desc:"物质考古学器物分析"},
         {file:"linguistics.html", title:"语言学", category:"v-ah", tags:["语言","语言学","语义","语法"], size:7, desc:"语言学与语义分析"},
-        // ===== Q 系列 (9) =====
+        // ===== Q 系列 (10) =====
         {file:"criticism-history.html", title:"批评史", category:"q-series", tags:["批评","历史","评论","接受史"], size:7, desc:"西游记批评史与评论流变"},
         {file:"cross-time-danmaku.html", title:"跨时空弹幕", category:"q-series", tags:["弹幕","跨时空","互动","评论"], size:6, desc:"跨时空弹幕互动评论"},
         {file:"concept-device.html", title:"概念装置", category:"q-series", tags:["概念","装置","工具","方法"], size:5, desc:"概念装置与分析工具"},
         {file:"emotional-heatmap.html", title:"情感热力图", category:"q-series", tags:["情感","热力图","情绪","可视化"], size:7, desc:"情感热力图可视化"},
         {file:"timeline.html", title:"时间线", category:"q-series", tags:["时间线","年表","编年","事件"], size:8, desc:"西游记事件编年时间线"},
+        {file:"story-timeline.html", title:"故事内时间线", category:"q-series", tags:["时间线","大事年表","八十一难","回目轴"], size:8, desc:"故事内关键事件回目轴时间线"},
         {file:"ai-dialogue.html", title:"AI 对话", category:"q-series", tags:["AI","对话","智能","生成"], size:6, desc:"AI 对话生成与交互"},
         {file:"text-search.html", title:"文本检索", category:"q-series", tags:["检索","搜索","文本","索引"], size:7, desc:"全文检索系统与索引"},
         {file:"century-dialogue.html", title:"世纪对话", category:"q-series", tags:["世纪","对话","跨时代","思想"], size:5, desc:"跨世纪思想对话"},

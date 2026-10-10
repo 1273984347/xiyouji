@@ -4,13 +4,25 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W693），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W694），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.288（2026-10-10）：W694 故事内时间线可视化页落地批
+
+> **来源**：用户对上轮裁决报告批复「可以」——① STRUCTURE 存量速记段专项清理；② 为故事内时间线立项建可视化页。
+> - **story-timeline.html 新页落地**（site/data/ 第 87 个可视化页·EMBEDDED 单源）：36 关键事件回目轴五泳道图（阶段筛选/悬停 tooltip/点击详情/明细表），数据与 scripts/F_时间/timeline.py 输出 timeline.json 同步锚定；新页契约自查过：INLINED 双 CSS、CSP 重生成、sitemap 851 条、og/canonical（非配对页无 hreflang 合规）、chart-degrade scroll-x、可引用性四判据、.chart-tooltip 统一层、count-up 白名单、色板全 token（暗色自适应）。
+> - **年表/timeline.py 事实勘正**（上批外审裁决落地）：timeline/西游记大事年表.md 按分回回目与第九十九回难簿勘正（81 难序表重写、齐天大圣归属第 4 回、第 9-10 回魏征袁守诚归位、灭法国 84 与玉华州 88-90 与天竺 93-95 与寇员外 96-97、5040 日与 14 年口径合一）；timeline.py KEY_EVENTS 24→36 条与年表对齐（补 12 回目锚点、修 18→19 收八戒）并重生成 timeline.json；脚本 docstring 数据链声明去虚（site/data/timeline.html 系真实历史三轴页·与本脚本无关）。
+> - **_template.html 路径组根治**：模板混用 site 根与 data 两态路径（head 四脚本加面包屑为根态、d3 为 data 态）统一为 data-ready 形态（与部署页逐项对照一致），补齐自述缺失的 d3 preload，CDN 示例注释改「W456 禁改用」，路径组注记列全 7 项。
+> - **STRUCTURE 速记段归档**：两段批次沿革速记（1.0KB 加 6.8KB）迁 docs/archive/STRUCTURE-ARCHIVE.md，「九个子板块」改描述式实数。
+> - **捎带**：W693 级联漏 add 的 4 页（index/cross-time-danmaku/tag-cloud/dukou-engine）INLINED 重同步随本批入仓（W537③ 同族）；inline_css force 全站 330 页归一重同步（INLINED 标记行缩进归一）。
+> - **验证**：verify_delivery 核心全绿；generate_csp check 0 漂移（856 页）；check_js_syntax 与 check_structure 全绿；新页 file:// 冒烟（36 节点/筛选/无 pageerror）；ruff 新脚本 0 错；batch_cascade 原生 dry 加 apply 自检过。
+> - **文件**：site/data/story-timeline.html（新增）、site/data/tag-cloud.html（81 条登记）、site/sitemap.xml（851 条）、site/_template.html、timeline/西游记大事年表.md、scripts/F_时间/timeline.py、scripts/output/data/timeline.json、STRUCTURE.md、docs/archive/STRUCTURE-ARCHIVE.md、README 与项目说明与交接与 AGENTS 计数级联、六文档级联、对账表。
+> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。
 
 ### v2.3.287（2026-10-10）：W693 用户三裁决执行批 — A-01 残留扫挂载第 38 门禁 + A-02 S 卡拍板记录 + A-05 S4 docx 重生成（本地件）
 
