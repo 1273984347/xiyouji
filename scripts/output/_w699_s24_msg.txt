@@ -1,0 +1,6 @@
+feat(w699): S-24 首对定做落地——check_chapter_stats_sync.py（chapter_stats 双源校验器·实测零漂移）
+
+- 模板沿用 check_story_timeline_sync（W695）：chapter_stats.py 系纯 regex 确定性分析——重跑生成器为真值，与 site/data/chapter-stats.html 的 EMBEDDED_DATA（JSON 直嵌·8 标量键+per_chapter[100]）全量比对；以重跑产物而非 gitignored 本地 json 为基准，使校验器 CI 可复现
+- 首跑实测：重跑产物 == 页面内嵌·100 回全量一致（W563 快照仍准确·语料稳定+生成器确定性）——零漂移零重灌
+- --self-test：正样本零误报 + 标量/条目两负样本全捕获；ruff 0 错
+- 登记面：S-24 候选 3 对状态收口——chapter_stats 已定做（本件）/timeline↔story-timeline 第 39 门禁覆盖/timeline↔timeline.html 键名撞名误报豁免；verify 第 40 槽挂载为候批事项待用户裁决
