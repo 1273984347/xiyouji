@@ -92,8 +92,10 @@ def main():
         for s in issues[:10]:
             print("  -", s)
         print("处置：按 W691 规则重灌页面 EMBEDDED（修复前旧值登记第 38 门禁标记）并重跑 generate_csp")
+        print("---- 第 40 门禁 chapter_stats 双源同步：漂移 %d 项 ----" % len(issues))
         return 1
     print("OK chapter_stats 双源一致（重跑产物 == 页面 EMBEDDED·%d 回全量比对）" % len(page.get("per_chapter", [])))
+    print("---- 第 40 门禁 chapter_stats 双源同步：重跑真值 == EMBEDDED · %d 回全量 · 漂移 0 ----" % len(page.get("per_chapter", [])))
     return 0
 
 
