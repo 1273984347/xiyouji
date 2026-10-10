@@ -50,7 +50,7 @@ KEY_EVENTS = [
     {"chapter": 32, "event": "平顶山金角银角", "characters": ["孙悟空", "猪八戒", "金角大王", "银角大王", "太上老君"]},
     {"chapter": 41, "event": "大战红孩儿，观音收为善财童子", "characters": ["孙悟空", "红孩儿", "观音"]},
     {"chapter": 47, "event": "通天河金鱼精", "characters": ["孙悟空", "灵感大王", "观音"]},
-    {"chapter": 53, "event": "女儿国子母河", "characters": ["唐僧", "猪八戒"]},
+    {"chapter": 53, "event": "女儿国，蝎子精", "characters": ["唐僧", "蝎子精"]},
     {"chapter": 57, "event": "真假美猴王", "characters": ["孙悟空", "六耳猕猴", "如来"]},
     {"chapter": 59, "event": "三借芭蕉扇，降牛魔王", "characters": ["孙悟空", "铁扇公主", "牛魔王"]},
     {"chapter": 65, "event": "小雷音寺黄眉怪", "characters": ["孙悟空", "黄眉怪", "弥勒"]},

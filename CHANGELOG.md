@@ -21,7 +21,7 @@
 > - **STRUCTURE 速记段归档**：两段批次沿革速记（1.0KB 加 6.8KB）迁 docs/archive/STRUCTURE-ARCHIVE.md，「九个子板块」改描述式实数。
 > - **捎带**：W693 级联漏 add 的 4 页（index/cross-time-danmaku/tag-cloud/dukou-engine）INLINED 重同步随本批入仓（W537③ 同族）；inline_css force 全站 330 页归一重同步（INLINED 标记行缩进归一）。
 > - **验证**：verify_delivery 核心全绿；generate_csp check 0 漂移（856 页）；check_js_syntax 与 check_structure 全绿；新页 file:// 冒烟（36 节点/筛选/无 pageerror）；ruff 新脚本 0 错；batch_cascade 原生 dry 加 apply 自检过。
-> - **文件**：site/data/story-timeline.html（新增）、site/data/tag-cloud.html（81 条登记）、site/sitemap.xml（851 条）、site/_template.html、timeline/西游记大事年表.md、scripts/F_时间/timeline.py、scripts/output/data/timeline.json、STRUCTURE.md、docs/archive/STRUCTURE-ARCHIVE.md、README 与项目说明与交接与 AGENTS 计数级联、六文档级联、对账表。
+> - **文件**：site/data/story-timeline.html（新增）、site/data/tag-cloud.html（81 条登记）、site/sitemap.xml（851 条）、site/_template.html、timeline/西游记大事年表.md、scripts/F_时间/timeline.py、scripts/output/data/timeline.json（.gitignore:59 本地产物·实不入仓·据 6154137 核对补注）、STRUCTURE.md、docs/archive/STRUCTURE-ARCHIVE.md、README 与项目说明与交接与 AGENTS 计数级联、六文档级联、对账表。
 > - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。
 
 ### v2.3.287（2026-10-10）：W693 用户三裁决执行批 — A-01 残留扫挂载第 38 门禁 + A-02 S 卡拍板记录 + A-05 S4 docx 重生成（本地件）
