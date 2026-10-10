@@ -38,6 +38,7 @@ MARKERS = [
     ('category: "人间", chapter: "第14回"', "W691 geo3d 到达回口径（两界山 13）", ["site/data/journey-geo-3d.html"]),
     ('category: "妖界", chapter: "第40-42回"', "W691 geo3d 到达回口径（号山 39）", ["site/data/journey-geo-3d.html"]),
     ("narratology-13d", "W676 改名 16d 回归防", ["site/**/*.html", "site/static/**/*.js"]),
+    ("13维叙事学网络", "W676 改名 16d 回归防·汉字形态（W695 review 补·narratology-13d 在改名后已空转）", ["site/**/*.html"]),
     ("词牌分布", "W676 诗词类别分布措辞回归防", SITE_ALL),
     ("21 位说话者", "W691 说话者 23 位回归防", SITE_ALL),
     ("708441", "W691 语料总量 719752 回归防", SITE_ALL + ["site/static/js/text-search-app.js"]),
