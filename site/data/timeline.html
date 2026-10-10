@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Bm3F9pLlky1dsi1OlFSkhjXA7uFQXQbWgzokvSRX64A=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qMNKn/HBOJ/gf4W/ox0wpCdTlFoT1+y8eBTF0/hIpMU=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>交互式时间线 · 详解西游记</title>
@@ -1562,7 +1562,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <nav class="breadcrumb"><a href="../dashboard.html">数据看板</a> → 交互式时间线</nav>
 
         <div class="notice" id="dataSource">
-            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）｜注记：1592 世德堂本与 1663 证道书同现于成书史、版本演变两轴，系刻意设计——同一事件的两面（原著刊行史／评点阐释史）。
         <div class="cite-block" id="citeBox">
   数据源：页面内嵌 EMBEDDED 数据（run_all 批量生成 JSON 快照于构建时嵌入·快照 2026-10-04） 由 <code>scripts/run_all.py</code> 批量生成（口径与参数见 dataset 同名 JSON 与生成脚本源）。
   <details class="cite-details">
@@ -1811,7 +1811,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const height = 460;
         const innerW = Math.max(width - margin.left - margin.right, 200);
 
-        const xMin = 600, xMax = 2040;
+        const _years = data.map(d => d.year);
+        const xMin = Math.min(..._years) - 15, xMax = Math.max(..._years) + 15;  // A-01：数据驱动域·消右留白
         const x = d3.scaleLinear().domain([xMin, xMax]).range([margin.left, margin.left + innerW]);
 
         const laneY = { composition: 110, version: 235, influence: 360 };
@@ -1822,7 +1823,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr('preserveAspectRatio', 'xMidYMid meet')
             .attr('role', 'img')
             .attr('aria-labelledby', 'tl-svg-title');
-        svg.append('title').attr('id', 'tl-svg-title').text('三轴时间线：成书史 + 版本演变 + 文化影响三泳道，横轴 600-2040 年，hover 圆点查看事件详情');
+        svg.append('title').attr('id', 'tl-svg-title').text('三轴时间线：成书史 + 版本演变 + 文化影响三泳道，横轴年份自适应数据范围，hover 圆点查看事件详情');
 
         // 时代背景带
         ERAS.forEach(e => {

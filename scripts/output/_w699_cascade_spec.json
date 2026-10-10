@@ -1,0 +1,22 @@
+{
+  "batch": "W699",
+  "version": "v2.3.293",
+  "date": "2026-10-11",
+  "desc": "三卡工具化与三报告批",
+  "title": "W699 三卡工具化与三报告批",
+  "changelog_body": "\n\n> **来源**：用户对第四篇复盘报告三卡（S-23/24/25）与登记项（A-01/02/04）批复「开工」（W681 三键联调维持用户侧等待）。\n> - **S-23 原文考据对拍器**：scripts/source_collate.py——难簿原文序（第 099 回难簿段 80 项+补足 81 老鼋淬水）×回目行×dataset/81-hardships.json 三方对拍；模式 --full/--entity/--chap/--year-table/--self-test；解析器经逗号分词+逐 token 非贪牙匹配（初版贪牙吞「二十」二字致重号 61 项·段起点带前缀两项教训均在自检内暴露修复）；验收=年表 81 难表回放 11 行 0 差异+self-test 难簿锚点 3 点与序名错配/81 错名两负样本全捕获。\n> - **S-24 双源校验器家族化**：scripts/check_dual_source_scan.py——发现器扫「default_output 生成器×EMBEDDED 页面」候选对（信号收紧为 .json 引用或 EMBEDDED 顶层键同名，排除自身防自指覆盖）；产出候选 3 对：chapter_stats（**真实新发现·待定做**）、timeline↔story-timeline（已有第 39 门禁覆盖）、timeline↔timeline.html（键名撞名误报 1 对·在验收容忍 ≤1 内）；逐对比对沿用 check_story_timeline_sync 模板按对定做。\n> - **S-25 复审扫荡器**：scripts/review_sweep.py——变动类→零命中断言矩阵（R1 旧数据链断言/R2 现役计数漂移/R3 已勘误事实断言·含路径与行级排除面：归档/历史批次行/复盘合法引用/自身）；--range 附变更清单回放；--self-test 探针捕获自证；首跑 3 规则 0 命中·区间 6154137..efd03fa 回放 889 文件。\n> - **A-01 timeline 历史三轴页打磨包**：x 轴 domain 由硬编码 600-2040 改数据驱动 ±15 年（消右留白）+aria 文案同步+1592/1663 双轴语义注记（dataSource 内·同一事件两面：原著刊行史/评点阐释史）+tag-cloud 条目 desc/tags 纠偏为历史三轴语义；CSP 0 漂移。\n> - **A-02 难簿序与 dataset 对拍报告**（只读·供 BL-8）：docs/10-方法论沉淀/难簿序与dataset对拍报告-2026-10-11.md——命名一致 24/81·名异 57·ds 多出 26（后段系另一套枚举）；章节锚点抽查一致；三选项（重建对齐/维持加注/分段统一）供作者裁决；dataset 零改动。\n> - **A-04 人名用字两态盘点**（只读）：docs/10-方法论沉淀/人名用字两态盘点-魏征-2026-10-11.md——site 徵:征=202:112·docs/01 混用 39:47·语料 4:42·引文行 0:1（第 20 门禁已强制语料形态·语料残留 4 处徵）；三选项建议 3+2。\n> - **验证**：verify_delivery 核心全绿（44 段自洽）；三器 ruff 0 错且 self-test 全过；CSP 0 漂移；batch_cascade 原生 dry+apply 自检过。\n> - **文件**：scripts/source_collate.py、scripts/check_dual_source_scan.py、scripts/review_sweep.py（均新增）、site/data/timeline.html、site/data/tag-cloud.html、docs/10-方法论沉淀/难簿序与dataset对拍报告-2026-10-11.md（新增）、docs/10-方法论沉淀/人名用字两态盘点-魏征-2026-10-11.md（新增）、docs/10-方法论沉淀/README.md（索引 37/38）、六文档级联、对账表。\n> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。\n",
+  "head_entry": "2026-10-11（v2.3.293 W699 三卡工具化与三报告批）",
+  "head_sentence": "三卡工具化与三报告入库",
+  "milestone_block": "- **v2.3.293 W699 三卡工具化与三报告批**：\n  - S-23 原文考据对拍器（三方对拍·年表回放 0 差异·self-test 全过）+ S-24 双源发现器（候选 3 对·新发现 chapter_stats 待定做）+ S-25 复审扫荡器（3 规则 0 命中·回放 889 文件）\n  - A-01 三轴页打磨（数据驱动域+双轴注记+tag-cloud 条目纠偏）·A-02 难簿对拍报告（24/81 一致·供 BL-8）·A-04 用字盘点（site 徵 64%·引文已归一）\n  - 方法论 README 索引 37/38 行·两报告只读不入 dataset",
+  "agents_note": "；2026-10-11（v2.3.293 W699）三卡工具化与三报告批：S-23 原文考据对拍器（source_collate.py·三方对拍+年表回放 0 差异）加 S-24 双源发现器（check_dual_source_scan.py·候选 3 对新发现 chapter_stats）加 S-25 复审扫荡器（review_sweep.py·3 规则 0 命中）加 A-01 三轴页打磨与 A-02 难簿对拍报告（供 BL-8 只读）与 A-04 用字盘点报告加 方法论 README 索引 37/38 行",
+  "file_index_rows": [
+    "| scripts/source_collate.py | W699 | S-23 原文考据三方对拍器 |",
+    "| scripts/check_dual_source_scan.py | W699 | S-24 双源对发现器 |",
+    "| scripts/review_sweep.py | W699 | S-25 复审扫荡器 |",
+    "| site/data/timeline.html | W699 | A-01 数据驱动域+双轴注记 |",
+    "| site/data/tag-cloud.html | W699 | A-01 timeline 条目纠偏 |",
+    "| docs/10-方法论沉淀/难簿序与dataset对拍报告-2026-10-11.md | W699 | A-02 对拍报告（供 BL-8·只读） |",
+    "| docs/10-方法论沉淀/人名用字两态盘点-魏征-2026-10-11.md | W699 | A-04 用字盘点（只读） |",
+    "| docs/10-方法论沉淀/README.md | W699 | 索引 37/38 行 |"
+  ]
+}
