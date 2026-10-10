@@ -269,8 +269,8 @@ abort 走 3 选 1：
 
 ### 项目内闭环执行记录
 
-- [../../scripts/output/drl-screenshot-review.md](../../scripts/output/drl-screenshot-review.md)：Phase Screenshot Review DRL 收敛记录
-- [../../scripts/output/drl-r1-findings.md](../../scripts/output/drl-r1-findings.md)：Phase C v0.9 DRL 收敛记录
+- scripts/output/drl-screenshot-review.md：Phase Screenshot Review DRL 收敛记录（本地产物不入仓）
+- scripts/output/drl-r1-findings.md：Phase C v0.9 DRL 收敛记录（本地产物不入仓）
 
 ### memory 文件
 

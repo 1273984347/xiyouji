@@ -491,7 +491,10 @@ def main():
         if r.returncode == 0:
             ok("docs 全量链接校验通过（lint_links 0 broken）")
         else:
-            tail = (r.stdout.splitlines()[-3:] + r.stderr.splitlines()[-3:])
+            # W700 热修：tail 只捞 BROKEN/汇总行——原 stdout[-3:] 会混入 OK 行（CI 首跑实证）
+            tail = ([x for x in r.stdout.splitlines()
+                     if "[BROKEN]" in x or "校验完成" in x][-3:]
+                    + r.stderr.splitlines()[-3:])
             fail("docs 存在 broken 链接（lint_links exit %d）：%s" % (r.returncode, " / ".join(tail)))
     except Exception as e:
         fail("docs 链接校验执行异常: %s" % e)
