@@ -75,7 +75,7 @@ EXPECTED_SECTION_NAMES = [
     "降级声明",
     "文档口径", "CLAUDE速查",
     "head内容", "CSS变量引用",
-    "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源",
+    "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源", "chapter双源",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
@@ -98,7 +98,7 @@ SCOPE_SITE_SECTIONS = {
     "双源漂移", "CSP漂移", "腐蚀插件", "内联语法", "CSS平衡", "token覆盖",
     "动效禁令", "a11y对比", "INLINED完整", "动态链接", "图表自洽", "数据一致",
     "SEOhead", "可引用性", "设计令牌对账", "色盲安全", "降级声明", "head内容",
-    "CSS变量引用", "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源",
+    "CSS变量引用", "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源", "chapter双源",
     "文档口径", "W区间字面量", "索引健康", "治理契约",
 }
 _SCOPE_CORE = {"期望版本", "dukou页脚", "六文档同步", "范围漂移"}
@@ -116,6 +116,7 @@ _GATE_SUMMARY_MARKERS = {
     "kpi基类": "---- 第 37 门禁 kpi 基类：",
     "内嵌残留": "---- 第 38 门禁 页面内嵌残留标记：",
     "时间线双源": "---- 第 39 门禁 故事内时间线双源同步：",
+    "chapter双源": "---- 第 40 门禁 chapter_stats 双源同步：",
 }
 
 
@@ -1074,6 +1075,25 @@ def main():
             fail("时间线双源门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
         else:
             ok("时间线双源门禁通过（%s）" % (r.stdout.splitlines()[-2] if len(r.stdout.splitlines()) >= 2 else "无输出"))
+
+
+    section("chapter双源")
+    # ---- chapter_stats 双源同步门禁（第 40 槽·W699 用户裁决「挂载为 verify 第 40 槽」：
+    # chapter_stats.py 纯 regex 确定性分析——重跑生成器为真值与页面 EMBEDDED 全量比对；
+    # 以重跑产物为基准使校验器 CI 可复现（gitignored 本地 json 不作基准）。wrapper 同款）----
+    cs_py = os.path.join(_HERE, "check_chapter_stats_sync.py")
+    try:
+        r = subprocess.run([sys.executable, cs_py], capture_output=True, text=True, timeout=300)
+    except Exception as e:
+        fail("chapter双源门禁执行异常（第 40 槽·crash 即拦）: %s" % e)
+    else:
+        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
+        if r.returncode != 0:
+            fail("chapter双源漂移（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+        elif "---- 第 40 门禁 chapter_stats 双源同步：" not in r.stdout:
+            fail("chapter双源门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
+        else:
+            ok("chapter双源门禁通过（%s）" % (r.stdout.splitlines()[-2] if len(r.stdout.splitlines()) >= 2 else "无输出"))
 
 
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----

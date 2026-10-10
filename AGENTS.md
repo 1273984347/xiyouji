@@ -141,6 +141,7 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 37. **kpi-card 基类**（check_kpi_card_base.py，W673 挂载·WP-2.6：W557 基类被 W563 洗掉 122 页裸奔的双保险复发防线——C1 system.css 含全局 .kpi-card 别名基类 + C2 使用页 INLINED 块含该规则（link 直引 system.css 豁免·模板壳排除）；--self-test 2 例）
 38. **页面内嵌残留标记**（check_embedded_stale_markers.py，W693 挂载·W692 报告 A-01 用户裁决：json 副本修复批的 EMBEDDED 双路径回归防线——修复前旧值即标记（万圣公主遗物/白虎洞/中将级/STD：/六耳/芭蕉扇钉耙旧措辞/佛位/流沙河/稀柿同/geo3d 旧章值/13d/词牌分布/21 位说话者/708441 共 17 组·新增双路径修复随批登记标记），任一标记在作用域页面命中即 FAIL；--self-test 注入式负样本 2 例）
 39. **故事内时间线双源同步**（check_story_timeline_sync.py --self-test 三负样本，W695 挂载·第 39 门禁：六轮外审 P1-4——timeline.py KEY_EVENTS 与 site/data/story-timeline.html EMBEDDED_DATA 为人工同步的机器防线：逐条比对 chapter/event/characters/顺序 + phase 区间映射；失配即 FAIL 阻断；改锚点须同批重灌页内嵌副本并重跑 generate_csp）
+40. **chapter_stats 双源同步**（check_chapter_stats_sync.py --self-test 两负样本，W699 挂载·第 40 门禁：chapter_stats.py 系纯 regex 确定性分析——重跑生成器为真值与 chapter-stats.html EMBEDDED_DATA 全量比对，gitignored 本地 json 不作基准使校验器 CI 可复现；漂移即 FAIL 并按 W691 规则重灌页内嵌副本）
 
 ### 4.3 脚本工具链要点
 

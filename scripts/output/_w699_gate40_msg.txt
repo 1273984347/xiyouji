@@ -1,0 +1,7 @@
+feat(w699): chapter_stats 双源校验器挂载 verify 第 40 门禁（用户裁决）——自洽锁 44→45 段
+
+- 第 40 门禁：check_chapter_stats_sync.py 上岗——chapter_stats.py 纯 regex 确定性分析，重跑生成器为真值与 chapter-stats.html EMBEDDED_DATA 全量比对（gitignored 本地 json 不作基准·CI 可复现）；wrapper 同款 crash 即拦+汇总行断言防静默跳过；漂移即 FAIL 并按 W691 规则重灌页内嵌副本
+- 校验器补 38/39/40 槽同款门禁汇总行；verify 三处挂载面齐改（主名单/scope site 集/汇总行 marker 映射）+ section 块；VERIFY_SECTIONS 自洽锁 44→45 段实测相符
+- 文档对齐：AGENTS §4.2 第 40 条目 + 文档规范 §8 引用式行对齐至第 40 门禁
+- 验证：verify_delivery 核心全绿（45 段·第 40 门禁在岗·首跑即过）；ruff 0 错
+- 版段/对账表追记随下一级联批（递延通道·W649 口径；提交时并行批 W700 级联在途为避让其 CHANGELOG/对账表写入面）
