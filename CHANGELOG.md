@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W699），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W700），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.294（2026-10-11）：W700 docs全量链接门禁与断链清债批
+
+> **来源**：外部「挑刺」P1（docs 活文档断链+链接门禁覆盖缺口）与 P3-1/P3-2 捎带项，经用户裁决「①+捎带」落地。
+> - **断链清债 22 条**：13d→16d 死链×8（docs/03 专题×4 文本+URL、docs/S2 学术候选×4——W676 重命名 sweep 漏网）+ skills 退役死链去链保文×7（docs/10 两篇方法论——W562 删除正源无存活承接载体）+ 并行批归档改链相对深度错×5（方法论 README ../../archive→../archive）+ STRUCTURE 根级双跳出×1 + 决策清单 S4 本地件去链×1。
+> - **lint_links 五改**：① fenced/inline code 去噪（site-quality 方案档正则文本曾被误判为链接）② git check-ignore 豁免本地产物（docs/S4 双盲件 102 条噪音出清——字节流 UTF-8 防 GBK 错位+C 引号双反斜杠归一两坑实证）③ docs/archive/ 冻结档默认排除 ④ POSIX 根绝对路径跳过（agent-web Vite 入口形态）⑤ _w588_ce.html 快照件点名排除。
+> - **第 6 门禁扩域**：docs01链接→**docs链接**（--dir docs 全量，挂载即绿：docs 口径 5191 链接 0 broken、全仓口径 19472 链接 0 broken），AGENTS §4.2 第 6 条措辞同步。
+> - **ci.yml 残件清理**：screenshots-regression→**pages-smoke**（Site Smoke HTTP 200 存活烟测·名实相符），fallback 扫描与永不产出的 screenshots/diff artifact 两残件删除；真实截图回归仍在 screenshot-review.yml。
+> - **验证**：lint docs 0 broken+全仓 0 broken；verify full 44 段自洽绿（docs/site 两 scoped 档实跑）+ ruff 0 错 + pytest 293 全过。
+> - **文件**：scripts/lint_links.py、scripts/verify_delivery.py、.github/workflows/ci.yml、docs/03×4、docs/S2×4、docs/10×3、STRUCTURE.md、六文档级联、对账表。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### v2.3.293（2026-10-11）：W699 三卡工具化与三报告批
 

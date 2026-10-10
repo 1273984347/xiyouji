@@ -1,0 +1,20 @@
+{
+  "batch": "W700",
+  "version": "v2.3.294",
+  "date": "2026-10-11",
+  "desc": "docs全量链接门禁与断链清债批",
+  "title": "W700 docs全量链接门禁与断链清债批",
+  "changelog_body": "\n\n> **来源**：外部「挑刺」P1（docs 活文档断链+链接门禁覆盖缺口）与 P3-1/P3-2 捎带项，经用户裁决「①+捎带」落地。\n> - **断链清债 22 条**：13d→16d 死链×8（docs/03 专题×4 文本+URL、docs/S2 学术候选×4——W676 重命名 sweep 漏网）+ skills 退役死链去链保文×7（docs/10 两篇方法论——W562 删除正源无存活承接载体）+ 并行批归档改链相对深度错×5（方法论 README ../../archive→../archive）+ STRUCTURE 根级双跳出×1 + 决策清单 S4 本地件去链×1。\n> - **lint_links 五改**：① fenced/inline code 去噪（site-quality 方案档正则文本曾被误判为链接）② git check-ignore 豁免本地产物（docs/S4 双盲件 102 条噪音出清——字节流 UTF-8 防 GBK 错位+C 引号双反斜杠归一两坑实证）③ docs/archive/ 冻结档默认排除 ④ POSIX 根绝对路径跳过（agent-web Vite 入口形态）⑤ _w588_ce.html 快照件点名排除。\n> - **第 6 门禁扩域**：docs01链接→**docs链接**（--dir docs 全量，挂载即绿：docs 口径 5191 链接 0 broken、全仓口径 19472 链接 0 broken），AGENTS §4.2 第 6 条措辞同步。\n> - **ci.yml 残件清理**：screenshots-regression→**pages-smoke**（Site Smoke HTTP 200 存活烟测·名实相符），fallback 扫描与永不产出的 screenshots/diff artifact 两残件删除；真实截图回归仍在 screenshot-review.yml。\n> - **验证**：lint docs 0 broken+全仓 0 broken；verify full 44 段自洽绿（docs/site 两 scoped 档实跑）+ ruff 0 错 + pytest 293 全过。\n> - **文件**：scripts/lint_links.py、scripts/verify_delivery.py、.github/workflows/ci.yml、docs/03×4、docs/S2×4、docs/10×3、STRUCTURE.md、六文档级联、对账表。\n> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。\n",
+  "head_entry": "2026-10-11（v2.3.294 W700 docs全量链接门禁与断链清债批）",
+  "head_sentence": "链接门禁扩全量与断链清债",
+  "milestone_block": "- **v2.3.294 W700 docs全量链接门禁与断链清债批**：\n  - 断链清债 22 条（13d→16d×8/skills 去链×7/归档深度×5/STRUCTURE×1/决策清单×1）\n  - lint_links 五改（code 去噪+check-ignore 豁免+archive 排除+POSIX 绝对路径+快照件）\n  - 第 6 门禁扩域 docs 全量（挂载即绿双口径 0 broken）+ AGENTS §4.2 措辞\n  - ci.yml pages-smoke 更名去残件（真实截图回归在 screenshot-review.yml）\n",
+  "agents_note": "2026-10-11（v2.3.294 W700）docs全量链接门禁与断链清债批（用户裁决「①+捎带」·挑刺 P1 与 P3-1/P3-2 落地）：断链 22 修（13d→16d×8 加 skills 去链×7 加归档深度×5 加 STRUCTURE×1 加决策清单×1）加 lint_links 五改（code 去噪 加 check-ignore 豁免 加 archive 排除 加 POSIX 绝对路径跳过 加快照件排除）加 verify 第 6 门禁扩域 docs 全量改名 docs链接（挂载即绿双口径 0 broken）加 ci.yml pages-smoke 更名去残件，§4.2 第 6 条措辞同步",
+  "file_index_rows": [
+    "| scripts/lint_links.py | W700 | 五改：code 去噪+check-ignore+archive 排除+POSIX 跳过+快照件 |",
+    "| scripts/verify_delivery.py | W700 | 第 6 门禁扩域 docs 全量改名 docs链接 |",
+    "| .github/workflows/ci.yml | W700 | pages-smoke 更名去残件 |",
+    "| docs/03-主题与情节专题 | W700 | 13d→16d 死链修复×4 |",
+    "| docs/S2-学术投稿 | W700 | 13d→16d 死链修复×4 |",
+    "| docs/10-方法论沉淀 | W700 | skills 去链×7+归档深度×5+决策清单去链 |"
+  ]
+}

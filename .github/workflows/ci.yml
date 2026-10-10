@@ -1,7 +1,8 @@
 name: CI
 
 # W263-E1 CI/CD 深化（v2.2.47）：9 矩阵测试 + pip 缓存 + 30 天 artifact + 失败重试 3 次
-# 保留 W234 三轨（screenshots/lighthouse/a11y），新增 dependency-scan + code-quality
+# W234 三轨已演进：screenshots→pages-smoke 存活烟测（W699 更名去残件）+lighthouse+a11y，
+# 另有 dependency-scan + code-quality + pytest-unit + verify-delivery + agent-web-build
 # W264-E2 a11y 深化：a11y-audit 升级为 9 规则 WCAG 2.2 AA
 on:
   push:
@@ -19,8 +20,11 @@ permissions:
   contents: read
 
 jobs:
-  screenshots-regression:
-    name: Screenshots Regression (Playwright)
+  pages-smoke:
+    # W699 更名：screenshots-regression 名不符实（tools/screenshot-baseline.js 从未
+    # 存在，W390 注记）——本 job 实为全站 HTTP 200 存活烟测；真实截图回归在
+    # screenshot-review.yml（双视口实拍+暗色门禁）。同批清除 fallback/artifact 残件。
+    name: Site Smoke (all pages HTTP 200)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -91,39 +95,10 @@ jobs:
           })();
           "
 
-      - name: Fallback screenshot scan (site/data/*.html)
-        if: failure() || steps.screenshot-baseline.outcome != 'success'
-        run: |
-          mkdir -p screenshots-diff
-          echo "tools/screenshot-baseline.js 未就绪，扫描 site/data/*.html 列表：" > screenshots-diff/README.txt
-          ls site/data/*.html >> screenshots-diff/README.txt || true
-
       - name: Stop static server
         if: always()
         run: |
           if [ -f server.pid ]; then kill "$(cat server.pid)" || true; fi
-
-      - name: Upload screenshots artifact
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        with:
-          name: screenshots-${{ github.sha }}
-          path: |
-            screenshots/
-            screenshots-diff/
-          if-no-files-found: ignore
-          retention-days: 30
-
-      - name: Upload diff images on failure
-        if: failure()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        with:
-          name: screenshots-diff-${{ github.sha }}
-          path: |
-            screenshots-diff/
-            **/*-diff.png
-          if-no-files-found: ignore
-          retention-days: 30
 
   lighthouse-performance:
     name: Lighthouse Performance (perf/a11y/bp/seo)
@@ -324,7 +299,7 @@ jobs:
         run: pip install -r scripts/requirements.txt
 
       # W401 修复：tests/ 全量（pytest.ini testpaths=tests + --ignore=tests/e2e
-      # 排除需 playwright browser 的 test_narratology_render.py，由 screenshots-regression job 覆盖）
+      # 排除需 playwright browser 的 test_narratology_render.py，由 pages-smoke job 的存活烟测覆盖（W699 更名））
       - name: Run pytest (unit + root tests)
         run: python -m pytest tests -q
 
