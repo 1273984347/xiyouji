@@ -1209,7 +1209,9 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    </style>
+      html[data-theme="dark"] svg [fill="rgb(128, 0, 38)" i] { fill: #b8556a; }
+  html[data-theme="dark"] svg [fill="rgb(163, 1, 38)" i] { fill: #c46e76; }  /* W674 连带：YlOrRd 第二深格 L=0.149 同样越阈 */  /* W674 连带：色标修复后 interpolateYlOrRd(1) 首次真实出现（d3 插值器输出 rgb 形态·hex 选择器不命中——W621 假 0 教训三犯） */  /* W674 WP-3.8 连带：色标修复后 interpolateYlOrRd(1) 新出现 */
+</style>
 <style>
         /* === 仅本页特有样式 === */
         .container { max-width: 1280px; margin: 0 auto; }

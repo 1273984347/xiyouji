@@ -1,0 +1,6 @@
+fix(w694): 暗色门禁热修——inline_css --force 洗掉页内私有规则四页回灌 + AGENTS §4.3 登记工具地雷
+
+- 根因：W674 批曾把部分页面的暗色重映射/reduce-motion 规则追加在 INLINED <style> 块内部，W694 的 inline_css --force 按源重建该块时静默吞掉——CI 暗色门禁（W579 only-increase）拦下 character-semantic-network 中英双页 invisible 0→1（暗底深红格 rgb(128,0,38)/rgb(163,1,38) 失去重映射）
+- 回灌四页 10 行：语义网中英双页暗色 YlOrRd 重映射 ×2 行/页 + criticism-history 中英双页 reduce-motion 块 ×3 行/页（从 6154137~1 提取缺失行·按文件 EOL 插回 INLINED 块尾·scripts/_w694_hotfix_restore.py）
+- 本地复跑 S2 暗色审计双页 inv=0；verify_delivery 核心全绿；CSP 0 漂移（纯 CSS·无脚本哈希变化）
+- AGENTS §4.3 W571 条目补地雷登记：--force 后必须核对当批 diff 删除行是否仅标记行；页内私有规则一律写独立 style 块，禁追加进 INLINED 块内部

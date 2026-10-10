@@ -1209,7 +1209,10 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    </style>
+        /* W674 WP-3.13④：一次性演出动画（wordFloat/bladeCut/crackOpen 终态 opacity:0）
+       在 reduce 下不播放——0.01ms 快进仍会停在「文字消失」终态，直接回到基础可见态 */
+    .scalpel-word, .scalpel-blade, .text-crack { animation: none !important; }
+</style>
 <style>
         /* e-track-exempt: chart-data-colors 5 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
