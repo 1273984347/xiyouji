@@ -25,6 +25,9 @@ const CONSOLE_WHITELIST = [
   'net::ERR_FAILED',
   'net::ERR_ABORTED',
   'Failed to load resource',
+  // W701：file:// 下 @font-face 以 origin 'null' 加载站内字体触发 CORS 策略提示，
+  // 与 F4 的 fetch ERR_CONNECTION_REFUSED 同属 file:// 环境噪音（http 部署态同源无此错）
+  'blocked by CORS policy',
 ];
 
 function parseArgs(argv) {
@@ -51,15 +54,46 @@ function isWhitelistedConsole(text) {
   return CONSOLE_WHITELIST.some((w) => text.includes(w));
 }
 
+function chromeCandidates() {
+  // W701 可移植性修正：原回退硬编码 Windows Chrome 路径。优先 CHROME_PATH 环境变量，
+  // 再按平台列常见安装位；playwright 自带 chromium 仍是最优先（launchBrowser 首选）。
+  const list = [];
+  if (process.env.CHROME_PATH) list.push(process.env.CHROME_PATH);
+  if (process.platform === 'win32') {
+    list.push(
+      'C:/Program Files/Google/Chrome/Application/chrome.exe',
+      'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
+      path.join(process.env.LOCALAPPDATA || '', 'Google', 'Chrome', 'Application', 'chrome.exe'),
+    );
+  } else if (process.platform === 'darwin') {
+    list.push('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome');
+  } else {
+    list.push('/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser');
+  }
+  return list.filter(Boolean);
+}
+
 async function launchBrowser() {
   try {
     return await chromium.launch();
-  } catch (e) {
-    return chromium.launch({
-      executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
-      headless: true,
-      args: ['--no-sandbox'],
-    });
+  } catch (bundledErr) {
+    let lastErr = bundledErr;
+    for (const exe of chromeCandidates()) {
+      if (!fs.existsSync(exe)) continue;
+      try {
+        return await chromium.launch({
+          executablePath: exe,
+          headless: true,
+          args: ['--no-sandbox'],
+        });
+      } catch (e) {
+        lastErr = e;
+      }
+    }
+    throw new Error(
+      'playwright chromium 与系统 Chrome 均不可用（可设 CHROME_PATH 环境变量或 npx playwright install chromium）: '
+      + String(lastErr).slice(0, 120),
+    );
   }
 }
 
