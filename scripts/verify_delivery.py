@@ -75,7 +75,7 @@ EXPECTED_SECTION_NAMES = [
     "降级声明",
     "文档口径", "CLAUDE速查",
     "head内容", "CSS变量引用",
-    "声明分隔", "孤立选择", "kpi基类",
+    "声明分隔", "孤立选择", "kpi基类", "内嵌残留",
 ]
 
 CORE_DOCS = [
@@ -906,6 +906,24 @@ def main():
             fail("kpi 基类门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
         else:
             ok("kpi 基类门禁通过（%s）" % (r.stdout.splitlines()[-1] if r.stdout.splitlines() else "无输出"))
+
+    section("内嵌残留")
+    # ---- 页面内嵌残留标记门禁（第 38 槽·W693/W692 报告 A-01 用户裁决：json 副本修复批的
+    # EMBEDDED 双路径回归防线——修复前旧值即标记（W691 review 6 页漏网样本即验收用例），
+    # 新增标记随批在 MARKERS 登记。wrapper 同款）----
+    em_py = os.path.join(_HERE, "check_embedded_stale_markers.py")
+    try:
+        r = subprocess.run([sys.executable, em_py], capture_output=True, text=True, timeout=180)
+    except Exception as e:
+        fail("内嵌残留门禁执行异常（第 38 槽·crash 即拦）: %s" % e)
+    else:
+        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
+        if r.returncode != 0:
+            fail("内嵌残留标记命中（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+        elif "---- 第 38 门禁 页面内嵌残留标记：" not in r.stdout:
+            fail("内嵌残留门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
+        else:
+            ok("内嵌残留门禁通过（%s）" % (r.stdout.splitlines()[-2] if len(r.stdout.splitlines()) >= 2 else "无输出"))
 
 
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----

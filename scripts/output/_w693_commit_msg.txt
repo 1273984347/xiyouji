@@ -1,0 +1,7 @@
+fix(w693): 用户三裁决执行批——A-01 残留扫挂载第 38 门禁 + A-02 S 卡拍板记录 + A-05 S4 docx 重生成（本地件不入仓）
+
+- A-01：scripts/check_embedded_stale_markers.py 新增（S-16 吸收·W692 报告 A-01 用户裁决）——EMBEDDED 双路径回归防线，语义=「修复前旧值即标记」（17 组：万圣公主遗物/白虎洞/中将级/demo/STD：/六耳句/对火系无效/钉耙性别条款/佛位/流沙河/稀柿同/geo3d 旧章值×2/13d/词牌分布/21 位说话者/708441），任一命中即 FAIL，--self-test 注入负样本通过；verify 第 38 槽挂载（wrapper+汇总行断言）+自洽名单 43 段；AGENTS §4.2 第 38 条目+文档规范 §8 引用式对齐；首跑即拦下 W691 自身注记残留旧字面量 708441 一处并修正（text-search.html）——门禁上岗当天即产证
+- A-02：S 卡拍板记录入交接 Backlog——S-16 吸收为第 38 门禁；S-17 内嵌重灌器/S-18 契约冒烟精化登记工具化排期；存量 S-04~S-15 十二张全部关闭不建置（skills/ W562 退役），逐卡标注吸收路径（test_site_quality/断言式脚本/e2e 探针/S4 docx 工具链/sync_data_json/派发边界/engine.smoke/告警裁决两账/手工级联模板/渠道落夹/第 21 门禁/无触发）
+- A-05（本地件不入仓·S4 双盲纪律）：可验证性方向 8 个 md 示范坐标修正（第 2 回 line 9→第 1 回 line 99·经 line_check.py 新语料实测四锚点全验 99/1/45/43）+正文补记「底本语料再度单源化重建·上述风险第二次应验」（与文中第一手材料段自洽）+图 C-2 重生成（_s4c_figures.py fig2 三行更新→SVG→PNG 2x）+两份 docx 重生成（_c_track_md2docx.js+脚注修复 PASS）+Word COM 验收（投稿版 21 页/适配版 22 页）
+
+验证：verify_delivery 核心全绿（43 段自洽·第 38 门禁上岗）；generate_csp --check 0 漂移；pytest 293/293；ruff 新脚本 0 错；batch_cascade 原生 dry+apply 自检过（交接 CR 自愈一项）。
