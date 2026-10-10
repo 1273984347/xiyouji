@@ -8,10 +8,10 @@
     2. 修改 <title>、.hero 内标题 / 副标题 / tagline
     3. 在 EMBEDDED_DATA 区块替换为页面专属数据
     4. 在图表占位区编写 D3 渲染逻辑
-  注意：本模板全部相对路径已按 site/data/ 落位预写（../tokens.css、../js/、../static/js/、../index.html），
-        复制到 site/data/ 后路径零修改；若直接在 site/ 根预览，需临时去掉各 ../ 前缀。
-        路径整组：tokens.css + js/theme-init.js + js/rum.js + js/visit-log.js
-        + static/js/goatcounter.js + static/js/d3.v7.min.js + 面包屑 index/dashboard 链接，改一处须全组核对。
+  注意：本模板全部相对路径已按 site/data/ 落位预写（../js/、../static/js/、../index.html；
+        tokens/system CSS 已内嵌为 INLINED 块无需引用），复制到 site/data/ 后路径零修改；
+        若直接在 site/ 根预览，需临时去掉各 ../ 前缀。路径整组：js/theme-init.js + js/rum.js
+        + js/visit-log.js + static/js/goatcounter.js + static/js/d3.v7.min.js + 面包屑 index/dashboard 链接。
   不修改现有页面，本模板仅供未来新页面使用。
 
   【W334 图表规范】
