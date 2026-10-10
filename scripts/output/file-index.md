@@ -11,6 +11,15 @@
 ---
 
 
+## W698 W698 门禁scope分级与提交重试批（2026-10-11·v2.3.292）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/verify_delivery.py | W698 | --scope full/docs/site/auto 四态分级 |
+| scripts/safe_commit.py | W698 | 新增：ref-lock 竞争提交重试 |
+| scripts/release.py | W698 | 步骤 3 仓库体量体检（1GB 告警） |
+| CLAUDE.md | W698 | 第 9 条扩 safe_commit 指引 |
+
 ## W697 W697 复盘报告第四篇入库批（2026-10-11·v2.3.291）
 
 | 文件 | W | 说明 |

@@ -14,7 +14,7 @@
 6. **file:// 铁律**：新页面必须 EMBEDDED 回退 + 零外域依赖 → AGENTS.md §6-5
 7. **引文先探针**：写「> 原文引文」前跑 `scripts/_cite_probe.py`，禁凭记忆编造 → AGENTS.md §4.3
 8. **级联与并发**：batch_cascade 落盘后按 `_cascade_files_<批号>.txt` 逐面 add；并行批次 pathspec 提交互斥；W 编号动工前在 docs/00-导读/W批次编号对账表.md 登记认领 → AGENTS.md §4.3
-9. **commit 规范**：多行信息 Write 临时文件 + `git commit -F`，禁 heredoc；`type(scope): 描述` → AGENTS.md §4.3 / docs/00-导读/文档规范.md §6
+9. **commit 规范**：多行信息 Write 临时文件 + `git commit -F`，禁 heredoc；并行会话提交走 `python scripts/safe_commit.py -F <file> <pathspec...>`（ref-lock 竞争自动重试）；`type(scope): 描述` → AGENTS.md §4.3 / docs/00-导读/文档规范.md §6
 10. **禁擅改**：CHANGELOG 历史段、归档、verify_delivery.py、bump_version.py 等管控文件，改动须经用户批准 → docs/00-导读/文档规范.md §11.2
 
 ## 常用命令（可直接复制）

@@ -78,6 +78,96 @@ EXPECTED_SECTION_NAMES = [
     "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源",
 ]
 
+# ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
+# 四态：full=全量（缺省·CI verify-delivery job·批收尾七步③恒为 full）；docs=文档轨子集；
+# site=页面轨+级联相关文档段；auto=按变更路径白名单分类（任何越界文件保守回退 full）。
+# 11 个内联廉价段（版本/计数/导航/sitemap walk）恒跑不跳；跳过只作用于 32 个 subprocess
+# 委托段：_scoped_run 统一短路，_GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
+# 校验（fake stdout 含段标记，wrapper 不会误判「缺汇总行」）；段自洽锁按 scope 断言子集。
+_DOC_FILES_RE = re.compile(
+    r"^(docs/.+\.md|(CHANGELOG|交接文档|README|STRUCTURE|CLAUDE)\.md|"
+    r"scripts/output/file-index(-archive)?\.md|CITATION\.cff|"
+    r"\.github/workflows/README\.md|AGENTS\.md|dataset/glossary\.json)$")
+_SITE_FILES_RE = re.compile(
+    r"^(site/.+\.(html|css|js|xml)|dataset/.+\.json|scripts/output/data/.+\.json)$")
+SCOPE_DOCS_SECTIONS = {
+    "docs01链接", "治理契约", "索引健康", "元信息块", "术语一致", "引文核验",
+    "W区间字面量", "文档口径", "CLAUDE速查",
+}
+SCOPE_SITE_SECTIONS = {
+    "双源漂移", "CSP漂移", "腐蚀插件", "内联语法", "CSS平衡", "token覆盖",
+    "动效禁令", "a11y对比", "INLINED完整", "动态链接", "图表自洽", "数据一致",
+    "SEOhead", "可引用性", "设计令牌对账", "色盲安全", "降级声明", "head内容",
+    "CSS变量引用", "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源",
+    "文档口径", "W区间字面量", "索引健康", "治理契约",
+}
+_SCOPE_CORE = {"期望版本", "dukou页脚", "六文档同步", "范围漂移"}
+_GATE_SUMMARY_MARKERS = {
+    "可引用性": "---- 第 28 门禁：",
+    "设计令牌对账": "---- 设计令牌对账：",
+    "色盲安全": "---- 第 29 门禁 色盲安全：",
+    "降级声明": "---- 第 30 门禁 降级声明：",
+    "文档口径": "---- 第 31 门禁 文档口径体检：",
+    "CLAUDE速查": "---- 第 32 门禁 CLAUDE.md 速查层：",
+    "head内容": "---- 第 33 门禁 head 内容：",
+    "CSS变量引用": "---- 第 34 门禁 CSS 变量引用：",
+    "声明分隔": "---- 第 35 门禁 声明分隔：",
+    "孤立选择": "---- 第 36 门禁 孤立选择器：",
+    "kpi基类": "---- 第 37 门禁 kpi 基类：",
+    "内嵌残留": "---- 第 38 门禁 页面内嵌残留标记：",
+    "时间线双源": "---- 第 39 门禁 故事内时间线双源同步：",
+}
+
+
+def _parse_scope(argv):
+    """解析 --scope full|auto|docs|site（缺省 full；非法值回退 full）。"""
+    for i, a in enumerate(argv):
+        if a == "--scope" and i + 1 < len(argv):
+            return argv[i + 1]
+        if a.startswith("--scope="):
+            return a.split("=", 1)[1]
+    return "full"
+
+
+def _git_changed_files():
+    """staged ∪ unstaged 变更文件集合；git 不可用/失败 → None（回退 full）。
+    未跟踪的 docs/site 内容文件（.md/.html/.json）在场 → None（树态含未验证新文件，
+    跳过任一门禁族都不安全；tmpe/ 临时区豁免）。"""
+    files = set()
+    for args in (["diff", "--cached", "--name-only"], ["diff", "--name-only"]):
+        try:
+            r = subprocess.run(["git", "-c", "core.quotePath=false"] + args,
+                               cwd=ROOT, capture_output=True, text=True, timeout=30)
+        except Exception:
+            return None
+        if r.returncode != 0:
+            return None
+        files |= {ln.strip().replace("\\", "/") for ln in r.stdout.splitlines() if ln.strip()}
+    try:
+        r = subprocess.run(["git", "-c", "core.quotePath=false",
+                            "ls-files", "--others", "--exclude-standard"],
+                           cwd=ROOT, capture_output=True, text=True, timeout=30)
+        if r.returncode == 0:
+            for ln in r.stdout.splitlines():
+                ln = ln.strip().replace("\\", "/")
+                if ln and not ln.startswith("tmpe/") and (
+                        _DOC_FILES_RE.match(ln) or _SITE_FILES_RE.match(ln)):
+                    return None
+    except Exception:
+        return None
+    return files
+
+
+def _classify_scope(files):
+    """白名单分类：全部命中 doc-ish → docs；含 site-ish（含站点+级联混合批）→ site；
+    任何越界文件（门禁脚本/workflow/tests/baseline/一次性脚本等）→ full（保守缺省）。"""
+    norm = sorted(f.replace("\\", "/") for f in files)
+    if any(not (_DOC_FILES_RE.match(f) or _SITE_FILES_RE.match(f)) for f in norm):
+        return "full"
+    if any(_SITE_FILES_RE.match(f) for f in norm):
+        return "site"
+    return "docs"
+
 CORE_DOCS = [
     "CHANGELOG.md",
     "交接文档.md",
@@ -166,10 +256,46 @@ def main():
     def ok(msg):
         print("OK    " + msg)
 
+    # ---- scope 分级（W698）：解析 --scope → 生效段集合 → subprocess 统一短路 ----
+    scope = _parse_scope(sys.argv)
+    if scope == "auto":
+        changed = _git_changed_files()
+        scope = "full" if changed is None else _classify_scope(changed)
+    if scope not in ("full", "docs", "site"):
+        scope = "full"
+    if scope == "full":
+        active_sections = set(EXPECTED_SECTION_NAMES)
+    else:
+        active_sections = _SCOPE_CORE | (SCOPE_DOCS_SECTIONS if scope == "docs"
+                                         else SCOPE_SITE_SECTIONS)
+    print("---- verify_delivery --scope %s（生效段 %d/%d）----"
+          % (scope, len(active_sections), len(EXPECTED_SECTION_NAMES)))
+
     sections_ran = []
 
     def section(name):
         sections_ran.append(name)
+
+    # subprocess 层统一短路（W698）：当前段不在生效集 → 返回伪造成功结果。
+    # _GATE_SUMMARY_MARKERS 保证防静默跳过 wrapper 的「缺汇总行」校验不被误触发；
+    # 真 subprocess 引用在打补丁前已完成（_git_changed_files 走原 run）。
+    _subprocess_run_real = subprocess.run
+
+    class _SkipResult:
+        def __init__(self, name):
+            marker = _GATE_SUMMARY_MARKERS.get(name, "")
+            self.returncode = 0
+            self.stdout = ((marker + "\n") if marker else "") + "（--scope %s 跳过）" % scope
+            self.stderr = ""
+
+    def _scoped_run(cmd, *args, **kwargs):
+        cur = sections_ran[-1] if sections_ran else ""
+        if scope != "full" and cur not in active_sections:
+            ok("跳过 [%s]（--scope %s 未覆盖）" % (cur, scope))
+            return _SkipResult(cur)
+        return _subprocess_run_real(cmd, *args, **kwargs)
+
+    subprocess.run = _scoped_run
 
     section("期望版本")
     # ---- 期望版本动态取自 CHANGELOG 现役版段（W518；页脚为滞后型手工工件，降级为新鲜度检查）----
@@ -954,13 +1080,18 @@ def main():
         except Exception as e:
             print("WARN  /health 不可达（环境项，不阻断提交）：%s" % e)
 
-    # ---- 门禁段自洽锁（VERIFY_SECTIONS·W663/T3：声明段集合 == 实跑段集合，缺段即红）----
-    missing_sections = [n for n in EXPECTED_SECTION_NAMES if n not in sections_ran]
+    # ---- 门禁段自洽锁（VERIFY_SECTIONS·W663/T3：声明段集合 == 实跑段集合，缺段即红；
+    # W698 scope 分级：非 full 档按生效子集断言，full 档仍断言全量 43 段）----
+    expected_sections = list(EXPECTED_SECTION_NAMES) if scope == "full" else \
+        [n for n in EXPECTED_SECTION_NAMES if n in active_sections]
+    missing_sections = [n for n in expected_sections if n not in sections_ran]
     if missing_sections:
-        fail("门禁段实跑 %d ≠ 声明 %d：缺 %s（VERIFY_SECTIONS 自洽锁）"
-             % (len(set(sections_ran)), len(EXPECTED_SECTION_NAMES), "、".join(missing_sections)))
+        fail("门禁段实跑 %d ≠ 声明 %d：缺 %s（VERIFY_SECTIONS 自洽锁·--scope %s）"
+             % (len(set(sections_ran)), len(expected_sections),
+                "、".join(missing_sections), scope))
     else:
-        ok("门禁段自洽锁：实跑 %d 段 == 声明 %d 段" % (len(EXPECTED_SECTION_NAMES), len(EXPECTED_SECTION_NAMES)))
+        ok("门禁段自洽锁：实跑 %d 段 == 声明 %d 段（--scope %s）"
+           % (len(expected_sections), len(expected_sections), scope))
 
     print("\n==== 交付校验汇总 ====")
     if fails == 0:
