@@ -75,7 +75,7 @@ EXPECTED_SECTION_NAMES = [
     "降级声明",
     "文档口径", "CLAUDE速查",
     "head内容", "CSS变量引用",
-    "声明分隔", "孤立选择", "kpi基类", "内嵌残留",
+    "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源",
 ]
 
 CORE_DOCS = [
@@ -924,6 +924,25 @@ def main():
             fail("内嵌残留门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
         else:
             ok("内嵌残留门禁通过（%s）" % (r.stdout.splitlines()[-2] if len(r.stdout.splitlines()) >= 2 else "无输出"))
+
+
+    section("时间线双源")
+    # ---- 故事内时间线双源同步门禁（第 39 槽·W695 用户裁决：六轮外审 P1-4——
+    # timeline.py KEY_EVENTS 与 story-timeline.html EMBEDDED_DATA 为人工同步，
+    # 本门禁即机器防线：逐条比对 chapter/event/characters/顺序 + phase 区间映射。wrapper 同款）----
+    ts_py = os.path.join(_HERE, "check_story_timeline_sync.py")
+    try:
+        r = subprocess.run([sys.executable, ts_py], capture_output=True, text=True, timeout=120)
+    except Exception as e:
+        fail("时间线双源门禁执行异常（第 39 槽·crash 即拦）: %s" % e)
+    else:
+        tail = (r.stdout.splitlines()[-1:] + r.stderr.splitlines()[-2:])
+        if r.returncode != 0:
+            fail("时间线双源失配（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+        elif "---- 第 39 门禁 故事内时间线双源同步：" not in r.stdout:
+            fail("时间线双源门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
+        else:
+            ok("时间线双源门禁通过（%s）" % (r.stdout.splitlines()[-2] if len(r.stdout.splitlines()) >= 2 else "无输出"))
 
 
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----

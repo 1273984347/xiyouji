@@ -1,0 +1,6 @@
+fix(w695): 第 39 门禁挂载与 CSP 全站收紧——verify 第 39 槽故事内时间线双源同步（自洽锁 43→44 段）+ script-src 收紧为 self+哈希（856 页重生成·零外域引用实证）
+
+- 第 39 门禁（用户裁决）：check_story_timeline_sync.py 上岗 verify 第 39 槽——timeline.py KEY_EVENTS 与 story-timeline.html EMBEDDED_DATA 逐条比对（chapter/event/characters/顺序+phase 区间映射），wrapper 同款 crash 即拦+汇总行断言防静默跳过；--self-test 篡改/缺条/phase 三负样本全捕获；校验器补 38 槽同款门禁汇总行；VERIFY_SECTIONS 自洽锁 43→44 段
+- CSP 全站收紧（用户立项）：generate_csp.py EXTERNAL_SCRIPT_HOSTS 清空——script-src 从 self+d3js.org+cdnjs.cloudflare.com 收紧为 self+内联哈希，856 页全部重生成；W456 禁外域 CDN 后全站零外域脚本/样式加载 grep 实证（唯一下划线命中为 GitHub dataset 普通链接非资源）；收紧后 story-timeline file:// 冒烟零报错无拒载
+- 文档对齐：AGENTS §4.2 第 39 条目 + 文档规范 §8 引用式行对齐至第 39 门禁；六文档级联 v2.3.289（batch_cascade 原生 dry+apply 自检过）；对账表 W695 认领翻现势 W696
+- 验证：verify_delivery 核心全绿（44 段自洽·第 39 门禁在列）；generate_csp --check 0 漂移；js 语法/CSS 结构全绿；ruff 0 错

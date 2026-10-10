@@ -84,9 +84,11 @@ def main():
         print("FAIL 故事内时间线双源失配 %d 项：" % len(issues))
         for s in issues[:10]:
             print("  -", s)
+        print("---- 第 39 门禁 故事内时间线双源同步：失配 %d 项 ----" % len(issues))
         return 1
     n = len(parse_py())
     print("OK 故事内时间线双源一致（KEY_EVENTS %d 条 == EMBEDDED_DATA %d 条·phase 区间全匹配）" % (n, n))
+    print("---- 第 39 门禁 故事内时间线双源同步：KEY_EVENTS %d 条 == EMBEDDED_DATA %d 条 · 失配 0 · phase 区间全匹配 ----" % (n, n))
     return 0
 
 

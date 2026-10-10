@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W694），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W695），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.289（2026-10-10）：W695 第 39 门禁挂载与 CSP 全站收紧批
+
+> **来源**：用户对第六轮外审报告两项候裁的批复——同步校验器挂载第 39 门禁；CSP 全站收紧立项。
+> - **第 39 门禁挂载**：check_story_timeline_sync.py 上岗 verify 第 39 槽——timeline.py KEY_EVENTS 与 story-timeline.html EMBEDDED_DATA 逐条比对（chapter/event/characters/顺序 + phase 区间映射），wrapper 同款（crash 即拦 + 汇总行断言防静默跳过）；--self-test 篡改/缺条/phase 三类负样本全捕获；VERIFY_SECTIONS 自洽锁 43→44 段；AGENTS §4.2 第 39 条目 + 文档规范 §8 引用式行对齐。
+> - **CSP 全站收紧**：generate_csp.py EXTERNAL_SCRIPT_HOSTS 清空——script-src 从 self+d3js.org+cdnjs.cloudflare.com 收紧为 self+内联哈希，856 页全部重生成；grep 实证 W456 禁外域 CDN 后全站零外域脚本/样式加载（唯一下划线命中为 GitHub dataset 普通链接非资源）；收紧后 story-timeline file:// 冒烟零报错（无 CSP 拒载）。
+> - **验证**：verify_delivery 核心全绿（44 段自洽·第 39 门禁上岗）；generate_csp --check 0 漂移；js 语法/CSS 结构全绿；ruff 0 错；batch_cascade 原生 dry+apply 自检过。
+> - **文件**：scripts/verify_delivery.py（第 39 槽+自洽 44）、scripts/check_story_timeline_sync.py（门禁汇总行）、scripts/generate_csp.py（白名单清空）、AGENTS.md（§4.2 第 39 条目）、docs/00-导读/文档规范.md（§8 对齐）、site/ 856 页 CSP 重生成、六文档级联、对账表。
+> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。
 
 ### v2.3.288（2026-10-10）：W694 故事内时间线可视化页落地批
 
