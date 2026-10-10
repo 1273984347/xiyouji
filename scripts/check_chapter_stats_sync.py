@@ -59,7 +59,7 @@ def flat_check(fresh, page):
             if len(v) != len(page[k]):
                 issues.append("per_chapter 长度 %d != %d" % (len(v), len(page[k])))
             else:
-                for a, b in zip(v, page[k]):
+                for a, b in zip(v, page[k], strict=False):
                     if a != b:
                         issues.append("%s 条目漂移：%s != %s" % (k, json.dumps(a, ensure_ascii=False), json.dumps(b, ensure_ascii=False)))
                         break
