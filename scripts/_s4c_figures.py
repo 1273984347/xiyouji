@@ -125,9 +125,9 @@ def fig2():
     p = []
     p.append(rect(40, 30, 1100, 330, WHITE, INK, 2.5, 14))
     x = 76
-    p.append(T(x, 96, "$ python scripts/audit/line_check.py 2 \"此山叫做灵台方寸山，山中有座斜月三星洞。\"", 20, INK, MONO))
-    p.append(T(x, 136, "9", 21, INK, MONO))
-    p.append(T(x + 60, 136, "→  第 2 回 line 9（引文首字符所在行）", 20, CINNABAR, FONT))
+    p.append(T(x, 96, "$ python scripts/audit/line_check.py 1 \"此山叫做灵台方寸山。山中有座斜月三星洞。\"", 20, INK, MONO))
+    p.append(T(x, 136, "99", 21, INK, MONO))
+    p.append(T(x + 60, 136, "→  第 1 回 line 99（引文首字符所在行）", 20, CINNABAR, FONT))
     p.append(T(x, 216, "$ python scripts/audit/line_check.py 7 \"皇帝轮流做，明年到我家。\"", 20, INK, MONO))
     p.append(T(x, 256, "45", 21, INK, MONO))
     p.append(T(x + 60, 256, "→  第 7 回 line 45", 20, CINNABAR, FONT))

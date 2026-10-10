@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W692），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W693），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.287（2026-10-10）：W693 用户三裁决执行批 — A-01 残留扫挂载第 38 门禁 + A-02 S 卡拍板记录 + A-05 S4 docx 重生成（本地件）
+
+> **来源**：用户对 W692 报告三项行动的裁决——A-01 残留扫挂载为第 38 门禁、A-02 S 卡（候选 3 张+存量 12 张）拍板、A-05 S4 docx 重生成。
+> - **A-01 第 38 门禁挂载**：scripts/check_embedded_stale_markers.py（S-16 吸收）——json 副本修复批的 EMBEDDED 双路径回归防线，语义=「修复前旧值即标记」（17 组：万圣公主遗物/白虎洞/中将级//demo/STD：/六耳句/对火系无效/钉耙性别条款/佛位/流沙河/稀柿同/geo3d 旧章值×2/13d/词牌分布/21 位说话者/708441），任一标记在作用域页面命中即 FAIL，新增双路径修复随批登记标记；--self-test 注入式负样本通过；首跑即拦下 W691 自身注记残留旧字面量 708441 一处（text-search.html）并修正——门禁当天上岗即产证。verify 第 38 槽挂载（wrapper 防静默跳过同款+汇总行断言）、VERIFY_SECTIONS 自洽名单追加（43 段==43 段）、AGENTS §4.2 第 38 条目、文档规范 §8 引用式对齐。
+> - **A-02 S 卡拍板记录**（交接 Backlog 段）：候选 S-16 吸收为第 38 门禁（本批）；S-17 内嵌重灌器/S-18 契约冒烟精化登记为工具化排期项（下个数据面批次顺带）；存量 S-04~S-15 十二张全部关闭不建置（skills/ 已 W562 退役），逐卡标注吸收路径（S-04→test_site_quality、S-05→断言式脚本模式、S-06→e2e 探针、S-07→S4 docx 工具链、S-08→sync_data_json、S-09→派发边界、S-10→engine.smoke、S-11→告警裁决两账、S-12→手工级联模板两代、S-13→渠道落夹、S-14→第 21 门禁、S-15→无触发）。
+> - **A-05 S4 docx 重生成（本地件不入仓·双盲纪律）**：W691 语料单源化的 S4 下游全面同步——① 可验证性方向 8 个 md 的示范坐标修正（第 2 回 line 9→第 1 回 line 99·三处声明/件·经 scripts/audit/line_check.py 新语料实测四锚点全验：第 1 回 99/第 13 回 1/第 7 回 45/第 98 回 43）；② 论文正文补记「底本语料再度单源化重建……上述风险第二次应验」（与文中『核验工具的引用对象是活的』第一手材料段自洽）；③ 图 C-2 重生成（_s4c_figures.py fig2 命令/输出/注记三行随新语料更新→SVG→PNG 2x 2360×860）；④ 两份 docx 重生成（01-论文/可验证性方向-投稿版.docx、05-投稿/数字人文研究投稿/可验证性方向-数字人文研究适配版.docx·_c_track_md2docx.js+脚注修复 PASS）+ Word COM 验收（21 页/22 页·14383/14674 词）；⑤ 内容断言：新坐标在位、旧坐标清零、事件句在位。其余六渠道 md（无 docx）已随 md 同步。
+> - **验证**：verify_delivery 核心全绿（43 段自洽·第 38 门禁上岗）；generate_csp --check 0 漂移；pytest 293/293；ruff 新脚本 0 错；batch_cascade 原生 dry+apply 自检过；S4 件内容断言全绿（本地件）。
+> - **文件**：scripts/check_embedded_stale_markers.py（新增·第 38 门禁）、scripts/verify_delivery.py（第 38 槽挂载+自洽名单 43）、scripts/_s4c_figures.py（fig2 新坐标）、scripts/output/_w693_com_check.ps1（新增·COM 页数验收工具）、AGENTS.md（§4.2 第 38 条目）、docs/00-导读/文档规范.md（§8 引用式对齐）、交接文档.md（S 卡拍板记录）、本地件（不入仓）：S4 md 8 件+图 C-2 SVG/PNG+docx 2 件、六文档级联、对账表。
+> - **处置收尾**：S4 双盲纪律维持（md/docx/图全部本地）；A-01 标记清单为活登记——后续 json 副本修复随批追加标记；S-17/S-18 工具化排期登记交接 Backlog。
+> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。
 
 ### v2.3.286（2026-10-10）：W692 工作复盘与优化分析报告入库（站点质量批次四~六+Backlog 裁决周期 2026-10-09/10）
 
