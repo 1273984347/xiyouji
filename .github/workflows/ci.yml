@@ -63,7 +63,7 @@ jobs:
           exit 1
 
       - name: Run screenshot baseline
-        id: screenshot-baseline
+        id: page-smoke
         # W390 修复：tools/screenshot-baseline.js 从未存在，原步骤必然失败走降级分支
         # 改为内联 Node 脚本：扫描 site/ 全部 HTML，逐个请求验证 200（页面存活烟测）
         run: |

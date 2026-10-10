@@ -38,12 +38,13 @@
 
 ## 2. ci.yml 七 job 说明
 
-### Job 1 · `screenshots-regression`（页面存活烟测）
+### Job 1 · `pages-smoke`（页面存活烟测）
 
 - **运行环境**：`ubuntu-latest` + Node 20 + Python 3.12
 - **依赖**：`npm install playwright @playwright/test` + `npx playwright install --with-deps chromium`
 - **流程**：启动 `python -m http.server 8000 --directory site` → 内联 Node 脚本递归扫描 `site/` 全部 HTML，逐个请求验证 HTTP 200
 - **W399 修复**：原引用 `tools/screenshot-baseline.js`（仓库从未存在 → 步骤必然失败走降级分支），改为内联 Node 存活烟测
+- **W700 更名**：job `screenshots-regression`→`pages-smoke`（原「Screenshots Regression」名不符实——真实截图回归在 screenshot-review.yml），同步删除永不产出的 screenshots/diff artifact 两残件步骤
 - **路径跨平台**：`p.replace(/[\\/]+/g,'/').replace(/^site\//,'')`（Windows 本地与 Linux CI 均可用）
 - **artifact**：`screenshots-${{ github.sha }}`（保留 30 天）；失败时额外上传 `screenshots-diff-${{ github.sha }}`
 
@@ -110,8 +111,6 @@
 
 | artifact 名 | 来源 job | 内容 | 保留 |
 | --- | --- | --- | --- |
-| `screenshots-${{ github.sha }}` | screenshots-regression | 存活烟测结果 | 30 天 |
-| `screenshots-diff-${{ github.sha }}` | screenshots-regression（失败时） | diff 对比图 | 30 天 |
 | `lighthouse-report` | lighthouse-performance | JSON + HTML 审计报告 | 30 天 |
 | `a11y-report-*` | a11y-audit | a11y Markdown + JSON 报告 | 30 天 |
 | `pip-audit-report` | dependency-scan | pip 漏洞审计 JSON | 30 天 |
