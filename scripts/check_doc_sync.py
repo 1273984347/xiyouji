@@ -26,10 +26,10 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
-RE_CHANGELOG_TOP = re.compile(r"^###\s+v(\d+\.\d+\.\d+)（([^）]*)）：\s*W(\d+)", re.M)
-RE_CHANGELOG_SECT = re.compile(r"^###\s+v\d+\.\d+\.\d+（[^）]*）：\s*W(\d+)", re.M)
-RE_README_HEAD = re.compile(r"当前版本\s*v(\d+\.\d+\.\d+)（([^）]+)）\*\*：\s*W(\d+)")
-RE_JIAOJIE_HEAD = re.compile(r"^-\s*\*\*v(\d+\.\d+\.\d+)\s+W(\d+)", re.M)
+RE_CHANGELOG_TOP = re.compile(r"^###\s+(?:v(\d+\.\d+\.\d+)|W(\d+))（([^）]*)）：\s*(?:W(\d+))?", re.M)  # W711 双形态：历史 vX.Y.Z（date）：W### / 新段 W###（date）：标题
+RE_CHANGELOG_SECT = re.compile(r"^###\s+(?:v\d+\.\d+\.\d+（[^）]*）：\s*W(\d+)|W(\d+)（[^）]*）：)", re.M)  # wnum = g1(历史) or g2(新)
+RE_README_HEAD = re.compile(r"当前(?:版本\s*v\d+\.\d+\.\d+|批次\s*W(\d+))（([^）]+)）\*\*：\s*(?:W(\d+))?", re.M)  # wnum = g1(新·批次后) or g3(历史·冒号后)
+RE_JIAOJIE_HEAD = re.compile(r"^-\s*\*\*(?:v\d+\.\d+\.\d+\s+)?W(\d+)", re.M)  # W711 双形态（ver 可选·wnum 捕获）
 RE_AGENTS_ITEM = re.compile(r"^(\d+)\.\s\*\*", re.M)
 RE_VERIFY_SLOT = re.compile(r"第\s*(\d+)\s*(?:槽|门禁)")
 RE_COMMIT_W = re.compile(r"(?<![A-Za-z0-9])[Ww](\d{3})(?!\d)")
@@ -68,12 +68,18 @@ ARCHIVE_CHANGELOGS = [
 
 
 def changelog_top(text):
+    """现役顶段 → (date, wnum)。W711 方案 D：新段 wnum 在「### W###」处、历史段在「：W###」处。"""
     m = RE_CHANGELOG_TOP.search(text)
-    return (m.group(1), m.group(2), m.group(3)) if m else None
+    if not m:
+        return None
+    return (m.group(3), int(m.group(2) or m.group(4)))
 
 
 def changelog_section_ws(text):
-    return set(RE_CHANGELOG_SECT.findall(text))
+    out = set()
+    for a, b in RE_CHANGELOG_SECT.findall(text):
+        out.add(a or b)  # 字符串契约（C4 的 RE_COMMIT_W 提取物为字符串）
+    return out
 
 
 def table_registered_ws(text):
@@ -118,31 +124,31 @@ def evaluate(inp):
     issues, notes = [], []
     top = changelog_top(inp["changelog"])
     if not top:
-        issues.append("C1: CHANGELOG 未解析出现役顶段（期望 ### vX.Y.Z（日期）：W###）")
-        top = ("?", "?", "?")
-    ver, date, wnum = top
+        issues.append("C1: CHANGELOG 未解析出现役顶段（期望 ### W###（日期）：标题 或历史 ### vX.Y.Z（日期）：W###）")
+        top = ("?", "?")
+    date, wnum = top
 
-    # C1 README 抬头三元组
+    # C1 README 抬头二元组（date+W·W711 双形态）
     m1 = RE_README_HEAD.search(inp["readme"])
     if not m1:
-        issues.append("C1: README 未解析出「当前版本 vX（日期）**： W###」抬头句")
+        issues.append("C1: README 未解析出「当前批次 W###（日期）**：」抬头句")
     elif line_has_exempt(inp["readme"], m1):
         notes.append("C1: README 抬头行带 doc-sync:exempt 豁免，跳过")
-    elif (m1.group(1), m1.group(2), m1.group(3)) != top:
+    elif (int(m1.group(1) or m1.group(3)), m1.group(2)) != (wnum, date):
         issues.append(
-            "C1: README 抬头 v%s（%s）W%s ≠ CHANGELOG 顶段 v%s（%s）W%s"
-            % (m1.group(1), m1.group(2), m1.group(3), ver, date, wnum)
+            "C1: README 抬头（%s）W%s ≠ CHANGELOG 顶段（%s）W%s"
+            % (m1.group(2), m1.group(1) or m1.group(3), date, wnum)
         )
 
     # C2 交接文档头链链首
     m2 = RE_JIAOJIE_HEAD.search(inp["jiaojie"])
     if not m2:
-        issues.append("C2: 交接文档未解析出头链链首「- **vX W###」")
+        issues.append("C2: 交接文档未解析出头链链首「- **W###」")
     elif line_has_exempt(inp["jiaojie"], m2):
         notes.append("C2: 交接头链行带 doc-sync:exempt 豁免，跳过")
-    elif (m2.group(1), m2.group(2)) != (ver, wnum):
+    elif int(m2.group(1)) != wnum:
         issues.append(
-            "C2: 交接头链 v%s W%s ≠ CHANGELOG 顶段 v%s W%s" % (m2.group(1), m2.group(2), ver, wnum)
+            "C2: 交接头链 W%s ≠ CHANGELOG 顶段 W%s" % (m2.group(1), wnum)
         )
 
     # C3 AGENTS §4.2 门禁清单上限 == verify 实况最高槽位
@@ -299,9 +305,9 @@ def run_check():
 def run_self_test():
     """7 例注入式负样本/正样本（纯合成输入，不改真实文件）。"""
     base = {
-        "changelog": "### v9.9.9（2026-10-05）：W999 自测顶段\n\n### v9.9.8（2026-10-04）：W998 旧段\n",
-        "readme": "> **当前版本 v9.9.9（2026-10-05）**： W999 自测抬头行\n",
-        "jiaojie": "- **v9.9.9 W999 自测链首**：\n",
+        "changelog": "### W999（2026-10-05）：自测顶段\n\n### v9.9.8（2026-10-04）：W998 旧段\n",
+        "readme": "> **当前批次 W999（2026-10-05）**：自测抬头行\n",
+        "jiaojie": "- **W999 自测链首**：\n",
         "agents": "### 4.2 交付门禁\n\n30. **甲门**\n31. **乙门**\n\n### 4.3 其他\n",
         "verify_src": "# ---- 第 30 槽 ----\n# ---- 第 31 槽 ----\n",
         "subjects": ["feat(w999): 自测提交"],
@@ -344,7 +350,7 @@ def run_self_test():
     )
     case(
         "T6 行级豁免标记生效",
-        lambda d: d.update(readme="> **当前版本 v9.9.6（2026-10-05）**： W996 自测抬头行 <!--doc-sync:exempt 历史时点事实-->\n"),
+        lambda d: d.update(readme="> **当前批次 W996（2026-10-05）**：自测抬头行 <!--doc-sync:exempt 历史时点事实-->\n"),
         "C1",
         expect_absent=True,
     )

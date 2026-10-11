@@ -26,24 +26,24 @@ def read_rel(rel):
         return fh.read()
 
 
-def footer_freshness_issues(handoff_text, newest_ver, newest_wnum):
+def footer_freshness_issues(handoff_text, newest_wnum):
     """检查 7：交接文档每处「最后更新」行链首条目须为 CHANGELOG 现役段同批（W518 新增）。
 
     newest_ver 形如 "v2.3.117"（含 v 前缀，即 CHANGELOG 版段正则的 group(1)）。
     条目形如 `最后更新：YYYY-MM-DD（vX.Y.Z W### 标题…）`；交接文档头部滚动链与
     尾页脚历史链各一处，全部扫描（各链历史条目允许滞后，只校验链首）。
     """
-    matches = list(re.finditer(r"最后更新：\d{4}-\d{2}-\d{2}（v([\d.]+)\s+W(\d+)", handoff_text))
+    matches = list(re.finditer(r"最后更新：\d{4}-\d{2}-\d{2}（(?:v([\d.]+)\s+)?W(\d+)", handoff_text))  # W711 双形态
     if not matches:
         return ["交接文档未解析出任何「最后更新」最新条目（期望 …（vX.Y.Z W###…）格式）"]
-    exp = (newest_ver, "W" + newest_wnum)
+    exp = newest_wnum  # W711：批次键唯一（ver 退出对账）
     issues = []
     for i, m in enumerate(matches, 1):
-        got = ("v" + m.group(1), "W" + m.group(2))
+        got = m.group(2)
         if got != exp:
             issues.append(
-                "第 %d 处「最后更新」链首条目 %s %s 与 CHANGELOG 现役段 %s %s 不一致（每批须前置最新条目）"
-                % (i, got[0], got[1], exp[0], exp[1])
+                "第 %d 处「最后更新」链首条目 W%s 与 CHANGELOG 现役段 W%s 不一致（每批须前置最新条目）"
+                % (i, got, exp)
             )
     return issues
 
@@ -78,15 +78,15 @@ def main():
             issues.append("启动 Prompt 短语「%s」出现 %d 次（上限 %d，应去重）" % (phrase, cnt, cap))
 
     # 4. 交接文档 HEAD 与 CHANGELOG 最新版本段一致
-    hm = re.search(r"当前 HEAD = (v[\d.]+) W(\d+)", handoff)
-    cm = re.search(r"^### (v[\d.]+)（.*?）：W(\d+)", changelog, re.M)
+    hm = re.search(r"当前 HEAD = (?:v([\d.]+)\s+)?W(\d+)", handoff)  # W711 双形态
+    cm = re.search(r"^### (?:v([\d.]+)|W(\d+))（.*?）：(?:W(\d+))?", changelog, re.M)
     if not hm or not cm:
         issues.append("无法解析 HEAD 或 CHANGELOG 最新段（hm=%s cm=%s）" % (bool(hm), bool(cm)))
     else:
-        hv, hw = hm.group(1), hm.group(2)
-        cv, cw = cm.group(1), cm.group(2)
-        if (hv, hw) != (cv, cw):
-            issues.append("交接文档 HEAD=%s W%s 与 CHANGELOG 最新段 v%s W%s 不一致" % (hv, hw, cv, cw))
+        hw = hm.group(2)
+        cw = cm.group(2) or cm.group(3)
+        if hw != cw:
+            issues.append("交接文档 HEAD W%s 与 CHANGELOG 最新段 W%s 不一致" % (hw, cw))
     # 5. CHANGELOG 编号规则 W001-W### 与最新版本段一致
     wm = re.search(r"W001-W(\d+)", changelog)
     if wm and cm:
@@ -105,7 +105,7 @@ def main():
 
     # 7. 交接文档全部「最后更新」行与 CHANGELOG 现役段一致（W518 新增·防连续漏更）
     if cm:
-        issues.extend(footer_freshness_issues(handoff, cm.group(1), cm.group(2)))
+        issues.extend(footer_freshness_issues(handoff, cm.group(2) or cm.group(3)))
 
     if issues:
         for it in issues:

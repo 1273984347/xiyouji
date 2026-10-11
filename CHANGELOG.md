@@ -6,15 +6,29 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W710），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W711），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
+>
+> **方案 D 形态切换（W711 生效）**：自 W711 段起，CHANGELOG 段标题去 v 号（新形态 `### W###（日期）：标题`）；W001-W710 段保留 `### vX.Y.Z（日期）：W###` 历史形态不改写；v 号降格为阶段标签（v2.3·无 patch）；CITATION.cff version 改批次号形态（"W###"·CFF free string）；file-index 历史条目保留 v 引用、新增条目 W only。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W711（2026-10-11）：W711 方案D形态改造批
+
+> **来源**：用户 userselect 全选五 Backlog 第三批（BL-22 收口·三决策点按倾向落地·盘点档 docs/superpowers/plans/2026-10-11-version-space-inventory.md 硬耦合 9 项逐项）——**v 号形态切换生效批：自本段起 CHANGELOG 段标题与治理文档抬头去 v 号（批次键唯一）**。
+> - **决策点 1（甲·段标题去 v）**：本段即首个新形态段 `### W711（2026-10-11）：标题`；W001-W710 段保留 `### vX.Y.Z（日期）：W###` 历史形态不改写（维护契约①）；沿革机器面三条=① 头部方案 D 声明段 ② doc-sync C1/C2/C4 正则双形态（历史 v 形态与新 W 形态并存解析）③ batch_cascade 段锚点/三模板/HEAD 句/页脚/交接标题双形态。
+> - **决策点 2（丙·CITATION=W 号）**：CITATION.cff version 自本批=批次号形态（`"W711"`·CFF free string 不强制 SemVer）；下游消费者核实=CI 无 cff 校验 job、仓库无自动化 CFF 消费者（盘点档 §五）。
+> - **决策点 3（甲·file-index）**：历史条目保留 v 引用、新段 W only（级联 file-index 段标题去 ver·格式分裂由 CHANGELOG 头部声明）。
+> - **硬耦合改造落地**：① doc-sync RE_CHANGELOG_TOP/SECT/READMEE_HEAD/JIAOJIE_HEAD 四正则双形态+changelog_top 返回 (date, wnum) 二元组+C1/C2 对比二元组化（self-test 12/12·base 换新形态样例）；② verify latest_version_from_changelog 双形态（ver 可 None）+期望批次段 W-only 展示+dukou footer 与 workflows 旁文档锚定改「footer 标签内联/调用处 anchor 参数」（parse_footer_version 加 anchor 参数·W708 宽匹配咬正文教训应用）+六文档区 ver 条件化；③ batch_cascade cur_anchor 双形态+新段标题 W-only+README/STRUCTURE/项目说明三模板换「当前批次」抬头+「起生效」/HEAD 句/workflows 页眉/两页脚 prepend 去 ver+「一、当前进度」标题替换串去 ver（锚点已双形态）+CITATION version=batch+file-index 段标题去 ver；④ tests/test_verify_delivery_version.py 补两用例（新段 ver=None/页脚 W-only·13 过）。
+> - **workflows 4 处豁免**（盘点 v2 零命中确认表修正）：dependency-review/scorecard 系第三方 action 版本注释（v4.9.0/v2.4.4·与项目 v 号无关）、ci/perf 系 W263/W266 历史批注——均无需改。
+> - **验证**：verify full 46 段绿（旧 v 形态全兼容）+pytest 295（+2 方案 D 用例）+doc-sync self-test 12/12+agents-layers 0 FAIL+级联 dry/apply 自检过（**本段即首个 W-only 新形态段·级联全链在真数据上验证**）。
+> - **文件**：scripts/check_doc_sync.py、scripts/verify_delivery.py、scripts/batch_cascade.py、tests/test_verify_delivery_version.py、CHANGELOG.md（头部声明+本段）、README.md（版本号说明节）、docs/00-导读/文档规范.md（§4.11 已实施注记）、docs/00-导读/W批次编号对账表.md（W711 认领）、六文档级联（新形态首写）。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### v2.3.304（2026-10-11）：W710 BL-25与BL-21收口批
 

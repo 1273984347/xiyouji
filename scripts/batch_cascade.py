@@ -81,7 +81,7 @@ def main():
             print("[PRECHECK-FAIL] " + it)
         print("[PRECHECK] %d 项违例——修正 spec 后重跑（参照 AGENTS §4.3 desc 分隔符规则）" % len(pre_issues))
         return 1
-    batch, ver, date = spec["batch"], spec["version"], spec["date"]
+    batch, date = spec["batch"], spec["date"]  # W711：ver 字段弃用（方案 D 批次键唯一·spec.version 仅存档）
     desc = spec["desc"]
     entry = spec["head_entry"]
     assert entry.endswith("）"), "head_entry 必须以闭合括号结尾"
@@ -93,15 +93,17 @@ def main():
     # ---------- CHANGELOG ----------
     p = "CHANGELOG.md"
     s, nl = load(p)
-    m = re.search(r"^### (v[\d.]+（[^）]*）：W(\d+))", s, re.M)
+    # W711 方案 D 双形态：历史段 ### vX.Y.Z（date）：W### / 新段 ### W###（date）：标题
+    m = re.search(r"^### (?:v[\d.]+（[^）]*）：W(\d+)|W(\d+)（[^）]*）：)", s, re.M)
     assert m, "CHANGELOG 未找到现役段"
-    cur_anchor, cur_w = m.group(0), int(m.group(2))  # group(0) 含 ### 前缀，替换时保持段标题完整
+    cur_anchor = m.group(0)
+    cur_w = int(m.group(1) or m.group(2))
     new_w = cur_w + 1
     assert batch == "W" + str(new_w), f"批次号应为 W{new_w}"
-    assert ("### " + ver) not in s, ver + " 段已存在"
+    assert ("### " + batch) not in s, batch + " 段已存在"
     old_rule, new_rule = f"（W001-W{cur_w}）", f"（W001-W{new_w}）"
     assert s.count(old_rule) == 1 and s.count(cur_anchor) == 1
-    new_title = "### {}（{}）：{}".format(ver, date, spec["title"])
+    new_title = "### {}（{}）：{}".format(batch, date, spec["title"])
     out = s.replace(cur_anchor, new_title + spec["changelog_body"] + nl + cur_anchor, 1)
     out = out.replace(old_rule, new_rule, 1)
     assert out.count(new_title) == 1 and out.count(new_rule) == 1
@@ -110,25 +112,25 @@ def main():
     # ---------- README / STRUCTURE / 项目说明 ----------
     p = "README.md"
     s, nl = load(p)
-    out = re.sub(r"> \*\*当前版本 v[\d.]+（[^）]*）\*\*：\s*W\d+ [^·]*·A1-A6",
-                 f"> **当前版本 {ver}（{date}）**：{batch} {desc}·A1-A6", s, count=1)
+    out = re.sub(r"> \*\*当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）\*\*：\s*(?:v[\d.]+\s+)?W\d+ [^·]*·A1-A6",
+                 f"> **当前批次 {batch}（{date}）**：{desc}·A1-A6", s, count=1)  # W711 方案 D 新抬头（批次键唯一）
     assert out != s, "README 版本行未变化"
     pend.append((p, out, nl))
 
     p = "STRUCTURE.md"
     s, nl = load(p)
-    out = re.sub(r"> 当前版本：v[\d.]+（[^）]*）— W\d+ [^—]*—\s*A1-A6",
-                 f"> 当前版本：{ver}（{date}）— {batch} {desc}—A1-A6", s, count=1)
+    out = re.sub(r"> 当前(?:版本：v[\d.]+|批次：W\d+)（[^）]*）— (?:v[\d.]+\s+)?W\d+ [^—]*—\s*A1-A6",
+                 f"> 当前批次：{batch}（{date}）— {desc}—A1-A6", s, count=1)
     assert out != s, "STRUCTURE 版本行未变化"
     pend.append((p, out, nl))
 
     p = "docs/00-导读/项目说明.md"
     s, nl = load(p)
-    out = re.sub(r"> 当前版本 v[\d.]+（[^）]*）：W\d+ [^·]*·详细变更见",
-                 f"> 当前版本 {ver}（{date}）：{batch} {desc}·详细变更见", s, count=1)
+    out = re.sub(r"> 当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）：(?:v[\d.]+\s+)?W\d+ [^·]*·详细变更见",
+                 f"> 当前批次 {batch}（{date}）：{desc}·详细变更见", s, count=1)
     assert out != s, "项目说明头部版本行未变化"
-    out2 = re.sub(r"(\*\*当前版本\*\*：)v[\d.]+（[^）]*）— W\d+ [^·]*",
-                  rf"\g<1>{ver}（{date}）— {batch} {desc}", out, count=1)
+    out2 = re.sub(r"(\*\*当前(?:版本|批次)\*\*：)(?:v[\d.]+|W\d+)（[^）]*）— (?:v[\d.]+\s+)?W\d+ [^·]*",
+                  rf"\g<1>{batch}（{date}）— {desc}", out, count=1)
     pend.append((p, out2, nl))
 
     # ---------- 交接文档 ----------
@@ -148,12 +150,12 @@ def main():
         head_line = head_line[:oldest] + head_line[note_idx:]
         entries = re.findall(r"·20\d{2}-\d{2}-\d{2}（", head_line)
     s = s[:h0] + head_line + s[h1:]
-    s = re.sub(r"；v[\d.]+ W\d+ 起生效）", f"；{ver} {batch} 起生效）", s, count=1)
+    s = re.sub(r"；v[\d.]+ W\d+ 起生效）", f"；{batch} 起生效）", s, count=1)
     # W705 教训：标题锚点与替换串形态必须恒定——旧替换串丢 ver 前缀致下一批锚点静默失配（re.sub 0 替换不报错），
     # 里程碑块遂在头部错位堆积、drop_block 跨段淘汰吞掉「一、当前进度」标题。此处改双形态锚点 + count 断言 fail-closed。
     _prog = re.compile(r"## 一、当前进度（(?:v[\d.]+ )?W\d+ [^；]*；更早批次详见 CHANGELOG\.md）")
     assert len(_prog.findall(s)) == 1, "「一、当前进度」标题锚点失配（W705 教训：静默失配后逐批漂移·先修复交接文档结构再级联）"
-    s = _prog.sub(f"## 一、当前进度（{ver} {batch} {desc}；更早批次详见 CHANGELOG.md）", s, count=1)
+    s = _prog.sub(f"## 一、当前进度（{batch} {desc}；更早批次详见 CHANGELOG.md）", s, count=1)
     fb = re.search(r"- \*\*v[\d.]+ W\d+", s)
     h1pos = s.find("## 一、当前进度")
     assert fb and h1pos != -1 and fb.start() > h1pos, (
@@ -182,9 +184,9 @@ def main():
     s = drop_block(s, bm_start, nl)
     s = s.replace(f"> 历史概要（W{oldest_w} 及更早）的详细记录见",
                   f"> 历史概要（W{new_w} 及更早）的详细记录见", 1)
-    hs = re.search(r"当前 HEAD = v[\d.]+ W\d+（[^）]*；详见 CHANGELOG）", s)
+    hs = re.search(r"当前 HEAD = (?:v[\d.]+ )?W\d+（[^）]*；详见 CHANGELOG）", s)
     assert hs, "未找到当前 HEAD 句"
-    s = s[:hs.start()] + "当前 HEAD = {} {}（{}；详见 CHANGELOG）".format(ver, batch, spec["head_sentence"]) + s[hs.end():]
+    s = s[:hs.start()] + "当前 HEAD = {}（{}；详见 CHANGELOG）".format(batch, spec["head_sentence"]) + s[hs.end():]
     # W560 修复：尾链 prepend 必须锚定文末行（旧实现 s.replace("最后更新：", ..., 1) 命中的是
     # 头链首处 → 头链 entry 双写「E；E·」，W556/W557/W558 三批实证）。改用 rfind 定位文末行。
     tail_idx = s.rfind("最后更新：")
@@ -212,7 +214,7 @@ def main():
     BS = chr(92)
     winpath = "`D:" + BS + "xiyouji`"  # W596：旧值为已不存在的双副本路径，曾每批续写进 workflows README
     pat_wf = re.compile(r"→ W450-W\d+\*\* — 西游记解读项目（" + re.escape(winpath) + r"，v[\d.]+ W\d+）的 GitHub Actions 工作流层。")
-    repl_wf = f"→ W450-W{new_w}** — 西游记解读项目（{winpath}，{ver} {batch}）的 GitHub Actions 工作流层。"
+    repl_wf = f"→ W450-W{new_w}** — 西游记解读项目（{winpath}，{batch}）的 GitHub Actions 工作流层。"
     out = pat_wf.sub(lambda m: repl_wf, s, count=1)
     assert out != s, "workflows 头部未变化"
     out = re.sub(r"> \*\*W450-W\d+\*\*：verify 门禁体系扩展",
@@ -227,13 +229,13 @@ def main():
         s, _ = load(p)
         mm = re.search(r"v[\d.]+ · W\d+ [^<]*", s)
         assert mm, p + " 页脚未命中"
-        pend.append((p, s.replace(mm.group(0), f"{ver} · {batch} {desc} · " + mm.group(0), 1), None))
+        pend.append((p, s.replace(mm.group(0), f"{batch} {desc} · " + mm.group(0), 1), None))
     p = "site/dukou-engine.html"
     s, _ = load(p)
     mm = re.search(r"v[\d.]+ W\d+ [^<]*", s)
     assert mm, p + " 页脚未命中"
     head_short = spec["head_sentence"].split("——")[0]
-    pend.append((p, s.replace(mm.group(0), f"{ver} {batch} {desc}（{head_short}） · " + mm.group(0), 1), None))
+    pend.append((p, s.replace(mm.group(0), f"{batch} {desc}（{head_short}） · " + mm.group(0), 1), None))
 
     # ---------- AGENTS 脚注 ----------
     p = "AGENTS.md"
@@ -247,7 +249,7 @@ def main():
     # ---------- CITATION.cff（W628 起第 10 面：version/date-released 随批同步——第 27 门禁 R2 面） ----------
     p = "CITATION.cff"
     s, nl = load(p)
-    out = re.sub(r'(?m)^version:\s*"[^"]+"', 'version: "{}"'.format(ver.lstrip("v")), s, count=1)
+    out = re.sub(r'(?m)^version:\s*"[^"]+"', f'version: "{batch}"', s, count=1)
     out = re.sub(r'(?m)^date-released:\s*"[^"]+"', f'date-released: "{date}"', out, count=1)
     assert out != s, "CITATION.cff 版本/日期行未变化"
     pend.append((p, out, nl))
@@ -257,7 +259,7 @@ def main():
     s, nl = load(p)
     mm = re.search(r"## (W\d+) ", s)
     assert mm, "file-index 未找到最新段"
-    rows = nl.join(["## {} {}（{}·{}）".format(batch, re.sub(r"\W\d+ ", "", spec["title"].split(" — ")[0].split("（")[0]), date, ver),
+    rows = nl.join(["## {} {}（{}）".format(batch, re.sub(r"\W\d+ ", "", spec["title"].split(" — ")[0].split("（")[0]), date),
                     "", "| 文件 | W | 说明 |", "|---|---|---|"] + spec["file_index_rows"] + ["", ""])
     pend.append((p, s.replace(mm.group(0), rows + mm.group(0), 1), nl))
 
@@ -311,11 +313,11 @@ def main():
                 selfcheck.append("交接文档: 历史概要指针缺失（结构断言）")
             hl0 = txt.find("> 最后更新：")  # W665 修复：里程碑块置顶后「最后更新」行不再固定在 index 6
             head_line = txt[hl0:txt.find(sep, hl0)] if hl0 != -1 else ""
-            head_entries = re.findall(r"v[\d.]+ (W\d+)", head_line)
+            head_entries = re.findall(r"(?:v[\d.]+\s+)?(W\d+)", head_line)  # W711 双形态
             if not head_entries or head_entries[0] != batch:
                 selfcheck.append(f"交接文档: 头链首条非 {batch}（{head_entries[:3]}）——需人工核查")
             tail_txt = txt[txt.rfind("最后更新："):]
-            tail_entries = re.findall(r"v[\d.]+ (W\d+)", tail_txt)
+            tail_entries = re.findall(r"(?:v[\d.]+\s+)?(W\d+)", tail_txt)  # W711 双形态
             if tail_txt.count("2026-") > 3 or not tail_entries or tail_entries[0] != batch:
                 selfcheck.append(f"交接文档: 尾链异常（{tail_entries[:3]}）——需人工核查")
             if "## 九、使用说明" not in txt:

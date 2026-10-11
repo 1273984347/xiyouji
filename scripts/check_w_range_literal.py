@@ -39,10 +39,10 @@ RANGE_RE = re.compile(r"W001\s*[-–~]\s*W(\d+)")
 
 def current_state():
     s = open(CHANGELOG, encoding="utf-8").read()
-    m = re.search(r"^### (v[\d.]+)（[^）]*）：W(\d+)", s, re.M)
+    m = re.search(r"^### (?:v([\d.]+)|W(\d+))（[^）]*）", s, re.M)  # W711 双形态
     if not m:
         raise SystemExit("FAIL 未能在 CHANGELOG 定位现役版段")
-    return m.group(1), int(m.group(2))
+    return m.group(1), int(m.group(2))  # ver 可 None（方案 D 新段）
 
 
 def check(cur_v, max_w):
@@ -59,8 +59,12 @@ def check(cur_v, max_w):
                 if int(m.group(1)) != max_w and not any(a in ln for a in ALLOW_SUBSTR):
                     fails.append(f"{rel}:{i} 「{m.group(0)}」终点 {m.group(1)} != W{max_w}（覆盖上限声明须随现役更新或改引用式）")
     cff = open(CFF, encoding="utf-8").read()
-    mv = re.search(r'^version:\s*"?([\d.]+)"?', cff, re.M)
-    if not mv or mv.group(1) != cur_v.lstrip("v"):
+    mv = re.search(r'^version:\s*"?([\d.]+|W\d+)"?', cff, re.M)  # W711 双形态（ver 或批次号）
+    if cur_v is None:
+        # W711 方案 D：CITATION version=批次号形态（"W###"·CFF free string）
+        if not mv or mv.group(1) != "W" + str(max_w):
+            fails.append(f"CITATION.cff version={mv.group(1) if mv else '缺失'} != 现役批次 W{max_w}（外部引用面）")
+    elif not mv or mv.group(1) != cur_v.lstrip("v"):
         fails.append(f"CITATION.cff version={mv.group(1) if mv else '缺失'} != 现役 {cur_v.lstrip('v')}（外部引用面）")
     return fails, scanned
 
