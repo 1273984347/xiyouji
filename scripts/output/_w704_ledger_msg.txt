@@ -1,0 +1,1 @@
+chore(w704): 对账表 W704 行翻已收官（19d8b586）——五工作流 CI/Security/Lighthouse/Screenshot/Deploy Pages 全绿 加 W705 递延豁免登记（本提交信息现势引用·先例 W703/W697）

@@ -11,6 +11,16 @@
 ---
 
 
+## W708 W708 全变动对抗复审修复批（2026-10-11·v2.3.302）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_cascade.py | W708 | 交接结构三断言前置 pend 落盘前阻断（W708 review ①） |
+| docs/00-导读/文档规范.md | W708 | §4.11 盘点引用更新 v2 数字（W708 review ②） |
+| scripts/output/_w704_ledger_msg.txt | W708 | 补入库（W704 chore msg 漏 add·review ④） |
+| CHANGELOG.md | W708 | W704「22 处」三重失真勘误追记（review ③）+ W708 段 |
+| docs/00-导读/W批次编号对账表.md | W708 | W708 认领 + 现势 W709 |
+
 ## W707 W707 分层重构先行件与阅读契约批（2026-10-11·v2.3.301）
 
 | 文件 | W | 说明 |

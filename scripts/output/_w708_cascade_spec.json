@@ -1,0 +1,19 @@
+{
+  "batch": "W708",
+  "version": "v2.3.302",
+  "date": "2026-10-11",
+  "desc": "全变动对抗复审修复批",
+  "title": "W708 全变动对抗复审修复批",
+  "changelog_body": "\n\n> **来源**：用户令「review 一遍所有变动」——范围=本日 W702-W707 十提交（4cec0494..HEAD·140 文件 2565+/103-）；机械扫描八面+对抗审读五发现，修复三项、勘误一项、留档一项。\n> - **机械扫描八面 0 异常**：双标点（；；/））；/。。）全治理文档 0；混行尾 17 文件 0（load 断言防线在位）；阅读契约 10 份全在位；对账表 W700-W707 各恰一行无重复；CLAUDE.md 44 行（≤60）；本批全部新脚本与级联产物 17 件 tracked；版本行新模板形态（无空格）✓；状态门禁复跑全绿（verify full/stats --check 零差异/doc-sync self-test 12/12/lint_links 19559 链接 0 broken）。\n> - **对抗审读发现与处置**：① batch_cascade 交接结构三断言（主标题前非空/段序零一二/指针在位）原实现于写后 selfcheck（WARN 非阻断·脏盘已落才报告）——**前置到交接面 pend 落盘前 raise 阻断**（真 fail-closed·写后断言保留双保险）；② 文档规范 §4.11 引用的盘点数字为 v1（7679 处/265 文件+硬耦合 8 项）——更新为 v2 实数（8791 处/826 文件+硬耦合 9 项）；③ W704 段「本轮 22 处标记」**三重失真勘误**：分项和 10+4+6+6=26≠22、实测 31（CHANGELOG 10/README 5/AGENTS 9/STRUCTURE 7）——违反 W496「验收数字当批现测」铁律（写 spec 时拍脑袋未实数），历史段禁改走本段勘误追记，教训并入 W496 条目执行记录；④ scripts/output/_w704_ledger_msg.txt 漏 add（W702/703/705/706/707 的 msg 均入库唯独 704 漏）——本批补入库；⑤ W706 chore 提交信息「翻state」英文混入（已推送不可改·留档警示）。\n> - **审读确认正常面**：batch_cascade 最终形态逐块复核（三模板 \\s* 兼容/join 守卫/标题双形态锚点/段内首块与 drop 段内断言/load 混行尾逻辑四态验证）；check_doc_sync C5/C5b/C5c 与设计一致；stats.py 实体化+--check 零差异；交接文档终态（块链 W707/W706/W705 滚动·指针 W707·头链三条·HEAD 句）；CITATION 2.3.301；file-index W707 段在位；agent_start --task 七类分类实测；对账表 W700-W707 行结构完整。\n> - **验证**：verify full 45 段绿 + pytest 293 + ruff 0 错 + 前置断言在重建态文件上实跑通过 + 机械八面复扫 0 异常。\n> - **文件**：scripts/batch_cascade.py（结构断言前置）、docs/00-导读/文档规范.md（§4.11 数字）、scripts/output/_w704_ledger_msg.txt（补入库）、docs/00-导读/W批次编号对账表.md（W708 认领）、六文档级联。\n> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。\n",
+  "head_entry": "2026-10-11（v2.3.302 W708 全变动对抗复审修复批）",
+  "head_sentence": "对抗复审五发现闭环",
+  "milestone_block": "- **v2.3.302 W708 全变动对抗复审修复批**：\n  - 机械扫八面 0 异常（双标点/混行尾/契约/对账表/行数/tracked/模板形态/门禁复跑）\n  - 对抗审读五发现：结构断言前置阻断 + §4.11 盘点数字 v2 + W704「22 处」三重失真勘误（W496 铁律执行记录）+ ledger msg 补入库 + chore 信息混入留档\n  - 审读确认正常面：级联四断言/C5 三层/stats 实体化/交接终态/CITATION/file-index\n",
+  "agents_note": "2026-10-11（v2.3.302 W708）全变动对抗复审修复批（用户令 review·范围 W702-W707 十提交 140 文件）：机械扫八面 0 异常（双标点/混行尾/契约 10 份/对账表行结构/CLAUDE 44 行/新脚本 17 件 tracked/版本行模板/门禁复跑全绿）加 对抗审读五发现——① batch_cascade 交接结构三断言前置 pend 落盘前 raise（原写后 WARN 性违 fail-closed·双保险保留）② 文档规范 §4.11 盘点引用更新 v2（8791 处/826 文件+9 项）③ W704 段「22 处标记」三重失真勘误（分项和 26 实测 31·W496 现测铁律执行记录·历史段禁改走勘误）④ _w704_ledger_msg.txt 漏 add 补入库 ⑤ W706 chore「翻state」混入留档；审读确认正常面=级联四断言/C5 三层/stats 实体化/交接终态/CITATION/file-index/--task 实测",
+  "file_index_rows": [
+    "| scripts/batch_cascade.py | W708 | 交接结构三断言前置 pend 落盘前阻断（W708 review ①） |",
+    "| docs/00-导读/文档规范.md | W708 | §4.11 盘点引用更新 v2 数字（W708 review ②） |",
+    "| scripts/output/_w704_ledger_msg.txt | W708 | 补入库（W704 chore msg 漏 add·review ④） |",
+    "| CHANGELOG.md | W708 | W704「22 处」三重失真勘误追记（review ③）+ W708 段 |",
+    "| docs/00-导读/W批次编号对账表.md | W708 | W708 认领 + 现势 W709 |"
+  ]
+}
