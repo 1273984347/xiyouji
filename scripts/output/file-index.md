@@ -11,6 +11,17 @@
 ---
 
 
+## W701 W701 BL-20动工与S-26工具化批（2026-10-11·v2.3.295）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/js/chart-a11y.js | W701 | 新增：图表 aria 摘要层与 tabable 焦点模块（BL-20） |
+| scripts/inject_chart_a11y.py | W701 | 新增：a11y 加载器注入器（幂等·--check） |
+| scripts/worktree_rehearse.py | W701 | 新增：S-26 worktree 预演器 |
+| scripts/_w701_a11y_probe.js | W701 | 一次性：BL-20 验收探针（87 页+焦点抽样） |
+| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-11.md | W701 | 正文状态同步（三卡已交付/A 项排期确认） |
+| 交接文档.md | W701 | Backlog BL-20 行翻已执行 |
+
 ## W700 W700 docs全量链接门禁与断链清债批（2026-10-11·v2.3.294）
 
 | 文件 | W | 说明 |

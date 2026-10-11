@@ -1,0 +1,20 @@
+{
+  "batch": "W701",
+  "version": "v2.3.295",
+  "date": "2026-10-11",
+  "desc": "BL-20动工与S-26工具化批",
+  "title": "W701 BL-20动工与S-26工具化批",
+  "changelog_body": "\n\n> **来源**：用户圈选四项裁决（BL-20 动工另批/S-26 开工/A-03 优先序确认/报告正文同步）。\n> - **BL-20 读屏替代文本/键盘导航落地**：site/static/js/chart-a11y.js 新模块（运行时为 svg/canvas 图表注入 tabindex+role=img+aria-label〔最近前驱标题〕+aria-describedby 指向 sr-only 摘要块〔图名+KPI 摘要+数据源指引〕·MutationObserver 兜晚渲染·幂等标记·零页面静态 DOM/CSS 改动·file:// 直开可用）+ scripts/inject_chart_a11y.py 注入器（幂等·--check 模式）·87 页全量注入（cite-box.js 同款外部本地脚本形态·无内联哈希需求）。\n> - **验收**：_w701_a11y_probe.js 探针 87 页 file:// 全扫失败 0（无图页 N/A 判定=对话/搜索页纯文本+tag-cloud 词云 div 群对读屏天然可读+-view 壳页）+ 3 页键盘 Tab 焦点抽样 ✓（含 Three canvas 页）+ render_check 三页双态 PASS + verify 45 段全绿 + pytest 293。**EN 镜像页（site/en/）为登记余项**。\n> - **S-26 worktree 预演器**：scripts/worktree_rehearse.py——E-14 三步手工封装（worktree add 临时树+工作区改动定向拷入+临时树内跑校验+always 清理·--tool lint/verify·--keep 调试），**首跑即拦注入器双 static 真 bug**（../static/static/js 拼接错·--check 存在性校验照不到路径正确性·docs 口径 lint 照不到 site——工具化当批即回本）。\n> - **报告正文同步**：第四篇复盘 §3 三卡待拍板→已交付（W699）、§8 WBS A-01/A-02/A-04 排期→✅ 已交付+A-03 优先序经用户确认（A-02>A-01>A-03>A-04）；交接文档 Backlog BL-20 行翻已执行（EN 镜像登记余项）。\n> - **级联外提交追记（W649 规）**：2bf126ed（W699 第 40 门禁挂载·verify 45 段）、a013c8b4（第四篇复盘增补一）、c64d3549（W700 review 收尾三件）、4cec0494（第四篇复盘增补二）。\n> - **验证**：worktree_rehearse 全仓口径预演 0 broken + verify full 45 段 + pytest 293 + ruff 0 错 + 探针全绿。\n> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。\n",
+  "head_entry": "2026-10-11（v2.3.295 W701 BL-20动工与S-26工具化批）",
+  "head_sentence": "图表读屏层落地与预演器工具化",
+  "milestone_block": "- **v2.3.295 W701 BL-20动工与S-26工具化批**：\n  - BL-20 落地：chart-a11y.js 模块+注入器·87 页 aria 摘要层+tabable 焦点（探针全绿·EN 镜像登记余项）\n  - S-26 worktree_rehearse.py（首跑即拦双 static 真 bug）\n  - 第四篇复盘正文状态同步+交接 BL-20 闭账+A-03 优先序确认\n  - 级联外提交追记：2bf126ed/a013c8b4/c64d3549/4cec0494\n",
+  "agents_note": "2026-10-11（v2.3.295 W701）BL-20动工与S-26工具化批（用户圈选四项裁决）：BL-20 读屏替代文本/键盘导航落地（chart-a11y.js 模块+注入器 87 页 aria 摘要层+tabable 焦点·探针 87 页全绿·EN 镜像登记余项）加 S-26 worktree_rehearse.py 预演器（首跑即拦双 static 真 bug）加 第四篇复盘正文状态同步与交接 BL-20 闭账 加 级联外提交追记四笔（2bf126ed/a013c8b4/c64d3549/4cec0494）",
+  "file_index_rows": [
+    "| site/static/js/chart-a11y.js | W701 | 新增：图表 aria 摘要层与 tabable 焦点模块（BL-20） |",
+    "| scripts/inject_chart_a11y.py | W701 | 新增：a11y 加载器注入器（幂等·--check） |",
+    "| scripts/worktree_rehearse.py | W701 | 新增：S-26 worktree 预演器 |",
+    "| scripts/_w701_a11y_probe.js | W701 | 一次性：BL-20 验收探针（87 页+焦点抽样） |",
+    "| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-11.md | W701 | 正文状态同步（三卡已交付/A 项排期确认） |",
+    "| 交接文档.md | W701 | Backlog BL-20 行翻已执行 |"
+  ]
+}
