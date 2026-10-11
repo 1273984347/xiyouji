@@ -20,6 +20,7 @@
 ## 常用命令（可直接复制）
 
 ```
+python scripts/agent_start.py            # 开局实读磁盘输出当前事实摘要（防记忆代读）
 python scripts/verify_delivery.py        # 提交前唯一硬门禁（pre-commit 自动跑）
 python scripts/verify_delivery.py --scope auto  # 本地提交轻量档（CI 恒全量）
 python scripts/generate_csp.py --check   # CSP 0 漂移

@@ -28,6 +28,14 @@ def load(path):
     if not (_real == _root or _real.startswith(_root + os.sep)):
         raise SystemExit("path escapes project root: %s" % path)
     s = open(_real, encoding="utf-8", newline="").read()
+    # W706 结构防线：混行尾文件下按单一 nl 操作会错位吞段（「一、当前进度」标题被吞实证）——fail-closed
+    _crlf = "\r\n" in s
+    _lf_bare = re.search(r"(?<!\r)\n", s) is not None
+    _cr_bare = re.search(r"\r(?!\n)", s) is not None
+    if (_crlf and (_lf_bare or _cr_bare)) or (_lf_bare and _cr_bare):
+        raise AssertionError(
+            "混合行尾文件（CRLF/CR/LF 并存）——级联按单一 nl 操作会错位吞段（W706 实证）：先归一行尾再级联"
+        )
     return s, ("\r\n" if "\r\n" in s else "\n")
 
 
@@ -141,10 +149,16 @@ def main():
         entries = re.findall(r"·20\d{2}-\d{2}-\d{2}（", head_line)
     s = s[:h0] + head_line + s[h1:]
     s = re.sub(r"；v[\d.]+ W\d+ 起生效）", f"；{ver} {batch} 起生效）", s, count=1)
-    s = re.sub(r"## 一、当前进度（v[\d.]+ W\d+ [^；]*；更早批次详见 CHANGELOG\.md）",
-               f"## 一、当前进度（{batch} {desc} + 前两批详见 CHANGELOG.md）", s, count=1)
+    # W705 教训：标题锚点与替换串形态必须恒定——旧替换串丢 ver 前缀致下一批锚点静默失配（re.sub 0 替换不报错），
+    # 里程碑块遂在头部错位堆积、drop_block 跨段淘汰吞掉「一、当前进度」标题。此处改双形态锚点 + count 断言 fail-closed。
+    _prog = re.compile(r"## 一、当前进度（(?:v[\d.]+ )?W\d+ [^；]*；更早批次详见 CHANGELOG\.md）")
+    assert len(_prog.findall(s)) == 1, "「一、当前进度」标题锚点失配（W705 教训：静默失配后逐批漂移·先修复交接文档结构再级联）"
+    s = _prog.sub(f"## 一、当前进度（{ver} {batch} {desc}；更早批次详见 CHANGELOG.md）", s, count=1)
     fb = re.search(r"- \*\*v[\d.]+ W\d+", s)
-    assert fb, "未找到里程碑首块"
+    h1pos = s.find("## 一、当前进度")
+    assert fb and h1pos != -1 and fb.start() > h1pos, (
+        "里程碑首块必须位于「一、当前进度」段内（W705 教训：文件头错位块链自我强化·先修复交接文档结构再级联）"
+    )
     at = s.rfind(nl, 0, fb.start()) + 1
     s = s[:at] + spec["milestone_block"].replace("\n", nl) + nl + s[at:]
     pm = re.search(r"> 历史概要（W(\d+) 及更早）的详细记录见", s)
@@ -155,6 +169,9 @@ def main():
     if not tgt:
         raise AssertionError(f"未找到最老里程碑块 W{oldest_w}；现存块 {[b.group(2) for b in blocks_all]}")
     bm_start = tgt[0].start()
+    assert bm_start > s.find("## 一、当前进度"), (
+        f"最老里程碑块 W{oldest_w} 不在「一、当前进度」段内（W705 教训：跨段整块淘汰会吞掉段标题）"
+    )
     eidx = s.find(f"> 历史概要（W{oldest_w} 及更早）的详细记录见", bm_start)
     assert eidx != -1
     # W624 修复：整块淘汰 = 标题行 + 其后连续 bullet 行（至空行/新组/标题/引用行止）。
@@ -277,6 +294,15 @@ def main():
         if path == "交接文档.md":
             txt = data.decode("utf-8")
             sep = "\r\n" if "\r\n" in txt else "\n"
+            # W706 结构断言（用户挑刺 P0 实证：头部错位块链+段标题被吞·写后即拦不落脏盘）
+            _main = txt.find("# 交接文档")
+            if _main == -1 or txt[:_main].strip():
+                selfcheck.append("交接文档: 主标题前存在错位内容（结构断言）")
+            _z, _y, _e = (txt.find("## ⚠️ 零、当前阻塞"), txt.find("## 一、当前进度"), txt.find("## 二、下一步方向候选清单"))
+            if not (-1 < _z < _y < _e):
+                selfcheck.append(f"交接文档: 段序破坏（零={_z} 一={_y} 二={_e}）——段标题被吞（结构断言）")
+            if not re.search(r"> 历史概要（W\d+ 及更早）的详细记录见", txt):
+                selfcheck.append("交接文档: 历史概要指针缺失（结构断言）")
             hl0 = txt.find("> 最后更新：")  # W665 修复：里程碑块置顶后「最后更新」行不再固定在 index 6
             head_line = txt[hl0:txt.find(sep, hl0)] if hl0 != -1 else ""
             head_entries = re.findall(r"v[\d.]+ (W\d+)", head_line)

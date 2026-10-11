@@ -4,13 +4,30 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W705），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W706），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+>
+> **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.300（2026-10-11）：W706 编号空间盘点与元规则批
+
+> **来源**：用户方案第四五阶段（结构性发现 10 项+v 号空间元规则）——本轮=盘点与元规则起草（方案 D 形态改造待 W707 三决策点拍板）；含用户对盘点 v1 的八项挑刺全采纳（E 类单列/零命中确认表/file-index 拆分与决策点 3/沿革机器面/丙选项/页脚边界/测试钉语义/词义句）。
+> - **v 号使用点全量盘点**（docs/superpowers/plans/2026-10-11-version-space-inventory.md·v2）：**8791 处/826 文件**六类分域（A 历史段 1316/B 现役版本行 70/C 页脚站点 1009/D 脚本 137/E CITATION 1/F 叙述面 6258·file-index 系最大消费方 4652）+硬耦合 9 项+零命中确认表（CLAUDE.md 0 处=W664 设计实证·workflows 4 处非 0）+三决策点带倾向（① 段标题去 v+沿革机器面 ② CITATION version 丙=W 号形态 ③ file-index 甲=历史双列）+双键不单调实证（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）。
+> - **盘点自纠如实入档（保真度纪律）**：v1 首跑踩 W523 quotePath 坑（git ls-files 中文路径八进制转义→io.open 失败漏扫约 1100 处·交接文档-ARCHIVE 342/reader 中文页/对账表 80 等）——总数 7679→8791；E 类 CITATION 无 v 前缀形态被 pattern 排除误记 0——用户挑刺后单列。脚本随批修正并注明。
+> - **文档规范 §4.11 编号空间与标识符纪律**：编号空间字典（W/S/B/A/E/P/SC/WF/FAM 各空间互不混用·引用带前缀禁裸编号）+v/W 双键元规则（时间点查询以 W 为准·v 号合并段区间不单调实证）+范围词汇定义（全量/现役/版本四语义）+标识符禁令（叙述引用用标题/键锚点禁行号）+裁决记录形态（来源字段+对账表双处·撤销=新批反转）。
+> - **AGENTS 三处**：§4.3 主题视图索引块（CSS/JS/git/级联/数据/文档/Windows 七类按需查坑·正文不动）；§5.2 检查层次映射（md/site/py/数据面/CI 五层·本地绿≠CI 绿）；§8 清单间裁定链（文档规范 §11>CHANGELOG 现役段>交接·三视角清单声明）。
+> - **配套**：CONTRIBUTING 权威清单补 CLAUDE.md；CHANGELOG 头部 v/W 双键口径声明；交接 Backlog 新增 BL-21（豁免清单周期盘点·用户挑刺 #6）与 BL-22（方案 D W707 预告·三决策点）。
+> - **交接文档结构修复（用户第三次挑刺 P0 实锤·级联工具复合缺陷根治）**：W705 里程碑块错位于主标题前+「一、当前进度」标题缺失（零→二跳段）——考古=头部错位块链 W700 时代已现（batch_cascade 的 fb=re.search 全文找首块·错位后逐批自我强化），W702 级联 drop_block 跨段整块淘汰吞掉段标题（淘汰范围从头部 oldest 块跨到历史概要指针）；根治四件=① 标题替换锚点改双形态+count 断言（旧替换串丢 ver 前缀致下一批锚点静默失配）② 里程碑首块断言必须位于「一、当前进度」段内 ③ drop_block 最老块段内断言 ④ 交接文档手工重建（头部清零/段序零一二恢复/近 3 批块搬回/指针改 W702 及更早）；修复后级联 dry 在重建件上验证锚点全过。
+> - **挑刺其余裁决（7 条中 3 真 4 旧快照）**：真=CONTRIBUTING 仍引用已脱节的 article-template（改「以目标目录实际结构为准·勿直接套用」）+CLAUDE.md 常用命令缺 agent_start（补一行·42/60）+AGENTS 脚注 200+ 行（**BL-23 登记待排期**·迁移须核级联锚点）；旧快照驳回 4 条=README「26 项门禁」（现值 40·W702 已改+C5 对账 gate_count 过）README/STRUCTURE 版本行 v2.3.294 滞后（级联逐批重写·现值 v2.3.299）CHANGELOG 279/280 缺空行与四件套（W702 已补录「（W702 补录」×4 在案）STRUCTURE「6 篇/30 类」（C5a 对账 33 篇/34 类通过即铁证）。
+> - **shell 场景分层铁律（用户第八条消息·W706 三败教训制度化）**：单行命令任意 shell；多行/复杂转义一律落 Python 脚本文件（AGENTS §4.3 heredoc 条目升级——Git Bash python heredoc 同样有反斜杠四层转义/迭代器空/混行尾三类败·与 PowerShell 无关）；Windows Terminal 双 profile 装配为用户侧动作。
+> - **验证**：verify full 45 段绿；vscan 修正后全量重扫实数入档；doc-sync self-test 12/12；交接结构自证（主标题前干净·零一二级序·段内块）。
+> - **文件**：docs/superpowers/plans/2026-10-11-version-space-inventory.md（新增·v2）、scripts/_w706_vscan.py（新增·一次性·含 W523 修正注记）、docs/00-导读/文档规范.md（§4.11）、AGENTS.md（§4.3/§5.2/§8）、CONTRIBUTING.md、CHANGELOG.md（双键口径）、交接文档.md（BL-21/22）、docs/00-导读/W批次编号对账表.md（W706 认领）、六文档级联。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### v2.3.299（2026-10-11）：W705 Agent开局状态摘要批
 
