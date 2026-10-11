@@ -20,8 +20,8 @@
     "domain": "scripts/verify_delivery.py「第 N 槽/门禁」max",
     "generator": "scripts/stats.py",
     "introduced_by": "W493",
-    "last_changed_by": "W493",
-    "value": 40
+    "last_changed_by": "W709",
+    "value": 41
   },
   "html_total": {
     "domain": "site/**/*.html（递归全站）",

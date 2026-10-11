@@ -1,0 +1,70 @@
+# 工具链坑位全量（L2 主题层 · W709 自 AGENTS §4.3 迁入）
+
+> **📖 阅读契约（W709）**：查表型——改 CSS/JS/git/级联/数据面踩坑排查时按主题查；每条含根因与修法。
+> **何时读**：同类缺陷第二次出现 / 批量修改前 / 排查静默失效。**读完你应该能**：避开全部已知坑族。
+
+## shell 场景查坑表（W706 场景分层铁律的速查面）
+
+| 场景 | 禁止 | 允许 |
+|---|---|---|
+| 写 md/文本文件 | `Set-Content` / `Add-Content` / `>` 重定向 | Write 工具或 Python `open(encoding='utf-8', newline='')` |
+| 多行 commit 信息 | `cat <<EOF` / 任意 shell heredoc | Write 临时文件 + `git commit -F` |
+| 多行复杂转义逻辑 | 任何 shell 多行（含 bash heredoc·W706 三败） | 落 Python 脚本文件再调用 |
+| 路径传 Python | `/c/...`（MSYS 形态） | `C:/...`（盘符形态） |
+| 判退出码 | PowerShell `echo $?`（是布尔） | 管道前显式取 `$?`/`$LASTEXITCODE` |
+| 中文路径分类 | 直接拼 git 输出 | `git -c core.quotePath=false` |
+| Word COM/注册表/ACL | 强行 bash | PowerShell（Windows 原生域·W615/W693 先例） |
+
+## 六主题坑位（原文全量·内容零改动）
+
+### CSS / 视觉渲染（9 条）
+
+- **批量正则改 CSS/JS 后必须验证括号/引号平衡**（`check_structure.py` / `_find_css_breaks.py`）。
+- **批量关键字扫描/门禁必须穷尽同义变体**（W550）：可视化缺陷扫描的关键字要覆盖同义写法（如 饼图/环形图/圆环图/Pie Chart/Donut Chart）——「圆环图」变体曾致漏网；命中后以「可见措辞 × 实现签名（d3.arc/pie/treemap 计数）」双条件定错配，禁止单关键字定性。
+- **SVG 标签量测四坑**（W553）：① `getBBox()` 是元素局部坐标系，跨 `<g>` 比较文本 bbox = 幻影重叠（W550 audit-contentavoid 曾据此单页 display:none 65 个未重叠标签——「行标签缺失」类缺陷根因是补丁遮蔽非布局），跨组比较必须 `getBoundingClientRect()`；② tspan 显式 `x=0` 在「x 属性定位」的 text 中是 g 原点绝对坐标，随节点定位的 text 折行须让 tspan 显式继承同一 x；③ d3 `selection.text()` 覆写 textContent 会抹掉子元素——先 text() 后 append('title')；④ 行宽量测禁用 canvas.measureText 字体串拼装（比真实渲染窄约 9%），用 svg 内隐藏探针 text 的 `getComputedTextLength()`。修复图表 svg 挂 `data-audit-skip` 即可让隐藏型 audit 补丁（axisfix4/contentavoid/labelavoid/labelavoid-all）在 svg 级循环跳过（旋转型 axisfix1/2/3 不识别该属性，维持 W550 已验收外观）。W557 全站复审实证该类缺陷在其余 15 页持续发作（页面级豁免≠类绝迹），已全局根治：20 页 contentavoid 补丁内 `getBBox()`→`getBoundingClientRect()`（探针验证行标签复活），data-audit-skip 保留为页面级豁免机制。
+- **标记与 CSS 演化脱节查「基类是否还在」**（W557）：全站复审 30+ 页同现「KPI 统计条纵向裸排」，根因是页面只用 `.kpi-card.alt-*` 变体而基类 `.kpi-row/.kpi-card` 布局规则在历史批次丢失——「同文案多页同病」信号应立即查共享 CSS 基类；修法为对缺失页注入基类（纯 token 引用，禁裸色回退防 token 覆盖率门禁）。
+- **CSS 缺分号 = 整条声明静默丢弃**（W558）：`: var(--xxx)` 后无分号直接换行跟下一属性，CSS 解析把两条并为一条非法声明整体丢弃（每处丢 2 个属性）——全站 130 页 1006 处实测（ethics-consumption 21 处/narrative-experiment 22 处恰为视觉 FAIL 重灾页）；机械修复用 `: var(--x)
+ prop:` 形态正则补分号（_w558_fix_semicolons.py）。与基类丢失同属「属性静默丢失」族，排查视觉缺陷时优先扫描。
+- **全局批量规则前置「设计惯例三查」**（W571）：对 tokens/system 级全局 CSS/JS 规则或正则批量修复，落规则前必查——① 页内注入机制盘点（style 块/id 标记，如 #audit-halo 光晕）；② 页内双轨设计（码/标签、光晕、fill=none）；③ 规则带豁免条件（如 :not(:has(#audit-halo)))+ 实拍复验。实证：W569 v2 文字反白一刀切误伤 168 光晕页（墨字+白晕本双主题可读，W571 :has 豁免修正）。
+- **改 tokens.css/system.css 后必跑 `python scripts/inline_css.py --force` 分发**（W571）：与 generate_csp 同级必要——精修 tokens 规则后漏跑，:has 豁免只存在于源、未分发到 226 页内联副本（hardship-heatmap tick 实测 #F2EBDC 揭示）；分发后须实拍/样式探针复验。**--force 会按源重建 INLINED 块——历史批次追加在该块*内部*的页面私有规则会被静默洗掉**（W694 实证：四页 10 行〔语义网中英双页暗色 YlOrRd 重映射 + criticism-history 中英双页 reduce-motion〕被吞，暗色门禁 invisible 0→1 拦截后回灌）——运行 --force 后必须核对当批 diff 删除行是否仅标记行；页内私有规则一律写独立 `<style>` 块，禁追加进 INLINED 块内部。
+- **d3.select 静态快照空选区族**（W575）：`d3.select('#x')` 在元素声明前执行、元素根本不存在、或把选区方法调在自建门面对象（仅 show/hide）上，均为永久空选区/静默 no-op——tooltip 类功能**桌面鼠标同样失效**且常无报错（一报错反而是 `node().offsetWidth` 型 TypeError）；修法三态=惰性取用/按 W460 形态补元素（必须置于捕获脚本之前）/门面补齐缺失方法。静态扫描「select 行号 vs 元素 id 行号」即可穷尽（W575 四例三型，81-hardships/ecology/global-pattern/cross-time-danmaku）。
+- **触屏 tooltip e2e 三坑**（W575）：① tooltip 显隐多带 CSS transition，合成派发后同步读 `getComputedStyle().opacity` 恒为过渡起始值——探针以「预清空 tip 内容→派发→内容非空」同步信号判定，并 stash/restore 防污染页面；快照键不可含显隐态 class（visible 翻转致键漂移跨快照失配），用 id 或顶层序号；② Chrome 在 touchend 后把 hover 同步回真实鼠标位置并补发 mouseout——e2e 中一旦先动过真实鼠标，后续 tap 的 compat mouseout 会杀掉 tooltip 显示态（浏览器行为非页面缺陷），触屏断言序列须全部先于鼠标动作完成；③ 泛选择器 `[class*="tip"]` 会误伤 `small-multiple`（子串撞车）与 tooltip 内层元素（容器 opacity:0 隐藏时内层 computed opacity 仍 1）——精确化（tooltip 子串/tip 结尾）+ 顶层容器过滤；常显换内容型面板（prismTooltip 类）无隐藏态，隐藏断言以「触屏≡鼠标」经验对照替代硬编码 hidden 期望；④（W581）d3.drag 的 touchstarted 会 stopImmediatePropagation——document 冒泡层 touch 委托收不到可拖拽节点的触摸事件，注入须挂 document 捕获阶段（capture:true·先于目标阶段·免疫下游拦截）；⑤（W581）touchscreen.tap 的 tooltip 显隐在 Playwright 由 compat 事件随机承载（注入派发与断言错位·tap 式 PASS 可能是 compat 代劳）——断言改合成 TouchEvent 与取点同 tick 派发（兼顾力导向节点漂移），并以事件流取证甄别派发真身。
+
+### JS / CSP / 运行时（3 条）
+
+- **改任何内联脚本后，必须重跑 `python scripts/generate_csp.py`**——否则 CSP sha256 哈希失配，整个内联脚本被浏览器拒执行（症状：无 pageerror 但内容空白、`window.__data` 未设置）。
+- **fullPage 截图不触发 IntersectionObserver**（W554）：凡含 `.reveal-in`（js-reveal 滚动显现）的页面，截图/审查前必须逐屏滚动穿透（步进 innerHeight、回顶后等待），否则下方区块渲染为空白——W550 G4 教训的截图侧二犯（试审判 curated「整屏空白 FAIL」实为伪影）；已固化进 `scripts/_w554_review.js`。
+- ** Express 5 / Node 20+ 的 req 'close' 语义陷阱**（W568）：`req.on("close")` 在请求体读取完毕即触发（并非连接断开），SSE 路由据此提前 `res.end()` 会吞掉后续全部事件（实证：init 之后 error 事件整段丢失、前端「思考中」永久挂起）；SSE 断开清理改挂 `res.on("close")`（已完成）。副作用教训：P2-3 类「断开清理」修复在运行时大版本升级后须复核语义。
+
+### git / 提交 / 并发（7 条）
+
+- **批量改 md 一律 Python `open(encoding='utf-8')`，禁用 PowerShell `Set-Content`**（后者默认写 UTF-8 BOM，项目 W427 曾全库清 BOM；`Add-Content` 同理慎用）。
+- **同文件多个 Edit 必须串行执行**（并行 Edit 基于同一原始内容计算 diff，后写覆盖先写——W505 复现 4 次：金角银角「唐僧肉」/CHANGELOG W506 段/项目说明头部/交接文档标题均丢失）；并行批次后必须 Grep 验证所有修改点。
+- **Windows 多行字符串/heredoc 一律走 Write 临时文件 + 命令 `-F` 参数 + Delete 临时文件**，禁用 `cat <<'EOF'` heredoc（PowerShell 不支持，报错；W514 git commit -F 中文提交信息二度复用教训）。；**W706 升级为场景分层铁律：单行简单命令任意 shell 均可，多行/复杂转义/heredoc/大段文本一律落 Python 脚本文件再调用（`scripts/_wNNN_*.py`）——Git Bash 的 `python <<EOF` 同样有转义地狱（本批三败：反斜杠四层转义错位/迭代器静默空/混行尾吞段），bash heredoc 禁令与 PowerShell 无关、与「多行文本进 shell」本身冲突**
+- **跨 session / 涉及远端状态**：执行前先 `git log --oneline -5` + `gh run list` 确认最新状态，识别并行交付真实增量（E41）；workflow 触发条件必须匹配真实开发流、门禁建置即绿、引用文件先 `git ls-files` 确认（E36-E42 CI 类，详见交接文档「三」W516 段）。
+- **W537 三新规（W536 批次声明失真复盘）**：① CHANGELOG「验证」栏必须以当批实跑 `verify_delivery` 的输出为准填写，「状态」栏仅在提交/推送实际落地后为真——自制批量文档脚本绕过 bump_version 防护时同样适用（W536 实证：声明先于验证 → 4 项 FAIL 状态下写出「全绿 + 已推送」）；② 版本行/页脚更新须整行替换并同步改描述文本——第 22/23 门禁只校验 W 号不校验描述（三简单页脚「W536 号挂 W535 描述」串号实证）；③ CHANGELOG「文件」清单中的新建文件必须 `git add`——无门禁覆盖「清单 ⊆ tracked」，漏 add 即静默丢失；④ JS/工具脚本改动推送前必须以真实参数冒烟一次——node --check 不覆盖运行时（W537/W538 白名单形状回归实证；batch_cascade.py 冒烟口径同此）。
+- `_` 前缀脚本为一次性/诊断脚本，不入库门禁、不参与 CI。
+- **pre-commit scope 分级与提交重试（W698·用户裁决「动工」·外部挑刺 P2 两条落地）**：verify_delivery.py 支持 `--scope full|docs|site|auto`——11 个内联廉价段恒跑，32 个 subprocess 委托段按生效集统一短路（`_GATE_SUMMARY_MARKERS` 兜住防静默跳过 wrapper 的汇总行校验），段自洽锁非 full 档按生效子集断言；`auto` 按变更路径白名单分类（doc-ish/site-ish 正则，任何越界文件→full；未跟踪 docs/site 内容文件在场→full 保守回退），`.git/hooks/pre-commit` 传 `--scope auto`，**CI verify-delivery job 与批收尾七步③恒为全量不缩水**；实测 docs 档 2.3s vs 全量 62s（热缓存）。并行会话提交改用 `python scripts/safe_commit.py -F <msg> [--] <pathspec...>`——ref-lock 竞争核对并行增量与 pathspec 无交集后自动重试一次（`--self-test` 4 负样本）；仓库体量监视挂 release.py 步骤 3（count-objects·1GB 告警线·处置红线=禁历史重写，裁决史 SHA 锚定）。**worktree 每会话一树根治候选评估关闭（2026-10-11 用户采纳判断）**：git 禁止两 worktree 共 checkout 同分支→侧分支+合并编排的改造代价≫safe_commit+scope 分级后的残留摩擦（撞车已降为一次自动重试·级联顺序等待与 git 拓扑无关·tmpe/S4 本地件会碎片化）；重启条件=safe_commit 自动重试频率>1 次/周。
+- **workflow/脚本用 git diff 输出做路径分类必须加 `-c core.quotePath=false`**（W523）：git 默认把非 ASCII 路径输出为带双引号的八进制转义串（交接文档.md → `"\344\272\244..."`），首尾引号破坏 bash case/glob 匹配（连 `*.md`、`docs/*` 都失配）→ 免审/定向分支被静默架空、恒走兜底全量（Screenshot Review scope 步骤曾因此每次推送 ~11min 全量截图）；验证靠本地 Git Bash 复刻分类逻辑对真实范围双向模拟。
+
+### 级联 / CHANGELOG（4 条）
+
+- **bump_version.py** 一键补齐辅助 4 文档版本行（W576 起恢复可用：W536 写路径守卫根目录曾误算为 scripts/ 致任何调用必误判越界，经用户批准修复为项目根——与 W550 修复的 generate_csp 同款；其「全文件 W001-W### 范围替换」覆盖 batch_cascade 不触及的 README 目录树/交接 CHANGELOG 范围行等存量漂移面，整文件 text-mode 重写兼带孤立 \r 损伤归一）；**三个已知坑（①②多次复现 W524 扩证·③W528 实证）**：① 全局替换会污染 file-index 历史段（生成「WXXX WXXX」重复标题的空壳段、登记表为空，需手工补全当批文件表）；② `--desc` 与 `--note` **均会**往 STRUCTURE.md 头部 / docs/00-导读/项目说明.md 的上一版本行**追加**「 + WXYY(...)」而非替换主描述（W523 实测 `--note` 同样触发——此前仅登记 `--desc` 单触发面）；③ 三简单页脚（index/cross-time-danmaku/tag-cloud）同步为替换式、只匹配"链首 == 解析版本"的条目，页脚一旦滞后就永不被命中（W528 实证停在 W453 脱节 74 批）——跑完必须 Grep 校验版本行三处 + 三页脚版本实际前进并手工净化。
+- **CHANGELOG 多版段插入/重排只用脚本 + 结构断言**（锚点唯一性 + 版段 order 校验），手工 Edit 大段会吞相邻版段标题；**新批版本号先 Grep 现役段取 max+1 再写**（防撞号）。
+- **batch_cascade.py 在 CRLF 文档上会翻倍行尾且头链双写**（W553，W554 二犯实锤）：级联落盘后 6 个 CRLF md 行尾变 4×CR（`\r\r\r\r\n`）、交接头链 entry 以「；」「·」各写一次——落盘后必须字节级核查（行尾 CR 串收敛 + 链唯一性断言），翻倍即逐行 `rstrip(b'\r')` 收敛修复；断言口径见 `scripts/_w553_jiacheck.py`（改批号复用）。**spec desc 禁含分隔符（·/—/；）**：desc 会被写进各文档当前态版本行，内嵌分隔符使下一批 batch_cascade 的 `[^·]*·A1-A6` 型锚点正则失配（W664 实证：W663 手工级联 desc 含「·」→ 本批 dry-run README/项目说明两锚点 AssertionError，去内嵌 · 后通过）。**跳号/合并段批次走手工级联脚本（W663/W666/W667/W679 四先例）**：对账表认领号 ≠ CHANGELOG 现役+1 时 batch_cascade「批次号应为 WNNN」断言必 FAIL（预留号被历史段登记占用不能让路）——复刻工具全部锚点断言写一次性脚本（批号硬编码+偏差声明在头·`scripts/output/_w663_close_cascade.py`/`_w679_close_cascade.py` 前例可复制改造），dry-run 全过再 --apply。**head_entry 内嵌日期串触发尾链自检误报（W679/W680 两犯）**：级联条目文本内含形如 `2026-10-07-xxx.md` 的文件名时，写后自检按「2026-」计数 >3 误报「尾链异常」——直接正则提取头尾链 W 号核实恰 3 条且链首=当批即放行，勿盲改。**提交信息/级联文本含预留 W 号触发第 31 门禁 C4（W680 实证）**：预留号动工前先在对账表登记预留行（登记即豁免）再写进提交文本。**乱序认领号 file-index 段插数值位（W676/W677 两例）**：认领号小于现役 max 时（预留号后补执行），file-index 新段若照常插顶部会触发第 17 门禁「段倒序断言」——按数值序插到前一个较小号段之上（W676 段插 W675 上）；级联文本/提交信息提前引用未认领自由号时按 D2 在对账表「递延批豁免登记」加 bullet（登记即豁免且不占号·W691 实证）。
+- **级联落盘清单与 partial commit 三犯根治**（W649·W595 sitemap 漏 add/W632 CITATION 三连漏/W647 版本行六面漏——同族三犯，病根均为「级联已落盘但未进提交」的检出树≠工作树脱节）：batch_cascade.py --apply 落盘后输出持久清单 `scripts/output/_cascade_files_<批号>.txt`，提交时按清单逐面 `git add`；级联外 chore 提交的版段对账由下一级联批追记（7b27cf1→W649 先例）；**并行批次在途时用 pathspec 提交互斥**（`git commit -F msg -- <paths>` 不动对方 index·动手前必须 `git log` 识别并行增量·跨批共享文件 AGENTS/CHANGELOG 等让行给暂存方）；**W 批编号动工前在对账表登记认领，唯一对账依据 = docs/00-导读/W批次编号对账表.md（W663 起·「Grep 现役段 max+1」在版段递延时可能滞后于已认领号）**。
+
+### 数据 / 内容可信度（4 条）
+
+- **CHANGELOG/方案档验收数字必须当批现测**（W496 铁律）：写 M 指标/内联字节数等数字前先跑 `python scripts/acceptance_snapshot.py` 从输出抄，禁止从上一批 CHANGELOG 复制（W493「28385B」跨批复制曾掩盖全站 INLINED 清空事故）。
+- **写 `> 原文引文` 行前先跑 `python scripts/_cite_probe.py --kw <关键词> --chap <回目>`** 从 text-search.json 提取候选，禁止凭记忆编造（W503 门禁只拦截"写入后未命中"，无法拦截"恰好像原文的编造"）；新文档（非基线豁免）用变体称谓（行者/唐僧/圣僧等）必须同时含 canonical（孙悟空/玄奘），写作前 Grep `dataset/glossary.json` 称谓组。
+- **EMBEDDED 回退铁律的部署态反例**（W554）：en/81-hardships.html EMBEDDED 清单为空数组 + fetch 指向 site 外路径（`../../scripts/output/data/`）——file:// 与 Pages 部署态双断（截图实锤 0/0 trials）。新增页面自查两条：EMBEDDED 必须含完整数据（不允许空数组等 fetch）；fetch 相对路径不得越出 site/（部署根=site/）。
+- **部署态冒烟与 file:// 审查是两条独立覆盖面**（W565 实证，P04）：EMBEDDED 回退机制使 fetch 成功（部署）与 fetch 失败（file://）走上不同代码路径，character-appearance 契约失配在生产崩溃数日而 file:// 截图审查全绿。凡改动「数据装载层 / fetch 链路」的批次，收尾必跑 `scripts/_deploy_smoke.js`（http.server + Playwright 断言 4xx/pageerror）。**修复 site/data/json 部署副本的批次，收尾必配「旧值标记全页面扫描」（W691 实证 6 页漏网）：json 与页内嵌副本是双路径，只改 json 必产生静默分叉——以修复前旧值为标记 grep 全站 data/en 页面，命中即同步重灌（W678 十六项 json 修复全未配此步，review 批补扫 cave-estate/geo3d/ethics 双语/game-webnovel/visual-art/workplace 六页；text-search-app.js 内嵌语料属同族第三容器，语料重建须三处同改：dataset json+部署副本+app 内嵌）。**
+
+### 流程 / 协作 / 取证（4 条）
+
+- **共享机制必须写入仓库内文件（git tracked）**：任何要让其他 Agent 读到的机制/规则/经验，一律写仓库内公共载体（AGENTS.md / 交接文档 / skills/ / docs/10-方法论沉淀/），**禁止只写全局路径**（如 `c:\Users\...\.trae-cn\skills\`）——其他 Agent 在项目 session 读的是仓库版，且 `sync_skills.py --sync` 为仓库→全局单向（全局修改会被覆盖）。改 skills/ 下任何 skill 必须改仓库版后 `python scripts/sync_skills.py --sync` 同步全局（W516 教训：上移机制曾误写全局版，被用户指出载体错误）。（W562：skills/ 目录已退役，本条 sync 指引仅存历史——用户级 `~/.zcode/skills/` 的 4 个通用会话技能为 junction，指向 `D:\open-source\`，与仓库无关。）
+- **W 批次收尾七步清单**（W543-W548 六批 dogfood 后 W563-W566 四批延续实证，沉淀自 2026-09-06 报告 S-A）：① 内容改动 → 专项门禁（改内联脚本/样式必跑 generate_csp + --check）；② 新增/修改 Python 脚本 → `python -m ruff check scripts/`（推送前本地预检，CI 红灯历史三类均为本地可拦截）；③ verify_delivery 核心全绿；④ batch_cascade dry-run → apply（自检通过即登记，无人工修复步骤）；⑤ Write 临时提交信息文件 + `git commit -F`（禁 heredoc）；⑥ `git push` → `gh run list` 确认（CI 与 Screenshot Review 为准）；⑦ 记忆/交接文档状态同步。**数据面扩展先查计数钉（W691 CI 红灯实证）**：扩追踪集/数据集（如 aliases 加人）先 grep tests/ 的 `assert len ==` 计数断言并同步；七步中的 pytest 须本地全量跑（W691 只跑单文件漏掉两例计数钉）。
+- **取证枚举四陷阱**（W563-W566 三犯沉淀 · ④ W649 补录）：① 站点/全仓级枚举一律 Python `glob(recursive=True)`，禁 shell 单层 glob（顶层扫描曾漏 scripts/B_人物/ 子目录生成器）；② `grep -n` 行号前缀输出不得与其他命令输出混读（行号曾被误读为 git ls-files 内容致 F17 假阳性方案项）；③ 判定 ugrep 循环失真时改用 Python 重扫（同会话三犯）；④ **判定"文件是否在仓库内"必须核 `git ls-files`，磁盘存在 ≠ 跟踪**——W649 实证：摸底阶段见 `docs/S4-学术投稿/` 目录在磁盘即判"投稿包滞留 public 仓库待出库"，实际 W620 已 untrack+gitignore 出库（`git ls-files` 返回 0），失真前提污染了三份分析产物并经 ICE 打分放大到榜首，经用户复核才纠正。
+- **子代理显式派发三类场景**（W671）：①独立取证扇出（外部评审/外部分析每主张一代理并行对仓取证——判例在仓库文件里，子代理冷启动不丢判例）；②只读调研（风险面普查/影响面盘点等与主线无共享写的任务，可与级联/CI 并行）；③长等待空档（等 CI/等长命令期间显式派发，禁纯 sleep）。主 context 保留三类内容=裁决与冻结史、串行变更链（单工作树+pre-commit+段计数锁为共享可变状态·并发写违反「同文件 Edit 串行」铁律）、跨步骤即时发现（发现会改变下一步，无法预先写进子代理指令）。**机器门禁优先于 agent review**：可复算的防线（自洽锁/负样本/doc-sync）先建，review 型代理只补机器判不了的面。子代理产出落仓库公共载体（本条即 W517 载体铁律的自我适用·私有记忆仅作镜像）。
+

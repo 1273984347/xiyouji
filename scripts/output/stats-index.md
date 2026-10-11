@@ -9,7 +9,7 @@
 |---|---|---|---|---|
 | a1_a6_docs | 615 | docs/01-06 六板块顶层内容 .md（排除 README） | W505 | W505 |
 | csp_covered | 856 | html_total − _template.html（generate_csp TEMPLATE_EXCLUDE） | W459 | W459 |
-| gate_count | 40 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | W493 |
+| gate_count | 41 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | W709 |
 | html_total | 857 | site/**/*.html（递归全站） | W459 | W459 |
 | inline_css_pages | 330 | site 全树含 INLINED 标记页 | W459 | W459 |
 | json_count | 135 | scripts/output/data/*.json | W676 | W676 |
@@ -24,6 +24,9 @@
 | visualization_pages | 87 | site/data_html − _shell.html | W459 | W459 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W709（2026-10-11）
+- gate_count: 40 → 41
 
 ### W704（2026-10-11）
 - （无变更·例行重跑）

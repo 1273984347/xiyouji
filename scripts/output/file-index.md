@@ -11,6 +11,22 @@
 ---
 
 
+## W709 W709 BL-24分层搬迁批（2026-10-11·v2.3.303）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/agent/gates.md | W709 | 新增：门禁全量 40+41 条五组重排（L2） |
+| docs/agent/pitfalls.md | W709 | 新增：坑位 31 条六主题+shell 查坑表（L2） |
+| docs/agent/agent-web.md | W709 | 新增：Web Agent 主题（L2） |
+| docs/archive/AGENTS-ARCHIVE.md | W709 | 新增：脚注 W458-W700 沿革归档（BL-23） |
+| AGENTS.md | W709 | 摘要层重构（§4.2/4.3/4.4+脚注切分） |
+| scripts/check_agents_layers.py | W709 | 新增：第 41 门禁 AGENTS 分层完整性（self-test 5） |
+| scripts/verify_delivery.py | W709 | 第 41 槽四处同改+自洽锁 46 段 |
+| scripts/_w709_migrate.py | W709 | 一次性：搬迁器（守恒断言） |
+| scripts/output/stats.json | W709 | gate_count 41（--w W709 记账） |
+| docs/00-导读/文档规范.md | W709 | §8 第 41 描述与上限 |
+| docs/00-导读/W批次编号对账表.md | W709 | W709 认领 + 现势 W710 |
+
 ## W708 W708 全变动对抗复审修复批（2026-10-11·v2.3.302）
 
 | 文件 | W | 说明 |
