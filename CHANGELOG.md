@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W702），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W703），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857 页（site/data 88 + site/en 138 + site 根 9 + site/reader 622）；CSP 覆盖 856 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855 文件（再排除 `_shell.html`）；check_seo_head 扫 855 页（site 全树减两个模板壳）；inline_css 同步 330 页（site 全树含 INLINED 标记页）；「可视化页 87」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.297（2026-10-11）：W703 聚合数字对账门禁批
+
+> **来源**：用户方案「40 个门禁仍漂移——根因诊断与 A+C 路线」（W702 挑刺 17 项裁决同日追加）——聚合数字系磁盘可计算量以手写常量散落叙述文本，逐点设防有天花板；按修正形态落地（A=stats.json 磁盘实算+C5 对账；C 裁剪为句式白名单+指针化规范——CHANGELOG 历史段须记录当批口径、README 内容规模数字面向读者且已受第 3 门禁磁盘对账，故全量禁写不采纳；占位符回填不采纳，循 W652 design-tokens 机器生成权威先例替代）。
+> - **stats.py + stats.json**：scripts/stats.py 从磁盘实算 15 键（html_total 857〔site/data 88+en 138+根 9+reader 622〕/csp_covered 856/scan_files 与 seo_scanned 855/inline_css_pages 330/visualization_pages 87/gate_count 40〔verify 槽位实解〕/a1_a6_docs 615〔排除六板块 README·口径对齐第 3 门禁·首跑 621 差 6 即此〕/methodology_docs 33/json_count 135/script_classes 34）+ --check 零差异自证；stats.json tracked 入库（CI 可复现·「gitignored 不作基准」第 40 门禁教训同源）。
+> - **C5 聚合数字对账**（第 31 门禁第 5 查）：18 式高危聚合句式×现役叙述面（README/STRUCTURE/AGENTS/项目说明全文+CHANGELOG 仅口径块行+AGENTS 版本脚注剥离）vs stats.json 实时对账——失配=FAIL、stats 缺键=fail-closed、基线/首跑时点值靠句式表设计豁免（第 33/34 门禁「235 页扫描」无 seo 语境自动放行实证）、行级豁免沿用；--self-test 7→10 例（T8 失配必红/T9 行级豁免放行/T10 stats 缺失 fail-closed）。
+> - **首跑即产证**：C5 抓 AGENTS 版本脚注 W514 条目「约 86 个可视化页」时点实况（历史记录非漂移）——据此把脚注区剥离出扫描域（历史段豁免哲学），正文现役值全对账通过。
+> - **配套规范**：AGENTS §4.2 第 31 条目扩 C5；文档规范新增 §4.10 聚合数字书写规范（唯一基准/现役叙述面句式对账/新增聚合量登记制/时点值豁免边界）。
+> - **验证**：check_doc_sync --self-test 10/10 + 首跑 0 FAIL；stats.py --check 零差异；verify full 45 段绿；pytest 293；ruff 0 错。
+> - **文件**：scripts/stats.py（新增）、scripts/output/stats.json（新增·tracked）、scripts/check_doc_sync.py（C5）、scripts/_w703_docsync.py（一次性）、AGENTS.md（第 31 条目）、docs/00-导读/文档规范.md（§4.10）、docs/00-导读/W批次编号对账表.md（W703 认领）、六文档级联。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### v2.3.296（2026-10-11）：W702 六文档口径清债批
 

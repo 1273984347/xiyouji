@@ -7,8 +7,11 @@
   C2 交接文档头链链首「- **vX W###」 ≡ CHANGELOG 顶段（v + W）
   C3 AGENTS §4.2 门禁清单最高编号 == verify_delivery.py 实况最高槽位
   C4 提交-版段对账：近 15 条 commit subject 中的 W### ⊆ CHANGELOG 版段集合 ∪ 对账表登记行
+  C5 聚合数字对账（W703）：18 式高危聚合句式 × 现役叙述面（README/STRUCTURE/AGENTS/项目说明全文 +
+     CHANGELOG 仅「全站页数口径」块行）vs scripts/output/stats.json（scripts/stats.py 磁盘实算·tracked）；
+     基线/首跑等时点值靠句式表设计豁免（不进句式形态），新聚合量须先登记 stats.py 键表
 豁免：行级 <!--doc-sync:exempt 原因-->；.git/shallow 存在时 C4 跳过（pre-commit 本地为主执行点）。
-用法：--check（默认）只读校验，0 FAIL 才过；--self-test 注入式负样本 7 例（纯合成输入，不改真实文件）；
+用法：--check（默认）只读校验，0 FAIL 才过；--self-test 注入式负样本 10 例（纯合成输入，不改真实文件）；
      --json 供 CI 消费。本脚本绝不修改任何文件。
 """
 
@@ -30,6 +33,29 @@ RE_VERIFY_SLOT = re.compile(r"第\s*(\d+)\s*(?:槽|门禁)")
 RE_COMMIT_W = re.compile(r"(?<![A-Za-z0-9])[Ww](\d{3})(?!\d)")
 RE_TABLE_ROW_W = re.compile(r"^\|\s*W(\d{3})\s*\|", re.M)
 RE_TABLE_DEFER = re.compile(r"^-\s*\*\*((?:W\d{3})(?:\s*/\s*W\d{3})*)\*\*", re.M)
+RE_STATS_PATTERNS = [  # (正则, (键...), 语境词[None=无·小写包含判定]) —— 键值与 scripts/output/stats.json 对账
+    (re.compile(r"HTML 共 (\d+) 页"), ("html_total",), None),
+    (re.compile(r"site/data (\d+) \+ site/en (\d+) \+ site 根 (\d+) \+ site/reader (\d+)"),
+     ("site_data_html", "site_en_html", "site_root_html", "site_reader_html"), None),
+    (re.compile(r"CSP 覆盖 (\d+) 页"), ("csp_covered",), None),
+    (re.compile(r"(\d+) 页哈希 0 漂移"), ("csp_covered",), None),
+    (re.compile(r"扫 (\d+) 文件"), ("scan_files",), None),
+    (re.compile(r"(\d+) 页扫描"), ("seo_scanned",), "seo"),
+    (re.compile(r"扫 (\d+) 页"), ("seo_scanned",), "seo"),
+    (re.compile(r"同步 (\d+) 页"), ("inline_css_pages",), None),
+    (re.compile(r"(\d+) 个[^，。）]*?可视化页"), ("visualization_pages",), None),
+    (re.compile(r"(\d+) 可视化页"), ("visualization_pages",), None),
+    (re.compile(r"(\d+) 项自动化门禁"), ("gate_count",), None),
+    (re.compile(r"共 (\d+) 篇"), ("a1_a6_docs",), None),
+    (re.compile(r"已建 (\d+) 篇"), ("methodology_docs",), "方法论"),
+    (re.compile(r"(\d+) 个 JSON 文件"), ("json_count",), None),
+    (re.compile(r"site/data/ 共 (\d+) 个 HTML"), ("site_data_html",), None),
+    (re.compile(r"A-AH (\d+) 类"), ("script_classes",), None),
+    (re.compile(r"按 (\d+) 类组织"), ("script_classes",), None),
+    (re.compile(r"(\d+) 类子目录全建"), ("script_classes",), None),
+]
+RE_CHANGELOG_SCOPE = re.compile(r"^> \*\*全站页数口径\*\*.*$", re.M)  # CHANGELOG 扫描域=口径块行
+C5_DOC_NAMES = {"readme": "README.md", "structure": "STRUCTURE.md", "agents": "AGENTS.md", "xiangmu": "项目说明.md"}
 EXEMPT_MARK = "<!--doc-sync:exempt"
 ARCHIVE_CHANGELOGS = [
     os.path.join(ROOT, "docs", "archive", "CHANGELOG-ARCHIVE.md"),
@@ -130,7 +156,50 @@ def evaluate(inp):
             for w in RE_COMMIT_W.findall(s):
                 if w not in reg:
                     issues.append("C4: 提交「%s」的 W%s 无 CHANGELOG 版段且未在对账表登记" % (s[:60], w))
+
+    # C5 聚合数字对账（W703·用户方案 A+C 修正形态）：句式白名单 × 现役叙述面 vs stats.json
+    stats = inp.get("stats")
+    if not stats:
+        issues.append("C5: scripts/output/stats.json 缺失或不可解析——先跑 python scripts/stats.py（fail-closed）")
+    else:
+        scans = [("CHANGELOG 口径块", ln) for ln in RE_CHANGELOG_SCOPE.findall(inp["changelog"])]
+        for key in C5_DOC_NAMES:
+            text = inp[key]
+            if key == "agents":
+                cut = text.find(chr(10) + "*本文件由")  # 版本脚注=历史沿革记录（W514 时点实况等）·不在扫描域
+                if cut != -1:
+                    text = text[:cut]
+            for i, ln in enumerate(text.splitlines(), 1):
+                scans.append(("%s:%d" % (C5_DOC_NAMES[key], i), ln))
+        for where, ln in scans:
+            if EXEMPT_MARK in ln:
+                continue
+            for pat, keys, ctx in RE_STATS_PATTERNS:
+                m = pat.search(ln)
+                if not m or (ctx and ctx not in ln.lower()):
+                    continue
+                for gi, key_name in enumerate(keys, 1):
+                    want = stats.get(key_name)
+                    got = int(m.group(gi))
+                    if want is None:
+                        issues.append(
+                            "C5: stats.json 缺键 %s（%s 命中「%s」）——新聚合量须先登记 scripts/stats.py"
+                            % (key_name, where, m.group(0))
+                        )
+                    elif got != want:
+                        issues.append(
+                            "C5: %s「%s」=%d ≠ stats.json %s=%d（跑 python scripts/stats.py 刷新或修正文档）"
+                            % (where, m.group(0), got, key_name, want)
+                        )
     return issues, notes
+
+
+def _load_stats():
+    try:
+        with open(os.path.join(ROOT, "scripts", "output", "stats.json"), encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return None
 
 
 def gather():
@@ -143,7 +212,10 @@ def gather():
         "readme": rd(os.path.join(ROOT, "README.md")),
         "jiaojie": rd(os.path.join(ROOT, "交接文档.md")),
         "agents": rd(os.path.join(ROOT, "AGENTS.md")),
+        "structure": rd(os.path.join(ROOT, "STRUCTURE.md")),
+        "xiangmu": rd(os.path.join(ROOT, "docs", "00-导读", "项目说明.md")),
         "verify_src": rd(os.path.join(HERE, "verify_delivery.py")),
+        "stats": _load_stats(),
         "table": rd(os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md")),
         "subjects": [],
         "shallow": os.path.exists(os.path.join(ROOT, ".git", "shallow")),
@@ -176,7 +248,7 @@ def run_check():
     for nt in notes:
         print("NOTE  " + nt)
     print(
-        "---- 第 31 门禁 文档口径体检：%d FAIL · %d NOTE（C1 README 抬头 / C2 交接头链 / C3 门禁清单上限 / C4 提交-版段对账）----"
+        "---- 第 31 门禁 文档口径体检：%d FAIL · %d NOTE（C1 README 抬头 / C2 交接头链 / C3 门禁清单上限 / C4 提交-版段对账 / C5 聚合数字对账）----"
         % (len(issues), len(notes))
     )
     return (1 if issues else 0), issues, notes
@@ -192,6 +264,12 @@ def run_self_test():
         "verify_src": "# ---- 第 30 槽 ----\n# ---- 第 31 槽 ----\n",
         "subjects": ["feat(w999): 自测提交"],
         "table": "| W999 | x | y | z | s | c |\n- **W659 / W660**：递延登记\n",
+        "structure": "",
+        "xiangmu": "",
+        "stats": {"gate_count": 31, "html_total": 100, "a1_a6_docs": 50, "methodology_docs": 6,
+                  "visualization_pages": 10, "csp_covered": 100, "scan_files": 100, "seo_scanned": 100,
+                  "inline_css_pages": 10, "json_count": 9, "script_classes": 34,
+                  "site_data_html": 10, "site_en_html": 10, "site_root_html": 10, "site_reader_html": 70},
         "shallow": False,
     }
     cases = []
@@ -224,6 +302,24 @@ def run_self_test():
         expect_absent=True,
     )
     case("T7 干净输入零误报", lambda d: None)
+    case(
+        "T8 聚合数字失配必红（C5）",
+        lambda d: d.update(readme=d["readme"] + "每次提交需通过 99 项自动化门禁\n"),
+        "C5",
+    )
+    case(
+        "T9 聚合数字行级豁免放行（C5）",
+        lambda d: d.update(
+            readme=d["readme"] + "每次提交需通过 99 项自动化门禁 <!--doc-sync:exempt 自测豁免-->\n"
+        ),
+        "C5",
+        expect_absent=True,
+    )
+    case(
+        "T10 stats.json 缺失 fail-closed（C5）",
+        lambda d: d.update(stats=None),
+        "C5",
+    )
 
     fails = 0
     for name, mutate, expect_prefix, expect_absent in cases:

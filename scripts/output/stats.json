@@ -1,0 +1,19 @@
+{
+  "_generated": "2026-10-11",
+  "_generator": "scripts/stats.py（W703·第 31 门禁 C5 对账基准·改口径批次须同批刷新）",
+  "a1_a6_docs": 615,
+  "csp_covered": 856,
+  "gate_count": 40,
+  "html_total": 857,
+  "inline_css_pages": 330,
+  "json_count": 135,
+  "methodology_docs": 33,
+  "scan_files": 855,
+  "script_classes": 34,
+  "seo_scanned": 855,
+  "site_data_html": 88,
+  "site_en_html": 138,
+  "site_reader_html": 622,
+  "site_root_html": 9,
+  "visualization_pages": 87
+}
