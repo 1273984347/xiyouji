@@ -1,0 +1,19 @@
+{
+  "batch": "W657",
+  "version": "v2.3.257",
+  "date": "2026-10-04",
+  "desc": "B-6 第二步可引用性组件",
+  "title": "W657 B-6 第二步可引用性组件 — 86 页 cite-block 静态注入（数据源+APA/BibTeX+下载）+ cite-box.js 交互模块 + 第 28 门禁基线 327→0 全量收紧（C1-C4 86/86·D4 兑现·转全量 FAIL 模式）",
+  "head_entry": "2026-10-04（v2.3.257 W657）B-6 第二步可引用性组件——86 页 cite-block 静态注入（数据源+快照+APA/BibTeX 预生成文本+JSON 下载入口），cite-box.js 交互模块（复制按钮 token 样式·file:// 降级），第 28 门禁基线 327→0 全量收紧（C1/C2/C3/C4 86/86 全过·D4「收敛至阈值以下」兑现·门禁转全量 FAIL 模式）",
+  "changelog_body": "\n> **来源**：全量启动队列第七批——B-6 第二步按 registry 启动注记（用户 2026-10-03「全部启动」·免另立 PRD）执行：86 页引用组件（APA/MLA/BibTeX 复制）+ 导出。\n> - **静态注入（_w657_cite_inject.py）**：81 页 append-to-dataSource / new-dataSource + 5 页 body 后新建（view/explorer/search 五特殊页无 dataSource 区与 noscript）——块内容全部真实信息零编造：数据源（fetch 页=json/xxx.json 路径·EMBEDDED 页=内嵌数据声明+scripts/run_all.py 批量生成入口+「快照 2026-10-04」）+ 引用格式 details 折叠（默认收起视觉零扰动·APA 与 BibTeX 预生成文本·title/canonical 从页面提取）+ fetch 页 a[download] JSON 下载入口。\n> - **交互模块 cite-box.js**（src 挂载 86 页·W656 同款形态）：复制按钮事件委托（navigator.clipboard 优先·file:// execCommand 降级·2s 反馈）+ token 样式动态注入（零裸色·覆盖率门禁合规·details 收起不动 W550 验收面）；无组件页零开销。\n> - **第 28 门禁基线全量收紧（D4 兑现）**：注入后 86 页 C1/C2/C3/C4 四项全过（86/86）——基线 missing 327→0（--generate-baseline 重生成 344 行全 ok）·门禁转全量 FAIL 模式（未来任何页缺任一项即红·零豁免）；W638「存在性对≠分级对」教训闭环：本次是真实修复后的收敛非判据放宽。\n> - **验证**：ruff 0 错；check_citability gate 基线外 0·可收紧 0；第 29/30 门禁与 verify 核心全绿；playwright 探针（citeBox 在位/2 复制按钮/details 可展开/cite-box.js 加载执行/零 pageerror）；CSP 不涉（无内联脚本改动·cite-box 为 src）。\n> - **文件**：site/static/js/cite-box.js（新增）、site/data 86 页（cite-block 注入+cite-box 挂载）、scripts/output/citability-baseline.txt（刷新 0 missing）、scripts/output/_w657_cite_inject.py（工具存档）、scripts/output/_cascade_files_W657_pages.txt、六文档、四页脚、CITATION、file-index。\n> - **状态**：已落地（本批提交并 push origin/main）。\n",
+  "milestone_block": "- **v2.3.257 W657 B-6 第二步可引用性组件**：\n  - 86 页 cite-block 静态注入（数据源+快照+APA/BibTeX+下载）+ cite-box.js 交互模块（复制/降级/token 样式）\n  - 第 28 门禁基线 327→0 全量收紧（C1-C4 86/86·D4 兑现·转全量 FAIL 零豁免）\n  - B-6 全项关闭（第一步门禁+第二步组件·registry 记账收尾随下批级联）\n",
+  "head_sentence": "B-6 第二步引用组件+第 28 门禁基线全量收紧",
+  "agents_note": "2026-10-04（v2.3.257 W657）B-6 第二步可引用性组件：无 § 结构性变更（86 页 cite-block 注入+cite-box.js 交互模块+第 28 门禁基线 327→0 全量收紧 C1-C4 86/86·D4 兑现转全量 FAIL），仅版本脚注同步",
+  "file_index_rows": [
+    "| site/static/js/cite-box.js | W657 | 新增·可引用性交互模块（复制/降级/token 样式动态注入） |",
+    "| site/data/*.html ×86 | W657 | 更新·cite-block 静态注入（数据源+APA/BibTeX+下载）+cite-box 挂载 |",
+    "| scripts/output/citability-baseline.txt | W657 | 刷新·missing 327→0（四项 86/86·全量 FAIL 模式） |",
+    "| scripts/output/_w657_cite_inject.py | W657 | 新增·注入工具（真实信息零编造·页面清单输出） |",
+    "| scripts/output/_cascade_files_W657_pages.txt | W657 | 新增·页面触达清单 |"
+  ]
+}

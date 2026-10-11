@@ -1,0 +1,12 @@
+fix(w678): 站点质量修复批次六——WP-6.1 三层断链根治 + WP-6.2/6.3 修复注记 + WP-6.4 出场管线 + WP-6.6/6.7 机械硬伤 + WP-6.5 Backlog 十四项 + W677 暗色回归修复
+
+方案 V1.7 批次六（B-8 惯例：机械/注记级直改、语义口径登记、生成器层先行）：
+- WP-6.1：sync_data_json.py 新建（生成器输出→部署副本单向同步·清单制）；cave_estate 四层归一（生成器内嵌数据白虎洞改波月洞/mischief 清除/万圣公主遗物改万岁狐王遗物 + dataset 真源同改 + 重跑同步）
+- WP-6.2/6.3：character_cards /demo 残留删；deconstruction_summary year_range [1986,2024]+明细关联注记；dialogue_sentiment 加 avg_sentiment_note/other_speakers 46/缺回注记；cave_by_owner_rank 中将级改妖将级
+- WP-6.4：character_appearance 生成器 FIRST_APPEAR_OVERRIDE 增观音=6（泛称「菩萨」第 1 回猴谣误计·剧情首秀口径）+ characters[] 补 appear_in_chapters（35/35 非空·W640 缺口闭合）；重跑同步。两条方案证据源反转裁定：玉帝 first=1 维持（方案引 text-search 第 1 回系 1584 字节选本，分回 md 实有「惊动高天上圣…玉皇大天尊」；抽样 8 角色对分回原文实算全一致）
+- WP-6.6/6.7：ticker 全角冒号×5 改半角；越南 year 结构化 year_start/year_end；大猿王中国条目单列《悟空传》；heart_sutra 归零语义对齐；journey_geo_3d duration 注记；villain_matrix 区间连续化 [0,6]/[7,10]+计数复算 1/7/6/1（对齐页内嵌副本）；rescue_roi 主观评分注记；project_review 佛位二人+贞观纪年注记；芭蕉扇专克火系；钉耙删性别条款；六耳改悟空打杀·如来识破；流沙河弱水三千；translation_bias 美猴王 chapter_first 4→1
+- WP-6.5：交接文档 Backlog 登记 BL-6 至 BL-19 十四项（含缺回补提 BL-18 与两真源分歧 BL-19）
+- 暗色连带修复：social-media 金棕色按用途拆分（图表填充恢复 #e9b885、徽章底/文本走页内变量 --sm-gold-ink 亮 #8a6420 4.83:1 暗自动翻转），修复 W677 单值 #7a571b 暗色态 6 处 invisible 回归（dark gate 实抓·本地 4 态审计 ZH/EN 归零留证）
+- 「必要配乐」句复核为 B-C 级趣味文案风格保留（第九轮尺度裁定）；F07 三昧真火对火系无效系平衡设定保留
+
+验证：verify_delivery 核心全绿（第 9 门禁 47 副本对账含新生成两件）；generate_csp --check 855 页 0 漂移；e2e test_smoke 89/89；ruff 新脚本 0 错；batch_cascade 原生 dry+apply 自检过（file-index W678 段调至数值位满足段倒序断言）；_audit_render_states 双页四态 invisible/lowContrastText 归零。
