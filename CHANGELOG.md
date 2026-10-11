@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W709），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W710），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -15,6 +15,15 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.304（2026-10-11）：W710 BL-25与BL-21收口批
+
+> **来源**：用户 userselect 全选五 Backlog 第二批（BL-25+BL-21）——BL-24/23 已随 W709 收官。
+> - **BL-25 执行**：STRUCTURE 02/04 段建置沿革（v0.10-W075 补齐叙事·约 1.2K 字符）迁 docs/archive/STRUCTURE-ARCHIVE.md（原文零改动追加 W709→W710 迁入节）——正文换现数+指针（「已建 26 篇」「已建 4 篇」·沿革见 ARCHIVE 与 CHANGELOG）；README 拆分评估结论落档=**维持不拆**（外链/统计口径/EXPECT_A4 字面量位置影响>收益·受众分段已由 W707 阅读契约头部承担）。
+> - **BL-21 执行**：首份门禁豁免清单周期盘点报告 docs/00-导读/门禁豁免盘点-2026-10-11.md——逐门禁十项豁免/基线现状对仓取数；结论=**豁免面健康无吞噬证据**（全部「冻结存量只拦新增」语义·拦截面=新增漂移不随豁免缩小）·第 28 可引用性为已收敛标杆（344→0→全量 FAIL）·第 22 与 C5c 起步态跟踪·第 29 色盲 17428 对大基线待专项收敛批（路径参考第 28）；**BL-21 关闭**（转例行动作·下次盘点随大版本段归档或 2027-01 季度点取先到）。
+> - **验证**：verify full 46 段绿；STRUCTURE 残留 v 引用降至 18（板块建置标注=历史事实保留）。
+> - **文件**：STRUCTURE.md（02/04 段）、docs/archive/STRUCTURE-ARCHIVE.md（迁入节）、docs/00-导读/门禁豁免盘点-2026-10-11.md（新增）、交接文档.md（BL-21/25 状态更新）、docs/00-导读/W批次编号对账表.md（W710 认领）、六文档级联。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### v2.3.303（2026-10-11）：W709 BL-24分层搬迁批
 
