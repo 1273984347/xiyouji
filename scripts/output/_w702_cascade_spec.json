@@ -1,0 +1,23 @@
+{
+  "batch": "W702",
+  "version": "v2.3.296",
+  "date": "2026-10-11",
+  "desc": "六文档口径清债批",
+  "title": "W702 六文档口径清债批",
+  "changelog_body": "\n\n> **来源**：外部「挑刺」报告（六治理文档口径与排版扫描·17 项 P0-P3）——逐条对仓取证裁决：实锤 15 项落地、误定位 1 项改址修复（双分号实为 AGENTS 脚注 4 处非 CHANGELOG）、1 项驳回（防新增漂移字面量）。\n> - **P0 口径四件**：CHANGELOG 头部「全站页数口径」按实跑整段刷新（234/233/232/225/86 → 857/856/855/330·site/reader 622 页纳入·可视化页 87=88 减 _shell）；AGENTS §4.2 第 8 门禁「233 页」→856 页（generate_csp 实跑）；README AI 说明「26 项自动化门禁」→40 项（对齐 §4.2 现役 40 槽）；STRUCTURE 10-方法论沉淀「已建 6 篇」→33 篇（目录实数·补索引指针·原 6 篇标注为奠基篇目）。\n> - **P1 两件**：STRUCTURE scripts 段「已建 30 类」→34 类子目录全建（磁盘枚举实证）+F 行可视化页补 story-timeline.html（W694 起·第 39 门禁双源）；AGENTS 第 6 门禁「三豁免」→「五豁免」（W700 lint_links 五改对齐）。\n> - **P2 三件**：CHANGELOG v2.3.279/280 两段补录四件套缺失「文件/状态」字段（git show 7aaa1f59/27f07e7e 取证·只增不删带 W702 补录标记）+段间空行归一；AGENTS 第 26 门禁「334 页扫描」→855 页（check_seo_head 实跑·site 全树减两个模板壳）；CONTRIBUTING 三件套表后补 W### 认领对账表入口段。\n> - **P3 排版与速查（含根治）**：README/STRUCTURE/项目说明版本行空格根治——batch_cascade 三处版本行模板去空格 + README/STRUCTURE 锚点同步 \\s* 兼容（防逐批复发）；「（A4 209 篇 已含）」存量两处归一；AGENTS 脚注「；；」×4 归一 + batch_cascade join 去重守卫（前条目尾「；」时不再补）；CLAUDE.md 常用命令补 verify --scope auto 轻量档一行（≤60 行约束内·40/60）；AGENTS §4.2 前言补 pre-commit --scope auto 指引（对齐 §4.3）。\n> - **顺带实数校真**：STRUCTURE「data/ 当前 131 个 JSON」→135（glob 实数）；STRUCTURE timeline/ 「取经路线图/人物时间线 待建」经 git ls-files 核实维持（仅大事年表已建·挑刺此条无需改）。\n> - **驳回留档**：挑刺建议第 27 门禁条目补「W700 时现役上限=W700」静态字面量——违反 W520 递增数字禁字面量纪律（门禁本动态取 CHANGELOG max W 比对·静态化即制造下一个腐烂点）。\n> - **验证**：verify full 45 段自洽绿 + lint_links 0 broken + ruff 0 错 + pytest 293 全过 + batch_cascade 原生 dry+apply 自检过（模板改动后锚点全过）+ generate_csp --check 0 漂移。\n> - **文件**：CHANGELOG.md、README.md、STRUCTURE.md、AGENTS.md、CLAUDE.md、CONTRIBUTING.md、scripts/batch_cascade.py、docs/00-导读/W批次编号对账表.md、scripts/_w702_edits.py（一次性）、六文档级联。\n> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。\n",
+  "head_entry": "2026-10-11（v2.3.296 W702 六文档口径清债批）",
+  "head_sentence": "挑刺裁决落地与门禁口径校真",
+  "milestone_block": "- **v2.3.296 W702 六文档口径清债批**：\n  - P0 四件：CHANGELOG 口径块实跑刷新（857/856/855/330·reader 622 纳入）+ AGENTS 第 8 门禁 856 页 + README 40 项门禁 + STRUCTURE 方法论 33 篇\n  - P1/P2：scripts 34 类全建 + 第 6 门禁五豁免 + 第 26 门禁 855 页 + v2.3.279/280 四件套补录 + CONTRIBUTING 对账表入口\n  - P3 根治：batch_cascade 版本行模板去空格 + AGENTS 脚注 join 双分号守卫 + CLAUDE.md --scope auto 行\n  - 驳回留档：第 27 门禁静态现役上限字面量建议（W520 纪律）\n",
+  "agents_note": "2026-10-11（v2.3.296 W702）六文档口径清债批（外部挑刺 17 项裁决）：P0 口径四件（CHANGELOG 头部页数口径按实跑刷新 857/856/855/330 加 AGENTS 第 8 门禁 233→856 页 加 README 26→40 项门禁 加 STRUCTURE 方法论沉淀 6→33 篇）加 P1 两件（scripts 30→34 类全建+F 行 story-timeline 补录 加 第 6 门禁三豁免→五豁免对齐 W700）加 P2 三件（v2.3.279/280 补录四件套只增不删 加 第 26 门禁 334→855 页校真 加 CONTRIBUTING 补对账表认领入口）加 P3 排版与速查（batch_cascade 三版本行模板去空格加锚点同步 加 AGENTS 脚注 join 双分号守卫与存量 4 处归一 加 CLAUDE.md 补 --scope auto 加 §4.2 前言 scope 指引）加 顺带实数校真（STRUCTURE JSON 131→135 加 timeline 待建经 git ls-files 维持）加 驳回 1 项（第 27 门禁补静态现役上限字面量——违反 W520 禁漂移字面量纪律）",
+  "file_index_rows": [
+    "| CHANGELOG.md | W702 | 头部页数口径块实跑刷新 + v2.3.279/280 四件套补录（W702 标记） |",
+    "| README.md | W702 | AI 说明门禁数 26→40 + 版本行空格归一 |",
+    "| STRUCTURE.md | W702 | 方法论 6→33 篇 + scripts 34 类全建 + F 行/JSON 实数 + 版本行归一 |",
+    "| AGENTS.md | W702 | 第 6/8/26 门禁口径 + §4.2 前言 scope auto + 脚注双分号×4 归一 |",
+    "| CLAUDE.md | W702 | 常用命令补 verify --scope auto 轻量档行 |",
+    "| CONTRIBUTING.md | W702 | 补 W### 认领对账表入口段 |",
+    "| scripts/batch_cascade.py | W702 | 版本行模板去空格×3 + AGENTS 脚注 join 双分号守卫 |",
+    "| docs/00-导读/W批次编号对账表.md | W702 | W702 认领 + 现势 W703 |",
+    "| scripts/_w702_edits.py | W702 | 一次性：挑刺裁决 26 处编辑器（跑完删除） |"
+  ]
+}

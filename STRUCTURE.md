@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.3.295（2026-10-11）— W701 BL-20动工与S-26工具化批 — A1-A6 共 615 篇 + 87 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前版本：v2.3.296（2026-10-11）— W702 六文档口径清债批—A1-A6 共 615 篇 + 87 可视化页（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构
@@ -108,7 +108,7 @@
 - `苦难意义论.md`：弗兰克尔 logotherapy 三种价值 + 加缪"想象西西弗是幸福的" + 态度性价值
 
 ### 10-方法论沉淀/（v2.0.43 W070 新增·S1 方向）
-项目方法论沉淀层——把项目过程中积累的可复利方法论经验集中沉淀为教学材料。已建 6 篇（统一结构：问题背景 + 核心方法论 + 复现案例 + 修复策略 + 关联文档）：
+项目方法论沉淀层——把项目过程中积累的可复利方法论经验集中沉淀为教学材料。已建 33 篇（目录实数·W702 校真·含索引 README；统一结构：问题背景 + 核心方法论 + 复现案例 + 修复策略 + 关联文档；全量篇目与阅读路径见 [README.md](docs/10-方法论沉淀/README.md) 索引）。奠基 6 篇：
 
 - `README.md`：索引文件·5 篇主题索引 + 阅读路径（新读者 5 分钟 / 项目接手者 / 方法论作者三路径）+ 复利经验总览表 + 与上游 skill 关系声明 + 维护规则
 - `DRL真循环.md`：DRL 真循环 + 4 层过拟合防护（P2 残留 N / 边际收益 gate / 过拟合警报 / 严重度门槛）+ R0-R3 完整流程 + 收敛曲线记录要求 + 3 个复现案例（W069 27 P1 / Phase F v1.1 14.3%→0% / Phase B v0.8 12→0→3→0→0）+ Verdict 字眼禁令 + 修复策略三件套
@@ -172,7 +172,7 @@
 | `static/js/charts/` | 各图表渲染逻辑 |
 | `static/images/` | 站点用图片 |
 
-## scripts/ Python 脚本（按 34 类组织 A-AH，已建 30 类）
+## scripts/ Python 脚本（按 34 类组织 A-AH·34 类子目录全建：A-L 早期基础 / M-U Phase 5 专题 / V-AH Phase 6 跨学科创意；Q+/Q++ 数据内嵌无独立脚本）
 
 ### 早期基础类（A-L，Phase 1-4 + Phase 6 v0.6 补全）
 
@@ -183,7 +183,7 @@
 | **C. 情节** | `C_情节/` | hardships_81.py | 81-hardships.html | 八十一难深度统计、妖怪结局、来历分类、难度系数、二元对立结构 |
 | **D. 关系** | `D_关系/` | relationships.py | relationships.html | 7 势力分布·8 法宝克制链·15 搬救兵·贝尔宾 9 角色适配度 |
 | **E. 地理** | `E_地理/` | journey_route.py | journey-route.html | 取经全路程图、国别风俗饮食、四大部洲风物、天庭-灵山-地府三维剖面 |
-| **F. 时间** | `F_时间/` | timeline.py | （未单独建可视化页） | 三重平行时间线、关键事件时间线 |
+| **F. 时间** | `F_时间/` | timeline.py | story-timeline.html（W694 起·第 39 门禁双源同步） | 三重平行时间线、关键事件时间线 |
 | **G. 哲学** | `G_哲学/` | philosophy.py | philosophy.html | 6 阶段心猿心性曲线·8 类修心寓言·81 难因果分类·心经第 19 回传授 |
 | **H. 风险与项目** | `H_风险与项目/` | risk_project.py | risk-project.html | 5 风险类别 81 难评估·7 KPI·8 里程碑·8 角色 MBTI（avg 8.25） |
 | **I. 妖怪社会学** | `I_妖怪社会学/` | monster_sociology.py | monster-sociology.html | 5 类作案 69 起·10 种求救信号·10 坐骑下凡档案（实质惩罚率 0%） |
@@ -230,7 +230,7 @@
 | 类别 | 子目录 | 说明 |
 |---|---|---|
 | **工具** | `utils/text_loader.py` | 文本加载与编码处理 |
-| **输出** | `output/figures/`、`output/data/` | 静态图（PNG/SVG）、数据（JSON/CSV）·data/ 当前 131 个 JSON 文件·data_validate.py 校验完整性 |
+| **输出** | `output/figures/`、`output/data/` | 静态图（PNG/SVG）、数据（JSON/CSV）·data/ 当前 135 个 JSON 文件·data_validate.py 校验完整性 |
 | **DRL 产物** | `output/drl-r1-findings.md`、`output/audit-baseline.md`、`output/v08-data-check.md`、`output/v08-embedded-data.js`、`output/drl-screenshot-review.md` | v0.7 baseline 审查 + v0.8 DRL R1→R4 收敛记录 + B1 数据检查 + EMBEDDED_DATA 统一命名 + W010.2 截图审查 DRL 收敛记录 |
 | **截图审查工具** | `batch_screenshots.js`、`slice_screenshots.py`、`detect_unwrapped_tables.py`、`package.json` | Playwright 批量全页截图 + Pillow 800px 切片 + 静态/运行时表格溢出双轨检查 + Node 依赖声明 |
 | **截图审查产物** | `output/screenshots/` | full-page 截图（desktop/ + mobile/）、800px 切片（slices/）、`layout-audit-report.md`、`screenshot-summary.md`、`slice-index.md` |

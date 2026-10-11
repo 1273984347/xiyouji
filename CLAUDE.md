@@ -21,6 +21,7 @@
 
 ```
 python scripts/verify_delivery.py        # 提交前唯一硬门禁（pre-commit 自动跑）
+python scripts/verify_delivery.py --scope auto  # 本地提交轻量档（CI 恒全量）
 python scripts/generate_csp.py --check   # CSP 0 漂移
 python scripts/check_doc_sync.py         # 第 31 门禁文档口径体检（--self-test 自测）
 python scripts/lint_links.py --dir .     # 全仓链接校验
