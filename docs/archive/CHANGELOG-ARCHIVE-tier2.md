@@ -1,5 +1,7 @@
 # CHANGELOG 二级归档（W001-W399·v0.1-v2.3.17）
 
+
+> **📖 阅读契约（W707）**：禁读型——**永远不要通读**；查历史 W 号用 `grep -A 20 "### vX"` 单段取用。
 > 本文件为 CHANGELOG-ARCHIVE.md 的二级归档层，承载最早期的 W001-W399 详细变更记录。
 > 归档时间：2026-08-25（W513 二级归档批次·方案 A：archive 超阈值时最老块下移）。
 > 最新变更见 [CHANGELOG.md](../../CHANGELOG.md)；中间层见 [CHANGELOG-ARCHIVE.md](../../CHANGELOG-ARCHIVE.md)（W400+）。

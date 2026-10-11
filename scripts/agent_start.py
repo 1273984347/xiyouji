@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Agent 开局状态摘要 agent_start（W705·用户方案第三阶段第 2 步）——把「读文档的负担」转移到系统。
+"""Agent 开局状态摘要 agent_start（W705 建·W707 加 --task）——把「读文档的负担」转移到系统。
 
 会话开始时运行 `python scripts/agent_start.py`：现读磁盘输出一份当前事实摘要
 （现役三元组/近 3 批次/stats 全键/对账表现势/门禁实况/关键铁律指针）——全部值来自
 磁盘实时读取，无缓存无硬编码，保证 Agent 开局拿到的是当前值而非训练记忆。
+`--task`：按 git status 改动路径分类输出「本次任务相关」必读清单（W707·按需读取入口）。
 `--json` 供程序化消费（宿主/MCP 注入用）。
 
 设计边界：本脚本不做「强制注入」（宿主 system message 是宿主侧能力）——项目侧最强形态是
@@ -14,6 +15,7 @@ CLAUDE.md 接手导航首行指令 + AGENTS §7 第 0 步：宿主自动加载 C
 import json
 import os
 import re
+import subprocess
 import sys
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -26,6 +28,16 @@ RE_TOP = re.compile(r"^###\s+(v[\d.]+)（([^）]+)）：(W\d+)\s*([^\n]*)", re.M
 RE_RECENT = re.compile(r"^###\s+(v[\d.]+)（([^）]+)）：(W\d+)[^\n]*", re.M)
 RE_LEDGER_NOW = re.compile(r"现势：下一自由号 = \*\*(W\d+)\*\*")
 RE_CLAUDE_RULE = re.compile(r"^\d+\. \*\*(.+?)→", re.M)
+
+TASK_MAP = [  # (路径模式, 必读提示) —— L2 主题文件就位后由 BL-24 批更新为文件级清单
+    (r"^site/|\.(css|js|html)$", "AGENTS §4.2 门禁体系（改 site 必读）+ AGENTS §4.3 CSS/JS 类坑位（pitfalls.md 待 BL-24）"),
+    (r"^scripts/check_|verify_delivery", "AGENTS §4.2 门禁清单 + verify 段自洽锁（改门禁必读）"),
+    (r"\.py$", "AGENTS §4.3 工具链要点 + ruff/pytest 计数钉纪律"),
+    (r"^dataset/|scripts/output/data", "AGENTS §4.3 数据类坑位（计数钉/旧值标记扫描/双源门禁第 39/40）"),
+    (r"^docs/|^交接文档|^CHANGELOG|^README|^STRUCTURE", "文档规范 §4.9-4.11 + AGENTS §4.3 文档类 + 第 31 门禁 C5 对账"),
+    (r"^xiyouji-agent-web/", "AGENTS §4.4 Web Agent"),
+    (r"^\.github/", "AGENTS §4.3 CI 类（workflow 触发条件/quotePath/SHA 钉）"),
+]
 
 
 def read(path):
@@ -95,7 +107,32 @@ def render(d):
     return "\n".join(out)
 
 
+def changed_paths():
+    r = subprocess.run(["git", "status", "--short"], cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="ignore")
+    return [ln[3:].strip().strip('"') for ln in r.stdout.splitlines() if ln.strip()]
+
+
+def render_task():
+    paths = changed_paths()
+    hits = []
+    for pat, tip in TASK_MAP:
+        matched = [x for x in paths if re.search(pat, x)]
+        if matched:
+            joined = "、".join(matched[:3])
+            hits.append("* " + tip + "\n      例：" + joined)
+    out = ["===== 本次任务相关（按改动路径分类·agent_start --task）====="]
+    if not paths:
+        out.append("（工作树干净——无未提交改动；按任务性质自行选择节）")
+    out.extend(hits if hits else ["（改动未命中已知分类——按 AGENTS §7 快速上手路径走）"])
+    out.append("通用必读：CLAUDE.md（宿主已加载）→ 交接「零、当前阻塞」→ 动手前 verify_delivery 全绿。")
+    out.append("=" * 60)
+    return "\n".join(out)
+
+
 def main():
+    if "--task" in sys.argv:
+        print(render_task())
+        return 0
     d = gather()
     if "--json" in sys.argv:
         print(json.dumps(d, ensure_ascii=False, indent=2))

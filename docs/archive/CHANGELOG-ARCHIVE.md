@@ -1,5 +1,7 @@
 # 更新日志归档（W400+）
 
+
+> **📖 阅读契约（W707）**：禁读型——**永远不要通读**；查历史 W 号用 `grep -A 20 "### vX"` 单段取用。
 > 本文件归档 W400+ 的详细变更记录（W417-W464 由 W511 迁入）。更早期 W001-W399（v0.1-v2.3.17）已下移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)。最新变更见 [CHANGELOG.md](CHANGELOG.md)。
 > 归档时间：2026-08-10（W422 归档 W400-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W464 + W484）· 2026-08-25（W513 二级归档：W001-W399 下移 tier2）
 
