@@ -64,7 +64,7 @@
 | W696 | 工作复盘与优化分析报告第二篇（W693 三裁决+W694/W695 并行周期·含 §6.1 复发预防专项 FAM 十族）入库 + 方法论 README 索引第 34 行 | 本次提交（级联 v2.3.290·batch_cascade 原生） | v2.3.290 | **已收官** | ZCode 2026-10-10 |
 | W682 | agent-web 引擎更换批次三：WF-1 复活（golden-50 新引擎 LLM 基线·评估集首跑） | 3b0dfed（预留在案·W680 收官批注记） | 待批次落段 | **作废**（W686·用户裁决 workflow 方案退役·WF-1 复活随之取消·后续重新设计另认领新号） | ZCode 2026-10-07 |
 | W703 | 聚合数字对账门禁批（用户方案·A+C 修正形态）：scripts/stats.py 磁盘实算生成 stats.json（tracked）+ 第 31 门禁扩 C5（18 式高危聚合句式×现役叙述面 vs stats.json·CHANGELOG 仅口径块·基线时点值句式表设计豁免）+ AGENTS §4.2 第 31 条目 C5 + 文档规范 §4.10 聚合数字书写规范 + self-test 7→9 例 | 本次提交（级联 v2.3.297·batch_cascade 原生） | v2.3.297 | **已收官**（6eeb65d9） | ZCode 2026-10-11 |
-| W711 | BL-22 方案 D 形态改造批（用户 userselect 第三批·三决策点按倾向落地）：① CHANGELOG 段标题去 v（新段「### W7NN（date）：标题」·历史段保留）+沿革机器面三条（维护契约句/C4 双形态/级联锚点双形态）② CITATION version 丙=W 号形态（下游消费者已核=CI 无 cff 校验 job）③ file-index 甲=历史双列+新段 W only+硬耦合改造（doc-sync C1/C2/C4 双形态+verify 期望版本与页脚与 CITATION 同步+batch_cascade 段锚点三模板 HEAD 句页脚脚注+tests 钉+workflows 4 处） | 本次提交（级联 v2.3.305·batch_cascade 原生） | v2.3.305 | **进行中** | ZCode 2026-10-11 |
+| W711 | BL-22 方案 D 形态改造批（用户 userselect 第三批·三决策点按倾向落地）：① CHANGELOG 段标题去 v（新段「### W7NN（date）：标题」·历史段保留）+沿革机器面三条（维护契约句/C4 双形态/级联锚点双形态）② CITATION version 丙=W 号形态（下游消费者已核=CI 无 cff 校验 job）③ file-index 甲=历史双列+新段 W only+硬耦合改造（doc-sync C1/C2/C4 双形态+verify 期望版本与页脚与 CITATION 同步+batch_cascade 段锚点三模板 HEAD 句页脚脚注+tests 钉+workflows 4 处） | c500b356（级联 v2.3.303 形态切换·batch_cascade 原生） | v2.3.305 | **已收官**（形态键=W 号·v2.3 阶段标签） | ZCode 2026-10-11 |
 | W710 | BL-25+BL-21 批（用户 userselect 第二批）：BL-25 STRUCTURE 02/04 段建置沿革迁 STRUCTURE-ARCHIVE（正文换现数+指针）+README 拆分评估结论落档（维持不拆·外链/口径/EXPECT_A4 位置影响>收益）+BL-21 门禁豁免清单周期盘点报告（docs/00-导读/门禁豁免盘点-2026-10-11.md·逐门禁豁免现状/收敛条件/复盘点建议） | ccdfbfaf（级联 v2.3.304·batch_cascade 原生） | v2.3.304 | **已收官** | ZCode 2026-10-11 |
 | W709 | BL-24 AGENTS 分层搬迁批（用户 userselect 全选 Backlog·方案档 docs/superpowers/plans/2026-10-11-agents-layered-restructure.md 按图施工）：§4.2 40 条完整迁 docs/agent/gates.md（五组重排+紧凑编号摘要留 L1 保 C3 零改造）+§4.3 迁 docs/agent/pitfalls.md（七主题重排+第九条 shell 查坑表并入）+§4.4 迁 docs/agent/agent-web.md+BL-23 并入（脚注 W458-W700 沿革迁 docs/archive/AGENTS-ARCHIVE.md·尾锚点形态保持级联透明）+check_agents_layers.py 新门禁挂第 41 槽（L2 存在与首行/L1-L2 条目对账/AGENTS 行数上限） | 16da35a4（级联 v2.3.303·batch_cascade 原生） | v2.3.303 | **已收官** | ZCode 2026-10-11 |
 | W708 | 全变动对抗复审修复批（用户令 review·机械扫八面 0 异常+对抗审读五发现）：① batch_cascade 交接结构三断言前置到 pend 落盘前阻断（原写后 selfcheck WARN 性·脏盘已落才报告违 fail-closed 设计意图·双保险保留）② 文档规范 §4.11 引用更新盘点 v2 数字（7679/8 项→8791/826+9 项）③ W704 段「22 处标记」三重失真勘误（分项和 26/实际 31·违反 W496 现测铁律·历史段禁改走勘误追记）④ _w704_ledger_msg.txt 漏 add 补入库⑤ W706 chore 信息「翻state」英文混入留档（已推送不可改） | 5d64276b（级联 v2.3.302·batch_cascade 原生） | v2.3.302 | **已收官** | ZCode 2026-10-11 |
@@ -86,6 +86,7 @@
 - **W709**：现势下一自由号（5d64276b w708 收官提交信息预留引用·2026-10-11）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W710**：现势下一自由号（16da35a4 w709 收官提交信息预留引用·2026-10-11·**本批流程遗漏教训=收官 chore 前必须为现势引用号加豁免 bullet**）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W711**：现势下一自由号（ccdfbfaf w710 收官提交信息预留引用·2026-10-11）——**预留登记豁免**，动工时按取号规则正式认领。
+- **W712**：现势下一自由号（c500b356 w711 收官提交信息预留引用·2026-10-11）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W691**：下一自由号被 W690 收官级联提交文本（4ab918d「现势 W691」）提前引用——C4 豁免登记（2026-10-09 补记）；本号仍为自由号，认领时正常占用。
 
 ## 登记 ASCII 纪律
