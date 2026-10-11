@@ -82,8 +82,9 @@ EXPECTED_SECTION_NAMES = [
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
 # 四态：full=全量（缺省·CI verify-delivery job·批收尾七步③恒为 full）；docs=文档轨子集；
 # site=页面轨+级联相关文档段；auto=按变更路径白名单分类（任何越界文件保守回退 full）。
-# 11 个内联廉价段（版本/计数/导航/sitemap walk）恒跑不跳；跳过只作用于 32 个 subprocess
-# 委托段：_scoped_run 统一短路，_GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
+# 11 个内联廉价段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区）恒跑不跳；跳过只作用于
+# 35 个 subprocess 委托段（46 段 - 11 内联·W713 实测校数）：_scoped_run 统一短路，
+# _GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
 # 校验（fake stdout 含段标记，wrapper 不会误判「缺汇总行」）；段自洽锁按 scope 断言子集。
 _DOC_FILES_RE = re.compile(
     r"^(docs/.+\.md|(CHANGELOG|交接文档|README|STRUCTURE|CLAUDE)\.md|"
@@ -102,7 +103,10 @@ SCOPE_SITE_SECTIONS = {
     "CSS变量引用", "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源", "chapter双源",
     "文档口径", "W区间字面量", "索引健康", "治理契约", "AGENTS分层",
 }
-_SCOPE_CORE = {"期望版本", "dukou页脚", "六文档同步", "范围漂移"}
+_SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·旁文档/A4/A1-A6/学术/A1导航/sitemap/内嵌回退 7 段不在任何 scope 集=自洽锁盲区）
+    "期望版本", "dukou页脚", "六文档同步", "旁文档同步", "范围漂移",
+    "A4计数", "A1-A6计数", "学术引用", "A1导航", "sitemap覆盖", "内嵌回退",
+}
 _GATE_SUMMARY_MARKERS = {
     "可引用性": "---- 第 28 门禁：",
     "设计令牌对账": "---- 设计令牌对账：",

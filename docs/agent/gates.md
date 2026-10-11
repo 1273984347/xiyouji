@@ -1,4 +1,4 @@
-# 交付门禁体系全量定义（40 槽 · L2 主题层 · W709 自 AGENTS §4.2 迁入）
+# 交付门禁体系全量定义（41 槽 · L2 主题层 · W709 自 AGENTS §4.2 迁入·W713 补正第 41 槽归组与标题同步）
 
 > **📖 阅读契约（W709）**：查表型——改 site/、加门禁、动 verify_delivery.py 时按编号查；每条含完整口径与历史实证；编号与 AGENTS §4.2 摘要一一对应。
 > **何时读**：门禁失败要懂原因 / 新增门禁要挂槽 / 复核某条防线范围。**读完你应该能**：说出任一槽位拦什么、豁免与基线在哪。
@@ -7,15 +7,15 @@
 
 | 组 | 槽位 | 主题 |
 |---|---|---|
-| 内容与同步类（1-5） | 1-5 | 六文档同步、范围漂移检测、A4 计数一致（EXPECT、学术研究轨显式引用、A1 导航相邻性 |
+| 内容与同步类（1-5） | 1-5 | 六文档同步、范围漂移检测、A4 计数一致（EXPECT_A4 209 篇）、学术研究轨显式引用、A1 导航相邻性 |
 | 结构与加载类（6-11） | 6-11 | docs 全量链接校验、sitemap 覆盖、CSP 漂移、数据漂移、内联脚本语法、CSS 结构平衡 |
-| 声明与完整性类（12-15） | 12-15 | token 覆盖率、动效禁止清单、a11y 对比度、INLINED CSS 完整 |
+| 声明与完整性类（12-15） | 12-15 | token 覆盖率、动效禁止清单、a11y 对比度、INLINED CSS 完整性 |
 | 数据与一致性类（16-26） | 16-26 | Skills 索引一致性、索引健康、元信息块 v2、术语一致性、原著引文硬验证、动态链接门禁、治理文档维护契约、旁文档同步、图表静态自洽、数据内容一致性、SEO head |
-| 编号与质量防线类（27-40） | 27-40 | W 号区间字面量、可视化可引用性、色盲安全、窄屏降级声明、文档口径体检、CLAUDE.md 速查层完、head 内容合法性、CSS 变量引用、声明分隔、孤立选择器、kpi-card 基类、页面内嵌残留标记、故事内时间线双源同步、chapter_stats  |
+| 编号与质量防线类（27-41） | 27-41 | W 号区间字面量、可视化可引用性、色盲安全、窄屏降级声明、文档口径体检、CLAUDE.md 速查层完整性、head 内容合法性、CSS 变量引用、声明分隔、孤立选择器、kpi-card 基类、页面内嵌残留标记、故事内时间线双源同步、chapter_stats 双源同步、AGENTS 分层完整性 |
 
 ## 完整定义
 
-以下为 AGENTS §4.2 原文全量（W709 迁入·内容零改动·仅按组分节）：
+以下为 AGENTS §4.2 原文全量（W709 迁入·仅按组分节·W713 补正：第 41 槽归组+速查表 4 处截断/缺字+标题 40→41）：
 
 ### 4.2 交付门禁体系（verify_delivery.py，pre-commit 强制）
 
@@ -23,14 +23,14 @@
 
 1. **六文档同步**（核心 2 硬门禁：CHANGELOG.md + 交接文档.md 必须含当前 v/W——期望版本由 verify_delivery 动态取自 CHANGELOG 现役版段，dukou-engine.html 页脚降级为新鲜度 WARN（W518 起）；辅助 4 仅 WARN：README / STRUCTURE / 项目说明 / file-index）
 2. **范围漂移检测**（html 最高 W ≤ 文档+归档最高 W）
-3. **A4 计数一致（EXPECT_A4 字面量「209 篇」）** + **A1-A6 真实计数（六板块顶层 .md 磁盘计数 == README「共 N 篇」声明，当前 N=615）**
+3. **A4 计数一致（EXPECT_A4 字面量「209 篇」）** + **A1-A6 真实计数（六板块顶层 .md 磁盘计数 == README「共 N 篇」声明，当前 N=615<!--stats:a1_a6_docs-->）**
 4. **学术研究轨显式引用**（105 篇）
 5. **A1 导航相邻性**（上一回=N-1·下一回=N+1）
 
 ### 结构与加载类（6-11）
 
 6. **docs 全量链接校验**（lint_links 0 broken·W699 扩自 docs/01 至 docs 全量·W700 五改后内建五豁免=fenced+inline code 去噪/git check-ignore 本地产物/docs/archive 冻结档/POSIX 根绝对路径跳过/_w588_ce.html 快照件）
-7. **sitemap 覆盖**、**site/data 回退模式**
+7. **sitemap 覆盖**、**site/data 回退模式**（两条共占第 7 槽·历史形态不拆以保 C2 三方对账不改）
 8. **CSP 漂移**（generate_csp.py --check，856<!--stats:csp_covered--> 页哈希 0 漂移·页数随口径演进以实跑为准）
 9. **数据漂移**（check_data_drift.js；W563 扩展：site/data/json 部署副本逐字节对账 47 副本基线 + 页面副本引用存在性 + 副本路径形态解析回原件 + EMBEDDED 单源页页名↔同名原件回退——对账面 44→46 页/71→74 项）、**腐蚀/插件**（check_corruption.py）
 10. **内联脚本语法**（check_js_syntax.js，node vm.Script 批量编译，含 EN 站）
@@ -57,7 +57,7 @@
 25. **数据内容一致性**（W555 挂载，经用户确认：check_content_consistency.py --gate 第 25 门禁——W550 实证三类同页数字矛盾规则化：同实体对/同主语多值、图注数 vs 数组字面长、桑基去重节点数、案例数 vs 边数；--self-test 负样本 4/4；基线 content-consistency-baseline.txt 冻结 W554 人工裁决 4 条误报·只拦新增；L2 站-dataset 对账与 L3 语义判读为报告型见 W554 审计报告）
 26. **SEO head**（W630 挂载，经用户裁决：check_seo_head.py 第 26 门禁（slot 自 W591 预留·脚本 W591 建置）——og:image/canonical 全页覆盖·JSON-LD 内联有效·hreflang 配对（89 对）·sitemap 集合一致；855<!--stats:seo_scanned--> 页扫描（site 全树减两个模板壳·W702 校真）；SEO head 属静默腐烂面（W628 实证同族：W575 字面量腐烂 52 批无人察觉））
 
-### 编号与质量防线类（27-40）
+### 编号与质量防线类（27-41）
 
 27. **W 号区间字面量**（W628 挂载，经用户指令防复发：check_w_range_literal.py 第 27 门禁——根因=外部综述照抄 README 过期字面量「W001-W575」（W628 审计叙述面 9 处漂移）：现役叙述面（README/STRUCTURE/CONTRIBUTING/新Agent启动Prompt/00-导读/方法论 README/workflows README/agent-web README）中「W001-Wxxx」覆盖上限字面量终点必须等于 CHANGELOG 现役 max W（含「对应」映射规则与「tier2」归档描述豁免·非 001 起始历史区间不在范围）+ CITATION.cff version 与现役版本同步；--self-test 负样本 4/4；历史段/级联自维护面豁免）
 28. **可视化可引用性**（2026-10-02 经用户裁决挂载·第 28 门禁：check_citability.py——B-6 第一步·slot 自 W638 预留·来源 W636 缺口发现/W637 升级路径/W638 出处四字段收编。**批准开工=反转 B-6 三次「登记不开工」裁决，已在 registry 记账**。扫描区=`<div id="dataSource">` ∪ 含「数据源：」的字符串字面量（fetch/EMBEDDED 两态都收）；四项判据 C1 数据路径+版本 / C2 生成脚本+参数（**排除构建工具引用 inline_css.py·w334_font_subset.py——二者在 86/86 页命中，系 v1.0 草案假阳性源**）/ C3 引用格式任一锚点（报告另分 L0-L3 级）/ C4 下载入口或 EMBEDDED 声明；D1 范围仅 site/data 86 页；形态=WARN+基线冻结（scripts/output/citability-baseline.txt·首跑 344 行/missing 326·C1 2/86 C2 9/86 C3 1/86 C4 6/86）·基线外新增违规 FAIL·存量转 FAIL 时点=D4「missing 收敛至阈值以下」不预设日期；**判据类门禁必须先跑全站形态普查再写正则**（W638「存在性对≠分级对」的门禁侧教训）·--self-test 6 例含构建工具回归用例
@@ -74,6 +74,4 @@
 39. **故事内时间线双源同步**（check_story_timeline_sync.py --self-test 三负样本，W695 挂载·第 39 门禁：六轮外审 P1-4——timeline.py KEY_EVENTS 与 site/data/story-timeline.html EMBEDDED_DATA 为人工同步的机器防线：逐条比对 chapter/event/characters/顺序 + phase 区间映射；失配即 FAIL 阻断；改锚点须同批重灌页内嵌副本并重跑 generate_csp）
 40. **chapter_stats 双源同步**（check_chapter_stats_sync.py --self-test 两负样本，W699 挂载·第 40 门禁：chapter_stats.py 系纯 regex 确定性分析——重跑生成器为真值与 chapter-stats.html EMBEDDED_DATA 全量比对，gitignored 本地 json 不作基准使校验器 CI 可复现；漂移即 FAIL 并按 W691 规则重灌页内嵌副本）
 
-### 附：第 41 槽（W709 新增）
-
-41. **AGENTS 分层完整性**（check_agents_layers.py，W709 挂载·BL-24：L1 摘要层与 L2 主题层结构防线——C1 L2 三件存在含契约 / C2 编号三方对账（AGENTS §4.2 摘要 == gates.md 条目 == verify 实况最高槽位）/ C3 AGENTS 行数上限 ≤450 / C4 指针目标存在；--self-test 5/5；BL-24 搬迁后本文件即 §4.2 全量真身，本条即第 41 槽真身）
+41. **AGENTS 分层完整性**（check_agents_layers.py，W709 挂载·BL-24：L1 摘要层与 L2 主题层结构防线——C1 L2 三件存在含契约 / C2 编号三方对账（AGENTS §4.2 摘要 == gates.md 条目 == verify 实况最高槽位）/ C3 AGENTS 行数上限 ≤450 / C4 指针目标存在；--self-test 5/5；BL-24 搬迁后本文件即 §4.2 全量真身，本条即第 41 槽真身·W713 自「附」节归组）

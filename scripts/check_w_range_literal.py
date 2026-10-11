@@ -39,10 +39,11 @@ RANGE_RE = re.compile(r"W001\s*[-–~]\s*W(\d+)")
 
 def current_state():
     s = open(CHANGELOG, encoding="utf-8").read()
-    m = re.search(r"^### (?:v([\d.]+)|W(\d+))（[^）]*）", s, re.M)  # W711 双形态
+    # W713：双形态各取 W 号（历史段 W 在「：」后·新段在「###」后）——原正则历史段 group(2)=None 致 int(None) 隐患
+    m = re.search(r"^### (?:v([\d.]+)（[^）]*）：W(\d+)|W(\d+)（[^）]*）)", s, re.M)
     if not m:
         raise SystemExit("FAIL 未能在 CHANGELOG 定位现役版段")
-    return m.group(1), int(m.group(2))  # ver 可 None（方案 D 新段）
+    return m.group(1), int(m.group(2) or m.group(3))  # ver 可 None（方案 D 新段）
 
 
 def check(cur_v, max_w):
@@ -94,9 +95,9 @@ def main():
     fails, scanned = check(cur_v, max_w)
     if fails:
         print("\n".join("FAIL " + f for f in fails))
-        print(f"W 号区间字面量门禁：{len(fails)} 处漂移（现役 {cur_v} W{max_w}·扫描 {scanned} 文件）")
+        print(f"W 号区间字面量门禁：{len(fails)} 处漂移（现役 {cur_v or '批次键'} W{max_w}·扫描 {scanned} 文件）")
         return 1
-    print(f"W 号区间字面量门禁通过（现役 {cur_v} W{max_w}·扫描 {scanned} 文件·覆盖上限字面量 0 漂移·CITATION 同步）")
+    print(f"W 号区间字面量门禁通过（现役 {cur_v or '批次键'} W{max_w}·扫描 {scanned} 文件·覆盖上限字面量 0 漂移·CITATION 同步）")
     return 0
 
 

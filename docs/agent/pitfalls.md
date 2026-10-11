@@ -40,7 +40,7 @@
 
 - **批量改 md 一律 Python `open(encoding='utf-8')`，禁用 PowerShell `Set-Content`**（后者默认写 UTF-8 BOM，项目 W427 曾全库清 BOM；`Add-Content` 同理慎用）。
 - **同文件多个 Edit 必须串行执行**（并行 Edit 基于同一原始内容计算 diff，后写覆盖先写——W505 复现 4 次：金角银角「唐僧肉」/CHANGELOG W506 段/项目说明头部/交接文档标题均丢失）；并行批次后必须 Grep 验证所有修改点。
-- **Windows 多行字符串/heredoc 一律走 Write 临时文件 + 命令 `-F` 参数 + Delete 临时文件**，禁用 `cat <<'EOF'` heredoc（PowerShell 不支持，报错；W514 git commit -F 中文提交信息二度复用教训）。；**W706 升级为场景分层铁律：单行简单命令任意 shell 均可，多行/复杂转义/heredoc/大段文本一律落 Python 脚本文件再调用（`scripts/_wNNN_*.py`）——Git Bash 的 `python <<EOF` 同样有转义地狱（本批三败：反斜杠四层转义错位/迭代器静默空/混行尾吞段），bash heredoc 禁令与 PowerShell 无关、与「多行文本进 shell」本身冲突**
+- **Windows 多行字符串/heredoc 一律走 Write 临时文件 + 命令 `-F` 参数 + Delete 临时文件**，禁用 `cat <<'EOF'` heredoc（PowerShell 不支持，报错；W514 git commit -F 中文提交信息二度复用教训）。**W706 升级为场景分层铁律：单行简单命令任意 shell 均可，多行/复杂转义/heredoc/大段文本一律落 Python 脚本文件再调用（`scripts/_wNNN_*.py`）——Git Bash 的 `python <<EOF` 同样有转义地狱（本批三败：反斜杠四层转义错位/迭代器静默空/混行尾吞段），bash heredoc 禁令与 PowerShell 无关、与「多行文本进 shell」本身冲突**
 - **跨 session / 涉及远端状态**：执行前先 `git log --oneline -5` + `gh run list` 确认最新状态，识别并行交付真实增量（E41）；workflow 触发条件必须匹配真实开发流、门禁建置即绿、引用文件先 `git ls-files` 确认（E36-E42 CI 类，详见交接文档「三」W516 段）。
 - **W537 三新规（W536 批次声明失真复盘）**：① CHANGELOG「验证」栏必须以当批实跑 `verify_delivery` 的输出为准填写，「状态」栏仅在提交/推送实际落地后为真——自制批量文档脚本绕过 bump_version 防护时同样适用（W536 实证：声明先于验证 → 4 项 FAIL 状态下写出「全绿 + 已推送」）；② 版本行/页脚更新须整行替换并同步改描述文本——第 22/23 门禁只校验 W 号不校验描述（三简单页脚「W536 号挂 W535 描述」串号实证）；③ CHANGELOG「文件」清单中的新建文件必须 `git add`——无门禁覆盖「清单 ⊆ tracked」，漏 add 即静默丢失；④ JS/工具脚本改动推送前必须以真实参数冒烟一次——node --check 不覆盖运行时（W537/W538 白名单形状回归实证；batch_cascade.py 冒烟口径同此）。
 - `_` 前缀脚本为一次性/诊断脚本，不入库门禁、不参与 CI。

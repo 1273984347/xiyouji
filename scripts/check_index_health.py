@@ -37,7 +37,7 @@ METHOD_DIR = ROOT / "docs" / "10-方法论沉淀"
 METHOD_README = METHOD_DIR / "README.md"
 CHANGELOG = ROOT / "CHANGELOG.md"
 
-# W449 归档重排遗留损坏区（2026-08-24 全面审查确认·W499 方案②维持现状）
+# W449 归档重排遗留损坏区（2026-08-24 全面审查确认·W499 方案②维持现状；事件发生于 W449 批·波及含早于 W449 的 418/419）
 # 含空壳（457/458/461/462/463）、重复（451/452/453/460）、乱序（418/419/450-455 段位置）
 EXEMPT_W = {418, 419, 450, 451, 452, 453, 454, 455, 457, 458, 460, 461, 462, 463}
 
@@ -100,7 +100,8 @@ def check_file_index(errors: list[str]) -> None:
 
     # 5) 段缺失检测（W526 新增：W525 实证 W504 段缺失漏网——CHANGELOG 现役版段须均有登记段）
     cl_text = CHANGELOG.read_text(encoding="utf-8-sig")
-    cl_w = {int(m) for m in re.findall(r"^### v\d+\.\d+\.\d+（[^）]*?）：W(\d{3})", cl_text, flags=re.M)}
+    cl_w = {int(m.group(1) or m.group(2)) for m in re.finditer(
+        r"^### (?:v\d+\.\d+\.\d+（[^）]*?）：W(\d{3})|W(\d{3})（[^）]*?）：)", cl_text, flags=re.M)}  # W713 双形态（W711 起新段无 v 前缀·与检查 6 同款）
     fi_w = {w for w, _, _ in sections}
     missing = sorted(w for w in cl_w if w not in fi_w and w not in EXEMPT_W)
     if missing:
@@ -151,7 +152,7 @@ def check_governance_refs(errors: list[str]) -> None:
     """
     doc = ROOT / "docs" / "00-导读" / "文档规范.md"
     doc_text = doc.read_text(encoding="utf-8-sig")
-    doc_refs = set(re.findall(r"scripts/([a-z0-9_]+\.(?:py|js))", doc_text))
+    doc_refs = set(re.findall(r"scripts/((?!output/)[\w/]+\.(?:py|js))", doc_text))  # W713 扩子目录（排除 output/ 生成产物区·gitignored 不保证在仓）
     missing_doc = sorted(r for r in doc_refs if not (ROOT / "scripts" / r).exists())
     if missing_doc:
         errors.append(f"文档规范.md 引用不存在的 scripts/ 文件：{missing_doc}")
