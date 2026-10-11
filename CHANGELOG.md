@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W711），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W712），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,17 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W712（2026-10-11）：W712 方案档挑刺补正批
+
+> **来源**：用户挑刺第十三次（两方案档 15 条·P0×2/P1×6/P2×7）——逐条三态裁决（采纳 8/事后应验 4/驳回 2/部分 1）并落地；含挑刺 #6 的实质补验（搬迁内容指纹对账）。
+> - **实质补验（挑刺 #6 P0「bullet 计数抓不到句子级丢失」）**：指纹对账实跑——git a998581d 时代 AGENTS §4.2/§4.3 原文 vs docs/agent/gates.md/pitfalls.md 现文——**40 条门禁标题全在位、31 条坑位首句全命中、31 条整行级守恒 0 缺失（零丢失实证）**；根因=迁移脚本为整段切片搬运（非人工重抄）·挑刺担心的丢失模式实际未发生，但验收缺陷属实（指纹对账已补为标准）。
+> - **W707 分层方案档补「执行实录与挑刺补正节」（§七）**：① L2 实建 3 份裁剪记录（workflow 并入 pitfalls git 组·tools/dirs 裁剪留 L1·挑刺 P0 采纳）② AGENTS 实测 292 行修正「2000+」预估（挑刺者 2500-3500 估计亦未实测·驳回）③ C2 节标题存在性检查实证（§4.3 摘要形态兼容·CLAUDE 指针未改）④ 机制 4 未单独落地补录 ⑤ BL-24 编号跳空指控驳回（BL-21/22/23 挑刺时点已在后续批登记·时点失真）⑥ 本批三件验收实录补记。+阅读契约头部。
+> - **W706 盘点档补「执行状态与挑刺补正节」（§七）**：① 漏扫精确 1112 处（差值·挑刺 P2）② 合计含 E 注记（挑刺 P2）③ 344 边界定义（W706 时点快照·含 W705 前历史·挑刺 P1）④ 硬耦合 5 来源标注（方案作者提议·**W711 实施定案=(ver|None, wnum) 保留 ver 组**·与建议不同以实施为准·挑刺 P2）⑤ 「执行前补做」措辞修正（三项在本档 v2 内·挑刺 P1）⑥ CFF 外部平台注记（CITATION 行内注释补形态说明·项目未接入自动 CFF 消费平台·挑刺 P1）⑦ workflows 4 处 W711 已核（action 注释与历史批注）。+阅读契约头部。
+> - **裁决驳回留档**：挑刺 #3（BL 编号跳空）系时点失真（BL-21/22/23 挑刺者所读旧版交接文档中尚未登记·现全部收口）；挑刺 #1 之「2500-3500 行」估计未实测（实数 292）。
+> - **验证**：指纹对账 0 缺失 + verify full 46 段绿 + pytest 296 + ruff 0 错 + stats --check 零差异 + w_range_literal CITATION 注释行兼容（W711 批次号形态·第 27 门禁绿）。
+> - **文件**：docs/superpowers/plans/2026-10-11-agents-layered-restructure.md（§七+契约）、docs/superpowers/plans/2026-10-11-version-space-inventory.md（§七+契约+措辞）、CITATION.cff（version 行注释）、docs/00-导读/W批次编号对账表.md（W712 认领）、六文档级联。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### W711（2026-10-11）：W711 方案D形态改造批
 
