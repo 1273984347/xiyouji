@@ -1,5 +1,7 @@
 # STRUCTURE 归档（版本里程碑历史）
 
+
+> **📖 阅读契约（W707）**：禁读型——**永远不要通读**；查历史建置沿革用 grep 关键词单段取用。
 > 2026-08-16 W448 从 STRUCTURE.md「版本变更」段迁出。范围为 v0.1-v2.2.48（W001-W272）的逐版本里程碑描述，与 CHANGELOG-ARCHIVE.md 存在信息重叠，仅作结构史备份。归档后不再更新，完整权威历史见 [CHANGELOG.md](../CHANGELOG.md) 与 [CHANGELOG-ARCHIVE.md](../CHANGELOG-ARCHIVE.md)。
 
 **主要阶段里程碑**：

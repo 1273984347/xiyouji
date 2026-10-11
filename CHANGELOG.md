@@ -1,10 +1,12 @@
 # 更新日志
 
+
+> **📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 docs/archive/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
 本项目所有重要变更均记录于此。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/)。
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W706），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W707），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -13,6 +15,18 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.301（2026-10-11）：W707 分层重构先行件与阅读契约批
+
+> **来源**：用户方案第十条（AGENTS L0/L1/L2 树状化）与第十一条（八份治理文件阅读契约）——本批=先行件（方案档+头部提示+--task+契约头部），阶段 1/2 内容搬迁登记 BL-24 下批按图施工（doc-sync C3 解析源与 check_claude_md C2 锚点属精确性改造）。
+> - **分层重构方案档入库**：docs/superpowers/plans/2026-10-11-agents-layered-restructure.md——目标结构（L0 CLAUDE 已就位/L1 AGENTS ≤400 行索引/L2 docs/agent 六文件）+内容搬迁映射（§4.2→gates.md 五组重排/§4.3→pitfalls.md 七主题〔含第九条 shell 查坑表〕/脚注→AGENTS-ARCHIVE〔=BL-23 合并执行〕）+硬耦合 7 项（doc-sync C3 双源/C2 锚点同步/级联锚点不变确认/W520 叙述面与 C5 扫描域豁免裁定〔L2 不入·头部声明历史引用〕/新校验门禁/--task 映射表）+验收清单（行数断言/指针可达/内容零丢失对账）。
+> - **AGENTS 头部阅读契约**：索引型声明（不要线性通读·先跑 agent_start --task·§4.2/§4.3 按需查表·§1-3/§6/§7 必读）。
+> - **agent_start.py --task**：按 git status 改动路径七类分类输出「本次任务相关」必读清单（TASK_MAP 常量·L2 就位后 BL-24 升级为文件级）——与 W705 全局摘要互补（摘要答项目什么状态/--task 答本次读什么）；heredoc 三败后按场景分层铁律改 Write 全量重写（教训自证）。
+> - **阅读契约头部×10**（用户方案第十一条阶段 1）：CHANGELOG 查表型/交接 首段+查表/STRUCTURE 索引型/README 分段型/AGENTS 索引型/CLAUDE 通读型+归档 4 份禁读型（grep 单段查勿通读·用户明示授权头部元数据·历史内容零改动）——每份 3-5 行「类型/何时读/读多少/不要读」。
+> - **BL-24/25 登记**：分层内容搬迁（阶段 1/2）+契约配套正文手术（STRUCTURE 沿革迁出/README 拆分评估登记不开工）。
+> - **验证**：agent_start 双模式冒烟（全局摘要+--task 分类清单）+py_compile+ruff 0 错；verify full 45 段绿；契约头部 10 份 grep 在位。
+> - **文件**：docs/superpowers/plans/2026-10-11-agents-layered-restructure.md（新增）、scripts/agent_start.py（--task+重写）、scripts/_w707_contracts.py（一次性）、AGENTS.md（头部契约）、CHANGELOG.md、交接文档.md、STRUCTURE.md、README.md、CLAUDE.md、docs/archive/×4（头部契约）、交接文档.md（BL-24/25）、docs/00-导读/W批次编号对账表.md（W707 认领）、六文档级联。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### v2.3.300（2026-10-11）：W706 编号空间盘点与元规则批
 
