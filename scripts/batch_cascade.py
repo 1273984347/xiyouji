@@ -198,6 +198,12 @@ def main():
     if len(tparts) > 3:
         s = s[:tail_idx] + "；".join(tparts[:3]) + s[tline_end:]
     assert s.count("））；") == 0, "写入后出现双括号 ））；"
+    # W708 review：结构断言前置到落盘前（原仅写后 selfcheck WARN——脏盘已落才报告违 fail-closed 意图；写后断言保留双保险）
+    _m = s.find("# 交接文档")
+    assert _m != -1 and not s[:_m].strip(), "交接文档主标题前存在错位内容（结构断言·落盘前拦截）"
+    _z, _y, _e = (s.find("## ⚠️ 零、当前阻塞"), s.find("## 一、当前进度"), s.find("## 二、下一步方向候选清单"))
+    assert -1 < _z < _y < _e, f"交接文档段序破坏（零={_z} 一={_y} 二={_e}）——段标题被吞（结构断言·落盘前拦截）"
+    assert re.search(r"> 历史概要（W\d+ 及更早）的详细记录见", s), "交接文档历史概要指针缺失（结构断言·落盘前拦截）"
     pend.append((p, s, nl))
 
     # ---------- workflows README ----------

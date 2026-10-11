@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W707），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W708），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -15,6 +15,16 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.302（2026-10-11）：W708 全变动对抗复审修复批
+
+> **来源**：用户令「review 一遍所有变动」——范围=本日 W702-W707 十提交（4cec0494..HEAD·140 文件 2565+/103-）；机械扫描八面+对抗审读五发现，修复三项、勘误一项、留档一项。
+> - **机械扫描八面 0 异常**：双标点（；；/））；/。。）全治理文档 0；混行尾 17 文件 0（load 断言防线在位）；阅读契约 10 份全在位；对账表 W700-W707 各恰一行无重复；CLAUDE.md 44 行（≤60）；本批全部新脚本与级联产物 17 件 tracked；版本行新模板形态（无空格）✓；状态门禁复跑全绿（verify full/stats --check 零差异/doc-sync self-test 12/12/lint_links 19559 链接 0 broken）。
+> - **对抗审读发现与处置**：① batch_cascade 交接结构三断言（主标题前非空/段序零一二/指针在位）原实现于写后 selfcheck（WARN 非阻断·脏盘已落才报告）——**前置到交接面 pend 落盘前 raise 阻断**（真 fail-closed·写后断言保留双保险）；② 文档规范 §4.11 引用的盘点数字为 v1（7679 处/265 文件+硬耦合 8 项）——更新为 v2 实数（8791 处/826 文件+硬耦合 9 项）；③ W704 段「本轮 22 处标记」**三重失真勘误**：分项和 10+4+6+6=26≠22、实测 31（CHANGELOG 10/README 5/AGENTS 9/STRUCTURE 7）——违反 W496「验收数字当批现测」铁律（写 spec 时拍脑袋未实数），历史段禁改走本段勘误追记，教训并入 W496 条目执行记录；④ scripts/output/_w704_ledger_msg.txt 漏 add（W702/703/705/706/707 的 msg 均入库唯独 704 漏）——本批补入库；⑤ W706 chore 提交信息「翻state」英文混入（已推送不可改·留档警示）。
+> - **审读确认正常面**：batch_cascade 最终形态逐块复核（三模板 \s* 兼容/join 守卫/标题双形态锚点/段内首块与 drop 段内断言/load 混行尾逻辑四态验证）；check_doc_sync C5/C5b/C5c 与设计一致；stats.py 实体化+--check 零差异；交接文档终态（块链 W707/W706/W705 滚动·指针 W707·头链三条·HEAD 句）；CITATION 2.3.301；file-index W707 段在位；agent_start --task 七类分类实测；对账表 W700-W707 行结构完整。
+> - **验证**：verify full 45 段绿 + pytest 293 + ruff 0 错 + 前置断言在重建态文件上实跑通过 + 机械八面复扫 0 异常。
+> - **文件**：scripts/batch_cascade.py（结构断言前置）、docs/00-导读/文档规范.md（§4.11 数字）、scripts/output/_w704_ledger_msg.txt（补入库）、docs/00-导读/W批次编号对账表.md（W708 认领）、六文档级联。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### v2.3.301（2026-10-11）：W707 分层重构先行件与阅读契约批
 
