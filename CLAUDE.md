@@ -37,4 +37,4 @@ make ci                                  # lint+test+audit+links 本地预跑 CI
 
 ## 接手导航（5 分钟动手）
 
-本文件（1 分钟）→ AGENTS.md 通读（3 分钟）→ 交接文档「零、当前阻塞」「一、当前进度」（1 分钟）→ 动手前跑 `python scripts/verify_delivery.py` 确认基线全绿。
+本文件（1 分钟）→ `python scripts/agent_start.py`（当前事实摘要·实读磁盘防记忆代读）→ AGENTS.md 通读（3 分钟）→ 交接文档「零、当前阻塞」「一、当前进度」（1 分钟）→ 动手前跑 `python scripts/verify_delivery.py` 确认基线全绿。
