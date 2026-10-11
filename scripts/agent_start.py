@@ -115,8 +115,8 @@ def render(d):
                st.get("site_reader_html"), st.get("visualization_pages"), st.get("csp_covered"), st.get("gate_count"))
         )
         out.append(
-            "内容口径：A1-A6 %s 篇·方法论 %s 篇·scripts %s 类·data json %s 个（全部实读 stats.json·勿用记忆值）"
-            % (st.get("a1_a6_docs"), st.get("methodology_docs"), st.get("script_classes"), st.get("json_count"))
+            "内容口径：A1-A6 %s 篇·方法论 %s 篇·scripts %s 类（全部实读 stats.json·勿用记忆值）"
+            % (st.get("a1_a6_docs"), st.get("methodology_docs"), st.get("script_classes"))
         )
     if d["blockers"]:
         out.append("当前阻塞（交接「零」段）：" + "；".join(d["blockers"]))

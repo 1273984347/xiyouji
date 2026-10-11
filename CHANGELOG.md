@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W715），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W716），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,19 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W716（2026-10-12）：stats 实体化补正批
+
+> **来源**：用户挑刺第十五次（stats 实体化专项 8 条：P0×2/P1×2/P2×2/P3×2）——逐条磁盘取证三态裁决（采纳 4/部分 3/驳回 1）并落地；另自查新增 1 项实锤并修（methodology_docs 磁盘漂移）。
+> - **P0-1 json_count 退役（采纳·方案甲）**：stats.py 移除该键（META+build）——其域 scripts/output/data/*.json 系 gitignored 本地产物（.gitignore:59），依赖它的键在无本地产物环境 --check 必红，违反「tracked 基准 CI 可复现」原则（W703 声明对该键不成立）；实测修正：CI/Makefile 现并不跑 stats --check（「任何机器必崩」降级为原则违反）·消费面=STRUCTURE 输出行标记与 agent_start 口径行，两处同批改写（STRUCTURE 输出行去标记改本地产物描述·agent_start 删 data json 段）。
+> - **P0-2 scan_files/seo_scanned 合并指控（驳回+注释补明）**：口径块设计原话「各门禁分母不同」——两键系两门禁独立分母刻意分开（C5 按句式上下文对账无重复对账·将来某器排除面变化时各自跟随），合并反而耦合；采纳-微=build 注释补明「同算式系近似实算·分母以各器实际排除集为准」（check_seo_head SEO_EXCLUDE=两模板壳实测与算式一致）。
+> - **P1 字段语义补明（部分采纳）**：introduced_by=口径首次**正式化**批次（META 注释原义已有·补「非历史首次出现批次」）；last_changed_by=stats.py 检出值变更的最近批次（建账前变更不记）——两者加 generator 恒同值省略列一并写入 stats-index 表头注（自动渲染·非手改）。
+> - **P2-6 reader 621→622（部分采纳·考古定谳）**：git 考古=主题枢纽页批次新增 site/reader/themes-hub.html 一页（a785a0f0）——历史段禁改不回填，本段留档；stats.json last_changed_by 不动（语义=建账后检出变更·见字段语义注）。
+> - **P3-7 _generated 粒度（采纳）**：补时分秒（同日多批可区分·变更史 date 仍为日期）。
+> - **P3-8 a4_docs 缺位（部分采纳·登记不开工）**：维持上轮裁决——EXPECT_A4 字面量绊线保留不改读 stats.json；完整形态=三处同改（stats 键+叙述面标记化+第 3 门禁匹配形态适配——「209 篇」子串在标记化后失配，系实体标记破坏既有解析器的同族地雷），待独立小批认领。
+> - **自查新增（实锤）**：stats.py --check 实测 methodology_docs 33→34 漂移——复盘报告批（W715）入库第 34 篇方法论文档但未同批 --w 刷新，「改口径批次须同批刷新」纪律违反实例；本批 --w W716 刷新（变更史记 33→34）+STRUCTURE 对齐 34。
+> - **验证**：stats --check 零差异（14 键·json_count 退役）+ doc-sync self-test 12/12 + doc-sync 门禁 0 FAIL + ruff 0 错 + verify full 与 pytest（级联后复跑）。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### W715（2026-10-11）：工作复盘报告批
 
