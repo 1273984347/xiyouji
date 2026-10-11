@@ -1,29 +1,45 @@
-[
-  {
-    "changes": [],
-    "date": "2026-10-11",
-    "w": "W704"
+{
+  "_field_notes": {
+    "changes": "值变更 [{key, from, to}]（from/to 为 int·建账前旧值 null）",
+    "checks": "零差异检查不入本文件——第 31 门禁 C5d（stats --check 对账·W718 挂载）每批 verify 恒跑背书，检查记录权威载体=verify 输出与 CHANGELOG 验证栏",
+    "date": "YYYY-MM-DD",
+    "note": "可选·人工考古注（如首条 W704 建账时点标记）",
+    "shape": "时序流水账（append-only·只记值变更）·按 W 反查用 stats-index.md 反向段（本文件渲染产物）",
+    "time": "HH:MM:SS（W718 起·迁移旧条目为 null）",
+    "w": "产生变更的批次号（建账前/未记批为 null）"
   },
-  {
-    "changes": [
-      {
-        "from": 40,
-        "key": "gate_count",
-        "to": 41
-      }
-    ],
-    "date": "2026-10-11",
-    "w": "W709"
-  },
-  {
-    "changes": [
-      {
-        "from": 33,
-        "key": "methodology_docs",
-        "to": 34
-      }
-    ],
-    "date": "2026-10-12",
-    "w": "W716"
-  }
-]
+  "_schema": "stats-changelog-v1",
+  "entries": [
+    {
+      "changes": [],
+      "date": "2026-10-11",
+      "note": "建账批空变更时点标记（W704 批开发迭代产物·终版条件式 append 不可产生·W718 考古注）",
+      "time": null,
+      "w": "W704"
+    },
+    {
+      "changes": [
+        {
+          "from": 40,
+          "key": "gate_count",
+          "to": 41
+        }
+      ],
+      "date": "2026-10-11",
+      "time": null,
+      "w": "W709"
+    },
+    {
+      "changes": [
+        {
+          "from": 33,
+          "key": "methodology_docs",
+          "to": 34
+        }
+      ],
+      "date": "2026-10-12",
+      "time": null,
+      "w": "W716"
+    }
+  ]
+}

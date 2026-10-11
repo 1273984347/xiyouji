@@ -11,6 +11,16 @@
 ---
 
 
+## W718 变更史可追踪补正批（2026-10-12）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/stats.py | W718 | 变更史 schema v1（migrate_hist 自动迁移+W704 note+entry time）+docstring 分工与建账说明 |
+| scripts/output/stats-changelog.json | W718 | v1 形态落盘（_schema/_field_notes/entries·W704 条目考古注） |
+| scripts/output/stats.json | W718 | 例行重跑（无变更·_generated 刷新） |
+| scripts/check_doc_sync.py | W718 | C5d 挂载（gather 内联 stats --check+evaluate 判定+T13·self-test 13/13） |
+| docs/agent/gates.md | W718 | 第 31 条目补 C5d 与 13 例 |
+
 ## W717 页脚链头锚定根修批（2026-10-12）
 
 | 文件 | W | 说明 |

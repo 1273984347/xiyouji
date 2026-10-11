@@ -3,11 +3,19 @@
 
 第 31 门禁 C5（check_doc_sync.py 聚合数字对账）的基准真值：治理文档现役叙述面中的
 高危聚合句式与 <!--stats:KEY--> 实体标记一律与本文件产物对账，不一致 = FAIL。
+第 31 门禁 C5d（W718 挂载）：本脚本 --check（stats.json vs 磁盘实算）由 doc-sync 每批
+verify 恒跑背书——「检查过零差异」有机器记录，「漂移未刷新」当场红（W715 漏 --w 实例的防线）。
 
 实体化形态（W704·用户方案「数字制度化」）：每个键 = {value, domain, generator,
 introduced_by, last_changed_by}——数字有身份（可正查来源、可反查 W 号）。
 变更史落 scripts/output/stats-changelog.json（重跑时 diff 旧值自动追加·--w 记批次），
 stats-index.md（W→stats key 反向索引·与 file-index 同构）随史重渲染。
+
+变更史 schema（stats-changelog-v1·W718）：{"_schema", "_field_notes", "entries": [
+  {w, date, time, changes: [{key, from, to}], note?}]}——时序流水账（append-only·
+只记值变更；零差异检查不入史，由 C5d 门禁与 CHANGELOG 验证栏背书）；按 W 反查用
+stats-index.md 反向段（本文件渲染产物）。首条 W704（changes=[]）系建账批开发迭代
+产物（终版条件式 append 不可产生·首入库时已在），保留作建账时点标记（note 注明）。
 
 用法：python scripts/stats.py [--w W704]   # 生成/刷新 stats.json + 变更史 + 反向索引
       python scripts/stats.py --check      # 与磁盘现存 stats.json 对比（应零差异·自证）
@@ -29,6 +37,31 @@ INDEX = os.path.join(HERE, "output", "stats-index.md")
 
 CONTENT_DIRS = ["01-全书逐回解读", "02-人物深度分析", "03-主题与情节专题", "04-文化与历史背景", "05-诗词歌赋", "06-个人随笔"]
 INLINED_MARK = "(tokens.css + system.css)"  # inline_css.py 注入的标记行特征
+HIST_SCHEMA = "stats-changelog-v1"  # W718：变更史结构版本（旧 list 形态 load 时自动迁移）
+
+HIST_FIELD_NOTES = {  # v1 自描述（W718 挑刺第十六次 P1-3/P2：防手工维护漂移+声明查找分工）
+    "shape": "时序流水账（append-only·只记值变更）·按 W 反查用 stats-index.md 反向段（本文件渲染产物）",
+    "w": "产生变更的批次号（建账前/未记批为 null）",
+    "date": "YYYY-MM-DD",
+    "time": "HH:MM:SS（W718 起·迁移旧条目为 null）",
+    "changes": "值变更 [{key, from, to}]（from/to 为 int·建账前旧值 null）",
+    "note": "可选·人工考古注（如首条 W704 建账时点标记）",
+    "checks": "零差异检查不入本文件——第 31 门禁 C5d（stats --check 对账·W718 挂载）每批 verify 恒跑背书，检查记录权威载体=verify 输出与 CHANGELOG 验证栏",
+}
+
+
+def migrate_hist(raw):
+    """变更史形态归一：旧 list → v1 dict（_schema+_field_notes+entries）；v1 原样返回。
+    迁移时补 time=None 与 W704 建账条目来源 note（W718 考古：终版条件式 append 不可产生该
+    空条目，系建账批开发迭代产物·首入库时已在——保留作建账时点标记，不删史）。"""
+    if isinstance(raw, dict) and raw.get("_schema") == HIST_SCHEMA:
+        return raw, False
+    entries = [dict(e) for e in raw] if isinstance(raw, list) else []
+    for e in entries:
+        e.setdefault("time", None)
+        if e.get("w") == "W704" and e.get("changes") == []:
+            e["note"] = "建账批空变更时点标记（W704 批开发迭代产物·终版条件式 append 不可产生·W718 考古注）"
+    return {"_schema": HIST_SCHEMA, "_field_notes": HIST_FIELD_NOTES, "entries": entries}, True
 
 # 实体元数据（W704 登记制：新键必须在此登记 domain 与口径起点；introduced_by=口径首次定义批次，
 # 即「该数字成为正式对账口径」的批次——非历史首次出现批次·语义见 stats-index 表头注·W716 补明）
@@ -127,9 +160,14 @@ def render_index(hist, entities):
         e = entities[k]
         lines.append("| %s | %s | %s | %s | %s |" % (k, e["value"], e["domain"], e["introduced_by"], e["last_changed_by"]))
     lines += ["", "## 反向：W → stats key 变更（新→旧）", ""]
-    for entry in reversed(hist):
+    for entry in reversed(hist["entries"]):
         w = entry.get("w") or "（未记 W）"
-        lines.append("### %s（%s）" % (w, entry.get("date", "")))
+        stamp = entry.get("date", "")
+        if entry.get("time"):
+            stamp += " " + entry["time"]
+        lines.append("### %s（%s）" % (w, stamp))
+        if entry.get("note"):
+            lines.append("- 注：%s" % entry["note"])
         for ch in entry.get("changes", []):
             lines.append("- %s: %s → %s" % (ch["key"], ch["from"], ch["to"]))
         if not entry.get("changes"):
@@ -156,17 +194,23 @@ def main():
         return 1 if diffs else 0
 
     today = datetime.date.today().isoformat()
-    generated_at = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")  # W716：补时分秒（同日多批可区分）
+    now = datetime.datetime.now()
+    generated_at = now.strftime("%Y-%m-%dT%H:%M:%S")  # W716：补时分秒（同日多批可区分）
     old_plain = {k: (e.get("value") if isinstance(e, dict) else e) for k, e in old_entities.items()}
     changes = [{"key": k, "from": old_plain.get(k), "to": v} for k, v in sorted(values.items()) if old_plain.get(k) != v]
-    hist = load_json(HIST, [])
+    hist, migrated = migrate_hist(load_json(HIST, []))
     if changes:
         if not args.w:
             print("WARN  检出 %d 键变更但未给 --w——变更史将以 w=null 登记（建议 --w <批号>）" % len(changes))
-        hist.append({"date": today, "w": args.w, "changes": changes})
+        hist["entries"].append({"date": today, "time": now.strftime("%H:%M:%S"), "w": args.w, "changes": changes})  # W718：time 字段
         with open(HIST, "w", encoding="utf-8", newline="\n") as f:
             json.dump(hist, f, ensure_ascii=False, indent=2, sort_keys=True)
             f.write("\n")
+    elif migrated:
+        with open(HIST, "w", encoding="utf-8", newline="\n") as f:  # W718：结构迁移写回（无变更也落盘一次）
+            json.dump(hist, f, ensure_ascii=False, indent=2, sort_keys=True)
+            f.write("\n")
+        print("OK    变更史已迁移 %s（旧 list → entries·W704 条目补注）" % HIST_SCHEMA)
 
     entities = {}
     for k, v in values.items():

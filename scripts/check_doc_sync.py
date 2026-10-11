@@ -11,9 +11,11 @@
      CHANGELOG 仅「全站页数口径」块行）vs scripts/output/stats.json（scripts/stats.py 磁盘实算·实体化 tracked）；
      C5b 数字实体标记：<!--stats:KEY--> 前置数字 == stats.json[KEY].value（键未登记=fail-closed）；
      C5c 裸聚合数字：标记/句式覆盖外的 N[页项篇个类] 记 NOTE 报告型（起步策略·收敛后转 FAIL）；
+     C5d stats 实算对账（W718）：scripts/stats.py --check（stats.json vs 磁盘实算）零差异——
+     「检查过零差异」有机器背书，漂移未刷新（漏跑 --w）当场 FAIL（W715 实例的防线）；
      基线/首跑等时点值靠句式表设计豁免（不进句式形态），新聚合量须先登记 stats.py META 键表
 豁免：行级 <!--doc-sync:exempt 原因-->；.git/shallow 存在时 C4 跳过（pre-commit 本地为主执行点）。
-用法：--check（默认）只读校验，0 FAIL 才过；--self-test 注入式负样本 12 例（纯合成输入，不改真实文件）；
+用法：--check（默认）只读校验，0 FAIL 才过；--self-test 注入式负样本 13 例（纯合成输入，不改真实文件）；
      --json 供 CI 消费。本脚本绝不修改任何文件。
 """
 
@@ -240,6 +242,14 @@ def evaluate(inp):
                 "C5c: 裸聚合数字 %d 处未实体化（报告型·前 20）：%s%s"
                 % (len(bare_hits), "；".join(bare_hits[:20]), "…" if len(bare_hits) > 20 else "")
             )
+
+    # C5d stats 实算对账（W718·挑刺第十六次升格）：stats.py --check（stats.json vs 磁盘实算）零差异——
+    # 「检查过」≠「没检查」的机器背书（W715 methodology 漂移漏 --w 实例的防线·0.3s 廉价 subprocess 恒跑）
+    if not inp.get("stats_check_ok", False):
+        issues.append(
+            "C5d: stats.json 与磁盘实算漂移（%s）——跑 python scripts/stats.py --w <批号> 刷新"
+            % inp.get("stats_check_tail", "stats --check 未通过")
+        )
     return issues, notes
 
 
@@ -280,6 +290,17 @@ def gather():
             inputs["subjects"] = [ln for ln in r.stdout.splitlines() if ln.strip()]
     except Exception as e:  # noqa: BLE001 —— 环境无 git 时 fail-closed
         inputs["git_err"] = str(e)[:120]
+    try:
+        r = subprocess.run(  # W718 C5d：stats.py --check（stats.json vs 磁盘实算·实测 0.3s）
+            [sys.executable, os.path.join(HERE, "stats.py"), "--check"],
+            cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="ignore", timeout=60,
+        )
+        inputs["stats_check_ok"] = r.returncode == 0
+        _tail = ((r.stdout or "") + (r.stderr or "")).strip().splitlines()
+        inputs["stats_check_tail"] = _tail[-1][:160] if _tail else ""
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        inputs["stats_check_ok"] = False
+        inputs["stats_check_tail"] = "stats --check 执行失败: %s" % exc
     if inputs.get("git_err") and not inputs["shallow"]:
         # 无 git 且非浅克隆：无法对账即 fail-closed（浅克隆已有跳过通道）
         inputs["force_c4_fail"] = inputs["git_err"]
@@ -298,7 +319,7 @@ def run_check():
     for nt in notes:
         print("NOTE  " + nt)
     print(
-        "---- 第 31 门禁 文档口径体检：%d FAIL · %d NOTE（C1 README 抬头 / C2 交接头链 / C3 门禁清单上限 / C4 提交-版段对账 / C5 聚合数字对账）----"
+        "---- 第 31 门禁 文档口径体检：%d FAIL · %d NOTE（C1 README 抬头 / C2 交接头链 / C3 门禁清单上限 / C4 提交-版段对账 / C5 聚合数字对账 / C5d stats 实算对账）----"
         % (len(issues), len(notes))
     )
     return (1 if issues else 0), issues, notes
@@ -317,6 +338,8 @@ def run_self_test():
         "structure": "",
         "xiangmu": "",
         "contributing": "",
+        "stats_check_ok": True,
+        "stats_check_tail": "",
         "stats": {
             k: {"value": v}
             for k, v in {
@@ -385,6 +408,11 @@ def run_self_test():
         "T12 实体标记未登记键必红（C5b）",
         lambda d: d.update(readme=d["readme"] + "共 9<!--stats:unknown_key--> 个\n"),
         "C5b",
+    )
+    case(
+        "T13 stats 实算漂移必红（C5d）",
+        lambda d: d.update(stats_check_ok=False, stats_check_tail="DRIFT methodology_docs: stats.json=33 磁盘实算=34"),
+        "C5d",
     )
 
     fails = 0
