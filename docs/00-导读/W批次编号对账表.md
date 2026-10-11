@@ -64,7 +64,7 @@
 | W696 | 工作复盘与优化分析报告第二篇（W693 三裁决+W694/W695 并行周期·含 §6.1 复发预防专项 FAM 十族）入库 + 方法论 README 索引第 34 行 | 本次提交（级联 v2.3.290·batch_cascade 原生） | v2.3.290 | **已收官** | ZCode 2026-10-10 |
 | W682 | agent-web 引擎更换批次三：WF-1 复活（golden-50 新引擎 LLM 基线·评估集首跑） | 3b0dfed（预留在案·W680 收官批注记） | 待批次落段 | **作废**（W686·用户裁决 workflow 方案退役·WF-1 复活随之取消·后续重新设计另认领新号） | ZCode 2026-10-07 |
 | W703 | 聚合数字对账门禁批（用户方案·A+C 修正形态）：scripts/stats.py 磁盘实算生成 stats.json（tracked）+ 第 31 门禁扩 C5（18 式高危聚合句式×现役叙述面 vs stats.json·CHANGELOG 仅口径块·基线时点值句式表设计豁免）+ AGENTS §4.2 第 31 条目 C5 + 文档规范 §4.10 聚合数字书写规范 + self-test 7→9 例 | 本次提交（级联 v2.3.297·batch_cascade 原生） | v2.3.297 | **已收官**（6eeb65d9） | ZCode 2026-10-11 |
-| W704 | 数字实体化批（用户方案第二阶段「数字制度化」）：stats.json 实体化（每键 value/domain/generator/introduced_by/last_changed_by）+ stats-changelog.json 自动变更史（--w 参数·diff 旧值追加）+ stats-index.md 反向索引（W→stats key·与 file-index 同构）+ C5 扩标记锚点对账（<!--stats:KEY--> 前置数字==value·键未登记 FAIL）与 C5c 裸聚合数字 NOTE 报告型起步 + 治理文档现役关键数字加标记约 25 处 + 文档规范 §4.10 增补实体化节 | 本次提交（级联 v2.3.298·batch_cascade 原生） | v2.3.298 | **进行中** | ZCode 2026-10-11 |（P0 口径四件〔CHANGELOG 页数口径块实跑刷新 857/856/855/330·reader 622 纳入 + AGENTS 第 8 门禁 233→856 页 + README 26→40 项门禁 + STRUCTURE 方法论 6→33 篇〕+ P1〔scripts 30→34 类全建+F 行 story-timeline 补录 + 第 6 门禁三豁免→五豁免对齐 W700〕+ P2〔v2.3.279/280 四件套补录只增不删 + 第 26 门禁 334→855 页 + CONTRIBUTING 对账表认领入口〕+ P3〔batch_cascade 版本行模板去空格 + AGENTS 脚注 join 双分号守卫与存量 4 处归一 + CLAUDE.md --scope auto 行〕+ 顺带 JSON 131→135 + 驳回 1 项防新漂移字面量） | 98c3a94f（级联 v2.3.296·batch_cascade 原生） | v2.3.296 | **已收官** | ZCode 2026-10-11 |
+| W704 | 数字实体化批（用户方案第二阶段「数字制度化」）：stats.json 实体化（每键 value/domain/generator/introduced_by/last_changed_by）+ stats-changelog.json 自动变更史（--w 参数·diff 旧值追加）+ stats-index.md 反向索引（W→stats key·与 file-index 同构）+ C5 扩标记锚点对账（<!--stats:KEY--> 前置数字==value·键未登记 FAIL）与 C5c 裸聚合数字 NOTE 报告型起步 + 治理文档现役关键数字加标记约 25 处 + 文档规范 §4.10 增补实体化节 | 19d8b586（级联 v2.3.298·batch_cascade 原生） | v2.3.298 | **已收官** | ZCode 2026-10-11 |（P0 口径四件〔CHANGELOG 页数口径块实跑刷新 857/856/855/330·reader 622 纳入 + AGENTS 第 8 门禁 233→856 页 + README 26→40 项门禁 + STRUCTURE 方法论 6→33 篇〕+ P1〔scripts 30→34 类全建+F 行 story-timeline 补录 + 第 6 门禁三豁免→五豁免对齐 W700〕+ P2〔v2.3.279/280 四件套补录只增不删 + 第 26 门禁 334→855 页 + CONTRIBUTING 对账表认领入口〕+ P3〔batch_cascade 版本行模板去空格 + AGENTS 脚注 join 双分号守卫与存量 4 处归一 + CLAUDE.md --scope auto 行〕+ 顺带 JSON 131→135 + 驳回 1 项防新漂移字面量） | 98c3a94f（级联 v2.3.296·batch_cascade 原生） | v2.3.296 | **已收官** | ZCode 2026-10-11 |
 
 ## 递延批豁免登记（D2 裁决：对账表登记即可过 doc-sync 提交-版段对账）
 
@@ -72,6 +72,7 @@
 - 后续任何「chore/追加批递延版段」沿用同一通道：**先在本表登记，再提交**——登记即豁免，未登记的 W 号在 doc-sync 中按失配点名。
 - **W697**：现势下一自由号（w696 收官提交信息预留引用·2026-10-10）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W703**：现势下一自由号（600adcba w701 收官提交信息预留引用·2026-10-11·W702 收官 chore 同款引用）——**预留登记豁免**，动工时按取号规则正式认领。
+- **W705**：现势下一自由号（19d8b586 w704 收官提交信息预留引用·2026-10-11）——**预留登记豁免**，动工时按取号规则正式认领。
 | W703 | 聚合数字对账门禁批（用户方案·A+C 修正形态）：scripts/stats.py 磁盘实算生成 stats.json（tracked）+ 第 31 门禁扩 C5（18 式高危聚合句式×现役叙述面 vs stats.json·CHANGELOG 仅口径块·基线时点值句式表设计豁免）+ AGENTS §4.2 第 31 条目 C5 + 文档规范 §4.10 聚合数字书写规范 + self-test 7→9 例 | 本次提交（级联 v2.3.297·batch_cascade 原生） | v2.3.297 | **已收官**（6eeb65d9） | ZCode 2026-10-11 |
 - **W691**：下一自由号被 W690 收官级联提交文本（4ab918d「现势 W691」）提前引用——C4 豁免登记（2026-10-09 补记）；本号仍为自由号，认领时正常占用。
 
