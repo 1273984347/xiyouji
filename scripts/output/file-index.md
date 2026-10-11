@@ -11,6 +11,14 @@
 ---
 
 
+## W720 C4 认领行强制批（2026-10-12）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_sync.py | W720 | C4 认领行强制（表格行与豁免 bullet 细分+T14·self-test 14 例） |
+| docs/agent/gates.md | W720 | 第 31 条 C4 描述+14 例 |
+| docs/agent/pitfalls.md | W720 | git 类新条目（认领流程五步·W720 强制） |
+
 ## W719 review 修复批（2026-10-12）
 
 | 文件 | W | 说明 |

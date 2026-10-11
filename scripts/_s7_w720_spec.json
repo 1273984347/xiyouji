@@ -1,0 +1,17 @@
+{
+  "batch": "W720",
+  "version": "v2.3",
+  "date": "2026-10-12",
+  "desc": "C4 认领行强制批",
+  "title": "W720 C4 认领行强制批",
+  "changelog_body": "\n\n> **来源**：用户 userselect 圈选 W719 报告的流程遗漏项（动工前未在对账表登记认领行）根修现做。\n> - **根因**：C4 只查「W 号 ∈ 版段 ∪ 对账表登记集合」，而登记集合混合了两种形态——认领「表格行」（| W### |）与预留「豁免 bullet」（- **WXXX**：现势下一自由号…，RE_TABLE_DEFER 收纳）；W719 动工未登记认领行，主提交时被当批现势豁免 bullet 救场，机器不可区分、流程违例不拦。\n> - **根修（C4 细分强制）**：C4 新增判定——CHANGELOG 现役段 W 号必须在对账表有「表格行」登记（RE_TABLE_ROW_W 单独取集·豁免 bullet 不算认领），动工前未登记则主提交即红（self-test T14 注入仅 bullet 形态必红·13→14 例）；认领行强制同时是「对账表=并发认领唯一依据」（W663 表头规则①）的机器化——W719 教训闭环。\n> - **流程面同步**：gates.md 第 31 条 C4 描述+14 例；pitfalls.md git 类新条目（认领流程五步：取号→表格加行进行中→动工→级联→主提交→收官翻已收官）；本批自身先登记认领行再动工（新防线首次合规执行）。\n> - **边界说明（如实留档）**：浅克隆跳过 C4（pre-commit 本地为主执行点·与既有 C4 同域）；并行会话场景下他方未登记时本方提交可能被连带拦——对未登记方是正确施压（同 checkout 并行本有互斥纪律·W649）。\n> - **验证**：doc-sync self-test 14/14 + 门禁 0 FAIL（现役段 W720 认领行在场实证）+ ruff 0 + verify full + pytest（级联后复跑）。\n> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。\n",
+  "head_entry": "2026-10-12（W720 C4 认领行强制批）",
+  "head_sentence": "认领行表格化强制与流程五步",
+  "milestone_block": "- **W720 C4 认领行强制批**：\n  - C4 细分：现役段 W 号须有对账表「表格行」认领（豁免 bullet 不算·动工未登记主提交即红·W719 教训闭环）\n  - self-test 13→14 例（T14）+gates 第 31 条+pitfalls 认领流程五步；本批先登记认领行再动工（新防线首次合规执行）\n",
+  "agents_note": "2026-10-12（W720）C4 认领行强制批（用户 userselect 圈选 W719 流程遗漏根修）：C4 细分强制（CHANGELOG 现役段 W 号须有对账表表格行认领加预留豁免 bullet 不算认领加动工未登记主提交即红加 W719 被豁免 bullet 救场实证不可区分根因）加 self-test 13→14 例（T14 仅 bullet 形态必红）加 gates 第 31 条与 pitfalls 认领流程五步同步加 本批先登记认领行再动工（新防线首次合规执行）加 浅克隆同既有 C4 跳过",
+  "file_index_rows": [
+    "| scripts/check_doc_sync.py | W720 | C4 认领行强制（表格行与豁免 bullet 细分+T14·self-test 14 例） |",
+    "| docs/agent/gates.md | W720 | 第 31 条 C4 描述+14 例 |",
+    "| docs/agent/pitfalls.md | W720 | git 类新条目（认领流程五步·W720 强制） |"
+  ]
+}

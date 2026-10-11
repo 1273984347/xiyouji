@@ -6,7 +6,8 @@
   C1 README 抬头「当前版本 vX（日期）**： W###」 ≡ CHANGELOG 顶段三元组
   C2 交接文档头链链首「- **vX W###」 ≡ CHANGELOG 顶段（v + W）
   C3 AGENTS §4.2 门禁清单最高编号 == verify_delivery.py 实况最高槽位
-  C4 提交-版段对账：近 15 条 commit subject 中的 W### ⊆ CHANGELOG 版段集合 ∪ 对账表登记行
+  C4 提交-版段对账：近 15 条 commit subject 中的 W### ⊆ CHANGELOG 版段集合 ∪ 对账表登记行；
+     认领行强制（W720）：CHANGELOG 现役段 W 号须有对账表「表格行」——预留豁免 bullet 不算认领
   C5 聚合数字对账（W703 建·W704 实体化）：18 式高危聚合句式 × 现役叙述面（README/STRUCTURE/AGENTS/项目说明全文 +
      CHANGELOG 仅「全站页数口径」块行）vs scripts/output/stats.json（scripts/stats.py 磁盘实算·实体化 tracked）；
      C5b 数字实体标记：<!--stats:KEY--> 前置数字 == stats.json[KEY].value（键未登记=fail-closed）；
@@ -15,7 +16,7 @@
      「检查过零差异」有机器背书，漂移未刷新（漏跑 --w）当场 FAIL（W715 实例的防线）；
      基线/首跑等时点值靠句式表设计豁免（不进句式形态），新聚合量须先登记 stats.py META 键表
 豁免：行级 <!--doc-sync:exempt 原因-->；.git/shallow 存在时 C4 跳过（pre-commit 本地为主执行点）。
-用法：--check（默认）只读校验，0 FAIL 才过；--self-test 注入式负样本 13 例（纯合成输入，不改真实文件）；
+用法：--check（默认）只读校验，0 FAIL 才过；--self-test 注入式负样本 14 例（纯合成输入，不改真实文件）；
      --json 供 CI 消费。本脚本绝不修改任何文件。
 """
 
@@ -175,6 +176,15 @@ def evaluate(inp):
             for w in RE_COMMIT_W.findall(s2):
                 if w not in reg:
                     issues.append("C4: 提交「%s」的 W%s 无 CHANGELOG 版段且未在对账表登记" % (s[:60], w))
+        # C4 认领行强制（W720·W719 流程遗漏根修）：现役段 W 号须有对账表「表格行」登记——
+        # 预留豁免 bullet（- **WXXX**：现势下一自由号…）不算认领；此前 C4 只查 W 号在登记集合，
+        # 两种形态不可区分，动工未先登记认领行不会被拦（W719 实证被豁免 bullet 救场）
+        top = changelog_top(inp["changelog"])
+        if top and ("%03d" % top[1]) not in set(RE_TABLE_ROW_W.findall(inp["table"])):
+            issues.append(
+                "C4: CHANGELOG 现役段 W%03d 无对账表认领行（动工前须先在本表登记·预留豁免 bullet 不算认领·W719 流程遗漏实例）"
+                % top[1]
+            )
 
     # C5 聚合数字对账（W703·用户方案 A+C 修正形态）：句式白名单 × 现役叙述面 vs stats.json
     stats = inp.get("stats")
@@ -413,6 +423,11 @@ def run_self_test():
         "T13 stats 实算漂移必红（C5d）",
         lambda d: d.update(stats_check_ok=False, stats_check_tail="DRIFT methodology_docs: stats.json=33 磁盘实算=34"),
         "C5d",
+    )
+    case(
+        "T14 现役段无对账表认领行必红（C4·W720）",
+        lambda d: d.update(table="- **W999**：现势下一自由号（递延豁免 bullet·非认领行）\n"),
+        "C4",
     )
 
     fails = 0
