@@ -64,7 +64,7 @@
 | W696 | 工作复盘与优化分析报告第二篇（W693 三裁决+W694/W695 并行周期·含 §6.1 复发预防专项 FAM 十族）入库 + 方法论 README 索引第 34 行 | 本次提交（级联 v2.3.290·batch_cascade 原生） | v2.3.290 | **已收官** | ZCode 2026-10-10 |
 | W682 | agent-web 引擎更换批次三：WF-1 复活（golden-50 新引擎 LLM 基线·评估集首跑） | 3b0dfed（预留在案·W680 收官批注记） | 待批次落段 | **作废**（W686·用户裁决 workflow 方案退役·WF-1 复活随之取消·后续重新设计另认领新号） | ZCode 2026-10-07 |
 | W703 | 聚合数字对账门禁批（用户方案·A+C 修正形态）：scripts/stats.py 磁盘实算生成 stats.json（tracked）+ 第 31 门禁扩 C5（18 式高危聚合句式×现役叙述面 vs stats.json·CHANGELOG 仅口径块·基线时点值句式表设计豁免）+ AGENTS §4.2 第 31 条目 C5 + 文档规范 §4.10 聚合数字书写规范 + self-test 7→9 例 | 本次提交（级联 v2.3.297·batch_cascade 原生） | v2.3.297 | **已收官**（6eeb65d9） | ZCode 2026-10-11 |
-| W707 | AGENTS 分层重构先行件批（用户方案第十条 L0/L1/L2 树状化）：方案档 docs/superpowers/plans/2026-10-11-agents-layered-restructure.md（§4.2→gates.md 与 §4.3→pitfalls.md 硬耦合清单=doc-sync C3 解析源/check_claude_md C2 锚点/查坑表并入 pitfalls/阶段拆分验收）+ AGENTS 头部「不要读完·先跑 agent_start --task」提示行 + agent_start.py --task 改动文件分类输出必读清单+ BL-24 登记阶段 1/2 内容搬迁（下批按图施工） | 本次提交（级联 v2.3.301·batch_cascade 原生） | v2.3.301 | **进行中** | ZCode 2026-10-11 |
+| W707 | AGENTS 分层重构先行件批（用户方案第十条 L0/L1/L2 树状化）：方案档 docs/superpowers/plans/2026-10-11-agents-layered-restructure.md（§4.2→gates.md 与 §4.3→pitfalls.md 硬耦合清单=doc-sync C3 解析源/check_claude_md C2 锚点/查坑表并入 pitfalls/阶段拆分验收）+ AGENTS 头部「不要读完·先跑 agent_start --task」提示行 + agent_start.py --task 改动文件分类输出必读清单+ BL-24 登记阶段 1/2 内容搬迁（下批按图施工） | 63195eca（级联 v2.3.301·batch_cascade 原生） | v2.3.301 | **已收官** | ZCode 2026-10-11 |
 | W706 | 编号空间盘点与元规则批（用户方案第四五阶段·仅盘点与元规则起草·方案 D 形态改造待 W707）：v 号使用点全量盘点（git grep 分类=历史段/现役版本行/页脚/脚本正则/外部件→docs/superpowers/plans 盘点档）+ 文档规范 §4.11 编号空间与标识符纪律（v/W 双键元规则草案+编号空间字典 W/S/B/A/E/P/SC/WF/FAM+范围词汇定义 全量/现役/版本+行号禁令+裁决记录形态）+ AGENTS §4.3 主题索引块+§5.2 检查层次映射+§8 裁定链句+CONTRIBUTING 权威清单补 CLAUDE.md+ CHANGELOG 编号规则段补 v 号不单调声明（W659-W667 合并段实证）+ 交接 Backlog 两条（豁免清单周期盘点/方案 D 形态改造批预告） | a8f498f3（级联 v2.3.300·batch_cascade 原生） | v2.3.300 | **已收官** | ZCode 2026-10-11 |
 | W705 | Agent 开局状态摘要批（用户方案第三阶段·仅执行第 2 步）：scripts/agent_start.py 现读磁盘输出当前事实摘要（现役三元组/近 3 段/stats 全键/对账表现势/铁律提醒·--json 可选）+ AGENTS §7 第 0 步挂接 + CLAUDE.md 接手导航一行（42/60 行）+ 对账表 W702 行首拆分修复（W704 登记 replace 误吞行首·正文并入 W704 行的损伤随 19d8b586 入仓）+ 分级裁决留档（阶段 3 rules.json+CLAUDE.md 生成化驳回=三源冲突违单一事实源/阶段 4 state.json+指纹驳回=第四副本/阶段 5 challenge 诊断性登记不开工） | 本次提交（级联 v2.3.299·batch_cascade 原生） | v2.3.299 | **进行中** | ZCode 2026-10-11 |
 | W704 | 数字实体化批（用户方案第二阶段「数字制度化」）：stats.json 实体化（每键 value/domain/generator/introduced_by/last_changed_by）+ stats-changelog.json 自动变更史（--w 参数·diff 旧值追加）+ stats-index.md 反向索引（W→stats key·与 file-index 同构）+ C5 扩标记锚点对账（<!--stats:KEY--> 前置数字==value·键未登记 FAIL）与 C5c 裸聚合数字 NOTE 报告型起步 + 治理文档现役关键数字加标记约 25 处 + 文档规范 §4.10 增补实体化节 | 19d8b586（级联 v2.3.298·batch_cascade 原生） | v2.3.298 | **已收官** | ZCode 2026-10-11 |
@@ -78,6 +78,7 @@
 - **W703**：现势下一自由号（600adcba w701 收官提交信息预留引用·2026-10-11·W702 收官 chore 同款引用）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W705**：现势下一自由号（19d8b586 w704 收官提交信息预留引用·2026-10-11）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W707**：现势下一自由号（a8f498f3 w706 收官提交信息预留引用·2026-10-11）——**预留登记豁免**，动工时按取号规则正式认领。
+- **W708**：现势下一自由号（63195eca w707 收官提交信息预留引用·2026-10-11）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W691**：下一自由号被 W690 收官级联提交文本（4ab918d「现势 W691」）提前引用——C4 豁免登记（2026-10-09 补记）；本号仍为自由号，认领时正常占用。
 
 ## 登记 ASCII 纪律
