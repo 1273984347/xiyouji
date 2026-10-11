@@ -7,11 +7,13 @@
   C2 交接文档头链链首「- **vX W###」 ≡ CHANGELOG 顶段（v + W）
   C3 AGENTS §4.2 门禁清单最高编号 == verify_delivery.py 实况最高槽位
   C4 提交-版段对账：近 15 条 commit subject 中的 W### ⊆ CHANGELOG 版段集合 ∪ 对账表登记行
-  C5 聚合数字对账（W703）：18 式高危聚合句式 × 现役叙述面（README/STRUCTURE/AGENTS/项目说明全文 +
-     CHANGELOG 仅「全站页数口径」块行）vs scripts/output/stats.json（scripts/stats.py 磁盘实算·tracked）；
-     基线/首跑等时点值靠句式表设计豁免（不进句式形态），新聚合量须先登记 stats.py 键表
+  C5 聚合数字对账（W703 建·W704 实体化）：18 式高危聚合句式 × 现役叙述面（README/STRUCTURE/AGENTS/项目说明全文 +
+     CHANGELOG 仅「全站页数口径」块行）vs scripts/output/stats.json（scripts/stats.py 磁盘实算·实体化 tracked）；
+     C5b 数字实体标记：<!--stats:KEY--> 前置数字 == stats.json[KEY].value（键未登记=fail-closed）；
+     C5c 裸聚合数字：标记/句式覆盖外的 N[页项篇个类] 记 NOTE 报告型（起步策略·收敛后转 FAIL）；
+     基线/首跑等时点值靠句式表设计豁免（不进句式形态），新聚合量须先登记 stats.py META 键表
 豁免：行级 <!--doc-sync:exempt 原因-->；.git/shallow 存在时 C4 跳过（pre-commit 本地为主执行点）。
-用法：--check（默认）只读校验，0 FAIL 才过；--self-test 注入式负样本 10 例（纯合成输入，不改真实文件）；
+用法：--check（默认）只读校验，0 FAIL 才过；--self-test 注入式负样本 12 例（纯合成输入，不改真实文件）；
      --json 供 CI 消费。本脚本绝不修改任何文件。
 """
 
@@ -55,6 +57,8 @@ RE_STATS_PATTERNS = [  # (正则, (键...), 语境词[None=无·小写包含判�
     (re.compile(r"(\d+) 类子目录全建"), ("script_classes",), None),
 ]
 RE_CHANGELOG_SCOPE = re.compile(r"^> \*\*全站页数口径\*\*.*$", re.M)  # CHANGELOG 扫描域=口径块行
+RE_STATS_MARK = re.compile(r"(\d+)\s*[页项篇个类]?\s*<!--stats:([a-z_0-9]+)-->")  # W704 数字实体标记（紧贴/句尾双形态·key 后置·渲染隐藏）
+RE_BARE_AGG = re.compile(r"\d+\s*(?:页|项|篇|个|类)")  # C5c 裸聚合数字（报告型 NOTE·W704 起步）
 C5_DOC_NAMES = {"readme": "README.md", "structure": "STRUCTURE.md", "agents": "AGENTS.md", "xiangmu": "项目说明.md"}
 EXEMPT_MARK = "<!--doc-sync:exempt"
 ARCHIVE_CHANGELOGS = [
@@ -90,6 +94,12 @@ def agents_gate_list_max(agents_text):
 def verify_slot_max(verify_src):
     nums = [int(x) for x in RE_VERIFY_SLOT.findall(verify_src)]
     return max(nums) if nums else None
+
+
+def stats_value(stats, key):
+    """stats.json 实体形态（W704 {value,...}）兼容平面值（W703 过渡）。"""
+    e = stats.get(key)
+    return e.get("value") if isinstance(e, dict) else e
 
 
 def line_has_exempt(text, match):
@@ -179,7 +189,7 @@ def evaluate(inp):
                 if not m or (ctx and ctx not in ln.lower()):
                     continue
                 for gi, key_name in enumerate(keys, 1):
-                    want = stats.get(key_name)
+                    want = stats_value(stats, key_name)
                     got = int(m.group(gi))
                     if want is None:
                         issues.append(
@@ -188,9 +198,41 @@ def evaluate(inp):
                         )
                     elif got != want:
                         issues.append(
-                            "C5: %s「%s」=%d ≠ stats.json %s=%d（跑 python scripts/stats.py 刷新或修正文档）"
+                            "C5: %s「%s」=%d ≠ stats.json %s=%d（跑 python scripts/stats.py --w <批号> 刷新或修正文档）"
                             % (where, m.group(0), got, key_name, want)
                         )
+
+        # C5b 数字实体标记对账（W704）：<!--stats:KEY--> 前置数字 == stats.json[KEY].value；键未登记 fail-closed
+        # C5c 裸聚合数字（报告型 NOTE·标记/句式覆盖位之外·起步策略收敛后转 FAIL）
+        bare_hits = []
+        for where, ln in scans:
+            if EXEMPT_MARK in ln:
+                continue
+            covered = set()
+            for pat, _keys, ctx in RE_STATS_PATTERNS:
+                for m in pat.finditer(ln):
+                    if not ctx or ctx in ln.lower():
+                        covered.update(range(m.start(), m.end()))
+            for m in RE_STATS_MARK.finditer(ln):
+                covered.update(range(m.start(), m.end()))
+                key_name = m.group(2)
+                want = stats_value(stats, key_name)
+                got = int(m.group(1))
+                if want is None:
+                    issues.append("C5b: %s 标记 <!--stats:%s--> 键未登记——先登记 scripts/stats.py META" % (where, key_name))
+                elif got != want:
+                    issues.append(
+                        "C5b: %s 标记数字 %d ≠ stats.json %s=%s（跑 python scripts/stats.py --w <批号> 刷新）"
+                        % (where, got, key_name, want)
+                    )
+            for m in RE_BARE_AGG.finditer(ln):
+                if m.start() not in covered:
+                    bare_hits.append("%s「%s」" % (where, m.group(0)))
+        if bare_hits:
+            notes.append(
+                "C5c: 裸聚合数字 %d 处未实体化（报告型·前 20）：%s%s"
+                % (len(bare_hits), "；".join(bare_hits[:20]), "…" if len(bare_hits) > 20 else "")
+            )
     return issues, notes
 
 
@@ -266,10 +308,15 @@ def run_self_test():
         "table": "| W999 | x | y | z | s | c |\n- **W659 / W660**：递延登记\n",
         "structure": "",
         "xiangmu": "",
-        "stats": {"gate_count": 31, "html_total": 100, "a1_a6_docs": 50, "methodology_docs": 6,
-                  "visualization_pages": 10, "csp_covered": 100, "scan_files": 100, "seo_scanned": 100,
-                  "inline_css_pages": 10, "json_count": 9, "script_classes": 34,
-                  "site_data_html": 10, "site_en_html": 10, "site_root_html": 10, "site_reader_html": 70},
+        "stats": {
+            k: {"value": v}
+            for k, v in {
+                "gate_count": 31, "html_total": 100, "a1_a6_docs": 50, "methodology_docs": 6,
+                "visualization_pages": 10, "csp_covered": 100, "scan_files": 100, "seo_scanned": 100,
+                "inline_css_pages": 10, "json_count": 9, "script_classes": 34,
+                "site_data_html": 10, "site_en_html": 10, "site_root_html": 10, "site_reader_html": 70,
+            }.items()
+        },
         "shallow": False,
     }
     cases = []
@@ -319,6 +366,16 @@ def run_self_test():
         "T10 stats.json 缺失 fail-closed（C5）",
         lambda d: d.update(stats=None),
         "C5",
+    )
+    case(
+        "T11 实体标记失配必红（C5b）",
+        lambda d: d.update(readme=d["readme"] + "HTML 共 200<!--stats:html_total--> 页\n"),
+        "C5b",
+    )
+    case(
+        "T12 实体标记未登记键必红（C5b）",
+        lambda d: d.update(readme=d["readme"] + "共 9<!--stats:unknown_key--> 个\n"),
+        "C5b",
     )
 
     fails = 0

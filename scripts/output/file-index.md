@@ -11,6 +11,24 @@
 ---
 
 
+## W704 W704 数字实体化批（2026-10-11·v2.3.298）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/stats.py | W704 | 实体化重写：entity-v1+stats-changelog 自动 diff+stats-index 反向索引 |
+| scripts/output/stats.json | W704 | 实体形态 entity-v1（15 键） |
+| scripts/output/stats-changelog.json | W704 | 新增：stats 变更史（--w 记批次） |
+| scripts/output/stats-index.md | W704 | 新增：数字反向索引（W→stats key） |
+| scripts/check_doc_sync.py | W704 | 扩 C5b 标记对账+C5c 裸数字报告（self-test 12 例） |
+| scripts/_w704_docsync.py | W704 | 一次性：C5b/C5c 编辑器 |
+| scripts/_w704_marks.py | W704 | 一次性：实体标记编辑器（22 处） |
+| AGENTS.md | W704 | §1/第 8/26 门禁/make analyze 实体标记 + 第 31 条目 C5b/C5c |
+| README.md | W704 | 版本行/可视化入口/门禁数实体标记 |
+| STRUCTURE.md | W704 | 版本行/类数/篇数/JSON 实体标记 |
+| CHANGELOG.md | W704 | 口径块 10 处实体标记 |
+| docs/00-导读/文档规范.md | W704 | §4.10 增补数字实体化与 C5 三层分工 |
+| docs/00-导读/W批次编号对账表.md | W704 | W704 认领 + 现势 W705 |
+
 ## W703 W703 聚合数字对账门禁批（2026-10-11·v2.3.297）
 
 | 文件 | W | 说明 |
