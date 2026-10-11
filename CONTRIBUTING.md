@@ -20,7 +20,7 @@
 
 subagent 基于文档骨架模板填充内容：
 
-- 文档骨架：[docs/_templates/article-template.md](docs/_templates/article-template.md)
+- 文档骨架：以目标目录下已建篇目的实际结构为准（docs/01 逐回六段式+原文全文 / docs/02 人物六段式 / docs/03 主题七段式等）；`_templates/article-template.md` 系历史模板，与线上实际结构脱节（STRUCTURE §_templates 警示），**勿直接套用**
 - 完成后按交接清单自检：[docs/_templates/handoff-checklist.md](docs/_templates/handoff-checklist.md)（8 项）
 - 自检通过后提交交付声明
 
@@ -61,6 +61,7 @@ W### ID 是双索引的锚点：CHANGELOG 按 W### 顺序记录变更，file-ind
 
 ## 关联文档
 
+- [CLAUDE.md](CLAUDE.md)：AI 速查层（宿主自动加载·W664）
 - [README.md](README.md)：项目说明
 - [STRUCTURE.md](STRUCTURE.md)：目录结构
 - [CHANGELOG.md](CHANGELOG.md)：变更日志（正向时间线）
