@@ -11,6 +11,21 @@
 ---
 
 
+## W719 review 修复批（2026-10-12）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_s7_w716_spec.json | W719 | 挑刺第十五次级联 spec 考古补库（W714 先例续做） |
+| scripts/_s7_w716_msg.txt | W719 | W716 提交信息件补库 |
+| scripts/_s7_w717_spec.json | W719 | 页脚根修批级联 spec 补库 |
+| scripts/_s7_w717_msg.txt | W719 | W717 提交信息件补库 |
+| scripts/_s7_w718_spec.json | W719 | 变更史补正批级联 spec 补库 |
+| scripts/_s7_w718_msg.txt | W719 | W718 提交信息件补库 |
+| scripts/output/_cascade_files_W714.txt | W719 | 并行会话级联清单漏 add 补库（W649 规则） |
+| scripts/output/_cascade_files_W715.txt | W719 | 并行会话级联清单漏 add 补库（W649 规则） |
+| scripts/_s7_footnote_trim2_20261012.py | W719 | 脚注滚动迁移一次性件（W708-W714 迁 ARCHIVE·用后保留） |
+| docs/archive/AGENTS-ARCHIVE.md | W719 | AGENTS 脚注 W708-W714 段原文迁入 |
+
 ## W718 变更史可追踪补正批（2026-10-12）
 
 | 文件 | W | 说明 |

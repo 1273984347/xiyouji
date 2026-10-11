@@ -1,0 +1,19 @@
+{
+  "batch": "W718",
+  "version": "v2.3",
+  "date": "2026-10-12",
+  "desc": "变更史可追踪补正批",
+  "title": "W718 变更史可追踪补正批",
+  "changelog_body": "\n\n> **来源**：用户挑刺第十六次（stats-changelog.json 专项 5 项：P0×1/P1×3/P2×1）——逐条磁盘取证三态裁决（采纳 3/部分 1 升格 1/驳回 0）并落地；含快照澄清与 W704 空条目 git 考古定谳。\n> - **P0 W704 空记录（采纳·澄清来源不删史）**：git 考古=首入库 commit（19d8b586）时 stats.py 终版已是条件式 append（if changes）——该空条目终版逻辑不可产生，系建账批开发迭代产物、append-only 从未清理；处置=保留（变更史只增原则·建账时点标记有价值）+ migrate_hist 注入 note 字段（考古结论随条目）+ docstring 记载；报告「2 条」系快照——现文件已 3 条（W716 条 methodology 33→34 系挑刺快照后 W716 批新增）。\n> - **P1「检查过≠没检查」（部分采纳且升格）**：拒绝 _checks 数组/--log-check 两形态（--check 只读语义不该有副作用·无门禁强制的流程项必漏）——改 **C5d 挂载第 31 门禁**（doc-sync gather 内联 subprocess 跑 stats.py --check·实测 0.3s·漂移当场 FAIL）：检查记录权威载体=verify 输出与 CHANGELOG 验证栏，「漂移未刷新」（W715 methodology 漏 --w 实例）自此有机器防线·每批 verify 恒跑；self-test 12→13 例（T13 注入漂移必红）+gates.md 第 31 条同步。\n> - **P1 无时间维度（采纳）**：entry 加 time 字段（HH:MM:SS·迁移旧条目 null）——同日多批可区分。\n> - **P1 无 schema（采纳·结构升级）**：stats-changelog-v1={_schema, _field_notes, entries}——旧 list 形态 load 时自动迁移（migrate_hist·无变更也写回一次）；_field_notes 内嵌字段语义（w/date/time/changes/note/shapes/checks 分工）。\n> - **P2 反向查找不在 json（采纳-轻）**：不改双索引（消费端仅 render_index·量小·append-only 是流水账自然形态）——_field_notes.shape 声明分工「本文件=时序流水账权威·按 W 反查用 stats-index.md 反向段（本文件渲染产物）」。\n> - **验证**：迁移实跑（v1 形态+W704 note+time null 落盘）+ doc-sync self-test 13/13 + doc-sync 门禁 0 FAIL + ruff 0 + verify full + pytest（级联后复跑）。\n> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。\n",
+  "head_entry": "2026-10-12（W718 变更史可追踪补正批）",
+  "head_sentence": "变更史 schema 化与检查机器背书",
+  "milestone_block": "- **W718 变更史可追踪补正批**：\n  - 挑刺第十六次 5 项裁决（采纳 3/部分升格 1/快照澄清 1）；W704 空条目考古定谳（建账批开发迭代产物·保留加注不删史）\n  - 变更史 schema v1（_schema+_field_notes+entries·旧形态自动迁移）+entry time 字段+反向查找分工声明\n  - C5d 挂载第 31 门禁（stats --check 恒跑·漂移当场 FAIL·W715 漏 --w 实例的机器防线·self-test 13/13）\n",
+  "agents_note": "2026-10-12（W718）变更史可追踪补正批（用户挑刺第十六次 stats-changelog 专项 5 项裁决 采纳 3/部分升格 1/快照澄清 1）：W704 空条目考古定谳（首入库时终版 append 逻辑已条件式·系建账批开发迭代产物·保留加 note 不删史加报告 2 条系快照现 3 条）加 变更史 schema v1（_schema 加 _field_notes 加 entries·旧 list 自动迁移）加 entry time 字段（迁移旧条目 null）加 反向查找分工声明（流水账权威加反查走 stats_index 反向段）加 C5d 挂载第 31 门禁（doc-sync 内联 subprocess 跑 stats check 0.3s 恒跑·漂移当场 FAIL·W715 漏刷实例机器防线·self-test 12→13 例）",
+  "file_index_rows": [
+    "| scripts/stats.py | W718 | 变更史 schema v1（migrate_hist 自动迁移+W704 note+entry time）+docstring 分工与建账说明 |",
+    "| scripts/output/stats-changelog.json | W718 | v1 形态落盘（_schema/_field_notes/entries·W704 条目考古注） |",
+    "| scripts/output/stats.json | W718 | 例行重跑（无变更·_generated 刷新） |",
+    "| scripts/check_doc_sync.py | W718 | C5d 挂载（gather 内联 stats --check+evaluate 判定+T13·self-test 13/13） |",
+    "| docs/agent/gates.md | W718 | 第 31 条目补 C5d 与 13 例 |"
+  ]
+}

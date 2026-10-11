@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W718），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W719），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,15 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W719（2026-10-12）：review 修复批
+
+> **来源**：用户令「review 一遍所有变动」（W708 先例第七次执行）——范围=本会话 W713/W716/W717/W718 四批八提交（其间交错并行会话 W714/W715 不在范围）：机械扫+逐提交审读+门禁复跑。
+> - **机械扫八面**：混行尾 19 文件 0 / 段标题双写（CHANGELOG+file-index W713-W718 六段）0 / 四页脚链头全 W718（W717 新锚二次实证）/ 对账表豁免链 W713-W719 连续 / 契约头 4 件全在 / ARCHIVE 尾块闭合正确；**口径误报澄清**：CHANGELOG 三处「双标点」（。。/；；/））；）系 W708 历史段对黑名单的引述记载（历史段禁改）——机械扫黑名单命中须豁免「括号引述形态」，本批记入口径注。
+> - **真发现 R1（P2·制度破约·修复）**：AGENTS 脚注累积 11 条（W708-W718），破 W713 自建「保留最近 5 条」滚动制度——级联只加不滚、制度无执行机制（W713 建制时未同批根修级联·本批如实留档）；修复=滚动迁移 W708-W714 七条迁 AGENTS-ARCHIVE（保留 W715-W719）+指针更新；**根修候选登记**：级联 AGENTS 脚注面内建滚动（加条后自动迁最老条·涉 ARCHIVE 第 12 面·待独立小批）。
+> - **真发现 R2（P2·漏 add 族·修复）**：未跟踪 8 件——本会话 W716/W717/W718 级联 spec+msg 6 件（同族 _s7_×4 已随 W714 考古补库·未续做）+并行会话级联清单 _cascade_files_W714/W715.txt 2 件（W649「清单随批入库」漏执行）；修复=8 件统一补库（file-index W719 段逐件登记）。
+> - **门禁复跑**：verify full 46 段绿（零 WARN·W717 页脚新锚 W718 级联自动插对链头二次实证）+ pytest 296 + doc-sync 13/13 + agents-layers 5/5 + w_range 4/4 + stats --check 零差异；四主提交抽检净（段标题清洗/rows 对应/lambda 替换/迁移幂等）。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### W718（2026-10-12）：变更史可追踪补正批
 
