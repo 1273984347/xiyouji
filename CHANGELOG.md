@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W713），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W714），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,15 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W714（2026-10-11）：停用守卫与考古补库批
+
+> **来源**：用户圈选 review 遗留⑤⑥（bump_version 过时声明+未跟踪 _s4_* 清理）。
+> - **⑤ bump_version 方案 D 停用守卫**：main() 入口检测四辅助文档「当前批次」新形态——命中即 STOP 提示并 exit（原生 ERROR exit 2 之上的明确指引·防旧 v 形态写回破坏方案 D 形态）；docstring 级注记；**工具归 batch_cascade 管辖后的存量收敛场景改用一次性脚本（_w702_edits.py 形态参照）**。
+> - **⑥ 未跟踪清理（分三类）**：① `_s4_*/_s5_*` 151 件=S4 双盲本地件→**.gitignore 降噪**（原地保留·正式收账随 S4 收账批·git status 噪声清零）；② **历史漏 add 考古补库 43 件**=_cascade_files_W651-W712 清单 24 件〔W649「清单随批入库」规则自 W651 起系统性漏执行〕+_w657/_w663/_w672/_w676/_w678/_w685/_w691/_w697 散件 15 件+_s7_×4〔W713 会话件〕+_s23/_a02 素材 2 件——**统一补入库**·file-index W714 段逐件登记（原属批次随行注明）；③ 其余零散确认无遗留。
+> - **验证**：bump_version 守卫实测 STOP+exit 0（四文档新形态）；git status 未跟踪 194→43→0（S4/S5 除外）；verify full 46 段绿。
+> - **文件**：scripts/bump_version.py（守卫）、.gitignore（_s4_*/_s5_*）、scripts/_s7_×4+scripts/output 考古补库 39 件、docs/00-导读/W批次编号对账表.md（W714 认领）、六文档级联。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### W713（2026-10-11）：挑刺第十四次补正批
 

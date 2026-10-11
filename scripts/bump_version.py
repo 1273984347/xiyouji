@@ -105,7 +105,23 @@ def bump_version_line(c, old_ver, new_ver, w, note, desc=None):
     return re.sub(pat, repl, c, flags=re.M)
 
 
+def _plan_d_guard():
+    """W714 方案 D 停用守卫：四辅助文档版本行已归 batch_cascade（当前批次形态）·
+    本工具的 v 形态写入会回退形态——检测到新形态即拒绝并提示。"""
+    for d in ("README.md", "STRUCTURE.md", "docs/00-导读/项目说明.md"):
+        try:
+            c = open(os.path.join(ROOT, d), encoding="utf-8").read()
+        except OSError:
+            continue
+        head = c[:400]
+        if "当前批次" in head or "当前批次：" in head:
+            print("STOP  方案 D（W711）后本工具停用：%s 已是「当前批次」新形态，" % d)
+            print("      版本行由 batch_cascade 每批维护；W 范围替换等存量收敛场景请改用一次性脚本（参照 _w702_edits.py 形态）。")
+            sys.exit(0)
+
+
 def main():
+    _plan_d_guard()
     ap = argparse.ArgumentParser(description="降级六文档同步：辅助 4 份一键补齐")
     ap.add_argument("--version", help="目标版本号，如 v2.3.18（缺省读页脚）")
     ap.add_argument("--w", help="目标 W 号，如 W393（缺省读页脚）")
@@ -190,3 +206,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+

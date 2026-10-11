@@ -1,0 +1,9 @@
+fix(w691): 全变动 review 修复批——EMBEDDED 页内嵌副本对齐 + 稀柿同全站清零 + text-search-app 语料重建
+
+对抗性复查（六提交 269 文件全量）确认三类漏网并同批修复：
+- EMBEDDED 双路径漏网 6 页（json 已修而页内嵌副本未同步·W563/W654 同族）：cave-estate（万圣公主遗物→万岁狐王遗物×1+中将级→妖将级×6）、journey-geo-3d（两界山 第14回→第13回+号山 第40-42回→第39回·BL-14A 口径）、ethics-consumption 双语（ticker 全角×5）、game-webnovel（六耳句+钉耙性别条款×2·按 W678 裁决对齐）、visual-art（流沙河句）、workplace（佛位×2+贞观纪年×2）
+- 稀柿同全站清零：docs/01 第 67 回 md + reader/ch067.html + reader/people/红蟒精.html ×3（BL-11A 延伸——审查发现该误植不止 source/ 一处）
+- text-search-app.js 语料重建（BL-19 第三容器）：站内检索页内嵌的 708441 字节选语料第 1/2/67 回自分回 md 重建（1610/1497/7173→7237/7306/7230 字）+ 头注/字数注记更新——实测检索「惊动高天上圣」命中第 1 回（重建前无结果）、「灵台方寸山」命中第 1 回不再误挂第 2 回；en/poetry 词牌注释残留一处
+- 复查证伪（不改）：dialogue-sentiment/relationships 的「chapter: 20」系数据行；journey-map-interactive/monster-background 的「第40-42回」系事件跨度语义非 route/geo_3d 口径对象；八戒 passive 叛变属 BL-7 卡池范畴维持用户 C 项裁决
+
+验证：verify_delivery 核心全绿；check_js_syntax 854 文件过；generate_csp --check 0 漂移；pytest 293/293；test_site_quality PASS；test_smoke 89/89；ruff 0 错；实测探针——text-search 检索新短语命中第 1 回、六修复页 file:// 零错误、dialogue-sentiment http 613 shapes+KPI 6617、character-appearance http 909 shapes+新五人渲染。

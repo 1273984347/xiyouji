@@ -11,6 +11,57 @@
 ---
 
 
+## W714 停用守卫与考古补库批（2026-10-11）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_s7_fileindex_dedup_20261011.py | W714 | 考古补库（原属 W713 会话·一次性） |
+| scripts/_s7_footnote_trim_20261011.py | W714 | 考古补库（原属 W713 会话·一次性） |
+| scripts/_s7_w713_msg.txt | W714 | 考古补库（W713 提交信息档） |
+| scripts/_s7_w713_spec.json | W714 | 考古补库（W713 级联 spec） |
+| scripts/output/_a02_matrix_body.md | W714 | 考古补库（原属 W699 素材） |
+| scripts/output/_s23_full_matrix.md | W714 | 考古补库（原属 W699 素材） |
+| scripts/output/_cascade_files_W651.txt | W714 | 考古补库（W651 级联清单·漏 add 存量） |
+| scripts/output/_cascade_files_W652.txt | W714 | 考古补库（W652 级联清单） |
+| scripts/output/_cascade_files_W653.txt | W714 | 考古补库（W653 级联清单） |
+| scripts/output/_cascade_files_W654.txt | W714 | 考古补库（W654 级联清单） |
+| scripts/output/_cascade_files_W655.txt | W714 | 考古补库（W655 级联清单） |
+| scripts/output/_cascade_files_W656.txt | W714 | 考古补库（W656 级联清单） |
+| scripts/output/_cascade_files_W657.txt | W714 | 考古补库（W657 级联清单） |
+| scripts/output/_cascade_files_W657_pages.txt | W714 | 考古补库（W657 页清单） |
+| scripts/output/_cascade_files_W658.txt | W714 | 考古补库（W658 级联清单） |
+| scripts/output/_cascade_files_W680.txt | W714 | 考古补库（W680 级联清单） |
+| scripts/output/_cascade_files_W698.txt | W714 | 考古补库（W698 级联清单） |
+| scripts/output/_cascade_files_W700.txt | W714 | 考古补库（W700 级联清单） |
+| scripts/output/_cascade_files_W701.txt | W714 | 考古补库（W701 级联清单） |
+| scripts/output/_cascade_files_W702.txt | W714 | 考古补库（W702 级联清单） |
+| scripts/output/_cascade_files_W703.txt | W714 | 考古补库（W703 级联清单） |
+| scripts/output/_cascade_files_W704.txt | W714 | 考古补库（W704 级联清单） |
+| scripts/output/_cascade_files_W705.txt | W714 | 考古补库（W705 级联清单） |
+| scripts/output/_cascade_files_W706.txt | W714 | 考古补库（W706 级联清单） |
+| scripts/output/_cascade_files_W707.txt | W714 | 考古补库（W707 级联清单） |
+| scripts/output/_cascade_files_W708.txt | W714 | 考古补库（W708 级联清单） |
+| scripts/output/_cascade_files_W709.txt | W714 | 考古补库（W709 级联清单） |
+| scripts/output/_cascade_files_W710.txt | W714 | 考古补库（W710 级联清单） |
+| scripts/output/_cascade_files_W711.txt | W714 | 考古补库（W711 级联清单） |
+| scripts/output/_cascade_files_W712.txt | W714 | 考古补库（W712 级联清单） |
+| scripts/output/_w657_cite_inject.py | W714 | 考古补库（原属 W657） |
+| scripts/output/_w657_cons2.txt | W714 | 考古补库（原属 W657） |
+| scripts/output/_w657_spec.json | W714 | 考古补库（W657 级联 spec） |
+| scripts/output/_w663_t4_shapin.py | W714 | 考古补库（原属 W663 T4） |
+| scripts/output/_w672_baseline_head.txt | W714 | 考古补库（W672 基线） |
+| scripts/output/_w672_baseline_orphans.txt | W714 | 考古补库（W672 基线） |
+| scripts/output/_w672_baseline_semicolons.txt | W714 | 考古补库（W672 基线） |
+| scripts/output/_w672_baseline_vars_kpi.txt | W714 | 考古补库（W672 基线） |
+| scripts/output/_w676_commit_msg.txt | W714 | 考古补库（W676 提交信息档） |
+| scripts/output/_w678_commit_msg.txt | W714 | 考古补库（W678 提交信息档） |
+| scripts/output/_w685_cascade_spec.json | W714 | 考古补库（W685 级联 spec） |
+| scripts/output/_w691_review_commit_msg.txt | W714 | 考古补库（W691 review 信息档） |
+| scripts/output/_w697_archive_msg.txt | W714 | 考古补库（W697 归档信息档） |
+| scripts/bump_version.py | W714 | 方案 D 停用守卫（新形态检测 STOP） |
+| .gitignore | W714 | _s4_*/_s5_* 降噪（151 件 S4 双盲） |
+| docs/00-导读/W批次编号对账表.md | W714 | W714 认领 + 现势 W715 |
+
 ## W713 挑刺第十四次补正批（2026-10-11）
 
 | 文件 | W | 说明 |

@@ -1,0 +1,11 @@
+fix(w676): 站点质量修复批次四——WP-4.1 fetch 数据装载族 + WP-4.2 可视化正确性 + WP-4.3 命名语义与页脚 + WP-4.4 a11y + WP-4.5 Backlog
+
+方案 V1.7 批次四（原拟号被 W675 复盘批占用顺延认领；对账表唯一取号权威）：
+- WP-4.1：narratology fetchJson 协议反转删除（http 恢复实时装载·对齐 12d 形态）；monster-female-network 三渲染函数参数化（EMBEDDED 直引清零+死回退摘除）；monster-victims-network 四渲染函数 victims 参数化；monster-ecology-network links 深拷贝防 forceLink 污染
+- WP-4.2：ecology 手搓桑基重写 d3.sankey()（补 d3-sankey.min.js 本地引用）；mbti 三 scale domain[0,10]+网格圆 [2,4,6,8,10]；magic-system 预算删 0.9249 折算两 bar；monster-background renderKPI 补清空
+- WP-4.3：narratology-13d 改名 16d 全牵连 51 处（canonical/og/hreflang/cite/sitemap/datahub/reader 主题/tests×4/视觉基线·git mv 双语·site/ 清零）；poetry-rhythm 词牌分布改诗词类别分布；magic-system kills 改 combat_record+表头战斗记录；monster-background 存活率之比表述；__clusterOrder 局部化；页脚停滞 sweep 162 页（v2.2.86·W334 改当批·含 bump 污染链 2 页收敛）
+- WP-4.4：mbti 4 个 stage-btn 补 aria-controls（单共享面板语义·tabpanel=1 按真实 UI 修正机判口径并留痕）；全站带 aria 的 svg role=img 覆盖 143/143
+- WP-4.5：交接文档 Backlog 段五条登记不开工；三项「修复时核对」复核证伪留档（makeTooltip 单例实态/renderCases 已清空/capability-radar 已清空）
+- EN 镜像全部同病确证后对称落地；doc-sync C4 存量失配补 W691 递延豁免登记（W690 收官级联文本提前引用所致·下一自由号不变）
+
+验证：verify_delivery 核心全绿（42 段）；generate_csp --check 855 页 0 漂移（19 页重生成）；check_js_syntax 854 文件过；check_structure 过；ruff 新脚本 0 错；e2e test_smoke 89/89+test_site_quality 全过（新增 W676 断言 5 项）；pytest test_narratology_data 36/36；test_deep 4 失败经 HEAD 基线 stash 对照确认为本地 file:// 环境既有抖动非本批引入（CI 为准）；级联 _w676_close_cascade 手工 11 面 dry+apply 自检过（file-index W676 段按数值位插 W675 之上满足段倒序断言）。
