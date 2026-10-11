@@ -30,7 +30,8 @@ INDEX = os.path.join(HERE, "output", "stats-index.md")
 CONTENT_DIRS = ["01-全书逐回解读", "02-人物深度分析", "03-主题与情节专题", "04-文化与历史背景", "05-诗词歌赋", "06-个人随笔"]
 INLINED_MARK = "(tokens.css + system.css)"  # inline_css.py 注入的标记行特征
 
-# 实体元数据（W704 登记制：新键必须在此登记 domain 与口径起点；introduced_by=口径首次定义批次）
+# 实体元数据（W704 登记制：新键必须在此登记 domain 与口径起点；introduced_by=口径首次定义批次，
+# 即「该数字成为正式对账口径」的批次——非历史首次出现批次·语义见 stats-index 表头注·W716 补明）
 META = {
     "html_total": {"domain": "site/**/*.html（递归全站）", "introduced_by": "W459"},
     "site_data_html": {"domain": "site/data/*.html", "introduced_by": "W459"},
@@ -45,7 +46,6 @@ META = {
     "gate_count": {"domain": "scripts/verify_delivery.py「第 N 槽/门禁」max", "introduced_by": "W493"},
     "a1_a6_docs": {"domain": "docs/01-06 六板块顶层内容 .md（排除 README）", "introduced_by": "W505"},
     "methodology_docs": {"domain": "docs/10-方法论沉淀/*.md（含索引 README）", "introduced_by": "W070"},
-    "json_count": {"domain": "scripts/output/data/*.json", "introduced_by": "W676"},
     "script_classes": {"domain": "scripts/[A-Z]_* 类目录数", "introduced_by": "W528"},
 }
 
@@ -75,7 +75,6 @@ def build():
         for d in CONTENT_DIRS
     )  # 口径对齐 verify 第 3 门禁：板块顶层内容 .md（排除各板块 README.md·615=621-6）
     methodology = len(glob.glob(os.path.join(ROOT, "docs", "10-方法论沉淀", "*.md")))
-    json_n = len(glob.glob(os.path.join(HERE, "output", "data", "*.json")))
     classes = [d for d in os.listdir(HERE) if os.path.isdir(os.path.join(HERE, d)) and d[:1].isalpha() and d[:1].isupper()]
 
     return {
@@ -86,13 +85,16 @@ def build():
         "site_reader_html": len(glob.glob(os.path.join(site, "reader", "**", "*.html"), recursive=True)),
         "visualization_pages": len(data_htmls) - shell_n,
         "csp_covered": len(htmls) - template_n,
+        # W716：两键当前同算式系近似实算——分母以各器实际排除集为准（三器现同分母=全站减两模板壳），
+        # 某器排除面将来变化时须同批改本算式（scan_files/seo_scanned 为两门禁独立分母·刻意不合并）
         "scan_files": len(htmls) - template_n - shell_n,
         "seo_scanned": len(htmls) - template_n - shell_n,
         "inline_css_pages": inlined,
         "gate_count": gate_max,
         "a1_a6_docs": a1_a6,
         "methodology_docs": methodology,
-        "json_count": json_n,
+        # json_count 键已移除（W716）：scripts/output/data/ 系 gitignored 本地产物（.gitignore:59），
+        # 依赖它的键在无本地产物环境 --check 必红，违反「tracked 基准 CI 可复现」原则（W703 声明对它不成立）
         "script_classes": len(classes),
     }
 
@@ -117,6 +119,9 @@ def render_index(hist, entities):
         "",
         "| key | value | domain | introduced_by | last_changed_by |",
         "|---|---|---|---|---|",
+        # W716 表头注：三字段语义（introduced_by/last_changed_by 为批次视角·generator 恒同值故省略列）
+        "> **字段语义（W716 注）**：`introduced_by`=口径首次**正式化**批次（非历史首次出现批次）；`last_changed_by`=stats.py **检出**值变更的最近批次（建账前变更不记，如 site/reader 621→622 系主题枢纽页批次新增、早于建账）；`generator` 恒为 `scripts/stats.py` 故省略列。",
+        "",
     ]
     for k in sorted(entities):
         e = entities[k]
@@ -151,6 +156,7 @@ def main():
         return 1 if diffs else 0
 
     today = datetime.date.today().isoformat()
+    generated_at = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")  # W716：补时分秒（同日多批可区分）
     old_plain = {k: (e.get("value") if isinstance(e, dict) else e) for k, e in old_entities.items()}
     changes = [{"key": k, "from": old_plain.get(k), "to": v} for k, v in sorted(values.items()) if old_plain.get(k) != v]
     hist = load_json(HIST, [])
@@ -175,7 +181,7 @@ def main():
             "introduced_by": META[k]["introduced_by"],
             "last_changed_by": last_changed,
         }
-    out = {"_generated": today, "_generator": "scripts/stats.py（W704 实体化·第 31 门禁 C5 对账基准·改口径批次须同批 --w 刷新）", "_format": "entity-v1"}
+    out = {"_generated": generated_at, "_generator": "scripts/stats.py（W704 实体化·第 31 门禁 C5 对账基准·改口径批次须同批 --w 刷新）", "_format": "entity-v1"}
     out.update(entities)
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:
         json.dump(out, f, ensure_ascii=False, indent=2, sort_keys=True)

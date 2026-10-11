@@ -11,6 +11,17 @@
 ---
 
 
+## W716 stats 实体化补正批（2026-10-12）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/stats.py | W716 | json_count 退役+build 近似注释+_generated 时分秒+index 表头注+META 语义补明 |
+| scripts/output/stats.json | W716 | 14 键重生成（json_count 退役·methodology 34）+_generated 带时分 |
+| scripts/output/stats-changelog.json | W716 | W716 变更条（methodology 33→34） |
+| scripts/output/stats-index.md | W716 | 表头字段语义注+实体卡刷新 |
+| STRUCTURE.md | W716 | 输出行去 json_count 标记改本地产物描述+方法论 33→34 |
+| scripts/agent_start.py | W716 | 内容口径行删 data json 段 |
+
 ## W715 工作复盘报告批（2026-10-11）
 
 | 文件 | W | 说明 |

@@ -3,7 +3,7 @@
 
 > **📖 阅读契约（W707）**：索引型——找「东西在哪」时读顶层结构表+目标目录所在段；各板块下的建置沿革（v0.x W0xx 补齐…）是历史记录见 CHANGELOG，勿通读；计数与口径以磁盘实数与 [统计口径说明](docs/00-导读/统计口径说明.md) 为准。
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前批次：W715（2026-10-11）— 工作复盘报告批—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前批次：W716（2026-10-12）— stats 实体化补正批—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构
@@ -110,7 +110,7 @@
 - `苦难意义论.md`：弗兰克尔 logotherapy 三种价值 + 加缪"想象西西弗是幸福的" + 态度性价值
 
 ### 10-方法论沉淀/（v2.0.43 W070 新增·S1 方向）
-项目方法论沉淀层——把项目过程中积累的可复利方法论经验集中沉淀为教学材料。已建 33<!--stats:methodology_docs--> 篇（目录实数·W702 校真·含索引 README；统一结构：问题背景 + 核心方法论 + 复现案例 + 修复策略 + 关联文档；全量篇目与阅读路径见 [README.md](docs/10-方法论沉淀/README.md) 索引）。奠基 6 篇：
+项目方法论沉淀层——把项目过程中积累的可复利方法论经验集中沉淀为教学材料。已建 34<!--stats:methodology_docs--> 篇（目录实数·W702 校真·W716 刷新·含索引 README；统一结构：问题背景 + 核心方法论 + 复现案例 + 修复策略 + 关联文档；全量篇目与阅读路径见 [README.md](docs/10-方法论沉淀/README.md) 索引）。奠基 6 篇：
 
 - `README.md`：索引文件·5 篇主题索引 + 阅读路径（新读者 5 分钟 / 项目接手者 / 方法论作者三路径）+ 复利经验总览表 + 与上游 skill 关系声明 + 维护规则
 - `DRL真循环.md`：DRL 真循环 + 4 层过拟合防护（P2 残留 N / 边际收益 gate / 过拟合警报 / 严重度门槛）+ R0-R3 完整流程 + 收敛曲线记录要求 + 3 个复现案例（W069 27 P1 / Phase F v1.1 14.3%→0% / Phase B v0.8 12→0→3→0→0）+ Verdict 字眼禁令 + 修复策略三件套
@@ -232,7 +232,7 @@
 | 类别 | 子目录 | 说明 |
 |---|---|---|
 | **工具** | `utils/text_loader.py` | 文本加载与编码处理 |
-| **输出** | `output/figures/`、`output/data/` | 静态图（PNG/SVG）、数据（JSON/CSV）·data/ 当前 135<!--stats:json_count--> 个 JSON 文件·data_validate.py 校验完整性 |
+| **输出** | `output/figures/`、`output/data/` | 静态图（PNG/SVG）、数据（JSON/CSV）·data/ 系 gitignored 本地产物（.gitignore:59·每次 `make analyze` 重新生成·不入 tracked 基准·W716 注）·data_validate.py 校验完整性 |
 | **DRL 产物** | `output/drl-r1-findings.md`、`output/audit-baseline.md`、`output/v08-data-check.md`、`output/v08-embedded-data.js`、`output/drl-screenshot-review.md` | v0.7 baseline 审查 + v0.8 DRL R1→R4 收敛记录 + B1 数据检查 + EMBEDDED_DATA 统一命名 + W010.2 截图审查 DRL 收敛记录 |
 | **截图审查工具** | `batch_screenshots.js`、`slice_screenshots.py`、`detect_unwrapped_tables.py`、`package.json` | Playwright 批量全页截图 + Pillow 800px 切片 + 静态/运行时表格溢出双轨检查 + Node 依赖声明 |
 | **截图审查产物** | `output/screenshots/` | full-page 截图（desktop/ + mobile/）、800px 切片（slices/）、`layout-audit-report.md`、`screenshot-summary.md`、`slice-index.md` |
