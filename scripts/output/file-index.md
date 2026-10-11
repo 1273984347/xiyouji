@@ -11,6 +11,15 @@
 ---
 
 
+## W712 W712 方案档挑刺补正批（2026-10-11）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/superpowers/plans/2026-10-11-agents-layered-restructure.md | W712 | §七执行实录与挑刺补正节+契约头部 |
+| docs/superpowers/plans/2026-10-11-version-space-inventory.md | W712 | §七执行状态与挑刺补正节+契约+措辞精确化 |
+| CITATION.cff | W712 | version 行补形态注释（CFF free string） |
+| docs/00-导读/W批次编号对账表.md | W712 | W712 认领 + 现势 W713 |
+
 ## W711 W711 方案D形态改造批（2026-10-11）
 
 | 文件 | W | 说明 |
