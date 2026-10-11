@@ -67,6 +67,12 @@ def main():
         if files is None:
             print("[rehearse] git 改动集读取失败")
             return 2
+        # 分项报告：modified（相对 HEAD）与 untracked（新增非忽略）——后者多为
+        # scripts/ 一次性脚本群（W597 周期待清点），拷入仅为模拟「全部入库」态
+        r_mod = git(["diff", "--name-only", "HEAD"])
+        mod = {x.strip().replace("\\", "/") for x in r_mod.stdout.splitlines() if x.strip()}
+        mod &= files
+        untracked = files - mod
         copied = 0
         for f in sorted(files):
             src = os.path.join(ROOT, f)
@@ -76,7 +82,8 @@ def main():
             os.makedirs(os.path.dirname(dst), exist_ok=True)
             shutil.copy2(src, dst)
             copied += 1
-        print("[rehearse] 临时树 tmpe/_rehearsal 就绪（HEAD 态）+ 拷入工作区改动 %d 文件" % copied)
+        print("[rehearse] 临时树 tmpe/_rehearsal 就绪（HEAD 态）+ 拷入工作区改动 %d 文件"
+              "（modified %d + untracked %d）" % (copied, len(mod), len(untracked)))
 
         if args.tool == "lint":
             cmd = [sys.executable, os.path.join(_HERE, "lint_links.py"), "--dir", args.dir]
