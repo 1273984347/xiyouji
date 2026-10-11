@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W714），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W715），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,15 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W715（2026-10-11）：工作复盘报告批
+
+> **来源**：用户令「写今天 12 复盘」并下发《工作复盘与优化分析系统提示词（AI Agent 专用版）》第七次执行——范围=W702-W714 十三批弧线（2026-10-11/12）。
+> - **报告入库**：docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-12.md（第 37 篇）——E 经验 8 项量化排序（结构断言落盘前拦截 5.00/replace 保留锚点 4.75/多行脚本化 4.75/解析面机器枚举 4.25/防线自证 4.25/三态裁决 4.00/切片搬运指纹对账 3.75/并行文件界协作 3.75）；skill-creator 三卡 S-26 级联安全守护器/S-27 外部输入三态裁决模板/S-28 形态切换解析面枚举器（S-28 按 YAGNI 待触发）；未用技能 3 项维持决策；高优场景 5 个全沉淀；问题 13 例全闭环（P0=0·P1=4·P2=7·P3=2）——新族 FAM-11 级联结构自指与跨段操作（修复后 5 批零复发）/FAM-12 形态切换解析面漏项（S-28 待触发）/FAM-13 提交信息形态（%s 复核新增）·FAM-07 黄警强化（S-27 含 git 基准 hash）；WF 形态切换双形态改造流；WBS 五行动（A-01 S-26 实现领衔）+可行性自评可行。
+> - **方法论 README 索引**：第 39 行。
+> - **验证**：verify full 46 段绿；报告过第 18 门禁（元信息块 v2）；索引第 39 行在位。
+> - **文件**：docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-12.md（新增）、docs/10-方法论沉淀/README.md（索引第 39 行）、六文档级联、对账表。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### W714（2026-10-11）：停用守卫与考古补库批
 
