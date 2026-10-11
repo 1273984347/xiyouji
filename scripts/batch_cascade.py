@@ -102,22 +102,22 @@ def main():
     # ---------- README / STRUCTURE / 项目说明 ----------
     p = "README.md"
     s, nl = load(p)
-    out = re.sub(r"> \*\*当前版本 v[\d.]+（[^）]*）\*\*： W\d+ [^·]*·A1-A6",
-                 f"> **当前版本 {ver}（{date}）**： {batch} {desc} ·A1-A6", s, count=1)
+    out = re.sub(r"> \*\*当前版本 v[\d.]+（[^）]*）\*\*：\s*W\d+ [^·]*·A1-A6",
+                 f"> **当前版本 {ver}（{date}）**：{batch} {desc}·A1-A6", s, count=1)
     assert out != s, "README 版本行未变化"
     pend.append((p, out, nl))
 
     p = "STRUCTURE.md"
     s, nl = load(p)
-    out = re.sub(r"> 当前版本：v[\d.]+（[^）]*）— W\d+ [^—]*— A1-A6",
-                 f"> 当前版本：{ver}（{date}）— {batch} {desc} — A1-A6", s, count=1)
+    out = re.sub(r"> 当前版本：v[\d.]+（[^）]*）— W\d+ [^—]*—\s*A1-A6",
+                 f"> 当前版本：{ver}（{date}）— {batch} {desc}—A1-A6", s, count=1)
     assert out != s, "STRUCTURE 版本行未变化"
     pend.append((p, out, nl))
 
     p = "docs/00-导读/项目说明.md"
     s, nl = load(p)
     out = re.sub(r"> 当前版本 v[\d.]+（[^）]*）：W\d+ [^·]*·详细变更见",
-                 f"> 当前版本 {ver}（{date}）：{batch} {desc} ·详细变更见", s, count=1)
+                 f"> 当前版本 {ver}（{date}）：{batch} {desc}·详细变更见", s, count=1)
     assert out != s, "项目说明头部版本行未变化"
     out2 = re.sub(r"(\*\*当前版本\*\*：)v[\d.]+（[^）]*）— W\d+ [^·]*",
                   rf"\g<1>{ver}（{date}）— {batch} {desc}", out, count=1)
@@ -217,7 +217,8 @@ def main():
     s, nl = load(p)
     tail = "。如与上述权威文档冲突，以权威文档为准。*"
     assert s.count(tail) == 1, "AGENTS 脚注尾锚点异常"
-    s = s.replace(tail, "；{}。如与上述权威文档冲突，以权威文档为准。*".format(spec["agents_note"]), 1)
+    _sep = "" if s[: s.index(tail)].rstrip().endswith("；") else "；"
+    s = s.replace(tail, _sep + "{}。如与上述权威文档冲突，以权威文档为准。*".format(spec["agents_note"]), 1)
     pend.append((p, s, nl))
 
     # ---------- CITATION.cff（W628 起第 10 面：version/date-released 随批同步——第 27 门禁 R2 面） ----------

@@ -4,13 +4,26 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W701），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W702），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
-> **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
+> **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857 页（site/data 88 + site/en 138 + site 根 9 + site/reader 622）；CSP 覆盖 856 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855 文件（再排除 `_shell.html`）；check_seo_head 扫 855 页（site 全树减两个模板壳）；inline_css 同步 330 页（site 全树含 INLINED 标记页）；「可视化页 87」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.296（2026-10-11）：W702 六文档口径清债批
+
+> **来源**：外部「挑刺」报告（六治理文档口径与排版扫描·17 项 P0-P3）——逐条对仓取证裁决：实锤 15 项落地、误定位 1 项改址修复（双分号实为 AGENTS 脚注 4 处非 CHANGELOG）、1 项驳回（防新增漂移字面量）。
+> - **P0 口径四件**：CHANGELOG 头部「全站页数口径」按实跑整段刷新（234/233/232/225/86 → 857/856/855/330·site/reader 622 页纳入·可视化页 87=88 减 _shell）；AGENTS §4.2 第 8 门禁「233 页」→856 页（generate_csp 实跑）；README AI 说明「26 项自动化门禁」→40 项（对齐 §4.2 现役 40 槽）；STRUCTURE 10-方法论沉淀「已建 6 篇」→33 篇（目录实数·补索引指针·原 6 篇标注为奠基篇目）。
+> - **P1 两件**：STRUCTURE scripts 段「已建 30 类」→34 类子目录全建（磁盘枚举实证）+F 行可视化页补 story-timeline.html（W694 起·第 39 门禁双源）；AGENTS 第 6 门禁「三豁免」→「五豁免」（W700 lint_links 五改对齐）。
+> - **P2 三件**：CHANGELOG v2.3.279/280 两段补录四件套缺失「文件/状态」字段（git show 7aaa1f59/27f07e7e 取证·只增不删带 W702 补录标记）+段间空行归一；AGENTS 第 26 门禁「334 页扫描」→855 页（check_seo_head 实跑·site 全树减两个模板壳）；CONTRIBUTING 三件套表后补 W### 认领对账表入口段。
+> - **P3 排版与速查（含根治）**：README/STRUCTURE/项目说明版本行空格根治——batch_cascade 三处版本行模板去空格 + README/STRUCTURE 锚点同步 \s* 兼容（防逐批复发）；「（A4 209 篇 已含）」存量两处归一；AGENTS 脚注双分号 4 处归一 + batch_cascade join 去重守卫（前条目尾「；」时不再补）；CLAUDE.md 常用命令补 verify --scope auto 轻量档一行（≤60 行约束内·40/60）；AGENTS §4.2 前言补 pre-commit --scope auto 指引（对齐 §4.3）。
+> - **顺带实数校真**：STRUCTURE「data/ 当前 131 个 JSON」→135（glob 实数）；STRUCTURE timeline/ 「取经路线图/人物时间线 待建」经 git ls-files 核实维持（仅大事年表已建·挑刺此条无需改）。
+> - **驳回留档**：挑刺建议第 27 门禁条目补「W700 时现役上限=W700」静态字面量——违反 W520 递增数字禁字面量纪律（门禁本动态取 CHANGELOG max W 比对·静态化即制造下一个腐烂点）。
+> - **验证**：verify full 45 段自洽绿 + lint_links 0 broken + ruff 0 错 + pytest 293 全过 + batch_cascade 原生 dry+apply 自检过（模板改动后锚点全过）+ generate_csp --check 0 漂移。
+> - **文件**：CHANGELOG.md、README.md、STRUCTURE.md、AGENTS.md、CLAUDE.md、CONTRIBUTING.md、scripts/batch_cascade.py、docs/00-导读/W批次编号对账表.md、scripts/_w702_edits.py（一次性）、六文档级联。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### v2.3.295（2026-10-11）：W701 BL-20动工与S-26工具化批
 
@@ -192,6 +205,9 @@
 > - **P3 采纳**：误报句限定终测口径＋英摘补「另 3 条」分母披露＋[^8] 补「14 类归并三失效模式」勾连＋心学稿「结论所拒斥」指涉修正＋§4.4 四要素改述防复写＋行内 [14]-[19] 标记撤除统一零夹注体例＋明清「并行/平行」自缠消除＋「驿、递、铺三系」展开＋设计稿直角引号规范。
 > - **登记待办**：设计稿 AI 声明模型名 V4/V4.1 写法须作者确认统一；心学稿 line 号裸露存量；母题线候选文献验真；类型学描述性定位维持。
 > - **验证**：verify_delivery 核心全绿；引文 486 条 100%；ruff scripts/ 全绿；受影响 docx（数字人文研究版/南艺版/艺术百家版）重生成 COM 验收 22/13/13 页。
+> - **文件**：六文档级联（README/STRUCTURE/项目说明/交接/AGENTS 脚注/workflows README）+ CITATION.cff + file-index + 对账表 + 三页脚（index/cross-time-danmaku/tag-cloud）+ dukou-engine 页脚 + scripts/_s5_review_fixes.py（一次性）；S4 稿件面均本地件不入仓（双盲纪律）。（W702 补录四件套）
+> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。（W702 补录）
+
 ### v2.3.279（2026-10-08）：W688 第六轮复审处置迷你批——HALLMARK 数字驳回＋摘要/结论/仪表盘措辞轻改＋DHR 英摘去重＋文献清单建账
 
 > **来源**：第五轮审读方复核四稿修订版后的第六份意见（三项核心批判重评估＋HALLMARK 数字主张＋措辞建议）——按逐条验真规程处置。
@@ -201,6 +217,9 @@
 > - **docx 重生成 5 份全 COM 验收**：可验证性主稿 21 页 14,238 字（<15000 ✓·20 条圈号注 PASS）/数字人文研究版 22 页 14,676 字/装饰版·南艺版·艺术百家版各 13 页。
 > - **登记待办**：心学判定标准进一步具体化；「程序母题线」叙事学框架对话（候选文献未验不入稿）。
 > - **门禁**：引文 486 条 100%。
+> - **文件**：六文档级联（README/STRUCTURE/项目说明/交接/AGENTS 脚注/workflows README）+ CITATION.cff + file-index + 对账表 + 三页脚（index/cross-time-danmaku/tag-cloud）+ dukou-engine 页脚 + scripts/_s5_round6_edits.py（一次性）；S4 稿件面均本地件不入仓（双盲纪律）。（W702 补录四件套）
+> - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。（W702 补录）
+
 ### v2.3.278（2026-10-08）：W687 S4 四方向外部审读处置与投稿体系批——审读裁决八批同日执行＋CNKI 核验＋渠道要求落夹＋文献 md 化
 
 > **来源**：用户转交第五轮外部审视报告（四方向稿＋文献清单·前提/逻辑/缺失审视）并逐段指令执行——圈选修订菜单、开放知网机构会话、「跑」「下」「添加生成」「装」等八道指令同日闭环。
