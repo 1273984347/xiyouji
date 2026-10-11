@@ -1,0 +1,27 @@
+{
+  "batch": "W704",
+  "version": "v2.3.298",
+  "date": "2026-10-11",
+  "desc": "数字实体化批",
+  "title": "W704 数字实体化批",
+  "changelog_body": "\n\n> **来源**：用户方案第二阶段「数字制度化/实体化」（W703 同日追加·修正「禁写数字」为「数字有身份」）——数字可写、必须写、且必须是实体：有 key、有生成器、有 W 号、有反查路径、有机检；渲染侧 HTML 注释在 GitHub 与 site/reader 双态均隐藏=视觉零损（决策点落定）。\n> - **stats.json 实体化（entity-v1）**：每键 {value, domain, generator, introduced_by, last_changed_by}（META 登记制 15 键·domain 与口径起点 W459/W493/W505/W528/W591/W676/W070 考据落档）；变更史=scripts/output/stats-changelog.json（stats.py 重跑 diff 旧值自动追加·--w 记批次）→ scripts/output/stats-index.md 反向索引（正向 key 实体卡+反向 W→stats key 变更·与 file-index 同构·自动生成禁手改）。\n> - **C5b 数字实体标记对账**：治理文档现役关键数字加 <!--stats:KEY--> 标记（数字紧贴·前置值==stats.json value·键未登记 fail-closed）——本轮 22 处（CHANGELOG 口径块 10/README 4/AGENTS 6+make analyze 双处/STRUCTURE 6）；标记处由 C5a 句式对账自然切换为 C5b 精确锚点。\n> - **C5c 裸聚合数字报告**：标记/句式覆盖外的 N[页项篇个类] 记 NOTE（首跑 97 处=内容描述数字〔板块篇数/维度数/表格计数〕·报告型不阻断·起步策略收敛后评估转 FAIL）；行级豁免沿用。\n> - **配套**：check_doc_sync --self-test 10→12 例（T11 标记失配必红/T12 未登记键必红·两例首版测试串数字与标记未紧贴自纠）；AGENTS §4.2 第 31 条目 C5b/C5c；文档规范 §4.10 增补「数字实体化」与「C5 三层分工」（C5b 权威锚点/C5a 句式兜底/C5c 报告起步）。\n> - **验证**：self-test 12/12 + 首跑 0 FAIL·1 NOTE（C5c 97 处留观）+ stats.py --check 零差异 + verify full 45 段绿 + pytest 293 + ruff 0 错。\n> - **文件**：scripts/stats.py（实体化重写）、scripts/output/stats.json（entity-v1）、scripts/output/stats-changelog.json（新增）、scripts/output/stats-index.md（新增）、scripts/check_doc_sync.py（C5b/C5c）、scripts/_w704_docsync.py 与 scripts/_w704_marks.py（一次性）、AGENTS.md、README.md、STRUCTURE.md、CHANGELOG.md（标记）、docs/00-导读/文档规范.md（§4.10 增补）、docs/00-导读/W批次编号对账表.md（W704 认领）、六文档级联。\n> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。\n",
+  "head_entry": "2026-10-11（v2.3.298 W704 数字实体化批）",
+  "head_sentence": "数字实体化与反向索引落地",
+  "milestone_block": "- **v2.3.298 W704 数字实体化批**：\n  - stats.json entity-v1（每键 value/domain/introduced_by）+ stats-changelog.json 自动变更史 + stats-index.md 反向索引（与 file-index 同构）\n  - C5b 实体标记对账（治理文档 22 处 <!--stats:KEY-->）+ C5c 裸聚合数字 NOTE 报告型（首跑 97 处留观）\n  - self-test 12 例 + 文档规范 §4.10 增补实体化与 C5 三层分工\n",
+  "agents_note": "2026-10-11（v2.3.298 W704）数字实体化批（用户方案第二阶段「数字制度化」）：stats.json 实体化 entity-v1（每键 value/domain/generator/introduced_by/last_changed_by·META 15 键登记制）加 stats-changelog.json 自动变更史与 stats-index.md 反向索引（W→stats key·与 file-index 同构）加 C5b 数字实体标记对账（治理文档 22 处 <!--stats:KEY--> 前置数字==value·键未登记 fail-closed）加 C5c 裸聚合数字 NOTE 报告型（首跑 97 处内容描述数字留观·起步策略）加 self-test 10→12 例（T11/T12 标记负样本·测试串紧贴形态自纠）加 AGENTS §4.2 第 31 条目 C5b/C5c 与文档规范 §4.10 增补（数字实体化+C5 三层分工）",
+  "file_index_rows": [
+    "| scripts/stats.py | W704 | 实体化重写：entity-v1+stats-changelog 自动 diff+stats-index 反向索引 |",
+    "| scripts/output/stats.json | W704 | 实体形态 entity-v1（15 键） |",
+    "| scripts/output/stats-changelog.json | W704 | 新增：stats 变更史（--w 记批次） |",
+    "| scripts/output/stats-index.md | W704 | 新增：数字反向索引（W→stats key） |",
+    "| scripts/check_doc_sync.py | W704 | 扩 C5b 标记对账+C5c 裸数字报告（self-test 12 例） |",
+    "| scripts/_w704_docsync.py | W704 | 一次性：C5b/C5c 编辑器 |",
+    "| scripts/_w704_marks.py | W704 | 一次性：实体标记编辑器（22 处） |",
+    "| AGENTS.md | W704 | §1/第 8/26 门禁/make analyze 实体标记 + 第 31 条目 C5b/C5c |",
+    "| README.md | W704 | 版本行/可视化入口/门禁数实体标记 |",
+    "| STRUCTURE.md | W704 | 版本行/类数/篇数/JSON 实体标记 |",
+    "| CHANGELOG.md | W704 | 口径块 10 处实体标记 |",
+    "| docs/00-导读/文档规范.md | W704 | §4.10 增补数字实体化与 C5 三层分工 |",
+    "| docs/00-导读/W批次编号对账表.md | W704 | W704 认领 + 现势 W705 |"
+  ]
+}

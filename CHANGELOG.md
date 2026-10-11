@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W703），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W704），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
-> **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857 页（site/data 88 + site/en 138 + site 根 9 + site/reader 622）；CSP 覆盖 856 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855 文件（再排除 `_shell.html`）；check_seo_head 扫 855 页（site 全树减两个模板壳）；inline_css 同步 330 页（site 全树含 INLINED 标记页）；「可视化页 87」= site/data 88 减 `_shell.html`。
+> **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.298（2026-10-11）：W704 数字实体化批
+
+> **来源**：用户方案第二阶段「数字制度化/实体化」（W703 同日追加·修正「禁写数字」为「数字有身份」）——数字可写、必须写、且必须是实体：有 key、有生成器、有 W 号、有反查路径、有机检；渲染侧 HTML 注释在 GitHub 与 site/reader 双态均隐藏=视觉零损（决策点落定）。
+> - **stats.json 实体化（entity-v1）**：每键 {value, domain, generator, introduced_by, last_changed_by}（META 登记制 15 键·domain 与口径起点 W459/W493/W505/W528/W591/W676/W070 考据落档）；变更史=scripts/output/stats-changelog.json（stats.py 重跑 diff 旧值自动追加·--w 记批次）→ scripts/output/stats-index.md 反向索引（正向 key 实体卡+反向 W→stats key 变更·与 file-index 同构·自动生成禁手改）。
+> - **C5b 数字实体标记对账**：治理文档现役关键数字加 <!--stats:KEY--> 标记（数字紧贴·前置值==stats.json value·键未登记 fail-closed）——本轮 22 处（CHANGELOG 口径块 10/README 4/AGENTS 6+make analyze 双处/STRUCTURE 6）；标记处由 C5a 句式对账自然切换为 C5b 精确锚点。
+> - **C5c 裸聚合数字报告**：标记/句式覆盖外的 N[页项篇个类] 记 NOTE（首跑 97 处=内容描述数字〔板块篇数/维度数/表格计数〕·报告型不阻断·起步策略收敛后评估转 FAIL）；行级豁免沿用。
+> - **配套**：check_doc_sync --self-test 10→12 例（T11 标记失配必红/T12 未登记键必红·两例首版测试串数字与标记未紧贴自纠）；AGENTS §4.2 第 31 条目 C5b/C5c；文档规范 §4.10 增补「数字实体化」与「C5 三层分工」（C5b 权威锚点/C5a 句式兜底/C5c 报告起步）。
+> - **验证**：self-test 12/12 + 首跑 0 FAIL·1 NOTE（C5c 97 处留观）+ stats.py --check 零差异 + verify full 45 段绿 + pytest 293 + ruff 0 错。
+> - **文件**：scripts/stats.py（实体化重写）、scripts/output/stats.json（entity-v1）、scripts/output/stats-changelog.json（新增）、scripts/output/stats-index.md（新增）、scripts/check_doc_sync.py（C5b/C5c）、scripts/_w704_docsync.py 与 scripts/_w704_marks.py（一次性）、AGENTS.md、README.md、STRUCTURE.md、CHANGELOG.md（标记）、docs/00-导读/文档规范.md（§4.10 增补）、docs/00-导读/W批次编号对账表.md（W704 认领）、六文档级联。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### v2.3.297（2026-10-11）：W703 聚合数字对账门禁批
 
