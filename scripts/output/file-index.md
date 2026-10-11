@@ -11,6 +11,20 @@
 ---
 
 
+## W711 W711 方案D形态改造批（2026-10-11）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_sync.py | W711 | 四正则双形态+changelog_top (date,wnum)+C1/C2 二元组 |
+| scripts/verify_delivery.py | W711 | latest_version 双形态+dukou footer 内联锚+workflows anchor 参数+六文档 ver 条件化 |
+| scripts/batch_cascade.py | W711 | 段锚点双形态+新段 W-only+三模板/HEAD/页脚/CITATION/file-index 去 ver |
+| tests/test_verify_delivery_version.py | W711 | 补方案 D 两用例（13 过） |
+| CHANGELOG.md | W711 | 头部方案 D 切换声明+首个 W-only 新形态段 |
+| README.md | W711 | 版本号说明节改方案 D 语义+抬头批次化 |
+| docs/00-导读/文档规范.md | W711 | §4.11 方案 D 已实施注记 |
+| CITATION.cff | W711 | version=批次号形态 |
+| docs/00-导读/W批次编号对账表.md | W711 | W711 认领 + 现势 W712 |
+
 ## W710 W710 BL-25与BL-21收口批（2026-10-11·v2.3.304）
 
 | 文件 | W | 说明 |

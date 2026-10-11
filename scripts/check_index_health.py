@@ -129,17 +129,18 @@ def check_methodology_readme(errors: list[str]) -> None:
 
 def check_changelog_w_upper(errors: list[str]) -> None:
     text = CHANGELOG.read_text(encoding="utf-8-sig")
-    latest = re.search(r"^### v\d+\.\d+\.\d+（[^）]*?）：W(\d{3})", text, flags=re.M)
+    latest = re.search(r"^### (?:v\d+\.\d+\.\d+（[^）]*?）：W(\d{3})|W(\d{3})（[^）]*?）：)", text, flags=re.M)  # W711 双形态
     rule = re.search(r"W### ID（W001-W(\d{3})）", text)
     if not latest or not rule:
         errors.append("CHANGELOG 无法解析最新 W 段或编号规则段（W### ID（W001-W###））")
         return
-    if latest.group(1) != rule.group(1):
+    latest_w = latest.group(1) or latest.group(2)
+    if latest_w != rule.group(1):
         errors.append(
-            f"CHANGELOG 编号规则段上限 W{rule.group(1)} != 最新 W 段 W{latest.group(1)}"
+            f"CHANGELOG 编号规则段上限 W{rule.group(1)} != 最新 W 段 W{latest_w}"
             "（bump 时须同步该段，或跑 bump_version.py）"
         )
-    print(f"CHANGELOG 编号规则段上限 W{rule.group(1)} == 最新 W 段 W{latest.group(1)}")
+    print(f"CHANGELOG 编号规则段上限 W{rule.group(1)} == 最新 W 段 W{latest_w}")
 
 
 def check_governance_refs(errors: list[str]) -> None:

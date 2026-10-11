@@ -227,18 +227,34 @@ def _read(p):
 
 
 def latest_version_from_changelog(text):
-    """从 CHANGELOG 文本解析现役（最新）版段 → (X.Y.Z, W##)；无版段返回 (None, None)。
+    """从 CHANGELOG 文本解析现役（最新）版段 → (X.Y.Z|None, W##)；无版段返回 (None, None)。
 
-    版段倒序排列（最新在最前），首个 `### vX.Y.Z（日期）：W###` 匹配即现役段。
-    ver 不含 "v" 前缀，与既有 ("v" + ver) 用法一致。
+    W711 方案 D 双形态：历史段 `### vX.Y.Z（日期）：W###`（ver=X.Y.Z）/ 新段 `### W###（日期）：标题`（ver=None·批次键唯一）。
     """
-    m = re.search(r"^###\s+v(\d+\.\d+\.\d+)（[^）]*）：\s*W(\d+)", text, re.M)
-    return (m.group(1), m.group(2)) if m else (None, None)
+    m = re.search(r"^###\s+(?:v(\d+\.\d+\.\d+)|W(\d+))（[^）]*）", text, re.M)
+    if not m:
+        return (None, None)
+    ver = m.group(1)
+    wnum = m.group(2)
+    if wnum is None:
+        m2 = re.search(r"^###\s+(?:v\d+\.\d+\.\d+|W\d+)（[^）]*）：\s*W(\d+)", text, re.M)
+        wnum = m2.group(1) if m2 else None
+    return (ver, wnum)
 
 
-def parse_footer_version(text):
-    """解析文本中首个 vX.Y.Z W### 版本标记 → (X.Y.Z, W##)；无匹配返回 (None, None)。"""
-    m = re.search(r"v(\d+\.\d+\.\d+)\s+W(\d+)", text)
+def parse_footer_version(text, anchor=None):
+    """解析版本标记 → (X.Y.Z|None, W##)。
+
+    W711 双形态：历史「vX.Y.Z W###」/ 新条目「W###」（ver=None）。
+    anchor=可选定位正则（先锚定区段再取首个版本标记——页脚/头部正文混有其他 W### 时必给，
+    W708 review 教训：宽匹配会咬正文 W 号）。
+    """
+    if anchor:
+        m0 = re.search(anchor, text)
+        if not m0:
+            return (None, None)
+        text = text[m0.start():]
+    m = re.search(r"(?:v(\d+\.\d+\.\d+)\s+)?W(\d+)", text)
     return (m.group(1), m.group(2)) if m else (None, None)
 
 
@@ -303,10 +319,10 @@ def main():
     section("期望版本")
     # ---- 期望版本动态取自 CHANGELOG 现役版段（W518；页脚为滞后型手工工件，降级为新鲜度检查）----
     ver, wnum = latest_version_from_changelog(_read(os.path.join(ROOT, "CHANGELOG.md")))
-    if not (ver and wnum):
-        fail("CHANGELOG.md 未解析出现役版段（期望标题格式 ### vX.Y.Z（日期）：W###）")
+    if wnum is None:
+        fail("CHANGELOG.md 未解析出现役版段（期望 ### W###（日期）：标题 或历史 ### vX.Y.Z（日期）：W###）")
     else:
-        ok("期望版本动态取自 CHANGELOG 现役段 v%s W%s" % (ver, wnum))
+        ok("期望批次动态取自 CHANGELOG 现役段 %sW%s" % (("v%s " % ver) if ver else "", wnum))
 
     section("dukou页脚")
     # ---- 读取 dukou-engine.html：页脚新鲜度 + 扫描所有 W### ----
@@ -316,13 +332,15 @@ def main():
     html_w = [int(x) for x in re.findall(r"W(\d{3})", html)]
     max_w_html = max(html_w) if html_w else 0
 
-    fver, fwnum = parse_footer_version(html)
-    if fver and fwnum:
-        if ver and wnum and int(fwnum) < int(wnum):
-            warn("dukou-engine.html 页脚版本 v%s W%s 落后于现役段 W%s"
-                 "（页脚为手工工件，建议随批升版，不阻断）" % (fver, fwnum, wnum))
+    # W711：footer 标签内联正则（页面正文含治理文档版本链引用·宽锚会误命中——锚定 <footer> 标签内首链目）
+    m_f = re.search(r"<footer>.{0,200}?(?:v([\d.]+)\s+)?W(\d{3})", html, re.S)
+    fver, fwnum = (m_f.group(1), m_f.group(2)) if m_f else (None, None)
+    if fwnum:  # W711：fver 可 None（W-only 新条目）·批次键比对
+        if wnum and int(fwnum) < int(wnum):
+            warn("dukou-engine.html 页脚版本 %sW%s 落后于现役 W%s"
+                 "（页脚为手工工件，建议随批升版，不阻断）" % (("v%s " % fver) if fver else "", fwnum, wnum))
         else:
-            ok("dukou-engine.html footer 版本 v%s W%s" % (fver, fwnum))
+            ok("dukou-engine.html footer 版本 %sW%s" % (("v%s " % fver) if fver else "", fwnum))
     else:
         fail("dukou-engine.html footer 未解析出 vX.Y.Z W###")
 
@@ -354,7 +372,7 @@ def main():
             else:
                 warn("%s 不含 W%s 里程碑 token（辅助文档，跑 scripts/bump_version.py 同步，不阻断）" % (d, wnum))
             continue
-        ok("%s 含 v%s / W%s" % (d, ver, wnum))
+        ok("%s 含 %sW%s" % (d, ("v%s / " % ver) if ver else "", wnum))
 
     section("旁文档同步")
     # ---- 旁文档同步门禁（W526：workflows/README.md 头部版本行 + 里程碑行上限 == 现役 v/W，补 W525 实证盲区）----
@@ -362,15 +380,15 @@ def main():
     if not wf:
         fail(".github/workflows/README.md 缺失（旁文档，需人工补回）")
     else:
-        wf_v, wf_w = parse_footer_version(wf)
-        if wf_v and wf_w:
-            if ver and wnum and (wf_v, wf_w) != (ver, wnum):
-                fail(".github/workflows/README.md 头部版本 v%s W%s != 现役 v%s W%s"
-                     "（旁文档滞后，W499/W525 两次实证复发）" % (wf_v, wf_w, ver, wnum))
+        wf_v, wf_w = parse_footer_version(wf, anchor=r"，(?:v[\d.]+\s+)?W\d+）的 GitHub")
+        if wf_w:
+            if wnum and int(wf_w) != int(wnum):
+                fail(".github/workflows/README.md 头部版本 W%s != 现役 W%s"
+                     "（旁文档滞后，W499/W525 两次实证复发）" % (wf_w, wnum))
             else:
-                ok(".github/workflows/README.md 头部版本同步（v%s W%s）" % (wf_v, wf_w))
+                ok(".github/workflows/README.md 头部版本同步（%sW%s）" % (("v%s " % wf_v) if wf_v else "", wf_w))
         else:
-            fail(".github/workflows/README.md 未解析出头部版本标记（vX.Y.Z W###）")
+            fail(".github/workflows/README.md 未解析出头部版本标记（W### 或历史 vX.Y.Z W###）")
         mw = re.search(r"W450-W(\d{3})", wf)
         if mw:
             if wnum and mw.group(1) != wnum:

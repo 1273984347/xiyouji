@@ -1,0 +1,26 @@
+{
+  "batch": "W711",
+  "version": "v2.3",
+  "date": "2026-10-11",
+  "desc": "方案D形态改造批",
+  "title": "W711 方案D形态改造批",
+  "changelog_body": "\n\n> **来源**：用户 userselect 全选五 Backlog 第三批（BL-22 收口·三决策点按倾向落地·盘点档 docs/superpowers/plans/2026-10-11-version-space-inventory.md 硬耦合 9 项逐项+级联首跑暴露的解析面漏项四门禁同批补齐——每轮低估定律再次应验）——**v 号形态切换生效批：自本段起 CHANGELOG 段标题与治理文档抬头去 v 号（批次键唯一）**。\n> - **决策点 1（甲·段标题去 v）**：本段即首个新形态段 `### W711（2026-10-11）：标题`；W001-W710 段保留 `### vX.Y.Z（日期）：W###` 历史形态不改写（维护契约①）；沿革机器面三条=① 头部方案 D 声明段 ② doc-sync C1/C2/C4 正则双形态 ③ batch_cascade 段锚点/三模板/HEAD 句/页脚/交接标题双形态。\n> - **决策点 2（丙·CITATION=W 号）**：CITATION.cff version 自本批=批次号形态（`\"W711\"`·CFF free string）；下游消费者核实=CI 无 cff 校验 job、仓库无自动化 CFF 消费者。\n> - **决策点 3（甲·file-index）**：历史条目保留 v 引用、新段 W only（级联 file-index 段标题去 ver）。\n> - **工具双形态改造**：① doc-sync 四正则（TOP/SECT/README_HEAD/JIAOJIE_HEAD）+changelog_top 返回 (date, wnum) 二元组+C1/C2 二元组对比（self-test 12/12·base 换新形态样例）；② verify latest_version_from_changelog 双形态（ver 可 None）+期望批次段 W-only 展示+dukou footer 内联正则与 workflows anchor 参数（parse_footer_version 加 anchor 参数·W708 宽匹配咬正文教训应用）+六文档区 ver 条件化+旁文档 W 比对；③ batch_cascade cur_anchor 双形态+新段标题 W-only+三模板换「当前批次」抬头+「起生效」/HEAD 句/workflows 页眉/两页脚 prepend/「一、当前进度」标题/file-index 段标题去 ver+CITATION version=batch+join 守卫与 selfcheck 头尾链提取双形态；④ check_governance_docs HEAD/顶段/最后更新三处双形态（footer_freshness 改 W 号单键）；⑤ check_index_health 最新段双形态；⑥ check_w_range_literal current_state 双形态+CITATION 比对分支（ver None→比对批次号）；⑦ tests 补方案 D 用例与 mismatch 语义更新（296 过）。\n> - **workflows 4 处豁免**（盘点 v2 零命中确认表修正）：dependency-review/scorecard 系第三方 action 版本注释（与项目 v 号无关）、ci/perf 系 W263/W266 历史批注——均无需改。\n> - **验证**：verify full 46 段绿（旧 v 形态全兼容）+pytest 296+doc-sync self-test 12/12+agents-layers 0 FAIL+级联 dry/apply 自检过（**本段即首个 W-only 新形态段·级联全链真数据验证**）。\n> - **文件**：scripts/check_doc_sync.py、scripts/verify_delivery.py、scripts/batch_cascade.py、scripts/check_governance_docs.py、scripts/check_index_health.py、scripts/check_w_range_literal.py、tests/test_verify_delivery_version.py、CHANGELOG.md、README.md、docs/00-导读/文档规范.md、docs/00-导读/W批次编号对账表.md、六文档级联（新形态首写）。\n> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。\n",
+  "head_entry": "2026-10-11（W711 方案D形态改造批）",
+  "head_sentence": "版本形态切换生效",
+  "milestone_block": "- **W711 方案D形态改造批**：\n  - 自本段起 CHANGELOG 段标题与治理文档抬头去 v 号（批次键唯一·W001-W710 历史形态保留）\n  - CITATION version=批次号形态（\"W711\"）+file-index 新段 W only\n  - 六工具双形态改造（doc-sync/verify/batch_cascade/governance/index_health/w_range_literal·296 测试）\n",
+  "agents_note": "2026-10-11（W711）方案D形态改造批（用户 userselect 第三批·BL-22 收口·三决策点按倾向落地）：自本段起 CHANGELOG 段标题与治理文档抬头去 v 号（新形态 ### W###（date）：标题·W001-W710 历史形态保留）加 CITATION version 改批次号形态（\"W711\"·下游无自动化消费者已核）加 file-index 新段 W only（历史双列保留）加 六工具双形态改造（doc-sync 四正则+verify latest_version 与 dukou/workflows 锚定+batch_cascade 段锚点三模板 HEAD 句页脚 CITATION+governance 三处 W 号单键+index_health+w_range_literal CITATION 分支·tests 296 含方案 D 用例）加 workflows 4 处豁免确认（action 版本注释与历史批注）加 级联首跑暴露四门禁解析漏项同批补齐（每轮低估定律应验）",
+  "file_index_rows": [
+    "| scripts/check_doc_sync.py | W711 | 四正则双形态+changelog_top (date,wnum)+C1/C2 二元组 |",
+    "| scripts/verify_delivery.py | W711 | latest_version 双形态+dukou footer 内联锚+workflows anchor 参数+六文档 ver 条件化 |",
+    "| scripts/batch_cascade.py | W711 | 段锚点双形态+新段 W-only+模板/HEAD/页脚/CITATION/file-index 去 ver+selfcheck 双形态 |",
+    "| scripts/check_governance_docs.py | W711 | HEAD/顶段/最后更新双形态（W 号单键） |",
+    "| scripts/check_index_health.py | W711 | 最新段双形态 |",
+    "| scripts/check_w_range_literal.py | W711 | current_state 双形态+CITATION 批次号分支 |",
+    "| tests/test_verify_delivery_version.py | W711 | 方案 D 用例与 mismatch 语义更新（296 过） |",
+    "| CHANGELOG.md | W711 | 头部方案 D 切换声明+首个 W-only 新形态段 |",
+    "| README.md | W711 | 版本号说明节改方案 D 语义+抬头批次化 |",
+    "| docs/00-导读/文档规范.md | W711 | §4.11 方案 D 已实施注记 |",
+    "| CITATION.cff | W711 | version=批次号形态 |",
+    "| docs/00-导读/W批次编号对账表.md | W711 | W711 认领 + 现势 W712 |"
+  ]
+}
