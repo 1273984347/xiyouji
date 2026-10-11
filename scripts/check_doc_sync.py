@@ -169,7 +169,8 @@ def evaluate(inp):
                 reg |= changelog_section_ws(open(p, encoding="utf-8").read())
         reg |= table_registered_ws(inp["table"])
         for s in inp["subjects"]:
-            for w in RE_COMMIT_W.findall(s):
+            s2 = re.sub(r"W\d{3}\s*[-–—]\s*W\d{3}", "", s)  # W711：区间形态（W001-W710 等）下限非实体号·剔除后再提取
+            for w in RE_COMMIT_W.findall(s2):
                 if w not in reg:
                     issues.append("C4: 提交「%s」的 W%s 无 CHANGELOG 版段且未在对账表登记" % (s[:60], w))
 
