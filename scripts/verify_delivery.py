@@ -76,6 +76,7 @@ EXPECTED_SECTION_NAMES = [
     "文档口径", "CLAUDE速查",
     "head内容", "CSS变量引用",
     "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源", "chapter双源",
+    "AGENTS分层",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
@@ -99,7 +100,7 @@ SCOPE_SITE_SECTIONS = {
     "动效禁令", "a11y对比", "INLINED完整", "动态链接", "图表自洽", "数据一致",
     "SEOhead", "可引用性", "设计令牌对账", "色盲安全", "降级声明", "head内容",
     "CSS变量引用", "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源", "chapter双源",
-    "文档口径", "W区间字面量", "索引健康", "治理契约",
+    "文档口径", "W区间字面量", "索引健康", "治理契约", "AGENTS分层",
 }
 _SCOPE_CORE = {"期望版本", "dukou页脚", "六文档同步", "范围漂移"}
 _GATE_SUMMARY_MARKERS = {
@@ -117,6 +118,7 @@ _GATE_SUMMARY_MARKERS = {
     "内嵌残留": "---- 第 38 门禁 页面内嵌残留标记：",
     "时间线双源": "---- 第 39 门禁 故事内时间线双源同步：",
     "chapter双源": "---- 第 40 门禁 chapter_stats 双源同步：",
+    "AGENTS分层": "---- 第 41 门禁 AGENTS 分层完整性：",
 }
 
 
@@ -1094,6 +1096,24 @@ def main():
             fail("chapter双源门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
         else:
             ok("chapter双源门禁通过（%s）" % (r.stdout.splitlines()[-2] if len(r.stdout.splitlines()) >= 2 else "无输出"))
+
+
+    section("AGENTS分层")
+    # ---- AGENTS 分层完整性门禁（第 41 槽·W709 BL-24：L1 摘要层与 L2 主题层结构防线——
+    # C1 L2 三件存在含契约 / C2 编号三方对账（AGENTS 摘要==gates.md==verify 实况）/ C3 行数上限 / C4 指针目标。
+    # BL-24 搬迁后 AGENTS §4.2/§4.3/§4.4 为摘要层，全量在 docs/agent/。wrapper 同款）----
+    al_py = os.path.join(_HERE, "check_agents_layers.py")
+    try:
+        r = subprocess.run([sys.executable, al_py], capture_output=True, text=True, timeout=120)
+    except Exception as e:
+        fail("AGENTS 分层门禁执行异常（第 41 槽·crash 即拦）: %s" % e)
+    else:
+        if r.returncode != 0:
+            fail("AGENTS 分层失配（exit %d）：%s" % (r.returncode, " / ".join(r.stdout.splitlines()[-4:])))
+        elif "---- 第 41 门禁 AGENTS 分层完整性：" not in r.stdout:
+            fail("AGENTS 分层门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r" % r.stdout[-160:])
+        else:
+            ok("AGENTS 分层完整性通过（%s）" % (r.stdout.splitlines()[-2] if len(r.stdout.splitlines()) >= 2 else "无输出"))
 
 
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
