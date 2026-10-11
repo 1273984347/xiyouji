@@ -2,7 +2,9 @@
 
 > **📖 阅读契约（W709）**：查表型——动 xiyouji-agent-web/（引擎/前端/权限）时读。
 
-- 后端 `server/index.ts`（Express + SSE 流式 + SQLite `data/chat.db`），前端 `src/`（React18 + Vite5 + TDesign）。
+- 后端 `server/index.ts`（Express 5 + SSE 流式 + SQLite `data/chat.db`）+ 自研 OpenAI-compatible 引擎 `server/engine/`（W680：types/openai-compat/tools/agent-loop 四模块+grep-worker·全主流大模型端点适配），前端 `src/`（React 19 + Vite 8 + TypeScript 7 + TDesign React·W543-W548 五阶段迁移）。
+- 引擎能力：流式驱动 + 六工具（read_file/glob/grep/write_file/edit_file/run_command）+ 安全基线（realpath 越界守卫/受保护路径黑名单/命令白名单/凭证仅服务端 .env）；常驻冒烟 `server/engine.smoke.mjs`（12 组机判断言·改引擎必跑）。
 - 引擎凭证 `LLM_API_BASE`/`LLM_API_KEY`/`LLM_MODEL`（`.env`，由 `.env.example` 复制，已 gitignore·兼容所有主流大模型 OpenAI-compatible 端点·W680）。
 - 默认 `PROJECT_CWD`=仓库根（启动时向上探测 AGENTS.md+site/tokens.css 自动解析·env 可覆盖·W596）；专属 Agent「渡口问津」内置项目 sysprompt；权限默认 `default`（UI 可切 `acceptEdits`/`plan`；`bypassPermissions` 仅当服务端 env `AGENT_WEB_ALLOW_BYPASS=1` 时放行，否则降级 default——W411 加固，W537 文档校正）。
 - 核心入口：`server/index.ts`、`src/hooks/useAgents.ts`（DEFAULT_AGENT）、`src/config.ts`（主题色 #c8463a「西」Logo）、`src/pages/ChatPage.tsx`。
+- 权威入口：[xiyouji-agent-web/README.md](../../xiyouji-agent-web/README.md)（运行/部署/扩展指南）。

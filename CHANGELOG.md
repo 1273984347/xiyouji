@@ -6,17 +6,28 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W712），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W713），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
 > **方案 D 形态切换（W711 生效）**：自 W711 段起，CHANGELOG 段标题去 v 号（新形态 `### W###（日期）：标题`）；W001-W710 段保留 `### vX.Y.Z（日期）：W###` 历史形态不改写；v 号降格为阶段标签（v2.3·无 patch）；CITATION.cff version 改批次号形态（"W###"·CFF free string）；file-index 历史条目保留 v 引用、新增条目 W only。
 >
-> **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
+> **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 W650+ 段（W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
 >
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W713（2026-10-11）：挑刺第十四次补正批
+
+> **来源**：用户挑刺第十四次（三报告：治理文档 13 条+L2 三件 13 条+九脚本 17 条=43 项）——逐条磁盘取证三态裁决（采纳 40/事后应验 0/驳回 3/部分 0）并落地；另自查新增 5 项同批并修（级联 W712 修复漏提交/CHANGELOG 段标题重复根因/agent_start 阻塞提取越段/file-index 重复规模=146 行/交接里程碑指针旋转语义漂移）。
+> - **级联旋转语义根治（自查项·滚动窗口契约恢复）**：里程碑淘汰目标改「窗口最老块」+「历史概要」指针改取淘汰后剩余最老块 + 删前断言 CHANGELOG 有段（级联契约原文承诺恢复）；原实现指针←new_w 使下批淘汰上批最新块、更老块永不滚动（W710→W711 实跑实证）；W712 手工段指针漂移已归位。
+> - **脚本形态补课（每轮低估定律再应验）**：agent_start 现役解析双形态（实跑曾显示 v2.3.304 W710）+阻塞提取锚段标题+TASK_MAP 指 L2；级联 fb/blocks 双形态（否则 W713 块插错位+W714 必崩）+file-index 段标题清洗正则根治+项目说明「当前版本」行 out2 失配补断言；index_health 检查5 双形态（新段漏检）+governance_refs 子目录扩面+governance 检查5 group 对齐+docstring 校正；w_range_literal 历史段 W 号 int(None) 隐患；agents_layers T3 自测复活（4/5→5/5·自 W709 挂 41 起即失效）；doc-sync C5 面补 CONTRIBUTING；verify _SCOPE_CORE 补 7 内联段（自洽锁盲区）+注释 32→35 校数。
+> - **治理文档与 L2 补正**：AGENTS 40→41 两处+头部指针改 L2 三件+脚注滚动迁移（保留最近 5 条·早段迁 ARCHIVE）；gates.md 41 槽标题+第 41 槽归组+速查表 4 处截断缺字+615 实体标记+第 7 槽共槽注记；agent-web.md 技术栈 React18/Vite5→React19/Vite8/TS7（package.json 实证）+引擎层 bullet（六工具/冒烟实证）+README 权威入口；STRUCTURE 02 段 26→215（磁盘实测）；项目说明 86→87 页+W711 残留清正（孤儿括号）+阅读契约头部；README 09 树补苦难意义论；CHANGELOG 归档段双形态表述；豁免盘点结论先行点名 8 项构成；对账表 W712 行裁决数对齐 CHANGELOG（8/4/2/1）+版段列幻影清正+翻已收官。
+> - **裁决驳回留档（3）**：①对账表「> ## 现势」渲染指控——GFM 引用块内 ## 正常渲染 H2，非层级丢失；②pitfalls「孤儿加粗」——同行前部有开标记（**修复 site/data/json…），加粗实配平；③EXPECT_A4 改 stats 化——字面量即设计（门禁名自declared「EXPECT_A4 字面量」·漂移绊线语义），stats 化属数字实体化扩展应走独立方案批。
+> - **验证**：verify full 46 段绿（自洽锁 46==46）+ pytest 296 + ruff 0 错 + 各门禁 self-test 全绿（agents-layers 5/5·doc-sync 12/12·w_range 4/4）+ agent_start 实跑现役解析正确 + file-index 去重后索引健康绿。
+> - **文件**：8 门禁脚本（batch_cascade/agent_start/verify_delivery/check_index_health/check_governance_docs/check_w_range_literal/check_agents_layers/check_doc_sync）+AGENTS/ARCHIVE+L2 三件+五治理文档+对账表+交接+file-index。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### W712（2026-10-11）：W712 方案档挑刺补正批
 

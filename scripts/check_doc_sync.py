@@ -59,7 +59,7 @@ RE_STATS_PATTERNS = [  # (正则, (键...), 语境词[None=无·小写包含判�
 RE_CHANGELOG_SCOPE = re.compile(r"^> \*\*全站页数口径\*\*.*$", re.M)  # CHANGELOG 扫描域=口径块行
 RE_STATS_MARK = re.compile(r"(\d+)\s*[页项篇个类]?\s*<!--stats:([a-z_0-9]+)-->")  # W704 数字实体标记（紧贴/句尾双形态·key 后置·渲染隐藏）
 RE_BARE_AGG = re.compile(r"\d+\s*(?:页|项|篇|个|类)")  # C5c 裸聚合数字（报告型 NOTE·W704 起步）
-C5_DOC_NAMES = {"readme": "README.md", "structure": "STRUCTURE.md", "agents": "AGENTS.md", "xiangmu": "项目说明.md"}
+C5_DOC_NAMES = {"readme": "README.md", "structure": "STRUCTURE.md", "agents": "AGENTS.md", "xiangmu": "项目说明.md", "contributing": "CONTRIBUTING.md"}  # W713 补 CONTRIBUTING（第 27 门禁叙述面已含·C5 面对齐）
 EXEMPT_MARK = "<!--doc-sync:exempt"
 ARCHIVE_CHANGELOGS = [
     os.path.join(ROOT, "docs", "archive", "CHANGELOG-ARCHIVE.md"),
@@ -263,6 +263,7 @@ def gather():
         "agents": rd(os.path.join(ROOT, "AGENTS.md")),
         "structure": rd(os.path.join(ROOT, "STRUCTURE.md")),
         "xiangmu": rd(os.path.join(ROOT, "docs", "00-导读", "项目说明.md")),
+        "contributing": rd(os.path.join(ROOT, "CONTRIBUTING.md")),
         "verify_src": rd(os.path.join(HERE, "verify_delivery.py")),
         "stats": _load_stats(),
         "table": rd(os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md")),
@@ -315,6 +316,7 @@ def run_self_test():
         "table": "| W999 | x | y | z | s | c |\n- **W659 / W660**：递延登记\n",
         "structure": "",
         "xiangmu": "",
+        "contributing": "",
         "stats": {
             k: {"value": v}
             for k, v in {

@@ -90,7 +90,7 @@ def run_self_test():
 
     case("T1 干净态零误报", lambda d: None, None)
     case("T2 gates.md 缺失必红", lambda d: d["files"].pop("docs/agent/gates.md"), "C1")
-    case("T3 编号三方失配必红", lambda d: d.update(agents_sec42=d["agents_sec42"].replace("40. **", "41. **", 1)), "C2")
+    case("T3 编号三方失配必红", lambda d: d.update(agents_sec42=re.sub(r"(?m)^41\. \*\*[^\n]*\n", "", d["agents_sec42"])), "C2")  # W713：40→41 替换在 1-41 全序列下 max 仍 41 不失配（4/5 实证）·改删 41 条注入失配
     case("T4 AGENTS 超行必红", lambda d: d.update(agents_lines=999), "C3")
     case("T5 指针悬空必红", lambda d: d.update(agents=d["agents"].replace("(docs/agent/gates.md)", "(docs/agent/nope.md)", 1)), "C4")
     fails = 0

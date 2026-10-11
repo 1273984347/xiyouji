@@ -29,9 +29,9 @@ def read_rel(rel):
 def footer_freshness_issues(handoff_text, newest_wnum):
     """检查 7：交接文档每处「最后更新」行链首条目须为 CHANGELOG 现役段同批（W518 新增）。
 
-    newest_ver 形如 "v2.3.117"（含 v 前缀，即 CHANGELOG 版段正则的 group(1)）。
-    条目形如 `最后更新：YYYY-MM-DD（vX.Y.Z W### 标题…）`；交接文档头部滚动链与
-    尾页脚历史链各一处，全部扫描（各链历史条目允许滞后，只校验链首）。
+    newest_wnum 形如 "712"（CHANGELOG 现役段 W 号·W711 起批次键唯一）。
+    条目形如 `最后更新：YYYY-MM-DD（W### 标题…）`，历史条目兼容 `（vX.Y.Z W### …）`；
+    交接文档头部滚动链与尾页脚历史链各一处，全部扫描（各链历史条目允许滞后，只校验链首）。
     """
     matches = list(re.finditer(r"最后更新：\d{4}-\d{2}-\d{2}（(?:v([\d.]+)\s+)?W(\d+)", handoff_text))  # W711 双形态
     if not matches:
@@ -90,8 +90,9 @@ def main():
     # 5. CHANGELOG 编号规则 W001-W### 与最新版本段一致
     wm = re.search(r"W001-W(\d+)", changelog)
     if wm and cm:
-        if wm.group(1) != cm.group(2):
-            issues.append("CHANGELOG 编号规则 W001-W%s 与最新段 W%s 不一致" % (wm.group(1), cm.group(2)))
+        cw5 = cm.group(2) or cm.group(3)  # W713：历史形态下 W 号在 group(3)（与检查 4/7 同款·原裸取 group(2) 历史段恒误报）
+        if cw5 and wm.group(1) != cw5:
+            issues.append("CHANGELOG 编号规则 W001-W%s 与最新段 W%s 不一致" % (wm.group(1), cw5))
 
     # 6. §11.5 登记的 10 份治理文档均含维护契约
     gov_docs = [

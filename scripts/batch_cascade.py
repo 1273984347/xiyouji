@@ -23,7 +23,6 @@ _root = os.path.realpath(ROOT)
 
 
 def load(path):
-    _root = os.path.realpath(ROOT)
     _real = os.path.realpath(os.path.join(ROOT, path))
     if not (_real == _root or _real.startswith(_root + os.sep)):
         raise SystemExit("path escapes project root: %s" % path)
@@ -93,6 +92,7 @@ def main():
     # ---------- CHANGELOG ----------
     p = "CHANGELOG.md"
     s, nl = load(p)
+    cl_src = s  # W713：保留 CHANGELOG 原文，供交接里程碑淘汰前断言（W534 承诺）
     # W711 方案 D 双形态：历史段 ### vX.Y.Z（date）：W### / 新段 ### W###（date）：标题
     m = re.search(r"^### (?:v[\d.]+（[^）]*）：W(\d+)|W(\d+)（[^）]*）：)", s, re.M)
     assert m, "CHANGELOG 未找到现役段"
@@ -102,9 +102,16 @@ def main():
     assert batch == "W" + str(new_w), f"批次号应为 W{new_w}"
     assert ("### " + batch) not in s, batch + " 段已存在"
     old_rule, new_rule = f"（W001-W{cur_w}）", f"（W001-W{new_w}）"
-    assert s.count(old_rule) == 1 and s.count(cur_anchor) == 1
-    new_title = "### {}（{}）：{}".format(batch, date, spec["title"])
-    out = s.replace(cur_anchor, new_title + spec["changelog_body"] + nl + cur_anchor, 1)
+    # W712：cur_anchor 改行首锚定——段 body 内的形态示例引用（反引号内·非行首）不再使计数爆炸
+    assert s.count(old_rule) == 1, "编号规则段锚点异常"
+    _anchor_hits = len(re.findall(rf"^{re.escape(cur_anchor)}", s, re.M))
+    assert _anchor_hits == 1, f"现役段标题行首命中 {_anchor_hits}（应为 1·body 自指内容须避开行首同形）"
+    # W713：precheck 强制 title 以批次号领衔（历史段 ：W### 解析依赖），新形态段标题由模板自带 batch——
+    # 模板侧清洗 title 领衔号，防「### W713（date）：W713 标题」双写（W711/W712 实证·file-index 同根）
+    title_body = re.sub(r"^W\d+\s+", "", spec["title"]).strip()
+    new_title = f"### {batch}（{date}）：{title_body}"
+    out = re.sub(rf"^{re.escape(cur_anchor)}", new_title + spec["changelog_body"].replace("\n", nl) + nl + cur_anchor, s, count=1, flags=re.M)
+    # re.sub 行首锚定插入（W712：防 body 自指·replace 全文计数会误伤）
     out = out.replace(old_rule, new_rule, 1)
     assert out.count(new_title) == 1 and out.count(new_rule) == 1
     pend.append((p, out, nl))
@@ -112,25 +119,26 @@ def main():
     # ---------- README / STRUCTURE / 项目说明 ----------
     p = "README.md"
     s, nl = load(p)
-    out = re.sub(r"> \*\*当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）\*\*：\s*(?:v[\d.]+\s+)?W\d+ [^·]*·A1-A6",
-                 f"> **当前批次 {batch}（{date}）**：{desc}·A1-A6", s, count=1)  # W711 方案 D 新抬头（批次键唯一）
+    out = re.sub(r"> \*\*当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）\*\*：\s*(?:v[\d.]+\s+)?(?:W\d+\s+)?[^·]*·A1-A6",
+                 f"> **当前批次 {batch}（{date}）**：{desc}·A1-A6", s, count=1)  # W711 方案 D 新抬头·W712 锚点兼容 desc 直连形态
     assert out != s, "README 版本行未变化"
     pend.append((p, out, nl))
 
     p = "STRUCTURE.md"
     s, nl = load(p)
-    out = re.sub(r"> 当前(?:版本：v[\d.]+|批次：W\d+)（[^）]*）— (?:v[\d.]+\s+)?W\d+ [^—]*—\s*A1-A6",
-                 f"> 当前批次：{batch}（{date}）— {desc}—A1-A6", s, count=1)
+    out = re.sub(r"> 当前(?:版本：v[\d.]+|批次：W\d+)（[^）]*）— (?:v[\d.]+\s+)?(?:W\d+\s+)?[^—]*—\s*A1-A6",
+                 f"> 当前批次：{batch}（{date}）— {desc}—A1-A6", s, count=1)  # W712 锚点兼容 desc 直连
     assert out != s, "STRUCTURE 版本行未变化"
     pend.append((p, out, nl))
 
     p = "docs/00-导读/项目说明.md"
     s, nl = load(p)
-    out = re.sub(r"> 当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）：(?:v[\d.]+\s+)?W\d+ [^·]*·详细变更见",
-                 f"> 当前批次 {batch}（{date}）：{desc}·详细变更见", s, count=1)
+    out = re.sub(r"> 当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）：(?:v[\d.]+\s+)?(?:W\d+\s+)?[^·]*·详细变更见",
+                 f"> 当前批次 {batch}（{date}）：{desc}·详细变更见", s, count=1)  # W712 锚点兼容 desc 直连
     assert out != s, "项目说明头部版本行未变化"
-    out2 = re.sub(r"(\*\*当前(?:版本|批次)\*\*：)(?:v[\d.]+|W\d+)（[^）]*）— (?:v[\d.]+\s+)?W\d+ [^·]*",
+    out2 = re.sub(r"(\*\*当前(?:版本|批次)\*\*：)(?:v[\d.]+|W\d+)（[^）]*）— (?:v[\d.]+\s+)?(?:W\d+\s+)?[^·]*",
                   rf"\g<1>{batch}（{date}）— {desc}", out, count=1)
+    assert out2 != out, "项目说明「当前版本」列表行未变化（正则失配·fail-closed——W711 起 desc 直连形态实证·W713 补断言）"
     pend.append((p, out2, nl))
 
     # ---------- 交接文档 ----------
@@ -150,13 +158,13 @@ def main():
         head_line = head_line[:oldest] + head_line[note_idx:]
         entries = re.findall(r"·20\d{2}-\d{2}-\d{2}（", head_line)
     s = s[:h0] + head_line + s[h1:]
-    s = re.sub(r"；v[\d.]+ W\d+ 起生效）", f"；{batch} 起生效）", s, count=1)
+    s = re.sub(r"；(?:v[\d.]+ W\d+|W\d+) 起生效）", f"；{batch} 起生效）", s, count=1)  # W713 双形态（该行现不存在=静默无操作·防未来回加时失配）
     # W705 教训：标题锚点与替换串形态必须恒定——旧替换串丢 ver 前缀致下一批锚点静默失配（re.sub 0 替换不报错），
     # 里程碑块遂在头部错位堆积、drop_block 跨段淘汰吞掉「一、当前进度」标题。此处改双形态锚点 + count 断言 fail-closed。
     _prog = re.compile(r"## 一、当前进度（(?:v[\d.]+ )?W\d+ [^；]*；更早批次详见 CHANGELOG\.md）")
     assert len(_prog.findall(s)) == 1, "「一、当前进度」标题锚点失配（W705 教训：静默失配后逐批漂移·先修复交接文档结构再级联）"
     s = _prog.sub(f"## 一、当前进度（{batch} {desc}；更早批次详见 CHANGELOG.md）", s, count=1)
-    fb = re.search(r"- \*\*v[\d.]+ W\d+", s)
+    fb = re.search(r"- \*\*(?:v[\d.]+ )?W\d+", s)  # W713 双形态（W711 起新块无 v 前缀）
     h1pos = s.find("## 一、当前进度")
     assert fb and h1pos != -1 and fb.start() > h1pos, (
         "里程碑首块必须位于「一、当前进度」段内（W705 教训：文件头错位块链自我强化·先修复交接文档结构再级联）"
@@ -166,24 +174,38 @@ def main():
     pm = re.search(r"> 历史概要（W(\d+) 及更早）的详细记录见", s)
     assert pm, "未找到历史概要指针"
     oldest_w = pm.group(1)
-    blocks_all = list(re.finditer(r"- \*\*(v[\d.]+) (W\d+)[^*]*\*+：", s))
-    tgt = [b for b in blocks_all if b.group(2) == "W" + oldest_w]
+    # W713 双形态 + 窗口限定进度段内（防后文待办/方法论区 bullet 误入旋转窗）
+    blocks_all = [b for b in re.finditer(r"- \*\*(?:v[\d.]+ )?(W\d+)[^*]*\*+：", s) if b.start() > h1pos]
+    tgt = [b for b in blocks_all if b.group(1) == "W" + oldest_w]
     if not tgt:
-        raise AssertionError(f"未找到最老里程碑块 W{oldest_w}；现存块 {[b.group(2) for b in blocks_all]}")
+        raise AssertionError(f"未找到最老里程碑块 W{oldest_w}；现存块 {[b.group(1) for b in blocks_all]}")
+    assert int(tgt[0].group(1)[1:]) == min(int(b.group(1)[1:]) for b in blocks_all), (
+        "淘汰目标非窗口最老块——「历史概要」指针漂移（W712 手工段实证 pm=最新块形态）："
+        "先手工把指针归位到最老可见块再级联（W713 旋转语义防线）"
+    )
     bm_start = tgt[0].start()
-    assert bm_start > s.find("## 一、当前进度"), (
+    assert bm_start > h1pos, (
         f"最老里程碑块 W{oldest_w} 不在「一、当前进度」段内（W705 教训：跨段整块淘汰会吞掉段标题）"
     )
     eidx = s.find(f"> 历史概要（W{oldest_w} 及更早）的详细记录见", bm_start)
     assert eidx != -1
+    # W534 承诺恢复（W713）：淘汰前断言该批详细记录已入 CHANGELOG 段（信息零丢失）
+    assert re.search(rf"^### (?:v[\d.]+（[^）]*）：W{oldest_w}\b|W{oldest_w}（[^）]*）：)", cl_src, re.M), (
+        f"CHANGELOG 无 W{oldest_w} 段（W534 契约：删前逐批断言 CHANGELOG 有段）"
+    )
     # W624 修复：整块淘汰 = 标题行 + 其后连续 bullet 行（至空行/新组/标题/引用行止）。
     # W557 版候选表里的裸 "\n" 命中标题行自身行尾 → 每批只删标题行文本，bullets 留成
     # 无标题组、残留换行累积成空行串（W623 实证 33 组孤儿 + 14 行 debris，_w624 批清债）。
     # W557 前的旧实现从块起点整段删到指针，块区漂移时会连正文吞掉（W557 dry-run 实证）——
     # 本实现消费终点有界于块自身行，两个历史缺陷闭合。
     s = drop_block(s, bm_start, nl)
+    # W713 旋转语义修正：pm ← 淘汰后窗口剩余最老块（W534 滚动窗口意图——原实现 pm←new_w
+    # 使下一批淘汰上批最新块、更老块永不滚动，W710→W711 实证行为）
+    _win = s[h1pos:s.find("> 历史概要（W")]
+    _remain = [int(x[1:]) for x in re.findall(r"- \*\*(?:v[\d.]+ )?(W\d+)[^*]*\*+：", _win)]
+    assert _remain, "淘汰后里程碑窗口为空（异常）"
     s = s.replace(f"> 历史概要（W{oldest_w} 及更早）的详细记录见",
-                  f"> 历史概要（W{new_w} 及更早）的详细记录见", 1)
+                  f"> 历史概要（W{min(_remain)} 及更早）的详细记录见", 1)
     hs = re.search(r"当前 HEAD = (?:v[\d.]+ )?W\d+（[^）]*；详见 CHANGELOG）", s)
     assert hs, "未找到当前 HEAD 句"
     s = s[:hs.start()] + "当前 HEAD = {}（{}；详见 CHANGELOG）".format(batch, spec["head_sentence"]) + s[hs.end():]
@@ -213,7 +235,7 @@ def main():
     s, nl = load(p)
     BS = chr(92)
     winpath = "`D:" + BS + "xiyouji`"  # W596：旧值为已不存在的双副本路径，曾每批续写进 workflows README
-    pat_wf = re.compile(r"→ W450-W\d+\*\* — 西游记解读项目（" + re.escape(winpath) + r"，v[\d.]+ W\d+）的 GitHub Actions 工作流层。")
+    pat_wf = re.compile(r"→ W450-W\d+\*\* — 西游记解读项目（" + re.escape(winpath) + r"，(?:v[\d.]+\s+)?W\d+）的 GitHub Actions 工作流层。")  # W711 双形态（ver 可选）
     repl_wf = f"→ W450-W{new_w}** — 西游记解读项目（{winpath}，{batch}）的 GitHub Actions 工作流层。"
     out = pat_wf.sub(lambda m: repl_wf, s, count=1)
     assert out != s, "workflows 头部未变化"
@@ -259,7 +281,7 @@ def main():
     s, nl = load(p)
     mm = re.search(r"## (W\d+) ", s)
     assert mm, "file-index 未找到最新段"
-    rows = nl.join(["## {} {}（{}）".format(batch, re.sub(r"\W\d+ ", "", spec["title"].split(" — ")[0].split("（")[0]), date),
+    rows = nl.join(["## {} {}（{}）".format(batch, re.sub(r"^W\d+\s+", "", spec["title"].split(" — ")[0].split("（")[0]).strip(), date),
                     "", "| 文件 | W | 说明 |", "|---|---|---|"] + spec["file_index_rows"] + ["", ""])
     pend.append((p, s.replace(mm.group(0), rows + mm.group(0), 1), nl))
 
