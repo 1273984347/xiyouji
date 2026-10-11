@@ -1,0 +1,21 @@
+{
+  "batch": "W703",
+  "version": "v2.3.297",
+  "date": "2026-10-11",
+  "desc": "聚合数字对账门禁批",
+  "title": "W703 聚合数字对账门禁批",
+  "changelog_body": "\n\n> **来源**：用户方案「40 个门禁仍漂移——根因诊断与 A+C 路线」（W702 挑刺 17 项裁决同日追加）——聚合数字系磁盘可计算量以手写常量散落叙述文本，逐点设防有天花板；按修正形态落地（A=stats.json 磁盘实算+C5 对账；C 裁剪为句式白名单+指针化规范——CHANGELOG 历史段须记录当批口径、README 内容规模数字面向读者且已受第 3 门禁磁盘对账，故全量禁写不采纳；占位符回填不采纳，循 W652 design-tokens 机器生成权威先例替代）。\n> - **stats.py + stats.json**：scripts/stats.py 从磁盘实算 15 键（html_total 857〔site/data 88+en 138+根 9+reader 622〕/csp_covered 856/scan_files 与 seo_scanned 855/inline_css_pages 330/visualization_pages 87/gate_count 40〔verify 槽位实解〕/a1_a6_docs 615〔排除六板块 README·口径对齐第 3 门禁·首跑 621 差 6 即此〕/methodology_docs 33/json_count 135/script_classes 34）+ --check 零差异自证；stats.json tracked 入库（CI 可复现·「gitignored 不作基准」第 40 门禁教训同源）。\n> - **C5 聚合数字对账**（第 31 门禁第 5 查）：18 式高危聚合句式×现役叙述面（README/STRUCTURE/AGENTS/项目说明全文+CHANGELOG 仅口径块行+AGENTS 版本脚注剥离）vs stats.json 实时对账——失配=FAIL、stats 缺键=fail-closed、基线/首跑时点值靠句式表设计豁免（第 33/34 门禁「235 页扫描」无 seo 语境自动放行实证）、行级豁免沿用；--self-test 7→10 例（T8 失配必红/T9 行级豁免放行/T10 stats 缺失 fail-closed）。\n> - **首跑即产证**：C5 抓 AGENTS 版本脚注 W514 条目「约 86 个可视化页」时点实况（历史记录非漂移）——据此把脚注区剥离出扫描域（历史段豁免哲学），正文现役值全对账通过。\n> - **配套规范**：AGENTS §4.2 第 31 条目扩 C5；文档规范新增 §4.10 聚合数字书写规范（唯一基准/现役叙述面句式对账/新增聚合量登记制/时点值豁免边界）。\n> - **验证**：check_doc_sync --self-test 10/10 + 首跑 0 FAIL；stats.py --check 零差异；verify full 45 段绿；pytest 293；ruff 0 错。\n> - **文件**：scripts/stats.py（新增）、scripts/output/stats.json（新增·tracked）、scripts/check_doc_sync.py（C5）、scripts/_w703_docsync.py（一次性）、AGENTS.md（第 31 条目）、docs/00-导读/文档规范.md（§4.10）、docs/00-导读/W批次编号对账表.md（W703 认领）、六文档级联。\n> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。\n",
+  "head_entry": "2026-10-11（v2.3.297 W703 聚合数字对账门禁批）",
+  "head_sentence": "聚合数字磁盘对账机制落地",
+  "milestone_block": "- **v2.3.297 W703 聚合数字对账门禁批**：\n  - stats.py 磁盘实算 15 键生成 stats.json（tracked·CI 可复现·--check 零差异自证）\n  - 第 31 门禁扩 C5：18 式聚合句式×现役叙述面 vs stats.json（self-test 10 例·首跑抓脚注时点值即产证）\n  - AGENTS §4.2 第 31 条目 C5 + 文档规范 §4.10 聚合数字书写规范（登记制+时点豁免边界）\n",
+  "agents_note": "2026-10-11（v2.3.297 W703）聚合数字对账门禁批（用户方案 A+C 修正形态）：scripts/stats.py 磁盘实算 15 键生成 scripts/output/stats.json（tracked·CI 可复现）加 第 31 门禁扩 C5 聚合数字对账（18 式高危句式×现役叙述面〔README/STRUCTURE/AGENTS/项目说明全文+CHANGELOG 口径块行+AGENTS 脚注剥离〕vs stats.json·self-test 7→10 例·首跑抓 W514 脚注时点值即产证后剥域）加 AGENTS §4.2 第 31 条目扩 C5 加 文档规范新增 §4.10 聚合数字书写规范（新增聚合量登记制+时点值豁免边界）加 全量禁写与占位符回填不采纳（CHANGELOG 历史段记录当批口径+README 面向读者+W652 机器生成先例）",
+  "file_index_rows": [
+    "| scripts/stats.py | W703 | 新增：聚合数字统计器（15 键磁盘实算·--check 自证） |",
+    "| scripts/output/stats.json | W703 | 新增：第 31 门禁 C5 对账基准（tracked） |",
+    "| scripts/check_doc_sync.py | W703 | 扩 C5 聚合数字对账（18 式句式表+self-test 10 例） |",
+    "| scripts/_w703_docsync.py | W703 | 一次性：C5 编辑器 |",
+    "| AGENTS.md | W703 | §4.2 第 31 条目扩 C5 |",
+    "| docs/00-导读/文档规范.md | W703 | 新增 §4.10 聚合数字书写规范 |",
+    "| docs/00-导读/W批次编号对账表.md | W703 | W703 认领 + 现势 W704 |"
+  ]
+}
