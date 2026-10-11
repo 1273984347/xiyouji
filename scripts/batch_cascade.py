@@ -110,7 +110,8 @@ def main():
     # 模板侧清洗 title 领衔号，防「### W713（date）：W713 标题」双写（W711/W712 实证·file-index 同根）
     title_body = re.sub(r"^W\d+\s+", "", spec["title"]).strip()
     new_title = f"### {batch}（{date}）：{title_body}"
-    out = re.sub(rf"^{re.escape(cur_anchor)}", new_title + spec["changelog_body"].replace("\n", nl) + nl + cur_anchor, s, count=1, flags=re.M)
+    _ins = new_title + spec["changelog_body"].replace("\n", nl) + nl + cur_anchor
+    out = re.sub(rf"^{re.escape(cur_anchor)}", lambda m: _ins, s, count=1, flags=re.M)  # W717：lambda 字面替换——replacement 串语义会把 body 中的 \d 等当转义（bad escape·本批实证）
     # re.sub 行首锚定插入（W712：防 body 自指·replace 全文计数会误伤）
     out = out.replace(old_rule, new_rule, 1)
     assert out.count(new_title) == 1 and out.count(new_rule) == 1
@@ -246,18 +247,29 @@ def main():
     out = out.replace(marker, f"无 workflow 结构改动）+ W{new_w} {desc}·无 workflow 结构改动）。", 1)
     pend.append((p, out, nl))
 
-    # ---------- 四页脚 ----------
+    # ---------- 四页脚（W717 根修：页脚区锚定——旧 v 形态锚落在手工时代 W 形态头块之下，
+    # 新批 token 每批插在链中、新鲜度门禁读链头恒 WARN（W716 实证）；改锚 <footer> 区内
+    # 首个批次 token（双形态·与第 1 门禁 dukou 解析同语义），新批恒插链头。位置切片插入，
+    # 顺带消除旧 s.replace 全文首处歧义隐患。链头前各页固定文案（MIT License/分隔注释/佛法=AI）
+    # 均不含 W token·不受影响。链长观察：四链 12-17 token 持续增长·治理待契约（本批不扩）----------
+    _FOOT_RE = re.compile(r"<footer[^>]*>")
     for p in ["site/index.html", "site/data/cross-time-danmaku.html", "site/data/tag-cloud.html"]:
         s, _ = load(p)
-        mm = re.search(r"v[\d.]+ · W\d+ [^<]*", s)
-        assert mm, p + " 页脚未命中"
-        pend.append((p, s.replace(mm.group(0), f"{batch} {desc} · " + mm.group(0), 1), None))
+        f = _FOOT_RE.search(s)
+        assert f, p + " 未找到 <footer>"
+        mm = re.search(r"(?:v[\d.]+\s*·\s*)?W\d+[^<]*", s[f.end():f.end() + 800])
+        assert mm, p + " 页脚链头 token 未命中（<footer> 后 800 字符窗口）"
+        at = f.end() + mm.start()
+        pend.append((p, s[:at] + f"{batch} {desc} · " + mm.group(0) + s[at:], None))
     p = "site/dukou-engine.html"
     s, _ = load(p)
-    mm = re.search(r"v[\d.]+ W\d+ [^<]*", s)
-    assert mm, p + " 页脚未命中"
+    f = _FOOT_RE.search(s)
+    assert f, p + " 未找到 <footer>"
+    mm = re.search(r"(?:v[\d.]+\s*)?W\d+[^<]*", s[f.end():f.end() + 800])
+    assert mm, p + " 页脚链头 token 未命中（<footer> 后 800 字符窗口）"
+    at = f.end() + mm.start()
     head_short = spec["head_sentence"].split("——")[0]
-    pend.append((p, s.replace(mm.group(0), f"{batch} {desc}（{head_short}） · " + mm.group(0), 1), None))
+    pend.append((p, s[:at] + f"{batch} {desc}（{head_short}） · " + mm.group(0) + s[at:], None))
 
     # ---------- AGENTS 脚注 ----------
     p = "AGENTS.md"
