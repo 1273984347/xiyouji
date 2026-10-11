@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W704），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W705），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.250+（W650+）。
 >
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### v2.3.299（2026-10-11）：W705 Agent开局状态摘要批
+
+> **来源**：用户方案第三阶段「Agent 惰性×文档膨胀联合治理」五步路线——本轮执行第 2 步（agent-start 状态摘要），第 3/4/5 步分级裁决（见下）；第 1 步已由 W703/W704 落地。另含对账表 W702 行首拆分修复（W704 登记 replace 误吞行首的损伤随 19d8b586 入仓·本轮 git 历史取证定位后还原）。
+> - **scripts/agent_start.py**：会话开局实读磁盘输出当前事实摘要——现役三元组（CHANGELOG 顶段解析）/近 3 批次/stats.json 全键规模口径/对账表现势下一自由号/交接「零、当前阻塞」头部/开局三查与收尾纪律指针；无缓存无硬编码（值全部来自磁盘实时读取=防「记忆代读」的物理手段）；--json 供程序化消费；stdout UTF-8 兜底（Windows 控制台 GBK）。
+> - **挂接**：AGENTS §7 快速上手路径新增第 0 步（开局先跑本脚本）；CLAUDE.md 接手导航首部插入同款指令（41/60 行约束内）。设计边界如实声明：宿主 system message 强制注入是宿主侧能力，项目侧最强形态=CLAUDE.md 自动加载指令 → Agent 开局看到指令 → 跑脚本刷新记忆。
+> - **对账表 W702 行首拆分修复**：W704 登记时 replace 以 W702 行首为插入锚点但未保留锚点自身——W702 行首被替换为「W703 翻收官+W704 新行」，W702 正文并入 W704 行（两行合并·C4 表格行判定失真风险）；本轮定位后拆行还原 W702 行首+删除误复制的 W703 重复行。**教训沉淀：replace 插入语义的锚点必须包含「保留自身」——用「锚点前插入」形态（new=新行+锚点）而非「锚点替换为新行组」**。
+> - **分级裁决（用户方案 3/4/5 步）**：阶段 3（rules.json+gen_claude_md 生成化）**驳回**——CLAUDE.md 系 W664「指针化·零漂移值·零维护成本」设计，生成化使 rules.json 成为与 AGENTS/文档规范并立的第三规则真源（副本数不减反增·违背「单一事实源」诊断）；阶段 4（state.json+状态指纹）**驳回**——现役版本/W/门禁数/篇数已在 CHANGELOG 顶段+stats.json+对账表三处权威，state.json 系第四份副本，「提交信息写指纹」污染 C4 对账；阶段 5（challenge.py 挑战-响应）**登记不开工**——用户自评「会被绕过·更适合诊断性而非阻断性」（登记态可随时重启）。
+> - **验证**：agent_start 冒烟输出全键正确（现值与 stats.json 对账一致）；verify full 45 段绿；pytest 293；ruff 0 错；对账表 W700-W705 行结构完整（各恰一行）。
+> - **文件**：scripts/agent_start.py（新增）、AGENTS.md（§7 第 0 步）、CLAUDE.md（接手导航）、docs/00-导读/W批次编号对账表.md（W705 认领+W702 行首修复+现势 W706）、六文档级联。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### v2.3.298（2026-10-11）：W704 数字实体化批
 
