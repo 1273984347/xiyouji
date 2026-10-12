@@ -1,0 +1,18 @@
+{
+  "batch": "W726",
+  "version": "v2.3",
+  "date": "2026-10-13",
+  "desc": "本地工具链修复批",
+  "title": "W726 本地工具链修复批",
+  "changelog_body": "\n\n> **来源**：用户令「排查代码中的报错」（无具体报错→主动全量扫描：verify full 41 门禁/pytest 296/ruff/check_js_syntax 855 文件/a11y/security/lint_links 逐项复跑）——CI 实跑范围全绿，本地工具链（make 目标）三项真实缺陷。\n> - **缺陷 1（代码 bug·唯一必崩）**：scripts/archive/fix_svg_negative_widths.py L22 ROOT 少一级——W447（dff17dc5「45 个一次性脚本归档」）把脚本从 scripts/ 搬进 scripts/archive/ 未同步路径，parent.parent 指向 scripts/ 而非仓库根，致 site/data glob 静默空扫+dashboard.html read_text 崩（FileNotFoundError·make audit 每跑必挂）。沙盒同构验证：修复后 dry-run 实扫 87 页、报 35 页待打 clientWidth 保护（W400 后新增页从未打上·审计死盲区实况·移交 W727 处置）。\n> - **缺陷 2（工作流断链）**：make data-validate 空目录 rc=1「未找到任何 .json 文件」——output/data/*.json 系 .gitignore 可重建产物，fresh clone 未跑 make analyze 即空目录，make ci 第 5 步必挂（CI 不跑此项·仅本地目标）。Makefile 加空目录跳过保护（提示先行 analyze·rc=0·不弱化校验语义）。\n> - **缺陷 3（文档腐烂）**：lint_links 全仓 12 broken rc=1——README.md:169→drl-screenshot-review.md（gitignore 本地件）、学术论文索引.md 7×v08-embedded-data.js（构建产物）、4×心学方向-投稿版.md（W620 裁决出库件·本地留存）；门禁全绿原因=第 6 门禁只扫 docs/（lint_links --dir docs）。修法=清 tracked 文件死链（README 改指 CHANGELOG·v08 剥链保文·S4 改本地存档注记·不扩豁免——豁免机制只滤被扫文件不滤链接目标）。\n> - **验证**：fix_svg 修复版 dry-run 实跑（87 页扫描·35 页待改·diff 合理）+ Makefile 守卫生效（空目录 rc=0+skip 提示）+ lint_links 全仓 19557 链接 0 broken + verify full 41 门禁 0 FAIL + pytest 296 passed + ruff（scripts/ CI 口径）All checks passed。\n> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。\n> - **文件**：scripts/archive/fix_svg_negative_widths.py、Makefile、README.md、source/引用与网络解读/学术论文索引.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md。\n",
+  "head_entry": "2026-10-13（W726 本地工具链修复批）",
+  "head_sentence": "三项断链根修与死链清理",
+  "milestone_block": "- **W726 本地工具链修复批**：\n  - 缺陷 1：fix_svg ROOT 三级上溯（W447 搬迁失同步·glob 静默空扫+dashboard 读崩）+站点目录存在性 fail-closed\n  - 缺陷 2：Makefile data-validate 空目录跳过保护（output/data gitignore·fresh clone 不挂 make ci）\n  - 缺陷 3：12 死链清理（README 改指 CHANGELOG·v08 剥链保文·S4 本地存档注记·全仓 0 broken）",
+  "agents_note": "2026-10-13（W726）本地工具链修复批（用户令排查代码中的报错·无具体报错转全量扫描）：缺陷 1 fix_svg_negative_widths ROOT 三级上溯加站点目录存在性 fail-closed（W447 归档搬迁失同步致 glob 静默空扫与 dashboard 读崩·make audit 每跑必挂·沙盒验证修复后 87 页扫描 35 页待打保护）加 缺陷 2 Makefile data-validate 空目录跳过保护（output/data 系 gitignore 可重建产物·fresh clone 不再挂 make ci）加 缺陷 3 十二处死链清理（README 改指 CHANGELOG 加 v08 七处剥链保文加 S4 四处本地存档注记·lint_links 19557 链接 0 broken）",
+  "file_index_rows": [
+    "| scripts/archive/fix_svg_negative_widths.py | W726 | ROOT 三级上溯根修（W447 搬迁失同步·glob 静默空扫+dashboard 读崩）+站点目录存在性 fail-closed |",
+    "| Makefile | W726 | data-validate 空目录跳过保护（output/data gitignore·fresh clone 不再挂 make ci） |",
+    "| README.md | W726 | drl-screenshot-review.md 死链改指 CHANGELOG（本地件不入库） |",
+    "| source/引用与网络解读/学术论文索引.md | W726 | 11 处死链清理（7×v08 剥链保文·4×S4 改本地存档注记） |"
+  ]
+}

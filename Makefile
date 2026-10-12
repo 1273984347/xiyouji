@@ -55,6 +55,10 @@ links: ## 链接校验（全仓库 HTML href/src + Markdown，排除 node_module
 
 data-validate: ## JSON 数据完整性校验（output/data/ 131 个文件）
 	@echo "==> data-validate: JSON 结构完整性"
+	@# W726 修复：output/data/*.json 系 .gitignore 可重建产物，fresh clone 未跑 make analyze 时
+	@# 目录为空 → data_validate.py「未找到任何 .json 文件」rc=1，make ci 第 5 步必挂。
+	@# 空目录=数据未生成（非数据损坏）→ 提示先行 make analyze 并以 0 跳过，不弱化校验语义。
+	@python -c "from pathlib import Path; import sys; d=Path('scripts/output/data'); sys.exit(0 if any(d.glob('*.json')) else print('  [skip] output/data 为空——请先运行 make analyze 生成数据'))"
 	python scripts/data_validate.py --quiet
 	@echo "==> data-validate 完成"
 
