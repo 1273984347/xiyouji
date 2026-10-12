@@ -11,6 +11,16 @@
 ---
 
 
+## W724 页脚链损坏修复与链长治理批（2026-10-12）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_cascade.py | W724 | 四页脚双重缺陷根修（去回写+完整节点+12 条裁剪尾注+去重断言·7B 治理落地） |
+| site/index.html | W724 | footer-meta 链重建（去重 182·11 条+尾注） |
+| site/data/cross-time-danmaku.html | W724 | footer-meta 链重建（去重 127·8 条+尾注） |
+| site/data/tag-cloud.html | W724 | footer-meta 链重建（去重 127·8 条+尾注） |
+| site/dukou-engine.html | W724 | 页脚链重建（去重 216·11 条+尾注） |
+
 ## W723 级联清单反向覆盖根修批（2026-10-12）
 
 | 文件 | W | 说明 |

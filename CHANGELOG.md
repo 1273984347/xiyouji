@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W723），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W724），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,17 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W724（2026-10-12）：页脚链损坏修复与链长治理批
+
+> **来源**：用户浏览器实见 site/index.html footer-meta 内容异常提问「为什么这个内容这么多」——取证定谳为重复损坏（非设计）。
+> - **根因（W717 页脚锚定根修埋雷·六批自强化）**：缺陷一=插入代码回写 mm.group(0) 而 s[at:] 本身已含该段 → 每批把整条链复制一遍（W705「错位块链自强化」的页脚版）；缺陷二=800 字符搜索窗口截断 mm 致插入点落 token 中间（「v2.3.28W722」粘连实证）。六批累计：index footer-meta 9198 字符/329 token/重复 182、danmaku/tag-cloud 各 2700/135/127、dukou 14883/406/216；W718-W723 六批验证只 grep 链头未查重复=验收盲区。
+> - **根修（batch_cascade 四页脚段重写）**：完整 footer 节点内定位首 token·纯前插**不回写** mm.group(0)·插入后批次段裁剪至 12 条+尾注「…更早批次详见 CHANGELOG.md」（**7B 链长治理就此落地**——损坏实害成立后从冻结转实施·历史权威在 CHANGELOG 零信息损失）+去重断言（节点内 W token 不得重复·防线）。
+> - **四页重建**：一次性脚本按「token 首现段」打捞原始未损坏文本（每批首次插入时段=完整）——index/dukou 各 11 条、danmaku/tag-cloud 8 条（其链 W717 起才有·历史链在注释区）+尾注；重建后四页 0 重复·161-409 字符。
+> - **验收盲区补防**：级联四页脚断言新增去重检查（写入前拦截）——重复损坏自本批起不可能再发生。
+> - **验证**：四页重建后 0 重复 + 级联 dry/apply（新裁剪逻辑真数据：插 W724 后 12 条+尾注）+ verify full + pytest + ruff + C4-f 提交时自证。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
+> - **文件**：scripts/batch_cascade.py、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、交接文档.md、.github/workflows/README.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、docs/00-导读/W批次编号对账表.md。
 
 ### W723（2026-10-12）：级联清单反向覆盖根修批
 
