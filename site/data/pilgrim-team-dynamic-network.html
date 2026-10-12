@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-fRtBdHxuGv0MZa/Mi8eP9aVQUwalCEqWZRmycj+ScKw=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-YXSB5bp6nvGTZOzHGhvdUVNxdYyFd4SqZEyAqbxJexY=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经团队动力学关系网络 · 详解西游记</title>
@@ -1583,7 +1583,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const width = +svg.attr("width") || 800;
         const height = +svg.attr("height");
         const cx = width / 2, cy = height / 2;
-        const radius = Math.min(width, height) / 2 - 60;
+        const radius = Math.max(0, Math.min(width, height) / 2 - 60);
         const roles = ["coordinator", "completer", "shaper", "plant", "specialist", "ri", "tw", "me", "implementer"];
         const roleLabels = ["协调者", "完成者", "塑造者", "智多星", "专家", "资源调查员", "团队工作者", "监督评估者", "执行者"];
         const colors = {唐僧: "#c8463a", 悟空: "#8c2a2a", 八戒: "#C9A063", 沙僧: "#6B8E5A", 白龙马: "#3a6b8c"};

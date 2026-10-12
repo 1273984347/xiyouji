@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-hW5V+ipEk5jW/p5Qzom33jJq47JW/Wvr3iRXox9Nhc8=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/WqzpKLOt6t7HkYLuK9L5K33rbmka1ciavN56QuH6O4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>四大天王器物符号图谱 · 详解西游记</title>
@@ -1724,7 +1724,7 @@ function renderRadar(radarData) {
 
   const cx = width / 2;
   const cy = height / 2 + 10;
-  const radius = Math.min(width, height) / 2 - 80;
+  const radius = Math.max(0, Math.min(width, height) / 2 - 80);
   const levels = 5;
 
   // 背景同心五边形
@@ -1901,7 +1901,7 @@ function renderChord(chordData) {
 
   const cx = width / 2;
   const cy = height / 2;
-  const outerRadius = Math.min(width, height) / 2 - 90;
+  const outerRadius = Math.max(0, Math.min(width, height) / 2 - 90);
   const innerRadius = outerRadius - 18;
 
   const chord = d3.chord()

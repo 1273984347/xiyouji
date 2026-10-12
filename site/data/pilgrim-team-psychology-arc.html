@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-40i/MYfWKgiCq47NuyG1uF+hKjf9F0HvcqhKfZzfQfY=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-5E0vdfa0I0d81JrPjPb4odWSLAX2cidBUwBzTZNMv00=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经团队心理变化曲线 · 详解西游记</title>
@@ -1693,7 +1693,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         const height = 520;
         svg.attr("viewBox", `0 0 ${width} ${height}`);
         const cx = width / 2, cy = height / 2 + 10;
-        const radius = Math.min(width, height) / 2 - 90;
+        const radius = Math.max(0, Math.min(width, height) / 2 - 90);
         const levels = 5;
         const angleSlice = (2 * Math.PI) / RADAR_AXES.length;
 
@@ -2003,7 +2003,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 g.append("rect")
                     .attr("x", xScale(col.key))
                     .attr("y", yScale(row.character))
-                    .attr("width", xScale.bandwidth())
+                    .attr("width",Math.max(0, xScale.bandwidth()))
                     .attr("height", yScale.bandwidth())
                     .attr("fill", colorScale(val))
                     .attr("stroke", "#fff").attr("stroke-width", 1.5)
@@ -2227,7 +2227,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             g.append("rect")
                 .attr("x", cx - boxW / 2)
                 .attr("y", yScale(d.q3))
-                .attr("width", boxW)
+                .attr("width",Math.max(0, boxW))
                 .attr("height", yScale(d.q1) - yScale(d.q3))
                 .attr("fill", color)
                 .attr("fill-opacity", 0)

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-mnFi75u+1r7H0q4dtbzSKQ9BSrddWqtLcQx7pr9a5Uo=' 'sha256-YHc/fcXFPWaqwCvUwbdl84rLPCi3AJXu3duz4XeksN8=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-GV0EODrrDC4fhiE/KdjHGZGN5Ix99mauFjMGtL95AAk=' 'sha256-YHc/fcXFPWaqwCvUwbdl84rLPCi3AJXu3duz4XeksN8=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>八十一难多维度难度热力图 · 详解西游记</title>
@@ -1734,7 +1734,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         // 高亮当前维度的行
         g.append("rect")
             .attr("x", -6).attr("y", yScale(dim))
-            .attr("width", innerW + 12).attr("height", yScale.bandwidth())
+            .attr("width",Math.max(0, innerW + 12)).attr("height", yScale.bandwidth())
             .attr("fill", "#fff8e7")
             .style("stroke", "var(--accent-soft)")
             .attr("stroke-dasharray", "3,3")
@@ -1755,7 +1755,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                     .attr("data-dim", d)
                     .attr("x", xScale(item.n))
                     .attr("y", yScale(d))
-                    .attr("width", cellW)
+                    .attr("width",Math.max(0, cellW))
                     .attr("height", cellH)
                     .attr("fill", dimColor(d, val))
                     .attr("stroke", "#fff")
@@ -1849,7 +1849,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             .attr("class", "bar")
             .attr("x", d => x(d.label))
             .attr("y", innerH)
-            .attr("width", x.bandwidth())
+            .attr("width",Math.max(0, x.bandwidth()))
             .attr("height", 0)
             .attr("fill", d => d.color)
             .attr("stroke", "#fff")

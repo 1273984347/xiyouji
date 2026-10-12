@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-WYBpS/Y952EHf3SUV4COtZB6hjpc6FPK635jUpv29IU=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-p9kFy8FKS8Wv+lkuJPUO9qs49/FBMZ21EyNjfWEFdeo=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>叙事节奏曲线 · 详解西游记</title>
@@ -1632,7 +1632,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 const v = data.matrix[i][j];
                 g.append("rect")
                     .attr("x", j * cellW).attr("y", i * cellH)
-                    .attr("width", cellW - 1).attr("height", cellH - 1)
+                    .attr("width",Math.max(0, cellW - 1)).attr("height", cellH - 1)
                     .attr("fill", colorScale(v))
                     .style("cursor", "pointer")
                     .on("mouseover", function(event) {

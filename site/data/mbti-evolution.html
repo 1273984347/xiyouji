@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Yxvnwi+w7EotR/dK+1mAuHWr9GtEnYEgUXfgkkqci1I=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/L1/HJGrEzy2ewGkeQHsnzHvE71AYvnCVGCBvIolhso=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经团队 MBTI 动态演变图 · 详解西游记</title>
@@ -1520,7 +1520,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         svg.selectAll("*").remove();
 
         const cx = w / 2, cy = h / 2;
-        const radius = Math.min(w, h) / 2 - 56;
+        const radius = Math.max(0, Math.min(w, h) / 2 - 56);
         const dims = EMBEDDED.dimensions;
         const n = dims.length;
         const angle = (i) => (i * 2 * Math.PI / n) - Math.PI / 2;
@@ -1830,7 +1830,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                         .attr("class", "heat-cell")
                         .attr("x", cx)
                         .attr("y", yStart)
-                        .attr("width", cellW)
+                        .attr("width",Math.max(0, cellW))
                         .attr("height", cellH)
                         .attr("fill", colorScale(absDiff))
                         .attr("stroke", "#fff").attr("stroke-width", 1);
@@ -1875,7 +1875,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         ticks.forEach(t => {
             legendG.append("rect")
                 .attr("x", legendScale(t)).attr("y", 0)
-                .attr("width", legendW / (ticks.length - 1))
+                .attr("width",Math.max(0, legendW / (ticks.length - 1)))
                 .attr("height", legendH)
                 .attr("fill", colorScale(t))
                 .attr("opacity", 0.9);

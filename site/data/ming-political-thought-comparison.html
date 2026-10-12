@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qHkR+Xark1q6Gp7+VOXX2fgUdlXl/rLu8QG/r69aubI=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-uolsC3/bx+eSke/IzkdKOKY1Rw8oS6qyIQJwnzOMHO4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>明代政治思想对照图谱 · 详解西游记</title>
@@ -1592,7 +1592,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
 
         const axes = ["心性论", "治理术", "谏诤传统"];
         const cellW = width / 3;
-        const radius = Math.min(cellW, height) / 2 - 60;
+        const radius = Math.max(0, Math.min(cellW, height) / 2 - 60);
         const colorMing = "#c8463a";
         const colorXy = "#3a6b8c";
 
@@ -1773,7 +1773,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             g.append("rect")
                 .attr("x", x(d.dimension))
                 .attr("y", y(d.group))
-                .attr("width", x.bandwidth())
+                .attr("width",Math.max(0, x.bandwidth()))
                 .attr("height", y.bandwidth())
                 .attr("fill", colorScale(d.score))
                 .attr("stroke", "#fff")
@@ -2028,7 +2028,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             g.append("rect")
                 .attr("x", colX[n.col] - 8)
                 .attr("y", n.y)
-                .attr("width", 16)
+                .attr("width",16)
                 .attr("height", n.height)
                 .attr("fill", nodeColor(i))
                 .attr("stroke", "#fff")
@@ -2083,7 +2083,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         svg.attr("viewBox", `0 0 ${width} ${height}`);
 
         const cellW = width / 3;
-        const radius = Math.min(cellW, height) / 2 - 60;
+        const radius = Math.max(0, Math.min(cellW, height) / 2 - 60);
         const tip = d3.select("#polar-tip");
         const wrapEl = document.getElementById("polar-svg").parentElement;
 

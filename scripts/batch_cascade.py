@@ -173,7 +173,11 @@ def main():
     assert fb and h1pos != -1 and fb.start() > h1pos, (
         "里程碑首块必须位于「一、当前进度」段内（W705 教训：文件头错位块链自我强化·先修复交接文档结构再级联）"
     )
-    at = s.rfind(nl, 0, fb.start()) + 1
+    # W727 根修：rfind(nl)+1 在双字符 nl（CRLF 工作树·autocrlf=true）下少进 1 字节——
+    # 标题行尾 \r\n 被撕成裸 \r（里程碑块插到 \r 与 \n 之间）+ 块尾多出裸 \n，交接文档混行尾
+    # （W706 防线在下批 dry-run 正确拦截·fail-closed 实证）。LF 工作树 nl 单字符故 +1 恒正确，
+    # 此前批次均运行于 LF 工作树所以未暴露。+len(nl) 双形态恒公。
+    at = s.rfind(nl, 0, fb.start()) + len(nl)
     s = s[:at] + spec["milestone_block"].replace("\n", nl) + nl + s[at:]
     pm = re.search(r"> 历史概要（W(\d+) 及更早）的详细记录见", s)
     assert pm, "未找到历史概要指针"

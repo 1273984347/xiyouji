@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-2Xnm2OBFP+d3QhdmVuxLKJmQfMQxPSi95egzb9LIZMc='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-J+B39PcaRKTiwRr619UNlaVDM4IPHMT5OLBLcUwHSIY='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>三教神学干预网络图谱 · 详解西游记</title>
@@ -1756,7 +1756,7 @@ const link = svg.append("g").selectAll("line")
         svg.append("rect")
             .attr("x", pos.x - 30)
             .attr("y", pos.y - 10)
-            .attr("width", 60)
+            .attr("width",60)
             .attr("height", 20)
             .attr("fill", colorMap[name])
             .attr("rx", 3);
@@ -1779,7 +1779,7 @@ const link = svg.append("g").selectAll("line")
     svg.attr("viewBox", `0 0 ${width} ${height}`);
     const cx = width / 2;
     const cy = height / 2;
-    const r = Math.min(width, height) / 2 - 60;
+    const r = Math.max(0, Math.min(width, height) / 2 - 60);
     const axes = ["显化", "点化", "试炼", "收服", "授记"];
 
     const colorMap = {
@@ -1894,7 +1894,7 @@ const link = svg.append("g").selectAll("line")
         const labelY = y + offset;
         svg.append("rect")
             .attr("x", x - 55).attr("y", labelY - 20)
-            .attr("width", 110).attr("height", 40)
+            .attr("width",110).attr("height", 40)
             .attr("fill", "#fff8e7")
             .attr("stroke", color)
             .attr("rx", 3);

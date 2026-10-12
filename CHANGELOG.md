@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W726），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W727），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,15 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W727（2026-10-13）：SVG 保护补打与级联 CRLF 根修批
+
+> **来源**：用户 quote 拍板批次 B（W726 缺陷 1 移交项·选项 1 直接打掉）——W726 修复 fix_svg 后首跑，对 35 个可视化页补打 clientWidth 最小宽度保护，make audit 的 SVG 检查自 W447 起死盲区至此复绿；顺带根修 W726 级联 apply 暴露的 batch_cascade CRLF off-by-one（本 worktree autocrlf=true 特有触发条件）。
+> - **35 页保护补打（主任务）**：fix_svg 非 dry-run 实跑（35 页·clientWidth 类·radius 与 attr 宽度类存量已保护 0 命中）+ generate_csp.py 重注入（35 页 CSP·全站 856 页 858 哈希零漂移）+ audit dry-run 复跑 0 待改。根因回顾：W400 后新增页从未打上 const W = X.clientWidth || N 的 200px 下限保护（移动视口 clientWidth 为 0 时直接回落 960）。
+> - **级联 CRLF off-by-one 根修（W726 提交内损坏·本批发现并修复）**：W726 级联 apply 在 CRLF 工作树触发 batch_cascade L176 rfind(nl)+1 双字符 nl 少进 1 字节——里程碑块插入把标题行尾 \r\n 撕成裸 \r（块插到 \r 与 \n 之间）+ 块尾多裸 \n，交接文档混行尾；W706 混行尾防线在 W727 dry-run 正确拦截（fail-closed 实证）。根修 +1→+len(nl)（LF 工作树 nl 单字符故旧写法恒正确·此前批次均运行于 LF 工作树所以未暴露）；受损交接文档两处字节级修复（裸 CR 补 LF 复标题换行·块尾 \r\n\n 归规范块间距 \r\n\r\n）·修复后 739 CRLF 纯净。
+> - **验证**：fix_svg --dry-run 0 files rc=0 + generate_csp --check 856 页 0 漂移 + 交接文档 739 行 CRLF 纯净（混行尾 0）+ verify full 46 段 0 FAIL + pytest 296 passed + check_js_syntax 855 文件 0 违例 + lint_links（--dir docs）0 broken。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
+> - **文件**：scripts/archive/fix_svg_negative_widths.py、scripts/batch_cascade.py、交接文档.md、site/data 下 35 个可视化页（逐页列名见 file-index）、CHANGELOG.md、docs/00-导读/W批次编号对账表.md。
 
 ### W726（2026-10-13）：本地工具链修复批
 

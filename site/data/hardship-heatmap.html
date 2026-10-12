@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-La8uiSXWrxt05cHMspsY1dRH08vLuJl7P+2M42Z+3MU=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-y7ryBmSUYiDeLqxDiBrYVM8Ky1nknUsWJHrk+SlJT14=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>八十一难难度热力图 · 详解西游记</title>
@@ -1705,7 +1705,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                     .attr("class", "heat-cell")
                     .attr("x", cx)
                     .attr("y", cy)
-                    .attr("width", w)
+                    .attr("width",Math.max(0, w))
                     .attr("height", cellH)
                     .attr("fill", scoreColor(d.score))
                     .attr("stroke", "#fff")
@@ -1791,7 +1791,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("class", "bar")
             .attr("x", d => x(d.label))
             .attr("y", innerH)
-            .attr("width", x.bandwidth())
+            .attr("width",Math.max(0, x.bandwidth()))
             .attr("height", 0)
             .attr("fill", d => scoreColor(d.avg))
             .attr("stroke", "#fff")
@@ -1895,7 +1895,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("class", "cause-rect")
             .attr("x", d => x(d.data.score.toString()))
             .attr("y", d => y(d[1]))
-            .attr("width", x.bandwidth())
+            .attr("width",Math.max(0, x.bandwidth()))
             .attr("height", d => y(d[0]) - y(d[1]))
             .attr("stroke", "#fff")
             .attr("stroke-width", 1)

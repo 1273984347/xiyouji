@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-wtLyY7ra1CizGKxGMyzI8IzIl+qQcdInN8kWQTXol+s=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-xpWlzT4xwuwDWDT9wzlUQPGD3anQk5RJGEVaO1vp7e0=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪后台论 · 详解西游记</title>
@@ -2136,7 +2136,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const containerW = svg.node().clientWidth || 700;
         const W = Math.max(containerW, 500), H = 360;
         svg.attr('viewBox', `0 0 ${W} ${H}`);
-        const radius = Math.min(W, H) / 2 - 40;
+        const radius = Math.max(0, Math.min(W, H) / 2 - 40);
         const g = svg.append('g').attr('transform', `translate(${W / 2},${H / 2})`);
 
         const tooltip = makeTooltip();

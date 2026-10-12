@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1nPLERMFarW0Ihpk8xAh+xnh/zUJsdtgs+WQE774djI=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-h9J/Nx/NHjRIyz/qzJ/LEkW1mguxJ0BNXPdO9OAhqC4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>情感热力图 · 详解西游记</title>
@@ -1950,7 +1950,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr("data-scholar-band", s.key)
                 .attr("x", -8)
                 .attr("y", si * cellH - 2)
-                .attr("width", cellW * hardships.length + 16)
+                .attr("width",Math.max(0, cellW * hardships.length + 16))
                 .attr("height", cellH)
                 .attr("opacity", 0);
         });
@@ -1968,7 +1968,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .attr("data-hardship", h.idx)
                     .attr("x", hi * cellW + 1)
                     .attr("y", si * cellH + 1)
-                    .attr("width", cellW - 2)
+                    .attr("width",Math.max(0, cellW - 2))
                     .attr("height", cellH - 2)
                     .attr("rx", 3)
                     .attr("fill", sentimentColor(r.sentiment))
