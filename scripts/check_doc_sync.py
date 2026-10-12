@@ -146,6 +146,7 @@ def evaluate(inp):
     """纯函数核对：inputs 为注入真值与文档文本的 dict，返回 (issues, notes)。
 
     issues 元素以 C1:/C2:/C3:/C4: 前缀定性，供 --self-test 断言。
+    W730 重构：177 行单体拆为 C1-C5d 六个检查函数（见下方 _check_*）+ 本编排体。
     """
     issues, notes = [], []
     top = changelog_top(inp["changelog"])
@@ -154,7 +155,17 @@ def evaluate(inp):
         top = ("?", "?")
     date, wnum = top
 
-    # C1 README 抬头二元组（date+W·W711 双形态）
+    _check_c1_readme_head(inp, date, wnum, issues, notes)
+    _check_c2_jiaojie_head(inp, wnum, issues, notes)
+    _check_c3_agents_slots(inp, issues)
+    _check_c4_commit_ledger(inp, issues, notes)
+    _check_c5_aggregate_stats(inp, issues, notes)
+    _check_c5d_stats_recheck(inp, issues)
+    return issues, notes
+
+
+def _check_c1_readme_head(inp, date, wnum, issues, notes):
+    """C1：README 抬头 (W, date) == CHANGELOG 顶段（W711 双形态·行级豁免）。W730 提取。"""
     m1 = RE_README_HEAD.search(inp["readme"])
     if not m1:
         issues.append("C1: README 未解析出「当前批次 W###（日期）**：」抬头句")
@@ -166,7 +177,9 @@ def evaluate(inp):
             % (m1.group(2), m1.group(1) or m1.group(3), date, wnum)
         )
 
-    # C2 交接文档头链链首
+
+def _check_c2_jiaojie_head(inp, wnum, issues, notes):
+    """C2：交接文档头链链首 W == CHANGELOG 顶段。W730 提取。"""
     m2 = RE_JIAOJIE_HEAD.search(inp["jiaojie"])
     if not m2:
         issues.append("C2: 交接文档未解析出头链链首「- **W###」")
@@ -177,7 +190,9 @@ def evaluate(inp):
             "C2: 交接头链 W%s ≠ CHANGELOG 顶段 W%s" % (m2.group(1), wnum)
         )
 
-    # C3 AGENTS §4.2 门禁清单上限 == verify 实况最高槽位
+
+def _check_c3_agents_slots(inp, issues):
+    """C3：AGENTS §4.2 门禁清单上限 == verify_delivery 实况最高槽位。W730 提取。"""
     a_max = agents_gate_list_max(inp["agents"])
     v_max = verify_slot_max(inp["verify_src"])
     if a_max is None or v_max is None:
@@ -185,140 +200,152 @@ def evaluate(inp):
     elif a_max != v_max:
         issues.append("C3: AGENTS §4.2 门禁清单止于 %d，verify 实况最高槽位 %d（声明落后于代码实况）" % (a_max, v_max))
 
-    # C4 提交-版段对账（D2：对账表登记即豁免）
+
+def _check_c4_commit_ledger(inp, issues, notes):
+    """C4：提交-版段对账 + 认领行强制（W720）+ 级联清单（C4-e·W722）+ 文件清单入库（C4-f·W723）。
+
+    W730 提取：浅克隆早退（仅 NOTE）；对账表登记即豁免（D2）。
+    """
     if inp.get("shallow"):
         notes.append("C4: 浅克隆环境（.git/shallow），提交对账跳过（pre-commit 本地为主执行点）")
-    else:
-        reg = changelog_section_ws(inp["changelog"])
-        for p in ARCHIVE_CHANGELOGS:
-            if os.path.exists(p):
-                reg |= changelog_section_ws(open(p, encoding="utf-8").read())
-        reg |= table_registered_ws(inp["table"])
-        for s in inp["subjects"]:
-            s2 = re.sub(r"W\d{3}\s*[-–—]\s*W\d{3}", "", s)  # W711：区间形态（W001-W710 等）下限非实体号·剔除后再提取
-            for w in RE_COMMIT_W.findall(s2):
-                if w not in reg:
-                    issues.append("C4: 提交「%s」的 W%s 无 CHANGELOG 版段且未在对账表登记" % (s[:60], w))
-        # C4 认领行强制（W720·W719 流程遗漏根修）：现役段 W 号须有对账表「表格行」登记——
-        # 预留豁免 bullet（- **WXXX**：现势下一自由号…）不算认领；此前 C4 只查 W 号在登记集合，
-        # 两种形态不可区分，动工未先登记认领行不会被拦（W719 实证被豁免 bullet 救场）
-        top = changelog_top(inp["changelog"])
-        if top and ("%03d" % top[1]) not in set(RE_TABLE_ROW_W.findall(inp["table"])):
-            issues.append(
-                "C4: CHANGELOG 现役段 W%03d 无对账表认领行（动工前须先在本表登记·预留豁免 bullet 不算认领·W719 流程遗漏实例）"
-                % top[1]
-            )
-        # C4-e 级联清单强校验（W722·用户裁决 2A·W649 漏 add 族机械化）：最终提交树（HEAD 树 ∪ staged·
-        # amend 补件场景 staged 仅含新增·本门禁自证修正）⊇ 当批级联清单；
-        # 清单不存在→NOTE（手工级联批须自建清单·pitfalls git 类义务）；
-        # staged 空（CI/普通跑）→本项不适用
-        staged = inp.get("staged") or []
-        if staged:
-            mf = inp.get("cascade_manifest")
-            if mf is None:
-                notes.append("C4-e: 当批级联清单不存在（手工级联批须自建 scripts/output/_cascade_files_*.txt·pitfalls git 类义务）")
-            else:
-                _tree = set(staged) | set(inp.get("head_tree") or [])
-                _missing = [ln for ln in mf if ln and ln not in _tree]
-                if _missing:
-                    issues.append(
-                        "C4-e: %d 个级联面未入提交树（漏 add·W649）：/%s"
-                        % (len(_missing), "、/".join(_missing[:5]))
-                    )
-        # C4-f 文件清单入库对账（W723·W537③ 八批旧账清偿·手工件漏 add 三犯根修）：
-        # 现役段「文件」行的路径 token ⊆ HEAD 树 且 无工作树未提交残留——
-        # 级联清单只列级联面，手工编辑件（脚本/文档）唯此防线（W721/W722 三处漏 add 实证）；
-        # 缺「文件」行/无路径 token → NOTE（四件套缺件或形态不合规·起步策略，成文 pitfalls）
-        if top:
-            has_line, fl = file_list_paths(inp["changelog"], top[1])
-            if has_line is None:
-                notes.append("C4-f: 现役段缺「文件」行（四件套缺件·W723 起级联 precheck 强制）")
-            elif not fl:
-                notes.append("C4-f: 「文件」行无可解析路径 token（须写 repo 相对路径·见 pitfalls git 类）")
-            else:
-                _tree2 = set(inp.get("head_tree") or []) | set(inp.get("staged") or [])  # pre-commit 首提场景与 C4-e 同语义
-                _dirty = set(inp.get("dirty") or [])
-                for f in fl:
-                    if f not in _tree2:
-                        issues.append("C4-f: 文件清单 %s 未入提交树（W537③·手工件漏 add 族）" % f)
-                    elif f in _dirty:
-                        issues.append("C4-f: 文件清单 %s 有工作树未提交残留（漏 add）" % f)
+        return
+    reg = changelog_section_ws(inp["changelog"])
+    for p in ARCHIVE_CHANGELOGS:
+        if os.path.exists(p):
+            reg |= changelog_section_ws(open(p, encoding="utf-8").read())
+    reg |= table_registered_ws(inp["table"])
+    for s in inp["subjects"]:
+        s2 = re.sub(r"W\d{3}\s*[-–—]\s*W\d{3}", "", s)  # W711：区间形态（W001-W710 等）下限非实体号·剔除后再提取
+        for w in RE_COMMIT_W.findall(s2):
+            if w not in reg:
+                issues.append("C4: 提交「%s」的 W%s 无 CHANGELOG 版段且未在对账表登记" % (s[:60], w))
+    # C4 认领行强制（W720·W719 流程遗漏根修）：现役段 W 号须有对账表「表格行」登记——
+    # 预留豁免 bullet（- **WXXX**：现势下一自由号…）不算认领；此前 C4 只查 W 号在登记集合，
+    # 两种形态不可区分，动工未先登记认领行不会被拦（W719 实证被豁免 bullet 救场）
+    top = changelog_top(inp["changelog"])
+    if top and ("%03d" % top[1]) not in set(RE_TABLE_ROW_W.findall(inp["table"])):
+        issues.append(
+            "C4: CHANGELOG 现役段 W%03d 无对账表认领行（动工前须先在本表登记·预留豁免 bullet 不算认领·W719 流程遗漏实例）"
+            % top[1]
+        )
+    # C4-e 级联清单强校验（W722·用户裁决 2A·W649 漏 add 族机械化）：最终提交树（HEAD 树 ∪ staged·
+    # amend 补件场景 staged 仅含新增·本门禁自证修正）⊇ 当批级联清单；
+    # 清单不存在→NOTE（手工级联批须自建清单·pitfalls git 类义务）；
+    # staged 空（CI/普通跑）→本项不适用
+    staged = inp.get("staged") or []
+    if staged:
+        mf = inp.get("cascade_manifest")
+        if mf is None:
+            notes.append("C4-e: 当批级联清单不存在（手工级联批须自建 scripts/output/_cascade_files_*.txt·pitfalls git 类义务）")
+        else:
+            _tree = set(staged) | set(inp.get("head_tree") or [])
+            _missing = [ln for ln in mf if ln and ln not in _tree]
+            if _missing:
+                issues.append(
+                    "C4-e: %d 个级联面未入提交树（漏 add·W649）：/%s"
+                    % (len(_missing), "、/".join(_missing[:5]))
+                )
+    # C4-f 文件清单入库对账（W723·W537③ 八批旧账清偿·手工件漏 add 三犯根修）：
+    # 现役段「文件」行的路径 token ⊆ HEAD 树 且 无工作树未提交残留——
+    # 级联清单只列级联面，手工编辑件（脚本/文档）唯此防线（W721/W722 三处漏 add 实证）；
+    # 缺「文件」行/无路径 token → NOTE（四件套缺件或形态不合规·起步策略，成文 pitfalls）
+    if top:
+        has_line, fl = file_list_paths(inp["changelog"], top[1])
+        if has_line is None:
+            notes.append("C4-f: 现役段缺「文件」行（四件套缺件·W723 起级联 precheck 强制）")
+        elif not fl:
+            notes.append("C4-f: 「文件」行无可解析路径 token（须写 repo 相对路径·见 pitfalls git 类）")
+        else:
+            _tree2 = set(inp.get("head_tree") or []) | set(inp.get("staged") or [])  # pre-commit 首提场景与 C4-e 同语义
+            _dirty = set(inp.get("dirty") or [])
+            for f in fl:
+                if f not in _tree2:
+                    issues.append("C4-f: 文件清单 %s 未入提交树（W537③·手工件漏 add 族）" % f)
+                elif f in _dirty:
+                    issues.append("C4-f: 文件清单 %s 有工作树未提交残留（漏 add）" % f)
 
-    # C5 聚合数字对账（W703·用户方案 A+C 修正形态）：句式白名单 × 现役叙述面 vs stats.json
+
+def _check_c5_aggregate_stats(inp, issues, notes):
+    """C5 聚合数字对账 + C5b 实体标记 + C5c 裸数字报告（W703/W704）。
+
+    W730 提取：句式白名单 × 现役叙述面（README/STRUCTURE/AGENTS/项目说明/CONTRIBUTING +
+    CHANGELOG 口径块）vs stats.json；标记键未登记/数字失配 fail-closed；裸聚合数字 NOTE。
+    stats 缺失 fail-closed 早退（原 else 分支等价）。
+    """
     stats = inp.get("stats")
     if not stats:
         issues.append("C5: scripts/output/stats.json 缺失或不可解析——先跑 python scripts/stats.py（fail-closed）")
-    else:
-        scans = [("CHANGELOG 口径块", ln) for ln in RE_CHANGELOG_SCOPE.findall(inp["changelog"])]
-        for key in C5_DOC_NAMES:
-            text = inp[key]
-            if key == "agents":
-                cut = text.find(chr(10) + "*本文件由")  # 版本脚注=历史沿革记录（W514 时点实况等）·不在扫描域
-                if cut != -1:
-                    text = text[:cut]
-            for i, ln in enumerate(text.splitlines(), 1):
-                scans.append(("%s:%d" % (C5_DOC_NAMES[key], i), ln))
-        for where, ln in scans:
-            if EXEMPT_MARK in ln:
+        return
+    scans = [("CHANGELOG 口径块", ln) for ln in RE_CHANGELOG_SCOPE.findall(inp["changelog"])]
+    for key in C5_DOC_NAMES:
+        text = inp[key]
+        if key == "agents":
+            cut = text.find(chr(10) + "*本文件由")  # 版本脚注=历史沿革记录（W514 时点实况等）·不在扫描域
+            if cut != -1:
+                text = text[:cut]
+        for i, ln in enumerate(text.splitlines(), 1):
+            scans.append(("%s:%d" % (C5_DOC_NAMES[key], i), ln))
+    for where, ln in scans:
+        if EXEMPT_MARK in ln:
+            continue
+        for pat, keys, ctx in RE_STATS_PATTERNS:
+            m = pat.search(ln)
+            if not m or (ctx and ctx not in ln.lower()):
                 continue
-            for pat, keys, ctx in RE_STATS_PATTERNS:
-                m = pat.search(ln)
-                if not m or (ctx and ctx not in ln.lower()):
-                    continue
-                for gi, key_name in enumerate(keys, 1):
-                    want = stats_value(stats, key_name)
-                    got = int(m.group(gi))
-                    if want is None:
-                        issues.append(
-                            "C5: stats.json 缺键 %s（%s 命中「%s」）——新聚合量须先登记 scripts/stats.py"
-                            % (key_name, where, m.group(0))
-                        )
-                    elif got != want:
-                        issues.append(
-                            "C5: %s「%s」=%d ≠ stats.json %s=%d（跑 python scripts/stats.py --w <批号> 刷新或修正文档）"
-                            % (where, m.group(0), got, key_name, want)
-                        )
-
-        # C5b 数字实体标记对账（W704）：<!--stats:KEY--> 前置数字 == stats.json[KEY].value；键未登记 fail-closed
-        # C5c 裸聚合数字（报告型 NOTE·标记/句式覆盖位之外·起步策略收敛后转 FAIL）
-        bare_hits = []
-        for where, ln in scans:
-            if EXEMPT_MARK in ln:
-                continue
-            covered = set()
-            for pat, _keys, ctx in RE_STATS_PATTERNS:
-                for m in pat.finditer(ln):
-                    if not ctx or ctx in ln.lower():
-                        covered.update(range(m.start(), m.end()))
-            for m in RE_STATS_MARK.finditer(ln):
-                covered.update(range(m.start(), m.end()))
-                key_name = m.group(2)
+            for gi, key_name in enumerate(keys, 1):
                 want = stats_value(stats, key_name)
-                got = int(m.group(1))
+                got = int(m.group(gi))
                 if want is None:
-                    issues.append("C5b: %s 标记 <!--stats:%s--> 键未登记——先登记 scripts/stats.py META" % (where, key_name))
+                    issues.append(
+                        "C5: stats.json 缺键 %s（%s 命中「%s」）——新聚合量须先登记 scripts/stats.py"
+                        % (key_name, where, m.group(0))
+                    )
                 elif got != want:
                     issues.append(
-                        "C5b: %s 标记数字 %d ≠ stats.json %s=%s（跑 python scripts/stats.py --w <批号> 刷新）"
-                        % (where, got, key_name, want)
+                        "C5: %s「%s」=%d ≠ stats.json %s=%d（跑 python scripts/stats.py --w <批号> 刷新或修正文档）"
+                        % (where, m.group(0), got, key_name, want)
                     )
-            for m in RE_BARE_AGG.finditer(ln):
-                if m.start() not in covered:
-                    bare_hits.append("%s「%s」" % (where, m.group(0)))
-        if bare_hits:
-            notes.append(
-                "C5c: 裸聚合数字 %d 处未实体化（报告型·前 20）：%s%s"
-                % (len(bare_hits), "；".join(bare_hits[:20]), "…" if len(bare_hits) > 20 else "")
-            )
 
-    # C5d stats 实算对账（W718·挑刺第十六次升格）：stats.py --check（stats.json vs 磁盘实算）零差异——
-    # 「检查过」≠「没检查」的机器背书（W715 methodology 漂移漏 --w 实例的防线·0.3s 廉价 subprocess 恒跑）
+    # C5b 数字实体标记对账（W704）：<!--stats:KEY--> 前置数字 == stats.json[KEY].value；键未登记 fail-closed
+    # C5c 裸聚合数字（报告型 NOTE·标记/句式覆盖位之外·起步策略收敛后转 FAIL）
+    bare_hits = []
+    for where, ln in scans:
+        if EXEMPT_MARK in ln:
+            continue
+        covered = set()
+        for pat, _keys, ctx in RE_STATS_PATTERNS:
+            for m in pat.finditer(ln):
+                if not ctx or ctx in ln.lower():
+                    covered.update(range(m.start(), m.end()))
+        for m in RE_STATS_MARK.finditer(ln):
+            covered.update(range(m.start(), m.end()))
+            key_name = m.group(2)
+            want = stats_value(stats, key_name)
+            got = int(m.group(1))
+            if want is None:
+                issues.append("C5b: %s 标记 <!--stats:%s--> 键未登记——先登记 scripts/stats.py META" % (where, key_name))
+            elif got != want:
+                issues.append(
+                    "C5b: %s 标记数字 %d ≠ stats.json %s=%s（跑 python scripts/stats.py --w <批号> 刷新）"
+                    % (where, got, key_name, want)
+                )
+        for m in RE_BARE_AGG.finditer(ln):
+            if m.start() not in covered:
+                bare_hits.append("%s「%s」" % (where, m.group(0)))
+    if bare_hits:
+        notes.append(
+            "C5c: 裸聚合数字 %d 处未实体化（报告型·前 20）：%s%s"
+            % (len(bare_hits), "；".join(bare_hits[:20]), "…" if len(bare_hits) > 20 else "")
+        )
+
+
+def _check_c5d_stats_recheck(inp, issues):
+    """C5d：stats.py --check（stats.json vs 磁盘实算）零差异背书（W718）。W730 提取。"""
     if not inp.get("stats_check_ok", False):
         issues.append(
             "C5d: stats.json 与磁盘实算漂移（%s）——跑 python scripts/stats.py --w <批号> 刷新"
             % inp.get("stats_check_tail", "stats --check 未通过")
         )
-    return issues, notes
 
 
 def _load_stats():
@@ -327,6 +354,22 @@ def _load_stats():
             return json.load(f)
     except (OSError, ValueError):
         return None
+
+
+def _git_output_lines(args, strip=True, timeout=30):
+    """运行 git 命令并返回 stdout 行列表（strip=True 逐行剥空/去空行；False 原样保留）；
+    非零退出或异常返回 None（W730 提取：gather 内三处同构 subprocess 块合一）。"""
+    try:
+        r = subprocess.run(["git", "-c", "core.quotePath=false"] + args,
+                           cwd=ROOT, capture_output=True, text=True,
+                           encoding="utf-8", errors="ignore", timeout=timeout)
+    except Exception:  # noqa: BLE001
+        return None
+    if r.returncode != 0:
+        return None
+    if strip:
+        return [ln.strip() for ln in (r.stdout or "").splitlines() if ln.strip()]
+    return (r.stdout or "").splitlines()
 
 
 def gather():
@@ -369,35 +412,18 @@ def gather():
     except (OSError, subprocess.TimeoutExpired) as exc:
         inputs["stats_check_ok"] = False
         inputs["stats_check_tail"] = "stats --check 执行失败: %s" % exc
-    try:
-        r = subprocess.run(  # W722 C4-e：pre-commit staged 集合（CI/普通跑为空→C4-e 不适用）
-            ["git", "-c", "core.quotePath=false", "diff", "--cached", "--name-only"],
-            cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="ignore", timeout=30,
-        )
-        inputs["staged"] = [ln.strip() for ln in (r.stdout or "").splitlines() if ln.strip()] if r.returncode == 0 else []
-    except Exception:  # noqa: BLE001
-        inputs["staged"] = []
-    try:
-        r = subprocess.run(  # W722 C4-e 语义修正：amend 补件场景 staged 仅含新增，最终提交树=HEAD 树 ∪ staged
-            ["git", "-c", "core.quotePath=false", "ls-tree", "-r", "HEAD", "--name-only"],
-            cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="ignore", timeout=30,
-        )
-        inputs["head_tree"] = [ln.strip() for ln in (r.stdout or "").splitlines() if ln.strip()] if r.returncode == 0 else []
-    except Exception:  # noqa: BLE001
-        inputs["head_tree"] = []
-    try:
-        r = subprocess.run(  # W723 C4-f：工作树未提交残留（porcelain 第二列非空或 ??）
-            ["git", "-c", "core.quotePath=false", "status", "--porcelain"],
-            cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="ignore", timeout=30,
-        )
-        _dirty = []
-        if r.returncode == 0:
-            for ln in (r.stdout or "").splitlines():
-                if len(ln) > 3 and (ln[1] != " " or ln[:2] == "??"):
-                    _dirty.append(ln[3:].strip().strip('"'))
-        inputs["dirty"] = _dirty
-    except Exception:  # noqa: BLE001
-        inputs["dirty"] = []
+    # W722/W723 git 探测（W730 去重）：staged（C4-e）/ HEAD 树（C4-e 补件语义）/ 工作树残留（C4-f）
+    staged_lines = _git_output_lines(["diff", "--cached", "--name-only"])
+    inputs["staged"] = staged_lines if staged_lines is not None else []
+    head_lines = _git_output_lines(["ls-tree", "-r", "HEAD", "--name-only"])
+    inputs["head_tree"] = head_lines if head_lines is not None else []
+    raw_status = _git_output_lines(["status", "--porcelain"], strip=False)
+    _dirty = []
+    if raw_status is not None:
+        for ln in raw_status:
+            if len(ln) > 3 and (ln[1] != " " or ln[:2] == "??"):
+                _dirty.append(ln[3:].strip().strip('"'))
+    inputs["dirty"] = _dirty
     try:
         _top = changelog_top(inputs["changelog"])
         _mp = os.path.join(ROOT, "scripts", "output", "_cascade_files_W%03d.txt" % _top[1]) if _top else None

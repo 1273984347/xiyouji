@@ -207,6 +207,86 @@ def heuristic_metrics(html_text):
 # W267 · RUM 真实用户监控·解析浏览器端采集数据
 # ---------------------------------------------------------------------------
 
+def _try_read_rum(rum_source):
+    """读取/归一化 RUM 输入为 (data, error_dict)（W730 提取自 collect_rum_metrics）。
+
+    文件路径读取 JSON；已解析的 dict/list 直接返回；读取失败返回错误 dict（error 键）。
+    """
+    if isinstance(rum_source, (str, Path)):
+        rum_path = Path(rum_source)
+        if not rum_path.exists():
+            return None, {"error": f"RUM 数据文件不存在: {rum_path}", "events": 0,
+                          "pages": {}, "aggregate": {}, "alerts": []}
+        try:
+            data = json.loads(rum_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            return None, {"error": f"RUM 数据 JSON 解析失败: {exc}", "events": 0,
+                          "pages": {}, "aggregate": {}, "alerts": []}
+        return data, None
+    return rum_source, None
+
+
+def _normalize_rum_events(data):
+    """归一化 RUM 输入为事件列表；不支持的形态返回 None（W730 提取）。"""
+    if isinstance(data, dict) and "events" in data and isinstance(data["events"], list):
+        return data["events"]
+    if isinstance(data, list):
+        return data
+    if isinstance(data, dict):
+        return [data]
+    return None
+
+
+def _percentile75(values):
+    """Core Web Vitals 官方百分位 P75（空列表 None·四舍五入 4 位）（W730 提取）。"""
+    if not values:
+        return None
+    ordered = sorted(values)
+    idx = max(0, int(len(ordered) * 0.75) - 1)
+    return round(ordered[idx], 4)
+
+
+def _bucket_rum_events(events):
+    """按页归集原始指标样本并统计样本数（W730 提取）。"""
+    pages = {}
+    for ev in events:
+        if not isinstance(ev, dict):
+            continue
+        metrics = ev.get("metrics", {})
+        page = ev.get("page", "unknown")
+        bucket = pages.setdefault(page, {
+            "lcp": [], "cls": [], "inp": [], "tbt": [], "fcp": [], "samples": 0,
+        })
+        for key in ("lcp", "cls", "inp", "tbt", "fcp"):
+            val = metrics.get(key)
+            if isinstance(val, (int, float)) and val >= 0:
+                bucket[key].append(val)
+        bucket["samples"] += 1
+    return pages
+
+
+def _summarize_rum_p75(pages):
+    """计算全站 aggregate P75 与逐页 P75 汇总（W730 提取）。"""
+    aggregate = {}
+    for key in ("lcp", "cls", "inp", "tbt", "fcp"):
+        all_vals = []
+        for bucket in pages.values():
+            all_vals.extend(bucket[key])
+        aggregate[f"{key}_p75"] = _percentile75(all_vals)
+
+    page_summary = {}
+    for page, bucket in pages.items():
+        page_summary[page] = {
+            "lcp": _percentile75(bucket["lcp"]),
+            "cls": _percentile75(bucket["cls"]),
+            "inp": _percentile75(bucket["inp"]),
+            "tbt": _percentile75(bucket["tbt"]),
+            "fcp": _percentile75(bucket["fcp"]),
+            "samples": bucket["samples"],
+        }
+    return aggregate, page_summary
+
+
 def collect_rum_metrics(rum_source):
     """解析 site/js/rum.js 采集并发送至 /api/rum 的 RUM 数据。
 
@@ -230,72 +310,21 @@ def collect_rum_metrics(rum_source):
           "aggregate": {lcp_p75, cls_p75, inp_p75, tbt_p75, fcp_p75},
           "alerts": [...]           # 触发的警报（委托 check_alerts）
         }
-    """
-    if isinstance(rum_source, (str, Path)):
-        rum_path = Path(rum_source)
-        if not rum_path.exists():
-            return {"error": f"RUM 数据文件不存在: {rum_path}", "events": 0,
-                    "pages": {}, "aggregate": {}, "alerts": []}
-        try:
-            data = json.loads(rum_path.read_text(encoding="utf-8"))
-        except json.JSONDecodeError as exc:
-            return {"error": f"RUM 数据 JSON 解析失败: {exc}", "events": 0,
-                    "pages": {}, "aggregate": {}, "alerts": []}
-    else:
-        data = rum_source
 
-    # 归一化为事件列表
-    if isinstance(data, dict) and "events" in data and isinstance(data["events"], list):
-        events = data["events"]
-    elif isinstance(data, list):
-        events = data
-    elif isinstance(data, dict):
-        events = [data]
-    else:
+    W730 重构：98 行单体拆为 _try_read_rum（读取）/ _normalize_rum_events（归一）/
+    _bucket_rum_events（按页归集）/ _summarize_rum_p75（P75 汇总）+ 本函数（编排）。
+    """
+    data, read_error = _try_read_rum(rum_source)
+    if read_error is not None:
+        return read_error
+
+    events = _normalize_rum_events(data)
+    if events is None:
         return {"error": "RUM 数据格式不被支持（需 dict/list/events 数组）",
                 "events": 0, "pages": {}, "aggregate": {}, "alerts": []}
 
-    pages = {}
-    for ev in events:
-        if not isinstance(ev, dict):
-            continue
-        metrics = ev.get("metrics", {})
-        page = ev.get("page", "unknown")
-        bucket = pages.setdefault(page, {
-            "lcp": [], "cls": [], "inp": [], "tbt": [], "fcp": [], "samples": 0,
-        })
-        for key in ("lcp", "cls", "inp", "tbt", "fcp"):
-            val = metrics.get(key)
-            if isinstance(val, (int, float)) and val >= 0:
-                bucket[key].append(val)
-        bucket["samples"] += 1
-
-    # 计算每页 P75（Core Web Vitals 官方百分位）
-    def _p75(values):
-        if not values:
-            return None
-        ordered = sorted(values)
-        idx = max(0, int(len(ordered) * 0.75) - 1)
-        return round(ordered[idx], 4)
-
-    aggregate = {}
-    for key in ("lcp", "cls", "inp", "tbt", "fcp"):
-        all_vals = []
-        for bucket in pages.values():
-            all_vals.extend(bucket[key])
-        aggregate[f"{key}_p75"] = _p75(all_vals)
-
-    # 汇总每页 P75 用于警报判定
-    page_summary = {}
-    for page, bucket in pages.items():
-        page_summary[page] = {
-            "lcp": _p75(bucket["lcp"]),
-            "cls": _p75(bucket["cls"]),
-            "inp": _p75(bucket["inp"]),
-            "tbt": _p75(bucket["tbt"]),
-            "fcp": _p75(bucket["fcp"]),
-            "samples": bucket["samples"],
-        }
+    pages = _bucket_rum_events(events)
+    aggregate, page_summary = _summarize_rum_p75(pages)
 
     alerts = check_alerts(page_summary)
 

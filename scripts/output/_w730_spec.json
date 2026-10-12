@@ -1,0 +1,17 @@
+{
+  "batch": "W730",
+  "date": "2026-10-13",
+  "title": "W730 门禁脚本长函数收尾重构批",
+  "desc": "门禁脚本长函数收尾重构",
+  "head_entry": "2026-10-13（W730 门禁脚本长函数收尾重构批）",
+  "head_sentence": "拆两门禁长函数并全量验证",
+  "changelog_body": "\n\n> **来源**：用户令「第三批候选按同一方法论推进」（承接 W728 方案档 §七 / W729 报告末条）。动工前 fetch origin 确认无撞号（origin/main 仍 W727·W730 认领）。\n> - **范围裁决（证据版·AST 度量）**：候选池三向比较——a11y 剩余最长仅 74 行（check_parsing·扫描器固有形态）排除；JS 侧最大非一次性文件仅 531 行且验证需 Playwright 重环境（抖动口径）排除；选定「两挂载门禁 + 一名命名候选」：check_doc_sync.py（evaluate 177 行·第 31 门禁·自带 self-test 18 例）+ lint_links.py（main 125 行·docs 链接门禁）+ perf_monitor.collect_rum_metrics（98 行·W729 遗留命名候选）。\n> - **T1 check_doc_sync.py（592→618 行）**：evaluate 177→20 行编排体（拆 _check_c1_readme_head/_check_c2_jiaojie_head/_check_c3_agents_slots/_check_c4_commit_ledger/_check_c5_aggregate_stats/_check_c5d_stats_recheck 六个检查函数——每条检查消息逐字节保留·fail-closed 早退语义等价）；gather 82→65（提取 _git_output_lines 合并 staged/head_tree/status 三处同构 git subprocess 块·git log 块因错误捕获语义独特保留原样）；**run_self_test 146 行经审计判定已表驱动（逻辑约 30 行·116 行为测试数据表）不动——防过度重构**。\n> - **T2 lint_links.py（442→473 行）**：main 125→33 行编排体（拆 _parse_args 参数构建/_resolve_scan_dir 目录解析与退出/_collect_scan_files 收集过滤/_process_file 单文件处理返回三计数——逐行打印序逐字节保留·args.fix→do_fix 参数化）。\n> - **T3 perf_monitor.py（1085→1085 行·净零）**：collect_rum_metrics 98→约 40 行编排体（拆 _try_read_rum 读取早退/_normalize_rum_events 形态归一/_bucket_rum_events 按页归集/_summarize_rum_p75 双 P75 汇总）；文件最长函数降至 88 行（compare_trend）。\n> - **验证（全绿）**：check_doc_sync 直跑输出 + --self-test 18/18 输出**双逐字节一致**；lint_links --dir docs 全量输出逐字节一致（5190 链接·0 broken）；collect_rum_metrics 11 形态合成 fixture 快照逐字节一致（正常/events 数组/裸数组/坏 JSON/缺失文件/内联 dict/内联 list/空 list/空 dict/非 dict 类型/不存在路径）+集成路径实测（--rum 数据流：events=5·2 页·alerts=2·aggregate 五键齐）；pytest 296 passed；ruff scripts/ 全量 0。\n> - **方法论沉淀（本批新增）**：「拆分前先审计是否已达标」——run_self_test 146 行体量看着大、实为既有表驱动（数据表≠逻辑），判定不动；同构块合并须逐块核对错误语义（git log 块 error 捕获与其余三块不同→不强行统一）。\n> - **状态**：已落地（级联+提交后以 gh run list 为准）。\n> - **文件**：scripts/check_doc_sync.py、scripts/lint_links.py、scripts/perf_monitor.py、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、交接文档.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、scripts/output/file-index.md。\n",
+  "milestone_block": "- **W730 门禁脚本长函数收尾重构批**：\n  - check_doc_sync evaluate 177→20（六个检查函数）+gather 去重（_git_output_lines）·直跑+self-test 双逐字节一致\n  - lint_links main 125→33（四提取）·5190 链接输出逐字节一致；perf collect_rum_metrics 98→编排体·RUM 11 形态快照一致\n  - 方法论：拆分前先审计是否已达标（self-test 已表驱动不动）+同构块合并逐块核对错误语义\n",
+  "agents_note": "2026-10-13（W730）门禁脚本长函数收尾重构批（用户令第三批候选按同方法论推进）：范围证据版裁决三目标（check_doc_sync 与 lint_links 两挂载门禁加 perf collect_rum_metrics 命名候选·排除 a11y 剩余 74 行固有形态与 JS 侧重环境）加 evaluate 拆六个检查函数加 gather 提取 _git_output_lines 三块合一加 lint_links main 拆四助手加 collect_rum_metrics 拆四助手；验证 dsync 直跑与 self-test 双逐字节一致加 links 全量输出一致加 RUM 快照 11 形态一致加集成路径加 pytest 296 加 ruff 0；方法论新增=拆分前审计是否已达标（self-test 表驱动判定不动）加同构块合并逐块核对错误语义",
+  "file_index_rows": [
+    "| scripts/check_doc_sync.py | W730 | evaluate 177→20（拆 _check_c1..c5d 六检查函数）+gather 提取 _git_output_lines（三块合一） |",
+    "| scripts/lint_links.py | W730 | main 125→33（拆 _parse_args/_resolve_scan_dir/_collect_scan_files/_process_file） |",
+    "| scripts/perf_monitor.py | W730 | collect_rum_metrics 98→编排体（拆 _try_read_rum/_normalize_rum_events/_bucket_rum_events/_summarize_rum_p75） |",
+    "| docs/00-导读/W批次编号对账表.md | W730 | W730 认领行登记 |"
+  ]
+}
