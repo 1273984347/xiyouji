@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-T046T/Y/7E2AJZc33zS8zmmE4HUA2h7US4mSNZ9SEMc=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-p/Cg6svgHgH1BWGfUKAcxoL64NEUmKvuqZwyJV8TnuI=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>详解西游记 · 人物出场频次与戏份分析 · 详解西游记</title>
@@ -1677,13 +1677,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .on("mousemove", tipMove)
             .on("mouseout", tipHide);
         if (animate) {
-            barSel.attr("width", 0)
+            barSel.attr("width",0)
                 .transition().duration(500)
                 .delay((d, i) => 200 + Math.min(i * 8, 400))
                 .ease(d3.easeCubicOut)
-                .attr("width", d => Math.max(0, x(d.appearances)));
+                .attr("width",d => Math.max(0, x(d.appearances)));
         } else {
-            barSel.attr("width", d => Math.max(0, x(d.appearances)));
+            barSel.attr("width",d => Math.max(0, x(d.appearances)));
         }
 
         // 数值标签：出场回数——墨韵 W460：条形就位后级联浮现

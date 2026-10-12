@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-YBn7R+h2XkSCMshLqhOeV3ccbhYtJ+/uQ5Ij403BAy0='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-GnBbHMgzCgHvY3RRgjFBxaS6qvQpH5Ac8SZbXsMBwYQ='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪生态网络图谱 · 详解西游记</title>
@@ -1882,7 +1882,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .data(graph.nodes)
             .join("rect")
             .attr("x", d => d.x0).attr("y", d => d.y0)
-            .attr("width", d => d.x1 - d.x0).attr("height", d => d.y1 - d.y0)
+            .attr("width",d => Math.max(0, d.x1 - d.x0)).attr("height", d => d.y1 - d.y0)
             .attr("fill", d => d.__color).attr("opacity", 0.85).attr("rx", 4)
             .append("title").text(d => d.name + "(" + d.value + ")");
 
@@ -1905,7 +1905,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const svg = d3.select("#radar-svg");
         const width = svg.node().clientWidth;
         const height = 500;
-        const cx = width / 2, cy = height / 2, R = Math.min(width, height) / 2 - 60;
+        const cx = width / 2, cy = height / 2, R = Math.max(0, Math.min(width, height) / 2 - 60);
         const dims = ["habitat", "diet", "sociality", "magic", "ending"];
         const dimLabels = ["栖息地", "食性", "群居度", "法力", "结局"];
         const maxV = 10;
@@ -1945,7 +1945,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         // 图例
         const legendG = svg.append("g").attr("transform", `translate(${width - 160}, 20)`);
         EMBEDDED_DATA.radar.forEach((m, idx) => {
-            legendG.append("rect").attr("x", 0).attr("y", idx * 18).attr("width", 12).attr("height", 12)
+            legendG.append("rect").attr("x", 0).attr("y", idx * 18).attr("width",12).attr("height", 12)
                 .attr("fill", colors[idx % 10]).attr("opacity", 0.7);
             legendG.append("text").attr("x", 18).attr("y", idx * 18 + 10).attr("font-size", "10px").style("fill", "var(--ink)")
                 .text(`${m.monster} (${m.strategy})`);

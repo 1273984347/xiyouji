@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-oY65Hn2Q35LRcrd++ybPvJpFeKnwQeYHeNw+ygcMgj8=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-eZARbQ4o1Zdw5Jf726l+p3FOv6FMosGULq6GUoAsGcM=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>回目结构图谱 · 详解西游记</title>
@@ -1612,7 +1612,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .attr("class", "heatmap-cell")
                     .attr("x", j * cellW)
                     .attr("y", i * cellH)
-                    .attr("width", cellW - 1)
+                    .attr("width",Math.max(0, cellW - 1))
                     .attr("height", cellH - 1)
                     .attr("fill", colorScale(matrix[i][j]))
                     .on("mouseover", function(event) {
@@ -1695,7 +1695,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("class", "bar")
             .attr("x", d => x(d.chapter))
             .attr("y", d => y(d.words))
-            .attr("width", x.bandwidth())
+            .attr("width",Math.max(0, x.bandwidth()))
             .attr("height", d => innerH - y(d.words))
             .attr("fill", d => {
                 if (d.words === maxWords) return COLOR_ACCENT;

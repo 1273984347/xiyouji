@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Q3KfVJsZh6QcBxb2Qs3Uzo8kloku5ihxO1iUIYwfKB4='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-nLhhoSZikKagXNce4cxy/k7IAOifnzCZJkH9DANZ8Gs='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>人物出场时间线可视化 · 详解西游记</title>
@@ -1498,7 +1498,7 @@ function renderHeatmap() {
       const isPresent = present && (ch % 5 !== 0 || char.name === "孙悟空");
       g.append("rect")
         .attr("x", x(ch)).attr("y", y(char.name))
-        .attr("width", x.bandwidth()).attr("height", y.bandwidth())
+        .attr("width",Math.max(0, x.bandwidth())).attr("height", y.bandwidth())
         .attr("fill", isPresent ? "var(--accent)" : "var(--paper)")
         .attr("stroke", "var(--line)").attr("stroke-width", 0.3);
     });
@@ -1552,7 +1552,7 @@ function renderFirstAppear() {
   g.selectAll(".bar").data(data).enter().append("rect")
     .attr("class","bar")
     .attr("x", 0).attr("y", d=>y(d.name))
-    .attr("width", d=>x(d.chapter)).attr("height", y.bandwidth())
+    .attr("width",d=>Math.max(0, x(d.chapter))).attr("height", y.bandwidth())
     .attr("fill", "var(--accent-2)").attr("opacity", 0.7);
   g.selectAll(".label").data(data).enter().append("text")
     .attr("class","label")
@@ -1576,7 +1576,7 @@ function renderExit() {
   g.selectAll(".bar").data(data).enter().append("rect")
     .attr("class","bar")
     .attr("x", d=>x(d.start)).attr("y", d=>y(d.name))
-    .attr("width", d=>x(d.end)-x(d.start)+5).attr("height", y.bandwidth())
+    .attr("width",d=>Math.max(0, x(d.end)-x(d.start)+5)).attr("height", y.bandwidth())
     .attr("fill", d=>EMBEDDED.exit_colors[d.exit_type])
     .style("cursor","pointer")
     .append("title").text(d=>`${d.name}: 第${d.start}-${d.end}回 (${d.exit_type})`);

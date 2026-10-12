@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-iY+v7bp+Sk+Oj9v+Meh0I04eKT4vtiXzs3VHR90mPTk=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-dvjfqG2BWZUfjE39YpFQcNEoDGL5KThBSF0uVx0JkqI=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪能力雷达图 · 详解西游记</title>
@@ -1631,7 +1631,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         svg.attr("viewBox", `0 0 ${width} ${height}`);
 
         const cx = width / 2, cy = height / 2 + 10;
-        const radius = Math.min(width, height) / 2 - 80;
+        const radius = Math.max(0, Math.min(width, height) / 2 - 80);
         const levels = 10;
 
         // 网格圆
@@ -1809,7 +1809,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 g.append("rect")
                     .attr("x", x0(d.dimension) + x1(k))
                     .attr("y", innerH)
-                    .attr("width", x1.bandwidth())
+                    .attr("width",Math.max(0, x1.bandwidth()))
                     .attr("height", 0)
                     .attr("fill", colors[k])
                     .attr("stroke", "#fff")
@@ -1857,9 +1857,9 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         });
 
         // 图例
-        g.append("rect").attr("x", innerW - 140).attr("y", 0).attr("width", 14).attr("height", 14).style("fill", "var(--chart-1)");
+        g.append("rect").attr("x", innerW - 140).attr("y", 0).attr("width",14).attr("height", 14).style("fill", "var(--chart-1)");
         g.append("text").attr("x", innerW - 120).attr("y", 11).style("font-size", "0.82rem").style("fill", "var(--ink)").text("最高分");
-        g.append("rect").attr("x", innerW - 70).attr("y", 0).attr("width", 14).attr("height", 14).style("fill", "var(--chart-2)");
+        g.append("rect").attr("x", innerW - 70).attr("y", 0).attr("width",14).attr("height", 14).style("fill", "var(--chart-2)");
         g.append("text").attr("x", innerW - 50).attr("y", 11).style("font-size", "0.82rem").style("fill", "var(--ink)").text("平均分");
     }
 
@@ -2069,7 +2069,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         leftNodes.forEach((n, i) => {
             g.append("rect")
                 .attr("x", n.x).attr("y", n.y)
-                .attr("width", n.w).attr("height", n.h)
+                .attr("width",Math.max(0, n.w)).attr("height", n.h)
                 .attr("fill", ORIGIN_COLORS[i])
                 .attr("stroke", "#fff")
                 .attr("stroke-width", 1);
@@ -2093,7 +2093,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         rightNodes.forEach((n, i) => {
             g.append("rect")
                 .attr("x", n.x).attr("y", n.y)
-                .attr("width", n.w).attr("height", n.h)
+                .attr("width",Math.max(0, n.w)).attr("height", n.h)
                 .attr("fill", END_COLORS[i])
                 .attr("stroke", "#fff")
                 .attr("stroke-width", 1);

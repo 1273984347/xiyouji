@@ -11,6 +11,49 @@
 ---
 
 
+## W727 SVG 保护补打与级联 CRLF 根修批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/archive/fix_svg_negative_widths.py | W727 | 35 页 clientWidth 保护补打（W726 修复后首跑·radius/attr 类存量已保护 0 命中） |
+| scripts/batch_cascade.py | W727 | L176 rfind(nl)+1 → +len(nl（CRLF 工作树 off-by-one 根修·W726 提交内交接文档混行尾损坏源） |
+| 交接文档.md | W727 | W726 级联 CRLF 损坏两处字节级修复（裸 CR 补 LF·块尾裸 LF 归规范块间距） |
+| site/data/chapter-stats.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/chapter-structure-graph.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/character-appearance.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/character-presence-timeline.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/customs-pass-route.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/dialogue-sentiment.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/emotional-heatmap.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/four-dimensional-research-network.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/four-heavenly-kings-artifacts.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/graph-explorer.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/guanyin-six-roles-network.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/hardship-difficulty-heatmap.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/hardship-heatmap.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/heaven-power-network.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/intertextuality-network.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/journey-map-interactive.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/journey-spacetime.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/mbti-evolution.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/ming-political-thought-comparison.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/monster-background.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/monster-capability-radar.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/monster-ecology-network.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/monster-female-network.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/monster-hierarchy-network.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/monster-victims-network.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/narrative-rhythm-curve.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/narratology-12d-network.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/narratology-16d-network.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/pilgrim-team-dynamic-network.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/pilgrim-team-psychology-arc.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/poetry-rhythm-analysis.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/relationships.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/six-senses-narratology-network.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/theological-intervention-network.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+| site/data/underworld-power-network.html | W727 | clientWidth 最小宽度保护补打（200px 下限·CSP 哈希随重注入更新） |
+
 ## W726 本地工具链修复批（2026-10-13）
 
 | 文件 | W | 说明 |

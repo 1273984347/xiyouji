@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-I2fFRahcf4mKNTvNsk39jCoLGK3KJm6gtJ/P4AHe8is=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-D8sFAgcTyKfe8WzvbobvKql7/kKAjm9yymeI6G0/ZYs=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>十六维叙事学关系图谱 · 详解西游记</title>
@@ -2281,7 +2281,7 @@ function renderRadar(dimensions) {
 
   const cx = width / 2;
   const cy = height / 2 + 10;
-  const radius = Math.min(width, height) / 2 - 120;
+  const radius = Math.max(0, Math.min(width, height) / 2 - 120);
   const levels = 10;
 
   const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
