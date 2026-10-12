@@ -6,8 +6,9 @@
   C1 README 抬头「当前版本 vX（日期）**： W###」 ≡ CHANGELOG 顶段三元组
   C2 交接文档头链链首「- **vX W###」 ≡ CHANGELOG 顶段（v + W）
   C3 AGENTS §4.2 门禁清单最高编号 == verify_delivery.py 实况最高槽位
-  C4 提交-版段对账：近 15 条 commit subject 中的 W### ⊆ CHANGELOG 版段集合 ∪ 对账表登记行；
-     认领行强制（W720）：CHANGELOG 现役段 W 号须有对账表「表格行」——预留豁免 bullet 不算认领
+     C4 提交-版段对账：近 15 条 commit subject 中的 W### ⊆ CHANGELOG 版段集合 ∪ 对账表登记行；
+     认领行强制（W720）：CHANGELOG 现役段 W 号须有对账表「表格行」——预留豁免 bullet 不算认领；
+     C4-e 级联清单强校验（W722）：pre-commit staged ⊇ 当批 _cascade_files 清单（无清单 NOTE·staged 空不适用）
   C5 聚合数字对账（W703 建·W704 实体化）：18 式高危聚合句式 × 现役叙述面（README/STRUCTURE/AGENTS/项目说明全文 +
      CHANGELOG 仅「全站页数口径」块行）vs scripts/output/stats.json（scripts/stats.py 磁盘实算·实体化 tracked）；
      C5b 数字实体标记：<!--stats:KEY--> 前置数字 == stats.json[KEY].value（键未登记=fail-closed）；
@@ -16,7 +17,7 @@
      「检查过零差异」有机器背书，漂移未刷新（漏跑 --w）当场 FAIL（W715 实例的防线）；
      基线/首跑等时点值靠句式表设计豁免（不进句式形态），新聚合量须先登记 stats.py META 键表
 豁免：行级 <!--doc-sync:exempt 原因-->；.git/shallow 存在时 C4 跳过（pre-commit 本地为主执行点）。
-用法：--check（默认）只读校验，0 FAIL 才过；--self-test 注入式负样本 14 例（纯合成输入，不改真实文件）；
+用法：--check（默认）只读校验，0 FAIL 才过；--self-test 注入式负样本 16 例（纯合成输入，不改真实文件）；
      --json 供 CI 消费。本脚本绝不修改任何文件。
 """
 
@@ -185,6 +186,23 @@ def evaluate(inp):
                 "C4: CHANGELOG 现役段 W%03d 无对账表认领行（动工前须先在本表登记·预留豁免 bullet 不算认领·W719 流程遗漏实例）"
                 % top[1]
             )
+        # C4-e 级联清单强校验（W722·用户裁决 2A·W649 漏 add 族机械化）：最终提交树（HEAD 树 ∪ staged·
+        # amend 补件场景 staged 仅含新增·本门禁自证修正）⊇ 当批级联清单；
+        # 清单不存在→NOTE（手工级联批须自建清单·pitfalls git 类义务）；
+        # staged 空（CI/普通跑）→本项不适用
+        staged = inp.get("staged") or []
+        if staged:
+            mf = inp.get("cascade_manifest")
+            if mf is None:
+                notes.append("C4-e: 当批级联清单不存在（手工级联批须自建 scripts/output/_cascade_files_*.txt·pitfalls git 类义务）")
+            else:
+                _tree = set(staged) | set(inp.get("head_tree") or [])
+                _missing = [ln for ln in mf if ln and ln not in _tree]
+                if _missing:
+                    issues.append(
+                        "C4-e: %d 个级联面未入提交树（漏 add·W649）：/%s"
+                        % (len(_missing), "、/".join(_missing[:5]))
+                    )
 
     # C5 聚合数字对账（W703·用户方案 A+C 修正形态）：句式白名单 × 现役叙述面 vs stats.json
     stats = inp.get("stats")
@@ -311,6 +329,31 @@ def gather():
     except (OSError, subprocess.TimeoutExpired) as exc:
         inputs["stats_check_ok"] = False
         inputs["stats_check_tail"] = "stats --check 执行失败: %s" % exc
+    try:
+        r = subprocess.run(  # W722 C4-e：pre-commit staged 集合（CI/普通跑为空→C4-e 不适用）
+            ["git", "-c", "core.quotePath=false", "diff", "--cached", "--name-only"],
+            cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="ignore", timeout=30,
+        )
+        inputs["staged"] = [ln.strip() for ln in (r.stdout or "").splitlines() if ln.strip()] if r.returncode == 0 else []
+    except Exception:  # noqa: BLE001
+        inputs["staged"] = []
+    try:
+        r = subprocess.run(  # W722 C4-e 语义修正：amend 补件场景 staged 仅含新增，最终提交树=HEAD 树 ∪ staged
+            ["git", "-c", "core.quotePath=false", "ls-tree", "-r", "HEAD", "--name-only"],
+            cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="ignore", timeout=30,
+        )
+        inputs["head_tree"] = [ln.strip() for ln in (r.stdout or "").splitlines() if ln.strip()] if r.returncode == 0 else []
+    except Exception:  # noqa: BLE001
+        inputs["head_tree"] = []
+    try:
+        _top = changelog_top(inputs["changelog"])
+        _mp = os.path.join(ROOT, "scripts", "output", "_cascade_files_W%03d.txt" % _top[1]) if _top else None
+        inputs["cascade_manifest"] = (
+            [ln.strip() for ln in open(_mp, encoding="utf-8").read().splitlines() if ln.strip()]
+            if _mp and os.path.exists(_mp) else None
+        )
+    except Exception:  # noqa: BLE001
+        inputs["cascade_manifest"] = None
     if inputs.get("git_err") and not inputs["shallow"]:
         # 无 git 且非浅克隆：无法对账即 fail-closed（浅克隆已有跳过通道）
         inputs["force_c4_fail"] = inputs["git_err"]
@@ -350,6 +393,9 @@ def run_self_test():
         "contributing": "",
         "stats_check_ok": True,
         "stats_check_tail": "",
+        "staged": [],
+        "head_tree": [],
+        "cascade_manifest": None,
         "stats": {
             k: {"value": v}
             for k, v in {
@@ -428,6 +474,18 @@ def run_self_test():
         "T14 现役段无对账表认领行必红（C4·W720）",
         lambda d: d.update(table="- **W999**：现势下一自由号（递延豁免 bullet·非认领行）\n"),
         "C4",
+    )
+    case(
+        "T15 级联面漏 add 必红（C4-e·W722）",
+        lambda d: d.update(staged=["CHANGELOG.md"], cascade_manifest=["CHANGELOG.md", "README.md", "AGENTS.md"]),
+        "C4-e",
+    )
+    case(
+        "T16 amend 补件场景不误报（C4-e 语义修正·W722 实证）",
+        lambda d: d.update(staged=["scripts/output/_cascade_files_W999.txt"], head_tree=["CHANGELOG.md", "README.md", "AGENTS.md"],
+                           cascade_manifest=["CHANGELOG.md", "README.md", "AGENTS.md", "scripts/output/_cascade_files_W999.txt"]),
+        "C4-e",
+        expect_absent=True,
     )
 
     fails = 0

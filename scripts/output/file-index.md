@@ -11,6 +11,22 @@
 ---
 
 
+## W722 八项裁决执行批（2026-10-12）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_sync.py | W722 | C4-e 级联清单强校验（staged 集合+T15·self-test 15 例） |
+| scripts/stats.py | W722 | a4_docs 键（META+build·introduced_by W722） |
+| scripts/output/stats.json | W722 | 15 键重生成（a4_docs=209） |
+| scripts/output/stats-changelog.json | W722 | W722 变更条（a4_docs 新键） |
+| scripts/output/stats-index.md | W722 | 实体卡刷新（a4_docs 行） |
+| scripts/verify_delivery.py | W722 | EXPECT_A4 双形态适配（第 3 门禁·正则） |
+| docs/00-导读/文档规范.md | W722 | §4.11 扩三节（裁决流程/自查扩面五项/降级重启契约） |
+| docs/agent/pitfalls.md | W722 | git 类两条（自建清单义务/多组 add 禁 2>/dev/null） |
+| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-12.md | W722 | S-26 卡降级状态注（W722 裁决） |
+| docs/00-导读/项目说明.md | W722 | A4 计数实体标记化（6A） |
+| docs/00-导读/W批次编号对账表.md | W722 | W722 认领+现势递延 |
+
 ## W721 复盘增补与脚注滚动根修批（2026-10-12）
 
 | 文件 | W | 说明 |

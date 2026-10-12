@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W721），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W722），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,17 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W722（2026-10-12）：八项裁决执行批
+
+> **来源**：用户 userselect「1A 2A 3A 4A 5A 6A 7B 8A」（第十七次挑刺=对我方推荐清单的 5 处质量问题全认领·修正版清单 v2 拍板）——八项裁决一次执行。
+> - **1A+5A+4A（S-28 例行化+S-30/S-27 成文·文档规范 §4.11 扩三节）**：「外部输入裁决流程」（S-27 落点=§4.11 裁决记录形态旁·pitfalls 系坑位不纳流程·用户修正采纳）+「处置自查扩面五项」（S-30 落点·①同型数字 grep②解析面枚举③未跟踪件④锚点语义对拍⑤流程面·基线 25%=W713-W719 三批 8/32 小样本 n=3 在案）——**S-28 例行化并入五项②（FAM-12 橙警强化落地·依赖 5A 已满足）**+「技能卡降级/重启契约」（禁频率低作理由·降级须列不受保护路径+重启触发）。
+> - **2A（C4-e 级联清单强校验）**：doc-sync gather 加 staged 集合（pre-commit 语境·CI/普通跑为空不适用）——提交树 ⊇ 当批 _cascade_files 清单，漏 add 即红（W649 漏 add 族机械化）；清单不存在→NOTE；**自建义务成文 pitfalls git 类**（手工级联批·W691/W693 先例 70 份在库）；self-test 14→15 例（T15 漏 add 必红）。
+> - **3A（S-26 降级）**：第 37 篇 S-26 卡状态注——降级后不受保护路径仅两条（手工 Edit/一次性脚本写共享文档·后者有写盘前断言软覆盖）；重启触发=事故 ≥1 次/月或单次 P1；降级契约入 §4.11。
+> - **6A（a4_docs 三处同改·EXPECT_A4 实体化收口）**：stats.py META+build 加 a4_docs 键（docs/03 顶层 .md−README·introduced_by W722）+五处叙述面标记化（README/STRUCTURE/AGENTS/交接/项目说明各一处现役口径·唯一锚点断言一次性脚本）+verify 第 3 门禁 EXPECT_A4 双形态适配（裸「209 篇」或「209<!--stats:a4_docs--> 篇」正则·门禁名沿用不改）；stats 15 键 --check 零差异（a4_docs=209 磁盘对上）。
+> - **7B+8A（双结案登记）**：四页脚链长治理=维持现状（无实测危害证据·A/C/D 备选登记待展示面偏好出现再启）；bump_version=维持停用（级联已全覆盖其职责）。
+> - **验证**：doc-sync self-test 15/15 + 门禁 0 FAIL + stats --check 零差异（15 键）+ verify full 46 段绿 + pytest 296 + ruff 0。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
 
 ### W721（2026-10-12）：复盘增补与脚注滚动根修批
 
