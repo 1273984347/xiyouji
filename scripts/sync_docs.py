@@ -14,6 +14,8 @@ import re
 import sys
 from pathlib import Path
 
+from doc_areas import AREA_DIRS, count_content_md
+
 # 项目根目录（脚本位于 scripts/ 下）
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -32,35 +34,21 @@ HEADER_LINES = 50  # 头部扫描行数
 # 统计期望值现值化（W685 校准·W684 P-11/A-03：STATIC_EXPECTED 硬编码 611 腐烂实证）——
 # AGG/A4/VIZ 改为磁盘实数动态计算，口径与 verify_delivery A1-A6 计数一致：
 # 六板块顶层 .md 排除 README.md；VIZ = site/data HTML 数减 _shell.html 模板壳。
-A_AREAS = [
-    ("A1", os.path.join("docs", "01-全书逐回解读")),
-    ("A2", os.path.join("docs", "06-个人随笔")),
-    ("A3", os.path.join("docs", "02-人物深度分析")),
-    ("A4", os.path.join("docs", "03-主题与情节专题")),
-    ("A5", os.path.join("docs", "04-文化与历史背景")),
-    ("A6", os.path.join("docs", "05-诗词歌赋")),
-]
-
-
-def _count_content_md(area_dir):
-    """统计板块顶层 .md 文件数，排除 README.md（与 verify_delivery._count_content_md 同口径）。"""
-    p = ROOT / area_dir
-    if not p.is_dir():
-        return -1
-    return sum(1 for fn in os.listdir(p)
-               if fn.endswith(".md") and fn.lower() != "readme.md")
+# 目录单一事实源在 doc_areas.AREA_DIRS（W728 与 verify_delivery 共享·防双份手工表漂移）；
+# 本文件消费短键标签（rule_stats 的 disk 字典键）·计数口径 = count_content_md。
+A_AREAS = list(zip(("A1", "A2", "A3", "A4", "A5", "A6"), AREA_DIRS, strict=True))
 
 
 def disk_expected():
     """磁盘实数统计期望（W685 现值化）。目录缺失时该键回退 0，由规则 2 报 MISMATCH。"""
     agg = 0
     for _, d in A_AREAS:
-        n = _count_content_md(d)
+        n = count_content_md(d)
         if n > 0:
             agg += n
     data_dir = ROOT / "site" / "data"
     viz = sum(1 for fn in os.listdir(data_dir) if fn.endswith(".html")) - 1 if data_dir.is_dir() else 0
-    return {"AGG": agg, "VIZ": viz, "A4": max(_count_content_md(A_AREAS[3][1]), 0)}
+    return {"AGG": agg, "VIZ": viz, "A4": max(count_content_md(A_AREAS[3][1]), 0)}
 
 # CHANGELOG 最新版本段统计正则（提取最终值，支持 N→M 和 N 两种格式）
 CL_PATTERNS = {
@@ -225,7 +213,7 @@ def rule_xmsm_counts():
     if not path.exists():
         return ["[MISSING] 项目说明 文件不存在"]
     text = read_text(path)
-    disk = {k: max(_count_content_md(d), 0) for k, d in A_AREAS}
+    disk = {k: max(count_content_md(d), 0) for k, d in A_AREAS}
     pat_map = {
         "A1": re.compile(r"A1 方向 (\d+)/\d+"),
         "A2": re.compile(r"A2 随笔 (\d+) 篇"),

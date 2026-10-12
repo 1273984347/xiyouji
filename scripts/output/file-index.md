@@ -11,6 +11,17 @@
 ---
 
 
+## W728 门禁与工具链代码重构批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/verify_delivery.py | W728 | main() 905 行表驱动化：_Reporter/_GateContext/_SimpleGate×18/_StrictGate×15/2 runner/13 段函数 |
+| scripts/doc_areas.py | W728 | 新建共享模块：AREA_DIRS 六板块目录+count_content_md 计数口径单一事实源 |
+| scripts/sync_docs.py | W728 | 接入 doc_areas（A_AREAS 派生+count_content_md·消除双份手工表） |
+| scripts/security_scan.py | W728 | scan_sri script/link 同构块提取 _check_resource_attrs 通用体 |
+| docs/superpowers/plans/2026-10-13-code-refactor-w728.md | W728 | 重构方案档（八节·度量基线/符号级设计/风险表/验证协议/经验沉淀） |
+| docs/00-导读/W批次编号对账表.md | W728 | W728 认领行登记（含撞号改号事件记录） |
+
 ## W727 SVG 保护补打与级联 CRLF 根修批（2026-10-13）
 
 | 文件 | W | 说明 |

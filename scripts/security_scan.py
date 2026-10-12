@@ -299,6 +299,46 @@ def _is_external_resource(url):
     return any(domain in lower for domain in EXTERNAL_CDN_PATTERNS)
 
 
+def _check_resource_attrs(text, pattern, kind_label, rel):
+    """外部资源 SRI 属性检查通用体（W728 重构：script/link 两种引用的同构块合一）。
+
+    入参：
+      text——HTML 全文；pattern——资源引用正则（SCRIPT_SRC_RE/LINK_HREF_RE·组 1=URL）；
+      kind_label——资源类型标签（「外部脚本」/「外部样式」·进 findings 描述）；
+      rel——文件 repo 相对路径（findings 的 file 字段）。
+    返回 findings 列表：SRI-001 缺 integrity=medium / SRI-002 缺 crossorigin=low；
+    本地与 http:// 资源经 _is_external_resource 过滤跳过（仅 https 跨域 CDN 纳管）。
+    """
+    findings = []
+    for match in pattern.finditer(text):
+        url = match.group(1)
+        if not _is_external_resource(url):
+            continue
+        tag = match.group(0)
+        line_no = text.count("\n", 0, match.start()) + 1
+        has_integrity = "integrity" in tag.lower()
+        has_crossorigin = "crossorigin" in tag.lower()
+        if not has_integrity:
+            findings.append({
+                "rule": "SRI-001",
+                "file": rel,
+                "line": line_no,
+                "description": f"{kind_label}缺少 integrity 属性: {url}",
+                "severity": "medium",
+                "snippet": tag[:120],
+            })
+        if not has_crossorigin:
+            findings.append({
+                "rule": "SRI-002",
+                "file": rel,
+                "line": line_no,
+                "description": f"{kind_label}缺少 crossorigin 属性: {url}",
+                "severity": "low",
+                "snippet": tag[:120],
+            })
+    return findings
+
+
 def scan_sri(html_dir):
     """验证 HTML 文件中外部资源含 integrity + crossorigin 属性。
 
@@ -333,61 +373,9 @@ def scan_sri(html_dir):
 
         rel = str(hp.relative_to(ROOT)).replace("\\", "/")
 
-        # 检查 <script src="external">
-        for match in SCRIPT_SRC_RE.finditer(text):
-            url = match.group(1)
-            if not _is_external_resource(url):
-                continue
-            tag = match.group(0)
-            line_no = text.count("\n", 0, match.start()) + 1
-            has_integrity = "integrity" in tag.lower()
-            has_crossorigin = "crossorigin" in tag.lower()
-            if not has_integrity:
-                findings.append({
-                    "rule": "SRI-001",
-                    "file": rel,
-                    "line": line_no,
-                    "description": f"外部脚本缺少 integrity 属性: {url}",
-                    "severity": "medium",
-                    "snippet": tag[:120],
-                })
-            if not has_crossorigin:
-                findings.append({
-                    "rule": "SRI-002",
-                    "file": rel,
-                    "line": line_no,
-                    "description": f"外部脚本缺少 crossorigin 属性: {url}",
-                    "severity": "low",
-                    "snippet": tag[:120],
-                })
-
-        # 检查 <link href="external">
-        for match in LINK_HREF_RE.finditer(text):
-            url = match.group(1)
-            if not _is_external_resource(url):
-                continue
-            tag = match.group(0)
-            line_no = text.count("\n", 0, match.start()) + 1
-            has_integrity = "integrity" in tag.lower()
-            has_crossorigin = "crossorigin" in tag.lower()
-            if not has_integrity:
-                findings.append({
-                    "rule": "SRI-001",
-                    "file": rel,
-                    "line": line_no,
-                    "description": f"外部样式缺少 integrity 属性: {url}",
-                    "severity": "medium",
-                    "snippet": tag[:120],
-                })
-            if not has_crossorigin:
-                findings.append({
-                    "rule": "SRI-002",
-                    "file": rel,
-                    "line": line_no,
-                    "description": f"外部样式缺少 crossorigin 属性: {url}",
-                    "severity": "low",
-                    "snippet": tag[:120],
-                })
+        # 检查 <script src="external"> 与 <link href="external">（W728 重构：同构块合一）
+        findings += _check_resource_attrs(text, SCRIPT_SRC_RE, "外部脚本", rel)
+        findings += _check_resource_attrs(text, LINK_HREF_RE, "外部样式", rel)
 
     return findings
 
