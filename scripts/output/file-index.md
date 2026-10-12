@@ -11,6 +11,15 @@
 ---
 
 
+## W726 本地工具链修复批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/archive/fix_svg_negative_widths.py | W726 | ROOT 三级上溯根修（W447 搬迁失同步·glob 静默空扫+dashboard 读崩）+站点目录存在性 fail-closed |
+| Makefile | W726 | data-validate 空目录跳过保护（output/data gitignore·fresh clone 不再挂 make ci） |
+| README.md | W726 | drl-screenshot-review.md 死链改指 CHANGELOG（本地件不入库） |
+| source/引用与网络解读/学术论文索引.md | W726 | 11 处死链清理（7×v08 剥链保文·4×S4 改本地存档注记） |
+
 ## W725 review 收官 mini 批（2026-10-12）
 
 | 文件 | W | 说明 |

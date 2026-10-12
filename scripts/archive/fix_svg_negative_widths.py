@@ -7,7 +7,7 @@
 3. const/let VAR = X.clientWidth || N  →  加最小宽度保护，避免移动视口下内部绘图区宽度为负
 
 Usage:
-    # from scripts/ directory, patch all site/data HTML + dashboard.html
+    # from any directory, patch all site/data HTML + dashboard.html
     python fix_svg_negative_widths.py
     # with extra HTML files (relative to project root)
     python fix_svg_negative_widths.py --extra site/index.html
@@ -19,7 +19,10 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+# W726 修复：W447 归档搬迁（scripts/ → scripts/archive/）后未同步调整——parent.parent
+# 指向 scripts/ 而非仓库根，致 site/data glob 静默空扫 + dashboard.html 读崩
+# （FileNotFoundError·make audit 每跑必挂）。位于 archive/ 需三级上溯。
+ROOT = Path(__file__).resolve().parent.parent.parent
 DEFAULT_TARGETS = list((ROOT / "site" / "data").glob("*.html")) + [ROOT / "site" / "dashboard.html"]
 
 RADIUS_RE = re.compile(
@@ -166,6 +169,13 @@ def main():
     parser.add_argument("--extra", nargs="*", help="Additional HTML files to patch (relative to project root)")
     parser.add_argument("--dry-run", action="store_true", help="Preview only, do not write changes")
     args = parser.parse_args()
+
+    # W726 修复：glob 空扫原为静默失败（目录不存在时返回空列表）——显式存在性检查，
+    # 路径推断再错即 fail-closed 报错，不再带病跑成 0 目标假绿。
+    site_data = ROOT / "site" / "data"
+    if not site_data.is_dir():
+        print(f"[ERROR] 站点数据目录不存在: {site_data}")
+        sys.exit(2)
 
     targets = list(DEFAULT_TARGETS)
     for rel in (args.extra or []):

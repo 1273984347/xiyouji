@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W725），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W726），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,16 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W726（2026-10-13）：本地工具链修复批
+
+> **来源**：用户令「排查代码中的报错」（无具体报错→主动全量扫描：verify full 41 门禁/pytest 296/ruff/check_js_syntax 855 文件/a11y/security/lint_links 逐项复跑）——CI 实跑范围全绿，本地工具链（make 目标）三项真实缺陷。
+> - **缺陷 1（代码 bug·唯一必崩）**：scripts/archive/fix_svg_negative_widths.py L22 ROOT 少一级——W447（dff17dc5「45 个一次性脚本归档」）把脚本从 scripts/ 搬进 scripts/archive/ 未同步路径，parent.parent 指向 scripts/ 而非仓库根，致 site/data glob 静默空扫+dashboard.html read_text 崩（FileNotFoundError·make audit 每跑必挂）。沙盒同构验证：修复后 dry-run 实扫 87 页、报 35 页待打 clientWidth 保护（W400 后新增页从未打上·审计死盲区实况·移交 W727 处置）。
+> - **缺陷 2（工作流断链）**：make data-validate 空目录 rc=1「未找到任何 .json 文件」——output/data/*.json 系 .gitignore 可重建产物，fresh clone 未跑 make analyze 即空目录，make ci 第 5 步必挂（CI 不跑此项·仅本地目标）。Makefile 加空目录跳过保护（提示先行 analyze·rc=0·不弱化校验语义）。
+> - **缺陷 3（文档腐烂）**：lint_links 全仓 12 broken rc=1——README.md:169→drl-screenshot-review.md（gitignore 本地件）、学术论文索引.md 7×v08-embedded-data.js（构建产物）、4×心学方向-投稿版.md（W620 裁决出库件·本地留存）；门禁全绿原因=第 6 门禁只扫 docs/（lint_links --dir docs）。修法=清 tracked 文件死链（README 改指 CHANGELOG·v08 剥链保文·S4 改本地存档注记·不扩豁免——豁免机制只滤被扫文件不滤链接目标）。
+> - **验证**：fix_svg 修复版 dry-run 实跑（87 页扫描·35 页待改·diff 合理）+ Makefile 守卫生效（空目录 rc=0+skip 提示）+ lint_links 全仓 19557 链接 0 broken + verify full 41 门禁 0 FAIL + pytest 296 passed + ruff（scripts/ CI 口径）All checks passed。
+> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。
+> - **文件**：scripts/archive/fix_svg_negative_widths.py、Makefile、README.md、source/引用与网络解读/学术论文索引.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md。
 
 ### W725（2026-10-12）：review 收官 mini 批
 
