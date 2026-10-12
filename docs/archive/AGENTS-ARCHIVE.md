@@ -67,3 +67,8 @@
 ```text
 2026-10-12（W725）review 收官 mini 批（用户令 review·范围 W720-W724 十一提交·W719 先例第九次）：机械扫净加 门禁六连全绿加 S-29 指针滚动注单段化（累积缺陷插前剥旧只留单段最新·本批级联自动收敛）加 文件行覆盖度对账新方法（W720-W722 历史形态不补加 W723 全覆盖加 W724 漏列 2 件现役段补列 AGENTS_ARCHIVE 与 foot_rebuild）加 垃圾件 PIPE 与废弃 msg 清除
 ```
+以下为 AGENTS.md 版本脚注早期条目（W726-W726）段的原文（单行沿革链·W731 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-13（W726）本地工具链修复批（用户令排查代码中的报错·无具体报错转全量扫描）：缺陷 1 fix_svg_negative_widths ROOT 三级上溯加站点目录存在性 fail-closed（W447 归档搬迁失同步致 glob 静默空扫与 dashboard 读崩·make audit 每跑必挂·沙盒验证修复后 87 页扫描 35 页待打保护）加 缺陷 2 Makefile data-validate 空目录跳过保护（output/data 系 gitignore 可重建产物·fresh clone 不再挂 make ci）加 缺陷 3 十二处死链清理（README 改指 CHANGELOG 加 v08 七处剥链保文加 S4 四处本地存档注记·lint_links 19557 链接 0 broken）
+```

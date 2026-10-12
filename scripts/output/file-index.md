@@ -11,6 +11,14 @@
 ---
 
 
+## W731 发布工具链与安全扫描重构批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_cascade.py | W731 | main 347→33（十面函数化+_Ctx+_foot_insert/_agents_entry_wn+_apply_pend/_post_check）·dry-run 全量+apply 对拍验证 |
+| scripts/security_scan.py | W731 | run 91→42（5 提取）+build_report 81→编排体（_summarize_findings+六段渲染）·单测+报告双一致 |
+| docs/00-导读/W批次编号对账表.md | W731 | W731 认领行登记 |
+
 ## W730 门禁脚本长函数收尾重构批（2026-10-13）
 
 | 文件 | W | 说明 |
