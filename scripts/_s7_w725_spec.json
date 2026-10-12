@@ -1,0 +1,15 @@
+{
+  "batch": "W725",
+  "version": "v2.3",
+  "date": "2026-10-12",
+  "desc": "review 收官 mini 批",
+  "title": "W725 review 收官 mini 批",
+  "changelog_body": "\n\n> **来源**：用户令「review 一遍这几次的改动」（W719 先例第九次·范围=W720-W724 十一提交）——机械扫+疑点深查+门禁复跑，发现三项轻度问题 mini 修。\n> - **机械扫**：混行尾 17 文件 0 / 段标题双写（CHANGELOG+file-index）0 / 对账表豁免链 W725 连续 / 垃圾件 2 清除（PIPE 调试残留+废弃 chore msg·未跟踪无痕）。\n> - **S-29 指针滚动注累积（发现→本批修）**：四段滚动注逐批累积（每段约 20 字符·批数线性膨胀）——batch_cascade 改单段化（插新注前 re.sub 剥全部旧「WNNN-WNNN 级联自动滚动·」·只留单段最新区间）；本批级联即自动收敛现指针（四段→单段 W720-W720）。\n> - **文件行覆盖度对账（C4-f 反向抽查·本批新方法）**：W720-W722 缺「文件」行系 precheck 强制（W723）之前的历史形态·不再补（历史段禁改）；W723 全覆盖（19 token）；**W724 漏列 2 件**（AGENTS-ARCHIVE 迁入件+foot_rebuild 一次性脚本——均已在库无漏 add·纯列名不全）——现役段补列（本批 Edit）。\n> - **验证**：verify full + pytest 296 + self-test（doc-sync 18/18·agents 5/5）+ stats --check 15 键零差异 + ruff 0（级联后复跑）。\n> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。\n> - **文件**：scripts/batch_cascade.py、CHANGELOG.md、docs/00-导读/W批次编号对账表.md。\n",
+  "head_entry": "2026-10-12（W725 review 收官 mini 批）",
+  "head_sentence": "指针单段化与文件行补列",
+  "milestone_block": "- **W725 review 收官 mini 批**：\n  - S-29 指针滚动注单段化（累积四段→插前剥旧·本批级联自动收敛）\n  - 文件行覆盖度对账（新方法）：W720-W722 历史形态不补+W724 现役段补列 2 件+垃圾件 2 清除\n",
+  "agents_note": "2026-10-12（W725）review 收官 mini 批（用户令 review·范围 W720-W724 十一提交·W719 先例第九次）：机械扫净加 门禁六连全绿加 S-29 指针滚动注单段化（累积缺陷插前剥旧只留单段最新·本批级联自动收敛）加 文件行覆盖度对账新方法（W720-W722 历史形态不补加 W723 全覆盖加 W724 漏列 2 件现役段补列 AGENTS_ARCHIVE 与 foot_rebuild）加 垃圾件 PIPE 与废弃 msg 清除",
+  "file_index_rows": [
+    "| scripts/batch_cascade.py | W725 | S-29 指针滚动注单段化（插前剥旧·防逐批膨胀） |"
+  ]
+}

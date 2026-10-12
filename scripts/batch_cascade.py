@@ -327,7 +327,8 @@ def main():
         )
         pend.append((_arc, _as, _anl))
         _newline = "；".join([_segs[0].split("；")[0], _segs[0].split("；", 1)[1], *_keep]) + tail
-        # 指针上界刷新（历史续迁注保留·追加本批自动滚动段）
+        # 指针上界刷新（W725 单段化：旧累积滚动注先剥除·只保留单段最新区间——防逐批膨胀）
+        _newline = re.sub(r"(?:W\d{3}-W\d{3} 级联自动滚动·)+", "", _newline)
         _newline = _newline.replace("W719 续迁 W708-W714·", "W719 续迁 W708-W714·W%d-W%d 级联自动滚动·" % (_lo, _hi))
         assert _newline.endswith(tail) and "；".join(_keep) in _newline
         s = s[:_fs] + _newline + s[_fs + len(_fline):]
