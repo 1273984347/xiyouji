@@ -416,16 +416,17 @@ def main():
         ok("无范围漂移（html 最高 W%d ≤ 文档+归档最高 W%d）" % (max_w_html, max_w_doc))
 
     section("A4计数")
-    # ---- A4 计数一致性 ----
+    # ---- A4 计数一致性（W722 双形态：裸字面量「209 篇」或实体标记「209<!--stats:a4_docs--> 篇」·三处同改之三）----
+    _a4_re = re.compile(r"209(?:<!--stats:a4_docs-->)?\s*篇")
     miss = []
     for d in A4_DOCS:
         c = _read(os.path.join(ROOT, d))
-        if EXPECT_A4 not in c:
+        if not _a4_re.search(c):
             miss.append(d)
     if miss:
-        fail("A4 计数不一致（缺 '%s'）：%s" % (EXPECT_A4, ", ".join(miss)))
+        fail("A4 计数不一致（缺 '209 篇/209<!--stats:a4_docs--> 篇'）：%s" % ", ".join(miss))
     else:
-        ok("A4 计数一致（四份文档均含 '%s'）" % EXPECT_A4)
+        ok("A4 计数一致（四份文档均含 '209 篇' 或实体标记形态）")
 
     section("A1-A6计数")
     # ---- A1-A6 真实文件计数 vs README 声明（W417 新增，防计数声明失真）----
