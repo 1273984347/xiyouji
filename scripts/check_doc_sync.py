@@ -8,7 +8,8 @@
   C3 AGENTS §4.2 门禁清单最高编号 == verify_delivery.py 实况最高槽位
      C4 提交-版段对账：近 15 条 commit subject 中的 W### ⊆ CHANGELOG 版段集合 ∪ 对账表登记行；
      认领行强制（W720）：CHANGELOG 现役段 W 号须有对账表「表格行」——预留豁免 bullet 不算认领；
-     C4-e 级联清单强校验（W722）：pre-commit staged ⊇ 当批 _cascade_files 清单（无清单 NOTE·staged 空不适用）
+     C4-e 级联清单强校验（W722）：pre-commit staged ⊇ 当批 _cascade_files 清单（无清单 NOTE·staged 空不适用）；
+     C4-f 文件清单入库对账（W723）：现役段「文件」行路径 ⊆ HEAD 树 且 无工作树残留（W537③ 清偿·手工件唯一防线·缺行 NOTE）
   C5 聚合数字对账（W703 建·W704 实体化）：18 式高危聚合句式 × 现役叙述面（README/STRUCTURE/AGENTS/项目说明全文 +
      CHANGELOG 仅「全站页数口径」块行）vs scripts/output/stats.json（scripts/stats.py 磁盘实算·实体化 tracked）；
      C5b 数字实体标记：<!--stats:KEY--> 前置数字 == stats.json[KEY].value（键未登记=fail-closed）；
@@ -17,7 +18,7 @@
      「检查过零差异」有机器背书，漂移未刷新（漏跑 --w）当场 FAIL（W715 实例的防线）；
      基线/首跑等时点值靠句式表设计豁免（不进句式形态），新聚合量须先登记 stats.py META 键表
 豁免：行级 <!--doc-sync:exempt 原因-->；.git/shallow 存在时 C4 跳过（pre-commit 本地为主执行点）。
-用法：--check（默认）只读校验，0 FAIL 才过；--self-test 注入式负样本 16 例（纯合成输入，不改真实文件）；
+用法：--check（默认）只读校验，0 FAIL 才过；--self-test 注入式负样本 18 例（纯合成输入，不改真实文件）；
      --json 供 CI 消费。本脚本绝不修改任何文件。
 """
 
@@ -61,6 +62,10 @@ RE_STATS_PATTERNS = [  # (正则, (键...), 语境词[None=无·小写包含判�
     (re.compile(r"(\d+) 类子目录全建"), ("script_classes",), None),
 ]
 RE_CHANGELOG_SCOPE = re.compile(r"^> \*\*全站页数口径\*\*.*$", re.M)  # CHANGELOG 扫描域=口径块行
+RE_FILE_LIST_LINE = re.compile(r"^> - \*\*文件\*\*：(.+)$", re.M)  # W723 C4-f：四件套「文件」行
+RE_FILE_TOKEN = re.compile(
+    r"^(?:CHANGELOG|README|STRUCTURE|AGENTS|CLAUDE|CONTRIBUTING|CITATION)\.cff?$|.+\.(?:py|js|mjs|md|json|cff|txt|html|css|xml|yml)$"
+)  # 路径 token 判定：根级治理文件白名单 或 带已知后缀（含 / 的子目录路径）
 RE_STATS_MARK = re.compile(r"(\d+)\s*[页项篇个类]?\s*<!--stats:([a-z_0-9]+)-->")  # W704 数字实体标记（紧贴/句尾双形态·key 后置·渲染隐藏）
 RE_BARE_AGG = re.compile(r"\d+\s*(?:页|项|篇|个|类)")  # C5c 裸聚合数字（报告型 NOTE·W704 起步）
 C5_DOC_NAMES = {"readme": "README.md", "structure": "STRUCTURE.md", "agents": "AGENTS.md", "xiangmu": "项目说明.md", "contributing": "CONTRIBUTING.md"}  # W713 补 CONTRIBUTING（第 27 门禁叙述面已含·C5 面对齐）
@@ -104,6 +109,23 @@ def agents_gate_list_max(agents_text):
 def verify_slot_max(verify_src):
     nums = [int(x) for x in RE_VERIFY_SLOT.findall(verify_src)]
     return max(nums) if nums else None
+
+
+def file_list_paths(changelog, wnum):
+    """W723 C4-f：解析现役段「文件」行的 repo 相对路径清单（W537③ 清偿）。
+    token 按分隔符切分+剥全角括号注释；非路径 token（描述词）滤除。段缺失/行缺失返回 (None, [])。"""
+    seg = re.search(rf"^### W{wnum:03d}（.*?(?=^### |\Z)", changelog, re.M | re.S)
+    if not seg:
+        return None, []
+    m = RE_FILE_LIST_LINE.search(seg.group(0))
+    if not m:
+        return None, []
+    out = []
+    for tok in re.split(r"[、；;，,\s]+", m.group(1)):
+        tok = re.sub(r"（[^）]*）", "", tok).strip("·。")
+        if tok and RE_FILE_TOKEN.match(tok):
+            out.append(tok)
+    return True, out
 
 
 def stats_value(stats, key):
@@ -203,6 +225,24 @@ def evaluate(inp):
                         "C4-e: %d 个级联面未入提交树（漏 add·W649）：/%s"
                         % (len(_missing), "、/".join(_missing[:5]))
                     )
+        # C4-f 文件清单入库对账（W723·W537③ 八批旧账清偿·手工件漏 add 三犯根修）：
+        # 现役段「文件」行的路径 token ⊆ HEAD 树 且 无工作树未提交残留——
+        # 级联清单只列级联面，手工编辑件（脚本/文档）唯此防线（W721/W722 三处漏 add 实证）；
+        # 缺「文件」行/无路径 token → NOTE（四件套缺件或形态不合规·起步策略，成文 pitfalls）
+        if top:
+            has_line, fl = file_list_paths(inp["changelog"], top[1])
+            if has_line is None:
+                notes.append("C4-f: 现役段缺「文件」行（四件套缺件·W723 起级联 precheck 强制）")
+            elif not fl:
+                notes.append("C4-f: 「文件」行无可解析路径 token（须写 repo 相对路径·见 pitfalls git 类）")
+            else:
+                _tree2 = set(inp.get("head_tree") or []) | set(inp.get("staged") or [])  # pre-commit 首提场景与 C4-e 同语义
+                _dirty = set(inp.get("dirty") or [])
+                for f in fl:
+                    if f not in _tree2:
+                        issues.append("C4-f: 文件清单 %s 未入提交树（W537③·手工件漏 add 族）" % f)
+                    elif f in _dirty:
+                        issues.append("C4-f: 文件清单 %s 有工作树未提交残留（漏 add）" % f)
 
     # C5 聚合数字对账（W703·用户方案 A+C 修正形态）：句式白名单 × 现役叙述面 vs stats.json
     stats = inp.get("stats")
@@ -346,6 +386,19 @@ def gather():
     except Exception:  # noqa: BLE001
         inputs["head_tree"] = []
     try:
+        r = subprocess.run(  # W723 C4-f：工作树未提交残留（porcelain 第二列非空或 ??）
+            ["git", "-c", "core.quotePath=false", "status", "--porcelain"],
+            cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="ignore", timeout=30,
+        )
+        _dirty = []
+        if r.returncode == 0:
+            for ln in (r.stdout or "").splitlines():
+                if len(ln) > 3 and (ln[1] != " " or ln[:2] == "??"):
+                    _dirty.append(ln[3:].strip().strip('"'))
+        inputs["dirty"] = _dirty
+    except Exception:  # noqa: BLE001
+        inputs["dirty"] = []
+    try:
         _top = changelog_top(inputs["changelog"])
         _mp = os.path.join(ROOT, "scripts", "output", "_cascade_files_W%03d.txt" % _top[1]) if _top else None
         inputs["cascade_manifest"] = (
@@ -486,6 +539,24 @@ def run_self_test():
                            cascade_manifest=["CHANGELOG.md", "README.md", "AGENTS.md", "scripts/output/_cascade_files_W999.txt"]),
         "C4-e",
         expect_absent=True,
+    )
+    case(
+        "T17 文件清单漏 add 必红（C4-f·W723）",
+        lambda d: d.update(
+            changelog=d["changelog"].replace("### W999（2026-10-05）：自测顶段\n",
+                                             "### W999（2026-10-05）：自测顶段\n\n> - **文件**：docs/a.md、docs/b.md（注）\n"),
+            head_tree=["docs/a.md"], dirty=[],
+        ),
+        "C4-f",
+    )
+    case(
+        "T18 文件清单工作树残留必红（C4-f·W723）",
+        lambda d: d.update(
+            changelog=d["changelog"].replace("### W999（2026-10-05）：自测顶段\n",
+                                             "### W999（2026-10-05）：自测顶段\n\n> - **文件**：docs/a.md\n"),
+            head_tree=["docs/a.md"], dirty=["docs/a.md"],
+        ),
+        "C4-f",
     )
 
     fails = 0

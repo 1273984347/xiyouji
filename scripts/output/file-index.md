@@ -11,6 +11,15 @@
 ---
 
 
+## W723 级联清单反向覆盖根修批（2026-10-12）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_sync.py | W723 | C4-f 文件清单入库对账（file_list_paths 解析+dirty 双断言+T17/T18·self-test 18 例） |
+| scripts/batch_cascade.py | W723 | precheck 强制 body 含「文件」行（数据源源头保证） |
+| docs/agent/pitfalls.md | W723 | git 类文件行义务新条+W537③ 更新指向 C4-f |
+| docs/00-导读/文档规范.md | W723 | §5 版本段文件行路径形态规范（禁描述列举） |
+
 ## W722 八项裁决执行批（2026-10-12）
 
 | 文件 | W | 说明 |
