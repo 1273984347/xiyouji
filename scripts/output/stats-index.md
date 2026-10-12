@@ -10,6 +10,7 @@
 > **字段语义（W716 注）**：`introduced_by`=口径首次**正式化**批次（非历史首次出现批次）；`last_changed_by`=stats.py **检出**值变更的最近批次（建账前变更不记，如 site/reader 621→622 系主题枢纽页批次新增、早于建账）；`generator` 恒为 `scripts/stats.py` 故省略列。
 
 | a1_a6_docs | 615 | docs/01-06 六板块顶层内容 .md（排除 README） | W505 | W505 |
+| a4_docs | 209 | docs/03-主题与情节专题/*.md（排除 README） | W722 | W722 |
 | csp_covered | 856 | html_total − _template.html（generate_csp TEMPLATE_EXCLUDE） | W459 | W459 |
 | gate_count | 41 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | W709 |
 | html_total | 857 | site/**/*.html（递归全站） | W459 | W459 |
@@ -25,6 +26,9 @@
 | visualization_pages | 87 | site/data_html − _shell.html | W459 | W459 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W722（2026-10-12 21:22:26）
+- a4_docs: None → 209
 
 ### W716（2026-10-12）
 - methodology_docs: 33 → 34

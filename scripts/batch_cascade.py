@@ -278,6 +278,40 @@ def main():
     assert s.count(tail) == 1, "AGENTS 脚注尾锚点异常"
     _sep = "" if s[: s.index(tail)].rstrip().endswith("；") else "；"
     s = s.replace(tail, _sep + "{}。如与上述权威文档冲突，以权威文档为准。*".format(spec["agents_note"]), 1)
+    # W721 根修（S-29·FAM-14 闭环·W719 R1 制度破约教训）：脚注滚动内建——条目 >5 时最老条迁
+    # ARCHIVE 尾块（第 12 面），指针上界同步；制度自此有执行机制，不再依赖手工 trim（W713/W719 两度）。
+    _fs = s.find("*本文件由")
+    _fline = s[_fs:].split(nl, 1)[0]
+    _segs = re.split(r"；(?=20\d{2}-\d{2}-\d{2}（)", _fline)
+    assert _fline.rstrip().endswith(tail) and len(_segs) >= 3, "脚注段解析异常（head/pointer/条目）"
+    _entries = list(_segs[1:])
+    _entries[-1] = _entries[-1][: -len(tail)]
+    if len(_entries) > 5:
+        def _wn(part):
+            m = re.search(r"（(?:v[\d.]+ )?W(\d{3})）", part)
+            assert m, "脚注条目批次号解析失败: " + part[:40]
+            return int(m.group(1))
+        _nums = [_wn(x) for x in _entries]
+        assert _nums == sorted(_nums), "脚注条目乱序: %s" % _nums
+        _overflow = len(_entries) - 5
+        _move, _keep = _entries[:_overflow], _entries[_overflow:]
+        _lo, _hi = _nums[0], _nums[_overflow - 1]
+        assert _wn(_keep[0]) == _hi + 1, "滚动切分不连续"
+        _arc = "docs/archive/AGENTS-ARCHIVE.md"
+        _as, _anl = load(_arc)
+        if not _as.endswith(_anl):
+            _as += _anl
+        _as += (
+            "以下为 AGENTS.md 版本脚注早期条目（W%d-W%d）段的原文"
+            "（单行沿革链·W%d 起级联自动滚动迁入·grep 查勿通读）：%s%s```text%s%s%s```%s"
+            % (_lo, _hi, new_w, _anl, _anl, _anl, "；".join(_move), _anl, _anl)
+        )
+        pend.append((_arc, _as, _anl))
+        _newline = "；".join([_segs[0].split("；")[0], _segs[0].split("；", 1)[1], *_keep]) + tail
+        # 指针上界刷新（历史续迁注保留·追加本批自动滚动段）
+        _newline = _newline.replace("W719 续迁 W708-W714·", "W719 续迁 W708-W714·W%d-W%d 级联自动滚动·" % (_lo, _hi))
+        assert _newline.endswith(tail) and "；".join(_keep) in _newline
+        s = s[:_fs] + _newline + s[_fs + len(_fline):]
     pend.append((p, s, nl))
 
     # ---------- CITATION.cff（W628 起第 10 面：version/date-released 随批同步——第 27 门禁 R2 面） ----------

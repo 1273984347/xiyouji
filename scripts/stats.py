@@ -78,6 +78,7 @@ META = {
     "inline_css_pages": {"domain": "site 全树含 INLINED 标记页", "introduced_by": "W459"},
     "gate_count": {"domain": "scripts/verify_delivery.py「第 N 槽/门禁」max", "introduced_by": "W493"},
     "a1_a6_docs": {"domain": "docs/01-06 六板块顶层内容 .md（排除 README）", "introduced_by": "W505"},
+    "a4_docs": {"domain": "docs/03-主题与情节专题/*.md（排除 README）", "introduced_by": "W722"},  # W722：A4 计数实体化（三处同改·用户裁决 6A）
     "methodology_docs": {"domain": "docs/10-方法论沉淀/*.md（含索引 README）", "introduced_by": "W070"},
     "script_classes": {"domain": "scripts/[A-Z]_* 类目录数", "introduced_by": "W528"},
 }
@@ -107,6 +108,7 @@ def build():
         len([p for p in glob.glob(os.path.join(ROOT, "docs", d, "*.md")) if not os.path.basename(p).startswith("README")])
         for d in CONTENT_DIRS
     )  # 口径对齐 verify 第 3 门禁：板块顶层内容 .md（排除各板块 README.md·615=621-6）
+    a4 = len([p for p in glob.glob(os.path.join(ROOT, "docs", "03-主题与情节专题", "*.md")) if not os.path.basename(p).startswith("README")])
     methodology = len(glob.glob(os.path.join(ROOT, "docs", "10-方法论沉淀", "*.md")))
     classes = [d for d in os.listdir(HERE) if os.path.isdir(os.path.join(HERE, d)) and d[:1].isalpha() and d[:1].isupper()]
 
@@ -125,6 +127,7 @@ def build():
         "inline_css_pages": inlined,
         "gate_count": gate_max,
         "a1_a6_docs": a1_a6,
+        "a4_docs": a4,
         "methodology_docs": methodology,
         # json_count 键已移除（W716）：scripts/output/data/ 系 gitignored 本地产物（.gitignore:59），
         # 依赖它的键在无本地产物环境 --check 必红，违反「tracked 基准 CI 可复现」原则（W703 声明对它不成立）
