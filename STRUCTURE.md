@@ -3,7 +3,7 @@
 
 > **📖 阅读契约（W707）**：索引型——找「东西在哪」时读顶层结构表+目标目录所在段；各板块下的建置沿革（v0.x W0xx 补齐…）是历史记录见 CHANGELOG，勿通读；计数与口径以磁盘实数与 [统计口径说明](docs/00-导读/统计口径说明.md) 为准。
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前批次：W721（2026-10-12）— 复盘增补与脚注滚动根修批—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前批次：W722（2026-10-12）— 八项裁决执行批—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构
@@ -78,7 +78,7 @@
 按人物立文件，例如 `孙悟空.md`、`唐僧.md` 等。已建 215 篇（A3 人物·谱系表+五众+妖魔+神佛+妖怪次级全覆盖·六段式模板·建置沿革见 [STRUCTURE-ARCHIVE](docs/archive/STRUCTURE-ARCHIVE.md) 与 CHANGELOG）。
 
 ### 03-主题与情节专题/
-按主题立文件（七段式模板），现 209 篇；建置沿革见 docs/archive/STRUCTURE-ARCHIVE.md 与 CHANGELOG。
+按主题立文件（七段式模板），现 209<!--stats:a4_docs--> 篇；建置沿革见 docs/archive/STRUCTURE-ARCHIVE.md 与 CHANGELOG。
 
 ### 04-文化与历史背景/
 成书背景、佛道思想、明代社会隐喻、版本演变、历史玄奘与小说玄奘等。已建 4 篇（成书背景/版本演变/佛道思想/明代隐喻·七段式模板·沿革见 [STRUCTURE-ARCHIVE](docs/archive/STRUCTURE-ARCHIVE.md) 与 CHANGELOG）。

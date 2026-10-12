@@ -1,0 +1,25 @@
+{
+  "batch": "W722",
+  "version": "v2.3",
+  "date": "2026-10-12",
+  "desc": "八项裁决执行批",
+  "title": "W722 八项裁决执行批",
+  "changelog_body": "\n\n> **来源**：用户 userselect「1A 2A 3A 4A 5A 6A 7B 8A」（第十七次挑刺=对我方推荐清单的 5 处质量问题全认领·修正版清单 v2 拍板）——八项裁决一次执行。\n> - **1A+5A+4A（S-28 例行化+S-30/S-27 成文·文档规范 §4.11 扩三节）**：「外部输入裁决流程」（S-27 落点=§4.11 裁决记录形态旁·pitfalls 系坑位不纳流程·用户修正采纳）+「处置自查扩面五项」（S-30 落点·①同型数字 grep②解析面枚举③未跟踪件④锚点语义对拍⑤流程面·基线 25%=W713-W719 三批 8/32 小样本 n=3 在案）——**S-28 例行化并入五项②（FAM-12 橙警强化落地·依赖 5A 已满足）**+「技能卡降级/重启契约」（禁频率低作理由·降级须列不受保护路径+重启触发）。\n> - **2A（C4-e 级联清单强校验）**：doc-sync gather 加 staged 集合（pre-commit 语境·CI/普通跑为空不适用）——提交树 ⊇ 当批 _cascade_files 清单，漏 add 即红（W649 漏 add 族机械化）；清单不存在→NOTE；**自建义务成文 pitfalls git 类**（手工级联批·W691/W693 先例 70 份在库）；self-test 14→15 例（T15 漏 add 必红）。\n> - **3A（S-26 降级）**：第 37 篇 S-26 卡状态注——降级后不受保护路径仅两条（手工 Edit/一次性脚本写共享文档·后者有写盘前断言软覆盖）；重启触发=事故 ≥1 次/月或单次 P1；降级契约入 §4.11。\n> - **6A（a4_docs 三处同改·EXPECT_A4 实体化收口）**：stats.py META+build 加 a4_docs 键（docs/03 顶层 .md−README·introduced_by W722）+五处叙述面标记化（README/STRUCTURE/AGENTS/交接/项目说明各一处现役口径·唯一锚点断言一次性脚本）+verify 第 3 门禁 EXPECT_A4 双形态适配（裸「209 篇」或「209<!--stats:a4_docs--> 篇」正则·门禁名沿用不改）；stats 15 键 --check 零差异（a4_docs=209 磁盘对上）。\n> - **7B+8A（双结案登记）**：四页脚链长治理=维持现状（无实测危害证据·A/C/D 备选登记待展示面偏好出现再启）；bump_version=维持停用（级联已全覆盖其职责）。\n> - **验证**：doc-sync self-test 15/15 + 门禁 0 FAIL + stats --check 零差异（15 键）+ verify full 46 段绿 + pytest 296 + ruff 0。\n> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。\n",
+  "head_entry": "2026-10-12（W722 八项裁决执行批）",
+  "head_sentence": "八项裁决一次执行与 a4 实体化收口",
+  "milestone_block": "- **W722 八项裁决执行批**：\n  - 1A/4A/5A：S-28 例行化并入 S-30 五项+S-27/S-30 成文（文档规范 §4.11 扩三节·流程不入 pitfalls 修正采纳）\n  - 2A：C4-e 级联清单强校验（staged⊇清单·漏 add 即红·self-test 15/15）+自建义务成文 pitfalls\n  - 3A：S-26 降级边界显式化（两路径+重启触发·§4.11 降级契约）；6A：a4_docs 三处同改收口（stats 15 键·五处标记化·EXPECT_A4 双形态）\n  - 7B 链长治理维持现状+8A bump 维持停用（双结案登记）\n",
+  "agents_note": "2026-10-12（W722）八项裁决执行批（用户 userselect 1A 2A 3A 4A 5A 6A 7B 8A·第十七次挑刺修正后拍板）：1A 加 4A 加 5A 文档规范 §4.11 扩三节（外部输入裁决流程 S-27 落点加 处置自查扩面五项 S-30 落点含 S-28 例行化并入 FAM-12 橙警强化落地 加 技能卡降级重启契约）加 2A C4-e 级联清单强校验（staged 超集清单·漏 add 即红·无清单 NOTE·自建义务成文 pitfalls·self-test 15/15）加 3A S-26 降级边界显式化（两路径加重启触发）加 6A a4_docs 三处同改收口（stats 15 键加五处叙述面标记化加 EXPECT_A4 双形态正则适配）加 7B 链长治理维持现状加 8A bump 维持停用双结案",
+  "file_index_rows": [
+    "| scripts/check_doc_sync.py | W722 | C4-e 级联清单强校验（staged 集合+T15·self-test 15 例） |",
+    "| scripts/stats.py | W722 | a4_docs 键（META+build·introduced_by W722） |",
+    "| scripts/output/stats.json | W722 | 15 键重生成（a4_docs=209） |",
+    "| scripts/output/stats-changelog.json | W722 | W722 变更条（a4_docs 新键） |",
+    "| scripts/output/stats-index.md | W722 | 实体卡刷新（a4_docs 行） |",
+    "| scripts/verify_delivery.py | W722 | EXPECT_A4 双形态适配（第 3 门禁·正则） |",
+    "| docs/00-导读/文档规范.md | W722 | §4.11 扩三节（裁决流程/自查扩面五项/降级重启契约） |",
+    "| docs/agent/pitfalls.md | W722 | git 类两条（自建清单义务/多组 add 禁 2>/dev/null） |",
+    "| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-12.md | W722 | S-26 卡降级状态注（W722 裁决） |",
+    "| docs/00-导读/项目说明.md | W722 | A4 计数实体标记化（6A） |",
+    "| docs/00-导读/W批次编号对账表.md | W722 | W722 认领+现势递延 |"
+  ]
+}
