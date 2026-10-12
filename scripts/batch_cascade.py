@@ -250,29 +250,45 @@ def main():
     out = out.replace(marker, f"无 workflow 结构改动）+ W{new_w} {desc}·无 workflow 结构改动）。", 1)
     pend.append((p, out, nl))
 
-    # ---------- 四页脚（W717 根修：页脚区锚定——旧 v 形态锚落在手工时代 W 形态头块之下，
-    # 新批 token 每批插在链中、新鲜度门禁读链头恒 WARN（W716 实证）；改锚 <footer> 区内
-    # 首个批次 token（双形态·与第 1 门禁 dukou 解析同语义），新批恒插链头。位置切片插入，
-    # 顺带消除旧 s.replace 全文首处歧义隐患。链头前各页固定文案（MIT License/分隔注释/佛法=AI）
-    # 均不含 W token·不受影响。链长观察：四链 12-17 token 持续增长·治理待契约（本批不扩）----------
+    # ---------- 四页脚（W717 锚定·W724 双重缺陷根修+链长治理）：
+    # 缺陷一=W717 版回写 mm.group(0) 而 s[at:] 已含该段 → 每批整链复制一遍（W705 错位链自强化页脚版·
+    # 六批后 index 重复 182 token/dukou 216·用户浏览器实见）；缺陷二=800 字符窗口截断 mm 致插入点
+    # 落 token 中间（「v2.3.28W722」粘连实证）。根修=完整 footer 节点内定位首 token·纯前插不回写·
+    # 插入后批次段裁剪至 12 条+尾注（链长治理落地·历史权威在 CHANGELOG 零信息损失）·去重断言。
     _FOOT_RE = re.compile(r"<footer[^>]*>")
+    _FOOT_TOKEN = re.compile(r"(?:v[\d.]+(?:\s*·\s*)?)?W\d{3}")
+    _FOOT_MAX = 12
+
+    def _foot_insert(s_html, new_token):
+        f = _FOOT_RE.search(s_html)
+        assert f, "未找到 <footer>"
+        f_close = s_html.find("</footer>", f.end())
+        node_e = f_close if f_close != -1 else len(s_html)
+        mm = _FOOT_TOKEN.search(s_html, f.end(), node_e)
+        assert mm, "页脚链头 token 未命中（footer 节点全宽）"
+        # 链文本节点=token 所在节点（dukou=footer 直后·index 等=footer-meta 内），全程插入前坐标
+        n_start = s_html.rfind(">", 0, mm.start()) + 1  # W724 修正：dukou footer 开标签>在 f.end() 前·rfind 须全文件回溯
+        n_end = s_html.find("<", mm.start())
+        node = s_html[n_start:n_end]
+        parts = node.split(" · ")
+        first = next(i for i, seg in enumerate(parts) if re.search(r"W\d{3}", seg))
+        batch = [new_token] + parts[first:]
+        if len(batch) > _FOOT_MAX:
+            batch = batch[:_FOOT_MAX] + ["…更早批次详见 CHANGELOG.md"]
+        elif len(batch) == _FOOT_MAX:
+            batch = batch + ["…更早批次详见 CHANGELOG.md"]
+        new_node = " · ".join(parts[:first] + batch)
+        _wns = re.findall(r"W\d{3}", new_node)
+        assert len(_wns) == len(set(_wns)), "页脚链 token 重复（W724 防线）"
+        return s_html[:n_start] + new_node + s_html[n_start + len(node):]
+
     for p in ["site/index.html", "site/data/cross-time-danmaku.html", "site/data/tag-cloud.html"]:
         s, _ = load(p)
-        f = _FOOT_RE.search(s)
-        assert f, p + " 未找到 <footer>"
-        mm = re.search(r"(?:v[\d.]+\s*·\s*)?W\d+[^<]*", s[f.end():f.end() + 800])
-        assert mm, p + " 页脚链头 token 未命中（<footer> 后 800 字符窗口）"
-        at = f.end() + mm.start()
-        pend.append((p, s[:at] + f"{batch} {desc} · " + mm.group(0) + s[at:], None))
+        pend.append((p, _foot_insert(s, f"{batch} {desc}"), None))
     p = "site/dukou-engine.html"
     s, _ = load(p)
-    f = _FOOT_RE.search(s)
-    assert f, p + " 未找到 <footer>"
-    mm = re.search(r"(?:v[\d.]+\s*)?W\d+[^<]*", s[f.end():f.end() + 800])
-    assert mm, p + " 页脚链头 token 未命中（<footer> 后 800 字符窗口）"
-    at = f.end() + mm.start()
     head_short = spec["head_sentence"].split("——")[0]
-    pend.append((p, s[:at] + f"{batch} {desc}（{head_short}） · " + mm.group(0) + s[at:], None))
+    pend.append((p, _foot_insert(s, f"{batch} {desc}（{head_short}）"), None))
 
     # ---------- AGENTS 脚注 ----------
     p = "AGENTS.md"

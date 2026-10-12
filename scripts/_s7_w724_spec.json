@@ -1,0 +1,19 @@
+{
+  "batch": "W724",
+  "version": "v2.3",
+  "date": "2026-10-12",
+  "desc": "页脚链损坏修复与链长治理批",
+  "title": "W724 页脚链损坏修复与链长治理批",
+  "changelog_body": "\n\n> **来源**：用户浏览器实见 site/index.html footer-meta 内容异常提问「为什么这个内容这么多」——取证定谳为重复损坏（非设计）。\n> - **根因（W717 页脚锚定根修埋雷·六批自强化）**：缺陷一=插入代码回写 mm.group(0) 而 s[at:] 本身已含该段 → 每批把整条链复制一遍（W705「错位块链自强化」的页脚版）；缺陷二=800 字符搜索窗口截断 mm 致插入点落 token 中间（「v2.3.28W722」粘连实证）。六批累计：index footer-meta 9198 字符/329 token/重复 182、danmaku/tag-cloud 各 2700/135/127、dukou 14883/406/216；W718-W723 六批验证只 grep 链头未查重复=验收盲区。\n> - **根修（batch_cascade 四页脚段重写）**：完整 footer 节点内定位首 token·纯前插**不回写** mm.group(0)·插入后批次段裁剪至 12 条+尾注「…更早批次详见 CHANGELOG.md」（**7B 链长治理就此落地**——损坏实害成立后从冻结转实施·历史权威在 CHANGELOG 零信息损失）+去重断言（节点内 W token 不得重复·防线）。\n> - **四页重建**：一次性脚本按「token 首现段」打捞原始未损坏文本（每批首次插入时段=完整）——index/dukou 各 11 条、danmaku/tag-cloud 8 条（其链 W717 起才有·历史链在注释区）+尾注；重建后四页 0 重复·161-409 字符。\n> - **验收盲区补防**：级联四页脚断言新增去重检查（写入前拦截）——重复损坏自本批起不可能再发生。\n> - **验证**：四页重建后 0 重复 + 级联 dry/apply（新裁剪逻辑真数据：插 W724 后 12 条+尾注）+ verify full + pytest + ruff + C4-f 提交时自证。\n> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。\n> - **文件**：scripts/batch_cascade.py、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、交接文档.md、.github/workflows/README.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、docs/00-导读/W批次编号对账表.md。\n",
+  "head_entry": "2026-10-12（W724 页脚链损坏修复与链长治理批）",
+  "head_sentence": "页脚链去重重建与治理落地",
+  "milestone_block": "- **W724 页脚链损坏修复与链长治理批**：\n  - W717 双重缺陷根修（group(0) 回写整链复制+800 窗口截断粘连·六批自强化 index 重复 182）——纯前插不回写+去重断言\n  - 7B 链长治理落地：12 条裁剪+尾注（损坏实害成立转实施·四页重建干净链 0 重复）\n",
+  "agents_note": "2026-10-12（W724）页脚链损坏修复与链长治理批（用户浏览器实见页脚异常提问触发）：W717 双重缺陷根修（group(0) 回写致每批整链复制加 800 窗口截断致 token 粘连·六批自强化 index 重复 182/dukou 216·验证盲区=只查链头未查重复）改 纯前插不回写加去重断言加 7B 链长治理落地（12 条裁剪加尾注加历史权威 CHANGELOG 零损失）加 四页首现段打捞重建干净链 0 重复",
+  "file_index_rows": [
+    "| scripts/batch_cascade.py | W724 | 四页脚双重缺陷根修（去回写+完整节点+12 条裁剪尾注+去重断言·7B 治理落地） |",
+    "| site/index.html | W724 | footer-meta 链重建（去重 182·11 条+尾注） |",
+    "| site/data/cross-time-danmaku.html | W724 | footer-meta 链重建（去重 127·8 条+尾注） |",
+    "| site/data/tag-cloud.html | W724 | footer-meta 链重建（去重 127·8 条+尾注） |",
+    "| site/dukou-engine.html | W724 | 页脚链重建（去重 216·11 条+尾注） |"
+  ]
+}
