@@ -65,6 +65,9 @@ def precheck(spec):
                               % (field, sep))
     if not str(spec.get("title", "")).startswith(str(spec.get("batch", ""))):
         issues.append("spec.title 未以 batch 号领衔（现役段解析取标题首个 W###·合并段场景必须显式领衔）")
+    if "**文件**：" not in str(spec.get("changelog_body", "")):
+        issues.append("spec.changelog_body 缺「**文件**：」行（四件套必填·W723 起第 31 门禁 C4-f 据其对账手工件入库·"
+                      "路径须写 repo 相对路径·见 pitfalls git 类）")
     return issues
 
 

@@ -1,0 +1,18 @@
+{
+  "batch": "W723",
+  "version": "v2.3",
+  "date": "2026-10-12",
+  "desc": "级联清单反向覆盖根修批",
+  "title": "W723 级联清单反向覆盖根修批",
+  "changelog_body": "\n\n> **来源**：用户圈选 HANDOVER v2 登记的根修候选「级联清单反向覆盖断言」现做（手工件漏 add 三犯 W721/W722 的根因收口·W537③ 八批旧账一并清偿）。\n> - **根修（C4-f 文件清单入库对账·第 31 门禁）**：现役段「文件」行的 repo 相对路径 token ⊆ HEAD 树∪staged 且无工作树未提交残留，违者 FAIL——级联清单（C4-e）只列级联面，**手工编辑件唯「文件」行可追溯**（W721/W722 三处漏 add 全是清单外手工件）；缺「文件」行/无路径 token → NOTE 起步策略（W719/W722 实证近期批次缺行）。\n> - **数据源强制（级联 precheck）**：spec changelog_body 必含「**文件**：」行，缺则 PRECHECK-FAIL——四件套必填项（维护契约③）自此有机器保证。\n> - **成文**：pitfalls git 类新条（文件行全量列名义务+三犯实证）+W537③ 更新（「无门禁覆盖」→「C4-f 已覆盖」）+文档规范 §5 版本段补文件行路径形态规范（禁纯描述列举）。\n> - **本批自证**：本段「文件」行即首个规范形态示范（全量 repo 相对路径·级联面+手工件）；self-test 16→18 例（T17 漏入库必红/T18 工作树残留必红）。\n> - **验证**：self-test 18/18 + ruff 0 + verify full + pytest（级联后复跑）+ 提交时 C4-f 真数据自证（staged 场景）。\n> - **状态**：已落地（CI 工作流以推送后 gh run list 为准）。\n> - **文件**：scripts/check_doc_sync.py、scripts/batch_cascade.py、docs/agent/pitfalls.md、docs/00-导读/文档规范.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、交接文档.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、scripts/output/file-index.md、docs/archive/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md。\n",
+  "head_entry": "2026-10-12（W723 级联清单反向覆盖根修批）",
+  "head_sentence": "文件行入库对账与数据源强制",
+  "milestone_block": "- **W723 级联清单反向覆盖根修批**：\n  - C4-f 文件清单入库对账（现役段「文件」行路径⊆HEAD 树∪staged+无残留·手工件唯一防线·W537③ 清偿）\n  - 级联 precheck 强制 body 含「文件」行（数据源源头保证）+pitfalls/文档规范成文路径形态规范（禁描述列举）\n  - 本段文件行即首个规范形态示范（19 token 全量列名）+self-test 16→18 例\n",
+  "agents_note": "2026-10-12（W723）级联清单反向覆盖根修批（用户圈选 HANDOVER v2 根修候选现做加 W537③ 八批旧账清偿）：C4-f 文件清单入库对账（现役段文件行路径 token 子集 HEAD 树∪staged 加无工作树残留加违者 FAIL 加缺行 NOTE 起步策略加手工件唯一防线三犯实证）加 级联 precheck 强制 body 含文件行（四件套必填机器保证）加 pitfalls git 类新条与 W537③ 更新加 文档规范 §5 文件行路径形态规范禁描述列举加 本段文件行首个规范示范加 self-test 16→18 例（T17/T18）",
+  "file_index_rows": [
+    "| scripts/check_doc_sync.py | W723 | C4-f 文件清单入库对账（file_list_paths 解析+dirty 双断言+T17/T18·self-test 18 例） |",
+    "| scripts/batch_cascade.py | W723 | precheck 强制 body 含「文件」行（数据源源头保证） |",
+    "| docs/agent/pitfalls.md | W723 | git 类文件行义务新条+W537③ 更新指向 C4-f |",
+    "| docs/00-导读/文档规范.md | W723 | §5 版本段文件行路径形态规范（禁描述列举） |"
+  ]
+}
