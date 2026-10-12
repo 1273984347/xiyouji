@@ -64,7 +64,7 @@
 | W696 | 工作复盘与优化分析报告第二篇（W693 三裁决+W694/W695 并行周期·含 §6.1 复发预防专项 FAM 十族）入库 + 方法论 README 索引第 34 行 | 本次提交（级联 v2.3.290·batch_cascade 原生） | v2.3.290 | **已收官** | ZCode 2026-10-10 |
 | W682 | agent-web 引擎更换批次三：WF-1 复活（golden-50 新引擎 LLM 基线·评估集首跑） | 3b0dfed（预留在案·W680 收官批注记） | 待批次落段 | **作废**（W686·用户裁决 workflow 方案退役·WF-1 复活随之取消·后续重新设计另认领新号） | ZCode 2026-10-07 |
 | W703 | 聚合数字对账门禁批（用户方案·A+C 修正形态）：scripts/stats.py 磁盘实算生成 stats.json（tracked）+ 第 31 门禁扩 C5（18 式高危聚合句式×现役叙述面 vs stats.json·CHANGELOG 仅口径块·基线时点值句式表设计豁免）+ AGENTS §4.2 第 31 条目 C5 + 文档规范 §4.10 聚合数字书写规范 + self-test 7→9 例 | 本次提交（级联 v2.3.297·batch_cascade 原生） | v2.3.297 | **已收官**（6eeb65d9） | ZCode 2026-10-11 |
-| W727 | SVG 保护补打与级联 CRLF 根修批（用户 quote 拍板批次 B 选项 1 直接打掉）：fix_svg 修复后首跑对 35 个可视化页补打 clientWidth 最小宽度保护（W400 后新增页存量清偿·generate_csp 重注入全站 856 页 858 哈希零漂移·audit dry-run 0 待改=W447 起死盲区复绿）+ batch_cascade L176 rfind(nl)+1 改 +len(nl)（CRLF 工作树双字符 nl off-by-one 根修——W726 级联 apply 致交接文档混行尾裸 CR+裸 LF·W706 混行尾防线在 W727 dry-run 正确拦截 fail-closed 实证·LF 工作树旧写法恒正确故此前批次未暴露）+ 交接文档两处字节级修复加块间接缝归位（740 CRLF 纯净） | 本次提交（batch_cascade 原生级联） | W727（方案 D 批次键） | **进行中** | ZCode 2026-10-13 |
+| W727 | SVG 保护补打与级联 CRLF 根修批（用户 quote 拍板批次 B 选项 1 直接打掉）：fix_svg 修复后首跑对 35 个可视化页补打 clientWidth 最小宽度保护（W400 后新增页存量清偿·generate_csp 重注入全站 856 页 858 哈希零漂移·audit dry-run 0 待改=W447 起死盲区复绿）+ batch_cascade L176 rfind(nl)+1 改 +len(nl)（CRLF 工作树双字符 nl off-by-one 根修——W726 级联 apply 致交接文档混行尾裸 CR+裸 LF·W706 混行尾防线在 W727 dry-run 正确拦截 fail-closed 实证·LF 工作树旧写法恒正确故此前批次未暴露）+ 交接文档两处字节级修复加块间接缝归位（740 CRLF 纯净） | 本次提交（batch_cascade 原生级联） | W727（方案 D 批次键） | **已收官**（054dbf63） | ZCode 2026-10-13 |
 | W726 | 本地工具链修复批（用户令「排查代码中的报错」·无具体报错转全量扫描）：缺陷 1 fix_svg_negative_widths.py ROOT 少一级（W447 归档搬迁 scripts/→archive/ 未同步·site/data glob 静默空扫+dashboard.html 读崩·make audit 每跑必挂·沙盒验证修复后 87 页扫描 35 页待打保护=W400 后审计死盲区）+缺陷 2 make data-validate 空目录 rc=1（output/data/*.json 系 gitignore 可重建产物·fresh clone 未跑 analyze 必挂 make ci）+缺陷 3 lint_links 全仓 12 broken（README→drl-screenshot-review.md 本地件·学术论文索引 7×v08-embedded-data.js 构建产物·4×心学方向-投稿版 W620 出库件·第 6 门禁只扫 docs/ 故全绿） | 本次提交（batch_cascade 原生级联） | W726（方案 D 批次键） | **已收官**（134b75eb） | ZCode 2026-10-13 |
 | W725 | review 收官 mini 批（用户令 review·范围 W720-W724 十一提交·W719 先例第八次）：机械扫净（混行尾/双写/豁免链 W725 连续）+门禁复跑六连全绿+文件行覆盖度对账（W720-W722 缺行系 precheck 前历史形态·W723 全覆盖·W724 漏列 2 件现役段补列）+S-29 指针滚动注单段化（累积四段→单段最新·本批级联自动收敛）+垃圾件 PIPE/_s7_w724_chore.txt 清除 | 0a94edae（batch_cascade 原生级联） | W725（方案 D 批次键） | **已收官**（0a94edae） | ZCode 2026-10-12 |
 | W724 | 页脚链损坏修复与链长治理批（用户浏览器实见 footer-meta 重复损坏提问触发）：四页 footer 链 W717 起 group(0) 回写+800 窗口截断双重缺陷致每批整链复制（index 重复 182/dukou 216）——batch_cascade 根修（去回写+完整节点+12 条裁剪尾注+去重断言）+四页重建干净链 | 150eeca3（batch_cascade 原生级联·C4-f 拦文件行漏 add 对账表一犯） | W724（方案 D 批次键） | **已收官**（150eeca3） | ZCode 2026-10-12 |
@@ -118,6 +118,7 @@
 - **W725**：现势下一自由号（150eeca3 w724 对账表现势行预留引用·2026-10-12·checklist 例行）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W726**：现势下一自由号（0a94edae w725 对账表现势行预留引用·2026-10-12·checklist 例行）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W727**：现势下一自由号（134b75eb w726 对账表现势行预留引用·2026-10-13·checklist 例行）——**预留登记豁免**，动工时按取号规则正式认领。
+- **W728**：现势下一自由号（054dbf63 w727 对账表现势行预留引用·2026-10-13·checklist 例行）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W691**：下一自由号被 W690 收官级联提交文本（4ab918d「现势 W691」）提前引用——C4 豁免登记（2026-10-09 补记）；本号仍为自由号，认领时正常占用。
 
 ## 登记 ASCII 纪律
