@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W729），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W730），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,18 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W730（2026-10-13）：门禁脚本长函数收尾重构批
+
+> **来源**：用户令「第三批候选按同一方法论推进」（承接 W728 方案档 §七 / W729 报告末条）。动工前 fetch origin 确认无撞号（origin/main 仍 W727·W730 认领）。
+> - **范围裁决（证据版·AST 度量）**：候选池三向比较——a11y 剩余最长仅 74 行（check_parsing·扫描器固有形态）排除；JS 侧最大非一次性文件仅 531 行且验证需 Playwright 重环境（抖动口径）排除；选定「两挂载门禁 + 一名命名候选」：check_doc_sync.py（evaluate 177 行·第 31 门禁·自带 self-test 18 例）+ lint_links.py（main 125 行·docs 链接门禁）+ perf_monitor.collect_rum_metrics（98 行·W729 遗留命名候选）。
+> - **T1 check_doc_sync.py（592→618 行）**：evaluate 177→20 行编排体（拆 _check_c1_readme_head/_check_c2_jiaojie_head/_check_c3_agents_slots/_check_c4_commit_ledger/_check_c5_aggregate_stats/_check_c5d_stats_recheck 六个检查函数——每条检查消息逐字节保留·fail-closed 早退语义等价）；gather 82→65（提取 _git_output_lines 合并 staged/head_tree/status 三处同构 git subprocess 块·git log 块因错误捕获语义独特保留原样）；**run_self_test 146 行经审计判定已表驱动（逻辑约 30 行·116 行为测试数据表）不动——防过度重构**。
+> - **T2 lint_links.py（442→473 行）**：main 125→33 行编排体（拆 _parse_args 参数构建/_resolve_scan_dir 目录解析与退出/_collect_scan_files 收集过滤/_process_file 单文件处理返回三计数——逐行打印序逐字节保留·args.fix→do_fix 参数化）。
+> - **T3 perf_monitor.py（1085→1085 行·净零）**：collect_rum_metrics 98→约 40 行编排体（拆 _try_read_rum 读取早退/_normalize_rum_events 形态归一/_bucket_rum_events 按页归集/_summarize_rum_p75 双 P75 汇总）；文件最长函数降至 88 行（compare_trend）。
+> - **验证（全绿）**：check_doc_sync 直跑输出 + --self-test 18/18 输出**双逐字节一致**；lint_links --dir docs 全量输出逐字节一致（5190 链接·0 broken）；collect_rum_metrics 11 形态合成 fixture 快照逐字节一致（正常/events 数组/裸数组/坏 JSON/缺失文件/内联 dict/内联 list/空 list/空 dict/非 dict 类型/不存在路径）+集成路径实测（--rum 数据流：events=5·2 页·alerts=2·aggregate 五键齐）；pytest 296 passed；ruff scripts/ 全量 0。
+> - **方法论沉淀（本批新增）**：「拆分前先审计是否已达标」——run_self_test 146 行体量看着大、实为既有表驱动（数据表≠逻辑），判定不动；同构块合并须逐块核对错误语义（git log 块 error 捕获与其余三块不同→不强行统一）。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：scripts/check_doc_sync.py、scripts/lint_links.py、scripts/perf_monitor.py、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、交接文档.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、scripts/output/file-index.md。
 
 ### W729（2026-10-13）：性能与可访问性工具链重构批
 

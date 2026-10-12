@@ -11,6 +11,15 @@
 ---
 
 
+## W730 门禁脚本长函数收尾重构批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_sync.py | W730 | evaluate 177→20（拆 _check_c1..c5d 六检查函数）+gather 提取 _git_output_lines（三块合一） |
+| scripts/lint_links.py | W730 | main 125→33（拆 _parse_args/_resolve_scan_dir/_collect_scan_files/_process_file） |
+| scripts/perf_monitor.py | W730 | collect_rum_metrics 98→编排体（拆 _try_read_rum/_normalize_rum_events/_bucket_rum_events/_summarize_rum_p75） |
+| docs/00-导读/W批次编号对账表.md | W730 | W730 认领行登记 |
+
 ## W729 性能与可访问性工具链重构批（2026-10-13）
 
 | 文件 | W | 说明 |
