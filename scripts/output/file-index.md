@@ -11,6 +11,14 @@
 ---
 
 
+## W729 性能与可访问性工具链重构批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/perf_monitor.py | W729 | build_report/compare_trend/check_budget/run 四长函数拆分（≥80 行 5→2·净 +58 行换 9 函数） |
+| scripts/a11y_audit.py | W729 | audit_directory/_render_md 拆分（≥80 行 2→0·净 +48 行换 7 函数） |
+| docs/00-导读/W批次编号对账表.md | W729 | W729 认领行登记 |
+
 ## W728 门禁与工具链代码重构批（2026-10-13）
 
 | 文件 | W | 说明 |
