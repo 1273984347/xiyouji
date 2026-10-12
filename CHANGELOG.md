@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W730），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W731），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,18 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W731（2026-10-13）：发布工具链与安全扫描重构批
+
+> **来源**：用户令「继续第四批」（承接 W728-W730 三批重构方法论固化）。动工前 fetch origin 确认无撞号（origin/main 仍 W727·W731 认领）。
+> - **范围裁决（证据版·AST 度量 TOP25）**：全仓最长函数 `batch_cascade.py main` 347 行入选（发布流程核心工具·十面级联断言与改写全在单函数内）；`security_scan.py run` 91 行+`build_report` 81 行入选（有单测 12 例+报告对比抓手成熟）。排除：`check_doc_sync run_self_test` 146 行（W730 已审计判定表驱动形态不动）、`perf compare_trend` 88 行（留第五批与 perf 收尾合并）。
+> - **T1 batch_cascade.py（429→492 行·main 347→33 行·≥80 行函数 1→0）**：十个面各提取一函数（_face_changelog 31/_face_three_docs 26/_handover_rotate_oldest 37/_face_handover 60/_face_workflows 17/_face_footers 9/_face_agents 41/_face_citation 9/_face_file_index 10）+ 页脚 _foot_insert 提模块级+_agents_entry_wn 提模块级 + 落盘 _apply_pend + 写后自检 _post_check + _Ctx 上下文承载跨面共享量；全部历史注释（53 条行首注释无损自检）与断言消息逐字节保留（W534→W727 教训链是文件核心资产）。
+> - **T2 security_scan.py run 91→42**：拆 _prepare_scan_targets（--target/--all 文件集解析）/三阶段检查（_run_headers_check/_run_sri_check/_run_pip_audit_check）/落盘 _write_report_files/退出码 _exit_code。
+> - **T3 security_scan.py build_report 81→编排体**：拆 _summarize_findings（统计+排序）+ 六段渲染（_render_md_header/rule_stats/details/rule_list/深化/fixes·md 行序列零改）+ 组装体。（文件 797→870 行·≥80 行函数 2→0）
+> - **验证（对拍级·本批新增受控 apply 对拍手法）**：batch_cascade 以「19 个历史 spec + W731 草稿」全量 dry-run 输出对比（归一化 traceback 行号/函数名——重构的结构性变化·exit 码+stdout+错误消息逐字节一致）+ **受控 apply 对拍**（旧版落盘快照→git checkout 撤销→新版落盘→diff）——14 文件级联落盘 diff 265 行逐字节全等 + manifest 一致 + 写后自检全过；security_scan 单测 12 passed + --all 报告 JSON/MD 双 IDENTICAL（除 timestamp/耗时）+ CLI 三分支对拍（target 正常/不存在/无参数）一致；pytest 296 + ruff 0 + 全量门禁 53 项 OK。
+> - **踩坑记录（经验沉淀）**：① _handover_rotate_oldest 提取时遗漏 return s（原就地修改→函数化须回传）——草稿 spec dry-run 立即 TypeError 抓住；19 个历史 spec 全部在早期断言失败（现役段号不匹配）覆盖不到 handover 面——**草稿 spec 走通全 10 面的必要性实证**；② dry-run 对比口径归一化：traceback 含行号/函数名/源码行（重构结构性变化不可比较），口径=exit 码+stdout+错误消息行；③ apply 对拍须排除重构文件自身 diff（basline 采于旧版时该文件=HEAD 无改动态）；④ batch_cascade 为 CRLF 工作树（autocrlf=true 检出）——切片重组脚本 LF 归一处理、写回恢复 CRLF、替换表逐行化+行首注释无损自检（53 条）防注释丢失；⑤ 消息文本的渲染段函数名缩写（w 加三位数字形态）被 C4 提交对账提取为未登记批次号 FAIL——reset --soft 重提交并改写为『深化』（amend 死锁：旧提交在 log -15 自查窗口内），消息与文档中函数名类引用此后须避开 W 加三位数字形态。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：scripts/batch_cascade.py、scripts/security_scan.py、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、交接文档.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、scripts/output/file-index.md。
 
 ### W730（2026-10-13）：门禁脚本长函数收尾重构批
 

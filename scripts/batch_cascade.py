@@ -71,114 +71,83 @@ def precheck(spec):
     return issues
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--spec", required=True)
-    ap.add_argument("--apply", action="store_true")
-    args = ap.parse_args()
-    spec = json.load(open(args.spec, encoding="utf-8"))
-    pre_issues = precheck(spec)
-    if pre_issues:
-        for it in pre_issues:
-            print("[PRECHECK-FAIL] " + it)
-        print("[PRECHECK] %d 项违例——修正 spec 后重跑（参照 AGENTS §4.3 desc 分隔符规则）" % len(pre_issues))
-        return 1
-    batch, date = spec["batch"], spec["date"]  # W711：ver 字段弃用（方案 D 批次键唯一·spec.version 仅存档）
-    desc = spec["desc"]
-    entry = spec["head_entry"]
-    assert entry.endswith("）"), "head_entry 必须以闭合括号结尾"
-    assert "（" not in spec["head_sentence"] and "）" not in spec["head_sentence"], (
-        "head_sentence 禁含全角括号——会破坏下一批「当前 HEAD 句」断言的 [^）]* 匹配（W649 实证：W648 嵌套括号致本批断言 FAIL，交接文档已手工修复）"
-    )
-    pend = []  # (path, content, nl)
+class _Ctx:
+    """级联上下文：spec 字段 + 派生量 + 落盘队列（W731 提取）。"""
 
+    def __init__(self, spec):
+        self.spec = spec
+        self.batch, self.date = spec["batch"], spec["date"]  # W711：ver 字段弃用（方案 D 批次键唯一·spec.version 仅存档）
+        self.desc = spec["desc"]
+        self.entry = spec["head_entry"]
+        self.new_w = None     # CHANGELOG 面回填：现役段号 + 1
+        self.new_rule = None  # CHANGELOG 面回填：编号规则段新形态
+        self.pend = []        # (path, content, nl) 落盘队列
+        self.cl_src = ""      # CHANGELOG 原文（交接文档面 W534 断言用）
+
+
+def _face_changelog(ctx):
+    """CHANGELOG 面：插入新段并推进编号规则（回填 ctx.new_w/new_rule/cl_src）。"""
     # ---------- CHANGELOG ----------
     p = "CHANGELOG.md"
     s, nl = load(p)
-    cl_src = s  # W713：保留 CHANGELOG 原文，供交接里程碑淘汰前断言（W534 承诺）
+    ctx.cl_src = s  # W713：保留 CHANGELOG 原文，供交接里程碑淘汰前断言（W534 承诺）
     # W711 方案 D 双形态：历史段 ### vX.Y.Z（date）：W### / 新段 ### W###（date）：标题
     m = re.search(r"^### (?:v[\d.]+（[^）]*）：W(\d+)|W(\d+)（[^）]*）：)", s, re.M)
     assert m, "CHANGELOG 未找到现役段"
     cur_anchor = m.group(0)
     cur_w = int(m.group(1) or m.group(2))
     new_w = cur_w + 1
-    assert batch == "W" + str(new_w), f"批次号应为 W{new_w}"
-    assert ("### " + batch) not in s, batch + " 段已存在"
+    ctx.new_w = new_w
+    assert ctx.batch == "W" + str(new_w), f"批次号应为 W{new_w}"
+    assert ("### " + ctx.batch) not in s, ctx.batch + " 段已存在"
     old_rule, new_rule = f"（W001-W{cur_w}）", f"（W001-W{new_w}）"
+    ctx.new_rule = new_rule
     # W712：cur_anchor 改行首锚定——段 body 内的形态示例引用（反引号内·非行首）不再使计数爆炸
     assert s.count(old_rule) == 1, "编号规则段锚点异常"
     _anchor_hits = len(re.findall(rf"^{re.escape(cur_anchor)}", s, re.M))
     assert _anchor_hits == 1, f"现役段标题行首命中 {_anchor_hits}（应为 1·body 自指内容须避开行首同形）"
     # W713：precheck 强制 title 以批次号领衔（历史段 ：W### 解析依赖），新形态段标题由模板自带 batch——
     # 模板侧清洗 title 领衔号，防「### W713（date）：W713 标题」双写（W711/W712 实证·file-index 同根）
-    title_body = re.sub(r"^W\d+\s+", "", spec["title"]).strip()
-    new_title = f"### {batch}（{date}）：{title_body}"
-    _ins = new_title + spec["changelog_body"].replace("\n", nl) + nl + cur_anchor
+    title_body = re.sub(r"^W\d+\s+", "", ctx.spec["title"]).strip()
+    new_title = f"### {ctx.batch}（{ctx.date}）：{title_body}"
+    _ins = new_title + ctx.spec["changelog_body"].replace("\n", nl) + nl + cur_anchor
     out = re.sub(rf"^{re.escape(cur_anchor)}", lambda m: _ins, s, count=1, flags=re.M)  # W717：lambda 字面替换——replacement 串语义会把 body 中的 \d 等当转义（bad escape·本批实证）
     # re.sub 行首锚定插入（W712：防 body 自指·replace 全文计数会误伤）
     out = out.replace(old_rule, new_rule, 1)
     assert out.count(new_title) == 1 and out.count(new_rule) == 1
-    pend.append((p, out, nl))
+    ctx.pend.append((p, out, nl))
 
+
+def _face_three_docs(ctx):
+    """README / STRUCTURE / 项目说明 三文档批头版本行。"""
     # ---------- README / STRUCTURE / 项目说明 ----------
     p = "README.md"
     s, nl = load(p)
     out = re.sub(r"> \*\*当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）\*\*：\s*(?:v[\d.]+\s+)?(?:W\d+\s+)?[^·]*·A1-A6",
-                 f"> **当前批次 {batch}（{date}）**：{desc}·A1-A6", s, count=1)  # W711 方案 D 新抬头·W712 锚点兼容 desc 直连形态
+                 f"> **当前批次 {ctx.batch}（{ctx.date}）**：{ctx.desc}·A1-A6", s, count=1)  # W711 方案 D 新抬头·W712 锚点兼容 desc 直连形态
     assert out != s, "README 版本行未变化"
-    pend.append((p, out, nl))
+    ctx.pend.append((p, out, nl))
 
     p = "STRUCTURE.md"
     s, nl = load(p)
     out = re.sub(r"> 当前(?:版本：v[\d.]+|批次：W\d+)（[^）]*）— (?:v[\d.]+\s+)?(?:W\d+\s+)?[^—]*—\s*A1-A6",
-                 f"> 当前批次：{batch}（{date}）— {desc}—A1-A6", s, count=1)  # W712 锚点兼容 desc 直连
+                 f"> 当前批次：{ctx.batch}（{ctx.date}）— {ctx.desc}—A1-A6", s, count=1)  # W712 锚点兼容 desc 直连
     assert out != s, "STRUCTURE 版本行未变化"
-    pend.append((p, out, nl))
+    ctx.pend.append((p, out, nl))
 
     p = "docs/00-导读/项目说明.md"
     s, nl = load(p)
     out = re.sub(r"> 当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）：(?:v[\d.]+\s+)?(?:W\d+\s+)?[^·]*·详细变更见",
-                 f"> 当前批次 {batch}（{date}）：{desc}·详细变更见", s, count=1)  # W712 锚点兼容 desc 直连
+                 f"> 当前批次 {ctx.batch}（{ctx.date}）：{ctx.desc}·详细变更见", s, count=1)  # W712 锚点兼容 desc 直连
     assert out != s, "项目说明头部版本行未变化"
     out2 = re.sub(r"(\*\*当前(?:版本|批次)\*\*：)(?:v[\d.]+|W\d+)（[^）]*）— (?:v[\d.]+\s+)?(?:W\d+\s+)?[^·]*",
-                  rf"\g<1>{batch}（{date}）— {desc}", out, count=1)
+                  rf"\g<1>{ctx.batch}（{ctx.date}）— {ctx.desc}", out, count=1)
     assert out2 != out, "项目说明「当前版本」列表行未变化（正则失配·fail-closed——W711 起 desc 直连形态实证·W713 补断言）"
-    pend.append((p, out2, nl))
+    ctx.pend.append((p, out2, nl))
 
-    # ---------- 交接文档 ----------
-    p = "交接文档.md"
-    s, nl = load(p)
-    assert s.count("））；") == 0, "基线已存在双括号，先人工处理"
-    s = s.replace("> 最后更新：", "> 最后更新：" + entry + "·", 1)
-    h0 = s.find("> 最后更新：")
-    h1 = s.find(nl, h0)
-    head_line = s[h0:h1]
-    entries = re.findall(r"·20\d{2}-\d{2}-\d{2}（", head_line)
-    while len(entries) + 1 > 3:
-        note_idx = head_line.find("·（W")
-        assert note_idx != -1, "未找到历史注记锚点"
-        oldest = head_line.rfind("·20", 0, note_idx)
-        assert oldest != -1
-        head_line = head_line[:oldest] + head_line[note_idx:]
-        entries = re.findall(r"·20\d{2}-\d{2}-\d{2}（", head_line)
-    s = s[:h0] + head_line + s[h1:]
-    s = re.sub(r"；(?:v[\d.]+ W\d+|W\d+) 起生效）", f"；{batch} 起生效）", s, count=1)  # W713 双形态（该行现不存在=静默无操作·防未来回加时失配）
-    # W705 教训：标题锚点与替换串形态必须恒定——旧替换串丢 ver 前缀致下一批锚点静默失配（re.sub 0 替换不报错），
-    # 里程碑块遂在头部错位堆积、drop_block 跨段淘汰吞掉「一、当前进度」标题。此处改双形态锚点 + count 断言 fail-closed。
-    _prog = re.compile(r"## 一、当前进度（(?:v[\d.]+ )?W\d+ [^；]*；更早批次详见 CHANGELOG\.md）")
-    assert len(_prog.findall(s)) == 1, "「一、当前进度」标题锚点失配（W705 教训：静默失配后逐批漂移·先修复交接文档结构再级联）"
-    s = _prog.sub(f"## 一、当前进度（{batch} {desc}；更早批次详见 CHANGELOG.md）", s, count=1)
-    fb = re.search(r"- \*\*(?:v[\d.]+ )?W\d+", s)  # W713 双形态（W711 起新块无 v 前缀）
-    h1pos = s.find("## 一、当前进度")
-    assert fb and h1pos != -1 and fb.start() > h1pos, (
-        "里程碑首块必须位于「一、当前进度」段内（W705 教训：文件头错位块链自我强化·先修复交接文档结构再级联）"
-    )
-    # W727 根修：rfind(nl)+1 在双字符 nl（CRLF 工作树·autocrlf=true）下少进 1 字节——
-    # 标题行尾 \r\n 被撕成裸 \r（里程碑块插到 \r 与 \n 之间）+ 块尾多出裸 \n，交接文档混行尾
-    # （W706 防线在下批 dry-run 正确拦截·fail-closed 实证）。LF 工作树 nl 单字符故 +1 恒正确，
-    # 此前批次均运行于 LF 工作树所以未暴露。+len(nl) 双形态恒公。
-    at = s.rfind(nl, 0, fb.start()) + len(nl)
-    s = s[:at] + spec["milestone_block"].replace("\n", nl) + nl + s[at:]
+
+def _handover_rotate_oldest(s, ctx, nl, h1pos):
+    """交接文档：滚动淘汰最老里程碑块并同步「历史概要」指针（W534/W624/W713 语义）。"""
     pm = re.search(r"> 历史概要（W(\d+) 及更早）的详细记录见", s)
     assert pm, "未找到历史概要指针"
     oldest_w = pm.group(1)
@@ -198,7 +167,7 @@ def main():
     eidx = s.find(f"> 历史概要（W{oldest_w} 及更早）的详细记录见", bm_start)
     assert eidx != -1
     # W534 承诺恢复（W713）：淘汰前断言该批详细记录已入 CHANGELOG 段（信息零丢失）
-    assert re.search(rf"^### (?:v[\d.]+（[^）]*）：W{oldest_w}\b|W{oldest_w}（[^）]*）：)", cl_src, re.M), (
+    assert re.search(rf"^### (?:v[\d.]+（[^）]*）：W{oldest_w}\b|W{oldest_w}（[^）]*）：)", ctx.cl_src, re.M), (
         f"CHANGELOG 无 W{oldest_w} 段（W534 契约：删前逐批断言 CHANGELOG 有段）"
     )
     # W624 修复：整块淘汰 = 标题行 + 其后连续 bullet 行（至空行/新组/标题/引用行止）。
@@ -214,15 +183,55 @@ def main():
     assert _remain, "淘汰后里程碑窗口为空（异常）"
     s = s.replace(f"> 历史概要（W{oldest_w} 及更早）的详细记录见",
                   f"> 历史概要（W{min(_remain)} 及更早）的详细记录见", 1)
+    return s
+
+
+def _face_handover(ctx):
+    """交接文档面：头尾链/进度标题/里程碑块/HEAD 句全量改写与结构断言。"""
+    # ---------- 交接文档 ----------
+    p = "交接文档.md"
+    s, nl = load(p)
+    assert s.count("））；") == 0, "基线已存在双括号，先人工处理"
+    s = s.replace("> 最后更新：", "> 最后更新：" + ctx.entry + "·", 1)
+    h0 = s.find("> 最后更新：")
+    h1 = s.find(nl, h0)
+    head_line = s[h0:h1]
+    entries = re.findall(r"·20\d{2}-\d{2}-\d{2}（", head_line)
+    while len(entries) + 1 > 3:
+        note_idx = head_line.find("·（W")
+        assert note_idx != -1, "未找到历史注记锚点"
+        oldest = head_line.rfind("·20", 0, note_idx)
+        assert oldest != -1
+        head_line = head_line[:oldest] + head_line[note_idx:]
+        entries = re.findall(r"·20\d{2}-\d{2}-\d{2}（", head_line)
+    s = s[:h0] + head_line + s[h1:]
+    s = re.sub(r"；(?:v[\d.]+ W\d+|W\d+) 起生效）", f"；{ctx.batch} 起生效）", s, count=1)  # W713 双形态（该行现不存在=静默无操作·防未来回加时失配）
+    # W705 教训：标题锚点与替换串形态必须恒定——旧替换串丢 ver 前缀致下一批锚点静默失配（re.sub 0 替换不报错），
+    # 里程碑块遂在头部错位堆积、drop_block 跨段淘汰吞掉「一、当前进度」标题。此处改双形态锚点 + count 断言 fail-closed。
+    _prog = re.compile(r"## 一、当前进度（(?:v[\d.]+ )?W\d+ [^；]*；更早批次详见 CHANGELOG\.md）")
+    assert len(_prog.findall(s)) == 1, "「一、当前进度」标题锚点失配（W705 教训：静默失配后逐批漂移·先修复交接文档结构再级联）"
+    s = _prog.sub(f"## 一、当前进度（{ctx.batch} {ctx.desc}；更早批次详见 CHANGELOG.md）", s, count=1)
+    fb = re.search(r"- \*\*(?:v[\d.]+ )?W\d+", s)  # W713 双形态（W711 起新块无 v 前缀）
+    h1pos = s.find("## 一、当前进度")
+    assert fb and h1pos != -1 and fb.start() > h1pos, (
+        "里程碑首块必须位于「一、当前进度」段内（W705 教训：文件头错位块链自我强化·先修复交接文档结构再级联）"
+    )
+    # W727 根修：rfind(nl)+1 在双字符 nl（CRLF 工作树·autocrlf=true）下少进 1 字节——
+    # 标题行尾 \r\n 被撕成裸 \r（里程碑块插到 \r 与 \n 之间）+ 块尾多出裸 \n，交接文档混行尾
+    # （W706 防线在下批 dry-run 正确拦截·fail-closed 实证）。LF 工作树 nl 单字符故 +1 恒正确，
+    # 此前批次均运行于 LF 工作树所以未暴露。+len(nl) 双形态恒公。
+    at = s.rfind(nl, 0, fb.start()) + len(nl)
+    s = s[:at] + ctx.spec["milestone_block"].replace("\n", nl) + nl + s[at:]
+    s = _handover_rotate_oldest(s, ctx, nl, h1pos)
     hs = re.search(r"当前 HEAD = (?:v[\d.]+ )?W\d+（[^）]*；详见 CHANGELOG）", s)
     assert hs, "未找到当前 HEAD 句"
-    s = s[:hs.start()] + "当前 HEAD = {}（{}；详见 CHANGELOG）".format(batch, spec["head_sentence"]) + s[hs.end():]
+    s = s[:hs.start()] + "当前 HEAD = {}（{}；详见 CHANGELOG）".format(ctx.batch, ctx.spec["head_sentence"]) + s[hs.end():]
     # W560 修复：尾链 prepend 必须锚定文末行（旧实现 s.replace("最后更新：", ..., 1) 命中的是
     # 头链首处 → 头链 entry 双写「E；E·」，W556/W557/W558 三批实证）。改用 rfind 定位文末行。
     tail_idx = s.rfind("最后更新：")
     assert tail_idx != -1, "未找到文末「最后更新」历史链"
-    if entry + "；" not in s[tail_idx : tail_idx + len(entry) + 2]:
-        s = s[:tail_idx] + "最后更新：" + entry + "；" + s[tail_idx + len("最后更新："):]
+    if ctx.entry + "；" not in s[tail_idx : tail_idx + len(ctx.entry) + 2]:
+        s = s[:tail_idx] + "最后更新：" + ctx.entry + "；" + s[tail_idx + len("最后更新："):]
     # W560: 尾链维持 ≤3 条（交接文档维护契约②）
     tline_end = s.find(nl, tail_idx)
     tline = s[tail_idx:tline_end]
@@ -236,71 +245,88 @@ def main():
     _z, _y, _e = (s.find("## ⚠️ 零、当前阻塞"), s.find("## 一、当前进度"), s.find("## 二、下一步方向候选清单"))
     assert -1 < _z < _y < _e, f"交接文档段序破坏（零={_z} 一={_y} 二={_e}）——段标题被吞（结构断言·落盘前拦截）"
     assert re.search(r"> 历史概要（W\d+ 及更早）的详细记录见", s), "交接文档历史概要指针缺失（结构断言·落盘前拦截）"
-    pend.append((p, s, nl))
+    ctx.pend.append((p, s, nl))
 
+
+def _face_workflows(ctx):
+    """workflows README 头部区间与里程碑尾标记。"""
     # ---------- workflows README ----------
     p = ".github/workflows/README.md"
     s, nl = load(p)
     BS = chr(92)
     winpath = "`D:" + BS + "xiyouji`"  # W596：旧值为已不存在的双副本路径，曾每批续写进 workflows README
     pat_wf = re.compile(r"→ W450-W\d+\*\* — 西游记解读项目（" + re.escape(winpath) + r"，(?:v[\d.]+\s+)?W\d+）的 GitHub Actions 工作流层。")  # W711 双形态（ver 可选）
-    repl_wf = f"→ W450-W{new_w}** — 西游记解读项目（{winpath}，{batch}）的 GitHub Actions 工作流层。"
+    repl_wf = f"→ W450-W{ctx.new_w}** — 西游记解读项目（{winpath}，{ctx.batch}）的 GitHub Actions 工作流层。"
     out = pat_wf.sub(lambda m: repl_wf, s, count=1)
     assert out != s, "workflows 头部未变化"
     out = re.sub(r"> \*\*W450-W\d+\*\*：verify 门禁体系扩展",
-                 f"> **W450-W{new_w}**：verify 门禁体系扩展", out, count=1)
+                 f"> **W450-W{ctx.new_w}**：verify 门禁体系扩展", out, count=1)
     marker = "无 workflow 结构改动）。"
     assert out.count(marker) == 1, f"里程碑尾标记出现 {out.count(marker)} 次"
-    out = out.replace(marker, f"无 workflow 结构改动）+ W{new_w} {desc}·无 workflow 结构改动）。", 1)
-    pend.append((p, out, nl))
+    out = out.replace(marker, f"无 workflow 结构改动）+ W{ctx.new_w} {ctx.desc}·无 workflow 结构改动）。", 1)
+    ctx.pend.append((p, out, nl))
 
-    # ---------- 四页脚（W717 锚定·W724 双重缺陷根修+链长治理）：
-    # 缺陷一=W717 版回写 mm.group(0) 而 s[at:] 已含该段 → 每批整链复制一遍（W705 错位链自强化页脚版·
-    # 六批后 index 重复 182 token/dukou 216·用户浏览器实见）；缺陷二=800 字符窗口截断 mm 致插入点
-    # 落 token 中间（「v2.3.28W722」粘连实证）。根修=完整 footer 节点内定位首 token·纯前插不回写·
-    # 插入后批次段裁剪至 12 条+尾注（链长治理落地·历史权威在 CHANGELOG 零信息损失）·去重断言。
-    _FOOT_RE = re.compile(r"<footer[^>]*>")
-    _FOOT_TOKEN = re.compile(r"(?:v[\d.]+(?:\s*·\s*)?)?W\d{3}")
-    _FOOT_MAX = 12
 
-    def _foot_insert(s_html, new_token):
-        f = _FOOT_RE.search(s_html)
-        assert f, "未找到 <footer>"
-        f_close = s_html.find("</footer>", f.end())
-        node_e = f_close if f_close != -1 else len(s_html)
-        mm = _FOOT_TOKEN.search(s_html, f.end(), node_e)
-        assert mm, "页脚链头 token 未命中（footer 节点全宽）"
-        # 链文本节点=token 所在节点（dukou=footer 直后·index 等=footer-meta 内），全程插入前坐标
-        n_start = s_html.rfind(">", 0, mm.start()) + 1  # W724 修正：dukou footer 开标签>在 f.end() 前·rfind 须全文件回溯
-        n_end = s_html.find("<", mm.start())
-        node = s_html[n_start:n_end]
-        parts = node.split(" · ")
-        first = next(i for i, seg in enumerate(parts) if re.search(r"W\d{3}", seg))
-        batch = [new_token] + parts[first:]
-        if len(batch) > _FOOT_MAX:
-            batch = batch[:_FOOT_MAX] + ["…更早批次详见 CHANGELOG.md"]
-        elif len(batch) == _FOOT_MAX:
-            batch = batch + ["…更早批次详见 CHANGELOG.md"]
-        new_node = " · ".join(parts[:first] + batch)
-        _wns = re.findall(r"W\d{3}", new_node)
-        assert len(_wns) == len(set(_wns)), "页脚链 token 重复（W724 防线）"
-        return s_html[:n_start] + new_node + s_html[n_start + len(node):]
+# ---------- 四页脚（W717 锚定·W724 双重缺陷根修+链长治理）：
+# 缺陷一=W717 版回写 mm.group(0) 而 s[at:] 已含该段 → 每批整链复制一遍（W705 错位链自强化页脚版·
+# 六批后 index 重复 182 token/dukou 216·用户浏览器实见）；缺陷二=800 字符窗口截断 mm 致插入点
+# 落 token 中间（「v2.3.28W722」粘连实证）。根修=完整 footer 节点内定位首 token·纯前插不回写·
+# 插入后批次段裁剪至 12 条+尾注（链长治理落地·历史权威在 CHANGELOG 零信息损失）·去重断言。
+_FOOT_RE = re.compile(r"<footer[^>]*>")
+_FOOT_TOKEN = re.compile(r"(?:v[\d.]+(?:\s*·\s*)?)?W\d{3}")
+_FOOT_MAX = 12
 
+def _foot_insert(s_html, new_token):
+    f = _FOOT_RE.search(s_html)
+    assert f, "未找到 <footer>"
+    f_close = s_html.find("</footer>", f.end())
+    node_e = f_close if f_close != -1 else len(s_html)
+    mm = _FOOT_TOKEN.search(s_html, f.end(), node_e)
+    assert mm, "页脚链头 token 未命中（footer 节点全宽）"
+    # 链文本节点=token 所在节点（dukou=footer 直后·index 等=footer-meta 内），全程插入前坐标
+    n_start = s_html.rfind(">", 0, mm.start()) + 1  # W724 修正：dukou footer 开标签>在 f.end() 前·rfind 须全文件回溯
+    n_end = s_html.find("<", mm.start())
+    node = s_html[n_start:n_end]
+    parts = node.split(" · ")
+    first = next(i for i, seg in enumerate(parts) if re.search(r"W\d{3}", seg))
+    batch = [new_token] + parts[first:]
+    if len(batch) > _FOOT_MAX:
+        batch = batch[:_FOOT_MAX] + ["…更早批次详见 CHANGELOG.md"]
+    elif len(batch) == _FOOT_MAX:
+        batch = batch + ["…更早批次详见 CHANGELOG.md"]
+    new_node = " · ".join(parts[:first] + batch)
+    _wns = re.findall(r"W\d{3}", new_node)
+    assert len(_wns) == len(set(_wns)), "页脚链 token 重复（W724 防线）"
+    return s_html[:n_start] + new_node + s_html[n_start + len(node):]
+
+
+def _face_footers(ctx):
+    """四页脚批次链插入（W717 锚定·W724 双重缺陷根修+链长治理）。"""
     for p in ["site/index.html", "site/data/cross-time-danmaku.html", "site/data/tag-cloud.html"]:
         s, _ = load(p)
-        pend.append((p, _foot_insert(s, f"{batch} {desc}"), None))
+        ctx.pend.append((p, _foot_insert(s, f"{ctx.batch} {ctx.desc}"), None))
     p = "site/dukou-engine.html"
     s, _ = load(p)
-    head_short = spec["head_sentence"].split("——")[0]
-    pend.append((p, _foot_insert(s, f"{batch} {desc}（{head_short}）"), None))
+    head_short = ctx.spec["head_sentence"].split("——")[0]
+    ctx.pend.append((p, _foot_insert(s, f"{ctx.batch} {ctx.desc}（{head_short}）"), None))
 
+
+def _agents_entry_wn(part):
+    """解析脚注条目批次号（W### 形态）·W721 滚动切分用。"""
+    m = re.search(r"（(?:v[\d.]+ )?W(\d{3})）", part)
+    assert m, "脚注条目批次号解析失败: " + part[:40]
+    return int(m.group(1))
+
+
+def _face_agents(ctx):
+    """AGENTS 脚注批次注记 + >5 条滚动迁 ARCHIVE（W721 内建机制）。"""
     # ---------- AGENTS 脚注 ----------
     p = "AGENTS.md"
     s, nl = load(p)
     tail = "。如与上述权威文档冲突，以权威文档为准。*"
     assert s.count(tail) == 1, "AGENTS 脚注尾锚点异常"
     _sep = "" if s[: s.index(tail)].rstrip().endswith("；") else "；"
-    s = s.replace(tail, _sep + "{}。如与上述权威文档冲突，以权威文档为准。*".format(spec["agents_note"]), 1)
+    s = s.replace(tail, _sep + "{}。如与上述权威文档冲突，以权威文档为准。*".format(ctx.spec["agents_note"]), 1)
     # W721 根修（S-29·FAM-14 闭环·W719 R1 制度破约教训）：脚注滚动内建——条目 >5 时最老条迁
     # ARCHIVE 尾块（第 12 面），指针上界同步；制度自此有执行机制，不再依赖手工 trim（W713/W719 两度）。
     _fs = s.find("*本文件由")
@@ -310,16 +336,12 @@ def main():
     _entries = list(_segs[1:])
     _entries[-1] = _entries[-1][: -len(tail)]
     if len(_entries) > 5:
-        def _wn(part):
-            m = re.search(r"（(?:v[\d.]+ )?W(\d{3})）", part)
-            assert m, "脚注条目批次号解析失败: " + part[:40]
-            return int(m.group(1))
-        _nums = [_wn(x) for x in _entries]
+        _nums = [_agents_entry_wn(x) for x in _entries]
         assert _nums == sorted(_nums), "脚注条目乱序: %s" % _nums
         _overflow = len(_entries) - 5
         _move, _keep = _entries[:_overflow], _entries[_overflow:]
         _lo, _hi = _nums[0], _nums[_overflow - 1]
-        assert _wn(_keep[0]) == _hi + 1, "滚动切分不连续"
+        assert _agents_entry_wn(_keep[0]) == _hi + 1, "滚动切分不连续"
         _arc = "docs/archive/AGENTS-ARCHIVE.md"
         _as, _anl = load(_arc)
         if not _as.endswith(_anl):
@@ -327,38 +349,43 @@ def main():
         _as += (
             "以下为 AGENTS.md 版本脚注早期条目（W%d-W%d）段的原文"
             "（单行沿革链·W%d 起级联自动滚动迁入·grep 查勿通读）：%s%s```text%s%s%s```%s"
-            % (_lo, _hi, new_w, _anl, _anl, _anl, "；".join(_move), _anl, _anl)
+            % (_lo, _hi, ctx.new_w, _anl, _anl, _anl, "；".join(_move), _anl, _anl)
         )
-        pend.append((_arc, _as, _anl))
+        ctx.pend.append((_arc, _as, _anl))
         _newline = "；".join([_segs[0].split("；")[0], _segs[0].split("；", 1)[1], *_keep]) + tail
         # 指针上界刷新（W725 单段化：旧累积滚动注先剥除·只保留单段最新区间——防逐批膨胀）
         _newline = re.sub(r"(?:W\d{3}-W\d{3} 级联自动滚动·)+", "", _newline)
         _newline = _newline.replace("W719 续迁 W708-W714·", "W719 续迁 W708-W714·W%d-W%d 级联自动滚动·" % (_lo, _hi))
         assert _newline.endswith(tail) and "；".join(_keep) in _newline
         s = s[:_fs] + _newline + s[_fs + len(_fline):]
-    pend.append((p, s, nl))
+    ctx.pend.append((p, s, nl))
 
+
+def _face_citation(ctx):
+    """CITATION.cff 版本/日期同步（第 10 面）。"""
     # ---------- CITATION.cff（W628 起第 10 面：version/date-released 随批同步——第 27 门禁 R2 面） ----------
     p = "CITATION.cff"
     s, nl = load(p)
-    out = re.sub(r'(?m)^version:\s*"[^"]+"', f'version: "{batch}"', s, count=1)
-    out = re.sub(r'(?m)^date-released:\s*"[^"]+"', f'date-released: "{date}"', out, count=1)
+    out = re.sub(r'(?m)^version:\s*"[^"]+"', f'version: "{ctx.batch}"', s, count=1)
+    out = re.sub(r'(?m)^date-released:\s*"[^"]+"', f'date-released: "{ctx.date}"', out, count=1)
     assert out != s, "CITATION.cff 版本/日期行未变化"
-    pend.append((p, out, nl))
+    ctx.pend.append((p, out, nl))
 
+
+def _face_file_index(ctx):
+    """file-index 最新段插入。"""
     # ---------- file-index ----------
     p = "scripts/output/file-index.md"
     s, nl = load(p)
     mm = re.search(r"## (W\d+) ", s)
     assert mm, "file-index 未找到最新段"
-    rows = nl.join(["## {} {}（{}）".format(batch, re.sub(r"^W\d+\s+", "", spec["title"].split(" — ")[0].split("（")[0]).strip(), date),
-                    "", "| 文件 | W | 说明 |", "|---|---|---|"] + spec["file_index_rows"] + ["", ""])
-    pend.append((p, s.replace(mm.group(0), rows + mm.group(0), 1), nl))
+    rows = nl.join(["## {} {}（{}）".format(ctx.batch, re.sub(r"^W\d+\s+", "", ctx.spec["title"].split(" — ")[0].split("（")[0]).strip(), ctx.date),
+                    "", "| 文件 | W | 说明 |", "|---|---|---|"] + ctx.spec["file_index_rows"] + ["", ""])
+    ctx.pend.append((p, s.replace(mm.group(0), rows + mm.group(0), 1), nl))
 
-    # ---------- 落盘 ----------
-    if not args.apply:
-        print(f"[DRY-RUN] 10 个面断言与改写全部通过：{batch}（规则 {new_rule}）。加 --apply 落盘。")
-        return 0
+
+def _apply_pend(pend, batch):
+    """apply 阶段：统一落盘 + 写级联清单（W560 newline 坑规避）。"""
     # W560 修复：newline 恒为 ""——旧实现对 CRLF 文件传 newline=nl，io 层把 content 中
     # 既有 \r\n 的每个 \n 再翻译一次 → \r 翻倍（实测累计至 4×CR，全页视觉损毁）。
     for path, content, _nl in pend:
@@ -378,6 +405,9 @@ def main():
         f.write("\n".join(p for p, _, _ in pend) + "\n")
     print(f"[MANIFEST] 级联落盘清单 {len(pend)} 个文件 → {manifest}（提交时按清单 git add；清单本身随批入库）")
 
+
+def _post_check(pend, batch):
+    """写后自检（W560 并入 jiacheck 要点）：CR 串/交接文档结构/头尾链；返回问题清单。"""
     # ---------- 写后自检 + 自愈（W560：并入 _cascade_fix.py 与 jiacheck 要点） ----------
     selfcheck = []
     for path, _, _nl in pend:
@@ -416,7 +446,40 @@ def main():
                 selfcheck.append("交接文档: 「九、使用说明」段缺失——需人工核查")
     for line in selfcheck:
         print("[SELF-CHECK]", line)
-    print(f"[APPLY] 级联完成：{batch} / {new_rule}，共 {len(pend)} 个文件；写后自检 {'发现 %d 项' % len(selfcheck) if selfcheck else '全部通过'}")
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--spec", required=True)
+    ap.add_argument("--apply", action="store_true")
+    args = ap.parse_args()
+    spec = json.load(open(args.spec, encoding="utf-8"))
+    pre_issues = precheck(spec)
+    if pre_issues:
+        for it in pre_issues:
+            print("[PRECHECK-FAIL] " + it)
+        print("[PRECHECK] %d 项违例——修正 spec 后重跑（参照 AGENTS §4.3 desc 分隔符规则）" % len(pre_issues))
+        return 1
+    ctx = _Ctx(spec)
+    assert ctx.entry.endswith("）"), "head_entry 必须以闭合括号结尾"
+    assert "（" not in ctx.spec["head_sentence"] and "）" not in ctx.spec["head_sentence"], (
+        "head_sentence 禁含全角括号——会破坏下一批「当前 HEAD 句」断言的 [^）]* 匹配（W649 实证：W648 嵌套括号致本批断言 FAIL，交接文档已手工修复）"
+    )
+    _face_changelog(ctx)
+    _face_three_docs(ctx)
+    _face_handover(ctx)
+    _face_workflows(ctx)
+    _face_footers(ctx)
+    _face_agents(ctx)
+    _face_citation(ctx)
+    _face_file_index(ctx)
+    # ---------- 落盘 ----------
+    if not args.apply:
+        print(f"[DRY-RUN] 10 个面断言与改写全部通过：{ctx.batch}（规则 {ctx.new_rule}）。加 --apply 落盘。")
+        return 0
+    _apply_pend(ctx.pend, ctx.batch)
+    selfcheck = _post_check(ctx.pend, ctx.batch)
+    print(f"[APPLY] 级联完成：{ctx.batch} / {ctx.new_rule}，共 {len(ctx.pend)} 个文件；写后自检 {'发现 %d 项' % len(selfcheck) if selfcheck else '全部通过'}")
     return 0
 
 
