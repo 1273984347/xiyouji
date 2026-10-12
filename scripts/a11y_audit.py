@@ -2329,42 +2329,69 @@ def audit_file(file_path):
     return findings
 
 
+def _scan_html_files(root):
+    """发现目录下全部 HTML 并逐文件执行 40 项检查（W729 重构从 audit_directory 提取）。
+
+    返回 (html_files, all_findings)。
+    """
+    html_files = sorted(root.rglob("*.html"))
+    all_findings = []
+    for f in html_files:
+        all_findings.extend(audit_file(f))
+    return html_files, all_findings
+
+
+def _count_by_rule(all_findings):
+    """按规则 × 严重度归集 findings 计数表（W729 重构从 audit_directory 提取）。"""
+    counts = {r: {"P0": 0, "P1": 0, "P2": 0, "P3": 0} for r, _ in ALL_CHECKS}
+    for fd in all_findings:
+        if fd["rule_id"] in counts and fd["severity"] in counts[fd["rule_id"]]:
+            counts[fd["rule_id"]][fd["severity"]] += 1
+    return counts
+
+
+def _emit_json(root, html_files, counts, all_findings):
+    """JSON 格式报告输出（W729 重构从 audit_directory 提取）。"""
+    out = {
+        "generated_at": datetime.now().isoformat(timespec="seconds"),
+        "scanned_dir": str(root),
+        "file_count": len(html_files),
+        "rule_count": len(ALL_CHECKS),
+        "summary": counts,
+        "findings": all_findings,
+    }
+    print(json.dumps(out, ensure_ascii=False, indent=2))
+
+
+def _emit_md(root, html_files, counts, all_findings, quiet):
+    """Markdown 格式报告输出（打印 + 落盘 a11y-report.md）（W729 重构提取）。"""
+    report = _render_md(root, html_files, counts, all_findings)
+    if not quiet:
+        print(report)
+    out_path = Path(__file__).parent / "output" / "a11y-report.md"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(report, encoding="utf-8")
+
+
 def audit_directory(root_dir, output_format="md", quiet=False):
-    """扫描目录下所有 HTML，运行 40 项检查，输出报告"""
+    """扫描目录下所有 HTML，运行 40 项检查，输出报告
+
+    W729 重构：84 行单体拆为 _scan_html_files（发现+扫描）+ _count_by_rule（计数表）
+    + _emit_json/_emit_md（输出分流）+ 本函数（编排+退出码）。
+    """
     root = Path(root_dir)
     if not root.exists():
         print(f"错误：目录不存在 {root}", file=sys.stderr)
         return 2
 
-    html_files = sorted(root.rglob("*.html"))
-    all_findings = []
-    for f in html_files:
-        all_findings.extend(audit_file(f))
-
-    # 计数表
-    counts = {r: {"P0": 0, "P1": 0, "P2": 0, "P3": 0} for r, _ in ALL_CHECKS}
-    for fd in all_findings:
-        if fd["rule_id"] in counts and fd["severity"] in counts[fd["rule_id"]]:
-            counts[fd["rule_id"]][fd["severity"]] += 1
+    html_files, all_findings = _scan_html_files(root)
+    counts = _count_by_rule(all_findings)
     p0_total = sum(c["P0"] for c in counts.values())
 
     if output_format == "json":
-        out = {
-            "generated_at": datetime.now().isoformat(timespec="seconds"),
-            "scanned_dir": str(root),
-            "file_count": len(html_files),
-            "rule_count": len(ALL_CHECKS),
-            "summary": counts,
-            "findings": all_findings,
-        }
-        print(json.dumps(out, ensure_ascii=False, indent=2))
+        _emit_json(root, html_files, counts, all_findings)
     else:
-        report = _render_md(root, html_files, counts, all_findings)
-        if not quiet:
-            print(report)
-        out_path = Path(__file__).parent / "output" / "a11y-report.md"
-        out_path.parent.mkdir(parents=True, exist_ok=True)
-        out_path.write_text(report, encoding="utf-8")
+        _emit_md(root, html_files, counts, all_findings, quiet)
 
     return 1 if p0_total > 0 else 0
 
@@ -2413,8 +2440,59 @@ RULE_DESCRIPTIONS = {
 }
 
 
+def _top_files_by_findings(all_findings, root, limit=5):
+    """按 findings 数取 Top N 文件（路径相对 root）（W729 重构从 _render_md 提取）。"""
+    file_counts = {}
+    for fd in all_findings:
+        try:
+            rel = str(Path(fd["file"]).relative_to(root))
+        except Exception:
+            rel = fd["file"]
+        file_counts[rel] = file_counts.get(rel, 0) + 1
+    return sorted(file_counts.items(), key=lambda x: -x[1])[:limit]
+
+
+def _render_top_findings(all_findings, root, limit=10):
+    """渲染 Top N findings 详情段（按严重度+规则 ID 排序）（W729 重构从 _render_md 提取）。"""
+    lines = ["## Top 10 findings 详情", ""]
+    sev_order = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
+    sorted_f = sorted(all_findings, key=lambda x: (sev_order.get(x["severity"], 9), x["rule_id"]))
+    for i, fd in enumerate(sorted_f[:limit], 1):
+        rel = fd["file"]
+        try:
+            rel = str(Path(rel).relative_to(root))
+        except Exception:
+            pass
+        lines.append(f"### {i}. [{fd['severity']}] {fd['rule_id']} {fd['rule_name']}")
+        lines.append(f"- 文件：`{rel}`")
+        lines.append(f"- 行号：{fd['line']}")
+        lines.append(f"- 描述：{fd['message']}")
+        if fd["evidence"]:
+            lines.append(f"- 证据：`{fd['evidence']}`")
+        lines.append("")
+    return lines
+
+
+def _render_priority_guide():
+    """渲染「建议修复优先级」固定四档段（W729 重构从 _render_md 提取·内容静态）。"""
+    return [
+        "## 建议修复优先级",
+        "",
+        "1. **P0 阻断级**：立即修复（aria-hidden 与可聚焦冲突、`<img>` 完全无 alt）",
+        "2. **P1 严重**：本轮迭代内修复（role=button 缺键盘事件、对比度 < 3:1、tabindex>0、拖拽缺键盘替代、对话框焦点陷阱、按钮缺可访问名）",
+        "3. **P2 一般**：下个版本修复（对比度 3–4.5:1、`<noscript>` 缺失、aria 互斥、目标尺寸 < 24px、缺 :focus-visible、帮助链接未入 landmark）",
+        "4. **P3 提示**：作为优化项跟踪（`<th>` 缺 scope、`alt=\"\"` 配 `role=\"presentation\"`）",
+        "",
+    ]
+
+
 def _render_md(root, html_files, counts, all_findings):
-    """渲染 markdown 报告"""
+    """渲染 markdown 报告
+
+    W729 重构：82 行单体拆为 _top_files_by_findings（Top5 文件统计）
+    + _render_top_findings（Top10 详情）+ _render_priority_guide（优先级段）
+    + 本函数（元信息/规则说明/计数表装配）。
+    """
     lines = []
     lines.append("# 西游记项目 a11y 审查报告")
     lines.append("")
@@ -2450,15 +2528,7 @@ def _render_md(root, html_files, counts, all_findings):
         f"**{totals['P2']}** | **{totals['P3']}** | **{sum(totals.values())}** |"
     )
     lines.append("")
-    # Top 5 文件问题数
-    file_counts = {}
-    for fd in all_findings:
-        try:
-            rel = str(Path(fd["file"]).relative_to(root))
-        except Exception:
-            rel = fd["file"]
-        file_counts[rel] = file_counts.get(rel, 0) + 1
-    top_files = sorted(file_counts.items(), key=lambda x: -x[1])[:5]
+    top_files = _top_files_by_findings(all_findings, root)
     if top_files:
         lines.append("## Top 5 文件问题数")
         lines.append("")
@@ -2467,30 +2537,8 @@ def _render_md(root, html_files, counts, all_findings):
         for rel, n in top_files:
             lines.append(f"| `{rel}` | {n} |")
         lines.append("")
-    lines.append("## Top 10 findings 详情")
-    lines.append("")
-    sev_order = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
-    sorted_f = sorted(all_findings, key=lambda x: (sev_order.get(x["severity"], 9), x["rule_id"]))
-    for i, fd in enumerate(sorted_f[:10], 1):
-        rel = fd["file"]
-        try:
-            rel = str(Path(rel).relative_to(root))
-        except Exception:
-            pass
-        lines.append(f"### {i}. [{fd['severity']}] {fd['rule_id']} {fd['rule_name']}")
-        lines.append(f"- 文件：`{rel}`")
-        lines.append(f"- 行号：{fd['line']}")
-        lines.append(f"- 描述：{fd['message']}")
-        if fd["evidence"]:
-            lines.append(f"- 证据：`{fd['evidence']}`")
-        lines.append("")
-    lines.append("## 建议修复优先级")
-    lines.append("")
-    lines.append("1. **P0 阻断级**：立即修复（aria-hidden 与可聚焦冲突、`<img>` 完全无 alt）")
-    lines.append("2. **P1 严重**：本轮迭代内修复（role=button 缺键盘事件、对比度 < 3:1、tabindex>0、拖拽缺键盘替代、对话框焦点陷阱、按钮缺可访问名）")
-    lines.append("3. **P2 一般**：下个版本修复（对比度 3–4.5:1、`<noscript>` 缺失、aria 互斥、目标尺寸 < 24px、缺 :focus-visible、帮助链接未入 landmark）")
-    lines.append("4. **P3 提示**：作为优化项跟踪（`<th>` 缺 scope、`alt=\"\"` 配 `role=\"presentation\"`）")
-    lines.append("")
+    lines.extend(_render_top_findings(all_findings, root))
+    lines.extend(_render_priority_guide())
     lines.append("---")
     lines.append("")
     lines.append("由 `scripts/a11y_audit.py` 生成 · W264-E2 + W271-E2 + W275-E2 + W279-E2 + W283-E2 + W316-E2 a11y 深化 · 40 条 WCAG 2.2 完整规范规则 · v2.2.68")

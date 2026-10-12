@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W728），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W729），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,16 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W729（2026-10-13）：性能与可访问性工具链重构批
+
+> **来源**：用户令「重构第二批（a11y_audit/perf_monitor）按同一方法论推进」（承接 W728 方案档 §七扩展面·同流程=AST 度量选题→采行为基线→重构→对比验证→批次级联）。动工前 fetch origin 确认无撞号（origin/main 仍 W727·对账表 max=W728·W729 认领）。
+> - **T1 perf_monitor.py（998→1056 行·净 +58 行换 9 个可测函数）**：build_report 189→67 行（提取 _summarize_results 统计/_render_vitals_table 逐页表/_render_optional_sections 四段可选子报告/_render_trend_details/_render_budget_details）；compare_trend 108→88（提取 _load_baseline——文件读取+pages/unit 提取+单位转换+错误早退）；check_budget 102→约 40（提取 _scan_resource_sizes 目录归集/_evaluate_budget 违规定级）；run 103→78（提取 _collect_vitals 采集降级 TBT 合并/_build_alerts_input 警报输入）。≥80 行函数 5→2（余 collect_rum_metrics 98 行=RUM 解析固有流程·下批候选）。
+> - **T2 a11y_audit.py（2513→2561 行·净 +48 行）**：audit_directory 84→约 30（提取 _scan_html_files 发现+扫描/_count_by_rule 计数表/_emit_json/_emit_md 输出分流）；_render_md 82→约 45（提取 _top_files_by_findings Top5 统计/_render_top_findings Top10 详情/_render_priority_guide 优先级段）。≥80 行函数 2→0（余 check_parsing 74 行=WCAG 4.1.1 解析检查固有形态·rule_* 系列不动）。
+> - **验证（全绿）**：a11y_audit --format json --quiet 全量输出与基线**逐字节一致**（仅 generated_at 时间戳·10228 条 findings/E2-2 P0/P1=0）+ MD 渲染对比一致（除生成时间戳）；perf_monitor --all 结构对比 10/10 全过——页集合 90/逐页字段集合/summary.total+errors/good+needs 总量 360/poor=0/报告顶层键/MD 八章序列/头部行/stdout 汇总量级全一致；pytest 296 passed；ruff scripts/ 全量 0。
+> - **方法论修正（重要·沉淀）**：perf 实测数值**不允许逐字节对比**——Playwright 路径的 LCP/CLS 为真实浏览器度量，同一文件两轮固有抖动（timeline.html CLS 0→0.1236 即抖动越过警报阈值 0.1·alerts 6→7 条）。原「确定性假设」只对启发式降级路径成立。行为对比口径按采集路径分流：确定性扫描（a11y 全静态/启发式）走逐字节，真实度量（Playwright）走结构对比（集合/骨架/量级）。此前 W728 的 scan 报告对比同属静态路径故可逐字节。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：scripts/perf_monitor.py、scripts/a11y_audit.py、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、交接文档.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、scripts/output/file-index.md。
 
 ### W728（2026-10-13）：门禁与工具链代码重构批
 
