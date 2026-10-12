@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W727），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W728），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,20 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W728（2026-10-13）：门禁与工具链代码重构批
+
+> **来源**：用户令「重构所的代码，保持原有功能、输入输出及外部接口完全不变，提升可读性和可维护性」，并追加「开始之前必须写一个详细的计划方案，详细具体一点，不要笼统」+「所有内容必须可量化、可验证、可执行、可追踪、符合实际情况」。方案档先行入库（docs/superpowers/plans/2026-10-13-code-refactor-w728.md·八节含度量基线/符号级设计/风险表/验证协议/经验沉淀点）。
+> - **撞号改号事件（过程记录·W659/W660 险情实证复发）**：本批原编号 W726，动工前未 fetch origin——并行会话（ZCode）已于同日 03:18 向 main 推送其 W726（本地工具链修复）+W727（SVG 保护补打），与本批同号。按对账表「争议以 git 历史为唯一事实源判定+下一自由号=max+1」规则，本批改号 W728 并以 origin/main 为基重建（dev 旧两提交 1b12c2c5/1dacd962 入 reflog 可溯·force-with-lease 经用户确认后推送）。代码面双方零重叠（对方动 batch_cascade.py/SVG 修复脚本；本批动 verify_delivery/sync_docs/security_scan/doc_areas）。
+> - **范围裁决（可量化）**：全仓 555 py + 787 js 单轮无法完成输出逐字节对比级验证（违反用户自设「可验证」硬约束）——改「先打样后推广」：按 AST 度量选三目标（复杂度痛点 × 有测试/行为基线），同方法论固化供后续批复用。显式排除 site/data 87 可视化页内联 JS、xiyouji-agent-web、a11y_audit.py（rule_* 30-60 行为规则扫描器固有形态·重复度低）。
+> - **T1 verify_delivery.py（1173→1037 行·main() 905 行→约 55 行）**：46 段中 35 个 subprocess 委托段（608 行同构样板·占 main 67%）收敛为 2 个通用 runner + 2 张 NamedTuple 参数表（_SimpleGate×18/_StrictGate×15·差异全参数化：消息模板/超时/尾行切片/严重级/marker/ok_line）；11 个内联逻辑段 + 2 个 bespoke 段（docs链接/a11y）各提取为 _gate_* 函数；闭包上报器提取为 _Reporter 类；scope 态+补丁时序+跨段共享量收敛为 _GateContext。新增第 42 门禁从「抄 15 行」变「加 1 行表项」。
+> - **T2 共享模块 doc_areas.py（新·42 行）**：verify_delivery 与 sync_docs 双份手工维护的 A_AREAS 六板块目录表 + _count_content_md 计数函数（sync_docs 注释自证同口径·任一侧改目录另一侧静默失配）收敛为单一事实源 AREA_DIRS + count_content_md；展示标签留消费方（verify 用长名/sync 用短键·呈现层不入模块）。
+> - **T3 security_scan.py（809→797 行）**：scan_sri 内 script/link 两个约 30 行同构块（SRI-001/002 判定+findings 构造）提取 _check_resource_attrs(text, pattern, kind_label, rel) 通用体，主体 91 行→约 40 行。
+> - **顺带修一处死代码**：原 L744-746 治理契约 except 块内遗留 Skills 索引一致性门禁（W498 已删除）的孤儿双 WARN 行——仅 check_governance_docs.py 崩溃时触发，删除。
+> - **验证（全绿·改号后在 origin/main 新基线上重采基线复跑）**：verify_delivery 四模式（full/docs/site/auto）输出与同树态基线（stash 法）**逐字节 diff 全等**+exit 码一致；pytest 296 passed；ruff scripts/ 全量 0；security_scan --all 报告与基线仅差路径/时间戳/耗时元数据（findings high=0 medium=266 low=0 逐字节一致）；sync_docs 输出 stash 对比一致（存量 MISMATCH 非本次引入）；check_agents_layers self-test 5/5（第 41 门禁 C2 槽位对账不受影响）。
+> - **踩坑记录（经验沉淀）**：① ruff B905 拦 zip() 缺 strict=（已补·顺带成长度断言）；② check_index_health 以正则扫 verify_delivery.py 源码计「挂载 check_* 33 个」——重构丢图表自洽段注释里的 check_screenshot_gates.js 引用致计数 33→32（已恢复注释·输出归位）——门禁脚本的注释文本也是被对账面；③ 方案档入库使引文扫描 +1 文件——行为基线必须同树态采（stash 法·跨树态对比必出假 diff）；④ 级联 apply 在 CRLF 工作树（autocrlf=true checkout）下曾致交接文档混行尾（原 W726 时点手工归一修复）——**该根因已由对方 W727 从工具层根修**（batch_cascade L176 rfind(nl)+1→+len(nl·CRLF 双字符 nl off-by-one），本批重级联不再复现；⑤ 撞号本身即最大踩坑——动工前必须 fetch origin 并以对账表 max 认领（本地台账滞后于远端认领·W659/W660 同型）。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：scripts/verify_delivery.py、scripts/doc_areas.py、scripts/sync_docs.py、scripts/security_scan.py、docs/superpowers/plans/2026-10-13-code-refactor-w728.md、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、交接文档.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、scripts/output/file-index.md。
 
 ### W727（2026-10-13）：SVG 保护补打与级联 CRLF 根修批
 
