@@ -108,6 +108,42 @@ def _is_above_fold_image(img_attrs, html_text):
     return False
 
 
+def _apply_lazy_pass(text, stats):
+    """为非首屏 <img> 补 loading="lazy"（W400 B023 规避：回调在函数体内定义·显式捕获 text/stats）。
+
+    判定：已有 loading 属性的跳过；_is_above_fold_image 判首屏的跳过；stats 就地累加。
+    """
+    def _repl(match):
+        full = match.group(0)
+        if "loading=" in full:
+            return full
+        # 取 attrs 字符串（首个捕获组）
+        attrs_text = match.group(1)
+        attrs_dict = {}
+        for am in re.finditer(r'(\w[\w-]*)\s*=\s*"([^"]*)"', attrs_text):
+            attrs_dict[am.group(1).lower()] = am.group(2)
+        if _is_above_fold_image(attrs_dict, text):
+            return full
+        stats["lazy_added"] += 1
+        return f'<img{attrs_text} loading="lazy">'
+
+    return re.sub(r'<img(\s[^>]*?)>', _repl, text, flags=re.I)
+
+
+def _collect_preload_lines(parser, stats):
+    """收集首屏大图 preload 行（stats 就地累加）。"""
+    preload_lines = []
+    for _line, attrs in parser.images:
+        if _is_above_floor_image(attrs) and attrs.get("src"):
+            src = attrs["src"]
+            preload_lines.append(
+                f'    <link rel="preload" href="{src}" as="image" '
+                f'fetchpriority="high">'
+            )
+            stats["preload_generated"] += 1
+    return preload_lines
+
+
 def optimize_lcp(html_dir):
     """LCP 优化模块
 
@@ -116,6 +152,7 @@ def optimize_lcp(html_dir):
     - 为字体生成 preload（参考 font-subset-guide.md 方案）
 
     返回 dict：{lazy_added, preload_generated, font_preload_added, files_modified}
+    W732：懒加载/预加载收集两段提取（_apply_lazy_pass/_collect_preload_lines）。
     """
     root = Path(html_dir)
     if not root.exists():
@@ -143,33 +180,10 @@ def optimize_lcp(html_dir):
 
         # 1) 添加 loading="lazy"（非首屏图）
         # 简单策略：对每个 <img> 标签若未声明 loading 且非首屏，则补 loading="lazy"
-        # W400 修复：B023 —— 用默认参数捕获当前 text，避免闭包绑定循环变量
-        def _add_lazy(match, _text=text):
-            full = match.group(0)
-            if "loading=" in full:
-                return full
-            # 取 attrs 字符串（首个捕获组）
-            attrs_text = match.group(1)
-            attrs_dict = {}
-            for am in re.finditer(r'(\w[\w-]*)\s*=\s*"([^"]*)"', attrs_text):
-                attrs_dict[am.group(1).lower()] = am.group(2)
-            if _is_above_fold_image(attrs_dict, _text):
-                return full
-            stats["lazy_added"] += 1
-            return f'<img{attrs_text} loading="lazy">'
-
-        text = re.sub(r'<img(\s[^>]*?)>', _add_lazy, text, flags=re.I)
+        text = _apply_lazy_pass(text, stats)
 
         # 2) 为首屏大图生成 preload（仅在 <head> 内追加一次）
-        preload_lines = []
-        for _line, attrs in parser.images:
-            if _is_above_floor_image(attrs) and attrs.get("src"):
-                src = attrs["src"]
-                preload_lines.append(
-                    f'    <link rel="preload" href="{src}" as="image" '
-                    f'fetchpriority="high">'
-                )
-                stats["preload_generated"] += 1
+        preload_lines = _collect_preload_lines(parser, stats)
 
         # 3) 字体 preload（仅当未声明时追加）
         if "preload" in text and "font/woff2" in text:
@@ -208,28 +222,9 @@ def _count_svg_nodes(html_text):
     return len(pattern.findall(html_text))
 
 
-def convert_svg_to_canvas(html_file, threshold=1000):
-    """D3.js SVG → Canvas 转换模块
-
-    检测 HTML 文件中 SVG 节点数；当 ≥ threshold 时自动注入 Canvas 渲染桥接脚本。
-    转换策略（不修改源 SVG 结构，仅注入切换逻辑）：
-      - 在 </body> 前注入 perf-canvas-bridge.js 加载器
-      - 标记 data-canvas-threshold 属性供运行时切换
-
-    返回 dict：{file, svg_node_count, threshold, switched, script_injected}
-    """
-    hp = Path(html_file)
-    if not hp.exists():
-        return {"error": f"文件不存在：{hp}", "switched": False}
-
-    text = _read_file_text(hp)
-    if not text:
-        return {"error": "空文件", "switched": False}
-
-    node_count = _count_svg_nodes(text)
-    should_switch = node_count >= threshold
-
-    bridge_snippet = (
+def _build_canvas_bridge(threshold):
+    """构造 Canvas 渲染桥接脚本（参数化 threshold·W732 从主体提取）。"""
+    return (
         '\n<script data-perf-canvas-bridge="1" '
         f'data-threshold="{threshold}">\n'
         '// W265 E3 性能深化：SVG → Canvas 自动切换桥接\n'
@@ -261,6 +256,31 @@ def convert_svg_to_canvas(html_file, threshold=1000):
         '})();\n'
         '</script>\n'
     )
+
+
+def convert_svg_to_canvas(html_file, threshold=1000):
+    """D3.js SVG → Canvas 转换模块
+
+    检测 HTML 文件中 SVG 节点数；当 ≥ threshold 时自动注入 Canvas 渲染桥接脚本。
+    转换策略（不修改源 SVG 结构，仅注入切换逻辑）：
+      - 在 </body> 前注入 perf-canvas-bridge.js 加载器
+      - 标记 data-canvas-threshold 属性供运行时切换
+
+    返回 dict：{file, svg_node_count, threshold, switched, script_injected}
+    W732：桥接脚本模板提取（_build_canvas_bridge）。
+    """
+    hp = Path(html_file)
+    if not hp.exists():
+        return {"error": f"文件不存在：{hp}", "switched": False}
+
+    text = _read_file_text(hp)
+    if not text:
+        return {"error": "空文件", "switched": False}
+
+    node_count = _count_svg_nodes(text)
+    should_switch = node_count >= threshold
+
+    bridge_snippet = _build_canvas_bridge(threshold)
 
     switched = False
     script_injected = False
@@ -308,31 +328,11 @@ def _extract_first_css_link(html_text):
     return m.group(1) if m else None
 
 
-def inline_critical_css(html_file):
-    """关键 CSS 内联模块
+def _resolve_critical_css(text, hp):
+    """确定 critical CSS 内容与来源：style-block > external > fallback（W732 提取）。
 
-    提取首屏 CSS（首个外部 stylesheet 或 <style> 块）+ 内联到 <head> 顶部 <style>。
-    若找不到外部 CSS 则注入 fallback 临界 CSS。
-
-    返回 dict：{file, source, inlined_bytes, fallback_used}
+    返回 (css_content, source)。
     """
-    hp = Path(html_file)
-    if not hp.exists():
-        return {"error": f"文件不存在：{hp}", "inlined_bytes": 0}
-
-    text = _read_file_text(hp)
-    if not text:
-        return {"error": "空文件", "inlined_bytes": 0}
-
-    # 已有 inline critical 标记则跳过
-    if "critical inline" in text.lower() or "data-critical-inline" in text:
-        return {
-            "file": str(hp),
-            "source": "already-inlined",
-            "inlined_bytes": 0,
-            "fallback_used": False,
-        }
-
     source = "fallback"
     css_content = _CRITICAL_CSS_FALLBACK
 
@@ -352,6 +352,37 @@ def inline_critical_css(html_file):
                 # 仅取前 4KB 作为 critical（首屏）
                 css_content = ext_text[:4096]
                 source = f"external:{css_href}"
+
+    return css_content, source
+
+
+def inline_critical_css(html_file):
+    """关键 CSS 内联模块
+
+    提取首屏 CSS（首个外部 stylesheet 或 <style> 块）+ 内联到 <head> 顶部 <style>。
+    若找不到外部 CSS 则注入 fallback 临界 CSS。
+
+    返回 dict：{file, source, inlined_bytes, fallback_used}
+    W732：CSS 解析/来源判定段提取（_resolve_critical_css）。
+    """
+    hp = Path(html_file)
+    if not hp.exists():
+        return {"error": f"文件不存在：{hp}", "inlined_bytes": 0}
+
+    text = _read_file_text(hp)
+    if not text:
+        return {"error": "空文件", "inlined_bytes": 0}
+
+    # 已有 inline critical 标记则跳过
+    if "critical inline" in text.lower() or "data-critical-inline" in text:
+        return {
+            "file": str(hp),
+            "source": "already-inlined",
+            "inlined_bytes": 0,
+            "fallback_used": False,
+        }
+
+    css_content, source = _resolve_critical_css(text, hp)
 
     inline_block = (
         '<style data-critical-inline="1">\n'
@@ -581,29 +612,17 @@ def minify_resources(html_dir):
 # 模块 6：输出报告
 # ===========================================================================
 
-def generate_report(stats_lcp=None, stats_canvas=None, stats_inline=None,
-                   stats_defer=None, stats_minify=None, output_path=None):
-    """生成 perf-optimization-report.md
+def _fmt_stats(d):
+    """统计 dict 转多行文本（None → 未运行；error → 错误行；W732 从闭包提级）。"""
+    if not d:
+        return "（未运行）"
+    if "error" in d:
+        return f"错误：{d['error']}"
+    return "\n".join(f"  - {k}: {v}" for k, v in d.items())
 
-    Args:
-        stats_*: 各模块返回的统计 dict
-        output_path: 报告输出路径（默认 scripts/output/perf-optimization-report.md）
 
-    Returns:
-        str: 报告 markdown 文本
-    """
-    out_path = Path(output_path) if output_path else DEFAULT_OUTPUT
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-    def _fmt(d):
-        if not d:
-            return "（未运行）"
-        if "error" in d:
-            return f"错误：{d['error']}"
-        return "\n".join(f"  - {k}: {v}" for k, v in d.items())
-
+def _render_report_header(timestamp):
+    """报告头部（标题/时间/工具/字体行·W732 提取）。"""
     md = []
     md.append(f"# W265 E3 性能优化报告 · {VERSION}")
     md.append("")
@@ -611,36 +630,24 @@ def generate_report(stats_lcp=None, stats_canvas=None, stats_inline=None,
     md.append("> 工具：`scripts/perf_optimize.py` · W265 E3 性能深化")
     md.append("> 字体子集化方案：参考 `scripts/font-subset-guide.md`")
     md.append("")
-    md.append("## 1. LCP 优化模块（图片懒加载 + 资源预加载 + 字体子集化）")
+    return md
+
+
+def _render_module_section(title, stats):
+    """单个模块统计段（五段同构·表驱动参数化·W732 提取）。"""
+    md = []
+    md.append(f"## {title}")
     md.append("")
     md.append("```")
-    md.append(_fmt(stats_lcp))
+    md.append(_fmt_stats(stats))
     md.append("```")
     md.append("")
-    md.append("## 2. Canvas 渲染深化模块（SVG → Canvas）")
-    md.append("")
-    md.append("```")
-    md.append(_fmt(stats_canvas))
-    md.append("```")
-    md.append("")
-    md.append("## 3. 关键 CSS 内联模块")
-    md.append("")
-    md.append("```")
-    md.append(_fmt(stats_inline))
-    md.append("```")
-    md.append("")
-    md.append("## 4. JS 延迟加载模块（defer/async + 动态 import）")
-    md.append("")
-    md.append("```")
-    md.append(_fmt(stats_defer))
-    md.append("```")
-    md.append("")
-    md.append("## 5. 资源压缩模块（minify + gzip）")
-    md.append("")
-    md.append("```")
-    md.append(_fmt(stats_minify))
-    md.append("```")
-    md.append("")
+    return md
+
+
+def _render_report_footer():
+    """总结与下一步 + 尾注（W732 提取）。"""
+    md = []
     md.append("## 6. 总结与下一步")
     md.append("")
     md.append("- **LCP**：首屏图片优先加载，非首屏懒加载；字体 preload + 子集化")
@@ -652,6 +659,37 @@ def generate_report(stats_lcp=None, stats_canvas=None, stats_inline=None,
     md.append("---")
     md.append("")
     md.append(f"由 `scripts/perf_optimize.py` 生成 · {WID} E3 性能深化 · {VERSION}")
+    return md
+
+
+def generate_report(stats_lcp=None, stats_canvas=None, stats_inline=None,
+                   stats_defer=None, stats_minify=None, output_path=None):
+    """生成 perf-optimization-report.md
+
+    Args:
+        stats_*: 各模块返回的统计 dict
+        output_path: 报告输出路径（默认 scripts/output/perf-optimization-report.md）
+
+    Returns:
+        str: 报告 markdown 文本
+    W732：五模块段表驱动（_render_module_section）+ 头尾段提取。
+    """
+    out_path = Path(output_path) if output_path else DEFAULT_OUTPUT
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    md = []
+    md += _render_report_header(timestamp)
+    for title, stats in (
+        ("1. LCP 优化模块（图片懒加载 + 资源预加载 + 字体子集化）", stats_lcp),
+        ("2. Canvas 渲染深化模块（SVG → Canvas）", stats_canvas),
+        ("3. 关键 CSS 内联模块", stats_inline),
+        ("4. JS 延迟加载模块（defer/async + 动态 import）", stats_defer),
+        ("5. 资源压缩模块（minify + gzip）", stats_minify),
+    ):
+        md += _render_module_section(title, stats)
+    md += _render_report_footer()
     report = "\n".join(md) + "\n"
     out_path.write_text(report, encoding="utf-8")
     return report

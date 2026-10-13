@@ -11,6 +11,15 @@
 ---
 
 
+## W732 性能与文档工具链重构批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/perf_optimize.py | W732 | 四长函数拆分（80/72/69/74→58/42/52/31·8 新函数）·fixture 快照+14 单测验证 |
+| scripts/optimize-html-size.py | W732 | render_report 126→六段渲染（summary/top10/full/suggestions/strategy/usage）·报告双一致 |
+| scripts/sync_docs.py | W732 | main 111→39+_run_checks 七规则表驱动·横幅历史形态逐字节保留·输出逐字节一致 |
+| docs/00-导读/W批次编号对账表.md | W732 | W732 认领行登记 |
+
 ## W731 发布工具链与安全扫描重构批（2026-10-13）
 
 | 文件 | W | 说明 |

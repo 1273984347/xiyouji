@@ -245,16 +245,10 @@ def scan_directory(html_dir: Path) -> list[FileMetrics]:
     return results
 
 
-def render_report(results: list[FileMetrics]) -> str:
-    if not results:
-        return "# HTML 体积优化报告\n\n（无扫描结果）\n"
-
-    total_raw = sum(r.raw_size for r in results)
-    total_opt = sum(r.estimated_optimized_size for r in results)
+def _render_summary_header(results, total_raw, total_opt, large_files):
+    """报告头部：扫描统计摘要（W732 提取）。"""
     total_reduction = total_raw - total_opt
     reduction_pct = (total_reduction / total_raw * 100) if total_raw else 0.0
-    large_files = [r for r in results if r.raw_size_kb >= LARGE_FILE_KB]
-
     lines: list[str] = []
     lines.append("# HTML 文件体积优化报告")
     lines.append("")
@@ -268,9 +262,13 @@ def render_report(results: list[FileMetrics]) -> str:
     lines.append(f"- **大文件（>{LARGE_FILE_KB:.0f}KB）数量**：{len(large_files)}")
     lines.append(f"- **解析后端**：{'BeautifulSoup4' if HAS_BS4 else '正则回退（建议 pip install beautifulsoup4 以获得更精准的解析）'}")
     lines.append("")
+    return lines
 
-    # Top 10 大文件
+
+def _render_top10_table(results):
+    """第一节：Top 10 大文件表（W732 提取）。"""
     top10 = sorted(results, key=lambda r: r.raw_size, reverse=True)[:10]
+    lines: list[str] = []
     lines.append("## 一、Top 10 大文件（按原始体积降序）")
     lines.append("")
     lines.append("| # | 文件 | 原始 | 内联CSS | 内联JS | 注释 | 空白 | 优化后 | 减少 | 建议数 |")
@@ -285,8 +283,12 @@ def render_report(results: list[FileMetrics]) -> str:
             f"{len(r.suggestions)} |"
         )
     lines.append("")
+    return lines
 
-    # 全量文件明细表
+
+def _render_full_table(results):
+    """第二节：全量文件明细表（W732 提取）。"""
+    lines: list[str] = []
     lines.append("## 二、全量文件明细")
     lines.append("")
     lines.append("| 文件 | 原始 | 优化后预估 | 优化比例 | 内联CSS | 内联JS | 注释 | 空白 | 外链JS | 外链CSS | img/lazy | iframe/lazy |")
@@ -301,8 +303,12 @@ def render_report(results: list[FileMetrics]) -> str:
             f"{r.external_scripts} | {r.external_styles} | {img_str} | {iframe_str} |"
         )
     lines.append("")
+    return lines
 
-    # 大文件专项建议
+
+def _render_large_suggestions(large_files):
+    """第三节：大文件（>100KB）专项建议（W732 提取）。"""
+    lines: list[str] = []
     lines.append("## 三、大文件（>100KB）优化建议")
     lines.append("")
     if not large_files:
@@ -315,8 +321,12 @@ def render_report(results: list[FileMetrics]) -> str:
             for sug in r.suggestions:
                 lines.append(f"- {sug}")
             lines.append("")
+    return lines
 
-    # 通用优化策略
+
+def _render_strategy_guide():
+    """第四节：通用优化策略 4.1-4.6（固定文本·W732 提取）。"""
+    lines: list[str] = []
     lines.append("## 四、通用优化策略")
     lines.append("")
     lines.append("### 4.1 内联 CSS 提取到外部文件")
@@ -350,8 +360,12 @@ def render_report(results: list[FileMetrics]) -> str:
     lines.append("- HTML 文本压缩率高于二进制资源，优先确保 text/html 启用压缩")
     lines.append("- 配合 CDN 边缘缓存，命中后零字节传输")
     lines.append("")
+    return lines
 
-    # 附录：脚本说明
+
+def _render_usage_section():
+    """第五节：脚本运行说明（固定文本·W732 提取）。"""
+    lines: list[str] = []
     lines.append("## 五、脚本运行说明")
     lines.append("")
     lines.append("```bash")
@@ -369,6 +383,25 @@ def render_report(results: list[FileMetrics]) -> str:
     lines.append("- **运行模式**：只读扫描，不修改 HTML 文件")
     lines.append("- **建议频率**：每次新增可视化页面后运行一次")
     lines.append("")
+    return lines
+
+
+def render_report(results: list[FileMetrics]) -> str:
+    """渲染 HTML 体积优化报告（W732 六段拆分：头部/Top10/全量/大文件建议/策略/说明）。"""
+    if not results:
+        return "# HTML 体积优化报告\n\n（无扫描结果）\n"
+
+    total_raw = sum(r.raw_size for r in results)
+    total_opt = sum(r.estimated_optimized_size for r in results)
+    large_files = [r for r in results if r.raw_size_kb >= LARGE_FILE_KB]
+
+    lines: list[str] = []
+    lines += _render_summary_header(results, total_raw, total_opt, large_files)
+    lines += _render_top10_table(results)
+    lines += _render_full_table(results)
+    lines += _render_large_suggestions(large_files)
+    lines += _render_strategy_guide()
+    lines += _render_usage_section()
 
     return "\n".join(lines)
 

@@ -516,6 +516,47 @@ def rule_file_location(scan_dir=None, fix=False):
     return issues
 
 
+def _run_checks(args, latest_v, latest_section, cl_text):
+    """顺序执行七规则检查（表驱动·W732）；返回 all_ok。
+
+    表项：(rule 键, 横幅全文（含前导换行·历史形态逐字节保留）, OK 消息, 检查函数, 前置输出可选)。
+    W732 提取——规则 1/3/4 横幅「标题 ===」含空格、规则 2/5/6/7 横幅「）===」无空格，系历史演进形态，原样保留。
+    """
+    checks = [
+        ("version", "=== 规则 1: 版本号一致性 ===", "  [OK] 4 文件头部均含最新版本号",
+         lambda: rule_version(latest_v, fix=args.fix),
+         (lambda: print(f"CHANGELOG 最新版本: {latest_v}")) if latest_v else None),
+        ("stats", "\n=== 规则 2: 统计计数一致性（磁盘实数）===",
+         "  [OK] README/STRUCTURE 聚合声明 + 项目说明分面声明 均与磁盘实数一致",
+         lambda: rule_stats(latest_section, fix=args.fix) + rule_xmsm_counts(), None),
+        ("wids", "\n=== 规则 3: W### 编号连续性 ===", "  [OK] CHANGELOG W### 编号连续 + file-index 条目一致",
+         lambda: rule_wids(cl_text), None),
+        ("fidx", "\n=== 规则 4: file-index 最新条目 ===", "  [OK] file-index.md 包含最新 W### 条目",
+         lambda: rule_fileindex_latest(cl_text), None),
+        ("marker", "\n=== 规则 5: 状态标记计数（E2 扩展）===", "  [OK] CHANGELOG 现役段'进行中'标记 ≤ 1",
+         lambda: rule_status_marker(cl_text, fix=args.fix), None),
+        ("sum", "\n=== 规则 6: 计数器求和一致性（E2 扩展）===", "  [OK] README 维度标题声明数 == 表格求和 == 其他位置",
+         lambda: rule_counter_sum(fix=args.fix), None),
+        ("loc", "\n=== 规则 7: 文件位置规范（E2 扩展）===", "  [OK] S2 方向文件均在对应 docs/S2-*/ 目录下",
+         lambda: rule_file_location(fix=args.fix), None),
+    ]
+    all_ok = True
+    for key, banner, ok_msg, run_check, pre in checks:
+        if args.rule not in (None, key):
+            continue
+        print(banner)
+        if pre:
+            pre()
+        issues = run_check()
+        if issues:
+            for i in issues:
+                print(f"  {i}")
+            all_ok = False
+        else:
+            print(ok_msg)
+    return all_ok
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="6 文件文档一致性自动校验（解决 E1 铁律：prior session 报告'已同步'但残留过时数据）",
@@ -546,79 +587,7 @@ def main():
     latest_v = get_latest_version(cl_text)
     latest_section = get_latest_section(cl_text)
 
-    all_ok = True
-
-    if args.rule in (None, "version"):
-        print("=== 规则 1: 版本号一致性 ===")
-        if latest_v:
-            print(f"CHANGELOG 最新版本: {latest_v}")
-        issues = rule_version(latest_v, fix=args.fix)
-        if issues:
-            for i in issues:
-                print(f"  {i}")
-            all_ok = False
-        else:
-            print("  [OK] 4 文件头部均含最新版本号")
-
-    if args.rule in (None, "stats"):
-        print("\n=== 规则 2: 统计计数一致性（磁盘实数）===")
-        issues = rule_stats(latest_section, fix=args.fix) + rule_xmsm_counts()
-        if issues:
-            for i in issues:
-                print(f"  {i}")
-            all_ok = False
-        else:
-            print("  [OK] README/STRUCTURE 聚合声明 + 项目说明分面声明 均与磁盘实数一致")
-
-    if args.rule in (None, "wids"):
-        print("\n=== 规则 3: W### 编号连续性 ===")
-        issues = rule_wids(cl_text)
-        if issues:
-            for i in issues:
-                print(f"  {i}")
-            all_ok = False
-        else:
-            print("  [OK] CHANGELOG W### 编号连续 + file-index 条目一致")
-
-    if args.rule in (None, "fidx"):
-        print("\n=== 规则 4: file-index 最新条目 ===")
-        issues = rule_fileindex_latest(cl_text)
-        if issues:
-            for i in issues:
-                print(f"  {i}")
-            all_ok = False
-        else:
-            print("  [OK] file-index.md 包含最新 W### 条目")
-
-    if args.rule in (None, "marker"):
-        print("\n=== 规则 5: 状态标记计数（E2 扩展）===")
-        issues = rule_status_marker(cl_text, fix=args.fix)
-        if issues:
-            for i in issues:
-                print(f"  {i}")
-            all_ok = False
-        else:
-            print("  [OK] CHANGELOG 现役段'进行中'标记 ≤ 1")
-
-    if args.rule in (None, "sum"):
-        print("\n=== 规则 6: 计数器求和一致性（E2 扩展）===")
-        issues = rule_counter_sum(fix=args.fix)
-        if issues:
-            for i in issues:
-                print(f"  {i}")
-            all_ok = False
-        else:
-            print("  [OK] README 维度标题声明数 == 表格求和 == 其他位置")
-
-    if args.rule in (None, "loc"):
-        print("\n=== 规则 7: 文件位置规范（E2 扩展）===")
-        issues = rule_file_location(fix=args.fix)
-        if issues:
-            for i in issues:
-                print(f"  {i}")
-            all_ok = False
-        else:
-            print("  [OK] S2 方向文件均在对应 docs/S2-*/ 目录下")
+    all_ok = _run_checks(args, latest_v, latest_section, cl_text)
 
     print("\n" + "=" * 60)
     if all_ok:

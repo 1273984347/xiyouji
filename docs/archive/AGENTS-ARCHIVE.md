@@ -72,3 +72,8 @@
 ```text
 2026-10-13（W726）本地工具链修复批（用户令排查代码中的报错·无具体报错转全量扫描）：缺陷 1 fix_svg_negative_widths ROOT 三级上溯加站点目录存在性 fail-closed（W447 归档搬迁失同步致 glob 静默空扫与 dashboard 读崩·make audit 每跑必挂·沙盒验证修复后 87 页扫描 35 页待打保护）加 缺陷 2 Makefile data-validate 空目录跳过保护（output/data 系 gitignore 可重建产物·fresh clone 不再挂 make ci）加 缺陷 3 十二处死链清理（README 改指 CHANGELOG 加 v08 七处剥链保文加 S4 四处本地存档注记·lint_links 19557 链接 0 broken）
 ```
+以下为 AGENTS.md 版本脚注早期条目（W727-W727）段的原文（单行沿革链·W732 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-13（W727）SVG 保护补打与级联 CRLF 根修批（用户 quote 拍板批次 B 选项 1 直接打掉）：fix_svg 修复后首跑对 35 个可视化页补打 clientWidth 最小宽度保护（W400 后新增页存量清偿加 W447 起审计死盲区复绿）加 generate_csp 重注入 35 页零漂移加 batch_cascade L176 rfind(nl)+1 改 +len(nl)（CRLF 工作树双字符 nl off-by-one 根修·W726 级联 apply 致交接文档混行尾·W706 防线在 W727 dry-run 拦截实证）加 交接文档两处字节级修复（739 CRLF 纯净）加 验证六连（dry-run 0 待改加 csp check 856 页 0 漂移加 verify full 46 段 0 FAIL 加 pytest 296 加 js 语法 855 加 links 0 broken）
+```
