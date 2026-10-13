@@ -44,12 +44,12 @@ archive/
 
 | 归档件 | 来源 | 归档批次 | 日期 | 原因 |
 |---|---|---|---|---|
-| `docs/CHANGELOG-ARCHIVE.md` | CHANGELOG.md 历史段（v2.3.32-v2.3.249 区间） | W511 · W422 · W681 滚动 | 滚动 | 体积超限一级归档 |
-| `docs/CHANGELOG-ARCHIVE-tier2.md` | 同上早期段（v0.1-v2.3.31 区间） | W513 建 · W422 追加 | 滚动 | 超 1MB 二级归档 |
-| `docs/HANDOVER-ARCHIVE.md` | 交接文档历史里程碑块 | 滚动（W534 语义） | 滚动 | 交接文档滚动淘汰 |
-| `docs/file-index-ARCHIVE.md` | file-index.md 历史段 | 滚动 | 滚动 | 索引反向滚动 |
-| `docs/AGENTS-ARCHIVE.md` | AGENTS.md 脚注沿革（W458-W700 起） | 滚动（W709 起） | 滚动 | AGENTS 分层滚动淘汰 |
-| `docs/STRUCTURE-ARCHIVE.md` | STRUCTURE.md 历史详细清单 | 历史滚动 | 滚动 | 结构文档瘦身 |
+| `archive/docs/CHANGELOG-ARCHIVE.md` | CHANGELOG.md 历史段（v2.3.32-v2.3.293·W417-W699 区间） | W511 · W422 · W681 · W736 滚动 | 滚动 | 体积超限一级归档 |
+| `archive/docs/CHANGELOG-ARCHIVE-tier2.md` | 同上早期段（v0.1-v2.3.31 区间） | W513 建 · W422 追加 | 滚动 | 超 1MB 二级归档 |
+| `archive/docs/HANDOVER-ARCHIVE.md` | 交接文档历史里程碑块 | 滚动（W534 语义） | 滚动 | 交接文档滚动淘汰 |
+| `archive/docs/file-index-ARCHIVE.md` | file-index.md 历史段（W031-W699 区间） | W511 · W422 · W736 滚动 | 滚动 | 索引反向滚动 |
+| `archive/docs/AGENTS-ARCHIVE.md` | AGENTS.md 脚注沿革（W458-W700 起） | 滚动（W709 起） | 滚动 | AGENTS 分层滚动淘汰 |
+| `archive/docs/STRUCTURE-ARCHIVE.md` | STRUCTURE.md 历史详细清单 | 历史滚动 | 滚动 | 结构文档瘦身 |
 | `docs/w550-shot-review/`（11 件） | W550 五轮截图审查会话产物 | W550 后整组归档 | 滚动 | 批次完结·来源成组 |
 | `docs/复盘报告/`（9 件） | docs/10-方法论沉淀 复盘报告（5 件 09-05~09-16 滚动 + 4 件 10-01~10-06 W735 迁入） | 滚动 · W735 | 滚动 | 时点性报告·间隔归档 |
 | `scripts/`（45 件） | 原 scripts/archive 整体迁入 | W734 迁入 | 2026-10-13 | 历史一次性脚本存档 |

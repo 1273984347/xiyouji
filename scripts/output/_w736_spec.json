@@ -1,0 +1,26 @@
+{
+  "batch": "W736",
+  "date": "2026-10-13",
+  "title": "W736 发布链工具化与文档负载治理批",
+  "desc": "发布链工具化与文档负载治理",
+  "head_entry": "2026-10-13（W736 发布链工具化与文档负载治理批）",
+  "head_sentence": "发布链三卡工具化并治理 CHANGELOG 与 file-index 文档负载",
+  "changelog_body": "\n> **来源**：用户批准 S-31/32/33 三卡与实现形态、U-01 宿主定时巡检、文档负载治理批（file-index 289KB 超 50KB 阈值 5.8 倍）认领。动工前 preflight_check 全绿（fetch 正常·对账表 max=W735 → W736 认领·现势 bullet 交叉核验一致）。\n> - **T1 S-33 前置核验器**：scripts/preflight_check.py 新建——五检（fetch/origin-main 顶部/对账表取号/工作树态/环境 py+ruff+pytest）+ fetch 故障降级 GitHub API 通道（W732 实证备路）；取号权威源=对账表表格 max+1（parse_ledger 修复双「现势」源冲突——顶部遗留块停 W721 曾致误取 bullet 残留 W697）+ 尾部 bullet 交叉核验；狗粮首跑即抓真 bug，工具价值实证。\n> - **T2 S-31 发布预检器**：scripts/release_prep.py 新建——spec 三检（字段必填/分隔符黑名单/title 领衔/四件套文件行）+ 消息 W### 形态登记核验（C4 镜像·登记源=CHANGELOG 现役+两归档+对账表四件）+ 文件行 C4-f 镜像（在库/staged 且未 gitignore）+ --init 模板生成；判据精确镜像 batch_cascade.precheck。\n> - **T3 单测 17 例**：tests/unit/test_release_prep.py + tests/unit/test_preflight_check.py——字段检/禁字符/领衔/W 号登记/porcelain 解析（\u0000 分隔形态）/路径 C4-f 镜像全覆盖。\n> - **T4 S-32 形态拍板**：行为等价验证套件（四口径工具箱）=仓库脚本形态·随下个重构批触发（任务卡 YAGNI 约束·不预建）。\n> - **T5 文档负载治理**：CHANGELOG W650-W699 段（v2.3.250-v2.3.293）迁 archive/docs/CHANGELOG-ARCHIVE.md（236KB→103KB）+ file-index W449-W699 段迁 archive/docs/file-index-ARCHIVE.md（289KB→35KB）——双文件归档边界统一 W700（check_index_health 段一一对应约束）；双文件头注/边界/「W736 一级归档」注记同步；C7 不变式 36/36 保持。\n> - **T6 引用登记**：scripts/README.md 三工具登记（archive_file/preflight_check/release_prep）+ archive/README.md 台账 6 行路径前缀与滚动批次同步 + 对账表 W736 认领行；W735 复盘报告 6 件随批入库（第 38 篇 328 行 37KB + 方法论 README 索引 + STRUCTURE 实体标记 30→31 + stats 三件刷新）。\n> - **验证（全绿）**：preflight 狗粮 PASS（五检+取号 W736）；release_prep spec 自检 PASS；pytest 313 passed（296+17 新例）；ruff scripts/ 全过（新测试文件含入·tests/ e2e 17 项历史存量不在本批口径）；stats --check 15 键零差异；全量门禁 46 段 OK（--scope auto·实跑=声明）；三登记件行尾保真（CRLF/LF 各归其位零混尾）。\n> - **状态**：已落地（级联+提交后以 gh run list 为准）。\n> - **文件**：scripts/preflight_check.py、scripts/release_prep.py、tests/unit/test_preflight_check.py、tests/unit/test_release_prep.py、CHANGELOG.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、scripts/output/file-index.md、docs/00-导读/W批次编号对账表.md、archive/README.md、scripts/README.md、HANDOVER.md、AGENTS.md、STRUCTURE.md、docs/10-方法论沉淀/README.md、docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-13.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/_w736_spec.json、scripts/output/_cascade_files_W736.txt、CITATION.cff。\n",
+  "milestone_block": "- **W736 发布链工具化与文档负载治理批**：\n  - scripts/preflight_check.py 前置核验器 + scripts/release_prep.py 发布预检（S-31/S-33 落地·17 单测·S-32 拍板随下个重构批触发）\n  - CHANGELOG/file-index 一级归档（W650-W699 与 W449-W699 段·双边界统一 W700·236KB→103KB 与 289KB→35KB）\n",
+  "agents_note": "2026-10-13（W736）发布链工具化与文档负载治理批（用户批准三卡与宿主巡检与负载治理）：preflight 前置核验器五检与 fetch 故障降级与取号权威源修复加 release 发布预检 spec 三检与消息核验与 init 模板加单测十七例加 S32 拍板仓库脚本随下个重构批触发加 CHANGELOG W650 至 W699 段与 file-index W449 至 W699 段一级归档双边界统一 W700加 archive 台账同步加 scripts README 三工具登记加复盘报告六件随批；验证=preflight 狗粮抓真 bug 加 release 自检过加单测全绿加门禁四十六段加 pytest 三百一十三加 ruff 零",
+  "file_index_rows": [
+    "| scripts/preflight_check.py | W736 | 前置核验器新建（五检+fetch 故障 GitHub API 降级+取号权威源 max+1） |",
+    "| scripts/release_prep.py | W736 | 发布预检器新建（spec 三检+消息 W 号核验+文件行 C4-f 镜像+--init 模板） |",
+    "| tests/unit/test_preflight_check.py | W736 | preflight 单测（含 porcelain \u0000 分隔解析） |",
+    "| tests/unit/test_release_prep.py | W736 | release_prep 单测 17 例组 |",
+    "| archive/docs/CHANGELOG-ARCHIVE.md | W736 | W650-W699 段迁入（一级归档·与 file-index 同界 W700） |",
+    "| archive/docs/file-index-ARCHIVE.md | W736 | W449-W699 段迁入（与 CHANGELOG 同界） |",
+    "| archive/README.md | W736 | 台账 6 行路径前缀与滚动批次同步 |",
+    "| scripts/README.md | W736 | 三工具登记（archive_file/preflight_check/release_prep） |",
+    "| docs/00-导读/W批次编号对账表.md | W736 | W736 认领行登记 |",
+    "| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-13.md | W736 | 第 38 篇复盘报告入库（328 行 37KB） |",
+    "| docs/10-方法论沉淀/README.md | W736 | 复盘报告索引登记 |",
+    "| STRUCTURE.md | W736 | 方法论文档实体标记 30→31 |",
+    "| scripts/output/stats.json | W736 | methodology 计数刷新（stats.py --w W736 派生 stats-changelog/stats-index） |"
+  ]
+}
