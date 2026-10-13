@@ -82,3 +82,8 @@
 ```text
 2026-10-13（W728）门禁与工具链代码重构批（用户令重构保接口不变加先写详细计划）：范围按可验证性裁决三文件（全仓 1342 文件单轮无法逐字节验证故先打样后推广）加 verify_delivery 表驱动化（905 行 main 拆为上报器类上下文类两张门禁参数表两个通用 runner 十三个段函数）加 doc_areas 共享模块消除 A_AREAS 与计数函数双份手工维护加 security_scan SRI 双块合一；验证四模式输出逐字节一致加 pytest 296 加 ruff 0 加 scan 报告一致；过程含撞号改号事件（原 W726 与并行会话 ZCode 同号按对账表规则改号并以 origin/main 为基重建）加踩坑五例（B905 strict 参数加 index_health 注释文本对账加基线同树态采集加 CRLF 级联 off-by-one 已由对方 W727 工具层根修加动工前须 fetch 对账）已沉淀方案档第八节
 ```
+以下为 AGENTS.md 版本脚注早期条目（W729-W729）段的原文（单行沿革链·W734 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-13（W729）性能与可访问性工具链重构批（用户令第二批按同方法论推进）：perf_monitor 拆 build_report compare_trend check_budget run 四个长函数为九个单一职责函数（统计渲染基线加载资源扫描预算定级采集警报输入）加 a11y_audit 拆 audit_directory 与 render_md 为七个函数（发现扫描计数表输出分流 Top 统计 Top 详情优先级段）；验证 a11y 全量 JSON 加 MD 双一致（10228 findings 逐字节）加 perf 结构对比十项全过加 pytest 296 加 ruff 0；方法论重要修正=Playwright 实测路径固有抖动禁逐字节对比改结构对比口径（timeline CLS 抖动越过警报阈值实证）已沉淀
+```

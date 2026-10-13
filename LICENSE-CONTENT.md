@@ -4,7 +4,7 @@
 
 适用内容：A1-A6 内容板块（01 全书逐回解读 / 02 人物深度分析 / 03 主题与情节专题 / 04 文化与历史背景 / 05 诗词歌赋 / 06 个人随笔）、07-09（学以致用 / 提升认知 / 精神塑造）、S1 方法论沉淀、S2/S3/S4 学术投稿候选与外部分享。site/ 站点页面内渲染的上述原创解读文本同样适用本协议。
 
-> 源代码（Python/JavaScript/HTML 脚本、GitHub Actions workflows、配置文件、site/ 下 HTML/CSS/JS 的代码结构）与根级项目文档（README/STRUCTURE/CHANGELOG/交接文档 等）仍适用 [MIT License](LICENSE)。
+> 源代码（Python/JavaScript/HTML 脚本、GitHub Actions workflows、配置文件、site/ 下 HTML/CSS/JS 的代码结构）与根级项目文档（README/STRUCTURE/CHANGELOG/HANDOVER 等）仍适用 [MIT License](LICENSE)。
 
 ## 核心条款（中文摘要）
 

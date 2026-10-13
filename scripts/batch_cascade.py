@@ -189,7 +189,7 @@ def _handover_rotate_oldest(s, ctx, nl, h1pos):
 def _face_handover(ctx):
     """交接文档面：头尾链/进度标题/里程碑块/HEAD 句全量改写与结构断言。"""
     # ---------- 交接文档 ----------
-    p = "交接文档.md"
+    p = "HANDOVER.md"
     s, nl = load(p)
     assert s.count("））；") == 0, "基线已存在双括号，先人工处理"
     s = s.replace("> 最后更新：", "> 最后更新：" + ctx.entry + "·", 1)
@@ -342,7 +342,7 @@ def _face_agents(ctx):
         _move, _keep = _entries[:_overflow], _entries[_overflow:]
         _lo, _hi = _nums[0], _nums[_overflow - 1]
         assert _agents_entry_wn(_keep[0]) == _hi + 1, "滚动切分不连续"
-        _arc = "docs/archive/AGENTS-ARCHIVE.md"
+        _arc = "archive/docs/AGENTS-ARCHIVE.md"
         _as, _anl = load(_arc)
         if not _as.endswith(_anl):
             _as += _anl
@@ -421,7 +421,7 @@ def _post_check(pend, batch):
             with open(_real, "wb") as f:
                 f.write(data)
             selfcheck.append(f"{path}: CR 串已收敛（自愈）")
-        if path == "交接文档.md":
+        if path == "HANDOVER.md":
             txt = data.decode("utf-8")
             sep = "\r\n" if "\r\n" in txt else "\n"
             # W706 结构断言（用户挑刺 P0 实证：头部错位块链+段标题被吞·写后即拦不落脏盘）

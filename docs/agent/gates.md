@@ -21,7 +21,7 @@
 
 ### 内容与同步类（1-5）
 
-1. **六文档同步**（核心 2 硬门禁：CHANGELOG.md + 交接文档.md 必须含当前 v/W——期望版本由 verify_delivery 动态取自 CHANGELOG 现役版段，dukou-engine.html 页脚降级为新鲜度 WARN（W518 起）；辅助 4 仅 WARN：README / STRUCTURE / 项目说明 / file-index）
+1. **六文档同步**（核心 2 硬门禁：CHANGELOG.md + HANDOVER.md 必须含当前 v/W——期望版本由 verify_delivery 动态取自 CHANGELOG 现役版段，dukou-engine.html 页脚降级为新鲜度 WARN（W518 起）；辅助 4 仅 WARN：README / STRUCTURE / 项目说明 / file-index）
 2. **范围漂移检测**（html 最高 W ≤ 文档+归档最高 W）
 3. **A4 计数一致（EXPECT_A4 字面量「209 篇」）** + **A1-A6 真实计数（六板块顶层 .md 磁盘计数 == README「共 N 篇」声明，当前 N=615<!--stats:a1_a6_docs-->）**
 4. **学术研究轨显式引用**（105 篇）
@@ -29,7 +29,7 @@
 
 ### 结构与加载类（6-11）
 
-6. **docs 全量链接校验**（lint_links 0 broken·W699 扩自 docs/01 至 docs 全量·W700 五改后内建五豁免=fenced+inline code 去噪/git check-ignore 本地产物/docs/archive 冻结档/POSIX 根绝对路径跳过/_w588_ce.html 快照件）
+6. **docs 全量链接校验**（lint_links 0 broken·W699 扩自 docs/01 至 docs 全量·W700 五改后内建五豁免=fenced+inline code 去噪/git check-ignore 本地产物/archive 冻结档/POSIX 根绝对路径跳过/_w588_ce.html 快照件）
 7. **sitemap 覆盖**、**site/data 回退模式**（两条共占第 7 槽·历史形态不拆以保 C2 三方对账不改）
 8. **CSP 漂移**（generate_csp.py --check，856<!--stats:csp_covered--> 页哈希 0 漂移·页数随口径演进以实跑为准）
 9. **数据漂移**（check_data_drift.js；W563 扩展：site/data/json 部署副本逐字节对账 47 副本基线 + 页面副本引用存在性 + 副本路径形态解析回原件 + EMBEDDED 单源页页名↔同名原件回退——对账面 44→46 页/71→74 项）、**腐蚀/插件**（check_corruption.py）

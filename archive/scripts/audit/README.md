@@ -1,4 +1,4 @@
-# audit/archive/ — 历史一次性验证脚本归档
+# audit/archive/ — 历史一次性验证脚本归档（W734 迁至 archive/scripts/audit/）（W734 迁至 archive/scripts/audit/）（W734 迁至 archive/scripts/audit/）
 
 本目录保存与特定 W### 工作项绑定的一次性验证脚本，已完成历史使命，保留以备追溯。
 
@@ -15,4 +15,4 @@
 | `w102_check_sanzang.py` | W102 | "三藏共"模式检查 |
 
 > **规则**：新的一次性验证脚本应放在 `audit/` 根目录并在文件名中带 W### 前缀；
-> 工作项收尾后归档至 `audit/archive/`。根目录 `audit/` 仅保留当前活跃工作项的脚本。
+> 工作项收尾后归档至 `archive/scripts/audit/`（W734 起全局统一归档根）。根目录 `audit/` 仅保留当前活跃工作项的脚本。

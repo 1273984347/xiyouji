@@ -4,12 +4,24 @@
 > W### 编号规则见 CHANGELOG.md 顶部。
 > 创建于 2026-07-22（v0.8 双索引改造）
 >
-> **历史归档**：W031-W087（v2.0.4-v2.0.60）site/data/ 部分已迁移至 [file-index-archive.md](file-index-archive.md)；W422 再归档 W393-W416 段；W511 归档 W417-W448 段 + W449-W463 损坏区尾部清理。本文件仅保留 W449+ 现役索引。
+> **历史归档**：W031-W087（v2.0.4-v2.0.60）site/data/ 部分已迁移至 [file-index-ARCHIVE.md](../../archive/docs/file-index-ARCHIVE.md)；W422 再归档 W393-W416 段；W511 归档 W417-W448 段 + W449-W463 损坏区尾部清理。本文件仅保留 W449+ 现役索引。
 >
 > **维护契约**：本索引按 W 追加登记（每文件 1 行 + 一句摘要），历史段禁改；新增/变更文件必须先有 CHANGELOG 对应 W 段再登记（双索引铁律），禁止无 W 段单独登记。
 
 ---
 
+
+## W734 归档体系统一与交接文档更名批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| HANDOVER.md | W734 | 交接文档更名（git mv·全部 live 引用同步） |
+| archive/docs/ | W734 | 自 docs/ARCHIVE 迁入（6 归档件+2 子目录·git 改名内容零改动） |
+| archive/scripts/ | W734 | 自 scripts/archive 迁入（45 件） |
+| archive/scripts/audit/ | W734 | 自 scripts/audit/archive 迁入（10 件） |
+| scripts/batch_cascade.py | W734 | handover 面路径与 _arc 同步（HANDOVER.md / archive/docs） |
+| scripts/verify_delivery.py | W734 | CORE_DOCS/A4_DOCS/ARCHIVE_DOCS/_DOC_FILES_RE 四组路径同步 |
+| docs/00-导读/文档规范.md | W734 | 归档规范重构（archive 根·按类·阈值沿用）+全量引用同步 |
 
 ## W733 达标收尾批（2026-10-13）
 

@@ -8,7 +8,7 @@ verify_delivery.py — 零依赖交付校验门禁（Senior Developer 设立）
      → 校验 site/dukou-engine.html 中引用的所有 W### 是否都已在文档中记录。
 
 降级六文档同步（W393）：
-  - 核心 2 份（CHANGELOG.md / 交接文档.md）= 跨 session 连续性真载体，缺失 v/W 仍【阻断】。
+  - 核心 2 份（CHANGELOG.md / HANDOVER.md）= 跨 session 连续性真载体，缺失 v/W 仍【阻断】。
   - 辅助 4 份（README.md / STRUCTURE.md / 项目说明.md / file-index.md）= 每次 W### 的纯手工税，
     缺失仅【WARN 不阻断】，里程碑时跑 scripts/bump_version.py 一键补齐。
 
@@ -102,7 +102,7 @@ EXPECTED_SECTION_NAMES = [
 # _GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
 # 校验（fake stdout 含段标记，wrapper 不会误判「缺汇总行」）；段自洽锁按 scope 断言子集。
 _DOC_FILES_RE = re.compile(
-    r"^(docs/.+\.md|(CHANGELOG|交接文档|README|STRUCTURE|CLAUDE)\.md|"
+    r"^(docs/.+\.md|(CHANGELOG|HANDOVER|README|STRUCTURE|CLAUDE)\.md|"
     r"scripts/output/file-index(-archive)?\.md|CITATION\.cff|"
     r"\.github/workflows/README\.md|AGENTS\.md|dataset/glossary\.json)$")
 _SITE_FILES_RE = re.compile(
@@ -192,7 +192,7 @@ def _classify_scope(files):
 
 CORE_DOCS = [
     "CHANGELOG.md",
-    "交接文档.md",
+    "HANDOVER.md",
 ]
 AUX_DOCS = [
     "README.md",
@@ -205,16 +205,16 @@ HTML = os.path.join(ROOT, "site", "dukou-engine.html")
 
 # 四份含 A4 计数语义的文档（W413 修正：交接文档恢复入库，恢复 4 份检查）
 A4_DOCS = ["README.md", "STRUCTURE.md",
-           os.path.join("docs", "00-导读", "项目说明.md"), "交接文档.md"]
+           os.path.join("docs", "00-导读", "项目说明.md"), "HANDOVER.md"]
 EXPECT_A4 = "209 篇"  # 真实计数（W342 199→201 起步，W400 后实际 209）
 
 # 归档文件（W417 新增）：归档后旧 W### 仍纳入范围漂移可追溯扫描，避免误报
 # W513：CHANGELOG-ARCHIVE 二级归档层（W001-W399）同纳入扫描
 ARCHIVE_DOCS = [
-    os.path.join("docs", "archive", "CHANGELOG-ARCHIVE.md"),
-    os.path.join("docs", "archive", "CHANGELOG-ARCHIVE-tier2.md"),
-    os.path.join("scripts", "output", "file-index-archive.md"),
-    os.path.join("docs", "archive", "交接文档-ARCHIVE.md"),
+    os.path.join("archive", "docs", "CHANGELOG-ARCHIVE.md"),
+    os.path.join("archive", "docs", "CHANGELOG-ARCHIVE-tier2.md"),
+    os.path.join("archive", "docs", "file-index-ARCHIVE.md"),
+    os.path.join("archive", "docs", "HANDOVER-ARCHIVE.md"),
 ]
 
 # A1-A6 内容板块真实文件计数 vs README 声明（W417 新增，防计数声明失真）
@@ -850,7 +850,7 @@ def _gate_a1_navigation(ctx):
 
 def _gate_docs_links(ctx):
     """docs 全量链接校验（W422 建置 docs/01·W699 扩为 docs 全量：挂载即绿 5191 链接 0 broken；
-    lint_links 内建三豁免=docs/archive 冻结档/gitignore 本地件/fenced+inline code 去噪）。"""
+    lint_links 内建三豁免=archive 冻结档/gitignore 本地件/fenced+inline code 去噪）。"""
     ctx.section("docs链接")
     try:
         r = subprocess.run(

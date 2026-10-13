@@ -4,7 +4,7 @@
 >
 > 本文件面向进入本仓库工作的 AI Agent（及新接手的人类维护者），提供项目的用途、技术栈、目录结构、关键模块、依赖关系、构建运行方式与必须遵守的铁律。动手前请通读；更细的规则以文末「权威文档」为准。
 >
-> **维护契约（防乱写）**：本文档是 Agent 协作指南，只允许结构性编辑——① 保持 §1–§8 骨架不变；② 新增铁律/规则必须**就地并入对应章节**并全篇去重（禁止追加「速记 / 补充」尾部段落）；③ 版本脚注更新须与当前 HEAD（vX.Y.Z W###，用 `git rev-parse --short HEAD` 核对）一致；④ 与 交接文档 / 文档规范 / CHANGELOG 冲突时以后三者为准。
+> **维护契约（防乱写）**：本文档是 Agent 协作指南，只允许结构性编辑——① 保持 §1–§8 骨架不变；② 新增铁律/规则必须**就地并入对应章节**并全篇去重（禁止追加「速记 / 补充」尾部段落）；③ 版本脚注更新须与当前 HEAD（vX.Y.Z W###，用 `git rev-parse --short HEAD` 核对）一致；④ 与 HANDOVER / 文档规范 / CHANGELOG 冲突时以后三者为准。
 
 ---
 
@@ -79,7 +79,7 @@ xiyouji/
 ├── tests/                 # pytest + Playwright E2E
 ├── assets/                # 字体源、图片
 ├── references/  timeline/  tools/  hyperframes/
-├── README.md / STRUCTURE.md / CHANGELOG.md / DESIGN.md / 交接文档.md / 新Agent启动Prompt.md / CLAUDE.md（AI 速查层·W664）
+├── README.md / STRUCTURE.md / CHANGELOG.md / DESIGN.md / HANDOVER.md / 新Agent启动Prompt.md / CLAUDE.md（AI 速查层·W664）
 └── LICENSE + LICENSE-CONTENT.md  # 双协议
 ```
 
@@ -230,7 +230,7 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ## 6. 必须遵守的铁律
 
-1. **六文档同步（W393 降级）**：每完成一个 W 批次，核心 2（CHANGELOG + 交接文档）必须写，辅助 4（README/STRUCTURE/项目说明/file-index）里程碑时跑 bump_version.py 补齐。
+1. **六文档同步（W393 降级）**：每完成一个 W 批次，核心 2（CHANGELOG + HANDOVER）必须写，辅助 4（README/STRUCTURE/项目说明/file-index）里程碑时跑 bump_version.py 补齐。
 2. **E1 铁律（声明 ≠ 落地）**：每个文件修改后 Grep spot-check 验证落地，禁止假收敛。
 3. **改内联脚本 → 重跑 generate_csp.py**（CSP 哈希失配会整脚本被拒）。
 4. **批量改 CSS/JS → 验证括号/引号平衡**（check_structure.py）。
@@ -250,10 +250,10 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 0. 开局先跑 `python scripts/agent_start.py`——实读磁盘输出当前事实摘要（现役三元组/近 3 批次/stats 全键/对账表现势/阻塞·W705）——防「记忆代读」，值全部来自磁盘实时读取。
 1. 读 `CLAUDE.md`（AI 速查层，1 分钟）→ 必守规则与常用命令速览（W664 起，宿主自动加载）。
-2. 读 `交接文档.md`「零、当前阻塞」+「一、当前进度」→ 当前 HEAD（vX.Y.Z W###）、下一 W 编号、遗留待办。
+2. 读 `HANDOVER.md`「零、当前阻塞」+「一、当前进度」→ 当前 HEAD（vX.Y.Z W###）、下一 W 编号、遗留待办。
 3. 读 `README.md` → 项目全貌、内容规模、在线站点、双协议。
 4. 读 `docs/00-导读/文档规范.md` §11 → 文件管控清单（必同步/禁擅改/接手速查 6 步/同步核对 10 项）。
-5. 读 `交接文档.md`「三、方法论沉淀」→ 可复利经验。
+5. 读 `HANDOVER.md`「三、方法论沉淀」→ 可复利经验。
 6. 深挖结构看 `STRUCTURE.md`、`scripts/output/file-index.md`（反向索引）、`CHANGELOG.md`（正向时间线）。
 7. 动手前跑 `python scripts/verify_delivery.py` 确认基线全绿。
 
@@ -261,9 +261,9 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ## 8. 权威文档（冲突时以此为准）
 
-> **清单间裁定链（W706）**：文档规范 §11（文件管控）> CHANGELOG 现役段 > 交接文档。本节与 CLAUDE.md（速查指针）、CONTRIBUTING（贡献者协作面）系三视角清单，内容不一致时按裁定链与本节为准。
+> **清单间裁定链（W706）**：文档规范 §11（文件管控）> CHANGELOG 现役段 > HANDOVER。本节与 CLAUDE.md（速查指针）、CONTRIBUTING（贡献者协作面）系三视角清单，内容不一致时按裁定链与本节为准。
 
-- 进度中枢 / 规则：`交接文档.md`、`新Agent启动Prompt.md`（速用精简版）、`CLAUDE.md`（AI 速查层·W664）
+- 进度中枢 / 规则：`HANDOVER.md`、`新Agent启动Prompt.md`（速用精简版）、`CLAUDE.md`（AI 速查层·W664）
 - 文档规范：`docs/00-导读/文档规范.md`（尤其 §11 文件管控）
 - 设计规范：`DESIGN.md`（§1-4 视觉 / **§5 动效契约**）
 - 目录结构：`STRUCTURE.md`
@@ -272,4 +272,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [docs/archive/AGENTS-ARCHIVE.md](docs/archive/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W728-W728 级联自动滚动·脚注保留最近 5 条·grep 查勿通读）；2026-10-13（W729）性能与可访问性工具链重构批（用户令第二批按同方法论推进）：perf_monitor 拆 build_report compare_trend check_budget run 四个长函数为九个单一职责函数（统计渲染基线加载资源扫描预算定级采集警报输入）加 a11y_audit 拆 audit_directory 与 render_md 为七个函数（发现扫描计数表输出分流 Top 统计 Top 详情优先级段）；验证 a11y 全量 JSON 加 MD 双一致（10228 findings 逐字节）加 perf 结构对比十项全过加 pytest 296 加 ruff 0；方法论重要修正=Playwright 实测路径固有抖动禁逐字节对比改结构对比口径（timeline CLS 抖动越过警报阈值实证）已沉淀；2026-10-13（W730）门禁脚本长函数收尾重构批（用户令第三批候选按同方法论推进）：范围证据版裁决三目标（check_doc_sync 与 lint_links 两挂载门禁加 perf collect_rum_metrics 命名候选·排除 a11y 剩余 74 行固有形态与 JS 侧重环境）加 evaluate 拆六个检查函数加 gather 提取 _git_output_lines 三块合一加 lint_links main 拆四助手加 collect_rum_metrics 拆四助手；验证 dsync 直跑与 self-test 双逐字节一致加 links 全量输出一致加 RUM 快照 11 形态一致加集成路径加 pytest 296 加 ruff 0；方法论新增=拆分前审计是否已达标（self-test 表驱动判定不动）加同构块合并逐块核对错误语义；2026-10-13（W731）发布工具链与安全扫描重构批（用户令继续第四批）：范围证据版裁决两目标（全仓最长 batch_cascade main 347 行加 security_scan 两长函数）；batch_cascade 十面各提取一函数加页脚与脚注解析提模块级加落盘自检分离加上下文类；security_scan run 与 build_report 拆编排体；验证=19 历史 spec 加草稿 dry-run 输出对比加受控 apply 落盘 git diff 对拍（14 文件 265 行逐字节）加单测 12 加 pytest 296 加 ruff 0 加报告对比；踩坑=提取漏 return 被草稿 spec 抓住加 traceback 口径归一化加 apply 对拍排除重构文件自身；2026-10-13（W732）性能与文档工具链重构批（用户令继续第五批）：范围证据版裁决三文件六函数（perf_optimize 四函数加 optimize-html-size render_report 加 sync_docs main）；本批后全仓 ≥100 行函数清零（除已判定不动的 run_self_test）；验证=perf fixture 快照全字段逐字节加 14 单测加 OHS stdout 与报告双一致加 sync_docs 七规则输出逐字节加 pytest 296 加 ruff 0 加门禁 53 项；踩坑=横幅历史形态普查（规则 1/3/4 有空格 vs 2/5/6/7 无空格逐字节保真）加 harness 时间戳归一化加 CRLF 文件归一处理；2026-10-13（W733）达标收尾批（用户 quote 剩余 60-90 行函数做收尾）：范围证据版裁决六目标（check_seo_head 加 spot_check_nlp 加 check_design_doc_drift 加 embed_json 加 build_reader 加 perf compare_trend）加审计判定不动 bump_version（W714 停用守卫死工具）；验证=三门禁输出逐字节加 drift 篡改负样本对拍加 embed 12 场景 CLI 快照加 compare_trend 9 场景快照加 reader 622 文件产物 sha 全等加 pytest 296 加 ruff 0 加门禁 53 项；踩坑=负样本旧版须放回 scripts 加 reader 直出为未后处理版对拍口径加采集标签统一加 echo 误建垃圾文件清理。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W729-W729 级联自动滚动·脚注保留最近 5 条·grep 查勿通读）；2026-10-13（W730）门禁脚本长函数收尾重构批（用户令第三批候选按同方法论推进）：范围证据版裁决三目标（check_doc_sync 与 lint_links 两挂载门禁加 perf collect_rum_metrics 命名候选·排除 a11y 剩余 74 行固有形态与 JS 侧重环境）加 evaluate 拆六个检查函数加 gather 提取 _git_output_lines 三块合一加 lint_links main 拆四助手加 collect_rum_metrics 拆四助手；验证 dsync 直跑与 self-test 双逐字节一致加 links 全量输出一致加 RUM 快照 11 形态一致加集成路径加 pytest 296 加 ruff 0；方法论新增=拆分前审计是否已达标（self-test 表驱动判定不动）加同构块合并逐块核对错误语义；2026-10-13（W731）发布工具链与安全扫描重构批（用户令继续第四批）：范围证据版裁决两目标（全仓最长 batch_cascade main 347 行加 security_scan 两长函数）；batch_cascade 十面各提取一函数加页脚与脚注解析提模块级加落盘自检分离加上下文类；security_scan run 与 build_report 拆编排体；验证=19 历史 spec 加草稿 dry-run 输出对比加受控 apply 落盘 git diff 对拍（14 文件 265 行逐字节）加单测 12 加 pytest 296 加 ruff 0 加报告对比；踩坑=提取漏 return 被草稿 spec 抓住加 traceback 口径归一化加 apply 对拍排除重构文件自身；2026-10-13（W732）性能与文档工具链重构批（用户令继续第五批）：范围证据版裁决三文件六函数（perf_optimize 四函数加 optimize-html-size render_report 加 sync_docs main）；本批后全仓 ≥100 行函数清零（除已判定不动的 run_self_test）；验证=perf fixture 快照全字段逐字节加 14 单测加 OHS stdout 与报告双一致加 sync_docs 七规则输出逐字节加 pytest 296 加 ruff 0 加门禁 53 项；踩坑=横幅历史形态普查（规则 1/3/4 有空格 vs 2/5/6/7 无空格逐字节保真）加 harness 时间戳归一化加 CRLF 文件归一处理；2026-10-13（W733）达标收尾批（用户 quote 剩余 60-90 行函数做收尾）：范围证据版裁决六目标（check_seo_head 加 spot_check_nlp 加 check_design_doc_drift 加 embed_json 加 build_reader 加 perf compare_trend）加审计判定不动 bump_version（W714 停用守卫死工具）；验证=三门禁输出逐字节加 drift 篡改负样本对拍加 embed 12 场景 CLI 快照加 compare_trend 9 场景快照加 reader 622 文件产物 sha 全等加 pytest 296 加 ruff 0 加门禁 53 项；踩坑=负样本旧版须放回 scripts 加 reader 直出为未后处理版对拍口径加采集标签统一加 echo 误建垃圾文件清理；2026-10-13（W734）归档体系统一与交接文档更名批（用户令同步加更名加归档新规）：docs/ARCHIVE 与 scripts/archive 与 scripts/audit/archive 三类归档迁入 archive 根按类归置加交接文档更名 HANDOVER 加工具链十五文件与六文档全量引用同步加文档规范归档规则重构（archive 根按类归置沿用五十 KB 阈值）；验证=lint_links 全量加五门禁直跑加残留扫描加 pytest 296 加 ruff 0 加门禁 53 项；踩坑=目录大小写历史态（git 小写 tracked 与磁盘大写）随迁移自然收敛加 C4 消息 W 号形态与归档路径 token 规则实测。如与上述权威文档冲突，以权威文档为准。*

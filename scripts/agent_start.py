@@ -34,7 +34,7 @@ TASK_MAP = [  # (路径模式, 必读提示) —— W713 更新：BL-24 已收�
     (r"^scripts/check_|verify_delivery", "docs/agent/gates.md 对应槽位 + verify 段自洽锁（改门禁必读）"),
     (r"\.py$", "AGENTS §4.3 工具链要点 + docs/agent/pitfalls.md §流程/协作/取证 + ruff/pytest 计数钉纪律"),
     (r"^dataset/|scripts/output/data", "docs/agent/pitfalls.md §数据/内容可信度（计数钉/旧值标记扫描/双源门禁第 39/40）"),
-    (r"^docs/|^交接文档|^CHANGELOG|^README|^STRUCTURE", "docs/00-导读/文档规范.md §4.9-4.11 + 第 31 门禁 C5 对账"),
+    (r"^docs/|^HANDOVER|^CHANGELOG|^README|^STRUCTURE", "docs/00-导读/文档规范.md §4.9-4.11 + 第 31 门禁 C5 对账"),
     (r"^xiyouji-agent-web/", "docs/agent/agent-web.md（W680 引擎层）"),
     (r"^\.github/", "AGENTS §4.3 CI 类（workflow 触发条件/quotePath/SHA 钉）"),
 ]
@@ -70,7 +70,7 @@ def gather():
         pass
     ledger = read(os.path.join("docs", "00-导读", "W批次编号对账表.md"))
     m_now = RE_LEDGER_NOW.search(ledger)
-    jiaojie = read("交接文档.md")
+    jiaojie = read("HANDOVER.md")
     i = jiaojie.find("零、当前阻塞（接手必读）")  # W713：锚段标题（原锚「零、当前阻塞」命中阅读契约引述·取不到正文）
     blockers = []
     if i != -1:

@@ -142,12 +142,12 @@ def step5_checklist(target_version: str) -> None:
 
   1. [ ] CHANGELOG.md 添加新版本段 `### {target_version}` + W### ID + 四件套字段
   2. [ ] file-index.md 追加新版本条目（反向索引）
-  3. [ ] README.md / STRUCTURE.md / 项目说明.md / 交接文档.md 头部版本号更新
+  3. [ ] README.md / STRUCTURE.md / 项目说明.md / HANDOVER.md 头部版本号更新
          可运行：python scripts/sync_docs.py --fix
   4. [ ] git commit -m "release: {target_version}"
   5. [ ] git tag {target_version}
   6. [ ] git push && git push --tags
-  7. [ ] （可选）更新 docs/archive/CHANGELOG-ARCHIVE.md（如旧版本归档）
+  7. [ ] （可选）更新 archive/docs/CHANGELOG-ARCHIVE.md（如旧版本归档）
 
 可用命令：
   python scripts/sync_docs.py          # 一致性校验

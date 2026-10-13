@@ -91,7 +91,7 @@ def _self_test():
         cases_list = [
             ("error: failed to push some refs", A, B, [], False, "非 ref-lock 失败"),
             (LOCK_MARK + ": is at X but expected Y", A, A, [], False, "HEAD 未前进"),
-            (LOCK_MARK + ": is at X but expected Y", A, B, ["交接文档.md"], True,
+            (LOCK_MARK + ": is at X but expected Y", A, B, ["HANDOVER.md"], True,
              "并行增量无交集可重试"),
             (LOCK_MARK + ": is at X but expected Y", A, B, ["CHANGELOG.md"], False,
              "并行增量有交集拒重试"),

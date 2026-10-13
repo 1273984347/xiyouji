@@ -48,7 +48,7 @@ FILE_INDEX = os.path.join(ROOT, "scripts", "output", "file-index.md")
 
 # W417 增强：W 范围替换 + 页脚 3 个简单页脚同步
 SYNC_DOCS = AUX_VERSION_DOCS + [FILE_INDEX,
-                                os.path.join(ROOT, "交接文档.md"),
+                                os.path.join(ROOT, "HANDOVER.md"),
                                 os.path.join(ROOT, "CHANGELOG.md"),
                                 os.path.join(ROOT, "site", "index.html"),
                                 os.path.join(ROOT, "site", "data", "cross-time-danmaku.html"),

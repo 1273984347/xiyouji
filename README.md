@@ -4,7 +4,7 @@
 > **📖 阅读契约（W707）**：分段型——普通读者通读「普通读者专区」；Agent/开发者**只读**「开发者/维护者专区」（技术栈/目录结构/测试/门禁）与「AI 生成说明」，读者导览段（emoji 列表）按需。
 > 一源多形 · 数字人文可视化解读《西游记》100 回 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
 >
-> **当前批次 W733（2026-10-13）**：达标收尾六目标拆编·A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> **当前批次 W734（2026-10-13）**：归档体系统一与交接文档更名·A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 >
 > **版本号说明（W711 方案 D 起）**：本项目的批次编号为 **W###**（单调递增·永不复用·唯一对账键），`v2.3` 为内容阶段标签（定性·无 patch 位·不适用 SemVer）；W710 及更早的历史版本号 `vX.Y.Z` 保留原文。判断「这批改了什么」看 [CHANGELOG.md](CHANGELOG.md) 顶段。
 >
@@ -183,7 +183,7 @@ python detect_unwrapped_tables.py   # 静态表格扫描（双轨之二）
 ## 文档维护规范
 
 - 更新项目文档前请先阅读 [文档规范](docs/00-导读/文档规范.md)（防膨胀·归档规则·Keep a Changelog/SemVer/Conventional Commits/Diátaxis）
-- 跨 session 接续流程见 [交接文档.md](交接文档.md)
+- 跨 session 接续流程见 [HANDOVER.md](HANDOVER.md)
 
 </details>
 
