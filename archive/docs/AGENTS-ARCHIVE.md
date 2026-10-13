@@ -92,3 +92,8 @@
 ```text
 2026-10-13（W730）门禁脚本长函数收尾重构批（用户令第三批候选按同方法论推进）：范围证据版裁决三目标（check_doc_sync 与 lint_links 两挂载门禁加 perf collect_rum_metrics 命名候选·排除 a11y 剩余 74 行固有形态与 JS 侧重环境）加 evaluate 拆六个检查函数加 gather 提取 _git_output_lines 三块合一加 lint_links main 拆四助手加 collect_rum_metrics 拆四助手；验证 dsync 直跑与 self-test 双逐字节一致加 links 全量输出一致加 RUM 快照 11 形态一致加集成路径加 pytest 296 加 ruff 0；方法论新增=拆分前审计是否已达标（self-test 表驱动判定不动）加同构块合并逐块核对错误语义
 ```
+以下为 AGENTS.md 版本脚注早期条目（W731-W731）段的原文（单行沿革链·W736 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-13（W731）发布工具链与安全扫描重构批（用户令继续第四批）：范围证据版裁决两目标（全仓最长 batch_cascade main 347 行加 security_scan 两长函数）；batch_cascade 十面各提取一函数加页脚与脚注解析提模块级加落盘自检分离加上下文类；security_scan run 与 build_report 拆编排体；验证=19 历史 spec 加草稿 dry-run 输出对比加受控 apply 落盘 git diff 对拍（14 文件 265 行逐字节）加单测 12 加 pytest 296 加 ruff 0 加报告对比；踩坑=提取漏 return 被草稿 spec 抓住加 traceback 口径归一化加 apply 对拍排除重构文件自身
+```
