@@ -71,8 +71,8 @@ RE_BARE_AGG = re.compile(r"\d+\s*(?:页|项|篇|个|类)")  # C5c 裸聚合数�
 C5_DOC_NAMES = {"readme": "README.md", "structure": "STRUCTURE.md", "agents": "AGENTS.md", "xiangmu": "项目说明.md", "contributing": "CONTRIBUTING.md"}  # W713 补 CONTRIBUTING（第 27 门禁叙述面已含·C5 面对齐）
 EXEMPT_MARK = "<!--doc-sync:exempt"
 ARCHIVE_CHANGELOGS = [
-    os.path.join(ROOT, "docs", "archive", "CHANGELOG-ARCHIVE.md"),
-    os.path.join(ROOT, "docs", "archive", "CHANGELOG-ARCHIVE-tier2.md"),
+    os.path.join(ROOT, "archive", "docs", "CHANGELOG-ARCHIVE.md"),
+    os.path.join(ROOT, "archive", "docs", "CHANGELOG-ARCHIVE-tier2.md"),
 ]
 
 
@@ -380,7 +380,7 @@ def gather():
     inputs = {
         "changelog": rd(os.path.join(ROOT, "CHANGELOG.md")),
         "readme": rd(os.path.join(ROOT, "README.md")),
-        "jiaojie": rd(os.path.join(ROOT, "交接文档.md")),
+        "jiaojie": rd(os.path.join(ROOT, "HANDOVER.md")),
         "agents": rd(os.path.join(ROOT, "AGENTS.md")),
         "structure": rd(os.path.join(ROOT, "STRUCTURE.md")),
         "xiangmu": rd(os.path.join(ROOT, "docs", "00-导读", "项目说明.md")),

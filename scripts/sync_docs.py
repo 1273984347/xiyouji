@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """sync_docs.py - 6 文件文档一致性自动校验
 
-校验 CHANGELOG.md / README.md / STRUCTURE.md / 项目说明.md / 交接文档.md / file-index.md
+校验 CHANGELOG.md / README.md / STRUCTURE.md / 项目说明.md / HANDOVER.md / file-index.md
 之间版本号、统计计数、W### 编号、file-index 最新条目的一致性。
 
 解决 E1 铁律模式（prior session 报告"已同步"但实际残留过时数据）。
@@ -25,7 +25,7 @@ FILES = {
     "README":     ROOT / "README.md",
     "STRUCTURE":  ROOT / "STRUCTURE.md",
     "项目说明":    ROOT / "docs" / "00-导读" / "项目说明.md",
-    "交接文档":    ROOT / "交接文档.md",
+    "HANDOVER":    ROOT / "HANDOVER.md",
     "file-index": ROOT / "scripts" / "output" / "file-index.md",
 }
 
@@ -126,7 +126,7 @@ def rule_version(latest_v, fix=False):
     issues = []
     if not latest_v:
         return ["[ERROR] CHANGELOG.md 顶部未找到版本号"]
-    for name in ["README", "STRUCTURE", "项目说明", "交接文档"]:
+    for name in ["README", "STRUCTURE", "项目说明", "HANDOVER"]:
         path = FILES[name]
         if not path.exists():
             issues.append(f"[MISSING] {name} 文件不存在: {path}")

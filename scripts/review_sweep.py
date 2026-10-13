@@ -24,14 +24,14 @@ RULES = [
         "id": "R1", "cls": "旧数据链断言",
         "patterns": [r"供 site/timeline\.html 渲染", r"自动生成，输出到 scripts/output", r"当前无对应可视化页"],
         "globs": ["docs/**/*.md", "timeline/*.md", "scripts/**/*.py", "site/**/*.html"],
-        "path_exclude": r"docs[/\\]archive|CHANGELOG|file-index|_w\d|工作复盘与优化分析报告|scripts[/\\]output[/\\]_|review_sweep",
+        "path_exclude": r"docs[/\\]archive|(?:^|[/\\])archive[/\\]|CHANGELOG|file-index|_w\d|工作复盘与优化分析报告|scripts[/\\]output[/\\]_|review_sweep",
         "line_exclude": None,
     },
     {
         "id": "R2", "cls": "现役文档计数漂移（86/87 族）",
         "patterns": [r"86 个可视化|86 可视化页|87 个 HTML|86 个 D3"],
         "globs": ["README.md", "STRUCTURE.md", "CLAUDE.md", "docs/00-导读/项目说明.md",
-                  "docs/00-导读/文档规范.md", "交接文档.md", "AGENTS.md", ".github/workflows/README.md"],
+                  "docs/00-导读/文档规范.md", "HANDOVER.md", "AGENTS.md", ".github/workflows/README.md"],
         "path_exclude": None,
         "line_exclude": r"W\d{3}",  # 含历史批次号的行=沿革叙述，合法
     },
@@ -39,7 +39,7 @@ RULES = [
         "id": "R3", "cls": "已勘误事实断言",
         "patterns": [r"灭法国与玉华州", r"5048 天", r"第 40 回 红孩儿妖童化身"],
         "globs": ["docs/**/*.md", "timeline/*.md", "site/**/*.html"],
-        "path_exclude": r"docs[/\\]archive|工作复盘与优化分析报告|CHANGELOG|review_sweep",
+        "path_exclude": r"docs[/\\]archive|(?:^|[/\\])archive[/\\]|工作复盘与优化分析报告|CHANGELOG|review_sweep",
         "line_exclude": r"勘正|驳回|误注|复审",
     },
 ]

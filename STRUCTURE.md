@@ -3,7 +3,7 @@
 
 > **📖 阅读契约（W707）**：索引型——找「东西在哪」时读顶层结构表+目标目录所在段；各板块下的建置沿革（v0.x W0xx 补齐…）是历史记录见 CHANGELOG，勿通读；计数与口径以磁盘实数与 [统计口径说明](docs/00-导读/统计口径说明.md) 为准。
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前批次：W733（2026-10-13）— 达标收尾六目标拆编—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前批次：W734（2026-10-13）— 归档体系统一与交接文档更名—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构
@@ -75,19 +75,19 @@
 **回目选取策略**：覆盖全书结构关键节点——开篇（001）、学艺（002）、龙宫借宝招安伏笔（003）、闹天宫引爆（005）、闹天宫转折（007）、取经项目启动（008）、取经组建（014）、团队集结完成（022）、首次决裂（027）、中段斗法（045）、心性整合（058）、火焰山主战（059）、最大外患（074）、后期识魔（078）、终回成佛（100）。每篇均采用六段式模板 + 4 条关联数据可视化链接。
 
 ### 02-人物深度分析/
-按人物立文件，例如 `孙悟空.md`、`唐僧.md` 等。已建 215 篇（A3 人物·谱系表+五众+妖魔+神佛+妖怪次级全覆盖·六段式模板·建置沿革见 [STRUCTURE-ARCHIVE](docs/archive/STRUCTURE-ARCHIVE.md) 与 CHANGELOG）。
+按人物立文件，例如 `孙悟空.md`、`唐僧.md` 等。已建 215 篇（A3 人物·谱系表+五众+妖魔+神佛+妖怪次级全覆盖·六段式模板·建置沿革见 [STRUCTURE-ARCHIVE](archive/docs/STRUCTURE-ARCHIVE.md) 与 CHANGELOG）。
 
 ### 03-主题与情节专题/
-按主题立文件（七段式模板），现 209<!--stats:a4_docs--> 篇；建置沿革见 docs/archive/STRUCTURE-ARCHIVE.md 与 CHANGELOG。
+按主题立文件（七段式模板），现 209<!--stats:a4_docs--> 篇；建置沿革见 archive/docs/STRUCTURE-ARCHIVE.md 与 CHANGELOG。
 
 ### 04-文化与历史背景/
-成书背景、佛道思想、明代社会隐喻、版本演变、历史玄奘与小说玄奘等。已建 4 篇（成书背景/版本演变/佛道思想/明代隐喻·七段式模板·沿革见 [STRUCTURE-ARCHIVE](docs/archive/STRUCTURE-ARCHIVE.md) 与 CHANGELOG）。
+成书背景、佛道思想、明代社会隐喻、版本演变、历史玄奘与小说玄奘等。已建 4 篇（成书背景/版本演变/佛道思想/明代隐喻·七段式模板·沿革见 [STRUCTURE-ARCHIVE](archive/docs/STRUCTURE-ARCHIVE.md) 与 CHANGELOG）。
 
 ### 05-诗词歌赋/
 原著诗词赏析、回目对联分析、主题诗词创作（个人创作）。
 
 ### 06-个人随笔/
-现代视角解读、职场映射、时代变迁中的西游。独立随笔以六段式（古今对位 + 加粗金句）建设，现 44 篇；建置沿革见 docs/archive/STRUCTURE-ARCHIVE.md 与 CHANGELOG。
+现代视角解读、职场映射、时代变迁中的西游。独立随笔以六段式（古今对位 + 加粗金句）建设，现 44 篇；建置沿革见 archive/docs/STRUCTURE-ARCHIVE.md 与 CHANGELOG。
 
 ### 07-学以致用/（v0.11 W016 新增）
 学以致用层——把《西游记》读到的"是什么"和"为什么"延伸到"怎么用"。已建 4 篇（六段式模板：教学讲解轨标）：
@@ -274,7 +274,7 @@
 
 ## 版本变更
 
-完整版本变更历史见 [CHANGELOG.md](CHANGELOG.md)（唯一事实源·文档规范 §3：本文件禁止写 W### 细节）。历史段按三段式归档（口径以 CHANGELOG 头部为准）：W001-W399 → docs/archive/CHANGELOG-ARCHIVE-tier2.md；W400-W416、W417-W464+W484 段 → docs/archive/CHANGELOG-ARCHIVE.md（W422/W511）；现役 v2.3.84+（W485+）。另 v0.1-v2.2.48（W001-W272）的旧版逐版本里程碑描述已迁至 [STRUCTURE-ARCHIVE.md](docs/archive/STRUCTURE-ARCHIVE.md)（2026-08-16 W448）。
+完整版本变更历史见 [CHANGELOG.md](CHANGELOG.md)（唯一事实源·文档规范 §3：本文件禁止写 W### 细节）。历史段按三段式归档（口径以 CHANGELOG 头部为准）：W001-W399 → archive/docs/CHANGELOG-ARCHIVE-tier2.md；W400-W416、W417-W464+W484 段 → archive/docs/CHANGELOG-ARCHIVE.md（W422/W511）；现役 v2.3.84+（W485+）。另 v0.1-v2.2.48（W001-W272）的旧版逐版本里程碑描述已迁至 [STRUCTURE-ARCHIVE.md](archive/docs/STRUCTURE-ARCHIVE.md)（2026-08-16 W448）。
 
 **主要阶段概要**（细节见 CHANGELOG 对应版本段）：
 

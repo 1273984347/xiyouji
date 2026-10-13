@@ -11,7 +11,7 @@ scripts/audit/w053_verify_links.py（Markdown [text](url)）的能力。
 
 豁免：
   - gitignore 本地产物（docs/S4 双盲件、tmpe/ 等）：git check-ignore 批量判定后剔除
-  - 默认排除：node_modules / _template.html / docs/archive/（冻结历史档·禁擅改，其
+  - 默认排除：node_modules / _template.html / archive/（冻结历史档·禁擅改，其
     出链不修）——排除匹配以仓库相对路径为准
 
 链接分类：
@@ -326,10 +326,10 @@ def _parse_args():
     ap.add_argument(
         "--exclude",
         nargs="*",
-        default=["node_modules", "_template.html", "docs/archive/", "tmpe/",
+        default=["node_modules", "_template.html", "archive/", "tmpe/",
                  "_w588_ce.html"],
         help="排除含这些路径片段的文件/目录，匹配仓库相对路径"
-             "（默认 node_modules/_template.html/docs/archive/ 冻结档/tmpe/ 临时区"
+             "（默认 node_modules/_template.html/archive/ 冻结档/tmpe/ 临时区"
              "/_w588_ce.html W588 渲染快照件·其出链为 site 根相对形态不适用 scripts/ 位）",
     )
     return ap.parse_args()
@@ -353,7 +353,7 @@ def _collect_scan_files(scan_dir, exclude):
     if exclude:
         before = len(files)
         # W699 起：排除匹配改为仓库相对路径（扫描 --dir docs 时 "archive/" 不会再
-        # 误伤扫描根外同名片段，docs/archive/ 冻结档豁免在全目录口径下均成立）
+        # 误伤扫描根外同名片段，archive/ 冻结档豁免在全目录口径下均成立）
         files = [
             f for f in files
             if not any(tok in display_path(f) for tok in exclude)

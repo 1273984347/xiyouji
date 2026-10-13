@@ -1,22 +1,33 @@
 # 更新日志
 
 
-> **📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 docs/archive/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
+> **📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
 本项目所有重要变更均记录于此。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/)。
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W733），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W734），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
 > **方案 D 形态切换（W711 生效）**：自 W711 段起，CHANGELOG 段标题去 v 号（新形态 `### W###（日期）：标题`）；W001-W710 段保留 `### vX.Y.Z（日期）：W###` 历史形态不改写；v 号降格为阶段标签（v2.3·无 patch）；CITATION.cff version 改批次号形态（"W###"·CFF free string）；file-index 历史条目保留 v 引用、新增条目 W only。
 >
-> **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](docs/archive/CHANGELOG-ARCHIVE.md)。本文件仅保留 W650+ 段（W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
+> **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](archive/docs/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。本文件仅保留 W650+ 段（W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
 >
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W734（2026-10-13）：归档体系统一与交接文档更名批
+
+> **来源**：用户令「同步（归档引用链）」+「把 交接文档.md 全部改换为 HANDOVER.md」，并确立归档新规：「以后超过文档内容大小的文件都要归档，全部归档到 D://xiyouji//archive，按照 docs 归档文档类内容、脚本类归档脚本内容等等以此类推按照文件格式统一储存」。动工前 fetch 正常·origin/main 无新批次·W734 认领。
+> - **T1 归档体系统一**：docs/ARCHIVE→archive/docs（8 项：6 归档件 + w550-shot-review/ 11 件 + 复盘报告/ 5 件）；scripts/archive→archive/scripts（45 件）；scripts/audit/archive→archive/scripts/audit（10 件）；旧目录删除；用户先行更名的 HANDOVER-ARCHIVE.md / file-index-ARCHIVE.md 一并归位（git 改名识别·LF 归一后与 HEAD blob 全等核验·纯改名零内容改动）。
+> - **T2 交接文档更名**：交接文档.md→HANDOVER.md（git mv·内容与行尾零改动）；全部 live 引用同步——工具链 15 文件（batch_cascade/verify_delivery/sync_docs/check_doc_sync/check_governance_docs/agent_start/check_w_range_literal/pre-commit-validate/release/review_sweep/safe_commit/bump_version/drl_contracts/Makefile/pyproject）+ 六文档与旁文档（README/STRUCTURE/AGENTS/项目说明/workflows README/CHANGELOG 顶注）+ agent 文档（gates/pitfalls）+ 根文档（CLAUDE/新Agent启动Prompt/LICENSE-CONTENT/PULL_REQUEST_TEMPLATE）；悬空链接清零（HANDOVER.md 内部归档链接 5 处 + file-index 顶部指针 + AGENTS 脚注归档指针 + S3 分享页 README（本地产物·gitignore））。
+> - **T3 工具链路径同步**：batch_cascade handover 面路径与 _arc（AGENTS-ARCHIVE 滚动目标）；verify_delivery CORE_DOCS/A4_DOCS/ARCHIVE_DOCS/_DOC_FILES_RE 四组；lint_links 冻结档排除 docs/archive/→archive/；check_doc_sync ARCHIVE_CHANGELOGS（C4 登记集合）与交接读取；pyproject ruff 排除入 archive/。
+> - **T4 文档规范重构**：§4.4 命名与归档条、§5 二级归档条、§8 健康指标、§11 管控表全量更新；新增「归档根与分类（W734 统一）」规则——archive/ 根·按类归置（文档类 archive/docs/、脚本类 archive/scripts/、其余以此类推）·触发=退役替换或体积超限（沿用 50KB/500 行与 1MB 分层阈值）。
+> - **验证（全绿）**：全仓残留扫描（live 面旧名/旧路径清零·历史件与迁移说明按规保留）；lint_links docs 全量 0 broken；check_governance_docs 7 项全过；check_doc_sync self-test 18/18 + 直跑；check_agents_layers self-test 5/5；check_w_range_literal 0 漂移；ruff scripts/ 全过；pytest 296 passed；全量门禁 53 项 OK。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：HANDOVER.md、CHANGELOG.md、README.md、STRUCTURE.md、AGENTS.md、CITATION.cff、CLAUDE.md、LICENSE-CONTENT.md、新Agent启动Prompt.md、pyproject.toml、Makefile、.github/PULL_REQUEST_TEMPLATE.md、.github/workflows/README.md、docs/00-导读/项目说明.md、docs/00-导读/文档规范.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/V2可视化维度方案.md、docs/agent/gates.md、docs/agent/pitfalls.md、docs/10-方法论沉淀/README.md、docs/10-方法论沉淀/双索引可追溯改造.md、docs/_templates/validation-checklist.md、scripts/batch_cascade.py、scripts/verify_delivery.py、scripts/lint_links.py、scripts/check_doc_sync.py、scripts/check_governance_docs.py、scripts/agent_start.py、scripts/check_w_range_literal.py、scripts/pre-commit-validate.py、scripts/release.py、scripts/review_sweep.py、scripts/safe_commit.py、scripts/bump_version.py、scripts/sync_docs.py、scripts/drl_contracts.yaml、scripts/output/file-index.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE-tier2.md、archive/docs/HANDOVER-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/STRUCTURE-ARCHIVE.md、archive/scripts/audit/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html（另 archive/docs/w550-shot-review/、archive/docs/复盘报告/、archive/scripts/ 45 件、archive/scripts/audit/ 10 件目录级迁入·逐项见 file-index）。
 
 ### W733（2026-10-13）：达标收尾批
 
