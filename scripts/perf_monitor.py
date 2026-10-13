@@ -433,6 +433,64 @@ def _load_baseline(baseline):
     return _convert_baseline_units(baseline_pages, baseline_unit), None
 
 
+def _empty_trend_result():
+    """空趋势结果骨架（错误/空输入共用·W733 提取）。"""
+    return {"regressions": [], "improvements": [], "unchanged": [],
+            "new_pages": [], "removed_pages": [],
+            "summary": {"regressions": 0, "improvements": 0, "unchanged": 0}}
+
+
+def _diff_metric(page, key, cv, bv):
+    """单指标差异条目（非数值返回 None·零值除零保护）（W733 提取）。"""
+    if not isinstance(cv, (int, float)) or not isinstance(bv, (int, float)):
+        return None
+    if bv == 0:
+        # 基线为 0 时只要有数值即视为新增（避免除零）
+        delta = cv
+        ratio = 1.0 if cv > 0 else 0.0
+    else:
+        delta = round(cv - bv, 4)
+        ratio = round((cv - bv) / bv, 4)
+    return {"page": page, "metric": key.upper(),
+            "current": cv, "baseline": bv,
+            "delta": delta, "delta_pct": ratio}
+
+
+def _diff_all_pages(current_norm, baseline_norm):
+    """全量页面逐指标差异分类（W733 提取）。
+
+    返回 (regressions, improvements, unchanged, new_pages, removed_pages)。
+    """
+    regressions = []
+    improvements = []
+    unchanged = []
+    new_pages = []
+    removed_pages = []
+
+    cur_pages = set(current_norm.keys())
+    bl_pages = set(baseline_norm.keys())
+    new_pages.extend(sorted(cur_pages - bl_pages))
+    removed_pages.extend(sorted(bl_pages - cur_pages))
+
+    metrics_keys = ("lcp", "cls", "inp", "tbt", "fcp")
+    for page in sorted(cur_pages & bl_pages):
+        cur_v = current_norm[page]
+        bl_v = baseline_norm[page]
+        for key in metrics_keys:
+            entry = _diff_metric(page, key, cur_v.get(key), bl_v.get(key))
+            if entry is None:
+                continue
+            # 容忍 5% 抖动，避免噪声
+            if abs(entry["delta_pct"]) < 0.05 and abs(entry["delta"]) < 0.02:
+                unchanged.append(entry)
+            elif entry["delta"] > 0:
+                regressions.append(entry)
+            else:
+                improvements.append(entry)
+
+    return regressions, improvements, unchanged, new_pages, removed_pages
+
+
 def compare_trend(current, baseline):
     """对比当前 Core Web Vitals 快照与历史基线，输出回归/改善明细。
 
@@ -453,61 +511,20 @@ def compare_trend(current, baseline):
           "removed_pages": [...], # 基线存在但当前无
           "summary": {"regressions": n, "improvements": n, "unchanged": n}
         }
+    W733：空骨架/单指标/全量分类三段提取（_diff_all_pages 等）。
     """
-    empty = {"regressions": [], "improvements": [], "unchanged": [],
-             "new_pages": [], "removed_pages": [],
-             "summary": {"regressions": 0, "improvements": 0, "unchanged": 0}}
-
     # 归一化 current
     current_norm = _normalize_vitals(current)
     # 归一化 baseline
     baseline_pages, bl_error = _load_baseline(baseline)
     if bl_error is not None:
+        empty = _empty_trend_result()
         empty.update(bl_error)
         return empty
 
     baseline_norm = _normalize_vitals(baseline_pages)
 
-    regressions = []
-    improvements = []
-    unchanged = []
-    new_pages = []
-    removed_pages = []
-
-    cur_pages = set(current_norm.keys())
-    bl_pages = set(baseline_norm.keys())
-    new_pages.extend(sorted(cur_pages - bl_pages))
-    removed_pages.extend(sorted(bl_pages - cur_pages))
-
-    metrics_keys = ("lcp", "cls", "inp", "tbt", "fcp")
-    for page in sorted(cur_pages & bl_pages):
-        cur_v = current_norm[page]
-        bl_v = baseline_norm[page]
-        for key in metrics_keys:
-            cv = cur_v.get(key)
-            bv = bl_v.get(key)
-            if not isinstance(cv, (int, float)) or not isinstance(bv, (int, float)):
-                continue
-            if bv == 0:
-                # 基线为 0 时只要有数值即视为新增（避免除零）
-                delta = cv
-                ratio = 1.0 if cv > 0 else 0.0
-            else:
-                delta = round(cv - bv, 4)
-                ratio = round((cv - bv) / bv, 4)
-            # 容忍 5% 抖动，避免噪声
-            if abs(ratio) < 0.05 and abs(delta) < 0.02:
-                unchanged.append({"page": page, "metric": key.upper(),
-                                  "current": cv, "baseline": bv,
-                                  "delta": delta, "delta_pct": ratio})
-            elif delta > 0:
-                regressions.append({"page": page, "metric": key.upper(),
-                                    "current": cv, "baseline": bv,
-                                    "delta": delta, "delta_pct": ratio})
-            else:
-                improvements.append({"page": page, "metric": key.upper(),
-                                     "current": cv, "baseline": bv,
-                                     "delta": delta, "delta_pct": ratio})
+    regressions, improvements, unchanged, new_pages, removed_pages = _diff_all_pages(current_norm, baseline_norm)
 
     return {
         "regressions": regressions,

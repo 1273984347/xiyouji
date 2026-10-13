@@ -77,3 +77,8 @@
 ```text
 2026-10-13（W727）SVG 保护补打与级联 CRLF 根修批（用户 quote 拍板批次 B 选项 1 直接打掉）：fix_svg 修复后首跑对 35 个可视化页补打 clientWidth 最小宽度保护（W400 后新增页存量清偿加 W447 起审计死盲区复绿）加 generate_csp 重注入 35 页零漂移加 batch_cascade L176 rfind(nl)+1 改 +len(nl)（CRLF 工作树双字符 nl off-by-one 根修·W726 级联 apply 致交接文档混行尾·W706 防线在 W727 dry-run 拦截实证）加 交接文档两处字节级修复（739 CRLF 纯净）加 验证六连（dry-run 0 待改加 csp check 856 页 0 漂移加 verify full 46 段 0 FAIL 加 pytest 296 加 js 语法 855 加 links 0 broken）
 ```
+以下为 AGENTS.md 版本脚注早期条目（W728-W728）段的原文（单行沿革链·W733 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-13（W728）门禁与工具链代码重构批（用户令重构保接口不变加先写详细计划）：范围按可验证性裁决三文件（全仓 1342 文件单轮无法逐字节验证故先打样后推广）加 verify_delivery 表驱动化（905 行 main 拆为上报器类上下文类两张门禁参数表两个通用 runner 十三个段函数）加 doc_areas 共享模块消除 A_AREAS 与计数函数双份手工维护加 security_scan SRI 双块合一；验证四模式输出逐字节一致加 pytest 296 加 ruff 0 加 scan 报告一致；过程含撞号改号事件（原 W726 与并行会话 ZCode 同号按对账表规则改号并以 origin/main 为基重建）加踩坑五例（B905 strict 参数加 index_health 注释文本对账加基线同树态采集加 CRLF 级联 off-by-one 已由对方 W727 工具层根修加动工前须 fetch 对账）已沉淀方案档第八节
+```

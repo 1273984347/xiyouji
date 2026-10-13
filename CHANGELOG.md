@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W732），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W733），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,21 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W733（2026-10-13）：达标收尾批
+
+> **来源**：用户 quote「剩余 60-90 行函数可选做达标收尾批」——将 ≥80 行区间清零（除审计判定项）。动工前 fetch 正常·origin/main 无新批次·W733 认领。
+> - **范围裁决（证据版·审计后）**：入选六目标——check_seo_head main 95（挂载门禁）+spot_check_nlp main 93+check_design_doc_drift main 89（StrictGate）+embed_json main 106+build_reader main 101+perf_monitor compare_trend 88；**审计判定不动**：bump_version main 82——W714 方案 D 停用守卫为死工具（任何调用检测到「当前批次」新形态即 STOP 退出），重构零收益；run_self_test 146 已判定。
+> - **T1 check_seo_head.py（154→186 行·main 95→20）**：五 R 检查提取（_check_og_cover/_check_head/_load_pairs+_check_hreflang/_check_sitemap/_check_json_ld）。
+> - **T2 spot_check_nlp.py（118→135 行·main 93→20）**：三数据段提取（_report_characters/_report_dialogues/_report_cooccurrence·返回码编排）。
+> - **T3 check_design_doc_drift.py（141→177 行·main 89→30）**：六函数（_collect_token_facts/_collect_page_local/_check_doc_regeneration/_check_md_coverage_and_fabrication/_check_design_md_section/_check_dark_count·StrictGate marker 汇总行保留）。
+> - **T4 embed_json.py（257→276 行·main 106→15）**：四函数（_parse_args/_load_inputs/_embed_key/_write_with_backup·全错误路径退出码保留）。
+> - **T5 perf_monitor compare_trend（88→28）**：三段提取（_empty_trend_result/_diff_metric/_diff_all_pages）。
+> - **T6 build_reader.py（326→350 行·main 101→40）**：五函数（_collect_section_files/_render_one_page/_render_section_index/_render_root_index/_prev_next_html 提级）。
+> - **验证（全绿）**：三门禁输出逐字节 IDENTICAL（seo 855 页+spot 92 行+drift 汇总）+**drift 篡改负样本对拍**（旧版临时放回 scripts 跑·FAIL 行+exit=1 逐字节一致）；embed_json **12 场景 CLI 快照**（成功/错误/备份/ensure·含裸键 exit 4 路径）+compare_trend **9 场景快照**（含 ms 单位换算/坏 JSON/零值除零）全字段逐字节；build_reader **622 文件产物 sha 全等**（对拍后 checkout 恢复）；pytest 296+ruff 0+门禁 53 项 OK。
+> - **踩坑记录（经验沉淀）**：① 负样本对拍需「旧版可执行」——备份文件在 tmpe 下 ROOT 推导错位，须临时复制回 scripts/ 跑完即删；② build_reader 直出为「未后处理版」（CSP/内联 CSS 由后续工具补）——提交版 reader ≠ 直出，对拍口径以直出为双方基准并跑后 checkout 恢复；③ 采集脚本标签不一致（「seo exit=」vs「exit=」）会造出假 diff——对比脚本须统一 echo 形态；④ 误操作 `echo >> 不存在路径` 会创建垃圾文件——发现即清理并 gito status 核验。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：scripts/check_seo_head.py、scripts/spot_check_nlp.py、scripts/check_design_doc_drift.py、scripts/embed_json.py、scripts/perf_monitor.py、scripts/build_reader.py、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、交接文档.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、scripts/output/file-index.md。
 
 ### W732（2026-10-13）：性能与文档工具链重构批
 

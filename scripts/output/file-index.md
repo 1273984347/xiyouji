@@ -11,6 +11,18 @@
 ---
 
 
+## W733 达标收尾批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_seo_head.py | W733 | main 95→20（五 R 检查函数提取）·输出逐字节验证 |
+| scripts/spot_check_nlp.py | W733 | main 93→20（三数据段提取·返回码编排） |
+| scripts/check_design_doc_drift.py | W733 | main 89→30（六函数·StrictGate marker 保留）·篡改负样本对拍 |
+| scripts/embed_json.py | W733 | main 106→15（四函数·全错误路径退出码保留）·12 场景 CLI 快照 |
+| scripts/perf_monitor.py | W733 | compare_trend 88→28（三段提取）·9 场景快照 |
+| scripts/build_reader.py | W733 | main 101→40（五函数）·622 文件产物 sha 全等 |
+| docs/00-导读/W批次编号对账表.md | W733 | W733 认领行登记 |
+
 ## W732 性能与文档工具链重构批（2026-10-13）
 
 | 文件 | W | 说明 |
