@@ -87,3 +87,8 @@
 ```text
 2026-10-13（W729）性能与可访问性工具链重构批（用户令第二批按同方法论推进）：perf_monitor 拆 build_report compare_trend check_budget run 四个长函数为九个单一职责函数（统计渲染基线加载资源扫描预算定级采集警报输入）加 a11y_audit 拆 audit_directory 与 render_md 为七个函数（发现扫描计数表输出分流 Top 统计 Top 详情优先级段）；验证 a11y 全量 JSON 加 MD 双一致（10228 findings 逐字节）加 perf 结构对比十项全过加 pytest 296 加 ruff 0；方法论重要修正=Playwright 实测路径固有抖动禁逐字节对比改结构对比口径（timeline CLS 抖动越过警报阈值实证）已沉淀
 ```
+以下为 AGENTS.md 版本脚注早期条目（W730-W730）段的原文（单行沿革链·W735 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-13（W730）门禁脚本长函数收尾重构批（用户令第三批候选按同方法论推进）：范围证据版裁决三目标（check_doc_sync 与 lint_links 两挂载门禁加 perf collect_rum_metrics 命名候选·排除 a11y 剩余 74 行固有形态与 JS 侧重环境）加 evaluate 拆六个检查函数加 gather 提取 _git_output_lines 三块合一加 lint_links main 拆四助手加 collect_rum_metrics 拆四助手；验证 dsync 直跑与 self-test 双逐字节一致加 links 全量输出一致加 RUM 快照 11 形态一致加集成路径加 pytest 296 加 ruff 0；方法论新增=拆分前审计是否已达标（self-test 表驱动判定不动）加同构块合并逐块核对错误语义
+```

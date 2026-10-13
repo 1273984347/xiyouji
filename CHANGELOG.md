@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W734），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W735），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,17 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W735（2026-10-13）：全仓归档大扫除批
+> **来源**：用户令「按 ①→②→③ 推进（归档体系完善）」+「全项目搜索计划方案类：有哪些是已经做过了需要归档、哪些过时需要删除或再评估」。动工前 fetch 正常·对账表 W735 认领。
+> - **T1 归档索引**：archive/README.md 新建——结构树（按类归置·用到才建）+ 归档台账（11 组登记·滚动/批次标注）+ 引用与检索约定（引用写新路径/检索/禁改/门禁关系）。
+> - **T2 归档工具**：scripts/archive_file.py 新建——git mv 归位（类别自动判定 md/txt 入 docs、W 号自动分桶 batches/wNxx）+ 活引用扫描提示 + 台账登记；前置校验（存在/跟踪/工作树干净）+ --dry-run。
+> - **T3 全仓归档迁移 728 件（3 件恢复后净 725）**：五分区——A 区 scripts/ 根下 310 件历史 spec/一次性脚本/中间产物（保留 _s4~_s7 活跃线）；B 区 scripts/_attic 32 件整迁 archive/scripts/attic/（自含 README）；C 区 scripts/output 335 件（含 83 个级联清单 W649-W727、历史 spec、review-pass3 全组 105 件、散件·保留活跃基线 34 件与 W728+ 批）；D 区 docs/superpowers 37 件已完结方案/计划/评估/设计稿（保留 9 件）；E 区 docs/_dev 10 件整迁；F 区复盘 4 件继 09-16 先例入 archive/docs/复盘报告/。
+> - **保留判定四维**（防误伤·全量引用扫描驱动）：① 活跃线（_s4/_s5/_s7 前缀含 gitignore 本地件）；② 活跃基线（file-index/stats 系/各 baseline/perf-baseline/design-tokens/hreflang-pairs 等被门禁脚本读写的 34 件）；③ 被现役文档以操作指令形态引用者 18 件（白屏诊断族 8/引文工具族 2/指纹对账 1/暗色审计 1/S4 论文线 4/暗色门禁配套 1）——扫描中纠回 15 件+恢复 3 件；④ HANDOVER 待办联动 2 件（demand-side master-plan 配额继续·agents-layered BL-24 登记在册）。
+> - **T4 引用同步与清理**：文档规范 1 处（设计依据→archive 路径）+ 10-方法论 README 4 条复盘链接（→archive/docs/复盘报告/）；scripts/_dayreview_shots 空目录删除；S4 论文线三脚本按「活跃工作文档引用」判据从归档恢复；归档连锁修复=stats.py --w W735 刷新技术键 methodology_docs 34→30（复盘 4 件迁出）+ STRUCTURE.md 实体标记同步。
+> - **验证（全绿）**：728 件 git mv 成功率 100%（0 失败）；行尾纯净检查全量（唯一混尾=对账表插入行·已修纯 CRLF）；lint_links docs 全量 5181 链接 0 broken；归档后残留引用精确扫描 50 处逐条判定（历史叙述/代码注释/已同步链接·全部可接受）；pytest 296 passed；ruff scripts/ 全过；全量门禁 53 项 OK。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：archive/README.md、scripts/archive_file.py、docs/00-导读/文档规范.md、docs/10-方法论沉淀/README.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、AGENTS.md、CITATION.cff、docs/00-导读/项目说明.md、.github/workflows/README.md、scripts/output/_w735_spec.json、scripts/output/_cascade_files_W735.txt、scripts/output/file-index.md（另 725 件归档迁移至 archive/docs/plans 等七组目录·逐项见 file-index W735 段）。
 
 ### W734（2026-10-13）：归档体系统一与交接文档更名批
 
