@@ -11,6 +11,22 @@
 ---
 
 
+## W735 全仓归档大扫除批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| archive/README.md | W735 | 归档总索引+台账新建（结构树/11 组登记/检索约定） |
+| scripts/archive_file.py | W735 | 归档工具新建（git mv 归位+引用扫描+台账登记+dry-run） |
+| archive/docs/plans/（28 件） | W735 | docs/superpowers 已完结方案归档（保留 9 件活跃/待办/被引用） |
+| archive/docs/specs/（8 件） | W735 | 早期设计稿归档 |
+| archive/docs/_dev/（10 件） | W735 | 开发草稿区归档（v07v08/v0.8/2026-10-02 报告组） |
+| archive/scripts/attic/（32 件） | W735 | scripts/_attic 整迁 |
+| archive/scripts/batches/（540 件） | W735 | 批次一次性产物归档（spec/级联清单/脚本·按 W 段分桶） |
+| archive/scripts/review-pass3/（105 件） | W735 | W557 三轮审查产物组级归档 |
+| docs/00-导读/文档规范.md | W735 | 设计依据引用同步至 archive 路径 |
+| docs/10-方法论沉淀/README.md | W735 | 4 条复盘链接同步至 archive 路径 |
+| docs/00-导读/W批次编号对账表.md | W735 | W735 认领行登记 |
+
 ## W734 归档体系统一与交接文档更名批（2026-10-13）
 
 | 文件 | W | 说明 |
