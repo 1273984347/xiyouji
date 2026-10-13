@@ -19,20 +19,8 @@ def load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def main():
-    parser = argparse.ArgumentParser(description="spot-check character_nlp.py 输出数据")
-    parser.add_argument("--data-dir", default=str(DEFAULT_DATA_DIR),
-                        help="数据目录（默认 scripts/output/data/）")
-    args = parser.parse_args()
-
-    data_dir = Path(args.data_dir)
-    if not data_dir.is_absolute():
-        data_dir = (ROOT / args.data_dir).resolve()
-
-    if not data_dir.exists():
-        print(f"[ERROR] 数据目录不存在: {data_dir}")
-        return 1
-
+def _report_characters(data_dir) -> int:
+    """characters.json Top 10 + 未出场人物清单；文件缺失返回 1（W733 提取）。"""
     print("=== characters.json Top 10 ===")
     chars_path = data_dir / "characters.json"
     if not chars_path.exists():
@@ -59,7 +47,11 @@ def main():
     appeared = set(c["name"] for c in data["characters"])
     missing = all_chars - appeared
     print(f"未出场人物: {sorted(missing) if missing else '无'}")
+    return 0
 
+
+def _report_dialogues(data_dir) -> int:
+    """dialogues.json 说话者 Top 10 + 第 100 回/第 1 回抽查；文件缺失返回 1（W733 提取）。"""
     print("\n=== dialogues.json Top 10 说话者 ===")
     dlg_path = data_dir / "dialogues.json"
     if not dlg_path.exists():
@@ -91,7 +83,11 @@ def main():
         pat = dlg["pattern"]
         q = dlg["quote"][:50]
         print(f"  [{sp}] ({pat}): {q}...")
+    return 0
 
+
+def _report_cooccurrence(data_dir) -> int:
+    """cooccurrence.json 概览（分回/场景两维度）；文件缺失返回 1（W733 提取）。"""
     print("\n=== cooccurrence.json 概览 ===")
     co_path = data_dir / "cooccurrence.json"
     if not co_path.exists():
@@ -110,7 +106,28 @@ def main():
         print("\n场景维度 Top 5 边:")
         for e in sl["edges"][:5]:
             print(f"  {e['source']} <-> {e['target']}: {e['weight']}")
+    return 0
 
+
+def main():
+    parser = argparse.ArgumentParser(description="spot-check character_nlp.py 输出数据")
+    parser.add_argument("--data-dir", default=str(DEFAULT_DATA_DIR),
+                        help="数据目录（默认 scripts/output/data/）")
+    args = parser.parse_args()
+
+    data_dir = Path(args.data_dir)
+    if not data_dir.is_absolute():
+        data_dir = (ROOT / args.data_dir).resolve()
+
+    if not data_dir.exists():
+        print(f"[ERROR] 数据目录不存在: {data_dir}")
+        return 1
+
+    # 三段数据抽查（W733 提取：字符/对话/共现）；任一段失败即返回其退出码
+    for report in (_report_characters, _report_dialogues, _report_cooccurrence):
+        rc = report(data_dir)
+        if rc:
+            return rc
     return 0
 
 

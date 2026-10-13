@@ -38,15 +38,8 @@ def fail(msg: str) -> int:
     return 1
 
 
-def main() -> int:
-    problems: list[str] = []
-
-    if not TOKENS_CSS.exists():
-        print(f"FAIL 基础设施缺失：{TOKENS_CSS}")
-        return 2
-    if not OUT_JSON.exists() or not OUT_MD.exists():
-        problems.append("design-tokens.json / design.md 未生成（先跑 export_design_tokens.py）")
-
+def _collect_token_facts():
+    """解析 tokens.css → (decls, css_names, light_vals, dark_names)（W733 提取）。"""
     css = TOKENS_CSS.read_text(encoding="utf-8")
     decls, _ = parse_css(css)
     css_names = {d["name"] for d in decls}
@@ -57,8 +50,11 @@ def main() -> int:
             light_vals[d["name"]] = d["value"]
         if d["theme"] == "dark":
             dark_names.add(d["name"])
+    return decls, css_names, light_vals, dark_names
 
-    # 站点页面本地令牌（dashboard.html 等内联声明·AC-2 白名单条款）
+
+def _collect_page_local() -> set[str]:
+    """站点页面本地令牌收集（dashboard.html 等内联声明·AC-2 白名单条款）（W733 提取）。"""
     page_local: set[str] = set()
     for p in (ROOT / "site").rglob("*.html"):
         if p.name.startswith("_"):
@@ -67,58 +63,98 @@ def main() -> int:
             page_local |= set(re.findall(r"(--[\w-]+)\s*:", p.read_text(encoding="utf-8", errors="ignore")))
         except OSError:
             continue
+    return page_local
+
+
+def _check_doc_regeneration(decls, on_disk) -> list[str]:
+    """1. 反篡改：design.md 与再生成逐字节比对（W733 提取）。"""
+    problems = []
+    regenerated = gen_markdown(decls, _counts(decls))
+    if on_disk != regenerated:
+        problems.append("design.md 与再生成结果不一致（被手改或导出器过期·重跑 export_design_tokens.py）")
+    return problems
+
+
+def _check_md_coverage_and_fabrication(on_disk, decls, css_names, page_local) -> list[str]:
+    """2. 覆盖（在 CSS 不在文档）+ 3. 虚构（在文档不在 CSS·页面本地白名单放行）（W733 提取）。"""
+    problems = []
+    md_names = set(re.findall(r"(`--[\w-]+`)", on_disk))
+    md_names = {n.strip("`") for n in md_names}
+    missing = sorted(
+        f"{d['theme']}/{d['name'][2:]}" for d in decls if d["name"] not in md_names
+    )
+    if missing:
+        problems.append(f"在 CSS 不在 design.md（{len(missing)}）：{', '.join(missing[:8])}{'…' if len(missing) > 8 else ''}")
+
+    known = css_names | page_local
+    fabricated_md = sorted(n for n in md_names if n not in known)
+    if fabricated_md:
+        problems.append(f"design.md 虚构令牌（{len(fabricated_md)}）：{', '.join(fabricated_md)}")
+    return problems
+
+
+def _check_design_md_section(css_names, page_local, light_vals) -> list[str]:
+    """4. DESIGN.md §2 虚构令牌 + 值同步（hex 不区分大小写·W733 提取）。"""
+    problems = []
+    if DESIGN_MD.exists():
+        design_txt = DESIGN_MD.read_text(encoding="utf-8")
+        if "## 2. 设计 Token" in design_txt:
+            sec2 = design_txt[design_txt.index("## 2. 设计 Token"):design_txt.index("## 3.", design_txt.index("## 2. 设计 Token"))]
+            d2_names = set(re.findall(r"(--[\w-]+)\s*:", sec2))
+            known = css_names | page_local
+            fabricated_d2 = sorted(n for n in d2_names if n not in known)
+            if fabricated_d2:
+                problems.append(f"DESIGN.md §2 虚构令牌（{len(fabricated_d2)}·W610 先例）：{', '.join(fabricated_d2)}")
+
+            # ---- 值同步（§2 手写表 light 值 ↔ CSS light·hex 不区分大小写）----
+            value_drift = []
+            for m in re.finditer(r"(--[\w-]+)\s*:\s*([^;\n]+);", sec2):
+                name, val = m.group(1), m.group(2).strip()
+                if name not in light_vals:
+                    continue  # 虚构/页面本地已由上层检查处置
+                want = light_vals[name].strip().lower()
+                got = val.strip().lower()
+                if got != want:
+                    value_drift.append(f"{name} 文档={val} · CSS={light_vals[name]}")
+            if value_drift:
+                problems.append(f"DESIGN.md §2 值漂移（{len(value_drift)}）：{'；'.join(value_drift[:6])}{'…' if len(value_drift) > 6 else ''}")
+    return problems
+
+
+def _check_dark_count(dark_names) -> list[str]:
+    """5. 暗色计数（AC-3）：JSON dark/* 条数 == CSS dark 名数（W733 提取）。"""
+    problems = []
+    if OUT_JSON.exists():
+        import json
+        payload = json.loads(OUT_JSON.read_text(encoding="utf-8"))
+        json_dark = sum(1 for k in payload.get("tokens", {}) if k.startswith("dark/"))
+        if json_dark != len(dark_names):
+            problems.append(f"暗色计数不一致：JSON dark {json_dark} != CSS dark {len(dark_names)}")
+    return problems
+
+
+def main() -> int:
+    problems: list[str] = []
+
+    if not TOKENS_CSS.exists():
+        print(f"FAIL 基础设施缺失：{TOKENS_CSS}")
+        return 2
+    if not OUT_JSON.exists() or not OUT_MD.exists():
+        problems.append("design-tokens.json / design.md 未生成（先跑 export_design_tokens.py）")
+
+    decls, css_names, light_vals, dark_names = _collect_token_facts()
+    page_local = _collect_page_local()
 
     if not problems:
-        # ---- 1. 反篡改（再生成逐字节比对）----
         on_disk = OUT_MD.read_text(encoding="utf-8")
-        regenerated = gen_markdown(decls, _counts(decls))
-        if on_disk != regenerated:
-            problems.append("design.md 与再生成结果不一致（被手改或导出器过期·重跑 export_design_tokens.py）")
-
-        # ---- 2. 覆盖（在 CSS 不在文档 == 0）----
-        md_names = set(re.findall(r"(`--[\w-]+`)", on_disk))
-        md_names = {n.strip("`") for n in md_names}
-        missing = sorted(
-            f"{d['theme']}/{d['name'][2:]}" for d in decls if d["name"] not in md_names
-        )
-        if missing:
-            problems.append(f"在 CSS 不在 design.md（{len(missing)}）：{', '.join(missing[:8])}{'…' if len(missing) > 8 else ''}")
-
-        # ---- 3. 虚构（在文档不在 CSS·页面本地白名单放行）----
-        known = css_names | page_local
-        fabricated_md = sorted(n for n in md_names if n not in known)
-        if fabricated_md:
-            problems.append(f"design.md 虚构令牌（{len(fabricated_md)}）：{', '.join(fabricated_md)}")
-
-        if DESIGN_MD.exists():
-            design_txt = DESIGN_MD.read_text(encoding="utf-8")
-            if "## 2. 设计 Token" in design_txt:
-                sec2 = design_txt[design_txt.index("## 2. 设计 Token"):design_txt.index("## 3.", design_txt.index("## 2. 设计 Token"))]
-                d2_names = set(re.findall(r"(--[\w-]+)\s*:", sec2))
-                fabricated_d2 = sorted(n for n in d2_names if n not in known)
-                if fabricated_d2:
-                    problems.append(f"DESIGN.md §2 虚构令牌（{len(fabricated_d2)}·W610 先例）：{', '.join(fabricated_d2)}")
-
-                # ---- 4. 值同步（§2 手写表 light 值 ↔ CSS light·hex 不区分大小写）----
-                value_drift = []
-                for m in re.finditer(r"(--[\w-]+)\s*:\s*([^;\n]+);", sec2):
-                    name, val = m.group(1), m.group(2).strip()
-                    if name not in light_vals:
-                        continue  # 虚构/页面本地已由上层检查处置
-                    want = light_vals[name].strip().lower()
-                    got = val.strip().lower()
-                    if got != want:
-                        value_drift.append(f"{name} 文档={val} · CSS={light_vals[name]}")
-                if value_drift:
-                    problems.append(f"DESIGN.md §2 值漂移（{len(value_drift)}）：{'；'.join(value_drift[:6])}{'…' if len(value_drift) > 6 else ''}")
-
+        # ---- 1. 反篡改（再生成逐字节比对）----
+        problems += _check_doc_regeneration(decls, on_disk)
+        # ---- 2. 覆盖 / 3. 虚构 ----
+        problems += _check_md_coverage_and_fabrication(on_disk, decls, css_names, page_local)
+        # ---- 4. DESIGN.md §2 虚构 + 值同步 ----
+        problems += _check_design_md_section(css_names, page_local, light_vals)
         # ---- 5. 暗色计数（AC-3）----
-        if OUT_JSON.exists():
-            import json
-            payload = json.loads(OUT_JSON.read_text(encoding="utf-8"))
-            json_dark = sum(1 for k in payload.get("tokens", {}) if k.startswith("dark/"))
-            if json_dark != len(dark_names):
-                problems.append(f"暗色计数不一致：JSON dark {json_dark} != CSS dark {len(dark_names)}")
+        problems += _check_dark_count(dark_names)
 
     for p in problems:
         print("FAIL " + p)

@@ -219,6 +219,91 @@ def build_themes_hub() -> int:
     return total
 
 
+def _prev_next_html(target: str | None, label: str, dup: str) -> str:
+    """上下篇导航链接 HTML（原 main 内 pn_html·W733 提级）。"""
+    if not target:
+        return f'<span class="off">{label}（无）</span>'
+    return f'<a href="{dup}{target}">{label}</a>'
+
+
+def _collect_section_files(src, sub, docs_root):
+    """收集板块 md 文件并构建渲染清单（W733 提取）；返回 [(out_rel, fname, display)]。"""
+    files = sorted(p for p in src.glob("*.md") if p.name != "README.md")
+    assert files, f"{docs_root} 无 md"
+
+    rendered: list[tuple[str, str, str]] = []  # (out_rel, fname, display)
+    for f in files:
+        md = f.read_text(encoding="utf-8")
+        h1, _full = extract(md)
+        out_name = f"ch{int(f.name[1:4]):03d}.html" if docs_root == "01-全书逐回解读" else f.stem + ".html"
+        out_rel = (sub + "/" + out_name) if sub else out_name
+        rendered.append((out_rel, f.name, h1 or f.stem))
+    if docs_root != "01-全书逐回解读":
+        rendered.sort(key=lambda x: x[1])
+    return rendered
+
+
+def _render_one_page(src, docs_root, cat_title, rendered, idx):
+    """渲染单页（链接改写/markdown/上下篇导航/shell 写盘）（W733 提取）；返回未识别链接清单。"""
+    out_rel, fname, _disp = rendered[idx]
+    depth = out_rel.count("/")
+    up = "../" * depth
+    up2 = "../" * (depth + 1)
+    up3 = "../" * (depth + 2)
+    md = (src / fname).read_text(encoding="utf-8")
+    md, leftovers = rewrite_links(md, docs_root, up, up2, up3)
+    body_html = markdown.markdown(md, extensions=["tables"])
+    h1, full = extract((src / fname).read_text(encoding="utf-8"))
+    title = full or h1 or out_rel
+    desc = f"{title}——《详解西游记》{cat_title}"
+
+    prev_rel = rendered[idx - 1][0] if idx > 0 else None
+    next_rel = rendered[idx + 1][0] if idx + 1 < len(rendered) else None
+
+    dup = depth * "../"
+    prev_html = _prev_next_html(prev_rel, "← 上一篇", dup)
+    next_html = _prev_next_html(next_rel, "下一篇 →", dup)
+    home = (dup + "index.html") if depth else "index.html"
+
+    blob = f"{BLOB}{docs_root}/{fname}"
+    body = f"""  <nav class="reader-topnav">
+    <a class="brand" href="{home}">详解西游记 · 站内阅读</a>
+    <a href="{up}../index.html">站点首页</a>
+    <a href="{blob}" rel="noopener">在 GitHub 查看源文件</a>
+  </nav>
+  <article class="reader-body">
+{body_html}
+  </article>
+  <nav class="reader-pn">{prev_html}{next_html}</nav>"""
+    (OUT / out_rel).parent.mkdir(parents=True, exist_ok=True)
+    (OUT / out_rel).write_text(
+        page_shell(out_rel, title, desc, body), encoding="utf-8", newline="\n")
+    return leftovers
+
+
+def _render_section_index(sub, cat_title, entries) -> None:
+    """板块目录页（02-06·目录页位于 sub/ 内·条目链接补 ../ 前缀）（W733 提取）。"""
+    items = "\n".join(f'<li><a href="../{rel}">{disp}</a></li>' for rel, disp in entries)
+    (OUT / sub / "index.html").write_text(
+        page_shell(sub + "/index.html", f"{cat_title} · 目录",
+                   f"《详解西游记》{cat_title}目录（{len(entries)} 篇）",
+                   f'<h1 style="font-size:26px;">{cat_title}</h1>\n<ul class="reader-idx">\n{items}\n</ul>'),
+        encoding="utf-8", newline="\n")
+
+
+def _render_root_index(sections_out, n_hub) -> None:
+    """总目录页：六板块分组（顶部附主题 hub 入口）（W733 提取）。"""
+    idx_body = '<p><a href="themes-hub.html"><strong>主题专题导航 hub</strong>（%d 篇·按族分组）</a></p>\n' % n_hub
+    for cat_title, entries in sections_out:
+        idx_body += f'<div class="reader-group">{cat_title}（{len(entries)}）</div>\n<ul class="reader-idx">\n'
+        idx_body += "\n".join(f'<li><a href="{rel}">{disp}</a></li>' for rel, disp in entries)
+        idx_body += "\n</ul>\n"
+    (OUT / "index.html").write_text(
+        page_shell("index.html", "站内阅读 · 全目录",
+                   "《详解西游记》站内阅读目录（六板块）", idx_body),
+        encoding="utf-8", newline="\n")
+
+
 def main() -> None:
     docs = ROOT / "docs"
     OUT.mkdir(parents=True, exist_ok=True)
@@ -235,83 +320,22 @@ def main() -> None:
 
     for docs_root, sub, cat_title in SECTIONS:
         src = docs / docs_root
-        files = sorted(p for p in src.glob("*.md") if p.name != "README.md")
-        assert files, f"{docs_root} 无 md"
-
-        rendered: list[tuple[str, str, str]] = []  # (out_rel, fname, display)
-        for f in files:
-            md = f.read_text(encoding="utf-8")
-            h1, _full = extract(md)
-            out_name = f"ch{int(f.name[1:4]):03d}.html" if docs_root == "01-全书逐回解读" else f.stem + ".html"
-            out_rel = (sub + "/" + out_name) if sub else out_name
-            rendered.append((out_rel, f.name, h1 or f.stem))
-        if docs_root != "01-全书逐回解读":
-            rendered.sort(key=lambda x: x[1])
+        rendered = _collect_section_files(src, sub, docs_root)
         entries = [(rel, disp) for rel, _, disp in rendered]
         sections_out.append((cat_title, entries))
 
-        for idx, (out_rel, fname, _disp) in enumerate(rendered):
-            depth = out_rel.count("/")
-            up = "../" * depth
-            up2 = "../" * (depth + 1)
-            up3 = "../" * (depth + 2)
-            md = (src / fname).read_text(encoding="utf-8")
-            md, leftovers = rewrite_links(md, docs_root, up, up2, up3)
-            leftovers_all += [(out_rel, u) for u in leftovers]
-            body_html = markdown.markdown(md, extensions=["tables"])
-            h1, full = extract((src / fname).read_text(encoding="utf-8"))
-            title = full or h1 or out_rel
-            desc = f"{title}——《详解西游记》{cat_title}"
-
-            prev_rel = rendered[idx - 1][0] if idx > 0 else None
-            next_rel = rendered[idx + 1][0] if idx + 1 < len(rendered) else None
-
-            def pn_html(target: str | None, label: str, dup: str) -> str:
-                if not target:
-                    return f'<span class="off">{label}（无）</span>'
-                return f'<a href="{dup}{target}">{label}</a>'
-
-            dup = depth * "../"
-            prev_html = pn_html(prev_rel, "← 上一篇", dup)
-            next_html = pn_html(next_rel, "下一篇 →", dup)
-            home = (dup + "index.html") if depth else "index.html"
-
-            blob = f"{BLOB}{docs_root}/{fname}"
-            body = f"""  <nav class="reader-topnav">
-    <a class="brand" href="{home}">详解西游记 · 站内阅读</a>
-    <a href="{up}../index.html">站点首页</a>
-    <a href="{blob}" rel="noopener">在 GitHub 查看源文件</a>
-  </nav>
-  <article class="reader-body">
-{body_html}
-  </article>
-  <nav class="reader-pn">{prev_html}{next_html}</nav>"""
-            (OUT / out_rel).parent.mkdir(parents=True, exist_ok=True)
-            (OUT / out_rel).write_text(
-                page_shell(out_rel, title, desc, body), encoding="utf-8", newline="\n")
+        for idx in range(len(rendered)):
+            leftovers_all += [(rendered[idx][0], u) for u in _render_one_page(src, docs_root, cat_title, rendered, idx)]
             n_pages += 1
         # 板块目录页（02-06）——目录页位于 sub/ 内·条目链接补 ../ 前缀
         if sub:
-            items = "\n".join(f'<li><a href="../{rel}">{disp}</a></li>' for rel, disp in entries)
-            (OUT / sub / "index.html").write_text(
-                page_shell(sub + "/index.html", f"{cat_title} · 目录",
-                           f"《详解西游记》{cat_title}目录（{len(entries)} 篇）",
-                           f'<h1 style="font-size:26px;">{cat_title}</h1>\n<ul class="reader-idx">\n{items}\n</ul>'),
-                encoding="utf-8", newline="\n")
+            _render_section_index(sub, cat_title, entries)
             n_pages += 1
 
     # 总目录：六板块分组（顶部附主题 hub 入口·全量跑同步重建 hub 防重渲删页）
     n_hub = build_themes_hub()
     n_pages += 1
-    idx_body = '<p><a href="themes-hub.html"><strong>主题专题导航 hub</strong>（%d 篇·按族分组）</a></p>\n' % n_hub
-    for cat_title, entries in sections_out:
-        idx_body += f'<div class="reader-group">{cat_title}（{len(entries)}）</div>\n<ul class="reader-idx">\n'
-        idx_body += "\n".join(f'<li><a href="{rel}">{disp}</a></li>' for rel, disp in entries)
-        idx_body += "\n</ul>\n"
-    (OUT / "index.html").write_text(
-        page_shell("index.html", "站内阅读 · 全目录",
-                   "《详解西游记》站内阅读目录（六板块）", idx_body),
-        encoding="utf-8", newline="\n")
+    _render_root_index(sections_out, n_hub)
     n_pages += 1
 
     print(f"[OK] 生成 {n_pages} 页（含内容页/板块目录/总目录）→ site/reader/")
