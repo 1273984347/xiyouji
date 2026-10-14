@@ -97,3 +97,8 @@
 ```text
 2026-10-13（W731）发布工具链与安全扫描重构批（用户令继续第四批）：范围证据版裁决两目标（全仓最长 batch_cascade main 347 行加 security_scan 两长函数）；batch_cascade 十面各提取一函数加页脚与脚注解析提模块级加落盘自检分离加上下文类；security_scan run 与 build_report 拆编排体；验证=19 历史 spec 加草稿 dry-run 输出对比加受控 apply 落盘 git diff 对拍（14 文件 265 行逐字节）加单测 12 加 pytest 296 加 ruff 0 加报告对比；踩坑=提取漏 return 被草稿 spec 抓住加 traceback 口径归一化加 apply 对拍排除重构文件自身
 ```
+以下为 AGENTS.md 版本脚注早期条目（W732-W732）段的原文（单行沿革链·W737 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-13（W732）性能与文档工具链重构批（用户令继续第五批）：范围证据版裁决三文件六函数（perf_optimize 四函数加 optimize-html-size render_report 加 sync_docs main）；本批后全仓 ≥100 行函数清零（除已判定不动的 run_self_test）；验证=perf fixture 快照全字段逐字节加 14 单测加 OHS stdout 与报告双一致加 sync_docs 七规则输出逐字节加 pytest 296 加 ruff 0 加门禁 53 项；踩坑=横幅历史形态普查（规则 1/3/4 有空格 vs 2/5/6/7 无空格逐字节保真）加 harness 时间戳归一化加 CRLF 文件归一处理
+```
