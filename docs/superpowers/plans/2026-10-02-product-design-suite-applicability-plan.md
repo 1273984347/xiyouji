@@ -6,7 +6,7 @@
 > - `docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md`（需求侧主计划 WP-A…WP-M · 13 包）
 > - `docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md`（维护态 Backlog B-1…B-9）
 > - `docs/_dev/产品管理套件应用-2026-10-02/02-需求优先级排序-ICE矩阵.md`（R1…R16 · ICE v2 评分 + W649-W652 Sprint 队列）
-> - 根目录 `项目GitHub参考调研报告.md`（W358 · 竞品选型打分）
+> - `docs/11-报告复盘/项目GitHub参考调研报告.md`（W358 · 竞品选型打分）
 > **工具链来源**：QoderWork「产品设计」插件套件 v0.5.10（28 个 Skill），套件内技能以 `/套件:技能` 形式调用，下文引用其 folderName（如 `/产品设计:chart`）。
 
 ---
@@ -108,7 +108,7 @@ python scripts/check_chart_data.py --self-test
 | `audit` | **做** PD-3 | 仓内截图审查跑像素几何，十启发式体验维度不在覆盖面 | AGENTS §4.2 第 24/25 门禁 + W550/554/557 档 |
 | `edge` | **做** PD-4 | 已有空/loading/回退三态，缺错误/边界/离线态与统一契约 | DESIGN.md §4.4/§5.7/§8.2/§8.4 实测 |
 | `extract` | **做** PD-5 | 无机器可读令牌导出；DESIGN.md 与 tokens.css 无一致性对账 | B-PD-06 + 无 design-tokens.json 实测 |
-| `bench` | **条件做** PD-6 | W358 已有选型打分档，缺逐页 UX 细拆（深化非从零） | `项目GitHub参考调研报告.md` 实读 |
+| `bench` | **条件做** PD-6 | W358 已有选型打分档，缺逐页 UX 细拆（深化非从零） | `docs/11-报告复盘/项目GitHub参考调研报告.md` 实读 |
 | `poster` | **条件做** PD-7 | 属营销内容生产，在 W626 冻结面内；解冻条件见 §4 | H1 |
 | `access` | **不做** | `a11y_audit.py` 实测 40 条规则常驻门禁，覆盖 WCAG 2.2 AA 主要 SC | B-PD-05 |
 | `motion-plan` | **不做** | DESIGN.md §5 有 5.1–5.9 九节契约 + `check_motion_ban` 门禁 | DESIGN.md 目录实读 |
@@ -301,7 +301,7 @@ python scripts/check_chart_data.py --self-test
 
 ### PD-6 竞品 UX 细拆（W358 深化）
 
-**状态**：可开工，但**不得按新调研立项**——根目录《项目GitHub参考调研报告》（W358，2026-08-05）已完成三方向选型打分（含 zizhitongjian 判为「最理想对标物」、Open WebUI/LobeChat/GraphRAG/LightRAG 等，并给出「只学呈现逻辑、不搬技术栈」裁决）。
+**状态**：可开工，但**不得按新调研立项**——《项目GitHub参考调研报告》（W358，2026-08-05·W737 迁入 docs/11-报告复盘/）已完成三方向选型打分（含 zizhitongjian 判为「最理想对标物」、Open WebUI/LobeChat/GraphRAG/LightRAG 等，并给出「只学呈现逻辑、不搬技术栈」裁决）。
 
 **净增量定义**：对 **1 个外部古典文本可视化 + 1 个数字馆藏类** 做套件 `/产品设计:bench` 的三识别（直接/间接/标杆）+ 维度细拆（信息架构 / 交互模式 / 视觉语言 / 内容策略 / 可借鉴细节）。W358 已有维度是「门面/骨架/灵魂星级」，**不含**交互模式与视觉语言细粒度。
 
