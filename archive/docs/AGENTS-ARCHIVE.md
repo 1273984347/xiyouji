@@ -112,3 +112,8 @@
 ```text
 2026-10-13（W734）归档体系统一与交接文档更名批（用户令同步加更名加归档新规）：docs/ARCHIVE 与 scripts/archive 与 scripts/audit/archive 三类归档迁入 archive 根按类归置加交接文档更名 HANDOVER 加工具链十五文件与六文档全量引用同步加文档规范归档规则重构（archive 根按类归置沿用五十 KB 阈值）；验证=lint_links 全量加五门禁直跑加残留扫描加 pytest 296 加 ruff 0 加门禁 53 项；踩坑=目录大小写历史态（git 小写 tracked 与磁盘大写）随迁移自然收敛加 C4 消息 W 号形态与归档路径 token 规则实测
 ```
+以下为 AGENTS.md 版本脚注早期条目（W735-W735）段的原文（单行沿革链·W740 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-13（W735）全仓归档大扫除批（用户令按一二三推进加全项目搜索计划方案类）：archive 根 README 索引台账新建加 archive_file 归档工具加五分区 725 件退役文件迁移（scripts 根下与 output 与 attic 与 superpowers 与 dev 草稿与复盘报告）加保留判定四维（活跃线加活跃基线加被现役操作指令引用十八件加 HANDOVER 待办联动二件）加引用同步文档规范一处加方法论索引四条链接加空目录清理；验证=迁移百分百成功率加行尾纯净加 lint 链接零 broken 加残留五十处逐条判定加 pytest 296 加 ruff 零加门禁五十三项
+```
