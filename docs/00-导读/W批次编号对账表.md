@@ -100,8 +100,8 @@
 | W705 | Agent 开局状态摘要批（用户方案第三阶段·仅执行第 2 步）：scripts/agent_start.py 现读磁盘输出当前事实摘要（现役三元组/近 3 段/stats 全键/对账表现势/铁律提醒·--json 可选）+ AGENTS §7 第 0 步挂接 + CLAUDE.md 接手导航一行（42/60 行）+ 对账表 W702 行首拆分修复（W704 登记 replace 误吞行首·正文并入 W704 行的损伤随 19d8b586 入仓）+ 分级裁决留档（阶段 3 rules.json+CLAUDE.md 生成化驳回=三源冲突违单一事实源/阶段 4 state.json+指纹驳回=第四副本/阶段 5 challenge 诊断性登记不开工） | 本次提交（级联 v2.3.299·batch_cascade 原生） | v2.3.299 | **进行中** | ZCode 2026-10-11 | |
 | W704 | 数字实体化批（用户方案第二阶段「数字制度化」）：stats.json 实体化（每键 value/domain/generator/introduced_by/last_changed_by）+ stats-changelog.json 自动变更史（--w 参数·diff 旧值追加）+ stats-index.md 反向索引（W→stats key·与 file-index 同构）+ C5 扩标记锚点对账（<!--stats:KEY--> 前置数字==value·键未登记 FAIL）与 C5c 裸聚合数字 NOTE 报告型起步 + 治理文档现役关键数字加标记约 25 处 + 文档规范 §4.10 增补实体化节 | 19d8b586（级联 v2.3.298·batch_cascade 原生） | v2.3.298 | **已收官** | ZCode 2026-10-11 | |
 | W702 | 外部挑刺 17 项裁决与六文档口径清债批（P0 口径四件〔CHANGELOG 页数口径块实跑刷新 857/856/855/330·reader 622 纳入 + AGENTS 第 8 门禁 233→856 页 + README 26→40 项门禁 + STRUCTURE 方法论 6→33 篇〕+ P1〔scripts 30→34 类全建+F 行 story-timeline 补录 + 第 6 门禁三豁免→五豁免对齐 W700〕+ P2〔v2.3.279/280 四件套补录只增不删 + 第 26 门禁 334→855 页 + CONTRIBUTING 对账表认领入口〕+ P3〔batch_cascade 版本行模板去空格 + AGENTS 脚注 join 双分号守卫与存量 4 处归一 + CLAUDE.md --scope auto 行〕+ 顺带 JSON 131→135 + 驳回 1 项防新漂移字面量） | 98c3a94f（级联 v2.3.296·batch_cascade 原生） | v2.3.296 | **已收官** | ZCode 2026-10-11 | |
-| W739 | 多 Agent 干扰治理 touches 机制批（用户裁定实施评估推荐项①）：对账表扩 touches 列+表头规则④（手工共享面声明·级联面由 batch_cascade 单写路径保护不列）；preflight_check.py 加 touches 解析/在途盘点/--touches 交集拒绝（第 6 检）+ 单测；AGENTS §4.3 铁则 + pitfalls 并发纪律条目 + scripts/README 工具表 + 文档规范 §11.1 说明 | 认领占位（2026-10-14·待收官 chore 回写） | W739 | **已收官**（5dca5834） | WorkBuddy 2026-10-14 | docs/00-导读/W批次编号对账表.md, AGENTS.md, docs/agent/pitfalls.md, scripts/README.md, docs/00-导读/文档规范.md |
-| W740 | 干扰治理路线图文档批（用户令「把穷举分析优化成决策加实施文档·做减法不做加法」）：docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md 新建——决策摘要五条/总纲（三条件加 N×p×T 加唯一写路径第一原则）/度量前置（两周干扰日志表内嵌加 N p T 判定规则）/P0P1P2 路线（touches W739 已落地标注）/不建机制清单/验收与退出指标/季度减量周期/A-P 四组映射附录 | 认领占位（2026-10-14·待收官 chore 回写） | W740 | 进行中 | WorkBuddy 2026-10-14 |  |
+| W739 | 多 Agent 干扰治理 touches 机制批（用户裁定实施评估推荐项①）：对账表扩 touches 列+表头规则④（手工共享面声明·级联面由 batch_cascade 单写路径保护不列）；preflight_check.py 加 touches 解析/在途盘点/--touches 交集拒绝（第 6 检）+ 单测；AGENTS §4.3 铁则 + pitfalls 并发纪律条目 + scripts/README 工具表 + 文档规范 §11.1 说明 | 5dca5834（batch_cascade 原生级联） | W739 | **已收官**（5dca5834） | WorkBuddy 2026-10-14 | docs/00-导读/W批次编号对账表.md, AGENTS.md, docs/agent/pitfalls.md, scripts/README.md, docs/00-导读/文档规范.md |
+| W740 | 干扰治理路线图文档批（用户令「把穷举分析优化成决策加实施文档·做减法不做加法」）：docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md 新建——决策摘要五条/总纲（三条件加 N×p×T 加唯一写路径第一原则）/度量前置（两周干扰日志表内嵌加 N p T 判定规则）/P0P1P2 路线（touches W739 已落地标注）/不建机制清单/验收与退出指标/季度减量周期/A-P 四组映射附录 | 4b1f007f（batch_cascade 原生级联） | W740 | **已收官**（4b1f007f） | WorkBuddy 2026-10-14 |  |
 
 ## 递延批豁免登记（D2 裁决：对账表登记即可过 doc-sync 提交-版段对账）
 
@@ -131,6 +131,7 @@
 - **W738**：现势下一自由号（13f8acda w737 收官级联后 checklist 例行·2026-10-14）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W739**：现势下一自由号（05474e82 w738 收官级联后 checklist 例行·2026-10-14）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W740**：现势下一自由号（5dca5834 w739 收官级联后 checklist 例行·2026-10-14）——**预留登记豁免**，动工时按取号规则正式认领。
+- **W741**：现势下一自由号（4b1f007f w740 收官级联后 checklist 例行·2026-10-14）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W691**：下一自由号被 W690 收官级联提交文本（4ab918d「现势 W691」）提前引用——C4 豁免登记（2026-10-09 补记）；本号仍为自由号，认领时正常占用。
 
 ## 登记 ASCII 纪律
