@@ -1,0 +1,19 @@
+{
+  "batch": "W738",
+  "date": "2026-10-14",
+  "title": "W738 tmpe 临时文件体系批",
+  "desc": "tmpe 临时文件体系策略化治理",
+  "head_entry": "2026-10-14（W738 tmpe 临时文件体系批）",
+  "head_sentence": "tmpe 临时区契约策略工具三件套落地并完成全量归桶治理",
+  "changelog_body": "\n> **来源**：用户令「请检查 D:\\\\xiyouji\\\\tmpe tmpe 文件我觉得应该和归档文件一样做一个 tmpe 临时文件体系」+ 长文方案 v1.0→v1.1 拍板（桶结构+契约+policy+盘点工具+并行锁+journal+_trash 受控可删除+工具晋升评估）。动工前并行侦察：取号 W738 无撞号·_edge_cdp_profile 无进程占用·全仓零引用。\n> - **T1 契约 tmpe/README.md**：定位=工地而非第二个 archive（archive=博物馆·登记禁删可追溯；tmpe=工地·分类堆放+完工清场）——桶约定（w###/_bak/_shot/_profile/_misc/_inbox/_hold/_trash/_reports）+ 保留策略表 + 清理纪律（列清单+主人确认+回收站·禁 rm -rf·docx/pdf 个人稿件永冻）。\n> - **T2 策略文件化 tmpe/policy.yml**：桶清单/TTL（_shot 30d、_misc 90d、_inbox 7d、_trash 7d）/备份代际 2/protect glob（个人稿件正则）/freeze 48h+活跃锁路径/排除项/cache_dirs（_edge_cdp_profile 可再生声明）/tool_promotion（九维评分·晋升阈值 14·观察阈值 8·禁自动晋升）；JSON 兼容语法（=YAML 子集·零硬依赖·CI 无需 pyyaml）。\n> - **T3 工具 scripts/tmpe_tidy.py 重写为策略执行臂**：默认 dry-run·--apply 必须 --confirm 双闸门；--plan --json 与 --apply --from-plan 计划一致性；journal（.journal/*.jsonl 记 src/dst/sha1/mtime/rule）+ --undo 反向恢复；运行锁 .locks/tmpe_tidy.lock（stale 自动接管）+ 会话热区锁 .locks/*.json（TTL 过期忽略）；目标冲突时间戳后缀禁覆盖；同分区 os.rename、跨分区拒绝（禁 copy+delete）；优先级链 protect>active_lock>freeze>标准桶>分类规则>_inbox；--report 落 _reports/（md+json）；--tool-candidates 工具晋升评估（只读扫描+九维 18 分+候选报告·禁执行禁自动晋升）。\n> - **T4 单测 19 例**：tests/unit/test_tmpe_tidy.py——用户点名 6 案例（w607_docxgen/w658_out2/a_note_bak/_c_review png/mqxs_pages/桶目录自排除）+ 优先级链 4 例 + protect 正则 glob + 过期锁忽略 + policy 加载 + 冲突后缀 + 同卷检测 + plan 过滤 + apply/undo 往返 + 运行锁占用 + 评分与只读断言；跑测中实证修复跨盘 relpath 崩溃（journal 展示健壮性）。\n> - **T5 治理执行（P0 三批）**：顶层 115→40 项；95 项归桶（w### 8/_bak 5/_shot 25/_misc 56/_profile 1·零删除·journal 全程）；_edge_cdp_profile 174.6MB/113 件入 _trash（可 undo·7 天后经确认清）；dxbak 实际 2 代已达「保留最近 2 代」规则无需清；review/ 与 w736/ 并行会话冻结（48h 窗）；个人稿件 12 件永冻（docx/pdf/papercheck）。\n> - **T6 git 纳入**：.gitignore 改 tmpe/ → tmpe/* + 文件级例外（!README.md !policy.yml）——体系件可复现、大文件留本地（目录级忽略后内部例外不生效的 git 规则实证）。\n> - **验证（全绿）**：pytest 332 passed（313+19）；ruff scripts/ 全过；盘点复跑结构稳定（桶内实况 7 桶齐）；--tool-candidates 11 脚本全落观察档无晋升候选（评分保守符合禁自动晋升设计）；_trash 项 journal undo 可恢复。\n> - **状态**：已落地（级联+提交后以 gh run list 为准）。\n> - **文件**：tmpe/README.md、tmpe/policy.yml、scripts/tmpe_tidy.py、tests/unit/test_tmpe_tidy.py、.gitignore、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、AGENTS.md、STRUCTURE.md、README.md、scripts/output/file-index.md、scripts/output/_w738_spec.json、scripts/output/_cascade_files_W738.txt、CITATION.cff。\n",
+  "milestone_block": "- **W738 tmpe 临时文件体系批**：\n  - tmpe/README.md 契约 + tmpe/policy.yml 策略文件化 + tmpe_tidy.py 策略执行臂（双闸门/journal/undo/锁/九维晋升评估）\n  - 治理执行 95 项归桶零删除 + 174.6MB profile 入 _trash + 个人稿件永冻 + 并行冻结；体系件入 git（gitignore 例外）\n",
+  "agents_note": "2026-10-14（W738）tmpe 临时文件体系批（用户令检查 tmpe 做体系加长文方案一点零到一点一拍板）：契约 README 加策略文件 policy.yml 加工具 tmpe_tidy 重写为策略执行臂（默认 dry 加 apply 双闸门加 plan json 与 from-plan 一致性加 journal 与 undo 往返加运行锁与会话热区锁加冲突后缀禁覆盖加同分区 rename 跨分区拒加优先级链 protect 到 active_lock 到 freeze 到标准桶到分类规则到 inbox 加 report 与 tool-candidates 九维十八分只读禁晋升）加单测十九例含用户点名六案例与跨盘健壮性修复加治理执行九十五项归桶零删除与一百七十四点六兆 profile 入 trash 可 undo 与 dxbak 两代达标无需清与 review 与 w736 并行冻结与个人稿件十二件永冻加 gitignore 例外体系件入 git；验证=pytest 三百三十二加 ruff 零加盘点结构稳定加候选十一脚本全观察档加 trash 可 undo",
+  "file_index_rows": [
+    "| tmpe/README.md | W738 | tmpe 临时区契约新建（定位/桶约定/保留策略/清理纪律） |",
+    "| tmpe/policy.yml | W738 | 策略文件新建（桶/TTL/代际/protect/freeze/tool_promotion·JSON 兼容零依赖） |",
+    "| scripts/tmpe_tidy.py | W738 | 策略化治理工具重写（双闸门/journal/undo/锁/优先级链/九维晋升评估） |",
+    "| tests/unit/test_tmpe_tidy.py | W738 | 单测 19 例（点名 6 案例+优先级链+roundtrip+锁+评分） |",
+    "| .gitignore | W738 | tmpe/* + 文件级例外（体系件入 git·大文件本地） |",
+    "| docs/00-导读/W批次编号对账表.md | W738 | W738 认领行登记 |"
+  ]
+}

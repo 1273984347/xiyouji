@@ -102,3 +102,8 @@
 ```text
 2026-10-13（W732）性能与文档工具链重构批（用户令继续第五批）：范围证据版裁决三文件六函数（perf_optimize 四函数加 optimize-html-size render_report 加 sync_docs main）；本批后全仓 ≥100 行函数清零（除已判定不动的 run_self_test）；验证=perf fixture 快照全字段逐字节加 14 单测加 OHS stdout 与报告双一致加 sync_docs 七规则输出逐字节加 pytest 296 加 ruff 0 加门禁 53 项；踩坑=横幅历史形态普查（规则 1/3/4 有空格 vs 2/5/6/7 无空格逐字节保真）加 harness 时间戳归一化加 CRLF 文件归一处理
 ```
+以下为 AGENTS.md 版本脚注早期条目（W733-W733）段的原文（单行沿革链·W738 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-13（W733）达标收尾批（用户 quote 剩余 60-90 行函数做收尾）：范围证据版裁决六目标（check_seo_head 加 spot_check_nlp 加 check_design_doc_drift 加 embed_json 加 build_reader 加 perf compare_trend）加审计判定不动 bump_version（W714 停用守卫死工具）；验证=三门禁输出逐字节加 drift 篡改负样本对拍加 embed 12 场景 CLI 快照加 compare_trend 9 场景快照加 reader 622 文件产物 sha 全等加 pytest 296 加 ruff 0 加门禁 53 项；踩坑=负样本旧版须放回 scripts 加 reader 直出为未后处理版对拍口径加采集标签统一加 echo 误建垃圾文件清理
+```
