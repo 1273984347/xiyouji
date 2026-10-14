@@ -75,6 +75,17 @@ def test_is_inflight_strips_markdown_bold():
     assert preflight_check.is_inflight("**进行中**")
 
 
+def test_inflight_with_bold_status_variants():
+    # W741 加固回归：单星/多星/空白变体（replace("**") 防不住单星·re.sub 全量剥离）
+    assert not preflight_check.is_inflight("*已收官*")
+    assert not preflight_check.is_inflight("***已收官***")
+    assert not preflight_check.is_inflight("  已收官  ")
+    assert not preflight_check.is_inflight("*已收官*（4b1f007f）")
+    assert not preflight_check.is_inflight("** 已闭环 **")
+    assert preflight_check.is_inflight("*进行中*")
+    assert preflight_check.is_inflight(" 已认领 ")
+
+
 def test_summarize_porcelain_counts_and_excludes_workbuddy():
     text = ("M  scripts/verify_delivery.py\x00"
             " M CHANGELOG.md\x00"

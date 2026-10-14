@@ -75,14 +75,16 @@ DONE_PREFIXES = ("已收官", "已闭环")
 
 
 def is_inflight(status):
-    """在途判定：状态列非「已收官/已闭环」开头即在途（含进行中/待收官/认领占位）。
+    """在途判定：状态列剥离全部星号与空白后，非「已收官/已闭环」开头即在途。
 
-    状态列可能带 Markdown 强调符（**已收官**）——先剥离再判定（W739 狗粮实证：
-    不剥离则收官行被误报在途，touches 永久挡路）。
+    加固史（W739→W741）：对账表状态列是 Markdown 自由文本——加粗（**已收官**）、
+    单星（*已收官*）、多星、空白前缀都可能由排版引入。首版 startswith 被加粗击穿
+    （狗粮实证）；二版 replace("**") 剥不到单星；本版 re.sub(r"[\\s*]+","") 全量剥离，
+    任何强调/空白变体都不影响判定（回归形态见 test_inflight_with_bold_status 族）。
     W681 式「进行中（剩余=真端点联调待用户三键）」判在途——但其 touches 为空（历史行），
     空集与任何清单交集为空，天然不挡路（旧在途批次无害化）。
     """
-    return not status.replace("**", "").strip().startswith(DONE_PREFIXES)
+    return not re.sub(r"[\s*]+", "", status).startswith(DONE_PREFIXES)
 
 
 def touches_conflict(inflight_touches, mine):
