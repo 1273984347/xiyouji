@@ -117,3 +117,8 @@
 ```text
 2026-10-13（W735）全仓归档大扫除批（用户令按一二三推进加全项目搜索计划方案类）：archive 根 README 索引台账新建加 archive_file 归档工具加五分区 725 件退役文件迁移（scripts 根下与 output 与 attic 与 superpowers 与 dev 草稿与复盘报告）加保留判定四维（活跃线加活跃基线加被现役操作指令引用十八件加 HANDOVER 待办联动二件）加引用同步文档规范一处加方法论索引四条链接加空目录清理；验证=迁移百分百成功率加行尾纯净加 lint 链接零 broken 加残留五十处逐条判定加 pytest 296 加 ruff 零加门禁五十三项
 ```
+以下为 AGENTS.md 版本脚注早期条目（W736-W736）段的原文（单行沿革链·W741 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-13（W736）发布链工具化与文档负载治理批（用户批准三卡与宿主巡检与负载治理）：preflight 前置核验器五检与 fetch 故障降级与取号权威源修复加 release 发布预检 spec 三检与消息核验与 init 模板加单测十七例加 S32 拍板仓库脚本随下个重构批触发加 CHANGELOG W650 至 W699 段与 file-index W449 至 W699 段一级归档双边界统一 W700加 archive 台账同步加 scripts README 三工具登记加复盘报告六件随批；验证=preflight 狗粮抓真 bug 加 release 自检过加单测全绿加门禁四十六段加 pytest 三百一十三加 ruff 零
+```
