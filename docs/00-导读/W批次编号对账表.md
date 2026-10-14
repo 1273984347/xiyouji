@@ -104,7 +104,7 @@
 | W740 | 干扰治理路线图文档批（用户令「把穷举分析优化成决策加实施文档·做减法不做加法」）：docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md 新建——决策摘要五条/总纲（三条件加 N×p×T 加唯一写路径第一原则）/度量前置（两周干扰日志表内嵌加 N p T 判定规则）/P0P1P2 路线（touches W739 已落地标注）/不建机制清单/验收与退出指标/季度减量周期/A-P 四组映射附录 | 4b1f007f（batch_cascade 原生级联） | W740 | **已收官**（4b1f007f） | WorkBuddy 2026-10-14 |  |
 | W741 | 干扰治理评估固化与 touches 加固批（用户裁定：评估部分为价值内核需入库·实施叙述按「交付加存量缺陷加活教材」三段重排·startswith 脆弱性固化为回归）：docs/11-报告复盘/多Agent干扰治理评估与实施记录-2026-10-14.md 新建（逐类核对加 N p T 实测加 W739 实施三段加 touches 拦不住的两件事）+README 现役索引 13→14；is_inflight 升级 strip 全星号（replace 双星防不住单星形态）+回归测试扩单星/多星/空白变体 | 93248d9b（batch_cascade 原生级联·fix 5ed27784 四执行洞） | W741 | **已收官**（93248d9b） | WorkBuddy 2026-10-14 | docs/11-报告复盘/README.md |
 | W742 | 复盘落地与引文门禁双向扩展批（用户三项裁决 2026-10-15：A-01 漏标反向扫描立项·PRE-25 中文计数纳入首版不接受 TODO·fix_quotes 随批归档）：第 39 篇复盘报告入库四连锁（README 索引加行+STRUCTURE report_docs 15→16+stats --w W742 三件+add）+check_citations 新增 --mode reverse 漏标反向扫描（判据同 F-3 逆向·豁免区同正向·self-test 扩例·dry-run 底数产出）+release_prep 第四检双形态（阿拉伯+中文数字转换器 零至万·W737 失真 spec 回放必拦·单测扩例）+fix_quotes 归档 archive/scripts+gates.md 重建四连 checklist+文档规范源产物同修原则+分层声明模板 | ef32f57c（batch_cascade 原生级联） | W742 | **已收官**（ef32f57c） | WorkBuddy 2026-10-15 | docs/11-报告复盘/README.md,STRUCTURE.md,scripts/check_citations.py,scripts/release_prep.py,tests/unit/test_release_prep.py,docs/agent/gates.md,docs/00-导读/文档规范.md |
-| W743 | 检索融合层消融重构批（T-01 Phase-0 落地·用户令「开始」）：xiyouji_rag 融合层消融重构——23 变体对照实证移除两路负贡献信号（标题命中/短语位置：四路全融 0.217~0.239 vs A+B 0.347~0.367 recall@5），改加权 RRF（A 原始 ×1.0 + 别名扩展 ×0.5）+ tests/unit/test_rag_fusion.py 单测 + 干扰日志 §8 行 | 认领占位 | W743 | **进行中** | WorkBuddy 2026-10-15 | scripts/rag/xiyouji_rag.py, tests/unit/test_rag_fusion.py, docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md |
+| W743 | 检索融合层消融重构批（T-01 Phase-0 落地·用户令「开始」）：xiyouji_rag 融合层消融重构——23 变体对照实证移除两路负贡献信号（标题命中/短语位置：四路全融 0.217~0.239 vs A+B 0.347~0.367 recall@5），改加权 RRF（A 原始 ×1.0 + 别名扩展 ×0.5）+ tests/unit/test_rag_fusion.py 单测 + 干扰日志 §8 行 | db25bc03（batch_cascade 原生级联） | W743 | **已收官**（db25bc03） | WorkBuddy 2026-10-15 | scripts/rag/xiyouji_rag.py, tests/unit/test_rag_fusion.py, docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md |
 
 ## 递延批豁免登记（D2 裁决：对账表登记即可过 doc-sync 提交-版段对账）
 
@@ -137,6 +137,7 @@
 - **W741**：现势下一自由号（4b1f007f w740 收官级联后 checklist 例行·2026-10-14）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W742**：现势下一自由号（93248d9b w741 收官级联后 checklist 例行·2026-10-14）——**预留登记豁免**，动工时按取号规则正式认领（已消费：W742 批）。
 - **W743**：现势下一自由号（ef32f57c w742 收官级联后 checklist 例行·2026-10-15）——**预留登记豁免**，动工时按取号规则正式认领。
+- **W744**：现势下一自由号（db25bc03 w743 收官级联后 checklist 例行·2026-10-15）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W691**：下一自由号被 W690 收官级联提交文本（4ab918d「现势 W691」）提前引用——C4 豁免登记（2026-10-09 补记）；本号仍为自由号，认领时正常占用。
 
 ## 登记 ASCII 纪律
