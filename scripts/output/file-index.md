@@ -11,6 +11,16 @@
 ---
 
 
+## W743 检索融合层消融重构批（2026-10-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/rag/xiyouji_rag.py | W743 | 融合层消融重构（四路等权 RRF→加权 A+B·移除标题命中/短语位置） |
+| tests/unit/test_rag_fusion.py | W743 | 加权 RRF 单测新增四例 |
+| docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md | W743 | 干扰日志 §8 追加开工观测行 |
+| docs/00-导读/W批次编号对账表.md | W743 | W743 认领行登记 |
+| scripts/output/_w743_spec.json | W743 | 本批 spec 入库 |
+
 ## W742 复盘落地与引文门禁双向扩展批（2026-10-15）
 
 | 文件 | W | 说明 |

@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W742），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W743），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,16 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W743（2026-10-15）：检索融合层消融重构批
+> **来源**：T-01 Phase-0 实测结论落地（用户令「开始」）——五系统对照实证现役检索融合层退化：四路等权 RRF 被「标题命中」「短语位置」两路异质榜单稀释（recall@5 0.239 vs 纯信号 0.367）。本批为纯代码批：融合层消融重构 + 实测验证。
+> - **T1 融合层消融重构**：xiyouji_rag.retrieve 融合层由「四路等权 RRF」改为「加权 RRF（A 原始 BM25 ×1.0 + B 别名扩展 BM25 ×EXPANDED_WEIGHT=0.5）」；「标题命中」（_heading_hits）与「短语位置」两路移除；_rrf 支持 weights 参数（zip strict 等长校验）。决策依据=二十三组融合变体扫描（探索性脚本 tmpe/hf-poc/scripts/fusion_sweep.py·本地实验区）：四路全融 0.217~0.239 vs A+B 0.347~0.367（recall@5·十八查询）；B 权重 0.3~0.6 为实测平台·取中值 0.5。
+> - **T2 实测验证（T-01 阵法复跑·十八查询）**：现役 bm25 recall@5 0.239→0.359（+50.2%）· recall@10 0.338→0.467（+38.2%）· MRR 0.343→0.603（+75.8%）；直接型 MRR 0.519→0.938；间接型 recall@5 0.141→0.261。评测数据与基线存 tmpe/hf-poc/ 实验区（本地）。
+> - **T3 单测**：tests/unit/test_rag_fusion.py 新增四例（等权缺省/权重缩放/零权跳过/共识优先）。
+> - **T4 干扰日志**：治理路线图 §8 追加开工观测行（非本会话 staged 暂态·确认为并行会话在途提交现场·损失零）。
+> - **验证（全绿）**：pytest 361 passed；ruff scripts/ 全过；verify_delivery 全量四十六段 OK；T-01 评测复跑前后对照完整（基线 JSON 已备份）。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：scripts/rag/xiyouji_rag.py、tests/unit/test_rag_fusion.py、docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md、docs/00-导读/W批次编号对账表.md、HANDOVER.md、AGENTS.md、scripts/output/file-index.md、scripts/output/_w743_spec.json、scripts/output/_cascade_files_W743.txt。
 
 ### W742（2026-10-15）：复盘落地与引文门禁双向扩展批
 > **来源**：用户三项裁决（2026-10-15：A-01 漏标反向扫描立项·PRE-25 中文计数纳入首版不接受 TODO·fix_quotes 随批归档）+ 第 39 篇复盘报告随批入库（第 38 篇先例）。动工前 preflight 五检（fetch 502 走 GitHub API 降级核验远端顶 5b7550b7 与本地一致·取号 W742·touches 申报七面无在途交集）。
