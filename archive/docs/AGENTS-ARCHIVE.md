@@ -107,3 +107,8 @@
 ```text
 2026-10-13（W733）达标收尾批（用户 quote 剩余 60-90 行函数做收尾）：范围证据版裁决六目标（check_seo_head 加 spot_check_nlp 加 check_design_doc_drift 加 embed_json 加 build_reader 加 perf compare_trend）加审计判定不动 bump_version（W714 停用守卫死工具）；验证=三门禁输出逐字节加 drift 篡改负样本对拍加 embed 12 场景 CLI 快照加 compare_trend 9 场景快照加 reader 622 文件产物 sha 全等加 pytest 296 加 ruff 0 加门禁 53 项；踩坑=负样本旧版须放回 scripts 加 reader 直出为未后处理版对拍口径加采集标签统一加 echo 误建垃圾文件清理
 ```
+以下为 AGENTS.md 版本脚注早期条目（W734-W734）段的原文（单行沿革链·W739 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-13（W734）归档体系统一与交接文档更名批（用户令同步加更名加归档新规）：docs/ARCHIVE 与 scripts/archive 与 scripts/audit/archive 三类归档迁入 archive 根按类归置加交接文档更名 HANDOVER 加工具链十五文件与六文档全量引用同步加文档规范归档规则重构（archive 根按类归置沿用五十 KB 阈值）；验证=lint_links 全量加五门禁直跑加残留扫描加 pytest 296 加 ruff 0 加门禁 53 项；踩坑=目录大小写历史态（git 小写 tracked 与磁盘大写）随迁移自然收敛加 C4 消息 W 号形态与归档路径 token 规则实测
+```

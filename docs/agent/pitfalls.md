@@ -36,7 +36,7 @@
 - **fullPage 截图不触发 IntersectionObserver**（W554）：凡含 `.reveal-in`（js-reveal 滚动显现）的页面，截图/审查前必须逐屏滚动穿透（步进 innerHeight、回顶后等待），否则下方区块渲染为空白——W550 G4 教训的截图侧二犯（试审判 curated「整屏空白 FAIL」实为伪影）；已固化进 `scripts/_w554_review.js`。
 - ** Express 5 / Node 20+ 的 req 'close' 语义陷阱**（W568）：`req.on("close")` 在请求体读取完毕即触发（并非连接断开），SSE 路由据此提前 `res.end()` 会吞掉后续全部事件（实证：init 之后 error 事件整段丢失、前端「思考中」永久挂起）；SSE 断开清理改挂 `res.on("close")`（已完成）。副作用教训：P2-3 类「断开清理」修复在运行时大版本升级后须复核语义。
 
-### git / 提交 / 并发（7 条）
+### git / 提交 / 并发（8 条）
 
 - **批量改 md 一律 Python `open(encoding='utf-8')`，禁用 PowerShell `Set-Content`**（后者默认写 UTF-8 BOM，项目 W427 曾全库清 BOM；`Add-Content` 同理慎用）。
 - **同文件多个 Edit 必须串行执行**（并行 Edit 基于同一原始内容计算 diff，后写覆盖先写——W505 复现 4 次：金角银角「唐僧肉」/CHANGELOG W506 段/项目说明头部/交接文档标题均丢失）；并行批次后必须 Grep 验证所有修改点。
@@ -50,6 +50,7 @@
 - `_` 前缀脚本为一次性/诊断脚本，不入库门禁、不参与 CI。
 - **pre-commit scope 分级与提交重试（W698·用户裁决「动工」·外部挑刺 P2 两条落地）**：verify_delivery.py 支持 `--scope full|docs|site|auto`——11 个内联廉价段恒跑，32 个 subprocess 委托段按生效集统一短路（`_GATE_SUMMARY_MARKERS` 兜住防静默跳过 wrapper 的汇总行校验），段自洽锁非 full 档按生效子集断言；`auto` 按变更路径白名单分类（doc-ish/site-ish 正则，任何越界文件→full；未跟踪 docs/site 内容文件在场→full 保守回退），`.git/hooks/pre-commit` 传 `--scope auto`，**CI verify-delivery job 与批收尾七步③恒为全量不缩水**；实测 docs 档 2.3s vs 全量 62s（热缓存）。并行会话提交改用 `python scripts/safe_commit.py -F <msg> [--] <pathspec...>`——ref-lock 竞争核对并行增量与 pathspec 无交集后自动重试一次（`--self-test` 4 负样本）；仓库体量监视挂 release.py 步骤 3（count-objects·1GB 告警线·处置红线=禁历史重写，裁决史 SHA 锚定）。**worktree 每会话一树根治候选评估关闭（2026-10-11 用户采纳判断）**：git 禁止两 worktree 共 checkout 同分支→侧分支+合并编排的改造代价≫safe_commit+scope 分级后的残留摩擦（撞车已降为一次自动重试·级联顺序等待与 git 拓扑无关·tmpe/S4 本地件会碎片化）；重启条件=safe_commit 自动重试频率>1 次/周。
 - **workflow/脚本用 git diff 输出做路径分类必须加 `-c core.quotePath=false`**（W523）：git 默认把非 ASCII 路径输出为带双引号的八进制转义串（交接文档.md → `"\344\272\244..."`），首尾引号破坏 bash case/glob 匹配（连 `*.md`、`docs/*` 都失配）→ 免审/定向分支被静默架空、恒走兜底全量（Screenshot Review scope 步骤曾因此每次推送 ~11min 全量截图）；验证靠本地 Git Bash 复刻分类逻辑对真实范围双向模拟。
+- **touches 冲突声明与交集拒绝（W739）**：对账表 touches 列登记本批计划**手工修改**的共享文件（级联面由 batch_cascade 单写路径 + safe_commit pathspec 互斥保护·不列；对账表追加认领行属 append 安全操作·不列；但改本表表头/规则/历史行等**结构性**修改必须列）；动工前跑 `python scripts/preflight_check.py --touches "<逗号分隔清单>" --self W###`——与在途批次（状态非已收官/已闭环且 touches 非空）有交集即 FAIL 拒绝并行（等对方收官或人工裁决）；语义=「同文件 Edit 串行」铁律的跨 Agent 版——串行保证「我一人不并发」，touches 保证「跨人无覆盖」；实证：W738 收官与 W739 认领在两个并行会话间交错完成（本会话读时 W738 未提交·写完已收官·幸未造成损坏），即 A 类读→写窗口漂移实例——touches 把该类冲突从「写回阶段才发现」前移到「计划阶段就拒绝」。
 
 ### 级联 / CHANGELOG（4 条）
 

@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W738），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W739），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -18,6 +18,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 
+### W739（2026-10-14）：多 Agent 干扰治理 touches 机制批
+> **来源**：用户下发多 Agent 同仓协作干扰治理长文评估（A 至 P 十六类加第一性原理 N×p×T 框架）并裁定实施推荐项①「touches 字段加交集拒绝」。动工前 preflight 全绿（max=W738 → W739 认领）；动工中实证 A 类读→写窗口漂移：并行会话在两次 git 调用间完成 W738 主提交与 chore 并推送 origin/dev（本会话只读验证未造成损坏），即本批机制要拦的真实场景。
+> - **T1 对账表扩 touches 列**：92 数据行加列（历史行留空·空集不参与交集判定；W687/W688 两行历史 5 列不齐行补空列至标准 7 列·内容零改动）；表头规则三句化四句新增④ touches 冲突声明条款（手工共享面登记·级联面由 batch_cascade 单写路径保护不列·对账表追加认领行不列·结构性修改必须列）；W739 认领行登记 5 项 touches。
+> - **T2 preflight_check.py 第 6 检**：parse_ledger 扩展返回 rows（w/status/touches·兼容 6 列旧格式）；is_inflight 状态判定（已收官/已闭环 开头为 done·W681 式历史在途行 touches 空天然无害）；touches_conflict 纯函数；CLI 加 --touches（本批手工共享面清单）与 --self（本批 W 号·排除自己认领行）；在途盘点 NOTE 加交集 FAIL 拒绝并行（退出码 1）。
+> - **T3 单测 10 例**：tests/unit/test_preflight_check.py 由 5 例扩至 10 例（touches 列解析/旧格式向后兼容/is_inflight 四态/touches_conflict 交集与多路径）；受控负样本实证：临时插入编号 999 的假在途批次行（touches 含 AGENTS.md）触发 FAIL rc=1·删行恢复后转绿。
+> - **T4 文档面**：AGENTS §4.3 最高频铁则补 touches 条；pitfalls git/提交/并发节 7→8 条新增 touches 纪律条目（含 W738/W739 并行交错实证）；scripts/README preflight 工具表六检与参数更新；文档规范 §11.1 补 touches 说明段（修相对链接 agent→../agent 一处·lint_links 拦截）。
+> - **验证（全绿）**：pytest 337 passed（332+5）；ruff scripts/ 全过；verify_delivery 全量 46 段 OK（级联前 C4-f 两项漏 add 时序 FAIL 属预期·add 后转绿）；行尾纯净（7 改动文件零混尾）；preflight 正路径 PASS 负样本 FAIL rc=1 双向实证。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：scripts/preflight_check.py、tests/unit/test_preflight_check.py、docs/00-导读/W批次编号对账表.md、AGENTS.md、docs/agent/pitfalls.md、scripts/README.md、docs/00-导读/文档规范.md。
 ### W738（2026-10-14）：tmpe 临时文件体系批
 > **来源**：用户令「请检查 D:\\xiyouji\\tmpe tmpe 文件我觉得应该和归档文件一样做一个 tmpe 临时文件体系」+ 长文方案 v1.0→v1.1 拍板（桶结构+契约+policy+盘点工具+并行锁+journal+_trash 受控可删除+工具晋升评估）。动工前并行侦察：取号 W738 无撞号·_edge_cdp_profile 无进程占用·全仓零引用。
 > - **T1 契约 tmpe/README.md**：定位=工地而非第二个 archive（archive=博物馆·登记禁删可追溯；tmpe=工地·分类堆放+完工清场）——桶约定（w###/_bak/_shot/_profile/_misc/_inbox/_hold/_trash/_reports）+ 保留策略表 + 清理纪律（列清单+主人确认+回收站·禁 rm -rf·docx/pdf 个人稿件永冻）。
