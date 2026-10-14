@@ -1,0 +1,52 @@
+{
+  "_comment": "tmpe 临时区策略（W738 建·JSON 兼容语法=YAML 子集·yaml/json 双路解析零依赖）。规则唯一权威源=本文件；README 只做解释不承载规则。",
+  "_schema": "v1",
+  "buckets": ["w###", "_bak", "_shot", "_profile", "_misc", "_inbox", "_hold", "_trash", "_reports"],
+  "ttl_days": { "_shot": 30, "_misc": 90, "_inbox": 7, "_trash": 7 },
+  "generations": { "dxbak": 2, "_bak": 2, "default": 2 },
+  "protect_globs": [
+    "匿名稿", "装饰投稿版", "投稿", "mqxs_anon", "mqxs_submission",
+    "hallmark", "papercheck", "audit_.*_paper_data"
+  ],
+  "freeze": {
+    "mtime_hours": 48,
+    "lock_paths": ["review/", "w736/"],
+    "_lock_note": "活跃锁（.locks/*.json）优先于 mtime 冻结；并行会话经 .locks 声明热区"
+  },
+  "exclude": ["README.md", "_bak", "_misc", "_shot", "_profile", "_inbox", "_hold", "_trash", "_reports", "w###", "policy.yml", ".protected.json", ".locks", ".journal"],
+  "cache_dirs": {
+    "_edge_cdp_profile": {
+      "regen": "Playwright/Edge CDP 调试 profile——删除后由调试脚本自动重建（本仓无硬编码引用·W738 实证 rg 零命中）",
+      "reclaimable": true
+    }
+  },
+  "classify_rules": [
+    { "name": "w_batch", "match": "^w\\d{3}", "bucket": "w###", "note": "批次桶" },
+    { "name": "bak_generic", "match": "bak", "bucket": "_bak", "note": "备份代" },
+    { "name": "profile", "match": "profile|_edge_cdp", "bucket": "_profile", "note": "工具 profile/cache" },
+    { "name": "review_artifacts", "match": "review|_png|ocr|shot|pages|_edge", "bucket": "_shot", "note": "审查产物" },
+    { "name": "script_scattered", "match": "\\.(py|txt|log|yml|yaml|md|json|ps1|csv)$", "bucket": "_misc", "note": "散件", "files_only": true },
+    { "name": "media_scattered", "match": "\\.(png|pdf|docx|html)$", "bucket": "_shot", "note": "审查产物", "files_only": true }
+  ],
+  "priority": ["protect", "active_lock", "freeze", "standard_bucket", "classify_rule", "_inbox"],
+  "conflict_suffix": "-%Y%m%d-%H%M%S",
+  "tool_promotion": {
+    "enabled": true,
+    "scan_extensions": [".py", ".sh", ".ps1", ".js", ".ts", ".ipynb"],
+    "scan_dirs": ["w###", "_misc", "_shot", "_bak", "_inbox"],
+    "target_dirs": ["scripts/", "tools/"],
+    "auto_move": false,
+    "require_review": true,
+    "require_tests": true,
+    "require_readme": true,
+    "min_reuse_score": 8,
+    "promote_threshold": 14
+  },
+  "limits": { "_misc_warn_files": 100, "_misc_warn_mb": 5 },
+  "safety": {
+    "delete_forbidden": true,
+    "trash_only_via": "主人确认+系统回收站",
+    "apply_requires": "--confirm",
+    "same_volume_rename_only": true
+  }
+}

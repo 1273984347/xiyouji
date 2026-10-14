@@ -118,7 +118,10 @@ SECURITY-AUDIT-2026-08-09.7z
 SECURITY-AUDIT-2026-08-09.password
 
 # 全站截图审查产物（W550·884MB 截图/切片/报告，本地保留不入库）
-tmpe/
+tmpe/*
+# W738：tmpe 临时文件体系件入 git（策略可复现）·大文件仍本地
+!tmpe/README.md
+!tmpe/policy.yml
 
 # W554 全站复审产物（B 方案·本地临时不入库，结束删除）
 .review-tmp/

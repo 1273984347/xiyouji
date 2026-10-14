@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W737），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W738），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,18 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W738（2026-10-14）：tmpe 临时文件体系批
+> **来源**：用户令「请检查 D:\\xiyouji\\tmpe tmpe 文件我觉得应该和归档文件一样做一个 tmpe 临时文件体系」+ 长文方案 v1.0→v1.1 拍板（桶结构+契约+policy+盘点工具+并行锁+journal+_trash 受控可删除+工具晋升评估）。动工前并行侦察：取号 W738 无撞号·_edge_cdp_profile 无进程占用·全仓零引用。
+> - **T1 契约 tmpe/README.md**：定位=工地而非第二个 archive（archive=博物馆·登记禁删可追溯；tmpe=工地·分类堆放+完工清场）——桶约定（w###/_bak/_shot/_profile/_misc/_inbox/_hold/_trash/_reports）+ 保留策略表 + 清理纪律（列清单+主人确认+回收站·禁 rm -rf·docx/pdf 个人稿件永冻）。
+> - **T2 策略文件化 tmpe/policy.yml**：桶清单/TTL（_shot 30d、_misc 90d、_inbox 7d、_trash 7d）/备份代际 2/protect glob（个人稿件正则）/freeze 48h+活跃锁路径/排除项/cache_dirs（_edge_cdp_profile 可再生声明）/tool_promotion（九维评分·晋升阈值 14·观察阈值 8·禁自动晋升）；JSON 兼容语法（=YAML 子集·零硬依赖·CI 无需 pyyaml）。
+> - **T3 工具 scripts/tmpe_tidy.py 重写为策略执行臂**：默认 dry-run·--apply 必须 --confirm 双闸门；--plan --json 与 --apply --from-plan 计划一致性；journal（.journal/*.jsonl 记 src/dst/sha1/mtime/rule）+ --undo 反向恢复；运行锁 .locks/tmpe_tidy.lock（stale 自动接管）+ 会话热区锁 .locks/*.json（TTL 过期忽略）；目标冲突时间戳后缀禁覆盖；同分区 os.rename、跨分区拒绝（禁 copy+delete）；优先级链 protect>active_lock>freeze>标准桶>分类规则>_inbox；--report 落 _reports/（md+json）；--tool-candidates 工具晋升评估（只读扫描+九维 18 分+候选报告·禁执行禁自动晋升）。
+> - **T4 单测 19 例**：tests/unit/test_tmpe_tidy.py——用户点名 6 案例（w607_docxgen/w658_out2/a_note_bak/_c_review png/mqxs_pages/桶目录自排除）+ 优先级链 4 例 + protect 正则 glob + 过期锁忽略 + policy 加载 + 冲突后缀 + 同卷检测 + plan 过滤 + apply/undo 往返 + 运行锁占用 + 评分与只读断言；跑测中实证修复跨盘 relpath 崩溃（journal 展示健壮性）。
+> - **T5 治理执行（P0 三批）**：顶层 115→40 项；95 项归桶（w### 8/_bak 5/_shot 25/_misc 56/_profile 1·零删除·journal 全程）；_edge_cdp_profile 174.6MB/113 件入 _trash（可 undo·7 天后经确认清）；dxbak 实际 2 代已达「保留最近 2 代」规则无需清；review/ 与 w736/ 并行会话冻结（48h 窗）；个人稿件 12 件永冻（docx/pdf/papercheck）。
+> - **T6 git 纳入**：.gitignore 改 tmpe/ → tmpe/* + 文件级例外（!README.md !policy.yml）——体系件可复现、大文件留本地（目录级忽略后内部例外不生效的 git 规则实证）。
+> - **验证（全绿）**：pytest 332 passed（313+19）；ruff scripts/ 全过；盘点复跑结构稳定（桶内实况 7 桶齐）；--tool-candidates 11 脚本全落观察档无晋升候选（评分保守符合禁自动晋升设计）；_trash 项 journal undo 可恢复。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：tmpe/README.md、tmpe/policy.yml、scripts/tmpe_tidy.py、tests/unit/test_tmpe_tidy.py、.gitignore、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、AGENTS.md、STRUCTURE.md、README.md、scripts/output/file-index.md、scripts/output/_w738_spec.json、scripts/output/_cascade_files_W738.txt、CITATION.cff。
 
 ### W737（2026-10-14）：对抗性审查修复与报告归置批
 > **来源**：用户令「对本项目进行最严格对抗性审查（五可标准：可量化/可验证/可执行/可追踪/符合实际情况）」+「全部开始修复·所有报告转移至 docs/11-报告复盘」。审查报告（六项发现·2 HIGH）落 docs/11-报告复盘/对抗性审查报告-2026-10-14.md；动工前 preflight 全绿（对账表 max=W736 → W737 认领）。
