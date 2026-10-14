@@ -31,7 +31,7 @@
 
 6. **docs 全量链接校验**（lint_links 0 broken·W699 扩自 docs/01 至 docs 全量·W700 五改后内建五豁免=fenced+inline code 去噪/git check-ignore 本地产物/archive 冻结档/POSIX 根绝对路径跳过/_w588_ce.html 快照件）
 7. **sitemap 覆盖**、**site/data 回退模式**（两条共占第 7 槽·历史形态不拆以保 C2 三方对账不改）
-8. **CSP 漂移**（generate_csp.py --check，856<!--stats:csp_covered--> 页哈希 0 漂移·页数随口径演进以实跑为准）
+8. **CSP 漂移**（generate_csp.py --check，856<!--stats:csp_covered--> 页哈希 0 漂移·页数随口径演进以实跑为准）——**重建操作规程（PRE-26·W742）**：reader/站点产物重建必须四连跑 `build_reader → inline_css → generate_csp → chapter-stats EMBEDDED 重灌`，缺一步即本门禁或第 40 门禁双源红（W737 实证：build_reader 直出无 INLINED·EMBEDDED 漏重灌）
 9. **数据漂移**（check_data_drift.js；W563 扩展：site/data/json 部署副本逐字节对账 47 副本基线 + 页面副本引用存在性 + 副本路径形态解析回原件 + EMBEDDED 单源页页名↔同名原件回退——对账面 44→46 页/71→74 项）、**腐蚀/插件**（check_corruption.py）
 10. **内联脚本语法**（check_js_syntax.js，node vm.Script 批量编译，含 EN 站）
 11. **CSS 结构平衡**（check_structure.py，括号/引号/url 闭合）

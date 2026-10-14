@@ -193,6 +193,61 @@ def iter_md(base):
                 yield p
 
 
+QUOTE_LONG_RE = re.compile(r"[“「]([^”」]{15,})[”」]")
+
+
+def scan_reverse(text, chapters):
+    """S-35 反向扫描（W742·A-01 立项落地）：未标记节的漏标候选。
+
+    判据 = 文档规范 §4.12 逆向（F-3 同源）：节内「未以规范语法标注的 ≥15 字引号内容
+    与归属对白」对全书语料未命中率 ≥50%（样本 ≥2）→ 漏标候选。
+    排除：原文照录区 / 延伸思考节 / 已含【文学演绎】标记的节；规范引文行不抽
+    （已由检查 1 管控·必真原文）。报告型工具：不改变第 20 门禁判定。
+    返回 [(节标题, 行号, n_total, n_miss, 示例)]。
+    """
+    whole = "".join(chapters[n] for n in sorted(chapters))
+    cands = []
+    state = {"lv": 0, "title": "", "line": 0, "fulltext": False, "marked": False, "samples": []}
+
+    def flush():
+        if (state["lv"] and state["samples"] and not state["marked"]
+                and not state["fulltext"] and "延伸思考" not in state["title"]):
+            n_total = len(state["samples"])
+            n_miss = sum(1 for _ln, q in state["samples"] if norm(q) not in whole)
+            if n_total >= 2 and n_miss / n_total >= 0.5:
+                cands.append((state["title"], state["line"], n_total, n_miss, state["samples"][0][1][:24]))
+        state["samples"] = []
+        state["marked"] = False
+
+    for i, ln in enumerate(text.splitlines(), 1):
+        st = ln.strip()
+        hm = HEADING_RE.match(st)
+        if hm:
+            flush()
+            state["lv"] = len(hm.group(1))
+            state["title"] = st[state["lv"]:].strip()
+            state["line"] = i
+            if state["lv"] == 2:
+                state["fulltext"] = state["title"].startswith(FULLTEXT_HEAD)
+            continue
+        if state["fulltext"]:
+            continue
+        if FICTION_MARK in st:
+            state["marked"] = True
+            continue
+        if CITE_RE.match(st):
+            continue
+        seen = set()
+        for q in ATTRIB_RE.findall(st):
+            seen.add(q)
+        for q in QUOTE_LONG_RE.findall(st):
+            seen.add(q)
+        for q in seen:
+            state["samples"].append((i, q))
+    flush()
+    return cands
+
+
 def rel_or_abs(p):
     try:
         return os.path.relpath(p, ROOT).replace(os.sep, "/")
@@ -286,7 +341,24 @@ def self_test(chapters):
     if not cf:
         print("FAIL self-test：语料保真负样本未检出（篡改后仍判全等）")
         bad += 1
-    total = len(SELF_TEST_CASES) + len(ATTRIB_SELF) + 3
+    # S-35 反向扫描自检（W742·A-01）：正向回归 + 对抗检出 + 真句零候选
+    marked_sec = ("## 深度解读\n\n### SD001 · 测试\n\n> " + FICTION_MARK + "测试标记\n\n"
+                  "八戒道：「娘啊，你物件有多少？都要我也用得着。」\n")
+    if scan_reverse(marked_sec, chapters):
+        print("FAIL self-test：反向扫描误报已标节（正向回归破坏）")
+        bad += 1
+    fake_sec = ("## 深度解读\n\n### SD002 · 测试\n\n"
+                "八戒道：「娘啊，你物件有多少？都要我也用得着。」\n"
+                "八戒又道：「这是第二条完全虚构的对白内容样本。」\n")
+    if not scan_reverse(fake_sec, chapters):
+        print("FAIL self-test：反向扫描未检出未标节虚构对白（对抗样本）")
+        bad += 1
+    real_sec = ("## 名句赏析\n\n石猴问道：“里面怎么样？水有多深？”\n"
+                "他说道：「感盘古开辟，三皇治世，五帝定伦」\n")
+    if scan_reverse(real_sec, chapters):
+        print("FAIL self-test：反向扫描误报全真句节：%s" % (scan_reverse(real_sec, chapters)[:1],))
+        bad += 1
+    total = len(SELF_TEST_CASES) + len(ATTRIB_SELF) + 6
     print("self-test %s：%d/%d" % ("通过" if not bad else "失败", total - bad, total))
     return 1 if bad else 0
 
@@ -297,6 +369,10 @@ def main():
     ap.add_argument("--dir", help="目录模式（检查 1+2+3·门禁模式）")
     ap.add_argument("--check-corpus", action="store_true", help="只跑语料保真检（检查 3）")
     ap.add_argument("--self-test", action="store_true", help="自检（内存正负样本，不依赖外部文档）")
+    ap.add_argument("--reverse", action="store_true",
+                    help="S-35 反向扫描：未标记节漏标候选（配 --dir·默认 docs/01·报告不阻断）")
+    ap.add_argument("--fail-on-candidates", action="store_true",
+                    help="--reverse 发现候选时退出码 1（定标后收紧用）")
     args = ap.parse_args()
 
     chapters = load_chapters()
@@ -306,6 +382,27 @@ def main():
 
     if args.check_corpus:
         return 1 if check_corpus(chapters) else 0
+
+    if args.reverse:
+        base = args.dir or os.path.join(ROOT, "docs", "01-全书逐回解读")
+        n_files = 0
+        all_cands = []
+        for p in iter_md(base):
+            n_files += 1
+            with open(p, encoding="utf-8") as fh:
+                text = fh.read()
+            for t, line_no, n_total, n_miss, ex in scan_reverse(text, chapters):
+                all_cands.append((rel_or_abs(p), line_no, t, n_total, n_miss, ex))
+        print("== S-35 漏标反向扫描（判据 §4.12 逆向·W742）==")
+        print("扫描 %d 篇 · 候选节 %d 个" % (n_files, len(all_cands)))
+        for rel, line_no, t, n_total, n_miss, ex in all_cands[:40]:
+            print("候选 %s:%d 「%s」 样本%d 未命中%d（%.0f%%） 示例：「%s…」"
+                  % (rel, line_no, t[:24], n_total, n_miss, 100.0 * n_miss / n_total, ex))
+        if len(all_cands) > 40:
+            print("…（其余 %d 条省略）" % (len(all_cands) - 40))
+        if not all_cands:
+            print("PASS 未发现漏标候选（已标区正向回归语义成立）")
+        return 1 if (args.fail_on_candidates and all_cands) else 0
 
     if not args.file and not args.dir:
         ap.error("需要 --file 或 --dir（或 --self-test / --check-corpus）")

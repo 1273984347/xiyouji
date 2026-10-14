@@ -58,7 +58,7 @@ archive/
 | `docs/specs/`（8 件） | docs/superpowers/specs 早期设计稿 | W735 | 2026-10-13 | 批次完结归档 |
 | `docs/_dev/`（10 件） | docs/_dev 开发草稿（v07v08 计划/v0.8 构思/三份 2026-10-02 报告组） | W735 | 2026-10-13 | 草稿区清理（保留来源子目录结构） |
 | `scripts/attic/`（32 件） | 原 scripts/_attic 整迁（自含 README） | W735 | 2026-10-13 | 历史存档区归位 |
-| `scripts/batches/`（540 件） | scripts/ 根下 _ 件 + scripts/output 批次产物（spec/级联清单/一次性脚本/中间产物） | W735 | 2026-10-13 | 已完结批次一次性产物归档（保留活跃线 _s4~_s7/活跃基线/被现役引用工具） |
+| `scripts/batches/`（544 件） | scripts/ 根下 _ 件 + scripts/output 批次产物（spec/级联清单/一次性脚本/中间产物）+ tmpe 晋升批次工具（W742 起·首批=fix_quotes×4 归 w7xx） | W735 | 2026-10-13 | 已完结批次一次性产物归档（保留活跃线 _s4~_s7/活跃基线/被现役引用工具） |
 | `scripts/review-pass3/`（105 件） | scripts/output/review-pass3（W557 三轮全站审查产物） | W735 | 2026-10-13 | 批次完结·组级归档 |
 
 ---
