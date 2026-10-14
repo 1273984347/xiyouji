@@ -28,7 +28,7 @@
 > - **T6 CITATION 与合规（F-4/F-5）**：CITATION.cff 五计数刷新（人物 56→215/专题 78→209/文化 16→34/可视化 61→87/维度 132→133）+ preferred-citation 真 URL+双许可注；5 处涉台表述修正（台湾故宫博物院→中国台北故宫博物院等·reader 随源重建）。
 > - **T7 陈旧态清理**：对账表「现势=W721」遗留块碑化（陈旧 16 号·人类陷阱）、陈旧预留 bullet 清理 10 条（W724-W733）、标题校正（W648 起回填）；AGENTS §5.1 补 make 依赖说明；AGENTS 脚注 W736 条目「五十三项」→「四十六段」措辞校正；site/index.html 字数口径 70.8→70.7 万（实测 706,586 字符·声明语料）。
 > - **T8 产物重建**：reader 622 页重建（build_reader+inline_css+generate_csp 全链）+ chapter-stats.html EMBEDDED 重灌（740093→742357·双源复绿）+ 红蟒精用字修正（稀柿同→衕）+ docs/INDEX 重建。
-> - **验证（全绿）**：check_citations 三检全过（423 规范引文+104 归属对白 100% 命中·语料保真 100/100·self-test 9/9）；全量门禁 46 段 OK（--scope full·C4-f 时序 FAIL 级联后消解）；CSP 零漂移（856 页/858 哈希）；chapter 双源一致；lint_links docs 0 broken；stats --check 16 键零差异；pytest 296 passed；ruff scripts/ 全过；混行尾 0。
+> - **验证（全绿）**：check_citations 三检全过（423 规范引文+104 归属对白 100% 命中·语料保真 100/100·self-test 9/9）；全量门禁 46 段 OK（--scope full·C4-f 时序 FAIL 级联后消解）；CSP 零漂移（856 页/858 哈希）；chapter 双源一致；lint_links docs 0 broken；stats --check 16 键零差异；pytest 313 passed；ruff scripts/ 全过；混行尾 0。
 > - **状态**：已落地（级联+提交后以 gh run list 为准）。
 > - **文件**：scripts/check_citations.py、dataset/text-search.json、source/原文/分回/（12 件修正）、docs/01-全书逐回解读/（100 件：演绎标记+引文整改）、docs/02-人物深度分析/（外传 3 标记+深化 2+红蟒精）、docs/03-主题与情节专题/时间的政治学专题.md、docs/04-文化与历史背景/（版本演变+西游与民间信仰）、docs/05-诗词歌赋/原著景物诗赏析专题.md、source/引用与网络解读/学术论文索引.md、docs/11-报告复盘/（README+13 报告+读者数据截图 5 件·新建目录）、docs/10-方法论沉淀/README.md、docs/00-导读/文档规范.md、docs/00-导读/W批次编号对账表.md、docs/agent/gates.md、CITATION.cff、README.md、STRUCTURE.md、AGENTS.md、HANDOVER.md、site/index.html、site/data/search.html、site/en/search.html、site/data/chapter-stats.html、site/reader/（622 页重建）、docs/INDEX.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md。
 
