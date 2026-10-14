@@ -77,10 +77,12 @@ DONE_PREFIXES = ("已收官", "已闭环")
 def is_inflight(status):
     """在途判定：状态列非「已收官/已闭环」开头即在途（含进行中/待收官/认领占位）。
 
+    状态列可能带 Markdown 强调符（**已收官**）——先剥离再判定（W739 狗粮实证：
+    不剥离则收官行被误报在途，touches 永久挡路）。
     W681 式「进行中（剩余=真端点联调待用户三键）」判在途——但其 touches 为空（历史行），
     空集与任何清单交集为空，天然不挡路（旧在途批次无害化）。
     """
-    return not status.startswith(DONE_PREFIXES)
+    return not status.replace("**", "").strip().startswith(DONE_PREFIXES)
 
 
 def touches_conflict(inflight_touches, mine):
