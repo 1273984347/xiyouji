@@ -132,3 +132,8 @@
 ```text
 2026-10-14（W738）tmpe 临时文件体系批（用户令检查 tmpe 做体系加长文方案一点零到一点一拍板）：契约 README 加策略文件 policy.yml 加工具 tmpe_tidy 重写为策略执行臂（默认 dry 加 apply 双闸门加 plan json 与 from-plan 一致性加 journal 与 undo 往返加运行锁与会话热区锁加冲突后缀禁覆盖加同分区 rename 跨分区拒加优先级链 protect 到 active_lock 到 freeze 到标准桶到分类规则到 inbox 加 report 与 tool-candidates 九维十八分只读禁晋升）加单测十九例含用户点名六案例与跨盘健壮性修复加治理执行九十五项归桶零删除与一百七十四点六兆 profile 入 trash 可 undo 与 dxbak 两代达标无需清与 review 与 w736 并行冻结与个人稿件十二件永冻加 gitignore 例外体系件入 git；验证=pytest 三百三十二加 ruff 零加盘点结构稳定加候选十一脚本全观察档加 trash 可 undo
 ```
+以下为 AGENTS.md 版本脚注早期条目（W739-W739）段的原文（单行沿革链·W744 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-14（W739）多 Agent 干扰治理 touches 机制批（用户下发干扰治理长文评估十六类加第一性原理并裁定实施推荐项一）：对账表扩 touches 列九十二行与表头规则四句化与 W739 认领行五项 touches 加 preflight 第六检（parse 返回 rows 与 is_inflight 与 touches_conflict 纯函数与 CLI 双参数 touches 加 self）加单测十例与受控负样本九九九假行触发 FAIL 撤销恢复实证加文档面四处（AGENTS 铁则与 pitfalls 并发节八条与 scripts README 工具表与文档规范十一点一说明修相对链接）；实证 A 类漂移（并行会话两次调用间完成 W738 提交推送·本会话只读无损）；验证=pytest 三百三十七加 ruff 零加门禁四十六段加行尾零混尾加正路径 PASS 负样本 FAIL
+```

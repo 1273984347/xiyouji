@@ -32,6 +32,11 @@ xiyouji_rag.py — 《详解西游记》本地 RAG 核心引擎（零依赖）
     等权融合时以异质榜单稀释排序：A+B 0.347~0.367 vs 四路全融 0.217~0.239）。
     现融合层 = 加权 RRF（A 原始 BM25 ×1.0 + B 别名扩展 BM25 ×EXPANDED_WEIGHT）。
 
+  W744 检索增强档（T-01 Phase-1 集成·可选·默认 off）：
+    经 RAG_ENHANCE 环境变量四档开关（off/dense/rerank/rewrite）接入
+    rag_enhance.py 增强引擎（稠密召回 + cross-encoder 重排 + LLM 查询改写；
+    30 查询实测 recall@5 0.393→0.487）。off 档保持零依赖行为不变。
+
 零依赖：仅用 Python 标准库（re / json / csv / os / urllib）。
 可直接运行：python xiyouji_rag.py "五行山 牧童"
 """
@@ -42,6 +47,7 @@ import json
 import math
 import os
 import re
+import sys
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -323,12 +329,76 @@ def _rrf(lists, k=60, weights=None):
     return sorted(fused.items(), key=lambda x: -x[1])
 
 
-def retrieve(query, top_k=5, index=None):
-    """返回 top_k 语料片段（含路径 + 摘录），经加权 RRF 融合重排。
+# ============================================================
+# 1.5 检索增强档分派（W744·T-01 Phase-1 集成）
+# ============================================================
 
-    W743：融合层消融重构——仅融合 A（原始 BM25·权重 1.0）与 B（别名扩展
-    BM25·权重 EXPANDED_WEIGHT）两路；原「标题命中」/「短语位置」两路经
-    T-01 对照实证为负贡献已移除（详见模块 docstring）。
+ENHANCE_LEVELS = ("off", "dense", "rerank", "rewrite")
+
+
+def enhance_level():
+    """解析 RAG_ENHANCE 环境变量 → 档位（off/dense/rerank/rewrite）。
+
+    off 为默认（空 / 0 / false / no / none / bm25 皆视为 off）；非法值抛
+    ValueError（fail-fast·防拼写错误被静默当作 off）。
+    """
+    raw = (os.environ.get("RAG_ENHANCE", "") or "").strip().lower()
+    if raw in ("", "0", "false", "no", "none", "bm25"):
+        return "off"
+    if raw not in ENHANCE_LEVELS:
+        raise ValueError("RAG_ENHANCE=%r 非法（合法值：off|dense|rerank|rewrite；空=off）" % raw)
+    return raw
+
+
+_enhance_engine = None
+
+
+def _get_enhance_engine(level):
+    """惰性获取增强引擎单例（rag_enhance.py·其内部再惰性加载重依赖）。"""
+    global _enhance_engine
+    if _enhance_engine is not None:
+        if _enhance_engine.level != level:
+            raise RuntimeError("增强引擎已以档位 %s 初始化（进程内不支持切换）"
+                               % _enhance_engine.level)
+        return _enhance_engine
+    if _HERE not in sys.path:
+        sys.path.insert(0, _HERE)
+    import rag_enhance  # 仅 RAG_ENHANCE 非 off 时导入（off 档保持零依赖）
+    _enhance_engine = rag_enhance.EnhanceEngine(level)
+    return _enhance_engine
+
+
+def retrieve(query, top_k=5, index=None):
+    """返回 top_k 语料片段（含路径 + 摘录）。
+
+    W743：融合层消融为加权 RRF（A 原始 BM25 ×1.0 + B 别名扩展 ×EXPANDED_WEIGHT）。
+    W744：RAG_ENHANCE 非 off 时经 rag_enhance 增强档排序（dense/rerank/rewrite）；
+    返回结构不变（path/score/excerpt·score 语义随档位）。
+    """
+    level = enhance_level()
+    if level == "off":
+        return _retrieve_bm25(query, top_k=top_k, index=index)
+    index = index or build_index()
+    engine = _get_enhance_engine(level)
+    ranked = engine.retrieve_ranked(query, top_k=top_k, index=index,
+                                    bm25_retrieve=_retrieve_bm25)
+    qt_exp = expand_query(query)
+    out = []
+    for path, score in ranked:
+        out.append({
+            "path": path,
+            "score": score,
+            "excerpt": _excerpt(path, qt_exp, index),
+        })
+    return out
+
+
+def _retrieve_bm25(query, top_k=5, index=None):
+    """现役加权 RRF 检索本体（off 档直达·亦为增强档的 BM25 路注入）。
+
+    W743：仅融合 A（原始 BM25·权重 1.0）与 B（别名扩展 BM25·权重
+    EXPANDED_WEIGHT）两路；「标题命中」/「短语位置」两路经 T-01 对照实证为
+    负贡献已移除（详见模块 docstring）。
     """
     index = index or build_index()
     qt_orig = tokenize(query, use_dict=True)
@@ -695,7 +765,9 @@ def main():
     q = " ".join(sys.argv[1:]) or "五行山 牧童"
     print(f"# 查询：{q}\n")
     res = answer(q, top_k=5, hops=1)
-    print("## 语料检索（BM25·加权 RRF·别名扩展）")
+    lvl = enhance_level()
+    tag = "（增强档 %s）" % lvl if lvl != "off" else ""
+    print("## 语料检索（BM25·加权 RRF·别名扩展%s）" % tag)
     for s in res["snippets"]:
         print(f"  [{s['score']}] {s['path']}")
         if s["excerpt"]:

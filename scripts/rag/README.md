@@ -13,13 +13,13 @@
 
 > **用 LightRAG 的架构思想（图谱 + 向量双层检索、Neo4j 后端），落地一个零依赖、当下能跑的本地 RAG；并把升级到完整 `lightrag-hku` 的接口留好。**
 
-这正符合「结合本项目实际情况去做」——复用真实资产（672 篇 docs + W326 图谱），不伪造能力。
+这正符合「结合本项目实际情况去做」——复用真实资产（千余篇 docs + W326 图谱），不伪造能力。
 
 ## 架构对照（LightRAG ↔ 本实现）
 
 | LightRAG 概念 | 本目录实现 | 依赖 |
 |---|---|---|
-| 向量检索层（vector layer） | `xiyouji_rag.py` 对 672 篇 `docs/*.md` 建 **BM25** 倒排索引 | 仅 stdlib |
+| 向量检索层（vector layer） | `xiyouji_rag.py` 对全量 `docs/*.md`（千余篇）建 **BM25** 倒排索引（W744 起可选稠密增强档·见下） | 仅 stdlib（增强档可选） |
 | 图谱检索层（graph layer） | 载入 **W326** `yuanqi_nodes/edges.csv` 做 1~2 跳邻居展开 | 仅 stdlib |
 | 双层检索（dual-level） | `answer()` 同时返回 语料片段 + 图谱三元组 | — |
 | Neo4j 后端 | `graph_seed_neo4j.py` 把同一份 CSV 导出为 LOAD CSV Cypher | 仅 stdlib |
@@ -27,7 +27,9 @@
 
 ## 文件
 
-- `xiyouji_rag.py` — 核心引擎（BM25 + 图谱 + 聚合）。CLI：`python xiyouji_rag.py "五行山 牧童"`
+- `xiyouji_rag.py` — 核心引擎（BM25 + 图谱 + 聚合 + `RAG_ENHANCE` 档位分派）。CLI：`python xiyouji_rag.py "五行山 牧童"`
+- `rag_enhance.py` — 检索增强引擎（W744·稠密召回 + cross-encoder 重排 + LLM 改写·被档位惰性调用）
+- `build_vectors.py` — 向量产物构建（W744·分块 + 微批嵌入·硬件安全模式·断点续跑）
 - `rag_server.py` — stdlib HTTP 服务，暴露 `/query` `/graph` `/health`（默认 127.0.0.1:8777）
 - `graph_seed_neo4j.py` — 生成 `rag_graph.json` 快照 + `neo4j_seed.cypher`（LightRAG Neo4j 后端种子）
 - `site/dukou-engine.html` — 前端「检索真实语料」按钮，调用 `/query`，服务未启动则回退模板引擎
@@ -44,13 +46,13 @@ curl "http://127.0.0.1:8777/query?q=%E4%BA%94%E8%A1%8C%E5%B1%B1%20%E7%89%A7%E7%A
 # 3. 打开 site/dukou-engine.html → 输入「五行山 牧童」→ 点「检索真实语料」
 ```
 
-首次运行会扫描 672 篇文档建索引（缓存到 `scripts/output/rag_index.json`），之后秒级响应。
+首次运行会扫描全量 docs（千余篇）建索引（缓存到 `scripts/output/rag_index.json`），之后秒级响应。
 
 ## LLM 真实生成（provider 化配置，W402）
 
 档 B 真实生成路径已接通。配置示例见 `.env.rag.example`，复制为项目根 `.env`（或 `scripts/rag/.env`，均已 gitignore）后填入：
 
-- `LLM_API_KEY`（必填）+ `LLM_MODEL`（按 provider 填对应模型名，如 `deepseek-v4-flash`）
+- `LLM_API_KEY`（必填）+ `LLM_MODEL`（按 provider 填对应模型名，如 `deepseek-flash`——DeepSeek-V4.1-Flash 服务的 API ID）
 - `LLM_PROVIDER`：`openai` | `anthropic` | `glm` | `kimi` | `minimax` | `deepseek` | `dashscope`（默认 openai）
 - 专属 Base URL 覆盖：`OPENAI_BASE_URL` / `ANTHROPIC_BASE_URL` / `GLM_BASE_URL` / `KIMI_BASE_URL` / `MINIMAX_BASE_URL` / `DEEPSEEK_BASE_URL` / `DASHSCOPE_BASE_URL`
 - `CUSTOM_LLM_BASE_URL`：代理/网关模式，优先于一切，统一按 OpenAI 兼容格式请求
@@ -58,6 +60,37 @@ curl "http://127.0.0.1:8777/query?q=%E4%BA%94%E8%A1%8C%E5%B1%B1%20%E7%89%A7%E7%A
 解析优先级：`CUSTOM_LLM_BASE_URL`（代理）> provider 专属变量 > 内置默认端点。
 API 格式：`anthropic` 走原生 messages（x-api-key 头）；其余走 OpenAI 兼容 `/chat/completions`（Bearer 头）。
 无 key / 请求失败时自动回退「渡口风格摘要」，前端展示 `llm_error` 提示。
+
+## 检索增强档（可选·W744·T-01 Phase-1 实测管线集成）
+
+默认 `off` 档为上述零依赖加权 RRF。T-01 检索增强实验（30 查询评测集）验证的
+增强管线已正式集成，经 `RAG_ENHANCE` 环境变量四档开关：
+
+| 档位 | 内容 | recall@5（30 查询实测） | 额外依赖 |
+|---|---|---|---|
+| `off`（默认） | 现役加权 RRF（零依赖·行为不变） | 0.393 | 无 |
+| `dense` | + 稠密召回（bge-small-zh-v1.5·页级 max）= 双路加权 RRF 融合池（dense×2.0） | 0.396 | numpy + sentence-transformers |
+| `rerank` | + cross-encoder 重排（bge-reranker-base·文档首 800 字导语） | **0.487** | 同上 + 向量产物 |
+| `rewrite` | + LLM 查询改写并池（每次检索多 1 次 API 调用） | 7 条弱查询均值 +0.228 | 同上 + LLM_API_KEY |
+
+启用步骤：
+
+```bash
+# 1. 安装增强依赖
+pip install sentence-transformers numpy
+
+# 2. 构建向量产物（重计算任务·首次含模型下载约 92MB·微批冷却+断点续跑）
+python scripts/rag/build_vectors.py                 # auto 设备（本机建议 py -3.12 运行）
+python scripts/rag/build_vectors.py --device cpu    # 或强制 CPU（较慢·无 GPU 风险）
+
+# 3. 设定档位启动（或写入 .env）
+RAG_ENHANCE=rerank python scripts/rag/rag_server.py
+```
+
+- 依赖/产物缺失时 fail-fast 报错（含修复指引·不静默降级）；`off` 档不加载任何重依赖。
+- 模型默认 CPU 推理（`RAG_DEVICE=cuda` 可切换）；国内网络可设 `HF_ENDPOINT=https://hf-mirror.com`。
+- docs/ 更新后向量产物过期：加载时自动告警，重跑 `build_vectors.py` 重建（分块未变秒级复用·变了全量重嵌）。
+- 硬件纪律：`build_vectors.py` 为重计算任务（GPU 模式默认微批 1500/冷却 35s/温度守护 ≥90°C 自动中止可续跑）——勿并行多开。
 
 ## 升级到完整 LightRAG（lightrag-hku）
 

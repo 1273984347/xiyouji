@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W743），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W744），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,17 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W744（2026-10-15）：检索增强集成批
+> **来源**：T-01 Phase-1 集成（用户令「开始」）——T-01 检索增强实验（30 查询评测集）验证过的管线正式集成进 scripts/rag：四档开关 + 向量构建工具 + 离线优先加载，完成从实验区（tmpe/hf-poc）到正式工具链的工程化落地。
+> - **T1 增强引擎（新增 rag_enhance.py）**：稠密召回（bge-small-zh-v1.5·页级 max）+ 加权 RRF 池融合（bm25×1.0 + dense×2.0·k=60）+ cross-encoder 重排（bge-reranker-base·v1 导语 800 字配方）+ LLM 查询改写并池（原池 ∪ 改写池·按改写查询重排）；实测冠军 recall@5 0.487（三十查询）。
+> - **T2 档位开关（RAG_ENHANCE·xiyouji_rag 分派）**：off（默认·零依赖行为零变化）/ dense / rerank / rewrite 四档；非法值 fail-fast；缺依赖/缺产物报修复指引；off 档不加载任何重依赖。
+> - **T3 向量构建（新增 build_vectors.py）**：分块复刻 T-01 口径（同语料同算法·逐条一致实证）+ 微批嵌入（1500/冷却 35s/温度守护 90°C 中止/断点续跑）+ manifest 防混批 + 产物三件（rag_vectors.npy / rag_chunks.jsonl / rag_embed_meta.json）+ 陈旧检测（docs 指纹·加载时告警）。
+> - **T4 离线优先加载（受限网络防护）**：HF 缓存探测→import 前预置 HF_HUB_OFFLINE=1（huggingface_hub offline 判定为 import 期常量·实测运行时设置无效）；本机代理证书链环境实证修复（etag 检查卡死）。
+> - **T5 单测与文档**：test_rag_enhance.py 二十九例（档位解析/RRF 权重/并池/改写清理/映射/离线预置）；README 检索增强档节（四档实测表+启用步骤+硬件纪律）+ .env.rag.example 同步 + LLM_MODEL 示例更正 deepseek-flash；.gitignore 加向量产物忽略。
+> - **验证（全绿）**：四档冒烟全通（off 零变化 / dense 38s / rerank 54s / rewrite 89s·治愈 Q29 池外查询）；pytest 390 passed；ruff scripts/ 全过；verify_delivery 全量四十六段 OK。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）；首建正式向量产物为后续运营动作（全量嵌入·重计算·硬件安全模式·待用户批准）。
+> - **文件**：scripts/rag/rag_enhance.py、scripts/rag/build_vectors.py、scripts/rag/xiyouji_rag.py、tests/unit/test_rag_enhance.py、scripts/rag/README.md、scripts/rag/.env.rag.example、.gitignore、docs/00-导读/W批次编号对账表.md、HANDOVER.md、AGENTS.md、scripts/output/file-index.md、scripts/output/_w744_spec.json、scripts/output/_cascade_files_W744.txt。
 
 ### W743（2026-10-15）：检索融合层消融重构批
 > **来源**：T-01 Phase-0 实测结论落地（用户令「开始」）——五系统对照实证现役检索融合层退化：四路等权 RRF 被「标题命中」「短语位置」两路异质榜单稀释（recall@5 0.239 vs 纯信号 0.367）。本批为纯代码批：融合层消融重构 + 实测验证。

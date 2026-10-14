@@ -11,6 +11,20 @@
 ---
 
 
+## W744 检索增强集成批（2026-10-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/rag/rag_enhance.py | W744 | 新增：检索增强引擎（稠密召回+池融合+重排+改写·离线优先加载） |
+| scripts/rag/build_vectors.py | W744 | 新增：向量构建（微批安全模式+防混批 manifest+陈旧检测） |
+| scripts/rag/xiyouji_rag.py | W744 | RAG_ENHANCE 四档分派（off 零变化·向后兼容） |
+| tests/unit/test_rag_enhance.py | W744 | 新增：增强层单测二十九例 |
+| scripts/rag/README.md | W744 | 检索增强档节 + LLM_MODEL 示例更正 deepseek-flash |
+| scripts/rag/.env.rag.example | W744 | RAG_ENHANCE/RAG_DEVICE 示例同步 |
+| .gitignore | W744 | 向量产物忽略（rag_vectors/rag_chunks/rag_embed_meta） |
+| docs/00-导读/W批次编号对账表.md | W744 | W744 认领行登记 |
+| scripts/output/_w744_spec.json | W744 | 本批 spec 入库 |
+
 ## W743 检索融合层消融重构批（2026-10-15）
 
 | 文件 | W | 说明 |
