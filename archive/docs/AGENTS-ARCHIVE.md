@@ -127,3 +127,8 @@
 ```text
 2026-10-14（W737）对抗性审查修复与报告归置批（用户令最严格对抗性审查五可标准加全部修复加报告归置十一目录）：报告归置十一目录新建十三篇现役加归档指针加全仓引用同步加 stats 新键 report_docs 加演绎标注三百一十处加规范四点十二条文加引文门禁扩三检加归属对白核验加语料保真检加失实引文十七条整改加语料仲裁重建（七丢段恢复加僻字还原加八十七字级对齐）加十二分回修正加 CITATION 五计数加涉台五处加对账表碑化加 bullet 清理加树目录三处同步加 reader 六百二十二页重建加 chapter-stats 重灌加红蟒精用字；验证=三检全过加四二三规范加一百零四对白百分百加语料百分百加自检九例加门禁四十六段加 CSP 零漂移加双源一致加 lint 零加 stats 十六键加 pytest 三百一十三加 ruff 零加混尾零
 ```
+以下为 AGENTS.md 版本脚注早期条目（W738-W738）段的原文（单行沿革链·W743 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-14（W738）tmpe 临时文件体系批（用户令检查 tmpe 做体系加长文方案一点零到一点一拍板）：契约 README 加策略文件 policy.yml 加工具 tmpe_tidy 重写为策略执行臂（默认 dry 加 apply 双闸门加 plan json 与 from-plan 一致性加 journal 与 undo 往返加运行锁与会话热区锁加冲突后缀禁覆盖加同分区 rename 跨分区拒加优先级链 protect 到 active_lock 到 freeze 到标准桶到分类规则到 inbox 加 report 与 tool-candidates 九维十八分只读禁晋升）加单测十九例含用户点名六案例与跨盘健壮性修复加治理执行九十五项归桶零删除与一百七十四点六兆 profile 入 trash 可 undo 与 dxbak 两代达标无需清与 review 与 w736 并行冻结与个人稿件十二件永冻加 gitignore 例外体系件入 git；验证=pytest 三百三十二加 ruff 零加盘点结构稳定加候选十一脚本全观察档加 trash 可 undo
+```
