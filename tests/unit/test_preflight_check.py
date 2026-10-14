@@ -68,6 +68,13 @@ def test_is_inflight_states():
     assert not preflight_check.is_inflight("已闭环")
 
 
+def test_is_inflight_strips_markdown_bold():
+    # W739 狗粮实证：状态列带 Markdown 强调符（**已收官**）不剥离会误判在途
+    assert not preflight_check.is_inflight("**已收官**（5dca5834）")
+    assert not preflight_check.is_inflight("**已闭环**")
+    assert preflight_check.is_inflight("**进行中**")
+
+
 def test_summarize_porcelain_counts_and_excludes_workbuddy():
     text = ("M  scripts/verify_delivery.py\x00"
             " M CHANGELOG.md\x00"
