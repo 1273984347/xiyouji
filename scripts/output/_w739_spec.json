@@ -1,0 +1,20 @@
+{
+  "batch": "W739",
+  "date": "2026-10-14",
+  "title": "W739 多 Agent 干扰治理 touches 机制批",
+  "desc": "对账表 touches 冲突声明与 preflight 交集拒绝落地",
+  "head_entry": "2026-10-14（W739 多 Agent 干扰治理 touches 机制批）",
+  "head_sentence": "touches 列与表头规则④加 preflight 第 6 检交集拒绝加 10 单测落地，多 Agent 并行干扰从事后撞车前移为计划阶段拒绝",
+  "changelog_body": "\n> **来源**：用户下发多 Agent 同仓协作干扰治理长文评估（A 至 P 十六类加第一性原理 N×p×T 框架）并裁定实施推荐项①「touches 字段加交集拒绝」。动工前 preflight 全绿（max=W738 → W739 认领）；动工中实证 A 类读→写窗口漂移：并行会话在两次 git 调用间完成 W738 主提交与 chore 并推送 origin/dev（本会话只读验证未造成损坏），即本批机制要拦的真实场景。\n> - **T1 对账表扩 touches 列**：92 数据行加列（历史行留空·空集不参与交集判定；W687/W688 两行历史 5 列不齐行补空列至标准 7 列·内容零改动）；表头规则三句化四句新增④ touches 冲突声明条款（手工共享面登记·级联面由 batch_cascade 单写路径保护不列·对账表追加认领行不列·结构性修改必须列）；W739 认领行登记 5 项 touches。\n> - **T2 preflight_check.py 第 6 检**：parse_ledger 扩展返回 rows（w/status/touches·兼容 6 列旧格式）；is_inflight 状态判定（已收官/已闭环 开头为 done·W681 式历史在途行 touches 空天然无害）；touches_conflict 纯函数；CLI 加 --touches（本批手工共享面清单）与 --self（本批 W 号·排除自己认领行）；在途盘点 NOTE 加交集 FAIL 拒绝并行（退出码 1）。\n> - **T3 单测 10 例**：tests/unit/test_preflight_check.py 由 5 例扩至 10 例（touches 列解析/旧格式向后兼容/is_inflight 四态/touches_conflict 交集与多路径）；受控负样本实证：临时插入编号 999 的假在途批次行（touches 含 AGENTS.md）触发 FAIL rc=1·删行恢复后转绿。\n> - **T4 文档面**：AGENTS §4.3 最高频铁则补 touches 条；pitfalls git/提交/并发节 7→8 条新增 touches 纪律条目（含 W738/W739 并行交错实证）；scripts/README preflight 工具表六检与参数更新；文档规范 §11.1 补 touches 说明段（修相对链接 agent→../agent 一处·lint_links 拦截）。\n> - **验证（全绿）**：pytest 337 passed（332+5）；ruff scripts/ 全过；verify_delivery 全量 46 段 OK（级联前 C4-f 两项漏 add 时序 FAIL 属预期·add 后转绿）；行尾纯净（7 改动文件零混尾）；preflight 正路径 PASS 负样本 FAIL rc=1 双向实证。\n> - **状态**：已落地（级联+提交后以 gh run list 为准）。\n> - **文件**：scripts/preflight_check.py、tests/unit/test_preflight_check.py、docs/00-导读/W批次编号对账表.md、AGENTS.md、docs/agent/pitfalls.md、scripts/README.md、docs/00-导读/文档规范.md。",
+  "milestone_block": "- **W739 多 Agent 干扰治理 touches 机制批**：\n  - 对账表扩 touches 列（92 行·历史空集不挡路·W687/W688 补列归一）+ 表头规则④冲突声明条款\n  - preflight 第 6 检：--touches 声明手工共享面·--self 排除自己·在途交集非空即 FAIL（10 单测+负样本实证）\n  - 文档面四处：AGENTS 铁则/pitfalls 纪律/工具表/文档规范 §11.1",
+  "agents_note": "2026-10-14（W739）多 Agent 干扰治理 touches 机制批（用户下发干扰治理长文评估十六类加第一性原理并裁定实施推荐项一）：对账表扩 touches 列九十二行与表头规则四句化与 W739 认领行五项 touches 加 preflight 第六检（parse 返回 rows 与 is_inflight 与 touches_conflict 纯函数与 CLI 双参数 touches 加 self）加单测十例与受控负样本九九九假行触发 FAIL 撤销恢复实证加文档面四处（AGENTS 铁则与 pitfalls 并发节八条与 scripts README 工具表与文档规范十一点一说明修相对链接）；实证 A 类漂移（并行会话两次调用间完成 W738 提交推送·本会话只读无损）；验证=pytest 三百三十七加 ruff 零加门禁四十六段加行尾零混尾加正路径 PASS 负样本 FAIL",
+  "file_index_rows": [
+    "| scripts/preflight_check.py | W739 | 第 6 检 touches（rows 解析/在途判定/交集拒绝/--touches --self CLI） |",
+    "| tests/unit/test_preflight_check.py | W739 | touches 单测 5→10 例（列解析/向后兼容/在途四态/交集×2） |",
+    "| docs/00-导读/W批次编号对账表.md | W739 | touches 列扩容（92 行）+表头规则④+W739 认领行 |",
+    "| AGENTS.md | W739 | §4.3 最高频铁则补 touches 条 |",
+    "| docs/agent/pitfalls.md | W739 | git/提交/并发节 7→8 条·touches 纪律条目 |",
+    "| scripts/README.md | W739 | preflight_check 工具表六检+参数更新 |",
+    "| docs/00-导读/文档规范.md | W739 | §11.1 补 touches 说明段（含相对链接修复） |"
+  ]
+}
