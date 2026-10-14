@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W741），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W742），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,18 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W742（2026-10-15）：复盘落地与引文门禁双向扩展批
+> **来源**：用户三项裁决（2026-10-15：A-01 漏标反向扫描立项·PRE-25 中文计数纳入首版不接受 TODO·fix_quotes 随批归档）+ 第 39 篇复盘报告随批入库（第 38 篇先例）。动工前 preflight 五检（fetch 502 走 GitHub API 降级核验远端顶 5b7550b7 与本地一致·取号 W742·touches 申报七面无在途交集）。
+> - **T1 第 39 篇复盘报告入库四连锁**：docs/11-报告复盘/工作复盘与优化分析报告-2026-10-14.md 落库（复盘系列迁移 11 目录首篇·三新族 FAM-20/21/22+PRE-25~30+裁决回填 10 处）+ README 索引 15 篇（新报告编 1·原 1-14 顺延·脚本断言）+ STRUCTURE report_docs 15→16 双同步 + stats --w W742 三件刷新。
+> - **T2 S-35 漏标反向扫描器（A-01 落地）**：check_citations.py 新增 --reverse 模式（判据=文档规范 §4.12 逆向：未标记节内 ≥15 字引号内容与归属对白对全书语料未命中率 ≥50% 且样本 ≥2 → 候选·排除原文照录/延伸思考/已标节·规范引文行不抽）+ --fail-on-candidates 收紧开关 + self-test 扩 3 例（正向回归/对抗检出/真句零误报·9→12）；dry-run 底数=101 篇 11 候选节全部 100% 未命中（H1 跨回连载节与聚合文档子节两类结构盲区·公文体/口语形态不在检查 2 语法族）→ 11 处全部补标（050/051/052/054/062/063/084/085/086/087+100 回 3.3 节·批量脚本幂等+计数断言）→ 复扫 0 候选收敛。
+> - **T3 PRE-25 release_prep 第四检（双形态）**：--check-spec 新增「②验证行计数对账」——changelog_body「pytest N passed」与 agents_note 中文计数双写一致+与 --pytest-count 实跑数对账（P-01/P-11 三类失真全拦）；新增 zh_num_to_int 中文数字转换器（零~万·段首十兜底/零占位语义·三百一十三=313）；单测扩至 30 例（含 W737 失真回放必拦/双写失步/缺双写/无声明 SKIP/截断风险）；CLI 级验证：失真态回放 FAIL·W741 真实 spec（338/三百三十八）OK。
+> - **T4 fix_quotes 归档**：tmpe/review/fix_quotes×4 → archive/scripts/batches/w7xx/（gitignore 区纳管后移动·archive/README 台账 540→544+tmpe 晋升注记）——第 39 篇报告 SC-02/K-04 裁决落地。
+> - **T5 文档件（PRE-26/28/30）**：gates.md 第 8 门禁补重建操作规程四连注（build_reader→inline_css→generate_csp→chapter-stats EMBEDDED 重灌）+ 文档规范新增 §4.13 源-产物同修原则 + HANDOVER §九交接流程增第 7 条质量分层声明模板（四行表）。
+> - **T6 reader 重建四连（PRE-26 规程首跑）**：build_reader 622 页 → inline_css（102 reader 页重内联·全站 330 INLINED 恢复）→ generate_csp（856 页/858 哈希）→ chapter-stats 双源实测豁免（统计源不含 docs 标记行·漂移 0——第 4 步按门禁实测决定·四连规程价值实证）。
+> - **验证（全绿）**：check_citations 三检全过（423 规范引文+104 归属对白 100% 命中·700 文件·语料保真 100/100）+ --reverse 复扫 0 候选 + self-test 12/12；pytest 357 passed；ruff scripts/ 全过；CSP 零漂移；chapter 双源一致。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：docs/11-报告复盘/工作复盘与优化分析报告-2026-10-14.md、docs/11-报告复盘/README.md、STRUCTURE.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/check_citations.py、scripts/release_prep.py、tests/unit/test_release_prep.py、archive/scripts/batches/w7xx/fix_quotes.py、archive/scripts/batches/w7xx/fix_quotes2.py、archive/scripts/batches/w7xx/fix_quotes3.py、archive/scripts/batches/w7xx/fix_quotes4.py、archive/README.md、docs/agent/gates.md、docs/00-导读/文档规范.md、HANDOVER.md、docs/00-导读/W批次编号对账表.md、docs/01-全书逐回解读/（10 件：S-35 反向扫描漏标补演绎标记）、site/reader/（622 页重建）、scripts/output/_w742_spec.json、scripts/output/_cascade_files_W742.txt。
 
 ### W741（2026-10-14）：干扰治理评估固化与 touches 加固批
 > **来源**：用户三段裁定——① 评估部分不需要优化（逐类核对做了原分析没做的实证·N×p×T 补实测·W671 关键纠正·四个不做钉死范围），但该内核此前只存在于会话中未入库；② 实施叙述从操作流水重排为「交付加存量缺陷加活教材」三段；③ 狗粮击穿 startswith 不是修一下就好——解析层设计缺陷需加固并固化为回归。

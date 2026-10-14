@@ -34,6 +34,69 @@ RE_W_FORM = re.compile(r"(?<![A-Za-z0-9])[Ww]\d{3}(?!\d)")
 RE_PATH_TOKEN = re.compile(
     r"[A-Za-z0-9_\-./\u4e00-\u9fff]+\.(?:py|js|mjs|md|json|html|cff|yml|yaml|txt|toml|css)$")
 BANNED = {"desc": ("·", "；", "—"), "head_sentence": ("；", "—", "（", "）")}
+RE_PYTEST_ARABIC = re.compile(r"pytest (\d+) passed")
+RE_PYTEST_ZH = re.compile(r"pytest ([零一二三四五六七八九十百千万]+)")
+ZH_DIGIT = {"零": 0, "一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
+ZH_UNIT = {"十": 10, "百": 100, "千": 1000, "万": 10000}
+
+
+def zh_num_to_int(s):
+    """中文数字 → int（覆盖 零~九 + 十百千万 组合·PRE-25 双形态）。
+
+    支持：三百一十三=313 / 十五=15（段首「十」兜底）/ 二千零五十=2050（零占位不累加）/ 一万零二十四=10024。
+    非法字符或空串抛 ValueError。
+    """
+    if not s:
+        raise ValueError("空串")
+    total = section = digit = 0
+    for ch in s:
+        if ch in ZH_DIGIT:
+            digit = ZH_DIGIT[ch]
+        elif ch in ZH_UNIT:
+            if ch == "万":
+                total = (total + section + digit) * ZH_UNIT[ch]
+                section = digit = 0
+            else:
+                if digit == 0 and section == 0:
+                    digit = 1  # 段首「十三/百/千」形态兜底（零后跟单位不触发·保 0 占位）
+                section += digit * ZH_UNIT[ch]
+                digit = 0
+        else:
+            raise ValueError(f"非法中文数字字符：{ch!r}")
+    return total + section + digit
+
+
+def check_pytest_count(spec, expect):
+    """PRE-25 第四检：spec 验证行 pytest 计数 vs 实跑对账（阿拉伯+中文双形态·W742）。
+
+    对账面：changelog_body 的「pytest N passed」与 agents_note 的「pytest 中文数字」
+    须双写一致且等于实跑数 expect（P-01/P-11 实证：单写/沿抄/双写失步三类失真）。
+    changelog_body 无 pytest 计数形态 → 返回 ([], skip=True)（纯文档批无此声明）。
+    返回 (issues, skipped)。
+    """
+    body = str(spec.get("changelog_body", ""))
+    note = str(spec.get("agents_note", ""))
+    s1 = sorted({int(m.group(1)) for m in RE_PYTEST_ARABIC.finditer(body)})
+    issues = []
+    if not s1:
+        return issues, True  # spec 未声明 pytest 计数（纯文档批）——跳过
+    s2_raw = [m.group(1) for m in RE_PYTEST_ZH.finditer(note)]
+    s2 = []
+    for raw in s2_raw:
+        try:
+            s2.append(zh_num_to_int(raw))
+        except ValueError as exc:
+            issues.append(f"spec.agents_note 中文计数解析失败：{raw!r}（{exc}）")
+    if len(s1) != 1:
+        issues.append(f"spec.changelog_body 的 pytest 计数形态不唯一：{s1}（应恰好 1 个「pytest N passed」）")
+    if s1 and s2 and set(s1) != set(s2):
+        issues.append(f"spec 双写失步（P-11）：changelog_body={s1} vs agents_note={s2}")
+    if s1 and not s2:
+        issues.append(f"spec.agents_note 缺中文计数双写（changelog_body={s1}·两处须一致——P-11 实证）")
+    if expect is not None and s1 and s1[0] != expect:
+        issues.append(f"spec 计数与实跑不符（P-01）：spec={s1[0]} vs 实跑 pytest={expect}"
+                      f"（W737 实证：沿抄旧计数致 fix×2 返工）")
+    return issues, False
 
 
 def run_git(*args, cwd=None):
@@ -135,7 +198,7 @@ def check_message(path):
     return n
 
 
-def check_spec(path):
+def check_spec(path, pytest_count=None):
     total = 0
     try:
         raw = open(path, encoding="utf-8", errors="replace").read()
@@ -145,6 +208,14 @@ def check_spec(path):
         return 1
     print(f"== spec 预检（{path}）==")
     total += report("①字段/分隔符/领衔", check_fields(spec))
+    cnt_issues, cnt_skip = check_pytest_count(spec, pytest_count)
+    if cnt_skip:
+        print("-- ②验证行计数对账（PRE-25）：SKIP（spec 未声明 pytest 计数·纯文档批）")
+    else:
+        total += report("②验证行计数对账（PRE-25·双形态）", cnt_issues)
+        if not cnt_issues:
+            got = sorted({int(m.group(1)) for m in RE_PYTEST_ARABIC.finditer(str(spec.get("changelog_body", "")))})
+            print(f"   PASS  阿拉伯+中文双写一致{f' 且等于实跑 {pytest_count}' if pytest_count is not None else '（未传 --pytest-count·建议传入实跑数）'}：{got[0]}")
     if spec.get("changelog_body") is not None:
         total += report("③文件行路径（C4-f 镜像）",
                         check_paths(extract_file_line_paths(str(spec.get("changelog_body", "")))))
@@ -185,14 +256,16 @@ def init_spec(batch, title, out_path):
 def main():
     ap = argparse.ArgumentParser(description="批次发布预检（S-31）")
     g = ap.add_mutually_exclusive_group(required=True)
-    g.add_argument("--check-spec", metavar="FILE", help="spec JSON 全量三检")
+    g.add_argument("--check-spec", metavar="FILE", help="spec JSON 全量四检（含 PRE-25 计数对账·配 --pytest-count）")
     g.add_argument("--check-message", metavar="FILE", help="消息/文本 W### 形态登记核验")
     g.add_argument("--init", metavar="BATCH", help="生成 spec 模板（配合 --title/--out）")
     ap.add_argument("--title", help="--init 用批次标题")
     ap.add_argument("--out", help="--init 输出路径")
+    ap.add_argument("--pytest-count", type=int, default=None,
+                    help="--check-spec 用：实跑 pytest 通过数（PRE-25 第四检对账基准·建议必传）")
     args = ap.parse_args()
     if args.check_spec:
-        return check_spec(args.check_spec)
+        return check_spec(args.check_spec, args.pytest_count)
     if args.check_message:
         return check_message(args.check_message)
     if not args.title or not args.out:
