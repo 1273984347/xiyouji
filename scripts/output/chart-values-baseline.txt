@@ -7,363 +7,363 @@
 #       fail→ok 或 fail→na = 可收紧（提示删/改行）；基线文件缺失 = 拒绝通过（fail-closed）。
 # 判据口径：V1 无 pageerror / V2 图表容器非空 / V3 数据量级自洽 / V4 KPI 可复算 / V5 数据源四要素（第 28 门禁口径·缺口）
 # 阈值：v3MinDataN=4 v3Ratio=0.5 chartMin=160x120 worsenFactor=0.5
-# 普查分布：族分布 {"line":14,"other":3,"sankey":5,"pie":14,"treemap":7,"bar":2,"scatter":11,"network":20,"dom":3,"3d":2,"area":3,"chord":1,"heatmap":2} · 有数据页 78/87 · V3 比例分位 p05=2.8 p25=16.071 p50=41
+# 普查分布：族分布 {"line":14,"other":3,"sankey":5,"pie":14,"treemap":7,"bar":2,"network":20,"scatter":11,"dom":3,"3d":2,"area":3,"chord":1,"heatmap":2} · 有数据页 78/87 · V3 比例分位 p05=2.8 p25=16.071 p50=41
 site/data/81-hardships-view.html|V1|n=0|ok
 site/data/81-hardships-view.html|V2|shapes=4 rows=0 domItems=8 painted=0 containers=1 scene=-|ok
 site/data/81-hardships-view.html|V3|N=0 best=- L=0 shapes=8 pathPts=14 domItems=8|na:no-data-source
 site/data/81-hardships-view.html|V4|kpi=0|na:no-kpi
 site/data/81-hardships-view.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/81-hardships-view.html|PROBE|ms=952 stable=true samples=3|ok
+site/data/81-hardships-view.html|PROBE|ms=880 stable=true samples=3|ok
 site/data/81-hardships.html|V1|n=0|ok
 site/data/81-hardships.html|V2|shapes=24 rows=85 domItems=337 painted=0 containers=4 scene=-|ok
 site/data/81-hardships.html|V3|N=81 best=EMBEDDED_DATA:$.hardships:81 r=4.16 shapes=337 pathPts=14 domItems=337|ok
 site/data/81-hardships.html|V4|kpi=4 matched=EMBEDDED_DATA:$.total=81 ↔ 81|ok
 site/data/81-hardships.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/81-hardships.html|PROBE|ms=1244 stable=true samples=3|ok
+site/data/81-hardships.html|PROBE|ms=1127 stable=true samples=3|ok
 site/data/aesthetics.html|V1|n=0|ok
 site/data/aesthetics.html|V2|shapes=60 rows=0 domItems=33 painted=0 containers=2 scene=-|ok
 site/data/aesthetics.html|V3|N=14 best=EMBEDDED:$.colors[6].representatives:2 r=30.00 shapes=60 pathPts=14 domItems=33|ok
 site/data/aesthetics.html|V4|kpi=4 matched=EMBEDDED:$.summary.total_characters=10 ↔ 10|ok
 site/data/aesthetics.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/aesthetics.html|PROBE|ms=1653 stable=true samples=5|ok
+site/data/aesthetics.html|PROBE|ms=1574 stable=true samples=5|ok
 site/data/ai-dialogue.html|V1|n=0|ok
 site/data/ai-dialogue.html|V2|shapes=0 rows=0 domItems=7 painted=0 containers=0 where=DIV>DIV.avatar|ok
 site/data/ai-dialogue.html|V3|N=8 best=EMBEDDED_DATA:$.celebrities[0].keywords:5 r=2.80 shapes=7 pathPts=14 domItems=7|ok
 site/data/ai-dialogue.html|V4|kpi=0|na:no-kpi
 site/data/ai-dialogue.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/ai-dialogue.html|PROBE|ms=1203 stable=true samples=3|ok
+site/data/ai-dialogue.html|PROBE|ms=1114 stable=true samples=3|ok
 site/data/business-model.html|V1|n=0|ok
 site/data/business-model.html|V2|shapes=136 rows=24 domItems=158 painted=0 containers=5 scene=-|ok
 site/data/business-model.html|V3|N=13 best=EMBEDDED:$.organization.organizations:2 r=79.00 shapes=158 pathPts=16 domItems=158|ok
 site/data/business-model.html|V4|kpi=4 matched=EMBEDDED:$.organization.organizations.length=2 ↔ 2|ok
 site/data/business-model.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/business-model.html|PROBE|ms=1552 stable=true samples=3|ok
+site/data/business-model.html|PROBE|ms=1472 stable=true samples=3|ok
 site/data/cave-estate.html|V1|n=0|ok
 site/data/cave-estate.html|V2|shapes=179 rows=22 domItems=161 painted=0 containers=4 scene=-|ok
 site/data/cave-estate.html|V3|N=22 best=EMBEDDED_DATA:$.caves[0].subordinates:2 r=89.50 shapes=179 pathPts=23 domItems=161|ok
 site/data/cave-estate.html|V4|kpi=4 matched=EMBEDDED_DATA:$.caves.length=22 ↔ 22|ok
 site/data/cave-estate.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/cave-estate.html|PROBE|ms=1727 stable=true samples=6|ok
+site/data/cave-estate.html|PROBE|ms=1668 stable=true samples=6|ok
 site/data/century-dialogue.html|V1|n=0|ok
 site/data/century-dialogue.html|V2|shapes=0 rows=0 domItems=6 painted=0 containers=0 where=DIV>DIV.speaker|ok
 site/data/century-dialogue.html|V3|N=3 best=EMBEDDED_DATA:$.triangle_dialogue L=3 shapes=6 pathPts=14 domItems=6|na:small-data
 site/data/century-dialogue.html|V4|kpi=0|na:no-kpi
 site/data/century-dialogue.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/century-dialogue.html|PROBE|ms=928 stable=true samples=3|ok
+site/data/century-dialogue.html|PROBE|ms=882 stable=true samples=3|ok
 site/data/chapter-stats.html|V1|n=0|ok
 site/data/chapter-stats.html|V2|shapes=511 rows=0 domItems=300 painted=0 containers=3 scene=-|ok
 site/data/chapter-stats.html|V3|N=100 best=MOCK_DATA:$.per_chapter:10 r=51.10 shapes=511 pathPts=298 domItems=300|ok
 site/data/chapter-stats.html|V4|kpi=6 matched=EMBEDDED_DATA:$.total_chapters=100 ↔ 100|ok
 site/data/chapter-stats.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/chapter-stats.html|PROBE|ms=2070 stable=true samples=8|ok
+site/data/chapter-stats.html|PROBE|ms=1973 stable=true samples=8|ok
 site/data/chapter-structure-graph.html|V1|n=0|ok
 site/data/chapter-structure-graph.html|V2|shapes=235 rows=0 domItems=200 painted=0 containers=3 scene=-|ok
 site/data/chapter-structure-graph.html|V3|N=100 best=EMBEDDED_DATA:$.kpi:6 r=39.17 shapes=235 pathPts=14 domItems=200|ok
 site/data/chapter-structure-graph.html|V4|kpi=6 matched=EMBEDDED_DATA:$.cluster.children.length=8 ↔ 8|ok
 site/data/chapter-structure-graph.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/chapter-structure-graph.html|PROBE|ms=972 stable=true samples=3|ok
+site/data/chapter-structure-graph.html|PROBE|ms=915 stable=true samples=3|ok
 site/data/character-appearance.html|V1|n=0|ok
 site/data/character-appearance.html|V2|shapes=667 rows=0 domItems=409 painted=0 containers=3 scene=-|ok
 site/data/character-appearance.html|V3|N=15 best=MOCK_CHARACTERS:$:15 r=44.47 shapes=667 pathPts=14 domItems=409|ok
 site/data/character-appearance.html|V4|kpi=3 matched=MOCK_CHARACTERS:$.length=15 ↔ 15|ok
 site/data/character-appearance.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/character-appearance.html|PROBE|ms=1476 stable=true samples=5|ok
+site/data/character-appearance.html|PROBE|ms=1550 stable=true samples=6|ok
 site/data/character-dynamic-network.html|V1|n=0|ok
-site/data/character-dynamic-network.html|V2|shapes=26 rows=4 domItems=24 painted=1150 containers=2 scene=-|ok
+site/data/character-dynamic-network.html|V2|shapes=26 rows=4 domItems=24 painted=1154 containers=2 scene=-|ok
 site/data/character-dynamic-network.html|V3|N=50 best=NODES:$[6].stages:2 r=13.00 shapes=26 pathPts=14 domItems=24|ok
 site/data/character-dynamic-network.html|V4|kpi=2 matched=NODES:$.length=35 ↔ 35|ok
 site/data/character-dynamic-network.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/character-dynamic-network.html|PROBE|ms=1040 stable=true samples=3|ok
+site/data/character-dynamic-network.html|PROBE|ms=957 stable=true samples=3|ok
 site/data/character-presence-timeline.html|V1|n=0|ok
 site/data/character-presence-timeline.html|V2|shapes=1669 rows=0 domItems=1520 painted=0 containers=5 scene=-|ok
 site/data/character-presence-timeline.html|V3|N=23 best=EMBEDDED:$.presence_by_chapter[0].characters:3 r=556.33 shapes=1669 pathPts=100 domItems=1520|ok
 site/data/character-presence-timeline.html|V4|kpi=4 matched=EMBEDDED:$.presence_by_chapter.max(chapter)=100 ↔ 100|ok
 site/data/character-presence-timeline.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/character-presence-timeline.html|PROBE|ms=1022 stable=true samples=3|ok
+site/data/character-presence-timeline.html|PROBE|ms=907 stable=true samples=3|ok
 site/data/character-relationship-3d-view.html|V1|n=0|ok
 site/data/character-relationship-3d-view.html|V2|shapes=0 rows=0 domItems=110 painted=0 containers=0 where=TR>TD.|ok
 site/data/character-relationship-3d-view.html|V3|N=0 best=- L=0 shapes=110 pathPts=14 domItems=110|na:no-data-source
 site/data/character-relationship-3d-view.html|V4|kpi=0|na:no-kpi
 site/data/character-relationship-3d-view.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/character-relationship-3d-view.html|PROBE|ms=838 stable=true samples=3|ok
+site/data/character-relationship-3d-view.html|PROBE|ms=755 stable=true samples=3|ok
 site/data/character-relationship-3d.html|V1|n=0|ok
 site/data/character-relationship-3d.html|V2|shapes=0 rows=0 domItems=5 painted=0 containers=1 scene=101|ok
 site/data/character-relationship-3d.html|V3|N=32 best=EMBEDDED_DATA:$.kpi:5 r=20.20 shapes=101 pathPts=14 domItems=5|ok
 site/data/character-relationship-3d.html|V4|kpi=3 matched=EMBEDDED_DATA:$.kpi.length=5 ↔ 5|ok
 site/data/character-relationship-3d.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/character-relationship-3d.html|PROBE|ms=1703 stable=true samples=3|ok
+site/data/character-relationship-3d.html|PROBE|ms=1346 stable=true samples=3|ok
 site/data/character-semantic-network.html|V1|n=0|ok
-site/data/character-semantic-network.html|V2|shapes=64 rows=0 domItems=54 painted=3247 containers=8 scene=-|ok
+site/data/character-semantic-network.html|V2|shapes=64 rows=0 domItems=54 painted=3232 containers=8 scene=-|ok
 site/data/character-semantic-network.html|V3|N=13 best=EMBEDDED:$.divine_hierarchy.top.nodes:2 r=32.00 shapes=64 pathPts=14 domItems=54|ok
 site/data/character-semantic-network.html|V4|kpi=6 matched=EMBEDDED:$.subnetworks.pilgrimage.nodes.length=5 ↔ 5|ok
 site/data/character-semantic-network.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/character-semantic-network.html|PROBE|ms=1239 stable=true samples=3|ok
+site/data/character-semantic-network.html|PROBE|ms=1076 stable=true samples=3|ok
 site/data/character-sentiment-arc.html|V1|n=0|ok
 site/data/character-sentiment-arc.html|V2|shapes=236 rows=0 domItems=120 painted=0 containers=5 scene=-|ok
 site/data/character-sentiment-arc.html|V3|N=10 best=EMBEDDED:$.characters:5 r=47.20 shapes=236 pathPts=56 domItems=120|ok
 site/data/character-sentiment-arc.html|V4|kpi=5 scalars=38 countScalars=0 sample=3521,1153,1138,318|na:kpi-unmatched
 site/data/character-sentiment-arc.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/character-sentiment-arc.html|PROBE|ms=2316 stable=true samples=7|ok
+site/data/character-sentiment-arc.html|PROBE|ms=1973 stable=true samples=7|ok
 site/data/chart-design.html|V1|n=0|ok
 site/data/chart-design.html|V2|shapes=141 rows=0 domItems=86 painted=0 containers=8 scene=-|ok
 site/data/chart-design.html|V3|N=12 best=EMBEDDED:$.spiral_progress.spiral_stages[1].key_events:2 r=900.50 shapes=141 pathPts=1801 domItems=86|ok
 site/data/chart-design.html|V4|kpi=6 matched=EMBEDDED:$.domino_causality.domino_chains.length=5 ↔ 5|ok
 site/data/chart-design.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/chart-design.html|PROBE|ms=1870 stable=true samples=3|ok
+site/data/chart-design.html|PROBE|ms=1503 stable=true samples=3|ok
 site/data/cognitive-psychology.html|V1|n=0|ok
 site/data/cognitive-psychology.html|V2|shapes=150 rows=23 domItems=187 painted=0 containers=4 scene=-|ok
 site/data/cognitive-psychology.html|V3|N=6 best=EMBEDDED:$.availability.tang_monk_evolution:4 r=46.75 shapes=187 pathPts=14 domItems=187|ok
 site/data/cognitive-psychology.html|V4|kpi=6 matched=EMBEDDED:$.availability.tang_monk_evolution.length=4 ↔ 4|ok
 site/data/cognitive-psychology.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/cognitive-psychology.html|PROBE|ms=1868 stable=true samples=3|ok
+site/data/cognitive-psychology.html|PROBE|ms=1551 stable=true samples=3|ok
 site/data/concept-device.html|V1|n=0|ok
 site/data/concept-device.html|V2|shapes=26 rows=0 domItems=11 painted=0 containers=3 scene=-|ok
 site/data/concept-device.html|V3|N=9 best=EMBEDDED_DATA:$.detective.candidates[0].for_:2 r=13.00 shapes=26 pathPts=19 domItems=11|ok
 site/data/concept-device.html|V4|kpi=0|na:no-kpi
 site/data/concept-device.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/concept-device.html|PROBE|ms=1451 stable=true samples=3|ok
+site/data/concept-device.html|PROBE|ms=1123 stable=true samples=3|ok
 site/data/counterfactual.html|V1|n=0|ok
 site/data/counterfactual.html|V2|shapes=20 rows=0 domItems=60 painted=0 containers=2 scene=-|ok
 site/data/counterfactual.html|V3|N=10 best=EMBEDDED_SUMMARY:$.categories:6 r=10.00 shapes=60 pathPts=23 domItems=60|ok
 site/data/counterfactual.html|V4|kpi=4 matched=EMBEDDED_SCENARIOS:$.length=10 ↔ 10|ok
 site/data/counterfactual.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/counterfactual.html|PROBE|ms=1499 stable=true samples=5|ok
+site/data/counterfactual.html|PROBE|ms=1413 stable=true samples=5|ok
 site/data/criticism-history.html|V1|n=0|ok
 site/data/criticism-history.html|V2|shapes=62 rows=6 domItems=30 painted=0 containers=4 scene=-|ok
 site/data/criticism-history.html|V3|N=9 best=EMBEDDED_DATA:$.streams[2].path:2 r=31.00 shapes=62 pathPts=14 domItems=30|ok
 site/data/criticism-history.html|V4|kpi=4 matched=EMBEDDED_DATA:$.summary.critics_count=9 ↔ 9|ok
 site/data/criticism-history.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/criticism-history.html|PROBE|ms=1224 stable=true samples=3|ok
+site/data/criticism-history.html|PROBE|ms=1131 stable=true samples=3|ok
 site/data/cross-time-danmaku.html|V1|n=0|ok
 site/data/cross-time-danmaku.html|V2|shapes=13 rows=0 domItems=13 painted=0 containers=2 scene=-|ok
 site/data/cross-time-danmaku.html|V3|N=10 best=EMBEDDED_DATA:$.age_groups[2].content:2 r=7.00 shapes=13 pathPts=14 domItems=13|ok
 site/data/cross-time-danmaku.html|V4|kpi=0|na:no-kpi
 site/data/cross-time-danmaku.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/cross-time-danmaku.html|PROBE|ms=1055 stable=true samples=3|ok
+site/data/cross-time-danmaku.html|PROBE|ms=996 stable=true samples=3|ok
 site/data/cultural-misreading.html|V1|n=0|ok
 site/data/cultural-misreading.html|V2|shapes=102 rows=12 domItems=118 painted=0 containers=3 scene=-|ok
 site/data/cultural-misreading.html|V3|N=12 best=EMBEDDED_TRANSLATION_BIAS:$[1].alt_translations:2 r=59.00 shapes=118 pathPts=14 domItems=118|ok
 site/data/cultural-misreading.html|V4|kpi=4 matched=EMBEDDED_TRANSLATION_BIAS:$.length=12 ↔ 12|ok
 site/data/cultural-misreading.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/cultural-misreading.html|PROBE|ms=1541 stable=true samples=5|ok
+site/data/cultural-misreading.html|PROBE|ms=1434 stable=true samples=5|ok
 site/data/customs-pass-route.html|V1|n=0|ok
 site/data/customs-pass-route.html|V2|shapes=16 rows=5 domItems=60 painted=0 containers=1 scene=-|ok
 site/data/customs-pass-route.html|V3|N=0 best=- L=0 shapes=60 pathPts=14 domItems=60|na:no-data-source
 site/data/customs-pass-route.html|V4|kpi=4|na:no-data-source
 site/data/customs-pass-route.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/customs-pass-route.html|PROBE|ms=1082 stable=true samples=3|ok
+site/data/customs-pass-route.html|PROBE|ms=910 stable=true samples=3|ok
 site/data/data-explorer.html|V1|n=0|ok
 site/data/data-explorer.html|V2|shapes=4 rows=0 domItems=8 painted=0 containers=1 scene=-|ok
 site/data/data-explorer.html|V3|N=0 best=- L=0 shapes=8 pathPts=14 domItems=8|na:no-data-source
 site/data/data-explorer.html|V4|kpi=0|na:no-kpi
 site/data/data-explorer.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/data-explorer.html|PROBE|ms=862 stable=true samples=3|ok
+site/data/data-explorer.html|PROBE|ms=766 stable=true samples=3|ok
 site/data/deconstruction.html|V1|n=0|ok
 site/data/deconstruction.html|V2|shapes=131 rows=16 domItems=115 painted=0 containers=3 scene=-|ok
 site/data/deconstruction.html|V3|N=12 best=EMBEDDED_SUMMARY:$.year_range:2 r=65.50 shapes=131 pathPts=14 domItems=115|ok
 site/data/deconstruction.html|V4|kpi=4 matched=EMBEDDED_DECONSTRUCTION_WORKS:$.length=7 ↔ 7|ok
 site/data/deconstruction.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/deconstruction.html|PROBE|ms=1532 stable=true samples=5|ok
+site/data/deconstruction.html|PROBE|ms=1396 stable=true samples=5|ok
 site/data/dialogue-sentiment.html|V1|n=0|ok
 site/data/dialogue-sentiment.html|V2|shapes=695 rows=0 domItems=531 painted=0 containers=6 scene=-|ok
 site/data/dialogue-sentiment.html|V3|N=100 best=EMBEDDED:$.sentiment.speaker_sentiment[9].top_positive_words:3 r=231.67 shapes=695 pathPts=276 domItems=531|ok
 site/data/dialogue-sentiment.html|V4|kpi=7 matched=EMBEDDED:$.sentiment.total_dialogues=6617 ↔ 6617|ok
 site/data/dialogue-sentiment.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/dialogue-sentiment.html|PROBE|ms=1955 stable=true samples=7|ok
+site/data/dialogue-sentiment.html|PROBE|ms=1907 stable=true samples=7|ok
 site/data/ecology.html|V1|n=0|ok
 site/data/ecology.html|V2|shapes=253 rows=23 domItems=203 painted=0 containers=7 scene=-|ok
 site/data/ecology.html|V3|N=10 best=EMBEDDED:$.pulse.pulse_cases[1].monster_names:2 r=126.50 shapes=253 pathPts=32 domItems=203|ok
 site/data/ecology.html|V4|kpi=9 matched=EMBEDDED:$.invasive.invasive_species_list.length=7 ↔ 7|ok
 site/data/ecology.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/ecology.html|PROBE|ms=1317 stable=true samples=3|ok
+site/data/ecology.html|PROBE|ms=1148 stable=true samples=3|ok
 site/data/emotional-heatmap.html|V1|n=0|ok
 site/data/emotional-heatmap.html|V2|shapes=511 rows=0 domItems=183 painted=0 containers=2 scene=-|ok
 site/data/emotional-heatmap.html|V3|N=160 best=EMBEDDED_DATA:$.scholars:8 r=63.88 shapes=511 pathPts=14 domItems=183|ok
 site/data/emotional-heatmap.html|V4|kpi=4 matched=EMBEDDED_DATA:$.meta.scholar_count=8 ↔ 8|ok
 site/data/emotional-heatmap.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/emotional-heatmap.html|PROBE|ms=1127 stable=true samples=3|ok
+site/data/emotional-heatmap.html|PROBE|ms=998 stable=true samples=3|ok
 site/data/ethics-consumption.html|V1|n=0|ok
 site/data/ethics-consumption.html|V2|shapes=71 rows=0 domItems=58 painted=0 containers=2 scene=-|ok
 site/data/ethics-consumption.html|V3|N=12 best=EMBEDDED:$.mount_rights_report.key_findings[1].implicated_monsters:2 r=35.50 shapes=71 pathPts=14 domItems=58|ok
 site/data/ethics-consumption.html|V4|kpi=6 matched=EMBEDDED:$.mount_rights_report.key_findings.length=5 ↔ 5|ok
 site/data/ethics-consumption.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/ethics-consumption.html|PROBE|ms=1341 stable=true samples=3|ok
+site/data/ethics-consumption.html|PROBE|ms=1135 stable=true samples=3|ok
 site/data/famous-time-travel.html|V1|n=0|ok
 site/data/famous-time-travel.html|V2|shapes=14 rows=0 domItems=11 painted=0 containers=2 scene=-|ok
 site/data/famous-time-travel.html|V3|N=6 best=EMBEDDED_DATA:$.scene_illustrations:2 r=7.00 shapes=14 pathPts=14 domItems=11|ok
 site/data/famous-time-travel.html|V4|kpi=0|na:no-kpi
 site/data/famous-time-travel.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/famous-time-travel.html|PROBE|ms=1059 stable=true samples=3|ok
+site/data/famous-time-travel.html|PROBE|ms=904 stable=true samples=3|ok
 site/data/four-dimensional-research-network.html|V1|n=0|ok
-site/data/four-dimensional-research-network.html|V2|shapes=236 rows=0 domItems=112 painted=3852 containers=6 scene=-|ok
+site/data/four-dimensional-research-network.html|V2|shapes=236 rows=0 domItems=112 painted=3890 containers=6 scene=-|ok
 site/data/four-dimensional-research-network.html|V3|N=32 best=EMBEDDED_DATA:$.dimensions:4 r=59.00 shapes=236 pathPts=62 domItems=112|ok
 site/data/four-dimensional-research-network.html|V4|kpi=4 matched=EMBEDDED_DATA:$.dimensions.length=4 ↔ 4|ok
 site/data/four-dimensional-research-network.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/four-dimensional-research-network.html|PROBE|ms=1166 stable=true samples=3|ok
+site/data/four-dimensional-research-network.html|PROBE|ms=1013 stable=true samples=3|ok
 site/data/four-heavenly-kings-artifacts.html|V1|n=0|ok
 site/data/four-heavenly-kings-artifacts.html|V2|shapes=67 rows=4 domItems=29 painted=0 containers=3 scene=-|ok
 site/data/four-heavenly-kings-artifacts.html|V3|N=10 best=EMBEDDED_DATA:$.kings:4 r=16.75 shapes=67 pathPts=14 domItems=29|ok
 site/data/four-heavenly-kings-artifacts.html|V4|kpi=5 matched=EMBEDDED_DATA:$.kings.length=4 ↔ 4|ok
 site/data/four-heavenly-kings-artifacts.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/four-heavenly-kings-artifacts.html|PROBE|ms=1165 stable=true samples=3|ok
+site/data/four-heavenly-kings-artifacts.html|PROBE|ms=959 stable=true samples=3|ok
 site/data/game-webnovel.html|V1|n=0|ok
 site/data/game-webnovel.html|V2|shapes=118 rows=10 domItems=110 painted=0 containers=5 scene=-|ok
 site/data/game-webnovel.html|V3|N=12 best=EMBEDDED:$.character_cards[11].skills:2 r=59.00 shapes=118 pathPts=14 domItems=110|ok
 site/data/game-webnovel.html|V4|kpi=6 matched=EMBEDDED:$.character_cards.length=12 ↔ 12|ok
 site/data/game-webnovel.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/game-webnovel.html|PROBE|ms=1424 stable=true samples=3|ok
+site/data/game-webnovel.html|PROBE|ms=1358 stable=true samples=3|ok
 site/data/global-pattern.html|V1|n=0|ok
 site/data/global-pattern.html|V2|shapes=31 rows=16 domItems=72 painted=0 containers=2 scene=-|ok
 site/data/global-pattern.html|V3|N=8 best=EMBEDDED_SUMMARY:$.year_range:2 r=36.00 shapes=72 pathPts=14 domItems=72|ok
 site/data/global-pattern.html|V4|kpi=4 matched=EMBEDDED_PILGRIMS:$.length=8 ↔ 8|ok
 site/data/global-pattern.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/global-pattern.html|PROBE|ms=1631 stable=true samples=5|ok
+site/data/global-pattern.html|PROBE|ms=1475 stable=true samples=5|ok
 site/data/graph-explorer.html|V1|n=0|ok
 site/data/graph-explorer.html|V2|shapes=41 rows=0 domItems=40 painted=0 containers=1 scene=-|ok
 site/data/graph-explorer.html|V3|N=0 best=- L=0 shapes=41 pathPts=14 domItems=40|na:no-data-source
 site/data/graph-explorer.html|V4|kpi=0|na:no-kpi
 site/data/graph-explorer.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/graph-explorer.html|PROBE|ms=899 stable=true samples=3|ok
+site/data/graph-explorer.html|PROBE|ms=839 stable=true samples=3|ok
 site/data/guanyin-six-roles-network.html|V1|n=0|ok
-site/data/guanyin-six-roles-network.html|V2|shapes=246 rows=0 domItems=136 painted=5997 containers=6 scene=-|ok
+site/data/guanyin-six-roles-network.html|V2|shapes=246 rows=0 domItems=136 painted=5960 containers=6 scene=-|ok
 site/data/guanyin-six-roles-network.html|V3|N=34 best=EMBEDDED_DATA:$.roles:6 r=41.00 shapes=246 pathPts=56 domItems=136|ok
 site/data/guanyin-six-roles-network.html|V4|kpi=6 matched=EMBEDDED_DATA:$.roles.length=6 ↔ 6|ok
 site/data/guanyin-six-roles-network.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/guanyin-six-roles-network.html|PROBE|ms=1153 stable=true samples=3|ok
+site/data/guanyin-six-roles-network.html|PROBE|ms=1042 stable=true samples=3|ok
 site/data/hardship-difficulty-heatmap.html|V1|n=0|ok
 site/data/hardship-difficulty-heatmap.html|V2|shapes=396 rows=85 domItems=413 painted=0 containers=5 scene=-|ok
 site/data/hardship-difficulty-heatmap.html|V3|N=81 best=EMBEDDED_DATA:$:81 r=5.10 shapes=413 pathPts=14 domItems=413|ok
 site/data/hardship-difficulty-heatmap.html|V4|kpi=4 matched=EMBEDDED_DATA:$.length=81 ↔ 81|ok
 site/data/hardship-difficulty-heatmap.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/hardship-difficulty-heatmap.html|PROBE|ms=1237 stable=true samples=3|ok
+site/data/hardship-difficulty-heatmap.html|PROBE|ms=1045 stable=true samples=3|ok
 site/data/hardship-heatmap.html|V1|n=0|ok
 site/data/hardship-heatmap.html|V2|shapes=173 rows=5 domItems=126 painted=0 containers=3 scene=-|ok
 site/data/hardship-heatmap.html|V3|N=81 best=EMBEDDED_DATA:$:81 r=2.14 shapes=173 pathPts=14 domItems=126|ok
 site/data/hardship-heatmap.html|V4|kpi=4 matched=EMBEDDED_DATA:$.length=81 ↔ 81|ok
 site/data/hardship-heatmap.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/hardship-heatmap.html|PROBE|ms=1129 stable=true samples=3|ok
+site/data/hardship-heatmap.html|PROBE|ms=1044 stable=true samples=3|ok
 site/data/heaven-power-network.html|V1|n=0|ok
-site/data/heaven-power-network.html|V2|shapes=225 rows=6 domItems=109 painted=2440 containers=7 scene=-|ok
+site/data/heaven-power-network.html|V2|shapes=225 rows=6 domItems=109 painted=2415 containers=7 scene=-|ok
 site/data/heaven-power-network.html|V3|N=27 best=EMBEDDED_DATA:$.summary.byStage:3 r=75.00 shapes=225 pathPts=23 domItems=109|ok
 site/data/heaven-power-network.html|V4|kpi=13 matched=EMBEDDED_DATA:$.network.nodes.length=20 ↔ 20|ok
 site/data/heaven-power-network.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/heaven-power-network.html|PROBE|ms=1323 stable=true samples=3|ok
+site/data/heaven-power-network.html|PROBE|ms=1126 stable=true samples=3|ok
 site/data/intertextuality-network.html|V1|n=0|ok
-site/data/intertextuality-network.html|V2|shapes=192 rows=7 domItems=140 painted=1840 containers=6 scene=-|ok
+site/data/intertextuality-network.html|V2|shapes=192 rows=7 domItems=140 painted=1860 containers=6 scene=-|ok
 site/data/intertextuality-network.html|V3|N=22 best=EMBEDDED_DATA:$.intertextuality.theorists:4 r=48.00 shapes=192 pathPts=14 domItems=140|ok
 site/data/intertextuality-network.html|V4|kpi=6 matched=EMBEDDED_DATA:$.intertextuality.texts.max(互文强度)=100 ↔ 1|ok
 site/data/intertextuality-network.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/intertextuality-network.html|PROBE|ms=1187 stable=true samples=3|ok
+site/data/intertextuality-network.html|PROBE|ms=1103 stable=true samples=3|ok
 site/data/journey-geo-3d.html|V1|n=0|ok
 site/data/journey-geo-3d.html|V2|shapes=0 rows=0 domItems=7 painted=0 containers=1 scene=40|ok
 site/data/journey-geo-3d.html|V3|N=17 best=EMBEDDED_DATA:$.nodes:17 r=2.35 shapes=40 pathPts=14 domItems=7|ok
 site/data/journey-geo-3d.html|V4|kpi=0|na:no-kpi
 site/data/journey-geo-3d.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/journey-geo-3d.html|PROBE|ms=1449 stable=true samples=3|ok
+site/data/journey-geo-3d.html|PROBE|ms=1199 stable=true samples=3|ok
 site/data/journey-geo-semiotics.html|V1|n=0|ok
 site/data/journey-geo-semiotics.html|V2|shapes=19 rows=0 domItems=10 painted=857 containers=2 scene=-|ok
 site/data/journey-geo-semiotics.html|V3|N=7 best=EMBEDDED_DATA:$.nodes:7 r=2.71 shapes=19 pathPts=14 domItems=10|ok
 site/data/journey-geo-semiotics.html|V4|kpi=0|na:no-kpi
 site/data/journey-geo-semiotics.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/journey-geo-semiotics.html|PROBE|ms=1075 stable=true samples=3|ok
+site/data/journey-geo-semiotics.html|PROBE|ms=961 stable=true samples=3|ok
 site/data/journey-map-interactive.html|V1|n=0|ok
 site/data/journey-map-interactive.html|V2|shapes=73 rows=0 domItems=54 painted=0 containers=2 scene=-|ok
 site/data/journey-map-interactive.html|V3|N=17 best=EMBEDDED_DATA:$.kpi:5 r=14.60 shapes=73 pathPts=49 domItems=54|ok
 site/data/journey-map-interactive.html|V4|kpi=4 matched=EMBEDDED_DATA:$.nodes.mean(id)=8 ↔ 8|ok
 site/data/journey-map-interactive.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/journey-map-interactive.html|PROBE|ms=1175 stable=true samples=3|ok
+site/data/journey-map-interactive.html|PROBE|ms=1120 stable=true samples=3|ok
 site/data/journey-route.html|V1|n=0|ok
 site/data/journey-route.html|V2|shapes=34 rows=9 domItems=54 painted=0 containers=2 scene=-|ok
 site/data/journey-route.html|V3|N=5 best=EMBEDDED_MOCK:$.places:5 r=10.80 shapes=54 pathPts=23 domItems=54|ok
 site/data/journey-route.html|V4|kpi=4 matched=EMBEDDED_MOCK:$.total_places=5 ↔ 5|ok
 site/data/journey-route.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/journey-route.html|PROBE|ms=1210 stable=true samples=3|ok
+site/data/journey-route.html|PROBE|ms=1065 stable=true samples=3|ok
 site/data/journey-spacetime.html|V1|n=0|ok
 site/data/journey-spacetime.html|V2|shapes=142 rows=4 domItems=73 painted=0 containers=1 scene=-|ok
 site/data/journey-spacetime.html|V3|N=68 best=LOCATIONS:$:24 r=7.67 shapes=142 pathPts=184 domItems=73|ok
 site/data/journey-spacetime.html|V4|kpi=4 matched=LOCATIONS:$.length=24 ↔ 24|ok
 site/data/journey-spacetime.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/journey-spacetime.html|PROBE|ms=1240 stable=true samples=3|ok
+site/data/journey-spacetime.html|PROBE|ms=1026 stable=true samples=3|ok
 site/data/jurisprudence.html|V1|n=0|ok
 site/data/jurisprudence.html|V2|shapes=156 rows=18 domItems=131 painted=0 containers=6 scene=-|ok
 site/data/jurisprudence.html|V3|N=10 best=EMBEDDED:$.artifact.artifact_inventory[1].usage_history:2 r=78.00 shapes=156 pathPts=14 domItems=131|ok
 site/data/jurisprudence.html|V4|kpi=7 matched=EMBEDDED:$.sentencing.sentencing_cases.length=10 ↔ 10|ok
 site/data/jurisprudence.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/jurisprudence.html|PROBE|ms=1401 stable=true samples=3|ok
+site/data/jurisprudence.html|PROBE|ms=1337 stable=true samples=3|ok
 site/data/karma-reincarnation.html|V1|n=0|ok
 site/data/karma-reincarnation.html|V2|shapes=75 rows=24 domItems=220 painted=0 containers=4 scene=-|ok
 site/data/karma-reincarnation.html|V3|N=10 best=EMBEDDED:$.samsara.realms[2].notable_cases:2 r=110.00 shapes=220 pathPts=44 domItems=220|ok
 site/data/karma-reincarnation.html|V4|kpi=4 matched=EMBEDDED:$.registry.cases.length=8 ↔ 8|ok
 site/data/karma-reincarnation.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/karma-reincarnation.html|PROBE|ms=1416 stable=true samples=3|ok
+site/data/karma-reincarnation.html|PROBE|ms=1257 stable=true samples=3|ok
 site/data/language-style-radar.html|V1|n=0|ok
 site/data/language-style-radar.html|V2|shapes=85 rows=0 domItems=42 painted=0 containers=2 scene=-|ok
 site/data/language-style-radar.html|V3|N=7 best=EMBEDDED_DATA:$.kpi:5 r=17.00 shapes=85 pathPts=14 domItems=42|ok
 site/data/language-style-radar.html|V4|kpi=3 matched=EMBEDDED_DATA:$.kpi.length=5 ↔ 5|ok
 site/data/language-style-radar.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/language-style-radar.html|PROBE|ms=981 stable=true samples=3|ok
+site/data/language-style-radar.html|PROBE|ms=896 stable=true samples=3|ok
 site/data/linguistics.html|V1|n=0|ok
 site/data/linguistics.html|V2|shapes=223 rows=8 domItems=96 painted=0 containers=6 scene=-|ok
 site/data/linguistics.html|V3|N=8 best=EMBEDDED:$.power_distance.dialogue_pairs[4].representative_dialogues:3 r=74.33 shapes=223 pathPts=14 domItems=96|ok
 site/data/linguistics.html|V4|kpi=14 matched=EMBEDDED:$.incantation.incantations.length=8 ↔ 8|ok
 site/data/linguistics.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/linguistics.html|PROBE|ms=1397 stable=true samples=3|ok
+site/data/linguistics.html|PROBE|ms=1200 stable=true samples=3|ok
 site/data/magic-system.html|V1|n=0|ok
 site/data/magic-system.html|V2|shapes=47 rows=24 domItems=128 painted=0 containers=5 scene=-|ok
 site/data/magic-system.html|V3|N=21 best=EMBEDDED_DATA:$.magic_energy_sankey.tianting_budget.revenue:4 r=32.00 shapes=128 pathPts=23 domItems=128|ok
 site/data/magic-system.html|V4|kpi=4 matched=EMBEDDED_DATA:$.magic_system.length=5 ↔ 5|ok
 site/data/magic-system.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/magic-system.html|PROBE|ms=1247 stable=true samples=3|ok
+site/data/magic-system.html|PROBE|ms=1170 stable=true samples=3|ok
 site/data/material-archaeology.html|V1|n=0|ok
 site/data/material-archaeology.html|V2|shapes=203 rows=45 domItems=324 painted=0 containers=8 scene=-|ok
 site/data/material-archaeology.html|V3|N=8 best=EMBEDDED_DATA:$.cave_architecture.architectural_types[1].representative_caves:2 r=162.00 shapes=324 pathPts=16 domItems=324|ok
 site/data/material-archaeology.html|V4|kpi=18 matched=EMBEDDED_DATA:$.artifact_materials.artifact_material_reports.length=8 ↔ 8|ok
 site/data/material-archaeology.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/material-archaeology.html|PROBE|ms=1770 stable=true samples=5|ok
+site/data/material-archaeology.html|PROBE|ms=1766 stable=true samples=5|ok
 site/data/mbti-evolution.html|V1|n=0|ok
 site/data/mbti-evolution.html|V2|shapes=296 rows=0 domItems=120 painted=0 containers=7 scene=-|ok
 site/data/mbti-evolution.html|V3|N=8 best=EMBEDDED:$.stages:4 r=74.00 shapes=296 pathPts=25 domItems=120|ok
 site/data/mbti-evolution.html|V4|kpi=4 matched=EMBEDDED:$.stages.length=4 ↔ 4|ok
 site/data/mbti-evolution.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/mbti-evolution.html|PROBE|ms=1061 stable=true samples=3|ok
+site/data/mbti-evolution.html|PROBE|ms=1001 stable=true samples=3|ok
 site/data/methodology-matrix.html|V1|n=0|ok
 site/data/methodology-matrix.html|V2|shapes=102 rows=25 domItems=130 painted=0 containers=2 scene=-|ok
 site/data/methodology-matrix.html|V3|N=15 best=EMBEDDED:$.villain_matrix.axes.x_axis.range:2 r=65.00 shapes=130 pathPts=28 domItems=130|ok
 site/data/methodology-matrix.html|V4|kpi=5 matched=EMBEDDED:$.villain_matrix.quadrants.length=4 ↔ 4|ok
 site/data/methodology-matrix.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/methodology-matrix.html|PROBE|ms=1255 stable=true samples=3|ok
+site/data/methodology-matrix.html|PROBE|ms=1275 stable=true samples=3|ok
 site/data/ming-political-thought-comparison.html|V1|n=0|ok
 site/data/ming-political-thought-comparison.html|V2|shapes=153 rows=0 domItems=70 painted=0 containers=5 scene=-|ok
 site/data/ming-political-thought-comparison.html|V3|N=12 best=EMBEDDED_DATA:$.kpi:6 r=25.50 shapes=153 pathPts=14 domItems=70|ok
 site/data/ming-political-thought-comparison.html|V4|kpi=6 matched=EMBEDDED_DATA:$.kpi.max(value)=9 ↔ 9|ok
 site/data/ming-political-thought-comparison.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/ming-political-thought-comparison.html|PROBE|ms=1108 stable=true samples=3|ok
+site/data/ming-political-thought-comparison.html|PROBE|ms=1146 stable=true samples=3|ok
 site/data/monster-background.html|V1|n=0|ok
 site/data/monster-background.html|V2|shapes=91 rows=9 domItems=90 painted=0 containers=3 scene=-|ok
 site/data/monster-background.html|V3|N=10 best=EMBEDDED:$.outcomes.outcome_types[4].typical_cases:2 r=45.50 shapes=91 pathPts=14 domItems=90|ok
 site/data/monster-background.html|V4|kpi=4 matched=EMBEDDED:$.background.background_types.sum(count)=69 ↔ 69|ok
 site/data/monster-background.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/monster-background.html|PROBE|ms=1208 stable=true samples=3|ok
+site/data/monster-background.html|PROBE|ms=1210 stable=true samples=3|ok
 site/data/monster-capability-radar.html|V1|n=0|ok
 site/data/monster-capability-radar.html|V2|shapes=111 rows=0 domItems=81 painted=0 containers=4 scene=-|ok
 site/data/monster-capability-radar.html|V3|N=15 best=EMBEDDED_DATA:$.kpi:4 r=27.75 shapes=111 pathPts=14 domItems=81|ok
 site/data/monster-capability-radar.html|V4|kpi=4 matched=EMBEDDED_DATA:$.kpi.length=4 ↔ 4|ok
 site/data/monster-capability-radar.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/monster-capability-radar.html|PROBE|ms=1136 stable=true samples=3|ok
+site/data/monster-capability-radar.html|PROBE|ms=1105 stable=true samples=3|ok
 site/data/monster-ecology-network.html|V1|n=0|ok
 site/data/monster-ecology-network.html|V2|shapes=168 rows=7 domItems=86 painted=4867 containers=5 scene=-|ok
 site/data/monster-ecology-network.html|V3|N=42 best=EMBEDDED_DATA:$.kpi:5 r=33.60 shapes=168 pathPts=14 domItems=86|ok
 site/data/monster-ecology-network.html|V4|kpi=5 matched=EMBEDDED_DATA:$.kpi.max(value)=73 ↔ 73|ok
 site/data/monster-ecology-network.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/monster-ecology-network.html|PROBE|ms=1103 stable=true samples=3|ok
+site/data/monster-ecology-network.html|PROBE|ms=1104 stable=true samples=3|ok
 site/data/monster-female-network.html|V1|n=0|ok
-site/data/monster-female-network.html|V2|shapes=225 rows=17 domItems=170 painted=3675 containers=5 scene=-|ok
+site/data/monster-female-network.html|V2|shapes=225 rows=17 domItems=170 painted=3653 containers=5 scene=-|ok
 site/data/monster-female-network.html|V3|N=32 best=EMBEDDED_DATA:$.monsterFemale.timeline:14 r=16.07 shapes=225 pathPts=14 domItems=170|ok
 site/data/monster-female-network.html|V4|kpi=6 matched=EMBEDDED_DATA:$.monsterFemale.nodes.length=17 ↔ 17|ok
 site/data/monster-female-network.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/monster-female-network.html|PROBE|ms=1119 stable=true samples=3|ok
+site/data/monster-female-network.html|PROBE|ms=1091 stable=true samples=3|ok
 site/data/monster-hierarchy-network.html|V1|n=0|ok
-site/data/monster-hierarchy-network.html|V2|shapes=224 rows=0 domItems=113 painted=2278 containers=7 scene=-|ok
+site/data/monster-hierarchy-network.html|V2|shapes=224 rows=0 domItems=113 painted=2276 containers=7 scene=-|ok
 site/data/monster-hierarchy-network.html|V3|N=23 best=EMBEDDED_DATA:$.tiers:4 r=56.00 shapes=224 pathPts=23 domItems=113|ok
 site/data/monster-hierarchy-network.html|V4|kpi=13 matched=EMBEDDED_DATA:$.tiers.length=4 ↔ 4|ok
 site/data/monster-hierarchy-network.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
@@ -373,160 +373,160 @@ site/data/monster-sociology.html|V2|shapes=151 rows=20 domItems=165 painted=0 co
 site/data/monster-sociology.html|V3|N=10 best=EMBEDDED:$.signal.signal_methods[0].cases:2 r=82.50 shapes=165 pathPts=14 domItems=165|ok
 site/data/monster-sociology.html|V4|kpi=4 matched=EMBEDDED:$.crime.crime_types.length=5 ↔ 5|ok
 site/data/monster-sociology.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/monster-sociology.html|PROBE|ms=1428 stable=true samples=3|ok
+site/data/monster-sociology.html|PROBE|ms=1449 stable=true samples=3|ok
 site/data/monster-victims-network.html|V1|n=0|ok
-site/data/monster-victims-network.html|V2|shapes=125 rows=0 domItems=66 painted=2843 containers=5 scene=-|ok
+site/data/monster-victims-network.html|V2|shapes=125 rows=0 domItems=66 painted=2827 containers=5 scene=-|ok
 site/data/monster-victims-network.html|V3|N=16 best=EMBEDDED_DATA:$.victims:4 r=31.25 shapes=125 pathPts=14 domItems=66|ok
 site/data/monster-victims-network.html|V4|kpi=6 matched=EMBEDDED_DATA:$.victims.length=4 ↔ 4|ok
 site/data/monster-victims-network.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/monster-victims-network.html|PROBE|ms=1059 stable=true samples=3|ok
+site/data/monster-victims-network.html|PROBE|ms=1031 stable=true samples=3|ok
 site/data/music-structure.html|V1|n=0|ok
 site/data/music-structure.html|V2|shapes=166 rows=43 domItems=97 painted=0 containers=3 scene=-|ok
 site/data/music-structure.html|V3|N=97 best=EMBEDDED_DATA:$.movement:4 r=61.00 shapes=166 pathPts=244 domItems=97|ok
 site/data/music-structure.html|V4|kpi=6 matched=EMBEDDED_DATA:$.summary.total_sounds=16 ↔ 16|ok
 site/data/music-structure.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/music-structure.html|PROBE|ms=995 stable=true samples=3|ok
+site/data/music-structure.html|PROBE|ms=1038 stable=true samples=3|ok
 site/data/narrative-experiment.html|V1|n=0|ok
 site/data/narrative-experiment.html|V2|shapes=28 rows=0 domItems=38 painted=0 containers=2 scene=-|ok
 site/data/narrative-experiment.html|V3|N=12 best=EMBEDDED:$.board_game.game_phases:3 r=12.67 shapes=38 pathPts=14 domItems=38|ok
 site/data/narrative-experiment.html|V4|kpi=5 matched=EMBEDDED:$.board_game.players.length=4 ↔ 4|ok
 site/data/narrative-experiment.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/narrative-experiment.html|PROBE|ms=1249 stable=true samples=3|ok
+site/data/narrative-experiment.html|PROBE|ms=1272 stable=true samples=3|ok
 site/data/narrative-rhythm-curve.html|V1|n=0|ok
 site/data/narrative-rhythm-curve.html|V2|shapes=168 rows=0 domItems=166 painted=0 containers=2 scene=-|ok
 site/data/narrative-rhythm-curve.html|V3|N=100 best=EMBEDDED_DATA:$.kpi:5 r=119.20 shapes=168 pathPts=596 domItems=166|ok
 site/data/narrative-rhythm-curve.html|V4|kpi=5 matched=EMBEDDED_DATA:$.density[8].chapter=9 ↔ 9|ok
 site/data/narrative-rhythm-curve.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/narrative-rhythm-curve.html|PROBE|ms=896 stable=true samples=3|ok
+site/data/narrative-rhythm-curve.html|PROBE|ms=951 stable=true samples=3|ok
 site/data/narratology-12d-network.html|V1|n=0|ok
 site/data/narratology-12d-network.html|V2|shapes=210 rows=12 domItems=138 painted=3699 containers=5 scene=-|ok
 site/data/narratology-12d-network.html|V3|N=30 best=EMBEDDED_DATA:$.narratology.dimensions:12 r=17.50 shapes=210 pathPts=14 domItems=138|ok
 site/data/narratology-12d-network.html|V4|kpi=7 matched=EMBEDDED_DATA:$.narratology.dimensions.length=12 ↔ 12|ok
 site/data/narratology-12d-network.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/narratology-12d-network.html|PROBE|ms=998 stable=true samples=3|ok
+site/data/narratology-12d-network.html|PROBE|ms=1044 stable=true samples=3|ok
 site/data/narratology-16d-network.html|V1|n=0|ok
 site/data/narratology-16d-network.html|V2|shapes=270 rows=16 domItems=179 painted=4873 containers=5 scene=-|ok
 site/data/narratology-16d-network.html|V3|N=32 best=EMBEDDED_DATA:$.narratology.dimensions[0].theorists:4 r=67.50 shapes=270 pathPts=14 domItems=179|ok
 site/data/narratology-16d-network.html|V4|kpi=7 matched=EMBEDDED_DATA:$.narratology.dimensions.length=16 ↔ 16|ok
 site/data/narratology-16d-network.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/narratology-16d-network.html|PROBE|ms=1128 stable=true samples=3|ok
+site/data/narratology-16d-network.html|PROBE|ms=1151 stable=true samples=3|ok
 site/data/perf-canvas-rendering.html|V1|n=0|ok
 site/data/perf-canvas-rendering.html|V2|shapes=1500 rows=0 domItems=1000 painted=54000 containers=2 scene=-|ok
 site/data/perf-canvas-rendering.html|V3|N=0 best=- L=0 shapes=1500 pathPts=14 domItems=1000|na:no-data-source
 site/data/perf-canvas-rendering.html|V4|kpi=4|na:no-data-source
 site/data/perf-canvas-rendering.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/perf-canvas-rendering.html|PROBE|ms=957 stable=true samples=3|ok
+site/data/perf-canvas-rendering.html|PROBE|ms=971 stable=true samples=3|ok
 site/data/philosophy.html|V1|n=0|ok
 site/data/philosophy.html|V2|shapes=151 rows=14 domItems=116 painted=0 containers=4 scene=-|ok
 site/data/philosophy.html|V3|N=8 best=EMBEDDED:$.summary.concept_list:2 r=75.50 shapes=151 pathPts=23 domItems=116|ok
 site/data/philosophy.html|V4|kpi=4 matched=EMBEDDED:$.mind_monkey.six_phases.length=6 ↔ 6|ok
 site/data/philosophy.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/philosophy.html|PROBE|ms=1188 stable=true samples=3|ok
+site/data/philosophy.html|PROBE|ms=1239 stable=true samples=3|ok
 site/data/pilgrim-team-dynamic-network.html|V1|n=0|ok
-site/data/pilgrim-team-dynamic-network.html|V2|shapes=34 rows=5 domItems=19 painted=1887 containers=3 scene=-|ok
+site/data/pilgrim-team-dynamic-network.html|V2|shapes=34 rows=5 domItems=19 painted=1898 containers=3 scene=-|ok
 site/data/pilgrim-team-dynamic-network.html|V3|N=10 best=EMBEDDED_DATA:$.phases.storming.key_events:3 r=11.33 shapes=34 pathPts=14 domItems=19|ok
 site/data/pilgrim-team-dynamic-network.html|V4|kpi=5 matched=EMBEDDED_DATA:$.kpi.length=5 ↔ 5|ok
 site/data/pilgrim-team-dynamic-network.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/pilgrim-team-dynamic-network.html|PROBE|ms=998 stable=true samples=3|ok
+site/data/pilgrim-team-dynamic-network.html|PROBE|ms=1084 stable=true samples=3|ok
 site/data/pilgrim-team-psychology-arc.html|V1|n=0|ok
 site/data/pilgrim-team-psychology-arc.html|V2|shapes=307 rows=0 domItems=136 painted=0 containers=5 scene=-|ok
 site/data/pilgrim-team-psychology-arc.html|V3|N=16 best=EMBEDDED_DATA:$.kpi:5 r=61.40 shapes=307 pathPts=46 domItems=136|ok
 site/data/pilgrim-team-psychology-arc.html|V4|kpi=5 matched=EMBEDDED_DATA:$.kpi.length=5 ↔ 5|ok
 site/data/pilgrim-team-psychology-arc.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/pilgrim-team-psychology-arc.html|PROBE|ms=994 stable=true samples=3|ok
+site/data/pilgrim-team-psychology-arc.html|PROBE|ms=1033 stable=true samples=3|ok
 site/data/poetry-rhythm-analysis.html|V1|n=0|ok
 site/data/poetry-rhythm-analysis.html|V2|shapes=179 rows=0 domItems=103 painted=0 containers=5 scene=-|ok
 site/data/poetry-rhythm-analysis.html|V3|N=10 best=EMBEDDED_DATA:$.kpi:5 r=35.80 shapes=179 pathPts=14 domItems=103|ok
 site/data/poetry-rhythm-analysis.html|V4|kpi=5 matched=EMBEDDED_DATA:$.kpi.length=5 ↔ 5|ok
 site/data/poetry-rhythm-analysis.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/poetry-rhythm-analysis.html|PROBE|ms=1013 stable=true samples=3|ok
+site/data/poetry-rhythm-analysis.html|PROBE|ms=1098 stable=true samples=3|ok
 site/data/power-resources.html|V1|n=0|ok
 site/data/power-resources.html|V2|shapes=113 rows=25 domItems=194 painted=0 containers=4 scene=-|ok
 site/data/power-resources.html|V3|N=10 best=EMBEDDED:$.structure.structure_analysis.t0_factions:2 r=97.00 shapes=194 pathPts=14 domItems=194|ok
 site/data/power-resources.html|V4|kpi=5 matched=EMBEDDED:$.structure.factions.length=7 ↔ 7|ok
 site/data/power-resources.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/power-resources.html|PROBE|ms=1238 stable=true samples=3|ok
+site/data/power-resources.html|PROBE|ms=1389 stable=true samples=3|ok
 site/data/relationships.html|V1|n=0|ok
-site/data/relationships.html|V2|shapes=1207 rows=55 domItems=833 painted=7742 containers=11 scene=-|ok
+site/data/relationships.html|V2|shapes=1207 rows=55 domItems=833 painted=7720 containers=11 scene=-|ok
 site/data/relationships.html|V3|N=329 best=EMBEDDED:$.faction.balance_analysis.dominant_factions:2 r=603.50 shapes=1207 pathPts=199 domItems=833|ok
 site/data/relationships.html|V4|kpi=5 matched=EMBEDDED:$.faction.factions.length=7 ↔ 7|ok
 site/data/relationships.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/relationships.html|PROBE|ms=1311 stable=true samples=3|ok
+site/data/relationships.html|PROBE|ms=1484 stable=true samples=3|ok
 site/data/risk-project.html|V1|n=0|ok
 site/data/risk-project.html|V2|shapes=201 rows=20 domItems=210 painted=0 containers=5 scene=-|ok
 site/data/risk-project.html|V3|N=10 best=EMBEDDED:$.risk.risk_matrix.high_probability_high_impact:2 r=149.00 shapes=210 pathPts=298 domItems=210|ok
 site/data/risk-project.html|V4|kpi=5 matched=EMBEDDED:$.risk.risk_categories.length=5 ↔ 5|ok
 site/data/risk-project.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/risk-project.html|PROBE|ms=1195 stable=true samples=3|ok
+site/data/risk-project.html|PROBE|ms=1301 stable=true samples=3|ok
 site/data/search.html|V1|n=0|ok
 site/data/search.html|V2|shapes=0 rows=0 domItems=2 painted=0 containers=0|na:interactive-input-page
 site/data/search.html|V3|N=0 best=- L=0 shapes=2 pathPts=14 domItems=2|na:no-rendered-view
 site/data/search.html|V4|kpi=0|na:no-kpi
 site/data/search.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/search.html|PROBE|ms=724 stable=true samples=3|ok
+site/data/search.html|PROBE|ms=723 stable=true samples=3|ok
 site/data/six-senses-narratology-network.html|V1|n=0|ok
-site/data/six-senses-narratology-network.html|V2|shapes=257 rows=7 domItems=138 painted=1962 containers=5 scene=-|ok
+site/data/six-senses-narratology-network.html|V2|shapes=257 rows=7 domItems=138 painted=1950 containers=5 scene=-|ok
 site/data/six-senses-narratology-network.html|V3|N=56 best=EMBEDDED_DATA:$.sixSenses.senses:7 r=36.71 shapes=257 pathPts=14 domItems=138|ok
 site/data/six-senses-narratology-network.html|V4|kpi=6 matched=EMBEDDED_DATA:$.sixSenses.senses.length=7 ↔ 7|ok
 site/data/six-senses-narratology-network.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/six-senses-narratology-network.html|PROBE|ms=969 stable=true samples=3|ok
+site/data/six-senses-narratology-network.html|PROBE|ms=996 stable=true samples=3|ok
 site/data/social-media.html|V1|n=0|ok
 site/data/social-media.html|V2|shapes=96 rows=8 domItems=42 painted=0 containers=2 scene=-|ok
 site/data/social-media.html|V3|N=8 best=EMBEDDED:$.mbti_characters[5].weakness:3 r=32.00 shapes=96 pathPts=14 domItems=42|ok
 site/data/social-media.html|V4|kpi=5 matched=EMBEDDED:$.social_media_profiles.length=7 ↔ 7|ok
 site/data/social-media.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/social-media.html|PROBE|ms=992 stable=true samples=3|ok
+site/data/social-media.html|PROBE|ms=1080 stable=true samples=3|ok
 site/data/story-timeline.html|V1|n=0|ok
 site/data/story-timeline.html|V2|shapes=64 rows=36 domItems=144 painted=0 containers=1 scene=-|ok
 site/data/story-timeline.html|V3|N=36 best=EMBEDDED_DATA:$.timeline[1].characters:2 r=72.00 shapes=144 pathPts=14 domItems=144|ok
 site/data/story-timeline.html|V4|kpi=4 matched=EMBEDDED_DATA:$.timeline.length=36 ↔ 36|ok
 site/data/story-timeline.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/story-timeline.html|PROBE|ms=1705 stable=true samples=7|ok
+site/data/story-timeline.html|PROBE|ms=1783 stable=true samples=7|ok
 site/data/tag-cloud.html|V1|n=0|ok
 site/data/tag-cloud.html|V2|shapes=0 rows=0 domItems=30 painted=0 containers=0 where=DIV>SPAN.tag-item.cat-v-new|ok
 site/data/tag-cloud.html|V3|N=81 best=EMBEDDED_DATA:$[0].tags:4 r=7.50 shapes=30 pathPts=14 domItems=30|ok
 site/data/tag-cloud.html|V4|kpi=0|na:no-kpi
 site/data/tag-cloud.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/tag-cloud.html|PROBE|ms=892 stable=true samples=3|ok
+site/data/tag-cloud.html|PROBE|ms=908 stable=true samples=3|ok
 site/data/text-evolution.html|V1|n=0|ok
 site/data/text-evolution.html|V2|shapes=106 rows=4 domItems=109 painted=0 containers=4 scene=-|ok
 site/data/text-evolution.html|V3|N=10 best=EMBEDDED_DATA:$.versions[0].key_role_introduction:2 r=54.50 shapes=109 pathPts=23 domItems=109|ok
 site/data/text-evolution.html|V4|kpi=5 matched=EMBEDDED_DATA:$.summary.total_versions=10 ↔ 10|ok
 site/data/text-evolution.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/text-evolution.html|PROBE|ms=1454 stable=true samples=5|ok
+site/data/text-evolution.html|PROBE|ms=1447 stable=true samples=5|ok
 site/data/text-search.html|V1|n=0|ok
 site/data/text-search.html|V2|shapes=0 rows=0 domItems=89 painted=0 containers=0 where=DIV>BUTTON.quick-tag.tag-char|ok
 site/data/text-search.html|V3|N=0 best=- L=0 shapes=89 pathPts=14 domItems=89|na:no-data-source
 site/data/text-search.html|V4|kpi=4|na:no-data-source
 site/data/text-search.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/text-search.html|PROBE|ms=830 stable=true samples=3|ok
+site/data/text-search.html|PROBE|ms=857 stable=true samples=3|ok
 site/data/theological-intervention-network.html|V1|n=0|ok
 site/data/theological-intervention-network.html|V2|shapes=152 rows=4 domItems=58 painted=2355 containers=6 scene=-|ok
 site/data/theological-intervention-network.html|V3|N=22 best=EMBEDDED_DATA:$.radar:3 r=50.67 shapes=152 pathPts=14 domItems=58|ok
 site/data/theological-intervention-network.html|V4|kpi=5 matched=EMBEDDED_DATA:$.network.nodes.uniq(type)=3 ↔ 3|ok
 site/data/theological-intervention-network.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/theological-intervention-network.html|PROBE|ms=958 stable=true samples=3|ok
+site/data/theological-intervention-network.html|PROBE|ms=939 stable=true samples=3|ok
 site/data/timeline.html|V1|n=0|ok
 site/data/timeline.html|V2|shapes=42 rows=0 domItems=53 painted=0 containers=1 scene=-|ok
 site/data/timeline.html|V3|N=22 best=EMBEDDED_DATA:$.timeline:22 r=2.41 shapes=53 pathPts=14 domItems=53|ok
 site/data/timeline.html|V4|kpi=4 matched=EMBEDDED_DATA:$.timeline.length=22 ↔ 22|ok
 site/data/timeline.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/timeline.html|PROBE|ms=1338 stable=true samples=5|ok
+site/data/timeline.html|PROBE|ms=1105 stable=true samples=4|ok
 site/data/underworld-power-network.html|V1|n=0|ok
 site/data/underworld-power-network.html|V2|shapes=210 rows=0 domItems=106 painted=1771 containers=7 scene=-|ok
 site/data/underworld-power-network.html|V3|N=20 best=EMBEDDED_DATA:$.summary.byStage:3 r=70.00 shapes=210 pathPts=23 domItems=106|ok
 site/data/underworld-power-network.html|V4|kpi=13 matched=EMBEDDED_DATA:$.network.nodes.max(power)=10 ↔ 10|ok
 site/data/underworld-power-network.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/underworld-power-network.html|PROBE|ms=1044 stable=true samples=3|ok
+site/data/underworld-power-network.html|PROBE|ms=1037 stable=true samples=3|ok
 site/data/visual-art.html|V1|n=0|ok
 site/data/visual-art.html|V2|shapes=38 rows=0 domItems=54 painted=0 containers=2 scene=-|ok
 site/data/visual-art.html|V3|N=10 best=EMBEDDED:$.scent_map.scent_categories.荒凉型:2 r=28.00 shapes=54 pathPts=56 domItems=54|ok
 site/data/visual-art.html|V4|kpi=5 matched=EMBEDDED:$.heart_sutra_sculpture.sutra_chanting_records.length=10 ↔ 10|ok
 site/data/visual-art.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/visual-art.html|PROBE|ms=1079 stable=true samples=3|ok
+site/data/visual-art.html|PROBE|ms=1164 stable=true samples=3|ok
 site/data/workplace.html|V1|n=0|ok
 site/data/workplace.html|V2|shapes=57 rows=12 domItems=75 painted=0 containers=3 scene=-|ok
 site/data/workplace.html|V3|N=15 best=EMBEDDED:$.wukong_resume.work_experience:3 r=25.00 shapes=75 pathPts=14 domItems=75|ok
 site/data/workplace.html|V4|kpi=3 matched=EMBEDDED:$.project_review.duration_years=14 ↔ 14|ok
 site/data/workplace.html|V5|C1=ok C2=ok C3=ok C4=ok|ok
-site/data/workplace.html|PROBE|ms=1072 stable=true samples=3|ok
+site/data/workplace.html|PROBE|ms=1052 stable=true samples=3|ok

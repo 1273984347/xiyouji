@@ -117,7 +117,7 @@ SCOPE_SITE_SECTIONS = {
     "双源漂移", "CSP漂移", "腐蚀插件", "内联语法", "CSS平衡", "token覆盖",
     "动效禁令", "a11y对比", "INLINED完整", "动态链接", "图表自洽", "数据一致",
     "SEOhead", "可引用性", "设计令牌对账", "色盲安全", "降级声明", "head内容",
-    "CSS变量引用", "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源", "chapter双源",
+    "CSS变量引用", "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源", "chapter双源", "可视化数据",
     "文档口径", "W区间字面量", "索引健康", "治理契约", "AGENTS分层",
 }
 _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·旁文档/A4/A1-A6/学术/A1导航/sitemap/内嵌回退 7 段不在任何 scope 集=自洽锁盲区）
@@ -582,7 +582,7 @@ _STRICT_GATES = [
                 fail_msg="根级脚本覆盖缺口",
                 marker_msg="脚本覆盖门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
                 ok_msg="根级脚本覆盖通过（%s）", ok_line=-2),
-    _StrictGate(section="可视化数据", script="check_chart_values.js", runner="node", timeout=300,
+    _StrictGate(section="可视化数据", script="check_chart_values.js", args=("--gate",), runner="node", timeout=300,
                 marker="---- 第 43 门禁 可视化数据断言：",
                 crash_msg="可视化数据断言门禁执行异常（第 43 槽·crash 即拦）: %s",
                 fail_msg="可视化数据断言缺口",
