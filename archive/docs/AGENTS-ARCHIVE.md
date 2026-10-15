@@ -162,3 +162,8 @@
 ```text
 2026-10-15（W744）检索增强集成批（T-01 Phase-1 集成加用户令开始）：验证过的增强管线正式集成进 scripts/rag 加新增 rag_enhance 增强引擎（稠密召回加加权 RRF 池融合 dense 乘二加 cross-encoder 重排加 LLM 改写并池）加新增 build_vectors 向量构建（分块加微批嵌入加温度守护加断点续跑加防混批 manifest）加 xiyouji_rag 增 RAG_ENHANCE 四档分派（off 零变化 加 dense 加 rerank 加 rewrite）加离线优先加载（缓存探测加 import 前预置 HF_HUB_OFFLINE 规避代理证书链环境 etag 卡死）加单测二十九例加 README 与 env 示例同步加 LLM_MODEL 示例更正 deepseek-flash；实测=冠军 recall@5 零点四八七（三十查询）加四档冒烟全通（rewrite 治愈 Q29 池外查询）；验证=pytest 三百九十四加 ruff 零加门禁四十六段
 ```
+以下为 AGENTS.md 版本脚注早期条目（W745-W746）段的原文（单行沿革链·W754 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-15（W745）改写智能路由批（W744-6b 全量验证落地加用户令难例才调 LLM）：rag_enhance 增 should_rewrite 短实体判据（长度不超过六汉字加无「的」加无疑问词加否则走改写）加 rewrite 档接线路由（短实体跳过改写直走主链加省 LLM 调用）加单测扩十二例加 README 同步加附 W744 pytest 计数更正（三百九十到三百九十四·四面同步）；依据=全量三十条实测（默认全改写 @5 负零点零三二·按型路由 加零点零四一 加 @10 加零点一零七）；验证=双冒烟（白骨精跳过加 Q24 治愈复现）加 pytest 四百零六加 ruff 零加门禁四十六段；2026-10-15（W746）语义页面路由端点批（T-01 Phase-0 转正加用户批准开工）：rag_server 增 /route 懒加载端点（只读八十七页向量缓存不触发 RAG 索引）加 /health 解绑索引（status 加 routes 数）加 page_router 晋升 scripts/rag（路径参数化加缓存迁 output）加单测九例加 README 路由节；实测=CLI 冒烟加 /route 端到端零点四秒加 21 题分层回归与实验区一致（基线十题 top-1 与 top-3 均九中持平）；两坑实证=子线程首次 import torch 段错误改主线程预热加 ruff isort 改坏 ST 先于 torch 顺序致 CLI 段错误加 noqa 防守；验证=pytest 四百一十五加 ruff 零加门禁四十六段
+```
