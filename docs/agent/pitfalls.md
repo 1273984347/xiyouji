@@ -14,6 +14,7 @@
 | 判退出码 | PowerShell `echo $?`（是布尔） | 管道前显式取 `$?`/`$LASTEXITCODE` |
 | 中文路径分类 | 直接拼 git 输出 | `git -c core.quotePath=false` |
 | Word COM/注册表/ACL | 强行 bash | PowerShell（Windows 原生域·W615/W693 先例） |
+| ML 脚本开跑前 | 直接 `py -3.12 script.py` | 五查：去 shebang（W743 教训）/ ST 先于 torch / ST import 块 `# noqa: I001` 防守 / 服务端子线程预热 / PIPESTATUS 验退出码 |
 
 ## 六主题坑位（原文全量·内容零改动）
 
@@ -30,11 +31,13 @@
 - **d3.select 静态快照空选区族**（W575）：`d3.select('#x')` 在元素声明前执行、元素根本不存在、或把选区方法调在自建门面对象（仅 show/hide）上，均为永久空选区/静默 no-op——tooltip 类功能**桌面鼠标同样失效**且常无报错（一报错反而是 `node().offsetWidth` 型 TypeError）；修法三态=惰性取用/按 W460 形态补元素（必须置于捕获脚本之前）/门面补齐缺失方法。静态扫描「select 行号 vs 元素 id 行号」即可穷尽（W575 四例三型，81-hardships/ecology/global-pattern/cross-time-danmaku）。
 - **触屏 tooltip e2e 三坑**（W575）：① tooltip 显隐多带 CSS transition，合成派发后同步读 `getComputedStyle().opacity` 恒为过渡起始值——探针以「预清空 tip 内容→派发→内容非空」同步信号判定，并 stash/restore 防污染页面；快照键不可含显隐态 class（visible 翻转致键漂移跨快照失配），用 id 或顶层序号；② Chrome 在 touchend 后把 hover 同步回真实鼠标位置并补发 mouseout——e2e 中一旦先动过真实鼠标，后续 tap 的 compat mouseout 会杀掉 tooltip 显示态（浏览器行为非页面缺陷），触屏断言序列须全部先于鼠标动作完成；③ 泛选择器 `[class*="tip"]` 会误伤 `small-multiple`（子串撞车）与 tooltip 内层元素（容器 opacity:0 隐藏时内层 computed opacity 仍 1）——精确化（tooltip 子串/tip 结尾）+ 顶层容器过滤；常显换内容型面板（prismTooltip 类）无隐藏态，隐藏断言以「触屏≡鼠标」经验对照替代硬编码 hidden 期望；④（W581）d3.drag 的 touchstarted 会 stopImmediatePropagation——document 冒泡层 touch 委托收不到可拖拽节点的触摸事件，注入须挂 document 捕获阶段（capture:true·先于目标阶段·免疫下游拦截）；⑤（W581）touchscreen.tap 的 tooltip 显隐在 Playwright 由 compat 事件随机承载（注入派发与断言错位·tap 式 PASS 可能是 compat 代劳）——断言改合成 TouchEvent 与取点同 tick 派发（兼顾力导向节点漂移），并以事件流取证甄别派发真身。
 
-### JS / CSP / 运行时（3 条）
+### JS / CSP / 运行时（5 条）
 
 - **改任何内联脚本后，必须重跑 `python scripts/generate_csp.py`**——否则 CSP sha256 哈希失配，整个内联脚本被浏览器拒执行（症状：无 pageerror 但内容空白、`window.__data` 未设置）。
 - **fullPage 截图不触发 IntersectionObserver**（W554）：凡含 `.reveal-in`（js-reveal 滚动显现）的页面，截图/审查前必须逐屏滚动穿透（步进 innerHeight、回顶后等待），否则下方区块渲染为空白——W550 G4 教训的截图侧二犯（试审判 curated「整屏空白 FAIL」实为伪影）；已固化进 `scripts/_w554_review.js`。
 - ** Express 5 / Node 20+ 的 req 'close' 语义陷阱**（W568）：`req.on("close")` 在请求体读取完毕即触发（并非连接断开），SSE 路由据此提前 `res.end()` 会吞掉后续全部事件（实证：init 之后 error 事件整段丢失、前端「思考中」永久挂起）；SSE 断开清理改挂 `res.on("close")`（已完成）。副作用教训：P2-3 类「断开清理」修复在运行时大版本升级后须复核语义。
+- **ML 栈在 handler 子线程首次 import → SIGSEGV**（W746）：http.server 的 ThreadingHTTPServer handler 子线程内首次 `import torch` / `sentence_transformers` → 段错误 exit 139 静默死亡（无 traceback；实证：rag_server /route 54s 后 empty reply、服务进程非零终止）。修复：**模型必须在主线程启动时预热**（`rag_server.py` main 里 `_get_router()` 范式）·handler 只做 encode（torch 已初始化后子线程使用安全）。诊断注意：静默 139 会被管道 `2>&1 | grep | tail` 掩盖——用 `${PIPESTATUS[0]}` 或不过滤直跑验退出码。
+- **ruff --fix 的 isort 会改坏「ST 先于 torch」顺序**（W746）：isort 排序规则把 plain import（`import torch`）排到 from-import（`from sentence_transformers import ...`）之前——正是本机段错误坑的关键顺序，铁则注释写在旁边也会被改坏（实证：--fix 后 CLI 静默 139）。修复：**ML 脚本的 ST import 块必须加 `# noqa: I001` 防守**（`scripts/rag/page_router.py` `_load_model` 范式），并复跑该脚本确认可跑。
 
 ### git / 提交 / 并发（8 条）
 
