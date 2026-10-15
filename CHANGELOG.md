@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W755），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W756），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,16 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W756（2026-10-16）：人名用字语料纯度批
+> **来源**：用户对 W699 A-04 盘点报告（[人名用字两态盘点-魏征-2026-10-11.md](docs/10-方法论沉淀/人名用字两态盘点-魏征-2026-10-11.md)）三选项的裁决——令「现在做」，执行其建议的**选项 3（仅清语料）+ 选项 2（口径登记）**。动工前 `preflight_check.py --touches` 全绿（对账表 max=W755 → W756 认领）。
+> - **T1 选项 3 清语料（10 字 / 5 容器）**：`魏徵`→`魏征` 于 ① 权威源 `source/原文/分回/第068回.md`（2 处·唐三藏复述引语内）+ `source/原文/分回/第091回.md`（1 处）+ `source/原文/shendu/SD039.md`（1 处·分析性文字混入）；② **镜像容器同改**——`dataset/text-search.json`（3 处·第 20 门禁语料保真检对拍源）+ `site/static/js/text-search-app.js`（3 处·页面内嵌语料副本，W691 三容器纪律：分回 md + dataset json + app 内嵌）。改用一次性断言脚本 `scripts/output/_w756_corpus_fix.py`（逐文件先断言旧值数恰为预期再替换·拒绝盲改）。**语料面残留自检 0 处**。
+> - **T2 选项 2 口径登记**：[统计口径说明.md](docs/00-导读/统计口径说明.md) 新增 **§7 人名用字口径**——语料与引文层强制简体「魏征」（权威源 + 两镜像容器）；散文与展示面两态并存**不作强制**（docs/02-04 散文、docs/01 原文照录区、dataset 可视化数据、site 页面对两种写法均予接受），并明确「任何批次禁以统一用字为名批量改展示面（全仓统一约 400 处属选项 1·未经作者裁决不得执行）」；附机器防线说明（第 20 门禁三检 + 改语料必须三容器同改）。
+> - **T3 回填与索引**：盘点报告「处置选项」节补**执行记录**（改字范围/验证/边界/选项 1 仍待裁决）；[docs/10 README](docs/10-方法论沉淀/README.md) 索引第 20 行同步（原「W754 校：选项 3 至今未执行」→「W756 已执行选项 3+2」）。
+> - **T4 边界声明（如实记账）**：展示面一律未动——含 `docs/01` 第068回/第091回的**原文照录区**（与语料同源但属展示面，3 处 `魏徵` 保留）、`docs/02`-`docs/04` 散文、`dataset/*.json` 可视化数据（underworld-power-network / music-structure / text-evolution）、`site/**` 页面（reader 页与可视化页）；全仓展示面 `魏徵` 存量按 W699 盘点口径（site 徵:征≈202:112）保持不变。
+> - **验证（全绿）**：`check_citations.py --check-corpus` **语料保真通过**（text-search.json 100 回与分回逐回全等·语料面残留 0）；`check_citations.py --dir docs` **423 条规范引文 + 104 条归属对白命中率 100%**（705 文件扫描）；`node --check site/static/js/text-search-app.js` 通过；`dataset/text-search.json` JSON 合法（100 回）；`generate_csp.py --check` 856 页 / 858 内联哈希 **0 漂移**；verify_delivery 全量 48 段自洽锁 OK。
+> - **状态**：已落地（级联+提交后以 gh run list 为准·本批未推送）。
+> - **文件**：source/原文/分回/第068回.md、source/原文/分回/第091回.md、source/原文/shendu/SD039.md、dataset/text-search.json、site/static/js/text-search-app.js、docs/00-导读/统计口径说明.md、docs/10-方法论沉淀/人名用字两态盘点-魏征-2026-10-11.md、docs/10-方法论沉淀/README.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w756_corpus_fix.py、scripts/output/_w756_spec.json、scripts/output/_cascade_files_W756.txt、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、.github/workflows/README.md、site/index.html、site/dukou-engine.html、site/data/tag-cloud.html、site/data/cross-time-danmaku.html、archive/docs/AGENTS-ARCHIVE.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md。
 
 ### W755（2026-10-16）：方法论深度篇扩建与治理口径统一批
 > **来源**：用户对 W754 审计报告「仍待拍板」四项的拍板（① 4 篇新增深度篇全建 ② 文档规范 §11 补分流行 ③ pitfalls 计数统一 ④ HANDOVER「三」指针化；推送项裁定暂不推送）。动工前 `preflight_check.py --touches` 全绿（对账表 max=W754 → W755 认领·交集零命中）。
