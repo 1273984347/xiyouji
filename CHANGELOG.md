@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W745），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W746），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,17 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W746（2026-10-15）：语义页面路由端点批
+> **来源**：T-01 Phase-0 ST-06 转正（用户批准开工）——路由原型 21 题分层评测过目后走标准批次。
+> - **T1 路由端点（rag_server.py）**：新增 /route?q=（懒加载 page_router·只读 87 页 title/desc 向量缓存·不触发 1077 篇 RAG BM25 索引）；/health 解绑索引（status + routes 数·dukou-engine 不消费 docs 字段已实证）。
+> - **T2 模块转正（page_router.py）**：从 tmpe 实验区晋升 scripts/rag/——路径参数化（__file__ 定位）、缓存迁 scripts/output/（page_vectors.npy + page_index.json·gitignored）、CLI 三态（查询 / --eval / --rebuild）。
+> - **T3 工程修复（两个实证坑）**：①路由模型主线程预热——torch/ST 在 handler 子线程首次 import 段错误（exit 139 静默死亡·实证）②ST-before-torch 顺序防回归——ruff --fix 的 isort 曾把顺序改坏致 CLI 段错误（noqa: I001 防守·已沉淀记忆）。
+> - **T4 单测**：test_page_router.py 九例（题层判定 / title 清洗 / top-N 命中·纯函数零重依赖）。
+> - **T5 评测与文档**：21 题分层评测回归与实验区一致（基线 top-1/top-3 均 9/10 持平·评测集 top-1 12/19 top-3 16/19·探针 R19/R21 miss 符合预期·难题 R20 top-1 命中）；README 语义页面路由节；recipe card 补 R17/R18 召回缺口与「无语义证据=机械口径无证据·语义待测」重定义（T-01 报告·本地件）。
+> - **验证（全绿）**：CLI 冒烟 + /route 端点端到端（0.4s·预热版稳定）；pytest 415 passed；ruff scripts/ 全过；verify_delivery 全量四十六段 OK。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。top-1 精度优化（泛词主导·中等层 2/8）留后续批次。
+> - **文件**：scripts/rag/page_router.py、scripts/rag/rag_server.py、scripts/rag/README.md、tests/unit/test_page_router.py、.gitignore、docs/00-导读/W批次编号对账表.md、HANDOVER.md、AGENTS.md、scripts/output/file-index.md、scripts/output/_w746_spec.json、scripts/output/_cascade_files_W746.txt。
 
 ### W745（2026-10-15）：改写智能路由批
 > **来源**：W744-6b 全量验证落地（用户令「全量 30 条跑一次改写对照」+「难例才调 LLM」）——7 条难查询的乐观结论经全量修正：改写默认全量 @5 −0.032（难层 +0.096 vs 简单层 −0.144·direct 型 −0.184）；按型路由模拟 @5 +0.041、@10 +0.107（逼近 Oracle 上界 0.707）。本批把路由实装进 rewrite 档，并附 W744 计数更正。

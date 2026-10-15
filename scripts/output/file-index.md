@@ -11,6 +11,18 @@
 ---
 
 
+## W746 语义页面路由端点批（2026-10-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/rag/page_router.py | W746 | 新增：语义页面路由（晋升转正·路径参数化+缓存+CLI+21 题评测） |
+| scripts/rag/rag_server.py | W746 | /route 懒加载端点 + /health 解绑 BM25 + 主线程预热 |
+| tests/unit/test_page_router.py | W746 | 新增：路由纯逻辑单测九例 |
+| scripts/rag/README.md | W746 | 语义页面路由节（端点用法+实测+已知边界） |
+| .gitignore | W746 | 路由产物忽略（page_vectors/page_index/page_route_eval） |
+| docs/00-导读/W批次编号对账表.md | W746 | W746 认领行登记 |
+| scripts/output/_w746_spec.json | W746 | 本批 spec 入库 |
+
 ## W745 改写智能路由批（2026-10-15）
 
 | 文件 | W | 说明 |
