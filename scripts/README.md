@@ -3,7 +3,7 @@
 > 本目录承载《西游记》文本分析脚本与可视化站点工程化工具。
 > 数据分析脚本按 A-AH 34 类分目录组织，详见 [STRUCTURE.md](../STRUCTURE.md)。
 > 根级工具脚本（截图审查 / 静态检查 / 批量修复）登记在本文件。
-> **历史一次性脚本已归档至 [`archive/`](archive/)（45 个，W446 治理），保留 git 历史备查，不再参与日常工作流。**
+> **历史一次性脚本已归档至 [`archive/scripts/`](../archive/scripts/)（45 个，W446 治理），保留 git 历史备查，不再参与日常工作流。**
 
 ## 根级工具脚本
 
@@ -27,6 +27,9 @@
 | `verify_chapters.py` | 章节文本完整性校验（回数/字数/标题格式） | `python verify_chapters.py` |
 | `data_validate.py` | output/data/ JSON 结构完整性校验（语法/非空/类型契约） | `python data_validate.py --quiet` |
 | `docs_index.py` | docs/ 文档索引自动生成（321 篇，支持 CI --check 模式） | `python docs_index.py` / `python docs_index.py --check` |
+| `archive_file.py` | 文件归档工具（git mv 归位 + 活引用扫描提示 + archive/README.md 台账登记；前置校验 + --dry-run） | `python scripts/archive_file.py <path> --batch W736 --dry-run` |
+| `preflight_check.py` | 批次开工前置核验（fetch/远端顶部/对账表取号/touches 在途盘点与交集拒绝/工作树/环境六检；fetch 故障降级 GitHub API 通道） | `python scripts/preflight_check.py [--touches "<逗号分隔的共享文件清单>"] [--self W###]` |
+| `release_prep.py` | 批次发布预检（spec 三检 + 消息 W### 形态登记核验 + --init spec 模板生成） | `python scripts/release_prep.py --check-spec output/_w736_spec.json` / `--init W736` |
 
 ### Node.js 工具
 

@@ -11,7 +11,9 @@
     "dev:client": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "server": "tsx server/index.ts"
+    "server": "tsx server/index.ts",
+    "test:server": "node --import tsx --test server/engine/tools.test.ts server/audit.test.ts server/citationGuard.test.ts",
+    "smoke:engine": "node server/engine.smoke.mjs"
   },
   "dependencies": {
     "@tdesign-react/aigc": "^0.1.0-alpha.1",

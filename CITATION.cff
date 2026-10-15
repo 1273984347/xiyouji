@@ -4,14 +4,14 @@ message: "如果本项目对您的研究或写作有帮助，请按以下格式�
 type: software
 authors:
   - name: 详解西游记项目
-version: "W727" # 批次号形态（W711 方案 D·非 SemVer·CFF 1.2.0 free string·解析方按字符串处理）
-date-released: "2026-10-13"
+version: "W758" # 批次号形态（W711 方案 D·非 SemVer·CFF 1.2.0 free string·解析方按字符串处理）
+date-released: "2026-10-16"
 license: MIT
 license-url: https://spdx.org/licenses/MIT.html
 abstract: >-
   一座关于《西游记》的混合型解读项目，采用「一源多形」组织方式，
-  包含 100 回逐回解读、56 篇人物深度分析、78 篇主题与情节专题、
-  16 篇文化背景专题、61 个 D3.js 数据可视化页面、132 个数据维度，
+  包含 100 回逐回解读、215 篇人物深度分析、209 篇主题与情节专题、
+  34 篇文化背景专题、87 个 D3.js 数据可视化页面、133 个数据维度，
   覆盖叙事学（十六维框架）、明代制度对照（八层镜像）、生态批评、
   后人类主义等多个学术维度，附 55 条学术引用索引。
 keywords:
@@ -27,7 +27,9 @@ preferred-citation:
   title: "详解西游记"
   authors:
     - name: 详解西游记项目
-  version: "2.2.15"
-  date-released: "2026-07-28"
+  version: "W737"
+  date-released: "2026-10-14"
+  # 双许可：代码 MIT + 文本内容 CC BY-NC 4.0（LICENSE-CONTENT.md）——CFF 单 license 字段取代码侧，
+  # 文本引用须同时遵守 CC BY-NC 4.0（非商业）。
   license: MIT
-  url: "https://github.com/详见仓库"
+  url: "https://github.com/1273984347/xiyouji"

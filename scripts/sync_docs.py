@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """sync_docs.py - 6 文件文档一致性自动校验
 
-校验 CHANGELOG.md / README.md / STRUCTURE.md / 项目说明.md / 交接文档.md / file-index.md
+校验 CHANGELOG.md / README.md / STRUCTURE.md / 项目说明.md / HANDOVER.md / file-index.md
 之间版本号、统计计数、W### 编号、file-index 最新条目的一致性。
 
 解决 E1 铁律模式（prior session 报告"已同步"但实际残留过时数据）。
@@ -14,6 +14,8 @@ import re
 import sys
 from pathlib import Path
 
+from doc_areas import AREA_DIRS, count_content_md
+
 # 项目根目录（脚本位于 scripts/ 下）
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -23,7 +25,7 @@ FILES = {
     "README":     ROOT / "README.md",
     "STRUCTURE":  ROOT / "STRUCTURE.md",
     "项目说明":    ROOT / "docs" / "00-导读" / "项目说明.md",
-    "交接文档":    ROOT / "交接文档.md",
+    "HANDOVER":    ROOT / "HANDOVER.md",
     "file-index": ROOT / "scripts" / "output" / "file-index.md",
 }
 
@@ -32,35 +34,21 @@ HEADER_LINES = 50  # 头部扫描行数
 # 统计期望值现值化（W685 校准·W684 P-11/A-03：STATIC_EXPECTED 硬编码 611 腐烂实证）——
 # AGG/A4/VIZ 改为磁盘实数动态计算，口径与 verify_delivery A1-A6 计数一致：
 # 六板块顶层 .md 排除 README.md；VIZ = site/data HTML 数减 _shell.html 模板壳。
-A_AREAS = [
-    ("A1", os.path.join("docs", "01-全书逐回解读")),
-    ("A2", os.path.join("docs", "06-个人随笔")),
-    ("A3", os.path.join("docs", "02-人物深度分析")),
-    ("A4", os.path.join("docs", "03-主题与情节专题")),
-    ("A5", os.path.join("docs", "04-文化与历史背景")),
-    ("A6", os.path.join("docs", "05-诗词歌赋")),
-]
-
-
-def _count_content_md(area_dir):
-    """统计板块顶层 .md 文件数，排除 README.md（与 verify_delivery._count_content_md 同口径）。"""
-    p = ROOT / area_dir
-    if not p.is_dir():
-        return -1
-    return sum(1 for fn in os.listdir(p)
-               if fn.endswith(".md") and fn.lower() != "readme.md")
+# 目录单一事实源在 doc_areas.AREA_DIRS（W728 与 verify_delivery 共享·防双份手工表漂移）；
+# 本文件消费短键标签（rule_stats 的 disk 字典键）·计数口径 = count_content_md。
+A_AREAS = list(zip(("A1", "A2", "A3", "A4", "A5", "A6"), AREA_DIRS, strict=True))
 
 
 def disk_expected():
     """磁盘实数统计期望（W685 现值化）。目录缺失时该键回退 0，由规则 2 报 MISMATCH。"""
     agg = 0
     for _, d in A_AREAS:
-        n = _count_content_md(d)
+        n = count_content_md(d)
         if n > 0:
             agg += n
     data_dir = ROOT / "site" / "data"
     viz = sum(1 for fn in os.listdir(data_dir) if fn.endswith(".html")) - 1 if data_dir.is_dir() else 0
-    return {"AGG": agg, "VIZ": viz, "A4": max(_count_content_md(A_AREAS[3][1]), 0)}
+    return {"AGG": agg, "VIZ": viz, "A4": max(count_content_md(A_AREAS[3][1]), 0)}
 
 # CHANGELOG 最新版本段统计正则（提取最终值，支持 N→M 和 N 两种格式）
 CL_PATTERNS = {
@@ -138,7 +126,7 @@ def rule_version(latest_v, fix=False):
     issues = []
     if not latest_v:
         return ["[ERROR] CHANGELOG.md 顶部未找到版本号"]
-    for name in ["README", "STRUCTURE", "项目说明", "交接文档"]:
+    for name in ["README", "STRUCTURE", "项目说明", "HANDOVER"]:
         path = FILES[name]
         if not path.exists():
             issues.append(f"[MISSING] {name} 文件不存在: {path}")
@@ -225,7 +213,7 @@ def rule_xmsm_counts():
     if not path.exists():
         return ["[MISSING] 项目说明 文件不存在"]
     text = read_text(path)
-    disk = {k: max(_count_content_md(d), 0) for k, d in A_AREAS}
+    disk = {k: max(count_content_md(d), 0) for k, d in A_AREAS}
     pat_map = {
         "A1": re.compile(r"A1 方向 (\d+)/\d+"),
         "A2": re.compile(r"A2 随笔 (\d+) 篇"),
@@ -528,6 +516,47 @@ def rule_file_location(scan_dir=None, fix=False):
     return issues
 
 
+def _run_checks(args, latest_v, latest_section, cl_text):
+    """顺序执行七规则检查（表驱动·W732）；返回 all_ok。
+
+    表项：(rule 键, 横幅全文（含前导换行·历史形态逐字节保留）, OK 消息, 检查函数, 前置输出可选)。
+    W732 提取——规则 1/3/4 横幅「标题 ===」含空格、规则 2/5/6/7 横幅「）===」无空格，系历史演进形态，原样保留。
+    """
+    checks = [
+        ("version", "=== 规则 1: 版本号一致性 ===", "  [OK] 4 文件头部均含最新版本号",
+         lambda: rule_version(latest_v, fix=args.fix),
+         (lambda: print(f"CHANGELOG 最新版本: {latest_v}")) if latest_v else None),
+        ("stats", "\n=== 规则 2: 统计计数一致性（磁盘实数）===",
+         "  [OK] README/STRUCTURE 聚合声明 + 项目说明分面声明 均与磁盘实数一致",
+         lambda: rule_stats(latest_section, fix=args.fix) + rule_xmsm_counts(), None),
+        ("wids", "\n=== 规则 3: W### 编号连续性 ===", "  [OK] CHANGELOG W### 编号连续 + file-index 条目一致",
+         lambda: rule_wids(cl_text), None),
+        ("fidx", "\n=== 规则 4: file-index 最新条目 ===", "  [OK] file-index.md 包含最新 W### 条目",
+         lambda: rule_fileindex_latest(cl_text), None),
+        ("marker", "\n=== 规则 5: 状态标记计数（E2 扩展）===", "  [OK] CHANGELOG 现役段'进行中'标记 ≤ 1",
+         lambda: rule_status_marker(cl_text, fix=args.fix), None),
+        ("sum", "\n=== 规则 6: 计数器求和一致性（E2 扩展）===", "  [OK] README 维度标题声明数 == 表格求和 == 其他位置",
+         lambda: rule_counter_sum(fix=args.fix), None),
+        ("loc", "\n=== 规则 7: 文件位置规范（E2 扩展）===", "  [OK] S2 方向文件均在对应 docs/S2-*/ 目录下",
+         lambda: rule_file_location(fix=args.fix), None),
+    ]
+    all_ok = True
+    for key, banner, ok_msg, run_check, pre in checks:
+        if args.rule not in (None, key):
+            continue
+        print(banner)
+        if pre:
+            pre()
+        issues = run_check()
+        if issues:
+            for i in issues:
+                print(f"  {i}")
+            all_ok = False
+        else:
+            print(ok_msg)
+    return all_ok
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="6 文件文档一致性自动校验（解决 E1 铁律：prior session 报告'已同步'但残留过时数据）",
@@ -558,79 +587,7 @@ def main():
     latest_v = get_latest_version(cl_text)
     latest_section = get_latest_section(cl_text)
 
-    all_ok = True
-
-    if args.rule in (None, "version"):
-        print("=== 规则 1: 版本号一致性 ===")
-        if latest_v:
-            print(f"CHANGELOG 最新版本: {latest_v}")
-        issues = rule_version(latest_v, fix=args.fix)
-        if issues:
-            for i in issues:
-                print(f"  {i}")
-            all_ok = False
-        else:
-            print("  [OK] 4 文件头部均含最新版本号")
-
-    if args.rule in (None, "stats"):
-        print("\n=== 规则 2: 统计计数一致性（磁盘实数）===")
-        issues = rule_stats(latest_section, fix=args.fix) + rule_xmsm_counts()
-        if issues:
-            for i in issues:
-                print(f"  {i}")
-            all_ok = False
-        else:
-            print("  [OK] README/STRUCTURE 聚合声明 + 项目说明分面声明 均与磁盘实数一致")
-
-    if args.rule in (None, "wids"):
-        print("\n=== 规则 3: W### 编号连续性 ===")
-        issues = rule_wids(cl_text)
-        if issues:
-            for i in issues:
-                print(f"  {i}")
-            all_ok = False
-        else:
-            print("  [OK] CHANGELOG W### 编号连续 + file-index 条目一致")
-
-    if args.rule in (None, "fidx"):
-        print("\n=== 规则 4: file-index 最新条目 ===")
-        issues = rule_fileindex_latest(cl_text)
-        if issues:
-            for i in issues:
-                print(f"  {i}")
-            all_ok = False
-        else:
-            print("  [OK] file-index.md 包含最新 W### 条目")
-
-    if args.rule in (None, "marker"):
-        print("\n=== 规则 5: 状态标记计数（E2 扩展）===")
-        issues = rule_status_marker(cl_text, fix=args.fix)
-        if issues:
-            for i in issues:
-                print(f"  {i}")
-            all_ok = False
-        else:
-            print("  [OK] CHANGELOG 现役段'进行中'标记 ≤ 1")
-
-    if args.rule in (None, "sum"):
-        print("\n=== 规则 6: 计数器求和一致性（E2 扩展）===")
-        issues = rule_counter_sum(fix=args.fix)
-        if issues:
-            for i in issues:
-                print(f"  {i}")
-            all_ok = False
-        else:
-            print("  [OK] README 维度标题声明数 == 表格求和 == 其他位置")
-
-    if args.rule in (None, "loc"):
-        print("\n=== 规则 7: 文件位置规范（E2 扩展）===")
-        issues = rule_file_location(fix=args.fix)
-        if issues:
-            for i in issues:
-                print(f"  {i}")
-            all_ok = False
-        else:
-            print("  [OK] S2 方向文件均在对应 docs/S2-*/ 目录下")
+    all_ok = _run_checks(args, latest_v, latest_section, cl_text)
 
     print("\n" + "=" * 60)
     if all_ok:

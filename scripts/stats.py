@@ -81,6 +81,7 @@ META = {
     "a4_docs": {"domain": "docs/03-主题与情节专题/*.md（排除 README）", "introduced_by": "W722"},  # W722：A4 计数实体化（三处同改·用户裁决 6A）
     "methodology_docs": {"domain": "docs/10-方法论沉淀/*.md（含索引 README）", "introduced_by": "W070"},
     "script_classes": {"domain": "scripts/[A-Z]_* 类目录数", "introduced_by": "W528"},
+    "report_docs": {"domain": "docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化）", "introduced_by": "W737"},
 }
 
 
@@ -132,6 +133,7 @@ def build():
         # json_count 键已移除（W716）：scripts/output/data/ 系 gitignored 本地产物（.gitignore:59），
         # 依赖它的键在无本地产物环境 --check 必红，违反「tracked 基准 CI 可复现」原则（W703 声明对它不成立）
         "script_classes": len(classes),
+    "report_docs": len(glob.glob(os.path.join(ROOT, "docs", "11-方案报告", "**", "*.md"), recursive=True)),
     }
 
 

@@ -1,0 +1,27 @@
+chore(w751): 根级工具链防护批——第 42 门禁挂载 + 三件专项测试 + import 冒烟层（并行合流第 43 槽）
+
+W751（用户三项薄弱点裁决之一：为根级工具脚本补齐专项测试与门禁覆盖）
+
+T1 三件专项测试 44 例：new_page.py 16（占位符/白名单/索引锚点/dry-run/幂等/真实仓库零触碰）
+  embed_json.py 16（括号深度边界/字符串内花括号/insert 三形态/注入点/replace 精确/退出码/备份）
+  slice_screenshots.py 12（切片几何/逐片取色证非重复/posix 路径/clean_dir 精确/W536 守卫/索引两视口）
+T2 根级 import 冒烟层 91 例：全根级脚本动态 import（语法/依赖/副作用底线），3 件显式豁免带理由
+  实测坑：动态 import 须先注册 sys.modules（dataclass 回查 __module__ 否则假阳性）
+T3 第 42 门禁 check_script_coverage.py：覆盖口径=四面引用（tests ∪ verify ∪ CI ∪ Makefile）
+  C1 新增脚本无引用未登记=FAIL / C2 基线陈腐与重复=FAIL / C3 fail-closed 下限；self-test 6/6
+  基线 35 条豁免逐行注明四类理由；建线前后 46/101 四面无引用 → 68 引用 / 35 豁免 / 0 FAIL
+T4 判据收窄（负面结论入档）：17 个根级脚本忽略 --help 直接执行主逻辑（inline_css.py --help
+  真重写 857 页行尾），CLI 契约普遍缺位；连带损伤逐文件取证并 git restore 复原 623 文件
+T5 门禁自伤与修复：基线解析未剥行内注释致 35 行豁免全判陈腐（70 FAIL），由自带单测拦下并补 T6 回归
+T6 并行合流：第 43 槽 check_chart_values.js（W753 交付）的 verify 挂载由本批统一执行，
+  _StrictGate 补 runner 字段支持 node 门禁（默认 py·既有 15 段行为不变）
+
+级联（W750 跳号作废未提交 → batch_cascade 编号锚点无法表达，按 pitfalls 手工级联先例 + 自建清单）：
+  CHANGELOG/AGENTS/README/STRUCTURE/HANDOVER/CITATION/workflows README/文档规范/项目说明/
+  对账表/gates.md/file-index/stats 三件/dukou 页脚
+
+验证：pytest 559 passed / 3 skipped（批前 415·净增 144）；verify_delivery 全量 48 段 0 FAIL 核心全绿；
+  ruff scripts/ 0 错；第 42 门禁 0 FAIL·self-test 6/6；第 43 门禁 87 页 0 FAIL；agents 分层三方 43=43=43；
+  doc-sync 0 FAIL；stats --check 零差异；CSP 856 页 0 漂移；check_w_range_literal 0 漂移
+发现（未修·如实记账）：tests/unit/test_tmpe_tidy.py 本机单独运行即挂起（collect 正常），
+  全量 pytest 须 --ignore；与本批改动零交集，属既有环境相关挂起，建议单独立项

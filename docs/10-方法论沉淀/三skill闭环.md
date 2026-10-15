@@ -2,9 +2,9 @@
 
 > deep-review-loop（审查）→ mem-wrap-up（收尾）→ self-evolution（沉淀）
 > 建立时间：2026-07-16
-> 当前版本：DRL v1.2.0 + mem-wrap-up v1.1.0 + self-evolution（TRAE 蒸馏版）
+> 当前版本：DRL v1.2.0 + mem-wrap-up v1.1.0 + self-evolution（TRAE 蒸馏版）——三者均属已退役协议层（W562 随 skills 治理整体退役）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + CLAUDE.md + [docs/agent/pitfalls.md](../agent/pitfalls.md)
 > 首次完整执行：2026-07-22 xiyouji 项目
-> 最新案例：W086 v2.0.59 三 skill 闭环完整执行（DRL R1b 真收敛 + mem-wrap-up 7 步含 Step 4a/7a 协议升级首次完整实战验证 + self-evolution dim 1/5/9/11 四维度复盘）
+> 最新案例：W086 v2.0.59 三 skill 闭环完整执行（DRL R1b 真收敛 + mem-wrap-up 7 步含 Step 4a/7a 协议升级首次完整实战验证 + self-evolution dim 1/5/9/11 四维度复盘）——案例表截至 W086（历史事实·原值不改）；W087+ 同类复现登记于 HANDOVER.md「三、方法论沉淀」与 pitfalls.md，W086 段已归档 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](../../archive/docs/CHANGELOG-ARCHIVE-tier2.md)
 
 ---
 
@@ -47,11 +47,13 @@ self-evolution（沉淀端，末端）
 
 ### 三 skill 位置
 
-| Skill | 位置 | 版本 | 角色 |
+| Skill | 位置（W754 起改指仓内等价载体） | 版本（历史值·不改） | 角色 |
 |:---|:---|:---:|:---|
-| deep-review-loop | `C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md` | v1.2.0 | 审查端（起点） |
-| mem-wrap-up | `C:\Users\12739\.trae-cn\skills\mem-wrap-up\SKILL.md` | v1.1.0 | 收尾端（中段） |
-| self-evolution | `C:\Users\12739\.trae-cn\skills\self-evolution\SKILL.md` | TRAE 蒸馏版 | 沉淀端（末端，反向喂回 DRL） |
+| deep-review-loop | [DRL真循环.md](DRL真循环.md)（审查流程与 R0-R3 记录） | v1.2.0 | 审查端（起点） |
+| mem-wrap-up | [E1铁律.md](E1铁律.md)（落地验证）+ [HANDOVER.md](../../HANDOVER.md)「三、方法论沉淀」（收尾登记） | v1.1.0 | 收尾端（中段） |
+| self-evolution | [docs/agent/pitfalls.md](../agent/pitfalls.md)（经验/坑位沉淀） | TRAE 蒸馏版 | 沉淀端（末端，反向喂回 DRL） |
+
+> **W754 校**：三者的原全局路径 `C:\Users\12739\.trae-cn\skills\{deep-review-loop,mem-wrap-up,self-evolution}\SKILL.md` 实测已失联（junction 指向不存在的 D:\1\open-source·仓内不共享），随 skills 治理整体退役（W562）；上表「位置」列改指仓内等价载体，「版本」列保留原值（历史事实不改）。现役协议载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + CLAUDE.md + docs/agent/*.md。
 
 ---
 
@@ -255,17 +257,19 @@ abort 走 3 选 1：
 
 ## 十、关联文档
 
-### 上游 skill
+### 上游 skill（已随 skills 治理退役·W562）
 
-- [C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md](file:///C:/Users/12739/.trae-cn/skills/deep-review-loop/SKILL.md)
-- [C:\Users\12739\.trae-cn\skills\mem-wrap-up\SKILL.md](file:///C:/Users/12739/.trae-cn/skills/mem-wrap-up/SKILL.md)
-- [C:\Users\12739\.trae-cn\skills\self-evolution\SKILL.md](file:///C:/Users/12739/.trae-cn/skills/self-evolution/SKILL.md)
+- 原 `deep-review-loop` → 仓内等价：[DRL真循环.md](DRL真循环.md)（审查端·R0-R3 流程与收敛曲线）
+- 原 `mem-wrap-up` → 仓内等价：[E1铁律.md](E1铁律.md)（落地验证·Step 4a/7a 记录）+ [HANDOVER.md](../../HANDOVER.md)「三、方法论沉淀」
+- 原 `self-evolution` → 仓内等价：[docs/agent/pitfalls.md](../agent/pitfalls.md)（经验/坑位沉淀）
+- 三者全局路径均已失联（junction 指向不存在的 D:\1\open-source·仓内不共享）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + CLAUDE.md + docs/agent/*.md
 
 ### 项目内关联
 
 - [DRL真循环.md](DRL真循环.md)：审查端细节
 - [E1铁律.md](E1铁律.md)：跨 session 接续验证（DRL 之前必须验证 prior session 报告）
 - [Preflight与Subagent模板.md](Preflight与Subagent模板.md)：DRL R1b/R2 subagent prompt 模板
+- 现役机制载体（协议层随 W562 退役后的运行时承接·W754 补登）：级联 `scripts/batch_cascade.py`（10 面级联 + `_cascade_files_<批号>.txt` 清单）、前置核验 `scripts/preflight_check.py`（W739 起 `--touches` 跨 Agent 交集拒绝）、并行提交 `scripts/safe_commit.py`（ref-lock 竞争重试）
 
 ### 项目内闭环执行记录
 
@@ -287,6 +291,8 @@ abort 走 3 选 1：
 - Step 4a（Line 88-118）：项目层 Grep spot-check 验证 v2.0.X/W### 在 6 文件出现
 - Step 7a（Line 155-181）：memory 层 Grep spot-check 验证 W### 在三件套出现
 - Line 255：Self-Disclosure E1 升级版 spot-check 已执行声明
+
+> **W754 校（取证口径）**：上述三处 SKILL.md 行号证据已不可核验——mem-wrap-up 协议载体随 skills 治理退役（W562）且全局路径失联；本节文字与行号保留原值不改（历史记录），现役等价载体＝[E1铁律.md](E1铁律.md)（Step 4a/7a 落地验证）+ [docs/agent/pitfalls.md](../agent/pitfalls.md)。
 
 **W086 首次完整实战验证三阶段**：
 1. **发现**：主代理 Grep spot-check v2.0.59/W086 在 6 文件出现 → 6 文件全部停留在 v2.0.58 W085（命中旧值）

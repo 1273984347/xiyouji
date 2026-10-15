@@ -44,6 +44,6 @@
 
 ## 处置规则
 
-- **6/6 通过**：接收交付，主代理继续后续同步（README/STRUCTURE/项目说明/交接文档/file-index 由主代理统一同步）
+- **6/6 通过**：接收交付，主代理继续后续同步（README/STRUCTURE/项目说明/HANDOVER/file-index 由主代理统一同步）
 - **任一项失败**：退回 subagent，附失败项 + 证据，要求修复后重新提交 handoff-checklist 声明
 - **失败 ≥ 3 项**：视为 subagent 任务理解偏差，主代理直接 fallback 接手修复，记录到方法论沉淀

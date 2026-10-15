@@ -1,0 +1,19 @@
+fix(w753): 可视化门禁收尾——43 槽显式 --gate + 入 SCOPE_SITE_SECTIONS + 基线/报告最终版 + 一条勘误
+
+并行批集成收尾（W753 交付的 check_chart_values.js 已在 0f4b0849 入库；本提交补齐三处）
+
+1. verify_delivery 第 43 槽补显式 `args=("--gate",)`：owner 已把无参调用钉死为 gate（fail-closed），
+   显式传参再加一层，防未来有人改默认模式时静默落到 report（恒 exit 0）造成 wrapper 假绿。
+2. `可视化数据` 入 SCOPE_SITE_SECTIONS：原先 `--scope site` 会跳过该段，**纯 site 提交流程漏掉可视化
+   数据门禁**（scope 盲区·owner 集成发现）。实测 `verify_delivery --scope site` 现 42 段实跑、该段
+   通过（判据分布 V1 87ok / V2 86ok+1na / V3 78ok+9na / V4 70ok+17na / V5 87ok / PROBE 87ok）。
+3. chart-values-baseline.txt / chart-values-report.json 换为**最终版**（与脚本同代：稳定等待改为
+   「图元数 + KPI 文本」双签名后重新生成；报告去掉容器调试字段、scalars 截 40）。两次全量跑
+   verdict 差异 0，判定等价但工件口径与脚本一致。
+4. CHANGELOG W751 段「发现」条**勘误**：原稿把「pytest 汇总后进程不退出」归因于
+   tests/unit/test_tmpe_tidy.py——依据仅为该文件单独跑无输出，而 harness 以进程退出取输出，
+   **证据不足**；并行批实测去掉其测试文件同样复现，故归因撤销、如实记为「判据不成立·现象未定位」。
+   （E1 纪律：错误归因与未定位现象都必须留在账上，不得静默删除。）
+
+验证：verify_delivery --scope site 0 FAIL（42 段自洽）；全量 48 段 0 FAIL（0f4b0849 已跑；
+本次改动仅 scope 集合与显式参数，随后重跑确认）；第 43 门禁 --self-test 12/12；--gate 87 页 0 FAIL

@@ -14,6 +14,7 @@
 | 判退出码 | PowerShell `echo $?`（是布尔） | 管道前显式取 `$?`/`$LASTEXITCODE` |
 | 中文路径分类 | 直接拼 git 输出 | `git -c core.quotePath=false` |
 | Word COM/注册表/ACL | 强行 bash | PowerShell（Windows 原生域·W615/W693 先例） |
+| ML 脚本开跑前 | 直接 `py -3.12 script.py` | 五查：去 shebang（W743 教训）/ ST 先于 torch / ST import 块 `# noqa: I001` 防守 / 服务端子线程预热 / PIPESTATUS 验退出码 |
 
 ## 六主题坑位（原文全量·内容零改动）
 
@@ -30,18 +31,20 @@
 - **d3.select 静态快照空选区族**（W575）：`d3.select('#x')` 在元素声明前执行、元素根本不存在、或把选区方法调在自建门面对象（仅 show/hide）上，均为永久空选区/静默 no-op——tooltip 类功能**桌面鼠标同样失效**且常无报错（一报错反而是 `node().offsetWidth` 型 TypeError）；修法三态=惰性取用/按 W460 形态补元素（必须置于捕获脚本之前）/门面补齐缺失方法。静态扫描「select 行号 vs 元素 id 行号」即可穷尽（W575 四例三型，81-hardships/ecology/global-pattern/cross-time-danmaku）。
 - **触屏 tooltip e2e 三坑**（W575）：① tooltip 显隐多带 CSS transition，合成派发后同步读 `getComputedStyle().opacity` 恒为过渡起始值——探针以「预清空 tip 内容→派发→内容非空」同步信号判定，并 stash/restore 防污染页面；快照键不可含显隐态 class（visible 翻转致键漂移跨快照失配），用 id 或顶层序号；② Chrome 在 touchend 后把 hover 同步回真实鼠标位置并补发 mouseout——e2e 中一旦先动过真实鼠标，后续 tap 的 compat mouseout 会杀掉 tooltip 显示态（浏览器行为非页面缺陷），触屏断言序列须全部先于鼠标动作完成；③ 泛选择器 `[class*="tip"]` 会误伤 `small-multiple`（子串撞车）与 tooltip 内层元素（容器 opacity:0 隐藏时内层 computed opacity 仍 1）——精确化（tooltip 子串/tip 结尾）+ 顶层容器过滤；常显换内容型面板（prismTooltip 类）无隐藏态，隐藏断言以「触屏≡鼠标」经验对照替代硬编码 hidden 期望；④（W581）d3.drag 的 touchstarted 会 stopImmediatePropagation——document 冒泡层 touch 委托收不到可拖拽节点的触摸事件，注入须挂 document 捕获阶段（capture:true·先于目标阶段·免疫下游拦截）；⑤（W581）touchscreen.tap 的 tooltip 显隐在 Playwright 由 compat 事件随机承载（注入派发与断言错位·tap 式 PASS 可能是 compat 代劳）——断言改合成 TouchEvent 与取点同 tick 派发（兼顾力导向节点漂移），并以事件流取证甄别派发真身。
 
-### JS / CSP / 运行时（3 条）
+### JS / CSP / 运行时（5 条）
 
 - **改任何内联脚本后，必须重跑 `python scripts/generate_csp.py`**——否则 CSP sha256 哈希失配，整个内联脚本被浏览器拒执行（症状：无 pageerror 但内容空白、`window.__data` 未设置）。
 - **fullPage 截图不触发 IntersectionObserver**（W554）：凡含 `.reveal-in`（js-reveal 滚动显现）的页面，截图/审查前必须逐屏滚动穿透（步进 innerHeight、回顶后等待），否则下方区块渲染为空白——W550 G4 教训的截图侧二犯（试审判 curated「整屏空白 FAIL」实为伪影）；已固化进 `scripts/_w554_review.js`。
 - ** Express 5 / Node 20+ 的 req 'close' 语义陷阱**（W568）：`req.on("close")` 在请求体读取完毕即触发（并非连接断开），SSE 路由据此提前 `res.end()` 会吞掉后续全部事件（实证：init 之后 error 事件整段丢失、前端「思考中」永久挂起）；SSE 断开清理改挂 `res.on("close")`（已完成）。副作用教训：P2-3 类「断开清理」修复在运行时大版本升级后须复核语义。
+- **ML 栈在 handler 子线程首次 import → SIGSEGV**（W746）：http.server 的 ThreadingHTTPServer handler 子线程内首次 `import torch` / `sentence_transformers` → 段错误 exit 139 静默死亡（无 traceback；实证：rag_server /route 54s 后 empty reply、服务进程非零终止）。修复：**模型必须在主线程启动时预热**（`rag_server.py` main 里 `_get_router()` 范式）·handler 只做 encode（torch 已初始化后子线程使用安全）。诊断注意：静默 139 会被管道 `2>&1 | grep | tail` 掩盖——用 `${PIPESTATUS[0]}` 或不过滤直跑验退出码。
+- **ruff --fix 的 isort 会改坏「ST 先于 torch」顺序**（W746）：isort 排序规则把 plain import（`import torch`）排到 from-import（`from sentence_transformers import ...`）之前——正是本机段错误坑的关键顺序，铁则注释写在旁边也会被改坏（实证：--fix 后 CLI 静默 139）。修复：**ML 脚本的 ST import 块必须加 `# noqa: I001` 防守**（`scripts/rag/page_router.py` `_load_model` 范式），并复跑该脚本确认可跑。
 
-### git / 提交 / 并发（7 条）
+### git / 提交 / 并发（12 条）
 
 - **批量改 md 一律 Python `open(encoding='utf-8')`，禁用 PowerShell `Set-Content`**（后者默认写 UTF-8 BOM，项目 W427 曾全库清 BOM；`Add-Content` 同理慎用）。
 - **同文件多个 Edit 必须串行执行**（并行 Edit 基于同一原始内容计算 diff，后写覆盖先写——W505 复现 4 次：金角银角「唐僧肉」/CHANGELOG W506 段/项目说明头部/交接文档标题均丢失）；并行批次后必须 Grep 验证所有修改点。
 - **Windows 多行字符串/heredoc 一律走 Write 临时文件 + 命令 `-F` 参数 + Delete 临时文件**，禁用 `cat <<'EOF'` heredoc（PowerShell 不支持，报错；W514 git commit -F 中文提交信息二度复用教训）。**W706 升级为场景分层铁律：单行简单命令任意 shell 均可，多行/复杂转义/heredoc/大段文本一律落 Python 脚本文件再调用（`scripts/_wNNN_*.py`）——Git Bash 的 `python <<EOF` 同样有转义地狱（本批三败：反斜杠四层转义错位/迭代器静默空/混行尾吞段），bash heredoc 禁令与 PowerShell 无关、与「多行文本进 shell」本身冲突**
-- **跨 session / 涉及远端状态**：执行前先 `git log --oneline -5` + `gh run list` 确认最新状态，识别并行交付真实增量（E41）；workflow 触发条件必须匹配真实开发流、门禁建置即绿、引用文件先 `git ls-files` 确认（E36-E42 CI 类，详见交接文档「三」W516 段）。
+- **跨 session / 涉及远端状态**：执行前先 `git log --oneline -5` + `gh run list` 确认最新状态，识别并行交付真实增量（E41）；workflow 触发条件必须匹配真实开发流、门禁建置即绿、引用文件先 `git ls-files` 确认（E36-E42 CI 类，详见 HANDOVER「三」W516 段）。
 - **W537 三新规（W536 批次声明失真复盘）**：① CHANGELOG「验证」栏必须以当批实跑 `verify_delivery` 的输出为准填写，「状态」栏仅在提交/推送实际落地后为真——自制批量文档脚本绕过 bump_version 防护时同样适用（W536 实证：声明先于验证 → 4 项 FAIL 状态下写出「全绿 + 已推送」）；② 版本行/页脚更新须整行替换并同步改描述文本——第 22/23 门禁只校验 W 号不校验描述（三简单页脚「W536 号挂 W535 描述」串号实证）；③ CHANGELOG「文件」清单中的新建文件必须 `git add`——W723 起有门禁覆盖（第 31 门禁 C4-f：路径 ⊆ HEAD 树且无工作树残留·见上条）；④ JS/工具脚本改动推送前必须以真实参数冒烟一次——node --check 不覆盖运行时（W537/W538 白名单形状回归实证；batch_cascade.py 冒烟口径同此）。
 - **动工前先在对账表登记认领「表格行」**（W720 强制·W719 流程遗漏实证）：预留豁免 bullet（`- **WXXX**：现势下一自由号…`）只是防 C4 误拦的登记，**不算认领**——第 31 门禁 C4 已细分：CHANGELOG 现役段 W 号无表格行则主提交即红；认领流程=取号→表格加行（状态**进行中**）→动工→级联→主提交→收官 chore 翻「已收官」。
 - **手工级联脚本必须自建 `_cascade_files_<批号>.txt` 清单**（W722 成文·用户裁决 2A）：batch_cascade --apply 自动输出清单，手工级联（跳号/合并段批）同等义务——W691/W693 先例已实践（70 份在库），第 31 门禁 C4-e 校验提交树 ⊇ 清单（无清单 NOTE·漏 add 即红），清单义务自此成文。
@@ -50,6 +53,7 @@
 - `_` 前缀脚本为一次性/诊断脚本，不入库门禁、不参与 CI。
 - **pre-commit scope 分级与提交重试（W698·用户裁决「动工」·外部挑刺 P2 两条落地）**：verify_delivery.py 支持 `--scope full|docs|site|auto`——11 个内联廉价段恒跑，32 个 subprocess 委托段按生效集统一短路（`_GATE_SUMMARY_MARKERS` 兜住防静默跳过 wrapper 的汇总行校验），段自洽锁非 full 档按生效子集断言；`auto` 按变更路径白名单分类（doc-ish/site-ish 正则，任何越界文件→full；未跟踪 docs/site 内容文件在场→full 保守回退），`.git/hooks/pre-commit` 传 `--scope auto`，**CI verify-delivery job 与批收尾七步③恒为全量不缩水**；实测 docs 档 2.3s vs 全量 62s（热缓存）。并行会话提交改用 `python scripts/safe_commit.py -F <msg> [--] <pathspec...>`——ref-lock 竞争核对并行增量与 pathspec 无交集后自动重试一次（`--self-test` 4 负样本）；仓库体量监视挂 release.py 步骤 3（count-objects·1GB 告警线·处置红线=禁历史重写，裁决史 SHA 锚定）。**worktree 每会话一树根治候选评估关闭（2026-10-11 用户采纳判断）**：git 禁止两 worktree 共 checkout 同分支→侧分支+合并编排的改造代价≫safe_commit+scope 分级后的残留摩擦（撞车已降为一次自动重试·级联顺序等待与 git 拓扑无关·tmpe/S4 本地件会碎片化）；重启条件=safe_commit 自动重试频率>1 次/周。
 - **workflow/脚本用 git diff 输出做路径分类必须加 `-c core.quotePath=false`**（W523）：git 默认把非 ASCII 路径输出为带双引号的八进制转义串（交接文档.md → `"\344\272\244..."`），首尾引号破坏 bash case/glob 匹配（连 `*.md`、`docs/*` 都失配）→ 免审/定向分支被静默架空、恒走兜底全量（Screenshot Review scope 步骤曾因此每次推送 ~11min 全量截图）；验证靠本地 Git Bash 复刻分类逻辑对真实范围双向模拟。
+- **touches 冲突声明与交集拒绝（W739）**：对账表 touches 列登记本批计划**手工修改**的共享文件（级联面由 batch_cascade 单写路径 + safe_commit pathspec 互斥保护·不列；对账表追加认领行属 append 安全操作·不列；但改本表表头/规则/历史行等**结构性**修改必须列）；动工前跑 `python scripts/preflight_check.py --touches "<逗号分隔清单>" --self W###`——与在途批次（状态非已收官/已闭环且 touches 非空）有交集即 FAIL 拒绝并行（等对方收官或人工裁决）；语义=「同文件 Edit 串行」铁律的跨 Agent 版——串行保证「我一人不并发」，touches 保证「跨人无覆盖」；实证：W738 收官与 W739 认领在两个并行会话间交错完成（本会话读时 W738 未提交·写完已收官·幸未造成损坏），即 A 类读→写窗口漂移实例——touches 把该类冲突从「写回阶段才发现」前移到「计划阶段就拒绝」。
 
 ### 级联 / CHANGELOG（4 条）
 
@@ -65,8 +69,10 @@
 - **EMBEDDED 回退铁律的部署态反例**（W554）：en/81-hardships.html EMBEDDED 清单为空数组 + fetch 指向 site 外路径（`../../scripts/output/data/`）——file:// 与 Pages 部署态双断（截图实锤 0/0 trials）。新增页面自查两条：EMBEDDED 必须含完整数据（不允许空数组等 fetch）；fetch 相对路径不得越出 site/（部署根=site/）。
 - **部署态冒烟与 file:// 审查是两条独立覆盖面**（W565 实证，P04）：EMBEDDED 回退机制使 fetch 成功（部署）与 fetch 失败（file://）走上不同代码路径，character-appearance 契约失配在生产崩溃数日而 file:// 截图审查全绿。凡改动「数据装载层 / fetch 链路」的批次，收尾必跑 `scripts/_deploy_smoke.js`（http.server + Playwright 断言 4xx/pageerror）。**修复 site/data/json 部署副本的批次，收尾必配「旧值标记全页面扫描」（W691 实证 6 页漏网）：json 与页内嵌副本是双路径，只改 json 必产生静默分叉——以修复前旧值为标记 grep 全站 data/en 页面，命中即同步重灌（W678 十六项 json 修复全未配此步，review 批补扫 cave-estate/geo3d/ethics 双语/game-webnovel/visual-art/workplace 六页；text-search-app.js 内嵌语料属同族第三容器，语料重建须三处同改：dataset json+部署副本+app 内嵌）。**
 
-### 流程 / 协作 / 取证（4 条）
+### 流程 / 协作 / 取证（6 条）
 
+- **门禁「建置即红」检测法**（W757 实证·D1）：凡门禁脚本依赖外部运行时（Playwright 浏览器 / Node 包 / 系统工具），**必须核对其 CI job 是否安装该依赖**——脚本本地有依赖所以本地全绿，CI 无依赖则 `require` 抛 `MODULE_NOT_FOUND` → fail-closed 分支打印 FAIL → 整条 `verify_delivery` 红。实证：`check_chart_values.js:904` 硬依赖 `require('playwright')`，而 `ci.yml` 的 verify-delivery job 只装 Python+Node（`scripts/node_modules` 被 gitignore），故第 43 门禁自 W753 建置起在 CI 中**必红**；且因本地 HEAD 领先公开 main 63 提交，长期无人发现（违反 E36-E42 铁则②「门禁建置即绿」）。查法：① 列脚本的 `require`/`import` 外部依赖；② 在对应 job 的 `run:` 块内查安装步骤；③ 缺失即缺陷。
+- **接线回归断言必须锚 `run:` 块，禁字符串存在性**（W757 实证·E-02）：断言「CI 是否执行 X」时，若只做 `"X" in ci_yml`，会被**步骤名/注释**骗过——负样本实测：把 `run: npm run test:server` 改成 `run: echo skipped` 后，`test:server` 仍在 `- name:` 里，断言**假绿**。正确做法：提取 job 正文的 `run:` 命令体（单行 `run: <cmd>` + `run: |` 多行块），只在该文本内匹配。同理，新增防回归测试必须用「摘除接线」负样本证明其会红，否则是假防线（本批 4/4 真防线验证）。
 - **共享机制必须写入仓库内文件（git tracked）**：任何要让其他 Agent 读到的机制/规则/经验，一律写仓库内公共载体（AGENTS.md / 交接文档 / skills/ / docs/10-方法论沉淀/），**禁止只写全局路径**（如 `c:\Users\...\.trae-cn\skills\`）——其他 Agent 在项目 session 读的是仓库版，且 `sync_skills.py --sync` 为仓库→全局单向（全局修改会被覆盖）。改 skills/ 下任何 skill 必须改仓库版后 `python scripts/sync_skills.py --sync` 同步全局（W516 教训：上移机制曾误写全局版，被用户指出载体错误）。（W562：skills/ 目录已退役，本条 sync 指引仅存历史——用户级 `~/.zcode/skills/` 的 4 个通用会话技能为 junction，指向 `D:\open-source\`，与仓库无关。）
 - **W 批次收尾七步清单**（W543-W548 六批 dogfood 后 W563-W566 四批延续实证，沉淀自 2026-09-06 报告 S-A）：① 内容改动 → 专项门禁（改内联脚本/样式必跑 generate_csp + --check）；② 新增/修改 Python 脚本 → `python -m ruff check scripts/`（推送前本地预检，CI 红灯历史三类均为本地可拦截）；③ verify_delivery 核心全绿；④ batch_cascade dry-run → apply（自检通过即登记，无人工修复步骤）；⑤ Write 临时提交信息文件 + `git commit -F`（禁 heredoc）；⑥ `git push` → `gh run list` 确认（CI 与 Screenshot Review 为准）；⑦ 记忆/交接文档状态同步。**数据面扩展先查计数钉（W691 CI 红灯实证）**：扩追踪集/数据集（如 aliases 加人）先 grep tests/ 的 `assert len ==` 计数断言并同步；七步中的 pytest 须本地全量跑（W691 只跑单文件漏掉两例计数钉）。
 - **取证枚举四陷阱**（W563-W566 三犯沉淀 · ④ W649 补录）：① 站点/全仓级枚举一律 Python `glob(recursive=True)`，禁 shell 单层 glob（顶层扫描曾漏 scripts/B_人物/ 子目录生成器）；② `grep -n` 行号前缀输出不得与其他命令输出混读（行号曾被误读为 git ls-files 内容致 F17 假阳性方案项）；③ 判定 ugrep 循环失真时改用 Python 重扫（同会话三犯）；④ **判定"文件是否在仓库内"必须核 `git ls-files`，磁盘存在 ≠ 跟踪**——W649 实证：摸底阶段见 `docs/S4-学术投稿/` 目录在磁盘即判"投稿包滞留 public 仓库待出库"，实际 W620 已 untrack+gitignore 出库（`git ls-files` 返回 0），失真前提污染了三份分析产物并经 ICE 打分放大到榜首，经用户复核才纠正。

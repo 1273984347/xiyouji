@@ -5,6 +5,7 @@
 > 当前复现计数器：3 项 pattern（Preflight interface analysis + Preflight fact verification + Scope-lock constraint）+ 1 项 fallback（Subagent 失败时主代理直接创作）+ 1 项升级（Preflight 三轨验证 W076 首次完整执行真收敛一次通过·W077-W086 累积 10 次复用稳定有效·总计 11 次完整执行）
 > 严重度：中等（影响 subagent 一次通过率 + atomic commit 原则）
 > 最新案例：W086 v2.0.59 Preflight 三轨验证第十一次完整执行真收敛一次通过 P0=0/P1=0/P2=0/P3=0
+> **W754 校（现役口径）**：以上为 W086 时点值（历史记录·按 E2 保留）。Preflight 的**开工侧**已工具化为 `scripts/preflight_check.py`（W736 建·五检：fetch / origin-main 顶部 / 对账表取号 / 工作树态 / 环境；W739 起 `--touches <清单> --self W###` 做跨 Agent 在途文件交集拒绝）。三轨验证的**语料路径已换代**：`site/data/text-search.html` 的内嵌语料于 W691 单源化迁出，语料权威源＝`dataset/text-search.json`（引文核验＝第 20 门禁 `scripts/check_citations.py` 精确子串），`num:` 回目标记现位于 `site/static/js/text-search-app.js`。
 
 ---
 
@@ -24,6 +25,8 @@
 - **Preflight interface analysis**：1/1（2026-07-21 Anthropic T14）
 - **Preflight fact verification**：1/1（2026-07-24 xiyouji W058）
 - **Preflight 双轨验证（升级版）**：1/1（2026-07-26 xiyouji W073，W072 教训吸收）
+- **Preflight 三轨验证**：11/11（W076 首次完整执行 → W086 第十一次·W754 校：与文件头部「1 项升级」为同一系列的两处表述，头部写升级项、此处写执行次数）
+- **开工侧工具化（W754 校增补）**：`scripts/preflight_check.py` 已承接「取号 + 远程/工作树/环境核验 + touches 交集」（W736/W739）；本表其余手工 pattern 仍适用于 subagent fact verification 与 content verification
 - **Scope-lock constraint**：1/1（2026-07-21 Anthropic T13）
 - **Subagent fallback**：3/3（W067/W068/W069）
 
@@ -101,9 +104,9 @@ Task 模板包含事实声明（人物关系/法宝归属/事件顺序）时。
 - **双轨（W073 正例）**：归属验证 + 内容 spot-check 双轨（Read text-search.html 实际 line 范围验证内容匹配），25 处 line 号一次通过 R1b
 
 **操作步骤**：
-1. 主代理 Grep text-search.html 验证 line 号归属（单轨）
-2. 主代理 Read text-search.html 的实际 line 范围（如 line 730-740），核对内容匹配
-3. 如内容不匹配，修正 line 号到正确位置
+1. 主代理核验引用归属（单轨）——**W754 校**：语料已分回化，改为「回目归属 + `dataset/text-search.json` 精确子串命中」（第 20 门禁 `check_citations.py` 同口径）；原写法为 Grep `text-search.html`
+2. 主代理读取引文所在段落核对内容匹配（原写法为 Read `text-search.html` 的实际 line 范围，如 line 730-740）
+3. 如内容不匹配，修正引用到正确位置
 
 **典型对比（W072 vs W073）**：
 
@@ -220,7 +223,7 @@ Task 模板包含事实声明（人物关系/法宝归属/事件顺序）时。
 
 **双轨并发执行**：W086 首次同时执行 A2 Batch 10 + A4 Batch 9 双轨创作，Preflight 三轨验证同时验证 11 处关键 line 号（522/589/632/864/981/1448/2629/2967/4432/7050/7102）。
 
-**三轨验证执行**：
+**三轨验证执行**（W754 校：以下为 W086 时点写法，`text-search.html` 内嵌语料已于 W691 单源化迁出；今日等价口径＝① 回目/键锚归属 ② `dataset/text-search.json` 精确子串内容匹配 ③ `num:` 回目标记查 `site/static/js/text-search-app.js`）：
 1. 第一轨（line 号归属）：Grep text-search.html 验证 11 处 line 号归属
 2. 第二轨（内容匹配）：Read text-search.html 实际 line 范围核对内容
 3. 第三轨（chapter 归属）：Grep num:N 验证 line 号所属回目
@@ -365,8 +368,9 @@ subagent 创建随笔时禁止编造 line 号；
 
 ### 上游 skill
 
-- [C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md](file:///C:/Users/12739/.trae-cn/skills/deep-review-loop/SKILL.md)（v1.2.0 R1a 硬性要求"verifier 必须附工具调用证据"）
+- `C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md`（v1.2.0 R1a 硬性要求"verifier 必须附工具调用证据"·**W754 校：实测失联·去链留值**）
 - [C:\Users\12739\.trae-cn\skills\executing-plans\SKILL.md](file:///C:/Users/12739/.trae-cn/skills/executing-plans/SKILL.md)（Step 2 子步骤 2 Preflight interface analysis + 子步骤 3 Scope-lock constraint）
+- **W754 校**：上述全局路径中 deep-review-loop 已实测失联、仓内 `skills/` 已 W562 退役（executing-plans 全局路径仍在，但非本仓协议载体）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + [CLAUDE.md](../../CLAUDE.md) + [docs/agent/pitfalls.md](../agent/pitfalls.md)，开工侧工具＝`scripts/preflight_check.py`
 
 ### 项目内关联
 

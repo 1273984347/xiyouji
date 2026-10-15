@@ -95,15 +95,15 @@ ls "D:/1/xiyouji" >/dev/null 2>&1 && echo EXISTS || echo MISSING
 **执行步骤（Agent）**：
 1. `python scripts/fetch_gate_stats.py --self-test`（离线负样本自测须全过）。
 2. `python scripts/fetch_gate_stats.py --json > scripts/output/gate-stats-<当日日期>.json`，从输出读 7 日/30 日 UV。
-3. `python scripts/judge_gate.py --uv7 <实测7日UV> --uv30 <实测30日UV> --report`（`--report` 自动追加判定记录到 `docs/10-方法论沉淀/读者数据复盘.md`）。
+3. `python scripts/judge_gate.py --uv7 <实测7日UV> --uv30 <实测30日UV> --report`（`--report` 自动追加判定记录到 `docs/11-报告复盘/读者数据复盘.md`）。
 4. 人工从 GoatCounter 后台补齐 `读者数据复盘.md` 剩余待回填格。**口径声明**：只填后台实有字段（如 7/30 日 visitors、top referrers、热门页面）；平台不提供的指标（如「跳出率」）该格填「平台不提供」并注明原因——不允许留空、写「待回填」、或用未经核实的替代指标与取数路径冒充。
 5. 依据 judge_gate 输出结论，更新交接文档「零、当前阻塞」：写明判定结果（继续分发 / 停止扩容转维持）与下一步指向（若「继续」→ 优先推进本方案 §5 队列；若「停止」→ 冻结 WP-D2 及一切内容扩容批，仅执行 P0/P1 工程批）。
 
 **机判验收**：
 - `git check-ignore .env` 退出码 0（令牌未入库）。
 - `python scripts/fetch_gate_stats.py --self-test` 退出码 0。
-- `grep -c '待回填' docs/10-方法论沉淀/读者数据复盘.md` 输出 `0`。
-- `docs/10-方法论沉淀/读者数据复盘.md` 含 judge_gate 判定原文一行（含日期与 uv7/uv30 数值）。
+- `grep -c '待回填' docs/11-报告复盘/读者数据复盘.md` 输出 `0`。
+- `docs/11-报告复盘/读者数据复盘.md` 含 judge_gate 判定原文一行（含日期与 uv7/uv30 数值）。
 - 交接文档「零」段含本批裁决结论行。
 
 **回归面**：无站点代码改动；常规 verify_delivery 即可。`scripts/output/gate-stats-*.json` 随批入库（数据快照，供后续批次对比）。
@@ -338,7 +338,7 @@ B14 WP-L  信任字段补全
 | 19 | `grep -rn 'D:/1/xiyouji'`（排除 node_modules/archive） | 0 命中 | J |
 | 20 | `git status --porcelain \| wc -l` | == 0 | K |
 | 21 | `grep -L '生成日期' docs/01-全书逐回解读/第*.md \| wc -l` | == 0 | L |
-| 22 | `grep -c '待回填' docs/10-方法论沉淀/读者数据复盘.md` | == 0 | A |
+| 22 | `grep -c '待回填' docs/11-报告复盘/读者数据复盘.md` | == 0 | A |
 
 每批收尾通用必过：`verify_delivery.py` 全绿、`generate_csp.py --check` 0 漂移、`check_structure.py` 过、`lint_links.py --dir .` 0 broken、CI 五工作流 push 后绿（`gh run list` 确认）。
 

@@ -1,4 +1,4 @@
-# 交付门禁体系全量定义（41 槽 · L2 主题层 · W709 自 AGENTS §4.2 迁入·W713 补正第 41 槽归组与标题同步）
+# 交付门禁体系全量定义（43 槽 · L2 主题层 · W709 自 AGENTS §4.2 迁入·W713 补正第 41 槽归组与标题同步·W751 补第 42 槽·W753 补第 43 槽）
 
 > **📖 阅读契约（W709）**：查表型——改 site/、加门禁、动 verify_delivery.py 时按编号查；每条含完整口径与历史实证；编号与 AGENTS §4.2 摘要一一对应。
 > **何时读**：门禁失败要懂原因 / 新增门禁要挂槽 / 复核某条防线范围。**读完你应该能**：说出任一槽位拦什么、豁免与基线在哪。
@@ -11,7 +11,7 @@
 | 结构与加载类（6-11） | 6-11 | docs 全量链接校验、sitemap 覆盖、CSP 漂移、数据漂移、内联脚本语法、CSS 结构平衡 |
 | 声明与完整性类（12-15） | 12-15 | token 覆盖率、动效禁止清单、a11y 对比度、INLINED CSS 完整性 |
 | 数据与一致性类（16-26） | 16-26 | Skills 索引一致性、索引健康、元信息块 v2、术语一致性、原著引文硬验证、动态链接门禁、治理文档维护契约、旁文档同步、图表静态自洽、数据内容一致性、SEO head |
-| 编号与质量防线类（27-41） | 27-41 | W 号区间字面量、可视化可引用性、色盲安全、窄屏降级声明、文档口径体检、CLAUDE.md 速查层完整性、head 内容合法性、CSS 变量引用、声明分隔、孤立选择器、kpi-card 基类、页面内嵌残留标记、故事内时间线双源同步、chapter_stats 双源同步、AGENTS 分层完整性 |
+| 编号与质量防线类（27-42） | 27-42 | W 号区间字面量、可视化可引用性、色盲安全、窄屏降级声明、文档口径体检、CLAUDE.md 速查层完整性、head 内容合法性、CSS 变量引用、声明分隔、孤立选择器、kpi-card 基类、页面内嵌残留标记、故事内时间线双源同步、chapter_stats 双源同步、AGENTS 分层完整性、根级脚本覆盖 |
 
 ## 完整定义
 
@@ -21,7 +21,7 @@
 
 ### 内容与同步类（1-5）
 
-1. **六文档同步**（核心 2 硬门禁：CHANGELOG.md + 交接文档.md 必须含当前 v/W——期望版本由 verify_delivery 动态取自 CHANGELOG 现役版段，dukou-engine.html 页脚降级为新鲜度 WARN（W518 起）；辅助 4 仅 WARN：README / STRUCTURE / 项目说明 / file-index）
+1. **六文档同步**（核心 2 硬门禁：CHANGELOG.md + HANDOVER.md 必须含当前 v/W——期望版本由 verify_delivery 动态取自 CHANGELOG 现役版段，dukou-engine.html 页脚降级为新鲜度 WARN（W518 起）；辅助 4 仅 WARN：README / STRUCTURE / 项目说明 / file-index）
 2. **范围漂移检测**（html 最高 W ≤ 文档+归档最高 W）
 3. **A4 计数一致（EXPECT_A4 字面量「209 篇」）** + **A1-A6 真实计数（六板块顶层 .md 磁盘计数 == README「共 N 篇」声明，当前 N=615<!--stats:a1_a6_docs-->）**
 4. **学术研究轨显式引用**（105 篇）
@@ -29,9 +29,9 @@
 
 ### 结构与加载类（6-11）
 
-6. **docs 全量链接校验**（lint_links 0 broken·W699 扩自 docs/01 至 docs 全量·W700 五改后内建五豁免=fenced+inline code 去噪/git check-ignore 本地产物/docs/archive 冻结档/POSIX 根绝对路径跳过/_w588_ce.html 快照件）
+6. **docs 全量链接校验**（lint_links 0 broken·W699 扩自 docs/01 至 docs 全量·W700 五改后内建五豁免=fenced+inline code 去噪/git check-ignore 本地产物/archive 冻结档/POSIX 根绝对路径跳过/_w588_ce.html 快照件）
 7. **sitemap 覆盖**、**site/data 回退模式**（两条共占第 7 槽·历史形态不拆以保 C2 三方对账不改）
-8. **CSP 漂移**（generate_csp.py --check，856<!--stats:csp_covered--> 页哈希 0 漂移·页数随口径演进以实跑为准）
+8. **CSP 漂移**（generate_csp.py --check，856<!--stats:csp_covered--> 页哈希 0 漂移·页数随口径演进以实跑为准）——**重建操作规程（PRE-26·W742）**：reader/站点产物重建必须四连跑 `build_reader → inline_css → generate_csp → chapter-stats EMBEDDED 重灌`，缺一步即本门禁或第 40 门禁双源红（W737 实证：build_reader 直出无 INLINED·EMBEDDED 漏重灌）
 9. **数据漂移**（check_data_drift.js；W563 扩展：site/data/json 部署副本逐字节对账 47 副本基线 + 页面副本引用存在性 + 副本路径形态解析回原件 + EMBEDDED 单源页页名↔同名原件回退——对账面 44→46 页/71→74 项）、**腐蚀/插件**（check_corruption.py）
 10. **内联脚本语法**（check_js_syntax.js，node vm.Script 批量编译，含 EN 站）
 11. **CSS 结构平衡**（check_structure.py，括号/引号/url 闭合）
@@ -49,7 +49,7 @@
 17. **索引健康**（check_index_health.py，W500 转正：file-index 段完整性/唯一性/最新段残留（豁免 W449-W463 损坏区·仅防新增）+ 方法论 README 双向覆盖（目录 md ↔ 索引链接·待创建占位 0）+ CHANGELOG 编号规则段上限 == 最新 W 段 + 治理文档引用一致性（文档规范.md scripts 引用存在性·verify 挂载脚本存在性）；W526 扩展：段倒序断言（豁免区外 W 号严格递减·防尾部追加）+ 段缺失检测（CHANGELOG 现役版段须均有 file-index 登记段））
 18. **元信息块 v2**（check_frontmatter.py，W501 挂载：内容可信度轨——新文件（不在基线清单内）必须含血缘 + 核验状态 4 字段：生成来源（skill@commit 或 人工撰写）/生成模型（含「未记录」合法·禁编造）/生成日期 YYYY-MM-DD/核验状态三值枚举；基线 frontmatter-baseline.txt 冻结存量 611 篇豁免；口径见文档规范 §4.6）
 19. **术语一致性**（check_glossary.py，W502 挂载：术语表↔dataset/glossary.json 双向同步（--generate 解析生成·禁手改）+ 人物称谓组规范词锚定（传递归一 圣僧→唐僧→玄奘·复合词掩码 心猿意马/金公木母黄婆）；基线 glossary-baseline.txt 冻结存量 303 篇 383 条豁免·只拦新增；口径见文档规范 §4.7）
-20. **原著引文硬验证**（check_citations.py，W503 挂载：`> 原文引文（第N回）：“…”` 行必须对 dataset/text-search.json 去空白归一后精确子串命中·防 AI 幻觉引文；--dir docs 全量·任何未命中 = FAIL·存量引文行 = 0 无豁免；语法见文档规范 §4.8）
+20. **原著引文硬验证**（check_citations.py，W503 挂载·W737 扩为三检：① `> 原文引文（第N回）：“…”` 规范行对 dataset/text-search.json 去空白归一后精确子串命中；② `X道：「……」` 归属对白行必须命中原著全文（防虚构台词冒充实录——W737 实证「名句赏析」57 条中 31 条两语料均不存在）；③ 语料保真检：text-search.json 100 回与 source/原文/分回（剥抬头/截附录/去空白）逐回全等（BL-19/W691 权威源不变式·W737 实证修复前 100/100 回漂移）。豁免区=「原文全文」照录区 + 【文学演绎】标记区（§4.12）；gitignored 本地工作区（S2/S3/S4 等）不进门禁分母；--self-test 9 例（含语料篡改负样本）；任何未命中 = FAIL·存量引文行 = 0 无豁免；语法见文档规范 §4.8/§4.12）
 21. **动态链接门禁**（check_dynamic_links.py，W459 挂载：解析页面 JS 内拼接生成的链接目标（A1_DOC_MAP 映射、EN source_doc 等）并对仓库路径存在性断言，补 lint_links 静态盲区，死链 = FAIL 阻断提交）
 22. **治理文档维护契约**（check_governance_docs.py，挂载即生效：七项检查扫描六文档——历史段遭改写 / 现役值残留多份 / 尾部追加速记段 / 「最后更新」新鲜度（W518 挂载：头部滚动链与尾页脚历史链两处链首条目均须 == CHANGELOG 现役段·finditer 全量扫描），命中记 WARN 不阻断提交（起步策略），为后续转 FAIL 积累监测数据）
 23. **旁文档同步**（W526 挂载：.github/workflows/README.md 头部版本行（vX.Y.Z W###）== CHANGELOG 现役段 + 里程碑行 W450-W### 上限 == 现役 W，任一不符 FAIL——W499/W525 两次实证旁文档滞后漏网，verify 覆盖外盲区封堵）
@@ -75,3 +75,7 @@
 40. **chapter_stats 双源同步**（check_chapter_stats_sync.py --self-test 两负样本，W699 挂载·第 40 门禁：chapter_stats.py 系纯 regex 确定性分析——重跑生成器为真值与 chapter-stats.html EMBEDDED_DATA 全量比对，gitignored 本地 json 不作基准使校验器 CI 可复现；漂移即 FAIL 并按 W691 规则重灌页内嵌副本）
 
 41. **AGENTS 分层完整性**（check_agents_layers.py，W709 挂载·BL-24：L1 摘要层与 L2 主题层结构防线——C1 L2 三件存在含契约 / C2 编号三方对账（AGENTS §4.2 摘要 == gates.md 条目 == verify 实况最高槽位）/ C3 AGENTS 行数上限 ≤450 / C4 指针目标存在；--self-test 5/5；BL-24 搬迁后本文件即 §4.2 全量真身，本条即第 41 槽真身·W713 自「附」节归组）
+
+42. **根级脚本覆盖**（check_script_coverage.py，W751 挂载）：scripts/ 根级非 `_` 前缀脚本（现 103 个）的「有没有机器会跑它」防线——覆盖口径=**四面引用任一**（① tests/** 专项/E2E ② verify_delivery.py 门禁调用 ③ .github/workflows/*.yml ④ Makefile），四面皆无者必须在 `scripts/output/script-coverage-baseline.txt` 显式登记并注明四类之一（①一次性/取证/人工审阅 ②会话直接执行 ③发布链/CI 编排 ④浏览器/布局）。C1 新增脚本四面无引用且未登记=FAIL（新增漂移即拦）；C2 基线陈腐行（脚本已删/重复行）=FAIL；C3 fail-closed 下限（脚本 ≥50 / 覆盖集 ≥15 / 豁免集 ≥10，防解析面塌陷成全绿空真）。建线取证：普查前 46/101 四面无引用（含 new_page.py 页面脚手架 / embed_json.py 嵌入器 / slice_screenshots.py 切片器——三个直接生成或改写站点产物的工具既无专项测试也不被任何门禁点名），本批补三件专测 + 根级 import 冒烟层后 → 67 四面引用 / 36 登记豁免 / 0 FAIL。**判据收窄说明**：原拟用 `--help` 冒烟，普查发现 17 个脚本忽略 `--help` 直接跑主逻辑（如 inline_css.py 真重写 857 页行尾、export_design_tokens.py 真改 generated 日期）+3 个直接跑全量主逻辑，故 CLI 契约面不入门禁，仅留 import 面；--self-test 5/5）
+
+43. **可视化数据断言**（check_chart_values.js，W753 建立·判据类门禁先普查后定阈·挂载与 verify_delivery 同批）：87 个 site/data 可视化页的「**页面真实渲染结果 ↔ 页面数据源**」一致性防线——W753 取证：第 24 槽只做静态文本自洽、tests/unit/test_d3_data_processors.py 是「用 Python 重写 D3 逻辑」的模拟测试（不验证真实渲染）、截图审查只看布局，故 W676 批次的数据装载族缺陷只能靠人工发现。口径=Playwright file:// 直开（禁起本地服务）+「图元数 + KPI 文本」双签名稳定等待（W753 教训：只数元素会采到 count-up 中途值·实测 chapter-stats 采到 96/100）逐页真实渲染，五判据：V1 无 pageerror（数据装载失败第一信号）/ V2 视图非空（图表容器图元·2D 画布像素·Three 场景子对象·表格行·DOM 数据项任一 > 0——防「数据没装上但不报错」空图）/ V3 数据量级自洽（best-fit 数组长度 L 与图元数 S 满足 S/L ≥ 0.5；全站普查干净页比例 p00=0.82·p05=2.8，阈值为远端下限）/ V4 KPI 可复算（[data-value]/.kpi-value/.kpi-card .num 类数字须由数据源复算：数组长度/字段 sum·max·mean·uniq；与可复算计数型标量差 <2% 而不等 = 近失配 FAIL；完全对不上记 na 缺口，禁静默跳过）/ V5 数据源四要素（复用第 28 槽 C1-C4 口径·缺失只计缺口不 FAIL）。形态=基线冻结（scripts/output/chart-values-baseline.txt·87 页 × 6 项 = 522 行·基线外新增/回归/图元数跌破基线 50% 恶化 = FAIL·基线缺失拒绝通过）+ 缺口报告（na 逐页逐条进 chart-values-report.json）+ fail-closed（探针异常/超时/未产出结果 → PROBE 与 V1-V5 全 FAIL）+ 汇总行 `---- 第 43 门禁 可视化数据断言：N FAIL ----`；W753 实测=87 页 20s（5 workers）·0 FAIL·0 probe_error·缺口 V3 9 页 / V4 17 页 / V2 1 页（各页原因见报告）；--self-test 12 例注入式（空图/错值近失配/量级错配/探针异常/基线内不红/基线外必红/恶化必红/无视图意图记 na/缺口记 na）+ tests/unit/test_visualization_data.py 18 例 + tests/e2e/test_visualization_assertions.js 六族真渲染抽样）

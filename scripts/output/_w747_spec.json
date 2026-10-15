@@ -1,0 +1,16 @@
+{
+  "batch": "W747",
+  "date": "2026-10-15",
+  "title": "W747 RAG 系统能力清单入库批",
+  "desc": "能力总览与边界沉淀",
+  "head_entry": "2026-10-15（W747 RAG 系统能力清单入库批）",
+  "head_sentence": "scripts/rag/README 扩写为系统能力与边界清单：四档指标+端点表+四条证伪+四条体系边界+分差三层+元模式+资产索引入库·把实验区的 recipe card 沉淀进仓库防知识断档",
+  "changelog_body": "\n> **来源**：W746 收官后的整合动作（用户提供整合草稿·事实校核后落盘）。**编号说明**：W747 原计划为「路由排序加权批」·经前置实验（title 加权零效果/IDF 加权负效果·第四条证伪）后用户裁定「A 主 B 待触发」不开工·编号改用于本沉淀批。\n> - **T1 README 扩写（scripts/rag/README.md）**：新增「系统能力总览与已知边界」节——①能力总览表（四档指标/主链 @5 0.487/智能路由 +0.041 至 0.528/路由 21 题/向量产物规模）②端点表（/query /graph /health /route·含懒加载语义）③**四条证伪清单**（MMR 敌我不分/长文本补足 −0.25/HyDE 嵌入桥≠重排桥/线性加权字面同权）④四条体系性边界（导语连续性/多 gold 天花板/C 类语义桥/路由 top-1 词汇鸿沟）⑤分差三层（毫厘不动作/中大都待/数量级靶子）⑥**元模式**（语义鸿沟领域线性方法失效·防下一轮重复投入）⑦资产索引（代码/产物/评测集/两坑）。\n> - **T2 事实修正五处**（草稿校核）：①「+0.041」明确为智能路由形态增益（默认全改写实为 −0.032 负）②启动命令统一 py -3.12（ML 档需要·裸 python 仅零依赖档）③eval_compare 位置修正为实验区 tmpe（未入库）④图谱数据文件名修正为 dataset/yuanqi-graph.json ⑤端点表补 /route 懒加载语义。\n> - **T3 沉淀价值**：recipe card/证伪清单原在 tmpe 实验区（gitignored）——实验区清理即知识断档；本批把「能做什么/不能做什么/怎么启动」固化为仓库件·后续会话与维护者可直接读。\n> - **验证（全绿）**：README 结构与既有节无冲突（追加式·LightRAG 对照/档位/硬件纪律原样保留）；ruff/门禁不受影响（纯 md）；verify_delivery 全量四十六段 OK。\n> - **状态**：已落地（级联+提交后以 gh run list 为准）。\n> - **文件**：scripts/rag/README.md、docs/00-导读/W批次编号对账表.md、HANDOVER.md、AGENTS.md、scripts/output/file-index.md、scripts/output/_w747_spec.json、scripts/output/_cascade_files_W747.txt。\n",
+  "milestone_block": "- **W747 RAG 系统能力清单入库批**：\n  - scripts/rag/README 扩写「系统能力总览与已知边界」：四档指标/端点/四条证伪/四条边界/分差三层/元模式\n  - 实验区 recipe card 沉淀进仓库（防知识断档）·事实修正五处\n",
+  "agents_note": "2026-10-15（W747）RAG 系统能力清单入库批（W746 收官整合加用户草稿校核·原 W747 排序加权批证伪后编号改用）：scripts/rag/README 扩写系统能力总览与已知边界节（四档指标加端点表加四条证伪加四条体系边界加分差三层加元模式加资产索引）；事实修正五处（零点四八一明确为智能路由增益加启动命令统一 py -3.12 加 eval_compare 位置修正为实验区加图谱数据文件名修正加负增益提示）；价值=实验区 recipe card 沉淀进仓库防知识断档；验证=纯 md 追加式不影响门禁加 verify 四十六段",
+  "file_index_rows": [
+    "| scripts/rag/README.md | W747 | 扩写「系统能力总览与已知边界」节（四档指标/端点/证伪/边界/分差三层/元模式/资产索引） |",
+    "| docs/00-导读/W批次编号对账表.md | W747 | W747 认领行登记（原排序加权批作废·编号改用记录） |",
+    "| scripts/output/_w747_spec.json | W747 | 本批 spec 入库 |"
+  ]
+}

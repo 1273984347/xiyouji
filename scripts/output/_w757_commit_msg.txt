@@ -1,0 +1,42 @@
+feat(w757): CI 门禁接线缺陷修复批——第 43 门禁 CI 必红修复 + W752 安全单测接线 + 安全扫描扩面
+
+来源：用户令「对项目工程基础设施薄弱点取证并修复」——本 session 对用户三轮共 22 条论断逐条实读磁盘
+对拍（结论：已消解 8 / 证伪 6 / 成立 8），并新发现四条用户未提及的硬缺陷。动工前 preflight_check
+--touches 全绿（对账表 max=W756 → W757 认领·交集 0）。审计报告见
+docs/11-方案报告/工程基础设施薄弱点审计报告-2026-10-16.md。
+
+- D1 第 43 门禁 CI 必红（最高优先级）：verify_delivery.py 第 43 槽委托 check_chart_values.js --gate，
+  该脚本第 904 行硬依赖 require('playwright')；而 ci.yml 的 verify-delivery job 只装 Python + Node，
+  从未安装 Playwright（scripts/node_modules 被 .gitignore 忽略）。缺失即 MODULE_NOT_FOUND →
+  main().catch 打印「1 FAIL」→ _StrictGate 记 FAIL → verify_delivery.py 整体 FAIL。违反项目
+  E36-E42 铁则②「门禁建置即绿」。修复=该 job 补 actions/cache 浏览器缓存（复用 W421 模式·key 绑
+  scripts/package-lock.json）+ npm ci --prefix scripts + npx playwright install --with-deps chromium。
+- D2 W752 安全单测未接线：xiyouji-agent-web/package.json 的 test:server（tools.test.ts 权限边界 /
+  audit.test.ts 审计落盘 / citationGuard.test.ts 引文守卫）在全部 workflow 中零引用，CI 只做
+  build + golden-evals（结构校验）。修复=agent-web-build job 补 npm run test:server 步骤
+  （本地实测 44/44 通过·0.5s）。
+- D3 安全扫描盲区：security_scan.py 的 discover_files() roots 不含 xiyouji-agent-web/、exts 不含
+  .ts/.tsx/.mjs——对「能读写仓库文件、运行脚本」的 React+Express 服务零覆盖（全文件 grep agent-web
+  命中 0）。修复=roots 增 agent-web、exts 增三扩展名，并加 _is_agent_web_build_artifact() 按
+  .gitignore 同一契约排除 tsc 编译产物（server/*.js、server/engine/*.js、vite.config.js 及其 .d.ts），
+  使扫描面 == 入库面。实测扫描面 1122 文件、agent-web 源文件 43 个入面、high=0（与改前基线一致）。
+- D4 放大因子（登记·未修）：本地 HEAD 2c1ec6cd（W756）领先公开 main 80f77dd3（W727）63 个提交，
+  W728-W756 全部未推送，故 D1-D3 长期未被 CI 暴露。推送属远端写操作，列范围外交用户决策。
+- 防回归（负样本验证）：新增 tests/unit/test_ci_wiring.py 9 例 + tests/unit/test_security_scan.py 4 例。
+  判据锚定 run: 块命令体而非字符串存在性——首版只做存在性断言时负样本实测假绿（把 run: 改成
+  echo skipped 后关键字仍在步骤名里），加固后 scripts/_w757_negative_check.py 四个负样本
+  （摘 playwright 安装 / 摘浏览器缓存 / test:server 改 echo / 摘第 43 门禁挂载）全部转红·真防线 4/4。
+- 顺带：docs/11-报告复盘 → docs/11-方案报告 目录改名级联（用户授权）——stats.py 路径与 docs_index.py
+  递归扫描同步、40 处断链修复（docs/INDEX.md 17 / 新目录 README 11 / docs/10 六处 / 子目录相对链接 6）、
+  四页脚版本链升版；CHANGELOG 历史段与 archive/ 冻结档未动。
+- 顺带：修一处既存断链 HANDOVER.md:197（W735 归档漏同步的 governance-experience-transplant-plan 路径）。
+- 范围纪律：不动 verify_delivery.py（§11.2 经用户确认清单）·不改 CHANGELOG 历史段·不改 overrides 策略。
+- 验证（全绿）：verify_delivery.py 全量 48 段核心全部通过 ✅（0 FAIL · 0 WARN）；第 43 门禁本地
+  0 FAIL（87 页 / 20.2s）；test_ci_wiring.py 9 passed；test_security_scan.py 16 passed；
+  _w757_negative_check.py 真防线 4/4；security_scan.py --all high=0（1122 文件）；
+  agent-web npm run test:server 44 passed；ruff scripts/ 全过；generate_csp.py --check 0 漂移；
+  lint_links.py --dir . 19753 链接 0 broken。
+- 遗留：pytest 全量合跑在 81-96% 静默退出（594 例逐文件单跑全过）——已用 git worktree 在未含本批
+  改动的干净 HEAD 上复现同现象，证明非本批引入，登记为 R-07 待后续批次独立排查；CI 侧实际效果
+  待推送后验证。
+- 状态：已落地（本地门禁全绿·待推送）。

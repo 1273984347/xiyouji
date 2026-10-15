@@ -18,7 +18,7 @@
 
 - `site/` 为纯静态站，`style-src` 保留 `unsafe-inline` 为工程取舍（159 页内联 CSS 哈希化不可维护，W424）；
 - agent-web 仅绑定 `127.0.0.1` 回环、默认无认证；外网暴露需显式设置 `AGENT_WEB_TOKEN`（W411）；
-- 引擎工具面对 LLM 输出设有受保护路径黑名单与命令白名单（W680 复核加固），剩余低危项见引擎蓝图。
+- 引擎工具面对 LLM 输出设有受保护路径黑名单与命令白名单（W680 复核加固），剩余低危项见引擎蓝图；W752 追加：写操作持久化审计（`data/audit.jsonl` + `GET /api/audit`·写入 fail-open）、细粒度写入允许域 `AGENT_WEB_WRITE_SCOPE`（默认不设＝全工作目录可写，建议按用途收紧）、工具面安全专项单测 30 例（`npm run test:server`）。
 
 ## 支持的版本
 

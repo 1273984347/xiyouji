@@ -3,9 +3,9 @@
 > Deep Review Loop（深度审查循环）方法论沉淀
 > 首次训诫：2026-07-12 用户明确训诫
 > 升级时间：2026-07-16 4 层过拟合防护
-> 当前版本：v1.2.0（含 4 层防护 + R0-R3 完整流程）
-> 最新案例：W086 v2.0.59 DRL R1b 主代理 spot-check 真收敛一次通过 P0=0/P1=0/P2=0/P3=0（A2 Batch 10 + A4 Batch 9 双轨并发·Preflight 三轨验证第十一次完整执行）
-> 上游 skill：[C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md](file:///C:/Users/12739/.trae-cn/skills/deep-review-loop/SKILL.md)
+> 当前版本：v1.2.0（含 4 层防护 + R0-R3 完整流程）——该版本号属已退役的 deep-review-loop 协议层（W562 随 skills 治理整体退役）；现役审查流程载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + CLAUDE.md + [docs/agent/pitfalls.md](../agent/pitfalls.md)
+> 最新案例：W086 v2.0.59 DRL R1b 主代理 spot-check 真收敛一次通过 P0=0/P1=0/P2=0/P3=0（A2 Batch 10 + A4 Batch 9 双轨并发·Preflight 三轨验证第十一次完整执行）——案例表截至 W086（历史事实·原值不改）；W087+ 同类复现登记于 HANDOVER.md「三、方法论沉淀」与 pitfalls.md，W086 段（含归档期记录的 commit `6408ef2d4`——该 commit 不在当前仓库历史·本仓历史起点 2026-07-30·保留原值不改）已归档 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](../../archive/docs/CHANGELOG-ARCHIVE-tier2.md)
+> 上游 skill（已随 skills 治理退役·W562）：原 `deep-review-loop` 全局路径 `C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md` 已失联（junction 指向不存在的 D:\1\open-source·仓内不共享）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + CLAUDE.md + docs/agent/*.md，仓内等价记录＝[E1铁律.md](E1铁律.md)
 
 ---
 
@@ -241,6 +241,7 @@ A2 = 边际收益 gate 采纳的 P2 残留数
 派 subagent 修复前，主代理必须：
 1. **Preflight fact verification**：Grep 验证关键事实（人物关系/法宝归属/事件顺序）
 2. **Scope-lock constraint**：subagent prompt 必含"仅修改 Files 段列出文件"约束
+3. **现役 Preflight 工具（W736 建·W739 起扩展）**：批次动工前跑 `python scripts/preflight_check.py --touches "<清单>" --self W###`（五检 + 从对账表取号 + 跨 Agent touches 交集拒绝）；内容级 spot-check 用 MCP 工具 `xiyouji_drl_spotcheck`（mcp-server/xiyouji_mcp.py:91·对应 E1 升级版铁律）
 
 详见 [Preflight与Subagent模板.md](Preflight与Subagent模板.md)。
 
@@ -250,7 +251,7 @@ A2 = 边际收益 gate 采纳的 P2 残留数
 |:---|:---|:---|
 | JS 语法 | RunCommand `node -c file.js` | 0 syntax error |
 | Grep 落地 | Grep 修复后的值 | 全部命中 |
-| zip 重新打包 | RunCommand `Compress-Archive` | 包含修复后文件 |
+| zip 重新打包（W754 校：非现役交付流程·全仓无 zip 交付链路，仅存历史） | RunCommand `Compress-Archive` | 包含修复后文件 |
 
 ### 7.3 修复后必跑 R2 重新审查
 
@@ -278,16 +279,16 @@ DRL 报告中**禁用**以下字眼：
 
 ## 九、关联文档
 
-### 上游 skill
+### 上游 skill（已随 skills 治理退役·W562）
 
-- [C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md](file:///C:/Users/12739/.trae-cn/skills/deep-review-loop/SKILL.md)（v1.2.0 协议层）
+- 原 `deep-review-loop` 全局路径已失联（junction 指向不存在的 D:\1\open-source·仓内不共享）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + CLAUDE.md + [docs/agent/pitfalls.md](../agent/pitfalls.md)；仓内等价记录＝[E1铁律.md](E1铁律.md)（R1a 硬性要求·subagent 报告 spot-check）
 
 ### 项目内关联
 
 - [三skill闭环.md](三skill闭环.md)：DRL 在三 skill 闭环中的位置（审查端）
 - [E1铁律.md](E1铁律.md)：DRL R1b/R2 subagent 报告 spot-check
 - [Preflight与Subagent模板.md](Preflight与Subagent模板.md)：DRL R1b/R2 subagent prompt 模板
-- [../../CHANGELOG.md](../../CHANGELOG.md)：每个 W### 的 DRL 收敛记录
+- [../../CHANGELOG.md](../../CHANGELOG.md)：每个 W### 的 DRL 收敛记录（现役件仅存 W700+；更早段见 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](../../archive/docs/CHANGELOG-ARCHIVE-tier2.md)）
 
 ### 项目内 DRL 历史记录
 

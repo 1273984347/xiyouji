@@ -13,7 +13,7 @@
 
 现役叙述面 = README / STRUCTURE / CONTRIBUTING / 新Agent启动Prompt /
 docs/00-导读（非归档）/ docs/10-方法论沉淀/README / .github/workflows/README /
-xiyouji-agent-web/README。CHANGELOG/file-index/交接文档/AGENTS/归档/S*/site 为
+xiyouji-agent-web/README。CHANGELOG/file-index/HANDOVER/AGENTS/归档/S*/site 为
 历史段或级联自维护面，豁免。
 
 用法：python scripts/check_w_range_literal.py [--self-test]

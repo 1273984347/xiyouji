@@ -149,6 +149,22 @@ COMPILED = [(rid, desc, re.compile(pat), sev, exts) for rid, desc, pat, sev, ext
 VISUAL_PAGE_DIRS = ("site",)
 XSS_DOWNGRADE_RULES = {"XSS-001", "XSS-002", "XSS-006"}
 
+# W757：agent-web 的 tsc 编译产物（`.gitignore:114-126` 已忽略：server/*.js、server/engine/*.js、
+# vite.config.js 等）。它们是 .ts 源的生成物，CI 上不存在——若纳入扫描会造成「本地红 / CI 绿」
+# 分歧（实测：tools.test.js 内的测试夹具假凭证命中 SEC-002 high）。按 gitignore 同一契约排除，
+# 保证扫描面 == 入库面（源文件 .ts/.tsx 仍全量扫描）。
+_AGENT_WEB_BUILD_ARTIFACT_RE = re.compile(
+    r"^xiyouji-agent-web/(server/[^/]+\.(js|d\.ts)|server/engine/[^/]+\.(js|d\.ts)|vite\.config\.(js|d\.ts))$")
+
+
+def _is_agent_web_build_artifact(path: Path) -> bool:
+    """判断是否为 agent-web 的 tsc 编译产物（非入库件·CI 不存在·按 gitignore 契约排除）。"""
+    try:
+        rel = str(path.relative_to(ROOT)).replace("\\", "/")
+    except ValueError:
+        return False
+    return bool(_AGENT_WEB_BUILD_ARTIFACT_RE.match(rel))
+
 
 def _is_visual_page(path: Path) -> bool:
     """判断文件是否位于可视化页面目录（D3.js 渲染页面，innerHTML 为标准用法）。"""
@@ -158,21 +174,33 @@ def _is_visual_page(path: Path) -> bool:
 
 
 def discover_files():
-    """发现 site/ + scripts/ + tests/ 下所有 HTML/JS/PY 文件。"""
-    roots = [SITE_DIR, SCRIPTS_DIR, ROOT / "tests", ROOT / "mcp-server"]
-    exts = {".html", ".js", ".py", ".jsx", ".yml", ".yaml", ".txt"}
+    """发现 site/ + scripts/ + tests/ + mcp-server/ + xiyouji-agent-web/ 下所有 HTML/JS/PY/TS 文件。
+
+    W757 扩面：原 roots 不含 `xiyouji-agent-web/`、exts 不含 `.ts/.tsx/.mjs`——该目录是
+    「能读写仓库文件、运行脚本」的 React+Express 服务（安全风险最集中处），此前**零覆盖**
+    （全文件 grep `agent-web` 命中 0）。现纳入扫描，`dist/` 构建产物与 `node_modules/` 由下方
+    排除段跳过（dist 已在排除集，防扫描产物噪声）。
+    """
+    roots = [SITE_DIR, SCRIPTS_DIR, ROOT / "tests", ROOT / "mcp-server",
+             ROOT / "xiyouji-agent-web"]  # W757 扩面
+    exts = {".html", ".js", ".py", ".jsx", ".yml", ".yaml", ".txt",
+            ".ts", ".tsx", ".mjs"}  # W757 扩面：TypeScript / ESM 模块
     files = []
     for root in roots:
         if not root.exists():
             continue
         for p in root.rglob("*"):
             if p.is_file() and p.suffix.lower() in exts:
-                # 跳过 baseline/current 截图目录、node_modules、本地 Playwright 浏览器二进制
-                if any(seg in {"node_modules", "current", "baseline", ".thumbnails", ".pw-browsers"} for seg in p.parts):
+                # 跳过 baseline/current 截图目录、node_modules、构建产物、本地 Playwright 浏览器二进制
+                if any(seg in {"node_modules", "current", "baseline", ".thumbnails", ".pw-browsers", "dist"} for seg in p.parts):
                     continue
                 # W400 修复：跳过下划线前缀的一次性诊断/开发脚本（如 _chk_*.js）
                 # —— 它们非生产代码，且常含 eval/innerHTML 用于本地调试，不应阻断安全门禁
                 if p.name.startswith("_"):
+                    continue
+                # W757：跳过 agent-web 的 tsc 编译产物（gitignore 已忽略·CI 不存在·
+                # 纳入会造成本地红/CI 绿分歧）
+                if _is_agent_web_build_artifact(p):
                     continue
                 files.append(p)
     return sorted(files)
@@ -299,6 +327,46 @@ def _is_external_resource(url):
     return any(domain in lower for domain in EXTERNAL_CDN_PATTERNS)
 
 
+def _check_resource_attrs(text, pattern, kind_label, rel):
+    """外部资源 SRI 属性检查通用体（W728 重构：script/link 两种引用的同构块合一）。
+
+    入参：
+      text——HTML 全文；pattern——资源引用正则（SCRIPT_SRC_RE/LINK_HREF_RE·组 1=URL）；
+      kind_label——资源类型标签（「外部脚本」/「外部样式」·进 findings 描述）；
+      rel——文件 repo 相对路径（findings 的 file 字段）。
+    返回 findings 列表：SRI-001 缺 integrity=medium / SRI-002 缺 crossorigin=low；
+    本地与 http:// 资源经 _is_external_resource 过滤跳过（仅 https 跨域 CDN 纳管）。
+    """
+    findings = []
+    for match in pattern.finditer(text):
+        url = match.group(1)
+        if not _is_external_resource(url):
+            continue
+        tag = match.group(0)
+        line_no = text.count("\n", 0, match.start()) + 1
+        has_integrity = "integrity" in tag.lower()
+        has_crossorigin = "crossorigin" in tag.lower()
+        if not has_integrity:
+            findings.append({
+                "rule": "SRI-001",
+                "file": rel,
+                "line": line_no,
+                "description": f"{kind_label}缺少 integrity 属性: {url}",
+                "severity": "medium",
+                "snippet": tag[:120],
+            })
+        if not has_crossorigin:
+            findings.append({
+                "rule": "SRI-002",
+                "file": rel,
+                "line": line_no,
+                "description": f"{kind_label}缺少 crossorigin 属性: {url}",
+                "severity": "low",
+                "snippet": tag[:120],
+            })
+    return findings
+
+
 def scan_sri(html_dir):
     """验证 HTML 文件中外部资源含 integrity + crossorigin 属性。
 
@@ -333,61 +401,9 @@ def scan_sri(html_dir):
 
         rel = str(hp.relative_to(ROOT)).replace("\\", "/")
 
-        # 检查 <script src="external">
-        for match in SCRIPT_SRC_RE.finditer(text):
-            url = match.group(1)
-            if not _is_external_resource(url):
-                continue
-            tag = match.group(0)
-            line_no = text.count("\n", 0, match.start()) + 1
-            has_integrity = "integrity" in tag.lower()
-            has_crossorigin = "crossorigin" in tag.lower()
-            if not has_integrity:
-                findings.append({
-                    "rule": "SRI-001",
-                    "file": rel,
-                    "line": line_no,
-                    "description": f"外部脚本缺少 integrity 属性: {url}",
-                    "severity": "medium",
-                    "snippet": tag[:120],
-                })
-            if not has_crossorigin:
-                findings.append({
-                    "rule": "SRI-002",
-                    "file": rel,
-                    "line": line_no,
-                    "description": f"外部脚本缺少 crossorigin 属性: {url}",
-                    "severity": "low",
-                    "snippet": tag[:120],
-                })
-
-        # 检查 <link href="external">
-        for match in LINK_HREF_RE.finditer(text):
-            url = match.group(1)
-            if not _is_external_resource(url):
-                continue
-            tag = match.group(0)
-            line_no = text.count("\n", 0, match.start()) + 1
-            has_integrity = "integrity" in tag.lower()
-            has_crossorigin = "crossorigin" in tag.lower()
-            if not has_integrity:
-                findings.append({
-                    "rule": "SRI-001",
-                    "file": rel,
-                    "line": line_no,
-                    "description": f"外部样式缺少 integrity 属性: {url}",
-                    "severity": "medium",
-                    "snippet": tag[:120],
-                })
-            if not has_crossorigin:
-                findings.append({
-                    "rule": "SRI-002",
-                    "file": rel,
-                    "line": line_no,
-                    "description": f"外部样式缺少 crossorigin 属性: {url}",
-                    "severity": "low",
-                    "snippet": tag[:120],
-                })
+        # 检查 <script src="external"> 与 <link href="external">（W728 重构：同构块合一）
+        findings += _check_resource_attrs(text, SCRIPT_SRC_RE, "外部脚本", rel)
+        findings += _check_resource_attrs(text, LINK_HREF_RE, "外部样式", rel)
 
     return findings
 
@@ -586,12 +602,8 @@ def _parse_pip_audit_output(stdout, stderr, returncode, source_name):
 SEVERITY_ORDER = {"high": 0, "medium": 1, "low": 2, "info": 3}
 
 
-def build_report(findings, scan_mode, duration, strict, w268_summary=None):
-    """组装报告数据 + markdown。
-
-    W268 扩展：可选传入 w268_summary（含 headers/sri/pip_audit 子项统计）。
-    """
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+def _summarize_findings(findings):
+    """统计 by_sev/by_rule 并按严重度→文件→行号排序（W731 提取）。"""
     by_sev = {"high": 0, "medium": 0, "low": 0, "info": 0}
     by_rule = {}
     for f in findings:
@@ -599,7 +611,11 @@ def build_report(findings, scan_mode, duration, strict, w268_summary=None):
         by_rule[f["rule"]] = by_rule.get(f["rule"], 0) + 1
     # 排序：按严重度→文件→行号
     findings_sorted = sorted(findings, key=lambda f: (SEVERITY_ORDER.get(f["severity"], 9), f["file"], f["line"]))
+    return by_sev, by_rule, findings_sorted
 
+
+def _render_md_header(timestamp, scan_mode, duration, strict, total, by_sev, w268_summary):
+    """md 头部段：版本/时间/模式/总数/W268 深化行（W731 提取）。"""
     md = []
     md.append("# W268 安全扫描报告\n")
     md.append("- 版本：v2.2.47 · W268 · E8 安全深化")
@@ -607,12 +623,18 @@ def build_report(findings, scan_mode, duration, strict, w268_summary=None):
     md.append(f"- 扫描模式：{scan_mode}")
     md.append(f"- 严格模式：{'是' if strict else '否'}")
     md.append(f"- 耗时：{duration:.2f}s")
-    md.append(f"- 问题总数：{len(findings)}（high={by_sev['high']} / medium={by_sev['medium']} / low={by_sev['low']} / info={by_sev['info']}）")
+    md.append(f"- 问题总数：{total}（high={by_sev['high']} / medium={by_sev['medium']} / low={by_sev['low']} / info={by_sev['info']}）")
     if w268_summary:
         md.append(f"- W268 深化：_headers 校验={'启用' if w268_summary.get('headers_enabled') else '跳过'}"
                   f" ｜ SRI 校验={'启用' if w268_summary.get('sri_enabled') else '跳过'}"
                   f" ｜ pip-audit={'启用' if w268_summary.get('pip_audit_enabled') else '跳过'}")
     md.append("")
+    return md
+
+
+def _render_md_rule_stats(by_rule):
+    """md 第一节：按规则分布表（W731 提取）。"""
+    md = []
     md.append("## 一、按规则分布\n")
     md.append("| 规则 | 描述 | 数量 |")
     md.append("|------|------|------|")
@@ -620,18 +642,36 @@ def build_report(findings, scan_mode, duration, strict, w268_summary=None):
     # 补充 W268 专用规则描述（COMPILED 含占位正则，描述仍可用）
     for rid in sorted(by_rule.keys()):
         md.append(f"| {rid} | {rule_desc.get(rid, _w268_rule_desc(rid))} | {by_rule[rid]} |")
+    return md
+
+
+def _render_md_details(findings_sorted):
+    """md 第二节：明细表（按严重度排序，前 30 条）（W731 提取）。"""
+    md = []
     md.append("\n## 二、明细（按严重度排序，前 30 条）\n")
     md.append("| 严重度 | 规则 | 文件 | 行号 | 描述 |")
     md.append("|--------|------|------|------|------|")
     for f in findings_sorted[:30]:
         rel = f["file"].replace(str(ROOT) + "\\", "").replace("\\", "/")
         md.append(f"| {f['severity']} | {f['rule']} | {rel} | {f['line']} | {f['description']} |")
+    return md
+
+
+def _render_md_rule_list():
+    """md 第三节：全量规则清单表（W731 提取）。"""
+    md = []
     md.append("\n## 三、规则清单\n")
     md.append("| 规则 | 类别 | 严重度 | 描述 |")
     md.append("|------|------|--------|------|")
     for rid, desc, _, sev, _ in RULES:
         cat = rid.split("-")[0]
         md.append(f"| {rid} | {cat} | {sev} | {desc} |")
+    return md
+
+
+def _render_md_w268(w268_summary):
+    """md 第四节：W268 安全深化明细（headers/SRI/pip-audit 计数）（W731 提取）。"""
+    md = []
     # W268 · 分类明细
     if w268_summary:
         md.append("\n## 四、W268 · 安全深化明细\n")
@@ -645,6 +685,12 @@ def build_report(findings, scan_mode, duration, strict, w268_summary=None):
         pip_count = w268_summary.get("pip_audit_findings", 0)
         pip_status = w268_summary.get("pip_audit_status", "未运行")
         md.append(f"- pip-audit：{pip_count} 项问题（{pip_status}）")
+    return md
+
+
+def _render_md_fixes():
+    """md 第五节：修复建议（W731 提取）。"""
+    md = []
     md.append("\n## 五、修复建议\n")
     md.append("- XSS-001~006：改用 textContent 或 DOMPurify 净化后再写入 innerHTML。")
     md.append("- SEC-001~004：敏感信息移至环境变量或 .env（已 gitignore）。")
@@ -653,6 +699,25 @@ def build_report(findings, scan_mode, duration, strict, w268_summary=None):
     md.append("- HDR-001~005：补全 site/_headers 的 5 安全头（参考 Netlify/Cloudflare 配置规范）。")
     md.append("- SRI-001~002：外部 CDN 资源（unpkg/cdn.jsdelivr）添加 integrity + crossorigin 属性。")
     md.append("- DEP-001：pip-audit 发现的漏洞依赖升级到修复版本；定期 `pip install pip-audit && pip-audit`。\n")
+    return md
+
+
+def build_report(findings, scan_mode, duration, strict, w268_summary=None):
+    """组装报告数据 + markdown。
+
+    W268 扩展：可选传入 w268_summary（含 headers/sri/pip_audit 子项统计）。
+    W731 重构：统计与六段渲染拆分（_summarize_findings + _render_md_*）。
+    """
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    by_sev, by_rule, findings_sorted = _summarize_findings(findings)
+
+    md = []
+    md += _render_md_header(timestamp, scan_mode, duration, strict, len(findings), by_sev, w268_summary)
+    md += _render_md_rule_stats(by_rule)
+    md += _render_md_details(findings_sorted)
+    md += _render_md_rule_list()
+    md += _render_md_w268(w268_summary)
+    md += _render_md_fixes()
     report = {
         "version": "W268",
         "version_detail": "v2.2.47",
@@ -711,6 +776,79 @@ def parse_args(argv):
     return ap.parse_args(argv)
 
 
+def _prepare_scan_targets(args):
+    """解析 --target/--all 求扫描文件集；文件不存在时返回 (None, None)（W731 提取）。"""
+    if args.target:
+        target = ROOT / args.target if not Path(args.target).is_absolute() else Path(args.target)
+        if not target.exists():
+            print(f"错误：文件不存在 {target}", file=sys.stderr)
+            return None, None
+        return [target], f"single:{target.name}"
+    return discover_files(), "all"
+
+
+def _run_headers_check(args, findings):
+    """W268 · _headers 安全头校验（--no-headers 跳过）；findings 就地 extend（W731 提取）。"""
+    headers_findings = []
+    if not args.no_headers:
+        print(f"W268 · 校验 _headers：{args.headers_file}")
+        headers_findings = scan_headers(args.headers_file)
+        findings.extend(headers_findings)
+        print(f"W268 · _headers 问题：{len(headers_findings)} 项")
+    return headers_findings
+
+
+def _run_sri_check(args, findings):
+    """W268 · SRI 外部资源校验（--no-sri 跳过）；findings 就地 extend（W731 提取）。"""
+    sri_findings = []
+    if not args.no_sri:
+        print("W268 · 校验外部资源 SRI")
+        sri_findings = scan_sri(SITE_DIR)
+        findings.extend(sri_findings)
+        print(f"W268 · SRI 问题：{len(sri_findings)} 项")
+    return sri_findings
+
+
+def _run_pip_audit_check(args, findings):
+    """W268 · pip-audit 依赖漏洞扫描（--no-pip-audit 跳过）；返回 (findings, 状态文本)（W731 提取）。"""
+    pip_findings = []
+    status = "跳过"
+    if not args.no_pip_audit:
+        print("W268 · 运行 pip-audit 依赖漏洞扫描")
+        pip_findings = run_pip_audit()
+        findings.extend(pip_findings)
+        # 判定 pip-audit 状态
+        if any(f["rule"] == "DEP-000" for f in pip_findings):
+            status = "未安装"
+        elif any(f["rule"] == "DEP-001" for f in pip_findings):
+            status = f"发现 {len([f for f in pip_findings if f['rule'] == 'DEP-001'])} 漏洞"
+        elif any(f["rule"] == "DEP-002" for f in pip_findings):
+            status = "通过"
+        else:
+            status = "完成"
+        print(f"W268 · pip-audit：{status}")
+    return pip_findings, status
+
+
+def _write_report_files(args, report, md):
+    """落盘 md + json 报告；返回 (out_md, out_json)（W731 提取）。"""
+    out_md = Path(args.output)
+    out_json = Path(args.json)
+    out_md.parent.mkdir(parents=True, exist_ok=True)
+    out_md.write_text(md, encoding="utf-8")
+    out_json.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    return out_md, out_json
+
+
+def _exit_code(summary, strict):
+    """退出码判定：high>0 → 1；strict 下 medium>0 → 1（W731 提取）。"""
+    if summary["high"] > 0:
+        return 1
+    if strict and summary["medium"] > 0:
+        return 1
+    return 0
+
+
 def run(argv=None):
     args = parse_args(argv or sys.argv[1:])
     if not args.target and not args.all:
@@ -719,65 +857,25 @@ def run(argv=None):
 
     import time
     start = time.time()
-    if args.target:
-        target = ROOT / args.target if not Path(args.target).is_absolute() else Path(args.target)
-        if not target.exists():
-            print(f"错误：文件不存在 {target}", file=sys.stderr)
-            return 2
-        files = [target]
-        scan_mode = f"single:{target.name}"
-    else:
-        files = discover_files()
-        scan_mode = "all"
+    files, scan_mode = _prepare_scan_targets(args)
+    if files is None:
+        return 2
 
     print(f"W268 安全扫描启动：{len(files)} 文件 · 模式 {scan_mode}")
     findings = []
     for f in files:
         findings.extend(scan_file(f))
 
-    # W268 · _headers 安全头校验
-    headers_findings = []
-    headers_enabled = not args.no_headers
-    if headers_enabled:
-        print(f"W268 · 校验 _headers：{args.headers_file}")
-        headers_findings = scan_headers(args.headers_file)
-        findings.extend(headers_findings)
-        print(f"W268 · _headers 问题：{len(headers_findings)} 项")
-
-    # W268 · SRI 外部资源校验
-    sri_findings = []
-    sri_enabled = not args.no_sri
-    if sri_enabled:
-        print("W268 · 校验外部资源 SRI")
-        sri_findings = scan_sri(SITE_DIR)
-        findings.extend(sri_findings)
-        print(f"W268 · SRI 问题：{len(sri_findings)} 项")
-
-    # W268 · pip-audit 依赖漏洞扫描
-    pip_findings = []
-    pip_audit_enabled = not args.no_pip_audit
-    pip_audit_status = "跳过"
-    if pip_audit_enabled:
-        print("W268 · 运行 pip-audit 依赖漏洞扫描")
-        pip_findings = run_pip_audit()
-        findings.extend(pip_findings)
-        # 判定 pip-audit 状态
-        if any(f["rule"] == "DEP-000" for f in pip_findings):
-            pip_audit_status = "未安装"
-        elif any(f["rule"] == "DEP-001" for f in pip_findings):
-            pip_audit_status = f"发现 {len([f for f in pip_findings if f['rule'] == 'DEP-001'])} 漏洞"
-        elif any(f["rule"] == "DEP-002" for f in pip_findings):
-            pip_audit_status = "通过"
-        else:
-            pip_audit_status = "完成"
-        print(f"W268 · pip-audit：{pip_audit_status}")
+    headers_findings = _run_headers_check(args, findings)   # W268 · _headers 安全头校验
+    sri_findings = _run_sri_check(args, findings)           # W268 · SRI 外部资源校验
+    pip_findings, pip_audit_status = _run_pip_audit_check(args, findings)  # W268 · pip-audit 依赖漏洞扫描
 
     duration = time.time() - start
 
     w268_summary = {
-        "headers_enabled": headers_enabled,
-        "sri_enabled": sri_enabled,
-        "pip_audit_enabled": pip_audit_enabled,
+        "headers_enabled": not args.no_headers,
+        "sri_enabled": not args.no_sri,
+        "pip_audit_enabled": not args.no_pip_audit,
         "headers_findings": len(headers_findings),
         "sri_findings": len(sri_findings),
         "pip_audit_findings": len([f for f in pip_findings if f["rule"] == "DEP-001"]),
@@ -786,22 +884,13 @@ def run(argv=None):
 
     report, md = build_report(findings, scan_mode, duration, args.strict, w268_summary)
 
-    out_md = Path(args.output)
-    out_json = Path(args.json)
-    out_md.parent.mkdir(parents=True, exist_ok=True)
-    out_md.write_text(md, encoding="utf-8")
-    out_json.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    out_md, out_json = _write_report_files(args, report, md)
 
     print(f"报告已生成：{out_md}")
     print(f"JSON 已生成：{out_json}")
     s = report["summary"]
     print(f"耗时 {duration:.2f}s · high={s['high']} medium={s['medium']} low={s['low']} info={s['info']}")
-    # 退出码判定
-    if s["high"] > 0:
-        return 1
-    if args.strict and s["medium"] > 0:
-        return 1
-    return 0
+    return _exit_code(s, args.strict)
 
 
 if __name__ == "__main__":

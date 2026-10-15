@@ -27,7 +27,7 @@ DOCS = [
     "README.md",
     "STRUCTURE.md",
     "docs/00-导读/项目说明.md",
-    "交接文档.md",
+    "HANDOVER.md",
     "scripts/output/file-index.md",
 ]
 
@@ -182,7 +182,7 @@ def main():
         for e in errors:
             print(f"  - {e}")
         print("\n阻断 commit。请修复以上问题后再提交。")
-        print("必检 6 文档: CHANGELOG / README / STRUCTURE / 项目说明 / 交接文档 / file-index")
+        print("必检 6 文档: CHANGELOG / README / STRUCTURE / 项目说明 / HANDOVER / file-index")
         print("提示: 文件计数不一致时，二选一处理：")
         print("  (a) 修改 README 头部声明数以匹配实际")
         print("  (b) 检查目录是否缺文件或多文件")

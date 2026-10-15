@@ -324,6 +324,23 @@ jobs:
         with:
           node-version: '20'
 
+      # W757 修复：本 job 此前只装 Python + Node，从未安装 Playwright——而第 43 门禁
+      # check_chart_values.js 硬依赖 require('playwright')（scripts/node_modules 被 gitignore），
+      # 缺失即 MODULE_NOT_FOUND → main().catch 打印 crashed + 「1 FAIL」→ exit 1 →
+      # _StrictGate 记 FAIL → verify_delivery.py 整体 FAIL。即「门禁建置即红」，
+      # 违反 E36-E42 铁则②。补装浏览器（缓存复用 W421 模式·key 绑 scripts/package-lock.json）。
+      - name: Cache Playwright browsers (W757·复用 W421 模式)
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('scripts/package-lock.json') }}
+
+      - name: Install scripts deps + Playwright (第 43 门禁运行条件·W757)
+        run: |
+          npm ci --prefix scripts
+          cd scripts
+          npx playwright install --with-deps chromium
+
       # W424 新增：交付校验门禁（六文档版本 / A4 209 / 范围漂移 / 导航 / 链接 / sitemap / 回退 / 数据漂移）
       # W424 落地：先 run_all 重新生成 scripts/output/data/*.json（生成物未入库），
       #            再跑 verify_delivery——数据漂移检查在 CI 中真实生效（防脚本改了数据但页面未重嵌）。
@@ -348,6 +365,12 @@ jobs:
 
       - name: Install deps
         run: npm --prefix xiyouji-agent-web ci
+
+      # W757 修复：W752 落地的安全单测（tools.test.ts 权限边界 44 例 / audit.test.ts 审计落盘 /
+      # citationGuard.test.ts 引文守卫）此前只在本地跑——全 workflow grep `test:server` 零命中，
+      # CI 只做 build + golden-evals（结构校验），这批安全防线在 CI 中不设防。
+      - name: Security unit tests (tools 权限边界 / audit 审计 / citationGuard·W757)
+        run: npm --prefix xiyouji-agent-web run test:server
 
       - name: Build (tsc -b && vite build)
         run: npm --prefix xiyouji-agent-web run build

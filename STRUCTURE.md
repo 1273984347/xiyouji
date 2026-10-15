@@ -3,7 +3,7 @@
 
 > **📖 阅读契约（W707）**：索引型——找「东西在哪」时读顶层结构表+目标目录所在段；各板块下的建置沿革（v0.x W0xx 补齐…）是历史记录见 CHANGELOG，勿通读；计数与口径以磁盘实数与 [统计口径说明](docs/00-导读/统计口径说明.md) 为准。
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前批次：W727（2026-10-13）— SVG 保护补打与级联根修批—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前批次：W758（2026-10-16）— CI 首跑暴露缺陷修复批（平台守卫加依赖登记加门禁加固）—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构
@@ -75,19 +75,19 @@
 **回目选取策略**：覆盖全书结构关键节点——开篇（001）、学艺（002）、龙宫借宝招安伏笔（003）、闹天宫引爆（005）、闹天宫转折（007）、取经项目启动（008）、取经组建（014）、团队集结完成（022）、首次决裂（027）、中段斗法（045）、心性整合（058）、火焰山主战（059）、最大外患（074）、后期识魔（078）、终回成佛（100）。每篇均采用六段式模板 + 4 条关联数据可视化链接。
 
 ### 02-人物深度分析/
-按人物立文件，例如 `孙悟空.md`、`唐僧.md` 等。已建 215 篇（A3 人物·谱系表+五众+妖魔+神佛+妖怪次级全覆盖·六段式模板·建置沿革见 [STRUCTURE-ARCHIVE](docs/archive/STRUCTURE-ARCHIVE.md) 与 CHANGELOG）。
+按人物立文件，例如 `孙悟空.md`、`唐僧.md` 等。已建 215 篇（A3 人物·谱系表+五众+妖魔+神佛+妖怪次级全覆盖·六段式模板·建置沿革见 [STRUCTURE-ARCHIVE](archive/docs/STRUCTURE-ARCHIVE.md) 与 CHANGELOG）。
 
 ### 03-主题与情节专题/
-按主题立文件（七段式模板），现 209<!--stats:a4_docs--> 篇；建置沿革见 docs/archive/STRUCTURE-ARCHIVE.md 与 CHANGELOG。
+按主题立文件（七段式模板），现 209<!--stats:a4_docs--> 篇；建置沿革见 archive/docs/STRUCTURE-ARCHIVE.md 与 CHANGELOG。
 
 ### 04-文化与历史背景/
-成书背景、佛道思想、明代社会隐喻、版本演变、历史玄奘与小说玄奘等。已建 4 篇（成书背景/版本演变/佛道思想/明代隐喻·七段式模板·沿革见 [STRUCTURE-ARCHIVE](docs/archive/STRUCTURE-ARCHIVE.md) 与 CHANGELOG）。
+成书背景、佛道思想、明代社会隐喻、版本演变、历史玄奘与小说玄奘等。已建 4 篇（成书背景/版本演变/佛道思想/明代隐喻·七段式模板·沿革见 [STRUCTURE-ARCHIVE](archive/docs/STRUCTURE-ARCHIVE.md) 与 CHANGELOG）。
 
 ### 05-诗词歌赋/
 原著诗词赏析、回目对联分析、主题诗词创作（个人创作）。
 
 ### 06-个人随笔/
-现代视角解读、职场映射、时代变迁中的西游。独立随笔以六段式（古今对位 + 加粗金句）建设，现 44 篇；建置沿革见 docs/archive/STRUCTURE-ARCHIVE.md 与 CHANGELOG。
+现代视角解读、职场映射、时代变迁中的西游。独立随笔以六段式（古今对位 + 加粗金句）建设，现 44 篇；建置沿革见 archive/docs/STRUCTURE-ARCHIVE.md 与 CHANGELOG。
 
 ### 07-学以致用/（v0.11 W016 新增）
 学以致用层——把《西游记》读到的"是什么"和"为什么"延伸到"怎么用"。已建 4 篇（六段式模板：教学讲解轨标）：
@@ -110,14 +110,17 @@
 - `苦难意义论.md`：弗兰克尔 logotherapy 三种价值 + 加缪"想象西西弗是幸福的" + 态度性价值
 
 ### 10-方法论沉淀/（v2.0.43 W070 新增·S1 方向）
-项目方法论沉淀层——把项目过程中积累的可复利方法论经验集中沉淀为教学材料。已建 34<!--stats:methodology_docs--> 篇（目录实数·W702 校真·W716 刷新·含索引 README；统一结构：问题背景 + 核心方法论 + 复现案例 + 修复策略 + 关联文档；全量篇目与阅读路径见 [README.md](docs/10-方法论沉淀/README.md) 索引）。奠基 6 篇：
+项目方法论沉淀层——把项目过程中积累的可复利方法论经验集中沉淀为教学材料。已建 24<!--stats:methodology_docs--> 篇（目录实数·含索引 README；统一结构：问题背景 + 方法论/判据 + 复现案例 + 修复策略 + 关联文档；全量篇目与阅读路径见 [README.md](docs/10-方法论沉淀/README.md) 索引。W754 口径整改 + W755 扩建后本目录只收方法论深度篇，报告类入 docs/11-报告复盘/）。奠基 6 篇：
 
-- `README.md`：索引文件·5 篇主题索引 + 阅读路径（新读者 5 分钟 / 项目接手者 / 方法论作者三路径）+ 复利经验总览表 + 与上游 skill 关系声明 + 维护规则
+- `README.md`：索引文件·目录索引 24 行 + 阅读路径（新读者 5 分钟 / 项目接手者 / 方法论作者三路径）+ 复利经验总览（W086 时点快照）+ 与协议层/现役载体的关系 + 维护规则（含报告分流与载体铁律）
 - `DRL真循环.md`：DRL 真循环 + 4 层过拟合防护（P2 残留 N / 边际收益 gate / 过拟合警报 / 严重度门槛）+ R0-R3 完整流程 + 收敛曲线记录要求 + 3 个复现案例（W069 27 P1 / Phase F v1.1 14.3%→0% / Phase B v0.8 12→0→3→0→0）+ Verdict 字眼禁令 + 修复策略三件套
 - `三skill闭环.md`：DRL→mem-wrap-up→self-evolution 单向闭环 + 正反向触发链 + L5 运行时检查 + L1 版本联动 + L3 显式声明 + L5+L3 当前 session 立即验证 + P2/P3 跨 skill 语义统一 + 4 个复现案例（2026-07-22 首次 / v1.0 阶段 / W039 / W069）
 - `E1铁律.md`：E1 跨 session git tracked（9/9 复现）+ E1 升级版修复落地验证（2/2 复现）+ Subagent 工具证据不可盲信（多次复现）+ W069 系统性编造 line 号（1/1 严重级别）+ 三层 spot-check 协议 + Preflight fact verification 扩展 + 5Why 根因分析
 - `Preflight与Subagent模板.md`：Preflight interface analysis（1/1 复现·Anthropic T14）+ Preflight fact verification（1/1 复现·xiyouji W058）+ Scope-lock constraint（1/1 复现·Anthropic T13）+ Subagent fallback 模式（3/3 复现·W067/W068/W069）+ 完整 subagent prompt 模板 + W069 新增约束（禁止编造 line 号）
 - `双索引可追溯改造.md`：CHANGELOG W### ID（正向时间线）+ file-index.md（反向文件索引）+ 双向链接字段 + 4 个使用场景（时间点→变更 / 文件→W### / 跨文件影响面追溯 / 改动后影响面扫描）+ file-index.md 结构 + CHANGELOG.md W### 段结构 + 维护规则
+
+### 11-方案报告/（W737 新增·W758 改名并子目录化）
+报告复盘层——全部工作复盘/审查/调研报告的统一归档与索引（W737 对抗性审查后归置·承接 10-方法论沉淀 的报告类条目、根目录调研报告与 tmpe 审查产物）。目录下 20<!--stats:report_docs--> 篇 .md（现役报告 17 篇 + 索引 README + 计划方案 2 篇；复盘系列 11 篇归入 `工作复盘与优化分析报告/` 子目录；历史归档 9 篇在 archive/docs/复盘报告/ 以指针形式引用；全量篇目见 [README.md](docs/11-方案报告/README.md) 索引）。与 10-方法论沉淀 的分工：本目录收「报告」（过去周期发生了什么），10 收「方法论」（以后同类事怎么做）。
 
 ### S2-外部分享/（W404 新增·内容分发）
 
@@ -274,7 +277,7 @@
 
 ## 版本变更
 
-完整版本变更历史见 [CHANGELOG.md](CHANGELOG.md)（唯一事实源·文档规范 §3：本文件禁止写 W### 细节）。历史段按三段式归档（口径以 CHANGELOG 头部为准）：W001-W399 → docs/archive/CHANGELOG-ARCHIVE-tier2.md；W400-W416、W417-W464+W484 段 → docs/archive/CHANGELOG-ARCHIVE.md（W422/W511）；现役 v2.3.84+（W485+）。另 v0.1-v2.2.48（W001-W272）的旧版逐版本里程碑描述已迁至 [STRUCTURE-ARCHIVE.md](docs/archive/STRUCTURE-ARCHIVE.md)（2026-08-16 W448）。
+完整版本变更历史见 [CHANGELOG.md](CHANGELOG.md)（唯一事实源·文档规范 §3：本文件禁止写 W### 细节）。历史段按三段式归档（口径以 CHANGELOG 头部为准）：W001-W399 → archive/docs/CHANGELOG-ARCHIVE-tier2.md；W400-W416、W417-W464+W484 段 → archive/docs/CHANGELOG-ARCHIVE.md（W422/W511）；现役 v2.3.84+（W485+）。另 v0.1-v2.2.48（W001-W272）的旧版逐版本里程碑描述已迁至 [STRUCTURE-ARCHIVE.md](archive/docs/STRUCTURE-ARCHIVE.md)（2026-08-16 W448）。
 
 **主要阶段概要**（细节见 CHANGELOG 对应版本段）：
 
