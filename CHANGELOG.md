@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W746），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W747），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,15 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W747（2026-10-15）：RAG 系统能力清单入库批
+> **来源**：W746 收官后的整合动作（用户提供整合草稿·事实校核后落盘）。**编号说明**：W747 原计划为「路由排序加权批」·经前置实验（title 加权零效果/IDF 加权负效果·第四条证伪）后用户裁定「A 主 B 待触发」不开工·编号改用于本沉淀批。
+> - **T1 README 扩写（scripts/rag/README.md）**：新增「系统能力总览与已知边界」节——①能力总览表（四档指标/主链 @5 0.487/智能路由 +0.041 至 0.528/路由 21 题/向量产物规模）②端点表（/query /graph /health /route·含懒加载语义）③**四条证伪清单**（MMR 敌我不分/长文本补足 −0.25/HyDE 嵌入桥≠重排桥/线性加权字面同权）④四条体系性边界（导语连续性/多 gold 天花板/C 类语义桥/路由 top-1 词汇鸿沟）⑤分差三层（毫厘不动作/中大都待/数量级靶子）⑥**元模式**（语义鸿沟领域线性方法失效·防下一轮重复投入）⑦资产索引（代码/产物/评测集/两坑）。
+> - **T2 事实修正五处**（草稿校核）：①「+0.041」明确为智能路由形态增益（默认全改写实为 −0.032 负）②启动命令统一 py -3.12（ML 档需要·裸 python 仅零依赖档）③eval_compare 位置修正为实验区 tmpe（未入库）④图谱数据文件名修正为 dataset/yuanqi-graph.json ⑤端点表补 /route 懒加载语义。
+> - **T3 沉淀价值**：recipe card/证伪清单原在 tmpe 实验区（gitignored）——实验区清理即知识断档；本批把「能做什么/不能做什么/怎么启动」固化为仓库件·后续会话与维护者可直接读。
+> - **验证（全绿）**：README 结构与既有节无冲突（追加式·LightRAG 对照/档位/硬件纪律原样保留）；ruff/门禁不受影响（纯 md）；verify_delivery 全量四十六段 OK。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：scripts/rag/README.md、docs/00-导读/W批次编号对账表.md、HANDOVER.md、AGENTS.md、scripts/output/file-index.md、scripts/output/_w747_spec.json、scripts/output/_cascade_files_W747.txt。
 
 ### W746（2026-10-15）：语义页面路由端点批
 > **来源**：T-01 Phase-0 ST-06 转正（用户批准开工）——路由原型 21 题分层评测过目后走标准批次。
