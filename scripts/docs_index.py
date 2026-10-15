@@ -41,6 +41,7 @@ SECTION_TITLES = {
     "08-提升认知": "08 · 提升认知",
     "09-精神塑造": "09 · 精神塑造",
     "10-方法论沉淀": "10 · 方法论沉淀",
+    "11-方案报告": "11 · 方案报告",
     "_dev": "开发笔记 (_dev)",
 }
 
@@ -73,7 +74,9 @@ def scan_docs(docs_dir: Path, include_dev: bool = False) -> dict:
         if not sub.name[0].isdigit() and sub.name != "_dev":
             continue
         entries = []
-        for md in sorted(sub.glob("*.md")):
+        # W757：递归扫描（11-方案报告 起含子目录·如 工作复盘与优化分析报告/ 与 计划方案/），
+        # 排序键用相对路径保证跨子目录顺序稳定（原 sub.glob("*.md") 只扫顶层，改名子目录化后会漏项）。
+        for md in sorted(sub.rglob("*.md")):
             if md.name == "INDEX.md":
                 continue
             title = extract_title(md)

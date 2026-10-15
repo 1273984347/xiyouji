@@ -11,6 +11,19 @@
 ---
 
 
+## W757 CI 门禁接线缺陷修复批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/ci.yml | W757 | verify-delivery job 补 Playwright（缓存+`npm ci --prefix scripts`+`playwright install`·D1）；agent-web-build job 补 `test:server`（D2） |
+| scripts/security_scan.py | W757 | discover_files roots 增 xiyouji-agent-web、exts 增 .ts/.tsx/.mjs、按 gitignore 契约排除 tsc 编译产物（D3） |
+| tests/unit/test_ci_wiring.py | W757 | 新增 9 例 CI 接线回归测试（锚 `run:` 块命令体·负样本 4/4 验证） |
+| tests/unit/test_security_scan.py | W757 | 补 4 例扫描扩面断言（agent-web 覆盖/TS 扩展名/产物排除/规模下限） |
+| scripts/_w757_negative_check.py | W757 | 负样本验证器（逐条摘除接线断言测试必红） |
+| docs/11-方案报告/工程基础设施薄弱点审计报告-2026-10-16.md | W757 | 三轮论断对拍 + 四条新发现缺陷 + 修复记录（报告正文） |
+| docs/11-方案报告/README.md | W757 | 索引登记（现役报告 16→17 篇） |
+| docs/00-导读/W批次编号对账表.md | W757 | W757 认领行登记 |
+
 ## W756 人名用字语料纯度批（2026-10-16）
 
 | 文件 | W | 说明 |

@@ -3,7 +3,7 @@
 
 > **📖 阅读契约（W707）**：索引型——找「东西在哪」时读顶层结构表+目标目录所在段；各板块下的建置沿革（v0.x W0xx 补齐…）是历史记录见 CHANGELOG，勿通读；计数与口径以磁盘实数与 [统计口径说明](docs/00-导读/统计口径说明.md) 为准。
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前批次：W756（2026-10-16）— 人名用字语料纯度与口径登记（清语料加口径登记）—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前批次：W757（2026-10-16）— CI 门禁接线缺陷修复（第 43 门禁 CI 必红 + 安全单测接线 + 扫描扩面）—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构
@@ -119,8 +119,8 @@
 - `Preflight与Subagent模板.md`：Preflight interface analysis（1/1 复现·Anthropic T14）+ Preflight fact verification（1/1 复现·xiyouji W058）+ Scope-lock constraint（1/1 复现·Anthropic T13）+ Subagent fallback 模式（3/3 复现·W067/W068/W069）+ 完整 subagent prompt 模板 + W069 新增约束（禁止编造 line 号）
 - `双索引可追溯改造.md`：CHANGELOG W### ID（正向时间线）+ file-index.md（反向文件索引）+ 双向链接字段 + 4 个使用场景（时间点→变更 / 文件→W### / 跨文件影响面追溯 / 改动后影响面扫描）+ file-index.md 结构 + CHANGELOG.md W### 段结构 + 维护规则
 
-### 11-报告复盘/（W737 新增·报告归置）
-报告复盘层——全部工作复盘/审查/调研报告的统一归档与索引（W737 对抗性审查后归置·承接 10-方法论沉淀 的报告类条目、根目录调研报告与 tmpe 审查产物）。已建 17<!--stats:report_docs--> 篇（现役报告 16 篇 + 索引 README；历史归档 9 篇在 archive/docs/复盘报告/ 以指针形式引用；全量篇目见 [README.md](docs/11-报告复盘/README.md) 索引）。与 10-方法论沉淀 的分工：本目录收「报告」（过去周期发生了什么），10 收「方法论」（以后同类事怎么做）。
+### 11-方案报告/（W737 新增·W758 改名并子目录化）
+报告复盘层——全部工作复盘/审查/调研报告的统一归档与索引（W737 对抗性审查后归置·承接 10-方法论沉淀 的报告类条目、根目录调研报告与 tmpe 审查产物）。目录下 20<!--stats:report_docs--> 篇 .md（现役报告 17 篇 + 索引 README + 计划方案 2 篇；复盘系列 11 篇归入 `工作复盘与优化分析报告/` 子目录；历史归档 9 篇在 archive/docs/复盘报告/ 以指针形式引用；全量篇目见 [README.md](docs/11-方案报告/README.md) 索引）。与 10-方法论沉淀 的分工：本目录收「报告」（过去周期发生了什么），10 收「方法论」（以后同类事怎么做）。
 
 ### S2-外部分享/（W404 新增·内容分发）
 
