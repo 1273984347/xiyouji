@@ -1,10 +1,10 @@
 # AGENTS.md — 《详解西游记》项目 Agent 指南
 
-> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 41 条门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
+> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 43 条门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
 >
 > 本文件面向进入本仓库工作的 AI Agent（及新接手的人类维护者），提供项目的用途、技术栈、目录结构、关键模块、依赖关系、构建运行方式与必须遵守的铁律。动手前请通读；更细的规则以文末「权威文档」为准。
 >
-> **维护契约（防乱写）**：本文档是 Agent 协作指南，只允许结构性编辑——① 保持 §1–§8 骨架不变；② 新增铁律/规则必须**就地并入对应章节**并全篇去重（禁止追加「速记 / 补充」尾部段落）；③ 版本脚注更新须与当前 HEAD（vX.Y.Z W###，用 `git rev-parse --short HEAD` 核对）一致；④ 与 交接文档 / 文档规范 / CHANGELOG 冲突时以后三者为准。
+> **维护契约（防乱写）**：本文档是 Agent 协作指南，只允许结构性编辑——① 保持 §1–§8 骨架不变；② 新增铁律/规则必须**就地并入对应章节**并全篇去重（禁止追加「速记 / 补充」尾部段落）；③ 版本脚注更新须与当前 HEAD（vX.Y.Z W###，用 `git rev-parse --short HEAD` 核对）一致；④ 与 HANDOVER / 文档规范 / CHANGELOG 冲突时以后三者为准。
 
 ---
 
@@ -55,6 +55,7 @@ xiyouji/
 │   ├── 06-个人随笔/       # A2 随笔（44 篇）
 │   ├── 07-09/             # 学以致用 / 提升认知 / 精神塑造
 │   ├── 10-方法论沉淀/     # 复盘、诊断 SOP、DRL 真循环等可复利经验
+│   ├── 11-方案报告/       # 复盘/审查/调研报告统一归档（W737 建·W757 改名·报告类不再入 10）
 │   ├── S2/S3/S4/          # 外部分享 / 方法论外部分享 / 学术投稿候选
 │   ├── superpowers/       # 开发过程 spec/plan 档案
 │   ├── _dev/  _templates/ # 开发内部文档 / 内容模板（勿直接套用）
@@ -79,7 +80,7 @@ xiyouji/
 ├── tests/                 # pytest + Playwright E2E
 ├── assets/                # 字体源、图片
 ├── references/  timeline/  tools/  hyperframes/
-├── README.md / STRUCTURE.md / CHANGELOG.md / DESIGN.md / 交接文档.md / 新Agent启动Prompt.md / CLAUDE.md（AI 速查层·W664）
+├── README.md / STRUCTURE.md / CHANGELOG.md / DESIGN.md / HANDOVER.md / 新Agent启动Prompt.md / CLAUDE.md（AI 速查层·W664）
 └── LICENSE + LICENSE-CONTENT.md  # 双协议
 ```
 
@@ -102,9 +103,9 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 
 ### 4.2 交付门禁体系（verify_delivery.py，pre-commit 强制 · 摘要层）
 
-> **📖 阅读契约（W709）**：索引型——本节=41 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
+> **📖 阅读契约（W709）**：索引型——本节=43 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
 
-verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 41 槽，五组：
+verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 43 槽，五组：
 
 **内容与同步类（1-5）**：
 1. **六文档同步**
@@ -140,7 +141,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 25. **数据内容一致性**
 26. **SEO head**
 
-**编号与质量防线类（27-41）**：
+**编号与质量防线类（27-43）**：
 27. **W 号区间字面量**
 28. **可视化可引用性**
 29. **色盲安全**
@@ -156,18 +157,20 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 39. **故事内时间线双源同步**
 40. **chapter_stats 双源同步**
 41. **AGENTS 分层完整性**
+42. **根级脚本覆盖**
+43. **可视化数据断言**（check_chart_values.js·W753）
 
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
 ### 4.3 工具链要点（摘要层 · 坑位全量已迁 L2）
 
-> **📖 阅读契约（W709）**：索引型——31 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
+> **📖 阅读契约（W709）**：索引型——38 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
 
 **主题视图（W706·按需查坑·正文按批次序不动）**：CSS 类=W557 基类丢失/W558 缺分号/W673 三门禁/W571 inline_css 分发/W582-W589 暗色族；JS 类=W575 空选区与触屏坑/W568 Express close 语义/W674 defer 时序/W656 audit 单模块；git 提交类=W649 级联清单与并行互斥/W698 scope+safe_commit/W537 三新规/W514 heredoc/W509 BOM 禁；级联类=W553 CRLF 翻倍/W664 desc 分隔符/W663 跳号手工先例/W679 日期串误报/W705 插入保留锚点；数据类=W691 计数钉与旧值扫描/W693 残留标记门禁/W565 部署态冒烟/W703-704 stats 对账；文档类=W520 字面量禁/W496 数字现测/W663 doc-sync/W706 元规则与标识符禁令；Windows 类=W509 BOM/W514 heredoc/W535 路径实参/W706 终端编码兜底。
 
-**最高频铁则（全文见 pitfalls.md）**：改内联脚本必跑 generate_csp.py；批量改 CSS/JS 验括号平衡；多行逻辑禁 shell heredoc 落 Python 文件；同文件 Edit 串行；级联后按清单 git add。
+**最高频铁则（全文见 pitfalls.md）**：改内联脚本必跑 generate_csp.py；批量改 CSS/JS 验括号平衡；多行逻辑禁 shell heredoc 落 Python 文件；同文件 Edit 串行；级联后按清单 git add；认领批次登记 touches·动工前 `preflight_check.py --touches <清单> --self W###` 查在途交集（跨 Agent 版「同文件串行」）。
 
-**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS/视觉渲染（9）· JS/CSP/运行时（3）· git/提交/并发（7）· 级联/CHANGELOG（4）· 数据/内容可信度（4）· 流程/协作/取证（4）。
+**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS/视觉渲染（9）· JS/CSP/运行时（5）· git/提交/并发（12）· 级联/CHANGELOG（4）· 数据/内容可信度（4）· 流程/协作/取证（6）。计数口径 = 各节顶层「- **」条目数（W757 校：流程节新增 2 条「门禁建置即红检测法·接线断言锚 run 块」由 4 升至 6，总 38→40）。
 
 ### 4.4 Web Agent（xiyouji-agent-web/ · 摘要层）
 
@@ -177,6 +180,8 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 ## 5. 构建与运行方式
 
 ### 5.1 统一编排（Makefile）
+
+> **环境依赖**：Makefile 目标需预装 `make`（Unix/WSL 原生；Windows 若无 make，可直接调 `python scripts/` 下对应脚本——各目标的脚本映射见 Makefile 注释）。
 
 ```bash
 make help          # 查看全部目标
@@ -230,7 +235,7 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ## 6. 必须遵守的铁律
 
-1. **六文档同步（W393 降级）**：每完成一个 W 批次，核心 2（CHANGELOG + 交接文档）必须写，辅助 4（README/STRUCTURE/项目说明/file-index）里程碑时跑 bump_version.py 补齐。
+1. **六文档同步（W393 降级）**：每完成一个 W 批次，核心 2（CHANGELOG + HANDOVER）必须写，辅助 4（README/STRUCTURE/项目说明/file-index）里程碑时跑 bump_version.py 补齐。
 2. **E1 铁律（声明 ≠ 落地）**：每个文件修改后 Grep spot-check 验证落地，禁止假收敛。
 3. **改内联脚本 → 重跑 generate_csp.py**（CSP 哈希失配会整脚本被拒）。
 4. **批量改 CSS/JS → 验证括号/引号平衡**（check_structure.py）。
@@ -250,10 +255,10 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 0. 开局先跑 `python scripts/agent_start.py`——实读磁盘输出当前事实摘要（现役三元组/近 3 批次/stats 全键/对账表现势/阻塞·W705）——防「记忆代读」，值全部来自磁盘实时读取。
 1. 读 `CLAUDE.md`（AI 速查层，1 分钟）→ 必守规则与常用命令速览（W664 起，宿主自动加载）。
-2. 读 `交接文档.md`「零、当前阻塞」+「一、当前进度」→ 当前 HEAD（vX.Y.Z W###）、下一 W 编号、遗留待办。
+2. 读 `HANDOVER.md`「零、当前阻塞」+「一、当前进度」→ 当前 HEAD（vX.Y.Z W###）、下一 W 编号、遗留待办。
 3. 读 `README.md` → 项目全貌、内容规模、在线站点、双协议。
 4. 读 `docs/00-导读/文档规范.md` §11 → 文件管控清单（必同步/禁擅改/接手速查 6 步/同步核对 10 项）。
-5. 读 `交接文档.md`「三、方法论沉淀」→ 可复利经验。
+5. 读 `HANDOVER.md`「三、方法论沉淀」→ 经验**总入口**（W755 起指针化：现役坑位/门禁读 [docs/agent/pitfalls.md](docs/agent/pitfalls.md) 与 [docs/agent/gates.md](docs/agent/gates.md)，深度篇读 [docs/10-方法论沉淀/](docs/10-方法论沉淀/README.md)）。
 6. 深挖结构看 `STRUCTURE.md`、`scripts/output/file-index.md`（反向索引）、`CHANGELOG.md`（正向时间线）。
 7. 动手前跑 `python scripts/verify_delivery.py` 确认基线全绿。
 
@@ -261,9 +266,9 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ## 8. 权威文档（冲突时以此为准）
 
-> **清单间裁定链（W706）**：文档规范 §11（文件管控）> CHANGELOG 现役段 > 交接文档。本节与 CLAUDE.md（速查指针）、CONTRIBUTING（贡献者协作面）系三视角清单，内容不一致时按裁定链与本节为准。
+> **清单间裁定链（W706）**：文档规范 §11（文件管控）> CHANGELOG 现役段 > HANDOVER。本节与 CLAUDE.md（速查指针）、CONTRIBUTING（贡献者协作面）系三视角清单，内容不一致时按裁定链与本节为准。
 
-- 进度中枢 / 规则：`交接文档.md`、`新Agent启动Prompt.md`（速用精简版）、`CLAUDE.md`（AI 速查层·W664）
+- 进度中枢 / 规则：`HANDOVER.md`、`新Agent启动Prompt.md`（速用精简版）、`CLAUDE.md`（AI 速查层·W664）
 - 文档规范：`docs/00-导读/文档规范.md`（尤其 §11 文件管控）
 - 设计规范：`DESIGN.md`（§1-4 视觉 / **§5 动效契约**）
 - 目录结构：`STRUCTURE.md`
@@ -272,4 +277,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [docs/archive/AGENTS-ARCHIVE.md](docs/archive/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W722-W722 级联自动滚动·脚注保留最近 5 条·grep 查勿通读）；2026-10-12（W723）级联清单反向覆盖根修批（用户圈选 HANDOVER v2 根修候选现做加 W537③ 八批旧账清偿）：C4-f 文件清单入库对账（现役段文件行路径 token 子集 HEAD 树∪staged 加无工作树残留加违者 FAIL 加缺行 NOTE 起步策略加手工件唯一防线三犯实证）加 级联 precheck 强制 body 含文件行（四件套必填机器保证）加 pitfalls git 类新条与 W537③ 更新加 文档规范 §5 文件行路径形态规范禁描述列举加 本段文件行首个规范示范加 self-test 16→18 例（T17/T18）；2026-10-12（W724）页脚链损坏修复与链长治理批（用户浏览器实见页脚异常提问触发）：W717 双重缺陷根修（group(0) 回写致每批整链复制加 800 窗口截断致 token 粘连·六批自强化 index 重复 182/dukou 216·验证盲区=只查链头未查重复）改 纯前插不回写加去重断言加 7B 链长治理落地（12 条裁剪加尾注加历史权威 CHANGELOG 零损失）加 四页首现段打捞重建干净链 0 重复；2026-10-12（W725）review 收官 mini 批（用户令 review·范围 W720-W724 十一提交·W719 先例第九次）：机械扫净加 门禁六连全绿加 S-29 指针滚动注单段化（累积缺陷插前剥旧只留单段最新·本批级联自动收敛）加 文件行覆盖度对账新方法（W720-W722 历史形态不补加 W723 全覆盖加 W724 漏列 2 件现役段补列 AGENTS_ARCHIVE 与 foot_rebuild）加 垃圾件 PIPE 与废弃 msg 清除；2026-10-13（W726）本地工具链修复批（用户令排查代码中的报错·无具体报错转全量扫描）：缺陷 1 fix_svg_negative_widths ROOT 三级上溯加站点目录存在性 fail-closed（W447 归档搬迁失同步致 glob 静默空扫与 dashboard 读崩·make audit 每跑必挂·沙盒验证修复后 87 页扫描 35 页待打保护）加 缺陷 2 Makefile data-validate 空目录跳过保护（output/data 系 gitignore 可重建产物·fresh clone 不再挂 make ci）加 缺陷 3 十二处死链清理（README 改指 CHANGELOG 加 v08 七处剥链保文加 S4 四处本地存档注记·lint_links 19557 链接 0 broken）；2026-10-13（W727）SVG 保护补打与级联 CRLF 根修批（用户 quote 拍板批次 B 选项 1 直接打掉）：fix_svg 修复后首跑对 35 个可视化页补打 clientWidth 最小宽度保护（W400 后新增页存量清偿加 W447 起审计死盲区复绿）加 generate_csp 重注入 35 页零漂移加 batch_cascade L176 rfind(nl)+1 改 +len(nl)（CRLF 工作树双字符 nl off-by-one 根修·W726 级联 apply 致交接文档混行尾·W706 防线在 W727 dry-run 拦截实证）加 交接文档两处字节级修复（739 CRLF 纯净）加 验证六连（dry-run 0 待改加 csp check 856 页 0 漂移加 verify full 46 段 0 FAIL 加 pytest 296 加 js 语法 855 加 links 0 broken）。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W748-W749 级联自动滚动·脚注保留最近 5 条·grep 查勿通读）；2026-10-15（W751）根级工具链防护批（用户三项薄弱点裁决之一加第 42 门禁挂载）：check_script_coverage 第 42 槽（四面引用加基线冻结加 self-test 六例）加 new_page 十六例加 embed_json 十六例加 slice_screenshots 十二例加根级 import 冒烟九十一例加 gate_count 四十一到四十二；验证=新增五文件一百四十五例加 ruff 零加第 42 门禁零 FAIL 加 agents 分层三方对账四十二加 doc-sync 零 FAIL；负面结论=十七脚本忽略 --help 直接跑主逻辑故判据收窄为 import 面；2026-10-16（W754）方法论目录口径整改批（用户令审计 docs/10-方法论沉淀 后裁 B 范围）：必修 4 类「narratology-13d 到 16d 页面更名 10 处（W700 断链清债漏 docs/10 加第 38 门禁不扫 md 加反引号路径非链接三重盲区）加 agent-web 迁移评估结论反转（W543-W548 落地·W568 关闭·ignore 已删加现役栈实测）加记忆研究七处行号锚点换代（语料分回化·改回目加引文·第 20 门禁口径）加上游 skill 协议层失联改指仓内（三 junction 断加仓内 skills W562 退役）」加建议改 8 类「README 索引重写（报告篇数引用式加复利总览标 W086 快照加协议层节改订加维护规则补分流与载体铁律）加 E1 计数自洽（23/23 与 21/21 两值不一改以明细表为准）加双索引 W700+ 边界与 W711 段形态加仓外 memory 链接改内链加前端 SOP 门禁表补槽号 8/9/10/11 加三下划线脚本降级手动取证加补第 43 槽加白屏清单逐条标落点加标唯一未落地项 inline_css 括号校验加创意 backlog 回填 19/43 槽加 markdown emoji 例外加可视化测试计划 P2 与 KPI 口径提示」加范围纪律「纯 md 18 件零代码面加历史值保留就地并入」加新增候选 4 篇登记未开工；验证=lint 182 链接零 broken 加 doc-sync 零 FAIL 加索引健康覆盖 19/19 加 verify 全量加行尾零混尾；2026-10-16（W755）方法论深度篇扩建与治理口径统一批（用户拍板四项）：docs/10-方法论沉淀新增 4 篇深度篇「批次交付流水线（七步链加编号锚点三形态加行尾编码纪律加失败模式速查）·治理文档分层与按需查表（L0-L3 四层体量纪律加阅读契约三型加第 41 门禁四查加数字指针纪律加 W754 反面案例）·可视化数据正确性断言方法论（三层盲区加真实渲染加双签名稳定等待加先普查后定阈加基线冻结 fail-closed 加五判据 V1-V5）·多 Agent 干扰治理与 touches 纪律（N×p×T 加机制三件套加登记口径加拦不住的两件事加四批复现案例）」加文档规范 §11 补 11-报告复盘 行与目录分流四规则（按面向时态判定）加 pitfalls 计数三处不一统一为 38（git 节 8 到 12 加 AGENTS 33 到 38 加六主题计数 9/3/7 改 9/5/12）加 HANDOVER 三 入口契约指针化（经验按分工登记现役载体加历史条目存档声明）加 AGENTS §7 接手路径同步加 docs/10 README 索引 20 到 24 行加 docs/INDEX 重建 689 篇加 stats methodology_docs 20 到 24；验证=lint 229 链接零 broken 加索引健康覆盖 23/23 加 doc-sync 零 FAIL 加 agents 分层零 FAIL 加 verify 全量 48 段；2026-10-16（W756）人名用字语料纯度批（用户令「现在做」加 W699 A-04 盘点选项 3+2）：选项 3 清语料「魏徵」改「魏征」共 10 字 5 容器（权威源 source/原文/分回 第068回 2 加 第091回 1 加 shendu SD039 1 加镜像 dataset/text-search.json 3 加 site/static/js/text-search-app.js 3）用一次性断言脚本先断言后替换加残留自检 0；选项 2 口径登记 docs/00-导读/统计口径说明.md 新增 §7（语料与引文强制简体加展示面两态并存不作强制加禁以统一用字批量改展示面加三容器同改纪律）；盘点报告补执行记录加 docs/10 README 索引第 20 行同步；边界=展示面含 docs/01 原文照录区与 dataset 可视化数据与 site 页面一律未动；验证=语料保真 100 回全等加 423 引文加 104 对白命中百分百加 node check 通过加 JSON 合法加 CSP 零漂移加 verify 全量 48 段；2026-10-16（W758）CI 首跑暴露缺陷修复批（用户令「写 PR 进行合并」加 PR45 首次真实 CI 运行暴露三缺陷）：F1 pytest 平台假设用例修复加 test_check_same_volume 盘符断言加 os.name nt 守卫（POSIX splitdrive 恒空串恒同卷）；F2 markdown 依赖漏登记补 scripts/requirements.txt 钉版 markdown==3.10.2（build_reader 顶层 import 加第 42 门禁可导入性 CI 必红根因）；F3 两门禁脚本 CodeQL 加固加 check_chart_values.js 剥离正则加 gi 加 check_seo_head.py R5 占位域名改左边界负向断言正则（notexample.com 不再误报加 www.example.com 仍命中）；F4 归档件 2 条告警走 CodeQL won't fix 豁免（冻结件不改写纪律）；验证=pytest 591 passed 加 ruff 零违例加 seo_head 855 页通过加 chart gate 87 页 0 FAIL 判据分布与改前一致加 verify 全量 48 段。如与上述权威文档冲突，以权威文档为准。*

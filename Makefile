@@ -40,7 +40,7 @@ audit: ## 表格无容器扫描 + JS 语法检查 + SVG 负宽度检查（dry-ru
 	@echo "==> audit: 表格无容器 / JS 语法 / SVG 负宽度"
 	python scripts/detect_unwrapped_tables.py
 	python scripts/check_js_syntax.py --all
-	python scripts/archive/fix_svg_negative_widths.py --dry-run
+	python archive/scripts/fix_svg_negative_widths.py --dry-run
 	@echo "==> audit 完成"
 
 lint: ## ruff + eslint（如配置存在）— 跨平台兼容

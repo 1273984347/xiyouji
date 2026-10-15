@@ -1,0 +1,26 @@
+feat(w753): 可视化数据正确性断言体系——第 43 门禁 check_chart_values.js（file:// 渲染值↔源数据）
+
+W753（用户三项薄弱点裁决之三：为可视化页面建立数据正确性的自动化断言体系）
+
+背景：87 个 D3/Three 可视化页此前数据正确性零自动化断言——第 24 门禁只做静态文本自洽
+（sankey 引用/饼图措辞错配），test_d3_data_processors.py 是用 Python 重写 D3 逻辑的模拟测试
+（不验证真实渲染），截图审查只看布局；W676 的数据装载族与可视化正确性问题正是被人发现后才修的
+
+T1 断言器 scripts/check_chart_values.js：Playwright 以 file:// 直开每页真实渲染后取回
+  「渲染层可数元素 + 页面数据源形态 + KPI 文本」，逐页跑 V1–V5：
+  V1 无 pageerror（数据装载失败第一信号）/ V2 图表容器非空（防数据没装上却不报错的空图）/
+  V3 数据量级自洽（数据数组长度 vs 图元数比值阈值）/ V4 KPI 可复算（可由数据源复算否则记 n/a
+  并计入覆盖缺口）/ V5 数据源四要素在位（缺记缺口不 FAIL）
+  fail-closed：探针异常/超时/未产出结果计 probe_error 并 FAIL（禁静默跳过）
+T2 基线冻结 scripts/output/chart-values-baseline.txt（522 行·存量缺口全冻结）+ 报告 JSON
+T3 pytest 逻辑层 18 例（判据纯函数 + 基线格式 + 陈腐行防悬空），不依赖浏览器
+T4 形态：--gate / --generate-baseline / --report / --self-test / --limit / --pages；5 workers 并发
+
+实测（full run）：87 页 · 基线外 FAIL 0 · probe_error 0 · 22.7s · workers=5
+  判据分布：V1 ok=87 · V2 ok=86/na=1 · V3 ok=78/na=9 · V4 ok=70/na=17 · V5 ok=87 · PROBE ok=87
+  18 页 na（覆盖缺口）与 1 页 V2 na 属设计内（记缺口不 FAIL·基线已冻结）
+
+挂载：第 43 槽由 W751 批次统一挂入 verify_delivery（并行批合流·_StrictGate runner=node）
+
+验证：第 43 门禁 0 FAIL；pytest tests/unit/test_visualization_data.py 18 passed；
+  verify_delivery 全量 48 段 0 FAIL；e2e 六族抽样通过

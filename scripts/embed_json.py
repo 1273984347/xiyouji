@@ -145,7 +145,8 @@ def replace_key(html: str, brace_start: int, brace_end: int, key: str, json_str:
     return html[:val_start] + json_str + html[val_end:]
 
 
-def main():
+def _parse_args():
+    """CLI 参数解析（W733 从 main 提取）。"""
     parser = argparse.ArgumentParser(
         description='将 JSON 数据嵌入到 HTML 的 EMBEDDED JavaScript 对象（file:// 协议友好）',
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -171,11 +172,11 @@ def main():
         '--no-backup', action='store_true',
         help='不备份原文件到 .bak（默认会备份）',
     )
-    args = parser.parse_args()
+    return parser.parse_args()
 
-    html_path = Path(args.html)
-    json_path = Path(args.json)
 
+def _load_inputs(html_path, json_path):
+    """读取并解析 JSON + HTML；错误路径打印 stderr 并以对应退出码终止（W733 提取）。"""
     if not html_path.exists():
         print(f'[ERROR] HTML 文件不存在: {html_path}', file=sys.stderr)
         sys.exit(1)
@@ -201,8 +202,11 @@ def main():
     except OSError as e:
         print(f'[ERROR] 读取 HTML 失败 ({html_path}): {e}', file=sys.stderr)
         sys.exit(2)
-    original_size = len(html)
+    return html, json_str
 
+
+def _embed_key(html, args, json_str):
+    """ensure 声明 + 定位边界 + 模式校验 + 执行嵌入；错误路径终止（W733 提取）。"""
     # 自动创建 EMBEDDED 声明（若不存在）
     html = ensure_embedded_exists(html)
 
@@ -225,15 +229,17 @@ def main():
     # 执行嵌入
     try:
         if args.mode == 'insert':
-            new_html = insert_key(html, brace_start, brace_end, args.key, json_str)
-        else:
-            new_html = replace_key(html, brace_start, brace_end, args.key, json_str)
+            return insert_key(html, brace_start, brace_end, args.key, json_str)
+        return replace_key(html, brace_start, brace_end, args.key, json_str)
     except KeyError as e:
         print(f'[ERROR] {e}', file=sys.stderr)
         sys.exit(4)
 
+
+def _write_with_backup(html_path, new_html, no_backup):
+    """备份原文件（可选 .bak）+ 写回；写失败终止（W733 提取）。"""
     # 备份原文件
-    if not args.no_backup:
+    if not no_backup:
         bak_path = html_path.with_suffix(html_path.suffix + '.bak')
         try:
             shutil.copy2(html_path, bak_path)
@@ -247,6 +253,19 @@ def main():
     except OSError as e:
         print(f'[ERROR] 写入 HTML 失败 ({html_path}): {e}', file=sys.stderr)
         sys.exit(5)
+
+
+def main():
+    args = _parse_args()
+
+    html_path = Path(args.html)
+    json_path = Path(args.json)
+
+    html, json_str = _load_inputs(html_path, json_path)
+    original_size = len(html)
+
+    new_html = _embed_key(html, args, json_str)
+    _write_with_backup(html_path, new_html, args.no_backup)
 
     delta = len(new_html) - original_size
     print(f'[OK] EMBEDDED.{args.key} 已以 {args.mode} 模式嵌入到 {html_path}')

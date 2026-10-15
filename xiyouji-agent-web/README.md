@@ -60,13 +60,19 @@ npm run dev
 - **权限模式白名单**：请求体的 `permissionMode` 仅接受 `default / acceptEdits / plan`；`bypassPermissions` 需服务端显式设置 `AGENT_WEB_ALLOW_BYPASS=1` 才放行（本地单人模式）。默认 Agent 已改为 `acceptEdits`。
 - **可选认证**：设置 `AGENT_WEB_TOKEN` 环境变量后，所有 `/api/*` 需携带 `x-agent-token` 或 `Authorization: Bearer <token>` 请求头；未设置则保持本地免认证（但仅回环可访问）。
 - **工作目录限制**：`cwd` 仅允许 `PROJECT_CWD` 内的路径，越界输入自动回落项目根。
+- **写操作持久化审计（W752）**：每次工具调用按 JSONL 追加到 `data/audit.jsonl`（已 gitignore），记录 `ts/sessionId/tool/phase/decision/kind/path|command/bytes/isError/reason`——`acceptEdits` 下自动放行的写入同样留痕。只读回放端点 `GET /api/audit?limit=100`（上限 1000，与其余 `/api` 同受 `AGENT_WEB_TOKEN` 保护）；`AGENT_WEB_AUDIT_LOG` 可改路径。审计写入 **fail-open**（磁盘满/权限异常只打 `console.error`，不影响工具调用），且审计文件本身对工具层禁读（LLM 读不回自己的操作史）。
+- **细粒度写入允许域（W752·可选）**：设置 `AGENT_WEB_WRITE_SCOPE=docs/,site/,scripts/output/` 后，`write_file`/`edit_file` 仅允许落在这些前缀内，越界拒绝并回显允许域；与受保护路径黑名单叠加（黑名单优先）。**诚实说明：不设置时仍为「全工作目录可写」**（W680 及以前行为，向后兼容零回归）；把 Agent 当文档助手用时建议收紧到 `docs/,site/`。
+- **工具安全专项单测（W752）**：`npm run test:server`——30 例工具面安全断言（越界/读写黑名单含 sha256 未改写实证/命令白名单精度含 python -c、-m、scripts/../、git --no-index、--output=/允许域/环境过滤/尺寸上限）+ 7 例审计断言 + 5 例引用守卫；改引擎工具面必跑，与 `npm run smoke:engine`（12 组全链路断言）配套。
 - 在 `acceptEdits` / `default` 下，Agent 的 Bash/写文件等操作会逐项请求人工确认（内联权限卡片）。
 
 ## API / 二次开发
 
 端点与定制方式同原模板，详见 [DEVELOPMENT.md](./DEVELOPMENT.md)。核心入口：
 
-- `server/index.ts` —— `PROJECT_CWD` 默认工作目录、`defaultSystemPrompt` 兜底系统提示词
+- `server/index.ts` —— `PROJECT_CWD` 默认工作目录、`defaultSystemPrompt` 兜底系统提示词、权限桥（`canUseTool` 审计接线）
+- `server/audit.ts` —— 写操作审计（JSONL 追加 + fail-open 读回），端点 `GET /api/audit?limit=100`
+- `server/engine/tools.ts` —— 六工具与安全边界（越界守卫/受保护路径黑名单/命令白名单/写入允许域）
+- `server/engine/tools.test.ts` · `server/audit.test.ts` —— W752 安全专项单测（`npm run test:server`）
 - `src/hooks/useAgents.ts` —— `DEFAULT_AGENT`（项目专属 Agent 配置）
 - `src/config.ts` —— 应用名称/主题色
 - `src/pages/ChatPage.tsx` —— 新对话默认 `cwd`

@@ -11,7 +11,7 @@ scripts/audit/w053_verify_links.py（Markdown [text](url)）的能力。
 
 豁免：
   - gitignore 本地产物（docs/S4 双盲件、tmpe/ 等）：git check-ignore 批量判定后剔除
-  - 默认排除：node_modules / _template.html / docs/archive/（冻结历史档·禁擅改，其
+  - 默认排除：node_modules / _template.html / archive/（冻结历史档·禁擅改，其
     出链不修）——排除匹配以仓库相对路径为准
 
 链接分类：
@@ -311,7 +311,8 @@ def display_path(path):
         return str(path)
 
 
-def main():
+def _parse_args():
+    """构建并解析 CLI 参数（W730 提取自 main）。"""
     ap = argparse.ArgumentParser(
         description="链接校验工具：HTML href/src + Markdown 链接（纯标准库）"
     )
@@ -325,13 +326,117 @@ def main():
     ap.add_argument(
         "--exclude",
         nargs="*",
-        default=["node_modules", "_template.html", "docs/archive/", "tmpe/",
+        default=["node_modules", "_template.html", "archive/", "tmpe/",
                  "_w588_ce.html"],
         help="排除含这些路径片段的文件/目录，匹配仓库相对路径"
-             "（默认 node_modules/_template.html/docs/archive/ 冻结档/tmpe/ 临时区"
+             "（默认 node_modules/_template.html/archive/ 冻结档/tmpe/ 临时区"
              "/_w588_ce.html W588 渲染快照件·其出链为 site 根相对形态不适用 scripts/ 位）",
     )
-    args = ap.parse_args()
+    return ap.parse_args()
+
+
+def _resolve_scan_dir(raw_dir):
+    """扫描目录解析（相对路径以 ROOT 为基准）；不存在即报错退出（W730 提取自 main）。"""
+    scan_dir = Path(raw_dir)
+    if not scan_dir.is_absolute():
+        scan_dir = (ROOT / raw_dir).resolve()
+    if not scan_dir.exists():
+        print(f"[ERROR] 扫描目录不存在: {scan_dir}", file=sys.stderr)
+        sys.exit(2)
+    return scan_dir
+
+
+def _collect_scan_files(scan_dir, exclude):
+    """收集扫描文件：collect_files → filter_gitignored → exclude 片段过滤（W730 提取自 main）。"""
+    files = collect_files(scan_dir)
+    files = filter_gitignored(files)
+    if exclude:
+        before = len(files)
+        # W699 起：排除匹配改为仓库相对路径（扫描 --dir docs 时 "archive/" 不会再
+        # 误伤扫描根外同名片段，archive/ 冻结档豁免在全目录口径下均成立）
+        files = [
+            f for f in files
+            if not any(tok in display_path(f) for tok in exclude)
+        ]
+        if len(files) != before:
+            print(f"[exclude] 已排除 {before - len(files)} 个文件: {exclude}")
+    return files
+
+
+def _process_file(f, do_internal, do_external, do_fix):
+    """处理单文件的全部链接检查与（可选）修复，返回 (checked, broken, fixed)。
+
+    W730 提取自 main：打印序与旧内联版逐字节一致（OK/BROKEN/FIXED/ERROR 行）；
+    读取失败早退返回全零（等价原 continue）。
+    """
+    checked = broken = fixed = 0
+    try:
+        text = f.read_text(encoding="utf-8")
+    except Exception as e:
+        print(f"[ERROR] {display_path(f)} 读取失败: {e}", file=sys.stderr)
+        return checked, broken, fixed
+
+    # 收集链接 (line, url)
+    links = []
+    if f.suffix.lower() in (".html", ".htm"):
+        ext = HtmlLinkExtractor()
+        try:
+            ext.feed(text)
+        except Exception:
+            pass
+        links = [(ln, url) for (ln, _, url) in ext.links]
+    else:
+        links = extract_markdown_links(strip_md_code(text))
+
+    pending_fixes = []  # (old_url, new_url)
+
+    for line, raw in links:
+        url = raw.strip()
+        if is_skip(url):
+            continue
+        if is_external(url):
+            if do_external:
+                checked += 1
+                ok, info = check_external(url)
+                if ok:
+                    print(f"[OK]     {display_path(f)}:{line}  {url}  ->  {info}")
+                else:
+                    broken += 1
+                    print(f"[BROKEN] {display_path(f)}:{line}  {url}  ->  {info}")
+            continue
+        # 站内
+        if do_internal:
+            checked += 1
+            ok, target, _ = check_internal(f, url)
+            disp = display_path(target) if target else "?"
+            if ok:
+                print(f"[OK]     {display_path(f)}:{line}  {url}  ->  {disp}")
+            else:
+                if do_fix:
+                    new = try_fix(f, url, ROOT)
+                    if new:
+                        pending_fixes.append((raw, new))
+                        fixed += 1
+                        print(f"[FIXED]  {display_path(f)}:{line}  {url}  ->  {new}")
+                        continue
+                broken += 1
+                print(f"[BROKEN] {display_path(f)}:{line}  {url}  ->  {disp}")
+
+    # 应用本文件的修复
+    if pending_fixes:
+        try:
+            content = f.read_text(encoding="utf-8")
+            for old, new in pending_fixes:
+                content = content.replace(old, new)
+            f.write_text(content, encoding="utf-8")
+        except Exception as e:
+            print(f"[ERROR] 写回修复失败 {display_path(f)}: {e}", file=sys.stderr)
+    return checked, broken, fixed
+
+
+def main():
+    """CLI 编排：参数 → 扫描目录 → 文件收集 → 逐文件检查 → 汇总退出（W730 拆分版）。"""
+    args = _parse_args()
 
     # 未指定任何模式时默认仅站内
     if not (args.internal or args.external or args.all):
@@ -340,25 +445,8 @@ def main():
         do_internal = args.internal or args.all
         do_external = args.external or args.all
 
-    scan_dir = Path(args.dir)
-    if not scan_dir.is_absolute():
-        scan_dir = (ROOT / args.dir).resolve()
-    if not scan_dir.exists():
-        print(f"[ERROR] 扫描目录不存在: {scan_dir}", file=sys.stderr)
-        sys.exit(2)
-
-    files = collect_files(scan_dir)
-    files = filter_gitignored(files)
-    if args.exclude:
-        before = len(files)
-        # W699 起：排除匹配改为仓库相对路径（扫描 --dir docs 时 "archive/" 不会再
-        # 误伤扫描根外同名片段，docs/archive/ 冻结档豁免在全目录口径下均成立）
-        files = [
-            f for f in files
-            if not any(tok in display_path(f) for tok in args.exclude)
-        ]
-        if len(files) != before:
-            print(f"[exclude] 已排除 {before - len(files)} 个文件: {args.exclude}")
+    scan_dir = _resolve_scan_dir(args.dir)
+    files = _collect_scan_files(scan_dir, args.exclude)
     print(f"扫描目录: {display_path(scan_dir)}  文件数: {len(files)}")
     print(f"模式: {'internal' if do_internal else '--'} + {'external' if do_external else '--'}")
     print("-" * 60)
@@ -368,67 +456,10 @@ def main():
     fixed = 0
 
     for f in files:
-        try:
-            text = f.read_text(encoding="utf-8")
-        except Exception as e:
-            print(f"[ERROR] {display_path(f)} 读取失败: {e}", file=sys.stderr)
-            continue
-
-        # 收集链接 (line, url)
-        links = []
-        if f.suffix.lower() in (".html", ".htm"):
-            ext = HtmlLinkExtractor()
-            try:
-                ext.feed(text)
-            except Exception:
-                pass
-            links = [(ln, url) for (ln, _, url) in ext.links]
-        else:
-            links = extract_markdown_links(strip_md_code(text))
-
-        pending_fixes = []  # (old_url, new_url)
-
-        for line, raw in links:
-            url = raw.strip()
-            if is_skip(url):
-                continue
-            if is_external(url):
-                if do_external:
-                    checked += 1
-                    ok, info = check_external(url)
-                    if ok:
-                        print(f"[OK]     {display_path(f)}:{line}  {url}  ->  {info}")
-                    else:
-                        broken += 1
-                        print(f"[BROKEN] {display_path(f)}:{line}  {url}  ->  {info}")
-                continue
-            # 站内
-            if do_internal:
-                checked += 1
-                ok, target, _ = check_internal(f, url)
-                disp = display_path(target) if target else "?"
-                if ok:
-                    print(f"[OK]     {display_path(f)}:{line}  {url}  ->  {disp}")
-                else:
-                    if args.fix:
-                        new = try_fix(f, url, ROOT)
-                        if new:
-                            pending_fixes.append((raw, new))
-                            fixed += 1
-                            print(f"[FIXED]  {display_path(f)}:{line}  {url}  ->  {new}")
-                            continue
-                    broken += 1
-                    print(f"[BROKEN] {display_path(f)}:{line}  {url}  ->  {disp}")
-
-        # 应用本文件的修复
-        if pending_fixes:
-            try:
-                content = f.read_text(encoding="utf-8")
-                for old, new in pending_fixes:
-                    content = content.replace(old, new)
-                f.write_text(content, encoding="utf-8")
-            except Exception as e:
-                print(f"[ERROR] 写回修复失败 {display_path(f)}: {e}", file=sys.stderr)
+        c, b, x = _process_file(f, do_internal, do_external, args.fix)
+        checked += c
+        broken += b
+        fixed += x
 
     print("-" * 60)
     summary = f"校验完成: {checked} 链接, {broken} broken"

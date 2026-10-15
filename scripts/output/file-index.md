@@ -4,12 +4,422 @@
 > W### 编号规则见 CHANGELOG.md 顶部。
 > 创建于 2026-07-22（v0.8 双索引改造）
 >
-> **历史归档**：W031-W087（v2.0.4-v2.0.60）site/data/ 部分已迁移至 [file-index-archive.md](file-index-archive.md)；W422 再归档 W393-W416 段；W511 归档 W417-W448 段 + W449-W463 损坏区尾部清理。本文件仅保留 W449+ 现役索引。
+> **历史归档**：W031-W087（v2.0.4-v2.0.60）site/data/ 部分已迁移至 [file-index-ARCHIVE.md](../../archive/docs/file-index-ARCHIVE.md)；W422 再归档 W393-W416 段；W511 归档 W417-W448 段 + W449-W463 损坏区尾部清理。；W736 归档 W449-W699 段（与 CHANGELOG 现役边界统一至 W700）。本文件仅保留 W700+ 现役索引。
 >
 > **维护契约**：本索引按 W 追加登记（每文件 1 行 + 一句摘要），历史段禁改；新增/变更文件必须先有 CHANGELOG 对应 W 段再登记（双索引铁律），禁止无 W 段单独登记。
 
 ---
 
+
+## W758 CI 首跑暴露缺陷修复批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| tests/unit/test_tmpe_tidy.py | W758 | 盘符断言加 os.name nt 守卫（POSIX splitdrive 恒空串·Linux runner 必红根修） |
+| scripts/requirements.txt | W758 | 补 markdown==3.10.2 钉版（build_reader 依赖登记·CI 首跑暴露） |
+| scripts/check_seo_head.py | W758 | R5 占位域名检测改左边界负向断言正则（CodeQL 加固） |
+| scripts/check_chart_values.js | W758 | stripJsComments 剥离正则加 gi 大小写不敏感（CodeQL 加固） |
+| docs/00-导读/W批次编号对账表.md | W758 | W758 认领行登记 |
+| scripts/output/_w758_spec.json | W758 | 本批 spec 入库 |
+| scripts/output/_w758_rotate.py | W758 | 一次性脚本：手工执行 AGENTS 脚注滚动迁 W749 入 ARCHIVE（编号空洞使级联断言失配的先例处置） |
+
+## W757 CI 门禁接线缺陷修复批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/ci.yml | W757 | verify-delivery job 补 Playwright（缓存+`npm ci --prefix scripts`+`playwright install`·D1）；agent-web-build job 补 `test:server`（D2） |
+| scripts/security_scan.py | W757 | discover_files roots 增 xiyouji-agent-web、exts 增 .ts/.tsx/.mjs、按 gitignore 契约排除 tsc 编译产物（D3） |
+| tests/unit/test_ci_wiring.py | W757 | 新增 9 例 CI 接线回归测试（锚 `run:` 块命令体·负样本 4/4 验证） |
+| tests/unit/test_security_scan.py | W757 | 补 4 例扫描扩面断言（agent-web 覆盖/TS 扩展名/产物排除/规模下限） |
+| scripts/_w757_negative_check.py | W757 | 负样本验证器（逐条摘除接线断言测试必红） |
+| docs/11-方案报告/工程基础设施薄弱点审计报告-2026-10-16.md | W757 | 三轮论断对拍 + 四条新发现缺陷 + 修复记录（报告正文） |
+| docs/11-方案报告/README.md | W757 | 索引登记（现役报告 16→17 篇） |
+| docs/00-导读/W批次编号对账表.md | W757 | W757 认领行登记 |
+
+## W756 人名用字语料纯度批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| source/原文/分回/第068回.md | W756 | 语料纯度：魏徵→魏征 2 处（唐三藏复述引语内·与 json/app 三容器同改） |
+| source/原文/分回/第091回.md | W756 | 语料纯度：魏徵→魏征 1 处 |
+| source/原文/shendu/SD039.md | W756 | 语料纯度：魏徵→魏征 1 处（分析性文字混入） |
+| dataset/text-search.json | W756 | 语料镜像同改 3 处（第 20 门禁语料保真检对拍源） |
+| site/static/js/text-search-app.js | W756 | 页面内嵌语料副本同改 3 处（W691 三容器纪律） |
+| docs/00-导读/统计口径说明.md | W756 | 新增 §7 人名用字口径（语料/引文强制简体·展示面两态并存·禁批量改展示面） |
+| docs/10-方法论沉淀/人名用字两态盘点-魏征-2026-10-11.md | W756 | 处置选项节补执行记录（范围/验证/边界·选项 1 仍待裁决） |
+| docs/10-方法论沉淀/README.md | W756 | 索引第 20 行同步（选项 3 已执行） |
+| scripts/output/_w756_corpus_fix.py | W756 | 一次性语料改字脚本（先断言后替换·幂等防盲改） |
+| docs/00-导读/W批次编号对账表.md | W756 | W756 认领行登记 |
+| scripts/output/_w756_spec.json | W756 | 本批 spec 入库 |
+
+## W755 方法论深度篇扩建与治理口径统一批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/10-方法论沉淀/批次交付流水线.md | W755 | 新建·七步交付链 + 编号锚点三形态 + 行尾编码纪律 + 失败模式速查 |
+| docs/10-方法论沉淀/治理文档分层与按需查表.md | W755 | 新建·L0-L3 四层职责与体量纪律 + 阅读契约三型 + 第 41 门禁四查 + 数字指针纪律 |
+| docs/10-方法论沉淀/可视化数据正确性断言方法论.md | W755 | 新建·真实渲染 + 双签名稳定等待 + 先普查后定阈 + 基线冻结 + 五判据 V1-V5 + 建线六步 |
+| docs/10-方法论沉淀/多Agent干扰治理与touches纪律.md | W755 | 新建·N×p×T 暴露面 + 机制三件套 + 登记口径 + 两条边界 + 四批复现案例 |
+| docs/10-方法论沉淀/README.md | W755 | 目录索引 20→24 行（新增 21-24·报告指针顺延 25） |
+| docs/10-方法论沉淀/Subagent盲信铁律.md | W755 | 「本目录 19 篇主题」改引用式（篇数以目录索引为准·防漂移） |
+| docs/00-导读/文档规范.md | W755 | §11.1 新增「辅助·索引」行 + 目录分流规则四则 + touches 块计数表述修正 + 互链新篇 |
+| docs/agent/pitfalls.md | W755 | git/提交/并发节计数 8→12（口径=顶层条目数） |
+| AGENTS.md | W755 | §4.3 坑位计数 33→38 + 六主题计数 9/5/12/4/4/4 + 口径注 + §7 接手路径第 5 步改指针版 |
+| HANDOVER.md | W755 | §三 新增入口契约（经验总入口指针化 + 历史条目存档声明） |
+| docs/INDEX.md | W755 | 重建（689 篇/12 板块） |
+| scripts/output/stats.json | W755 | methodology_docs 20→24（stats.py --w W755 派生三件） |
+| docs/00-导读/W批次编号对账表.md | W755 | W755 认领行登记 |
+| scripts/output/_w755_spec.json | W755 | 本批 spec 入库 |
+
+## W754 方法论目录口径整改批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/10-方法论沉淀/README.md | W754 | 索引重写（报告篇数引用式 + 复利总览标 W086 快照 + 协议层节改订 + 维护规则补报告分流/载体铁律 + 13d→16d） |
+| docs/10-方法论沉淀/DRL真循环.md | W754 | 上游 skill 失联注记 + 案例表截至 W086 指针 + 手工 Preflight 补现役工具行 + zip 步骤标非现役 |
+| docs/10-方法论沉淀/三skill闭环.md | W754 | 三 skill 位置列改指仓内等价载体 + 行号证据不可核验注记 + 补现役级联/核验工具 |
+| docs/10-方法论沉淀/E1铁律.md | W754 | 计数自洽（去易漂移总分·以明细表为准）+ commit 不在当前历史注记 + neat-freak 载体退役 + CHANGELOG 指针改归档 |
+| docs/10-方法论沉淀/E2文档同步区分历史vs现役.md | W754 | file-index W700+ 边界 + 第 31 门禁机器化补记 + W711 段形态注 + 归档段指向修正 |
+| docs/10-方法论沉淀/Preflight与Subagent模板.md | W754 | 三轨语料路径换代（text-search.html → dataset/text-search.json + text-search-app.js）+ 开工侧工具化登记 + 上游路径改指 |
+| docs/10-方法论沉淀/Subagent盲信铁律.md | W754 | 上游 skill 失联改指仓内 + 「共 4 篇」标 W235-S1 批次历史值 + 现役目录篇数注 |
+| docs/10-方法论沉淀/agent-web技术栈迁移评估.md | W754 | 状态行（迁移 W543-W548 已完成·ignore 已删·现役栈实测）+ 结论反转标注 + 版本回填 + 选项 A 终止 |
+| docs/10-方法论沉淀/dispatching-parallel-agents四subagent并行模式.md | W754 | 新增「现役并行纪律」节（touches 交集 + safe_commit）+ 三 skill 兜底改指仓内 |
+| docs/10-方法论沉淀/前端显示问题诊断SOP.md | W754 | 门禁对照表补槽号（8/9/10/11）+ 表注（.js 与 .py 两实现 + 三 `_` 脚本降级手动取证）+ 补第 43 槽 |
+| docs/10-方法论沉淀/双索引可追溯改造.md | W754 | W700+ 索引边界与 W711 段形态 + 仓外 memory 链接改内链 + §六 维护规则标工具化 + 归档段指向 |
+| docs/10-方法论沉淀/可视化测试计划-十七维叙事学图谱.md | W754 | 页面更名 13d→16d 9 处 + 测试真实路径 tests/e2e/ + 行号锚点改键锚 + P2 基线与 KPI 口径提示 + 投稿件路径 |
+| docs/10-方法论沉淀/并行Edit竞态问题.md | W754 | 补跨 Agent touches 层（机制未被取代）+ 上游路径改指 + CHANGELOG 段改归档指向 |
+| docs/10-方法论沉淀/改动后影响面扫描.md | W754 | 补机制层工具化（batch_cascade 10 面 + 清单 + preflight --touches + lint_links）+ 归档指向修正 |
+| docs/10-方法论沉淀/人机创意工作流方法论.md | W754 | backlog 落地状态回填（第 19/43 槽）+ audit 归档路径 + skills 退役 + .github 模板实测 |
+| docs/10-方法论沉淀/markdown写作规范.md | W754 | 阅读契约标记例外 + 关联文档补现役写作权威指针（§4.9/§4.10/§6） |
+| docs/10-方法论沉淀/白屏三连根因复盘与防回归清单.md | W754 | 改进清单逐条标落点（第 10/11/24/43 槽）+ 唯一未落地项（inline_css 括号校验）+ 页数现状括注 |
+| docs/10-方法论沉淀/记忆研究理论框架应用方法论.md | W754 | 七处 line 锚点换代（改回目+引文·第 20 门禁口径）+ §三 定位策略改写 + 九段式行同步 |
+| docs/00-导读/W批次编号对账表.md | W754 | W754 认领行登记 |
+| scripts/output/_w754_spec.json | W754 | 本批 spec 入库 |
+
+## W753 可视化数据正确性断言批（第 43 门禁）（2026-10-15）
+
+> **递延补登记**：本段由 W754 批依对账表 W753 行补入（原批条目文本按同会话约定后插·CHANGELOG 对应段同批补登记）。
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_chart_values.js | W753 | 第 43 门禁本体（Playwright file:// 真实渲染·五判据 V1-V5·87 页·基线冻结 + fail-closed） |
+| scripts/output/chart-values-baseline.txt | W753 | 基线冻结（87 页 × 6 项 = 522 行·只增） |
+| scripts/output/chart-values-report.json | W753 | 缺口报告（na 逐页逐条：V3 9 页 / V4 17 页 / V2 1 页） |
+| tests/unit/test_visualization_data.py | W753 | 断言器单测 |
+| tests/e2e/test_visualization_assertions.js | W753 | E2E 扩面 |
+
+## W752 Web Agent 安全加固批（2026-10-15）
+
+> **递延补登记**：本段由 W754 批依对账表 W752 行补入（同 W753 约定：门禁面归 W751 单写·条目文本后插）。
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/engine/tools.ts | W752 | 工具面安全加固（安全单测 30 例对应实现面） |
+| xiyouji-agent-web/server/engine/tools.test.ts | W752 | tools 安全单测 30 例 |
+| xiyouji-agent-web/server/index.ts | W752 | /api/audit 端点接线 |
+| xiyouji-agent-web/server/audit.ts | W752 | 写操作持久化审计（audit.jsonl） |
+| xiyouji-agent-web/server/audit.test.ts | W752 | 审计单测 |
+| xiyouji-agent-web/package.json | W752 | 依赖与脚本同步 |
+| xiyouji-agent-web/.env.example | W752 | AGENT_WEB_WRITE_SCOPE 细粒度写入允许域示例 |
+| xiyouji-agent-web/README.md | W752 | 安全边界文档同步 |
+| docs/agent/agent-web.md | W752 | Web Agent L2 文档同步（安全面） |
+| SECURITY.md | W752 | 安全记录同步 |
+
+## W751 根级工具链防护批（第 42 门禁挂载）（2026-10-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_script_coverage.py | W751 | 新增·第 42 门禁根级脚本覆盖（四面引用·基线冻结·self-test 6 例） |
+| scripts/output/script-coverage-baseline.txt | W751 | 新增·35 条豁免逐行注明四类理由 |
+| scripts/verify_delivery.py | W751 | 挂第 42 槽（段名脚本覆盖·EXPECTED_SECTION_NAMES 47 段） |
+| tests/unit/test_new_page.py | W751 | 新增·页面脚手架专项 16 例 |
+| tests/unit/test_embed_json.py | W751 | 新增·JSON 嵌入器专项 16 例 |
+| tests/unit/test_slice_screenshots.py | W751 | 新增·截图切片器专项 12 例 |
+| tests/unit/test_tool_scripts_cli.py | W751 | 新增·根级 import 冒烟层 91 例（3 件显式豁免） |
+| tests/unit/test_check_script_coverage.py | W751 | 新增·第 42 门禁自测 10 例（含解析器自伤回归） |
+| AGENTS.md | W751 | §4.2 门禁计数 41→42 + 第 42 条摘要 + 阅读契约同步 + 版本脚注 |
+| docs/agent/gates.md | W751 | 标题 42 槽 + 速查表 + 第 42 条全量定义 |
+| docs/00-导读/文档规范.md | W751 | 门禁体系编号 41→42 |
+| README.md | W751 | 门禁数量标记 42<!--stats:gate_count--> + 当前批次抬头 W751 |
+| STRUCTURE.md | W751 | 当前批次抬头 W749→W751 |
+| docs/00-导读/项目说明.md | W751 | 当前批次行与「当前版本」列表行 W749→W751 |
+| HANDOVER.md | W751 | 最后更新链 + 进度节 W751 + 当前 HEAD 句 W751 |
+| CITATION.cff | W751 | version W749→W751（W 号区间字面量门禁同步面） |
+| .github/workflows/README.md | W751 | 头部版本 + 里程碑上限 W450-W751 + 批次链补 W751 条 |
+| scripts/output/stats.json | W751 | gate_count 41→42（stats.py --w W751 派生三件） |
+| scripts/output/stats-changelog.json | W751 | gate_count 变更史登记 |
+| scripts/output/stats-index.md | W751 | gate_count 反向索引登记 |
+| scripts/output/_w751_spec.json | W751 | 本批 spec 入库 |
+| scripts/output/_cascade_files_W751.txt | W751 | 手工级联清单（跳号批自建义务·W722 成文） |
+
+## W749 ML 坑族防守补登批（2026-10-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/agent/pitfalls.md | W749 | 运行时节补两条 ML import 坑 + 查坑表补 ML 五查行（计数 3→5） |
+| AGENTS.md | W749 | §4.3 坑位计数 31→33 联动 |
+| docs/00-导读/W批次编号对账表.md | W749 | W749 认领行登记 |
+| scripts/output/_w749_spec.json | W749 | 本批 spec 入库 |
+
+## W748 第40篇复盘入库批（2026-10-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-报告复盘/工作复盘与优化分析报告-2026-10-15.md | W748 | 第 40 篇复盘报告入库（十节+附录·双线收官） |
+| docs/11-报告复盘/README.md | W748 | 索引加行（新报告编 1·原编号顺延·现役 15→16 篇） |
+| STRUCTURE.md | W748 | report_docs 实体标记 16→17+现役文字同步 |
+| scripts/output/stats.json | W748 | report_docs 16→17（stats.py --w W748 派生三件） |
+| docs/00-导读/W批次编号对账表.md | W748 | W748 认领行登记 |
+| scripts/output/_w748_spec.json | W748 | 本批 spec 入库 |
+
+## W747 RAG 系统能力清单入库批（2026-10-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/rag/README.md | W747 | 扩写「系统能力总览与已知边界」节（四档指标/端点/证伪/边界/分差三层/元模式/资产索引） |
+| docs/00-导读/W批次编号对账表.md | W747 | W747 认领行登记（原排序加权批作废·编号改用记录） |
+| scripts/output/_w747_spec.json | W747 | 本批 spec 入库 |
+
+## W746 语义页面路由端点批（2026-10-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/rag/page_router.py | W746 | 新增：语义页面路由（晋升转正·路径参数化+缓存+CLI+21 题评测） |
+| scripts/rag/rag_server.py | W746 | /route 懒加载端点 + /health 解绑 BM25 + 主线程预热 |
+| tests/unit/test_page_router.py | W746 | 新增：路由纯逻辑单测九例 |
+| scripts/rag/README.md | W746 | 语义页面路由节（端点用法+实测+已知边界） |
+| .gitignore | W746 | 路由产物忽略（page_vectors/page_index/page_route_eval） |
+| docs/00-导读/W批次编号对账表.md | W746 | W746 认领行登记 |
+| scripts/output/_w746_spec.json | W746 | 本批 spec 入库 |
+
+## W745 改写智能路由批（2026-10-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/rag/rag_enhance.py | W745 | 智能路由（should_rewrite 短实体判据·rewrite 档接线） |
+| tests/unit/test_rag_enhance.py | W745 | 路由单测扩十二例（共四十五例） |
+| scripts/rag/README.md | W745 | rewrite 档行与说明更新（路由后 @5 +0.041 / @10 +0.107） |
+| docs/00-导读/W批次编号对账表.md | W745 | W745 认领行登记 |
+| scripts/output/_w745_spec.json | W745 | 本批 spec 入库 |
+
+## W744 检索增强集成批（2026-10-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/rag/rag_enhance.py | W744 | 新增：检索增强引擎（稠密召回+池融合+重排+改写·离线优先加载） |
+| scripts/rag/build_vectors.py | W744 | 新增：向量构建（微批安全模式+防混批 manifest+陈旧检测） |
+| scripts/rag/xiyouji_rag.py | W744 | RAG_ENHANCE 四档分派（off 零变化·向后兼容） |
+| tests/unit/test_rag_enhance.py | W744 | 新增：增强层单测二十九例 |
+| scripts/rag/README.md | W744 | 检索增强档节 + LLM_MODEL 示例更正 deepseek-flash |
+| scripts/rag/.env.rag.example | W744 | RAG_ENHANCE/RAG_DEVICE 示例同步 |
+| .gitignore | W744 | 向量产物忽略（rag_vectors/rag_chunks/rag_embed_meta） |
+| docs/00-导读/W批次编号对账表.md | W744 | W744 认领行登记 |
+| scripts/output/_w744_spec.json | W744 | 本批 spec 入库 |
+
+## W743 检索融合层消融重构批（2026-10-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/rag/xiyouji_rag.py | W743 | 融合层消融重构（四路等权 RRF→加权 A+B·移除标题命中/短语位置） |
+| tests/unit/test_rag_fusion.py | W743 | 加权 RRF 单测新增四例 |
+| docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md | W743 | 干扰日志 §8 追加开工观测行 |
+| docs/00-导读/W批次编号对账表.md | W743 | W743 认领行登记 |
+| scripts/output/_w743_spec.json | W743 | 本批 spec 入库 |
+
+## W742 复盘落地与引文门禁双向扩展批（2026-10-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-报告复盘/工作复盘与优化分析报告-2026-10-14.md | W742 | 第 39 篇复盘报告入库（复盘系列迁移 11 目录首篇·三新族+PRE-25~30+三项裁决回填） |
+| docs/11-报告复盘/README.md | W742 | 现役索引 14→15 篇（第 39 篇编 1·原编号顺延） |
+| STRUCTURE.md | W742 | report_docs 实体标记 15→16+现役文字同步 |
+| scripts/output/stats.json | W742 | report_docs 15→16（stats.py --w W742 派生三件） |
+| scripts/check_citations.py | W742 | S-35 反向扫描 --reverse（判据 §4.12 逆向+--fail-on-candidates+self-test 9→12 例） |
+| scripts/release_prep.py | W742 | PRE-25 第四检双形态（验证行计数对账+zh_num_to_int 中文数字转换器） |
+| tests/unit/test_release_prep.py | W742 | 单测扩至 30 例（转换器 11+对账 7 场景+W737 失真回放） |
+| archive/scripts/batches/w7xx/（fix_quotes×4） | W742 | tmpe 晋升归档（用户裁决·SC-02/K-04 落地） |
+| archive/README.md | W742 | batches 台账 540→544+tmpe 晋升注记 |
+| docs/agent/gates.md | W742 | 第 8 门禁补重建操作规程四连注（PRE-26） |
+| docs/00-导读/文档规范.md | W742 | 新增 §4.13 源-产物同修原则（PRE-28） |
+| HANDOVER.md | W742 | §九交接流程增第 7 条质量分层声明模板（PRE-30） |
+| docs/00-导读/W批次编号对账表.md | W742 | W742 认领行登记（touches 七面申报） |
+| docs/01-全书逐回解读/（10 件） | W742 | S-35 反向扫描漏标补【文学演绎】标记（11 节·H1 连载节+聚合子节盲区） |
+| site/reader/（622 页） | W742 | PRE-26 四连重建（11 处标记随源生效·CSP 零漂移） |
+| scripts/output/_w742_spec.json | W742 | 本批 spec 入库 |
+
+## W741 干扰治理评估固化与 touches 加固批（2026-10-14）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-报告复盘/多Agent干扰治理评估与实施记录-2026-10-14.md | W741 | 评估与实施记录新建（逐类核对/N×p×T/W739 三段/touches 边界加固） |
+| docs/11-报告复盘/README.md | W741 | 现役索引 13→14 篇（新报告编 1·原编号顺延） |
+| scripts/preflight_check.py | W741 | is_inflight 升级 re.sub 全星号剥离（单星变体防御） |
+| tests/unit/test_preflight_check.py | W741 | 回归扩充单星/多星/空白变体（11→12 例） |
+| docs/00-导读/W批次编号对账表.md | W741 | W741 认领行登记 |
+
+## W740 干扰治理路线图文档批（2026-10-14）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md | W740 | 干扰治理路线图新建（决策摘要/总纲/度量前置/P0-P2/不建清单/验收退出/减量周期/四组映射/日志表） |
+| docs/00-导读/W批次编号对账表.md | W740 | W740 认领行登记 |
+
+## W739 多 Agent 干扰治理 touches 机制批（2026-10-14）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/preflight_check.py | W739 | 第 6 检 touches（rows 解析/在途判定/交集拒绝/--touches --self CLI） |
+| tests/unit/test_preflight_check.py | W739 | touches 单测 5→10 例（列解析/向后兼容/在途四态/交集×2） |
+| docs/00-导读/W批次编号对账表.md | W739 | touches 列扩容（92 行）+表头规则④+W739 认领行 |
+| AGENTS.md | W739 | §4.3 最高频铁则补 touches 条 |
+| docs/agent/pitfalls.md | W739 | git/提交/并发节 7→8 条·touches 纪律条目 |
+| scripts/README.md | W739 | preflight_check 工具表六检+参数更新 |
+| docs/00-导读/文档规范.md | W739 | §11.1 补 touches 说明段（含相对链接修复） |
+
+## W738 tmpe 临时文件体系批（2026-10-14）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| tmpe/README.md | W738 | tmpe 临时区契约新建（定位/桶约定/保留策略/清理纪律） |
+| tmpe/policy.yml | W738 | 策略文件新建（桶/TTL/代际/protect/freeze/tool_promotion·JSON 兼容零依赖） |
+| scripts/tmpe_tidy.py | W738 | 策略化治理工具重写（双闸门/journal/undo/锁/优先级链/九维晋升评估） |
+| tests/unit/test_tmpe_tidy.py | W738 | 单测 19 例（点名 6 案例+优先级链+roundtrip+锁+评分） |
+| .gitignore | W738 | tmpe/* + 文件级例外（体系件入 git·大文件本地） |
+| docs/00-导读/W批次编号对账表.md | W738 | W738 认领行登记 |
+
+## W737 对抗性审查修复与报告归置批（2026-10-14）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_citations.py | W737 | 三检扩展（归属对白核验+演绎豁免+语料保真检+gitignore 分母收敛·self-test 9 例） |
+| dataset/text-search.json | W737 | 语料仲裁重建（7 丢段恢复+僻字还原 6+字级对齐 87·100/100 回与分回全等·corpus_note 记裁） |
+| source/原文/分回/（12 件） | W737 | 分回 md 同步修正（补丢段/僻字/字级差异·与 json 逐字一致） |
+| docs/01-全书逐回解读/（100 件） | W737 | 演绎标记 310 处 + 17 条失实归属对白逐条整改（程序化提取原文） |
+| docs/02-人物深度分析/（6 件） | W737 | 外传 3 篇文档级演绎标记 + 深化 2 篇虚构对白整改 + 红蟒精用字修正 |
+| docs/03-主题与情节专题/时间的政治学专题.md | W737 | 虚构对白整改（水陆大会场景对齐第 12 回原文） |
+| docs/04-文化与历史背景/（2 件） | W737 | 涉台表述修正（版本演变/西游与民间信仰） |
+| docs/05-诗词歌赋/原著景物诗赏析专题.md | W737 | 涉台表述修正（出版地补中国台湾） |
+| source/引用与网络解读/学术论文索引.md | W737 | 涉台表述修正（台湾故宫博物院→中国台北故宫博物院） |
+| docs/11-报告复盘/（新建目录） | W737 | README 索引+13 篇现役报告+读者数据截图 5 件（报告统一归置） |
+| docs/10-方法论沉淀/README.md | W737 | 报告类条目迁出重编号（方法论 20+魏征盘点+指针行） |
+| docs/00-导读/文档规范.md | W737 | 新增 §4.12 演绎内容标注（标记语义+门禁豁免依据） |
+| docs/00-导读/W批次编号对账表.md | W737 | W737 认领行+现势块碑化+陈旧 bullet 清理 10 条+标题校正 |
+| docs/agent/gates.md | W737 | 第 20 门禁定义更新（三检口径+豁免区+分母收敛） |
+| CITATION.cff | W737 | 五计数刷新+preferred-citation 真 URL+双许可注 |
+| README.md | W737 | 目录树补 11-报告复盘 |
+| STRUCTURE.md | W737 | 新增 11-报告复盘节（report_docs 实体标记） |
+| AGENTS.md | W737 | 目录树+§5.1 make 依赖说明+脚注 W736 措辞校正 |
+| HANDOVER.md | W737 | 当前进度/最后更新（级联面） |
+| site/index.html | W737 | 字数口径 70.8→70.7 万（实测 706,586 字符） |
+| site/data/search.html | W737 | 文档清单路径同步至 11-报告复盘（9 处） |
+| site/en/search.html | W737 | 文档清单路径同步至 11-报告复盘（9 处） |
+| site/data/chapter-stats.html | W737 | EMBEDDED 重灌（740093→742357·双源复绿+CSP 重哈希） |
+| site/reader/（622 页） | W737 | 全链重建（演绎标记/引文整改/涉台修正随源生效） |
+| docs/INDEX.md | W737 | 重建（682 篇/12 板块） |
+| scripts/output/stats.json | W737 | report_docs 新键+methodology_docs 31→20（stats.py --w W737 派生三件） |
+
+## W736 发布链工具化与文档负载治理批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/preflight_check.py | W736 | 前置核验器新建（五检+fetch 故障 GitHub API 降级+取号权威源 max+1） |
+| scripts/release_prep.py | W736 | 发布预检器新建（spec 三检+消息 W 号核验+文件行 C4-f 镜像+--init 模板） |
+| tests/unit/test_preflight_check.py | W736 | preflight 单测（含 porcelain \u0000 分隔解析） |
+| tests/unit/test_release_prep.py | W736 | release_prep 单测 17 例组 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W736 | W650-W699 段迁入（一级归档·与 file-index 同界 W700） |
+| archive/docs/file-index-ARCHIVE.md | W736 | W449-W699 段迁入（与 CHANGELOG 同界） |
+| archive/README.md | W736 | 台账 6 行路径前缀与滚动批次同步 |
+| scripts/README.md | W736 | 三工具登记（archive_file/preflight_check/release_prep） |
+| docs/00-导读/W批次编号对账表.md | W736 | W736 认领行登记 |
+| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-13.md | W736 | 第 38 篇复盘报告入库（328 行 37KB） |
+| docs/10-方法论沉淀/README.md | W736 | 复盘报告索引登记 |
+| STRUCTURE.md | W736 | 方法论文档实体标记 30→31 |
+| scripts/output/stats.json | W736 | methodology 计数刷新（stats.py --w W736 派生 stats-changelog/stats-index） |
+
+## W735 全仓归档大扫除批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| archive/README.md | W735 | 归档总索引+台账新建（结构树/11 组登记/检索约定） |
+| scripts/archive_file.py | W735 | 归档工具新建（git mv 归位+引用扫描+台账登记+dry-run） |
+| archive/docs/plans/（28 件） | W735 | docs/superpowers 已完结方案归档（保留 9 件活跃/待办/被引用） |
+| archive/docs/specs/（8 件） | W735 | 早期设计稿归档 |
+| archive/docs/_dev/（10 件） | W735 | 开发草稿区归档（v07v08/v0.8/2026-10-02 报告组） |
+| archive/scripts/attic/（32 件） | W735 | scripts/_attic 整迁 |
+| archive/scripts/batches/（540 件） | W735 | 批次一次性产物归档（spec/级联清单/脚本·按 W 段分桶） |
+| archive/scripts/review-pass3/（105 件） | W735 | W557 三轮审查产物组级归档 |
+| docs/00-导读/文档规范.md | W735 | 设计依据引用同步至 archive 路径 |
+| docs/10-方法论沉淀/README.md | W735 | 4 条复盘链接同步至 archive 路径 |
+| docs/00-导读/W批次编号对账表.md | W735 | W735 认领行登记 |
+
+## W734 归档体系统一与交接文档更名批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| HANDOVER.md | W734 | 交接文档更名（git mv·全部 live 引用同步） |
+| archive/docs/ | W734 | 自 docs/ARCHIVE 迁入（6 归档件+2 子目录·git 改名内容零改动） |
+| archive/scripts/ | W734 | 自 scripts/archive 迁入（45 件） |
+| archive/scripts/audit/ | W734 | 自 scripts/audit/archive 迁入（10 件） |
+| scripts/batch_cascade.py | W734 | handover 面路径与 _arc 同步（HANDOVER.md / archive/docs） |
+| scripts/verify_delivery.py | W734 | CORE_DOCS/A4_DOCS/ARCHIVE_DOCS/_DOC_FILES_RE 四组路径同步 |
+| docs/00-导读/文档规范.md | W734 | 归档规范重构（archive 根·按类·阈值沿用）+全量引用同步 |
+
+## W733 达标收尾批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_seo_head.py | W733 | main 95→20（五 R 检查函数提取）·输出逐字节验证 |
+| scripts/spot_check_nlp.py | W733 | main 93→20（三数据段提取·返回码编排） |
+| scripts/check_design_doc_drift.py | W733 | main 89→30（六函数·StrictGate marker 保留）·篡改负样本对拍 |
+| scripts/embed_json.py | W733 | main 106→15（四函数·全错误路径退出码保留）·12 场景 CLI 快照 |
+| scripts/perf_monitor.py | W733 | compare_trend 88→28（三段提取）·9 场景快照 |
+| scripts/build_reader.py | W733 | main 101→40（五函数）·622 文件产物 sha 全等 |
+| docs/00-导读/W批次编号对账表.md | W733 | W733 认领行登记 |
+
+## W732 性能与文档工具链重构批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/perf_optimize.py | W732 | 四长函数拆分（80/72/69/74→58/42/52/31·8 新函数）·fixture 快照+14 单测验证 |
+| scripts/optimize-html-size.py | W732 | render_report 126→六段渲染（summary/top10/full/suggestions/strategy/usage）·报告双一致 |
+| scripts/sync_docs.py | W732 | main 111→39+_run_checks 七规则表驱动·横幅历史形态逐字节保留·输出逐字节一致 |
+| docs/00-导读/W批次编号对账表.md | W732 | W732 认领行登记 |
+
+## W731 发布工具链与安全扫描重构批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_cascade.py | W731 | main 347→33（十面函数化+_Ctx+_foot_insert/_agents_entry_wn+_apply_pend/_post_check）·dry-run 全量+apply 对拍验证 |
+| scripts/security_scan.py | W731 | run 91→42（5 提取）+build_report 81→编排体（_summarize_findings+六段渲染）·单测+报告双一致 |
+| docs/00-导读/W批次编号对账表.md | W731 | W731 认领行登记 |
+
+## W730 门禁脚本长函数收尾重构批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_sync.py | W730 | evaluate 177→20（拆 _check_c1..c5d 六检查函数）+gather 提取 _git_output_lines（三块合一） |
+| scripts/lint_links.py | W730 | main 125→33（拆 _parse_args/_resolve_scan_dir/_collect_scan_files/_process_file） |
+| scripts/perf_monitor.py | W730 | collect_rum_metrics 98→编排体（拆 _try_read_rum/_normalize_rum_events/_bucket_rum_events/_summarize_rum_p75） |
+| docs/00-导读/W批次编号对账表.md | W730 | W730 认领行登记 |
+
+## W729 性能与可访问性工具链重构批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/perf_monitor.py | W729 | build_report/compare_trend/check_budget/run 四长函数拆分（≥80 行 5→2·净 +58 行换 9 函数） |
+| scripts/a11y_audit.py | W729 | audit_directory/_render_md 拆分（≥80 行 2→0·净 +48 行换 7 函数） |
+| docs/00-导读/W批次编号对账表.md | W729 | W729 认领行登记 |
+
+## W728 门禁与工具链代码重构批（2026-10-13）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/verify_delivery.py | W728 | main() 905 行表驱动化：_Reporter/_GateContext/_SimpleGate×18/_StrictGate×15/2 runner/13 段函数 |
+| scripts/doc_areas.py | W728 | 新建共享模块：AREA_DIRS 六板块目录+count_content_md 计数口径单一事实源 |
+| scripts/sync_docs.py | W728 | 接入 doc_areas（A_AREAS 派生+count_content_md·消除双份手工表） |
+| scripts/security_scan.py | W728 | scan_sri script/link 同构块提取 _check_resource_attrs 通用体 |
+| docs/superpowers/plans/2026-10-13-code-refactor-w728.md | W728 | 重构方案档（八节·度量基线/符号级设计/风险表/验证协议/经验沉淀） |
+| docs/00-导读/W批次编号对账表.md | W728 | W728 认领行登记（含撞号改号事件记录） |
 
 ## W727 SVG 保护补打与级联 CRLF 根修批（2026-10-13）
 
@@ -409,2942 +819,3 @@
 | docs/03-主题与情节专题 | W700 | 13d→16d 死链修复×4 |
 | docs/S2-学术投稿 | W700 | 13d→16d 死链修复×4 |
 | docs/10-方法论沉淀 | W700 | skills 去链×7+归档深度×5+决策清单去链 |
-
-## W699 三卡工具化与三报告批（2026-10-11·v2.3.293）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/source_collate.py | W699 | S-23 原文考据三方对拍器 |
-| scripts/check_dual_source_scan.py | W699 | S-24 双源对发现器 |
-| scripts/review_sweep.py | W699 | S-25 复审扫荡器 |
-| site/data/timeline.html | W699 | A-01 数据驱动域+双轴注记 |
-| site/data/tag-cloud.html | W699 | A-01 timeline 条目纠偏 |
-| docs/10-方法论沉淀/难簿序与dataset对拍报告-2026-10-11.md | W699 | A-02 对拍报告（供 BL-8·只读） |
-| docs/10-方法论沉淀/人名用字两态盘点-魏征-2026-10-11.md | W699 | A-04 用字盘点（只读） |
-| docs/10-方法论沉淀/README.md | W699 | 索引 37/38 行 |
-
-## W698 门禁scope分级与提交重试批（2026-10-11·v2.3.292）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/verify_delivery.py | W698 | --scope full/docs/site/auto 四态分级 |
-| scripts/safe_commit.py | W698 | 新增：ref-lock 竞争提交重试 |
-| scripts/release.py | W698 | 步骤 3 仓库体量体检（1GB 告警） |
-| CLAUDE.md | W698 | 第 9 条扩 safe_commit 指引 |
-
-## W697 复盘报告第四篇入库批（2026-10-11·v2.3.291）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-11.md | W697 | 第四篇复盘（年表勘正/六轮外报/story-timeline 链/39 门禁/CSP/复审周期） |
-| docs/10-方法论沉淀/README.md | W697 | 索引第 36 行 |
-
-## W696 工作复盘与优化分析报告第二篇入库（2026-10-10·v2.3.290）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-10-2.md | W696 | 新增·W693+W694/W695 并行周期复盘（含 §6.1 复发预防专项·FAM 十族） |
-| docs/10-方法论沉淀/README.md | W696 | 更新·索引第 34 行 |
-| docs/00-导读/W批次编号对账表.md | W696 | 更新·W696 认领+翻转+现势 |
-
-## W695 第门禁挂载与 CSP 全站收紧批（2026-10-10·v2.3.289）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/verify_delivery.py | W695 | 第 39 槽时间线双源挂载+自洽锁 44 段 |
-| scripts/check_story_timeline_sync.py | W695 | 门禁汇总行（38 槽同款 marker） |
-| scripts/generate_csp.py | W695 | EXTERNAL_SCRIPT_HOSTS 清空·docstring 同步 |
-| AGENTS.md | W695 | §4.2 第 39 门禁条目 |
-| docs/00-导读/文档规范.md | W695 | §8 引用式行对齐至第 39 门禁 |
-| site/ 全站 HTML | W695 | CSP script-src 收紧重生成（856 页） |
-
-## W694 故事内时间线可视化页落地批（2026-10-10·v2.3.288）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/story-timeline.html | W694 | 故事内时间线可视化页（EMBEDDED 单源·36 事件回目轴五泳道） |
-| timeline/西游记大事年表.md | W694 | 外审事实勘正（难序/回目归属/人物/数据链声明） |
-| scripts/F_时间/timeline.py | W694 | KEY_EVENTS 24→36 与年表对齐·docstring 去虚 |
-| scripts/output/data/timeline.json | W694 | 重生成（36 条） |
-| site/_template.html | W694 | 路径组 data-ready 化加禁 CDN 注记 |
-| site/data/tag-cloud.html | W694 | 页面登记（81 条） |
-| site/sitemap.xml | W694 | 851 条重生成 |
-| STRUCTURE.md | W694 | 速记段归档加子板块表述修正加 87 页 |
-| docs/archive/STRUCTURE-ARCHIVE.md | W694 | 迁入两段建置沿革 |
-
-## W693 用户三裁决执行批（2026-10-10·v2.3.287）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_embedded_stale_markers.py | W693 | 新增·第 38 门禁页面内嵌残留标记（17 组·S-16 吸收） |
-| scripts/verify_delivery.py | W693 | 更新·第 38 槽挂载加自洽名单 43 段 |
-| scripts/_s4c_figures.py | W693 | 更新·fig2 新语料坐标（第 1 回 line 99） |
-| scripts/output/_w693_com_check.ps1 | W693 | 新增·Word COM 页数验收工具 |
-| AGENTS.md | W693 | 更新·§4.2 第 38 条目 |
-| docs/00-导读/文档规范.md | W693 | 更新·§8 引用式对齐第 38 门禁 |
-| 交接文档.md | W693 | 更新·S 卡拍板记录（3 候选+12 存量） |
-| docs/00-导读/W批次编号对账表.md | W693 | 更新·W693 认领+翻转+现势 |
-
-## W692 工作复盘与优化分析报告入库（2026-10-10·v2.3.286）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-10.md | W692 | 新增·站点质量批次四~六+Backlog 裁决周期复盘（经验 7 项/候选三卡/问题 12 例） |
-| docs/10-方法论沉淀/README.md | W692 | 更新·索引第 33 行 |
-| docs/00-导读/W批次编号对账表.md | W692 | 更新·W692 认领+翻转+现势 |
-
-## W691 Backlog 裁决执行批（2026-10-10·v2.3.285）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| dataset/text-search.json | W691 | 更新·第 1/2/67 回自分回重建加 corpus_note（两真源单源化） |
-| scripts/utils/aliases.py | W691 | 更新·归属追踪集补袁守诚/泾河龙王/魏征/唐太宗/崔判官 |
-| scripts/B_人物/character_nlp.py | W691 | 更新·other_speakers 动态计算加注记字段生成器化 |
-| site/data/json/dialogue_sentiment.json 加 character_appearance.json | W691 | 更新·生成器链重跑（6617 条/缺回清零/40 人） |
-| site/data/dialogue-sentiment.html | W691 | 更新·内嵌 const 整块替换加 KPI 硬数字与说话者同步 |
-| docs 下 31 文件 | W691 | 更新·35 行第 1/2 回引文自节选本迁回真本（含 S4 论文七副本 md） |
-| site/data/json/character_cards.json | W691 | 更新·牛魔王卡芭蕉扇借机制 lore_note |
-| site/data/json/counterfactual_summary.json 加 domino_causality.json | W691 | 更新·性质/时点口径注记 |
-| site/data/json/journey_geo_3d.json 加 journey_route.json | W691 | 更新·到达回口径统一（两界山13/号山39/浮屠山19）加 chapter_note |
-| site/data/json/spiral_progress.json 加 team_effectiveness.json | W691 | 更新·阶段口径注记（两维度声明） |
-| site/data/json/trip_report.json | W691 | 更新·alert_level 七处统一色·标签格式 |
-| source/原文/分回/第067回.md | W691 | 更新·稀柿同误植改衕 |
-| scripts/_w691_quote_fix.py 加 _w691_bl_items.py | W691 | 入账·引文迁移与七小项一次性工具 |
-| docs/00-导读/W批次编号对账表.md | W691 | 更新·W691 认领+翻转+现势 |
-
-## W690 安全告警处置批（2026-10-08·v2.3.281）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/package.json | W690 | 更新·overrides +2（shell-quote 1.11.0/katex ^0.18.2）+ lock 同步（audit 0） |
-| scripts/package-lock.json | W690 | 更新·brace-expansion 5.0.12（npm update·audit 0） |
-| docs/00-导读/W批次编号对账表.md | W690 | 更新·W690 认领+W689 翻收官+现势 W691 |
-
-## W689 全变动对抗复审修复批—项发现闭环＋DHR 前置区重建＋明清注号重排与数据修正（2026-10-08·v2.3.280）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/03-审查与核验/外部审读处置-四方向前提逻辑审视-2026-10-08.md | W689 | 更新·§13 全变动对抗复审（15 项闭环+机械扫修复） |
-| docs/S4-学术投稿/06-文献/INDEX.md | W689 | 更新·104 PDF＋md/ 目录批注 |
-| docs/00-导读/W批次编号对账表.md | W689 | 更新·W689 认领+现势 W690 |
-
-## W688 第六轮复审处置迷你批——HALLMARK 数字驳回＋摘要/结论/仪表盘措辞轻改＋DHR 英摘去重＋文献清单建账（2026-10-08·v2.3.279）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/03-审查与核验/外部审读处置-四方向前提逻辑审视-2026-10-08.md | W688 | 更新·§12 第六轮复审对照与处置（HALLMARK 驳回+措辞轻改+英摘去重自查） |
-| docs/S4-学术投稿/06-文献/00-文献清单.md | W688 | 更新·HALLMARK 建账（§3.1）+Resnik DOI Crossref 注记 |
-| docs/00-导读/W批次编号对账表.md | W688 | 更新·W688 认领+现势 W689 |
-
-## W687 S4 四方向外部审读处置与投稿体系批——审读裁决八批同日执行＋CNKI 核验＋渠道要求落夹＋文献 md 化（2026-10-08·v2.3.278）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| source/引用与网络解读/学术论文索引.md | W687 | 更新·CNKI 核验批（N01 勘正＋N03-N06 幻觉撤除替补＋N07 新增＋修订记录 v1.4/v1.5） |
-| docs/S4-学术投稿/03-审查与核验/外部审读处置-四方向前提逻辑审视-2026-10-08.md | W687 | 新建·第五轮审视裁决＋八批执行追记（§1-§11） |
-| docs/S4-学术投稿/00-决策导航/投稿夹装填清单-2026-10-07.md | W687 | 更新·2026-10-08 批注（全夹副本刷新＋要求落夹＋适配版对账） |
-| docs/S4-学术投稿/06-文献/00-文献清单.md | W687 | 更新·md/ 目录批注＋§3.1 十条 CNKI 存档注记 |
-| docs/S4-学术投稿/06-文献/md/ | W687 | 新建·文献 markdown 抽取稿 104 份（99 文本层＋5 OCR） |
-| docs/S4-学术投稿/05-投稿/（14 渠道夹）/投稿要求-2026-10-08.md | W687 | 新建·14 家期刊官方投稿须知（源分级锚定） |
-| docs/S4-学术投稿/05-投稿/数字人文研究投稿 等 3 夹/适配版 | W687 | 新建·数字人文研究版可验证性＋南艺版/艺术百家版设计（md＋docx 双形态·COM 验收） |
-| docs/00-导读/W批次编号对账表.md | W687 | 更新·W687 认领＋现势 W688 |
-
-## W686 动态 Workflow 工业化方案退役（2026-10-08·v2.3.277）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md | W686 | 删除·方案退役（WF-1~6 全作废·用户裁决等后续重新设计） |
-| docs/00-导读/W批次编号对账表.md | W686 | 更新·W686 认领+W682 预留作废+现势 W687 |
-
-## W685 复盘下半场报告入库与工具收尾批（2026-10-08·v2.3.276）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-07-2.md | W685 | 新增·投稿体系下半场复盘（第二报告）入库 |
-| docs/10-方法论沉淀/README.md | W685 | 更新·索引第 32 行修位（序号撞号消解+S-13~S-15 重编号） |
-| scripts/sync_docs.py | W685 | 更新·规则 2 现值化+规则 3 预留号豁免+规则 5 正则收紧（7 规则全绿） |
-| site/visit-viewer.html | W685 | 更新·tokens.css 接入+表格 fixed 布局溢出治理（裸色 7 处 var 化） |
-| scripts/（46 件） | W685 | 更新·S4 目录重组与方向改名路径 sweep 收账 |
-| scripts/_s4_* 一次性工具（24 件） | W685 | 入账·中性工具（期刊探针族按双盲纪律保持本地） |
-| scripts/_attic/ | W685 | 收档·_w672 扫描器 6 件（第 33-37 门禁常驻后零引用） |
-| docs/00-导读/W批次编号对账表.md | W685 | 更新·W685 认领+翻转+现势 W686 |
-
-## W684 工作复盘报告入库（2026-10-07·v2.3.275）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-07-治理与引擎.md | W684 | 新增·治理与引擎周期复盘（E-01~E-10/S-10~S-12 三卡/P-01~P-14/WBS 七行动·含 W681 部分/W683 合并登记） |
-| SECURITY.md | W683 | 新增·安全策略（scorecard 首账快修·报告渠道/处置口径/设计取舍） |
-| .github/workflows/dependency-review.yml | W683 | 新增·PR 依赖变更审查（v4.9.0 SHA 钉·fail-on-severity=moderate） |
-| .github/workflows/stale.yml | W683 | 新增·陈旧 issue/PR 自动提醒（v9·60+14 天·权限 job 级） |
-| .github/workflows/scorecard.yml | W683 | 新增·OpenSSF 安全评分（v2.4.4·周评+SARIF 入 Code scanning） |
-| docs/00-导读/W批次编号对账表.md | W684 | 更新·W684 认领+收官+W681/W683 版段列同步 |
-
-## W680 agent-web 引擎更换批次一（2026-10-07·v2.3.274）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-10-07-agent-web-engine-swap-plan.md | W680 | 新增·agent-web 引擎更换蓝图 V1.0（集成面量化/新引擎规格/三批推进） |
-| docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md | W680 | 更新·WF-1 改道记录（待新引擎 W682） |
-| xiyouji-agent-web/server/engine/types.ts | W680 | 新增·引擎类型契约 |
-| xiyouji-agent-web/server/engine/openai-compat.ts | W680 | 新增·chat/completions 流式驱动（全厂商兼容） |
-| xiyouji-agent-web/server/engine/tools.ts | W680 | 新增·服务端六工具集+权限分类+路径守卫 |
-| xiyouji-agent-web/server/engine/agent-loop.ts | W680 | 新增·工具循环（maxTurns 封顶） |
-| xiyouji-agent-web/server/engine.smoke.mjs | W680 | 新增·引擎全链路常驻冒烟（4 组机判断言） |
-| xiyouji-agent-web/server/index.ts | W680 | 更新·引擎重接线（SSE 八事件契约不变） |
-| xiyouji-agent-web/src/components/SettingsPage.tsx | W680 | 更新·凭证区改引擎配置状态 |
-| xiyouji-agent-web/evals/run_eval.mjs | W680 | 重写·驱动 /api/chat 全链路（机判口径不变） |
-| xiyouji-agent-web/.env.example | W680 | 更新·LLM 三键+九家主流端点预设表 |
-| xiyouji-agent-web/package.json | W680 | 更新·移除旧厂商 SDK 依赖 |
-| .gitignore | W680 | 更新·engine 编译副产物忽略 |
-| docs/00-导读/W批次编号对账表.md | W680 | 更新·W680 认领+翻转 |
-
-## W679 动态 Workflow 工业化方案入库（2026-10-07·v2.3.273）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md | W679 | 新增·动态 Workflow 工业化方案 V1.0（六提案/事实基线 B1-B31/运行时契约/执行记录） |
-| xiyouji-agent-web/evals/run_eval.mjs | W679 | 更新·.env 密钥引导 9 行（W598 缺口·评估基线首跑前置） |
-| docs/00-导读/W批次编号对账表.md | W679 | 更新·现势 W680 + W679 认领翻转 |
-
-## W678 站点质量修复批次六（2026-10-09·v2.3.284）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/sync_data_json.py | W678 | 新增·生成器输出与部署副本单向同步（清单制·三层断链根治） |
-| scripts/M_洞府房产/cave_estate.py | W678 | 更新·内嵌数据三处修正（波月洞/mischief/万岁狐王遗物） |
-| scripts/B_人物/character_appearance.py | W678 | 更新·FIRST_APPEAR_OVERRIDE 增观音 6 加 characters 条目补 appear_in_chapters |
-| dataset/cave-estate.json | W678 | 更新·真源万岁狐王遗物同改 |
-| site/data/json/cave_estate.json 加 character_appearance.json | W678 | 更新·生成器链重跑同步（白虎洞清零加 appear 35/35 非空） |
-| site/data/json/character_cards.json | W678 | 更新·/demo 调试残留删除 |
-| site/data/json/deconstruction_summary.json | W678 | 更新·year_range 1986 加明细关联注记 |
-| site/data/json/dialogue_sentiment.json | W678 | 更新·avg_sentiment 口径注记 加 other_speakers 46 加缺回注记 |
-| site/data/json/cave_by_owner_rank.json | W678 | 更新·中将级改妖将级 |
-| site/data/json/monster_ipo.json | W678 | 更新·ticker 全角冒号五处改半角 |
-| site/data/json/east_asia_receptions.json | W678 | 更新·越南 year 字段结构化 year_start/year_end |
-| site/data/json/east_asia_amplification.json | W678 | 更新·中国条目代表作悟空传单列（同名歧义消解） |
-| site/data/json/heart_sutra_sculpture.json | W678 | 更新·highest_peak 归零语义对齐 |
-| site/data/json/journey_geo_3d.json | W678 | 更新·duration 单位注记 |
-| site/data/json/villain_matrix.json | W678 | 更新·象限区间连续化加计数复算 1/7/6/1（对齐页内嵌） |
-| site/data/json/rescue_roi.json | W678 | 更新·主观评分注记 |
-| site/data/json/project_review.json | W678 | 更新·佛位二人加贞观纪年注记 |
-| site/data/json/narrative_cards.json | W678 | 更新·芭蕉扇专克火系加钉耙删性别条款 |
-| site/data/json/webnovel_adaptations.json 加 scent_map.json 加 translation_bias.json | W678 | 更新·六耳归悟空打杀加流沙河弱水注记加美猴王首现回 1 |
-| scripts/_w678_fixes.py | W678 | 入账·批次六一次性总修工具 |
-| 交接文档.md | W678 | 更新·Backlog 段登记 BL-6 至 BL-19 十四项 |
-| docs/00-导读/W批次编号对账表.md | W678 | 更新·W678 认领+翻转+现势 |
-
-## W677 站点质量修复批次五（2026-10-09·v2.3.283）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/relationships.html（加 EN 镜像） | W677 | 更新·cooccurrence_timeline 重复键收口（生成器对拍删陈旧份） |
-| site/data/tag-cloud.html（加 EN 镜像） | W677 | 更新·搜索 ID 失配修复 加 setupTouchNav 死函数删除 加点击死渲染删除 加 data-file 零消费删除 |
-| site/data/visual-art.html（加 EN 镜像） | W677 | 更新·heart-breath keyframes 移静态块（style 追加泄漏根治） |
-| site/data/timeline.html（加 EN 镜像） | W677 | 更新·DOMContentLoaded 启动 加 tooltip 定位父 .tl-wrap |
-| site/data/text-search.html（加 EN 镜像） | W677 | 更新·动态注入补 onerror 兜底 |
-| site/data/theological-intervention-network.html（加 EN 镜像） | W677 | 更新·header 全局选择器改 .page-head 语义类 |
-| site/data/six-senses-narratology-network.html（加 EN 镜像） | W677 | 更新·.node-label 删 CSS fill（JS 分型复活） |
-| site/data/social-media.html（加 EN 镜像） | W677 | 更新·徽章色对比度 5.91:1 加 typical_posts 渲染 加 duration 五对清理（ZH） |
-| site/data/text-evolution.html（加 EN 镜像） | W677 | 更新·tickValues 改 d3.ticks 域内动态 |
-| site/data/workplace.html（加 EN 镜像） | W677 | 更新·viewBox 首调死代码删除 |
-| site/data/risk-project.html（加 EN 镜像） | W677 | 更新·里程碑标签侧别数学修正 |
-| site/data/underworld-power-network.html（加 EN 镜像） | W677 | 更新·同人物串联死循环删除（actor 全唯一） |
-| scripts/_w677_fixes.py | W677 | 入账·批次五一次性修复工具（断言式） |
-| docs/00-导读/W批次编号对账表.md | W677 | 更新·W677 认领+翻转+现势 |
-
-## W676 站点质量修复批次四（2026-10-09·v2.3.282）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/monster-ecology-network.html（加 EN 镜像） | W676 | 更新·links 深拷贝 加 手搓桑基重写 d3.sankey（补 d3-sankey.min.js 引用） |
-| site/data/monster-female-network.html（加 EN 镜像） | W676 | 更新·buildSankeyGraph/renderSankey/renderRadar 参数化加 loadData 死回退摘除 |
-| site/data/monster-victims-network.html（加 EN 镜像） | W676 | 更新·四渲染函数 victims 参数化（victimColors 改传入派生） |
-| site/data/monster-background.html（加 EN 镜像） | W676 | 更新·renderKPI 前置清空 加 10.7 倍表述修正 |
-| site/data/mbti-evolution.html（加 EN 镜像） | W676 | 更新·三 scale domain[0,10] 加网格圆加 aria-controls 加 2 svg 补 role=img |
-| site/data/magic-system.html（加 EN 镜像） | W676 | 更新·预算折算两 bar 删除 加 kills 改 combat_record 加表头战斗记录 |
-| site/data/narratology-16d-network.html（加 EN 镜像·改名自 13d） | W676 | 重命名·全牵连 51 处引用同步加 fetch 反转修复加 clusterOrder 局部化 |
-| site/data/poetry-rhythm-analysis.html（加 EN 镜像） | W676 | 更新·词牌分布改诗词类别分布（标题/svg title/注释） |
-| site/data 与 site/en 共 162 页 | W676 | 更新·页脚停滞 sweep（v2.2.86·W334 改 v2.3.282·W676·污染链 2 页收敛） |
-| site/sitemap.xml 加 index/dukou-engine/tag-cloud/search/perf-canvas/pilgrim-team（加 EN 镜像与 reader 主题 4 页）加 datahub-index.js | W676 | 更新·16d 改名引用面同步 |
-| scripts/output/hreflang-pairs.json | W676 | 更新·16d 配对改名同步（第 26 门禁对拍面） |
-| tests/e2e/test_narratology_render.py 加 tests/test_narratology_data.py 加 tests/e2e/test_deep.js 加 tests/e2e/test_visual.js | W676 | 更新·16d 路径同步 |
-| tests/e2e/test_site_quality.js | W676 | 更新·新增 W676 断言 5 项（monster 族数据污染与 resize 重入与 KPI 单例） |
-| scripts/_w676_*（5 件） | W676 | 入账·一次性修复工具（wp41/wp42_sankey/wp42_43/rename_16d/footer_sweep） |
-| 交接文档.md | W676 | 更新·新增 Backlog 段五条（登记不开工） |
-| docs/00-导读/W批次编号对账表.md | W676 | 更新·W676 认领翻转加现势加 W691 递延豁免登记 |
-
-## W675 工作复盘与优化分析报告（2026-10-06·v2.3.272）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-06.md | W675 | 新增·站点质量前三批周期复盘（经验 10 项/三卡/问题 15 例/WBS） |
-| docs/10-方法论沉淀/README.md | W675 | 更新·索引第 29 行 |
-| docs/00-导读/W批次编号对账表.md | W675 | 更新·W675 认领 + 翻转（批次四~六顺延注记） |
-
-## W674 站点质量批次三（2026-10-06·v2.3.271）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data + site/en/*.html ×91 | W674 | 更新·WP-3.1–3.11/3.13–3.15 JS 交互修复与清理包（含 _shell.html 旧 audit 块删除） |
-| DESIGN.md | W674 | 更新·§5.1 时长白名单登记一次性叙事演出三项 |
-| tests/e2e/test_site_quality.js | W674 | 新增·批次三 e2e 套件（A1–A8+K9–K11·15 断言） |
-| tests/e2e/test_smoke.js + test_deep.js | W674 | 更新·playwright 解析回退+字体 CORS 本地白名单 |
-| scripts/package.json | W674 | 更新·test:e2e 串联 test_site_quality |
-| docs/00-导读/W批次编号对账表.md | W674 | 更新·W674 认领 + 翻转 |
-
-## W673 站点质量批次二（2026-10-06·v2.3.270）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/system.css | W673 | 更新·新增 .kpi-card 全局别名基类块（W557 形态恢复·双套子类名兼容） |
-| site 页 ×329 | W673 | 更新·WP-2.3 缺分号 442 处 + WP-2.4 孤立选择器 214 行删除 + 降级对齐 2 页 + 328 页 INLINED 重分发 |
-| scripts/check_css_decl_separators.py | W673 | 新增·第 35 门禁（声明分隔·self-test 3 例） |
-| scripts/check_css_orphan_selectors.py | W673 | 新增·第 36 门禁（孤立选择器·self-test 2 例） |
-| scripts/check_kpi_card_base.py | W673 | 新增·第 37 门禁（kpi 基类双保险·self-test 2 例） |
-| scripts/verify_delivery.py | W673 | 更新·挂载第 35/36/37 槽 + 段自洽锁 39→42 段 |
-| scripts/_w673_fix_semicolons.py | W673 | 新增·缺分号修复工具（逐文件自断言） |
-| scripts/_w673_fix_orphans.py | W673 | 新增·孤立选择器删除工具（同文连带扩展） |
-| scripts/_w673_kpi_audit.py | W673 | 新增·WP-2.1 私有基类审计工具（18 页 117 条 CSV） |
-| scripts/_w673_verify.js | W673 | 新增·批次二 Playwright 机判套件（A-E 五组） |
-| scripts/output/_w673_kpi_private_audit.csv | W673 | 新增·私有基类声明集留档 |
-| docs/00-导读/W批次编号对账表.md | W673 | 更新·W673 认领 + 翻转 |
-
-## W672 站点质量批次一（2026-10-06·v2.3.269）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-10-05-site-quality-remediation-plans.md | W672 | 新增·站点质量六批修复方案 V1.7（编号顺延更正 W672-W677） |
-| site/data/*.html ×50 | W672 | 更新·WP-1.1 dataSource 块 head→body 首子节点移位 |
-| site/data + site/en/*.html ×70 | W672 | 更新·WP-1.2/1.6 CSS 变量漂移 648 处四组映射替换 + 自引用 24 处删除 |
-| scripts/check_html_head_content.py | W672 | 新增·第 33 门禁（head 内容合法性·self-test 2 例） |
-| scripts/check_css_var_refs.py | W672 | 新增·第 34 门禁（CSS 变量引用·扫描器 3 宽口径·self-test 2 例） |
-| scripts/verify_delivery.py | W672 | 更新·挂载第 33/34 槽 + 段自洽锁 37→39 段 |
-| scripts/_w672_move_datasource.py | W672 | 新增·WP-1.1 div 嵌套平衡截块移位工具 |
-| scripts/_w672_var_drift.py | W672 | 新增·WP-1.2/1.6 四组映射 + 自引用删除工具（自断言防残留） |
-| scripts/_w672_shot_equiv.js | W672 | 新增·渲染等值验收工具（确定性口径·批次二/三复用） |
-| site/static/js/cite-box.js | W672 | 新增（补 W657 漏 add）·86 页引用的可引用性交互模块 |
-| docs/00-导读/W批次编号对账表.md | W672 | 更新·W672 认领 + 翻转 |
-
-## W671 共享载体治理（2026-10-05·v2.3.268）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| AGENTS.md | W671 | 更新·§4.3 补子代理显式派发三类场景条目 |
-| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W671 | 更新·第五节默认路径普查三发现登记（2 中 1 低不开工） |
-| docs/00-导读/W批次编号对账表.md | W671 | 更新·W671 认领+翻转 |
-
-## W670 开放项双闭与默认源治理（2026-10-05·v2.3.267）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/B_人物/character_nlp.py | W670 | 更新·默认 --input 切 source/原文/分回/（权威语料·旧 HTML 兼容保留） |
-| docs/00-导读/W批次编号对账表.md | W670 | 更新·W670 认领+翻转 |
-
-## W669 WP-E 内容发现架构（2026-10-05·v2.3.266）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/build_reader.py | W669 | 更新·--hub 模式+build_themes_hub 前缀族机械分组 |
-| scripts/_gen_search_index.py | W669 | 更新·themes-hub 入索引例外（正斜杠包含式判断） |
-| site/reader/themes-hub.html | W669 | 新增·A4 主题导航 hub（209 链接三组） |
-| site/dashboard.html | W669 | 更新·7 tab 口径对齐（全部 51） |
-| site/mobile-index.html | W669 | 删除·职能被 dashboard 覆盖（蓝图 §WP-E.3） |
-| site/sitemap.xml + search.html + 双 tag-cloud | W669 | 更新·850 净稳+索引条目增删+引用收敛 |
-| docs/00-导读/W批次编号对账表.md | W669 | 更新·W669 认领+翻转 |
-
-## W668 数据评审裁决落地（2026-10-05·v2.3.265）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/C_情节/hardships_81.py | W668 | 更新·三难 cause→mind（W639 冻结解除·用户裁决） |
-| scripts/B_人物/character_nlp.py | W668 | 更新·data_scope_note 口径常驻（W668 实测前提修正） |
-| dataset/81-hardships.json + site/data/json/*×2 | W668 | 更新·重分类传播+口径 note（明细==聚合自洽） |
-| site/data/81-hardships.html + dialogue-sentiment.html | W668 | 更新·EMBEDDED 同步+洞察/叙述重算 |
-| site/data/*.html ×16 | W668 | 更新·cite-block 数据性质标注（9 趣味向+7 总结展示） |
-| scripts/output/_w668_t3_inject.py | W668 | 新增·标注注入器（幂等+触达清单） |
-| docs/00-导读/W批次编号对账表.md | W668 | 更新·W668 认领+翻转 |
-
-## W667 复盘三卡防漂移落地（2026-10-05·v2.3.263）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/batch_cascade.py | W667 | 更新·spec 预校验 precheck（分隔符分治+title 领衔·历史回放校准） |
-| scripts/check_claude_md.py | W667 | 新增·第 32 门禁 CLAUDE.md 速查层完整性（四查·self-test 7 例） |
-| scripts/verify_delivery.py | W667 | 更新·挂第 32 槽+自洽锁声明 37 段 |
-| docs/superpowers/plans/2026-10-05-doc-sync-coverage-evaluation.md | W667 | 新增·doc-sync 扩面评估报告（10/10 已防·不扩面） |
-| AGENTS.md | W667 | 更新·§4.2 补第 32 条目 |
-| docs/00-导读/文档规范.md | W667 | 更新·§4.9 前置纪律句 |
-| docs/00-导读/W批次编号对账表.md | W667 | 更新·W667 认领+翻转 |
-
-## W666 工作复盘报告入库（2026-10-05·v2.3.261）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-05.md | W666 | 新增·W663-W665 周期七维度复盘（296 行·元信息块 v2） |
-| docs/10-方法论沉淀/README.md | W666 | 更新·索引 +1 行（第 28 条） |
-| docs/00-导读/W批次编号对账表.md | W666 | 更新·W666 认领+翻转·现势 W667 |
-
-## W664 CLAUDE.md AI 速查层 + 文档规范 §4写作可验证纪律（2026-10-05·v2.3.260）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| CLAUDE.md | W664 | 新增·AI 速查层（10 条一行规则+权威指针·零漂移值·39 行） |
-| docs/00-导读/文档规范.md | W664 | 更新·新增 §4.9 写作可验证纪律（禁词清单/验收含期望输出/头五要素/正反例） |
-| AGENTS.md | W664 | 更新·§3 目录树/§7 上手第 1 步/§8 权威文档行三处锚点 |
-| STRUCTURE.md | W664 | 更新·顶层结构表补 CLAUDE.md 行 |
-| docs/00-导读/W批次编号对账表.md | W664 | 更新·W664 认领行+现势行 W665 |
-
-## W663 治理经验移植批（2026-10-05·v2.3.259）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-10-05-governance-experience-transplant-plan.md | W663 | 新增·三仓治理经验移植方案（现状盘点/不移植表/T1-T4·D1-D3 裁决） |
-| docs/00-导读/W批次编号对账表.md | W663 | 新增·并发认领对账唯一依据（W648-W663 hash 实证·递延豁免通道 D2） |
-| scripts/check_doc_sync.py | W663 | 新增·第 31 门禁文档口径体检（四类窄句式·--self-test 7 例） |
-| scripts/verify_delivery.py | W663 | 更新·挂第 31 槽 + VERIFY_SECTIONS 自洽锁（36 段缺段即红） |
-| scripts/output/doc-sync-first-run.md | W663 | 新增·doc-sync 首跑捕获留证（C3 一处·修复后 0 FAIL） |
-| scripts/output/_w663_t3_inject.py | W663 | 新增·自洽锁注入器（幂等守卫） |
-| scripts/output/_w663_t4_shapin.py | W663 | 新增·workflow SHA 钉改写器（ls-remote 实取·残留复核） |
-| .github/workflows/*.yml ×5 | W663 | 更新·61 处 uses SHA 钉 + 顶层 permissions 收敛 + security dispatch |
-| 交接文档.md / AGENTS.md / docs/00-导读/文档规范.md | W663 | 更新·雷区索引 13 行 + 坑 #14 + §4.2 门禁清单 29/30/31 + 契约锚点 |
-
-## W662 暗色审计入基线+遗漏收敛（2026-10-05·v2.3.264）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_audit_render_states.js | W662 | 更新·新增 --prefix 页域过滤（与 --scope charts 叠加） |
-| scripts/output/render-state-audit-baseline.jsonl | W662 | 更新·基线 163→784 行（+621 reader S2 零缺陷） |
-| scripts/output/render-state-audit.jsonl | W662 | 更新·charts 163 行当前输出（gate 复验输入） |
-| docs/00-导读/W批次编号对账表.md | W662 | 更新·W662 认领+翻转 |
-
-## W661 WP-D2 索引站内化+footer-meta 改链（2026-10-05·v2.3.262）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/build_reader.py | W661 | 更新·README.md ①规则 blob→板块目录页（footer-meta 改链） |
-| scripts/_gen_search_index.py | W661 | 更新·02-06 五板块 kind=reader 映射+exists 回退 |
-| site/data/search.html + site/en/search.html | W661 | 更新·双索引重生成（reader 615/doc 61） |
-| site/reader/ 621 页 | W661 | 更新·全量重渲（52 页导航块+CSP 重注入） |
-| docs/00-导读/W批次编号对账表.md | W661 | 更新·W661 认领+翻转·W665 版段列 v2.3.262 |
-
-## W658 B分析方法 pip 包 0.1.0（2026-10-04·v2.3.258）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| packaging/xiyouji-analysis/pyproject.toml | W658 | 新增·pip 包定义（xiyouji-analysis 0.1.0·CLI 入口） |
-| packaging/xiyouji-analysis/src/xiyouji_analysis/cli.py | W658 | 新增·CLI（list/run/run-all·subprocess 透传） |
-| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/ | W658 | 新增·32 个自包含分析脚本（A-H 类目结构·sync 产物） |
-| scripts/package_analysis_sync.py | W658 | 新增·包同步机制（单一事实源→analyses/·COUPLED 排除·--check 幂等） |
-| scripts/output/_sync_analysis_manifest.json | W658 | 新增·同步清单（边界与 excluded 登记） |
-
-## W657 B第二步可引用性组件（2026-10-04·v2.3.257）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/js/cite-box.js | W657 | 新增·可引用性交互模块（复制/降级/token 样式动态注入） |
-| site/data/*.html ×86 | W657 | 更新·cite-block 静态注入（数据源+APA/BibTeX+下载）+cite-box 挂载 |
-| scripts/output/citability-baseline.txt | W657 | 刷新·missing 327→0（四项 86/86·全量 FAIL 模式） |
-| scripts/output/_w657_cite_inject.py | W657 | 新增·注入工具（真实信息零编造·页面清单输出） |
-| scripts/output/_cascade_files_W657_pages.txt | W657 | 新增·页面触达清单 |
-
-## W656 B-9① audit 六族补丁合并单模块（2026-10-04·v2.3.256）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/js/chart-audit.js | W656 | 新增·audit 六族统一模块（单一事实源·ChartAudit API·data-families 接入） |
-| site/data/*.html ×84 | W656 | 更新·七块 audit 补丁→1 行 defer src（净删 20524 行） |
-| scripts/output/_w656_replace_audit.py | W656 | 新增·内联替换工具（被 src 方案取代·存档） |
-| scripts/output/_w656_src_tag.py | W656 | 新增·src 标签替换工具（含页面清单输出） |
-| scripts/_w656_equiv_probe.js | W656 | 新增·等价性 DOM 终态探针（before/after 对比） |
-| scripts/output/_cascade_files_W656_pages.txt | W656 | 新增·页面触达清单（非级联批量改动自带清单） |
-
-## W655 B-9② D3 字面色值→CSS 变量（2026-10-04·v2.3.255）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/tokens.css | W655 | 更新·暗块补 chart 系列暗值 4 行（chart-1/2/4/6 对齐 accent 系） |
-| site/data/*.html ×46 | W655 | 更新·赋值语境字面色值→var(--token) 405 处（attr→style 230+style→var 175） |
-| scripts/output/design-tokens.json | W655 | 刷新·97 键（暗块 +4 chart 暗值） |
-| docs/00-导读/design.md | W655 | 刷新·dark 段 +4 行 |
-| scripts/output/_w655_literal_to_var.py | W655 | 新增·转换脚本存档（token 精确匹配+attr→style 形态转换） |
-| scripts/output/_cascade_files_W655.txt | W655 | 新增·级联落盘清单 |
-
-## W654 PD-1b 图表选型章与降级门禁（2026-10-03·v2.3.254）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| DESIGN.md | W654 | 更新·§4B 图表选型与数据契约（九族 45 格·与 §6 响应式配套） |
-| scripts/check_chart_data.py | W654 | 更新·R3 措辞×实现错配+spec-check+自检 6 例（3→6） |
-| scripts/check_chart_degrade.py | W654 | 新增·第 30 门禁窄屏降级声明（四值枚举·静态解析） |
-| scripts/verify_delivery.py | W654 | 更新·挂第 30 槽降级声明门禁 |
-| site/data/*.html ×86 | W654 | 更新·chart-degrade 降级形态声明注释（族签名推导） |
-| scripts/agg_entities.py | W654 | 新增·B-5 聚合器（chapter-meta→entities·100/100 覆盖断言） |
-| dataset/entities/characters.json | W654 | 新增·56 名角色聚合（出场回数/回目列表/首秀回） |
-| dataset/entities/locations.json | W654 | 新增·61 处地点聚合 |
-| scripts/output/_cascade_files_W654.txt | W654 | 新增·级联落盘清单 |
-
-## W653 PD-1a 图表配色色盲安全门禁（2026-10-03·v2.3.253）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_chart_colorblind.py | W653 | 新增·第 29 门禁色盲安全（Machado 二型+CIEDE2000·WARN+基线·survey/report/baseline/gate/self-test 五模式） |
-| scripts/verify_delivery.py | W653 | 更新·挂第 29 槽色盲安全门禁 |
-| scripts/output/colorblind-baseline.txt | W653 | 新增·基线冻结（17428 对·1,059,178B） |
-| scripts/output/colorblind-survey.json | W653 | 新增·86 页色值书写变体形态普查 |
-| scripts/output/_cascade_files_W653.txt | W653 | 新增·级联落盘清单 |
-
-## W652 PD设计令牌机器可读导出 + 文档对账门禁（2026-10-03·v2.3.252）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/export_design_tokens.py | W652 | 新增·令牌导出器（DTCG 简化 JSON+design.md·--check-count=AC-1） |
-| scripts/check_design_doc_drift.py | W652 | 新增·文档对账门禁（反篡改/覆盖/虚构/值同步/暗色计数五层·挂 verify） |
-| scripts/verify_delivery.py | W652 | 更新·挂设计令牌对账门禁（PD-5·wrapper 防静默跳过） |
-| scripts/output/design-tokens.json | W652 | 新增·93 键令牌真值清单（B-9② 色值→变量前置） |
-| docs/00-导读/design.md | W652 | 新增·令牌消费文档（机器生成勿手改·反篡改字节比对） |
-| DESIGN.md | W652 | 更新·§2.1 六处值漂移同步至 tokens.css 现行值 |
-| scripts/output/_cascade_files_W652.txt | W652 | 新增·级联落盘清单 |
-
-## W651 全量启动裁决入档（2026-10-03·v2.3.251）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_traffic_snapshot.py | W651 | 新增·GitHub Traffic API 快照工具（14 日窗四端点·周期落盘） |
-| scripts/output/traffic-snapshots/traffic-snapshot-2026-10-03.json | W651 | 新增·首采（views 5/4·clones 2623/231·referrers 空） |
-| docs/superpowers/plans/2026-10-02-product-design-suite-applicability-plan.md | W651 | 更新·§10.1 批复记录（D-1…D-7 落默认项） |
-| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W651 | 更新·B-5/B-6 第二步/B-7/B-9①② 启动注记 |
-| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W651 | 更新·§8.3 WP-A 终态回写+WP-D2/E 解冻启动 |
-| 交接文档.md | W651 | 更新·两笔陈旧勾选修正（迁移/读者量验证实际已完成） |
-
-## W650 第门禁三项加固（2026-10-02·v2.3.250）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_citability.py | W650 | 更新·C2 判据收紧（子目录≠参数提示）+docstring 自检数校正 |
-| scripts/verify_delivery.py | W650 | 更新·第 28 门禁 wrapper 防静默跳过（异常升 FAIL+汇总行校验） |
-| scripts/output/citability-baseline.txt | W650 | 刷新·判据收紧后 missing 326→327（C2 9/86→8/86） |
-| .gitignore | W650 | 更新·两份第 28 门禁 PRD 出库（真名防泄漏·本地留存） |
-| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W650 | 更新·B-6 PRD 引用改本地留存说明 |
-| .github/workflows/README.md | W650 | 瘦身·累积链 5590→305 字符（实质批次清单化·级联锚点保留） |
-| docs/_dev/产品管理套件应用-2026-10-02/03-PRD-*.md 与 plans/gate28-citability-prd.md | W650 | 出库·git rm --cached（W649 曾入库） |
-| scripts/output/_cascade_files_W650.txt | W650 | 新增·级联落盘清单 |
-
-## W649 第门禁可视化可引用性挂载落地（2026-10-02·v2.3.249）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_citability.py | W649 | 新增·第 28 门禁可视化可引用性（四判据·WARN+基线冻结·self-test 6 例） |
-| scripts/verify_delivery.py | W649 | 更新·挂第 28 门禁（基线外新增 FAIL） |
-| scripts/output/citability-baseline.txt | W649 | 新增·基线冻结（344 行/missing 326） |
-| scripts/output/citability-report.json | W649 | 新增·首跑报告 |
-| docs/_dev/产品管理套件应用-2026-10-02/×6 | W649 | 新增·路线图/ICE 矩阵/PRD-第 28 门禁/产品脑暴/用户反馈分析/产品指标复盘 |
-| docs/superpowers/plans/2026-10-02-gate28-citability-prd.md | W649 | 新增·第 28 门禁 PRD（v1.1 判据实测校准） |
-| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W649 | 更新·B-6 裁决变更记账（第一步开工·第二步仍登记） |
-| docs/10-方法论沉淀/读者数据复盘.md | W649 | 更新·第零·二 页面级读数与三源同采法 |
-| scripts/output/_cascade_files_W649.txt | W649 | 新增·级联落盘清单（partial commit 三犯根治首用） |
-| scripts/batch_cascade.py 等 35 文件 | W649 | chore 7b27cf1 对账追记·S4/审计脚本清账+落盘清单加固 |
-
-## W648 读者数据来源占比人工截图留档（2026-10-02·v2.3.248）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/10-方法论沉淀/读者数据截图/dashboard-top-2026-10-02.png | W648 | 新增·30 日周期页头留档（Pages 26/30） |
-| docs/10-方法论沉淀/读者数据截图/dashboard-topref-2026-10-02.png | W648 | 新增·Top referrers=Nothing to display 特写留档 |
-| docs/10-方法论沉淀/读者数据复盘.md | W648 | 更新·§一来源占比回填+头部链注记+§二 Loading 根因备注 |
-
-## W647 Backlog 微件三连 + 工作复盘报告入库（2026-10-01·v2.3.247）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| CODE_OF_CONDUCT.md | W647 | 新增·Contributor Covenant 2.1 中文版（B-3） |
-| .github/workflows/security.yml | W647 | 更新·增 CodeQL job（js/py 双矩阵·B-2） |
-| scripts/gen_rss.py | W647 | 新增·RSS 生成器（CHANGELOG 现役段 20 条·B-1） |
-| site/rss.xml | W647 | 新增·RSS feed（首发生成） |
-| site/index.html | W647 | 更新·head 挂 RSS alternate link |
-| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-01.md | W647 | 新增·七维度工作复盘报告（19 批实测数据·11 份外部分析总表） |
-
-## W646 Backlog BThree.js 静态回退（2026-10-01·v2.3.246）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/character-relationship-3d.html | W646 | 更新·WebGL 不可用 try-catch+webgl-fallback 回退 2D 语义网络 |
-| site/en/character-relationship-3d.html | W646 | 更新·同上（EN 版·回退 EN 2D network） |
-| site/data/journey-geo-3d.html | W646 | 更新·同上（回退 2D 路线图） |
-
-## W645 Backlog B小子项（2026-10-01·v2.3.245）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/tokens.css | W645 | 更新·z-index 层级四令牌（--z-nav/mask/drawer/tooltip） |
-| site/system.css | W645 | 更新·四处 z-index 换 var+补 .skip-link 类定义 |
-| site/data/graph-explorer.html | W645 | 更新·力导向确定性种子（LCG） |
-| site/data/monster-victims-network.html | W645 | 更新·力导向确定性种子（LCG） |
-
-## W644 Backlog 微件三连（2026-10-01·v2.3.244）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| CODE_OF_CONDUCT.md | W644 | 新增·Contributor Covenant 2.1 中文版（B-3） |
-| .github/workflows/security.yml | W644 | 更新·增 CodeQL job（js/py 双矩阵·B-2） |
-| scripts/gen_rss.py | W644 | 新增·RSS 生成器（CHANGELOG 现役段 20 条·B-1） |
-| site/rss.xml | W644 | 新增·RSS feed（首发生成） |
-| site/index.html | W644 | 更新·head 挂 RSS alternate link |
-
-## W643 Backlog B数据质量修复落地（2026-10-01·v2.3.243）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/B_人物/character_appearance.py | W643 | 更新·FIRST_APPEAR_OVERRIDE 剧情首秀覆盖表（三妖 first_chapter 勘正·差分外科手术级） |
-| site/data/json/character_appearance.json | W643 | 同步·三妖 first_chapter 勘正（78/74/74·重生成+部署副本一致） |
-| site/data/json/character_appearance.json | W643 | 同步·部署副本（漂移门禁 47 副本一致） |
-| scripts/_w643_probe_appearance.js | W643 | 新增·appearance 双路径回归探针（http 双页 PASS） |
-| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W643 | 更新·B-8 ①修复②撤销③勘误④语料漂移登记 |
-
-## W642 Backlog B登记（2026-10-01·v2.3.242）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W642 | 更新·B-9 工程债聚合登记（audit 合并/色值→变量/种子/命名/z-index/语义化·第十一份评审收尾） |
-
-## W641 全站 meta description 注入页 + title 清理行（2026-10-01·v2.3.241）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/inject_descriptions.py | W641 | 新增·全站 meta description 注入器（h2 序列推导·幂等·title 清理同批） |
-| scripts/check_seo_head.py | W630/W641 | 更新·R1 必备项增 description（第 26 门禁防复发扩展） |
-| site/ 229 页 | W641 | 更新·meta description+og:description 注入与 title/og:title 清理（含 CSP 哈希更新） |
-
-## W640 Backlog B追加（2026-10-01·v2.3.240）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W640 | 更新·B-8 追加跨文件一致性裁决（appear_in_chapters 空字段实测新增+缺失维度提案冻结） |
-
-## W639 Backlog B数据质量修复登记（2026-10-01·v2.3.239）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W639 | 更新·B-8 数据质量修复登记（appearance 消歧+dialogue 变体·生成器层·第九份全保真分析） |
-
-## W638 Backlog B存档注记（2026-10-01·v2.3.238）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W638 | 更新·B-6 追加第八份分析存档注记（矩阵零幻觉/分级未验证/门禁降级 WARN+基线/出处四字段收编） |
-
-## W637 Backlog B门禁升级路径 + B脚本打包登记（2026-10-01·v2.3.237）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W637 | 更新·B-6 门禁升级路径注记（第 28 门禁 WARN+基线）+B-7 脚本 pip 打包登记 |
-
-## W636 Backlog B登记 + 新增可视化九问评审清单（2026-09-30·v2.3.236）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W636 | 更新·B-6 可视化可引用性登记+§五 新增可视化九问评审清单（第六份分析裁决） |
-
-## W635 Backlog B追加学术增强子项（2026-09-30·v2.3.235）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W635 | 更新·B-5 追加重启后学术增强子项（Wikidata→本体→Zenodo/OSF·安全响应头平台受限附注） |
-
-## W634 外部路线图保真度裁决入档（2026-09-30·v2.3.234）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W634 | 新增·维护态 Backlog 登记（外部路线图保真度裁决+5 项增量执行要点·重启触发） |
-
-## W633 CI ruff 红灯热修复（2026-09-30·v2.3.233）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_citations.py | W633 | 热修复·文件尾补换行（W292·CI ruff 拦截） |
-| scripts/audit/line_check.py | W633 | 热修复·文件尾补换行（W292·CI ruff 拦截） |
-
-## W632 CITATION.cff 级联面漏提交热修复（2026-09-30·v2.3.232）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| CITATION.cff | W632 | 热修复·补提交（W629-W631 三批级联输出漏 scoped 清单→CI R2 拦截·2.3.232 同步） |
-
-## W631 门禁脚本加固落库（2026-09-30·v2.3.231）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_citations.py | W631 | 落库·09-27 加固（SUSPECT_RE 防静默跳过+--self-test 4/4·第 20 门禁脚本运行态=版本态） |
-| scripts/audit/line_check.py | W631 | 落库·09-27 加固（语料路径修正 text-search-app.js+--self-test 105/105） |
-
-## W630 第门禁 SEO head 挂载（2026-09-30·v2.3.230）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/verify_delivery.py | W630 | 更新·挂载第 26 门禁 SEO head 单注册块（禁擅改清单内·经用户裁决） |
-| README.md | W630 | 更新·门禁口径 25→26 项（活跃口径自洽） |
-
-## W629 作者侧待办收口（2026-09-30·v2.3.229）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/10-方法论沉淀/读者数据截图/dashboard-top-2026-09-30.png | W629 | 新增·后台报告头+周期选择器+仪表盘上部截图 |
-| docs/10-方法论沉淀/读者数据截图/dashboard-pages-2026-09-30.png | W629 | 新增·页面级访问分布截图（computer-use） |
-| docs/10-方法论沉淀/读者数据截图/uv-curve-2026-09.svg | W629 | 新增·UV 曲线（API 逐日 daily 字段·零依赖 SVG） |
-| docs/10-方法论沉淀/读者数据复盘.md | W629 | 更新·§一/§二 留档引用回填+口径备注（35vs31 时区差·逐日字段勘误） |
-
-## W628 叙述面内容漂移清零 + 第门禁防复发（2026-09-30·v2.3.228）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_w_range_literal.py | W628 | 新增·第 27 门禁（叙述面 W001-Wxxx 终点==现役 max+CITATION 同步·self-test 4/4） |
-| scripts/batch_cascade.py | W628 | 更新·+CITATION.cff 第 10 面（version/date-released 随批同步·第 27 门禁 R2 倒逼） |
-| scripts/verify_delivery.py | W628 | 更新·挂载第 27 门禁单注册块（禁擅改清单内·经用户指令防复发） |
-| scripts/_w628_drift_audit.py | W628 | 新增·叙述面漂移取证脚本（四类扫描·30+ 命中逐条裁决 9 真漂移） |
-| CITATION.cff | W628 | 更新·version 2.2.15→2.3.227 + date-released 同步（外部引用面） |
-| README.md | W628 | 更新·W001-W575 字面量×2 引用式化（外部综述错误源头根治） |
-| STRUCTURE.md | W628 | 更新·归档描述对齐三段式现行口径 |
-| docs/00-导读/文档规范.md | W628 | 更新·管控清单 W423 引用式化 + §8 行补第 27 门禁与活跃口径 |
-| docs/10-方法论沉淀/README.md | W628 | 更新·W529 引用式化 + 当前版本快照改随批登记口径 |
-| .github/workflows/README.md | W628 | 更新·17 项门禁 W500 快照改引用 verify_delivery 现役 |
-
-## W627 i18n 根治层路线 B（2026-09-30·v2.3.227）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/en/json/（7 文件） | W627 | 新增·EN 数据副本（villain_matrix/rescue_roi/methodology_summary/monster_clock/chart_design_summary/domino_causality/spiral_progress） |
-| site/en/methodology-matrix.html | W627 | 更新·fetch 切换 ../en/json/（3 处·含 CSP） |
-| site/en/chart-design.html | W627 | 更新·fetch 切换 ../en/json/（4 处·含 CSP） |
-| scripts/_w627_extract_embedded.js | W627 | 新增·Node 原生解析提取两页 EMBEDDED 为 JSON |
-| scripts/_w627_gen_en_data.py | W627 | 新增·EN 优先合并生成器（形状取 EMBEDDED·schedule 位置配对·记录数护栏） |
-| scripts/_check_en_json_parity.py | W627 | 新增·en/json 对账检查器（记录数/CJK 残留基线/可解析·按需） |
-| scripts/_w625_probe_en_i18n.js | W627 | 更新·长文本边界断言反转为应已英化 |
-
-## W626 WP-A 度量闭环正式判定（2026-09-30·v2.3.226）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/10-方法论沉淀/读者数据复盘.md | W626 | 更新·首轮 5 格回填（uv7=1/uv30=24 实测+平台不提供标注）+judge_gate 归档判定记录+决策行 |
-| 交接文档.md | W626 | 更新·阻塞区追加 W530 决策闸门正式判定（归档·冻结内容扩容仅工程批） |
-
-## W625 EN 页数据显示面枚举名快赢英化（2026-09-29·v2.3.225）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/en/methodology-matrix.html | W625 | 更新·枚举名归一+象限 undefined/scenarios 形状修复+标签交替/刻度截断/margin 110 |
-| site/en/chart-design.html | W625 | 更新·枚举名归一（monster/时辰/schedule 复合键/summary 妖名） |
-| scripts/_w625_build_zh2en_maps.py | W625 | 新增·ZH2EN 映射生成器（EMBEDDED×部署 JSON 机械配对·双译名拆表·SACT 复合键） |
-| scripts/_w625_probe_en_i18n.js | W625 | 新增·双路径探针 30 断言（枚举名 0 CJK+长文本边界+scenarios/KPI 补收） |
-| scripts/_w625_capture.js | W625 | 新增·免 resize 截图法（扩视口至全页高→静置 3.5s→免 fullPage） |
-
-## W624 交接里程碑块级联根治（2026-09-29·v2.3.224）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/batch_cascade.py | W624 | 更新·删除逻辑提取 drop_block() 整块淘汰（W557 只删标题行缺陷修复·6 例单测护栏） |
-| 交接文档.md | W624 | 更新·里程碑区 33 组孤儿+空行 debris 清债 130 行（内容均在 CHANGELOG·回归单块稳态） |
-| scripts/_w624_inspect_milestone.py | W624 | 新增·里程碑区结构盘点（组分类/异物标记/行数分布） |
-| scripts/_w624_repair_milestone.py | W624 | 新增·孤儿债务一次性清理（删除区异物护栏断言·130 行） |
-| scripts/_w624_cascade_block_test.py | W624 | 新增·drop_block 6 例单测（含真实文件整块淘汰与稳态模拟） |
-
-## W623 README 补 AI 生成声明（2026-09-29·v2.3.223）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| README.md | W623 | 更新·AI 生成说明节（AI 代理协作+人工审定·元信息块四字段口径·引文硬验证防幻觉·25 门禁·责任边界） |
-| pyproject.toml | W623 | 更新·UP031 注释复测校真（34→213 处·维持 ignore 裁决不变） |
-| xiyouji-agent-web/package-lock.json | W623 | 更新·dependabot 组合并（生产 8 更新含 dotenv 18·开发 9 更新含 @types express5/uuid11/better-sqlite3 9） |
-| scripts/package-lock.json | W623 | 更新·dependabot 组合并（playwright 1.63.0/eslint 10.11.0） |
-| scripts/requirements.txt | W623 | 更新·dependabot 区间合并（ruff 0.16.9/brotli ≥1.2/fonttools ≥4.66） |
-
-## W622 触屏 tooltip 真机验证收口 + en 人物页部署态名字英化（2026-09-29·v2.3.222）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/en/character-appearance.html | W622 | 更新·35 人 ZH2EN 全量 map+加载后归一（显示面英文化·修复 insights find 失败） |
-| docs/superpowers/plans/2026-09-29-en-data-i18n-display-plan.md | W622 | 新增·EN 数据显示面 i18n 两路线评估（快赢层/根治层梯队） |
-| scripts/_w622_probe_en_names.js | W622 | 新增·en 人物页名字英化探针（CJK 密度+图表在位断言） |
-
-## W621 暗色阶段三收口（2026-09-28·v2.3.221）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/tokens.css | W621 | 更新·暗色映射+1（#7a5230→#bb9070·narrative-experiment 部署数据组色） |
-| site/data+en（7 页修复·327 页 INLINED 分发） | W621 | 更新·appearance/matrix zh+en 契约归一·chart-design en 怪物别名·journey 标记 fill 属性化·customs-pass-route 附带前批引文行号修正 |
-| scripts/output/render-state-audit-baseline.jsonl | W621 | 更新·暗色基线刷新 48/7→0/0（只增即 FAIL） |
-| scripts/_w621_dark_data_colors_fix.py | W621 | 新增·四族契约归一补丁记录（精确匹配断言式） |
-| scripts/_w621_probe_dark_fills.js 等 4 件 | W621 | 新增·取证链（低亮度探针/内容在位断言/暗色实拍复拍） |
-
-## W620 装饰投稿包五图 SVG 重绘（2026-09-24·v2.3.220）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_w621_svg_figures.py | W620 | 新建·五图数据提取+SVG 生成（图3 弹簧布局/图4 五级线性色标/图5 时间轴） |
-| scripts/_w621_render_png.js | W620 | 新建·Playwright SVG→PNG 2x 渲染（CJK 路径 ASCII 中转） |
-| scripts/_w607_md2docx.js | W620 | 修改·图 3/4/5 图注改「据项目数据重绘」 |
-| CHANGELOG.md | W620 | 新增·W620 版段 + 编号规则上限 W001-W620 |
-| 交接文档.md | W620 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W620 | 修改·版本行同步 v2.3.220 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W620 | 修改·四页脚链首 prepend W620 |
-| .github/workflows/README.md | W620 | 修改·旁文档同步 |
-| AGENTS.md | W620 | 修改·版本脚注追加 W620 |
-| scripts/output/file-index.md | W620 | 新增·W620 段（本段·batch_cascade.py 执行） |
-| scripts/_w621_spec.json | W620 | 新建·本批级联 spec |
-
-## W619 官方投稿须知全文终验（2026-09-24·v2.3.219）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W619 | 修改·v2.8 声明补流程句+头注作者信息占位+9 处微剪（9,986 守位） |
-| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W619 | 修改·同款镜像（不含作者信息占位） |
-| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W619 | 重生成·94 blocks·9,986 字符·探针 6/6 |
-| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W619 | 重生成·9,971 字符 |
-| docs/S4-学术投稿/装饰投稿/装饰投稿政策核查-2026-09.md | W619 | 修改·W619 终验段+清单第 9/10 项（作者信息·公开仓库风险） |
-| CHANGELOG.md | W619 | 新增·W619 版段 + 编号规则上限 W001-W619 |
-| 交接文档.md | W619 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W619 | 修改·版本行同步 v2.3.219 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W619 | 修改·四页脚链首 prepend W619 |
-| .github/workflows/README.md | W619 | 修改·旁文档同步 |
-| AGENTS.md | W619 | 修改·版本脚注追加 W619 |
-| scripts/output/file-index.md | W619 | 新增·W619 段（本段·batch_cascade.py 执行） |
-| scripts/_w619_spec.json | W619 | 新建·本批级联 spec |
-
-## W618 图片 AI 率处置（2026-09-24·v2.3.218）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W618 | 修改·v2.7 声明补图源+微剪守位 9,975 |
-| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W618 | 修改·同款镜像 |
-| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W618 | 重生成·94 blocks·9,975 字符·探针 7/7 |
-| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W618 | 重生成·9,960 字符 |
-| docs/S4-学术投稿/装饰投稿/图表/图1-重绘底稿.svg | W618 | 新建·作者手工重绘底稿（可编辑） |
-| docs/S4-学术投稿/装饰投稿/图表/图2-重绘底稿.svg | W618 | 新建·作者手工重绘底稿（可编辑） |
-| scripts/_w606_paper_figures.py | W618 | 修改·OUT 迁移后新址+图 6 复活块移除+ruff 清零+冒烟 |
-| CHANGELOG.md | W618 | 新增·W618 版段 + 编号规则上限 W001-W618 |
-| 交接文档.md | W618 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W618 | 修改·版本行同步 v2.3.218 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W618 | 修改·四页脚链首 prepend W618 |
-| .github/workflows/README.md | W618 | 修改·旁文档同步 |
-| AGENTS.md | W618 | 修改·版本脚注追加 W618 |
-| scripts/output/file-index.md | W618 | 新增·W618 段（本段·batch_cascade.py 执行） |
-| scripts/_w618_spec.json | W618 | 新建·本批级联 spec |
-
-## W617 投稿版全文人文化改写（2026-09-24·v2.3.217）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W617 | 修改·v2.6 全文人文化改写（降 AI 检测特征·事实冻结·9,971 达标） |
-| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W617 | 修改·同款镜像（项目命名段独立变体·双盲不变式过） |
-| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W617 | 重生成·94 blocks·9,971 字符·14 页·探针 15/15 |
-| docs/S4-学术投稿/装饰投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W617 | 重生成·9,956 字符·图 5 脱敏变体 |
-| scripts/_w617_humanize.py | W617 | 新建·人化改写脚本（分节替换+冻结面断言+序区回填修复） |
-| CHANGELOG.md | W617 | 新增·W617 版段 + 编号规则上限 W001-W617 |
-| 交接文档.md | W617 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W617 | 修改·版本行同步 v2.3.217 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W617 | 修改·四页脚链首 prepend W617 |
-| .github/workflows/README.md | W617 | 修改·旁文档同步 |
-| AGENTS.md | W617 | 修改·版本脚注追加 W617 |
-| scripts/output/file-index.md | W617 | 新增·W617 段（本段·batch_cascade.py 执行） |
-| scripts/_w617_spec.json | W617 | 新建·本批级联 spec |
-
-## W616 《装饰》投稿包独立文件夹迁移（2026-09-24·v2.3.216）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/装饰投稿/（目录·12 文件） | W616 | 迁入·B 轨《装饰》投稿包独立储存（三稿+docx+大纲+两调研+政策核查+投稿辅助+Zotero+图表清单·自 S4 根 git mv） |
-| docs/S4-学术投稿/装饰投稿/图表/（图1-5 浅暗 9 PNG） | W616 | 迁入·B 轨配套图随包（自 S4/图表/ git mv） |
-| docs/S4-学术投稿/图表/（A-图×3） | W616 | 留守·A 轨灰度图路径不变 |
-| scripts/_w616_zhuangshi_folder.py | W616 | 新建·迁移链接/脚本路径修复器（链接自检断言+双形态规则+幂等） |
-| scripts/ 9 个 _w6 脚本 | W616 | 修改·路径常量迁新址（_w606×2/_w607×2/_w608/_w612×2/_w614/_w615·FIGDIR/Zotero out） |
-| CHANGELOG.md | W616 | 新增·W616 版段 + 编号规则上限 W001-W616 |
-| 交接文档.md | W616 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W616 | 修改·版本行同步 v2.3.216 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W616 | 修改·四页脚链首 prepend W616 |
-| .github/workflows/README.md | W616 | 修改·旁文档同步 |
-| AGENTS.md | W616 | 修改·版本脚注追加 W616 |
-| scripts/output/file-index.md | W616 | 新增·W616 段（本段·batch_cascade.py 执行） |
-| scripts/_w616_spec.json | W616 | 新建·本批级联 spec |
-
-## W615 官网体例定稿（2026-09-23·v2.3.215）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W615 | 修改·v2.5 官网体例重排+AI 文末声明+瘦身 548 字符+页脚实测回填+头注三重复修复 |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W615 | 修改·同款镜像（③佚名保持·双盲不变式断言过） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W615 | 重生成·88 blocks·9,986 字符达标·13 页 |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W615 | 重生成·9,971 字符·图 5 脱敏变体 |
-| docs/S4-学术投稿/装饰投稿政策核查-2026-09.md | W615 | 修改·官网直采升级（来源行/定案段/清单 3·6·8 项） |
-| scripts/_w615_official_format.py | W615 | 新建·官网体例落地脚本（引号归一+幂等守卫+双盲断言） |
-| CHANGELOG.md | W615 | 新增·W615 版段 + 编号规则上限 W001-W615 |
-| 交接文档.md | W615 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W615 | 修改·版本行同步 v2.3.215 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W615 | 修改·四页脚链首 prepend W615 |
-| .github/workflows/README.md | W615 | 修改·旁文档同步 |
-| AGENTS.md | W615 | 修改·版本脚注追加 W615 |
-| scripts/output/file-index.md | W615 | 新增·W615 段（本段·batch_cascade.py 执行） |
-| scripts/_w615_spec.json | W615 | 新建·本批级联 spec |
-
-## W614 第四份外部审读分级采纳（2026-09-23·v2.3.214）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W614 | 修改·v2.4 文献体例与英文摘要微调+字数口径 Word 实测回填 |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W614 | 修改·同款镜像（③佚名脱敏保持·双盲不变式断言过） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W614 | 重生成·86 blocks·斜体 run 16·Word 统计 6,639 字/12 页 |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W614 | 重生成·图 5 脱敏变体·86 blocks |
-| docs/S4-学术投稿/装饰投稿政策核查-2026-09.md | W614 | 修改·清单第 8 项挂载+篇幅条目口径修正 |
-| docs/S4-学术投稿/B轨论文文献-Zotero导入.json | W614 | 修改·⑧ page 50-64/⑪ 卷期页码+DOI/⑯→⑮ |
-| scripts/_w614_notes_polish.py | W614 | 新建·采纳面编辑脚本（E1 断言+双盲不变式） |
-| scripts/_w607_zotero_export.py | W614 | 修改·文献数据增补+citekey 重排修复 |
-| CHANGELOG.md | W614 | 新增·W614 版段 + 编号规则上限 W001-W614 |
-| 交接文档.md | W614 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W614 | 修改·版本行同步 v2.3.214 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W614 | 修改·四页脚链首 prepend W614 |
-| .github/workflows/README.md | W614 | 修改·旁文档同步 |
-| AGENTS.md | W614 | 修改·版本脚注追加 W614 |
-| scripts/output/file-index.md | W614 | 新增·W614 段（本段·batch_cascade.py 执行） |
-| scripts/_w614_spec.json | W614 | 新建·本批级联 spec |
-
-## W613 S4 三线推进（2026-09-23·v2.3.213）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/B轨投稿辅助-确认邮件与投稿信.md | W613 | 新建·政策确认邮件四问+投稿信+AI 披露三草稿 |
-| docs/S4-学术投稿/学术论文-西游记驿递交通书写的数字人文研究.md | W613 | 修改·A 轨强化（数据 15→30·正文 12,012·两脉络·引文行 3 条） |
-| docs/S4-学术投稿/学术论文-西游记驿递交通书写的数字人文研究-匿名稿.md | W613 | 修改·11 处镜像同步 |
-| docs/S4-学术投稿/学术投稿规划-三路线论文选题大纲与目标刊分级.md | W613 | 修改·第四节标记强化六项落地 |
-| docs/S4-学术投稿/C轨论文三大纲-可验证性基础设施.md | W613 | 新建·C 轨六章大纲+材料清单+待办 |
-| docs/S4-学术投稿/图表/A-图1-驿路时间线-灰度.png | W613 | 新建·印刷态灰度图（15 节点时间线） |
-| docs/S4-学术投稿/图表/A-图2-明代驿递制度对照-灰度.png | W613 | 新建·印刷态灰度图（制度×西游对照表） |
-| scripts/_w613_a_track.py | W613 | 新建·A 轨强化编辑脚本 |
-| scripts/_w613_a_anon.py | W613 | 新建·匿名稿镜像脚本 |
-| CHANGELOG.md | W613 | 新增·W613 版段 + 编号规则上限 W001-W613 |
-| 交接文档.md | W613 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W613 | 修改·版本行同步 v2.3.213 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W613 | 修改·四页脚链首 prepend W613 |
-| .github/workflows/README.md | W613 | 修改·旁文档同步 |
-| AGENTS.md | W613 | 修改·版本脚注追加 W613 |
-| scripts/output/file-index.md | W613 | 新增·W613 段（本段·batch_cascade.py 执行） |
-| scripts/_w613_spec.json | W613 | 新建·本批级联 spec |
-
-## W612 用户研究整体删除（2026-09-23·v2.3.212）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/B轨论文-用户研究协议.md | W612 | 删除·用户研究整体移除（git 历史可溯） |
-| docs/S4-学术投稿/图表/图6-用户研究设计.png | W612 | 删除·随用户研究移除 |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W612 | 修改·用户研究段/局限其一/注⑮删除·⑯→⑮·字数回填 |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W612 | 修改·同投稿版镜像 |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集.md | W612 | 修改·4.6 节删除+局限/路线图清理+[15]Chen 删+[16]→[15] |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-大纲.md | W612 | 修改·4.4 用户研究小节+图 6 行删除 |
-| docs/S4-学术投稿/图表_清单.md | W612 | 修改·图 6 行/状态说明删除·标题 9→8 张 |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W612 | 修改·重生成（12 页·postcheck 9/9） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W612 | 修改·重生成（同管线） |
-| docs/S4-学术投稿/B轨论文文献-Zotero导入.json | W612 | 修改·21→20 条（Chen 移除） |
-| scripts/_w607_md2docx.js | W612 | 修改·图 6 配置删除+§5 图列表 [3,4,5] |
-| scripts/_w607_zotero_export.py | W612 | 修改·Chen 条目移除 |
-| scripts/_w612_remove_user_study.py | W612 | 新建·删除手术脚本（完整稿部分） |
-| scripts/_w612b_finish.py | W612 | 新建·删除收尾脚本（投稿版/匿名稿/大纲/清单·CRLF 适配+幂等） |
-| CHANGELOG.md | W612 | 新增·W612 版段 + 编号规则上限 W001-W612 |
-| 交接文档.md | W612 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W612 | 修改·版本行同步 v2.3.212 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W612 | 修改·四页脚链首 prepend W612 |
-| .github/workflows/README.md | W612 | 修改·旁文档同步 |
-| AGENTS.md | W612 | 修改·版本脚注追加 W612 |
-| scripts/output/file-index.md | W612 | 新增·W612 段（本段·batch_cascade.py 执行） |
-| scripts/_w612_spec.json | W612 | 新建·本批级联 spec |
-
-## W611 第三份审读微采纳（2026-09-23·v2.3.211）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W611 | 修改·表 2 题注写法+英文关键词斜体+字数回填 |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W611 | 修改·同投稿版镜像 |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W611 | 修改·重生成（postcheck 9/9·斜体渲染验证） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W611 | 修改·重生成（同管线） |
-| CHANGELOG.md | W611 | 新增·W611 版段 + 编号规则上限 W001-W611 |
-| 交接文档.md | W611 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W611 | 修改·版本行同步 v2.3.211 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W611 | 修改·四页脚链首 prepend W611 |
-| .github/workflows/README.md | W611 | 修改·旁文档同步 |
-| AGENTS.md | W611 | 修改·版本脚注追加 W611 |
-| scripts/output/file-index.md | W611 | 新增·W611 段（本段·batch_cascade.py 执行） |
-| scripts/_w611_spec.json | W611 | 新建·本批级联 spec |
-
-## W610 第二份外部审读分级采纳（2026-09-23·v2.3.210）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W610 | 修改·表 2/表 3 插入+三小修+注③⑯引用日期+字数口径回填 |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W610 | 修改·同投稿版镜像（注③除外） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集.md | W610 | 修改·往往反复+检查项措辞 |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W610 | 修改·重生成（14 页·postcheck 9/9·Word 渲染复验通过） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W610 | 修改·重生成（同管线） |
-| docs/S4-学术投稿/B轨论文文献-Zotero导入.json | W610 | 修改·③⑯加 accessed 字段 |
-| scripts/_w607_md2docx.js | W610 | 修改·表格列宽按列数泛化 |
-| scripts/_w607_zotero_export.py | W610 | 修改·③⑯accessed 字段 |
-| CHANGELOG.md | W610 | 新增·W610 版段 + 编号规则上限 W001-W610 |
-| 交接文档.md | W610 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W610 | 修改·版本行同步 v2.3.210 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W610 | 修改·四页脚链首 prepend W610 |
-| .github/workflows/README.md | W610 | 修改·旁文档同步 |
-| AGENTS.md | W610 | 修改·版本脚注追加 W610 |
-| scripts/output/file-index.md | W610 | 新增·W610 段（本段·batch_cascade.py 执行） |
-| scripts/_w610_spec.json | W610 | 新建·本批级联 spec |
-
-## W609 外部审读采纳四项（2026-09-23·v2.3.209）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W609 | 修改·审读采纳 8 处+瘦身 6 处+字数回填（正文 6,458/词计 9,984） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W609 | 修改·同投稿版镜像 |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集.md | W609 | 修改·完整稿 4 处（荣誉提名奖×2+中文化+协议措辞） |
-| docs/S4-学术投稿/图表/图6-用户研究设计.png | W609 | 新建·研究设计示意四层结构图（替代旧结果示意） |
-| docs/S4-学术投稿/图表/图6-用户研究结果-示意.png | W609 | 删除·易被读作预期当结果（W609 废弃） |
-| docs/S4-学术投稿/图表_清单.md | W609 | 修改·图 6 行与状态说明同步 |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W609 | 修改·重生成（postcheck 9/9·Word 渲染复验通过） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W609 | 修改·重生成（同管线） |
-| docs/S4-学术投稿/B轨论文文献-Zotero导入.json | W609 | 修改·⑥补 URL/引用日期/提名奖·⑧升级期刊条目 |
-| scripts/_w606_paper_figures.py | W609 | 修改·图 6 段重写为设计示意图 |
-| scripts/_w607_md2docx.js | W609 | 修改·图 6 路径与图注同步 |
-| scripts/_w607_zotero_export.py | W609 | 修改·⑥⑧条目更新 |
-| CHANGELOG.md | W609 | 新增·W609 版段 + 编号规则上限 W001-W609 |
-| 交接文档.md | W609 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W609 | 修改·版本行同步 v2.3.209 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W609 | 修改·四页脚链首 prepend W609 |
-| .github/workflows/README.md | W609 | 修改·旁文档同步 |
-| AGENTS.md | W609 | 修改·版本脚注追加 W609 |
-| scripts/output/file-index.md | W609 | 新增·W609 段（本段·batch_cascade.py 执行） |
-| scripts/_w609_spec.json | W609 | 新建·本批级联 spec |
-
-## W608 匿名稿图双盲脱敏（2026-09-23·v2.3.208）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W608 | 修改·图 5 品牌栏裁除变体重生成（postcheck 9/9·Word 渲染复验 8/8） |
-| docs/S4-学术投稿/图表_清单.md | W608 | 修改·匿名衍生图说明（裁剪脚本+管线入口） |
-| scripts/_w608_crop_fig5.py | W608 | 新建·图 5 顶栏脱敏裁剪（尺寸断言+三级实测） |
-| scripts/_w607_md2docx.js | W608 | 修改·FIG5_OVERRIDE 环境变量（仅匿名稿引用裁除变体） |
-| CHANGELOG.md | W608 | 新增·W608 版段 + 编号规则上限 W001-W608 |
-| 交接文档.md | W608 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W608 | 修改·版本行同步 v2.3.208 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W608 | 修改·四页脚链首 prepend W608 |
-| .github/workflows/README.md | W608 | 修改·旁文档同步 |
-| AGENTS.md | W608 | 修改·版本脚注追加 W608 |
-| scripts/output/file-index.md | W608 | 新增·W608 段（本段·batch_cascade.py 执行） |
-| scripts/_w608_spec.json | W608 | 新建·本批级联 spec |
-
-## W607 S4 论文 Word 化与文献库（2026-09-22·v2.3.207）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.docx | W607 | 新建·Word 投稿稿（13 页·图 1-6 嵌入·Word COM 渲染验收通过） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.docx | W607 | 新建·双盲匿名 Word 稿（同管线产出） |
-| docs/S4-学术投稿/B轨论文文献-Zotero导入.json | W607 | 新建·CSL JSON 21 条（DOI 仅带已核验 3 条） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W607 | 修改·图注引用补全 3 处+字数重测回填（正文 6,438） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W607 | 修改·图注引用同步 3 处 |
-| scripts/_w607_md2docx.js | W607 | 新建·md→docx 转换器（运行时解析·图高 800px 上限） |
-| scripts/_w607_zotero_export.py | W607 | 新建·文献库 CSL JSON 导出（宁缺勿造纪律） |
-| CHANGELOG.md | W607 | 新增·W607 版段 + 编号规则上限 W001-W607 |
-| 交接文档.md | W607 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W607 | 修改·版本行同步 v2.3.207 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W607 | 修改·四页脚链首 prepend W607 |
-| .github/workflows/README.md | W607 | 修改·旁文档同步 |
-| AGENTS.md | W607 | 修改·版本脚注追加 W607 |
-| scripts/output/file-index.md | W607 | 新增·W607 段（本段·batch_cascade.py 执行） |
-| scripts/_w607_spec.json | W607 | 新建·本批级联 spec |
-
-## W606 S4 论文语域专业化（2026-09-22·v2.3.206）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W606 | 修改·v2.3 语域专业化 24 处+文献激活 [1]-[5]+跨稿残留修复+字数重测回填 |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W606 | 修改·自 v2.3 脚本化重建（正文 diff 仅 1 行预期脱敏点） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集.md | W606 | 修改·完整稿语域修正 15 处+我们→本文×18 |
-| docs/S4-学术投稿/图表_清单.md | W606 | 修改·自绘示意图条目补重绘脚本指针 |
-| docs/S4-学术投稿/图表/图1-文化母题转译流程.png | W606 | 修改·重绘（盒标题裁切根治·文字盒内居中） |
-| docs/S4-学术投稿/图表/图2-令牌三层模型.png | W606 | 修改·重绘（箭头穿字根治·箭头走层间空隙+侧注） |
-| docs/S4-学术投稿/图表/图6-用户研究结果-示意.png | W606 | 修改·风格统一（标题改墨色·令牌配色） |
-| scripts/_w606_prose_polish.py | W606 | 新建·语域批量修正脚本（逐处断言·一次性） |
-| scripts/_w606_paper_figures.py | W606 | 新建·配图重绘脚本（常驻可复现） |
-| CHANGELOG.md | W606 | 新增·W606 版段 + 编号规则上限 W001-W606 |
-| 交接文档.md | W606 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W606 | 修改·版本行同步 v2.3.206 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W606 | 修改·四页脚链首 prepend W606 |
-| .github/workflows/README.md | W606 | 修改·旁文档同步 |
-| AGENTS.md | W606 | 修改·版本脚注追加 W606 |
-| scripts/output/file-index.md | W606 | 新增·W606 段（本段·batch_cascade.py 执行） |
-| scripts/_w606_spec.json | W606 | 新建·本批级联 spec |
-
-## W605 S4 学术核查修正（2026-09-22·v2.3.205）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W605 | 修改·v2.2 学术核查修正（幻觉[5]替换+真实色阶+规则数实测+⑪⑮元数据+雅集定义段+可守断言+实践表明·字数重测回填） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W605 | 修改·14 处镜像同步 v2.2（diff 仍仅 2 处预期脱敏点） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集.md | W605 | 修改·完整稿 7 处事实校准（墨→朱砂×4·五行色误述·40 条×3） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-大纲.md | W605 | 修改·案例表述 2 行校准（色阶名实+五行色→五色雅集） |
-| docs/S4-学术投稿/图表_清单.md | W605 | 修改·图 4 行色阶名实校准 |
-| docs/S4-学术投稿/学术论文-西游记驿递交通书写的数字人文研究.md | W605 | 修改·幻觉引文清除（2.2 节改写+文献表 [6]-[10] 重排·改引 Ping&Wang+Jia） |
-| docs/S4-学术投稿/学术论文-西游记驿递交通书写的数字人文研究-匿名稿.md | W605 | 修改·同主稿镜像修复 |
-| docs/S4-学术投稿/同方向文献调研-B轨-古典文学可视化本土美学.md | W605 | 修改·A2 行改幻觉教训记录（循环核验警示） |
-| docs/S4-学术投稿/学术投稿规划-三路线论文选题大纲与目标刊分级.md | W605 | 修改·第九节第 5 条补实证结论与 N 类剩余风险登记 |
-| source/引用与网络解读/学术论文索引.md | W605 | 修改·N02 幻觉条目替换为 Ping & Wang 2024（联网确证·行内登记替换缘由） |
-| CHANGELOG.md | W605 | 新增·W605 版段 + 编号规则上限 W001-W605 |
-| 交接文档.md | W605 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W605 | 修改·版本行同步 v2.3.205 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W605 | 修改·四页脚链首 prepend W605 |
-| .github/workflows/README.md | W605 | 修改·旁文档同步 |
-| AGENTS.md | W605 | 修改·版本脚注追加 W605 |
-| scripts/output/file-index.md | W605 | 新增·W605 段（本段·batch_cascade.py 执行） |
-| scripts/_w605_spec.json | W605 | 新建·本批级联 spec |
-
-## W604 S4 学术投稿 B 轨论文入库（2026-09-22·v2.3.204）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-装饰投稿版.md | W604 | 新建·《装饰》投稿版 v2.1（摘要 220 字·全稿 9,958 字符实测达标·本批摘要收敛与实测回填） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-匿名稿.md | W604 | 新建·双盲匿名稿（自 v2.1 重同步·脱敏体例保持·diff 仅 2 处预期脱敏点） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集.md | W604 | 新建·B 轨完整稿（实测约 1.93 万字符） |
-| docs/S4-学术投稿/学术论文B轨-新中式数字雅集-大纲.md | W604 | 新建·B 轨论文大纲 |
-| docs/S4-学术投稿/学术投稿规划-三路线论文选题大纲与目标刊分级.md | W604 | 新建·三路线规划（A 驿递/B 设计/C 可信基础设施·含联网撞题判定） |
-| docs/S4-学术投稿/同方向文献调研-B轨-古典文学可视化本土美学.md | W604 | 新建·同方向文献调研 |
-| docs/S4-学术投稿/论文写法调研-B轨-设计类期刊写作范式.md | W604 | 新建·设计类期刊写作范式调研 |
-| docs/S4-学术投稿/装饰投稿政策核查-2026-09.md | W604 | 新建·《装饰》政策核查（2026-07-02 版须知）+本批必做清单 1/2 标记完成 |
-| docs/S4-学术投稿/B轨论文-用户研究协议.md | W604 | 新建·用户研究协议（pre-registration 风格·四项待真实被试执行） |
-| docs/S4-学术投稿/图表_清单.md | W604 | 新建·9 图清单（印刷态截图 2× 口径） |
-| docs/S4-学术投稿/图表/（9 PNG） | W604 | 新建·图 1/2/6 自绘示意+图 3-5 印刷态截图 2× 浅/暗 |
-| CHANGELOG.md | W604 | 新增·W604 版段 + 编号规则上限 W001-W604 |
-| 交接文档.md | W604 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W604 | 修改·版本行同步 v2.3.204 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W604 | 修改·四页脚链首 prepend W604 |
-| .github/workflows/README.md | W604 | 修改·旁文档同步 |
-| AGENTS.md | W604 | 修改·版本脚注追加 W604 |
-| scripts/output/file-index.md | W604 | 新增·W604 段（本段·batch_cascade.py 执行） |
-| scripts/_w604_spec.json | W604 | 新建·本批级联 spec |
-
-## W603 计划外·CI 热修复（2026-09-21·v2.3.203）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site 235 页 | W603 | 修改·brand aria-label 摘除（4 页）+页脚反馈/Feedback/English/中文链接 padding 补齐（点击目标 ≥24px） |
-| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W603 | 修改·W603 计划外热修复行登记 + WP-L 哈希补填 |
-| scripts/_w603_spec.json | W603 | 新建·本批级联 spec |
-| CHANGELOG.md | W603 | 新增·W603 版段 + 编号规则上限 W001-W603 |
-| 交接文档.md | W603 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W603 | 修改·版本行同步 v2.3.203 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W603 | 修改·四页脚链首 prepend W603 |
-| .github/workflows/README.md | W603 | 修改·旁文档同步 |
-| AGENTS.md | W603 | 修改·版本脚注追加 W603 |
-| scripts/output/file-index.md | W603 | 新增·W603 段（本段·batch_cascade.py 执行） |
-
-## W602 A1 信任字段补全（2026-09-21·v2.3.202）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/01-全书逐回解读/ 100 篇 | W602 | 修改·补生成来源/生成模型/生成日期三字段（日期取 git 首次提交·核验状态空真防护保持未核验） |
-| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W602 | 修改·WP-L 落地状态回写 |
-| scripts/_w602_spec.json | W602 | 新建·本批级联 spec |
-| CHANGELOG.md | W602 | 新增·W602 版段 + 编号规则上限 W001-W602 |
-| 交接文档.md | W602 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W602 | 修改·版本行同步 v2.3.202 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W602 | 修改·四页脚链首 prepend W602 |
-| .github/workflows/README.md | W602 | 修改·旁文档同步 |
-| AGENTS.md | W602 | 修改·版本脚注追加 W602 |
-| scripts/output/file-index.md | W602 | 新增·W602 段（本段·batch_cascade.py 执行） |
-
-## W601 EN 站治理（2026-09-21·v2.3.201）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site 配对页 178 处页脚注入（89 对） | W601 | 修改·页脚导航双向语言链接（ZH 侧 English/EN 侧 中文·W572 反馈锚点+footer 兜底） |
-| site/en/index.html | W601 | 修改·English Pages 段内部批次记录句改写读者视角 + subset 量化句（138 of 235） |
-| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W601 | 修改·WP-G 落地状态回写（落位页脚为登记偏离） |
-| scripts/_w601_spec.json | W601 | 新建·本批级联 spec |
-| CHANGELOG.md | W601 | 新增·W601 版段 + 编号规则上限 W001-W601 |
-| 交接文档.md | W601 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W601 | 修改·版本行同步 v2.3.201 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W601 | 修改·四页脚链首 prepend W601 |
-| .github/workflows/README.md | W601 | 修改·旁文档同步 |
-| AGENTS.md | W601 | 修改·版本脚注追加 W601 |
-| scripts/output/file-index.md | W601 | 新增·W601 段（本段·batch_cascade.py 执行） |
-
-## W600 Agent 反馈闭环（2026-09-21·v2.3.200）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/server/db.ts | W600 | 修改·feedback 表（幂等唯一索引）+ insertFeedback/feedbackSummary |
-| xiyouji-agent-web/server/index.ts | W600 | 修改·POST /api/feedback + GET /api/feedback/summary |
-| xiyouji-agent-web/server/feedback.test.mjs | W600 | 新建·集成测试（真实起服→HTTP→sqlite 直查→清理·5/5） |
-| xiyouji-agent-web/src/types.ts / src/hooks/useChat.ts | W600 | 修改·Message 增 feedback/durationSec·done 捕获耗时 |
-| xiyouji-agent-web/src/components/ChatMessages.tsx / src/pages/ChatPage.tsx | W600 | 修改·操作条四按钮+耗时 footer+onRegenerate 接线 |
-| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W600 | 修改·WP-H2 落地状态回写 |
-| scripts/_w600_spec.json | W600 | 新建·本批级联 spec |
-| CHANGELOG.md | W600 | 新增·W600 版段 + 编号规则上限 W001-W600 |
-| 交接文档.md | W600 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W600 | 修改·版本行同步 v2.3.200 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W600 | 修改·四页脚链首 prepend W600 |
-| .github/workflows/README.md | W600 | 修改·旁文档同步 |
-| AGENTS.md | W600 | 修改·版本脚注追加 W600 |
-| scripts/output/file-index.md | W600 | 新增·W600 段（本段·batch_cascade.py 执行） |
-
-## W599 Agent 引用校验与拒答边界（2026-09-21·v2.3.199）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/server/citationGuard.ts | W599 | 新建·最终回答路径核实（7 顶层目录·存在转 GitHub 链接首现去重·不存在文末警示） |
-| xiyouji-agent-web/server/citationGuard.test.ts | W599 | 新建·判定逻辑单测 5 用例（node:test+tsx 零新增依赖·5/5 实测） |
-| xiyouji-agent-web/server/index.ts | W599 | 修改·citationGuard 挂接 SSE done 前+citation_guard 事件+提示词增补 |
-| xiyouji-agent-web/src/hooks/useChat.ts | W599 | 修改·citation_guard 分支（末文本块替换） |
-| xiyouji-agent-web/src/hooks/useAgents.ts | W599 | 修改·DEFAULT_AGENT 同步增补+本地工具定位后缀 |
-| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W599 | 修改·WP-I 落地状态回写 |
-| scripts/_w599_spec.json | W599 | 新建·本批级联 spec |
-| CHANGELOG.md | W599 | 新增·W599 版段 + 编号规则上限 W001-W599 |
-| 交接文档.md | W599 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W599 | 修改·版本行同步 v2.3.199 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W599 | 修改·四页脚链首 prepend W599 |
-| .github/workflows/README.md | W599 | 修改·旁文档同步 |
-| AGENTS.md | W599 | 修改·版本脚注追加 W599 |
-| scripts/output/file-index.md | W599 | 新增·W599 段（本段·batch_cascade.py 执行） |
-
-## W598 Agent 黄金评估集（2026-09-21·v2.3.198）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/evals/golden-50.jsonl | W598 | 新建·50 条黄金问答（chapter15/character10/theme10/dataset10/ops5·构造时全路径磁盘验证） |
-| xiyouji-agent-web/evals/validate.mjs | W598 | 新建·结构与真实性校验器（无 LLM·CI agent-web-build 挂载·50/50 实测） |
-| xiyouji-agent-web/evals/run_eval.mjs | W598 | 新建·评估运行器（--self-check 4/4/--limit/全量·三规则机判·results 输出） |
-| .github/workflows/ci.yml | W598 | 修改·agent-web-build 增 golden evals validate 步骤 |
-| xiyouji-agent-web/README.md | W598 | 修改·evals 使用文档章节 |
-| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W598 | 修改·WP-H1 落地状态回写 |
-| scripts/_w598_spec.json | W598 | 新建·本批级联 spec |
-| CHANGELOG.md | W598 | 新增·W598 版段 + 编号规则上限 W001-W598 |
-| 交接文档.md | W598 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W598 | 修改·版本行同步 v2.3.198 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W598 | 修改·四页脚链首 prepend W598 |
-| .github/workflows/README.md | W598 | 修改·旁文档同步 |
-| AGENTS.md | W598 | 修改·版本脚注追加 W598 |
-| scripts/output/file-index.md | W598 | 新增·W598 段（本段·batch_cascade.py 执行） |
-
-## W597 一次性脚本治理（2026-09-21·v2.3.197）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_attic/（25 项迁移） | W597 | 新建·历史诊断脚本收档区（_audit/_chk/_diag/_shots/_trace/_verify 系列+报告·零引用≥45 天·git mv 保历史） |
-| scripts/_attic/README.md | W597 | 新建·收档规则一行（仅收档禁新增引用·复用先移回） |
-| 未跟踪 42 项 | W597 | 删除·零引用会话诊断残留（_w575/_w581/_w588 diag 系列+pool/en-zh summary+heatmap-dark.png+output 产物等·逐项引用判定 0 命中） |
-| 交接文档.md | W597 | 修改·「二」头部需求侧批次配额规则行 |
-| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W597 | 修改·WP-K 落地状态回写+W596 哈希补填 |
-| scripts/_w597_spec.json | W597 | 新建·本批级联 spec |
-| CHANGELOG.md | W597 | 新增·W597 版段 + 编号规则上限 W001-W597 |
-| 交接文档.md | W597 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W597 | 修改·版本行同步 v2.3.197 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W597 | 修改·四页脚链首 prepend W597 |
-| .github/workflows/README.md | W597 | 修改·旁文档同步 |
-| AGENTS.md | W597 | 修改·版本脚注追加 W597 |
-| scripts/output/file-index.md | W597 | 新增·W597 段（本段·batch_cascade.py 执行） |
-
-## W596 Agent 运行卫生（2026-09-21·v2.3.196）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/server/index.ts | W596 | 修改·PROJECT_CWD 仓库根自动解析（锚点探测）+启动 fail-fast+boot 日志 |
-| xiyouji-agent-web/src/hooks/useAgents.ts | W596 | 修改·系统提示词去写死路径与悬空版本串 v2.3.9 |
-| xiyouji-agent-web/Dockerfile / .dockerignore / DEPLOYMENT.md | W596 | 新建·容器三件套（node:22-alpine·HEALTHCHECK /api/health·镜像构建待补验） |
-| xiyouji-agent-web/README.md / DEVELOPMENT.md | W596 | 修改·定位与路径表述更新·旧 node:18 Docker 段删除 |
-| scripts/batch_cascade.py | W596 | 修改·winpath 根因修复（旧值每批续写 workflows README） |
-| .github/workflows/README.md / AGENTS.md / STRUCTURE.md / 交接文档.md / 新Agent启动Prompt.md / mcp-server/README.md | W596 | 修改·双副本脏路径清零（级联续写面+治理文档现役段） |
-| scripts/utils/aliases.py / scripts/optimize-html-size.py / scripts/font-subset-guide.md / site/en/README.md / docs/03/法宝政治学专题.md | W596 | 修改·杂面脏路径清零 |
-| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W596 | 修改·WP-J 落地状态回写+W591-W595 哈希补填 |
-| scripts/_w596_spec.json | W596 | 新建·本批级联 spec |
-| CHANGELOG.md | W596 | 新增·W596 版段 + 编号规则上限 W001-W596 |
-| 交接文档.md | W596 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W596 | 修改·版本行同步 v2.3.196 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W596 | 修改·四页脚链首 prepend W596 |
-| .github/workflows/README.md | W596 | 修改·旁文档同步（batch_cascade.py 执行） |
-| AGENTS.md | W596 | 修改·版本脚注追加 W596 |
-| scripts/output/file-index.md | W596 | 新增·W596 段（本段·batch_cascade.py 执行） |
-
-## W595 CI 红灯热修复（2026-09-21·v2.3.195）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/sitemap.xml | W595 | 修改·补提交 W593 漏 add 的重生成版（229→330 条·含 reader 101） |
-| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W595 | 修改·WP-C 第 5 条增补 sitemap 必入提交清单教训 |
-| scripts/_w595_spec.json | W595 | 新建·本批级联 spec |
-| CHANGELOG.md | W595 | 新增·W595 版段 + 编号规则上限 W001-W595 |
-| 交接文档.md | W595 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W595 | 修改·版本行同步 v2.3.195 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W595 | 修改·四页脚链首 prepend W595 |
-| .github/workflows/README.md | W595 | 修改·旁文档同步 |
-| AGENTS.md | W595 | 修改·版本脚注追加 W595 |
-| scripts/output/file-index.md | W595 | 新增·W595 段（本段·batch_cascade.py 执行） |
-
-## W594 搜索质量与搜索词埋点（2026-09-21·v2.3.194）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_gen_search_index.py | W594 | 修改·kw 字段（jieba/词干≤12·缺失降级）+ 中英双索引分离 + 常量名 ZH/EN |
-| scripts/_check_search_golden_e2e.js | W594 | 新建·黄金查询常驻 e2e（30 条·--quick 冒烟模式） |
-| scripts/output/search-golden.json | W594 | 新建·黄金查询集（zh20+en10·构建时模拟预验证） |
-| scripts/_check_search_rum_e2e.js | W594 | 修改·SEARCH_IDX shim ×3 适配双常量 + en 段候选回退加固 |
-| site/data/search.html / site/en/search.html | W594 | 修改·kw 评分 +4、doSearch 上报双通道、索引重嵌（双常量） |
-| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W594 | 修改·WP-F 落地状态回写（3 项偏差） |
-| scripts/_w594_spec.json | W594 | 新建·本批级联 spec |
-| CHANGELOG.md | W594 | 新增·W594 版段 + 编号规则上限 W001-W594 |
-| 交接文档.md | W594 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W594 | 修改·版本行同步 v2.3.194 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W594 | 修改·四页脚链首 prepend W594 |
-| .github/workflows/README.md | W594 | 修改·旁文档同步 |
-| AGENTS.md | W594 | 修改·版本脚注追加 W594 |
-| scripts/output/file-index.md | W594 | 新增·W594 段（本段·batch_cascade.py 执行） |
-
-## W593 docs 站内阅读器试点（2026-09-21·v2.3.193）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/build_reader.py | W593 | 新建·阅读器生成器（docs/01 100 篇→site/reader 101 页·链接三规则改写·SEO 内建·0 残留） |
-| site/reader/（ch001-ch100+index） | W593 | 新建·101 页逐回阅读器（tokens link+纯 token 私有样式·连载导航·纯静态） |
-| scripts/_gen_search_index.py | W593 | 修改·A1 100 条映射 kind=reader+reader 页排除防双计 |
-| site/data/search.html / site/en/search.html | W593 | 修改·类型列与打开逻辑适配 reader（各 2 处）+ 索引重嵌 |
-| site/index.html / site/guide.html | W593 | 修改·顶导逐回→reader/index + 阅读路径卡增入口 |
-| scripts/requirements.txt | W593 | 修改·增 markdown==3.10.2（实测已装版本） |
-| scripts/content-consistency-baseline.txt | W593 | 修改·冻结 +5（reader 页叙述性回目提及误报·W555 机制） |
-| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W593 | 修改·WP-D1 落地状态回写（3 项偏差含 blob 2379 分解） |
-| scripts/_w593_spec.json | W593 | 新建·本批级联 spec |
-| CHANGELOG.md | W593 | 新增·W593 版段 + 编号规则上限 W001-W593 |
-| 交接文档.md | W593 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W593 | 修改·版本行同步 v2.3.193 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W593 | 修改·四页脚链首 prepend W593 |
-| .github/workflows/README.md | W593 | 修改·旁文档同步 |
-| AGENTS.md | W593 | 修改·版本脚注追加 W593 |
-| scripts/output/file-index.md | W593 | 新增·W593 段（本段·batch_cascade.py 执行） |
-
-## W592 AI 入口收敛（2026-09-21·v2.3.192）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/index.html | W592 | 修改·首屏 ask-hero 改站内搜索（提交跳 data/search.html?q=·chip 换检索词·移除 xiyouji_asks 写入） |
-| site/guide.html / site/curated.html | W592 | 修改·品牌去重 7 处（渡口问津→西游·渡口/站内搜索·问答语义链接改指 search） |
-| site/visit-viewer.html | W592 | 修改·标题去品牌（访问记录·本地埋点查看） |
-| site/data/search.html / site/en/search.html | W592 | 修改·内嵌索引同步 visit-viewer 新标题 |
-| site/static/js/rag-chat.js | W592 | 修改·浮窗 6 处改名渡口检索（本地） |
-| site/en/guide.html | W592 | 修改·2 处语义失真修正（引擎不答问题→Site Search） |
-| xiyouji-agent-web/README.md | W592 | 修改·头部定位声明（本地工程工具·不对公网开放） |
-| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W592 | 修改·WP-B 落地状态回写（4 项执行期偏差） |
-| scripts/_w592_spec.json | W592 | 新建·本批级联 spec |
-| CHANGELOG.md | W592 | 新增·W592 版段 + 编号规则上限 W001-W592 |
-| 交接文档.md | W592 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W592 | 修改·版本行同步 v2.3.192 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W592 | 修改·四页脚链首 prepend W592 |
-| .github/workflows/README.md | W592 | 修改·旁文档同步 |
-| AGENTS.md | W592 | 修改·版本脚注追加 W592 |
-| scripts/output/file-index.md | W592 | 新增·W592 段（本段·batch_cascade.py 执行） |
-
-## W591 SEO 五项硬伤清零（2026-09-21·v2.3.191）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/inject_seo_head.py | W591 | 新建·全站 SEO head 注入器（233 页幂等·canonical/og 全套+hreflang 89 对+JSON-LD 内联·逐标签判重） |
-| scripts/gen_og_cover.py | W591 | 新建·og 封面生成（Pillow 1200x630·53KB·可复现） |
-| scripts/gen_sitemap.py | W591 | 新建·sitemap 生成器（229 条·EXCLUDE=门禁期望集·lastmod 取 git %cs） |
-| scripts/check_seo_head.py | W591 | 新建·SEO head 常驻检查（R1-R5·待裁决注册第 26 门禁） |
-| scripts/check_js_syntax.js | W591 | 修改·经用户批准：非 JS 数据块（ld+json 等）跳过编译（数据块非可执行脚本） |
-| site/static/img/og-cover.png | W591 | 新建·社交分享封面 1200x630 |
-| site/ 233 页 head + structured-data.jsonld + sitemap.xml | W591 | 修改·SEO 注入全量落地（canonical/og:image 计数 233·占位域名 6 处替换·sitemap 229 条刷新） |
-| scripts/output/hreflang-pairs.json | W591 | 新建·中英配对清单机判锚点（89 对） |
-| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W591 | 修改·WP-C 落地状态回写+sitemap 口径执行期修订（230→229） |
-| scripts/_w591_spec.json | W591 | 新建·本批级联 spec |
-| CHANGELOG.md | W591 | 新增·W591 版段 + 编号规则上限 W001-W591 |
-| 交接文档.md | W591 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W591 | 修改·版本行同步 v2.3.191 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W591 | 修改·四页脚链首 prepend W591 |
-| .github/workflows/README.md | W591 | 修改·旁文档同步 |
-| AGENTS.md | W591 | 修改·版本脚注追加 W591 |
-| scripts/output/file-index.md | W591 | 新增·W591 段（本段·batch_cascade.py 执行） |
-
-## W590 需求侧优化主计划入库（2026-09-21·v2.3.190）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W590 | 新建·需求侧优化主计划（13 工作包 WP-A…WP-M·约 14 批·机判验收+回归面·§0.2 基线命令·§6 总验收 22 条·WP-B-ALT 冻结预案·§8 Mode B 自审 8 项修正+落地状态表） |
-| scripts/_w590_spec.json | W590 | 新建·本批级联 spec |
-| CHANGELOG.md | W590 | 新增·W590 版段 + 编号规则上限 W001-W590 |
-| 交接文档.md | W590 | 修改·头尾链 prepend + 里程碑滚动 + HEAD 句 + 零段补 W590 主计划句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W590 | 修改·版本行同步 v2.3.190 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W590 | 修改·四页脚链首 prepend W590 |
-| .github/workflows/README.md | W590 | 修改·旁文档同步 |
-| AGENTS.md | W590 | 修改·版本脚注追加 W590 |
-| scripts/output/file-index.md | W590 | 新增·W590 段（本段·batch_cascade.py 执行） |
-
-## W589 暗色审计读数语义修正+映射合并重建（2026-09-20·v2.3.189）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/tokens.css | W589 | 更新·W582+W588b 两代映射合并重建（W582 hex 24+全量 rgb 37·61 条） |
-| site/（批量226页·inline_css分发） | W589 | 更新·合并映射分发 |
-| site/（批量163页） | W589 | 回退·W587/W588 JS 亮度提升器撤除（CSS !important 持续压制方案胜出） |
-| scripts/_audit_render_states.js | W589 | 更新·invisible 判定读数语义修正（computed+透明豁免+var豁免+hasV2/w588init/mmDark 诊断字段） |
-| scripts/output/render-state-audit-baseline.jsonl | W589 | 更新·基线刷新至 48/7（残余=数据驱动角色色·登记阶段三设计批） |
-| scripts/_w586_upgrade_leave.py | W589 | 新增·leave 本体直派升级器（升级④·W586 内容随批补登） |
-| scripts/_w586_upgrade_ancestors.py | W589 | 新增·祖先链 leave 升级器（升级⑤·W586 内容随批补登） |
-| scripts/_w588_upgrade_observer.py | W589 | 新增·暗色提升器 v2 升级器（W588 内容随批补登·后由 W589 撤除） |
-| scripts/_w588b_upgrade_v3.py | W589 | 新增·v3 合体升级器（同上·后由 W589 撤除） |
-| scripts/_w588b_gen_full.py | W589 | 新增·全量 rgb 映射生成器 |
-| scripts/_w588b_scan_full.js | W589 | 新增·54 缺陷页暗填充源串全量扫描器 |
-
-## W588 暗色提升器v2（2026-09-20·v2.3.188）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/（批量163页·zh+en含svg） | W588 | 更新·暗色提升器v2（MutationObserver+80ms防抖+去标记化幂等·定时兜底） |
-| scripts/_w588_upgrade_observer.py | W588 | 新增·v2升级器（163页块替换·幂等锚点） |
-
-## W587 暗色存量修复阶段二（2026-09-20·v2.3.187）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/（批量163页·zh+en含svg） | W587 | 更新·注入运行时填充亮度提升器（dark门控·亮度<0.16混合至≥0.22·幂等标记） |
-| scripts/output/render-state-audit-baseline.jsonl | W587 | 更新·基线刷新至零缺陷状态（invisible 0·缺陷页 0） |
-| scripts/_w587_inject_darklift.py | W587 | 新增·暗色亮度提升器注入器（三查合规·fail-open） |
-| scripts/_w587_shots.js | W587 | 新增·修复前后暗色实拍（before/after×3页） |
-| scripts/_w587_shots2.js | W587 | 新增·图表区域元素级特写拍摄 |
-
-## W586 注入hide分支祖先链mouseleave+e2e动效等待与判定语义定型（2026-09-19·v2.3.186）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/（批量61页） | W586 | 更新·注入hide分支祖先链mouseleave（mouseleave型hide页覆盖） |
-| site/en/（批量62页） | W586 | 更新·同上 |
-| scripts/_w586_upgrade_leave.py | W586 | 新增·leave本体直派升级器（升级④） |
-| scripts/_w586_upgrade_ancestors.py | W586 | 新增·祖先链leave升级器（升级⑤·124页） |
-| scripts/_w575_touchtip_e2e.js | W586 | 更新·等待650ms/全视口触控垫/refBlank在位拍摄/D内容匹配判定四项定型 |
-
-## W585 注入头行mouseout补bubbles+断言等待对齐动效上限（2026-09-19·v2.3.185）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/（批量61页） | W585 | 更新·注入头行mouseout补bubbles（升级②漏网·g包装层hideTip触发修复） |
-| site/en/（批量62页） | W585 | 更新·同上 |
-| site/data/language-style-radar.html | W585 | 更新·W574试点块头行同步补bubbles |
-| scripts/_w585_upgrade_headout.py | W585 | 新增·头行mouseout升级器（124页·每页恰1处断言） |
-| scripts/_w575_touchtip_e2e.js | W585 | 更新·断言等待300→650ms对齐动效上限+B/D升回阻断+隐藏判定重构 |
-
-## W584 O1审计器并行化（2026-09-19·v2.3.184）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_audit_render_states.js | W584 | 更新·O1并行化（state内3并发worker共享context·--conc参数化·jsonl顺序无关） |
-
-## W583 O3契约对账门禁评估落地（2026-09-19·v2.3.183）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_contract_smoke.js | W583 | 新增·契约冒烟门禁（file://EMBEDDED路径·pageerror+图形产量双阻断·--self-test 6/6+--update-baseline） |
-| scripts/output/contract-smoke-baseline.jsonl | W583 | 新增·163页图形产量基线 |
-| .github/workflows/screenshot-review.yml | W583 | 挂载·dark-state-gate job 增 Contract smoke step（file://互补http路径） |
-| docs/superpowers/plans/2026-09-19-o3-contract-gate-evaluation.md | W583 | 新增·O3评估档（三方案对比·采纳C运行时产量冒烟·残余边界） |
-
-## W582 暗色存量修复阶段一（2026-09-19·v2.3.182）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/tokens.css | W582 | 更新·暗色段24种离散hex填充→暖纸调亮映射（属性精确匹配·保色相） |
-| site/（批量226页·inline_css分发） | W582 | 更新·tokens暗色映射内联分发 |
-| scripts/output/render-state-audit-baseline.jsonl | W582 | 更新·基线刷新至修复后状态（invisible 259/37页·lowContrast 0） |
-| scripts/_w582_scan_attrs.js | W582 | 新增·44缺陷页暗色fill属性值收集器 |
-| scripts/_w582_gen_css.py | W582 | 新增·暗色映射CSS生成器（二分混合至目标亮度·保色相） |
-
-## W581 触屏tooltip EN镜像62页推开+注入捕获阶段升级（2026-09-19·v2.3.181）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/en/（批量62页） | W581 | 更新·方案H EN镜像推开 touchstart 委托注入（幂等标记 W581）+capture 升级 |
-| site/en/ecology.html | W581 | 修复·tooltip门面补 move 方法（8处直调 .style·zh 同款镜像） |
-| site/en/81-hardships.html | W581 | 修复·动态选择器空选区（tip元素搬至捕获脚本前）+W558家族CSS缺分号 |
-| site/en/global-pattern.html | W581 | 修复·补缺失 #tooltip 容器元素（zh 同款） |
-| site/data/（批量61页） | W581 | 更新·注入捕获阶段升级（d3.drag stopImmediatePropagation 免疫） |
-| site/data/language-style-radar.html | W581 | 更新·W574试点块捕获阶段升级（8空格缩进变体） |
-| scripts/_w581_inject_touchtip.py | W581 | 新增·EN池同构注入器（幂等标记 W581） |
-| scripts/_w581_pool_scan.py | W581 | 新增·EN池枚举+同族静态扫描（含动态选择器变体盲区教训） |
-| scripts/_w581_upgrade_capture.py | W581 | 新增·124页注入捕获阶段统一升级（多行锚点精确替换） |
-| scripts/_w575_touchtip_e2e.js | W581 | 更新·e2e 语义升级（TouchEvent 同 tick 确定性驱动+--dir/--marker 参数+W575_EVENTS 事件流取证钩子） |
-
-## W580 CI 红灯热修复（2026-09-18·v2.3.180）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/screenshot-review.yml | W580 | 热修复·dark-state-gate Checkout 补 fetch-depth: 0（浅克隆 git diff 128·首跑实证） |
-
-## W579 暗色态门禁常驻化挂载（2026-09-18·v2.3.179）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/screenshot-review.yml | W579 | 挂载·dark-state-gate独立job（S2×图表页只增即FAIL·页脚-only跳过·失败上传产物）+paths补两脚本与基线 |
-| scripts/check_dark_state_gate.js | W579 | 新增·暗色态门禁对比器（三类型只增即FAIL+暗色未应用回归+--self-test 5负样本+--update-baseline） |
-| scripts/_audit_render_states.js | W579 | 更新·新增--scope charts参数（全站svg页163页机判口径单一来源） |
-| scripts/output/render-state-audit-baseline.jsonl | W579 | 新增·S2-desktop-dark×163页基线快照（318处/44页·与W571诚实基线对账一致） |
-| docs/superpowers/plans/2026-09-18-dark-state-gate-plan.md | W579 | 更新·§5落地状态回填（三待决点裁决+偏离声明+验证记录） |
-
-## W578 复盘报告 WBS 落地①（2026-09-18·v2.3.178）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| AGENTS.md | W578 | 修改·§4.3 补两条 W571 教训（三查前置/--force 分发） |
-| docs/superpowers/plans/2026-09-18-dark-state-gate-plan.md | W578 | 新增·O2 暗色门禁常驻化挂载方案（含基线阈值与三待决点） |
-| CHANGELOG.md | W578 | 新增·W578 版段 + 编号规则上限 W001-W578 |
-| 交接文档.md | W578 | 修改·头尾「最后更新」prepend W578 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W578 | 修改·版本行同步 v2.3.178（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W578 | 修改·四页脚链首 prepend W578（batch_cascade.py 执行） |
-| .github/workflows/README.md | W578 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W578 | 新增·W578 段（本段·batch_cascade.py 执行） |
-
-## W577 工作复盘与优化分析报告（2026-09-18·v2.3.177）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-09-16.md | W577 | 新增·W569-W571 会话复盘（E27-E33·P01-P11·WBS 与自评） |
-| docs/10-方法论沉淀/README.md | W577 | 修改·方法论索引第 25 条（门禁 17 双向覆盖） |
-| CHANGELOG.md | W577 | 新增·W577 版段 + 编号规则上限 W001-W577 |
-| 交接文档.md | W577 | 修改·头尾「最后更新」prepend W577 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W577 | 修改·版本行同步 v2.3.177（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W577 | 修改·四页脚链首 prepend W577（batch_cascade.py 执行） |
-| .github/workflows/README.md | W577 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W577 | 新增·W577 段（本段·batch_cascade.py 执行） |
-
-## W576 bump_version.py W536写路径守卫根目录误算修复（2026-09-18·v2.3.176）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/bump_version.py | W576 | 修复·W536写路径守卫根目录误算（守卫根scripts/→项目根·一行·经用户批准·与W550 generate_csp同款） |
-| README.md | W576 | 更新·目录树「更新日志（W001-W536）」存量漂移修至W575（bump范围替换恢复生效） |
-| 交接文档.md | W576 | 更新·CHANGELOG范围行W536→W575 + 第38行孤立\r行分隔损伤归一（历史概要块quote恢复渲染·blob回归文本态） |
-
-## W575 可视化页触屏tooltip全量推开（2026-09-18·v2.3.175）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/（批量61页） | W575 | 更新·方案H全量推开 touchstart 委托同构注入（20行独立script块·</body>前·幂等标记） |
-| site/data/81-hardships.html | W575 | 修复·tipNode 静态快照空选区改惰性取用（桌面tooltip同步根治） |
-| site/data/ecology.html | W575 | 修复·tooltip门面补 move 方法（8处直调 .style 抛TypeError根治） |
-| site/data/global-pattern.html | W575 | 修复·补缺失 #tooltip 容器元素（d3空选区静默no-op·置于捕获脚本前） |
-| site/data/cross-time-danmaku.html | W575 | 修复·补缺失 #hero-tooltip 元素（星图mouseover TypeError·池外同族静态扫描发现） |
-| scripts/_w575_inject_touchtip.py | W575 | 新增·方案H同构注入器（池枚举·幂等标记·dry-run/apply） |
-| scripts/_w575_touchtip_e2e.js | W575 | 新增·逐页触屏tooltip e2e（5断言×61页·探针与注入路径1:1同构·三轮候选+滚动探测+活点重解析） |
-| scripts/_w575_pool_scan.py | W575 | 新增·池枚举与形态盘点（只读） |
-
-## W574 可视化页触屏tooltip试点（2026-09-18·v2.3.174）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/language-style-radar.html | W574 | 更新·H试点 touchstart 委托注入 25 行（复用既有 show/hide·零逻辑复制） |
-| scripts/_check_touch_tooltip_e2e.js | W574 | 新增·触屏/鼠标 tooltip 验收 e2e（6 断言） |
-
-## W573 站内检索服务化与RUM改道（2026-09-18·v2.3.173）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_gen_search_index.py | W573 | 新增·全站目录索引生成器（常驻·772docs+233pages 内嵌 search 两页） |
-| scripts/_check_search_rum_e2e.js | W573 | 新增·E-1/E-2 file:// 机判 e2e（11 断言） |
-| site/js/rum.js | W573 | 更新·E-2 上报改道（isHttp 闸门+GoatCounter __rum__ 单事件+回退） |
-| site/data/search.html | W573 | 更新·E-1 索引内嵌+renderOffline 打分重写+banner 文案清除 |
-| site/en/search.html | W573 | 更新·E-1 同法（英文 UI+中文标题说明） |
-
-## W572 站点可达性与信任信号（2026-09-18·v2.3.172）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-09-09-service-experience-and-agent-ops-plans.md | W572 | 新增·体验与服务优化计划（方案D-H v2+方案R占位·三问已裁决） |
-| docs/superpowers/plans/2026-09-17-agent-web-redesign-plan.md | W572 | 新增·agent-web重设计方案R v2（自研单引擎·2026-09-18暂停） |
-| scripts/_audit_service_experience.py | W572 | 新增·体验与服务基线审计（只读·S/A键值） |
-| scripts/_audit_agentweb_baseline.py | W572 | 新增·agent-web重设计基线审计（只读·B键值） |
-| scripts/_fix_site_links.py | W572 | 新增·D-1越界锚链接改写（262处/132文件+A1_DOC_MAP前缀+手工清单裁决） |
-| scripts/_add_feedback_link.py | W572 | 新增·D-3反馈入口四类形态注入（A85/B59/C77/D14） |
-| scripts/_collapse_index_footer.py | W572 | 新增·D-4首页页脚收敛（bump正则兼容形态） |
-| site/404.html | W572 | 新增·自定义404页（自包含·四入口·零JS零外域） |
-| site/sitemap.xml | W572 | 更新·追加404.html（228→229条） |
-| site/index.html | W572 | 更新·D-3反馈入口+D-4页脚40版本号收敛为1组 |
-| site/data/journey-spacetime.html | W572 | 更新·D-1 A1_DOC_MAP消费点前缀改写（:1551×2） |
-| site/_template.html | W572 | 更新·D-1手工清单2项改站内路径 |
-| site/（批量133文件） | W572 | 更新·D-1越界锚链接改写为GitHub blob/tree |
-| site/（批量235文件） | W572 | 更新·D-3页脚反馈入口注入 |
-
-## W571 复审修正（2026-09-16·v2.3.171）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/tokens.css | W571 | 修改·v2 反白规则精修 :not(:has(#audit-halo)) 豁免光晕页 |
-| site/en/narrative-experiment.html | W571 | 修改·difficulty 钳位补齐（W569 遗漏） |
-| scripts/_audit_render_states.js | W571 | 修改·光晕感知（paint-order:stroke 文字不计缺陷） |
-| scripts/output/render-state-audit.jsonl | W571 | 更新·光晕感知诚实基线（S2 318 处/S4 32 处） |
-| CHANGELOG.md | W571 | 新增·W571 版段 + 编号规则上限 W001-W571 |
-| 交接文档.md | W571 | 修改·头尾「最后更新」prepend W571 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W571 | 修改·版本行同步 v2.3.171（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W571 | 修改·四页脚链首 prepend W571（batch_cascade.py 执行） |
-| .github/workflows/README.md | W571 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W571 | 新增·W571 段（本段·batch_cascade.py 执行） |
-
-## W570 审计矩阵补全与图表页容错封装（2026-09-16·v2.3.170）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_audit_render_states.js | W570 | 修改·补 S4-mobile-light 态（2×2 矩阵完整）+ --states 参数化 |
-| scripts/output/render-state-audit.jsonl | W570 | 更新·S4 移动浅色基线（232 行·1064 处/131 页） |
-| site/data+en methodology-matrix/narrative-experiment 4 页 | W570 | 修改·渲染调用 safe() 函数级容错封装（44 处） |
-| CHANGELOG.md | W570 | 新增·W570 版段 + 编号规则上限 W001-W570 |
-| 交接文档.md | W570 | 修改·头尾「最后更新」prepend W570 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W570 | 修改·版本行同步 v2.3.170（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W570 | 修改·四页脚链首 prepend W570（batch_cascade.py 执行） |
-| .github/workflows/README.md | W570 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W570 | 新增·W570 段（本段·batch_cascade.py 执行） |
-
-## W569 渲染状态全站审计与图表暗色适配 v2（2026-09-16·v2.3.169）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/tokens.css | W569 | 修改·暗色块图表文字反白规则 v2（!important 压 attr/内联填充） |
-| site/data+en 226 个 HTML | W569 | 修改·--force 重内联（暗色适配层分发） |
-| site/data+en methodology-matrix/narrative-experiment 4 页 | W569 | 修改·pageerror 契约错位修复（quadrant 回退/bands 守卫/difficulty 钳位/scoring 字典化/merit 回退/components 守卫） |
-| scripts/_audit_render_states.js | W569 | 新增·常驻：全站渲染状态审计器（3 态机判） |
-| scripts/output/render-state-audit-2026-09-13.jsonl | W569 | 新增·基线清单（696 行·暗色缺陷 1590 基线） |
-| scripts/output/render-state-audit.jsonl | W569 | 更新·修复后复测（464 行·302） |
-| CHANGELOG.md | W569 | 新增·W569 版段 + 编号规则上限 W001-W569 |
-| 交接文档.md | W569 | 修改·头尾「最后更新」prepend W569 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W569 | 修改·版本行同步 v2.3.169（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W569 | 修改·四页脚链首 prepend W569（batch_cascade.py 执行） |
-| .github/workflows/README.md | W569 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W569 | 新增·W569 段（本段·batch_cascade.py 执行） |
-
-## W568 聊天页视觉走查与错误链路双重断裂根治（2026-09-13·v2.3.168）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/server/index.ts | W568 | 修改·SSE 断开清理改挂 res close（req close 语义陷阱根治） |
-| xiyouji-agent-web/src/hooks/useChat.ts | W568 | 修改·SSE error 分支补全 + reader 循环先解析后退出 |
-| AGENTS.md | W568 | 修改·§4.3 落载体五条（收尾七步/取证三陷阱/部署态冒烟/close 语义陷阱） |
-| CHANGELOG.md | W568 | 新增·W568 版段 + 编号规则上限 W001-W568 |
-| 交接文档.md | W568 | 修改·头尾「最后更新」prepend W568 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W568 | 修改·版本行同步 v2.3.168（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W568 | 修改·四页脚链首 prepend W568（batch_cascade.py 执行） |
-| .github/workflows/README.md | W568 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W568 | 新增·W568 段（本段·batch_cascade.py 执行） |
-
-## W567 工作复盘与优化分析报告（2026-09-13·v2.3.167）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-09-13.md | W567 | 新增·W563-W566 会话复盘（E18-E26·P01-P19·WBS 与自评） |
-| docs/10-方法论沉淀/README.md | W567 | 修改·方法论索引第 24 条（门禁 17 双向覆盖） |
-| CHANGELOG.md | W567 | 新增·W567 版段 + 编号规则上限 W001-W567 |
-| 交接文档.md | W567 | 修改·头尾「最后更新」prepend W567 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W567 | 修改·版本行同步 v2.3.167（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W567 | 修改·四页脚链首 prepend W567（batch_cascade.py 执行） |
-| .github/workflows/README.md | W567 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W567 | 新增·W567 段（本段·batch_cascade.py 执行） |
-
-## W566 遗留三项裁决与收口（2026-09-13·v2.3.166）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| dataset/81-hardships.json | W566 | 修改·chapter 0→前传 4 处（向站侧对齐） |
-| dataset/six-senses-narratology-network.json | W566 | 修改·整体同步页侧运行时数据（sankey 40→56·案例数 5→4） |
-| site/data/81-hardships.html | W566 | 修改·EMBEDDED 数据码→标签 9 类（渲染层键一致性修复） |
-| site/data/text-search.html | W566 | 修改·late 注入容器 min-height 占位（CLS 0.315→0.075） |
-| site/curated.html + dashboard.html + guide.html + index.html + mobile-index.html + rum-viewer.html | W566 | 修改·主字体 preload 2 行/页（link 页补全） |
-| scripts/_add_preload_link_pages.py | W566 | 新增·一次性：link 页 preload 注入（模板/无 tokens 跳过） |
-| CHANGELOG.md | W566 | 新增·W566 版段 + 编号规则上限 W001-W566 |
-| 交接文档.md | W566 | 修改·头尾「最后更新」prepend W566 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W566 | 修改·版本行同步 v2.3.166（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W566 | 修改·四页脚链首 prepend W566（batch_cascade.py 执行） |
-| .github/workflows/README.md | W566 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W566 | 新增·W566 段（本段·batch_cascade.py 执行） |
-
-## W565 EMBEDDED单源化与预算收紧前置（2026-09-12·v2.3.165）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/relationships.html + site/en/relationships.html | W565 | 修改·C-2 单源化（loadJson 直返+调用直传文件名+badge/说明文案） |
-| site/data/character-appearance.html + site/en/character-appearance.html | W565 | 修改·loadData 派生 timeline（真实 matrix 优先） |
-| scripts/B_人物/character_appearance.py | W565 | 修改·补 characters 数组（页面契约字段+first_chapter 数字化） |
-| site/data/json/character_appearance.json | W565 | 再生成·含 characters 键（35 角色） |
-| .github/workflows/perf.yml | W565 | 修改·artifact path 补无点 lighthouseci/（根因修复） |
-| scripts/_enum_dual_source.py | W565 | 新增·一次性：双源页枚举（C-1） |
-| scripts/_fix_relationships_embed.py | W565 | 新增·一次性：relationships 单源化锚点替换 |
-| scripts/_deploy_smoke.js | W565 | 修改·常驻化：部署态 6 页 4xx/pageerror 回归探针 |
-| scripts/output/dual-source-pages.txt | W565 | 新增·双源页清单（17 页·15 页保留裁决登记） |
-| CHANGELOG.md | W565 | 新增·W565 版段 + 编号规则上限 W001-W565 |
-| 交接文档.md | W565 | 修改·头尾「最后更新」prepend W565 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W565 | 修改·版本行同步 v2.3.165（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W565 | 修改·四页脚链首 prepend W565（batch_cascade.py 执行） |
-| .github/workflows/README.md | W565 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W565 | 新增·W565 段（本段·batch_cascade.py 执行） |
-
-## W564 字体字节治理（2026-09-10·v2.3.164）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/fonts/NotoSansSC-Regular.subset.woff2 | W564 | 新增·754→605KB（4925 字字符集子集） |
-| site/static/fonts/NotoSansSC-Medium.subset.woff2 | W564 | 新增·765→614KB |
-| site/static/fonts/noto-serif-sc-shared.subset.woff2 | W564 | 新增·414→405KB（源 1499 字形已与站内字符集一致，fvar 保留） |
-| site/tokens.css | W564 | 修改·三行 @font-face url 指向 .subset.woff2 |
-| site/data+en 226 个 HTML | W564 | 修改·--force 重内联（url 切换）+ 主字体 preload 注入 2 行/页 |
-| site/sw.js | W564 | 修改·SHELL 三字体切换 subset + 补 serif 一行（离线完整性）·CACHE v3 |
-| scripts/requirements.txt | W564 | 修改·追加 fonttools/brotli（子集化管线依赖，入 pip-audit） |
-| scripts/_gen_font_charset.py | W564 | 新增·一次性：字符集提取（site HTML 完整原文+双 JSON+ASCII） |
-| scripts/_check_font_coverage.py | W564 | 新增·常驻守卫：零回归覆盖 100% + serif fvar 断言（新增内容批次收尾重跑） |
-| scripts/_add_font_preload.py | W564 | 新增·一次性：226 页 preload 注入（幂等 + CRLF + <body> 回退锚点） |
-| scripts/_font_request_probe.js | W564 | 新增·一次性：部署态 woff2 请求数探针（每字体恰 1 次） |
-| scripts/output/font-charset.txt | W564 | 新增·子集字符集（4925 字，不参与部署） |
-| CHANGELOG.md | W564 | 新增·W564 版段 + 编号规则上限 W001-W564 |
-| 交接文档.md | W564 | 修改·头尾「最后更新」prepend W564 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W564 | 修改·版本行同步 v2.3.164（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W564 | 修改·四页脚链首 prepend W564（batch_cascade.py 执行） |
-| .github/workflows/README.md | W564 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W564 | 新增·W564 段（本段·batch_cascade.py 执行） |
-
-## W563 前端关键路径与部署正确性批次（2026-09-10·v2.3.163）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-09-08-frontend-perf-and-deploy-correctness-plans.md | W563 | 新增·方案档（A/B/C 三方案+复审修订+执行实录） |
-| scripts/inline_css.py | W563 | 修改·B-0 按页深度 url 重写 + W536 写守卫根目录同款修复 |
-| scripts/_fix_d3_position.py | W563 | 新增·一次性：154 页 d3.v7+d3-sankey 移位+preload（CRLF 安全+安全阀） |
-| scripts/_font_probe.js | W563 | 新增·一次性：file:// 字体加载探针（3 页 3/3） |
-| scripts/_fix_oob_fetch.py | W563 | 新增·一次性：越界 fetch 前缀改写（两步替换）+副本复制 |
-| scripts/_embed_chapter_stats.py | W563 | 新增·一次性：chapter-stats 中英页 EMBEDDED_DATA 嵌入 |
-| scripts/_fix_semiotics_embed.py | W563 | 新增·一次性：journey-geo-semiotics 中英页单源化 |
-| scripts/_check_json_copies.py | W563 | 新增·批内自检：47 副本逐字节对账 |
-| scripts/_deploy_smoke.js | W563 | 新增·一次性：部署态 6 页 4xx/pageerror 冒烟 |
-| scripts/check_data_drift.js | W563 | 修改·门禁 9 扩展：副本对账+引用存在性+副本路径解析+页名回退（46 页/74 项） |
-| scripts/utils/text_loader.py | W563 | 修改·load_all_chapters 兼容 第*.md（曾只匹配 .txt 致分析器全空转） |
-| scripts/output/data/chapter_stats.json / character_appearance.json | W563 | 再生成·loader 修复后首次真实数据（22.6KB/59KB） |
-| site/data/json/*.json（47 个） | W563 | 新增·部署副本（与原件逐字节相等，门禁 9 对账） |
-| site/data+en+根 227 个 HTML | W563 | 修改·226 页重内联（字体 url）+154 页 D3 移位+107 页 fetch 治理+4 页单源化（有交叠） |
-| site/_template.html | W563 | 修改·D3 引用改正确蓝图形态（head preload + body 移位） |
-| site/sw.js | W563 | 修改·SHELL 摘 VF 3.5MB·cache v2·静态分支 SWR |
-| .github/workflows/pages.yml | W563 | 修改·部署期 SW 缓存名 SHA 版本戳（步内 grep 断言） |
-| assets/fonts/source/NotoSerifSC-VF.woff2 | W563 | git mv·自 site/static/fonts/ 归档（全站 0 引用死重） |
-| AGENTS.md | W563 | 修改·§4.2 第 9 门禁条目补记 D1-a 扩展 |
-| CHANGELOG.md | W563 | 新增·W563 版段 + 编号规则上限 W001-W563 |
-| 交接文档.md | W563 | 修改·头尾「最后更新」prepend W563 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W563 | 修改·版本行同步 v2.3.163（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W563 | 修改·四页脚链首 prepend W563（batch_cascade.py 执行） |
-| .github/workflows/README.md | W563 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W563 | 新增·W563 段（本段·batch_cascade.py 执行） |
-
-## W562 skills/ 目录退役（2026-09-08·v2.3.162）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| skills/（19 技能目录） | W562 | 删除·经用户确认退役（运行时零加载；历史见 git） |
-| scripts/check_skills_index.py | W562 | 删除·第 16 门禁本体随载体退役 |
-| scripts/sync_skills.py | W562 | 删除·MIRROR_SKILLS 归属策略随载体退役（W531/W533 历史保留 CHANGELOG） |
-| tests/test_skills_reference_integrity.py | W562 | 删除·check_skills_index 专属测试 |
-| scripts/verify_delivery.py | W562 | 修改·移除第 16 门禁挂载块（编号保留） |
-| AGENTS.md | W562 | 修改·§4.5 移除 + §4.2 条目退役标记 + 版本脚注 |
-| docs/00-导读/文档规范.md | W562 | 修改·§8 门禁表 24 项 + check_skills_index 行退役注记 |
-| CHANGELOG.md | W562 | 新增·W562 版段 + 编号规则上限 W001-W562 |
-| 交接文档.md | W562 | 修改·头尾「最后更新」prepend W562 + 里程碑块 + HEAD 句 + §5 skills 小节退役化（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W562 | 修改·版本行同步 v2.3.162 + skills 行/表删除（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W562 | 修改·四页脚链首 prepend W562（batch_cascade.py 执行） |
-| .github/workflows/README.md | W562 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W562 | 新增·W562 段（本段·batch_cascade.py 执行） |
-
-## W561 残余几何越界收敛（2026-09-08·v2.3.161）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/en/cave-estate.html | W561 | 修改·chart-minions width 父容器 + margin 420 + 刻度截断（W558 同款陷阱补齐） |
-| site/en/mbti-evolution.html | W561 | 修改·热力图 marginLeft 70→200→回退 70（右侧溢出更差，维持 W557 登记态） |
-| site/en/chapter-structure-graph.html | W561 | 修改·cluster 树 margin right 30→180 |
-| site/en/journey-map-interactive.html | W561 | 修改·地图 margin left 50→160/right 30→150 |
-| site/en/narrative-rhythm-curve.html | W561 | 修改·chart-area margin right 30→150 |
-| site/en/material-archaeology.html | W561 | 修改·costume-line margin 平衡 380→170（左右取舍）+ scatter 标签钳位截断 |
-| site/data/material-archaeology.html | W561 | 修改·costume-line margin 平衡（同 EN 镜像） |
-| scripts/batch_cascade.py | W561 | 复用·S1 收尾后首次第二批次应用（零人工修复，P05 关闭依据） |
-| CHANGELOG.md | W561 | 新增·W561 版段 + 编号规则上限 W001-W561 |
-| 交接文档.md | W561 | 修改·头尾「最后更新」prepend W561 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W561 | 修改·版本行同步 v2.3.161（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W561 | 修改·四页脚链首 prepend W561（batch_cascade.py 执行） |
-| .github/workflows/README.md | W561 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W561 | 新增·W561 段（本段·batch_cascade.py 执行） |
-
-## W560 工具链收尾批次（2026-09-08·v2.3.160）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/batch_cascade.py | W560 | 修改·S1 收尾：写盘 newline="" 根因修复 + 尾链 rfind 锚定/≤3 条 + 写后自检自愈（_cascade_fix.py 并入） |
-| scripts/_csp_guard.js | W560 | 新增·CSP 漂移守卫（探针/截图脚本启动自检·Windows python 候选探测） |
-| scripts/_w554_review.js 等 9 脚本 | W560 | 修改·接入 CSP 守卫行 |
-| scripts/_cascade_fix.py | W560 | 修改·标记废弃（功能并入 batch_cascade 写后自检） |
-| scripts/_w560_runtime_extract.js | W560 | 新增·U1 运行时 EMBEDDED_DATA 提取器（d3 变异规范化） |
-| scripts/check_content_consistency.py | W560 | 修改·--dataset-runtime 运行时对账模式 |
-| AGENTS.md | W560 | 修改·版本脚注（W559 WBS 三项落地） |
-| CHANGELOG.md | W560 | 新增·W560 版段 + 编号规则上限 W001-W560 |
-| 交接文档.md | W560 | 修改·头尾「最后更新」prepend W560 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W560 | 修改·版本行同步 v2.3.160（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W560 | 修改·四页脚链首 prepend W560（batch_cascade.py 执行） |
-| .github/workflows/README.md | W560 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W560 | 新增·W560 段（本段·batch_cascade.py 执行） |
-
-## W559 工作复盘与优化分析报告（2026-09-08·v2.3.159）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-09-08.md | W559 | 新增·W553-W558 会话复盘（经验 9 项/技能 3 方案/未用技能 5 决策/问题 16 例闭环/KPI 基线 6 项/WBS） |
-| docs/10-方法论沉淀/README.md | W559 | 修改·方法论索引第 23 条 |
-| CHANGELOG.md | W559 | 新增·W559 版段 + 编号规则上限 W001-W559 |
-| 交接文档.md | W559 | 修改·头尾「最后更新」prepend W559 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W559 | 修改·版本行同步 v2.3.159（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W559 | 修改·四页脚链首 prepend W559（batch_cascade.py 执行） |
-| .github/workflows/README.md | W559 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W559 | 新增·W559 段（本段·batch_cascade.py 执行） |
-
-## W558 五类残留缺陷修复（2026-09-07·v2.3.158）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/ 约 170 页 | W558 | 修改·五类修复（分号 130 页/overflow 47 页/margin 21 处/桑基 8 页/字段映射 2 页/表格 4 页，含重叠） |
-| scripts/_w558_detect.js | W558 | 新增·svg 文本越界/表格挤压通用检测器 |
-| scripts/_w558_fix_semicolons.py | W558 | 新增·全站 CSS 缺分号机械修复器（130 页 1006 处） |
-| scripts/_w558_inject_overflow.py | W558 | 新增·chart svg overflow visible 注入器（47 页） |
-| scripts/_w558_fix_margins.py | W558 | 新增·margin 加性扩边修补器（v3 幂等强制设值版） |
-| scripts/_w558_fix_meco_order.py / _w558_shots.js / _w558_probe_tables.js / _w558_count_works.py / _w557_plan.py / _w557_prompts.py / _w557_consolidate.py | W558 | 新增·绘制顺序修复/验收截图/表格探针/数据计数/复审编排合并工具 |
-| docs/superpowers/plans/2026-09-07-w558-five-class-remediation-report.md | W558 | 新增·五类修复执行报告 |
-| AGENTS.md | W558 | 修改·§4.3 补录 CSS 缺分号条目 + 版本脚注 |
-| CHANGELOG.md | W558 | 新增·W558 版段 + 编号规则上限 W001-W558 |
-| 交接文档.md | W558 | 修改·头尾「最后更新」prepend W558 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W558 | 修改·版本行同步 v2.3.158（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W558 | 修改·四页脚链首 prepend W558（batch_cascade.py 执行） |
-| .github/workflows/README.md | W558 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W558 | 新增·W558 段（本段·batch_cascade.py 执行） |
-
-## W557 全站复审完成（2026-09-06·v2.3.157）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/ 156 页（20 页 contentavoid getBBox→getBoundingClientRect + 136 页 kpi-row 基类注入，含重叠） | W557 | 修改·两项类级根因修复（探针验证） |
-| scripts/output/review-pass3/verdicts.jsonl | W557 | 新增·98 组组级判定（151 条） |
-| scripts/output/review-pass3/verdicts-page.jsonl | W557 | 新增·232 页页级合并判定（含证据切片号） |
-| scripts/output/review-pass3/final-summary.json | W557 | 新增·覆盖率对账与计数（pass93/warn62/fail77） |
-| scripts/output/review-pass3/prompts/ | W557 | 新增·98 组切片清单（复现用） |
-| scripts/_w557_plan.py / _w557_prompts.py / _w557_consolidate.py | W557 | 新增·复审编排与合并工具 |
-| scripts/_w557_fix_contentavoid.py / _w557_fix_kpirow.py / _w557_verify_fix.js / _w557_kpirow_check.js | W557 | 新增·两项类级修复器与验证探针 |
-| docs/superpowers/plans/2026-09-06-w557-full-site-review-pass3-report.md | W557 | 新增·审查报告 + W558 五类逐项修复清单 |
-| AGENTS.md | W557 | 修改·§4.3 两条经验 + 版本脚注 |
-| CHANGELOG.md | W557 | 新增·W557 版段 + 编号规则上限 W001-W557 |
-| 交接文档.md | W557 | 修改·头尾「最后更新」prepend W557 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W557 | 修改·版本行同步 v2.3.157（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W557 | 修改·四页脚链首 prepend W557（batch_cascade.py 执行） |
-| .github/workflows/README.md | W557 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W557 | 新增·W557 段（本段·batch_cascade.py 执行） |
-
-## W556 审计修复批次F1-F8 + 数据内容一致性挂载第25门禁（2026-09-06·v2.3.156）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/en/81-hardshots.html | W556 | 修改·F1 八十一难 81 行英译清单内嵌 + 移除越界 fetch（聚合断言对齐 KPI） |
-| site/data/relationships.html | W556 | 修改·F3 唐僧-孙悟空 共现声明统一 89（文案×3 + 边权 90→89） |
-| site/en/relationships.html | W556 | 修改·F3 英文镜像同步（文案×4 + 边权 90→89） |
-| site/en/essay-ming-military.html | W556 | 修改·F2 汉字实体纠错 土司×2/军屯×1 + 兵制译名 |
-| site/en/essay-ming-intellectual-history.html | W556 | 修改·F4 客主标注对调修正 + 术语表锚标 14 of 22 |
-| site/en/character-wukong.html | W556 | 修改·F5 行者赐名归属改唐僧（第 14 回） |
-| site/en/character-bailongma.html | W556 | 修改·F6 纵火定性 + 全队极值声明改如实表述 |
-| site/en/essay-thematic-poetry.html | W556 | 修改·F7 七律体式译名 regulated verse |
-| site/en/essay-folk-belief.html | W556 | 修改·F8 三位学者生年删注改通称 |
-| scripts/check_content_consistency.py | W556 | 修改·--gate 门禁模式（基线装载/冻结豁免/新增拦截） |
-| scripts/content-consistency-baseline.txt | W556 | 新增·第 25 门禁基线（冻结 W554 裁决 4 误报） |
-| scripts/verify_delivery.py | W556 | 修改·挂载第 25 门禁（经用户确认，py_compile + 全量跑通） |
-| scripts/_w556_f1.py / _w556_f1check.js / _w556_f3.py | W556 | 新增·F1 生成器/F1 渲染探针/F3 批量修复器（归档） |
-| AGENTS.md | W556 | 修改·§4.2 补录第 25 门禁 + 版本脚注 |
-| docs/00-导读/文档规范.md | W556 | 修改·§8 门禁表 23→25 项 |
-| CHANGELOG.md | W556 | 新增·W556 版段 + 编号规则上限 W001-W556 |
-| 交接文档.md | W556 | 修改·头尾「最后更新」prepend W556 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W556 | 修改·版本行同步 v2.3.156（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W556 | 修改·四页脚链首 prepend W556（batch_cascade.py 执行） |
-| .github/workflows/README.md | W556 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W556 | 新增·W556 段（本段·batch_cascade.py 执行） |
-
-## W555 工作复盘与优化分析报告（2026-09-06·v2.3.155）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-09-06.md | W555 | 新增·W550-W554 会话复盘（经验 8 项/技能 3 方案/未用技能 5 决策/场景 3 沉淀/问题 15 例/流程 -22%/WBS/自评） |
-| docs/10-方法论沉淀/README.md | W555 | 修改·方法论索引第 22 条 |
-| CHANGELOG.md | W555 | 新增·W555 版段 + 编号规则上限 W001-W555 |
-| 交接文档.md | W555 | 修改·头尾「最后更新」prepend W555 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W555 | 修改·版本行同步 v2.3.155（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W555 | 修改·四页脚链首 prepend W555（batch_cascade.py 执行） |
-| .github/workflows/README.md | W555 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W555 | 新增·W555 段（本段·batch_cascade.py 执行） |
-
-## W554 方案B阶段一全站复审管线 + 方案C数据内容审计全量（2026-09-06·v2.3.154）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_content_consistency.py | W554 | 新增·方案C L1/L2/self-test 数据一致性常驻工具（--self-test 4/4·--dataset 17页0漂移） |
-| scripts/_w554_review.js | W554 | 新增·方案B 全站复审采集/切片/分组管线（滚动穿透固化） |
-| scripts/_w555_l3b.py | W554 | 新增·L3-b KPI/年代机器核查 |
-| scripts/output/review-pass3/groups.json | W554 | 新增·B 方案 98 组分组清单（剩余 97 组审查复用） |
-| scripts/output/review-pass3/verdicts-pilot.jsonl | W554 | 新增·试审组终判存档（3 页 pass + 伪影教训注记） |
-| docs/superpowers/plans/2026-09-06-w554-content-audit-and-b-pipeline.md | W554 | 新增·审计报告与 B 恢复指令（8 项修复清单 F1-F8） |
-| .gitignore | W554 | 修改·新增 .review-tmp/（B 复审基线保留复用） |
-| scripts/_w553_jiacheck.py | W554 | 修改·级联落盘字节级核查脚本改 W554 口径（26 项断言复用） |
-| AGENTS.md | W554 | 修改·§4.3 补录滚动穿透教训 + EMBEDDED 反例 + 版本脚注 |
-| CHANGELOG.md | W554 | 新增·W554 版段 + 编号规则上限 W001-W554 |
-| 交接文档.md | W554 | 修改·头尾「最后更新」prepend W554 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W554 | 修改·版本行同步 v2.3.154（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W554 | 修改·四页脚链首 prepend W554（batch_cascade.py 执行） |
-| .github/workflows/README.md | W554 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W554 | 新增·W554 段（本段·batch_cascade.py 执行） |
-
-## W553 低危视觉细节批次（2026-09-06·v2.3.153）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/en/text-evolution.html | W553 | 修改·A-1 行标签修复（2 svg 挂 data-audit-skip + 3 隐藏型补丁守卫 + min-width 滚动容器扩展） |
-| site/en/intertextuality-network.html | W553 | 修改·A-2 力导向标签折行+title+collide 34+收敛让位（svg 挂豁免 + 3 补丁守卫） |
-| site/en/monster-female-network.html | W553 | 修改·A-3 fate 短文案/折行/去重/错行 + 名字标签纵向分散（svg 挂豁免 + 4 补丁守卫） |
-| site/data/monster-female-network.html | W553 | 修改·A-3 中文镜像同步（同上） |
-| site/en/social-media.html | W553 | 修改·A-4 行标 svg 探针量测自适应左边距（150→173） |
-| scripts/_w553_probe.js | W553 | 新增·方案 A 四项验收探针（a1 行标签可见/a2 标签两两零相交/a3 fate 间距+名字标签/a4 行标自适应） |
-| scripts/_w553_shots.js | W553 | 新增·修复前后截图对比采集（配 git worktree 基线） |
-| scripts/_w553_jiacheck.py | W553 | 新增·batch_cascade 落盘字节级核查（行尾 CR 收敛/链唯一性/26 项断言） |
-| AGENTS.md | W553 | 修改·§4.3 补录 SVG 标签量测四坑 + 版本脚注 |
-| CHANGELOG.md | W553 | 新增·W553 版段 + 编号规则上限 W001-W553 |
-| 交接文档.md | W553 | 修改·头尾「最后更新」prepend W553 + 里程碑块 + HEAD 句；头链 W552/W551 双写脏链清洗（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W553 | 修改·版本行同步 v2.3.153（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W553 | 修改·四页脚链首 prepend W553（batch_cascade.py 执行） |
-| .github/workflows/README.md | W553 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W553 | 新增·W553 段（本段·batch_cascade.py 执行） |
-
-## W552 三项可选改进批次计划 + tmpe 处置（2026-09-06·v2.3.152）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-09-06-w552-three-optional-batches-plans.md | W552 | 新增·方案 A 低危细节（W553 候选·四项机判验收）/B 全站人工复审（W554 候选·232 页 1150 切片 96-100 组）/C 数据内容审计（W555 候选·L1 自洽/L2 对账/L3 语义抽样 260 项）三计划 |
-| docs/archive/w550-shot-review/ | W552 | 新增·W550 全站截图审查报告精简归档（11 文件 420KB：报告+逐页判定+flagged 告警清单） |
-| tmpe/（W550 临时产物目录） | W552 | 删除·1.1G 截图/切片/联络表已清理（gitignore 未入库·报告精简版已归档至 docs/archive/w550-shot-review/） |
-| CHANGELOG.md | W552 | 新增·W552 版段 + 编号规则上限 W001-W552 |
-| 交接文档.md | W552 | 修改·头尾「最后更新」prepend W552 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W552 | 修改·版本行同步 v2.3.152（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W552 | 修改·四页脚链首 prepend W552（batch_cascade.py 执行） |
-| .github/workflows/README.md | W552 | 修改·旁文档同步（batch_cascade.py 执行） |
-| AGENTS.md | W552 | 修改·版本脚注追加 W552 条目 |
-| scripts/output/file-index.md | W552 | 新增·W552 段（本段·batch_cascade.py 执行） |
-
-## W551 图表门禁常驻化（2026-09-05·v2.3.151）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_chart_data.py | W551 | 新增·图表静态自洽门禁（R1 sankey 引用/R2 饼图措辞×实现错配）+ --self-test 负样本自检 |
-| scripts/check_screenshot_gates.js | W551 | 新增·动态渲染五类门禁（pageerror/sankey 运行时/溢出/reveal 收敛触发/画布遮挡）挂 screenshot-review workflow |
-| scripts/verify_delivery.py | W551 | 修改·挂载第 24 门禁（图表静态自洽） |
-| .github/workflows/screenshot-review.yml | W551 | 修改·新增 chart-gates 阻断步 |
-| site/data+en 14 个（underworld-power/character-dynamic/character-semantic/guanyin-six-roles/heaven-power/monster-hierarchy/monster-victims 中英） | W551 | 修改·G5 存量遮挡补杀（透明背景规则，同 W550 连线修复） |
-| scripts/_w551_probe_reveal.js | W551 | 新增·reveal 触发取证探针（一次性归档） |
-| AGENTS.md | W551 | 修改·§4.2 补录第 24 门禁 + 版本脚注 |
-| docs/00-导读/文档规范.md | W551 | 修改·§8 门禁表 23→24 项（对齐 AGENTS §4.2） |
-| CHANGELOG.md | W551 | 新增·W551 版段 + 编号规则上限 W001-W551 |
-| 交接文档.md | W551 | 修改·头尾「最后更新」prepend W551 + 里程碑块 + HEAD 句（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W551 | 修改·版本行同步 v2.3.151（batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W551 | 修改·四页脚链首 prepend W551（batch_cascade.py 执行） |
-| .github/workflows/README.md | W551 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W551 | 新增·W551 段（本段·batch_cascade.py 执行） |
-
-## W550 全站截图审查与修复闭环（2026-09-05·v2.3.150）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| 站点 HTML 57 个（10 桑基引用 + 12 连线可见性 + 9 树图口径 + 2 编码锚文本 + 2 旧口径 + 2 桑基补链 + 2 文案对齐 + 2 13d 口径 + 8 树图填色 + 3 裁切边距 + 34 溢出修复，部分文件重叠） | W550 | 修改·全站截图审查缺陷修复（详见 tmpe/report/shot-review-report.md §八） |
-| scripts/generate_csp.py | W550 | 修改·W536 写路径守卫根目录 scripts/→仓库根（重生成模式自阻 bug 修复） |
-| tmpe/ | W550 | 新增·全站截图审查与验证产物（截图/切片/联络表/报告，未 git add） |
-| CHANGELOG.md | W550 | 新增·W550 版段 + 编号规则上限 W001-W550 |
-| 交接文档.md | W550 | 修改·骨架修复（重建被误吞的「一、当前进度」章）+ 头尾链去重 + prepend W550 |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W550 | 修改·版本行同步 v2.3.150（2026-09-05·batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W550 | 修改·四页脚链首 prepend W550（batch_cascade.py 执行） |
-| .github/workflows/README.md | W550 | 修改·旁文档同步（batch_cascade.py 执行） |
-| AGENTS.md | W550 | 修改·§4.3 补录变体穷尽规则 + 版本脚注追加 W550 条目 |
-| scripts/output/file-index.md | W550 | 新增·W550 段（本段·batch_cascade.py 执行） |
-
-## W549 复盘报告后记（2026-09-05·v2.3.149）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-09-05.md | W549 | 修改·§九后记（WBS 5/5 完成对账·阶段 2-5 落地明细·deep 基线 sealed scanId·E8 增补·样本局限缓解说明）+ 头部窗口刷新 W536-W548 |
-| CHANGELOG.md | W549 | 新增·W549 版段 + 编号规则上限 W001-W549 |
-| 交接文档.md | W549 | 修改·头尾「最后更新」prepend W549 + 头链 3 批自动淘汰 + 里程碑概要滚动淘汰最老块 + 当前 HEAD 句更新 + 当前进度标题更新（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W549 | 修改·版本行同步 v2.3.149（2026-09-05·batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W549 | 修改·四页脚链首 prepend W549（batch_cascade.py 执行） |
-| .github/workflows/README.md | W549 | 修改·旁文档同步（batch_cascade.py 执行） |
-| AGENTS.md | W549 | 修改·版本脚注追加 W549 条目 |
-| scripts/output/file-index.md | W549 | 新增·W549 段（本段·batch_cascade.py 执行） |
-
-## W548 迁移阶段+ 闭环（2026-09-05·v2.3.148）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/package.json | W548 | 修改·迁移阶段 5：react/react-dom ^19.2 + tdesign-react ^1.18 + tdesign-icons-react ^0.6 |
-| xiyouji-agent-web/package-lock.json | W548 | 修改·阶段 5 锁文件更新 |
-| .github/dependabot.yml | W548 | 修改·删除 agent-web 段 ignore semver-major（五阶段闭环·解除条件达成） |
-| CHANGELOG.md | W548 | 新增·W548 版段 + 编号规则上限 W001-W548 |
-| 交接文档.md | W548 | 修改·头尾「最后更新」prepend W548 + 头链 3 批自动淘汰 + 里程碑概要滚动淘汰最老块 + HEAD 句/标题更新（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W548 | 修改·版本行同步 v2.3.148（2026-09-05·batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W548 | 修改·四页脚链首 prepend W548（batch_cascade.py 执行） |
-| .github/workflows/README.md | W548 | 修改·旁文档同步（batch_cascade.py 执行） |
-| AGENTS.md | W548 | 修改·版本脚注追加 W548 条目 |
-| scripts/output/file-index.md | W548 | 新增·W548 段（本段·batch_cascade.py 执行） |
-
-## W547 迁移阶段 4（2026-09-05·v2.3.146）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/package.json | W547 | 修改·tailwindcss ^4.3.3 + @tailwindcss/postcss 新增·autoprefixer 移除 |
-| xiyouji-agent-web/postcss.config.js | W547 | 修改·插件替换为 @tailwindcss/postcss |
-| xiyouji-agent-web/src/index.css | W547 | 修改·@import "tailwindcss" + @config + @custom-variant dark |
-| xiyouji-agent-web/package-lock.json | W547 | 修改·阶段 4 锁文件更新 |
-| CHANGELOG.md | W547 | 新增·W547 版段 + 编号规则上限 W001-W547 |
-| 交接文档.md | W547 | 修改·头尾「最后更新」prepend W547 + 头链 3 批自动淘汰 + 里程碑概要滚动淘汰最老块 + HEAD 句/标题更新（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W547 | 修改·版本行同步 v2.3.146（2026-09-05·batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W547 | 修改·四页脚链首 prepend W547（batch_cascade.py 执行） |
-| .github/workflows/README.md | W547 | 修改·旁文档同步（batch_cascade.py 执行） |
-| AGENTS.md | W547 | 修改·版本脚注追加 W547 条目 |
-| scripts/output/file-index.md | W547 | 新增·W547 段（本段·batch_cascade.py 执行） |
-
-## W546 迁移阶段 3（2026-09-05·v2.3.145）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/package.json | W546 | 修改·迁移阶段 3：vite ^8.2.2（rolldown）/ @vitejs/plugin-react ^6.1.1 + engines 收紧 ^20.19.0 || >=22.12.0 |
-| xiyouji-agent-web/package-lock.json | W546 | 修改·阶段 3 锁文件更新 |
-| CHANGELOG.md | W546 | 新增·W546 版段 + 编号规则上限 W001-W546 + W545 热修复补记段 |
-| 交接文档.md | W546 | 修改·头尾「最后更新」prepend W546 + 头链 3 批自动淘汰 + 里程碑概要滚动淘汰 W535 块 + 当前 HEAD 句更新 + 当前进度标题更新 |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W546 | 修改·版本行同步 v2.3.145（2026-09-05） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W546 | 修改·四页脚链首 prepend W546 |
-| .github/workflows/README.md | W546 | 修改·旁文档同步（头部版本行 + 里程碑行上限 W450-W546） |
-| AGENTS.md | W546 | 修改·版本脚注追加 W545/W546 条目 |
-| scripts/output/file-index.md | W546 | 新增·W546 段（本段） |
-
-## W545 热修复补记（2026-09-05·v2.3.144）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/batch_cascade.py | W545 | 修改·补 _root = os.path.realpath(ROOT) 模块级定义一行（W544 内联钳制引用未定义名——ruff F821 ×2 红灯·行为零变更） |
-
-## W544 agent-web 迁移阶段 2（2026-09-05·v2.3.143）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/package.json | W544 | 修改·迁移阶段 2：typescript ^7.0.2 / @types/react ^19.2.18 / @types/react-dom ^19 |
-| xiyouji-agent-web/package-lock.json | W544 | 修改·阶段 2 锁文件更新 |
-| xiyouji-agent-web/src/vite-env.d.ts | W544 | 新建·vite/client 类型引用（TS2882 CSS side-effect import 修复） |
-| xiyouji-agent-web/src/components/ChatMessages.tsx | W544 | 修改·messagesEndRef prop 放宽为 RefObject<HTMLDivElement | null>（TS2322·React 19 useRef 语义） |
-| CHANGELOG.md | W544 | 新增·W544 版段 + 编号规则上限 W001-W544 |
-| 交接文档.md | W544 | 修改·头尾「最后更新」prepend W544 + 头链 3 批自动淘汰 + 里程碑概要滚动淘汰最老块 + HEAD 句/标题更新（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W544 | 修改·版本行同步 v2.3.143（2026-09-05·batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W544 | 修改·四页脚链首 prepend W544（batch_cascade.py 执行） |
-| .github/workflows/README.md | W544 | 修改·旁文档同步（batch_cascade.py 执行） |
-| AGENTS.md | W544 | 修改·版本脚注追加 W544 条目 |
-| scripts/output/file-index.md | W544 | 新增·W544 段（本段·batch_cascade.py 执行） |
-
-## W543 agent-web 迁移阶段 1（2026-09-05·v2.3.142）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/package.json | W543 | 修改·迁移阶段 1：express ^5 / uuid ^14 / dotenv ^17 / @types/node 26 / better-sqlite3 13（评估未验证项转已验证） |
-| xiyouji-agent-web/package-lock.json | W543 | 修改·阶段 1 锁文件更新 |
-| docs/10-方法论沉淀/agent-web技术栈迁移评估.md | W543 | 修改·better-sqlite3 13 未验证项标注已验证（Node 24 预编译·运行冒烟通过） |
-| CHANGELOG.md | W543 | 新增·W543 版段 + 编号规则上限 W001-W543 |
-| 交接文档.md | W543 | 修改·头尾「最后更新」prepend W543 + 头链 3 批自动淘汰 + 里程碑概要滚动淘汰最老块 + HEAD 句/标题更新（batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W543 | 修改·版本行同步 v2.3.142（2026-09-05·batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W543 | 修改·四页脚链首 prepend W543（batch_cascade.py 执行） |
-| .github/workflows/README.md | W543 | 修改·旁文档同步（batch_cascade.py 执行） |
-| AGENTS.md | W543 | 修改·版本脚注追加 W543 条目 |
-| scripts/output/file-index.md | W543 | 新增·W543 段（本段·batch_cascade.py 执行） |
-
-## W542 交付效率工具化（2026-09-05·v2.3.141）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/batch_cascade.py | W542 | 新建·spec 驱动的批次级联常驻脚本（9 面：CHANGELOG/三版本行/交接文档头尾链+3 批自动淘汰+里程碑滚动+HEAD 句/workflows/四页脚/AGENTS 脚注/file-index；两阶段先断言后落盘·双括号自检·本批自身级联 dogfood 实测） |
-| AGENTS.md | W542 | 修改·§4.3 三新规增补④（真实参数冒烟）+ 版本脚注追加 W542 条目 |
-| CHANGELOG.md | W542 | 新增·W542 版段 + 编号规则上限 W001-W542 |
-| 交接文档.md | W542 | 修改·头尾「最后更新」prepend W542 + 头链 3 批自动淘汰 + 里程碑概要滚动淘汰最老块 + 当前 HEAD 句更新 + 当前进度标题更新（全部由 batch_cascade.py 执行） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W542 | 修改·版本行同步 v2.3.141（2026-09-05·batch_cascade.py 执行） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W542 | 修改·四页脚链首 prepend W542（batch_cascade.py 执行） |
-| .github/workflows/README.md | W542 | 修改·旁文档同步（batch_cascade.py 执行） |
-| scripts/output/file-index.md | W542 | 新增·W542 段（本段·batch_cascade.py 执行） |
-
-## W541 复盘报告归档（2026-09-05·v2.3.140）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-09-05.md | W541 | 新建·W536-W540 会话复盘报告（8 章：经验复用 7 项/技能矩阵/未用技能 6 项决策/场景沉淀 4 模板/问题 14 例与闭环机制/工作流优化 3 建议/WBS 计划/可行性自评） |
-| docs/10-方法论沉淀/README.md | W541 | 修改·索引登记第 21 条（双向覆盖） |
-| CHANGELOG.md | W541 | 新增·W541 版段 + 编号规则上限 W001-W541 |
-| 交接文档.md | W541 | 修改·头尾「最后更新」prepend W541 + 里程碑概要滚动淘汰 W536 块（保 5 版）+ 当前 HEAD 句更新 + 当前进度标题更新 + W540 尾链双括号修正 |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W541 | 修改·版本行同步 v2.3.140（2026-09-05） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W541 | 修改·四页脚链首 prepend W541 |
-| .github/workflows/README.md | W541 | 修改·旁文档同步（头部版本行 + 里程碑行上限 W450-W541） |
-| AGENTS.md | W541 | 修改·版本脚注追加 W541 条目 |
-| scripts/output/file-index.md | W541 | 新增·W541 段（本段） |
-
-## W540 迁移评估基线更新（2026-09-05·v2.3.139）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/10-方法论沉淀/agent-web技术栈迁移评估.md | W540 | 修改·头部补基线更新注记（vite 5.4.21→6.4.3 已于 W539 落地）+ §二 Vite 行跨度修订 6.4.3 → 8.2 + §三 阶段 3 补注——基线快照与现实脱节补记 |
-| CHANGELOG.md | W540 | 新增·W540 版段 + 编号规则上限 W001-W540 |
-| 交接文档.md | W540 | 修改·头尾「最后更新」prepend W540 + 里程碑概要滚动淘汰 W535 块（保 5 版）+ 当前 HEAD 句更新 + 当前进度标题更新 |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W540 | 修改·版本行同步 v2.3.139（2026-09-05） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W540 | 修改·四页脚链首 prepend W540 |
-| .github/workflows/README.md | W540 | 修改·旁文档同步（头部版本行 + 里程碑行上限 W450-W540） |
-| AGENTS.md | W540 | 修改·版本脚注追加 W540 条目 |
-| scripts/output/file-index.md | W540 | 新增·W540 段（本段） |
-
-## W539 遗留收尾（2026-09-05·v2.3.138）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/package.json | W539 | 修改·vite ^5.0.10→^6.4.3（devDep 漏洞清零·esbuild 随升·plugin-react 4.7.0 peer 兼容·build 34.88s）+ dompurify 直接依赖 ^3.4.13→^3.4.14 |
-| xiyouji-agent-web/package.json | W539 | 修改·移除 W410 dompurify override（直接依赖+传递依赖同名场景的结构性冲突——Dependabot recreate 整组卡死根因·cherry-markdown 传递 ^3.2.6 可满足） |
-| xiyouji-agent-web/package-lock.json | W539 | 修改·vite/dompurify 升级与 dedupe |
-| CHANGELOG.md | W539 | 新增·W539 版段 + 编号规则上限 W001-W539 |
-| 交接文档.md | W539 | 修改·头尾「最后更新」prepend W539 + 里程碑概要滚动淘汰 W534 块（保 5 版）+ 当前 HEAD 句更新 + 当前进度标题更新 + 尾链双括号修正 |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W539 | 修改·版本行同步 v2.3.138（2026-09-05·含项目说明 L47 W536 陈旧描述一并校正） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W539 | 修改·四页脚链首 prepend W539 |
-| .github/workflows/README.md | W539 | 修改·旁文档同步（头部版本行 + 里程碑行上限 W450-W539） |
-| AGENTS.md | W539 | 修改·版本脚注追加 W539 条目 |
-| scripts/output/file-index.md | W539 | 新增·W539 段（本段） |
-
-## W538 CI 红灯热修复（2026-09-05·v2.3.137）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/batch_screenshots.js | W538 | 修改·W537 白名单形状回归修复——onlyPages/extraPages 实为 {file,dir} 对象数组（parseExtraPages），重写为形状感知 _cleanPages（file 禁 ../绝对路径·dir 钳制项目根）并核对下游 p.file/p.dir 契约 |
-| xiyouji-agent-web/package.json | W538 | 修改·overrides 追加 qs ^6.16.0 与 fast-uri ^3.1.6（W410 先例·fast-uri 留 3.x 兼容 ajv）——生产依赖审计归零 |
-| xiyouji-agent-web/package-lock.json | W538 | 修改·overrides 生成的锁文件更新 |
-| CHANGELOG.md | W538 | 新增·W538 版段 + 编号规则上限 W001-W538 |
-| 交接文档.md | W538 | 修改·头尾「最后更新」prepend W538 + 里程碑概要滚动淘汰 W533 块（保 5 版）+ 当前 HEAD 句更新 + 当前进度标题更新 |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W538 | 修改·版本行同步 v2.3.137（2026-09-05） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W538 | 修改·四页脚链首 prepend W538 |
-| .github/workflows/README.md | W538 | 修改·旁文档同步（头部版本行 + 里程碑行上限 W450-W538） |
-| AGENTS.md | W538 | 修改·版本脚注追加 W538 条目 |
-| scripts/output/file-index.md | W538 | 新增·W538 段（本段） |
-
-## W537 全仓对抗性审查修复（2026-09-05·v2.3.136）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| Makefile | W537 | 修改·audit 引用已归档脚本改指 scripts/archive/ 路径（W447 起潜伏 89 批）+ test 目标 fail-open 改 fail-closed（pytest 失败不再被吞） |
-| mcp-server/xiyouji_mcp.py | W537 | 修改·xiyouji_docs_index 诚实化（docstring 假校验纠正 + content_checked 字段 + message 指向权威链路 docs_index.py --check） |
-| 新Agent启动Prompt.md | W537 | 修改·py -3 规则条件化（消除与提交流程示例的自相矛盾） |
-| AGENTS.md | W537 | 修改·§4.4 权限默认值校正（bypassPermissions→default+env 开关）+ §4.3 sync 指引补 MIRROR_SKILLS 例外交叉引用 + §4.3 新增 W537 三新规 + 版本脚注 |
-| skills/xiyouji-drift-audit/SKILL.md | W537 | 修改·v1.3.0 增「AGENTS 关键事实断言抽查」维度·sync 双轨一致 |
-| .eslintrc.json | W537 | 删除·ESLint 9+ 失效死配置（被 eslint.config.mjs 取代） |
-| xiyouji-agent-web/server/index.ts | W537 | 修改·sysprompt 去硬编码版本号（v2.3.26 滞后 109 批）+ check-login 脱敏收敛（不再回显 apiKey/authToken 前 8 位） |
-| CHANGELOG.md | W537 | 新增·W537 版段 + 编号规则上限 W001-W537 + W536 段数字更正注记（71/58 系首轮数字，实际 77 处/60 余文件） |
-| 交接文档.md | W537 | 修改·头尾「最后更新」prepend W537 + 里程碑概要滚动淘汰 W532 块（保 5 版）+ 当前进度标题更新 |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W537 | 修改·版本行同步 v2.3.136（2026-09-05） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W537 | 修改·四页脚链首 prepend W537 |
-| .github/workflows/README.md | W537 | 修改·旁文档同步（头部版本行 + 里程碑行上限 W450-W537） |
-| scripts/output/file-index.md | W537 | 新增·W537 段（本段）+ 补记 W536 第二轮 Mimosa 修复的索引注记（render_check/batch_screenshots 钳制、test_graph 字面量化、server index.ts 工作目录钳制与权限存储无原型化） |
-
-## W536 依赖积压治理（2026-09-02·v2.3.135）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| eslint.config.mjs | W536 | 新建·ESLint flat config（`.eslintrc.json` 自 ESLint 9 失效的实证修复·0 error / 31 warning·9.39.5 与 10.9.1 双版本一致） |
-| docs/10-方法论沉淀/agent-web技术栈迁移评估.md | W536 | 新建·agent-web 主版本迁移评估（9 条实证 + 破坏点分级表 + 五阶段迁移顺序 + 未验证项显式清单） |
-| docs/10-方法论沉淀/README.md | W536 | 修改·索引登记第 20 条（迁移评估出档） |
-| .github/dependabot.yml | W536 | 修改·agent-web 段新增 ignore semver-major（dependency-name `*`·注释含原因与解除条件） |
-| .github/workflows/screenshot-review.yml | W536 | 修改·免审路径白名单补 eslint.config.mjs |
-| scripts/requirements.txt | W536 | 修改·pytest 9.0.3→9.1.1（PR #1 冲突手工落地·302 passed 与 9.0.3 基线一致） |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html | W536 | 修改·三简单页脚链首 prepend W536 + 描述串号修正（收尾补：误挂「决策闸门取数自动化」改「依赖积压治理」） |
-| site/dukou-engine.html | W536 | 修改·页脚长链链首 prepend W536 条目 |
-| .github/workflows/README.md | W536 | 修改·旁文档同步（第 23 门禁：头部版本行 + 里程碑行上限 W450-W536·收尾补） |
-| .gitignore | W536 | 修改·新增 .mimosa/（Agent 插件本地状态 5.6MB 不入库·收尾补） |
-| AGENTS.md | W536 | 修改·版本脚注同步至 v2.3.135 W536（收尾补） |
-| 交接文档.md | W536 | 修改·顶部「最后更新」prepend W536 + 文末尾链链首前置 W536（收尾补） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W536 | 修改·版本行同步 + README 计数声明恢复（收尾补：「A1-A6 共 615 篇 + A4 209 篇」锚点回归第 3 门禁 + 日期 2026-09-02 校正） |
-| CHANGELOG.md | W536 | 新增·W536 版段（_w536_insert.py 脚本化插入·锚点唯一/幂等/order/编号规则断言）+ 编号规则行上限 W001-W536 + 收尾补执行条 |
-| scripts/output/file-index.md | W536 | 新增·W536 段（本段·收尾补：空壳段修复 + v2.3.121 孤儿行清除 + 本批全文件登记） |
-| scripts/ 下 58 个工具脚本 | W536 | 修改·Mimosa 提交闸门高危清零（收尾补）：Python 写路径 realpath+项目根守卫 ×54、JS 动态执行改 JSON 解析（check_data_drift 移植宽容字面量解析器）、batch_screenshots argv 字面量化、lint_links/fetch_gate_stats/w286×2 请求边界加固 |
-
-## W535 决策闸门取数自动化（2026-08-31·v2.3.134）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/fetch_gate_stats.py | W535 | 新建·W535 核心——零第三方依赖拉取 GoatCounter API v0 近 7/30 日页面 UV（页面 UV=total−total_events）·`--json` 结构化输出·`--fixture F7 F30` 离线端到端·`--self-test` 负样本 14/14（缺字段/类型错/events>total/HTTP 401·403·404·超时/空窗）·token 从 .env 读不落盘 |
-| docs/10-方法论沉淀/读者数据复盘.md | W535 | 修改·新增「第零、UV 取数方式」段（令牌获取路径 + 两条取数命令 + 口径注记：闭区间含当日/事件去重/自测 14 项/末 3 项仍需后台截图）·表内前两行取数来源由「后台统计页」改为 fetch_gate_stats.py |
-| site/dukou-engine.html | W535 | 修改·页脚长链链首 prepend W535 条目（该页脚为 bump_version 读取当前 v/W 的真值源·第 0 步预检须用 head 读链首·坑⑥） |
-| CHANGELOG.md | W535 | 新增·W535 版段（脚本化插入 _w535_insert.py：锚点唯一/版段 order/换行一致性/编号规则行 5 项断言全绿·51 版段）+ 编号规则行上限改 v2.3.134 W535 |
-| 交接文档.md | W535 | 修改·顶部/文末「最后更新」行 prepend W535（顶部链裁至契约上限 3 批）·阻塞段当前 HEAD 句 + 「一、当前进度」标题 + 里程碑概要新增块 + W530 遗留待办句改写为「已部分解除（W535）」 |
-| 交接文档.md | W535 | 修改·里程碑概要滚动淘汰 W530 块（维持契约上限 5 版）·注记范围标签同步（W531 及更早） |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W535 | 修改·版本行同步（bump v2.3.134 W535）+ 坑②/坑③ 收尾（规模描述补回·STRUCTURE 畸形尾巴重写·项目说明第二处版本行核改） |
-| .github/workflows/README.md | W535 | 修改·旁文档同步（第 23 门禁：头部版本行 + 里程碑行 W450-W### 上限） |
-| AGENTS.md | W535 | 修改·版本脚注同步至 v2.3.134 W535 |
-| skills/xiyouji-version-bump/SKILL.md | W535 | 修改·v1.3.0→v1.5.0·坑⑤适用范围由「git commit -F」扩为「Windows 原生程序的一切路径实参」（含 Python --fixture·实证 FileNotFoundError 反斜杠吞路径）+ 坑⑧（裁剪须逐批断言 + 条目锚点正则 v2.3.N W(NNN) 防描述内 W 号误匹配 + W 号集合归一化 + 末块尾随空行回滚）·sync_skills 双轨一致 |
-| scripts/output/file-index.md | W535 | 新增·W535 段（本段） |
-
-## W534 治理文档递增数字字面量修复（2026-08-30·v2.3.133）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| 交接文档.md | W534 | v2.3.133 修改·「九、使用说明」第 2 条「接续 W 编号」写死「当前 W531·下一 W532」改引用式表述（W520 递增数字禁字面量规则外存量 1 处） |
-| 交接文档.md | W534 | v2.3.133 修改·顶部/文末「最后更新」行 prepend W534（顶部链裁至契约上限 3 批）·阻塞段当前 HEAD 句 + 「一、当前进度」标题 + 里程碑概要新增块 |
-| site/dukou-engine.html | W534 | v2.3.133 修改·页脚长链链首 prepend W534 条目（该页脚为 bump_version 读取当前 v/W 的真值源） |
-| CHANGELOG.md | W534 | v2.3.133 新增·W534 四件套条目（脚本化插入 + 锚点唯一/版段 order/换行一致性断言）·编号规则行 W001-W534 |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W534 | v2.3.133 版本行同步（bump）+ 规模描述补回 + STRUCTURE 畸形尾巴重写 + 项目说明第二处版本行核改 |
-| .github/workflows/README.md | W534 | v2.3.133 修改·旁文档同步（第 23 门禁：头部版本行 + 里程碑行上限） |
-| AGENTS.md | W534 | v2.3.133 修改·版本脚注同步 |
-| skills/xiyouji-version-bump/SKILL.md | W534 | v2.3.133 v1.2.0→v1.3.0·第 0 步增「页脚链首用 head 不用 tail」预检附加项 + 陷阱清单收录坑⑤（git commit -F 须 Windows 路径）/坑⑥（tail 误判假漂移）/坑⑦（长行 Edit 吞描述·须整行复读）+ 验证清单同步·sync_skills 双轨一致 |
-| CHANGELOG.md | W534 | v2.3.133 修改·W534 段补「执行（经验上移）」条（三坑写回 playbook）·文件行补 skill 路径 |
-| 交接文档.md | W534 | v2.3.133 裁剪·里程碑概要 29 版→5 版（删 W529-W506 共 52 行）+ 「一、当前进度」标题 8509→337 字符（保留 3 批 + CHANGELOG 指针）·_w534_trim.py 逐批断言 132 个 W 号均有 CHANGELOG 段后 --apply |
-| CHANGELOG.md | W534 | v2.3.133 修改·W534 段补「执行（治理膨胀裁剪）」条 |
-
-## W533 skills 归属策略显式化 + 坑④入 playbook（2026-08-29·v2.3.132）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/sync_skills.py | W533 | v2.3.132 新增·MIRROR_SKILLS 显式归属 + sync_blocked()（镜像技能禁 --sync/--force）+ --self-test 第 5 负样本 |
-| skills/agent-session-loop/SKILL.md | W533 | v2.3.132 回写·master 注入真源声明（全局为唯一 master，仓库为受控镜像） |
-| skills/deep-review-loop/SKILL.md | W533 | v2.3.132 回写·同上 |
-| skills/mem-wrap-up/SKILL.md | W533 | v2.3.132 回写·同上 |
-| skills/self-evolution/SKILL.md | W533 | v2.3.132 回写·同上 |
-| skills/xiyouji-version-bump/SKILL.md | W533 | v2.3.132 v1.1.0→v1.2.0·第 6 步扩四子项收录坑④（三简单页脚描述滞留+历史条目被顶掉）+ 陷阱清单/完成清单/第 8 步第 0 项 |
-| skills/README.md | W533 | v2.3.132 修改·归属注记（4 镜像 vs 15 真源），表格行数不变（门禁 16 检查 1 仍 19） |
-| AGENTS.md | W533 | v2.3.132 修改·§4.5 四技能归属段 + §4.2 第 16 门禁补 MIRROR_SKILLS + 版本脚注 |
-| CHANGELOG.md / 交接文档.md | W533 | v2.3.132 修改·W533 四件套条目 + 交接同步 |
-| .github/workflows/README.md | W533 | v2.3.132 修改·旁文档同步（第 23 门禁） |
-
-## W532 交接文档最后更新滚动链裁剪回契约上限（2026-08-29·v2.3.131）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| 交接文档.md | W532 | v2.3.131 修改·「最后更新」滚动链 9 批→3 批回契约②上限（删 6 批前逐批断言 CHANGELOG 有段）+ 当前进度标题/里程碑概要/尾链/HEAD 行同步 |
-| CHANGELOG.md | W532 | v2.3.131 修改·W532 四件套条目 + 编号规则 W001-W532 |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W532 | v2.3.131 修改·版本行推进（bump 后人工补规模描述与日期、重写 W 描述、去追加畸形尾巴） |
-| scripts/output/file-index.md | W532 | v2.3.131 修改·W532 登记段 |
-| AGENTS.md | W532 | v2.3.131 修改·版本脚注（无 § 结构性变更） |
-| site/dukou-engine.html | W532 | v2.3.131 修改·页脚 prepend v2.3.131 W532 |
-| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html | W532 | v2.3.131 修改·bump 简单页脚链首 + 人工核描述滞留（W531 坑④复核） |
-| .github/workflows/README.md | W532 | v2.3.131 修改·旁文档同步（头部版本行 + 里程碑段补 W532·第 23 门禁） |
-
-## W531 skills 部署全查 + 三真源降级保护（2026-08-29·v2.3.130）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/sync_skills.py | W531 | v2.3.130 重写·judge_direction 版本/ mtime 方向判定 + --sync 降级拦截 + --take-global 反向回写 + read_norm LF 归一化比对 + --self-test 4 负样本 |
-| skills/agent-session-loop/SKILL.md | W531 | v2.3.130 回写·全局真源 v1.2.0-qwenwork-native（QwenWork 原生工具/路径口径） |
-| skills/agent-session-loop/references/02-wrap-up.md | W531 | v2.3.130 回写·收尾步骤表改 QwenWork 工具口径 |
-| skills/agent-session-loop/references/03-evolution.md | W531 | v2.3.130 回写·双模式产出改当日 daily 日志段 |
-| skills/deep-review-loop/SKILL.md | W531 | v2.3.130 回写·全局真源 v1.4.0-qwenwork-native（去 TRAE/Claude 蒸馏溯源段） |
-| skills/mem-wrap-up/SKILL.md | W531 | v2.3.130 回写·全局真源 v1.3.0-qwenwork-native（6 项目层文件 → 读登记治理文档清单） |
-| skills/self-evolution/SKILL.md | W531 | v2.3.130 回写·全局真源 v1.2.0-qwenwork-native（知识层升级并入 skill/MEMORY.md 口径） |
-| skills/self-evolution/references/experience-capture-format.md | W531 | v2.3.130 回写·去 FT/ST 与 hooks 项目私有表述 |
-| AGENTS.md | W531 | v2.3.130 修改·§4.2 第 16 门禁配套 sync_skills 描述补降级保护 + 版本脚注 |
-| .github/workflows/README.md | W531 | v2.3.130 修改·旁文档同步（头部版本行 + 里程碑段补 W531·第 23 门禁） |
-| CHANGELOG.md / 交接文档.md | W531 | v2.3.130 修改·W531 四件套条目 + 交接同步（含「接续 W 编号」过期行 W463→W531 校正） |
-
-## W530 决策闸门工程落地（W465' 重排）（2026-08-26·v2.3.129）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/judge_gate.py | W530 | v2.3.129 新建·决策闸门判定（uv30<30 归档优先·--report 追加复盘·可复算） |
-| docs/10-方法论沉淀/读者数据复盘.md | W530 | v2.3.129 新建·决策闸门判定记录与数据存档模板（5 项数字 + 污染确认 + 判定记录 + 决策区） |
-| docs/10-方法论沉淀/README.md | W530 | v2.3.129 修改·目录索引登记第 19 行 + 关联文档陈旧版本引用改引用式 |
-| scripts/output/观测基线快照.md | W530 | v2.3.129 修改·UV 三栏补填表说明（日期/填表人） |
-| CHANGELOG.md | W530 | v2.3.129 修改·W530 段四件套 + 编号规则 W001-W530 |
-| 交接文档.md | W530 | v2.3.129 修改·头部最后更新/阻塞段 HEAD/进度标题/里程碑概要/尾页脚五处同步 |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W530 | v2.3.129 修改·版本行（bump 同步 + 人工核） |
-| scripts/output/file-index.md | W530 | v2.3.129 修改·新增 W530 段登记（本段） |
-| site/dukou-engine.html | W530 | v2.3.129 修改·页脚链头 prepend v2.3.129 W530 |
-| .github/workflows/README.md | W530 | v2.3.129 修改·头部版本行 + 里程碑行（旁文档同步） |
-
-## W529 R6 拦截落地 + W464 方案 v7 回填（2026-08-26·v2.3.128）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/ci.yml | W529 | v2.3.128 修改·lighthouse 命令加 --blocked-url-patterns（R6 纵深防御·goatcounter beacon 拦截） |
-| .github/workflows/perf.yml | W529 | v2.3.128 修改·lighthouserc collect.settings 加 blockedUrlPatterns |
-| scripts/batch_screenshots.js | W529 | v2.3.128 修改·页面创建后加 page.route 拦截 1273984347.goatcounter.com |
-| scripts/render_check.js | W529 | v2.3.128 修改·同上 |
-| tests/e2e/test_smoke.js | W529 | v2.3.128 修改·同上 |
-| docs/superpowers/plans/2026-08-18-w464-phase3-quantified-roadmap.md | W529 | v2.3.128 修改·v7 回填 12 处（§0.5 实施状态表/批次重排/W465 三步/R6 实测修正/W468 投稿准备/W467 脚本名/W469 平台前置/W471 探针注记/py -3/goatcounter.js 命名/v7 修订记录） |
-| CHANGELOG.md | W529 | v2.3.128 修改·W529 段四件套 + 编号规则 W001-W529 |
-| 交接文档.md | W529 | v2.3.128 修改·头部最后更新/阻塞段 HEAD/进度标题/里程碑概要/尾页脚五处同步 |
-| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W529 | v2.3.128 修改·版本行（bump 同步 + 人工核） |
-| scripts/output/file-index.md | W529 | v2.3.128 修改·新增 W529 段登记（本段） |
-| site/dukou-engine.html | W529 | v2.3.128 修改·页脚链头 prepend v2.3.128 W529 |
-| .github/workflows/README.md | W529 | v2.3.128 修改·头部版本行 + 里程碑行（旁文档同步） |
-
-## W528 存量漂移点统一修复（2026-08-26·v2.3.127）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| README.md | W528 | v2.3.127 修改·目录树 skills 计数 17→19（列表补 day-review/drift-audit） |
-| STRUCTURE.md | W528 | v2.3.127 修改·skills 17→19 + 学术论文索引 50→55 条 + site/data 46→86（改引用式口径）+ D3 CDN 行改本地化 static/js/d3.v7.min.js |
-| 交接文档.md | W528 | v2.3.127 修改·9 处漂移点修复（A3 211→215 ×3·「五」README 行去陈旧版本号）+ 头部最后更新/阻塞段 HEAD/进度标题/里程碑概要/尾页脚五处同步 |
-| CHANGELOG.md | W528 | v2.3.127 修改·W528 段四件套 + 编号规则 W001-W528 |
-| docs/00-导读/项目说明.md | W528 | v2.3.127 修改·版本行两处（bump 同步 + 人工核） |
-| scripts/output/file-index.md | W528 | v2.3.127 修改·新增 W528 段登记（本段） |
-| site/dukou-engine.html | W528 | v2.3.127 修改·页脚链头 prepend v2.3.127 W528 |
-| .github/workflows/README.md | W528 | v2.3.127 修改·头部版本行 + 里程碑行（旁文档同步） |
-| scripts/check_index_health.py | W528 | v2.3.127 修改·B905 修复：zip(seq, seq[1:]) → itertools.pairwise（CI Code Quality 转绿·W526 存量） |
-| AGENTS.md | W528 | v2.3.127 修改·§4.3 bump_version 条目扩坑③（三页脚替换式盲区）+ 版本脚注 W528 条目 |
-| site/index.html | W528 | v2.3.127 修改·页脚链头 prepend v2.3.127 W528（原滞留在 v2.3.68 W453） |
-| site/data/cross-time-danmaku.html | W528 | v2.3.127 修改·页脚链头 prepend v2.3.127 W528（原滞留在 v2.3.68 W453） |
-| site/data/tag-cloud.html | W528 | v2.3.127 修改·页脚链头 prepend v2.3.127 W528（原滞留在 v2.3.68 W453） |
-
-## W527 drift-audit 技能补漏维度（2026-08-26·v2.3.126）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| skills/xiyouji-drift-audit/SKILL.md | W527 | v2.3.126 修改·v1.1.0→v1.2.0：步骤 3 新增段缺失（双向交叉核对）维度 = P1（W504 实证）+ 豁免区外新增倒序错位判级 P3→P1（W522-W524 实证）·门禁覆盖表述更新（W526 起第 17 门禁含段倒序断言 + 段缺失检测）+ 步骤 8 P1 分级/验证清单同步 |
-| skills/xiyouji-drift-audit/reference.md | W527 | v2.3.126 修改·步骤 3 命令区补段缺失双向差集命令（comm -23/-13）+ 类型 A 补段缺失实证 + 类型 I 判级 P1/P3 分级 + 新增类型 J（W525 实证双漏网 → W526 转自动化） |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W527 | v2.3.126 修改·六文档同步（编号上限 W001-W526） |
-
-## W526 索引健康门禁盲区封堵（2026-08-26·v2.3.125）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_index_health.py | W526 | v2.3.125 修改·第 17 门禁扩展：新增检查 6 段倒序断言（豁免区外严格递减）+ 检查 7 段缺失检测（CHANGELOG 现役版段须均有 file-index 登记段）·修复新增正则全角问号误用 |
-| scripts/verify_delivery.py | W526 | v2.3.125 修改·新增第 23 门禁旁文档同步（workflows/README.md 头部版本行 == 现役 v/W + 里程碑行上限 == 现役 W） |
-| .github/workflows/README.md | W526 | v2.3.125 修改·头部版本行 + 里程碑行升版（受第 23 门禁校验） |
-| docs/00-导读/文档规范.md | W526 | v2.3.125 修改·§8 门禁表第 17 条描述扩展 + 新增第 23 门禁行 |
-| AGENTS.md | W526 | v2.3.125 修改·§4.2 第 17 条描述扩展 + 新增第 23 门禁 + 版本脚注 |
-| site/dukou-engine.html | W526 | v2.3.125 修改·页脚链头 prepend v2.3.125 W526 |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W526 | v2.3.125 修改·六文档同步（编号上限 W001-W525） |
-
-## W525 漂移审查修复（2026-08-26·v2.3.124）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/output/file-index.md | W525 | v2.3.124 修复·W504 段缺失补建 + W522/W523/W524 段尾部追加重排归位至 W521 前（删除三段 bump 残留快照行）+ 本段登记 |
-| .github/workflows/README.md | W525 | v2.3.124 修复·头部版本行 W514→W524 + 里程碑行 W450-W503→W450-W524（补 W504-W524 摘要） |
-| docs/00-导读/文档规范.md | W525 | v2.3.124 修复·§8 门禁表补漏列两项（学术轨显式引用 + site/data 回退模式）对齐 AGENTS §4.2 22 条 |
-| site/dukou-engine.html | W525 | v2.3.124 修改·页脚链头 prepend v2.3.124 W525 |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W525 | v2.3.124 修改·六文档同步（编号上限 W001-W525） |
-
-## W524 bump 追加污染坑位补记——--desc/--note 双触发固化（2026-08-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| AGENTS.md | W524 | v2.3.123 修改·§4.3 bump_version 坑②扩为 --desc/--note 双触发 + 坑①补记 file-index 空壳段现象 + 版本脚注 |
-| CHANGELOG.md | W524 | v2.3.123 修改·W524 段四件套 + 编号范围 W001-W524 |
-| site/dukou-engine.html | W524 | v2.3.123 修改·页脚链头 prepend v2.3.123 W524 |
-| 交接文档.md | W524 | v2.3.123 修改·头部链/HEAD/一段头/里程碑概要/尾页脚历史链（W521 条目摘除保持 ≤3 批） |
-| README.md | W524 | v2.3.123 修改·版本行 W524 + W 范围 W001-W524 ×2（bump_version 辅助同步） |
-| STRUCTURE.md | W524 | v2.3.123 修改·当前版本行 W524 描述（净化 --note 追加残留） |
-| docs/00-导读/项目说明.md | W524 | v2.3.123 修改·头部引用行（--note 直替）+ 当前版本行 W524 描述手工对齐 |
-| scripts/output/file-index.md | W524 | v2.3.123 修改·新增 W524 段登记本批 8 文件（bump 生成空壳表头·手工补全） |
-
-## W523 截图审查恒全量根因修复（scope diff 加 core.quotePath=false）（2026-08-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/screenshot-review.yml | W523 | v2.3.122 修改·scope 步骤三处 git diff 统一加 -c core.quotePath=false（中文路径八进制转义致 case 免审失配恒落保守全量 ~11min）+ 注释 |
-| AGENTS.md | W523 | v2.3.122 修改·§4.3 工具链新增 quotePath 强制规则 + 版本脚注 |
-| CHANGELOG.md | W523 | v2.3.122 修改·W523 段四件套 + 编号范围 W001-W523 |
-| site/dukou-engine.html | W523 | v2.3.122 修改·页脚链头 prepend v2.3.122 W523 |
-| 交接文档.md | W523 | v2.3.122 修改·头部链/HEAD/一段头/里程碑概要/E47 登记/尾页脚历史链 + 权威文档 W 范围行 |
-| README.md | W523 | v2.3.122 修改·版本行 W523 + W 范围 W001-W523 ×2（bump_version 辅助同步） |
-| STRUCTURE.md | W523 | v2.3.122 修改·当前版本行 W523 描述（净化 --desc 追加残留） |
-| docs/00-导读/项目说明.md | W523 | v2.3.122 修改·头部引用行 + 当前版本行 W523 |
-| scripts/output/file-index.md | W523 | v2.3.122 修改·新增 W523 段登记本批 9 文件 |
-
-## W522 CI 红灯修复（2026-08-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/inject_goatcounter.py | W522 | v2.3.121 修改·根因修复 :68 字符串未闭合（转义闭引号还原·行为零变更） |
-| scripts/check_dynamic_links.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
-| scripts/check_glossary.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
-| scripts/check_governance_docs.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
-| scripts/check_motion_ban.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
-| scripts/check_token_coverage.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
-| scripts/extract_strings.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
-| scripts/validate_en.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
-| CHANGELOG.md | W522 | v2.3.121 修改·W522 段四件套 + 编号规则上限 W522 |
-| 交接文档.md | W522 | v2.3.121 修改·进度标题/概要区/最后更新链头插入 W522 + 零段 HEAD 同步 |
-| README.md | W522 | v2.3.121 修改·版本行 W522 + W 范围 W001-W522 ×2 |
-| STRUCTURE.md | W522 | v2.3.121 修改·当前版本行 W522 描述（净化 --desc 追加残留） |
-| docs/00-导读/项目说明.md | W522 | v2.3.121 修改·头部引用行 + 当前版本行 W522（净化 --desc 残留） |
-| scripts/output/file-index.md | W522 | v2.3.121 修改·新增 W522 段登记本批 16 文件 |
-| site/dukou-engine.html | W522 | v2.3.121 修改·页脚链头 prepend v2.3.121 W522 |
-| AGENTS.md | W522 | v2.3.121 修改·版本脚注追加 W522 条目 |
-
-## W521 存量裸字面量清剿 + W463 三坑补登记（2026-08-25·v2.3.120）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| skills/xiyouji-en-translation/SKILL.md | W521 | v2.3.120 修改·陷阱清单「共 615 篇」→「共 N 篇（值以 README 版本行/verify 输出为准，当前 N=615）」 |
-| skills/xiyouji-character-content/SKILL.md | W521 | v2.3.120 修改·desc「A3 板块 215 篇」→「篇数以统计口径说明为准」 |
-| skills/xiyouji-character-content/references/quality-gates.md | W521 | v2.3.120 修改·verify 描述「A4 209」加注「随批次校正、以 verify_delivery 输出为准」 |
-| skills/xiyouji-characters-knowledge/SKILL.md | W521 | v2.3.120 修改·「215 个角色名录」→「角色名录（篇数以 roster 实际为准）」 |
-| skills/xiyouji-characters-knowledge/references/roster.md | W521 | v2.3.120 修改·标题「215 篇」→「篇数以目录实际为准」 |
-| skills/README.md | W521 | v2.3.120 修改·索引表「roster 215」→「roster 人物名录」 |
-| skills/xiyouji-version-bump/SKILL.md | W521 | v2.3.120 修改·desc「共 615 篇」→「共 N 篇（值随批次校正，当前 N=615）」 |
-| skills/xiyouji-drift-audit/SKILL.md | W521 | v2.3.120 修改·检查项「计数引用（615/209/86）」加注「随批次校正、以实际为准」 |
-| skills/xiyouji-drift-audit/reference.md | W521 | v2.3.120 修改·排查命令「615\|209\|86」改 -nE + 加注「随批次校正」 |
-| skills/xiyouji-plan-review/SKILL.md | W521 | v2.3.120 修改·口径陷阱「87/86/85」加注「页数以实际为准，随批次校正」 |
-| skills/xiyouji-visual-batch/SKILL.md | W521 | v2.3.120 修改·探针扫描面「233 页」加注「页数以 site/ 实际为准随批次校正」 |
-| 交接文档.md | W521 | v2.3.120 修改·头部滚动链/当前 HEAD/进度标题链/里程碑 bullet/尾页脚链首五处同步 + 「三」新增 W463 段（E45 W 批收尾三坑补登记·编号空间完整化） |
-| CHANGELOG.md | W521 | v2.3.120 修改·编号规则段 W001-W521 + 新增 v2.3.120/W521 段（四件套） |
-| README.md | W521 | v2.3.120 修改·L5 当前版本行 bump 至 v2.3.120 |
-| STRUCTURE.md | W521 | v2.3.120 修改·L4 当前版本行 bump 至 v2.3.120 |
-| docs/00-导读/项目说明.md | W521 | v2.3.120 修改·L5 主行 + L47 次级版本行 bump 至 v2.3.120 |
-| AGENTS.md | W521 | v2.3.120 修改·版本脚注追加 W521 条目（无 § 结构性变更） |
-| site/dukou-engine.html | W521 | v2.3.120 修改·页脚长链人工前置 W521 段 |
-| scripts/output/file-index.md | W521 | v2.3.120 修改·W521 段登记（本段） |
-
-## W520 递增数字禁字面量 + skills 内文数字比对维度（2026-08-25·v2.3.119）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| skills/xiyouji-plan-authoring/SKILL.md | W520 | v2.3.119 修改·去模糊化成文标准新增第 5 条「递增数字引用式」+ 陷阱清单同步 + 验证清单新增自查项（version 1.1.0→1.2.0） |
-| skills/xiyouji-day-review/SKILL.md | W520 | v2.3.119 修改·步骤 4 新增第 8 条「递增数字字面量扫描」+ 陷阱 9 + 验证清单自体病例治愈「六项」→「逐项以步骤 4 现行清单为准」（version 1.1.0→1.2.0） |
-| skills/xiyouji-drift-audit/SKILL.md | W520 | v2.3.119 修改·步骤 5 第 4 条固化为「skill 内部数字引用 vs 权威值比对」固定维度（version 1.0.0→1.1.0） |
-| skills/xiyouji-drift-audit/reference.md | W520 | v2.3.119 修改·步骤 5 命令区新增 3 条排查命令 + 案例库「举一反三型」新增 W520 扩展段 + 「修复后验证」区自体病例治愈「17 门禁全绿」→「全部门禁全绿」 |
-| 交接文档.md | W520 | v2.3.119 修改·头部滚动链/当前 HEAD/进度标题链/里程碑 bullet/尾页脚链首五处同步 + 「三」新增 W520 段（E46 递增数字禁字面量·复现计数器 3/3·E45 已被 W460-W463 三坑占用顺延） |
-| CHANGELOG.md | W520 | v2.3.119 修改·编号规则段 W001-W520 + 新增 v2.3.119/W520 段（P2 三提案四件套） |
-| README.md | W520 | v2.3.119 修改·L5 当前版本行 bump 至 v2.3.119 |
-| STRUCTURE.md | W520 | v2.3.119 修改·L4 当前版本行 bump 至 v2.3.119 |
-| docs/00-导读/项目说明.md | W520 | v2.3.119 修改·L5 主行 + L47 次级版本行 bump 至 v2.3.119 |
-| AGENTS.md | W520 | v2.3.119 修改·版本脚注追加 W520 条目（无 § 结构性变更） |
-| site/dukou-engine.html | W520 | v2.3.119 修改·页脚长链人工前置 W520 段 |
-| scripts/output/file-index.md | W520 | v2.3.119 修改·W520 段登记（本段）+ DRL 复验补充登记 |
-| skills/xiyouji-version-bump/reference.md | W520 | v2.3.119 修改·DRL 复验修复「当前基准（W425 时）」错锚快照 →「示例值·随批次校正·W514 定稿口径」（锚点/数值错位修正） |
-
-> W520 段 DRL 复验说明：deep-review-loop（R1a 3 verifier + R1b 对抗 + R2 独立审计）后同批补充修复 8 项（详见 CHANGELOG v2.3.119「DRL 复验补充」行）——规则补门禁依赖豁免 / reference 排查命令实测修正 / 防线口径统一「两道」/ 扫描范围补 AGENTS.md / 补 E2 判据 / 案例归属修正 / 验证措辞限定 / version-bump 错锚快照；三 skill + 两 reference 经 sync_skills --sync 二次同步双轨一致。
-
-## W519 Skills 全目录审查与 SKILL.md 内容优化（2026-08-25·v2.3.118）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| skills/xiyouji-character-content/SKILL.md | W519 | v2.3.118 修改·desc 人物计数 211→215（A 类）+ 补顶层 version: 1.0.0（D 类） |
-| skills/xiyouji-characters-knowledge/SKILL.md | W519 | v2.3.118 修改·角色名录行 211→215（A 类）+ 补顶层 version: 1.0.0（D 类） |
-| skills/xiyouji-characters-knowledge/references/roster.md | W519 | v2.3.118 修改·标题人物谱系计数 211→215（A 类） |
-| skills/xiyouji-version-bump/SKILL.md | W519 | v2.3.118 修改·内容规模「共 611」→「共 615」×3 处修正（A 类） |
-| skills/xiyouji-version-bump/reference.md | W519 | v2.3.118 修改·「共 611」→「共 615」×4 处修正·含 :32 A3 计数口径行（A 类） |
-| skills/xiyouji-en-translation/SKILL.md | W519 | v2.3.118 修改·收尾提示内容规模 611→615（A 类） |
-| skills/xiyouji-drift-audit/SKILL.md | W519 | v2.3.118 修改·B 类门禁数去硬编码 ×4（改「随批次递增、以 verify 输出为准」）+ A 类转述示例同步 |
-| skills/xiyouji-drift-audit/reference.md | W519 | v2.3.118 修改·B 类去硬编码 ×3 + A 类排查命令示例修正（:138 E2 历史案例引文按口径保留旧值） |
-| skills/xiyouji-day-review/SKILL.md | W519 | v2.3.118 修改·B 类门禁数去硬编码 ×1（同上表述） |
-| skills/xiyouji-sun-wukong/SKILL.md | W519 | v2.3.118 修改·D 类补顶层 version: 1.0.0 |
-| skills/xiyouji-zhu-bajie/SKILL.md | W519 | v2.3.118 修改·D 类补顶层 version: 1.0.0 |
-| skills/xiyouji-sha-seng/SKILL.md | W519 | v2.3.118 修改·D 类补顶层 version: 1.0.0 |
-| skills/xiyouji-tangseng/SKILL.md | W519 | v2.3.118 修改·D 类补顶层 version: 1.0.0 |
-| skills/xiyouji-bai-longma/SKILL.md | W519 | v2.3.118 修改·D 类补顶层 version: 1.0.0 |
-| skills/README.md | W519 | v2.3.118 修改·索引表 roster 计数 211→215（A 类·仓库权威索引·sync 范围外） |
-| AGENTS.md | W519 | v2.3.118 修改·§3 目录树注释 skill 数 17→19（C 类树注释漏更修正）+ 版本脚注追加 W519 条目 |
-| CHANGELOG.md | W519 | v2.3.118 修改·编号规则段 W001-W519 + 新增 v2.3.118/W519 段（四类修复摘要 + 文件清单 + 验证行） |
-| 交接文档.md | W519 | v2.3.118 修改·头部滚动链/进度标题链/里程碑 bullet（数字终稿 A 类 14 处）/尾页脚链首等五处同步 |
-| README.md | W519 | v2.3.118 修改·L5 当前版本行 bump 至 v2.3.118 |
-| STRUCTURE.md | W519 | v2.3.118 修改·L4 当前版本行 bump 至 v2.3.118 |
-| docs/00-导读/项目说明.md | W519 | v2.3.118 修改·L5 主行 + L47 次级版本行 bump 至 v2.3.118 |
-| scripts/output/file-index.md | W519 | v2.3.118 修改·W519 段登记（本段） |
-| site/dukou-engine.html | W519 | v2.3.118 修改·页脚长链人工前置 W519 段 |
-
-## W518 期望版本动态化 + 尾页脚新鲜度门禁（2026-08-25·v2.3.117）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/verify_delivery.py | W518 | v2.3.117 修改·期望版本动态取自 CHANGELOG 现役版段（latest_version_from_changelog/parse_footer_version 纯函数）·dukou-engine 页脚降级新鲜度 WARN |
-| scripts/check_governance_docs.py | W518 | v2.3.117 修改·检查 7「最后更新」新鲜度挂载：交接文档头尾两处链首均须==CHANGELOG 现役段（finditer 全量·WARN 起步） |
-| tests/test_verify_delivery_version.py | W518 | v2.3.117 新增·TDD 11 测试（动态版本源 6 + 治理检查 7 finditer 全量 5·含双活体拦截用例） |
-| skills/xiyouji-day-review/SKILL.md | W518 | v2.3.117 修改·步骤 4 新增第 7 条清单项（「最后更新」随批前置）+ version 1.1.0 |
-| scripts/output/file-index.md | W518 | v2.3.117 修改·W518 段登记（本段·bump 底部空壳块清除） |
-| CHANGELOG.md | W518 | v2.3.117 修改·脚本插入 v2.3.117/W518 段 + 验证行/文件行当批实测更正（11 测试/302 passed/仅 dukou 页脚） |
-| 交接文档.md | W518 | v2.3.117 修改·头部滚动链/HEAD 句/进度链/里程碑 bullet/尾页脚前置共 5 处 |
-| README.md | W518 | v2.3.117 修改·bump 版本行 + 目录 W 范围 W001-W518 |
-| STRUCTURE.md | W518 | v2.3.117 修改·版本行手工净化 bump 坑②追加残留 |
-| docs/00-导读/项目说明.md | W518 | v2.3.117 修改·主行 bump + L47 次级版本行手工修复坑②变体 |
-| site/dukou-engine.html | W518 | v2.3.117 修改·页脚长链人工前置 W518 段（降级为新鲜度被检对象后仍为 bump 缺省读取源） |
-| AGENTS.md | W518 | v2.3.117 修改·§4.2 第 1 条补动态版本源 + 第 22 门禁扩七项检查 + 版本脚注 |
-| docs/00-导读/文档规范.md | W518 | v2.3.117 修改·§8 verify_delivery 行门禁数 20→22 + 动态版本源口径 |
-
-## W517 共享机制载体铁律（2026-08-25·v2.3.116）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| AGENTS.md | W517 | v2.3.116 修改·§4.3 新增「共享机制必须写入仓库内文件」规则（禁只写全局路径·改 skill 后 sync 同步全局） |
-| 交接文档.md | W517 | v2.3.116 修改·「三」新增 W517 段（W516 载体错误教训固化） |
-
-## W516 经验上移机制固化（2026-08-25·v2.3.115）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| AGENTS.md | W516 | v2.3.115 修改·§4.3 补录 Windows heredoc 禁 + 跨 session 先确认远端 |
-| 交接文档.md | W516 | v2.3.115 修改·「三」新增 W516 段（E44/E34/E41/E36-42 五组经验登记） |
-
-## W515 渲染抽查常驻化 + 门禁正文引用存在性检查（2026-08-25·v2.3.114）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/render_check.js | W515 | v2.3.114 新增·Playwright 常驻渲染抽查（--page 可重复/内容断言/styled 背景/390·414 溢出/pageerror/console 白名单/--dark 截图·dukou-engine 冒烟 exit 0） |
-| tests/test_skills_reference_integrity.py | W515 | v2.3.114 新增·TDD 9 测试（SCRIPT_REF_RE 提取 4 + 缺失判定 4 + 真实仓库冒烟 1） |
-| scripts/check_skills_index.py | W515 | v2.3.114 修改·检查 5「skill 正文引用资产存在性」挂载（修复前 CLI exit 1 抓失效 2 处） |
-| skills/xiyouji-day-review/SKILL.md | W515 | v2.3.114 修改·L59 `_shot_check.js` 失效指针改指 `node scripts/render_check.js --page <页面> --dark` |
-| skills/xiyouji-day-review/reference.md | W515 | v2.3.114 修改·L42 `_shot_check.js` 失效指针改指 `scripts/render_check.js` |
-| CHANGELOG.md | W515 | v2.3.114 修改·脚本插入 v2.3.114/W515 段（锚点唯一+防重入断言） |
-| 交接文档.md | W515 | v2.3.114 修改·HEAD 句/进度链头/里程碑 bullet/尾页脚最后更新条目（补 W505-W514 九批漏更中的当前批） |
-| README.md | W515 | v2.3.114 修改·当前版本行 + 目录 W 帖与正向索引描述（W001-W515）手工同步 |
-| STRUCTURE.md | W515 | v2.3.114 修改·版本行手工同步并净化 bump 坑②追加残留 `+ W514（…）` |
-| docs/00-导读/项目说明.md | W515 | v2.3.114 修改·头部版本行 + 项目状态版本行同步 |
-| 新Agent启动Prompt.md | W515 | v2.3.114 修改·Python 执行规则升级 py -3（裸 python shim 静默 no-op 实证）+ 示例命令同步 |
-| AGENTS.md | W515 | v2.3.114 修改·§4.2 第 16 门禁补录正文引用资产存在性子检查 + 版本脚注 |
-| scripts/output/file-index.md | W515 | v2.3.114 修改·W515 段登记（本段） |
-
-## W514 治理文档口径修复（2026-08-25·v2.3.113）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-08-25-w514-governance-doc-consistency-fix.md | W514 | v2.3.113 新增·《治理文档口径修复》方案档（五元数字校正+第 21/22 门禁登记·Phase 0-7 三拍闭环） |
-| AGENTS.md | W514 | v2.3.113 修改·五元数字校正（611→615·A3 211→215·CSP 措辞改当批现测）+ §4.2 补录第 21/22 门禁登记 |
-| 新Agent启动Prompt.md | W514 | v2.3.113 修改·五元口径同步（615 篇/A3 215 篇/CSP 当批现测/86 可视化页口径） |
-| CHANGELOG.md | W514 | v2.3.113 修改·新增 v2.3.113/W514 段 + 编号上限 W514 |
-| 交接文档.md | W514 | v2.3.113 修改·HEAD 句/进度链头/里程碑 bullet/最后更新条目（73→3 裁剪至最近三批） |
-| README.md | W514 | v2.3.113 修改·当前版本行 + 目录 W 帽（W001-W514）同步（bump_version） |
-| STRUCTURE.md | W514 | v2.3.113 修改·版本行同步（bump_version） |
-| docs/00-导读/项目说明.md | W514 | v2.3.113 修改·五元口径校正 + 版本行同步 |
-| docs/00-导读/文档规范.md | W514 | v2.3.113 修改·E4.1 CSP 措辞改当批现测 |
-| docs/00-导读/统计口径说明.md | W514 | v2.3.113 修改·六处口径落地 + §6 数字修正溯源（根因 W505 cd6d7b8） |
-| site/dukou-engine.html | W514 | v2.3.113 修改·页脚链头部插入 v2.3.113 W514 节点 |
-| .github/workflows/README.md | W514 | v2.3.113 修改·版本帽 W450-W500→W450-W514 + v2.3.99 W500→v2.3.113 W514 |
-| docs/INDEX.md | W514 | v2.3.113 修改·docs_index.py 重建收录 W514 方案档（663 篇/11 板块） |
-| scripts/output/file-index.md | W514 | v2.3.113 修改·W514 段登记（本段·bump_version 底部追加块归位清理） |
-
-## W513 归档二级归档（2026-08-25·v2.3.112）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| CHANGELOG-ARCHIVE.md | W513 | v2.3.112 修改·W001-W399 下移 tier2（917→150.4KB）·头部改「W400+」+ 指针 |
-| docs/archive/CHANGELOG-ARCHIVE-tier2.md | W513 | v2.3.112 新增·二级归档层（W001-W399·745.7KB·自含头部+指针） |
-| scripts/verify_delivery.py | W513 | v2.3.112 修改·ARCHIVE_DOCS 新增 tier2（范围漂移可追溯） |
-| docs/00-导读/文档规范.md | W513 | v2.3.112 修改·§5 二级归档规则 + §8 健康指标（归档三件套 >1MB 触发） |
-| scripts/_w513_archive_tier2.py | W513 | v2.3.112 新增·二级归档脚本（入库） |
-
-## W512 CI 安全批次（2026-08-25·v2.3.111）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/security_scan.py | W512 | v2.3.111 修改·pip-audit 子进程 timeout 120→300（消除 DEP-001 超时误报·真实依赖漏洞=0） |
-
-## W511 治理文档健康指标归档（2026-08-25·v2.3.110）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| CHANGELOG.md | W511 | v2.3.110 修改·W417-W464 段归档（158KB→49KB·235 行）·头部归档标注更新（仅保留 v2.3.83+/W484+）·编号上限 W511 |
-| CHANGELOG-ARCHIVE.md | W511 | v2.3.110 修改·追加 W511 归档段（W417-W448）+ 归档段-2（W449-W464）·头部归档时间更新 |
-| scripts/output/file-index.md | W511 | v2.3.110 修改·W417-W448 段 + 损坏区清理归档（82KB→35.8KB·335 行）·头部「仅保留 W449+」更新 |
-| scripts/output/file-index-archive.md | W511 | v2.3.110 修改·追加 W511 归档段·头部归档时间更新 |
-| 交接文档.md | W511 | v2.3.110 修改·里程碑概要保留最近 5 版（W506-W510）·W505 及更早归档·概要 408→19 行 |
-| 交接文档-archive.md | W511 | v2.3.110 修改·追加 W511 里程碑概要归档段·头部扩容说明更新 |
-| scripts/_w511_archive.py 等 3 个 | W511 | v2.3.110 新增·归档批次脚本（CHANGELOG/file-index/交接文档 三档瘦身） |
-
-## W510 治理文档修复（2026-08-25·v2.3.109）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/00-导读/文档规范.md | W510 | v2.3.109 修改·§8 门禁数 17→20（补 W501-503 三项）+ §11.4 第 9 项「核心 6 文档」→「核心 2 硬+辅助 4 WARN」口径统一；健康指标超标登记待办 |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W510 | v2.3.109 修改·六文档同步（编号上限 W001-W510） |
-
-## W509 经验上移共享（2026-08-25·v2.3.108）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| AGENTS.md | W509 | v2.3.108 修改·§4.3 工具链新增 3 条强制规则（Set-Content BOM 禁/同文件 Edit 串行/引文探针+canonical 预查）+ §6 铁律新增第 13 条内容可信度轨 |
-| 交接文档.md | W509 | v2.3.108 修改·「三、方法论沉淀」登记 W505-508 四类规则 + W507-508 上移机制方法论 |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W509 | v2.3.108 修改·六文档同步（编号上限 W001-W509） |
-
-## W508 复盘剩余项收口（2026-08-25·v2.3.107）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_check_pipeline_consistency.py | W508 | v2.3.107 新增·管线一致性轻量校验（P3-7：C1 管线标记/C2 生成来源须 创意三明治管线@/C3 引文 ≥3·不入库门禁） |
-| skills/xiyouji-character-content/SKILL.md | W508 | v2.3.107 修改·Step 4 新增第 7 步管线一致性检查（--file 模式） |
-| skills/xiyouji-character-content/references/creative-methods.md | W508 | v2.3.107 修改·方法四去重为速查摘要+指向 SKILL 管线章节为协议单一事实源（修数字漂移 50→≥20） |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W508 | v2.3.107 修改·六文档同步（编号上限 W001-W508） |
-
-## W507 复盘沉淀落地（2026-08-25·v2.3.106）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_cite_probe.py | W507 | v2.3.106 新增·引文候选提取探针（E-A 沉淀永久化：--kw/--chap/--min-len/--max-len/--frag·写引文前从 text-search.json 提取候选·禁凭记忆编造） |
-| skills/xiyouji-day-review/SKILL.md | W507 | v2.3.106 修改·步骤 4 新增第 6 项「归档/删除脚本查 tests/ 引用」（W506 教训固化） |
-| skills/xiyouji-character-content/SKILL.md | W507 | v2.3.106 修改·深化专题步补引文探针工具引用（写引文前先跑 _cite_probe.py） |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W507 | v2.3.106 修改·六文档同步（编号上限 W001-W507） |
-
-## W506 处置遗留（2026-08-25·v2.3.105）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| tests/test_fix_svg_negative_widths.py | W506 | v2.3.105 删除·W447 归档 fix_svg_negative_widths.py 时漏删的配套测试（引用已归档模块致 pytest 收集失败）；脚本仍在 scripts/archive/ 可追溯 |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W506 | v2.3.105 修改·六文档同步（编号上限 W001-W506） |
-
-## W505 创意流程闭环落地（2026-08-25·v2.3.104）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| skills/xiyouji-character-content/SKILL.md | W505 | v2.3.104 修改·新增「创意三明治管线」章节（四步固定流程·显式触发·生成来源记 创意三明治管线@commit） |
-| docs/02-人物深度分析/菩提祖师-方向二深化.md | W505 | v2.3.104 新增·创意三明治管线试点（种子：师父与逐出+算无遗策+心学隐喻·3 条引文 100% 命中·核验状态 引文已核验） |
-| docs/02-人物深度分析/黑熊精-方向二深化.md | W505 | v2.3.104 新增·创意三明治管线试点（种子：被招安+品味+守山后半生·3 条引文 100% 命中·核验状态 引文已核验） |
-| docs/02-人物深度分析/金角银角-方向二深化.md | W505 | v2.3.104 新增·创意三明治管线试点（种子：烧火童子出差+五件套悖论+职场关系学·3 条引文 100% 命中·核验状态 引文已核验） |
-| docs/02-人物深度分析/高翠兰-方向二深化.md | W505 | v2.3.104 新增·创意三明治管线试点（种子：沉默翠兰+婚姻经济学+三次回家·3 条引文 100% 命中·核验状态 引文已核验） |
-| docs/10-方法论沉淀/README.md | W505 | v2.3.104 核验·2 篇方法论文档索引已含（W499 暂存版，双向覆盖核验跳过） |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W505 | v2.3.104 修改·六文档同步（编号上限 W001-W505·A1-A6 计数 611→615） |
-
-## W504 存量核验状态基线 + 学术轨 105 篇引文核验（2026-08-25·v2.3.103）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/01-06 全部 .md（611 篇） | W504 | v2.3.103 修改·核验状态字段全覆盖（批量打标「未核验」·幂等脚本·基线豁免不变） |
-| 学术轨 105 篇（docs/02×4 + docs/03×66 + docs/04×33 + docs/05×2） | W504 | v2.3.103 修改·补 ≥3 条原文引文行 + 核验状态升「引文已核验」（A+ 路径·绿标 105/105·引文 411 条 100% 命中） |
-| scripts/_w504_trust_baseline.py | W504 | v2.3.103 新增·611 篇核验状态批量打标（幂等·插入位置三型） |
-| scripts/_w504_cite_find.py | W504 | v2.3.103 新增·原著句子检索辅助（subagent 补引文用） |
-| scripts/output/_w504_acad_list.txt | W504 | v2.3.103 新增·学术轨 105 篇清单（verify 首匹配口径） |
-| scripts/output/content-trust-report.json + .md | W504 | v2.3.103 新增·三值分布报告（未核验 506·引文已核验 105·专家 0） |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W504 | v2.3.103 修改·六文档同步（编号上限 W001-W504） |
-
-## W503 原著引文硬验证（2026-08-24·v2.3.102）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_citations.py | W503 | v2.3.102 新增·第 20 门禁（原文引文行对 text-search.json 精确子串命中·去空白归一·--file/--dir 模式·越界/空引文/非全角引号均报错） |
-| scripts/verify_delivery.py | W503 | v2.3.102 修改·挂载第 20 门禁原著引文核验（--dir docs 全量） |
-| docs/00-导读/文档规范.md | W503 | v2.3.102 修改·§4.8 原著引文语法新立 + §4.6 核验状态引用补实脚本路径 |
-| skills/xiyouji-character-content/SKILL.md | W503 | v2.3.102 修改·深化专题硬规则 ≥3 条引文行 + Step 4 引文核验步 |
-| skills/xiyouji-s4-submission/SKILL.md | W503 | v2.3.102 修改·阶段 2 补 check_citations.py 调用说明 |
-| site/dukou-engine.html | W503 | v2.3.102 修改·长链页脚 prepend W503 条目 |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W503 | v2.3.102 修改·六文档同步（编号上限 W001-W503） |
-
-## W502 术语一致性门禁（2026-08-24·v2.3.101）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_glossary.py | W502 | v2.3.101 新增·第 19 门禁（C1 术语表↔json 双向同步 + C2 称谓组规范词锚定·传递归一·复合词掩码·--generate/--build-baseline/--file 模式） |
-| dataset/glossary.json | W502 | v2.3.101 新增·机器可读术语库（6 组 59 条目·--generate 解析生成·禁手改） |
-| scripts/output/glossary-baseline.txt | W502 | v2.3.101 新增·存量违规基线（303 篇 383 条·2026-08-24 实测冻结） |
-| scripts/verify_delivery.py | W502 | v2.3.101 修改·挂载第 19 门禁术语一致性 |
-| docs/00-导读/文档规范.md | W502 | v2.3.101 修改·§4.7 术语一致性新立（单一事实源/C1/C2/基线豁免/已知局限） |
-| site/dukou-engine.html | W502 | v2.3.101 修改·长链页脚 prepend W502 条目 |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W502 | v2.3.101 修改·六文档同步（编号上限 W001-W502） |
-
-## W501 元信息块 v2（2026-08-24·v2.3.100）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_frontmatter.py | W501 | v2.3.100 新增·第 18 门禁（新文件血缘+核验状态 4 字段：生成来源/生成模型/生成日期/核验状态三值·基线豁免） |
-| scripts/output/frontmatter-baseline.txt | W501 | v2.3.100 新增·存量 611 篇豁免清单（docs/01-06 冻结基线） |
-| scripts/verify_delivery.py | W501 | v2.3.100 修改·挂载第 18 门禁元信息块 v2 |
-| docs/00-导读/文档规范.md | W501 | v2.3.100 修改·§4.6 元信息块 v2 新立（4 字段枚举口径 + 空真防护 + 门禁挂载说明） |
-| skills/xiyouji-character-content/SKILL.md | W501 | v2.3.100 修改·Step 2 追加 v2 血缘 4 字段必填模板 |
-| docs/superpowers/plans/2026-08-24-content-trust-provenance-w501-w505.md | W501 | v2.3.100 新增·《内容可信度与溯源体系》方案（W501-W505 路线图·含口径修正 109→105） |
-| site/dukou-engine.html | W501 | v2.3.100 修改·长链页脚 prepend W501 条目 |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W501 | v2.3.100 修改·六文档同步（编号上限 W001-W501） |
-
-## W500 索引健康门禁（2026-08-24·v2.3.99）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_index_health.py | W500 | v2.3.99 新增·第 17 门禁（file-index 段完整性/唯一性/最新段残留 + 方法论 README 双向覆盖 + CHANGELOG 编号上限）·豁免 W449-W463 损坏区 |
-| scripts/verify_delivery.py | W500 | v2.3.99 修改·挂载第 17 门禁索引健康 |
-| scripts/bump_version.py | W500 | v2.3.99 修改·bump_version_line 扩展支持 `- **当前版本**：` 次级行（仅换版本号不追加 W） |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W500 | v2.3.99 修改·六文档同步（编号上限 W001-W500） |
-| AGENTS.md | W500 | v2.3.99 修改·§4.2 补录第 17 门禁正文 + 版本脚注同步 |
-| docs/00-导读/文档规范.md | W500 | v2.3.99 修改·§7/§8/§11 与 17 门禁同步（file-index 行门禁列·17 门禁表·禁改清单补两脚本·bump W500 增强·行号 45→47） |
-| skills/xiyouji-day-review/SKILL.md | W500 | v2.3.99 修改·步骤 4 补治理文档内容引用核验 + 陷阱第 8 条 + 验证清单五项（已同步全局版） |
-| .github/workflows/README.md | W500 | v2.3.99 修改·旁文档同步（头部版本 W449→W500·W450-W500 里程碑行·Job 8 17 门禁说明·§8 双索引更新） |
-
-## W499 GitHub 协作模板 + 创意方法论沉淀（2026-08-24·v2.3.98）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/ISSUE_TEMPLATE/bug_report.md | W499 | v2.3.98 新建·bug 报告模板 |
-| .github/ISSUE_TEMPLATE/config.yml | W499 | v2.3.98 新建·issue 模板配置 |
-| .github/ISSUE_TEMPLATE/feature_request.md | W499 | v2.3.98 新建·功能请求模板 |
-| .github/ISSUE_TEMPLATE/question.md | W499 | v2.3.98 新建·提问模板 |
-| .github/PULL_REQUEST_TEMPLATE.md | W499 | v2.3.98 新建·PR 模板 |
-| docs/10-方法论沉淀/创意三明治工作流.md | W499 | v2.3.98 新建·AI 发散→人类收敛→AI 补全→人类裁决四层交替 |
-| docs/10-方法论沉淀/人机创意工作流方法论.md | W499 | v2.3.98 新建·反向约束/跨时空嫁接/幻觉驱动四层创意飞轮 + backlog 备忘 |
-| docs/10-方法论沉淀/README.md | W499 | v2.3.98 修改·索引补登 8 个存量 + 修正 2 条待创建 + 关联文档版本刷新 |
-| skills/xiyouji-character-content/SKILL.md | W499 | v2.3.98 修改·补创意方法引用（外传/方向二/随笔可选） |
-| skills/xiyouji-character-content/references/creative-methods.md | W499 | v2.3.98 新建·四层创意方法速查（提示词模板 + 红线） |
-| scripts/output/file-index.md | W499 | v2.3.98 修改·W498 段内补维护注记（W449-W463 结构问题·查历史以 CHANGELOG 为准） |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W499 | v2.3.98 修改·六文档同步 |
-
-## W498 防漂移门禁（2026-08-24·v2.3.97）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_skills_index.py | W498 | v2.3.97 新增·Skills 索引一致性门禁（目录==README==AGENTS §4.5 + 全文件 git tracked + name==目录名）·挂 verify_delivery 第 16 门禁 |
-| scripts/sync_skills.py | W498 | v2.3.97 新增·本地同步工具（--check 漂移清单 / --sync 仓库→全局，不入 CI） |
-| scripts/verify_delivery.py | W498 | v2.3.97 修改·挂载第 16 门禁 Skills 索引一致性 |
-| skills/xiyouji-plan-authoring/.skill-metadata.yaml | W498 | v2.3.97 修改·全局版回拷（含 §10 三段式表述，统一仓库为真源） |
-| skills/xiyouji-version-bump/SKILL.md | W498 | v2.3.97 修改·第 8 步补 sync_skills.py --sync + check_skills_index 必跑 |
-| AGENTS.md | W498 | v2.3.97 修改·§4.2 补录第 16 门禁 + 脚注 |
-| site/dukou-engine.html | W498 | v2.3.97 修改·footer 版本链 prepend v2.3.97 W498 |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W498 | v2.3.97 修改·六文档同步 |
-
-> **维护注记（2026-08-24 全面审查）**：本文件 W449-W463 区间存在历史遗留结构问题——W457/W458/W461/W462/W463 段登记内容缺失（空表格）、W451/W452/W453/W460 空壳重复段、W454/W455 乱序、尾部残留 v2.3.65-v2.3.78 旧版本快照行。经审查确认**维持现状不重排**（历史段禁改），该区间查历史变更一律以 [CHANGELOG.md](../../CHANGELOG.md) 为准。
-
-## W497 skills 治理同步（2026-08-24·v2.3.96）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| skills/xiyouji-visual-batch/SKILL.md | W497 | v2.3.96 同步全局版 v1.2.0（W478 脚本迁移六规则 + W488 可感知验收/暗色夜读 + M-A1 ≥1%） |
-| skills/xiyouji-visual-batch/reference.md | W497 | v2.3.96 同步全局版 v1.2.0 |
-| skills/xiyouji-plan-authoring/SKILL.md | W497 | v2.3.96 同步全局版 v1.1.0（验收三段式/派生命令/裁掉项/§10 落地回写） |
-| skills/xiyouji-plan-authoring/reference.md | W497 | v2.3.96 同步全局版 v1.1.0 |
-| skills/xiyouji-day-review/（3 文件） | W497 | v2.3.96 新增入库（SKILL.md + reference.md + .skill-metadata.yaml·此前从未 git add） |
-| skills/xiyouji-characters-knowledge/SKILL.md | W497 | v2.3.96 修改·全文检索入口 text-search.html（语料已迁出）→ dataset/text-search.json |
-| skills/xiyouji-version-bump/SKILL.md | W497 | v2.3.96 修改·新增第 8 步收尾三同步（AGENTS 脚注/路线图/方案档§10）·流程改九步·v1.1.0 |
-| skills/agent-session-loop/SKILL.md | W497 | v2.3.96 修改·补子代理不可用降级声明 |
-| skills/deep-review-loop/SKILL.md | W497 | v2.3.96 修改·补子代理不可用降级声明 + 闭环单一事实源护栏 |
-| skills/mem-wrap-up/SKILL.md | W497 | v2.3.96 修改·补子代理不可用降级声明 + 闭环单一事实源护栏 |
-| skills/self-evolution/SKILL.md | W497 | v2.3.96 修改·补子代理不可用声明 + 闭环单一事实源护栏 |
-| AGENTS.md | W497 | v2.3.96 修改·§4.5 流程类补录 day-review（总数 18）+ 版本脚注 |
-| skills/README.md | W497 | v2.3.96 修改·索引补 day-review 行·标题 17→18·治理注释补 W497 |
-| site/dukou-engine.html | W497 | v2.3.96 修改·footer 版本链 prepend v2.3.96 W497 |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W497 | v2.3.96 修改·六文档同步 |
-
-## W496 优化收尾（2026-08-22·v2.3.95）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/js/theme-init.js | W496 | v2.3.95 修改·无 .theme-toggle 页注入夜读浮动切换钮（225 页生效·根页跳过·零 CSP 改动） |
-| tests/e2e/test_smoke.js | W496 | v2.3.95 修改·检查 6 样式生效断言（html/body 背景不得同时透明） |
-| scripts/acceptance_snapshot.py | W496 | v2.3.95 新增·验收数字当批现测速览（M5/M2M3/M4/M1/断点五组） |
-| AGENTS.md | W496 | v2.3.95 修改·§4.3 验收数字禁跨批复制铁律 |
-| docs/00-导读/V2可视化维度方案.md | W496 | v2.3.95 修改·fps 遗留实测关闭回写（落地状态表+验收清单） |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W496 | v2.3.95 修改·六文档同步 |
-
-## W495 P0 热修复（2026-08-22·v2.3.94）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/*.html + site/en/*.html 225 页 | W495 | v2.3.94 修改·INLINED CSS 块恢复（W493 误清空·--force 重同步 30659B） |
-| scripts/inline_css.py | W495 | v2.3.94 修改·修 --force 的 skip-no-link 短路缺陷（已内联页可重同步） |
-| scripts/check_inlined_css.py | W495 | v2.3.94 新增·第 15 门禁（INLINED 块 ≥20KB 断言·负样本自测过） |
-| scripts/verify_delivery.py | W495 | v2.3.94 修改·挂载 INLINED CSS 门禁 |
-| scripts/baseline_snapshot.py + scripts/output/观测基线快照.md | W495 | v2.3.94 补入库（W464 宣称入库但从未提交·M6 证据链修复） |
-| docs/superpowers/plans/2026-08-22-phase-e-{e3,e4,e5,e6,w494}*.md 5 份 | W495 | v2.3.94 修改·落地状态段 + commit 回填 + 证据作废注记 |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W495 | v2.3.94 修改·六文档同步 |
-
-## W494 Phase E 遗留收尾（2026-08-22·v2.3.93）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/*.html + data/*.html + en/*.html（全站） | W494 | v2.3.93 修改·断点映射 380 处 + tag-cloud/81-hardships 溢出修复 + CSP 重跑 |
-| site/system.css | W494 | v2.3.93 修改·图表 ≤640px 降级段（图例纵排/轴文字/tooltip 收窄） |
-| docs/superpowers/plans/2026-08-22-phase-e-w494-legacy-closure.md | W494 | v2.3.93 新增·遗留收尾批次记录（字体切片关闭根因） |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W494 | v2.3.93 修改·六文档同步 |
-
-## W493 Phase E6 验收收口（2026-08-22·v2.3.92）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_token_coverage.py | W493 | v2.3.92 新增·M2/M3 门禁（私有块 UI 裸色=0/豁免≤N + 真裸 box-shadow=0） |
-| scripts/check_motion_ban.py | W493 | v2.3.92 新增·D4 动效禁止清单门禁 |
-| scripts/verify_delivery.py | W493 | v2.3.92 修改·挂载 token/动效/a11y 三门禁 |
-| site/*.html 93 页（data/en/根） | W493 | v2.3.92 修改·e-track-exempt 豁免登记（新增 6+更新 84）+ 色值/阴影映射修复 |
-| site/data/criticism-history.html + en 同名 + concept-device ×2 | W493 | v2.3.92 修改·10 处 infinite 动画改一次性 |
-| docs/superpowers/plans/2026-08-22-phase-e-e6-closure-report.md | W493 | v2.3.92 新增·Phase E 收口报告（M1-M7 + 遗留项） |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W493 | v2.3.92 修改·六文档同步 |
-
-## W492 Phase E5 响应式+微交互（2026-08-22·v2.3.91）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/system.css | W492 | v2.3.91 修改·导航抽屉组件（.nav-toggle/.nav-mask/≤768 滑出面板 display:none 关闭态） |
-| site/index.html / dashboard.html / curated.html / guide.html | W492 | v2.3.91 修改·汉堡按钮 + 遮罩 + 抽屉 JS（双 rAF）；dashboard 补 system.css link |
-| docs/superpowers/plans/2026-08-22-phase-e-e5-batch-record.md | W492 | v2.3.91 新增·E5 批次记录（推迟项显式化） |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W492 | v2.3.91 修改·六文档同步 |
-
-## W491 Phase E4 EN 站同步（2026-08-22·v2.3.90）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/en/*.html（85 页）| W491 | v2.3.90 修改·EN 同名可视化页六规则令牌化（CN 86 减 journey-geo-3d） |
-| docs/superpowers/plans/2026-08-22-phase-e-e4-batch-record.md | W491 | v2.3.90 新增·E4 批次记录（85 页迁移清单表） |
-| docs/superpowers/plans/2026-08-18-phase-e-visual-elevation-roadmap.md | W491 | v2.3.90 修改·E4 段 ✅ 回写 |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W491 | v2.3.90 修改·六文档同步 |
-
-## W490 Phase E3 CN 可视化页传播 II（2026-08-22·v2.3.89）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/*.html（30 页）| W490 | v2.3.89 修改·E3 令牌化（86−E2 56 余量）：R-SHADOW/R-RADIUS/R-TRANS/裸色白名单/R-EXEMPT 六规则；3D 2 页仅 UI 层 |
-| docs/superpowers/plans/2026-08-22-phase-e-e3-batch-record.md | W490 | v2.3.89 新增·E3 批次记录（30 页迁移清单表） |
-| docs/superpowers/plans/2026-08-18-phase-e-visual-elevation-roadmap.md | W490 | v2.3.89 修改·E3 段 ✅ 回写 + §10 表格 + 基线行 |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W490 | v2.3.89 修改·六文档同步 |
-
-## W489 全站暗色模式（2026-08-22·v2.3.88）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/tokens.css | W489 | v2.3.88 修改·dark 令牌组全局化（html[data-theme] 覆盖 15 组变量 + 深色 elev + SVG 数据色提亮 filter）+1494B |
-| site/js/theme-init.js | W489 | v2.3.88 新增·全站 theme 初始化（xy-theme→data-theme·同步防 FOUC·fail-open） |
-| site/*.html（根 9）| W489 | v2.3.88 修改·head 插 theme-init 引用（诊断 2 页豁免）；5 根页删内联 dark 通用令牌块 -1170B/页 |
-| site/data/*.html（86）| W489 | v2.3.88 修改·head 插 theme-init + inline_css --force 重新内联（dark 令牌 + hover 升级传播） |
-| site/en/*.html（138）| W489 | v2.3.88 修改·head 插 theme-init + inline_css --force 重新内联（EN 全获 dark UI 适配） |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W489 | v2.3.88 修改·六文档同步 |
-
-## W488 根页视觉重设计 + 夜读模式（2026-08-22·v2.3.87）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/system.css | W488 | v2.3.87 修改·.card/.kpi hover 升级（-3px + 朱砂外描边 40%）+ 导航指示条（::after scaleX 滑动，含 nav-strong/aria-current）+644B |
-| site/index.html | W488 | v2.3.87 修改·hero "100" 朱砂强调 + 夜读按钮 + dark 内联覆盖 + 防 FOUC + reveal + 交互 JS |
-| site/dashboard.html | W488 | v2.3.87 修改·标题/KPI 数字朱砂 + 表头淡朱砂 + route-strip 朱砂线 + KPI 圆角 2→6 + 夜读 + 环图 dark 提亮 |
-| site/curated.html | W488 | v2.3.87 修改·卡片 hover 描边 + 夜读 + reveal |
-| site/guide.html | W488 | v2.3.87 修改·7 emoji→朱砂 SVG + 卡片 hover 描边 + 夜读 + reveal |
-| site/dukou-engine.html | W488 | v2.3.87 修改·header 标题加大 + 朱砂双线 + 夜读按钮 + dark 双变量覆盖 + footer 版本链 prepend |
-| site/mobile-index.html | W488 | v2.3.87 修改·6 emoji→朱砂 SVG + hero 夜读按钮 + dark 覆盖 |
-| skills/xiyouji-plan-review/SKILL.md | W488 | v2.3.87 修改·v1.0.1：陷阱 9「视觉目标 ≠ 工程卫生验收」+ 阶段 1 动作 6 + 阶段 0 目标性质登记 + 速查表 + 验证清单（双副本同步） |
-| skills/xiyouji-plan-review/reference.md | W488 | v2.3.87 修改·§1.6 worktree 截图法 + 历史案例 7（双副本同步） |
-| docs/superpowers/plans/2026-08-18-phase-e-visual-elevation-roadmap.md | W488 | v2.3.87 修改·E2 完成态回写（68168a6·56 页）+ 感知验收后补 |
-| docs/superpowers/plans/2026-08-22-rootpages-visual-and-nightmode.md | W488 | v2.3.87 新增·方向 A 第一批方案（M-A1 感知验收强制项 + 夜读模式） |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W488 | v2.3.87 修改·六文档同步 |
-
-## W487 四会话 skill 二轮同步（2026-08-19·v2.3.86）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| skills/mem-wrap-up/SKILL.md | W487 | v2.3.86 修改·Step 7b 补 deep-review-loop 未安装降级声明（精简审查 + `DRL downgraded` 标注 + 降级≠跳过） |
-| skills/self-evolution/SKILL.md | W487 | v2.3.86 修改·触发词扩充（记住这个/capture/经验沉淀）+ 写入步骤引用格式规范 |
-| skills/self-evolution/references/experience-capture-format.md | W487 | v2.3.86 新增·经验捕获格式规范（97 行：写入格式 / 质量标准 / 边界纪律 / 手动触发 / 通用编号前缀） |
-| AGENTS.md / README.md / STRUCTURE.md / skills/README.md | W487 | v2.3.86 修改·版本脚注 + 版本行 + skills 索引注记 |
-| 交接文档.md / CHANGELOG.md / docs/00-导读/项目说明.md / scripts/output/file-index.md / site/dukou-engine.html | W487 | v2.3.86 修改·六文档同步 |
-
-## W486 四会话 skill 协议同步（2026-08-19·v2.3.85）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| skills/agent-session-loop/{SKILL.md,references/01-review.md,references/02-wrap-up.md} | W486 | v2.3.85 修改·R0 4 件套 + 过拟合警报增强版 + verdict 7 词全序 + P2 ≤ N_max（对齐上游 Claude Code 修正） |
-| skills/deep-review-loop/SKILL.md | W486 | v2.3.85 修改·verdict 禁词 5 处 6 词→7 词全序 + file size 目标 ≤500 行 / 5000 tokens |
-| skills/mem-wrap-up/SKILL.md | W486 | v2.3.85 修改·Step 6 P2 ≤ N_max + work-log 路径修正 + R0 4 件套 + bridge_note 定义 |
-| skills/self-evolution/SKILL.md | W486 | v2.3.85 修改·快速模式补「与整合版并用时」协调声明 |
-| AGENTS.md / README.md / STRUCTURE.md / skills/README.md | W486 | v2.3.85 修改·版本脚注 + 版本行 + skills 索引注记 |
-| 交接文档.md / CHANGELOG.md / docs/00-导读/项目说明.md / scripts/output/file-index.md / site/dukou-engine.html | W486 | v2.3.85 修改·六文档同步 |
-
-## W485 收录三项目 playbook（2026-08-19·v2.3.84）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| skills/xiyouji-visual-batch/{SKILL.md,reference.md,.skill-metadata.yaml} | W485 | v2.3.84 新增·Phase E 视觉批次执行管线 playbook（W476/W477 实测验证） |
-| skills/xiyouji-plan-authoring/{SKILL.md,reference.md,.skill-metadata.yaml} | W485 | v2.3.84 新增·W 批次路线图/方案撰写 playbook（九段结构） |
-| skills/xiyouji-plan-review/{SKILL.md,reference.md,.skill-metadata.yaml} | W485 | v2.3.84 新增·方案/文档评估 playbook（取证硬门槛 + 五维评估）；metadata 为本次补写 |
-| AGENTS.md | W485 | v2.3.84 修改·§4.5 补录 3 视觉/方案专项 skill（14→17）+ 版本脚注 |
-| README.md / STRUCTURE.md / skills/README.md | W485 | v2.3.84 修改·skills 计数 14→17 + 新增行 |
-| 交接文档.md / CHANGELOG.md / docs/00-导读/项目说明.md / scripts/output/file-index.md | W485 | v2.3.84 修改·六文档同步 |
-
-## W484 Skills 目录治理（2026-08-19·v2.3.83）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| skills/xiyouji-{sun-wukong,zhu-bajie,sha-seng,tangseng,bai-longma}/agents/openai.yaml | W484 | v2.3.83 修改·System.Collections.Hashtable 占位符还原为真实中文描述 |
-| skills/deep-review-loop/SKILL.md | W484 | v2.3.83 修改·新增平台适配段 + memory 路径占位符 + 工具映射 + 溯源标注 |
-| skills/mem-wrap-up/SKILL.md | W484 | v2.3.83 修改·7 步收尾协议路径占位化 + 平台适配段 |
-| skills/self-evolution/SKILL.md | W484 | v2.3.83 修改·平台适配 + 5 件套 sync verify 术语统一 |
-| skills/agent-session-loop/SKILL.md + references/01-03.md | W484 | v2.3.83 修改·编排指向仓库内独立 skill + 三 references 精简版注记 |
-| skills/xiyouji-tangseng/SKILL.md | W484 | v2.3.83 修改·「如二弟子」→「如来二弟子」错字修复 |
-| skills/xiyouji-version-bump/SKILL.md | W484 | v2.3.83 修改·陷阱清单重复条目去重 |
-| skills/xiyouji-en-translation/SKILL.md | W484 | v2.3.83 修改·footer 版本模板 v2.2.86·W334 → vX.Y.Z·W### 占位符 |
-| skills/xiyouji-characters-knowledge/references/data-sources.md | W484 | v2.3.83 修改·EN 人物页计数 10→12 |
-| skills/README.md | W484 | v2.3.83 新增·14 个 skill 索引表 + 平台适配说明 |
-| scripts/_check_skills.py | W484 | v2.3.83 新增·skill 目录自检脚本（不入 gate） |
-| AGENTS.md | W484 | v2.3.83 修改·§4.5 补录 4 会话流程 skill（10→14）+ 版本脚注 |
-| README.md / STRUCTURE.md / 交接文档.md / docs/00-导读/项目说明.md / CHANGELOG.md / scripts/output/file-index.md | W484 | v2.3.83 修改·六文档同步 + 交接文档三 skill 闭环位置仓库化 + HEAD 修正 |
-
-## W478 Phase E2 CN 可视化页传播 I（2026-08-18·v2.3.81）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data 53 页 | W478 | v2.3.81 批量·_w478_migrate.py 六规则迁移（阴影→elev/圆角→radius/时长→dur/focus 派生/裸色白名单/豁免登记） |
-| site/data/{hardship-heatmap,intertextuality-network,chapter-stats}.html | W478 | v2.3.81 试点·并行 session 3549327 人工迁移定范式 |
-| docs/superpowers/plans/2026-08-18-phase-e-e2-batch-record.md | W478 | v2.3.81 修改·56 行迁移登记表 + 验收实测 |
-| scripts/_w478_migrate.py | W478 | v2.3.81 新增·E2 迁移一次性脚本（不入门禁） |
-| scripts/_w477_shot_check.js / scripts/output/e2_list.txt | W478 | v2.3.81 修改/新增·全批 56 页 pageerror 断言 + 派生清单 |
-| site/dukou-engine.html | W478 | v2.3.81 修改·长链页脚 prepend |
-
-## W477 Phase E1 组件层 v2 + 根页模板化（2026-08-18·v2.3.80）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/system.css | W477 | v2.3.80 修改·v2：card/kpi/chart-block elev-1+hover elev-2+radius-md·btn 五态+朱砂微渐变白名单·tab/badge/search pill·tooltip elev-3·颜色令牌化·微交互工具类（+2455B） |
-| site/index.html | W477 | v2.3.80 修改·提问框全令牌化（elev/radius/渐变按钮/focus 光圈/chip pill） |
-| site/dashboard.html | W477 | v2.3.80 修改·footer 统一 site-footer + 版本 v2.2.86→v2.3.79 + focus 派生统一 |
-| site/curated.html / site/guide.html | W477 | v2.3.80 修改·卡片海拔化（elev-1/2 + radius-lg + 时长令牌） |
-| site/mobile-index.html | W477 | v2.3.80 修改·nav-card/kpi-item 令牌化 |
-| site/data/text-search.html | W477 | v2.3.80 修改·--focus-ring 未定义缺陷修复（color-mix 光圈） |
-| site/static/fonts/NotoSansSC-{Regular,Medium}.woff2 | W477 | v2.3.80 覆写·子集化 9340 字（771/783→755/766KB） |
-| site/data+en 225 页 | W477 | v2.3.80 批量·inline_css --force 重内联 system.css v2 |
-| site/dukou-engine.html | W477 | v2.3.80 修改·长链页脚 prepend |
-
-## W476 Phase E0 纸感轻立体宪改 + tokens v3（2026-08-18·v2.3.79）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/superpowers/plans/2026-08-18-phase-e-visual-elevation-roadmap.md | W476 | v2.3.79 新增·Phase E 视觉高级感升级路线图 v1.1（W476-W483·六维度·三问已决） |
-| docs/superpowers/plans/2026-08-18-phase-e-e0-probe-report.md | W476 | v2.3.79 新增·E0 探针取证报告 P1-P6 |
-| DESIGN.md | W476 | v2.3.79 修改·§4A 纸感轻立体体系新立（8 节：演进声明/四级海拔/渐变白名单/排版阶梯/圆角边框/断点/微交互清单/体积预算）+ §1.1 演进指针 |
-| site/tokens.css | W476 | v2.3.79 修改·v2→v3：--elev-0~4 海拔 + --radius-sm~pill + --border-hairline/accent + 色阶派生（--accent-deep/tint/wash + --ink-tint）+ 语义色 --ok~info + --text-step-0~5/--text-hero/--leading×3（+2035B） |
-| site/data+en 225 页 | W476 | v2.3.79 批量·inline_css --force 重内联 tokens v3 + system.css |
-| site/dukou-engine.html | W476 | v2.3.79 修改·长链页脚 prepend v2.3.79 W476 |
-
-## W464 Phase 3 观测基线确立（2026-08-18·v2.3.82）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/baseline_snapshot.py | W464 | v2.3.82 新增·观测基线快照生成器（计数+性能+UV 手填栏+闸门阈值） |
-| scripts/output/观测基线快照.md | W464 | v2.3.82 新增·机器生成基线表（611/86/138/228 + 性能三值 + UV 待回填） |
-| scripts/output/perf-baseline.json | W464 | v2.3.82 修改·W464 实测（5 核心页 LCP/CLS/TBT） |
-| scripts/_w464_perf_measure.js | W464 | v2.3.82 新增·一次性性能实测脚本 |
-| site/dukou-engine.html | W464 | v2.3.82 修改·长链页脚 prepend |
-
-## W460 墨韵全站动效体系 P0+样板批（2026-08-17·v2.3.75）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/tokens.css | W460 | v2.3.75 修改·新增动效令牌：--dur-fast/base/slow 三级时长 + --ease-out-quart/expo + --ease-in-out-soft 三系缓动 + --shadow-lift 浮起阴影 |
-| site/system.css | W460 | v2.3.75 修改·六组升级：表格行 hover 暖底+朱砂指示条+数字列加深（blanket）；opt-in .table-anim 行入场 stagger（--row-i·封顶 220ms）与 .table-wrap--sticky（>30 行）；.btn:active 按压；.kpi/.card hover 浮起；.link-ink 下划线生长；.chart-tooltip 统一 tooltip 类；.card/.search-box 裸 ease 补齐 |
-| site/index.html | W460 | v2.3.75 修改·stats count-up 脚本（900ms easeOutExpo·IO 触发一次·fail-open）+ 页脚版本 |
-| site/dashboard.html | W460 | v2.3.75 修改·KPI count-up 脚本（纯数字正则过滤·文本型跳过） |
-| site/data/chapter-stats.html | W460 | v2.3.75 修改·3 图 D3 入场编排（轴 200/网格 100+300/柱+点 500 stagger 封顶 400·easeCubicOut·折线 draw-in by getTotalLength）+ tooltip 收编 .chart-tooltip（视口钳制）+ ANIMATE 首帧门控 + reduced-motion 守卫 |
-| site/data/character-appearance.html | W460 | v2.3.75 修改·条形/热力图对角波浪/散点 stagger + tipShow/tipMove/tipHide 统一 tooltip + ANIMATE 门控 + reduced-motion 守卫 |
-| site/data/81-hardships.html | W460 | v2.3.75 修改·treemap×3 scale+fade 入场 + 桑基节点/流带淡入 + 交叉表/81 难表 .table-anim 行入场（--row-i）+ 难表（81 行）.table-wrap--sticky + 统一 tooltip + ANIMATE 门控 |
-| site/data/emotional-heatmap.html | W460 | v2.3.75 修改·热力图对角波浪 stagger + 曲线按人物级联入场 + 轴/网格淡入 + 双 tooltip 收编 .chart-tooltip（内部结构样式保留·宣纸底配色重映射）+ ANIMATE 门控 |
-| site/data/*.html（其余 81 页）+ site/en/*.html（138 页） | W460 | v2.3.75 修改·inline_css --force 同步 tokens/system 新动效样式（被动受益：表格 hover/按钮按压/卡片浮起全站生效） |
-| docs/superpowers/w-b-critique.md | W460 | v2.3.75 新增·W-b 样板批 critique 评审报告（33/40·Keep/Fix 清单·过程缺陷记录） |
-| site/data/cross-time-danmaku.html / site/data/tag-cloud.html | W460 | v2.3.75 修改·页脚版本同步（bump_version） |
-| site/dukou-engine.html | W460 | v2.3.75 修改·页脚 prepend v2.3.75 W460 |
-| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / docs/00-导读/项目说明.md / scripts/output/file-index.md | W460 | v2.3.75 修改·六文档同步（W460 四件套 + 接续编号 W461） |
-
-## W459 V2 审查收尾（2026-08-17·v2.3.74）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/journey-spacetime.html | W459 | v2.3.74 修改·D2 回目跳转死链修复：A1_DOC_MAP 内嵌 100 条真实文件名映射 + chapterDocUrl 查表/目录回退 + 路径深度 ../→../../ |
-| scripts/check_dynamic_links.py | W459 | v2.3.74 新增·动态链接门禁（内联 script 字面量链接存在性校验·--self-test 负样本自测） |
-| scripts/verify_delivery.py | W459 | v2.3.74 修改·挂入 check_dynamic_links.py 动态链接门禁 |
-| site/data/tag-cloud.html | W459 | v2.3.74 修改·dashboard 条目死链修复（file:"dashboard.html"→"../dashboard.html"） |
-| site/en/ming-political-thought-comparison.html | W459 | v2.3.74 修改·source_doc 虚构英文化路径改诚实 ASCII 注记 |
-| docs/00-导读/V2可视化维度方案.md | W459 | v2.3.74 修改·落地状态记录表 + Three 本地化条文回写 + D2 约定勘误 + 动态链接盲区风险条 + 验证清单更新 |
-| site/index.html | W459 | v2.3.74 修改·精选必看补西游地理 3D 卡片（差异化描述）·note 八→九个入口 |
-| site/dukou-engine.html | W459 | v2.3.74 修改·页脚 prepend v2.3.74 W459 |
-| CHANGELOG.md / 交接文档.md | W459 | v2.3.74 修改·W459 四件套条目 + 交接同步（阻塞段陈旧 HEAD 行修正 + 方法论沉淀新增 JS 拼接链接盲区） |
-
-## W449 冗余文档清理（2026-08-16·v2.3.64）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| 项目概览.md / 项目认知总览.md / 项目交接参考手册.md | W449 | v2.3.64 删除·判定与 交接文档.md 冗余（git rm·保留历史可恢复） |
-| README.md | W449 | v2.3.64 修改·链接改指 交接文档.md |
-| docs/00-导读/文档规范.md | W449 | v2.3.64 修改·§11.1/§11.4 旁文档 4→1（已先行提交） |
-| scripts/output/file-index.md | W449 | v2.3.64 修改·移除 10 条三冗余文档反向索引 |
-| MEMORY.md | W449 | v2.3.64 修改·修订陈旧 W423（未 push/无远端）记忆 + 英文站 138 页 + 空 legacy 目录 |
-| site/dukou-engine.html | W449 | v2.3.64 修改·页脚 prepend v2.3.64 W449 |
-| CHANGELOG.md / 交接文档.md | W449 | v2.3.64 修改·W449 四件套条目 + 交接同步 |

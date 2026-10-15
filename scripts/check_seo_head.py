@@ -52,13 +52,9 @@ def en_candidate(zh_rel: str) -> str:
     return "en/" + (zh_rel[len("data/"):] if zh_rel.startswith("data/") else zh_rel)
 
 
-def main() -> bool:
-    violations: list[str] = []
-    pages = site_pages()
-    page_set = set(pages)
-    today = time.strftime("%Y-%m-%d")
-
-    # R4 og-cover
+def _check_og_cover() -> list[str]:
+    """R4 og-cover 存在性 + 尺寸（1200x630）+ 体积（≤300KB）（W733 提取）。"""
+    violations = []
     if not COVER.exists():
         violations.append("R4 og-cover.png 不存在")
     else:
@@ -68,8 +64,12 @@ def main() -> bool:
                 violations.append(f"R4 og-cover 尺寸 {im.size} != (1200,630)")
         if COVER.stat().st_size > 300 * 1024:
             violations.append(f"R4 og-cover 超 300KB: {COVER.stat().st_size}B")
+    return violations
 
-    # R1 每页 head 必备项
+
+def _check_head(pages) -> list[str]:
+    """R1 每页 head 必备项（viewport/description/canonical/og/twitter）（W733 提取）。"""
+    violations = []
     for rel in pages:
         s = (SITE / rel).read_text(encoding="utf-8")
         url = BASE + rel
@@ -86,10 +86,18 @@ def main() -> bool:
         for probe, name in checks:
             if probe not in head:
                 violations.append(f"R1 {rel} 缺 {name}")
+    return violations
 
-    # R2 hreflang 与配对清单双向一致
+
+def _load_pairs():
+    """加载 hreflang 配对清单（zh-en 二元组集合·W733 提取）。"""
     data = json.loads(PAIRS.read_text(encoding="utf-8"))
-    pairs = {(p["zh"], p["en"]) for p in data["pairs"]}
+    return {(p["zh"], p["en"]) for p in data["pairs"]}
+
+
+def _check_hreflang(pages, page_set, pairs) -> list[str]:
+    """R2 hreflang 与配对清单双向一致（W733 提取）。"""
+    violations = []
     derived = {(p, en_candidate(p)) for p in pages if not p.startswith("en/") and en_candidate(p) in page_set}
     if pairs != derived:
         violations.append(f"R2 hreflang-pairs.json 与磁盘推导不一致（文件 {len(pairs)} vs 推导 {len(derived)}）")
@@ -114,8 +122,12 @@ def main() -> bool:
         # 仅检查 <link hreflang>（alternate 机制）；<a hreflang> 属性为历史既有用法不在此列
         if re.search(r"<link[^>]+hreflang=", s) and not any(rel in pr for pr in pairs):
             violations.append(f"R2 非配对页含 hreflang link: {rel}")
+    return violations
 
-    # R3 sitemap
+
+def _check_sitemap(pages, today) -> list[str]:
+    """R3 sitemap 集合一致 + lastmod 不晚于当天（W733 提取）。"""
+    violations = []
     sm = SITEMAP.read_text(encoding="utf-8")
     locs = set(re.findall(r"<loc>([^<]+)</loc>", sm))
     expect = {BASE + p for p in pages if p not in SITEMAP_EXCLUDE}
@@ -124,8 +136,12 @@ def main() -> bool:
     bad_lm = [lm for lm in re.findall(r"<lastmod>([^<]+)</lastmod>", sm) if lm > today]
     if bad_lm:
         violations.append(f"R3 lastmod 晚于当天: {bad_lm[:3]}")
+    return violations
 
-    # R5 index JSON-LD
+
+def _check_json_ld() -> list[str]:
+    """R5 index JSON-LD 内联有效（非外链/可解析/无占位域名）（W733 提取）。"""
+    violations = []
     idx = (SITE / "index.html").read_text(encoding="utf-8")
     if 'application/ld+json" src=' in idx:
         violations.append("R5 index.html JSON-LD 仍为 src 外链写法")
@@ -137,8 +153,24 @@ def main() -> bool:
             json.loads(m.group(1))
         except json.JSONDecodeError as e:
             violations.append(f"R5 JSON-LD 解析失败: {e}")
-    if "example.com" in idx:
+    if re.search(r"(?<![\w-])example\.com", idx):  # 域名左边界断言：notexample.com 不误报·www.example.com 仍命中（W758 CodeQL 加固）
         violations.append("R5 index.html 含 example.com 占位域名")
+    return violations
+
+
+def main() -> bool:
+    violations: list[str] = []
+    pages = site_pages()
+    page_set = set(pages)
+    today = time.strftime("%Y-%m-%d")
+    pairs = _load_pairs()
+
+    # R4 og-cover / R1 每页 head / R2 hreflang / R3 sitemap / R5 index JSON-LD
+    violations += _check_og_cover()
+    violations += _check_head(pages)
+    violations += _check_hreflang(pages, page_set, pairs)
+    violations += _check_sitemap(pages, today)
+    violations += _check_json_ld()
 
     if violations:
         print(f"SEO head 检查 FAIL：{len(violations)} 项违例")

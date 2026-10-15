@@ -24,11 +24,18 @@ xiyouji_rag.py — 《详解西游记》本地 RAG 核心引擎（零依赖）
        （「五行山」整体成词，而非被拆成「五/行/行山」），提升检索精度。
     2. 查询别名扩展：命中「悟空」时同时检索「美猴王/猴王/行者/大圣」等，
        大幅提升召回（同一概念的不同叫法都能命中）。
-    3. 字段加权 BM25：标题/小标题（markdown #）命中权重高于正文。
-    4. 短语连贯加权：查询作为连续子串出现在文档中时额外加权。
-    5. RRF 多信号融合重排：融合 原始BM25 + 扩展BM25 + 标题命中 + 短语命中
-       四个排序，给出更稳健的最终 top_k。
-    6. 改进摘录：优先选取含查询词的段落，并附最近小标题上下文 + 命中高亮。
+    3. 改进摘录：优先选取含查询词的段落，并附最近小标题上下文 + 命中高亮。
+
+  W743 融合层消融重构（T-01 Phase-0 实证·18 查询 recall@5 0.239→0.359）：
+    W337 曾以四路等权 RRF 融合 原始BM25 + 扩展BM25 + 标题命中 + 短语位置——
+    对照实测「标题命中」「短语位置」两路为负贡献（与全文 BM25 信息冗余·
+    等权融合时以异质榜单稀释排序：A+B 0.347~0.367 vs 四路全融 0.217~0.239）。
+    现融合层 = 加权 RRF（A 原始 BM25 ×1.0 + B 别名扩展 BM25 ×EXPANDED_WEIGHT）。
+
+  W744 检索增强档（T-01 Phase-1 集成·可选·默认 off）：
+    经 RAG_ENHANCE 环境变量四档开关（off/dense/rerank/rewrite）接入
+    rag_enhance.py 增强引擎（稠密召回 + cross-encoder 重排 + LLM 查询改写；
+    30 查询实测 recall@5 0.393→0.487）。off 档保持零依赖行为不变。
 
 零依赖：仅用 Python 标准库（re / json / csv / os / urllib）。
 可直接运行：python xiyouji_rag.py "五行山 牧童"
@@ -40,6 +47,7 @@ import json
 import math
 import os
 import re
+import sys
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -88,6 +96,7 @@ _load_dotenv()
 
 K1 = 1.5
 B = 0.75
+EXPANDED_WEIGHT = 0.5  # W743：融合层 B（别名扩展）信号权重（0.3~0.6 实测平台·取中值）
 INDEX_VERSION = 2  # 索引结构变更时 +1，触发缓存重建
 
 # ============================================================
@@ -305,22 +314,92 @@ def bm25_score(index, q_tokens, doc_idx):
     return score
 
 
-def _rrf(lists, k=60):
-    """Reciprocal Rank Fusion：融合多个排序列表，返回 [(idx, fused_score), ...]。"""
+def _rrf(lists, k=60, weights=None):
+    """Reciprocal Rank Fusion：融合多个排序列表，返回 [(idx, fused_score), ...]。
+
+    W743：支持按列表加权（weights 与 lists 等长·缺省等权·权重 ≤0 的列表跳过）。
+    """
+    ws = list(weights) if weights is not None else [1.0] * len(lists)
     fused = {}
-    for lst in lists:
+    for w, lst in zip(ws, lists, strict=True):
+        if w <= 0:
+            continue
         for rank, (_, idx) in enumerate(lst):
-            fused[idx] = fused.get(idx, 0.0) + 1.0 / (k + rank + 1)
+            fused[idx] = fused.get(idx, 0.0) + w / (k + rank + 1)
     return sorted(fused.items(), key=lambda x: -x[1])
 
 
-def _heading_hits(index, q_tokens, doc_idx):
-    hay = index["headings"].get(str(doc_idx), index["headings"].get(doc_idx, ""))
-    return sum(1 for t in q_tokens if t and t in hay)
+# ============================================================
+# 1.5 检索增强档分派（W744·T-01 Phase-1 集成）
+# ============================================================
+
+ENHANCE_LEVELS = ("off", "dense", "rerank", "rewrite")
+
+
+def enhance_level():
+    """解析 RAG_ENHANCE 环境变量 → 档位（off/dense/rerank/rewrite）。
+
+    off 为默认（空 / 0 / false / no / none / bm25 皆视为 off）；非法值抛
+    ValueError（fail-fast·防拼写错误被静默当作 off）。
+    """
+    raw = (os.environ.get("RAG_ENHANCE", "") or "").strip().lower()
+    if raw in ("", "0", "false", "no", "none", "bm25"):
+        return "off"
+    if raw not in ENHANCE_LEVELS:
+        raise ValueError("RAG_ENHANCE=%r 非法（合法值：off|dense|rerank|rewrite；空=off）" % raw)
+    return raw
+
+
+_enhance_engine = None
+
+
+def _get_enhance_engine(level):
+    """惰性获取增强引擎单例（rag_enhance.py·其内部再惰性加载重依赖）。"""
+    global _enhance_engine
+    if _enhance_engine is not None:
+        if _enhance_engine.level != level:
+            raise RuntimeError("增强引擎已以档位 %s 初始化（进程内不支持切换）"
+                               % _enhance_engine.level)
+        return _enhance_engine
+    if _HERE not in sys.path:
+        sys.path.insert(0, _HERE)
+    import rag_enhance  # 仅 RAG_ENHANCE 非 off 时导入（off 档保持零依赖）
+    _enhance_engine = rag_enhance.EnhanceEngine(level)
+    return _enhance_engine
 
 
 def retrieve(query, top_k=5, index=None):
-    """返回 top_k 语料片段（含路径 + 摘录），经 RRF 多信号融合重排。"""
+    """返回 top_k 语料片段（含路径 + 摘录）。
+
+    W743：融合层消融为加权 RRF（A 原始 BM25 ×1.0 + B 别名扩展 ×EXPANDED_WEIGHT）。
+    W744：RAG_ENHANCE 非 off 时经 rag_enhance 增强档排序（dense/rerank/rewrite）；
+    返回结构不变（path/score/excerpt·score 语义随档位）。
+    """
+    level = enhance_level()
+    if level == "off":
+        return _retrieve_bm25(query, top_k=top_k, index=index)
+    index = index or build_index()
+    engine = _get_enhance_engine(level)
+    ranked = engine.retrieve_ranked(query, top_k=top_k, index=index,
+                                    bm25_retrieve=_retrieve_bm25)
+    qt_exp = expand_query(query)
+    out = []
+    for path, score in ranked:
+        out.append({
+            "path": path,
+            "score": score,
+            "excerpt": _excerpt(path, qt_exp, index),
+        })
+    return out
+
+
+def _retrieve_bm25(query, top_k=5, index=None):
+    """现役加权 RRF 检索本体（off 档直达·亦为增强档的 BM25 路注入）。
+
+    W743：仅融合 A（原始 BM25·权重 1.0）与 B（别名扩展 BM25·权重
+    EXPANDED_WEIGHT）两路；「标题命中」/「短语位置」两路经 T-01 对照实证为
+    负贡献已移除（详见模块 docstring）。
+    """
     index = index or build_index()
     qt_orig = tokenize(query, use_dict=True)
     qt_exp = expand_query(query)
@@ -335,36 +414,15 @@ def retrieve(query, top_k=5, index=None):
         if s > 0:
             a.append((s, idx))
     a.sort(reverse=True)
-    # (B) 扩展 BM25（召回优先）
+    # (B) 扩展 BM25（召回优先·别名扩展）
     b = []
     for idx in range(N):
         s = bm25_score(index, qt_exp, idx)
         if s > 0:
             b.append((s, idx))
     b.sort(reverse=True)
-    # (C) 标题命中（字段加权）
-    c = [( _heading_hits(index, qt_exp, idx), idx)
-         for idx in range(N) if _heading_hits(index, qt_exp, idx) > 0]
-    c.sort(reverse=True)
-    # (D) 短语连贯命中：在 top 候选中读原文，含连续查询串者加权
-    raw = (query or "").lower().strip()
-    d = []
-    if raw:
-        cand = [idx for _, idx in a[:40]]
-        for idx in cand:
-            rel = index["docs"][idx]["path"]
-            try:
-                with open(os.path.join(ROOT, rel), encoding="utf-8") as fh:
-                    txt = fh.read().lower()
-            except Exception:
-                continue
-            pos = txt.find(raw)
-            if pos >= 0:
-                # 越靠前出现，排名越前（用负位置作为排序键）
-                d.append((-pos, idx))
-        d.sort()
 
-    fused = _rrf([a, b, c, d])[:top_k]
+    fused = _rrf([a, b], weights=(1.0, EXPANDED_WEIGHT))[:top_k]
 
     out = []
     for idx, _ in fused:
@@ -707,7 +765,9 @@ def main():
     q = " ".join(sys.argv[1:]) or "五行山 牧童"
     print(f"# 查询：{q}\n")
     res = answer(q, top_k=5, hops=1)
-    print("## 语料检索（BM25·RRF 融合·别名扩展）")
+    lvl = enhance_level()
+    tag = "（增强档 %s）" % lvl if lvl != "off" else ""
+    print("## 语料检索（BM25·加权 RRF·别名扩展%s）" % tag)
     for s in res["snippets"]:
         print(f"  [{s['score']}] {s['path']}")
         if s["excerpt"]:

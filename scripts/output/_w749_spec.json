@@ -1,0 +1,17 @@
+{
+  "batch": "W749",
+  "date": "2026-10-15",
+  "title": "W749 ML 坑族防守补登批",
+  "desc": "ML import 坑入 pitfalls",
+  "head_entry": "2026-10-15（W749 ML 坑族防守补登批）",
+  "head_sentence": "pitfalls 运行时节补两条 ML import 坑·子线程首次 import torch 与 ST 段错误静默 139 改主线程预热范式·ruff --fix isort 改坏 ST 先于 torch 顺序加 noqa: I001 防守·查坑表补 ML 五查行·AGENTS 计数 31 至 33",
+  "changelog_body": "\n> **来源**：第 40 篇复盘报告 A-02 行动（用户令开工）——W746 当日两坑从 MEMORY 补登进仓库 pitfalls（MEMORY 与日志均有完整记录·本批为仓库级固化）。\n> - **T1 运行时节补两条（docs/agent/pitfalls.md）**：①**子线程首次 import 段错误**——http.server handler 子线程首次 import torch/ST → SIGSEGV exit 139 静默死亡（实证：/route 54s empty reply·服务静默终止）→ 服务端必须主线程启动预热（rag_server main 的 _get_router 范式）；②**ruff --fix isort 破坏 ST 顺序**——isort 排序规则把 plain import（torch）排到 from-import（sentence_transformers）之前·改坏「ST 先于 torch」关键顺序致 CLI 静默段错误（实证：--fix 后管道+tail 掩盖退出码·PIPESTATUS 才抓到 139）→ ML 脚本 ST import 块必须 `# noqa: I001` 防守。\n> - **T2 查坑表补行**：shell 场景查坑表补「ML 脚本开跑前」行——五查（去 shebang / ST 先于 torch / noqa: I001 防守 / 子线程预热 / PIPESTATUS 验退出码）。\n> - **T3 计数联动**：运行时节计数 3→5·AGENTS.md §4.3 坑位计数 31→33 同步。\n> - **T4 检查单沉淀**：ML 脚本开跑前检查单（第 40 篇报告 S-38 任务卡）随 pitfalls 条目正式化。\n> - **验证（全绿）**：纯 md 追加·pytest 415 不变；ruff scripts/ 全过；verify_delivery 全量四十六段 OK；check_doc_sync 0 FAIL。\n> - **状态**：已落地（级联+提交后以 gh run list 为准）。\n> - **文件**：docs/agent/pitfalls.md、AGENTS.md、docs/00-导读/W批次编号对账表.md、HANDOVER.md、scripts/output/file-index.md、scripts/output/_w749_spec.json、scripts/output/_cascade_files_W749.txt。\n",
+  "milestone_block": "- **W749 ML 坑族防守补登批**：\n  - pitfalls 运行时节补两条 ML import 坑（子线程段错误→主线程预热 / isort 改坏 ST 顺序→noqa 防守）\n  - 查坑表补 ML 五查行 + AGENTS 坑位计数 31→33 联动\n",
+  "agents_note": "2026-10-15（W749）ML 坑族防守补登批（第 40 篇复盘 A-02 行动加用户令开工）：pitfalls 运行时节补两条（子线程首次 import torch/ST 段错误 exit 139 静默→主线程预热范式加 ruff --fix isort 把 ST 先于 torch 顺序改坏→noqa: I001 防守）加查坑表补 ML 五查行加运行时节计数三到五加 AGENTS 坑位计数三十一到三十三联动；验证=纯 md 追加加 pytest 四百一十五不变加门禁四十六段",
+  "file_index_rows": [
+    "| docs/agent/pitfalls.md | W749 | 运行时节补两条 ML import 坑 + 查坑表补 ML 五查行（计数 3→5） |",
+    "| AGENTS.md | W749 | §4.3 坑位计数 31→33 联动 |",
+    "| docs/00-导读/W批次编号对账表.md | W749 | W749 认领行登记 |",
+    "| scripts/output/_w749_spec.json | W749 | 本批 spec 入库 |"
+  ]
+}

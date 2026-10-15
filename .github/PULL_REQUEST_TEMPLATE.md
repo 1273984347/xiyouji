@@ -1,4 +1,4 @@
-<!-- 感谢贡献！提交前请确认以下要点（详见 CONTRIBUTING.md 与 交接文档.md）。 -->
+<!-- 感谢贡献！提交前请确认以下要点（详见 CONTRIBUTING.md 与 HANDOVER.md）。 -->
 
 ## 变更类型
 

@@ -29,7 +29,7 @@
     - must_still_contain: "v2.2.55"
     - must_still_contain: "W286c"
 
-- file: 交接文档.md
+- file: HANDOVER.md
   checks:
     - must_still_contain: "v2.2.55"
     - must_still_contain: "W286c"

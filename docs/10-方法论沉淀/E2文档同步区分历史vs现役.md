@@ -86,6 +86,8 @@ Why 5: 主代理把历史变更日志中的旧版本号一并改成新版本号
 | 2 | 逐条分类：现役描述 vs 历史条目 | 人工判断（基于语义位置） |
 | 3 | 仅更新现役描述，保留历史条目 | Edit + Grep spot-check |
 
+> **W754 补（制度层）**：本三步法已由第 31 门禁 `scripts/check_doc_sync.py`（现役叙述面句式对账·C5 只扫现役面、CHANGELOG 仅口径块行）承接——「现役面 vs 历史段」不再只靠人工判断，门禁对现役叙述面机器对账、历史段不纳入扫描；人工三步法仍是门禁 FAIL 后的定位手段。
+
 ### 典型文件分类
 
 | 文件 | 现役部分 | 历史部分 |
@@ -93,8 +95,10 @@ Why 5: 主代理把历史变更日志中的旧版本号一并改成新版本号
 | README.md | 头部"当前版本 v2.0.59" | 无（README 不保留历史版本号） |
 | STRUCTURE.md | 表格当前结构 | 版本史段（v0.1/v0.5/...保留原值） |
 | CHANGELOG.md | 当前版本段（W086 v2.0.59） | 历史版本段（W085 v2.0.58 保留） |
-| file-index.md | 当前反向索引 | 历史变更记录（保留） |
+| file-index.md | 当前反向索引（现役件仅存 W700+） | 历史变更记录已移出：W449-W699 段归档 [archive/docs/file-index-ARCHIVE.md](../../archive/docs/file-index-ARCHIVE.md)（W736 迁） |
 | 项目说明.md | 当前项目说明 | 无 |
+
+> **W754 补（形态与归档口径·示例值保留）**：表中 v2.0.59 / v2.0.58 属 W086 当时形态（历史示例值不改）——CHANGELOG 段标题自 W711 起去 v 号，形态为 `### W###（日期）：标题`，v 号降格为阶段标签；CHANGELOG.md 与 file-index.md 现役件均只保留 W700+，更早段分别查 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](../../archive/docs/CHANGELOG-ARCHIVE-tier2.md) 与上表归档件。
 
 ### 错误示例与正确示例
 
@@ -138,9 +142,9 @@ mem-wrap-up Step 4a 协议升级要求文档同步后 Grep spot-check 验证新�
 - [三skill闭环.md](三skill闭环.md)：mem-wrap-up Step 4a 协议升级与本铁律协同
 - [双索引可追溯改造.md](双索引可追溯改造.md)：双索引维护时区分历史 vs 现役
 
-### 上游 skill
+### 上游 skill（已随 skills 治理退役·W562）
 
-- [C:\Users\12739\.trae-cn\skills\mem-wrap-up\SKILL.md](file:///C:/Users/12739/.trae-cn/skills/mem-wrap-up/SKILL.md)（Step 4a 项目层 Grep spot-check）
+- 原 `mem-wrap-up`（Step 4a 项目层 Grep spot-check）全局路径已失联（junction 指向不存在的 D:\1\open-source·仓内不共享）→ 仓内等价：[E1铁律.md](E1铁律.md)（Step 4a/7a 落地验证）+ [三skill闭环.md](三skill闭环.md)（协议升级联动记录）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + CLAUDE.md + docs/agent/*.md
 
 ### memory 文件
 
@@ -149,8 +153,8 @@ mem-wrap-up Step 4a 协议升级要求文档同步后 Grep spot-check 验证新�
 
 ### 双索引
 
-- 正向时间线：[../../CHANGELOG.md](../../CHANGELOG.md)（W086 v2.0.59 文档同步 6 文件落地后 Grep spot-check 验证）
-- 反向文件索引：[../../scripts/output/file-index.md](../../scripts/output/file-index.md)
+- 正向时间线：[../../CHANGELOG.md](../../CHANGELOG.md)（现役件仅存 W700+）——W086 v2.0.59 文档同步 6 文件落地后 Grep spot-check 验证记录见 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](../../archive/docs/CHANGELOG-ARCHIVE-tier2.md)
+- 反向文件索引：[../../scripts/output/file-index.md](../../scripts/output/file-index.md)（现役件仅存 W700+；W449-W699 段见 [archive/docs/file-index-ARCHIVE.md](../../archive/docs/file-index-ARCHIVE.md)）
 - W235 反向索引：W235-S1 方法论沉淀·本文件为第 1 篇（共 4 篇）
 
 ---

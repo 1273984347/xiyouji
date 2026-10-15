@@ -172,7 +172,7 @@ DRL R1b/R2 subagent spot-check 是本铁律的下游应用。DRL R1a 3 verifier 
 
 ### 上游 skill
 
-- [C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md](file:///C:/Users/12739/.trae-cn/skills/deep-review-loop/SKILL.md)（v1.2.0 R1a 硬性要求"verifier 必须附工具调用证据"·本铁律补充"证据本身仍需主代理 spot-check"）
+- 原指全局路径 `C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md`（v1.2.0 R1a 硬性要求"verifier 必须附工具调用证据"·本铁律补充"证据本身仍需主代理 spot-check"）——**W754 校：该全局路径随 `skills/` 治理退役（W562）失联**；仓内等价权威改指 [E1铁律.md](E1铁律.md)（§四 L3 层级）与 [AGENTS.md](../../AGENTS.md) §4.3（subagent prompt 约束与 spot-check 铁则）
 
 ### memory 文件
 
@@ -183,8 +183,10 @@ DRL R1b/R2 subagent spot-check 是本铁律的下游应用。DRL R1a 3 verifier 
 
 - 正向时间线：[../../CHANGELOG.md](../../CHANGELOG.md)（2026-07-19 首次复现 + 2026-07-21 E14 第二次复现 ripgrep 跳过二进制文件）
 - 反向文件索引：[../../scripts/output/file-index.md](../../scripts/output/file-index.md)
-- W235 反向索引：W235-S1 方法论沉淀·本文件为第 3 篇（共 4 篇）
+- W235 反向索引：W235-S1 方法论沉淀·本文件为第 3 篇（共 4 篇）——该「4 篇」为 W235-S1 批次计数（历史值·E2 铁律保留）；**篇序不再作为现役口径**——本目录现役篇数以 [README.md](README.md) 目录索引为准（W755 起新增 4 篇深度篇）
 
 ---
 
 W235-S1 方法论沉淀·v2.2.41·2026-07-30
+
+（W 号、版本号、日期均为 W235-S1 当时时点的历史脚注·E2 铁律保留原值；现役版本与批次以 [CHANGELOG.md](../../CHANGELOG.md) 顶段为准）

@@ -1,0 +1,19 @@
+{
+  "batch": "W748",
+  "date": "2026-10-15",
+  "title": "W748 第40篇复盘入库批",
+  "desc": "双线收官复盘入库",
+  "head_entry": "2026-10-15（W748 第40篇复盘入库批）",
+  "head_sentence": "第 40 篇工作复盘报告入库：检索增强线收敛 0.487 四步弧线+四证伪数据卡+路由 21 题持平+八问题族 FAM-23~30 与 PRE-31~39+S-36~38 技能任务卡+README 索引 16 篇+STRUCTURE report_docs 17",
+  "changelog_body": "\n> **来源**：用户提供「工作复盘与优化分析系统提示词」·第十一次执行（第 40 篇）——当日 W743-W747 五批收官周期复盘。\n> - **T1 报告入库**：docs/11-报告复盘/工作复盘与优化分析报告-2026-10-15.md（十节+附录 A-E）——① 执行摘要（19:00-20:40 双线周期·11 提交）② 信息基础（I-01~06+ASM-01~04）③ 经验复用 8 项（E-01~08·微批安全模式/ML 三件套/发布链五步/证伪入档等 P0 级）④ 技能优化 3 项+skill-creator 任务卡（S-36 路由评测方法论/S-37 负面结果处置/S-38 ML 排错）⑤ 未用技能 4 项全暂缓（各有触发条件）⑥ 场景沉淀 3 个（SC-01 实验→入库/SC-02 负面收口/SC-04 评审闭环）⑦ 问题 10 项+8 问题族 FAM-23~30+PRE-31~39（代理直连 fallback/主线程预热/noqa 防守/PIPESTATUS/全量提交/先诊断后方案等）⑧ 工作流 2 条（WF-01 实验闭环瓶颈识别/WF-02 评审链）⑨ 行动 A-01~07（W748 编号改由本篇消费·原路由版改写候选顺延）⑩ 可行性自评（总体可行）·附录=批次弧线/四证伪数据卡/分差谱/假设清单/术语表。\n> - **T2 索引与统计三连锁**：docs/11-报告复盘/README.md 索引加行（新报告编 1·原 1-15 顺延·现役 15→16 篇）+ STRUCTURE.md report_docs 标记 16→17（「现役 16 篇」文字同步）+ stats.py --w W748 派生三件刷新。\n> - **T3 编号说明**：W748 原为「路由版改写批」预留候选——本篇复盘入库先行消费该号；路由版改写仍为后续候选（触发条件=dukou 要 top-1 直跳·不变）。\n> - **验证（全绿）**：报告数据全部可溯源（git log 11 提交+实验区 tmpe 原始数据+当日日志）；pytest 415 不变（纯文档批）；ruff scripts/ 全过；verify_delivery 全量四十六段 OK；check_doc_sync 0 FAIL。\n> - **状态**：已落地（级联+提交后以 gh run list 为准）。\n> - **文件**：docs/11-报告复盘/工作复盘与优化分析报告-2026-10-15.md、docs/11-报告复盘/README.md、STRUCTURE.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、docs/00-导读/W批次编号对账表.md、HANDOVER.md、AGENTS.md、scripts/output/file-index.md、scripts/output/_w748_spec.json、scripts/output/_cascade_files_W748.txt。\n",
+  "milestone_block": "- **W748 第40篇复盘入库批**：\n  - 第 40 篇工作复盘报告入库（十节+附录·双线收官周期·四证伪数据卡+八问题族+三技能任务卡）\n  - 索引三连锁：README 现役 16 篇（编号顺延）+ STRUCTURE report_docs 17 + stats 派生三件\n",
+  "agents_note": "2026-10-15（W748）第 40 篇复盘入库批（用户提供复盘系统提示词加第十一次执行）：工作复盘与优化分析报告-2026-10-15.md 入库（执行摘要加信息基础加经验八项加技能三项任务卡加未用技能四项加场景三个加问题十项八族 FAM-23~30 与 PRE-31~39 加工作流两条加行动七项加知识资产十条加可行性自评加附录五份）；索引三连锁（README 加行编号顺展现役十六篇加 STRUCTURE report_docs 十七加 stats 派生三件）；编号说明=原路由版改写候选顺延；验证=数据全溯源加 pytest 四百一十五不变加门禁四十六段",
+  "file_index_rows": [
+    "| docs/11-报告复盘/工作复盘与优化分析报告-2026-10-15.md | W748 | 第 40 篇复盘报告入库（十节+附录·双线收官） |",
+    "| docs/11-报告复盘/README.md | W748 | 索引加行（新报告编 1·原编号顺延·现役 15→16 篇） |",
+    "| STRUCTURE.md | W748 | report_docs 实体标记 16→17+现役文字同步 |",
+    "| scripts/output/stats.json | W748 | report_docs 16→17（stats.py --w W748 派生三件） |",
+    "| docs/00-导读/W批次编号对账表.md | W748 | W748 认领行登记 |",
+    "| scripts/output/_w748_spec.json | W748 | 本批 spec 入库 |"
+  ]
+}

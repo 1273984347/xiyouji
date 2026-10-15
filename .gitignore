@@ -52,6 +52,9 @@ scripts/.pw-browsers/
 Thumbs.db
 desktop.ini
 
+# W745：WorkBuddy 工具目录（本地记忆/自动化文件·防 add -A 误入公开库）
+.workbuddy/
+
 # 输出文件
 scripts/output/figures/*.png
 scripts/output/figures/*.svg
@@ -63,6 +66,15 @@ scripts/output/security-report.md
 scripts/output/security-report.json
 # RAG 索引构建产物（可由 source/原文 重建，32MB+，不入库）
 scripts/output/rag_index.json
+# W744：检索增强向量产物（本地生成·大文件）
+scripts/output/rag_vectors.npy
+scripts/output/rag_vectors_parts/
+scripts/output/rag_chunks.jsonl
+scripts/output/rag_embed_meta.json
+# W746：语义页面路由产物（本地生成）
+scripts/output/page_vectors.npy
+scripts/output/page_index.json
+scripts/output/page_route_eval.md
 # 临时报告（file-index.md 保留入库，其他可重新生成）
 scripts/output/a11y-report.*
 scripts/output/audit-baseline.md
@@ -118,7 +130,10 @@ SECURITY-AUDIT-2026-08-09.7z
 SECURITY-AUDIT-2026-08-09.password
 
 # 全站截图审查产物（W550·884MB 截图/切片/报告，本地保留不入库）
-tmpe/
+tmpe/*
+# W738：tmpe 临时文件体系件入 git（策略可复现）·大文件仍本地
+!tmpe/README.md
+!tmpe/policy.yml
 
 # W554 全站复审产物（B 方案·本地临时不入库，结束删除）
 .review-tmp/

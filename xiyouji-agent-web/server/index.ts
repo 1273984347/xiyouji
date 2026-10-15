@@ -8,6 +8,7 @@ import * as db from "./db.js";
 import { applyCitationGuard } from "./citationGuard.js";
 import { runAgentTurn } from "./engine/agent-loop.js";
 import { createToolset, TOOL_PERMISSION_KIND } from "./engine/tools.js";
+import { appendAudit, auditTarget, readAudit } from "./audit.js";
 import type { ChatMessage, CanUseTool, PermissionDecision } from "./engine/types.js";
 
 // 待处理的权限请求
@@ -146,6 +147,16 @@ app.get("/api/feedback/summary", (_req, res) => {
 
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
+// W752 写操作审计回放（只读）：返回最近 limit 条（默认 100，上限 1000）。
+// 与其余 /api/* 同受 AGENT_WEB_TOKEN 中间件与 30 req/min 限流保护；
+// 审计文件本体在工具层禁读（tools.ts DENY_READ），LLM 无法读回自己的操作史。
+app.get("/api/audit", (req, res) => {
+  const raw = Number(req.query.limit);
+  const limit = Number.isFinite(raw) && raw > 0 ? Math.min(Math.floor(raw), 1000) : 100;
+  const result = readAudit(limit);
+  res.json({ ok: true, limit, total: result.total, skipped: result.skipped, entries: result.entries });
 });
 
 // 引擎配置状态（W680：原厂商 CLI 登录检查退役——路径保留以免前端 404）
@@ -498,25 +509,45 @@ app.post("/api/chat", async (req, res) => {
       else if (m.role === "assistant" && m.content) history.push({ role: "assistant", content: m.content });
     }
     const toolset = createToolset(workingDir);
+    // W752：被权限桥拒绝的工具调用 id——agent-loop 对拒绝回执的 isError 恒为 false，
+    // 故工具结果处需借此区分「权限拒绝（根本没执行）」与「执行成功」（见 onToolResult 审计）。
+    const deniedToolUseIds = new Set<string>();
 
     // 工具权限桥（策略：bypass 直通 / read 类放行 / plan 只读 / acceptEdits 放行写 / 其余走前端许可）
     const canUseTool: CanUseTool = async (toolName, input, options) => {
       console.log(`[Permission] Tool request: ${toolName}`);
       if (VERBOSE_LOG) console.log(`[Permission] Input:`, JSON.stringify(input, null, 2)); // P3-1
 
+      const kind = TOOL_PERMISSION_KIND[toolName] ?? "command";
+      const auditTargetInfo = auditTarget(input);
+      // W752 审计（决策阶段）：写/命令面 allow 与 deny 都留痕；read 类自动放行不落（噪声大且非写面风险）
+      const audited = (decision: PermissionDecision, reason: string): PermissionDecision => {
+        if (kind === "read") return decision;
+        if (decision.behavior === "deny") deniedToolUseIds.add(options.toolUseID);
+        appendAudit({
+          sessionId: session.id,
+          tool: toolName,
+          phase: "permission",
+          decision: decision.behavior,
+          kind,
+          ...auditTargetInfo,
+          reason: decision.message ?? reason,
+        });
+        return decision;
+      };
+
       // bypassPermissions 模式直接放行（仅当 AGENT_WEB_ALLOW_BYPASS=1 时经净化可达）
       if (effectivePermissionMode === 'bypassPermissions') {
         console.log(`[Permission] Bypassing permissions for ${toolName}`);
-        return { behavior: 'allow', updatedInput: input };
+        return audited({ behavior: 'allow', updatedInput: input }, 'bypassPermissions 模式放行');
       }
 
-      const kind = TOOL_PERMISSION_KIND[toolName] ?? "command";
       if (kind === "read") return { behavior: 'allow', updatedInput: input };
       if (effectivePermissionMode === 'plan') {
-        return { behavior: 'deny', message: 'plan 模式为只读规划：写入与命令执行被拒绝' };
+        return audited({ behavior: 'deny', message: 'plan 模式为只读规划：写入与命令执行被拒绝' }, 'plan 模式只读');
       }
       if (kind === "write" && effectivePermissionMode === 'acceptEdits') {
-        return { behavior: 'allow', updatedInput: input };
+        return audited({ behavior: 'allow', updatedInput: input }, 'acceptEdits 写面自动放行');
       }
 
       // default 的写操作与各模式（除 bypass）的命令执行 → 请求前端许可
@@ -538,8 +569,10 @@ app.post("/api/chat", async (req, res) => {
 
       // 创建 Promise 等待用户响应
       return new Promise<PermissionDecision>((resolve, reject) => {
+        // 前端许可（/api/permission-response 以单参调用）与超时两条出口都经 audited 留痕
+        const settle = (decision: PermissionDecision, why = '前端许可决策') => resolve(audited(decision, why));
         const pending: PendingPermission = {
-          resolve,
+          resolve: settle,
           reject,
           toolName,
           input,
@@ -555,10 +588,10 @@ app.post("/api/chat", async (req, res) => {
           if (reqKey2 && pendingPermissions[reqKey2] !== undefined) {
             delete pendingPermissions[reqKey2];
             console.log(`[Permission] Request timeout: ${requestId}`);
-            resolve({
+            settle({
               behavior: 'deny',
               message: '权限请求超时'
-            });
+            }, '权限请求超时');
           }
         }, PERMISSION_TIMEOUT);
       });
@@ -618,6 +651,23 @@ app.post("/api/chat", async (req, res) => {
             tool.status = isError ? "error" : "completed";
             tool.isError = isError;
             tool.result = content;
+          }
+          // W752 审计（结果阶段）：工具层拒绝（受保护路径/越界/白名单/允许域，tools.ts 抛出即 isError）
+          // 与权限拒绝（deniedToolUseIds）统一记 deny + 原因；成功记 allow。审计自身 fail-open，不影响 SSE。
+          if (tool?.name) {
+            const wasDenied = deniedToolUseIds.has(toolId);
+            const target = auditTarget(tool.input);
+            appendAudit({
+              sessionId: session.id,
+              tool: tool.name,
+              phase: "result",
+              decision: wasDenied || isError ? "deny" : "allow",
+              kind: TOOL_PERMISSION_KIND[tool.name] ?? "command",
+              ...target,
+              bytes: target.bytes ?? Buffer.byteLength(content ?? "", "utf8"),
+              isError,
+              reason: wasDenied ? `权限拒绝：${content}` : isError ? content : "执行成功",
+            });
           }
           res.write(`data: ${JSON.stringify({
             type: "tool_result",
