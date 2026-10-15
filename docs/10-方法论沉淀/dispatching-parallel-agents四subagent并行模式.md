@@ -1,6 +1,6 @@
 # dispatching-parallel-agents 四 subagent 并行模式
 
-> W257·v2.2.46·S1 方法论沉淀第 10 篇·与 W253-W256 记忆研究四篇并行形成"经验-方法论"双轨
+> W257·v2.2.46·S1 方法论沉淀第 10 篇·与 W253-W256 记忆研究四篇并行形成"经验-方法论"双轨（W 号/版本号/篇序为 W257 批次历史锚点·E2 铁律保留；现役版本以 CHANGELOG 顶段为准）
 
 ## 一、模式定义
 
@@ -12,11 +12,21 @@
 
 ## 三、设计原则
 
-三大设计原则：(1) 独立无共享——4 个 subagent 任务边界清晰，无文件读写冲突、无状态依赖、无共享变量；(2) 主代理统一 spot-check——主代理对 4 个交付物执行统一五维度抽查（文件存在性、结构完整性、核心内容、footer 双索引、无 placeholder），避免 subagent 自报虚高；(3) 三 skill 闭环兜底——DRL 审查、mem-wrap-up 收尾、self-evolution 沉淀形成质量闭环，确保并行模式下质量不打折。
+三大设计原则：(1) 独立无共享——4 个 subagent 任务边界清晰，无文件读写冲突、无状态依赖、无共享变量；(2) 主代理统一 spot-check——主代理对 4 个交付物执行统一五维度抽查（文件存在性、结构完整性、核心内容、footer 双索引、无 placeholder），避免 subagent 自报虚高；(3) 三 skill 闭环兜底——DRL 审查、mem-wrap-up 收尾、self-evolution 沉淀形成质量闭环，确保并行模式下质量不打折（W754 校：三个全局 skill 路径随 `skills/` 治理退役（W562）失联，仓内等价权威见 [三skill闭环.md](三skill闭环.md) 与 [DRL真循环.md](DRL真循环.md)）。
 
 ## 四、执行流程
 
-五步执行流程：(1) 主代理分发任务——明确 4 个 subagent 的任务边界、交付物路径、质量要求；(2) 四 subagent 并行执行——4 个 subagent 独立完成各自任务，互不干扰；(3) 主代理 spot-check——对 4 个交付物执行五维度抽查；(4) DRL R1b 验证——深度复检循环确保无假收敛；(5) mem-wrap-up 收尾——更新记忆系统、写入 user_profile.md 计数器，self-evolution 沉淀方法论。
+五步执行流程：(1) 主代理分发任务——明确 4 个 subagent 的任务边界、交付物路径、质量要求；(2) 四 subagent 并行执行——4 个 subagent 独立完成各自任务，互不干扰；(3) 主代理 spot-check——对 4 个交付物执行五维度抽查；(4) DRL R1b 验证——深度复检循环确保无假收敛；(5) mem-wrap-up 收尾——更新记忆系统、写入 user_profile.md 计数器，self-evolution 沉淀方法论（W754 校：mem-wrap-up / self-evolution 两个全局 skill 已随 W562 退役失联，收尾与沉淀的仓内落点见 [三skill闭环.md](三skill闭环.md)）。
+
+### 现役并行纪律（W754 校）
+
+上文"无文件冲突"的判据在现役流程中已收敛为可机检的三条：
+
+1. **跨 Agent**：文件冲突由 [W 批次编号对账表](../00-导读/W批次编号对账表.md) 的 touches 列登记，动工前跑 `python scripts/preflight_check.py --touches <清单> --self W###`，touches 交集非空即拒绝并行（见 [pitfalls.md](../agent/pitfalls.md) git/提交/并发主题）。
+2. **同 Agent**：同一文件的多处 Edit 仍须串行（并行 Edit 基于同一原始内容，后写覆盖先写）——见 [AGENTS.md](../../AGENTS.md) §4.3。
+3. **提交**：并行会话提交走 `python scripts/safe_commit.py -F <file> <pathspec...>`（ref-lock 竞争自动重试），级联清单由 `batch_cascade.py` 落盘后按 `_cascade_files_<批号>.txt` 逐面 git add。
+
+据此，第一节"无文件冲突即可四路并行"的判据改述为：touches 交集为空，且级联面走单写路径。
 
 ## 五、主代理 spot-check 策略
 
@@ -28,7 +38,7 @@ E1 memory 层假收敛指 subagent 自报完成但实际交付缺失的虚高状
 
 ## 七、与三 skill 闭环关系
 
-三 skill 闭环构成质量保障三层防线：DRL（deep-review-loop）负责 R1b 深度复检，识别假收敛与过度拟合；mem-wrap-up 负责收尾归档，更新记忆系统与计数器；self-evolution 负责方法论沉淀，将经验提炼为可复用模式。四 subagent 并行模式通过三 skill 闭环实现"执行-验证-收尾-沉淀"全链路质量保障，避免并行模式下的质量塌陷，确保方法论可追溯、可复用。
+三 skill 闭环构成质量保障三层防线：DRL（deep-review-loop）负责 R1b 深度复检，识别假收敛与过度拟合；mem-wrap-up 负责收尾归档，更新记忆系统与计数器；self-evolution 负责方法论沉淀，将经验提炼为可复用模式（W754 校：三个 skill 已于 W562 随 `skills/` 治理退役，现役权威为 [DRL真循环.md](DRL真循环.md) 与 [三skill闭环.md](三skill闭环.md)）。四 subagent 并行模式通过三 skill 闭环实现"执行-验证-收尾-沉淀"全链路质量保障，避免并行模式下的质量塌陷，确保方法论可追溯、可复用。
 
 ## 八、案例：W253-W256 记忆研究四篇并行
 
@@ -36,5 +46,5 @@ W253-W256 记忆研究四篇并行执行案例：W253 文化记忆（阿斯曼�
 
 ---
 
-> 双索引：W257 | v2.2.46 | S1 方法论沉淀第 10 篇 | dispatching-parallel-agents 四 subagent 并行模式
+> 双索引：W257 | v2.2.46 | S1 方法论沉淀第 10 篇（历史锚点·E2 铁律保留） | dispatching-parallel-agents 四 subagent 并行模式
 > 关联文档：W253-W256 记忆研究四篇 | W229-W231 三 subagent 并行 | W233 四 subagent 并行

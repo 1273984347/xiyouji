@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W751），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W754），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -18,7 +18,37 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 
-### W751（2026-10-15）：根级工具链防护批（第 42 门禁挂载）
+### W754（2026-10-16）：方法论目录口径整改批
+> **来源**：用户令「docs/10-方法论沉淀 文件内的所有文件内容有需要更新或者新增的吗」——四组并行只读审计（18 篇逐件核 + 交叉复核）产出「必修 4 类 / 建议改 8 类 / 仍准确 4 篇 / 新增候选 4 篇」清单，用户裁定执行 B 范围（必修 + 建议改 + 索引重写·新增深度篇另行拍板）。动工前 `preflight_check.py --touches` 全绿（对账表 max=W753 → W754 认领）。
+> - **T1 必修（结论级纠错·4 类）**：① **页面更名漏同步**——`narratology-13d-network` → `narratology-16d-network` 全目录 10 处（[可视化测试计划](docs/10-方法论沉淀/可视化测试计划-十七维叙事学图谱.md) 9 + [README 索引](docs/10-方法论沉淀/README.md) 1）：W700 断链清债只扫 docs/03 与 docs/S2，**docs/10 漏在 sweep 外**；第 38 门禁扫描面仅 site HTML 与 docs/01 md，且这些路径写在反引号内非 markdown 链接——lint_links 全绿也照放行（三重盲区实证）。② **agent-web 迁移评估结论反转**——原文 §零/§四「不合并·暂不迁移·ignore 未解除」已作废：迁移 W543-W548 落地、W568 关闭、`.github/dependabot.yml` 的 ignore 规则已删（2026-09-05 注释实证）、现役栈实测 TS 7.0.2 / Vite 8.3.1 / React 19.3.0 / Express 5.2.1 / Tailwind 4.3.3 / better-sqlite3 13.0.3；文件降级为历史评估档案。③ **记忆研究七处 line 锚点失效**——行号空间随语料分回化消失（`source/原文` 最长文件 302 行，全库无 >1000 行语料），定位策略改「回目 + 精确引文」（第 20 门禁 `check_citations.py` 对 `dataset/text-search.json` 精确子串）。④ **上游 skill 协议层失联声明**——三 skill 全局路径实测断链（junction 目标不存在）且仓内 `skills/` 已 W562 退役，10 篇文件的「上游 skill」节统一改指仓内载体（AGENTS.md §4.3/§6 + CLAUDE.md + docs/agent/*.md）。
+> - **T2 建议改（口径与自洽·8 类）**：[README 索引](docs/10-方法论沉淀/README.md) 重写（报告篇数改引用式·复利经验总览表标注 W086 快照并指向 HANDOVER 三·「与上游 skill 关系」节改订为「与协议层/现役载体的关系」·维护规则补报告分流与载体铁律）；[E1 铁律](docs/10-方法论沉淀/E1铁律.md) 计数自洽（头部 23/23 vs 节标题 21/21 两值不一 → 去掉易漂移总分·以明细表为准）；[双索引改造](docs/10-方法论沉淀/双索引可追溯改造.md) 补 W700+ 索引边界与 W711 段形态 + 仓外 memory 链接改内链 + §六 手工维护规则标注工具化；[前端 SOP](docs/10-方法论沉淀/前端显示问题诊断SOP.md) 门禁对照表补槽号（第 8/9/10/11 槽）与表注（三个 `_` 前缀脚本降级为手动取证·实测无 CI 引用）+ 补第 43 槽；[白屏三连](docs/10-方法论沉淀/白屏三连根因复盘与防回归清单.md) 清单逐条标落点（第 10/11/24/43 槽）并标出唯一未落地项（`inline_css.py` 输出后括号校验）；[人机创意工作流](docs/10-方法论沉淀/人机创意工作流方法论.md) backlog 落地状态回填（第 19 槽 `check_glossary.py`·第 43 槽 `check_chart_values.js`）；[markdown 写作规范](docs/10-方法论沉淀/markdown写作规范.md) 补阅读契约标记例外与现役写作权威指针；[可视化测试计划](docs/10-方法论沉淀/可视化测试计划-十七维叙事学图谱.md) 补 P2 基线现状（基线已建·图像 diff 未引入）与 KPI 口径分歧提示。
+> - **T3 范围纪律**：纯 md 改动（18 件·零 site/scripts 代码面）；历史值一律保留（E2 铁律）——新增说明就地并入既有小节，禁尾增速记段；两件判定「仍准确」不动（创意三明治工作流·人名用字两态盘点，后者系 W737 唯一登记保留在本目录的报告件）。
+> - **T4 新增候选（未开工·待拍板）**：批次交付流水线（preflight_check + batch_cascade + release_prep + safe_commit 链路）/ 治理文档分层与按需查表（W707/W709 + 第 41 门禁）/ 可视化数据正确性断言方法论（W753 三层防线）/ 多 Agent 干扰治理（W739-W741 touches 纪律）——四篇深度篇登记为候选，本批不建；另记「报告/方法论分流规则未入文档规范 §11 管控表」为权威位缺口。
+> - **T5 顺带修复三处仓库结构缺陷（级联前置取证发现问题·非本批原计划）**：① **W751 段头重复**——CHANGELOG 第 21/22 行为同一行 `### W751（…）`，使 batch_cascade 的「现役段标题行首唯一」断言失败、任何后续批次级联都无法运行（手工级联遗留），已去重；② **NUL 字节污染 2 处**——W736 批 spec 的 `\u0000` JSON 转义在落盘时被写成**真 NUL 字节**（CHANGELOG W736 段 + file-index W736 段各 1），两文件被编辑器判为二进制且 `check_edit` 类工具拒绝写入，已还原为字面 `\u0000` 转义（修复脚本 `scripts/output/_w754_fix_nul.py`·幂等）；③ **W752/W753 段缺失**——两批已收官（对账表有行·CHANGELOG 无段），依「条目文本由 Lead 在 W751 收官后插入」的既定约定补登记 CHANGELOG 段 + file-index 段（内容取自对账表行，来源逐段标注「递延补登记」），使 CHANGELOG 编号规则上限（W001-W754）与 file-index 段一一对应（第 17 门禁复绿）。④ **现役版本行递增数字收敛**——级联 desc 中的「19 篇」按 W520（递增数字禁字面量）改为不漂移表述（README/STRUCTURE/项目说明/HANDOVER/workflows README/四页脚共 12 处）。行尾保真：CHANGELOG/file-index 两文件 HEAD blob 为 CRLF，暂存用 `git -c core.autocrlf=false add` 保持，零整文件行尾翻动。
+> - **验证（全绿）**：lint_links docs/10 182 链接 0 broken；check_doc_sync 第 31 门禁 0 FAIL；check_index_health 通过（方法论 README 覆盖 19/19）；verify_delivery 门禁全量 OK；行尾保真（16 件 LF 保持 LF·README 与双索引两件保持 CRLF·零混尾）；pytest 不变（纯 md）。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：docs/10-方法论沉淀/README.md、docs/10-方法论沉淀/DRL真循环.md、docs/10-方法论沉淀/三skill闭环.md、docs/10-方法论沉淀/E1铁律.md、docs/10-方法论沉淀/E2文档同步区分历史vs现役.md、docs/10-方法论沉淀/Preflight与Subagent模板.md、docs/10-方法论沉淀/Subagent盲信铁律.md、docs/10-方法论沉淀/agent-web技术栈迁移评估.md、docs/10-方法论沉淀/dispatching-parallel-agents四subagent并行模式.md、docs/10-方法论沉淀/前端显示问题诊断SOP.md、docs/10-方法论沉淀/双索引可追溯改造.md、docs/10-方法论沉淀/可视化测试计划-十七维叙事学图谱.md、docs/10-方法论沉淀/并行Edit竞态问题.md、docs/10-方法论沉淀/改动后影响面扫描.md、docs/10-方法论沉淀/人机创意工作流方法论.md、docs/10-方法论沉淀/markdown写作规范.md、docs/10-方法论沉淀/白屏三连根因复盘与防回归清单.md、docs/10-方法论沉淀/记忆研究理论框架应用方法论.md、docs/00-导读/W批次编号对账表.md、AGENTS.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、CHANGELOG.md、CITATION.cff、.github/workflows/README.md、scripts/output/file-index.md、scripts/output/_w754_spec.json、scripts/output/_w754_fix_nul.py、scripts/output/_cascade_files_W754.txt。
+
+### W753（2026-10-15）：可视化数据正确性断言批（第 43 门禁）
+> **来源**：用户对项目三项薄弱点取证裁决之第三项——「87 个可视化页的渲染值 ↔ 页面数据源一致性无机器防线」。**递延补登记**：本段由 W754 批依对账表 W753 行补入（原批与 W751/W752 同会话并行收官，按同批约定「门禁面与文档面归 W751 单写、条目文本由 Lead 在 W751 收官后插入」，本段即该插入动作的落地）。
+> - **T1 断言器（scripts/check_chart_values.js）**：Playwright `file://` 直开（禁起本地服务）+「图元数 + KPI 文本」双签名稳定等待（只数元素会采到 count-up 中途值·实测 chapter-stats 采到 96/100）逐页真实渲染，覆盖 87 个 site/data 可视化页。
+> - **T2 五判据**：V1 无 pageerror（数据装载失败第一信号）/ V2 视图非空（SVG 图元·2D 画布像素·Three 场景子对象·表格行·DOM 数据项任一 > 0）/ V3 数据量级自洽（best-fit 数组长度 L 与图元数 S 满足 S/L ≥ 0.5·全站普查 p00=0.82·p05=2.8）/ V4 KPI 可复算（`[data-value]`/`.kpi-value` 类数字须由数据源复算·近失配差 <2% 而不等 = FAIL·对不上记 na 缺口禁静默跳过）/ V5 数据源四要素（复用第 28 槽 C1-C4·缺失只计缺口不 FAIL）。
+> - **T3 基线冻结与缺口报告**：`scripts/output/chart-values-baseline.txt`（87 页 × 6 项 = 522 行·基线外新增/回归/图元数跌破 50% 恶化 = FAIL）+ `scripts/output/chart-values-report.json`（na 逐页逐条）+ fail-closed（探针异常/超时/未产出 → PROBE 与 V1-V5 全 FAIL）。**门禁面与文档面归 W751**：`scripts/verify_delivery.py`、`docs/agent/gates.md`、`AGENTS.md` 由 W751 批次单写，本批只提交条目文本。
+> - **T4 E2E 扩面**：`tests/unit/test_visualization_data.py` + `tests/e2e/test_visualization_assertions.js`。
+> - **验证**：87 页 20s（5 workers）·0 FAIL·0 probe_error；缺口 V3 9 页 / V4 17 页 / V2 1 页（逐页原因见报告）；门禁终态 43 槽（同会话 W751 段 T6 记录）；第 43 槽定义见 docs/agent/gates.md。
+> - **状态**：已收官（0f4b0849 + 0827a401 收尾）。
+> - **文件**：scripts/check_chart_values.js、scripts/output/chart-values-baseline.txt、scripts/output/chart-values-report.json、tests/unit/test_visualization_data.py、tests/e2e/test_visualization_assertions.js。
+
+### W752（2026-10-15）：Web Agent 安全加固批
+> **来源**：用户对项目三项薄弱点取证裁决之第二项——「Web Agent 工具面即攻击面」。**递延补登记**：本段由 W754 批依对账表 W752 行补入（同 W753 约定：门禁面归 W751 单写·条目文本后插）。
+> - **T1 tools.ts 安全单测（30 例）**：工具面权限边界、参数校验与越界拒绝逐项断言（`server/engine/tools.test.ts`）。
+> - **T2 写操作持久化审计**：新增 `server/audit.ts`（audit.jsonl 落盘）+ `/api/audit` 查询端点 + `server/audit.test.ts`。
+> - **T3 细粒度写入允许域**：`AGENT_WEB_WRITE_SCOPE` 限定可写目录，白名单外拒绝（与权限四模式配合）。
+> - **T4 门禁面归 W751**：`scripts/verify_delivery.py` 由 W751 批次单写，本批不列 touches、只提交条目文本。
+> - **验证**：安全单测与审计单测全绿；文档面 `docs/agent/agent-web.md`、`SECURITY.md`、`xiyouji-agent-web/README.md`、`.env.example` 同步；同会话终态见 W751 段验证栏。
+> - **状态**：已收官（d55e0479）。
+> - **文件**：xiyouji-agent-web/server/engine/tools.ts、xiyouji-agent-web/server/engine/tools.test.ts、xiyouji-agent-web/server/index.ts、xiyouji-agent-web/server/audit.ts、xiyouji-agent-web/server/audit.test.ts、xiyouji-agent-web/package.json、xiyouji-agent-web/.env.example、xiyouji-agent-web/README.md、docs/agent/agent-web.md、SECURITY.md。
+
 ### W751（2026-10-15）：根级工具链防护批（第 42 门禁挂载）
 > **来源**：用户对项目的三项薄弱点取证裁决（内容生产体系完成度高、工程基础设施最薄）之第一项——「为根级工具脚本补齐专项测试与门禁覆盖」。开工前实读磁盘取证：scripts/ 根级 101 个非 `_` 脚本做四面引用普查（tests ∪ verify_delivery ∪ CI workflow ∪ Makefile），**46/101 四面无引用**；用户点名的三件（new_page.py 页面脚手架 / embed_json.py JSON 嵌入器 / slice_screenshots.py 截图切片器）逐个复核成立——它们直接生成或改写站点产物，却既无专项测试也不被任何门禁点名。
 > - **T1 三件专项测试（tests/unit/，共 44 例）**：①`test_new_page.py`（16 例）——P1 占位符全替换 / P2 模板缺失快速失败 / P3 name 白名单（`../evil`、`a/b`、大写、空格、中文、空串全拒）/ P4 索引条目插入位置（必须落 A-AH 区块第一个 `</ul>` 内且无关区块零损）/ P5 锚点缺失只警告不误写 / P6 dry-run 零写入 / P7 `--no-index` 不碰导航 / P8 重跑字节一致 + 零外域；路径三分（TEMPLATE/OUTPUT_DIR/INDEX）全部改道 tmp_path，末尾专用用例断言真实 site/index.html 未被触碰。②`test_embed_json.py`（16 例）——E1 括号深度边界（防贪婪截断）/ E2 JSON 字符串内 `{}` 不破坏深度计数 / E3 insert 三形态排版 + 产出仍是合法 JSON / E4 ensure 注入点（head→body→EOF 三级）/ E5 replace 只动目标键值 / E6 键名边界（`note` 不得命中 `note_extra`）/ E7 退出码契约 1/2/4 实测 + E8 备份语义（默认 `.bak`、`--no-backup` 不刷新）/ E9 中文不转义。③`test_slice_screenshots.py`（12 例）——S1 切片几何（2000/800 → 3 片且末片 400px·丢尾=页脚盲区）/ S1c 条纹图逐片取色证「按 y 递进」/ S2-S3 命名顺序与 posix 相对路径 / S4 clean_dir 只删 png 不递归 / S5 W536 守卫（scripts/ 外必拒且零落盘·内侧放行）/ S6 索引报告两视口 + 索引行与磁盘切片一一对应 / S7 重跑无残留；CLI 端到端必须落 scripts/ 内（守卫语义：`--output-dir` 不是逃逸口），用唯一子目录 `scripts/output/_w751_slice_probe/` 并自清。
@@ -171,7 +201,7 @@
 > **来源**：用户批准 S-31/32/33 三卡与实现形态、U-01 宿主定时巡检、文档负载治理批（file-index 289KB 超 50KB 阈值 5.8 倍）认领。动工前 preflight_check 全绿（fetch 正常·对账表 max=W735 → W736 认领·现势 bullet 交叉核验一致）。
 > - **T1 S-33 前置核验器**：scripts/preflight_check.py 新建——五检（fetch/origin-main 顶部/对账表取号/工作树态/环境 py+ruff+pytest）+ fetch 故障降级 GitHub API 通道（W732 实证备路）；取号权威源=对账表表格 max+1（parse_ledger 修复双「现势」源冲突——顶部遗留块停 W721 曾致误取 bullet 残留 W697）+ 尾部 bullet 交叉核验；狗粮首跑即抓真 bug，工具价值实证。
 > - **T2 S-31 发布预检器**：scripts/release_prep.py 新建——spec 三检（字段必填/分隔符黑名单/title 领衔/四件套文件行）+ 消息 W### 形态登记核验（C4 镜像·登记源=CHANGELOG 现役+两归档+对账表四件）+ 文件行 C4-f 镜像（在库/staged 且未 gitignore）+ --init 模板生成；判据精确镜像 batch_cascade.precheck。
-> - **T3 单测 17 例**：tests/unit/test_release_prep.py + tests/unit/test_preflight_check.py——字段检/禁字符/领衔/W 号登记/porcelain 解析（  分隔形态）/路径 C4-f 镜像全覆盖。
+> - **T3 单测 17 例**：tests/unit/test_release_prep.py + tests/unit/test_preflight_check.py——字段检/禁字符/领衔/W 号登记/porcelain 解析（\u0000 分隔形态）/路径 C4-f 镜像全覆盖。
 > - **T4 S-32 形态拍板**：行为等价验证套件（四口径工具箱）=仓库脚本形态·随下个重构批触发（任务卡 YAGNI 约束·不预建）。
 > - **T5 文档负载治理**：CHANGELOG W650-W699 段（v2.3.250-v2.3.293）迁 archive/docs/CHANGELOG-ARCHIVE.md（236KB→103KB）+ file-index W449-W699 段迁 archive/docs/file-index-ARCHIVE.md（289KB→35KB）——双文件归档边界统一 W700（check_index_health 段一一对应约束）；双文件头注/边界/「W736 一级归档」注记同步；C7 不变式 36/36 保持。
 > - **T6 引用登记**：scripts/README.md 三工具登记（archive_file/preflight_check/release_prep）+ archive/README.md 台账 6 行路径前缀与滚动批次同步 + 对账表 W736 认领行；W735 复盘报告 6 件随批入库（第 38 篇 328 行 37KB + 方法论 README 索引 + STRUCTURE 实体标记 30→31 + stats 三件刷新）。

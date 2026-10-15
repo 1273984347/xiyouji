@@ -11,6 +11,60 @@
 ---
 
 
+## W754 方法论目录口径整改批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/10-方法论沉淀/README.md | W754 | 索引重写（报告篇数引用式 + 复利总览标 W086 快照 + 协议层节改订 + 维护规则补报告分流/载体铁律 + 13d→16d） |
+| docs/10-方法论沉淀/DRL真循环.md | W754 | 上游 skill 失联注记 + 案例表截至 W086 指针 + 手工 Preflight 补现役工具行 + zip 步骤标非现役 |
+| docs/10-方法论沉淀/三skill闭环.md | W754 | 三 skill 位置列改指仓内等价载体 + 行号证据不可核验注记 + 补现役级联/核验工具 |
+| docs/10-方法论沉淀/E1铁律.md | W754 | 计数自洽（去易漂移总分·以明细表为准）+ commit 不在当前历史注记 + neat-freak 载体退役 + CHANGELOG 指针改归档 |
+| docs/10-方法论沉淀/E2文档同步区分历史vs现役.md | W754 | file-index W700+ 边界 + 第 31 门禁机器化补记 + W711 段形态注 + 归档段指向修正 |
+| docs/10-方法论沉淀/Preflight与Subagent模板.md | W754 | 三轨语料路径换代（text-search.html → dataset/text-search.json + text-search-app.js）+ 开工侧工具化登记 + 上游路径改指 |
+| docs/10-方法论沉淀/Subagent盲信铁律.md | W754 | 上游 skill 失联改指仓内 + 「共 4 篇」标 W235-S1 批次历史值 + 现役目录篇数注 |
+| docs/10-方法论沉淀/agent-web技术栈迁移评估.md | W754 | 状态行（迁移 W543-W548 已完成·ignore 已删·现役栈实测）+ 结论反转标注 + 版本回填 + 选项 A 终止 |
+| docs/10-方法论沉淀/dispatching-parallel-agents四subagent并行模式.md | W754 | 新增「现役并行纪律」节（touches 交集 + safe_commit）+ 三 skill 兜底改指仓内 |
+| docs/10-方法论沉淀/前端显示问题诊断SOP.md | W754 | 门禁对照表补槽号（8/9/10/11）+ 表注（.js 与 .py 两实现 + 三 `_` 脚本降级手动取证）+ 补第 43 槽 |
+| docs/10-方法论沉淀/双索引可追溯改造.md | W754 | W700+ 索引边界与 W711 段形态 + 仓外 memory 链接改内链 + §六 维护规则标工具化 + 归档段指向 |
+| docs/10-方法论沉淀/可视化测试计划-十七维叙事学图谱.md | W754 | 页面更名 13d→16d 9 处 + 测试真实路径 tests/e2e/ + 行号锚点改键锚 + P2 基线与 KPI 口径提示 + 投稿件路径 |
+| docs/10-方法论沉淀/并行Edit竞态问题.md | W754 | 补跨 Agent touches 层（机制未被取代）+ 上游路径改指 + CHANGELOG 段改归档指向 |
+| docs/10-方法论沉淀/改动后影响面扫描.md | W754 | 补机制层工具化（batch_cascade 10 面 + 清单 + preflight --touches + lint_links）+ 归档指向修正 |
+| docs/10-方法论沉淀/人机创意工作流方法论.md | W754 | backlog 落地状态回填（第 19/43 槽）+ audit 归档路径 + skills 退役 + .github 模板实测 |
+| docs/10-方法论沉淀/markdown写作规范.md | W754 | 阅读契约标记例外 + 关联文档补现役写作权威指针（§4.9/§4.10/§6） |
+| docs/10-方法论沉淀/白屏三连根因复盘与防回归清单.md | W754 | 改进清单逐条标落点（第 10/11/24/43 槽）+ 唯一未落地项（inline_css 括号校验）+ 页数现状括注 |
+| docs/10-方法论沉淀/记忆研究理论框架应用方法论.md | W754 | 七处 line 锚点换代（改回目+引文·第 20 门禁口径）+ §三 定位策略改写 + 九段式行同步 |
+| docs/00-导读/W批次编号对账表.md | W754 | W754 认领行登记 |
+| scripts/output/_w754_spec.json | W754 | 本批 spec 入库 |
+
+## W753 可视化数据正确性断言批（第 43 门禁）（2026-10-15）
+
+> **递延补登记**：本段由 W754 批依对账表 W753 行补入（原批条目文本按同会话约定后插·CHANGELOG 对应段同批补登记）。
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_chart_values.js | W753 | 第 43 门禁本体（Playwright file:// 真实渲染·五判据 V1-V5·87 页·基线冻结 + fail-closed） |
+| scripts/output/chart-values-baseline.txt | W753 | 基线冻结（87 页 × 6 项 = 522 行·只增） |
+| scripts/output/chart-values-report.json | W753 | 缺口报告（na 逐页逐条：V3 9 页 / V4 17 页 / V2 1 页） |
+| tests/unit/test_visualization_data.py | W753 | 断言器单测 |
+| tests/e2e/test_visualization_assertions.js | W753 | E2E 扩面 |
+
+## W752 Web Agent 安全加固批（2026-10-15）
+
+> **递延补登记**：本段由 W754 批依对账表 W752 行补入（同 W753 约定：门禁面归 W751 单写·条目文本后插）。
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/engine/tools.ts | W752 | 工具面安全加固（安全单测 30 例对应实现面） |
+| xiyouji-agent-web/server/engine/tools.test.ts | W752 | tools 安全单测 30 例 |
+| xiyouji-agent-web/server/index.ts | W752 | /api/audit 端点接线 |
+| xiyouji-agent-web/server/audit.ts | W752 | 写操作持久化审计（audit.jsonl） |
+| xiyouji-agent-web/server/audit.test.ts | W752 | 审计单测 |
+| xiyouji-agent-web/package.json | W752 | 依赖与脚本同步 |
+| xiyouji-agent-web/.env.example | W752 | AGENT_WEB_WRITE_SCOPE 细粒度写入允许域示例 |
+| xiyouji-agent-web/README.md | W752 | 安全边界文档同步 |
+| docs/agent/agent-web.md | W752 | Web Agent L2 文档同步（安全面） |
+| SECURITY.md | W752 | 安全记录同步 |
+
 ## W751 根级工具链防护批（第 42 门禁挂载）（2026-10-15）
 
 | 文件 | W | 说明 |
@@ -210,7 +264,7 @@
 |---|---|---|
 | scripts/preflight_check.py | W736 | 前置核验器新建（五检+fetch 故障 GitHub API 降级+取号权威源 max+1） |
 | scripts/release_prep.py | W736 | 发布预检器新建（spec 三检+消息 W 号核验+文件行 C4-f 镜像+--init 模板） |
-| tests/unit/test_preflight_check.py | W736 | preflight 单测（含 porcelain   分隔解析） |
+| tests/unit/test_preflight_check.py | W736 | preflight 单测（含 porcelain \u0000 分隔解析） |
 | tests/unit/test_release_prep.py | W736 | release_prep 单测 17 例组 |
 | archive/docs/CHANGELOG-ARCHIVE.md | W736 | W650-W699 段迁入（一级归档·与 file-index 同界 W700） |
 | archive/docs/file-index-ARCHIVE.md | W736 | W449-W699 段迁入（与 CHANGELOG 同界） |

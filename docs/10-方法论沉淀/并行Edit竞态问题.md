@@ -32,6 +32,8 @@ Edit 工具无文件级锁，并行 Edit 同一文件时基于同一原始文件
 
 > 同一文件的多个 Edit 必须串行执行；若多行有共同模式，用 `replace_all=true` 一次性处理。
 
+> **跨 Agent 版（W739·本铁律现役未被取代）**：单 Agent 内同文件 Edit 串行约束（AGENTS.md §4.3「同文件 Edit 串行」）不变；跨 Agent 的同类竞态由 `scripts/preflight_check.py --touches "<清单>" --self W###` 交集拒绝承接（W739 起·与在途批次 touches 交集非空即拒绝并行），纪律见 [docs/agent/pitfalls.md](../agent/pitfalls.md) git/提交/并发类。承接关系是「事后 Grep 验证」前移到「动工前交集拒绝」，非机制淘汰。
+
 ### 当前 session 立即验证原则
 
 > 并行 Edit 同一文件后，必须 Grep 验证所有修改点是否生效，发现丢失立即重新修复。
@@ -151,9 +153,9 @@ W086 Step 4a 协议升级首次完整实战验证中，subagent 串行同步 6 �
 - [三skill闭环.md](三skill闭环.md)：mem-wrap-up Step 4a 协议升级中本铁律是修复阶段关键约束
 - [Preflight与Subagent模板.md](Preflight与Subagent模板.md)：subagent prompt 模板含本铁律约束
 
-### 上游 skill
+### 上游 skill（已随 skills 治理退役·W562）
 
-- [C:\Users\12739\.trae-cn\skills\mem-wrap-up\SKILL.md](file:///C:/Users/12739/.trae-cn/skills/mem-wrap-up/SKILL.md)（Step 4a 项目层 Grep spot-check·串行 Edit 约束）
+- 原 `mem-wrap-up`（Step 4a 项目层 Grep spot-check·串行 Edit 约束）全局路径已失联（junction 指向不存在的 D:\1\open-source·仓内不共享）→ 仓内等价：[E1铁律.md](E1铁律.md)（Step 4a/7a 落地验证）+ [三skill闭环.md](三skill闭环.md)（协议升级联动记录）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + CLAUDE.md + docs/agent/*.md
 
 ### memory 文件
 
@@ -162,8 +164,8 @@ W086 Step 4a 协议升级首次完整实战验证中，subagent 串行同步 6 �
 
 ### 双索引
 
-- 正向时间线：[../../CHANGELOG.md](../../CHANGELOG.md)（W086 v2.0.59 文档同步 6 文件串行 Edit + Grep spot-check 30 处命中全部通过）
-- 反向文件索引：[../../scripts/output/file-index.md](../../scripts/output/file-index.md)
+- 正向时间线：[../../CHANGELOG.md](../../CHANGELOG.md)（现役件仅存 W700+）——W086 v2.0.59 文档同步 6 文件串行 Edit + Grep spot-check 30 处命中全部通过的记录见 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](../../archive/docs/CHANGELOG-ARCHIVE-tier2.md)
+- 反向文件索引：[../../scripts/output/file-index.md](../../scripts/output/file-index.md)（现役件仅存 W700+；W449-W699 段见 [archive/docs/file-index-ARCHIVE.md](../../archive/docs/file-index-ARCHIVE.md)）
 - W235 反向索引：W235-S1 方法论沉淀·本文件为第 2 篇（共 4 篇）
 
 ---

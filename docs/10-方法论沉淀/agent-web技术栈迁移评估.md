@@ -4,10 +4,11 @@
 > 创建：2026-09-02（W536）·触发源：dependabot PR #9 / #11 CI 红灯
 > 配套：`.github/dependabot.yml`（W536 起 agent-web 主版本升级单独排队）
 > 基线更新：2026-09-05（W539）— vite 5.4.21 → 6.4.3（devDep 漏洞清零·esbuild 随升·build/tsc 实测通过）；下文 Vite 跨度修订为「6.4.3 → 8.2」（剩余 2 个大版本）。另：dompurify override 已移除（Dependabot recreate 冲突根治，见 CHANGELOG W539）。
+> **状态（W754 校订·2026-10-16）：本评估已闭环，文件降级为历史档案。** 五阶段迁移 W543-W548 全落地、W568 走查关闭；§四 的解除条件已执行——`.github/dependabot.yml` 中 agent-web 段 `ignore: semver-major` 规则已删除（该文件 2026-09-05 注释实证），主版本升级恢复正常排队。**现役栈以 `xiyouji-agent-web/package.json` 为准**：typescript 7.0.2 / vite 8.3.1 / tailwindcss 4.3.3 / react 19.3.0 / express 5.2.1 / better-sqlite3 13.0.3 / dotenv 18.0.4 / uuid 14.0.2。**下文 §零-§四 是 W536-W539 时点的评估结论，按 E2 铁律保留原值，不得据以判断现役技术栈。**
 
 ## 零、结论摘要
 
-**当前处置**：agent-web 的两个 major PR（#9 dev-deps、#11 prod-deps）**不合并**，dependabot 配置已加 `ignore: semver-major` 规则让它们退出每周自动更新队列，转为专项迁移批次处理。
+**当前处置（W536 时点结论·已被 W543-W548 迁移取代，见头部状态行）**：agent-web 的两个 major PR（#9 dev-deps、#11 prod-deps）**不合并**，dependabot 配置已加 `ignore: semver-major` 规则让它们退出每周自动更新队列，转为专项迁移批次处理。
 
 **判断依据**：这两个 PR 各跨 1-3 个大版本（TypeScript 5→7、Vite 5→8、Tailwind 3→4、React 18→19、Express 4→5），属于**框架级范式变更**，不是"改几处类型错误"能吸收的。CI 暴露的两处报错只是最先撞上的门槛，其后还有配置迁移与运行时语义变更。
 
@@ -29,7 +30,7 @@
 | 8 | 运行时入口是 `server/index.ts`（`tsx` 执行），`server/index.js` 为编译产物；`engines.node >= 20` | `package.json` |
 | 9 | 本仓 ESLint 配置在 ESLint 9 下已失效（`.eslintrc.json` 不被读取，exit 2）—— W536 已迁移为 flat config | 本地 9.39.5 / 10.9.1 双版本实测 |
 
-**未验证项（本批未做，需专项批次内验证）**：
+**未验证项（本批未做，需专项批次内验证；W754 校：五项均已随 W543-W548 迁移完成验证）**：
 
 - TypeScript 7 对本仓 `tsconfig.json` 选项（`allowImportingTsExtensions` / `verbatimModuleSyntax` / `moduleResolution: bundler`）的兼容性
 - Vite 8 对 `vite.config.ts` 及 Node 版本下限的要求
@@ -56,6 +57,8 @@
 | **@types/node** | 20 → 26 | **中** | 类型层 | 需与 Node 运行时版本对齐，否则类型与运行时脱节 |
 | **TDesign 系** | tdesign-react 1.12→1.18、tdesign-icons-react 0.5→0.6 | **中** | 全量 UI | 版本跨度不大但需视觉回归；与 React 19 的组合兼容性未验证 |
 
+> **W754 校（结果回填）**：上表「版本跨度」写作时为**目标跨度**；实测现役版本已全部达到或超过目标——typescript 7.0.2 / vite 8.3.1 / tailwindcss 4.3.3 / react 19.3.0 / express 5.2.1 / better-sqlite3 13.0.3 / dotenv 18.0.4 / uuid 14.0.2（取证：`xiyouji-agent-web/package.json`）。评级列的「高/中/低」为 W536 预判，实际成本分布与预判的偏差见 §二 各行处置要点（Tailwind v4 为首位·Express 5 与 uuid 14 低风险判级实证修正）。
+
 ---
 
 ## 三、建议迁移顺序
@@ -76,18 +79,18 @@
 
 | 选项 | 说明 | 代价 |
 |:--:|:---|:---|
-| **A（当前采用）** | 暂不迁移，dependabot 忽略 agent-web 主版本升级，登记为专项待办 | agent-web 停留在旧技术栈；安全修复若落在 major 版本需人工判断 |
+| **A（W536 时点采用·已结束）** | 暂不迁移，dependabot 忽略 agent-web 主版本升级，登记为专项待办 | agent-web 停留在旧技术栈；安全修复若落在 major 版本需人工判断（W754 校：本选项已于 W548 终止——ignore 删除，迁移按选项 B 走完五阶段） |
 | B | 按 §三 分 5 个阶段逐栈迁移 | 5 个批次的工程量，且需人工视觉回归 |
 | C | 最小可用迁移——只做阶段 1（4 个低风险包） | 收益有限（React/TS/Vite 仍落后），但半小时内可闭环 |
 
-**当前采用 A 的原因**：项目战略重心是发布与读者数据验证（决策闸门待 GoatCounter UV 回填），agent-web 是平行入口而非主站；在主站数据未验证前，投入 5 个批次做子项目技术栈迁移的优先级不足。
+**当时采用 A 的原因（历史依据·W754 校保留原值）**：项目战略重心是发布与读者数据验证（决策闸门待 GoatCounter UV 回填），agent-web 是平行入口而非主站；在主站数据未验证前，投入 5 个批次做子项目技术栈迁移的优先级不足。
 
-**解除条件**：任一时刻决定做迁移时，删除 `.github/dependabot.yml` 中 agent-web 段的 `ignore` 规则，dependabot 会在下次扫描重新生成 PR。
+**解除条件**：任一时刻决定做迁移时，删除 `.github/dependabot.yml` 中 agent-web 段的 `ignore` 规则，dependabot 会在下次扫描重新生成 PR。**（W754 校：该条件已执行——规则已于 2026-09-05 W548 阶段删除，主版本升级恢复正常排队。）**
 
 ---
 
 ## 五、相关文件
 
-- `.github/dependabot.yml`：W536 起 agent-web 主版本升级单独排队（含解除条件注释）
+- `.github/dependabot.yml`：W536 起 agent-web 主版本升级单独排队；**W548 起 `ignore` 规则已删除、恢复正常排队**（解除记录见文件内注释）
 - `eslint.config.mjs`：W536 新建，flat config（`.eslintrc.json` 自 ESLint 9 起已失效）
 - `docs/10-方法论沉淀/前端显示问题诊断SOP.md`：视觉回归验证方法
