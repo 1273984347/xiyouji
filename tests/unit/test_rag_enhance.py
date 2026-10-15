@@ -5,6 +5,7 @@
 - 加权 RRF 池融合（rrf_fuse·dense×2 权重语义与共识优先·k=60 分母核验）
 - 并池合并（merge_pools·保序去重）
 - 改写输出清理与消息构造（clean_rewrite / build_rewrite_messages）
+- 智能改写路由（should_rewrite·短实体判据·W745）
 - chunks → 映射重建（doc_rows_from_chunks）
 - 离线预置（hf_model_cached / hf_offline_prepare·缓存探测与强制离线）
 - 引擎档位校验（EnhanceEngine 拒绝 off / 非法值·构造不触发重依赖加载）
@@ -117,6 +118,33 @@ def test_build_rewrite_messages_shape():
     msgs = rag_enhance.build_rewrite_messages("猴子被压在哪座山下")
     assert msgs[0]["role"] == "system" and "改写" in msgs[0]["content"]
     assert msgs[1] == {"role": "user", "content": "猴子被压在哪座山下"}
+
+
+# ---------- 智能改写路由（W745） ----------
+
+@pytest.mark.parametrize("q", ["白骨精", "铁扇公主", "紧箍咒", "真假美猴王", "牛魔王", "大闹天宫"])
+def test_should_rewrite_short_entity_skips(q):
+    assert rag_enhance.should_rewrite(q) is False
+
+
+@pytest.mark.parametrize("q", [
+    "猴子被压在哪座山下",
+    "孙悟空头上那个一收就疼的圈",
+    "吃了能长生不老的那种果子",
+    "妖怪为什么都有后台",
+    "孙悟空其实代表人的哪一部分",
+])
+def test_should_rewrite_descriptive_routes(q):
+    assert rag_enhance.should_rewrite(q) is True
+
+
+def test_should_rewrite_edge_cases():
+    assert rag_enhance.should_rewrite("") is False
+    assert rag_enhance.should_rewrite(None) is False
+    assert rag_enhance.should_rewrite("观音的坐骑") is True     # 短但含「的」结构
+    assert rag_enhance.should_rewrite("国王是谁") is True      # 短但疑问词
+    assert rag_enhance.should_rewrite("大闹天宫悟空") is False  # 6 字=上限·短实体
+    assert rag_enhance.should_rewrite("大闹天宫孙悟空") is True  # 7 字>上限
 
 
 # ---------- chunks 映射 ----------

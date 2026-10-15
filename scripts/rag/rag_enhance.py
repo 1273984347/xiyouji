@@ -12,7 +12,10 @@ rag_enhance.py — 《详解西游记》检索增强引擎（T-01 Phase-1 集成
   rerank     — dense 基础上：融合池 top50 交 cross-encoder（bge-reranker-base）
                重排（v1 配方：文档首 800 字导语为输入）
   rewrite    — rerank 基础上：LLM 查询改写并池（原查询池 ∪ 改写池·按改写查询
-               重排）——治「池外」查询（Q24 recall@5 0→1.0、Q29 0→0.667）
+               重排）——治「池外」查询（Q24 recall@5 0→1.0、Q29 0→0.667）；
+               W745 起内置智能路由：短实体查询（≤6 汉字·无「的」·无疑问词）
+               跳过改写直走主链——全量 30 条实测：默认全改写 @5 −0.032（direct
+               型 −0.184、简单层 −0.144），按型路由 @5 +0.041、@10 +0.107
 
 实测口径（T-01 Phase-1·30 查询评测集·详见 tmpe/hf-poc/ 实验区）：
   off 0.393 → dense 0.396 → rerank 0.487 recall@5（五系统对照 → 池构造器冠军）。
@@ -33,6 +36,7 @@ rag_enhance.py — 《详解西游记》检索增强引擎（T-01 Phase-1 集成
 """
 import json
 import os
+import re
 import sys
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
@@ -53,6 +57,7 @@ POOL_K = 50          # 融合池大小（交重排的候选数）
 INTRO_CHARS = 800    # v1 重排文本配方：文档首 800 字
 RERANK_BATCH = 16    # 重排批大小（实验口径）
 ENGINE_LEVELS = ("dense", "rerank", "rewrite")
+SHORT_CJK_MAX = 6    # W745 智能路由：短实体判据（≤6 汉字视为短查询·跳过改写）
 
 # 查询改写 prompt（与 T-01 实验一致）
 REWRITE_PROMPT = (
@@ -108,6 +113,29 @@ def build_rewrite_messages(query):
     """构造改写请求 messages（provider 兼容 schema）。"""
     return [{"role": "system", "content": REWRITE_PROMPT},
             {"role": "user", "content": query}]
+
+
+def should_rewrite(query):
+    """智能路由：查询是否走改写路径（W745·W744-6b 全量实测落地）。
+
+    依据（全量 30 条对照）：direct 型（短专名）改写 recall@5 −0.184（稀释精准
+    关键词 + 污染重排 query）；indirect/concept 型 +0.088/+0.020——「难例才调
+    LLM」。判据=短实体形态学规则（与评测集 direct 标签 30/30 一致·小样本·
+    后续可用更多数据校准）：
+
+      长度 >6 汉字 | 含「的」结构 | 含疑问词 → 走改写；否则短实体直走主链。
+    """
+    q = (query or "").strip()
+    if not q:
+        return False
+    cjk = len(re.findall(r"[\u4e00-\u9fff]", q))
+    if cjk > SHORT_CJK_MAX:
+        return True
+    if "的" in q:
+        return True
+    if re.search(r"(谁|什么|哪|怎么|为什么|为何|如何|吗|呢|多少|几)", q):
+        return True
+    return False
 
 
 def doc_rows_from_chunks(chunks):
@@ -301,7 +329,11 @@ class EnhanceEngine:
         pool = [p for p, _ in fused[:POOL_K]]
         rank_query = query
         if self.level == "rewrite":
-            rewritten = self._rewrite(query)
+            rewritten = ""
+            if should_rewrite(query):
+                rewritten = self._rewrite(query)
+            else:
+                print("[rag_enhance] 智能路由：短实体查询→主链（跳过改写）", file=sys.stderr)
             if rewritten:
                 bm2 = [s["path"] for s in bm25_retrieve(rewritten, top_k=POOL_TOP, index=index)]
                 dn2 = self._dense_order(rewritten)

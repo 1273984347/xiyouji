@@ -52,6 +52,9 @@ scripts/.pw-browsers/
 Thumbs.db
 desktop.ini
 
+# W745：WorkBuddy 工具目录（本地记忆/自动化文件·防 add -A 误入公开库）
+.workbuddy/
+
 # 输出文件
 scripts/output/figures/*.png
 scripts/output/figures/*.svg

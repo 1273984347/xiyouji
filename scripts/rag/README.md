@@ -71,7 +71,7 @@ API 格式：`anthropic` 走原生 messages（x-api-key 头）；其余走 OpenA
 | `off`（默认） | 现役加权 RRF（零依赖·行为不变） | 0.393 | 无 |
 | `dense` | + 稠密召回（bge-small-zh-v1.5·页级 max）= 双路加权 RRF 融合池（dense×2.0） | 0.396 | numpy + sentence-transformers |
 | `rerank` | + cross-encoder 重排（bge-reranker-base·文档首 800 字导语） | **0.487** | 同上 + 向量产物 |
-| `rewrite` | + LLM 查询改写并池（每次检索多 1 次 API 调用） | 7 条弱查询均值 +0.228 | 同上 + LLM_API_KEY |
+| `rewrite` | + 智能路由：短实体→主链 / 其余→LLM 改写并池（难例才调 LLM） | 全量路由后 @5 +0.041 / @10 +0.107 | 同上 + LLM_API_KEY |
 
 启用步骤：
 
@@ -88,6 +88,7 @@ RAG_ENHANCE=rerank python scripts/rag/rag_server.py
 ```
 
 - 依赖/产物缺失时 fail-fast 报错（含修复指引·不静默降级）；`off` 档不加载任何重依赖。
+- `rewrite` 档为智能路由（W745）：短实体查询（≤6 汉字·无「的」·无疑问词）直走主链不调 LLM；仅描述/问句型难查询走改写并池。依据=全量 30 条实测——默认全改写 @5 −0.032（简单层 −0.144），路由后 @5 +0.041、@10 +0.107。
 - 模型默认 CPU 推理（`RAG_DEVICE=cuda` 可切换）；国内网络可设 `HF_ENDPOINT=https://hf-mirror.com`。
 - docs/ 更新后向量产物过期：加载时自动告警，重跑 `build_vectors.py` 重建（分块未变秒级复用·变了全量重嵌）。
 - 硬件纪律：`build_vectors.py` 为重计算任务（GPU 模式默认微批 1500/冷却 35s/温度守护 ≥90°C 自动中止可续跑）——勿并行多开。

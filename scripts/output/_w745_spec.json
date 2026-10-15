@@ -1,0 +1,19 @@
+{
+  "batch": "W745",
+  "date": "2026-10-15",
+  "title": "W745 改写智能路由批",
+  "desc": "改写档智能路由化",
+  "head_entry": "2026-10-15（W745 改写智能路由批）",
+  "head_sentence": "T-01 全量验证落地：rewrite 档升级为智能路由，短实体直走主链、难例才调 LLM，全量 30 条由默认改写负增益转正为路由 @5 +0.041、@10 +0.107",
+  "changelog_body": "\n> **来源**：W744-6b 全量验证落地（用户令「全量 30 条跑一次改写对照」+「难例才调 LLM」）——7 条难查询的乐观结论经全量修正：改写默认全量 @5 −0.032（难层 +0.096 vs 简单层 −0.144·direct 型 −0.184）；按型路由模拟 @5 +0.041、@10 +0.107（逼近 Oracle 上界 0.707）。本批把路由实装进 rewrite 档，并附 W744 计数更正。\n> - **T1 智能路由（should_rewrite）**：新增短实体判据——长度 ≤6 汉字、无「的」结构、无疑问词 → 短实体（跳过改写直走主链）；否则走改写并池。判据与评测集 direct 标签 30/30 一致（小样本·后续可用更多数据校准）。\n> - **T2 接线（rewrite 档）**：retrieve_ranked 内路由——短实体不调 LLM（省改写调用与二次重排）、退化为主链（rerank 档行为）；跳过时 stderr 提示「智能路由：短实体查询→主链」。\n> - **T3 单测与文档**：test_rag_enhance.py 扩十二例（短实体/描述句/「的」结构/疑问词/长度边界）；README rewrite 档行与说明更新（全量路由后 @5 +0.041 / @10 +0.107）。\n> - **附：W744 计数更正**：W744 段旧计数 390 系离线预置四例加入前的数值，已更正为 394（CHANGELOG/HANDOVER/AGENTS/_w744_spec 四面同步随本批入库）；教训=新增测试落地后须重跑全量再定稿验证行计数。\n> - **附：仓库卫生**：.gitignore 增 `.workbuddy/` 忽略（本地记忆/自动化文件所在工具目录·此前未忽略·本批实测 add -A 会误暂存·已撤出改显式清单）。\n> - **验证（全绿）**：双冒烟——「白骨精」短实体跳过改写（stderr 提示+主链精准命中）、「把师徒四人装进袖子里的老道士」走改写（Q24 治愈复现·top2=镇元大仙）；pytest 406 passed；ruff scripts/ 全过；verify_delivery 全量四十六段 OK。\n> - **状态**：已落地（级联+提交后以 gh run list 为准）。\n> - **文件**：scripts/rag/rag_enhance.py、tests/unit/test_rag_enhance.py、scripts/rag/README.md、.gitignore、docs/00-导读/W批次编号对账表.md、HANDOVER.md、AGENTS.md、scripts/output/file-index.md、scripts/output/_w745_spec.json、scripts/output/_cascade_files_W745.txt。\n",
+  "milestone_block": "- **W745 改写智能路由批**：\n  - rewrite 档升级智能路由：短实体→主链（跳过改写）·难例才调 LLM（全量路由后 @5 +0.041 / @10 +0.107）\n  - should_rewrite 短实体判据 + 单测扩 12 例 + 附 W744 计数更正（390→394）\n",
+  "agents_note": "2026-10-15（W745）改写智能路由批（W744-6b 全量验证落地加用户令难例才调 LLM）：rag_enhance 增 should_rewrite 短实体判据（长度不超过六汉字加无「的」加无疑问词加否则走改写）加 rewrite 档接线路由（短实体跳过改写直走主链加省 LLM 调用）加单测扩十二例加 README 同步加附 W744 pytest 计数更正（三百九十到三百九十四·四面同步）；依据=全量三十条实测（默认全改写 @5 负零点零三二·按型路由 加零点零四一 加 @10 加零点一零七）；验证=双冒烟（白骨精跳过加 Q24 治愈复现）加 pytest 四百零六加 ruff 零加门禁四十六段",
+  "file_index_rows": [
+    "| scripts/rag/rag_enhance.py | W745 | 智能路由（should_rewrite 短实体判据·rewrite 档接线） |",
+    "| tests/unit/test_rag_enhance.py | W745 | 路由单测扩十二例（共四十五例） |",
+    "| scripts/rag/README.md | W745 | rewrite 档行与说明更新（路由后 @5 +0.041 / @10 +0.107） |",
+    "| .gitignore | W745 | 增 .workbuddy/ 忽略（防工具目录误提交） |",
+    "| docs/00-导读/W批次编号对账表.md | W745 | W745 认领行登记 |",
+    "| scripts/output/_w745_spec.json | W745 | 本批 spec 入库 |"
+  ]
+}
