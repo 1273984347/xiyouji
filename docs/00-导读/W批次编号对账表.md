@@ -116,7 +116,7 @@
 | W752 | Web Agent 安全加固批（用户三项薄弱点裁决之二）：tools.ts 安全单测 + 写操作持久化审计（audit.jsonl + /api/audit）+ 细粒度写入允许域（AGENT_WEB_WRITE_SCOPE）。**门禁面归 W751**：scripts/verify_delivery.py 由 W751 批次（Lead）单写，本批只在其收官后追加自己那一个挂载条目，故不列 touches | d55e0479 | W752 | **已收官**（d55e0479） | DSH 2026-10-15 | xiyouji-agent-web/server/engine/tools.ts, xiyouji-agent-web/server/engine/tools.test.ts, xiyouji-agent-web/server/index.ts, xiyouji-agent-web/server/audit.ts, xiyouji-agent-web/server/audit.test.ts, xiyouji-agent-web/package.json, xiyouji-agent-web/.env.example, xiyouji-agent-web/README.md, docs/agent/agent-web.md, SECURITY.md |
 | W753 | 可视化数据正确性断言批（用户三项薄弱点裁决之三）：site/data 文件:// 渲染值↔源数据一致性断言器 + 第 43 门禁 + E2E 扩面。**门禁面与文档面归 W751**：scripts/verify_delivery.py、docs/agent/gates.md、AGENTS.md 由 W751 批次（Lead）单写——本批只提交条目文本，由 Lead 在 W751 收官后插入，故不列 touches（preflight 实测交集项即此三文件·裁定：同面串行） | 0f4b0849 + 0827a401（收尾） | W753 | **已收官**（0f4b0849 + 0827a401） | DSH 2026-10-15 | scripts/check_chart_values.js, scripts/output/chart-values-baseline.txt, scripts/output/chart-values-report.json, tests/unit/test_visualization_data.py, tests/e2e/test_visualization_assertions.js |
 | W754 | 方法论目录口径整改批（用户令「docs/10-方法论沉淀 有需要更新或新增的吗」审计后裁 B 范围）：19 篇 + 索引全量校订——必修 4（页面更名 13d→16d ×10 处·agent-web 迁移评估结论反转·记忆研究七处 line 锚点失效·上游 skill 协议层失联声明）+ 建议改 8（README 索引重写/E1 计数自洽/双索引 W700+ 边界/门禁对照表槽号/白屏清单落点/创意 backlog 落地状态/markdown emoji 例外/测试计划口径）+ 全目录死链改指仓内；**顺带修复三处结构缺陷**（W751 段头重复去重·W736 段 NUL 字节污染 2 处还原·W752/W753 递延段补登记） | 812806ff | W754 | **已收官**（812806ff） | DSH 2026-10-16 | docs/10-方法论沉淀/*.md, docs/00-导读/W批次编号对账表.md |
-| W755 | 方法论深度篇扩建与治理口径统一批（用户拍板四项之二/三）：① 新建 4 篇深度篇（批次交付流水线 / 治理文档分层与按需查表 / 可视化数据正确性断言方法论 / 多 Agent 干扰治理与 touches 纪律）② 文档规范 §11 补「11-报告复盘」行 + 报告-方法论分流规则 ③ pitfalls 计数口径统一（AGENTS 33 / 节声明 34 / 顶层实测 38）④ HANDOVER「三」改经验总入口指针化 | 提交待回填 | W755 | **进行中** | DSH 2026-10-16 | docs/10-方法论沉淀/README.md, docs/00-导读/文档规范.md, docs/agent/pitfalls.md, AGENTS.md, HANDOVER.md, docs/00-导读/W批次编号对账表.md |
+| W755 | 方法论深度篇扩建与治理口径统一批（用户拍板四项之二/三）：① 新建 4 篇深度篇（批次交付流水线 / 治理文档分层与按需查表 / 可视化数据正确性断言方法论 / 多 Agent 干扰治理与 touches 纪律）② 文档规范 §11 补「11-报告复盘」行 + 报告-方法论分流规则 ③ pitfalls 计数口径统一（AGENTS 33 / 节声明 34 / 顶层实测 38 → 统一 38）④ HANDOVER「三」改经验总入口指针化；联动 docs/10 README 索引 20→24 + docs/INDEX 重建 + stats methodology_docs 20→24 + STRUCTURE §10 | 0ad6465a | W755 | **已收官**（0ad6465a） | DSH 2026-10-16 | docs/10-方法论沉淀/README.md, docs/00-导读/文档规范.md, docs/agent/pitfalls.md, AGENTS.md, HANDOVER.md, docs/00-导读/W批次编号对账表.md |
 
 ## 递延批豁免登记（D2 裁决：对账表登记即可过 doc-sync 提交-版段对账）
 
@@ -158,7 +158,8 @@
 - **W750**：现势下一自由号（859ec4c4 w749 收官级联后 checklist 例行·2026-10-15）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W691**：下一自由号被 W690 收官级联提交文本（4ab918d「现势 W691」）提前引用——C4 豁免登记（2026-10-09 补记）；本号仍为自由号，认领时正常占用。
 - **W750 / W751-W753**：W750 经前置实验证伪作废且**未产生提交**（编号不作数·见本表 W750 行）；W751-W753 三批于 2026-10-15 同会话并行收官（W751 根级工具链防护 / W752 Agent 安全加固 / W753 可视化数据断言），三批的**门禁面统一由 W751 单写**（并行批同面串行纪律·preflight 交集项即此），故 batch_cascade 编号锚点无法表达 W750 跳号，级联按 pitfalls「手工级联（跳号批）」先例执行并自建 `scripts/output/_cascade_files_W751.txt` 清单。**W754 补记**：该批遗留的三处结构缺陷（CHANGELOG W751 段头重复 / W736 段 NUL 字节污染 2 处 / W752-W753 段缺失）已由 W754 批修复并补登记（详见 CHANGELOG W754 段 T5）。
-- **W755**：现势下一自由号（812806ff w754 收官级联后 checklist 例行·2026-10-16）——**预留登记豁免**，动工时按取号规则正式认领。
+- **W755**：现势下一自由号（812806ff w754 收官级联后 checklist 例行·2026-10-16）——**预留登记豁免**，动工时按取号规则正式认领（已消费：方法论深度篇扩建与治理口径统一批·0ad6465a）。
+- **W756**：现势下一自由号（0ad6465a w755 收官级联后 checklist 例行·2026-10-16）——**预留登记豁免**，动工时按取号规则正式认领。
 
 ## 登记 ASCII 纪律
 
