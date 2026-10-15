@@ -117,7 +117,7 @@ function listPages() {
 
 function stripJsComments(html) {
   return html
-    .replace(/<script[\s\S]*?<\/script\s*>/gi, (m) => m.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/\/\/.*$/gm, ' '))
+    .replace(/<script[\s\S]*?<\/script[^>]*>/gi, (m) => m.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/\/\/.*$/gm, ' '))
     .replace(/<!--[\s\S]*?-->/g, ' ');
 }
 
