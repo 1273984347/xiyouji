@@ -183,7 +183,7 @@ DRL R1b/R2 subagent spot-check 是本铁律的下游应用。DRL R1a 3 verifier 
 
 - 正向时间线：[../../CHANGELOG.md](../../CHANGELOG.md)（2026-07-19 首次复现 + 2026-07-21 E14 第二次复现 ripgrep 跳过二进制文件）
 - 反向文件索引：[../../scripts/output/file-index.md](../../scripts/output/file-index.md)
-- W235 反向索引：W235-S1 方法论沉淀·本文件为第 3 篇（共 4 篇）——该「4 篇」为 W235-S1 批次计数（历史值·E2 铁律保留）；W754 校：本目录现役 19 篇主题（20 个 md，含 README.md），篇序不再作为现役口径
+- W235 反向索引：W235-S1 方法论沉淀·本文件为第 3 篇（共 4 篇）——该「4 篇」为 W235-S1 批次计数（历史值·E2 铁律保留）；**篇序不再作为现役口径**——本目录现役篇数以 [README.md](README.md) 目录索引为准（W755 起新增 4 篇深度篇）
 
 ---
 

@@ -39,7 +39,7 @@
 - **ML 栈在 handler 子线程首次 import → SIGSEGV**（W746）：http.server 的 ThreadingHTTPServer handler 子线程内首次 `import torch` / `sentence_transformers` → 段错误 exit 139 静默死亡（无 traceback；实证：rag_server /route 54s 后 empty reply、服务进程非零终止）。修复：**模型必须在主线程启动时预热**（`rag_server.py` main 里 `_get_router()` 范式）·handler 只做 encode（torch 已初始化后子线程使用安全）。诊断注意：静默 139 会被管道 `2>&1 | grep | tail` 掩盖——用 `${PIPESTATUS[0]}` 或不过滤直跑验退出码。
 - **ruff --fix 的 isort 会改坏「ST 先于 torch」顺序**（W746）：isort 排序规则把 plain import（`import torch`）排到 from-import（`from sentence_transformers import ...`）之前——正是本机段错误坑的关键顺序，铁则注释写在旁边也会被改坏（实证：--fix 后 CLI 静默 139）。修复：**ML 脚本的 ST import 块必须加 `# noqa: I001` 防守**（`scripts/rag/page_router.py` `_load_model` 范式），并复跑该脚本确认可跑。
 
-### git / 提交 / 并发（8 条）
+### git / 提交 / 并发（12 条）
 
 - **批量改 md 一律 Python `open(encoding='utf-8')`，禁用 PowerShell `Set-Content`**（后者默认写 UTF-8 BOM，项目 W427 曾全库清 BOM；`Add-Content` 同理慎用）。
 - **同文件多个 Edit 必须串行执行**（并行 Edit 基于同一原始内容计算 diff，后写覆盖先写——W505 复现 4 次：金角银角「唐僧肉」/CHANGELOG W506 段/项目说明头部/交接文档标题均丢失）；并行批次后必须 Grep 验证所有修改点。
