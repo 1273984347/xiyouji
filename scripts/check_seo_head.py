@@ -153,7 +153,7 @@ def _check_json_ld() -> list[str]:
             json.loads(m.group(1))
         except json.JSONDecodeError as e:
             violations.append(f"R5 JSON-LD 解析失败: {e}")
-    if "example.com" in idx:
+    if re.search(r"(?<![\w-])example\.com", idx):  # 域名左边界断言：notexample.com 不误报·www.example.com 仍命中（W758 CodeQL 加固）
         violations.append("R5 index.html 含 example.com 占位域名")
     return violations
 

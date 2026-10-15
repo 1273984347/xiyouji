@@ -186,7 +186,8 @@ def test_check_same_volume(tmp_path):
     b = tmp_path / "b"
     b.write_text("x", encoding="utf-8")
     assert tt.check_same_volume(str(a), str(b)) is True
-    assert tt.check_same_volume(str(a), "Z:\\nonexistent\\b") is False
+    if os.name == "nt":  # 盘符对比语义仅 Windows：POSIX splitdrive 恒返回空串，异盘断言不成立
+        assert tt.check_same_volume(str(a), "Z:\\nonexistent\\b") is False
 
 
 def test_build_plan_filters_non_move(env):
