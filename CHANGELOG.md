@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W747），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W748），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,15 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W748（2026-10-15）：第40篇复盘入库批
+> **来源**：用户提供「工作复盘与优化分析系统提示词」·第十一次执行（第 40 篇）——当日 W743-W747 五批收官周期复盘。
+> - **T1 报告入库**：docs/11-报告复盘/工作复盘与优化分析报告-2026-10-15.md（十节+附录 A-E）——① 执行摘要（19:00-20:40 双线周期·11 提交）② 信息基础（I-01~06+ASM-01~04）③ 经验复用 8 项（E-01~08·微批安全模式/ML 三件套/发布链五步/证伪入档等 P0 级）④ 技能优化 3 项+skill-creator 任务卡（S-36 路由评测方法论/S-37 负面结果处置/S-38 ML 排错）⑤ 未用技能 4 项全暂缓（各有触发条件）⑥ 场景沉淀 3 个（SC-01 实验→入库/SC-02 负面收口/SC-04 评审闭环）⑦ 问题 10 项+8 问题族 FAM-23~30+PRE-31~39（代理直连 fallback/主线程预热/noqa 防守/PIPESTATUS/全量提交/先诊断后方案等）⑧ 工作流 2 条（WF-01 实验闭环瓶颈识别/WF-02 评审链）⑨ 行动 A-01~07（W748 编号改由本篇消费·原路由版改写候选顺延）⑩ 可行性自评（总体可行）·附录=批次弧线/四证伪数据卡/分差谱/假设清单/术语表。
+> - **T2 索引与统计三连锁**：docs/11-报告复盘/README.md 索引加行（新报告编 1·原 1-15 顺延·现役 15→16 篇）+ STRUCTURE.md report_docs 标记 16→17（「现役 16 篇」文字同步）+ stats.py --w W748 派生三件刷新。
+> - **T3 编号说明**：W748 原为「路由版改写批」预留候选——本篇复盘入库先行消费该号；路由版改写仍为后续候选（触发条件=dukou 要 top-1 直跳·不变）。
+> - **验证（全绿）**：报告数据全部可溯源（git log 11 提交+实验区 tmpe 原始数据+当日日志）；pytest 415 不变（纯文档批）；ruff scripts/ 全过；verify_delivery 全量四十六段 OK；check_doc_sync 0 FAIL。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：docs/11-报告复盘/工作复盘与优化分析报告-2026-10-15.md、docs/11-报告复盘/README.md、STRUCTURE.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、docs/00-导读/W批次编号对账表.md、HANDOVER.md、AGENTS.md、scripts/output/file-index.md、scripts/output/_w748_spec.json、scripts/output/_cascade_files_W748.txt。
 
 ### W747（2026-10-15）：RAG 系统能力清单入库批
 > **来源**：W746 收官后的整合动作（用户提供整合草稿·事实校核后落盘）。**编号说明**：W747 原计划为「路由排序加权批」·经前置实验（title 加权零效果/IDF 加权负效果·第四条证伪）后用户裁定「A 主 B 待触发」不开工·编号改用于本沉淀批。
