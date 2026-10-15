@@ -11,6 +11,18 @@
 ---
 
 
+## W758 CI 首跑暴露缺陷修复批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| tests/unit/test_tmpe_tidy.py | W758 | 盘符断言加 os.name nt 守卫（POSIX splitdrive 恒空串·Linux runner 必红根修） |
+| scripts/requirements.txt | W758 | 补 markdown==3.10.2 钉版（build_reader 依赖登记·CI 首跑暴露） |
+| scripts/check_seo_head.py | W758 | R5 占位域名检测改左边界负向断言正则（CodeQL 加固） |
+| scripts/check_chart_values.js | W758 | stripJsComments 剥离正则加 gi 大小写不敏感（CodeQL 加固） |
+| docs/00-导读/W批次编号对账表.md | W758 | W758 认领行登记 |
+| scripts/output/_w758_spec.json | W758 | 本批 spec 入库 |
+| scripts/output/_w758_rotate.py | W758 | 一次性脚本：手工执行 AGENTS 脚注滚动迁 W749 入 ARCHIVE（编号空洞使级联断言失配的先例处置） |
+
 ## W757 CI 门禁接线缺陷修复批（2026-10-16）
 
 | 文件 | W | 说明 |

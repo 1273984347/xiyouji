@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W757），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W758），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,17 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W758（2026-10-16）：CI 首跑暴露缺陷修复批
+> **来源**：用户令「写 PR 进行合并」——PR #45（dev→main·W728-W757 共 64 提交弧线）首次真实 GitHub Actions 运行，26 项检查暴露 2 处必红 + 4 条 high 告警；**Delivery Gate 在首跑通过 = W757 接线修复（Playwright 安装）实测有效**。动工前 `preflight_check.py --touches` 全绿（对账表 max=W757 → W758 认领·交集 0）。
+> - **F1 pytest 平台假设用例（CI 必红 1/2）**：`tests/unit/test_tmpe_tidy.py::test_check_same_volume` 断言「不存在的 `Z:` 盘 → 不同卷」依赖 Windows 盘符语义；POSIX `os.path.splitdrive` 恒返回空串（任何路径恒判同卷）→ Linux runner 上 `is False` 必败。修复=盘符断言加 `os.name == "nt"` 守卫，同卷正断言保留全平台覆盖。
+> - **F2 markdown 依赖漏登记（CI 必红 2/2）**：`scripts/build_reader.py` 顶层 `import markdown`，本地环境已装而 `scripts/requirements.txt` 未登记 → CI `pip install -r requirements.txt` 后第 42 门禁根级脚本可导入性测试（`test_root_script_is_importable[build_reader.py]`）`ModuleNotFoundError` 必红。修复=requirements 补 `markdown==3.10.2`（本地实测版钉版）。
+> - **F3 两门禁脚本 CodeQL 加固（high 告警 2/4）**：① `check_chart_values.js` `stripJsComments` 的 `<script>` 剥离正则无 `i` 标志（大写 `<SCRIPT>` 变体漏剥·Bad HTML filtering regexp）→ 加 `gi`；实跑对拍 87 页 V1-V5 判据分布与改前逐项一致（0 FAIL·20.3s）。② `check_seo_head.py` R5 占位域名裸子串检测（incomplete URL substring sanitization）→ 改带左边界负向断言正则 `(?<![\w-])example\.com`（`notexample.com` 不再误报·`www.example.com` 仍命中）；实跑 855 页通过。
+> - **F4 归档件告警豁免（high 告警 2/4·范围纪律）**：`archive/scripts/batches/w6xx/_w672_var_drift.py` 与 `archive/scripts/w286_merge_yuanwen_shendu.py`（铁律 9 禁重跑件）同报 Bad HTML filtering regexp——归档冻结件不改写（§11.2 精神），走 GitHub CodeQL 警报豁免（won't fix·注明一次性归档脚本不在现役管线）。
+> - **F5 HANDOVER 当前 HEAD 句锚点修复（级联 dry-run 拦截·W757 遗留结构缺陷）**：实读磁盘发现「当前 HEAD = W757（…）」句内混入游离右括号与 W756 尾串残留 55 字（W757 批写 HANDOVER 时旧句未整段替换所致），致 batch_cascade 锚点正则 `[^）]*；详见 CHANGELOG）` 失配 fail-closed（防线实证有效）；本批按「先修复交接文档结构再级联」先例手工清残留（W756 内容在 CHANGELOG/对账表全量在档·零丢失）后重跑级联。
+> - **验证（全绿）**：`pytest tests -q` **591 passed / 3 skipped**；`ruff check` 改动 py 全过；`node --check check_chart_values.js` 通过；`check_seo_head.py` **855 页通过**；`check_chart_values.js --gate` **0 FAIL**（87 页 / 20.3s·判据分布与改前一致）；`verify_delivery.py` 全量 48 段自洽锁 OK。
+> - **状态**：代码面已落地并推送 dev；CI 侧以 PR #45 重跑为准，绿后按用户令合并 main。
+> - **文件**：tests/unit/test_tmpe_tidy.py、scripts/requirements.txt、scripts/check_seo_head.py、scripts/check_chart_values.js、docs/00-导读/W批次编号对账表.md、scripts/output/_w758_spec.json、scripts/output/_w758_rotate.py、scripts/output/_cascade_files_W758.txt、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、.github/workflows/README.md、site/index.html、site/dukou-engine.html、site/data/tag-cloud.html、site/data/cross-time-danmaku.html、archive/docs/AGENTS-ARCHIVE.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md。
 
 ### W757（2026-10-16）：CI 门禁接线缺陷修复批
 > **来源**：用户令「对项目工程基础设施薄弱点取证并修复」——本 session 对用户三轮共 22 条论断逐条实读磁盘对拍（结论：已消解 8 / 证伪 6 / 成立 8），并**新发现四条用户未提及的硬缺陷**。动工前 `preflight_check.py --touches` 全绿（对账表 max=W756 → W757 认领·交集 0）。审计报告见 [docs/11-方案报告/工程基础设施薄弱点审计报告-2026-10-16.md](docs/11-方案报告/工程基础设施薄弱点审计报告-2026-10-16.md)。
