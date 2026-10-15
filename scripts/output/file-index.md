@@ -11,6 +11,33 @@
 ---
 
 
+## W751 根级工具链防护批（第 42 门禁挂载）（2026-10-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_script_coverage.py | W751 | 新增·第 42 门禁根级脚本覆盖（四面引用·基线冻结·self-test 6 例） |
+| scripts/output/script-coverage-baseline.txt | W751 | 新增·35 条豁免逐行注明四类理由 |
+| scripts/verify_delivery.py | W751 | 挂第 42 槽（段名脚本覆盖·EXPECTED_SECTION_NAMES 47 段） |
+| tests/unit/test_new_page.py | W751 | 新增·页面脚手架专项 16 例 |
+| tests/unit/test_embed_json.py | W751 | 新增·JSON 嵌入器专项 16 例 |
+| tests/unit/test_slice_screenshots.py | W751 | 新增·截图切片器专项 12 例 |
+| tests/unit/test_tool_scripts_cli.py | W751 | 新增·根级 import 冒烟层 91 例（3 件显式豁免） |
+| tests/unit/test_check_script_coverage.py | W751 | 新增·第 42 门禁自测 10 例（含解析器自伤回归） |
+| AGENTS.md | W751 | §4.2 门禁计数 41→42 + 第 42 条摘要 + 阅读契约同步 + 版本脚注 |
+| docs/agent/gates.md | W751 | 标题 42 槽 + 速查表 + 第 42 条全量定义 |
+| docs/00-导读/文档规范.md | W751 | 门禁体系编号 41→42 |
+| README.md | W751 | 门禁数量标记 42<!--stats:gate_count--> + 当前批次抬头 W751 |
+| STRUCTURE.md | W751 | 当前批次抬头 W749→W751 |
+| docs/00-导读/项目说明.md | W751 | 当前批次行与「当前版本」列表行 W749→W751 |
+| HANDOVER.md | W751 | 最后更新链 + 进度节 W751 + 当前 HEAD 句 W751 |
+| CITATION.cff | W751 | version W749→W751（W 号区间字面量门禁同步面） |
+| .github/workflows/README.md | W751 | 头部版本 + 里程碑上限 W450-W751 + 批次链补 W751 条 |
+| scripts/output/stats.json | W751 | gate_count 41→42（stats.py --w W751 派生三件） |
+| scripts/output/stats-changelog.json | W751 | gate_count 变更史登记 |
+| scripts/output/stats-index.md | W751 | gate_count 反向索引登记 |
+| scripts/output/_w751_spec.json | W751 | 本批 spec 入库 |
+| scripts/output/_cascade_files_W751.txt | W751 | 手工级联清单（跳号批自建义务·W722 成文） |
+
 ## W749 ML 坑族防守补登批（2026-10-15）
 
 | 文件 | W | 说明 |

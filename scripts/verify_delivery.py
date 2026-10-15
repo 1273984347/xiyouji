@@ -92,13 +92,15 @@ EXPECTED_SECTION_NAMES = [
     "时间线双源",
     "chapter双源",
     "AGENTS分层",
+    "脚本覆盖",
+    "可视化数据",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
 # 四态：full=全量（缺省·CI verify-delivery job·批收尾七步③恒为 full）；docs=文档轨子集；
 # site=页面轨+级联相关文档段；auto=按变更路径白名单分类（任何越界文件保守回退 full）。
 # 11 个内联廉价段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区）恒跑不跳；跳过只作用于
-# 35 个 subprocess 委托段（46 段 - 11 内联·W713 实测校数）：_scoped_run 统一短路，
+# 37 个 subprocess 委托段（48 段 - 11 内联·W751 加第 42/43 槽后校数）：_scoped_run 统一短路，
 # _GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
 # 校验（fake stdout 含段标记，wrapper 不会误判「缺汇总行」）；段自洽锁按 scope 断言子集。
 _DOC_FILES_RE = re.compile(
@@ -138,6 +140,8 @@ _GATE_SUMMARY_MARKERS = {
     "时间线双源": "---- 第 39 门禁 故事内时间线双源同步：",
     "chapter双源": "---- 第 40 门禁 chapter_stats 双源同步：",
     "AGENTS分层": "---- 第 41 门禁 AGENTS 分层完整性：",
+    "脚本覆盖": "---- 第 42 门禁 根级脚本覆盖：",
+    "可视化数据": "---- 第 43 门禁 可视化数据断言：",
 }
 
 
@@ -406,6 +410,7 @@ class _StrictGate(NamedTuple):
     ok_msg: str = ""
     ok_line: int = -1
     fail_tail: str = "tail6"
+    runner: str = "py"  # W751：py=sys.executable（默认·既有 15 段行为不变）/ node=node（第 43 槽 check_chart_values.js）
 
 
 # a11y对比（第 20 段·bespoke）之前的 7 个简单委托段（执行序=EXPECTED_SECTION_NAMES 声明序）
@@ -571,6 +576,18 @@ _STRICT_GATES = [
                 fail_msg="AGENTS 分层失配",
                 marker_msg="AGENTS 分层门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
                 ok_msg="AGENTS 分层完整性通过（%s）", ok_line=-2, fail_tail="stdout4"),
+    _StrictGate(section="脚本覆盖", script="check_script_coverage.py",
+                marker="---- 第 42 门禁 根级脚本覆盖：",
+                crash_msg="脚本覆盖门禁执行异常（第 42 槽·crash 即拦）: %s",
+                fail_msg="根级脚本覆盖缺口",
+                marker_msg="脚本覆盖门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+                ok_msg="根级脚本覆盖通过（%s）", ok_line=-2),
+    _StrictGate(section="可视化数据", script="check_chart_values.js", runner="node", timeout=300,
+                marker="---- 第 43 门禁 可视化数据断言：",
+                crash_msg="可视化数据断言门禁执行异常（第 43 槽·crash 即拦）: %s",
+                fail_msg="可视化数据断言缺口",
+                marker_msg="可视化数据断言门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+                ok_msg="可视化数据断言通过（%s）", ok_line=-2),
 ]
 
 
@@ -609,8 +626,9 @@ def _run_strict_gate(ctx, gate):
     经 fail_tail="stdout4" 参数化，其余段为标准 tail（stdout 末 1 行 + stderr 末 2 行）。
     """
     ctx.section(gate.section)
+    exe = "node" if gate.runner == "node" else sys.executable
     try:
-        r = subprocess.run([sys.executable, os.path.join(_HERE, gate.script)] + list(gate.args),
+        r = subprocess.run([exe, os.path.join(_HERE, gate.script)] + list(gate.args),
                            capture_output=True, text=True, timeout=gate.timeout)
     except Exception as e:
         ctx.rep.fail(gate.crash_msg % e)
