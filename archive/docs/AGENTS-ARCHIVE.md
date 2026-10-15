@@ -183,3 +183,8 @@
 ```text
 2026-10-15（W749）ML 坑族防守补登批（第 40 篇复盘 A-02 行动加用户令开工）：pitfalls 运行时节补两条（子线程首次 import torch/ST 段错误 exit 139 静默→主线程预热范式加 ruff --fix isort 把 ST 先于 torch 顺序改坏→noqa: I001 防守）加查坑表补 ML 五查行加运行时节计数三到五加 AGENTS 坑位计数三十一到三十三联动；验证=纯 md 追加加 pytest 四百一十五不变加门禁四十六段
 ```
+以下为 AGENTS.md 版本脚注早期条目（W751-W751）段的原文（单行沿革链·W759 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-15（W751）根级工具链防护批（用户三项薄弱点裁决之一加第 42 门禁挂载）：check_script_coverage 第 42 槽（四面引用加基线冻结加 self-test 六例）加 new_page 十六例加 embed_json 十六例加 slice_screenshots 十二例加根级 import 冒烟九十一例加 gate_count 四十一到四十二；验证=新增五文件一百四十五例加 ruff 零加第 42 门禁零 FAIL 加 agents 分层三方对账四十二加 doc-sync 零 FAIL；负面结论=十七脚本忽略 --help 直接跑主逻辑故判据收窄为 import 面
+```
