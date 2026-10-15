@@ -1,6 +1,6 @@
 # AGENTS.md — 《详解西游记》项目 Agent 指南
 
-> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 41 条门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
+> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 43 条门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
 >
 > 本文件面向进入本仓库工作的 AI Agent（及新接手的人类维护者），提供项目的用途、技术栈、目录结构、关键模块、依赖关系、构建运行方式与必须遵守的铁律。动手前请通读；更细的规则以文末「权威文档」为准。
 >
@@ -103,9 +103,9 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 
 ### 4.2 交付门禁体系（verify_delivery.py，pre-commit 强制 · 摘要层）
 
-> **📖 阅读契约（W709）**：索引型——本节=41 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
+> **📖 阅读契约（W709）**：索引型——本节=43 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
 
-verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 41 槽，五组：
+verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 43 槽，五组：
 
 **内容与同步类（1-5）**：
 1. **六文档同步**
@@ -141,7 +141,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 25. **数据内容一致性**
 26. **SEO head**
 
-**编号与质量防线类（27-41）**：
+**编号与质量防线类（27-43）**：
 27. **W 号区间字面量**
 28. **可视化可引用性**
 29. **色盲安全**
@@ -157,6 +157,8 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 39. **故事内时间线双源同步**
 40. **chapter_stats 双源同步**
 41. **AGENTS 分层完整性**
+42. **根级脚本覆盖**
+43. **可视化数据断言**（check_chart_values.js·W753）
 
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
@@ -275,4 +277,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W744-W744 级联自动滚动·脚注保留最近 5 条·grep 查勿通读）；2026-10-15（W745）改写智能路由批（W744-6b 全量验证落地加用户令难例才调 LLM）：rag_enhance 增 should_rewrite 短实体判据（长度不超过六汉字加无「的」加无疑问词加否则走改写）加 rewrite 档接线路由（短实体跳过改写直走主链加省 LLM 调用）加单测扩十二例加 README 同步加附 W744 pytest 计数更正（三百九十到三百九十四·四面同步）；依据=全量三十条实测（默认全改写 @5 负零点零三二·按型路由 加零点零四一 加 @10 加零点一零七）；验证=双冒烟（白骨精跳过加 Q24 治愈复现）加 pytest 四百零六加 ruff 零加门禁四十六段；2026-10-15（W746）语义页面路由端点批（T-01 Phase-0 转正加用户批准开工）：rag_server 增 /route 懒加载端点（只读八十七页向量缓存不触发 RAG 索引）加 /health 解绑索引（status 加 routes 数）加 page_router 晋升 scripts/rag（路径参数化加缓存迁 output）加单测九例加 README 路由节；实测=CLI 冒烟加 /route 端到端零点四秒加 21 题分层回归与实验区一致（基线十题 top-1 与 top-3 均九中持平）；两坑实证=子线程首次 import torch 段错误改主线程预热加 ruff isort 改坏 ST 先于 torch 顺序致 CLI 段错误加 noqa 防守；验证=pytest 四百一十五加 ruff 零加门禁四十六段；2026-10-15（W747）RAG 系统能力清单入库批（W746 收官整合加用户草稿校核·原 W747 排序加权批证伪后编号改用）：scripts/rag/README 扩写系统能力总览与已知边界节（四档指标加端点表加四条证伪加四条体系边界加分差三层加元模式加资产索引）；事实修正五处（零点四八一明确为智能路由增益加启动命令统一 py -3.12 加 eval_compare 位置修正为实验区加图谱数据文件名修正加负增益提示）；价值=实验区 recipe card 沉淀进仓库防知识断档；验证=纯 md 追加式不影响门禁加 verify 四十六段；2026-10-15（W748）第 40 篇复盘入库批（用户提供复盘系统提示词加第十一次执行）：工作复盘与优化分析报告-2026-10-15.md 入库（执行摘要加信息基础加经验八项加技能三项任务卡加未用技能四项加场景三个加问题十项八族 FAM-23~30 与 PRE-31~39 加工作流两条加行动七项加知识资产十条加可行性自评加附录五份）；索引三连锁（README 加行编号顺展现役十六篇加 STRUCTURE report_docs 十七加 stats 派生三件）；编号说明=原路由版改写候选顺延；验证=数据全溯源加 pytest 四百一十五不变加门禁四十六段；2026-10-15（W749）ML 坑族防守补登批（第 40 篇复盘 A-02 行动加用户令开工）：pitfalls 运行时节补两条（子线程首次 import torch/ST 段错误 exit 139 静默→主线程预热范式加 ruff --fix isort 把 ST 先于 torch 顺序改坏→noqa: I001 防守）加查坑表补 ML 五查行加运行时节计数三到五加 AGENTS 坑位计数三十一到三十三联动；验证=纯 md 追加加 pytest 四百一十五不变加门禁四十六段。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W744-W744 级联自动滚动·脚注保留最近 5 条·grep 查勿通读）；2026-10-15（W745）改写智能路由批（W744-6b 全量验证落地加用户令难例才调 LLM）：rag_enhance 增 should_rewrite 短实体判据（长度不超过六汉字加无「的」加无疑问词加否则走改写）加 rewrite 档接线路由（短实体跳过改写直走主链加省 LLM 调用）加单测扩十二例加 README 同步加附 W744 pytest 计数更正（三百九十到三百九十四·四面同步）；依据=全量三十条实测（默认全改写 @5 负零点零三二·按型路由 加零点零四一 加 @10 加零点一零七）；验证=双冒烟（白骨精跳过加 Q24 治愈复现）加 pytest 四百零六加 ruff 零加门禁四十六段；2026-10-15（W746）语义页面路由端点批（T-01 Phase-0 转正加用户批准开工）：rag_server 增 /route 懒加载端点（只读八十七页向量缓存不触发 RAG 索引）加 /health 解绑索引（status 加 routes 数）加 page_router 晋升 scripts/rag（路径参数化加缓存迁 output）加单测九例加 README 路由节；实测=CLI 冒烟加 /route 端到端零点四秒加 21 题分层回归与实验区一致（基线十题 top-1 与 top-3 均九中持平）；两坑实证=子线程首次 import torch 段错误改主线程预热加 ruff isort 改坏 ST 先于 torch 顺序致 CLI 段错误加 noqa 防守；验证=pytest 四百一十五加 ruff 零加门禁四十六段；2026-10-15（W747）RAG 系统能力清单入库批（W746 收官整合加用户草稿校核·原 W747 排序加权批证伪后编号改用）：scripts/rag/README 扩写系统能力总览与已知边界节（四档指标加端点表加四条证伪加四条体系边界加分差三层加元模式加资产索引）；事实修正五处（零点四八一明确为智能路由增益加启动命令统一 py -3.12 加 eval_compare 位置修正为实验区加图谱数据文件名修正加负增益提示）；价值=实验区 recipe card 沉淀进仓库防知识断档；验证=纯 md 追加式不影响门禁加 verify 四十六段；2026-10-15（W748）第 40 篇复盘入库批（用户提供复盘系统提示词加第十一次执行）：工作复盘与优化分析报告-2026-10-15.md 入库（执行摘要加信息基础加经验八项加技能三项任务卡加未用技能四项加场景三个加问题十项八族 FAM-23~30 与 PRE-31~39 加工作流两条加行动七项加知识资产十条加可行性自评加附录五份）；索引三连锁（README 加行编号顺展现役十六篇加 STRUCTURE report_docs 十七加 stats 派生三件）；编号说明=原路由版改写候选顺延；验证=数据全溯源加 pytest 四百一十五不变加门禁四十六段；2026-10-15（W749）ML 坑族防守补登批（第 40 篇复盘 A-02 行动加用户令开工）：pitfalls 运行时节补两条（子线程首次 import torch/ST 段错误 exit 139 静默→主线程预热范式加 ruff --fix isort 把 ST 先于 torch 顺序改坏→noqa: I001 防守）加查坑表补 ML 五查行加运行时节计数三到五加 AGENTS 坑位计数三十一到三十三联动；验证=纯 md 追加加 pytest 四百一十五不变加门禁四十六段；2026-10-15（W751）根级工具链防护批（用户三项薄弱点裁决之一加第 42 门禁挂载）：check_script_coverage 第 42 槽（四面引用加基线冻结加 self-test 六例）加 new_page 十六例加 embed_json 十六例加 slice_screenshots 十二例加根级 import 冒烟九十一例加 gate_count 四十一到四十二；验证=新增五文件一百四十五例加 ruff 零加第 42 门禁零 FAIL 加 agents 分层三方对账四十二加 doc-sync 零 FAIL；负面结论=十七脚本忽略 --help 直接跑主逻辑故判据收窄为 import 面。如与上述权威文档冲突，以权威文档为准。*
