@@ -149,6 +149,22 @@ COMPILED = [(rid, desc, re.compile(pat), sev, exts) for rid, desc, pat, sev, ext
 VISUAL_PAGE_DIRS = ("site",)
 XSS_DOWNGRADE_RULES = {"XSS-001", "XSS-002", "XSS-006"}
 
+# W757：agent-web 的 tsc 编译产物（`.gitignore:114-126` 已忽略：server/*.js、server/engine/*.js、
+# vite.config.js 等）。它们是 .ts 源的生成物，CI 上不存在——若纳入扫描会造成「本地红 / CI 绿」
+# 分歧（实测：tools.test.js 内的测试夹具假凭证命中 SEC-002 high）。按 gitignore 同一契约排除，
+# 保证扫描面 == 入库面（源文件 .ts/.tsx 仍全量扫描）。
+_AGENT_WEB_BUILD_ARTIFACT_RE = re.compile(
+    r"^xiyouji-agent-web/(server/[^/]+\.(js|d\.ts)|server/engine/[^/]+\.(js|d\.ts)|vite\.config\.(js|d\.ts))$")
+
+
+def _is_agent_web_build_artifact(path: Path) -> bool:
+    """判断是否为 agent-web 的 tsc 编译产物（非入库件·CI 不存在·按 gitignore 契约排除）。"""
+    try:
+        rel = str(path.relative_to(ROOT)).replace("\\", "/")
+    except ValueError:
+        return False
+    return bool(_AGENT_WEB_BUILD_ARTIFACT_RE.match(rel))
+
 
 def _is_visual_page(path: Path) -> bool:
     """判断文件是否位于可视化页面目录（D3.js 渲染页面，innerHTML 为标准用法）。"""
@@ -158,21 +174,33 @@ def _is_visual_page(path: Path) -> bool:
 
 
 def discover_files():
-    """发现 site/ + scripts/ + tests/ 下所有 HTML/JS/PY 文件。"""
-    roots = [SITE_DIR, SCRIPTS_DIR, ROOT / "tests", ROOT / "mcp-server"]
-    exts = {".html", ".js", ".py", ".jsx", ".yml", ".yaml", ".txt"}
+    """发现 site/ + scripts/ + tests/ + mcp-server/ + xiyouji-agent-web/ 下所有 HTML/JS/PY/TS 文件。
+
+    W757 扩面：原 roots 不含 `xiyouji-agent-web/`、exts 不含 `.ts/.tsx/.mjs`——该目录是
+    「能读写仓库文件、运行脚本」的 React+Express 服务（安全风险最集中处），此前**零覆盖**
+    （全文件 grep `agent-web` 命中 0）。现纳入扫描，`dist/` 构建产物与 `node_modules/` 由下方
+    排除段跳过（dist 已在排除集，防扫描产物噪声）。
+    """
+    roots = [SITE_DIR, SCRIPTS_DIR, ROOT / "tests", ROOT / "mcp-server",
+             ROOT / "xiyouji-agent-web"]  # W757 扩面
+    exts = {".html", ".js", ".py", ".jsx", ".yml", ".yaml", ".txt",
+            ".ts", ".tsx", ".mjs"}  # W757 扩面：TypeScript / ESM 模块
     files = []
     for root in roots:
         if not root.exists():
             continue
         for p in root.rglob("*"):
             if p.is_file() and p.suffix.lower() in exts:
-                # 跳过 baseline/current 截图目录、node_modules、本地 Playwright 浏览器二进制
-                if any(seg in {"node_modules", "current", "baseline", ".thumbnails", ".pw-browsers"} for seg in p.parts):
+                # 跳过 baseline/current 截图目录、node_modules、构建产物、本地 Playwright 浏览器二进制
+                if any(seg in {"node_modules", "current", "baseline", ".thumbnails", ".pw-browsers", "dist"} for seg in p.parts):
                     continue
                 # W400 修复：跳过下划线前缀的一次性诊断/开发脚本（如 _chk_*.js）
                 # —— 它们非生产代码，且常含 eval/innerHTML 用于本地调试，不应阻断安全门禁
                 if p.name.startswith("_"):
+                    continue
+                # W757：跳过 agent-web 的 tsc 编译产物（gitignore 已忽略·CI 不存在·
+                # 纳入会造成本地红/CI 绿分歧）
+                if _is_agent_web_build_artifact(p):
                     continue
                 files.append(p)
     return sorted(files)

@@ -16,7 +16,7 @@
 | html_total | 857 | site/**/*.html（递归全站） | W459 | W459 |
 | inline_css_pages | 330 | site 全树含 INLINED 标记页 | W459 | W459 |
 | methodology_docs | 24 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W755 |
-| report_docs | 17 | docs/11-报告复盘/*.md（含索引 README） | W737 | W748 |
+| report_docs | 20 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W757 |
 | scan_files | 855 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W459 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
 | seo_scanned | 855 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | W591 |
@@ -27,6 +27,9 @@
 | visualization_pages | 87 | site/data_html − _shell.html | W459 | W459 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W757（2026-10-16 04:04:21）
+- report_docs: 17 → 20
 
 ### W755（2026-10-16 03:06:14）
 - methodology_docs: 20 → 24

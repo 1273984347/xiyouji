@@ -281,3 +281,49 @@ def test_dependency_scan_integration_with_security_scan():
     assert "SEC" in categories
     assert "API" in categories
     assert "CSP" in categories
+
+
+# ---------------------------------------------------------------------------
+# W757 扩面：扫描面必须覆盖 xiyouji-agent-web（能读写仓库的 React+Express 服务）
+# ---------------------------------------------------------------------------
+
+def test_discover_files_covers_agent_web():
+    """W757 D3：扫描面必须包含 xiyouji-agent-web/ 下的源文件。
+
+    缺陷背景：原 roots = [site, scripts, tests, mcp-server]，不含 agent-web；
+    exts 不含 .ts/.tsx/.mjs。该目录是「能读写仓库文件、运行脚本」的服务
+    （安全风险最集中处），此前**零覆盖**（全文件 grep `agent-web` 命中 0）。
+    """
+    files = security_scan.discover_files()
+    aw = [f for f in files if "xiyouji-agent-web" in str(f).replace("\\", "/")]
+    assert aw, "扫描面不含 xiyouji-agent-web/ 任何文件——扩面被回退（W757 D3 复发）"
+
+
+def test_discover_files_includes_typescript_sources():
+    """W757 D3：必须扫 .ts / .tsx / .mjs（agent-web 主体为 TypeScript）。"""
+    files = security_scan.discover_files()
+    exts = {f.suffix for f in files}
+    for want in (".ts", ".tsx", ".mjs"):
+        assert want in exts, "扫描面缺扩展名 %s——TypeScript 源文件不受安全门禁保护" % want
+
+
+def test_discover_files_excludes_agent_web_build_artifacts():
+    """W757：tsc 编译产物必须排除（否则「本地红 / CI 绿」分歧）。
+
+    实测：tools.test.js（由 tools.test.ts 生成·.gitignore:121 忽略）内含测试夹具
+    假凭证，命中 SEC-002 high；CI 上无该产物，若纳入扫描会造成本地阻断而 CI 放行。
+    """
+    files = security_scan.discover_files()
+    artifacts = [
+        str(f).replace("\\", "/") for f in files
+        if str(f).replace("\\", "/").startswith("xiyouji-agent-web/server/")
+        and (str(f).endswith(".js") or str(f).endswith(".d.ts"))
+    ]
+    assert not artifacts, "扫描面含 agent-web tsc 编译产物（应排除）：%s" % artifacts[:5]
+
+
+def test_agent_web_scan_surface_is_stable():
+    """W757：扩面规模下限（防扩面被静默收窄成空集）。"""
+    files = security_scan.discover_files()
+    aw = [f for f in files if "xiyouji-agent-web" in str(f).replace("\\", "/")]
+    assert len(aw) >= 30, "agent-web 扫描面仅 %d 个文件，疑似收窄（实测入库源文件 43 个）" % len(aw)

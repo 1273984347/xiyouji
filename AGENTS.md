@@ -55,7 +55,7 @@ xiyouji/
 │   ├── 06-个人随笔/       # A2 随笔（44 篇）
 │   ├── 07-09/             # 学以致用 / 提升认知 / 精神塑造
 │   ├── 10-方法论沉淀/     # 复盘、诊断 SOP、DRL 真循环等可复利经验
-│   ├── 11-报告复盘/       # 复盘/审查/调研报告统一归档（W737 建·报告类不再入 10）
+│   ├── 11-方案报告/       # 复盘/审查/调研报告统一归档（W737 建·W757 改名·报告类不再入 10）
 │   ├── S2/S3/S4/          # 外部分享 / 方法论外部分享 / 学术投稿候选
 │   ├── superpowers/       # 开发过程 spec/plan 档案
 │   ├── _dev/  _templates/ # 开发内部文档 / 内容模板（勿直接套用）
@@ -170,7 +170,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 **最高频铁则（全文见 pitfalls.md）**：改内联脚本必跑 generate_csp.py；批量改 CSS/JS 验括号平衡；多行逻辑禁 shell heredoc 落 Python 文件；同文件 Edit 串行；级联后按清单 git add；认领批次登记 touches·动工前 `preflight_check.py --touches <清单> --self W###` 查在途交集（跨 Agent 版「同文件串行」）。
 
-**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS/视觉渲染（9）· JS/CSP/运行时（5）· git/提交/并发（12）· 级联/CHANGELOG（4）· 数据/内容可信度（4）· 流程/协作/取证（4）。计数口径 = 各节顶层「- **」条目数（W755 校：此前本节与 pitfalls 节标题三处不一致——33/34/38——已按实测统一为 38）。
+**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS/视觉渲染（9）· JS/CSP/运行时（5）· git/提交/并发（12）· 级联/CHANGELOG（4）· 数据/内容可信度（4）· 流程/协作/取证（6）。计数口径 = 各节顶层「- **」条目数（W757 校：流程节新增 2 条「门禁建置即红检测法·接线断言锚 run 块」由 4 升至 6，总 38→40）。
 
 ### 4.4 Web Agent（xiyouji-agent-web/ · 摘要层）
 

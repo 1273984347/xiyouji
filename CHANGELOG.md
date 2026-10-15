@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W756），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W757），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,17 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W757（2026-10-16）：CI 门禁接线缺陷修复批
+> **来源**：用户令「对项目工程基础设施薄弱点取证并修复」——本 session 对用户三轮共 22 条论断逐条实读磁盘对拍（结论：已消解 8 / 证伪 6 / 成立 8），并**新发现四条用户未提及的硬缺陷**。动工前 `preflight_check.py --touches` 全绿（对账表 max=W756 → W757 认领·交集 0）。审计报告见 [docs/11-方案报告/工程基础设施薄弱点审计报告-2026-10-16.md](docs/11-方案报告/工程基础设施薄弱点审计报告-2026-10-16.md)。
+> - **D1 第 43 门禁 CI 必红（最高优先级）**：`verify_delivery.py` 第 43 槽委托 `check_chart_values.js --gate`，该脚本第 904 行硬依赖 `require('playwright')`；而 `ci.yml` 的 verify-delivery job 只装 Python + Node，**从未安装 Playwright**（`scripts/node_modules` 被 `.gitignore` 忽略）。缺失即 `MODULE_NOT_FOUND` → `main().catch` 打印「1 FAIL」→ `_StrictGate` 记 FAIL → `verify_delivery.py` 整体 FAIL。**违反项目 E36-E42 铁则②「门禁建置即绿」**。修复=该 job 补 `actions/cache` 浏览器缓存（复用 W421 模式·key 绑 `scripts/package-lock.json`）+ `npm ci --prefix scripts` + `npx playwright install --with-deps chromium`。
+> - **D2 W752 安全单测未接线**：`xiyouji-agent-web/package.json` 的 `test:server`（tools.test.ts 权限边界 / audit.test.ts 审计落盘 / citationGuard.test.ts 引文守卫）在**全部 workflow 中零引用**，CI 只做 build + golden-evals（结构校验）。修复=`agent-web-build` job 补 `npm run test:server` 步骤（本地实测 44/44 通过·0.5s）。
+> - **D3 安全扫描盲区**：`security_scan.py` 的 `discover_files()` roots 不含 `xiyouji-agent-web/`、exts 不含 `.ts/.tsx/.mjs`——对「能读写仓库文件、运行脚本」的 React+Express 服务（项目自身认定的安全风险最集中处）**零覆盖**（全文件 grep `agent-web` 命中 0）。修复=roots 增 agent-web、exts 增三扩展名，并加 `_is_agent_web_build_artifact()` 按 `.gitignore` 同一契约排除 tsc 编译产物（`server/*.js`、`server/engine/*.js`、`vite.config.js` 及其 `.d.ts`），使**扫描面 == 入库面**。实测扫描面 1122 文件、agent-web 源文件 43 个入面、`high=0`（与改前基线一致）。
+> - **D4 放大因子（登记·未修）**：本地 HEAD `2c1ec6cd`（W756）领先公开 `main` `80f77dd3`（W727）**63 个提交**，W728-W756 全部未推送，故 D1-D3 长期未被 CI 暴露，同时公开侧不存在 W751-W753 三批防护——解释了用户论断中 14 条失准（读的是 W727 快照）。推送属远端写操作，列范围外交用户决策。
+> - **防回归（负样本验证）**：新增 `tests/unit/test_ci_wiring.py` 9 例 + `tests/unit/test_security_scan.py` 4 例。判据**锚定 `run:` 块命令体**而非字符串存在性——首版只做存在性断言时负样本实测**假绿**（把 `run:` 改成 `echo skipped` 后关键字仍在步骤名里），加固后 `scripts/_w757_negative_check.py` 四个负样本（摘 playwright 安装 / 摘浏览器缓存 / test:server 改 echo / 摘第 43 门禁挂载）**全部转红·真防线 4/4**。
+> - **范围纪律**：不动 `verify_delivery.py`（§11.2 经用户确认清单）·不改 CHANGELOG 历史段·不改 `overrides` 依赖策略·不推送积压提交。
+> - **验证（全绿）**：`pytest tests/unit/test_ci_wiring.py` **9 passed**；`pytest tests/unit/test_security_scan.py` **16 passed**；`_w757_negative_check.py` **真防线 4/4**；`security_scan.py --all` **high=0**（1122 文件）；agent-web `npm run test:server` **44 passed**；`check_chart_values.js --gate` 本地 **0 FAIL**（87 页 / 20.2s）；`verify_delivery.py` 全量 48 段自洽锁 OK。
+> - **状态**：代码面已落地；**CI 侧效果待推送后验证**（本 session 无 origin 推送授权）。
 
 ### W756（2026-10-16）：人名用字语料纯度批
 > **来源**：用户对 W699 A-04 盘点报告（[人名用字两态盘点-魏征-2026-10-11.md](docs/10-方法论沉淀/人名用字两态盘点-魏征-2026-10-11.md)）三选项的裁决——令「现在做」，执行其建议的**选项 3（仅清语料）+ 选项 2（口径登记）**。动工前 `preflight_check.py --touches` 全绿（对账表 max=W755 → W756 认领）。
