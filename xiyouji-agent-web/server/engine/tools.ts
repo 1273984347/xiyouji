@@ -4,6 +4,9 @@
 // W680 复核加固：受保护路径黑名单（密钥/门禁脚本/.git/会话库——读+写双面）、
 // 命令白名单剔除任意代码执行原语（python -m/-c、git --no-index/--output）、
 // spawn 环境变量过滤（LLM_API_KEY/AGENT_WEB_TOKEN 不下发子进程）、grep 移入 worker 防 ReDoS。
+// W752 加固：①细粒度写入允许域 AGENT_WEB_WRITE_SCOPE（黑名单之外再收紧，未设置=零行为变化）；
+// ②审计日志 data/audit.jsonl 入 DENY_READ（防 LLM 读回自己的操作史·写面已在 DENY_WRITE 覆盖）。
+// 专项单测：server/engine/tools.test.ts（七组·越界/黑名单/白名单精度/允许域/环境过滤/上限）。
 import fs from "fs";
 import path from "path";
 import { spawn } from "child_process";
@@ -36,12 +39,39 @@ export const TOOL_PERMISSION_KIND: Record<string, ToolPermissionKind> = {
 const DENY_READ: RegExp[] = [
   /(^|\/)\.env($|\.)/i, // 任意层级的 .env / .env.*（含 xiyouji-agent-web/.env）
   /^xiyouji-agent-web\/data\//, // 会话库 chat.db（历史含工具结果，防二次外泄）
+  /(^|\/)data\/audit\.jsonl$/i, // W752 操作审计日志（防 LLM 读回自己的操作史；cwd 为仓库根或其子目录均命中）
 ];
 const DENY_WRITE: RegExp[] = [
   ...DENY_READ,
   /^\.git\//, // hooks 等版本库内部（持久化执行原语）
   /^scripts\/(verify_delivery|bump_version|batch_cascade)\.py$/, // 门禁脚本（铁律 8）
 ];
+
+// —— W752 细粒度写入允许域（AGENT_WEB_WRITE_SCOPE·可选）——
+// 逗号分隔的 posix 前缀（相对工作目录，默认工作目录=仓库根），如 docs/,site/,scripts/output/。
+// 语义：`docs/`＝该目录下全部；`README.md`＝该文件（或其同名目录）；`.`＝全仓（等同未设置）。
+// 未设置/全空白＝不启用（保持 W680 及以前行为：全工作目录可写，向后兼容零回归）。
+// 与 DENY_WRITE 叠加：黑名单优先命中即拒，白名单只收紧不放宽（黑名单外的路径仍可能被允许域拒绝）。
+function parseWriteScope(): string[] | null {
+  const raw = (process.env.AGENT_WEB_WRITE_SCOPE || "").trim();
+  if (!raw) return null;
+  const list = raw
+    .split(",")
+    .map((s) => s.trim().replace(/\\/g, "/").replace(/^\.\//, "").replace(/^\/+/, "").replace(/\/{2,}/g, "/"))
+    .filter((s) => s && s !== ".");
+  return list.length ? list : null;
+}
+
+function withinWriteScope(relPosix: string): boolean {
+  const scope = parseWriteScope();
+  if (!scope) return true; // 未配置＝不启用允许域
+  const ci = process.platform === "win32"; // Windows 文件系统不区分大小写，比较同步放宽
+  const rel = ci ? relPosix.toLowerCase() : relPosix;
+  return scope.some((p) => {
+    const s = ci ? p.toLowerCase() : p;
+    return s.endsWith("/") ? rel.startsWith(s) : rel === s || rel.startsWith(s + "/");
+  });
+}
 
 function toRelPosix(cwd: string, target: string): string {
   return path.relative(cwd, target).split(path.sep).join("/");
@@ -51,6 +81,12 @@ function checkProtected(relPosix: string, mode: "read" | "write"): void {
   const list = mode === "read" ? DENY_READ : DENY_WRITE;
   for (const rx of list) {
     if (rx.test(relPosix)) throw new Error(`受保护路径，工具拒绝访问：${relPosix}`);
+  }
+  // 黑名单之后再过允许域（黑名单优先）；未设置 AGENT_WEB_WRITE_SCOPE 时此分支恒不触发
+  if (mode === "write" && !withinWriteScope(relPosix)) {
+    throw new Error(
+      `写入越界：不在 AGENT_WEB_WRITE_SCOPE 允许域内（允许前缀：${(parseWriteScope() ?? []).join(", ")}）：${relPosix}`
+    );
   }
 }
 
@@ -136,8 +172,9 @@ function runAllowed(cmd: string): boolean {
   return RUN_ALLOW.some((r) => r.first.has(first) && r.prefix.test(cmd.trim()));
 }
 
-/** spawn 子进程环境：剔除凭证（LLM_API_KEY/AGENT_WEB_TOKEN 等不下发给 LLM 可执行的子进程）。 */
-function childEnv(): NodeJS.ProcessEnv {
+/** spawn 子进程环境：剔除凭证（LLM_API_KEY/AGENT_WEB_TOKEN 等不下发给 LLM 可执行的子进程）。
+ *  W752：导出供专项单测直接断言（纯增加导出，行为不变）。 */
+export function childEnv(): NodeJS.ProcessEnv {
   const env = { ...process.env };
   delete env.LLM_API_KEY;
   delete env.AGENT_WEB_TOKEN;
@@ -316,9 +353,19 @@ export function createToolset(cwd: string): Toolset {
           if (tokens[0] === "git" && /--no-index|--output=/.test(cmd)) {
             return { content: "git 子命令含被禁止的参数（--no-index / --output=）", isError: true };
           }
-          // W680 复核：scripts/ 脚本路径做 realpath 归一（拒绝 scripts/../../ 等非规范形态）
+          // W680 复核 + W752 加固：解释器脚本路径双重约束——
+          // ① **口径约束**：posix 归一后必须仍以 scripts/ 开头（堵 `scripts/../evil.mjs` 型
+          //    「真实存在于根内但不在 scripts/ 下」的绕过；旧实现只查 realpath 是否在根内，
+          //    于是根内任意位置的脚本都能被拉起）；
+          // ② **越界约束**：realpath 归一后必须仍在仓库根内（堵 symlink/出根）；
+          //    不存在即拒绝（ENOENT 属拦截，不属放行）。
           if ((tokens[0] === "python" || tokens[0] === "python3" || tokens[0] === "node") && tokens[1]) {
             const root = fs.realpathSync(cwd);
+            const scriptArg = tokens[1].split(path.sep).join("/");
+            const norm = path.posix.normalize(scriptArg);
+            if (!norm.startsWith("scripts/") || norm.startsWith("../")) {
+              return { content: `脚本路径必须落在 scripts/ 内（白名单口径）：${tokens[1]}`, isError: true };
+            }
             const scriptReal = fs.realpathSync(path.resolve(root, tokens[1])); // 不存在即拒绝
             if (scriptReal !== root && !scriptReal.startsWith(root + path.sep)) {
               return { content: "脚本路径越界", isError: true };
