@@ -1,0 +1,24 @@
+{
+  "batch": "W756",
+  "date": "2026-10-16",
+  "title": "W756 人名用字语料纯度批",
+  "desc": "人名用字语料纯度与口径登记（清语料加口径登记）",
+  "head_entry": "2026-10-16（W756 人名用字语料纯度批）",
+  "head_sentence": "语料容器「魏徵」改「魏征」共 10 字 5 容器·权威源分回第068回与第091回加 shendu SD039 加镜像 dataset text-search.json 与 app 内嵌副本·统计口径说明 §7 登记「语料引文强制简体·展示面两态并存」·盘点报告与目录索引回填执行记录",
+  "changelog_body": "\n> **来源**：用户对 W699 A-04 盘点报告（[人名用字两态盘点-魏征-2026-10-11.md](docs/10-方法论沉淀/人名用字两态盘点-魏征-2026-10-11.md)）三选项的裁决——令「现在做」，执行其建议的**选项 3（仅清语料）+ 选项 2（口径登记）**。动工前 `preflight_check.py --touches` 全绿（对账表 max=W755 → W756 认领）。\n> - **T1 选项 3 清语料（10 字 / 5 容器）**：`魏徵`→`魏征` 于 ① 权威源 `source/原文/分回/第068回.md`（2 处·唐三藏复述引语内）+ `source/原文/分回/第091回.md`（1 处）+ `source/原文/shendu/SD039.md`（1 处·分析性文字混入）；② **镜像容器同改**——`dataset/text-search.json`（3 处·第 20 门禁语料保真检对拍源）+ `site/static/js/text-search-app.js`（3 处·页面内嵌语料副本，W691 三容器纪律：分回 md + dataset json + app 内嵌）。改用一次性断言脚本 `scripts/output/_w756_corpus_fix.py`（逐文件先断言旧值数恰为预期再替换·拒绝盲改）。**语料面残留自检 0 处**。\n> - **T2 选项 2 口径登记**：[统计口径说明.md](docs/00-导读/统计口径说明.md) 新增 **§7 人名用字口径**——语料与引文层强制简体「魏征」（权威源 + 两镜像容器）；散文与展示面两态并存**不作强制**（docs/02-04 散文、docs/01 原文照录区、dataset 可视化数据、site 页面对两种写法均予接受），并明确「任何批次禁以统一用字为名批量改展示面（全仓统一约 400 处属选项 1·未经作者裁决不得执行）」；附机器防线说明（第 20 门禁三检 + 改语料必须三容器同改）。\n> - **T3 回填与索引**：盘点报告「处置选项」节补**执行记录**（改字范围/验证/边界/选项 1 仍待裁决）；[docs/10 README](docs/10-方法论沉淀/README.md) 索引第 20 行同步（原「W754 校：选项 3 至今未执行」→「W756 已执行选项 3+2」）。\n> - **T4 边界声明（如实记账）**：展示面一律未动——含 `docs/01` 第068回/第091回的**原文照录区**（与语料同源但属展示面，3 处 `魏徵` 保留）、`docs/02`-`docs/04` 散文、`dataset/*.json` 可视化数据（underworld-power-network / music-structure / text-evolution）、`site/**` 页面（reader 页与可视化页）；全仓展示面 `魏徵` 存量按 W699 盘点口径（site 徵:征≈202:112）保持不变。\n> - **验证（全绿）**：`check_citations.py --check-corpus` **语料保真通过**（text-search.json 100 回与分回逐回全等·语料面残留 0）；`check_citations.py --dir docs` **423 条规范引文 + 104 条归属对白命中率 100%**（705 文件扫描）；`node --check site/static/js/text-search-app.js` 通过；`dataset/text-search.json` JSON 合法（100 回）；`generate_csp.py --check` 856 页 / 858 内联哈希 **0 漂移**；verify_delivery 全量 48 段自洽锁 OK。\n> - **状态**：已落地（级联+提交后以 gh run list 为准·本批未推送）。\n> - **文件**：source/原文/分回/第068回.md、source/原文/分回/第091回.md、source/原文/shendu/SD039.md、dataset/text-search.json、site/static/js/text-search-app.js、docs/00-导读/统计口径说明.md、docs/10-方法论沉淀/人名用字两态盘点-魏征-2026-10-11.md、docs/10-方法论沉淀/README.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w756_corpus_fix.py、scripts/output/_w756_spec.json、scripts/output/_cascade_files_W756.txt、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、.github/workflows/README.md、site/index.html、site/dukou-engine.html、site/data/tag-cloud.html、site/data/cross-time-danmaku.html、archive/docs/AGENTS-ARCHIVE.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md。\n",
+  "milestone_block": "- **W756 人名用字语料纯度批**：\n  - 选项 3：语料容器「魏徵」→「魏征」10 字 / 5 容器（权威源 3 件 + 镜像 dataset json 与 app 内嵌）\n  - 选项 2：统计口径说明 §7 登记「语料引文强制简体 · 展示面两态并存不作强制」\n",
+  "agents_note": "2026-10-16（W756）人名用字语料纯度批（用户令「现在做」加 W699 A-04 盘点选项 3+2）：选项 3 清语料「魏徵」改「魏征」共 10 字 5 容器（权威源 source/原文/分回 第068回 2 加 第091回 1 加 shendu SD039 1 加镜像 dataset/text-search.json 3 加 site/static/js/text-search-app.js 3）用一次性断言脚本先断言后替换加残留自检 0；选项 2 口径登记 docs/00-导读/统计口径说明.md 新增 §7（语料与引文强制简体加展示面两态并存不作强制加禁以统一用字批量改展示面加三容器同改纪律）；盘点报告补执行记录加 docs/10 README 索引第 20 行同步；边界=展示面含 docs/01 原文照录区与 dataset 可视化数据与 site 页面一律未动；验证=语料保真 100 回全等加 423 引文加 104 对白命中百分百加 node check 通过加 JSON 合法加 CSP 零漂移加 verify 全量 48 段",
+  "file_index_rows": [
+    "| source/原文/分回/第068回.md | W756 | 语料纯度：魏徵→魏征 2 处（唐三藏复述引语内·与 json/app 三容器同改） |",
+    "| source/原文/分回/第091回.md | W756 | 语料纯度：魏徵→魏征 1 处 |",
+    "| source/原文/shendu/SD039.md | W756 | 语料纯度：魏徵→魏征 1 处（分析性文字混入） |",
+    "| dataset/text-search.json | W756 | 语料镜像同改 3 处（第 20 门禁语料保真检对拍源） |",
+    "| site/static/js/text-search-app.js | W756 | 页面内嵌语料副本同改 3 处（W691 三容器纪律） |",
+    "| docs/00-导读/统计口径说明.md | W756 | 新增 §7 人名用字口径（语料/引文强制简体·展示面两态并存·禁批量改展示面） |",
+    "| docs/10-方法论沉淀/人名用字两态盘点-魏征-2026-10-11.md | W756 | 处置选项节补执行记录（范围/验证/边界·选项 1 仍待裁决） |",
+    "| docs/10-方法论沉淀/README.md | W756 | 索引第 20 行同步（选项 3 已执行） |",
+    "| scripts/output/_w756_corpus_fix.py | W756 | 一次性语料改字脚本（先断言后替换·幂等防盲改） |",
+    "| docs/00-导读/W批次编号对账表.md | W756 | W756 认领行登记 |",
+    "| scripts/output/_w756_spec.json | W756 | 本批 spec 入库 |"
+  ]
+}
