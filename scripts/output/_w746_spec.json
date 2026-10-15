@@ -1,0 +1,20 @@
+{
+  "batch": "W746",
+  "date": "2026-10-15",
+  "title": "W746 语义页面路由端点批",
+  "desc": "路由端点与模块转正",
+  "head_entry": "2026-10-15（W746 语义页面路由端点批）",
+  "head_sentence": "语义页面路由转正：rag_server 增 /route 懒加载端点·只读页面向量缓存不触发 RAG 索引、/health 解绑 BM25、page_router 晋升 scripts/rag/、21 题分层评测基线持平、pytest 415",
+  "changelog_body": "\n> **来源**：T-01 Phase-0 ST-06 转正（用户批准开工）——路由原型 21 题分层评测过目后走标准批次。\n> - **T1 路由端点（rag_server.py）**：新增 /route?q=（懒加载 page_router·只读 87 页 title/desc 向量缓存·不触发 1077 篇 RAG BM25 索引）；/health 解绑索引（status + routes 数·dukou-engine 不消费 docs 字段已实证）。\n> - **T2 模块转正（page_router.py）**：从 tmpe 实验区晋升 scripts/rag/——路径参数化（__file__ 定位）、缓存迁 scripts/output/（page_vectors.npy + page_index.json·gitignored）、CLI 三态（查询 / --eval / --rebuild）。\n> - **T3 工程修复（两个实证坑）**：①路由模型主线程预热——torch/ST 在 handler 子线程首次 import 段错误（exit 139 静默死亡·实证）②ST-before-torch 顺序防回归——ruff --fix 的 isort 曾把顺序改坏致 CLI 段错误（noqa: I001 防守·已沉淀记忆）。\n> - **T4 单测**：test_page_router.py 九例（题层判定 / title 清洗 / top-N 命中·纯函数零重依赖）。\n> - **T5 评测与文档**：21 题分层评测回归与实验区一致（基线 top-1/top-3 均 9/10 持平·评测集 top-1 12/19 top-3 16/19·探针 R19/R21 miss 符合预期·难题 R20 top-1 命中）；README 语义页面路由节；recipe card 补 R17/R18 召回缺口与「无语义证据=机械口径无证据·语义待测」重定义（T-01 报告·本地件）。\n> - **验证（全绿）**：CLI 冒烟 + /route 端点端到端（0.4s·预热版稳定）；pytest 415 passed；ruff scripts/ 全过；verify_delivery 全量四十六段 OK。\n> - **状态**：已落地（级联+提交后以 gh run list 为准）。top-1 精度优化（泛词主导·中等层 2/8）留后续批次。\n> - **文件**：scripts/rag/page_router.py、scripts/rag/rag_server.py、scripts/rag/README.md、tests/unit/test_page_router.py、.gitignore、docs/00-导读/W批次编号对账表.md、HANDOVER.md、AGENTS.md、scripts/output/file-index.md、scripts/output/_w746_spec.json、scripts/output/_cascade_files_W746.txt。\n",
+  "milestone_block": "- **W746 语义页面路由端点批**：\n  - /route 懒加载端点（只读页面向量·不触发 RAG 索引）+ /health 解绑 BM25\n  - page_router 转正 scripts/rag/（路径参数化+缓存迁 output）+ 单测 9 例 + 21 题评测基线持平\n  - 两坑实证修复：子线程 import 段错误（主线程预热）+ isort 改坏 ST 顺序（noqa 防守）\n",
+  "agents_note": "2026-10-15（W746）语义页面路由端点批（T-01 Phase-0 转正加用户批准开工）：rag_server 增 /route 懒加载端点（只读八十七页向量缓存不触发 RAG 索引）加 /health 解绑索引（status 加 routes 数）加 page_router 晋升 scripts/rag（路径参数化加缓存迁 output）加单测九例加 README 路由节；实测=CLI 冒烟加 /route 端到端零点四秒加 21 题分层回归与实验区一致（基线十题 top-1 与 top-3 均九中持平）；两坑实证=子线程首次 import torch 段错误改主线程预热加 ruff isort 改坏 ST 先于 torch 顺序致 CLI 段错误加 noqa 防守；验证=pytest 四百一十五加 ruff 零加门禁四十六段",
+  "file_index_rows": [
+    "| scripts/rag/page_router.py | W746 | 新增：语义页面路由（晋升转正·路径参数化+缓存+CLI+21 题评测） |",
+    "| scripts/rag/rag_server.py | W746 | /route 懒加载端点 + /health 解绑 BM25 + 主线程预热 |",
+    "| tests/unit/test_page_router.py | W746 | 新增：路由纯逻辑单测九例 |",
+    "| scripts/rag/README.md | W746 | 语义页面路由节（端点用法+实测+已知边界） |",
+    "| .gitignore | W746 | 路由产物忽略（page_vectors/page_index/page_route_eval） |",
+    "| docs/00-导读/W批次编号对账表.md | W746 | W746 认领行登记 |",
+    "| scripts/output/_w746_spec.json | W746 | 本批 spec 入库 |"
+  ]
+}

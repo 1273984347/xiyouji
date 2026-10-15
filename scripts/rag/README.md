@@ -93,6 +93,21 @@ RAG_ENHANCE=rerank python scripts/rag/rag_server.py
 - docs/ 更新后向量产物过期：加载时自动告警，重跑 `build_vectors.py` 重建（分块未变秒级复用·变了全量重嵌）。
 - 硬件纪律：`build_vectors.py` 为重计算任务（GPU 模式默认微批 1500/冷却 35s/温度守护 ≥90°C 自动中止可续跑）——勿并行多开。
 
+## 语义页面路由（W746·可选）
+
+`page_router.py` 把自然语言查询路由到最相关的可视化页面（87 页·title+description 嵌入·bge-small-zh-v1.5·与增强档共用离线加载设施）：
+
+```bash
+# CLI
+py -3.12 scripts/rag/page_router.py "天庭的权力结构是怎样的"   # top5 路由
+py -3.12 scripts/rag/page_router.py --eval                     # 21 题分层评测
+
+# HTTP（rag_server 运行中·懒加载不拖累 /query）
+curl "http://127.0.0.1:8777/route?q=%E5%A4%A9%E5%BA%AD%E7%9A%84%E6%9D%83%E5%8A%9B%E7%BB%93%E6%9E%84"
+```
+
+实测（21 题·W746 冻结结构：基线 10 + 中等 8 + 难题 1 + 边界探针 2）：基线 top-1/top-3 均 9/10（Phase-0 持平）·中等 top-3 6/8·难题 R20 top-1 命中（嵌入同义桥明朝↔明代）·探针 R19/R21 miss 符合预期。已知边界：**词汇鸿沟类查询**（用户说法与页面自称差距大·如「高频词」vs「标签云」·R09）——与 C 类语义桥同族，处方=查询扩展而非页面修补；**召回缺口**：R17（时间线）/R18（批评史）top-3 未进·列下一批优化方向；top-1 精度（泛词主导·中等层 2/8）留 W747+。详见 T-01 实验报告 recipe card（tmpe/hf-poc/）。
+
 ## 升级到完整 LightRAG（lightrag-hku）
 
 当具备 LLM / embedding API key 时，可让 LightRAG 对本项目做**真正的图谱抽取**，再用本引擎的

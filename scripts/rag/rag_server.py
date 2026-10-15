@@ -3,9 +3,11 @@
 rag_server.py — 《详解西游记》本地 RAG 查询服务（零依赖）
 
 基于 Python 标准库 http.server，暴露给 dukou-engine.html 调用的本地 API：
-  GET /health              → {"status":"ok"}
+  GET /health              → {"status":"ok","routes":N}（W746 起不再触发 BM25 索引）
   GET /query?q=五行山牧童   → {"query","snippets","graph","draft"}
   GET /graph?q=紧箍咒       → {"graph":[...]}  仅图谱三元组
+  GET /route?q=天庭权力结构  → {"query","routes":[{file,title,score}]}  语义页面路由
+                               （W746·懒加载 page_router·只读页面向量缓存）
 
 零依赖：仅标准库。直接运行：
   python rag_server.py            # 默认 127.0.0.1:8777
@@ -26,6 +28,38 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import xiyouji_rag as RAG
+
+# W746：语义页面路由（懒加载·/route 只读 page_vectors 缓存·不触发 RAG BM25 索引）
+_router_state = {"model": None, "vecs": None, "pages": None}
+
+
+def _get_router():
+    """路由状态懒加载（首次 /route 调用时加载模型与页面向量缓存）。"""
+    if _router_state["model"] is None:
+        import page_router as PR
+        pages = PR.load_pages()
+        model = PR._load_model()
+        vecs = PR._ensure_cache(model, pages)
+        _router_state.update({"model": model, "vecs": vecs, "pages": pages})
+    return _router_state
+
+
+def _routes_count():
+    """路由页数：读 page_index.json 指纹（不加载模型·不触发 RAG 索引）。"""
+    try:
+        import page_router as PR
+        with open(PR.CACHE_IDX, encoding="utf-8") as f:
+            idx = json.load(f)
+        n = len(idx.get("fingerprint", []))
+        if n:
+            return n
+    except Exception:
+        pass
+    try:
+        import page_router as PR
+        return len(PR.load_pages())
+    except Exception:
+        return 0
 
 
 def _clamp_int(raw, default, lo, hi):
@@ -76,7 +110,9 @@ class Handler(BaseHTTPRequestHandler):
         parsed = urllib.parse.urlparse(self.path)
         q = urllib.parse.parse_qs(parsed.query)
         if parsed.path == "/health":
-            self._send({"status": "ok", "docs": RAG.build_index()["N"]})
+            # W746：解绑 RAG 索引（dukou-engine 不消费 docs 字段·已实证）——
+            # /health 不再触发 1077 篇 BM25 构建；路由页数走 page_index 指纹。
+            self._send({"status": "ok", "routes": _routes_count()})
             return
         if parsed.path == "/query":
             query = q.get("q", [""])[0]
@@ -91,6 +127,19 @@ class Handler(BaseHTTPRequestHandler):
             triples = RAG.graph_expand(query, hops=_clamp_int(q.get("hops", ["1"])[0], 1, 1, 3))
             self._send({"graph": triples})
             return
+        if parsed.path == "/route":
+            # W746：语义页面路由（懒加载·失败 fail-fast 500·不静默降级）
+            query = q.get("q", [""])[0]
+            top_k = _clamp_int(q.get("k", ["5"])[0], 5, 1, 20)
+            try:
+                import page_router as PR
+                st = _get_router()
+                results = PR.route(query, st["model"], st["vecs"], st["pages"], top_k=top_k)
+                self._send({"query": query, "routes": [
+                    {"file": f, "title": t, "score": round(s, 4)} for f, t, s in results]})
+            except Exception as exc:
+                self._send({"error": "route failed: %s" % exc}, code=500)
+            return
         self._send({"error": "not found"}, code=404)
 
     def log_message(self, *args):
@@ -100,6 +149,14 @@ class Handler(BaseHTTPRequestHandler):
 def main():
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8777
     host = "127.0.0.1"
+    # W746：路由模型主线程预热——torch/sentence-transformers 在 handler 子线程
+    # 首次 import 有段错误风险（本机实证：exit 139 静默死亡）；启动时一次付清，
+    # /route 只做 encode（轻）。预热失败不阻塞服务（/route 返回 500 说明）。
+    try:
+        _get_router()
+        print("路由模型已预热（/route 就绪）")
+    except Exception as exc:
+        print("路由模型预热失败（/route 暂不可用）：%s" % exc)
     srv = ThreadingHTTPServer((host, port), Handler)
     print(f"西游·渡口 RAG 服务已启动： http://{host}:{port}")
     print("  按 Ctrl+C 停止。")
