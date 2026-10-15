@@ -11,6 +11,15 @@
 ---
 
 
+## W759 batch_cascade 脚注滚动根修批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_cascade.py | W759 | 脚注滚动断言放松为严格递增加指针注记就地刷新（编号空洞兼容根修） |
+| scripts/output/_w759_negative_check.py | W759 | 负样本：切分边界重复号夹具断言转红加字节级恢复原状 |
+| scripts/output/_w759_spec.json | W759 | 本批 spec 入库 |
+| docs/00-导读/W批次编号对账表.md | W759 | W759 认领行登记 |
+
 ## W758 CI 首跑暴露缺陷修复批（2026-10-16）
 
 | 文件 | W | 说明 |

@@ -341,7 +341,10 @@ def _face_agents(ctx):
         _overflow = len(_entries) - 5
         _move, _keep = _entries[:_overflow], _entries[_overflow:]
         _lo, _hi = _nums[0], _nums[_overflow - 1]
-        assert _agents_entry_wn(_keep[0]) == _hi + 1, "滚动切分不连续"
+        # W759 根修：编号空洞（W750 作废·W752/753 由 W751 并行单写）系永久历史，
+        # 「+1 连续」断言对每次真实滚动必假阳性（W758 实证）——放松为严格递增：
+        # 前序 sorted 断言仍守乱序，本断言拦切分边界重复号（负样本 _w759_negative_check 实测仍红）。
+        assert _agents_entry_wn(_keep[0]) > _hi, "滚动切分乱序（_keep 首条未严格大于 _hi——边界重复号或序错）"
         _arc = "archive/docs/AGENTS-ARCHIVE.md"
         _as, _anl = load(_arc)
         if not _as.endswith(_anl):
@@ -353,9 +356,15 @@ def _face_agents(ctx):
         )
         ctx.pend.append((_arc, _as, _anl))
         _newline = "；".join([_segs[0].split("；")[0], _segs[0].split("；", 1)[1], *_keep]) + tail
-        # 指针上界刷新（W725 单段化：旧累积滚动注先剥除·只保留单段最新区间——防逐批膨胀）
-        _newline = re.sub(r"(?:W\d{3}-W\d{3} 级联自动滚动·)+", "", _newline)
-        _newline = _newline.replace("W719 续迁 W708-W714·", "W719 续迁 W708-W714·W%d-W%d 级联自动滚动·" % (_lo, _hi))
+        # 指针上界刷新（W725 单段化·W759 根修：区间注记就地正则替换——旧实现 strip 后按字面锚
+        # 「W719 续迁 W708-W714·」回插，而现役脚注前缀已漂移为 W713 形态→回插静默失新；
+        # 就地替换 token 保持「仅留最新区间」语义，无 token 时锚「脚注保留最近 5 条」前插）
+        _note = "W%d-W%d 级联自动滚动·" % (_lo, _hi)
+        if re.search(r"W\d{3}-W\d{3} 级联自动滚动·", _newline):
+            _newline = re.sub(r"(?:W\d{3}-W\d{3} 级联自动滚动·)+", _note, _newline, count=1)
+        else:
+            assert "脚注保留最近 5 条" in _newline, "指针注记缺位且无插入锚点"
+            _newline = _newline.replace("脚注保留最近 5 条", _note + "脚注保留最近 5 条", 1)
         assert _newline.endswith(tail) and "；".join(_keep) in _newline
         s = s[:_fs] + _newline + s[_fs + len(_fline):]
     ctx.pend.append((p, s, nl))
