@@ -11,6 +11,16 @@
 ---
 
 
+## W745 改写智能路由批（2026-10-15）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/rag/rag_enhance.py | W745 | 智能路由（should_rewrite 短实体判据·rewrite 档接线） |
+| tests/unit/test_rag_enhance.py | W745 | 路由单测扩十二例（共四十五例） |
+| scripts/rag/README.md | W745 | rewrite 档行与说明更新（路由后 @5 +0.041 / @10 +0.107） |
+| docs/00-导读/W批次编号对账表.md | W745 | W745 认领行登记 |
+| scripts/output/_w745_spec.json | W745 | 本批 spec 入库 |
+
 ## W744 检索增强集成批（2026-10-15）
 
 | 文件 | W | 说明 |

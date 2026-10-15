@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W744），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W745），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -18,6 +18,17 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 
+### W745（2026-10-15）：改写智能路由批
+> **来源**：W744-6b 全量验证落地（用户令「全量 30 条跑一次改写对照」+「难例才调 LLM」）——7 条难查询的乐观结论经全量修正：改写默认全量 @5 −0.032（难层 +0.096 vs 简单层 −0.144·direct 型 −0.184）；按型路由模拟 @5 +0.041、@10 +0.107（逼近 Oracle 上界 0.707）。本批把路由实装进 rewrite 档，并附 W744 计数更正。
+> - **T1 智能路由（should_rewrite）**：新增短实体判据——长度 ≤6 汉字、无「的」结构、无疑问词 → 短实体（跳过改写直走主链）；否则走改写并池。判据与评测集 direct 标签 30/30 一致（小样本·后续可用更多数据校准）。
+> - **T2 接线（rewrite 档）**：retrieve_ranked 内路由——短实体不调 LLM（省改写调用与二次重排）、退化为主链（rerank 档行为）；跳过时 stderr 提示「智能路由：短实体查询→主链」。
+> - **T3 单测与文档**：test_rag_enhance.py 扩十二例（短实体/描述句/「的」结构/疑问词/长度边界）；README rewrite 档行与说明更新（全量路由后 @5 +0.041 / @10 +0.107）。
+> - **附：W744 计数更正**：W744 段旧计数 390 系离线预置四例加入前的数值，已更正为 394（CHANGELOG/HANDOVER/AGENTS/_w744_spec 四面同步随本批入库）；教训=新增测试落地后须重跑全量再定稿验证行计数。
+> - **附：仓库卫生**：.gitignore 增 `.workbuddy/` 忽略（本地记忆/自动化文件所在工具目录·此前未忽略·本批实测 add -A 会误暂存·已撤出改显式清单）。
+> - **验证（全绿）**：双冒烟——「白骨精」短实体跳过改写（stderr 提示+主链精准命中）、「把师徒四人装进袖子里的老道士」走改写（Q24 治愈复现·top2=镇元大仙）；pytest 406 passed；ruff scripts/ 全过；verify_delivery 全量四十六段 OK。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：scripts/rag/rag_enhance.py、tests/unit/test_rag_enhance.py、scripts/rag/README.md、docs/00-导读/W批次编号对账表.md、HANDOVER.md、AGENTS.md、scripts/output/file-index.md、scripts/output/_w745_spec.json。
+
 ### W744（2026-10-15）：检索增强集成批
 > **来源**：T-01 Phase-1 集成（用户令「开始」）——T-01 检索增强实验（30 查询评测集）验证过的管线正式集成进 scripts/rag：四档开关 + 向量构建工具 + 离线优先加载，完成从实验区（tmpe/hf-poc）到正式工具链的工程化落地。
 > - **T1 增强引擎（新增 rag_enhance.py）**：稠密召回（bge-small-zh-v1.5·页级 max）+ 加权 RRF 池融合（bm25×1.0 + dense×2.0·k=60）+ cross-encoder 重排（bge-reranker-base·v1 导语 800 字配方）+ LLM 查询改写并池（原池 ∪ 改写池·按改写查询重排）；实测冠军 recall@5 0.487（三十查询）。
@@ -25,7 +36,7 @@
 > - **T3 向量构建（新增 build_vectors.py）**：分块复刻 T-01 口径（同语料同算法·逐条一致实证）+ 微批嵌入（1500/冷却 35s/温度守护 90°C 中止/断点续跑）+ manifest 防混批 + 产物三件（rag_vectors.npy / rag_chunks.jsonl / rag_embed_meta.json）+ 陈旧检测（docs 指纹·加载时告警）。
 > - **T4 离线优先加载（受限网络防护）**：HF 缓存探测→import 前预置 HF_HUB_OFFLINE=1（huggingface_hub offline 判定为 import 期常量·实测运行时设置无效）；本机代理证书链环境实证修复（etag 检查卡死）。
 > - **T5 单测与文档**：test_rag_enhance.py 二十九例（档位解析/RRF 权重/并池/改写清理/映射/离线预置）；README 检索增强档节（四档实测表+启用步骤+硬件纪律）+ .env.rag.example 同步 + LLM_MODEL 示例更正 deepseek-flash；.gitignore 加向量产物忽略。
-> - **验证（全绿）**：四档冒烟全通（off 零变化 / dense 38s / rerank 54s / rewrite 89s·治愈 Q29 池外查询）；pytest 390 passed；ruff scripts/ 全过；verify_delivery 全量四十六段 OK。
+> - **验证（全绿）**：四档冒烟全通（off 零变化 / dense 38s / rerank 54s / rewrite 89s·治愈 Q29 池外查询）；pytest 394 passed；ruff scripts/ 全过；verify_delivery 全量四十六段 OK。
 > - **状态**：已落地（级联+提交后以 gh run list 为准）；首建正式向量产物为后续运营动作（全量嵌入·重计算·硬件安全模式·待用户批准）。
 > - **文件**：scripts/rag/rag_enhance.py、scripts/rag/build_vectors.py、scripts/rag/xiyouji_rag.py、tests/unit/test_rag_enhance.py、scripts/rag/README.md、scripts/rag/.env.rag.example、.gitignore、docs/00-导读/W批次编号对账表.md、HANDOVER.md、AGENTS.md、scripts/output/file-index.md、scripts/output/_w744_spec.json、scripts/output/_cascade_files_W744.txt。
 
