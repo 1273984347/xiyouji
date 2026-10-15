@@ -157,3 +157,8 @@
 ```text
 2026-10-15（W743）检索融合层消融重构批（T-01 Phase-0 结论落地加用户令开始）：xiyouji_rag 融合层四路等权 RRF 消融为加权 RRF（A 原始乘一点零加 B 别名扩展乘零点五）加移除标题命中与短语位置两路负贡献信号（二十一组变体扫描实证·两轮 11+10 次运行：四路全融零点二一七到零点二三九对比 A+B 零点三四七到零点三六七）加 _rrf 支持 weights 加单测文件新增四例加干扰日志第八节追加开工观测行；实测=现役 recall@5 零点二三九到零点三五九 加 recall@10 零点三三八到零点四六七 加 MRR 零点三四三到零点六零三；验证=评测复跑加 pytest 三百六十一加 ruff 零加门禁四十六段
 ```
+以下为 AGENTS.md 版本脚注早期条目（W744-W744）段的原文（单行沿革链·W749 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-15（W744）检索增强集成批（T-01 Phase-1 集成加用户令开始）：验证过的增强管线正式集成进 scripts/rag 加新增 rag_enhance 增强引擎（稠密召回加加权 RRF 池融合 dense 乘二加 cross-encoder 重排加 LLM 改写并池）加新增 build_vectors 向量构建（分块加微批嵌入加温度守护加断点续跑加防混批 manifest）加 xiyouji_rag 增 RAG_ENHANCE 四档分派（off 零变化 加 dense 加 rerank 加 rewrite）加离线优先加载（缓存探测加 import 前预置 HF_HUB_OFFLINE 规避代理证书链环境 etag 卡死）加单测二十九例加 README 与 env 示例同步加 LLM_MODEL 示例更正 deepseek-flash；实测=冠军 recall@5 零点四八七（三十查询）加四档冒烟全通（rewrite 治愈 Q29 池外查询）；验证=pytest 三百九十四加 ruff 零加门禁四十六段
+```
