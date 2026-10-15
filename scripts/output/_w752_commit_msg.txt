@@ -1,0 +1,27 @@
+feat(w752): Web Agent 安全加固——tools.ts 安全单测 30 例 + 写操作持久化审计 + 细粒度写入允许域
+
+W752（用户三项薄弱点裁决之二：为 Web Agent 增加更细粒度的权限隔离与操作审计）
+
+背景：server/engine/tools.ts 是安全风险最集中处（LLM 输出 + 仓库完整读写），但安全逻辑
+  此前无任何专项单测（仅 engine.smoke.mjs 三条否定断言 S4/S5/S6）；acceptEdits 模式下
+  write/edit 自动放行且除可关闭 console 外无任何持久化操作审计；细粒度隔离只有黑名单
+
+T1 tools.ts 安全单测 30 例：越界拒绝（../ 与绝对路径与反斜杠变体·写面零落盘）/ 读黑名单
+  （.env 与子目录 .env.local 与会话库）/ 写黑名单四目标（.git/hooks 与三门禁脚本·写前写后
+  sha256 一致 + 原文仍在）/ 命令白名单精度 7 拒 1 放行 / 正常读写编辑语义 / 环境过滤
+  （LLM_API_KEY 与 AGENT_WEB_TOKEN 不下发子进程）/ 尺寸上限 2MB 边界
+T2 写操作持久化审计（新增 server/audit.ts）：JSONL 追加（ts/sessionId/tool/phase/decision/
+  kind/path/bytes/isError/reason）；审计自身 fail-open（写失败只告警不让工具失败）；
+  data/audit.jsonl 入 DENY_READ 防 LLM 读回自身操作史；新增 GET /api/audit（受 token 中间件保护）
+T3 细粒度写入允许域 AGENT_WEB_WRITE_SCOPE（可选·逗号分隔 posix 前缀）：设置后写面只允许落
+  在域内，黑名单优先（只收紧不放宽），未设置=零行为变更；前缀边界 docs2/ 不误判 docs/
+T4 前缀绕过硬化（安全复核后由 Lead 落刀）：scripts/../evil-root.mjs 原可拉起根内 scripts/ 之外
+  的真实脚本 → run_command 增路径口径约束（posix 归一后必须仍以 scripts/ 开头）+ realpath 出根
+  检查叠加；新增 T1.4y 端到端回归（真建可执行脚本 + 哨兵 + 断言未被拉起 + 自清）
+
+独立复核（owner 自证 + 21 种逃逸形态对抗矩阵）：误伤未发现（子目录/深层/多分隔符/反斜杠段均
+  正确放行）；新绕过未发现；已知残留如实记账（口径为词法判定，若 scripts/ 内已存在指向根内他处
+  的符号链接则两道检查都放行——前提是该链接已存在且工具集无建链能力，已写入测试注释）
+
+验证：node --import tsx --test（tools + audit + citationGuard）44/44 pass；tsc -b exit 0；
+  engine.smoke.mjs 12 组全 PASS；npm run build（CI 同轨）exit 0
