@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-JlOLEfUFyUF8uXQycTBn6ZR8Qkpg2wBPV4iYZsSyxMc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-ZgOBqVfKLRcscUa/992AN9zivjo7vsN1YlqH6EnSFZA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Character Appearances &amp; Screen Time · Annotated Journey to the West</title>
@@ -1659,7 +1659,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             })
             .on("mouseout", () => tooltip.style("opacity", 0))
             .transition()
-            .duration(800)
+            .duration(600)
             .delay((d, i) => i * 50)
             .attr("width",d => Math.max(0, x(d.appearances)));
 
@@ -1674,7 +1674,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .text(d => `${d.appearances} ch`)
             .style("opacity", 0)
             .transition()
-            .duration(800)
+            .duration(600)
             .delay((d, i) => i * 50 + 400)
             .style("opacity", 1);
 
@@ -1689,7 +1689,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .text(d => `/ ${d.mentions.toLocaleString()} mentions`)
             .style("opacity", 0)
             .transition()
-            .duration(800)
+            .duration(600)
             .delay((d, i) => i * 50 + 500)
             .style("opacity", 1);
     }
@@ -1987,7 +1987,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .style("opacity", 0.85);
             })
             .transition()
-            .duration(800)
+            .duration(600)
             .delay((d, i) => i * 4)
             .attr("r", d => r(d.mentions));
 
