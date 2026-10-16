@@ -173,6 +173,12 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 **六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS/视觉渲染（9）· JS/CSP/运行时（5）· git/提交/并发（12）· 级联/CHANGELOG（4）· 数据/内容可信度（4）· 流程/协作/取证（6）。计数口径 = 各节顶层「- **」条目数（W757 校：流程节新增 2 条「门禁建置即红检测法·接线断言锚 run 块」由 4 升至 6，总 38→40）。
 
+**本机环境事实（Windows 单机·2026-10-17 实测·机器相关不入 L2）**：
+- `make` 未安装：Makefile 目标不可用，直调 `python scripts/<对应脚本>`（映射见 Makefile 注释）。
+- 全局 Python 3.12·无项目 `.venv`：`pytest`/`playwright`/`pip_audit` 未入终端 PATH，一律加 `python -m` 前缀调用；`ruff`/`uv`/`node`/`npm`/`git`/`gh` 可直呼。
+- 提交门禁 hook 优先用 workbuddy 托管 Python（目录名 3.13.12、实际运行 3.13.14，勿按目录名断版本）——与终端 3.12 属两个环境。
+- pre-commit 框架未装且**禁装**：`pre-commit install` 会覆盖手写 `.git/hooks/pre-commit`，破坏零依赖门禁。
+
 ### 4.4 Web Agent（xiyouji-agent-web/ · 摘要层）
 
 > **📖 阅读契约（W709）**：索引型——引擎/前端/权限细节 → [docs/agent/agent-web.md](docs/agent/agent-web.md)。
