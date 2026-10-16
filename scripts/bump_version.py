@@ -26,15 +26,10 @@ import os
 import re
 import sys
 
-# W576 修复（经用户批准）：守卫根此前误算为 scripts/ 自身（与 W550 修复的 generate_csp 同款），
-# 而 AUX_VERSION_DOCS 为仓库根相对路径 → 任何调用必误判「越界」。守卫根应为项目根。
-_W536_ROOT = os.path.realpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+# W576：守卫根=项目根（曾误算 scripts/ 自身·AUX_VERSION_DOCS 全误判越界）·W761 收敛至 utils/path_guard
+from utils.path_guard import PROJECT_ROOT, make_guard
 
-def _w536_guard_open(path, *a, **k):
-    _real = os.path.realpath(path)
-    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
-        raise SystemExit("W536 guard: path escapes project root: %s" % path)
-    return open(_real, *a, **k)
+_w536_guard_open = make_guard(PROJECT_ROOT)
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(_HERE, ".."))

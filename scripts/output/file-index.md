@@ -11,6 +11,23 @@
 ---
 
 
+## W761 工具链可维护性重构批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/utils/path_guard.py | W761 | 新建：W536 路径守卫公共模块（make_guard 工厂+双根·收敛 14 处重复定义） |
+| scripts/check_content_consistency.py | W761 | l2/l2_runtime 去重+check_page 拆分（峰值 cx 41→19）+js_of→extract_scripts |
+| scripts/tmpe_tidy.py | W761 | scan 分类链外提+main 三分派+三处去重+human_size |
+| scripts/a11y_audit.py | W761 | 40 项规则族命名统一 rule_N_topic（19 改名+测试 38 同步+注释升级） |
+| scripts/inject_rum.py | W761 | P-02 修复：守卫根 SCRIPTS_ROOT→PROJECT_ROOT（同批 inject×3+bump_footer_version） |
+| scripts/bump_version.py | W761 | 守卫迁移至 path_guard（仓库根语义·W576 注释精华保留） |
+| scripts/fetch_gate_stats.py | W761 | 删除 W536 死定义（零调用点·同批 lint_links/security_scan） |
+| tests/unit/test_path_guard.py | W761 | 新建：守卫公共模块 6 例（双根放行/双外拒/消息文本/闭包独立） |
+| tests/unit/test_a11y_audit.py | W761 | 同步 a11y 规则族改名（38 处引用） |
+| scripts/README.md | W761 | utils 共享模块表补 path_guard 行 |
+| docs/00-导读/W批次编号对账表.md | W761 | W761 认领行登记（chore 翻收官） |
+| scripts/output/_w761_spec.json | W761 | 本批 spec 入库 |
+
 ## W760 全量对抗性审查报告批（2026-10-16）
 
 | 文件 | W | 说明 |

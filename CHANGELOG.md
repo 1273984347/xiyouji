@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W760），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W761），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,19 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W761（2026-10-16）：工具链可维护性重构批
+> **来源**：用户 scene#15「日常开发」重构令（保持原有功能、输入输出及外部接口完全不变，提升可读性与可维护性）+ 19:49 追加令「都做，现在开始做」（a11y 命名体系统一+P-02 潜伏缺陷修复）。动工前 `preflight_check.py --touches` 全绿（对账表 max=W759 → W761 认领·W760 为并行会话在途预留 bullet·交集 0）；W760 收尾批（应用户令「你帮他做完」由本会话代修其报告 118 行引文+三连带+代走发布链·e4ff4faf+e121f53a）先于本批落地，级联编号锚点畅通。
+> - **WS1 守卫单模块化**：W536 路径守卫 14 处逐字符重复定义（3 种 root 表达式/2 种根语义/3 处死定义）收敛为 `scripts/utils/path_guard.py` 公共模块——`make_guard(root)` 工厂 + PROJECT_ROOT/SCRIPTS_ROOT 双根显式传参（错误消息与历史实现逐字一致）；13 文件迁移（10 别名导入保原语义·3 死定义删除）；slice_screenshots 测试钉死的 `_W536_ROOT`/`_w536_guard_open` 名以别名保留（12/12 单测未改一字过）。新增 `tests/unit/test_path_guard.py` 6 例（双根放行/双外拒/消息文本/闭包独立性）。
+> - **WS2 重复消除+复杂函数拆分**（check_content_consistency.py）：l2/l2_runtime 26 行逐字符重复的比较逻辑提取为 `_compare_embedded_vs_dataset` 公共内核；check_page（60 行·cx=41 全仓峰值）拆为编排器+5 个 `_rule_*` 函数；`js_of`→`extract_scripts`。三模式（--self-test/--gate/--dataset）输出与基线逐字节一致。
+> - **WS3 拆分+去重+命名**（tmpe_tidy.py）：scan 优先级链 ⑤⑥ 外提 `_match_classify_rule`；main（68 行）→ `_cmd_tool_candidates`/`_cmd_plan`/`_cmd_apply` 三分发；`_group_by_bucket`（print_rows/write_report）、`_write_report_pair`（两个报告函数）、`_find_callers`（callers 扫描）三处去重；`human`→`human_size`。19/19 单测+CLI 四模式对拍零行为差异。
+> - **WS4 命名体系统一**（a11y_audit.py）：40 项规则族统一为 `rule_N_topic`（N=E2-N 注册位序·与 R_* 常量同源）——19 个 check_* 函数改名+测试 38 处同步+规则 27-40 分组注释升级为逐规则注释（贴 def 惯例）；两增强辅助函数（audit_/validate_·parser 优先签名·被规则 1/3 内部调用）保留。53/53 单测；mcp-server 自包含实现不受影响。
+> - **P-02 潜伏缺陷修复**（用户裁断）：inject_goatcounter/inject_rum/inject_visit_log/bump_footer_version 守卫根 SCRIPTS_ROOT→PROJECT_ROOT——原 root 与各自 site/ 写面相悖（守卫生效即必炸·仅被幂等跳过掩盖）；功能级验证 4/4（负样本仓外拒·正样本 site/ 写面放行）。**行为变化声明**：当前树态零可观察差异（全页面已注入·走 skip 路径），修复恢复工具 documented 行为。
+> - **stats 归口**：report_docs 20→21 的刷新已归 W760 收尾批（其报告件入库·`--w W760`）——本批不含 stats 件。
+> - **验证（全绿）**：pytest 594→600 collected（**pytest 597 passed**+3 skipped·0 failed）；`ruff check scripts/` 0 告警；ccc 三模式+tt 四模式 CLI 对拍逐字节一致；守卫导入面对拍根值等价（P-02 四处为批准的预期变更）；AST 峰值 cx 41→19；`stats.py --check` 零差异；a11y 门禁 E2-2 P0/P1=0；verify_delivery 全量 48 段 0 FAIL。
+> - **范围纪律**：docs/11-方案报告/ 不碰（该面归 W760 收尾批·已先于本批提交）；不推送远端（推送需用户单独确认）。
+> - **状态**：已提交（本地·未推送）；W760 收尾批（e4ff4faf+e121f53a）先于本批落地；完整报告 `tmpe/w761/W761-重构报告.md`（晋升 docs/11-方案报告/ 另议）。
+> - **文件**：scripts/utils/path_guard.py、tests/unit/test_path_guard.py、scripts/bump_version.py、scripts/generate_csp.py、scripts/inline_css.py、scripts/slice_screenshots.py、scripts/rag/graph_seed_neo4j.py、scripts/rag/xiyouji_rag.py、scripts/inject_goatcounter.py、scripts/inject_rum.py、scripts/inject_visit_log.py、scripts/bump_footer_version.py、scripts/fetch_gate_stats.py、scripts/lint_links.py、scripts/security_scan.py、scripts/check_content_consistency.py、scripts/tmpe_tidy.py、scripts/a11y_audit.py、tests/unit/test_a11y_audit.py、scripts/README.md、scripts/output/_w761_spec.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、.github/workflows/README.md、site/index.html、site/dukou-engine.html、site/data/tag-cloud.html、site/data/cross-time-danmaku.html、archive/docs/AGENTS-ARCHIVE.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_cascade_files_W761.txt。
 
 ### W760（2026-10-16）：全量对抗性审查报告批
 > **来源**：并行会话在途批（全量对抗性审查·对抗性审查报告-2026-10-16），应用户令由本会话收尾完成——修报告 118 行归属对白引文（第 20 门禁口径：引号内改逐字节原文、省略号移出引号外）+ 三连带同步（README 索引 17→18 篇·STRUCTURE 标记 20→21·stats --w W760 刷新）+ 干扰日志登记。
