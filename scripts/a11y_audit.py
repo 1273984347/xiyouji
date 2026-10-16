@@ -324,9 +324,11 @@ def _contrast_ratio(rgb1, rgb2):
     return (L1 + 0.05) / (L2 + 0.05)
 
 
-# ---------- 增强审计函数 ----------
+# ---------- 增强审计辅助族（parser 优先签名·被规则 1/3 内部调用；W765 注释统一） ----------
+# 本族两函数与 40 项规则族（rule_N_*）签名不同：首参为已解析的 parser，供规则避免重复解析；
+# 不直接注册于 ALL_CHECKS，仅作规则 1（键盘导航）/ 规则 3（ARIA 标签）的细化检测臂。
 def audit_keyboard_navigation(parser, html_content, file_path):
-    """键盘导航审计：Tab 顺序 + 焦点陷阱检测（增强 E2-1）"""
+    """键盘导航审计：Tab 顺序 + 焦点陷阱检测（增强 E2-1·辅助族·被 rule_1 调用）"""
     findings = []
 
     # 焦点陷阱：role=dialog/alertdialog 缺少焦点管理
@@ -364,7 +366,7 @@ def audit_keyboard_navigation(parser, html_content, file_path):
 
 
 def validate_aria_completeness(parser, html_content, file_path):
-    """ARIA 标签验证：aria-label/aria-labelledby/aria-describedby 完整性（增强 E2-3）"""
+    """ARIA 标签验证：aria-label/aria-labelledby/aria-describedby 完整性（增强 E2-3·辅助族·被 rule_3 调用）"""
     findings = []
 
     # 收集所有元素 ID 用于引用验证
@@ -1678,14 +1680,21 @@ def rule_28_no_three_flashes(html_content, file_path):
 
 
 # ---------- 规则 29：解析（可编程确定）（E2-29·W283 深化） ----------
-def rule_29_parsing(html_content, file_path):
-    """E2-29：WCAG 4.1.1 Parsing。
-    检测 HTML 是否有严重解析错误（重复 ID、未闭合标签、stray end tag）。
-    严重解析错误会导致辅助技术 DOM 解析异常，影响可访问性。"""
-    findings = []
-    parser = _parse_html(html_content)
+# ---------- 规则 29 内部检测臂（E2-29·W765 自 rule_29_parsing 拆分） ----------
+# 隐式闭合元素（html/li/td 等——无显式结束标签符合规范）与非空元素（void——无需闭合）
+_PARSING_VOID_TAGS = {
+    "area", "base", "br", "col", "embed", "hr", "img", "input",
+    "link", "meta", "param", "source", "track", "wbr",
+}
+_PARSING_OPTIONAL_CLOSE = {
+    "html", "head", "body", "p", "li", "dt", "dd", "option",
+    "tr", "td", "th", "thead", "tbody", "tfoot", "colgroup",
+}
 
-    # 1. 重复 ID
+
+def _parsing_duplicate_ids(parser, file_path, html_content):
+    """检测重复 ID——ID 必须唯一，否则辅助技术定位元素异常（WCAG 4.1.1）。"""
+    findings = []
     id_count = {}
     for el in parser.elements:
         eid = el.attrs.get("id", "").strip()
@@ -1699,22 +1708,21 @@ def rule_29_parsing(html_content, file_path):
                 "ID 必须唯一，否则辅助技术定位元素异常（WCAG 4.1.1，W283 E2-29 深化）",
                 _snippet(html_content, lines[0]),
             ))
+    return findings
 
-    # 2. 未闭合的非空元素（起始标签 > 结束标签）
-    void_tags = {
-        "area", "base", "br", "col", "embed", "hr", "img", "input",
-        "link", "meta", "param", "source", "track", "wbr",
-    }
-    optional_close = {
-        "html", "head", "body", "p", "li", "dt", "dd", "option",
-        "tr", "td", "th", "thead", "tbody", "tfoot", "colgroup",
-    }
+
+def _parsing_unclosed_tags(parser, file_path, html_content):
+    """检测未闭合的非空元素（起始标签数 > 结束标签数）。
+
+    返回 (findings, open_count, close_count)——计数供 stray end tag 检测臂复用。
+    """
+    findings = []
     open_count = {}
     close_count = {}
     open_lines = {}
     for el in parser.elements:
         tag = el.tag
-        if tag in void_tags or tag in optional_close:
+        if tag in _PARSING_VOID_TAGS or tag in _PARSING_OPTIONAL_CLOSE:
             continue
         open_count[tag] = open_count.get(tag, 0) + 1
         if tag not in open_lines:
@@ -1723,7 +1731,7 @@ def rule_29_parsing(html_content, file_path):
     endtag_pattern = re.compile(r"</\s*([a-zA-Z][\w-]*)\s*>", re.IGNORECASE)
     for match in endtag_pattern.finditer(html_content):
         tag = match.group(1).lower()
-        if tag in void_tags or tag in optional_close:
+        if tag in _PARSING_VOID_TAGS or tag in _PARSING_OPTIONAL_CLOSE:
             continue
         close_count[tag] = close_count.get(tag, 0) + 1
 
@@ -1736,8 +1744,12 @@ def rule_29_parsing(html_content, file_path):
                 "未闭合标签会破坏辅助技术的 DOM 解析（WCAG 4.1.1，W283 E2-29 深化）",
                 _snippet(html_content, open_lines[tag]),
             ))
+    return findings, open_count, close_count
 
-    # 3. Stray end tag（结束标签无对应起始标签）
+
+def _parsing_stray_end_tags(open_count, close_count, file_path, html_content):
+    """检测 stray end tag（结束标签无对应起始标签·每标签只报首个）。"""
+    findings = []
     for tag, cc in close_count.items():
         oc = open_count.get(tag, 0)
         if cc > oc:
@@ -1750,7 +1762,19 @@ def rule_29_parsing(html_content, file_path):
                     _snippet(html_content, line_num),
                 ))
                 break
+    return findings
 
+
+def rule_29_parsing(html_content, file_path):
+    """E2-29：WCAG 4.1.1 Parsing。
+    检测 HTML 是否有严重解析错误（重复 ID、未闭合标签、stray end tag）。
+    严重解析错误会导致辅助技术 DOM 解析异常，影响可访问性。"""
+    parser = _parse_html(html_content)
+    findings = []
+    findings.extend(_parsing_duplicate_ids(parser, file_path, html_content))
+    unclosed, open_count, close_count = _parsing_unclosed_tags(parser, file_path, html_content)
+    findings.extend(unclosed)
+    findings.extend(_parsing_stray_end_tags(open_count, close_count, file_path, html_content))
     return findings
 
 
