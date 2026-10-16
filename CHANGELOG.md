@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W765），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W766），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,16 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W766（2026-10-16）：C 类引文静默删改修复批
+> **来源**：用户令「继续」（遗留事项③·W760 审查 F-1b HIGH 修复）。审查证据 `tmpe/review-w760/content/c-violations.json` 59 条（sim≥0.7·C 类长引文静默删改·落在第 20 门禁两种语法族之外）。
+> - **处置总量**：**51 处修复 + 8 处登记**（涉及 42 件文档；含未 flag 但同引文同形态的 8 件一致性扩散修复）。
+> - **修复分类（51 处）**：① 单字/专名——鋋罗→棕罗、翙→躧、兼→咸（×3）、贫僧已发→我已发了（×6）、被父王→我父王（×2）、名山→山、该当何罪→语料原句「该问个钤束不严的罪名」；② 标点/句读——。→，（多处）、顿号→逗号、；→，、你算[，]他该、劫[。]每劫；③ 引号规范——『』→“”（6 条直角引号还原语料形态）；④ 补全截断——可不枉生世界之中[，不得久住天人之内]、咬断铁索走来[，却与朱紫国王消灾也]、晚辈[，元辰是家师的下宾]、托化妖魔[，看你师徒可有真心往西去也]、品级[，如何不好]、尘凡[；一灵真性……变得这般模样]；⑤ 恢复删节——保他家生者安全，亡者超脱（×2）、经不可轻传向时句、即唤阿傩式补字、八戒编谎长句按语料逐字（两处省略号标记）；⑥ 句式按语料——心经「行深般若波罗蜜多，时照见五蕴皆空」（3 文件）、袁守诚卦语「巳时发雷，午时下雨，未时雨足」、太白金星「上届/慈恩」、镇元子观音骂语全句、皇帝轮流做内层引号结构+补全（×4）。
+> - **登记不修（8 处·语料疑点）**：① 第002回「惜修**生命**无他说」——遍检版本作「性命」（性命双修），doc 保持「性命」不向语料疑点看齐（×4 条）；② 第007回「**变**罢了」——通行本作「便罢了」，doc 保持「便」（×4 条）。两类均属语料仲裁批（与 007 生/在 重字、我把你/我怕你 同族）。
+> - **过程自查（诚实记录）**：初版对「我现四大部洲」按记忆误修为「我观」，逐字核语料后回退——**教训：引文修改必须逐字对语料，禁用版本记忆直觉**（已入批内方法论）。
+> - **验证（全绿）**：省略号感知全量核验 **51 合规 + 8 登记 = 59/59 办结**（按……切段·每段逐字为语料子串）；引文门禁 **423 规范引文 + 112 归属对白命中率 100%**（710 文件·修复新增 7 条归属对白全过）；**pytest 597 passed**；verify_delivery 全量 48 段 0 FAIL；级联面 dry-run 十面预检。
+> - **状态**：已提交（本地）。W760 审查 4 HIGH 至此 3 项完成（F-1a/F-1b/RCE），余第 9 门禁口径与 validate_en 接线待后续批。
+> - **文件**：docs/01-全书逐回解读/第001回-灵根育孕源流出.md、docs/02-人物深度分析/（28 件含方向二深化组/器物传记/外传/专题）、docs/03-主题与情节专题/（13 件）、scripts/output/_w766_spec.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、.github/workflows/README.md、site/index.html、site/dukou-engine.html、site/data/tag-cloud.html、site/data/cross-time-danmaku.html、archive/docs/AGENTS-ARCHIVE.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_cascade_files_W766.txt。
 
 ### W765（2026-10-16）：a11y 辅助族注释统一与解析规则拆分批
 > **来源**：用户令「现在做」（遗留事项④·W761 报告 §9.3 登记的可选项收尾）。
