@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W762），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W763），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,16 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W763（2026-10-16）：照录区字级篡改全量修复批
+> **来源**：用户令「现在做」（遗留事项③·W760 审查 F-1a HIGH 修复）；审查报告 F-1 清单 15 处 + 本批独立全量比对新增 82 处 = 97 处全量修复。
+> - **修复范围**：docs/01 九个回次文件的 `## 原文全文` 照录区（第 20 门禁永久豁免区·自称「原文照搬」但存在字级篡改）——以权威语料（source/原文/分回·与 dataset/text-search.json 逐字一致）为基准，空白归一后 difflib 对拍定位全部字级差异并逐处修复。
+> - **修复方法**：独立比对器（`tmpe/w763/w763_f1a_fix.py`）——opcode 级修复按「归一化位置→原文位置」映射回原文施加（保留 span 外原始空白）；逐 span 断言校验；修复后复跑比对器终验 0 残留。
+> - **典型修复（97 处）**：① 人名/专名改字——初江王→楚江王、子叉→木吒（12 处）、崔珪→崔珏（6 处）、木呼/木吐→木吒（4 处）、迎叶→迦叶、比丘增→比丘僧（×2）、游憎→游僧；② 实词/用字——般苦→般若、皤桃→蟠桃（3 处）、五帝→玉帝（4 处）、岭旨→领旨、锡枚→锡杖（2 处）、北巨→北俱、南赠→南赡、邪崇→邪祟、奈河→奈何、登极→登基、已时→巳时（2 处）、头防→头陀、暨岭→鹫岭、音沓→音杳、盘龙警→盘龙髻、神珍→神针、好亲→好杀、法天像地→法天相地、四键将→四健将、水廉洞→水帘洞、饶地→饶他、皤→蟠、袛园→衹园、孟兰盆→盂兰盆、与法→与汝、适→违、全→圣、憎→僧、谱→僧（2 处）、钻→钯、入→人、河→何；③ 删字补回——我怕你（漏怕）、法相如是（漏是）、即唤阿傩（漏阿）、喷将出去（漏出）、取经人（漏人）、语末补引号；④ 标点/编码残损——乖猴．→乖猴，、违法．→违法，、．→。（3 处）、￥→栴（货币符号系码位残损）、诗曰:→诗曰：、。”“→：；⑤ 3 处 W756 语料「徵→征」批联动（第068回×2·第091回×1）。
+> - **登记不修（两类）**：① 僻字占位符约定 5 处（□【左「鱼」右「便」】类系统性转录约定·非篡改·维持现状）；② 语料 OCR 疑错 2 处（第007回「在因在凡间」「生长生变化」——照录区为正确形态·源文分回含重字 OCR 错误·修语料属仲裁批·本批只登记不传播）。
+> - **验证（全绿）**：全量比对器终验 实改残留 0（占位符 5·语料疑点 2 为登记项）；9 文件行尾纯净（全 CRLF·零混尾）；**pytest 597 passed**（+3 skipped·0 failed）；verify_delivery 全量 48 段 0 FAIL；级联面经 batch_cascade dry-run 十面预检。
+> - **状态**：已提交（本地·未推送）。F-1b（C 类 59 条·docs/02 为主）与其余 3 项 HIGH（第 9 门禁口径/validate_en 接线/agent-web RCE）待后续批次。
+> - **文件**：docs/01-全书逐回解读/第003回-四海千山皆拱伏.md、docs/01-全书逐回解读/第004回-官封弼马心何足.md、docs/01-全书逐回解读/第006回-观音赴会问原因.md、docs/01-全书逐回解读/第007回-八卦炉中逃大圣.md、docs/01-全书逐回解读/第008回-我佛造经传极乐.md、docs/01-全书逐回解读/第009回-袁守诚妙算无私曲老龙王拙计犯天条.md、docs/01-全书逐回解读/第010回-二将军宫门镇鬼唐太宗地府还魂.md、docs/01-全书逐回解读/第068回-朱紫国唐僧论前世孙行者施为三折肱.md、docs/01-全书逐回解读/第091回-金平府元夜观灯玄英洞唐僧供状.md、scripts/output/_w763_spec.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、.github/workflows/README.md、site/index.html、site/dukou-engine.html、site/data/tag-cloud.html、site/data/cross-time-danmaku.html、archive/docs/AGENTS-ARCHIVE.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_cascade_files_W763.txt。
 
 ### W762（2026-10-16）：W761 重构报告晋升批
 > **来源**：用户令「现在做」（遗留事项②：报告晋升）——W761 重构报告自 tmpe/w761/ 工地转正入 docs/11-方案报告/，完成三连带同步。
