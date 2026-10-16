@@ -20,15 +20,10 @@ import os
 import re
 import sys
 
-# W550 同款修复（generate_csp.py 先例）：根目录必须是项目根而非 scripts/，
-# 否则写 site/ 下任何页面都会被本守卫误拒（W536 后首次 --force 实证）。
-_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# W550：守卫根=项目根而非 scripts/（否则写 site/ 页面被误拒·W536 后 --force 实证）·W761 收敛至 utils/path_guard
+from utils.path_guard import PROJECT_ROOT, make_guard
 
-def _w536_guard_open(path, *a, **k):
-    _real = os.path.realpath(path)
-    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
-        raise SystemExit("W536 guard: path escapes project root: %s" % path)
-    return open(_real, *a, **k)
+_w536_guard_open = make_guard(PROJECT_ROOT)
 
 SITE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "site")
 TOKENS = os.path.join(SITE_DIR, "tokens.css")

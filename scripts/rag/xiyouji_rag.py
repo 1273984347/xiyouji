@@ -52,13 +52,10 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # scripts/ 入 path（utils 公共包）
+from utils.path_guard import SCRIPTS_ROOT, make_guard
 
-def _w536_guard_open(path, *a, **k):
-    _real = os.path.realpath(path)
-    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
-        raise SystemExit("W536 guard: path escapes project root: %s" % path)
-    return open(_real, *a, **k)
+_w536_guard_open = make_guard(SCRIPTS_ROOT)  # W761：W536 守卫单模块化（root=scripts/）
 
 # ---- 路径（相对本脚本：scripts/rag/xiyouji_rag.py → 项目根 = ../../）----
 _HERE = os.path.dirname(os.path.abspath(__file__))

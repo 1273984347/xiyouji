@@ -64,7 +64,8 @@ def visible_text(html: str) -> str:
     return "".join(p.parts)
 
 
-def js_of(html: str) -> str:
+def extract_scripts(html: str) -> str:
+    """提取页面全部 <script> 内联内容（拼接）。"""
     return "\n".join(re.findall(r"<script\b[^>]*>(.*?)</script>", html, re.S | re.I))
 
 
@@ -159,40 +160,41 @@ def pair_claims(text: str) -> list[tuple[str, int, str]]:
     return out
 
 
-def check_page(path: Path) -> list[str]:
-    """L1：单页规则检查，返回 FAIL 描述列表。"""
-    html = path.read_text(encoding="utf-8", errors="replace")
-    text = visible_text(html)
-    js = js_of(html)
+# ---------- L1 规则族（check_page 编排·逐条规则独立可测） ----------
+
+def _rule_nodes_vs_arrays(text: str, claim_list: list, node_arrays: list, link_arrays: list) -> list[str]:
+    """规则 1：网络图注 节点数/边数 vs 数组字面长度（页面仅一组 nodes/links 数组时才判）。"""
     fails: list[str] = []
-
-    arrays = arrays_in_js(js)
-    node_arrays = [a for a in arrays if a and all(("id" in x or "name" in x) for x in a)]
-    link_arrays = [a for a in arrays if a and all(("source" in x and "target" in x) for x in a)]
-
-    # 规则 1：网络图注 节点数/边数 vs 数组字面长度（页面仅一组 nodes/links 数组时才判）
     if len(node_arrays) == 1 and len(link_arrays) == 1:
         n_nodes, n_links = len(node_arrays[0]), len(link_arrays[0])
-        for num, cnt, subj, ctx in claims(text):
+        for num, cnt, subj, ctx in claim_list:
             key = cnt + subj
             if ("节点" in key or re.fullmatch(r"nodes?", key)) and num != n_nodes:
                 fails.append(f"规则1 节点数矛盾：文案 {num} vs nodes 数组 {n_nodes}（…{ctx}…）")
             if ("边" in key or re.fullmatch(r"(links?|edges?)", key)) and num != n_links:
                 fails.append(f"规则1 边数矛盾：文案 {num} vs links 数组 {n_links}（…{ctx}…）")
+    return fails
 
-    # 规则 2：桑基图注 节点数 vs links 去重节点数
+
+def _rule_sankey_nodes(text: str, claim_list: list, js: str, link_arrays: list) -> list[str]:
+    """规则 2：桑基图注 节点数 vs links 去重节点数。"""
+    fails: list[str] = []
     if "d3.sankey(" in js and len(link_arrays) == 1:
         dedupe = set()
         for x in link_arrays[0]:
             dedupe.add(str(x.get("source")))
             dedupe.add(str(x.get("target")))
-        for num, cnt, subj, ctx in claims(text):
+        for num, cnt, subj, ctx in claim_list:
             if ("节点" in cnt + subj or re.fullmatch(r"nodes?", cnt + subj)) and num != len(dedupe):
                 fails.append(f"规则2 桑基节点数矛盾：文案 {num} vs links 去重 {len(dedupe)}（…{ctx}…）")
+    return fails
 
-    # 规则 3a：同页同主语（计数词后置名词）出现 ≥2 个不同数字
+
+def _rule_subject_values(text: str, claim_list: list) -> list[str]:
+    """规则 3a：同页同主语（计数词后置名词）出现 ≥2 个不同数字。"""
+    fails: list[str] = []
     subj_vals: dict[str, set[int]] = {}
-    for num, cnt, subj, _ctx in claims(text):
+    for num, cnt, subj, _ctx in claim_list:
         if len(subj) >= 2:
             key = cnt + subj
             if key.isascii() and len(key) > 10:
@@ -203,21 +205,52 @@ def check_page(path: Path) -> list[str]:
     for key, nums in subj_vals.items():
         if len(nums) >= 2:
             fails.append(f"规则3 同主语计数矛盾：「{key}」出现多个值 {sorted(nums)}")
+    return fails
 
-    # 规则 3b：同页同实体对出现 ≥2 个不同数字（计数词或裸括号数字）
+
+def _rule_pair_values(text: str) -> list[str]:
+    """规则 3b：同页同实体对出现 ≥2 个不同数字（计数词或裸括号数字）。"""
+    fails: list[str] = []
     pair_vals: dict[str, set[int]] = {}
     for pair, num, _cnt in pair_claims(text):
         pair_vals.setdefault(pair, set()).add(num)
     for pair, nums in pair_vals.items():
         if len(nums) >= 2:
             fails.append(f"规则3 实体对计数矛盾：「{pair}」出现多个值 {sorted(nums)}")
+    return fails
 
-    # 规则 4：单 links 数组页，案例/流程类声明数 vs 实际边数
+
+def _rule_case_counts(text: str, claim_list: list, link_arrays: list) -> list[str]:
+    """规则 4：单 links 数组页，案例/流程类声明数 vs 实际边数。"""
+    fails: list[str] = []
     if len(link_arrays) == 1:
         n_links = len(link_arrays[0])
-        for num, _cnt, subj, ctx in claims(text):
+        for num, _cnt, subj, ctx in claim_list:
             if subj in ("案例", "流程", "链路", "分支", "flows", "cases", "scene", "scenes") and num != n_links:
                 fails.append(f"规则4 案例数矛盾：文案 {num} vs links 数组 {n_links}（…{ctx}…）")
+    return fails
+
+
+def check_page(path: Path) -> list[str]:
+    """L1：单页规则检查，返回 FAIL 描述列表（编排器·逐条规则见上方 _rule_* 函数）。
+
+    规则顺序即输出顺序：1 节点/边数 → 2 桑基节点 → 3a 同主语 → 3b 同实体对 → 4 案例数。
+    """
+    html = path.read_text(encoding="utf-8", errors="replace")
+    text = visible_text(html)
+    js = extract_scripts(html)
+    claim_list = claims(text)
+
+    arrays = arrays_in_js(js)
+    node_arrays = [a for a in arrays if a and all(("id" in x or "name" in x) for x in a)]
+    link_arrays = [a for a in arrays if a and all(("source" in x and "target" in x) for x in a)]
+
+    fails: list[str] = []
+    fails += _rule_nodes_vs_arrays(text, claim_list, node_arrays, link_arrays)
+    fails += _rule_sankey_nodes(text, claim_list, js, link_arrays)
+    fails += _rule_subject_values(text, claim_list)
+    fails += _rule_pair_values(text)
+    fails += _rule_case_counts(text, claim_list, link_arrays)
     return fails
 
 
@@ -310,10 +343,49 @@ def l1(gate: bool = False) -> int:
     return 1 if (n_new + len(frozen)) else 0
 
 
+# ---------- L2 对账（静态 / 运行时共用比较内核） ----------
+
+def _compare_embedded_vs_dataset(embedded: dict, source: dict) -> list[str]:
+    """同名顶层键对账内核（每页每键最多 8 项）：list 比长度+逐元素字段，dict 比前 6 字段。
+
+    l2（静态 EMBEDDED 解析）与 l2_runtime（Playwright 运行时提取）共用——
+    W761 前两者各持一份逐字符相同的 26 行比较循环，收敛于此。
+    """
+    mism = []
+    checked = 0
+    for key, ev in embedded.items():
+        if key not in source or checked >= 8:
+            continue
+        sv = source[key]
+        if isinstance(ev, list) and isinstance(sv, list):
+            if len(ev) != len(sv):
+                mism.append(f"{key}: 页 {len(ev)} 项 vs dataset {len(sv)} 项")
+                checked += 1
+                continue
+            for i, (a, b) in enumerate(zip(ev, sv, strict=False)):
+                if isinstance(a, dict) and isinstance(b, dict):
+                    for k in list(a)[:6]:
+                        if k in b and a[k] != b[k]:
+                            mism.append(f"{key}[{i}].{k}: 页 {a[k]!r} vs dataset {b[k]!r}")
+                            break
+                elif a != b:
+                    mism.append(f"{key}[{i}]: 页 {a!r} vs dataset {b!r}")
+                checked += 1
+                if checked >= 8:
+                    break
+        elif isinstance(ev, dict) and isinstance(sv, dict):
+            for k in list(ev)[:6]:
+                if k in sv and ev[k] != sv[k]:
+                    mism.append(f"{key}.{k}: 页 {ev[k]!r} vs dataset {sv[k]!r}")
+                    break
+            checked += 1
+    return mism
+
+
 def l2() -> int:
     """L2 站-dataset 对账：site/data/<X>.html 的 EMBEDDED_DATA vs dataset/<X>.json 同名同源。
 
-    比对：同名顶层键——list 对长度，dict/list 元素抽样逐字段相等（每页每键最多 8 项）。
+    比对走 _compare_embedded_vs_dataset 共用内核；页面发现/标签/汇总行为本模式自有。
     """
     drift = []
     n_pages = 0
@@ -331,34 +403,7 @@ def l2() -> int:
             drift.append(f"{hp.name}: JSON 解析失败 {e}")
             continue
         n_pages += 1
-        mism = []
-        checked = 0
-        for key, ev in embedded.items():
-            if key not in source or checked >= 8:
-                continue
-            sv = source[key]
-            if isinstance(ev, list) and isinstance(sv, list):
-                if len(ev) != len(sv):
-                    mism.append(f"{key}: 页 {len(ev)} 项 vs dataset {len(sv)} 项")
-                    checked += 1
-                    continue
-                for i, (a, b) in enumerate(zip(ev, sv, strict=False)):
-                    if isinstance(a, dict) and isinstance(b, dict):
-                        for k in list(a)[:6]:
-                            if k in b and a[k] != b[k]:
-                                mism.append(f"{key}[{i}].{k}: 页 {a[k]!r} vs dataset {b[k]!r}")
-                                break
-                    elif a != b:
-                        mism.append(f"{key}[{i}]: 页 {a!r} vs dataset {b!r}")
-                    checked += 1
-                    if checked >= 8:
-                        break
-            elif isinstance(ev, dict) and isinstance(sv, dict):
-                for k in list(ev)[:6]:
-                    if k in sv and ev[k] != sv[k]:
-                        mism.append(f"{key}.{k}: 页 {ev[k]!r} vs dataset {sv[k]!r}")
-                        break
-                checked += 1
+        mism = _compare_embedded_vs_dataset(embedded, source)
         if mism:
             drift.append(f"{hp.name}: " + "；".join(mism[:4]))
     for d in drift:
@@ -369,7 +414,10 @@ def l2() -> int:
 
 def l2_runtime(runtime_dir: Path) -> int:
     """L2 运行时版（W560 U1）：对账 <runtime_dir>/<X>.json（Playwright 提取的页面
-    实际 EMBEDDED_DATA）vs dataset/<X>.json。覆盖不受静态解析限制，目标 38/38。"""
+    实际 EMBEDDED_DATA）vs dataset/<X>.json。覆盖不受静态解析限制，目标 38/38。
+
+    比对走 _compare_embedded_vs_dataset 共用内核；输入来源/标签与静态版不同。
+    """
     drift = []
     n_pages = 0
     for rj in sorted(runtime_dir.glob("*.json")):
@@ -384,34 +432,7 @@ def l2_runtime(runtime_dir: Path) -> int:
             drift.append(f"{stem}: JSON 解析失败 {e}")
             continue
         n_pages += 1
-        mism = []
-        checked = 0
-        for key, ev in embedded.items():
-            if key not in source or checked >= 8:
-                continue
-            sv = source[key]
-            if isinstance(ev, list) and isinstance(sv, list):
-                if len(ev) != len(sv):
-                    mism.append(f"{key}: 页 {len(ev)} 项 vs dataset {len(sv)} 项")
-                    checked += 1
-                    continue
-                for i, (a, b) in enumerate(zip(ev, sv, strict=False)):
-                    if isinstance(a, dict) and isinstance(b, dict):
-                        for k in list(a)[:6]:
-                            if k in b and a[k] != b[k]:
-                                mism.append(f"{key}[{i}].{k}: 页 {a[k]!r} vs dataset {b[k]!r}")
-                                break
-                    elif a != b:
-                        mism.append(f"{key}[{i}]: 页 {a!r} vs dataset {b!r}")
-                    checked += 1
-                    if checked >= 8:
-                        break
-            elif isinstance(ev, dict) and isinstance(sv, dict):
-                for k in list(ev)[:6]:
-                    if k in sv and ev[k] != sv[k]:
-                        mism.append(f"{key}.{k}: 页 {ev[k]!r} vs dataset {sv[k]!r}")
-                        break
-                checked += 1
+        mism = _compare_embedded_vs_dataset(embedded, source)
         if mism:
             drift.append(f"{stem}.html: " + "；".join(mism[:4]))
     for d in drift:
