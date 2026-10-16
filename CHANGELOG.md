@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W766），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W767），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,18 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W767（2026-10-16）：数据漂移门禁深比对批
+> **来源**：用户令「继续」（遗留事项③·W760 审查 F-2 HIGH 门禁口径修复；顺带 F-7 P1 修正）。
+> - **G1 门禁 v3（check_data_drift.js）**：增补**共路深比对**——递归遍历双方皆有的键（仅一侧有之键不计·W760 实证 949 项此类系内嵌子集/复合之设计形态）、数组按位对齐、标量严格比对；声明式基线 `scripts/output/data-drift-baseline.txt`（`页面 ⇄ 源 路径`·[N]→[*] 归一化匹配·no-new-drift 语义）；顶层数组长度口径与副本对账保留。
+> - **G2 盲区实证（即刻）**：新口径当场暴露审查员深比对未覆盖的存量漂移——① `chapter_stats.json` 陈旧（源文经 W756 修订后未重跑 stats·该文件 gitignored 系本地产物·已重跑对齐 11 回·页嵌为现行值）；② cave-estate「中将级」= 第 38 门禁登记的**旧值标记**（页面全域「妖将级」·dataset 残留旧值）；③ language-style-radar 悟空色 ×2（#e67e22 旧 palette → #C9A063 现行 · 页余项已一致）；④ theological-intervention-network `var(--accent-1)`×5（页内 accent-1 出现 0 次）；⑤ character-relationship-3d kpi 名（悟空 vs 孙悟空）。
+> - **F-7 双 KPI（数据自证真值）**：① character-relationship-3d `kpi[4]`——按 links 度数年 孙悟空 12 > 唐僧 7 → 修正 dataset 为「悟空 / 度数 12」（与 kpi[3] 及页嵌同名形）；② journey-map-interactive `kpi[2]`——isHardship 节点实数 8 → 修正 dataset「8」。两处均嵌侧正确、dataset 侧陈旧，双边同步后一致。
+> - **81-hardships**：页嵌 3 处 `cause:"mind"` → `"人心自生的魔障"`（页内 label 字典 14 处齐备）；生成器（`C_情节/hardships_81.py`·code 规范）与页面（label 形）之约定分裂 → 基线声明 + 登记独立对齐批。
+> - **visual-art**：`visual_art_ideas` 计数 vs 数组——页面注释显证「仅在 EMBEDDED 中」系设计双形态 → 基线声明。
+> - **验证（全绿）**：门禁 v3 绿（深层比对一致·基线豁免 244 项）；**负样本实证**（向 radar 注入 #dead00 → 门禁转红且精确到 `$.characters[0].color` 路径 → 恢复转绿）；改页内联脚本后 CSP 重注 **零漂移**（856 页/858 哈希）；**pytest 597 passed**；verify_delivery 全量 48 段 0 FAIL。
+> - **登记（独立批）**：hardships_81 生成器 code↔页面 label 约定对齐（含 deployed 副本形态）。
+> - **状态**：已提交（本地）。
+> - **文件**：scripts/check_data_drift.js、scripts/output/data-drift-baseline.txt（新）、dataset/cave-estate.json、dataset/character-relationship-3d.json、dataset/journey-map-interactive.json、dataset/language-style-radar.json、dataset/theological-intervention-network.json、site/data/81-hardships.html、scripts/output/_w767_spec.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、.github/workflows/README.md、site/index.html、site/dukou-engine.html、site/data/tag-cloud.html、site/data/cross-time-danmaku.html、archive/docs/AGENTS-ARCHIVE.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_cascade_files_W767.txt。
 
 ### W766（2026-10-16）：C 类引文静默删改修复批
 > **来源**：用户令「继续」（遗留事项③·W760 审查 F-1b HIGH 修复）。审查证据 `tmpe/review-w760/content/c-violations.json` 59 条（sim≥0.7·C 类长引文静默删改·落在第 20 门禁两种语法族之外）。

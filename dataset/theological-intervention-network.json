@@ -13,14 +13,14 @@
         "type": "deity",
         "religion": "佛",
         "size": 28,
-        "color": "var(--accent-1)"
+        "color": "var(--accent-2)"
       },
       {
         "id": "如来",
         "type": "deity",
         "religion": "佛",
         "size": 30,
-        "color": "var(--accent-1)"
+        "color": "var(--accent-2)"
       },
       {
         "id": "太上老君",
@@ -237,11 +237,11 @@
     "nodes": [
       {
         "name": "观音",
-        "color": "var(--accent-1)"
+        "color": "var(--accent-2)"
       },
       {
         "name": "如来",
-        "color": "var(--accent-1)"
+        "color": "var(--accent-2)"
       },
       {
         "name": "太上老君",
@@ -424,7 +424,7 @@
   "radar": [
     {
       "name": "佛性论",
-      "color": "var(--accent-1)",
+      "color": "var(--accent-2)",
       "values": [
         5,
         5,
