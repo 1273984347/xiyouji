@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W767），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W768），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,16 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W768（2026-10-16）：英文站校验接线批
+> **来源**：用户令「继续」（遗留事项③·W760 审查 F-3 HIGH 收口——四 HIGH 最后一项）。W760 实证：`HANDOVER`/`V2可视化维度方案` 宣称「138 个 EN 页通过 validate_en.py」，实际三入口零接线（verify/CI/Makefile 均无引用）+ 被第 42 槽（根级脚本覆盖）豁免基线豁免，6 页违规（search 中文语料 5458 CJK + chart-design 132 / chapter-stats 102 / methodology-matrix 48 / character-appearance 35 / relationships 1）长期在绿。
+> - **G1 校验器升级（validate_en.py）**：① 新增 `--all [root]` 批量模式（全站遍历·汇总行 `EN validate: OK=N FAIL=M`·任一页违规即退出码 1）；② 豁免区落地——`/* SEARCH_INDEX:BEGIN */…/* SEARCH_INDEX:END */` 包裹的全文检索语料索引为「引用语料区」（与第 20 槽「原文全文」豁免区同类·W768 用户口径），不计入 script CJK；③ 单页模式输出与旧版**逐字节兼容**（check_page 重构·对拍留档：非语料页输出 IDENTICAL）。
+> - **G2 六页整改**：① chart-design——zh→en 字典（HOUR_EN/ACTGEN_EN/MSTATE_EN/SACT_EN/SKEY_EN 共 126 对）全域转形（数据+字典键同步·自映射保行为）；② methodology-matrix——MONSTER_EN/PHASE_EN/RESCUER_EN/RMONSTER_EN 32 对 + 四角标签键值化（左上→left_top 等）；③ character-appearance——ZH2EN_NAME 35 对转形；④ chapter-stats——「第N回」→「Chapter N」×102（循 chapters-map「Chapter 100」惯例）；⑤ relationships——调试串 `[DATA] EMBEDDED 单源:` → `single-source:`；⑥ search——语料索引按豁免区口径处理（0 改动·EXEMPT 生效）。
+> - **G3 接线（第 44 槽）**：verify_delivery.py 五面注册（EXPECTED_SECTION_NAMES 49 段 / _STRICT_GATES 含 marker `EN validate:` / _GATE_SUMMARY_MARKERS / SCOPE_SITE_SECTIONS / 头注 46→49 段校正）；CI 经 verify-delivery job 自动生效；Makefile 新增 `validate-en` 目标并挂入 `ci` 链；第 42 槽豁免基线移除 `validate_en.py  # ①英文站校验` 行（接线后不再豁免）。
+> - **G4 三方编号同步**：AGENTS §4.2（43→44 槽·清单补第 44 项）+ gates.md（标题 44 槽·补第 44 槽全量定义）+ stats `gate_count` 43→44（--w W768 刷新）+ README `<!--stats:gate_count-->` 标记 43→44。
+> - **验证（全绿）**：`validate_en --all` **138/138 通过**；verify_delivery 全量 **49 段**（实跑==声明）0 核心 FAIL；CSP 重注零漂移（856 页/858 哈希·5 页内联脚本改动后重注）；单页输出与旧版对拍一致；**pytest 597 passed**。
+> - **状态**：已提交（本地）。**W760 审查四项 HIGH 至此全部办结**（F-1a W763 / F-1b W766 / RCE W764 / 第 9 门禁 W767 / validate_en 本批）；余用户侧 `.env` 凭证轮换。
+> - **文件**：scripts/validate_en.py、scripts/verify_delivery.py、Makefile、AGENTS.md、docs/agent/gates.md、README.md、scripts/output/script-coverage-baseline.txt、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、site/en/chart-design.html、site/en/methodology-matrix.html、site/en/character-appearance.html、site/en/chapter-stats.html、site/en/relationships.html、scripts/output/_w768_spec.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、.github/workflows/README.md、site/index.html、site/dukou-engine.html、site/data/tag-cloud.html、site/data/cross-time-danmaku.html、archive/docs/AGENTS-ARCHIVE.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_cascade_files_W768.txt。
 
 ### W767（2026-10-16）：数据漂移门禁深比对批
 > **来源**：用户令「继续」（遗留事项③·W760 审查 F-2 HIGH 门禁口径修复；顺带 F-7 P1 修正）。

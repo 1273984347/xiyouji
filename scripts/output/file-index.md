@@ -11,6 +11,24 @@
 ---
 
 
+## W768 英文站校验接线批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/validate_en.py | W768 | --all 批量模式 + SEARCH_INDEX 语料豁免区 + check_page 重构（单页输出逐字节兼容） |
+| scripts/verify_delivery.py | W768 | 第 44 槽挂载（段数 48→49·五面注册） |
+| Makefile | W768 | validate-en 目标 + ci 链挂载 |
+| AGENTS.md | W768 | §4.2 43→44 槽（清单补第 44 项） |
+| docs/agent/gates.md | W768 | 44 槽标题 + 第 44 槽全量定义 |
+| README.md | W768 | gate_count 标记 43→44 |
+| scripts/output/script-coverage-baseline.txt | W768 | 移除 validate_en 豁免行（接线后不再豁免） |
+| site/en/chart-design.html | W768 | zh→en 字典 126 对全域转形 |
+| site/en/methodology-matrix.html | W768 | 字典 32 对 + 四角标签键值化 |
+| site/en/character-appearance.html | W768 | ZH2EN_NAME 35 对转形 |
+| site/en/chapter-stats.html | W768 | 第N回→Chapter N ×102 |
+| site/en/relationships.html | W768 | 调试串英译 |
+| scripts/output/_w768_spec.json | W768 | 本批 spec 入库 |
+
 ## W767 数据漂移门禁深比对批（2026-10-16）
 
 | 文件 | W | 说明 |

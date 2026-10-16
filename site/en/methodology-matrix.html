@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-K6a3z1h2zj86wFTlpArxFUfqPG22j1JhCl+D5EFWj8s=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-A6/L9JNAs8eGjdDf7Zl31L7NqD+ZkDqHVxz7FjODhrY=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-w6LpMjwvcAt/Rw2M8mkYdcMuJ7SJa01490meeD5RDiE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-A6/L9JNAs8eGjdDf7Zl31L7NqD+ZkDqHVxz7FjODhrY=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Methodology Matrix · Villain Evaluation &amp; Rescue ROI · Annotated Journey to the West</title>
@@ -2185,7 +2185,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         "right_bottom": "#C9A063"   // weak backing + metaphysical · brown
     };
     // W621：象限字段双形态兼容——部署 JSON 用中文象限名，EMBEDDED/代码键为英文 id
-    const QUADRANT_KEY = q => ({ "左上": "left_top", "右上": "right_top", "左下": "left_bottom", "右下": "right_bottom" }[q] || q);
+    const QUADRANT_KEY = q => ({ "left_top": "left_top", "right_top": "right_top", "left_bottom": "left_bottom", "right_bottom": "right_bottom" }[q] || q);
     const QUADRANT_LABELS = {
         "left_top": "Top-left · strong backing + metaphysical",
         "right_top": "Top-right · strong backing + survival",
@@ -2198,15 +2198,15 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         "Late · actuary": "#6B8E5A"
     };
     // W621：阶段字段双形态兼容——部署 JSON 用中文阶段名，EMBEDDED/代码键为英文
-    const PHASE_KEY = p => ({ "早期·本能型": "Early · instinctive", "中期·学习型": "Middle · learning", "后期·精算师型": "Late · actuary" }[p] || p);
+    const PHASE_KEY = p => ({ "Early · instinctive": "Early · instinctive", "Middle · learning": "Middle · learning", "Late · actuary": "Late · actuary" }[p] || p);
     // W625 快赢层：部署 JSON 为 zh 原语，显示面枚举名归一为英文——映射由 scripts/_w625_build_zh2en_maps.py
     // 从 EMBEDDED（英）×部署 JSON（中）机械配对生成，勿手改；EMBEDDED 路径本就英文，归一恒等。
     // 长文本（analysis/insight 类）保持原语，归根治层（WP-C 的 en 数据副本）。
-    const MONSTER_EN = { "九头虫": "Nine-Headed Bug", "六耳猕猴": "Six-Eared Macaque", "大鹏金翅雕": "Great Peng, the Golden-Winged Roc", "寅将军": "General Tiger", "熊山君": "Bear Mountain Lord", "白骨精": "White Bone Demon", "红孩儿": "Red Boy", "老鼠精": "Rat Demon", "蜘蛛精": "Spider Demons", "蝎子精": "Scorpion Demon", "金角银角": "Gold Horn & Silver Horn", "青毛狮子怪": "Green-Maned Lion Demon", "青牛精": "Green Ox Demon", "黄眉怪": "Yellow-Browed Demon", "黄袍怪": "Yellow Robe Demon" };
-    const RMONSTER_EN = { "九灵元圣": "Nine-Headed Lion", "牛魔王": "Bull Demon King", "狮驼岭三妖": "The Three Demons of Lion-Camel Ridge", "红孩儿": "Red Boy", "老鼠精": "Rat Demon", "蝎子精": "Scorpion Demon", "青牛精": "Green Ox Demon", "黄眉怪": "Yellow-Browed Demon", "黄风怪": "Yellow Wind Demon", "黑熊精": "Black Bear Demon" };
-    const RESCUER_EN = { "哪吒 + 天兵天将": "Nezha + heavenly troops", "太上老君": "Laojun", "太乙救苦天尊": "Taiyi", "如来佛祖": "the Tathagata", "弥勒佛": "Maitreya", "托塔李天王": "Heavenly King Li", "昴日星官": "Mao Sun Star Officer", "灵吉菩萨": "Lingji", "观音菩萨": "Guanyin" };
-    const PHASE_EN = { "中期·学习型": "Middle · learning", "后期·精算师型": "Late · actuary", "早期·本能型": "Early · instinctive" };
-    const QUADRANT_ID = { "右上": "right_top", "右下": "right_bottom", "左上": "left_top", "左下": "left_bottom" };
+    const MONSTER_EN = { "Nine-Headed Bug": "Nine-Headed Bug", "Six-Eared Macaque": "Six-Eared Macaque", "Great Peng, the Golden-Winged Roc": "Great Peng, the Golden-Winged Roc", "General Tiger": "General Tiger", "Bear Mountain Lord": "Bear Mountain Lord", "White Bone Demon": "White Bone Demon", "Red Boy": "Red Boy", "Rat Demon": "Rat Demon", "Spider Demons": "Spider Demons", "Scorpion Demon": "Scorpion Demon", "Gold Horn & Silver Horn": "Gold Horn & Silver Horn", "Green-Maned Lion Demon": "Green-Maned Lion Demon", "Green Ox Demon": "Green Ox Demon", "Yellow-Browed Demon": "Yellow-Browed Demon", "Yellow Robe Demon": "Yellow Robe Demon" };
+    const RMONSTER_EN = { "Nine-Headed Lion": "Nine-Headed Lion", "Bull Demon King": "Bull Demon King", "The Three Demons of Lion-Camel Ridge": "The Three Demons of Lion-Camel Ridge", "Red Boy": "Red Boy", "Rat Demon": "Rat Demon", "Scorpion Demon": "Scorpion Demon", "Green Ox Demon": "Green Ox Demon", "Yellow-Browed Demon": "Yellow-Browed Demon", "Yellow Wind Demon": "Yellow Wind Demon", "Black Bear Demon": "Black Bear Demon" };
+    const RESCUER_EN = { "Nezha + heavenly troops": "Nezha + heavenly troops", "Laojun": "Laojun", "Taiyi": "Taiyi", "the Tathagata": "the Tathagata", "Maitreya": "Maitreya", "Heavenly King Li": "Heavenly King Li", "Mao Sun Star Officer": "Mao Sun Star Officer", "Lingji": "Lingji", "Guanyin": "Guanyin" };
+    const PHASE_EN = { "Middle · learning": "Middle · learning", "Late · actuary": "Late · actuary", "Early · instinctive": "Early · instinctive" };
+    const QUADRANT_ID = { "right_top": "right_top", "right_bottom": "right_bottom", "left_top": "left_top", "left_bottom": "left_bottom" };
 
     // ===== Render: design purpose =====
     function renderDesignPurpose(purpose) {

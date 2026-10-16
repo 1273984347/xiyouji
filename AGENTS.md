@@ -1,6 +1,6 @@
 # AGENTS.md — 《详解西游记》项目 Agent 指南
 
-> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 43 条门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
+> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 44 条门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
 >
 > 本文件面向进入本仓库工作的 AI Agent（及新接手的人类维护者），提供项目的用途、技术栈、目录结构、关键模块、依赖关系、构建运行方式与必须遵守的铁律。动手前请通读；更细的规则以文末「权威文档」为准。
 >
@@ -103,9 +103,9 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 
 ### 4.2 交付门禁体系（verify_delivery.py，pre-commit 强制 · 摘要层）
 
-> **📖 阅读契约（W709）**：索引型——本节=43 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
+> **📖 阅读契约（W709）**：索引型——本节=44 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
 
-verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 43 槽，五组：
+verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 44 槽，五组：
 
 **内容与同步类（1-5）**：
 1. **六文档同步**
@@ -141,7 +141,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 25. **数据内容一致性**
 26. **SEO head**
 
-**编号与质量防线类（27-43）**：
+**编号与质量防线类（27-44）**：
 27. **W 号区间字面量**
 28. **可视化可引用性**
 29. **色盲安全**
@@ -159,6 +159,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 41. **AGENTS 分层完整性**
 42. **根级脚本覆盖**
 43. **可视化数据断言**（check_chart_values.js·W753）
+44. **英文站 CJK 校验**（validate_en.py·W768）
 
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
@@ -277,4 +278,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W762-W762 级联自动滚动·脚注保留最近 5 条·grep 查勿通读）；2026-10-16（W763）照录区字级篡改全量修复批（用户令现在做·W760 审查 F-1a 修复）：照录区（第二十门禁永久豁免区）以权威语料为基准空白归一 difflib 对拍·opcode 级映射回原文修复九十七处（九文件）等于人名专名（子叉到木吒十二·崔珪到崔珏六·木呼木吐到木吒四·初江王到楚江王·迎叶到迦叶·比丘增到比丘僧）加实词用字（般苦到般若·皤桃到蟠桃三·五帝到玉帝四·锡枚到锡杖二·已时到巳时二·头防到头陀·暨岭到鹫岭·奈河到奈何·登极到登基）加删字补回（我怕你漏怕·法相如是漏是·即唤阿傩漏阿·取经人漏人）加标点编码残损（乖猴句读·货币符到栴·诗曰冒号）加语料徵征批联动三处；登记不修等于占位符约定五处加语料 OCR 疑错二处（在因在凡间加生长生变化·修语料属仲裁批）；验证等于比对器残留零加行尾纯净九文件全 CRLF 加 pytest 五百九十七 passed 加 verify 全量 48 段零 FAIL；2026-10-16（W764）命令白名单 pager 逃逸修复批（用户令现在做·W760 审查 F-11 HIGH P0）：W760 S-01 实证 git grep -O 把 pager 交 sh -c 执行参数未转义且 shell:false 下落盘成功；修复等于 tools.ts 参数层拦截扩展（-O 含粘连与=形态加 open-files-in-pager 加 ext-diff 加 pager= 统一按 token 判定·原 no-index 与 output= 裸串匹配升级 token 级）加全命令 shell 元字符二次校验（分号与与号与大于小于与反引号与换行拒·竖线与美元符放行保 git grep 正则）；单测加六例（五拒一放行）；验证等于 tools 单测三十八过加全套四十九过加 tsc 零错加引擎冒烟十二组全绿加 pytest 五百九十七 passed 加 verify 全量 48 段零 FAIL；待用户执行凭证轮换（LLM_API_KEY 与 GOATCOUNTER_API_TOKEN）；2026-10-16（W765）a11y 辅助族注释统一与解析规则拆分批（用户令现在做·遗留事项四）：增强审计辅助族（键盘导航审计与 ARIA 完整性验证）docstring 与节头集中声明 parser 优先签名加不注册于 ALL_CHECKS 加被规则一三内部调用；rule_29_parsing 七十四行拆为编排器加重复 ID 臂加未闭合元素臂（返回计数供复用）加悬垂结束标签臂·void 与 optional-close 标签集提模块常量·消息与顺序逐字保留；验证等于新旧行为对拍逐字节一致（五夹具加整页 findings JSON 全等）加 a11y 专项五十三过加 AST 退出四十行榜加 pytest 五百九十七 passed 加 ruff 零加 verify 全量 48 段零 FAIL；2026-10-16（W766）C 类引文静默删改修复批（用户令继续·W760 审查 F-1b HIGH）：证据 c-violations 五十九条（C 类长引文静默删改）全量处置等于五十一条修复加八条语料疑点登记（四十二条文档含未 flag 同引文扩散八件）；修复五类等于单字专名（鋋罗到棕罗·翙到躧·兼到咸三·贫僧已发到我已发了六）加标点句读（顿号到逗号·分号到逗号）加直角引号还原（六条到语料双引号）加补全截断（不可久住天人之内加消灾也加下宾加如何不好）加恢复删节（保他家生者安全亡者超脱二·八戒编谎长句两处省略号）加句式按语料（心经三文件·袁守诚卦语·镇海神针）；登记八条等于惜修生命对性命四（语料疑点保 doc 正确形态）加变罢了对便罢了四；过程自查等于我现误修我观逐字核后回退；验证等于省略号感知核验五十九之五十一加八加引文门禁四百二十三加一百一十二百分百（新增七归属对白全过）加 pytest 五百九十七 passed 加 verify 全量 48 段零 FAIL；2026-10-16（W767）数据漂移门禁深比对批（用户令继续·W760 F-2 HIGH 修复加 F-7 P1）：第九门禁补共路深比对（递归共键·数组按位·标量严格比·仅一侧有之键不计）加声明式基线 data-drift-baseline 归一匹配加 no-new-drift；新口径当场暴露存量漂移等于 chapter_stats 陈旧本地产物重跑十一回对齐加 cave-estate 中将级旧值标记清理加 radar 悟空色二加 theo accent 五加 kpi 名；F-7 双 KPI 按数据自证（links 度数悟空十二胜唐僧七·isHardship 实数八）双边同步；八十一难页嵌三处 mind 修 label 形·生成器 code 与页面 label 约定分裂基线登记独立批；visual-art 设计双形态基线；验证等于门禁绿豁免二百四十四加负样本注入转红恢复转绿加 CSP 重注零漂移加 pytest 五百九十七 passed 加 verify 全量 48 段零 FAIL。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W763-W763 级联自动滚动·脚注保留最近 5 条·grep 查勿通读）；2026-10-16（W764）命令白名单 pager 逃逸修复批（用户令现在做·W760 审查 F-11 HIGH P0）：W760 S-01 实证 git grep -O 把 pager 交 sh -c 执行参数未转义且 shell:false 下落盘成功；修复等于 tools.ts 参数层拦截扩展（-O 含粘连与=形态加 open-files-in-pager 加 ext-diff 加 pager= 统一按 token 判定·原 no-index 与 output= 裸串匹配升级 token 级）加全命令 shell 元字符二次校验（分号与与号与大于小于与反引号与换行拒·竖线与美元符放行保 git grep 正则）；单测加六例（五拒一放行）；验证等于 tools 单测三十八过加全套四十九过加 tsc 零错加引擎冒烟十二组全绿加 pytest 五百九十七 passed 加 verify 全量 48 段零 FAIL；待用户执行凭证轮换（LLM_API_KEY 与 GOATCOUNTER_API_TOKEN）；2026-10-16（W765）a11y 辅助族注释统一与解析规则拆分批（用户令现在做·遗留事项四）：增强审计辅助族（键盘导航审计与 ARIA 完整性验证）docstring 与节头集中声明 parser 优先签名加不注册于 ALL_CHECKS 加被规则一三内部调用；rule_29_parsing 七十四行拆为编排器加重复 ID 臂加未闭合元素臂（返回计数供复用）加悬垂结束标签臂·void 与 optional-close 标签集提模块常量·消息与顺序逐字保留；验证等于新旧行为对拍逐字节一致（五夹具加整页 findings JSON 全等）加 a11y 专项五十三过加 AST 退出四十行榜加 pytest 五百九十七 passed 加 ruff 零加 verify 全量 48 段零 FAIL；2026-10-16（W766）C 类引文静默删改修复批（用户令继续·W760 审查 F-1b HIGH）：证据 c-violations 五十九条（C 类长引文静默删改）全量处置等于五十一条修复加八条语料疑点登记（四十二条文档含未 flag 同引文扩散八件）；修复五类等于单字专名（鋋罗到棕罗·翙到躧·兼到咸三·贫僧已发到我已发了六）加标点句读（顿号到逗号·分号到逗号）加直角引号还原（六条到语料双引号）加补全截断（不可久住天人之内加消灾也加下宾加如何不好）加恢复删节（保他家生者安全亡者超脱二·八戒编谎长句两处省略号）加句式按语料（心经三文件·袁守诚卦语·镇海神针）；登记八条等于惜修生命对性命四（语料疑点保 doc 正确形态）加变罢了对便罢了四；过程自查等于我现误修我观逐字核后回退；验证等于省略号感知核验五十九之五十一加八加引文门禁四百二十三加一百一十二百分百（新增七归属对白全过）加 pytest 五百九十七 passed 加 verify 全量 48 段零 FAIL；2026-10-16（W767）数据漂移门禁深比对批（用户令继续·W760 F-2 HIGH 修复加 F-7 P1）：第九门禁补共路深比对（递归共键·数组按位·标量严格比·仅一侧有之键不计）加声明式基线 data-drift-baseline 归一匹配加 no-new-drift；新口径当场暴露存量漂移等于 chapter_stats 陈旧本地产物重跑十一回对齐加 cave-estate 中将级旧值标记清理加 radar 悟空色二加 theo accent 五加 kpi 名；F-7 双 KPI 按数据自证（links 度数悟空十二胜唐僧七·isHardship 实数八）双边同步；八十一难页嵌三处 mind 修 label 形·生成器 code 与页面 label 约定分裂基线登记独立批；visual-art 设计双形态基线；验证等于门禁绿豁免二百四十四加负样本注入转红恢复转绿加 CSP 重注零漂移加 pytest 五百九十七 passed 加 verify 全量 48 段零 FAIL；2026-10-16（W768）英文站校验接线批（用户令继续·W760 F-3 HIGH 收口）：validate_en 加 --all 批量（汇总行 EN validate·任一页违规退一）加语料索引豁免区（SEARCH_INDEX BEGIN END 包裹视为引用语料）加单页输出逐字节兼容；六页整改等于 chart-design 字典百二十六对转形加 methodology 三十二对加四角键值化加 appearance 三十五对加 chapter-stats 第 N 回到 Chapter N 百零二加 relationships 调试串加 search 豁免零改动；接线等于 verify 第四十四槽五面注册加段数四十九自洽加 CI 经 verify-delivery 生效加 Makefile 目标挂 ci 加第四十二槽豁免行移除；三方编号等于 AGENTS 四十四加 gates.md 四十四加 stats gate_count 四十三到四十四加 README 标记同步；验证等于全站百三十八页通过加 verify 四十九段零 FAIL 加 CSP 重注零漂移加 pytest 五百九十七 passed。如与上述权威文档冲突，以权威文档为准。*
