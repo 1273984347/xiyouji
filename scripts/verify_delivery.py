@@ -25,7 +25,7 @@ verify_delivery.py — 零依赖交付校验门禁（Senior Developer 设立）
 结构（W728 重构：原 905 行单体 main() 拆为五层·行为与输出逐字节不变）：
   模块级常量 → scope 分级工具 → 版本解析工具 → _Reporter/_GateContext（上报与执行态）
   → 门禁参数表（_SimpleGate×18 / _StrictGate×15）→ 通用 runner×2 → 13 个段函数
-  → 收尾三函数 → main() 编排（46 段执行序 == EXPECTED_SECTION_NAMES 声明序·段自洽锁对账）。
+  → 收尾三函数 → main() 编排（49 段执行序 == EXPECTED_SECTION_NAMES 声明序·段自洽锁对账）。
 """
 
 import json
@@ -94,6 +94,7 @@ EXPECTED_SECTION_NAMES = [
     "AGENTS分层",
     "脚本覆盖",
     "可视化数据",
+    "英文站",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
@@ -117,7 +118,7 @@ SCOPE_SITE_SECTIONS = {
     "双源漂移", "CSP漂移", "腐蚀插件", "内联语法", "CSS平衡", "token覆盖",
     "动效禁令", "a11y对比", "INLINED完整", "动态链接", "图表自洽", "数据一致",
     "SEOhead", "可引用性", "设计令牌对账", "色盲安全", "降级声明", "head内容",
-    "CSS变量引用", "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源", "chapter双源", "可视化数据",
+    "CSS变量引用", "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源", "chapter双源", "可视化数据", "英文站",
     "文档口径", "W区间字面量", "索引健康", "治理契约", "AGENTS分层",
 }
 _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·旁文档/A4/A1-A6/学术/A1导航/sitemap/内嵌回退 7 段不在任何 scope 集=自洽锁盲区）
@@ -131,6 +132,7 @@ _GATE_SUMMARY_MARKERS = {
     "降级声明": "---- 第 30 门禁 降级声明：",
     "文档口径": "---- 第 31 门禁 文档口径体检：",
     "CLAUDE速查": "---- 第 32 门禁 CLAUDE.md 速查层：",
+    "英文站": "EN validate:",
     "head内容": "---- 第 33 门禁 head 内容：",
     "CSS变量引用": "---- 第 34 门禁 CSS 变量引用：",
     "声明分隔": "---- 第 35 门禁 声明分隔：",
@@ -588,6 +590,12 @@ _STRICT_GATES = [
                 fail_msg="可视化数据断言缺口",
                 marker_msg="可视化数据断言门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
                 ok_msg="可视化数据断言通过（%s）", ok_line=-2),
+    _StrictGate(section="英文站", script="validate_en.py", args=("--all",), timeout=180,
+                marker="EN validate:",
+                crash_msg="英文站校验执行异常（第 44 槽·crash 即拦）: %s",
+                fail_msg="英文站 CJK 违规（script CJK=0 / chrome 白名单）",
+                marker_msg="英文站校验输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+                ok_msg="英文站校验通过（%s）", ok_line=-1),
 ]
 
 
