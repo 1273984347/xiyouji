@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W769），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W770），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,17 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W770（2026-10-16）：引文豁免口径修正与数据链路对齐批
+> **来源**：用户令「继续」（W760 审查遗留收口：F-2 经用户批准修脚本 + W767 登记的 hardships 对齐 + F-8 复核）。
+> - **F-2 修复（check_citations.py·两判定面）**：① `_iter_checked_lines`（检查 1/2 豁免）——文首文件级标记（首个标题前的 `> 【文学演绎】`）此前因 head_level=0 置 fiction_until=0（0 即「不在豁免区」）而实为不豁免 → 新增 file_fiction 整文件豁免态；② `scan_reverse`（--reverse 候选）——原 `marked` 语义仅豁免到下一标题即清，与外传文类「h1 标题后的文首标记」冲突 → 改为与 `_iter_checked_lines` 同源的「标记时标题级·豁免至同级或更高级标题」+ 文件级豁免。**实证**：接引佛祖外传/日值功曹外传的假阳性候选（「一、凌云渡」「六、那一页」各 1）修复后归零；自测 +2 例（check_text/scan_reverse 双面）12/12。
+> - **hardships_81 生成器 label 化输出对齐（W767 登记项）**：`C_情节/hardships_81.py` 输出的 `hardships` 清单由 code 形（arranged/taken/solo…）转 **label 形**（如来/观音安排/被接走（有背景）/悟空独立解决…·经 build_statistics 既有 label_maps 映射）——与页面 EMBEDDED 及 dataset/81-hardships.json 对齐；重生成 + `sync_data_json.py` 同步部署副本。
+> - **副本回灌与自检工具恢复**：全站排查实证 `site/data/json/` 部署副本含 W678/W691 修复而 `scripts/output/data/` 原件未回灌（20 件·如 `/demo 求助观音`、`中将级`、`geo3d 到达回`、W691 口径注记等）——**回灌 20 件**（副本为准·含 project_review 副本侧重复后缀损坏修复×2）→ 47 副本与原件**字节全等**；恢复 `scripts/_check_json_copies.py`（W563 的本地字节级自检工具·W735 归档后门禁注释仍引用其职责·本轮实证其缺位正是回灌缺口无人报警的根因）。
+> - **门禁解析 v3.1（check_data_drift.js）**：候选解析补两级——`json/…` 形态优先解析到 **tracked 副本**（CI 稳定：gitignored 原件在 CI 由 run_all 再生成·值可因生成器源差异漂移）+ 裸文件名形态（relationships.html 的 loadJson（…）族·此前整页跳过）。**实测覆盖跃升**：可比 45→57 页·JSON 对比项 73→147·全绿（豁免仅剩 visual-art 设计双形态 1 项）。
+> - **F-8 复核（诚实留档）**：审查员「pytest 95% 静默终止」不可复现——本轮 6+ 次全量与两形态定向（`tests/unit` 单跑 413+3·全量 597+3）全绿；其建议的两项防护**均已在位**（probePage 逐探针 context.close :453 + 探针超时 :442 + subprocess timeout=300），其「仅全部跑完才 browser.close()」论断与代码实况不符。登记为观察项：若复发按其 bisect 表定位 + 考虑 --workers=1。
+> - **验证（全绿）**：check_citations 自测 12/12 + 主检 423+112 命中率 100% + --reverse 候选 0；数据漂移 v3.1 门禁绿（覆盖 45→57 页/73→147 对·豁免 1）；47 副本字节全等；**pytest 597 passed**；verify_delivery 全量 49 段 0 核心 FAIL。
+> - **状态**：已提交（本地）。
+> - **文件**：scripts/check_citations.py、scripts/C_情节/hardships_81.py、scripts/_check_json_copies.py（新·自 archive 恢复）、scripts/check_data_drift.js、scripts/output/data-drift-baseline.txt、site/data/json/hardships_81.json、site/data/json/project_review.json、scripts/output/_w770_spec.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、.github/workflows/README.md、site/index.html、site/dukou-engine.html、site/data/tag-cloud.html、site/data/cross-time-danmaku.html、archive/docs/AGENTS-ARCHIVE.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_cascade_files_W770.txt。
 
 ### W769（2026-10-16）：动效时长归一与口径说明修正批
 > **来源**：用户令「继续」（W760 审查 P1/P2 残余小项：F-4 动效盲区 + F-9/F-10 口径说明与文案）。

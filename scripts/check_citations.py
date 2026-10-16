@@ -109,11 +109,16 @@ def _iter_checked_lines(text):
     """逐行产出 (行号, 行文本, 是否在核验区)。
 
     核验区 = 全文 − 「原文全文」照录区 − 【文学演绎】标记区（§4.12）。
-    标记区范围：标记行所在标题节内（直到同级或更高级标题）。
+    标记区范围：标记行所在标题节内（直到同级或更高级标题）；
+    **文首文件级标记（首个标题之前·W770 F-2 修复）** = 整文件豁免——此前该形态因
+    head_level=0 置 fiction_until=0（0 即「不在豁免区」）而实为不豁免，致 docs/02-06
+    外传文类（标记在文首第 3 行）的合规文件被 --reverse 反复列为漏标候选（100 抽样
+    100% 假阳性·门禁口径修正）。
     """
     head_level = 0
     in_fulltext = False
-    fiction_until = 0  # >0 表示处于演绎豁免区（值=标记节标题级）
+    fiction_until = 0  # >0 表示处于节级演绎豁免区（值=标记节标题级）
+    file_fiction = False  # W770：文首文件级标记 → 整文件豁免
     for i, ln in enumerate(text.splitlines(), 1):
         st = ln.strip()
         hm = HEADING_RE.match(st)
@@ -128,10 +133,13 @@ def _iter_checked_lines(text):
             yield i, ln, False
             continue
         if FICTION_MARK in st and st.startswith(">"):
-            fiction_until = head_level  # 豁免至同级/更高级标题
+            if head_level == 0:
+                file_fiction = True  # 文首（标题前）→ 文件级
+            else:
+                fiction_until = head_level  # 豁免至同级/更高级标题
             yield i, ln, False
             continue
-        if in_fulltext or fiction_until:
+        if in_fulltext or fiction_until or file_fiction:
             yield i, ln, False
             continue
         yield i, ln, True
@@ -207,17 +215,21 @@ def scan_reverse(text, chapters):
     """
     whole = "".join(chapters[n] for n in sorted(chapters))
     cands = []
-    state = {"lv": 0, "title": "", "line": 0, "fulltext": False, "marked": False, "samples": []}
+    state = {"lv": 0, "title": "", "line": 0, "fulltext": False,
+             "file_marked": False, "section_fiction": 0, "samples": []}
+    # W770 F-2：豁免语义对齐 _iter_checked_lines——file_marked=文首（标题前）整文件；
+    # section_fiction=标记时的标题级·豁免至「同级或更高级标题」为止（原实现仅豁免到下一标题即清，
+    # 与外传文类「h1 标题后的文首标记」冲突 → 假阳性候选）。
 
     def flush():
-        if (state["lv"] and state["samples"] and not state["marked"]
+        if (state["lv"] and state["samples"]
+                and not state["file_marked"] and not state["section_fiction"]
                 and not state["fulltext"] and "延伸思考" not in state["title"]):
             n_total = len(state["samples"])
             n_miss = sum(1 for _ln, q in state["samples"] if norm(q) not in whole)
             if n_total >= 2 and n_miss / n_total >= 0.5:
                 cands.append((state["title"], state["line"], n_total, n_miss, state["samples"][0][1][:24]))
         state["samples"] = []
-        state["marked"] = False
 
     for i, ln in enumerate(text.splitlines(), 1):
         st = ln.strip()
@@ -229,11 +241,16 @@ def scan_reverse(text, chapters):
             state["line"] = i
             if state["lv"] == 2:
                 state["fulltext"] = state["title"].startswith(FULLTEXT_HEAD)
+            if state["section_fiction"] and state["lv"] <= state["section_fiction"]:
+                state["section_fiction"] = 0  # 到同级/更高级标题·豁免结束
             continue
         if state["fulltext"]:
             continue
         if FICTION_MARK in st:
-            state["marked"] = True
+            if state["lv"] == 0:
+                state["file_marked"] = True  # 文首（标题前）→ 文件级豁免
+            else:
+                state["section_fiction"] = state["lv"]  # 至同级/更高级标题
             continue
         if CITE_RE.match(st):
             continue
@@ -357,6 +374,18 @@ def self_test(chapters):
                 "他说道：「感盘古开辟，三皇治世，五帝定伦」\n")
     if scan_reverse(real_sec, chapters):
         print("FAIL self-test：反向扫描误报全真句节：%s" % (scan_reverse(real_sec, chapters)[:1],))
+        bad += 1
+    # W770 F-2：文首文件级标记（首个标题前）→ 整文件豁免（正反两面断言）
+    file_marked_doc = ("> " + FICTION_MARK + "本篇为外传创作（文首第 3 行形态）\n\n"
+                       "# 乌巢禅师：测试标题\n\n## 深度解读\n\n"
+                       "八戒道：「娘啊，你物件有多少？都要我也用得着。」\n"
+                       "八戒又道：「这是第二条完全虚构的对白内容样本。」\n")
+    _, _, fails = check_text(file_marked_doc, chapters)
+    if fails:
+        print("FAIL self-test：文首文件级标记豁免失效（check_text 判 FAIL：%s）" % (fails[:1],))
+        bad += 1
+    if scan_reverse(file_marked_doc, chapters):
+        print("FAIL self-test：文首文件级标记被反向扫描误报")
         bad += 1
     total = len(SELF_TEST_CASES) + len(ATTRIB_SELF) + 6
     print("self-test %s：%d/%d" % ("通过" if not bad else "失败", total - bad, total))

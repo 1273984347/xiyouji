@@ -164,6 +164,17 @@ def build_statistics(hardships: list) -> dict:
             count = sum(1 for h in hardships if h["cause"] == cause and h["ending"] == ending)
             cross_cause_ending[cause_labels[cause]][ending_labels[ending]] = count
 
+    # W770：输出 hardships 条目统一 label 形（与页面 EMBEDDED 及 dataset/81-hardships.json 对齐——
+    # W760 F-2 实证：原 code 形输出（arranged/taken/solo…）与页面 label 字典/统计面脱节，
+    # 致「页面⇄源」共路深比对 243 项存量漂移）。
+    hardships_out = [
+        {**h,
+         "cause": cause_labels.get(h["cause"], h["cause"]),
+         "ending": ending_labels.get(h["ending"], h["ending"]),
+         "difficulty": difficulty_labels.get(h["difficulty"], h["difficulty"])}
+        for h in hardships
+    ]
+
     return {
         "total": len(hardships),
         "by_cause": {k: len(v) for k, v in by_cause.items()},
@@ -173,7 +184,7 @@ def build_statistics(hardships: list) -> dict:
         "by_difficulty": {k: len(v) for k, v in by_difficulty.items()},
         "by_difficulty_detail": by_difficulty,
         "cross_cause_ending": cross_cause_ending,
-        "hardships": hardships,
+        "hardships": hardships_out,
     }
 
 

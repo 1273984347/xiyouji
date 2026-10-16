@@ -11,6 +11,19 @@
 ---
 
 
+## W770 引文豁免口径修正与数据链路对齐批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_citations.py | W770 | F-2：文首文件级演绎标记识别（两判定面）+ 自测 +2 例（12/12） |
+| scripts/C_情节/hardships_81.py | W770 | 输出 hardships 清单 label 化（与页面/dataset 对齐） |
+| scripts/_check_json_copies.py | W770 | 自 archive 恢复：47 副本字节级自检（W563 职责回归） |
+| scripts/check_data_drift.js | W770 | 候选解析 v3.1（json 形态优先 tracked 副本 + 裸文件名·覆盖 45→57 页） |
+| site/data/json/hardships_81.json | W770 | 部署副本 label 化（与源/页面对齐） |
+| site/data/json/project_review.json | W770 | 副本侧重复后缀损坏修复 ×2 |
+| scripts/output/data-drift-baseline.txt | W770 | 撤 hardships 3 行豁免（对齐后恢复全量管控） |
+| scripts/output/_w770_spec.json | W770 | 本批 spec 入库 |
+
 ## W769 动效时长归一与口径说明修正批（2026-10-16）
 
 | 文件 | W | 说明 |
