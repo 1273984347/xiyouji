@@ -208,3 +208,8 @@
 ```text
 2026-10-16（W758）CI 首跑暴露缺陷修复批（用户令「写 PR 进行合并」加 PR45 首次真实 CI 运行暴露三缺陷）：F1 pytest 平台假设用例修复加 test_check_same_volume 盘符断言加 os.name nt 守卫（POSIX splitdrive 恒空串恒同卷）；F2 markdown 依赖漏登记补 scripts/requirements.txt 钉版 markdown==3.10.2（build_reader 顶层 import 加第 42 门禁可导入性 CI 必红根因）；F3 两门禁脚本 CodeQL 加固加 check_chart_values.js 剥离正则加 gi 加 check_seo_head.py R5 占位域名改左边界负向断言正则（notexample.com 不再误报加 www.example.com 仍命中）；F4 归档件 2 条告警走 CodeQL won't fix 豁免（冻结件不改写纪律）；验证=pytest 591 passed 加 ruff 零违例加 seo_head 855 页通过加 chart gate 87 页 0 FAIL 判据分布与改前一致加 verify 全量 48 段
 ```
+以下为 AGENTS.md 版本脚注早期条目（W759-W759）段的原文（单行沿革链·W764 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W759）batch_cascade 脚注滚动根修批（用户令「开工」加 W758 手工迁档逃生门转正）：R1 滚动切分断言放松改严格递增（==hi+1 假设连续而编号空洞 W750 作废与 W752/753 单写系永久历史每次真滚动必炸加 sorted 断言仍守乱序加负样本边界重复号夹具实测仍红）；R2 指针注记刷新锚点失配根治（字面锚 W719 续迁已漂移为 W713 形态回插静默失新）改 token 就地正则替换保持 W725 单段化语义；R3 真数据首跑=本批级联即触发真实滚动迁 W751 入 ARCHIVE 加区间注记就地翻新；验证=py_compile 加 ruff 零加负样本真防线加 dry-run 十面过加 apply 写后自检过加 verify 全量 48 段
+```
