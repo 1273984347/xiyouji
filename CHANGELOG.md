@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W759），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W760），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,19 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W760（2026-10-16）：全量对抗性审查报告批
+> **来源**：并行会话在途批（全量对抗性审查·对抗性审查报告-2026-10-16），应用户令由本会话收尾完成——修报告 118 行归属对白引文（第 20 门禁口径：引号内改逐字节原文、省略号移出引号外）+ 三连带同步（README 索引 17→18 篇·STRUCTURE 标记 20→21·stats --w W760 刷新）+ 干扰日志登记。
+> - **审查范围**：3327 入库件·五可标准（可量化/可验证/可执行/可追踪/符合实际）·六个审查面（内容可信度/门禁有效性/数据一致性/工程基础设施/安全/文档治理）。
+> - **11 项发现·4 HIGH**：① 引文门禁整改不完整——`## 原文全文` 照录区 17 处字级篡改（13 篇 docs/01·该区系第 20 门禁永久豁免区）+ C 类 59 条（sim≥0.7）静默删改（28 文件·docs/02 为主·落在门禁两种语法族之外）；② 第 9 门禁数据漂移口径全失明；③ validate_en 未接线 + en 站 duration 盲区；④ agent-web `git grep -O` 白名单绕过 RCE。
+> - **MEDIUM 1 项**：门禁豁免判定口径缺陷——check_citations.py 演绎豁免只认标题节内 `> 【文学演绎】`，不认文首文件级标记，docs/02-06 外传文类标记在文首第 3 行致 --reverse 100 候选抽样 100% 假阳性；修该脚本属禁擅改清单，需用户批准。
+> - **交叉复核更正（重要）**：内容面称 `太白金星-方向二深化.md:23`（sim 0.95）为「说话人被整体改写」——经权威语料逐字核验**归属正确**（第003回说话人确为太白长庚星·对白「臣启陛下，可念生化之慈恩」原文精确存在）；该引文确有 3 处静默删改（省开头长段铺陈·上届→上界·删末尾句不用省略号）——「静默删改」成立、「归属错误」不成立，已按证据更正定性。
+> - **明确未发现违规（有证据）**：回次错置 0 条；演绎标注覆盖率 docs/01 的 159 个 SD 小节 100%；涉台/涉港澳表述 0 违规（W737 的 9 处修复经独立复验落实）。
+> - **证据与复算**：25 个证据脚本全部 rc=0 可复跑；正面结论独立复算——stats 16 键全对上、引文核验 423 条规范引文 + 105 条归属对白命中率 100%、语料保真 100 回全等、CSP 0 漂移、file:// 88/88。
+> - **本会话收尾修正**：报告 118 行归属对白引文形态按第 20 门禁 ATTRIB_RE 口径修正（引号内只留逐字节原文「臣启陛下，可念生化之慈恩」·省略号移至引号外），修正后引文门禁全绿（命中率 100%·709 文件扫描）。
+> - **验证（全绿）**：引文门禁 423+105 命中率 100%；stats --check 零差异（16 键）；六文档同步与级联面经 batch_cascade dry-run 十面预检；**pytest 597 passed**（+3 skipped·0 failed）；verify_delivery 全量 48 段 0 FAIL。
+> - **状态**：已提交（本地·未推送）；审查发现的 4 HIGH 修复批待用户排期（引文照录区/门禁口径/en 接线/agent-web 安全各需独立批·F-2 脚本修改需用户批准）。
+> - **文件**：docs/11-方案报告/全量对抗审查报告-2026-10-16.md、docs/11-方案报告/README.md、STRUCTURE.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/_w760_spec.json、docs/00-导读/W批次编号对账表.md、docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、.github/workflows/README.md、site/index.html、site/dukou-engine.html、site/data/tag-cloud.html、site/data/cross-time-danmaku.html、archive/docs/AGENTS-ARCHIVE.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_cascade_files_W760.txt。
 
 ### W759（2026-10-16）：batch_cascade 脚注滚动根修批
 > **来源**：用户令「开工」——W758 实证 AGENTS 脚注滚动连续性断言在编号空洞下必炸（被迫手工三步手术逃生），裁定根修不再手工迁档。动工前 `preflight_check.py --touches` 全绿（对账表 max=W758 → W759 认领·交集 0）。
