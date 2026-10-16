@@ -11,6 +11,21 @@
 ---
 
 
+## W769 动效时长归一与口径说明修正批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_motion_ban.py | W769 | 补 .duration(N) N>600 判据（DESIGN §5.1·count-up 900 白名单） |
+| scripts/check_doc_sync.py | W769 | C5 扫描域补统计口径说明.md（装载+夹具同步·自测 18/18） |
+| docs/00-导读/统计口径说明.md | W769 | §2 86→87（唯一口径来源自相矛盾修正） |
+| site/index.html | W769 | 4 处 86→87 + duration 归一 |
+| site/dashboard.html | W769 | 86→87 + duration 归一 |
+| site/en/（19 页） | W769 | duration 全部归一 ≤600 |
+| DESIGN.md | W769 | 首节 86→87 |
+| HANDOVER.md | W769 | V 方向节头 86→87 |
+| 新Agent启动Prompt.md | W769 | 可视化页 87（Html=88） |
+| scripts/output/_w769_spec.json | W769 | 本批 spec 入库 |
+
 ## W768 英文站校验接线批（2026-10-16）
 
 | 文件 | W | 说明 |

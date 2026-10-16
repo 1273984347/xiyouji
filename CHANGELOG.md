@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W768），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W769），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,15 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W769（2026-10-16）：动效时长归一与口径说明修正批
+> **来源**：用户令「继续」（W760 审查 P1/P2 残余小项：F-4 动效盲区 + F-9/F-10 口径说明与文案）。
+> - **WS1 动效时长归一（F-4）**：① 全站扫描实测——`.duration(N)` N>600 共 **37 处 / 20 页**（site/en 19 页 + dashboard；最大 journey-map-interactive 3000·与 W462 已归一的 zh 站形成对照）；② **37 处全部归一为 600**（DESIGN §5.1 全站硬指标 N ≤ 600·入场档上限；cultural-misreading 两处 900 经上下文核验系入场动画非 KPI count-up·不适用 900 白名单）；③ **第 13 门禁补规则**（check_motion_ban.py）——新增 `.duration(N)` N>600 判据（扫域=site/** 全部 HTML·天然覆盖 en 站·白名单仅 KPI count-up 900 须伴 easeOutExpo 上下文）；**负样本实证**（注入 9999 → 门禁转红且精确到路径+上下文 → 恢复转绿）。此前全仓无任何 duration 检查器（审查员面「扫描域盲区」归因修正为「规则缺位」）。
+> - **WS2 口径说明修正（F-9/F-10）**：① `docs/00-导读/统计口径说明.md` §2 自相矛盾修正——标题「= 86 页」→「= 87 页」·算法行更新为「88 文件 − _shell = 87」（W694 起级联·W459 旧口径块注释替换）；② **现役叙述面 8 处 86→87 同步**——site/index.html ×4（KPI 数字块/「全部 86 页」/「86 个 D3.js」/「全站 86 个页面」）+ site/dashboard.html ×1 + DESIGN.md 首节 + HANDOVER.md「V 方向」节头 + 新Agent启动Prompt.md（Html=88·对外 87）；**历史记录保留口径**：HANDOVER「曾为静态博物馆」回顾段与 W445/W446 批次记录等历史语境数字不改写；S4 投稿冻结稿不在门禁分母（不改）。
+> - **WS2b 门禁域扩展**：`check_doc_sync.py` C5 扫描域补入「统计口径说明.md」（该文件自称「唯一口径来源」却此前不在任何扫描域·F-9 根因）+ 装载器 + 自测夹具三处；**自测 18/18 通过**。
+> - **验证（全绿）**：全站 duration 扫描 0 超限；check_motion_ban 负样本闭环；check_doc_sync 自测 18/18 + C5 扩展后零新告警；CSP 重注零漂移（改内联脚本 20 页后）；**pytest 597 passed**；verify_delivery 全量 49 段 0 核心 FAIL。
+> - **状态**：已提交（本地）。
+> - **文件**：scripts/check_motion_ban.py、scripts/check_doc_sync.py、docs/00-导读/统计口径说明.md、site/index.html、site/dashboard.html、site/en/（19 页）、DESIGN.md、HANDOVER.md、新Agent启动Prompt.md、scripts/output/_w769_spec.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、.github/workflows/README.md、site/index.html、site/dukou-engine.html、site/data/tag-cloud.html、site/data/cross-time-danmaku.html、archive/docs/AGENTS-ARCHIVE.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_cascade_files_W769.txt。
 
 ### W768（2026-10-16）：英文站校验接线批
 > **来源**：用户令「继续」（遗留事项③·W760 审查 F-3 HIGH 收口——四 HIGH 最后一项）。W760 实证：`HANDOVER`/`V2可视化维度方案` 宣称「138 个 EN 页通过 validate_en.py」，实际三入口零接线（verify/CI/Makefile 均无引用）+ 被第 42 槽（根级脚本覆盖）豁免基线豁免，6 页违规（search 中文语料 5458 CJK + chart-design 132 / chapter-stats 102 / methodology-matrix 48 / character-appearance 35 / relationships 1）长期在绿。
