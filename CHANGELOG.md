@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W770），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W771），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,15 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W771（2026-10-16）：编号空洞登记与门禁注释刷新批
+> **来源**：用户令「F-9 现在做」——W760 全量对抗审查报告 F-9 跟踪项（10 个 W 号区间缺失且 CHANGELOG/对账表均无记载 + 门禁注释陈旧），W766-W770 五批修复后 F-1~F-8/F-10/F-11 均已闭环，本批收口最后两项。动工前 preflight_check 全绿（对账表 max=W770 → W771 认领·touches 交集 0）。
+> - **T1 十缺号三源定性**（取证脚本 `tmpe/w771_evidence.py`·三源=CHANGELOG 现役+两归档/对账表表格行/git 全历史提交）：逐号定性后据实分三类处置——**A 类有提交未立段（2 号）**：W341（`1bad4374` 死链巡检修复·早批未立 CHANGELOG 段）、W392（`0dda530f` 内容导读层）；**B 类计划档明示未执行后重排（6 号）**：W466 归档维护 SOP、W470 dataset +2、W472 375px 回归、W473 a11y 达标（被 W493 替代）、W474 性能预算复核、加 W467/W468/W469 同家族连续预排号（`archive/docs/plans/2026-08-18-w464-phase3-quantified-roadmap.md` 处置列明文「❌ 未执行/重排新号」）；**C 类预排后由实际批次落地（3 号）**：W480/W481/W482 = phase-e 计划 E4/E5/E6 预排号，其**计划档执行表（L258-260）自证**由 W491/W492/W493 落地且已在 CHANGELOG 立段。十号均无 git 批次提交（W341/W392 的工作量合入相邻号提交），无 S4 双盲或预发表风险。
+> - **T2 门禁注释刷新**（F-9 附带项）：`scripts/check_seo_head.py` docstring 与常量注释的 **233/230/229 页** 为陈旧数字（SEO 注入面实测 855、sitemap 收录面实测 851），现役代码行为与门禁实际一致、仅注释误导维护者；刷新为实测口径并对齐 `verify_delivery.py` 同行注释。**范围纪律**：注释-only（不触任何判定逻辑·第 26 槽不受影响）。
+> - **T3 对账表登记**：W771 认领行 + 「递延批豁免登记」补 10 号去向 bullet（登记即豁免·doc-sync C4 口径）——不动任何历史行。
+> - **验证（全绿）**：`py_compile` 通过；`ruff check` 零违例；十号三源表逐号有出处（git log --all 实证 hash + 计划档行号）;`check_seo_head.py` 实跑 **855 页通过·sitemap 集合一致**（注释刷新前后行为零变化）；`pytest 597 passed / 3 skipped`；`verify_delivery.py` 全量 49 段自洽锁 0 FAIL。
+> - **状态**：已落地（本地）。
+> - **文件**：scripts/check_seo_head.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、.github/workflows/README.md、site/index.html、site/dukou-engine.html、site/data/tag-cloud.html、site/data/cross-time-danmaku.html、archive/docs/AGENTS-ARCHIVE.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w771_spec.json、scripts/output/_cascade_files_W771.txt。（取证脚本 `tmpe/w771_evidence.py` 留本地不入库·tmpe/ gitignored 既定策略·W768 先例）
 
 ### W770（2026-10-16）：引文豁免口径修正与数据链路对齐批
 > **来源**：用户令「继续」（W760 审查遗留收口：F-2 经用户批准修脚本 + W767 登记的 hardships 对齐 + F-8 复核）。

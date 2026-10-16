@@ -4,9 +4,9 @@
 方案：docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md WP-C 第 6 条。
 独立可跑；如经用户批准可注册为 verify_delivery 第 26 门禁（--check 形态兼容门禁调用）。
 
-检查面：
-  SEO 注入面 233 页 = site 全部 HTML 减模板壳（_template.html / data/_shell.html）
-  sitemap 收录面 230 页 = 233 页再减 rum-viewer.html / visit-viewer.html / 404.html
+检查面（页码为现役实测口径·W771 刷新·随站点增页同步）：
+  SEO 注入面 855 页 = site 全部 HTML（857）减两模板壳（_template.html / data/_shell.html）
+  sitemap 收录面 851 页 = SEO 注入面再减 rum-viewer.html / visit-viewer.html / data/81-hardships-view.html / data/character-relationship-3d-view.html（404.html 按门禁要求收录）
   R1 每页必备：viewport / canonical(=BASE+自身路径) / og:title / og:image(=og-cover 绝对 URL) / og:url / twitter:card
   R2 hreflang 与 scripts/output/hreflang-pairs.json 双向一致（配对页双方各含 zh-CN+en；ZH 页含 x-default；非配对页不得含 hreflang link）
   R3 sitemap <loc> 集合 == 磁盘页面集合（sitemap 收录面口径）且 lastmod ≤ 当天
@@ -31,8 +31,8 @@ COVER = SITE / "static" / "img" / "og-cover.png"
 
 BASE = "https://1273984347.github.io/xiyouji/"
 OG_IMAGE = BASE + "static/img/og-cover.png"
-# 两个排除面语义不同：SEO 注入面=233 页（只排模板壳）；
-# sitemap 收录面=229 页（与 verify_delivery 现役 sitemap 门禁期望集一致：另排本地工具页两页 + 两个 data/-view 辅助页；404.html 按门禁要求收录）
+# 两个排除面语义不同：SEO 注入面=855 页（只排模板壳，W771 现役实测）；
+# sitemap 收录面=851 页（与 verify_delivery 现役 sitemap 门禁期望集一致：另排本地工具页两页 + 两个 data/-view 辅助页；404.html 按门禁要求收录）
 SEO_EXCLUDE = {"_template.html", "data/_shell.html"}
 SITEMAP_EXCLUDE = SEO_EXCLUDE | {
     "rum-viewer.html", "visit-viewer.html",
