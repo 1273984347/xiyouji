@@ -11,6 +11,15 @@
 ---
 
 
+## W764 命令白名单 pager 逃逸修复批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/engine/tools.ts | W764 | 参数层拦截扩展（git pager 族 token 级 + shell 元字符二次校验·W760 S-01 RCE 修复） |
+| xiyouji-agent-web/server/engine/tools.test.ts | W764 | +6 例（5 拒 1 放行·-O/=形态/长形态/ext-diff/元字符/正则放行） |
+| docs/agent/agent-web.md | W764 | 安全边界描述同步（run_command 参数层拦截 W680→W764 收口） |
+| scripts/output/_w764_spec.json | W764 | 本批 spec 入库 |
+
 ## W763 照录区字级篡改全量修复批（2026-10-16）
 
 | 文件 | W | 说明 |
