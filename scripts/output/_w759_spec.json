@@ -1,0 +1,17 @@
+{
+  "batch": "W759",
+  "date": "2026-10-16",
+  "title": "W759 batch_cascade 脚注滚动根修批",
+  "desc": "脚注滚动断言与指针注记刷新根修（编号空洞兼容）",
+  "head_entry": "2026-10-16（W759 batch_cascade 脚注滚动根修批）",
+  "head_sentence": "滚动切分断言放松为严格递增·编号空洞兼容加指针注记就地刷新根治加负样本防线加真数据首跑即真实滚动验证",
+  "changelog_body": "\n> **来源**：用户令「开工」——W758 实证 AGENTS 脚注滚动连续性断言在编号空洞下必炸（被迫手工三步手术逃生），裁定根修不再手工迁档。动工前 `preflight_check.py --touches` 全绿（对账表 max=W758 → W759 认领·交集 0）。\n> - **R1 滚动切分断言放松**：`_agents_entry_wn(_keep[0]) == _hi + 1` 假设脚注条目号连续，而编号空洞（W750 作废未产提交·W752/753 由 W751 并行单写）系永久历史→每次真实滚动必 FAIL；改 `> _hi` 严格递增——前序 `sorted(_nums)` 断言仍守乱序防线，新增拦切分边界重复号（负样本夹具实测仍红）。\n> - **R2 指针注记刷新锚点失配根治**：滚动后「W###-W### 级联自动滚动·」区间注记刷新用字面锚 `W719 续迁 W708-W714·` 回插，而现役脚注前缀已是 `W713 续迁` 形态→即使断言过注记也静默失新（grep 实证）；改对 token 就地正则替换（保持 W725 单段化语义·仅留最新区间），无 token 时锚「脚注保留最近 5 条」前插并断言锚点在场。\n> - **R3 真数据首跑**：本批级联自身即触发真实滚动（脚注 5 条 + 本批 = 6 条 → 迁 W751 入 ARCHIVE 尾块·区间注记就地翻新 W751-W751），修复代码首跑即真数据验证（W717「新锚真数据首跑」同款验证形态）。\n> - **防回归（负样本）**：`scripts/output/_w759_negative_check.py`——切分边界重复号夹具（脚注内 W754→W751 造有序重复）实测断言转红「滚动切分乱序」+ 字节级恢复原状断言 + 阳性对照（未变异 dry-run 十面全过）。\n> - **验证（全绿）**：`py_compile` 通过；`ruff check` 零违例；负样本真防线 1/1 + 恢复断言过；`batch_cascade --spec` dry-run 十面过 → `--apply` 写后自检全部通过；`verify_delivery.py` 全量 48 段自洽锁 OK。\n> - **状态**：已落地并推送 dev；CI 侧以 PR 重跑为准。\n> - **文件**：scripts/batch_cascade.py、scripts/output/_w759_negative_check.py、scripts/output/_w759_spec.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、.github/workflows/README.md、site/index.html、site/dukou-engine.html、site/data/tag-cloud.html、site/data/cross-time-danmaku.html、archive/docs/AGENTS-ARCHIVE.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_cascade_files_W759.txt。\n",
+  "milestone_block": "- **W759 batch_cascade 脚注滚动根修批**：\n  - 滚动切分断言放松为严格递增（编号空洞兼容·排序断言仍守乱序）\n  - 指针级联自动滚动注记改就地正则刷新（旧字面锚点已失配致静默失新）\n",
+  "agents_note": "2026-10-16（W759）batch_cascade 脚注滚动根修批（用户令「开工」加 W758 手工迁档逃生门转正）：R1 滚动切分断言放松改严格递增（==hi+1 假设连续而编号空洞 W750 作废与 W752/753 单写系永久历史每次真滚动必炸加 sorted 断言仍守乱序加负样本边界重复号夹具实测仍红）；R2 指针注记刷新锚点失配根治（字面锚 W719 续迁已漂移为 W713 形态回插静默失新）改 token 就地正则替换保持 W725 单段化语义；R3 真数据首跑=本批级联即触发真实滚动迁 W751 入 ARCHIVE 加区间注记就地翻新；验证=py_compile 加 ruff 零加负样本真防线加 dry-run 十面过加 apply 写后自检过加 verify 全量 48 段",
+  "file_index_rows": [
+    "| scripts/batch_cascade.py | W759 | 脚注滚动断言放松为严格递增加指针注记就地刷新（编号空洞兼容根修） |",
+    "| scripts/output/_w759_negative_check.py | W759 | 负样本：切分边界重复号夹具断言转红加字节级恢复原状 |",
+    "| scripts/output/_w759_spec.json | W759 | 本批 spec 入库 |",
+    "| docs/00-导读/W批次编号对账表.md | W759 | W759 认领行登记 |"
+  ]
+}
