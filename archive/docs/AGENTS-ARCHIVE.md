@@ -218,3 +218,8 @@
 ```text
 2026-10-16（W760）全量对抗性审查报告批（并行会话在途·应用户令由本会话收尾）：审查范围 3327 入库件六面五可标准；十一项发现四项高危等于引文门禁整改不完整（原文照录区十七处字级篡改加 C 类五十九条静默删改）加第九门禁数据漂移口径全失明加 validate_en 未接线加 agent-web git grep O 白名单绕过 RCE；中等一项为 check_citations 演绎豁免口径缺陷（文首标记不认致百候选百分百假阳性·需用户批准）；交叉复核更正太白金星归属正确（第 003 回对白臣启陛下可念生化之慈恩原文精确存在·静默删改成立归属错误不成立）；本会话收尾等于报告 118 行引文按门禁口径修正加三连带同步（README 十七到十八·STRUCTURE 二十到二十一·stats 刷 W760）加干扰日志登记；验证等于引文 423 加 105 命中率百分百加 stats 零差异加 pytest 五百九十七 passed 加 verify 全量 48 段零 FAIL
 ```
+以下为 AGENTS.md 版本脚注早期条目（W761-W761）段的原文（单行沿革链·W766 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W761）工具链可维护性重构批（用户 scene#15 重构令加追加令都做）：WS1 路径守卫十四处重复定义收敛为 utils/path_guard（make_guard 工厂加 PROJECT_ROOT/SCRIPTS_ROOT 双根·十三文件迁移·三死定义删除·slice 测试钉死名别名保留·新测 6 例）；WS2 check_content_consistency 的 l2/l2_runtime 二十六行重复提取公共比较器加 check_page 六十行 cx41 拆为编排器加五规则函数（三模式输出逐字节一致）；WS3 tmpe_tidy 的 scan 分类链外提加 main 六十八行三分派加三处去重加 human_size；WS4 a11y_audit 四十项规则族命名统一为 rule_N_topic（十九个 check_ 改名加测试三十八处同步加规则 27-40 逐规则注释·五十三单测过）；P-02 潜伏缺陷修复（inject 三件加 bump_footer_version 守卫根改仓库根·原 root 与 site/ 写面相悖守卫生效即必炸·功能验证四过）；stats 归口 W760 收尾批（report_docs 二十到二十一）；验证等于 pytest 五百九十七 passed 加三 skipped 加 ruff scripts/ 零加 ccc 三模式与 tt 四模式对拍逐字节加 AST 峰值 cx 四十一降十九加 stats 零差异加 a11y 门禁 E2-2 零加 verify 全量 48 段零 FAIL；W760 收尾批（应用户令代修其报告引文加三连带·e4ff4faf 加 e121f53a）先于本批落地
+```
