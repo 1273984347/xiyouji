@@ -183,13 +183,27 @@ function main() {
       } else if (ref.startsWith('dataset/')) {
         candidates.add(path.join(ROOT, ref));
       } else if (/^(?:\.\.\/)?(?:\.\/)?data\/json\/[A-Za-z0-9_/.-]+\.json$/.test(ref) || /^json\/[A-Za-z0-9_/.-]+\.json$/.test(ref)) {
-        // W563：A-3 改写后的部署副本形态（site/data/json/）→ 对账回原件
-        candidates.add(path.join(OUT_DATA_DIR, ref.split('/').pop()));
+        // W563/W770：部署副本形态（site/data/json/）——页面 http 模式的真实 fetch 目标。
+        // W770 起**优先解析到 tracked 副本**（CI 稳定：gitignored 的 output/data 在 CI 会被
+        // run_all 再生成，值可因生成器源差异漂移；副本为 tracked 且与页面双路径修复同步）。
+        const copyPath = path.join(ROOT, 'site', 'data', 'json', ref.split('/').pop());
+        if (fs.existsSync(copyPath)) candidates.add(copyPath);
+        else candidates.add(path.join(OUT_DATA_DIR, ref.split('/').pop()));
       } else if (ref.includes('/')) {
         // 相对引用（如 ../../scripts/output/data/xxx.json 或 output/data/xxx.json）
         const cleaned = ref.replace(/^\.\.\/\.\.\//, '').replace(/^\.\.\//, '').replace(/^output\/data\//, 'scripts/output/data/');
         if (cleaned.startsWith('scripts/output/data/') || cleaned.startsWith('dataset/')) {
           candidates.add(path.join(ROOT, cleaned));
+        }
+      } else if (/^[A-Za-z0-9_-]+\.json$/.test(ref)) {
+        // W770：裸文件名（relationships.html 等 loadJson('x.json') 形态）——副本优先·dataset/output 兜底
+        const copyPath = path.join(ROOT, 'site', 'data', 'json', ref);
+        if (fs.existsSync(copyPath)) candidates.add(copyPath);
+        else {
+          for (const base of [DATASET_DIR, OUT_DATA_DIR]) {
+            const p2 = path.join(base, ref);
+            if (fs.existsSync(p2)) { candidates.add(p2); break; }
+          }
         }
       }
     }

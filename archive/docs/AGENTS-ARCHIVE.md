@@ -238,3 +238,8 @@
 ```text
 2026-10-16（W764）命令白名单 pager 逃逸修复批（用户令现在做·W760 审查 F-11 HIGH P0）：W760 S-01 实证 git grep -O 把 pager 交 sh -c 执行参数未转义且 shell:false 下落盘成功；修复等于 tools.ts 参数层拦截扩展（-O 含粘连与=形态加 open-files-in-pager 加 ext-diff 加 pager= 统一按 token 判定·原 no-index 与 output= 裸串匹配升级 token 级）加全命令 shell 元字符二次校验（分号与与号与大于小于与反引号与换行拒·竖线与美元符放行保 git grep 正则）；单测加六例（五拒一放行）；验证等于 tools 单测三十八过加全套四十九过加 tsc 零错加引擎冒烟十二组全绿加 pytest 五百九十七 passed 加 verify 全量 48 段零 FAIL；待用户执行凭证轮换（LLM_API_KEY 与 GOATCOUNTER_API_TOKEN）
 ```
+以下为 AGENTS.md 版本脚注早期条目（W765-W765）段的原文（单行沿革链·W770 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W765）a11y 辅助族注释统一与解析规则拆分批（用户令现在做·遗留事项四）：增强审计辅助族（键盘导航审计与 ARIA 完整性验证）docstring 与节头集中声明 parser 优先签名加不注册于 ALL_CHECKS 加被规则一三内部调用；rule_29_parsing 七十四行拆为编排器加重复 ID 臂加未闭合元素臂（返回计数供复用）加悬垂结束标签臂·void 与 optional-close 标签集提模块常量·消息与顺序逐字保留；验证等于新旧行为对拍逐字节一致（五夹具加整页 findings JSON 全等）加 a11y 专项五十三过加 AST 退出四十行榜加 pytest 五百九十七 passed 加 ruff 零加 verify 全量 48 段零 FAIL
+```
