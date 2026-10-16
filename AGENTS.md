@@ -175,7 +175,8 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 **本机环境事实（Windows 单机·2026-10-17 实测·机器相关不入 L2）**：
 - `make` 未安装：Makefile 目标不可用，直调 `python scripts/<对应脚本>`（映射见 Makefile 注释）。
-- 全局 Python 3.12·无项目 `.venv`：`pytest`/`playwright`/`pip_audit` 未入终端 PATH，一律加 `python -m` 前缀调用；`ruff`/`uv`/`node`/`npm`/`git`/`gh` 可直呼。
+- 全局 Python 3.12·无项目 `.venv`：`pytest`/`playwright`/`pip_audit` 约定加 `python -m` 前缀调用（不以各机 PATH 状态为依据）；`ruff`/`uv`/`node`/`npm`/`git`/`gh`/`pwsh` 可直呼。
+- `pwsh`（PowerShell 7）与 `powershell`（5.1）并存：需 PowerShell 时一律用 `pwsh`（默认 UTF-8 无 BOM）；`powershell` 是 5.1（GBK 默认·W509 BOM 坑源），且仍遵守仓内「禁 PowerShell 写仓内文件」铁则。
 - 提交门禁 hook 优先用 workbuddy 托管 Python（目录名 3.13.12、实际运行 3.13.14，勿按目录名断版本）——与终端 3.12 属两个环境。
 - pre-commit 框架未装且**禁装**：`pre-commit install` 会覆盖手写 `.git/hooks/pre-commit`，破坏零依赖门禁。
 
