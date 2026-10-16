@@ -14,6 +14,12 @@
  * v2（W424 扩展）：不再只认 fetch('...') 字面路径——页面常以 `base = '../../scripts/output/data/'`
  * + `fetch(base + f)` / `fetch(path)` 形态加载，但文件名仍是字面量。故改为扫描页面源码中
  * 引用的全部 *.json（指向 scripts/output/data 或 dataset），逐个与内嵌块比对顶层数组长度。
+ *
+ * v3（W767·W760 F-2 修复）：顶层长度口径对深层漂移全失明（实证 85 项 0 捕获）。增补
+ * **共路深比对**——递归遍历双方皆有的键（仅一侧有之键不计·内嵌子集/复合属设计形态）、
+ * 数组按位对齐、标量严格比对；声明式基线 `scripts/output/data-drift-baseline.txt`
+ * （`页面 ⇄ 源 路径`·[N]→[*] 归一）豁免双形态设计项（如 81-hardships 中文标签 vs 英文 code）。
+ * 语义：基线内豁免、基线外任何新深层漂移即失败（no-new-drift）。
  */
 
 const fs = require('fs');
@@ -94,12 +100,62 @@ function compareArrays(label, embedded, json) {
   return issues;
 }
 
+/** W767 深比对：递归遍历共路（双方皆有的键）·数组按位对齐·标量严格比。
+ *  仅一侧有的键不计（内嵌为源之子集/复合体属设计形态·W760 实证 949 项此类）；
+ *  产出 `${路径}: ...` 描述。深度上限 8 防环。 */
+function deepDiff(a, b, label, acc, depth) {
+  if (depth > 8) return;
+  if (a === null || b === null) {
+    if (a !== b) acc.push(`${label}: null 不一致`);
+    return;
+  }
+  const ta = typeof a, tb = typeof b;
+  if (ta !== tb) {
+    acc.push(`${label}: 类型 embedded=${ta} json=${tb}`);
+    return;
+  }
+  if (ta === 'object') {
+    if (Array.isArray(a) && Array.isArray(b)) {
+      if (a.length !== b.length) {
+        acc.push(`${label}: 数组长度 embedded=${a.length} json=${b.length}`);
+        return;
+      }
+      for (let k = 0; k < a.length; k++) deepDiff(a[k], b[k], `${label}[${k}]`, acc, depth + 1);
+      return;
+    }
+    const keys = new Set([...Object.keys(a), ...Object.keys(b)]);
+    for (const k of keys) {
+      if (!(k in a) || !(k in b)) continue; // 仅一侧有：设计形态·不计（W760 口径）
+      deepDiff(a[k], b[k], `${label}.${k}`, acc, depth + 1);
+    }
+    return;
+  }
+  if (a !== b) acc.push(`${label}: embedded=${JSON.stringify(a)} json=${JSON.stringify(b)}`);
+}
+
+/** W767 基线：声明式豁免（data-drift-baseline.txt）。行格式 `页面 ⇄ 源 路径`（[N]→[*] 归一后匹配）。 */
+function loadDriftBaseline() {
+  const p = path.join(ROOT, 'scripts', 'output', 'data-drift-baseline.txt');
+  const set = new Set();
+  if (!fs.existsSync(p)) return set;
+  for (const ln of fs.readFileSync(p, 'utf-8').split(/\r?\n/)) {
+    const s = ln.trim();
+    if (s && !s.startsWith('#')) set.add(s);
+  }
+  return set;
+}
+
+const normDriftPath = (s) => s.replace(/\[\d+\]/g, '[*]');
+
 function main() {
   const pages = fs.readdirSync(DATA_DIR).filter((f) => f.endsWith('.html')).sort();
+  const driftBaseline = loadDriftBaseline();
   let comparable = 0;
   let skipped = 0;
   let pairs = 0;
+  let deepBaselined = 0;
   const allIssues = [];
+  const deepIssues = [];
   const skips = [];
 
   for (const pg of pages) {
@@ -163,11 +219,21 @@ function main() {
       }
       pageCompared = true;
       pairs++;
-      allIssues.push(...compareArrays(
-        `${pg.replace(/\.html$/, '')} ⇄ ${path.basename(jp)}`,
-        embedded,
-        json,
-      ));
+      const label = `${pg.replace(/\.html$/, '')} ⇄ ${path.basename(jp)}`;
+      allIssues.push(...compareArrays(label, embedded, json));
+      // W767 深比对（共路标量）——W760 F-2 实证：顶层长度口径对 85 项深层漂移全失明；
+      // 按共路递归（仅一侧有之键不计·设计形态）+ 基线豁免（声明式·no-new-drift）
+      const acc = [];
+      deepDiff(embedded, json, '$', acc, 0);
+      for (const it of acc) {
+        const colon = it.indexOf(': ');
+        const pth = normDriftPath(it.slice(0, colon));
+        if (driftBaseline.has(`${label} ${pth}`)) {
+          deepBaselined++;
+        } else {
+          deepIssues.push(`${label} ${it}`);
+        }
+      }
     }
     if (pageCompared) {
       comparable++;
@@ -229,6 +295,12 @@ function main() {
     process.exit(1);
   }
   console.log(`副本对账 ✓（47 个副本数组长度比对一致 · 页面引用无缺失）`);
+  if (deepIssues.length) {
+    console.log('发现深层漂移（共路标量·非基线）：');
+    deepIssues.forEach((i) => console.log('  ✗', i));
+    process.exit(1);
+  }
+  console.log(`深层比对 ✓（共路标量逐层一致 · 基线豁免 ${deepBaselined} 项）`);
   if (allIssues.length) {
     console.log('发现漂移：');
     allIssues.forEach((i) => console.log('  ✗', i));

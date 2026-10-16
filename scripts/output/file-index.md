@@ -11,6 +11,20 @@
 ---
 
 
+## W767 数据漂移门禁深比对批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_data_drift.js | W767 | v3 共路深比对（递归共键·数组按位·标量严格比）+声明式基线+no-new-drift |
+| scripts/output/data-drift-baseline.txt | W767 | 基线新建（81-hardships 生成器/页面约定分裂 + visual-art 设计双形态·含归因注释） |
+| dataset/cave-estate.json | W767 | 中将级→妖将级（第 38 门禁旧值标记清理） |
+| dataset/character-relationship-3d.json | W767 | F-7：kpi[4] → 悟空/度数 12（links 度数自证·与 kpi[3]/页嵌同名形） |
+| dataset/journey-map-interactive.json | W767 | F-7：kpi[2] 难点 9→8（isHardship 节点实数自证） |
+| dataset/language-style-radar.json | W767 | 悟空色 ×2 → #C9A063（现行 palette） |
+| dataset/theological-intervention-network.json | W767 | accent-1×5 → accent-2（页内 accent-1 零出现） |
+| site/data/81-hardships.html | W767 | 页嵌 cause mind×3 → 人心自生的魔障 + CSP 重注 |
+| scripts/output/_w767_spec.json | W767 | 本批 spec 入库 |
+
 ## W766 C 类引文静默删改修复批（2026-10-16）
 
 | 文件 | W | 说明 |

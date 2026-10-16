@@ -1,0 +1,18 @@
+# 数据漂移门禁 v3 基线（W767 建）——声明式豁免：页面与源为「双形态/约定分裂」且已登记跟进项。
+# 行格式：<页面名> ⇄ <源文件名> <归一化路径>（[N]→[*] 归一后匹配）
+# 语义：任何不在此列的深层（共路标量）漂移 = 新增漂移 → 门禁失败（no-new-drift 防线）。
+# 本基线内容须与 CHANGELOG W767 段互证；新增豁免须随批注明理由。
+#
+# --- 81-hardships：页面 label 形 ↔ hardships_81.json 生成器输出 code 形 ---
+# 页面（site/data/81-hardships.html）已转 label 形（「如来/观音安排」等·映射字典与 by_cause
+# 统计随页）；而生成器 scripts/C_情节/hardships_81.py 以 code 为规范（arranged/wild/mount/mind）。
+# 约定对齐（生成器改 label 或页面改 code 渲染）属独立批——W767 登记待办，暂全字段豁免。
+81-hardships ⇄ hardships_81.json $.hardships[*].cause
+81-hardships ⇄ hardships_81.json $.hardships[*].ending
+81-hardships ⇄ hardships_81.json $.hardships[*].difficulty
+#
+# --- visual-art：设计双形态（页面显式声明） ---
+# site/data/visual-art.html 注释原文：「visual_art_ideas: EMBEDDED.visual_art_ideas
+# // 视觉艺术构想仅在 EMBEDDED 中」——summary.json（快照·run_all 生成）的
+# visual_art_ideas 为计数（number），页嵌为完整构想数组（object）·系刻意设计。
+visual-art ⇄ visual_art_summary.json $.visual_art_ideas
