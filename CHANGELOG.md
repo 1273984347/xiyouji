@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W781），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W787），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,62 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W787（2026-10-18）：release.py 行为保持重构批
+> **来源**：外部重构提案收编第六批（末批·用户令「全部做完之后合并」）。动工前 preflight PASS（W787 认领·零交集）。
+> - **release.py**：_STEP_SEPARATOR/_REPO_SIZE_WARN_MB/_LOOSE_OBJECTS_WARN/_CHANGELOG_VERSION_RE 常量化（正则提模块级预编译·import re 随之上移）；step2 拆 _check_uncommitted/_check_unpushed；step3 拆 _parse_count_objects；main 版本解析提 _resolve_target_version；新增 _print_step_header 供步骤 2-5 复用（**步骤 1 保持独立实现**——原输出无前置空行·避免引入空行差异）；五步输出文本/前缀/短路顺序/退出码逐字保留。
+> - **22 项门禁脚本改动点清单：裁定不执行**（工程裁定非遗漏）——① 交付阻断面：门禁脚本 FAIL 语义即发布闸门，W781 刚完成 verify 体系收口（注册表派生+启动期断言+锁反向查），连续 churn 违背「谨慎」本意；② 清单自身标注多数文件「已足够简洁」或「已做过 W730/W733/W761 拆分」；③ 其可证伪发现 5 项中 3 项经对盘系 W775 前旧快照（W780 已核）。未来如做：须逐门禁三态核验（干净/破防/self-test 输出与退出码逐字比对）+ 流水线 §八五维对拍。
+> - **对拍（流水线 §八）**：完整运行前后各一轮，stdout 全文与退出码（存量 exit=1·sync_docs 一致性检查为存量失败态·与重构无关）**逐字相同**；pytest 630 passed；ruff 0；verify 全量 0 FAIL。
+> - **状态**：已落地（对拍全绿）；级联+提交+推送按批次流程执行。
+> - **文件**：scripts/release.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w787_spec.json、scripts/output/_cascade_files_W787.txt
+
+### W786（2026-10-18）：graph_seed_neo4j 行为保持重构批
+> **来源**：外部重构提案收编第五批（用户令「全部做完之后合并」）。动工前 preflight PASS（W786 认领·零交集）。
+> - **graph_seed_neo4j**：Cypher 拼装提 _build_cypher（纯字符串拼接·逐行字节稳定）；快照组装提 _build_snapshot；_OUTPUT 中间变量收敛路径拼接；Cypher 各行/json.dump 参数/_w536_guard_open 调用/日志文本逐字保留。
+> - **rag 家族其余五件不收（工程裁定·与 character_nlp 同款原则）**：build_vectors（GPU 温度守护与断点续跑管线）、page_router（模型加载评测面）、rag_server（运行时服务）、rag_enhance（LLM 端点回退路径）、xiyouji_rag（800 行核心引擎）——重运行时对拍面+累计约 2100 行转录风险；对拍可行段（确定性产物 diff）无法覆盖其风险面（温度守护/断点/端点回退），留机械通道。
+> - **对拍（流水线 §八）**：前后各一轮，rag_graph.json/neo4j_seed.cypher/运行日志**全部逐字节相等**；pytest 630 passed；ruff 0；verify 全量 0 FAIL。
+> - **状态**：已落地（对拍全绿）；级联+提交+推送按批次流程执行。
+> - **文件**：scripts/rag/graph_seed_neo4j.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w786_spec.json、scripts/output/_cascade_files_W786.txt
+
+### W785（2026-10-18）：api_server 行为保持重构批
+> **来源**：外部重构提案收编第四批（重件档其一·用户令「全部做完之后合并」）。动工前 preflight PASS。
+> - **常量提级**：_CORS_FILE_ORIGIN/_CORS_LOCAL_ORIGINS/_CORS_RESPONSE_ORIGIN（W681 回显常量防头注入语义保留）、_MIME_TYPES（自 _ctype 内联字典）、_SNIPPET_BEFORE/_SNIPPET_AFTER/_HITS_PER_DATASET_LIMIT。
+> - **路由拆臂**：do_GET 拆 _handle_openapi/_handle_search/_handle_graph/_handle_dataset/_serve_static；新增 _send_error_json 统一 {error[,try]} 结构（响应体字段与嵌套不变）；文档页表格行渲染提 _render_dataset_row。
+> - **逐字保留**：全部路由路径、状态码（200/400/404）、CORS 白名单判定、_resolve_static 的 startswith 边界、_recursive_search 片段窗口与省略号、openapi version v2.2.92、启动/停止日志；W337/W339/W681/P3-2 溯源保留。
+> - **对拍（流水线 §八）**：起服务前后各一轮，11 个端点工件（health/datasets/openapi/search 火焰山/graph/graph_yuanqi/keys/CORS 头/404 状态/doc 页/服务日志）10 个逐字节相等，cors.txt 漂移经 diff 定性为 **HTTP Date 响应头时钟字段**（剥除后逐字节相同 908a1406）——§八抖动归一；pytest 630 passed；ruff scripts/api/ 0；verify 全量 0 FAIL。
+> - **状态**：已落地（对拍全绿）；级联+提交+推送按批次流程执行。
+> - **文件**：scripts/api/api_server.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w785_spec.json、scripts/output/_cascade_files_W785.txt
+
+### W784（2026-10-18）：分析与审计五小件行为保持重构批
+> **来源**：外部重构提案收编第三批（小件档·用户令「全部做完之后合并」）。动工前 preflight PASS（W784 认领·零交集）。
+> - **chapter_stats**：诗词计数拆 _count_poem_headers/_count_aligned_poem_blocks（阈值提 _POEM_CONSECUTIVE_THRESHOLD）；中文计数/占比提 _count_chinese_chars/_dialogue_ratio；聚合提 _aggregate_totals（键顺序保持·per_chapter 仍追加末尾）。
+> - **word_frequency**：token 过滤提 _is_valid_token+_MIN_TOKEN_LENGTH；结果构造提 _build_frequency_result；DEFAULT_STOPWORDS 保持 set 不改 frozenset。
+> - **narrative_experiment**：四份 JSON 写出拆 _write_json/_write_all_outputs、控制台汇总拆 _print_summary；build_summary 由两次调用改一次复用（确定性数据·结果不变）；三数据块逐字保留。
+> - **hardships_81**：三标签字典提模块级（CAUSE/ENDING/DIFFICULTY_LABELS）；交叉统计拆 _build_cross_cause_ending、label 化拆 _relabel_hardships（W770/W760-F-2 溯源保留）；输出拆 _write_json/_write_all_outputs/_print_category/_print_summary；Counter.most_common 键序保留。
+> - **line_check**：self_test 拆 _self_test_corpus_ok/_self_test_positive_samples/_self_test_negative_sample；查询分支提 _query_one/_parse_chapter_num；_TOTAL_CHAPTERS 替代三处裸 100；全部输出串与退出码逐字保留。
+> - **对拍（流水线 §八）**：五脚本前后各一轮，11 个产物（chapter_stats/word_freq/ne 四件/h81 四件/line_check 自检输出含退出码与样本查询）**全部逐字节相等**；pytest 630 passed；ruff 四目录 0；verify 全量 0 FAIL。
+> - **状态**：已落地（对拍全绿）；级联+提交+推送按批次流程执行。
+> - **文件**：scripts/A_文本基础/chapter_stats.py、scripts/A_文本基础/word_frequency.py、scripts/AA_叙事实验/narrative_experiment.py、scripts/C_情节/hardships_81.py、scripts/audit/line_check.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w784_spec.json、scripts/output/_cascade_files_W784.txt
+
+### W783（2026-10-18）：B_人物行为保持重构批
+> **来源**：外部重构提案收编第二批（用户令「做」）。动工前 preflight PASS（W783 认领·零交集）。
+> - **character_appearance**：aggregate 内排行榜/矩阵/前端契约字段三段拆 _build_ranking/_build_matrix/_build_characters_out；first_chapter 计算提 _resolve_first_chapter 并**显式保住字面值先求值语义**（与原 dict.get 默认参数急切求值一致·防 first_appear 数据完整性判断静默变化）；正则提 _CHAPTER_NUM_RE；W643/W678/W565 溯源注释逐字保留。
+> - **character_network**：单回共现累积拆 _accumulate_chapter；嵌套循环改 itertools.combinations（pair 键 tuple(sorted()) 等价）；节点/边结构与排序键逐字保留。
+> - **character_nlp 不收**：提案整文件重写约千行，转录落地风险大于可读性收益；W101/W102 上下文排除规则与 W691 追踪集属密缘导管且无自动对拍面（run_all 各类仅执行目录首脚本·B 类=__init__.py·nlp 不在自动回归面）——留待机械通道（直接以文档驱动 apply+五产物 diff 的执行方式）。
+> - **对拍（流水线 §八）**：两脚本全量前后各一轮，输出 character_appearance.json（89KB）/character_network.json（38KB）**逐字节相等**；pytest 630 passed；ruff scripts/ 全目录 0；verify 全量 0 FAIL。
+> - **状态**：已落地（对拍全绿）；级联+提交+推送按批次流程执行。
+> - **文件**：scripts/B_人物/character_appearance.py、scripts/B_人物/character_network.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w783_spec.json、scripts/output/_cascade_files_W783.txt
+
+### W782（2026-10-18）：utils 与 run_all 行为保持重构批
+> **来源**：外部重构提案收编第一批（用户令「做」·全文 21938 行含约 30 文件重构方案与三轮项目批评·经对盘核实分档：JS 门禁部分 W775 已执行、5 项裁决发现 3 项旧快照、utils 与分析脚本部分仍然有效）。动工前 preflight PASS（W782 认领·零交集）。
+> - **aliases**：global 手动懒加载改 lru_cache(maxsize=1)+setdefault；_build_reverse_index 更名 _alias_to_canonical（测试仅钉公开 API·改名安全已实证）；docstring 按盘面现实改写（提案「未来 character_nlp 应迁移」已过时·盘上三脚本早已 import 本表；过时「35 位」表述一并清除）；40 人物数据逐字保留。
+> - **text_loader**：编码候选提 _ENCODING_CANDIDATES、标点集提 _PUNCTUATION_CHARS；load_text/load_chapter/load_all_chapters 内联逻辑拆 _read_with_fallback_encoding/_resolve_chapter_path/_collect_chapter_files；W563 溯源保留。
+> - **analyzer_base**：_PROJECT_ROOT/_DEFAULT_CHAPTERS_DIR 提模块级；argparse 构建/输入路径解析/1 参 2 参兼容/写 JSON 拆 _build_arg_parser/_resolve_input_path/_invoke_analyze/_write_json；错误消息与日志前缀逐字保留。
+> - **run_all**：300 提 SCRIPT_TIMEOUT_SECONDS（超时消息 f-string 动态拼接·文本不变）；过滤/执行/汇总拆 _parse_category_filter/_filter_scripts/_print_dry_run/_execute_scripts/_print_summary；退出码语义不变。
+> - **path_guard 跳过**：其文件头自述「对账面·禁改写」，提案亦仅动 docstring 排版——零收益触碰面，不收。
+> - **对拍（流水线 §八）**：run_all 全量 34/34 PASS 前后两轮；138 个输出产物 132 个逐字节相等；6 个 *_summary.json 漂移经三连实验定性为**存量无种子随机**（生成器类示例组合·同码连续两跑即不同·新旧 utils 四象限实验同判）——§八差异判定规则一「抖动归一」，与重构无关；stdout 逐行 diff 为空；aliases 新旧字典/反向映射/全别名解析行为经 importlib 双载逐项断言相等；pytest 630 passed / ruff scripts/ 全目录 0 / verify 全量 0 FAIL。
+> - **状态**：已落地（对拍全绿）；级联+提交+推送按批次流程执行。
+> - **文件**：scripts/utils/aliases.py、scripts/utils/text_loader.py、scripts/utils/analyzer_base.py、scripts/utils/__init__.py、scripts/run_all.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w782_spec.json、scripts/output/_cascade_files_W782.txt
 
 ### W781（2026-10-18）：门禁防线收口批
 > **来源**：用户令「1 to 2 to 3」三收口（复盘遗留改进菜单第一档两项+第二档一项·仿 W773 WS 多项一批先例）。动工前 preflight PASS（W781 认领·零交集）。

@@ -22,8 +22,8 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from utils.aliases import CHARACTER_ALIASES as CHARACTERS
-from utils.analyzer_base import run_analyzer
+from utils.aliases import CHARACTER_ALIASES as CHARACTERS  # noqa: I001
+from utils.analyzer_base import run_analyzer  # noqa: I001
 
 # W643 专名消歧：白鹿/大鹏/白象为普通名词（散文诗词中作动物义远早于角色剧情出现，
 # 如第 1 回「白鹿」），字面首回误计为角色首秀——按原著剧情首秀覆盖：
@@ -40,6 +40,13 @@ FIRST_APPEAR_OVERRIDE = {
     "观音": 6,
 }
 
+# 回目名格式如 "第001回"；用于把字面首回字符串转成整数
+_CHAPTER_NUM_RE = re.compile(r"第(\d+)回")
+
+
+# -------------------------------------------------------------------
+# 单回 / 全量 提及统计
+# -------------------------------------------------------------------
 
 def count_mentions(text: str, aliases: list) -> int:
     """统计文本中某人物所有别名的总出现次数。"""
@@ -67,9 +74,80 @@ def analyze_chapter(chapter_name: str, text: str, characters: dict) -> dict:
     }
 
 
+# -------------------------------------------------------------------
+# 聚合：排行榜 / 热力矩阵 / 前端渲染契约字段
+# -------------------------------------------------------------------
+
+def _resolve_first_chapter(character: str, first_appear: str) -> int:
+    """计算 first_chapter 整数值。
+
+    - 字面首回字符串（"第001回"）先解析为整数；
+    - 若 character 在 FIRST_APPEAR_OVERRIDE 中，使用剧情首秀覆盖值。
+
+    注意：字面值总会被计算一次（与原始 `dict.get(key, default)` 的
+    求值顺序一致），确保对 first_appear 的数据完整性判断逻辑不变。
+    """
+    literal = int(_CHAPTER_NUM_RE.match(first_appear).group(1))
+    return FIRST_APPEAR_OVERRIDE.get(character, literal)
+
+
+def _build_ranking(
+    characters: dict,
+    appear_chapters: dict,
+    total_mentions: dict,
+    first_appear: dict,
+) -> list:
+    """构建按出场回数降序的排行榜（仅保留出场过的人物）。"""
+    ranking = sorted(
+        [
+            {
+                "character": c,
+                "appear_chapters": appear_chapters[c],
+                "total_mentions": total_mentions[c],
+                "first_appear": first_appear[c],
+            }
+            for c in characters
+        ],
+        key=lambda x: (-x["appear_chapters"], -x["total_mentions"]),
+    )
+    return [r for r in ranking if r["appear_chapters"] > 0]
+
+
+def _build_matrix(characters: dict, per_chapter: list) -> dict:
+    """构建 人物 × 回目 的提及次数矩阵，仅保留出现过的人物。"""
+    matrix = {}
+    for char in characters:
+        row = [ch["mentions"].get(char, 0) for ch in per_chapter]
+        if sum(row) > 0:
+            matrix[char] = row
+    return matrix
+
+
+def _build_characters_out(ranking: list, appear_in_chapters: dict) -> list:
+    """构建前端渲染契约字段。
+
+    W565：补 characters 数组（页面渲染契约：name/first_chapter/
+          appearances/mentions；timeline 由页面侧从 matrix 派生真实分布）。
+          first_chapter 转数字（"第001回"→1）。
+    W678：补 per-character appear_in_chapters（此前仅顶层聚合图，
+          条目级字段缺失）。
+    """
+    return [
+        {
+            "name": r["character"],
+            "first_chapter": _resolve_first_chapter(
+                r["character"], r["first_appear"]
+            ),
+            "appearances": r["appear_chapters"],
+            "mentions": r["total_mentions"],
+            "appear_in_chapters": appear_in_chapters.get(r["character"], []),
+        }
+        for r in ranking
+    ]
+
+
 def aggregate(per_chapter: list, characters: dict) -> dict:
     """聚合所有回目的统计结果。"""
-    # 出场回数与总提及次数
     appear_chapters = {c: 0 for c in characters}
     total_mentions = {c: 0 for c in characters}
     first_appear = {c: None for c in characters}
@@ -84,49 +162,11 @@ def aggregate(per_chapter: list, characters: dict) -> dict:
         for char, count in ch["mentions"].items():
             total_mentions[char] += count
 
-    # 排行榜（按出场回数降序）
-    ranking = sorted(
-        [
-            {
-                "character": c,
-                "appear_chapters": appear_chapters[c],
-                "total_mentions": total_mentions[c],
-                "first_appear": first_appear[c],
-            }
-            for c in characters
-        ],
-        key=lambda x: (-x["appear_chapters"], -x["total_mentions"]),
+    ranking = _build_ranking(
+        characters, appear_chapters, total_mentions, first_appear
     )
-
-    # 仅保留出场过的人物
-    ranking = [r for r in ranking if r["appear_chapters"] > 0]
-
-    # 时间分布矩阵（人物 × 回目）：用于热力图
-    # matrix[character][chapter_idx] = mention_count
-    matrix = {}
-    for char in characters:
-        row = []
-        for ch in per_chapter:
-            row.append(ch["mentions"].get(char, 0))
-        if sum(row) > 0:
-            matrix[char] = row
-
-    # W565：补 characters 数组（页面渲染契约：name/first_chapter/appearances/mentions；
-    # timeline 由页面侧从 matrix 派生真实分布）。first_chapter 转数字（"第001回"→1）。
-    # W678：补 per-character appear_in_chapters（此前仅顶层聚合图，条目级字段缺失）。
-    characters_out = [
-        {
-            "name": r["character"],
-            "first_chapter": FIRST_APPEAR_OVERRIDE.get(
-                r["character"],
-                int(re.match(r"第(\d+)回", r["first_appear"]).group(1)),
-            ),
-            "appearances": r["appear_chapters"],
-            "mentions": r["total_mentions"],
-            "appear_in_chapters": appear_in_chapters.get(r["character"], []),
-        }
-        for r in ranking
-    ]
+    matrix = _build_matrix(characters, per_chapter)
+    characters_out = _build_characters_out(ranking, appear_in_chapters)
 
     return {
         "total_chapters": len(per_chapter),
@@ -134,13 +174,19 @@ def aggregate(per_chapter: list, characters: dict) -> dict:
         "characters": characters_out,
         "ranking": ranking,
         "matrix": matrix,
-        "appear_in_chapters": {c: appear_in_chapters[c] for c in characters if appear_in_chapters[c]},
+        "appear_in_chapters": {
+            c: appear_in_chapters[c]
+            for c in characters
+            if appear_in_chapters[c]
+        },
     }
 
 
 def analyze(chapters) -> dict:
     """分析所有回目人物出场情况，返回聚合统计。"""
-    per_chapter = [analyze_chapter(name, text, CHARACTERS) for name, text in chapters]
+    per_chapter = [
+        analyze_chapter(name, text, CHARACTERS) for name, text in chapters
+    ]
     return aggregate(per_chapter, CHARACTERS)
 
 

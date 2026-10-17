@@ -11,6 +11,57 @@
 ---
 
 
+## W787 release.py 行为保持重构批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/release.py | W787 | 行为保持重构：常量化+拆函数（步进标题复用） |
+| docs/00-导读/W批次编号对账表.md | W787 | W787 认领登记 |
+
+## W786 graph_seed_neo4j 行为保持重构批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/rag/graph_seed_neo4j.py | W786 | 行为保持重构：_build_cypher/_build_snapshot 提函数 |
+| docs/00-导读/W批次编号对账表.md | W786 | W786 认领登记 |
+
+## W785 api_server 行为保持重构批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/api/api_server.py | W785 | 行为保持重构：常量提级+路由拆臂+错误结构统一+行渲染提函数 |
+| docs/00-导读/W批次编号对账表.md | W785 | W785 认领登记 |
+
+## W784 分析与审计五小件行为保持重构批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/A_文本基础/chapter_stats.py | W784 | 行为保持重构：诗词计数拆双函数+聚合提函数 |
+| scripts/A_文本基础/word_frequency.py | W784 | 行为保持重构：token 过滤提函数+常量化 |
+| scripts/AA_叙事实验/narrative_experiment.py | W784 | 行为保持重构：输出/口志拆函数（build_summary 单次复用） |
+| scripts/C_情节/hardships_81.py | W784 | 行为保持重构：标签字典提模块级+输出拆函数 |
+| scripts/audit/line_check.py | W784 | 行为保持重构：self_test 拆三查+查询提函数 |
+| docs/00-导读/W批次编号对账表.md | W784 | W784 认领登记 |
+
+## W783 B_人物行为保持重构批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/B_人物/character_appearance.py | W783 | 行为保持重构：聚合拆三函数+首回计算提函数（保急切求值） |
+| scripts/B_人物/character_network.py | W783 | 行为保持重构：共现累积拆函数+combinations 等价 |
+| docs/00-导读/W批次编号对账表.md | W783 | W783 认领登记 |
+
+## W782 utils 与 run_all 行为保持重构批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/utils/aliases.py | W782 | 行为保持重构：lru_cache+setdefault·更名 _alias_to_canonical·docstring 现实化 |
+| scripts/utils/text_loader.py | W782 | 行为保持重构：常量提取+三函数拆分（W563 溯源保留） |
+| scripts/utils/analyzer_base.py | W782 | 行为保持重构：路径常量提模块级+四函数拆分 |
+| scripts/utils/__init__.py | W782 | docstring 升级为模块清单（含 path_guard） |
+| scripts/run_all.py | W782 | 行为保持重构：超时常量化+五函数拆分 |
+| docs/00-导读/W批次编号对账表.md | W782 | W782 认领登记 |
+
 ## W781 门禁防线收口批（2026-10-18）
 
 | 文件 | W | 说明 |

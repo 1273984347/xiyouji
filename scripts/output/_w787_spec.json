@@ -1,0 +1,15 @@
+{
+  "batch": "W787",
+  "date": "2026-10-18",
+  "title": "W787 release.py 行为保持重构批",
+  "desc": "外部重构提案收编第六批末批，分隔线与告警线常量化并提步进标题函数，git 状态与体量解析与版本解析拆函数，22 项门禁脚本改动点清单经裁定不执行，对拍验收为完整运行输出与退出码逐字相同",
+  "head_entry": "2026-10-18（W787 release.py 行为保持重构批）",
+  "head_sentence": "release.py 常量化与拆函数，完整运行输出逐字相同，门禁清单裁定不执行",
+  "changelog_body": "\n> **来源**：外部重构提案收编第六批（末批·用户令「全部做完之后合并」）。动工前 preflight PASS（W787 认领·零交集）。\n> - **release.py**：_STEP_SEPARATOR/_REPO_SIZE_WARN_MB/_LOOSE_OBJECTS_WARN/_CHANGELOG_VERSION_RE 常量化（正则提模块级预编译·import re 随之上移）；step2 拆 _check_uncommitted/_check_unpushed；step3 拆 _parse_count_objects；main 版本解析提 _resolve_target_version；新增 _print_step_header 供步骤 2-5 复用（**步骤 1 保持独立实现**——原输出无前置空行·避免引入空行差异）；五步输出文本/前缀/短路顺序/退出码逐字保留。\n> - **22 项门禁脚本改动点清单：裁定不执行**（工程裁定非遗漏）——① 交付阻断面：门禁脚本 FAIL 语义即发布闸门，W781 刚完成 verify 体系收口（注册表派生+启动期断言+锁反向查），连续 churn 违背「谨慎」本意；② 清单自身标注多数文件「已足够简洁」或「已做过 W730/W733/W761 拆分」；③ 其可证伪发现 5 项中 3 项经对盘系 W775 前旧快照（W780 已核）。未来如做：须逐门禁三态核验（干净/破防/self-test 输出与退出码逐字比对）+ 流水线 §八五维对拍。\n> - **对拍（流水线 §八）**：完整运行前后各一轮，stdout 全文与退出码（存量 exit=1·sync_docs 一致性检查为存量失败态·与重构无关）**逐字相同**；pytest 630 passed；ruff 0；verify 全量 0 FAIL。\n> - **状态**：已落地（对拍全绿）；级联+提交+推送按批次流程执行。\n> - **文件**：scripts/release.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w787_spec.json、scripts/output/_cascade_files_W787.txt\n",
+  "milestone_block": "- **W787 release.py 行为保持重构批**：\n  - 常量化+拆函数（步进标题复用·步骤 1 独立实现保输出差异为零）；22 门禁清单裁定不执行（交付阻断面+W781 刚收口+清单自标多数已简洁+3/5 发现系旧快照）\n  - 对拍：完整运行输出与退出码逐字相同\n  - 验证：pytest 630 passed + ruff 0 + verify 全量 0 FAIL\n",
+  "agents_note": "2026-10-18（W787）release.py 行为保持重构批：外部重构提案收编第六批末批——分隔线与告警线与 CHANGELOG 版本正则常量化（预编译·import re 上移）；git 状态拆未提交与未推送双检查；体量解析提 count objects 解析函数；版本解析提函数；新增步进标题函数供二至五步复用而步骤一保持独立实现避免空行差异（五步输出前缀短路顺序退出码逐字保留）；22 项门禁脚本改动点清单经裁定不执行（交付阻断面加 W781 刚完成 verify 体系收口连续 churn 违背谨慎本意加清单自标多数已足够简洁加五项可证伪发现三项系 W775 前旧快照；未来如做须逐门禁三态核验加五维对拍）；对拍完整运行输出与退出码逐字相同（存量 exit 1 系 sync docs 一致性检查失败态与重构无关）；验证等于 pytest 六百三十 passed 加 ruff 零 加 verify 全量零 FAIL",
+  "file_index_rows": [
+    "| scripts/release.py | W787 | 行为保持重构：常量化+拆函数（步进标题复用） |",
+    "| docs/00-导读/W批次编号对账表.md | W787 | W787 认领登记 |"
+  ]
+}
