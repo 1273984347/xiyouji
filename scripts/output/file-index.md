@@ -11,6 +11,23 @@
 ---
 
 
+## W775 JS 门禁重构落地批（2026-10-17）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/lib/gate_common.js | W775 | 新增：门禁公共工具（路径规范化/HTML 枚举/注释剥离/worker 池/汇总行·110 行） |
+| scripts/lib/playwright_gate_utils.js | W775 | 新增：Playwright 公共辅助（launch/离线页/file:// 导航·53 行） |
+| scripts/check_chart_values.js | W775 | 重构：probeInPage 拆 6 统计函数 + judgeProbe 拆 V1-V5 + validateGateBaseline 合并 + TH 重复键修复（契约对拍零漂移） |
+| scripts/check_screenshot_gates.js | W775 | 重构：checkPage 拆 G1-G5 + 删死代码 BENIGN_CONSOLE_RE + 补 use strict（输出逐字节一致） |
+| scripts/check_data_drift.js | W775 | 重构 + 潜伏缺陷修复：jsLiteralToJson 引号腐蚀致 2 页静默跳过（可比 57→59·exit 0） |
+| tests/unit/test_ci_wiring.py | W775 | gate43 playwright 断言升级传递链两环守护（11 passed） |
+| scripts/check_story_timeline_sync.py | W775 | 裁决 3.3：去冗余 and 护栏 + 双 findall（与 parse_html 习语对齐·零行为变化） |
+| scripts/check_claude_md.py | W775 | 裁决 3.4：删死常量 MAX_LINES_MSG |
+| .gitignore | W775 | scripts/lib/ 定向 negation（lib/ 规则误伤修复） |
+| docs/11-方案报告/外部评审回应与逐项核查报告-2026-10-17.md | W775 | 外部评审七项指控逐条核查 + 四项材料实况 + 机制层立场回应 |
+| docs/11-方案报告/README.md | W775 | 现役报告索引登记第 20 篇 |
+| docs/00-导读/W批次编号对账表.md | W775 | W775 认领登记 |
+
 ## W774 CI 首跑分歧修复批（2026-10-17）
 
 | 文件 | W | 说明 |

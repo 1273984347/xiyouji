@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W774），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W775），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,20 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W775（2026-10-17）：JS 门禁重构落地批
+> **来源**：用户转交桌面重构产出（外部会话的 JS 门禁重构全文 + 5 条「需你裁决的发现」+ 两轮外部评审文本），指令三项并做——落地重构、裁决 5 条、回应评审。动工前 preflight PASS（W775 认领·与在途 W750/W764 零交集）。
+> - **T1 重构落地（两个新公共模块 + 三门禁重写）**：新增 `scripts/lib/gate_common.js`（路径规范化/HTML 枚举/脚本注释剥离/worker 池/门禁汇总行·110 行）与 `scripts/lib/playwright_gate_utils.js`（统一 launch/离线页创建含外域拦截与 pageerror 收集/file:// 导航·53 行）；`check_chart_values.js`（1409→1529 行：probeInPage 拆 6 个统计函数、judgeProbe 拆 judgeV1~V5+makeVerdict、前置后置重复基线校验合并为 validateGateBaseline、模式分发函数化 main 200→80 行）、`check_screenshot_gates.js`（186→212 行：checkPage 拆 G1–G5 独立判据、删死代码 BENIGN_CONSOLE_RE、补 'use strict'）、`check_data_drift.js`（326→385 行：jsLiteralToJson 拆两纯函数、main 拆 collectCandidateJsonPaths/checkDeployedCopies/comparePageAgainstJson、47→EXPECTED_DEPLOYED_COPY_COUNT 常量化）。txt 提取经 round-trip 逐字节自检；外部会话携带的异体系溯源批号统一就地修正为本批号（防 W 号体系污染）。
+> - **T2 静态契约核验（外部契约零漂移）**：`module.exports` 九项（judgeProbe/compareBaseline/parseBaseline/numEq/TH/ITEMS/CRITERIA/summarizeData/classifyFamily/discoverDataNames）逐项在册；CLI 参数面、退出码语义（gate 基线外新增=1/report=0/self-test 全过=0）、基线四段格式、stdout 末行 `---- 第 43 门禁 可视化数据断言：N FAIL ----` 全部保真；FAIL/OK/WARN 消息文本逐字节一致（sorted diff 实证）；W767/W770 行为点（深比对/基线豁免/部署副本优先解析/EMBEDDED 回退）逐段核对在位。
+> - **T3 五维受控对拍（旧版快照 vs 新版重跑）**：self-test 12/12 同判定（仅 T10 打印序移位·纯装饰）；--judge 注入载荷输出**逐字节一致**；--gate 3 页（81-hardships/guanyin-six-roles-network/chapter-stats）**逐字节一致**（计时归一）；截图门禁 32 页子集**逐字节一致**（静态清单计数 sankey 26/link-canvas 36 不变）；--generate-baseline 格式一致（差异仅计时/像素固有抖动与两行注释性头精简·基线文件未入库且解析器跳过 # 行）。
+> - **T4 潜伏缺陷修复（对拍意外收获·第 9 门禁覆盖缺口）**：`check_data_drift.js` 的 `jsLiteralToJson` 字符串归一化分支自安全加固改写起即被引号腐蚀（`c === ""` 空串比较·分支死代码）——含单引号 EMBEDDED 块的 timeline/journey-geo-semiotics 两页被静默跳过为「无内嵌块」达五个批次（W424 初版 `new Function` 动态求值 → 加固改写静态扫描器时引号字符被吞）。重构版恢复正确引号比较，两页纳入共路深比对且全绿：可比 **57→59 页**（147→150 对比项）·exit 0·全量 verify 第 9 槽通过。git 考古（9d434c9b→a460b889→c2846d82）确认腐蚀路径留档。
+> - **T5 基建坑修复**：`.gitignore` 的 `lib/`（Python 模板残留）误伤 `scripts/lib/`——不修则新模块不入库、CI 必现 MODULE_NOT_FOUND；定向 negation（`!scripts/lib/` + `!scripts/lib/*.js`）修复，check-ignore 实证转白。
+> - **T6 测试面跟随**：`test_ci_wiring.py` gate43 playwright 断言升级为「传递链两环」守护（门禁 → playwright_gate_utils → require('playwright')·任一环断裂即红），保留原意图（CI 装浏览器耦合探测）·11 passed。
+> - **T7 五条待裁决发现裁定**：3.1 TH 重复键——随重构解决（删重复项·单一定义值 0.02 不变）；3.2 未用 text 参数——**不改**（5 条规则 4 条同构不用 text 是「规则族统一签名」设计形态·L1 注释明示·ruff 未开 ARG 规则）；3.3 短路表达式——**改**（去冗余 `and` 护栏+双 findall·与 parse_html 既有习语对齐·tuple 空集等价零行为变化）；3.4 死常量 MAX_LINES_MSG——**改**（删除·零引用实证）；3.5 分段循环——**不改**（接受原建议：合并会改 stdout 路径文本）。
+> - **T8 外部评审回应**：`docs/11-方案报告/外部评审回应与逐项核查报告-2026-10-17.md`——七项工程指控逐条核查（4 不成立/2 部分成立/1 成立：唯一成立项为测试覆盖率数字缺席·登记后续候选）、索要四项材料的仓库实况（verify 注册段/pytest 配置/agent-web 安全三套件/sync_docs 源码）、两轮机制层批评的立场回应（质量方差成立属人的战场、工程 overhead 成立属主动权衡、单点故障成立已缓解到可转让）；评审文本三个存量数字（600+ 提交/W759/43 项门禁）与现势（772 提交/W774/44 槽）全部失配，证其所据为过期公开快照。
+> - **验证（全绿）**：pytest 602 passed / 3 skipped / 0 failed；verify_delivery 全量 **49 段 0 FAIL**（含第 9 槽数据漂移 59 页·第 43 槽 87 页 V1–V5 0 FAIL·第 42 槽根级覆盖）；ruff 0；三门禁 self-test/直跑 exit 0；timeline/claude_md self-test 与默认跑双绿；node --check 五文件全过。
+> - **状态**：已落地（本地全绿）；级联+提交+推送按批次流程执行（main 合并留待用户决策）。
+> - **文件**：scripts/lib/gate_common.js、scripts/lib/playwright_gate_utils.js、scripts/check_chart_values.js、scripts/check_screenshot_gates.js、scripts/check_data_drift.js、tests/unit/test_ci_wiring.py、scripts/check_story_timeline_sync.py、scripts/check_claude_md.py、.gitignore、docs/11-方案报告/外部评审回应与逐项核查报告-2026-10-17.md、docs/11-方案报告/README.md、docs/INDEX.md、STRUCTURE.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、docs/00-导读/项目说明.md、HANDOVER.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w775_spec.json、scripts/output/_cascade_files_W775.txt。
 
 ### W774（2026-10-17）：CI 首跑分歧修复批
 > **来源**：W773 收官后用户指令闭环 AC-02——推送 origin/dev（10 提交·含 W771/W772 dev 积压）并开 PR #47 dev→main，CI 首跑暴露新缺陷，本批修复并复跑全绿。
