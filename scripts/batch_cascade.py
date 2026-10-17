@@ -301,14 +301,17 @@ def _foot_insert(s_html, new_token):
 
 
 def _face_footers(ctx):
-    """四页脚批次链插入（W717 锚定·W724 双重缺陷根修+链长治理）。"""
+    """四页脚批次链插入（W717 锚定·W724 双重缺陷根修+链长治理·W781 防御性剥离前导批次号）。"""
+    # W781 R-2：desc 以 W### 开头会叠成「W779 W779…」双 token（W779 四页实证·存量缺陷
+    # 由 W780 顺修）——插入前无条件剥离，与 release_prep 的 spec 时点校验构成双防线。
+    desc = re.sub(r"^W\d{3}\s*", "", ctx.desc)
     for p in ["site/index.html", "site/data/cross-time-danmaku.html", "site/data/tag-cloud.html"]:
         s, _ = load(p)
-        ctx.pend.append((p, _foot_insert(s, f"{ctx.batch} {ctx.desc}"), None))
+        ctx.pend.append((p, _foot_insert(s, f"{ctx.batch} {desc}"), None))
     p = "site/dukou-engine.html"
     s, _ = load(p)
     head_short = ctx.spec["head_sentence"].split("——")[0]
-    ctx.pend.append((p, _foot_insert(s, f"{ctx.batch} {ctx.desc}（{head_short}）"), None))
+    ctx.pend.append((p, _foot_insert(s, f"{ctx.batch} {desc}（{head_short}）"), None))
 
 
 def _agents_entry_wn(part):

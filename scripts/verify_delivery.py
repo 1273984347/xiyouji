@@ -95,13 +95,14 @@ EXPECTED_SECTION_NAMES = [
     "脚本覆盖",
     "可视化数据",
     "英文站",
+    "目录文档",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
 # 四态：full=全量（缺省·CI verify-delivery job·批收尾七步③恒为 full）；docs=文档轨子集；
 # site=页面轨+级联相关文档段；auto=按变更路径白名单分类（任何越界文件保守回退 full）。
 # 11 个内联廉价段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区）恒跑不跳；跳过只作用于
-# 38 个 subprocess 委托段（49 段 - 11 内联·W780 加第 45 槽后校数）：_scoped_run 统一短路，
+# 38 个 subprocess 委托段（50 段 - 12 内联/bespoke·W781 注册表派生与 EXPECTED 补齐第 45 槽段名后校数）：_scoped_run 统一短路，
 # _GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
 # 校验（fake stdout 含段标记，wrapper 不会误判「缺汇总行」）；段自洽锁按 scope 断言子集。
 _DOC_FILES_RE = re.compile(
@@ -125,27 +126,8 @@ _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·�
     "期望版本", "dukou页脚", "六文档同步", "旁文档同步", "范围漂移",
     "A4计数", "A1-A6计数", "学术引用", "A1导航", "sitemap覆盖", "内嵌回退",
 }
-_GATE_SUMMARY_MARKERS = {
-    "可引用性": "---- 第 28 门禁：",
-    "设计令牌对账": "---- 设计令牌对账：",
-    "色盲安全": "---- 第 29 门禁 色盲安全：",
-    "降级声明": "---- 第 30 门禁 降级声明：",
-    "文档口径": "---- 第 31 门禁 文档口径体检：",
-    "CLAUDE速查": "---- 第 32 门禁 CLAUDE.md 速查层：",
-    "英文站": "EN validate:",
-    "head内容": "---- 第 33 门禁 head 内容：",
-    "CSS变量引用": "---- 第 34 门禁 CSS 变量引用：",
-    "声明分隔": "---- 第 35 门禁 声明分隔：",
-    "孤立选择": "---- 第 36 门禁 孤立选择器：",
-    "kpi基类": "---- 第 37 门禁 kpi 基类：",
-    "内嵌残留": "---- 第 38 门禁 页面内嵌残留标记：",
-    "时间线双源": "---- 第 39 门禁 故事内时间线双源同步：",
-    "chapter双源": "---- 第 40 门禁 chapter_stats 双源同步：",
-    "AGENTS分层": "---- 第 41 门禁 AGENTS 分层完整性：",
-    "脚本覆盖": "---- 第 42 门禁 根级脚本覆盖：",
-    "可视化数据": "---- 第 43 门禁 可视化数据断言：",
-    "目录文档": "---- 第 45 门禁 目录文档新鲜度：",
-}
+# _GATE_SUMMARY_MARKERS 已由 _STRICT_GATES 元组派生（W781 R-1·见 _STRICT_GATES 定义后），
+# 手工字典删除——挂槽漏登记即启动期断言红（W780 实证：漏登记会在 --scope 跳过路径爆「缺汇总行」假红）
 
 
 def _parse_scope(argv):
@@ -452,10 +434,11 @@ _SIMPLE_GATES_POST_A11Y = [
     _SimpleGate(section="动态链接", script="check_dynamic_links.py",
                 ok_msg="动态链接门禁通过（%s）", fail_msg="动态链接死链",
                 warn_msg="动态链接门禁执行异常（W459）: %s"),
-    # 治理契约：非零退出仅 WARN 不阻断（2026-08-18 起·W499 先例）；尾行口径 4+2·fail 取前 4
+    # 治理契约：W781 转正 FAIL 阻断（2026-08-18 WARN 起步策略两月监测期满·当前 0 告警零成本转正；
+    # 尾行口径 4+2·fail 取前 4）
     _SimpleGate(section="治理契约", script="check_governance_docs.py", timeout=60,
-                tail_out=4, fail_tail=4, severity="warn",
-                ok_msg="治理文档维护契约通过（%s）", fail_msg="治理文档维护契约告警",
+                tail_out=4, fail_tail=4,
+                ok_msg="治理文档维护契约通过（%s）", fail_msg="治理文档维护契约违规",
                 warn_msg="治理文档维护契约门禁执行异常: %s"),
     _SimpleGate(section="索引健康", script="check_index_health.py",
                 ok_msg="索引健康门禁通过（%s）", fail_msg="索引健康异常",
@@ -604,6 +587,41 @@ _STRICT_GATES = [
                 marker_msg="目录文档门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
                 ok_msg="目录文档新鲜度通过（%s）", ok_line=-1),
 ]
+
+# ---- 注册表派生与一致性防线（W781 R-1·挂槽「五处同改」收敛）----
+# 派生：section→marker 映射自 _STRICT_GATES 元组（W780 实证对拍逐项相等）——新挂槽只改
+# 门禁元组与 EXPECTED_SECTION_NAMES 两处，漏改由 _assert_registry_consistent() 启动期
+# fail-fast（防静默跳过/CI 红延迟暴露·K11 接线缺失型同族）。
+_GATE_SUMMARY_MARKERS = {g.section: g.marker for g in _STRICT_GATES if getattr(g, "marker", "")}
+
+# 仅 full 档生效的门禁段（刻意登记·不在任何 scope 子集）：仓库全域面，docs/site 变更子集
+# 不触碰其判据分母——漏登记此集合的段会在 R-1 断言红（W713 内联段盲区同族的显式化）。
+_FULL_ONLY_SECTIONS = {"脚本覆盖", "目录文档"}
+
+
+def _assert_registry_consistent() -> None:
+    """启动期注册表一致性断言（W781 R-1）：挂槽漏改任一手工面当场红，不等到 CI。
+
+    四查：① 门禁段名互不重复；② 元组段名 ⊆ EXPECTED_SECTION_NAMES（W780 实证漏
+    「目录文档」于顺序表·旧自洽锁单向查缺抓不到多段）；③ 元组相对序 == EXPECTED 相对序
+    （执行序漂移即红）；④ 不在任何 scope 子集的段必须登记 _FULL_ONLY_SECTIONS。
+    """
+    gate_sections = [g.section for _l in (_SIMPLE_GATES_PRE_A11Y, _SIMPLE_GATES_POST_A11Y,
+                                          _STRICT_GATES) for g in _l]
+    dupes = sorted({s for s in gate_sections if gate_sections.count(s) > 1})
+    assert not dupes, "门禁段名重复（挂槽漏改·R-1）： %r" % dupes
+    expected_set = set(EXPECTED_SECTION_NAMES)
+    missing = [s for s in gate_sections if s not in expected_set]
+    assert not missing, ("门禁元组段名未入 EXPECTED_SECTION_NAMES（挂槽漏改·R-1·W780 第 45 槽同型）： %r"
+                         % missing)
+    order_in_expected = [n for n in EXPECTED_SECTION_NAMES if n in set(gate_sections)]
+    assert order_in_expected == gate_sections, (
+        "门禁执行序与 EXPECTED_SECTION_NAMES 相对序不一致（R-1）： %r vs %r"
+        % (gate_sections, order_in_expected))
+    unscoped = set(gate_sections) - _SCOPE_CORE - SCOPE_DOCS_SECTIONS - SCOPE_SITE_SECTIONS
+    unregistered = sorted(unscoped - _FULL_ONLY_SECTIONS)
+    assert not unregistered, ("门禁段不在任何 scope 子集且未登记 _FULL_ONLY_SECTIONS（R-1）： %r"
+                              % unregistered)
 
 
 def _run_simple_gate(ctx, gate):
@@ -1011,14 +1029,18 @@ def _check_section_lock(ctx):
     """
     expected_sections = list(EXPECTED_SECTION_NAMES) if ctx.scope == "full" else \
         [n for n in EXPECTED_SECTION_NAMES if n in ctx.active_sections]
-    missing_sections = [n for n in expected_sections if n not in ctx.sections_ran]
-    if missing_sections:
-        ctx.rep.fail("门禁段实跑 %d ≠ 声明 %d：缺 %s（VERIFY_SECTIONS 自洽锁·--scope %s）"
-                     % (len(set(ctx.sections_ran)), len(expected_sections),
-                        "、".join(missing_sections), ctx.scope))
+    ran_set = set(ctx.sections_ran)
+    missing_sections = [n for n in expected_sections if n not in ran_set]
+    # W781 R-1：补反向查（实跑多出声明外段=挂槽漏 EXPECTED·旧单向查放过了第 45 槽实证）
+    extra_sections = [n for n in dict.fromkeys(ctx.sections_ran) if n not in set(EXPECTED_SECTION_NAMES)]
+    if missing_sections or extra_sections:
+        ctx.rep.fail("门禁段实跑 %d ≠ 声明 %d：缺 %s 多 %s（VERIFY_SECTIONS 自洽锁·--scope %s）"
+                     % (len(ran_set), len(expected_sections),
+                        "、".join(missing_sections) or "无", "、".join(extra_sections) or "无",
+                        ctx.scope))
     else:
         ctx.rep.ok("门禁段自洽锁：实跑 %d 段 == 声明 %d 段（--scope %s）"
-                   % (len(expected_sections), len(expected_sections), ctx.scope))
+                   % (len(ran_set), len(expected_sections), ctx.scope))
 
 
 def _print_summary(rep):
@@ -1032,6 +1054,7 @@ def _print_summary(rep):
 
 
 def main():
+    _assert_registry_consistent()  # W781 R-1：注册表一致性启动期防线
     """交付门禁编排（W728 重构：905 行单体 → 表驱动编排）。
 
     执行序 = 46 个段名在 EXPECTED_SECTION_NAMES 中的声明序（段自洽锁对账·不得重排）；

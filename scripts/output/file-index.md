@@ -11,6 +11,20 @@
 ---
 
 
+## W781 门禁防线收口批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/verify_delivery.py | W781 | R-1 注册表派生+启动期四查+自洽锁反向查+EXPECTED 补目录文档（50 段） |
+| scripts/release_prep.py | W781 | R-2 desc/head_sentence 禁以 W### 开头判据 |
+| scripts/batch_cascade.py | W781 | R-2 页脚插入防御性剥离前导批次号 |
+| scripts/check_governance_docs.py | W781 | R-3 转正 FAIL（docstring 同步） |
+| docs/agent/gates.md | W781 | 第 22 条转正记录 |
+| docs/agent/pitfalls.md | W781 | W698 scope 条目增补 R-1 演进（就地·条目数不变） |
+| tests/unit/test_verify_registry.py | W781 | 新建：8 例（四查负样本+锁双向+派生覆盖） |
+| tests/unit/test_release_prep.py | W781 | 增 2 例（desc/head_sentence 批次号开头负样本） |
+| docs/00-导读/W批次编号对账表.md | W781 | W781 认领登记 |
+
 ## W780 目录文档新鲜度门禁批（2026-10-18）
 
 | 文件 | W | 说明 |
