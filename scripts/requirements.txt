@@ -8,5 +8,6 @@ markdown==3.10.2
 # dev dependencies
 ruff==0.16.9
 pytest==9.1.1
-fonttools>=4.66.0
-brotli>=1.2.0
+# W776：fonttools/brotli 移除——全仓（含 archive/）零 import（W564 字体子集化一次性
+# 工具的遗留·子集化脚本已归档），CI/pip-audit 无需扫描；字体重子集化时按
+# scripts/font-subset-guide.md §3.1 按需安装（pyftsubset 回退路径）。

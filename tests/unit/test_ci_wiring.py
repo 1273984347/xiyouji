@@ -31,6 +31,9 @@ r"""W757 专项测试：CI 工作流接线完整性（门禁「建置即绿」�
   W3 第 43 门禁仍挂在 verify_delivery（防「删门禁代替修门禁」的假修复）
   W4 三条接线各自可定位（失败时报出缺失项，不静默通过）
   W5 反自检：断言面对真实文件生效（文件不存在即 FAIL，不许静默跳过）
+  W6 e2e-interaction job 实际执行 `node tests/e2e/` 套件 + 具备 Playwright
+     运行条件（T-02/W773 缺陷①：8 个 JS E2E 套件零 workflow 接线——W674 遗留的
+     K11 页面回归因此潜伏到本批接线首跑才暴露，见 ci.yml 内注释）
 """
 
 import re
@@ -42,6 +45,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 CI_YML = ROOT / ".github" / "workflows" / "ci.yml"
 VERIFY_PY = ROOT / "scripts" / "verify_delivery.py"
 CHART_JS = ROOT / "scripts" / "check_chart_values.js"
+PLAYWRIGHT_UTILS_JS = ROOT / "scripts" / "lib" / "playwright_gate_utils.js"
 AGENT_WEB_PKG = ROOT / "xiyouji-agent-web" / "package.json"
 
 
@@ -106,14 +110,22 @@ def test_wiring_targets_exist():
 # ---------------------------------------------------------------------------
 
 def test_gate43_hard_depends_on_playwright():
-    """前提事实：第 43 门禁脚本确实 require('playwright')（判据前提，非接线本身）。
+    """前提事实：第 43 门禁（经 lib 公共模块）确实 require('playwright')（判据前提，非接线本身）。
 
-    若某天它改成可选依赖，本断言会红并提示同步更新 CI 需求——防止
-    「脚本不再需要浏览器，但 CI 仍装着」或反向的静默漂移。
+    W775 重构后 playwright 依赖改为传递链：check_chart_values.js →
+    scripts/lib/playwright_gate_utils.js（惰性 require·仅浏览器模式加载，
+    --self-test/--judge 纯函数模式不加载浏览器）。本断言守护传递链两环——
+    任一环断裂即红，提示同步复核 ci.yml 是否需要装浏览器：防「脚本不再需要
+    浏览器，但 CI 仍装着」或反向的静默漂移。
     """
-    src = CHART_JS.read_text(encoding="utf-8")
-    assert "require('playwright')" in src or 'require("playwright")' in src, (
-        "check_chart_values.js 不再硬依赖 playwright——请同步复核 ci.yml 是否需要装浏览器")
+    gate_src = CHART_JS.read_text(encoding="utf-8")
+    assert "playwright_gate_utils" in gate_src, (
+        "check_chart_values.js 不再引用 lib/playwright_gate_utils——playwright 依赖链第一环断裂")
+    assert PLAYWRIGHT_UTILS_JS.exists(), (
+        "scripts/lib/playwright_gate_utils.js 缺失——playwright 依赖链第二环断裂（W5 同款 fail-closed）")
+    utils_src = PLAYWRIGHT_UTILS_JS.read_text(encoding="utf-8")
+    assert "require('playwright')" in utils_src or 'require("playwright")' in utils_src, (
+        "playwright_gate_utils.js 不再硬依赖 playwright——请同步复核 ci.yml 是否需要装浏览器")
 
 
 def test_verify_delivery_job_installs_playwright():
@@ -168,6 +180,39 @@ def test_agent_web_package_declares_server_tests():
     assert script, "xiyouji-agent-web/package.json 缺少 test:server 脚本（接线目标已消失）"
     for f in ("tools.test.ts", "audit.test.ts", "citationGuard.test.ts"):
         assert f in script, "test:server 未覆盖 %s（安全单测面收窄）" % f
+
+
+# ---------------------------------------------------------------------------
+# W6（T-02·W773）：JS E2E 套件接线（缺陷①——8 个套件零 workflow 调用）
+# ---------------------------------------------------------------------------
+
+def test_e2e_interaction_job_runs_js_suite():
+    """W6：e2e-interaction job 必须**实际执行** `node tests/e2e/` 套件。
+
+    判据锚 run: 块（同 W1/W2 理由）：字符串存在性会被步骤名/注释骗过。
+    接受 `node ../tests/e2e/`（scripts/ cwd 形态）与 `node tests/e2e/`
+    （仓库根 cwd 形态）两种写法。
+    """
+    body = _job_body(_ci_text(), "e2e-interaction")
+    cmds = _run_blocks(body)
+    assert re.search(r"node\s+(?:\.\./)?tests/e2e/", cmds), (
+        "e2e-interaction job 未在 `run:` 中执行 node tests/e2e/ 套件——"
+        "8 个 Playwright JS E2E 套件零接线缺陷复燃（T-02 缺陷①·W773）")
+
+
+def test_e2e_interaction_job_has_playwright_runtime():
+    """W6 辅助：该 job 必须具备 Playwright 运行条件（依赖安装 + 浏览器安装）。
+
+    入口即使写对，缺依赖/缺浏览器仍会红（W757 D1 同族：第 43 门禁因 CI 未装
+    Playwright 而「建置即红」）。
+    """
+    body = _job_body(_ci_text(), "e2e-interaction")
+    cmds = _run_blocks(body)
+    assert "npm ci --prefix scripts" in cmds or "npm install" in cmds, (
+        "e2e-interaction job 缺少 scripts/ 的 npm 依赖安装——"
+        "playwright 包来自 scripts/package.json（W757 D1 同族）")
+    assert "playwright install" in cmds, (
+        "e2e-interaction job 缺少 `npx playwright install`——无浏览器套件必红")
 
 
 # ---------------------------------------------------------------------------

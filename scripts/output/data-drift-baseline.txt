@@ -1,0 +1,13 @@
+# 数据漂移门禁 v3 基线（W767 建）——声明式豁免：页面与源为「双形态/约定分裂」且已登记跟进项。
+# 行格式：<页面名> ⇄ <源文件名> <归一化路径>（[N]→[*] 归一后匹配）
+# 语义：任何不在此列的深层（共路标量）漂移 = 新增漂移 → 门禁失败（no-new-drift 防线）。
+# 本基线内容须与 CHANGELOG W767 段互证；新增豁免须随批注明理由。
+#
+# --- 81-hardships：已对齐（W770）——生成器输出清单 label 化（与页面 EMBEDDED/dataset 同形）·
+# 对应的 code 形豁免行已随 W770 撤销，恢复共路深比对全量管控。 ---
+#
+# --- visual-art：设计双形态（页面显式声明） ---
+# site/data/visual-art.html 注释原文：「visual_art_ideas: EMBEDDED.visual_art_ideas
+# // 视觉艺术构想仅在 EMBEDDED 中」——summary.json（快照·run_all 生成）的
+# visual_art_ideas 为计数（number），页嵌为完整构想数组（object）·系刻意设计。
+visual-art ⇄ visual_art_summary.json $.visual_art_ideas

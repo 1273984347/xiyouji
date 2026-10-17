@@ -12,11 +12,11 @@
 | a1_a6_docs | 615 | docs/01-06 六板块顶层内容 .md（排除 README） | W505 | W505 |
 | a4_docs | 209 | docs/03-主题与情节专题/*.md（排除 README） | W722 | W722 |
 | csp_covered | 856 | html_total − _template.html（generate_csp TEMPLATE_EXCLUDE） | W459 | W459 |
-| gate_count | 43 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | W751 |
+| gate_count | 45 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | W780 |
 | html_total | 857 | site/**/*.html（递归全站） | W459 | W459 |
 | inline_css_pages | 330 | site 全树含 INLINED 标记页 | W459 | W459 |
 | methodology_docs | 24 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W755 |
-| report_docs | 20 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W757 |
+| report_docs | 25 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W777 |
 | scan_files | 855 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W459 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
 | seo_scanned | 855 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | W591 |
@@ -27,6 +27,27 @@
 | visualization_pages | 87 | site/data_html − _shell.html | W459 | W459 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W780（2026-10-18 02:51:20）
+- gate_count: 44 → 45
+
+### W777（2026-10-17 23:19:43）
+- report_docs: 24 → 25
+
+### W775（2026-10-17 22:22:25）
+- report_docs: 23 → 24
+
+### W772（2026-10-17 06:58:53）
+- report_docs: 22 → 23
+
+### W768（2026-10-16 23:05:24）
+- gate_count: 43 → 44
+
+### W762（2026-10-16 21:17:18）
+- report_docs: 21 → 22
+
+### W760（2026-10-16 20:31:16）
+- report_docs: 20 → 21
 
 ### W757（2026-10-16 04:04:21）
 - report_docs: 17 → 20

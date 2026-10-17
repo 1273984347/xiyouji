@@ -78,6 +78,17 @@ def test_check_fields_rejects_head_sentence_brackets():
     assert any("head_sentence" in i for i in issues)
 
 
+def test_check_fields_rejects_desc_leading_batch_number():
+    """W781 R-2：desc 以批次号开头=页脚双 token 根因（W779 四页实证）·spec 时点即拦。"""
+    issues = release_prep.check_fields(_spec(desc="W779 全仓目录索引补齐批"))
+    assert any("以批次号开头" in i for i in issues)
+
+
+def test_check_fields_rejects_head_sentence_leading_batch_number():
+    issues = release_prep.check_fields(_spec(head_sentence="W780 目录文档新鲜度门禁批"))
+    assert any("以批次号开头" in i for i in issues)
+
+
 def test_check_fields_requires_leading_batch_in_title():
     issues = release_prep.check_fields(_spec(title="示例批 W736"))
     assert any("领衔" in i for i in issues)

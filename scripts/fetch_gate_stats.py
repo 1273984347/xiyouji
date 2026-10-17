@@ -34,14 +34,6 @@ import urllib.request
 from datetime import date, timedelta
 from pathlib import Path
 
-_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
-
-def _w536_guard_open(path, *a, **k):
-    _real = os.path.realpath(path)
-    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
-        raise SystemExit("W536 guard: path escapes project root: %s" % path)
-    return open(_real, *a, **k)
-
 ROOT = Path(__file__).resolve().parent.parent
 ENV_FILE = ROOT / ".env"
 DEFAULT_SITE = "https://1273984347.goatcounter.com"

@@ -11,7 +11,10 @@
  *      缺省退页面标题）+ aria-describedby 指向注入的 sr-only 摘要块；
  *   3) 摘要块内容 = 图名 + KPI 摘要（.kpi-card 等可见统计文本·至多 6 条）+
  *      「数据源」区块指引（#dataSource 在场时）；
- *   4) MutationObserver 兜晚渲染图表（d3 fetch/EMBEDDED 异步建图），20s 后停观。
+ *   4) MutationObserver 兜晚渲染图表（d3 fetch/EMBEDDED 异步建图），20s 后停观；
+ *   5) i18n（W773）：摘要文本按 document.documentElement.lang 选 zh/en
+ *      （缺省 zh·中文页行为逐字节不变）——EN 镜像页（site/en·W773 起注入）
+ *      不再产出中文读屏文本。
  *
  * 幂等：window.__chartA11y 全局闸 + 元素级 data-chart-a11y 标记。无动画（不动效契约面）。
  */
@@ -28,9 +31,33 @@
   var OBSERVE_MS = 20000;
   var appliedCount = 0;
 
+  // W773 最小 i18n：zh 串与原实现逐字节一致（中文页零行为变化）；en 供 site/en 镜像页
+  var LANG = (document.documentElement.lang || 'zh').toLowerCase().indexOf('en') === 0 ? 'en' : 'zh';
+  var I18N = {
+    zh: {
+      chart: '（交互式图表）。',
+      kpi: '关键统计：',
+      kpiSep: '；',
+      kpiEnd: '。',
+      source: '数据来源与引用格式见页面下方「数据源」区块。',
+      focus: '本区块已设为可聚焦，屏幕阅读器可直接朗读本段替代文本。',
+      fallbackTitle: '数据图表'
+    },
+    en: {
+      chart: ' (interactive chart).',
+      kpi: 'Key statistics: ',
+      kpiSep: '; ',
+      kpiEnd: '.',
+      source: 'See the "Data Source" section below for data provenance and citation format.',
+      focus: 'This region is focusable; screen readers can read this alternative text directly.',
+      fallbackTitle: 'Chart'
+    }
+  };
+  var T = I18N[LANG];
+
   function docTitle() {
     var t = (document.title || '').split(/[·|—]/)[0].trim();
-    return t || '数据图表';
+    return t || T.fallbackTitle;
   }
 
   function isTopLevelGraphic(el) {
@@ -78,13 +105,13 @@
     div.className = 'sr-only';
     div.style.cssText = SR_STYLE;
     div.setAttribute('role', 'note');
-    var parts = [label + '（交互式图表）。'];
+    var parts = [label + T.chart];
     var kpis = kpiDigest();
-    if (kpis.length) parts.push('关键统计：' + kpis.join('；') + '。');
+    if (kpis.length) parts.push(T.kpi + kpis.join(T.kpiSep) + T.kpiEnd);
     if (document.getElementById('dataSource')) {
-      parts.push('数据来源与引用格式见页面下方「数据源」区块。');
+      parts.push(T.source);
     }
-    parts.push('本区块已设为可聚焦，屏幕阅读器可直接朗读本段替代文本。');
+    parts.push(T.focus);
     div.textContent = parts.join(' ');
     return div;
   }

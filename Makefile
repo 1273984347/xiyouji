@@ -10,7 +10,7 @@
 #   - 任一命令失败即整体退出（makefile 默认行为）
 #   - 目标注释 `## ` 由 help 目标自动解析
 
-.PHONY: help analyze analyze-list analyze-only screenshots slice audit lint links test ci clean release data-validate docs-index
+.PHONY: help analyze analyze-list analyze-only screenshots slice audit lint links test ci clean release data-validate docs-index validate-en
 
 help: ## 显示所有目标
 	@python -c "import re; lines=open(__file__,encoding='utf-8').read().splitlines(); print('\n用法:\n  make <target>\n\n目标:'); [print(f'  {m.group(1):<15} {m.group(2)}') for l in lines for m in [re.match(r'^([a-zA-Z_-]+):.*?##\s*(.*)', l)] if m]; print('')"
@@ -62,6 +62,11 @@ data-validate: ## JSON 数据完整性校验（output/data/ 131 个文件）
 	python scripts/data_validate.py --quiet
 	@echo "==> data-validate 完成"
 
+validate-en: ## 英文站 CJK 校验（script CJK=0 + chrome 白名单·138 页）
+	@echo "==> validate-en: 英文站校验"
+	python scripts/validate_en.py --all
+	@echo "==> validate-en 完成"
+
 docs-index: ## 生成/更新 docs/INDEX.md（321 篇文档索引）
 	@echo "==> docs-index: 生成文档索引"
 	python scripts/docs_index.py
@@ -72,14 +77,15 @@ test: ## pytest（python -m pytest tests/）— 跨平台兼容
 	@python -c "from pathlib import Path; import subprocess, sys; sys.exit(subprocess.run([sys.executable, '-m', 'pytest', 'tests/', '-q']).returncode if Path('tests').is_dir() else (print('  [skip] tests/ 目录不存在'), 0)[1])"
 	@echo "==> test 完成"
 
-ci: ## CI 本地预跑 = lint + test + audit + links + data-validate + docs-index
-	@echo "==> ci: lint + test + audit + links + data + docs"
+ci: ## CI 本地预跑 = lint + test + audit + links + data-validate + docs-index + validate-en
+	@echo "==> ci: lint + test + audit + links + data + docs + validate-en"
 	$(MAKE) lint
 	$(MAKE) test
 	$(MAKE) audit
 	$(MAKE) links
 	$(MAKE) data-validate
 	$(MAKE) docs-index
+	$(MAKE) validate-en
 	@echo "==> ci 完成"
 
 release: ## 版本发布前体检（sync_docs + git 状态 + pytest + checklist）

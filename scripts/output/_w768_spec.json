@@ -1,0 +1,26 @@
+{
+  "batch": "W768",
+  "date": "2026-10-16",
+  "title": "W768 英文站校验接线批",
+  "desc": "第 44 槽挂载（validate_en --all，138 页 script CJK=0）+6 页整改+豁免基线移除",
+  "head_entry": "2026-10-16（W768 英文站校验接线批）",
+  "head_sentence": "英文站校验接线挂载第四十四槽加六页 CJK 整改加豁免基线移除加全站百三十八页通过",
+  "changelog_body": "\n> **来源**：用户令「继续」（遗留事项③·W760 审查 F-3 HIGH 收口——四 HIGH 最后一项）。W760 实证：`HANDOVER`/`V2可视化维度方案` 宣称「138 个 EN 页通过 validate_en.py」，实际三入口零接线（verify/CI/Makefile 均无引用）+ 被第 42 槽（根级脚本覆盖）豁免基线豁免，6 页违规（search 中文语料 5458 CJK + chart-design 132 / chapter-stats 102 / methodology-matrix 48 / character-appearance 35 / relationships 1）长期在绿。\n> - **G1 校验器升级（validate_en.py）**：① 新增 `--all [root]` 批量模式（全站遍历·汇总行 `EN validate: OK=N FAIL=M`·任一页违规即退出码 1）；② 豁免区落地——`/* SEARCH_INDEX:BEGIN */…/* SEARCH_INDEX:END */` 包裹的全文检索语料索引为「引用语料区」（与第 20 槽「原文全文」豁免区同类·W768 用户口径），不计入 script CJK；③ 单页模式输出与旧版**逐字节兼容**（check_page 重构·对拍留档：非语料页输出 IDENTICAL）。\n> - **G2 六页整改**：① chart-design——zh→en 字典（HOUR_EN/ACTGEN_EN/MSTATE_EN/SACT_EN/SKEY_EN 共 126 对）全域转形（数据+字典键同步·自映射保行为）；② methodology-matrix——MONSTER_EN/PHASE_EN/RESCUER_EN/RMONSTER_EN 32 对 + 四角标签键值化（左上→left_top 等）；③ character-appearance——ZH2EN_NAME 35 对转形；④ chapter-stats——「第N回」→「Chapter N」×102（循 chapters-map「Chapter 100」惯例）；⑤ relationships——调试串 `[DATA] EMBEDDED 单源:` → `single-source:`；⑥ search——语料索引按豁免区口径处理（0 改动·EXEMPT 生效）。\n> - **G3 接线（第 44 槽）**：verify_delivery.py 五面注册（EXPECTED_SECTION_NAMES 49 段 / _STRICT_GATES 含 marker `EN validate:` / _GATE_SUMMARY_MARKERS / SCOPE_SITE_SECTIONS / 头注 46→49 段校正）；CI 经 verify-delivery job 自动生效；Makefile 新增 `validate-en` 目标并挂入 `ci` 链；第 42 槽豁免基线移除 `validate_en.py  # ①英文站校验` 行（接线后不再豁免）。\n> - **G4 三方编号同步**：AGENTS §4.2（43→44 槽·清单补第 44 项）+ gates.md（标题 44 槽·补第 44 槽全量定义）+ stats `gate_count` 43→44（--w W768 刷新）+ README `<!--stats:gate_count-->` 标记 43→44。\n> - **验证（全绿）**：`validate_en --all` **138/138 通过**；verify_delivery 全量 **49 段**（实跑==声明）0 核心 FAIL；CSP 重注零漂移（856 页/858 哈希·5 页内联脚本改动后重注）；单页输出与旧版对拍一致；**pytest 597 passed**。\n> - **状态**：已提交（本地）。**W760 审查四项 HIGH 至此全部办结**（F-1a W763 / F-1b W766 / RCE W764 / 第 9 门禁 W767 / validate_en 本批）；余用户侧 `.env` 凭证轮换。\n> - **文件**：scripts/validate_en.py、scripts/verify_delivery.py、Makefile、AGENTS.md、docs/agent/gates.md、README.md、scripts/output/script-coverage-baseline.txt、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、site/en/chart-design.html、site/en/methodology-matrix.html、site/en/character-appearance.html、site/en/chapter-stats.html、site/en/relationships.html、scripts/output/_w768_spec.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、.github/workflows/README.md、site/index.html、site/dukou-engine.html、site/data/tag-cloud.html、site/data/cross-time-danmaku.html、archive/docs/AGENTS-ARCHIVE.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_cascade_files_W768.txt。\n",
+  "milestone_block": "- **W768 英文站校验接线批**：\n  - 第 44 槽挂载：validate_en --all（138 页 script CJK=0 + chrome 白名单·语料索引豁免区）\n  - 六页整改（字典转形/Chapter N/角标键值化/调试串）+ 三方编号 43→44 + 豁免基线移除\n",
+  "agents_note": "2026-10-16（W768）英文站校验接线批（用户令继续·W760 F-3 HIGH 收口）：validate_en 加 --all 批量（汇总行 EN validate·任一页违规退一）加语料索引豁免区（SEARCH_INDEX BEGIN END 包裹视为引用语料）加单页输出逐字节兼容；六页整改等于 chart-design 字典百二十六对转形加 methodology 三十二对加四角键值化加 appearance 三十五对加 chapter-stats 第 N 回到 Chapter N 百零二加 relationships 调试串加 search 豁免零改动；接线等于 verify 第四十四槽五面注册加段数四十九自洽加 CI 经 verify-delivery 生效加 Makefile 目标挂 ci 加第四十二槽豁免行移除；三方编号等于 AGENTS 四十四加 gates.md 四十四加 stats gate_count 四十三到四十四加 README 标记同步；验证等于全站百三十八页通过加 verify 四十九段零 FAIL 加 CSP 重注零漂移加 pytest 五百九十七 passed",
+  "file_index_rows": [
+    "| scripts/validate_en.py | W768 | --all 批量模式 + SEARCH_INDEX 语料豁免区 + check_page 重构（单页输出逐字节兼容） |",
+    "| scripts/verify_delivery.py | W768 | 第 44 槽挂载（段数 48→49·五面注册） |",
+    "| Makefile | W768 | validate-en 目标 + ci 链挂载 |",
+    "| AGENTS.md | W768 | §4.2 43→44 槽（清单补第 44 项） |",
+    "| docs/agent/gates.md | W768 | 44 槽标题 + 第 44 槽全量定义 |",
+    "| README.md | W768 | gate_count 标记 43→44 |",
+    "| scripts/output/script-coverage-baseline.txt | W768 | 移除 validate_en 豁免行（接线后不再豁免） |",
+    "| site/en/chart-design.html | W768 | zh→en 字典 126 对全域转形 |",
+    "| site/en/methodology-matrix.html | W768 | 字典 32 对 + 四角标签键值化 |",
+    "| site/en/character-appearance.html | W768 | ZH2EN_NAME 35 对转形 |",
+    "| site/en/chapter-stats.html | W768 | 第N回→Chapter N ×102 |",
+    "| site/en/relationships.html | W768 | 调试串英译 |",
+    "| scripts/output/_w768_spec.json | W768 | 本批 spec 入库 |"
+  ]
+}

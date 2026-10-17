@@ -1,0 +1,19 @@
+{
+  "batch": "W772",
+  "date": "2026-10-17",
+  "title": "W772 计划入库纯文档批",
+  "desc": "计划方案三篇登记入库加索引重建加报告计数 22 到 23",
+  "head_entry": "2026-10-17（W772 计划入库纯文档批）",
+  "head_sentence": "计划方案三篇登记入库加索引重建加报告计数 22 到 23",
+  "changelog_body": "\n> **来源**：用户令「认领 W772『计划入库纯文档批』并完成全级联」——T-02 工程基础设施薄弱点修复计划（2026-10-17 落盘）与既有 T-01 计划及报告三件一并登记入 `docs/11-方案报告/README.md` 索引，完成报告计数与 docs 索引级联。\n> - **计划方案三篇登记**：`docs/11-方案报告/计划方案/` 下 3 篇（`执行前计划-T01.md`、`T01-任务计划执行与经验沉淀报告-2026-10-14.md`、`执行前计划-T02-工程基础设施薄弱点修复.md`）此前**从未进入本目录索引**（README 全文 grep「计划方案」= 0 命中·存量登记缺口）——本批在 README 新建「二、计划方案（3 篇）」章节登记，原「二、历史归档指针」顺延为「三、」。\n> - **现役报告计数不变**：README「一、现役报告（19 篇）」维持 19 篇——目录分区口径 = 现役报告 19 + 索引 README 1 + 计划方案 3 = 23，与 STRUCTURE 现役文字同源。\n> - **报告计数三连带**：STRUCTURE.md `report_docs` 标记 22→23 + 现役文字「计划方案 2 篇」→「3 篇」+ `stats.py --w W772` 刷新（stats-changelog + stats-index 派生）·`--check` 零差异（16 键）。\n> - **docs 索引重建**：`docs_index.py` 重建 `docs/INDEX.md`，清 2 条存量漂移（`W761工具链可维护性重构报告-2026-10-16.md`、`全量对抗审查报告-2026-10-16.md` 未入索引）·`--check` exit 0。\n> - **T-02 计划要点（登记·非执行）**：四项「有设施无防线」缺陷——① 8 个 Playwright JS E2E 套件与视觉回归层零 workflow 接线；② 视觉基线 PNG 被 `.gitignore` 排除（无版本化载体）；③ 英文站 chart-a11y 覆盖 0 页（中文站 87/88）；④ `docs/INDEX.md` 无产物级一致性门禁。计划含 G-01 目标、AC-01~09（每条含命令与 exit/计数判据）、ST-01~10、V-01~10、R-01~08、D-01~06。\n> - **状态**：**修复批未动工**——WS1~WS4 修复波次待用户批准 W 号与批次拆解后另批执行（本批仅登记入库·**零代码改动**）。\n> - **验证（全绿）**：`stats.py --check` 零差异；`docs_index.py --check` exit 0；batch_cascade dry-run 十面预检全过；**pytest 597 passed**（+3 skipped·0 failed；两段实测绿拼合=除 viz 层 582 项 579 passed rc=0 与 viz 层单跑 18 项 rc=0；本机 Windows 全量单进程在 ~39s 处被控制台 SIGINT 打断于 viz 层首例·八面取证排除内存峰值 95MB 与磁盘余 239GB 与墙钟看门狗与测试内进程自杀与单文件缺陷与 Playwright 浏览器用例与本批引入[暂存 23 文件 .py 与 .js 计 0]；deselect viz 层 12 例 node 播种用例后全量 585 passed rc=0 三面互证；非仓内缺陷=CI Linux main 全绿）；verify_delivery 全量 49 段 0 FAIL。\n> - **文件**：docs/11-方案报告/计划方案/执行前计划-T02-工程基础设施薄弱点修复.md、docs/11-方案报告/README.md、STRUCTURE.md、CHANGELOG.md、README.md、docs/00-导读/项目说明.md、HANDOVER.md、AGENTS.md、CITATION.cff、.github/workflows/README.md、scripts/output/file-index.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/_w772_spec.json、scripts/output/_cascade_files_W772.txt、docs/00-导读/W批次编号对账表.md、docs/INDEX.md、site/index.html、site/dukou-engine.html、site/data/tag-cloud.html、site/data/cross-time-danmaku.html、archive/docs/AGENTS-ARCHIVE.md。\n",
+  "milestone_block": "- **W772 计划入库纯文档批**：\n  - 计划方案 3 篇登记入 docs/11-方案报告/README.md（新建「二、计划方案（3 篇）」章节）\n  - STRUCTURE report_docs 22→23 + 计划方案 2 篇→3 篇 + stats 三连带 + docs/INDEX.md 重建清 2 条漂移\n",
+  "agents_note": "2026-10-17（W772）计划入库纯文档批（用户令认领 W772 计划入库纯文档批并完成全级联）：T-02 工程基础设施薄弱点修复计划加既有 T-01 计划与报告三件登记入十一方案报告索引（新建二计划方案三篇章节加原二历史归档指针顺延为三）；现役报告十九篇不变加目录分区等于十九加一加三等于二十三；STRUCTURE 标记二十二到二十三加计划方案二篇到三篇加 stats 三连带刷新；docs INDEX 重建清两条存量漂移加 check 零差异；验证等于 stats 零差异加 docs_index check 通过加 dry-run 十面预检加 pytest 五百九十七 passed 加 verify 全量 49 段零 FAIL；修复批未动工加 WS1 到 WS4 待用户批准 W 号后另批执行",
+  "file_index_rows": [
+    "| docs/11-方案报告/计划方案/执行前计划-T02-工程基础设施薄弱点修复.md | W772 | T-02 计划登记入库（四项基础设施缺陷·AC-01~09·修复未动工） |",
+    "| docs/11-方案报告/README.md | W772 | 新建「二、计划方案（3 篇）」章节+原二顺延为三 |",
+    "| STRUCTURE.md | W772 | report_docs 标记 22→23+现役文字 计划方案 2 篇→3 篇 |",
+    "| scripts/output/stats.json | W772 | report_docs 22→23（计划方案 3 篇登记） |",
+    "| docs/00-导读/W批次编号对账表.md | W772 | W772 认领行登记 |",
+    "| scripts/output/_w772_spec.json | W772 | 本批 spec 入库 |"
+  ]
+}

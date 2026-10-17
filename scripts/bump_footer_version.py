@@ -17,13 +17,10 @@ import os
 import re
 import sys
 
-_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+# W761 P-02 修复：root 由 scripts/ 改为仓库根（原 root 与下方 site/ 写面相悖——守卫生效即必炸·仅被幂等跳过掩盖）
+from utils.path_guard import PROJECT_ROOT, make_guard
 
-def _w536_guard_open(path, *a, **k):
-    _real = os.path.realpath(path)
-    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
-        raise SystemExit("W536 guard: path escapes project root: %s" % path)
-    return open(_real, *a, **k)
+_w536_guard_open = make_guard(PROJECT_ROOT)
 
 SITE = "site"
 DEFAULT_FROM = "v2.3.8 W357"

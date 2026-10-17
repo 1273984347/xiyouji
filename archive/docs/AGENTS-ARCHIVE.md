@@ -188,3 +188,108 @@
 ```text
 2026-10-15（W751）根级工具链防护批（用户三项薄弱点裁决之一加第 42 门禁挂载）：check_script_coverage 第 42 槽（四面引用加基线冻结加 self-test 六例）加 new_page 十六例加 embed_json 十六例加 slice_screenshots 十二例加根级 import 冒烟九十一例加 gate_count 四十一到四十二；验证=新增五文件一百四十五例加 ruff 零加第 42 门禁零 FAIL 加 agents 分层三方对账四十二加 doc-sync 零 FAIL；负面结论=十七脚本忽略 --help 直接跑主逻辑故判据收窄为 import 面
 ```
+以下为 AGENTS.md 版本脚注早期条目（W754-W754）段的原文（单行沿革链·W760 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W754）方法论目录口径整改批（用户令审计 docs/10-方法论沉淀 后裁 B 范围）：必修 4 类「narratology-13d 到 16d 页面更名 10 处（W700 断链清债漏 docs/10 加第 38 门禁不扫 md 加反引号路径非链接三重盲区）加 agent-web 迁移评估结论反转（W543-W548 落地·W568 关闭·ignore 已删加现役栈实测）加记忆研究七处行号锚点换代（语料分回化·改回目加引文·第 20 门禁口径）加上游 skill 协议层失联改指仓内（三 junction 断加仓内 skills W562 退役）」加建议改 8 类「README 索引重写（报告篇数引用式加复利总览标 W086 快照加协议层节改订加维护规则补分流与载体铁律）加 E1 计数自洽（23/23 与 21/21 两值不一改以明细表为准）加双索引 W700+ 边界与 W711 段形态加仓外 memory 链接改内链加前端 SOP 门禁表补槽号 8/9/10/11 加三下划线脚本降级手动取证加补第 43 槽加白屏清单逐条标落点加标唯一未落地项 inline_css 括号校验加创意 backlog 回填 19/43 槽加 markdown emoji 例外加可视化测试计划 P2 与 KPI 口径提示」加范围纪律「纯 md 18 件零代码面加历史值保留就地并入」加新增候选 4 篇登记未开工；验证=lint 182 链接零 broken 加 doc-sync 零 FAIL 加索引健康覆盖 19/19 加 verify 全量加行尾零混尾
+```
+以下为 AGENTS.md 版本脚注早期条目（W755-W755）段的原文（单行沿革链·W761 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W755）方法论深度篇扩建与治理口径统一批（用户拍板四项）：docs/10-方法论沉淀新增 4 篇深度篇「批次交付流水线（七步链加编号锚点三形态加行尾编码纪律加失败模式速查）·治理文档分层与按需查表（L0-L3 四层体量纪律加阅读契约三型加第 41 门禁四查加数字指针纪律加 W754 反面案例）·可视化数据正确性断言方法论（三层盲区加真实渲染加双签名稳定等待加先普查后定阈加基线冻结 fail-closed 加五判据 V1-V5）·多 Agent 干扰治理与 touches 纪律（N×p×T 加机制三件套加登记口径加拦不住的两件事加四批复现案例）」加文档规范 §11 补 11-报告复盘 行与目录分流四规则（按面向时态判定）加 pitfalls 计数三处不一统一为 38（git 节 8 到 12 加 AGENTS 33 到 38 加六主题计数 9/3/7 改 9/5/12）加 HANDOVER 三 入口契约指针化（经验按分工登记现役载体加历史条目存档声明）加 AGENTS §7 接手路径同步加 docs/10 README 索引 20 到 24 行加 docs/INDEX 重建 689 篇加 stats methodology_docs 20 到 24；验证=lint 229 链接零 broken 加索引健康覆盖 23/23 加 doc-sync 零 FAIL 加 agents 分层零 FAIL 加 verify 全量 48 段
+```
+以下为 AGENTS.md 版本脚注早期条目（W756-W756）段的原文（单行沿革链·W762 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W756）人名用字语料纯度批（用户令「现在做」加 W699 A-04 盘点选项 3+2）：选项 3 清语料「魏徵」改「魏征」共 10 字 5 容器（权威源 source/原文/分回 第068回 2 加 第091回 1 加 shendu SD039 1 加镜像 dataset/text-search.json 3 加 site/static/js/text-search-app.js 3）用一次性断言脚本先断言后替换加残留自检 0；选项 2 口径登记 docs/00-导读/统计口径说明.md 新增 §7（语料与引文强制简体加展示面两态并存不作强制加禁以统一用字批量改展示面加三容器同改纪律）；盘点报告补执行记录加 docs/10 README 索引第 20 行同步；边界=展示面含 docs/01 原文照录区与 dataset 可视化数据与 site 页面一律未动；验证=语料保真 100 回全等加 423 引文加 104 对白命中百分百加 node check 通过加 JSON 合法加 CSP 零漂移加 verify 全量 48 段
+```
+以下为 AGENTS.md 版本脚注早期条目（W758-W758）段的原文（单行沿革链·W763 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W758）CI 首跑暴露缺陷修复批（用户令「写 PR 进行合并」加 PR45 首次真实 CI 运行暴露三缺陷）：F1 pytest 平台假设用例修复加 test_check_same_volume 盘符断言加 os.name nt 守卫（POSIX splitdrive 恒空串恒同卷）；F2 markdown 依赖漏登记补 scripts/requirements.txt 钉版 markdown==3.10.2（build_reader 顶层 import 加第 42 门禁可导入性 CI 必红根因）；F3 两门禁脚本 CodeQL 加固加 check_chart_values.js 剥离正则加 gi 加 check_seo_head.py R5 占位域名改左边界负向断言正则（notexample.com 不再误报加 www.example.com 仍命中）；F4 归档件 2 条告警走 CodeQL won't fix 豁免（冻结件不改写纪律）；验证=pytest 591 passed 加 ruff 零违例加 seo_head 855 页通过加 chart gate 87 页 0 FAIL 判据分布与改前一致加 verify 全量 48 段
+```
+以下为 AGENTS.md 版本脚注早期条目（W759-W759）段的原文（单行沿革链·W764 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W759）batch_cascade 脚注滚动根修批（用户令「开工」加 W758 手工迁档逃生门转正）：R1 滚动切分断言放松改严格递增（==hi+1 假设连续而编号空洞 W750 作废与 W752/753 单写系永久历史每次真滚动必炸加 sorted 断言仍守乱序加负样本边界重复号夹具实测仍红）；R2 指针注记刷新锚点失配根治（字面锚 W719 续迁已漂移为 W713 形态回插静默失新）改 token 就地正则替换保持 W725 单段化语义；R3 真数据首跑=本批级联即触发真实滚动迁 W751 入 ARCHIVE 加区间注记就地翻新；验证=py_compile 加 ruff 零加负样本真防线加 dry-run 十面过加 apply 写后自检过加 verify 全量 48 段
+```
+以下为 AGENTS.md 版本脚注早期条目（W760-W760）段的原文（单行沿革链·W765 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W760）全量对抗性审查报告批（并行会话在途·应用户令由本会话收尾）：审查范围 3327 入库件六面五可标准；十一项发现四项高危等于引文门禁整改不完整（原文照录区十七处字级篡改加 C 类五十九条静默删改）加第九门禁数据漂移口径全失明加 validate_en 未接线加 agent-web git grep O 白名单绕过 RCE；中等一项为 check_citations 演绎豁免口径缺陷（文首标记不认致百候选百分百假阳性·需用户批准）；交叉复核更正太白金星归属正确（第 003 回对白臣启陛下可念生化之慈恩原文精确存在·静默删改成立归属错误不成立）；本会话收尾等于报告 118 行引文按门禁口径修正加三连带同步（README 十七到十八·STRUCTURE 二十到二十一·stats 刷 W760）加干扰日志登记；验证等于引文 423 加 105 命中率百分百加 stats 零差异加 pytest 五百九十七 passed 加 verify 全量 48 段零 FAIL
+```
+以下为 AGENTS.md 版本脚注早期条目（W761-W761）段的原文（单行沿革链·W766 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W761）工具链可维护性重构批（用户 scene#15 重构令加追加令都做）：WS1 路径守卫十四处重复定义收敛为 utils/path_guard（make_guard 工厂加 PROJECT_ROOT/SCRIPTS_ROOT 双根·十三文件迁移·三死定义删除·slice 测试钉死名别名保留·新测 6 例）；WS2 check_content_consistency 的 l2/l2_runtime 二十六行重复提取公共比较器加 check_page 六十行 cx41 拆为编排器加五规则函数（三模式输出逐字节一致）；WS3 tmpe_tidy 的 scan 分类链外提加 main 六十八行三分派加三处去重加 human_size；WS4 a11y_audit 四十项规则族命名统一为 rule_N_topic（十九个 check_ 改名加测试三十八处同步加规则 27-40 逐规则注释·五十三单测过）；P-02 潜伏缺陷修复（inject 三件加 bump_footer_version 守卫根改仓库根·原 root 与 site/ 写面相悖守卫生效即必炸·功能验证四过）；stats 归口 W760 收尾批（report_docs 二十到二十一）；验证等于 pytest 五百九十七 passed 加三 skipped 加 ruff scripts/ 零加 ccc 三模式与 tt 四模式对拍逐字节加 AST 峰值 cx 四十一降十九加 stats 零差异加 a11y 门禁 E2-2 零加 verify 全量 48 段零 FAIL；W760 收尾批（应用户令代修其报告引文加三连带·e4ff4faf 加 e121f53a）先于本批落地
+```
+以下为 AGENTS.md 版本脚注早期条目（W762-W762）段的原文（单行沿革链·W767 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W762）W761 重构报告晋升批（用户令现在做·遗留事项二）：报告自 tmpe 工地转正入十一方案报告目录（头部改注晋升说明·V3.0 收官版十节全量·四工作流重构加 P-02 修复加代收 W760 全过程）；README 现役十八到十九篇加新报告置顶加全表重编号连续性断言；STRUCTURE 标记二十一到二十二加现役文字十八到十九；stats 刷 W762 三连带加 check 零差异十六键；验证等于编号连续性断言加 stats 零差异加 dry-run 十面加 pytest 五百九十七 passed 加 verify 全量 48 段零 FAIL
+```
+以下为 AGENTS.md 版本脚注早期条目（W763-W763）段的原文（单行沿革链·W768 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W763）照录区字级篡改全量修复批（用户令现在做·W760 审查 F-1a 修复）：照录区（第二十门禁永久豁免区）以权威语料为基准空白归一 difflib 对拍·opcode 级映射回原文修复九十七处（九文件）等于人名专名（子叉到木吒十二·崔珪到崔珏六·木呼木吐到木吒四·初江王到楚江王·迎叶到迦叶·比丘增到比丘僧）加实词用字（般苦到般若·皤桃到蟠桃三·五帝到玉帝四·锡枚到锡杖二·已时到巳时二·头防到头陀·暨岭到鹫岭·奈河到奈何·登极到登基）加删字补回（我怕你漏怕·法相如是漏是·即唤阿傩漏阿·取经人漏人）加标点编码残损（乖猴句读·货币符到栴·诗曰冒号）加语料徵征批联动三处；登记不修等于占位符约定五处加语料 OCR 疑错二处（在因在凡间加生长生变化·修语料属仲裁批）；验证等于比对器残留零加行尾纯净九文件全 CRLF 加 pytest 五百九十七 passed 加 verify 全量 48 段零 FAIL
+```
+以下为 AGENTS.md 版本脚注早期条目（W764-W764）段的原文（单行沿革链·W769 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W764）命令白名单 pager 逃逸修复批（用户令现在做·W760 审查 F-11 HIGH P0）：W760 S-01 实证 git grep -O 把 pager 交 sh -c 执行参数未转义且 shell:false 下落盘成功；修复等于 tools.ts 参数层拦截扩展（-O 含粘连与=形态加 open-files-in-pager 加 ext-diff 加 pager= 统一按 token 判定·原 no-index 与 output= 裸串匹配升级 token 级）加全命令 shell 元字符二次校验（分号与与号与大于小于与反引号与换行拒·竖线与美元符放行保 git grep 正则）；单测加六例（五拒一放行）；验证等于 tools 单测三十八过加全套四十九过加 tsc 零错加引擎冒烟十二组全绿加 pytest 五百九十七 passed 加 verify 全量 48 段零 FAIL；待用户执行凭证轮换（LLM_API_KEY 与 GOATCOUNTER_API_TOKEN）
+```
+以下为 AGENTS.md 版本脚注早期条目（W765-W765）段的原文（单行沿革链·W770 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W765）a11y 辅助族注释统一与解析规则拆分批（用户令现在做·遗留事项四）：增强审计辅助族（键盘导航审计与 ARIA 完整性验证）docstring 与节头集中声明 parser 优先签名加不注册于 ALL_CHECKS 加被规则一三内部调用；rule_29_parsing 七十四行拆为编排器加重复 ID 臂加未闭合元素臂（返回计数供复用）加悬垂结束标签臂·void 与 optional-close 标签集提模块常量·消息与顺序逐字保留；验证等于新旧行为对拍逐字节一致（五夹具加整页 findings JSON 全等）加 a11y 专项五十三过加 AST 退出四十行榜加 pytest 五百九十七 passed 加 ruff 零加 verify 全量 48 段零 FAIL
+```
+以下为 AGENTS.md 版本脚注早期条目（W766-W766）段的原文（单行沿革链·W771 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W766）C 类引文静默删改修复批（用户令继续·W760 审查 F-1b HIGH）：证据 c-violations 五十九条（C 类长引文静默删改）全量处置等于五十一条修复加八条语料疑点登记（四十二条文档含未 flag 同引文扩散八件）；修复五类等于单字专名（鋋罗到棕罗·翙到躧·兼到咸三·贫僧已发到我已发了六）加标点句读（顿号到逗号·分号到逗号）加直角引号还原（六条到语料双引号）加补全截断（不可久住天人之内加消灾也加下宾加如何不好）加恢复删节（保他家生者安全亡者超脱二·八戒编谎长句两处省略号）加句式按语料（心经三文件·袁守诚卦语·镇海神针）；登记八条等于惜修生命对性命四（语料疑点保 doc 正确形态）加变罢了对便罢了四；过程自查等于我现误修我观逐字核后回退；验证等于省略号感知核验五十九之五十一加八加引文门禁四百二十三加一百一十二百分百（新增七归属对白全过）加 pytest 五百九十七 passed 加 verify 全量 48 段零 FAIL
+```
+以下为 AGENTS.md 版本脚注早期条目（W767-W767）段的原文（单行沿革链·W772 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W767）数据漂移门禁深比对批（用户令继续·W760 F-2 HIGH 修复加 F-7 P1）：第九门禁补共路深比对（递归共键·数组按位·标量严格比·仅一侧有之键不计）加声明式基线 data-drift-baseline 归一匹配加 no-new-drift；新口径当场暴露存量漂移等于 chapter_stats 陈旧本地产物重跑十一回对齐加 cave-estate 中将级旧值标记清理加 radar 悟空色二加 theo accent 五加 kpi 名；F-7 双 KPI 按数据自证（links 度数悟空十二胜唐僧七·isHardship 实数八）双边同步；八十一难页嵌三处 mind 修 label 形·生成器 code 与页面 label 约定分裂基线登记独立批；visual-art 设计双形态基线；验证等于门禁绿豁免二百四十四加负样本注入转红恢复转绿加 CSP 重注零漂移加 pytest 五百九十七 passed 加 verify 全量 48 段零 FAIL
+```
+以下为 AGENTS.md 版本脚注早期条目（W768-W768）段的原文（单行沿革链·W773 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W768）英文站校验接线批（用户令继续·W760 F-3 HIGH 收口）：validate_en 加 --all 批量（汇总行 EN validate·任一页违规退一）加语料索引豁免区（SEARCH_INDEX BEGIN END 包裹视为引用语料）加单页输出逐字节兼容；六页整改等于 chart-design 字典百二十六对转形加 methodology 三十二对加四角键值化加 appearance 三十五对加 chapter-stats 第 N 回到 Chapter N 百零二加 relationships 调试串加 search 豁免零改动；接线等于 verify 第四十四槽五面注册加段数四十九自洽加 CI 经 verify-delivery 生效加 Makefile 目标挂 ci 加第四十二槽豁免行移除；三方编号等于 AGENTS 四十四加 gates.md 四十四加 stats gate_count 四十三到四十四加 README 标记同步；验证等于全站百三十八页通过加 verify 四十九段零 FAIL 加 CSP 重注零漂移加 pytest 五百九十七 passed
+```
+以下为 AGENTS.md 版本脚注早期条目（W769-W769）段的原文（单行沿革链·W774 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W769）动效时长归一与口径说明修正批（用户令继续·W760 P1/P2 残余）：动效面等于全站扫描三十七处二十页归一为六百（最大三千·九百万白名单经核不适用）加第十三门禁补 duration 超六百判据扫 site 全域加负样本实证；口径面等于统计口径说明标题与算法改八十七（八十八文件减模板壳）加现役文案八处同步（首页四处看板一处 DESIGN 一节 HANDOVER 节头 启动 Prompt）加历史记录保留加 S4 冻结稿不改加 C5 扫描域补该文件加装载与夹具加自测十八过；验证等于全站零超限加负样本闭环加 CSP 重注零漂移加 pytest 五百九十七 passed 加 verify 四十九段零 FAIL
+```
+以下为 AGENTS.md 版本脚注早期条目（W770-W770）段的原文（单行沿革链·W775 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W770）引文豁免口径修正与数据链路对齐批（用户令剩余全部做完·F-2 脚本经用户批准）：F-2 等于文首文件级演绎标记识别两判定面（iter_checked_lines 的 file_fiction 整文件豁免态加 scan_reverse 的 section_fiction 至同级或更高级标题语义·原 marked 到下一标题即清与外传 h1 后文首标记冲突）加自测加二例十二过加外传假阳性归零；hardships 对齐等于生成器输出 hardships 清单 label 化（经既有 label_maps）加重生成加 sync 同步副本；数据链路等于排查实证副本含修复而原件未回灌二十件（demo 求助观音 中将级 geo3d 到达回 W691 注记等）回灌副本为准加 project_review 副本侧重复后缀损坏修复二处加字节自检工具自 archive 恢复（四十七副本字节全等）；门禁解析 v3.1 等于 json 形态优先 tracked 副本加裸文件名形态（relationships loadJson 族）覆盖四十五到五十七页七十三到一百四十七对比项全绿豁免一；F-8 复核等于不可复现（六次全量加两形态定向全绿）加审查员两处防护论断与实况不符（逐探针 close 与超时均在位）登记观察项；验证等于引文门禁四百二十三加一百一十二百分百加自测十二过加数据漂移门禁绿豁免一加四十七副本字节全等加 pytest 五百九十七 passed 加 verify 四十九段零 FAIL
+```
+以下为 AGENTS.md 版本脚注早期条目（W771-W771）段的原文（单行沿革链·W776 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W771）编号空洞登记与门禁注释刷新批（用户令 F-9 现在做·W760 报告最后跟踪项收口）：T1 十缺号三源定性（CHANGELOG 加两归档比对账表表格行加 git 全历史）分三类处置等于 A 类有提交未立段两个（W341 死链巡检加 W392 导读层）加 B 类计划档明示重排六个（W466 归档 SOP 加 W470 dataset 加 W472 三百七十五像素加 W473 被 W493 替代加 W474 性能预算）加 C 类预排由实际批次落地三个（W480 到 482 系 phase-e E4/E5/E6·计划档执行表自证由 W491/W492/W493 落地且已立段）；T2 check_seo_head 注释二百三十三/二百三十/二百二十九页刷新为现役实测（SEO 注入面八百五十五加 sitemap 八百五十一·注释 only 判定零改）；T3 对账表追加认领行加递延豁免补十号去向 bullet 不动历史行；验证=py_compile 加 ruff 零加 check_seo_head 八百五十五页集合一致加 pytest 五百九十七加 verify 全量四十九段零 FAIL
+```
+以下为 AGENTS.md 版本脚注早期条目（W772-W772）段的原文（单行沿革链·W777 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-17（W772）计划入库纯文档批（用户令认领 W772 计划入库纯文档批并完成全级联）：T-02 工程基础设施薄弱点修复计划加既有 T-01 计划与报告三件登记入十一方案报告索引（新建二计划方案三篇章节加原二历史归档指针顺延为三）；现役报告十九篇不变加目录分区等于十九加一加三等于二十三；STRUCTURE 标记二十二到二十三加计划方案二篇到三篇加 stats 三连带刷新；docs INDEX 重建清两条存量漂移加 check 零差异；验证等于 stats 零差异加 docs_index check 通过加 dry-run 十面预检加 pytest 五百九十七 passed 加 verify 全量 49 段零 FAIL；修复批未动工加 WS1 到 WS4 待用户批准 W 号后另批执行
+```
+以下为 AGENTS.md 版本脚注早期条目（W773-W773）段的原文（单行沿革链·W778 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-17（W773）工程基础设施薄弱点修复批（用户批准执行 T-02 计划）：WS1 ci.yml 新增 e2e-interaction job 加 test_ci_wiring 扩 W6 断言（E2E 套件零接线缺陷修复·负样本实证）；接线首跑抓 W674 遗留 K11 回归（reduce 规则误置媒体查询外·演出动画对全部用户静默失效·中英双页同修）；WS2 视觉基线十 PNG 版本化加判据升级为像素 diff（pngjs 加 pixelmatch·重灌基线二次跑十页全过）；WS3 英文站一百三十八页 chart-a11y 注入加模块 i18n 加八页 lang 修正加 validate_en 补文档 lang 检查（图表页覆盖八十三比八十三）；WS4 第十七门禁新增 docs INDEX 产物级校验（负样本删条目实证）；范围纪律等于不动 verify_delivery 加视觉套件不入 CI 加两套件按依赖排除；验证等于 pytest 五百九十九 passed 加 verify 全量四十九段零 FAIL 加 CSP 与英文站与 ruff 全绿；ST-04 推送受 github 代理阻断待网络恢复（AC-02 未闭环如实登记）
+```
+以下为 AGENTS.md 版本脚注早期条目（W774-W774）段的原文（单行沿革链·W780 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-17（W774）CI 首跑分歧修复批（W773 收官后闭环 AC-02）：推送 dev 十提交含 W771 与 W772 积压并开 PR 四十七；首跑 e2e-interaction job 实跑 success 达 AC-02 但 verify-delivery 红（自建第十七门禁 INDEX 校验 Linux 红 Windows 绿）；根因等于 docs_index 裸 sorted Path 在 Windows 用 normcase 与 Linux 大小写敏感两平台序不同（design.md 等混排条目位移）；修复等于 scan_docs 两处排序显式小写键（INDEX 重建零 churn）加 test_docs_index 三例（合成目录不变量加真实树不变量加磁盘生成器一致·Windows 两法等价故真实执行位是 CI）；复跑全绿加 E2E 与 Delivery Gate 双绿；T-02 九项 AC 全部闭环；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 PR 复跑 success；PR 待用户合并
+```
+以下为 AGENTS.md 版本脚注早期条目（W775-W775）段的原文（单行沿革链·W781 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-17（W775）JS 门禁重构落地批：新增 scripts/lib 两公共模块（gate_common 门禁工具与 playwright_gate_utils 浏览器辅助）并重写三个门禁脚本（chart_values 的 probeInPage 拆六函数与 judgeProbe 拆五判据加 validateGateBaseline 合并重复校验、screenshot_gates 的 checkPage 拆 G1 至 G5 加删死常量、data_drift 的 jsLiteralToJson 拆两纯函数加 main 三分派）；外部契约五维受控对拍零漂移（self-test 同判定、judge 与 gate 三页逐字节一致、截图三十二页一致、基线格式一致）；对拍意外修复第 9 门禁自安全加固起潜伏五个批次的引号腐蚀死代码（两页静默跳过、修复后可比五十七至五十九页全绿）；gitignore 的 lib 规则误伤新目录以定向 negation 修复；ci_wiring 测试断言升级为传递链两环守护；五条待裁决发现裁定三条改两条不改；外部评审七项指控逐条核查成报告（四不成立、两部分成立、一成立）；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 ruff 零
+```
