@@ -278,3 +278,8 @@
 ```text
 2026-10-17（W772）计划入库纯文档批（用户令认领 W772 计划入库纯文档批并完成全级联）：T-02 工程基础设施薄弱点修复计划加既有 T-01 计划与报告三件登记入十一方案报告索引（新建二计划方案三篇章节加原二历史归档指针顺延为三）；现役报告十九篇不变加目录分区等于十九加一加三等于二十三；STRUCTURE 标记二十二到二十三加计划方案二篇到三篇加 stats 三连带刷新；docs INDEX 重建清两条存量漂移加 check 零差异；验证等于 stats 零差异加 docs_index check 通过加 dry-run 十面预检加 pytest 五百九十七 passed 加 verify 全量 49 段零 FAIL；修复批未动工加 WS1 到 WS4 待用户批准 W 号后另批执行
 ```
+以下为 AGENTS.md 版本脚注早期条目（W773-W773）段的原文（单行沿革链·W778 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-17（W773）工程基础设施薄弱点修复批（用户批准执行 T-02 计划）：WS1 ci.yml 新增 e2e-interaction job 加 test_ci_wiring 扩 W6 断言（E2E 套件零接线缺陷修复·负样本实证）；接线首跑抓 W674 遗留 K11 回归（reduce 规则误置媒体查询外·演出动画对全部用户静默失效·中英双页同修）；WS2 视觉基线十 PNG 版本化加判据升级为像素 diff（pngjs 加 pixelmatch·重灌基线二次跑十页全过）；WS3 英文站一百三十八页 chart-a11y 注入加模块 i18n 加八页 lang 修正加 validate_en 补文档 lang 检查（图表页覆盖八十三比八十三）；WS4 第十七门禁新增 docs INDEX 产物级校验（负样本删条目实证）；范围纪律等于不动 verify_delivery 加视觉套件不入 CI 加两套件按依赖排除；验证等于 pytest 五百九十九 passed 加 verify 全量四十九段零 FAIL 加 CSP 与英文站与 ruff 全绿；ST-04 推送受 github 代理阻断待网络恢复（AC-02 未闭环如实登记）
+```

@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W777），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W778），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,17 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W778（2026-10-17）：第 41 篇改进项落地批
+> **来源**：用户令「开始优化」——第 41 篇复盘报告 §8 计划中 WorkBuddy 归属项（T-41-01/02/04、P-41-01、T-41-03）——三项落地、一项撤销（T-41-03 见下）。动工前 preflight PASS（W778 认领·零交集）。
+> - **P-41-01 + P-41-04 合成 pitfalls 新条目（流程节 6→7·总 40→41）**：`docs/agent/pitfalls.md` 新增「**latent 三问 + 双平台断言禁例**」——① 接线缺失型（K11 动画规则自 W674 潜伏 6 周·E2E 零接线·查法=列套件在 `run:` 块出现次数）；② 平台序差型（INDEX 门禁 CI 红/本地绿·`sorted(Path)` 两平台语义差·查法=显式键+双平台可判负样本）；③ 引号腐蚀型（`c === '"'` 被吞成空串比较·分支死代码五批·查法=逐字节验字符+五维对拍）。**双平台禁例**：盘符存在性/大小写不敏感排序/`os.name` 默认值断言在 Windows 负样本不可辨——必须登记「真实执行位=CI（Linux）」并 docstring 注明（处置例 test_tmpe_tidy::test_check_same_volume）。**AGENTS §4.3 三处计数同步**（阅读契约 38→41 条 / 流程节 6→7 / 总 38→40→41 修述）。
+> - **T-41-02 流水线文档增补两节**：`docs/10-方法论沉淀/批次交付流水线.md` 新增 **§七 外部产出落地七步**（提取 round-trip→静态契约核验→旧版快照→字节级落地→对拍→全量验证→差异定性表·红线=禁止直接 cp 覆盖）与 **§八 重构/替换的对拍 SOP**（五维矩阵表：self-test/纯函数面/子集/全量/产物格式·各带归一化与降级路径 + 差异判定三规则：抖动归一/契约零容忍/覆盖集合变化须追根因且不得回滚修复）；原 §七 关联文档顺延 §九（全仓无 §七 引用·零断链）。
+> - **T-41-01 对拍模板落地**：`tmpe/_templates/duipai/`（duipai.py：`snapshot` 采集 stdout/stderr/exit/meta + 计时归一化；`compare` 逐行或多重集 diff + 退出码判定；README 快速用法与判定规则）——**自测通过**：计时差异（1.5s/42ms vs 9.9s/99ms）归一后 PASS·新增内容行 FAIL+exit 1。
+> - **T-41-03 复盘提醒 automation：提案撤销**——用户既有规则（2026-10-13 U-01：全部自动化取消·巡检/提醒回归手动或按需）优先；本批一度误建「复盘 48h 节奏提醒」被用户当场纠正，已立即删除，复盘节奏改为**会话内主动提议**（每次会话开工读最新篇日期，>48h 主动提示补写）。Q-11 改进路径以手动/按需方式保留。
+> - **报告第 41 篇补跨周期执行记录**：头部加 HTML 注释记录本批三项 P1/P2 落地与 automation 提案撤销（周期口径 W748-W776 不变·第 39 篇同款做法）。
+> - **验证（全绿）**：pytest 602 passed / 3 skipped / 0 failed；verify_delivery 全量 49 段 0 FAIL；ruff 0；pitfalls 顶层条目实测 41 == 各节声明合计 41；duipai.py 自测 PASS/FAIL 双态实证。
+> - **状态**：已落地（本地全绿）；级联+提交+推送按批次流程执行（main 合并留待用户决策）。
+> - **文件**：docs/agent/pitfalls.md、AGENTS.md、docs/10-方法论沉淀/批次交付流水线.md、docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-17.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w778_spec.json、scripts/output/_cascade_files_W778.txt。
 
 ### W777（2026-10-17）：第 41 篇复盘报告入库批
 > **来源**：用户令「现在写」——第 40 篇（2026-10-15）后断档 2 天、积压 W748–W776 二十八段/60 提交，本篇为补课。动工前 preflight PASS（W777 认领·零交集）。
