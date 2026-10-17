@@ -288,3 +288,8 @@
 ```text
 2026-10-17（W774）CI 首跑分歧修复批（W773 收官后闭环 AC-02）：推送 dev 十提交含 W771 与 W772 积压并开 PR 四十七；首跑 e2e-interaction job 实跑 success 达 AC-02 但 verify-delivery 红（自建第十七门禁 INDEX 校验 Linux 红 Windows 绿）；根因等于 docs_index 裸 sorted Path 在 Windows 用 normcase 与 Linux 大小写敏感两平台序不同（design.md 等混排条目位移）；修复等于 scan_docs 两处排序显式小写键（INDEX 重建零 churn）加 test_docs_index 三例（合成目录不变量加真实树不变量加磁盘生成器一致·Windows 两法等价故真实执行位是 CI）；复跑全绿加 E2E 与 Delivery Gate 双绿；T-02 九项 AC 全部闭环；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 PR 复跑 success；PR 待用户合并
 ```
+以下为 AGENTS.md 版本脚注早期条目（W775-W775）段的原文（单行沿革链·W781 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-17（W775）JS 门禁重构落地批：新增 scripts/lib 两公共模块（gate_common 门禁工具与 playwright_gate_utils 浏览器辅助）并重写三个门禁脚本（chart_values 的 probeInPage 拆六函数与 judgeProbe 拆五判据加 validateGateBaseline 合并重复校验、screenshot_gates 的 checkPage 拆 G1 至 G5 加删死常量、data_drift 的 jsLiteralToJson 拆两纯函数加 main 三分派）；外部契约五维受控对拍零漂移（self-test 同判定、judge 与 gate 三页逐字节一致、截图三十二页一致、基线格式一致）；对拍意外修复第 9 门禁自安全加固起潜伏五个批次的引号腐蚀死代码（两页静默跳过、修复后可比五十七至五十九页全绿）；gitignore 的 lib 规则误伤新目录以定向 negation 修复；ci_wiring 测试断言升级为传递链两环守护；五条待裁决发现裁定三条改两条不改；外部评审七项指控逐条核查成报告（四不成立、两部分成立、一成立）；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 ruff 零
+```

@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W780），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W781），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,16 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W781（2026-10-18）：门禁防线收口批
+> **来源**：用户令「1 to 2 to 3」三收口（复盘遗留改进菜单第一档两项+第二档一项·仿 W773 WS 多项一批先例）。动工前 preflight PASS（W781 认领·零交集）。
+> - **R-1 挂槽注册表派生（verify_delivery）**：_GATE_SUMMARY_MARKERS 手工字典（20 条）删除，改由 _STRICT_GATES 元组派生（开发期对拍逐项相等零漂移）——挂槽手工面自五处收敛为两处（门禁元组+EXPECTED_SECTION_NAMES 顺序表）；新增 _assert_registry_consistent() 启动期四查（段名重复/元组段名缺顺序表/相对序漂移/scope 未覆盖段须显式登记 _FULL_ONLY_SECTIONS）、main() 入口调用，漏改启动期即红不再等 CI；段自洽锁补反向查（实跑多出声明外段即红·旧单向查放行实证=W780 第 45 槽漏 EXPECTED 顺序表而锁恒绿）+「实跑数」改打印真实 sections_ran 数；EXPECTED 顺序表补「目录文档」段名（50 段校数·W780 遗留盲区根治）；tests/unit/test_verify_registry.py 8 例（常态全绿+四查各负样本+锁双向）。
+> - **R-2 spec desc 防线前移**：release_prep.check_fields 增 desc/head_sentence 禁以 W### 开头判据（W779 页脚双 token 根因在 spec 以 W779 领衔·W724 防线只能下一批级联时拦截——本次前移到 spec 时点）；batch_cascade._face_footers 插入前防御性剥离前导批次号（存量坏 spec 双保险）；test_release_prep 增 2 负样本。
+> - **R-3 第 22 门禁转正**：check_governance_docs 命中即 exit 1 本就具备，2026-08-18 WARN 起步策略两月监测期满·转正时点 0 告警零成本切换——verify 治理契约段去 severity=warn（FAIL 阻断）；gates.md 第 22 条转正记录；脚本 docstring 同步。
+> - **文档面**：gates.md 第 22 条转正 + pitfalls W698 scope 条目就地增补 R-1 演进（挂槽五处收敛两处+双实证）。
+> - **验证（全绿）**：pytest 630 passed / 3 skipped / 0 failed（新增 10 例）；ruff 0；verify 三 scope——full 50 段 0 FAIL（自洽锁实跑==声明·含反向查）+docs/site 档除 C4-f 未提交残留（提交即消解）外零红；开发期派生注册表与手工字典逐项对拍相等；R-2 判据 live 负样本经单测断言。
+> - **状态**：已落地（本地全绿）；级联+提交+推送按批次流程执行（dev 合 main PR 随批开出·合并留用户决策）。
+> - **文件**：scripts/verify_delivery.py、scripts/release_prep.py、scripts/batch_cascade.py、scripts/check_governance_docs.py、docs/agent/gates.md、docs/agent/pitfalls.md、tests/unit/test_verify_registry.py、tests/unit/test_release_prep.py、tests/unit/index.md、tests/unit/README.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w781_spec.json、scripts/output/_cascade_files_W781.txt
 
 ### W780（2026-10-18）：目录文档新鲜度门禁批
 > **来源**：用户令「那你来做」——第 41 篇复盘报告「门禁自建即自曝」防线的延伸：把 W779 落地即登记的生成物漂移面（index.md 为生成时点快照·目录增删后清单过期且无机器防线）收进门禁。动工前 preflight PASS（W780 认领·零交集）；开工前接管另一会话的 W779 收尾（chore 571bb9f1 对账表 hash 回填 + W780 现势预留）。

@@ -143,6 +143,11 @@ def check_fields(spec):
         issues.append("spec.title 未以 batch 号领衔（现役段解析取标题首个 W###）")
     if not re.fullmatch(r"W\d{3}", str(spec.get("batch", ""))):
         issues.append(f"spec.batch 形态非法：{spec.get('batch')!r}（应 W+三位数字）")
+    for field in ("desc", "head_sentence"):
+        if re.match(r"^W\d{3}", str(spec.get(field, ""))):
+            issues.append(
+                f"spec.{field} 以批次号开头（页脚 token 形态为「batch + desc」·W779 实证叠成"
+                f"「W779 W779…」双 token 且 W724 防线只能下一批拦截——防线前移到 spec 时点·W781 R-2）")
     body = str(spec.get("changelog_body", ""))
     if "**文件**：" not in body:
         issues.append("spec.changelog_body 缺「**文件**：」行（C4-f 据其对账手工件入库）")
