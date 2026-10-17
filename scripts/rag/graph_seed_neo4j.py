@@ -36,42 +36,61 @@ CYPHER = os.path.join(ROOT, "scripts", "output", "neo4j_seed.cypher")
 
 
 def read_csv(path):
+    """读取 CSV（utf-8-sig 兼容 BOM），返回 DictReader 的 list。"""
     with open(path, encoding="utf-8-sig") as f:
         return list(csv.DictReader(f))
 
 
-def build():
-    nodes = read_csv(NODES_CSV)
-    edges = read_csv(EDGES_CSV)
-    # 快照
-    snap = {
+# ============================================================
+# 产物构建
+# ============================================================
+
+def _build_snapshot(nodes, edges):
+    """构建内存图快照（含节点类型与关系类型去重排序）。"""
+    return {
         "nodes": nodes,
         "edges": edges,
         "node_types": sorted({n["node_type"] for n in nodes}),
         "relations": sorted({e["relation"] for e in edges}),
     }
-    with _w536_guard_open(GRAPH_JSON, "w", encoding="utf-8") as f:
-        json.dump(snap, f, ensure_ascii=False, indent=2)
 
-    # Cypher
-    lines = []
-    lines.append("// 西游·佛法=AI 语义图 → Neo4j 种子脚本（W326 产出）")
-    lines.append("// 在 Neo4j Browser / cypher-shell 中执行前，请先把 yuanqi_nodes.csv / yuanqi_edges.csv")
-    lines.append("// 放到 Neo4j import 目录，或修改下方 url 为绝对路径。\n")
-    lines.append("LOAD CSV WITH HEADERS FROM 'file:///yuanqi_nodes.csv' AS row")
-    lines.append("CREATE (n:Yuanqi {id: row.id, nodeType: row.node_type,")
-    lines.append("  buddhist: row.buddhist_entity, ai: row.ai_entity,")
-    lines.append("  xiyou: row.xiyou_entity, desc: row.description});\n")
-    lines.append("LOAD CSV WITH HEADERS FROM 'file:///yuanqi_edges.csv' AS row")
-    lines.append("MATCH (a:Yuanqi {id: row.source}), (b:Yuanqi {id: row.target})")
-    lines.append("CREATE (a)-[:REL {type: row.relation, property: row.property,")
-    lines.append("  value: row.value}]->(b);\n")
-    lines.append("// 索引（可选，加速检索）")
-    lines.append("CREATE INDEX yuanqi_id IF NOT EXISTS FOR (n:Yuanqi) ON (n.id);")
-    lines.append("CREATE INDEX yuanqi_type IF NOT EXISTS FOR (n:Yuanqi) ON (n.nodeType);")
-    cypher = "\n".join(lines)
+
+def _build_cypher():
+    """生成 LOAD CSV 灌库脚本（逐行拼接保持输出字节稳定）。"""
+    lines = [
+        "// 西游·佛法=AI 语义图 → Neo4j 种子脚本（W326 产出）",
+        "// 在 Neo4j Browser / cypher-shell 中执行前，请先把 yuanqi_nodes.csv / yuanqi_edges.csv",
+        "// 放到 Neo4j import 目录，或修改下方 url 为绝对路径。\n",
+        "LOAD CSV WITH HEADERS FROM 'file:///yuanqi_nodes.csv' AS row",
+        "CREATE (n:Yuanqi {id: row.id, nodeType: row.node_type,",
+        "  buddhist: row.buddhist_entity, ai: row.ai_entity,",
+        "  xiyou: row.xiyou_entity, desc: row.description});\n",
+        "LOAD CSV WITH HEADERS FROM 'file:///yuanqi_edges.csv' AS row",
+        "MATCH (a:Yuanqi {id: row.source}), (b:Yuanqi {id: row.target})",
+        "CREATE (a)-[:REL {type: row.relation, property: row.property,",
+        "  value: row.value}]->(b);\n",
+        "// 索引（可选，加速检索）",
+        "CREATE INDEX yuanqi_id IF NOT EXISTS FOR (n:Yuanqi) ON (n.id);",
+        "CREATE INDEX yuanqi_type IF NOT EXISTS FOR (n:Yuanqi) ON (n.nodeType);",
+    ]
+    return "\n".join(lines)
+
+
+def build():
+    """生成 rag_graph.json 与 neo4j_seed.cypher。
+
+    Returns:
+        (节点数, 边数, 快照路径, Cypher 路径)
+    """
+    nodes = read_csv(NODES_CSV)
+    edges = read_csv(EDGES_CSV)
+
+    snapshot = _build_snapshot(nodes, edges)
+    with _w536_guard_open(GRAPH_JSON, "w", encoding="utf-8") as f:
+        json.dump(snapshot, f, ensure_ascii=False, indent=2)
+
     with _w536_guard_open(CYPHER, "w", encoding="utf-8") as f:
-        f.write(cypher)
+        f.write(_build_cypher())
 
     return len(nodes), len(edges), GRAPH_JSON, CYPHER
 
