@@ -11,6 +11,17 @@
 ---
 
 
+## W782 utils 与 run_all 行为保持重构批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/utils/aliases.py | W782 | 行为保持重构：lru_cache+setdefault·更名 _alias_to_canonical·docstring 现实化 |
+| scripts/utils/text_loader.py | W782 | 行为保持重构：常量提取+三函数拆分（W563 溯源保留） |
+| scripts/utils/analyzer_base.py | W782 | 行为保持重构：路径常量提模块级+四函数拆分 |
+| scripts/utils/__init__.py | W782 | docstring 升级为模块清单（含 path_guard） |
+| scripts/run_all.py | W782 | 行为保持重构：超时常量化+五函数拆分 |
+| docs/00-导读/W批次编号对账表.md | W782 | W782 认领登记 |
+
 ## W781 门禁防线收口批（2026-10-18）
 
 | 文件 | W | 说明 |
