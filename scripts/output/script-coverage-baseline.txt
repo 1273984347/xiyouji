@@ -21,6 +21,7 @@ extract_datasets.js  # ①数据集抽取
 extract_strings.py  # ①字符串抽取
 fetch_gate_stats.py  # ②取数
 gen_og_cover.py  # ①OG 封面需人工审图
+gen_folder_docs.py  # ①目录索引生成（W779·按需重跑·幂等）
 gen_rss.py  # ③发布链·gen_rss
 inject_chart_a11y.py  # ③发布链·a11y 注入
 inject_descriptions.py  # ①批量注入·人工审形

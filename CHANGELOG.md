@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W778），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W779），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,16 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W779（2026-10-18）：全仓目录索引补齐批
+> **来源**：用户令「检查一下文件内所有文件夹，添加一下 index.md REMADE.md STRUCTURE.md」。三项裁决：① REMADE.md=README.md 误写（仓内 0 先例·用户确认）→ 补 README.md；② STRUCTURE.md 不逐目录复制（根级 STRUCTURE.md 已存·单一事实源·各新文件放指针指回）；③ 范围=245 个在管目录（排除 node_modules/__pycache__/tmpe/构建产物/缓存）。动工前 preflight PASS（W779 认领·零交集）。
+> - **定位分工（消除同文重复）**：`index.md`=逐文件清单（机器可读·查「这里有什么」）/ `README.md`=目录导读（人读·「装什么、怎么加」）。首版两者同文=174 个目录纯重复，违反文档规范 §3「单一事实源」判据——verify 全量跑完后重设计分工，再全量重生成。
+> - **产物**：`scripts/gen_folder_docs.py`（幂等·大小写不敏感判重·gitignored 过滤·治理树排除·`--dry-run`/`--force`）+ `index.md` ×167 + `README.md` ×151，覆盖 179 个在管目录；`docs/INDEX.md` 重建（697→701 篇）。
+> - **三处设计债整改（均由 verify 全量实证驱动）**：① **Windows NTFS 大小写不敏感**——直接 `open('index.md','w')` 会整文件覆写已存在的 `INDEX.md`，S4 学术投稿 12 份索引与 `docs/INDEX.md` 会瞬间清空（实测探针实证）→ 判重改为大小写不敏感；② **gitignored 路径泄漏**——首版实测 344 条被 `.gitignore` 排除的路径被列名入库（含 W650 裁决移出仓的真名 PRD、`.env`、`SECURITY-AUDIT-*.password`、`docs/S2-*`/`S3`/`S4` 双盲树）——列名本身即泄漏 → 加 `git check-ignore` 过滤（两处口径坑：目录查询必须带尾斜杠；stdout 行需剥 CR，否则集合永不命中），整改后 2908 条实测 **0 泄漏**；③ **治理目录污染**——`docs/10-方法论沉淀/` 与 `docs/11-方案报告/` 受第 17 门禁「方法论 README 双向覆盖」断言且 `report_docs`/`methodology_docs` 是 stats 键，脚本写入 3 个子目录即令 stats 25→32 触发第 31 门禁 C5d「stats 与磁盘实算漂移」FAIL → 两棵树（含子目录）整体跳过，README 仍由治理流程人工维护。
+> - **连带**：`scripts/output/script-coverage-baseline.txt` 登记 `gen_folder_docs.py`（第 42 门禁 C1：四面无引用且不在豁免清单即 FAIL）。
+> - **验证（全绿）**：`verify_delivery.py` 全量 **49 段 0 FAIL**；`lint_links.py --dir .` 全仓 **19906 链接 0 broken**；`docs_index.py --check` exit 0；pytest 逐模块 **603 passed 0 failed**（基线 602）；`ruff` 0；`generate_csp --check`/`check_js_syntax --all`/`check_structure` 三检查全绿；生成器**幂等**（重跑写入 0 文件·已存在跳过 336）。
+> - **状态**：施工完成·门禁全绿；级联四文档 + 对账表 + file-index 同批落盘，待 commit。
+> - **文件**：scripts/gen_folder_docs.py、docs/INDEX.md、scripts/output/script-coverage-baseline.txt、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、CITATION.cff、scripts/output/file-index.md、site/dukou-engine.html、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、.github/workflows/README.md、docs/00-导读/项目说明.md。**目录索引件共 318 份**（清单类 167、导读类 151·按顶层分布于 .github / archive / assets / dataset / docs / hyperframes / mcp-server / packaging / references / scripts / site / source / tests / timeline / tools / xiyouji-agent-web 及仓库根）——逐文件全清单登记于 scripts/output/file-index.md 的 W779 段，运行 `python scripts/gen_folder_docs.py --dry-run` 可复现。
 
 ### W778（2026-10-17）：第 41 篇改进项落地批
 > **来源**：用户令「开始优化」——第 41 篇复盘报告 §8 计划中 WorkBuddy 归属项（T-41-01/02/04、P-41-01、T-41-03）——三项落地、一项撤销（T-41-03 见下）。动工前 preflight PASS（W778 认领·零交集）。
