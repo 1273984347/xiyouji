@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W783），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W784），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,17 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W784（2026-10-18）：分析与审计五小件行为保持重构批
+> **来源**：外部重构提案收编第三批（小件档·用户令「全部做完之后合并」）。动工前 preflight PASS（W784 认领·零交集）。
+> - **chapter_stats**：诗词计数拆 _count_poem_headers/_count_aligned_poem_blocks（阈值提 _POEM_CONSECUTIVE_THRESHOLD）；中文计数/占比提 _count_chinese_chars/_dialogue_ratio；聚合提 _aggregate_totals（键顺序保持·per_chapter 仍追加末尾）。
+> - **word_frequency**：token 过滤提 _is_valid_token+_MIN_TOKEN_LENGTH；结果构造提 _build_frequency_result；DEFAULT_STOPWORDS 保持 set 不改 frozenset。
+> - **narrative_experiment**：四份 JSON 写出拆 _write_json/_write_all_outputs、控制台汇总拆 _print_summary；build_summary 由两次调用改一次复用（确定性数据·结果不变）；三数据块逐字保留。
+> - **hardships_81**：三标签字典提模块级（CAUSE/ENDING/DIFFICULTY_LABELS）；交叉统计拆 _build_cross_cause_ending、label 化拆 _relabel_hardships（W770/W760-F-2 溯源保留）；输出拆 _write_json/_write_all_outputs/_print_category/_print_summary；Counter.most_common 键序保留。
+> - **line_check**：self_test 拆 _self_test_corpus_ok/_self_test_positive_samples/_self_test_negative_sample；查询分支提 _query_one/_parse_chapter_num；_TOTAL_CHAPTERS 替代三处裸 100；全部输出串与退出码逐字保留。
+> - **对拍（流水线 §八）**：五脚本前后各一轮，11 个产物（chapter_stats/word_freq/ne 四件/h81 四件/line_check 自检输出含退出码与样本查询）**全部逐字节相等**；pytest 630 passed；ruff 四目录 0；verify 全量 0 FAIL。
+> - **状态**：已落地（对拍全绿）；级联+提交+推送按批次流程执行。
+> - **文件**：scripts/A_文本基础/chapter_stats.py、scripts/A_文本基础/word_frequency.py、scripts/AA_叙事实验/narrative_experiment.py、scripts/C_情节/hardships_81.py、scripts/audit/line_check.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w784_spec.json、scripts/output/_cascade_files_W784.txt
 
 ### W783（2026-10-18）：B_人物行为保持重构批
 > **来源**：外部重构提案收编第二批（用户令「做」）。动工前 preflight PASS（W783 认领·零交集）。
