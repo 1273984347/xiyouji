@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W776），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W777），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,16 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W777（2026-10-17）：第 41 篇复盘报告入库批
+> **来源**：用户令「现在写」——第 40 篇（2026-10-15）后断档 2 天、积压 W748–W776 二十八段/60 提交，本篇为补课。动工前 preflight PASS（W777 认领·零交集）。
+> - **报告内容（十节框架+附录·V1.0）**：`docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-17.md`——周期 2026-10-15 20:55–10-17 23:10（约 50 小时）·覆盖 W748–W776（W750 作废不计）二十八段·提交 30ec46e3→ec76e397 共 60 个。五项核心发现：① 审查→修复→复验闭环成为主形态（W760 全量对抗审查 4 HIGH → W763-W770 八批全部清零）；② **「门禁自建即自曝」三次实证**——W773 CI 接线首跑抓 K11 动画规则潜伏 6 周（E2E 写了未接线）、W774 自建 INDEX 门禁 CI 红/本地绿（sorted(Path) 跨平台序差）、W775 对拍抓第 9 门禁引号腐蚀潜伏五批（2 页静默跳过）；③ CI 实证位认知闭环（本地全绿≠交付·三次真实分歧代价）；④ 两批工具链重构全部对拍零漂移（W761 四工作流/W775 JS 三门禁五维对拍）；⑤ 外部评审对抗→回应闭环（W775 报告+W776 §7 四项）。
+> - **经验与机制沉淀**：新经验 **E-09~E-16**（五维受控对拍/latent 三型取证/自建门禁即自曝/外部产出落地七步/死依赖治理/C4 表格行/gitignore 检查/审查 HIGH 追踪表）·问题族 **FAM-31~36**（本地绿 CI 红/静态扫描器腐蚀/接线缺失/行尾编码/依赖度量漂移/编号登记一致性）·工作流 **WF-03~05**（对拍优先重构/外部产出七步/审查修复复验）·11 项问题实例（**6 项潜伏型**·Q-11 复盘断档入清单）。
+> - **诚实的流程自曝**：报告明确登记「本报告本身是断档补课产物」——复盘节奏此前纯靠用户发起、无机器提醒（2 天 28 段零复盘）；改进候选=automation（48h 未写复盘提醒·T-41-03·**待用户批准后方可创建**·本批不擅自建）。
+> - **三连带**：README 现役报告 20→21 篇（新条目取末号第 21 行）·STRUCTURE report_docs 24→25 + 现役 21 篇 + 复盘系列 12 篇·docs_index 重建（696→697 篇·--check exit 0）·stats --w W777 刷新。
+> - **验证（全绿）**：pytest 602 passed / 3 skipped / 0 failed；verify_delivery 全量 49 段 0 FAIL；ruff 0；docs_index --check exit 0。
+> - **状态**：已落地（本地全绿）；级联+提交+推送按批次流程执行（main 合并留待用户决策）。
+> - **文件**：docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-17.md、docs/11-方案报告/README.md、STRUCTURE.md、docs/INDEX.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、docs/00-导读/项目说明.md、HANDOVER.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w777_spec.json、scripts/output/_cascade_files_W777.txt。
 
 ### W776（2026-10-17）：评审后续行动落地批
 > **来源**：用户令「做完报告 §7」——W775《外部评审回应与逐项核查报告》§7 四项后续行动（A-01~A-04）正式立项执行。动工前 preflight PASS（W776 认领·与在途批次零交集）。
