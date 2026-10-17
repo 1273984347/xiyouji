@@ -1,0 +1,15 @@
+{
+  "batch": "W786",
+  "date": "2026-10-18",
+  "title": "W786 graph_seed_neo4j 行为保持重构批",
+  "desc": "外部重构提案收编第五批，Cypher 拼装提 _build_cypher 快照组装提 _build_snapshot OUTPUT 中间变量收敛路径拼接，rag 家族其余五件不收留机械通道，对拍验收为两产物与运行日志逐字节相等",
+  "head_entry": "2026-10-18（W786 graph_seed_neo4j 行为保持重构批）",
+  "head_sentence": "graph_seed_neo4j 拆产物构建双函数，输出逐字节相等",
+  "changelog_body": "\n> **来源**：外部重构提案收编第五批（用户令「全部做完之后合并」）。动工前 preflight PASS（W786 认领·零交集）。\n> - **graph_seed_neo4j**：Cypher 拼装提 _build_cypher（纯字符串拼接·逐行字节稳定）；快照组装提 _build_snapshot；_OUTPUT 中间变量收敛路径拼接；Cypher 各行/json.dump 参数/_w536_guard_open 调用/日志文本逐字保留。\n> - **rag 家族其余五件不收（工程裁定·与 character_nlp 同款原则）**：build_vectors（GPU 温度守护与断点续跑管线）、page_router（模型加载评测面）、rag_server（运行时服务）、rag_enhance（LLM 端点回退路径）、xiyouji_rag（800 行核心引擎）——重运行时对拍面+累计约 2100 行转录风险；对拍可行段（确定性产物 diff）无法覆盖其风险面（温度守护/断点/端点回退），留机械通道。\n> - **对拍（流水线 §八）**：前后各一轮，rag_graph.json/neo4j_seed.cypher/运行日志**全部逐字节相等**；pytest 630 passed；ruff 0；verify 全量 0 FAIL。\n> - **状态**：已落地（对拍全绿）；级联+提交+推送按批次流程执行。\n> - **文件**：scripts/rag/graph_seed_neo4j.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w786_spec.json、scripts/output/_cascade_files_W786.txt\n",
+  "milestone_block": "- **W786 graph_seed_neo4j 行为保持重构批**：\n  - Cypher 拼装与快照组装提函数（字节稳定）；rag 家族其余五件不收留机械通道（重运行时对拍面）\n  - 对拍：两产物与运行日志逐字节相等\n  - 验证：pytest 630 passed + ruff 0 + verify 全量 0 FAIL\n",
+  "agents_note": "2026-10-18（W786）graph_seed_neo4j 行为保持重构批：外部重构提案收编第五批——Cypher 拼装提 build cypher 纯函数（逐行拼接字节稳定）与快照组装提 build snapshot（节点类型与关系类型去重排序）及 OUTPUT 中间变量收敛路径拼接（Cypher 各行与 json dump 参数与守卫调用与日志文本逐字保留）；rag 家族其余五件工程裁定不收留机械通道（build vectors 温度守护断点续跑管线 page router 模型评测面 rag server 运行时服务 rag enhance 端点回退 xiyouji rag 八百行核心——重运行时对拍面加约两千一百行转录风险与 character nlp 同款原则）；对拍两产物与运行日志逐字节相等；验证等于 pytest 六百三十 passed 加 ruff 零 加 verify 全量零 FAIL",
+  "file_index_rows": [
+    "| scripts/rag/graph_seed_neo4j.py | W786 | 行为保持重构：_build_cypher/_build_snapshot 提函数 |",
+    "| docs/00-导读/W批次编号对账表.md | W786 | W786 认领登记 |"
+  ]
+}

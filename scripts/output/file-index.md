@@ -11,6 +11,13 @@
 ---
 
 
+## W786 graph_seed_neo4j 行为保持重构批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/rag/graph_seed_neo4j.py | W786 | 行为保持重构：_build_cypher/_build_snapshot 提函数 |
+| docs/00-导读/W批次编号对账表.md | W786 | W786 认领登记 |
+
 ## W785 api_server 行为保持重构批（2026-10-18）
 
 | 文件 | W | 说明 |
