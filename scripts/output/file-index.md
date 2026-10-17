@@ -11,6 +11,17 @@
 ---
 
 
+## W784 分析与审计五小件行为保持重构批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/A_文本基础/chapter_stats.py | W784 | 行为保持重构：诗词计数拆双函数+聚合提函数 |
+| scripts/A_文本基础/word_frequency.py | W784 | 行为保持重构：token 过滤提函数+常量化 |
+| scripts/AA_叙事实验/narrative_experiment.py | W784 | 行为保持重构：输出/口志拆函数（build_summary 单次复用） |
+| scripts/C_情节/hardships_81.py | W784 | 行为保持重构：标签字典提模块级+输出拆函数 |
+| scripts/audit/line_check.py | W784 | 行为保持重构：self_test 拆三查+查询提函数 |
+| docs/00-导读/W批次编号对账表.md | W784 | W784 认领登记 |
+
 ## W783 B_人物行为保持重构批（2026-10-18）
 
 | 文件 | W | 说明 |

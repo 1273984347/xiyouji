@@ -3,7 +3,7 @@
 
 > **📖 阅读契约（W707）**：索引型——找「东西在哪」时读顶层结构表+目标目录所在段；各板块下的建置沿革（v0.x W0xx 补齐…）是历史记录见 CHANGELOG，勿通读；计数与口径以磁盘实数与 [统计口径说明](docs/00-导读/统计口径说明.md) 为准。
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前批次：W783（2026-10-18）— 外部重构提案收编第二批，character_appearance 拆聚合三函数并提首回计算函数保急切求值语义，character_network 拆共现累积函数 combinations 等价改写，character_nlp 整文件重写提案本批不收留待机械通道，对拍验收为两脚本前后输出逐字节相等—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前批次：W784（2026-10-18）— 外部重构提案收编第三批小件档，chapter_stats 诗词计数拆双函数聚合提 _aggregate_totals，word_frequency 提 _is_valid_token 与最短长度常量，narrative_experiment 拆输出口志函数 build_summary 两次调用改一次复用，hardships_81 三标签字典提模块级并拆交叉统计与 label 化函数，line_check self_test 拆三查并提 _query_one，对拍验收为五脚本前后输出逐字节相等—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构

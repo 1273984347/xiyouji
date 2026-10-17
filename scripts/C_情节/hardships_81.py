@@ -122,8 +122,34 @@ HARDSHIPS_81 = [
 ]
 
 
+# -------------------------------------------------------------------
+# 分类标签（原实现位于 build_statistics 内部，提到模块级供多处复用）
+# -------------------------------------------------------------------
+
+CAUSE_LABELS = {
+    "arranged": "如来/观音安排",
+    "wild": "真正野怪",
+    "mount": "天界/西天坐骑下凡",
+    "mind": "人心自生的魔障",
+}
+
+ENDING_LABELS = {
+    "taken": "被接走（有背景）",
+    "killed": "被打死（无背景）",
+    "recruited": "被收编",
+}
+
+DIFFICULTY_LABELS = {
+    "solo": "悟空独立解决",
+    "rescue": "需要搬救兵",
+}
+
+
 def group_by(items: list, key: str, label_map: dict) -> dict:
-    """按字段分组统计。"""
+    """按字段分组统计。
+
+    返回 {标签: [{n,name,chapter}, ...], ...}，键顺序由 Counter.most_common() 决定。
+    """
     counter = Counter(item[key] for item in items)
     return {
         label_map.get(k, k): [
@@ -134,46 +160,54 @@ def group_by(items: list, key: str, label_map: dict) -> dict:
     }
 
 
-def build_statistics(hardships: list) -> dict:
-    """生成完整统计结果。"""
-    cause_labels = {
-        "arranged": "如来/观音安排",
-        "wild": "真正野怪",
-        "mount": "天界/西天坐骑下凡",
-        "mind": "人心自生的魔障",
-    }
-    ending_labels = {
-        "taken": "被接走（有背景）",
-        "killed": "被打死（无背景）",
-        "recruited": "被收编",
-    }
-    difficulty_labels = {
-        "solo": "悟空独立解决",
-        "rescue": "需要搬救兵",
-    }
+def _build_cross_cause_ending(hardships: list) -> dict:
+    """交叉统计：起因 × 结局。
 
-    by_cause = group_by(hardships, "cause", cause_labels)
-    by_ending = group_by(hardships, "ending", ending_labels)
-    by_difficulty = group_by(hardships, "difficulty", difficulty_labels)
+    返回 {起因标签: {结局标签: count}}，键顺序由 CAUSE_LABELS / ENDING_LABELS 决定。
+    """
+    cross = {}
+    for cause in CAUSE_LABELS:
+        cross[CAUSE_LABELS[cause]] = {}
+        for ending in ENDING_LABELS:
+            cross[CAUSE_LABELS[cause]][ENDING_LABELS[ending]] = sum(
+                1 for h in hardships
+                if h["cause"] == cause and h["ending"] == ending
+            )
+    return cross
 
-    # 交叉统计：起因 × 结局
-    cross_cause_ending = {}
-    for cause in cause_labels:
-        cross_cause_ending[cause_labels[cause]] = {}
-        for ending in ending_labels:
-            count = sum(1 for h in hardships if h["cause"] == cause and h["ending"] == ending)
-            cross_cause_ending[cause_labels[cause]][ending_labels[ending]] = count
 
-    # W770：输出 hardships 条目统一 label 形（与页面 EMBEDDED 及 dataset/81-hardships.json 对齐——
-    # W760 F-2 实证：原 code 形输出（arranged/taken/solo…）与页面 label 字典/统计面脱节，
-    # 致「页面⇄源」共路深比对 243 项存量漂移）。
-    hardships_out = [
-        {**h,
-         "cause": cause_labels.get(h["cause"], h["cause"]),
-         "ending": ending_labels.get(h["ending"], h["ending"]),
-         "difficulty": difficulty_labels.get(h["difficulty"], h["difficulty"])}
+def _relabel_hardships(hardships: list) -> list:
+    """把 hardships 条目的 cause/ending/difficulty 转为 label 形。
+
+    W770：输出 hardships 条目统一 label 形（与页面 EMBEDDED 及
+    dataset/81-hardships.json 对齐——W760 F-2 实证：原 code 形输出
+    （arranged/taken/solo…）与页面 label 字典/统计面脱节，致
+    「页面⇄源」共路深比对 243 项存量漂移）。
+    """
+    return [
+        {
+            **h,
+            "cause": CAUSE_LABELS.get(h["cause"], h["cause"]),
+            "ending": ENDING_LABELS.get(h["ending"], h["ending"]),
+            "difficulty": DIFFICULTY_LABELS.get(h["difficulty"], h["difficulty"]),
+        }
         for h in hardships
     ]
+
+
+def build_statistics(hardships: list) -> dict:
+    """生成完整统计结果。
+
+    返回字典含：
+        total:                   难目总数
+        by_cause / by_ending / by_difficulty:            各类计数
+        by_*_detail:             分组明细
+        cross_cause_ending:      起因 × 结局交叉矩阵
+        hardships:               转为 label 形后的条目列表（W770）
+    """
+    by_cause = group_by(hardships, "cause", CAUSE_LABELS)
+    by_ending = group_by(hardships, "ending", ENDING_LABELS)
+    by_difficulty = group_by(hardships, "difficulty", DIFFICULTY_LABELS)
 
     return {
         "total": len(hardships),
@@ -183,14 +217,72 @@ def build_statistics(hardships: list) -> dict:
         "by_ending_detail": by_ending,
         "by_difficulty": {k: len(v) for k, v in by_difficulty.items()},
         "by_difficulty_detail": by_difficulty,
-        "cross_cause_ending": cross_cause_ending,
-        "hardships": hardships_out,
+        "cross_cause_ending": _build_cross_cause_ending(hardships),
+        "hardships": _relabel_hardships(hardships),
     }
+
+
+# -------------------------------------------------------------------
+# 输出
+# -------------------------------------------------------------------
+
+def _write_json(data, path: Path) -> None:
+    """把 dict 写为 UTF-8 缩进 2 空格 JSON。"""
+    path.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+
+# 分项输出：文件名 → build_statistics 结果中的明细键
+_DETAIL_OUTPUTS = [
+    ("hardships_by_cause.json", "by_cause_detail"),
+    ("hardships_by_ending.json", "by_ending_detail"),
+    ("hardships_by_difficulty.json", "by_difficulty_detail"),
+]
+
+
+def _write_all_outputs(output_dir: Path, stats: dict) -> None:
+    """写出综合文件 + 三个分项文件，并打印每条写入日志。"""
+    out_main = output_dir / "hardships_81.json"
+    _write_json(stats, out_main)
+    print(f"[OK] 完整统计已写入：{out_main}")
+
+    for name, key in _DETAIL_OUTPUTS:
+        out = output_dir / name
+        _write_json(stats[key], out)
+        print(f"[OK] {key} 已写入：{out}")
+
+
+def _print_category(title: str, mapping: dict, total: int) -> None:
+    """打印单个分类标题 + 逐行计数（保留原始格式）。"""
+    print(f"\n{title}")
+    for label, count in mapping.items():
+        pct = count / total * 100
+        print(f"  {label:<20} {count:3d} 难 ({pct:5.1f}%)")
+
+
+def _print_summary(stats: dict) -> None:
+    """打印控制台汇总，格式与原始实现逐字一致。"""
+    print("\n=== 八十一难深度统计 ===")
+    print(f"总数：{stats['total']} 难")
+    _print_category("按起因分类：", stats["by_cause"], stats["total"])
+    _print_category("按结局分类：", stats["by_ending"], stats["total"])
+    _print_category("按难度分类：", stats["by_difficulty"], stats["total"])
+    print("\n交叉统计（起因 × 结局）：")
+    for cause, endings in stats["cross_cause_ending"].items():
+        print(f"  {cause}:")
+        for ending, count in endings.items():
+            print(f"    {ending:<20} {count:3d}")
 
 
 def main():
     parser = argparse.ArgumentParser(description="《西游记》九九八十一难深度统计")
-    parser.add_argument("--output", default="output/data/", help="输出目录路径（默认 output/data/，相对 scripts/；run_all 无参调用约定）")
+    parser.add_argument(
+        "--output",
+        default="output/data/",
+        help="输出目录路径（默认 output/data/，相对 scripts/；run_all 无参调用约定）",
+    )
     args = parser.parse_args()
 
     output_dir = Path(args.output)
@@ -198,47 +290,8 @@ def main():
 
     stats = build_statistics(HARDSHIPS_81)
 
-    # 输出综合文件
-    out_main = output_dir / "hardships_81.json"
-    out_main.write_text(
-        json.dumps(stats, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
-    print(f"[OK] 完整统计已写入：{out_main}")
-
-    # 输出分项文件
-    for name, key in [
-        ("hardships_by_cause.json", "by_cause_detail"),
-        ("hardships_by_ending.json", "by_ending_detail"),
-        ("hardships_by_difficulty.json", "by_difficulty_detail"),
-    ]:
-        out = output_dir / name
-        out.write_text(
-            json.dumps(stats[key], ensure_ascii=False, indent=2),
-            encoding="utf-8",
-        )
-        print(f"[OK] {key} 已写入：{out}")
-
-    # 控制台汇总
-    print("\n=== 八十一难深度统计 ===")
-    print(f"总数：{stats['total']} 难")
-    print("\n按起因分类：")
-    for cause, count in stats["by_cause"].items():
-        pct = count / stats["total"] * 100
-        print(f"  {cause:<20} {count:3d} 难 ({pct:5.1f}%)")
-    print("\n按结局分类：")
-    for ending, count in stats["by_ending"].items():
-        pct = count / stats["total"] * 100
-        print(f"  {ending:<20} {count:3d} 难 ({pct:5.1f}%)")
-    print("\n按难度分类：")
-    for diff, count in stats["by_difficulty"].items():
-        pct = count / stats["total"] * 100
-        print(f"  {diff:<20} {count:3d} 难 ({pct:5.1f}%)")
-    print("\n交叉统计（起因 × 结局）：")
-    for cause, endings in stats["cross_cause_ending"].items():
-        print(f"  {cause}:")
-        for ending, count in endings.items():
-            print(f"    {ending:<20} {count:3d}")
+    _write_all_outputs(output_dir, stats)
+    _print_summary(stats)
 
 
 if __name__ == "__main__":

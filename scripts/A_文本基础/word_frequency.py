@@ -21,7 +21,7 @@ from pathlib import Path
 import jieba
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from utils.analyzer_base import run_analyzer
+from utils.analyzer_base import run_analyzer  # noqa: I001
 
 # 取经团队与高频虚词的停用词示例
 DEFAULT_STOPWORDS = {
@@ -31,13 +31,30 @@ DEFAULT_STOPWORDS = {
     "得", "与", "而", "之", "其", "为", "以", "于", "及", "所",
 }
 
+# 计入词频的最短 token 长度（单字被过滤）
+_MIN_TOKEN_LENGTH = 2
+
+
+def _is_valid_token(token: str, stopwords: set[str]) -> bool:
+    """判断分词结果是否计入词频。
+
+    有效条件（与原实现逐字对应）：
+        - 不是停用词
+        - 长度 ≥ _MIN_TOKEN_LENGTH
+        - 不是纯空白
+    """
+    return (
+        token not in stopwords
+        and len(token) >= _MIN_TOKEN_LENGTH
+        and not token.isspace()
+    )
+
 
 def tokenize(text: str, stopwords: set[str]) -> list[str]:
     """用 jieba 分词并过滤停用词与单字。"""
-    tokens = jieba.lcut(text)
     return [
-        t for t in tokens
-        if t not in stopwords and len(t) >= 2 and not t.isspace()
+        t for t in jieba.lcut(text)
+        if _is_valid_token(t, stopwords)
     ]
 
 
@@ -48,16 +65,21 @@ def word_frequency(text: str, top: int = 100) -> list[tuple[str, int]]:
     return counter.most_common(top)
 
 
-def analyze(chapters, args) -> dict:
-    """词频分析：聚合所有章节文本后分词统计。"""
-    full_text = "\n".join(text for _, text in chapters)
-    freq = word_frequency(full_text, top=args.top)
+def _build_frequency_result(full_text: str, top: int) -> dict:
+    """把词频统计结果封装为 JSON 可序列化的字典。"""
+    freq = word_frequency(full_text, top=top)
     return {
         "source": "aggregated",
         "total_chars": len(full_text),
-        "top": args.top,
+        "top": top,
         "frequencies": [{"word": w, "count": c} for w, c in freq],
     }
+
+
+def analyze(chapters, args) -> dict:
+    """词频分析：聚合所有章节文本后分词统计。"""
+    full_text = "\n".join(text for _, text in chapters)
+    return _build_frequency_result(full_text, top=args.top)
 
 
 if __name__ == "__main__":
