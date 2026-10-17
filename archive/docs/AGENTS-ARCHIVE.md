@@ -253,3 +253,8 @@
 ```text
 2026-10-16（W767）数据漂移门禁深比对批（用户令继续·W760 F-2 HIGH 修复加 F-7 P1）：第九门禁补共路深比对（递归共键·数组按位·标量严格比·仅一侧有之键不计）加声明式基线 data-drift-baseline 归一匹配加 no-new-drift；新口径当场暴露存量漂移等于 chapter_stats 陈旧本地产物重跑十一回对齐加 cave-estate 中将级旧值标记清理加 radar 悟空色二加 theo accent 五加 kpi 名；F-7 双 KPI 按数据自证（links 度数悟空十二胜唐僧七·isHardship 实数八）双边同步；八十一难页嵌三处 mind 修 label 形·生成器 code 与页面 label 约定分裂基线登记独立批；visual-art 设计双形态基线；验证等于门禁绿豁免二百四十四加负样本注入转红恢复转绿加 CSP 重注零漂移加 pytest 五百九十七 passed 加 verify 全量 48 段零 FAIL
 ```
+以下为 AGENTS.md 版本脚注早期条目（W768-W768）段的原文（单行沿革链·W773 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W768）英文站校验接线批（用户令继续·W760 F-3 HIGH 收口）：validate_en 加 --all 批量（汇总行 EN validate·任一页违规退一）加语料索引豁免区（SEARCH_INDEX BEGIN END 包裹视为引用语料）加单页输出逐字节兼容；六页整改等于 chart-design 字典百二十六对转形加 methodology 三十二对加四角键值化加 appearance 三十五对加 chapter-stats 第 N 回到 Chapter N 百零二加 relationships 调试串加 search 豁免零改动；接线等于 verify 第四十四槽五面注册加段数四十九自洽加 CI 经 verify-delivery 生效加 Makefile 目标挂 ci 加第四十二槽豁免行移除；三方编号等于 AGENTS 四十四加 gates.md 四十四加 stats gate_count 四十三到四十四加 README 标记同步；验证等于全站百三十八页通过加 verify 四十九段零 FAIL 加 CSP 重注零漂移加 pytest 五百九十七 passed
+```

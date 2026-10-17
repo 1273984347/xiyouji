@@ -1,0 +1,31 @@
+{
+  "batch": "W773",
+  "date": "2026-10-17",
+  "title": "W773 工程基础设施薄弱点修复批",
+  "desc": "工程基础设施薄弱点修复（E2E 接线，视觉回归重建，英文站 a11y 补面，索引漂移门禁）",
+  "head_entry": "2026-10-17（W773 工程基础设施薄弱点修复批）",
+  "head_sentence": "工程基础设施薄弱点修复：E2E 接线与视觉回归重建，英文站 a11y 补面，索引漂移门禁",
+  "changelog_body": "\n> **来源**：用户 2026-10-17 会话批准执行 T-02《执行前计划——工程基础设施薄弱点修复》（`docs/11-方案报告/计划方案/执行前计划-T02-工程基础设施薄弱点修复.md`·V1.0）——四项「有设施无防线」缺陷修复批，分 WS1~WS4 四波推进，本地五提交（W772 收官 chore / 波一 CI 接线+视觉 / WS3 英文站 a11y / WS4 索引门禁 / 本级联收尾）。\n> - **WS1 CI 接线（缺陷①·8 个 JS E2E 套件零 workflow 调用）**：ci.yml 新增 e2e-interaction job（`node tests/e2e/test_site_quality.js`·npm ci --prefix scripts + playwright chromium·job 数 8→9）；test_ci_wiring.py 扩 W6 断言（判据锚 `run:` 块对抗步骤名伪装·负样本注释 run 行实测转红·恢复字节一致回绿·11 passed）。\n> - **WS1 战果——K11 回归修复（接线首跑即抓）**：reduce 专属规则误置于 max-width:640px 媒体查询之后（顶层 !important·scalpel 演出动画对全部用户静默失效·K11 实证 computed animation-name 恒 none·自 W674 起潜伏 6 周——pytest.ini 排除 tests/e2e 故套件从未自动运行）；中英双页同修移入查询内，22 断言转全绿（「门禁建置即绿」铁则正面实证）。\n> - **WS2 视觉回归（缺陷②·基线 PNG 被 gitignore 无版本化载体）**：.gitignore 取消 tests/e2e/baseline/ 排除（10 PNG 版本化·current/ 保持忽略）；test_visual.js 判据由「文件大小 ±15%」升级为 pngjs+pixelmatch 像素 diff（默认阈值 0.5%·宽高不一致直失败·稳定轮询兜力导向/演出动画抖动·文件大小降级为信息量）；对旧基线实跑 10/10 尺寸不一致（8 月至今内容演进·旧基线全废）→ 重灌 10 页·二次跑 10/10 0 FAIL（实测像素差异 0.000%~0.122%）；新增依赖 pngjs 7.0.0 + pixelmatch 5.3.0（CJS·v8 系 ESM 有 CI Node 20 兼容风险故弃用）。\n> - **WS3 英文站 a11y（缺陷③·chart-a11y 覆盖 0/138）**：inject_chart_a11y.py 加 --dir（默认 site/data 行为不变·rel 前缀按目标目录相对 site/ 深度计算）；site/en 138 页全量注入·二次幂等 0·--check exit 0；chart-a11y.js 最小 i18n（摘要文本按 html lang 选 zh/en·缺省 zh·中文页行为逐字节不变·探针对拍实证）。\n> - **WS3 连带修复（注入前探针暴露第二项 latent）**：8 个 EN 页 `<html lang=\"zh-CN\">`（W394-W398 漏网·读屏语音/SEO/i18n 全错）修正为 en；validate_en 补第 3 项检查（文档 lang=en·WCAG 3.1.1·负样本实测转红·恢复一致）——指向中文版的回链 lang=\"zh-CN\" 语义正确不误伤。覆盖口径：EN 图表页 83/83（80 静态 svg/canvas + 3 运行时渲染 ai-dialogue/century-dialogue/character-relationship-3d——ASM-09b「58 纯文本页」判断对这 3 页不成立·全页注入策略与 site/data 87/88 同规则）。\n> - **WS4 索引门禁（缺陷④·INDEX.md 无产物级校验）**：check_index_health.py（第 17 门禁·D-01 决策扩面而非新增槽位·未触碰受保护件 verify_delivery.py）新增第 8 项检查 docs/INDEX.md 产物级一致性（复用 docs_index.py 生成逻辑逐字节比对·单一事实源）；负样本（删 1 条目）实测转红·恢复字节一致回绿；docs_index.py --check exit 0（695 篇·12 板块）——mcp-server「CI 同款」声明自本批起成为事实。\n> - **范围纪律**：不动 verify_delivery.py（受保护件）；视觉套件本批不入 CI（D-02 首波只接 1 套件·V-02 首波目标 1/8 达成）；test_graph/test_newfeatures（API_PORT 在线断言）与 test_w266（@playwright/test 未声明）按 R-03/R-04 排除出首波；不做第 43 门禁豁免收敛；.github/workflows/README.md 同步新 job 文档（雷区 13.7）。\n> - **验证（全绿）**：pytest **599 passed / 3 skipped / 0 failed**（基线 597 + 新增 2 接线断言）；verify_delivery 全量 **49 段 0 FAIL**；CSP 856 页零漂移；validate_en --all **138/138**（含新增 lang 检查）；ruff 0；JS 语法 855 文件；e2e 22 断言全绿；视觉二次跑 10/10；stats --check 零差异（16 键·本批无键值变更）。\n> - **状态**：WS1~WS4 全部落地（本地）；**ST-04 未闭环**——github.com 主站被代理拦截（CONNECT 502·重试多次均失败·gh 与 api.github.com 正常），推送与 CI 实跑实证待网络恢复后执行（AC-02 余项如实登记·不虚构「CI 绿」）。\n> - **文件**：.github/workflows/ci.yml、.github/workflows/README.md、.gitignore、tests/e2e/baseline/（10 PNG）、tests/e2e/test_visual.js、tests/unit/test_ci_wiring.py、scripts/package.json、scripts/package-lock.json、scripts/inject_chart_a11y.py、scripts/validate_en.py、scripts/check_index_health.py、site/static/js/chart-a11y.js、site/data/criticism-history.html、site/en/criticism-history.html、site/en/（138 页）、docs/11-方案报告/计划方案/执行前计划-T02-工程基础设施薄弱点修复.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、docs/00-导读/项目说明.md、HANDOVER.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w773_spec.json、scripts/output/_cascade_files_W773.txt。\n",
+  "milestone_block": "- **W773 工程基础设施薄弱点修复批**：\n  - E2E 接线：ci.yml 新增 e2e-interaction job（test_site_quality.js 22 断言）+ test_ci_wiring W6 断言；首跑抓 W674 遗留 K11 回归（reduce 规则误置·中英双页修复·潜伏 6 周）\n  - 视觉回归：baseline 10 PNG 版本化 + 判据升级像素 diff（pngjs/pixelmatch）·重灌基线二次跑 10/10\n  - 英文站 a11y：138 页 chart-a11y 注入 + 模块 i18n + 8 页 lang 修正 + validate_en 补 lang 检查（图表页覆盖 83/83）\n  - 索引门禁：第 17 门禁新增 docs/INDEX.md 产物级校验（负样本实证）\n",
+  "agents_note": "2026-10-17（W773）工程基础设施薄弱点修复批（用户批准执行 T-02 计划）：WS1 ci.yml 新增 e2e-interaction job 加 test_ci_wiring 扩 W6 断言（E2E 套件零接线缺陷修复·负样本实证）；接线首跑抓 W674 遗留 K11 回归（reduce 规则误置媒体查询外·演出动画对全部用户静默失效·中英双页同修）；WS2 视觉基线十 PNG 版本化加判据升级为像素 diff（pngjs 加 pixelmatch·重灌基线二次跑十页全过）；WS3 英文站一百三十八页 chart-a11y 注入加模块 i18n 加八页 lang 修正加 validate_en 补文档 lang 检查（图表页覆盖八十三比八十三）；WS4 第十七门禁新增 docs INDEX 产物级校验（负样本删条目实证）；范围纪律等于不动 verify_delivery 加视觉套件不入 CI 加两套件按依赖排除；验证等于 pytest 五百九十九 passed 加 verify 全量四十九段零 FAIL 加 CSP 与英文站与 ruff 全绿；ST-04 推送受 github 代理阻断待网络恢复（AC-02 未闭环如实登记）",
+  "file_index_rows": [
+    "| .github/workflows/ci.yml | W773 | 新增 e2e-interaction job（node tests/e2e/test_site_quality.js·8→9 job） |",
+    "| .github/workflows/README.md | W773 | Job 9 e2e-interaction 文档节+job 清单 8→9+阈值表补行 |",
+    "| tests/unit/test_ci_wiring.py | W773 | 扩 W6 断言（run: 块锚定+Playwright 运行条件·负样本实证） |",
+    "| .gitignore | W773 | 取消 tests/e2e/baseline/ 排除（current/ 保持忽略） |",
+    "| tests/e2e/baseline/（10 PNG） | W773 | 视觉回归基线版本化入库 |",
+    "| tests/e2e/test_visual.js | W773 | 判据升级像素 diff（pngjs+pixelmatch·阈值 0.5%·稳定轮询）+require 解析修复 |",
+    "| scripts/package.json | W773 | 新增依赖 pngjs 7.0.0 + pixelmatch 5.3.0 |",
+    "| scripts/package-lock.json | W773 | pngjs/pixelmatch 锁文件 |",
+    "| site/data/criticism-history.html | W773 | K11 回归修复：reduce 规则移入媒体查询（W674 遗留） |",
+    "| site/en/criticism-history.html | W773 | 同族修复（EN 镜像页） |",
+    "| scripts/inject_chart_a11y.py | W773 | 加 --dir 参数（rel 按目录深度算·默认行为不变） |",
+    "| site/static/js/chart-a11y.js | W773 | 最小 i18n（zh/en·中文页逐字节不变） |",
+    "| site/en/（138 页） | W773 | chart-a11y 加载器全量注入+8 页 lang zh-CN→en |",
+    "| scripts/validate_en.py | W773 | 补第 3 项检查：文档 lang=en（WCAG 3.1.1·负样本实证） |",
+    "| scripts/check_index_health.py | W773 | 第 17 门禁新增第 8 项：docs/INDEX.md 产物级校验 |",
+    "| docs/11-方案报告/计划方案/执行前计划-T02-工程基础设施薄弱点修复.md | W773 | 执行记录追加 ST-01~ST-10（含偏差与修正） |",
+    "| docs/00-导读/W批次编号对账表.md | W773 | W773 认领行+W772 收官登记+W774 预留 bullet |",
+    "| scripts/output/_w773_spec.json | W773 | 本批 spec 入库 |"
+  ]
+}

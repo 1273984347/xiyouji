@@ -11,6 +11,29 @@
 ---
 
 
+## W773 工程基础设施薄弱点修复批（2026-10-17）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/ci.yml | W773 | 新增 e2e-interaction job（node tests/e2e/test_site_quality.js·8→9 job） |
+| .github/workflows/README.md | W773 | Job 9 e2e-interaction 文档节+job 清单 8→9+阈值表补行 |
+| tests/unit/test_ci_wiring.py | W773 | 扩 W6 断言（run: 块锚定+Playwright 运行条件·负样本实证） |
+| .gitignore | W773 | 取消 tests/e2e/baseline/ 排除（current/ 保持忽略） |
+| tests/e2e/baseline/（10 PNG） | W773 | 视觉回归基线版本化入库 |
+| tests/e2e/test_visual.js | W773 | 判据升级像素 diff（pngjs+pixelmatch·阈值 0.5%·稳定轮询）+require 解析修复 |
+| scripts/package.json | W773 | 新增依赖 pngjs 7.0.0 + pixelmatch 5.3.0 |
+| scripts/package-lock.json | W773 | pngjs/pixelmatch 锁文件 |
+| site/data/criticism-history.html | W773 | K11 回归修复：reduce 规则移入媒体查询（W674 遗留） |
+| site/en/criticism-history.html | W773 | 同族修复（EN 镜像页） |
+| scripts/inject_chart_a11y.py | W773 | 加 --dir 参数（rel 按目录深度算·默认行为不变） |
+| site/static/js/chart-a11y.js | W773 | 最小 i18n（zh/en·中文页逐字节不变） |
+| site/en/（138 页） | W773 | chart-a11y 加载器全量注入+8 页 lang zh-CN→en |
+| scripts/validate_en.py | W773 | 补第 3 项检查：文档 lang=en（WCAG 3.1.1·负样本实证） |
+| scripts/check_index_health.py | W773 | 第 17 门禁新增第 8 项：docs/INDEX.md 产物级校验 |
+| docs/11-方案报告/计划方案/执行前计划-T02-工程基础设施薄弱点修复.md | W773 | 执行记录追加 ST-01~ST-10（含偏差与修正） |
+| docs/00-导读/W批次编号对账表.md | W773 | W773 认领行+W772 收官登记+W774 预留 bullet |
+| scripts/output/_w773_spec.json | W773 | 本批 spec 入库 |
+
 ## W772 计划入库纯文档批（2026-10-17）
 
 | 文件 | W | 说明 |
