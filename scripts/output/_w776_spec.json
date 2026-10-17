@@ -1,0 +1,20 @@
+{
+  "batch": "W776",
+  "date": "2026-10-17",
+  "title": "W776 评审后续行动落地批",
+  "desc": "外部评审后续四项行动全部落地，覆盖率口径决策与实证基线入仓，两条死依赖移除，机制层三项风险登记入 HANDOVER，评审原文归档 tmpe",
+  "head_entry": "2026-10-17（W776 评审后续行动落地批）",
+  "head_sentence": "外部评审后续四项行动全部落地：覆盖率口径决策与实证基线写入 pytest.ini，fonttools/brotli 死依赖移除，机制层三项风险登记入 HANDOVER，评审原文归档",
+  "changelog_body": "\n> **来源**：用户令「做完报告 §7」——W775《外部评审回应与逐项核查报告》§7 四项后续行动（A-01~A-04）正式立项执行。动工前 preflight PASS（W776 认领·与在途批次零交集）。\n> - **A-01 覆盖率口径决策（实证驱动）**：pytest-cov 一次性实测——全 `scripts/` TOTAL **18%**（23,762 语句）·门禁层（check_* + utils + verify_delivery/docs_index/stats）**24%**（4,647 语句）·计时开销 **+82%**（45s→82s·pytest 602 passed 不变）。三条结构性失真证据：① 门禁验证主路径是**子进程**（verify_delivery 以 subprocess 跑 49 段、测试以 subprocess 调 JS 门禁），coverage.py 进程本地跨进程失明；② **双轨制**——浏览器 E2E/视觉套件按设计排除于 pytest（pytest.ini W401 注释），由 CI 独立 job 覆盖；③ 23k 语句多数是 34 类数据生成器脚本，其正确性由输出级门禁与 self-test 负样本保证。**决策**：不引入 CI 覆盖率门禁（阈值门禁在内容型项目诱发凑数），决策全文与实证基线写入 pytest.ini 注释，替代呈现=可机器核验资产清单（602 passed + E2E 三套件 + verify 49 段）。\n> - **A-02 死依赖移除（由「精确钉版」升级）**：实证推翻原计划前提——全仓（含 `archive/`）**零 import** fonttools/brotli：W564 字体子集化的一次性工具已归档（archive/scripts/batches/misc/_check_font_coverage.py 亦不 import）、packaging/xiyouji-analysis 无依赖声明、Makefile 无引用；两条 `>=` 区间条目为纯死依赖。**处置**：从 `scripts/requirements.txt` 移除两行（消除供应链与 pip-audit 无效扫描面），`scripts/font-subset-guide.md` §3.1 改为按需安装注记（pyftsubset 回退路径可用性保留）；原「精确钉版」计划废止并在报告 §7 留痕。\n> - **A-03 机制层风险登记**：`HANDOVER.md` Backlog 新增 BL-26（内容质量方差·AI 平庸化→写作规范 §4 五条反模式 + 对抗性审查批持续抽检）/ BL-27（工程 overhead 可持续性·断点可恢复性是主动权衡）/ BL-28（单点故障·无解已缓解到可转让），三条均标注**不设工程关闭项**；`docs/10-方法论沉淀/markdown写作规范.md` §4 新增 5 条「AI 内容生产特有」反模式（情节复述+主题套话/平庸安全结论/情感空转/流畅权威体/引文真推论假）。\n> - **A-04 评审原文归档**：评审原文 235 行（原 txt L21705–L21939·三轮完整）逐字节提取至 `tmpe/review-w776/review-original.md` + 同目录 README（来源/提取方式/三轮结构与报告章节映射）；tmpe 为 gitignored 工地层不随仓库发布，报告为唯一权威回应。\n> - **验证（全绿）**：pytest **602 passed / 3 skipped / 0 failed**；verify_delivery 全量 **49 段 0 FAIL**；ruff 0；docs_index --check exit 0。\n> - **状态**：已落地（本地全绿）；级联+提交+推送按批次流程执行（main 合并留待用户决策）。\n> - **文件**：pytest.ini、scripts/requirements.txt、scripts/font-subset-guide.md、HANDOVER.md、docs/10-方法论沉淀/markdown写作规范.md、docs/11-方案报告/外部评审回应与逐项核查报告-2026-10-17.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w776_spec.json、scripts/output/_cascade_files_W776.txt。\n",
+  "milestone_block": "- **W776 评审后续行动落地批**：\n  - 报告 §7 四项全部执行：覆盖率口径决策入 pytest.ini（实证 18%/24%/+82%·不设门禁）、fonttools/brotli 死依赖移除（全仓零 import 实证）、HANDOVER BL-26/27/28 风险登记 + 写作规范 5 条 AI 反模式、评审原文归档 tmpe/review-w776\n  - 验证：pytest 602 passed + verify 49 段 0 FAIL + ruff 0\n",
+  "agents_note": "2026-10-17（W776）评审后续行动落地批：报告第七节四项全部执行，A-01 覆盖率口径决策以实证驱动（pytest-cov 实测全 scripts 百分之十八、门禁层百分之二十四、计时增百分之八十二，三条结构性失真理由——子进程验证失明、双轨制、生成器脚本占多数——故不引 CI 覆盖率门禁，决策与基线全文入 pytest.ini 注释，替代呈现为资产清单）；A-02 由精确钉版升级为死依赖移除（全仓含归档零 import fonttools 与 brotli 实证、W564 一次性工具遗留、打包件无依赖声明，故从 requirements 移除并改指南按需安装）；A-03 HANDOVER 登记 BL-26 内容质量方差、BL-27 工程 overhead、BL-28 单点故障三条不设关闭项风险，写作规范第四节增五条 AI 内容生产特有反模式；A-04 评审原文二百三十五行动字节归档 tmpe 加三轮结构映射 README；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 ruff 零",
+  "file_index_rows": [
+    "| pytest.ini | W776 | 覆盖率口径决策注释（实证 18%/24%/+82%·不引 --cov 门禁·替代=资产清单） |",
+    "| scripts/requirements.txt | W776 | 移除 fonttools/brotli 死依赖（全仓零 import 实证·指南改按需安装） |",
+    "| scripts/font-subset-guide.md | W776 | §3.1 注记：fonttools/brotli 按需安装（pyftsubset 回退路径） |",
+    "| HANDOVER.md | W776 | Backlog 新增 BL-26/27/28（内容质量方差/工程 overhead/单点故障·均不设工程关闭项） |",
+    "| docs/10-方法论沉淀/markdown写作规范.md | W776 | §4 增 5 条 AI 内容生产特有反模式 |",
+    "| docs/11-方案报告/外部评审回应与逐项核查报告-2026-10-17.md | W776 | §7 四项行动状态更新为已完成（含 A-02 升级处置留痕） |",
+    "| docs/00-导读/W批次编号对账表.md | W776 | W776 认领登记 |"
+  ]
+}

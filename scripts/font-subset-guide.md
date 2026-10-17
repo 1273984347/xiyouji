@@ -118,6 +118,8 @@ npm install -g fontmin
 npm install --save-dev fontmin
 
 # 可选：安装 glyphhanger 作为补充（需要 Python 环境）
+# W776 起 fonttools/brotli 不再是 scripts/requirements.txt 常驻依赖（全仓零 import·W564
+# 子集化一次性工具已归档）——仅在需要 pyftsubset 回退路径时按需安装：
 pip install fonttools brotli zopfli
 npm install -g glyphhanger
 ```
