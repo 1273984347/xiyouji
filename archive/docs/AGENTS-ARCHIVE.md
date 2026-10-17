@@ -293,3 +293,8 @@
 ```text
 2026-10-17（W775）JS 门禁重构落地批：新增 scripts/lib 两公共模块（gate_common 门禁工具与 playwright_gate_utils 浏览器辅助）并重写三个门禁脚本（chart_values 的 probeInPage 拆六函数与 judgeProbe 拆五判据加 validateGateBaseline 合并重复校验、screenshot_gates 的 checkPage 拆 G1 至 G5 加删死常量、data_drift 的 jsLiteralToJson 拆两纯函数加 main 三分派）；外部契约五维受控对拍零漂移（self-test 同判定、judge 与 gate 三页逐字节一致、截图三十二页一致、基线格式一致）；对拍意外修复第 9 门禁自安全加固起潜伏五个批次的引号腐蚀死代码（两页静默跳过、修复后可比五十七至五十九页全绿）；gitignore 的 lib 规则误伤新目录以定向 negation 修复；ci_wiring 测试断言升级为传递链两环守护；五条待裁决发现裁定三条改两条不改；外部评审七项指控逐条核查成报告（四不成立、两部分成立、一成立）；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 ruff 零
 ```
+以下为 AGENTS.md 版本脚注早期条目（W776-W776）段的原文（单行沿革链·W782 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-17（W776）评审后续行动落地批：报告第七节四项全部执行，A-01 覆盖率口径决策以实证驱动（pytest-cov 实测全 scripts 百分之十八、门禁层百分之二十四、计时增百分之八十二，三条结构性失真理由——子进程验证失明、双轨制、生成器脚本占多数——故不引 CI 覆盖率门禁，决策与基线全文入 pytest.ini 注释，替代呈现为资产清单）；A-02 由精确钉版升级为死依赖移除（全仓含归档零 import fonttools 与 brotli 实证、W564 一次性工具遗留、打包件无依赖声明，故从 requirements 移除并改指南按需安装）；A-03 HANDOVER 登记 BL-26 内容质量方差、BL-27 工程 overhead、BL-28 单点故障三条不设关闭项风险，写作规范第四节增五条 AI 内容生产特有反模式；A-04 评审原文二百三十五行动字节归档 tmpe 加三轮结构映射 README；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 ruff 零
+```
