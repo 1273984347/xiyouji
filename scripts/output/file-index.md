@@ -11,6 +11,14 @@
 ---
 
 
+## W783 B_人物行为保持重构批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/B_人物/character_appearance.py | W783 | 行为保持重构：聚合拆三函数+首回计算提函数（保急切求值） |
+| scripts/B_人物/character_network.py | W783 | 行为保持重构：共现累积拆函数+combinations 等价 |
+| docs/00-导读/W批次编号对账表.md | W783 | W783 认领登记 |
+
 ## W782 utils 与 run_all 行为保持重构批（2026-10-18）
 
 | 文件 | W | 说明 |

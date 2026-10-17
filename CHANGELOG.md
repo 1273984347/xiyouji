@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W782），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W783），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,15 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W783（2026-10-18）：B_人物行为保持重构批
+> **来源**：外部重构提案收编第二批（用户令「做」）。动工前 preflight PASS（W783 认领·零交集）。
+> - **character_appearance**：aggregate 内排行榜/矩阵/前端契约字段三段拆 _build_ranking/_build_matrix/_build_characters_out；first_chapter 计算提 _resolve_first_chapter 并**显式保住字面值先求值语义**（与原 dict.get 默认参数急切求值一致·防 first_appear 数据完整性判断静默变化）；正则提 _CHAPTER_NUM_RE；W643/W678/W565 溯源注释逐字保留。
+> - **character_network**：单回共现累积拆 _accumulate_chapter；嵌套循环改 itertools.combinations（pair 键 tuple(sorted()) 等价）；节点/边结构与排序键逐字保留。
+> - **character_nlp 不收**：提案整文件重写约千行，转录落地风险大于可读性收益；W101/W102 上下文排除规则与 W691 追踪集属密缘导管且无自动对拍面（run_all 各类仅执行目录首脚本·B 类=__init__.py·nlp 不在自动回归面）——留待机械通道（直接以文档驱动 apply+五产物 diff 的执行方式）。
+> - **对拍（流水线 §八）**：两脚本全量前后各一轮，输出 character_appearance.json（89KB）/character_network.json（38KB）**逐字节相等**；pytest 630 passed；ruff scripts/ 全目录 0；verify 全量 0 FAIL。
+> - **状态**：已落地（对拍全绿）；级联+提交+推送按批次流程执行。
+> - **文件**：scripts/B_人物/character_appearance.py、scripts/B_人物/character_network.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w783_spec.json、scripts/output/_cascade_files_W783.txt
 
 ### W782（2026-10-18）：utils 与 run_all 行为保持重构批
 > **来源**：外部重构提案收编第一批（用户令「做」·全文 21938 行含约 30 文件重构方案与三轮项目批评·经对盘核实分档：JS 门禁部分 W775 已执行、5 项裁决发现 3 项旧快照、utils 与分析脚本部分仍然有效）。动工前 preflight PASS（W782 认领·零交集）。

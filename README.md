@@ -4,7 +4,7 @@
 > **📖 阅读契约（W707）**：分段型——普通读者通读「普通读者专区」；Agent/开发者**只读**「开发者/维护者专区」（技术栈/目录结构/测试/门禁）与「AI 生成说明」，读者导览段（emoji 列表）按需。
 > 一源多形 · 数字人文可视化解读《西游记》100 回 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
 >
-> **当前批次 W782（2026-10-18）**：外部重构提案收编第一批，四件 utils 加 run_all 行为保持重构，aliases 懒加载改 lru_cache 并更名反向索引构建函数，text_loader 与 analyzer_base 与 run_all 拆函数提常量，path_guard 按对账面禁改写自述跳过，对拍验收为全量重跑输出逐字节相等·A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> **当前批次 W783（2026-10-18）**：外部重构提案收编第二批，character_appearance 拆聚合三函数并提首回计算函数保急切求值语义，character_network 拆共现累积函数 combinations 等价改写，character_nlp 整文件重写提案本批不收留待机械通道，对拍验收为两脚本前后输出逐字节相等·A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 >
 > **版本号说明（W711 方案 D 起）**：本项目的批次编号为 **W###**（单调递增·永不复用·唯一对账键），`v2.3` 为内容阶段标签（定性·无 patch 位·不适用 SemVer）；W710 及更早的历史版本号 `vX.Y.Z` 保留原文。判断「这批改了什么」看 [CHANGELOG.md](CHANGELOG.md) 顶段。
 >
