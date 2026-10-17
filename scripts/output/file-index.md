@@ -11,6 +11,19 @@
 ---
 
 
+## W780 目录文档新鲜度门禁批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_folder_docs.py | W780 | 新建：目录文档新鲜度门禁（第 45 槽·四判据对拍·--self-test 7 例） |
+| scripts/gen_folder_docs.py | W780 | 模块化（GOVERNED_SKIP/in_scope/case_collides）+ --refresh 安全刷新（所有权标记判定） |
+| scripts/verify_delivery.py | W780 | 第 45 槽注册（目录文档段·_StrictGate）+ 校数注释按实跑回写 |
+| tests/unit/test_folder_docs_gate.py | W780 | 新建：16 例（合成树断言 + refresh 修复/保护 + 大小写判定 + CLI 退出码） |
+| docs/agent/gates.md | W780 | 第 45 槽全量定义 + 速查表 27-42→27-45 存量漂移顺修 |
+| AGENTS.md | W780 | §4.2 计数 44→45（四处）+ 新增条目 45 |
+| docs/00-导读/W批次编号对账表.md | W780 | W780 认领登记 |
+| scripts/output/stats.json | W780 | gate_count 44→45（--w W780） |
+
 ## W779 全仓目录索引补齐批（2026-10-18）
 
 | 文件 | W | 说明 |

@@ -1,6 +1,6 @@
 # AGENTS.md — 《详解西游记》项目 Agent 指南
 
-> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 44 条门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
+> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 45 条门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
 >
 > 本文件面向进入本仓库工作的 AI Agent（及新接手的人类维护者），提供项目的用途、技术栈、目录结构、关键模块、依赖关系、构建运行方式与必须遵守的铁律。动手前请通读；更细的规则以文末「权威文档」为准。
 >
@@ -103,9 +103,9 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 
 ### 4.2 交付门禁体系（verify_delivery.py，pre-commit 强制 · 摘要层）
 
-> **📖 阅读契约（W709）**：索引型——本节=44 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
+> **📖 阅读契约（W709）**：索引型——本节=45 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
 
-verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 44 槽，五组：
+verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 45 槽，五组：
 
 **内容与同步类（1-5）**：
 1. **六文档同步**
@@ -141,7 +141,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 25. **数据内容一致性**
 26. **SEO head**
 
-**编号与质量防线类（27-44）**：
+**编号与质量防线类（27-45）**：
 27. **W 号区间字面量**
 28. **可视化可引用性**
 29. **色盲安全**
@@ -160,6 +160,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 42. **根级脚本覆盖**
 43. **可视化数据断言**（check_chart_values.js·W753）
 44. **英文站 CJK 校验**（validate_en.py·W768）
+45. **目录文档新鲜度**（check_folder_docs.py·W780）
 
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
@@ -285,4 +286,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W773-W773 级联自动滚动·脚注保留最近 5 条·grep 查勿通读）；2026-10-17（W774）CI 首跑分歧修复批（W773 收官后闭环 AC-02）：推送 dev 十提交含 W771 与 W772 积压并开 PR 四十七；首跑 e2e-interaction job 实跑 success 达 AC-02 但 verify-delivery 红（自建第十七门禁 INDEX 校验 Linux 红 Windows 绿）；根因等于 docs_index 裸 sorted Path 在 Windows 用 normcase 与 Linux 大小写敏感两平台序不同（design.md 等混排条目位移）；修复等于 scan_docs 两处排序显式小写键（INDEX 重建零 churn）加 test_docs_index 三例（合成目录不变量加真实树不变量加磁盘生成器一致·Windows 两法等价故真实执行位是 CI）；复跑全绿加 E2E 与 Delivery Gate 双绿；T-02 九项 AC 全部闭环；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 PR 复跑 success；PR 待用户合并；2026-10-17（W775）JS 门禁重构落地批：新增 scripts/lib 两公共模块（gate_common 门禁工具与 playwright_gate_utils 浏览器辅助）并重写三个门禁脚本（chart_values 的 probeInPage 拆六函数与 judgeProbe 拆五判据加 validateGateBaseline 合并重复校验、screenshot_gates 的 checkPage 拆 G1 至 G5 加删死常量、data_drift 的 jsLiteralToJson 拆两纯函数加 main 三分派）；外部契约五维受控对拍零漂移（self-test 同判定、judge 与 gate 三页逐字节一致、截图三十二页一致、基线格式一致）；对拍意外修复第 9 门禁自安全加固起潜伏五个批次的引号腐蚀死代码（两页静默跳过、修复后可比五十七至五十九页全绿）；gitignore 的 lib 规则误伤新目录以定向 negation 修复；ci_wiring 测试断言升级为传递链两环守护；五条待裁决发现裁定三条改两条不改；外部评审七项指控逐条核查成报告（四不成立、两部分成立、一成立）；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 ruff 零；2026-10-17（W776）评审后续行动落地批：报告第七节四项全部执行，A-01 覆盖率口径决策以实证驱动（pytest-cov 实测全 scripts 百分之十八、门禁层百分之二十四、计时增百分之八十二，三条结构性失真理由——子进程验证失明、双轨制、生成器脚本占多数——故不引 CI 覆盖率门禁，决策与基线全文入 pytest.ini 注释，替代呈现为资产清单）；A-02 由精确钉版升级为死依赖移除（全仓含归档零 import fonttools 与 brotli 实证、W564 一次性工具遗留、打包件无依赖声明，故从 requirements 移除并改指南按需安装）；A-03 HANDOVER 登记 BL-26 内容质量方差、BL-27 工程 overhead、BL-28 单点故障三条不设关闭项风险，写作规范第四节增五条 AI 内容生产特有反模式；A-04 评审原文二百三十五行动字节归档 tmpe 加三轮结构映射 README；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 ruff 零；2026-10-17（W777）第 41 篇复盘报告入库批：覆盖 W748 至 W776 二十八段与六十提交、周期约五十小时的断档补课；五项核心发现——审查修复复验闭环四 HIGH 清零、门禁自建即自曝三次实证（K11 潜伏六周、INDEX 跨平台序差、引号腐蚀五批）、CI 实证位认知闭环、两批工具链重构对拍零漂移、外部评审对抗转回应闭环；沉淀八条新经验 E-09 至 E-16、六个问题族 FAM-31 至 36、三条工作流 WF-03 至 05、十一项问题实例其中六项潜伏型；诚实登记复盘断档 Q-11 与 automation 改进候选（待用户批准）；三连带等于 README 二十至二十一篇、STRUCTURE 二十四至二十五篇、INDEX 六百九十六至六百九十七篇、stats 刷新；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 ruff 零；2026-10-17（W778）第 41 篇改进项落地批：改进四项全落地——P-41-01 与 P-41-04 合成 pitfalls 新条目「latent 三问加双平台断言禁例」（接线缺失型、平台序差型、引号腐蚀型三问查法加盘符大小写 os.name 禁例清单，流程节六至七条、总四十至四十一条，AGENTS 三处计数同步）；T-41-02 流水线文档增两节（外部产出落地七步含禁 cp 覆盖红线、重构替换对拍 SOP 含五维矩阵与差异判定三规则，原关联文档顺延第九节）；T-41-01 对拍模板落地 tmpe 下 duipai 脚本与说明并自测双态（计时归一通过、内容差异失败退出码一）；T-41-03 复盘提醒 automation 提案撤销（用户既有规则：自动化全部取消、巡检提醒回归手动按需；误建一次已当场删除、复盘节奏改会话内主动提议）；报告第 41 篇头部补跨周期执行记录；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 ruff 零 加 pitfalls 条目实测四十一。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W774-W774 级联自动滚动·脚注保留最近 5 条·grep 查勿通读）；2026-10-17（W775）JS 门禁重构落地批：新增 scripts/lib 两公共模块（gate_common 门禁工具与 playwright_gate_utils 浏览器辅助）并重写三个门禁脚本（chart_values 的 probeInPage 拆六函数与 judgeProbe 拆五判据加 validateGateBaseline 合并重复校验、screenshot_gates 的 checkPage 拆 G1 至 G5 加删死常量、data_drift 的 jsLiteralToJson 拆两纯函数加 main 三分派）；外部契约五维受控对拍零漂移（self-test 同判定、judge 与 gate 三页逐字节一致、截图三十二页一致、基线格式一致）；对拍意外修复第 9 门禁自安全加固起潜伏五个批次的引号腐蚀死代码（两页静默跳过、修复后可比五十七至五十九页全绿）；gitignore 的 lib 规则误伤新目录以定向 negation 修复；ci_wiring 测试断言升级为传递链两环守护；五条待裁决发现裁定三条改两条不改；外部评审七项指控逐条核查成报告（四不成立、两部分成立、一成立）；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 ruff 零；2026-10-17（W776）评审后续行动落地批：报告第七节四项全部执行，A-01 覆盖率口径决策以实证驱动（pytest-cov 实测全 scripts 百分之十八、门禁层百分之二十四、计时增百分之八十二，三条结构性失真理由——子进程验证失明、双轨制、生成器脚本占多数——故不引 CI 覆盖率门禁，决策与基线全文入 pytest.ini 注释，替代呈现为资产清单）；A-02 由精确钉版升级为死依赖移除（全仓含归档零 import fonttools 与 brotli 实证、W564 一次性工具遗留、打包件无依赖声明，故从 requirements 移除并改指南按需安装）；A-03 HANDOVER 登记 BL-26 内容质量方差、BL-27 工程 overhead、BL-28 单点故障三条不设关闭项风险，写作规范第四节增五条 AI 内容生产特有反模式；A-04 评审原文二百三十五行动字节归档 tmpe 加三轮结构映射 README；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 ruff 零；2026-10-17（W777）第 41 篇复盘报告入库批：覆盖 W748 至 W776 二十八段与六十提交、周期约五十小时的断档补课；五项核心发现——审查修复复验闭环四 HIGH 清零、门禁自建即自曝三次实证（K11 潜伏六周、INDEX 跨平台序差、引号腐蚀五批）、CI 实证位认知闭环、两批工具链重构对拍零漂移、外部评审对抗转回应闭环；沉淀八条新经验 E-09 至 E-16、六个问题族 FAM-31 至 36、三条工作流 WF-03 至 05、十一项问题实例其中六项潜伏型；诚实登记复盘断档 Q-11 与 automation 改进候选（待用户批准）；三连带等于 README 二十至二十一篇、STRUCTURE 二十四至二十五篇、INDEX 六百九十六至六百九十七篇、stats 刷新；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 ruff 零；2026-10-17（W778）第 41 篇改进项落地批：改进四项全落地——P-41-01 与 P-41-04 合成 pitfalls 新条目「latent 三问加双平台断言禁例」（接线缺失型、平台序差型、引号腐蚀型三问查法加盘符大小写 os.name 禁例清单，流程节六至七条、总四十至四十一条，AGENTS 三处计数同步）；T-41-02 流水线文档增两节（外部产出落地七步含禁 cp 覆盖红线、重构替换对拍 SOP 含五维矩阵与差异判定三规则，原关联文档顺延第九节）；T-41-01 对拍模板落地 tmpe 下 duipai 脚本与说明并自测双态（计时归一通过、内容差异失败退出码一）；T-41-03 复盘提醒 automation 提案撤销（用户既有规则：自动化全部取消、巡检提醒回归手动按需；误建一次已当场删除、复盘节奏改会话内主动提议）；报告第 41 篇头部补跨周期执行记录；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 ruff 零 加 pitfalls 条目实测四十一；2026-10-18（W780）目录文档新鲜度门禁批：第四十五槽 check folder docs 挂载（index 生成清单与磁盘实况对拍·四判据为两件套在位子目录清单文件清单标题·README 正文因时点限定声明豁免·漂移差异名直接进 FAIL 行）；生成器两处模块化（治理排除清单与 in scope 判定提升模块级供门禁共用单一事实源·大小写冲突目录全模式跳过按 listdir 真名小写判定两平台同构·docs 目录首跑实证 Windows 红C2Linux红C1 分歧形态）；新增 refresh 安全刷新模式（按生成来源元信息标记判所有权·仅重写生成物·人工维护件自动跳过·本批六生成物刷新六人工件保护实证）使门禁修复路径闭环；门禁首跑自证抓四处漂移后归零（含另一会话施工期临时脚本死名单五项）；跨平台纪律按 pitfalls latent 三问合规（名字符串码点序比对·零平台语义断言·合成树负样本两平台同构）；三方槽位同步（verify 与 gates 与 AGENTS 计数四十四至四十五·速查表二十七至四十二存量漂移顺修·stats gate_count 四十四至四十五）；验证等于 pytest 六百二十 passed 加 verify 全量四十九段零 FAIL 加 ruff 零 加自测七例全过。如与上述权威文档冲突，以权威文档为准。*

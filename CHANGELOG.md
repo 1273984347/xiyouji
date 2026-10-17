@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W779），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W780），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,19 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W780（2026-10-18）：目录文档新鲜度门禁批
+> **来源**：用户令「那你来做」——第 41 篇复盘报告「门禁自建即自曝」防线的延伸：把 W779 落地即登记的生成物漂移面（index.md 为生成时点快照·目录增删后清单过期且无机器防线）收进门禁。动工前 preflight PASS（W780 认领·零交集）；开工前接管另一会话的 W779 收尾（chore 571bb9f1 对账表 hash 回填 + W780 现势预留）。
+> - **第 45 槽 check_folder_docs.py 挂载（--gate·timeout 240·目录文档段）**：全仓在管目录（gen_folder_docs@W779 口径·实测 167 目录）的「index.md 逐文件清单 ↔ 磁盘实况」对拍——C1 index/README 两件套在位 / C2 子目录清单（成员+计数）/ C3 文件清单（跨分组成员并集+计数）/ C4 H1 标题==目录名；漂移差异名直接进 FAIL 行（盘上多/文档多·各列前 5）；README 正文豁免（数字声明带「生成时点」时点限定·非现役谎报·文档规范 §4.9 形态）。
+> - **单一事实源模块化（gen_folder_docs.py）**：GOVERNED_SKIP 自 main() 局部量提升模块级 + 新增 in_scope()（生成器主循环与门禁共用判定·生成器改口径门禁自动跟随）；新增 case_collides()（目录含 INDEX.md 等大小写变体即全模式跳过·os.listdir 真名小写判定两平台同构）——W780 门禁首跑实证 docs/ 目录分歧形态：Windows 把 INDEX.md 当 index.md 读到异构内容报 C2、Linux 会报 C1 缺件，同一目录两平台两种红法，根因即生成器 NTFS 覆写守卫只活了 Windows 判重路径。
+> - **修复路径闭环（--refresh）**：门禁修复提示「重跑生成器」在默认模式不可达（跳过已存在件·刷不了陈旧清单），--force 则会误轰根 README.md 等人工维护档——新增 --refresh 安全刷新：按「生成来源：gen_folder_docs.py」元信息标记判所有权，仅重写生成物、人工维护件自动跳过（HAND 报告）。本批实测：3 目录 6 生成物刷新（scripts 死名单 5 项系另一会话施工期临时调试脚本已删、级联清单与测试文件各 1 项），6 人工维护件 HAND 跳过（mcp-server/scripts 根/packaging/site-en/agent-web 等 README 族）。
+> - **门禁首跑自证（建 gate 即自我实证·W777 复盘 E 族教训）**：真仓首跑抓 4 处漂移（3 处真实清单漂移 + 1 处 docs/ 大小写跨平台分歧）——修复后 0 FAIL；--self-test 7 例注入式（1 正 6 负：fresh/增文件/删文件/增子目录/缺件/手改清单/H1 漂移）全过。
+> - **跨平台纪律（pitfalls「latent 三问 + 双平台断言禁例」合规）**：全部比对基于名字符串（sorted(str) 码点序两平台一致）·零 os.name/盘符/大小写语义断言；负样本用系统临时目录合成树（两平台同构·不触仓库）；测试内先打 ROOT 补丁再调生成器（跨盘 relpath 会炸·C 盘临时目录 vs D 盘仓库根实测）。
+> - **三方槽位同步**：verify_delivery 第 45 槽注册（_StrictGate·目录文档段·校数注释 38 委托/49 段按实跑回写）+ gates.md（全量定义第 45 条 + 组头 27-41→27-45 + 速查表 27-42→27-45——43/44 槽挂载时漏更的存量漂移顺修 + 标题 44→45 槽）+ AGENTS §4.2（阅读契约 45 条/本节 45 槽摘要/内含 45 槽/组头 27-45/新增条目 45）+ scripts/output/stats.json gate_count 44→45（--w W780·复查零漂移 16 键）。
+> - **页脚双 token 顺修（W779 存量缺陷·W724 防线 fail-closed 拦截）**：W779 级联时 spec desc 以「W779」开头，四个 site 页脚链被叠插为「W779 W779…」且 index 与 dukou 两页为**整条目双份**——本批级联 dry-run 被 W724 页脚 token 重复防线当场拦截，顺修四页（删重一份整条目/折叠相邻双 token）后链恢复唯一 token，W780 方能入链；该缺陷随 W779 已提交上线（CI 无页脚链防线·级联时点防线本次首立功）。
+> - **验证（全绿）**：pytest 620 passed / 3 skipped / 0 failed（新增 tests/unit/test_folder_docs_gate.py 16 例：合成树断言 9 + 大小写判定 + refresh 修复生成物 + refresh 保护人工件 + CLI 自测退出码 + round-trip 解析 + in_scope 豁免 + 漂移修复路径）；ruff 0；verify 全量 49 段 0 FAIL（第 45 槽在列·段自洽锁实跑==声明）；gen --dry-run 幂等（0 待写）；W779 推送 CI 全绿（五工作流含 Lighthouse 与截图审查）。
+> - **状态**：已落地（本地全绿）；级联+提交+推送按批次流程执行（main 合并留待用户决策）。
+> - **文件**：scripts/check_folder_docs.py、scripts/gen_folder_docs.py、scripts/verify_delivery.py、tests/unit/test_folder_docs_gate.py、docs/agent/gates.md、AGENTS.md、docs/00-导读/W批次编号对账表.md、scripts/index.md、scripts/output/index.md、scripts/output/README.md、tests/unit/index.md、tests/unit/README.md、scripts/output/stats.json、site/index.html、site/dukou-engine.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w780_spec.json、scripts/output/_cascade_files_W780.txt
 
 ### W779（2026-10-18）：全仓目录索引补齐批
 > **来源**：用户令「检查一下文件内所有文件夹，添加一下 index.md REMADE.md STRUCTURE.md」。三项裁决：① REMADE.md=README.md 误写（仓内 0 先例·用户确认）→ 补 README.md；② STRUCTURE.md 不逐目录复制（根级 STRUCTURE.md 已存·单一事实源·各新文件放指针指回）；③ 范围=245 个在管目录（排除 node_modules/__pycache__/tmpe/构建产物/缓存）。动工前 preflight PASS（W779 认领·零交集）。

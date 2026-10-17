@@ -37,7 +37,8 @@
 
     python scripts/gen_folder_docs.py            # 写入缺失的 index.md / README.md
     python scripts/gen_folder_docs.py --dry-run  # 只报告将写哪些文件
-    python scripts/gen_folder_docs.py --force    # 已存在的也按生成内容重写（默认跳过）
+    python scripts/gen_folder_docs.py --refresh  # 安全刷新陈旧生成物（「生成来源」标记判所有权·人工维护件自动跳过·W780）
+    python scripts/gen_folder_docs.py --force    # 已存在的也按生成内容重写（含人工维护件·慎用）
 
 退出码：0 成功；3 有目录写入失败（未中断整批）；2 参数/环境错误。
 """
@@ -257,6 +258,53 @@ def rel_of(abs_dir: str) -> str:
     return "" if r == "." else r
 
 
+# 治理目录整体跳过（含其下全部子目录）——生成器主循环与 check_folder_docs.py 新鲜度
+# 门禁（第 45 槽）共用本判定（W780 自 main() 局部量提升模块级：单一事实源，两处维护即漂移）：
+# - docs/10-方法论沉淀/：第 17 门禁「方法论 README 双向覆盖」断言（目录 md ↔ README 索引
+#   链接差集=0）——脚本生成的 README 会同时打破双向覆盖并推高 methodology_docs 计数。
+# - docs/11-方案报告/：同族·report_docs 是 stats 键（W737 建·该目录 README 是报告篇数
+#   唯一权威）——W779 首版实证：脚本写入 3 个子目录 README/index 后 report_docs 25→32、
+#   methodology_docs 24→25，第 31 门禁 C5d「stats 与磁盘实算漂移」当场 FAIL。
+# - docs/01-06 内容板块顶层：既有 README 是教学模板档·且 check_frontmatter / check_glossary /
+#   check_citations 的 iter 逻辑按名排除顶层 README（子目录不在三者扫描面）。
+GOVERNED_SKIP = {
+    "docs/10-方法论沉淀",
+    "docs/11-方案报告",
+    "docs/01-全书逐回解读",
+    "docs/02-人物深度分析",
+    "docs/03-主题与情节专题",
+    "docs/04-文化与历史背景",
+    "docs/05-诗词歌赋",
+    "docs/06-个人随笔",
+}
+
+
+def in_scope(abs_dir: str) -> bool:
+    """目录是否在生成器管辖内（治理树排除）。gen_folder_docs 主循环与
+    check_folder_docs.py（第 45 槽）共用本判定——口径改动只改这一处。"""
+    rel = rel_of(abs_dir)
+    return not (rel in GOVERNED_SKIP or any(
+        rel == g or rel.startswith(g + "/") for g in GOVERNED_SKIP
+    ))
+
+
+def case_collides(abs_dir: str) -> bool:
+    """目录内已有 index/README 的大小写变体（如 INDEX.md/Readme.md）→ True。
+
+    NTFS 大小写不敏感：open('index.md','w') 会整文件覆写已存在的 INDEX.md
+    （W779 实测·S4 12 份 + docs/INDEX.md 差点被清空），故生成器**全模式**跳过
+    此类目录；check_folder_docs 第 45 槽同口径豁免。按 os.listdir 真名小写比对
+    （两平台同构·不依赖 fs 大小写语义）——否则 Windows 读到异构内容、Linux 报缺件，
+    同一目录两平台两种红法（W780 首跑实证 docs/ 目录）。
+    """
+    try:
+        names = os.listdir(abs_dir)
+    except OSError:
+        return False
+    return any(n.lower() in ("index.md", "readme.md")
+               and n not in ("index.md", "README.md") for n in names)
+
+
 def build_index(abs_dir: str) -> str:
     """index.md：机器可读逐文件清单（定位=「这个目录里有什么」·不含叙述与约定）。"""
     rel = rel_of(abs_dir)
@@ -384,42 +432,26 @@ def render(abs_dir: str, kind: str) -> str:
 def main() -> int:
     ap = argparse.ArgumentParser(description="为在管目录补齐 index.md / README.md")
     ap.add_argument("--dry-run", action="store_true", help="只报告将写哪些文件，不落盘")
-    ap.add_argument("--force", action="store_true", help="已存在的文件也按生成内容重写（默认跳过）")
+    ap.add_argument("--force", action="store_true", help="已存在的文件也按生成内容重写（含人工维护件·慎用）")
+    ap.add_argument("--refresh", action="store_true",
+                    help="安全刷新：仅重写「生成物所有」的既有文件（按「生成来源」标记判定所有权·人工维护件自动跳过）")
     args = ap.parse_args()
 
     global _GITIGNORED_DIRS
     _GITIGNORED_DIRS = _build_gitignored_dirs()
-    dirs = scan_dirs()
-    written, skipped_exist, skipped_readme, failed = [], [], [], []
-
-    # 治理目录整体跳过（含其下全部子目录）：
-    # - docs/10-方法论沉淀/：第 17 门禁「方法论 README 双向覆盖」断言（目录 md ↔ README 索引
-    #   链接差集=0）——脚本生成的 README 会同时打破双向覆盖并推高 methodology_docs 计数。
-    # - docs/11-方案报告/：同族·report_docs 是 stats 键（W737 建·该目录 README 是报告篇数
-    #   唯一权威）——W779 首版实证：脚本写入 3 个子目录 README/index 后 report_docs 25→32、
-    #   methodology_docs 24→25，第 31 门禁 C5d「stats 与磁盘实算漂移」当场 FAIL。
-    # - docs/01-06 内容板块顶层：既有 README 是教学模板档·且 check_frontmatter / check_glossary /
-    #   check_citations 的 iter 逻辑按名排除顶层 README（子目录不在三者扫描面）。
-    GOVERNED_SKIP = {
-        "docs/10-方法论沉淀",
-        "docs/11-方案报告",
-        "docs/01-全书逐回解读",
-        "docs/02-人物深度分析",
-        "docs/03-主题与情节专题",
-        "docs/04-文化与历史背景",
-        "docs/05-诗词歌赋",
-        "docs/06-个人随笔",
-    }
+    dirs_all = scan_dirs()
+    # 大小写冲突目录全模式跳过（INDEX.md 等变体在盘·NTFS 覆写守卫·见 case_collides）
+    dirs = [d for d in dirs_all if not case_collides(d)]
+    skipped_collision = len(dirs_all) - len(dirs)
+    written, skipped_exist, skipped_readme, skipped_hand, failed = [], [], [], [], []
 
     for d in dirs:
-        rel = rel_of(d)
-        if rel in GOVERNED_SKIP or any(
-            rel == g or rel.startswith(g + "/") for g in GOVERNED_SKIP
-        ):
+        if not in_scope(d):
             continue
 
         for kind in ("index.md", "README.md"):
-            if _kind_exists(d, kind) and not args.force:
+            exists_kind = _kind_exists(d, kind)
+            if exists_kind and not (args.force or args.refresh):
                 if kind == "README.md":
                     skipped_readme.append(os.path.relpath(os.path.join(d, kind), ROOT))
                 else:
@@ -431,9 +463,25 @@ def main() -> int:
                 written.append(rel_target)
                 continue
             # 写前再校验一次（防 dry-run 与实际写之间并发产生 INDEX.md 被覆写）
-            if _kind_exists(d, kind) and not args.force:
+            exists_kind = _kind_exists(d, kind)
+            if exists_kind and not (args.force or args.refresh):
                 skipped_exist.append(rel_target)
                 continue
+            if exists_kind and args.refresh and not args.force:
+                # --refresh 所有权判定：带「生成来源：gen_folder_docs.py」元信息标记（或
+                # 内容与当前渲染全等）→ 生成物所有·可安全刷新；否则视为人工维护/手改件
+                # （所有权已转移）跳过——防 --force 式误轰根 README.md 等手工档（W780）
+                try:
+                    with open(target, encoding="utf-8") as f:
+                        content = f.read()
+                except OSError:
+                    content = None
+                owned = content is not None and (
+                    "> 生成来源：`scripts/gen_folder_docs.py`@" in content
+                    or content == render(d, kind))
+                if not owned:
+                    skipped_hand.append(rel_target)
+                    continue
             try:
                 with open(target, "w", encoding="utf-8", newline="\n") as f:
                     f.write(render(d, kind))
@@ -443,13 +491,17 @@ def main() -> int:
                 continue
             written.append(rel_target)
 
-    print("在管目录数：%d" % len(dirs))
+    print("在管目录数：%d（大小写冲突跳过 %d）" % (len(dirs), skipped_collision))
     print("将写入/已写入文件数：%d（index.md %d · README.md %d）" % (
         len(written),
         sum(1 for w in written if w.lower().endswith("index.md")),
         sum(1 for w in written if w.lower().endswith("readme.md")),
     ))
     print("已存在跳过：index.md %d · README.md %d" % (len(skipped_exist), len(skipped_readme)))
+    if skipped_hand:
+        print("人工维护件跳过 %d 个（--refresh 所有权判定不等·未覆写）：" % len(skipped_hand))
+        for rel_t in skipped_hand:
+            print("  HAND  " + rel_t)
     if failed:
         print("写入失败 %d 个（目录被占用/沙盒拒绝·未中断整批）：" % len(failed))
         for rel_target, etype in failed:
