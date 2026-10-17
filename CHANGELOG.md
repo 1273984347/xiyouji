@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W773），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W774），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,18 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W774（2026-10-17）：CI 首跑分歧修复批
+> **来源**：W773 收官后用户指令闭环 AC-02——推送 origin/dev（10 提交·含 W771/W772 dev 积压）并开 PR #47 dev→main，CI 首跑暴露新缺陷，本批修复并复跑全绿。
+> - **CI 首跑实况（run 39033092055）**：e2e-interaction job **success**（T-02 AC-02 核心判据达成·job 日志实证 K11 `animation-name=wordFloat`·22 断言全过——W674 遗留回归的修复在 CI 真实验证）；但 verify-delivery job **红**：本批自建的第 17 门禁「docs/INDEX.md 产物级校验」在 Linux 报 INDEX 过期（本地 Windows 全绿）。
+> - **根因（第三项 latent·「本地绿/CI 红」分歧族）**：`docs_index.scan_docs` 裸 `sorted(Path)` 在 Windows 用 normcase（大小写不敏感）、Linux 用大小写敏感——`00-导读` 的 `design.md` 与 `10-方法论沉淀` 的大小写混排条目在两平台排序不同（实测 diff：design.md 位次 7↔10·方法论三条目位移），生成内容与入库 INDEX.md 失配。**且由本批自建门禁自曝**——新防线「违例必红」有效性的正面实证。
+> - **修复**：scan_docs 两处排序显式加 `str(p).lower()` 键（纯 Python 串比较·平台无关·与存量 INDEX.md 顺序字节一致·重建零 churn 实测 `git diff` 为空）。
+> - **回归防线**：新增 `tests/unit/test_docs_index.py` 三例——合成目录小写键序不变量（Beta/alpha/Gamma）、真实 docs/ 树不变量、磁盘与生成器逐字节一致。注意 Windows 上裸排与小写键等价（normcase），合成用例在 Windows 两法均绿——**真实执行位是 CI（Linux）**，与 W773「CI 才是实证位」同款保护模型（已入 docstring）。
+> - **T-02 闭环记录**：PR #47（https://github.com/1273984347/xiyouji/pull/47）复跑 run [39034308443](https://github.com/1273984347/xiyouji/actions/runs/39034308443) **success**——E2E Interaction 与 Delivery Gate 双绿·全 9 job+矩阵过；计划文件 ST-04 与 AC-02 转闭环（两轮 run URL 留证）。
+> - **范围纪律**：不动 verify_delivery.py·无 site 页面改动·INDEX.md 重建零 diff·视觉套件仍不入 CI。
+> - **验证（全绿）**：pytest **602 passed / 3 skipped / 0 failed**（599+3 新增）；verify_delivery 全量 49 段 0 FAIL；ruff 0；gate 17 直跑 exit 0；docs_index --check exit 0；PR #47 CI 复跑 success。
+> - **状态**：已落地并推送；PR #47 待用户合并（main 写操作按纪律留待用户决策）。
+> - **文件**：scripts/docs_index.py、tests/unit/test_docs_index.py、docs/11-方案报告/计划方案/执行前计划-T02-工程基础设施薄弱点修复.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、docs/00-导读/项目说明.md、HANDOVER.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w774_spec.json、scripts/output/_cascade_files_W774.txt。
 
 ### W773（2026-10-17）：工程基础设施薄弱点修复批
 > **来源**：用户 2026-10-17 会话批准执行 T-02《执行前计划——工程基础设施薄弱点修复》（`docs/11-方案报告/计划方案/执行前计划-T02-工程基础设施薄弱点修复.md`·V1.0）——四项「有设施无防线」缺陷修复批，分 WS1~WS4 四波推进，本地五提交（W772 收官 chore / 波一 CI 接线+视觉 / WS3 英文站 a11y / WS4 索引门禁 / 本级联收尾）。

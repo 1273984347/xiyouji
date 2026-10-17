@@ -258,3 +258,8 @@
 ```text
 2026-10-16（W768）英文站校验接线批（用户令继续·W760 F-3 HIGH 收口）：validate_en 加 --all 批量（汇总行 EN validate·任一页违规退一）加语料索引豁免区（SEARCH_INDEX BEGIN END 包裹视为引用语料）加单页输出逐字节兼容；六页整改等于 chart-design 字典百二十六对转形加 methodology 三十二对加四角键值化加 appearance 三十五对加 chapter-stats 第 N 回到 Chapter N 百零二加 relationships 调试串加 search 豁免零改动；接线等于 verify 第四十四槽五面注册加段数四十九自洽加 CI 经 verify-delivery 生效加 Makefile 目标挂 ci 加第四十二槽豁免行移除；三方编号等于 AGENTS 四十四加 gates.md 四十四加 stats gate_count 四十三到四十四加 README 标记同步；验证等于全站百三十八页通过加 verify 四十九段零 FAIL 加 CSP 重注零漂移加 pytest 五百九十七 passed
 ```
+以下为 AGENTS.md 版本脚注早期条目（W769-W769）段的原文（单行沿革链·W774 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-16（W769）动效时长归一与口径说明修正批（用户令继续·W760 P1/P2 残余）：动效面等于全站扫描三十七处二十页归一为六百（最大三千·九百万白名单经核不适用）加第十三门禁补 duration 超六百判据扫 site 全域加负样本实证；口径面等于统计口径说明标题与算法改八十七（八十八文件减模板壳）加现役文案八处同步（首页四处看板一处 DESIGN 一节 HANDOVER 节头 启动 Prompt）加历史记录保留加 S4 冻结稿不改加 C5 扫描域补该文件加装载与夹具加自测十八过；验证等于全站零超限加负样本闭环加 CSP 重注零漂移加 pytest 五百九十七 passed 加 verify 四十九段零 FAIL
+```
