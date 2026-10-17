@@ -1,0 +1,23 @@
+{
+  "batch": "W769",
+  "date": "2026-10-16",
+  "title": "W769 动效时长归一与口径说明修正批",
+  "desc": "动效 duration 全站归一（37 处至≤600+第 13 门禁补规则）+统计口径说明 86→87 级联（8 处现役文案+C5 域扩展）",
+  "head_entry": "2026-10-16（W769 动效时长归一与口径说明修正批）",
+  "head_sentence": "动效时长全站归一加门禁补规则加口径说明修正加现役文案同步加扫描域扩展",
+  "changelog_body": "\n> **来源**：用户令「继续」（W760 审查 P1/P2 残余小项：F-4 动效盲区 + F-9/F-10 口径说明与文案）。\n> - **WS1 动效时长归一（F-4）**：① 全站扫描实测——`.duration(N)` N>600 共 **37 处 / 20 页**（site/en 19 页 + dashboard；最大 journey-map-interactive 3000·与 W462 已归一的 zh 站形成对照）；② **37 处全部归一为 600**（DESIGN §5.1 全站硬指标 N ≤ 600·入场档上限；cultural-misreading 两处 900 经上下文核验系入场动画非 KPI count-up·不适用 900 白名单）；③ **第 13 门禁补规则**（check_motion_ban.py）——新增 `.duration(N)` N>600 判据（扫域=site/** 全部 HTML·天然覆盖 en 站·白名单仅 KPI count-up 900 须伴 easeOutExpo 上下文）；**负样本实证**（注入 9999 → 门禁转红且精确到路径+上下文 → 恢复转绿）。此前全仓无任何 duration 检查器（审查员面「扫描域盲区」归因修正为「规则缺位」）。\n> - **WS2 口径说明修正（F-9/F-10）**：① `docs/00-导读/统计口径说明.md` §2 自相矛盾修正——标题「= 86 页」→「= 87 页」·算法行更新为「88 文件 − _shell = 87」（W694 起级联·W459 旧口径块注释替换）；② **现役叙述面 8 处 86→87 同步**——site/index.html ×4（KPI 数字块/「全部 86 页」/「86 个 D3.js」/「全站 86 个页面」）+ site/dashboard.html ×1 + DESIGN.md 首节 + HANDOVER.md「V 方向」节头 + 新Agent启动Prompt.md（Html=88·对外 87）；**历史记录保留口径**：HANDOVER「曾为静态博物馆」回顾段与 W445/W446 批次记录等历史语境数字不改写；S4 投稿冻结稿不在门禁分母（不改）。\n> - **WS2b 门禁域扩展**：`check_doc_sync.py` C5 扫描域补入「统计口径说明.md」（该文件自称「唯一口径来源」却此前不在任何扫描域·F-9 根因）+ 装载器 + 自测夹具三处；**自测 18/18 通过**。\n> - **验证（全绿）**：全站 duration 扫描 0 超限；check_motion_ban 负样本闭环；check_doc_sync 自测 18/18 + C5 扩展后零新告警；CSP 重注零漂移（改内联脚本 20 页后）；**pytest 597 passed**；verify_delivery 全量 49 段 0 核心 FAIL。\n> - **状态**：已提交（本地）。\n> - **文件**：scripts/check_motion_ban.py、scripts/check_doc_sync.py、docs/00-导读/统计口径说明.md、site/index.html、site/dashboard.html、site/en/（19 页）、DESIGN.md、HANDOVER.md、新Agent启动Prompt.md、scripts/output/_w769_spec.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、.github/workflows/README.md、site/index.html、site/dukou-engine.html、site/data/tag-cloud.html、site/data/cross-time-danmaku.html、archive/docs/AGENTS-ARCHIVE.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_cascade_files_W769.txt。\n",
+  "milestone_block": "- **W769 动效时长归一与口径说明修正批**：\n  - 动效：37 处 duration 归一 ≤600 + 第 13 门禁补判据（负样本实证）\n  - 口径：统计口径说明 86→87 + 8 处现役文案同步 + C5 扫描域扩展（自测 18/18）\n",
+  "agents_note": "2026-10-16（W769）动效时长归一与口径说明修正批（用户令继续·W760 P1/P2 残余）：动效面等于全站扫描三十七处二十页归一为六百（最大三千·九百万白名单经核不适用）加第十三门禁补 duration 超六百判据扫 site 全域加负样本实证；口径面等于统计口径说明标题与算法改八十七（八十八文件减模板壳）加现役文案八处同步（首页四处看板一处 DESIGN 一节 HANDOVER 节头 启动 Prompt）加历史记录保留加 S4 冻结稿不改加 C5 扫描域补该文件加装载与夹具加自测十八过；验证等于全站零超限加负样本闭环加 CSP 重注零漂移加 pytest 五百九十七 passed 加 verify 四十九段零 FAIL",
+  "file_index_rows": [
+    "| scripts/check_motion_ban.py | W769 | 补 .duration(N) N>600 判据（DESIGN §5.1·count-up 900 白名单） |",
+    "| scripts/check_doc_sync.py | W769 | C5 扫描域补统计口径说明.md（装载+夹具同步·自测 18/18） |",
+    "| docs/00-导读/统计口径说明.md | W769 | §2 86→87（唯一口径来源自相矛盾修正） |",
+    "| site/index.html | W769 | 4 处 86→87 + duration 归一 |",
+    "| site/dashboard.html | W769 | 86→87 + duration 归一 |",
+    "| site/en/（19 页） | W769 | duration 全部归一 ≤600 |",
+    "| DESIGN.md | W769 | 首节 86→87 |",
+    "| HANDOVER.md | W769 | V 方向节头 86→87 |",
+    "| 新Agent启动Prompt.md | W769 | 可视化页 87（Html=88） |",
+    "| scripts/output/_w769_spec.json | W769 | 本批 spec 入库 |"
+  ]
+}

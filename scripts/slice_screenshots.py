@@ -6,14 +6,10 @@ import glob
 import os
 
 from PIL import Image
+from utils.path_guard import SCRIPTS_ROOT as _W536_ROOT
+from utils.path_guard import make_guard
 
-_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
-
-def _w536_guard_open(path, *a, **k):
-    _real = os.path.realpath(path)
-    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
-        raise SystemExit("W536 guard: path escapes project root: %s" % path)
-    return open(_real, *a, **k)
+_w536_guard_open = make_guard(_W536_ROOT)  # W761：守卫单模块化；_W536_ROOT 名保留（test_slice_screenshots S5 钉死）
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_OUT = os.path.join(ROOT, 'scripts', 'output', 'screenshots')

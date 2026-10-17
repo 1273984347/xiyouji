@@ -1,0 +1,18 @@
+{
+  "batch": "W778",
+  "date": "2026-10-17",
+  "title": "W778 第 41 篇改进项落地批",
+  "desc": "复盘改进三项落地，latent 三问与双平台禁例入 pitfalls，外部产出七步与对拍 SOP 入流水线文档，对拍模板固化，复盘提醒 automation 提案按用户规则撤销",
+  "head_entry": "2026-10-17（W778 第 41 篇改进项落地批）",
+  "head_sentence": "复盘改进三项落地：latent 三问入 pitfalls，外部产出七步与对拍 SOP 入流水线，对拍模板固化并自测通过，复盘提醒 automation 提案撤销",
+  "changelog_body": "\n> **来源**：用户令「开始优化」——第 41 篇复盘报告 §8 计划中 WorkBuddy 归属项（T-41-01/02/04、P-41-01、T-41-03）——三项落地、一项撤销（T-41-03 见下）。动工前 preflight PASS（W778 认领·零交集）。\n> - **P-41-01 + P-41-04 合成 pitfalls 新条目（流程节 6→7·总 40→41）**：`docs/agent/pitfalls.md` 新增「**latent 三问 + 双平台断言禁例**」——① 接线缺失型（K11 动画规则自 W674 潜伏 6 周·E2E 零接线·查法=列套件在 `run:` 块出现次数）；② 平台序差型（INDEX 门禁 CI 红/本地绿·`sorted(Path)` 两平台语义差·查法=显式键+双平台可判负样本）；③ 引号腐蚀型（`c === '\"'` 被吞成空串比较·分支死代码五批·查法=逐字节验字符+五维对拍）。**双平台禁例**：盘符存在性/大小写不敏感排序/`os.name` 默认值断言在 Windows 负样本不可辨——必须登记「真实执行位=CI（Linux）」并 docstring 注明（处置例 test_tmpe_tidy::test_check_same_volume）。**AGENTS §4.3 三处计数同步**（阅读契约 38→41 条 / 流程节 6→7 / 总 38→40→41 修述）。\n> - **T-41-02 流水线文档增补两节**：`docs/10-方法论沉淀/批次交付流水线.md` 新增 **§七 外部产出落地七步**（提取 round-trip→静态契约核验→旧版快照→字节级落地→对拍→全量验证→差异定性表·红线=禁止直接 cp 覆盖）与 **§八 重构/替换的对拍 SOP**（五维矩阵表：self-test/纯函数面/子集/全量/产物格式·各带归一化与降级路径 + 差异判定三规则：抖动归一/契约零容忍/覆盖集合变化须追根因且不得回滚修复）；原 §七 关联文档顺延 §九（全仓无 §七 引用·零断链）。\n> - **T-41-01 对拍模板落地**：`tmpe/_templates/duipai/`（duipai.py：`snapshot` 采集 stdout/stderr/exit/meta + 计时归一化；`compare` 逐行或多重集 diff + 退出码判定；README 快速用法与判定规则）——**自测通过**：计时差异（1.5s/42ms vs 9.9s/99ms）归一后 PASS·新增内容行 FAIL+exit 1。\n> - **T-41-03 复盘提醒 automation：提案撤销**——用户既有规则（2026-10-13 U-01：全部自动化取消·巡检/提醒回归手动或按需）优先；本批一度误建「复盘 48h 节奏提醒」被用户当场纠正，已立即删除，复盘节奏改为**会话内主动提议**（每次会话开工读最新篇日期，>48h 主动提示补写）。Q-11 改进路径以手动/按需方式保留。\n> - **报告第 41 篇补跨周期执行记录**：头部加 HTML 注释记录本批三项 P1/P2 落地与 automation 提案撤销（周期口径 W748-W776 不变·第 39 篇同款做法）。\n> - **验证（全绿）**：pytest 602 passed / 3 skipped / 0 failed；verify_delivery 全量 49 段 0 FAIL；ruff 0；pitfalls 顶层条目实测 41 == 各节声明合计 41；duipai.py 自测 PASS/FAIL 双态实证。\n> - **状态**：已落地（本地全绿）；级联+提交+推送按批次流程执行（main 合并留待用户决策）。\n> - **文件**：docs/agent/pitfalls.md、AGENTS.md、docs/10-方法论沉淀/批次交付流水线.md、docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-17.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w778_spec.json、scripts/output/_cascade_files_W778.txt。\n",
+  "milestone_block": "- **W778 第 41 篇改进项落地批**：\n  - pitfalls 增「latent 三问 + 双平台断言禁例」（流程 6→7·总 41·AGENTS 三处同步）；流水线文档增 §七 外部产出七步 + §八 对拍 SOP\n  - 对拍模板 tmpe/_templates/duipai/ 固化并自测通过（计时归一 PASS/内容差异 FAIL）；复盘节奏改会话内主动提议（automation 提案撤销·用户规则）\n  - 验证：pytest 602 passed + verify 49 段 0 FAIL + ruff 0 + pitfalls 条目实测=41\n",
+  "agents_note": "2026-10-17（W778）第 41 篇改进项落地批：改进四项全落地——P-41-01 与 P-41-04 合成 pitfalls 新条目「latent 三问加双平台断言禁例」（接线缺失型、平台序差型、引号腐蚀型三问查法加盘符大小写 os.name 禁例清单，流程节六至七条、总四十至四十一条，AGENTS 三处计数同步）；T-41-02 流水线文档增两节（外部产出落地七步含禁 cp 覆盖红线、重构替换对拍 SOP 含五维矩阵与差异判定三规则，原关联文档顺延第九节）；T-41-01 对拍模板落地 tmpe 下 duipai 脚本与说明并自测双态（计时归一通过、内容差异失败退出码一）；T-41-03 复盘提醒 automation 提案撤销（用户既有规则：自动化全部取消、巡检提醒回归手动按需；误建一次已当场删除、复盘节奏改会话内主动提议）；报告第 41 篇头部补跨周期执行记录；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 ruff 零 加 pitfalls 条目实测四十一",
+  "file_index_rows": [
+    "| docs/agent/pitfalls.md | W778 | 流程节增「latent 三问 + 双平台断言禁例」（6→7 条·总 41） |",
+    "| AGENTS.md | W778 | §4.3 读数契约与计数三处同步（41 条/流程 7/总 40→41） |",
+    "| docs/10-方法论沉淀/批次交付流水线.md | W778 | 新增 §七 外部产出落地七步 + §八 对拍 SOP（原 §七→§九） |",
+    "| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-17.md | W778 | 头部补跨周期执行记录（改进项落地留痕） |",
+    "| docs/00-导读/W批次编号对账表.md | W778 | W778 认领登记 |"
+  ]
+}

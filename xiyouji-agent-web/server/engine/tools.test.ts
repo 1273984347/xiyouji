@@ -183,6 +183,31 @@ const DENIED_COMMANDS: Array<{ cmd: string; why: string; pattern: RegExp }> = [
     pattern: /被禁止的参数/,
   },
   {
+    cmd: "git grep -Oecho;echo pwn -- pattern",
+    why: "W764：git grep -O<pager> 把 pager 交 sh -c 执行（W760 S-01 落盘实证 RCE）→ 参数层拦截",
+    pattern: /被禁止的参数/,
+  },
+  {
+    cmd: "git grep -O=touch /tmp/probe -- pattern",
+    why: "W764：-O=<pager> 等价形态（粘连 token 识别）",
+    pattern: /被禁止的参数/,
+  },
+  {
+    cmd: "git grep --open-files-in-pager=cat -- pattern",
+    why: "W764：--open-files-in-pager 长形态（与 -O 同源）",
+    pattern: /被禁止的参数/,
+  },
+  {
+    cmd: "git log --ext-diff",
+    why: "W764：--ext-diff 外部 diff 驱动执行（同族外呼原语）",
+    pattern: /被禁止的参数/,
+  },
+  {
+    cmd: "git grep pwn > evil.txt",
+    why: "W764：全命令 shell 元字符二次校验（> 重定向形态·防御纵深）",
+    pattern: /shell 元字符/,
+  },
+  {
     cmd: "rm -rf /",
     why: "非白名单首命令（无 shell 直调 argv，rm 从未入列）",
     pattern: /不在白名单/,
@@ -209,6 +234,14 @@ test("T1.4z 命令放行：git status 真实执行成功（isError=false）", as
   const r = await call("run_command", { command: "git status" });
   assert.equal(r.isError, false, `git status 应放行且退出码 0：${r.content}`);
   assert.match(r.content, /branch|master|main/i, "应返回真实 git 输出");
+});
+
+test("T1.4z2 放行校验：git grep 正则交替（|）与锚点（$）不被 W764 元字符校验误伤", async () => {
+  // W764 设计决策钉死：元字符黑名单只含 ; & > < 反引号/换行——`|` 与 `$` 是 git grep 正则的
+  // 合法语法（交替/锚点），必须保持放行。判据=命令进入 git 执行（无匹配 exit=1 属 git 语义·非拒绝）
+  execFileSync("git", ["init", "-q"], { cwd: ROOT, stdio: "ignore" });
+  const r = await call("run_command", { command: 'git grep "master|main$" -- .gitignore' });
+  assert.doesNotMatch(r.content, /被禁止的参数|shell 元字符|不在白名单/, `不应被安全层拒绝：${r.content}`);
 });
 
 test("T1.4y 前缀绕过闭环：根内真实存在的可执行脚本也不得经 scripts/../ 拉起", async () => {

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""check_governance_docs.py — 治理文档维护契约门禁（W477 后 · WARN 起步）
+"""check_governance_docs.py — 治理文档维护契约门禁（W477 后 WARN 起步 · W781 转正 FAIL）
 
 防「追加式乱写」（W419-W424 启动 Prompt / 交接文档膨胀先例，2026-08-18 治理）：
   1. 新Agent启动Prompt.md 五段骨架（【第 1 步】…【第 5 步】顺序）与「维护契约」存在

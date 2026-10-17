@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-DmCPn5NICJSdBl13QdlBO/Ec6lzgcRrtHFLGZHidzKY=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-IvOmkKkdCOT5TNmr2sPe+KLBwhpSU4wN2FVksaEYt2I=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-0tLHkkE+fyRXMQQ4MFFDrFDIJQ1BoiOvrz83roM9NLk=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-IvOmkKkdCOT5TNmr2sPe+KLBwhpSU4wN2FVksaEYt2I=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Relationship Network · Annotated Journey to the West</title>
@@ -5560,7 +5560,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
     // ===== loadJson: EMBEDDED 单源（W565）=====
     async function loadJson(path, fallback) {
         // 数据与页面同源生成，部署态不再重复 fetch（每次访问省 6 次请求 / ~225KB 传输）
-        console.info('[DATA] EMBEDDED 单源:', path);
+        console.info('[DATA] EMBEDDED single-source:', path);
         return fallback;
     }
 
@@ -7184,5 +7184,6 @@ const link = svg.append('g').selectAll('line')
     }, { passive: true, capture: true });
 })();
 </script>
+<script defer src="../static/js/chart-a11y.js"></script>
 </body>
 </html>

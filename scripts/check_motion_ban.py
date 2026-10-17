@@ -6,6 +6,8 @@
 - rotate(360/720（旋转动画）
 - animation 无限循环（infinite）
 - parallax（视差滚动）
+- d3 .duration(N) 数字形态 N > 600（DESIGN §5.1 全站硬指标·W769 补入·W760 F-4 实证
+  en 站 19 页超限与门禁盲区；白名单：KPI count-up 900 需伴 easeOutExpo 上下文）
 
 白名单（功能性/一次性）：
 - .chart-loading 呼吸骨架（功能加载指示）
@@ -68,13 +70,23 @@ def main():
             for m in pat.finditer(body):
                 ctx = body[max(0, m.start() - 40):m.end() + 20].replace("\n", " ")
                 fails.append(f"{rel}: {desc} → …{ctx}…")
+        # W769：d3 .duration(N) 硬指标 N ≤ 600（DESIGN §5.1·白名单 KPI count-up 900 伴 easeOutExpo）
+        for m in re.finditer(r"\.duration\(\s*(\d+)\s*\)", body):
+            n = int(m.group(1))
+            if n <= 600:
+                continue
+            ctx0 = body[max(0, m.start() - 90):m.end() + 40]
+            if n == 900 and "easeOutExpo" in ctx0:
+                continue  # KPI count-up 白名单
+            ctx = ctx0.replace("\n", " ")
+            fails.append(f"{rel}: .duration({n}) 超 600（DESIGN §5.1 硬指标） → …{ctx}…")
     print(f"动效禁止清单门禁：命中 {len(fails)}")
     for msg in fails[:15]:
         print("  FAIL", msg)
     if fails:
         print("FAIL 详情见上（超 15 条仅显示前 15）")
         return 1
-    print("OK   动效禁止清单门禁通过（无 bounce/旋转/无限循环/parallax）")
+    print("OK   动效禁止清单门禁通过（无 bounce/旋转/无限循环/parallax·duration≤600）")
     return 0
 
 

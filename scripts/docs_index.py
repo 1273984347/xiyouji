@@ -64,9 +64,16 @@ def extract_title(path: Path) -> str:
 
 
 def scan_docs(docs_dir: Path, include_dev: bool = False) -> dict:
-    """扫描 docs/ 返回 {section_name: [(title, rel_path), ...]}。"""
+    """扫描 docs/ 返回 {section_name: [(title, rel_path), ...]}。
+
+    W773 修：排序键显式取 `str(p).lower()`——裸 `sorted(Path)` 在 Windows 用
+    normcase（大小写不敏感）、Linux 用大小写敏感，00-导读 的 design.md 与
+    10-方法论沉淀 的大小写混排条目在两平台序不同（第 17 门禁 INDEX 产物级
+    校验 CI 首跑即红·「本地绿/CI 红」分歧族）。小写键为纯 Python 串比较、
+    平台无关；与存量 INDEX.md 顺序字节一致（实测零 churn）。
+    """
     result = {}
-    for sub in sorted(docs_dir.iterdir()):
+    for sub in sorted(docs_dir.iterdir(), key=lambda p: str(p).lower()):
         if not sub.is_dir():
             continue
         if sub.name.startswith("_") and not include_dev:
@@ -76,7 +83,7 @@ def scan_docs(docs_dir: Path, include_dev: bool = False) -> dict:
         entries = []
         # W757：递归扫描（11-方案报告 起含子目录·如 工作复盘与优化分析报告/ 与 计划方案/），
         # 排序键用相对路径保证跨子目录顺序稳定（原 sub.glob("*.md") 只扫顶层，改名子目录化后会漏项）。
-        for md in sorted(sub.rglob("*.md")):
+        for md in sorted(sub.rglob("*.md"), key=lambda p: str(p).lower()):
             if md.name == "INDEX.md":
                 continue
             title = extract_title(md)

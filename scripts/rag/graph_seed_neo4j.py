@@ -20,14 +20,12 @@ LightRAG 原生支持 Neo4j 作为存储后端。本脚本让本项目的「佛�
 import csv
 import json
 import os
+import sys
 
-_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # scripts/ 入 path（utils 公共包）
+from utils.path_guard import SCRIPTS_ROOT, make_guard
 
-def _w536_guard_open(path, *a, **k):
-    _real = os.path.realpath(path)
-    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
-        raise SystemExit("W536 guard: path escapes project root: %s" % path)
-    return open(_real, *a, **k)
+_w536_guard_open = make_guard(SCRIPTS_ROOT)  # W761：W536 守卫单模块化（root=scripts/）
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(_HERE, "..", ".."))

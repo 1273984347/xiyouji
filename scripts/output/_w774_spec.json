@@ -1,0 +1,18 @@
+{
+  "batch": "W774",
+  "date": "2026-10-17",
+  "title": "W774 CI 首跑分歧修复批",
+  "desc": "CI 首跑分歧修复（docs_index 跨平台排序根修加回归测试）与 T-02 推送闭环",
+  "head_entry": "2026-10-17（W774 CI 首跑分歧修复批）",
+  "head_sentence": "CI 首跑分歧修复：docs_index 跨平台排序根修，T-02 推送与 CI 实证闭环",
+  "changelog_body": "\n> **来源**：W773 收官后用户指令闭环 AC-02——推送 origin/dev（10 提交·含 W771/W772 dev 积压）并开 PR #47 dev→main，CI 首跑暴露新缺陷，本批修复并复跑全绿。\n> - **CI 首跑实况（run 39033092055）**：e2e-interaction job **success**（T-02 AC-02 核心判据达成·job 日志实证 K11 `animation-name=wordFloat`·22 断言全过——W674 遗留回归的修复在 CI 真实验证）；但 verify-delivery job **红**：本批自建的第 17 门禁「docs/INDEX.md 产物级校验」在 Linux 报 INDEX 过期（本地 Windows 全绿）。\n> - **根因（第三项 latent·「本地绿/CI 红」分歧族）**：`docs_index.scan_docs` 裸 `sorted(Path)` 在 Windows 用 normcase（大小写不敏感）、Linux 用大小写敏感——`00-导读` 的 `design.md` 与 `10-方法论沉淀` 的大小写混排条目在两平台排序不同（实测 diff：design.md 位次 7↔10·方法论三条目位移），生成内容与入库 INDEX.md 失配。**且由本批自建门禁自曝**——新防线「违例必红」有效性的正面实证。\n> - **修复**：scan_docs 两处排序显式加 `str(p).lower()` 键（纯 Python 串比较·平台无关·与存量 INDEX.md 顺序字节一致·重建零 churn 实测 `git diff` 为空）。\n> - **回归防线**：新增 `tests/unit/test_docs_index.py` 三例——合成目录小写键序不变量（Beta/alpha/Gamma）、真实 docs/ 树不变量、磁盘与生成器逐字节一致。注意 Windows 上裸排与小写键等价（normcase），合成用例在 Windows 两法均绿——**真实执行位是 CI（Linux）**，与 W773「CI 才是实证位」同款保护模型（已入 docstring）。\n> - **T-02 闭环记录**：PR #47（https://github.com/1273984347/xiyouji/pull/47）复跑 run [39034308443](https://github.com/1273984347/xiyouji/actions/runs/39034308443) **success**——E2E Interaction 与 Delivery Gate 双绿·全 9 job+矩阵过；计划文件 ST-04 与 AC-02 转闭环（两轮 run URL 留证）。\n> - **范围纪律**：不动 verify_delivery.py·无 site 页面改动·INDEX.md 重建零 diff·视觉套件仍不入 CI。\n> - **验证（全绿）**：pytest **602 passed / 3 skipped / 0 failed**（599+3 新增）；verify_delivery 全量 49 段 0 FAIL；ruff 0；gate 17 直跑 exit 0；docs_index --check exit 0；PR #47 CI 复跑 success。\n> - **状态**：已落地并推送；PR #47 待用户合并（main 写操作按纪律留待用户决策）。\n> - **文件**：scripts/docs_index.py、tests/unit/test_docs_index.py、docs/11-方案报告/计划方案/执行前计划-T02-工程基础设施薄弱点修复.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、docs/00-导读/项目说明.md、HANDOVER.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w774_spec.json、scripts/output/_cascade_files_W774.txt。\n",
+  "milestone_block": "- **W774 CI 首跑分歧修复批**：\n  - PR #47 首跑：e2e-interaction 实跑 success（AC-02 达成）·verify-delivery 红（INDEX 校验 Linux 红 Windows 绿）\n  - 根因=docs_index 裸 sorted(Path) 跨平台排序序不同（normcase vs 大小写敏感）→ 显式小写键修复（INDEX 重建零 churn）+ test_docs_index 三例\n  - 复跑全绿（E2E + Delivery Gate 双绿）·T-02 九项 AC 全部闭环\n",
+  "agents_note": "2026-10-17（W774）CI 首跑分歧修复批（W773 收官后闭环 AC-02）：推送 dev 十提交含 W771 与 W772 积压并开 PR 四十七；首跑 e2e-interaction job 实跑 success 达 AC-02 但 verify-delivery 红（自建第十七门禁 INDEX 校验 Linux 红 Windows 绿）；根因等于 docs_index 裸 sorted Path 在 Windows 用 normcase 与 Linux 大小写敏感两平台序不同（design.md 等混排条目位移）；修复等于 scan_docs 两处排序显式小写键（INDEX 重建零 churn）加 test_docs_index 三例（合成目录不变量加真实树不变量加磁盘生成器一致·Windows 两法等价故真实执行位是 CI）；复跑全绿加 E2E 与 Delivery Gate 双绿；T-02 九项 AC 全部闭环；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 PR 复跑 success；PR 待用户合并",
+  "file_index_rows": [
+    "| scripts/docs_index.py | W774 | scan_docs 两处排序显式 str(p).lower() 键（跨平台确定性·CI 首跑分歧根修） |",
+    "| tests/unit/test_docs_index.py | W774 | 新增三例：小写键序不变量/真实树不变量/磁盘与生成器一致 |",
+    "| docs/11-方案报告/计划方案/执行前计划-T02-工程基础设施薄弱点修复.md | W774 | ST-04 与 AC-02 转闭环（两轮 CI run URL 留证）+不完成定义附记 |",
+    "| docs/00-导读/W批次编号对账表.md | W774 | W774 认领行登记 |",
+    "| scripts/output/_w774_spec.json | W774 | 本批 spec 入库 |"
+  ]
+}

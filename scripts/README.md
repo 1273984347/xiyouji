@@ -45,6 +45,7 @@
 | `utils/text_loader.py` | 文本加载与编码处理（多编码尝试 + 分回目录加载） |
 | `utils/aliases.py` | 人物别名表单一数据源（35 人物 + resolve_alias 反查），被 B_人物/ 三脚本共享 |
 | `utils/analyzer_base.py` | 分析脚本通用入口 `run_analyzer`（argparse / 加载文本 / 写 JSON / 进度日志），消除 34 类脚本样板 |
+| `utils/path_guard.py` | W536 路径守卫公共模块（W761 建）：`make_guard(root)` 生成 open() 的 root 受限版 + PROJECT_ROOT/SCRIPTS_ROOT 双根常量，收敛 14 处重复内联定义 |
 
 > **新脚本接入约定**：A-AH 34 类分析脚本应使用 `run_analyzer` 入口，仅需实现 `analyze(chapters, args) -> dict` 函数，无需重复 argparse/load/json 样板。参照 `A_文本基础/chapter_stats.py` 与 `B_人物/character_appearance.py` 模式。
 

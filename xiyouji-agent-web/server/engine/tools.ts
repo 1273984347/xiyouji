@@ -3,6 +3,8 @@
 // 命令白名单、输出/写入尺寸上限、目录遍历黑名单。
 // W680 复核加固：受保护路径黑名单（密钥/门禁脚本/.git/会话库——读+写双面）、
 // 命令白名单剔除任意代码执行原语（python -m/-c、git --no-index/--output）、
+// W764 补拦 git pager/外部工具族（-O/--open-files-in-pager/--ext-diff/--pager=·W760 S-01
+// 实证 -O 把 pager 交 sh -c 执行 = RCE）+ 全命令 shell 元字符二次校验（防御纵深，见 run_command）。
 // spawn 环境变量过滤（LLM_API_KEY/AGENT_WEB_TOKEN 不下发子进程）、grep 移入 worker 防 ReDoS。
 // W752 加固：①细粒度写入允许域 AGENT_WEB_WRITE_SCOPE（黑名单之外再收紧，未设置=零行为变化）；
 // ②审计日志 data/audit.jsonl 入 DENY_READ（防 LLM 读回自己的操作史·写面已在 DENY_WRITE 覆盖）。
@@ -158,6 +160,7 @@ function tokenize(cmd: string): string[] {
 
 // 命令白名单：项目脚本解释器（仅 scripts/ 下的脚本文件）+ 只读 git 子命令 + pip 查询。
 // W680 复核：剔除 python -m/-c（任意代码执行原语）；git 侧 --no-index/--output= 在参数层拦截。
+// W764 复核：git 侧 -O/--open-files-in-pager/--ext-diff/--pager= 同入参数层拦截（pager 经 sh -c）。
 const RUN_ALLOW: Array<{ first: Set<string>; prefix: RegExp }> = [
   { first: new Set(["python", "python3"]), prefix: /^python3?\s+scripts\// },
   { first: new Set(["node"]), prefix: /^node\s+scripts\// },
@@ -349,9 +352,25 @@ export function createToolset(cwd: string): Toolset {
             return { content: `命令不在白名单（允许：python/node scripts/…、只读 git 子命令、pip show|list）：${cmd.slice(0, 120)}`, isError: true };
           }
           const tokens = tokenize(cmd);
-          // W680 复核：git 参数层逃逸原语拦截（--no-index 读仓外 / --output= 写任意路径）
-          if (tokens[0] === "git" && /--no-index|--output=/.test(cmd)) {
-            return { content: "git 子命令含被禁止的参数（--no-index / --output=）", isError: true };
+          // W680 复核 + W764 加固：git 参数层逃逸原语拦截（按 token 判定·兼容粘连形态）——
+          // ① --no-index 读仓外 / --output= 写任意路径（W680）；
+          // ② W764（W760 S-01 落盘实证）：-O / -O=<pager> / --open-files-in-pager —— git 把
+          //    pager 交 `sh -c '<pager> "$@"'` 执行（参数未转义）→ 任意命令执行；--ext-diff
+          //    （外部 diff 驱动）与 --pager= 同族外呼，一并拦截。
+          const GIT_DANGER = /^(--no-index|--output=|--open-files-in-pager|--ext-diff|--pager=)/;
+          if (tokens[0] === "git") {
+            const bad = tokens.find((t) => t.startsWith("-O") || GIT_DANGER.test(t));
+            if (bad) {
+              return { content: `git 子命令含被禁止的参数：${bad.slice(0, 60)}`, isError: true };
+            }
+          }
+          // W764 加固（防御纵深）：全命令 shell 元字符二次校验——`;` `&` `>` `<` 反引号与换行
+          // 不出现在白名单命令的合法参数中（脚本路径/ref/正则/包名）；`|` 与 `$` 放行
+          // （git grep 正则交替/锚点的合法用法）。shell:false 下 node 侧本无 shell，此检兜底
+          // 「命令内部再起 shell」的同类逃逸（-O 即此类入口）。
+          const badMeta = tokens.find((t) => /[;&<>`\n]/.test(t));
+          if (badMeta) {
+            return { content: `命令参数含禁止的 shell 元字符（; & > < 反引号 换行）：${badMeta.slice(0, 60)}`, isError: true };
           }
           // W680 复核 + W752 加固：解释器脚本路径双重约束——
           // ① **口径约束**：posix 归一后必须仍以 scripts/ 开头（堵 `scripts/../evil.mjs` 型

@@ -68,7 +68,7 @@ RE_FILE_TOKEN = re.compile(
 )  # 路径 token 判定：根级治理文件白名单 或 带已知后缀（含 / 的子目录路径）
 RE_STATS_MARK = re.compile(r"(\d+)\s*[页项篇个类]?\s*<!--stats:([a-z_0-9]+)-->")  # W704 数字实体标记（紧贴/句尾双形态·key 后置·渲染隐藏）
 RE_BARE_AGG = re.compile(r"\d+\s*(?:页|项|篇|个|类)")  # C5c 裸聚合数字（报告型 NOTE·W704 起步）
-C5_DOC_NAMES = {"readme": "README.md", "structure": "STRUCTURE.md", "agents": "AGENTS.md", "xiangmu": "项目说明.md", "contributing": "CONTRIBUTING.md"}  # W713 补 CONTRIBUTING（第 27 门禁叙述面已含·C5 面对齐）
+C5_DOC_NAMES = {"readme": "README.md", "structure": "STRUCTURE.md", "agents": "AGENTS.md", "xiangmu": "项目说明.md", "contributing": "CONTRIBUTING.md", "koujing": "统计口径说明.md"}  # W713 补 CONTRIBUTING（第 27 门禁叙述面已含·C5 面对齐）；W769 补统计口径说明（自称「唯一口径来源」却不在扫描域·W760 F-9 实证）
 EXEMPT_MARK = "<!--doc-sync:exempt"
 ARCHIVE_CHANGELOGS = [
     os.path.join(ROOT, "archive", "docs", "CHANGELOG-ARCHIVE.md"),
@@ -385,6 +385,7 @@ def gather():
         "structure": rd(os.path.join(ROOT, "STRUCTURE.md")),
         "xiangmu": rd(os.path.join(ROOT, "docs", "00-导读", "项目说明.md")),
         "contributing": rd(os.path.join(ROOT, "CONTRIBUTING.md")),
+        "koujing": rd(os.path.join(ROOT, "docs", "00-导读", "统计口径说明.md")),
         "verify_src": rd(os.path.join(HERE, "verify_delivery.py")),
         "stats": _load_stats(),
         "table": rd(os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md")),
@@ -470,6 +471,7 @@ def run_self_test():
         "structure": "",
         "xiangmu": "",
         "contributing": "",
+        "koujing": "",
         "stats_check_ok": True,
         "stats_check_tail": "",
         "staged": [],

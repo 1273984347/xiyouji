@@ -39,7 +39,7 @@ def parse_py():
     ast.literal_eval("[" + m.group(1).strip().rstrip(",") + "]")  # 字面量合法性
     out = []
     for ch, ev, chars in RE_PY.findall(m.group(1)):
-        out.append((int(ch), ev, tuple(RE_ITEM.findall(chars) and [a or b for a, b in RE_ITEM.findall(chars)])))
+        out.append((int(ch), ev, tuple(a or b for a, b in RE_ITEM.findall(chars))))
     return out
 
 

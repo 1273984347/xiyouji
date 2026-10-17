@@ -12,6 +12,8 @@ eggs/
 .eggs/
 lib/
 lib64/
+!scripts/lib/
+!scripts/lib/*.js
 parts/
 sdist/
 var/
@@ -87,7 +89,9 @@ scripts/output/v08-*
 
 # 截图与测试基线（本地保留，不入库）
 scripts/screenshots/
-tests/e2e/baseline/
+# W773（T-02 D-03）：tests/e2e/baseline/ 取消排除——视觉回归基线需版本化才能让
+# CI 有可信参照（此前 10 PNG 被 ignore·接线亦不可运行·git log 末次触及 d721eac0）；
+# current/ 仍为运行时对比产物，保持忽略。
 tests/e2e/current/
 
 # Hyperframes 缓存

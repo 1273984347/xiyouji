@@ -324,9 +324,11 @@ def _contrast_ratio(rgb1, rgb2):
     return (L1 + 0.05) / (L2 + 0.05)
 
 
-# ---------- 增强审计函数 ----------
+# ---------- 增强审计辅助族（parser 优先签名·被规则 1/3 内部调用；W765 注释统一） ----------
+# 本族两函数与 40 项规则族（rule_N_*）签名不同：首参为已解析的 parser，供规则避免重复解析；
+# 不直接注册于 ALL_CHECKS，仅作规则 1（键盘导航）/ 规则 3（ARIA 标签）的细化检测臂。
 def audit_keyboard_navigation(parser, html_content, file_path):
-    """键盘导航审计：Tab 顺序 + 焦点陷阱检测（增强 E2-1）"""
+    """键盘导航审计：Tab 顺序 + 焦点陷阱检测（增强 E2-1·辅助族·被 rule_1 调用）"""
     findings = []
 
     # 焦点陷阱：role=dialog/alertdialog 缺少焦点管理
@@ -364,7 +366,7 @@ def audit_keyboard_navigation(parser, html_content, file_path):
 
 
 def validate_aria_completeness(parser, html_content, file_path):
-    """ARIA 标签验证：aria-label/aria-labelledby/aria-describedby 完整性（增强 E2-3）"""
+    """ARIA 标签验证：aria-label/aria-labelledby/aria-describedby 完整性（增强 E2-3·辅助族·被 rule_3 调用）"""
     findings = []
 
     # 收集所有元素 ID 用于引用验证
@@ -424,7 +426,7 @@ def validate_aria_completeness(parser, html_content, file_path):
 
 
 # ---------- 规则 1：键盘导航 ----------
-def check_keyboard_navigation(html_content, file_path):
+def rule_1_keyboard_navigation(html_content, file_path):
     """E2-1：tabindex>0、focus 陷阱、accesskey 冲突 + Tab 顺序 + 焦点陷阱"""
     findings = []
     parser = _parse_html(html_content)
@@ -477,7 +479,7 @@ def check_keyboard_navigation(html_content, file_path):
 
 
 # ---------- 规则 2：色彩对比度 ----------
-def check_color_contrast(html_content, file_path):
+def rule_2_color_contrast(html_content, file_path):
     """E2-2：解析 CSS color/background-color 计算对比度"""
     findings = []
     parser = _parse_html(html_content)
@@ -531,7 +533,7 @@ def check_color_contrast(html_content, file_path):
 
 
 # ---------- 规则 3：ARIA 标签 ----------
-def check_aria_labels(html_content, file_path):
+def rule_3_aria_labels(html_content, file_path):
     """E2-3：role 完整性、aria 互斥、aria-hidden 冲突、role=img/button 检查 + ARIA 引用完整性"""
     findings = []
     parser = _parse_html(html_content)
@@ -595,7 +597,7 @@ def check_aria_labels(html_content, file_path):
 
 
 # ---------- 规则 4：焦点指示 ----------
-def check_focus_indicator(html_content, file_path):
+def rule_4_focus_indicator(html_content, file_path):
     """E2-4：outline:none 无替代、交互元素无 :focus 样式"""
     findings = []
     parser = _parse_html(html_content)
@@ -649,7 +651,7 @@ def check_focus_indicator(html_content, file_path):
 
 
 # ---------- 规则 5：屏幕阅读器 ----------
-def check_screen_reader(html_content, file_path):
+def rule_5_screen_reader(html_content, file_path):
     """E2-5：img alt、input label、th scope、noscript 完整性"""
     findings = []
     parser = _parse_html(html_content)
@@ -1540,10 +1542,8 @@ def rule_26_target_size_enhanced(html_content, file_path):
     return findings
 
 
-# ---------- W283 E 方向深化：4 项持续可用与解析规则（E2-27 至 E2-30）----------
-
-
-def check_pause_stop_hide(html_content, file_path):
+# ---------- 规则 27：暂停/停止/隐藏（E2-27·W283 深化） ----------
+def rule_27_pause_stop_hide(html_content, file_path):
     """E2-27：WCAG 2.2.2 Pause, Stop, Hide。
     检测自动播放/滚动/动画是否提供暂停/停止/隐藏机制。
     触发条件：<video autoplay>/<audio autoplay> 无 controls、<marquee>/<blink> 元素、
@@ -1611,7 +1611,8 @@ def check_pause_stop_hide(html_content, file_path):
     return findings
 
 
-def check_no_three_flashes(html_content, file_path):
+# ---------- 规则 28：无闪烁（E2-28·W283 深化） ----------
+def rule_28_no_three_flashes(html_content, file_path):
     """E2-28：WCAG 2.3.1 Three Flashes or Below Threshold。
     检测页面是否含超过 3 次/秒闪烁的元素（光敏性癫痫安全阈值）。
     触发条件：<blink> 元素自动闪烁、CSS animation duration < 333ms 且 infinite 且关键帧含闪烁语义
@@ -1678,14 +1679,22 @@ def check_no_three_flashes(html_content, file_path):
     return findings
 
 
-def check_parsing(html_content, file_path):
-    """E2-29：WCAG 4.1.1 Parsing。
-    检测 HTML 是否有严重解析错误（重复 ID、未闭合标签、stray end tag）。
-    严重解析错误会导致辅助技术 DOM 解析异常，影响可访问性。"""
-    findings = []
-    parser = _parse_html(html_content)
+# ---------- 规则 29：解析（可编程确定）（E2-29·W283 深化） ----------
+# ---------- 规则 29 内部检测臂（E2-29·W765 自 rule_29_parsing 拆分） ----------
+# 隐式闭合元素（html/li/td 等——无显式结束标签符合规范）与非空元素（void——无需闭合）
+_PARSING_VOID_TAGS = {
+    "area", "base", "br", "col", "embed", "hr", "img", "input",
+    "link", "meta", "param", "source", "track", "wbr",
+}
+_PARSING_OPTIONAL_CLOSE = {
+    "html", "head", "body", "p", "li", "dt", "dd", "option",
+    "tr", "td", "th", "thead", "tbody", "tfoot", "colgroup",
+}
 
-    # 1. 重复 ID
+
+def _parsing_duplicate_ids(parser, file_path, html_content):
+    """检测重复 ID——ID 必须唯一，否则辅助技术定位元素异常（WCAG 4.1.1）。"""
+    findings = []
     id_count = {}
     for el in parser.elements:
         eid = el.attrs.get("id", "").strip()
@@ -1699,22 +1708,21 @@ def check_parsing(html_content, file_path):
                 "ID 必须唯一，否则辅助技术定位元素异常（WCAG 4.1.1，W283 E2-29 深化）",
                 _snippet(html_content, lines[0]),
             ))
+    return findings
 
-    # 2. 未闭合的非空元素（起始标签 > 结束标签）
-    void_tags = {
-        "area", "base", "br", "col", "embed", "hr", "img", "input",
-        "link", "meta", "param", "source", "track", "wbr",
-    }
-    optional_close = {
-        "html", "head", "body", "p", "li", "dt", "dd", "option",
-        "tr", "td", "th", "thead", "tbody", "tfoot", "colgroup",
-    }
+
+def _parsing_unclosed_tags(parser, file_path, html_content):
+    """检测未闭合的非空元素（起始标签数 > 结束标签数）。
+
+    返回 (findings, open_count, close_count)——计数供 stray end tag 检测臂复用。
+    """
+    findings = []
     open_count = {}
     close_count = {}
     open_lines = {}
     for el in parser.elements:
         tag = el.tag
-        if tag in void_tags or tag in optional_close:
+        if tag in _PARSING_VOID_TAGS or tag in _PARSING_OPTIONAL_CLOSE:
             continue
         open_count[tag] = open_count.get(tag, 0) + 1
         if tag not in open_lines:
@@ -1723,7 +1731,7 @@ def check_parsing(html_content, file_path):
     endtag_pattern = re.compile(r"</\s*([a-zA-Z][\w-]*)\s*>", re.IGNORECASE)
     for match in endtag_pattern.finditer(html_content):
         tag = match.group(1).lower()
-        if tag in void_tags or tag in optional_close:
+        if tag in _PARSING_VOID_TAGS or tag in _PARSING_OPTIONAL_CLOSE:
             continue
         close_count[tag] = close_count.get(tag, 0) + 1
 
@@ -1736,8 +1744,12 @@ def check_parsing(html_content, file_path):
                 "未闭合标签会破坏辅助技术的 DOM 解析（WCAG 4.1.1，W283 E2-29 深化）",
                 _snippet(html_content, open_lines[tag]),
             ))
+    return findings, open_count, close_count
 
-    # 3. Stray end tag（结束标签无对应起始标签）
+
+def _parsing_stray_end_tags(open_count, close_count, file_path, html_content):
+    """检测 stray end tag（结束标签无对应起始标签·每标签只报首个）。"""
+    findings = []
     for tag, cc in close_count.items():
         oc = open_count.get(tag, 0)
         if cc > oc:
@@ -1750,11 +1762,24 @@ def check_parsing(html_content, file_path):
                     _snippet(html_content, line_num),
                 ))
                 break
-
     return findings
 
 
-def check_consistent_navigation(html_content, file_path):
+def rule_29_parsing(html_content, file_path):
+    """E2-29：WCAG 4.1.1 Parsing。
+    检测 HTML 是否有严重解析错误（重复 ID、未闭合标签、stray end tag）。
+    严重解析错误会导致辅助技术 DOM 解析异常，影响可访问性。"""
+    parser = _parse_html(html_content)
+    findings = []
+    findings.extend(_parsing_duplicate_ids(parser, file_path, html_content))
+    unclosed, open_count, close_count = _parsing_unclosed_tags(parser, file_path, html_content)
+    findings.extend(unclosed)
+    findings.extend(_parsing_stray_end_tags(open_count, close_count, file_path, html_content))
+    return findings
+
+
+# ---------- 规则 30：一致导航（E2-30·W283 深化） ----------
+def rule_30_consistent_navigation(html_content, file_path):
     """E2-30：WCAG 3.2.3 Consistent Navigation。
     检测导航元素（<nav> / role=navigation）是否有稳定识别属性（id 或 aria-label），
     保证在多页面中保持相同顺序与定位。
@@ -1798,10 +1823,8 @@ def check_consistent_navigation(html_content, file_path):
     return findings
 
 
-# ---------- W316 E 方向深化：10 项 WCAG 2.2 完整规范扩展规则（E2-31 至 E2-40）----------
-
-
-def check_language_of_page(html_content, file_path):
+# ---------- 规则 31：页面语言（E2-31·W316 深化） ----------
+def rule_31_language_of_page(html_content, file_path):
     """E2-31：WCAG 3.1.1 Language of Page。
     检测 <html> 元素是否有 lang 属性且值有效（BCP 47 语言标签，如 zh/zh-CN/en/en-US）。
     无 lang 属性 → 屏幕阅读器无法正确发音。"""
@@ -1839,7 +1862,8 @@ def check_language_of_page(html_content, file_path):
     return findings
 
 
-def check_link_purpose(html_content, file_path):
+# ---------- 规则 32：链接目的（E2-32·W316 深化） ----------
+def rule_32_link_purpose(html_content, file_path):
     """E2-32：WCAG 2.4.4 Link Purpose (In Context) + 2.4.9 Link Purpose (Link Only)。
     检测 <a> 链接文本是否模糊（仅"点击这里"/"更多"/"链接"/here/more/click 等），
     用户脱离上下文时无法判断链接目的。"""
@@ -1887,7 +1911,8 @@ def check_link_purpose(html_content, file_path):
     return findings
 
 
-def check_multiple_ways(html_content, file_path):
+# ---------- 规则 33：多种导航方式（E2-33·W316 深化） ----------
+def rule_33_multiple_ways(html_content, file_path):
     """E2-33：WCAG 2.4.5 Multiple Ways。
     检测页面是否提供至少 2 种导航方式（导航栏 + 搜索框/站点地图/面包屑等），
     帮助用户以不同方式发现内容。"""
@@ -1949,7 +1974,8 @@ def check_multiple_ways(html_content, file_path):
     return findings
 
 
-def check_non_text_contrast(html_content, file_path):
+# ---------- 规则 34：非文本对比度（E2-34·W316 深化） ----------
+def rule_34_non_text_contrast(html_content, file_path):
     """E2-34：WCAG 1.4.11 Non-text Contrast。
     检测 UI 组件（button/input/select/textarea 的 border-color）与背景的对比度 ≥ 3:1。
     非文本元素（边框/图标）对比度不足会影响识别。"""
@@ -2006,7 +2032,8 @@ def check_non_text_contrast(html_content, file_path):
     return findings
 
 
-def check_hover_focus_content(html_content, file_path):
+# ---------- 规则 35：悬停或聚焦内容（E2-35·W316 深化） ----------
+def rule_35_hover_focus_content(html_content, file_path):
     """E2-35：WCAG 1.4.13 Content on Hover or Focus。
     检测悬停/聚焦触发的附加内容（tooltip/popover）是否满足三条件：
     1. 可关闭（Esc 键关闭）
@@ -2062,7 +2089,8 @@ def check_hover_focus_content(html_content, file_path):
     return findings
 
 
-def check_char_key_shortcuts(html_content, file_path):
+# ---------- 规则 36：字符快捷键（E2-36·W316 深化） ----------
+def rule_36_char_key_shortcuts(html_content, file_path):
     """E2-36：WCAG 2.1.4 Character Key Shortcuts。
     检测单字符快捷键（accesskey 或 JS keydown 单字符监听）是否满足：
     可关闭 / 可重映射 / 仅在聚焦时生效。
@@ -2122,7 +2150,8 @@ def check_char_key_shortcuts(html_content, file_path):
     return findings
 
 
-def check_pointer_gestures(html_content, file_path):
+# ---------- 规则 37：指针手势（E2-37·W316 深化） ----------
+def rule_37_pointer_gestures(html_content, file_path):
     """E2-37：WCAG 2.5.1 Pointer Gestures。
     检测多点触控或路径手势是否有单点替代方案。
     触发条件：JS 中 touchstart 检测 touches.length > 1（多指）或
@@ -2159,7 +2188,8 @@ def check_pointer_gestures(html_content, file_path):
     return findings
 
 
-def check_pointer_cancellation(html_content, file_path):
+# ---------- 规则 38：指针取消（E2-38·W316 深化） ----------
+def rule_38_pointer_cancellation(html_content, file_path):
     """E2-38：WCAG 2.5.2 Pointer Cancellation。
     检测 onmousedown/ontouchstart 即时触发操作是否提供 onmouseup/onclick 替代。
     应使用 up 事件触发操作，允许用户通过移开指针取消。"""
@@ -2191,7 +2221,8 @@ def check_pointer_cancellation(html_content, file_path):
     return findings
 
 
-def check_label_in_name(html_content, file_path):
+# ---------- 规则 39：名称中的标签（E2-39·W316 深化） ----------
+def rule_39_label_in_name(html_content, file_path):
     """E2-39：WCAG 2.5.3 Label in Name。
     检测可见标签文本是否包含在可访问名（aria-label）中。
     语音控制用户说出可见标签文本应能激活对应元素。
@@ -2225,7 +2256,8 @@ def check_label_in_name(html_content, file_path):
     return findings
 
 
-def check_animation_interactions(html_content, file_path):
+# ---------- 规则 40：交互动画（E2-40·W316 深化） ----------
+def rule_40_animation_interactions(html_content, file_path):
     """E2-40：WCAG 2.3.3 Animation from Interactions（新增 WCAG 2.2）。
     检测非必要动画是否支持 prefers-reduced-motion。
     触发条件：页面含 transition/animation 但无 @media (prefers-reduced-motion: reduce) 覆盖。
@@ -2263,11 +2295,11 @@ def check_animation_interactions(html_content, file_path):
 
 # ---------- 主流程 ----------
 ALL_CHECKS = [
-    (R_KEYBOARD, check_keyboard_navigation),
-    (R_CONTRAST, check_color_contrast),
-    (R_ARIA, check_aria_labels),
-    (R_FOCUS, check_focus_indicator),
-    (R_SCREEN_READER, check_screen_reader),
+    (R_KEYBOARD, rule_1_keyboard_navigation),
+    (R_CONTRAST, rule_2_color_contrast),
+    (R_ARIA, rule_3_aria_labels),
+    (R_FOCUS, rule_4_focus_indicator),
+    (R_SCREEN_READER, rule_5_screen_reader),
     (R_FOCUS_VISIBLE, rule_6_focus_visible),
     (R_TARGET_SIZE, rule_7_target_size),
     (R_DRAGGING, rule_8_dragging),
@@ -2293,21 +2325,21 @@ ALL_CHECKS = [
     (R_STATUS_MESSAGES, rule_25_status_messages),
     (R_TARGET_SIZE_ENHANCED, rule_26_target_size_enhanced),
     # W283 E 方向深化：4 项持续可用与解析规则（暂停/停止/隐藏 + 无闪烁 + 解析 + 一致导航）
-    (R_PAUSE_STOP_HIDE, check_pause_stop_hide),
-    (R_NO_THREE_FLASHES, check_no_three_flashes),
-    (R_PARSING, check_parsing),
-    (R_CONSISTENT_NAVIGATION, check_consistent_navigation),
+    (R_PAUSE_STOP_HIDE, rule_27_pause_stop_hide),
+    (R_NO_THREE_FLASHES, rule_28_no_three_flashes),
+    (R_PARSING, rule_29_parsing),
+    (R_CONSISTENT_NAVIGATION, rule_30_consistent_navigation),
     # W316 E 方向深化：10 项 WCAG 2.2 完整规范扩展规则（页面语言/链接目的/多种导航/非文本对比/悬停聚焦/字符快捷键/指针手势/指针取消/名称标签/交互动画）
-    (R_LANGUAGE_OF_PAGE, check_language_of_page),
-    (R_LINK_PURPOSE, check_link_purpose),
-    (R_MULTIPLE_WAYS, check_multiple_ways),
-    (R_NON_TEXT_CONTRAST, check_non_text_contrast),
-    (R_HOVER_FOCUS_CONTENT, check_hover_focus_content),
-    (R_CHAR_KEY_SHORTCUTS, check_char_key_shortcuts),
-    (R_POINTER_GESTURES, check_pointer_gestures),
-    (R_POINTER_CANCELLATION, check_pointer_cancellation),
-    (R_LABEL_IN_NAME, check_label_in_name),
-    (R_ANIMATION_INTERACTIONS, check_animation_interactions),
+    (R_LANGUAGE_OF_PAGE, rule_31_language_of_page),
+    (R_LINK_PURPOSE, rule_32_link_purpose),
+    (R_MULTIPLE_WAYS, rule_33_multiple_ways),
+    (R_NON_TEXT_CONTRAST, rule_34_non_text_contrast),
+    (R_HOVER_FOCUS_CONTENT, rule_35_hover_focus_content),
+    (R_CHAR_KEY_SHORTCUTS, rule_36_char_key_shortcuts),
+    (R_POINTER_GESTURES, rule_37_pointer_gestures),
+    (R_POINTER_CANCELLATION, rule_38_pointer_cancellation),
+    (R_LABEL_IN_NAME, rule_39_label_in_name),
+    (R_ANIMATION_INTERACTIONS, rule_40_animation_interactions),
 ]
 
 

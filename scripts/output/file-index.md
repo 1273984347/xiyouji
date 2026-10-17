@@ -11,6 +11,324 @@
 ---
 
 
+## W781 门禁防线收口批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/verify_delivery.py | W781 | R-1 注册表派生+启动期四查+自洽锁反向查+EXPECTED 补目录文档（50 段） |
+| scripts/release_prep.py | W781 | R-2 desc/head_sentence 禁以 W### 开头判据 |
+| scripts/batch_cascade.py | W781 | R-2 页脚插入防御性剥离前导批次号 |
+| scripts/check_governance_docs.py | W781 | R-3 转正 FAIL（docstring 同步） |
+| docs/agent/gates.md | W781 | 第 22 条转正记录 |
+| docs/agent/pitfalls.md | W781 | W698 scope 条目增补 R-1 演进（就地·条目数不变） |
+| tests/unit/test_verify_registry.py | W781 | 新建：8 例（四查负样本+锁双向+派生覆盖） |
+| tests/unit/test_release_prep.py | W781 | 增 2 例（desc/head_sentence 批次号开头负样本） |
+| docs/00-导读/W批次编号对账表.md | W781 | W781 认领登记 |
+
+## W780 目录文档新鲜度门禁批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_folder_docs.py | W780 | 新建：目录文档新鲜度门禁（第 45 槽·四判据对拍·--self-test 7 例） |
+| scripts/gen_folder_docs.py | W780 | 模块化（GOVERNED_SKIP/in_scope/case_collides）+ --refresh 安全刷新（所有权标记判定） |
+| scripts/verify_delivery.py | W780 | 第 45 槽注册（目录文档段·_StrictGate）+ 校数注释按实跑回写 |
+| tests/unit/test_folder_docs_gate.py | W780 | 新建：16 例（合成树断言 + refresh 修复/保护 + 大小写判定 + CLI 退出码） |
+| docs/agent/gates.md | W780 | 第 45 槽全量定义 + 速查表 27-42→27-45 存量漂移顺修 |
+| AGENTS.md | W780 | §4.2 计数 44→45（四处）+ 新增条目 45 |
+| docs/00-导读/W批次编号对账表.md | W780 | W780 认领登记 |
+| scripts/output/stats.json | W780 | gate_count 44→45（--w W780） |
+
+## W779 全仓目录索引补齐批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/gen_folder_docs.py | W779 | 目录索引生成器（幂等·大小写判重防覆写 INDEX.md·gitignored 过滤·治理树排除·--dry-run/--force） |
+| docs/INDEX.md | W779 | 重建（697→701 篇·docs_index.py·第 17 门禁产物级一致） |
+| scripts/output/script-coverage-baseline.txt | W779 | 登记 gen_folder_docs.py 豁免行（第 42 门禁 C1） |
+| docs/00-导读/W批次编号对账表.md | W779 | W779 认领登记 |
+| CHANGELOG.md | W779 | 新增 W779 版段 + 编号规则 W001-W778→W779 |
+| HANDOVER.md | W779 | 最后更新链首 + 当前进度段 W779 摘要 |
+| README.md | W779 | 抬头当前批次 W778→W779 |
+| STRUCTURE.md | W779 | 抬头当前批次 W778→W779 + 工具与输出表新增「目录索引生成」行 |
+| CITATION.cff | W779 | version W778→W779（外部引用面·第 27 门禁 R2） |
+| scripts/output/file-index.md | W779 | 本段（W779 per-file 登记） |
+| .github/（index.md ×3） | W779 | 逐文件索引（机器可读）·.github 根 + ISSUE_TEMPLATE + workflows |
+| archive/（index.md ×20） | W779 | 逐文件索引（机器可读）·archive 根 + docs/scripts 全子树 20 个 |
+| assets/（index.md ×5） | W779 | 逐文件索引（机器可读）·根 + fonts/images/maps/fonts-source |
+| dataset/（index.md ×2） | W779 | 逐文件索引（机器可读）·根 + entities |
+| docs/（index.md ×8） | W779 | 逐文件索引（机器可读）·docs 根 + 00-导读/07/08/09/_templates/agent/superpowers/plans |
+| hyperframes/（index.md ×4） | W779 | 逐文件索引（机器可读）·根 + compositions/d3-visualizations + output |
+| index.md（根级 ×1） | W779 | 仓库根逐文件索引（机器可读）·列顶层 16 个子目录与根级文件 |
+| mcp-server/（index.md ×1） | W779 | 逐文件索引（机器可读） |
+| packaging/（index.md ×37） | W779 | 逐文件索引（机器可读）·xiyouji-analysis/src 全树（34 类 analyses 逐一建） |
+| references/（index.md ×1） | W779 | 逐文件索引（机器可读） |
+| scripts/（index.md ×43） | W779 | 逐文件索引（机器可读）·根 + A-AH 34 类 + api/audit/lib/output/output-data/figures/rag/utils |
+| site/（index.md ×22） | W779 | 逐文件索引（机器可读）·根 + chapters/characters/data/data-json/en/en-json/js/reader×5/static×7/themes |
+| source/（index.md ×5） | W779 | 逐文件索引（机器可读）·根 + 原文/分回/shendu + 引用与网络解读 |
+| tests/（index.md ×4） | W779 | 逐文件索引（机器可读）·根 + unit/e2e/e2e-baseline |
+| timeline/（index.md ×1） | W779 | 逐文件索引（机器可读） |
+| tools/（index.md ×1） | W779 | 逐文件索引（机器可读） |
+| xiyouji-agent-web/（index.md ×9） | W779 | 逐文件索引（机器可读）·根 + server/server-engine/src/src-components/hooks/pages/utils/evals |
+| .github/（README.md ×2） | W779 | 目录导读（人读）·.github 根 + ISSUE_TEMPLATE |
+| archive/（README.md ×17） | W779 | 目录导读（人读）·archive 根 + docs/scripts 子树 17 个 |
+| assets/（README.md ×5） | W779 | 目录导读（人读）·根 + fonts/images/maps/fonts-source |
+| dataset/（README.md ×1） | W779 | 目录导读（人读） |
+| docs/（README.md ×5） | W779 | 目录导读（人读）·docs 根 + _templates/agent/superpowers/superpowers-plans |
+| hyperframes/（README.md ×3） | W779 | 目录导读（人读）·根 + compositions/d3-visualizations |
+| packaging/（README.md ×36） | W779 | 目录导读（人读）·xiyouji-analysis 全树 36 个 |
+| references/（README.md ×1） | W779 | 目录导读（人读） |
+| scripts/（README.md ×41） | W779 | 目录导读（人读）·根 + A-AH 34 类 + api/audit/lib/output/output-data/figures/utils |
+| site/（README.md ×21） | W779 | 目录导读（人读）·根 + chapters/characters/data/data-json/en-json/js/reader×5/static×6/themes |
+| source/（README.md ×5） | W779 | 目录导读（人读）·根 + 原文/分回/shendu + 引用与网络解读 |
+| tests/（README.md ×4） | W779 | 目录导读（人读）·根 + unit/e2e/e2e-baseline |
+| timeline/（README.md ×1） | W779 | 目录导读（人读） |
+| tools/（README.md ×1） | W779 | 目录导读（人读） |
+| xiyouji-agent-web/（README.md ×8） | W779 | 目录导读（人读）·根 + server/server-engine/src/src-components/hooks/pages/utils/evals |
+
+> 全量 318 个目录索引件（index.md 167 + README.md 151）逐文件清单由 `python scripts/gen_folder_docs.py --dry-run` 复现；生成器幂等（重跑写 0 文件）。
+
+## W778 第 41 篇改进项落地批（2026-10-17）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/agent/pitfalls.md | W778 | 流程节增「latent 三问 + 双平台断言禁例」（6→7 条·总 41） |
+| AGENTS.md | W778 | §4.3 读数契约与计数三处同步（41 条/流程 7/总 40→41） |
+| docs/10-方法论沉淀/批次交付流水线.md | W778 | 新增 §七 外部产出落地七步 + §八 对拍 SOP（原 §七→§九） |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-17.md | W778 | 头部补跨周期执行记录（改进项落地留痕） |
+| docs/00-导读/W批次编号对账表.md | W778 | W778 认领登记 |
+
+## W777 第 41 篇复盘报告入库批（2026-10-17）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-17.md | W777 | 第 41 篇复盘（W748-W776 二十八段/60 提交·断档 2 天补课·E-09~E-16/FAM-31~36/WF-03~05） |
+| docs/11-方案报告/README.md | W777 | 现役报告索引 20→21 篇（第 21 行） |
+| STRUCTURE.md | W777 | report_docs 24→25 + 现役 21 篇 + 复盘系列 12 篇 |
+| docs/INDEX.md | W777 | docs_index 重建 696→697 篇 |
+| docs/00-导读/W批次编号对账表.md | W777 | W777 认领登记 |
+
+## W776 评审后续行动落地批（2026-10-17）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| pytest.ini | W776 | 覆盖率口径决策注释（实证 18%/24%/+82%·不引 --cov 门禁·替代=资产清单） |
+| scripts/requirements.txt | W776 | 移除 fonttools/brotli 死依赖（全仓零 import 实证·指南改按需安装） |
+| scripts/font-subset-guide.md | W776 | §3.1 注记：fonttools/brotli 按需安装（pyftsubset 回退路径） |
+| HANDOVER.md | W776 | Backlog 新增 BL-26/27/28（内容质量方差/工程 overhead/单点故障·均不设工程关闭项） |
+| docs/10-方法论沉淀/markdown写作规范.md | W776 | §4 增 5 条 AI 内容生产特有反模式 |
+| docs/11-方案报告/外部评审回应与逐项核查报告-2026-10-17.md | W776 | §7 四项行动状态更新为已完成（含 A-02 升级处置留痕） |
+| docs/00-导读/W批次编号对账表.md | W776 | W776 认领登记 |
+
+## W775 JS 门禁重构落地批（2026-10-17）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/lib/gate_common.js | W775 | 新增：门禁公共工具（路径规范化/HTML 枚举/注释剥离/worker 池/汇总行·110 行） |
+| scripts/lib/playwright_gate_utils.js | W775 | 新增：Playwright 公共辅助（launch/离线页/file:// 导航·53 行） |
+| scripts/check_chart_values.js | W775 | 重构：probeInPage 拆 6 统计函数 + judgeProbe 拆 V1-V5 + validateGateBaseline 合并 + TH 重复键修复（契约对拍零漂移） |
+| scripts/check_screenshot_gates.js | W775 | 重构：checkPage 拆 G1-G5 + 删死代码 BENIGN_CONSOLE_RE + 补 use strict（输出逐字节一致） |
+| scripts/check_data_drift.js | W775 | 重构 + 潜伏缺陷修复：jsLiteralToJson 引号腐蚀致 2 页静默跳过（可比 57→59·exit 0） |
+| tests/unit/test_ci_wiring.py | W775 | gate43 playwright 断言升级传递链两环守护（11 passed） |
+| scripts/check_story_timeline_sync.py | W775 | 裁决 3.3：去冗余 and 护栏 + 双 findall（与 parse_html 习语对齐·零行为变化） |
+| scripts/check_claude_md.py | W775 | 裁决 3.4：删死常量 MAX_LINES_MSG |
+| .gitignore | W775 | scripts/lib/ 定向 negation（lib/ 规则误伤修复） |
+| docs/11-方案报告/外部评审回应与逐项核查报告-2026-10-17.md | W775 | 外部评审七项指控逐条核查 + 四项材料实况 + 机制层立场回应 |
+| docs/11-方案报告/README.md | W775 | 现役报告索引登记第 20 篇 |
+| docs/00-导读/W批次编号对账表.md | W775 | W775 认领登记 |
+
+## W774 CI 首跑分歧修复批（2026-10-17）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/docs_index.py | W774 | scan_docs 两处排序显式 str(p).lower() 键（跨平台确定性·CI 首跑分歧根修） |
+| tests/unit/test_docs_index.py | W774 | 新增三例：小写键序不变量/真实树不变量/磁盘与生成器一致 |
+| docs/11-方案报告/计划方案/执行前计划-T02-工程基础设施薄弱点修复.md | W774 | ST-04 与 AC-02 转闭环（两轮 CI run URL 留证）+不完成定义附记 |
+| docs/00-导读/W批次编号对账表.md | W774 | W774 认领行登记 |
+| scripts/output/_w774_spec.json | W774 | 本批 spec 入库 |
+
+## W773 工程基础设施薄弱点修复批（2026-10-17）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/ci.yml | W773 | 新增 e2e-interaction job（node tests/e2e/test_site_quality.js·8→9 job） |
+| .github/workflows/README.md | W773 | Job 9 e2e-interaction 文档节+job 清单 8→9+阈值表补行 |
+| tests/unit/test_ci_wiring.py | W773 | 扩 W6 断言（run: 块锚定+Playwright 运行条件·负样本实证） |
+| .gitignore | W773 | 取消 tests/e2e/baseline/ 排除（current/ 保持忽略） |
+| tests/e2e/baseline/（10 PNG） | W773 | 视觉回归基线版本化入库 |
+| tests/e2e/test_visual.js | W773 | 判据升级像素 diff（pngjs+pixelmatch·阈值 0.5%·稳定轮询）+require 解析修复 |
+| scripts/package.json | W773 | 新增依赖 pngjs 7.0.0 + pixelmatch 5.3.0 |
+| scripts/package-lock.json | W773 | pngjs/pixelmatch 锁文件 |
+| site/data/criticism-history.html | W773 | K11 回归修复：reduce 规则移入媒体查询（W674 遗留） |
+| site/en/criticism-history.html | W773 | 同族修复（EN 镜像页） |
+| scripts/inject_chart_a11y.py | W773 | 加 --dir 参数（rel 按目录深度算·默认行为不变） |
+| site/static/js/chart-a11y.js | W773 | 最小 i18n（zh/en·中文页逐字节不变） |
+| site/en/（138 页） | W773 | chart-a11y 加载器全量注入+8 页 lang zh-CN→en |
+| scripts/validate_en.py | W773 | 补第 3 项检查：文档 lang=en（WCAG 3.1.1·负样本实证） |
+| scripts/check_index_health.py | W773 | 第 17 门禁新增第 8 项：docs/INDEX.md 产物级校验 |
+| docs/11-方案报告/计划方案/执行前计划-T02-工程基础设施薄弱点修复.md | W773 | 执行记录追加 ST-01~ST-10（含偏差与修正） |
+| docs/00-导读/W批次编号对账表.md | W773 | W773 认领行+W772 收官登记+W774 预留 bullet |
+| scripts/output/_w773_spec.json | W773 | 本批 spec 入库 |
+
+## W772 计划入库纯文档批（2026-10-17）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/计划方案/执行前计划-T02-工程基础设施薄弱点修复.md | W772 | T-02 计划登记入库（四项基础设施缺陷·AC-01~09·修复未动工） |
+| docs/11-方案报告/README.md | W772 | 新建「二、计划方案（3 篇）」章节+原二顺延为三 |
+| STRUCTURE.md | W772 | report_docs 标记 22→23+现役文字 计划方案 2 篇→3 篇 |
+| scripts/output/stats.json | W772 | report_docs 22→23（计划方案 3 篇登记） |
+| docs/00-导读/W批次编号对账表.md | W772 | W772 认领行登记 |
+| scripts/output/_w772_spec.json | W772 | 本批 spec 入库 |
+
+## W771 编号空洞登记与门禁注释刷新批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_seo_head.py | W771 | 注释陈旧数字刷新 233/230/229→855/851（注释-only·判定零改） |
+| scripts/output/_w771_spec.json | W771 | 本批 spec 入库 |
+| docs/00-导读/W批次编号对账表.md | W771 | W771 认领行登记 + 递延豁免补十号去向 bullet |
+
+## W770 引文豁免口径修正与数据链路对齐批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_citations.py | W770 | F-2：文首文件级演绎标记识别（两判定面）+ 自测 +2 例（12/12） |
+| scripts/C_情节/hardships_81.py | W770 | 输出 hardships 清单 label 化（与页面/dataset 对齐） |
+| scripts/_check_json_copies.py | W770 | 自 archive 恢复：47 副本字节级自检（W563 职责回归） |
+| scripts/check_data_drift.js | W770 | 候选解析 v3.1（json 形态优先 tracked 副本 + 裸文件名·覆盖 45→57 页） |
+| site/data/json/hardships_81.json | W770 | 部署副本 label 化（与源/页面对齐） |
+| site/data/json/project_review.json | W770 | 副本侧重复后缀损坏修复 ×2 |
+| scripts/output/data-drift-baseline.txt | W770 | 撤 hardships 3 行豁免（对齐后恢复全量管控） |
+| scripts/output/_w770_spec.json | W770 | 本批 spec 入库 |
+
+## W769 动效时长归一与口径说明修正批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_motion_ban.py | W769 | 补 .duration(N) N>600 判据（DESIGN §5.1·count-up 900 白名单） |
+| scripts/check_doc_sync.py | W769 | C5 扫描域补统计口径说明.md（装载+夹具同步·自测 18/18） |
+| docs/00-导读/统计口径说明.md | W769 | §2 86→87（唯一口径来源自相矛盾修正） |
+| site/index.html | W769 | 4 处 86→87 + duration 归一 |
+| site/dashboard.html | W769 | 86→87 + duration 归一 |
+| site/en/（19 页） | W769 | duration 全部归一 ≤600 |
+| DESIGN.md | W769 | 首节 86→87 |
+| HANDOVER.md | W769 | V 方向节头 86→87 |
+| 新Agent启动Prompt.md | W769 | 可视化页 87（Html=88） |
+| scripts/output/_w769_spec.json | W769 | 本批 spec 入库 |
+
+## W768 英文站校验接线批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/validate_en.py | W768 | --all 批量模式 + SEARCH_INDEX 语料豁免区 + check_page 重构（单页输出逐字节兼容） |
+| scripts/verify_delivery.py | W768 | 第 44 槽挂载（段数 48→49·五面注册） |
+| Makefile | W768 | validate-en 目标 + ci 链挂载 |
+| AGENTS.md | W768 | §4.2 43→44 槽（清单补第 44 项） |
+| docs/agent/gates.md | W768 | 44 槽标题 + 第 44 槽全量定义 |
+| README.md | W768 | gate_count 标记 43→44 |
+| scripts/output/script-coverage-baseline.txt | W768 | 移除 validate_en 豁免行（接线后不再豁免） |
+| site/en/chart-design.html | W768 | zh→en 字典 126 对全域转形 |
+| site/en/methodology-matrix.html | W768 | 字典 32 对 + 四角标签键值化 |
+| site/en/character-appearance.html | W768 | ZH2EN_NAME 35 对转形 |
+| site/en/chapter-stats.html | W768 | 第N回→Chapter N ×102 |
+| site/en/relationships.html | W768 | 调试串英译 |
+| scripts/output/_w768_spec.json | W768 | 本批 spec 入库 |
+
+## W767 数据漂移门禁深比对批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_data_drift.js | W767 | v3 共路深比对（递归共键·数组按位·标量严格比）+声明式基线+no-new-drift |
+| scripts/output/data-drift-baseline.txt | W767 | 基线新建（81-hardships 生成器/页面约定分裂 + visual-art 设计双形态·含归因注释） |
+| dataset/cave-estate.json | W767 | 中将级→妖将级（第 38 门禁旧值标记清理） |
+| dataset/character-relationship-3d.json | W767 | F-7：kpi[4] → 悟空/度数 12（links 度数自证·与 kpi[3]/页嵌同名形） |
+| dataset/journey-map-interactive.json | W767 | F-7：kpi[2] 难点 9→8（isHardship 节点实数自证） |
+| dataset/language-style-radar.json | W767 | 悟空色 ×2 → #C9A063（现行 palette） |
+| dataset/theological-intervention-network.json | W767 | accent-1×5 → accent-2（页内 accent-1 零出现） |
+| site/data/81-hardships.html | W767 | 页嵌 cause mind×3 → 人心自生的魔障 + CSP 重注 |
+| scripts/output/_w767_spec.json | W767 | 本批 spec 入库 |
+
+## W766 C 类引文静默删改修复批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/01-全书逐回解读/第001回-灵根育孕源流出.md | W766 | C 类引文修复（补回「不得久住天人之内」） |
+| docs/02-人物深度分析/（28 件） | W766 | C 类引文静默删改修复（单字/标点/引号/截断/删节五类·含 4 条语料疑点登记） |
+| docs/03-主题与情节专题/（13 件） | W766 | C 类引文修复（『』→“”还原·字形/句读/补全·含 4 条语料疑点登记） |
+| scripts/output/_w766_spec.json | W766 | 本批 spec 入库 |
+| docs/00-导读/W批次编号对账表.md | W766 | W766 认领行登记 |
+
+## W765 a11y 辅助族注释统一与解析规则拆分批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/a11y_audit.py | W765 | 辅助族注释统一 + rule_29_parsing 拆分（编排器+三检测臂·对拍一致） |
+| scripts/output/_w765_spec.json | W765 | 本批 spec 入库 |
+
+## W764 命令白名单 pager 逃逸修复批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/engine/tools.ts | W764 | 参数层拦截扩展（git pager 族 token 级 + shell 元字符二次校验·W760 S-01 RCE 修复） |
+| xiyouji-agent-web/server/engine/tools.test.ts | W764 | +6 例（5 拒 1 放行·-O/=形态/长形态/ext-diff/元字符/正则放行） |
+| docs/agent/agent-web.md | W764 | 安全边界描述同步（run_command 参数层拦截 W680→W764 收口） |
+| scripts/output/_w764_spec.json | W764 | 本批 spec 入库 |
+
+## W763 照录区字级篡改全量修复批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/01-全书逐回解读/第003回-四海千山皆拱伏.md | W763 | 照录区字级篡改修复 8 处（初江王→楚江王等） |
+| docs/01-全书逐回解读/第004回-官封弼马心何足.md | W763 | 照录区修复 2 处（我怕你·领旨） |
+| docs/01-全书逐回解读/第006回-观音赴会问原因.md | W763 | 照录区修复 10 处（子叉→木吒 8·神针·嚷处） |
+| docs/01-全书逐回解读/第007回-八卦炉中逃大圣.md | W763 | 照录区修复 2 处（斝·即唤阿傩） |
+| docs/01-全书逐回解读/第008回-我佛造经传极乐.md | W763 | 照录区修复 58 处（般若/蟠桃/玉帝/迦叶/锡杖/￥→栴等） |
+| docs/01-全书逐回解读/第009回-袁守诚妙算无私曲老龙王拙计犯天条.md | W763 | 照录区修复 4 处（登基·巳时×2·冒号） |
+| docs/01-全书逐回解读/第010回-二将军宫门镇鬼唐太宗地府还魂.md | W763 | 照录区修复 8 处（崔珏×6·邪祟·奈何） |
+| docs/01-全书逐回解读/第068回-朱紫国唐僧论前世孙行者施为三折肱.md | W763 | 照录区修复 2 处（魏征·W756 语料联动） |
+| docs/01-全书逐回解读/第091回-金平府元夜观灯玄英洞唐僧供状.md | W763 | 照录区修复 1 处（魏征·W756 语料联动） |
+| scripts/output/_w763_spec.json | W763 | 本批 spec 入库 |
+| docs/00-导读/W批次编号对账表.md | W763 | W763 认领行登记 |
+
+## W762 W761 重构报告晋升批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/W761工具链可维护性重构报告-2026-10-16.md | W762 | W761 重构报告晋升入库（V3.0·十节全量） |
+| docs/11-方案报告/README.md | W762 | 索引加行+现役 18→19 篇+全表重编号 1-19 |
+| STRUCTURE.md | W762 | report_docs 标记 21→22+现役文字 18→19 篇 |
+| scripts/output/stats.json | W762 | report_docs 21→22（新报告件入库） |
+| docs/00-导读/W批次编号对账表.md | W762 | W762 认领行登记 |
+| scripts/output/_w762_spec.json | W762 | 本批 spec 入库 |
+
+## W761 工具链可维护性重构批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/utils/path_guard.py | W761 | 新建：W536 路径守卫公共模块（make_guard 工厂+双根·收敛 14 处重复定义） |
+| scripts/check_content_consistency.py | W761 | l2/l2_runtime 去重+check_page 拆分（峰值 cx 41→19）+js_of→extract_scripts |
+| scripts/tmpe_tidy.py | W761 | scan 分类链外提+main 三分派+三处去重+human_size |
+| scripts/a11y_audit.py | W761 | 40 项规则族命名统一 rule_N_topic（19 改名+测试 38 同步+注释升级） |
+| scripts/inject_rum.py | W761 | P-02 修复：守卫根 SCRIPTS_ROOT→PROJECT_ROOT（同批 inject×3+bump_footer_version） |
+| scripts/bump_version.py | W761 | 守卫迁移至 path_guard（仓库根语义·W576 注释精华保留） |
+| scripts/fetch_gate_stats.py | W761 | 删除 W536 死定义（零调用点·同批 lint_links/security_scan） |
+| tests/unit/test_path_guard.py | W761 | 新建：守卫公共模块 6 例（双根放行/双外拒/消息文本/闭包独立） |
+| tests/unit/test_a11y_audit.py | W761 | 同步 a11y 规则族改名（38 处引用） |
+| scripts/README.md | W761 | utils 共享模块表补 path_guard 行 |
+| docs/00-导读/W批次编号对账表.md | W761 | W761 认领行登记（chore 翻收官） |
+| scripts/output/_w761_spec.json | W761 | 本批 spec 入库 |
+
+## W760 全量对抗性审查报告批（2026-10-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/全量对抗审查报告-2026-10-16.md | W760 | 全量对抗性审查报告（11 发现 4 HIGH+25 证据脚本+正面结论复算） |
+| docs/11-方案报告/README.md | W760 | 索引加行+现役 17→18 篇+全表重编号 |
+| STRUCTURE.md | W760 | report_docs 标记 20→21+现役文字 17→18 篇 |
+| scripts/output/stats.json | W760 | report_docs 20→21（新报告件入库） |
+| docs/00-导读/W批次编号对账表.md | W760 | W760 认领行登记（原预留 bullet 转正） |
+| scripts/output/_w760_spec.json | W760 | 本批 spec 入库 |
+
 ## W759 batch_cascade 脚注滚动根修批（2026-10-16）
 
 | 文件 | W | 说明 |

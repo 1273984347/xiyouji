@@ -44,14 +44,6 @@ import urllib.request
 from html.parser import HTMLParser
 from pathlib import Path
 
-_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
-
-def _w536_guard_open(path, *a, **k):
-    _real = os.path.realpath(path)
-    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
-        raise SystemExit("W536 guard: path escapes project root: %s" % path)
-    return open(_real, *a, **k)
-
 ROOT = Path(__file__).resolve().parent.parent
 
 # 视为外链 / 跳过本地校验的 scheme

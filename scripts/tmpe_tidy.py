@@ -65,7 +65,7 @@ def load_policy(path=POLICY_PATH):
 
 # ---------- 基础工具 ----------
 
-def human(n):
+def human_size(n):
     for unit in ("B", "KB", "MB", "GB"):
         if n < 1024:
             return f"{n:.1f}{unit}"
@@ -128,6 +128,22 @@ def read_active_locks(policy):
 
 # ---------- 扫描与分类（优先级链） ----------
 
+def _match_classify_rule(name, ext, is_dir, policy):
+    """⑤ classify_rule 匹配（files_only 规则跳过目录）→ (bucket, rule_name, note) 或 None。
+
+    自 scan() 优先级链外提（W761）：本分支是链中唯一含内层循环的一段，
+    独立后 scan 主体只剩优先级判定本身。
+    """
+    for rule in policy.get("classify_rules", []):
+        if rule.get("files_only") and is_dir:
+            continue
+        if re.search(rule["match"], name, re.IGNORECASE):
+            return rule["bucket"], rule["name"], rule.get("note", "")
+        if rule.get("files_only") and re.search(rule["match"], ext, re.IGNORECASE):
+            return rule["bucket"], rule["name"], rule.get("note", "")
+    return None
+
+
 def scan(policy, freeze_hours=None):
     """扫描 tmpe 顶层项。优先级链：protect > active_lock > freeze > w### > classify_rule > _inbox。"""
     fh = freeze_hours if freeze_hours is not None else policy["freeze"]["mtime_hours"]
@@ -160,19 +176,9 @@ def scan(policy, freeze_hours=None):
         elif re.match(r"^w\d{3}", name, re.IGNORECASE):  # ④ standard_bucket
             row.update(bucket="w###", rule="w_batch", action="MOVE", note="批次桶")
         else:  # ⑤ classify_rule → ⑥ fallback _inbox
-            ext = os.path.splitext(name)[1].lower()
-            hit = None
-            for rule in policy.get("classify_rules", []):
-                if rule.get("files_only") and is_dir:
-                    continue
-                if re.search(rule["match"], name, re.IGNORECASE):
-                    hit = rule
-                    break
-                if rule.get("files_only") and re.search(rule["match"], ext, re.IGNORECASE):
-                    hit = rule
-                    break
+            hit = _match_classify_rule(name, os.path.splitext(name)[1].lower(), is_dir, policy)
             if hit:
-                row.update(bucket=hit["bucket"], rule=hit["name"], action="MOVE", note=hit.get("note", ""))
+                row.update(bucket=hit[0], rule=hit[1], action="MOVE", note=hit[2])
             else:
                 row.update(bucket="_inbox", rule="fallback", action="MOVE", note="未分类·入收件箱")
         rows.append(row)
@@ -374,13 +380,31 @@ def _score_dim(name, text, lines, stem, root):
     return dim
 
 
+def _find_callers(name, stem, root):
+    """调用者/被引用扫描（仓内 import 名或路径提及·只读 grep）→ 相对路径列表。
+
+    自 scan_tool_candidates 外提（W761）：scripts/ tools/ tmpe/ 三树逐文件读 50KB
+    找 stem 提及；候选文件自身（f==name）跳过。
+    """
+    callers = []
+    for base in (os.path.join(root, "scripts"), os.path.join(root, "tools"), os.path.join(root, "tmpe")):
+        if not os.path.isdir(base):
+            continue
+        for dirpath, _dirs, files in os.walk(base):
+            for f in files:
+                if f == name or not f.endswith((".py", ".md", ".json", ".js", ".ts")):
+                    continue
+                t = _read_text(os.path.join(dirpath, f), 50000)
+                if stem in t:
+                    callers.append(os.path.relpath(os.path.join(dirpath, f), root))
+    return callers
+
+
 def scan_tool_candidates(policy, root=ROOT):
     """只读扫描工具候选（禁执行·禁自动晋升）。返回评分行。"""
     cfg = policy.get("tool_promotion", {})
     if not cfg.get("enabled", False):
         return []
-    scripts_dir = os.path.join(root, "scripts")
-    tools_dir = os.path.join(root, "tools")
     rows = []
     for fp in _iter_tool_files(policy):
         text = _read_text(fp)
@@ -392,18 +416,7 @@ def scan_tool_candidates(policy, root=ROOT):
         rel = os.path.relpath(fp, TMPE)
         size, _nf, mtime = item_stat(fp)
         dim = _score_dim(name, text, lines, stem, root)
-        # 调用者/被引用（仓内 import 名或路径提及·只读 grep）
-        callers = []
-        for base in (scripts_dir, tools_dir, os.path.join(root, "tmpe")):
-            if not os.path.isdir(base):
-                continue
-            for dirpath, _dirs, files in os.walk(base):
-                for f in files:
-                    if f == name or not f.endswith((".py", ".md", ".json", ".js", ".ts")):
-                        continue
-                    t = _read_text(os.path.join(dirpath, f), 50000)
-                    if stem in t:
-                        callers.append(os.path.relpath(os.path.join(dirpath, f), root))
+        callers = _find_callers(name, stem, root)  # 调用者/被引用（只读 grep·W761 外提）
         has_test = os.path.exists(os.path.join(os.path.dirname(fp), f"test_{stem}.py"))
         if has_test:
             dim["可测试"] = 2
@@ -426,7 +439,6 @@ def scan_tool_candidates(policy, root=ROOT):
 
 
 def write_tool_report(rows, policy):
-    os.makedirs(REPORT_DIR, exist_ok=True)
     stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     md = ["# tmpe 工具晋升候选报告 " + stamp, "",
           "> 只读评估·禁自动晋升·禁执行未知脚本。晋升流程=人工评审→试运行→移动（不复制）→补 README/测试/owner→入 git→原副本移 _trash。",
@@ -443,51 +455,60 @@ def write_tool_report(rows, policy):
             for k, v in r["dim"].items():
                 md.append(f"- {k}：{v}/2")
             md.append("")
-    md_path = os.path.join(REPORT_DIR, f"tool_candidates-{stamp}.md")
-    with open(md_path, "w", encoding="utf-8") as fh:
-        fh.write("\n".join(md))
-    json_path = os.path.join(REPORT_DIR, f"tool_candidates-{stamp}.json")
-    with open(json_path, "w", encoding="utf-8") as fh:
-        json.dump({"stamp": stamp, "rows": rows}, fh, ensure_ascii=False, indent=2, default=str)
+    md_path, _json_path = _write_report_pair(
+        "tool_candidates", md, {"stamp": stamp, "rows": rows}, stamp)
     print(f"工具候选报告已落：_reports/tool_candidates-{stamp}.md（+json）")
     return md_path
 
 
 # ---------- 报告 ----------
 
-def write_report(rows, policy):
-    os.makedirs(REPORT_DIR, exist_ok=True)
-    stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    total = sum(r["size"] for r in rows)
+def _group_by_bucket(rows):
+    """按 bucket 聚合行（未分类归「未分」·保持行序）——print_rows/write_report 共用（W761 去重）。"""
     agg = {}
     for r in rows:
         agg.setdefault(r["bucket"] or "未分", []).append(r)
+    return agg
+
+
+def _write_report_pair(prefix, md_lines, json_obj, stamp):
+    """落 _reports/ 双件（md+json·同 stamp）——write_report/write_tool_report 共用（W761 去重）。"""
+    os.makedirs(REPORT_DIR, exist_ok=True)
+    md_path = os.path.join(REPORT_DIR, f"{prefix}-{stamp}.md")
+    with open(md_path, "w", encoding="utf-8") as fh:
+        fh.write("\n".join(md_lines))
+    json_path = os.path.join(REPORT_DIR, f"{prefix}-{stamp}.json")
+    with open(json_path, "w", encoding="utf-8") as fh:
+        json.dump(json_obj, fh, ensure_ascii=False, indent=2, default=str)
+    return md_path, json_path
+
+
+def write_report(rows, policy):
+    stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    total = sum(r["size"] for r in rows)
+    agg = _group_by_bucket(rows)
     md = [f"# tmpe 盘点报告 {stamp}", "",
-          f"- 顶层项 {len(rows)} · 总体积 {human(total)} · 冻结窗 {policy['freeze']['mtime_hours']}h", ""]
+          f"- 顶层项 {len(rows)} · 总体积 {human_size(total)} · 冻结窗 {policy['freeze']['mtime_hours']}h", ""]
     for b in list(dict.fromkeys(policy["buckets"] + ["_hold"])):
         if b not in agg:
             continue
         items = agg[b]
-        md.append(f"## {b}（{len(items)} 项 · {human(sum(i['size'] for i in items))}）")
+        md.append(f"## {b}（{len(items)} 项 · {human_size(sum(i['size'] for i in items))}）")
         md.append("")
         md.append("| 项 | 类型 | 体积 | 文件数 | 最后写 | 规则 | 动作 |")
         md.append("|---|---|---|---|---|---|---|")
         for r in sorted(items, key=lambda x: -x["size"]):
             when = datetime.datetime.fromtimestamp(r["mtime"]).strftime("%m-%d %H:%M")
-            md.append(f"| {r['name']} | {'D' if r['is_dir'] else 'F'} | {human(r['size'])} | {r['files']} | {when} | {r['rule']} | {r['action']} |")
+            md.append(f"| {r['name']} | {'D' if r['is_dir'] else 'F'} | {human_size(r['size'])} | {r['files']} | {when} | {r['rule']} | {r['action']} |")
         md.append("")
     lim = policy.get("limits", {})
     misc = agg.get("_misc", [])
     if len(misc) > lim.get("_misc_warn_files", 100) or sum(i["size"] for i in misc) > lim.get("_misc_warn_mb", 5) * 1048576:
-        md.append(f"⚠ **_misc 超额告警**：{len(misc)} 项 / {human(sum(i['size'] for i in misc))}"
+        md.append(f"⚠ **_misc 超额告警**：{len(misc)} 项 / {human_size(sum(i['size'] for i in misc))}"
                   f"（阈值 {lim.get('_misc_warn_files')} 项 / {lim.get('_misc_warn_mb')}MB）——需分流 _trash 或评估归档")
         md.append("")
-    md_path = os.path.join(REPORT_DIR, f"tmpe-report-{stamp}.md")
-    with open(md_path, "w", encoding="utf-8") as fh:
-        fh.write("\n".join(md))
-    json_path = os.path.join(REPORT_DIR, f"tmpe-report-{stamp}.json")
-    with open(json_path, "w", encoding="utf-8") as fh:
-        json.dump({"stamp": stamp, "total_bytes": total, "rows": rows}, fh, ensure_ascii=False, indent=2)
+    md_path, _json_path = _write_report_pair(
+        "tmpe-report", md, {"stamp": stamp, "total_bytes": total, "rows": rows}, stamp)
     print(f"报告已落：_reports/tmpe-report-{stamp}.md（+json）")
     return md_path
 
@@ -497,18 +518,16 @@ def write_report(rows, policy):
 def print_rows(rows, policy):
     total = sum(r["size"] for r in rows)
     print("== tmpe 盘点（策略源=policy.yml·只读）==")
-    print(f"顶层项 {len(rows)} · 总体积 {human(total)} · 冻结窗 {policy['freeze']['mtime_hours']}h")
-    agg = {}
-    for r in rows:
-        agg.setdefault(r["bucket"] or "未分", []).append(r)
+    print(f"顶层项 {len(rows)} · 总体积 {human_size(total)} · 冻结窗 {policy['freeze']['mtime_hours']}h")
+    agg = _group_by_bucket(rows)
     shown = list(dict.fromkeys(policy["buckets"] + ["_hold"]))
     for b in shown:
         if b not in agg:
             continue
-        print(f"── {b}（{len(agg[b])} 项·{human(sum(i['size'] for i in agg[b]))}）")
+        print(f"── {b}（{len(agg[b])} 项·{human_size(sum(i['size'] for i in agg[b]))}）")
         for r in agg[b]:
             when = datetime.datetime.fromtimestamp(r["mtime"]).strftime("%m-%d %H:%M")
-            print(f"   {'D' if r['is_dir'] else ' '} {r['name']:<34} {human(r['size']):>9} {r['files']:>5} 件  {when}  [{r['action']}] {r['note']}")
+            print(f"   {'D' if r['is_dir'] else ' '} {r['name']:<34} {human_size(r['size']):>9} {r['files']:>5} 件  {when}  [{r['action']}] {r['note']}")
     # 桶内实况（scan 只扫顶层·桶内项在此汇总）
     print("── 桶内实况（已归位项）")
     for b in shown:
@@ -517,7 +536,53 @@ def print_rows(rows, policy):
             continue
         size, nfiles, _ = item_stat(bpath)
         ntop = len([n for n in os.listdir(bpath) if n != ".DS_Store"])
-        print(f"   {b:<10} {ntop:>4} 项 / {nfiles:>5} 件 / {human(size):>9}")
+        print(f"   {b:<10} {ntop:>4} 项 / {nfiles:>5} 件 / {human_size(size):>9}")
+
+
+# ---------- CLI 模式处理器（main 分发用·W761 外提） ----------
+
+def _cmd_tool_candidates(policy, as_json):
+    """--tool-candidates：只读评估 + 报告落盘（禁自动晋升·禁执行未知脚本）。"""
+    rows = scan_tool_candidates(policy)
+    if as_json:
+        print(json.dumps({"rows": rows}, ensure_ascii=False, indent=2, default=str))
+    else:
+        print(f"== 工具晋升候选（只读评估·{len(rows)} 个脚本）==")
+        for r in rows:
+            print(f"   {r['score']:>2}/18  {r['path']:<44} {r['verdict']}")
+        if rows:
+            print("（报告落 _reports/：--tool-candidates 已自动生成）")
+        write_tool_report(rows, policy)
+    return 0
+
+
+def _cmd_plan(rows, older, as_json):
+    """--plan [--json]：输出迁移计划（不执行·--json 为机器可读形态）。"""
+    if as_json:
+        print(json.dumps({"actions": build_plan(rows, older), "rows": rows},
+                         ensure_ascii=False, indent=2, default=str))
+        return 0
+    actions = build_plan(rows, older)
+    print(f"== 迁移计划（{len(actions)} 项·未执行）==")
+    for a in actions:
+        print(f"   [MOVE] {a['name']}  →  {a['dest']}   (rule={a['rule']})")
+    if not actions:
+        print("   （无可归桶项）")
+    return 0
+
+
+def _cmd_apply(rows, args, policy):
+    """--apply：双闸门执行归桶（--confirm 必备·--from-plan 防中途规则漂移）。"""
+    if not args.confirm:
+        print("FAIL --apply 必须配 --confirm（双闸门·防误触）。先 --plan 审清单。")
+        return 1
+    if args.from_plan:
+        data = json.load(open(args.from_plan, encoding="utf-8"))
+        actions = data["actions"] if isinstance(data, dict) else data
+    else:
+        actions = build_plan(rows, args.older)
+    apply_actions(actions, TMPE, policy)
+    return 0
 
 
 def main():
@@ -546,44 +611,15 @@ def main():
     lock.acquire()
     try:
         if args.tool_candidates:
-            rows = scan_tool_candidates(policy)
-            if args.json:
-                print(json.dumps({"rows": rows}, ensure_ascii=False, indent=2, default=str))
-            else:
-                print(f"== 工具晋升候选（只读评估·{len(rows)} 个脚本）==")
-                for r in rows:
-                    print(f"   {r['score']:>2}/18  {r['path']:<44} {r['verdict']}")
-                if rows:
-                    print("（报告落 _reports/：--tool-candidates 已自动生成）")
-                write_tool_report(rows, policy)
-            return 0
+            return _cmd_tool_candidates(policy, args.json)
         rows = scan(policy, args.freeze_hours)
         if args.report:
             write_report(rows, policy)
             return 0
-        if args.plan and args.json:
-            print(json.dumps({"actions": build_plan(rows, args.older), "rows": rows},
-                             ensure_ascii=False, indent=2, default=str))
-            return 0
         if args.plan:
-            actions = build_plan(rows, args.older)
-            print(f"== 迁移计划（{len(actions)} 项·未执行）==")
-            for a in actions:
-                print(f"   [MOVE] {a['name']}  →  {a['dest']}   (rule={a['rule']})")
-            if not actions:
-                print("   （无可归桶项）")
-            return 0
+            return _cmd_plan(rows, args.older, args.json)
         if args.apply:
-            if not args.confirm:
-                print("FAIL --apply 必须配 --confirm（双闸门·防误触）。先 --plan 审清单。")
-                return 1
-            if args.from_plan:
-                data = json.load(open(args.from_plan, encoding="utf-8"))
-                actions = data["actions"] if isinstance(data, dict) else data
-            else:
-                actions = build_plan(rows, args.older)
-            apply_actions(actions, TMPE, policy)
-            return 0
+            return _cmd_apply(rows, args, policy)
         print_rows(rows, policy)
         return 0
     finally:

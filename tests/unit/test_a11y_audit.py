@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """W266 E5 测试深化·a11y_audit.py 单元测试·pytest 风格
 
 覆盖 9 条 WCAG 2.2 AA 规则 + 键盘导航 + ARIA 完整性：
@@ -27,7 +26,6 @@ if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
 import a11y_audit  # noqa: E402
-
 
 # ---------------------------------------------------------------------------
 # 公共 fixture
@@ -88,7 +86,7 @@ def bad_html_text():
 
 def test_rule_1_alt_text_good(good_html_text):
     """符合规范的 HTML：屏幕阅读器检查应无 P0/P1"""
-    findings = a11y_audit.check_screen_reader(good_html_text, Path("good.html"))
+    findings = a11y_audit.rule_5_screen_reader(good_html_text, Path("good.html"))
     p0 = [f for f in findings if f["severity"] == a11y_audit.Severity.P0]
     p1 = [f for f in findings if f["severity"] == a11y_audit.Severity.P1]
     # 应无 P0（img alt 已提供）
@@ -99,7 +97,7 @@ def test_rule_1_alt_text_good(good_html_text):
 
 def test_rule_1_alt_text_missing(bad_html_text):
     """img 缺 alt 应报 P0"""
-    findings = a11y_audit.check_screen_reader(bad_html_text, Path("bad.html"))
+    findings = a11y_audit.rule_5_screen_reader(bad_html_text, Path("bad.html"))
     p0 = [f for f in findings if f["severity"] == a11y_audit.Severity.P0]
     assert len(p0) >= 1
     assert any("img" in f["message"].lower() and "alt" in f["message"].lower()
@@ -109,7 +107,7 @@ def test_rule_1_alt_text_missing(bad_html_text):
 def test_rule_1_alt_text_empty_role_presentation():
     """alt="" + role="presentation" 应无 P0"""
     text = '<img src="decor.png" alt="" role="presentation">'
-    findings = a11y_audit.check_screen_reader(text, Path("dec.html"))
+    findings = a11y_audit.rule_5_screen_reader(text, Path("dec.html"))
     p0 = [f for f in findings if f["severity"] == a11y_audit.Severity.P0]
     assert len(p0) == 0
 
@@ -120,7 +118,7 @@ def test_rule_1_noscript_missing():
         '<html><head><script src="a.js"></script><script src="b.js"></script>'
         '</head><body></body></html>'
     )
-    findings = a11y_audit.check_screen_reader(text, Path("ns.html"))
+    findings = a11y_audit.rule_5_screen_reader(text, Path("ns.html"))
     p2 = [f for f in findings if f["severity"] == a11y_audit.Severity.P2]
     assert any("noscript" in f["message"].lower() for f in p2)
 
@@ -136,7 +134,7 @@ def test_rule_2_color_contrast_pass():
         '.contrast-text { color: #000000; background-color: #ffffff; }'
         '</style></head><body><p class="contrast-text">hello</p></body></html>'
     )
-    findings = a11y_audit.check_color_contrast(text, Path("ok.html"))
+    findings = a11y_audit.rule_2_color_contrast(text, Path("ok.html"))
     # 应无低于 4.5:1 的发现
     fails = [f for f in findings if f["severity"] in
              (a11y_audit.Severity.P0, a11y_audit.Severity.P1, a11y_audit.Severity.P2)]
@@ -150,7 +148,7 @@ def test_rule_2_color_contrast_fail():
         '.low { color: #aaaaaa; background-color: #cccccc; }'
         '</style></head><body><p class="low">low contrast</p></body></html>'
     )
-    findings = a11y_audit.check_color_contrast(text, Path("fail.html"))
+    findings = a11y_audit.rule_2_color_contrast(text, Path("fail.html"))
     # 应至少有一个对比度问题
     assert len(findings) >= 1
     assert any("对比度" in f["message"] or "ratio" in f["message"].lower()
@@ -169,7 +167,7 @@ def test_rule_3_label_association_good():
         '<button aria-labelledby="title">按钮</button>'
         '</body></html>'
     )
-    findings = a11y_audit.check_aria_labels(text, Path("ok.html"))
+    findings = a11y_audit.rule_3_aria_labels(text, Path("ok.html"))
     p1 = [f for f in findings if f["severity"] == a11y_audit.Severity.P1]
     # 仅 P1 中可能含 label 引用问题，应无
     assert not any("aria-labelledby" in f["message"] for f in p1)
@@ -182,7 +180,7 @@ def test_rule_3_label_association_dangling():
         '<button aria-labelledby="nonexistent">按钮</button>'
         '</body></html>'
     )
-    findings = a11y_audit.check_aria_labels(text, Path("dangling.html"))
+    findings = a11y_audit.rule_3_aria_labels(text, Path("dangling.html"))
     dangling = [f for f in findings if "aria-labelledby" in f["message"]
                 and "不存在" in f["message"]]
     assert len(dangling) >= 1
@@ -195,7 +193,7 @@ def test_rule_3_label_mutually_exclusive():
         '<button aria-label="A" aria-labelledby="x">按钮</button>'
         '</body></html>'
     )
-    findings = a11y_audit.check_aria_labels(text, Path("mutual.html"))
+    findings = a11y_audit.rule_3_aria_labels(text, Path("mutual.html"))
     mutual = [f for f in findings if "aria-label" in f["message"]
               and "aria-labelledby" in f["message"]]
     assert len(mutual) >= 1
@@ -214,7 +212,7 @@ def test_rule_4_heading_hierarchy_good():
         '<h1>主</h1><h2>二</h2><h3>三</h3>'
         '</body></html>'
     )
-    findings = a11y_audit.check_focus_indicator(text, Path("h.html"))
+    findings = a11y_audit.rule_4_focus_indicator(text, Path("h.html"))
     # 应无 outline:none 缺替代的发现
     outline_issues = [f for f in findings if "outline:none" in f["message"]
                       or "outline" in f["message"]]
@@ -230,7 +228,7 @@ def test_rule_4_heading_hierarchy_skip():
         '<a href="#x">click</a>'
         '</body></html>'
     )
-    findings = a11y_audit.check_focus_indicator(text, Path("bad.html"))
+    findings = a11y_audit.rule_4_focus_indicator(text, Path("bad.html"))
     outline_finds = [f for f in findings
                     if "outline:none" in f["message"]
                     or "outline" in f["evidence"]]
@@ -254,7 +252,7 @@ def test_rule_5_lang_attr_present():
 
 
 def test_rule_5_lang_attr_missing():
-    """html lang 缺失：a11y_audit 的 check_screen_reader 不直接检查 lang，
+    """html lang 缺失：a11y_audit 的 rule_5_screen_reader 不直接检查 lang，
     这里以独立验证模块导出能识别 lang 属性缺失"""
     text = (
         '<!DOCTYPE html><html><head><title>x</title></head>'
@@ -398,7 +396,7 @@ def test_keyboard_navigation_accesskey_conflict():
         '<a href="#b" accesskey="a">B</a>'
         '</body></html>'
     )
-    findings = a11y_audit.check_keyboard_navigation(text, Path("ak.html"))
+    findings = a11y_audit.rule_1_keyboard_navigation(text, Path("ak.html"))
     ak = [f for f in findings if "accesskey" in f["message"]]
     assert len(ak) >= 1
 
@@ -406,7 +404,7 @@ def test_keyboard_navigation_accesskey_conflict():
 def test_keyboard_navigation_positive_tabindex():
     """tabindex > 0 应报 P1"""
     text = '<html><body><a href="#x" tabindex="5">x</a></body></html>'
-    findings = a11y_audit.check_keyboard_navigation(text, Path("tb.html"))
+    findings = a11y_audit.rule_1_keyboard_navigation(text, Path("tb.html"))
     tb = [f for f in findings if "tabindex" in f["message"]]
     assert len(tb) >= 1
 
@@ -418,7 +416,7 @@ def test_keyboard_navigation_focus_trap_alert():
         '<input onfocus="alert(1)">'
         '</body></html>'
     )
-    findings = a11y_audit.check_keyboard_navigation(text, Path("trap.html"))
+    findings = a11y_audit.rule_1_keyboard_navigation(text, Path("trap.html"))
     p0 = [f for f in findings if f["severity"] == a11y_audit.Severity.P0]
     assert len(p0) >= 1
 
@@ -430,7 +428,7 @@ def test_keyboard_navigation_dialog_no_modal():
         '<div role="dialog">对话框</div>'
         '</body></html>'
     )
-    findings = a11y_audit.check_keyboard_navigation(text, Path("dialog.html"))
+    findings = a11y_audit.rule_1_keyboard_navigation(text, Path("dialog.html"))
     dialog = [f for f in findings if "dialog" in f["message"].lower()
               and "aria-modal" in f["message"]]
     assert len(dialog) >= 1
@@ -526,14 +524,14 @@ def test_audit_directory_integration(tmp_path: Path):
 def test_rule_31_language_of_page_good():
     """<html lang="zh-CN"> 应无 findings"""
     text = '<!DOCTYPE html><html lang="zh-CN"><head><title>x</title></head><body></body></html>'
-    findings = a11y_audit.check_language_of_page(text, Path("ok.html"))
+    findings = a11y_audit.rule_31_language_of_page(text, Path("ok.html"))
     assert len(findings) == 0
 
 
 def test_rule_31_language_of_page_missing():
     """<html> 缺 lang 属性应报 P1"""
     text = '<!DOCTYPE html><html><head><title>x</title></head><body></body></html>'
-    findings = a11y_audit.check_language_of_page(text, Path("bad.html"))
+    findings = a11y_audit.rule_31_language_of_page(text, Path("bad.html"))
     p1 = [f for f in findings if f["severity"] == a11y_audit.Severity.P1]
     assert len(p1) >= 1
     assert any("lang" in f["message"].lower() for f in p1)
@@ -542,7 +540,7 @@ def test_rule_31_language_of_page_missing():
 def test_rule_31_language_of_page_invalid_bcp47():
     """<html lang="1"> 不符合 BCP 47 应报 P2"""
     text = '<!DOCTYPE html><html lang="1"><head><title>x</title></head><body></body></html>'
-    findings = a11y_audit.check_language_of_page(text, Path("bad.html"))
+    findings = a11y_audit.rule_31_language_of_page(text, Path("bad.html"))
     p2 = [f for f in findings if f["severity"] == a11y_audit.Severity.P2]
     assert len(p2) >= 1
     assert any("BCP 47" in f["message"] for f in p2)
@@ -555,14 +553,14 @@ def test_rule_31_language_of_page_invalid_bcp47():
 def test_rule_32_link_purpose_good():
     """描述性链接文本应无 findings"""
     text = '<html><body><a href="/about">关于我们</a></body></html>'
-    findings = a11y_audit.check_link_purpose(text, Path("ok.html"))
+    findings = a11y_audit.rule_32_link_purpose(text, Path("ok.html"))
     assert len(findings) == 0
 
 
 def test_rule_32_link_purpose_vague():
     """「点击这里」模糊链接应报 P2"""
     text = '<html><body><a href="/x">点击这里</a></body></html>'
-    findings = a11y_audit.check_link_purpose(text, Path("bad.html"))
+    findings = a11y_audit.rule_32_link_purpose(text, Path("bad.html"))
     p2 = [f for f in findings if f["severity"] == a11y_audit.Severity.P2]
     assert len(p2) >= 1
     assert any("模糊" in f["message"] for f in p2)
@@ -571,7 +569,7 @@ def test_rule_32_link_purpose_vague():
 def test_rule_32_link_purpose_aria_label_exempt():
     """有 aria-label 的链接应跳过模糊检测"""
     text = '<html><body><a href="/x" aria-label="查看详情">更多</a></body></html>'
-    findings = a11y_audit.check_link_purpose(text, Path("ok.html"))
+    findings = a11y_audit.rule_32_link_purpose(text, Path("ok.html"))
     assert len(findings) == 0
 
 
@@ -587,14 +585,14 @@ def test_rule_33_multiple_ways_good():
         '<input type="search" placeholder="搜索">'
         '</body></html>'
     )
-    findings = a11y_audit.check_multiple_ways(text, Path("ok.html"))
+    findings = a11y_audit.rule_33_multiple_ways(text, Path("ok.html"))
     assert len(findings) == 0
 
 
 def test_rule_33_multiple_ways_insufficient():
     """无 nav 无 search 应报 P2（仅 0 种导航方式）"""
     text = '<html><body><p>内容</p></body></html>'
-    findings = a11y_audit.check_multiple_ways(text, Path("bad.html"))
+    findings = a11y_audit.rule_33_multiple_ways(text, Path("bad.html"))
     p2 = [f for f in findings if f["severity"] == a11y_audit.Severity.P2]
     assert len(p2) >= 1
     assert any("导航方式" in f["message"] for f in p2)
@@ -611,7 +609,7 @@ def test_rule_34_non_text_contrast_good():
         'button { border-color: #000000; background-color: #ffffff; }'
         '</style></head><body><button>x</button></body></html>'
     )
-    findings = a11y_audit.check_non_text_contrast(text, Path("ok.html"))
+    findings = a11y_audit.rule_34_non_text_contrast(text, Path("ok.html"))
     assert len(findings) == 0
 
 
@@ -622,7 +620,7 @@ def test_rule_34_non_text_contrast_low():
         'button { border-color: #cccccc; background-color: #dddddd; }'
         '</style></head><body><button>x</button></body></html>'
     )
-    findings = a11y_audit.check_non_text_contrast(text, Path("bad.html"))
+    findings = a11y_audit.rule_34_non_text_contrast(text, Path("bad.html"))
     p2 = [f for f in findings if f["severity"] == a11y_audit.Severity.P2]
     assert len(p2) >= 1
     assert any("1.4.11" in f["message"] or "非文本" in f["message"] for f in p2)
@@ -635,7 +633,7 @@ def test_rule_34_non_text_contrast_low():
 def test_rule_35_hover_focus_content_good():
     """无 title 属性无 tooltip CSS 应无 findings"""
     text = '<html><body><button>提交</button></body></html>'
-    findings = a11y_audit.check_hover_focus_content(text, Path("ok.html"))
+    findings = a11y_audit.rule_35_hover_focus_content(text, Path("ok.html"))
     assert len(findings) == 0
 
 
@@ -647,7 +645,7 @@ def test_rule_35_hover_focus_content_title_attr():
         '<button title="提交表单数据">提交</button>'
         '</body></html>'
     )
-    findings = a11y_audit.check_hover_focus_content(text, Path("bad.html"))
+    findings = a11y_audit.rule_35_hover_focus_content(text, Path("bad.html"))
     p3 = [f for f in findings if f["severity"] == a11y_audit.Severity.P3]
     assert len(p3) >= 1
     assert any("title" in f["message"].lower() for f in p3)
@@ -660,7 +658,7 @@ def test_rule_35_hover_focus_content_title_attr():
 def test_rule_36_char_key_shortcuts_good():
     """无 accesskey 无单字符 keydown 应无 findings"""
     text = '<html><body><button>提交</button></body></html>'
-    findings = a11y_audit.check_char_key_shortcuts(text, Path("ok.html"))
+    findings = a11y_audit.rule_36_char_key_shortcuts(text, Path("ok.html"))
     assert len(findings) == 0
 
 
@@ -672,7 +670,7 @@ def test_rule_36_char_key_shortcuts_accesskey():
         '<button accesskey="b">B</button>'
         '</body></html>'
     )
-    findings = a11y_audit.check_char_key_shortcuts(text, Path("bad.html"))
+    findings = a11y_audit.rule_36_char_key_shortcuts(text, Path("bad.html"))
     p3 = [f for f in findings if f["severity"] == a11y_audit.Severity.P3]
     assert len(p3) >= 1
     assert any("accesskey" in f["message"].lower() for f in p3)
@@ -685,7 +683,7 @@ def test_rule_36_char_key_shortcuts_accesskey():
 def test_rule_37_pointer_gestures_good():
     """无多指手势无路径手势应无 findings"""
     text = '<html><body><button onclick="doStuff()">点击</button></body></html>'
-    findings = a11y_audit.check_pointer_gestures(text, Path("ok.html"))
+    findings = a11y_audit.rule_37_pointer_gestures(text, Path("ok.html"))
     assert len(findings) == 0
 
 
@@ -698,7 +696,7 @@ def test_rule_37_pointer_gestures_no_click_alt():
         '});'
         '</script></head><body></body></html>'
     )
-    findings = a11y_audit.check_pointer_gestures(text, Path("bad.html"))
+    findings = a11y_audit.rule_37_pointer_gestures(text, Path("bad.html"))
     p2 = [f for f in findings if f["severity"] == a11y_audit.Severity.P2]
     assert len(p2) >= 1
     assert any("2.5.1" in f["message"] for f in p2)
@@ -711,14 +709,14 @@ def test_rule_37_pointer_gestures_no_click_alt():
 def test_rule_38_pointer_cancellation_good():
     """onmousedown + onclick 应无 findings（down 事件有 up/click 替代）"""
     text = '<html><body><button onmousedown="down()" onclick="doStuff()">x</button></body></html>'
-    findings = a11y_audit.check_pointer_cancellation(text, Path("ok.html"))
+    findings = a11y_audit.rule_38_pointer_cancellation(text, Path("ok.html"))
     assert len(findings) == 0
 
 
 def test_rule_38_pointer_cancellation_down_only():
     """仅 onmousedown 无 onmouseup/onclick 应报 P2"""
     text = '<html><body><button onmousedown="doStuff()">x</button></body></html>'
-    findings = a11y_audit.check_pointer_cancellation(text, Path("bad.html"))
+    findings = a11y_audit.rule_38_pointer_cancellation(text, Path("bad.html"))
     p2 = [f for f in findings if f["severity"] == a11y_audit.Severity.P2]
     assert len(p2) >= 1
     assert any("2.5.2" in f["message"] for f in p2)
@@ -731,14 +729,14 @@ def test_rule_38_pointer_cancellation_down_only():
 def test_rule_39_label_in_name_good():
     """aria-label 包含可见文本应无 findings"""
     text = '<html><body><button aria-label="提交表单">提交</button></body></html>'
-    findings = a11y_audit.check_label_in_name(text, Path("ok.html"))
+    findings = a11y_audit.rule_39_label_in_name(text, Path("ok.html"))
     assert len(findings) == 0
 
 
 def test_rule_39_label_in_name_mismatch():
     """aria-label 不包含可见文本应报 P3"""
     text = '<html><body><button aria-label="确认操作">提交</button></body></html>'
-    findings = a11y_audit.check_label_in_name(text, Path("bad.html"))
+    findings = a11y_audit.rule_39_label_in_name(text, Path("bad.html"))
     p3 = [f for f in findings if f["severity"] == a11y_audit.Severity.P3]
     assert len(p3) >= 1
     assert any("2.5.3" in f["message"] for f in p3)
@@ -758,7 +756,7 @@ def test_rule_40_animation_interactions_good():
         '}'
         '</style></head><body><button>x</button></body></html>'
     )
-    findings = a11y_audit.check_animation_interactions(text, Path("ok.html"))
+    findings = a11y_audit.rule_40_animation_interactions(text, Path("ok.html"))
     assert len(findings) == 0
 
 
@@ -769,7 +767,7 @@ def test_rule_40_animation_interactions_no_reduced_motion():
         'button { transition: all 0.3s; }'
         '</style></head><body><button>x</button></body></html>'
     )
-    findings = a11y_audit.check_animation_interactions(text, Path("bad.html"))
+    findings = a11y_audit.rule_40_animation_interactions(text, Path("bad.html"))
     p2 = [f for f in findings if f["severity"] == a11y_audit.Severity.P2]
     assert len(p2) >= 1
     assert any("prefers-reduced-motion" in f["message"] for f in p2)

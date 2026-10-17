@@ -16,6 +16,10 @@ v2.3.65-78 快照行）；方法论 README 目录索引长期滞后（17 文件 
    W525 实证 W522/W523/W524 曾被追加到文件尾部（W449 段后）而门禁全绿漏网
 7. file-index 段缺失检测（W526 新增）：CHANGELOG 每个现役版段都必须有对应 file-index 段——
    W525 实证 W504 段缺失（CHANGELOG 有 v2.3.103 段而反向索引无登记）漏网
+8. docs/INDEX.md 产物级一致性（W773/T-02 PR-D 新增）：与 docs_index.py 生成结果
+   逐字节比对（复用生成逻辑·单一事实源）——W772 前 INDEX.md 实测过期（§11 20 条
+   vs 磁盘 22 个 md）而 8 个 workflow 零调用 docs_index.py、verify_delivery 无引用，
+   mcp-server「CI 同款」声明与实际零调用背离（T-02 缺陷④）；负样本（删 1 条目）实测转红
 
 豁免设计（W499 方案②精神）：
 W449-W463 区间已确认损坏且"维持现状不重排（历史段禁改）"——门禁只查豁免区外的
@@ -164,10 +168,46 @@ def check_governance_refs(errors: list[str]) -> None:
     print(f"治理文档引用：文档规范.md 引 scripts/ {len(doc_refs)} 个 · verify 挂载 check_* {len(vd_scripts)} 个（全存在）")
 
 
+def check_docs_index(errors: list[str]) -> None:
+    """docs/INDEX.md 产物级一致性（W773/T-02 PR-D·缺陷④的防线）。
+
+    缺陷④：docs/INDEX.md 已实测过期（W772 前 §11 20 条 vs 磁盘 22 个 md·差集恰为
+    W761 重构报告与 W760 全量对抗审查报告）而**无任何门禁**做产物级校验——
+    8 个 workflow 零处调用 docs_index.py、verify_delivery.py 全文无引用、
+    Makefile docs-index 目标是生成模式（非 --check）且本机无 make、CI 不调 Makefile；
+    mcp-server/xiyouji_mcp.py:320「过期判定的权威链路是 python scripts/docs_index.py
+    --check（CI 同款）」声明与实际零调用背离（「声明≠落地」文本证据）。
+
+    判据 = 复用 docs_index.py 的生成逻辑做逐字节比对（单一事实源：改生成器即同步
+    改判据·不复制第二份渲染规则）；缺失文件/内容不一致均 FAIL。
+    """
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    try:
+        import docs_index
+    except ImportError as exc:  # 生成器被挪走/改名 = 防线失效·必须红
+        errors.append("docs_index 模块导入失败（%s）——INDEX 产物级校验无法执行" % exc)
+        return
+    output = docs_index.DEFAULT_OUTPUT
+    if not output.exists():
+        errors.append("docs/INDEX.md 不存在（请运行 python scripts/docs_index.py）")
+        return
+    scanned = docs_index.scan_docs(docs_index.DEFAULT_DOCS_DIR)
+    expected = docs_index.render_index(scanned)
+    current = output.read_text(encoding="utf-8")
+    if current != expected:
+        errors.append(
+            "docs/INDEX.md 已过期（与 docs_index.py 生成结果不一致·"
+            "请运行 python scripts/docs_index.py 重建——T-02 缺陷④复燃）")
+        return
+    total = sum(len(v) for v in scanned.values())
+    print(f"docs/INDEX.md 产物级一致（{total} 篇 · {len(scanned)} 板块）")
+
+
 def main() -> int:
     errors: list[str] = []
     check_file_index(errors)
     check_methodology_readme(errors)
+    check_docs_index(errors)
     check_changelog_w_upper(errors)
     check_governance_refs(errors)
     if errors:
@@ -175,7 +215,7 @@ def main() -> int:
         for e in errors:
             print("  - " + e)
         return 1
-    print("索引健康门禁通过（file-index 段完整性 / 方法论 README 覆盖 / 编号上限 / 治理文档引用）")
+    print("索引健康门禁通过（file-index 段完整性 / 方法论 README 覆盖 / docs INDEX 产物级一致 / 编号上限 / 治理文档引用）")
     return 0
 
 
