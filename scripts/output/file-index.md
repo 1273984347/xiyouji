@@ -11,6 +11,55 @@
 ---
 
 
+## W779 全仓目录索引补齐批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/gen_folder_docs.py | W779 | 目录索引生成器（幂等·大小写判重防覆写 INDEX.md·gitignored 过滤·治理树排除·--dry-run/--force） |
+| docs/INDEX.md | W779 | 重建（697→701 篇·docs_index.py·第 17 门禁产物级一致） |
+| scripts/output/script-coverage-baseline.txt | W779 | 登记 gen_folder_docs.py 豁免行（第 42 门禁 C1） |
+| docs/00-导读/W批次编号对账表.md | W779 | W779 认领登记 |
+| CHANGELOG.md | W779 | 新增 W779 版段 + 编号规则 W001-W778→W779 |
+| HANDOVER.md | W779 | 最后更新链首 + 当前进度段 W779 摘要 |
+| README.md | W779 | 抬头当前批次 W778→W779 |
+| STRUCTURE.md | W779 | 抬头当前批次 W778→W779 + 工具与输出表新增「目录索引生成」行 |
+| CITATION.cff | W779 | version W778→W779（外部引用面·第 27 门禁 R2） |
+| scripts/output/file-index.md | W779 | 本段（W779 per-file 登记） |
+| .github/（index.md ×3） | W779 | 逐文件索引（机器可读）·.github 根 + ISSUE_TEMPLATE + workflows |
+| archive/（index.md ×20） | W779 | 逐文件索引（机器可读）·archive 根 + docs/scripts 全子树 20 个 |
+| assets/（index.md ×5） | W779 | 逐文件索引（机器可读）·根 + fonts/images/maps/fonts-source |
+| dataset/（index.md ×2） | W779 | 逐文件索引（机器可读）·根 + entities |
+| docs/（index.md ×8） | W779 | 逐文件索引（机器可读）·docs 根 + 00-导读/07/08/09/_templates/agent/superpowers/plans |
+| hyperframes/（index.md ×4） | W779 | 逐文件索引（机器可读）·根 + compositions/d3-visualizations + output |
+| index.md（根级 ×1） | W779 | 仓库根逐文件索引（机器可读）·列顶层 16 个子目录与根级文件 |
+| mcp-server/（index.md ×1） | W779 | 逐文件索引（机器可读） |
+| packaging/（index.md ×37） | W779 | 逐文件索引（机器可读）·xiyouji-analysis/src 全树（34 类 analyses 逐一建） |
+| references/（index.md ×1） | W779 | 逐文件索引（机器可读） |
+| scripts/（index.md ×43） | W779 | 逐文件索引（机器可读）·根 + A-AH 34 类 + api/audit/lib/output/output-data/figures/rag/utils |
+| site/（index.md ×22） | W779 | 逐文件索引（机器可读）·根 + chapters/characters/data/data-json/en/en-json/js/reader×5/static×7/themes |
+| source/（index.md ×5） | W779 | 逐文件索引（机器可读）·根 + 原文/分回/shendu + 引用与网络解读 |
+| tests/（index.md ×4） | W779 | 逐文件索引（机器可读）·根 + unit/e2e/e2e-baseline |
+| timeline/（index.md ×1） | W779 | 逐文件索引（机器可读） |
+| tools/（index.md ×1） | W779 | 逐文件索引（机器可读） |
+| xiyouji-agent-web/（index.md ×9） | W779 | 逐文件索引（机器可读）·根 + server/server-engine/src/src-components/hooks/pages/utils/evals |
+| .github/（README.md ×2） | W779 | 目录导读（人读）·.github 根 + ISSUE_TEMPLATE |
+| archive/（README.md ×17） | W779 | 目录导读（人读）·archive 根 + docs/scripts 子树 17 个 |
+| assets/（README.md ×5） | W779 | 目录导读（人读）·根 + fonts/images/maps/fonts-source |
+| dataset/（README.md ×1） | W779 | 目录导读（人读） |
+| docs/（README.md ×5） | W779 | 目录导读（人读）·docs 根 + _templates/agent/superpowers/superpowers-plans |
+| hyperframes/（README.md ×3） | W779 | 目录导读（人读）·根 + compositions/d3-visualizations |
+| packaging/（README.md ×36） | W779 | 目录导读（人读）·xiyouji-analysis 全树 36 个 |
+| references/（README.md ×1） | W779 | 目录导读（人读） |
+| scripts/（README.md ×41） | W779 | 目录导读（人读）·根 + A-AH 34 类 + api/audit/lib/output/output-data/figures/utils |
+| site/（README.md ×21） | W779 | 目录导读（人读）·根 + chapters/characters/data/data-json/en-json/js/reader×5/static×6/themes |
+| source/（README.md ×5） | W779 | 目录导读（人读）·根 + 原文/分回/shendu + 引用与网络解读 |
+| tests/（README.md ×4） | W779 | 目录导读（人读）·根 + unit/e2e/e2e-baseline |
+| timeline/（README.md ×1） | W779 | 目录导读（人读） |
+| tools/（README.md ×1） | W779 | 目录导读（人读） |
+| xiyouji-agent-web/（README.md ×8） | W779 | 目录导读（人读）·根 + server/server-engine/src/src-components/hooks/pages/utils/evals |
+
+> 全量 318 个目录索引件（index.md 167 + README.md 151）逐文件清单由 `python scripts/gen_folder_docs.py --dry-run` 复现；生成器幂等（重跑写 0 文件）。
+
 ## W778 第 41 篇改进项落地批（2026-10-17）
 
 | 文件 | W | 说明 |

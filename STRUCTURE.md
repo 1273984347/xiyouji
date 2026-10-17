@@ -3,7 +3,7 @@
 
 > **📖 阅读契约（W707）**：索引型——找「东西在哪」时读顶层结构表+目标目录所在段；各板块下的建置沿革（v0.x W0xx 补齐…）是历史记录见 CHANGELOG，勿通读；计数与口径以磁盘实数与 [统计口径说明](docs/00-导读/统计口径说明.md) 为准。
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前批次：W778（2026-10-17）— 复盘改进三项落地，latent 三问与双平台禁例入 pitfalls，外部产出七步与对拍 SOP 入流水线文档，对拍模板固化，复盘提醒 automation 提案按用户规则撤销—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前批次：W779（2026-10-18）— 全仓目录索引补齐：179 个在管目录新增 index.md（逐文件清单）/README.md（目录导读）分工定位·gen_folder_docs.py 幂等生成并自动排除 gitignored 路径与治理树·三处设计债整改（INDEX 覆写/gitignored 泄漏/治理树污染）—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构
@@ -241,6 +241,7 @@
 | **截图审查产物** | `output/screenshots/` | full-page 截图（desktop/ + mobile/）、800px 切片（slices/）、`layout-audit-report.md`、`screenshot-summary.md`、`slice-index.md` |
 | **反向索引** | `output/file-index.md` | 文件→W 条目反向索引（400+ 行，45 HTML + 34 类 scripts + docs + 根目录 + Top 5 多次改动文件），与 CHANGELOG.md 双向链接 |
 | **工程化工具**（v2.2.16 新增） | `run_all.py`、`new_page.py`、`release.py`、`drl_spotcheck.py`、`data_validate.py`、`docs_index.py`、`sync_docs.py --fix` | 批量调度 34 类分析脚本 + 页面脚手架 + 版本发布体检 + DRL spot-check + JSON 结构校验（131 文件）+ 文档索引生成（321 篇·`docs/INDEX.md`）+ 6 文件文档一致性自动修复 |
+| **目录索引生成**（W779 新增） | `gen_folder_docs.py` | 为在管目录补齐 `index.md`（逐文件清单·机器可读）+ `README.md`（目录导读·人读）；幂等（已存在跳过·大小写不敏感判重防覆写 `INDEX.md`）·自动排除 gitignored 路径、治理树（10-方法论沉淀/11-方案报告/docs 01-06 顶层）与构建产物；`--dry-run`/`--force` |
 
 ## timeline/ 时间线专题
 
