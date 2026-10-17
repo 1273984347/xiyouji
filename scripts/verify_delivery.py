@@ -101,7 +101,7 @@ EXPECTED_SECTION_NAMES = [
 # 四态：full=全量（缺省·CI verify-delivery job·批收尾七步③恒为 full）；docs=文档轨子集；
 # site=页面轨+级联相关文档段；auto=按变更路径白名单分类（任何越界文件保守回退 full）。
 # 11 个内联廉价段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区）恒跑不跳；跳过只作用于
-# 37 个 subprocess 委托段（48 段 - 11 内联·W751 加第 42/43 槽后校数）：_scoped_run 统一短路，
+# 38 个 subprocess 委托段（49 段 - 11 内联·W780 加第 45 槽后校数）：_scoped_run 统一短路，
 # _GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
 # 校验（fake stdout 含段标记，wrapper 不会误判「缺汇总行」）；段自洽锁按 scope 断言子集。
 _DOC_FILES_RE = re.compile(
@@ -144,6 +144,7 @@ _GATE_SUMMARY_MARKERS = {
     "AGENTS分层": "---- 第 41 门禁 AGENTS 分层完整性：",
     "脚本覆盖": "---- 第 42 门禁 根级脚本覆盖：",
     "可视化数据": "---- 第 43 门禁 可视化数据断言：",
+    "目录文档": "---- 第 45 门禁 目录文档新鲜度：",
 }
 
 
@@ -596,6 +597,12 @@ _STRICT_GATES = [
                 fail_msg="英文站 CJK 违规（script CJK=0 / chrome 白名单）",
                 marker_msg="英文站校验输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
                 ok_msg="英文站校验通过（%s）", ok_line=-1),
+    _StrictGate(section="目录文档", script="check_folder_docs.py", args=("--gate",), timeout=240,
+                marker="---- 第 45 门禁 目录文档新鲜度：",
+                crash_msg="目录文档新鲜度门禁执行异常（第 45 槽·crash 即拦）: %s",
+                fail_msg="目录文档新鲜度违规（生成清单与磁盘漂移·重跑 python scripts/gen_folder_docs.py --refresh 刷新·人工维护件自动跳过）",
+                marker_msg="目录文档门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+                ok_msg="目录文档新鲜度通过（%s）", ok_line=-1),
 ]
 
 

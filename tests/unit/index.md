@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（19）
+## 文件（20）
 
 ### Python 脚本
 
@@ -21,6 +21,7 @@
 - `test_d3_data_processors.py`
 - `test_docs_index.py`
 - `test_embed_json.py`
+- `test_folder_docs_gate.py`
 - `test_new_page.py`
 - `test_page_router.py`
 - `test_path_guard.py`

@@ -283,3 +283,8 @@
 ```text
 2026-10-17（W773）工程基础设施薄弱点修复批（用户批准执行 T-02 计划）：WS1 ci.yml 新增 e2e-interaction job 加 test_ci_wiring 扩 W6 断言（E2E 套件零接线缺陷修复·负样本实证）；接线首跑抓 W674 遗留 K11 回归（reduce 规则误置媒体查询外·演出动画对全部用户静默失效·中英双页同修）；WS2 视觉基线十 PNG 版本化加判据升级为像素 diff（pngjs 加 pixelmatch·重灌基线二次跑十页全过）；WS3 英文站一百三十八页 chart-a11y 注入加模块 i18n 加八页 lang 修正加 validate_en 补文档 lang 检查（图表页覆盖八十三比八十三）；WS4 第十七门禁新增 docs INDEX 产物级校验（负样本删条目实证）；范围纪律等于不动 verify_delivery 加视觉套件不入 CI 加两套件按依赖排除；验证等于 pytest 五百九十九 passed 加 verify 全量四十九段零 FAIL 加 CSP 与英文站与 ruff 全绿；ST-04 推送受 github 代理阻断待网络恢复（AC-02 未闭环如实登记）
 ```
+以下为 AGENTS.md 版本脚注早期条目（W774-W774）段的原文（单行沿革链·W780 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-17（W774）CI 首跑分歧修复批（W773 收官后闭环 AC-02）：推送 dev 十提交含 W771 与 W772 积压并开 PR 四十七；首跑 e2e-interaction job 实跑 success 达 AC-02 但 verify-delivery 红（自建第十七门禁 INDEX 校验 Linux 红 Windows 绿）；根因等于 docs_index 裸 sorted Path 在 Windows 用 normcase 与 Linux 大小写敏感两平台序不同（design.md 等混排条目位移）；修复等于 scan_docs 两处排序显式小写键（INDEX 重建零 churn）加 test_docs_index 三例（合成目录不变量加真实树不变量加磁盘生成器一致·Windows 两法等价故真实执行位是 CI）；复跑全绿加 E2E 与 Delivery Gate 双绿；T-02 九项 AC 全部闭环；验证等于 pytest 六百零二 passed 加 verify 全量四十九段零 FAIL 加 PR 复跑 success；PR 待用户合并
+```

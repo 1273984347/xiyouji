@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（213）
+## 文件（209）
 
 ### Markdown 文档
 
@@ -121,11 +121,6 @@
 - `_w757_footer_bump.py`
 - `_w757_negative_check.py`
 - `_w757_rename_cascade.py`
-- `_w779_debug2.py`
-- `_w779_debug_ignore.py`
-- `_w779_patch_fn.py`
-- `_w779_patch_ignore.py`
-- `_w779_patch_ignore2.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
@@ -154,6 +149,7 @@
 - `check_dual_source_scan.py`
 - `check_dynamic_links.py`
 - `check_embedded_stale_markers.py`
+- `check_folder_docs.py`
 - `check_frontmatter.py`
 - `check_glossary.py`
 - `check_governance_docs.py`
