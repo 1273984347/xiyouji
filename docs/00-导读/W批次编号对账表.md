@@ -148,7 +148,7 @@
 | W783 | B_人物行为保持重构批（外部提案收编第二批）：character_appearance（aggregate 拆 _build_ranking/_build_matrix/_build_characters_out·first_chapter 计算提 _resolve_first_chapter 并保字面值先求值语义·W643/W678/W565 溯源保留）；character_network（共现累积拆 _accumulate_chapter·combinations 等价改写）；character_nlp 整文件重写提案（文档 1147-2332 行完整版）**本批不收**——千行级转录风险大于可读性收益且无自动对拍面，留待机械通道。验收=两脚本前后输出逐字节 diff 为空+pytest+ruff+verify 全量 | ce82c014（batch_cascade 原生级联） | W783 | **已收官**（ce82c014） | DSH 2026-10-18 | scripts/B_人物/character_appearance.py, scripts/B_人物/character_network.py, docs/00-导读/W批次编号对账表.md |
 | W784 | 分析与审计五小件行为保持重构批（外部提案收编第三批·小件档）：chapter_stats（诗词计数拆双函数+聚合提 _aggregate_totals·正则阈值逐字保留）；word_frequency（token 过滤提 _is_valid_token·_MIN_TOKEN_LENGTH 常量化·DEFAULT_STOPWORDS 保持 set 不改 frozenset）；narrative_experiment（四份 JSON 写出与汇总打印拆函数·build_summary 由两次调用改一次复用·数据块逐字保留）；hardships_81（三标签字典提模块级·交叉统计与 label 化拆函数·Counter.most_common 键序保留·W770/W760-F-2 溯源保留）；line_check（self_test 拆三查·查询分支提 _query_one·全部输出串与退出码逐字保留）。验收=五脚本前后输出 diff 为空（narrative_experiment 随机组合面按 §八抖动归一仅对账 summary 计数）+pytest+ruff+verify 全量 | e0e1e194（batch_cascade 原生级联） | W784 | **已收官**（e0e1e194） | DSH 2026-10-18 | scripts/A_文本基础/chapter_stats.py, scripts/A_文本基础/word_frequency.py, scripts/AA_叙事实验/narrative_experiment.py, scripts/C_情节/hardships_81.py, scripts/audit/line_check.py, docs/00-导读/W批次编号对账表.md |
 | W785 | api_server 行为保持重构批（外部提案收编第四批重件档其一）：CORS 白名单/MIME 映射/检索片段窗口提模块级常量（W681 回显常量语义保留）；do_GET 拆 _handle_openapi/_handle_search/_handle_graph/_handle_dataset/_serve_static 五臂并新增 _send_error_json 统一错误结构（响应体字段不变）；文档页行渲染提 _render_dataset_row；全部路由状态码 CORS 判定与 static 边界与检索窗口逐字保留（W337/W339/W681/P3-2 溯源保留）。对拍=起服务前后 11 端点工件 10 个逐字节相等·1 个为 HTTP Date 时钟字段（剥除后相同·§八抖动归一） | 2a194bcc（batch_cascade 原生级联） | W785 | **已收官**（2a194bcc） | DSH 2026-10-18 | scripts/api/api_server.py, docs/00-导读/W批次编号对账表.md |
-| W786 | graph_seed_neo4j 行为保持重构批（外部提案收编第五批）：Cypher 拼装提 _build_cypher、快照组装提 _build_snapshot、_OUTPUT 中间变量收敛路径拼接；rag 家族其余五件（build_vectors/page_router/rag_server/rag_enhance/xiyouji_rag）**不收留机械通道**——重运行时对拍面（模型加载/GPU 守护/LLM 端点路径）+ 累计约 2100 行转录风险，与 character_nlp 同款原则。验收=两产物（rag_graph.json/neo4j_seed.cypher）前后逐字节相等 | 本次提交 | W786 | 进行中 | DSH 2026-10-18 | scripts/rag/graph_seed_neo4j.py, docs/00-导读/W批次编号对账表.md |
+| W786 | graph_seed_neo4j 行为保持重构批（外部提案收编第五批）：Cypher 拼装提 _build_cypher、快照组装提 _build_snapshot、_OUTPUT 中间变量收敛路径拼接；rag 家族其余五件（build_vectors/page_router/rag_server/rag_enhance/xiyouji_rag）**不收留机械通道**——重运行时对拍面（模型加载/GPU 守护/LLM 端点路径）+ 累计约 2100 行转录风险，与 character_nlp 同款原则。验收=两产物（rag_graph.json/neo4j_seed.cypher）前后逐字节相等 | de965962（batch_cascade 原生级联） | W786 | **已收官**（de965962） | DSH 2026-10-18 | scripts/rag/graph_seed_neo4j.py, docs/00-导读/W批次编号对账表.md |
 
 ## 递延批豁免登记（D2 裁决：对账表登记即可过 doc-sync 提交-版段对账）
 
@@ -222,6 +222,7 @@
 - **W784**：现势下一自由号（ce82c014 W783 收官级联后 checklist 例行·2026-10-18）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W785**：现势下一自由号（e0e1e194 W784 收官级联后 checklist 例行·2026-10-18）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W786**：现势下一自由号（2a194bcc W785 收官级联后 checklist 例行·2026-10-18）——**预留登记豁免**，动工时按取号规则正式认领。
+- **W787**：现势下一自由号（de965962 W786 收官级联后 checklist 例行·2026-10-18）——**预留登记豁免**，动工时按取号规则正式认领。
 
 ## 登记 ASCII 纪律
 
