@@ -16,7 +16,6 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 LINE_LIMIT = 60
-MAX_LINES_MSG = "行数超限"
 
 
 def section_exists(text, topnum):

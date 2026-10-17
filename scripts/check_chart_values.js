@@ -6,59 +6,40 @@
  *
  * 站点有 87 个 D3/Three 可视化页（site/data/*.html，不含模板壳 _shell.html），但 W753 前
  * **数据正确性零自动化断言**：
- *   - scripts/check_chart_data.py（第 24 门禁）只做静态文本自洽（sankey 引用 / 饼图措辞×实现错配 / R3）；
- *   - tests/unit/test_d3_data_processors.py 是「用 Python 重写 D3 逻辑」的模拟测试，跑的是
- *     Python 侧的复算，**并不验证页面真实渲染结果**；
- *   - 截图审查（check_screenshot_gates.js / batch_screenshots.js）只看布局与可见性。
- * 后果：数据装载族缺陷（EMBEDDED 与渲染脱节、图元数量与数据量级不符、KPI 与数据算不平）
- * 只能靠人工大审查发现——W676 批次正是被人发现后才修的，当时没有机器防线。
+ *   - scripts/check_chart_data.py（第 24 门禁）只做静态文本自洽；
+ *   - tests/unit/test_d3_data_processors.py 是「用 Python 重写 D3 逻辑」的模拟测试，
+ *     **并不验证页面真实渲染结果**；
+ *   - 截图审查只看布局与可见性。
+ * 后果：数据装载族缺陷只能靠人工大审查发现——W676 批次正是被人发现后才修的。
  *
- * 本门禁建立「**页面真实渲染结果 ↔ 页面数据源**」的一致性断言：用 Playwright 以 file:// 直开
+ * 本门禁建立「页面真实渲染结果 ↔ 页面数据源」的一致性断言：用 Playwright 以 file:// 直开
  * 每页（站点设计口径，禁起 http 服务），真实渲染后取回「渲染层可数元素 + 页面数据源形态 +
  * KPI 文本」，逐页跑 V1–V5 判据，并把存量缺口冻结成基线，只拦新增/恶化。
  *
  * ## 判据（每条：为什么是数据正确性而非布局）
  *
- * - **V1 无 pageerror**：未捕获异常 = 数据装载/解析失败的第一信号（数据坏了才抛，纯布局问题
- *   不会抛异常；W551 截图门禁 G1 同源口径）。
- * - **V2 图表容器非空**：图表容器（≥160×120 的 svg/canvas）内图元数 > 0（或 2D canvas 有
- *   实际绘制像素 / Three 场景有子对象）。防「数据没装上但页面不报错」的空图——布局完整但
- *   零图元，唯一解释是绑定到数据的那段渲染没执行。
- * - **V3 数据量级自洽**：数据源里某个数组长度 L 与渲染图元数 S（或 path 数据点数）之比
- *   S/L ≥ 阈值。数值关系直接来自「数据 → 图元」的映射契约（柱子/点/节点/格子数），
- *   与布局无关：布局改样式不改图元数，而数据丢失必然让比例塌到 0。
- * - **V4 KPI 可复算**：页面上 [data-value]/.kpi-value 类数字必须能由页面数据源复算得到
- *   （数组长度 / 数值字段 sum·max·mean / 字符串字段去重计数）。KPI 是数据的聚合投影，
- *   算不平就是展示值 ≠ 数据值——纯布局问题不会改变 KPI 数值。
- * - **V5 数据源四要素在位**：复用第 28 门禁（check_citability.py）C1-C4 口径（数据路径 /
- *   生成脚本 / 引用格式 / 下载入口）。缺失只计**覆盖缺口**（不 FAIL·口径同第 28 门禁 D4
- *   裁决），但必须显式出现在报告里，禁静默跳过。
+ * - V1 无 pageerror：未捕获异常 = 数据装载/解析失败的第一信号。
+ * - V2 图表容器非空：图表容器内图元数 > 0（或 2D canvas 有绘制像素 / Three 场景有子对象）。
+ * - V3 数据量级自洽：数据源数组长度 L 与渲染图元数 S 之比 S/L ≥ 阈值。
+ * - V4 KPI 可复算：页面 [data-value]/.kpi-value 数字必须能由页面数据源复算得到。
+ * - V5 数据源四要素在位：复用第 28 门禁 C1-C4 口径，缺失只计覆盖缺口（不 FAIL）。
  *
  * ## fail-closed（W631 / W650 教训）
  *
- * 任何页面探针异常 / 超时 / 未产出结果 → 该页 `probe_error`，PROBE 与 V1–V5 全部记 FAIL，
- * 计入汇总行与报告（禁静默跳过）。汇总行恒为 `---- 第 43 门禁 可视化数据断言：N FAIL ----`
- * 形态且为最后一行输出（挂门禁靠这行；缺行 = 未真正扫描 = 未通过）。
+ * 任何页面探针异常 / 超时 / 未产出结果 → 该页 probe_error，PROBE 与 V1–V5 全部记 FAIL。
+ * 汇总行恒为 `---- 第 43 门禁 可视化数据断言：N FAIL ----` 形态且为最后一行输出。
  *
  * ## 用法
  *
- *   node scripts/check_chart_values.js --self-test          # 注入式自检（无浏览器·断言判据纯函数）
- *   node scripts/check_chart_values.js --survey --limit 8   # 小样普查（打印逐页族签名与实测值）
- *   node scripts/check_chart_values.js --report             # 全量 + 写 chart-values-report.json + 分布
- *   node scripts/check_chart_values.js --generate-baseline  # 冻结存量缺口（禁手写）
- *   node scripts/check_chart_values.js --gate               # 门禁：基线外违规 = FAIL(exit 1)
- *   node scripts/check_chart_values.js                      # 同 --gate（缺省 fail-closed·供 verify_delivery 直调）
+ *   node scripts/check_chart_values.js --self-test          # 注入式自检（无浏览器）
+ *   node scripts/check_chart_values.js --survey --limit 8   # 小样普查
+ *   node scripts/check_chart_values.js --report             # 全量 + 写报告 + 分布
+ *   node scripts/check_chart_values.js --generate-baseline  # 冻结存量缺口
+ *   node scripts/check_chart_values.js --gate               # 门禁：基线外违规 = FAIL
+ *   node scripts/check_chart_values.js                      # 同 --gate（缺省 fail-closed）
  *   node scripts/check_chart_values.js --pages bar-chart.html,tag-cloud.html
- *   node scripts/check_chart_values.js --judge payload.json # 纯判据入口（pytest 注入用·无需浏览器）
- *
- * 常用开关：--workers N（默认 5）· --limit N · --no-citability · --json <path> · --baseline <path>
- *
- * ## 阈值口径（calibrate 于 W753 全站普查·见基线注释头与 chart-values-report.json）
- *
- *   阈值不是拍脑袋的万能值：先对 8 页六族代表做形态普查，再全量 87 页实测，取「干净页
- *   实测比例分布」的下沿作 V3 下限（详见 report.calibration.ratio_percentiles）。
+ *   node scripts/check_chart_values.js --judge payload.json # 纯判据入口（pytest 注入用）
  */
-
 'use strict';
 
 const fs = require('fs');
@@ -66,13 +47,29 @@ const os = require('os');
 const path = require('path');
 const { execFileSync } = require('child_process');
 
-const ROOT = path.resolve(__dirname, '..');
+const {
+  PROJECT_ROOT,
+  relativeToRoot,
+  listHtmlFilesFlat,
+  stripScriptComments,
+  gateSummaryLine,
+  runWorkerPool,
+} = require('./lib/gate_common');
+const {
+  launchHeadlessBrowser,
+  createOfflinePage,
+  gotoFileUrl,
+} = require('./lib/playwright_gate_utils');
+
+const ROOT = PROJECT_ROOT;
 const SITE_DATA = path.join(ROOT, 'site', 'data');
 const BASELINE = path.join(ROOT, 'scripts', 'output', 'chart-values-baseline.txt');
 const DEFAULT_REPORT = path.join(ROOT, 'scripts', 'output', 'chart-values-report.json');
 const SKIP_STEMS = new Set(['_shell', '_template']);
 const ITEMS = ['V1', 'V2', 'V3', 'V4', 'V5', 'PROBE'];
 const CRITERIA = ['V1', 'V2', 'V3', 'V4', 'V5'];
+const GATE_NAME = '第 43 门禁 可视化数据断言';
+
 // 视图载体意图（静态签名·用于把「本来就没有图表的结构页」判 na 而非假红）
 const VIEW_INTENT_CHART =
   /d3\.(select|json|scale|arc|pie|line|area|treemap|sankey|force)|createElementNS\(\s*['"]http:\/\/www\.w3\.org\/2000\/svg|append\(\s*['"](svg|canvas|rect|circle|path|g)['"]|getContext\(\s*['"]|new\s+THREE\.|scaleLinear|scaleBand/;
@@ -81,57 +78,45 @@ const VIEW_INTENT_INPUT = /<input[^>]+type=["'](?:search|text)["']|contenteditab
 
 // ---------------- 阈值（口径集中在此·报告里随实测分布一起打印） ----------------
 const TH = {
-  chartMinW: 160, // 图表容器最小宽（px）：小于此值多半是图标/图例而非图表
-  chartMinH: 120, // 图表容器最小高（px）
-  v2MinShapes: 1, // V2：图表容器内图元数下限（0 = 空图）
-  v2MinDomItems: 4, // V2：DOM 数据项（D3 data join 产 div/span 的族）重复兄弟下限
-  v3MinDataN: 4, // V3：数据数组长度门槛（低于此值比例是噪声 → n/a:small-data；普查实测 N<12 页最小比例 2.71 ≫ 0.5）
-  v3Ratio: 0.5, // V3：S/L 下限（best-fit 数组）
-  v4NearMissPct: 0.02, // V4：与可复算计数型标量差在此比例内但不相等 = 算不平（近似错误值）
-  v3WorsenFactor: 0.5, // 冻结缺口恶化判定：图元数跌破基线 50% 且基线 ≥ 4
-  v4NearMissPct: 0.02, // V4：与可复算计数型标量差在此比例内但不相等 = 算不平（近似错误值）
-  stableStepMs: 200, // DOM 稳定采样间隔
-  stableRounds: 3, // 连续相同采样次数
-  maxStableMs: 3000, // 稳定等待上限
-  pageTimeoutMs: 25000, // 单页探针总超时
-  navTimeoutMs: 20000, // page.goto 超时
-  selectorTimeoutMs: 6000, // 等 svg/canvas 出现
+  chartMinW: 160,
+  chartMinH: 120,
+  v2MinShapes: 1,
+  v2MinDomItems: 4,
+  v3MinDataN: 4,
+  v3Ratio: 0.5,
+  v4NearMissPct: 0.02,
+  v3WorsenFactor: 0.5,
+  stableStepMs: 200,
+  stableRounds: 3,
+  maxStableMs: 3000,
+  pageTimeoutMs: 25000,
+  navTimeoutMs: 20000,
+  selectorTimeoutMs: 6000,
 };
 
-// ---------------- 小工具 ----------------
-const now = () => Date.now();
-const rel = (p) => p.replace(/\\/g, '/');
-
-function readText(p) {
-  return fs.readFileSync(p, 'utf8');
-}
+const nowMs = () => Date.now();
+const readText = (p) => fs.readFileSync(p, 'utf8');
 
 function listPages() {
-  return fs
-    .readdirSync(SITE_DATA)
-    .filter((f) => f.endsWith('.html'))
+  return listHtmlFilesFlat(SITE_DATA)
     .filter((f) => !SKIP_STEMS.has(path.basename(f, '.html')))
-    .sort()
     .map((f) => 'site/data/' + f);
 }
 
-function stripJsComments(html) {
-  return html
-    .replace(/<script[\s\S]*?<\/script[^>]*>/gi, (m) => m.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/\/\/.*$/gm, ' '))
-    .replace(/<!--[\s\S]*?-->/g, ' ');
-}
-
-/** 族签名（运行时候选优先·静态签名兜底；仅用于报告分组与 V3 适用性判定）。
- *  运行时候选优先的原因：标签云页的 EMBEDDED_DATA 里含全站页名（heatmap/network 等词），
- *  纯文本词命中会把族判错（W753 普查实测）。 */
+/**
+ * 族签名（运行时候选优先·静态签名兜底；仅用于报告分组与 V3 适用性判定）。
+ * 运行时候选优先的原因：标签云页的 EMBEDDED_DATA 里含全站页名（heatmap/network 等词），
+ * 纯文本词命中会把族判错（W753 普查实测）。
+ */
 function classifyFamily(html, probe) {
-  const js = stripJsComments(html);
+  const js = stripScriptComments(html);
   const chart = (probe && probe.chart) || {};
   const shapes = chart.shapes || 0;
   const rectRatio = chart.rectRatio || 0;
   const painted = chart.canvasPainted || 0;
   const domItems = chart.domItems || 0;
   const name = String((probe && probe.page) || '').toLowerCase();
+
   if (/THREE\./.test(html)) return '3d';
   if (/forceSimulation|d3\.force|linkCanvas|nodePos/.test(js)) return 'network';
   if (/d3\.sankey|sankey/i.test(js)) return 'sankey';
@@ -153,204 +138,209 @@ function classifyFamily(html, probe) {
 }
 
 // ---------------- 浏览器侧探针（自包含·禁引用外部变量） ----------------
+/**
+ * 页面内探针。必须完全自包含：Playwright 会将本函数 toString() 后注入页面执行，
+ * 因此所有辅助函数必须在本函数体内定义，不得引用 Node 侧变量。
+ */
 function probeInPage(cfg) {
-  const out = {};
+  const PRIMITIVES = ['rect', 'circle', 'path', 'line', 'polygon', 'polyline', 'ellipse'];
 
-  // ---- 图表容器与图元计数 ----
-  const PRIMS = ['rect', 'circle', 'path', 'line', 'polygon', 'polyline', 'ellipse'];
-  function pathPointCount(d) {
+  function countPathPoints(d) {
     if (!d || typeof d !== 'string') return 0;
     const nums = d.match(/-?\d*\.?\d+(?:e[-+]?\d+)?/gi) || [];
     return Math.floor(nums.length / 2);
   }
-  const containers = [];
-  let shapes = 0;
-  let pathPoints = 0;
-  let pathPointsTotal = 0;
-  let canvasPainted = 0;
-  const mix = {};
-  for (const t of PRIMS) mix[t] = 0;
-  let maxPathPoints = 0;
 
-  const allEls = [...document.querySelectorAll('svg,canvas')];
-  const all = [];
-  for (const el of allEls) {
-    let r;
-    try {
-      r = el.getBoundingClientRect();
-    } catch (e) {
-      r = { width: 0, height: 0 };
-    }
-    const w = Math.round(r.width);
-    const h = Math.round(r.height);
-    const rec = { tag: el.tagName.toLowerCase(), w, h, shapes: 0, painted: null, kind: '' };
-    if (el.tagName.toLowerCase() === 'svg') {
-      for (const p of PRIMS) {
-        const n = el.querySelectorAll(p).length;
-        rec.shapes += n;
-        mix[p] += n;
-        if (p === 'path') {
-          for (const pe of el.querySelectorAll('path')) {
-            const pts = pathPointCount(pe.getAttribute('d'));
-            pathPointsTotal += pts;
-            if (pts > maxPathPoints) maxPathPoints = pts;
+  /** 遍历 svg/canvas，统计图元、path 点数、canvas 实际绘制像素。 */
+  function analyzeChartContainers() {
+    const allEls = [...document.querySelectorAll('svg,canvas')];
+    const mix = Object.fromEntries(PRIMITIVES.map((p) => [p, 0]));
+    let totalShapes = 0;
+    let maxPathPoints = 0;
+    let pathPointsTotal = 0;
+    const kept = [];
+
+    for (const el of allEls) {
+      let rect;
+      try { rect = el.getBoundingClientRect(); } catch { rect = { width: 0, height: 0 }; }
+      const w = Math.round(rect.width);
+      const h = Math.round(rect.height);
+      const tag = el.tagName.toLowerCase();
+      const rec = { tag, w, h, shapes: 0, painted: null, kind: '' };
+
+      if (tag === 'svg') {
+        for (const p of PRIMITIVES) {
+          const n = el.querySelectorAll(p).length;
+          rec.shapes += n;
+          mix[p] += n;
+        }
+        for (const pathEl of el.querySelectorAll('path')) {
+          const pts = countPathPoints(pathEl.getAttribute('d'));
+          pathPointsTotal += pts;
+          if (pts > maxPathPoints) maxPathPoints = pts;
+        }
+        totalShapes += rec.shapes;
+      } else {
+        try {
+          rec.kind = 'canvas';
+          const ctx = el.getContext && el.getContext('2d');
+          if (ctx && el.width > 0 && el.height > 0) {
+            rec.kind = '2d';
+            const data = ctx.getImageData(0, 0, el.width, el.height).data;
+            let painted = 0;
+            for (let i = 3; i < data.length; i += 16) if (data[i] > 0) painted++;
+            rec.painted = painted;
+          } else if (el.width > 0 && el.height > 0) {
+            rec.kind = 'webgl-or-blank';
           }
+        } catch {
+          rec.kind = 'canvas-error';
         }
       }
-      rec.painted = null;
-      shapes += rec.shapes;
-    } else {
-      // canvas：2D 采样实际绘制像素；WebGL 读不到 2D 上下文（返回 null）
-      try {
-        rec.kind = 'canvas';
-        const ctx = el.getContext && el.getContext('2d');
-        if (ctx && el.width > 0 && el.height > 0) {
-          rec.kind = '2d';
-          const d = ctx.getImageData(0, 0, el.width, el.height).data;
-          let painted = 0;
-          for (let i = 3; i < d.length; i += 16) if (d[i] > 0) painted++;
-          rec.painted = painted;
-        } else if (el.width > 0 && el.height > 0) {
-          rec.kind = 'webgl-or-blank';
-        }
-      } catch (e) {
-        rec.kind = 'canvas-error';
+
+      if (rec.shapes > 0 || rec.painted > 0 || (w >= cfg.chartMinW && h >= cfg.chartMinH)) {
+        kept.push(rec);
       }
     }
-    if (rec.shapes > 0 || rec.painted > 0 || (w >= cfg.chartMinW && h >= cfg.chartMinH)) {
-      all.push(rec);
-    }
+
+    const chartContainers = kept.filter((c) => c.w >= cfg.chartMinW && c.h >= cfg.chartMinH);
+    return {
+      svg: allEls.filter((e) => e.tagName.toLowerCase() === 'svg').length,
+      canvas: allEls.filter((e) => e.tagName.toLowerCase() === 'canvas').length,
+      containers: chartContainers.length,
+      allContainers: kept.length,
+      shapes: chartContainers.reduce((a, c) => a + c.shapes, 0),
+      shapesAll: totalShapes,
+      pathPoints: maxPathPoints,
+      pathPointsTotal,
+      canvasPainted: chartContainers.reduce((a, c) => a + (c.painted || 0), 0),
+      webglCanvases: chartContainers.filter((c) => c.kind === 'webgl-or-blank').length,
+      rectRatio: totalShapes ? mix.rect / totalShapes : 0,
+      rect: mix.rect,
+      circle: mix.circle,
+      path: mix.path,
+      line: mix.line,
+      detail: chartContainers.slice(0, 12),
+      skipped: kept.filter((c) => c.w < cfg.chartMinW || c.h < cfg.chartMinH).slice(0, 8),
+    };
   }
-  const chartContainers = all.filter((c) => c.w >= cfg.chartMinW && c.h >= cfg.chartMinH);
-  const chartShapes = chartContainers.reduce((a, c) => a + c.shapes, 0);
-  const chartPainted = chartContainers.reduce((a, c) => a + (c.painted || 0), 0);
-  const webglCanvases = chartContainers.filter((c) => c.kind === 'webgl-or-blank').length;
 
-  // 表格族（数据集浏览页在 file:// 下渲染表格而非图元）：行数即「数据装上没有」的信号
-  let tableRows = 0;
-  let tables = 0;
-  try {
-    for (const t of document.querySelectorAll('table')) {
-      if (t.closest('.vt-table, .chart-tooltip')) continue;
-      const rows = t.querySelectorAll('tbody tr').length || t.querySelectorAll('tr').length - 1;
-      if (rows > 0) {
-        tables++;
-        tableRows += rows;
+  /** 表格族行数（数据集浏览页在 file:// 下渲染表格而非图元）。 */
+  function countTableRows() {
+    let tables = 0;
+    let tableRows = 0;
+    try {
+      for (const t of document.querySelectorAll('table')) {
+        if (t.closest('.vt-table, .chart-tooltip')) continue;
+        const rows = t.querySelectorAll('tbody tr').length || t.querySelectorAll('tr').length - 1;
+        if (rows > 0) { tables++; tableRows += rows; }
       }
-    }
-  } catch (e) {}
+    } catch {}
+    return { tables, tableRows };
+  }
 
-  // DOM 元素族（D3 data join 产出 div/span 而非 svg 的页面·如标签云 .tag-item）
-  // 口径：父子分组中「同 tag+class 的重复兄弟」最大组（≥4 才计），排除导航/页脚/选择器
-  let domItems = 0;
-  let domItemsWhere = '';
-  const domTop = [];
-  try {
-    const groups = new Map();
-    for (const el of document.querySelectorAll('body *')) {
-      if (el.closest('nav,header,footer,select,script,style,.site-footer,.topnav,.chart-tooltip')) continue;
-      const parent = el.parentElement;
-      if (!parent) continue;
-      const key = parent.tagName + '>' + el.tagName + '.' + String(el.className || '').trim().split(/\s+/).slice(0, 2).join('.');
-      groups.set(key, (groups.get(key) || 0) + 1);
-    }
-    for (const [k, n] of groups) {
-      if (n > domItems) {
-        domItems = n;
-        domItemsWhere = k;
+  /** DOM 数据项族（D3 data join 产出 div/span 而非 svg 的页面·如标签云 .tag-item）。 */
+  function countRepeatedDomItems() {
+    let domItems = 0;
+    let domItemsWhere = '';
+    const domTop = [];
+    try {
+      const groups = new Map();
+      for (const el of document.querySelectorAll('body *')) {
+        if (el.closest('nav,header,footer,select,script,style,.site-footer,.topnav,.chart-tooltip')) continue;
+        const parent = el.parentElement;
+        if (!parent) continue;
+        const key = parent.tagName + '>' + el.tagName + '.' + String(el.className || '').trim().split(/\s+/).slice(0, 2).join('.');
+        groups.set(key, (groups.get(key) || 0) + 1);
       }
-      if (n >= 4) domTop.push(k + '×' + n);
-    }
-  } catch (e) {}
+      for (const [key, n] of groups) {
+        if (n > domItems) { domItems = n; domItemsWhere = key; }
+        if (n >= 4) domTop.push(key + '×' + n);
+      }
+    } catch {}
+    return { domItems, domItemsWhere, domTop: domTop.slice(0, 10) };
+  }
 
-  out.chart = {
-    svg: allEls.filter((e) => e.tagName.toLowerCase() === 'svg').length,
-    canvas: allEls.filter((e) => e.tagName.toLowerCase() === 'canvas').length,
-    containers: chartContainers.length,
-    allContainers: all.length,
-    shapes: chartShapes,
-    shapesAll: shapes,
-    pathPoints: maxPathPoints,
-    pathPointsTotal,
-    canvasPainted: chartPainted,
-    webglCanvases,
-    rectRatio: shapes ? mix.rect / shapes : 0,
-    rect: mix.rect,
-    circle: mix.circle,
-    path: mix.path,
-    line: mix.line,
-    tables,
-    tableRows,
-    domItems,
-    domItemsWhere,
-    domTop: domTop.slice(0, 10),
-    detail: chartContainers.slice(0, 12),
-    skipped: all.filter((c) => c.w < cfg.chartMinW || c.h < cfg.chartMinH).slice(0, 8),
-  };
-
-  // ---- Three.js 场景（WebGL 页的可数代理·取不到则 null）----
-  out.three = null;
-  try {
-    if (typeof THREE !== 'undefined') {
+  /** Three.js 场景（WebGL 页的可数代理·取不到则 null）。 */
+  function readThreeScene() {
+    try {
+      if (typeof THREE === 'undefined') return null;
       const t = {};
-      try {
-        if (typeof scene !== 'undefined' && scene && scene.children) t.sceneChildren = scene.children.length;
-      } catch (e) {}
-      try {
-        if (typeof renderer !== 'undefined' && renderer && renderer.info) t.triangles = renderer.info.render.triangles;
-      } catch (e) {}
-      try {
-        if (typeof nodes !== 'undefined' && nodes && nodes.length) t.nodes = nodes.length;
-      } catch (e) {}
-      out.three = t;
+      try { if (typeof scene !== 'undefined' && scene && scene.children) t.sceneChildren = scene.children.length; } catch {}
+      try { if (typeof renderer !== 'undefined' && renderer && renderer.info) t.triangles = renderer.info.render.triangles; } catch {}
+      try { if (typeof nodes !== 'undefined' && nodes && nodes.length) t.nodes = nodes.length; } catch {}
+      return t;
+    } catch {
+      return null;
     }
-  } catch (e) {
-    out.three = null;
   }
 
-  // ---- KPI / 计数型文本 ----
-  const KPI_SEL =
-    '[data-value],.kpi-value,.kpi-card .value,.kpi .value,.kpi-card .kpi-value,.kpi-card .num,.kpi .num,.kpi-row .num,.metric-value,.stat-value,.count-up,[data-counter],[id^="total"],[id*="-total"],[id*="Total"],[id*="kpiTotal"]';
-  const parseNums = (s) => (s.match(/-?\d[\d,]*(?:\.\d+)?/g) || []).filter((x) => x.replace(/[^\d]/g, '').length);
-  const kpi = [];
-  try {
-    for (const el of document.querySelectorAll(KPI_SEL)) {
-      if (el.closest('script,style')) continue;
-      const raw = (el.getAttribute('data-value') || el.textContent || '').trim();
-      if (!raw) continue;
-      for (const m of parseNums(raw)) {
-        kpi.push({ text: m, raw: raw.slice(0, 40), src: el.className || el.id || el.tagName.toLowerCase(), num: Number(m.replace(/,/g, '')) });
+  /** KPI / 计数型文本数字。 */
+  function readKpiNumbers() {
+    const KPI_SELECTOR =
+      '[data-value],.kpi-value,.kpi-card .value,.kpi .value,.kpi-card .kpi-value,.kpi-card .num,.kpi .num,.kpi-row .num,.metric-value,.stat-value,.count-up,[data-counter],[id^="total"],[id*="-total"],[id*="Total"],[id*="kpiTotal"]';
+    const parseNums = (s) => (s.match(/-?\d[\d,]*(?:\.\d+)?/g) || []).filter((x) => x.replace(/[^\d]/g, '').length);
+    const kpi = [];
+    try {
+      for (const el of document.querySelectorAll(KPI_SELECTOR)) {
+        if (el.closest('script,style')) continue;
+        const raw = (el.getAttribute('data-value') || el.textContent || '').trim();
+        if (!raw) continue;
+        for (const m of parseNums(raw)) {
+          kpi.push({
+            text: m,
+            raw: raw.slice(0, 40),
+            src: el.className || el.id || el.tagName.toLowerCase(),
+            num: Number(m.replace(/,/g, '')),
+          });
+        }
+        if (kpi.length > 300) break;
       }
-      if (kpi.length > 300) break;
+    } catch {}
+    return kpi;
+  }
+
+  /** 全文数字（报告用·不参与判据）。 */
+  function countTextNumbers() {
+    try {
+      const body = document.body ? document.body.innerText || '' : '';
+      return (body.match(/-?\d[\d,]*(?:\.\d+)?/g) || []).length;
+    } catch {
+      return 0;
     }
-  } catch (e) {}
+  }
 
-  // ---- 全文数字（报告用·不参与判据）----
-  let textNumCount = 0;
-  try {
-    const body = document.body ? document.body.innerText || '' : '';
-    textNumCount = (body.match(/-?\d[\d,]*(?:\.\d+)?/g) || []).length;
-  } catch (e) {}
+  const chart = analyzeChartContainers();
+  const table = countTableRows();
+  const dom = countRepeatedDomItems();
+  const three = readThreeScene();
+  const kpi = readKpiNumbers();
+  const textNumCount = countTextNumbers();
 
-  out.kpi = kpi;
-  out.textNumCount = textNumCount;
-  // ---- 页面数据源（内嵌变量名由 Node 侧发现后以字符串表达式求摘要·见 discoverDataNames）----
-  out.dataSource = { kind: 'none', name: '', maxArrayLen: 0, arrays: [], scalars: [] };
-  out.hasDataSourceAnchor = !!document.querySelector('#dataSource');
-  out.readyState = document.readyState;
-  return out;
+  return {
+    chart: { ...chart, ...table, ...dom },
+    three,
+    kpi,
+    textNumCount,
+    // 数据源摘要由 Node 侧 collectEmbeddedData 填充
+    dataSource: { kind: 'none', name: '', maxArrayLen: 0, arrays: [], scalars: [] },
+    hasDataSourceAnchor: !!document.querySelector('#dataSource'),
+    readyState: document.readyState,
+  };
 }
 
-// ---------------- 浏览器侧：单页探针 ----------------
-/** DOM 稳定判定：图元数 + KPI 文本一起做签名。
- *  W753 教训：只数元素会漏掉 count-up 数字动画（元素数不变而文本在变）——V4 会采到中途值
- *  （实测 chapter-stats 采到 96/100），故签名必须含 KPI 文本。 */
+// ---------------- 浏览器侧：DOM 稳定等待 ----------------
+/**
+ * DOM 稳定判定：图元数 + KPI 文本一起做签名。
+ * W753 教训：只数元素会漏掉 count-up 数字动画（元素数不变而文本在变）——V4 会采到中途值
+ * （实测 chapter-stats 采到 96/100），故签名必须含 KPI 文本。
+ */
 async function waitStable(page) {
-  const t0 = now();
+  const t0 = nowMs();
   let prev = null;
   let same = 0;
   let samples = 0;
-  while (now() - t0 < TH.maxStableMs) {
+  while (nowMs() - t0 < TH.maxStableMs) {
     let sig = null;
     let elements = -1;
     try {
@@ -363,22 +353,23 @@ async function waitStable(page) {
       });
       sig = r.sig;
       elements = r.n;
-    } catch (e) {
+    } catch {
       sig = null;
     }
     samples++;
     if (sig !== null && sig === prev) {
       same++;
-      if (same >= TH.stableRounds - 1) return { stable: true, samples, ms: now() - t0, elements };
+      if (same >= TH.stableRounds - 1) return { stable: true, samples, ms: nowMs() - t0, elements };
     } else {
       same = 0;
     }
     prev = sig;
     await page.waitForTimeout(TH.stableStepMs);
   }
-  return { stable: false, samples, ms: now() - t0, elements: -1 };
+  return { stable: false, samples, ms: nowMs() - t0, elements: -1 };
 }
 
+// ---------------- 静态 JSON 目标发现 ----------------
 function staticJsonTargets(relPath) {
   const abs = path.join(ROOT, relPath);
   const html = readText(abs);
@@ -388,10 +379,15 @@ function staticJsonTargets(relPath) {
   while ((m = re.exec(html))) {
     const raw = m[1];
     const base = path.dirname(abs);
-    const cands = [path.join(base, raw), path.join(ROOT, 'site', raw.replace(/^\/?site\//, '')), path.join(SITE_DATA, raw), path.join(SITE_DATA, 'json', path.basename(raw))];
+    const cands = [
+      path.join(base, raw),
+      path.join(ROOT, 'site', raw.replace(/^\/?site\//, '')),
+      path.join(SITE_DATA, raw),
+      path.join(SITE_DATA, 'json', path.basename(raw)),
+    ];
     for (const c of cands) {
       if (fs.existsSync(c) && fs.statSync(c).isFile()) {
-        out.push(rel(c));
+        out.push(relativeToRoot(c));
         break;
       }
     }
@@ -399,42 +395,38 @@ function staticJsonTargets(relPath) {
   return [...new Set(out)];
 }
 
+// ---------------- 单页探针 ----------------
 async function probePage(browser, relPath, cfg) {
   const abs = path.join(ROOT, relPath);
-  const timing = { start: now() };
+  const timing = { start: nowMs() };
   const html = readText(abs);
-  const pageErrors = [];
   const consoleErrors = [];
-  const context = await browser.newContext({ viewport: { width: 1280, height: 800 }, deviceScaleFactor: 1 });
-  const page = await context.newPage();
-  page.on('pageerror', (e) => pageErrors.push(String((e && e.message) || e).slice(0, 300)));
+  const { context, page, pageErrors } = await createOfflinePage(browser);
   page.on('console', (m) => {
     if (m.type() === 'error') consoleErrors.push(m.text().slice(0, 300));
   });
-  // 站点设计口径：file:// 直开，禁本地 http 服务；外域请求一律拒绝（离线自包含契约）
-  await page.route((u) => u.protocol === 'http:' || u.protocol === 'https:', (r) => r.abort());
+
   let payload = null;
   let probeError = null;
   let readiness = 'none';
   let stability = null;
   try {
     const work = (async () => {
-      await page.goto('file:///' + rel(abs), { waitUntil: 'load', timeout: TH.navTimeoutMs });
+      await gotoFileUrl(page, abs, 'load', TH.navTimeoutMs);
       try {
         await page.waitForSelector('svg,canvas', { timeout: TH.selectorTimeoutMs, state: 'attached' });
         readiness = 'chart-node';
-      } catch (e) {
+      } catch {
         readiness = 'no-chart-node';
       }
       if (readiness === 'no-chart-node') {
         try {
           await page.waitForSelector('#dataSource', { timeout: 2000, state: 'attached' });
           readiness = 'dataSource-only';
-        } catch (e) {}
+        } catch {}
       }
       stability = await waitStable(page);
       payload = await page.evaluate(probeInPage, { chartMinW: TH.chartMinW, chartMinH: TH.chartMinH });
-      // 内嵌数据：逐个候选变量名求摘要（须在 context 关闭前·合并多源如 SCENARIOS+SUMMARY）
       payload.dataSource = await collectEmbeddedData(page, html);
     })();
     let timer;
@@ -449,34 +441,33 @@ async function probePage(browser, relPath, cfg) {
   } catch (e) {
     probeError = String((e && e.message) || e).slice(0, 200);
   }
-  try {
-    await context.close();
-  } catch (e) {}
-  timing.ms = now() - timing.start;
+  try { await context.close(); } catch {}
+  timing.ms = nowMs() - timing.start;
 
-  const probe = Object.assign(
-    {
-      page: relPath,
-      family: classifyFamily(html, payload),
-      dataSource: (payload && payload.dataSource) || { kind: 'none', maxArrayLen: 0, arrays: [], scalars: [] },
-      chart: (payload && payload.chart) || {},
-      three: payload ? payload.three : null,
-      kpi: (payload && payload.kpi) || [],
-      textNumCount: (payload && payload.textNumCount) || 0,
-      hasDataSourceAnchor: !!(payload && payload.hasDataSourceAnchor),
-      stability,
-      readiness,
-      viewIntent: { chart: VIEW_INTENT_CHART.test(html), table: VIEW_INTENT_TABLE.test(html), interactive: VIEW_INTENT_INPUT.test(html) },
-      pageErrors,
-      consoleErrors,
-      jsonTargets: staticJsonTargets(relPath),
-      probeError,
-      timing,
+  const probe = {
+    page: relPath,
+    family: 'unknown',
+    dataSource: (payload && payload.dataSource) || { kind: 'none', maxArrayLen: 0, arrays: [], scalars: [] },
+    chart: (payload && payload.chart) || {},
+    three: payload ? payload.three : null,
+    kpi: (payload && payload.kpi) || [],
+    textNumCount: (payload && payload.textNumCount) || 0,
+    hasDataSourceAnchor: !!(payload && payload.hasDataSourceAnchor),
+    stability,
+    readiness,
+    viewIntent: {
+      chart: VIEW_INTENT_CHART.test(html),
+      table: VIEW_INTENT_TABLE.test(html),
+      interactive: VIEW_INTENT_INPUT.test(html),
     },
-    {}
-  );
+    pageErrors,
+    consoleErrors,
+    jsonTargets: staticJsonTargets(relPath),
+    probeError,
+    timing,
+  };
   probe.family = classifyFamily(html, probe);
-  probe.viewIntent = { chart: VIEW_INTENT_CHART.test(html), table: VIEW_INTENT_TABLE.test(html), interactive: VIEW_INTENT_INPUT.test(html) };
+
   // 回退：内嵌取不到时读 fetch 目标 JSON（file:// 下 fetch 必然失败·Node 侧直读磁盘）
   if ((!probe.dataSource || probe.dataSource.kind === 'none') && probe.jsonTargets.length) {
     for (const t of probe.jsonTargets) {
@@ -485,7 +476,7 @@ async function probePage(browser, relPath, cfg) {
         probe.dataSource = Object.assign({ kind: 'json', name: t }, summarizeData(j));
         probe.dataSourceFallback = t;
         break;
-      } catch (e) {}
+      } catch {}
     }
   }
   return probe;
@@ -499,7 +490,7 @@ async function collectEmbeddedData(page, html) {
     let sum = null;
     try {
       sum = await page.evaluate(dataExpr(name));
-    } catch (e) {
+    } catch {
       sum = null;
     }
     if (!sum || (!(sum.arrays || []).length && !(sum.scalars || []).length)) continue;
@@ -525,6 +516,7 @@ function summarizeData(v) {
   let maxArrayLen = 0;
   let visited = 0;
   const isObj = (x) => x && typeof x === 'object';
+
   function walk(node, p, depth) {
     if (visited > 200000 || depth > 4 || !isObj(node)) return;
     visited++;
@@ -569,16 +561,12 @@ function summarizeData(v) {
       }
     }
   }
-  try {
-    walk(v, '$', 0);
-  } catch (e) {}
+  try { walk(v, '$', 0); } catch {}
   return { maxArrayLen, arrays: arrays.slice(0, 60), scalars: scalars.slice(0, 400) };
 }
 
-// ---------------- 内嵌数据变量发现（W753 普查：87 页里 15 页用的不是 EMBEDDED_DATA） ----------------
-// 口径：顶层 `const/var/let <前缀名> = {` 或 `= [` 的声明；前缀表来自全站普查实测
-// （EMBEDDED* 为多数派，另有 MOCK_/FALLBACK/DATA/SERIES/CHART/STATIONS/NODES/EDGES/LOCATIONS/EVENTS/TIMELINE）。
-// 求值走 CDP 字符串表达式（编译于全局作用域·可解析 const 词法绑定；CSP 不影响 Runtime.evaluate）。
+// ---------------- 内嵌数据变量发现 ----------------
+// 口径：顶层 `const/var/let <前缀名> = {` 或 `= [` 的声明；前缀表来自全站普查实测。
 const DATA_NAME_RE =
   /(?:^|\n)[ \t]*(?:const|var|let)[ \t]+((?:EMBEDDED|MOCK|FALLBACK|DATA|SERIES|CHART|STATIONS|NODES|EDGES|LOCATIONS|EVENTS|TIMELINE)[A-Za-z0-9_$]*)[ \t]*=[ \t]*([\[{])/g;
 
@@ -589,7 +577,9 @@ function discoverDataNames(html) {
   while ((m = DATA_NAME_RE.exec(html))) {
     if (!names.includes(m[1])) names.push(m[1]);
   }
-  return names.sort((a, b) => (b.startsWith('EMBEDDED') ? 1 : 0) - (a.startsWith('EMBEDDED') ? 1 : 0)).slice(0, 30);
+  return names
+    .sort((a, b) => (b.startsWith('EMBEDDED') ? 1 : 0) - (a.startsWith('EMBEDDED') ? 1 : 0))
+    .slice(0, 30);
 }
 
 function dataExpr(name) {
@@ -607,9 +597,10 @@ function dataExpr(name) {
 
 // ---------------- 纯判据（--judge / --self-test / pytest 注入面） ----------------
 
-/** 数字相等判定：容忍千分位 / 百分号 / 万 / 前后缀与展示层四舍五入。
- *  W753 修正：比例↔百分数互认只在量级说得通时启用（旧实现让 0.6157 与「99」假匹配——
- *  整数展示的 ±0.5 容差被误用到比例重标定分支）。 */
+/**
+ * 数字相等判定：容忍千分位 / 百分号 / 万 / 前后缀与展示层四舍五入。
+ * W753 修正：比例↔百分数互认只在量级说得通时启用（旧实现让 0.6157 与「99」假匹配）。
+ */
 function numEq(cand, domNum, domText) {
   if (!isFinite(cand) || !isFinite(domNum)) return false;
   const t = String(domText || '');
@@ -618,44 +609,34 @@ function numEq(cand, domNum, domText) {
   if (/%/.test(t)) scales.push(0.01);
   if (/万/.test(t)) scales.push(10000);
   if (/千/.test(t)) scales.push(1000);
-  if (cand > 0 && cand <= 1 && domNum >= 1) scales.push(0.01); // 数据是比例、展示是百分数
+  if (cand > 0 && cand <= 1 && domNum >= 1) scales.push(0.01);
   if (cand >= 1 && cand <= 100 && domNum > 0 && domNum <= 1) scales.push(100);
   for (const s of scales) {
     const target = domNum * s;
-    // 恒等标度：允许展示层四舍五入容差（整数 ±0.5 / 小数 ±半个末位）
-    // 比例重标定标度：只允许 0.5% 相对容差（防「量级差 100 倍」的假匹配）
-    const tol = s === 1 ? Math.max(1e-9, Math.abs(target) * 1e-6 + (dec > 0 ? Math.pow(10, -dec) / 2 : 0.5)) : Math.max(1e-9, Math.abs(target) * 0.005);
+    const tol =
+      s === 1
+        ? Math.max(1e-9, Math.abs(target) * 1e-6 + (dec > 0 ? Math.pow(10, -dec) / 2 : 0.5))
+        : Math.max(1e-9, Math.abs(target) * 0.005);
     if (Math.abs(cand - target) <= tol) return true;
   }
   return false;
 }
 
-/**
- * 判据纯函数：输入探针 payload，输出 {V1..V5,PROBE} 判定。
- * 每条判据附「为什么这是数据正确性」的理由码（reason）。
- */
-function judgeProbe(probe, thresholds) {
-  const th = Object.assign({}, TH, thresholds || {});
-  const v = {};
-  const put = (item, status, reason, measured) => {
-    v[item] = { status, reason, measured: measured == null ? '-' : String(measured) };
-  };
+/** 判据结果构造器。 */
+function makeVerdict(status, reason, measured) {
+  return { status, reason, measured: measured == null ? '-' : String(measured) };
+}
 
-  if (probe.probeError) {
-    put('PROBE', 'fail', 'probe-error', probe.probeError);
-    for (const it of CRITERIA) put(it, 'fail', 'probe-error', probe.probeError);
-    return { page: probe.page, family: probe.family || 'unknown', verdicts: v };
-  }
-  const stab = probe.stability || {};
-  put('PROBE', 'ok', stab.stable === false ? 'dom-unstable' : 'probe-ok', `ms=${(probe.timing && probe.timing.ms) || 0} stable=${stab.stable !== false} samples=${stab.samples || 0}`);
+/** V1：无 pageerror。 */
+function judgeV1(probe) {
+  const errors = probe.pageErrors || [];
+  return errors.length
+    ? makeVerdict('fail', 'pageerror', `n=${errors.length} ${errors[0]}`)
+    : makeVerdict('ok', 'no-pageerror', 'n=0');
+}
 
-  // V1 pageerror
-  const pe = probe.pageErrors || [];
-  if (pe.length) put('V1', 'fail', 'pageerror', `n=${pe.length} ${pe[0]}`);
-  else put('V1', 'ok', 'no-pageerror', 'n=0');
-
-  // V2 视图非空（图元 / 2D 画布像素 / Three 场景对象 / 表格行 / DOM 数据项）
-  const ds = probe.dataSource || { kind: 'none', arrays: [], scalars: [] };
+/** V2：视图非空（图元 / 2D 画布像素 / Three 场景对象 / 表格行 / DOM 数据项）。 */
+function judgeV2(probe, th) {
   const chart = probe.chart || {};
   const shapes = chart.shapes || 0;
   const painted = chart.canvasPainted || 0;
@@ -664,109 +645,153 @@ function judgeProbe(probe, thresholds) {
   const domItems = chart.domItems || 0;
   const three = probe.three || null;
   const threeObjs = three && typeof three.sceneChildren === 'number' ? three.sceneChildren : null;
-  const v2m = `shapes=${shapes} rows=${rows} domItems=${domItems} painted=${painted} containers=${chart.containers || 0}`;
-  if (shapes >= th.v2MinShapes || painted > 0 || (threeObjs !== null && threeObjs > 0)) {
-    put('V2', 'ok', 'view-nonempty', v2m + ` scene=${threeObjs === null ? '-' : threeObjs}`);
-  } else if (rows > 0) {
-    put('V2', 'ok', 'table-nonempty', v2m);
-  } else if (domItems >= th.v2MinDomItems) {
-    put('V2', 'ok', 'dom-items-nonempty', v2m + ` where=${chart.domItemsWhere || '-'}`);
-  } else if (webgl > 0) {
-    // WebGL 画布：读不到 2D 像素、也拿不到场景对象 → 弱判据（尺寸在位即放行·报告标 degraded）
-    put('V2', 'ok', 'webgl-canvas-sized-degraded', v2m + ` webgl=${webgl}`);
-  } else if (threeObjs === 0) {
-    put('V2', 'fail', 'empty-3d-scene', v2m);
-  } else {
-    const vi = probe.viewIntent || {};
-    if (!vi.chart && !vi.table) put('V2', 'na', 'no-view-intent', v2m);
-    else if (vi.interactive && ds.kind === 'none') put('V2', 'na', 'interactive-input-page', v2m);
-    else put('V2', 'fail', 'empty-view', v2m);
-  }
+  const measured = `shapes=${shapes} rows=${rows} domItems=${domItems} painted=${painted} containers=${chart.containers || 0}`;
 
-  // V3 数据量级自洽
-  const arrays = (ds.arrays || []).filter((a) => a && a.len >= 2);
+  if (shapes >= th.v2MinShapes || painted > 0 || (threeObjs !== null && threeObjs > 0)) {
+    return makeVerdict('ok', 'view-nonempty', measured + ` scene=${threeObjs === null ? '-' : threeObjs}`);
+  }
+  if (rows > 0) return makeVerdict('ok', 'table-nonempty', measured);
+  if (domItems >= th.v2MinDomItems) return makeVerdict('ok', 'dom-items-nonempty', measured + ` where=${chart.domItemsWhere || '-'}`);
+  if (webgl > 0) return makeVerdict('ok', 'webgl-canvas-sized-degraded', measured + ` webgl=${webgl}`);
+  if (threeObjs === 0) return makeVerdict('fail', 'empty-3d-scene', measured);
+
+  const vi = probe.viewIntent || {};
+  if (!vi.chart && !vi.table) return makeVerdict('na', 'no-view-intent', measured);
+  if (vi.interactive && (probe.dataSource || {}).kind === 'none') return makeVerdict('na', 'interactive-input-page', measured);
+  return makeVerdict('fail', 'empty-view', measured);
+}
+
+/** V3：数据量级自洽（依赖 V2 结果）。 */
+function judgeV3(probe, th, v2Verdict) {
+  const ds = probe.dataSource || { kind: 'none', arrays: [], scalars: [] };
+  const chart = probe.chart || {};
+  const shapes = chart.shapes || 0;
+  const domItems = chart.domItems || 0;
   const pathPts = chart.pathPoints || 0;
+  const three = probe.three || null;
+  const threeObjs = three && typeof three.sceneChildren === 'number' ? three.sceneChildren : null;
+  const arrays = (ds.arrays || []).filter((a) => a && a.len >= 2);
   const eff = Math.max(shapes, domItems, probe.family === '3d' && threeObjs !== null ? threeObjs : 0);
+
   let best = { path: '-', len: 0, r: 0 };
   for (const a of arrays) {
     const r = Math.max(eff / a.len, pathPts / a.len);
-    if (r > best.r) {
-      best = { path: a.path, len: a.len, r };
-    }
+    if (r > best.r) best = { path: a.path, len: a.len, r };
   }
   const metricBase = `N=${ds.maxArrayLen || 0} best=${best.path} L=${best.len} shapes=${eff} pathPts=${pathPts} domItems=${domItems}`;
-  if (v.V2.status !== 'ok') {
-    // 没有渲染出来的视图时，图元数/数据量级的比较无意义（记 na 而非假绿·进覆盖缺口报告）
-    put('V3', 'na', 'no-rendered-view', metricBase);
-  } else if (ds.kind === 'none' || !arrays.length) {
-    put('V3', 'na', 'no-data-source', metricBase);
-  } else if (probe.family === '3d' && threeObjs === null && shapes === 0) {
-    put('V3', 'na', '3d-family-uncountable', metricBase);
-  } else if (probe.family === 'canvas2d' && shapes === 0 && domItems < th.v2MinDomItems) {
-    put('V3', 'na', 'canvas-family-uncountable', metricBase);
-  } else if ((ds.maxArrayLen || 0) < th.v3MinDataN) {
-    put('V3', 'na', 'small-data', metricBase);
-  } else {
-    const measured = `N=${ds.maxArrayLen} best=${best.path}:${best.len} r=${best.r.toFixed(2)} shapes=${eff} pathPts=${pathPts} domItems=${domItems}`;
-    if (best.r >= th.v3Ratio) put('V3', 'ok', 'magnitude-consistent', measured);
-    else put('V3', 'fail', 'data-element-mismatch', measured);
-  }
 
-  // V4 KPI 可复算（ok = 至少一个 KPI 数字由页面数据源复算得出；
-  //    近失配 = 与可复算计数型标量差在 nearMissPct 内但不相等 → 算不平 FAIL；
-  //    完全对不上 = 无法判定（KPI 出处可能在页面数据源之外）→ na + 覆盖缺口，禁静默跳过）
-  const kpi = probe.kpi || [];
-  const scalars = ds.scalars || [];
-  const countScalars = scalars.filter((c) => /\.length$|\.count\(|\.uniq\(/.test(c.expr) && isFinite(c.value) && c.value >= 20);
-  if (!kpi.length) {
-    put('V4', 'na', 'no-kpi', 'kpi=0');
-  } else if (ds.kind === 'none') {
-    put('V4', 'na', 'no-data-source', `kpi=${kpi.length}`);
-  } else if (!scalars.length) {
-    put('V4', 'na', 'no-scalar-derivable', `kpi=${kpi.length} scalars=0`);
-  } else {
-    let match = null;
-    for (const c of scalars) {
-      for (const k of kpi) {
-        if (numEq(c.value, k.num, k.raw + ' ' + k.text)) {
-          match = { expr: c.expr, value: c.value, dom: k.text, src: k.src };
-          break;
-        }
-      }
-      if (match) break;
-    }
-    let near = null;
-    if (!match) {
-      for (const c of countScalars) {
-        for (const k of kpi) {
-          const d = Math.abs(c.value - k.num);
-          if (d > 0 && d / Math.max(c.value, 1) <= th.v4NearMissPct && d >= 1) {
-            near = { expr: c.expr, value: c.value, dom: k.text };
-            break;
-          }
-        }
-        if (near) break;
-      }
-    }
-    if (match) put('V4', 'ok', 'kpi-recomputable', `kpi=${kpi.length} matched=${match.expr}=${match.value} ↔ ${match.dom}`);
-    else if (near) put('V4', 'fail', 'kpi-near-miss', `kpi=${kpi.length} data=${near.expr}=${near.value} dom=${near.dom}（差 <${(th.v4NearMissPct * 100).toFixed(0)}% 但不相等）`);
-    else put('V4', 'na', 'kpi-unmatched', `kpi=${kpi.length} scalars=${scalars.length} countScalars=${countScalars.length} sample=${kpi.slice(0, 4).map((k) => k.text).join(',')}`);
-  }
+  if (v2Verdict.status !== 'ok') return makeVerdict('na', 'no-rendered-view', metricBase);
+  if (ds.kind === 'none' || !arrays.length) return makeVerdict('na', 'no-data-source', metricBase);
+  if (probe.family === '3d' && threeObjs === null && shapes === 0) return makeVerdict('na', '3d-family-uncountable', metricBase);
+  if (probe.family === 'canvas2d' && shapes === 0 && domItems < th.v2MinDomItems) return makeVerdict('na', 'canvas-family-uncountable', metricBase);
+  if ((ds.maxArrayLen || 0) < th.v3MinDataN) return makeVerdict('na', 'small-data', metricBase);
 
-  // V5 数据源四要素（第 28 门禁口径·缺失计缺口不 FAIL）
-  const cit = probe.citability;
-  if (!cit) {
-    put('V5', 'na', 'citability-unavailable', '-');
-  } else {
-    const missing = ['C1', 'C2', 'C3', 'C4'].filter((c) => cit[c] && cit[c].status === 'missing');
-    const measured = ['C1', 'C2', 'C3', 'C4'].map((c) => c + '=' + ((cit[c] && cit[c].status) || '?')).join(' ');
-    if (missing.length) put('V5', 'na', 'gap:' + missing.join(','), measured);
-    else put('V5', 'ok', 'source-four-elements', measured);
-  }
-  return { page: probe.page, family: probe.family || 'unknown', verdicts: v };
+  const measured = `N=${ds.maxArrayLen} best=${best.path}:${best.len} r=${best.r.toFixed(2)} shapes=${eff} pathPts=${pathPts} domItems=${domItems}`;
+  return best.r >= th.v3Ratio
+    ? makeVerdict('ok', 'magnitude-consistent', measured)
+    : makeVerdict('fail', 'data-element-mismatch', measured);
 }
 
-/** 基线比较（纯函数）：返回 {newFail, frozen, tighten, worsen, exit}。 */
+/** 在标量中查找与 KPI 匹配的可复算项。 */
+function findKpiMatch(kpi, scalars) {
+  for (const scalar of scalars) {
+    for (const k of kpi) {
+      if (numEq(scalar.value, k.num, k.raw + ' ' + k.text)) {
+        return { expr: scalar.expr, value: scalar.value, dom: k.text };
+      }
+    }
+  }
+  return null;
+}
+
+/** 查找近失配（与计数型标量差 < nearMissPct 但不相等）。 */
+function findNearMiss(kpi, countScalars, nearMissPct) {
+  for (const scalar of countScalars) {
+    for (const k of kpi) {
+      const delta = Math.abs(scalar.value - k.num);
+      if (delta > 0 && delta / Math.max(scalar.value, 1) <= nearMissPct && delta >= 1) {
+        return { expr: scalar.expr, value: scalar.value, dom: k.text };
+      }
+    }
+  }
+  return null;
+}
+
+/** V4：KPI 可复算。 */
+function judgeV4(probe, th) {
+  const kpi = probe.kpi || [];
+  const ds = probe.dataSource || { kind: 'none', arrays: [], scalars: [] };
+  const scalars = ds.scalars || [];
+  if (!kpi.length) return makeVerdict('na', 'no-kpi', 'kpi=0');
+  if (ds.kind === 'none') return makeVerdict('na', 'no-data-source', `kpi=${kpi.length}`);
+  if (!scalars.length) return makeVerdict('na', 'no-scalar-derivable', `kpi=${kpi.length} scalars=0`);
+
+  const match = findKpiMatch(kpi, scalars);
+  if (match) {
+    return makeVerdict('ok', 'kpi-recomputable', `kpi=${kpi.length} matched=${match.expr}=${match.value} ↔ ${match.dom}`);
+  }
+
+  const countScalars = scalars.filter(
+    (c) => /\.length$|\.count\(|\.uniq\(/.test(c.expr) && isFinite(c.value) && c.value >= 20
+  );
+  const near = findNearMiss(kpi, countScalars, th.v4NearMissPct);
+  if (near) {
+    return makeVerdict(
+      'fail',
+      'kpi-near-miss',
+      `kpi=${kpi.length} data=${near.expr}=${near.value} dom=${near.dom}（差 <${(th.v4NearMissPct * 100).toFixed(0)}% 但不相等）`
+    );
+  }
+
+  return makeVerdict(
+    'na',
+    'kpi-unmatched',
+    `kpi=${kpi.length} scalars=${scalars.length} countScalars=${countScalars.length} sample=${kpi.slice(0, 4).map((k) => k.text).join(',')}`
+  );
+}
+
+/** V5：数据源四要素（第 28 门禁口径·缺失计缺口不 FAIL）。 */
+function judgeV5(probe) {
+  const cit = probe.citability;
+  if (!cit) return makeVerdict('na', 'citability-unavailable', '-');
+  const missing = ['C1', 'C2', 'C3', 'C4'].filter((c) => cit[c] && cit[c].status === 'missing');
+  const measured = ['C1', 'C2', 'C3', 'C4'].map((c) => c + '=' + ((cit[c] && cit[c].status) || '?')).join(' ');
+  return missing.length
+    ? makeVerdict('na', 'gap:' + missing.join(','), measured)
+    : makeVerdict('ok', 'source-four-elements', measured);
+}
+
+/**
+ * 判据纯函数：输入探针 payload，输出 {V1..V5,PROBE} 判定。
+ * 每条判据附「为什么这是数据正确性」的理由码（reason）。
+ */
+function judgeProbe(probe, thresholds) {
+  const th = Object.assign({}, TH, thresholds || {});
+  const verdicts = {};
+
+  if (probe.probeError) {
+    const fail = makeVerdict('fail', 'probe-error', probe.probeError);
+    verdicts.PROBE = fail;
+    for (const item of CRITERIA) verdicts[item] = fail;
+    return { page: probe.page, family: probe.family || 'unknown', verdicts };
+  }
+
+  const stability = probe.stability || {};
+  verdicts.PROBE = makeVerdict(
+    'ok',
+    stability.stable === false ? 'dom-unstable' : 'probe-ok',
+    `ms=${(probe.timing && probe.timing.ms) || 0} stable=${stability.stable !== false} samples=${stability.samples || 0}`
+  );
+  verdicts.V1 = judgeV1(probe);
+  verdicts.V2 = judgeV2(probe, th);
+  verdicts.V3 = judgeV3(probe, th, verdicts.V2);
+  verdicts.V4 = judgeV4(probe, th);
+  verdicts.V5 = judgeV5(probe);
+
+  return { page: probe.page, family: probe.family || 'unknown', verdicts };
+}
+
+/** 基线比较（纯函数）：返回 {rows, newFail, frozen, tighten, exit}。 */
 function compareBaseline(judged, baseMap, thresholds) {
   const th = Object.assign({}, TH, thresholds || {});
   const rows = [];
@@ -791,7 +816,14 @@ function compareBaseline(judged, baseMap, thresholds) {
         const b = Number((cur.measured.match(/shapes=(\d+)/) || [])[1]);
         if (isFinite(a) && isFinite(b) && a >= 4 && b < a * th.v3WorsenFactor) kind = 'worsen';
       }
-      rows.push({ page: j.page, item, kind, prev: prev ? prev.status + ':' + prev.reason : '-', cur: cur.status + ':' + cur.reason, measured: cur.measured });
+      rows.push({
+        page: j.page,
+        item,
+        kind,
+        prev: prev ? prev.status + ':' + prev.reason : '-',
+        cur: cur.status + ':' + cur.reason,
+        measured: cur.measured,
+      });
     }
   }
   const newFail = rows.filter((r) => r.kind === 'new' || r.kind === 'regress' || r.kind === 'worsen');
@@ -812,16 +844,16 @@ function parseBaseline(raw) {
       problems.push('列数 < 4: ' + s.slice(0, 80));
       continue;
     }
-    const [page, item, measured, status] = bits;
+    const [page, item, measured, statusField] = bits;
     if (!ITEMS.includes(item)) {
       problems.push('未知判据: ' + item);
       continue;
     }
     const key = page + '|' + item;
     if (map[key]) problems.push('重复行: ' + key);
-    const m = status.match(/^(ok|fail|na)(?::(.*))?$/);
+    const m = statusField.match(/^(ok|fail|na)(?::(.*))?$/);
     if (!m) {
-      problems.push('状态非法: ' + status);
+      problems.push('状态非法: ' + statusField);
       continue;
     }
     map[key] = { page, item, measured, status: m[1], reason: m[2] || '' };
@@ -834,11 +866,10 @@ function baselineLines(judged, snapshot, census) {
     '# 第 43 门禁 · 可视化数据断言基线（W753 建立·存量缺口冻结）',
     `# 生成：${snapshot} · 页数 ${judged.length} · 每页 ${ITEMS.length} 项 = ${judged.length * ITEMS.length} 行`,
     '# 生成命令：node scripts/check_chart_values.js --generate-baseline',
-    '# 格式：page|item|measured|status    status ∈ ok | fail:<reason> | na:<reason>（na = 判据对该页不适用/缺覆盖，计入缺口报告）',
+    '# 格式：page|item|measured|status    status ∈ ok | fail:<reason> | na:<reason>',
     '# 语义：违规集合单调不增——本文件内 fail 为冻结存量（WARN 冻结·不算 FAIL）；',
     '#       基线外新增/回归 = FAIL 阻断；冻结项图元数跌破基线 50% = 恶化 FAIL；',
     '#       fail→ok 或 fail→na = 可收紧（提示删/改行）；基线文件缺失 = 拒绝通过（fail-closed）。',
-    '# 判据口径：V1 无 pageerror / V2 图表容器非空 / V3 数据量级自洽 / V4 KPI 可复算 / V5 数据源四要素（第 28 门禁口径·缺口）',
     `# 阈值：v3MinDataN=${TH.v3MinDataN} v3Ratio=${TH.v3Ratio} chartMin=${TH.chartMinW}x${TH.chartMinH} worsenFactor=${TH.v3WorsenFactor}`,
     `# 普查分布：${census}`,
   ];
@@ -859,11 +890,14 @@ function resolvePython() {
   cands.push(['py', ['-3']], ['python3', []], ['python', []]);
   for (const [cmd, args] of cands) {
     try {
-      const o = execFileSync(cmd, args.concat(['-c', 'import sys;print(sys.version_info[0])']), { stdio: 'pipe', timeout: 15000 })
+      const o = execFileSync(cmd, args.concat(['-c', 'import sys;print(sys.version_info[0])']), {
+        stdio: 'pipe',
+        timeout: 15000,
+      })
         .toString()
         .trim();
       if (o.startsWith('3')) return { cmd, args };
-    } catch (e) {}
+    } catch {}
   }
   return null;
 }
@@ -884,7 +918,7 @@ function loadCitability() {
   } catch (e) {
     try {
       if (fs.existsSync(tmp)) fs.unlinkSync(tmp);
-    } catch (e2) {}
+    } catch {}
     return { detail: null, why: 'citability-run-failed: ' + String((e && e.message) || e).slice(0, 120) };
   }
 }
@@ -901,28 +935,38 @@ function attachCitability(probes, cit) {
 
 // ---------------- 运行（浏览器） ----------------
 async function runProbes(pages, cfg) {
-  const { chromium } = require('playwright');
-  const browser = await chromium.launch({ headless: true });
-  const probes = [];
-  const t0 = now();
-  let next = 0;
-  async function worker() {
-    for (;;) {
-      const i = next++;
-      if (i >= pages.length) break;
-      let p;
-      try {
-        p = await probePage(browser, pages[i], cfg);
-      } catch (e) {
-        p = { page: pages[i], probeError: String((e && e.message) || e).slice(0, 200), pageErrors: [], consoleErrors: [], kpi: [], chart: {}, dataSource: { kind: 'none', arrays: [], scalars: [] }, family: 'unknown', stability: {} };
-      }
-      probes.push(p);
-      if (cfg.verbose) console.log(`  ${probes.length}/${pages.length} ${p.page} ${p.family} shapes=${(p.chart && p.chart.shapes) || 0} N=${(p.dataSource && p.dataSource.maxArrayLen) || 0}${p.probeError ? ' PROBE_ERROR' : ''}`);
+  const browser = await launchHeadlessBrowser();
+  const t0 = nowMs();
+  let completed = 0;
+  const probes = await runWorkerPool(pages, cfg.workers, async (relPath) => {
+    let p;
+    try {
+      p = await probePage(browser, relPath, cfg);
+    } catch (e) {
+      p = {
+        page: relPath,
+        probeError: String((e && e.message) || e).slice(0, 200),
+        pageErrors: [],
+        consoleErrors: [],
+        kpi: [],
+        chart: {},
+        dataSource: { kind: 'none', arrays: [], scalars: [] },
+        family: 'unknown',
+        stability: {},
+      };
     }
-  }
-  await Promise.all(Array.from({ length: cfg.workers }, () => worker()));
+    completed++;
+    if (cfg.verbose) {
+      console.log(
+        `  ${completed}/${pages.length} ${p.page} ${p.family} ` +
+          `shapes=${(p.chart && p.chart.shapes) || 0} N=${(p.dataSource && p.dataSource.maxArrayLen) || 0}` +
+          `${p.probeError ? ' PROBE_ERROR' : ''}`
+      );
+    }
+    return p;
+  });
   await browser.close();
-  return { probes, elapsed: (now() - t0) / 1000 };
+  return { probes, elapsed: (nowMs() - t0) / 1000 };
 }
 
 function percentile(sorted, p) {
@@ -944,7 +988,9 @@ function calibration(probes) {
     const arrays = ((p.dataSource && p.dataSource.arrays) || []).filter((a) => a.len >= 2);
     const eff = Math.max(shapes, (p.chart && p.chart.domItems) || 0);
     let best = 0;
-    for (const a of arrays) best = Math.max(best, eff / a.len, ((p.chart && p.chart.pathPoints) || 0) / a.len);
+    for (const a of arrays) {
+      best = Math.max(best, eff / a.len, ((p.chart && p.chart.pathPoints) || 0) / a.len);
+    }
     if (arrays.length && p.dataSource.maxArrayLen >= TH.v3MinDataN) ratios.push(Number(best.toFixed(3)));
   }
   const sorted = ratios.slice().sort((a, b) => a - b);
@@ -965,20 +1011,10 @@ function calibration(probes) {
   };
 }
 
-function printSummary(judged, cmp, cfg, elapsed, mode) {
-  const tally = {};
-  for (const item of ITEMS) tally[item] = { ok: 0, fail: 0, na: 0 };
-  for (const j of judged) for (const item of ITEMS) tally[item][j.verdicts[item].status]++;
-  const probeErr = judged.filter((j) => j.verdicts.PROBE.status === 'fail');
-  const nFail = mode === 'gate' ? cmp.newFail.length : judged.filter((j) => CRITERIA.some((c) => j.verdicts[c].status === 'fail')).length;
-  console.log(
-    `扫描 ${judged.length} 页 · 基线外 FAIL ${cmp ? cmp.newFail.length : '-'} · 冻结存量 ${cmp ? cmp.frozen.length : '-'} · ` +
-      `可收紧 ${cmp ? cmp.tighten.length : '-'} · probe_error ${probeErr.length} 页 · ${elapsed.toFixed(1)}s · workers=${cfg.workers || ''}`
-  );
-  console.log('判据分布：' + ITEMS.map((i) => `${i} ok=${tally[i].ok}/fail=${tally[i].fail}/na=${tally[i].na}`).join(' · '));
-  for (const r of (cmp ? cmp.newFail : []).slice(0, 40)) console.log(`FAIL ${r.page} :: ${r.item} ${r.cur} (${r.kind}) ${r.measured}`);
-  if (probeErr.length) console.log('probe_error 页：' + probeErr.map((j) => j.page).join(', '));
-  console.log(`---- 第 43 门禁 可视化数据断言：${nFail} FAIL ----`);
+function countBy(arr, key) {
+  const out = {};
+  for (const x of arr) out[x[key]] = (out[x[key]] || 0) + 1;
+  return out;
 }
 
 function coverageGaps(judged) {
@@ -992,13 +1028,41 @@ function coverageGaps(judged) {
   return gaps;
 }
 
+function printSummary(judged, cmp, cfg, elapsed, mode) {
+  const tally = {};
+  for (const item of ITEMS) tally[item] = { ok: 0, fail: 0, na: 0 };
+  for (const j of judged) for (const item of ITEMS) tally[item][j.verdicts[item].status]++;
+  const probeErr = judged.filter((j) => j.verdicts.PROBE.status === 'fail');
+  const nFail =
+    mode === 'gate'
+      ? cmp.newFail.length
+      : judged.filter((j) => CRITERIA.some((c) => j.verdicts[c].status === 'fail')).length;
+
+  console.log(
+    `扫描 ${judged.length} 页 · 基线外 FAIL ${cmp ? cmp.newFail.length : '-'} · 冻结存量 ${cmp ? cmp.frozen.length : '-'} · ` +
+      `可收紧 ${cmp ? cmp.tighten.length : '-'} · probe_error ${probeErr.length} 页 · ${elapsed.toFixed(1)}s · workers=${cfg.workers || ''}`
+  );
+  console.log('判据分布：' + ITEMS.map((i) => `${i} ok=${tally[i].ok}/fail=${tally[i].fail}/na=${tally[i].na}`).join(' · '));
+  for (const r of (cmp ? cmp.newFail : []).slice(0, 40)) {
+    console.log(`FAIL ${r.page} :: ${r.item} ${r.cur} (${r.kind}) ${r.measured}`);
+  }
+  if (probeErr.length) console.log('probe_error 页：' + probeErr.map((j) => j.page).join(', '));
+  console.log(gateSummaryLine(GATE_NAME, nFail));
+}
+
 // ---------------- 自检（注入式·无浏览器） ----------------
 function makeProbe(o) {
   const base = {
     page: 'site/data/_selftest.html',
     family: 'bar',
     probeError: null,
-    dataSource: { kind: 'embedded', name: 'EMBEDDED_DATA', maxArrayLen: 100, arrays: [{ path: '$', len: 100 }], scalars: [{ expr: '$.length', value: 100 }] },
+    dataSource: {
+      kind: 'embedded',
+      name: 'EMBEDDED_DATA',
+      maxArrayLen: 100,
+      arrays: [{ path: '$', len: 100 }],
+      scalars: [{ expr: '$.length', value: 100 }],
+    },
     chart: { svg: 1, canvas: 0, containers: 1, shapes: 100, pathPoints: 0, canvasPainted: 0, webglCanvases: 0 },
     three: null,
     kpi: [{ text: '100', raw: '100', src: 'kpi-value', num: 100 }],
@@ -1012,105 +1076,99 @@ function makeProbe(o) {
   return Object.assign(base, o || {});
 }
 
+function buildSelfTestCases() {
+  const emptyChart = { svg: 1, canvas: 0, containers: 1, shapes: 0, pathPoints: 0, canvasPainted: 0, webglCanvases: 0 };
+  return [
+    { name: 'T1 干净页放行（四判据全 ok）', probes: [makeProbe()], baseline: [], expectNoFail: true },
+    { name: 'T2 空图必红（V2 图表零图元）', probes: [makeProbe({ chart: emptyChart })], baseline: [], expectFail: ['V2'] },
+    {
+      name: 'T3 错值必红（V4 KPI 与可复算计数差 1% 而不等 = 近失配）',
+      probes: [
+        makeProbe({
+          dataSource: {
+            kind: 'embedded',
+            name: 'EMBEDDED_DATA',
+            maxArrayLen: 100,
+            arrays: [{ path: '$', len: 100 }],
+            scalars: [{ expr: '$.length', value: 100 }],
+          },
+          kpi: [{ text: '99', raw: '99', src: 'kpi-value', num: 99 }],
+        }),
+      ],
+      baseline: [],
+      expectFail: ['V4'],
+    },
+    { name: 'T4 探针异常必红（probe-error → PROBE + V1-V5）', probes: [makeProbe({ probeError: 'probe-timeout 25000ms' })], baseline: [], expectFail: ['PROBE', 'V1', 'V3'] },
+    {
+      name: 'T5 基线内不红（冻结缺口不算 FAIL）',
+      probes: [makeProbe({ chart: emptyChart })],
+      baseline: [
+        'site/data/_selftest.html|V2|shapes=0 painted=0 containers=1|fail:empty-chart',
+        'site/data/_selftest.html|V3|N=100 best=$:100 r=0.00 shapes=0 pathPts=0|fail:data-element-mismatch',
+      ],
+      expectExit: 0,
+    },
+    { name: 'T6 基线外新增必红（同页同判据不在基线内）', probes: [makeProbe({ chart: emptyChart })], baseline: [], expectExit: 1 },
+    {
+      name: 'T7 量级错配必红（V3 数据 100 而图元 3）',
+      probes: [
+        makeProbe({
+          chart: { svg: 1, canvas: 0, containers: 1, shapes: 3, pathPoints: 0, canvasPainted: 0, webglCanvases: 0 },
+          kpi: [{ text: '100', raw: '100', src: 'kpi-value', num: 100 }],
+        }),
+      ],
+      baseline: [],
+      expectFail: ['V3'],
+    },
+    {
+      name: 'T8 V5 缺口记 na（第 28 门禁口径缺失非 FAIL）',
+      probes: [makeProbe({ citability: { C1: { status: 'ok' }, C2: { status: 'missing' }, C3: { status: 'ok' }, C4: { status: 'missing' } } })],
+      baseline: [],
+      expectNa: ['V5'],
+      expectExit: 0,
+    },
+    {
+      name: 'T9 数据源缺失记 na 而非假绿（V3/V4 覆盖缺口）',
+      probes: [makeProbe({ dataSource: { kind: 'none', maxArrayLen: 0, arrays: [], scalars: [] } })],
+      baseline: [],
+      expectNa: ['V3', 'V4'],
+      expectExit: 0,
+    },
+    {
+      name: 'T10 冻结项恶化必红（图元数跌破基线 50%）',
+      probes: [makeProbe({ chart: { svg: 1, canvas: 0, containers: 1, shapes: 1, pathPoints: 0, canvasPainted: 0, webglCanvases: 0 } })],
+      baseline: ['site/data/_selftest.html|V3|N=100 best=$:100 r=0.01 shapes=20 pathPts=0|fail:data-element-mismatch'],
+      expectExit: 1,
+    },
+    {
+      name: 'T11 无视图意图页记 na（结构页/搜索页不假红）',
+      probes: [
+        makeProbe({
+          chart: { svg: 0, canvas: 0, containers: 0, shapes: 0, pathPoints: 0, canvasPainted: 0, webglCanvases: 0, tableRows: 0, domItems: 0 },
+          viewIntent: { chart: false, table: false },
+          dataSource: { kind: 'none', maxArrayLen: 0, arrays: [], scalars: [] },
+        }),
+      ],
+      baseline: [],
+      expectNa: ['V2', 'V3'],
+      expectExit: 0,
+    },
+    {
+      name: 'T12 KPI 完全无法复算记 na + 缺口（不假绿也不假红）',
+      probes: [makeProbe({ kpi: [{ text: '777777', raw: '777777', src: 'kpi-value', num: 777777 }] })],
+      baseline: [],
+      expectNa: ['V4'],
+      expectExit: 0,
+    },
+  ];
+}
+
 function runSelfTest() {
-  const cases = [];
-  const clean = makeProbe();
-  cases.push({ name: 'T1 干净页放行（四判据全 ok）', probes: [clean], baseline: [], expectNoFail: true });
-
-  cases.push({
-    name: 'T2 空图必红（V2 图表零图元）',
-    probes: [makeProbe({ chart: { svg: 1, canvas: 0, containers: 1, shapes: 0, pathPoints: 0, canvasPainted: 0, webglCanvases: 0 } })],
-    baseline: [],
-    expectFail: ['V2'],
-  });
-
-  cases.push({
-    name: 'T3 错值必红（V4 KPI 与可复算计数差 1% 而不等 = 近失配）',
-    probes: [
-      makeProbe({
-        dataSource: { kind: 'embedded', name: 'EMBEDDED_DATA', maxArrayLen: 100, arrays: [{ path: '$', len: 100 }], scalars: [{ expr: '$.length', value: 100 }] },
-        kpi: [{ text: '99', raw: '99', src: 'kpi-value', num: 99 }],
-      }),
-    ],
-    baseline: [],
-    expectFail: ['V4'],
-  });
-
-  cases.push({
-    name: 'T4 探针异常必红（probe-error → PROBE + V1-V5）',
-    probes: [makeProbe({ probeError: 'probe-timeout 25000ms' })],
-    baseline: [],
-    expectFail: ['PROBE', 'V1', 'V3'],
-  });
-
-  cases.push({
-    name: 'T5 基线内不红（冻结缺口不算 FAIL）',
-    probes: [makeProbe({ chart: { svg: 1, canvas: 0, containers: 1, shapes: 0, pathPoints: 0, canvasPainted: 0, webglCanvases: 0 } })],
-    baseline: [
-      'site/data/_selftest.html|V2|shapes=0 painted=0 containers=1|fail:empty-chart',
-      'site/data/_selftest.html|V3|N=100 best=$:100 r=0.00 shapes=0 pathPts=0|fail:data-element-mismatch',
-    ],
-    expectExit: 0,
-  });
-
-  cases.push({
-    name: 'T6 基线外新增必红（同页同判据不在基线内）',
-    probes: [makeProbe({ chart: { svg: 1, canvas: 0, containers: 1, shapes: 0, pathPoints: 0, canvasPainted: 0, webglCanvases: 0 } })],
-    baseline: [],
-    expectExit: 1,
-  });
-
-  cases.push({
-    name: 'T7 量级错配必红（V3 数据 100 而图元 3）',
-    probes: [makeProbe({ chart: { svg: 1, canvas: 0, containers: 1, shapes: 3, pathPoints: 0, canvasPainted: 0, webglCanvases: 0 }, kpi: [{ text: '100', raw: '100', src: 'kpi-value', num: 100 }] })],
-    baseline: [],
-    expectFail: ['V3'],
-  });
-
-  cases.push({
-    name: 'T8 V5 缺口记 na（第 28 门禁口径缺失非 FAIL）',
-    probes: [makeProbe({ citability: { C1: { status: 'ok' }, C2: { status: 'missing' }, C3: { status: 'ok' }, C4: { status: 'missing' } } })],
-    baseline: [],
-    expectNa: ['V5'],
-    expectExit: 0,
-  });
-
-  cases.push({
-    name: 'T9 数据源缺失记 na 而非假绿（V3/V4 覆盖缺口）',
-    probes: [makeProbe({ dataSource: { kind: 'none', maxArrayLen: 0, arrays: [], scalars: [] } })],
-    baseline: [],
-    expectNa: ['V3', 'V4'],
-    expectExit: 0,
-  });
-
-  cases.push({
-    name: 'T11 无视图意图页记 na（结构页/搜索页不假红）',
-    probes: [makeProbe({ chart: { svg: 0, canvas: 0, containers: 0, shapes: 0, pathPoints: 0, canvasPainted: 0, webglCanvases: 0, tableRows: 0, domItems: 0 }, viewIntent: { chart: false, table: false }, dataSource: { kind: 'none', maxArrayLen: 0, arrays: [], scalars: [] } })],
-    baseline: [],
-    expectNa: ['V2', 'V3'],
-    expectExit: 0,
-  });
-
-  cases.push({
-    name: 'T12 KPI 完全无法复算记 na + 缺口（不假绿也不假红）',
-    probes: [makeProbe({ kpi: [{ text: '777777', raw: '777777', src: 'kpi-value', num: 777777 }] })],
-    baseline: [],
-    expectNa: ['V4'],
-    expectExit: 0,
-  });
-
-  cases.push({
-    name: 'T10 冻结项恶化必红（图元数跌破基线 50%）',
-    probes: [makeProbe({ chart: { svg: 1, canvas: 0, containers: 1, shapes: 1, pathPoints: 0, canvasPainted: 0, webglCanvases: 0 } })],
-    baseline: ['site/data/_selftest.html|V3|N=100 best=$:100 r=0.01 shapes=20 pathPts=0|fail:data-element-mismatch'],
-    expectExit: 1,
-  });
-
+  const cases = buildSelfTestCases();
   let pass = 0;
   for (const c of cases) {
     const judged = c.probes.map((p) => judgeProbe(p, null));
-    const baseRaw = (c.baseline || []).join('\n');
-    const { map, problems } = parseBaseline(baseRaw);
+    const { map, problems } = parseBaseline((c.baseline || []).join('\n'));
     const cmp = compareBaseline(judged, map, null);
     let ok = true;
     const detail = [];
@@ -1153,8 +1211,7 @@ function runSelfTest() {
 // ---------------- CLI ----------------
 function parseArgs(argv) {
   // 缺省 = gate（fail-closed）：verify_delivery 第 43 槽以 `node check_chart_values.js` 直调，
-  // 若缺省走 report（恒 exit 0）将成为「wrapper 假绿」——W753 挂载时实测该槽未带 --gate，
-  // 故此处把无参调用钉死不通过即非零退出。
+  // 若缺省走 report（恒 exit 0）将成为「wrapper 假绿」——W753 挂载时实测该槽未带 --gate。
   const cfg = { mode: 'gate', workers: 5, limit: 0, pages: null, json: DEFAULT_REPORT, verbose: false, noCitability: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
@@ -1171,8 +1228,7 @@ function parseArgs(argv) {
     else if (a === '--json') {
       cfg.json = argv[++i];
       cfg.jsonExplicit = true;
-    }
-    else if (a === '--pages') cfg.pages = String(argv[++i] || '').split(',').map((s) => s.trim()).filter(Boolean);
+    } else if (a === '--pages') cfg.pages = String(argv[++i] || '').split(',').map((s) => s.trim()).filter(Boolean);
     else if (a === '--baseline') cfg.baseline = argv[++i];
     else if (a === '--judge-file' || a === '--payload') cfg.payload = argv[++i];
     else if (!a.startsWith('--') && cfg.mode === 'judge') cfg.payload = a;
@@ -1198,97 +1254,64 @@ function baselinePath(cfg) {
   return cfg && cfg.baseline ? path.resolve(ROOT, cfg.baseline) : BASELINE;
 }
 
-async function main() {
-  const cfg = parseArgs(process.argv.slice(2));
-  if (cfg.help) {
-    console.log(readText(__filename).split('\n').filter((l) => l.startsWith(' *   ') || l.startsWith(' * ##')).join('\n'));
-    return 0;
+/**
+ * 门禁模式前置校验：基线必须存在且可解析（fail-closed，不浪费一次全量探针）。
+ * @returns {{ok: true, map: object, problems: string[]} | {ok: false, exitCode: number}}
+ */
+function validateGateBaseline(baselineFile) {
+  if (!fs.existsSync(baselineFile)) {
+    console.log(`FAIL 基线缺失：${relativeToRoot(baselineFile)} — refuse to pass（先跑 --generate-baseline）`);
+    console.log(gateSummaryLine(GATE_NAME, 1));
+    return { ok: false, exitCode: 1 };
   }
-  if (cfg.mode === 'self-test') return runSelfTest();
+  const parsed = parseBaseline(readText(baselineFile));
+  if (parsed.problems.length) {
+    for (const s of parsed.problems.slice(0, 10)) console.log('FAIL 基线不可解析：' + s);
+    console.log(gateSummaryLine(GATE_NAME, parsed.problems.length));
+    return { ok: false, exitCode: 1 };
+  }
+  return { ok: true, map: parsed.map, problems: [] };
+}
 
-  if (cfg.mode === 'judge') {
-    const raw = cfg.payload === '-' ? fs.readFileSync(0, 'utf8') : readText(cfg.payload);
-    const payload = JSON.parse(raw);
-    const judged = (payload.probes || []).map((p) => judgeProbe(p, payload.thresholds));
-    const { map, problems } = parseBaseline(payload.baseline || '');
-    const cmp = compareBaseline(judged, map, payload.thresholds);
-    console.log(JSON.stringify({ problems, results: judged, gate: { newFail: cmp.newFail, frozen: cmp.frozen, tighten: cmp.tighten, exit: cmp.exit } }, null, 1));
-    return 0;
-  }
+/** --judge 模式：从 payload 读取探针，运行纯判据并输出 JSON。 */
+function runJudgeMode(cfg) {
+  const raw = cfg.payload === '-' ? fs.readFileSync(0, 'utf8') : readText(cfg.payload);
+  const payload = JSON.parse(raw);
+  const judged = (payload.probes || []).map((p) => judgeProbe(p, payload.thresholds));
+  const { map, problems } = parseBaseline(payload.baseline || '');
+  const cmp = compareBaseline(judged, map, payload.thresholds);
+  console.log(
+    JSON.stringify(
+      { problems, results: judged, gate: { newFail: cmp.newFail, frozen: cmp.frozen, tighten: cmp.tighten, exit: cmp.exit } },
+      null,
+      1
+    )
+  );
+  return 0;
+}
 
-  const pages = resolvePages(cfg);
-  if (!pages.length) {
-    console.log('FAIL 未扫到页面（site/data 下无匹配页·fail-closed）');
-    console.log('---- 第 43 门禁 可视化数据断言：1 FAIL ----');
-    return 1;
-  }
-  // fail-closed 前置：门禁模式先验基线（缺失/不可解析立即拒绝·不浪费一次全量探针）
-  const baselineFile = baselinePath(cfg);
-  if (cfg.mode === 'gate') {
-    if (!fs.existsSync(baselineFile)) {
-      console.log(`FAIL 基线缺失：${rel(baselineFile)} — refuse to pass（先跑 --generate-baseline）`);
-      console.log('---- 第 43 门禁 可视化数据断言：1 FAIL ----');
-      return 1;
-    }
-    const pre = parseBaseline(readText(baselineFile));
-    if (pre.problems.length) {
-      for (const s of pre.problems.slice(0, 10)) console.log('FAIL 基线不可解析：' + s);
-      console.log(`---- 第 43 门禁 可视化数据断言：${pre.problems.length} FAIL ----`);
-      return 1;
-    }
-  }
-  let cit = { why: 'skipped' };
-  if (!cfg.noCitability) {
-    cit = loadCitability();
-    if (cit.why !== 'ok') console.log(`WARN V5（第 28 门禁口径）不可用：${cit.why}（该判据全页记 na 并计入覆盖缺口）`);
-  }
-  const { probes, elapsed } = await runProbes(pages, cfg);
-  const citInfo = attachCitability(probes, cit);
-  const judged = probes.map((p) => judgeProbe(p, null));
-  const cal = calibration(probes);
-
-  let baseMap = {};
-  let baselineProblems = [];
-  let baselineMissing = false;
-  if (cfg.mode === 'gate' || cfg.mode === 'report' || cfg.mode === 'survey') {
-    if (fs.existsSync(baselineFile)) {
-      const parsed = parseBaseline(readText(baselineFile));
-      baseMap = parsed.map;
-      baselineProblems = parsed.problems;
-    } else {
-      baselineMissing = true;
-    }
-  }
-  const cmp = cfg.mode === 'generate-baseline' ? null : compareBaseline(judged, baseMap, null);
-
-  const census =
-    `族分布 ${JSON.stringify(cal.families)} · 有数据页 ${cal.pages_with_data}/${probes.length} · ` +
-    `V3 比例分位 p05=${cal.ratio_percentiles.p05} p25=${cal.ratio_percentiles.p25} p50=${cal.ratio_percentiles.p50}`;
-  const gaps = coverageGaps(judged);
-
-  if (cfg.mode === 'generate-baseline') {
-    const lines = baselineLines(judged, new Date().toISOString().slice(0, 10), census);
-    fs.mkdirSync(path.dirname(baselineFile), { recursive: true });
-    fs.writeFileSync(baselineFile, lines.join('\n') + '\n', 'utf8');
-    const frozenN = judged.reduce((a, j) => a + ITEMS.filter((i) => j.verdicts[i].status === 'fail').length, 0);
-    console.log(`基线已生成：${rel(baselineFile)} · ${judged.length} 页 · ${judged.length * ITEMS.length} 行 · 冻结缺口 ${frozenN} 项 · ${census}`);
-    console.log('判据缺口（na）：' + JSON.stringify(countBy(gaps, 'item')));
-    console.log(`---- 第 43 门禁 可视化数据断言：${frozenN} FAIL ----`);
-    return 0;
-  }
-
+/** 构建报告对象（report/survey/gate 共用）。 */
+function buildReport(cfg, judged, probes, cal, citInfo, baselineFile, cmp, gaps, elapsed, baselineProblems) {
   const report = {
     generated_at: new Date().toISOString(),
-    gate: '第 43 门禁 可视化数据断言',
-    command: 'node scripts/check_chart_values.js ' + (cfg.mode === 'gate' ? '--gate' : cfg.mode === 'survey' ? '--survey' : '--report'),
+    gate: GATE_NAME,
+    command:
+      'node scripts/check_chart_values.js ' +
+      (cfg.mode === 'gate' ? '--gate' : cfg.mode === 'survey' ? '--survey' : '--report'),
     site_pages_total: listPages().length,
     pages_scanned: judged.length,
     workers: cfg.workers,
     elapsed_s: Number(elapsed.toFixed(1)),
     thresholds: TH,
-    calibration: { families: cal.families, pages_with_data: cal.pages_with_data, pages_shapes_positive: cal.pages_shapes_positive, ratio_n: cal.ratio_n, ratio_percentiles: cal.ratio_percentiles },
+    calibration: {
+      families: cal.families,
+      pages_with_data: cal.pages_with_data,
+      pages_shapes_positive: cal.pages_shapes_positive,
+      ratio_n: cal.ratio_n,
+      ratio_percentiles: cal.ratio_percentiles,
+    },
     citability: citInfo,
-    baseline: { path: rel(baselineFile), present: fs.existsSync(baselineFile), problems: baselineProblems },
+    baseline: { path: relativeToRoot(baselineFile), present: fs.existsSync(baselineFile), problems: baselineProblems },
     gate_detail: cmp
       ? { new_fail: cmp.newFail.slice(0, 200), frozen: cmp.frozen.slice(0, 200), tighten: cmp.tighten.slice(0, 200) }
       : null,
@@ -1313,9 +1336,14 @@ async function main() {
     report.pages[j.page] = {
       family: j.family,
       verdicts: j.verdicts,
-      dataSource: { kind: p.dataSource && p.dataSource.kind, name: p.dataSource && p.dataSource.name, maxArrayLen: p.dataSource && p.dataSource.maxArrayLen, arrays: ((p.dataSource && p.dataSource.arrays) || []).slice(0, 30), scalars: ((p.dataSource && p.dataSource.scalars) || []).slice(0, 40) },
+      dataSource: {
+        kind: p.dataSource && p.dataSource.kind,
+        name: p.dataSource && p.dataSource.name,
+        maxArrayLen: p.dataSource && p.dataSource.maxArrayLen,
+        arrays: ((p.dataSource && p.dataSource.arrays) || []).slice(0, 30),
+        scalars: ((p.dataSource && p.dataSource.scalars) || []).slice(0, 40),
+      },
       viewIntent: p.viewIntent,
-      // 报告只留判据面字段（容器详情/去重组等调试面用 --survey 实时打印·避免报告膨胀）
       chart: p.chart
         ? {
             svg: p.chart.svg,
@@ -1347,51 +1375,132 @@ async function main() {
       jsonTargets: p.jsonTargets || [],
     };
   }
+  return report;
+}
+
+function printSurvey(judged, report, cal, gaps) {
+  for (const j of judged) {
+    const p = report.pages[j.page];
+    const ds = p.dataSource || {};
+    console.log(
+      `${j.page} | ${j.family} | N=${ds.maxArrayLen || 0} ${ds.kind || 'none'} | ` +
+        `shapes=${(p.chart && p.chart.shapes) || 0} (all=${(p.chart && p.chart.shapesAll) || 0}) ` +
+        `pathPts=${(p.chart && p.chart.pathPoints) || 0} painted=${(p.chart && p.chart.canvasPainted) || 0} ` +
+        `containers=${(p.chart && p.chart.containers) || 0} rows=${(p.chart && p.chart.tableRows) || 0} ` +
+        `domItems=${(p.chart && p.chart.domItems) || 0} | kpi=${(p.kpi || []).length} | ` +
+        `${CRITERIA.map((c) => c + '=' + j.verdicts[c].status).join(' ')}` +
+        `${p.pageErrors.length ? ' | PE:' + p.pageErrors[0].slice(0, 60) : ''}`
+    );
+  }
+  console.log('V3 比例（best-fit S/L）分布：' + JSON.stringify(cal.ratio_percentiles) + `  n=${cal.ratio_n}`);
+  console.log('族分布：' + JSON.stringify(cal.families));
+  console.log('覆盖缺口（na）按判据：' + JSON.stringify(countBy(gaps, 'item')));
+}
+
+function printReportOutput(cfg, cal, cmp, baselineFile, baselineMissing, baselineProblems) {
+  console.log(`报告已写出：${relativeToRoot(cfg.json)} · 族分布 ${JSON.stringify(cal.families)}`);
+  console.log(
+    `V3 比例分位：p05=${cal.ratio_percentiles.p05} p10=${cal.ratio_percentiles.p10} ` +
+      `p25=${cal.ratio_percentiles.p25} p50=${cal.ratio_percentiles.p50} · n=${cal.ratio_n}`
+  );
+  for (const l of (cmp ? cmp.tighten : []).slice(0, 20)) {
+    console.log(`TIGHTEN 可收紧基线行：${l.page} :: ${l.item}（基线 ${l.prev}）`);
+  }
+  if (baselineMissing) {
+    console.log(`WARN 基线缺失：${relativeToRoot(baselineFile)}（--gate 会拒绝通过·先跑 --generate-baseline）`);
+  }
+  if (baselineProblems.length) {
+    console.log('WARN 基线格式问题：' + baselineProblems.slice(0, 5).join('; '));
+  }
+}
+
+// ---------------- 主流程 ----------------
+async function main() {
+  const cfg = parseArgs(process.argv.slice(2));
+  if (cfg.help) {
+    console.log(readText(__filename).split('\n').filter((l) => l.startsWith(' *   ') || l.startsWith(' * ##')).join('\n'));
+    return 0;
+  }
+  if (cfg.mode === 'self-test') return runSelfTest();
+  if (cfg.mode === 'judge') return runJudgeMode(cfg);
+
+  const pages = resolvePages(cfg);
+  if (!pages.length) {
+    console.log('FAIL 未扫到页面（site/data 下无匹配页·fail-closed）');
+    console.log(gateSummaryLine(GATE_NAME, 1));
+    return 1;
+  }
+
+  const baselineFile = baselinePath(cfg);
+
+  // 门禁模式：前置验证基线（fail-closed）
+  let baseMap = {};
+  let baselineProblems = [];
+  let baselineMissing = false;
+  if (cfg.mode === 'gate') {
+    const check = validateGateBaseline(baselineFile);
+    if (!check.ok) return check.exitCode;
+    baseMap = check.map;
+    baselineProblems = check.problems;
+  } else if (cfg.mode === 'report' || cfg.mode === 'survey') {
+    if (fs.existsSync(baselineFile)) {
+      const parsed = parseBaseline(readText(baselineFile));
+      baseMap = parsed.map;
+      baselineProblems = parsed.problems;
+    } else {
+      baselineMissing = true;
+    }
+  }
+
+  let cit = { why: 'skipped' };
+  if (!cfg.noCitability) {
+    cit = loadCitability();
+    if (cit.why !== 'ok') {
+      console.log(`WARN V5（第 28 门禁口径）不可用：${cit.why}（该判据全页记 na 并计入覆盖缺口）`);
+    }
+  }
+
+  const { probes, elapsed } = await runProbes(pages, cfg);
+  const citInfo = attachCitability(probes, cit);
+  const judged = probes.map((p) => judgeProbe(p, null));
+  const cal = calibration(probes);
+  const cmp = cfg.mode === 'generate-baseline' ? null : compareBaseline(judged, baseMap, null);
+
+  const census =
+    `族分布 ${JSON.stringify(cal.families)} · 有数据页 ${cal.pages_with_data}/${probes.length} · ` +
+    `V3 比例分位 p05=${cal.ratio_percentiles.p05} p25=${cal.ratio_percentiles.p25} p50=${cal.ratio_percentiles.p50}`;
+  const gaps = coverageGaps(judged);
+
+  if (cfg.mode === 'generate-baseline') {
+    const lines = baselineLines(judged, new Date().toISOString().slice(0, 10), census);
+    fs.mkdirSync(path.dirname(baselineFile), { recursive: true });
+    fs.writeFileSync(baselineFile, lines.join('\n') + '\n', 'utf8');
+    const frozenN = judged.reduce(
+      (a, j) => a + ITEMS.filter((i) => j.verdicts[i].status === 'fail').length,
+      0
+    );
+    console.log(
+      `基线已生成：${relativeToRoot(baselineFile)} · ${judged.length} 页 · ` +
+        `${judged.length * ITEMS.length} 行 · 冻结缺口 ${frozenN} 项 · ${census}`
+    );
+    console.log('判据缺口（na）：' + JSON.stringify(countBy(gaps, 'item')));
+    console.log(gateSummaryLine(GATE_NAME, frozenN));
+    return 0;
+  }
+
+  const report = buildReport(cfg, judged, probes, cal, citInfo, baselineFile, cmp, gaps, elapsed, baselineProblems);
 
   if (cfg.mode === 'survey') {
     if (cfg.jsonExplicit) writeJson(cfg.json, report);
-    for (const j of judged) {
-      const p = report.pages[j.page];
-      const ds = p.dataSource || {};
-      console.log(
-        `${j.page} | ${j.family} | N=${ds.maxArrayLen || 0} ${ds.kind || 'none'} | shapes=${(p.chart && p.chart.shapes) || 0} (all=${(p.chart && p.chart.shapesAll) || 0}) pathPts=${(p.chart && p.chart.pathPoints) || 0} painted=${(p.chart && p.chart.canvasPainted) || 0} containers=${(p.chart && p.chart.containers) || 0} rows=${(p.chart && p.chart.tableRows) || 0} domItems=${(p.chart && p.chart.domItems) || 0}` +
-          ` | kpi=${(p.kpi || []).length} | ${CRITERIA.map((c) => c + '=' + j.verdicts[c].status).join(' ')}${p.pageErrors.length ? ' | PE:' + p.pageErrors[0].slice(0, 60) : ''}`
-      );
-    }
-    console.log('V3 比例（best-fit S/L）分布：' + JSON.stringify(cal.ratio_percentiles) + `  n=${cal.ratio_n}`);
-    console.log('族分布：' + JSON.stringify(cal.families));
-    console.log('覆盖缺口（na）按判据：' + JSON.stringify(countBy(gaps, 'item')));
+    printSurvey(judged, report, cal, gaps);
   } else if (cfg.mode === 'report' || cfg.jsonExplicit) {
-    // 只在报告模式（或显式 --json）写报告：门禁/小样跑不得覆盖全量报告
     writeJson(cfg.json, report);
-    console.log(`报告已写出：${rel(cfg.json)} · 族分布 ${JSON.stringify(cal.families)}`);
-    console.log(
-      `V3 比例分位：p05=${cal.ratio_percentiles.p05} p10=${cal.ratio_percentiles.p10} p25=${cal.ratio_percentiles.p25} p50=${cal.ratio_percentiles.p50} · n=${cal.ratio_n}`
-    );
-    for (const l of (cmp ? cmp.tighten : []).slice(0, 20)) console.log(`TIGHTEN 可收紧基线行：${l.page} :: ${l.item}（基线 ${l.prev}）`);
-    if (baselineMissing) console.log(`WARN 基线缺失：${rel(baselineFile)}（--gate 会拒绝通过·先跑 --generate-baseline）`);
-    if (baselineProblems.length) console.log('WARN 基线格式问题：' + baselineProblems.slice(0, 5).join('; '));
+    printReportOutput(cfg, cal, cmp, baselineFile, baselineMissing, baselineProblems);
   }
 
-  if (cfg.mode === 'gate' && baselineMissing) {
-    console.log(`FAIL 基线缺失：${rel(baselineFile)} — refuse to pass（先跑 --generate-baseline）`);
-    console.log('---- 第 43 门禁 可视化数据断言：1 FAIL ----');
-    return 1;
-  }
-  if (cfg.mode === 'gate' && baselineProblems.length) {
-    for (const s of baselineProblems.slice(0, 10)) console.log('FAIL 基线不可解析：' + s);
-    console.log(`---- 第 43 门禁 可视化数据断言：${baselineProblems.length} FAIL ----`);
-    return 1;
-  }
   printSummary(judged, cmp, cfg, elapsed, cfg.mode);
   if (cfg.mode === 'gate') return cmp.exit;
   return 0;
-}
-
-function countBy(arr, key) {
-  const out = {};
-  for (const x of arr) out[x[key]] = (out[x[key]] || 0) + 1;
-  return out;
 }
 
 if (require.main === module) {
@@ -1401,9 +1510,20 @@ if (require.main === module) {
     })
     .catch((e) => {
       console.error('check_chart_values crashed: ' + ((e && e.stack) || e));
-      console.log('---- 第 43 门禁 可视化数据断言：1 FAIL ----');
+      console.log(gateSummaryLine(GATE_NAME, 1));
       process.exitCode = 1;
     });
 }
 
-module.exports = { judgeProbe, compareBaseline, parseBaseline, numEq, TH, ITEMS, CRITERIA, summarizeData, classifyFamily, discoverDataNames };
+module.exports = {
+  judgeProbe,
+  compareBaseline,
+  parseBaseline,
+  numEq,
+  TH,
+  ITEMS,
+  CRITERIA,
+  summarizeData,
+  classifyFamily,
+  discoverDataNames,
+};

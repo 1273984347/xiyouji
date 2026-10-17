@@ -45,6 +45,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 CI_YML = ROOT / ".github" / "workflows" / "ci.yml"
 VERIFY_PY = ROOT / "scripts" / "verify_delivery.py"
 CHART_JS = ROOT / "scripts" / "check_chart_values.js"
+PLAYWRIGHT_UTILS_JS = ROOT / "scripts" / "lib" / "playwright_gate_utils.js"
 AGENT_WEB_PKG = ROOT / "xiyouji-agent-web" / "package.json"
 
 
@@ -109,14 +110,22 @@ def test_wiring_targets_exist():
 # ---------------------------------------------------------------------------
 
 def test_gate43_hard_depends_on_playwright():
-    """前提事实：第 43 门禁脚本确实 require('playwright')（判据前提，非接线本身）。
+    """前提事实：第 43 门禁（经 lib 公共模块）确实 require('playwright')（判据前提，非接线本身）。
 
-    若某天它改成可选依赖，本断言会红并提示同步更新 CI 需求——防止
-    「脚本不再需要浏览器，但 CI 仍装着」或反向的静默漂移。
+    W775 重构后 playwright 依赖改为传递链：check_chart_values.js →
+    scripts/lib/playwright_gate_utils.js（惰性 require·仅浏览器模式加载，
+    --self-test/--judge 纯函数模式不加载浏览器）。本断言守护传递链两环——
+    任一环断裂即红，提示同步复核 ci.yml 是否需要装浏览器：防「脚本不再需要
+    浏览器，但 CI 仍装着」或反向的静默漂移。
     """
-    src = CHART_JS.read_text(encoding="utf-8")
-    assert "require('playwright')" in src or 'require("playwright")' in src, (
-        "check_chart_values.js 不再硬依赖 playwright——请同步复核 ci.yml 是否需要装浏览器")
+    gate_src = CHART_JS.read_text(encoding="utf-8")
+    assert "playwright_gate_utils" in gate_src, (
+        "check_chart_values.js 不再引用 lib/playwright_gate_utils——playwright 依赖链第一环断裂")
+    assert PLAYWRIGHT_UTILS_JS.exists(), (
+        "scripts/lib/playwright_gate_utils.js 缺失——playwright 依赖链第二环断裂（W5 同款 fail-closed）")
+    utils_src = PLAYWRIGHT_UTILS_JS.read_text(encoding="utf-8")
+    assert "require('playwright')" in utils_src or 'require("playwright")' in utils_src, (
+        "playwright_gate_utils.js 不再硬依赖 playwright——请同步复核 ci.yml 是否需要装浏览器")
 
 
 def test_verify_delivery_job_installs_playwright():
