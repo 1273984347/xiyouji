@@ -11,6 +11,18 @@
 ---
 
 
+## W776 评审后续行动落地批（2026-10-17）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| pytest.ini | W776 | 覆盖率口径决策注释（实证 18%/24%/+82%·不引 --cov 门禁·替代=资产清单） |
+| scripts/requirements.txt | W776 | 移除 fonttools/brotli 死依赖（全仓零 import 实证·指南改按需安装） |
+| scripts/font-subset-guide.md | W776 | §3.1 注记：fonttools/brotli 按需安装（pyftsubset 回退路径） |
+| HANDOVER.md | W776 | Backlog 新增 BL-26/27/28（内容质量方差/工程 overhead/单点故障·均不设工程关闭项） |
+| docs/10-方法论沉淀/markdown写作规范.md | W776 | §4 增 5 条 AI 内容生产特有反模式 |
+| docs/11-方案报告/外部评审回应与逐项核查报告-2026-10-17.md | W776 | §7 四项行动状态更新为已完成（含 A-02 升级处置留痕） |
+| docs/00-导读/W批次编号对账表.md | W776 | W776 认领登记 |
+
 ## W775 JS 门禁重构落地批（2026-10-17）
 
 | 文件 | W | 说明 |

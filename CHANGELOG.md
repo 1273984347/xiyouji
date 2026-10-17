@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W775），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W776），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,16 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W776（2026-10-17）：评审后续行动落地批
+> **来源**：用户令「做完报告 §7」——W775《外部评审回应与逐项核查报告》§7 四项后续行动（A-01~A-04）正式立项执行。动工前 preflight PASS（W776 认领·与在途批次零交集）。
+> - **A-01 覆盖率口径决策（实证驱动）**：pytest-cov 一次性实测——全 `scripts/` TOTAL **18%**（23,762 语句）·门禁层（check_* + utils + verify_delivery/docs_index/stats）**24%**（4,647 语句）·计时开销 **+82%**（45s→82s·pytest 602 passed 不变）。三条结构性失真证据：① 门禁验证主路径是**子进程**（verify_delivery 以 subprocess 跑 49 段、测试以 subprocess 调 JS 门禁），coverage.py 进程本地跨进程失明；② **双轨制**——浏览器 E2E/视觉套件按设计排除于 pytest（pytest.ini W401 注释），由 CI 独立 job 覆盖；③ 23k 语句多数是 34 类数据生成器脚本，其正确性由输出级门禁与 self-test 负样本保证。**决策**：不引入 CI 覆盖率门禁（阈值门禁在内容型项目诱发凑数），决策全文与实证基线写入 pytest.ini 注释，替代呈现=可机器核验资产清单（602 passed + E2E 三套件 + verify 49 段）。
+> - **A-02 死依赖移除（由「精确钉版」升级）**：实证推翻原计划前提——全仓（含 `archive/`）**零 import** fonttools/brotli：W564 字体子集化的一次性工具已归档（archive/scripts/batches/misc/_check_font_coverage.py 亦不 import）、packaging/xiyouji-analysis 无依赖声明、Makefile 无引用；两条 `>=` 区间条目为纯死依赖。**处置**：从 `scripts/requirements.txt` 移除两行（消除供应链与 pip-audit 无效扫描面），`scripts/font-subset-guide.md` §3.1 改为按需安装注记（pyftsubset 回退路径可用性保留）；原「精确钉版」计划废止并在报告 §7 留痕。
+> - **A-03 机制层风险登记**：`HANDOVER.md` Backlog 新增 BL-26（内容质量方差·AI 平庸化→写作规范 §4 五条反模式 + 对抗性审查批持续抽检）/ BL-27（工程 overhead 可持续性·断点可恢复性是主动权衡）/ BL-28（单点故障·无解已缓解到可转让），三条均标注**不设工程关闭项**；`docs/10-方法论沉淀/markdown写作规范.md` §4 新增 5 条「AI 内容生产特有」反模式（情节复述+主题套话/平庸安全结论/情感空转/流畅权威体/引文真推论假）。
+> - **A-04 评审原文归档**：评审原文 235 行（原 txt L21705–L21939·三轮完整）逐字节提取至 `tmpe/review-w776/review-original.md` + 同目录 README（来源/提取方式/三轮结构与报告章节映射）；tmpe 为 gitignored 工地层不随仓库发布，报告为唯一权威回应。
+> - **验证（全绿）**：pytest **602 passed / 3 skipped / 0 failed**；verify_delivery 全量 **49 段 0 FAIL**；ruff 0；docs_index --check exit 0。
+> - **状态**：已落地（本地全绿）；级联+提交+推送按批次流程执行（main 合并留待用户决策）。
+> - **文件**：pytest.ini、scripts/requirements.txt、scripts/font-subset-guide.md、HANDOVER.md、docs/10-方法论沉淀/markdown写作规范.md、docs/11-方案报告/外部评审回应与逐项核查报告-2026-10-17.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w776_spec.json、scripts/output/_cascade_files_W776.txt。
 
 ### W775（2026-10-17）：JS 门禁重构落地批
 > **来源**：用户转交桌面重构产出（外部会话的 JS 门禁重构全文 + 5 条「需你裁决的发现」+ 两轮外部评审文本），指令三项并做——落地重构、裁决 5 条、回应评审。动工前 preflight PASS（W775 认领·与在途 W750/W764 零交集）。
