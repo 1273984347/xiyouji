@@ -350,6 +350,40 @@ jobs:
       - name: Run verify_delivery.py
         run: python scripts/verify_delivery.py
 
+  e2e-interaction:
+    name: E2E Interaction (test_site_quality.js)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: scripts/package-lock.json
+
+      # W773（T-02 缺陷①）：8 个 Playwright JS E2E 套件此前零 workflow 接线——
+      # 本地绿/CI 无运行两侧观察不一致，W674 遗留的 K11 页面回归（reduce 规则误置）
+      # 因此潜伏至本批才被首跑暴露。本 job 首波接 test_site_quality.js：
+      # 22 项 file:// 断言·无 API_PORT 在线依赖·require 已按 paths 解析 scripts/node_modules。
+      # 按计划 R-03/R-04 排除：test_graph/test_newfeatures 需 Express 服务（API_PORT）、
+      # test_w266 依赖未声明的 @playwright/test——留待独立接线任务。
+      - name: Cache Playwright browsers (W773·复用 W421 模式)
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('scripts/package-lock.json') }}
+
+      - name: Install scripts deps + Playwright (E2E 运行条件·W773)
+        run: |
+          npm ci --prefix scripts
+          cd scripts
+          npx playwright install --with-deps chromium
+
+      - name: Run E2E site quality suite
+        run: node tests/e2e/test_site_quality.js
+
   agent-web-build:
     name: Agent Web Build (xiyouji-agent-web)
     runs-on: ubuntu-latest

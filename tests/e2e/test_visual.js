@@ -4,8 +4,7 @@
  *
  * 对 10 个关键页面在 desktop viewport 下截图，建立视觉基线并对比变化。
  * - 首次运行或 --update-baseline：生成 baseline 截图
- * - 默认运行：截图 + 与 baseline 对比文件大小差异（D3 力导向图动画导致
- *   像素级 diff 误报率高，改用文件大小差异作为粗略回归指标）
+ * - 默认运行：截图 + 与 baseline 像素级对比（pngjs + pixelmatch）
  *
  * 关键页面（W236-E 由 5 扩充为 10）：
  *   1. dashboard.html
@@ -29,13 +28,36 @@
  *   1 = 有页面视觉差异超过阈值
  *   2 = 脚本错误
  *
- * 阈值：
- *   --threshold 0.15  # 文件大小差异比例阈值（默认 15%）
+ * 判据（W773/T-02 PR-B 升级·原「文件大小 ±15%」判据退役）：
+ *   W204 头注自述「像素级 diff 误报率高，改用文件大小差异作为粗略回归指标」——
+ *   该判据双向失效：压缩率变化可致字节差异大而画面相同（假阳性·ASM-06 实测
+ *   4/10 超 ±15% 部分源于此），画面实质变化时字节亦可能接近（假阴性）。
+ *   新判据 = pngjs 解码 + pixelmatch 逐像素比对：
+ *     diffRatio = diffPixels / totalPixels ≤ --pixel-threshold（默认 0.5%）
+ *     宽/高不一致直接判失败（页面结构回归的确定性信号）
+ *     文件大小差异降级为信息量输出（--threshold 保留·仅打印不判定）
+ *   抖动防护（R-02·力导向模拟/一次性演出动画时序抖动）：截图前稳定轮询——
+ *   间隔 --settle-step-ms（默认 400）连拍两帧，字节相同视为 settled
+ *   （至多 --settle-rounds 轮·默认 3），取最后一帧参与判定。
  */
 
-const { chromium } = require('playwright');
-const fs = require('fs');
 const path = require('path');
+const fs = require('fs');
+// tests/e2e 无本地 node_modules——依赖安装在 scripts/（与 test_site_quality.js 同款解析）
+const SCRIPTS_DIR = path.join(__dirname, '..', '..', 'scripts');
+function requireFromScripts(name) {
+  try {
+    return require(name);
+  } catch (e) {
+    return require(require.resolve(name, { paths: [SCRIPTS_DIR] }));
+  }
+}
+const { chromium } = requireFromScripts('playwright');
+const { PNG } = requireFromScripts('pngjs');
+const pixelmatch = requireFromScripts('pixelmatch');
+
+// pixelmatch 逐像素色差阈值（0-1·YIQ 距离·默认 0.1）——抗亚像素/抗锯齿级抖动
+const PIXEL_MATCH_THRESHOLD = 0.1;
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const SITE_DIR = path.join(ROOT, 'site');
@@ -66,7 +88,10 @@ function parseArgs(argv) {
   const config = {
     updateBaseline: false,
     pageFilter: null,
-    threshold: 0.15,
+    threshold: 0.15,        // 文件大小差异（仅信息量输出·不判定）
+    pixelThreshold: 0.005,  // 像素差异占比阈值（判定判据·默认 0.5%）
+    settleRounds: 3,        // 稳定轮询轮数（两帧字节相同即 settled）
+    settleStepMs: 400,      // 稳定轮询间隔
     timeout: 15000,
   };
   for (let i = 0; i < args.length; i++) {
@@ -77,6 +102,15 @@ function parseArgs(argv) {
       i++;
     } else if (args[i] === '--threshold' && args[i + 1]) {
       config.threshold = parseFloat(args[i + 1]);
+      i++;
+    } else if (args[i] === '--pixel-threshold' && args[i + 1]) {
+      config.pixelThreshold = parseFloat(args[i + 1]);
+      i++;
+    } else if (args[i] === '--settle-rounds' && args[i + 1]) {
+      config.settleRounds = parseInt(args[i + 1], 10);
+      i++;
+    } else if (args[i] === '--settle-step-ms' && args[i + 1]) {
+      config.settleStepMs = parseInt(args[i + 1], 10);
       i++;
     } else if (args[i] === '--timeout' && args[i + 1]) {
       config.timeout = parseInt(args[i + 1], 10);
@@ -90,7 +124,7 @@ function ensureDir(dir) {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 }
 
-async function captureScreenshot(context, pageInfo, timeout) {
+async function captureScreenshot(context, pageInfo, timeout, settle) {
   const page = await context.newPage();
   const consoleErrors = [];
   page.on('console', msg => {
@@ -107,7 +141,15 @@ async function captureScreenshot(context, pageInfo, timeout) {
     // 等待 D3 渲染 + 力导向图稳定
     await page.waitForTimeout(2000);
 
-    const buf = await page.screenshot({ fullPage: true, type: 'png' });
+    // W773 稳定轮询（R-02）：连拍两帧字节相同视为 settled，兜住力导向模拟/
+    // 一次性演出动画的时序抖动；至多 settleRounds 轮，取最后一帧
+    let buf = null;
+    for (let round = 0; round < settle.settleRounds; round++) {
+      const shot = await page.screenshot({ fullPage: true, type: 'png' });
+      if (buf && Buffer.compare(buf, shot) === 0) { buf = shot; break; }
+      buf = shot;
+      if (round < settle.settleRounds - 1) await page.waitForTimeout(settle.settleStepMs);
+    }
     return { buffer: buf, consoleErrors };
   } finally {
     // P1 修复：确保所有异常路径下 page 句柄都被释放
@@ -132,7 +174,7 @@ async function main() {
   console.log(`\n=== 视觉回归测试 ===`);
   console.log(`模式: ${config.updateBaseline ? '更新 baseline' : '对比 baseline'}`);
   console.log(`页面: ${filtered.length} 个`);
-  console.log(`阈值: 文件大小差异 ${(config.threshold * 100).toFixed(1)}%\n`);
+  console.log(`判据: 像素差异 ≤ ${(config.pixelThreshold * 100).toFixed(2)}%（文件大小差异 ${(config.threshold * 100).toFixed(1)}% 仅信息量）\n`);
 
   const browser = await chromium.launch({ headless: true });
   try {
@@ -150,7 +192,7 @@ async function main() {
       const baselinePath = path.join(BASELINE_DIR, `${pageInfo.name}.png`);
 
       try {
-        const { buffer, consoleErrors } = await captureScreenshot(context, pageInfo, config.timeout);
+        const { buffer, consoleErrors } = await captureScreenshot(context, pageInfo, config.timeout, config);
 
         if (config.updateBaseline) {
           fs.writeFileSync(baselinePath, buffer);
@@ -166,24 +208,43 @@ async function main() {
             continue;
           }
 
-          const baselineSize = fs.statSync(baselinePath).size;
+          const baselineBuf = fs.readFileSync(baselinePath);
+          const baselineSize = baselineBuf.length;
           const currentSize = buffer.length;
-          const diffRatio = Math.abs(currentSize - baselineSize) / baselineSize;
-          const passed = diffRatio <= config.threshold;
-          const status = passed ? '✓' : '✗';
-          const diffPct = (diffRatio * 100).toFixed(2);
+          const sizeRatio = Math.abs(currentSize - baselineSize) / baselineSize;
 
-          console.log(`${num} ${status} ${pageInfo.name} 大小差异 ${diffPct}% (baseline=${(baselineSize / 1024).toFixed(1)}KB / current=${(currentSize / 1024).toFixed(1)}KB)`);
+          // W773 像素级判定：pngjs 解码 + pixelmatch 逐像素比对
+          const baselinePng = PNG.sync.read(baselineBuf);
+          const currentPng = PNG.sync.read(buffer);
+          if (baselinePng.width !== currentPng.width || baselinePng.height !== currentPng.height) {
+            failedCount++;
+            console.log(`${num} ✗ ${pageInfo.name} 尺寸不一致 baseline=${baselinePng.width}x${baselinePng.height} current=${currentPng.width}x${currentPng.height}`);
+            results.push({ name: pageInfo.name, status: 'failed', dimensionMismatch: true });
+            continue;
+          }
+          const totalPixels = baselinePng.width * baselinePng.height;
+          const diffPixels = pixelmatch(baselinePng.data, currentPng.data, null,
+            baselinePng.width, baselinePng.height, { threshold: PIXEL_MATCH_THRESHOLD });
+          const diffRatio = diffPixels / totalPixels;
+          const passed = diffRatio <= config.pixelThreshold;
+          const status = passed ? '✓' : '✗';
+
+          console.log(`${num} ${status} ${pageInfo.name} 像素差异 ${(diffRatio * 100).toFixed(3)}% ` +
+            `(${diffPixels}/${totalPixels} px·阈值 ${(config.pixelThreshold * 100).toFixed(2)}%·` +
+            `文件大小差异 ${(sizeRatio * 100).toFixed(1)}% 仅参考)`);
 
           if (!passed) {
             failedCount++;
-            console.log(`      阈值 ${(config.threshold * 100).toFixed(1)}% 超标，请人工对比: tests/e2e/baseline/${pageInfo.name}.png vs tests/e2e/current/${pageInfo.name}.png`);
+            console.log(`      像素差异超阈值，请人工对比: tests/e2e/baseline/${pageInfo.name}.png vs tests/e2e/current/${pageInfo.name}.png`);
           }
           results.push({
             name: pageInfo.name,
             status: passed ? 'passed' : 'failed',
             baselineSize,
             currentSize,
+            sizeRatio,
+            diffPixels,
+            totalPixels,
             diffRatio,
           });
         }
