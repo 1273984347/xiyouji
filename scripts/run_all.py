@@ -28,6 +28,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = ROOT / "scripts"
 
+# 单脚本执行超时（秒）；W536 起沿用 300，改此值即全局生效
+SCRIPT_TIMEOUT_SECONDS = 300
+
 
 def discover_scripts() -> list[tuple[str, Path]]:
     """扫描 A_*/ ~ AH_*/ 目录，返回 [(类别名, 脚本路径)]。
@@ -57,61 +60,104 @@ def run_one(script_path: Path) -> tuple[bool, str]:
             cwd=str(SCRIPTS),
             capture_output=True,
             text=True,
-            timeout=300,
+            timeout=SCRIPT_TIMEOUT_SECONDS,
         )
         ok = r.returncode == 0
         tail = (r.stdout + r.stderr).strip().split("\n")[-1] if (r.stdout or r.stderr) else ""
         return ok, tail
     except subprocess.TimeoutExpired:
-        return False, "[TIMEOUT >300s]"
+        return False, f"[TIMEOUT >{SCRIPT_TIMEOUT_SECONDS}s]"
     except Exception as e:
         return False, f"[EXC] {e}"
 
 
-def main():
-    parser = argparse.ArgumentParser(description="批量运行 A-AH 34 类分析脚本")
-    parser.add_argument("--dry-run", action="store_true", help="仅列出会跑的脚本")
-    parser.add_argument("--only", default="", help="仅跑指定类别（逗号分隔，如 A,B,F）")
-    parser.add_argument("--skip", default="", help="跳过指定类别（逗号分隔）")
-    args = parser.parse_args()
+def _parse_category_filter(raw: str) -> set[str]:
+    """把 `--only`/`--skip` 的逗号分隔字符串解析为归一化类别集合。
 
-    scripts = discover_scripts()
-    if args.only:
-        only_set = {s.strip().upper() for s in args.only.split(",")}
+    大小写归一化为大写；空串与空白片段忽略。原实现未过滤空串，
+    但空串不会命中任何类别，结果等价。
+    """
+    return {s.strip().upper() for s in raw.split(",") if s.strip()}
+
+
+def _filter_scripts(
+    scripts: list[tuple[str, Path]],
+    only: str,
+    skip: str,
+) -> list[tuple[str, Path]]:
+    """按 --only / --skip 过滤脚本列表。"""
+    if only:
+        only_set = _parse_category_filter(only)
         scripts = [(c, p) for c, p in scripts if c.upper() in only_set]
-    if args.skip:
-        skip_set = {s.strip().upper() for s in args.skip.split(",")}
+    if skip:
+        skip_set = _parse_category_filter(skip)
         scripts = [(c, p) for c, p in scripts if c.upper() not in skip_set]
+    return scripts
 
-    print(f"==> 发现 {len(scripts)} 个分析脚本")
-    if args.dry_run:
-        for c, p in scripts:
-            print(f"  [{c}] {p.relative_to(ROOT)}")
-        return
 
+def _print_dry_run(scripts: list[tuple[str, Path]]) -> None:
+    """dry-run 分支：仅打印将执行的脚本清单。"""
+    for c, p in scripts:
+        print(f"  [{c}] {p.relative_to(ROOT)}")
+
+
+def _execute_scripts(
+    scripts: list[tuple[str, Path]],
+) -> tuple[int, list[tuple[str, Path, str]]]:
+    """顺序执行全部脚本。
+
+    返回：
+        (PASS 数, 失败列表)，失败列表元素为 (类别名, 相对路径, 输出尾部)。
+    """
+    total = len(scripts)
     pass_count = 0
-    fail_count = 0
-    failures = []
+    failures: list[tuple[str, Path, str]] = []
+
     for i, (cat, path) in enumerate(scripts, 1):
         rel = path.relative_to(ROOT)
-        print(f"[{i:02d}/{len(scripts)}] [{cat}] {rel} ...", end=" ", flush=True)
+        print(f"[{i:02d}/{total}] [{cat}] {rel} ...", end=" ", flush=True)
         ok, tail = run_one(path)
         if ok:
             print("[OK]")
             pass_count += 1
         else:
             print(f"[FAIL] {tail}")
-            fail_count += 1
             failures.append((cat, rel, tail))
 
+    return pass_count, failures
+
+
+def _print_summary(
+    pass_count: int,
+    failures: list[tuple[str, Path, str]],
+    total: int,
+) -> None:
+    """打印 PASS/FAIL 汇总行与失败明细。"""
     print("\n" + "=" * 60)
-    print(f"汇总：{pass_count} PASS / {fail_count} FAIL / {len(scripts)} 总计")
+    print(f"汇总：{pass_count} PASS / {len(failures)} FAIL / {total} 总计")
     if failures:
         print("\n失败列表：")
         for cat, rel, tail in failures:
             print(f"  [{cat}] {rel}  ->  {tail}")
-        return 1
-    return 0
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="批量运行 A-AH 34 类分析脚本")
+    parser.add_argument("--dry-run", action="store_true", help="仅列出会跑的脚本")
+    parser.add_argument("--only", default="", help="仅跑指定类别（逗号分隔，如 A,B,F）")
+    parser.add_argument("--skip", default="", help="跳过指定类别（逗号分隔）")
+    args = parser.parse_args()
+
+    scripts = _filter_scripts(discover_scripts(), args.only, args.skip)
+
+    print(f"==> 发现 {len(scripts)} 个分析脚本")
+    if args.dry_run:
+        _print_dry_run(scripts)
+        return 0
+
+    pass_count, failures = _execute_scripts(scripts)
+    _print_summary(pass_count, failures, len(scripts))
+    return 1 if failures else 0
 
 
 if __name__ == "__main__":
