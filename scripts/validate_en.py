@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
-"""Validate an EN viz page: chrome CJK must be whitelist-only; script CJK must be 0.
+"""Validate an EN viz page: chrome CJK must be whitelist-only; script CJK must be 0;
+document <html lang> must be en (W773/T-02 WS3·WCAG 3.1.1 Language of Page).
 
 用法：
   python scripts/validate_en.py <path-to-en-html>     # 单页（既有形态·输出格式不变）
   python scripts/validate_en.py --all [root]          # 全站批量（默认 site/en·W768 接线用）
 
 退出码：0 = 通过；1 = 违规（--all 模式下任一页违规即 1）。
+
+检查项：
+  1. script CJK = 0（内联脚本字面量·语料索引豁免区除外）
+  2. chrome CJK 白名单外 = 0（品牌戳/「中文」回链除外）
+  3. 文档 lang 声明 = en（W773 新增：8 页曾漏改 lang="zh-CN"——读屏语音/SEO/
+     chart-a11y 摘要 i18n 全错；仅查文档 <html> 标签·指向中文版的回链
+     lang="zh-CN" 语义正确不误伤）
 
 豁免区（W768 口径）：`/* SEARCH_INDEX:BEGIN */ … /* SEARCH_INDEX:END */` 包裹的全文检索
 语料索引为「引用语料区」——与第 20 门禁「原文全文」豁免区同类，不计入 script CJK
@@ -87,6 +95,15 @@ def check_page(path):
         out.append("CHROME CJK VIOLATION (%d):" % len(bad))
         for t in bad[:40]:
             out.append("  CHROME  " + t)
+        return 1, "\n".join(out)
+    # 3) 文档 lang 声明（W773/T-02 WS3）：英文页必须 <html lang="en...">
+    #    （只查文档头部 <html> 标签·指向中文版的回链 lang="zh-CN" 语义正确不误伤）
+    m = re.search(r"<html\b[^>]*\blang=\"([^\"]+)\"", html[:2048])
+    if not m:
+        out.append("HTML LANG MISSING: 文档头部未找到 <html lang=...> 声明")
+        return 1, "\n".join(out)
+    if not m.group(1).lower().startswith("en"):
+        out.append("HTML LANG VIOLATION: <html lang=\"%s\">（英文页须为 en·WCAG 3.1.1）" % m.group(1))
         return 1, "\n".join(out)
     out.append("OK  chrome=whitelist-only  script=0  (%s)" % os.path.basename(path))
     return 0, "\n".join(out)
