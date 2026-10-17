@@ -1209,9 +1209,14 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-        /* W674 WP-3.13④：一次性演出动画（wordFloat/bladeCut/crackOpen 终态 opacity:0）
-       在 reduce 下不播放——0.01ms 快进仍会停在「文字消失」终态，直接回到基础可见态 */
+/* W674 WP-3.13④：一次性演出动画（wordFloat/bladeCut/crackOpen 终态 opacity:0）
+   在 reduce 下不播放——0.01ms 快进仍会停在「文字消失」终态，直接回到基础可见态。
+   W773 修复：本规则原误置于 reduce 媒体查询之外（承 W674 遗留·E2E 接线首跑实证
+   computed animation-name 恒 'none'·演出动画对全部用户静默失效），
+   移入查询内恢复「默认播放·reduce 停播」设计语义。 */
+@media (prefers-reduced-motion: reduce) {
     .scalpel-word, .scalpel-blade, .text-crack { animation: none !important; }
+}
 </style>
 <style>
         /* e-track-exempt: chart-data-colors 5 处 */

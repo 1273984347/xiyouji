@@ -31,6 +31,9 @@ r"""W757 专项测试：CI 工作流接线完整性（门禁「建置即绿」�
   W3 第 43 门禁仍挂在 verify_delivery（防「删门禁代替修门禁」的假修复）
   W4 三条接线各自可定位（失败时报出缺失项，不静默通过）
   W5 反自检：断言面对真实文件生效（文件不存在即 FAIL，不许静默跳过）
+  W6 e2e-interaction job 实际执行 `node tests/e2e/` 套件 + 具备 Playwright
+     运行条件（T-02/W773 缺陷①：8 个 JS E2E 套件零 workflow 接线——W674 遗留的
+     K11 页面回归因此潜伏到本批接线首跑才暴露，见 ci.yml 内注释）
 """
 
 import re
@@ -168,6 +171,39 @@ def test_agent_web_package_declares_server_tests():
     assert script, "xiyouji-agent-web/package.json 缺少 test:server 脚本（接线目标已消失）"
     for f in ("tools.test.ts", "audit.test.ts", "citationGuard.test.ts"):
         assert f in script, "test:server 未覆盖 %s（安全单测面收窄）" % f
+
+
+# ---------------------------------------------------------------------------
+# W6（T-02·W773）：JS E2E 套件接线（缺陷①——8 个套件零 workflow 调用）
+# ---------------------------------------------------------------------------
+
+def test_e2e_interaction_job_runs_js_suite():
+    """W6：e2e-interaction job 必须**实际执行** `node tests/e2e/` 套件。
+
+    判据锚 run: 块（同 W1/W2 理由）：字符串存在性会被步骤名/注释骗过。
+    接受 `node ../tests/e2e/`（scripts/ cwd 形态）与 `node tests/e2e/`
+    （仓库根 cwd 形态）两种写法。
+    """
+    body = _job_body(_ci_text(), "e2e-interaction")
+    cmds = _run_blocks(body)
+    assert re.search(r"node\s+(?:\.\./)?tests/e2e/", cmds), (
+        "e2e-interaction job 未在 `run:` 中执行 node tests/e2e/ 套件——"
+        "8 个 Playwright JS E2E 套件零接线缺陷复燃（T-02 缺陷①·W773）")
+
+
+def test_e2e_interaction_job_has_playwright_runtime():
+    """W6 辅助：该 job 必须具备 Playwright 运行条件（依赖安装 + 浏览器安装）。
+
+    入口即使写对，缺依赖/缺浏览器仍会红（W757 D1 同族：第 43 门禁因 CI 未装
+    Playwright 而「建置即红」）。
+    """
+    body = _job_body(_ci_text(), "e2e-interaction")
+    cmds = _run_blocks(body)
+    assert "npm ci --prefix scripts" in cmds or "npm install" in cmds, (
+        "e2e-interaction job 缺少 scripts/ 的 npm 依赖安装——"
+        "playwright 包来自 scripts/package.json（W757 D1 同族）")
+    assert "playwright install" in cmds, (
+        "e2e-interaction job 缺少 `npx playwright install`——无浏览器套件必红")
 
 
 # ---------------------------------------------------------------------------
