@@ -15,35 +15,48 @@ character_network.py — 《西游记》人物共现网络
 import json
 import sys
 from collections import defaultdict
+from itertools import combinations
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from utils.aliases import CHARACTER_ALIASES as DEFAULT_CHARACTERS
-from utils.analyzer_base import run_analyzer
+from utils.aliases import CHARACTER_ALIASES as DEFAULT_CHARACTERS  # noqa: I001
+from utils.analyzer_base import run_analyzer  # noqa: I001
 
 
 def find_characters_in_text(text: str, characters: dict) -> list[str]:
     """找出文本中出现的人物（标准化名称）。"""
-    present = []
-    for canonical, aliases in characters.items():
-        if any(alias in text for alias in aliases):
-            present.append(canonical)
-    return present
+    return [
+        canonical
+        for canonical, aliases in characters.items()
+        if any(alias in text for alias in aliases)
+    ]
+
+
+def _accumulate_chapter(
+    present: list[str],
+    edges: defaultdict,
+    node_counts: defaultdict,
+) -> None:
+    """累积单回节点计数与两两共现边。
+
+    两两组合使用 itertools.combinations 替代原嵌套循环，
+    生成顺序一致；pair 键统一为元组，因 present 已按人物表顺序排序，
+    与原始 `tuple(sorted([...]))` 结果等价。
+    """
+    for c in present:
+        node_counts[c] += 1
+    for c1, c2 in combinations(present, 2):
+        edges[tuple(sorted((c1, c2)))] += 1
 
 
 def build_network(chapters: list, characters: dict) -> dict:
     """构建共现网络：节点 + 边。"""
-    edges = defaultdict(int)
-    node_counts = defaultdict(int)
+    edges: defaultdict = defaultdict(int)
+    node_counts: defaultdict = defaultdict(int)
 
     for _, text in chapters:
         present = find_characters_in_text(text, characters)
-        for c in present:
-            node_counts[c] += 1
-        for i in range(len(present)):
-            for j in range(i + 1, len(present)):
-                pair = tuple(sorted([present[i], present[j]]))
-                edges[pair] += 1
+        _accumulate_chapter(present, edges, node_counts)
 
     return {
         "nodes": [
