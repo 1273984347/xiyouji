@@ -137,30 +137,13 @@ def _find_canonical(alias: str, characters: dict) -> str | None:
     return None
 
 
-def find_dialogues_in_text(
-    text: str,
-    alias_patterns: list,
-    characters: dict,
-) -> list[dict]:
-    """在文本中找出所有引语并归属到人物。
+def _build_dialogue_patterns(alias_alternation: str) -> tuple["re.Pattern", "re.Pattern"]:
+    """编译标准/倒装两套引语正则（拆分自 find_dialogues_in_text·W802）。
 
-    引语模式：
-      1. 标准模式：X (副词)? 道/曰/言/云 (：)? "..."  → "行者笑道：..."
-      2. 倒装模式："..." ，X (副词)? 道/曰/言/云        → "...，" 行者道。
-
-    返回 [{speaker, alias_used, quote, pattern, position, quote_length}, ...]
+    - 标准：别名 + middle? + 道类动词 + 可选冒号 + 引号内容（middle 非贪婪，
+      覆盖「口中嚷」「却又对唐僧」「笑」「大怒」等中间字符）；
+    - 倒装：引号内容 + ≤3 个标点 + 别名 + middle? + 道类动词（防跨句误匹配）。
     """
-    dialogues = []
-
-    # 构建所有别名的统一 alternation（按长度降序避免子串冲突）
-    all_aliases = set()
-    for aliases in characters.values():
-        all_aliases.update(aliases)
-    sorted_all = sorted(all_aliases, key=len, reverse=True)
-    alias_alternation = "|".join(re.escape(a) for a in sorted_all)
-
-    # 标准模式正则：别名 + middle? + 道类动词 + 可选冒号 + 引号内容
-    # middle 非贪婪，覆盖 "口中嚷"/"却又对唐僧"/"笑"/"大怒" 等中间字符
     standard_pattern = re.compile(
         r"(?P<alias>" + alias_alternation + r")"
         + MIDDLE_PATTERN
@@ -171,9 +154,25 @@ def find_dialogues_in_text(
         + r"(?P<quote>[^\"" + chr(0x201D) + chr(0x2019) + r"]+)"
         + r"(?P<q_close>[\"" + chr(0x201D) + chr(0x2019) + r"])"
     )
+    inverted_pattern = re.compile(
+        r"(?P<q_open>[\"" + chr(0x201C) + chr(0x2018) + r"])"
+        + r"(?P<quote>[^\"" + chr(0x201D) + chr(0x2019) + r"]{2,})"
+        + r"(?P<q_close>[\"" + chr(0x201D) + chr(0x2019) + r"])"
+        + r"[，。！？\s]{0,3}"
+        + r"(?P<alias>" + alias_alternation + r")"
+        + MIDDLE_PATTERN
+        + SPEECH_VERB_PATTERN
+    )
+    return standard_pattern, inverted_pattern
 
+
+def _collect_standard_dialogues(
+    text: str, pattern: "re.Pattern", characters: dict
+) -> tuple[list[dict], set[int]]:
+    """标准模式扫描：返回 (引语列表, 引语起始位置集)——位置集供倒装去重。"""
+    dialogues = []
     standard_positions = set()
-    for m in standard_pattern.finditer(text):
+    for m in pattern.finditer(text):
         alias = m.group("alias")
         speaker = _find_canonical(alias, characters)
         if speaker is None:
@@ -189,23 +188,19 @@ def find_dialogues_in_text(
             "position": m.start(),
             "quote_length": len(m.group("quote")),
         })
-        # 记录引语开始位置（q_open 的 start），用于 inverted 模式去重
         standard_positions.add(m.start("q_open"))
+    return dialogues, standard_positions
 
-    # 倒装模式正则：引号内容 + 标点 + 别名 + middle? + 道类动词
-    # 限制：引号结束和 alias 之间最多 3 个标点字符，避免跨句误匹配
-    inverted_pattern = re.compile(
-        r"(?P<q_open>[\"" + chr(0x201C) + chr(0x2018) + r"])"
-        + r"(?P<quote>[^\"" + chr(0x201D) + chr(0x2019) + r"]{2,})"
-        + r"(?P<q_close>[\"" + chr(0x201D) + chr(0x2019) + r"])"
-        + r"[，。！？\s]{0,3}"
-        + r"(?P<alias>" + alias_alternation + r")"
-        + MIDDLE_PATTERN
-        + SPEECH_VERB_PATTERN
-    )
 
-    for m in inverted_pattern.finditer(text):
-        # 用引语开始位置去重，避免与 standard 模式重复匹配同一段引语
+def _collect_inverted_dialogues(
+    text: str,
+    pattern: "re.Pattern",
+    characters: dict,
+    standard_positions: set[int],
+) -> list[dict]:
+    """倒装模式扫描：跳过与标准模式重复的引语起始位置。"""
+    dialogues = []
+    for m in pattern.finditer(text):
         if m.start("q_open") in standard_positions:
             continue
         alias = m.group("alias")
@@ -223,6 +218,40 @@ def find_dialogues_in_text(
             "position": m.start(),
             "quote_length": len(m.group("quote")),
         })
+    return dialogues
+
+
+def find_dialogues_in_text(
+    text: str,
+    alias_patterns: list,
+    characters: dict,
+) -> list[dict]:
+    """在文本中找出所有引语并归属到人物。
+
+    引语模式：
+      1. 标准模式：X (副词)? 道/曰/言/云 (：)? "..."  → "行者笑道：..."
+      2. 倒装模式："..." ，X (副词)? 道/曰/言/云        → "...，" 行者道。
+
+    返回 [{speaker, alias_used, quote, pattern, position, quote_length}, ...]
+
+    W802 行为保持重构：正则编译与两轮扫描拆为 `_build_dialogue_patterns` /
+    `_collect_standard_dialogues` / `_collect_inverted_dialogues`；别名 alternation
+    构建、去重规则与按位置排序均原样保留。
+    """
+    # 构建所有别名的统一 alternation（按长度降序避免子串冲突）
+    all_aliases = set()
+    for aliases in characters.values():
+        all_aliases.update(aliases)
+    sorted_all = sorted(all_aliases, key=len, reverse=True)
+    alias_alternation = "|".join(re.escape(a) for a in sorted_all)
+
+    standard_pattern, inverted_pattern = _build_dialogue_patterns(alias_alternation)
+    dialogues, standard_positions = _collect_standard_dialogues(
+        text, standard_pattern, characters
+    )
+    dialogues += _collect_inverted_dialogues(
+        text, inverted_pattern, characters, standard_positions
+    )
 
     dialogues.sort(key=lambda x: x["position"])
     return dialogues
@@ -302,18 +331,13 @@ def build_cooccurrence(
     }
 
 
-def build_cooccurrence_timeline(
+def _accumulate_timeline(
     chapters: list[tuple[int, str, str]],
-    characters: dict,
     alias_patterns: list,
-) -> dict:
-    """构建按回的共现时间线数据（W102 关系演化可视化基础·精简版）。
+) -> tuple:
+    """按回累加共现：产出 per_chapter、累积边、分桶边、关系对按回序列。
 
-    输出三组数据：
-      - per_chapter: 每回出场人物列表（edges 前端动态计算，避免数据冗余）
-      - cumulative_snapshots: 每 10 回一个累积快照（Top 30 边，用于力导向图时间滑块）
-      - binned: 每 10 回分桶的共现边列表（Top 30 边，用于热力图）
-      - top_pairs_curve: 全书 Top 10 关系对的按回共现序列（用于演化曲线）
+    拆分自 build_cooccurrence_timeline（W802 行为保持重构）——只做遍历累加。
     """
     per_chapter = []
     cumulative_edges = defaultdict(int)
@@ -351,6 +375,11 @@ def build_cooccurrence_timeline(
             }
             cumulative_snapshots.append(snapshot)
 
+    return per_chapter, cumulative_edges, cumulative_snapshots, binned_edges, pair_per_chapter
+
+
+def _build_binned_output(binned_edges: dict) -> list:
+    """按桶组装共现边列表（每桶 Top 30·桶号升序）。"""
     binned_by_bucket = defaultdict(list)
     for (bucket, pair), weight in binned_edges.items():
         binned_by_bucket[bucket].append({
@@ -368,10 +397,13 @@ def build_cooccurrence_timeline(
             "bucket": bucket,
             "edges": edges,
         })
+    return binned_output
 
-    # Top 10 关系对的按回共现序列（用于演化曲线）
+
+def _build_top_pairs_curve(pair_per_chapter: dict) -> list:
+    """全书 Top 10 关系对的按回共现序列（用于演化曲线）。"""
     top_pairs = sorted(pair_per_chapter.items(), key=lambda x: -len(x[1]))[:10]
-    top_pairs_curve = [
+    return [
         {
             "source": pair[0],
             "target": pair[1],
@@ -380,6 +412,28 @@ def build_cooccurrence_timeline(
         }
         for pair, chapters_list in top_pairs
     ]
+
+
+def build_cooccurrence_timeline(
+    chapters: list[tuple[int, str, str]],
+    characters: dict,
+    alias_patterns: list,
+) -> dict:
+    """构建按回的共现时间线数据（W102 关系演化可视化基础·精简版）。
+
+    输出三组数据：
+      - per_chapter: 每回出场人物列表（edges 前端动态计算，避免数据冗余）
+      - cumulative_snapshots: 每 10 回一个累积快照（Top 30 边，用于力导向图时间滑块）
+      - binned: 每 10 回分桶的共现边列表（Top 30 边，用于热力图）
+      - top_pairs_curve: 全书 Top 10 关系对的按回共现序列（用于演化曲线）
+
+    W802 行为保持重构：累加、分桶组装、Top 曲线拆为三个 `_build/_accumulate` 小函数。
+    """
+    per_chapter, cumulative_edges, cumulative_snapshots, binned_edges, pair_per_chapter = (
+        _accumulate_timeline(chapters, alias_patterns)
+    )
+    binned_output = _build_binned_output(binned_edges)
+    top_pairs_curve = _build_top_pairs_curve(pair_per_chapter)
 
     return {
         "per_chapter": per_chapter,
