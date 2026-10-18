@@ -36,7 +36,6 @@ const {
 const SITE_DIR = path.join(PROJECT_ROOT, 'site');
 const RENDER_WAIT_MS = 1500;
 const WORKER_COUNT = 4;
-const GATE_NAME = 'screenshot-gates';
 const OVERFLOW_TOLERANCE_PX = 2;
 
 // ---------------- 静态页面清单（哪些页调用了 sankey / 有 link-canvas） ----------------

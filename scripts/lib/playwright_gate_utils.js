@@ -10,7 +10,6 @@
  */
 'use strict';
 
-const path = require('path');
 const { toPosixPath } = require('./gate_common');
 
 const DEFAULT_VIEWPORT = { width: 1280, height: 800 };

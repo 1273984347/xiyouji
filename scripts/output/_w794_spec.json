@@ -1,0 +1,19 @@
+{
+  "batch": "W794",
+  "date": "2026-10-19",
+  "title": "W794 PD-3 裁决落地批",
+  "desc": "PD-3 三项裁决全部落地，首页补随笔入口与全卷命名，数据提示改读者语，专题卡加图例与悬停明细，自查撤回一条假阳性",
+  "head_entry": "2026-10-19（W794 PD-3 裁决落地批）",
+  "head_sentence": "PD-3 三项裁决落地，随笔入口与全卷命名就位，假阳性自查撤回",
+  "changelog_body": "\n> **来源**：用户令「按推荐办」——PD-3-A1/A2/A3 三项裁决全采纳落地 + 自查撤回 F-08 假阳性。动工前 preflight PASS（W794 认领·零交集）。\n> - **A1 首页补 06**：`site/index.html` 九卷索引在 05 与 07 之间补 06 个人随笔行（链 `reader/essays/index.html`·「随笔集 · 44 篇个人视角的现代解读」），节名「九卷索引」→「**全卷索引**」、引言「九卷通读」→「全卷通读」——44 篇 A2 主体内容自此有首页入口，跳号困惑消除。\n> - **A2 DATA 文案**：`site/dashboard.html` 提示条由「嵌入快照 · file:// 直接打开（如需最新数据，请在 site/ 目录运行 py -m http.server 8000）」改为「**数据已内置，离线可直接打开（file://）；最新数据以本地服务模式为准。**」——公网页不再出现开发命令，「离线可读」卖点保留。\n> - **A3 数字串图例**：专题区引言加「数字为对应维度计数（悬停可看明细）」；**30 张多数字卡**（`7·8·15·5` 形态·与维度词数对齐）加 `title` 属性（如「势力 7 · 法宝 8 · 搬救兵 15 · 贝尔宾 5」·悬停与读屏可得）；11 张单值卡（「2 场」「100 回」自解释）按推荐跳过。\n> - **自查撤回（诚实修正）**：F-08「主题/专题混用」系 50% 缩放截图低分辨率误读——HTML 实为「51 个专题页」、`grep 主题` 5 处全合法（目录名 docs/03-主题与情节专题/A4 计数/卡片描述）；报告 F-08 标注撤回（8 条初判→7 条有效）、§1 增「假阳性撤回」条并记方法债（探针只校验选择器不校验文字主张）、登记表 B-104 同步撤回。\n> - **视觉基线**：`tests/e2e/baseline/index.png` 与 `dashboard.png` 同步更新（布局变更必同步）；其余 8 张经 `--update-baseline` 出现的渲染抖动一并回退（仅留必要两张）——对比模式 10/10 通过（最大抖动 0.086% < 0.5% 阈值）。\n> - **验证（全绿）**：PD-3 探针 7/7 命中（F-08 撤回后）；视觉对比 10/10；pytest 629 passed / 3 skipped；ruff 0；verify 全量 50 段 0 FAIL。\n> - **状态**：已落地（级联+提交+推送按批次流程执行·PR #50 随批扩入）。\n> - **文件**：site/index.html、site/dashboard.html、tests/e2e/baseline/index.png、tests/e2e/baseline/dashboard.png、docs/superpowers/plans/2026-10-18-pd3-heuristic-review-report.md、docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w794_spec.json、scripts/output/_cascade_files_W794.txt\n",
+  "milestone_block": "- **W794 PD-3 裁决落地批**：\n  - A1 首页补 06 个人随笔行（链 reader/essays）+ 九卷→全卷命名；A2 DATA 提示改读者语\n  - A3 专题区图例半句 + 30 张多数字卡 title；F-08 假阳性自查撤回（B-104 同步撤回）\n  - 视觉基线仅同步 index/dashboard 两张（其余 8 张回退免抖动 churn）\n  - 验证：探针 7/7 + 视觉对比 10/10 + pytest 629 passed + verify 全量 0 FAIL\n",
+  "agents_note": "2026-10-19（W794）产品设计套件 PD-3 三项裁决落地：用户令按推荐办——A1 首页九卷索引补 06 个人随笔行并链接 reader essays 阅读器、节名与引言由九卷改全卷（四十四篇 A2 主体内容获首页入口）；A2 数据看板提示条改读者语并移除 python http server 开发指令（离线可读卖点保留）；A3 专题区引言加数字为对应维度计数半句并为三十张多数字卡加 title 悬停明细（十一张单值卡自解释跳过）；自查撤回 F-08 主题专题混用假阳性（五十百分比缩放截图低分辨率误读·HTML 实为专题）并同步撤回 B-104、报告留方法债（探针应加主张文本校验）；视觉基线仅同步 index 与 dashboard 两张其余回退免抖动；验证等于探针七比七加视觉对比十比十加 pytest 六百二十九 passed 加 ruff 零 加 verify 全量五十段零 FAIL",
+  "file_index_rows": [
+    "| site/index.html | W794 | A1：补 06 个人随笔行 + 九卷→全卷命名 |",
+    "| site/dashboard.html | W794 | A2：DATA 提示改读者语；A3：图例半句 + 30 卡 title |",
+    "| tests/e2e/baseline/index.png | W794 | 视觉基线同步（06 行新增） |",
+    "| tests/e2e/baseline/dashboard.png | W794 | 视觉基线同步（提示与图例变更） |",
+    "| docs/superpowers/plans/2026-10-18-pd3-heuristic-review-report.md | W794 | F-08 撤回 + §5 落地记录 |",
+    "| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W794 | B-104 撤回 |"
+  ]
+}
