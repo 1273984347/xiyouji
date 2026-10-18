@@ -152,7 +152,7 @@
 | W787 | release.py 行为保持重构批（外部提案收编第六批末批）：分隔线/告警线/CHANGELOG 版本正则常量化（预编译·import re 上移）；step2 拆 _check_uncommitted/_check_unpushed；step3 拆 _parse_count_objects；main 版本解析提 _resolve_target_version；新增 _print_step_header 供步骤 2-5 复用（步骤 1 保持独立实现避免空行差异）；五步输出/前缀/短路顺序/退出码逐字保留。**22 项门禁脚本改动点清单裁定不执行**（交付阻断面+W781 刚完成 verify 体系收口+清单自标多数已足够简洁+5 项发现 3 项系 W775 前旧快照；未来如做须三态核验+五维对拍）。对拍=完整运行输出与退出码逐字相同（存量 exit=1 系 sync_docs 失败态·与重构无关） | 6433053f（batch_cascade 原生级联） | W787 | **已收官**（6433053f） | DSH 2026-10-18 | scripts/release.py, docs/00-导读/W批次编号对账表.md |
 | W788 | JS 门禁死代码清理批（W775 重构收尾·用户令「B」）：删除 `check_screenshot_gates.js` 新增的死常量 `GATE_NAME`（定义后零引用；该门禁无 `---- N FAIL ----` 汇总末行、不在 verify 槽内，CI 靠退出码判定，故不需该常量——系 W775 照抄第 43 槽模式的机械迁移残留）+ 删除 `lib/playwright_gate_utils.js` 的未使用导入 `const path = require('path')`。**零行为变化**：两处均无任何消费点，不动判据/阈值/输出/退出码。验收=截图门禁全量 857 页 FAIL 数逐字节相同 + 破防态负样本可红 + self-test 12/12 + 第 43 槽全量 + pytest 全量 + verify 全量 | 19ab5221（batch_cascade 原生级联） | W788 | **已收官**（19ab5221） | DSH 2026-10-18 | scripts/check_screenshot_gates.js, scripts/lib/playwright_gate_utils.js, docs/00-导读/W批次编号对账表.md |
 | W789 | 外部门禁重构提案对盘登记批（裁定不执行）：用户转发外部重构产出（三 gate 脚本+两公共模块完整重构版·其自带编号未登记于对账表），按外部产出落地流程对盘——五文件逐字节提取 round-trip 自检后与磁盘现势做 CRLF 归一 diff+15 项改动清单全标记核查，证实提案已由此前重构批完全吸收（probeInPage/judgeProbe/checkPage/jsLiteralToJson/main 拆分、常量化、v4NearMissPct 去重、死代码删除、命名规范化、基线检查合并、模式分发函数化、use strict、JSDoc 全部在位）；提案与磁盘仅剩 7 处差异且全部驳回（两模块 docstring 改号造未登记 W###、带回 W788 刚删两处死代码、尾逗号正则缺反斜杠属提取层腐蚀、两组等价写法噪声、报告字段与自述契约相悖）。零代码变更不立施工；现势健康验证=self-test 12/12+数据漂移全量 exit 0（可比 59 页）+门禁子集 0 FAIL；登记以防未来会话重复收编 | 4d7413d4（batch_cascade 原生级联） | W789 | **已收官**（4d7413d4） | DSH 2026-10-18 | docs/00-导读/W批次编号对账表.md |
-| W790 | 外部评审第三轮回应登记批（用户令「b」）：同一评审者第三轮七项工程核查（与 2026-10-17 轮全同·15 批次间隔）逐条对盘——4 项不成立（依赖锁定已三处锁装/门禁数字过期且无 warn 级/覆盖率项已由 W776 关闭/脚本注册表已机器强制）、3 项部分成立（视觉回归已三层分工/agent-web 有 38 测试但点名三类负向测试不存在/sync_docs 半退役状态未决）；唯一实质增量=agent-web 攻击面负向测试缺口。交付=回应报告归档（docs/11-方案报告/·三连带+INDEX 重建 702 篇+stats 刷新）+ BL-29~32 登记 HANDOVER。验收=报告全证据可复跑+pytest 630+verify 全量 | （认领中·收官回填） | W790 | **进行中**（回应登记批施工中） | DSH 2026-10-18 | docs/11-方案报告/README.md, STRUCTURE.md, scripts/output/stats.json, docs/INDEX.md, HANDOVER.md |
+| W790 | 外部评审第三轮回应登记批（用户令「b」）：同一评审者第三轮七项工程核查（与 2026-10-17 轮全同·15 批次间隔）逐条对盘——4 项不成立（依赖锁定已三处锁装/门禁数字过期且无 warn 级/覆盖率项已由 W776 关闭/脚本注册表已机器强制）、3 项部分成立（视觉回归已三层分工/agent-web 有 38 测试但点名三类负向测试不存在/sync_docs 半退役状态未决）；唯一实质增量=agent-web 攻击面负向测试缺口。交付=回应报告归档（docs/11-方案报告/·三连带+INDEX 重建 702 篇+stats 刷新）+ BL-29~32 登记 HANDOVER。验收=报告全证据可复跑+pytest 630+verify 全量 | b2c55e8e（batch_cascade 原生级联） | W790 | **已收官**（b2c55e8e） | DSH 2026-10-18 | docs/11-方案报告/README.md, STRUCTURE.md, scripts/output/stats.json, docs/INDEX.md, HANDOVER.md |
 
 ## 递延批豁免登记（D2 裁决：对账表登记即可过 doc-sync 提交-版段对账）
 
@@ -229,7 +229,8 @@
 - **W787**：现势下一自由号（de965962 W786 收官级联后 checklist 例行·2026-10-18）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W788**：现势下一自由号（6433053f W787 收官级联后 checklist 例行·2026-10-18）——**预留登记豁免**，动工时按取号规则正式认领（已消费：W788 JS 门禁死代码清理批）。
 - **W789**：现势下一自由号（19ab5221 W788 收官级联后 checklist 例行·2026-10-18）——**预留登记豁免**，动工时按取号规则正式认领（已消费：W789 外部门禁重构提案对盘登记批）。
-- **W790**：现势下一自由号（4d7413d4 W789 收官级联后 checklist 例行·2026-10-18）——**预留登记豁免**，动工时按取号规则正式认领。
+- **W790**：现势下一自由号（4d7413d4 W789 收官级联后 checklist 例行·2026-10-18）——**预留登记豁免**，动工时按取号规则正式认领（已消费：W790 外部评审第三轮回应登记批）。
+- **W791**：现势下一自由号（b2c55e8e W790 收官级联后 checklist 例行·2026-10-18）——**预留登记豁免**，动工时按取号规则正式认领。
 
 ## 登记 ASCII 纪律
 
