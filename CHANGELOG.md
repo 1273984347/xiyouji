@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W795），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W796），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,17 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W796（2026-10-19）：提示词库整理入库批
+> **来源**：用户令「把这个文件内容整理进项目目录内」（附 `C:\Users\12739\Desktop\Prompt.txt`·966 行/47KB·提示词合集+任务清单+素材混排）。按上一轮分析稿的模块化建议落地，Q-01~Q-05 五项决策全部记录于总目录 §三。动工前 preflight PASS（W796 认领·零交集）。
+> - **拆分（12 文件·03/04 原文照录·其余 9 篇润色·逐行映射入各文件头）**：`docs/12-提示词库/`——00 总目录（模块索引+冲突处理+决策记录）/01 参考链接（8 站点）/02 写作与输出规范（计划要求·三润色 skill·成果要素·回答风格）/03 工作复盘系统提示词（L29-465 全文）/04 任务执行系统提示词（L466-829 全文）/05 项目审查任务书（7 段合并 R-1~R-7）/06 隐私与开源边界（独立前置）/07 安全架构准则（6 域）/08 团队角色与分工/09 导师提问流程/10 创意写作四题/11 色彩素材。
+> - **冲突处理**：① 色值 20 组逐条校准——4 组 RGB≠HEX（玫瑰粉差 225/象牙白 30/柠檬黄 30/樱花粉 100）**判定以 HEX 为准**（HEX 与色名语义一致率 4/4·RGB 按 HEX 重算并保留原值可溯）+ 1 组微差（芭比粉 9/通道）；② 7 段代码审查合并为一篇 R-1~R-7；③ 隐私边界从审查段中间独立成篇并前置（00 开篇声明 + 06）；④ L911 单行（plan-ceo-review/autoplan）性质不明照录加注。
+> - **润色二稿（同批）**：按用户令 03/04 两篇系统提示词保持照录不润色；其余 9 篇结构化重排——**05 补全首稿被截断的 R-3~R-7 五段**、修两处笔误（「AI 率为 5% 一下」→「以下」/「安wsl全」→「安全隐患」）、01 补全后 5 条链接、08/09/10 转为表格与任务卡、11 补判定口径与使用注记；全部语义未改，修订清单入 00-总目录 §五。
+> - **工程面**：`docs_index.py` SECTION_TITLES 增第 13 板块「12 · 提示词库」；STRUCTURE.md 增设 12 段条目；目录治理自动生成 `README.md`/`index.md`（第 45 槽 0 FAIL·168 目录）；docs/INDEX.md 重建 704→718 篇。
+> - **性质声明**：本目录为**素材归档非任务清单**——执行其中任何任务须用户单独授权（提示词 ≠ 待办），该约定写入 00 总目录 §四。
+> - **验证（全绿）**：pytest 629 passed / 3 skipped；ruff 0；verify 全量 50 段 0 FAIL；第 45 槽 0 FAIL；docs_index --check 与 stats --check 均零差异。
+> - **状态**：已落地（级联+提交+推送按批次流程执行·PR #52 随批开出）。
+> - **文件**：docs/12-提示词库/00-总目录.md、docs/12-提示词库/01-参考链接.md、docs/12-提示词库/02-写作与输出规范.md、docs/12-提示词库/03-工作复盘提示词.md、docs/12-提示词库/04-任务执行提示词.md、docs/12-提示词库/05-项目审查任务书.md、docs/12-提示词库/06-隐私与开源边界.md、docs/12-提示词库/07-安全架构准则.md、docs/12-提示词库/08-团队角色分工.md、docs/12-提示词库/09-导师提问流程.md、docs/12-提示词库/10-创意写作题.md、docs/12-提示词库/11-colors.md、scripts/docs_index.py、STRUCTURE.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w796_spec.json、scripts/output/_cascade_files_W796.txt
 
 ### W795（2026-10-19）：第 42 篇复盘报告入库批
 > **来源**：用户令「合并 PR #50 → 写复盘第 42 篇」。PR #50 已于 2026-10-18T17:34Z 合并（98f2cadb·dev 与 main 归零），本批为复盘报告入库。
