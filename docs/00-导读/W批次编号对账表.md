@@ -160,7 +160,7 @@
 | W795 | 第 42 篇复盘报告入库批（用户令「合并 PR #50 → 写复盘第 42 篇」）：W777-W794 十八段 39 提交复盘——外部输入三段处置闭环（收编六批/对盘驳回/重复投递识别）+ 本地绿CI红第三型（CI Node×原生依赖 engines 错配）+ 探针假阳性自撤（F-08）+ 全仓待办核查无假收敛 + PD-3 走查落地；新经验 E-17~E-24·问题族 FAM-37~39·工作流 WF-06/07·改进项 P-42-01~05；三连带（README 行 24/STRUCTURE 28/INDEX 704 篇）。验收=pytest 全量 + verify 全量 | e174f89f（batch_cascade 原生级联） | W795 | **已收官**（e174f89f） | DSH 2026-10-19 | docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-19.md, docs/11-方案报告/README.md, STRUCTURE.md |
 | W796 | 提示词库整理入库批（用户令「把这个文件内容整理进项目目录内」·Prompt.txt 966 行 47KB）：拆 12 文件至 docs/12-提示词库/（原文照录·逐行映射入各文件头）——总目录+8 设计链接+写作规范+复盘系统提示词+任务执行提示词+项目审查任务书（7 段合一）+隐私边界（独立前置）+安全架构准则+团队角色分工+导师提问流程+创意四题+色彩素材；色值 20 组逐条校准（4 组建言不一致以 HEX 为准·1 组微差）+ docs_index 加第 13 板块 + STRUCTURE 加段 + 目录治理（index/README 生成）；性质=素材归档非任务清单（执行须单独授权）。验收=pytest 全量 + verify 全量 + 第 45 槽 | cba9a309（batch_cascade 原生级联） | W796 | **已收官**（cba9a309） | DSH 2026-10-19 | docs/12-提示词库, scripts/docs_index.py, STRUCTURE.md |
 | W797 | 历史模板归档批（用户令「办」·四文件处置）：三模板 git mv 入 archive/docs/templates/（配馆藏 README=退休依据+出生证明+采用率 0% 证据）；两个 checklist 有效条目提炼为「交付自检 10 项」入文档规范 §12；docs/_templates 留作现役模板位（README/index 由目录治理维护）；PRD 第28门禁保持本地 gitignored 不动（W650 真名出库裁决·不进公开仓）。验收=verify 全量+pytest | 32f37255（batch_cascade 原生级联） | W797 | **已收官**（32f37255） | DSH 2026-10-19 | docs/_templates/, archive/docs/templates/, docs/00-导读/文档规范.md |
-| W798 | 对拍模板转正 + 临时区清理批（用户令「全都做」）：`tmpe/_templates/duipai/` → `docs/_templates/duipai/`（duipai.py + README 入库·路径引用同步=流水线 §八 + README 自身）；tmpe 本轮清理实录——归桶 30 项（journal 可 undo）·删 `_trash/_edge_cdp_profile` 174.6MB（113 件）·删 `_inbox/hf-poc/hf-cache` HF 模型缓存 1.15GB（可重下）·`_shot` 实测无 30 天前项（0 删）；`hf-poc/data` 252MB（10-15 近作实验数据·无引用）**保留待作者定**。验收=pytest 全量 + verify 全量 | （认领中·收官回填） | W798 | **进行中**（对拍模板转正批施工中） | DSH 2026-10-19 | docs/_templates/duipai/, docs/10-方法论沉淀/批次交付流水线.md |
+| W798 | 对拍模板转正 + 临时区清理批（用户令「全都做」）：`tmpe/_templates/duipai/` → `docs/_templates/duipai/`（duipai.py + README 入库·路径引用同步=流水线 §八 + README 自身）；tmpe 本轮清理实录——归桶 30 项（journal 可 undo）·删 `_trash/_edge_cdp_profile` 174.6MB（113 件）·删 `_inbox/hf-poc/hf-cache` HF 模型缓存 1.15GB（可重下）·`_shot` 实测无 30 天前项（0 删）；`hf-poc/data` 252MB（10-15 近作实验数据·无引用）**保留待作者定**。验收=pytest 全量 + verify 全量 | c1bddd9a（batch_cascade 原生级联） | W798 | **已收官**（c1bddd9a） | DSH 2026-10-19 | docs/_templates/duipai/, docs/10-方法论沉淀/批次交付流水线.md |
 
 ## 递延批豁免登记（D2 裁决：对账表登记即可过 doc-sync 提交-版段对账）
 
@@ -245,7 +245,8 @@
 - **W795**：现势下一自由号（b341d39a W794 收官级联后 checklist 例行·2026-10-19）——**预留登记豁免**，动工时按取号规则正式认领（已消费：W795 第 42 篇复盘报告入库批）。
 - **W796**：现势下一自由号（e174f89f W795 收官级联后 checklist 例行·2026-10-19）——**预留登记豁免**，动工时按取号规则正式认领（已消费：W796 提示词库整理入库批）。
 - **W797**：现势下一自由号（cba9a309 W796 收官级联后 checklist 例行·2026-10-19）——**预留登记豁免**，动工时按取号规则正式认领（已消费：W797 历史模板归档批）。
-- **W798**：现势下一自由号（32f37255 W797 收官级联后 checklist 例行·2026-10-19）——**预留登记豁免**，动工时按取号规则正式认领。
+- **W798**：现势下一自由号（32f37255 W797 收官级联后 checklist 例行·2026-10-19）——**预留登记豁免**，动工时按取号规则正式认领（已消费：W798 对拍模板转正批）。
+- **W799**：现势下一自由号（c1bddd9a W798 收官级联后 checklist 例行·2026-10-19）——**预留登记豁免**，动工时按取号规则正式认领。
 
 ## 登记 ASCII 纪律
 
