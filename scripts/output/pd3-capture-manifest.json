@@ -1,0 +1,87 @@
+{
+  "generated": "2026-10-18T15:53:17.012Z",
+  "tool": "scripts/_pd3_finding_probe.js --capture",
+  "rows": [
+    {
+      "page": "index",
+      "proto": "file",
+      "scheme": "light",
+      "url": "file:///d:/xiyouji/site/index.html",
+      "file": "tmpe/w793/pd3-shots/index-file-light.png",
+      "bytes": 665428,
+      "sha256_16": "31c08e65c854330a",
+      "pageerrors": []
+    },
+    {
+      "page": "index",
+      "proto": "file",
+      "scheme": "dark",
+      "url": "file:///d:/xiyouji/site/index.html",
+      "file": "tmpe/w793/pd3-shots/index-file-dark.png",
+      "bytes": 683424,
+      "sha256_16": "c7b9b393b9fda31c",
+      "pageerrors": []
+    },
+    {
+      "page": "index",
+      "proto": "http",
+      "scheme": "light",
+      "url": "http://127.0.0.1:8000/index.html",
+      "file": "tmpe/w793/pd3-shots/index-http-light.png",
+      "bytes": 665530,
+      "sha256_16": "defc718980abd8f6",
+      "pageerrors": []
+    },
+    {
+      "page": "index",
+      "proto": "http",
+      "scheme": "dark",
+      "url": "http://127.0.0.1:8000/index.html",
+      "file": "tmpe/w793/pd3-shots/index-http-dark.png",
+      "bytes": 682708,
+      "sha256_16": "ab6cb7ed2d520a57",
+      "pageerrors": []
+    },
+    {
+      "page": "dashboard",
+      "proto": "file",
+      "scheme": "light",
+      "url": "file:///d:/xiyouji/site/dashboard.html",
+      "file": "tmpe/w793/pd3-shots/dashboard-file-light.png",
+      "bytes": 1133671,
+      "sha256_16": "32aa5f27f0789e2a",
+      "pageerrors": []
+    },
+    {
+      "page": "dashboard",
+      "proto": "file",
+      "scheme": "dark",
+      "url": "file:///d:/xiyouji/site/dashboard.html",
+      "file": "tmpe/w793/pd3-shots/dashboard-file-dark.png",
+      "bytes": 1172658,
+      "sha256_16": "0ca294f0972bbfdf",
+      "pageerrors": []
+    },
+    {
+      "page": "dashboard",
+      "proto": "http",
+      "scheme": "light",
+      "url": "http://127.0.0.1:8000/dashboard.html",
+      "file": "tmpe/w793/pd3-shots/dashboard-http-light.png",
+      "bytes": 1132282,
+      "sha256_16": "e7e6e269a0b52a5b",
+      "pageerrors": []
+    },
+    {
+      "page": "dashboard",
+      "proto": "http",
+      "scheme": "dark",
+      "url": "http://127.0.0.1:8000/dashboard.html",
+      "file": "tmpe/w793/pd3-shots/dashboard-http-dark.png",
+      "bytes": 1170895,
+      "sha256_16": "01fb91a3d908a906",
+      "pageerrors": []
+    }
+  ],
+  "pageerror_total": 0
+}

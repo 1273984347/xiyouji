@@ -88,7 +88,7 @@ ci: ## CI 本地预跑 = lint + test + audit + links + data-validate + docs-inde
 	$(MAKE) validate-en
 	@echo "==> ci 完成"
 
-release: ## 版本发布前体检（sync_docs + git 状态 + pytest + checklist）
+release: ## 版本发布前体检（doc-sync + git 状态 + pytest + checklist）
 	@echo "==> release: 版本发布前体检"
 	python scripts/release.py
 	@echo "==> release 完成"

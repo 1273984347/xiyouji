@@ -208,7 +208,6 @@
 - `spot_check_nlp.py`
 - `stats.py`
 - `sync_data_json.py`
-- `sync_docs.py`
 - `tmpe_tidy.py`
 - `validate_en.py`
 - `verify_chapters.py`
@@ -223,6 +222,7 @@
 - `_diag_white_pages.js`
 - `_fix_en_quote_corrosion.js`
 - `_p1_viz_audit.js`
+- `_pd3_finding_probe.js`
 - `_pmc_pdf_fetch.js`
 - `_smoke_batch.js`
 - `_w621_render_png.js`

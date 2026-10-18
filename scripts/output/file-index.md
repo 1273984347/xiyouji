@@ -11,6 +11,76 @@
 ---
 
 
+## W794 PD-3 裁决落地批（2026-10-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/index.html | W794 | A1：补 06 个人随笔行 + 九卷→全卷命名 |
+| site/dashboard.html | W794 | A2：DATA 提示改读者语；A3：图例半句 + 30 卡 title |
+| tests/e2e/baseline/index.png | W794 | 视觉基线同步（06 行新增） |
+| tests/e2e/baseline/dashboard.png | W794 | 视觉基线同步（提示与图例变更） |
+| docs/superpowers/plans/2026-10-18-pd3-heuristic-review-report.md | W794 | F-08 撤回 + §5 落地记录 |
+| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W794 | B-104 撤回 |
+
+## W793 PD-3 走查与 BL-31 退休批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/superpowers/plans/2026-10-18-pd3-heuristic-review-report.md | W793 | 新增：PD-3 两页启发式走查报告（8 findings·20 格·AC-1 8/8） |
+| scripts/_pd3_finding_probe.js | W793 | 新增：双模式取证/防虚构探针（capture + report） |
+| scripts/sync_docs.py | W793 | 删除：退役（职责并入第 31 门禁 check_doc_sync） |
+| scripts/release.py | W793 | step1 改指 check_doc_sync + checklist 旧命令更新 |
+| HANDOVER.md | W793 | 冻结适用范围单一权威表述（W793 立） |
+| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W793 | B-100~B-104 追加（PD-3 工程分流） |
+| docs/11-方案报告/全仓待办计划方案状态核查报告-2026-10-18.md | W793 | PD 行陈滞自修（待批复→已批+已执行） |
+| Makefile | W793 | release 注释 doc-sync 化 |
+
+## W792 全仓待办计划状态核查批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/全仓待办计划方案状态核查报告-2026-10-18.md | W792 | 新增：全仓待办核查报告（五分类+5 处陈滞修正+4 决策项） |
+| HANDOVER.md | W792 | BL-22 ✅ 标注 + 候选清单配额终止注 |
+| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W792 | B-1~B-7 状态回写（4 ✅·2 ◐·1 ☐） |
+| docs/superpowers/plans/2026-09-29-en-data-i18n-display-plan.md | W792 | 状态行回写（快赢层 ✅·根治层排期） |
+| docs/superpowers/plans/2026-10-13-code-refactor-w728.md | W792 | 执行状态行回写（✅ 已执行） |
+
+## W791 agent-web 攻击面负向测试批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/security.ts | W791 | 新增：安全边界纯函数与 SSE 守卫（BL-29 提取） |
+| xiyouji-agent-web/server/security.test.ts | W791 | 新增：17 例攻击面负向测试（BL-29） |
+| xiyouji-agent-web/server/index.ts | W791 | 安全逻辑提取至 security.ts（14 增 54 删）+ W568 漏改修正 |
+| xiyouji-agent-web/package.json | W791 | test:server 接入 security.test.ts |
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W791 | D2/E 状态行陈滞回写 ✅ + 计划头状态收官 |
+| HANDOVER.md | W791 | BL-23/24 关闭标注 |
+
+## W790 外部评审第三轮回应登记批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/外部评审回应与逐项核查报告-2026-10-18.md | W790 | 新增：外部评审第三轮回应报告（重复投递认定+七项裁定+BL-29~32） |
+| HANDOVER.md | W790 | Backlog 登记 BL-29~32 |
+| docs/11-方案报告/README.md | W790 | 索引加行 22 |
+| STRUCTURE.md | W790 | 11-方案报告段现役报告计数 21→22 |
+| scripts/output/stats.json | W790 | report_docs 25→26·--w W790 刷新 |
+| docs/INDEX.md | W790 | 重建纳入新报告（701→702 篇） |
+
+## W789 外部门禁重构提案对盘登记批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/00-导读/W批次编号对账表.md | W789 | W789 认领登记（外部门禁重构提案对盘裁定不执行） |
+
+## W788 JS 门禁死代码清理批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_screenshot_gates.js | W788 | 清理：删 W775 新增的死常量 GATE_NAME（零引用·该门禁靠退出码判定不需汇总末行） |
+| scripts/lib/playwright_gate_utils.js | W788 | 清理：删未使用导入 path（该文件由 W775 全量新增·原生瑕疵） |
+| docs/00-导读/W批次编号对账表.md | W788 | W788 认领登记 |
+
 ## W787 release.py 行为保持重构批（2026-10-18）
 
 | 文件 | W | 说明 |

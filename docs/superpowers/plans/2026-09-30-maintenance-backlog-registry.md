@@ -3,6 +3,7 @@
 > 来源：外部「项目优化路线图」提案（P0/P1/P2 共 40+ Issue 的完整 playbook）——经逐条对仓库取证裁决后，用户裁决：**不创建 Issue，仅登记 5 项真增量**（登记≠开工·维护态不主动执行）。
 > 生成：2026-09-30（W634）·快照基准 v2.3.233 / W633。
 > 用途：**重启时的输入清单**——当且仅当归档裁决解除（W626 触发条件）或用户逐项点名时，按下表执行。
+> **状态回写（W792 核查批·2026-10-18）**：B-1/B-2/B-3/B-7 已落地·B-5/B-6 部分·B-4 开面；未竟项冻结语义不变（归档裁决解除或用户点名才执行）。
 
 ## 一、裁决结论
 
@@ -29,13 +30,13 @@
 
 | # | 项 | 量级 | 执行要点（重启时照此做） |
 |---|---|---|---|
-| B-1 | **RSS feed**（site/rss.xml 生成器 + link 标签） | 小 | 仿 gen_sitemap.py 模式；源=docs INDEX 或 CHANGELOG 现役段；入 verify 可选 |
-| B-2 | **CodeQL job**（security.yml 增 analyze） | 小 | js/python 两矩阵；注意 runner 时长（security 现有 job 数分钟量级） |
-| B-3 | **CODE_OF_CONDUCT.md** | 微小 | Contributor Covenant 中文版即可；README「贡献方式」节加链接 |
-| B-4 | **Three.js 懒加载+静态回退**（4 页：relationship-3d ×2/journey-geo-3d/dukou-engine） | 中 | 动态 import() 三脚本（同 W627 fetch 切换模式）；回退=首帧 canvas 截图 or SVG 占位；LHCI 3D 预算（LCP12000/TBT900）复验 |
-| B-5 | **A1 chapter-meta 扩字段 + entities.json 聚合**（monsters/treasures/themes/related ×100 篇实体标注；聚合器读 chapter-meta 出 entities/*.json） | 中 | **属内容标注工作·须归档裁决解除或用户点名**；聚合器可先行（纯机械·读 100/100 现有 meta 出 characters/locations 两类）；Schema 沿用 chapter-meta 现有键风格。**重启后学术增强子项（W635 登记·来源=外部 FAIR/学术化分析裁决）**：Wikidata QID 对齐（实体消歧入开放知识生态）→ 领域本体（人物关系类型/事件因果链/劫难分类体系）→ Zenodo DOI + OSF 存档（长期保存独立入口）；安全响应头（XFO/HSTS）同属此类但受 GitHub Pages 平台限制·需 Cloudflare 前置 **▶ 已启动（2026-10-03 用户「全部启动」·W651 入档）**：聚合器先行（纯机械·读 100/100 现有 meta 出 characters/locations 两类）·扩字段与学术增强梯队随后续批 |
-| B-6 | **可视化可引用性**（每页引用格式 APA/MLA/BibTeX 复制组件 + PNG/SVG 导出按钮 + 「提问式标题」三问自查） | 中 | 来源=第六份外部可视化哲学分析（W636 裁决·其「砍到 20 个」核心建议已否决——见 §三）；仅取其中唯一实质缺口；数据源标注/JSON 下载/脚本公开已在位；**登记不开工**。**门禁升级路径（W637 登记·来源=第七份分析裁决）**：落地时同步挂第 28 门禁（数据文件路径+版本/生成脚本+参数/引用格式/下载入口四项·**WARN+基线冻结只增即 FAIL**·W555 先例——直接挂阻断不可行：86 页现无一页满足四项）；轻量替代已否决「每数据文件加 CITATION.cff」（dataSource 区路径可见+引用块即达及格线）。**矩阵与门禁规范存档（W638·来源=第八份分析）**：86 页二维定级矩阵+《可引用性门禁规范》草案备查不执行——存在性零幻觉（86/86 点名全对）但分级未经验证（抽查 2 硬伤：emotional-heatmap 已是批评家×回目维度·chart-design 非元页面）、阻断式设计即挂即全红须降级 WARN+基线、每页 200-400 字叙事脚本×86≈2.6 万字新内容违反 W626 归档裁决不执行；可收编=二维框架 + §2.2 数据出处四字段（路径/版本/脚本/时间）作为第 28 门禁实现参考。**⚠️ 裁决变更（2026-10-02 用户批准）**：第一步（第 28 门禁 check_citability.py·WARN+基线只增）**已反转本条「登记不开工」裁决并开工**，PRD v1.1 本地留存未入公开仓库（W650 真名防泄漏出库·判据要点已收编 AGENTS §4.2 第 28 条）；**第二步（86 页引用组件 APA/MLA/BibTeX + PNG/SVG 导出）仍维持「登记不开工」**，另立 PRD 再裁。首跑基线 344 行/missing 326（C1 2/86·C2 9/86·C3 1/86·C4 6/86），实证 W638「86 页无一页满足四项」结论成立 **▶ 第二步已启动（2026-10-03 用户「全部启动」·免另立 PRD 直接开工）**：86 页引用组件（APA/MLA/BibTeX 复制）+ PNG/SVG 导出，缺口地图以 W650 刷新版基线为准（missing 327） |
-| B-7 | **分析脚本打包为独立 pip 包**（`pip install xiyouji-analysis`·34 类分析让研究者用自己的文本跑同一套方法） | 大 | 来源=第七份分析裁决（W637 登记·七份中首个真增量工程提案）；**前置**：脚本与仓库路径强耦合（ROOT 相对+dataset/ 硬编码）需解耦改造+包基础设施+文档；学术影响力论点成立（"网站"→"方法"）；归档模式下冻结·重启后学术增强梯队（随 B-5） **▶ 已启动（2026-10-03 用户「全部启动」）**：脚本与仓库路径解耦 + 打包开工 |
+| B-1 | **RSS feed**（site/rss.xml 生成器 + link 标签） | 小 | 仿 gen_sitemap.py 模式；源=docs INDEX 或 CHANGELOG 现役段；入 verify 可选 | **✅ 已落地（site/rss.xml 在库·W792 核查实证）** |
+| B-2 | **CodeQL job**（security.yml 增 analyze） | 小 | js/python 两矩阵；注意 runner 时长（security 现有 job 数分钟量级） | **✅ 已落地（CodeQL 于 CI 实跑·PR 检查项实证）** |
+| B-3 | **CODE_OF_CONDUCT.md** | 微小 | Contributor Covenant 中文版即可；README「贡献方式」节加链接 | **✅ 已落地（仓根在库）** |
+| B-4 | **Three.js 懒加载+静态回退**（4 页：relationship-3d ×2/journey-geo-3d/dukou-engine） | 中 | 动态 import() 三脚本（同 W627 fetch 切换模式）；回退=首帧 canvas 截图 or SVG 占位；LHCI 3D 预算（LCP12000/TBT900）复验 | **☐ 开面（W423 已以 defer+独立预算缓解·动态 import() 未实施）** |
+| B-5 | **A1 chapter-meta 扩字段 + entities.json 聚合**（monsters/treasures/themes/related ×100 篇实体标注；聚合器读 chapter-meta 出 entities/*.json） | 中 | **属内容标注工作·须归档裁决解除或用户点名**；聚合器可先行（纯机械·读 100/100 现有 meta 出 characters/locations 两类）；Schema 沿用 chapter-meta 现有键风格。**重启后学术增强子项（W635 登记·来源=外部 FAIR/学术化分析裁决）**：Wikidata QID 对齐（实体消歧入开放知识生态）→ 领域本体（人物关系类型/事件因果链/劫难分类体系）→ Zenodo DOI + OSF 存档（长期保存独立入口）；安全响应头（XFO/HSTS）同属此类但受 GitHub Pages 平台限制·需 Cloudflare 前置 **▶ 已启动（2026-10-03 用户「全部启动」·W651 入档）**：聚合器先行（纯机械·读 100/100 现有 meta 出 characters/locations 两类）·扩字段与学术增强梯队随后续批 | **◐ 部分（聚合器先行已兑现：dataset/entities/ characters+locations·扩字段与学术梯队未竟）** |
+| B-6 | **可视化可引用性**（每页引用格式 APA/MLA/BibTeX 复制组件 + PNG/SVG 导出按钮 + 「提问式标题」三问自查） | 中 | 来源=第六份外部可视化哲学分析（W636 裁决·其「砍到 20 个」核心建议已否决——见 §三）；仅取其中唯一实质缺口；数据源标注/JSON 下载/脚本公开已在位；**登记不开工**。**门禁升级路径（W637 登记·来源=第七份分析裁决）**：落地时同步挂第 28 门禁（数据文件路径+版本/生成脚本+参数/引用格式/下载入口四项·**WARN+基线冻结只增即 FAIL**·W555 先例——直接挂阻断不可行：86 页现无一页满足四项）；轻量替代已否决「每数据文件加 CITATION.cff」（dataSource 区路径可见+引用块即达及格线）。**矩阵与门禁规范存档（W638·来源=第八份分析）**：86 页二维定级矩阵+《可引用性门禁规范》草案备查不执行——存在性零幻觉（86/86 点名全对）但分级未经验证（抽查 2 硬伤：emotional-heatmap 已是批评家×回目维度·chart-design 非元页面）、阻断式设计即挂即全红须降级 WARN+基线、每页 200-400 字叙事脚本×86≈2.6 万字新内容违反 W626 归档裁决不执行；可收编=二维框架 + §2.2 数据出处四字段（路径/版本/脚本/时间）作为第 28 门禁实现参考。**⚠️ 裁决变更（2026-10-02 用户批准）**：第一步（第 28 门禁 check_citability.py·WARN+基线只增）**已反转本条「登记不开工」裁决并开工**，PRD v1.1 本地留存未入公开仓库（W650 真名防泄漏出库·判据要点已收编 AGENTS §4.2 第 28 条）；**第二步（86 页引用组件 APA/MLA/BibTeX + PNG/SVG 导出）仍维持「登记不开工」**，另立 PRD 再裁。首跑基线 344 行/missing 326（C1 2/86·C2 9/86·C3 1/86·C4 6/86），实证 W638「86 页无一页满足四项」结论成立 **▶ 第二步已启动（2026-10-03 用户「全部启动」·免另立 PRD 直接开工）**：86 页引用组件（APA/MLA/BibTeX 复制）+ PNG/SVG 导出，缺口地图以 W650 刷新版基线为准（missing 327） | **◐ 大部分（第一步第 28 门禁+基线 ✅；第二步引用组件 87 页在位·PNG/SVG 导出仅 4 页）** |
+| B-7 | **分析脚本打包为独立 pip 包**（`pip install xiyouji-analysis`·34 类分析让研究者用自己的文本跑同一套方法） | 大 | 来源=第七份分析裁决（W637 登记·七份中首个真增量工程提案）；**前置**：脚本与仓库路径强耦合（ROOT 相对+dataset/ 硬编码）需解耦改造+包基础设施+文档；学术影响力论点成立（"网站"→"方法"）；归档模式下冻结·重启后学术增强梯队（随 B-5） **▶ 已启动（2026-10-03 用户「全部启动」）**：脚本与仓库路径解耦 + 打包开工 | **✅ 已落地（packaging/xiyouji-analysis 在库）** |
 | B-8 | **数据质量修复（生成器层）**：①~~character_appearance 专名消歧~~ **✅ 已修复（W643）**——修复形态=生成器 `FIRST_APPEAR_OVERRIDE` 剧情首秀覆盖表（白鹿精→78 比丘国·大鹏/白象→74 狮驼岭），裸别名保留（分回文本以裸名词指称三妖·删除即失去召回——临时删别名实证白象/白鹿精整体消失）；②~~dialogue_sentiment 变体补充~~ **撤销（W643 证实已满足）**——utils.aliases 如来别名本就含 佛祖/世尊，58 条为真实语料量；③~~appear_in_chapters 全空~~ **勘误（W643）**——W640 探错位置（characters[].None 而非顶层字段），顶层 matrix/appear_in_chapters 均已填实（35 人物·悟空 96 非零回）④对话重生成语料漂移（分回语料悟空 3516 vs 现网 3521）登记为数据重生成债·随 run_all 下一轮自然消化。**hardships_81 重分类维持不采纳**（奎木狼下凡反证·须作者学术裁决·第十份「青毛狮子→74」亦误：39 乌鸡国即该角色首秀）；cave 合并/fun/ 迁移=重构冻结维持。**其余登记（W640）**：「缺失维度」类提案（difficulty 1-10 评分/ending 扩 6-8 类/timeline.json/53 地点经纬度/poetry.json）=**新数据生产·归档冻结**·随 B-5 一并考虑 |
 | B-9 | **可视化页面工程债（第十一份 HTML 评审可取项聚合）**：①audit-\* 六族补丁合并为单 label-avoid 模块渲染后一次执行（85/86 页分布·每页省 300-500 行·消除 setTimeout 5 轮全量遍历）②D3 字面色值改读 CSS 变量·删 140 条暗色 fill 硬编码映射③力导向确定性种子（Math.random×5 页·图表可复现）④EMBEDDED/EMBEDDED_DATA 命名统一（46vs26 页分裂）⑤z-index token 化（tooltip z-10 < topnav z-50 遮挡隐患）⑥表格 caption/noscript 增强/skip-link inline style 收编 | 中大 | 来源=第十一份 HTML 页面层评审（W641 裁决入档·**11 份首个真读页面的**·命中与误读参半）；各项独立可分批·维护态按需逐项；**误读不采纳**：CSP 哈希改 nonce（纯静态不可行·generate_csp 自动化非手贴）/hreflang 死链（140 文件在位）/pilgrim-team 截断（2019 行完整）；**先决核查**：--ink-faint 对比度主张 vs a11y 门禁 E2-2 扫描口径（实测 2.7:1 但门禁恒绿·先查扫描范围） **▶ ①②已启动（2026-10-03 用户「全部启动」）**：③④⑤⑥已于 W645 落地 |
 
@@ -72,3 +73,15 @@
 | R-1 | scripts/spot_check_nlp.py:15 | 默认输入=scripts/output/data（非 tracked 本地产物）；无参在新克隆/CI 即显式 ERROR return 1——定位即「管线后校验器」，失败即报错属设计 | 中 | 保持现状；若需 CI 化先跑 run_all 管线再调用 |
 | R-2 | scripts/data_validate.py:31 | 同 R-1（校验 output/data/*.json·依赖先跑 run_all） | 中 | 同上 |
 | R-3 | scripts/extract_datasets.js:104 | 生成的 README 模板示例引用 dataset/philosophy.json（磁盘不存在）——误导性文档示例，非运行时输入 | 低 | 触碰该脚本时顺手改为真实存在的 dataset 文件名 |
+
+## 六、PD-3 走查分流追加（W793·2026-10-18·登记不开工）
+
+> 来源：PD-3 两页启发式走查（docs/superpowers/plans/2026-10-18-pd3-heuristic-review-report.md·8 findings：S2×3 / S3×5·AC-1 零虚构 8/8 命中）。工程类五条登记于此；内容/设计三条（06 缺卷/技术提示文案/数字串图例）在报告 §5 列裁决项 PD-3-A1~A3 交作者定。
+
+| # | 项 | 量级 | 执行要点 |
+|---|---|---|---|
+| B-100 | 页脚批次链 token 化（batch_cascade `_foot_insert` 插 `W### <desc>` → 收敛为 `W###`） | 小 | desc 移 title 属性或省略；四页脚同步；改后 dry-run 10 面断言 + 全量 verify |
+| B-101 | site 文案聚合数口径（搜索卡「772 篇」vs SEARCH_INDEX 实测 771 条） | 小 | 改引用式或生成注入；「高危位置定点断言」（页脚/版本徽标/搜索卡）评估入第 31 槽扩展·不做全页扫描 |
+| B-102 | dashboard 研究矩阵卡片计数与 stats 对齐（卡片 Σ575 vs 引言 615） | 小 | 卡片数字改 stats 实体注入（C5b 同款）或按现势重写 |
+| B-103 | v-号残留清除（dashboard 页脚 `v2.3.79`·v-号体系已 W711 退役） | 微小 | 改现役批次 token 或移除；顺带全站 grep `v2\.\d+\.\d+` 残留清单 |
+| ~~B-104~~ | ~~主题/专题术语统一~~ | — | **✗ 撤回（W794 复核）**：术语本已一致（HTML 实为「51 个专题页」·系走查低分辨率误读·F-08 假阳性）；不产生工程项 |
