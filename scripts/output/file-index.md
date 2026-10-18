@@ -11,6 +11,17 @@
 ---
 
 
+## W791 agent-web 攻击面负向测试批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/security.ts | W791 | 新增：安全边界纯函数与 SSE 守卫（BL-29 提取） |
+| xiyouji-agent-web/server/security.test.ts | W791 | 新增：17 例攻击面负向测试（BL-29） |
+| xiyouji-agent-web/server/index.ts | W791 | 安全逻辑提取至 security.ts（14 增 54 删）+ W568 漏改修正 |
+| xiyouji-agent-web/package.json | W791 | test:server 接入 security.test.ts |
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W791 | D2/E 状态行陈滞回写 ✅ + 计划头状态收官 |
+| HANDOVER.md | W791 | BL-23/24 关闭标注 |
+
 ## W790 外部评审第三轮回应登记批（2026-10-18）
 
 | 文件 | W | 说明 |
