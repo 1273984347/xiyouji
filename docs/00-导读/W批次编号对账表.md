@@ -163,7 +163,7 @@
 | W798 | 对拍模板转正 + 临时区清理批（用户令「全都做」）：`tmpe/_templates/duipai/` → `docs/_templates/duipai/`（duipai.py + README 入库·路径引用同步=流水线 §八 + README 自身）；tmpe 本轮清理实录——归桶 30 项（journal 可 undo）·删 `_trash/_edge_cdp_profile` 174.6MB（113 件）·删 `_inbox/hf-poc/hf-cache` HF 模型缓存 1.15GB（可重下）·`_shot` 实测无 30 天前项（0 删）；`hf-poc/data` 252MB（10-15 近作实验数据·无引用）**保留待作者定**。验收=pytest 全量 + verify 全量 | c1bddd9a（batch_cascade 原生级联） | W798 | **已收官**（c1bddd9a） | DSH 2026-10-19 | docs/_templates/duipai/, docs/10-方法论沉淀/批次交付流水线.md |
 | W799 | 截图桶 TTL 收紧批（用户令「改成 7 天」）：`tmpe/policy.yml` ttl_days._shot 30→7（临时证据桶·截图可再生）；按新规清理 **25 项/40.3MB**（目录 6 + 散文件 19·最老 11.9 天）·剩余 38 项 262MB 全在 7 天内；**口径修正**：tmpe 总量复核 574MB（W798 记 615MB 系删除过程瞬时读数·差异归因=du 取样时点）。验收=verify 全量 | 16687b34（batch_cascade 原生级联） | W799 | **已收官**（16687b34） | DSH 2026-10-19 | tmpe/policy.yml |
 | W800 | 第四轮外部评审回应批（用户令「办」）：事实漂移核对（评审称 W759/43 门禁/600 提交 vs 实测 W799/50 段/825）；三条重复投递（BL-26/27/28）不重复登记；**四件落地**——README「AI 生成说明」增「门禁边界（保真不保质）」（直答「可信度剧场」）+ 阅读契约后移至一句话介绍之后（读者优先）+ 133 维性质分层（学术/趣味/工具）+ 统计口径说明 §8「文本与数据基础及适用性限制」；**登记** B-105 可视化叙事/B-106 D3 遗产/B-107 数据基础校勘/B-108 已落地即关。验收=第 31 槽 0 FAIL + pytest + verify | 5d901d6b（batch_cascade 原生级联） | W800 | **已收官**（5d901d6b） | DSH 2026-10-19 | README.md, docs/00-导读/统计口径说明.md, docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md |
-| W801 | character_nlp 行为保持重构批（用户令「代码重构·功能不变」）：`scripts/B_人物/character_nlp.py`（995 行）两处最大函数拆分——`build_dialogue_sentiment` 190 行 → 公开函数 + 6 个 `_accumulate/_build` 小函数；`main` 175 行 → CLI 解析/回目加载/五产物各一函数（print 顺序逐字未变）；**对拍**：PYTHONHASHSEED=0 下旧新两版五件 JSON + stdout **逐字节一致**（base/new 首轮 cooccurrence 差异经查=集合序非确定性·非代码差异，登记 B-109）。未动清单：`_` 前缀一次性脚本 4 个 / check_doc_sync.run_self_test / bump_version.main（W787 已裁定）·其余 47 项 ≥60 行函数按停 churn 纪律不碰。验收=ruff 0 + pytest 629 + verify 全量 | （认领中·收官回填） | W801 | **进行中**（character_nlp 重构批施工中） | DSH 2026-10-19 | scripts/B_人物/character_nlp.py, docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md |
+| W801 | character_nlp 行为保持重构批（用户令「代码重构·功能不变」）：`scripts/B_人物/character_nlp.py`（995 行）两处最大函数拆分——`build_dialogue_sentiment` 190 行 → 公开函数 + 6 个 `_accumulate/_build` 小函数；`main` 175 行 → CLI 解析/回目加载/五产物各一函数（print 顺序逐字未变）；**对拍**：PYTHONHASHSEED=0 下旧新两版五件 JSON + stdout **逐字节一致**（base/new 首轮 cooccurrence 差异经查=集合序非确定性·非代码差异，登记 B-109）。未动清单：`_` 前缀一次性脚本 4 个 / check_doc_sync.run_self_test / bump_version.main（W787 已裁定）·其余 47 项 ≥60 行函数按停 churn 纪律不碰。验收=ruff 0 + pytest 629 + verify 全量 | 3e85a0cf（batch_cascade 原生级联） | W801 | **已收官**（3e85a0cf） | DSH 2026-10-19 | scripts/B_人物/character_nlp.py, docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md |
 
 ## 递延批豁免登记（D2 裁决：对账表登记即可过 doc-sync 提交-版段对账）
 
@@ -251,7 +251,8 @@
 - **W798**：现势下一自由号（32f37255 W797 收官级联后 checklist 例行·2026-10-19）——**预留登记豁免**，动工时按取号规则正式认领（已消费：W798 对拍模板转正批）。
 - **W799**：现势下一自由号（c1bddd9a W798 收官级联后 checklist 例行·2026-10-19）——**预留登记豁免**，动工时按取号规则正式认领（已消费：W799 截图桶 TTL 收紧批）。
 - **W800**：现势下一自由号（16687b34 W799 收官级联后 checklist 例行·2026-10-19）——**预留登记豁免**，动工时按取号规则正式认领（已消费：W800 第四轮外部评审回应批）。
-- **W801**：现势下一自由号（5d901d6b W800 收官级联后 checklist 例行·2026-10-19）——**预留登记豁免**，动工时按取号规则正式认领。
+- **W801**：现势下一自由号（5d901d6b W800 收官级联后 checklist 例行·2026-10-19）——**预留登记豁免**，动工时按取号规则正式认领（已消费：W801 character_nlp 行为保持重构批）。
+- **W802**：现势下一自由号（3e85a0cf W801 收官级联后 checklist 例行·2026-10-19）——**预留登记豁免**，动工时按取号规则正式认领。
 
 ## 登记 ASCII 纪律
 
