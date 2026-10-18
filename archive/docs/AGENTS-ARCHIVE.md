@@ -333,3 +333,8 @@
 ```text
 2026-10-18（W784）分析与审计五小件行为保持重构批：外部重构提案收编第三批小件档——chapter_stats 诗词计数拆显式标记与连续对仗双函数并提聚合函数（键顺序保持）；word_frequency 提 token 过滤函数与最短长度常量（DEFAULT_STOPWORDS 保持 set）；narrative_experiment 四份 JSON 写出与口志拆函数并改 build_summary 单次复用（确定性数据结果不变·数据块逐字保留）；hardships_81 三标签字典提模块级并拆交叉统计与 label 化函数（Counter most common 键序保留·W770 W760-F-2 溯源保留）；line_check self_test 拆三查并提查询单函数（全部输出串与退出码逐字保留）；对拍五脚本前后十一产物逐字节相等；验证等于 pytest 六百三十 passed 加 ruff 零 加 verify 全量零 FAIL
 ```
+以下为 AGENTS.md 版本脚注早期条目（W785-W785）段的原文（单行沿革链·W790 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-18（W785）api_server 行为保持重构批：外部重构提案收编第四批重件档其一——CORS 白名单与 MIME 映射与检索片段窗口提模块级常量（W681 回显常量语义保留）；do_GET 拆 openapi search graph dataset static 五个处理方法并新增 send error json 统一错误结构（响应体字段不变）；文档页表格行渲染提函数；全部路由路径状态码 CORS 判定与 static 边界与检索窗口逐字保留（W337 W339 W681 P3-2 溯源保留）；对比起服务前后十一端点工件十个逐字节相等一个为 HTTP Date 时钟字段剥除后相同按抖动归一；验证等于 pytest 六百三十 passed 加 ruff 零 加 verify 全量零 FAIL
+```

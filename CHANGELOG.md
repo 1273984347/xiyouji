@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W789），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W790），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,17 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W790（2026-10-18）：外部评审第三轮回应登记批
+> **来源**：用户令「b」——外部评审第三轮（同一评审者·七项工程核查 + 末尾索要四项源码）回应登记。判定路径=对盘核验（CI 安装路径/门禁 severity 分布/视觉基线计数/agent-web 测试关键词扫描/覆盖率配置/脚本注册表/sync_docs 接线状态全量实测）+ 上轮报告（2026-10-17·W775）逐条比对。
+> - **重复投递认定**：七项与上轮全同（依赖锁定/门禁数字/视觉回归/agent-web/覆盖率/脚本膨胀/sync_docs），末尾索要四项文件同一；间隔 15 批次（W775→W790）事实已漂移——门禁 44→50 槽、覆盖率项由 W776 决策关闭、归档脚本 45 个数字本轮属实。
+> - **裁定：4 项不成立**——① 依赖锁定：CI 三处安装全锁（pip -r 钉版 + npm ci ×2·lockfile 在库），审计对象是锁定清单非浮动快照；② 门禁数字：现势 50 槽、severity 机制在但当前无 warn 级、无 warn-only 模式，内容/数据语义层硬门禁 8 项可枚举；⑤ 覆盖率：.coveragerc/fail_under 不存在，「配置了没生效」陷阱无从触发，W776 口径决策全文在 pytest.ini；⑥ 脚本注册表：script-coverage-baseline 43 条四分类 + 第 42 门禁机器强制（无引用未登记即 FAIL）。
+> - **裁定：3 项部分成立**——③ 视觉回归：10/87 像素基线属实，但三层分工已建（10 关键页像素 + 87 页第 43 门禁语义断言 + 857 页截图审查），基线更新为手工命令·CI 不自动吞；④ agent-web：38 个 node --test 用例接 CI（tools 26/audit 7/citationGuard 5），但点名三类负向测试不存在；⑦ sync_docs：半退役脚本（校验器·非 CI 接线·仅 Makefile release·存量 exit=1·无单测），活跃同职责门禁 check_doc_sync 有 18 负样本。
+> - **唯一实质增量**：agent-web 攻击面负向测试缺口（CORS 预检绕过/超大 RAG top_k/SSE 超时未清理·W411/W412 修复无回归固化）→ 登记 BL-29；另登记 BL-30（E2E playwright 浮动钉版 + 根级依赖指针）、BL-31（sync_docs 状态处置三选一）、BL-32（截图审查触发粒度）。
+> - **交付**：回应报告归档 docs/11-方案报告/外部评审回应与逐项核查报告-2026-10-18.md（七节体例对齐上轮）+ 三连带（README 索引行 22 / STRUCTURE 现役报告 21→22 篇 / stats report_docs 25→26）+ docs/INDEX.md 重建 701→702 篇 + HANDOVER BL-29~32。
+> - **验证（全绿）**：stats --check 16 键零差异；docs_index --check 通过；pytest 630 passed / 3 skipped；ruff 0；verify 全量 50 段 0 FAIL（含第 17 索引健康/第 31 C5d stats 对账/第 45 目录文档）。
+> - **状态**：已落地（级联+提交+推送按批次流程执行·PR #50 随批更新）。
+> - **文件**：docs/11-方案报告/外部评审回应与逐项核查报告-2026-10-18.md、HANDOVER.md、docs/11-方案报告/README.md、STRUCTURE.md、scripts/output/stats.json、docs/INDEX.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w790_spec.json、scripts/output/_cascade_files_W790.txt
 
 ### W789（2026-10-18）：外部门禁重构提案对盘登记批
 > **来源**：用户转发外部重构产出（三 gate 脚本 + 两公共模块「完整重构版本」·其自带批次编号未登记于对账表·外部异体系）。按流水线 §七 外部产出落地流程对盘：五文件逐字节提取并 round-trip 语法自检，与磁盘现势做 CRLF 归一 diff，15 项改动清单全标记核查。动工前 preflight PASS（W789 认领·与在途 W750/W764 零交集）。
