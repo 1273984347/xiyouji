@@ -150,6 +150,7 @@
 | W785 | api_server 行为保持重构批（外部提案收编第四批重件档其一）：CORS 白名单/MIME 映射/检索片段窗口提模块级常量（W681 回显常量语义保留）；do_GET 拆 _handle_openapi/_handle_search/_handle_graph/_handle_dataset/_serve_static 五臂并新增 _send_error_json 统一错误结构（响应体字段不变）；文档页行渲染提 _render_dataset_row；全部路由状态码 CORS 判定与 static 边界与检索窗口逐字保留（W337/W339/W681/P3-2 溯源保留）。对拍=起服务前后 11 端点工件 10 个逐字节相等·1 个为 HTTP Date 时钟字段（剥除后相同·§八抖动归一） | 2a194bcc（batch_cascade 原生级联） | W785 | **已收官**（2a194bcc） | DSH 2026-10-18 | scripts/api/api_server.py, docs/00-导读/W批次编号对账表.md |
 | W786 | graph_seed_neo4j 行为保持重构批（外部提案收编第五批）：Cypher 拼装提 _build_cypher、快照组装提 _build_snapshot、_OUTPUT 中间变量收敛路径拼接；rag 家族其余五件（build_vectors/page_router/rag_server/rag_enhance/xiyouji_rag）**不收留机械通道**——重运行时对拍面（模型加载/GPU 守护/LLM 端点路径）+ 累计约 2100 行转录风险，与 character_nlp 同款原则。验收=两产物（rag_graph.json/neo4j_seed.cypher）前后逐字节相等 | de965962（batch_cascade 原生级联） | W786 | **已收官**（de965962） | DSH 2026-10-18 | scripts/rag/graph_seed_neo4j.py, docs/00-导读/W批次编号对账表.md |
 | W787 | release.py 行为保持重构批（外部提案收编第六批末批）：分隔线/告警线/CHANGELOG 版本正则常量化（预编译·import re 上移）；step2 拆 _check_uncommitted/_check_unpushed；step3 拆 _parse_count_objects；main 版本解析提 _resolve_target_version；新增 _print_step_header 供步骤 2-5 复用（步骤 1 保持独立实现避免空行差异）；五步输出/前缀/短路顺序/退出码逐字保留。**22 项门禁脚本改动点清单裁定不执行**（交付阻断面+W781 刚完成 verify 体系收口+清单自标多数已足够简洁+5 项发现 3 项系 W775 前旧快照；未来如做须三态核验+五维对拍）。对拍=完整运行输出与退出码逐字相同（存量 exit=1 系 sync_docs 失败态·与重构无关） | 6433053f（batch_cascade 原生级联） | W787 | **已收官**（6433053f） | DSH 2026-10-18 | scripts/release.py, docs/00-导读/W批次编号对账表.md |
+| W788 | JS 门禁死代码清理批（W775 重构收尾·用户令「B」）：删除 `check_screenshot_gates.js` 新增的死常量 `GATE_NAME`（定义后零引用；该门禁无 `---- N FAIL ----` 汇总末行、不在 verify 槽内，CI 靠退出码判定，故不需该常量——系 W775 照抄第 43 槽模式的机械迁移残留）+ 删除 `lib/playwright_gate_utils.js` 的未使用导入 `const path = require('path')`。**零行为变化**：两处均无任何消费点，不动判据/阈值/输出/退出码。验收=截图门禁全量 857 页 FAIL 数逐字节相同 + 破防态负样本可红 + self-test 12/12 + 第 43 槽全量 + pytest 全量 + verify 全量 | 本次提交 | W788 | **进行中** | DSH 2026-10-18 | scripts/check_screenshot_gates.js, scripts/lib/playwright_gate_utils.js, docs/00-导读/W批次编号对账表.md |
 
 ## 递延批豁免登记（D2 裁决：对账表登记即可过 doc-sync 提交-版段对账）
 
@@ -224,7 +225,7 @@
 - **W785**：现势下一自由号（e0e1e194 W784 收官级联后 checklist 例行·2026-10-18）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W786**：现势下一自由号（2a194bcc W785 收官级联后 checklist 例行·2026-10-18）——**预留登记豁免**，动工时按取号规则正式认领。
 - **W787**：现势下一自由号（de965962 W786 收官级联后 checklist 例行·2026-10-18）——**预留登记豁免**，动工时按取号规则正式认领。
-- **W788**：现势下一自由号（6433053f W787 收官级联后 checklist 例行·2026-10-18）——**预留登记豁免**，动工时按取号规则正式认领。
+- **W788**：现势下一自由号（6433053f W787 收官级联后 checklist 例行·2026-10-18）——**预留登记豁免**，动工时按取号规则正式认领（已消费：W788 JS 门禁死代码清理批）。
 
 ## 登记 ASCII 纪律
 

@@ -11,6 +11,14 @@
 ---
 
 
+## W788 JS 门禁死代码清理批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_screenshot_gates.js | W788 | 清理：删 W775 新增的死常量 GATE_NAME（零引用·该门禁靠退出码判定不需汇总末行） |
+| scripts/lib/playwright_gate_utils.js | W788 | 清理：删未使用导入 path（该文件由 W775 全量新增·原生瑕疵） |
+| docs/00-导读/W批次编号对账表.md | W788 | W788 认领登记 |
+
 ## W787 release.py 行为保持重构批（2026-10-18）
 
 | 文件 | W | 说明 |
