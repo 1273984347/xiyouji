@@ -1,0 +1,14 @@
+{
+  "batch": "W799",
+  "date": "2026-10-19",
+  "title": "W799 截图桶 TTL 收紧批",
+  "desc": "截图桶保留期由三十天收紧至七天并按新规清理四十兆，临时区总量复核五百七十四兆，删除期读数差异归因记录",
+  "head_entry": "2026-10-19（W799 截图桶 TTL 收紧批）",
+  "head_sentence": "截图桶保留期收紧至七天，新规清理四十兆，总量复核记录",
+  "changelog_body": "\n> **来源**：用户令「改成 7 天，_shot 本来就是临时证据桶」。\n> - **策略变更**：`tmpe/policy.yml` `ttl_days._shot` **30 → 7**（其余 TTL 不动：_misc 90 / _inbox 7 / _trash 7）；截图桶定位=临时证据·全部可再生（视觉基线另有 tests/e2e/baseline 版本化，不受影响）。\n> - **按新规清理**：删除 **25 项 / 40.3MB**（目录 6 + 散文件 19·最老 11.9 天·含 `_c_review2_png` 10.8MB / `mqxs_pages` 10.2MB 等）；剩余 38 项 262MB 全部在 7 天内保留。\n> - **口径修正（诚实留痕）**：tmpe 总量复核 **574MB**（du·文件实计 563.5MB）——W798 章记载的「1.8GB→615MB」中 615MB 系删除过程瞬时取样，本批以复核值为准；本轮总账=1.8GB → 574MB（降幅 68%）。\n> - **验证（全绿）**：pytest 629 passed / 3 skipped；ruff 0；verify 全量 50 段 0 FAIL。\n> - **状态**：已落地（级联+提交+推送按批次流程执行·PR #51 随批扩入）。\n> - **文件**：tmpe/policy.yml、docs/00-导读/W批次编号对账表.md、scripts/output/_w799_spec.json、scripts/output/_cascade_files_W799.txt\n",
+  "milestone_block": "- **W799 截图桶 TTL 收紧批**：\n  - `_shot` TTL 30→7（policy.yml）；按新规删 25 项/40.3MB（剩余 38 项 262MB 全在 7 天内）\n  - tmpe 总量复核 574MB（1.8GB → 574MB·降 68%）；W798 的 615MB 系瞬时读数已修正\n  - 验证：pytest 629 passed + verify 全量 0 FAIL\n",
+  "agents_note": "2026-10-19（W799）截图桶保留期收紧批：用户令改成七天——策略文件内截图桶 TTL 由三十天改七天（其余不动），按新规删除二十五项四十点三兆（目录六加散文件十九、最老十一点九天），剩余三十八项二百六十二兆全在七天内；同时复核临时区总量为五百七十四兆并修正上一批章记载的六百一十五兆瞬时读数（归因等于 du 取样时点）；验证等于 pytest 六百二十九 passed 加 ruff 零 加 verify 全量五十段零 FAIL",
+  "file_index_rows": [
+    "| tmpe/policy.yml | W799 | ttl_days._shot 30→7（临时证据桶收紧） |"
+  ]
+}

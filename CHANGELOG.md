@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W798），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W799），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,15 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W799（2026-10-19）：截图桶 TTL 收紧批
+> **来源**：用户令「改成 7 天，_shot 本来就是临时证据桶」。
+> - **策略变更**：`tmpe/policy.yml` `ttl_days._shot` **30 → 7**（其余 TTL 不动：_misc 90 / _inbox 7 / _trash 7）；截图桶定位=临时证据·全部可再生（视觉基线另有 tests/e2e/baseline 版本化，不受影响）。
+> - **按新规清理**：删除 **25 项 / 40.3MB**（目录 6 + 散文件 19·最老 11.9 天·含 `_c_review2_png` 10.8MB / `mqxs_pages` 10.2MB 等）；剩余 38 项 262MB 全部在 7 天内保留。
+> - **口径修正（诚实留痕）**：tmpe 总量复核 **574MB**（du·文件实计 563.5MB）——W798 章记载的「1.8GB→615MB」中 615MB 系删除过程瞬时取样，本批以复核值为准；本轮总账=1.8GB → 574MB（降幅 68%）。
+> - **验证（全绿）**：pytest 629 passed / 3 skipped；ruff 0；verify 全量 50 段 0 FAIL。
+> - **状态**：已落地（级联+提交+推送按批次流程执行·PR #51 随批扩入）。
+> - **文件**：tmpe/policy.yml、docs/00-导读/W批次编号对账表.md、scripts/output/_w799_spec.json、scripts/output/_cascade_files_W799.txt
 
 ### W798（2026-10-19）：对拍模板转正批
 > **来源**：用户令「全都做」——tmpe 清理 ①②③ + 对拍模板转正（P-42-03）。本轮 tmpe 实测与处置见下。
