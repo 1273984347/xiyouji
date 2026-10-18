@@ -1,0 +1,14 @@
+{
+  "batch": "W789",
+  "date": "2026-10-18",
+  "title": "W789 外部门禁重构提案对盘登记批",
+  "desc": "外部门禁重构提案对盘登记，逐字节提取五文件与磁盘现势比对，提案十五项改动已全部由此前重构批次落地，余量七处差异均为改号回退或等价噪声，裁定不执行，零代码变更，登记以防重复收编",
+  "head_entry": "2026-10-18（W789 外部门禁重构提案对盘登记批）",
+  "head_sentence": "外部重构提案对盘后裁定不执行，十五项改动均已在此前重构批落地，七处余量差异全部驳回",
+  "changelog_body": "\n> **来源**：用户转发外部重构产出（三 gate 脚本 + 两公共模块「完整重构版本」·其自带批次编号未登记于对账表·外部异体系）。按流水线 §七 外部产出落地流程对盘：五文件逐字节提取并 round-trip 语法自检，与磁盘现势做 CRLF 归一 diff，15 项改动清单全标记核查。动工前 preflight PASS（W789 认领·与在途 W750/W764 零交集）。\n> - **裁定：不执行（提案已被 W775 完全吸收）**——提案 15 项改动（probeInPage/judgeProbe/checkPage/jsLiteralToJson/main 拆分、常量化、v4NearMissPct 去重、BENIGN_CONSOLE_RE 死代码删除、命名规范化、基线检查合并、模式分发函数化、use strict、JSDoc）经逐字节 diff + 全标记核查证实已 100% 落地于磁盘现势（HEAD 7fabdd2c·W788 收官态·工作树干净）；提案与磁盘仅剩 7 处差异且全部驳回。\n> - **驳回项①（改号）**：两公共模块 docstring 由 W775 改为外部自带编号——未登记 W### 入仓即造编号黑洞（C4 镜像拦·W724 同族），且断 W775 溯源链。\n> - **驳回项②（回退 W788）**：playwright_gate_utils 提案版带回 const path 死导入、check_screenshot_gates 提案版带回 GATE_NAME 死常量——均系 W788 刚删除的无消费点代码，落回即回退上一批清理成果。\n> - **驳回项③（正则腐蚀）**：check_data_drift 提案版尾逗号正则缺反斜杠（磁盘 od 实证为 W775 验证态）——W775 引号腐蚀同款症候，按提案落地将令含双逗号的内嵌块静默跳过、可比页数缩水。\n> - **驳回项④（等价噪声）**：utf-8/utf8 与 } })()/})() 两组写法 Node 行为完全等价，零收益 churn（W787 同款裁定）。\n> - **驳回项⑤（契约相悖）**：check_chart_values 提案版 buildReport 增 pathPointsTotal 报告字段——与提案自述「报告 JSON 字段名不变」相悖，且消费方 test_visualization_data.py 在盯，属交付阻断面无收益改动。\n> - **现势健康验证（全绿·兼作已落地实证）**：第 43 门禁 self-test 12/12 exit 0；check_data_drift 全量 exit 0（可比 59 页·150 个 JSON 对比项·W775 引号腐蚀修复覆盖仍在）；chart_values gate 子集（tag-cloud+chapter-stats）0 FAIL；screenshot gate 子集 FAIL 0；pytest 630 passed / 3 skipped；ruff scripts/ 0。\n> - **防重复收编**：本批即登记目的——证据（五份 diff + 五份逐字节提取件 + 健康快照）留存 tmpe 临时区（gitignored）；未来会话收到同族提案应先 diff 对盘勿直接落地（流水线 §七 红线）。\n> - **状态**：登记批（零代码变更·施工前后 HEAD 不变）；级联+提交+推送按批次流程执行。\n> - **文件**：CHANGELOG.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/output/_w789_spec.json、scripts/output/_cascade_files_W789.txt\n",
+  "milestone_block": "- **W789 外部门禁重构提案对盘登记批**：\n  - 外部重构提案对盘裁定不执行，15 项改动已全部由此前重构批落地，余量 7 处差异全部驳回\n  - 零代码变更，登记以防未来会话重复收编；证据留存 tmpe 临时区\n  - 验证：self-test 12/12 + 数据漂移全量 exit 0 + 门禁子集 0 FAIL + pytest 630 passed + verify 全量 0 FAIL\n",
+  "agents_note": "2026-10-18（W789）外部门禁重构提案对盘登记批：用户转发外部重构产出（三 gate 脚本加两公共模块完整重构版，其自带编号未登记于对账表），按外部产出落地流程对盘——五文件逐字节提取 round-trip 自检后与磁盘现势 CRLF 归一 diff 加 15 项改动清单全标记核查，证实提案已由此前重构批完全吸收，提案与磁盘仅剩七处差异且全部驳回（两模块改号回退未登记编号、带回 W788 刚删两处死代码、尾逗号正则缺反斜杠属提取层腐蚀、两组等价写法噪声、报告字段与自述契约相悖）；零代码变更不立施工，现势健康验证等于 self-test 十二例通过加数据漂移全量 exit 零加图表门禁与截图门禁子集零 FAIL 加 pytest 六百三十 passed 加 ruff 零 加 verify 全量零 FAIL；证据留存 tmpe 临时区，登记以防未来会话重复收编同族提案",
+  "file_index_rows": [
+    "| docs/00-导读/W批次编号对账表.md | W789 | W789 认领登记（外部门禁重构提案对盘裁定不执行） |"
+  ]
+}

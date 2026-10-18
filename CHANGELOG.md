@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W788），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W789），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,19 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W789（2026-10-18）：外部门禁重构提案对盘登记批
+> **来源**：用户转发外部重构产出（三 gate 脚本 + 两公共模块「完整重构版本」·其自带批次编号未登记于对账表·外部异体系）。按流水线 §七 外部产出落地流程对盘：五文件逐字节提取并 round-trip 语法自检，与磁盘现势做 CRLF 归一 diff，15 项改动清单全标记核查。动工前 preflight PASS（W789 认领·与在途 W750/W764 零交集）。
+> - **裁定：不执行（提案已被 W775 完全吸收）**——提案 15 项改动（probeInPage/judgeProbe/checkPage/jsLiteralToJson/main 拆分、常量化、v4NearMissPct 去重、BENIGN_CONSOLE_RE 死代码删除、命名规范化、基线检查合并、模式分发函数化、use strict、JSDoc）经逐字节 diff + 全标记核查证实已 100% 落地于磁盘现势（HEAD 7fabdd2c·W788 收官态·工作树干净）；提案与磁盘仅剩 7 处差异且全部驳回。
+> - **驳回项①（改号）**：两公共模块 docstring 由 W775 改为外部自带编号——未登记 W### 入仓即造编号黑洞（C4 镜像拦·W724 同族），且断 W775 溯源链。
+> - **驳回项②（回退 W788）**：playwright_gate_utils 提案版带回 const path 死导入、check_screenshot_gates 提案版带回 GATE_NAME 死常量——均系 W788 刚删除的无消费点代码，落回即回退上一批清理成果。
+> - **驳回项③（正则腐蚀）**：check_data_drift 提案版尾逗号正则缺反斜杠（磁盘 od 实证为 W775 验证态）——W775 引号腐蚀同款症候，按提案落地将令含双逗号的内嵌块静默跳过、可比页数缩水。
+> - **驳回项④（等价噪声）**：utf-8/utf8 与 } })()/})() 两组写法 Node 行为完全等价，零收益 churn（W787 同款裁定）。
+> - **驳回项⑤（契约相悖）**：check_chart_values 提案版 buildReport 增 pathPointsTotal 报告字段——与提案自述「报告 JSON 字段名不变」相悖，且消费方 test_visualization_data.py 在盯，属交付阻断面无收益改动。
+> - **现势健康验证（全绿·兼作已落地实证）**：第 43 门禁 self-test 12/12 exit 0；check_data_drift 全量 exit 0（可比 59 页·150 个 JSON 对比项·W775 引号腐蚀修复覆盖仍在）；chart_values gate 子集（tag-cloud+chapter-stats）0 FAIL；screenshot gate 子集 FAIL 0；pytest 630 passed / 3 skipped；ruff scripts/ 0。
+> - **防重复收编**：本批即登记目的——证据（五份 diff + 五份逐字节提取件 + 健康快照）留存 tmpe 临时区（gitignored）；未来会话收到同族提案应先 diff 对盘勿直接落地（流水线 §七 红线）。
+> - **状态**：登记批（零代码变更·施工前后 HEAD 不变）；级联+提交+推送按批次流程执行。
+> - **文件**：CHANGELOG.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/output/_w789_spec.json、scripts/output/_cascade_files_W789.txt
 
 ### W788（2026-10-18）：JS 门禁死代码清理批
 > **来源**：W775 重构收尾（用户令「B」）——W775 落地批的独立验证中，Lead 与 provenance 复核共同确认两处残余死代码：一处是 W775 **新增**的死常量（非历史遗留），一处是**从落笔起就未使用**的导入。两处均属 W787「门禁脚本停止 churn」裁定之后新增的可读性瑕疵，本批以最小改动（净删 2 行）清理。动工前 preflight PASS（W788 认领·与在途 W750/W764 零交集）。

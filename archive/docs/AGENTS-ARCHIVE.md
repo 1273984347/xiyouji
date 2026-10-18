@@ -328,3 +328,8 @@
 ```text
 2026-10-18（W783）B_人物行为保持重构批：外部重构提案收编第二批——character_appearance 聚合拆排行榜矩阵前端契约三函数并提首回计算函数（显式保住字面值先求值语义与 dict get 默认参数急切求值一致·正则提模块级·W643 W678 W565 溯源保留）；character_network 共现累积拆单函数 combinations 等价改写（节点边结构与排序键逐字保留）；character_nlp 整文件千行重写提案不收（转录风险大于可读性收益·上下文排除规则属密缘导管·run_all 各类仅执行目录首脚本故无自动对拍面·留待文档驱动机械通道）；对拍两脚本全量前后输出逐字节相等；验证等于 pytest 六百三十 passed 加 ruff scripts 全目录零 加 verify 全量零 FAIL
 ```
+以下为 AGENTS.md 版本脚注早期条目（W784-W784）段的原文（单行沿革链·W789 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-18（W784）分析与审计五小件行为保持重构批：外部重构提案收编第三批小件档——chapter_stats 诗词计数拆显式标记与连续对仗双函数并提聚合函数（键顺序保持）；word_frequency 提 token 过滤函数与最短长度常量（DEFAULT_STOPWORDS 保持 set）；narrative_experiment 四份 JSON 写出与口志拆函数并改 build_summary 单次复用（确定性数据结果不变·数据块逐字保留）；hardships_81 三标签字典提模块级并拆交叉统计与 label 化函数（Counter most common 键序保留·W770 W760-F-2 溯源保留）；line_check self_test 拆三查并提查询单函数（全部输出串与退出码逐字保留）；对拍五脚本前后十一产物逐字节相等；验证等于 pytest 六百三十 passed 加 ruff 零 加 verify 全量零 FAIL
+```
