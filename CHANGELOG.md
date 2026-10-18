@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W803），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W804），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,17 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W804（2026-10-19）：桌面版三平台安装包与自动更新批
+> **来源**：用户令「给项目在 GitHub 仓库上面增加一个可以直接下载的安装包，并且支持自动更新」。方案裁定为离线全站桌面版：Electron 壳内嵌全部站点内容（87 可视化页 + 615 篇解读），三平台 GitHub Releases 分发 + electron-updater 自动更新。
+> - **桌面应用（新建 xiyouji-desktop/）**：Electron 44 主进程 + 本地静态服务（纯 Node stdlib·127.0.0.1 随机端口·路径穿越防护·仅 GET/HEAD）+ 中文菜单与原生更新对话框 + 单实例锁与崩溃日志；`--self-test` 无窗口冒烟；`node --test` 33 项单测覆盖静态服务与内容版本解析。
+> - **自动更新**：electron-updater 6.x（publish 指向本仓库 Releases）；启动 3 秒首次检查、之后每 4 小时复查，菜单「帮助→检查更新…」手动触发；发现新版本询问下载→下载进度→重启安装（选择稍后则退出时安装）；开发态与 `XIYOUJI_DISABLE_UPDATE=1` 安全降级。
+> - **发布流水线（新建 .github/workflows/release.yml）**：tag v* 或 workflow_dispatch → 版本一致性闸门（tag 与 xiyouji-desktop/package.json 严格相等，内容批次从 CHANGELOG 首段动态提取）→ 三平台并行构建（Windows NSIS / macOS universal dmg+zip / Linux AppImage）→ 汇总上传 GitHub Release（latest*.yml 与 blockmap 自动更新元数据必传）+ 中文 release notes；Release 已存在时 clobber 更新（幂等重跑）。
+> - **CI 接线**：ci.yml 新增 desktop-build job（npm ci + node --test + prepare:content + electron-builder --dir），防止桌面工程回归；workflows/README.md 登记 release.yml 与发布/自动更新流程。
+> - **下载入口**：根 README 新增「桌面版下载（可安装·自动更新）」段（三平台固定直链 releases/latest/download/...）；STRUCTURE 顶层目录与 README 目录树登记 xiyouji-desktop/。
+> - **验证（全绿）**：npm install + npm test 33 passed；`--self-test` 输出 SELF_TEST_OK（开发态与打包产物双跑）；dist:win 产出 xiyouji-desktop-win-x64.exe 130,705,240 B + latest.yml（sha512 实测对拍一致·app-update.yml 的 provider/owner/repo 正确）；pytest 714 passed / 3 skipped（tests/unit/test_visualization_data.py 末尾挂起为改动前既有现象·W803 已登记，本批排除该文件实跑）；ruff 0；actionlint 0 errors；verify_delivery 全量 50 段 0 FAIL。
+> - **状态**：已落地（级联+提交按批次流程执行；tag v2.3.0 触发 .github/workflows/release.yml 三平台发布，资产以 GitHub Release 页为准）。
+> - **文件**：xiyouji-desktop/、.github/workflows/release.yml、.github/workflows/ci.yml、.github/workflows/README.md、README.md、STRUCTURE.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w804_spec.json
 
 ### W803（2026-10-19）：工具链行为保持重构批：公共骨架提取与长函数拆分
 > **来源**：用户令「对本项目进行代码重构，在保持原有功能、输入输出及外部接口完全不变的前提下提升可读性与可维护性」。动工前先做重复形态普查（378 个 Python 文件 AST 扫描：同名函数体、helper 名频次、惯用法计数），按取证结果定面，不凭印象动刀。

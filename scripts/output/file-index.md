@@ -11,6 +11,20 @@
 ---
 
 
+## W804 桌面版三平台安装包与自动更新批（2026-10-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-desktop/package.json | W804 | 桌面版工程（electron 44.9.0 + electron-builder 26.15.3 + electron-updater 6.8.9·version 2.3.0） |
+| xiyouji-desktop/electron-builder.yml | W804 | 三平台打包配置（NSIS/macOS universal dmg+zip/Linux AppImage·产物名固定字面量·publish=GitHub Releases） |
+| xiyouji-desktop/src/main.cjs | W804 | Electron 主进程（单实例/窗口/菜单/安全策略/--self-test 无窗口冒烟） |
+| xiyouji-desktop/src/server.cjs | W804 | 本地静态服务（127.0.0.1 随机端口/穿越防护/仅 GET+HEAD/MIME/缓存头） |
+| xiyouji-desktop/src/updater.cjs | W804 | electron-updater 自动更新（3 秒首查·4 小时复查·下载/重启中文对话框） |
+| xiyouji-desktop/scripts/prepare-content.mjs | W804 | 构建期内容版本清单注入（CHANGELOG 首段动态批次 + stats 计数） |
+| xiyouji-desktop/tests/ | W804 | node --test 33 项（静态服务/内容准备/打包配置契约） |
+| .github/workflows/release.yml | W804 | 三平台桌面发布工作流（版本闸门→构建→Release+latest*.yml 自动更新元数据） |
+| .github/workflows/ci.yml | W804 | 新增 desktop-build job（npm ci + node --test + electron-builder --dir 打包回归） |
+
 ## W803 工具链行为保持重构批：公共骨架提取与长函数拆分（2026-10-19）
 
 | 文件 | W | 说明 |

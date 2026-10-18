@@ -3,7 +3,7 @@
 
 > **📖 阅读契约（W707）**：索引型——找「东西在哪」时读顶层结构表+目标目录所在段；各板块下的建置沿革（v0.x W0xx 补齐…）是历史记录见 CHANGELOG，勿通读；计数与口径以磁盘实数与 [统计口径说明](docs/00-导读/统计口径说明.md) 为准。
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前批次：W803（2026-10-19）— 五个门禁族收敛公共骨架加 MCP 长函数拆分加 Web Agent 服务端按职责分文件，全部以新旧对拍与构建测试证明行为不变—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前批次：W804（2026-10-19）— 桌面版三平台安装包与自动更新发布流水线—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构
@@ -19,6 +19,7 @@
 | `references/` | 参考文献索引 |
 | `tools/` | 辅助工具脚本（章节切分等） |
 | `xiyouji-agent-web/` | Web Agent「西游记·渡口问津」·自研 OpenAI-compatible 引擎（server/engine/·全主流大模型端点·W680）·`PROJECT_CWD`=仓库根（自动解析）直接对话/检索 docs/ + 跑 scripts/ + 写 dataset/·引擎三键 `LLM_API_BASE`/`LLM_API_KEY`/`LLM_MODEL` 配于服务端 .env（与 scripts/rag 检索式生成并行·详见其 README） |
+| `xiyouji-desktop/` | 桌面版「离线全站客户端」（Electron·W804）：构建时把 `site/` 全量内容打进安装包，运行时经本地 127.0.0.1 静态服务打开；Windows NSIS / macOS universal / Linux AppImage 三平台安装包由 `.github/workflows/release.yml` 发布 GitHub Releases，electron-updater 自动更新（详见该目录 README） |
 | `README.md` | 项目说明 |
 | `CLAUDE.md` | AI 速查层（宿主自动加载·一行规则+权威指针·禁写会漂移的数字与现役值·W664） |
 | `STRUCTURE.md` | 本文件 |
