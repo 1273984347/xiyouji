@@ -338,3 +338,8 @@
 ```text
 2026-10-18（W785）api_server 行为保持重构批：外部重构提案收编第四批重件档其一——CORS 白名单与 MIME 映射与检索片段窗口提模块级常量（W681 回显常量语义保留）；do_GET 拆 openapi search graph dataset static 五个处理方法并新增 send error json 统一错误结构（响应体字段不变）；文档页表格行渲染提函数；全部路由路径状态码 CORS 判定与 static 边界与检索窗口逐字保留（W337 W339 W681 P3-2 溯源保留）；对比起服务前后十一端点工件十个逐字节相等一个为 HTTP Date 时钟字段剥除后相同按抖动归一；验证等于 pytest 六百三十 passed 加 ruff 零 加 verify 全量零 FAIL
 ```
+以下为 AGENTS.md 版本脚注早期条目（W786-W786）段的原文（单行沿革链·W791 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-18（W786）graph_seed_neo4j 行为保持重构批：外部重构提案收编第五批——Cypher 拼装提 build cypher 纯函数（逐行拼接字节稳定）与快照组装提 build snapshot（节点类型与关系类型去重排序）及 OUTPUT 中间变量收敛路径拼接（Cypher 各行与 json dump 参数与守卫调用与日志文本逐字保留）；rag 家族其余五件工程裁定不收留机械通道（build vectors 温度守护断点续跑管线 page router 模型评测面 rag server 运行时服务 rag enhance 端点回退 xiyouji rag 八百行核心——重运行时对拍面加约两千一百行转录风险与 character nlp 同款原则）；对拍两产物与运行日志逐字节相等；验证等于 pytest 六百三十 passed 加 ruff 零 加 verify 全量零 FAIL
+```

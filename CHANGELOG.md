@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W790），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W791），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,16 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W791（2026-10-18）：agent-web 攻击面负向测试批
+> **来源**：用户令「①+②」——BL-29（三轮外部评审唯一实质增量：agent-web 攻击面负向测试缺口）主工 + 需求侧计划状态收尾搭车。动工前 preflight PASS（W791 认领·与在途零交集）。
+> - **攻击面重映射（按真实防护模型·非按评审想象）**：① 「CORS 预检绕过」→ agent-web 无 CORS 中间件（防护模型=loopback 绑定+可选 AGENT_WEB_TOKEN+限流），对应面=token 鉴权负样本+权限模式白名单+cwd 钳制；② 「SSE 超时未清理」→ 守卫四路径单测（超时/断开/幂等/clearTimer）；③ 「超大 RAG top_k」→ agent-web 无此参数（检索为 grep 工具·钳制在 Python 侧 scripts/rag/rag_server.py·W412），映射说明已入 W790 回应报告。
+> - **提取（行为逐字保留）**：index.ts 三处安全逻辑（sanitizePermissionMode/cwd 钳制/SSE 守卫）迁移至新模块 server/security.ts（14 增 54 删·CRLF 行尾纯净·git diff 无整文件翻动）；顺修 W568 漏改——正常完成/异常路径的 `req.off` 注销侧修正为 `res.off`（监听注册在 res·原注销从未生效·每请求泄漏一个 close 监听）。
+> - **测试（新增 17 例·全套 67/67 过）**：权限净化 4 + cwd 钳制 6 + SSE 守卫 5（单测）+ 真实起服集成 2（限流第 31 次请求 429·token 无头/错头 401 与 x-agent-token/Authorization 双正确头式 200·spawn 范式沿用 feedback.test.mjs）；接入 package.json test:server（CI agent-web-build job 既有接线·test_ci_wiring 包含性断言不破·tsc -b 零错误）。
+> - **搭车（计划状态收尾）**：需求侧主计划状态表 WP-D2/WP-E 由「待执行」回写 ✅（W659-W667 六批全关/W669·对账表实证·陈表系 W651 时点未更新）+ 计划头状态改「已全部收官」+ HANDOVER BL-23/24 关闭标注（AGENTS 脚注归档与分层拆分均已于 W709 落地·滚动机制常驻）。
+> - **验证（全绿）**：agent-web test:server 67/67（约 4 秒）+ tsc -b 零错误 + pytest 630 passed / 3 skipped + ruff 0 + verify 全量 50 段 0 FAIL。
+> - **状态**：已落地（级联+提交+推送按批次流程执行·PR #50 随批扩入）。
+> - **文件**：xiyouji-agent-web/server/security.ts、xiyouji-agent-web/server/security.test.ts、xiyouji-agent-web/server/index.ts、xiyouji-agent-web/package.json、docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md、HANDOVER.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w791_spec.json、scripts/output/_cascade_files_W791.txt
 
 ### W790（2026-10-18）：外部评审第三轮回应登记批
 > **来源**：用户令「b」——外部评审第三轮（同一评审者·七项工程核查 + 末尾索要四项源码）回应登记。判定路径=对盘核验（CI 安装路径/门禁 severity 分布/视觉基线计数/agent-web 测试关键词扫描/覆盖率配置/脚本注册表/sync_docs 接线状态全量实测）+ 上轮报告（2026-10-17·W775）逐条比对。

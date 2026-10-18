@@ -10,6 +10,7 @@ import { runAgentTurn } from "./engine/agent-loop.js";
 import { createToolset, TOOL_PERMISSION_KIND } from "./engine/tools.js";
 import { appendAudit, auditTarget, readAudit } from "./audit.js";
 import type { ChatMessage, CanUseTool, PermissionDecision } from "./engine/types.js";
+import { sanitizePermissionMode, resolveWorkingDir, createSseGuard } from "./security.js";
 
 // 待处理的权限请求
 interface PendingPermission {
@@ -107,19 +108,13 @@ if (AGENT_WEB_TOKEN) {
 }
 
 // P0-1 修复：权限模式白名单——外部请求体不可直接传入 bypassPermissions（防未授权 RCE）
-const SAFE_PERMISSION_MODES = new Set(["default", "acceptEdits", "plan"]);
 // 仅当显式设置 AGENT_WEB_ALLOW_BYPASS=1 时启用 bypassPermissions（本地单人模式）
+// 白名单与净化函数提取至 server/security.ts（W791 BL-29·获得回归测试面）
 const ALLOW_BYPASS = process.env.AGENT_WEB_ALLOW_BYPASS === "1";
 // P3-1：详细日志（工具输入/流消息）默认关闭，仅 AGENT_WEB_VERBOSE=1 时打印（防敏感信息泄露）
 const VERBOSE_LOG = process.env.AGENT_WEB_VERBOSE === "1";
 
-function sanitizePermissionMode(input: unknown): "default" | "acceptEdits" | "plan" | "bypassPermissions" {
-  if (typeof input === "string" && SAFE_PERMISSION_MODES.has(input)) return input as "default" | "acceptEdits" | "plan";
-  if (ALLOW_BYPASS && input === "bypassPermissions") return "bypassPermissions";
-  return "default";
-}
-
-// P0-1/W536：工作目录钳制逻辑已内联至 /api/chat 调用点（realpath 规范化 + PROJECT_CWD 前缀校验）。
+// P0-1/W536：权限模式净化与工作目录钳制提取至 server/security.ts（W791 BL-29·调用点见 /api/chat）。
 
 // 引擎配置（W680）：OpenAI-compatible 端点，全部由服务端 .env 提供（P0-2 同款纪律：禁运行时覆盖）。
 // 兼容所有主流大模型：GLM/DeepSeek/Kimi/Qwen/OpenAI/Gemini/Claude-compat/ollama/vLLM 等。
@@ -353,14 +348,9 @@ app.post("/api/chat", async (req, res) => {
 
   // P0-1 修复：工作目录仅允许 PROJECT_CWD 内 + 权限模式白名单净化（不信任请求体原值）
   // P0-1 + W536 安全加固：工作目录钳制（realpath 规范化后仅允许 PROJECT_CWD 内，非法输入回落默认）
-  let workingDir = path.resolve(PROJECT_CWD);
-  try { workingDir = fs.realpathSync(workingDir); } catch { /* 保持 resolve 结果 */ }
-  if (typeof cwd === "string" && cwd.trim()) {
-    let candidate = path.resolve(cwd);
-    try { candidate = fs.realpathSync(candidate); } catch { candidate = ""; }
-    if (candidate && (candidate === workingDir || candidate.startsWith(workingDir + path.sep))) workingDir = candidate;
-  }
-  const effectivePermissionMode = sanitizePermissionMode(permissionMode);
+  // 提取至 server/security.ts（W791 BL-29·逻辑逐字保留）
+  const workingDir = resolveWorkingDir(cwd, PROJECT_CWD);
+  const effectivePermissionMode = sanitizePermissionMode(permissionMode, ALLOW_BYPASS);
   
   // 请求日志
   console.log(`\n[Chat] ========== 新请求 ==========`);
@@ -427,39 +417,9 @@ app.post("/api/chat", async (req, res) => {
   res.setHeader("Connection", "keep-alive");
 
   // P2-3 修复：SSE 断开清理 + 总时长上限（防客户端断开后流继续运行、pending 权限请求悬挂）
-  let aborted = false;
-  const SSE_MAX_MS = 10 * 60 * 1000; // 10 分钟总时长上限
-  const sseTimer = setTimeout(() => {
-    if (aborted) return;
-    aborted = true;
-    engineAbort.abort(); // W680 复核：超时路径同样中止引擎（与 abortStream 对齐，不再烧 token）
-    for (const rid of Object.keys(pendingPermissions)) {
-      const p = pendingPermissions[rid];
-      if (p.sessionId === session.id) {
-        delete pendingPermissions[rid];
-        p.reject(new Error("SSE 超时"));
-      }
-    }
-    try {
-      res.write(`data: ${JSON.stringify({ type: "error", message: "请求超时（10 分钟上限）" })}\n\n`);
-      res.end();
-    } catch { /* 客户端可能已断开 */ }
-  }, SSE_MAX_MS);
-  const abortStream = () => {
-    if (aborted) return;
-    aborted = true;
-    clearTimeout(sseTimer);
-    for (const rid of Object.keys(pendingPermissions)) {
-      const p = pendingPermissions[rid];
-      if (p.sessionId === session.id) {
-        delete pendingPermissions[rid];
-        p.reject(new Error("客户端断开连接"));
-      }
-    }
-    engineAbort.abort(); // W680：中止引擎（终止 LLM 流消费，不再为已断开的客户端烧 token）
-    try { res.end(); } catch { /* 已断开 */ }
-  };
-  const engineAbort = new AbortController();
+  // 守卫提取至 server/security.ts（W791 BL-29·逻辑逐字保留·maxMs 可注入供测试）
+  const sseGuard = createSseGuard({ res, sessionId: session.id, pendingPermissions });
+  const abortStream = sseGuard.abortStream;
   // W568 修复：Express 5 / Node 20+ 下 req 的 'close' 在「请求体读取完毕」即触发（并非连接断开），
   // abortStream 会立刻 res.end() 吞掉后续全部 SSE 事件（实证：init 之后 error 事件整段丢失）。
   // 改挂 res 'close'——仅在客户端提前断开或响应正常完成时触发；完成态重复 res.end() 为无害空操作。
@@ -626,7 +586,7 @@ app.post("/api/chat", async (req, res) => {
       toolset,
       canUseTool,
       maxTurns: LLM_MAX_TURNS,
-      signal: engineAbort.signal,
+      signal: sseGuard.signal,
       handlers: {
         onText: (delta) => {
           fullResponse += delta;
@@ -694,8 +654,8 @@ app.post("/api/chat", async (req, res) => {
     res.write(`data: ${JSON.stringify({ type: "done", duration: result.durationMs })}\n\n`);
 
     // P2-3：清理 SSE 定时器与 close 监听（正常完成路径）
-    clearTimeout(sseTimer);
-    req.off("close", abortStream);
+    sseGuard.clearTimer();
+    res.off("close", abortStream); // W791：注销侧修正为 res（监听注册在 res·W568 改挂时漏改注销）
 
     // 保存助手消息到数据库
     db.createMessage({
@@ -720,8 +680,8 @@ app.post("/api/chat", async (req, res) => {
     console.log(`[Chat] 请求完成 ✓`);
     res.end();
   } catch (error: any) {
-    clearTimeout(sseTimer); // P2-3：异常路径同样清理定时器与 close 监听
-    req.off("close", abortStream);
+    sseGuard.clearTimer(); // P2-3：异常路径同样清理定时器与 close 监听
+    res.off("close", abortStream); // W791：注销侧修正为 res（监听注册在 res·W568 改挂时漏改注销）
     console.error(`\n[Chat] ========== 错误 ==========`);
     console.error(`[Chat] Error Name:`, error?.name);
     console.error(`[Chat] Error Message:`, error?.message);

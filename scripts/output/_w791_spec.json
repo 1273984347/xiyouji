@@ -1,0 +1,19 @@
+{
+  "batch": "W791",
+  "date": "2026-10-18",
+  "title": "W791 agent-web 攻击面负向测试批",
+  "desc": "agent-web 三类攻击面负向测试固化，安全逻辑提取得可测面，真服集成覆盖限流与鉴权，计划状态陈滞回写，服务端测试套件扩充至六十七例",
+  "head_entry": "2026-10-18（W791 agent-web 攻击面负向测试批）",
+  "head_sentence": "三类攻击面负向测试十七例固化，安全逻辑提取获回归面，计划状态陈滞回写",
+  "changelog_body": "\n> **来源**：用户令「①+②」——BL-29（三轮外部评审唯一实质增量：agent-web 攻击面负向测试缺口）主工 + 需求侧计划状态收尾搭车。动工前 preflight PASS（W791 认领·与在途零交集）。\n> - **攻击面重映射（按真实防护模型·非按评审想象）**：① 「CORS 预检绕过」→ agent-web 无 CORS 中间件（防护模型=loopback 绑定+可选 AGENT_WEB_TOKEN+限流），对应面=token 鉴权负样本+权限模式白名单+cwd 钳制；② 「SSE 超时未清理」→ 守卫四路径单测（超时/断开/幂等/clearTimer）；③ 「超大 RAG top_k」→ agent-web 无此参数（检索为 grep 工具·钳制在 Python 侧 scripts/rag/rag_server.py·W412），映射说明已入 W790 回应报告。\n> - **提取（行为逐字保留）**：index.ts 三处安全逻辑（sanitizePermissionMode/cwd 钳制/SSE 守卫）迁移至新模块 server/security.ts（14 增 54 删·CRLF 行尾纯净·git diff 无整文件翻动）；顺修 W568 漏改——正常完成/异常路径的 `req.off` 注销侧修正为 `res.off`（监听注册在 res·原注销从未生效·每请求泄漏一个 close 监听）。\n> - **测试（新增 17 例·全套 67/67 过）**：权限净化 4 + cwd 钳制 6 + SSE 守卫 5（单测）+ 真实起服集成 2（限流第 31 次请求 429·token 无头/错头 401 与 x-agent-token/Authorization 双正确头式 200·spawn 范式沿用 feedback.test.mjs）；接入 package.json test:server（CI agent-web-build job 既有接线·test_ci_wiring 包含性断言不破·tsc -b 零错误）。\n> - **搭车（计划状态收尾）**：需求侧主计划状态表 WP-D2/WP-E 由「待执行」回写 ✅（W659-W667 六批全关/W669·对账表实证·陈表系 W651 时点未更新）+ 计划头状态改「已全部收官」+ HANDOVER BL-23/24 关闭标注（AGENTS 脚注归档与分层拆分均已于 W709 落地·滚动机制常驻）。\n> - **验证（全绿）**：agent-web test:server 67/67（约 4 秒）+ tsc -b 零错误 + pytest 630 passed / 3 skipped + ruff 0 + verify 全量 50 段 0 FAIL。\n> - **状态**：已落地（级联+提交+推送按批次流程执行·PR #50 随批扩入）。\n> - **文件**：xiyouji-agent-web/server/security.ts、xiyouji-agent-web/server/security.test.ts、xiyouji-agent-web/server/index.ts、xiyouji-agent-web/package.json、docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md、HANDOVER.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w791_spec.json、scripts/output/_cascade_files_W791.txt\n",
+  "milestone_block": "- **W791 agent-web 攻击面负向测试批**：\n  - BL-29 主工：三类攻击面按真实防护模型重映射，17 例负向测试固化（净化 4/钳制 6/SSE 守卫 5/真服集成 2）\n  - 安全逻辑提取至 server/security.ts（14 增 54 删·行为逐字保留）+ W568 漏改修正（req.off→res.off）\n  - 搭车：需求侧计划 D2/E 陈滞回写 ✅ + BL-23/24 关闭；test:server 67/67\n  - 验证：tsc 零错误 + pytest 630 passed + verify 全量 0 FAIL\n",
+  "agents_note": "2026-10-18（W791）agent-web 攻击面负向测试批：用户令一加二——BL-29 主工加计划状态收尾搭车；三轮评审点名的三类攻击面按 agent-web 真实防护模型重映射（无 CORS 中间件故以 token 鉴权与权限白名单与 cwd 钳制对应、SSE 守卫四路径、top_k 参数不存在于 agent-web 而钳制在 Python 侧）；index.ts 三处安全逻辑逐字提取至 server/security.ts（十四增五十四删）并顺修 W568 漏改（完成路径注销侧由 req 改 res）；新增十七例负向测试（净化四、钳制六、SSE 守卫五、真服集成二覆盖限流四百二十九与鉴权四百零一）接入 test:server 后全套六十七例全过；搭车等于需求侧计划 D2 与 E 状态行陈滞回写完结加 BL-23 与 BL-24 关闭标注；验证等于 test:server 六十七比六十七加 tsc 零错误加 pytest 六百三十 passed 加 ruff 零 加 verify 全量五十段零 FAIL",
+  "file_index_rows": [
+    "| xiyouji-agent-web/server/security.ts | W791 | 新增：安全边界纯函数与 SSE 守卫（BL-29 提取） |",
+    "| xiyouji-agent-web/server/security.test.ts | W791 | 新增：17 例攻击面负向测试（BL-29） |",
+    "| xiyouji-agent-web/server/index.ts | W791 | 安全逻辑提取至 security.ts（14 增 54 删）+ W568 漏改修正 |",
+    "| xiyouji-agent-web/package.json | W791 | test:server 接入 security.test.ts |",
+    "| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W791 | D2/E 状态行陈滞回写 ✅ + 计划头状态收官 |",
+    "| HANDOVER.md | W791 | BL-23/24 关闭标注 |"
+  ]
+}

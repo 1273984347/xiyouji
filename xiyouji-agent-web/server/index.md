@@ -11,7 +11,7 @@
 
 - `engine/`
 
-## 文件（8）
+## 文件（10）
 
 ### JavaScript / TypeScript
 
@@ -23,6 +23,8 @@
 - `engine.smoke.mjs`
 - `feedback.test.mjs`
 - `index.ts`
+- `security.test.ts`
+- `security.ts`
 
 ---
 
