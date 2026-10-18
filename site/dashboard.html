@@ -529,7 +529,7 @@
     <main class="container" id="main">
         <div class="notice-wrap">
             <div class="notice" id="dataSource">
-                DATA · 嵌入快照 · file:// 直接打开（如需最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+                DATA · 数据已内置，离线可直接打开（file://）；最新数据以本地服务模式为准。
             </div>
         </div>
 
@@ -684,7 +684,7 @@
         <section class="section" style="padding-top:8px;">
             <div class="section-kick">TOPICS</div>
             <h2 class="section-title">专题数据看板</h2>
-            <div class="section-sub">51 个专题页，37 大门类可视化总览，覆盖 A-AI 全维度 + Q+++ v2.0 新功能 + 原著全文检索 + 妖怪后台论 + D2A 难度热力图。可按类别筛选，或用搜索框按关键词定位。</div>
+            <div class="section-sub">51 个专题页，37 大门类可视化总览，覆盖 A-AI 全维度 + Q+++ v2.0 新功能 + 原著全文检索 + 妖怪后台论 + D2A 难度热力图。可按类别筛选，或用搜索框按关键词定位。数字为对应维度计数（悬停可看明细）。</div>
 
             <div class="filter-bar">
                 <div class="filter-tabs" role="group" aria-label="专题分类筛选">
@@ -713,43 +713,43 @@
                 <div class="empty-state hidden" id="topic-empty" aria-live="polite" aria-atomic="true">
                     未找到匹配“<span class="empty-query"></span>”的专题，试试其他关键词？
                 </div>
-                <a class="kpi-card" href="data/relationships.html" data-category="a-l">
+                <a class="kpi-card" href="data/relationships.html" data-category="a-l" title="势力 7 · 法宝 8 · 搬救兵 15 · 贝尔宾 5">
                     <div class="label">D · 关系网络<span class="category-badge badge-a-l">A-L</span></div>
                     <div class="value">7·8·15·5</div>
                     <div class="desc">势力·法宝·搬救兵·贝尔宾</div>
                     <div class="detail">天庭与灵山双中心结构 →</div>
                 </a>
-                <a class="kpi-card" href="data/philosophy.html" data-category="a-l">
+                <a class="kpi-card" href="data/philosophy.html" data-category="a-l" title="心猿阶段 6 · 修心寓言 8 · 难 81">
                     <div class="label">G · 哲学心性<span class="category-badge badge-a-l">A-L</span></div>
                     <div class="value">6·8·81</div>
                     <div class="desc">心猿阶段·修心寓言·难</div>
                     <div class="detail">六耳猕猴是降伏二心转折点 →</div>
                 </a>
-                <a class="kpi-card" href="data/risk-project.html" data-category="a-l">
+                <a class="kpi-card" href="data/risk-project.html" data-category="a-l" title="风险类别 5 · KPI 7 · MBTI 8">
                     <div class="label">H · 风险项目<span class="category-badge badge-a-l">A-L</span></div>
                     <div class="value">5·7·8</div>
                     <div class="desc">风险类别·KPI·MBTI</div>
                     <div class="detail">综合风险评分 7.2·项目成功 →</div>
                 </a>
-                <a class="kpi-card" href="data/monster-sociology.html" data-category="a-l">
+                <a class="kpi-card" href="data/monster-sociology.html" data-category="a-l" title="作案 5 · 信号 10 · 坐骑档案 10">
                     <div class="label">I · 妖怪社会<span class="category-badge badge-a-l">A-L</span></div>
                     <div class="value">5·10·10</div>
                     <div class="desc">作案·信号·坐骑档案</div>
                     <div class="detail">坐骑下凡实质惩罚率 0% →</div>
                 </a>
-                <a class="kpi-card" href="data/power-resources.html" data-category="a-l">
+                <a class="kpi-card" href="data/power-resources.html" data-category="a-l" title="势力 7 · 晋升 8 · 长生资源 10">
                     <div class="label">J · 权力资源<span class="category-badge badge-a-l">A-L</span></div>
                     <div class="value">7·8·10</div>
                     <div class="desc">势力·晋升·长生资源</div>
                     <div class="detail">天庭与灵山并列影响力 10 →</div>
                 </a>
-                <a class="kpi-card" href="data/karma-reincarnation.html" data-category="a-l">
+                <a class="kpi-card" href="data/karma-reincarnation.html" data-category="a-l" title="生死簿 8 · 因果 10 · 六道 6">
                     <div class="label">K · 命运轮回<span class="category-badge badge-a-l">A-L</span></div>
                     <div class="value">8·10·6</div>
                     <div class="desc">生死簿·因果·六道</div>
                     <div class="detail">地府治理漏洞率 87.5% →</div>
                 </a>
-                <a class="kpi-card" href="data/business-model.html" data-category="a-l">
+                <a class="kpi-card" href="data/business-model.html" data-category="a-l" title="组织对比 2 · 悟空职业 6 · 妖怪公司 5">
                     <div class="label">L · 商业模型<span class="category-badge badge-a-l">A-L</span></div>
                     <div class="value">2·6·5</div>
                     <div class="desc">组织对比·悟空职业·妖怪公司</div>
@@ -767,25 +767,25 @@
                     <div class="desc">修炼·火系·阵法·法宝</div>
                     <div class="detail">天庭能量预算盈余 9249 蟠桃 →</div>
                 </a>
-                <a class="kpi-card" href="data/aesthetics.html" data-category="m-u">
+                <a class="kpi-card" href="data/aesthetics.html" data-category="m-u" title="角色 10 · 色彩 12 · 场景 14">
                     <div class="label">O · 美学时尚<span class="category-badge badge-m-u">M-U</span></div>
                     <div class="value">10·12·14</div>
                     <div class="desc">角色·色彩·场景</div>
                     <div class="detail">悟空时尚 U 型曲线 →</div>
                 </a>
-                <a class="kpi-card" href="data/music-structure.html" data-category="m-u">
+                <a class="kpi-card" href="data/music-structure.html" data-category="m-u" title="声效 16 · 对称 8 · 乐章 4">
                     <div class="label">P · 音乐声效<span class="category-badge badge-m-u">M-U</span></div>
                     <div class="value">16·8·4</div>
                     <div class="desc">声效·对称·乐章</div>
                     <div class="detail">100 回是一首交响乐 →</div>
                 </a>
-                <a class="kpi-card" href="data/text-evolution.html" data-category="m-u">
+                <a class="kpi-card" href="data/text-evolution.html" data-category="m-u" title="版本 10 · 候选作者 4 · 批点者 5">
                     <div class="label">Q · 源流演变<span class="category-badge badge-m-u">M-U</span></div>
                     <div class="value">10·4·5</div>
                     <div class="desc">版本·候选作者·批点者</div>
                     <div class="detail">5 批点者共 6100 条评论 →</div>
                 </a>
-                <a class="kpi-card" href="data/criticism-history.html" data-category="q-plus">
+                <a class="kpi-card" href="data/criticism-history.html" data-category="q-plus" title="年 500 · 批评家 9 · 解读流派 3">
                     <div class="label">Q+ · 批评史长卷<span class="category-badge badge-q-plus">Q+</span></div>
                     <div class="value">500·9·3</div>
                     <div class="desc">年·批评家·解读流派</div>
@@ -839,37 +839,37 @@
                     <div class="desc">关键词匹配 · 跨时空对话 · 快捷话题</div>
                     <div class="detail">鲁迅/胡适/毛泽东/林语堂 →</div>
                 </a>
-                <a class="kpi-card" href="data/monster-background.html" data-category="q-plusplusplus">
+                <a class="kpi-card" href="data/monster-background.html" data-category="q-plusplusplus" title="后台分类 4 · 典型案例 10 · 处置方式 5">
                     <div class="label">Q+++ · 妖怪后台论<span class="category-badge badge-q-plusplusplus">Q+++</span></div>
                     <div class="value">4·10·5</div>
                     <div class="desc">后台分类 · 典型案例 · 处置方式</div>
                     <div class="detail">有后台存活率 97.2% vs 无后台 9.1% →</div>
                 </a>
-                <a class="kpi-card" href="data/deconstruction.html" data-category="m-u">
+                <a class="kpi-card" href="data/deconstruction.html" data-category="m-u" title="解构 7 · 再创作 9 · 国家 7">
                     <div class="label">R · 解构作品<span class="category-badge badge-m-u">M-U</span></div>
                     <div class="value">7·9·7</div>
                     <div class="desc">解构·再创作·国家</div>
                     <div class="detail">日本龙珠全球影响最大 →</div>
                 </a>
-                <a class="kpi-card" href="data/global-pattern.html" data-category="m-u">
+                <a class="kpi-card" href="data/global-pattern.html" data-category="m-u" title="取经者 8 · 节点 8 · 跨年 2300">
                     <div class="label">S · 全球模式<span class="category-badge badge-m-u">M-U</span></div>
                     <div class="value">8·8·2300</div>
                     <div class="desc">取经者·节点·跨年</div>
                     <div class="detail">世界取经者家族跨 2300 年 →</div>
                 </a>
-                <a class="kpi-card" href="data/counterfactual.html" data-category="m-u">
+                <a class="kpi-card" href="data/counterfactual.html" data-category="m-u" title="场景 10 · 类别 6">
                     <div class="label">T · 反事实推断<span class="category-badge badge-m-u">M-U</span></div>
                     <div class="value">10·6</div>
                     <div class="desc">场景·类别</div>
                     <div class="detail">无紧箍咒则取经失败 →</div>
                 </a>
-                <a class="kpi-card" href="data/cultural-misreading.html" data-category="m-u">
+                <a class="kpi-card" href="data/cultural-misreading.html" data-category="m-u" title="翻译偏差 12 · 放大元素 12 · 国 6">
                     <div class="label">U · 文化错位<span class="category-badge badge-m-u">M-U</span></div>
                     <div class="value">12·12·6</div>
                     <div class="desc">翻译偏差·放大元素·国</div>
                     <div class="detail">心猿意马文化鸿沟满分 →</div>
                 </a>
-                <a class="kpi-card" href="data/workplace.html" data-category="v-ah">
+                <a class="kpi-card" href="data/workplace.html" data-category="v-ah" title="年项目 14 · 团队 5 · 黑话 15">
                     <div class="label">V · 打工人职场<span class="category-badge badge-v-ah">V-AH</span></div>
                     <div class="value">14·5·15</div>
                     <div class="desc">年项目·团队·黑话</div>
@@ -881,79 +881,79 @@
                     <div class="desc">社媒·MBTI·适配度</div>
                     <div class="detail">如来 INTJ 10/10 适配 →</div>
                 </a>
-                <a class="kpi-card" href="data/game-webnovel.html" data-category="v-ah">
+                <a class="kpi-card" href="data/game-webnovel.html" data-category="v-ah" title="卡牌 12 · 法宝 10 · 网文 9">
                     <div class="label">X · 游戏网文<span class="category-badge badge-v-ah">V-AH</span></div>
                     <div class="value">12·10·9</div>
                     <div class="desc">卡牌·法宝·网文</div>
                     <div class="detail">退队流猴哥人气 9/10 →</div>
                 </a>
-                <a class="kpi-card" href="data/ethics-consumption.html" data-category="v-ah">
+                <a class="kpi-card" href="data/ethics-consumption.html" data-category="v-ah" title="发现 5 · 探店 12 · IPO 5">
                     <div class="label">Y · 伦理消费<span class="category-badge badge-v-ah">V-AH</span></div>
                     <div class="value">5·12·5</div>
                     <div class="desc">发现·探店·IPO</div>
                     <div class="detail">坐骑权益 0 元赔付 →</div>
                 </a>
-                <a class="kpi-card" href="data/chart-design.html" data-category="v-ah">
+                <a class="kpi-card" href="data/chart-design.html" data-category="v-ah" title="链 5 · 螺旋 5 · 日晷 6">
                     <div class="label">Z · 图表设计<span class="category-badge badge-v-ah">V-AH</span></div>
                     <div class="value">5·5·6</div>
                     <div class="desc">链·螺旋·日晷</div>
                     <div class="detail">阿基米德螺旋修心进度 →</div>
                 </a>
-                <a class="kpi-card" href="data/narrative-experiment.html" data-category="v-ah">
+                <a class="kpi-card" href="data/narrative-experiment.html" data-category="v-ah" title="玩家 4 · 卡牌 32 · 组合 1200">
                     <div class="label">AA · 叙事实验<span class="category-badge badge-v-ah">V-AH</span></div>
                     <div class="value">4·32·1200</div>
                     <div class="desc">玩家·卡牌·组合</div>
                     <div class="detail">灵山董事会反取经桌游 →</div>
                 </a>
-                <a class="kpi-card" href="data/visual-art.html" data-category="v-ah">
+                <a class="kpi-card" href="data/visual-art.html" data-category="v-ah" title="诵经 10 · 气味 10 · 构想 10">
                     <div class="label">AB · 视觉艺术<span class="category-badge badge-v-ah">V-AH</span></div>
                     <div class="value">10·10·10</div>
                     <div class="desc">诵经·气味·构想</div>
                     <div class="detail">心经物质形态金线雕塑 →</div>
                 </a>
-                <a class="kpi-card" href="data/methodology-matrix.html" data-category="v-ah">
+                <a class="kpi-card" href="data/methodology-matrix.html" data-category="v-ah" title="反派 15 · 象限 4 · ROI 10">
                     <div class="label">AC · 方法论矩阵<span class="category-badge badge-v-ah">V-AH</span></div>
                     <div class="value">15·4·10</div>
                     <div class="desc">反派·象限·ROI</div>
                     <div class="detail">搬救兵 ROI 三阶段演变 →</div>
                 </a>
-                <a class="kpi-card" href="data/cognitive-psychology.html" data-category="v-ah">
+                <a class="kpi-card" href="data/cognitive-psychology.html" data-category="v-ah" title="阶段 4 · 人 5 · 案例 6">
                     <div class="label">AD · 认知心理<span class="category-badge badge-v-ah">V-AH</span></div>
                     <div class="value">4·5·6</div>
                     <div class="desc">阶段·人·案例</div>
                     <div class="detail">紧箍咒=外部执行控制 →</div>
                 </a>
-                <a class="kpi-card" href="data/ecology.html" data-category="v-ah">
+                <a class="kpi-card" href="data/ecology.html" data-category="v-ah" title="入侵 7 · 脉冲 10 · 演替 6">
                     <div class="label">AE · 生态学<span class="category-badge badge-v-ah">V-AH</span></div>
                     <div class="value">7·10·6</div>
                     <div class="desc">入侵·脉冲·演替</div>
                     <div class="detail">花果山猴群降 97.2% →</div>
                 </a>
-                <a class="kpi-card" href="data/jurisprudence.html" data-category="v-ah">
+                <a class="kpi-card" href="data/jurisprudence.html" data-category="v-ah" title="量刑 10 · 产权 8 · 数据 8">
                     <div class="label">AF · 法理经济<span class="category-badge badge-v-ah">V-AH</span></div>
                     <div class="value">10·8·8</div>
                     <div class="desc">量刑·产权·数据</div>
                     <div class="detail">大鹏雕 disparity 10/10 →</div>
                 </a>
-                <a class="kpi-card" href="data/material-archaeology.html" data-category="v-ah">
+                <a class="kpi-card" href="data/material-archaeology.html" data-category="v-ah" title="法宝 8 · 服饰 19 · 洞府 14">
                     <div class="label">AG · 物质考古<span class="category-badge badge-v-ah">V-AH</span></div>
                     <div class="value">8·19·14</div>
                     <div class="desc">法宝·服饰·洞府</div>
                     <div class="detail">金刚琢莫氏硬度 9.5 →</div>
                 </a>
-                <a class="kpi-card" href="data/linguistics.html" data-category="v-ah">
+                <a class="kpi-card" href="data/linguistics.html" data-category="v-ah" title="咒语 8 · 对话 5 · 身份 8">
                     <div class="label">AH · 语言学<span class="category-badge badge-v-ah">V-AH</span></div>
                     <div class="value">8·5·8</div>
                     <div class="desc">咒语·对话·身份</div>
                     <div class="detail">三教合一语言图谱 →</div>
                 </a>
-                <a class="kpi-card" href="data/mbti-evolution.html" data-category="v-ah">
+                <a class="kpi-card" href="data/mbti-evolution.html" data-category="v-ah" title="人 5 · 阶段 4 · 维度漂移 8">
                     <div class="label">MBTI · 演变<span class="category-badge badge-v-ah">V-AH</span></div>
                     <div class="value">5·4·8</div>
                     <div class="desc">人·阶段·维度漂移</div>
                     <div class="detail">D1·取经团队人格动力学 →</div>
                 </a>
-                <a class="kpi-card" href="data/hardship-heatmap.html" data-category="a-l">
+                <a class="kpi-card" href="data/hardship-heatmap.html" data-category="a-l" title="难 81 · 难度系数 1-10 10">
                     <div class="label">C · 难度热力<span class="category-badge badge-a-l">A-L</span></div>
                     <div class="value">81·10</div>
                     <div class="desc">难·难度系数 1-10</div>
