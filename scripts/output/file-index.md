@@ -11,6 +11,17 @@
 ---
 
 
+## W794 PD-3 裁决落地批（2026-10-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/index.html | W794 | A1：补 06 个人随笔行 + 九卷→全卷命名 |
+| site/dashboard.html | W794 | A2：DATA 提示改读者语；A3：图例半句 + 30 卡 title |
+| tests/e2e/baseline/index.png | W794 | 视觉基线同步（06 行新增） |
+| tests/e2e/baseline/dashboard.png | W794 | 视觉基线同步（提示与图例变更） |
+| docs/superpowers/plans/2026-10-18-pd3-heuristic-review-report.md | W794 | F-08 撤回 + §5 落地记录 |
+| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W794 | B-104 撤回 |
+
 ## W793 PD-3 走查与 BL-31 退休批（2026-10-18）
 
 | 文件 | W | 说明 |
