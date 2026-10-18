@@ -11,6 +11,16 @@
 ---
 
 
+## W792 全仓待办计划状态核查批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/全仓待办计划方案状态核查报告-2026-10-18.md | W792 | 新增：全仓待办核查报告（五分类+5 处陈滞修正+4 决策项） |
+| HANDOVER.md | W792 | BL-22 ✅ 标注 + 候选清单配额终止注 |
+| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W792 | B-1~B-7 状态回写（4 ✅·2 ◐·1 ☐） |
+| docs/superpowers/plans/2026-09-29-en-data-i18n-display-plan.md | W792 | 状态行回写（快赢层 ✅·根治层排期） |
+| docs/superpowers/plans/2026-10-13-code-refactor-w728.md | W792 | 执行状态行回写（✅ 已执行） |
+
 ## W791 agent-web 攻击面负向测试批（2026-10-18）
 
 | 文件 | W | 说明 |
