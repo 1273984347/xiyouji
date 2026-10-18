@@ -158,7 +158,7 @@
 | W793 | 产品设计套件 PD-3 执行批（用户令「三项都按你说的办」）：两页启发式走查（index+dashboard）——Playwright 真实渲染 file/http × 浅/暗 8 张截图矩阵（pageerror 0）+ Nielsen 十启发式 20 格全覆盖，8 条 finding（S1×0/S2×3/S3×5）全部经选择器回真实 DOM 校验（AC-1 8/8 命中·防虚构）；工程类五条登记 B-100~B-104、内容三条列裁决项 PD-3-A1~A3。搭车：BL-31 sync_docs 退休（release.py step1 改指 check_doc_sync·删脚本·Makefile/doc_areas 同步·release 实跑 step1 PASS）+ 冻结适用范围单一权威表述写入阻塞段（W793 立）+ W792 报告 PD 行陈滞自修。验收=探针 AC-1 全过 + 第 42 槽 0 FAIL + pytest 全量 + verify 全量 | 1b8544e8（batch_cascade 原生级联） | W793 | **已收官**（1b8544e8） | DSH 2026-10-18 | HANDOVER.md, docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md, docs/11-方案报告/全仓待办计划方案状态核查报告-2026-10-18.md, scripts/release.py, scripts/doc_areas.py, Makefile |
 | W794 | PD-3 裁决落地批（用户令「按推荐办」）：A1 首页补 06 个人随笔行（链 reader/essays·节名九卷→全卷）；A2 DATA 提示改读者语（移除 py -m http.server 开发指令）；A3 专题区加图例半句 + 30 张多数字卡 title（单值卡自解释跳过）；自查撤回 F-08 假阳性（术语本已一致·低分辨率误读）+ B-104 同步撤回；视觉基线 index/dashboard 两张同步（其余 8 张回退免抖动 churn）。验收=探针 7/7 + 视觉对比 10/10 + pytest 全量 + verify 全量 | b341d39a（batch_cascade 原生级联） | W794 | **已收官**（b341d39a） | DSH 2026-10-19 | site/index.html, site/dashboard.html, tests/e2e/baseline/index.png, tests/e2e/baseline/dashboard.png, docs/superpowers/plans/2026-10-18-pd3-heuristic-review-report.md, docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md |
 | W795 | 第 42 篇复盘报告入库批（用户令「合并 PR #50 → 写复盘第 42 篇」）：W777-W794 十八段 39 提交复盘——外部输入三段处置闭环（收编六批/对盘驳回/重复投递识别）+ 本地绿CI红第三型（CI Node×原生依赖 engines 错配）+ 探针假阳性自撤（F-08）+ 全仓待办核查无假收敛 + PD-3 走查落地；新经验 E-17~E-24·问题族 FAM-37~39·工作流 WF-06/07·改进项 P-42-01~05；三连带（README 行 24/STRUCTURE 28/INDEX 704 篇）。验收=pytest 全量 + verify 全量 | e174f89f（batch_cascade 原生级联） | W795 | **已收官**（e174f89f） | DSH 2026-10-19 | docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-19.md, docs/11-方案报告/README.md, STRUCTURE.md |
-| W796 | 提示词库整理入库批（用户令「把这个文件内容整理进项目目录内」·Prompt.txt 966 行 47KB）：拆 12 文件至 docs/12-提示词库/（原文照录·逐行映射入各文件头）——总目录+8 设计链接+写作规范+复盘系统提示词+任务执行提示词+项目审查任务书（7 段合一）+隐私边界（独立前置）+安全架构准则+团队角色分工+导师提问流程+创意四题+色彩素材；色值 20 组逐条校准（4 组建言不一致以 HEX 为准·1 组微差）+ docs_index 加第 13 板块 + STRUCTURE 加段 + 目录治理（index/README 生成）；性质=素材归档非任务清单（执行须单独授权）。验收=pytest 全量 + verify 全量 + 第 45 槽 | （认领中·收官回填） | W796 | **进行中**（提示词库入库批施工中） | DSH 2026-10-19 | docs/12-提示词库, scripts/docs_index.py, STRUCTURE.md |
+| W796 | 提示词库整理入库批（用户令「把这个文件内容整理进项目目录内」·Prompt.txt 966 行 47KB）：拆 12 文件至 docs/12-提示词库/（原文照录·逐行映射入各文件头）——总目录+8 设计链接+写作规范+复盘系统提示词+任务执行提示词+项目审查任务书（7 段合一）+隐私边界（独立前置）+安全架构准则+团队角色分工+导师提问流程+创意四题+色彩素材；色值 20 组逐条校准（4 组建言不一致以 HEX 为准·1 组微差）+ docs_index 加第 13 板块 + STRUCTURE 加段 + 目录治理（index/README 生成）；性质=素材归档非任务清单（执行须单独授权）。验收=pytest 全量 + verify 全量 + 第 45 槽 | cba9a309（batch_cascade 原生级联） | W796 | **已收官**（cba9a309） | DSH 2026-10-19 | docs/12-提示词库, scripts/docs_index.py, STRUCTURE.md |
 
 ## 递延批豁免登记（D2 裁决：对账表登记即可过 doc-sync 提交-版段对账）
 
@@ -241,7 +241,8 @@
 - **W793**：现势下一自由号（dde3f64f W792 收官级联后 checklist 例行·2026-10-18）——**预留登记豁免**，动工时按取号规则正式认领（已消费：W793 PD-3 走查与 BL-31 退休批）。
 - **W794**：现势下一自由号（1b8544e8 W793 收官级联后 checklist 例行·2026-10-18）——**预留登记豁免**，动工时按取号规则正式认领（已消费：W794 PD-3 裁决落地批）。
 - **W795**：现势下一自由号（b341d39a W794 收官级联后 checklist 例行·2026-10-19）——**预留登记豁免**，动工时按取号规则正式认领（已消费：W795 第 42 篇复盘报告入库批）。
-- **W796**：现势下一自由号（e174f89f W795 收官级联后 checklist 例行·2026-10-19）——**预留登记豁免**，动工时按取号规则正式认领。
+- **W796**：现势下一自由号（e174f89f W795 收官级联后 checklist 例行·2026-10-19）——**预留登记豁免**，动工时按取号规则正式认领（已消费：W796 提示词库整理入库批）。
+- **W797**：现势下一自由号（cba9a309 W796 收官级联后 checklist 例行·2026-10-19）——**预留登记豁免**，动工时按取号规则正式认领。
 
 ## 登记 ASCII 纪律
 
