@@ -11,20 +11,27 @@
 
 - `engine/`
 
-## 文件（10）
+## 文件（17）
 
 ### JavaScript / TypeScript
 
 - `audit.test.ts`
 - `audit.ts`
+- `chat.ts`
 - `citationGuard.test.ts`
 - `citationGuard.ts`
+- `config.ts`
 - `db.ts`
 - `engine.smoke.mjs`
 - `feedback.test.mjs`
+- `http.ts`
 - `index.ts`
+- `middleware.ts`
+- `permissions.ts`
+- `routes.ts`
 - `security.test.ts`
 - `security.ts`
+- `sse.ts`
 
 ---
 

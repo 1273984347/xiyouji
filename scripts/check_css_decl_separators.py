@@ -14,13 +14,21 @@ experiment 等恰为视觉 FAIL 重灾页（W558 首证 · W673 WP-2.3 机械修
 用法：默认=只读校验（0 违例才过）；--self-test 注入式合成样本 3 例。本脚本绝不修改任何文件。
 """
 
-import glob
 import os
 import re
 import sys
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+# W803：站点页面清单 / 容错读取 / style 块提取 / 注入式自测跑批四段骨架收敛至 scripts/utils/gate_common.py，
+# 本脚本只保留「第 35 门禁声明分隔判定内核」这一自有语义（判定逻辑与输出文案逐字未变）。
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from utils.gate_common import (  # noqa: E402  （须在 sys.path 引导之后·与仓内既有消费形态一致）
+    iter_style_blocks,
+    read_text,
+    relpath,
+    run_case_batch,
+    site_pages,
+)
 
 PROP_RE = re.compile(r"^\s*(--[-\w]|[-\w]+\s*):.*\S")
 DECL_RE = re.compile(r"([-\w]+)\s*:\s*")
@@ -86,17 +94,14 @@ def block_violations(block):
 
 
 def run_scan():
-    files = sorted(glob.glob(os.path.join(ROOT, "site", "data", "*.html"))
-                   + glob.glob(os.path.join(ROOT, "site", "*.html"))
-                   + glob.glob(os.path.join(ROOT, "site", "en", "*.html")))
+    files = site_pages()  # 三源（site/data ∪ site/*.html ∪ site/en）·全局排序
     total = 0
     for f in files:
-        src = open(f, encoding="utf-8", errors="replace").read()
-        for m in re.finditer(r"<style[^>]*>(.*?)</style>", src, re.S | re.I):
-            base = src[:m.start(1)].count("\n") + 1
-            for (i, kind) in block_violations(m.group(1)):
+        src = read_text(f)
+        for block, base in iter_style_blocks(src):
+            for (i, kind) in block_violations(block):
                 total += 1
-                print("FAIL %s:%d [%s]" % (os.path.relpath(f, ROOT), base + i, kind))
+                print("FAIL %s:%d [%s]" % (relpath(f), base + i, kind))
     print("---- 第 35 门禁 声明分隔：%d 页扫描 · 违例 %d 处 ----" % (len(files), total))
     return 1 if total else 0
 
@@ -108,15 +113,13 @@ def run_self_test():
         ("规则末条缺分号合法", ".a {\n  color: red\n}", 0),
         ("粘词残缀（无效属性名）", ".a { border-radius: 20pxbackground:#f0e7d6 }", 1),
     ]
-    fails = 0
-    for name, css, want in cases:
-        got = len(block_violations(css))
-        status = "PASS" if got == want else "FAIL"
-        if got != want:
-            fails += 1
-        print("  %s %s（期望 %d 处）" % (status, name, want))
-    print("---- 第 35 门禁 self-test：%d/%d 通过 ----" % (len(cases) - fails, len(cases)))
-    return 1 if fails else 0
+    # 逐例行 `"  %s %s（期望 %d 处）"` 与收尾行由 gate_common 统一产出（文案逐字同旧版）。
+    return run_case_batch(
+        cases,
+        lambda case: (len(block_violations(case[1])), case[2]),
+        "第 35 门禁",
+        want_text=lambda want: "%d 处" % want,
+    )
 
 
 def main():

@@ -11,6 +11,23 @@
 ---
 
 
+## W803 工具链行为保持重构批：公共骨架提取与长函数拆分（2026-10-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/utils/gate_common.py | W803 | 新建·门禁族公共骨架（12 个公共符号：路径/读取/站点清单/样式块/自测跑批/CLI 分发） |
+| scripts/check_css_decl_separators.py | W803 | 消费 gate_common·第 35 门禁 stdout 逐字节不变 |
+| scripts/check_css_orphan_selectors.py | W803 | 消费 gate_common·二源变体用 site_pages(root=False) |
+| scripts/check_css_var_refs.py | W803 | 消费 gate_common·第 34 门禁 stdout 逐字节不变 |
+| scripts/check_html_head_content.py | W803 | 消费 gate_common·第 33 门禁 stdout 逐字节不变 |
+| scripts/check_kpi_card_base.py | W803 | 消费 gate_common·第 37 门禁 stdout 逐字节不变 |
+| scripts/check_agents_layers.py | W803 | 消费 gate_common·SelfTestTally 收敛自测计数 |
+| scripts/check_claude_md.py | W803 | 消费 gate_common·清 C3 行数计算死代码（7 边界样本证明等值） |
+| scripts/lint_links.py | W803 | _process_file 69→拆分·路径解析口径去重·import 提模块级·逐字节对拍一致 |
+| mcp-server/xiyouji_mcp.py | W803 | 4 个 MCP 工具拆分（长函数 5→1·最长 102→66）·常量提升·注解收敛·30 组对拍一致 |
+| xiyouji-agent-web/server/index.ts | W803 | 710→51 行·按职责拆为 chat/config/http/middleware/permissions/routes/sse |
+| xiyouji-agent-web/src/components/ToolCallsCollapse.tsx | W803 | 767→166 行·渲染分支拆为 src/components/toolCalls/ 五模块 |
+
 ## W802 character_nlp 行为保持重构批·二（2026-10-19）
 
 | 文件 | W | 说明 |

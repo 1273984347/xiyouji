@@ -15,13 +15,22 @@
 用法：默认=只读校验（0 违例才过）；--self-test 注入式合成样本 2 例。本脚本绝不修改任何文件。
 """
 
-import glob
 import os
 import re
 import sys
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+# W803：站点页面清单 / 页面容错读取 / 注入式自测跑批三段骨架收敛至 scripts/utils/gate_common.py，
+# 本脚本只保留「第 37 门禁 kpi-card 基类双保险判定（C1 全局块 + C2 页面 INLINED 分发）」这一自有语义。
+# 注意 system.css 仍走严格 UTF-8 读取（无 errors="replace"）——与页面容错读口径刻意不同，勿统一。
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from utils.gate_common import (  # noqa: E402  （须在 sys.path 引导之后·与仓内既有消费形态一致）
+    ROOT,
+    read_text,
+    relpath,
+    run_case_batch,
+    site_pages,
+)
 
 BASE_RE = re.compile(r"\.kpi-card\s*\{")
 USE_RES = [
@@ -65,18 +74,16 @@ def run_scan():
     fails = []
     if not BASE_RE.search(syscss):
         fails.append("site/system.css: .kpi-card 基类规则缺失（C1）")
-    files = sorted(glob.glob(os.path.join(ROOT, "site", "data", "*.html"))
-                   + glob.glob(os.path.join(ROOT, "site", "*.html"))
-                   + glob.glob(os.path.join(ROOT, "site", "en", "*.html")))
+    files = site_pages()  # 三源（site/data ∪ site/*.html ∪ site/en）·全局排序
     exclude = {"_template.html", "_shell.html"}  # 模板壳：全站门禁口径历来豁免
     use_n = 0
     for f in files:
         if os.path.basename(f) in exclude:
             continue
-        src = open(f, encoding="utf-8", errors="replace").read()
+        src = read_text(f)
         if page_missing(src):
             use_n += 1
-            fails.append("%s: 使用 .kpi-card 但 INLINED 块缺规则（C2）" % os.path.relpath(f, ROOT))
+            fails.append("%s: 使用 .kpi-card 但 INLINED 块缺规则（C2）" % relpath(f))
     for x in fails:
         print("FAIL", x)
     print("---- 第 37 门禁 kpi 基类：%d 页扫描 · 使用页缺分发 %d · C1 %s ----"
@@ -92,15 +99,13 @@ def run_self_test():
         ("使用页 INLINED 缺基类", '<html><head><!-- INLINED CSS --><style>.kpi { color: red }</style></head>'
          '<body><div class="kpi-card">x</div></body></html>', True),
     ]
-    fails = 0
-    for name, html, want in cases:
-        got = page_missing(html)
-        status = "PASS" if got == want else "FAIL"
-        if got != want:
-            fails += 1
-        print("  %s %s（期望 missing=%s）" % (status, name, want))
-    print("---- 第 37 门禁 self-test：%d/%d 通过 ----" % (len(cases) - fails, len(cases)))
-    return 1 if fails else 0
+    # 期望值是布尔（page_missing 语义），逐例行渲染为「期望 missing=True/False」——文案逐字同旧版。
+    return run_case_batch(
+        cases,
+        lambda case: (page_missing(case[1]), case[2]),
+        "第 37 门禁",
+        want_text=lambda want: "missing=%s" % want,
+    )
 
 
 def main():

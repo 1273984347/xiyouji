@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（21）
+## 文件（22）
 
 ### Python 脚本
 
@@ -22,6 +22,7 @@
 - `test_docs_index.py`
 - `test_embed_json.py`
 - `test_folder_docs_gate.py`
+- `test_lint_links_refactor.py`
 - `test_new_page.py`
 - `test_page_router.py`
 - `test_path_guard.py`

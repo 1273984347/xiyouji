@@ -14,13 +14,20 @@
 用法：默认=只读校验（0 违例才过）；--self-test 注入式合成样本 2 例。本脚本绝不修改任何文件。
 """
 
-import glob
 import os
 import re
 import sys
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+# W803：站点页面清单 / 容错读取 / 注入式自测跑批三段骨架收敛至 scripts/utils/gate_common.py，
+# 本脚本只保留「第 33 门禁 head 区间非法开标签判定」这一自有语义（判定逻辑与输出文案逐字未变）。
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from utils.gate_common import (  # noqa: E402  （须在 sys.path 引导之后·与仓内既有消费形态一致）
+    read_text,
+    relpath,
+    run_case_batch,
+    site_pages,
+)
 
 ALLOWED = {"title", "meta", "link", "style", "script", "base", "noscript", "template"}
 HEAD_RE = re.compile(r"<head[^>]*>(.*?)</head>", re.S | re.I)
@@ -41,14 +48,12 @@ def head_bad_tags(src):
 
 def run_scan():
     pages = []
-    files = sorted(glob.glob(os.path.join(ROOT, "site", "data", "*.html"))
-                   + glob.glob(os.path.join(ROOT, "site", "*.html"))
-                   + glob.glob(os.path.join(ROOT, "site", "en", "*.html")))
+    files = site_pages()  # 三源（site/data ∪ site/*.html ∪ site/en）·全局排序
     for f in files:
-        src = open(f, encoding="utf-8", errors="replace").read()
+        src = read_text(f)
         bad = head_bad_tags(src)
         if bad:
-            pages.append((os.path.relpath(f, ROOT), sorted(bad)))
+            pages.append((relpath(f), sorted(bad)))
     for name, bad in pages:
         print("FAIL %s: head 内非法标签 %s" % (name, ",".join(bad)))
     print("---- 第 33 门禁 head 内容：%d 页扫描 · 违例 %d 页 ----" % (len(files), len(pages)))
@@ -62,15 +67,13 @@ def run_self_test():
          '<style>p{color:red}</style><script>1</script><noscript><p>开 JS</p></noscript><!-- 注释 --></head>'
          "<body></body></html>", 0),
     ]
-    fails = 0
-    for name, src, want in cases:
-        got = 1 if head_bad_tags(src) else 0
-        status = "PASS" if got == want else "FAIL"
-        if got != want:
-            fails += 1
-        print("  %s %s（期望 exit %d）" % (status, name, want))
-    print("---- 第 33 门禁 self-test：%d/%d 通过 ----" % (len(cases) - fails, len(cases)))
-    return 1 if fails else 0
+    # 期望值是退出码口径（0/1），故逐例行渲染为「期望 exit %d」——文案逐字同旧版。
+    return run_case_batch(
+        cases,
+        lambda case: (1 if head_bad_tags(case[1]) else 0, case[2]),
+        "第 33 门禁",
+        want_text=lambda want: "exit %d" % want,
+    )
 
 
 def main():
