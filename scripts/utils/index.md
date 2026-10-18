@@ -11,13 +11,14 @@
 
 - （无）
 
-## 文件（5）
+## 文件（6）
 
 ### Python 脚本
 
 - `__init__.py`
 - `aliases.py`
 - `analyzer_base.py`
+- `gate_common.py`
 - `path_guard.py`
 - `text_loader.py`
 

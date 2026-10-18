@@ -16,21 +16,39 @@ JS 文本定义集（--x:/--x= 形态、.style("--x"…、setProperty）——�
 用法：默认=只读校验（0 违例才过）；--self-test 注入式合成样本 2 例。本脚本绝不修改任何文件。
 """
 
-import glob
 import os
 import re
 import sys
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+# W803：站点页面清单 / 容错读取 / style 块提取 / 注入式自测跑批四段骨架收敛至 scripts/utils/gate_common.py，
+# 本脚本只保留「第 34 门禁已知定义集与未定义引用判定」这一自有语义（判定逻辑与输出文案逐字未变）。
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from utils.gate_common import (  # noqa: E402  （须在 sys.path 引导之后·与仓内既有消费形态一致）
+    ROOT,
+    iter_style_blocks,
+    read_text,
+    relpath,
+    run_case_batch,
+    site_pages,
+)
 
 VAR_RE = re.compile(r"var\((--[\w-]+)\)")
 DEF_RE = re.compile(r"(--[\w-]+)\s*:")
 
 
+def _style_blocks_text(src):
+    """全部 style 块正文按 `"\\n"` 连接（扫描口径：跨块去重/对照同一张定义集）。
+
+    与历史内联 `"\\n".join(re.findall(r"<style[^>]*>(.*?)</style>", src, re.S | re.I))`
+    逐字同义——gate_common.iter_style_blocks 用同一正则与同序遍历，此处丢弃行号即可。
+    """
+    return "\n".join(block for block, _base in iter_style_blocks(src))
+
+
 def known_defs(src, tok_defs):
     """与方案附录 A 扫描器 3 同口径的已知定义集。"""
-    style_blocks = "\n".join(re.findall(r"<style[^>]*>(.*?)</style>", src, re.S | re.I))
+    style_blocks = _style_blocks_text(src)
     inline_attr = " ".join(re.findall(r'style="([^"]*)"', src))
     js_text = "\n".join(re.findall(r"<script[^>]*>(.*?)</script>", src, re.S | re.I))
     defs = set(re.findall(DEF_RE, style_blocks)) | set(re.findall(DEF_RE, inline_attr))
@@ -43,25 +61,23 @@ def known_defs(src, tok_defs):
 def page_violations(src, tok_defs):
     """返回该页 style 块内未定义变量引用（去重列表）。"""
     known = known_defs(src, tok_defs)
-    blocks = "\n".join(re.findall(r"<style[^>]*>(.*?)</style>", src, re.S | re.I))
-    return sorted({v for v in VAR_RE.findall(blocks) if v not in known})
+    return sorted({v for v in VAR_RE.findall(_style_blocks_text(src)) if v not in known})
 
 
 def run_scan():
     tok_path = os.path.join(ROOT, "site", "tokens.css")
+    # 注意：tokens.css 用严格 UTF-8 读取（无 errors="replace"）—— 与页面容错读口径刻意不同，勿统一。
     tok_defs = set(re.findall(DEF_RE, open(tok_path, encoding="utf-8").read()))
-    files = sorted(glob.glob(os.path.join(ROOT, "site", "data", "*.html"))
-                   + glob.glob(os.path.join(ROOT, "site", "*.html"))
-                   + glob.glob(os.path.join(ROOT, "site", "en", "*.html")))
+    files = site_pages()  # 三源（site/data ∪ site/*.html ∪ site/en）·全局排序
     bad_total = 0
     pages = 0
     for f in files:
-        src = open(f, encoding="utf-8", errors="replace").read()
+        src = read_text(f)
         bad = page_violations(src, tok_defs)
         if bad:
             pages += 1
             bad_total += len(bad)
-            print("FAIL %s: 未定义变量 %s" % (os.path.relpath(f, ROOT), ",".join(bad)))
+            print("FAIL %s: 未定义变量 %s" % (relpath(f), ",".join(bad)))
     print("---- 第 34 门禁 CSS 变量引用：%d 页扫描 · 违例 %d 处 / %d 页 ----" % (len(files), bad_total, pages))
     return 1 if bad_total else 0
 
@@ -72,15 +88,13 @@ def run_self_test():
         ("未定义变量违例", "<style>p{color:var(--muted);border:1px solid var(--line)}</style>", ["--muted"]),
         ("含页面私有定义豁免", "<style>:root{--muted:#6b6455}p{color:var(--muted)}</style>", []),
     ]
-    fails = 0
-    for name, src, want in cases:
-        got = page_violations(src, set(re.findall(DEF_RE, tok)))
-        status = "PASS" if got == want else "FAIL"
-        if got != want:
-            fails += 1
-        print("  %s %s（期望 %s）" % (status, name, want or "无违例"))
-    print("---- 第 34 门禁 self-test：%d/%d 通过 ----" % (len(cases) - fails, len(cases)))
-    return 1 if fails else 0
+    # 期望值空表时渲染为「无违例」——want_text 由本门禁提供（文案逐字同旧版）。
+    return run_case_batch(
+        cases,
+        lambda case: (page_violations(case[1], set(re.findall(DEF_RE, tok))), case[2]),
+        "第 34 门禁",
+        want_text=lambda want: want or "无违例",
+    )
 
 
 def main():

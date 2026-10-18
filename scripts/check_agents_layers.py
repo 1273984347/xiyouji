@@ -13,8 +13,8 @@ import os
 import re
 import sys
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+from utils.gate_common import ROOT, SCRIPTS_DIR, SelfTestTally, cli_main, read_text_strict
+
 L2_FILES = ["docs/agent/gates.md", "docs/agent/pitfalls.md", "docs/agent/agent-web.md"]
 RE_AGENT_ITEM = re.compile(r"^(\d+)\. \*\*", re.M)
 RE_GATE_ITEM = re.compile(r"^(\d+)\. \*\*", re.M)
@@ -23,8 +23,9 @@ AGENTS_MAX_LINES = 450
 
 
 def rd(p):
-    with open(os.path.join(ROOT, p), encoding="utf-8") as f:
-        return f.read()
+    """读治理档（严格 UTF-8：本门禁读的是仓自有文件，编码坏了应当立刻炸出来，
+    不像站点扫描型门禁那样需要容错跳过——见 utils/gate_common.read_text_strict 注释）。"""
+    return read_text_strict(os.path.join(ROOT, p))
 
 
 def evaluate(inp):
@@ -69,7 +70,7 @@ def gather():
         "agents_sec42": agents[i42:i43] if i42 != -1 and i43 != -1 else "",
         "agents_lines": agents.count("\n") + 1,
         "files": files,
-        "verify_src": rd(os.path.join(HERE, "verify_delivery.py")),
+        "verify_src": rd(os.path.join(SCRIPTS_DIR, "verify_delivery.py")),
     }
 
 
@@ -82,6 +83,11 @@ def run_check():
 
 
 def run_self_test():
+    """注入式负样本自测：每个用例在干净输入上打一处变异，断言对应检查项必红。
+
+    计数与收尾行交给 SelfTestTally（W803 收敛）；逐例输出形态（`PASS  <用例名>`
+    与失败时的 `      -> <issue>` 明细）是本门禁自有文案，保留在本地。
+    """
     base = gather()
     cases = []
 
@@ -93,7 +99,8 @@ def run_self_test():
     case("T3 编号三方失配必红", lambda d: d.update(agents_sec42=re.sub(r"(?m)^41\. \*\*[^\n]*\n", "", d["agents_sec42"])), "C2")  # W713：40→41 替换在 1-41 全序列下 max 仍 41 不失配（4/5 实证）·改删 41 条注入失配
     case("T4 AGENTS 超行必红", lambda d: d.update(agents_lines=999), "C3")
     case("T5 指针悬空必红", lambda d: d.update(agents=d["agents"].replace("(docs/agent/gates.md)", "(docs/agent/nope.md)", 1)), "C4")
-    fails = 0
+
+    tally = SelfTestTally("agents-layers")
     for name, mutate, expect in cases:
         d = dict(base)
         d["files"] = dict(base["files"])
@@ -101,18 +108,14 @@ def run_self_test():
         issues = evaluate(d)
         ok = (not issues) if expect is None else any(i.startswith(expect) for i in issues)
         print("%s  %s" % ("PASS" if ok else "FAIL", name))
-        if not ok:
-            fails += 1
+        if not tally.add(ok):
             for i in issues:
                 print("      -> " + i)
-    print("---- agents-layers self-test：%d/%d 通过 ----" % (len(cases) - fails, len(cases)))
-    return 1 if fails else 0
+    return tally.report()
 
 
 def main():
-    if "--self-test" in sys.argv:
-        return run_self_test()
-    return run_check()
+    return cli_main(run_check, run_self_test)
 
 
 if __name__ == "__main__":

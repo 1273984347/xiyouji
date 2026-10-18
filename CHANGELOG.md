@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W802），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W803），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,19 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W803（2026-10-19）：工具链行为保持重构批：公共骨架提取与长函数拆分
+> **来源**：用户令「对本项目进行代码重构，在保持原有功能、输入输出及外部接口完全不变的前提下提升可读性与可维护性」。动工前先做重复形态普查（378 个 Python 文件 AST 扫描：同名函数体、helper 名频次、惯用法计数），按取证结果定面，不凭印象动刀。
+> - **公共骨架提取（新建 scripts/utils/gate_common.py·250 行）**：把 `check_*` 门禁族各自内联的骨架收敛为单一实现——`ROOT`/`SCRIPTS_DIR` 常量、`read_text`（容错）与 `read_text_strict`（严格·两口径按门禁类型分治不互替）、`site_pages`（站点三源清单·支持二源变体）、`iter_style_blocks`（style 块正文+起始行号）、`run_case_batch`/`SelfTestTally`（自测计数与收尾行）、`cli_main`（`--self-test` 分发）；共 12 个公共符号。
+> - **门禁族改为消费公共模块（7 个脚本）**：`check_css_decl_separators`/`check_css_orphan_selectors`/`check_css_var_refs`/`check_html_head_content`/`check_kpi_card_base`（第 33-37 门禁）+ `check_agents_layers`/`check_claude_md`（第 41/32 门禁）。判定内核函数名与签名全部未变；`--self-test` 与只读扫描的 stdout 逐字节不变。
+> - **清死代码（1 处）**：`check_claude_md.py` 的 C3 行数计算原有连续两次赋值，第一次结果从未被读取（含两项恒为 0 的加法）——以 7 个边界样本（空串/无尾换行/有尾换行/仅换行/双换行）+ 真实 CLAUDE.md 实算证明旧新等值（0 处不一致）后删除。
+> - **长函数拆分**：`lint_links.py` 的 `_process_file`（69 行）拆出链接提取与逐链接判定两段，`check_internal`/`try_fix` 的路径解析口径收敛为共用助手；`_check_external` 的循环内 import 提升为模块级。`mcp-server/xiyouji_mcp.py` 四个 MCP 工具（94-102 行）各拆为参数校验/判定/汇总若干私有助手，`EXPECTED_TYPES`/`SECTION_TITLES` 提为模块级常量、五处重复的 annotations 字典收敛为 `READONLY_TOOL_ANNOTATIONS`。
+> - **Web Agent 服务端按职责分文件**：`server/index.ts` 710 → 51 行（路由注册/SSE/中间件/权限/配置/HTTP 工具各自成文件），`src/components/ToolCallsCollapse.tsx` 767 → 166 行（渲染分支拆为 `src/components/toolCalls/` 5 个模块），新增 `src/utils/` 三个复用模块。
+> - **对拍取证（新增证据链）**：以 git worktree 重建 HEAD 旧态做同源对拍，避免路径伪差——8 个脚本 × 2 模式共 16 组，stdout 逐字节一致（`lint_links --dir docs` 一组首轮报差异，查明为 worktree 内未跟踪文件触发 gitignore 排除的**取证环境伪差**，改在同仓两跑后 sha256 完全相同）；MCP 模块以 30 组输入覆盖全分支（4 种 replacement 组合/5 种 JSON 失败 reason/越界/空目录/截断）返回字典序列化逐字节一致。Web Agent 以路由集合（14 条无丢失）、SSE `type` 取值集合（13 个无丢失）、导出符号与 `npm run build`、`npm run test:server` 为契约面。
+> - **关于第 45 门禁**：本次新增目录与新文件触发目录文档新鲜度门禁，已按生成器刷新（`gen_folder_docs.py` + `--refresh`），不手改生成物。
+> - **验证（全绿）**：ruff check scripts/ mcp-server/ 0；pytest 单元面 427 passed / 3 skipped（`tests/unit/test_visualization_data.py` 在全量套件末尾挂起属**改动前既有现象**，已用 HEAD worktree 复现同点同状态，非本批引入）；verify_delivery 全量 50 段 0 FAIL；`npm run build` 成功、`npm run test:server` 67 passed / 0 fail。
+> - **状态**：已落地（级联+提交按批次流程执行）。
+> - **文件**：scripts/utils/gate_common.py、scripts/check_css_decl_separators.py、scripts/check_css_orphan_selectors.py、scripts/check_css_var_refs.py、scripts/check_html_head_content.py、scripts/check_kpi_card_base.py、scripts/check_agents_layers.py、scripts/check_claude_md.py、scripts/lint_links.py、mcp-server/xiyouji_mcp.py、xiyouji-agent-web/server/、xiyouji-agent-web/src/、tests/test_xiyouji_mcp_extra.py、tests/unit/test_lint_links_refactor.py、docs/00-导读/W批次编号对账表.md、scripts/output/_w803_spec.json、scripts/output/_cascade_files_W803.txt
 
 ### W802（2026-10-19）：character_nlp 行为保持重构批·二
 > **来源**：用户令「继续」——W801 的延续（同模块剩余两处）。对拍法修正：W801 首轮的 base/new 比较混入输出路径字符串伪差，本批改用**同路径两跑**（旧版 stash 后跑→存证→恢复→新版跑→diff）。
