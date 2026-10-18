@@ -11,6 +11,13 @@
 ---
 
 
+## W801 character_nlp 行为保持重构批（2026-10-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/B_人物/character_nlp.py | W801 | 行为保持重构：情感构建 190→7 函数·main 175→9 函数·五处写盘收敛 |
+| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W801 | B-109 登记（cooccurrence 输出非确定） |
+
 ## W800 第四轮外部评审回应批（2026-10-19）
 
 | 文件 | W | 说明 |
