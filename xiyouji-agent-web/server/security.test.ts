@@ -201,13 +201,26 @@ test("clearTimer 后超时不再触发（正常完成路径语义）", async () 
 
 async function spawnServer(port: number, extraEnv: Record<string, string> = {}) {
   const token = extraEnv.AGENT_WEB_TOKEN || "";
-  const child = spawn(process.execPath, ["node_modules/tsx/dist/cli.mjs", "server/index.ts"], {
+  // W791 CI 修复配套：绝对路径（禁相对·cwd 敏感）+ 子进程输出捕获（失败时可见根因·禁盲超时）
+  const tsxCli = path.join(WEB, "node_modules", "tsx", "dist", "cli.mjs");
+  if (!fs.existsSync(tsxCli)) {
+    throw new Error(`tsx CLI 不存在：${tsxCli}（先 npm ci/install·依赖树要求 node>=22）`);
+  }
+  const child = spawn(process.execPath, [tsxCli, "server/index.ts"], {
     cwd: WEB,
     env: { ...process.env, PORT: String(port), AGENT_WEB_TOKEN: "", ...extraEnv },
-    stdio: "ignore",
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+  let out = "";
+  child.stdout?.on("data", (d) => {
+    out += String(d);
+  });
+  child.stderr?.on("data", (d) => {
+    out += String(d);
   });
   const headers: Record<string, string> = token ? { "x-agent-token": token } : {};
-  for (let i = 0; i < 40; i++) {
+  // 40 秒启动预算（CI 冷启动余量·W791 实证 Node 20 下 better-sqlite3 加载失败即进程退出）
+  for (let i = 0; i < 80; i++) {
     try {
       const r = await fetch(`http://127.0.0.1:${port}/api/health`, { headers });
       if (r.ok || r.status === 401) return child; // 401=token 已生效·服务已就绪
@@ -217,7 +230,7 @@ async function spawnServer(port: number, extraEnv: Record<string, string> = {}) 
     await sleep(500);
   }
   child.kill();
-  throw new Error(`server 未就绪（port ${port}）`);
+  throw new Error(`server 未就绪（port ${port}）·子进程输出尾部：\n${out.slice(-1500) || "(无输出)"}`);
 }
 
 test("集成：/api 限流第 31 次请求 429（W681·每分钟 30 次上限）", async () => {
