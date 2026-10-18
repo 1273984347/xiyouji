@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W804），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W805），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,14 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W805（2026-10-19）：跨平台测试守卫热修批
+> **来源**：W804 推送后 dev→main PR 的 CI 首跑（run 39177553777）在 Linux 暴露 W803 引入的测试缺陷——`tests/test_xiyouji_mcp_extra.py::TestInheritedBehaviour::test_directory_as_target_file_raises_permission_error` 断言 `pytest.raises(PermissionError)`，而 Linux/macOS 读目录抛 `IsADirectoryError`（同属 OSError），致「1 failed / 729 passed」CI 红。
+> - **缺陷定位**：W803 为 mcp-server 拆分新增该「继承行为守卫」测试，断言绑定 Windows 专属异常子类；本地 Windows 绿、未推送前 Linux 从未执行，属**平台口径缺陷**（非业务行为变更）。
+> - **修复（仅测试面，行为零变更）**：断言改为跨平台 `pytest.raises(OSError)`，测试更名 `test_directory_as_target_file_raises_os_error`，docstring 明写「Windows PermissionError / Linux IsADirectoryError 同属 OSError，守卫点=目录当文件会抛异常，不绑定平台子类」；被测 `xiyouji_drl_spotcheck` 生产代码未动。
+> - **验证（全绿）**：`pytest tests/test_xiyouji_mcp_extra.py -q` 67 passed；全量排除既有挂起文件 `pytest tests -q --ignore=tests/unit/test_visualization_data.py` 714 passed / 3 skipped；ruff `check scripts/` 0；verify_delivery 全量 50 段 0 FAIL；推送后 PR CI 复跑（Unit Tests pytest job）转绿为准。
+> - **状态**：已落地（级联+提交按批次流程执行）。
+> - **文件**：tests/test_xiyouji_mcp_extra.py、docs/00-导读/W批次编号对账表.md、scripts/output/_w805_spec.json
 
 ### W804（2026-10-19）：桌面版三平台安装包与自动更新批
 > **来源**：用户令「给项目在 GitHub 仓库上面增加一个可以直接下载的安装包，并且支持自动更新」。方案裁定为离线全站桌面版：Electron 壳内嵌全部站点内容（87 可视化页 + 615 篇解读），三平台 GitHub Releases 分发 + electron-updater 自动更新。
