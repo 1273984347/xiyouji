@@ -724,12 +724,17 @@ class TestInheritedBehaviour:
         with pytest.raises(UnicodeDecodeError):
             xiyouji_mcp.xiyouji_drl_spotcheck(file_path=str(tmp_path / "t.md"), old="a", new="b")
 
-    def test_directory_as_target_file_raises_permission_error(self, tmp_path, monkeypatch):
-        """drl_spotcheck 目标是目录：exists() 为真后 read_text 抛 PermissionError（既有）。"""
+    def test_directory_as_target_file_raises_os_error(self, tmp_path, monkeypatch):
+        """drl_spotcheck 目标是目录：exists() 为真后 read_text 抛 OSError。
+
+        W805 跨平台化：Windows 为 PermissionError（[WinError 5]），Linux/macOS 为
+        IsADirectoryError（Errno 21），两者同属 OSError；守卫点=「目录当文件会抛异常」，
+        不绑定具体平台子类（W803 原文断言 PermissionError 致 Linux CI 红）。
+        """
         d = tmp_path / "adir"
         d.mkdir()
         monkeypatch.setattr(xiyouji_mcp, "ROOT", tmp_path)
-        with pytest.raises(PermissionError):
+        with pytest.raises(OSError):
             xiyouji_mcp.xiyouji_drl_spotcheck(file_path=str(d), old="a", new="b")
 
     def test_html_parse_errors_are_swallowed(self, tmp_path, monkeypatch):

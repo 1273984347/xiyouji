@@ -1,0 +1,14 @@
+{
+  "batch": "W805",
+  "date": "2026-10-19",
+  "title": "W805 跨平台测试守卫热修批",
+  "desc": "跨平台测试守卫热修",
+  "head_entry": "2026-10-19（W805 跨平台测试守卫热修批）",
+  "head_sentence": "修复新增跨平台测试守卫在 Linux CI 的异常类型断言",
+  "changelog_body": "\n> **来源**：W804 推送后 dev→main PR 的 CI 首跑（run 39177553777）在 Linux 暴露 W803 引入的测试缺陷——`tests/test_xiyouji_mcp_extra.py::TestInheritedBehaviour::test_directory_as_target_file_raises_permission_error` 断言 `pytest.raises(PermissionError)`，而 Linux/macOS 读目录抛 `IsADirectoryError`（同属 OSError），致「1 failed / 729 passed」CI 红。\n> - **缺陷定位**：W803 为 mcp-server 拆分新增该「继承行为守卫」测试，断言绑定 Windows 专属异常子类；本地 Windows 绿、未推送前 Linux 从未执行，属**平台口径缺陷**（非业务行为变更）。\n> - **修复（仅测试面，行为零变更）**：断言改为跨平台 `pytest.raises(OSError)`，测试更名 `test_directory_as_target_file_raises_os_error`，docstring 明写「Windows PermissionError / Linux IsADirectoryError 同属 OSError，守卫点=目录当文件会抛异常，不绑定平台子类」；被测 `xiyouji_drl_spotcheck` 生产代码未动。\n> - **验证（全绿）**：`pytest tests/test_xiyouji_mcp_extra.py -q` 67 passed；全量排除既有挂起文件 `pytest tests -q --ignore=tests/unit/test_visualization_data.py` 714 passed / 3 skipped；ruff `check scripts/` 0；verify_delivery 全量 50 段 0 FAIL；推送后 PR CI 复跑（Unit Tests pytest job）转绿为准。\n> - **状态**：已落地（级联+提交按批次流程执行）。\n> - **文件**：tests/test_xiyouji_mcp_extra.py、docs/00-导读/W批次编号对账表.md、scripts/output/_w805_spec.json\n",
+  "milestone_block": "- **W805 跨平台测试守卫热修批**：\n  - 根因：W803 新增 `test_directory_as_target_file_raises_permission_error` 断言 PermissionError（Windows 专属），Linux/macOS 读目录抛 IsADirectoryError → PR CI 1 failed\n  - 修复：断言改跨平台 OSError + 测试更名 + docstring 明写平台差异；生产代码零改动（行为不变）\n  - 验证：目标测试 67 passed；全量排除既有挂起文件 714 passed / 3 skipped；PR CI 复跑转绿\n",
+  "agents_note": "2026-10-19（W805）跨平台测试守卫热修批：W804 推送后 dev 到 main 的 PR CI 首跑在 Linux 暴露 W803 引入的测试缺陷——tests/test_xiyouji_mcp_extra.py 的目录目标守卫断言 pytest.raises(PermissionError) 绑定 Windows 专属异常子类，而 Linux 与 macOS 读目录抛 IsADirectoryError（同属 OSError），导致单元测试任务一失败七百二十九通过；修复仅动测试面（断言改为跨平台 OSError、测试更名为 test_directory_as_target_file_raises_os_error、docstring 明写 Windows PermissionError 与 Linux IsADirectoryError 同属 OSError 且守卫点等于目录当文件会抛异常不绑定平台子类），被测 xiyouji_drl_spotcheck 生产代码零改动行为不变；验证等于目标测试六十七 passed 加全量排除既有挂起文件七百一十四 passed 三 skipped 加 ruff 零加 verify 全量五十段零 FAIL 加以推送后 PR CI 复跑转绿为准",
+  "file_index_rows": [
+    "| tests/test_xiyouji_mcp_extra.py | W805 | 目录目标守卫跨平台化（PermissionError → OSError·测试更名 os_error·生产代码零改动） |"
+  ]
+}
