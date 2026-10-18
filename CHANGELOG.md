@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W796），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W797），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,18 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W797（2026-10-19）：历史模板归档批
+> **来源**：用户令「办」——四文件处置（三模板归档 + PRD 留本地），并附「还有哪些文件需要归档 / tmpe 要不要动」两问（答复见批后结论，本批只执行模板归档）。动工前 preflight PASS（W797 认领·零交集）。
+> - **归馆（git mv 保全历史）**：`docs/_templates/{article-template,handoff-checklist,validation-checklist}.md` → `archive/docs/templates/`；新增馆藏 `README.md`——含退休依据（2026-08-11 对抗审查实测**采用率 0%**·证据指向 archive/scripts/batches/misc/）、出生证明（archive/docs/specs/2026-07-29-w205-w206 设计档）与后代载体（文档规范 §12）。
+> - **现役化（内容不随馆藏消失）**：两清单的有效条目提炼为 **「交付自检（10 项）」入 `docs/00-导读/文档规范.md` §12**——含判据与执行方式、机器可判项（2/5/6/7/8/9）要求跑命令不以声明代替证据、处置规则（10/10 接收·任一项退回·≥3 项接手）。
+> - **目录定位**：`docs/_templates/` 保留为**现役模板位**（README/index 由目录治理生成·当前 0 直属文件）；未来新模板在此新建，馆藏勿改。
+> - **PRD 处置（不进馆·明确例外）**：`docs/_dev/产品管理套件应用-2026-10-02/03-PRD-第28门禁…` 为 gitignored 本地件，且 W650 已裁决「真名防泄漏出库」——`archive/` 在公开仓库内，入馆等于重新公开，**维持原地不动**。
+> - **引用面修复（断链 26 处）**：docs/01-09 README、00-导读 README/项目说明、CONTRIBUTING 共 12 文件的模板链接统一改指 `文档规范` §12（相对路径按文件计算）；STRUCTURE `_templates/` 段更新为「现役模板位」；数量表述 8/6 项 → 10 项。
+> - **引用面修复（断链 26 处）**：docs/01-09 README、00-导读 README/项目说明、CONTRIBUTING 共 12 文件的模板链接统一改指 `文档规范` §12（相对路径按文件计算）；STRUCTURE `_templates/` 段更新为「现役模板位」；数量表述 8/6 项 → 10 项。
+> - **验证（全绿）**：git mv 识别为 rename（历史连续）；pytest 629 passed / 3 skipped；ruff 0；verify 全量 50 段 0 FAIL；第 45 槽（docs/_templates 留 README/index 仍满足）；docs_index --check 零差异（模板本不在 INDEX·718 篇不变）。
+> - **状态**：已落地（级联+提交+推送按批次流程执行·PR #51 随批扩入）。
+> - **文件**：archive/docs/templates/README.md、archive/docs/templates/article-template.md、archive/docs/templates/handoff-checklist.md、archive/docs/templates/validation-checklist.md、docs/00-导读/文档规范.md、docs/_templates/README.md、docs/_templates/index.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w797_spec.json、scripts/output/_cascade_files_W797.txt
 
 ### W796（2026-10-19）：提示词库整理入库批
 > **来源**：用户令「把这个文件内容整理进项目目录内」（附 `C:\Users\12739\Desktop\Prompt.txt`·966 行/47KB·提示词合集+任务清单+素材混排）。按上一轮分析稿的模块化建议落地，Q-01~Q-05 五项决策全部记录于总目录 §三。动工前 preflight PASS（W796 认领·零交集）。
