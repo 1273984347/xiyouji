@@ -73,3 +73,15 @@
 | R-1 | scripts/spot_check_nlp.py:15 | 默认输入=scripts/output/data（非 tracked 本地产物）；无参在新克隆/CI 即显式 ERROR return 1——定位即「管线后校验器」，失败即报错属设计 | 中 | 保持现状；若需 CI 化先跑 run_all 管线再调用 |
 | R-2 | scripts/data_validate.py:31 | 同 R-1（校验 output/data/*.json·依赖先跑 run_all） | 中 | 同上 |
 | R-3 | scripts/extract_datasets.js:104 | 生成的 README 模板示例引用 dataset/philosophy.json（磁盘不存在）——误导性文档示例，非运行时输入 | 低 | 触碰该脚本时顺手改为真实存在的 dataset 文件名 |
+
+## 六、PD-3 走查分流追加（W793·2026-10-18·登记不开工）
+
+> 来源：PD-3 两页启发式走查（docs/superpowers/plans/2026-10-18-pd3-heuristic-review-report.md·8 findings：S2×3 / S3×5·AC-1 零虚构 8/8 命中）。工程类五条登记于此；内容/设计三条（06 缺卷/技术提示文案/数字串图例）在报告 §5 列裁决项 PD-3-A1~A3 交作者定。
+
+| # | 项 | 量级 | 执行要点 |
+|---|---|---|---|
+| B-100 | 页脚批次链 token 化（batch_cascade `_foot_insert` 插 `W### <desc>` → 收敛为 `W###`） | 小 | desc 移 title 属性或省略；四页脚同步；改后 dry-run 10 面断言 + 全量 verify |
+| B-101 | site 文案聚合数口径（搜索卡「772 篇」vs SEARCH_INDEX 实测 771 条） | 小 | 改引用式或生成注入；「高危位置定点断言」（页脚/版本徽标/搜索卡）评估入第 31 槽扩展·不做全页扫描 |
+| B-102 | dashboard 研究矩阵卡片计数与 stats 对齐（卡片 Σ575 vs 引言 615） | 小 | 卡片数字改 stats 实体注入（C5b 同款）或按现势重写 |
+| B-103 | v-号残留清除（dashboard 页脚 `v2.3.79`·v-号体系已 W711 退役） | 微小 | 改现役批次 token 或移除；顺带全站 grep `v2\.\d+\.\d+` 残留清单 |
+| B-104 | 主题/专题术语统一（dashboard 引言「51 个主题页」vs 其余处「专题」） | 微小 | 统一为「专题」；同族检查其余页 |
