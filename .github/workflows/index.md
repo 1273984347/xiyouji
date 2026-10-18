@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（8）
+## 文件（9）
 
 ### 数据与配置
 
@@ -19,6 +19,7 @@
 - `dependency-review.yml`
 - `pages.yml`
 - `perf.yml`
+- `release.yml`
 - `scorecard.yml`
 - `screenshot-review.yml`
 - `security.yml`

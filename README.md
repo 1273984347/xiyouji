@@ -4,7 +4,7 @@
 > 一源多形 · 数字人文可视化解读《西游记》100 回 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
 > **📖 阅读契约（W707）**：普通读者通读「普通读者专区」；Agent/开发者只读「开发者/维护者专区」与「AI 生成说明」。先读「是什么/为什么」（下一行），再按路径深入。
 >
-> **当前批次 W803（2026-10-19）**：五个门禁族收敛公共骨架加 MCP 长函数拆分加 Web Agent 服务端按职责分文件，全部以新旧对拍与构建测试证明行为不变·A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> **当前批次 W804（2026-10-19）**：桌面版三平台安装包与自动更新发布流水线·A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 >
 > **版本号说明（W711 方案 D 起）**：本项目的批次编号为 **W###**（单调递增·永不复用·唯一对账键），`v2.3` 为内容阶段标签（定性·无 patch 位·不适用 SemVer）；W710 及更早的历史版本号 `vX.Y.Z` 保留原文。判断「这批改了什么」看 [CHANGELOG.md](CHANGELOG.md) 顶段。
 >
@@ -27,6 +27,20 @@
 *如果图片加载慢，请直接点击上方链接打开站点。*
 
 **本地浏览**：克隆仓库后双击 `site/index.html`（纯静态站点，支持 `file://` 协议直接打开，无需安装任何软件）。
+
+## 📥 桌面版下载（可安装 · 自动更新）
+
+**无需 Node/Python**，安装后离线阅读全部内容（87<!--stats:visualization_pages--> 个可视化页 + 615<!--stats:a1_a6_docs--> 篇解读内置）👉 [**前往 Releases 下载最新版**](https://github.com/1273984347/xiyouji/releases/latest)
+
+| 平台 | 下载文件 | 说明 |
+| --- | --- | --- |
+| Windows | [xiyouji-desktop-win-x64.exe](https://github.com/1273984347/xiyouji/releases/latest/download/xiyouji-desktop-win-x64.exe) | NSIS 安装包（x64） |
+| macOS | [xiyouji-desktop-mac-universal.dmg](https://github.com/1273984347/xiyouji/releases/latest/download/xiyouji-desktop-mac-universal.dmg) | Intel / Apple Silicon 通用 |
+| Linux | [xiyouji-desktop-linux-x86_64.AppImage](https://github.com/1273984347/xiyouji/releases/latest/download/xiyouji-desktop-linux-x86_64.AppImage) | `chmod +x` 后运行 |
+
+**自动更新**：安装后启动 3 秒检查更新（此后每 4 小时检查一次）；菜单「帮助 → 检查更新…」可手动检查，下载完成后重启应用生效。
+
+**未签名提示**：macOS 首次打开请右键 App →「打开」；Windows 若弹 SmartScreen 选择「更多信息」→「仍要运行」。详见 [xiyouji-desktop/README.md](xiyouji-desktop/README.md)。
 
 ## 🎁 你将会看到什么？
 
@@ -130,6 +144,7 @@ xiyouji/
 ├── mcp-server/            # MCP 服务（xiyouji_drl_spotcheck 等工具）
 ├── tests/                 # pytest 测试 + Playwright E2E
 ├── xiyouji-agent-web/     # Web Agent「西游记·渡口问津」（OpenAI-compatible 引擎）
+├── xiyouji-desktop/       # 桌面版（Electron 离线全站客户端 · W804）
 ├── .github/workflows/     # CI/Security/Deploy Pages/Lighthouse/截图审查
 ├── README.md              # 本文件（用户手册 + 开发者分区）
 ├── STRUCTURE.md           # 目录结构详细说明

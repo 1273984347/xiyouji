@@ -423,3 +423,33 @@ jobs:
           path: xiyouji-agent-web/dist
           if-no-files-found: ignore
           retention-days: 30
+
+  desktop-build:
+    # W804：桌面版构建回归（xiyouji-desktop/ 为 Electron 壳 + 内嵌站点内容；
+    # 发布流水线见 release.yml，本 job 只验证「安装包能打出来」，不产 Release）
+    name: Desktop Build (xiyouji-desktop)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          # 桌面版 electron 44 / electron-builder 26 与 agent-web 同用 Node 22
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: xiyouji-desktop/package-lock.json
+
+      - name: Install deps
+        run: npm --prefix xiyouji-desktop ci
+
+      # prepare:content 生成桌面版内置内容清单（generated/ 为生成物，不入库）
+      - name: Prepare bundled content
+        run: npm --prefix xiyouji-desktop run prepare:content
+
+      - name: Unit tests (node --test)
+        run: npm --prefix xiyouji-desktop test
+
+      # electron-builder --dir 只解包不产安装包：验证 asar/extraResources/publish 配置可构建
+      - name: Pack check (electron-builder --dir)
+        run: npm --prefix xiyouji-desktop run pack:dir
