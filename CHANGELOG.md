@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W787），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W788），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,18 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W788（2026-10-18）：JS 门禁死代码清理批
+> **来源**：W775 重构收尾（用户令「B」）——W775 落地批的独立验证中，Lead 与 provenance 复核共同确认两处残余死代码：一处是 W775 **新增**的死常量（非历史遗留），一处是**从落笔起就未使用**的导入。两处均属 W787「门禁脚本停止 churn」裁定之后新增的可读性瑕疵，本批以最小改动（净删 2 行）清理。动工前 preflight PASS（W788 认领·与在途 W750/W764 零交集）。
+> - **改动 1**：`scripts/check_screenshot_gates.js` 删 `const GATE_NAME = 'screenshot-gates';`——该常量定义后全文件零引用（`Select-String -SimpleMatch GATE_NAME` 命中 1 = 仅定义行）。**为何是死代码**：本门禁无 `---- N FAIL ----` 汇总末行（唯一汇总行是 `[chart-gates] done in … FAIL N`），且不在 verify_delivery 45 槽内，CI 靠 `process.exit(bad.length?1:0)` 的**进程退出码**判定（`.github/workflows/screenshot-review.yml` 以 `nick-fields/retry` 包裹 + Summarize 段取 step outcome、不解析末行）——即 GATE_NAME 系 W775 照抄第 43 槽「汇总末行」模式时的**机械迁移残留**，本门禁并不需要它。反讽点：同一提交既删了旧死代码 `BENIGN_CONSOLE_RE`（T1 宣称属实·实测 pre=1/cur=0），又新增了此常量。
+> - **改动 2**：`scripts/lib/playwright_gate_utils.js` 删 `const path = require('path');`——文件内零 `path.` 消费（`\bpath\b` 命中 1 = 仅 require 行）；该模块四导出（DEFAULT_VIEWPORT/launchHeadlessBrowser/createOfflinePage/gotoFileUrl）本不含 path，删后导出面不变。该文件由 W775 全量新增，故属**原生瑕疵**而非历史遗留。
+> - **零行为变化论证**：两处均无任何消费点（源码 grep + 下游引用 + 行号脆弱断言三项核查），不动判据/阈值/消息文本/退出码。
+> - **三态核验（W787 立的标准）**：① **干净态**——截图门禁全量 857 页 · FAIL 0 · exit 0，与改动前逐页 `fails` 比对（排序归一 worker 完成序，流水线 §八固有抖动）**857/857 完全相同**；② **破防态**——本门禁无 self-test 且无注入入口，故以同口径直接驱动判据函数 + 真实浏览器打开 `$env:TEMP` 临时缺陷页，注入 pageerror → G1 红、4000px 溢出 → G3 红（+2720px）、干净页对照 → 绿，3/3 通过（证明删常量未删出假绿）；③ **self-test**——第 43 槽 `--self-test` 12/12 通过 · exit 0。
+> - **回归面**：pytest 630 passed / 3 skipped（`test_visualization_data.py` 18/18 单独复跑通过——全量连跑时该文件被 harness 中断，属环境抖动而非失败）；verify_delivery 全量 50 段核心全过。
+> - **行尾与字节保真**：两文件删行后仍为纯 CRLF、无 BOM、无混行尾（HEAD blob 为 LF，`core.autocrlf=true` 下常规 add 即可，无 W553 翻转风险）；`git diff --numstat` 为 `0 1` / `0 1`（纯删除行，非整文件翻动）。
+> - **不修清单的处置**：W775 验证中另发现两处**行为等价**差异（`pageerror` 统一 `.slice(0,300)` 截断、`gotoFileUrl` 默认参为死参数）——前者经全下游核查确认无行为影响（G1 只读 `.length`，`chart-gates.json` 全仓无消费者），后者属公共模块签名语义，两者均**不在本批范围**，留待下次因其他原因必改该模块的批次作伴随清理。
+> - **状态**：已落地（三态核验全绿）；级联+提交+推送按批次流程执行。
+> - **文件**：scripts/check_screenshot_gates.js、scripts/lib/playwright_gate_utils.js、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w788_spec.json、scripts/output/_cascade_files_W788.txt
 
 ### W787（2026-10-18）：release.py 行为保持重构批
 > **来源**：外部重构提案收编第六批（末批·用户令「全部做完之后合并」）。动工前 preflight PASS（W787 认领·零交集）。
