@@ -11,6 +11,17 @@
 ---
 
 
+## W797 历史模板归档批（2026-10-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| archive/docs/templates/README.md | W797 | 新增：历史模板馆藏说明（退休依据/出生证明/后代载体） |
+| archive/docs/templates/article-template.md | W797 | 迁入：docs/_templates/ 退休（0% 采用） |
+| archive/docs/templates/handoff-checklist.md | W797 | 迁入：docs/_templates/ 退休（subagent 协议已演化） |
+| archive/docs/templates/validation-checklist.md | W797 | 迁入：docs/_templates/ 退休（同上） |
+| docs/00-导读/文档规范.md | W797 | 新增 §12 交付自检（10 项） |
+| docs/_templates/README.md | W797 | 目录刷新（现役模板位·0 直属文件） |
+
 ## W796 提示词库整理入库批（2026-10-19）
 
 | 文件 | W | 说明 |

@@ -11,13 +11,9 @@
 
 - （无）
 
-## 文件（3）
+## 文件（0）
 
-### Markdown 文档
-
-- `article-template.md`
-- `handoff-checklist.md`
-- `validation-checklist.md`
+- （无直属文件·纯容器或占位目录）
 
 ---
 

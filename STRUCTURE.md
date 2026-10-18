@@ -3,7 +3,7 @@
 
 > **📖 阅读契约（W707）**：索引型——找「东西在哪」时读顶层结构表+目标目录所在段；各板块下的建置沿革（v0.x W0xx 补齐…）是历史记录见 CHANGELOG，勿通读；计数与口径以磁盘实数与 [统计口径说明](docs/00-导读/统计口径说明.md) 为准。
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前批次：W796（2026-10-19）— 桌面提示词合集整理入库，九百六十六行拆为十二文件逐行照录，二十组色值逐条校准四组以十六进制为准，七段审查合并为任务书，隐私边界独立前置—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前批次：W797（2026-10-19）— 三件历史模板按仓库惯例归馆，有效条目提炼为交付自检十项入文档规范，本地 PRD 维持出库裁决不动—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构
@@ -149,11 +149,11 @@
 
 开发内部推进计划/执行方案（v07v08 等）。
 
-### _templates/（内容模板）
+### _templates/（现役模板位·W797 起）
 
-通用内容模板（article-template/handoff-checklist/validation-checklist）。
+该目录留作**现役模板位**（当前 0 直属文件）。
 
-> ⚠️ 注意：`article-template.md` 的六段式与线上人物/主题内容实际结构**脱节**（L1 贴合率 0%），新增内容以各类实际结构为准，勿直接套用。
+> 历史模板（article-template/handoff-checklist/validation-checklist）已于 W797 归馆 `archive/docs/templates/`（采用率 0%·馆藏说明含退休依据）；现行交付自检与结构约定见 `docs/00-导读/文档规范.md` §12。
 
 ## source/ 子目录
 
