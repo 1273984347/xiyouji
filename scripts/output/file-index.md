@@ -11,6 +11,14 @@
 ---
 
 
+## W798 对拍模板转正批（2026-10-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/_templates/duipai/README.md | W798 | 新增：对拍模板入库版说明（路径与定位更新） |
+| docs/_templates/duipai/duipai.py | W798 | 新增：对拍模板脚本（snapshot/compare） |
+| docs/10-方法论沉淀/批次交付流水线.md | W798 | §八模板路径改指 docs/_templates/duipai/ |
+
 ## W797 历史模板归档批（2026-10-19）
 
 | 文件 | W | 说明 |
