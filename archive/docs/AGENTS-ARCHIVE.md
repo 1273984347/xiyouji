@@ -343,3 +343,8 @@
 ```text
 2026-10-18（W786）graph_seed_neo4j 行为保持重构批：外部重构提案收编第五批——Cypher 拼装提 build cypher 纯函数（逐行拼接字节稳定）与快照组装提 build snapshot（节点类型与关系类型去重排序）及 OUTPUT 中间变量收敛路径拼接（Cypher 各行与 json dump 参数与守卫调用与日志文本逐字保留）；rag 家族其余五件工程裁定不收留机械通道（build vectors 温度守护断点续跑管线 page router 模型评测面 rag server 运行时服务 rag enhance 端点回退 xiyouji rag 八百行核心——重运行时对拍面加约两千一百行转录风险与 character nlp 同款原则）；对拍两产物与运行日志逐字节相等；验证等于 pytest 六百三十 passed 加 ruff 零 加 verify 全量零 FAIL
 ```
+以下为 AGENTS.md 版本脚注早期条目（W787-W787）段的原文（单行沿革链·W792 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-18（W787）release.py 行为保持重构批：外部重构提案收编第六批末批——分隔线与告警线与 CHANGELOG 版本正则常量化（预编译·import re 上移）；git 状态拆未提交与未推送双检查；体量解析提 count objects 解析函数；版本解析提函数；新增步进标题函数供二至五步复用而步骤一保持独立实现避免空行差异（五步输出前缀短路顺序退出码逐字保留）；22 项门禁脚本改动点清单经裁定不执行（交付阻断面加 W781 刚完成 verify 体系收口连续 churn 违背谨慎本意加清单自标多数已足够简洁加五项可证伪发现三项系 W775 前旧快照；未来如做须逐门禁三态核验加五维对拍）；对拍完整运行输出与退出码逐字相同（存量 exit 1 系 sync docs 一致性检查失败态与重构无关）；验证等于 pytest 六百三十 passed 加 ruff 零 加 verify 全量零 FAIL
+```

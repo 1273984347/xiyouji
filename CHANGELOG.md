@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W791），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W792），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,17 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W792（2026-10-18）：全仓待办计划状态核查批
+> **来源**：用户令「全面审查项目文件中记录的所有待办、计划、方案，逐项核对完成状态」。核查范围=HANDOVER 四区（阻塞段/候选清单/Backlog 32 项/短期待办 25 条）+ docs/superpowers/plans/ 12 份计划 + 需求侧 WP 队列 + S 卡拍板记录 + 维护登记表 B-1~B-7 + S4 投稿树；方法=commit/门禁实跑/产物存在性/计划自载状态行四方交叉，五分类（已完成/未完成/陈滞/需决策/冻结）。
+> - **总判定：无假收敛**——未发现任何「宣称完成实际未做」项；5 处陈滞全部朝「实际已完成或条件已变而文档未更新」的安全方向，本批全部修正。
+> - **已完成（分组）**：需求侧 WP-A~M 十三项全收官；BL 六项已闭（BL-20/21/22/23/24/29·其中 BL-22 实于 W711 收官而 HANDOVER 未标注）；短期待办 25 条全 [x]（抽查无假勾）；计划文件六份收官（需求侧/gate28/agents 分层/方案 D/W728 重构/EN i18n 快赢层）；维护登记表 B-1/B-2/B-3/B-7 已落地、B-5 聚合器先行已出（dataset/entities 两类）、B-6 第一步已闭（第 28 门禁+基线 344 行）。
+> - **未完成（分组·附原因）**：BL-1~BL-19 十八项开面（登记不开工·六项作者裁决）；BL-26/27/28 机制层持续管理（不设关闭项）；BL-30/31/32 低优先残项；B-4 Three.js 懒加载（动态 import 未实施·defer+3D 独立预算已缓解）；B-5 扩字段+学术梯队；B-6 第二步 PNG/SVG 导出（引用组件 87 页在位·导出仅 4 页）；EN i18n 根治层；产品设计套件待用户批复；干扰治理 3 纪律项+两周日志（窗口至 10-28）；S2 外部平台分发与 S4 投稿动作（用户侧）；内容质量深化方向（W626 冻结适用范围待明确）；V1-V4 候选；S-17/18 排期项；复盘第 42 篇（节奏未触发）。
+> - **陈滞修正（5 处·本批落地）**：① BL-22 补 ✅（version-space-inventory §七·W711 实证）；② W728 计划状态行「待执行」→ ✅（CHANGELOG W728 段实证）；③ 维护登记表状态回写（B-1/2/3/7 ✅·B-5/B-6 ◐·B-4 ☐）；④ EN i18n 状态行「待排期」→ 快赢层 ✅（G2 六页整改）；⑤ 候选清单需求侧配额加终止注（WP-A 判定+全 WP 收官实证·W790/W791）。
+> - **需用户决策 4 项**：① 内容扩容冻结的当前适用范围（W626 归档 vs W651 解冻点名·建议单一权威表述写入阻塞段）；② 产品设计套件 §10 逐条批复；③ S4 投稿选刊与时点；④ BL-31 sync_docs 三选一。
+> - **验证（全绿）**：stats --check 16 键零差异；docs_index --check 703 篇通过；pytest 630 passed / 3 skipped；ruff 0；verify 全量 50 段 0 FAIL。
+> - **状态**：已落地（级联+提交+推送按批次流程执行·PR #50 随批扩入）。
+> - **文件**：docs/11-方案报告/全仓待办计划方案状态核查报告-2026-10-18.md、HANDOVER.md、docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md、docs/superpowers/plans/2026-09-29-en-data-i18n-display-plan.md、docs/superpowers/plans/2026-10-13-code-refactor-w728.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w792_spec.json、scripts/output/_cascade_files_W792.txt
 
 ### W791（2026-10-18）：agent-web 攻击面负向测试批
 > **来源**：用户令「①+②」——BL-29（三轮外部评审唯一实质增量：agent-web 攻击面负向测试缺口）主工 + 需求侧计划状态收尾搭车。动工前 preflight PASS（W791 认领·与在途零交集）。
