@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W792），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W793），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,18 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W793（2026-10-18）：PD-3 走查与 BL-31 退休批
+> **来源**：用户令「三项都按你说的办」——产品设计套件 PD-3 执行包（PD 档 §10 D-3 已批范围=2 页）+ BL-31 sync_docs 退休 + 冻结适用范围立句。动工前 preflight PASS（W793 认领·零交集）。
+> - **PD-3 执行（交付物按 PD 档规格）**：Playwright 真实渲染 index+dashboard × {file,http} × {浅,暗} 8 张全页截图矩阵（pageerror 逐张 0·manifest 入库 scripts/output/pd3-capture-manifest.json·截图本体 tmpe gitignored 可一条命令再生）；Nielsen 十启发式 20 格全覆盖（2 格「不适用+理由」）；**8 条 finding（S1×0 / S2×3 / S3×5）全部经 `--report` 探针回真实 DOM 校验（AC-1 8/8 命中·防虚构，同第 20 门禁防幻觉引文族）**。
+> - **发现摘要**：S2 三条——九卷索引 05→07 跳号且 06 个人随笔（44 篇）全页零入口；dashboard 同一节两套 A1-A6 计数（引言 615 体系 vs 卡片 Σ575）；页脚 v2.3.79 陈旧（v-号体系已随 W711 退役）。S3 五条——footer 批次链 2232 字符长文（W724 上限管条数未管条长）、搜索卡「772 篇」vs 索引实测 771 条、DATA 提示含开发指令、专题卡数字串无图例、主题/专题术语混用。分流=工程五条登记 B-100~B-104，内容三条列裁决项 PD-3-A1~A3。
+> - **走查方法论**：低分辨率截图曾产生三处「疑似乱码」误读（搜索提示/DATA 介绍/人物关系卡），原尺寸回读均为正确正文——**探针纪律（先排除工艺伪影与低分辨率误读再下判）实录**；reveal-in 滚动显现导致的截图空白同理排除未记 finding。
+> - **BL-31 退休（替换而非裸删）**：release.py step1 由 sync_docs 改为 check_doc_sync（`python scripts/release.py` 实跑 step1 PASS 实证）；删除 scripts/sync_docs.py；Makefile release 注释与 doc_areas.py 历史注记同步；checklist 三处旧命令改现役路径（check_doc_sync / stats --w）。理由=职责被第 31 门禁完全覆盖且更强（18 负样本）、它不在 CI、存量 exit=1 无人发现——死重量标准画像（W562/W776/W788 同款裁定）。
+> - **冻结适用范围立句（W793 立·单一权威表述）**：写入 HANDOVER 阻塞段——内容扩容维持 W626 冻结（UV 数据链 2026-09-30 起中断·fetch_gate_stats 实测 404·API 恢复后重判）；点名解冻项已全收官；工程/治理/门禁批不受限；新增内容扩容须用户点名或 judge_gate 判「继续分发」。
+> - **W792 报告自修**：PD 行「待批复」系初稿误判（§10 已于 W651 全批·PD-1/5 已执行），本批修正并记录——自查自纠同批留痕。
+> - **验证（全绿）**：探针 AC-1 8/8 + AC-3 pageerror 0；第 42 槽 0 FAIL（基线顺带清 2 条陈腐豁免）；第 31 门禁 0 FAIL；release.py step1 PASS；pytest 629 passed / 3 skipped；ruff 0；verify 全量 50 段 0 FAIL。
+> - **状态**：已落地（级联+提交+推送按批次流程执行·PR #50 随批扩入）。
+> - **文件**：docs/superpowers/plans/2026-10-18-pd3-heuristic-review-report.md、scripts/_pd3_finding_probe.js、scripts/output/pd3-capture-manifest.json、scripts/release.py、scripts/doc_areas.py、Makefile、HANDOVER.md、docs/11-方案报告/全仓待办计划方案状态核查报告-2026-10-18.md、docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w793_spec.json、scripts/output/_cascade_files_W793.txt
 
 ### W792（2026-10-18）：全仓待办计划状态核查批
 > **来源**：用户令「全面审查项目文件中记录的所有待办、计划、方案，逐项核对完成状态」。核查范围=HANDOVER 四区（阻塞段/候选清单/Backlog 32 项/短期待办 25 条）+ docs/superpowers/plans/ 12 份计划 + 需求侧 WP 队列 + S 卡拍板记录 + 维护登记表 B-1~B-7 + S4 投稿树；方法=commit/门禁实跑/产物存在性/计划自载状态行四方交叉，五分类（已完成/未完成/陈滞/需决策/冻结）。

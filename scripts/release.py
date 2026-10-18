@@ -3,7 +3,7 @@
 
 用途：
     版本 bump 时自动校验 6 文档文档一致性 + 推荐下一步动作清单。
-    不直接修改文件（修改仍由人工/sync_docs.py --fix 完成），仅做发布前体检。
+    不直接修改文件（文档一致性由 check_doc_sync.py 校验·修改由批次级联/人工完成），仅做发布前体检。
 
 使用方式：
     # 发布前体检
@@ -12,7 +12,7 @@
     python scripts/release.py --target v2.2.16
 
 设计要点：
-    - 步骤 1：sync_docs 全部 4 规则必须 PASS（否则报错并退出）
+    - 步骤 1：check_doc_sync 口径体检必须 PASS（否则报错并退出·W793 起替换已退役的 sync_docs）
     - 步骤 2：git 状态检查（未提交改动 / 未推送 commits）
     - 步骤 3：测试套件 pytest 必须通过（如 tests/ 存在）
     - 步骤 4：打印发布动作 checklist（tag / push / archive note）
@@ -58,17 +58,16 @@ def _print_step_header(step: int, title: str) -> None:
 # 步骤 1：文档一致性
 # ============================================================
 
-def step1_sync_docs() -> bool:
-    """步骤 1：sync_docs.py 4 规则全 PASS。"""
+def step1_doc_sync() -> bool:
+    """步骤 1：check_doc_sync.py 口径体检全 PASS（W793 起替换已退役的 sync_docs.py）。"""
     print(_STEP_SEPARATOR)
-    print("步骤 1/5: 文档一致性校验 (sync_docs.py)")
+    print("步骤 1/5: 文档口径体检 (check_doc_sync.py)")
     print(_STEP_SEPARATOR)
-    rc, _ = run([sys.executable, str(SCRIPTS / "sync_docs.py")], check=False)
+    rc, _ = run([sys.executable, str(SCRIPTS / "check_doc_sync.py")], check=False)
     if rc != 0:
-        print("\n[FAIL] sync_docs.py 检测到不一致，请先修复或运行：")
-        print("       python scripts/sync_docs.py --fix")
+        print("\n[FAIL] check_doc_sync.py 检测到不一致——按输出逐条修复（与 verify_delivery 第 31 槽同源）")
         return False
-    print("[OK] sync_docs.py 4 规则全 PASS")
+    print("[OK] check_doc_sync.py 口径体检全 PASS")
     return True
 
 
@@ -193,15 +192,15 @@ def step5_checklist(target_version: str) -> None:
   1. [ ] CHANGELOG.md 添加新版本段 `### {target_version}` + W### ID + 四件套字段
   2. [ ] file-index.md 追加新版本条目（反向索引）
   3. [ ] README.md / STRUCTURE.md / 项目说明.md / HANDOVER.md 头部版本号更新
-         可运行：python scripts/sync_docs.py --fix
+         版本行由批次级联（batch_cascade）更新·一致性用 python scripts/check_doc_sync.py 校验
   4. [ ] git commit -m "release: {target_version}"
   5. [ ] git tag {target_version}
   6. [ ] git push && git push --tags
   7. [ ] （可选）更新 archive/docs/CHANGELOG-ARCHIVE.md（如旧版本归档）
 
 可用命令：
-  python scripts/sync_docs.py          # 一致性校验
-  python scripts/sync_docs.py --fix    # 自动修复版本号 + 统计
+  python scripts/check_doc_sync.py     # 文档口径体检（与 verify 第 31 槽同源）
+  python scripts/stats.py --w <批号>   # 统计计数刷新（sync_docs 已退役·无 --fix 路径）
   python scripts/lint_links.py --all   # 链接校验
   python scripts/check_js_syntax.py --all  # JS 语法检查
 """)
@@ -230,7 +229,7 @@ def main():
 
     target = _resolve_target_version(args.target)
 
-    ok = step1_sync_docs()
+    ok = step1_doc_sync()
     if not ok:
         return 1
     ok = step2_git_status() and ok

@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（9）
+## 文件（10）
 
 ### Markdown 文档
 
@@ -24,6 +24,7 @@
 - `2026-10-11-version-space-inventory.md`
 - `2026-10-13-code-refactor-w728.md`
 - `2026-10-14-interference-governance-roadmap.md`
+- `2026-10-18-pd3-heuristic-review-report.md`
 
 ---
 

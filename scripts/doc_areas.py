@@ -2,7 +2,8 @@
 """doc_areas.py — A1-A6 内容板块目录与计数口径的单一事实源（W728 重构提取）。
 
 背景：verify_delivery.py（A1-A6 计数门禁）与 sync_docs.py（rule_stats 磁盘实数期望）
-各自维护一份六板块目录表与 .md 计数函数——sync_docs 源码注释即自证「与
+各自维护一份六板块目录表与 .md 计数函数（sync_docs.py 已于 W793 退役·一致性职责由
+check_doc_sync 承接·本段为 W728 提取时的历史背景）——sync_docs 源码注释即自证「与
 verify_delivery._count_content_md 同口径」。双份手工表的漂移风险：任一侧改目录或
 计数口径，另一侧静默失配（A1-A6 计数门禁/统计期望值同时失真且无机器防线）。
 

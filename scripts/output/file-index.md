@@ -11,6 +11,19 @@
 ---
 
 
+## W793 PD-3 走查与 BL-31 退休批（2026-10-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/superpowers/plans/2026-10-18-pd3-heuristic-review-report.md | W793 | 新增：PD-3 两页启发式走查报告（8 findings·20 格·AC-1 8/8） |
+| scripts/_pd3_finding_probe.js | W793 | 新增：双模式取证/防虚构探针（capture + report） |
+| scripts/sync_docs.py | W793 | 删除：退役（职责并入第 31 门禁 check_doc_sync） |
+| scripts/release.py | W793 | step1 改指 check_doc_sync + checklist 旧命令更新 |
+| HANDOVER.md | W793 | 冻结适用范围单一权威表述（W793 立） |
+| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W793 | B-100~B-104 追加（PD-3 工程分流） |
+| docs/11-方案报告/全仓待办计划方案状态核查报告-2026-10-18.md | W793 | PD 行陈滞自修（待批复→已批+已执行） |
+| Makefile | W793 | release 注释 doc-sync 化 |
+
 ## W792 全仓待办计划状态核查批（2026-10-18）
 
 | 文件 | W | 说明 |
