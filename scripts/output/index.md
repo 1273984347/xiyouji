@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（229）
+## 文件（230）
 
 ### Markdown 文档
 
@@ -220,6 +220,7 @@
 - `_w821_spec.json`
 - `_w822_spec.json`
 - `_w823_spec.json`
+- `_w825_spec.json`
 - `_w826_container_survey.json`
 - `_w826_contrast_audit.json`
 - `_w826_migration_plan_check.json`
