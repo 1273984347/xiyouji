@@ -423,3 +423,13 @@
 ```text
 2026-10-19（W802）character_nlp 行为保持重构二批：用户令继续——同模块剩余两处收尾，find_dialogues_in_text 八十九行拆为正则编译与标准倒装两轮扫描三函数（去重规则原样保留），build_cooccurrence_timeline 八十五行拆为按回累加分桶组装与 Top 曲线三函数；对拍法修正上一批的路径伪差（同路径两跑旧版暂存存证恢复后新版复跑），标准输出与五件产物逐字节一致；模块终态六十行以上长函数由四个降为零，公开 API 未变，文件一千一百一十八行；验证等于 ruff 零 加 pytest 六百二十九 passed 加 verify 全量五十段零 FAIL
 ```
+以下为 AGENTS.md 版本脚注早期条目（W803-W803）段的原文（单行沿革链·W818 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-19（W803）工具链行为保持重构批：用户令在功能与输入输出与外部接口完全不变前提下提升可读性与可维护性——动工前先做重复形态普查（三百七十八个 Python 文件 AST 扫描同名函数体与 helper 名频次与惯用法），按取证定面；新建 scripts/utils/gate_common.py 收敛门禁族公共骨架（路径常量与容错及严格两种读取与站点三源清单与样式块提取与自测跑批与命令行分发共十二个公共符号），七个门禁脚本改为消费该模块且判定内核函数名与签名及标准输出逐字节不变；清理 check_claude_md 行数计算死代码（七边界样本加真实文件实算证明等值）；拆分 lint_links 的 _process_file 六十九行与收敛两处路径解析口径，提升循环内 import 为模块级；拆分 mcp-server 四个 MCP 工具（长函数由五降为一、最长由一百零二行降为六十六行）并把两处函数内大字典提为模块级常量与五处重复注解字典收敛为一；Web Agent 服务端按职责分文件（index.ts 由七百一十行降为五十一行、ToolCallsCollapse 由七百六十七行降为一百六十六行，新增 src/utils 三模块与 toolCalls 五模块）；对拍取证以 git worktree 重建 HEAD 旧态同源比较，八脚本乘两模式共十六组标准输出逐字节一致（其中 lint_links 全仓文档口径一组首轮报差异经查为 worktree 内未跟踪文件触发 gitignore 排除的取证环境伪差，同仓两跑 sha256 相同），MCP 三十组输入覆盖全分支返回字典一致；验证等于 ruff 零 加 pytest 单元面四百二十七 passed 三 skipped 加 verify 全量五十段零 FAIL 加 npm build 成功 加 test:server 六十七 passed 零 fail；另查明 tests/unit/test_visualization_data.py 在全量套件末尾挂起为改动前既有现象（HEAD worktree 复现同点），非本批引入
+```
+以下为 AGENTS.md 版本脚注早期条目（W804-W804）段的原文（单行沿革链·W821 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-19（W804）桌面版三平台安装包与自动更新批：用户令给项目在 GitHub 仓库增加可直接下载的安装包并支持自动更新——方案裁定离线全站桌面版，新建 xiyouji-desktop 桌面工程（Electron 四十四主进程加本地静态服务仅监听 127.0.0.1 随机端口并做路径穿越防护且仅接受 GET 与 HEAD 加中文菜单与原生更新对话框加单实例锁与崩溃文件日志加无窗口 self-test 冒烟）；自动更新基于 electron-updater 六点八（发布源指向本仓库 Releases），启动三秒后首次检查且此后每四小时复查并支持菜单手动检查，发现新版本询问下载、下载进度回显、下载完成询问重启安装（选择稍后则退出时安装），开发态与禁用环境变量下安全降级；发布流水线新建 .github/workflows/release.yml（tag v 星号或 workflow_dispatch 触发，版本一致性闸门校验 tag 与桌面工程 package.json 严格相等并从 CHANGELOG 首段动态提取内容批次，三平台并行构建 Windows NSIS 与 macOS universal dmg 加 zip 与 Linux AppImage，汇总上传 GitHub Release 含 latest 系列 yml 与 blockmap 自动更新元数据并生成中文 release notes，Release 已存在时 clobber 幂等更新）；ci.yml 末尾新增 desktop-build job 做 npm ci 加 node --test 加内容准备加 electron-builder --dir 打包回归；根 README 新增桌面版下载段（三平台固定直链）且 STRUCTURE 顶层目录与 README 目录树登记 xiyouji-desktop；验证等于 npm install 成功加 npm test 三十三项通过加 self-test 输出 SELF_TEST_OK（开发态与打包产物双跑）加 Windows 安装包 130705240 字节且 latest.yml 的 sha512 与安装包实算一致并对拍 app-update.yml 发布源正确加 pytest 七百一十四 passed 三 skipped（可视化数据测试文件末尾挂起为改动前既有现象，本批排除该文件实跑）加 ruff 零加 actionlint 零错误加 verify 全量五十段零 FAIL
+```

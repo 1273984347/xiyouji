@@ -123,7 +123,7 @@
 - `_w818_file_protocol_probe.py`
 - `_w818_inventory.py`
 - `_w819_design_audit.py`
-- `_w820_db_schema_probe.py`
+- `_w822_db_schema_probe.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
