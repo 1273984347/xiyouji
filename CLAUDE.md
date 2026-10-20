@@ -37,6 +37,7 @@ make ci                                  # lint+test+audit+links 本地预跑 CI
 - 批量改 md 一律 Python `open(encoding='utf-8')`，禁 PowerShell Set-Content（默认写 UTF-8 BOM）→ AGENTS.md §4.3
 - 同文件多个 Edit 必须串行（并行 Edit 基于同一原始内容，后写覆盖先写）→ AGENTS.md §4.3
 - 跨 session 动手前先 `git log --oneline -5` + `gh run list` 识别并行增量 → AGENTS.md §4.3
+- 本节与工具表里的 `python …` 是可移植形态（CI/Linux/macOS 通用）；**本机 PowerShell 侧** `python` 是应用执行存根（调用即静默失败）→ 该侧改写 `py -3 …` → AGENTS.md §4.3
 
 ## 接手导航（5 分钟动手）
 

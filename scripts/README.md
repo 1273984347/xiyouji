@@ -4,6 +4,7 @@
 > 数据分析脚本按 A-AH 34 类分目录组织，详见 [STRUCTURE.md](../STRUCTURE.md)。
 > 根级工具脚本（截图审查 / 静态检查 / 批量修复）登记在本文件。
 > **历史一次性脚本已归档至 [`archive/scripts/`](../archive/scripts/)（45 个，W446 治理），保留 git 历史备查，不再参与日常工作流。**
+> **调用形态**：下表 `python <脚本>` 是**可移植形态**（CI 跑 `ubuntu-latest`·Linux/macOS 通用）；**本机 PowerShell 侧** `python`/`python3` 是应用执行存根（命令存在但调用即静默失败）→ 该侧请写 `py -3 <脚本>`（三语境口径见 [AGENTS.md](../AGENTS.md) §4.3）。
 
 ## 根级工具脚本
 
