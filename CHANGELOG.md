@@ -26,10 +26,10 @@
 > - **设计取舍（与 W828 §五 字面的偏离，此处明示）**：约定写「复用既有 LHCI 判据」，落地改为**采静态成本代理**、不跑浏览器。三条理由：① pre-commit 每次提交都跑，分钟级 + 依赖浏览器的门禁会被绕过或拖垮流程；② 影子期要的是同口径连续样本，静态量确定性复算、跨机器同值，而 CI 的 LCP 受 runner 冷启与网络抖动影响、单点不可比；③ 真数不另立口径——`--ingest .lighthouseci/assertion-results.json` 把 CI 的 LCP/CLS/TBT 并进**同一批样本**的 `lhci` 字段。**若要求槽内真跑 LHCI，须换成 `--scope perf` 显式 opt-in 轨道另议。**
 > - **采六项（每页）**：`html_bytes` / `head_bytes` / `inline_script_bytes`（无 src 脚本内容字节）/ `local_dep_bytes`（本地外链依赖实测字节）/ `remote_refs`（外域引用条数）/ `blocking_head_refs`（head 内同步脚本 + 非 print 样式表）。全部零依赖可算。
 > - **判据只有一条会红（C1）**：perf.yml `collect.url` 的 5 页必须真实存在——缺页等于 CI 必 404 的真断链，不是阈值判断；其余数字只记录、不判红。
-> - **自测第 6 例照出的真 bug**：属性解析只认 `key=value`，`defer`/`async` 这类布尔属性被静默丢掉——首版把 index.html 三个 defer 脚本全算成阻塞，基线第一笔就是脏的。改为布尔属性也收，并把「defer 与 media=print 不计」写进自测锁死。
+> - **自测首跑照出的真 bug**：属性解析只认 `key=value`，`defer`/`async` 这类布尔属性被静默丢掉——首版把 index.html 三个 defer 脚本全算成阻塞，基线第一笔就是脏的。改为布尔属性也收，并把「defer 与 media=print 不计」写进自测锁死。
 > - **本批首笔基线（不判读、不下结论）**：dashboard 91,791 B · 阻塞头 3；index 51,071 B · 3；timeline 93,207 B · 5；3D 78,575 B · 5；text-search 66,694 B · 5。攒满 10 批后再由用户裁决阈值（3D 页单独分档）。段内数字为落盘时实测，权威值以 `scripts/output/perf_shadow.json` 为准。
 > - **连带同步**：门禁段 51→52；AGENTS §4.2 与 gates.md 的第 47 条（含 gates.md 标题从「45 槽」订正为「47 槽」——W809 补第 46 槽时漏改的标题计数）；stats 两键刷新（`gate_count` 47 · `pytest_collected` 787——新脚本被 `test_tool_scripts_cli.py` 的根级脚本参数化收进 import 冒烟，故 +1 属预期）；三处内联标记（README / 架构方案 / pytest.ini）同步。
-> - **验证**：`check_perf_shadow --self-test` 6/6；全量 52 段核心全部通过；`check_doc_sync` 0 FAIL；`check_agents_layers` 0 FAIL（三方编号同为 47）；`check_script_coverage` 0 FAIL；stats 17 键零差异；CSP 与页数零漂移。
+> - **验证**：`check_perf_shadow --self-test` 7/7；全量 52 段核心全部通过；`check_doc_sync` 0 FAIL；`check_agents_layers` 0 FAIL（三方编号同为 47）；`check_script_coverage` 0 FAIL；stats 17 键零差异；CSP 与页数零漂移。
 > - **未做**：不改 perf.yml 阈值、不装 lhci、不跑浏览器、不设任何阈值、不推送远端。
 > - **状态**：已收官。
 

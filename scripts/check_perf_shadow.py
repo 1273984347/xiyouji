@@ -354,6 +354,11 @@ def _self_test():
     cases.append(("T6 汇总行含门禁标记与「不判红」口径",
                   code == 0 and summary.startswith(MARKER) and "不判红" in summary))
 
+    # T7 负样本：缺页必须真的红（fail-closed）——只测 measure_page 的 exists 不够，
+    # 判据在 report 的 C1 分支上，这里直接打那条路径
+    code_bad, _ = report([missing], base)
+    cases.append(("T7 缺页 → C1 判红 exit 1（不是只记录）", code_bad == 1))
+
     ok = 0
     for name, passed in cases:
         print("%s %s" % ("PASS" if passed else "FAIL", name))
