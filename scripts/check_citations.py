@@ -201,6 +201,33 @@ def iter_md(base):
                 yield p
 
 
+def resolve_scan_base(rel_dir):
+    """相对目录按脚本自身 ROOT 解析（禁按 cwd 解析——W816 修）。
+
+    成因：`--dir docs` 是相对路径，原实现直接交给 os.walk → 以**调用方 cwd** 为基准。
+    从非仓库根调用时扫到 0 篇，却仍输出「命中率 100%（0 个文件扫描）」并 exit 0
+    → 第 20 门禁被完全中性化并自报成功（违反「不允许从未运行/从未通过的门禁存在」）。
+    本函数把相对路径锚到脚本推导出的项目根，使判据与 cwd 无关。
+    """
+    if os.path.isabs(rel_dir):
+        return rel_dir
+    return os.path.join(ROOT, rel_dir)
+
+
+def scan_files_guard(base, files):
+    """零文件守卫（fail-closed·W816 修）：判据未执行必须判红，不得自报 100%。
+
+    返回 (code, message)：code=0 放行；1=判据未执行（目录存在但扫到 0 篇 .md）；
+    2=输入错误（目录不存在）。二者语义不同，故不同码——「判据未执行」与
+    「调用方传错路径」不可同码处理。
+    """
+    if not os.path.isdir(base):
+        return 2, "扫描目录不存在：%s" % base
+    if not files:
+        return 1, "扫描目录存在但未扫到任何 .md（判据未执行·不得判绿）：%s" % base
+    return 0, ""
+
+
 QUOTE_LONG_RE = re.compile(r"[“「]([^”」]{15,})[”」]")
 
 
@@ -387,7 +414,20 @@ def self_test(chapters):
     if scan_reverse(file_marked_doc, chapters):
         print("FAIL self-test：文首文件级标记被反向扫描误报")
         bad += 1
-    total = len(SELF_TEST_CASES) + len(ATTRIB_SELF) + 6
+    # W816：路径解析与零文件守卫自检（判据面负样本——cwd 无关 + 判据未执行必红）
+    _resolved = resolve_scan_base("docs")
+    if not os.path.isabs(_resolved) or not _resolved.startswith(ROOT):
+        print("FAIL self-test：相对扫描目录未按 ROOT 解析（%s）" % _resolved)
+        bad += 1
+    _c1, _w1 = scan_files_guard(os.path.join(ROOT, "docs"), [])
+    if _c1 != 1:
+        print("FAIL self-test：零文件守卫未判红（目录存在但 0 篇时 code=%s，应为 1）" % _c1)
+        bad += 1
+    _c2, _w2 = scan_files_guard(os.path.join(ROOT, "自测用不存在目录"), ["x"])
+    if _c2 != 2:
+        print("FAIL self-test：目录不存在未判输入错误（code=%s，应为 2）" % _c2)
+        bad += 1
+    total = len(SELF_TEST_CASES) + len(ATTRIB_SELF) + 9
     print("self-test %s：%d/%d" % ("通过" if not bad else "失败", total - bad, total))
     return 1 if bad else 0
 
@@ -413,7 +453,7 @@ def main():
         return 1 if check_corpus(chapters) else 0
 
     if args.reverse:
-        base = args.dir or os.path.join(ROOT, "docs", "01-全书逐回解读")
+        base = resolve_scan_base(args.dir) if args.dir else os.path.join(ROOT, "docs", "01-全书逐回解读")
         n_files = 0
         all_cands = []
         for p in iter_md(base):
@@ -435,7 +475,16 @@ def main():
 
     if not args.file and not args.dir:
         ap.error("需要 --file 或 --dir（或 --self-test / --check-corpus）")
-    files = [args.file] if args.file else list(iter_md(args.dir))
+    if args.file:
+        files = [args.file]
+    else:
+        # W816：目录按脚本 ROOT 解析（cwd 无关）+ 零文件守卫（判据未执行必红）
+        base = resolve_scan_base(args.dir)
+        files = list(iter_md(base))
+        guard_code, guard_why = scan_files_guard(base, files)
+        if guard_code != 0:
+            print("FAIL 引文核验：%s" % guard_why)
+            return guard_code
 
     g_total_c, g_total_a, g_fail_files = 0, 0, 0
     for p in files:

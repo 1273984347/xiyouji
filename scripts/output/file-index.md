@@ -11,6 +11,17 @@
 ---
 
 
+## W816 门禁判据可信化批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_citations.py | W816 | 改：相对 `--dir` 按脚本 ROOT 解析（cwd 无关）+ 零文件守卫（判据未执行 exit 1 / 输入错误 exit 2）+ 自测 +3 例（15/15） |
+| scripts/security_scan.py | W816 | 改：tsc 产物排除补 `.tsbuild`（outDir 迁移致本地红 CI 绿分裂）+ 新增 XSS-007（d3 `.html(` 动态实参）/ XSS-008（`.innerHTML +=`）·判据排除静态字面量与回调首参 |
+| tests/unit/test_security_scan.py | W816 | 新增 6 例：XSS-007 命中 / XSS-008 命中 / XSS-001 回归锚 / site 降级口径 / 非 site 保持 high / tsbuild 产物排除 |
+| docs/11-方案报告/计划方案/执行前计划-T03-全项目审查第一批修复.md | W816 | 新建：T-03《执行前计划》— 全项目审查第一批修复（门禁判据可信化·12 项自检全过） |
+| docs/11-方案报告/README.md | W816 | 改：§二 计划方案索引登记 T-03《执行前计划》条目（3 篇 → 4 篇） |
+| docs/00-导读/W批次编号对账表.md | W816 | 改：W813/W814/W815 认领行 commit 与状态列回填为已收官 + 现势 bullet 标 W813 已消费并追加 W816 + W816 认领行登记 |
+
 ## W815 shell 查坑表补两条（2026-10-20）
 
 | 文件 | W | 说明 |
