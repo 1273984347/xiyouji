@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W848），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W849），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,21 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W849（2026-10-21）：性能门禁挂槽批（第 47 槽·影子模式不判红·攒够样本再裁阈值）
+
+> **来源**：用户令「开 W849 做性能门禁挂槽」。这是 W828 备料件 §五 单列的审批项，口径写死为「只挂 1 槽·不改阈值·不碰体积预算」。
+> - **文件**：scripts/verify_delivery.py、scripts/check_perf_shadow.py、scripts/output/perf_shadow.json、AGENTS.md、docs/agent/gates.md、pytest.ini、README.md、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md、scripts/output/stats.json、scripts/output/_w849_spec.json、docs/00-导读/W批次编号对账表.md。
+> - **补的是什么洞**：perf.yml 是唯一性能门禁（Lighthouse CI · desktop · 5 URL · 3 runs · LCP ≤4000ms/CLS ≤0.3/TBT ≤300ms·3D 页 12000/900），但它在 pre-commit 路径上**不可执行**（要 Chrome + @lhci/cli，5 URL × 3 runs 分钟级），CI 结果也从未回流成仓内基线——「这次提交有没有让页面变慢」在每次提交时都没有数据可答。
+> - **设计取舍（与 W828 §五 字面的偏离，此处明示）**：约定写「复用既有 LHCI 判据」，落地改为**采静态成本代理**、不跑浏览器。三条理由：① pre-commit 每次提交都跑，分钟级 + 依赖浏览器的门禁会被绕过或拖垮流程；② 影子期要的是同口径连续样本，静态量确定性复算、跨机器同值，而 CI 的 LCP 受 runner 冷启与网络抖动影响、单点不可比；③ 真数不另立口径——`--ingest .lighthouseci/assertion-results.json` 把 CI 的 LCP/CLS/TBT 并进**同一批样本**的 `lhci` 字段。**若要求槽内真跑 LHCI，须换成 `--scope perf` 显式 opt-in 轨道另议。**
+> - **采六项（每页）**：`html_bytes` / `head_bytes` / `inline_script_bytes`（无 src 脚本内容字节）/ `local_dep_bytes`（本地外链依赖实测字节）/ `remote_refs`（外域引用条数）/ `blocking_head_refs`（head 内同步脚本 + 非 print 样式表）。全部零依赖可算。
+> - **判据只有一条会红（C1）**：perf.yml `collect.url` 的 5 页必须真实存在——缺页等于 CI 必 404 的真断链，不是阈值判断；其余数字只记录、不判红。
+> - **自测第 6 例照出的真 bug**：属性解析只认 `key=value`，`defer`/`async` 这类布尔属性被静默丢掉——首版把 index.html 三个 defer 脚本全算成阻塞，基线第一笔就是脏的。改为布尔属性也收，并把「defer 与 media=print 不计」写进自测锁死。
+> - **本批首笔基线（不判读、不下结论）**：dashboard 91,791 B · 阻塞头 3；index 51,071 B · 3；timeline 93,207 B · 5；3D 78,575 B · 5；text-search 66,694 B · 5。攒满 10 批后再由用户裁决阈值（3D 页单独分档）。段内数字为落盘时实测，权威值以 `scripts/output/perf_shadow.json` 为准。
+> - **连带同步**：门禁段 51→52；AGENTS §4.2 与 gates.md 的第 47 条（含 gates.md 标题从「45 槽」订正为「47 槽」——W809 补第 46 槽时漏改的标题计数）；stats 两键刷新（`gate_count` 47 · `pytest_collected` 787——新脚本被 `test_tool_scripts_cli.py` 的根级脚本参数化收进 import 冒烟，故 +1 属预期）；三处内联标记（README / 架构方案 / pytest.ini）同步。
+> - **验证**：`check_perf_shadow --self-test` 6/6；全量 52 段核心全部通过；`check_doc_sync` 0 FAIL；`check_agents_layers` 0 FAIL（三方编号同为 47）；`check_script_coverage` 0 FAIL；stats 17 键零差异；CSP 与页数零漂移。
+> - **未做**：不改 perf.yml 阈值、不装 lhci、不跑浏览器、不设任何阈值、不推送远端。
+> - **状态**：已收官。
 
 ### W848（2026-10-21）：Q5 裁决落档批（dense 升为显式可选档·默认仍 off）
 

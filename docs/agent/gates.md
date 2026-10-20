@@ -1,4 +1,4 @@
-# 交付门禁体系全量定义（45 槽 · L2 主题层 · W709 自 AGENTS §4.2 迁入·W713 补正第 41 槽归组与标题同步·W751 补第 42 槽·W753 补第 43 槽·W768 补第 44 槽·W780 补第 45 槽）
+# 交付门禁体系全量定义（47 槽 · L2 主题层 · W709 自 AGENTS §4.2 迁入·W713 补正第 41 槽归组与标题同步·W751 补第 42 槽·W753 补第 43 槽·W768 补第 44 槽·W780 补第 45 槽·W809 补第 46 槽·W849 补第 47 槽）
 
 > **📖 阅读契约（W709）**：查表型——改 site/、加门禁、动 verify_delivery.py 时按编号查；每条含完整口径与历史实证；编号与 AGENTS §4.2 摘要一一对应。
 > **何时读**：门禁失败要懂原因 / 新增门禁要挂槽 / 复核某条防线范围。**读完你应该能**：说出任一槽位拦什么、豁免与基线在哪。
@@ -11,7 +11,7 @@
 | 结构与加载类（6-11） | 6-11 | docs 全量链接校验、sitemap 覆盖、CSP 漂移、数据漂移、内联脚本语法、CSS 结构平衡 |
 | 声明与完整性类（12-15） | 12-15 | token 覆盖率、动效禁止清单、a11y 对比度、INLINED CSS 完整性 |
 | 数据与一致性类（16-26） | 16-26 | Skills 索引一致性、索引健康、元信息块 v2、术语一致性、原著引文硬验证、动态链接门禁、治理文档维护契约、旁文档同步、图表静态自洽、数据内容一致性、SEO head |
-| 编号与质量防线类（27-45） | 27-45 | W 号区间字面量、可视化可引用性、色盲安全、窄屏降级声明、文档口径体检、CLAUDE.md 速查层完整性、head 内容合法性、CSS 变量引用、声明分隔、孤立选择器、kpi-card 基类、页面内嵌残留标记、故事内时间线双源同步、chapter_stats 双源同步、AGENTS 分层完整性、根级脚本覆盖、目录文档新鲜度 |
+| 编号与质量防线类（27-47） | 27-47 | W 号区间字面量、可视化可引用性、色盲安全、窄屏降级声明、文档口径体检、CLAUDE.md 速查层完整性、head 内容合法性、CSS 变量引用、声明分隔、孤立选择器、kpi-card 基类、页面内嵌残留标记、故事内时间线双源同步、chapter_stats 双源同步、AGENTS 分层完整性、根级脚本覆盖、目录文档新鲜度、搜索索引新鲜度、性能影子槽 |
 
 ## 完整定义
 
@@ -57,7 +57,7 @@
 25. **数据内容一致性**（W555 挂载，经用户确认：check_content_consistency.py --gate 第 25 门禁——W550 实证三类同页数字矛盾规则化：同实体对/同主语多值、图注数 vs 数组字面长、桑基去重节点数、案例数 vs 边数；--self-test 负样本 4/4；基线 content-consistency-baseline.txt 冻结 W554 人工裁决 4 条误报·只拦新增；L2 站-dataset 对账与 L3 语义判读为报告型见 W554 审计报告）
 26. **SEO head**（W630 挂载，经用户裁决：check_seo_head.py 第 26 门禁（slot 自 W591 预留·脚本 W591 建置）——og:image/canonical 全页覆盖·JSON-LD 内联有效·hreflang 配对（89 对）·sitemap 集合一致；855<!--stats:seo_scanned--> 页扫描（site 全树减两个模板壳·W702 校真）；SEO head 属静默腐烂面（W628 实证同族：W575 字面量腐烂 52 批无人察觉））
 
-### 编号与质量防线类（27-45）
+### 编号与质量防线类（27-47）
 
 27. **W 号区间字面量**（W628 挂载，经用户指令防复发：check_w_range_literal.py 第 27 门禁——根因=外部综述照抄 README 过期字面量「W001-W575」（W628 审计叙述面 9 处漂移）：现役叙述面（README/STRUCTURE/CONTRIBUTING/新Agent启动Prompt/00-导读/方法论 README/workflows README/agent-web README）中「W001-Wxxx」覆盖上限字面量终点必须等于 CHANGELOG 现役 max W（含「对应」映射规则与「tier2」归档描述豁免·非 001 起始历史区间不在范围）+ CITATION.cff version 与现役版本同步；--self-test 负样本 4/4；历史段/级联自维护面豁免）
 28. **可视化可引用性**（2026-10-02 经用户裁决挂载·第 28 门禁：check_citability.py——B-6 第一步·slot 自 W638 预留·来源 W636 缺口发现/W637 升级路径/W638 出处四字段收编。**批准开工=反转 B-6 三次「登记不开工」裁决，已在 registry 记账**。扫描区=`<div id="dataSource">` ∪ 含「数据源：」的字符串字面量（fetch/EMBEDDED 两态都收）；四项判据 C1 数据路径+版本 / C2 生成脚本+参数（**排除构建工具引用 inline_css.py·w334_font_subset.py——二者在 86/86 页命中，系 v1.0 草案假阳性源**）/ C3 引用格式任一锚点（报告另分 L0-L3 级）/ C4 下载入口或 EMBEDDED 声明；D1 范围仅 site/data 86 页；形态=WARN+基线冻结（scripts/output/citability-baseline.txt·首跑 344 行/missing 326·C1 2/86 C2 9/86 C3 1/86 C4 6/86）·基线外新增违规 FAIL·存量转 FAIL 时点=D4「missing 收敛至阈值以下」不预设日期；**判据类门禁必须先跑全站形态普查再写正则**（W638「存在性对≠分级对」的门禁侧教训）·--self-test 6 例含构建工具回归用例
@@ -84,3 +84,4 @@
 
 45. **目录文档新鲜度**（check_folder_docs.py --gate，W780 挂载）：全仓在管目录（gen_folder_docs@W779 口径·245 个·治理树 docs/10-11 整体与 docs/01-06 顶层豁免）的「index.md 逐文件清单 ↔ 磁盘实况」对拍防线——W779 落地即登记的漂移面：index.md/README.md 是生成时点快照，目录增删后清单过期且无机器防线。四判据：C1 两件套在位（新目录未跑生成器即拦）/ C2 子目录清单（成员+计数）/ C3 文件清单（跨分组成员并集+计数）/ C4 H1 标题==目录名；README 正文豁免（数字声明带「生成时点」时点限定·非现役谎报·文档规范 §4.9 形态）；清单算法 import 生成器模块（GOVERNED_SKIP/in_scope 已提升模块级——单一事实源·生成器改口径门禁自动跟随）；跨平台纪律=pitfalls「latent 三问」合规（名字符串码点序比对·零 os.name/盘符/大小写语义断言·负样本合成树两平台可判）；--self-test 7 例注入式（1 正 6 负：fresh/增文件/删文件/增子目录/缺件/手改清单/H1 漂移）+ tests/unit/test_folder_docs_gate.py 16 例；修复路径=gen_folder_docs **--refresh**（按「生成来源：gen_folder_docs.py」元信息标记判所有权·仅重写生成物·人工维护件自动跳过——防 --force 误轰根 README.md 等手工档）；大小写冲突目录豁免（目录已有 INDEX.md 等变体→生成器 NTFS 覆写守卫不管理·gen.case_collides 按 listdir 真名小写判定两平台同构·W780 首跑实证 docs/ 目录 Windows 红 C2/Linux 红 C1 的分歧形态）；同批顺修 gates.md 速查表 27-42 存量漂移（43/44 槽挂载时漏更）
 46. **搜索索引新鲜度**（check_search_index_fresh.py --gate，W809 挂载）：站内搜索「页面内嵌索引 ↔ 生成器实算」对拍防线——W807 实证：索引自 2026-09-16 前后停更（771 条仅含 61 篇 doc 条目 + 9 条链接仍指向已改名的 `docs/11-报告复盘/` 致 GitHub 侧 404），W807 刷新（doc 61→111·失效目录引用 9→0）并把生成器恢复常驻，但**刷新动作本身无机器防线**——任何内容批次改 `docs/` 或 `site/` 后忘重跑生成器，索引即静默陈旧（用户搜不到新文档·老链接点不开）。三判据：C1 两页索引块存在（`SEARCH_INDEX:BEGIN/END` 标记对齐全·缺块即 FAIL——索引被手删则站内搜索退化为「无命中」而无人察觉）/ C2 zh 页内嵌载荷 == 实算载荷 / C3 en 页同；逐条对拍（kind/标题/分类/摘要/URL/关键词·禁字节串比对——JSON 序列化细节变化会致假红）；期望载荷由 `scripts/_gen_search_index.py` 的 `build_indexes()` **纯计算**得出（W809 函数化：原实现 import 即写盘·门禁无法安全复用——函数化是挂槽前置；门禁只读不写，刷新动作 = `python scripts/_gen_search_index.py` + 重算 CSP 哈希）；fail-closed（jieba 缺失则 kw 退化为逐字·期望载荷不可信 → 报「环境缺依赖」并 FAIL·禁静默跳过假绿·与第 31/45 门禁同族纪律）；跨平台纪律=比对基于 JSON 值与路径字符串（零 os.name/盘符/大小写语义断言·负样本合成树两平台同构）；--self-test 5 例（1 正 4 负：一致/缺块/少条目/字段漂移/常量名错位）+ tests/unit/test_check_search_index_fresh.py 6 例
+47. **性能影子槽**（check_perf_shadow.py --gate，W849 挂载·W828 备料件 §五 单列审批项落地）：性能防线的「本地可见化」槽——perf.yml 是唯一性能门禁（Lighthouse CI · desktop 预设 · 5 URL · 3 runs · LCP ≤4000ms / CLS ≤0.3 / TBT ≤300ms·3D 页 12000/900），但它**不在 pre-commit 路径上**（要 Chrome + @lhci/cli、5 URL × 3 runs 是分钟级），且 CI 结果从未回流成仓内基线——于是「这次提交有没有让页面变慢」在每次提交时都没有数据可答。本槽按 W828 §五 的约定只做三件事：**挂槽、攒样本、不判红**。采六项静态成本代理（每页）：`html_bytes` / `head_bytes` / `inline_script_bytes`（无 src 的脚本内容字节）/ `local_dep_bytes`（本地外链依赖实测字节）/ `remote_refs`（外域引用条数）/ `blocking_head_refs`（head 内同步脚本 + 非 print 样式表），全部零依赖可算、跨机器同值。**为什么不直接跑 LHCI**：pre-commit 每次提交都跑，分钟级 + 依赖浏览器的门禁会被绕过；影子期要的是同口径连续样本，而 CI 的 LCP 受 runner 冷启与网络抖动影响、单点不可比；真数不另立口径——`--ingest .lighthouseci/assertion-results.json` 把 CI 的 LCP/CLS/TBT 并进**同一批样本**的 `lhci` 字段。**唯一会红的判据 C1**：perf.yml `collect.url` 的 5 页必须真实存在（缺页=CI 必 404 的真断链，不是阈值判断）；其余数字只记录。基线 `scripts/output/perf_shadow.json` 按批累积（同批重跑覆盖不重复追加），满 10 批后由用户单独裁决阈值（3D 页单独分档）——本槽**不设阈值、不碰体积预算**（html 50 KB 旧预算与现役单页均值 107.9 KB 矛盾，挂上去要么立刻红要么等于承认预算失效，故不采用）。**实测教训（自测第 6 例暴露）**：属性解析只认 `key=value` 会丢掉 `defer`/`async` 这类布尔属性，首个版本把 index.html 的三个 defer 脚本全算成阻塞 → 基线从第一笔就不可信；现按「布尔属性也收」解析，并在自测里锁死 defer / media=print 不计的语义。--self-test 6 例（解析三面 / 缺页 / 记录去重 / ingest 落位 / 汇总行）

@@ -30,8 +30,8 @@ fail-closed 委派语义（W831·用户批准修 B1/B2·CLAUDE.md 第 10 条授�
 
 结构（W728 重构：原 905 行单体 main() 拆为五层·行为与输出逐字节不变）：
   模块级常量 → scope 分级工具 → 版本解析工具 → _Reporter/_GateContext（上报与执行态）
-  → 门禁参数表（_SimpleGate×18 / _StrictGate×15）→ 通用 runner×2 → 13 个段函数
-  → 收尾三函数 → main() 编排（49 段执行序 == EXPECTED_SECTION_NAMES 声明序·段自洽锁对账）。
+  → 门禁参数表（_SimpleGate×18 / _StrictGate×16）→ 通用 runner×2 → 13 个段函数
+  → 收尾三函数 → main() 编排（52 段执行序 == EXPECTED_SECTION_NAMES 声明序·段自洽锁对账）。
 """
 
 import json
@@ -103,6 +103,7 @@ EXPECTED_SECTION_NAMES = [
     "英文站",
     "目录文档",
     "搜索索引",
+    "性能影子",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
@@ -127,7 +128,7 @@ SCOPE_SITE_SECTIONS = {
     "动效禁令", "a11y对比", "INLINED完整", "动态链接", "图表自洽", "数据一致",
     "SEOhead", "可引用性", "设计令牌对账", "色盲安全", "降级声明", "head内容",
     "CSS变量引用", "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源", "chapter双源", "可视化数据", "英文站",
-    "文档口径", "W区间字面量", "索引健康", "治理契约", "AGENTS分层", "搜索索引",
+    "文档口径", "W区间字面量", "索引健康", "治理契约", "AGENTS分层", "搜索索引", "性能影子",
 }
 _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·旁文档/A4/A1-A6/学术/A1导航/sitemap/内嵌回退 7 段不在任何 scope 集=自洽锁盲区）
     "期望版本", "dukou页脚", "六文档同步", "旁文档同步", "范围漂移",
@@ -479,7 +480,7 @@ _SIMPLE_GATES_POST_A11Y = [
                 warn_msg="SEO head 门禁执行异常（W630）: %s"),
 ]
 
-# 15 个严格委托段（第 28-41 门禁·「第 NN 门禁」字面量即第 41 门禁 C2 对账源·禁改写）
+# 16 个严格委托段（第 28-47 门禁·「第 NN 门禁」字面量即第 41 门禁 C2 对账源·禁改写）
 _STRICT_GATES = [
     _StrictGate(section="可引用性", script="check_citability.py", args=("--gate",),
                 marker="---- 第 28 门禁：",
@@ -601,6 +602,12 @@ _STRICT_GATES = [
                 fail_msg="站内搜索索引陈旧（页面内嵌索引 ≠ 生成器实算·重跑 python scripts/_gen_search_index.py 刷新并重算 CSP 哈希）",
                 marker_msg="搜索索引门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
                 ok_msg="搜索索引新鲜度通过（%s）", ok_line=-1),
+    _StrictGate(section="性能影子", script="check_perf_shadow.py", args=("--gate",), timeout=120,
+                marker="---- 第 47 门禁 性能影子：",
+                crash_msg="性能影子槽执行异常（第 47 槽·crash 即拦）: %s",
+                fail_msg="性能影子槽采集面缺失（perf.yml collect.url 的页面不在了·先修断链再看数字）",
+                marker_msg="性能影子槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+                ok_msg="性能影子槽通过（%s）", ok_line=-1),
 ]
 
 # ---- 注册表派生与一致性防线（W781 R-1·挂槽「五处同改」收敛）----
@@ -1096,7 +1103,7 @@ def main():
     _assert_registry_consistent()  # W781 R-1：注册表一致性启动期防线
     """交付门禁编排（W728 重构：905 行单体 → 表驱动编排）。
 
-    执行序 = 46 个段名在 EXPECTED_SECTION_NAMES 中的声明序（段自洽锁对账·不得重排）；
+    执行序 = 52 个段名在 EXPECTED_SECTION_NAMES 中的声明序（段自洽锁对账·不得重排）；
     新增/调整门禁段只改对应参数表项或段函数，main() 编排面保持稳定。
     """
     rep = _Reporter()
