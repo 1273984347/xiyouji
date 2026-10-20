@@ -1,0 +1,17 @@
+{
+  "batch": "W842",
+  "date": "2026-10-21",
+  "title": "W842 CHANGELOG 递延补段工具批（backfill_changelog.py + 12 批欠账一次补齐）",
+  "desc": "补段工具一次补齐十二批欠账，让号序链重新接上，并顺手修正 pytest 收集数 785 到 786 的真漂移",
+  "head_entry": "2026-10-21（W842 CHANGELOG 递延补段工具批）",
+  "head_sentence": "把压在递延队列里的那十二批版段一次补回去，让号序链重新接上，之后的新批就回到正常级联",
+  "changelog_body": "\n\n> **来源**：用户令「现在解决」——W830 起版段递延链卡死十二批，CHANGELOG 顶段停在 W827，此后所有批只能「内容先落 + spec 入库 + 递延登记」。用户要的是结构性解法，不是先补 W828 的功能四项再回头收拾。\n> - **文件**：scripts/backfill_changelog.py、scripts/output/_w842_spec.json、CHANGELOG.md、scripts/output/file-index.md、scripts/output/index.md、scripts/output/_cascade_files_W842.txt、pytest.ini、scripts/output/stats.json、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、AGENTS.md、CITATION.cff、.github/workflows/README.md、docs/00-导读/W批次编号对账表.md、scripts/check_script_coverage.py、scripts/output/script-coverage-baseline.txt、scripts/index.md、scripts/output/README.md。\n> - **根因（两条叠加，先后查明）**：① **号序缺口 W828**——batch_cascade 断言 `batch == 顶段+1`，W828 没立段则顶段恒为 W827，W829 起任何批都过不了断言；② **W826 desc 含「·」**致三处版本行锚点（`·A1-A6` / `—A1-A6` / `·详细变更见`）全部失配，连「本该能落的那一批」也落不下（W827 施工时撞上并把三处 · 改为 、，十面断言随即全过，坐实因果）。②修好后 W827 立段成功，但①仍在，W830-W841 十二批继续积压。\n> - **落地**：新建 `scripts/backfill_changelog.py`，两阶段设计——① **补段**：按降序把待补批插到「第一个号小于自己的段」之前（`insert_before_smaller`，找不到锚点直接 AssertionError 拒绝执行，防高号误走补段路径绕过正常级联）；② **当前态同步**：补完顶段号变了，README / STRUCTURE / 项目说明三处版本行、HANDOVER 交接头、workflows README、AGENTS 版本脚注、CITATION、四页脚必须跟着走，否则 C1（README 抬头 ≡ 顶段）当场红——故 `--refresh-current` 直接复用 batch_cascade 的六个 `_face_*` 函数，把「现在是什么」这一层推到新顶段。\n> - **落盘前全量断言（fail-closed）**：段数 = 补前段数 + 待补数、W 号严格降序、无重复号、每段标题锚点唯一、file-index 段数与序同 CHANGELOG——任一不过即零落盘。\n> - **本次实跑**：CHANGELOG 127→**139** 段、file-index 127→**139** 段、规则 `W001-W827`→`W001-W841`；当前态同步 11 面（六函数 + 落盘清单 `_cascade_files_W841.txt`）。**号序链恢复**：顶段 W841，本批 W842 起回到 batch_cascade 正常级联，补段工具从此只作应急。\n> - **顺手修真漂移**：`stats.py` 实算 pytest 收集数 785→**786**——W839 收官刷新时少记一例（该批 CHANGELOG 原文写「783→785」，与磁盘实算不符，且 C5b 因两边同为旧值而假绿）；pytest.ini 头注标记同步 785→786。\n> - **验证**：check_doc_sync 0 FAIL（C1 README 抬头 ≡ W841、C2 交接头链、C4 提交-版段对账、C5d stats 实算、C6 版本行分隔符全绿）；`stats.py --w W842` 刷新 1 键；补段段数/降序/锚点断言全过。\n> - **状态**：已落地（本地提交·未推送）；W830-W841 十二批台账「CHANGELOG 版段」列由「递延」翻「已立段」。\n",
+  "milestone_block": "- **W842 CHANGELOG 递延补段工具批（12 批欠账一次补齐）**：\n  - 根因：号序缺口 W828（`batch == 顶段+1` 断言）叠加 W826 desc 含 · 致三处版本行锚点全失配\n  - 落地：backfill_changelog.py 两阶段——补段（插到第一个更小号之前·无锚点即拒跑）+ 当前态六面推到新顶段\n  - 断言：段数 · 严格降序 · 无重复号 · 标题锚点唯一 · file-index 同序，任一不过即零落盘\n  - 实跑：CHANGELOG 127→139 段 · file-index 127→139 段 · 规则 W001-W827→W001-W841 · 11 面同步\n  - 顺手修：pytest 收集数 785→786 真漂移（W839 少记一例）+ pytest.ini 标记同步\n  - 收效：顶段 W841 · 本批起回到正常级联 · 补段工具降级为应急",
+  "agents_note": "二〇二六年十月二十一日（W842）CHANGELOG 递延补段工具批：把断掉的账链接上。上一批修了一个让所有批次都落不了段的坑，但那只是两个原因里的一个——另一个是号序上缺了一号，断言要求新批必须是顶段的下一号，缺号就意味着后来者永远过不了。这两个原因叠在一起，积压了十二批：内容都落盘了，来源与文件清单也写好了，就是版本段插不进去。既然根子是「链断了就再也没人接」，那就得有个专门的接链工序：找到第一个比它小的段，插在前面；补完再确认「现在是什么」那一层也跟着走，否则文档开头的现势行会指着旧号，门禁当场红。断言写得比较硬——段数、降序、重复号、锚点唯一，任何一条不过就一个字节都不写。顺带揪出一个假绿：测试收集数的标记两边都是旧值，所以对账看起来是过的，实际磁盘早多了一例。这类「两边一起错」的漂移只有换个源头实算才照得出来。",
+  "file_index_rows": [
+    "| scripts/backfill_changelog.py | W842 | 新增：CHANGELOG 递延补段工具（两阶段：按降序补段 + 当前态六面推到新顶段·段数与降序断言 fail-closed） |",
+    "| scripts/output/_w842_spec.json | W842 | 新增：本批 spec（级联唯一来源） |",
+    "| pytest.ini | W842 | 改：头注 collected 实体标记 785 改 786（顺手修真漂移·W839 少记一例） |",
+    "| scripts/output/index.md | W842 | 改：登记 backfill_changelog.py 与 _w842_spec.json + 文件计数刷新 |"
+  ]
+}

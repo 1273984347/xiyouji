@@ -9,6 +9,7 @@
 agent_start.py  # ②开局摘要
 agg_entities.py  # ④实体聚合（由数据管线调用）
 archive_file.py  # ①归档动作
+backfill_changelog.py  # ②应急补段（版段递延链断裂时人工触发·非常规流程·W842 建）
 baseline_snapshot.py  # ①取证快照
 build_reader.py  # ①阅读器构建
 bump_footer_version.py  # ①批量页脚版本
@@ -31,7 +32,6 @@ package_analysis_sync.py  # ②分析包同步
 perf_monitor.py  # ②性能监控
 render_check.js  # ④渲染检查
 review_sweep.py  # ②审查扫
-safe_commit.py  # ②提交重试
 source_collate.py  # ①原文归集
 spot_check_nlp.py  # ①NLP 抽查
 sync_data_json.py  # ③发布链·数据同步
