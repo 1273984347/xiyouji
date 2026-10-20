@@ -11,6 +11,15 @@
 ---
 
 
+## W807 站内搜索索引刷新批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_gen_search_index.py | W807 | 恢复 W573 原位（常驻留档·内容批次收尾重跑）：全站搜索索引生成器 |
+| site/data/search.html | W807 | 搜索索引刷新（doc 条目 61→111·失效目录引用 9→0）+ CSP 哈希重算 |
+| site/en/search.html | W807 | 搜索索引刷新（doc 条目 61→111）+ CSP 哈希重算 |
+| tests/e2e/test_site_quality.js | W807 | 新增 S1/S1b 两条搜索页常驻断言（负样本实证旧索引必红） |
+
 ## W806 GoatCounter 统计链彻底退役批（2026-10-20）
 
 | 文件 | W | 说明 |
