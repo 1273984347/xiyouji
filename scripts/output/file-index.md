@@ -11,6 +11,15 @@
 ---
 
 
+## W843 pitfalls 增补批（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/agent/pitfalls.md | W843 | 改：级联节增第 48 条（desc 禁含内嵌 W 号·页脚链 token 撞车）+ 数据节增第 49 条（双源同旧值假绿）；节标题 4→5、4→5 |
+| AGENTS.md | W843 | 改：§4.3 坑位总数 47→49、六主题目录级联节 4→5 与数据节 4→5、补 W843 计数口径注 |
+| scripts/output/_w843_spec.json | W843 | 新增：本批 spec（级联唯一来源） |
+| scripts/output/index.md | W843 | 改：登记 _w843_spec.json 与 _cascade_files_W843.txt |
+
 ## W842 CHANGELOG 递延补段工具批（2026-10-21）
 
 | 文件 | W | 说明 |
