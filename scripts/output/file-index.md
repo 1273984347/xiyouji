@@ -11,6 +11,29 @@
 ---
 
 
+## W844 系统架构批四项落地（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/backup.ts | W844 | 新增：会话库与审计日志快照（VACUUM INTO 一致性快照 + 保留策略 + 启动钩子） |
+| xiyouji-agent-web/server/backup.test.ts | W844 | 新增：备份 9 例回归（行数一致/幂等/份数/超龄/跳过仍清理/缺失不抛/dry-run） |
+| xiyouji-agent-web/server/metrics.ts | W844 | 新增：首 token 滚动窗口（100 样本·p50/p95·脏数据丢弃） |
+| xiyouji-agent-web/server/metrics.test.ts | W844 | 新增：指标窗 7 例回归（空窗给 null/分位/淘汰/脏数据/快照语义） |
+| xiyouji-agent-web/server/chat.ts | W844 | 改：OBS-14 首 token 计时（handler 起算 + 首个 delta 记录 + 无文本记 no_text_delta） |
+| xiyouji-agent-web/server/routes.ts | W844 | 改：新增只读 GET /api/metrics（首 token 窗口摘要） |
+| xiyouji-agent-web/server/index.ts | W844 | 改：listen 回调挂 backupOnStartup（失败不阻断启动） |
+| xiyouji-agent-web/server/db.ts | W844 | 改：导出 databasePath() 供备份复用同一解析结果 |
+| xiyouji-agent-web/package.json | W844 | 改：test:server 加入 backup.test.ts 与 metrics.test.ts |
+| docs/agent/agent-web.md | W844 | 改：补会话库备份与保留期、OBS-14 首 token 两节 |
+| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W844 | 改：S8 口径纠正（dense 增益实测）+ 档 2 触发条件细化 + Q1/Q3/Q4 裁决回填 + 新增 Q5 |
+| scripts/rag/eval/queries_30q_frozen.jsonl | W844 | 新增：30 题冻结集原样迁入（与工地原件字节一致） |
+| scripts/rag/eval/queries_100q.jsonl | W844 | 新增：100 题评测集（30 冻结 + 70 标题派生·gold 由脚本解析） |
+| scripts/rag/eval/make_queries.py | W844 | 新增：题集生成器（锚点表 + gold 解析 + --check 一致性） |
+| scripts/rag/eval/eval_retrieval.py | W844 | 新增：检索复算入口（三档 + recall@1/5/10 + 报告生成） |
+| scripts/rag/README.md | W844 | 改：补检索评测节（题集构成/复算入口/基线/与历史数字关系/局限） |
+| scripts/output/rag_eval_report.md | W844 | 新增：检索评测报告（生成物·可重跑覆盖） |
+| scripts/output/_w844_spec.json | W844 | 新增：本批 spec（级联唯一来源） |
+
 ## W843 pitfalls 增补批（2026-10-21）
 
 | 文件 | W | 说明 |

@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W843），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W844），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,18 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W844（2026-10-21）：系统架构批四项落地（会话库备份 + 首 token 计时 + 两项裁决回填 + 检索题集入仓）
+
+> **来源**：用户令「继续做完」。原 W828 批（2026-10-20 用户批「可以」的 Q1/Q3/Q4/OBS-14 四项）因当时 CHANGELOG 号序链断裂（W828 缺口）始终无法级联立段，内容一直停在备料件。W842 修复号序链后，本批以新号 W844 承接落地。
+> - **文件**：xiyouji-agent-web/server/backup.ts、xiyouji-agent-web/server/backup.test.ts、xiyouji-agent-web/server/metrics.ts、xiyouji-agent-web/server/metrics.test.ts、xiyouji-agent-web/server/db.ts、xiyouji-agent-web/server/index.ts、xiyouji-agent-web/server/chat.ts、xiyouji-agent-web/server/routes.ts、xiyouji-agent-web/package.json、docs/agent/agent-web.md、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md、scripts/rag/eval/queries_30q_frozen.jsonl、scripts/rag/eval/queries_100q.jsonl、scripts/rag/eval/make_queries.py、scripts/rag/eval/eval_retrieval.py、scripts/rag/README.md、scripts/output/rag_eval_report.md、scripts/output/_w844_spec.json、docs/00-导读/W批次编号对账表.md。
+> - **Q1 会话库备份**：`chat.db` 是全仓唯一不可重建的数据（gitignored 且无备份）。新增 `server/backup.ts`——用 `VACUUM INTO` 生成一致性快照（**禁文件拷贝**：库有 WAL 伴生文件，只拷主文件会丢最近未 checkpoint 的提交）；备份两件（库快照 + 审计日志副本）、每日一份、留 7 份、清 90 天；份数与天数两条件**独立取并集**（备料件首跑曾把超龄判断嵌进「仅在超份数时才查」，致 90 天规则实际失效）；落点仓外 `%LOCALAPPDATA%\xiyouji\backups\`（`XIYOUJI_BACKUP_DIR` 可覆盖）；年龄以文件名日期为主、mtime 兜底；幂等跳过时仍执行清理。挂载在 `listen` 回调，**失败只记日志不阻断启动**，`NODE_ENV=test` 跳过。回归面 9 例。
+> - **OBS-14 首 token**：`/api/chat` handler **最前**取 `reqStartedAt`（入参校验与会话读写也属用户等待，靠后计时会系统性低估），首个 text delta 记 `firstTokenMs` 并打结构化日志；整轮无文本增量时记 `reason: no_text_delta`，**不把缺样本当 0 ms**。新增 `server/metrics.ts`（滚动 100 样本·最近秩法 p50/p95·脏数据丢弃）与 `GET /api/metrics` 只读端点，不落盘不外发。回归面 7 例。
+> - **Q3 多租户不预加**：三条触发条件写死（第 2 个真实使用者 / 需按用户导出删除 / 会话数超 5,000）+ 提前记账的代价清单（三表改 schema、查询路径加 WHERE、老数据归属规则等约 1 批工作量），回填 §8.2 档 2 与 §12.2 Q3。
+> - **Q4 检索维持现役 + 评测集入仓**：30 题冻结集**逐行原样**迁入（与原件字节一致·sha256 `8d9385b5…`），另由 `make_queries.py` 按文档标题锚点派生 70 题（gold 由脚本解析·只认索引内文档），合计 100 题；`eval_retrieval.py` 为复算入口，出 `scripts/output/rag_eval_report.md`（总表 + 题源分组 + 题型分组 + 逐题明细 + 口径局限）。
+> - **一处必须纠正的旧结论**：备料件写着「dense 仅 +0.003，不成立」。复算后 off 档 100 题 recall@5 = 0.573、frozen 30 = 0.382、dense = 0.712 / 0.446——增益远大于 +0.003。查明原因是历史数字跑在 T-01 冻结索引（1,077 篇）上，与现役索引（768 篇）语料面不同，**不可互引**。故「dense 无增益」论据作废，**默认档仍为 off，但理由换成成本与可移植性**（四重依赖 + 约 96 MB 模型 + 124 MB 产物、离线不可复算），并把「dense 是否升为可选档」登记为**新开放项 Q5** 交用户裁决。体积口径按实测值写，未用估算。
+> - **验证**：`npm run test:server` 98 例中 97 通过（唯一失败 W817-C2b 为**本机环境限制**：沙箱下 `fs.symlinkSync` 不抛错也不建链，用例前置假设不成立，CI 为 Linux 必执行面；该文件本批未改动）；`tsc -b` 零错误；`make_queries --check` 一致；ruff 净；`eval_retrieval` 4.3 s 跑完 100 题。
+> - **状态**：已落地（本地提交·未推送）。
 
 ### W843（2026-10-21）：pitfalls 增补批（第 48 条 desc 内嵌 W 号 + 第 49 条双源同旧值假绿）
 

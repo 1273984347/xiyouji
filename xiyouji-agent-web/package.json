@@ -12,7 +12,7 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "server": "tsx server/index.ts",
-    "test:server": "node --import tsx --test server/engine/tools.test.ts server/audit.test.ts server/citationGuard.test.ts server/security.test.ts",
+    "test:server": "node --import tsx --test server/engine/tools.test.ts server/audit.test.ts server/citationGuard.test.ts server/security.test.ts server/backup.test.ts server/metrics.test.ts",
     "test:integration": "node --import tsx --test server/api.integration.test.ts",
     "test:client": "vitest run",
     "test:e2e": "node e2e/chat.e2e.mjs",

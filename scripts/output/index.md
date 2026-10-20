@@ -12,13 +12,14 @@
 - `data/`
 - `figures/`
 
-## 文件（252）
+## 文件（255）
 
 ### Markdown 文档
 
 - `_a02_matrix_body.md`
 - `_s23_full_matrix.md`
 - `file-index.md`
+- `rag_eval_report.md`
 - `stats-index.md`
 - `观测基线快照.md`
 
@@ -128,6 +129,7 @@
 - `_cascade_files_W831.txt`
 - `_cascade_files_W842.txt`
 - `_cascade_files_W843.txt`
+- `_cascade_files_W844.txt`
 - `_sync_analysis_manifest.json`
 - `_w728_spec.json`
 - `_w729_spec.json`
@@ -246,6 +248,7 @@
 - `_w841_spec.json`
 - `_w842_spec.json`
 - `_w843_spec.json`
+- `_w844_spec.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`

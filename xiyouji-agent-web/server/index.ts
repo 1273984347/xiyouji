@@ -29,6 +29,9 @@ import { registerChatRoute } from "./chat.js";
 import { errorHandler, notFoundHandler } from "./errors.js";
 import { logger } from "./logger.js";
 import { closeDatabase } from "./db.js";
+import { databasePath } from "./db.js";
+import { backupOnStartup } from "./backup.js";
+import { auditLogPath } from "./audit.js";
 import { registerShutdownHandlers } from "./shutdown.js";
 import { PORT, AGENT_WEB_TOKEN, REQUIRE_TOKEN, ALLOWED_HOSTS } from "./config.js";
 
@@ -80,6 +83,9 @@ const server = app.listen(PORT, "127.0.0.1", () => {
     host: "127.0.0.1",
     database: "SQLite (data/chat.db)",
   });
+  // W844：启动期会话库快照（每日一份·留 7 份·清 90 天）。失败只记日志、绝不阻断启动——
+  // chat.db 是全仓唯一「不可重建」的数据，备份缺席是风险，但启动失败是立即故障，故降级不抛。
+  backupOnStartup(databasePath(), auditLogPath());
   console.log(`
 ╔════════════════════════════════════════════╗
 ║                                            ║
