@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（233）
+## 文件（234）
 
 ### Markdown 文档
 
@@ -227,6 +227,7 @@
 - `_w826_container_survey.json`
 - `_w826_contrast_audit.json`
 - `_w826_migration_plan_check.json`
+- `_w830_spec.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`

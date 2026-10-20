@@ -68,7 +68,10 @@ EXCLUDE_SUBSTR = (
     "review-w760",
 )
 # 顶层目录排除（纯本地运行态·不入库也无内容导航价值）
-EXCLUDE_TOP = set(EXCLUDE_SUBSTR) | {".git"}
+# W830：补 .agent / .workbuddy——AI 会话运行态目录（agent-mail 暂存 / 会话工作区与记忆），
+# 每个未来会话都会重建，不排除则第 45 门禁对每个会话恒红（W830 实证：3 目录 6 FAIL）；
+# .github 是受管 CI 面（workflows/README.md 为级联面）·刻意不在排除集
+EXCLUDE_TOP = set(EXCLUDE_SUBSTR) | {".git", ".agent", ".workbuddy"}
 # 构建/打包产物目录名（packaging/xiyouji-analysis/build · dist · *.egg-info·非源码面无导航价值）
 EXCLUDE_SEGMENTS = {"build", "dist"}
 EXCLUDE_SUFFIX = (".egg-info",)

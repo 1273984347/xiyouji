@@ -12,7 +12,11 @@
      C4-f 文件清单入库对账（W723）：现役段「文件」行路径 ⊆ HEAD 树 且 无工作树残留（W537③ 清偿·手工件唯一防线·缺行 NOTE）
   C5 聚合数字对账（W703 建·W704 实体化）：18 式高危聚合句式 × 现役叙述面（README/STRUCTURE/AGENTS/项目说明全文 +
      CHANGELOG 仅「全站页数口径」块行）vs scripts/output/stats.json（scripts/stats.py 磁盘实算·实体化 tracked）；
-     C5b 数字实体标记：<!--stats:KEY--> 前置数字 == stats.json[KEY].value（键未登记=fail-closed）；
+     C5b 数字实体标记：<!--stats:KEY--> 前置数字 == stats.json[KEY].value（键未登记=fail-closed；
+          W830 扩展面：docs/11-方案报告/ 根层现役报告 *.md + pytest.ini 亦入标记对账——只跑标记、
+          不跑句式白名单与 C5c 裸数字（辅助叙述面宁窄勿误）；计划方案/ 子目录刻意除外：计划件为
+          时点快照，其引用的基线数字随批次冻结（同 CHANGELOG 历史段纪律·禁回溯改写），由计划自身的
+          「聚合数字当批现测」条款在开工批复核（T04 AC-07 34/35 vs 现役 37 实例））；
      C5c 裸聚合数字：标记/句式覆盖外的 N[页项篇个类] 记 NOTE 报告型（起步策略·收敛后转 FAIL）；
      C5d stats 实算对账（W718）：scripts/stats.py --check（stats.json vs 磁盘实算）零差异——
      「检查过零差异」有机器背书，漂移未刷新（漏跑 --w）当场 FAIL（W715 实例的防线）；
@@ -22,6 +26,7 @@
      --json 供 CI 消费。本脚本绝不修改任何文件。
 """
 
+import glob
 import json
 import os
 import re
@@ -77,6 +82,20 @@ RE_FILE_TOKEN = re.compile(
 RE_STATS_MARK = re.compile(r"(\d+)\s*[页项篇个类]?\s*<!--stats:([a-z_0-9]+)-->")  # W704 数字实体标记（紧贴/句尾双形态·key 后置·渲染隐藏）
 RE_BARE_AGG = re.compile(r"\d+\s*(?:页|项|篇|个|类)")  # C5c 裸聚合数字（报告型 NOTE·W704 起步）
 C5_DOC_NAMES = {"readme": "README.md", "structure": "STRUCTURE.md", "agents": "AGENTS.md", "xiangmu": "项目说明.md", "contributing": "CONTRIBUTING.md", "koujing": "统计口径说明.md"}  # W713 补 CONTRIBUTING（第 27 门禁叙述面已含·C5 面对齐）；W769 补统计口径说明（自称「唯一口径来源」却不在扫描域·W760 F-9 实证）
+
+
+def c5b_extra_surfaces():
+    """W830：C5b 实体标记对账扩展面（只跑标记·不跑句式与裸数字·宁窄勿误）。
+
+    ① pytest.ini：头注 collected 计数实体化——原 602 字面量无任何对账，W830 审查实证其已漂移至 770；
+    ② docs/11-方案报告/*.md 根层（非递归 glob·不含子目录）：现役报告自称「当前态盘点」，其 stats
+       实体标记须随 stats.json 活——W830 审查实证系统架构方案 report_docs=30 过期（现役 37）却无门禁兜底。
+    **计划方案/ 子目录刻意除外**：计划件是时点快照，其引用的基线数字随批次冻结（同 CHANGELOG 历史段
+    纪律·禁回溯改写），由计划自身的「聚合数字当批现测」条款在开工批复核（T04 AC-07 34/35 实例）。
+    """
+    paths = [os.path.join(ROOT, "pytest.ini")]
+    paths += sorted(glob.glob(os.path.join(ROOT, "docs", "11-方案报告", "*.md")))
+    return paths
 EXEMPT_MARK = "<!--doc-sync:exempt"
 ARCHIVE_CHANGELOGS = [
     os.path.join(ROOT, "archive", "docs", "CHANGELOG-ARCHIVE.md"),
@@ -273,6 +292,20 @@ def _check_c4_commit_ledger(inp, issues, notes):
                     issues.append("C4-f: 文件清单 %s 有工作树未提交残留（漏 add）" % f)
 
 
+def _check_stats_marker(m, where, stats, issues):
+    """C5b 单标记对账（W830 提取：主叙述面与扩展面共用·判据一致防双源漂移）。"""
+    key_name = m.group(2)
+    want = stats_value(stats, key_name)
+    got = int(m.group(1))
+    if want is None:
+        issues.append("C5b: %s 标记 <!--stats:%s--> 键未登记——先登记 scripts/stats.py META" % (where, key_name))
+    elif got != want:
+        issues.append(
+            "C5b: %s 标记数字 %d ≠ stats.json %s=%s（跑 python scripts/stats.py --w <批号> 刷新）"
+            % (where, got, key_name, want)
+        )
+
+
 def _check_c5_aggregate_stats(inp, issues, notes):
     """C5 聚合数字对账 + C5b 实体标记 + C5c 裸数字报告（W703/W704）。
 
@@ -327,16 +360,7 @@ def _check_c5_aggregate_stats(inp, issues, notes):
                     covered.update(range(m.start(), m.end()))
         for m in RE_STATS_MARK.finditer(ln):
             covered.update(range(m.start(), m.end()))
-            key_name = m.group(2)
-            want = stats_value(stats, key_name)
-            got = int(m.group(1))
-            if want is None:
-                issues.append("C5b: %s 标记 <!--stats:%s--> 键未登记——先登记 scripts/stats.py META" % (where, key_name))
-            elif got != want:
-                issues.append(
-                    "C5b: %s 标记数字 %d ≠ stats.json %s=%s（跑 python scripts/stats.py --w <批号> 刷新）"
-                    % (where, got, key_name, want)
-                )
+            _check_stats_marker(m, where, stats, issues)
         for m in RE_BARE_AGG.finditer(ln):
             if m.start() not in covered:
                 bare_hits.append("%s「%s」" % (where, m.group(0)))
@@ -345,6 +369,14 @@ def _check_c5_aggregate_stats(inp, issues, notes):
             "C5c: 裸聚合数字 %d 处未实体化（报告型·前 20）：%s%s"
             % (len(bare_hits), "；".join(bare_hits[:20]), "…" if len(bare_hits) > 20 else "")
         )
+
+    # W830 扩展面 C5b 标记对账（只标记·不句式·不裸数字·rationale 见 c5b_extra_surfaces docstring）
+    for rel, text in (inp.get("reports_extra") or {}).items():
+        for i, ln in enumerate(text.splitlines(), 1):
+            if EXEMPT_MARK in ln:
+                continue
+            for m in RE_STATS_MARK.finditer(ln):
+                _check_stats_marker(m, "%s:%d" % (rel, i), stats, issues)
 
 
 def _check_c5d_stats_recheck(inp, issues):
@@ -397,6 +429,12 @@ def gather():
         "verify_src": rd(os.path.join(HERE, "verify_delivery.py")),
         "stats": _load_stats(),
         "table": rd(os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md")),
+        # W830：C5b 扩展面（pytest.ini + 11-方案报告根层·只跑标记对账·见 c5b_extra_surfaces）
+        "reports_extra": {
+            os.path.relpath(p, ROOT).replace(os.sep, "/"): rd(p)
+            for p in c5b_extra_surfaces()
+            if os.path.exists(p)
+        },
         "subjects": [],
         "shallow": os.path.exists(os.path.join(ROOT, ".git", "shallow")),
     }
@@ -412,8 +450,9 @@ def gather():
         inputs["git_err"] = str(e)[:120]
     try:
         r = subprocess.run(  # W718 C5d：stats.py --check（stats.json vs 磁盘实算·实测 0.3s）
+            # W830：timeout 60→180——stats --check 自 W830 起含 pytest --collect-only 实算（本机 0.3s·CI 留裕量）
             [sys.executable, os.path.join(HERE, "stats.py"), "--check"],
-            cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="ignore", timeout=60,
+            cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="ignore", timeout=180,
         )
         inputs["stats_check_ok"] = r.returncode == 0
         _tail = ((r.stdout or "") + (r.stderr or "")).strip().splitlines()
@@ -467,7 +506,7 @@ def run_check():
 
 
 def run_self_test():
-    """7 例注入式负样本/正样本（纯合成输入，不改真实文件）。"""
+    """22 例注入式负样本/正样本（纯合成输入，不改真实文件）。"""
     base = {
         "changelog": "### W999（2026-10-05）：自测顶段\n\n### v9.9.8（2026-10-04）：W998 旧段\n",
         "readme": "> **当前批次 W999（2026-10-05）**：自测抬头行\n",
@@ -480,6 +519,7 @@ def run_self_test():
         "xiangmu": "",
         "contributing": "",
         "koujing": "",
+        "reports_extra": {},
         "stats_check_ok": True,
         "stats_check_tail": "",
         "staged": [],
@@ -614,6 +654,19 @@ def run_self_test():
             head_tree=[], dirty=[],
         ),
         "C4-f",
+    )
+    # W830：C5b 扩展面（11-方案报告根层 + pytest.ini·只跑标记对账）双向锁——
+    # 失配必红（现役报告过期标记无门禁兜底的根修）+ 一致放行（不误伤时点快照外的新叙述面）
+    case(
+        "T21 报告扩展面标记失配必红（C5b·W830）",
+        lambda d: d.update(reports_extra={"docs/11-方案报告/x.md": "全站 HTML 共 200<!--stats:html_total--> 页\n"}),
+        "C5b",
+    )
+    case(
+        "T22 报告扩展面标记一致放行（C5b·W830）",
+        lambda d: d.update(reports_extra={"docs/11-方案报告/x.md": "全站 HTML 共 100<!--stats:html_total--> 页\n"}),
+        "C5b",
+        expect_absent=True,
     )
 
     fails = 0
