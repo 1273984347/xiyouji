@@ -43,7 +43,7 @@
 - **ML 栈在 handler 子线程首次 import → SIGSEGV**（W746）：http.server 的 ThreadingHTTPServer handler 子线程内首次 `import torch` / `sentence_transformers` → 段错误 exit 139 静默死亡（无 traceback；实证：rag_server /route 54s 后 empty reply、服务进程非零终止）。修复：**模型必须在主线程启动时预热**（`rag_server.py` main 里 `_get_router()` 范式）·handler 只做 encode（torch 已初始化后子线程使用安全）。诊断注意：静默 139 会被管道 `2>&1 | grep | tail` 掩盖——用 `${PIPESTATUS[0]}` 或不过滤直跑验退出码。
 - **ruff --fix 的 isort 会改坏「ST 先于 torch」顺序**（W746）：isort 排序规则把 plain import（`import torch`）排到 from-import（`from sentence_transformers import ...`）之前——正是本机段错误坑的关键顺序，铁则注释写在旁边也会被改坏（实证：--fix 后 CLI 静默 139）。修复：**ML 脚本的 ST import 块必须加 `# noqa: I001` 防守**（`scripts/rag/page_router.py` `_load_model` 范式），并复跑该脚本确认可跑。
 
-### git / 提交 / 并发（12 条）
+### git / 提交 / 并发（17 条）
 
 - **批量改 md 一律 Python `open(encoding='utf-8')`，禁用 PowerShell `Set-Content`**（后者默认写 UTF-8 BOM，项目 W427 曾全库清 BOM；`Add-Content` 同理慎用）。
 - **同文件多个 Edit 必须串行执行**（并行 Edit 基于同一原始内容计算 diff，后写覆盖先写——W505 复现 4 次：金角银角「唐僧肉」/CHANGELOG W506 段/项目说明头部/交接文档标题均丢失）；并行批次后必须 Grep 验证所有修改点。
@@ -58,6 +58,12 @@
 - **pre-commit scope 分级与提交重试（W698·用户裁决「动工」·外部挑刺 P2 两条落地）**：verify_delivery.py 支持 `--scope full|docs|site|auto`——11 个内联廉价段恒跑，32 个 subprocess 委托段按生效集统一短路（`_GATE_SUMMARY_MARKERS` 兜住防静默跳过 wrapper 的汇总行校验），段自洽锁非 full 档按生效子集断言；`auto` 按变更路径白名单分类（doc-ish/site-ish 正则，任何越界文件→full；未跟踪 docs/site 内容文件在场→full 保守回退），`.git/hooks/pre-commit` 传 `--scope auto`，**CI verify-delivery job 与批收尾七步③恒为全量不缩水**；实测 docs 档 2.3s vs 全量 62s（热缓存）。**W781 R-1 演进**：`_GATE_SUMMARY_MARKERS` 改由 `_STRICT_GATES` 元组派生（手工字典删除）+ `_assert_registry_consistent()` 启动期四查（段名重复/缺 EXPECTED_SECTION_NAMES/相对序漂/scope 未覆盖段须显式登记 `_FULL_ONLY_SECTIONS`）+ 段自洽锁补反向查（实跑多出声明外段即红）——挂槽手工面自五处收敛为两处（门禁元组+顺序表）且漏改启动期即红（W780 双实证：漏 markers 在 scope 跳过路径爆「缺汇总行」假红·漏 EXPECTED 被单向锁放行）。并行会话提交改用 `python scripts/safe_commit.py -F <msg> [--] <pathspec...>`——ref-lock 竞争核对并行增量与 pathspec 无交集后自动重试一次（`--self-test` 4 负样本）；仓库体量监视挂 release.py 步骤 3（count-objects·1GB 告警线·处置红线=禁历史重写，裁决史 SHA 锚定）。**worktree 每会话一树根治候选评估关闭（2026-10-11 用户采纳判断）**：git 禁止两 worktree 共 checkout 同分支→侧分支+合并编排的改造代价≫safe_commit+scope 分级后的残留摩擦（撞车已降为一次自动重试·级联顺序等待与 git 拓扑无关·tmpe/S4 本地件会碎片化）；重启条件=safe_commit 自动重试频率>1 次/周。
 - **workflow/脚本用 git diff 输出做路径分类必须加 `-c core.quotePath=false`**（W523）：git 默认把非 ASCII 路径输出为带双引号的八进制转义串（交接文档.md → `"\344\272\244..."`），首尾引号破坏 bash case/glob 匹配（连 `*.md`、`docs/*` 都失配）→ 免审/定向分支被静默架空、恒走兜底全量（Screenshot Review scope 步骤曾因此每次推送 ~11min 全量截图）；验证靠本地 Git Bash 复刻分类逻辑对真实范围双向模拟。
 - **touches 冲突声明与交集拒绝（W739）**：对账表 touches 列登记本批计划**手工修改**的共享文件（级联面由 batch_cascade 单写路径 + safe_commit pathspec 互斥保护·不列；对账表追加认领行属 append 安全操作·不列；但改本表表头/规则/历史行等**结构性**修改必须列）；动工前跑 `python scripts/preflight_check.py --touches "<逗号分隔清单>" --self W###`——与在途批次（状态非已收官/已闭环且 touches 非空）有交集即 FAIL 拒绝并行（等对方收官或人工裁决）；语义=「同文件 Edit 串行」铁律的跨 Agent 版——串行保证「我一人不并发」，touches 保证「跨人无覆盖」；实证：W738 收官与 W739 认领在两个并行会话间交错完成（本会话读时 W738 未提交·写完已收官·幸未造成损坏），即 A 类读→写窗口漂移实例——touches 把该类冲突从「写回阶段才发现」前移到「计划阶段就拒绝」。
+
+- **部分提交（pathspec）的 pre-commit 钩子跑在「临时索引」上**（W833 实证）：`git commit -- <pathspec>` 会构造临时索引（= HEAD + 本次 pathspec 的工作树内容）供钩子使用 ⇒ **并行会话已暂存未提交的件，在钩子视角下`git status` 显示为「工作树未提交残留」**。若该件恰在现役顶段「文件」行内（如 `docs/11-方案报告/README.md`），第 31 门禁 C4-f 即判红——**与本批内容无关的假红**（手动跑同一门禁为绿·两者结论相反是识别它的判据）。解法：把该件纳入本次 pathspec，或先请他方落库；**禁为此改门禁**。
+- **git 在 pre-commit 钩子全时长持有 `index.lock`**（W833 实证）：并行会话 `git commit` 期间 `index.lock` 会存在数分钟（钩子跑完才释放）⇒ 另一会话的提交报 `Unable to create index.lock`。纪律：**活锁不删**（有 git 进程在跑就等它释放）；确认无 git 进程后残留锁方可清理。自动化提交建议「等锁 → stage → 提交 →按门禁失败点重试」的小包装器，并把每轮门禁输出落文件（后台任务被终止时仍可取证失败点）。
+- **C5d 与 C5b 双向绑定：stats.json 刷新后实体标记必须同步**（W836 实证）：`stats.py --w <批号>` 刷新 stats.json 后，**实体标记**（`<!--stats:KEY-->` 形态的数字·如 pytest.ini 头注与 `docs/11-方案报告/` 根层报告内的标记）若未同步，C5b 反向判红（标记 782 ≠ stats 783）；而 stats.json 不刷新时 C5d 又判红——**两侧互锁** ⇒ 改任一侧后两侧都要刷。（本批即因并行会话新增 1 例收集项后两侧同时滞后而被门禁挡下。）
+- **PowerShell 管道会给行文本加 BOM**（W836 实证）：`Get-Content x | py -3 script.py` 传入的行首带 U+FEFF ⇒ 写入台账后该行成为 `U+FEFF| W836 | …` ⇒ 第 31 门禁 C4 的登记正则 `^\|\s*W(\d{3})\s*\|` 不匹配 ⇒ 判「该 W 号未在对账表登记」红——而**明面完全看不见**（编辑器不显示行首 BOM）。纪律：**登记行必须以文件直写传入**（`open(..., encoding="utf-8")`），禁经管道；写入后核 `git show HEAD:<file>` 的行首。
+- **守卫不能把自己判红**（W836 实证）：扫描被禁字面量的守卫若①在注释里写出字面量、②在自检样本里硬编码字面量，①会被自己命中、②入库后即自指违规 ⇒ 字面量以 **base64 存储·运行时解码**（明文扫描仍为 0 而守卫仍能检出回归）；自检的**正例探针由解码结果在运行时派生**（`pat` / `pat.upper()` / `pat.capitalize()` / 词内嵌形态），只有反例才硬编码。守卫上线后先跑自身扫描——它会当场报出你刚写下的字面量。
 
 ### 级联 / CHANGELOG（4 条）
 
