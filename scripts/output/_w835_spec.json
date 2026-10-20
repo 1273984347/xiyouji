@@ -1,0 +1,23 @@
+{
+  "batch": "W835",
+  "date": "2026-10-20",
+  "title": "W835 服务端暴露面收口批（Host 头白名单防 DNS rebinding + token 硬开关 + 启动暴露面告警）",
+  "desc": "服务端暴露面收口：Host 校验与 token 强制口径",
+  "head_entry": "2026-10-20（W835 服务端暴露面收口批）",
+  "head_sentence": "给本地 API 加 Host 白名单挡住 DNS rebinding，并让强制认证成为可硬开关",
+  "changelog_body": "\n\n> **来源**：2026-10-20 全项目只读审查（服务端面）所得的两项暴露面缺陷。\n> - **文件**：xiyouji-agent-web/server/security.ts、xiyouji-agent-web/server/config.ts、xiyouji-agent-web/server/middleware.ts、xiyouji-agent-web/server/index.ts、xiyouji-agent-web/server/security.test.ts、xiyouji-agent-web/.env.example、docs/agent/agent-web.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w835_spec.json、scripts/output/index.md、scripts/output/README.md。\n> - **缺陷①（服务端无 Host 校验 → DNS rebinding 可驱动本地 Agent）**：服务端只绑定回环地址（127.0.0.1）且默认免认证，但**浏览器发往 127.0.0.1 的请求会带上攻击者可控的 Host 头**——攻击者把 evil.com 的 DNS 解析到 127.0.0.1（DNS rebinding），浏览器便以 `Host: evil.com:3000` 请求本地 API；服务端若不校验 Host，这次请求与正常本地请求无异 ⇒ **攻击者网页可驱动本地 Agent**（读文件 / 执行命令）。**回环绑定挡不住这条路**（请求确实是打向 127.0.0.1 的）。**修**：① `server/security.ts` 新增纯函数 `normalizeHostname()`（去端口 / IPv6 去方括号 / 小写 / 去 FQDN 尾点 / 畸形判空）与 `isAllowedHost()`（白名单判定·空与畸形一律判否·fail-closed）；② `server/config.ts` 新增 `ALLOWED_HOSTS`（默认只认回环三形态 127.0.0.1 / localhost / ::1，`AGENT_WEB_ALLOWED_HOSTS` 为**追加**项）；③ `server/middleware.ts` 新增 `hostGuard` 关卡，挂载序=request ID → **Host 校验** → 限流 → 安全头 → 可选鉴权（不在白名单即 403，**不进限流桶、不触达任何路由**；响应体沿用既有 AppError 契约 `{ error: <文案> }`，前端契约零改动）。**端口不参与判定**（与 Django ALLOWED_HOSTS 同口径）：dev proxy（changeOrigin 改写 Host 为代理目标）、随机端口测试、Electron 桌面端都是同主机名不同端口，判端口会误伤。\n> - **缺陷②（token 口径无法硬化）**：`AGENT_WEB_TOKEN` 未设时 `/api/*` 免认证，此前**没有任何强制手段**——用户想「必须带 token」时只能靠自觉，进程不会拒绝在免认证模式下跑起来。**修**：① `AGENT_WEB_REQUIRE_TOKEN=1` 时若未设 `AGENT_WEB_TOKEN` 则**拒绝启动**（fail-closed·不静默降级为免认证）；② 未设 token 时启动记 WARN 并报当前暴露面与加固指引。**口径未改**：W808 固化的「无 CORS 中间件 + 回环绑定 + 可选 token + 限流」防护模型保持不变（本批只加严、不加面），对外契约（路径/字段/状态码）零变化。\n> - **自测当场抓出实现缺陷（负样本自证）**：`normalizeHostname` 初版按「首个冒号」截断端口，把白名单里的**裸 IPv6 `::1`** 归一化成空串 ⇒ `[::1]:3000` 反被判否——**实现比判据先错**；改为按冒号个数判定（恰一个才截端口·两个及以上视为裸 IPv6 整体保留）后通过。教训：白名单里同时存在「带端口形态」与「裸 IPv6 形态」时，端口剥离规则必须按形态判定，不能按「第一个冒号」这种位置判定。\n> - **验证**：`npm run test:server` **82 例 / 81 通过 / 0 失败 / 1 跳过**（既有 skip）· 集成测试 20 例 / 19 通过 / 0 失败 / 1 跳过 · `tsc --noEmit` **0 错** · 端到端 **11 通过 / 0 失败**（真实后端 + 真实前端代理链路未被打断）· 真起服负样本：`Host: evil.com` / `evil.com:3213` / `127.0.0.1.evil.com` 均 **403**，`127.0.0.1:3213` 与 `localhost:3213` 均 **200**；`AGENT_WEB_REQUIRE_TOKEN=1` 且未设 token → **退出码非 0 且打印拒绝原因**。\n> - **状态**：已落地（本地提交·未推送）。CHANGELOG 版段因顶段序约束（batch 必须等于顶段+1·当前顶段为 W826·W827 至 W834 的段均待补写）**递延**，待顶段推进后以 chore 批补写十面；本批内容与认领行已入库。\n",
+  "milestone_block": "- **W835 服务端暴露面收口批（Host 头白名单防 DNS rebinding + token 硬开关 + 启动暴露面告警）**：\n  - 新增 Host 头白名单关卡（默认只认回环三形态·追加项可配·只比主机名不比端口·不在白名单即 403 且不进限流桶）\n  - 新增 AGENT_WEB_REQUIRE_TOKEN 硬开关：要求强制认证却未设 token 时拒绝启动（fail-closed）\n  - 未设 token 时启动记 WARN 报当前暴露面\n  - 口径未改：回环绑定 + 可选 token + 限流 + 无 CORS 的既有防护模型只加严不加面\n",
+  "agents_note": "二〇二六年十月二十日（W835）服务端暴露面收口批：修两项暴露面缺陷。其一，服务端只绑定回环地址且默认免认证，但浏览器发往回环地址的请求会带上攻击者可控的主机名头——攻击者把自己控制的域名解析到回环地址，浏览器便以该域名请求本地接口；服务端若不校验主机名，这次请求与正常本地请求无异，于是攻击者网页可驱动本地智能体读文件与执行命令；回环绑定挡不住这条路，因为请求确实是打向回环地址的。修法是加主机名白名单关卡：默认只认三个回环形态，可按需追加；判定只比主机名不比端口，因为开发代理会改写该头为代理目标、随机端口测试与桌面端同理；不在白名单即拒绝且不进限流桶、不触达任何路由。其二，令牌未设时接口免认证，此前没有任何强制手段——想「必须带令牌」只能靠自觉，进程不会拒绝在免认证模式下跑起来。修法是加一个硬开关：要求强制认证却未设令牌时拒绝启动，不静默降级；未设令牌时启动记一条告警，报出当前暴露面与加固指引。口径未改：既有的回环绑定、可选令牌、限流、不设跨域中间件的防护模型保持不变，本批只加严、不加面。诚实记账：自测当场抓出实现缺陷——主机名归一化初版按「第一个冒号」截断端口，把白名单里的裸 IPv6 截成空串，致该形态反被拒；改为按冒号个数判定后通过。教训是白名单里同时存在带端口形态与裸 IPv6 形态时，端口剥离必须按形态判定。",
+  "file_index_rows": [
+    "| xiyouji-agent-web/server/security.ts | W835 | 改：新增 normalizeHostname 与 isAllowedHost 纯函数（Host 归一化与白名单判定·fail-closed） |",
+    "| xiyouji-agent-web/server/config.ts | W835 | 改：新增 ALLOWED_HOSTS（默认回环三形态 + 追加项）与 REQUIRE_TOKEN 两个启动期配置 |",
+    "| xiyouji-agent-web/server/middleware.ts | W835 | 改：新增 hostGuard 关卡（挂在 request ID 之后、限流之前） |",
+    "| xiyouji-agent-web/server/index.ts | W835 | 改：启动期暴露面自检（强制 token 无 token 拒绝启动 + 未设 token 记 WARN） |",
+    "| xiyouji-agent-web/server/security.test.ts | W835 | 改：新增纯函数 3 例与真起服负样本 2 例（rebinding 主机名 403 / 强制 token 拒绝启动） |",
+    "| xiyouji-agent-web/.env.example | W835 | 改：新增 AGENT_WEB_REQUIRE_TOKEN 与 AGENT_WEB_ALLOWED_HOSTS 的说明 |",
+    "| docs/agent/agent-web.md | W835 | 改：新增暴露面收口条目（Host 白名单与 token 硬开关·含挂载序与回归面） |",
+    "| docs/00-导读/W批次编号对账表.md | W835 | 改：W835 认领行登记（含版段递延说明·顶段序约束） |",
+    "| scripts/output/index.md | W835 | 派生面：目录文档文件清单（收录 _w835_spec.json） |",
+    "| scripts/output/README.md | W835 | 派生面：目录说明的文件计数（新增 _w835_spec.json 后重算） |"
+  ]
+}
