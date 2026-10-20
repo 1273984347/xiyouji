@@ -177,9 +177,9 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 **本机环境事实（Windows 单机·2026-10-17 实测·机器相关不入 L2）**：
 - `make` 未安装：Makefile 目标不可用，直调 `python scripts/<对应脚本>`（映射见 Makefile 注释）。
-- 全局 Python 3.12·无项目 `.venv`：`pytest`/`playwright`/`pip_audit` 约定加 `python -m` 前缀调用（不以各机 PATH 状态为依据）；`ruff`/`uv`/`node`/`npm`/`git`/`gh`/`pwsh` 可直呼。
+- 全局 Python 3.12·无项目 `.venv`：`pytest`/`playwright`/`pip_audit` 约定加 `-m` 前缀调用，**统一写 `py -3 -m <工具>`**（不以各机 PATH 状态为依据）；`ruff`/`uv`/`node`/`npm`/`git`/`gh`/`pwsh` 可直呼。**2026-10-20 实测（本机两 shell 解析不同·写文档时勿凭直觉）**：PowerShell 侧 `python`/`python3` 指向 `WindowsApps/python.exe` 应用执行存根（**命令存在但调用即 exit 9009·无输出无报错**），git-bash 侧 `python`/`python3` 才解析到 `C:\Users\12739\bin\` 下的实解释器；`py -3` 两 shell 一致指向全局 Python 3.12（`AppData\Local\Programs\Python\Python312`）且能吃 git-bash 的 POSIX 路径——故跨 shell 调用一律用 `py -3`。
 - `pwsh`（PowerShell 7）与 `powershell`（5.1）并存：需 PowerShell 时一律用 `pwsh`（默认 UTF-8 无 BOM）；`powershell` 是 5.1（GBK 默认·W509 BOM 坑源），且仍遵守仓内「禁 PowerShell 写仓内文件」铁则。
-- 提交门禁 hook（.git/hooks/pre-commit）用「逐候选实测可运行」选解释器（python3 → python → 系统 Python 3.12 路径）：候选须执行 `$cand -c "import sys"` 返回 0 才选用——PATH 上的 `python3`/`python` 可能是应用执行存根（命令存在但调用即 exit 9009·无输出无报错），不可按「命令存在」判定可用；hook 不依赖任何厂商托管运行时路径。
+- 提交门禁 hook（.git/hooks/pre-commit）与本清单同口径取解释器：首选 `py -3`，回退系统 Python 3.12 绝对路径，两者均须实测可运行（`-c "import sys"` 返回 0）才选用；**不按 PATH 上的 `python`/`python3` 形状挑选**（两 shell 解析不同·见上一条）·不依赖任何厂商托管运行时路径。
 - pre-commit 框架未装且**禁装**：`pre-commit install` 会覆盖手写 `.git/hooks/pre-commit`，破坏零依赖门禁。
 
 ### 4.4 Web Agent（xiyouji-agent-web/ · 摘要层）
