@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W826），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W827），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,16 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W827（2026-10-21）：站内阅读入口打通施工批（622 页 reader 从站内 0 入链到首页一跳可达）
+
+> **来源**：用户「可以」批准 —— T-04 执行前计划（`6b02c346`·W824 方案件）的施工落地。计划核心判据：`site/` 全树（排除 `site/reader/`）对 `reader/index.html` 命中 0，620 页正文解读处于站内孤岛。
+> - **文件**：site/index.html、site/guide.html、docs/11-方案报告/计划方案/T04-任务计划执行与经验沉淀报告-2026-10-21.md、docs/11-方案报告/README.md、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md、STRUCTURE.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/_w827_spec.json、scripts/output/index.md、docs/00-导读/W批次编号对账表.md。
+> - **五处入口**：① 首页主导航新增「阅读」指向 `reader/index.html`（原 6 项无一项通向阅读）；② 首屏 masthead 加「开始阅读 · 第 1 回 灵根育孕源流出 →」CTA 指向 `reader/ch001.html`；③ 新增「从哪一回读起」区块，4 张卡直达第 1 回（开篇）/ 第 5 回（大闹天宫）/ 第 27 回（三打白骨精）/ 第 58 回（真假美猴王），回目名由 `site/reader/index.html` 程序化提取非记忆；④ 全卷索引「开卷有益」后插入「逐回精读」行（编号 01），原 11 条 00-10 顺延为 02-11，脚本内前置断言 `len(rows)==11 and nos==range(11)` 不符即停；⑤ 导读页 `guide.html` 主导航 + 首条阅读路径卡各补 1 条。
+> - **范围纪律**：不改 `site/reader/**` 622 页（体验封装属 W829 候选·未获批）；不新增任何页面；零外域请求与外域脚本；不改管控件与 archive；不推送远端。
+> - **计划偏差（如实留档 4 条）**：AC-04 原按「索引 9 条 00-08」编写，开工实测 11 条 00-10（计划时点后新增 curated 等行）→ 按实质判据执行；AC-07 计数基线 34→（计划自带的 39 订正）→ 本批实测 40；AC-01 的 `../reader/` 形态表述有歧义（两页均在 site 根，形态同为 `reader/index.html`）→ 按「两页各至少 1 条」验收；AC-18 干扰日志未命中（开工 staged=0，无已暂存变更）→ 不虚构登记。
+> - **验证**：AC-01~AC-20 逐条实测（报告 §二 表格留证）；9 条门禁逐条 rc=0（`_gen_search_index` / `check_search_index_fresh` / `lint_links --internal` / `generate_csp --check` / `check_seo_head` / `a11y_audit` / `check_structure` / `check_doc_sync` / `verify_delivery`）；页数四项 88/138/622/9 不变；`report_docs` 39→40 且三处标记同步；连通性探针实证首页一跳直达两个目标、非搜索页对 `reader/ch0\d\d` 引用数 0→1。
+> - **状态**：已落地（本地提交·未推送）；本批为递延链解链批（顶段 W826 + 1 → 版段由级联直接落下）。
 
 ### W826（2026-10-20）：界面视觉重设计细化规格批（五项裁决落地 + 实算参数 + 迁移批次清单）
 
