@@ -16,7 +16,7 @@
 | 文件 | W | 说明 |
 |---|---|---|
 | .gitignore | W812 | 改：删该厂商工具目录的忽略规则（2 行） |
-| AGENTS.md | W812 | 改：机器环境事实条「提交门禁 hook 解释器」改写为遵循仓内工具清单口径（全局 Python 3.12·启动器优先·去掉厂商托管运行时指向） |
+| AGENTS.md | W812 | 改：机器环境事实条两条——「提交门禁 hook 解释器」改写为遵循仓内工具清单口径（全局 Python 3.12·`py -3` 优先·去掉厂商托管运行时指向）+「全局 Python 3.12」条补三语境分清（仓内文档/CI/Makefile 用可移植 `python`·本机 PowerShell 用 `py -3`） |
 | CHANGELOG.md | W812 | 改：现役与历史段该品牌字样去品牌化（认领/来源/环境事实类叙述） |
 | archive/docs/CHANGELOG-ARCHIVE.md | W812 | 改：归档段该品牌字样去品牌化（豁免登记/环境事实/硬性排除三类） |
 | archive/docs/file-index-ARCHIVE.md | W812 | 改：归档文件索引条该品牌字样去品牌化 |
