@@ -1020,6 +1020,11 @@ def _gate_a11y(ctx):
     except Exception as e:
         ctx.rep.fail("a11y 对比度门禁执行异常（判据不可执行·fail-closed·W831）: %s" % e)
         return
+    if isinstance(r, _SkipResult):
+        # W839 回归修复：scope 跳过时 _scoped_run 返回伪造结果（stdout 为「（--scope X 跳过）」，
+        # 跳过提示已由其打印）；W834 改 fail-closed 后误把该提示串送 json.loads → docs 档提交必红。
+        # 跳过不是「判据不可执行」，直接返回，不重复上报。
+        return
     if r.returncode != 0:
         ctx.rep.fail("a11y_audit 失败（exit %d）：%s"
                      % (r.returncode, (r.stderr or r.stdout).splitlines()[-1:]))
