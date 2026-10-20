@@ -81,7 +81,7 @@ API 格式：`anthropic` 走原生 messages（x-api-key 头）；其余走 OpenA
 # 1. 安装增强依赖
 pip install sentence-transformers numpy
 
-# 2. 构建向量产物（重计算任务·首次含模型下载约 92MB·微批冷却+断点续跑）
+# 2. 构建向量产物（重计算任务·首次含模型下载约 92 MiB／≈96 MB·微批冷却+断点续跑）
 python scripts/rag/build_vectors.py                 # auto 设备（本机建议 py -3.12 运行）
 python scripts/rag/build_vectors.py --device cpu    # 或强制 CPU（较慢·无 GPU 风险）
 
