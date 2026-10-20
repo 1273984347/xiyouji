@@ -52,6 +52,8 @@
 | site/en/search.html | W812 | 改：内嵌搜索索引载荷随文档变更重生成 + CSP 哈希重算 |
 | tests/unit/test_preflight_check.py | W812 | 改：用例改测工作树态三态计数本身 + 认领会话样例去品牌化 |
 | tmpe/README.md | W812 | 改：活跃冻结区并行会话表述去品牌化 |
+| CLAUDE.md | W812 | 改：环境注意段增「调用形态」指针一行——本机 PowerShell 侧 `python` 是应用执行存根（调用即静默失败）→ 该侧改写 `py -3`（可移植形态仍为 `python`·CI/Linux/macOS 通用） |
+| scripts/README.md | W812 | 改：工具表头增「调用形态」指针一行——表内 `python <脚本>` 为可移植形态，本机 PowerShell 侧改写 `py -3 <脚本>` |
 
 ## W811 CI 断链修复批（2026-10-20）
 
