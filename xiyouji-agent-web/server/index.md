@@ -11,10 +11,11 @@
 
 - `engine/`
 
-## 文件（17）
+## 文件（24）
 
 ### JavaScript / TypeScript
 
+- `api.integration.test.ts`
 - `audit.test.ts`
 - `audit.ts`
 - `chat.ts`
@@ -23,15 +24,21 @@
 - `config.ts`
 - `db.ts`
 - `engine.smoke.mjs`
+- `errors.ts`
 - `feedback.test.mjs`
 - `http.ts`
 - `index.ts`
+- `logger.ts`
 - `middleware.ts`
 - `permissions.ts`
+- `requestId.ts`
 - `routes.ts`
 - `security.test.ts`
 - `security.ts`
+- `shutdown.ts`
 - `sse.ts`
+- `types.ts`
+- `validation.ts`
 
 ---
 

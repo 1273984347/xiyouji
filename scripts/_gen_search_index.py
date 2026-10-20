@@ -9,10 +9,16 @@ import glob
 import json
 import os
 import re
+import warnings
 
 try:
-    import jieba
-    jieba.setLogLevel(60)
+    with warnings.catch_warnings():
+        # W809：jieba 依赖的 pkg_resources 已弃用（setuptools ≥81 警告）——静音以免污染
+        # 门禁汇总行的机器解析（stderr 噪声不影响 stdout 标记，但读日志时误导判读）
+        warnings.simplefilter("ignore", DeprecationWarning)
+        warnings.simplefilter("ignore", UserWarning)
+        import jieba
+        jieba.setLogLevel(60)
 except ImportError:  # W594：jieba 缺失时 kw 中文退化为逐字，不失败
     jieba = None
 
@@ -110,48 +116,63 @@ def page_entry(p):
             'snippet': snippet, 'url': rel_site, 'kw': make_kw(title)}
 
 
-doc_files = [p for p in glob.glob(os.path.join(DOCS, '**', '*.md'), recursive=True)
-             if not any(x in p.replace(os.sep, '/') for x in EXCLUDE)]
-page_files = [p for p in glob.glob(os.path.join(SITE, '**', '*.html'), recursive=True)
-              if os.path.basename(p) not in ('_template.html', '_shell.html')
-              and ('/reader/' not in p.replace(os.sep, '/') or p.replace(os.sep, '/').endswith('reader/themes-hub.html'))]  # W593：reader 页由 docs 条目承载避免双条目；W669 例外=themes-hub（无 docs 对应·导航页入索引）
-
-# W594：中英双索引分离——docs 全量两份共用；site 页面 zh 版收 zh 页、en 版收 en 页
-index_docs = [doc_entry(p) for p in sorted(doc_files)]
-page_rels = sorted(page_files)
-pages_zh = [page_entry(p) for p in page_rels if '/en/' not in p.replace(os.sep, '/')]
-pages_en = [page_entry(p) for p in page_rels if '/en/' in p.replace(os.sep, '/')]
-index_zh = index_docs + pages_zh
-index_en = index_docs + pages_en
-
-
 def build_block(const_name, items):
     payload = json.dumps(items, ensure_ascii=False, separators=(',', ':'))
     return BEGIN + '\nconst ' + const_name + ' = ' + payload + ';\n' + END, payload
 
 
-block_zh, payload_zh = build_block('SITE_SEARCH_INDEX_ZH', index_zh)
-block_en, payload_en = build_block('SITE_SEARCH_INDEX_EN', index_en)
+def build_indexes():
+    """按当前 docs/ 与 site/ 实况算出两语索引（纯计算·不落盘）。
 
-targets = [
-    (os.path.join(SITE, 'data', 'search.html'), block_zh),
-    (os.path.join(SITE, 'en', 'search.html'), block_en),
-]
-for t, block in targets:
-    s = rd(t)
-    if BEGIN in s and END in s:
-        pre = s[:s.find(BEGIN)]
-        post = s[s.find(END) + len(END):]
-        s = pre + block + post
-    else:
-        anchor = s.find('window.SEARCH_INDEX = [')
-        if anchor == -1:
-            raise SystemExit(f'FAIL 未找到注入锚点: {t}')
-        line_start = s.rfind('\n', 0, anchor) + 1
-        s = s[:line_start] + block + '\n' + s[line_start:]
-    with open(t, 'w', encoding='utf-8', newline='') as f:
-        f.write(s)
+    W809：原实现把「算」与「写」都放在模块级（import 即写盘），导致「只算不写」的
+    新鲜度门禁（check_search_index_fresh.py）无法安全复用本模块——本函数化是挂槽前置：
+    门禁侧 import 本模块只调用 build_indexes() 取期望载荷；页面写盘只发生在 main()。
+    返回：{'zh': (block_zh, payload_zh), 'en': (block_en, payload_en), 'counts': (docs, pages_zh, pages_en)}
+    """
+    doc_files = [p for p in glob.glob(os.path.join(DOCS, '**', '*.md'), recursive=True)
+                 if not any(x in p.replace(os.sep, '/') for x in EXCLUDE)]
+    page_files = [p for p in glob.glob(os.path.join(SITE, '**', '*.html'), recursive=True)
+                  if os.path.basename(p) not in ('_template.html', '_shell.html')
+                  and ('/reader/' not in p.replace(os.sep, '/') or p.replace(os.sep, '/').endswith('reader/themes-hub.html'))]  # W593：reader 页由 docs 条目承载避免双条目；W669 例外=themes-hub（无 docs 对应·导航页入索引）
 
-print(f'docs={len(doc_files)} pages_zh={len(pages_zh)} pages_en={len(pages_en)} '
-      f'bytes zh={len(payload_zh.encode("utf-8"))} en={len(payload_en.encode("utf-8"))}')
-print('targets=2 embedded')
+    # W594：中英双索引分离——docs 全量两份共用；site 页面 zh 版收 zh 页、en 版收 en 页
+    index_docs = [doc_entry(p) for p in sorted(doc_files)]
+    page_rels = sorted(page_files)
+    pages_zh = [page_entry(p) for p in page_rels if '/en/' not in p.replace(os.sep, '/')]
+    pages_en = [page_entry(p) for p in page_rels if '/en/' in p.replace(os.sep, '/')]
+    index_zh = index_docs + pages_zh
+    index_en = index_docs + pages_en
+    block_zh, payload_zh = build_block('SITE_SEARCH_INDEX_ZH', index_zh)
+    block_en, payload_en = build_block('SITE_SEARCH_INDEX_EN', index_en)
+    return {'zh': (block_zh, payload_zh), 'en': (block_en, payload_en),
+            'counts': (len(doc_files), len(pages_zh), len(pages_en))}
+
+def main():
+    """把两语索引写进两个搜索页（幂等：先删旧标记段再插新段）。"""
+    built = build_indexes()
+    targets = [
+        (os.path.join(SITE, 'data', 'search.html'), built['zh'][0]),
+        (os.path.join(SITE, 'en', 'search.html'), built['en'][0]),
+    ]
+    for t, block in targets:
+        s = rd(t)
+        if BEGIN in s and END in s:
+            pre = s[:s.find(BEGIN)]
+            post = s[s.find(END) + len(END):]
+            s = pre + block + post
+        else:
+            anchor = s.find('window.SEARCH_INDEX = [')
+            if anchor == -1:
+                raise SystemExit(f'FAIL 未找到注入锚点: {t}')
+            line_start = s.rfind('\n', 0, anchor) + 1
+            s = s[:line_start] + block + '\n' + s[line_start:]
+        with open(t, 'w', encoding='utf-8', newline='') as f:
+            f.write(s)
+    n_docs, n_zh, n_en = built['counts']
+    print(f'docs={n_docs} pages_zh={n_zh} pages_en={n_en} '
+          f'bytes zh={len(built["zh"][1].encode("utf-8"))} en={len(built["en"][1].encode("utf-8"))}')
+    print('targets=2 embedded')
+
+
+if __name__ == '__main__':
+    main()

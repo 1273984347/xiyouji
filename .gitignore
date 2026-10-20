@@ -120,6 +120,10 @@ scratch/
 xiyouji-agent-web/node_modules/
 xiyouji-agent-web/dist/
 xiyouji-agent-web/data/
+# W808：tsc 编译产物改出源目录（tsconfig.node.json 的 outDir=./.tsbuild）——
+# 根修「陈旧 vite.config.js 遮蔽 vite.config.ts·配置改动静默失效」（Vite 优先读 .js）。
+# 旧的同层产物规则保留（防历史检出树残留物再遮蔽）。
+xiyouji-agent-web/.tsbuild/
 xiyouji-agent-web/server/*.js
 xiyouji-agent-web/server/*.d.ts
 xiyouji-agent-web/server/engine/*.js

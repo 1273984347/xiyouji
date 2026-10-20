@@ -33,7 +33,7 @@ function AppContent() {
   // Hooks
   const { theme, toggleTheme } = useTheme();
   const { agents, addAgent, updateAgent, deleteAgent, getAgent } = useAgents();
-  const { models, selectedModel, setSelectedModel, fetchModels } = useModels();
+  const { models, selectedModel, setSelectedModel, fetchModels, error: modelsError } = useModels();
   const {
     sessions,
     setSessions,
@@ -47,7 +47,12 @@ function AppContent() {
     addSession,
     updateSession,
     updateSessionMessages,
+    error: sessionsError,
+    setError: setSessionsError,
   } = useSessions();
+
+  // W808：把加载失败暴露到界面（此前失败只进 console，表现为「列表空白且无提示」）
+  const loadError = sessionsError ?? modelsError ?? null;
 
   // 聊天 Hook
   const {
@@ -171,6 +176,32 @@ function AppContent() {
           onToggleTheme={toggleTheme}
           onRefreshModels={fetchModels}
         />
+
+        {/* W808：加载失败横幅（此前失败只进 console，界面无任何提示） */}
+        {loadError && (
+          <div
+            role="alert"
+            className="flex items-start justify-between gap-3 px-4 py-2 text-sm"
+            style={{
+              backgroundColor: 'var(--td-error-color-light)',
+              color: 'var(--td-error-color)',
+              borderBottom: '1px solid var(--td-error-color-light)',
+            }}
+          >
+            <span>{loadError}</span>
+            <button
+              type="button"
+              onClick={() => {
+                setSessionsError(null);
+                fetchSessions();
+                fetchModels();
+              }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit', textDecoration: 'underline' }}
+            >
+              重试
+            </button>
+          </div>
+        )}
 
         {/* 设置页面或聊天页面 */}
         {isSettingsPage ? (

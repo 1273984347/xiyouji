@@ -11,6 +11,44 @@
 ---
 
 
+## W808 Web Agent 全栈加固批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/errors.ts | W808 | 新建：类型化错误层级 + 全局错误处理中间件（运营错结构化返回·编程错只记日志返通用 500·不泄堆栈） |
+| xiyouji-agent-web/server/logger.ts | W808 | 新建：结构化 JSON 日志 + 凭证脱敏 + request ID 上下文 |
+| xiyouji-agent-web/server/requestId.ts | W808 | 新建：request ID 生成与传播（响应头回写 + 上游 ID 沿用 + 畸形 ID 净化） |
+| xiyouji-agent-web/server/validation.ts | W808 | 新建：Zod 边界校验（全部 /api 端点入参·零信任客户端） |
+| xiyouji-agent-web/server/shutdown.ts | W808 | 新建：优雅关闭（SIGTERM/SIGINT 排空在途请求 + WAL checkpoint + 关库） |
+| xiyouji-agent-web/server/api.integration.test.ts | W808 | 新建：第二层集成测试（真实起服 + 真实 HTTP + 真实 SQLite·14 例·禁 mock 冒充） |
+| xiyouji-agent-web/src/utils/api.ts | W808 | 重写：统一 API client（补 res.ok 判定 + 类型化 ApiError + 共享 token 注入 + 可配基址） |
+| xiyouji-agent-web/src/utils/apiTypes.ts | W808 | 新建：前后端共享 API 契约类型（字段改名即编译期报错） |
+| xiyouji-agent-web/src/utils/errorMessage.ts | W808 | 新建：状态码 → 用户可读文案映射（此前失败只 console.error 吞掉） |
+| xiyouji-agent-web/src/utils/api.test.ts | W808 | 新建：前端单元测试 17 例（res.ok/token/基址三缺陷各有负样本） |
+| xiyouji-agent-web/src/utils/errorMessage.test.ts | W808 | 新建：错误文案映射单元测试（4xx/5xx/网络不可达全覆盖） |
+| xiyouji-agent-web/src/hooks/useSessions.test.tsx | W808 | 新建：会话 hook 失败态可见性测试（错误不得被当数据塞进列表） |
+| xiyouji-agent-web/src/hooks/useSessions.ts | W808 | 改：收敛到统一 client + 新增 error/isLoading 状态（失败可见） |
+| xiyouji-agent-web/src/hooks/useModels.ts | W808 | 改：收敛到统一 client + 新增 error 状态 |
+| xiyouji-agent-web/src/hooks/useChat.ts | W808 | 改：SSE 路径补判非 2xx（此前 401 被当流解析致永久挂起）+ 权限回执走统一 client |
+| xiyouji-agent-web/src/components/ChatMessages.tsx | W808 | 修真实缺陷：反馈补传 sessionId（此前恒 400 且静默丢弃·赞踩从未记录） |
+| xiyouji-agent-web/src/components/SettingsPage.tsx | W808 | 改：check-login 走统一 client（此前 401/500 被当成功数据） |
+| xiyouji-agent-web/src/pages/ChatPage.tsx | W808 | 改：透传 sessionId 给消息区（反馈接口必填） |
+| xiyouji-agent-web/src/App.tsx | W808 | 改：新增加载失败横幅 + 重试入口（此前空白无提示） |
+| xiyouji-agent-web/src/test/setup.ts | W808 | 新建：vitest 全局准备（jest-dom + jsdom 缺失 API 补齐） |
+| xiyouji-agent-web/e2e/chat.e2e.mjs | W808 | 新建：第三层 E2E（真实浏览器 + 真实构建产物 + 真实后端 + 真实 SQLite·10 断言） |
+| xiyouji-agent-web/e2e/mockLlm.mjs | W808 | 新建：OpenAI-compatible 假 LLM 端点（外部依赖替身·被测系统全真实） |
+| xiyouji-agent-web/vite.config.ts | W808 | 改：代理层注入共享 token（不进浏览器包）+ 代理目标可配 + preview 代理 |
+| xiyouji-agent-web/vitest.config.ts | W808 | 新建：前端单元测试配置（jsdom + setup + 包含面） |
+| xiyouji-agent-web/tsconfig.node.json | W808 | 根修：编译产物改 outDir=./.tsbuild（此前 vite.config.js 遮蔽 .ts·配置改动静默失效） |
+| xiyouji-agent-web/server/config.ts | W808 | 修：补 dotenv 加载（此前声明了依赖却从未 import·.env 流程实际从未生效） |
+| xiyouji-agent-web/server/index.ts | W808 | 改：全局错误处理 + /api 404 兜底 + 优雅关闭接线 |
+| xiyouji-agent-web/server/routes.ts | W808 | 改：入参经 Zod 校验 + 类型化错误（对外状态码与文案逐字不变） |
+| xiyouji-agent-web/server/middleware.ts | W808 | 改：request ID + 访问日志 + 限流改抛类型化错误 |
+| xiyouji-agent-web/server/db.ts | W808 | 新增：closeDatabase（WAL checkpoint + 关库·优雅关闭用） |
+| xiyouji-agent-web/package.json | W808 | 改：新增 test:client / test:integration / test:e2e / test:all 脚本 + zod 直依赖 |
+| .github/workflows/ci.yml | W808 | 改：agent-web-build job 接线三层测试（单测 + 集成 + E2E 含 Playwright chromium） |
+| .gitignore | W808 | 改：新增 xiyouji-agent-web/.tsbuild/ 忽略（编译产物移出源目录） |
+
 ## W807 站内搜索索引刷新批（2026-10-20）
 
 | 文件 | W | 说明 |

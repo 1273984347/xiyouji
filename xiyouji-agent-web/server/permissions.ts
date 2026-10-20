@@ -14,6 +14,7 @@
  */
 import { v4 as uuidv4 } from "uuid";
 import { appendAudit, auditTarget } from "./audit.js";
+import { logger } from "./logger.js";
 import { TOOL_PERMISSION_KIND } from "./engine/tools.js";
 import type { CanUseTool, PermissionDecision } from "./engine/types.js";
 import type { PermissionMode } from "./security.js";
@@ -69,8 +70,8 @@ export function createPermissionBroker(deps: PermissionBrokerDeps): CanUseTool {
   const { sessionId, permissionMode, store, emitPermissionRequest, deniedToolUseIds } = deps;
 
   return async (toolName, input, options) => {
-    console.log(`[Permission] Tool request: ${toolName}`);
-    if (VERBOSE_LOG) console.log(`[Permission] Input:`, JSON.stringify(input, null, 2)); // P3-1
+    logger.info("工具请求", { tool: toolName });
+    if (VERBOSE_LOG) logger.debug("工具入参", { tool: toolName, input }); // P3-1
 
     const kind = TOOL_PERMISSION_KIND[toolName] ?? "command";
     const auditTargetInfo = auditTarget(input);
@@ -92,7 +93,7 @@ export function createPermissionBroker(deps: PermissionBrokerDeps): CanUseTool {
 
     // bypassPermissions 模式直接放行（仅当 AGENT_WEB_ALLOW_BYPASS=1 时经净化可达）
     if (permissionMode === "bypassPermissions") {
-      console.log(`[Permission] Bypassing permissions for ${toolName}`);
+      logger.warn("bypassPermissions 模式放行工具调用", { tool: toolName, session_id: sessionId });
       return audited({ behavior: "allow", updatedInput: input }, "bypassPermissions 模式放行");
     }
 
@@ -135,7 +136,7 @@ export function createPermissionBroker(deps: PermissionBrokerDeps): CanUseTool {
       setTimeout(() => {
         if (reqKey && store.map[reqKey] !== undefined) {
           delete store.map[reqKey];
-          console.log(`[Permission] Request timeout: ${requestId}`);
+          logger.warn("权限请求超时", { request_id: requestId, tool: toolName });
           settle({ behavior: "deny", message: "权限请求超时" }, "权限请求超时");
         }
       }, PERMISSION_TIMEOUT);
@@ -157,12 +158,12 @@ export function handlePermissionResponse(
   // 请求体非可信输入：message 按 string|undefined 使用（真值判定与重构前 `message || '用户拒绝了此操作'` 一致）
   const message = body.message as string | undefined;
 
-  console.log(`[Permission] Response received: requestId=${requestId}, behavior=${behavior}`);
+  logger.info("收到权限回执", { request_id: requestId, behavior });
 
   const reqKey = store.safeKey(requestId);
   const pending = reqKey ? store.map[reqKey] : undefined;
   if (!pending) {
-    console.log(`[Permission] Request not found: ${requestId}`);
+    logger.warn("权限请求不存在或已超时", { request_id: requestId });
     return sendError(res, 404, "权限请求不存在或已超时");
   }
 

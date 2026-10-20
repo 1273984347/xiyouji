@@ -11,11 +11,15 @@
 
 - （无）
 
-## 文件（4）
+## 文件（8）
 
 ### JavaScript / TypeScript
 
+- `api.test.ts`
 - `api.ts`
+- `apiTypes.ts`
+- `errorMessage.test.ts`
+- `errorMessage.ts`
 - `format.ts`
 - `iconMap.ts`
 - `sseStream.ts`

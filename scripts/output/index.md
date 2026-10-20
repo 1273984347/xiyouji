@@ -12,12 +12,13 @@
 - `data/`
 - `figures/`
 
-## 文件（195）
+## 文件（200）
 
 ### Markdown 文档
 
 - `_a02_matrix_body.md`
 - `_s23_full_matrix.md`
+- `_w808_commit_pathspec.md`
 - `file-index.md`
 - `stats-index.md`
 - `观测基线快照.md`
@@ -107,6 +108,7 @@
 - `_cascade_files_W805.txt`
 - `_cascade_files_W806.txt`
 - `_cascade_files_W807.txt`
+- `_cascade_files_W808.txt`
 - `_sync_analysis_manifest.json`
 - `_w728_spec.json`
 - `_w729_spec.json`
@@ -189,6 +191,8 @@
 - `_w805_spec.json`
 - `_w806_spec.json`
 - `_w807_spec.json`
+- `_w808_spec.json`
+- `_w809_spec.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`
@@ -214,6 +218,7 @@
 - `stats-changelog.json`
 - `stats.json`
 - `unwrapped-tables-baseline.txt`
+- `w808_commit_files.txt`
 - `yuanqi_edges.csv`
 - `yuanqi_nodes.csv`
 

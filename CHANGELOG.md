@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W807），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W808），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,20 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W808（2026-10-20）：Web Agent 全栈加固批
+> **来源**：用户令「全栈一遍（集成层 + 后端生产化）」+「测试三件套全上（单测 + 集成 + 前端 E2E）」+「完整 W808 批次施工但提交留用户」。审计 agent-web（仓库内唯一全栈应用：React 19 + Vite 8 + TS 前端 / Express 5 + better-sqlite3 后端）后发现三处**真实跨边界缺陷**与一批生产化缺口。
+> - **真实缺陷①（反馈恒丢）**：`src/components/ChatMessages.tsx` 提交 `/api/feedback` 时**漏传 sessionId**，而服务端要求 sessionId + messageId + verdict 三者齐备 → 每次赞/踩恒 400，且前端 `.catch(() => {})` 静默吞掉 → **用户的赞/踩从未被记录且界面无任何异常表现**。修复：补齐 sessionId（`ChatPage` 透传）+ 改走统一 client + 失败回滚乐观 UI。
+> - **真实缺陷②（错误被当成功数据）**：`src/utils/api.ts` **不判 `res.ok`**——服务端 500 的 `{error}` 响应体被 `await res.json()` 当成功数据返回，调用方拿到「成功的错误」故错误被静默吞掉；SSE 流 `/api/chat` 同样不判状态码，401/400 的 JSON 体被当流解析 → **「思考中…」永久挂起**。修复：统一 client 判状态码 + 类型化 `ApiError`（携带 status 与 body）+ SSE 路径补判非 2xx。
+> - **真实缺陷③（开 token 即全站 401）**：服务端 `AGENT_WEB_TOKEN` 鉴权（P0-1）此前**前端从不携带该 token** → 一旦启用即全站 401 且无人察觉。修复：dev/preview 代理层注入（token 不进浏览器包·不落 localStorage）+ 前端 `VITE_AGENT_WEB_TOKEN` 兜底。
+> - **后端生产化**：新建 `server/errors.ts`（类型化错误层级 + 全局错误处理中间件：运营错结构化返回·编程错只记日志返通用 500·不泄堆栈）+ `server/logger.ts`（结构化 JSON 日志 + 凭证脱敏）+ `server/requestId.ts`（request ID 全链路传播·响应头回写 + 上游 ID 沿用 + 畸形 ID 净化）+ `server/validation.ts`（Zod 边界校验·全部 /api 端点·零信任客户端）+ `server/shutdown.ts`（SIGTERM/SIGINT 优雅关闭：排空在途请求 + WAL checkpoint + 关库）；`/api/ready` 就绪探针新增（依赖不可用返 503）。
+> - **前端集成层**：新增 `src/utils/apiTypes.ts`（前后端共享类型契约·两端字段改名即编译期报错）+ `src/utils/errorMessage.ts`（状态码 → 用户可读文案映射·此前失败只 `console.error` 吞掉·界面表现为空白无提示）；`useSessions`/`useModels`/`useChat`/`ChatMessages`/`SettingsPage` 五处裸 `fetch` 全部收敛到统一 client；`App.tsx` 新增失败横幅 + 重试。
+> - **配置链修复**：`dotenv` 此前是 package.json 里**声明了却从未被 import** 的依赖 → 文档化的「复制 .env.example → .env」配置流程实际从未生效；本批补上加载（不覆盖既有环境变量）。
+> - **产物遮蔽根修**：`tsc -b` 此前把 `vite.config.js` 吐在项目根，而 Vite 的配置解析**优先读 .js** → 改 `vite.config.ts` 静默失效（latent 接线缺失）；改为 `outDir=./.tsbuild` 产物移出源目录（40 个陈旧产物一并清理）。
+> - **测试三件套**：① **单元**（vitest 5 + testing-library·40 例：api client 的 res.ok/token/基址三缺陷各有负样本 + 错误文案映射 + 会话 hook 失败态可见）；② **集成**（真实起服 + 真实 HTTP + 真实 SQLite·14 例：就绪探针 / request ID 全链路 / 边界校验 / 错误体形状恒为 `{error}` / 会话 CRUD 全链路落库 / 优雅关闭）；③ **E2E**（Playwright 真实浏览器 + 真实构建产物 + 真实后端 + 真实 SQLite·10 断言：输入 → 发送 → 流式渲染 → 落库 → 反馈全流程；外部大模型端点以 `e2e/mockLlm.mjs` 替身·被测系统全部真实实现）。
+> - **契约红线**：对外路径/方法/字段名/状态码/SSE 事件序**零改动**；`/api/feedback` 校验失败保持既有 `400 invalid body`（`feedback.test.mjs` 钉此契约）；CORS 维持「无 CORS 中间件 + 回环绑定 + 可选 token + 限流」防护模型（不引入跨源面）。
+> - **验证**：三层测试全绿（单测 40 passed / 集成 13 passed + 1 skipped〔SIGTERM 信号位为 POSIX 专属·真实执行位=CI（Linux）〕/ E2E 10 通过）+ 既有 `test:server` 67 passed（限流 429 与 token 鉴权负样本均绿·证明错误处理器重构未改契约）+ `npm run build` 成功 + 第 45 门禁 0 FAIL + verify 全量 50 段 0 FAIL。
+> - **文件**：xiyouji-agent-web/server/errors.ts、server/logger.ts、server/requestId.ts、server/validation.ts、server/shutdown.ts、server/types.ts、server/index.ts、server/routes.ts、server/middleware.ts、server/config.ts、server/db.ts、server/api.integration.test.ts、xiyouji-agent-web/src/utils/api.ts、src/utils/apiTypes.ts、src/utils/errorMessage.ts、src/utils/api.test.ts、src/utils/errorMessage.test.ts、src/hooks/useSessions.ts、src/hooks/useModels.ts、src/hooks/useChat.ts、src/hooks/useSessions.test.tsx、src/components/ChatMessages.tsx、src/components/SettingsPage.tsx、src/pages/ChatPage.tsx、src/App.tsx、src/test/setup.ts、xiyouji-agent-web/e2e/chat.e2e.mjs、xiyouji-agent-web/e2e/mockLlm.mjs、xiyouji-agent-web/vite.config.ts、xiyouji-agent-web/vitest.config.ts、xiyouji-agent-web/tsconfig.node.json、xiyouji-agent-web/package.json、.github/workflows/ci.yml、.gitignore。
 
 ### W807（2026-10-20）：站内搜索索引刷新批
 > **来源**：W806 退役 GoatCounter 时顺带盘点站内搜索，发现站内搜索索引自 2026-09-16 前后停更：全站 771 条索引仅含 61 篇 doc 条目，且 9 条链接仍指向已改名的 `docs/11-报告复盘/`（GitHub 侧 404）——**无任何门禁覆盖**，属远早于该批的历史债。

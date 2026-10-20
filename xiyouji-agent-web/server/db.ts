@@ -258,4 +258,23 @@ export function clearAllData(): void {
   db.exec('DELETE FROM sessions');
 }
 
+/**
+ * 关闭数据库连接（W808 新增·优雅关闭用）。
+ *
+ * 语义：先做 WAL checkpoint（把 WAL 内容合并回主库）再关闭连接——
+ * 否则进程退出时可能留下未 checkpoint 的 WAL 文件（下次启动能恢复，但文件滞留）。
+ * 关闭后本模块的其它函数不可再调用（better-sqlite3 会抛「连接已关闭」）。
+ */
+export function closeDatabase(): void {
+  try {
+    if (db.open) {
+      db.pragma('wal_checkpoint(TRUNCATE)');
+      db.close();
+    }
+  } catch (e) {
+    // 关闭失败不外抛——关闭路径上不应因清理异常而崩溃
+    console.error(`[DB] 关闭连接失败: ${e instanceof Error ? e.message : String(e)}`);
+  }
+}
+
 export default db;

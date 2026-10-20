@@ -13,6 +13,7 @@
 import express from "express";
 import { v4 as uuidv4 } from "uuid";
 import type { Request, Response } from "express";
+import type { z } from "zod";
 import * as db from "./db.js";
 import { applyCitationGuard } from "./citationGuard.js";
 import { runAgentTurn } from "./engine/agent-loop.js";
@@ -21,6 +22,8 @@ import { appendAudit, auditTarget } from "./audit.js";
 import type { ChatMessage } from "./engine/types.js";
 import { sanitizePermissionMode, resolveWorkingDir, createSseGuard } from "./security.js";
 import { sendError } from "./http.js";
+import { logger } from "./logger.js";
+import { chatBodySchema, parseBody } from "./validation.js";
 import { createSseWriter, setSseHeaders } from "./sse.js";
 import {
   createPermissionBroker,
@@ -98,7 +101,32 @@ function auditToolResult(params: {
  */
 export function registerChatRoute(app: express.Express, permissions: PendingPermissionStore): void {
   app.post("/api/chat", async (req: Request, res: Response) => {
-    const { sessionId, message, model, systemPrompt, cwd, permissionMode } = req.body;
+    // W808：入参经 Zod 边界校验（server/validation.ts）。
+    // 契约红线：**「消息为空」仍返 400 +「消息不能为空」**（既有契约逐字保留·
+    // 本路由在 SSE 之前以 JSON 返回，前端按 response.body 读——状态码不可改）。
+    // 其余字段（cwd / permissionMode）只做**类型**校验，语义净化仍归
+    // server/security.ts 的 resolveWorkingDir 与 sanitizePermissionMode（两处规则不重复实现）。
+    const raw = (req.body ?? {}) as Record<string, unknown>;
+
+    // ① 消息为空——单独判定，保留既有契约的逐字文案（其余字段是否合法与本条无关）
+    if (typeof raw.message !== "string" || raw.message.length === 0) {
+      logger.warn("聊天请求消息为空", { request_id: req.requestId });
+      return sendError(res, 400, "消息不能为空");
+    }
+
+    // ② 其余字段的形状校验（失败文案与①区分，避免「model 非法」也被报成「消息不能为空」）
+    let body: z.infer<typeof chatBodySchema>;
+    try {
+      body = parseBody(chatBodySchema, raw);
+    } catch (err) {
+      logger.warn("聊天请求入参非法", {
+        request_id: req.requestId,
+        error: err instanceof Error ? err.message : String(err),
+      });
+      return sendError(res, 400, "请求参数不合法");
+    }
+
+    const { sessionId, message, model, systemPrompt, cwd, permissionMode } = body;
 
     // P0-1 修复：工作目录仅允许 PROJECT_CWD 内 + 权限模式白名单净化（不信任请求体原值）
     // P0-1 + W536 安全加固：工作目录钳制（realpath 规范化后仅允许 PROJECT_CWD 内，非法输入回落默认）
@@ -106,17 +134,14 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
     const workingDir = resolveWorkingDir(cwd, PROJECT_CWD);
     const effectivePermissionMode = sanitizePermissionMode(permissionMode, ALLOW_BYPASS);
 
-    // 请求日志
-    console.log(`\n[Chat] ========== 新请求 ==========`);
-    console.log(`[Chat] SessionId: ${sessionId}`);
-    console.log(`[Chat] Model: ${model}`);
-    console.log(`[Chat] Message: ${message?.slice(0, 100)}${message?.length > 100 ? "..." : ""}`);
-    console.log(`[Chat] CWD: ${cwd || "default"}`);
-
-    if (!message) {
-      console.log(`[Chat] 错误: 消息为空`);
-      return sendError(res, 400, "消息不能为空");
-    }
+    // 请求日志（W808：改走结构化日志·request ID 贯穿·凭证字段自动脱敏）
+    logger.info("聊天请求", {
+      request_id: req.requestId,
+      session_id: sessionId ?? null,
+      model: model ?? null,
+      message_preview: message.slice(0, 100),
+      cwd: cwd || "default",
+    });
 
     // W680：引擎未配置时快速失败（400 JSON，不进 SSE 流）
     if (!engineConfigured()) {
@@ -129,7 +154,7 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
 
     if (!session) {
       // 创建新会话
-      console.log(`[Chat] 创建新会话`);
+      logger.info("创建新会话", { request_id: req.requestId, session_id: sessionId ?? null });
       session = db.createSession({
         id: sessionId || uuidv4(),
         title: titleFromMessage(message),
@@ -139,7 +164,7 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
         updated_at: now,
       });
     } else {
-      console.log(`[Chat] 使用现有会话`);
+      logger.info("使用现有会话", { request_id: req.requestId, session_id: session.id });
     }
 
     const selectedModel = model || session.model;
@@ -159,9 +184,12 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
         created_at: now,
         tool_calls: null,
       });
-      console.log(`[Chat] 用户消息已保存: ${userMessageId}`);
+      logger.info("用户消息已保存", { request_id: req.requestId, message_id: userMessageId });
     } catch (dbError) {
-      console.error(`[Chat] 保存用户消息失败:`, dbError);
+      logger.error("保存用户消息失败", {
+        request_id: req.requestId,
+        error: dbError instanceof Error ? dbError.message : String(dbError),
+      });
       return sendError(res, 500, "保存消息失败", { detail: (dbError as { message?: string })?.message });
     }
 
@@ -179,10 +207,12 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
     res.on("close", abortStream);
 
     try {
-      console.log(`[Chat] 调用引擎 runAgentTurn...`);
-      console.log(`[Chat] - Model: ${selectedModel}`);
-      console.log(`[Chat] - CWD: ${workingDir}`);
-      console.log(`[Chat] - PermissionMode: ${effectivePermissionMode}`);
+      logger.info("调用引擎", {
+        request_id: req.requestId,
+        model: selectedModel,
+        cwd: workingDir,
+        permission_mode: effectivePermissionMode,
+      });
 
       // 会话历史（W680：从 SQLite 重建，替代 SDK resume——消息表已存全量 user/assistant 文本）
       const history = rebuildHistory(session.id);
@@ -223,13 +253,14 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
             sse.text(delta);
           },
           onToolCall: (call) => {
-            console.log(`[Stream] Tool use: id=${call.id}, name=${call.name}`);
-            if (VERBOSE_LOG) console.log(`[Stream] Tool input:`, JSON.stringify(call.input, null, 2)); // P3-1
+            logger.info("工具调用", { request_id: req.requestId, tool_call_id: call.id, tool: call.name });
+            // P3-1：工具入参属敏感信息，仅在显式 verbose 模式下输出
+            if (VERBOSE_LOG) logger.debug("工具入参", { request_id: req.requestId, input: call.input });
             toolCalls.push({ id: call.id, name: call.name, input: call.input, status: "running" });
             sse.tool(call);
           },
           onToolResult: (toolId, content, isError) => {
-            console.log(`[Stream] Tool result: tool_use_id=${toolId}, is_error=${isError}`);
+            logger.info("工具结果", { request_id: req.requestId, tool_call_id: toolId, is_error: isError });
             const tool = toolCalls.find((t) => t.id === toolId) ?? toolCalls[toolCalls.length - 1];
             if (tool) {
               tool.status = isError ? "error" : "completed";
@@ -282,17 +313,18 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
         });
       }
 
-      console.log(`[Chat] 请求完成 ✓`);
+      logger.info("请求完成", { request_id: req.requestId, session_id: session.id });
       res.end();
     } catch (error) {
       sseGuard.clearTimer(); // P2-3：异常路径同样清理定时器与 close 监听
       res.off("close", abortStream); // W791：注销侧修正为 res（监听注册在 res·W568 改挂时漏改注销）
-      console.error(`\n[Chat] ========== 错误 ==========`);
-      console.error(`[Chat] Error Name:`, (error as Error)?.name);
-      console.error(`[Chat] Error Message:`, (error as Error)?.message);
-      console.error(`[Chat] Error Code:`, (error as NodeJS.ErrnoException)?.code);
-      console.error(`[Chat] Error Stack:`, (error as Error)?.stack);
-      console.error(`[Chat] Full Error:`, JSON.stringify(error, null, 2));
+      logger.error("聊天请求失败", {
+        request_id: req.requestId,
+        error_name: (error as Error)?.name,
+        error: (error as Error)?.message,
+        error_code: (error as NodeJS.ErrnoException)?.code,
+        stack: (error as Error)?.stack,
+      });
 
       const message2 = (error as Error)?.message || "处理请求时发生错误";
       sse.error(message2);
