@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W816），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W817），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,20 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W817（2026-10-20）：agent-web 工具层边界加固批（会话库黑名单 cwd 无关 + symlink 逃逸 + git --output 空格形态 + 遍历面过黑名单）
+
+> **来源**：2026-10-20 全项目只读审查（服务端面）实证的五处同源缺陷——根因同一：**受保护路径判据假定 cwd 是仓库根**，而实际不是。
+> - **文件**：xiyouji-agent-web/server/engine/tools.ts、xiyouji-agent-web/server/engine/tools.test.ts、docs/00-导读/W批次编号对账表.md、scripts/output/_w817_spec.json。
+> - **根因（先说清，否则后面的修法看不懂）**：工具集根 = **请求 cwd**（`server/chat.ts:134` `workingDir = resolveWorkingDir(cwd, PROJECT_CWD)` → `:219` `createToolset(workingDir)`），而 `guardPath` 的 `relPosix = toRelPosix(root, target)` 是**相对 cwd** 计算；受保护路径黑名单却按**仓库根相对**书写（`^xiyouji-agent-web/data/`、`^scripts/(verify_delivery|bump_version|batch_cascade)\.py$`）。二者错位 ⇒ 换 cwd 即失配。`resolveWorkingDir` 允许 PROJECT_CWD 内**任意子目录**（前端 `NewChatDialog` 的 cwd 是用户可输入的自由文本框），故这不是理论路径。
+> - **缺陷①（会话库可读，C1）**：`DENY_READ` 的会话库规则为 `^xiyouji-agent-web/data/`（仓库根锚定）→ cwd=`xiyouji-agent-web` 时 `relPosix` 形如 `data/chat.db` → **失配放行**。该库实存 184 KB + wal 226 KB + shm 33 KB，存全部会话正文与**工具结果原文**（`chat.ts:262-273` 写入 `tool_calls`）——正是该黑名单注释声明要防的「二次外泄」。**修**：会话库三件套改 cwd 无关形态 `/(^|\/)data\/chat\.db(-wal|-shm)?$/i`，并把仓库根相对那条去掉 `^` 锚。**验**：cwd=子目录下 `data/chat.db` 与 `data/chat.db-wal|-shm` 全部被拒且不泄内容。
+> - **缺陷②（symlink/junction 逃逸未被拦，C2）**：`guardPath` 的 `mustExist` 分支只写 `fs.realpathSync(target);` 而**丢弃返回值**，其注释声称的「symlink 指向仓外则解析后判越界」**在代码里并不存在**；`mustExist=false`（写面）只从 `path.dirname(target)` 起做祖先 realpath，**从不解析 target 本身** ⇒ 指向仓外的**文件级**链接可被读出/写穿。**修**：`mustExist` 分支改为取 realpath → 判「在 root 之下」→ **返回解析后的绝对路径**（后续读写跟随它·不再二次跟随链接）；写面补「target 已存在时先解析后判定」。**验**：指向仓外的目录链接（Windows junction·POSIX symlink）读出被拒且不泄内容；仓外文件内容哈希不变。
+> - **缺陷③（git 输出重定向空格形态，C3）**：`GIT_DANGER` 只认 `--output=` 带等号形态，而 `git log --output <file>` 是**独立取值**形态 → 放行。实证：TEMP 隔离仓库内 `git diff --output <file>` 与 `git log --output <file>` 均 **exit 0 且文件已生成**（越出工作目录边界）。**修**：`--output` 按整 token 拦截。**附带订正**：短形式 `-o` 经实测是 `--only`（限提交·报 "invalid object name"）**不是**输出重定向，故不拦（避免误伤）。**验**：空格形态被拒且目标文件零落盘；等号形态仍被拒；`git status` 仍放行。
+> - **缺陷④（门禁脚本写面可绕，C4）**：门禁脚本规则 `^scripts/(...)\.py$` 同为仓库根锚定 → cwd=`scripts` 时 `relPosix` 形如 `verify_delivery.py`（无 `scripts/` 段）→ 失配 ⇒ 铁律 8 门禁脚本可被改写。**修**：改基名形态 `/(^|\/)(verify_delivery|bump_version|batch_cascade)\.py$/`。**分层口径保持**（W680）：门禁脚本只在**写面**受保护，读面按设计放行（脚本本身是公开件）。**验**：cwd=scripts 下写 `verify_delivery.py` / `bump_version.py` 均被拒且 sha256 未变。
+> - **缺陷⑤（遍历类工具完全不过黑名单，C5）**：`glob` 与 `grep` 从不调用 `checkProtected`（`walkFiles` 只按名跳过 `.env`）⇒ 会话库内容**可经 grep 外泄**，路径可经 glob 泄露——恰是该黑名单的设立目的。**修**：`walkFiles` 内按 read 面过滤受保护路径（新增不抛异常的 `isProtected()` 判定）。**验**：grep 搜会话库特征串零命中、glob 零列出；普通文件仍可 grep（未误伤）。
+> - **负样本自证（关键·本仓纪律「负样本必红」）**：把 `tools.ts` 的源码修复单独 stash（保留测试）后实跑 → **C1/C1b/C2/C3/C4/C5 六条逐条变红**（C3 更实锤：命令真被执行，git 报 exit 128）；控制组 C3b/C3c/C5b 保持绿（证明未误伤既有行为）；C2b 因本机 Windows 无文件级建链权限而以 `t.skip()` **诚实标注跳过**（CI 的 Linux 必执行·禁静默通过）。
+> - **验证**：`npm run test:server` → **76 pass / 1 skip / 0 fail**（原 67 → +9）；`api.integration.test.ts` → **19 pass / 1 skip / 0 fail**；`tsc --noEmit` → **0 错**；verify_delivery 全量 51 段 0 FAIL；ruff 0 违规。
+> - **状态**：已落地（本地提交·未推送）。
 
 ### W816（2026-10-20）：门禁判据可信化批（审查第一批）
 
