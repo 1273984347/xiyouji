@@ -24,7 +24,7 @@ const GREP_FILE_MAX_BYTES = 2 * 1024 * 1024;
 const RUN_TIMEOUT_MS = 120 * 1000;
 const RUN_MAX_BUFFER = 1024 * 1024;
 
-const SKIP_DIRS = new Set(["node_modules", ".git", ".venv", "venv", "__pycache__", "dist", ".zcode"]);
+const SKIP_DIRS = new Set(["node_modules", ".git", ".venv", "venv", "__pycache__", "dist", ".local-agent-tools"]);
 
 /** 工具 → 权限分类（index.ts 权限策略消费）。未知工具按 command（最保守）处理。 */
 export const TOOL_PERMISSION_KIND: Record<string, ToolPermissionKind> = {

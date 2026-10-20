@@ -124,7 +124,7 @@ tmpe/
 
 ## 六、覆盖与口径说明
 
-- 覆盖：`site/**.html` 全部 234 页 × 2 视口 = 468 张整页截图，**无遗漏**；site/chapters|characters|themes 为空遗留目录（无页面）；`xiyouji-agent-web/` 为需后端 + CODEBUDDY_API_KEY 的本地工具型 SPA，不在静态站截图审查范围。
+- 覆盖：`site/**.html` 全部 234 页 × 2 视口 = 468 张整页截图，**无遗漏**；site/chapters|characters|themes 为空遗留目录（无页面）；`xiyouji-agent-web/` 为需后端 + 旧厂商_API_KEY 的本地工具型 SPA，不在静态站截图审查范围。
 - 移动端视觉复核集 = 9 个中文根页 + 全部自动断言告警页（34 页）；其余移动页依赖同一套模板（英文长文页互为同模板），其桌面视图已 100% 视觉复核、移动视图 100% 截图留档 + 断言覆盖。
 - 截图约定与 CI 同源（file://、load+2s、良性噪声白名单），差异：mobile deviceScaleFactor=1（CI 为 2）、新增外域请求拦截取证与空白启发式。
 

@@ -11,6 +11,19 @@
 ---
 
 
+## W814 去品牌扩展批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/00-导读/W批次编号对账表.md | W814 | 改：认领会话列 23 处会话标识去品牌化（改为并行 Agent 会话·多 Agent 区分保留）+ W812 行「保留原名」决定随新裁决反转的注记 |
+| CHANGELOG.md | W814 | 改：现役与历史段该品牌字面去品牌化（认领会话/生成模型署名/品牌复合表述/退役凭证变量名四类分治） |
+| HANDOVER.md | W814 | 改：现役批摘要该品牌字面去品牌化 + 与新裁决矛盾的「保留原名」表述就地订正 |
+| CLAUDE.md | W814 | 改：元信息块生成模型署名去品牌化（改为本地 Agent 会话） |
+| .gitignore | W814 | 改：删该本地索引配置的忽略规则（2 行）+ 并入其 24 条独有忽略规则（功能不丢·备份在项目外 TEMP） |
+| xiyouji-agent-web/server/engine/tools.ts | W814 | 改：目录跳过项该品牌目录名改中性名（遍历防护功能保留） |
+| scripts/output/file-index.md | W814 | 改：文件索引条该品牌字面去品牌化 |
+| scripts/output/_w814_spec.json | W814 | 改：本批 spec（级联唯一来源） |
+
 ## W813 review 修复批（2026-10-20）
 
 | 文件 | W | 说明 |
@@ -32,7 +45,7 @@
 | CHANGELOG.md | W812 | 改：现役与历史段该品牌字样去品牌化（认领/来源/环境事实类叙述） |
 | archive/docs/CHANGELOG-ARCHIVE.md | W812 | 改：归档段该品牌字样去品牌化（豁免登记/环境事实/硬性排除三类） |
 | archive/docs/file-index-ARCHIVE.md | W812 | 改：归档文件索引条该品牌字样去品牌化 |
-| archive/docs/plans/2026-09-09-service-experience-and-agent-ops-plans.md | W812 | 改：品牌清零类裁决叙述去品牌化（复合表述改为旧厂商 Agent 品牌含 CodeBuddy） |
+| archive/docs/plans/2026-09-09-service-experience-and-agent-ops-plans.md | W812 | 改：品牌清零类裁决叙述去品牌化（复合表述改为旧厂商 Agent 品牌含 旧厂商 Agent 品牌） |
 | archive/docs/plans/2026-09-17-agent-web-redesign-plan.md | W812 | 改：v2 修订说明/清理范围/验收判据/遗留登记四处去品牌化 |
 | archive/docs/plans/2026-10-07-agent-web-engine-swap-plan.md | W812 | 改：用户裁决链/目标/文档面验收/W681 判据/收官判据五处去品牌化 |
 | archive/scripts/_scan_sd_anchors.py | W812 | 改：ROOT 与守卫根上溯三级对齐项目根（顺修归档后目录加深的解析错位）+ 报告落 tmpe/_reports/ |

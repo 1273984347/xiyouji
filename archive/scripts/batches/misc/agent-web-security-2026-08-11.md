@@ -25,7 +25,7 @@
 ## 逐项发现
 
 ### 1. 硬编码密钥 / Token — P3（低）
-- **未发现**源码中硬编码真实 `CODEBUDDY_API_KEY`、`CODEBUDDY_AUTH_TOKEN`、`AGENT_WEB_TOKEN`。
+- **未发现**源码中硬编码真实 `旧厂商_API_KEY`、`旧厂商_AUTH_TOKEN`、`AGENT_WEB_TOKEN`。
 - 仓库内仅 `xiyouji-agent-web/.env.example`（占位符 `your_api_key_here`）。真实密钥应在服务端 `.env`（父目录 `D:/1/xiyouji/.env` 不在本仓库范围，未纳入审查）。
 - `server/index.ts:118-138` `/api/check-login` 返回的密钥已做脱敏（`slice(0,8)+****+slice(-4)`），不直接泄露。
 - **建议**：确保 `.env` 被 `.gitignore` 忽略且永不上传；CI 中扫描密钥。
@@ -99,7 +99,7 @@
 ## 其他观察（非阻断）
 
 - **“双份源码”footgun**：`server/index.ts` 与编译产物 `server/index.js`、`server/db.js`、`*.d.ts` 共存于 `server/`（Grep 可见 `index.js` 也含安全修复副本）。`tsx` 实际运行 `.ts`，但若有人误执行 `node server/index.js` 会跑可能陈旧的镜像。建议将编译输出导向独立 `dist/`（已在 `.gitignore` 忽略 `dist/`），并忽略 `server/*.js`/`*.d.ts`。
-- **运行时改环境变量**：`/api/save-env-config`（`index.ts:192-226`）拒绝覆盖 `apiKey`/`baseUrl`（P0-2 修复，防密钥劫持+SSRF），但允许运行时设置 `CODEBUDDY_AUTH_TOKEN`/`CODEBUDDY_INTERNET_ENVIRONMENT` 到进程环境。无认证时本地可调；暴露前须依赖 #2 的 token。
+- **运行时改环境变量**：`/api/save-env-config`（`index.ts:192-226`）拒绝覆盖 `apiKey`/`baseUrl`（P0-2 修复，防密钥劫持+SSRF），但允许运行时设置 `旧厂商_AUTH_TOKEN`/`旧厂商_INTERNET_ENVIRONMENT` 到进程环境。无认证时本地可调；暴露前须依赖 #2 的 token。
 - **SSE 生命周期**：`index.ts:471-500` 已加断开清理与 10 分钟总超时，避免客户端断开后流/悬挂权限请求继续运行。设计良好。
 - **监听绑定**：`index.ts:761` 与 `vite.config.ts:7` 均显式 `127.0.0.1`——默认不对外，是本项目最重要的“默认安全”保障。
 

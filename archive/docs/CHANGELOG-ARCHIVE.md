@@ -197,7 +197,7 @@
 ### v2.3.277（2026-10-08）：W686 动态 Workflow 工业化方案退役 — 方案文件删除 + W682 预留作废（用户裁决等后续重新设计）
 
 > **来源**：用户裁决「把这个方案所有 workflow 都删了·等后续再重新设计」并追令「把这个计划方案也删除」——W679 入库的《动态 Workflow 工业化方案 V1.0》整体退役。
-> - **执行**：① git rm docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md（458 行）——WF-1~WF-6 六提案全部随之作废；退役前实查：方案从未建置到任何实体（.zcode/workflows/ 项目与宿主全局保存件均为 0），无 workflow 代码可删；唯一落地件 WP-1.0（run_eval dotenv 密钥引导）已于 W680 随引擎更换重写移除——零代码残留。② 对账表：W682 预留行注记作废（WF-1 复活随方案退役）、W686 认领行登记、现势翻 W687。③ 保留面：W598 评估资产三件套（golden-50.jsonl/run_eval.mjs/validate.mjs）早于本方案、服务评估基线本身，不动；方案文件头「本文件当前 untracked」过时注记（W679 入库时漏删）随删除消解。
+> - **执行**：① git rm docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md（458 行）——WF-1~WF-6 六提案全部随之作废；退役前实查：方案从未建置到任何实体（.本地工具目录/workflows/ 项目与宿主全局保存件均为 0），无 workflow 代码可删；唯一落地件 WP-1.0（run_eval dotenv 密钥引导）已于 W680 随引擎更换重写移除——零代码残留。② 对账表：W682 预留行注记作废（WF-1 复活随方案退役）、W686 认领行登记、现势翻 W687。③ 保留面：W598 评估资产三件套（golden-50.jsonl/run_eval.mjs/validate.mjs）早于本方案、服务评估基线本身，不动；方案文件头「本文件当前 untracked」过时注记（W679 入库时漏删）随删除消解。
 > - **验证**：verify_delivery 核心全绿；全仓引用扫描——活引用 0（仅 scripts/output/_w679_spec.json/_w680_spec.json 两份历史级联 spec 档案提及路径，按历史档不动）；第 31 门禁 C4 预留号拦截 W680 同族二犯实测（W685 级联提交文本「现势 W686」在进入近 15 提交窗口后被点名）并按 AGENTS 规程解除（动工前登记即豁免）。
 > - **文件**：docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md（删除）、docs/00-导读/W批次编号对账表.md（W686 认领+W682 作废+现势 W687）、六文档级联、AGENTS 脚注、四页脚、CITATION、file-index。
 > - **处置收尾**：后续 workflow 重新设计时按对账表规程另认领新号，不复活 W682；WF-2 扇出若随批次四重启亦以届时方案为准。dynamic-workflows 能力本体（宿主侧）不受影响，仅本仓方案退役。
@@ -234,11 +234,11 @@
 
 ### v2.3.273（2026-10-07）：W679 动态 Workflow 工业化方案入库
 > **来源**：用户裁决批准《动态 Workflow 工业化方案 V1.0》（2026-10-07 全仓实测扫描·事实基线 B1-B31 逐项带取证命令）并令「开工」；本批 = 方案入库 + WF-1 前置 WP-1.0（对账表现势 W680·W676-W678 批次四~六预留不变）。
-> - **执行**：① 方案 V1.0 入库 docs/superpowers/plans/——六提案（WF-1 评估 LLM 基线〔W598 建置起唯一已立项未执行项〕/WF-2 批次修复扇出〔批次四~六 W676-W678 载体·包装站点质量方案档 §十四扇出矩阵〕/WF-3 存量冻结基线抽查〔8 份基线 19,545 行只拦新增零抽查缺口〕/WF-4 复盘报告取证包〔11 份复盘报告重复取证劳动〕/WF-5 外部输入逐条裁决〔W634 先例流水线化〕/WF-6 触发条件登记不建置）+ 运行时硬约束 9 条 + 事实基线 31 项 + 产出契约 TypeScript interface + 验收表逐条命令+期望输出 + §1.3 范围外反向清单（门禁/级联/提交链/e2e 等六类禁 workflow 化）；② WP-1.0 run_eval.mjs .env 密钥引导补丁 9 行——只载 CODEBUDDY_* 前缀变量（PROJECT_CWD 等不碰·example 内为过期路径）、已存在环境变量优先、.env 缺失静默跳过。
-> - **探测实证（当批现测）**：node --check exit 0；--self-check 输出 4/4 通过；--limit 1 探测 → 用例 chapter-001 报 SDK「Authentication required. Please use /login」+ exit 0 落盘 score 0/1（垃圾产物已删除）——凭证缺失实锤（.env 不存在 + 无全局 CODEBUDDY_API_KEY + ~/.codebuddy 实查为 CLI 工作目录非凭证库）＝方案 R3 预设场景；据此方案 WP-1.2 增补 score=0 熔断守卫（workflow 不信 exit code 单值）。
+> - **执行**：① 方案 V1.0 入库 docs/superpowers/plans/——六提案（WF-1 评估 LLM 基线〔W598 建置起唯一已立项未执行项〕/WF-2 批次修复扇出〔批次四~六 W676-W678 载体·包装站点质量方案档 §十四扇出矩阵〕/WF-3 存量冻结基线抽查〔8 份基线 19,545 行只拦新增零抽查缺口〕/WF-4 复盘报告取证包〔11 份复盘报告重复取证劳动〕/WF-5 外部输入逐条裁决〔W634 先例流水线化〕/WF-6 触发条件登记不建置）+ 运行时硬约束 9 条 + 事实基线 31 项 + 产出契约 TypeScript interface + 验收表逐条命令+期望输出 + §1.3 范围外反向清单（门禁/级联/提交链/e2e 等六类禁 workflow 化）；② WP-1.0 run_eval.mjs .env 密钥引导补丁 9 行——只载 旧厂商_* 前缀变量（PROJECT_CWD 等不碰·example 内为过期路径）、已存在环境变量优先、.env 缺失静默跳过。
+> - **探测实证（当批现测）**：node --check exit 0；--self-check 输出 4/4 通过；--limit 1 探测 → 用例 chapter-001 报 SDK「Authentication required. Please use /login」+ exit 0 落盘 score 0/1（垃圾产物已删除）——凭证缺失实锤（.env 不存在 + 无全局 旧厂商_API_KEY + ~/.旧厂商目录 实查为 CLI 工作目录非凭证库）＝方案 R3 预设场景；据此方案 WP-1.2 增补 score=0 熔断守卫（workflow 不信 exit code 单值）。
 > - **验证**：verify_delivery 核心全绿（提交前实跑·37 门禁 42 段锁）；run_eval.mjs --self-check 4/4；node --check exit 0；方案文档过第 18 门禁（4 新文件检查含本件）。
 > - **文件**：docs/superpowers/plans/2026-10-07-workflow-industrialization-plan.md（新增·方案 V1.0 六提案+执行记录 §5.6）、xiyouji-agent-web/evals/run_eval.mjs（更新·密钥引导）、docs/00-导读/W批次编号对账表.md（现势 W680 + W679 认领行）、scripts/output/_w679_spec.json（spec 档案）、六文档级联、AGENTS 脚注、三页脚、CITATION、file-index、_cascade_files_W679.txt（级联清单）。
-> - **处置收尾**：WF-1 主跑阻断于 P0-1 用户凭证（xiyouji-agent-web/.env 配 CODEBUDDY_API_KEY 或 CLI /login 二选一），凭证就位后按方案 §5.3 WP-1.1 单例实测 → WP-1.2 工作流建置继续（届时另认领 W 号）；WF-2 随站点质量批次四 W676 启用；批次四~六编号预留 W676-W678 不变。
+> - **处置收尾**：WF-1 主跑阻断于 P0-1 用户凭证（xiyouji-agent-web/.env 配 旧厂商_API_KEY 或 CLI /login 二选一），凭证就位后按方案 §5.3 WP-1.1 单例实测 → WP-1.2 工作流建置继续（届时另认领 W 号）；WF-2 随站点质量批次四 W676 启用；批次四~六编号预留 W676-W678 不变。
 > - **状态**：已落地（CI 五工作流以推送后 gh run list 为准）。
 
 ### v2.3.272（2026-10-06）：W675 工作复盘与优化分析报告（W666-W674 站点质量前三批周期）入库
@@ -631,7 +631,7 @@
 > - **check_citations.py（第 20 门禁脚本）**：①防静默跳过——凡以「原文引文」起始却不匹配规范语法的行一律 FAIL（SUSPECT_RE 容忍 `>原文引文`/`> **原文引文` 漂移前缀），堵死「格式漂移整行不进分母、报 100% 实为空真」盲区（实证：匿名稿 3 条引文因回目号带空格+半角引号曾长期被跳过）；②`--self-test` 内存正负样本 4/4。
 > - **scripts/audit/line_check.py**（引文行号取证工具）：①数据源指向修正——语料 W424 起迁至 site/static/js/text-search-app.js，旧脚本指向 text-search.html 已失效（该类静默失效曾实际发生且多时未察觉）；②语料缺失/格式漂移显式报错；③`--self-test` 100 回全解析+正样本 4/负样本 1。
 > - **落库意义**：verify_delivery 每次提交跑的是工作树脚本——本批使提交库=运行态，消除「回退/换机后门禁静默降级回有盲区版本」的隐患；两笔加固各自带自测（4/4·105/105）。
-> - **S4 其余残留裁决（如实登记）**：5 个已暂存脚本+约 30 个未跟踪 `_` 诊断脚本+3 个 S4 工具脚本改动（_w607×2/_w621）——均为 09-27 前后冻结轨工作产物，**未满 W597 ≥45 天归档规则**，维持现状待下一治理批（S4 重启或到期归档）；.zcodeignore/_w575_e2e_result.json 同上。
+> - **S4 其余残留裁决（如实登记）**：5 个已暂存脚本+约 30 个未跟踪 `_` 诊断脚本+3 个 S4 工具脚本改动（_w607×2/_w621）——均为 09-27 前后冻结轨工作产物，**未满 W597 ≥45 天归档规则**，维持现状待下一治理批（S4 重启或到期归档）；.本地工具配置/_w575_e2e_result.json 同上。
 > - **验证**：check_citations --self-test 4/4；line_check --self-test 105/105；verify_delivery 全量核心全绿（第 20 门禁含加固逻辑首跑）。
 > - **文件**：scripts/check_citations.py、scripts/audit/line_check.py（均落库既有加固·新增 --self-test）、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
 > - **状态**：已落地（本批提交并 push origin/main）。
@@ -919,7 +919,7 @@
 > - **执行（API）**：POST /api/feedback（body 校验+comment 截断 500+幂等）与 GET /api/feedback/summary 两端点。
 > - **执行（前端）**：ChatMessages 非流式消息下增操作条——👍/👎（乐观态+POST·失败保本地态）/复制（clipboard）/重新生成（onRegenerate→ChatPage 取上一条用户提问经 onSendMessage 重发）；done 事件 duration 捕获为 durationSec（ms 自动换算秒）上屏。
 > - **执行（集成测试）**：server/feedback.test.mjs——独立端口真实起服→HTTP→直查 chat.db→清理测试行，5/5 过（首插 1/幂等 0/非法 400/summary/sqlite 直查）。
-> - **偏差声明**：① Playwright 点按 e2e 未做——产生 assistant 消息需 CODEBUDDY_API_KEY（用户侧凭证），UI 点按链路待凭证后补 e2e；② cost 字段 SDK 单位未确认，首版仅展示 duration（方案原文允许），cost 展示待确认启用。
+> - **偏差声明**：① Playwright 点按 e2e 未做——产生 assistant 消息需 旧厂商_API_KEY（用户侧凭证），UI 点按链路待凭证后补 e2e；② cost 字段 SDK 单位未确认，首版仅展示 duration（方案原文允许），cost 展示待确认启用。
 > - **验证**：集成测试 5/5；npm run build（tsc+vite）过；verify_delivery 核心全绿。
 > - **文件**：xiyouji-agent-web（server/db.ts、server/index.ts、server/feedback.test.mjs、src/types.ts、src/hooks/useChat.ts、src/components/ChatMessages.tsx、src/pages/ChatPage.tsx）、方案档落地状态、scripts/_w600_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
 > - **状态**：已落地（本批随 W600 提交并 push origin/main）。
@@ -941,7 +941,7 @@
 > - **执行（校验器）**：evals/validate.mjs——50 条/分类配比/id 唯一/schema 完整/路径磁盘真实，无 LLM 可进 CI；实测 50/50 过。
 > - **执行（运行器）**：evals/run_eval.mjs——三模式（--self-check 判分器自检 4/4 过：正反斜杠路径/缺路径拒判/forbid 拒判；--limit N；全量真跑），判分三规则=expect 路径全提及且磁盘存在+must_mention 全命中+forbid 零命中；输出 evals/results-<日期>.json；基线规则=首跑仅建基线·连续两批下降 ≥10pp 告警。
 > - **执行（CI）**：ci.yml agent-web-build 增 validate 步骤（无 LLM 不跑真评估·成本稳定性考量）。
-> - **偏差声明**：本地 LLM 基线跑未执行——xiyouji-agent-web/.env 无 CODEBUDDY_API_KEY（用户侧凭证·与 WP-A 同因），凭证具备后 `--limit 5` 起步补基线。
+> - **偏差声明**：本地 LLM 基线跑未执行——xiyouji-agent-web/.env 无 旧厂商_API_KEY（用户侧凭证·与 WP-A 同因），凭证具备后 `--limit 5` 起步补基线。
 > - **验证**：validate 50/50；self-check 4/4；路径真实性 100%；ci.yml 语法随 CI 运行确认。
 > - **文件**：xiyouji-agent-web/evals/（golden-50.jsonl、validate.mjs、run_eval.mjs）、.github/workflows/ci.yml、xiyouji-agent-web/README.md、方案档落地状态、scripts/_w598_spec.json、六文档、四页脚、workflows README、AGENTS 脚注、file-index。
 > - **状态**：已落地（本批随 W598 提交并 push origin/main）。
@@ -1227,7 +1227,7 @@
 > **来源**：W566 收官三项遗留之①②③（用户确认执行）——聊天页明暗两态视觉走查（W548 遗留人工项，五阶段迁移后首次）+ 收尾/取证清单落载体 + 本地预检纪律。
 > - **走查结论（明暗两态）**：浏览器自动化实测——深色（默认）与浅色态的侧栏/Agent 选择卡/工作目录输入/会话列表/消息气泡/模型与权限选择器渲染全部正常；会话列表含历史记录（hi/hi2）可打开、消息气泡与模型标签渲染正确。发现 1 个 P1 级功能缺陷（见下）。
 > - **P1 根治：agent 错误链路双重断裂（「错误链路无感」总根因）**：① 服务端——Express 5/Node 20+ 下 `req.on('close')` 在请求体读取完毕即触发（并非连接断开），W5xx P2-3 断开清理据此 `res.end()` 吞掉 init 之后全部 SSE 事件（含 error）；改挂 `res.on('close')`（wire 级 curl 实证：init+error 完整到达）。② 前端——useChat SSE 处理无 error 分支（错误事件静默丢弃）+ reader 循环 `if (done) break` 丢弃与 EOF 合并的末 chunk；补 error 分支（⚠️ 前缀渲染错误消息）+ 先解析后退出。修复前任何后端错误（含 spawn ENOENT 类环境错误）均表现为「思考中…」永久挂起。
-> - **环境事实登记**：本机旧厂商 Agent CLI（含 CodeBuddy）已删除（用户确认），聊天功能在本机只能走错误路径——这正是走查能立即暴露错误链路缺陷的原因；修复后错误以 ⚠️ 气泡明确呈现，不再无感。
+> - **环境事实登记**：本机旧厂商 Agent CLI已删除（用户确认），聊天功能在本机只能走错误路径——这正是走查能立即暴露错误链路缺陷的原因；修复后错误以 ⚠️ 气泡明确呈现，不再无感。
 > - **② 清单落载体**：AGENTS §4.3 新增五条——W 批次收尾七步清单（含本地预检：新增/修改 Python 脚本跑 ruff check）、取证枚举三陷阱、部署态冒烟与 file:// 审查双覆盖面、Express5 req close 语义陷阱。
 > - **验证（当批实跑）**：agent-web `npx tsc -b` 0 error + vite build 通过；wire 级 curl 实证 init+error 完整到达；浏览器走查截图（深色/浅色/会话/消息）留档会话记录；site 站门禁不受本批影响（verify_delivery 全绿基线延续）。
 > - **文件**：xiyouji-agent-web/server/index.ts（close 语义修复）、xiyouji-agent-web/src/hooks/useChat.ts（error 分支+末 chunk 修复）、AGENTS.md（§4.3 五条）、六文档级联。
@@ -1294,7 +1294,7 @@
 > - **删除**：skills/ 目录（19 技能）；scripts/check_skills_index.py；scripts/sync_skills.py（含 MIRROR_SKILLS 归属策略——W531 降级保护/W533 归属策略的历史使命随载体退役终结，git 历史永久可回溯）；tests/test_skills_reference_integrity.py（check_skills_index 专属测试）。
 > - **门禁**：verify_delivery 移除第 16 门禁（Skills 索引一致性）挂载块——AGENTS §4.2 与文档规范 §8 编号保留（标 W562 退役），门禁计数 25→24、verify 挂载 check_* 17→16（索引健康门禁动态计数自动收敛）。
 > - **文档**：AGENTS §4.5 整节移除、目录树行/门禁条目/sync 指引退役化；文档规范 §8 门禁表 24 项 + 行更新；README 目录树行与 STRUCTURE 表行删除；交接文档 §5 skills 小节退役化（历史条目按「历史段不改写」保留）。
-> - **不受影响**：用户级 `~/.zcode/skills/`（4 个通用会话技能 junction → D:\open-source，运行时仍加载）；`~/.qwenworkcn/`（另一运行时）；AGENTS §4.3 / 报告 / memory 中沉淀的操作知识（合法载体三件套）。
+> - **不受影响**：用户级 `~/.本地工具目录/skills/`（4 个通用会话技能 junction → D:\open-source，运行时仍加载）；`~/.qwenworkcn/`（另一运行时）；AGENTS §4.3 / 报告 / memory 中沉淀的操作知识（合法载体三件套）。
 > - **验证（当批实跑）**：verify_delivery 核心全绿（24 门禁）；check_index_health 动态计数收敛（16 个全存在）并正确拦截删除后的文档残留引用（修复后放行）；check_structure / a11y / token 全绿。
 > - **文件**：skills/（删）、scripts/check_skills_index.py + sync_skills.py + tests/test_skills_reference_integrity.py（删）、scripts/verify_delivery.py（门禁移除）、AGENTS.md、docs/00-导读/文档规范.md、README.md、STRUCTURE.md、交接文档.md、六文档 + 旁文档版本行 + site 四页脚（batch_cascade.py 级联）。
 > - **状态**：已落地（本批随 W562 提交并 push origin/main）。
@@ -2086,7 +2086,7 @@
 
 > **W415 README 视觉引导增量（承接 W414 用户手册改造·吸收第三方模板 3 增量·修正 4 处错误）**
 > - **来源**：用户提供第三方 README 模板（徽章区/在线体验/内容速览/快速开始/details 折叠/反馈）→ 主代理评估：骨架已被 W414 覆盖，但 3 个增量有参考价值（徽章区/首页预览截图/反馈段）·4 处错误不照抄（URL `/site/` 后缀会 404·release 徽章不适用——仓库无 Releases·单协议错应为双协议·徽章语法残缺缺 `[![` 包裹）→ 用户选"落地增量 + 图标化速览"
-> - **执行（README 增量）**：顶部新增徽章区 3 枚 shields.io（在线访问 brightgreen 大按钮式·双协议授权 MIT + CC BY-NC 4.0·部署状态 pages.yml workflow）·「内容导航表」改为「🎁 你将会看到什么」8 条 emoji 图标化速览（📖逐回解读/🕸️人物分析/🗺️主题专题/📚文化背景/📜诗词/💭随笔/📊可视化/🔍术语表·各带链接）·在线体验区插入站点首页预览截图（assets/images/index-preview.png·Playwright 1280×900 截图 108.7KB·PNG 头校验通过·临时脚本已删）·底部新增「💬 反馈与建议」（issues 链接）·开发者/维护者专区新增「技术栈」段（D3.js/Three.js/Python/原生 HTML/CodeBuddy Agent SDK/GitHub Actions）
+> - **执行（README 增量）**：顶部新增徽章区 3 枚 shields.io（在线访问 brightgreen 大按钮式·双协议授权 MIT + CC BY-NC 4.0·部署状态 pages.yml workflow）·「内容导航表」改为「🎁 你将会看到什么」8 条 emoji 图标化速览（📖逐回解读/🕸️人物分析/🗺️主题专题/📚文化背景/📜诗词/💭随笔/📊可视化/🔍术语表·各带链接）·在线体验区插入站点首页预览截图（assets/images/index-preview.png·Playwright 1280×900 截图 108.7KB·PNG 头校验通过·临时脚本已删）·底部新增「💬 反馈与建议」（issues 链接）·开发者/维护者专区新增「技术栈」段（D3.js/Three.js/Python/原生 HTML/旧厂商 Agent SDK/GitHub Actions）
 > - **执行（版本同步）**：bump v2.3.30 W415（README/STRUCTURE/项目说明）+ site 页脚 4 个（dukou-engine/index/cross-time-danmaku/tag-cloud）+ 交接文档/项目概览/项目认知总览/项目交接参考手册/workflows README 同步
 > - **验证**：verify_delivery 全绿（含"201 篇" A4 计数）·index-preview.png PNG 头校验通过（108.7KB）
 > - **处置收尾（2026-08-10·文档最新性审查）**：用户要求审查交接文档等是否全部最新 → 修复 5 处过时残留（交接文档 W414 段状态行"待 push"→已 push 83a2d87 全绿·W413 段验证行"（待跑）"→已跑·候选清单 RAG 阻塞"唯独阻塞"→标注 W402 已解除·待办 RAG [ ]→[x]·核心问题段补 W402 解除标注）+ 项目说明待办 2 处标记完成（v0.9.1 回归/截图审查 W406）·verify_delivery 全绿
@@ -2829,7 +2829,7 @@
 
 > **来源**：用户要求审查 skills/ 目录并全量修复（坏 openai.yaml / 六文档计数失真 / TRAE 路径不可移植 / 重复与过期内容）。
 > - **执行（skill 修复）**：5 角色 skill `agents/openai.yaml` 的 `System.Collections.Hashtable` 占位符还原为真实中文描述；唐僧 SKILL.md 错字修复；version-bump 陷阱清单去重；self-evolution 4/5 件套统一为 5 件套；en-translation footer 版本模板占位符化；characters-knowledge EN 人物页计数 10→12。
-> - **执行（平台适配）**：deep-review-loop / mem-wrap-up / self-evolution 新增「平台适配」段（`<memory_root>` / `<skills_root>` 占位符 + TRAE Task/RunCommand → Codex/CodeBuddy 工具映射），正文运行路径全部占位化，原机路径仅保留溯源标注；agent-session-loop references 标注为精简快速路径（完整协议以独立 skill 为准）。
+> - **执行（平台适配）**：deep-review-loop / mem-wrap-up / self-evolution 新增「平台适配」段（`<memory_root>` / `<skills_root>` 占位符 + TRAE Task/RunCommand → Codex/旧厂商 Agent 品牌 工具映射），正文运行路径全部占位化，原机路径仅保留溯源标注；agent-session-loop references 标注为精简快速路径（完整协议以独立 skill 为准）。
 > - **执行（文档）**：AGENTS.md §4.5 / README / STRUCTURE 同步为 14 个；交接文档「三 skill 闭环」位置改仓库内副本 + 陈旧 Git HEAD 修正；新增 `skills/README.md` 索引 + `scripts/_check_skills.py` 自检脚本（不入 verify_delivery 门禁）。
 > - **文件**：skills/ 下 22 文件 + AGENTS.md + README.md + STRUCTURE.md + 交接文档.md + 六文档。
 > - **验证**：`scripts/_check_skills.py` 全过（14 skill）；ruff 通过；`verify_delivery.py` 核心全绿（CSP 1173 哈希 0 漂移 / 数据漂移 / sitemap / A1 导航 / 计数 611 / 治理文档契约 6 项全过）。

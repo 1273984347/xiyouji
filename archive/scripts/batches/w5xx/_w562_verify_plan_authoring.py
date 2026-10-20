@@ -1,8 +1,8 @@
-# _w562_verify_plan_authoring.py — 校验 ZCode 用户级 plan-authoring 技能
+# _w562_verify_plan_authoring.py — 校验 本地 Agent 用户级 plan-authoring 技能
 import os
 import re
 
-base = os.path.join(os.path.expanduser('~'), '.zcode', 'skills', 'xiyouji-plan-authoring')
+base = os.path.join(os.path.expanduser('~'), '.本地工具目录', 'skills', 'xiyouji-plan-authoring')
 s = open(os.path.join(base, 'SKILL.md'), encoding='utf-8').read()
 r = open(os.path.join(base, 'reference.md'), encoding='utf-8').read()
 
