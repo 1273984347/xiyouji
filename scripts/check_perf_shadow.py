@@ -258,6 +258,7 @@ def report(pages, baseline_path=BASELINE):
     data = _load_baseline(baseline_path)
     samples = data["samples"]
     prev_pages = {}
+    prev_batch = samples[-1].get("batch") if samples else None
     if samples:
         for p in samples[-1].get("pages", []):
             prev_pages[p["url"]] = p
@@ -273,7 +274,7 @@ def report(pages, baseline_path=BASELINE):
             p["local_dep_bytes"], p["blocking_head_refs"], p["remote_refs"],
             p["local_dep_count"]))
         prev = prev_pages.get(p["url"])
-        if prev and prev.get("batch") != _current_batch():
+        if prev and prev_batch != _current_batch():
             d = _fmt_delta(p, prev, "html_bytes")
             if d:
                 print("%-38s %-4s   HTML 相对上一批%s" % ("", "", d))
