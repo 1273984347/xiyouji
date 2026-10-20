@@ -6,7 +6,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // 数据库文件路径
-const dbPath = path.join(__dirname, '..', 'data', 'chat.db');
+// W829：允许用环境变量覆盖（默认不变·生产形态零变化）——E2E 必须跑在**临时库**上：
+// 原实现库路径写死 → E2E 的清理逻辑（按「最近更新的 session」删 feedback/messages/sessions）
+// 会删掉开发者真实会话（历史含工具结果·不可逆）。
+const dbPath = process.env.AGENT_WEB_DB_PATH
+  ? path.resolve(process.env.AGENT_WEB_DB_PATH)
+  : path.join(__dirname, '..', 'data', 'chat.db');
 
 // 确保 data 目录存在
 import fs from 'fs';

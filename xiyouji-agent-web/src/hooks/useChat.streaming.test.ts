@@ -17,12 +17,13 @@
  *   ③ fetch 必须带 signal（AbortController 接线）且 handleStop 必须调 abort
  *      （「停止」此前只改 UI 状态·流继续推进·服务端继续跑完本轮）。
  */
-import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
+import { describe, it, expect } from 'vitest';
 
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-const SRC = readFileSync(path.join(HERE, 'useChat.ts'), 'utf8');
+// W829：用 Vite 的 import.meta.glob 以**原始文本**读同目录源文件（`?raw`）——
+// 不用 node:fs：前端 tsconfig 不含 node types（src 下的测试按仓内惯例不引 node API）。
+const SRC = (
+  import.meta.glob('./useChat.ts', { query: '?raw', import: 'default', eager: true })['./useChat.ts'] ?? ''
+) as string;
 
 describe('W825 · useChat 流式链路不变量', () => {
   it('① catch 分支同时匹配 temp 与 real 两个消息 id', () => {

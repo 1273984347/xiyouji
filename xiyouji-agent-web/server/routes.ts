@@ -81,7 +81,11 @@ function checkDatabase(): { status: "ok" | "error"; detail?: string } {
     db.getAllSessions();
     return { status: "ok" };
   } catch (error) {
-    return { status: "error", detail: error instanceof Error ? error.message : String(error) };
+    // W829：不回显底层异常原文（含 SQLite 库文件绝对路径）——形状不变·取值固定·原文进日志
+    logger.error("数据库可达性探针失败", {
+      error: error instanceof Error ? error.message : String(error),
+    });
+    return { status: "error", detail: "数据库不可用" };
   }
 }
 
