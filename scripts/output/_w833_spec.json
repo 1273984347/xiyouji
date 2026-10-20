@@ -1,0 +1,21 @@
+{
+  "batch": "W833",
+  "date": "2026-10-20",
+  "title": "W833 交付链与工具链静默失效根修批（分支保护零强制点 + 独立工作流守卫 + 锁失配即红 + 类型检查真跑）",
+  "desc": "交付链强制点补齐与工具链三处静默失效根修",
+  "head_entry": "2026-10-20（W833 交付链与工具链静默失效根修批）",
+  "head_sentence": "给 main 分支加必需检查、把工作流守卫独立出来、让锁失配即红，并让类型检查真正跑起来",
+  "changelog_body": "\n\n> **来源**：2026-10-20 全项目只读审查（交付链面 + 工具链面）实证的四项缺陷。\n> - **文件**：.github/workflows/workflow-lint.yml、.github/workflows/ci.yml、.github/workflows/security.yml、.github/workflows/README.md、.github/workflows/index.md、scripts/output/_w833_spec.json、scripts/output/README.md、scripts/output/index.md、docs/00-导读/W批次编号对账表.md。.github/workflows/README.md、.github/workflows/index.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w833_spec.json。\n> - **缺陷①（main 分支零强制点）**：远端实测 `repos/1273984347/xiyouji/branches/main/protection` 的 `required_status_checks` 与 `required_pull_request_reviews` **均为 ABSENT**、`rulesets` 为空 ⇒ 整条交付链（51 段硬门禁 / 10 个 CI job / pre-commit hook）**全部是建议性的**：CI 红可合、CI 未运行也可合——这正是「事故静默复发」的根条件（W806 同型事故：工作流整体不可解析 → run 0 秒失败 → PR 根本不生成 check，在无人察觉下复发过一次）。**修**：以「读→改→写」方式加 `required_status_checks` = 两个始终运行的 job（`Delivery Gate (verify_delivery.py)` + `Unit Tests (pytest)`·strict=false），其余键原样保留（`enforce_admins` true；`lock_branch` / `required_linear_history` / `required_signatures` / `required_conversation_resolution` 均 false——**此前审查结论称 linear_history/signatures 已启用·经复核不属实·此处按实测纠正**）。回滚命令：`gh api -X DELETE repos/1273984347/xiyouji/branches/main/protection`。\n> - **缺陷②（工作流守卫与被守卫同生共死）**：事故机理——ci.yml 某 step 的裸标量值内含冒号加空格 → YAML 映射歧义 → GitHub 解析该工作流直接失败、报「workflow file issue」、run 0 秒失败且 `pull_request` **不生成 check**；而当时唯一的可解析性守卫（W811 增的 pytest 用例）住在 **ci.yml 的 pytest-unit job 内** ⇒ 守卫与被守卫同生共死，ci.yml 坏掉时守卫根本不启动，缺陷遂复发。**修**：新增 `.github/workflows/workflow-lint.yml`——**独立存在**、`push`/`pull_request` 不限分支、只做一件事（PyYAML 全量解析全部工作流并指出失败文件与常见成因），ci.yml 坏掉时它仍能照亮问题；实测本机 10 个工作流全部可解析（0 失败）。\n> - **缺陷③（锁失配被回退静默吞掉）**：security.yml 两处 `npm ci` 失败即回退 `npm install`——lock 与 manifest 失配时会按**浮动版本**重新解析出一棵与 CI 构建、本地安装都不同的依赖树，随后 npm audit 审计的也是那棵树，而「锁不同步」这一最该暴露的信号被吞掉。**修**：去掉回退，失配即红（fail-closed）并给出可判定的错误说明。\n> - **缺陷④（类型检查从未真正执行）**：ci.yml 的 mypy 命令带 `--non-interactive`——mypy ≥ 1.11 起该选项**必须**搭配 `--install-types`，单独使用直接在参数解析阶段报错（实测：`error: --non-interactive is only supported with --install-types`）→ 配合忽略失败的写法整条命令静默失败 ⇒ **类型检查一次都没跑过**。**修**：去掉该参数（保留 report-only 不阻断），输出截尾 5 行避免 3000+ 行日志淹没 CI；实测去掉参数后真跑：`Found 3353 errors in 275 files`——此前一次都没跑过。\n> - **验证**：10 个 workflow 全部 PyYAML 可解析（0 失败）· main 保护复验 `required_status_checks` 已含两个检查且其余键未变 · 交付门禁未受影响（本批只改 workflow 与远端设置）。\n> - **状态**：已落地（本地提交·未推送）。CHANGELOG 版段因顶段序约束（batch 必须等于顶段+1·当前顶段为 W826·W827 至 W832 的段均待补写）**递延**，待顶段推进后以 chore 批补写十面；本批内容与认领行已入库。\n",
+  "milestone_block": "- **W833 交付链与工具链静默失效根修批（分支保护零强制点 + 独立工作流守卫 + 锁失配即红 + 类型检查真跑）**：\n  - main 分支保护加必需检查（Delivery Gate + Unit Tests·strict=false·其余键原样保留）——此前零强制点，CI 红可合、CI 未运行也可合\n  - 新增独立工作流 .github/workflows/workflow-lint.yml（不依赖 ci.yml·W806 同型事故的根修）\n  - security.yml 两处去掉 npm install 回退——锁与 manifest 失配即红\n  - ci.yml 的 mypy 去掉 --non-interactive——此前类型检查一次都没跑过（真跑 3353 errors in 275 files）\n",
+  "agents_note": "二〇二六年十月二十日（W833）交付链与工具链静默失效根修批：修四项缺陷。其一，main 分支保护实测必需状态检查与必需评审两栏皆缺、规则集为空，整条交付链——五十一段硬门禁、十个持续集成作业、提交前钩子——全属建议性：持续集成报红可合、不运行也可合；这正是事故静默复发的根条件。修法是以读改写方式加两个始终运行的必需检查，其余键原样保留；此前审查结论称线性历史与签名强制已启用，经复核不属实，此处按实测纠正。其二，工作流守卫与被守卫同生共死：唯一的工作流可解析性用例住在被守卫的作业内，被守卫坏掉时守卫根本不启动，于是同类事故静默复发；修法是新增独立工作流，不限分支触发，只做一件事——解析全部工作流并指出失败文件。其三，锁与清单失配时的回退安装会按浮动版本重解析出另一棵依赖树，最该暴露的信号被吞掉；修法是去掉回退，失配即红。其四，类型检查命令所带的选项在新版工具中必须搭配另一选项才可用，单独使用在参数解析阶段即报错，又被忽略失败的写法吞掉，于是类型检查一次都没跑过；修法是去掉该选项，保留仅报告不阻断，真跑一次得到两千余文件三千余条错误。",
+  "file_index_rows": [
+    "| .github/workflows/workflow-lint.yml | W833 | 新建：工作流 YAML 可解析性守卫（独立于 ci.yml·W806 同型事故根修） |",
+    "| .github/workflows/ci.yml | W833 | 改：mypy 去掉 --non-interactive（该选项使命令在参数解析阶段即报错·配合忽略失败写法导致类型检查从未执行） |",
+    "| .github/workflows/security.yml | W833 | 改：两处去掉 npm ci 失败即回退 npm install 的写法——锁与 manifest 失配即红 |",
+    "| .github/workflows/README.md | W833 | 改：登记 Workflow Lint 工作流（触发条件与 W806 事故机理说明） |",
+    "| .github/workflows/index.md | W833 | 派生面：目录文档文件清单 9→10（含 workflow-lint.yml） |",
+    "| docs/00-导读/W批次编号对账表.md | W833 | 改：W833 认领行登记（含版段递延说明·顶段序约束） |",
+    "| scripts/output/README.md | W833 | 派生面：目录说明的文件计数（新增 _w833_spec.json 后重算） |",
+    "| scripts/output/index.md | W833 | 派生面：目录文档文件清单（收录 _w833_spec.json） |"
+  ]
+}

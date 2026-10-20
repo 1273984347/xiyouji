@@ -1,0 +1,55 @@
+name: Workflow Lint
+# W833：工作流可解析性守卫（**独立于 ci.yml**·W806 同型事故的根修）
+#
+# 事故机理（W806·2026-10-20 实证复发一次）：
+#   ci.yml 某 step 的裸标量值内含 ": "（冒号+空格）→ YAML 映射歧义 → GitHub 解析该
+#   工作流直接失败，报「This run likely failed because of a workflow file issue」，
+#   run 0 秒失败，且 pull_request 事件**根本不生成 check**（PR 上看不到任何 CI 结果）。
+#   当时的唯一守卫（W811 增的 YAML 可解析性用例）住在 **ci.yml 的 pytest-unit job 内**
+#   ⇒ 守卫与被守卫同生共死：ci.yml 坏掉时守卫根本不启动 → 缺陷静默复发。
+# 本工作流独立存在：ci.yml 解析失败时它仍能照亮问题，并给出「哪个文件的第几行」。
+# 独立守卫是这类事故的**唯一可靠形态**——把守卫放进被守卫的进程里，等于没有守卫。
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Workflow YAML parseable
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.12"
+      - name: Install PyYAML
+        run: pip install "PyYAML==6.0.2"
+      - name: 解析全部工作流（PyYAML 全量解析）
+        run: |
+          python - <<'PY'
+          import glob, sys
+          import yaml
+
+          files = sorted(glob.glob(".github/workflows/*.yml")) + sorted(glob.glob(".github/workflows/*.yaml"))
+          if not files:
+              print("::error::未找到任何工作流文件——守卫不可用")
+              sys.exit(1)
+          bad = 0
+          for f in files:
+              try:
+                  with open(f, encoding="utf-8") as fh:
+                      yaml.safe_load(fh)
+                  print("OK   %s" % f)
+              except Exception as exc:
+                  bad += 1
+                  first = str(exc).splitlines()[0] if str(exc) else exc
+                  print("::error::%s 不可解析：%s" % (f, first))
+                  print("  常见成因：裸标量值内含 ': '（冒号+空格）→ YAML 映射歧义；"
+                        "解决方式：给该值加引号（Windows 上用单引号避免转义）")
+          print("共 %d 个工作流，失败 %d 个" % (len(files), bad))
+          sys.exit(1 if bad else 0)

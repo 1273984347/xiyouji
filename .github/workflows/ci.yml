@@ -279,7 +279,13 @@ jobs:
         run: python scripts/check_js_syntax.py --all
 
       - name: Run mypy (report-only, W422)
-        run: mypy scripts/ --ignore-missing-imports --non-interactive || true
+        # W833：去掉 --non-interactive——mypy ≥ 1.11 起该选项**必须**搭配 --install-types，
+        # 单独使用直接在参数解析阶段报错（实测：error: --non-interactive is only supported
+        # with --install-types）→ 配合 `|| true` 整条命令静默失败 ⇒ **类型检查从未真正执行过**
+        # （去掉该参数后实跑：Found 3353 errors in 275 files·此前一次都没跑过）。
+        # 保持 report-only 不阻断；输出截尾 5 行（避免 3000+ 行日志淹没 CI 输出），
+        # 计数行本身即含总量与文件数。
+        run: mypy scripts/ --ignore-missing-imports 2>&1 | tail -5 || true
 
   pytest-unit:
     name: Unit Tests (pytest)
