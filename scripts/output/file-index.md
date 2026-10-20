@@ -11,6 +11,24 @@
 ---
 
 
+## W806 GoatCounter 统计链彻底退役批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_no_goatcounter.py | W806 | 新建：GoatCounter 退役防回退守卫（四项判据·自测 1 正 4 负·CI 接线） |
+| tests/unit/test_check_no_goatcounter.py | W806 | 新建：守卫专项单测 5 例（现网实跑/自检/判据单元/忽略规则/退出码） |
+| scripts/generate_csp.py | W806 | connect-src 去 GoatCounter 计数端点（856 页 CSP 重算·546 页放行回收） |
+| site/js/rum.js | W806 | 上报通道三口径改造（删 GoatCounter 改道分支与 bucket 死函数·线上零外发） |
+| site/js/visit-log.js | W806 | 注释口径同步（GoatCounter 已退役·本文件为现役唯一访问记录面） |
+| site/rum-viewer.html | W806 | 说明段改写（生产无 CWV 外发通道·dev origin 回流口径） |
+| site/data/search.html | W806 | 摘除活的 window.goatcounter.count 搜索词上报分支（仅留 localStorage） |
+| site/en/search.html | W806 | 摘除活的 window.goatcounter.count 搜索词上报分支（仅留 localStorage） |
+| site/_headers | W806 | 平台层 CSP connect-src 去 GoatCounter 域 |
+| scripts/fetch_gate_stats.py | W806 | 加 W806 现状声明（后端失效·保留在库供账号重建后复用） |
+| docs/00-导读/访问统计方案.md | W806 | 改写为《访问统计现状与退役记录》（退役依据/历史选型存档/恢复路径） |
+| docs/00-导读/V2可视化维度方案.md | W806 | 零外域请求口径改为全站零例外 |
+| docs/11-方案报告/读者数据复盘.md | W806 | 加 W806 现状声明（W626 判定保留·数据源重建前无法复算） |
+
 ## W805 跨平台测试守卫热修批（2026-10-19）
 
 | 文件 | W | 说明 |
@@ -66,6 +84,7 @@
 | 文件 | W | 说明 |
 |---|---|---|
 | README.md | W800 | 门禁边界（保真不保质）+ 阅读契约后移 + 133 维性质分层 |
+| docs/00-导读/协议边界速查.md | W805 | 双协议适用范围 + 边界快速表（MIT/CC BY-NC 4.0） |
 | docs/00-导读/统计口径说明.md | W800 | §3 维度分层 + §8 文本与数据基础及适用性限制 |
 | docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W800 | B-105~B-108 登记（第四轮评审） |
 

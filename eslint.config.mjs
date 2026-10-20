@@ -8,7 +8,7 @@
 //
 // 设计取舍：
 //   1. 零新增依赖——不引 `globals` 包，改为手写全局白名单（本仓 JS 体量小，白名单够用且可控）。
-//   2. 只覆盖本仓自写 JS。第三方自托管库（d3/three/sankey/goatcounter）、一次性诊断脚本
+//   2. 只覆盖本仓自写 JS。第三方自托管库（d3/three/sankey）、一次性诊断脚本
 //      （`scripts/_*.js`，按项目约定不入库门禁）、Playwright 浏览器二进制（`scripts/.pw-browsers/`）
 //      一律忽略，避免用第三方代码的问题淹没本仓信号。
 //   3. 规则集与原 .eslintrc.json 保持一致（no-unused-vars warn / no-undef error / no-console off），
@@ -167,7 +167,6 @@ export default [
       'site/static/js/d3.v7.min.js',
       'site/static/js/three.r128.min.js',
       'site/static/js/d3-sankey.min.js',
-      'site/static/js/goatcounter.js',
       'hyperframes/**',
     ],
   },

@@ -144,7 +144,6 @@ jobs:
               --output-path=lighthouse-report \
               --only-categories=performance,accessibility,best-practices,seo \
               --throttling-method=simulate \
-              --blocked-url-patterns="*1273984347.goatcounter.com*" \
               --chrome-flags="--headless --no-sandbox"
 
       - name: Stop static server
@@ -349,6 +348,10 @@ jobs:
 
       - name: Run verify_delivery.py
         run: python scripts/verify_delivery.py
+
+      # W806：GoatCounter 统计链退役防回退守卫（全站零 goatcounter 引用）
+      - name: Guard: no GoatCounter references (W806)
+        run: python scripts/check_no_goatcounter.py
 
   e2e-interaction:
     name: E2E Interaction (test_site_quality.js)

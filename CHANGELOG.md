@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W805），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W806），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,18 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W806（2026-10-20）：GoatCounter 统计链彻底退役批
+> **来源**：GoatCounter 站点代码 1273984347 失效——`py -3 scripts/fetch_gate_stats.py --json` 实测 HTTP 404「not found」（断链自 2026-09-30，至裁决日未恢复）：页面埋点采不到任何数据，却仍在每页加载并产生一次无效外域请求。用户裁决「彻底退役」（选项 A）。
+> - **退役范围（234 页）**：site 根 8 + site/data 88 + site/en 138 页移除 `<script data-goatcounter>` 埋点标签（全站 `data-goatcounter` 残留 0；`site/reader/**` 自建站起未注入·本就无残留）；CSP 生成源去掉计数端点后重算 **856 页** meta（其中 **546 页**原含该域放行），`site/_headers` 同步；`site/data/search.html` 与 `site/en/search.html` 摘除活的 `window.goatcounter.count` 搜索词上报分支（搜索词改为仅落本机 localStorage）。
+> - **工具与脚本退役**：删除 `scripts/inject_goatcounter.py`（注入器）与 `site/static/js/goatcounter.js`（自托管 count.js）；`scripts/output/script-coverage-baseline.txt` 同步移除两条登记行（含一行与实现不符的注释）。
+> - **防回退守卫（新增）**：`scripts/check_no_goatcounter.py`——四项判据（C1 页面无埋点标签 / C2 页面无外域放行 / C3 站点无追踪脚本 / C4 工具无注入器），自测 1 正 4 负（`--self-test` 输出 SELF_TEST_OK），单测 `tests/unit/test_check_no_goatcounter.py` 5 passed；接入 `.github/workflows/ci.yml` 的 `verify-delivery` job（CI 侧机器引用·满足第 42 门禁脚本覆盖口径）。
+> - **RUM 口径改造**：`site/js/rum.js` 删除 GoatCounter 改道分支与随之失效的 `bucket()` 死函数，改为三条明确通道——① 本地 dev origin（localhost/127.0.0.1/[::1]）→ POST `/api/rum` 回流本地后端 ② 显式 `window.__RUM_CONFIG__.endpoint` → 按配置外发 ③ 其余（GitHub Pages 等纯静态托管）→ 零网络请求·仅 localStorage 备援；`site/js/visit-log.js`、`site/rum-viewer.html` 同步口径。
+> - **文档口径同步**：`docs/00-导读/访问统计方案.md` 改写为《访问统计现状与退役记录》（退役依据/历史选型存档/恢复路径）；`docs/00-导读/V2可视化维度方案.md` 零外域请求口径改为全站零例外；`docs/11-方案报告/读者数据复盘.md` 与其目录 README 加 W806 现状声明（W626 判定结论予以保留·数据源重建前无法复算）；`scripts/fetch_gate_stats.py` 保留在库并加现状声明（纯 CLI 工具·账号重建后复用）。
+> - **验证**：CSP `--check` 856 页 0 漂移；守卫实跑 0 FAIL + 自测 SELF_TEST_OK + 单测 5 passed；`node --check site/js/rum.js` 通过；pytest 全量 719 passed / 3 skipped（排除既有挂起文件 `tests/unit/test_visualization_data.py`；解释器退出时挂起为 HEAD worktree 对拍复现的既有现象·非本批引入）；verify_delivery 全量 50 段 0 FAIL。
+> - **W805 遗留件补入**：`docs/00-导读/协议边界速查.md`（双协议适用范围 + 边界快速表·MIT/CC BY-NC 4.0）系 W805 会话已产出但未入库的新文档，file-index 仍记 W805；本批随提交一并入库，并同步 `docs/00-导读/README.md`、`docs/00-导读/index.md` 与 `docs/INDEX.md` 的登记（计数 12→13 / 718→719 篇）。
+> - **状态**：已落地（级联+提交按批次流程执行）。
+> - **文件**：scripts/check_no_goatcounter.py、tests/unit/test_check_no_goatcounter.py、scripts/generate_csp.py、site/js/rum.js、site/js/visit-log.js、site/rum-viewer.html、site/_headers、site/data/search.html、site/en/search.html、site/static/js/index.md、scripts/index.md、scripts/output/script-coverage-baseline.txt、scripts/fetch_gate_stats.py、eslint.config.mjs、.github/workflows/ci.yml、.github/workflows/perf.yml、tests/e2e/test_smoke.js、docs/00-导读/访问统计方案.md、docs/00-导读/V2可视化维度方案.md、docs/11-方案报告/读者数据复盘.md、docs/11-方案报告/README.md、docs/10-方法论沉淀/白屏三连根因复盘与防回归清单.md、docs/INDEX.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/output/_w806_spec.json、docs/00-导读/协议边界速查.md。
 
 ### W805（2026-10-19）：跨平台测试守卫热修批
 > **来源**：W804 推送后 dev→main PR 的 CI 首跑（run 39177553777）在 Linux 暴露 W803 引入的测试缺陷——`tests/test_xiyouji_mcp_extra.py::TestInheritedBehaviour::test_directory_as_target_file_raises_permission_error` 断言 `pytest.raises(PermissionError)`，而 Linux/macOS 读目录抛 `IsADirectoryError`（同属 OSError），致「1 failed / 729 passed」CI 红。

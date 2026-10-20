@@ -1,0 +1,26 @@
+{
+  "batch": "W806",
+  "date": "2026-10-20",
+  "title": "W806 GoatCounter 统计链彻底退役批",
+  "desc": "GoatCounter 统计链彻底退役",
+  "head_entry": "2026-10-20（W806 GoatCounter 统计链彻底退役批）",
+  "head_sentence": "234 页埋点清零与 CSP 外域放行回收，防回退守卫上线",
+  "changelog_body": "\n> **来源**：GoatCounter 站点代码 1273984347 失效——`py -3 scripts/fetch_gate_stats.py --json` 实测 HTTP 404「not found」（断链自 2026-09-30，至裁决日未恢复）：页面埋点采不到任何数据，却仍在每页加载并产生一次无效外域请求。用户裁决「彻底退役」（选项 A）。\n> - **退役范围（234 页）**：site 根 8 + site/data 88 + site/en 138 页移除 `<script data-goatcounter>` 埋点标签（全站 `data-goatcounter` 残留 0；`site/reader/**` 自建站起未注入·本就无残留）；CSP 生成源去掉计数端点后重算 **856 页** meta（其中 **546 页**原含该域放行），`site/_headers` 同步；`site/data/search.html` 与 `site/en/search.html` 摘除活的 `window.goatcounter.count` 搜索词上报分支（搜索词改为仅落本机 localStorage）。\n> - **工具与脚本退役**：删除 `scripts/inject_goatcounter.py`（注入器）与 `site/static/js/goatcounter.js`（自托管 count.js）；`scripts/output/script-coverage-baseline.txt` 同步移除两条登记行（含一行与实现不符的注释）。\n> - **防回退守卫（新增）**：`scripts/check_no_goatcounter.py`——四项判据（C1 页面无埋点标签 / C2 页面无外域放行 / C3 站点无追踪脚本 / C4 工具无注入器），自测 1 正 4 负（`--self-test` 输出 SELF_TEST_OK），单测 `tests/unit/test_check_no_goatcounter.py` 5 passed；接入 `.github/workflows/ci.yml` 的 `verify-delivery` job（CI 侧机器引用·满足第 42 门禁脚本覆盖口径）。\n> - **RUM 口径改造**：`site/js/rum.js` 删除 GoatCounter 改道分支与随之失效的 `bucket()` 死函数，改为三条明确通道——① 本地 dev origin（localhost/127.0.0.1/[::1]）→ POST `/api/rum` 回流本地后端 ② 显式 `window.__RUM_CONFIG__.endpoint` → 按配置外发 ③ 其余（GitHub Pages 等纯静态托管）→ 零网络请求·仅 localStorage 备援；`site/js/visit-log.js`、`site/rum-viewer.html` 同步口径。\n> - **文档口径同步**：`docs/00-导读/访问统计方案.md` 改写为《访问统计现状与退役记录》（退役依据/历史选型存档/恢复路径）；`docs/00-导读/V2可视化维度方案.md` 零外域请求口径改为全站零例外；`docs/11-方案报告/读者数据复盘.md` 与其目录 README 加 W806 现状声明（W626 判定结论予以保留·数据源重建前无法复算）；`scripts/fetch_gate_stats.py` 保留在库并加现状声明（纯 CLI 工具·账号重建后复用）。\n> - **验证**：CSP `--check` 856 页 0 漂移；守卫实跑 0 FAIL + 自测 SELF_TEST_OK + 单测 5 passed；`node --check site/js/rum.js` 通过；pytest 全量 719 passed / 3 skipped（排除既有挂起文件 `tests/unit/test_visualization_data.py`；解释器退出时挂起为 HEAD worktree 对拍复现的既有现象·非本批引入）；verify_delivery 全量 50 段 0 FAIL。\n> - **状态**：已落地（级联+提交按批次流程执行）。\n> - **文件**：scripts/check_no_goatcounter.py、tests/unit/test_check_no_goatcounter.py、scripts/generate_csp.py、site/js/rum.js、site/js/visit-log.js、site/rum-viewer.html、site/_headers、site/data/search.html、site/en/search.html、site/static/js/index.md、scripts/index.md、scripts/output/script-coverage-baseline.txt、scripts/fetch_gate_stats.py、eslint.config.mjs、.github/workflows/ci.yml、.github/workflows/perf.yml、tests/e2e/test_smoke.js、docs/00-导读/访问统计方案.md、docs/00-导读/V2可视化维度方案.md、docs/11-方案报告/读者数据复盘.md、docs/11-方案报告/README.md、docs/10-方法论沉淀/白屏三连根因复盘与防回归清单.md、docs/INDEX.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/output/_w806_spec.json。\n",
+  "milestone_block": "- **W806 GoatCounter 统计链彻底退役批**：\n  - 依据：GoatCounter 站点代码失效实测 404（断链自 2026-09-30）——埋点采不到任何数据却仍每页加载并产生无效外域请求，用户裁决彻底退役\n  - 落地：234 页埋点标签移除 + CSP 856 页重算（546 页外域放行回收）+ 注入器与自托管 count.js 退役 + rum.js 三通道口径改造 + 新建防回退守卫 check_no_goatcounter.py（CI 接线）+ 4 处文档口径同步\n  - 验证：守卫实跑 0 FAIL + 自测 SELF_TEST_OK + 单测 5 passed + CSP 0 漂移 + pytest 719 passed / 3 skipped（退出时挂起为 HEAD 对拍复现的既有现象）+ verify 全量 50 段 0 FAIL\n",
+  "agents_note": "2026-10-20（W806）GoatCounter 统计链彻底退役批：站点代码 1273984347 失效，fetch_gate_stats 实测 HTTP 404 且断链自 2026-09-30 未恢复——页面埋点采不到任何数据，却仍每页加载并产生一次无效外域请求，用户裁决彻底退役；落地为 site 根 8 加 site/data 88 加 site/en 138 共 234 页移除埋点标签且全站 data-goatcounter 残留归零，CSP 生成源去掉计数端点后重算 856 页 meta（其中 546 页原含该域放行）并同步 site/_headers，搜索两页摘除活的 window.goatcounter.count 分支，删除注入器 scripts/inject_goatcounter.py 与自托管 count.js，rum.js 删除改道分支与随之失效的 bucket 死函数并改为本地 dev 回流、显式配置外发、纯静态托管零外发三条通道，新建防回退守卫 scripts/check_no_goatcounter.py（四项判据加自测 1 正 4 负加单测 5 项并接入 ci.yml），访问统计方案改写为现状与退役记录并同步四处文档口径；验证等于守卫实跑 0 FAIL 加自测 SELF_TEST_OK 加单测 5 passed 加 CSP 零漂移加 pytest 七百一十九 passed 三 skipped（退出时挂起为 HEAD worktree 对拍复现的既有现象非本批引入）加 verify 全量五十段零 FAIL",
+  "file_index_rows": [
+    "| scripts/check_no_goatcounter.py | W806 | 新建：GoatCounter 退役防回退守卫（四项判据·自测 1 正 4 负·CI 接线） |",
+    "| tests/unit/test_check_no_goatcounter.py | W806 | 新建：守卫专项单测 5 例（现网实跑/自检/判据单元/忽略规则/退出码） |",
+    "| scripts/generate_csp.py | W806 | connect-src 去 GoatCounter 计数端点（856 页 CSP 重算·546 页放行回收） |",
+    "| site/js/rum.js | W806 | 上报通道三口径改造（删 GoatCounter 改道分支与 bucket 死函数·线上零外发） |",
+    "| site/js/visit-log.js | W806 | 注释口径同步（GoatCounter 已退役·本文件为现役唯一访问记录面） |",
+    "| site/rum-viewer.html | W806 | 说明段改写（生产无 CWV 外发通道·dev origin 回流口径） |",
+    "| site/data/search.html | W806 | 摘除活的 window.goatcounter.count 搜索词上报分支（仅留 localStorage） |",
+    "| site/en/search.html | W806 | 摘除活的 window.goatcounter.count 搜索词上报分支（仅留 localStorage） |",
+    "| site/_headers | W806 | 平台层 CSP connect-src 去 GoatCounter 域 |",
+    "| scripts/fetch_gate_stats.py | W806 | 加 W806 现状声明（后端失效·保留在库供账号重建后复用） |",
+    "| docs/00-导读/访问统计方案.md | W806 | 改写为《访问统计现状与退役记录》（退役依据/历史选型存档/恢复路径） |",
+    "| docs/00-导读/V2可视化维度方案.md | W806 | 零外域请求口径改为全站零例外 |",
+    "| docs/11-方案报告/读者数据复盘.md | W806 | 加 W806 现状声明（W626 判定保留·数据源重建前无法复算） |"
+  ]
+}

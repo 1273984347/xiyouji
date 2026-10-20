@@ -221,8 +221,8 @@ async function main() {
   for (let i = 0; i < filteredPages.length; i++) {
     const pageInfo = filteredPages[i];
     const page = await context.newPage();
-    // R6（W464 Phase 3 方案·2026-08-26 落地）：拦截 GoatCounter count beacon，
-    // 防止冒烟测试加载页面污染真实 UV 统计。
+    // W806：GoatCounter 统计链已退役（站点代码失效·无数据可采）。此处保留拦截，
+    // 作为「页面若重新引入该外域」的防回退保险——被拦截的请求不会出网。
     await page.route('**1273984347.goatcounter.com**', (route) => route.abort());
 
     const result = await testPage(

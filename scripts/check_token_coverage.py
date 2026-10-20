@@ -17,6 +17,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+
+# W803: 强制使用统一站点页面枚举；实现简化且与现役全版（834+ 页）相符。避免每个脚本重复写同一套 `glob(site/*.html) + glob(site/data/*.html) + glob(site/en/*.html)`。
 UI_ATTR = re.compile(
     r"(background|border(?:-[a-z]+)?|box-shadow|color|outline)\s*:\s*"
     r"([#][0-9a-fA-F]{3,8}|rgba?\([^)]*\)|hsl[a-z]*\([^)]*\))"
@@ -49,30 +51,20 @@ def check_page(path: Path):
 def main():
     fails = []
     total_ui = total_shadow = 0
-    for f in sorted(ROOT.glob("site/*.html")):
-        ui, allowed, sh, has_ex = check_page(f)
+    from utils.gate_common import site_pages as gc_site_pages
+    for f in gc_site_pages(data=True, root=True, en=True):
+        f_path = Path(f)
+        ui, allowed, sh, has_ex = check_page(f_path)
         total_ui += ui
         total_shadow += sh
         if sh:
-            fails.append(f"{f.name}: 真裸 box-shadow {sh} 处（M3 必须 0）")
+            fails.append(f"{f_path.name}: 真裸 box-shadow {sh} 处（M3 必须 0）")
         if has_ex:
             if ui > allowed:
-                fails.append(f"{f.name}: UI 裸色 {ui} > 豁免登记 {allowed}")
+                fails.append(f"{f_path.name}: UI 裸色 {ui} > 豁免登记 {allowed}")
         else:
             if ui:
-                fails.append(f"{f.name}: 无豁免注释但 UI 裸色 {ui} 处")
-    for f in sorted(ROOT.glob("site/data/*.html")) + sorted(ROOT.glob("site/en/*.html")):
-        ui, allowed, sh, has_ex = check_page(f)
-        total_ui += ui
-        total_shadow += sh
-        if sh:
-            fails.append(f"{f.relative_to(ROOT)}: 真裸 box-shadow {sh} 处（M3 必须 0）")
-        if has_ex:
-            if ui > allowed:
-                fails.append(f"{f.relative_to(ROOT)}: UI 裸色 {ui} > 豁免登记 {allowed}")
-        else:
-            if ui:
-                fails.append(f"{f.relative_to(ROOT)}: 无豁免注释但 UI 裸色 {ui} 处")
+                fails.append(f"{f_path.name}: 无豁免注释但 UI 裸色 {ui} 处")
     print(f"token 覆盖率门禁：UI 裸色总 {total_ui} · 真裸 box-shadow 总 {total_shadow} · FAIL {len(fails)}")
     for msg in fails[:15]:
         print("  FAIL", msg)
