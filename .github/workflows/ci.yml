@@ -350,7 +350,7 @@ jobs:
         run: python scripts/verify_delivery.py
 
       # W806：GoatCounter 统计链退役防回退守卫（全站零 goatcounter 引用）
-      - name: Guard: no GoatCounter references (W806)
+      - name: "Guard: no GoatCounter references (W806)"
         run: python scripts/check_no_goatcounter.py
 
   e2e-interaction:

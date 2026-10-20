@@ -242,3 +242,75 @@ def test_ci_jobs_are_distinct_and_locatable():
     ci = _ci_text()
     assert re.search(r"(?m)^  verify-delivery:\s*$", ci), "verify-delivery job 不存在"
     assert re.search(r"(?m)^  agent-web-build:\s*$", ci), "agent-web-build job 不存在"
+
+
+# ---------------------------------------------------------------------------
+# W811：工作流 YAML 可解析性守卫（GitHub 侧「workflow file issue」防线）
+# ---------------------------------------------------------------------------
+# W806 在 ci.yml 新增 goatcounter 防回退守卫步骤时，step 名写成
+# `- name: Guard: no GoatCounter references (W806)`——裸标量值内含 ": "（冒号+空格）
+# 在 YAML 映射上下文里属歧义语法：GitHub 解析该工作流时直接报
+# 「This run likely failed because of a workflow file issue」，run 0 秒失败，
+# 且 pull_request 事件根本不生成 check（PR 上看不到 CI 结果）。
+# 本地全绿的原因：既有接线测试全是 grep/regex 型断言，对 YAML 语法无感；
+# 且 ci.yml 的 on.push 只含 main → dev 分支 push 从不触发 CI → 缺陷潜伏至推送才暴露。
+#
+# 守卫判据（确定性·恒生效，不依赖 PyYAML）：
+#   J1 无制表符缩进（YAML 禁制表符）
+#   J2 映射项 name 的裸标量值不得含 ": "（加引号即合法）
+#   J3 PyYAML 可用时做全量解析（加严；不可用时由 J1+J2 覆盖本风险类·非静默跳过）
+
+WORKFLOWS_DIR = ROOT / ".github" / "workflows"
+
+
+def _workflow_files():
+    return sorted(WORKFLOWS_DIR.glob("*.yml")) + sorted(WORKFLOWS_DIR.glob("*.yaml"))
+
+
+def _iter_mapping_name_values(text):
+    """逐行产出 (行号, 值)：仅映射上下文中的 name 值（跳过块标量正文）。
+
+    块标量（run: | / script: >）内部是自由文本，不能按映射项判。
+    """
+    block_indent = None
+    for lineno, raw_line in enumerate(text.splitlines(), 1):
+        stripped = raw_line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        indent = len(raw_line) - len(raw_line.lstrip(" "))
+        if block_indent is not None:
+            if stripped and indent > block_indent:
+                continue
+            block_indent = None
+        m = re.match(r"^\s*(?:-\s*)?name:\s*(.+?)\s*$", raw_line)
+        if m:
+            yield lineno, m.group(1)
+        if re.match(r"^\s*(?:-\s*)?(?:run|script):\s*[|>]", raw_line):
+            block_indent = indent
+
+
+def test_workflow_yaml_is_parseable():
+    """W811：全部 .github/workflows/*.yml 须是 GitHub 可解析的 YAML（W806 回归防线）。"""
+    files = _workflow_files()
+    assert files, "未找到任何 workflow 文件——守卫不可用·须防静默跳过假绿"
+    for f in files:
+        text = f.read_text(encoding="utf-8")
+        # J1：制表符缩进
+        assert "\t" not in text, "%s 含制表符（YAML 禁制表符缩进）" % f.name
+        # J2：裸标量值内含 ": " → 映射歧义 → GitHub 0 秒失败该 workflow
+        for lineno, value in _iter_mapping_name_values(text):
+            if value.startswith(("'", '"')):
+                continue
+            assert ": " not in value, (
+                "%s:%d 的 name 值是未加引号的裸标量且含 ': '——YAML 映射歧义，"
+                "GitHub 会以「workflow file issue」0 秒失败该 workflow 且 PR 不生成 "
+                "check（请给该值加引号）" % (f.name, lineno))
+        # J3：PyYAML 可用时全量解析（加严；不可用时由 J1+J2 覆盖本风险类）
+        try:
+            import yaml
+        except ImportError:
+            continue
+        try:
+            yaml.safe_load(text)
+        except Exception as exc:  # noqa: BLE001
+            raise AssertionError("%s 非可解析 YAML：%s" % (f.name, exc)) from exc
