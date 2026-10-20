@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W808），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W810），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,24 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W810（2026-10-20）：站内搜索死代码清理批
+> **来源**：W807 刷新站内搜索索引时遗留的清理候选——旧 `window.SEARCH_INDEX = [...]` 数组在换成 `SITE_SEARCH_INDEX_ZH/EN` 新常量后成为零引用死重（zh 2044 字符 / en 2328 字符），每页各背 2KB 余量。
+> - **零引用三项核查**：① 页面 JS 只读 `SITE_SEARCH_INDEX_ZH/EN`（zh:1303 / en:1287），legacy 数组零引用；② `scripts/validate_en.py` 只认 `/* SEARCH_INDEX:BEGIN */…END` 包裹区，不读 legacy 数组；③ 生成器 `_gen_search_index.py` 的同名匹配仅为「缺标记时的兜底注入锚点」，而两页标记齐全故该分支不可达（生成器面不动·不属本批范围）。
+> - **落地**：两页各删 1 行（−2271 / −2329 字节）+ `generate_csp.py` 重算该 2 页内联脚本哈希（恰好 2 页更新·其余 854 页 0 漂移）。**范围纪律**：本批不新增门禁、不改生成器与页面逻辑，纯粹删死代码。
+> - **验证**：CSP `--check` 856 页 0 漂移 + 第 46 槽搜索索引新鲜度门禁 0 FAIL（zh 822·en 864 与生成器实算一致·删除未触及载荷块）+ check_structure 855 文件 1411 style 块 + check_js_syntax 855 文件 + e2e 站点质量套件全过（S1 rows=23 errors=[]·S1b rows=4 exactHit=true·与改动前逐字一致）+ pytest 719 passed / 3 skipped + verify_delivery 全量 51 段 0 FAIL。
+> - **状态**：已落地（级联+提交按批次流程执行）。
+> - **文件**：site/data/search.html、site/en/search.html、docs/00-导读/W批次编号对账表.md、scripts/output/_w810_spec.json。
+
+### W809（2026-10-20）：站内搜索索引新鲜度门禁挂载批
+> **来源**：W807 刷新站内搜索索引后遗留的登记余项——「索引新鲜度门禁未挂载」：内容批次改 `docs/` 或 `site/` 后忘重跑生成器，索引即静默陈旧（用户搜不到新文档·旧链接点不开），而**刷新动作本身无机器防线**。
+> - **生成器函数化（挂槽前置）**：`scripts/_gen_search_index.py` 原实现把「算」与「写」同放模块级（import 即落盘），门禁无法安全复用 → 拆为 `build_indexes()` 纯计算 + `main()` 写盘；**实证**：import 后两页 sha256 不变（不落盘）、脚本实跑二跑 sha256 一致（仍幂等）。
+> - **新建第 46 槽门禁**：`scripts/check_search_index_fresh.py`——三判据（C1 两页 `SEARCH_INDEX:BEGIN/END` 标记块存在·C2 zh 页内嵌载荷 == 实算载荷·C3 en 页同），逐条对拍 kind/标题/分类/摘要/URL/关键词（禁字节串比对：JSON 序列化细节变化会致假红）；期望载荷由生成器 `build_indexes()` 纯计算得出，**门禁只读不写**，刷新动作仍为 `python scripts/_gen_search_index.py` + 重算 CSP 哈希；**fail-closed**：jieba 缺失则 kw 退化为逐字、期望载荷不可信 → 报「环境缺依赖」并 FAIL，禁静默跳过假绿（与第 31/45 门禁同族纪律）。
+> - **挂载三方编号对账**：`scripts/verify_delivery.py` 门禁元组 + `EXPECTED_SECTION_NAMES` + scope 归属（docs 与 site **两面**——任一面改动即令索引过期）+ `docs/agent/gates.md` 第 46 条 + `AGENTS.md` §4.2 摘要（45→46 槽）——第 41 门禁「编号三方对账」为该面的机器防线。
+> - **单测**：`tests/unit/test_check_search_index_fresh.py` 5 例（现网实跑 0 FAIL / 自检 5-5 / 判据单元 4 类漂移 / jieba 缺失 fail-closed / 挂载一致性点检）。
+> - **验证**：门禁 `--self-test` 5/5 + 单测 5 passed + 现网实跑 0 FAIL（zh 822 条 · en 864 条与实算一致）+ 第 41 门禁 0 FAIL + pytest 全量 + verify_delivery 全量 51 段 0 FAIL。
+> - **状态**：已落地（级联+提交按批次流程执行）。
+> - **文件**：scripts/check_search_index_fresh.py、scripts/_gen_search_index.py、tests/unit/test_check_search_index_fresh.py、scripts/verify_delivery.py、docs/agent/gates.md、AGENTS.md、scripts/index.md、tests/unit/index.md、scripts/output/index.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/output/_w809_spec.json。
 
 ### W808（2026-10-20）：Web Agent 全栈加固批
 > **来源**：用户令「全栈一遍（集成层 + 后端生产化）」+「测试三件套全上（单测 + 集成 + 前端 E2E）」+「完整 W808 批次施工但提交留用户」。审计 agent-web（仓库内唯一全栈应用：React 19 + Vite 8 + TS 前端 / Express 5 + better-sqlite3 后端）后发现三处**真实跨边界缺陷**与一批生产化缺口。
