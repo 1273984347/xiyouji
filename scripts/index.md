@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（207）
+## 文件（208）
 
 ### Markdown 文档
 
@@ -65,6 +65,7 @@
 - `_check_json_copies.py`
 - `_check_pipeline_consistency.py`
 - `_cite_probe.py`
+- `_gen_search_index.py`
 - `_s4_audit_a_track_anchors.py`
 - `_s4_audit_doi.py`
 - `_s4_biblio_analysis.py`

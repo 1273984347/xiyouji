@@ -272,6 +272,46 @@ function check(ok, label, detail) {
     await page.close();
   }
 
+  // ---------- S1 站内搜索页（W807 索引刷新后功能面） ----------
+  {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(String(e.message).slice(0, 80)));
+    await page.goto(url('data/search.html'), { waitUntil: 'load' });
+    await page.waitForTimeout(800);
+    await page.fill('#q', '孙悟空');
+    await page.click('#go');
+    await page.waitForTimeout(1200);
+    const s1 = await page.evaluate(() => {
+      const box = document.getElementById('results');
+      const txt = (box && box.innerText) || '';
+      return {
+        rows: document.querySelectorAll('#results tbody tr').length,
+        summary: (txt.split('\n')[0] || '').trim()
+      };
+    });
+    check(s1.rows > 0 && errors.length === 0,
+      'S1 搜索页离线检索有结果且无脚本错误', JSON.stringify({ ...s1, errors: errors.slice(0, 2) }));
+    // S1b：W807 刷新的回归防线——《协议边界速查》为刷新后新增入库的文档，
+    // 刷新前索引无此条目 → 标题单元格精确命中断言在刷新前必然失败
+    //（doc 条目 61→111 是本批的实质增量；用「标题单元格全等」而非「文本包含」——
+    //   kw 子串弱匹配会让「边界」等词条也命中，文本包含断言不具区分力）
+    await page.fill('#q', '协议边界速查');
+    await page.click('#go');
+    await page.waitForTimeout(1200);
+    const s2 = await page.evaluate(() => {
+      const rows = Array.from(document.querySelectorAll('#results tbody tr'));
+      const titles = rows.map((tr) => {
+        const td = tr.querySelectorAll('td');
+        return td.length > 1 ? (td[1].textContent || '').trim() : '';
+      });
+      return { rows: rows.length, exactHit: titles.indexOf('协议边界速查') >= 0 };
+    });
+    check(s2.exactHit,
+      'S1b 刷新后新增文档《协议边界速查》可被检索到（标题精确命中）', JSON.stringify(s2));
+    await page.close();
+  }
+
   await browser.close();
   console.log(bad === 0 ? 'W674-E2E-PASS' : 'W674-E2E-FAIL: ' + bad + ' 项');
   process.exitCode = bad === 0 ? 0 : 1;
