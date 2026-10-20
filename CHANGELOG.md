@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W824），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W826），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,32 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W826（2026-10-20）：界面视觉重设计细化规格批（五项裁决落地 + 实算参数 + 迁移批次清单）
+
+> **来源**：用户令「帮我给界面出一版重设计：视觉层级、配色与字体体系、间距栅格、组件样式统一都要升级，保留原有功能结构不乱动，**先出设计方向再细化**」——W819 交付设计方向后，用户就方向文档 §10 的五个议题**逐条选中推荐选项**（对比度基线 / 朱砂实底限额 / 容器档位 / 夜读模式地位 / 迁移节奏），本批据此把方向翻译为**可执行规格**。
+> - **文件**：docs/11-方案报告/界面视觉重设计细化规格-v4-2026-10-20.md、docs/11-方案报告/界面视觉重设计方向-v4-2026-10-20.md（v1.1 订正）、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、scripts/_w826_contrast_audit.py、scripts/_w826_container_survey.py、scripts/_w826_migration_plan_check.py、scripts/output/_w826_contrast_audit.json、scripts/output/_w826_container_survey.json、scripts/output/_w826_migration_plan_check.json、scripts/index.md、scripts/output/index.md、site/data/search.html、site/en/search.html。
+> - **五项裁决（2026-10-20 用户逐条确认）**：① 对比度基线＝正文 AA+ ≥7:1 作目标线 · AA ≥4.5:1 作红线（元信息/图形边界 ≥3:1）；② 朱砂实底每页 ≤3 处（严口径）；③ 容器三档 760 / 1120 / 1320（dashboard 1536 降档）；④ 夜读模式继续与浅色平级（改造量翻倍）；⑤ 迁移每批 ≤10 页灰度。
+> - **取证①（对比度实算·`scripts/_w826_contrast_audit.py`·WCAG 2.1）**：17 组比值实跑，**5 项未达标**并给出三条修法取值——朱砂落页面底 4.47→**4.50**（新增 `--accent-text: #C7463A`）· 图表赭金 2.42→**3.01**（深档 `--chart-3: #B38F58`）· 暗色朱砂 4.35→**4.50**（`#E46250`）；另 `--accent-soft` 1.80:1 → 降为纯装饰、**禁作交互边界**，`--chart-5` 米灰 1.55:1 → 仅作底色。
+> - **取证②（推翻 W819 估算·两处）**：`--ink-3` 现役 `#9A9280` 实测 **3.09:1 已达标** → **撤销**方向文档「加深至 #8A8271」的结论；容器「四档并存」实为**现役主力 1320**（data/en 合计 166 页纯 1320，1200 仅存于 DESIGN.md §3.1 规范条文）→ 待迁移面由「四档并存」收敛为 **18 页**（`scripts/_w826_container_survey.py` 实测）。
+> - **取证③（迁移批次对拍·`scripts/_w826_migration_plan_check.py`）**：§6 批次清单对拍磁盘——site/data 87 页 + 根 8 页 **0 漏 0 重** · 每批 ≤10 · reader 622 页单批 → 判定 PASS。
+> - **规格交付（细化规格文档 11 节）**：§3 五项裁决逐条落地细则（朱砂实底定义与白名单、容器迁移映射 18 页明细、暗色双组色板与三档硬指标）· §4 **v4 令牌终稿**（纯加法 +62 变量 ≈ +2.9 KB·不改任何现役取值⇒857 页视觉零变化·须同批上调 DESIGN.md §4A.8 预算至 +3 KB）· §5 **24 组件规格卡**（含 10 张重点卡：用途 / 结构 / 令牌 / 五态 / 禁改项）· §6 迁移批次清单 11 批 · §7 **阶段 1 六判据**（含 J2「现役页面 computed-style 全量快照零差异」探针设计·仓内首次落视觉回归载体）· §8 W819 估算值订正表；同步将 W819 方向文档升 v1.1（§4.3 对比度表改实算值、§10「待裁决项」改「裁决记录」）。
+> - **让号链（两次让号·可复算时间线）**：原编 W822（干扰治理批已落地：safe_commit.py 18:37:43 · preflight_check.py 18:41:41 · CHANGELOG W822 段在库）→ 让至 W824（干扰治理批改号后所占）→ 再让至 **W826**（台账 max=825·站内阅读批取 W825·现势 bullet 已指 W827）；本批文件名前缀与台账行号统一为 W826。
+> - **范围纪律**：**细化 ≠ 实施**——未落任何令牌/组件/页面改动，`site/` 857 页**视觉 0 改动**（仅搜索索引 2 页机械刷新）· DESIGN.md 0 改动 · tokens.css/system.css 0 改动 · DOM 类名与功能结构 0 改动（用户硬约束「保留原有功能结构不乱动」）。
+> - **验证**：三脚本实跑复现全部计数与比值（退出 0）· 批次清单对拍 PASS · 第 45 槽 0 FAIL · 第 46 槽 0 FAIL（zh 830 / en 872 与生成器实算一致）· `generate_csp.py --check` 856 页 0 漂移 · `py -3 scripts/stats.py --check` 16 键零差异。
+> - **状态**：已落地（本地提交 9114d968 + 收官登记 9ab0b094·未推送）；终稿规格见 `docs/11-方案报告/界面视觉重设计细化规格-v4-2026-10-20.md`；**下一步待用户确认**：阶段 1（令牌 v4 纯加法落地·首次触碰全站共享层 tokens.css 并触发 856 页内联级联）开工与否。
+
+### W825（2026-10-20）：审查发现第二批修复批（前端流式链路三项 + 门禁解析层格式鲁棒性）
+
+> **来源**：2026-10-20 全项目只读审查（前端面 + 门禁判据面）实证的缺陷，叠加并行会话 W818 批反馈的台账格式错位问题。
+> - **文件**：xiyouji-agent-web/src/utils/sseStream.ts、xiyouji-agent-web/src/utils/sseStream.test.ts、xiyouji-agent-web/src/hooks/useChat.ts、xiyouji-agent-web/src/hooks/useChat.streaming.test.ts、scripts/preflight_check.py、tests/unit/test_preflight_check.py、docs/00-导读/W批次编号对账表.md、scripts/output/_w825_spec.json。
+> - **缺陷①（SSE 帧跨片整帧丢失）**：服务端帧格式为 `data: <JSON>\n\n`（`server/sse.ts:58`），而一次网络读**不保证落在帧边界**——`tool_result` 帧可达 256KB 至 1MB（`server/engine/tools.ts` 的 READ_MAX_BYTES 与 RUN_MAX_BUFFER）必然被切成多片。旧实现逐片 `chunk.split('\n')` 独立处理：第一片是半截 JSON → 解析失败被 `catch {}` 静默丢弃；第二片是 JSON 残段 → 不以 `data: ` 开头被跳过 ⇒ **整帧事件凭空消失，无报错无日志**（工具条目永远停在「执行中…」、文本增量丢字）。且 `src/utils/sseStream.ts`（原设计的复用层）从未被引用，解析逻辑在两处各存一份。**修**：新增 `createSseLineSplitter()`（跨块行缓冲：末尾半行留待下一片，流结束时冲刷），`readChatStream` 与 `useChat` 内联解析**共用同一实现**（单一修复点，两处不再分叉）。**验**：帧被切成两片/逐字符时事件均被完整还原；200KB 大帧跨片还原零丢失；控制组（整帧一次到达、心跳与非法 JSON 帧跳过）行为不变。
+> - **缺陷②（流失败后永久「思考中…」且错误文案不可见）**：`init` 事件把消息 id 由 `tempAssistantMessageId` 改写为 `realAssistantMessageId`，而 catch 分支只按 temp 匹配 ⇒ **init 之后的任何异常都匹配不到任何消息** → 错误文案写不进、`isStreaming` 永为 true（`finally` 只复位 `isLoading`）→ 前端永久显示「思考中…」、反馈/复制/重新生成按钮永不出现。另一路径：SSE `error` 事件只写 `content`，而 `ChatMessages.renderAssistantContent` 优先渲染 `contentBlocks`（非空即跳过 content）⇒ **有内容块时错误提示完全不可见**。**修**：catch 分支同时匹配两个 id；finally 分支兜底复位消息流式态；错误文案**追加为文本块**（保留已生成的部分回答且错误可见）。**验**：源码级回归锚四条（catch 双 id 匹配、finally 复位、错误追加为文本块、停止链路 abort 接线）逐条钉住。
+> - **缺陷③（「停止」按钮不停止生成）**：`handleStop` 只 `setIsLoading(false)`，请求无 `AbortController` ⇒ 流继续推进、答案继续增长、服务端继续跑完本轮；且 `isLoading` 复位后可再次发送 ⇒ 同一会话两条并发流同时写状态；组件卸载也无清理（切页后无人观察的流继续改全局会话）。**修**：`AbortController` 接线（fetch 带 signal）+ 停止按钮 `abort()` + 卸载清理 + 停止时结束流式态。
+> - **缺陷④（台账解析层按固定下标读列 ⇒ 幻影在途行）**：认领行摘要若含裸竖线，Markdown 按竖线分列 ⇒ 行被切成 8/9 格（标准 7 格）⇒ `parse_ledger` 的 `cells[4]` 读到摘要残段（把批次号当状态）→ **已收官批次被永久判为在途**；`cells[6]` 读到认领会话列 → touches 变成非路径垃圾串。实测两行幻影：W764（8 格·状态读成「W764」·touches 读成「DSH 2026-10-16」）与 W750（touches 占位符「—」被当成一个路径条目）。**修**：状态列改为**右起首个紧匹配**「已收官/已闭环」形态的格（整格即状态，避免主题里偶然出现同词被误认），无匹配则回退 `cells[4]`；touches 改为**取末格**（touches 是固定末列，摘要里的裸竖线只让前列右移、末格不动）；touches 占位符归一为空集。**验**：修复前两条用例逐条变红、幻影在途行复现；修复后 W750 与 W764 两行幻影消失，在途清单只剩真实在途批次。
+> - **并发回退处置（如实记账）**：本批的解析层修复曾被 W822 批的整仓提交（`7fa31d82`）覆盖丢失（其特性已落 HEAD、我方改动被回退），按「并发提交回退的正确处置」**定点补回并单独提交**；同时 W822 批遗留未提交的 3 条干扰日志用例随本批一并入库（其源码特性已在 HEAD·测试悬空），提交信息中逐条标注归属。
+> - **验证**：前端 vitest **51 passed / 5 files**（原 41 → +10：帧缓冲 7 + 源码级不变量锚 4，含 2 条控制组保持绿）；`tsc --noEmit` **0 错**；agent-web 服务端测试 64 pass / 1 skip / 0 fail；`pytest tests/unit/test_preflight_check.py` **19 passed**（含 W822 遗留 3 条）；`ruff check scripts/` 0 违规；`check_doc_sync.py` 0 FAIL；`verify_delivery.py` 全量 51 段 0 FAIL。
+> - **状态**：已落地（本地提交·未推送）。
 
 ### W824（2026-10-20）：站内阅读入口打通批（T-04 执行前计划落库·实证 622 页 reader 阅读内容站内入链为 0·施工待下一轮）
 
