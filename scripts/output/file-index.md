@@ -11,6 +11,22 @@
 ---
 
 
+## W824 站内阅读入口打通批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md | W824 | 新增：T-04 执行前计划（外部评审稿逐条对盘 + 622 页 reader 内容站内入链为 0 的实证 + 入口打通 20 条验收判据 + 阅读页体验封装 W827 候选 + 12 项自检全过） |
+| docs/11-方案报告/README.md | W824 | 改：§二 登记 T-04 执行前计划（计划方案 5→6 篇） |
+| docs/00-导读/W批次编号对账表.md | W824 | 改：W824 认领行登记（两度让号后归位·严格 7 格）+ 现势 bullet 链 W824/W825/W826/W827 |
+| STRUCTURE.md | W824 | 改：report_docs 计数 34→36（现役报告 29〔含在途 2〕+ 索引 README 1 + 计划方案 6） |
+| scripts/output/stats.json | W824 | 改：report_docs 34→36（last_changed_by=W824） |
+| scripts/output/stats-changelog.json | W824 | 改：变更史登记本批（W824·report_docs 34→36） |
+| scripts/output/stats-index.md | W824 | 改：stats 反向索引重生成 |
+| scripts/output/_w824_spec.json | W824 | 新增：本批 spec 入库 |
+| scripts/output/_cascade_files_W824.txt | W824 | 新增：本批级联面清单 |
+| docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md | W824 | 改：§8 干扰日志补登 1 行（开工漂移 + 交集拒绝 + 两度号段争用·即时登记） |
+| docs/INDEX.md | W824 | 改：目录索引重生成（727 篇·含本执行前计划） |
+
 ## W823 数据库表设计审查报告落档批（2026-10-20）
 
 | 文件 | W | 说明 |
