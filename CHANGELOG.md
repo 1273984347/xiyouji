@@ -34,7 +34,7 @@
 > - **单测**：`tests/unit/test_check_search_index_fresh.py` 5 例（现网实跑 0 FAIL / 自检 5-5 / 判据单元 4 类漂移 / jieba 缺失 fail-closed / 挂载一致性点检）。
 > - **验证**：门禁 `--self-test` 5/5 + 单测 5 passed + 现网实跑 0 FAIL（zh 822 条 · en 864 条与实算一致）+ 第 41 门禁 0 FAIL + pytest 全量 + verify_delivery 全量 51 段 0 FAIL。
 > - **状态**：已落地（级联+提交按批次流程执行）。
-> - **文件**：scripts/check_search_index_fresh.py、scripts/_gen_search_index.py、tests/unit/test_check_search_index_fresh.py、scripts/verify_delivery.py、docs/agent/gates.md、AGENTS.md、scripts/index.md、tests/unit/index.md、scripts/output/index.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/output/_w809_spec.json。
+> - **文件**：scripts/check_search_index_fresh.py、scripts/_gen_search_index.py、tests/unit/test_check_search_index_fresh.py、scripts/verify_delivery.py、docs/agent/gates.md、AGENTS.md、README.md、scripts/index.md、tests/unit/index.md、scripts/output/index.md、scripts/output/README.md、scripts/output/stats.json、scripts/output/stats-index.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/output/_w809_spec.json。
 
 ### W808（2026-10-20）：Web Agent 全栈加固批
 > **来源**：用户令「全栈一遍（集成层 + 后端生产化）」+「测试三件套全上（单测 + 集成 + 前端 E2E）」+「完整 W808 批次施工但提交留用户」。审计 agent-web（仓库内唯一全栈应用：React 19 + Vite 8 + TS 前端 / Express 5 + better-sqlite3 后端）后发现三处**真实跨边界缺陷**与一批生产化缺口。
