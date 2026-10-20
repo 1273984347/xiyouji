@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
 <script src="../../js/theme-init.js"></script>
+<script src="../../js/reader-enhance.js" defer></script>
 <style>
   .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
@@ -52,6 +53,35 @@
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -61,6 +91,19 @@
     <a href="../../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/02-人物深度分析/玉皇大帝-方向二深化.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/people/玉皇大帝-方向二深化.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>玉皇大帝：三界至尊的统治逻辑</h1>
 <blockquote>
@@ -105,6 +148,10 @@
 <p>三界至尊，没有朋友。这不是修辞，是制度设计的必然结果。任何人坐在那个位置上，都不可能有朋友。因为朋友关系建立在平等和信任之上，而皇帝和任何人都不平等，也不应该信任任何人。他被供养在最高处，也被囚禁在最高处。蟠桃会是三界最盛大的权力社交场合，玉帝坐在首席，看着满天神佛觥筹交错——所有人都在笑，没有人对他说真话。悟空偷蟠桃那一回，把蟠桃会搅得天翻地覆。玉帝的反应不是心疼蟠桃，是愤怒——愤怒有人敢在他的社交场域里不守规矩。但他有没有那么一瞬间，觉得那只猴子搅得好？没有人知道。也许他散席后回到寝宫，站在瑶台边往下看了一眼——不是看猴子打到哪里了，是看瑶池里自己的倒影。波光一晃，倒影皱成一团。他觉得好累。不是身体累，是太久没有用过表情的那几块肌肉，忽然想动一动。他想做一个不是微笑、不是威严、不是忧虑的表情。他想做“松一口气”。</p>
 <p>后来他听说了猴子被压五行山后吃的铁丸喝的铜汁，听说了猴子被骗戴紧箍疼得满地打滚，听说了猴子在白虎岭被师父念紧箍咒念到跪地磕头告别。每次听到，他的手指都会在扶手上轻轻敲一下。太白金星以为他在幸灾乐祸。其实不是。他是在想：那只猴子起码有人疼。疼他的人就在身边，咒语一念就让他疼。他玉皇大帝的疼，没有人念咒语，也没有人知道疼在哪里。也许在下一次蟠桃会上，他会举起金杯对满天神佛说爱卿平身，然后饮尽杯中酒。酒是琼浆玉液，入口极醇。他不知道自己想喝的是不是这个。很多年前他还是凡人的时候，也许喝过一种辣嗓子的东西——不是酒，是渴。凤仙郡的百姓在米山面山金锁下面渴了三年，他们不知道，三界至尊也在渴——不是缺水，是缺一滴从他眼眶里滚出来的、不需要被任何人解读的东西。但他是玉帝，他的眼睛里不能流出来历不明的东西。他只能把它咽回去，用琼浆玉液压下去。然后说：众卿平身。</p>
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%8E%89%E7%9A%87%E5%A4%A7%E5%B8%9D%EF%BC%9A%E4%B8%89%E7%95%8C%E8%87%B3%E5%B0%8A%E7%9A%84%E7%BB%9F%E6%B2%BB%E9%80%BB%E8%BE%91&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E7%8E%89%E7%9A%87%E5%A4%A7%E5%B8%9D-%E6%96%B9%E5%90%91%E4%BA%8C%E6%B7%B1%E5%8C%96.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%8E%89%E7%9A%87%E5%A4%A7%E5%B8%9D%EF%BC%9A%E4%B8%89%E7%95%8C%E8%87%B3%E5%B0%8A%E7%9A%84%E7%BB%9F%E6%B2%BB%E9%80%BB%E8%BE%91&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E7%8E%89%E7%9A%87%E5%A4%A7%E5%B8%9D-%E6%96%B9%E5%90%91%E4%BA%8C%E6%B7%B1%E5%8C%96.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="../people/玉帝深化专题.html">← 上一篇</a><a href="../people/玉皇大帝外传.html">下一篇 →</a></nav>
 </main>
 </body>

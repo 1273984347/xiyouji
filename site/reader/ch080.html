@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第080回-姹女育阳求配偶心猿护主识妖邪.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch080.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第080回 姹女育阳求配偶 心猿护主识妖邪</h1>
 <blockquote>
@@ -1269,12 +1312,13 @@ td.num, th.num {
 <p><strong>第八十回 姹女育阳求配偶 心猿护主识妖邪</strong></p>
 <p>回目对仗极工。"姹女"对"心猿"，"育阳"对"护主"，"求配偶"对"识妖邪"——一妖一圣，一动一静，一欲一慧。<strong>"姹女"是妖精的女相，"心猿"是悟空的法号</strong>，吴承恩把两个人物的核心动作压缩成六个字：妖精要"育阳求配偶"，悟空要"护主识妖邪"。</p>
 <p>更冷的是"育阳"二字。妖精绑在树上，看似待救的弱女，实则要采唐僧的元阳以成太乙金仙——<strong>"育"字下得极准：阳不是抢的，是养的、培育的。</strong> 这不是粗鲁的劫色，是精心的炼丹之术。回目已把全回的冷写在标题里：救人的被救者害，识妖的被师斥。慈悲与智慧在这一回彻底错位。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>师徒离比丘国西行，过冬残春尽，又见一座高山峻岭。三藏起思乡之念，吟诗叹"行尽巫山峰十二，何时对子见当今"。八戒打趣"我佛如来舍不得那三藏经，想是搬了"，沙僧劝"只把工夫捱他"。师徒行至一派黑松大林，林深不见日月，藤葛缠枝，大虫摆尾，多年狐狢妆娘子，日久苍狼吼振林。三藏欲歇马化斋，悟空纵筋斗去半空，回头见松林中祥云缥缈——原是唐僧金蝉转世十世修行的瑞霭。忽见林南下冒出一股黑气，骨都都上升，悟空大惊，知是邪气，恐师父有难，即返云头按落林中。</p>
 <p>彼时三藏独坐松阴讽念《摩诃般若波罗密多心经》，忽听嘤嘤叫声"救人"。三藏起身穿过千年柏、万年松，只见大树上绑着一个女子，上半截使葛藤绑在树上，下半截埋在土里。那怪桃腮垂泪、星眼含悲，自称家住贫婆国，清明随父母扫墓，被强人拐来山内，众强人争她美色，遂将她绑在林间，已五日五夜。三藏慈心忍不住落泪，叫八戒解救。</p>
 <p>悟空自半空返回，一把揪住八戒耳朵掼了一跌，喝道"他是个妖怪，弄喧儿骗我们哩"。三藏斥悟空胡说，悟空道"这都是老孙干过的买卖，想人肉吃的法儿"。三藏听信，一行前进把怪撇了。那妖精咬牙恨齿，自思"那唐僧乃童身修行，一点元阳未泄，正欲拿他去配合，成太乙金仙"，遂不动绳索，把几声善言善语用一阵顺风嘤嘤吹入唐僧耳内："师父啊，你放着活人的性命还不救，昧心拜佛取何经？"</p>
 <p>唐僧在马上听得，勒马叫悟空去救。八戒沙僧皆称不曾听见，悟空亦称不曾听见。唐僧道"他叫得有理"。悟空劝"今日一个妖精的性命舍不得，要去救他"，三藏引"勿以善小而不为，勿以恶小而为之"。悟空道"这个担儿老孙却担不起，任你去救"。八戒解绳，那怪喜孜孜跟着唐僧出松林，见行者冷笑不止。行者道"我笑你时来逢好友，运去遇佳人"，又以王法条律谏——恐遇歹人拿送官司，打做奸情，问拐带人口。三藏喝"莫胡说"，决意带她同行。议定三藏下马与女子同走，八戒牵空马，沙僧挑担，行者拿棒辖着那女子。</p>
 <p>不上二三十里，天色将晚，见一座楼台殿阁。三藏先进去借宿，见前边破败不堪——长廊寂静，古刹萧疏，钟楼崩坏鼓无皮，佛祖金身没色，观音淋坏尽成泥。三藏摸着一口札在地下的铜钟，高声赞叹，惊动侍奉香火的道人。道人引三藏入三层门里，后边却青砖彩云墙、绿瓦琉璃殿，十分齐整。道人言此山多妖邪强寇，天阴来寺藏身，把前边破房舍与强人，从新另化施主盖了一所寺院，"清混各一，这是西方的事情"。山门上有五大字"镇海禅林寺"。喇嘛和尚迎出，见三藏俊雅，捻手捻脚以示亲近。小喇嘛出去请三徒，见行者八戒沙僧模样唬了两跌，回报"三四个妖怪站在那门首"。三藏笑释，一行入寺安歇。正是"积功须在慈悲念，佛法兴时僧赞僧"。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、采阳补阴的丹道暗语：妖精的"育阳"之术</h3>
 <p>本回最冷的设计，藏在妖精的自言自语里。她被悟空识破、唐僧撇下之后，咬牙恨齿道："那唐僧乃童身修行，一点元阳未泄，正欲拿他去配合，成太乙金仙。"——<strong>这不是普通的劫色，这是炼丹。</strong> "育阳"二字，是明代内丹学里的核心术语：以女鼎采男子元阳，补女子之阴，谓之"采阳补阴"。唐僧十世修行、童身未泄的元阳，在妖精眼中不是肉体，是药材；不是欲望，是工夫。</p>
@@ -1354,7 +1398,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch079.html">上一回</a> · <a href="ch081.html">下一回</a> · <a href="../index.html">站点首页</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/沙僧.html">沙僧</a> · <a href="people/如来.html">如来</a> · <a href="people/观音.html">观音</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD066 · 无底洞——当老鼠称自己为半截观音</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1427,7 +1471,8 @@ td.num, th.num {
 </li>
 </ol>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>却说比丘国君臣黎庶，送唐僧四众出城，有二十里之远，还不肯舍。三藏勉强下辇，乘马辞别而行，目送者直至望不见踪影
 方回
 。四众行彀多时，又过了 冬残春尽，看不了野花山树，景物芳菲，前面又见一座高山峻岭。三藏心惊问道：“徒弟，前面高山，有路无路，是必小心！”行者笑道：“师父这话，也不象个走 长路的，却似个公子王孙，坐井观天之类。自古道：山不碍路，路自通山。何以言有路无路？”三藏道：“虽然是山不碍路，但恐险峻之间生怪物，密林深处出妖 精。”八戒道：“放心，放心！这里来相近极乐不远，管取太平无事！”师徒正说，不觉的到了山脚下。行者取出金箍棒，走上石崖叫道：“师父，此间乃转山的路 儿，忒好步，快来快来！”长老只得放怀策马。沙僧教：</p>
@@ -1540,8 +1585,13 @@ td.num, th.num {
 嵘
 眈
 旰
-匦</p>
+匦</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E5%85%AB%E5%8D%81%E5%9B%9E%20%E5%A7%B9%E5%A5%B3%E8%82%B2%E9%98%B3%E6%B1%82%E9%85%8D%E5%81%B6%20%E5%BF%83%E7%8C%BF%E6%8A%A4%E4%B8%BB%E8%AF%86%E5%A6%96%E9%82%AA&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch080.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E5%85%AB%E5%8D%81%E5%9B%9E%20%E5%A7%B9%E5%A5%B3%E8%82%B2%E9%98%B3%E6%B1%82%E9%85%8D%E5%81%B6%20%E5%BF%83%E7%8C%BF%E6%8A%A4%E4%B8%BB%E8%AF%86%E5%A6%96%E9%82%AA&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch080.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch079.html">← 上一篇</a><a href="ch081.html">下一篇 →</a></nav>
 </main>
 </body>

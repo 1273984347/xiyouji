@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第001回-灵根育孕源流出.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch001.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第001回 灵根育孕源流出 心性修持大道生</h1>
 <blockquote>
@@ -1268,9 +1311,10 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第一回 灵根育孕源流出 心性修持大道生</strong></p>
 <p>回目为对联形式，"灵根"对应"心性"，"育孕源流出"对"修持大道生"。回目已经埋下全书最大伏笔：石猴的诞生与道心的萌发，本就是一体两面。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>本回是全书开篇，从盘古开天辟地讲起，落到东胜神洲傲来国花果山。山顶一块仙石受天真地秀、日精月华，孕育石卵，见风化作石猴。石猴在山中与群猴为伴，一日因发现瀑布源头水帘洞，被群猴拥戴为美猴王。</p>
 <p>享乐三五百年后，美猴王忽生远虑——怕将来年老血衰，被阎王老子管着。通臂猿猴告诉他，世间有三等名色不伏阎王管束：佛、仙、神圣。美猴王遂决意下山访道，求一个不老长生。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、宇宙观的开场</h3>
 <p>原著以"诗曰"开头，从"混沌未分天地乱"讲到"开辟从兹清浊辨"，再讲到"十二万九千六百岁为一元"的邵康节式宇宙观。这不仅是序曲，更是一张时间尺度表——告诉读者，下面的故事要从一万八百岁的"会"讲到一天十二个时辰，再讲到一只猴子的命运。</p>
@@ -1333,7 +1377,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch002.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/character-appearance.html">人物出场数据</a> · <a href="../data/philosophy.html">哲学可视化</a></p>
 <p>关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/菩提祖师.html">菩提祖师</a> · <a href="people/玉帝.html">玉帝</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD001 · 那块石头里，藏着所有故事的起点</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1358,7 +1402,8 @@ td.num, th.num {
 <p>「斜月三星」是个字谜——「心」字（斜月如卧钩，三星如三点）。回目后半句「心性修持大道生」，至此点题：猴王寻的不是一个外在的神仙，而是「心」的修持。菩提祖师赐名「孙悟空」——「鸿蒙初辟原无姓，打破顽空须悟空」。姓孙（子系婴儿之本论），名悟空（悟「空」即悟「心」）。第一章写完，主角的名字已经把全书的修行纲领藏在里头了。</p>
 <p>回末诗收束得好：「三阳交泰产群生，仙石胞含日月精。借卵化猴完大道，假他名姓配丹成。」出世不是终点，是起点。一块石头里，藏着所有故事的起点——也藏着「心」这个贯穿百回的种子。</p>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>诗曰：</p>
 <p>混沌未分天地乱，茫茫渺渺无人见。</p>
 <p>自从盘古破鸿蒙，开辟从兹清浊辨。</p>
@@ -1505,8 +1550,13 @@ td.num, th.num {
 煌
 毋
 卵
-傻</p>
+傻</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC1%E5%9B%9E%20%E7%81%B5%E6%A0%B9%E8%82%B2%E5%AD%95%E6%BA%90%E6%B5%81%E5%87%BA%20%E5%BF%83%E6%80%A7%E4%BF%AE%E6%8C%81%E5%A4%A7%E9%81%93%E7%94%9F&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch001.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC1%E5%9B%9E%20%E7%81%B5%E6%A0%B9%E8%82%B2%E5%AD%95%E6%BA%90%E6%B5%81%E5%87%BA%20%E5%BF%83%E6%80%A7%E4%BF%AE%E6%8C%81%E5%A4%A7%E9%81%93%E7%94%9F&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch001.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><span class="off">← 上一篇（无）</span><a href="ch002.html">下一篇 →</a></nav>
 </main>
 </body>

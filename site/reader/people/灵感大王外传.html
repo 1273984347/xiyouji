@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
 <script src="../../js/theme-init.js"></script>
+<script src="../../js/reader-enhance.js" defer></script>
 <style>
   .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
@@ -52,6 +53,35 @@
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -61,6 +91,19 @@
     <a href="../../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/02-人物深度分析/灵感大王外传.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/people/灵感大王外传.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>灵感大王·外传：冰层下面的供桌</h1>
 <blockquote>
@@ -86,6 +129,10 @@
 <p>观音在池边说了一句话：“以后就在这里修行。”他没吭声。鱼不会说话。他把头埋进泥里。泥里的电气石电压透过泥层还能感觉到一点残余，残余的电流频率和供桌盐晶压电的频率差了几个数量级。他不习惯。他知道自己需要重新习惯电气石，就像当年他需要习惯冰层下独自等待童男童女的那几百年。习惯之后什么都会好。但他还是把尾巴插在泥里没有拔出来。尾鳍上最后一丝粘液在恒河水里慢慢溶解，粘液里残留的通天河抗体在莲花池的洁净水环境里找不到任何病原体可以结合，抗体分子在池水里游荡了几圈，然后被电气石电场吸附在电气石表面，慢慢变性，失活。那层粘液是他在通天河的全部免疫史，是几百年来抵抗冰层下所有微生物侵袭的抗体库，是供桌在他身上留下的唯一生化印记。在紫竹林的电气石化池水里全部降解，降解产物被莲花吸收——来年夏天，莲花池里开了一朵比别的莲花都红的莲花。红不是色素，是抗体降解后的氨基酸序列和莲花花青素前体发生酰基化反应，改变了花青素的吸光波长。</p>
 <p>观音看到了那朵莲花。她认得那种红——不是紫竹林的颜色。是通天河冰层下被冻伤的孩子的脸颊上的红。她没有摘。她把那朵莲花留在了池心。灵感大王从池底浮上来，游过那朵莲花的时候侧线擦了一下花梗。花梗上有极细微的绒毛，绒毛划过侧线，感觉和供桌桌面上那片微光盐晶的麻差了几千倍。但方向是一样的——都是从左往右，从尾到头，沿着脊柱往上，最后到达脑干网状结构。他在花梗旁边停了一息。然后继续游。莲花池的池面很平静。通天河已经封冻。供桌上最后的泪盐正在被河苔假根的草酸慢慢溶蚀。那个被老石匠偏了一凿的凹坑里，燧石碎屑还在闪着极微的火花——是灵感大王尾鳍最后一次接触供桌时压电效应逆转产生的反向电压，把燧石里的铁离子激发到高能态。高能态铁离子在几百年后终于回落到基态，释放出一个光子。光子从凹坑里射出，穿过河苔的假根，穿过淤泥，穿过冰层，穿过腊月的夜空，最后消失在观音莲花池边的柳叶上。柳叶被那粒光子击中，晃了一下，晃动的频率和灵感大王在供桌上打盹时脑波θ波的频率一致。柳叶晃完之后恢复了正常。河里冰封如初。供桌在冰层下继续沉在淤泥里，慢慢被河苔全部覆盖。只有那片微光的泪盐晶还在石面下发出极淡的微光——不是光，是燧石和泪盐之间那层水玻璃薄膜被河底暗流推动时产生的压电发光。几百年后，陈家庄的人会把这截河填平，在上面建一座小学。小学操场正下方十几米深处，一张片麻岩供桌还在河底，桌面上那片微光已经微弱到无法被任何仪器检测。但每年腊月初八，操场上的孩子会觉得自己脚下的草地比平时暖一点。他们把耳朵贴在草地上，能听到极远极深处有一声极轻的扑通——不是石头的声音。是鱼食落入水中的声音。他们不知道扑通是什么意思。但他们记住了那种暖，每年腊月初八都会趴在草地上，把耳朵贴地，等那一声扑通。灵感大王已经不在了。扑通还在。</p>
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%81%B5%E6%84%9F%E5%A4%A7%E7%8E%8B%C2%B7%E5%A4%96%E4%BC%A0%EF%BC%9A%E5%86%B0%E5%B1%82%E4%B8%8B%E9%9D%A2%E7%9A%84%E4%BE%9B%E6%A1%8C&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E7%81%B5%E6%84%9F%E5%A4%A7%E7%8E%8B%E5%A4%96%E4%BC%A0.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%81%B5%E6%84%9F%E5%A4%A7%E7%8E%8B%C2%B7%E5%A4%96%E4%BC%A0%EF%BC%9A%E5%86%B0%E5%B1%82%E4%B8%8B%E9%9D%A2%E7%9A%84%E4%BE%9B%E6%A1%8C&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E7%81%B5%E6%84%9F%E5%A4%A7%E7%8E%8B%E5%A4%96%E4%BC%A0.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="../people/灵感大王.html">← 上一篇</a><a href="../people/燃灯古佛外传.html">下一篇 →</a></nav>
 </main>
 </body>

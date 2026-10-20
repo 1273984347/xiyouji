@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第052回-悟空大闹金山兜洞如来暗示主人公.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch052.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第052回 悟空大闹金山兜洞 如来暗示主人公</h1>
 <blockquote>
@@ -1268,9 +1311,10 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第五十二回 悟空大闹金山兜洞 如来暗示主人公</strong></p>
 <p>回目"大闹"是武戏，"暗示"是文戏，一武一文构成双线张力。<strong>"主人公"三字是全回的禅机眼目</strong>——明面指青牛精的"主人"太上老君，暗里却是如来对佛道权力边界的一次精算。如来不直说，让降龙伏虎点破，把"指认"的责任推给两个罗汉，自己始终不沾手。这是佛道两家最体面的一次默契。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>悟空盗回金箍棒、纵火龙烧洞，仍未能奈何青牛精。次日再战，众神兵器又被金刚琢套去。悟空无奈赴灵山求如来。如来以慧眼遥观早已识破青牛来历，却怕悟空"口敞"惹祸上灵山，不肯明言，只令十八罗汉携十八粒"金丹砂"助力。降龙、伏虎二罗汉奉如来密旨留在最后，待金丹砂亦被套去，方点破"上离恨天兜率宫太上老君处寻踪迹"。</p>
 <p>悟空直入兜率宫撞见老君，发现牛栏空空——青牛偷了金刚琢下界已七日。老君道出金刚琢乃过函关化胡之器，执芭蕉扇下界，一搧收金刚琢，二搧令青牛力软筋麻现本相，穿鼻系琢牵归。众神各取兵器散归，唐僧师徒获救启程。路旁忽有人叫"唐圣僧吃了斋饭去"，长老心惊，悬念留待下回。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、"主人公"禅机——如来的不沾手政治</h3>
 <p>如来"早已知识"却"不可与你说"，是全回最锋利的一笔。他怕的不是青牛，是老君。</p>
@@ -1437,7 +1481,7 @@ td.num, th.num {
 <blockquote>
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch051.html">上一回</a> · <a href="ch053.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/relationships.html">人物关系</a> · <a href="../data/character-appearance.html">人物出场</a> · <a href="../data/philosophy.html">哲学可视化</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD047 · 当悟空的人脉网撞上了一只牛</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1456,6 +1500,7 @@ td.num, th.num {
 <p>“山叫什么？洞叫什么？妖叫什么？”</p>
 <p>土地磕磕巴巴地交代了：山叫金兜山，洞叫金兜洞。洞主是一只独角兕大王——青牛精。手下有七八百小妖，建制比通天河的水族军队还完整。土地说到一半，忽然左右看了看，压低声音：“大圣，小老儿多说一句——您别自己进去。”</p>
 <p>悟空的眉头皱得更紧了。土地不是第一次见到妖怪，也不是第一次见到悟空。他见过悟空对付黄风怪、对付红孩儿、对付灵感大王。他从来没劝过悟空“别自己进去”。</p>
+</div></details>
 <h2>一、金箍棒被套走了</h2>
 <p>青牛精不是在等取经人。他是在等人来打他。</p>
 <p>悟空变成一只飞虫潜入金兜洞，看到的景象让他倒抽一口冷气。洞里不是普通的妖洞——石壁上刻着完整的防御阵法，小妖们操练的阵型是正规军的排兵布阵，兵器库里整整齐齐码着的不是抢来的刀枪，是统一制式的戈矛。独角兕大王坐在石座上，面前摆着三盘牛肉，手边放着一杆点钢枪。他吃牛肉。自己吃自己。悟空一时不知道该从哪个角度吐槽这件事。</p>
@@ -1554,7 +1599,7 @@ td.num, th.num {
 </li>
 </ol>
 <hr />
-<h2>原文全文</h2>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>话说孙大圣得了金箍棒，打出门前，跳上高峰，对众神满心欢喜。李天王道：“你这场如何”行者道：“老孙变化进他洞去，那怪物越发唱唱舞舞的，吃 得胜酒哩，更不曾打听得他的宝贝在那里。我转他后面，忽听得马叫龙吟，知是火部之物。东壁厢靠着我的金箍棒，是老孙拿在手中，一路打将出来也。”众神道： “你的宝贝得了，我们的宝贝何时到手？”行者道：“不难！</p>
 <p>不难！我有了这根铁棒，不管怎的，也要打倒他，取宝贝还你。”</p>
 <p>正讲处，只听得那山坡下锣鼓齐鸣，喊声振地，原来是兕大王帅众精灵来赶行者。行者见了，叫道：“好！好！好！正合吾意！</p>
@@ -1672,8 +1717,13 @@ td.num, th.num {
 寉
 㙮
 炡
-抎</p>
+抎</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%BA%94%E5%8D%81%E4%BA%8C%E5%9B%9E%20%E6%82%9F%E7%A9%BA%E5%A4%A7%E9%97%B9%E9%87%91%E5%B1%B1%E5%85%9C%E6%B4%9E%20%E5%A6%82%E6%9D%A5%E6%9A%97%E7%A4%BA%E4%B8%BB%E4%BA%BA%E5%85%AC&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch052.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%BA%94%E5%8D%81%E4%BA%8C%E5%9B%9E%20%E6%82%9F%E7%A9%BA%E5%A4%A7%E9%97%B9%E9%87%91%E5%B1%B1%E5%85%9C%E6%B4%9E%20%E5%A6%82%E6%9D%A5%E6%9A%97%E7%A4%BA%E4%B8%BB%E4%BA%BA%E5%85%AC&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch052.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch051.html">← 上一篇</a><a href="ch053.html">下一篇 →</a></nav>
 </main>
 </body>

@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第065回-妖邪假设小雷音四众皆遭大厄难.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch065.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第065回 妖邪假设小雷音 四众皆遭大厄难</h1>
 <blockquote>
@@ -1268,9 +1311,10 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>妖邪假设小雷音 四众皆遭大厄难</strong></p>
 <p>回目出自世德堂本《新刻出像官板大字西游记》第六十五回。七字二句，前句主"假"，后句主"难"——"假设"二字是全回之眼：所设者非寻常妖洞，而是雷音寺的形制；所假冒者非寻常妖王，而是如来佛祖本身。后句"四众皆遭大厄难"，"皆"字极重，自唐僧、八戒、沙僧至白龙马，连悟空亦被困金铙之内，此乃取经以来第一次全员被擒。"大厄难"三字承接前句之"假"——假佛最难辨，故其难最大。本回是小雷音寺事件的开端，黄眉老佛登场，亦为全书"假佛"主题最尖锐的一次正面展开。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>师徒离荆棘岭西行，时值春残，忽见高山楼阁，祥光蔼蔼，钟磬悠扬，宛若灵山。三藏急欲进拜，行者观气数言"少吉多凶"，三藏不听。至山门见"小雷音寺"四字，三藏仍以"三千诸佛，想是不在一方"自解，命取袈裟入内。殿中莲台上"佛祖"厉声喝行者不拜，行者识其是假，掣棒便打。半空叮狢一声，撇下一副金铙将行者合于其中；八戒、沙僧、三藏一齐被捉，绳缠索绑。"佛祖"乃妖王所化，限三昼夜将行者化为脓血。</p>
 <p>行者于金铙内使尽神通不能出，拘五方揭谛、六丁六甲亦掀不动。揭谛上天启奏玉帝，钦差二十八宿下界，亢金龙以角尖钻孔，行者变芥菜子钻其角窍而出。行者打碎金铙惊醒妖王，妖王自号"黄眉老佛"，使短软狼牙棒与行者斗五十回合不分胜负，忽解腰间白布搭包儿一幌，将行者、二十八宿、五方揭谛尽装去，捆入地窖。夜半行者脱身先救三众与诸神出，复返寻行李袈裟惊醒老妖。再战诸神再被搭包装去，唯行者预先知觉逃脱，立于东山顶上悲嗟，决意往武当山请荡魔天尊。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、"假设小雷音"——假佛真妖的信仰陷阱</h3>
 <p>小雷音寺之"假"，不在形制，在"位序"。作者写那楼阁"珍楼宝座，上刹名方"，"霞光缥缈龙宫显，彩色飘飖沙界长"，香花艳丽、瑞气缤纷，五百罗汉、三千揭谛、四金刚、八菩萨环列俨然——<strong>形制之真，已到无一破绽的地步。</strong> 唯一的破绽在山门三字与四字之差：唐僧先误读"雷音寺"三字，行者纠正"乃小雷音寺"。<strong>一字之差，正是假佛的全部秘密。</strong> 假佛不以丑陋惑人，而以"几乎全真"惑人——少一字、差一线，便是佛与妖的分界。山门内那一声"唐僧，你自东土来拜见我佛，怎么还这等怠慢？"尤冷：<strong>妖魔知道唐僧的名字、来历与去向，这不是随机遇妖，是定点伏击。</strong> 假佛以唐僧最虔诚的那一念为缺口——"遇佛拜佛"本是本分，却成了陷阱的入口。</p>
@@ -1342,7 +1386,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch064.html">上一回</a> · <a href="ch066.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/philosophy.html">心猿心性曲线</a> · <a href="../data/81-hardships.html">八十一难分布</a> · <a href="../data/magic-system.html">法术阵法可视化</a> · <a href="../data/monster-sociology.html">妖怪社会学</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/沙僧.html">沙僧</a> · <a href="people/白龙马.html">白龙马</a> · <a href="people/玉帝.html">玉帝</a> · <a href="people/如来.html">如来</a></p>
 </blockquote>
-<h2>原文全文</h2>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>这回因果，劝人为善，切休作恶。一念生，神明照鉴，任他为作。拙蠢乖能君怎学，两般还是无心药。趁生前有道正该修，莫浪泊。认根源，脱本壳。访 长生，须把捉。要时时明见，醍醐斟酌。贯彻三关填黑海，管教善者乘鸾鹤。那其间愍故更慈悲，登极乐。话表唐三藏一念虔诚，且休言天神保护，似这草木之灵， 尚来引送，雅会一宵，脱出荆棘针刺，再无萝蓏攀缠。四众西进，行彀多时，又值冬残，正是那三春之日：物华交泰，斗柄回寅。草芽遍地绿，柳眼满堤青。一岭桃 花红锦涴，半溪烟水碧罗明。几多风雨，无限心情。日晒花心艳，燕衔苔蕊轻。山色
 王维
 画浓淡，鸟声季子舌纵横。芳菲铺绣无人赏，蝶舞蜂歌却有情。师徒们也自 寻芳踏翠，缓随马步，正行之间，忽见一座高山，远望着与天相接。三藏扬鞭指道：“悟空，那座山也不知有多少高，可便似接着青天，透冲碧汉。”行者道：“古 诗不云只有天在上，更无山与齐。但言山之极高，
@@ -1452,7 +1496,8 @@ td.num, th.num {
 梊
 唓
 挿</p>
-<h2>深度解读</h2>
+</div></details>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD059 · 小西天——当灵山也是假的</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1468,6 +1513,7 @@ td.num, th.num {
 <p>“不是。”悟空说。</p>
 <p>“你怎么知道？”</p>
 <p>“灵山没有这么亮。”</p>
+</div></details>
 <h2>一、殿——假灵山，真寺庙</h2>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1566,6 +1612,10 @@ td.num, th.num {
 </ol>
 <hr />
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E5%85%AD%E5%8D%81%E4%BA%94%E5%9B%9E%20%E5%A6%96%E9%82%AA%E5%81%87%E8%AE%BE%E5%B0%8F%E9%9B%B7%E9%9F%B3%20%E5%9B%9B%E4%BC%97%E7%9A%86%E9%81%AD%E5%A4%A7%E5%8E%84%E9%9A%BE&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch065.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E5%85%AD%E5%8D%81%E4%BA%94%E5%9B%9E%20%E5%A6%96%E9%82%AA%E5%81%87%E8%AE%BE%E5%B0%8F%E9%9B%B7%E9%9F%B3%20%E5%9B%9B%E4%BC%97%E7%9A%86%E9%81%AD%E5%A4%A7%E5%8E%84%E9%9A%BE&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch065.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch064.html">← 上一篇</a><a href="ch066.html">下一篇 →</a></nav>
 </main>
 </body>

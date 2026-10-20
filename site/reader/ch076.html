@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第076回-心神居舍魔归性木母同降怪体真.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch076.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第076回 心神居舍魔归性 木母同降怪体真</h1>
 <blockquote>
@@ -1269,8 +1312,9 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第七十六回 心神居舍魔归性 木母同降怪体真</strong></p>
 <p>本回承第075回"心猿钻透阴阳窍魔王还归大道真"——上回悟空钻入老魔肚中，本回即以肚中弄法降老魔；启第077回"群魔欺本性一体拜真如"——本回末唐僧被抬入狮驼城，下回即三魔与三僧的决战。前句"心神居舍魔归性"言悟空居妖魔之腹收伏其心，后句"木母同降怪体真"言八戒同降二魔——"木母"即八戒（亥猪属水，水生木故称木母），"心神"即悟空（心猿），一主一辅，是本回的结构骨架。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>悟空在老魔肚中，老魔装死求饶，三魔教老魔咬悟空，悟空以金箍棒试之，迸碎老魔门牙。三魔激将，悟空拴绳于老魔心肝，从鼻孔飞出，扯绳如放风筝，老魔跌落黄土成坑。三魔伪降，愿抬轿送唐僧过山。悟空收绳回山东，见八戒正在分行李散伙——八戒谎报悟空已死。悟空打八戒一掌，告知已降老魔。三魔回洞，二魔不服，点三千小妖叫战。八戒出战，腰系悟空之绳为"救命索"，却败阵被二魔以鼻子卷走。悟空变蟭蟟虫随入洞，二魔将八戒捆浸池塘。悟空变勾司人诈八戒私房银——八戒藏于左耳眼儿四五钱银子，被悟空搜去。悟空救八戒，二人打出洞门。二魔赶出，悟空以棒搠其鼻孔，与八戒牵鼻如象奴，将二魔拉至唐僧前。二魔跪降，愿抬轿送师。三魔暗设调虎离山计——选十六小妖抬轿、三十小妖沿途设斋，送至四百里外狮驼城，城中接应人马拿唐僧。师徒欢然上轿，行四百里见城池，城中满布妖魔。三魔忽举方天戟打悟空，老魔砍八戒，二魔刺沙僧，三对三混战。十六小妖抢马担，将唐僧抬入城中。唐僧昏沉举眼无亲——本回至此而止。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、心神居舍与拴心绳</h3>
 <p>悟空在老魔肚中，将尾上毫毛变作四十丈绳，"一头拴着妖怪的心肝系上，打做个活扣儿"，从鼻孔飞出，扯绳如放风筝。此即"心神居舍魔归性"之落处——心神居于妖魔之舍（腹中），以绳拴其心，妖魔之性方归。绳是假，拴心是真；"心"字在此有了实写——妖魔之心被拴，方知"心猿"之"心"可主可伏。</p>
@@ -1340,7 +1384,7 @@ td.num, th.num {
 <blockquote>
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch075.html">上一回</a> · <a href="ch077.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/relationships.html">人物关系</a> · <a href="../data/character-appearance.html">人物出场</a> · <a href="../data/philosophy.html">哲学可视化</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD064 · 狮驼岭——当尸山血海铺成了路</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1353,6 +1397,7 @@ td.num, th.num {
 <p>气压不对。不是暴风雨前的低气压，不是高山上的缺氧，是负压——像有人在远处不断抽走这片区域的空气，而周围的空气来不及补充。悟空也感觉到了。金箍棒横在肩上，棒身压着后颈那块蝎子精留下的三层疤，疤下的筋脉在跳，不是疼——是预警。</p>
 <p>狮驼岭是八十一难里面积最大、驻妖密度最高、结果最惨烈的一站。之前所有劫难中“被吃掉”的叙事大多停留在个体层面——两个随从、几个村民、被吞进人种袋或蟒腹。但狮驼岭把“吃人”从个体行为变成了一座全自动工业流水线，从抓捕、分类、加工到消化，每一个环节都有专门的妖怪负责，每一步都有对应的洞穴和刑具。取经团队即将走进的不只是一个妖怪洞府——而是一座以人类骨血为唯一原料、运转了五百年的巨型工厂。它的恐怖不在于某个魔王的法力有多高，而在于每一个环节都如此平常——妖怪们像上工一样走进洞，像换班一样拖出骨头，像倒垃圾一样把骨灰撒进山涧。它们不觉得吃人有什么特别——对它们来说，那不是罪行，是生计。</p>
 <p>这就是取经路上最诚实的一站。没有误会，没有因果，没有被逼无奈的苦衷。只有骨头和吃骨头的人。</p>
+</div></details>
 <h2>一、骨——太白金星的预警</h2>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1422,7 +1467,7 @@ td.num, th.num {
 </li>
 </ol>
 <hr />
-<h2>原文全文</h2>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>话表孙大圣在老魔肚里支吾一会，那魔头倒在尘埃，无声无气，若不言语，想是死了，却又把手放放。魔头回过气来，叫一声：“大慈大悲齐天大圣菩萨！”行者听见道：“儿子，莫废工夫，省几个字儿，只叫孙外公罢。”那妖魔惜命，真个叫：“外公！</p>
 <p>外公！是我的不是了！一差二误吞了你，你如今却反害我。万望大圣慈悲，可怜蝼蚁贪生之意，饶了我命，愿送你师父过山也。”大圣虽英雄，甚为唐僧进步，他 见妖魔哀告，好奉承的人，也就回了善念，叫道：“妖怪，我饶你，你怎么送我师父？”老魔道：“我这里也没甚么金银、珠翠、玛瑙、珊瑚、琉璃、琥珀、玳瑁珍 奇之宝相送，我兄弟三个，抬一乘香藤轿儿，把你师父送过此山。”行者笑道：“既是抬轿相送，强如要宝。你张开口，我出来。”那魔头真个就张开口。那三魔走 近前，悄悄的对老魔道：</p>
 <p>“大哥，等他出来时，把口往下一咬，将猴儿嚼碎，咽下肚，却不得磨害你了。”原来行者在里面听得，便不先出去， 却把金箍棒伸出，试他一试。那怪果往下一口，扢喳的一声，把个门牙都迸碎了。行者抽回棒道：“好妖怪！我倒饶你性命出来，你反咬我，要害我命！我不出来， 活活的只弄杀你！不出来！不出来！”老魔报怨三魔道：“兄弟，你是自家人弄自家人了。且是请他出来好了，你却教我咬他。他倒不曾咬着，却迸得我牙龈疼痛， 这是怎么起的！“三魔见老魔怪他，他又作个激将法，厉声高叫道：</p>
@@ -1543,8 +1588,13 @@ td.num, th.num {
 䑩
 䂨
 䡕
-憂</p>
+憂</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%B8%83%E5%8D%81%E5%85%AD%E5%9B%9E%20%E5%BF%83%E7%A5%9E%E5%B1%85%E8%88%8D%E9%AD%94%E5%BD%92%E6%80%A7%20%E6%9C%A8%E6%AF%8D%E5%90%8C%E9%99%8D%E6%80%AA%E4%BD%93%E7%9C%9F&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch076.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%B8%83%E5%8D%81%E5%85%AD%E5%9B%9E%20%E5%BF%83%E7%A5%9E%E5%B1%85%E8%88%8D%E9%AD%94%E5%BD%92%E6%80%A7%20%E6%9C%A8%E6%AF%8D%E5%90%8C%E9%99%8D%E6%80%AA%E4%BD%93%E7%9C%9F&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch076.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch075.html">← 上一篇</a><a href="ch077.html">下一篇 →</a></nav>
 </main>
 </body>

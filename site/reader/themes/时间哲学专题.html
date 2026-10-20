@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
 <script src="../../js/theme-init.js"></script>
+<script src="../../js/reader-enhance.js" defer></script>
 <style>
   .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
@@ -52,6 +53,35 @@
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -61,6 +91,19 @@
     <a href="../../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/时间哲学专题.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/themes/时间哲学专题.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>时间哲学专题</h1>
 <blockquote>
@@ -1048,6 +1091,10 @@
 <p><strong>本专题方法论价值</strong>：从"数学结构维度"（W083 八十一难结构学）+"比较文学维度"（W082 全球神话比较）+"组织学维度"（W084 取经团队组织学）转向"时间哲学维度"（W088 时间哲学），与 W074 数学随笔 / W074 宗教学随笔 / W074 天文学随笔形成"随笔浅尝 + 专题深化"三层结构。理论框架：奥古斯丁《忏悔录》第11卷（时间作为心灵延展）+ 海德格尔《存在与时间》（向死而生的时间性）+ 柏格森《时间与自由意志》（绵延 vs 钟表时间）+ 伊利亚德《永恒回归》（神话时间 vs 历史时间）+ 康德《纯粹理性批判》（时间作为先天直观形式）+ 阿甘本《剩余的时间》（弥赛亚时间）。核心发现：①《西游记》的四种时间形态（历史时间 / 神话时间 / 修行时间 / 数字时间）相互交错构成全书最复杂的时间结构 ②"山中方七日，世上几千年"是神话时间膨胀的文学表述，与爱因斯坦相对论跨世纪共鸣 ③"差八日"+"少一难"的双重差数是阿甘本"弥赛亚时间作为差数时间"命题的文学印证 ④明代历法多元主义（大统历+回回历）投射为小说的时间形态多元主义 ⑤时间与权力共生——神话时间=神权、历史时间=皇权、修行时间=宗教权、数字时间=算法权 ⑥奥古斯丁"时间心灵化"+海德格尔"向死而生"+柏格森"绵延 vs 钟表时间"+伊利亚德"永恒回归"+康德"时间先天直观"+阿甘本"弥赛亚时间"六位理论家命题在《西游记》中得到文学印证，构成跨世纪（5 世纪-21 世纪）的哲学—文学共鸣。</p>
 </blockquote>
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E6%97%B6%E9%97%B4%E5%93%B2%E5%AD%A6%E4%B8%93%E9%A2%98&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/themes/%E6%97%B6%E9%97%B4%E5%93%B2%E5%AD%A6%E4%B8%93%E9%A2%98.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E6%97%B6%E9%97%B4%E5%93%B2%E5%AD%A6%E4%B8%93%E9%A2%98&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/themes/%E6%97%B6%E9%97%B4%E5%93%B2%E5%AD%A6%E4%B8%93%E9%A2%98.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="../themes/时间叙事学专题.html">← 上一篇</a><a href="../themes/时间的政治学专题.html">下一篇 →</a></nav>
 </main>
 </body>

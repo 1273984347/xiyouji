@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第069回-心主夜间修药物君王筵上论妖邪.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch069.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第069回 心主夜间修药物 君王筵上论妖邪</h1>
 <blockquote>
@@ -1269,8 +1312,9 @@ td.num, th.num {
 <p><strong>心主夜间修药物 君王筵上论妖邪</strong></p>
 <p>回目出自世德堂本第六十九回。十四字二句，前句主"药"，后句主"妖"——"心主"指悟空（心猿为主），夜间制药；"君王"指朱紫国王，筵上自陈妖邪之祸。一医一妖，看似两事，实则同源：国王的"双鸟失群"之症，根由正是赛太岁掳走金圣宫。<strong>吴承恩把"医病"与"除妖"并置，暗示国政之疾与君主之疾互为表里</strong>——身体政治学在此回首次完整登场。</p>
 <p>"心主"二字尤需细味。悟空以"心猿"为号，此处称"心主"，是强调其在医疗场景中的主导地位。一个猴精，给一国之君悬丝诊脉、合药制药——这种身份倒置，是明代市民文化对"正统权威"的戏谑。<strong>医者不自知，患者不自知，唯有"心"能主之</strong>——这是全书"心性"主题在医国叙事中的一次投射。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>悟空以金线悬丝诊脉，断国王为"双鸟失群"之症。命太医院办八百八味药各三斤，夜至会同馆，只取大黄、巴豆、锅灰（百草霜）、白龙马尿，搓成三丸"乌金丹"。又召东海龙王打喷嚏化雨，得"无根水"送服。国王药后排下三年积滞，痊愈设宴。席间国王泣诉三年前端午赛太岁掳走金圣宫之祸，并引悟空看避妖楼。忽风响妖至，悟空迎击先锋，妖败走放火，悟空以酒杯灭之，遂请缨赴麒麟山降妖救后。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、悬丝诊脉的权力剧场</h3>
 <p>悟空以三条金线系国王手腕，"调停自家呼吸，分定四气、五郁、七表、八里、九候"——这是一套完整的中医脉学话语。但戏剧性在于：<strong>诊脉者是猴，被诊者是君</strong>。明代医者地位卑微，吴承恩却让一个"妖猴"凭医术跻身朝堂，甚至让国王跪拜谢恩。这种身份倒置，既是对"医"的抬举，也是对"君"的解构——国王的病，要靠一只猴子来医，则"君权神授"的神圣性何在？</p>
@@ -1342,7 +1386,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch068.html">上一回</a> · <a href="ch070.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/character-appearance.html">人物出场数据</a> · <a href="../data/philosophy.html">哲学可视化</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/白龙马.html">白龙马</a> · <a href="people/玉帝.html">玉帝</a> · <a href="people/太上老君.html">太上老君</a></p>
 </blockquote>
-<h2>原文全文</h2>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>第六十九回　心主夜间修药物　君王筵上论妖邪
 话表孙大圣同近侍宦官到于皇宫内院，直至寝宫门外立定。将三条金线与宦官拿入里面，吩咐：“教内宫妃后，或近侍太监，先系在圣躬左手腕下，按寸、关、 尺三部上，却将线头从窗棂儿穿出与我。”真个那宦官依此言，请国王坐在龙床，按寸、关、尺，以金线一头系了，一头理出窗外。行者接了线头，以自己右手大指先托着食指，看了寸脉；次将中指按大指，看了关脉；又将大指托定
 无名
@@ -1643,7 +1687,8 @@ td.num, th.num {
 断酒
 喜翁文尧员外病起
 寄少常卢同年</p>
-<h2>深度解读</h2>
+</div></details>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD061 · 朱紫国——当拆开比降妖更难</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1654,6 +1699,7 @@ td.num, th.num {
 <p>白龙马的蹄铁在稀柿衕泡锈的那颗钉子，被沙僧用降妖杖的月牙刃起出来，换上了一颗新的。新钉子是沙僧自己打的——用火焰山焦土里筛出的铁砂熔成铁条，在溪边石头上敲敲打打了半夜，敲出来的钉子比原来的还长半指，钉进蹄铁之后从蹄面透出一小截尖，再用挫刀磨平。他打铁的时候八戒蹲在旁边看，说“老沙你以前是不是在流沙河开过铁匠铺”，沙僧没有回答，但他敲钉子的节奏在那一刻忽然流畅了半拍。不是生气的流畅——是被问到了一个曾经很熟悉的问题。流沙河底没有铁匠铺，但流沙河底有很多沉船。沉船上有铁钉，他把铁钉从朽木里拔出来，磨掉锈，在河底石头上敲直，串成锁链。那些锁链后来挂过九个骷髅头。现在他用同样的手法打了一颗新的蹄铁钉——这颗钉子不是挂骷髅的，是挂马蹄的。他把钉子钉进去的时候，白龙马的耳朵往后转了一下——不是疼，是金属穿过蹄铁孔时那种凉凉的触感。</p>
 <p>玄奘在马上翻开文牒，没有写字，只是在翻页。车迟国的焦痕，通天河的空白，女儿国的凤印，祭赛国的“寡人惭愧”，解阳山自诫，小西天“不是西天”——还有火焰山之后那一大片空白。这片空白他不知道该怎么写。稀柿衕没有国王，没有印，没有妖怪可以打，没有因果可以还。只有一条蛇和一堆烂柿子。他从怀里掏出那颗从稀柿衕带出来的柿核，核壳裂开的地方已经长出了一截半指长的嫩芽，白嫩嫩的，顶端两片胚叶还没展开，紧紧抱在一起像双手合十。他想了想，把这颗发了芽的柿核夹在通天河的空白和女儿国的凤印之间，不写字——让这颗种子替他写。</p>
 <p>远处，朱紫国的城墙出现在地平线上。不是女儿国那种白墙凤旗，也不是祭赛国那种青石铜铃。朱紫国的城墙是赭红色的——不是漆，是砖头本身的颜色。当地的红壤烧成的砖，出窑之后不浸水、不打磨，直接砌上墙，砖面粗得像砂纸，手指摸上去会勾丝。这种墙不防雅，只防实——防的是攻城锤，不是审美。城门口站着一排卫兵，盔甲擦得比镜子还亮，长戟的戟尖反射着午后阳光，每一根都像针一样扎眼。城门上方挂着一面铜锣，不是报警用的——是报喜用的。锣边刻着一行小字：有高医者敲此锣。这面锣很久没被人敲过了。</p>
+</div></details>
 <h2>一、病——朱紫国王的三年</h2>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1767,6 +1813,10 @@ td.num, th.num {
 </ol>
 <hr />
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E5%85%AD%E5%8D%81%E4%B9%9D%E5%9B%9E%20%E5%BF%83%E4%B8%BB%E5%A4%9C%E9%97%B4%E4%BF%AE%E8%8D%AF%E7%89%A9%20%E5%90%9B%E7%8E%8B%E7%AD%B5%E4%B8%8A%E8%AE%BA%E5%A6%96%E9%82%AA&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch069.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E5%85%AD%E5%8D%81%E4%B9%9D%E5%9B%9E%20%E5%BF%83%E4%B8%BB%E5%A4%9C%E9%97%B4%E4%BF%AE%E8%8D%AF%E7%89%A9%20%E5%90%9B%E7%8E%8B%E7%AD%B5%E4%B8%8A%E8%AE%BA%E5%A6%96%E9%82%AA&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch069.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch068.html">← 上一篇</a><a href="ch070.html">下一篇 →</a></nav>
 </main>
 </body>

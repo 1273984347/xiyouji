@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
 <script src="../../js/theme-init.js"></script>
+<script src="../../js/reader-enhance.js" defer></script>
 <style>
   .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
@@ -52,6 +53,35 @@
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -61,6 +91,19 @@
     <a href="../../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/02-人物深度分析/变的哲学-方向二深化.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/people/变的哲学-方向二深化.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>“变”的哲学：七十二变的能力边界</h1>
 <blockquote>
@@ -153,6 +196,10 @@
 <p>他把“来过这里”写在石头上，然后把石头留给风。他知道沙僧在罗汉堂门口捻麻绳——拆开、搓紧、绕成圈。他刻的那些凹痕，是另一种麻绳。不捡东西，不绕任何物件，只在石头上留下“这里曾经站过一只猴子”。他没有告诉沙僧，但路过的风总会帮他带信：一块石头上的凹痕和一根麻绳的捻法在同一个频率上共鸣。就像当年，蛛丝和紧箍在断掉的那一刻共振了三分之一秒。</p>
 <p>蹲石头的人身上会落花瓣。落花瓣不意味着他成了花，只意味着他足够静，静到花以为他是石头。斗战胜佛的斗战不是打斗，是抵抗。抵抗的不是妖怪，是“想动”的欲望。一动不动蹲着，是最高级别的抵抗。当他在灵山的石头上蹲成一块石头时，他在花果山当美猴王时所有的喧嚣、在天宫当齐天大圣时所有的愤怒、在取经路上所有的疼痛，都在这块石头上沉淀成同一个重量。石头不会说话，但石头会唱歌。声音很轻，比当年他在八卦炉里的心跳还轻。那是斗战胜佛唯一的咒语：不动。但不是死的不动，是花瓣落在肩上时，他不抖掉。</p>
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E2%80%9C%E5%8F%98%E2%80%9D%E7%9A%84%E5%93%B2%E5%AD%A6%EF%BC%9A%E4%B8%83%E5%8D%81%E4%BA%8C%E5%8F%98%E7%9A%84%E8%83%BD%E5%8A%9B%E8%BE%B9%E7%95%8C&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E5%8F%98%E7%9A%84%E5%93%B2%E5%AD%A6-%E6%96%B9%E5%90%91%E4%BA%8C%E6%B7%B1%E5%8C%96.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E2%80%9C%E5%8F%98%E2%80%9D%E7%9A%84%E5%93%B2%E5%AD%A6%EF%BC%9A%E4%B8%83%E5%8D%81%E4%BA%8C%E5%8F%98%E7%9A%84%E8%83%BD%E5%8A%9B%E8%BE%B9%E7%95%8C&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E5%8F%98%E7%9A%84%E5%93%B2%E5%AD%A6-%E6%96%B9%E5%90%91%E4%BA%8C%E6%B7%B1%E5%8C%96.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="../people/取经团队动力学深化专题.html">← 上一篇</a><a href="../people/哪吒.html">下一篇 →</a></nav>
 </main>
 </body>

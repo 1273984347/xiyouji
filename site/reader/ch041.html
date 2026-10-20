@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第041回-心猿遭火败木母被魔擒.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch041.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第041回 心猿遭火败 木母被魔擒</h1>
 <blockquote>
@@ -1268,10 +1311,11 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第四十一回 心猿遭火败 木母被魔擒</strong></p>
 <p>回目两句各写一人。"心猿遭火败"是悟空被三昧真火所伤，冷水一逼，几近气绝；"木母被魔擒"是八戒被假观音骗回洞府，装入皮袋。<strong>一个是败于火，一个是败于诈。</strong> 败于火是技不如人，败于诈是识不破伪。吴承恩把取经团队两位主力在同回内接连击溃，留下的破口只能由第三方——观音——来补。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>悟空与八戒寻至号山枯松涧火云洞，索要唐僧。红孩儿出战，悟空以牛魔王旧盟自居，称红孩儿为"贤侄"，红孩儿不认，举枪便刺。二十合不分胜负，八戒助战，红孩儿败阵，遂捶鼻喷火——三昧真火加上五辆小车（金木水火土），烟火漫天。悟空入火寻妖，被一口烟煼得眼花泪落，纵云退走，投涧水救火，<strong>被冷水一逼，火气攻心，三魂出舍，几近丧命</strong>。八戒以按摩禅法将其救活。</p>
 <p>悟空往东海借龙王私雨灭火，再战红孩儿。<strong>龙王私雨只浇得凡火，浇不灭三昧真火，反似火上浇油。</strong> 悟空再被烟攻，败走。悟空腰疼不能驾云，遣八戒往南海请观音。红孩儿识破来意，抢先赶至近路，变作假观音，将八戒骗回火云洞，装入如意皮袋。</p>
 <p>悟空变苍蝇入洞探听，知八戒被擒，又闻红孩儿遣六健将（云里雾、雾里云、急如火、快如风、兴烘掀、掀烘兴）往请"老大王"牛魔王来吃唐僧肉。悟空尾随六健将而去。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、认亲失败：旧盟约在新一代面前一文不值</h3>
 <p>悟空上门索人，第一张牌不是棍子，是"亲情"。他搬出五百年前与牛魔王等七兄弟结义的旧事，自称"老弟兄们那时节耍子时，还不曾生你哩"，要红孩儿认这个"贤叔"。</p>
@@ -1411,7 +1455,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch040.html">上一回</a> · <a href="ch042.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/magic-system.html">法术体系</a> · <a href="../data/monster-sociology.html">妖怪社会学</a> · <a href="../data/81-hardships.html">八十一难数据</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/沙僧.html">沙僧</a> · <a href="people/观音.html">观音</a> · <a href="people/牛魔王.html">牛魔王</a> · <a href="people/红孩儿.html">红孩儿</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD038 · 号山逢怪，红孩儿的第一场戏</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1446,7 +1490,8 @@ td.num, th.num {
 <li>红孩儿从“圣婴大王”到“善财童子”的转变，是自愿还是被迫？他在被刀穿双腿时喊的“愿”是真心还是求饶？一个人在暴力面前说出的“愿意”，和在没有压力时做出的选择，哪一个更接近真实的信仰？</li>
 </ol>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>善恶一时忘念，荣枯都不关心。晦明隐现任浮沉，随分饥餐渴饮。神静湛然常寂，昏冥便有魔侵。五行蹭蹬破禅林，风动必然寒凛。却说那孙大圣引八戒 别了沙僧，跳过枯松涧，径来到那怪石崖前，果见有一座洞府，真个也景致非凡。但见回銮古道幽还静，风月也听玄鹤弄。白云透出满川光，流水过桥仙意兴。猿啸 鸟啼花木奇，藤萝石蹬芝兰胜。苍摇崖壑散烟霞，翠染松篁招彩凤。远列巅峰似插屏，山朝涧绕真仙洞。昆仑地脉发来龙，有分有缘方受用。将近行到门前，见有一 座石碣，上镌八个大字，乃是“号山枯松涧火云洞”。那壁厢一群小妖，在那里轮枪舞剑的跳风顽耍。孙大圣厉声高叫道：“那小的们，趁早去报与洞主知道，教他 送出我唐僧师父来，免你这一洞精灵的性命！牙迸半个不字，我就掀翻了你的山场，躧平了你的洞府！”那些小妖闻有此言，慌忙急转身，各归洞里，关了两扇石 门，到里边来报：“大王，祸事了！”</p>
 <p>却说那怪自把三藏拿到洞中，选剥了衣服，四马攒蹄，捆在后院里，着小妖打干净水刷洗，要上笼蒸吃 哩，急听得报声祸事，且不刷洗，便来前庭上问：“有何祸事？”小妖道：“有个毛脸雷公嘴的和尚，带一个长嘴大耳的和尚，在门前要甚么唐僧师父哩。但若牙迸 半个不字，就要掀翻山场，躧平洞府。”魔
 王微
@@ -1559,8 +1604,13 @@ td.num, th.num {
 几
 任
 口
-表</p>
+表</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%80%E5%9B%9E%20%E5%BF%83%E7%8C%BF%E9%81%AD%E7%81%AB%E8%B4%A5%20%E6%9C%A8%E6%AF%8D%E8%A2%AB%E9%AD%94%E6%93%92&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch041.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%80%E5%9B%9E%20%E5%BF%83%E7%8C%BF%E9%81%AD%E7%81%AB%E8%B4%A5%20%E6%9C%A8%E6%AF%8D%E8%A2%AB%E9%AD%94%E6%93%92&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch041.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch040.html">← 上一篇</a><a href="ch042.html">下一篇 →</a></nav>
 </main>
 </body>

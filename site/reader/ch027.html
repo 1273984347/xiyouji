@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第027回-尸魔三戏唐三藏.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch027.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第 027回 尸魔三戏唐三藏 圣僧恨逐美猴王</h1>
 <blockquote>
@@ -1268,9 +1311,10 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>尸魔三戏唐三藏 圣僧恨逐美猴王</strong></p>
 <p>回目出自世德堂本《新刻出像官板大字西游记》。此回为取经团队首次内部危机，亦是唐僧"可得性启发"认知偏差的起源点。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>唐僧师徒行至白虎岭，尸魔白骨精为吃唐僧肉，三次变化接近：先变妙龄少女送饭，被悟空火眼金睛识破，一棒打倒；又变老妇寻女，再被识破打倒；最后变老翁寻妻女，三度被识破打杀。唐僧本就疑悟空滥杀，加上八戒进谗言挑拨，称悟空变化以掩饰罪行。唐僧大怒，连念紧箍咒，最终写下贬书，将悟空逐回花果山。悟空含泪拜别师父，临行前嘱咐沙僧照护唐僧，方才离去。</p>
 <p>此回暗藏三重危机：<strong>外敌</strong>（白骨精）、<strong>内乱</strong>（八戒谗言）、<strong>决裂</strong>（唐僧赶走悟空）。三重危机在同一回集中爆发，使白骨精事件成为全书最关键的转折点之一。</p>
+</div></details>
 <h2>重点要点</h2>
 <ol>
 <li><strong>认知偏差的起源</strong>：唐僧此前对万物信任（trust_wukong=8），此回首次建立"美女可能是妖"的认知，是可得性启发（availability heuristic）的典型起点。后续红孩儿变小孩、老鼠精变良女等多次事件中，唐僧的判断均受此回影响。</li>
@@ -1312,7 +1356,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch026.html">上一回</a> · <a href="ch028.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/81-hardships.html">八十一难数据</a> · <a href="../data/cognitive-psychology.html">认知心理</a> · <a href="themes/八十一难专题.html">八十一难专题</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/沙僧.html">沙僧</a> · <a href="people/观音.html">观音</a> · <a href="people/红孩儿.html">红孩儿</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD027 · 三打白骨精——信任坍塌，第一次取经团队破裂</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1328,7 +1372,8 @@ td.num, th.num {
 <hr />
 <p><strong>下一回预告</strong>：第31回，奎木狼。黄袍怪的真实身份终于揭晓——他不是野妖精，他是天庭二十八星宿之一，奎木狼。而下凡的动机，竟然与百花羞的前世有关。与此同时，悟空用一场干净利落的战斗证明了自己的不可替代性，玄奘也在铁笼里完成了无声的自省。贬书还在悟空怀里，但没有人再提那件事了。</p>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>却说三藏师徒，次日天明，收拾前进。那镇元子与行者结为兄弟，两人情投意合，决不肯放，又安排管待，一连住了五六日。那长老自服了草还丹，真似脱胎换骨，神爽体健。他取经心重，那里肯淹留，无已，遂行。</p>
 <p>师徒别了上路，早见一座高山。三藏道：“徒弟，前面有山险峻，恐马不能前，大家须仔细仔细。”行者道：“师父放心，我等自然理会。”好猴王，他在那马前，横担着棒，剖开山路，上了高崖，看不尽：峰岩重叠，涧壑湾环。虎狼成阵走，麂鹿作群行。</p>
 <p>无数獐豝钻簇簇，满山狐兔聚丛丛。千尺大蟒，万丈长蛇。大蟒喷愁雾，长蛇吐怪风。道旁荆棘牵漫，岭上松楠秀丽。薜萝满目，芳草连天。影落沧溟北，云开斗 柄南。万古常含元气老，千峰巍列日光寒。那长老马上心惊，孙大圣布施手段，舞着铁棒，哮吼一声，唬得那狼虫颠窜，虎豹奔逃。师徒们入此山，正行到嵯峨之 处，三藏道：“悟空，我这一日，肚中饥了，你去那里化些斋吃？”行者陪笑道：“师父好不聪明。这等半山之中，前不巴村，后不着店，有
@@ -1444,8 +1489,13 @@ td.num, th.num {
 䟍
 煁
 綳
-䔱</p>
+䔱</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%9B%9E%20%E5%B0%B8%E9%AD%94%E4%B8%89%E6%88%8F%E5%94%90%E4%B8%89%E8%97%8F%20%E5%9C%A3%E5%83%A7%E6%81%A8%E9%80%90%E7%BE%8E%E7%8C%B4%E7%8E%8B&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch027.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%9B%9E%20%E5%B0%B8%E9%AD%94%E4%B8%89%E6%88%8F%E5%94%90%E4%B8%89%E8%97%8F%20%E5%9C%A3%E5%83%A7%E6%81%A8%E9%80%90%E7%BE%8E%E7%8C%B4%E7%8E%8B&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch027.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch026.html">← 上一篇</a><a href="ch028.html">下一篇 →</a></nav>
 </main>
 </body>

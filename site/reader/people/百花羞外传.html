@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
 <script src="../../js/theme-init.js"></script>
+<script src="../../js/reader-enhance.js" defer></script>
 <style>
   .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
@@ -52,6 +53,35 @@
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -61,6 +91,19 @@
     <a href="../../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/02-人物深度分析/百花羞外传.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/people/百花羞外传.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>百花羞：被解救后，她去了哪里？</h1>
 <blockquote>
@@ -110,6 +153,10 @@
 <p>她被救回宝象国之后，父王问过她要不要改封号。百花羞这个名字太轻了，不适合一个从波月洞回来的人。她说不用。不是留恋这个名字，是改了名字又能怎样。百花还是百花，羞还是羞。她在波月洞里叫“公主”，孩子叫“娘”，黄袍怪叫她——“你”。他没有叫过她百花羞。他不认得这个名字。在他的叙事里，她是“侍香玉女的转世”，是“前情”，是“践约”，唯独不是“百花羞”。而她从头到尾，只想做百花羞。那个在御花园赏月、在母后膝上学绣花、在父王龙案旁偷蘸朱砂画小人的百花羞。那个七岁就会背全本《女诫》却偷偷用《女诫》的纸背面写“碗子山上有妖怪”的百花羞。她把那张纸折成小方块，塞在御书房书架最底层她够得着的那格，夹在《水经注》卷三和卷四之间。十三年后她回来，纸还在原处，字迹已经淡了，但“碗子山”三个字还能认。她在下面添了一行字：碗子山波月洞，皂角树一棵，溪水向西流。没有加句号。</p>
 <p>后来宫里新来的小宫女，不知道她的来历，只听说这位公主不太爱说话，有时候傍晚会一个人坐在桂花树下发呆。小宫女端着茶盘走过，轻声说：公主，您的茶。她接过来，道谢。小宫女问：公主，您在看什么。她指了指碗子山的方向。小宫女说那座山好丑，像一只倒扣的碗。她说：山上有棵皂角树，每年秋天结皂角，砸在地上嘣嘣响。小宫女说：那不是很吵吗。她没说话，低头喝了一口茶。茶是桂花茶。今年御花园的桂花开得太多了，她让宫女们全都摘下来，晒干，分给后宫所有人泡茶喝。一连喝了七天，喝到第八天，桂花终于不落了。她看着空空的桂花树，树杈间只剩下几片褐色的枯叶，被风吹得哗哗响。阳光从光秃秃的枝干间漏下来，落在她眼皮上，是暖的。她把茶喝完，对着空树笑了笑。不是桂花没了才笑，是她知道明年还会开，但她今年不用再闻了。茶盏见底，杯底沉着最后一朵没泡开的桂花苞，她用舌尖轻轻碰了一下，把杯盏放回茶盘上。那朵花苞在杯底慢慢展开，像睡了很久的人翻了个身。</p>
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%99%BE%E8%8A%B1%E7%BE%9E%EF%BC%9A%E8%A2%AB%E8%A7%A3%E6%95%91%E5%90%8E%EF%BC%8C%E5%A5%B9%E5%8E%BB%E4%BA%86%E5%93%AA%E9%87%8C%EF%BC%9F&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E7%99%BE%E8%8A%B1%E7%BE%9E%E5%A4%96%E4%BC%A0.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%99%BE%E8%8A%B1%E7%BE%9E%EF%BC%9A%E8%A2%AB%E8%A7%A3%E6%95%91%E5%90%8E%EF%BC%8C%E5%A5%B9%E5%8E%BB%E4%BA%86%E5%93%AA%E9%87%8C%EF%BC%9F&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E7%99%BE%E8%8A%B1%E7%BE%9E%E5%A4%96%E4%BC%A0.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="../people/百花羞-方向二深化.html">← 上一篇</a><a href="../people/紧箍儿的内侧-器物传记.html">下一篇 →</a></nav>
 </main>
 </body>

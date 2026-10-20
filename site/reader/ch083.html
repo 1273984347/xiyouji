@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第083回-心猿识得丹头姹女还归本性.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch083.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第083回 心猿识得丹头 姹女还归本性</h1>
 <blockquote>
@@ -1266,8 +1309,9 @@ td.num, th.num {
 </blockquote>
 <h2>回目解析</h2>
 <p>回目"心猿识得丹头 姹女还归本性"是对仗工整的禅机对句。"心猿"即孙悟空，禅宗以猿喻心，谓其躁动攀缘；"丹头"是内丹术语，指炼丹的本来真料、本来面目——心猿"识得"丹头，即悟空识破妖精本来面目（金鼻白毛老鼠精），亦即禅宗"明心见性"的西游转译。"姹女"本为内丹喻女子、喻阴、喻情，此处指老鼠精；"还归本性"是收编仪式——佛灯老鼠归佛门，妖性被佛性收摄。上句"识得"是悟，下句"还归"是归，一悟一归，完成心猿对姹女的照破与超度。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>悟空从妖精肚中以枣核钉撑口脱身，与老鼠精在山头大战。八戒、沙僧助战，鼠精用遗鞋计留下花鞋假身脱逃，回头再次摄走唐僧。八戒劝"事无三不成"，悟空三入无底洞，洞中已空，却在后堂发现供奉"尊父李天王之位"、"尊兄哪吒三太子位"的牌位香炉。悟空大喜，携牌位上南天门，于玉帝前告御状，状告李靖"闺门不谨，走出亲女"。玉帝派太白金星宣李天王见驾。天王大怒，以缚妖索捆行者欲杀。哪吒以剑架刀，道破真相：此妖乃三百年前灵山偷食香花宝烛的金鼻白毛老鼠精，蒙如来饶命，拜李靖为义父、哪吒为义兄，曾名半截观音、地涌夫人。金星出面调解，行者解绑。天王点天兵下界，于无底洞东南黑角落小洞中擒获鼠精、救出唐僧。师徒辞别天王，复上西行之路。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3><strong>"丹头"禅机：明心见性的妖精照破</strong></h3>
 <p>"丹头"是内丹学核心范畴，指炼丹的"真种"、"本来面目"。本回中，悟空三入无底洞，不见妖精，却见供桌牌位——这一"见"不是看见妖精，而是看见妖精的"出身根脚"。禅宗讲"明心见性"，妖精的"性"被悟空一照而破：原来不是姹女，而是佛灯老鼠。<strong>"识得丹头"的本质，是识破现象直抵本来</strong>——妖精的假面被揭穿，姹女之名归于金鼻白毛老鼠精之实。这正是心猿"火眼金睛"的禅机转译：照破的不只是妖，是"名相"。</p>
@@ -1359,7 +1403,7 @@ td.num, th.num {
 <blockquote>
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch082.html">上一回</a> · <a href="ch084.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/relationships.html">人物关系</a> · <a href="../data/character-appearance.html">人物出场</a> · <a href="../data/philosophy.html">哲学可视化</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD066 · 无底洞——当老鼠称自己为半截观音</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1432,7 +1476,8 @@ td.num, th.num {
 </li>
 </ol>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>却说三藏着妖精送出洞外，沙和尚近前问曰：“师父出来，师兄何在？”八戒道：“他有算计，必定贴换师父出来也。”三藏用手指着妖精道：“你师兄 在他肚里哩。”八戒笑道：“腌脏杀人！在肚里做甚？出来罢！”行者在里边叫道：“张开口，等我出来！”那怪真个把口张开。行者变得小小的，睮在咽喉之内， 正欲出来，又恐他无理来咬，即将铁棒取出，吹口仙气，叫“变！”</p>
 <p>变作个枣核钉儿，撑住他的上腭子，把身一纵跳出口外，就把铁棒顺手带出，把腰一躬，还是原身法象，举起棒来就打。那妖精也随手取出两口宝剑，丁当架住。两个在山头上这场好杀：</p>
 <p>双舞剑飞当面架，金箍棒起照头来。一个是天生猴属心猿体，一个是地产精灵姹女骸。他两个，恨冲怀，喜处生仇大会垓。那个要取元阳成配偶，这个要战纯阴结 圣胎。棒举一天寒雾漫，剑迎满地黑尘筛。因长老，拜如来，恨苦相争显大才，水火不投母道损，阴阳难合各分开。两家斗罢多时节，地动山摇树木摧。</p>
@@ -1559,8 +1604,13 @@ td.num, th.num {
 绩</p>
 <blockquote>
 <p>关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/沙僧.html">沙僧</a> · <a href="people/玉帝.html">玉帝</a> · <a href="people/如来.html">如来</a> · <a href="people/观音.html">观音</a> · <a href="people/哪吒.html">哪吒</a> · <a href="people/老鼠精-方向二深化.html">老鼠精</a></p>
-</blockquote>
+</blockquote></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E5%85%AB%E5%8D%81%E4%B8%89%E5%9B%9E%20%E5%BF%83%E7%8C%BF%E8%AF%86%E5%BE%97%E4%B8%B9%E5%A4%B4%20%E5%A7%B9%E5%A5%B3%E8%BF%98%E5%BD%92%E6%9C%AC%E6%80%A7&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch083.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E5%85%AB%E5%8D%81%E4%B8%89%E5%9B%9E%20%E5%BF%83%E7%8C%BF%E8%AF%86%E5%BE%97%E4%B8%B9%E5%A4%B4%20%E5%A7%B9%E5%A5%B3%E8%BF%98%E5%BD%92%E6%9C%AC%E6%80%A7&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch083.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch082.html">← 上一篇</a><a href="ch084.html">下一篇 →</a></nav>
 </main>
 </body>

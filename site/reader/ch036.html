@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第036回-心猿正处诸缘伏劈破旁门见月明.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch036.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第036回 心猿正处诸缘伏 劈破旁门见月明</h1>
 <blockquote>
@@ -1268,10 +1311,11 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第三十六回 心猿正处诸缘伏 劈破旁门见月明</strong></p>
 <p>回目两个动作都是内修语。"心猿正处"指悟空归于本位，诸缘自然降伏；"劈破旁门"指破除伪佛伪道，方见明月当空。<strong>一个是降伏，一个是破除。</strong> 降伏的是心，破除的是门。门有伪门，心无伪心。吴承恩用一寺一月的对照，把"内外之辨"写到了底。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>师徒辞别平顶山，行者备言菩萨借童子、老君收宝之事，三藏称谢，舍命投西。行至一座高山，三藏见山势崔巍，心生凄惨。行者宽慰，言"还在堂屋里转，不曾出大门"，又以青天为屋瓦、日月作窗棂喻天地之敞。红轮西坠，遥见山凹楼台迭迭，乃敕建宝林寺。</p>
 <p>三藏自恃文雅，独入借宿。僧官见其光头破衣，怒斥道人通报，令其"往前廊下蹲"。三藏闻言垂泪，自叹"人离乡贱"。再入方丈恳请，僧官以"老虎进了城，日前坏了名"为由相拒，历数往日游方僧之不端。三藏忍气而出，以"鬼也怕恶人"自解。行者入寺，打破石狮子立威，喝令五百僧众齐整出迎。僧官跪伏磕头，迎唐老爷入方丈。</p>
 <p>夜深明月当空，三藏对月怀归，口占古风一首。行者以月之晦朔弦望喻先天采炼，沙僧补以水火土三家相会，八戒以戏谑自喻"缺之不久又团圆"。三藏欲温习幼时经文，行者点破："佛未得见，经未曾取，你念的是那卷经儿？"众人睡下，长老独挑银灯默读。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、僧官的"伪佛"——名实之辨的极致</h3>
 <p>宝林寺是敕建大寺，"万佛阁对如来殿，朝阳楼应大雄门"，殿堂之盛，几追梵王宫。可寺中主事的僧官，却是个<strong>以貌取人、看门第下菜</strong>的势利之徒。他接客有定规："但只有城上来的士夫降香，我方出来迎接"——<strong>接的不是人，是身份</strong>。</p>
@@ -1359,7 +1403,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch035.html">上一回</a> · <a href="ch037.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/philosophy.html">哲学可视化</a> · <a href="../data/cultural-misreading.html">文化错位可视化</a> · <a href="../data/cognitive-psychology.html">认知心理可视化</a> · <a href="../data/deconstruction.html">解构作品可视化</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/沙僧.html">沙僧</a> · <a href="people/如来.html">如来</a> · <a href="people/太上老君.html">太上老君</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD036 · 乌鸡国的真假国王，与太子射猎的暗线</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1368,7 +1412,8 @@ td.num, th.num {
 <p>悟空可以打妖怪，但不能说服太子。太子的第一反应是拔剑砍人——对武力威胁，武力的回答是更大的武力。但玄奘用的是另一种力量：他拿出玉圭，语气平静，不急不缓地陈述事实。他是一个没有任何武力威胁的凡人和尚，正因如此，他说的话反而比悟空的火眼金睛更有说服力——太子不会觉得一个手无寸铁的和尚在威胁他。</p>
 <p>这是玄奘在西行路上逐渐获得的新角色：外交官。从宝象国开始，取经团队每到一国都需要通关文牒，这本身就是外交行为。乌鸡国更复杂——不仅要通关，还要帮一个被篡位的国王复位。这不是武力能解决的问题。悟空能打假国王，但不能替真国王拿回王位，因为“拿回王位”是一个政治程序，需要君臣之间的信任重建、需要王室内部的确认、需要一系列象征性的仪式（比如太子当众认父、王后当众确认、国王登基重新接受朝拜）。这些程序的执行者，只能是那个凡人——玄奘。</p>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>却说孙行者按落云头，对师父备言菩萨借童子、老君收去宝贝之事。三藏称谢不已，死心塌地，办虔诚，舍命投西，攀鞍上马，猪八戒挑着行李，沙和尚 拢着马头，孙行者执了铁棒，剖开路，径下高山前进。说不尽那水宿风餐，披霜冒露，师徒们行罢多时，前又一山阻路。三藏在那马上高叫：“徒弟啊，你看那里山 势崔巍，须是要仔细提防，恐又有魔障侵身也。”行者道：</p>
 <p>“师父休要胡思乱想，只要定性存神，自然无事。”三藏道：“徒弟呀，西天怎么这 等难行？我记得离了长安城，在路上春尽夏来，秋残冬至，有四五个年头，怎么还不能得到？”行者闻言，呵呵笑道：“早哩！早哩！还不曾出大门哩！”八戒道： “哥哥不要扯谎，人间就有这般大门？”行者道：“兄弟，我们还在堂屋里转哩！”沙僧笑道：“师兄，少说大话吓我，那里就有这般大堂屋，却也没处买这般大过 梁啊。”行者道：“兄弟，若依老孙看时，把这青天为屋瓦，日月作窗棂，四山五岳为梁柱，天地犹如一敞厅！”八戒听说道：“罢了！罢了！我们只当转些时回去 罢。”行者道：“不必乱谈，只管跟着老孙走路。”</p>
 <p>好大圣，横担了铁棒，领定了唐僧，剖开山路，一直前进。</p>
@@ -1483,8 +1528,13 @@ td.num, th.num {
 咩
 篦
 滏
-搡</p>
+搡</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%B8%89%E5%8D%81%E5%85%AD%E5%9B%9E%20%E5%BF%83%E7%8C%BF%E6%AD%A3%E5%A4%84%E8%AF%B8%E7%BC%98%E4%BC%8F%20%E5%8A%88%E7%A0%B4%E6%97%81%E9%97%A8%E8%A7%81%E6%9C%88%E6%98%8E&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch036.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%B8%89%E5%8D%81%E5%85%AD%E5%9B%9E%20%E5%BF%83%E7%8C%BF%E6%AD%A3%E5%A4%84%E8%AF%B8%E7%BC%98%E4%BC%8F%20%E5%8A%88%E7%A0%B4%E6%97%81%E9%97%A8%E8%A7%81%E6%9C%88%E6%98%8E&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch036.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch035.html">← 上一篇</a><a href="ch037.html">下一篇 →</a></nav>
 </main>
 </body>

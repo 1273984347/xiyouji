@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第097回-金酬外护遭魔毒圣显幽魂救本原.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch097.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第097回 金酬外护遭魔毒 圣显幽魂救本原</h1>
 <blockquote>
@@ -1270,8 +1313,9 @@ td.num, th.num {
 <p><strong>金酬外护遭魔毒 圣显幽魂救本原</strong></p>
 <p>回目出自世德堂本第九十七回。七字二句，前句写"酬"反遭"毒"——寇员外以金银斋僧酬谢外护，反因此招致杀身之祸；后句写"圣显"以救"本原"——悟空显圣通幽冥，将寇员外幽魂救回阳世，本原归位。<strong>"酬"是善因，"毒"是恶果；"显"是神通，"救"是慈悲</strong>——前句的反讽与后句的圆融构成全回张力。</p>
 <p>"外护"是佛教术语，指护持僧人的在家信众。寇员外斋僧万员，正是唐僧取经路上最后一位"外护"。然"金酬外护"四字已藏杀机——金银招魔，外护反遭毒手。吴承恩以此七字判语，写尽善报论的道德困境：<strong>行善不但未必得福，反可能因"金"招祸</strong>。这与明代理学家"善恶无定报"的怀疑论遥相呼应，是全书对"功德经济"最冷峻的反讽。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>寇员外送别唐僧当晚，铜台府地灵县一伙宿娼赌博的凶徒乘夜雨打劫寇家。员外舍不得财物，出门哀告，被贼人撩阴一脚踢死。寇妈妈因妒恨唐僧不受斋供，反栽赃陷害，教唆二子寇梁寇栋坐名告状："唐僧点着火，八戒叫杀人。沙和尚劫出金银去，孙行者打死我父亲。"刺史姜坤三差人捕获，恰逢师徒路遇真贼分赃，悟空定身擒贼，唐僧发心送还财物报恩，反被官兵误捉下狱。狱中脑箍、辖床加身，唐僧苦痛难禁，悟空却隐忍不施法力——盖因师父该有此一夜牢狱之灾。四更时分，悟空化身蜢虫，先赴寇家假托员外显魂，再赴刺史宅假托其伯父姜乾一神位显魂，复至地灵县以浪荡游神法身恐吓合县官吏。三处显应之后，寇梁递解状、县官报神迹、刺史大惊释放师徒。悟空复赴地府，地藏王菩萨喜其善念，延寇洪阳寿一纪，命金衣童子领出魂灵。悟空将魂化气藏于袖中，返回阳间，寇员外从棺中爬出，叩谢再造之恩，冤情大白。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、"金酬外护遭魔毒"的善报反讽</h3>
 <p>寇员外斋僧二十四年，恰恰"圆满"之夜，正是被贼人杀害之时。<strong>行善的"圆满"与灾祸的"降临"在同一夜重合——这是全书对善报论最锋利的一刀</strong>。贼人算计的逻辑极其冷峻："只有今日送那唐朝和尚的寇员外家，十分富厚"——金银因斋僧而显，魔毒因金银而至。<strong>"金"是"酬"的媒介，也是"遭魔"的引信</strong>。明代市民社会"为富不仁"的反面是"为富招祸"——寇员外的善，恰恰把他变成了贼人眼中的"肥羊"。吴承恩以此写尽善报论的悖论：善若被计量为"金"，则善即祸源。</p>
@@ -1357,7 +1401,7 @@ td.num, th.num {
 <blockquote>
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch096.html">上一回</a> · <a href="ch098.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/relationships.html">人物关系</a> · <a href="../data/character-appearance.html">人物出场</a> · <a href="../data/philosophy.html">哲学可视化</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD072 · 铜台府——当悟空学会了不做英雄</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1370,7 +1414,8 @@ td.num, th.num {
 </blockquote>
 <p><strong>第84回结束。野茶在粗瓷杯里凉了。茶摊的布棚被风吹得哗哗响，寇洪起身去加固棚绳，腿有点瘸，但手稳。张氏把灶里的柴火拨了拨，火光照在她脸上，手还在抖，但脸上没有泪。寇梁在收拾茶杯，他把悟空喝过的那个杯子单独放在一边——不是供奉，是明天继续用。</strong></p>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>且不言唐僧等在华光破屋中，苦奈夜雨存身。却说铜台府地灵县城内有伙凶徒，因宿娼、饮酒、赌博，花费了家私，无计过活，遂伙了十数人做贼，算道 本城那家是第一个财主，那家是第二个财主，去打劫些金银用度。内有一人道：“也不用缉访，也不须算计，只有今日送那唐朝和尚的寇员外家，十分富厚。我们乘 此夜雨，街上人也不防备，火甲等也不巡逻，就此下手，劫他些资本，我们再去嫖赌儿耍子，岂不美哉！众贼欢喜，齐了心，都带了短刀、蒺藜、拐子、闷棍、麻 绳、火把，冒雨前来，打开寇家大门，呐喊杀入。慌得他家里若大若小，是男是女，俱躲个干净。妈妈儿躲在床底，老头儿闪在门后，寇梁、寇栋与着亲的几个儿 女，都战战兢兢的四散逃走顾命。那伙贼，拿着刀，点着火，将他家箱笼打开，把些金银宝贝，首饰衣裳，器皿家火，尽情搜劫。那员外割舍不得，拚了命，走出门 来对众强人哀告道：“列位大王，彀你用的便罢，还留几件衣物与我老汉送终”那众强人那容分说，赶上前，把寇员外撩阴一脚踢翻在地，可怜三魂渺渺归阴府，七 魄悠悠别世人！众贼得了手，走出寇家，顺城脚做了软梯，漫城墙一一系出，冒着雨连夜奔西而去。</p>
 <p>那寇家僮仆、见贼退了，方才出头。及看时，老员外已死在地下，放声哭道：“天呀！主人公已打死了！”众皆伏尸而哭，悲悲啼啼。</p>
 <p>将四更时，那妈妈想恨唐僧等不受他的斋供，因为花扑扑的送他，惹出这场灾祸，便生妒害之心，欲陷他四众，扶着寇梁道：“儿啊，不须哭了。你老子今日也斋 僧，明日也斋僧，岂知今日做圆满，斋着那一伙送命的僧也！”他兄弟道：“母亲，怎么是送命的僧？”妈妈道：“贼势凶勇，杀进房来，我就躲在床下，战兢兢的 留心向灯火处看得明白，你说是谁？点火的是唐僧，持刀的是猪八戒，搬金银的是沙和尚，打死你老子的是孙行者。”</p>
@@ -1530,8 +1575,13 @@ td.num, th.num {
 齅
 鵟
 衉
-虈</p>
+虈</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%B9%9D%E5%8D%81%E4%B8%83%E5%9B%9E%20%E9%87%91%E9%85%AC%E5%A4%96%E6%8A%A4%E9%81%AD%E9%AD%94%E6%AF%92%20%E5%9C%A3%E6%98%BE%E5%B9%BD%E9%AD%82%E6%95%91%E6%9C%AC%E5%8E%9F&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch097.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%B9%9D%E5%8D%81%E4%B8%83%E5%9B%9E%20%E9%87%91%E9%85%AC%E5%A4%96%E6%8A%A4%E9%81%AD%E9%AD%94%E6%AF%92%20%E5%9C%A3%E6%98%BE%E5%B9%BD%E9%AD%82%E6%95%91%E6%9C%AC%E5%8E%9F&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch097.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch096.html">← 上一篇</a><a href="ch098.html">下一篇 →</a></nav>
 </main>
 </body>

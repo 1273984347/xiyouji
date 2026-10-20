@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第081回-镇海寺心猿知怪黑松林三众寻师.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch081.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第081回 镇海寺心猿知怪 黑松林三众寻师</h1>
 <blockquote>
@@ -1269,8 +1312,9 @@ td.num, th.num {
 <p><strong>镇海寺心猿知怪 黑松林三众寻师</strong></p>
 <p>回目出自世德堂本第八十一回。十四字二句，前句主"知"——悟空在镇海寺识破妖邪；后句主"寻"——三众回黑松林寻找被摄的师父。"知"与"寻"是一组因果：知怪在前，寻师在后。<strong>知而不防，仍是失师；寻而不舍，方见师徒</strong>。本回把"识"与"失"并置，是对"心猿"能力的首次正面质疑——悟空能知怪，却未能护师。</p>
 <p>"镇海寺"与"黑松林"两个地点亦成对照。寺是静修之所，林是险厄之地；妖精不在林中现身，反在寺中食僧——<strong>神圣空间被污染，是本回最不安的设定</strong>。明代寺院经济膨胀、戒律松弛，"寺中有妖"几乎是对当时佛教腐败的直接写照。吴承恩让妖精在佛殿食僧，比任何抨击都更锋利。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>师徒携黑松林所救女子宿镇海禅林寺。唐僧当夜病倒，三日不愈，欲修书辞唐王。悟空道破病根：金蝉子曾于听法时躧一粒米下界，该有三日病。寺僧暗泣，悟空追问，知三日间已被妖精吃了六个小和尚。唐僧初劝勿降妖，闻吃僧之事后方允。悟空变小和尚佛殿诱妖，与女子交战。妖精以花鞋化分身，真身潜入方丈摄走唐僧，至陷空山无底洞。悟空归见师失，怒打八戒沙僧，沙僧苦劝，三众回黑松林找寻。山神土地现身，告知妖精居陷空山无底洞，三众遂南下寻师。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、唐僧"躧米成病"的业报微观化</h3>
 <p>悟空道破病根：金蝉子听法打盹，"左脚下躧了一粒米下界来，该有这三日病"。<strong>这是全书最微观的业报案例</strong>——一粒米换三日病，因果如账，分毫不差。八戒惊呼"老猪吃东西泼泼撒撒的，也不知害多少年代病"，以市井之口道出众生皆业的普遍性。吴承恩以"米"为业，把佛门"粒米皆恩"的戒律讲得既庄严又家常——明代寺院斋僧惜米之风，于此可见。</p>
@@ -1342,7 +1386,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch080.html">上一回</a> · <a href="ch082.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/character-appearance.html">人物出场数据</a> · <a href="../data/philosophy.html">哲学可视化</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/沙僧.html">沙僧</a> · <a href="people/哪吒.html">哪吒</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD066 · 无底洞——当老鼠称自己为半截观音</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1415,7 +1459,8 @@ td.num, th.num {
 </li>
 </ol>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>话表三藏师徒到镇海禅林寺，众僧相见，安排斋供。四众食毕，那女子也得些食力。渐渐天昏，方丈里点起灯来，众僧一则是问唐僧取经来历，二则是贪 看那女子，都攒攒簇簇，排列灯下。三藏对那初见的喇嘛僧道：“院主，明日离了宝山，西去的路途如何？”那僧双膝跪下，慌得长老一把扯住道：“院主请起，我 问你个路程，你为何行礼？”那僧道：“老师父明日西行，路途平正，不须费心。只是眼下有件事儿不尴魀，一进门就要说，恐怕冒犯 洪威，却才斋罢，方敢大胆奉 告：老师东来，路遥辛苦，都在小和尚房中安歇甚好；只是这位女菩萨，不方便，不知请他那里睡好。”三藏道：“院主，你不要生疑，说我师徒们有甚邪意。早间 打黑松林过，撞见这个女子绑在树上。小徒孙悟空不肯救他，是我发菩提心，将他救了，到此随院主送他那里睡去。”那僧谢道：“既老师宽厚，请他到天王殿里， 就在天王爷爷身后，安排个草铺，教他睡罢。”三藏道：“甚好，甚好。”遂此时，众小和尚引那女子往殿后睡去。长老就在方丈中，请众院主自在，遂各散去。三 藏吩咐悟空：“辛苦了，早睡早起！”遂一处都睡了，不敢离侧，护着师父。渐入夜深，正是那：玉兔高升万籁宁，天街寂静断人行。银河耿耿星光灿，鼓发谯楼趱 换更。</p>
 <p>一宵晚话不题。及天明了，行者起来，教八戒沙僧收拾行囊马匹，却请师父走路。此时长老还贪睡未醒，行者近前叫声“师父。”那师父把头抬了一抬，又不曾答应得出。行者问：“师父怎么说？”长老呻吟道：“我怎么这般头悬眼胀，浑身皮骨皆疼？”八戒听说，伸手去摸摸，身上有些发热。呆子 笑道：“我晓得了，这是昨晚见没
 钱
@@ -1536,8 +1581,13 @@ td.num, th.num {
 伕
 䗖
 啿
-䁤</p>
+䁤</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E5%85%AB%E5%8D%81%E4%B8%80%E5%9B%9E%20%E9%95%87%E6%B5%B7%E5%AF%BA%E5%BF%83%E7%8C%BF%E7%9F%A5%E6%80%AA%20%E9%BB%91%E6%9D%BE%E6%9E%97%E4%B8%89%E4%BC%97%E5%AF%BB%E5%B8%88&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch081.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E5%85%AB%E5%8D%81%E4%B8%80%E5%9B%9E%20%E9%95%87%E6%B5%B7%E5%AF%BA%E5%BF%83%E7%8C%BF%E7%9F%A5%E6%80%AA%20%E9%BB%91%E6%9D%BE%E6%9E%97%E4%B8%89%E4%BC%97%E5%AF%BB%E5%B8%88&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch081.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch080.html">← 上一篇</a><a href="ch082.html">下一篇 →</a></nav>
 </main>
 </body>

@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第092回-三僧大战青龙山四星挟捉犀牛怪.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch092.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第092回 三僧大战青龙山 四星挟捉犀牛怪</h1>
 <blockquote>
@@ -1269,8 +1312,9 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第九十二回 三僧大战青龙山 四星挟捉犀牛怪</strong></p>
 <p>本回承第091回"金平府元夜观灯玄英洞唐僧供状"——上回唐僧元宵观灯，三尊假佛摄去唐僧与酥合香油，本回即三僧上门索战；启第093回——本回末师徒留月余，五更悄悄离寺西行，下回即入天竺国境。前句"三僧大战"言悟空八戒沙僧与三犀牛正面交锋，后句"四星挟捉"言四木禽星奉旨降犀——"三僧"对"四星"，"大战"对"挟捉"，前者人之力不能胜，后者天之力方能克，结构上是"人不能，天能"的递进。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>悟空挟八戒沙僧至青龙山玄英洞，变火焰虫飞入，见唐僧锁在后房檐柱上啼泣。悟空解锁领师出走，被妖惊觉，悟空顾不得师父，一路棒打出洞。三怪披挂出门，三僧三怪大战，八戒先被绊倒拖入洞，沙僧亦被捉。悟空筋斗云走脱，回慈云寺安抚众僧后上天求救。至西天门遇太白金星，金星点明三妖是犀牛之精，"若要拿他，只是四木禽星见面就伏"。悟空奏闻玉帝，玉帝差许天师同至斗牛宫点四木禽星——角木蛟、斗木獬、奎木狼、井木犴。四星随悟空下界，三犀见之害怕，现本相（山牛、水牛、黄牛）四散奔逃，三妖王亦现犀牛本相往东北跑。斗木獬、奎木狼扫荡群牛、解放唐僧八戒沙僧。悟空与井木犴、角木蛟追赶三犀至西洋大海，西海龙王敖顺遣太子摩昂点水兵相助。井木犴咬死辟寒儿，角木蛟赶回辟暑儿，辟尘儿被龙王兵围住。悟空教锯角剥皮，留角进贡——四只上天进玉帝，一只留府堂镇库，一只献灵山佛祖。悟空半空宣示金平府军民：假佛即犀牛，永免灯油之役。府县建四星降妖庙、唐僧生祠，留月余。长老恐误取经，五更悄悄离寺西行。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、三犀假佛与酥合香油</h3>
 <p>三犀牛精——辟寒大王、辟暑大王、辟尘大王——据玄英洞，年年元宵假扮佛像降临金平府，骗取酥合香油"价贵白金五万余两"。此是取经路上少见的"妖以佛名害民"——妖不在洞吃人，在观里受香。吴承恩以"假佛"二字，写尽民间以讹传讹、官民共谋的信仰骗局。三犀之名"辟寒辟暑辟尘"，看似祥瑞，实是妖名，点破"名"与"实"的颠倒。</p>
@@ -1340,7 +1384,7 @@ td.num, th.num {
 <blockquote>
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch091.html">上一回</a> · <a href="ch093.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/relationships.html">人物关系</a> · <a href="../data/character-appearance.html">人物出场</a> · <a href="../data/philosophy.html">哲学可视化</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD069 · 青龙山——当妖怪年年正月十五收灯油</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1410,7 +1454,8 @@ td.num, th.num {
 </blockquote>
 <p><strong>第86回结束。上元节当晚，金平府满城镜灯。无数面镜子里映着无数颗星，风从青龙山方向吹来，吹过灯炉，炉膛里的铜镜岿然不动。有老人说，那三只犀牛在天上看见这些光，会以为灯油还在烧。年轻人在镜子里看见的是今年的收成、明年的雨水。孩子们什么都不看，只是满街跑，手里的破碗晃着水，水面晃着一颗永远不灭的星。</strong></p>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>却说孙大圣挟同二弟滚着风，驾着云，向东北艮地上，顷刻至青龙山玄英洞口，按落云头。八戒就欲筑门，行者道：“且消停，待我进去看看师父生死如何，再好与他争持。”沙僧道：</p>
 <p>“这门闭紧，如何得进？”行者道：“我自有法力。”好大圣，收了棒，捻着诀，念声咒语，叫“变！”即变做个火焰虫儿。真个也疾伶！你看他：展翅星流光 灿，古云腐草为萤。神通变化不非轻，自有徘徊之性。飞近石门悬看，旁边瑕缝穿风。将身一纵到幽庭，打探妖魔动静。他自飞入，只见几只牛横敧直倒，一个个呼 吼如雷，尽皆睡熟。又至中厅里面，全无消息。四下门户通关，不知那三个妖精睡在何处。才转过厅房，向后又照，只闻得啼泣之声，乃是唐僧锁在后房檐柱上哭 哩。行者暗暗听他哭甚，只见他哭道：“一别长安十数年，登山涉水苦熬煎。幸来西域逢佳节，喜到金平遇上元。不识灯中假佛像，概因命里有灾愆。贤徒追袭施威 武，但愿英雄展大权。”行者闻言，满心欢喜，展开翅，飞近师前。唐僧揩泪道：“呀！西方景象不同，此时正月，蛰虫始振，为何就有萤飞？”行者忍不住，叫 声：“师父，我来了！”</p>
 <p>唐僧喜道：“悟空，我心说正月怎得萤火，原来是你。”行者即现了本相道：“师父啊，为你不识真假，误了多少路 程，费了多少心力。我一行说不是好人，你就下拜，却被这怪侮暗灯光，盗取酥合香油，连你都摄将来了。我当吩咐八戒沙僧回寺看守，我即闻风追至此间，不识地 名，幸遇四值功曹传报，说此山名青龙山玄英洞。我日间与此怪斗至天晚
@@ -1527,8 +1572,13 @@ td.num, th.num {
 凕
 㸊
 菳
-悺</p>
+悺</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%B9%9D%E5%8D%81%E4%BA%8C%E5%9B%9E%20%E4%B8%89%E5%83%A7%E5%A4%A7%E6%88%98%E9%9D%92%E9%BE%99%E5%B1%B1%20%E5%9B%9B%E6%98%9F%E6%8C%9F%E6%8D%89%E7%8A%80%E7%89%9B%E6%80%AA&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch092.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%B9%9D%E5%8D%81%E4%BA%8C%E5%9B%9E%20%E4%B8%89%E5%83%A7%E5%A4%A7%E6%88%98%E9%9D%92%E9%BE%99%E5%B1%B1%20%E5%9B%9B%E6%98%9F%E6%8C%9F%E6%8D%89%E7%8A%80%E7%89%9B%E6%80%AA&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch092.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch091.html">← 上一篇</a><a href="ch093.html">下一篇 →</a></nav>
 </main>
 </body>

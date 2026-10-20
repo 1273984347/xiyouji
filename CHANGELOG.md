@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W846），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W847），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,19 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W847（2026-10-21）：阅读页体验封装批（速览折叠 + 进度书签字号 + 每页反馈 + 幂等复验）
+
+> **来源**：用户令「开工全部做完」。W846 已把正文回灌做完，本批落地 W829 的体验封装本体四项（计划 AC-22~25）。
+> - **文件**：scripts/build_reader.py、site/js/reader-enhance.js、site/reader/、docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md、scripts/output/_w847_spec.json、docs/00-导读/W批次编号对账表.md。
+> - **AC-22 速览/深读折叠**：生成器把「剧情梗概 / 深度解读 / 原文全文」三段包进 `<details>`，折叠态只留一行标题；工具条加「展开全部 / 收起全部」一键切换。**为什么是三段不是两段**：只折 AC 字面的两节时，100 页实测折叠态高度平均仍有 84.2%、仅 17/100 达标——原文全文独占正文约 48.9%，不折它页面降不下来。加折原文后平均 45.1%、中位 40.2%、≤60% 达标 77/100。
+> - **AC-22 阈值如实记账（部分达标）**：仍有 23 页超 60%（最差 81.3%）。根因是这些页的深读内容不是单节，而是拆成多条独立 H2 分节（如「八、最后一个晨」占 27%），不在折叠集合内。要 100/100 达标须把「一、」到「九、」的分节也折叠，那样速览页会变成一排折叠条——本批不做，实测分布留档待按读者反馈再调。
+> - **AC-23 进度/书签/字号**：新增 `site/js/reader-enhance.js`（ES5 IIFE·零依赖·零外域）。三键 `reader.progress`（每页滚动百分比 map）/ `reader.bookmark`（收藏页清单）/ `reader.fontsize`（15–21px），顶部 3px 进度条实时反映位置；页面标识取生成器写入的 `data-page`，不用 `location.pathname`（后者在 file:// 与 http:// 下形态不同，会让同一页进度互不认）；localStorage 不可用时静默降级为无状态，不抛错。
+> - **AC-24 每页反馈**：文末「这页有帮助吗？」👍 / 👎 两条纯 `<a>`，跳 GitHub Issue 新建页并预填标题（含回目名）与正文（含页面 canonical URL），零外域脚本。
+> - **AC-25 幂等**：改造落地后在真仓连跑两次三段管线，二次 diff = **0 文件**。
+> - **验证**：Playwright 17 项交互断言全过（三键写入/刷新保持/跨页保持/字号生效/进度恢复/进度条宽度/展开全部），http 与 `file://` 双环境均可用；`generate_csp.py --check` 856 页 0 漂移；`stats.py --check` 17 键零差异（页数四项 88/138/622/9 不变）；`node --check` 通过；`check_doc_sync.py` 0 FAIL；`verify_delivery.py --scope full` 核心全部通过。
+> - **未做**：不动 `docs/` 源、不加外域请求、不推送远端。
+> - **状态**：已收官。
 
 ### W846（2026-10-21）：阅读页正文回灌批（三段管线重建·字级修复回灌 51 页）
 

@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第037回-鬼王夜谒唐三藏悟空神化引婴儿.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch037.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第037回 鬼王夜谒唐三藏 悟空神化引婴儿</h1>
 <blockquote>
@@ -1268,8 +1311,9 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>鬼王夜谒唐三藏 悟空神化引婴儿</strong></p>
 <p>回目出自世德堂本《新刻出像官板大字西游记》第三十七回。八字二句，前句主"阴"，后句主"阳"——鬼王夜谒为阴冤托梦，悟空神化为阳谋引婴。题眼在"夜"与"引"二字：夜为阴境之时，引为阳谋之动，全回结构由此二字定调。此回是乌鸡国故事弧的开篇，亦是全书少有的"鬼魂托梦"叙事，在取经途中嵌入政治寓言，为后续辨妖降魔铺设悬念。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>承接第036回宝林寺夜宿，唐僧于禅堂灯下诵《梁皇水忏》《孔雀真经》，三更时分阴风乍起，乌鸡国王冤魂夜谒托梦。鬼王诉说三年前大旱，全真祈雨有功，与之结为兄弟，却在御花园八角琉璃井边被推下淹死，全真变形篡位，禁太子入宫。唐僧允诺除妖，鬼王留下金厢白玉圭为表记。次日悟空设计，化作二寸小和尚"立帝货"藏于红匣中，又化白兔引太子入寺。悟空揭明真相，太子疑信参半，悟空嘱其回宫问母，以夫妻恩爱之情辨真假。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、鬼魂托梦的政治寓言</h3>
 <p>乌鸡国王被推入井、全真篡位、文武不识、阴司不告——这一整套叙事是明代靖难、夺门之变的隐喻投影。建文帝"不知所终"、景泰帝被废、英宗复辟——明代政治中的"真假君主"难题，被吴承恩以妖邪变形的奇幻笔法重写。<strong>鬼魂的"无门投告"——都城隍会酒、海龙王有亲、十代阎罗异兄弟——更是明代官场关系网的辛辣写照</strong>。</p>
@@ -1346,7 +1390,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch036.html">上一回</a> · <a href="ch038.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/character-appearance.html">人物出场数据</a> · <a href="../data/philosophy.html">哲学可视化</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD037 · 深读第37讲</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1357,7 +1401,8 @@ td.num, th.num {
 <p>二、号山的名字与红孩儿的来历</p>
 <p>山名“号山”，这个“号”字值得拆解。“号”有哭喊之意——号哭、哀号——暗示这座山里有一个会发出哭声的存在。同时“号”也有称号之意——名号、大号——暗示这座山的主人有一个响亮的来头。两种暗示最终都会在红孩儿身上交汇：他会用哭声引诱取经人，也会用一个极其响亮的名号震慑对手。</p>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>却说三藏坐于宝林寺禅堂中，灯下念一会《梁皇水忏》，看一会《孔雀真经》，只坐到三更时候，却才把经本包在囊里，正欲起身去睡，只听得门外扑剌剌一声响喨，淅零零刮阵狂风。</p>
 <p>那长老恐吹灭了灯，慌忙将褊衫袖子遮住，又见那灯或明或暗，便觉有些心惊胆战。此时又困倦上来，伏在经案上盹睡，虽是合眼朦胧，却还心中明白，耳内嘤嘤听着那窗外阴风飒飒。</p>
 <p>好风，真个那淅淅潇潇，飘飘荡荡。淅淅潇潇飞落叶，飘飘荡荡卷浮云。满天星斗皆昏昧，遍地尘沙尽洒纷。一阵家猛，一阵家纯。纯时松竹敲清韵，猛处江湖波 浪浑。刮得那山鸟难栖声哽哽，海鱼不定跳喷喷。东西馆阁门窗脱，前后房廊神鬼。佛殿花瓶吹堕地，琉璃摇落慧灯昏。香炉鞍＋倒香灰迸，烛架歪斜烛焰横。幢幡 宝盖都摇拆，钟鼓楼台撼动根。</p>
@@ -1477,8 +1522,13 @@ td.num, th.num {
 呠
 嫐
 劘
-棶</p>
+棶</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%9B%9E%20%E9%AC%BC%E7%8E%8B%E5%A4%9C%E8%B0%92%E5%94%90%E4%B8%89%E8%97%8F%20%E6%82%9F%E7%A9%BA%E7%A5%9E%E5%8C%96%E5%BC%95%E5%A9%B4%E5%84%BF&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch037.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%9B%9E%20%E9%AC%BC%E7%8E%8B%E5%A4%9C%E8%B0%92%E5%94%90%E4%B8%89%E8%97%8F%20%E6%82%9F%E7%A9%BA%E7%A5%9E%E5%8C%96%E5%BC%95%E5%A9%B4%E5%84%BF&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch037.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch036.html">← 上一篇</a><a href="ch038.html">下一篇 →</a></nav>
 </main>
 </body>

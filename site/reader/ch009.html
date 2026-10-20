@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第009回-袁守诚妙算无私曲老龙王拙计犯天条.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch009.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第009回 袁守诚妙算无私曲 老龙王拙计犯天条</h1>
 <blockquote>
@@ -1268,9 +1311,10 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第九回 袁守诚妙算无私曲 老龙王拙计犯天条</strong></p>
 <p>回目以两个人物领起：袁守诚与老龙王。上句"妙算无私曲"是算卦先生的精准，下句"拙计犯天条"是龙王的冲动越界。<strong>这一回是全书"取经缘起"的开端——前八回讲悟空的身世与取经项目的立项，从这一回起，故事转向"为什么要取经"的现实推动力。</strong> 一个卖卦先生、一个龙王、一场赌局，引发了把唐太宗送进地府的连锁反应。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>长安城外泾河边，渔翁与樵夫闲聊"水秀山青"。渔翁透露：长安城里有位卖卦先生袁守诚（袁天罡叔父），每日指点他下网方位，因此满载而归。巡水夜叉听闻大惊，回报泾河龙王——水族子孙将被捕尽。龙王大怒，变作白衣秀士去长安探虚实，与袁守诚打赌"明日何时下雨、雨量多少"。袁守诚断言：辰时布云，巳时发雷，午时下雨，未时雨足，共水三尺三寸零四十八点。</p>
 <p>龙王本以为稳赢，不料天庭敕旨恰与此断言分毫不差。军师鲥军师献"拙计"：改时辰、扣点数。龙王照办，推迟一个时辰，克了三寸八点。下完雨后去砸袁守诚卦铺，袁守诚冷言点破他身份——"你是泾河龙王，违了玉帝敕旨，犯了天条，剐龙台上恐难免一刀"。龙王魂飞魄散，跪求救命。袁守诚指点：明日午时三刻赴人曹官魏徵处听斩，须去央告唐太宗，魏徵是唐王驾前丞相，讨个人情可保无事。龙王化风而去，求太宗救命。太宗允诺，次日召魏徵入宫对弈，拖至午时三刻，魏徵却在棋局间酣然入睡——魂魄离身，于剐龙台行刑斩龙。当夜，无头龙王提血淋淋龙头入梦索命："唐太宗！还我命来！"太宗惊醒，从此病重。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、渔樵问答：看似离题的哲学序曲</h3>
 <p>第九回开头不是袁守诚，不是龙王，而是渔翁与樵夫在泾河边的一次闲聊。两人各夸"水秀""山青"，用一整首诗辩论"水上生涯"与"山里日子"哪个更逍遥，谁也说服不了谁，最后各自散去。</p>
@@ -1350,7 +1394,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch008.html">上一回</a> · <a href="ch010.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/philosophy.html">哲学可视化</a> · <a href="../data/jurisprudence.html">法理经济可视化</a> · <a href="../data/cognitive-psychology.html">认知心理可视化</a> · <a href="../data/risk-project.html">风险与项目可视化</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/玉帝.html">玉帝</a> · <a href="people/如来.html">如来</a> · <a href="people/观音.html">观音</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD009 · 长安城外，一场赌局引发的连环地震</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1358,7 +1402,8 @@ td.num, th.num {
 <p>第九回是《西游记》里最接近希腊悲剧的一回。泾河龙王不是反派。他从头到尾都是在捍卫自己的利益——他的水族被大量捕杀，他只是想保护家人。他唯一的错是傲慢（低估了一个卖卦先生）和冲动（改了下雨的时辰和点数）。但他付出的代价是死刑。龙王被押上剐龙台的那一刻，袁守诚安然无恙，渔翁继续打鱼，长安城的老百姓甚至不知道泾河里少了一个龙王。所有因他而死的人，继续过着各自的日子。他的愤怒、恐惧、挣扎，在天庭的规则面前，连一朵水花都没有溅起来。</p>
 <p>袁守诚的身份，《西游记》始终没有直接交代。但他的叔叔是袁天罡——唐代最著名的道士、预言家、李世民的国师。袁守诚能提前知道玉帝的敕旨，暗示他和天庭有某种直接或间接的信息通道。他从头到尾都在钓鱼——不是钓水族，是钓龙王。而龙王吞下了鱼饵。渔翁每天打鱼的信息，就是袁守诚故意放出去的。一个在长安街头摆摊的算命先生，精心布置了一个局，把一个龙王送上了剐龙台，引发了唐太宗的噩梦——然后整个取经工程有了启动的按钮。袁守诚到底是为谁工作的？是袁天罡的自发行为，还是观音更高层面布局的一部分？书中没有写。但这个“空白”，也许恰恰是吴承恩最精妙的一笔——不是所有细节都需要被填满。一个神秘角色的“来路不明”，本身就是他力量的来源。</p>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>诗曰：都城大国实堪观，八水周流绕四山。多少帝王兴此处，古来天下说长安。此单表陕西大国长安城，乃历代帝
 王建
 都之地。自周、秦、汉以来，三州 花似锦，八水绕城流。三十六条花柳巷，七十二座管弦楼。华夷图上看，天下最为头，真是奇胜之方。今却是大唐太宗文皇帝登基，改元龙集贞观。此时已登基十三 年，岁在己巳。且不说他驾前有安邦定国的英豪。与那创业争疆的杰士。</p>
@@ -1517,8 +1562,13 @@ td.num, th.num {
 痒
 菱
 蹄
-莹</p>
+莹</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC9%E5%9B%9E%20%E8%A2%81%E5%AE%88%E8%AF%9A%E5%A6%99%E7%AE%97%E6%97%A0%E7%A7%81%E6%9B%B2%20%E8%80%81%E9%BE%99%E7%8E%8B%E6%8B%99%E8%AE%A1%E7%8A%AF%E5%A4%A9%E6%9D%A1&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch009.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC9%E5%9B%9E%20%E8%A2%81%E5%AE%88%E8%AF%9A%E5%A6%99%E7%AE%97%E6%97%A0%E7%A7%81%E6%9B%B2%20%E8%80%81%E9%BE%99%E7%8E%8B%E6%8B%99%E8%AE%A1%E7%8A%AF%E5%A4%A9%E6%9D%A1&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch009.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch008.html">← 上一篇</a><a href="ch010.html">下一篇 →</a></nav>
 </main>
 </body>

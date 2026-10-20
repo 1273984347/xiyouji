@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第095回-假合真形擒玉兔真阴归正会灵元.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch095.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第095回 假合真形擒玉兔 真阴归正会灵元</h1>
 <blockquote>
@@ -1269,11 +1312,12 @@ td.num, th.num {
 <p><strong>第九十五回 假合真形擒玉兔 真阴归正会灵元</strong></p>
 <p>回目八字两两对仗，工稳中藏机锋。"假合真形"对"真阴归正"，"擒玉兔"对"会灵元"——一假一真，一擒一会，把全回的双重动作写得清清楚楚。<strong>"假合真形"四字是全回的枢纽：</strong> 玉兔不是变作公主，是"合"了公主的真形——真公主未死，形却被人借去用了一载。这个"合"字冷得彻底：真正的篡位不是杀人夺位，是活人被藏起来，身份被顶替者完整继承。</p>
 <p>"真阴归正"则是收束。"真阴"指月宫素娥（真公主的本相），"归正"是回到本来位置。<strong>一擒一会，一动一静：</strong> 擒是武力，会是机缘。悟空擒得了玉兔的假身，可真公主的归位靠的不是武力，是布金寺老僧一年的藏护、是太阴星君的一段因果说明、是国王亲自出城迎取。假者一擒即去，真者却要慢慢"会"回来。吴承恩把这两个动作分开写，写尽了"去假易、归真难"的世情冷暖。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>唐僧随国王入后宫赴合卺宴，行者化作蜜蜂儿丁在毗卢帽顶，睁火眼金睛观看，见公主头顶微露妖氛，悄悄告知师父"公主是个假的"。唐僧欲待君后退散再使法力，行者性急，大咤一声现本相，赶上前揪住公主骂道"好孽畜"，唬得国王呆挣、后妃跌爬。妖精挣脱手，剥衣摇落钗环，奔御花园土地庙取出一条碓嘴样短棍，与行者斗起。二人各驾云雾杀在空中，金箍铁棒对捣药短棍，从御花园打到西天门。妖精战不过，化道清风奔碧空逃走，行者喝令天门庞刘苟毕四大元帅拦阻，妖精回头舍死相持，又斗十数合，化金光径奔正南上败走，钻入一座大山洞中寂然不见。行者恐妖回国害师，认了山势，返云头径回天竺国护驾。</p>
 <p>行者向唐僧与国王备言假公主是妖邪，真公主待擒住假者自然来。国王依言行事，召八戒沙僧护持，行者纵筋斗云复至正南山上寻妖。唤出土地山神审问，二神告此山唤毛颖山，亘古无妖，只有三处兔穴。引行者寻至绝顶窟中，见两块大石挡门，行者捎开石块，妖邪呼地跳出举杵来打。且战且退奔至空中，天色已晚，行者下毒手欲一棒打杀，忽闻九霄碧汉间有人叫"大圣莫动手，棍下留情"。回头看时，乃太阴星君，后带姮娥仙子降彩云到于当面。</p>
 <p>太阴星君言此妖乃广寒宫捣玄霜仙药之玉兔，私偷玉关金锁走出宫来经今一载，特来救其性命。行者责其摄藏公主、欲破师父元阳。太阴星君道出因果：那国王之公主原是蟾宫素娥，十八年前打玉兔一掌，思凡下界，一灵之光投胎于正宫皇后之腹；玉兔怀一掌之仇，旧年走出广寒，抛素娥于荒野，但不应欲配唐僧，此罪不可逭。行者笑允，请太阴君同众仙妹将玉兔拿到天竺国对国王明证。太阴君指定妖邪喝"归正同来"，玉兔打滚现原身——缺唇尖齿，长耳稀须，团身一块毛如玉。</p>
 <p>太阴星君领姮娥仙子带玉兔径转天竺国界，时正黄昏月上，满城香案叩头念佛。八戒动欲心跳起抱住霓裳仙子，被行者揪落打骂。太阴君收回玉兔上月宫去。国王问真公主下落，行者道真公主现在给孤布金寺里装疯。次日国王同皇后、多官、四神僧摆驾往布金寺，老僧述一年前公主被风吹来，他锁于僻静房中保护，公主日间胡言乱语装疯，夜深思量父母悲啼。国王开门搂抱公主大哭，取香汤沐浴更衣回国。行者又建议百脚山多蜈蚣伤人，可选千只雄鸡撒放山中降伏，改山名宝华山，封老僧为报国僧官世袭。国王画圣僧四众喜容供养华夷楼上，师徒辞王西去，"沐净恩波归了性，出离金海悟真空"。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、一掌之仇的跨世传递：十八年的因果讨债</h3>
 <p>本回的发动机是"一掌之仇"。太阴星君的几句道白，把整回的因果链条交代得清清楚楚：十八年前，蟾宫素娥打了玉兔一掌，随即思凡下界，投胎为天竺国公主；玉兔怀那一掌之恨，于旧年偷开玉关金锁走下界来，把素娥抛在荒野，自己变形假冒公主。<strong>一掌之微，引出十八年的跨世讨债。</strong> 这一笔冷得让人脊背发凉——素娥早已忘了那一掌，早已在人间做了十八年公主，可玉兔没忘。仇记得多久，报复就有多久。</p>
@@ -1353,7 +1397,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch094.html">上一回</a> · <a href="ch096.html">下一回</a> · <a href="../index.html">站点首页</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/沙僧.html">沙僧</a> · <a href="people/如来.html">如来</a> · <a href="people/观音.html">观音</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD070 · 天竺国——当公主是假的，和尚是真的</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1425,7 +1469,8 @@ td.num, th.num {
 </blockquote>
 <p>第90回玄奘在废弃茶亭写“路在”时，意识到路不在走完的地方——在他走后继续往东走的货郎扁担上，在救生寺哑僧的扫帚声里，在天竺国公主的浇花水壶里。第92回回灵山时云停够了脚自己离开地面，身体层面的归程结束。第93回灵山的日常开始——尾巴点水、供品分类、捻麻绳、捡鳞片、写天气。第94回年夜饭——终点第一顿不需要赶路的饭，豆角太酸悟空独占一整盘。第95回封号被叫出口——斗战胜佛、旃檀功德佛、净坛使者、金身罗汉、八部天龙马，名字终于有了日常的语气。第96回每个人找到自己最不累的位置——莲池石头、藏经阁窗边、供堂角落、罗汉堂第三级台阶、化龙池进水口。第97回访客路过——二郎神聊狗牙，哪吒迷路，旧恩怨被莲池水泡软。第98回沙僧拆担子做竹篮——整理者释放了所有遗物，开始整理日常。第99回永恒被刻上刻度——花粉、甜度、竹篮里的叶子，无用的记录填满无边的永恒。</p>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>却说那唐僧忧忧愁愁，随着国王至后宫，只听得鼓乐喧天，随闻得异香扑鼻，低着头，不敢仰视。行者暗里欣然，丁在那毗卢帽顶上，运神光，睁火眼金 睛观看，又只见那两班彩女，摆列的似蕊宫仙府，胜强似锦帐春风。真个是：娉婷嬝娜，玉质冰肌。一双双娇欺楚女，一对对美赛西施。云髻高盘飞彩凤，娥眉微显 远山低。笙簧杂奏，箫鼓频吹。宫商角徵羽，抑扬高下齐。清歌妙舞常堪爱，锦砌花团色色怡。行者见师父全不动念，暗自里咂嘴夸称道：“好和尚！好和尚！身居 锦绣心无爱，足步琼瑶意不迷。”</p>
 <p>少时，皇后嫔妃簇拥着公主出鳷鹊宫，一齐迎接，都道声：</p>
 <p>“我王万岁，万万岁！”慌的个长老战战兢兢，莫知所措。行者早已知识，见那公主头顶上微露出一点妖氛，却也不十分凶恶，即忙爬近耳朵叫道：“师父，公主是个假的。”长老道：“是假的，却如何教他现相。”行者道：“使出法身，就此拿他也。”长老道：</p>
@@ -1536,8 +1581,13 @@ td.num, th.num {
 欸
 㐖
 協
-㘋</p>
+㘋</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%B9%9D%E5%8D%81%E4%BA%94%E5%9B%9E%20%E5%81%87%E5%90%88%E7%9C%9F%E5%BD%A2%E6%93%92%E7%8E%89%E5%85%94%20%E7%9C%9F%E9%98%B4%E5%BD%92%E6%AD%A3%E4%BC%9A%E7%81%B5%E5%85%83&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch095.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%B9%9D%E5%8D%81%E4%BA%94%E5%9B%9E%20%E5%81%87%E5%90%88%E7%9C%9F%E5%BD%A2%E6%93%92%E7%8E%89%E5%85%94%20%E7%9C%9F%E9%98%B4%E5%BD%92%E6%AD%A3%E4%BC%9A%E7%81%B5%E5%85%83&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch095.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch094.html">← 上一篇</a><a href="ch096.html">下一篇 →</a></nav>
 </main>
 </body>

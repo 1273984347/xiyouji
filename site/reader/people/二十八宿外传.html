@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
 <script src="../../js/theme-init.js"></script>
+<script src="../../js/reader-enhance.js" defer></script>
 <style>
   .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
@@ -52,6 +53,35 @@
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -61,6 +91,19 @@
     <a href="../../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/02-人物深度分析/二十八宿外传.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/people/二十八宿外传.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>二十八宿·外传：星图上的盲点</h1>
 <blockquote>
@@ -86,6 +129,10 @@
 <p>其他二十七宿都知道那圈光晕是什么。没有人问过他。但他们每次经过奎宿星位时都会放慢脚步——不是故意，是星图上的那圈光晕有一种说不清的凉意，靠近时会让人心情忽然安静一下。安静之后会想起一些很久没想的事。昴日星官想起自己第一次当值时被星图上的第一缕晨光唤醒，趴在灵霄殿的栏杆上往下看——下界的公鸡还没叫，人间的灯火像星图倒映在地上的碎屑，明明灭灭。角木蛟想起自己年轻时星等还是一等，青龙七宿的龙尾在天河上扫过时溅起的水花是金色的，有几粒金水花落在他手背上，烫出几个极小的疤，他用袖口盖住继续做事。心月狐想起她在披香殿订过一次香，侍香仙子给她配了一小盒安神的冷香，她没用——舍不得用，放在狐尾绒里藏着，每次心烦时拿出来闻一下盖子上的残香。虚日鼠想起他和奎木狼一起去天河上游剿妖，两人打完之后坐在天河堤岸上吃干粮，奎木狼递给他半块云糕，他咬了一口发现云糕里夹了一粒星尘——奎木狼自己揉面时掉进去的，奎木狼说“不好吃就扔了”，虚日鼠没扔，他把星尘嚼碎咽了。那粒星尘在他肚子里待了到现在还没消化，每次他路过奎宿星位时肚子会咕咕响，星尘在胃里被胃酸腐蚀了一点边角，释放出一丝极细的金色灵力，让他打出的嗝是淡金色的。胃日鸡想起她曾经在披香殿门口见过侍香仙子一次，那天天庭下雨，她没带伞，披香殿的门檐太窄遮不住雨，她就站在门口淋着。侍香仙子从殿里出来把一把油纸伞递给她。伞是极普通的油纸伞，竹骨，桐油纸面，但伞面上画了一枝桂花——不是画的，是桂花落在伞面上被雨打湿后花瓣贴在纸面上留下的印子。胃日鸡把伞还给侍香仙子时发现印子洗不掉了，后来每次下雨她路过披香殿都会往门口看一眼——那把伞总是靠在门柱上，伞面上的桂花印在雨里慢慢褪色，从金黄褪到浅金，从浅金褪到灰白，最后只剩一个极淡的轮廓。她不知道那枝桂花是侍香仙子从广寒宫桂树下收集月魄时摘的——月魄要沾过桂花的露水，桂树一夜只开几朵花，仙子每次摘一朵，贴在伞面上留个记号。那把伞现在还在披香殿门柱上靠着。桂花印已经褪到和伞面一样的颜色，但每次下雨时雨水打在伞面上，那枝花的轮廓会因为水渍反光重新浮出来一下——极短的一瞬，雨停就没了。那是奎宿星离开天庭后披香殿唯一还在下雨的东西。</p>
 <p>很多很多年以后，新入职的星宿接替了奎木狼的位置。新奎宿是年轻后辈，从下界修炼飞升不久，第一次巡视星位时发现星图上奎宿位的星光边缘有一圈极淡的银蓝光晕。他问昴日星官这是什么，昴日星官说是前任留下的。他问为什么会有凉意，昴日星官说那不是凉——是冷。年轻后辈不懂，昴日星官想了想说，以后你会懂的。等你有一天在星位上值夜班，忽然闻到一种从来没闻过的香气——不是龙涎不是降真不是旃檀，是雪地月光加铁锈味和星尘的微苦，那一瞬间你会觉得有一个你不认识的人站在你身后，把手放在你胸甲上，手指冰凉。他问你回头了吗？昴日星官摇头——没有。因为来不及。等你回头的时候人已经不在了，只剩下铠甲鳞片上沾着一粒极细的银白粉末，在星光下闪着极淡的光。那是她指尖最后一点月魄。他把那粒月魄从鳞片上轻轻刮下来，放在星图的奎宿位上。从那以后，奎宿星的光晕又凉了一丝。</p>
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E4%BA%8C%E5%8D%81%E5%85%AB%E5%AE%BF%C2%B7%E5%A4%96%E4%BC%A0%EF%BC%9A%E6%98%9F%E5%9B%BE%E4%B8%8A%E7%9A%84%E7%9B%B2%E7%82%B9&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E4%BA%8C%E5%8D%81%E5%85%AB%E5%AE%BF%E5%A4%96%E4%BC%A0.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E4%BA%8C%E5%8D%81%E5%85%AB%E5%AE%BF%C2%B7%E5%A4%96%E4%BC%A0%EF%BC%9A%E6%98%9F%E5%9B%BE%E4%B8%8A%E7%9A%84%E7%9B%B2%E7%82%B9&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E4%BA%8C%E5%8D%81%E5%85%AB%E5%AE%BF%E5%A4%96%E4%BC%A0.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="../people/九灵元圣-方向二深化.html">← 上一篇</a><a href="../people/二郎神-方向二深化.html">下一篇 →</a></nav>
 </main>
 </body>

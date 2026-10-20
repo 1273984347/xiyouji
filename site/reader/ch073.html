@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第073回-情因旧恨生灾毒心主遭魔幸破光.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch073.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第073回 情因旧恨生灾毒 心主遭魔幸破光</h1>
 <blockquote>
@@ -1268,10 +1311,11 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第七十三回 情因旧恨生灾毒 心主遭魔幸破光</strong></p>
 <p>回目对仗工稳。"情因旧恨"对"心主遭魔"，"生灾毒"对"幸破光"——一因一果、一毒一解。<strong>"旧恨"二字是全回的发动机：</strong> 蜘蛛精在盘丝洞败走，带着怨恨投奔师兄，师兄为妹报仇而起毒心。"心主"指唐僧（心猿心主之配），遭魔是果，幸破光是毗蓝婆以绣花针破千眼金光。吴承恩把因果链条写得极冷——上一回的胜负未结账，这一回以"茶"的形式上门讨债。旧债不销，新灾自生。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>师徒离盘丝洞西行，至一处楼阁，门匾"黄花观"。观中道士红冠皂服，貌似羽士，迎客备茶。盘丝洞七蜘蛛精自濯垢泉败后，因与道士同堂学艺为师兄妹，已先投奔此间，向师兄哭诉唐僧师徒"欺凌"之仇——此即"旧恨"。道士闻言变色，取出秘制毒药（山中百鸟粪熬炼，入口见阎君），称出一分二厘分作四分，将十二红枣每枣揌一厘，分入四锺茶中奉客。悟空见茶色有异，与道士换茶，得道士自陪的黑枣茶未饮；唐僧、八戒、沙僧食红枣，须臾变色吐沫晕倒。</p>
 <p>悟空掼茶锺与道士交战。七蜘蛛精脐孔吐丝罩人，悟空念咒撞破天篷走脱。问土地，知其为蜘蛛精本相。悟空拔毫毛变七十小行者，搅断丝绳，拖出七只巴斗大蜘蛛，尽皆打死。道士见师妹被杀，举剑来战，五六十合渐败，遂脱袍露出两胁下千只眼，迸放金光黄雾，将悟空罩于其中，进退不得。悟空往上撞破金光，撞软顶梁皮，无奈变穿山甲钻地二十余里方出，力软筋麻，眼中流泪，叹"大海洪波无恐惧，阳沟之内却遭风"。</p>
 <p>正悲切间，遇一孝妇啼哭，原是黎山老姆假扮，指点悟空往紫云山千花洞请毗蓝婆菩萨。毗蓝婆自言赴盂兰会至今三百余年未曾出门，隐姓埋名无人知。闻悟空来请，以小儿昴日星官日眼里炼就的绣花针破金光，又以三丸解毒丹救活唐僧三人。道士现原形，乃七尺大蜈蚣，被毗蓝婆收去千花洞看守门户。悟空火烧黄花观，师徒复行。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、旧恨的跨主体传递：师兄妹的"代位复仇"</h3>
 <p>本回的发动机是"旧恨"。盘丝洞七蜘蛛精败于悟空之手，并未被全歼（七女逃出），径投黄花观师兄。道士听完诉苦，"却就恼恨，遂变了声色"——他的愤怒是被传染的。<strong>师兄妹之间没有直接的利害冲突，他本不必为妹报仇。</strong> 但同窗之雅、兄妹之情，让他把妹妹的恨接过来了。这是全书最典型的一次"仇恨跨主体传递"：得罪了一个小角色，结果触动了整个关系网。</p>
@@ -1348,7 +1392,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch072.html">上一回</a> · <a href="ch074.html">下一回</a> · <a href="../index.html">站点首页</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/沙僧.html">沙僧</a> · <a href="people/如来.html">如来</a> · <a href="people/观音.html">观音</a> · <a href="people/红孩儿.html">红孩儿</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD063 · 黄花观——当毒茶里泡着一整个师门</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1363,6 +1407,7 @@ td.num, th.num {
 <p>这道士穿的不是法衣，是常服——一件洗得发白的青布道袍，袖口磨出了毛边，腰上系的不是丝绦，是一根麻绳。他的脸很瘦，颧骨从皮肤下面顶出来，眼窝很深，深到看不清眼珠的颜色。但他的眼睛是亮的——不是有神的亮，是那种长期服用某种矿物之后眼底毛细血管充血折射出的暗红色微光。他的手指细长，指关节凸出，指甲盖是淡黄色的，不是不洗——是洗不掉的黄。道士把门拉开半扇，目光越过玄奘的头顶，扫过悟空、八戒、沙僧和白龙马，最后回到玄奘脸上。</p>
 <p>“贫道百眼魔君，”他说，“道号多目。施主从何处来？”</p>
 <p>玄奘报上了取经人的身份。多目怪听完之后没有什么特别的反应——没有惊讶，没有贪婪，没有妖怪听到“唐僧肉”时那种压抑不住的兴奋。他只是点了点头，把门又拉开了一些，侧身让出通道。“远来是客。请进，喝杯茶。”</p>
+</div></details>
 <h2>一、茶——黄花观的待客之道</h2>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1439,7 +1484,7 @@ td.num, th.num {
 </li>
 </ol>
 <hr />
-<h2>原文全文</h2>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>话说孙大圣扶持着唐僧，与八戒、沙僧奔上大路，一直西来。不半晌，忽见一处楼阁重重，宫殿巍巍。唐僧勒马道：“徒弟，你看那是个甚么去处？”行 者举头观看，忽然见：山环楼阁，溪绕亭台。门前杂树密森森，宅外野花香艳艳。柳间
 栖白
 鹭，浑如烟里玉无瑕；桃内啭黄莺，却似火中金有色。双双野鹿，忘情闲 踏绿莎茵；对对山禽，飞语高鸣红树杪。真如刘阮天台洞，不亚神仙阆苑家。行者报道：“师父，那所在也不是王侯第宅，也不是豪富人家，却象一个庵观寺院，到 那里方知端的。”三藏闻言，加鞭促马。师徒们来至门前观看，门上嵌着一块石板，上有黄花观三字。三藏下马，八戒道：“黄花观乃道士之家，我们进去会他一会 也好，他与我们衣冠虽别，修行一般。”沙僧道：</p>
@@ -1568,8 +1613,13 @@ td.num, th.num {
 祍
 㮆
 䑃
-焃</p>
+焃</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%B8%83%E5%8D%81%E4%B8%89%E5%9B%9E%20%E6%83%85%E5%9B%A0%E6%97%A7%E6%81%A8%E7%94%9F%E7%81%BE%E6%AF%92%20%E5%BF%83%E4%B8%BB%E9%81%AD%E9%AD%94%E5%B9%B8%E7%A0%B4%E5%85%89&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch073.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%B8%83%E5%8D%81%E4%B8%89%E5%9B%9E%20%E6%83%85%E5%9B%A0%E6%97%A7%E6%81%A8%E7%94%9F%E7%81%BE%E6%AF%92%20%E5%BF%83%E4%B8%BB%E9%81%AD%E9%AD%94%E5%B9%B8%E7%A0%B4%E5%85%89&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch073.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch072.html">← 上一篇</a><a href="ch074.html">下一篇 →</a></nav>
 </main>
 </body>

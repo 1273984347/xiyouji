@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
 <script src="../../js/theme-init.js"></script>
+<script src="../../js/reader-enhance.js" defer></script>
 <style>
   .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
@@ -52,6 +53,35 @@
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -61,6 +91,19 @@
     <a href="../../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/西游渡第十八讲专题.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/themes/西游渡第十八讲专题.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>西游渡 · 第十八讲</h1>
 <blockquote>
@@ -115,6 +158,10 @@ W285（git 创建提交溯源 · W424 回填）
 <p>问：你种了这么多年的松树，有没有觉得南坡还是长不回原来的样子？</p>
 <p>答：长不回的。原来的松林是老林，树和树之间靠树根说话——地底下全是菌根网络，松树用菌根给彼此输送水和糖，一棵树缺水，另一棵树会把深层地下水抽上来通过菌丝分给它。天火烧光了整片林子，菌根网络全烧死了。新林是我一棵一棵种的，树之间互相不认识。它们没有菌根，只能靠自己，长的速度比老林慢得多。但我在种树时偷偷做了件事——把北坡老林的松针土一捧一捧捧到南坡，埋在松子坑底下。老林腐殖土里有老菌的孢子，孢子是菌类沉睡的种子。有些孢子没死，在土里等了很久，等到新松树的根扎下来，根尖分泌出糖分——极微极淡的糖，顺着土壤颗粒间的毛细水慢慢扩散。孢子在水里醒了，抽出一根极细的菌丝，菌丝找到了最近的松树根尖。一颗，两颗，三颗。每次南坡上新发了一个菌丝连接，我就会去那两棵树下坐一会儿。树是新的，菌是老林的。它们不认识彼此，但菌丝的化学成分和老林里那套网络一模一样——同样的葡聚糖、同样的几丁质、同样的信号肽。金兜山的菌脉没断。天火烧了老林，但菌脉从火里幸存下来——不是靠运气，是靠我老伴的手。她生前每天跟我巡山，松树根部的土壤踩上去极软极弹，她知道那底下有菌网。她用手指在松树根部画圈，每次画完都把指尖的松针土拍干净，说树在底下说话。那时候我不知道菌根是什么，只觉得她说的话好听。现在我每天傍晚在南坡松林里走，脚底板踩在腐殖土上，土里菌丝在极缓慢地生长，断裂的菌丝重新连接时的张力从地底传到我的脚底，隔着草鞋底，隔着厚茧，我能感觉到那一下一下极细微的脉冲，和我老伴活着时心跳的频率一模一样。菌脉在重新织网，织得极慢极耐心，就像她还在用手指在树根部一圈一圈画圈。你看不见那个圈，但菌丝记得。它穿过天火留下的焦土，穿过碎石，穿过死在土层里的松子空壳——空壳里没有仁，只有一团极细极白的菌丝，把空壳填得满满当当，像一颗白仁。白仁是菌的礼物，给山，给她，给所有在焦土上种过树的人。</p>
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E8%A5%BF%E6%B8%B8%E6%B8%A1%20%C2%B7%20%E7%AC%AC%E5%8D%81%E5%85%AB%E8%AE%B2&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/themes/%E8%A5%BF%E6%B8%B8%E6%B8%A1%E7%AC%AC%E5%8D%81%E5%85%AB%E8%AE%B2%E4%B8%93%E9%A2%98.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E8%A5%BF%E6%B8%B8%E6%B8%A1%20%C2%B7%20%E7%AC%AC%E5%8D%81%E5%85%AB%E8%AE%B2&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/themes/%E8%A5%BF%E6%B8%B8%E6%B8%A1%E7%AC%AC%E5%8D%81%E5%85%AB%E8%AE%B2%E4%B8%93%E9%A2%98.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="../themes/西游渡第十五讲专题.html">← 上一篇</a><a href="../themes/西游渡第十六讲专题.html">下一篇 →</a></nav>
 </main>
 </body>

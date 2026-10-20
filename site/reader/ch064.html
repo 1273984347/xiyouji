@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第064回-荆棘岭悟能努力木仙庵三藏谈诗.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch064.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第064回 荆棘岭悟能努力 木仙庵三藏谈诗</h1>
 <blockquote>
@@ -1268,10 +1311,11 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第六十四回 荆棘岭悟能努力 木仙庵三藏谈诗</strong></p>
 <p>回目对仗极工。"荆棘岭"对"木仙庵"（地对面），"悟能"对"三藏"（人对人），"努力"对"谈诗"（事对事）。表面上师徒分工：一武一文，一开路一吟诗。<strong>但这一回的冷，正在于"分工"本身即是陷阱。</strong> 八戒之力开得荆棘，开不脱妖邪之局；三藏之诗谈得清雅，谈不出美人局套。回目以"努力"与"谈诗"并置，实则各坠一层——力有所不逮，诗有所不净。荆棘在外，木仙在内，外内两重关卡，师徒分头失守。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>祭赛国王送师徒出城，伏龙寺僧人恋恋不舍，悟空拔毫毛变斑斓猛虎拦路，众僧方惧而退。师徒西行，时序由冬入春，忽见一条长岭，岭上荆棘丫叉、薜萝牵绕，石碣上书"荆棘岭"，下刻"荆棘蓬攀八百里，古来有路少人行"。沙僧议烧荒，八戒以"正当蕃盛"难之，遂变身高大、长钯搂开荆棘，一日一夜行百十里。八戒自添两句于碣："自今八戒能开破，直透西方路尽平。"</p>
 <p>又行一日一夜，至一处古庙，庙外松柏凝青。悟空观之曰"此地少吉多凶，不宜久坐"，沙僧不以然。忽阴风起，一老者自称荆棘岭土地，携赤身鬼使奉蒸饼，悟空喝打，老者化阴风摄走三藏。三藏醒于烟霞石屋前，见自称"十八公"者，又见孤直公、凌空子、拂云叟三老，各赋诗自道千年之寿，实为松、柏、桧、竹四树之精。四老请三藏论禅，三藏讲"禅者静也，法者度也"。拂云叟反诘："道也者，本安中国，反来求证西方。空费了草鞋，不知寻个甚么？"入木仙庵，吃茯苓膏，三藏与四老联句，起句"禅心似月迥无尘"。</p>
 <p>忽有杏仙至，献茶吟诗，渐有见爱之情，挨挨轧轧，低语"佳客莫者，趁此良宵，不耍子待要怎的？人生光景，能有几何？"四老做媒保亲，主婚成姻。三藏变色怒斥："汝等皆是一类邪物，这般诱我！当时只以砥砺之言，谈玄谈道可也，如今怎么以美人局来骗害贫僧！"坚执不从，鬼使威胁，三藏心如金石。天明悟空等寻至，喊一声，妖怪俱隐。悟空点破木仙真身——十八公乃松、孤直公乃柏、凌空子乃桧、拂云叟乃竹、赤身鬼乃枫、杏仙即杏、女童即丹桂腊梅。八戒先筑倒腊梅、丹桂、老杏、枫杨，根下鲜血淋漓；三藏欲饶，悟空言"恐日后成了大怪，害人不浅"，八戒再一顿钯将松柏桧竹尽皆筑倒。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、荆棘岭：八百里"古来有路少人行"的修行隐喻</h3>
 <p>荆棘岭是全书少有的"纯景物"开篇。作者用一阕长赋铺写："为人谁不遭荆棘，那见西方荆棘长！"——这一句把地理的荆棘直接拔到修行的高度。<strong>人世哪条路无荆棘？唯独取经路上的荆棘"长"到八百里。</strong> 石碣所刻"古来有路少人行"更冷：路是有的，只是少有人走完。<strong>这是取经最朴素也最锋利的定义——不是无路，是有人走而无人成。</strong></p>
@@ -1348,7 +1392,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch063.html">上一回</a> · <a href="ch065.html">下一回</a> · <a href="../index.html">站点首页</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/沙僧.html">沙僧</a></p>
 </blockquote>
-<h2>原文全文</h2>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>话表祭赛国王谢了唐三藏师徒获宝擒怪之恩，所赠金玉，分毫不受，却命当驾官照依四位常穿的衣服，各做两套，鞋袜各做两双，绦环各做两条，外备干 粮烘炒，倒换了通关文牒，大排銮驾，并文武多官，满城百姓，伏龙寺僧人，大吹大打，送四众出城。约有二十里，先辞了国王。众人又送二十里辞回。伏龙寺僧人 送有五六十里不回，有的要同上西天，有的要修行伏侍。行者见都不肯回去，遂弄个手段，把毫毛拔了三四十根，吹口仙气，叫“变！”都变作斑斓猛虎，拦住前 路，哮吼踊跃。众僧方惧，不敢前进，大圣才引师父策马而去。少时间，去得远了，众僧人放声大哭，都喊：“有恩有义的老爷！我等无缘，不肯度我们也！”</p>
 <p>且不说众僧啼哭，却说师徒四众，走上大路，却才收回毫毛，一直西去。正是时序易迁，又早冬残春至，不暖不寒，正好逍遥行路。忽见一条长岭，岭顶上是路。 三藏勒马观看，那岭上荆棘丫叉，薜萝牵绕，虽是有道路的痕迹，左右却都是荆刺棘针。唐僧叫：“徒弟，这路怎生走得？”行者道：“怎么走不得？”</p>
 <p>又道：“徒弟啊，路痕在下，荆棘在上，只除是蛇虫伏地而游，方可去了。若你们走，腰也难伸，教我如何乘马？”八戒道：“不打紧，等我使出钯柴手来，把钉 钯分开荆棘，莫说乘马，就抬轿也包你过去。”三藏道：“你虽有力，长远难熬，却不知有多少远近，怎生费得这许多精神！”行者道：“不须商量，等我去看 看。”</p>
@@ -1471,7 +1515,8 @@ td.num, th.num {
 嫐
 劘
 躒</p>
-<h2>深度解读</h2>
+</div></details>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD058 · 荆棘岭——当谈诗论道也成了一种考验</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1492,6 +1537,7 @@ td.num, th.num {
 <p>“贫道十八公，特来与高僧谈诗。”</p>
 <p>玄奘愣了一下。他这一路上被妖怪请过吃饭，被国王请过讲经，被女王请过散步，被蝎子精请过听琵琶——还没被人请过谈诗。诗是他出家的理由之一——他从小在金山寺长大，寺里的藏经阁除了佛经还有诗集。他读过陶渊明，读过谢灵运，读过王维——读到他决定去西天取经之前，曾经在藏经阁的窗台上用毛笔写过一行字：“诗以载道，佛以度人。”他以为取经路上不会再遇到诗了——诗是长安的事，是寺院里的事，是在一棵树下坐着看夕阳落下时随口念一句的事。他没想到在这片松林里，有一棵松树精要跟他谈诗。</p>
 <p>但他是取经人。他不能拒绝善意的请求——哪怕这个请求来自一个妖怪。因为拒绝善意，本身就是一种傲慢。妖怪请你谈诗，你如果说不谈，那你的慈悲在哪里？你取经是为了普度众生，众生里包不包括一棵想跟你谈诗的松树？他说：“请。”</p>
+</div></details>
 <h2>一、松——十八公的诗社</h2>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1560,6 +1606,10 @@ td.num, th.num {
 </blockquote>
 <hr />
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E5%85%AD%E5%8D%81%E5%9B%9B%E5%9B%9E%20%E8%8D%86%E6%A3%98%E5%B2%AD%E6%82%9F%E8%83%BD%E5%8A%AA%E5%8A%9B%20%E6%9C%A8%E4%BB%99%E5%BA%B5%E4%B8%89%E8%97%8F%E8%B0%88%E8%AF%97&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch064.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E5%85%AD%E5%8D%81%E5%9B%9B%E5%9B%9E%20%E8%8D%86%E6%A3%98%E5%B2%AD%E6%82%9F%E8%83%BD%E5%8A%AA%E5%8A%9B%20%E6%9C%A8%E4%BB%99%E5%BA%B5%E4%B8%89%E8%97%8F%E8%B0%88%E8%AF%97&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch064.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch063.html">← 上一篇</a><a href="ch065.html">下一篇 →</a></nav>
 </main>
 </body>

@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第047回-圣僧夜阻通天水.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch047.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第047回 圣僧夜阻通天水 金木垂慈救小童</h1>
 <blockquote>
@@ -1268,9 +1311,10 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第四十七回 圣僧夜阻通天水 金木垂慈救小童</strong></p>
 <p>回目"金木"指悟空（金公）与八戒（木母）。"金木垂慈"，是两员杀神的角色反转——他们平日里杀人，这一回要去救人。"救小童"三字最为沉痛：救，意味着有孩子在被献祭。<strong>这一回讲的是制度性的恶，以及它如何被两个妖怪出身的徒弟以"扮演"的方式瓦解。</strong></p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>师徒行至通天河，河宽八百里，无船可渡。夜宿河畔陈家庄，庄主陈澄、陈清兄弟老迈悲苦。问其故，言河中有灵感大王，每年需祭一对童男童女，已祭九年。今年轮到陈澄之子陈关保、女儿一秤金献祭，明日即是期。</p>
 <p>悟空闻之，与八戒商议化身替祭。悟空变作陈关保，八戒变作一秤金，于灵感庙中等候。灵感大王来享祭，见"童男"敢于呵斥，心生疑窦，几番试探后被八戒钉耙筑伤，逃回水府。灵感大王虽败，却设计冻河诱师徒过河，于河心破冰，将唐僧摄入水底。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、灵感大王——观音莲花池金鱼</h3>
 <p>这一回的妖怪身份极特别。灵感大王是观音莲花池里养大的金鱼，每日浮头听经，修成神通，趁海啸泛涨逃到通天河，成了"灵感大王"。</p>
@@ -1436,7 +1480,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch046.html">上一回</a> · <a href="ch048.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/relationships.html">团队关系可视化</a> · <a href="../data/character-appearance.html">人物出场可视化</a> · <a href="../data/business-model.html">商业模型可视化</a> · <a href="../data/risk-project.html">风险与项目可视化</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/观音.html">观音</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD044 · 通天河——当河水有了账单</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1446,6 +1490,7 @@ td.num, th.num {
 <p>不是下坡的那种往下，是地势在降。空气越来越湿，风里的土味变成了水草味。树木从槐杨变成了垂柳，树根泡在水里，树干上长着青苔。路两边的田地越来越少，水塘越来越多，水面上漂着浮萍和不知道名字的水草。</p>
 <p>走了七八天，耳边开始出现一种持续的低响。起初以为是风声，但树叶不动。后来以为是耳鸣，但捂着耳朵也能听见。八戒最先反应过来——是水声。不是溪流或瀑布那种哗哗声，而是一种沉闷的、持续的轰隆，像大地深处有什么东西在滚动。</p>
 <p>悟空跳到半空往前看。他看到了通天河。</p>
+</div></details>
 <h2>一、八百里的"通天"</h2>
 <p>这条河的名字取得狂妄。不是"通天河"——好像它真能通天似的。但站在河边的时候，就会觉得这个名字不是修辞，是写实。河水从西北方向铺天盖地涌来，河面宽得看不到对岸。不是"很宽"，是"看不到"。视线飞过水面，飞到一半就被水汽吞掉了。</p>
 <p>河水是青黑色的，不是浑浊，是太深。深到什么程度？悟空用火眼金睛往下看，看到水下有三层：第一层是泥沙翻涌，第二层是暗流旋转，第三层什么都没有——纯粹的黑暗。那不是河床，是深度本身。当一种东西深到让你看不到底的时候，它就不是空间概念，是时间概念了。</p>
@@ -1544,7 +1589,7 @@ td.num, th.num {
 </blockquote>
 <p><strong>第89回结束。河水流淌的声音盖住了营地的鼾声，星星在天上转了半圈。悟空翻了个身，手背上的疤蹭到粗糙的石头，微微发痒。他挠了挠痒，没有挠破。他以前挠痒会挠破，现在不会了——这是十四年学会的另一个技能：挠痒的力度刚好止痒，不伤皮肤。</strong></p>
 <hr />
-<h2>原文全文</h2>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>却说那国王倚着龙床，泪如泉涌，只哭到天晚不住。行者上前高呼道：“你怎么这等昏乱！见放着那道士的尸骸，一个是虎，一个是鹿，那羊力是一个羚 羊。不信时，捞上骨头来看，那里人有那样骷髅？他本是成精的山兽，同心到此害你，因见气数还旺，不敢下手。若再过二年，你气数衰败，他就害了你性命，把你 江山一股儿尽属他了。幸我等早来，除妖邪救了你命，你还哭甚？哭甚！急打发关文，送我出去。”国王闻此，方才省悟。那文武多官俱奏道：“死者果然是白鹿黄 虎，油锅里果是羊骨。圣僧之言，不可不听。”国王道：“既是这等，感谢圣僧。今日天晚，教太师且请圣僧至智渊寺。明日早朝，大开东阁，教光禄寺安排素净筵 宴酬谢。”果送至寺里安歇。次日五更时候，国王设朝，聚集多官，传旨：“快出招僧榜文，四门各路张挂。”一壁厢大排筵宴，摆驾出朝，至智渊寺门外，请了三 藏等，共入东阁赴宴，不在话下。却说那脱命的和尚闻有招僧榜，个个欣然，都入城来寻孙大圣，交纳毫毛谢恩。这长老散了宴，那国王换了关文，同皇后嫔妃，两 班文武，送出朝门。只见那些和尚跪拜道旁，口称：“齐天大圣爷爷！我等是沙滩上脱命僧人。闻知爷爷扫除妖孽，救拔我等，又蒙我王出榜招僧，特来交纳毫毛， 叩谢天恩。”行者笑道：“汝等来了几何？”僧人道：“五百名，半个不少。”行者将身一抖，收了毫毛，对君臣僧俗人说道：“这些和尚实是老孙放了，车辆是老 孙运转双关穿夹脊，捽碎了，那两个妖道也是老孙打死了。今日灭了妖邪，方知是禅门有道，向后来再不可胡为乱信。望你把三教归一，也敬僧，也敬道，也养育人 才，我保你江山永固。”国王依言，感谢不尽，遂送唐僧出城去讫。</p>
 <p>这一去，只为殷勤经三藏，努力修持光一元。晓行夜住，渴饮饥餐，不觉的 春尽夏残，又是秋光天气。一日，天色已晚，唐僧勒马道：“徒弟，今宵何处安身也？”行者道：“师父，出家人莫说那在家人的话。”三藏道：“在家人怎么？出 家人怎么？”行者道：“在家人，这时候温床暖被，怀中抱子，脚后蹬妻，自自在在睡觉；我等出家人，那里能够！便是要带月披星，餐风宿水，有路且行，无路方 住。”八戒道：“哥哥，你只知其一，不知其二。如今路多险峻，我挑着重担，着实难走，须要寻个去处，好眠一觉，养养精神，明日方好捱担，不然，却不累倒我 也？”行者道：</p>
 <p>“趁月光再走一程，到有人家之所再住。”师徒们没奈何，只得相随行者往前。</p>
@@ -1659,8 +1704,13 @@ td.num, th.num {
 蛺
 蝍
 韲
-鰉</p>
+鰉</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%9B%9E%20%E5%9C%A3%E5%83%A7%E5%A4%9C%E9%98%BB%E9%80%9A%E5%A4%A9%E6%B0%B4%20%E9%87%91%E6%9C%A8%E5%9E%82%E6%85%88%E6%95%91%E5%B0%8F%E7%AB%A5&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch047.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%9B%9E%20%E5%9C%A3%E5%83%A7%E5%A4%9C%E9%98%BB%E9%80%9A%E5%A4%A9%E6%B0%B4%20%E9%87%91%E6%9C%A8%E5%9E%82%E6%85%88%E6%95%91%E5%B0%8F%E7%AB%A5&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch047.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch046.html">← 上一篇</a><a href="ch048.html">下一篇 →</a></nav>
 </main>
 </body>

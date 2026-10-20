@@ -11,6 +11,17 @@
 ---
 
 
+## W847 阅读页体验封装批（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/build_reader.py | W847 | 折叠段/工具条/反馈块的生成逻辑 + 对应样式（FOLD_SECTIONS / fold_sections / toolbar_html / feedback_html） |
+| site/js/reader-enhance.js | W847 | 新增：进度记忆/书签/字号/进度条/展开全部（localStorage 三键·file:// 可用·降级不抛错） |
+| docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md | W847 | AC-22~25 改判 + 附录 D 实测分布与根因 |
+| scripts/output/_w847_spec.json | W847 | 本批 spec 十字段 |
+| docs/00-导读/W批次编号对账表.md | W847 | 认领行与收官回填 |
+| site/reader/ch008.html | W847 | 代表页：折叠/工具条/进度条/反馈块（全部 622 页同批重建） |
+
 ## W846 阅读页正文回灌批（2026-10-21）
 
 | 文件 | W | 说明 |

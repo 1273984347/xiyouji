@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
 <script src="../../js/theme-init.js"></script>
+<script src="../../js/reader-enhance.js" defer></script>
 <style>
   .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
@@ -52,6 +53,35 @@
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -61,6 +91,19 @@
     <a href="../../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/02-人物深度分析/紧箍儿的内侧-器物传记.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/people/紧箍儿的内侧-器物传记.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>紧箍儿的内侧</h1>
 <blockquote>
@@ -1289,6 +1332,10 @@
 <p>土地蹲在那盆土前，像几千年来每次巡园时蹲在桃树下数落叶的姿势。落叶的数量代表土壤的湿度，湿度影响菌丝活性，菌丝活性决定来年的花量。他这一辈子都在把复杂的生命现象还原成可计数的数字。现在他面前这盆土里正在发生的事超出了他几千年的所有经验。他没有拿木牍来记，没有拿尺子来量。只是蹲着，把右手放在花盆的豁口上，手心朝向土面。手掌感觉不到温度变化——息壤是恒温的。但他感觉掌心下有一阵极轻的搏动，像心脏在泵送。息壤不需要心跳。在跳的是他自己的手。他的手掌里那根猴毛复合纱——在袖子里压了上千年的那一小块布——在花盆口的湿气和菌丝代谢产生的微弱生物电作用下，被激活了残余的神经传导功能。猴毛里残留的毛囊干细胞分化出了极原始的神经元，神经元在织物里发射了一个动作电位。电位从他的虎口传入桡神经，桡神经上行到臂丛，臂丛进入脊髓，脊髓上传到丘脑，丘脑投射到体感皮层。他那几千年没有出过蟠桃园的右手，在那一刹那间感受到了悟空的手掌几千年前第一次摸到蟠桃树皮时的触觉——树皮粗粝，金猴毛和树皮角质层摩擦产生静电，静电在毛尖上跳动，悟空的手掌被树皮硌得痒痒的。那一份痒穿越几千年，穿过八卦炉的烈火、五行山的严冰、水帘洞瀑布的水雾、取经路上风沙的打磨、成佛时斗战胜佛金身的凝固——最后传到一只蟠桃园土地被息壤侵蚀了几千年的手掌上。手心痒了一下。他把手翻过来看，手心什么都没有。挠了一下——挠的不是手心，是被悟空拍过的那边肩膀。肩膀在上午被他拍过之后一直微微发热，不是烫，是温度比另一边肩膀高半度。那是他几千年职业生涯里第一次被上级之外的人拍肩膀。他以后还会被拍很多次——锄树力士渴了会拍他背问井在哪，运水力士搬缸会拍他肩让一让。但只有这一次拍肩膀的人，让他把那个写了又划掉的“零”在心里默默补上了。他重新写了一个“零”，没有划掉。他把那个完整的“零”交给了几千年前那个在木牍上撒谎的自己，说：没关系，今天就是零。零不代表出事。零代表这只猴子来过这里，把树上所有的桃子都吃光了。零是完整。零是圆满。</p>
 <p>他站起身，膝盖咔嗒响了一声——老寒腿，在蟠桃园湿气里蹲了几千年落下的病根。息壤保湿但不保温，他的膝盖软骨在长期跪地培土中磨薄了一层，骨缝里积了息壤的微粒，每一粒微粒都是活的，在他关节腔里继续呼吸，释放微量元素。疼痛是他的老伙伴。他拍了拍膝盖上的土，往园门口走。门口的木牍架子上放着今天的记录——今天没有偷桃的，没有落果，没有病虫害，没有异常。他在木牍上写了一个“零”，又在“零”下面用小字加了一行注：“斗战胜佛今日过园，无桃可偷。”写完把木牍插回架子上。风吹过园门口，木牍在风里轻轻晃。第一行注的墨迹还没干，被风吹皱，在“偷”字的最后一笔上晕开一小朵墨花。土地转身回园里，继续给那盆不知名的树浇水。</p>
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%B4%A7%E7%AE%8D%E5%84%BF%E7%9A%84%E5%86%85%E4%BE%A7&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E7%B4%A7%E7%AE%8D%E5%84%BF%E7%9A%84%E5%86%85%E4%BE%A7-%E5%99%A8%E7%89%A9%E4%BC%A0%E8%AE%B0.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%B4%A7%E7%AE%8D%E5%84%BF%E7%9A%84%E5%86%85%E4%BE%A7&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E7%B4%A7%E7%AE%8D%E5%84%BF%E7%9A%84%E5%86%85%E4%BE%A7-%E5%99%A8%E7%89%A9%E4%BC%A0%E8%AE%B0.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="../people/百花羞外传.html">← 上一篇</a><a href="../people/紫金铃外传.html">下一篇 →</a></nav>
 </main>
 </body>

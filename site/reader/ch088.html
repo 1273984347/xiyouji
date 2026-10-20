@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第088回-禅到玉华施法会心猿木母授门人.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch088.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第088回 禅到玉华施法会 心猿木母授门人</h1>
 <blockquote>
@@ -1268,11 +1311,12 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第八十八回 禅到玉华施法会 心猿木母授门人</strong></p>
 <p>回目对仗工稳。"禅到玉华"对"心猿木母"，"施法会"对"授门人"——一处地名一处心法，一事外相一事内传。<strong>"禅到"二字最妙：</strong> 不是"行到"也不是"走到"，是"禅到"——以禅心至此。玉华县本属天竺下郡，临近佛国，是西行将终的最后一片俗世烟火。"心猿"指悟空，"木母"指八戒，二人于本回正式收徒授艺——这是西行路上悟空等三人第一次以师父身份传艺，也是全书少有的将"心猿木母"对举入回目的章节。<strong>回目把"施法会"与"授门人"对举，一公一私，一显一隐：</strong> 法会是玉华王摆宴谢师，门人是三王子拜师学艺。前者是世间礼数，后者是道统传承，二者在同一回中互为表里，又都为末段兵器被盗埋下了祸根。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>师徒离凤仙郡西行，深秋时节至一座城池。途中遇一老者，告知此处乃天竺国下郡玉华县，城主为天竺皇帝宗室，封为玉华王，"此王甚贤，专敬僧道，重爱黎民"。三藏入府倒换关文，王子见三藏一表非凡，赐坐看印，欣然押了花字。三藏言明有三个徒弟在外等候，王子命当殿官请入。八戒、行者、沙僧入府，相貌丑陋——当殿官惊呼"猪魈""猴精""灶君"，王子举目亦心中惊骇。三藏以"顽徒虽是貌丑，却都心良"为之缓颊，安排暴纱亭吃斋。</p>
 <p>王子退殿回宫，三个小王子好武好强，闻父王惊恐，各持齐眉棍、九齿钯、乌油黑棒闯入暴纱亭，喝问"是人是怪"。八戒揭衣取出九齿钉钯，金光万道；行者耳中取出金箍棒，碗来粗细、丈二三长短，竖地如生根，三王子尽气力莫想动得分毫；沙僧拈降妖宝杖，艳艳光生、纷纷霞亮。三王子拜服，请三位"施展一番"。行者三人各驾云头起在半空，悟空撒花盖顶、黄龙转身，八戒上三下四、左五右六，沙僧丹凤朝阳、饿虎扑食——满城军民僧尼、家家念佛、户户拈香。三王子回宫奏请父王，欲拜三位为师，"学他手段，保护我邦"。</p>
 <p>玉华王父子亲至暴纱亭下拜，恳求传艺，"必以倾城之资奉谢"。行者答以"出家人巴不得要传几个徒弟"，不受分毫之利，但以情相处。次日行者三人受王子师徒之礼，先教焚香拜天地，悟空念真言诵咒语，将仙气吹入三王子心腹，把元神收归本舍，运遍子午周天——"却象个脱胎换骨之法"。三王子苏醒后骨壮筋强，各能拿起金箍棒、九齿钯、降妖杖，然终是凡夫，使一路便喘气嘘嘘，转换艰难。</p>
 <p>三王子请命依神器式样减削斤两另造兵器。王子宣召铁匠，买钢铁万斤，于王府前院搭厂支炉，请行者三人将三般兵器放于篷厂作样，昼夜不收。兵器乃随身之宝，"各藏在身，自有许多光彩护体"，今放在厂院中数日，"那霞光有万道冲天，瑞气有千般罩地"。城外七十里豹头山虎口洞有一妖精，夜坐见霞光，驾云近前查看，认出是三般兵器放光，又喜又爱，"爱心一动，弄起威风，将三般兵器一股收之，径转本洞"。正是"道不须臾离，可离非道也。神兵尽落空，枉费参修者。"</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、心猿木母授门人：取经路上唯一的"道统外传"</h3>
 <p>本回最特殊之处，是悟空、八戒、沙僧三人在西行将终之际，第一次以师父身份收徒。<strong>这是全书仅有的"道统外传"：</strong> 取经本是"自度"之业，至此忽然生出"度人"之枝节。悟空向三藏行礼禀明："彼既为我等之徒弟，即为我师之徒孙也。谨禀过我师，庶好传授。"——这一句话把传承谱系讲得极清楚：唐僧→悟空→玉华三王子。<strong>三代师承，在玉华县这座小城落地生根。</strong></p>
@@ -1349,7 +1393,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch087.html">上一回</a> · <a href="ch089.html">下一回</a> · <a href="../index.html">站点首页</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/沙僧.html">沙僧</a> · <a href="people/观音.html">观音</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD068 · 竹节山——当狮子不稀罕吃你的肉</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1419,6 +1463,7 @@ td.num, th.num {
 <p>第83回凤仙郡是“惩罚结束后的纪念”——倒下的碑、空供桌、“不旱了”的石碑、碑座上的槐树。凤仙郡人用整个郡的生活来转化恐惧的残留。第85回玉华州，恐惧没有残留——因为九灵元圣不是惩罚凤仙郡的米山面山，九灵元圣只是一个护孙子的老狮子。玉华州的妖怪之灾不是“罪与罚”，是武痴黄狮精的一次入室盗窃，引发的连锁反应。所以玉华州的“灾后重建”不需要转化恐惧——只需要正常生活。</p>
 <p>正常生活就是：铜棍上的招式忘了一半，铁钯的齿在田里硌弯了，额角的疤阴天下雨还疼，每天早上打三招，打完去巡城。兵器不再是兵器，是农具，是招牌，是习惯。师父不再是师父，是过路的客人——煮茶时多放一碗水，留他们住一晚，听他们讲路上的事。但兵器架上的凹痕、弯齿磨亮的铁芯、额角那道不再疼的疤，都在说：那一年，有三个天上下来的妖怪路过，有三个地上的人拜了师。</p>
 <p>悟空站在铁匠铺门口，看着那块“齐天大圣师父所授”的招牌。字歪了，铜棍旧了，但铁匠铺的炉火烧得很旺。铁匠在打一把新锄头。悟空走过去，看了一会儿，说：“好火。”</p>
+</div></details>
 <h2>五、术语更新</h2>
 <p><strong>V24. “招式遗忘”</strong></p>
 <p>徒弟忘了师父教的招式，不是荒废，是招式内化为身体记忆后，不再需要被记住。遗忘是学习的最终阶段——动作还在手上，口诀已经不需要了。像沙僧的横杖，他从来没教过三王子，但三王子每天早上打的起手式就是横杖。师父没教，徒弟学会了。</p>
@@ -1450,7 +1495,7 @@ td.num, th.num {
 </blockquote>
 <p><strong>第85回结束。清晨，铁匠铺的炉火烧起来，风箱呼呼响。三个中年人在城门口送别四个和尚一匹马。这次没有跪送，只是拱了拱手。“师父们慢走。”“你们也是。”悟空走出去几步又回头，看了一眼铜棍上那行字——晨光照在“齐天大圣”四个字上，他笑着摇了摇头，转身追上队伍。</strong></p>
 <hr />
-<h2>原文全文</h2>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>话说唐僧喜喜欢欢别了郡侯，在马上向行者道：“贤徒，这一场善果，真胜似比丘国搭救儿童，皆尔之功也。”沙僧道：“比丘国只救得一千一百一十一 个小儿，怎似这场大雨，滂沱浸润，活彀者万万千千性命！弟子也暗自称赞大师兄的法力通天，慈恩盖地也。”八戒笑道：“哥的恩也有，善也有，却只是外施仁 义，内包祸心。但与老猪走，就要作践人。”行者道：“我在那里作践你？”八戒道：“也彀了！也彀了！常照顾我捆，照顾我吊，照顾我煮，照顾我蒸！今在凤仙 郡施了恩惠与万万之人，就该住上半年，带挈我吃几顿自在饱饭，却只管催趱行路！”长老闻言，喝道：“这个呆子，怎么只思量掳嘴！快走路，再莫斗口！”</p>
 <p>八戒不敢言，掬掬嘴，挑着行囊，打着哈哈，师徒们奔上大路。</p>
 <p>此时光景如梭，又值深秋之候，但见：水痕收，山骨瘦。红叶纷飞，黄花时候。霜晴觉夜长，月白穿窗透。家家烟火夕阳多，处处湖光寒水溜。白蘋香，红蓼茂。 桔绿橙黄，柳衰谷秀。荒村雁落碎芦花，野店鸡声收菽豆。四众行彀多时，又见城垣影影，长老举鞭遥指叫：“悟空，你看那里又有一座城池，却不知是甚去处。” 行者道：“你我俱未曾到，何以知之？且行至边前问人。”</p>
@@ -1567,8 +1612,13 @@ td.num, th.num {
 磥
 瞵
 禡
-綪</p>
+綪</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E5%85%AB%E5%8D%81%E5%85%AB%E5%9B%9E%20%E7%A6%85%E5%88%B0%E7%8E%89%E5%8D%8E%E6%96%BD%E6%B3%95%E4%BC%9A%20%E5%BF%83%E7%8C%BF%E6%9C%A8%E6%AF%8D%E6%8E%88%E9%97%A8%E4%BA%BA&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch088.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E5%85%AB%E5%8D%81%E5%85%AB%E5%9B%9E%20%E7%A6%85%E5%88%B0%E7%8E%89%E5%8D%8E%E6%96%BD%E6%B3%95%E4%BC%9A%20%E5%BF%83%E7%8C%BF%E6%9C%A8%E6%AF%8D%E6%8E%88%E9%97%A8%E4%BA%BA&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch088.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch087.html">← 上一篇</a><a href="ch089.html">下一篇 →</a></nav>
 </main>
 </body>

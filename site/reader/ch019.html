@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第019回-云栈洞悟空收八戒浮屠山玄奘受心经.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch019.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第019回 云栈洞悟空收八戒 浮屠山玄奘受心经</h1>
 <blockquote>
@@ -1269,8 +1312,9 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第十九回 云栈洞悟空收八戒 浮屠山玄奘受心经</strong></p>
 <p>本回处全书百回之第十九，承第018回"高老庄行者降魔"——上回止于悟空追赶八戒化狂风脱身，本回续写云栈洞降伏之事；启第020回"黄风岭唐僧有难"——本回末师徒下浮屠山西行，下回即入黄风岭劫难。八字二句，前句收徒，后句受法：队伍补人至四，心法奠基立纲。一收一受，外扩队伍，内立心法，吴承恩于此回同时完成两件事——组建取经队伍的 4/5，与铺设全书的修心大纲。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>悟空追八戒至云栈洞，八戒取出九齿钉钯迎战。八戒自述身世：原为天蓬元帅，因酒醉调戏嫦娥被贬，重责二千锤，错投胎成猪，官名猪刚鬣。两人斗至天明，八戒败阵闭洞不出。悟空回高老庄禀报唐僧，再赴云栈洞砸门叫阵。八戒炫耀钉钯乃老君亲手锻炼、玉皇御赐之神兵，悟空伸头任其筑而不伤，自陈铜头铁臂来历。悟空亮明身份——乃保唐僧西天取经的齐天大圣。八戒闻言丢钯归依，自言受观音菩萨劝戒，持斋等候取经人多年。八戒烧毁云栈洞，悟空绑其回高老庄拜见唐僧。唐僧大喜，八戒法名"悟能"乃菩萨所赐，唐僧又因其断了五荤三厌，赐别号"八戒"。师徒三人辞高老庄西行，行过乌斯藏界，至浮屠山，遇乌巢禅师。禅师认得八戒，又授唐僧《摩诃般若波罗蜜多心经》一卷，凡五十四句二百七十字，嘱其遇魔瘴处念诵可免伤害。禅师另诵一偈预指前途，言"野猪挑担子，水怪前头遇，多年老石猴"。悟空怒其暗骂，举棒捣巢，奈何莲花祥雾护体，莫想挽着乌巢一缕藤。师徒下山西去。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、收徒与受法并置</h3>
 <p>回目"收八戒"与"受心经"对举，一武一文，一外一内。队伍补人（4/5）与心法奠基同步完成——取经不只是赶路，更是修心。结构上以"收徒"为铺垫，"受法"为升华，全回重心落在后半的心经。</p>
@@ -1346,14 +1390,15 @@ td.num, th.num {
 <blockquote>
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch018.html">上一回</a> · <a href="ch020.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/relationships.html">人物关系</a> · <a href="../data/character-appearance.html">人物出场</a> · <a href="../data/philosophy.html">哲学可视化</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD019 · 云栈洞悟空收八戒，浮屠山玄奘受心经</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
 </blockquote>
 <p>此回玄奘两次面临危机：第一次是被抓进波月洞，第二次是在宝象国被国王要求降妖。两次都没有出现《心经》的内心独白或念诵描写。第19回乌巢禅师传经时说的“若遇魔瘴之处，但念此经，自无伤害”仍然没有兑现。</p>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>却说那怪的火光前走，这大圣的彩霞随跟。正行处，忽见一座高山，那怪把红光结聚，现了本相，撞入洞里，取出一柄九齿钉钯来战。行者喝一声道：“泼怪！你是那里来的邪魔？怎么知道我老孙的名号？你有甚么本事，实实供来，饶你性命！”</p>
 <p>那怪道：“是你也不知我的手段！上前来站稳着，我说与你听：</p>
 <p>我自小生来心性拙，贪闲爱懒无休歇。不曾养性与修真，混沌迷心熬日月。忽然闲里遇真仙，就把寒温坐下说。劝我回心莫堕凡，伤生造下无边孽。有朝大限命终 时，八难三途悔不喋。听言意转要修行，闻语心回求妙诀。有缘立地拜为师，指示天关并地阙。得传九转大还丹，工夫昼夜无时辍。上至顶门泥丸宫，下至脚板涌泉 穴。周流肾水入华池，丹田补得温温热。婴儿姹女配阴阳，铅汞相投分日月。离龙坎虎用调和，灵龟吸尽金乌血。三花聚顶得归根，五气朝元通透彻。功圆行满却飞 升，天仙对对来迎接。朗然足下彩云生，身轻体健朝金阙。玉皇设宴会群仙，各分品级排班列。敕封元帅管天河，总督水兵称宪节。</p>
@@ -1469,8 +1514,13 @@ td.num, th.num {
 聪
 酸
 骗
-磨</p>
+磨</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%9B%9E%20%E4%BA%91%E6%A0%88%E6%B4%9E%E6%82%9F%E7%A9%BA%E6%94%B6%E5%85%AB%E6%88%92%20%E6%B5%AE%E5%B1%A0%E5%B1%B1%E7%8E%84%E5%A5%98%E5%8F%97%E5%BF%83%E7%BB%8F&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch019.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%9B%9E%20%E4%BA%91%E6%A0%88%E6%B4%9E%E6%82%9F%E7%A9%BA%E6%94%B6%E5%85%AB%E6%88%92%20%E6%B5%AE%E5%B1%A0%E5%B1%B1%E7%8E%84%E5%A5%98%E5%8F%97%E5%BF%83%E7%BB%8F&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch019.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch018.html">← 上一篇</a><a href="ch020.html">下一篇 →</a></nav>
 </main>
 </body>

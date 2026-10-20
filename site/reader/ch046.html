@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第046回-外道弄强欺正法心猿显圣灭诸邪.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch046.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第046回 外道弄强欺正法 心猿显圣灭诸邪</h1>
 <blockquote>
@@ -1268,8 +1311,9 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>外道弄强欺正法 心猿显圣灭诸邪</strong></p>
 <p>回目出自世德堂本《新刻出像官板大字西游记》第四十六回。八字二句，前句主"邪"，后句主"正"——"外道"指虎力、鹿力、羊力三大仙，"弄强"即赌赛逞能；"心猿"即悟空，"显圣"即大显神通。一个"欺"字，一个"灭"字，胜负已定。承上回求雨初胜，此回三大赌命局连场，三妖皆死——车迟国斗法终局，正法归位。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>车迟国国王虽倒换关文，三大仙不甘败绩，再起赌局。第一场"云梯显圣"坐禅，虎力大仙被悟空化作蜈蚣叮鼻翻下禅台；第二场"隔板猜枚"，悟空钻柜三番换物——山河社稷袄变破烂流丢一口钟、仙桃啃成桃核、道童剃成和尚，鹿力大仙三猜皆输。虎力大仙遂赌三大要命局：砍头、剖腹剜心、下滚油锅。砍头局中，悟空被土地按头仍能长出新头，虎力大仙之头被悟空化黄犬衔走，现形黄毛虎而死；剖腹局中，悟空脏腑自取自安，鹿力大仙之五脏被悟空化饿鹰抓去，现形白毛角鹿而死；油锅局中，悟空假死试八戒义气，羊力大仙恃北海龙王所助"冷龙"护体，悟空唤走冷龙，羊力煠化身亡。三大仙皆死，国王痛哭，车迟国尊道抑佛之祸终得清除。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、三大赌命局的"递进"结构</h3>
 <p>云梯坐禅——隔板猜枚——砍头剖腹油锅，三场赌赛层层加码。前两场赌的是"法术"，第三场赌的是"性命"。<strong>吴承恩把赌局从技艺推向生死，是为了让"外道"自陷死路。</strong> 三大仙若止于求雨、坐禅之败，尚可保命；可他们偏要赌命——逞强之心不死，则身必死。这是全书最严密的"递进式叙事"：每一场胜利都不彻底，逼出下一场更狠的赌，直到赌无可赌。</p>
@@ -1342,7 +1386,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch045.html">上一回</a> · <a href="ch047.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/philosophy.html">哲学可视化</a> · <a href="../data/magic-system.html">法术阵法可视化</a> · <a href="../data/jurisprudence.html">法理经济可视化</a> · <a href="../data/cultural-misreading.html">文化错位可视化</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD041 · 车迟国的三个问题</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1351,6 +1395,7 @@ td.num, th.num {
 <p>上回说到，黑水河河神终于拿回了自己的水府。取经团队开始习惯一件事：他们的到来本身，就能打破某地的权力僵局。但这种功能也有代价——每经过一处，当地的隐藏矛盾就会被激活。不是取经人找麻烦，是麻烦本来就在那里，只是需要一个外来者来引爆。</p>
 <p>车迟国，就是这种引爆最剧烈的一次。</p>
 <hr />
+</div></details>
 <h2>一、一座城市的信仰，被三道符咒劫持</h2>
 <p>老远就听到了声响。</p>
 <p>不是风声，不是水声，是几百人一起喊号子的声音。那声音从车迟国城外的一片工地上传来，整齐划一里透着力气耗尽前的嘶哑。玄奘在马上皱了皱眉，悟空已经跃到半空往下看。</p>
@@ -1504,7 +1549,7 @@ td.num, th.num {
 </li>
 </ol>
 <hr />
-<h2>原文全文</h2>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>话说那国王见孙行者有呼龙使圣之法，即将关文用了宝印，便要递与唐僧，放行西路。那三个道士，慌得拜倒在
 金銮
 殿上启奏，那皇帝即下龙位，御手忙 搀道：“国师今日行此大礼，何也？”道士说：“陛下，我等至此匡扶社稷，保国安民，苦历二十年来，今日这和尚弄法力，抓了功去，败了我们声名，陛下以一场 之雨，就恕杀人之罪，可不轻了我等也？望陛下且留住他的关文，让我兄弟与他再赌一赌，看是何如。”那国王着实昏乱，东说向东，西说向西，真个收了关文道： “国师，你怎么与他赌？”虎力大仙道：“我与他赌坐禅。”国王道：“国师差矣，那和尚乃禅教出身，必然先会禅机，才敢奉旨求经，你怎与他赌此？”大仙道： “我这坐禅，比常不同，有一异名，教做云梯显圣。”国王道：“何为云梯显圣？”大仙道：“要一百张桌子，五十张作一禅台，一张一张迭将起去，不许手攀而 上，亦不用梯凳而登，各驾一朵云头，上台坐下，约定几个时辰不动。”国王见此有些难处，就便传旨问道：“那和尚，我国师要与你赌云梯显圣坐禅，那个会 么？”行者闻言，沉吟不答。八戒道：“哥哥，怎么不言语？”行者道：“兄弟，实不瞒你说，若是踢天弄井，搅海翻江，担山赶月，换斗移星，诸般巧事，我都干 得；就是砍头剁脑，剖腹剜心，异样腾那，却也不怕。但说坐禅我就输了，我那里有这坐性？你就把我锁在铁柱子上，我也要上下爬蹅，莫想坐得住。”三藏忽的开 言道：“我会坐禅。”行者欢喜道：“却好却好！</p>
@@ -1622,8 +1667,13 @@ td.num, th.num {
 鍓
 鯇
 鴻
-箛</p>
+箛</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E5%9B%9B%E5%8D%81%E5%85%AD%E5%9B%9E%20%E5%A4%96%E9%81%93%E5%BC%84%E5%BC%BA%E6%AC%BA%E6%AD%A3%E6%B3%95%20%E5%BF%83%E7%8C%BF%E6%98%BE%E5%9C%A3%E7%81%AD%E8%AF%B8%E9%82%AA&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch046.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E5%9B%9B%E5%8D%81%E5%85%AD%E5%9B%9E%20%E5%A4%96%E9%81%93%E5%BC%84%E5%BC%BA%E6%AC%BA%E6%AD%A3%E6%B3%95%20%E5%BF%83%E7%8C%BF%E6%98%BE%E5%9C%A3%E7%81%AD%E8%AF%B8%E9%82%AA&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch046.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch045.html">← 上一篇</a><a href="ch047.html">下一篇 →</a></nav>
 </main>
 </body>
