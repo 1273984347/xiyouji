@@ -13,7 +13,7 @@ SD 切片错位（张冠李戴）扫描器。
 
 输出：
 - 控制台打印疑似错位清单与逐项 top3 相似度。
-- 报告写入 .workbuddy/sd_scan_report.md（不在 git 跟踪内）。
+- 报告写入 tmpe/_reports/sd_scan_report.md（项目工地·不在 git 跟踪内）。
 """
 import os
 import re
@@ -22,7 +22,11 @@ import json
 import math
 from collections import Counter
 
-_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# W812：归档后目录加深致 ROOT 解析错位（原位为 scripts/ 下·现为 archive/scripts/）——
+# 守卫根与 ROOT 一并上溯三级对齐到项目根，使「path escapes project root」语义成立。
+_W536_ROOT = os.path.realpath(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+)
 
 def _w536_guard_open(path, *a, **k):
     _real = os.path.realpath(path)
@@ -30,10 +34,11 @@ def _w536_guard_open(path, *a, **k):
         raise SystemExit("W536 guard: path escapes project root: %s" % path)
     return open(_real, *a, **k)
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SHENDU = os.path.join(ROOT, "source", "原文", "shendu")
 FENHUI = os.path.join(ROOT, "source", "原文", "分回")
-REPORT = os.path.join(ROOT, ".workbuddy", "sd_scan_report.md")
+# W812：报告落项目工地（tmpe/_reports/·gitignore 覆盖·不入库），不再写入厂商工具目录
+REPORT = os.path.join(ROOT, "tmpe", "_reports", "sd_scan_report.md")
 
 
 def read(path):

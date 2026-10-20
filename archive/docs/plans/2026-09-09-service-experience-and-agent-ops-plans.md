@@ -349,12 +349,12 @@
 
 ## 方案 R（占位，独立成案）：agent-web 重设计
 
-> 2026-09-09 用户裁决：agent-web 走重设计路线，不为本体现状做公网化入口。**重设计方案见 `docs/superpowers/plans/2026-09-17-agent-web-redesign-plan.md`：v1（双引擎）于同日被用户追加裁决取代——全量移除 CodeBuddy/WorkBuddy 后重写为 v2（自研 OpenAI 兼容单引擎：llm/client + agent/loop + 五工具注册表，无 SDK、无 CLI、CODEBUDDY_* 环境变量退役，SSE 协议对前端零变更；专用基线审计脚本 `_audit_agentweb_baseline.py`）。v2 已部分裁决（工具集=五件套、编排维持不变），**R 整体于 2026-09-18 暂停**（用户裁决「暂停开发 agent web」）；恢复前置 = 用户点名 + LLM 接入参数 + E0' 探针通过。站点侧 D/E/H 批次不受影响。**
+> 2026-09-09 用户裁决：agent-web 走重设计路线，不为本体现状做公网化入口。**重设计方案见 `docs/superpowers/plans/2026-09-17-agent-web-redesign-plan.md`：v1（双引擎）于同日被用户追加裁决取代——全量移除旧厂商 Agent 品牌（含 CodeBuddy） 后重写为 v2（自研 OpenAI 兼容单引擎：llm/client + agent/loop + 五工具注册表，无 SDK、无 CLI、CODEBUDDY_* 环境变量退役，SSE 协议对前端零变更；专用基线审计脚本 `_audit_agentweb_baseline.py`）。v2 已部分裁决（工具集=五件套、编排维持不变），**R 整体于 2026-09-18 暂停**（用户裁决「暂停开发 agent web」）；恢复前置 = 用户点名 + LLM 接入参数 + E0' 探针通过。站点侧 D/E/H 批次不受影响。**
 
 - **触发时点**：默认在方案 D/E（W572–W573）落地后启动 R1（W574 起）；用户可点名提前。A/B/C 已于 W563–W565 完成，不再构成前置。
 - **输入**：① 本计划 F/G 全部验收口径（错误契约三件套、指标 schema、限流、构建链、sysprompt 单源）平移为需求基线；② 本方案基线表 F22–F31（agent 侧审计发现）；③ `scripts/rag/` BM25+图谱索引的接入评估。
 - **并入关系（R 已获批生效，2026-09-17；见 R 文档裁决 C）**：F-1 残余→R3、F-2/F-3/F-4→R1、G-1→R2、G-3→R3/R4、G-4/G-5/G-2 README 小项→R5；本计划 F/G 节降级为 R 的需求基线文档，**不再独立施工**（避免双重改动）；D/E/H 维持原批号不变。
-- **明确约束**：重设计不回退现有安全基线（回环绑定默认值、权限白名单、目录钳制、P0–P3 审计结论、`AGENT_WEB_ALLOW_BYPASS` 门控、save-env-config 的 P0-2 姿态）；**CodeBuddy/WorkBuddy 全量移除**（R v2 裁决 A'：自研 OpenAI 兼容 Agent 循环，`@tencent-ai/agent-sdk` 退役、CLI 概念删除、CODEBUDDY_* 环境变量改 LLM_*）。
+- **明确约束**：重设计不回退现有安全基线（回环绑定默认值、权限白名单、目录钳制、P0–P3 审计结论、`AGENT_WEB_ALLOW_BYPASS` 门控、save-env-config 的 P0-2 姿态）；**旧厂商 Agent 品牌全量移除（含 CodeBuddy）**（R v2 裁决 A'：自研 OpenAI 兼容 Agent 循环，`@tencent-ai/agent-sdk` 退役、CLI 概念删除、CODEBUDDY_* 环境变量改 LLM_*）。
 
 ---
 

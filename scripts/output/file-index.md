@@ -11,6 +11,48 @@
 ---
 
 
+## W812 去旧厂商 Agent 工具品牌化批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .gitignore | W812 | 改：删该厂商工具目录的忽略规则（2 行） |
+| AGENTS.md | W812 | 改：机器环境事实条「提交门禁 hook 解释器」改写为逐候选实测可运行口径（去掉厂商托管运行时指向） |
+| CHANGELOG.md | W812 | 改：现役与历史段该品牌字样去品牌化（认领/来源/环境事实类叙述） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W812 | 改：归档段该品牌字样去品牌化（豁免登记/环境事实/硬性排除三类） |
+| archive/docs/file-index-ARCHIVE.md | W812 | 改：归档文件索引条该品牌字样去品牌化 |
+| archive/docs/plans/2026-09-09-service-experience-and-agent-ops-plans.md | W812 | 改：品牌清零类裁决叙述去品牌化（复合表述改为旧厂商 Agent 品牌含 CodeBuddy） |
+| archive/docs/plans/2026-09-17-agent-web-redesign-plan.md | W812 | 改：v2 修订说明/清理范围/验收判据/遗留登记四处去品牌化 |
+| archive/docs/plans/2026-10-07-agent-web-engine-swap-plan.md | W812 | 改：用户裁决链/目标/文档面验收/W681 判据/收官判据五处去品牌化 |
+| archive/scripts/_scan_sd_anchors.py | W812 | 改：ROOT 与守卫根上溯三级对齐项目根（顺修归档后目录加深的解析错位）+ 报告落 tmpe/_reports/ |
+| archive/scripts/_scan_sd_misplace.py | W812 | 改：ROOT 与守卫根上溯三级对齐项目根 + 报告落 tmpe/_reports/ + docstring 同步 |
+| archive/scripts/batches/misc/adversarial-review-integrated-2026-08-11.md | W812 | 改：记忆/技能路径与工具名叙述去品牌化（6 处） |
+| archive/scripts/batches/misc/link-audit-report.md | W812 | 改：链接扫描排除目录默认值叙述去品牌化（3 处） |
+| archive/scripts/batches/misc/perf_canvas_report.md | W812 | 改：运行时模块路径写法去品牌化（2 处） |
+| archive/scripts/batches/w5xx/_w568_spec.json | W812 | 改：归档批 spec 的环境事实叙述去品牌化 |
+| archive/scripts/batches/w5xx/_w596_spec.json | W812 | 改：归档批 spec 的豁免登记叙述去品牌化 |
+| archive/scripts/batches/w6xx/_w684_spec.json | W812 | 改：归档批 spec 的品牌清零登记叙述去品牌化 |
+| archive/scripts/w334_font_subset.py | W812 | 改：字体子集脚本的托管虚拟环境路径改指系统解释器 |
+| docs/00-导读/W批次编号对账表.md | W812 | 改：W726-W750 共 23 行认领会话列去品牌化（结构性修改·按 pitfalls 列入 touches）+ W812 认领行与 bullet |
+| docs/11-方案报告/W761工具链可维护性重构报告-2026-10-16.md | W812 | 改：报告头负责人署名去品牌化 |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-07-治理与引擎.md | W812 | 改：复盘范围叙述的品牌清零表述去品牌化 |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-13.md | W812 | 改：元信息块/信息来源/自动化项/经验库结构/假设清单五处去品牌化 |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-14.md | W812 | 改：元信息块/跨周期自证/工具依赖/经验库落点/衔接说明五处去品牌化 |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-15.md | W812 | 改：报告头/责任人/任务卡/坑族/知识资产各表署名列去品牌化（27 处） |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-17.md | W812 | 改：报告头/责任人/任务卡/行动项/优先级各表署名列去品牌化（15 处） |
+| docs/11-方案报告/计划方案/T01-任务计划执行与经验沉淀报告-2026-10-14.md | W812 | 改：报告头/记忆落点/验收判据三处去品牌化 |
+| docs/11-方案报告/计划方案/执行前计划-T01.md | W812 | 改：负责人/验收判据/假设表/任务表八处去品牌化 |
+| docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md | W812 | 改：豁免域登记叙述去品牌化 |
+| docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md | W812 | 改：干扰日志表会话列去品牌化（4 行·保留并行会话语义） |
+| scripts/archive_file.py | W812 | 改：引用扫描去掉该厂商目录的排除项 |
+| scripts/gen_folder_docs.py | W812 | 改：目录文档生成的排除目录元组去掉该项 |
+| scripts/output/_w745_spec.json | W812 | 改：现役 spec 的仓库卫生与文件行叙述去品牌化 |
+| scripts/output/_w778_spec.json | W812 | 改：现役 spec 的来源叙述去品牌化 |
+| scripts/preflight_check.py | W812 | 改：工作树态统计去掉该厂商目录的排除分支（3 处·说明行/docstring/排除 if） |
+| site/data/search.html | W812 | 改：内嵌搜索索引载荷随文档变更重生成 + CSP 哈希重算 |
+| site/en/search.html | W812 | 改：内嵌搜索索引载荷随文档变更重生成 + CSP 哈希重算 |
+| tests/unit/test_preflight_check.py | W812 | 改：用例改测工作树态三态计数本身 + 认领会话样例去品牌化 |
+| tmpe/README.md | W812 | 改：活跃冻结区并行会话表述去品牌化 |
+
 ## W811 CI 断链修复批（2026-10-20）
 
 | 文件 | W | 说明 |

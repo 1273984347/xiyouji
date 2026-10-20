@@ -92,7 +92,7 @@ def scan_refs(path):
         return []
     cmd = ["grep", "-rnF", name, ROOT,
            "--exclude-dir=.git", "--exclude-dir=node_modules", "--exclude-dir=__pycache__",
-           "--exclude-dir=archive", "--exclude-dir=.workbuddy", "--exclude-dir=tmpe",
+           "--exclude-dir=archive", "--exclude-dir=tmpe",
            "--exclude-dir=hyperframes", "--exclude-dir=.playwright", "--exclude-dir=.pw-browsers"]
     for f in EXCLUDE_FILES:
         cmd.append(f"--exclude={f}")

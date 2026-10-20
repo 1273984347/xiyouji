@@ -44,7 +44,7 @@
 | **P1** | 英文站 | `site/en/chapters-map.html` 未译（CJK 主导） | 语言比 1.51 |
 | **P1** | 供应链 | 96 处 CDN 脚本无 SRI | grep d3js.org=94；SRI-001/002=95+95 |
 | **P2** | 工具漂移 | TodoWrite 引用失效（应为 TaskCreate 系列） | 文档规范.md:208/213 |
-| **P2** | 工具漂移 | 三 skill 闭环路径指向 Trae（WorkBuddy 路径失效） | 交接文档.md:296-298 |
+| **P2** | 工具漂移 | 三 skill 闭环路径指向 Trae（Agent 运行时路径失效） | 交接文档.md:296-298 |
 | **P2** | 文档 | 新Agent启动Prompt.md 滞后 W419 | 未涵盖 W420-W423 |
 | **P2** | 安全工具 | API-004 "2 findings" 系扫描器自匹配假阳性 | grep verify=False 仅现于规则文本 |
 | **P2** | 版本工具 | bump_version 不更新权威版本锚点 | bump_version.py:176 |
@@ -74,9 +74,9 @@
 ### P0-2 · 记忆系统路径全面失效（新 Agent 接手陷阱）
 - `文档规范.md:198`、`新Agent启动Prompt.md:39`、`交接文档.md:259/538/540` 要求改/查 `user_profile.md` / `project_memory.md` / `work-log.md` / `topics.md` / `retrospective.md` 与 `C:\Users\12739\.trae-cn\memory\`。
 - 实测：这些文件在仓库根与 `.trae-cn/` 均 **not found**。
-- 当前真实记忆系统：`C:\Users\12739\.workbuddy\MEMORY.md` + `D:\1\xiyouji\.workbuddy\memory\`。
+- 当前真实记忆系统：`<agent-runtime>\MEMORY.md` + `<project-root>\<agent-runtime>\memory\`。
 - **影响**：E1 铁律"memory spot-check"让新 Agent 查**不存在的文件** → 误判 memory 缺失，或在仓库根新建 `user_profile.md` **污染 repo**；§11.2 把"user_profile.md"列为禁改项，但该对象根本不存在。
-- **修复**：所有 memory 引用改为 WorkBuddy 实际路径；`.trae-cn/` 标注"历史(Trae)遗留，已废弃"。
+- **修复**：所有 memory 引用改为实际运行时路径；`.trae-cn/` 标注"历史(Trae)遗留，已废弃"。
 
 ### P0-3 · security.yml E8-4 安全门禁永久失败（永远红 + 真实依赖零覆盖）
 - `security_scan.py --all` 对**本地 Python 环境**跑 `pip-audit`，把环境依赖漏洞计入 `DEP-001`（high）。本次 high=103，**全部是 `(environment)`**（gradio/keras/cryptography/bleach…），非仓库 `requirements.txt` 钉版依赖。
@@ -138,10 +138,10 @@ CN 版同位置干净。→ D3 加载失败 + 布局全崩，**该 EN 页完全�
 ## 5. P2 级发现（工具漂移 / 安全工具 / 脚本缺陷）
 
 ### P2-1 · TodoWrite 引用失效
-`文档规范.md:208/213`、`新Agent启动Prompt.md:37` 要求"TodoWrite 逐项勾选"。TodoWrite 是 Claude Code 工具，WorkBuddy 用 TaskCreate/TaskList/TaskUpdate。
+`文档规范.md:208/213`、`新Agent启动Prompt.md:37` 要求"TodoWrite 逐项勾选"。TodoWrite 是 Claude Code 工具，本项目另一 Agent 运行时用 TaskCreate/TaskList/TaskUpdate。
 
 ### P2-2 · 三 skill 闭环路径指向 Trae
-`交接文档.md:296-298`、`项目交接参考手册.md:178`、`docs/10-方法论沉淀/三skill闭环.md` 等指向 `C:\Users\12739\.trae-cn\skills\...`。WorkBuddy skills 在 `~/.workbuddy/skills/`，路径失效。
+`交接文档.md:296-298`、`项目交接参考手册.md:178`、`docs/10-方法论沉淀/三skill闭环.md` 等指向 `C:\Users\12739\.trae-cn\skills\...`。Agent skills 在 `<agent-runtime>/skills/`，路径失效。
 
 ### P2-3 · 新Agent启动Prompt.md 本身滞后
 创建/更新止于 W419（2026-08-10），未涵盖 W420-W423 关键变更（verify 4 新门禁、perf 预算收紧、CSP 仍含 unsafe-inline 待办）。虽声明"以交接文档为准"，但其"配套/更新"段会误导新 Agent 低估近 4 个版本的治理成果与遗留项。
@@ -330,7 +330,7 @@ GitHub Pages 不消费 `_headers`，`script-src` 去 `unsafe-inline` 待部署�
 1. `verify_delivery.py:50` `EXPECT_A4` → `"209 篇"`（或动态计数）；统一 README/STRUCTURE/项目说明/文档规范 四处 "199→201" parenthetical。（P0-1）
 2. `README.md:5` / `项目说明.md:5` 日期 2026-08-10 → **2026-08-11**。（P1-1）
 3. bump 旁文档 4 份到 v2.3.38 W423。（P1-3）
-4. memory / skill 路径引用改为 WorkBuddy 实际路径，`.trae-cn/` 标注废弃。（P0-2 / P2-2）
+4. memory / skill 路径引用改为实际运行时路径，`.trae-cn/` 标注废弃。（P0-2 / P2-2）
 5. 修 `character-relationship-3d*`（P0-4）与 `security.yml` E8-4（P0-3）。
 
 **短期**

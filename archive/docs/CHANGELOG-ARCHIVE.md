@@ -216,7 +216,7 @@
 ### v2.3.275（2026-10-07）：W684 工作复盘与优化分析报告入库 — 治理与引擎周期复盘（含 W681 部分/W683 合并登记）
 > **来源**：用户令按「工作复盘与优化分析系统提示词（AI Agent 专用版）」复盘；周期=2026-10-07 治理与引擎更换弧线（W679-W683·13 提交全绿）。合并登记：W681 部分（文档清零+归档治理+CodeQL 首账·联调待凭证仍进行中）与 W683（三 starter 收官）随本段补录（D1 式合并段）。
 > - **执行（报告）**：docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-07-治理与引擎.md——执行摘要+九章+附录：E-01~E-10 十项经验量化排序（独立安全审查先行 5.0/手工级联复制改造 4.75/崩溃前写盘 git 重建 4.5/告警按族裁决 4.5/归档三规则 4.5 等）+S-10~S-12 三张 skill-creator 任务卡（引擎冒烟模板/告警裁决流水线/手工级联生成器·均含规格五要素与周级时间表）+U 四项三态决策（dynamic-workflows 暂缓沿用 W675 裁决等）+SC 五场景量化（跳号收官 4.40 最高）+P-01~P-14 问题登记（P0×2 已闭环：铁令跨 session 载体/引擎密钥可读）+WF 两流程（引擎更换批复盘+告警处置 ≥20% 目标）+WBS 七行动（关键路径=A-01 联调→A-02 基线·唯一外部依赖=用户三键）。
-> - **合并登记·W681 部分**（4801650+e51d067+82e40d0）：品牌现役面 31 处/10 文件清零（含 agent-web 三 md 与 .workbuddy 功能排除）+三归档件移 docs/archive/ 统一大写 ARCHIVE 后缀+CHANGELOG 滚动归档迁 W485-W649 段 166 节（1861→273 行）+文档规范 §5 固化归档三规则+CodeQL 42 告警首账清零（真修 3：api_server realpath 边界/CORS 常量化/agent-web /api/* 限流·其余按族 dismiss 理由随条）——状态=进行中（剩余=真端点联调待用户 LLM 三键+权限矩阵）。
+> - **合并登记·W681 部分**（4801650+e51d067+82e40d0）：品牌现役面 31 处/10 文件清零（含 agent-web 三 md 与本地工具目录功能排除）+三归档件移 docs/archive/ 统一大写 ARCHIVE 后缀+CHANGELOG 滚动归档迁 W485-W649 段 166 节（1861→273 行）+文档规范 §5 固化归档三规则+CodeQL 42 告警首账清零（真修 3：api_server realpath 边界/CORS 常量化/agent-web /api/* 限流·其余按族 dismiss 理由随条）——状态=进行中（剩余=真端点联调待用户 LLM 三键+权限矩阵）。
 > - **合并登记·W683**（bdc3fb8+1c8ba10+4b27de2）：三 starter workflow（dependency-review/stale/scorecard·全 action SHA 钉）三首跑全绿+依赖图开启（vulnerability-alerts PUT 204·dep-review 首跑红根因）+SECURITY.md 新增与 stale 权限收 job 级（scorecard 首账快修 2）——状态=已收官。
 > - **验证**：verify_delivery 核心全绿（37 门禁 42 段·级联后实跑）；报告全部数字取自 git log/gh api/机判套件当批实测；假设 H-01~H-04 显式标注并给验证法；可行性自评 7/7 可行。
 > - **文件**：docs/10-方法论沉淀/工作复盘与优化分析报告-2026-10-07-治理与引擎.md（新增）、SECURITY.md（W683 追记）、.github/workflows/ 三 starter yml（W683 追记）、docs/00-导读/W批次编号对账表.md（W684 认领+W681/W683 版段列同步）、六文档级联、AGENTS 脚注、四页脚、CITATION、file-index。
@@ -961,7 +961,7 @@
 > - **执行（PROJECT_CWD 自动解析）**：server/index.ts 默认值改为向上探测「AGENTS.md + site/tokens.css」锚点自动解析仓库根（env 覆盖优先），启动打印 `[boot] PROJECT_CWD=...` 且目录不存在 FATAL 退出（fail-fast）；实测启动打印正确仓库根。
 > - **执行（Docker 三件套）**：Dockerfile（node:22-alpine·与 engines≥20 对齐·HEALTHCHECK 探既有 /api/health·容器内 PROJECT_CWD=/workspace 配合挂载）+ .dockerignore（排除 .env/data/dist）+ DEPLOYMENT.md（本地/Docker 运行指南·Negative Scope 明示不做公网）；DEVELOPMENT.md 旧 node:18 Dockerfile 示例段删除（与 engines 矛盾）。
 > - **执行（脏路径活面清零）**：14 文件 24 处——workflows README/AGENTS §4.4/STRUCTURE/交接文档×3/新Agent启动Prompt/mcp-server README（JSON 占位符+file:/// 死链改仓库相对+.trae-cn 全局死链行移除）/agent-web README×4/useAgents（路径+悬空版本串 v2.3.9）/scripts utils/aliases·optimize-html-size·font-subset-guide/site/en README/法宝政治学专题来源行/batch_cascade winpath 根因。
-> - **执行（豁免登记）**：21 文件保留——CHANGELOG 历史段（禁改）/.workbuddy 会话记忆/docs/_dev/历史方案档/scripts/output 诊断产物/检测器 `_audit_agentweb_baseline.py`（其搜索模式即旧路径·设计保留）/gitignore 编译产物 index.js。
+> - **执行（豁免登记）**：21 文件保留——CHANGELOG 历史段（禁改）/会话级记忆/docs/_dev/历史方案档/scripts/output 诊断产物/检测器 `_audit_agentweb_baseline.py`（其搜索模式即旧路径·设计保留）/gitignore 编译产物 index.js。
 > - **偏差声明**：Docker 镜像构建未完成验证——本机 Docker Hub 拉取 node:22-alpine 受限，且用户指示「先不用 Docker」；三件套已入库，条件具备后补验（如实登记·禁假收敛）。
 > - **验证**：tsc+vite build 过；启动冒烟打印 `[boot] PROJECT_CWD = D:\xiyouji`（实测）；活面脏路径终扫 0 文件；ruff 过（batch_cascade/utils/aliases/optimize-html-size）；verify_delivery 核心全绿。
 > - **文件**：xiyouji-agent-web（server/index.ts、src/hooks/useAgents.ts、README、DEVELOPMENT.md、Dockerfile、.dockerignore、DEPLOYMENT.md）、scripts/batch_cascade.py、scripts/utils/aliases.py、scripts/optimize-html-size.py、scripts/font-subset-guide.md、site/en/README.md、docs/03/法宝政治学专题.md、.github/workflows/README.md、AGENTS.md、STRUCTURE.md、交接文档.md、新Agent启动Prompt.md、mcp-server/README.md、方案档落地状态、scripts/_w596_spec.json、六文档、四页脚、file-index。
@@ -1227,7 +1227,7 @@
 > **来源**：W566 收官三项遗留之①②③（用户确认执行）——聊天页明暗两态视觉走查（W548 遗留人工项，五阶段迁移后首次）+ 收尾/取证清单落载体 + 本地预检纪律。
 > - **走查结论（明暗两态）**：浏览器自动化实测——深色（默认）与浅色态的侧栏/Agent 选择卡/工作目录输入/会话列表/消息气泡/模型与权限选择器渲染全部正常；会话列表含历史记录（hi/hi2）可打开、消息气泡与模型标签渲染正确。发现 1 个 P1 级功能缺陷（见下）。
 > - **P1 根治：agent 错误链路双重断裂（「错误链路无感」总根因）**：① 服务端——Express 5/Node 20+ 下 `req.on('close')` 在请求体读取完毕即触发（并非连接断开），W5xx P2-3 断开清理据此 `res.end()` 吞掉 init 之后全部 SSE 事件（含 error）；改挂 `res.on('close')`（wire 级 curl 实证：init+error 完整到达）。② 前端——useChat SSE 处理无 error 分支（错误事件静默丢弃）+ reader 循环 `if (done) break` 丢弃与 EOF 合并的末 chunk；补 error 分支（⚠️ 前缀渲染错误消息）+ 先解析后退出。修复前任何后端错误（含 spawn ENOENT 类环境错误）均表现为「思考中…」永久挂起。
-> - **环境事实登记**：本机 CodeBuddy/WorkBuddy CLI 已删除（用户确认），聊天功能在本机只能走错误路径——这正是走查能立即暴露错误链路缺陷的原因；修复后错误以 ⚠️ 气泡明确呈现，不再无感。
+> - **环境事实登记**：本机旧厂商 Agent CLI（含 CodeBuddy）已删除（用户确认），聊天功能在本机只能走错误路径——这正是走查能立即暴露错误链路缺陷的原因；修复后错误以 ⚠️ 气泡明确呈现，不再无感。
 > - **② 清单落载体**：AGENTS §4.3 新增五条——W 批次收尾七步清单（含本地预检：新增/修改 Python 脚本跑 ruff check）、取证枚举三陷阱、部署态冒烟与 file:// 审查双覆盖面、Express5 req close 语义陷阱。
 > - **验证（当批实跑）**：agent-web `npx tsc -b` 0 error + vite build 通过；wire 级 curl 实证 init+error 完整到达；浏览器走查截图（深色/浅色/会话/消息）留档会话记录；site 站门禁不受本批影响（verify_delivery 全绿基线延续）。
 > - **文件**：xiyouji-agent-web/server/index.ts（close 语义修复）、xiyouji-agent-web/src/hooks/useChat.ts（error 分支+末 chunk 修复）、AGENTS.md（§4.3 五条）、六文档级联。
@@ -2109,7 +2109,7 @@
 > **W413 仓库文件策略审查（严格审查：哪些文件不能上传，其余全部上传）**
 > - **来源**：用户指令"再去调研一下哪些文件是可以不用一起 push 到仓库的文件，哪些是必须一起跟随上传的文件，最后给我完整的方案让我选"→ 初步方案 A（6 个个人文档+3 目录转本地）→ 用户改口"你审查一下哪些文件不能上传，其他全部上传，严格审查"
 > - **执行（严格审查结论）**：全库 Grep 扫描无密钥命中（`.env` 已 gitignore 未 tracked）；6 个个人文档（交接文档.md/交接文档-archive.md/项目交接参考手册.md/项目概览.md/项目认知总览.md/项目GitHub参考调研报告.md）+ docs/_dev(3) + docs/_templates(3) + docs/superpowers(11) + docs/10-方法论沉淀(14) 逐一扫描均无敏感内容 → **撤销 W413 初版本地化决策，全部恢复入库**
-> - **执行（仅硬性排除·不能上传）**：`.env`（含 sk-ba531 密钥·gitignore）·SECURITY-AUDIT-2026-08-09.7z + .password（敏感审计档·gitignore）·node_modules/dist/__pycache__/venv/.vscode（依赖与构建产物·gitignore）·scripts/output/rag_index.json（32MB 可重建·gitignore）·scripts/output/figures 生成图/screenshots/tests 基线（可重建·gitignore）·.workbuddy/（gitignore）
+> - **执行（仅硬性排除·不能上传）**：`.env`（含 sk-ba531 密钥·gitignore）·SECURITY-AUDIT-2026-08-09.7z + .password（敏感审计档·gitignore）·node_modules/dist/__pycache__/venv/.vscode（依赖与构建产物·gitignore）·scripts/output/rag_index.json（32MB 可重建·gitignore）·scripts/output/figures 生成图/screenshots/tests 基线（可重建·gitignore）·本地工具目录（gitignore）
 > - **执行（字体源入库）**：assets/fonts/source/ 5 文件（NotoSerifSC-var.ttf 24MB + JetBrainsMono ×2 + NotoSansSC woff2 ×2）`git add -f` 强制入库（.gitignore 原规则保留注释说明）
 > - **执行（verify_delivery.py 恢复）**：CORE_DOCS 恢复为 CHANGELOG.md + 交接文档.md 两份硬门禁（移除 W413 初版 LOCAL_OPT_DOCS 本地可选逻辑）·A4_DOCS 恢复 4 份（README/STRUCTURE/项目说明/交接文档）
 > - **执行（文档同步）**：README/STRUCTURE/项目说明/交接文档 头部版本描述统一为 W413 修正（严格审查入库边界）·site/dukou-engine.html 页脚 v2.3.28 W413（index/cross-time-danmaku/tag-cloud 三页页脚同步）·CHANGELOG 本段 + file-index W413 反向索引

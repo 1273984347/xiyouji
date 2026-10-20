@@ -8,7 +8,7 @@
   3. 对账表取号 —— 已认领最大 W 号 + 现势下一自由号（二者不衔接时告警）
   4. touches 在途盘点 + 交集拒绝 —— W739 建：在途批次 touches 列盘点；
      传 --touches 声明本批手工共享面，与在途批次有交集 → FAIL（拒绝并行·等对方收官）
-  5. 工作树态 —— staged / 未暂存 / 未跟踪 简表（.workbuddy 排除）
+  5. 工作树态 —— staged / 未暂存 / 未跟踪 简表
   6. 环境 —— 仓库根校验 + python/pytest/ruff 可用性
 
 用法：
@@ -93,14 +93,12 @@ def touches_conflict(inflight_touches, mine):
 
 
 def summarize_porcelain(text):
-    """porcelain -z 输出 → {staged, unstaged, untracked, items}（.workbuddy 排除）。"""
+    """porcelain -z 输出 → {staged, unstaged, untracked, items}。"""
     out = {"staged": 0, "unstaged": 0, "untracked": 0, "items": []}
     for item in text.split("\0"):
         if len(item) < 4:
             continue
         status, path = item[:2], item[3:]
-        if path.startswith(".workbuddy"):
-            continue
         out["items"].append((status.strip() or "??", path))
         if status == "??":
             out["untracked"] += 1
