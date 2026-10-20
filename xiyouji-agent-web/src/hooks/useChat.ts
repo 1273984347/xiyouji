@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Message, ToolCall, PermissionRequest, PermissionMode, Session, CustomAgent, ContentBlock } from '../types';
+import { api, ApiError } from '../utils/api';
+import { getErrorMessage } from '../utils/errorMessage';
 
 const STORAGE_KEYS = {
   draftInput: 'draftInput',
@@ -133,9 +135,17 @@ export function useChat(options: UseChatOptions) {
     const systemPrompt = agent?.systemPrompt;
 
     try {
+      // W808：SSE 请求也须带共享 token——否则服务端开了 AGENT_WEB_TOKEN 后聊天流直接 401，
+      // 而此前此处**不判 res.ok**，401 的 JSON 体被当流读取（读不到 'data: ' 帧），
+      // 表现为「思考中…」永久挂起（与 W568 修复的挂起症状同形，根因不同）。
       const response = await fetch('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(import.meta.env?.VITE_AGENT_WEB_TOKEN
+            ? { 'x-agent-token': import.meta.env.VITE_AGENT_WEB_TOKEN as string }
+            : {}),
+        },
         body: JSON.stringify({
           sessionId,
           message: messageContent,
@@ -145,6 +155,17 @@ export function useChat(options: UseChatOptions) {
           permissionMode: currentPermissionMode,
         })
       });
+
+      // W808：非 2xx 时服务端返回 JSON 错误体（而非 SSE 流）——必须先判状态码，
+      // 否则会把错误体当流解析，产出「无事件即结束」的静默失败。
+      if (!response.ok) {
+        const errBody = await response.json().catch(() => null);
+        throw new ApiError(
+          response.status,
+          errBody,
+          errBody && typeof errBody.error === 'string' ? errBody.error : undefined
+        );
+      }
 
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
@@ -357,6 +378,8 @@ export function useChat(options: UseChatOptions) {
         }
       }
     } catch (error) {
+      // W808：错误文案经统一映射（此前固定写死「发生错误，请重试」，401/429/网络不可达全同形）
+      const errorText = getErrorMessage(error);
       console.error('Chat error:', error);
       setSessions(prev => prev.map(s => {
         if (s.id === sessionId) {
@@ -364,7 +387,7 @@ export function useChat(options: UseChatOptions) {
             ...s,
             messages: s.messages.map(m => 
               m.id === tempAssistantMessageId 
-                ? { ...m, content: '发生错误，请重试', isStreaming: false }
+                ? { ...m, content: errorText, isStreaming: false }
                 : m
             )
           };
@@ -388,15 +411,15 @@ export function useChat(options: UseChatOptions) {
     
     console.log('[Permission] User allowed:', permissionRequest.requestId);
     
-    await fetch('/api/permission-response', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        requestId: permissionRequest.requestId,
-        behavior: 'allow'
-      })
+    // W808：改走统一 client（自动带 token + 判 res.ok——此前 401 被静默忽略，
+    // 用户点了「允许」却什么都没发生，挂起表里的请求一直等到超时）
+    await api.permissionResponse({
+      requestId: permissionRequest.requestId,
+      behavior: 'allow'
+    }).catch((err) => {
+      console.error('[Permission] 提交许可回执失败:', err);
     });
-    
+
     setPermissionRequest(null);
   }, [permissionRequest]);
 
@@ -406,16 +429,14 @@ export function useChat(options: UseChatOptions) {
     
     console.log('[Permission] User denied:', permissionRequest.requestId);
     
-    await fetch('/api/permission-response', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        requestId: permissionRequest.requestId,
-        behavior: 'deny',
-        message: '用户拒绝了此操作'
-      })
+    await api.permissionResponse({
+      requestId: permissionRequest.requestId,
+      behavior: 'deny',
+      message: '用户拒绝了此操作'
+    }).catch((err) => {
+      console.error('[Permission] 提交许可回执失败:', err);
     });
-    
+
     setPermissionRequest(null);
   }, [permissionRequest]);
 

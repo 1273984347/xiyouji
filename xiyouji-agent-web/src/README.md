@@ -9,13 +9,14 @@
 
 ## 这个目录装什么
 
-生成时点含 6 个直属文件（JavaScript / TypeScript、样式与资源）；下辖 4 个子目录。详见同目录 `index.md` 的逐文件清单。
+生成时点含 6 个直属文件（JavaScript / TypeScript、样式与资源）；下辖 5 个子目录。详见同目录 `index.md` 的逐文件清单。
 
 ## 子目录
 
 - `components/`
 - `hooks/`
 - `pages/`
+- `test/`
 - `utils/`
 
 ## 维护约定

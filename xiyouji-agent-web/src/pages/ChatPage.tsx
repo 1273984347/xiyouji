@@ -101,6 +101,8 @@ export function ChatPage({
             messages={currentSession!.messages}
             models={models}
             messagesEndRef={messagesEndRef}
+            // W808：反馈接口需要 sessionId（服务端三字段齐备校验）——此前未传，赞/踩恒 400
+            sessionId={currentSession!.id}
             onRegenerate={(msg) => {
               const ms = currentSession!.messages;
               const idx = ms.findIndex(x => x.id === msg.id);

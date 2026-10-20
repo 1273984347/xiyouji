@@ -96,6 +96,7 @@ EXPECTED_SECTION_NAMES = [
     "可视化数据",
     "英文站",
     "目录文档",
+    "搜索索引",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
@@ -113,14 +114,14 @@ _SITE_FILES_RE = re.compile(
     r"^(site/.+\.(html|css|js|xml)|dataset/.+\.json|scripts/output/data/.+\.json)$")
 SCOPE_DOCS_SECTIONS = {
     "docs链接", "治理契约", "索引健康", "元信息块", "术语一致", "引文核验",
-    "W区间字面量", "文档口径", "CLAUDE速查",
+    "W区间字面量", "文档口径", "CLAUDE速查", "搜索索引",
 }
 SCOPE_SITE_SECTIONS = {
     "双源漂移", "CSP漂移", "腐蚀插件", "内联语法", "CSS平衡", "token覆盖",
     "动效禁令", "a11y对比", "INLINED完整", "动态链接", "图表自洽", "数据一致",
     "SEOhead", "可引用性", "设计令牌对账", "色盲安全", "降级声明", "head内容",
     "CSS变量引用", "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源", "chapter双源", "可视化数据", "英文站",
-    "文档口径", "W区间字面量", "索引健康", "治理契约", "AGENTS分层",
+    "文档口径", "W区间字面量", "索引健康", "治理契约", "AGENTS分层", "搜索索引",
 }
 _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·旁文档/A4/A1-A6/学术/A1导航/sitemap/内嵌回退 7 段不在任何 scope 集=自洽锁盲区）
     "期望版本", "dukou页脚", "六文档同步", "旁文档同步", "范围漂移",
@@ -586,6 +587,12 @@ _STRICT_GATES = [
                 fail_msg="目录文档新鲜度违规（生成清单与磁盘漂移·重跑 python scripts/gen_folder_docs.py --refresh 刷新·人工维护件自动跳过）",
                 marker_msg="目录文档门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
                 ok_msg="目录文档新鲜度通过（%s）", ok_line=-1),
+    _StrictGate(section="搜索索引", script="check_search_index_fresh.py", args=("--gate",), timeout=300,
+                marker="---- 第 46 门禁 搜索索引新鲜度：",
+                crash_msg="搜索索引新鲜度门禁执行异常（第 46 槽·crash 即拦）: %s",
+                fail_msg="站内搜索索引陈旧（页面内嵌索引 ≠ 生成器实算·重跑 python scripts/_gen_search_index.py 刷新并重算 CSP 哈希）",
+                marker_msg="搜索索引门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+                ok_msg="搜索索引新鲜度通过（%s）", ok_line=-1),
 ]
 
 # ---- 注册表派生与一致性防线（W781 R-1·挂槽「五处同改」收敛）----

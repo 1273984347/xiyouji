@@ -12,7 +12,7 @@
 | a1_a6_docs | 615 | docs/01-06 六板块顶层内容 .md（排除 README） | W505 | W505 |
 | a4_docs | 209 | docs/03-主题与情节专题/*.md（排除 README） | W722 | W722 |
 | csp_covered | 856 | html_total − _template.html（generate_csp TEMPLATE_EXCLUDE） | W459 | W459 |
-| gate_count | 45 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | W780 |
+| gate_count | 46 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | W809 |
 | html_total | 857 | site/**/*.html（递归全站） | W459 | W459 |
 | inline_css_pages | 330 | site 全树含 INLINED 标记页 | W459 | W459 |
 | methodology_docs | 24 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W755 |
@@ -27,6 +27,9 @@
 | visualization_pages | 87 | site/data_html − _shell.html | W459 | W459 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W809（2026-10-20 11:53:08）
+- gate_count: 45 → 46
 
 ### W795（2026-10-19 01:13:41）
 - report_docs: 27 → 28

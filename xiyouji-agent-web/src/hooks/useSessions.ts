@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Session, Message } from '../types';
+import { api } from '../utils/api';
+import { getErrorMessage } from '../utils/errorMessage';
 
 const STORAGE_KEYS = {
   sessionModels: 'sessionModels',
@@ -8,15 +10,22 @@ const STORAGE_KEYS = {
 export function useSessions() {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
+  /** W808：加载失败的用户可读文案（null = 无错误）。此前失败只 console.error，UI 表现为空白无提示。 */
+  const [error, setError] = useState<string | null>(null);
+  /** W808：会话列表是否正在加载（供 UI 显示加载态·skill 纪律：禁空白屏）。 */
+  const [isLoading, setIsLoading] = useState(false);
   
   // 每个会话的模型选择缓存
   const [sessionModels, setSessionModels] = useState<Record<string, string>>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.sessionModels);
-      return saved ? JSON.parse(saved) : {};
+      if (saved) {
+        return JSON.parse(saved);
+      }
     } catch {
-      return {};
+      // 忽略：缓存损坏时用空缓存继续
     }
+    return {};
   });
 
   // 获取当前会话
@@ -24,54 +33,58 @@ export function useSessions() {
 
   // 从 API 加载会话列表
   const fetchSessions = useCallback(async () => {
+    setIsLoading(true);
     try {
-      const res = await fetch('/api/sessions');
-      const data = await res.json();
-      
-      if (data.sessions) {
-        const loadedSessions: Session[] = data.sessions.map((s: any) => ({
-          id: s.id,
-          title: s.title,
-          model: s.model,
-          createdAt: new Date(s.created_at),
-          messages: []
-        }));
-        setSessions(loadedSessions);
-      }
-    } catch (error) {
-      console.error('Failed to fetch sessions:', error);
+      // W808：改走统一 client（非裸 fetch）——服务端错误不再被当成功数据返回
+      const data = await api.listSessions();
+      setError(null);
+
+      const loadedSessions: Session[] = (data.sessions ?? []).map((s) => ({
+        id: s.id,
+        title: s.title,
+        model: s.model,
+        createdAt: new Date(s.created_at),
+        messages: []
+      }));
+      setSessions(loadedSessions);
+    } catch (err) {
+      // W808：失败态可见（此前静默吞错 → 用户只见空白列表）
+      setError(getErrorMessage(err));
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
   // 加载单个会话的消息
   const loadSessionMessages = useCallback(async (sessionId: string) => {
     try {
-      const res = await fetch(`/api/sessions/${sessionId}`);
-      const data = await res.json();
-      
+      const data = await api.getSession(sessionId);
+
       if (data.messages) {
-        const messages: Message[] = data.messages.map((m: any) => ({
+        const messages: Message[] = data.messages.map((m) => ({
           id: m.id,
           role: m.role,
           content: m.content,
-          model: m.model,
+          model: m.model ?? undefined,
           timestamp: new Date(m.created_at),
-          toolCalls: m.tool_calls || undefined
+          toolCalls: (m.tool_calls as never) ?? undefined
         }));
         
         setSessions(prev => prev.map(s => 
           s.id === sessionId ? { ...s, messages } : s
         ));
       }
-    } catch (error) {
-      console.error('Failed to load session messages:', error);
+    } catch (err) {
+      setError(getErrorMessage(err));
     }
   }, []);
 
   // 删除会话
   const deleteSession = useCallback(async (sessionId: string): Promise<string | null> => {
     try {
-      await fetch(`/api/sessions/${sessionId}`, { method: 'DELETE' });
+      // W808：改走统一 client——删除失败时不再「本地假装删掉了」
+      await api.deleteSession(sessionId);
+      setError(null);
       
       let navigateTo: string | null = null;
       
@@ -80,7 +93,7 @@ export function useSessions() {
         return filtered;
       });
       
-      // 返回需要导航到的位置
+      // 确定导航目标
       const remaining = sessions.filter(s => s.id !== sessionId);
       if (currentSessionId === sessionId) {
         if (remaining.length > 0) {
@@ -93,8 +106,8 @@ export function useSessions() {
       }
       
       return navigateTo;
-    } catch (error) {
-      console.error('Failed to delete session:', error);
+    } catch (err) {
+      setError(getErrorMessage(err));
       return null;
     }
   }, [sessions, currentSessionId]);
@@ -155,5 +168,8 @@ export function useSessions() {
     addSession,
     updateSession,
     updateSessionMessages,
+    error,
+    setError,
+    isLoading,
   };
 }

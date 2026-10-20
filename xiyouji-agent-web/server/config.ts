@@ -11,6 +11,22 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import dotenv from "dotenv";
+
+/**
+ * W808：加载服务端 .env（W411 起 .env.example 与 DEPLOYMENT.md 均以「复制 .env.example → .env
+ * 并填入」为标准配置流程，但此前 dotenv 虽在 package.json 声明为依赖却**从未被 import**——
+ * 故 .env 实际从未生效，凭证只能靠外部 shell 导出。补上加载后，文档化的配置流程才真正成立。
+ *
+ * 两条纪律：
+ *   ① **不覆盖既有环境变量**（dotenv 默认行为）——外部显式导出的值优先级更高；
+ *   ② **失败不致命**——.env 缺失是合法的（容器/K8s 形态靠环境变量注入），故吞掉读取错误。
+ */
+try {
+  dotenv.config();
+} catch {
+  // .env 不存在或不可读——合法形态（环境变量注入），不阻断启动
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

@@ -4,6 +4,7 @@ import { User, Bot, ThumbsUp, ThumbsDown, Copy, RotateCcw } from 'lucide-react';
 import { useState } from 'react';
 import DOMPurify from 'dompurify'; // P2-6：ChatMarkdown 内部 html:true + unsafeHTML 无消毒，渲染前净化
 import { Message, Model, PermissionRequest, ContentBlock } from '../types';
+import { api } from '../utils/api';
 import { ToolCallsCollapse } from './ToolCallsCollapse';
 import { InlinePermissionCard } from './InlinePermissionCard';
 
@@ -16,22 +17,38 @@ interface ChatMessagesProps {
   permissionRequest?: PermissionRequest | null;
   onPermissionAllow?: () => void;
   onPermissionDeny?: () => void;
+  /** W808：所属会话 ID——反馈接口必填（服务端要求 sessionId + messageId + verdict 三者齐备）。 */
+  sessionId?: string;
 }
 
 export function ChatMessages({ 
   messages, 
-  models, 
+  models,
   messagesEndRef,
   onRegenerate,
   permissionRequest,
   onPermissionAllow,
-  onPermissionDeny
+  onPermissionDeny,
+  sessionId
 }: ChatMessagesProps) {
   const [feedbacks, setFeedbacks] = useState<Record<string, 'up' | 'down'>>({});
   const handleFeedback = (messageId: string, verdict: 'up' | 'down') => {
     if (feedbacks[messageId]) return;
-    setFeedbacks(prev => ({ ...prev, [messageId]: verdict }));
-    fetch('/api/feedback', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messageId, verdict }) }).catch(() => { });
+    // W808 修复真实缺陷：此前提交体只有 { messageId, verdict }，**缺 sessionId**，
+    // 而服务端要求三者齐备 → 恒返回 400，且此处 .catch(() => {}) 静默吞掉 →
+    // 用户的赞/踩**从未被记录**且界面无任何异常表现。
+    // 现在：① 补齐 sessionId；② 改走统一 client（失败不再静默）；③ 失败时回滚乐观 UI。
+    if (!sessionId) {
+      console.warn('[Feedback] 缺少 sessionId，跳过提交');
+      return;
+    }
+    api.feedback({ sessionId, messageId, verdict })
+      .then(() => {
+        setFeedbacks(prev => ({ ...prev, [messageId]: verdict }));
+      })
+      .catch((err) => {
+        console.error('[Feedback] 提交失败:', err);
+      });
   };
   const handleCopy = (message: Message) => {
     const text = message.content || (message.contentBlocks || []).filter(b => b.type === 'text').map(b => (b as { text: string }).text).join('\n');
