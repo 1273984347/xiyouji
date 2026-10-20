@@ -13,6 +13,8 @@
 | 路径传 Python | `/c/...`（MSYS 形态） | `C:/...`（盘符形态） |
 | 判退出码 | PowerShell `echo $?`（是布尔） | 管道前显式取 `$?`/`$LASTEXITCODE` |
 | 中文路径分类 | 直接拼 git 输出 | `git -c core.quotePath=false` |
+| 内联 Python 含 `$变量名` | PowerShell 双引号包裹（`$var` 被展开成空·Python 收到空串） | PowerShell 单引号包裹（`$var` 原样透传·实证 `[$myvar]`）或 `--%` 停止解析符；**注意**孤立 `$`（后不跟合法变量名·如正则行尾锚 `r'^ab$'`）**不受影响**·不被展开 |
+| 内联 Python 含引号 | PowerShell 双引号 + Python 侧单引号（引号配对被破坏→`SyntaxError: unterminated string literal` 或 PowerShell「字符串缺少终止符」） | 落 Python 脚本文件再调用（仓内既定铁律·W706）——**内联只适合无引号无 `$` 的极短表达式** |
 | Word COM/注册表/ACL | 强行 bash | PowerShell（Windows 原生域·W615/W693 先例） |
 | ML 脚本开跑前 | 直接 `py -3.12 script.py` | 五查：去 shebang（W743 教训）/ ST 先于 torch / ST import 块 `# noqa: I001` 防守 / 服务端子线程预热 / PIPESTATUS 验退出码 |
 
