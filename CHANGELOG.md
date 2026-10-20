@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W815），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W816），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,18 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W816（2026-10-20）：门禁判据可信化批（审查第一批）
+
+> **来源**：2026-10-20 对本仓库的全项目只读审查（先审 12 个未推送提交·后按用户指令扩到全项目文件内容）——三轮审查共产生 20+ 项发现，其中 3 项属「门禁判据自身不可信」（判据未执行却报绿）。本批处理其中**不触碰管控件与归档面**的子集；`scripts/verify_delivery.py`（管控件·须用户批准）与 `archive/**`（文档规范 §11.2 禁回溯修改）另起 W817 待授权。
+> - **文件**：scripts/check_citations.py、scripts/security_scan.py、tests/unit/test_security_scan.py、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/计划方案/执行前计划-T03-全项目审查第一批修复.md、docs/11-方案报告/README.md、scripts/output/_w816_spec.json。
+> - **缺陷①（引文门禁 cwd 依赖 + 零文件假绿）**：`check_citations.py` 自身已定义正确 `ROOT`（`os.path.dirname(os.path.dirname(os.path.abspath(__file__)))`），但 `--dir docs` 是相对路径且被直接交给 `os.walk` → 以**调用方 cwd** 为基准。实证：cwd=仓库根 → 「423 条规范引文 + 112 条归属对白 · 命中率 100%（744 个文件扫描）」exit 0；cwd=`%TEMP%` → **「共 0 条规范引文 + 0 条归属对白 · 命中率 100%（0 个文件扫描）」exit 0**——第 20 门禁被完全中性化并自报成功，违反铁则「不允许从未运行/从未通过的门禁存在」。**修**：新增 `resolve_scan_base()`（相对目录按脚本 ROOT 解析）与 `scan_files_guard()`（零文件守卫，目录不存在→exit 2「输入错误」/ 目录存在但扫到 0 篇→exit 1「判据未执行」，二者语义不同故不同码）；`--reverse` 面的基目录同步改为 ROOT 解析。**验证**：从 `%TEMP%` 调用 → **745 个文件扫描**（含本批新增报告文件）·命中率 100%·exit 0；空目录 → exit 1 并明示「判据未执行·不得判绿」；不存在目录 → exit 2；`--self-test` **12/12 → 15/15**（+3 判据面负样本：相对目录未按 ROOT 解析 / 零文件未判红 / 目录不存在未判输入错误）。
+> - **缺陷②（安全扫描构建产物排除失效·本地红 CI 绿）**：`security_scan.py` 的 `_AGENT_WEB_BUILD_ARTIFACT_RE` 只匹配 `xiyouji-agent-web/server/**` 与 `server/engine/**`，而 `xiyouji-agent-web/tsconfig.node.json` 的实际 `"outDir": "./.tsbuild"` → 编译测试夹具被纳入扫描。实证：排除正则对 `.tsbuild/server/engine/tools.test.js` **匹配=False**；全量扫描报 **high=2**（`AGENT_WEB_TOKEN = "unit-test-token-should-not-leak"`、`SECRET = "w791-test-secret"`），而 `.tsbuild/` 已被 `.gitignore:124` 忽略 → CI 上不存在该目录 → **CI 恒绿、本机恒红**，正是 W757 当年为此专门加排除正则所要防的分裂，在 outDir 迁移后失效。**修**：通用排除段补 `.tsbuild`（覆盖任意嵌套深度）且同步正则加 `.tsbuild/.*` 分支。**验证**：全量 `--all`（1165 文件）→ **high 2 → 0**；新增单测 `test_discover_files_excludes_tsbuild_artifacts`（全量扫描面断言无 `.tsbuild` 段）与 `test_agent_web_build_artifact_regex_covers_tsbuild`（正则层直证·含旧形态回归锚）。
+> - **缺陷③（XSS 规则对主流 sink 形态零覆盖）**：`XSS-001` 正则 `\.innerHTML\s*=` 既不匹配 `.innerHTML +=`，也**完全没有 d3 `.html(` 的规则**——而 site/ 内 `.html(` 有 **1328 行**、`.innerHTML +=` 有 **4 行**，此前对门禁**零信号**。**修**：新增 XSS-007（d3 `.html()` 动态实参）与 XSS-008（`.innerHTML +=`），并入 `XSS_DOWNGRADE_RULES`（site/ 沿用既有降级口径·非 site/ 仍 high）。XSS-007 判据只取**动态实参**（真 sink）：整参静态字面量与 d3 回调首参不算（前者无注入面·后者是 DOM 构造）——判据自检 **8/8 合成样本符合预期**（静态字面量/双引号字面量/拼接插值/模板插值/裸标识符实参/成员访问实参/回调首参/非 .html 形态）。**验证**：全量扫描 XSS-007 命中 **758**（真实动态 sink 数）·XSS-008 命中 **4**·XSS-001 仍命中 262（未破坏既有规则）；单测 `test_security_scan.py` **16 → 22 passed**（+6：XSS-007 命中 / XSS-008 命中 / XSS-001 回归锚 / site 降级口径 / 非 site 保持 high / tsbuild 排除）。
+> - **附带订正（认领行状态回填）**：W813/W814/W815 三行「关联 commit」列仍写「待提交」而对应提交早已落地（4fb0f300 / 09b1b27e+fa1c2b4f / 4bc6dede），状态列仍为「进行中」→ `preflight_check.py` 判定三者皆为在途批次 → **实测 exit 1**（两条 touches 交集 FAIL），任何后续批次无法开工；现势 bullet 停在 W813 且未标已消费 → 与 max+1 不衔接。**修**：三行 commit 与状态列按 `git log --oneline` 实证回填为「已收官」，W813 bullet 标已消费并追加 W816 bullet。**验证**：`preflight_check.py --no-fetch --touches <本批清单>` → **exit 0**（修复前 1）·「现势 bullet 交叉核验：W816 与 max+1 一致」·「PREFLIGHT PASS——无风险项，可动工」。
+> - **偏差记录**：执行中实测「XSS 新规则使 medium 计数由 264 升至 1026（+762）」，超出执行前计划 AC-06 设定的「medium 增量 ≤ 564」。原因：AC-06 的阈值系估算值，而收窄后的判据捕获的是**真实动态 sink 数**（XSS-007 命中 758 处），非噪声。影响：CI 的 security job 只拦 high（实测 high=0），阻断信号未变；`scripts/output/security-report.md` 为 gitignore 件（不入库·不进提交），报告体积不影响提交。处置：保留该规则与实测计数，AC-06 阈值按实测值订正（以执行前计划为基线不改写，偏差留档于本段与终稿报告）。
+> - **验证**：引文门禁 --self-test 15/15 + 主检 745 文件命中率 100%；安全扫描 --all high=0 / medium=1026 / low=1（1165 文件·8.34 s）；`pytest tests/unit/test_security_scan.py` 22 passed；`ruff check scripts/` 0 违规；`check_doc_sync.py` 0 FAIL + `--self-test` 20/20；`verify_delivery.py` 全量 51 段 0 FAIL；`generate_csp.py --check` 856 页 0 漂移；preflight exit 0。
+> - **状态**：已落地（本地提交·未推送）。
 
 ### W815（2026-10-20）：shell 查坑表补两条（PowerShell $ 变量展开 + 引号配对冲突）
 
