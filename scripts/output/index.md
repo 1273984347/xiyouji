@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（223）
+## 文件（224）
 
 ### Markdown 文档
 
@@ -216,6 +216,7 @@
 - `_w819_design_audit.json`
 - `_w820_spec.json`
 - `_w821_spec.json`
+- `_w822_contrast_audit.json`
 - `_w822_spec.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`

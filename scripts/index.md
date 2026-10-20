@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（213）
+## 文件（214）
 
 ### Markdown 文档
 
@@ -123,6 +123,7 @@
 - `_w818_file_protocol_probe.py`
 - `_w818_inventory.py`
 - `_w819_design_audit.py`
+- `_w822_contrast_audit.py`
 - `_w822_db_schema_probe.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
