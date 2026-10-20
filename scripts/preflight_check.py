@@ -73,6 +73,24 @@ def parse_ledger(text):
 
 DONE_PREFIXES = ("已收官", "已闭环")
 
+# W821：§8 干扰日志的机器触发点提示（真触发才输出·用户裁决 2026-10-20）。
+# 背景：W741 立的两周干扰日志（路线图 §8）自 2026-10-16 起断档 4 天 128 提交零登记，
+# 而该期间实际发生 ≥2 次强制触发事件——根因是「该日志无任何机器防线·纯自觉动作」。
+# 本提示把「靠人记得写日志」变成「机器在真发生时喊一声」，**不改变任何判定与退出码**。
+INTERFERENCE_LOG_HINT = (
+    "⚠     §8 干扰日志待登记：本次命中强制录入触发（路线图 §8·窗口 2026-10-14 → 10-28）"
+    "——请在 docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md "
+    "的 §8 表追加一行（日期/会话/事件类/共享面/读时状态/写时状态/损失返工）"
+)
+
+
+def interference_log_hint(reason):
+    """构造 §8 干扰日志待登记提示行（带命中原因）。返回单行字符串。
+
+    纯函数形态——供 --self-test 与单测直接断言。
+    """
+    return "%s（命中：%s）" % (INTERFERENCE_LOG_HINT, reason)
+
 
 def is_inflight(status):
     """在途判定：状态列剥离全部星号与空白后，非「已收官/已闭环」开头即在途。
@@ -224,6 +242,9 @@ def main():
         for w, c in bad:
             print(f"FAIL  touches 交集（在途 W{w}）：{', '.join(c)}——共享文件并行写风险·等对方收官或人工裁决")
             problems.append(f"touches 与在途批次 W{w} 冲突：{', '.join(c)}")
+        # W821：触发③（preflight 交集拒绝）——真触发才提示登记 §8 干扰日志
+        if bad:
+            print(interference_log_hint("preflight 交集拒绝"))
         if not bad:
             print(f"OK    touches 交集检查：本批声明 {len(mine)} 项·与在途批次（{len(inflight)} 个声明方）无交集")
 
@@ -235,6 +256,12 @@ def main():
         print(f"       [{status}] {path}")
     if len(tree["items"]) > 8:
         print(f"       ……另 {len(tree['items']) - 8} 项")
+    # W821 注：原拟的「触发①（开工 git status 发现非本会话变更）」已按用户裁决删除
+    # （2026-10-20）——preflight 内无法可靠区分「本会话变更」与「他方变更」
+    # （工作树里的已暂存件可能来自并行会话），按「staged>0 即提示」会在正常态误报，
+    # 变成常态噪音。现役触发点只剩两个判据精确者：
+    #   ② safe_commit ref-lock 竞争触发重试（safe_commit.py）
+    #   ③ preflight touches 交集拒绝（本文件·上方）
 
     # 5) 环境
     env_ok, env_lines = step_env()
