@@ -156,6 +156,27 @@ jobs:
               raise SystemExit(1)
           print(f"[E8 XSS] high 级别问题数：{high}，通过")
           PY
+  # E8-5 品牌字面量零命中守卫（W836）
+  brand-refs:
+    name: Brand refs check (品牌字面量零命中)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.12"
+
+      - name: 品牌字面量零命中（含 archive/·字面量以 base64 存储故本文件自身不命中）
+        run: |
+          # W836：W812/W814 两批把三枚品牌字面量清零，但**验收方式是人工终扫**——仓内无机器防线；
+          # 且唯一的历史扫描器是归档件（其 ROOT 上溯层级错 2 级·运行时即崩·品牌扫描段不可达）。
+          # 本守卫是该检测能力的活面承接：退出码 0=零命中 · 1=有命中（阻断）· 2=判据未执行（阻断）。
+          python scripts/check_no_brand_refs.py
+          # 判据自检（合成样本·确认守卫本身没瞎）：自检不过即视为守卫失效 → 阻断
+          python scripts/check_no_brand_refs.py --self-test
+
   # B-2 CodeQL 静态分析（js/py 双矩阵·W644 登记）
   codeql:
     name: CodeQL 静态分析 (${{ matrix.language }})

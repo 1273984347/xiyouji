@@ -68,10 +68,16 @@ EXCLUDE_SUBSTR = (
     "review-w760",
 )
 # 顶层目录排除（纯本地运行态·不入库也无内容导航价值）
-# W830：补 .agent / .workbuddy——AI 会话运行态目录（agent-mail 暂存 / 会话工作区与记忆），
-# 每个未来会话都会重建，不排除则第 45 门禁对每个会话恒红（W830 实证：3 目录 6 FAIL）；
-# .github 是受管 CI 面（workflows/README.md 为级联面）·刻意不在排除集
-EXCLUDE_TOP = set(EXCLUDE_SUBSTR) | {".git", ".agent", ".workbuddy"}
+# W830：补 AI 会话运行态目录——每个未来会话都会重建（会话工作区与记忆暂存），
+# 不排除则第 45 门禁对每个会话恒红（W830 实证：3 目录 6 FAIL）。
+# W836：该类目录名属**被禁品牌字面量**（三枚·用户 2026-10-20 确认均在禁令范围·
+# 不在允许品牌之列；字面量清单以编码形式存于 scripts/check_no_brand_refs.py·此处不落明文）——
+# 故此处**不再逐名列举**，改为排除「全部点开头的顶层目录」：既去掉明文字面量，
+# 又对将来新出现的同类会话运行态目录免疫。
+# .github 是受管 CI 面（workflows/README.md 为级联面）·刻意不在排除集。
+EXCLUDE_TOP = set(EXCLUDE_SUBSTR) | {".git"} | {
+    d for d in os.listdir(ROOT) if d.startswith(".") and d != ".github"
+}
 # 构建/打包产物目录名（packaging/xiyouji-analysis/build · dist · *.egg-info·非源码面无导航价值）
 EXCLUDE_SEGMENTS = {"build", "dist"}
 EXCLUDE_SUFFIX = (".egg-info",)

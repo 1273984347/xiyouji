@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（216）
+## 文件（217）
 
 ### Markdown 文档
 
@@ -165,6 +165,7 @@
 - `check_js_syntax.py`
 - `check_kpi_card_base.py`
 - `check_motion_ban.py`
+- `check_no_brand_refs.py`
 - `check_no_goatcounter.py`
 - `check_script_coverage.py`
 - `check_search_index_fresh.py`
