@@ -21,8 +21,14 @@
      C5d stats 实算对账（W718）：scripts/stats.py --check（stats.json vs 磁盘实算）零差异——
      「检查过零差异」有机器背书，漂移未刷新（漏跑 --w）当场 FAIL（W715 实例的防线）；
      基线/首跑等时点值靠句式表设计豁免（不进句式形态），新聚合量须先登记 stats.py META 键表
+  C6 版本行 desc 分隔符体检（W841）：README / STRUCTURE / 项目说明三处「当前批次」版本行的 desc 段
+     禁含 · ； —。缺口来源——batch_cascade.precheck() 早已 fail-closed 禁这些字符，但只管「走
+     batch_cascade 的 spec」；W826 的段是手工写入的（无 _w826_spec.json），precheck 从未被调用，
+     于是 desc 里的「·」把三处锚点正则（·A1-A6 / —A1-A6 / ·详细变更见）全部顶掉，此后任何批
+     都级联不了。版本行是 desc 的唯一落点，扫它就把手工路径一并闭上。文档非空但版本行形态不识别
+     按 FAIL 计（形态变更会让本支静默失效）。
 豁免：行级 <!--doc-sync:exempt 原因-->；.git/shallow 存在时 C4 跳过（pre-commit 本地为主执行点）。
-用法：--check（默认）只读校验，0 FAIL 才过；--self-test 注入式负样本 18 例（纯合成输入，不改真实文件）；
+用法：--check（默认）只读校验，0 FAIL 才过；--self-test 注入式负样本 24 例（纯合成输入，不改真实文件）；
      --json 供 CI 消费。本脚本绝不修改任何文件。
 """
 
@@ -82,6 +88,27 @@ RE_FILE_TOKEN = re.compile(
 RE_STATS_MARK = re.compile(r"(\d+)\s*[页项篇个类]?\s*<!--stats:([a-z_0-9]+)-->")  # W704 数字实体标记（紧贴/句尾双形态·key 后置·渲染隐藏）
 RE_BARE_AGG = re.compile(r"\d+\s*(?:页|项|篇|个|类)")  # C5c 裸聚合数字（报告型 NOTE·W704 起步）
 C5_DOC_NAMES = {"readme": "README.md", "structure": "STRUCTURE.md", "agents": "AGENTS.md", "xiangmu": "项目说明.md", "contributing": "CONTRIBUTING.md", "koujing": "统计口径说明.md"}  # W713 补 CONTRIBUTING（第 27 门禁叙述面已含·C5 面对齐）；W769 补统计口径说明（自称「唯一口径来源」却不在扫描域·W760 F-9 实证）
+
+# C6 版本行 desc 分隔符体检（W841）——手工写段绕过 batch_cascade.precheck 的兜底。
+# 缺口实证：batch_cascade.precheck() 早已 fail-closed 禁 desc 含 · ； —，但那只覆盖「走 batch_cascade 的 spec」；
+# W826 的段是**手工写入**的（output 下仅三个 _w826_*.py 审计脚本·无 _w826_spec.json），precheck 从未被调用，
+# 于是 desc 里的「·」把三处版本行锚点正则（·A1-A6 / —A1-A6 / ·详细变更见）全部顶掉，
+# 之后任何批都级联不了（W827 施工时撞上，改 · 为 、后十面断言立过）。
+# 版本行是 desc 的唯一落点，扫它就把手工路径一并闭上——这是 precheck 之外必须有的第二道。
+# 形态： (输入键, 显示名, 版本行正则·捕获组 1 为 desc 起至行尾, 尾锚点元组)
+C6_SURFACES = (
+    ("readme", "README.md",
+     re.compile(r"^>\s*\*\*当前批次\s*W\d+（[^）]*）\*\*：(.+)$", re.M),
+     ("·A1-A6",)),
+    ("structure", "STRUCTURE.md",
+     re.compile(r"^>\s*当前批次：W\d+（[^）]*）—\s*(.+)$", re.M),
+     ("—A1-A6",)),
+    ("xiangmu", "项目说明.md",
+     re.compile(r"^>\s*当前批次\s*W\d+（[^）]*）：(.+)$", re.M),
+     ("·详细变更见",)),
+)
+C6_BANNED_SEPS = ("·", "；", "—")  # 与 batch_cascade.precheck 的 desc 黑名单同口径（双源一致性由本支兜底）
+
 
 
 def c5b_extra_surfaces():
@@ -169,6 +196,39 @@ def line_has_exempt(text, match):
     return EXEMPT_MARK in text[line_start:line_end]
 
 
+def _check_c6_version_desc_seps(inp, issues, notes):
+    """C6：三处版本行的 desc 段禁含分隔符（W841）。
+
+    为什么要有这一支：batch_cascade.precheck() 早就 fail-closed 地禁 desc 含 · ； —，
+    但那只管「走 batch_cascade 的 spec」；段一旦手工写入（W826 实证）就完全绕过 precheck。
+    版本行是 desc 的唯一落点，扫它能把手工路径一并闭上。
+
+    fail-closed 口径：文档非空但版本行形态不识别 → 报 FAIL（形态变更会让本支静默失效，
+    这正是 W813 记过的「滤除即不被校验」同族）；文档为空 → 跳过（合成输入场景）。
+    """
+    for key, name, pat, tails in C6_SURFACES:
+        text = inp.get(key) or ""
+        if not text.strip():
+            continue
+        m = pat.search(text)
+        if not m:
+            issues.append("C6: %s 版本行形态未识别（期望「当前批次 W###（日期）」抬头）——"
+                          "形态变更会使本支静默失效，须同步正则" % name)
+            continue
+        raw = m.group(1)
+        cut = len(raw)
+        for t in tails:
+            i = raw.find(t)
+            if i != -1:
+                cut = min(cut, i)
+        desc = raw[:cut]
+        hit = [s for s in C6_BANNED_SEPS if s in desc]
+        if hit:
+            issues.append("C6: %s 版本行 desc 含分隔符「%s」——写入后会使下一批级联锚点正则失配"
+                          "（W826 实证：三处全断·任何批都无法落段）。改用「、」或空格分隔"
+                          % (name, "".join(hit)))
+
+
 def evaluate(inp):
     """纯函数核对：inputs 为注入真值与文档文本的 dict，返回 (issues, notes)。
 
@@ -188,6 +248,7 @@ def evaluate(inp):
     _check_c4_commit_ledger(inp, issues, notes)
     _check_c5_aggregate_stats(inp, issues, notes)
     _check_c5d_stats_recheck(inp, issues)
+    _check_c6_version_desc_seps(inp, issues, notes)
     return issues, notes
 
 
@@ -506,7 +567,7 @@ def run_check():
 
 
 def run_self_test():
-    """22 例注入式负样本/正样本（纯合成输入，不改真实文件）。"""
+    """24 例注入式负样本/正样本（纯合成输入，不改真实文件）。"""
     base = {
         "changelog": "### W999（2026-10-05）：自测顶段\n\n### v9.9.8（2026-10-04）：W998 旧段\n",
         "readme": "> **当前批次 W999（2026-10-05）**：自测抬头行\n",
@@ -666,6 +727,24 @@ def run_self_test():
         "T22 报告扩展面标记一致放行（C5b·W830）",
         lambda d: d.update(reports_extra={"docs/11-方案报告/x.md": "全站 HTML 共 100<!--stats:html_total--> 页\n"}),
         "C5b",
+        expect_absent=True,
+    )
+
+    # W841：C6 版本行 desc 分隔符体检双向锁——含分隔符必红（手工写段绕过 batch_cascade.precheck 的兜底）
+    # + 「、」分隔放行（防误伤正常 desc）
+    case(
+        "T23 版本行 desc 含分隔符必红（C6·W841）",
+        lambda d: d.update(readme=d["readme"].replace("自测抬头行", "自测·抬头行")),
+        "C6",
+    )
+    case(
+        "T24 版本行 desc 用「、」分隔放行（C6·W841 防误伤）",
+        lambda d: d.update(
+            readme="> **当前批次 W999（2026-10-05）**：甲、乙、丙·A1-A6 共 50 篇\n",
+            structure="> 当前批次：W999（2026-10-05）— 甲、乙、丙—A1-A6 共 50 篇\n",
+            xiangmu="> 当前批次 W999（2026-10-05）：甲、乙、丙·详细变更见 CHANGELOG\n",
+        ),
+        "C6",
         expect_absent=True,
     )
 
