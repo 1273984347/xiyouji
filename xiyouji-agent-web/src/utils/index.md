@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（8）
+## 文件（9）
 
 ### JavaScript / TypeScript
 
@@ -22,6 +22,7 @@
 - `errorMessage.ts`
 - `format.ts`
 - `iconMap.ts`
+- `sseStream.test.ts`
 - `sseStream.ts`
 
 ---
