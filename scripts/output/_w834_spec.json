@@ -1,0 +1,22 @@
+{
+  "batch": "W834",
+  "date": "2026-10-20",
+  "title": "W834 门禁 fail-open 根修批（B1/B2 用户批准·verify_delivery fail-closed 化 + 12 例负样本）",
+  "desc": "用户令「开始」批准修 T03 遗留的 B1/B2：verify_delivery 委派段与 a11y 段的四处 fail-open（崩溃记 WARN、解析失败记 OK、缺结构静默绿）全部改 fail-closed FAIL，同族全扫无隐藏同类，12 例注入式负样本钉死新语义并保留 W424 M2 登记式降级",
+  "head_entry": "2026-10-20（W834 门禁 fail-open 根修批）",
+  "head_sentence": "根除门禁判据不可执行却伪装通过的假绿面：委派段崩溃与 a11y 输出异常一律 FAIL，12 例负样本钉死，快乐径与退出码口径零变化",
+  "changelog_body": "\n\n> **来源**：用户令「开始」——批准执行 W830 审查报告 §六建议 1（B1/B2 修复·CLAUDE.md 第 10 条授权改管控件 scripts/verify_delivery.py）。\n> - **文件**：scripts/verify_delivery.py、tests/unit/test_verify_failclosed.py、pytest.ini、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/_w834_spec.json、STRUCTURE.md、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md、docs/11-方案报告/计划方案三性审查报告-2026-10-20.md、docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md、docs/00-导读/W批次编号对账表.md。\n> - **B1 根修**（_run_simple_gate·T03 D-01 遗留）：两条异常路径由 WARN 改 FAIL——子进程崩溃/超时 = 判据不可执行，原 WARN 使 18/33 委托段崩溃即降级而整轮仍报「核心全部通过 ✅」+ exit 0（假绿面根除·对齐 _run_strict_gate 语义）；唯一保留 WARN 为 Gate.missing_warn 登记的运行期缺失降级（W424 M2·仅 2 个 node 段·显式 opt-in·docstring 已注明）。\n> - **B2 根修**（_gate_a11y）：三处 fail-open 全改 FAIL——① JSON 解析异常原记 rep.ok「summary 解析跳过」；② 缺 summary/E2-2 键原走 p01=0 静默判绿；③ 外层异常原记 rep.warn。现为解析失败/结构不符/子进程异常一律 FAIL（fail-closed·_count_by_rule 预置全规则 0 值故干净态恒有 E2-2·快乐径不受影响·回归锁钉住）。\n> - **同族全扫**（建置即红纪律）：verify_delivery.py 内 except 路径的 rep.ok/rep.warn 仅此 4 处（:645/:648/:1009/:1014·本批实证）；scope 跳过路径（:343·登记式分级）与 _probe_health（登记式可选探活）不属缺陷面；无隐藏同类。\n> - **负样本测试**：新增 tests/unit/test_verify_failclosed.py 12 例全过——B1×5（崩溃必红且零 OK 零 WARN / 未登记 missing_warn 必红 / 登记缺失保留 WARN / 快乐径回归 / 退出码径回归）+ B2×7（解析失败必红 / 缺 summary 必红 / 缺 E2-2 必红 / 子进程异常必红 / 干净态 OK 回归 / P0+P1 阻断回归 / 非零退出回归）。\n> - **行为不变性**：退出码口径与快乐径消息文本零变化（5 例回归锁）；门禁段数 51 不变（段自洽锁实证 51==51）；全量 verify 核心全部通过。\n> - **连带刷新**：stats pytest_collected 770→782（本批 12 例入库）、report_docs 37→39（并行 W831 取经编制表批落库·W761 先例 glob 计磁盘口径）；STRUCTURE 与系统架构方案 report_docs 标记同步 39；pytest.ini 标记 770→782；W830 行递延注记更新。\n> - **取号与版段**：原拟 W831 被并行「取经编制表」批占用（d560a8d7）、W832 被 agent-web 加固批占用（990fa068）、W833 被并行「交付链与工具链根修」批占用（_w833_spec.json 22:09 + workflow 在途件）→ **三度顺延 W834**；CHANGELOG 版段递延（顶段序约束 batch==顶段+1·顶段仍 W826·W830-W833 同处递延·号序链待 W827/W828 落地后恢复·spec 已入库）。\n> - **状态**：已落地（本地提交·未推送）。\n",
+  "milestone_block": "- **W834 门禁 fail-open 根修批（B1/B2 用户批准·假绿面根除）**：\n  - B1：_run_simple_gate 两条异常路径 WARN→FAIL（18/33 委托段崩溃即降级、整轮仍核心全部通过+exit 0 的假绿面根除）；唯一保留 WARN=Gate.missing_warn 登记式降级（W424 M2·2 个 node 段）\n  - B2：_gate_a11y 三处 fail-open 全改 FAIL（JSON 解析失败记 OK / 缺 summary 或 E2-2 静默绿 / 外层异常记 WARN）\n  - 同族全扫：except 路径 rep.ok/rep.warn 仅 4 处（:645/:648/:1009/:1014）·scope 跳过与 _probe_health 属登记式不属缺陷·无隐藏同类\n  - 负样本：新增 test_verify_failclosed.py 12 例全过（B1×5 + B2×7·含快乐径与退出码径回归锁）\n  - 不变性：退出码口径与消息文本零变化·门禁 51 段不变（自洽锁实证）·全量 verify 核心全部通过\n  - 连带：pytest_collected 770→782·report_docs 37→39（并行 W831 落库·glob 计磁盘先例）·STRUCTURE/系统架构标记同步\n  - 取号：原拟 W831/W832/W833 被三个并行批先后占用→三度顺延 W834；版段递延（顶段仍 W826·W830-W833 同处递延·待号序链恢复）\n  - 范围纪律：只改 fail-open 判据·不动其他语义·不推送远端",
+  "agents_note": "二〇二六年十月二十日（W834）门禁 fail-open 根修批：应用户批准修掉交付门禁里两处判据不可执行却伪装通过的缺陷——委派段子进程崩溃原来只记警告，等于十八个门禁里任何一个崩了整轮仍报全部通过；对比度审计段的输出解析失败原来直接记通过。现在这两类情况一律记失败，唯一保留的警告是早就登记过的节点运行时缺失降级。同时补十二个注入式负样本测试钉死新语义，正常路径与退出码口径零变化，门禁段数不变。",
+  "file_index_rows": [
+    "| scripts/verify_delivery.py | W834 | 改：B1/B2 fail-open 根修（_run_simple_gate 异常路径 WARN→FAIL·_gate_a11y 三处 fail-open→FAIL·missing_warn 登记式降级保留·模块 docstring 补 fail-closed 语义段） |",
+    "| tests/unit/test_verify_failclosed.py | W834 | 新增：fail-closed 语义负样本测试 12 例（B1 崩溃/未登记缺失/登记缺失保留/快乐径/退出码径 + B2 解析失败/缺 summary/缺 E2-2/崩溃/快乐径/P0P1 阻断/非零退出） |",
+    "| pytest.ini | W834 | 改：头注 collected 实体标记 770→782（本批 12 例入库·C5b 扩展面对账） |",
+    "| scripts/output/stats.json | W834 | 改：pytest_collected 770→782·report_docs 37→39（并行 W831 落库） |",
+    "| STRUCTURE.md | W834 | 改：report_docs 标记 38→39（并行 W831 取经编制表批落库·含 T05 计划件与抓位文档） |",
+    "| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W834 | 改：report_docs 实体标记 38→39（C5b 扩展面对账） |",
+    "| docs/11-方案报告/计划方案三性审查报告-2026-10-20.md | W834 | 改：§五.5 pytest 标记 770→782 + W834 复测注（含三度顺延取号记录） |",
+    "| docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md | W834 | 改：AC-07/ASM-08 订正注更新至现役 39（W831 取经编制表批落库后） |",
+    "| docs/00-导读/W批次编号对账表.md | W834 | 改：W834 认领行（7 格）+ W830 行递延注记更新（顶段链因并行落库移位） |"
+  ]
+}

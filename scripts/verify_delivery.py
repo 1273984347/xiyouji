@@ -16,6 +16,12 @@ verify_delivery.py — 零依赖交付校验门禁（Senior Developer 设立）
   手工工件，辅助文档升版后必现"不含旧版"噪音 WARN），改为动态取 CHANGELOG 倒序首个
   版段（现役段）；页脚自身降级为新鲜度被检对象，落后现役段仅【WARN 不阻断】。
 
+fail-closed 委派语义（W831·用户批准修 B1/B2·CLAUDE.md 第 10 条授权）：门禁子进程崩溃/
+  超时/输出不可解析/汇总结构缺失 = 判据不可执行 → 一律 FAIL。原 _run_simple_gate 异常记
+  WARN、a11y 段 JSON 解析失败记 OK，使「从未通过的门禁」伪装「通过」、整轮仍报核心全部
+  通过 + exit 0（T03 审查实证·本轮根除）；唯一例外为 Gate.missing_warn 登记的运行期缺失
+  降级（W424 M2·仅 2 个 node 段·显式 opt-in）。
+
 零依赖：仅标准库。可直接运行：
   python scripts/verify_delivery.py            # 静态校验（提交前门禁）
   python scripts/verify_delivery.py --health   # 额外探测 RAG /health（环境项，仅告警不阻断）
@@ -359,8 +365,10 @@ class _SimpleGate(NamedTuple):
       tail_out/tail_err——尾行切片（stdout/stderr 各末 N 行）；
       fail_tail——fail 消息中尾行上限（12 段 [:6]·治理契约 [:4]·6 段全量因 tail≤4 条等价）；
       runner——py=sys.executable / node=node；
-      missing_warn——FileNotFoundError 专用 WARN（仅 2 个 node 段：运行时缺失语义）；
-      severity——fail=非零退出即 FAIL / warn=非零退出仅 WARN（治理契约·W499 起不阻断）。
+      missing_warn——FileNotFoundError 专用 WARN（仅 2 个 node 段：运行时缺失语义·W424 M2
+      受控降级；W831 起未登记 missing_warn 的段遇运行器缺失按 fail-closed 记 FAIL）；
+      severity——fail=非零退出即 FAIL / warn=非零退出仅 WARN（治理契约·W499 起不阻断；
+      注意：severity 只管「退出码口径」，子进程崩溃/超时任何段都 FAIL·W831 B1 根修）。
     """
     section: str
     script: str
@@ -635,6 +643,10 @@ def _run_simple_gate(ctx, gate):
     """简单委托门禁通用体（W728 重构）：替代原 18 个同构 try/run/tail 段。
 
     输出口径与逐段内联版逐字节一致；scope 跳过时经 ctx._scoped_run 拿伪造结果走 ok 路径。
+    W831 B1 根修（用户批准·T03 D-01 遗留·CLAUDE.md 第 10 条）：异常路径由 WARN 改 FAIL——
+    子进程崩溃/超时 = 判据不可执行，记 WARN 会使 18/33 委托段崩溃即降级、整轮仍「核心全部
+    通过 ✅」+ exit 0（假绿面根除·对齐 _run_strict_gate 语义）；唯一保留的 WARN 是
+    Gate.missing_warn 登记的运行期缺失降级（W424 M2·仅 2 个 node 段·显式 opt-in）。
     """
     ctx.section(gate.section)
     exe = "node" if gate.runner == "node" else sys.executable
@@ -642,10 +654,13 @@ def _run_simple_gate(ctx, gate):
     try:
         r = subprocess.run(cmd, capture_output=True, text=True, timeout=gate.timeout)
     except FileNotFoundError as e:
-        ctx.rep.warn(gate.missing_warn if gate.missing_warn else gate.warn_msg % e)
+        if gate.missing_warn:
+            ctx.rep.warn(gate.missing_warn)  # W424 M2 登记式降级（node 运行期缺失·受控）
+        else:
+            ctx.rep.fail(gate.warn_msg % e)  # 未登记降级 → fail-closed（判据不可执行即红）
         return
     except Exception as e:
-        ctx.rep.warn(gate.warn_msg % e)
+        ctx.rep.fail(gate.warn_msg % e)  # W831：crash/timeout → FAIL（原 WARN·假绿面根除）
         return
     tail = r.stdout.splitlines()[-gate.tail_out:] + r.stderr.splitlines()[-gate.tail_err:]
     first = tail[0] if tail else "无输出"
@@ -988,30 +1003,42 @@ def _gate_embedded_fallback(ctx):
 
 
 def _gate_a11y(ctx):
-    """a11y 对比度门禁（W493 E6 转正：M1 WCAG AA，P0/P1 阻断；bespoke=JSON 汇总解析）。"""
+    """a11y 对比度门禁（W493 E6 转正：M1 WCAG AA，P0/P1 阻断；bespoke=JSON 汇总解析）。
+
+    W831 B2 根修（用户批准·T03 D-01 遗留）：原实现三处 fail-open——① JSON 解析异常 →
+    rep.ok「summary 解析跳过」；② 缺 summary/E2-2 键 → p01=0 静默判绿（_count_by_rule 虽
+    预置全规则 0 值，但任何输出形态漂移都走这条静默绿路）；③ 外层异常 → rep.warn。三者
+    都使「判据不可执行」伪装成「通过」。现改 fail-closed：解析失败/结构不符/子进程异常
+    一律 FAIL（对齐 _run_strict_gate 与 _run_simple_gate W831 语义）。
+    """
     ctx.section("a11y对比")
     a11y_py = os.path.join(_HERE, "a11y_audit.py")
     try:
         r = subprocess.run(
             [sys.executable, a11y_py, "--dir", "site", "--format", "json", "--quiet"],
             capture_output=True, text=True, timeout=300)
-        if r.returncode == 0:
-            try:
-                rep = json.loads(r.stdout)
-                s = rep.get("summary", {})
-                e22 = s.get("E2-2", {})
-                p01 = (e22.get("P0", 0) or 0) + (e22.get("P1", 0) or 0)
-                if p01 == 0:
-                    ctx.rep.ok("a11y 对比度门禁通过（E2-2 P0/P1=0）")
-                else:
-                    ctx.rep.fail("a11y 对比度 P0+P1=%d（M1 WCAG AA 阻断）" % p01)
-            except Exception:
-                ctx.rep.ok("a11y 审计完成（summary 解析跳过）")
-        else:
-            ctx.rep.fail("a11y_audit 失败（exit %d）：%s"
-                         % (r.returncode, (r.stderr or r.stdout).splitlines()[-1:]))
     except Exception as e:
-        ctx.rep.warn("a11y 对比度门禁执行异常（W493）: %s" % e)
+        ctx.rep.fail("a11y 对比度门禁执行异常（判据不可执行·fail-closed·W831）: %s" % e)
+        return
+    if r.returncode != 0:
+        ctx.rep.fail("a11y_audit 失败（exit %d）：%s"
+                     % (r.returncode, (r.stderr or r.stdout).splitlines()[-1:]))
+        return
+    try:
+        rep = json.loads(r.stdout)
+    except Exception as e:
+        ctx.rep.fail("a11y 审计输出不可解析（判据不可执行·fail-closed·W831）: %s" % str(e)[:120])
+        return
+    s = rep.get("summary") if isinstance(rep, dict) else None
+    e22 = s.get("E2-2") if isinstance(s, dict) else None
+    if not isinstance(e22, dict):
+        ctx.rep.fail("a11y 汇总缺 summary.E2-2 结构（判据不可执行·fail-closed·W831）")
+        return
+    p01 = (e22.get("P0", 0) or 0) + (e22.get("P1", 0) or 0)
+    if p01 == 0:
+        ctx.rep.ok("a11y 对比度门禁通过（E2-2 P0/P1=0）")
+    else:
+        ctx.rep.fail("a11y 对比度 P0+P1=%d（M1 WCAG AA 阻断）" % p01)
 
 
 # ---------------------------------------------------------------------------
