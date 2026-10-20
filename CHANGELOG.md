@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W842），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W843），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,18 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W843（2026-10-21）：pitfalls 增补批（第 48 条 desc 内嵌 W 号 + 第 49 条双源同旧值假绿）
+
+> **来源**：用户令「继续做完」——W842 收尾时我提了两条建议，第一条是「先写个小批把今天新踩的坑固化进 pitfalls」，用户批准按此顺序推进。
+> - **文件**：docs/agent/pitfalls.md、AGENTS.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w843_spec.json、scripts/output/_cascade_files_W843.txt。
+> - **第 48 条（级联 / CHANGELOG 节 · 4→5）**：`spec` 的 `desc` 禁含**内嵌** W 号。`_face_footers` 把 `desc` 拼进四页脚批次链（`f"{ctx.batch} {desc}"`），`_foot_insert` 末行断言 `len(_wns) == len(set(_wns))`。W781 建的剥离防线只有 `re.sub(r"^W\d{3}\s*", "", desc)`——**只治行首**。W842 首版 desc 写「补段工具一次补齐 W830 到 W841 十二批欠账…」，链上已有的 W841 与 desc 里的 W841 撞，`batch_cascade` dry-run 直接抛 `AssertionError: 页脚链 token 重复（W724 防线）`。改法 = desc 用不含 W 号的量词表述，批号引用移到 `changelog_body`（body 不进链）。
+> - **第 49 条（数据 / 内容可信度节 · 4→5）**：双源互锁在两侧都停在旧值时**必然假绿**。C5b 比对 `pytest.ini` 标记与 `stats.json` 值，C5d 才是 `stats.json` 与磁盘实算。W839 收官刷新少记一例（该批正文写「783→785」而实算 786），C5b 因为两边都是 785 而一路绿，直到 W842 跑 `stats.py --w` 触发 C5d 才照出来。结论：**标记↔缓存的对账只能证明两者彼此一致，不能证明它们与事实一致**，凡存在实算源就必须让实算支路常驻门禁。
+> - **同批校准 AGENTS §4.3**：坑位总数 47→**49**、级联节（4）→（5）、数据节（4）→（5），并在计数口径注里补 W843 一行说明。这不是形式主义——W840 刚实证过「沉淀时只改 pitfalls 节标题、不改本行」会让总数静默漂移。
+> - **实跑校准**：计数脚本按 `^### ` 切节、按 `^- \*\*` 数顶层条目，得 9/5/17/5/5/8 = **49**，与六个节标题、与 AGENTS 本行三者自洽。
+> - **顺带**：台账「现势下一自由号」bullet 从 W827 轮换到 W843——preflight 的 WARN「现势 bullet 与 max+1 不衔接」由黄转 NOTE。
+> - **验证**：check_doc_sync 0 FAIL；全量 verify 核心全部通过（51/51）；ruff 净；目录文档新鲜度 0 FAIL。
+> - **状态**：已落地（本地提交·未推送）。
 
 ### W842（2026-10-21）：CHANGELOG 递延补段工具批（backfill_changelog.py + 12 批欠账一次补齐）
 

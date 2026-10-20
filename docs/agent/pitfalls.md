@@ -65,19 +65,23 @@
 - **PowerShell 管道会给行文本加 BOM**（W836 实证）：`Get-Content x | py -3 script.py` 传入的行首带 U+FEFF ⇒ 写入台账后该行成为 `U+FEFF| W836 | …` ⇒ 第 31 门禁 C4 的登记正则 `^\|\s*W(\d{3})\s*\|` 不匹配 ⇒ 判「该 W 号未在对账表登记」红——而**明面完全看不见**（编辑器不显示行首 BOM）。纪律：**登记行必须以文件直写传入**（`open(..., encoding="utf-8")`），禁经管道；写入后核 `git show HEAD:<file>` 的行首。
 - **守卫不能把自己判红**（W836 实证）：扫描被禁字面量的守卫若①在注释里写出字面量、②在自检样本里硬编码字面量，①会被自己命中、②入库后即自指违规 ⇒ 字面量以 **base64 存储·运行时解码**（明文扫描仍为 0 而守卫仍能检出回归）；自检的**正例探针由解码结果在运行时派生**（`pat` / `pat.upper()` / `pat.capitalize()` / 词内嵌形态），只有反例才硬编码。守卫上线后先跑自身扫描——它会当场报出你刚写下的字面量。
 
-### 级联 / CHANGELOG（4 条）
+### 级联 / CHANGELOG（5 条）
 
 - **bump_version.py** 一键补齐辅助 4 文档版本行（W576 起恢复可用：W536 写路径守卫根目录曾误算为 scripts/ 致任何调用必误判越界，经用户批准修复为项目根——与 W550 修复的 generate_csp 同款；其「全文件 W001-W### 范围替换」覆盖 batch_cascade 不触及的 README 目录树/交接 CHANGELOG 范围行等存量漂移面，整文件 text-mode 重写兼带孤立 \r 损伤归一）；**三个已知坑（①②多次复现 W524 扩证·③W528 实证）**：① 全局替换会污染 file-index 历史段（生成「WXXX WXXX」重复标题的空壳段、登记表为空，需手工补全当批文件表）；② `--desc` 与 `--note` **均会**往 STRUCTURE.md 头部 / docs/00-导读/项目说明.md 的上一版本行**追加**「 + WXYY(...)」而非替换主描述（W523 实测 `--note` 同样触发——此前仅登记 `--desc` 单触发面）；③ 三简单页脚（index/cross-time-danmaku/tag-cloud）同步为替换式、只匹配"链首 == 解析版本"的条目，页脚一旦滞后就永不被命中（W528 实证停在 W453 脱节 74 批）——跑完必须 Grep 校验版本行三处 + 三页脚版本实际前进并手工净化。
 - **CHANGELOG 多版段插入/重排只用脚本 + 结构断言**（锚点唯一性 + 版段 order 校验），手工 Edit 大段会吞相邻版段标题；**新批版本号先 Grep 现役段取 max+1 再写**（防撞号）。
 - **batch_cascade.py 在 CRLF 文档上会翻倍行尾且头链双写**（W553，W554 二犯实锤）：级联落盘后 6 个 CRLF md 行尾变 4×CR（`\r\r\r\r\n`）、交接头链 entry 以「；」「·」各写一次——落盘后必须字节级核查（行尾 CR 串收敛 + 链唯一性断言），翻倍即逐行 `rstrip(b'\r')` 收敛修复；断言口径见 `scripts/_w553_jiacheck.py`（改批号复用）。**spec desc 禁含分隔符（·/—/；）**：desc 会被写进各文档当前态版本行，内嵌分隔符使下一批 batch_cascade 的 `[^·]*·A1-A6` 型锚点正则失配（W664 实证：W663 手工级联 desc 含「·」→ 本批 dry-run README/项目说明两锚点 AssertionError，去内嵌 · 后通过）。**跳号/合并段批次走手工级联脚本（W663/W666/W667/W679 四先例）**：对账表认领号 ≠ CHANGELOG 现役+1 时 batch_cascade「批次号应为 WNNN」断言必 FAIL（预留号被历史段登记占用不能让路）——复刻工具全部锚点断言写一次性脚本（批号硬编码+偏差声明在头·`scripts/output/_w663_close_cascade.py`/`_w679_close_cascade.py` 前例可复制改造），dry-run 全过再 --apply。**head_entry 内嵌日期串触发尾链自检误报（W679/W680 两犯）**：级联条目文本内含形如 `2026-10-07-xxx.md` 的文件名时，写后自检按「2026-」计数 >3 误报「尾链异常」——直接正则提取头尾链 W 号核实恰 3 条且链首=当批即放行，勿盲改。**提交信息/级联文本含预留 W 号触发第 31 门禁 C4（W680 实证）**：预留号动工前先在对账表登记预留行（登记即豁免）再写进提交文本。**乱序认领号 file-index 段插数值位（W676/W677 两例）**：认领号小于现役 max 时（预留号后补执行），file-index 新段若照常插顶部会触发第 17 门禁「段倒序断言」——按数值序插到前一个较小号段之上（W676 段插 W675 上）；级联文本/提交信息提前引用未认领自由号时按 D2 在对账表「递延批豁免登记」加 bullet（登记即豁免且不占号·W691 实证）。
 - **级联落盘清单与 partial commit 三犯根治**（W649·W595 sitemap 漏 add/W632 CITATION 三连漏/W647 版本行六面漏——同族三犯，病根均为「级联已落盘但未进提交」的检出树≠工作树脱节）：batch_cascade.py --apply 落盘后输出持久清单 `scripts/output/_cascade_files_<批号>.txt`，提交时按清单逐面 `git add`；级联外 chore 提交的版段对账由下一级联批追记（7b27cf1→W649 先例）；**并行批次在途时用 pathspec 提交互斥**（`git commit -F msg -- <paths>` 不动对方 index·动手前必须 `git log` 识别并行增量·跨批共享文件 AGENTS/CHANGELOG 等让行给暂存方）；**W 批编号动工前在对账表登记认领，唯一对账依据 = docs/00-导读/W批次编号对账表.md（W663 起·「Grep 现役段 max+1」在版段递延时可能滞后于已认领号）**。
 
-### 数据 / 内容可信度（4 条）
+- **spec 的 `desc` 禁含内嵌 W 号**（W842 实证 · `_foot_insert` 的 W724 防线当场炸）：`_face_footers` 把 `desc` 拼进四页脚批次链（`f"{ctx.batch} {desc}"`），`_foot_insert` 末行断言 `len(_wns) == len(set(_wns))` 防 token 重复。W781 建的剥离防线只有 `re.sub(r"^W\d{3}\s*", "", desc)`——**只治行首**，治不了行内嵌：首版 desc 写「补段工具一次补齐 W830 到 W841 十二批欠账…」→ `AssertionError: 页脚链 token 重复（W724 防线）`，链上已有的 W841 与 desc 里的 W841 撞。**同族口径**：`desc` 是唯一被拼进「批次链」的自由文本，凡 desc 出现别批 W 号（范围表述、批号引用、引上一批）都会撞链上既有 token；三处版本行不会撞，但为一致性一并按此纪律。判据 = batch_cascade dry-run 抛「页脚链 token 重复」；改法 = desc 用不含 W 号的量词表述（「十二批欠账」），批号引用移到 `changelog_body`（body 不进链）。
+
+### 数据 / 内容可信度（5 条）
 
 - **CHANGELOG/方案档验收数字必须当批现测**（W496 铁律）：写 M 指标/内联字节数等数字前先跑 `python scripts/acceptance_snapshot.py` 从输出抄，禁止从上一批 CHANGELOG 复制（W493「28385B」跨批复制曾掩盖全站 INLINED 清空事故）。
 - **写 `> 原文引文` 行前先跑 `python scripts/_cite_probe.py --kw <关键词> --chap <回目>`** 从 text-search.json 提取候选，禁止凭记忆编造（W503 门禁只拦截"写入后未命中"，无法拦截"恰好像原文的编造"）；新文档（非基线豁免）用变体称谓（行者/唐僧/圣僧等）必须同时含 canonical（孙悟空/玄奘），写作前 Grep `dataset/glossary.json` 称谓组。
 - **EMBEDDED 回退铁律的部署态反例**（W554）：en/81-hardships.html EMBEDDED 清单为空数组 + fetch 指向 site 外路径（`../../scripts/output/data/`）——file:// 与 Pages 部署态双断（截图实锤 0/0 trials）。新增页面自查两条：EMBEDDED 必须含完整数据（不允许空数组等 fetch）；fetch 相对路径不得越出 site/（部署根=site/）。
 - **部署态冒烟与 file:// 审查是两条独立覆盖面**（W565 实证，P04）：EMBEDDED 回退机制使 fetch 成功（部署）与 fetch 失败（file://）走上不同代码路径，character-appearance 契约失配在生产崩溃数日而 file:// 截图审查全绿。凡改动「数据装载层 / fetch 链路」的批次，收尾必跑 `scripts/_deploy_smoke.js`（http.server + Playwright 断言 4xx/pageerror）。**修复 site/data/json 部署副本的批次，收尾必配「旧值标记全页面扫描」（W691 实证 6 页漏网）：json 与页内嵌副本是双路径，只改 json 必产生静默分叉——以修复前旧值为标记 grep 全站 data/en 页面，命中即同步重灌（W678 十六项 json 修复全未配此步，review 批补扫 cave-estate/geo3d/ethics 双语/game-webnovel/visual-art/workplace 六页；text-search-app.js 内嵌语料属同族第三容器，语料重建须三处同改：dataset json+部署副本+app 内嵌）。**
+
+- **双源互锁在「两侧都停在旧值」时必然假绿**（W842 实证 · pytest 收集数 785 虚挂两批）：`check_doc_sync` 的 C5b 比对 `pytest.ini` 标记 vs `stats.json` 值，C5d 才是 `stats.json` vs 磁盘实算。W839 收官刷新少记一例（该批正文写「783→785」而实算 786），C5b 因为 `pytest.ini` 与 `stats.json` **两边都是 785** 而一路绿——直到 W842 跑 `stats.py --w` 触发 C5d（换源头实算）才照出来。教训：**标记↔缓存的对账只能证明两者彼此一致，不能证明它们与事实一致**；任何「X 抄自 Y」的互锁都必须配一条「Y 由 Z 实算」的独立支路，否则同源污染会静默通过。同族检查面 = `report_docs` 标记、A4/A1-A6 计数、`stats.json` 各键——凡存在实算源，就必须让实算支路常驻门禁（C5d 即这条）。
 
 ### 流程 / 协作 / 取证（8 条）
 
