@@ -12,13 +12,12 @@
 - `data/`
 - `figures/`
 
-## 文件（203）
+## 文件（201）
 
 ### Markdown 文档
 
 - `_a02_matrix_body.md`
 - `_s23_full_matrix.md`
-- `_w808_commit_pathspec.md`
 - `file-index.md`
 - `stats-index.md`
 - `观测基线快照.md`
@@ -221,7 +220,6 @@
 - `stats-changelog.json`
 - `stats.json`
 - `unwrapped-tables-baseline.txt`
-- `w808_commit_files.txt`
 - `yuanqi_edges.csv`
 - `yuanqi_nodes.csv`
 
