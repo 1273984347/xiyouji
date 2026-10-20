@@ -30,7 +30,7 @@
 > - **缺陷⑤（遍历类工具完全不过黑名单，C5）**：`glob` 与 `grep` 从不调用 `checkProtected`（`walkFiles` 只按名跳过 `.env`）⇒ 会话库内容**可经 grep 外泄**，路径可经 glob 泄露——恰是该黑名单的设立目的。**修**：`walkFiles` 内按 read 面过滤受保护路径（新增不抛异常的 `isProtected()` 判定）。**验**：grep 搜会话库特征串零命中、glob 零列出；普通文件仍可 grep（未误伤）。
 > - **负样本自证（关键·本仓纪律「负样本必红」）**：把 `tools.ts` 的源码修复单独 stash（保留测试）后实跑 → **C1/C1b/C2/C3/C4/C5 六条逐条变红**（C3 更实锤：命令真被执行，git 报 exit 128）；控制组 C3b/C3c/C5b 保持绿（证明未误伤既有行为）；C2b 因本机 Windows 无文件级建链权限而以 `t.skip()` **诚实标注跳过**（CI 的 Linux 必执行·禁静默通过）。
 > - **验证**：`npm run test:server` → **76 pass / 1 skip / 0 fail**（原 67 → +9）；`api.integration.test.ts` → **19 pass / 1 skip / 0 fail**；`tsc --noEmit` → **0 错**；verify_delivery 全量 51 段 0 FAIL；ruff 0 违规。
-> - **状态**：已落地（本地提交·未推送）。
+> - **状态**：已落地（本地提交 b1d125fc·未推送）。
 
 ### W816（2026-10-20）：门禁判据可信化批（审查第一批）
 
