@@ -133,6 +133,52 @@ test("集成：POST /api/feedback 非法入参返回 400 invalid body（既有�
   }
 });
 
+// ==================== ③' W813：框架层 4xx 保真（请求体解析失败） ====================
+// 契约回归防线：W808 新增全局错误处理器后，express.json() 的解析失败
+// （SyntaxError·body-parser 带 status=400）被误归为「编程错误」→ 客户端收到 500。
+// 重构前（无全局处理器）Express 默认处理器返 400。
+// 本组用例钉住「客户端错误不得被升格成服务端故障」这条契约。
+
+test("集成：请求体 JSON 畸形返回 400 而非 500（W813 修的契约回归防线）", async () => {
+  const { child, base } = await spawnServer(3219);
+  try {
+    const r = await fetch(`${base}/api/feedback`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: "{not-valid-json",
+    });
+    assert.equal(r.status, 400, "请求体畸形是客户端错误，须为 400（不可升格为 500）");
+    const body = (await r.json()) as { error: string };
+    assert.equal(typeof body.error, "string", "错误体形状恒为 { error: string }");
+    assert.ok(body.error.length > 0);
+    // 负样本断言：不得回显原始解析消息（细节外泄防线）
+    assert.ok(
+      !/position|Unexpected token|SyntaxError|JSON\.parse/i.test(body.error),
+      "不得回显原始解析异常消息（细节外泄）：%s",
+      body.error
+    );
+  } finally {
+    child.kill();
+  }
+});
+
+test("集成：畸形 JSON 的错误体不含堆栈字段（防细节外泄）", async () => {
+  const { child, base } = await spawnServer(3220);
+  try {
+    const r = await fetch(`${base}/api/feedback`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: '{"a":',
+    });
+    assert.equal(r.status, 400);
+    const text = await r.text();
+    assert.ok(!/\bat .*\.js:\d+/.test(text), "响应体不得含堆栈帧：%s", text.slice(0, 200));
+    assert.ok(!text.includes("SyntaxError"), "响应体不得含异常类名：%s", text.slice(0, 200));
+  } finally {
+    child.kill();
+  }
+});
+
 test("集成：POST /api/feedback 缺 sessionId 返回 400（W808 修的真实缺陷：前端曾漏传）", async () => {
   const { child, base } = await spawnServer(3218);
   try {

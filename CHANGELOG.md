@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W812），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W813），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,16 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W813（2026-10-20）：review 修复批（W806-W812 对抗审读三项实证缺陷）
+
+> **来源**：用户令「review 一遍这几个批次」后追加裁决「按顺序开始」——本批为 W806-W812 七批对抗审读所得三项实证缺陷的修复批。审读范围为 W806（GoatCounter 退役）/ W807（索引刷新）/ W808（Web Agent 全栈加固）/ W809（索引新鲜度门禁）/ W810（死代码清理）/ W811（CI 断链修复）/ W812（去旧厂商 Agent 工具品牌化）共 23 提交（1012 文件·+7178/-2420）。
+> - **文件**：xiyouji-agent-web/server/errors.ts、xiyouji-agent-web/server/api.integration.test.ts、tests/unit/test_ci_wiring.py、scripts/requirements.txt、scripts/check_doc_sync.py、docs/agent/gates.md、AGENTS.md、scripts/output/_w813_spec.json。
+> - **P1 契约回归（畸形 JSON 从 400 变 500）**：W808 新增全局错误处理中间件 `server/errors.ts`，其 `toErrorResponse` 只认 `AppError`，而 `express.json()` 的请求体解析失败抛的是 `SyntaxError`（body-parser 附带 `status=400`）——这类**客户端错误**被归入「编程错误」分支，客户端收到 500 +「服务器内部错误」。重构前（无全局处理器）Express 默认处理器返 **400**，故 W808 在引入全局处理器的瞬间把一类客户端错误升格成了服务端故障，且违反该批自述的「对外契约零改动」红线。连带影响：前端 `errorMessage.ts` 的 `isRetryable` 对 5xx 判 true、对 4xx 判 false，于是「请求体畸形」被误判为可重试的服务端故障。**修复**：异常自带 4xx 状态码即按该状态码返回，文案用固定表（400/413/415），不回显原始解析消息（防细节外泄）；日志分支新增「框架层客户端错误」记 warn 不记堆栈。**验证**：新增两条集成测试（畸形 JSON 返 400 而非 500 + 错误体不含堆栈/异常类名/原始解析消息），集成套件 20 项全过。
+> - **P2 门禁真空（文件清单防线对前端件失效）**：第 31 门禁 C4-f 的 token 正则 `RE_FILE_TOKEN` 只认 `.py/.js/.mjs/.md/.json/.cff/.txt/.html/.css/.xml/.yml`，`.ts/.tsx/.cjs/.jsonl/.yaml/.toml/.ini/.cfg/.sh/.ps1/.csv/.svg/.example` 全部被**静默滤除**——而滤除即「不被校验」。实测：W808 段「文件」行声明 34 项，C4-f 实际只认 **5 项**（丢弃 29 项·全是 .ts/.tsx），即「手工件漏 add」这条防线在 W808 这类前端批上等于不存在。负样本对照实证：同一漏 add 形态，`.py` 判红、`.ts` 只出 NOTE 放行。**修复**：扩展正则覆盖仓内实际存在且会被手工编辑的文本类扩展名（二进制资产如 .png/.woff2/.ttf 不列——「文件」行本就只登记手工编辑件），并补 T19/T20 两条自测用例（.ts 漏 add 必红 + 多扩展名覆盖面回归锁）。**验证**：自测 18→**20/20 通过**；新旧正则对照实证「旧放行、新判红」证明用例抓的是真缺陷而非自证。
+> - **P3 CI 防线静默失效（守卫在 CI 侧形同虚设）**：W811 的工作流 YAML 可解析性守卫有三条判据——J1 无制表符、J2 裸标量值不得含 ": "、J3 PyYAML 全量解析。实证两处漏洞：① **J2 只查 `name` 键**，但 YAML 映射歧义对任意键成立（实测 `run:` / `env:` / `if:` 三种形态同样让 GitHub 报「workflow file issue」0 秒失败该 workflow 且 PR 不生成 check，原判据全部放行）；② **J3 在 CI 恒跳过**——原实现为「PyYAML 不可用即 `continue`」，而 CI 的 `pytest-unit` job 只装 `scripts/requirements.txt`（当时其中无 PyYAML），于是唯一能拦住这三种形态的判据在 CI 侧从未执行，缺陷照旧潜伏（本地有 PyYAML 故本地绿）。**修复**：J2 判据扩到**任意映射键**的裸标量值（引号包裹与块标量起始标记除外）；PyYAML 登记进 `scripts/requirements.txt`（`PyYAML==6.0.2`）使 J3 在 CI 恒生效，并把 J3 的 `ImportError` 分支从「静默跳过」改为「判红」（可选依赖缺失时不得假装通过）；另补守卫自身的负样本实证用例（4 种坏形态必红 + 4 种形态 PyYAML 同样解析失败证明非误报 + 合法形态不误杀 + PyYAML 确已登记的回归锁）。**验证**：守卫 12→**22 项全过**；新旧判据对照实证「旧判据放行 run/env/if 三种、新判据全部拦下」；本机 `pip-audit -r` 实测 `PyYAML==6.0.2` 「No known vulnerabilities found」（6.x 线已修全部 loader 类 CVE）。
+> - **审读其余面结论（不修·留档）**：交付全量门禁 51 段 0 FAIL；三个新增守卫单测 22 passed；改动文件混行尾 0；W812 目标字面全仓实测 0 命中（site/ 内 10 处残留经逐条核验全是退役说明注释·无实质埋点或外域引用·守卫按「具体形态」判定成立）；W812 移除 `.gitignore` 中该厂商工具目录规则后无兜底（本地目录已迁出项目·实测 `Test-Path` 为 False·属可接受风险敞口·按禁令意图刻意）；`ZCode` 字面 234 处属不在当时禁令范围的品牌（与 CodeBuddy 同类·按裁决保留原名·**W814 已按用户新裁决一并清除**）。
+> - **机械扫（八面）**：行尾 0 混行尾 / 双写 0 / 豁免链连续 / 文件行覆盖度对账（各批 token 认定数逐批实测）/ 门禁复跑全绿 / 垃圾件 0 / 临时探针已清（review 用探针写在 `tmpe/` 且完工即删·不入库）。
 
 ### W812（2026-10-20）：去旧厂商 Agent 工具品牌化批（工具环境解耦 + 全仓去品牌 + 多 Agent 机制保全）
 
