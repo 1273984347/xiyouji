@@ -1,0 +1,327 @@
+{
+  "total_html": 857,
+  "by_dir": {
+    "(root)": 9,
+    "data": 88,
+    "en": 138,
+    "reader": 622
+  },
+  "pages_with_shared_layer": 330,
+  "pages_with_page_layer": 857,
+  "shared_layer_bytes_total": 15425481,
+  "shared_layer_bytes_max": 47808,
+  "page_layer_bytes_total": 3264180,
+  "page_layer_bytes_top": [
+    {
+      "bytes": 25838,
+      "page": "en/concept-device.html"
+    },
+    {
+      "bytes": 25838,
+      "page": "data/concept-device.html"
+    },
+    {
+      "bytes": 22763,
+      "page": "dashboard.html"
+    },
+    {
+      "bytes": 21988,
+      "page": "en/narrative-experiment.html"
+    },
+    {
+      "bytes": 21840,
+      "page": "data/narrative-experiment.html"
+    },
+    {
+      "bytes": 21302,
+      "page": "en/ethics-consumption.html"
+    },
+    {
+      "bytes": 21157,
+      "page": "data/ethics-consumption.html"
+    },
+    {
+      "bytes": 19810,
+      "page": "en/visual-art.html"
+    },
+    {
+      "bytes": 19665,
+      "page": "data/visual-art.html"
+    },
+    {
+      "bytes": 18580,
+      "page": "en/game-webnovel.html"
+    },
+    {
+      "bytes": 18435,
+      "page": "data/game-webnovel.html"
+    },
+    {
+      "bytes": 18060,
+      "page": "en/methodology-matrix.html"
+    },
+    {
+      "bytes": 17972,
+      "page": "data/methodology-matrix.html"
+    },
+    {
+      "bytes": 17201,
+      "page": "en/linguistics.html"
+    },
+    {
+      "bytes": 17201,
+      "page": "data/linguistics.html"
+    }
+  ],
+  "component_fragment": {
+    ".card": {
+      "pages": 4,
+      "sample": [
+        "404.html",
+        "en/guide.html",
+        "en/index.html",
+        "index.html"
+      ]
+    },
+    ".kpi-card": {
+      "pages": 119,
+      "sample": [
+        "_template.html",
+        "dashboard.html",
+        "data/aesthetics.html",
+        "data/business-model.html"
+      ]
+    },
+    ".section": {
+      "pages": 35,
+      "sample": [
+        "_template.html",
+        "dashboard.html",
+        "data/81-hardships.html",
+        "data/character-dynamic-network.html"
+      ]
+    },
+    ".chart-block": {
+      "pages": 98,
+      "sample": [
+        "_template.html",
+        "dashboard.html",
+        "data/81-hardships.html",
+        "data/aesthetics.html"
+      ]
+    },
+    ".hero": {
+      "pages": 58,
+      "sample": [
+        "_template.html",
+        "data/concept-device.html",
+        "data/tag-cloud.html",
+        "en/academic-papers.html"
+      ]
+    },
+    ".table-wrap": {
+      "pages": 25,
+      "sample": [
+        "_template.html",
+        "data/81-hardships.html",
+        "data/cave-estate.html",
+        "data/cultural-misreading.html"
+      ]
+    },
+    ".insight-box": {
+      "pages": 79,
+      "sample": [
+        "_template.html",
+        "dashboard.html",
+        "data/81-hardships.html",
+        "data/aesthetics.html"
+      ]
+    },
+    ".topnav": {
+      "pages": 1,
+      "sample": [
+        "dashboard.html"
+      ]
+    },
+    ".filter-tab": {
+      "pages": 1,
+      "sample": [
+        "dashboard.html"
+      ]
+    },
+    ".empty-state": {
+      "pages": 25,
+      "sample": [
+        "dashboard.html",
+        "data/four-heavenly-kings-artifacts.html",
+        "data/guanyin-six-roles-network.html",
+        "data/heaven-power-network.html"
+      ]
+    },
+    ".chart-tooltip": {
+      "pages": 5,
+      "sample": [
+        "data/aesthetics.html",
+        "data/cultural-misreading.html",
+        "data/hardship-heatmap.html",
+        "data/journey-geo-semiotics.html"
+      ]
+    },
+    ".badge": {
+      "pages": 6,
+      "sample": [
+        "data/counterfactual.html",
+        "data/four-dimensional-research-network.html",
+        "data/timeline.html",
+        "en/counterfactual.html"
+      ]
+    },
+    ".card-grid": {
+      "pages": 8,
+      "sample": [
+        "data/game-webnovel.html",
+        "data/visual-art.html",
+        "en/bestiary.html",
+        "en/chapters-map.html"
+      ]
+    },
+    ".btn": {
+      "pages": 6,
+      "sample": [
+        "data/journey-geo-3d.html",
+        "data/journey-map-interactive.html",
+        "data/narrative-rhythm-curve.html",
+        "en/journey-map-interactive.html"
+      ]
+    },
+    ".kpi-grid": {
+      "pages": 4,
+      "sample": [
+        "en/bestiary.html",
+        "en/chapters-map.html",
+        "en/characters.html",
+        "en/tribulations.html"
+      ]
+    },
+    ".stat": {
+      "pages": 2,
+      "sample": [
+        "index.html",
+        "rum-viewer.html"
+      ]
+    }
+  },
+  "typo_raw": {
+    "font-size": {
+      "pages": 856,
+      "sample": [
+        "404.html",
+        "_template.html",
+        "curated.html"
+      ]
+    },
+    "padding": {
+      "pages": 854,
+      "sample": [
+        "404.html",
+        "_template.html",
+        "curated.html"
+      ]
+    },
+    "margin": {
+      "pages": 840,
+      "sample": [
+        "404.html",
+        "_template.html",
+        "curated.html"
+      ]
+    },
+    "gap": {
+      "pages": 818,
+      "sample": [
+        "404.html",
+        "_template.html",
+        "curated.html"
+      ]
+    },
+    "border-radius": {
+      "pages": 856,
+      "sample": [
+        "404.html",
+        "_template.html",
+        "curated.html"
+      ]
+    },
+    "color": {
+      "pages": 856,
+      "sample": [
+        "404.html",
+        "_template.html",
+        "curated.html"
+      ]
+    },
+    "background": {
+      "pages": 854,
+      "sample": [
+        "404.html",
+        "_template.html",
+        "curated.html"
+      ]
+    },
+    "box-shadow": {
+      "pages": 181,
+      "sample": [
+        "curated.html",
+        "dashboard.html",
+        "data/aesthetics.html"
+      ]
+    }
+  },
+  "spacing_literals": {
+    "12px": 3174,
+    "14px": 3156,
+    "8px": 2064,
+    "24px": 1635,
+    "10px": 1327,
+    "16px": 1283,
+    "34px": 1247,
+    "20px": 926,
+    "2px": 794,
+    "9px": 666,
+    "32px": 654,
+    "26px": 641,
+    "72px": 622,
+    "6px": 584,
+    "18px": 337,
+    "4px": 296,
+    "28px": 148,
+    "1px": 116,
+    "60px": 106,
+    "22px": 91,
+    "48px": 88,
+    "40px": 70,
+    "5px": 63,
+    "36px": 61,
+    "30px": 52,
+    "-30px": 52,
+    "7px": 44,
+    "3px": 40,
+    "15px": 34,
+    "96px": 18,
+    "44px": 8,
+    "56px": 4,
+    "50px": 4,
+    "11px": 4,
+    "88px": 3,
+    "42px": 2,
+    "38px": 2,
+    "80px": 2,
+    "-40px": 2,
+    "-24px": 1
+  },
+  "hex_in_page_layer": 1041,
+  "hex_in_shared_layer": 72934,
+  "token_refs_page_layer": 30380,
+  "token_refs_shared_layer": 90090,
+  "pages_page_layer_without_token": 1
+}
