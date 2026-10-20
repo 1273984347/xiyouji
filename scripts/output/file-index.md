@@ -11,6 +11,167 @@
 ---
 
 
+## W842 CHANGELOG 递延补段工具批（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/backfill_changelog.py | W842 | 新增：CHANGELOG 递延补段工具（两阶段：按降序补段 + 当前态六面推到新顶段·段数与降序断言 fail-closed） |
+| scripts/output/_w842_spec.json | W842 | 新增：本批 spec（级联唯一来源） |
+| pytest.ini | W842 | 改：头注 collected 实体标记 785 改 786（顺手修真漂移·W839 少记一例） |
+| scripts/output/index.md | W842 | 改：登记 backfill_changelog.py 与 _w842_spec.json + 文件计数刷新 |
+
+## W841 版本行分隔符兜底门禁批（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_sync.py | W841 | 改：新增 C6 版本行 desc 分隔符体检（三面 · ； — 禁入 + 形态不识别 fail-closed）+ 自测 22 增至 24 例 |
+| scripts/output/_w841_spec.json | W841 | 新增：本批 spec 入库（版段递延用） |
+| scripts/output/index.md | W841 | 改：登记 _w841_spec.json + 文件计数 246 改 247 |
+
+
+## W840 pitfalls 坑位沉淀批（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/agent/pitfalls.md | W840 | 改：流程节新增第 47 条（fail-closed 跳过路径 _SkipResult 守卫）· 节标题 7 条改 8 条 |
+| AGENTS.md | W840 | 改：§4.3 坑位计数校准 41 改 47（git 节 12 改 17 · 流程节 7 改 8） |
+| scripts/output/_w840_spec.json | W840 | 新增：本批 spec 入库（版段递延用） |
+| scripts/output/index.md | W840 | 改：登记 _w840_spec.json + 文件计数 244 改 245 |
+| docs/00-导读/W批次编号对账表.md | W840 | 改：W840 认领行登记与收官回填 |
+
+
+## W839 fail-closed 跳过路径回归修复批（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/verify_delivery.py | W839 | 改：_gate_a11y 加 isinstance(_SkipResult) 守卫（scope 跳过伪造结果不得判红·W834 回归修复） |
+| tests/unit/test_verify_failclosed.py | W839 | 改：新增 2 例回归锁（跳过结果零上报 / 简单段跳过不判红） |
+| pytest.ini | W839 | 改：头注 collected 实体标记 783→785 |
+| scripts/output/stats.json | W839 | 改：pytest_collected 783→785 |
+| scripts/output/_w839_spec.json | W839 | 新增：本批 spec 入库（版段递延用） |
+| scripts/output/index.md | W839 | 改：登记 _w839_spec.json + 文件计数 243→244 |
+| docs/00-导读/W批次编号对账表.md | W839 | 改：W839 认领行登记（回归修复批） |
+
+
+## W838 取经编制表勘误批（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/取经编制表-工具与技能挂位-2026-10-20.md | W838 | 改：V1.1a 勘误五处（§6.2 自查脚本正则块引限定·旁文档指针面 9→13 处三处统一·附录 A 时点行更新·行 13 引用 §6.4→§6.5·第 31 门禁 C4/C5b 拆分·版本行与状态行同步） |
+| scripts/output/_w838_spec.json | W838 | 新增：本批 spec 入库（版段递延用） |
+| scripts/output/index.md | W838 | 改：登记 _w838_spec.json + 文件计数 242→243 |
+| docs/00-导读/W批次编号对账表.md | W838 | 改：W838 认领行登记（取经编制表勘误批·只读审查转修订） |
+
+
+## W837 并发实况沉淀批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/agent/pitfalls.md | W837 | 改：「git / 提交 / 并发」段新增 5 条（W833/W836 批实证：临时索引假红 / index.lock 全程持锁 / C5b-C5d 互锁 / 管道 BOM / 守卫自指）· 段计数 12→17 |
+| docs/00-导读/W批次编号对账表.md | W837 | 改：W837 认领行登记（含版段递延说明·顶段序约束） |
+
+
+## W836 品牌字面量零命中守卫批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_no_brand_refs.py | W836 | 新建：品牌字面量零命中守卫（字面量 base64 存储·扫已跟踪文件含 archive/·退出码 0/1/2 分流·--self-test 32 例） |
+| .github/workflows/security.yml | W836 | 改：新增 brand-refs 作业（品牌字面量扫描 + 自检复核·守卫失效即阻断） |
+| scripts/gen_folder_docs.py | W836 | 改：点开头顶层目录改为整体排除（去掉逐名列举的明文字面量·对未来同类目录免疫） |
+| docs/11-方案报告/计划方案/执行前计划-T05-取经编制表落库与编制位补全.md | W836 | 改：路径引用改为不落被禁品牌明文 |
+| archive/scripts/batches/misc/_audit_agentweb_baseline.py | W836 | 改：移除已成空转且含被禁字面量的品牌扫描段（其余按 §11.2 不回溯修复·检测能力已由活面承接） |
+| docs/00-导读/W批次编号对账表.md | W836 | 改：W836 认领行登记（含版段递延说明·顶段序约束） |
+
+
+## W835 服务端暴露面收口批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/security.ts | W835 | 改：新增 normalizeHostname 与 isAllowedHost 纯函数（Host 归一化与白名单判定·fail-closed） |
+| xiyouji-agent-web/server/config.ts | W835 | 改：新增 ALLOWED_HOSTS（默认回环三形态 + 追加项）与 REQUIRE_TOKEN 两个启动期配置 |
+| xiyouji-agent-web/server/middleware.ts | W835 | 改：新增 hostGuard 关卡（挂在 request ID 之后、限流之前） |
+| xiyouji-agent-web/server/index.ts | W835 | 改：启动期暴露面自检（强制 token 无 token 拒绝启动 + 未设 token 记 WARN） |
+| xiyouji-agent-web/server/security.test.ts | W835 | 改：新增纯函数 3 例与真起服负样本 2 例（rebinding 主机名 403 / 强制 token 拒绝启动） |
+| xiyouji-agent-web/.env.example | W835 | 改：新增 AGENT_WEB_REQUIRE_TOKEN 与 AGENT_WEB_ALLOWED_HOSTS 的说明 |
+| docs/agent/agent-web.md | W835 | 改：新增暴露面收口条目（Host 白名单与 token 硬开关·含挂载序与回归面） |
+| docs/00-导读/W批次编号对账表.md | W835 | 改：W835 认领行登记（含版段递延说明·顶段序约束） |
+| scripts/output/index.md | W835 | 派生面：目录文档文件清单（收录 _w835_spec.json） |
+| scripts/output/README.md | W835 | 派生面：目录说明的文件计数（新增 _w835_spec.json 后重算） |
+
+
+## W834 门禁 fail-open 根修批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/verify_delivery.py | W834 | 改：B1/B2 fail-open 根修（_run_simple_gate 异常路径 WARN→FAIL·_gate_a11y 三处 fail-open→FAIL·missing_warn 登记式降级保留·模块 docstring 补 fail-closed 语义段） |
+| tests/unit/test_verify_failclosed.py | W834 | 新增：fail-closed 语义负样本测试 12 例（B1 崩溃/未登记缺失/登记缺失保留/快乐径/退出码径 + B2 解析失败/缺 summary/缺 E2-2/崩溃/快乐径/P0P1 阻断/非零退出） |
+| pytest.ini | W834 | 改：头注 collected 实体标记 770→782（本批 12 例入库·C5b 扩展面对账） |
+| scripts/output/stats.json | W834 | 改：pytest_collected 770→782·report_docs 37→39（并行 W831 落库） |
+| STRUCTURE.md | W834 | 改：report_docs 标记 38→39（并行 W831 取经编制表批落库·含 T05 计划件与抓位文档） |
+| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W834 | 改：report_docs 实体标记 38→39（C5b 扩展面对账） |
+| docs/11-方案报告/计划方案三性审查报告-2026-10-20.md | W834 | 改：§五.5 pytest 标记 770→782 + W834 复测注（含三度顺延取号记录） |
+| docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md | W834 | 改：AC-07/ASM-08 订正注更新至现役 39（W831 取经编制表批落库后） |
+| docs/00-导读/W批次编号对账表.md | W834 | 改：W834 认领行（7 格）+ W830 行递延注记更新（顶段链因并行落库移位） |
+
+
+## W833 交付链与工具链静默失效根修批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/workflow-lint.yml | W833 | 新建：工作流 YAML 可解析性守卫（独立于 ci.yml·W806 同型事故根修） |
+| .github/workflows/ci.yml | W833 | 改：mypy 去掉 --non-interactive（该选项使命令在参数解析阶段即报错·配合忽略失败写法导致类型检查从未执行） |
+| .github/workflows/security.yml | W833 | 改：两处去掉 npm ci 失败即回退 npm install 的写法——锁与 manifest 失配即红 |
+| .github/workflows/README.md | W833 | 改：登记 Workflow Lint 工作流（触发条件与 W806 事故机理说明） |
+| .github/workflows/index.md | W833 | 派生面：目录文档文件清单 9→10（含 workflow-lint.yml） |
+| docs/00-导读/W批次编号对账表.md | W833 | 改：W833 认领行登记（含版段递延说明·顶段序约束） |
+| scripts/output/README.md | W833 | 派生面：目录说明的文件计数（新增 _w833_spec.json 后重算） |
+| scripts/output/index.md | W833 | 派生面：目录文档文件清单（收录 _w833_spec.json） |
+
+
+## W832 agent-web 生产面加固批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/chat.ts | W832 | 改：保存消息失败的 detail 与聊天异常 SSE error 帧改固定文案（形状不变·原文进 logger） |
+| xiyouji-agent-web/server/routes.ts | W832 | 改：/api/ready 探针的 detail 改固定文案 + 原文进 logger |
+| xiyouji-agent-web/server/db.ts | W832 | 改：库路径支持 AGENT_WEB_DB_PATH 覆盖（默认不变·供端到端测试用临时库） |
+| xiyouji-agent-web/e2e/chat.e2e.mjs | W832 | 改：改跑临时库 + 真实库零改动断言 + 指向真实库时拒绝启动且跳过清理（守卫三处同源） |
+| xiyouji-agent-web/src/hooks/useChat.streaming.test.ts | W832 | 改：改用 Vite 的 import.meta.glob 以原始文本读源文件（前端 tsconfig 无 node types） |
+| docs/00-导读/W批次编号对账表.md | W832 | 改：W832 认领行登记（含版段递延说明·顶段序约束） |
+
+
+## W831 取经编制表落库与编制位补全批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/取经编制表-工具与技能挂位-2026-10-20.md | W831 | 新增：项目级编制说明（§0 一分钟速览 + §1 编制总表 17 位 × 6 列 + §2 编制卡 17 位五问 + §3 三处空缺编制位诊断与补全步骤 + §4 挂位表 28 项 + §5 术语权威指针 27 条 + §6 复现命令；15 条引文逐字命中；V1.1 增补丁组「归档与工地」2 位：酆都判官崔珏=archive/ 档案官、扫地道人=tmpe/ 场地官） |
+| docs/11-方案报告/取经编制表-工具与技能挂位-2026-10-20.html | W831 | 新增：零外域依赖编制表预览页（file:// 直开·Playwright 实测 17 卡 / 17 引用块 / 53 挂载标签 / extEls=0 / 无控制台错误） |
+| docs/11-方案报告/计划方案/执行前计划-T05-取经编制表落库与编制位补全.md | W831 | 新增：框架第五次执行的执行前计划（14 条 AC · 23 条 ASM · 12 步 ST · 8 指标 · 10 风险 · 10 决策 · 16 项自检 + §0.5 零前置知识速览） |
+| docs/11-方案报告/README.md | W831 | 改：§一 现役报告 30→31 篇（追加编制表索引行）· §二 计划方案 6→7 篇（追加 T-05 索引行）；三项结构自校验实测通过（表头计数 == 实际行数 · 编号升序连续 · 表内无断裂空行） |
+| docs/00-导读/W批次编号对账表.md | W831 | 改：追加 W831 认领行（7 格严式·touches 落末格 = docs/11-方案报告/README.md·状态 进行中） |
+| docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md | W831 | 改：§8 干扰日志追加一行（G1-A 漂移 + G1-F 号段邻接占用·W832 并行避让·0 实质损失） |
+| scripts/output/_w831_spec.json | W831 | 新增：W831 落段 spec（10 键·供顶段推进后 batch_cascade 补写用） |
+| scripts/output/_cascade_files_W831.txt | W831 | 新增：W831 落地件清单（C4-e 强校验要求） |
+
+
+## W830 计划方案三性审查与快照漂移门禁修复批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/计划方案三性审查报告-2026-10-20.md | W830 | 新增：9 份计划方案三性审查报告（逐份结论表 + 约 60 断言复验证据 + 四类真问题分级 + 本批修复清单 + 后续建议 + 复算附录） |
+| scripts/check_doc_sync.py | W830 | 改：C5b 实体标记对账扩展面（11-方案报告根层 + pytest.ini·只跑标记不跑句式与裸数字·计划方案子目录除外）+ 标记判据助手提取 + 自测 20→22 例（T21/T22 双向锁） |
+| scripts/stats.py | W830 | 改：新增 pytest_collected 键（pytest --collect-only 实算·fail-closed 判据未执行即红）+ C5d timeout 60→180s |
+| pytest.ini | W830 | 改：头注 collected 计数实体化（602 字面量→770 实体标记）+ verify_delivery 49 段→51 段 |
+| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W830 | 改：report_docs 实体标记 30→37（C5b 扩展面纳入后订正·原值无门禁兜底） |
+| docs/11-方案报告/静态站前端框架化选型对比-2026-10-20.md | W830 | 改：site/data 合计 9,272,531→9,722,504（均值 110,483×88 对账值·原误植与 9.27 MB 注解矛盾） |
+| docs/11-方案报告/计划方案/执行前计划-T03-全项目审查第一批修复.md | W830 | 改：头五要素状态字段执行中→已收官（W816 落地 55b9b8c0·终稿报告已在库） |
+| docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md | W830 | 改：AC-07/ASM-08 加开工重测注记（现役 report_docs 37 非 34/35·聚合数字当批现测） |
+| docs/11-方案报告/README.md | W830 | 改：§一 现役报告索引登记三性审查报告（29→30 篇） |
+| STRUCTURE.md | W830 | 改：report_docs 36→37 + 现役报告 29→30 篇 + 去过期「在途 2 篇」括注 |
+| docs/agent/gates.md | W830 | 改：第 31 条追加 W830 C5b 扩展面定义（扫描域、子目录除外理由、建置即红实证、pytest_collected 键） |
+| docs/00-导读/W批次编号对账表.md | W830 | 改：W830 认领行（7 格）+ W830 bullet（取号说明 + W829 占用实证 + B1/B2 待办登记） |
+
+
 ## W827 站内阅读入口打通施工批（2026-10-21）
 
 | 文件 | W | 说明 |

@@ -289,6 +289,7 @@ CATEGORY_OF = {
     "agg_entities.py": "④实体聚合（由数据管线调用）",
     # 后续批次新增脚本（未覆盖时在此登记并注明类别；同批必须给出上面的四类理由）
     "check_chart_values.js": "④浏览器渲染断言（需真实 Chromium·由 pytest 逻辑层与 verify 第 43 槽覆盖）",
+    "backfill_changelog.py": "②应急补段（版段递延链断裂时人工触发·非常规流程·W842 建）",
 }
 
 

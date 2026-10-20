@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W827），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W842），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,157 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W842（2026-10-21）：CHANGELOG 递延补段工具批（backfill_changelog.py + 12 批欠账一次补齐）
+
+> **来源**：用户令「现在解决」——W830 起版段递延链卡死十二批，CHANGELOG 顶段停在 W827，此后所有批只能「内容先落 + spec 入库 + 递延登记」。用户要的是结构性解法，不是先补 W828 的功能四项再回头收拾。
+> - **文件**：scripts/backfill_changelog.py、scripts/output/_w842_spec.json、CHANGELOG.md、scripts/output/file-index.md、scripts/output/index.md、scripts/output/_cascade_files_W842.txt、pytest.ini、scripts/output/stats.json、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、AGENTS.md、CITATION.cff、.github/workflows/README.md、docs/00-导读/W批次编号对账表.md、scripts/check_script_coverage.py、scripts/output/script-coverage-baseline.txt、scripts/index.md、scripts/output/README.md。
+> - **根因（两条叠加，先后查明）**：① **号序缺口 W828**——batch_cascade 断言 `batch == 顶段+1`，W828 没立段则顶段恒为 W827，W829 起任何批都过不了断言；② **W826 desc 含「·」**致三处版本行锚点（`·A1-A6` / `—A1-A6` / `·详细变更见`）全部失配，连「本该能落的那一批」也落不下（W827 施工时撞上并把三处 · 改为 、，十面断言随即全过，坐实因果）。②修好后 W827 立段成功，但①仍在，W830-W841 十二批继续积压。
+> - **落地**：新建 `scripts/backfill_changelog.py`，两阶段设计——① **补段**：按降序把待补批插到「第一个号小于自己的段」之前（`insert_before_smaller`，找不到锚点直接 AssertionError 拒绝执行，防高号误走补段路径绕过正常级联）；② **当前态同步**：补完顶段号变了，README / STRUCTURE / 项目说明三处版本行、HANDOVER 交接头、workflows README、AGENTS 版本脚注、CITATION、四页脚必须跟着走，否则 C1（README 抬头 ≡ 顶段）当场红——故 `--refresh-current` 直接复用 batch_cascade 的六个 `_face_*` 函数，把「现在是什么」这一层推到新顶段。
+> - **落盘前全量断言（fail-closed）**：段数 = 补前段数 + 待补数、W 号严格降序、无重复号、每段标题锚点唯一、file-index 段数与序同 CHANGELOG——任一不过即零落盘。
+> - **本次实跑**：CHANGELOG 127→**139** 段、file-index 127→**139** 段、规则 `W001-W827`→`W001-W841`；当前态同步 11 面（六函数 + 落盘清单 `_cascade_files_W841.txt`）。**号序链恢复**：顶段 W841，本批 W842 起回到 batch_cascade 正常级联，补段工具从此只作应急。
+> - **顺手修真漂移**：`stats.py` 实算 pytest 收集数 785→**786**——W839 收官刷新时少记一例（该批 CHANGELOG 原文写「783→785」，与磁盘实算不符，且 C5b 因两边同为旧值而假绿）；pytest.ini 头注标记同步 785→786。
+> - **验证**：check_doc_sync 0 FAIL（C1 README 抬头 ≡ W841、C2 交接头链、C4 提交-版段对账、C5d stats 实算、C6 版本行分隔符全绿）；`stats.py --w W842` 刷新 1 键；补段段数/降序/锚点断言全过。
+> - **状态**：已落地（本地提交·未推送）；W830-W841 十二批台账「CHANGELOG 版段」列由「递延」翻「已立段」。
+
+### W841（2026-10-21）：版本行分隔符兜底门禁批（check_doc_sync C6 + 自测 22 增至 24 例）
+
+> **来源**：用户令「写」——W827 施工中撞上「三处版本行锚点全失配、任何批都级联不了」，追根因后提出的守卫，用户批准落地。
+> - **文件**：scripts/check_doc_sync.py、scripts/output/_w841_spec.json、scripts/output/index.md、docs/00-导读/W批次编号对账表.md。
+> - **缺陷链条**：W826 批 desc 含「·」→ 三处版本行（README `·A1-A6` / STRUCTURE `—A1-A6` / 项目说明 `·详细变更见`）锚点正则全部失配 → 后续任何批无法级联落段。W827 施工时把三处 · 改为 、后十面断言立即全过，坐实因果。
+> - **关键查明（纠正了一个错误判断）**：batch_cascade.py 的 precheck() **早已存在且 fail-closed**（desc 禁 · ； —，违例 return 1）。W826 漏网的原因是它**没走 batch_cascade**——output 下只有三个 _w826_*.py 审计脚本、没有 _w826_spec.json，段为手工写入，precheck 从未被调用。所以真缺口是「手工写段无兜底」，不是 precheck 缺失。
+> - **落地**：check_doc_sync.py 新增 **C6 版本行 desc 分隔符体检**——对三处版本行取 desc 段（先截掉已知尾锚点）断言不含 · ； —；文档非空但版本行形态不识别按 FAIL 计（形态变更会让本支静默失效，这是 W813「滤除即不被校验」同族）；空文档跳过（合成输入场景）。版本行是 desc 的唯一落点，扫它即可覆盖手工路径。
+> - **回归锁**：自测 22 例增至 **24 例**——T23 负样本（desc 含 · 必红）、T24 正样本（三面均用「、」分隔须放行，防误伤）。另用四组真文件注入验过：README/STRUCTURE/项目说明三面分别含 · / — / ；均判红，形态不识别亦判红。
+> - **验证**：`--self-test` 24/24 通过；ruff 净；check_doc_sync 实跑 0 C6 FAIL（真实文件三面均干净）；全量 verify 核心全部通过；段自洽锁 51 段不变（未改 verify_delivery.py 结构）。
+> - **状态**：已落地（本地提交·未推送）；CHANGELOG 版段递延（顶段 W827·W828 缺口未补·spec 已入库）。
+
+### W840（2026-10-21）：pitfalls 坑位沉淀批（fail-closed 跳过路径入查坑表 + AGENTS §4.3 计数校准 41→47）
+
+> **来源**：用户令「加」——W839 收官后我提出该坑值得进仓内查坑表（凡改 bespoke 门禁的人都会撞上一次），用户批准。
+> - **文件**：docs/agent/pitfalls.md、AGENTS.md、scripts/output/_w840_spec.json、scripts/output/index.md、docs/00-导读/W批次编号对账表.md。
+> - **新增条目（第 47 条·流程/协作/取证 7→8）**：「把 subprocess 输出解析改成 fail-closed 前，先识别 scope 跳过的伪造结果」——根因=_GateContext 把全局 subprocess.run 猴补为 _scoped_run，--scope 不覆盖某段时返回 _SkipResult（rc=0、stdout 只有跳过提示串，消息已由其自打印）；事故=W834 把 a11y 段改 fail-closed 后提示串被送 json.loads → 判「输出不可解析」→ docs 档提交必红而全量档全绿（W838 收官两度被拦）；判据=同一次 --scope auto 同段打出「OK 跳过」+「FAIL 判红」双消息，且绕过 monkeypatch 手动复跑两次均正常（排除瞬态）；修法=rc 检查前 isinstance(_SkipResult) 守卫直接 return（跳过不是判据不可执行·不重复上报），回归锁 2 例；同族口径=凡 bespoke 段自行 parse subprocess 输出（json/正则/结构），改 fail-closed 时必须先过此守卫。
+> - **附带校准（既存漂移·非本批引入）**：AGENTS.md §4.3 两处计数——「41 条坑位」改 47；六主题目录 git/提交/并发 12 改 17（W837 沉淀五条时只改 pitfalls 节标题、未同步本行）、流程/协作/取证 7 改 8；括注补 W840 校准事实。
+> - **验证**：脚本实跑各节计数 9/5/17/4/4/8 = 47，与六节标题声明值逐节相等（0 节不一致）；git diff 3 文件 6 增 3 删（无 Edit 吞行）；doc-sync 0 FAIL；全量 verify 核心全部通过（51 段）；提交后 docs 档 pre-commit 核心全部通过。
+> - **状态**：已落地（本地提交·未推送）；CHANGELOG 版段递延（顶段序约束·spec 已入库）。
+
+### W839（2026-10-21）：fail-closed 跳过路径回归修复批（_gate_a11y 对 _SkipResult 误判红 + 2 例回归锁）
+
+> **来源**：W838 收官 chore 提交时被 a11y 段拦截（「审计输出不可解析」）→ 根因定位为 W834 B2 修复自身引入的回归 → 用户「继续」推进下修复。
+> - **文件**：scripts/verify_delivery.py、tests/unit/test_verify_failclosed.py、pytest.ini、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/_w839_spec.json、scripts/output/index.md、docs/00-导读/W批次编号对账表.md。
+> - **回归机理**：_GateContext 把全局 subprocess.run 猴补为 _scoped_run——scope 跳过时返回 _SkipResult（returncode=0·stdout=「（--scope X 跳过）」提示串，跳过行已由其打印）。W834 的 _gate_a11y 改 fail-closed 后对该伪造结果继续走 json.loads → 提示串在 char 0 即失败 → 判「审计输出不可解析」→ **docs 档（auto scope）提交必红**；全量档不受影响（a11y 真跑）。
+> - **实证**：W838 收官 chore 两次被拦；`--scope auto` 实跑显示「OK 跳过 [a11y对比]」后紧接一条 FAIL（同一段双消息）；同形 subprocess 手动复跑两次均正常（3.1M 字符合法 JSON）——排除瞬态，确认为跳过路径回归。
+> - **修复**：_gate_a11y 在 rc 检查前加 `isinstance(r, _SkipResult)` 守卫——跳过不是「判据不可执行」，直接返回、不重复上报；真实路径（rc/解析/结构检查）语义零变化。
+> - **回归锁**：新增 2 例——① _SkipResult 注入 → 零 fail 零 ok 零 warn（不得判红、不得重复上报）；② 简单委托段收到 _SkipResult → 走既有 rc=0 OK 路径不判红（旁证既有 W698 双行噪声非故障）。pytest 收集 783→785。
+> - **验证**：test_verify_failclosed 14 passed；`verify_delivery --scope auto` 原必红场景转绿（a11y 真跑通过）；doc-sync 0 FAIL；ruff 净；stats --w W839 刷新（pytest_collected 783→785）；pytest.ini 标记同步；全量 verify 核心全部通过。
+> - **状态**：已落地（本地提交·未推送）；CHANGELOG 版段递延（顶段序约束·spec 已入库）。
+
+### W838（2026-10-21）：取经编制表勘误批（V1.1a·自查脚本正则/指针面计数/附录时点行/交叉引用/术语）
+
+> **来源**：用户令审查取经编制表文档（三性标准：符合实际/量化/可验证）+「开始」批准修复。
+> - **文件**：docs/11-方案报告/取经编制表-工具与技能挂位-2026-10-20.md、scripts/output/_w838_spec.json、scripts/output/index.md、docs/00-导读/W批次编号对账表.md。
+> - **审查结论**：文档整体高质量——抽验 12 项事实断言全过（615/857/87/46 与 stats 一致·5 个 MCP 工具脚本在位且工具名对·fastmcp 未装·块引原文引文 15/15 逐字命中语料·碎片模式小 max-len 静默失败声明精确复现·被引 tmpe/archive 契约文件全在位·17 位分组自洽）；问题集中于可验证口径与量化数字。
+> - **勘误①（必修·可验证硬伤）**：§6.2 引文自查脚本正则 `「([^」]+)」` 过宽，把全文 75 处强调引号计入「引文」——实跑 94 条 vs 命中 19，按本节自写判据（命中数==引文条数）**在自己的文档上不过**。真实原文引文（块引 15 条）15/15 全命中，实质无误、发布口径错。修正为 `^> 「([^」]+)」`（re.M 块引限定），实跑复验 **15 15** 通过，并将勘误缘由留档节内。
+> - **勘误②（必修·量化失实）**：「旁文档指针面」三处口径互不相容（§3.1/§3.2 写 9 处、§5 列举 14 项），实证为 batch_cascade 实际改写 **13 个文件**（9 文档面 + 4 站点页脚·W823 提交记录同载 13 面）。三处统一订正为 13 处并给出分解，§5 列举补齐缺失的 AGENTS 与 workflows README、删除臆造的 HANDOVER×4。
+> - **勘误③（应修）**：附录 A 两条数据来源行停留 V1.0 时点（「15 位编制位」现 17 位、「10 组回目锚点」口径不明）→ 更新为 17 位（含丁组 2 位）与 13 位有回目锚点（4 位无：孙悟空/千里眼·顺风耳/红孩儿〔未获批〕/牛魔王），取值时间标 W838 勘误复核。
+> - **勘误④（应修）**：行 13 交叉引用「原因见 §6.4」实为 §6.5（§6.4 是归档工地复现）→ 已改。
+> - **勘误⑤（小瑕）**：§5「第 31 门禁（C5b）」条目混同 C4（提交-版段对账）与 C5b（标记对账）→ 拆为「C4 + C5b」双标签并分工描述，同时补注 W830 起的 C5b 扩展面（11-方案报告根层 + pytest.ini）。
+> - **版本处理**：文档升至 V1.1a（编制位内容零变化·纯勘误），版本行与状态行同步标注。
+> - **数据边界留档**：审查过程中一度枚举用户 profile 下 `.minimax` 目录，应用户令「不用 .minimax 文件里面的所有内容」全部弃用，由其派生的「技能目录状态」一条结论已撤回、改列不可验（文档引用该路径的复现命令只审写法不代执行）；边界规则已入用户级记忆。
+> - **验证**：修正后 §6.2 脚本实跑 15 15（判据在自己的文档上通过）· doc-sync 0 FAIL · 全量 verify 核心全部通过 · 无残留旧值（9 处/§6.4 引用均为 0）。
+> - **状态**：已落地（本地提交·未推送）；CHANGELOG 版段递延（顶段序约束·spec 已入库）。
+
+### W837（2026-10-20）：并发实况沉淀批（部分提交临时索引 + index.lock 全程持锁 + C5b/C5d 互锁 + 管道 BOM + 守卫自指）
+
+> **来源**：2026-10-20 全项目只读审查的落地过程（W833/W835/W836 三批）——并行交付在共享工作区里暴露的五条可复算坑位，均已沉淀进 `docs/agent/pitfalls.md`「git / 提交 / 并发」段（12 → 17 条）。
+> - **文件**：docs/agent/pitfalls.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w837_spec.json。
+> - **沉淀①（部分提交的钩子跑在临时索引上）**：`git commit -- <pathspec>` 构造临时索引（HEAD + 本次 pathspec 的工作树内容）供 pre-commit 钩子使用 ⇒ 并行会话已暂存未提交的件在钩子视角下成为「工作树未提交残留」；若该件在现役顶段「文件」行内，第 31 门禁 C4-f 即判红——**与本批无关的假红**（手动跑同一门禁为绿·两者结论相反即识别判据）。解法：把该件纳入本次 pathspec，或先请他方落库；禁为此改门禁。
+> - **沉淀②（index.lock 被钩子全时长持有）**：并行会话提交期间 `index.lock` 存在数分钟 ⇒ 另一会话的提交报 `Unable to create index.lock`。活锁不删（有 git 进程就等）；确认无 git 进程后残留锁方可清理。
+> - **沉淀③（C5d 与 C5b 互锁）**：stats.json 刷新后，实体标记（`<!--stats:KEY-->` 形态的数字）必须同步，否则 C5b 反向判红；不刷新 stats.json 则 C5d 判红——两侧互锁，改任一侧后两侧都要刷。
+> - **沉淀④（PowerShell 管道加 BOM）**：`Get-Content x | py -3 script.py` 传入的行首带 U+FEFF ⇒ 台账行成为 `U+FEFF| W### | …` ⇒ C4 登记正则不匹配 ⇒ 判「未在对账表登记」红且明面不可见。登记行必须以文件直写传入。
+> - **沉淀⑤（守卫不能把自己判红）**：被禁字面量守卫的字面量以 base64 存储运行时解码；自检的正例探针由解码结果在运行时派生（硬编码会让守卫入库后自指违规）。守卫上线后先跑自身扫描——它会当场报出你刚写下的字面量。
+> - **验证**：pitfalls.md 段计数 12→17（5 条新条目）· 行首 BOM 清理（见 W835 批记账）· 门禁核心全部通过。
+> - **状态**：已落地（本地提交·未推送）。CHANGELOG 版段因顶段序约束递延，待顶段推进后以 chore 批补写十面。
+
+### W836（2026-10-20）：品牌字面量零命中守卫批（归档检测器活面复活 + 三处品牌回退修复 + CI 挂载）
+
+> **来源**：2026-10-20 全项目只读审查（归档面存活性）所得的 N2 项 + 用户 2026-10-20 对禁令范围的确认（三枚品牌字面量均在禁令范围·不在允许品牌之列）。
+> - **文件**：scripts/check_no_brand_refs.py（新建）、.github/workflows/security.yml、scripts/gen_folder_docs.py、docs/11-方案报告/计划方案/执行前计划-T05-取经编制表落库与编制位补全.md、archive/scripts/batches/misc/_audit_agentweb_baseline.py、docs/00-导读/W批次编号对账表.md、scripts/output/_w836_spec.json、scripts/index.md、scripts/README.md、scripts/output/index.md、scripts/output/README.md。
+> - **缺口（为何需要机器防线）**：W812/W814 两批把三枚品牌字面量从全仓清零，**验收方式是人工终扫**——仓内没有任何机器防线。与此同时，仓里唯一一处「品牌字面量扫描器」是归档件 `archive/scripts/batches/misc/_audit_agentweb_baseline.py`：它在归档后仍按「脚本所在目录上溯两级」计算 ROOT ⇒ ROOT 落到 `archive/scripts`（应为仓库根·上溯四级）⇒ 第 31 行读 `archive/scripts/xiyouji-agent-web/…` 直接抛错，**第 110 行的品牌扫描段永不可达**。于是「品牌回归」既无扫描器也无防线：**后写的文档把字面量带回来也没人拦**。
+> - **实测回退（守卫不是空跑）**：W831 会话新引入的点开头会话运行态目录名（含被禁字面量）出现在 `scripts/gen_folder_docs.py` 与计划件 T05 中——全仓明文命中 **6 行 / 4 文件**（「全仓归零」状态已被回退）。
+> - **修①（活面守卫·N2 的「复活到活面」路径）**：新建 `scripts/check_no_brand_refs.py`——① **字面量以 base64 存储**（运行时解码）：禁令要求的是「全仓明文 0 命中」，守卫若明文写出被禁字面量即自己违规；编码后明文扫描仍为 0，而守卫依旧能检出回归；② **扫描面 = git 已跟踪文件**（含 `archive/**`；未跟踪的会话运行态目录与本地临时产物不入库·不进判定面）；③ **fail-closed 且退出码分流**（0=零命中 · 1=有命中 · 2=判据未执行：字面量解码失败/扫描面为空/git 不可用）——沿用 W816 引文门禁的 1/2 分流口径；④ `--self-test` 合成样本自检（正例**由解码结果在运行时派生**，避免探针硬编码导致守卫自指违规；反例覆盖允许品牌与允许的中性标识）。
+> - **修②③④（三处明文回退）**：`scripts/gen_folder_docs.py` 去掉逐名列举，改为**排除全部点开头的顶层目录**（既去字面量，又对未来新出现的同类会话运行态目录免疫）；计划件 T05 的路径引用改为不落明文；归档检测器移除其**已成空转**（被扫依赖随 W812/W814 退役而消失）且**自身含被禁字面量**的品牌扫描段，并注明检测能力已由活面承接——**归档件其余部分按文档规范 §11.2 不回溯修复**（其 ROOT 层级错配仍在归档态存在·需要的检测能力一律走活面）。
+> - **修⑤（CI 挂载·机器防线成形）**：`.github/workflows/security.yml` 新增 `brand-refs` 作业（跑扫描 + 跑 `--self-test` 复核：守卫本身瞎了即阻断）——**不挂 `verify_delivery.py`**（管控件·CLAUDE.md 第 10 条须用户批准才改）。
+> - **守卫当场抓出我方自伤两处（如实记账）**：① 我在 `gen_folder_docs.py` 的注释里**写出了明文字面量**（3 处命中）——守卫上线即报；② 自检探针若硬编码字面量，守卫**入库后会把自己判红**（自指违规）⇒ 探针改为由解码结果在运行时派生。两处均已修。
+> - **验证**：`--self-test` **32/32 通过** · 全仓扫描 **0 命中**（**3897 个已跟踪文件·含 archive/**）· 把未跟踪的新文件一并计入后**仍 0 命中**（模拟入库后状态）· 退出码分流 0/1/2 逐条自检通过。
+> - **状态**：已落地（本地提交·未推送）。CHANGELOG 版段因顶段序约束（batch 必须等于顶段+1·当前顶段为 W826·W827 至 W835 的段均待补写）**递延**，待顶段推进后以 chore 批补写十面；本批内容与认领行已入库。
+
+### W835（2026-10-20）：服务端暴露面收口批（Host 头白名单防 DNS rebinding + token 硬开关 + 启动暴露面告警）
+
+> **来源**：2026-10-20 全项目只读审查（服务端面）所得的两项暴露面缺陷。
+> - **文件**：xiyouji-agent-web/server/security.ts、xiyouji-agent-web/server/config.ts、xiyouji-agent-web/server/middleware.ts、xiyouji-agent-web/server/index.ts、xiyouji-agent-web/server/security.test.ts、xiyouji-agent-web/.env.example、docs/agent/agent-web.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w835_spec.json、scripts/output/index.md、scripts/output/README.md。
+> - **缺陷①（服务端无 Host 校验 → DNS rebinding 可驱动本地 Agent）**：服务端只绑定回环地址（127.0.0.1）且默认免认证，但**浏览器发往 127.0.0.1 的请求会带上攻击者可控的 Host 头**——攻击者把 evil.com 的 DNS 解析到 127.0.0.1（DNS rebinding），浏览器便以 `Host: evil.com:3000` 请求本地 API；服务端若不校验 Host，这次请求与正常本地请求无异 ⇒ **攻击者网页可驱动本地 Agent**（读文件 / 执行命令）。**回环绑定挡不住这条路**（请求确实是打向 127.0.0.1 的）。**修**：① `server/security.ts` 新增纯函数 `normalizeHostname()`（去端口 / IPv6 去方括号 / 小写 / 去 FQDN 尾点 / 畸形判空）与 `isAllowedHost()`（白名单判定·空与畸形一律判否·fail-closed）；② `server/config.ts` 新增 `ALLOWED_HOSTS`（默认只认回环三形态 127.0.0.1 / localhost / ::1，`AGENT_WEB_ALLOWED_HOSTS` 为**追加**项）；③ `server/middleware.ts` 新增 `hostGuard` 关卡，挂载序=request ID → **Host 校验** → 限流 → 安全头 → 可选鉴权（不在白名单即 403，**不进限流桶、不触达任何路由**；响应体沿用既有 AppError 契约 `{ error: <文案> }`，前端契约零改动）。**端口不参与判定**（与 Django ALLOWED_HOSTS 同口径）：dev proxy（changeOrigin 改写 Host 为代理目标）、随机端口测试、Electron 桌面端都是同主机名不同端口，判端口会误伤。
+> - **缺陷②（token 口径无法硬化）**：`AGENT_WEB_TOKEN` 未设时 `/api/*` 免认证，此前**没有任何强制手段**——用户想「必须带 token」时只能靠自觉，进程不会拒绝在免认证模式下跑起来。**修**：① `AGENT_WEB_REQUIRE_TOKEN=1` 时若未设 `AGENT_WEB_TOKEN` 则**拒绝启动**（fail-closed·不静默降级为免认证）；② 未设 token 时启动记 WARN 并报当前暴露面与加固指引。**口径未改**：W808 固化的「无 CORS 中间件 + 回环绑定 + 可选 token + 限流」防护模型保持不变（本批只加严、不加面），对外契约（路径/字段/状态码）零变化。
+> - **自测当场抓出实现缺陷（负样本自证）**：`normalizeHostname` 初版按「首个冒号」截断端口，把白名单里的**裸 IPv6 `::1`** 归一化成空串 ⇒ `[::1]:3000` 反被判否——**实现比判据先错**；改为按冒号个数判定（恰一个才截端口·两个及以上视为裸 IPv6 整体保留）后通过。教训：白名单里同时存在「带端口形态」与「裸 IPv6 形态」时，端口剥离规则必须按形态判定，不能按「第一个冒号」这种位置判定。
+> - **验证**：`npm run test:server` **82 例 / 81 通过 / 0 失败 / 1 跳过**（既有 skip）· 集成测试 20 例 / 19 通过 / 0 失败 / 1 跳过 · `tsc --noEmit` **0 错** · 端到端 **11 通过 / 0 失败**（真实后端 + 真实前端代理链路未被打断）· 真起服负样本：`Host: evil.com` / `evil.com:3213` / `127.0.0.1.evil.com` 均 **403**，`127.0.0.1:3213` 与 `localhost:3213` 均 **200**；`AGENT_WEB_REQUIRE_TOKEN=1` 且未设 token → **退出码非 0 且打印拒绝原因**。
+> - **状态**：已落地（本地提交·未推送）。CHANGELOG 版段因顶段序约束（batch 必须等于顶段+1·当前顶段为 W826·W827 至 W834 的段均待补写）**递延**，待顶段推进后以 chore 批补写十面；本批内容与认领行已入库。
+
+### W834（2026-10-20）：门禁 fail-open 根修批（B1/B2 用户批准·verify_delivery fail-closed 化 + 12 例负样本）
+
+> **来源**：用户令「开始」——批准执行 W830 审查报告 §六建议 1（B1/B2 修复·CLAUDE.md 第 10 条授权改管控件 scripts/verify_delivery.py）。
+> - **文件**：scripts/verify_delivery.py、tests/unit/test_verify_failclosed.py、pytest.ini、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/_w834_spec.json、STRUCTURE.md、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md、docs/11-方案报告/计划方案三性审查报告-2026-10-20.md、docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md、docs/00-导读/W批次编号对账表.md。
+> - **B1 根修**（_run_simple_gate·T03 D-01 遗留）：两条异常路径由 WARN 改 FAIL——子进程崩溃/超时 = 判据不可执行，原 WARN 使 18/33 委托段崩溃即降级而整轮仍报「核心全部通过 ✅」+ exit 0（假绿面根除·对齐 _run_strict_gate 语义）；唯一保留 WARN 为 Gate.missing_warn 登记的运行期缺失降级（W424 M2·仅 2 个 node 段·显式 opt-in·docstring 已注明）。
+> - **B2 根修**（_gate_a11y）：三处 fail-open 全改 FAIL——① JSON 解析异常原记 rep.ok「summary 解析跳过」；② 缺 summary/E2-2 键原走 p01=0 静默判绿；③ 外层异常原记 rep.warn。现为解析失败/结构不符/子进程异常一律 FAIL（fail-closed·_count_by_rule 预置全规则 0 值故干净态恒有 E2-2·快乐径不受影响·回归锁钉住）。
+> - **同族全扫**（建置即红纪律）：verify_delivery.py 内 except 路径的 rep.ok/rep.warn 仅此 4 处（:645/:648/:1009/:1014·本批实证）；scope 跳过路径（:343·登记式分级）与 _probe_health（登记式可选探活）不属缺陷面；无隐藏同类。
+> - **负样本测试**：新增 tests/unit/test_verify_failclosed.py 12 例全过——B1×5（崩溃必红且零 OK 零 WARN / 未登记 missing_warn 必红 / 登记缺失保留 WARN / 快乐径回归 / 退出码径回归）+ B2×7（解析失败必红 / 缺 summary 必红 / 缺 E2-2 必红 / 子进程异常必红 / 干净态 OK 回归 / P0+P1 阻断回归 / 非零退出回归）。
+> - **行为不变性**：退出码口径与快乐径消息文本零变化（5 例回归锁）；门禁段数 51 不变（段自洽锁实证 51==51）；全量 verify 核心全部通过。
+> - **连带刷新**：stats pytest_collected 770→782（本批 12 例入库）、report_docs 37→39（并行 W831 取经编制表批落库·W761 先例 glob 计磁盘口径）；STRUCTURE 与系统架构方案 report_docs 标记同步 39；pytest.ini 标记 770→782；W830 行递延注记更新。
+> - **取号与版段**：原拟 W831 被并行「取经编制表」批占用（d560a8d7）、W832 被 agent-web 加固批占用（990fa068）、W833 被并行「交付链与工具链根修」批占用（_w833_spec.json 22:09 + workflow 在途件）→ **三度顺延 W834**；CHANGELOG 版段递延（顶段序约束 batch==顶段+1·顶段仍 W826·W830-W833 同处递延·号序链待 W827/W828 落地后恢复·spec 已入库）。
+> - **状态**：已落地（本地提交·未推送）。
+
+### W833（2026-10-20）：交付链与工具链静默失效根修批（分支保护零强制点 + 独立工作流守卫 + 锁失配即红 + 类型检查真跑）
+
+> **来源**：2026-10-20 全项目只读审查（交付链面 + 工具链面）实证的四项缺陷。
+> - **文件**：.github/workflows/workflow-lint.yml、.github/workflows/ci.yml、.github/workflows/security.yml、.github/workflows/README.md、.github/workflows/index.md、scripts/output/_w833_spec.json、scripts/output/README.md、scripts/output/index.md、docs/00-导读/W批次编号对账表.md。.github/workflows/README.md、.github/workflows/index.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w833_spec.json。
+> - **缺陷①（main 分支零强制点）**：远端实测 `repos/1273984347/xiyouji/branches/main/protection` 的 `required_status_checks` 与 `required_pull_request_reviews` **均为 ABSENT**、`rulesets` 为空 ⇒ 整条交付链（51 段硬门禁 / 10 个 CI job / pre-commit hook）**全部是建议性的**：CI 红可合、CI 未运行也可合——这正是「事故静默复发」的根条件（W806 同型事故：工作流整体不可解析 → run 0 秒失败 → PR 根本不生成 check，在无人察觉下复发过一次）。**修**：以「读→改→写」方式加 `required_status_checks` = 两个始终运行的 job（`Delivery Gate (verify_delivery.py)` + `Unit Tests (pytest)`·strict=false），其余键原样保留（`enforce_admins` true；`lock_branch` / `required_linear_history` / `required_signatures` / `required_conversation_resolution` 均 false——**此前审查结论称 linear_history/signatures 已启用·经复核不属实·此处按实测纠正**）。回滚命令：`gh api -X DELETE repos/1273984347/xiyouji/branches/main/protection`。
+> - **缺陷②（工作流守卫与被守卫同生共死）**：事故机理——ci.yml 某 step 的裸标量值内含冒号加空格 → YAML 映射歧义 → GitHub 解析该工作流直接失败、报「workflow file issue」、run 0 秒失败且 `pull_request` **不生成 check**；而当时唯一的可解析性守卫（W811 增的 pytest 用例）住在 **ci.yml 的 pytest-unit job 内** ⇒ 守卫与被守卫同生共死，ci.yml 坏掉时守卫根本不启动，缺陷遂复发。**修**：新增 `.github/workflows/workflow-lint.yml`——**独立存在**、`push`/`pull_request` 不限分支、只做一件事（PyYAML 全量解析全部工作流并指出失败文件与常见成因），ci.yml 坏掉时它仍能照亮问题；实测本机 10 个工作流全部可解析（0 失败）。
+> - **缺陷③（锁失配被回退静默吞掉）**：security.yml 两处 `npm ci` 失败即回退 `npm install`——lock 与 manifest 失配时会按**浮动版本**重新解析出一棵与 CI 构建、本地安装都不同的依赖树，随后 npm audit 审计的也是那棵树，而「锁不同步」这一最该暴露的信号被吞掉。**修**：去掉回退，失配即红（fail-closed）并给出可判定的错误说明。
+> - **缺陷④（类型检查从未真正执行）**：ci.yml 的 mypy 命令带 `--non-interactive`——mypy ≥ 1.11 起该选项**必须**搭配 `--install-types`，单独使用直接在参数解析阶段报错（实测：`error: --non-interactive is only supported with --install-types`）→ 配合忽略失败的写法整条命令静默失败 ⇒ **类型检查一次都没跑过**。**修**：去掉该参数（保留 report-only 不阻断），输出截尾 5 行避免 3000+ 行日志淹没 CI；实测去掉参数后真跑：`Found 3353 errors in 275 files`——此前一次都没跑过。
+> - **验证**：10 个 workflow 全部 PyYAML 可解析（0 失败）· main 保护复验 `required_status_checks` 已含两个检查且其余键未变 · 交付门禁未受影响（本批只改 workflow 与远端设置）。
+> - **状态**：已落地（本地提交·未推送）。CHANGELOG 版段因顶段序约束（batch 必须等于顶段+1·当前顶段为 W826·W827 至 W832 的段均待补写）**递延**，待顶段推进后以 chore 批补写十面；本批内容与认领行已入库。
+
+### W832（2026-10-20）：agent-web 生产面加固批（错误原文回显收口 + 端到端测试改跑临时库）
+
+> **来源**：2026-10-20 全项目只读审查（服务端面 + 端到端测试面）实证的两项缺陷。
+> - **文件**：xiyouji-agent-web/server/chat.ts、xiyouji-agent-web/server/routes.ts、xiyouji-agent-web/server/db.ts、xiyouji-agent-web/e2e/chat.e2e.mjs、xiyouji-agent-web/src/hooks/useChat.streaming.test.ts、docs/00-导读/W批次编号对账表.md、scripts/output/_w832_spec.json。
+> - **缺陷①（底层错误原文回显客户端）**：三处把内部异常原文直接交给客户端——① `server/chat.ts` 保存消息失败时 `detail` 带 SQLite 错误原文（含库文件绝对路径）；② `server/chat.ts` 聊天异常 catch 块把 `error.message` 送进 SSE error 帧（上游引擎错误体含前 300 字原文，可能回显请求内容或账号信息）；③ `server/routes.ts` 的 `/api/ready` 探针 `detail` 带数据库异常原文。**与本仓既有红线冲突**：`server/errors.ts` 的对外契约明定「编程错误 → 固定文案 + 不泄细节」，而这三处绕过了该收敛层（走 `sendError` 旁路）。**修**：三处**形状全部不变**（`detail`/SSE `message` 字段仍在），只把取值换成固定文案（`数据库写入失败` / `服务器内部错误` / `数据库不可用`），原文照旧进 `logger`；已核实全仓无消费方读取这些取值（前端 `ChatInput.tsx` 的 `e?.detail` 读的是 DOM 异常对象，不是本仓响应体）。**验**：集成测试 19 pass / 1 skip；响应体形状与状态码零变化。
+> - **缺陷②（端到端测试会删开发者真实会话）**：`server/db.ts` 的库路径写死为 `data/chat.db`，而 `e2e/chat.e2e.mjs` 的收尾清理按「最近更新的 session」删 feedback/messages/sessions → 若本轮聊天未落库而库中已有历史会话，被删的就是**真实会话**（含工具结果原文·不可逆·无备份）。**修**：① `server/db.ts` 支持 `AGENT_WEB_DB_PATH` 覆盖（默认路径不变·生产形态零变化）；② 端到端测试起后端时指向**临时库**，断言与清理只用该临时库；③ 收尾断言**真实库零改动**（大小 + mtime 双比对）；④ 硬守卫：`DB_PATH` 指向真实库时**拒绝启动**且**跳过全部清理**。
+> - **负样本自证事故（如实记账·已复原）**：为验证硬守卫，把 `AGENT_WEB_DB_PATH` 指向真实库跑了一次负样本 —— **我方新增的「删临时库文件」块当时没有守卫**（守卫只在启动侧），且「真实库零改动」断言排在该删除块**之后** ⇒ 该次自证把真实 `data/chat.db` 连同 `-wal`/`-shm` 删除。**复原**：用 W828 批 `VACUUM INTO` 留下的快照 `tmpe/w828/backup_probe_dir/chat-20261020.db`（184320 字节·与被删文件字节数一致）恢复 → `integrity_check=ok`·**65 会话 / 129 消息全量复原**；快照内最新会话为 2026-10-18 21:13 ⇒ 快照后本机未产生新会话 ⇒ **实际数据零丢失**。**根因订正（已落地）**：守卫改为**三处同源**——① 启动侧拒绝 ② 清理侧不删（`DB_IS_REAL` 判定）③ 断言移到全部清理之后；复测负样本：拒绝启动 + 真实库 size 与 mtime **完全未变**。**教训**：破坏性清理路径的守卫必须覆盖**删除动作本身**，且安全断言必须排在所有破坏性动作**之后**——「只在入口设防」不构成保护。
+> - **验证**：端到端测试实跑 **11 通过 / 0 失败**（含新增「真实库零改动」断言）· 负样本自证（指向真实库）**拒绝启动 exit 1 且真实库零改动** · `npm run test:server` 64 pass / 1 skip / 0 fail · 集成测试 19 pass / 1 skip · `tsc --noEmit` 0 错 · 前端 vitest 51 passed。
+> - **状态**：已落地（本地提交·未推送）。CHANGELOG 版段因顶段序约束（batch 必须等于顶段+1·当前顶段为 W826·W827 至 W831 的段均待补写）**递延**，待顶段推进后以 chore 批补写十面；本批内容与认领行已入库。
+
+### W831（2026-10-20）：取经编制表落库与编制位补全批（17 位编制表 + 归档与工地两套治理系统纳入 + 零前置知识速览 + 三处编制位空缺诊断）
+> **来源**：用户 2026-10-20 会话三问——①「帮我推荐适合我的工具/技能」→ ② 纠正「难道不应该贴合本项目来做吗？本项目是西游记，你就按照西游记里面的角色人物来看看哪个比较贴合」→ ③ 纠正过程产物落位（`.tmp/` 非 sanctioned 临时区）→「先把方案写出来」→ 再要求「写清楚内容，从没看过本项目的任何人包括 Agent 都能读取知道了解详细内容」。
+> - **文件**：docs/11-方案报告/取经编制表-工具与技能挂位-2026-10-20.md、docs/11-方案报告/取经编制表-工具与技能挂位-2026-10-20.html、docs/11-方案报告/计划方案/执行前计划-T05-取经编制表落库与编制位补全.md、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md、scripts/output/_w831_spec.json、scripts/output/_cascade_files_W831.txt。
+> - **编制轴（17 位 × 6 列）**：甲组取经四众 4 位（孙悟空=施工官/唐僧=持经人/猪八戒=挑刺官/沙悟净=收官官）· 乙组天庭编制 5 位（玉皇大帝=号牌官/太白金星=传令官/太上老君=器物官/观音菩萨=仲裁官/如来佛祖=框架官）· 丙组旁证与方法 6 位（菩提祖师=授业官/千里眼·顺风耳=取证官/谛听=只验证/六耳猕猴=反面角色·假收敛/红孩儿=高风险项/牛魔王=失控面·禁令）。每位列「谁→负责什么→挂什么→怎么用→不能做什么」五问，并给出「在役 / 位空·建议建 / 在役（禁令）」三态。
+> - **回目标与引文（全部实测·非凭记忆）**：10 组回目标由 `py scripts/_cite_probe.py` 实测提取（六耳猕猴与谛听同在第 58 回·太白金星第 3/4/21/44/71/74/83/92 回·菩提祖师第 1 回·太上老君 17 回·猪刚鬣第 18/19/63 回·沙悟净第 22/29/100 回·玉皇大帝第 15/17/63/71 回·白龙马第 31/40/52/65/82 回·观音菩萨 30 回）；15 条原文引文逐字比对 `dataset/text-search.json` **15/15 命中**。**排版纪律实证**：初版 2 条引文被把内层 `“…”` 改成 `‘…’` 而破坏「语料精确子串」保证 → 已修正为语料原样 + 外框统一 `「」`，并写入 ASM-15 与编制表 §6.1。
+> - **三处编制位空缺（实测诊断）**：① 器物官位——`mavis mcp list` 实测 0 个 MCP 服务器，仓内 `mcp-server/xiyouji_mcp.py` 5 只读工具齐备且背后 5 脚本实测全在位，唯一缺口 `fastmcp` 未装（补全 = 2 条命令，`command` 须为 `py -3` 因本机 `python` 是应用执行存根）；② 收官官位——`mavis agent list` 实测仅 explore/worker/verifier 三个通用角色，46 条门禁与 9 处旁文档指针面无专属执行体（旁文档滞后已由并行会话 2 次检出）；③ 授业官位——本地技能目录实测为空，`docs/agent/pitfalls.md` 已沉淀可复用避坑条目但模型改文件前不会主动加载（补全 = 1 次 Agent 创建 + 1 次 Skill 固化，**均须用户逐项批准**）。
+> - **零前置知识可读（AC-13）**：编制表含 §0 一分钟速览（项目四层产物 + 本文档是什么 + 三条阅读路径 + 5 词最小词汇集）、§5 前置知识清单（27 条术语各配一句解释 + 权威指针）、§6 复现命令（引文复现 / 逐字一致性自查 / 缺位诊断复现）——任何没读过本项目的人或 Agent 可独立读懂并自行下钻。
+> - **HTML 预览页（零外域依赖·file:// 直开）**：Playwright 实测 15 卡 / 15 引用块 / 45 挂载标签 / `extEls=0` / 无控制台错误 / 无横向溢出 / 底色 `rgb(250,247,240)`。**范围纪律**：本批不使用 `<!--stats:*-->` 实体标记（编制表内容与报告篇数无关；改动者请勿擅自添加，见 D-10）。
+> - **并行避让（W832 在途批）**：对方已声明 touches 7 项（对账表 + `_w832_spec.json` + `xiyouji-agent-web/` 6 文件），**与本批 touches（`docs/11-方案报告/README.md`）交集为空**；其另在改但未声明 `STRUCTURE.md` / `scripts/output/stats.json` / `系统架构方案-*.md` / `三性审查报告-*.md` / `pytest.ini` / `scripts/verify_delivery.py`——本批**一律不碰**，`stats.json` 的 `report_docs` 漂移（实算 39 vs stats 38）登记为待刷项交对方批收尾时刷新（收敛到 39）。**号段未撞**：我方 W831 · 对方 W832 → 链 W830→W831→W832 连续无空号。
+> - **门禁轨迹**：第 31 门禁在本批推进过程中 FAIL 由 5 → 1（3 处 C5b 系对方未提交刷新所致并已被其同步；C4-f 需提交后清）→ 本批落件后 0 FAIL。**版段递延**：顶段仍为 W826 且 W827 已被预留占用，`batch_cascade` 断言「批次号 = 顶段+1」→ 本批按 W830 先例走 spec 入库 + 待顶段推进后以 chore 补写路径（见 T-05 §5.7 R-01）。
+> - **范围纪律**：不改 site/ 任何现役页面 · 不改 DESIGN.md 宪法 · 不改 verify_delivery.py / check_doc_sync.py / batch_cascade.py / preflight_check.py 等管控脚本 · 不动 W827/W828/W829/W830 他方认领行与版段 · 不动 W832 在途批所持有面 · 不推送远端 · 临时产物全进 `tmpe/_shot/` 与 `tmpe/_misc/`（不在仓库根另建临时区） · 仓外三动作（fastmcp 装包 / MCP 注册 / 建 Agent 与 Skill）不占 W 号且须用户批准后执行
+### W830（2026-10-20）：计划方案三性审查与快照漂移门禁修复批（9 份文档约 60 断言复算 + C5b 扩展面 + pytest_collected 键 + 六处订正）
+
+> **来源**：用户令「这些计划方案你审查遍是否符合实际是否量化是否可验证」+ 同轮对话批准「开始」执行修复建议。
+> - **文件**：scripts/check_doc_sync.py、scripts/stats.py、pytest.ini、docs/11-方案报告/计划方案三性审查报告-2026-10-20.md、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md、docs/11-方案报告/静态站前端框架化选型对比-2026-10-20.md、docs/11-方案报告/计划方案/执行前计划-T03-全项目审查第一批修复.md、docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md、docs/11-方案报告/README.md、STRUCTURE.md、docs/agent/gates.md、docs/00-导读/W批次编号对账表.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/index.md、docs/INDEX.md、site/data/search.html、site/en/search.html。
+> - **审查结论**：9 份文档三性全部达标，约 60 断言实跑复算绝大多数字节级一致（reader/index.html 108,699 B、tokens.css 20,799 B、text-search-app.js 2,177,796 B、relationships.html 373,002 B、81 难数据集序号逐点命中、DB 基线探针复现），无编造数据；问题集中于三类——快照数字漂移无门禁兜底（系统架构方案 report_docs 字面 30 过期、pytest 计数 600/602 vs 实测 770、W818 site/data 合计 9,272,531 与自身均值 110,483 矛盾）、W829 撞号（并行会话在途占用且无认领行）、B1/B2 fail-open 遗留（原定批次 W817 被 agent-web 加固批占用）。
+> - **修复① C5b 扩展面**（check_doc_sync.py）：`docs/11-方案报告/` 根层现役报告 + `pytest.ini` 入 stats 实体标记对账——只跑标记、不跑句式白名单与 C5c 裸数字（辅助叙述面宁窄勿误）；**计划方案/ 子目录刻意除外**（计划件为时点快照，其引用的基线数字随批次冻结，同 CHANGELOG 历史段纪律禁回溯改写，由计划自身「聚合数字当批现测」条款在开工批复核——T04 AC-07 34/35 vs 现役 37 实例）；**建置即红实证**（先红后绿：扩展面纳入当场抓出系统架构方案 30≠36 与 stats 新键未刷新→订正刷新后转绿）；自测 20→22 例（T21 扩展面标记失配必红 / T22 一致放行·双向锁）。
+> - **修复② stats 新增 pytest_collected 键**（stats.py）：`pytest --collect-only -q` 实算·fail-closed（pytest 不可用/收集失败/解析失败即 FAIL·禁静默写坏 stats.json·与「不允许从未运行的门禁存在」铁则同族）；C5d 子进程 timeout 60→180s 同步留裕量。
+> - **修复③ 六处文档订正**：系统架构方案 report_docs 30→37；W818 site/data 合计 9,272,531→9,722,504（=均值 110,483×88 对账值·与「9.27 MB」注解自洽·原误植留档）；pytest.ini 头注 602→770 实体标记 + 49 段→51 段；T03 计划状态字段执行中→已收官（W816 落地 55b9b8c0）；T04 计划 AC-07/ASM-08 加开工重测注记（现役 37 非 34/35）；STRUCTURE 36→37 并去过期「在途 2 篇」括注。
+> - **修复④ 治理登记**：对账表 W830 认领行 + bullet——W829 在途占用实证（工作树 4 文件注释带 W829 标记·内容为 agent-web 错误回显加固 + E2E 临时库隔离·对账表无认领行·按「先落地者保留」判例视为已占·T04 候选应顺延）；B1/B2 待用户单独批准并指定批号（W830 之后）——修复前「全量 0 FAIL」结论对子进程崩溃类故障不具备背书力。
+> - **连带链路**（新增报告进索引载荷·W806/W807 同型）：docs/INDEX.md 重生 727→728 篇；`_gen_search_index.py` 重生（zh 831 条 / en 873 条）；`generate_csp.py` 重生 2 页内联哈希·`--check` 856 页 0 漂移。
+> - **验证（全绿）**：doc-sync 主检 0 FAIL（C5b 扩展面生效·C4-f 三项未暂存残留随本批提交自解）+ self-test 22/22；`stats.py --check` 17 键零差异（report_docs 36→37 + pytest_collected 770 新键）；ruff scripts/ 0 违规；pytest 767 passed + 3 skipped / 0 failed（搜索索引用例曾因新报告条目红→重生索引后转绿·留档）；check_search_index_fresh 0 FAIL；generate_csp --check 856 页 0 漂移；verify_delivery 全量见收官记录。
+> - **状态**：已落地（本地提交·未推送）；B1/B2 与 W829 撞号处置留待用户裁量（见审查报告 §六）。
 
 ### W827（2026-10-21）：站内阅读入口打通施工批（622 页 reader 从站内 0 入链到首页一跳可达）
 
