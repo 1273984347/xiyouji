@@ -34,6 +34,7 @@
 | Mark Stale | [`stale.yml`](stale.yml) | 每日 01:30 UTC + `workflow_dispatch`（W683） | 陈旧 issue/PR 标记（60 天）与自动关闭（再 14 天·pinned 豁免） |
 | OpenSSF Scorecard | [`scorecard.yml`](scorecard.yml) | 每周一 03:00 UTC + `branch_protection_rule` 变更 + `workflow_dispatch`（W683） | OpenSSF 安全评分（SARIF 入 Code scanning + publish_results 徽章） |
 | Release Desktop | [`release.yml`](release.yml) | `push` tag `v*` + `workflow_dispatch` | 三平台桌面安装包构建（Win NSIS / macOS universal dmg+zip / Linux AppImage）并发布 GitHub Release + latest*.yml 自动更新元数据 |
+| Workflow Lint | [`workflow-lint.yml`](workflow-lint.yml) | `push` + `pull_request` + `workflow_dispatch`（**不限定分支**） | 工作流 YAML 可解析性守卫（W833·**独立于 ci.yml**）：W806 同型事故（裸标量值含冒号加空格 → YAML 映射歧义 → 工作流整体不可解析 → run 0 秒失败且 PR 不生成 check）的根修——当时唯一守卫住在 ci.yml 内·与被守卫同生共死·缺陷遂复发；本工作流独立存在，ci.yml 坏掉时仍能照亮问题并指到文件与行 |
 
 > **W400 关键教训**：ci.yml 建置时仅 `pull_request` 触发，但项目工作流是直接 push main（无 PR），**CI 从未真正运行过**。W399 补 push 触发后首次运行暴露全部存量问题。**新 workflow 必须本地语法校验 + 确认触发条件匹配真实开发流。**
 

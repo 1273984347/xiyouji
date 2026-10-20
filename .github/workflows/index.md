@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（9）
+## 文件（10）
 
 ### 数据与配置
 
@@ -24,6 +24,7 @@
 - `screenshot-review.yml`
 - `security.yml`
 - `stale.yml`
+- `workflow-lint.yml`
 
 ---
 

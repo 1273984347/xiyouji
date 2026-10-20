@@ -34,8 +34,13 @@ jobs:
             xiyouji-agent-web/package-lock.json
 
       - name: 安装依赖（scripts/）
+        # W833：去掉 `|| npm install` 回退——lock 与 manifest 失配时 npm install 会按**浮动
+        # 版本**重新解析出一棵与 CI 构建/本地安装都不同的依赖树，随后审计的也是那棵树，
+        # 而「锁不同步」这一最该暴露的信号被静默吞掉。改为：失配即红（fail-closed）。
         run: |
-          if [ -f scripts/package.json ]; then npm --prefix scripts ci || npm --prefix scripts install; fi
+          if [ -f scripts/package.json ]; then
+            npm --prefix scripts ci || { echo "::error::scripts/ 的 package-lock.json 与 package.json 失配（或安装失败）——不退回浮动安装"; exit 1; }
+          fi
 
       - name: npm audit（scripts/ · 生产依赖漏洞阻断）
         run: |
@@ -46,8 +51,11 @@ jobs:
           fi
 
       - name: 安装依赖（xiyouji-agent-web/）
+        # W833：同上——去回退、锁失配即红
         run: |
-          if [ -f xiyouji-agent-web/package.json ]; then npm --prefix xiyouji-agent-web ci || npm --prefix xiyouji-agent-web install; fi
+          if [ -f xiyouji-agent-web/package.json ]; then
+            npm --prefix xiyouji-agent-web ci || { echo "::error::xiyouji-agent-web/ 的 package-lock.json 与 package.json 失配（或安装失败）——不退回浮动安装"; exit 1; }
+          fi
 
       - name: npm audit（xiyouji-agent-web/ · 生产依赖漏洞阻断）
         run: |
