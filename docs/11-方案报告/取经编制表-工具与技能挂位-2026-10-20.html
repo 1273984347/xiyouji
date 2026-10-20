@@ -199,7 +199,7 @@ footer .chain{font-family:var(--font-mono); font-size:11.5px; color:var(--ink-3)
       下表把每个角色的「原典行为」逐条对齐到项目流水线上一个真实环节，再把可用工具、已装技能、待建 Agent 挂到那个位上。
       编制位是空的，先补编制；位是满的，直接上岗。</p>
     <div class="meta">
-      <div><span>版本</span><b>v1.0 · 2026-10-20</b></div>
+      <div><span>版本</span><b>v1.1 · 2026-10-20</b></div>
       <div><span>范围</span><b>工具 / 技能 / Agent 建议面</b></div>
       <div><span>核验状态</span><b class="ok">回目锚点与原句已实测提取</b></div>
       <div><span>环境现状</span><b class="warn">MCP 空 · 自定义 Agent 空</b></div>
@@ -274,6 +274,12 @@ footer .chain{font-family:var(--font-mono); font-size:11.5px; color:var(--ink-3)
       <tr><td class="role">牛魔王</td><td class="post">失控面</td><td class="chap">—</td>
         <td>能力强而不受治理：反面教材</td><td class="tools">禁不带 pathspec 整仓提交 · 禁对共享面 git restore</td>
         <td class="status s-on">在役（禁令）</td></tr>
+      <tr><td class="role">酆都判官崔珏</td><td class="post">档案官</td><td class="chap">10 · 11 · 58</td>
+        <td>掌生死文簿：只追加、禁回溯修改、登记造册、按名可查</td><td class="tools">archive/ · archive/README.md 归档台账 · archive_file.py · 文档规范 §5</td>
+        <td class="status s-on">在役</td></tr>
+      <tr><td class="role">扫地道人</td><td class="post">场地官</td><td class="chap">2 · 14 · 27 · 36 · 44</td>
+        <td>扫地锄园、撞钟打勤劳；清场须禀报管家</td><td class="tools">tmpe/ 桶约定 · tmpe_tidy.py · tmpe/policy.yml</td>
+        <td class="status s-on">在役</td></tr>
     </tbody>
   </table>
 </section>
@@ -459,6 +465,33 @@ footer .chain{font-family:var(--font-mono); font-size:11.5px; color:var(--ink-3)
       </article>
     </div>
   </div>
+
+  <div class="band">
+    <div class="band-head"><span class="no">丁</span><h3>归档与工地 · 两套仓内治理系统</h3>
+      <span class="note">V1.1 增补 · 管的是已建成的系统</span></div>
+    <div class="cards">
+      <article class="card">
+        <div class="top"><div class="nm">酆都判官崔珏</div><div class="chp">10 · 11 · 58</div></div>
+        <div class="po">档案官 · archive/</div>
+        <p class="duty">判官不判生死，只掌册、造册、按册检索——生死簿一改，幽冥秩序便跟着动。
+          项目里同一位是归档区：只追加、禁回溯修改、按类归置、台账登记、引用可查。归档件是退役但仍有引用价值的东西，不是垃圾。</p>
+        <blockquote>「命掌生死簿判官：“急取簿子来，看陛下阳寿天禄该有几何？”」<span class="src">第 10 回（探针实测提取）</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip on">archive/</span><span class="chip on">archive_file.py</span><span class="chip">归档台账</span><span class="chip">文档规范 §5</span></div></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><div class="nm">扫地道人</div><div class="chp">2 · 14 · 27 · 36 · 44</div></div>
+        <div class="po">场地官 · tmpe/</div>
+        <p class="duty">扫地锄园、撞钟打勤劳——他们不生产东西，只负责让场地干净。
+          项目里同一位是临时区：过程件按桶堆放、使命终即可弃、到期先列清单再报主人、主人点头才动、扫而不焚（移动而非删除）、近 48 小时有写入的桶一律不碰。</p>
+        <blockquote>「我是这里扫地撞钟打勤劳的道人，里面还有个管家的老师父哩，待我进去禀他一声。」<span class="src">第 36 回（探针实测提取）</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip on">tmpe/ 桶约定</span><span class="chip on">tmpe_tidy.py</span><span class="chip">policy.yml</span><span class="chip">禁 rm -rf</span></div></div>
+      </article>
+    </div>
+  </div>
+
 </section>
 
 <section>
