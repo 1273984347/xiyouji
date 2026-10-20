@@ -23,6 +23,7 @@ import type { ChatMessage } from "./engine/types.js";
 import { sanitizePermissionMode, resolveWorkingDir, createSseGuard } from "./security.js";
 import { sendError } from "./http.js";
 import { logger } from "./logger.js";
+import { recordFirstToken } from "./metrics.js";
 import { chatBodySchema, parseBody } from "./validation.js";
 import { createSseWriter, setSseHeaders } from "./sse.js";
 import {
@@ -101,6 +102,11 @@ function auditToolResult(params: {
  */
 export function registerChatRoute(app: express.Express, permissions: PendingPermissionStore): void {
   app.post("/api/chat", async (req: Request, res: Response) => {
+    // W844：OBS-14 计时起点。取在 handler 最前——入参校验、会话读写都属「用户等待」的一部分，
+    // 从更靠后开始计时会系统性低估首 token 延迟。
+    const reqStartedAt = Date.now();
+    let firstTokenMs: number | null = null;
+
     // W808：入参经 Zod 边界校验（server/validation.ts）。
     // 契约红线：**「消息为空」仍返 400 +「消息不能为空」**（既有契约逐字保留·
     // 本路由在 SSE 之前以 JSON 返回，前端按 response.body 读——状态码不可改）。
@@ -251,6 +257,17 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
         signal: sseGuard.signal,
         handlers: {
           onText: (delta) => {
+            // W844：OBS-14——首个 text delta 即「首 token」。sse.init 是会话元信息帧，不计。
+            if (firstTokenMs === null) {
+              firstTokenMs = Date.now() - reqStartedAt;
+              recordFirstToken(firstTokenMs);
+              logger.info("问答首 token 计时", {
+                request_id: req.requestId,
+                first_token_ms: firstTokenMs,
+                model: selectedModel,
+                session_id: session.id,
+              });
+            }
             fullResponse += delta;
             sse.text(delta);
           },
@@ -276,6 +293,17 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
           },
         },
       });
+
+      // W844：OBS-14——整轮无文本增量（纯工具调用）时明确记「无样本」，
+      // 而不是留空让下游把「缺数据」读成「0 ms」。SLO 只对文本回答有意义。
+      if (firstTokenMs === null) {
+        logger.info("问答首 token 无样本", {
+          request_id: req.requestId,
+          reason: "no_text_delta",
+          model: selectedModel,
+          session_id: session.id,
+        });
+      }
 
       // 完成时兜底：仍未终结的工具标记完成（对齐旧 result 分支语义）
       toolCalls.forEach((tool) => {

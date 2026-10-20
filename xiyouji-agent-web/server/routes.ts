@@ -10,6 +10,7 @@
  *   GET    /api/health                { status, timestamp }
  *   GET    /api/ready                 { status, checks }        ← W808 新增（就绪探针）
  *   GET    /api/audit                 { ok, limit, total, skipped, entries }
+ *   GET    /api/metrics               { ok, first_token:{count,window,p50,p95,min,max,sloMs} } ← W844 新增（OBS-14）
  *   GET    /api/check-login           LoginStatusResponse（apiKey 脱敏 `****` + 末四位）
  *   GET    /api/models                { models:[{modelId,name}], defaultModel }
  *   GET    /api/sessions              { sessions:[…+messageCount] }
@@ -29,6 +30,7 @@ import type { Express, Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 import * as db from "./db.js";
 import { readAudit } from "./audit.js";
+import { firstTokenSummary } from "./metrics.js";
 import { NotFoundError } from "./errors.js";
 import { logger } from "./logger.js";
 import {
@@ -130,6 +132,13 @@ export function registerApiRoutes(app: Express, permissions: PendingPermissionSt
     const limit = Number.isFinite(raw) && raw > 0 ? Math.min(Math.floor(raw), 1000) : 100;
     const result = readAudit(limit);
     res.json({ ok: true, limit, total: result.total, skipped: result.skipped, entries: result.entries });
+  });
+
+  // W844 · OBS-14：问答首 token 延迟的只读窗口摘要。
+  // 与其余 /api/* 同受 token 中间件与限流保护；只读进程内滚动窗口，
+  // **不落盘、不外发**——长期分布看结构化日志（logger 已记 first_token_ms）。
+  app.get("/api/metrics", (_req, res) => {
+    res.json({ ok: true, first_token: firstTokenSummary() });
   });
 
   app.get("/api/check-login", (req, res) => {

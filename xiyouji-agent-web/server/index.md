@@ -11,13 +11,15 @@
 
 - `engine/`
 
-## 文件（24）
+## 文件（28）
 
 ### JavaScript / TypeScript
 
 - `api.integration.test.ts`
 - `audit.test.ts`
 - `audit.ts`
+- `backup.test.ts`
+- `backup.ts`
 - `chat.ts`
 - `citationGuard.test.ts`
 - `citationGuard.ts`
@@ -29,6 +31,8 @@
 - `http.ts`
 - `index.ts`
 - `logger.ts`
+- `metrics.test.ts`
+- `metrics.ts`
 - `middleware.ts`
 - `permissions.ts`
 - `requestId.ts`

@@ -1,0 +1,100 @@
+{"qid": "Q01", "query": "白骨精", "type": "direct", "gold": ["docs\\02-人物深度分析\\白骨精-方向二深化.md", "docs\\02-人物深度分析\\白骨精.md", "docs\\02-人物深度分析\\白骨精外传.md", "docs\\02-人物深度分析\\白骨精深化专题.md", "docs\\S2-外部分享\\S2-发布-西游与伦理学.md"]}
+{"qid": "Q02", "query": "铁扇公主", "type": "direct", "gold": ["docs\\02-人物深度分析\\铁扇公主-方向二深化.md", "docs\\02-人物深度分析\\铁扇公主.md", "docs\\02-人物深度分析\\铁扇公主深化专题.md"]}
+{"qid": "Q03", "query": "紧箍咒", "type": "direct", "gold": ["docs\\02-人物深度分析\\紧箍儿的内侧-器物传记.md", "docs\\03-主题与情节专题\\紧箍儿咒-四百年回响.md", "docs\\03-主题与情节专题\\紧箍咒专题.md", "docs\\S2-外部分享\\S2-发布-紧箍儿咒四百年回响.md", "docs\\S2-外部分享\\S2-发布-西游与代理悖论.md", "docs\\S2-外部分享\\S2-发布-西游与博弈论.md", "docs\\S2-外部分享\\S2-发布-西游与心理学.md", "docs\\S2-外部分享\\S2-发布-西游与符号学.md", "docs\\S2-外部分享\\S2-发布-西游与符号学专题.md", "docs\\S2-外部分享\\S2-发布-西游与认知科学.md", "docs\\S2-外部分享\\S2-发布-西游与音乐学.md"]}
+{"qid": "Q04", "query": "人参果", "type": "direct", "gold": ["docs\\03-主题与情节专题\\人参果-人与欲望的关系.md", "docs\\S2-外部分享\\S2-发布-人参果人与欲望的关系.md", "docs\\S2-外部分享\\S2-发布-西游与饮食学.md"]}
+{"qid": "Q05", "query": "女儿国", "type": "direct", "gold": ["docs\\02-人物深度分析\\女儿国国王-方向二深化.md", "docs\\02-人物深度分析\\女儿国国王.md", "docs\\02-人物深度分析\\女儿国国王深化专题.md", "docs\\S2-外部分享\\S2-发布-西游与性别政治.md"]}
+{"qid": "Q06", "query": "车迟国", "type": "direct", "gold": ["docs\\01-全书逐回解读\\第045回-三清观大圣留名.md", "docs\\02-人物深度分析\\车迟国三国师-方向二深化.md", "docs\\02-人物深度分析\\车迟国三国师外传.md", "docs\\S2-外部分享\\S2-发布-西游与明代嘉靖镜像.md"]}
+{"qid": "Q07", "query": "真假美猴王", "type": "direct", "gold": ["docs\\02-人物深度分析\\六耳猕猴-方向二深化.md", "docs\\02-人物深度分析\\六耳猕猴.md", "docs\\02-人物深度分析\\六耳猕猴深化专题.md", "docs\\03-主题与情节专题\\真假美猴王-二心之战.md", "docs\\03-主题与情节专题\\真假美猴王专题.md", "docs\\S2-外部分享\\S2-发布-真假美猴王二心之战.md", "docs\\S2-外部分享\\S2-发布-西游与代理悖论.md", "docs\\S2-外部分享\\S2-发布-西游与伦理学.md", "docs\\S2-外部分享\\S2-发布-西游与心理学.md", "docs\\S2-外部分享\\S2-发布-西游与男性研究.md", "docs\\S4-学术投稿\\01-论文\\心学方向-匿名稿.md", "docs\\S4-学术投稿\\01-论文\\心学方向-投稿版.md", "docs\\S4-学术投稿\\05-投稿\\中文核心期刊要目总览投稿\\心学方向-匿名稿.md", "docs\\S4-学术投稿\\05-投稿\\中文核心期刊要目总览投稿\\心学方向-投稿版.md", "docs\\S4-学术投稿\\06-文献\\md\\2019_Tang-He_六耳猕猴形象的三教阐释_绵阳师范学院学报19-7.md"]}
+{"qid": "Q08", "query": "蟠桃", "type": "direct", "gold": ["docs\\01-全书逐回解读\\第005回-乱蟠桃大圣偷丹.md", "docs\\03-主题与情节专题\\蟠桃园-体制内的秘密.md", "docs\\S2-外部分享\\S2-发布-蟠桃园体制内的秘密.md", "docs\\S2-外部分享\\S2-发布-西游与天文学.md", "docs\\S2-外部分享\\S2-发布-西游与平台经济.md", "docs\\S2-外部分享\\S2-发布-西游与饮食学.md"]}
+{"qid": "Q09", "query": "猴子被压在哪座山下", "type": "indirect", "gold": ["docs\\01-全书逐回解读\\第007回-八卦炉中逃大圣.md", "docs\\S2-外部分享\\S2-发布-西游与代理悖论.md"]}
+{"qid": "Q10", "query": "孙悟空头上那个一收就疼的圈", "type": "indirect", "gold": ["docs\\02-人物深度分析\\紧箍儿的内侧-器物传记.md", "docs\\03-主题与情节专题\\紧箍儿咒-四百年回响.md", "docs\\03-主题与情节专题\\紧箍咒专题.md", "docs\\S2-外部分享\\S2-发布-紧箍儿咒四百年回响.md", "docs\\S2-外部分享\\S2-发布-西游与代理悖论.md", "docs\\S2-外部分享\\S2-发布-西游与博弈论.md", "docs\\S2-外部分享\\S2-发布-西游与心理学.md", "docs\\S2-外部分享\\S2-发布-西游与符号学.md", "docs\\S2-外部分享\\S2-发布-西游与符号学专题.md", "docs\\S2-外部分享\\S2-发布-西游与认知科学.md", "docs\\S2-外部分享\\S2-发布-西游与音乐学.md"]}
+{"qid": "Q11", "query": "灭火借来的那把扇子", "type": "indirect", "gold": ["docs\\01-全书逐回解读\\第059回-唐三藏路阻火焰山.md", "docs\\01-全书逐回解读\\第060回-牛魔王罢战赴华筵孙行者二调芭蕉扇.md", "docs\\01-全书逐回解读\\第061回-猪八戒助力败魔王孙行者三调芭蕉扇.md", "docs\\02-人物深度分析\\芭蕉扇外传.md", "docs\\03-主题与情节专题\\芭蕉扇-终极灭火器的关系.md"]}
+{"qid": "Q12", "query": "唐僧的前世是谁", "type": "indirect", "gold": ["docs\\01-全书逐回解读\\第012回-玄奘秉诚建大会观音显象化金蝉.md", "docs\\02-人物深度分析\\金蝉子外传.md"]}
+{"qid": "Q13", "query": "教孙悟空七十二变的师父", "type": "indirect", "gold": ["docs\\01-全书逐回解读\\第002回-悟彻菩提真妙理.md", "docs\\02-人物深度分析\\菩提祖师-方向二深化.md", "docs\\02-人物深度分析\\菩提祖师.md", "docs\\02-人物深度分析\\菩提祖师外传.md", "docs\\02-人物深度分析\\菩提祖师深化专题.md", "docs\\03-主题与情节专题\\须菩提祖师-消失的师父.md", "docs\\S2-外部分享\\S2-发布-西游与AI时代.md", "docs\\S2-外部分享\\S2-发布-西游与教育学.md"]}
+{"qid": "Q14", "query": "孙悟空从东海拿的兵器", "type": "indirect", "gold": ["docs\\01-全书逐回解读\\第063回-二僧荡怪闹龙宫群圣除邪获宝贝.md", "docs\\02-人物深度分析\\敖广外传.md", "docs\\02-人物深度分析\\金箍棒-方向二深化.md", "docs\\03-主题与情节专题\\金箍棒的重量-一万三千五百斤的秘密.md", "docs\\S2-外部分享\\S2-发布-兵器的自我修养.md", "docs\\S2-外部分享\\S2-发布-西游与符号学专题.md"]}
+{"qid": "Q15", "query": "吃了能长生不老的那种果子", "type": "indirect", "gold": ["docs\\03-主题与情节专题\\人参果-人与欲望的关系.md", "docs\\S2-外部分享\\S2-发布-人参果人与欲望的关系.md", "docs\\S2-外部分享\\S2-发布-西游与饮食学.md"]}
+{"qid": "Q16", "query": "队伍里最沉默的那个徒弟", "type": "indirect", "gold": ["docs\\01-全书逐回解读\\第022回-八戒大战流沙河.md", "docs\\02-人物深度分析\\沙僧-方向二深化.md", "docs\\02-人物深度分析\\沙僧.md", "docs\\02-人物深度分析\\沙僧外传.md", "docs\\02-人物深度分析\\沙僧深化专题.md", "docs\\02-人物深度分析\\泥鳅外传.md", "docs\\03-主题与情节专题\\沙僧-沉默者的智慧.md", "docs\\S2-外部分享\\S2-发布-西游与地理学.md"]}
+{"qid": "Q17", "query": "取经路上的权力结构", "type": "concept", "gold": ["docs\\03-主题与情节专题\\取经政治学专题.md", "docs\\03-主题与情节专题\\权力五联对照专题.md", "docs\\03-主题与情节专题\\长生之道的权力谱系专题.md"]}
+{"qid": "Q18", "query": "妖怪为什么都有后台", "type": "concept", "gold": ["docs\\02-人物深度分析\\妖怪群体组织形态深化.md", "docs\\02-人物深度分析\\妖怪谱系深度分析.md", "docs\\03-主题与情节专题\\妖怪身份政治专题.md", "docs\\03-主题与情节专题\\妖魔谱系政治学专题.md"]}
+{"qid": "Q19", "query": "牛魔王", "type": "direct", "gold": ["docs\\01-全书逐回解读\\第060回-牛魔王罢战赴华筵孙行者二调芭蕉扇.md", "docs\\02-人物深度分析\\严嵩与牛魔王对照专题.md", "docs\\02-人物深度分析\\牛魔王-方向二深化.md", "docs\\02-人物深度分析\\牛魔王-方向二深化B.md", "docs\\02-人物深度分析\\牛魔王.md", "docs\\02-人物深度分析\\牛魔王深化专题.md", "docs\\S2-外部分享\\S2-发布-西游与男性研究.md"]}
+{"qid": "Q20", "query": "大闹天宫", "type": "direct", "gold": ["docs\\03-主题与情节专题\\大闹天宫-英雄还是悲剧.md", "docs\\03-主题与情节专题\\大闹天宫专题.md", "docs\\S2-外部分享\\S2-发布-大闹天宫英雄还是悲剧.md"]}
+{"qid": "Q21", "query": "火焰山", "type": "direct", "gold": ["docs\\01-全书逐回解读\\第059回-唐三藏路阻火焰山.md", "docs\\02-人物深度分析\\火焰山土地外传.md"]}
+{"qid": "Q22", "query": "盘丝洞", "type": "direct", "gold": ["docs\\01-全书逐回解读\\第072回-盘丝洞七情迷本濯垢泉八戒忘形.md", "docs\\02-人物深度分析\\蜘蛛精-方向二深化.md", "docs\\02-人物深度分析\\蜘蛛精.md", "docs\\02-人物深度分析\\蜘蛛精七姐妹合集专题.md", "docs\\02-人物深度分析\\蜘蛛精七姐妹深化专题.md", "docs\\02-人物深度分析\\蜘蛛精外传.md"]}
+{"qid": "Q23", "query": "在天庭操办年度神仙宴会的女神是谁", "type": "indirect", "gold": ["docs\\02-人物深度分析\\王母娘娘.md", "docs\\02-人物深度分析\\王母娘娘深化专题.md"]}
+{"qid": "Q24", "query": "把师徒四人装进袖子里的老道士", "type": "indirect", "gold": ["docs\\01-全书逐回解读\\第025回-镇元仙赶捉取经僧孙行者大闹五庄观.md", "docs\\02-人物深度分析\\镇元大仙-方向二深化.md", "docs\\02-人物深度分析\\镇元大仙.md"]}
+{"qid": "Q25", "query": "会喷三昧真火的妖怪小孩", "type": "indirect", "gold": ["docs\\02-人物深度分析\\红孩儿-方向二深化.md", "docs\\02-人物深度分析\\红孩儿.md", "docs\\02-人物深度分析\\红孩儿外传.md", "docs\\02-人物深度分析\\红孩儿深化专题.md"]}
+{"qid": "Q26", "query": "谁用甘露救活了那棵果树", "type": "indirect", "gold": ["docs\\01-全书逐回解读\\第026回-孙悟空三岛求方观世音甘泉活树.md", "docs\\02-人物深度分析\\观音菩萨-方向二深化.md", "docs\\02-人物深度分析\\观音菩萨深化专题.md"]}
+{"qid": "Q27", "query": "假装成佛祖骗了唐僧的妖怪", "type": "indirect", "gold": ["docs\\01-全书逐回解读\\第065回-妖邪假设小雷音四众皆遭大厄难.md", "docs\\02-人物深度分析\\黄眉老佛外传.md"]}
+{"qid": "Q28", "query": "师徒四人为什么能走到西天", "type": "concept", "gold": ["docs\\02-人物深度分析\\取经团队动力学深化专题.md", "docs\\03-主题与情节专题\\取经团队-凭什么走到西天.md", "docs\\03-主题与情节专题\\取经团队决策论专题.md", "docs\\03-主题与情节专题\\取经团队动力学.md", "docs\\03-主题与情节专题\\取经团队心理学专题.md", "docs\\03-主题与情节专题\\取经团队组织学专题.md", "docs\\03-主题与情节专题\\取经团队身体地理学专题.md", "docs\\S2-外部分享\\S2-发布-西游与情绪劳动.md", "docs\\S2-外部分享\\S2-发布-西游与现代组织管理.md", "docs\\S2-外部分享\\S2-发布-西游与经济学.md"]}
+{"qid": "Q29", "query": "为什么厉害的妖怪最后都被收走而不是打死", "type": "concept", "gold": ["docs\\03-主题与情节专题\\妖怪身份政治专题.md", "docs\\03-主题与情节专题\\招安对比重写专题.md", "docs\\03-主题与情节专题\\招安的两种结局专题.md"]}
+{"qid": "Q30", "query": "孙悟空其实代表人的哪一部分", "type": "concept", "gold": ["docs\\S2-外部分享\\S2-发布-西游与心理学.md", "docs\\S4-学术投稿\\01-论文\\心学方向-匿名稿.md", "docs\\S4-学术投稿\\01-论文\\心学方向-投稿版.md", "docs\\S4-学术投稿\\05-投稿\\中文核心期刊要目总览投稿\\心学方向-匿名稿.md", "docs\\S4-学术投稿\\05-投稿\\中文核心期刊要目总览投稿\\心学方向-投稿版.md"]}
+{"qid": "Q31", "query": "白骨精这个角色到底想表达什么", "type": "person", "gold": ["docs/02-人物深度分析/白骨精-方向二深化.md", "docs/02-人物深度分析/白骨精.md", "docs/02-人物深度分析/白骨精外传.md", "docs/02-人物深度分析/白骨精深化专题.md"], "origin": "anchor", "anchor": "白骨精"}
+{"qid": "Q32", "query": "铁扇公主和牛魔王的关系怎么看", "type": "person", "gold": ["docs/02-人物深度分析/铁扇公主-方向二深化.md", "docs/02-人物深度分析/铁扇公主.md", "docs/02-人物深度分析/铁扇公主深化专题.md"], "origin": "anchor", "anchor": "铁扇公主"}
+{"qid": "Q33", "query": "牛魔王为什么不肯借扇", "type": "person", "gold": ["docs/01-全书逐回解读/第060回-牛魔王罢战赴华筵孙行者二调芭蕉扇.md", "docs/02-人物深度分析/严嵩与牛魔王对照专题.md", "docs/02-人物深度分析/牛魔王-方向二深化.md", "docs/02-人物深度分析/牛魔王-方向二深化B.md", "docs/02-人物深度分析/牛魔王.md", "docs/02-人物深度分析/牛魔王深化专题.md"], "origin": "anchor", "anchor": "牛魔王"}
+{"qid": "Q34", "query": "红孩儿和牛魔王是什么关系", "type": "person", "gold": ["docs/02-人物深度分析/红孩儿-方向二深化.md", "docs/02-人物深度分析/红孩儿.md", "docs/02-人物深度分析/红孩儿外传.md", "docs/02-人物深度分析/红孩儿深化专题.md"], "origin": "anchor", "anchor": "红孩儿"}
+{"qid": "Q35", "query": "二郎神和孙悟空谁更自由", "type": "person", "gold": ["docs/02-人物深度分析/二郎神-方向二深化.md", "docs/02-人物深度分析/二郎神.md", "docs/02-人物深度分析/二郎神外传.md", "docs/02-人物深度分析/二郎神深化专题.md", "docs/03-主题与情节专题/二郎神与悟空-自由观碰撞.md"], "origin": "anchor", "anchor": "二郎神"}
+{"qid": "Q36", "query": "哪吒的出身和剔骨还父怎么理解", "type": "person", "gold": ["docs/02-人物深度分析/哪吒.md", "docs/02-人物深度分析/哪吒外传.md", "docs/02-人物深度分析/哪吒深化专题.md"], "origin": "anchor", "anchor": "哪吒"}
+{"qid": "Q37", "query": "六耳猕猴是不是孙悟空的另一面", "type": "person", "gold": ["docs/02-人物深度分析/六耳猕猴-方向二深化.md", "docs/02-人物深度分析/六耳猕猴.md", "docs/02-人物深度分析/六耳猕猴深化专题.md"], "origin": "anchor", "anchor": "六耳猕猴"}
+{"qid": "Q38", "query": "黄袍怪下界为妖的缘由", "type": "person", "gold": ["docs/02-人物深度分析/黄袍怪-方向二深化.md", "docs/02-人物深度分析/黄袍怪.md", "docs/02-人物深度分析/黄袍怪外传.md"], "origin": "anchor", "anchor": "黄袍怪"}
+{"qid": "Q39", "query": "奎木狼为什么不负前情", "type": "person", "gold": ["docs/02-人物深度分析/奎木狼-方向二深化.md", "docs/02-人物深度分析/奎木狼不负前情外传.md", "docs/02-人物深度分析/奎木狼外传.md"], "origin": "anchor", "anchor": "奎木狼"}
+{"qid": "Q40", "query": "太上老君在取经里扮演什么角色", "type": "person", "gold": ["docs/02-人物深度分析/太上老君-方向二深化.md", "docs/02-人物深度分析/太上老君.md", "docs/02-人物深度分析/太上老君外传.md", "docs/02-人物深度分析/太上老君深化专题.md"], "origin": "anchor", "anchor": "太上老君"}
+{"qid": "Q41", "query": "太白金星为什么总来招安", "type": "person", "gold": ["docs/02-人物深度分析/太白金星-方向二深化.md", "docs/02-人物深度分析/太白金星.md"], "origin": "anchor", "anchor": "太白金星"}
+{"qid": "Q42", "query": "观音菩萨的安排有什么用意", "type": "person", "gold": ["docs/01-全书逐回解读/第006回-观音赴会问原因.md", "docs/01-全书逐回解读/第012回-玄奘秉诚建大会观音显象化金蝉.md", "docs/01-全书逐回解读/第016回-观音院僧谋宝贝黑风山怪窃袈裟.md", "docs/01-全书逐回解读/第018回-观音院唐僧脱难高老庄行者降魔.md", "docs/01-全书逐回解读/第042回-大圣殷勤拜南海观音慈善缚红孩.md", "docs/01-全书逐回解读/第049回-三藏有灾沉水宅观音救难现鱼篮.md", "docs/01-全书逐回解读/第071回-行者假名降怪犼观音现象伏妖王.md", "docs/02-人物深度分析/观音.md", "docs/02-人物深度分析/观音外传.md", "docs/02-人物深度分析/观音菩萨-方向二深化.md", "docs/02-人物深度分析/观音菩萨深化专题.md", "docs/02-人物深度分析/鱼篮观音外传.md"], "origin": "anchor", "anchor": "观音"}
+{"qid": "Q43", "query": "唐僧的软弱是不是一种坚持", "type": "person", "gold": ["docs/01-全书逐回解读/第018回-观音院唐僧脱难高老庄行者降魔.md", "docs/01-全书逐回解读/第020回-黄风岭唐僧有难半山中八戒争先.md", "docs/01-全书逐回解读/第068回-朱紫国唐僧论前世孙行者施为三折肱.md", "docs/01-全书逐回解读/第091回-金平府元夜观灯玄英洞唐僧供状.md", "docs/02-人物深度分析/唐僧-方向二深化.md", "docs/02-人物深度分析/唐僧.md", "docs/02-人物深度分析/唐僧深化专题.md", "docs/02-人物深度分析/王阳明与唐僧心学对照专题.md", "docs/03-主题与情节专题/唐僧-凡躯圣心.md", "docs/S2-外部分享/S2-发布-唐僧凡躯圣心.md"], "origin": "anchor", "anchor": "唐僧"}
+{"qid": "Q44", "query": "猪八戒的贪欲有什么功能", "type": "person", "gold": ["docs/01-全书逐回解读/第031回-猪八戒义激猴王孙行者智降妖怪.md", "docs/01-全书逐回解读/第061回-猪八戒助力败魔王孙行者三调芭蕉扇.md", "docs/02-人物深度分析/猪八戒-方向二深化.md", "docs/02-人物深度分析/猪八戒.md", "docs/02-人物深度分析/猪八戒深化专题.md", "docs/03-主题与情节专题/猪八戒-不愿承认的自己.md", "docs/S2-外部分享/S2-发布-猪八戒不愿承认的自己.md"], "origin": "anchor", "anchor": "猪八戒"}
+{"qid": "Q45", "query": "沙僧为什么几乎没有台词", "type": "person", "gold": ["docs/02-人物深度分析/沙僧-方向二深化.md", "docs/02-人物深度分析/沙僧.md", "docs/02-人物深度分析/沙僧外传.md", "docs/02-人物深度分析/沙僧深化专题.md", "docs/03-主题与情节专题/沙僧-沉默者的智慧.md"], "origin": "anchor", "anchor": "沙僧"}
+{"qid": "Q46", "query": "女儿国国王的抉择", "type": "person", "gold": ["docs/02-人物深度分析/女儿国国王-方向二深化.md", "docs/02-人物深度分析/女儿国国王.md", "docs/02-人物深度分析/女儿国国王深化专题.md"], "origin": "anchor", "anchor": "女儿国国王"}
+{"qid": "Q47", "query": "乌鸡国国王的遭遇说明了什么", "type": "person", "gold": ["docs/02-人物深度分析/乌鸡国国王-方向二深化.md"], "origin": "anchor", "anchor": "乌鸡国国王"}
+{"qid": "Q48", "query": "大鹏金翅雕的背景有多硬", "type": "person", "gold": ["docs/02-人物深度分析/大鹏金翅雕.md", "docs/02-人物深度分析/大鹏金翅雕外传.md"], "origin": "anchor", "anchor": "大鹏金翅雕"}
+{"qid": "Q49", "query": "九头虫的战力设定", "type": "person", "gold": ["docs/02-人物深度分析/九头虫.md"], "origin": "anchor", "anchor": "九头虫"}
+{"qid": "Q50", "query": "万圣公主偷灵芝的动机", "type": "person", "gold": ["docs/02-人物深度分析/万圣公主外传.md"], "origin": "anchor", "anchor": "万圣公主"}
+{"qid": "Q51", "query": "土地公在各地怎么出场", "type": "person", "gold": ["docs/02-人物深度分析/土地公-方向二深化.md", "docs/03-主题与情节专题/增补三土地公与山神专题.md"], "origin": "anchor", "anchor": "土地公"}
+{"qid": "Q52", "query": "取经五众之间的关系网络", "type": "person", "gold": ["docs/02-人物深度分析/取经五众关系网络深化.md"], "origin": "anchor", "anchor": "取经五众"}
+{"qid": "Q53", "query": "八十一难的整体结构怎么划分", "type": "theme", "gold": ["docs/03-主题与情节专题/八十一难结构学专题.md", "docs/S2-外部分享/S2-发布-八十一难结构学.md"], "origin": "anchor", "anchor": "八十一难结构"}
+{"qid": "Q54", "query": "八十一难的风险管理视角", "type": "theme", "gold": ["docs/03-主题与情节专题/八十一难风险管理学专题.md"], "origin": "anchor", "anchor": "八十一难风险管理"}
+{"qid": "Q55", "query": "取经团队的动力学如何演变", "type": "theme", "gold": ["docs/02-人物深度分析/取经团队动力学深化专题.md", "docs/03-主题与情节专题/取经团队动力学.md"], "origin": "anchor", "anchor": "取经团队动力学"}
+{"qid": "Q56", "query": "取经地理学讲了什么", "type": "theme", "gold": ["docs/03-主题与情节专题/取经地理学专题.md"], "origin": "anchor", "anchor": "取经地理学"}
+{"qid": "Q57", "query": "取经伦理学的核心争点", "type": "theme", "gold": ["docs/03-主题与情节专题/取经伦理学专题.md"], "origin": "anchor", "anchor": "取经伦理学"}
+{"qid": "Q58", "query": "取经团队心理学怎么分析", "type": "theme", "gold": ["docs/03-主题与情节专题/取经团队心理学专题.md"], "origin": "anchor", "anchor": "取经团队心理学"}
+{"qid": "Q59", "query": "时间叙事在原著里怎么用", "type": "theme", "gold": ["docs/03-主题与情节专题/时间叙事学专题.md"], "origin": "anchor", "anchor": "时间叙事"}
+{"qid": "Q60", "query": "空间叙事与取经路线的关系", "type": "theme", "gold": ["docs/03-主题与情节专题/空间叙事学专题.md"], "origin": "anchor", "anchor": "空间叙事"}
+{"qid": "Q61", "query": "身体政治学怎么看妖魔变形", "type": "theme", "gold": ["docs/03-主题与情节专题/身体政治学专题.md"], "origin": "anchor", "anchor": "身体政治"}
+{"qid": "Q62", "query": "权力在西游世界如何分布", "type": "theme", "gold": ["docs/03-主题与情节专题/权力五联对照专题.md", "docs/03-主题与情节专题/长生之道的权力谱系专题.md"], "origin": "anchor", "anchor": "权力"}
+{"qid": "Q63", "query": "西游与死亡研究专题讲了什么", "type": "theme", "gold": ["docs/03-主题与情节专题/西游与死亡研究专题.md"], "origin": "anchor", "anchor": "西游与死亡"}
+{"qid": "Q64", "query": "声音政治学怎么切入取经", "type": "theme", "gold": ["docs/03-主题与情节专题/取经声音政治学专题.md"], "origin": "anchor", "anchor": "声音政治"}
+{"qid": "Q65", "query": "不可靠叙述在原著中的表现", "type": "theme", "gold": ["docs/03-主题与情节专题/不可靠叙述专题.md"], "origin": "anchor", "anchor": "不可靠叙述"}
+{"qid": "Q66", "query": "元叙事学怎么解读西游记", "type": "theme", "gold": ["docs/03-主题与情节专题/元叙事学专题.md"], "origin": "anchor", "anchor": "元叙事"}
+{"qid": "Q67", "query": "互文性叙事学的分析路径", "type": "theme", "gold": ["docs/03-主题与情节专题/互文性叙事学专题.md"], "origin": "anchor", "anchor": "互文性"}
+{"qid": "Q68", "query": "创伤叙事学能解释谁", "type": "theme", "gold": ["docs/03-主题与情节专题/创伤叙事学专题.md"], "origin": "anchor", "anchor": "创伤叙事"}
+{"qid": "Q69", "query": "动物研究视角下的妖怪", "type": "theme", "gold": ["docs/03-主题与情节专题/动物研究专题.md"], "origin": "anchor", "anchor": "动物研究"}
+{"qid": "Q70", "query": "历史叙事学与玄奘取经", "type": "theme", "gold": ["docs/03-主题与情节专题/历史叙事学专题.md"], "origin": "anchor", "anchor": "历史叙事"}
+{"qid": "Q71", "query": "取经生态学的关切点", "type": "theme", "gold": ["docs/03-主题与情节专题/取经生态学专题.md"], "origin": "anchor", "anchor": "取经生态"}
+{"qid": "Q72", "query": "取经气候学的切入点", "type": "theme", "gold": ["docs/03-主题与情节专题/取经气候学专题.md"], "origin": "anchor", "anchor": "取经气候"}
+{"qid": "Q73", "query": "取经拓扑学的空间模型", "type": "theme", "gold": ["docs/03-主题与情节专题/取经拓扑学专题.md"], "origin": "anchor", "anchor": "取经拓扑"}
+{"qid": "Q74", "query": "取经密码学在讲什么", "type": "theme", "gold": ["docs/03-主题与情节专题/取经密码学专题.md"], "origin": "anchor", "anchor": "取经密码"}
+{"qid": "Q75", "query": "媒介考古学怎么看取经传播", "type": "theme", "gold": ["docs/03-主题与情节专题/取经媒介考古学专题.md"], "origin": "anchor", "anchor": "媒介考古"}
+{"qid": "Q76", "query": "取经数字人文专题的方法", "type": "theme", "gold": ["docs/03-主题与情节专题/取经数字人文专题.md"], "origin": "anchor", "anchor": "取经数字人文"}
+{"qid": "Q77", "query": "五次蜕变分别指什么", "type": "hardship", "gold": ["docs/03-主题与情节专题/五次蜕变专题.md", "docs/03-主题与情节专题/猴王到行者-五次蜕变.md"], "origin": "anchor", "anchor": "五次蜕变"}
+{"qid": "Q78", "query": "大闹天宫是英雄还是悲剧", "type": "hardship", "gold": ["docs/03-主题与情节专题/大闹天宫-英雄还是悲剧.md", "docs/03-主题与情节专题/大闹天宫专题.md", "docs/S2-外部分享/S2-发布-大闹天宫英雄还是悲剧.md"], "origin": "anchor", "anchor": "大闹天宫"}
+{"qid": "Q79", "query": "真假美猴王到底死了谁", "type": "hardship", "gold": ["docs/03-主题与情节专题/真假美猴王-二心之战.md", "docs/03-主题与情节专题/真假美猴王专题.md", "docs/S2-外部分享/S2-发布-真假美猴王二心之战.md", "docs/S4-学术投稿/学术论文-心学视域下的西游记心猿书写与真假美猴王.md"], "origin": "anchor", "anchor": "真假美猴王"}
+{"qid": "Q80", "query": "火焰山这一难的结构作用", "type": "hardship", "gold": ["docs/01-全书逐回解读/第059回-唐三藏路阻火焰山.md", "docs/02-人物深度分析/火焰山土地外传.md"], "origin": "anchor", "anchor": "火焰山"}
+{"qid": "Q81", "query": "人参果与欲望的关系", "type": "hardship", "gold": ["docs/03-主题与情节专题/人参果-人与欲望的关系.md", "docs/S2-外部分享/S2-发布-人参果人与欲望的关系.md"], "origin": "anchor", "anchor": "人参果"}
+{"qid": "Q82", "query": "紧箍儿为什么是内侧的", "type": "hardship", "gold": ["docs/02-人物深度分析/紧箍儿的内侧-器物传记.md", "docs/03-主题与情节专题/紧箍儿咒-四百年回响.md", "docs/S2-外部分享/S2-发布-紧箍儿咒四百年回响.md"], "origin": "anchor", "anchor": "紧箍儿"}
+{"qid": "Q83", "query": "三借芭蕉扇的叙事节奏", "type": "hardship", "gold": ["docs/01-全书逐回解读/第060回-牛魔王罢战赴华筵孙行者二调芭蕉扇.md", "docs/01-全书逐回解读/第061回-猪八戒助力败魔王孙行者三调芭蕉扇.md", "docs/02-人物深度分析/芭蕉扇外传.md", "docs/03-主题与情节专题/芭蕉扇-终极灭火器的关系.md"], "origin": "anchor", "anchor": "芭蕉扇"}
+{"qid": "Q84", "query": "盘丝洞的性别隐喻", "type": "hardship", "gold": ["docs/01-全书逐回解读/第072回-盘丝洞七情迷本濯垢泉八戒忘形.md"], "origin": "anchor", "anchor": "盘丝洞"}
+{"qid": "Q85", "query": "车迟国斗法的政治含义", "type": "hardship", "gold": ["docs/02-人物深度分析/车迟国三国师-方向二深化.md", "docs/02-人物深度分析/车迟国三国师外传.md"], "origin": "anchor", "anchor": "车迟国"}
+{"qid": "Q86", "query": "狮驼岭为什么最恐怖", "type": "hardship", "gold": ["docs/02-人物深度分析/狮驼岭三魔-方向二深化.md"], "origin": "anchor", "anchor": "狮驼岭"}
+{"qid": "Q87", "query": "八十一难专题的总论", "type": "hardship", "gold": ["docs/03-主题与情节专题/八十一难专题.md"], "origin": "anchor", "anchor": "八十一难专题"}
+{"qid": "Q88", "query": "取经路上地府体系的呈现", "type": "hardship", "gold": ["docs/02-人物深度分析/地府体系深化专题.md"], "origin": "anchor", "anchor": "地府体系"}
+{"qid": "Q89", "query": "第五十九回唐三藏路阻火焰山讲了什么", "type": "chapter", "gold": ["docs/01-全书逐回解读/第059回-唐三藏路阻火焰山.md"], "origin": "anchor", "anchor": "第059回"}
+{"qid": "Q90", "query": "第二十七回尸魔三戏唐三藏怎么读", "type": "chapter", "gold": ["docs/01-全书逐回解读/第027回-尸魔三戏唐三藏.md"], "origin": "anchor", "anchor": "第027回"}
+{"qid": "Q91", "query": "第一回灵根育孕源流出", "type": "chapter", "gold": ["docs/01-全书逐回解读/第001回-灵根育孕源流出.md"], "origin": "anchor", "anchor": "第001回"}
+{"qid": "Q92", "query": "第一百回径回东土五圣成真", "type": "chapter", "gold": ["docs/01-全书逐回解读/第100回-径回东土五圣成真.md"], "origin": "anchor", "anchor": "第100回"}
+{"qid": "Q93", "query": "第七回八卦炉中逃大圣", "type": "chapter", "gold": ["docs/01-全书逐回解读/第007回-八卦炉中逃大圣.md"], "origin": "anchor", "anchor": "第007回"}
+{"qid": "Q94", "query": "第十四回心猿归正六贼无踪", "type": "chapter", "gold": ["docs/01-全书逐回解读/第014回-心猿归正六贼无踪.md"], "origin": "anchor", "anchor": "第014回"}
+{"qid": "Q95", "query": "第四十二回大圣殷勤拜南海", "type": "chapter", "gold": ["docs/01-全书逐回解读/第042回-大圣殷勤拜南海观音慈善缚红孩.md"], "origin": "anchor", "anchor": "第042回"}
+{"qid": "Q96", "query": "第七十二回盘丝洞七情迷本", "type": "chapter", "gold": ["docs/01-全书逐回解读/第072回-盘丝洞七情迷本濯垢泉八戒忘形.md"], "origin": "anchor", "anchor": "第072回"}
+{"qid": "Q97", "query": "第九十八回猿熟马驯方脱壳", "type": "chapter", "gold": ["docs/01-全书逐回解读/第098回-猿熟马驯方脱壳功成行满见真如.md"], "origin": "anchor", "anchor": "第098回"}
+{"qid": "Q98", "query": "第十六回观音院僧谋宝贝", "type": "chapter", "gold": ["docs/01-全书逐回解读/第016回-观音院僧谋宝贝黑风山怪窃袈裟.md"], "origin": "anchor", "anchor": "第016回"}
+{"qid": "Q99", "query": "第三十三回外道迷真性元神助本心", "type": "chapter", "gold": ["docs/01-全书逐回解读/第033回-外道迷真性元神助本心.md"], "origin": "anchor", "anchor": "第033回"}
+{"qid": "Q100", "query": "第八十一回镇海寺心猿知怪", "type": "chapter", "gold": ["docs/01-全书逐回解读/第081回-镇海寺心猿知怪黑松林三众寻师.md"], "origin": "anchor", "anchor": "第081回"}

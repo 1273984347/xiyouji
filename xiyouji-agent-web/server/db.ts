@@ -13,6 +13,16 @@ const dbPath = process.env.AGENT_WEB_DB_PATH
   ? path.resolve(process.env.AGENT_WEB_DB_PATH)
   : path.join(__dirname, '..', 'data', 'chat.db');
 
+/**
+ * W844：对外暴露解析后的库路径，供 backup.ts 做快照。
+ *
+ * 不复算路径是有意的——启动期快照必须备**同一个**库；若两处各算一次，
+ * 环境变量 resolve 差异会让快照悄悄备错文件，而这类错误只在恢复时才发现。
+ */
+export function databasePath(): string {
+  return dbPath;
+}
+
 // 确保 data 目录存在
 import fs from 'fs';
 const dataDir = path.dirname(dbPath);

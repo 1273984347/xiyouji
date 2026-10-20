@@ -123,6 +123,57 @@ cp scripts/rag/.env.lightrag.example .env   # 填入 LLM_BASE_URL / LLM_API_KEY 
 要点：**W326 的 curated 三元组是项目独有资产，应作为种子先行灌入 Neo4j，而非让 LLM 从零重抽**——
 这是本项目相对"裸用 LightRAG"的最大差异点，也是「结合实际」的核心。
 
+## 检索评测（W844 · 题集与复算入口入仓）
+
+> **为什么补这一节**：题集与评测脚本原先只活在本地工地（`tmpe/_inbox/hf-poc/`），
+> 报出去的 recall 数字**不可复算、不可审计**——手工件一旦失传，数字就成了传说。
+> 本批把题集、生成规则与复算脚本一并入仓。
+
+### 题集构成（`eval/queries_100q.jsonl` · 100 条）
+
+| 题源 | 条数 | 生成方式 | 定位 |
+|:---|---:|:---|:---|
+| `origin=frozen` | 30 | 人工撰写，逐行原样迁入（`eval/queries_30q_frozen.jsonl` 与原件字节一致，sha256 `8d9385b5…`） | 接近真实提问（口语/间接/概念），**主指标** |
+| `origin=anchor` | 70 | `eval/make_queries.py` 由**文档标题锚点**派生：问句用模板、`gold` 由脚本解析（只认 BM25 索引内文档） | 偏易（BM25 命中标题即中），**只看标题面覆盖** |
+
+四类机械题分布：person 22 · theme 24 · hardship 12 · chapter 12。
+**两组数字不可跨组比较**，也不可拿全量均值当「真实体验」——这是读这份报告的第一条纪律。
+
+### 复算入口
+
+```bash
+py -3 scripts/rag/eval/make_queries.py --check          # 校验题集与生成规则一致
+py -3 scripts/rag/eval/eval_retrieval.py               # off 档 · 100 题 · 写 scripts/output/rag_eval_report.md
+py -3 scripts/rag/eval/eval_retrieval.py --queries scripts/rag/eval/queries_30q_frozen.jsonl   # 只跑人工 30 题
+```
+
+`--mode dense|rerank|rewrite` 需本地重建向量产物与依赖；缺失时**直接报错退出**（不静默降级成 off，
+那等于把「没测」伪装成「测了」）。确需降级须显式加 `--allow-missing-deps`，报告会标注降级事实。
+
+### 基线（2026-10-21 实测 · 现役索引 768 篇 · 100 题）
+
+| 档位 | 全量 recall@5 | frozen 30 recall@5 | anchor 70 recall@5 | 备注 |
+|:---|---:|---:|---:|:---|
+| `off`（默认·零依赖） | **0.573** | **0.382** | 0.655 | 4 s 跑完·CI 可跑 |
+| `dense`（bge-small-zh + 双路 RRF） | 0.712 | 0.446 | 0.826 | 需 numpy + sentence-transformers + 约 96 MB 模型 + 124 MB 向量产物（合计约 220 MB·均 gitignore） |
+
+### 与历史数字的关系（**必读**）
+
+历史记录写的是「off 0.393 / dense 0.396，dense 仅 +0.003」。复算后 **off 0.382 接近、dense 0.446 差很远**，
+原因查明：历史那次是 `eval_compare.py` 在 **T-01 冻结索引（1,077 篇 · `rag_index_t01.json`）** 上跑的，
+而仓内复算用**现役索引（768 篇 · `docs/**` 现况）**，两者语料面不同，数字**不可互引**。
+
+结论因此要改口径，不是改数字：
+- **「dense 无增益」的旧论据作废**——在现役索引面上，人工题 +0.064、标题派生题 +0.171；
+- **默认档仍为 off**，理由换成**成本与可移植性**（四重依赖 + 约 220 MB 本地体积 + 离线不可复算，与「零依赖 + 可溯源」硬约束冲突）；
+- 「dense 是否升为显式可选档」登记为架构方案 **Q5**，交用户裁决（增益真实，值不值得这个代价是价值判断，不是技术判断）。
+
+### 已知局限
+
+1. 索引面 = `docs/**/*.md` 中经 `_load_docs()` 收录的文档（768 篇）；`site/**` 与 622 页 reader **不在检索面内**，故不作 gold。
+2. 30 题中有 3 题的 gold 含索引外文档；复算时把 gold 收窄到索引内（分母与检索面一致），否则 recall 天生为 0 会把「题集与索引面不一致」糊成「检索失败」。
+3. `anchor` 题的 gold 由标题匹配生成，**同源偏置**存在（问句与标题共享词面）；它的用途是「标题面回归」而非「体验度量」。
+
 ## 许可证说明
 
 LightRAG / GraphRAG 均为 **MIT**，可商用，仅需署名。本目录脚本为项目自有代码，沿用项目整体许可。
@@ -192,6 +243,6 @@ LightRAG / GraphRAG 均为 **MIT**，可商用，仅需署名。本目录脚本�
 **代码**（本目录）：`xiyouji_rag.py`（引擎）· `rag_server.py`（HTTP·含 /route）· `rag_enhance.py`（四档增强）· `page_router.py`（语义路由）· `build_vectors.py`（向量构建）· `graph_seed_neo4j.py`（Neo4j 种子）。
 **图谱数据**：`dataset/yuanqi-graph.json`（W326 三元组）。
 **产物**（scripts/output/·gitignored）：rag_vectors.npy + rag_chunks.jsonl + rag_embed_meta.json · page_vectors.npy + page_index.json · rag_index.json。
-**评测集**：检索 30 条（direct 12 / indirect 13 / concept 5）· 路由 21 条（基线 10 / 中等 8 / 难题 1 / 探针 2）。检索评测脚本在实验区 `tmpe/hf-poc/scripts/eval_compare.py`（未入库）· 路由评测 `py -3.12 scripts/rag/page_router.py --eval`。
+**评测集**：**检索 100 条已入仓**（`eval/queries_100q.jsonl`：人工冻结 30 + 标题派生 70，见下节）· 路由 21 条（基线 10 / 中等 8 / 难题 1 / 探针 2），路由评测 `py -3.12 scripts/rag/page_router.py --eval`。
 **已知两坑**（均已入项目记忆）：① http.server handler 子线程首次 import torch/ST 段错误（exit 139）→ 主线程预热；② `ruff --fix` 的 isort 会把「ST 先于 torch」改坏 → `# noqa: I001` 防守。
 
