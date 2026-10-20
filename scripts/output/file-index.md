@@ -11,6 +11,43 @@
 ---
 
 
+## W826 界面视觉重设计细化规格批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/界面视觉重设计细化规格-v4-2026-10-20.md | W826 | 新建：五项裁决落地细则 + 对比度实算三条修法 + 24 组件规格卡 + v4 令牌终稿 + 11 批迁移清单 + 阶段 1 六判据 |
+| docs/11-方案报告/界面视觉重设计方向-v4-2026-10-20.md | W826 | 改：v1.1 订正——§4.3 对比度表改实算值（ink-3 3.09:1 已达标→撤销加深）· §10 待裁决项改裁决记录 |
+| scripts/_w826_contrast_audit.py | W826 | 新建：WCAG 2.1 对比度实算（17 组比值 + 5 项未达标 + 三条修法取值推导） |
+| scripts/_w826_container_survey.py | W826 | 新建：容器宽度现状测绘（1320 实际主导·1200 仅存规范条文→待迁移面 18 页） |
+| scripts/_w826_migration_plan_check.py | W826 | 新建：迁移批次清单对拍（site/data 87 + 根 8 页 0 漏 0 重 · 每批 ≤10 · reader 622 单批） |
+| scripts/output/_w826_contrast_audit.json | W826 | 产物：对比度实算数据（浅/暗两组比值 + 修法取值） |
+| scripts/output/_w826_container_survey.json | W826 | 产物：容器宽度分布数据（按目录） |
+| scripts/output/_w826_migration_plan_check.json | W826 | 产物：批次清单对拍结果（判定 PASS） |
+| docs/11-方案报告/README.md | W826 | 新增：现役报告索引第 29 行（细化规格）· 篇数 28→29 |
+| docs/00-导读/W批次编号对账表.md | W826 | 认领行（W826·7 格）+ 收官回填（hash 9114d968 + 状态已收官 + CHANGELOG 版段已立）+ W827 现势 bullet |
+| CHANGELOG.md | W826 | 新增 W826 版段（顶段）· 编号规则行 W001-W825→W001-W826 |
+| README.md | W826 | 版本指针同步：当前批次 W825→W826 |
+| STRUCTURE.md | W826 | 版本指针同步：当前批次 W825→W826 |
+| HANDOVER.md | W826 | 版本指针同步：头链 + 「一、当前进度」新增 W826 条目 + 当前 HEAD 句 |
+| docs/00-导读/项目说明.md | W826 | 版本指针同步：头部 + 「当前版本」行 |
+| .github/workflows/README.md | W826 | 版本指针同步：头部版本行 + 里程碑行上限 W825→W826 |
+| CITATION.cff | W826 | 外部引用面：version W825→W826 |
+| site/data/search.html | W826 | 派生面：搜索索引机械刷新（无语义变更） |
+| site/en/search.html | W826 | 派生面：搜索索引机械刷新（无语义变更） |
+| scripts/index.md | W826 | 派生面：目录清单（列本批三个脚本） |
+| scripts/output/index.md | W826 | 派生面：目录清单（列本批三份产物） |
+
+## W825 审查发现第二批修复批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/src/utils/sseStream.ts | W825 | 改：新增 createSseLineSplitter（跨块行缓冲·末尾半行留待下一片+流末冲刷）并由 readChatStream 采用（帧跨片不再整帧丢失） |
+| xiyouji-agent-web/src/utils/sseStream.test.ts | W825 | 新建 7 例：半行不提前吐出 + 流末冲刷幂等 + 200KB 大帧两片还原 + 逐字符切片还原 + 多字节跨片无替换符 + 整帧一次到达回归锚 + 心跳与非法帧跳过回归锚 |
+| xiyouji-agent-web/src/hooks/useChat.ts | W825 | 改：内联 SSE 解析改用共享行缓冲器（与 sseStream 共用单一实现）+ catch 分支双 id 匹配 + finally 兜底复位流式态 + 错误文案追加为文本块 + AbortController 接线与停止/卸载 abort |
+| xiyouji-agent-web/src/hooks/useChat.streaming.test.ts | W825 | 新建 4 例源码级回归锚：catch 双 id 匹配 / finally 复位流式态 / fetch 带 signal 且停止调 abort / 错误文案追加为文本块 |
+| scripts/preflight_check.py | W825 | 改：状态列与 touches 列按内容定位（状态右起紧匹配「已收官/已闭环」形态格 + touches 取末格 + 占位符归一空集）·消除 8 格错位行与占位行造成的幻影在途批次 |
+| tests/unit/test_preflight_check.py | W825 | 新增 4 例：摘要含裸竖线的 8 格行状态与 touches 仍定位正确 / 占位符 touches 归一空集 / 主题含「已收官」不误认状态 / 标准 7 格行解析结果不变 |
+
 ## W824 站内阅读入口打通批（2026-10-20）
 
 | 文件 | W | 说明 |
