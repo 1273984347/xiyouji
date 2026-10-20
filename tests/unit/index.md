@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（24）
+## 文件（25）
 
 ### Python 脚本
 
@@ -37,6 +37,7 @@
 - `test_slice_screenshots.py`
 - `test_tmpe_tidy.py`
 - `test_tool_scripts_cli.py`
+- `test_verify_failclosed.py`
 - `test_verify_registry.py`
 - `test_visualization_data.py`
 
