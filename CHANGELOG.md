@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W814），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W815），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,16 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W815（2026-10-20）：shell 查坑表补两条（PowerShell $ 变量展开 + 引号配对冲突）
+
+> **来源**：用户在 W813/W814 施工后提供 PowerShell `$` 变量展开的处置方案（单引号包裹 / `--%` 停止解析符 / stdin 管道 / 反引号转义），本批据此把该类坑固化进仓内坑表。
+> - **文件**：docs/agent/pitfalls.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w815_spec.json。
+> - **起因**：W813/W814 施工中两次内联 `py -3 -c "..."` 失败（一次 Python 侧报 `SyntaxError: unterminated string literal`、一次 PowerShell 侧报「字符串缺少终止符」），触发一次根因取证。
+> - **pwsh 7.6.7 实证结论（对照实验·非凭记忆）**：① **双引号内 `$变量名` 会被展开成空**——实测 `py -3 -c "print('[$myvar]')"` 得 `[]`（Python 收到空串），改单引号得 `[$myvar]`（原样透传）；**`--%` 停止解析符**同效。② **孤立 `$` 不受影响**——`$` 后不跟合法变量名时 PowerShell 不展开，故正则行尾锚（`r'^ab$'` / `r'^W(\d+)$'`）在双引号内**实测正常**（`['123']`）；即「正则里有 `$`」本身不是坑。③ **两次真实失败的根因是引号配对而非 `$`**——逐片段拆解实测：外层双引号 + Python 侧单引号 → 引号配对被破坏而失败；同一段代码落文件执行 → 正常。④ 因此处置分两层：含 `$变量名` 用单引号或 `--%`；含引号（几乎所有真实逻辑）一律**落 Python 脚本文件再调用**（仓内 W706 场景分层铁律的既定正解）——**内联只适合无引号无 `$` 的极短表达式**。
+> - **用户所给四方案的适用面核对**：`--%` 与单引号在「代码含双引号」时同样失败（引号配对问题依旧存在），故两者只解决「`$` 展开」这一类；stdin 管道（方案三）确实最彻底但改变了调用形态、且仓内已有「落脚本文件」这一等价且更简的路径；反引号转义可读性差故不采。
+> - **附带订正**：W814 收官时漏了认领行状态回填（仍为「进行中」）→ preflight 判定 W814 为在途批次·W815 改同一共享文件被拒（交集拒绝机制按设计生效）·据对账表规则「本会话自己的行允许更新状态列」回填为已收官。
+> - **验证**：坑表两行已落（`docs/agent/pitfalls.md` 第 16-17 行）+ 四组 pwsh 对照实验实测结论一致 + 交付全量门禁 51 段 0 FAIL。
 
 ### W814（2026-10-20）：去品牌扩展批（另两个同类品牌字面全量清除）
 
