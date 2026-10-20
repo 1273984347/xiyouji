@@ -169,3 +169,22 @@ def test_b2_nonzero_exit_fails_unchanged(monkeypatch):
     ctx = _Ctx()
     v._gate_a11y(ctx)
     assert ctx.rep.fails and not ctx.rep.oks
+
+
+def test_w839_skip_result_not_a_failure(monkeypatch):
+    """W839 回归锁（W834 fail-closed 引入的回归）：scope 跳过时 _scoped_run 返回 _SkipResult
+    伪造结果，其 stdout 是「（--scope X 跳过）」提示串——不得送 json.loads 判红，也不得重复上报。"""
+    _patch_run(monkeypatch, result=v._SkipResult("a11y对比", "docs"))
+    ctx = _Ctx()
+    v._gate_a11y(ctx)
+    assert not ctx.rep.fails, "跳过结果不得判红: %r" % ctx.rep.fails
+    assert not ctx.rep.oks, "跳过提示已由 _scoped_run 打印，门禁体不得重复上报"
+    assert not ctx.rep.warns
+
+
+def test_w839_skip_result_simple_gate_harmless(monkeypatch):
+    """旁证：简单委托段收到 _SkipResult 走 rc=0 OK 路径（既有 W698 双行噪声·非故障）。"""
+    _patch_run(monkeypatch, result=v._SkipResult("测试段", "docs"))
+    ctx = _Ctx()
+    v._run_simple_gate(ctx, _gate())
+    assert not ctx.rep.fails
