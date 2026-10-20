@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W810），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W811），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,14 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W811（2026-10-20）：CI 断链修复批（工作流 YAML 歧义语法修复 + 可解析性守卫）
+> **来源**：W806 退役 GoatCounter 时在 `.github/workflows/ci.yml` 新增全站零 goatcounter 引用防回退守卫，step 名写成 `- name: Guard: no GoatCounter references (W806)`——裸标量值内含 ": "（冒号+空格）在 YAML 映射上下文里属歧义语法，GitHub 解析该工作流时直接报「This run likely failed because of a workflow file issue」，run 0 秒失败，且 pull_request 事件**根本不生成 check**（PR 上看不到 CI 结果）。**潜伏机理三项**：① 既有 CI 接线测试（tests/unit/test_ci_wiring.py）全为 grep/regex 型断言，对 YAML 语法无感 → 本地全绿；② ci.yml 的 `on.push` 只含 `main` → dev 分支 push 从不触发 CI → 缺陷潜伏至推送并开 PR 才暴露；③ W806 的验证只跑本地门禁与 pytest，无任何 YAML 解析步骤。**暴露面声明**：因该工作流此前不可解析，W803-W810 整段从未被 CI 实跑过（dev push 不触发 CI·PR 因工作流解析失败不生成 check）——本批修复后 PR 的 CI 方为该段的首次实跑。
+> - **修复**：step 名加引号（`- name: "Guard: no GoatCounter references (W806)"`）→ ci.yml 重新可解析（本地 PyYAML 解析通过·10 个 job 全在：pages-smoke / lighthouse-performance / a11y-audit / dependency-scan / code-quality / pytest-unit / verify-delivery / e2e-interaction / agent-web-build / desktop-build）。
+> - **守卫**：`tests/unit/test_ci_wiring.py` 增 W811 守卫（12 例全过）——J1 无制表符缩进（YAML 禁制表符）/ J2 映射项 name 的裸标量值不得含 ": "（加引号即合法）/ J3 PyYAML 可用时做全量解析（加严；不可用时由 J1+J2 覆盖本风险类·非静默跳过）。**负样本实证**：把 ci.yml 还原成 W806 形态（去掉引号）后跑真实守卫函数，按预期报错并指到 `ci.yml:353`；真实 9 个 workflow 文件全过。
+> - **验证**：守卫单测 12 passed + 负样本实证按预期报错（指到 ci.yml:353）+ 真实 9 个 workflow 全过 + pytest 全量 726 passed / 3 skipped + verify_delivery 全量 51 段 0 FAIL。
+> - **状态**：已落地（级联+提交按批次流程执行）。
+> - **文件**：.github/workflows/ci.yml、tests/unit/test_ci_wiring.py、docs/00-导读/W批次编号对账表.md、scripts/output/index.md、scripts/output/README.md、scripts/output/_w811_spec.json。
 
 ### W810（2026-10-20）：站内搜索死代码清理批
 > **来源**：W807 刷新站内搜索索引时遗留的清理候选——旧 `window.SEARCH_INDEX = [...]` 数组在换成 `SITE_SEARCH_INDEX_ZH/EN` 新常量后成为零引用死重（zh 2044 字符 / en 2328 字符），每页各背 2KB 余量。
@@ -359,7 +367,7 @@
 > - **文件**：scripts/gen_folder_docs.py、docs/INDEX.md、scripts/output/script-coverage-baseline.txt、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、CITATION.cff、scripts/output/file-index.md、site/dukou-engine.html、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、.github/workflows/README.md、docs/00-导读/项目说明.md。**目录索引件共 318 份**（清单类 167、导读类 151·按顶层分布于 .github / archive / assets / dataset / docs / hyperframes / mcp-server / packaging / references / scripts / site / source / tests / timeline / tools / xiyouji-agent-web 及仓库根）——逐文件全清单登记于 scripts/output/file-index.md 的 W779 段，运行 `python scripts/gen_folder_docs.py --dry-run` 可复现。
 
 ### W778（2026-10-17）：第 41 篇改进项落地批
-> **来源**：用户令「开始优化」——第 41 篇复盘报告 §8 计划中 WorkBuddy 归属项（T-41-01/02/04、P-41-01、T-41-03）——三项落地、一项撤销（T-41-03 见下）。动工前 preflight PASS（W778 认领·零交集）。
+> **来源**：用户令「开始优化」——第 41 篇复盘报告 §8 计划中 主会话归属项（T-41-01/02/04、P-41-01、T-41-03）——三项落地、一项撤销（T-41-03 见下）。动工前 preflight PASS（W778 认领·零交集）。
 > - **P-41-01 + P-41-04 合成 pitfalls 新条目（流程节 6→7·总 40→41）**：`docs/agent/pitfalls.md` 新增「**latent 三问 + 双平台断言禁例**」——① 接线缺失型（K11 动画规则自 W674 潜伏 6 周·E2E 零接线·查法=列套件在 `run:` 块出现次数）；② 平台序差型（INDEX 门禁 CI 红/本地绿·`sorted(Path)` 两平台语义差·查法=显式键+双平台可判负样本）；③ 引号腐蚀型（`c === '"'` 被吞成空串比较·分支死代码五批·查法=逐字节验字符+五维对拍）。**双平台禁例**：盘符存在性/大小写不敏感排序/`os.name` 默认值断言在 Windows 负样本不可辨——必须登记「真实执行位=CI（Linux）」并 docstring 注明（处置例 test_tmpe_tidy::test_check_same_volume）。**AGENTS §4.3 三处计数同步**（阅读契约 38→41 条 / 流程节 6→7 / 总 38→40→41 修述）。
 > - **T-41-02 流水线文档增补两节**：`docs/10-方法论沉淀/批次交付流水线.md` 新增 **§七 外部产出落地七步**（提取 round-trip→静态契约核验→旧版快照→字节级落地→对拍→全量验证→差异定性表·红线=禁止直接 cp 覆盖）与 **§八 重构/替换的对拍 SOP**（五维矩阵表：self-test/纯函数面/子集/全量/产物格式·各带归一化与降级路径 + 差异判定三规则：抖动归一/契约零容忍/覆盖集合变化须追根因且不得回滚修复）；原 §七 关联文档顺延 §九（全仓无 §七 引用·零断链）。
 > - **T-41-01 对拍模板落地**：`tmpe/_templates/duipai/`（duipai.py：`snapshot` 采集 stdout/stderr/exit/meta + 计时归一化；`compare` 逐行或多重集 diff + 退出码判定；README 快速用法与判定规则）——**自测通过**：计时差异（1.5s/42ms vs 9.9s/99ms）归一后 PASS·新增内容行 FAIL+exit 1。
@@ -708,7 +716,7 @@
 > - **T2 接线（rewrite 档）**：retrieve_ranked 内路由——短实体不调 LLM（省改写调用与二次重排）、退化为主链（rerank 档行为）；跳过时 stderr 提示「智能路由：短实体查询→主链」。
 > - **T3 单测与文档**：test_rag_enhance.py 扩十二例（短实体/描述句/「的」结构/疑问词/长度边界）；README rewrite 档行与说明更新（全量路由后 @5 +0.041 / @10 +0.107）。
 > - **附：W744 计数更正**：W744 段旧计数 390 系离线预置四例加入前的数值，已更正为 394（CHANGELOG/HANDOVER/AGENTS/_w744_spec 四面同步随本批入库）；教训=新增测试落地后须重跑全量再定稿验证行计数。
-> - **附：仓库卫生**：.gitignore 增 `.workbuddy/` 忽略（本地记忆/自动化文件所在工具目录·此前未忽略·本批实测 add -A 会误暂存·已撤出改显式清单）。
+> - **附：仓库卫生**：.gitignore 增 本地工具目录忽略（本地记忆/自动化文件所在工具目录·此前未忽略·本批实测 add -A 会误暂存·已撤出改显式清单）。
 > - **验证（全绿）**：双冒烟——「白骨精」短实体跳过改写（stderr 提示+主链精准命中）、「把师徒四人装进袖子里的老道士」走改写（Q24 治愈复现·top2=镇元大仙）；pytest 406 passed；ruff scripts/ 全过；verify_delivery 全量四十六段 OK。
 > - **状态**：已落地（级联+提交后以 gh run list 为准）。
 > - **文件**：scripts/rag/rag_enhance.py、tests/unit/test_rag_enhance.py、scripts/rag/README.md、docs/00-导读/W批次编号对账表.md、HANDOVER.md、AGENTS.md、scripts/output/file-index.md、scripts/output/_w745_spec.json。

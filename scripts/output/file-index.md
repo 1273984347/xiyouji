@@ -11,6 +11,13 @@
 ---
 
 
+## W811 CI 断链修复批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/ci.yml | W811 | 修复：step 名加引号（W806 裸标量含冒号空格致 YAML 映射歧义·GitHub 0 秒失败该 workflow） |
+| tests/unit/test_ci_wiring.py | W811 | 增：工作流 YAML 可解析性守卫（三判据·负样本实证·CI 恒生效不依赖 PyYAML） |
+
 ## W810 站内搜索死代码清理批（2026-10-20）
 
 | 文件 | W | 说明 |
