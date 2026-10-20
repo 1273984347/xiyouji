@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W817），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W820），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,45 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W820（2026-10-20）：干扰治理日志补登与机制自身缺陷修复批
+
+> **来源**：用户问「项目内多 Agent 并行是怎么处理的？」→「为什么从来没有更新记录呢？」→ 查明 §8 干扰日志表最后一行停在 2026-10-16，而 10-17~10-20 四天 128 个提交零登记；用户令「按顺序做」（三步：补登 / 加机器触发点 / 改判定口径），本批为第一步与第三步（第二步涉管控脚本另立批）。
+> - **文件**：docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w820_spec.json。
+> - **断档事实（取证·非凭记忆）**：§8 表原 4 行全在 10-14~10-16，末行 10-16 20:42（e4ff4faf）；此后 10-17/18/19/20 各 21/31/26/28 提交共 **128 个**，零登记。而 W741（5ed27784）自定的**强制录入触发**明列三种情形——① 开工 `git status` 发现非本会话变更 ② `safe_commit` 触发重试 ③ preflight 交集拒绝触发——**该期间至少发生两次**：W812 撞号让号（14eeabcd 提交信息含「让号/撞号/preflight/交集/并行会话」五词）与 W815 被 preflight 交集拒绝（4bc6dede 载「W814 收官漏认领行状态回填 → 致 W815 被 preflight 交集拒绝（机制按设计生效）·已回填」）。
+> - **补登 4 行（每行带可核验证据·如实标注延迟登记）**：G1-B 撞号让号（W812·commit 14eeabcd）/ G1-C 机制自身缺陷致交集拒绝（W815·commit 4bc6dede）/ G1-A 开工观测漂移（W820 开工见 36 条变更·30 件已暂存全为 W818 产物·preflight 输出实证）/ G1-D 机制自身缺陷（认领行列数错位·下述）。**延迟登记本身是该机制的第一个真实样本**——它暴露的正是「无机器触发点则必然掉档」这一结构问题。
+> - **判定口径加严（治「不完整被误读为低发」）**：§2 原写「空表本身也是有效结论（两周零事件 = 共享面事件低于阈值 → P1 缓建坐实）」——该结论**只在登记完整的前提下成立**。现补：**表不完整（应有登记行而缺失）同样不是有效结论**，10-28 复盘时须先验**登记完整性**（对照 §2 强制触发三项逐条回查该窗口提交与门禁输出），完整性不达标时判为**度量失败**并重记，**不得据残表做 P1 触发决策**。实证依据：按残表计算会把 10-17~10-20 的高发期误判为低发期并错误坐实 P1 缓建（实际发生 ≥2 次强制触发）。
+> - **机制自身缺陷登记（G1-D·本批自查发现）**：**W819 认领行有 8 个单元格（标准 7 格）**——状态列位置多写了一个「W819」字段，致后三格整体右移：状态列='W819'·认领会话列='**进行中**'·touches 列='主会话 2026-10-20'·**真实 touches 落到第 8 格**（`preflight_check.py` 的 `parse_ledger` 读 `cells[6]` 读不到）→ **该批声明的共享面完全不在交集判定内**（别的批次改 docs/11-方案报告/ 等面不会被拦）；在途判定侥幸成立仅因「W819」不以「已收官」开头（`is_inflight` 判 True）——**属偶然而非设计**。按对账表规则「不改他方行」，本批**不擅改 W819 行**，仅登记发现、留待其收官时由该批自修。
+> - **本批自身的机制遵循**：认领行按表头规则④「对账表追加认领行属 append 安全操作·不列」——初次认领时误列了对账表致 preflight 判与在途 W818 冲突（exit 1），据规范订正 touches 后放行；动工前 `preflight_check.py --touches <路线图> --self W820` 复跑 PASS（与在途 W818/W819 无交集）；提交用显式 pathspec，**不碰对方在途件**（工作树 36 条变更中 30 件为 W818 产物·本批全程规避）。
+> - **验证**：§8 事件行 4→**8 行**（补登 4 行）+ §2 口径加严段已落 + 交付全量门禁 51 段 0 FAIL。
+
+### W819（2026-10-20）：界面视觉重设计方向批（v4 刻本秩序 · 五轴决策 + 零外域视觉预览）
+
+> **来源**：用户令「帮我给界面出一版重设计：视觉层级、配色与字体体系、间距栅格、组件样式统一都要升级，保留原有功能结构不乱动，先出设计方向再细化」。
+> - **文件**：docs/11-方案报告/界面视觉重设计方向-v4-2026-10-20.md、docs/11-方案报告/v4-design-language-preview.html、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、scripts/_w819_design_audit.py、scripts/output/_w819_design_audit.json、site/data/search.html、site/en/search.html、scripts/index.md、scripts/output/index.md。
+> - **取证①（分层盘点·`scripts/_w819_design_audit.py` 实跑·2026-10-20）**：857 页按「公共层 / 页面层」分层——公共层 INLINED CSS 覆盖 **330 页 · 15,425,481 B**（单页最大 47,808 B · 裸 hex **72,934** 个）；页面层 3,264,180 B。
+> - **取证②（页面层自建同名核心组件·页数）**：`.kpi-card` **119** · `.chart-block` **98** · `.insight-box` **79**（DESIGN.md §4.8 有规范而 system.css 实现 **0** 处）· `.hero` **58** · `.section` **35** · `.table-wrap` **25** · `.empty-state` **25** · `.badge` 6 · `.btn` 6 · `.chart-tooltip` 5（违 §5.4「禁页面私有 tooltip 盒」契约）。
+> - **取证③（间距无刻度）**：`site/tokens.css` 的 `--space*` 令牌命中 **0**；页面层间距字面量 Top25 合计 20,201 处，其中刻度外值六类（9/34/26/22/5/30px）合计 **2,760** 处；容器宽度四档并存（760/1200/1320/1536）。
+> - **取证④（同名组件两套异形）**：`site/dashboard.html` 自建 `.kpi-card`/`.filter-tab`/`.search-box`/`.category-badge` 与 system.css 并存（padding 22/20px · 数字 34/32px · 朱砂/墨色）。
+> - **方向决策（五轴）**：A 视觉层级＝页级五段式（eyebrow→title→lead→meta→action）+ 区块三段式 + 层级三杠杆（留白 96/32/16/8 · 墨色深浅 · 朱砂实底每页 ≤3 处）；B 配色＝四族角色（纸/墨/彩/夜）+ 三档色阶统一 color-mix + 图表色板双组驱动暗色（替代约 200 条 hex 补丁表）+ 对比度硬指标；C 字体＝宋/黑/等宽三族分工保留 + 九个排版角色 + CJK 行高 1.80 + 字重预算（黑体只 400/500）；D 间距栅格＝4px 基准十三级 + 语义别名 + 容器三档（760/1120/1320）+ 12 栏栅格；E 组件统一＝24 组件清单 + 五态规格卡 + dashboard 第二套回收 + 补齐缺实现组件 + 新增第 47 槽门禁「页面层禁覆盖核心组件」。另附六阶段落地路线与五个待用户裁决项（对比度基线 / 朱砂实底限额 / 容器档位 / 夜读模式地位 / 迁移节奏）。
+> - **视觉预览**：`docs/11-方案报告/v4-design-language-preview.html`（45,691 B · 零外域依赖 · file:// 双击直开 · 浅色/暗色双主题 · 现状 vs 提案逐项对照 · 含整页骨架样张）。
+> - **范围纪律**：本批**只出方向**——`site/` 857 页**视觉 0 改动**（仅搜索索引 2 页机械刷新，派生面无设计变更）· `DESIGN.md` 宪法 0 改动 · `tokens.css`/`system.css` 0 改动 · DOM 类名与功能结构 0 改动（用户硬约束「保留原有功能结构不乱动」）。
+> - **验证**：盘点脚本实跑复现全部计数（`py -3 scripts/_w819_design_audit.py` 退出 0 · JSON 落 `scripts/output/_w819_design_audit.json`）· 预览页自检全过（CSS 括号/引号平衡 · 0 外域引用 · 本地字体文件存在 · 6 个锚点与文档链接可解析）· 第 46 门禁搜索索引 0 FAIL（zh 827 · en 869）· `generate_csp.py --check` 856 页 0 漂移 · 第 31 门禁 0 FAIL。
+> - **状态**：已落地（本地提交·未推送）；方向文档见 `docs/11-方案报告/界面视觉重设计方向-v4-2026-10-20.md`（五轴决策 + 六阶段路线 + 五个待裁决项 + 复算附录）；**待用户裁决后进入细化阶段**（令牌 v4 纯加法 → 组件层 v4 → 逐页迁移 → reader 一次改造 → 门禁固化）。
+
+### W818（2026-10-20）：静态站前端框架化选型评估批
+
+> **来源**：用户令「技术选型对比：候选方案的定位与生态、核心能力覆盖度、性能与成本、上手成本与踩坑记录、长期维护活跃度都对齐，最后给一个推荐结论」，并经四项确认（问题域=静态站与可视化页是否值得前端框架化或换渲染方案 / 候选由本批给出并排序 / 硬约束=Windows 本机可跑且零额外付费仅宽松许可 / 交付形态=落仓正式文档并同步治理面与跑门禁）。
+> - **文件**：docs/11-方案报告/静态站前端框架化选型对比-2026-10-20.md、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、STRUCTURE.md、scripts/_w818_inventory.py、scripts/_w818_file_protocol_probe.py、scripts/index.md、scripts/output/_w818_spec.json。
+> - **取证①（现状盘点·`scripts/_w818_inventory.py` 实跑）**：site 全站 857 页（site/data 88 + site/en 138 + site/reader 622 + 根 9）总体积 49,334,618 B（47.05 MB）；site/data 88 页合计 9,272,531 B（9.27 MB）·均值 110,483 B（107.9 KB）·中位 103,109 B（100.7 KB）·最大 373,002 B（relationships.html）；内联 <style> 块 358（88/88 页）·内联 <script> 块 183（88/88 页）·外链 script 623·CSP meta 88 页全覆盖·**type=module 脚本 0 页**（现役资产天然适配 file://）·on* 内联事件属性 7 处/3 页；EMBEDDED 标记 88/88 页·fetch 调用 59/88 页（59 页为「fetch + 回退」双态）；本地化资产 text-search-app.js 2,177,796 B + three.r128.min.js 603,445 B + d3.v7.min.js 279,706 B；**site/reader 622 页（10,718,220 B）为 scripts/build_reader.py 生成物** ⇒ 迁移面从「857 页手改」收缩为「87 手写可视化页 + 138 EN 页 + 9 根页 + 2 个生成器」。
+> - **取证②（file:// 三判据·`scripts/_w818_file_protocol_probe.py` 实测）**——Chromium + Playwright 1.63.0：判据 A `<script type="module" src>` 被 CORS 拦截（`origin 'null'`·`net::ERR_FAILED`·脚本零执行）·判据 B classic `<script src>` 正常执行 ·判据 C `fetch('./x.json')` 报 `URL scheme "file" is not supported` ⇒ 59 页双态回退是必需设计而非冗余。
+> - **取证③（构建链产物对照·Vite 8.3.4 + Node v24.14.0 本机实跑）**：P1 默认 ESM 构建（index.html 238 B + assets/index-*.js 728 B）→ file:// 直开**失败**（CORS 拦截·DOM 停在 pending）·P2 加 vite-plugin-singlefile 全量内联（933 B 单文件）→ **通过** ·P3 React 19.3.1 + singlefile（219,875 B = 214.7 KB 空页）→ **通过**；对照现役单页均值 107.9 KB ⇒ React 路线单页体积 ×1.99 起，87 页逐页内联则全站 +18.25 MB。三个实测坑：默认 ESM 产物违 file:// 铁律 · singlefile 内联后仍保留 `type="module"` 属性（不可凭「已内联」判定可用）· 构建入口与 config 绑定错（rc=0 不等于产物合契约）。
+> - **取证④（生态一手数据·npm registry + GitHub API 当刻实取）**：vite 8.3.4（MIT·近周 119,005,168 下载·83,415 stars·push 2026-10-20）·react 19.3.1（MIT·116,163,376·251,450 stars）·astro 7.4.1（MIT·4,784,961·63,337 stars）·lit 3.3.3（BSD-3-Clause·3,965,350·末次发版 2026-05-14 为四候选最慢）·vite-plugin-singlefile 2.3.4（MIT·1,199,696）·typescript 7.0.2（Apache-2.0）—— 许可全属宽松许可且上游均活跃 ⇒ **两条用户硬约束对五候选全部放行**，不构成淘汰理由。
+> - **结论（加权 30/25/20/15/10·能力覆盖度/上手成本/维护活跃度/性能成本/定位生态）**：**A 维持现役原生管线 4.50 > B 局部构建化 4.30 > E Lit 3 2.70 > C React 19 全面框架化 2.65 > D Astro 7 islands 2.45**。推荐路线三档：档 0 维持现役并把「file:// 直开 + 体积上限 + 第 43 槽真渲染」固化为新建页准入检查 ·档 1 **新建页可走 Vite 8 + TypeScript 7 + singlefile（存量 87 页不迁）** ·档 2 若档 1 连续 3 个新页验证有效再评估迁移 build_reader.py 生成器（生成物·迁移面最小）。明确不做：87 页可视化页迁 UI 框架 ·全站迁静态生成器 ·在 site/ 引入 type=module 脚本 ·以外链共享 JS 换体积。
+> - **处理声明（隐性强约束）**：用户未把「file:// + 零外域依赖」列入硬约束选项，但该条是 AGENTS.md §6-5 第 5 条仓内铁律，本批按一票否决处理并在报告 §2.2 显式声明；另按用户「上手成本与长期维护活跃度优先于性能」的口径自设权重 30/25/20/15/10（报告 §1.2 与 §5.6 逐项列出依据，可由用户改权重重算）。
+> - **范围纪律**：本批为只读评估 + 新增 1 份报告 + 2 个一次性取证脚本（`scripts/_*.py`·按 AGENTS §2 不入 CI 门禁）+ 治理面计数订正；**未改 site/ 任何页面、未改 xiyouji-agent-web/ 代码、未改管控脚本（verify_delivery.py 等按文档规范 §11.2 禁擅改）、未改 archive/** 面。
+> - **验证**：两份取证脚本实跑复现报告全部计数（inventory 退出 0）·file:// 探针三判据与预期一致（退出 0）·`py -3 scripts/verify_delivery.py` 全量 51 段 0 FAIL ·`py -3 scripts/generate_csp.py --check` 0 漂移 ·`py -3 scripts/check_doc_sync.py` 0 FAIL ·`py -3 scripts/stats.py --check` 零差异 ·pytest 全量通过。
+> - **状态**：已落地（本地提交·未推送）；终稿报告见 `docs/11-方案报告/静态站前端框架化选型对比-2026-10-20.md`（六节正文 + 五维对齐表 + 加权排序 + 推荐路线三档 + 明确不做清单 + 复算附录）。
 
 ### W817（2026-10-20）：agent-web 工具层边界加固批（会话库黑名单 cwd 无关 + symlink 逃逸 + git --output 空格形态 + 遍历面过黑名单）
 

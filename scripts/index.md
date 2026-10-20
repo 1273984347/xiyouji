@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（209）
+## 文件（213）
 
 ### Markdown 文档
 
@@ -120,6 +120,10 @@
 - `_w757_footer_bump.py`
 - `_w757_negative_check.py`
 - `_w757_rename_cascade.py`
+- `_w818_file_protocol_probe.py`
+- `_w818_inventory.py`
+- `_w819_design_audit.py`
+- `_w820_db_schema_probe.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
