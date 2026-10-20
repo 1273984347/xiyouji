@@ -61,10 +61,8 @@ def parse_ledger(text):
         if not m:
             continue
         cells = [c.strip() for c in line.strip().strip("|").split("|")]
-        status = cells[4] if len(cells) > 4 else ""
-        touches = set()
-        if len(cells) > 6 and cells[6]:
-            touches = {t.strip() for t in cells[6].split(",") if t.strip()}
+        status = _locate_status(cells)
+        touches = _locate_touches(cells)
         rows.append({"w": int(m.group(1)), "status": status, "touches": touches})
     return {"max_w": max(rows_table) if rows_table else None,
             "bullet_w": int(bullets[-1]) if bullets else None,
@@ -72,6 +70,45 @@ def parse_ledger(text):
 
 
 DONE_PREFIXES = ("已收官", "已闭环")
+
+# W825：状态列与 touches 列的**内容定位**（禁按固定下标 cells[4]/cells[6]）。
+#
+# 成因（实测 W764 行·8 格）：认领行的「主题/摘要」里若含裸竖线，Markdown 按竖线分列
+# → 该行被切成 8/9 格（标准 7 格）→ 固定下标随即读错：
+#   ① 状态读到别列（cells[4] 落在摘要残段上·把「W764」当状态）→ **已收官批次被永久
+#      判为在途批次**（在途列表出现永不平息的幻影·误导后续批次判断）；
+#   ② touches 读到认领会话列（cells[6] = 「DSH 2026-10-16」）→ 非路径垃圾串。
+# 修法（三条，均不改变语义·只改定位方式）：
+#   ① 状态 = 右起首个**紧匹配**「已收官/已闭环」形态的格（无则回退 cells[4]）——
+#      紧匹配（整格即状态·可带 hash 括注）避免主题里偶然出现「已收官」三字被误认；
+#   ② touches = **末格**（touches 是固定末列·摘要里的裸竖线只让前列右移·末格不动）；
+#   ③ touches 占位符（—/-/无）归一为空集（历史「作废」行以「—」占位·原实现被当成
+#      一个路径条目·使该行永久出现在在途列表）。
+_TOUCHES_PLACEHOLDERS = {"—", "-", "－", "无", "n/a", "N/A", "(空)", "（空）"}
+_STATUS_CELL_RE = re.compile(r"^(?:已收官|已闭环)(?:（[^）]*）)?$")
+
+
+def _locate_status(cells):
+    """状态列定位：右起首个紧匹配「已收官/已闭环」形态的格；无则回退固定下标 cells[4]。
+
+    右起扫描的原因：状态列在主题列之右·若主题里偶然出现「已收官」三字·
+    右起扫描会优先命中真正的状态格。紧匹配（整格即状态）进一步排除误认。
+    """
+    for c in reversed(cells):
+        norm = re.sub(r"[\s*]+", "", c)
+        if _STATUS_CELL_RE.match(norm):
+            return c
+    return cells[4] if len(cells) > 4 else ""
+
+
+def _locate_touches(cells):
+    """touches 列定位：末格（列序固定·末列恒为 touches）；占位符归一为空集。"""
+    if len(cells) < 7:
+        return set()
+    last = cells[-1].strip()
+    if last in _TOUCHES_PLACEHOLDERS:
+        return set()
+    return {t.strip() for t in last.split(",") if t.strip()}
 
 # W821：§8 干扰日志的机器触发点提示（真触发才输出·用户裁决 2026-10-20）。
 # 背景：W741 立的两周干扰日志（路线图 §8）自 2026-10-16 起断档 4 天 128 提交零登记，
