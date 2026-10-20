@@ -1,0 +1,15 @@
+{
+  "batch": "W810",
+  "date": "2026-10-20",
+  "title": "W810 站内搜索死代码清理批",
+  "desc": "站内搜索两页 legacy 死数组清理",
+  "head_entry": "2026-10-20（W810 站内搜索死代码清理批）",
+  "head_sentence": "两页 legacy 死数组清除，各 −2.3KB，零引用",
+  "changelog_body": "\n> **来源**：W807 刷新站内搜索索引时遗留的清理候选——旧 `window.SEARCH_INDEX = [...]` 数组在换成 `SITE_SEARCH_INDEX_ZH/EN` 新常量后成为零引用死重（zh 2044 字符 / en 2328 字符），每页各背 2KB 余量。\n> - **零引用三项核查**：① 页面 JS 只读 `SITE_SEARCH_INDEX_ZH/EN`（zh:1303 / en:1287），legacy 数组零引用；② `scripts/validate_en.py` 只认 `/* SEARCH_INDEX:BEGIN */…END` 包裹区，不读 legacy 数组；③ 生成器 `_gen_search_index.py` 的同名匹配仅为「缺标记时的兜底注入锚点」，而两页标记齐全故该分支不可达（生成器面不动·不属本批范围）。\n> - **落地**：两页各删 1 行（−2271 / −2329 字节）+ `generate_csp.py` 重算该 2 页内联脚本哈希（恰好 2 页更新·其余 854 页 0 漂移）。**范围纪律**：本批不新增门禁、不改生成器与页面逻辑，纯粹删死代码。\n> - **验证**：CSP `--check` 856 页 0 漂移 + 第 46 槽搜索索引新鲜度门禁 0 FAIL（zh 822·en 864 与生成器实算一致·删除未触及载荷块）+ check_structure 855 文件 1411 style 块 + check_js_syntax 855 文件 + e2e 站点质量套件全过（S1 rows=23 errors=[]·S1b rows=4 exactHit=true·与改动前逐字一致）+ pytest 719 passed / 3 skipped + verify_delivery 全量 51 段 0 FAIL。\n> - **状态**：已落地（级联+提交按批次流程执行）。\n> - **文件**：site/data/search.html、site/en/search.html、docs/00-导读/W批次编号对账表.md、scripts/output/_w810_spec.json。\n",
+  "milestone_block": "- **W810 站内搜索死代码清理批**：\n  - 起因：W807 换用 SITE_SEARCH_INDEX 新常量后，旧 `window.SEARCH_INDEX` 数组成零引用死重（每页约 2KB 余量）\n  - 落地：两页各删 1 行 + CSP 哈希重算（恰好 2 页更新·854 页 0 漂移）·不动生成器与页面逻辑\n  - 验证：CSP 0 漂移 + 第 46 槽门禁 0 FAIL + e2e 与改动前逐字一致 + pytest 719 passed + verify 全量 51 段 0 FAIL\n",
+  "agents_note": "二〇二六年十月二十日（W810）站内搜索死代码清理批：W807 刷新站内搜索索引时遗留的清理候选——旧 window 空格 SEARCH 空格 INDEX 赋值数组在换成新常量后成为零引用死重，每页各背两千余字节余量；本批先做零引用三项核查（页面脚本只读新常量、旧数组未被校验脚本读取、生成器同名匹配仅为缺标记时的兜底注入锚点而两页标记齐全故不可达），确认后两页各删一行并重算该两页内联脚本哈希，恰好两页更新而其余八百五十四页零漂移；验证等于内容安全策略零漂移加第四十六槽搜索索引新鲜度门禁零失败加端到端套件与改动前逐字一致加全量测试七百一十九通过三跳过加交付校验全量五十一段零失败",
+  "file_index_rows": [
+    "| site/data/search.html | W810 | 删 legacy 死数组 `window.SEARCH_INDEX = [...]`（−2271 字节）+ CSP 哈希重算 |",
+    "| site/en/search.html | W810 | 删 legacy 死数组 `window.SEARCH_INDEX = [...]`（−2329 字节）+ CSP 哈希重算 |"
+  ]
+}

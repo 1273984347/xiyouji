@@ -11,6 +11,23 @@
 ---
 
 
+## W810 站内搜索死代码清理批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/search.html | W810 | 删 legacy 死数组 `window.SEARCH_INDEX = [...]`（−2271 字节）+ CSP 哈希重算 |
+| site/en/search.html | W810 | 删 legacy 死数组 `window.SEARCH_INDEX = [...]`（−2329 字节）+ CSP 哈希重算 |
+
+## W809 站内搜索索引新鲜度门禁挂载批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_search_index_fresh.py | W809 | 新建：站内搜索索引新鲜度门禁（第 46 槽·三判据·fail-closed·只读不写） |
+| scripts/_gen_search_index.py | W809 | 函数化：算与写分离（build_indexes 纯计算 + main 写盘·挂槽前置） |
+| tests/unit/test_check_search_index_fresh.py | W809 | 新建：第 46 槽门禁专项单测 5 例（含 fail-closed 与挂载一致性） |
+| scripts/verify_delivery.py | W809 | 挂载第 46 槽门禁（元组 + 段名表 + docs/site 两面 scope 归属） |
+| docs/agent/gates.md | W809 | 新增第 46 槽门禁定义（编号三方对账的一端） |
+
 ## W808 Web Agent 全栈加固批（2026-10-20）
 
 | 文件 | W | 说明 |
