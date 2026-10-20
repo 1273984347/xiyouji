@@ -11,6 +11,22 @@
 ---
 
 
+## W849 性能门禁挂槽批（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_perf_shadow.py | W849 | 新增：性能影子槽判据件（六项静态成本代理·C1 缺页即红·--record/--ingest/--self-test） |
+| scripts/verify_delivery.py | W849 | 挂第 47 槽「性能影子」（严格委托段 + EXPECTED + site scope）；段数注释 51→52 订正 |
+| scripts/output/perf_shadow.json | W849 | 新增：影子基线（按批样本·同批重跑覆盖） |
+| AGENTS.md | W849 | §4.2 门禁清单补第 47 条 |
+| docs/agent/gates.md | W849 | 第 47 条全量定义 + 标题计数 45→47 订正 + 速查表分组 27-47 |
+| pytest.ini | W849 | collected 标记 786→787（新脚本入 import 冒烟参数化）·段数 51→52 |
+| README.md | W849 | gate_count 内联标记 46→47 |
+| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W849 | gate_count 内联标记 46→47 |
+| scripts/output/stats.json | W849 | gate_count 47 / pytest_collected 787 刷新 |
+| scripts/output/_w849_spec.json | W849 | 本批 spec 十字段 |
+| docs/00-导读/W批次编号对账表.md | W849 | 认领行与收官回填 |
+
 ## W848 Q5 裁决落档批（2026-10-21）
 
 | 文件 | W | 说明 |
