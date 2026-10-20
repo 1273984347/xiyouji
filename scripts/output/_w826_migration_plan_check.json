@@ -1,0 +1,182 @@
+{
+  "batches": {
+    "B1": {
+      "theme": "根页与入口",
+      "declared": 8,
+      "pages": [
+        "index",
+        "guide",
+        "curated",
+        "dashboard",
+        "dukou-engine",
+        "rum-viewer",
+        "visit-viewer",
+        "404"
+      ]
+    },
+    "B2": {
+      "theme": "结构与回目",
+      "declared": 10,
+      "pages": [
+        "chapter-structure-graph",
+        "chapter-stats",
+        "story-timeline",
+        "timeline",
+        "relationships",
+        "81-hardships",
+        "81-hardships-view",
+        "hardship-heatmap",
+        "hardship-difficulty-heatmap",
+        "methodology-matrix"
+      ]
+    },
+    "B3": {
+      "theme": "人物主线",
+      "declared": 9,
+      "pages": [
+        "character-appearance",
+        "character-presence-timeline",
+        "character-semantic-network",
+        "character-dynamic-network",
+        "character-sentiment-arc",
+        "character-relationship-3d",
+        "character-relationship-3d-view",
+        "dialogue-sentiment",
+        "ai-dialogue"
+      ]
+    },
+    "B4": {
+      "theme": "妖怪与神力",
+      "declared": 10,
+      "pages": [
+        "monster-background",
+        "monster-capability-radar",
+        "monster-ecology-network",
+        "monster-female-network",
+        "monster-hierarchy-network",
+        "monster-sociology",
+        "monster-victims-network",
+        "ecology",
+        "heaven-power-network",
+        "underworld-power-network"
+      ]
+    },
+    "B5": {
+      "theme": "取经与行迹",
+      "declared": 10,
+      "pages": [
+        "guanyin-six-roles-network",
+        "pilgrim-team-dynamic-network",
+        "pilgrim-team-psychology-arc",
+        "journey-route",
+        "journey-geo-3d",
+        "journey-geo-semiotics",
+        "journey-map-interactive",
+        "journey-spacetime",
+        "customs-pass-route",
+        "cave-estate"
+      ]
+    },
+    "B6": {
+      "theme": "叙事学",
+      "declared": 10,
+      "pages": [
+        "narrative-experiment",
+        "narrative-rhythm-curve",
+        "narratology-12d-network",
+        "narratology-16d-network",
+        "intertextuality-network",
+        "deconstruction",
+        "six-senses-narratology-network",
+        "poetry-rhythm-analysis",
+        "music-structure",
+        "language-style-radar"
+      ]
+    },
+    "B7": {
+      "theme": "文本与思想",
+      "declared": 10,
+      "pages": [
+        "text-evolution",
+        "text-search",
+        "linguistics",
+        "famous-time-travel",
+        "cultural-misreading",
+        "century-dialogue",
+        "counterfactual",
+        "philosophy",
+        "jurisprudence",
+        "karma-reincarnation"
+      ]
+    },
+    "B8": {
+      "theme": "跨学科与实验",
+      "declared": 10,
+      "pages": [
+        "cognitive-psychology",
+        "social-media",
+        "business-model",
+        "game-webnovel",
+        "mbti-evolution",
+        "risk-project",
+        "concept-device",
+        "workplace",
+        "ethics-consumption",
+        "criticism-history"
+      ]
+    },
+    "B9": {
+      "theme": "视觉与叙事实验",
+      "declared": 10,
+      "pages": [
+        "aesthetics",
+        "visual-art",
+        "cross-time-danmaku",
+        "emotional-heatmap",
+        "chart-design",
+        "perf-canvas-rendering",
+        "global-pattern",
+        "four-dimensional-research-network",
+        "four-heavenly-kings-artifacts",
+        "tag-cloud"
+      ]
+    },
+    "B10": {
+      "theme": "工具与检索",
+      "declared": 8,
+      "pages": [
+        "data-explorer",
+        "graph-explorer",
+        "search",
+        "material-archaeology",
+        "ming-political-thought-comparison",
+        "power-resources",
+        "magic-system",
+        "theological-intervention-network"
+      ]
+    },
+    "B11": {
+      "theme": "reader 622 页",
+      "declared": 622,
+      "pages": [
+        "site/reader/**（递归 622 页）"
+      ]
+    }
+  },
+  "disk": {
+    "data_pages": 87,
+    "root_pages": 8,
+    "reader_pages": 622
+  },
+  "missing": [],
+  "extra": [],
+  "duplicated": [],
+  "oversized_batches": {},
+  "declared_mismatch": {},
+  "reader_check": {
+    "disk": 622,
+    "declared": 622,
+    "ok": true
+  },
+  "verdict": "PASS"
+}
