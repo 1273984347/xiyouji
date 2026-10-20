@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W844），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W845），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,19 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W845（2026-10-21）：阅读页重建影响面量化批（W829 前置门槛实测 262 行）
+
+> **来源**：用户令「继续」。候选批 W829（阅读页体验封装）在计划里留了一道前置门槛（AC-21）：重建 diff ≤ 2000 行才允许进入施工。本批把这道门槛实测掉，同时纠正量法本身。
+> - **文件**：docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w845_spec.json。
+> - **口径纠正（本批最有价值的产出）**：计划原写法是「临时副本试跑 `build_reader.py` 量 diff」。实测单跑这一步得到 **122,366 行**（622 页全变）——因为 reader 页现状是三段管线的产物，只跑第一步会把已内联的 CSS（`tokens.css` + `system.css`）与 CSP meta 全部剥掉，等于拿「少了两道后处理」当「内容漂移」。正确量法是 `build_reader.py` → `inline_css.py` → `generate_csp.py` 三段跑完再比。**按旧口径执行会直接假红（12.2 万 > 2000），把一个本来可做的批挡在门外。**
+> - **实测**：隔离副本 43 MB（六板块源 + reader 基线 + 三脚本 + 两份 CSS，不复制 1.1 GB 的 `docs/S4-学术投稿`）按三段管线重建 622 页，逐文件比对得 **51 文件 · 131 增 131 删 · 合计 262 行**，占 622 页的 8.2%，距阈值一个数量级余量。
+> - **漂移性质（比行数更有价值）**：51 处全是正文文字差异（头防→头陀、般苦→般若、锡枚→锡杖、盂兰盆会、迦叶 等），即 `docs/` 源的字级修复（W763 那批 97 处）从未回灌到 reader 页。分布 people 28 / themes 13 / 回目 10。**mtime 新不等于内容新**：这些页 2026-10-20 被 W806 为删埋点机械改过，mtime 比源新，正文却停在 10-16 之前。
+> - **幂等与收尾**：三段连跑两次 → 二次 diff = **0**，AC-25 的生成侧风险先行证伪；副本内 `generate_csp.py --check` 报 622 页 0 漂移。
+> - **结论**：AC-21 达标（262 ≤ 2000），W829 可进入施工。副产品：全量重建会顺带把 51 页正文拉回与源一致——这不是纯改造，也是一次欠账清偿。
+> - **未做**：未改 `site/reader` 任何一页（W829 未获批）、未动生成器、未推送远端。
+> - **验证**：`check_doc_sync.py` 0 FAIL；`verify_delivery.py --scope full` 核心全部通过；页数四项（88/138/622/9）零漂移。
+> - **状态**：已收官。
 
 ### W844（2026-10-21）：系统架构批四项落地（会话库备份 + 首 token 计时 + 两项裁决回填 + 检索题集入仓）
 
