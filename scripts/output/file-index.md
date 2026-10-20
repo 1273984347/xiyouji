@@ -11,6 +11,14 @@
 ---
 
 
+## W817 agent-web 工具层边界加固批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/engine/tools.ts | W817 | 改：受保护路径黑名单去仓库根锚定（会话库 cwd 无关形态 + 门禁脚本基名形态）+ 路径守卫取 realpath 判越界并返回解析后路径 + `git --output` 空格形态整 token 拦截 + 遍历类工具（glob/grep）过黑名单 |
+| xiyouji-agent-web/server/engine/tools.test.ts | W817 | 新增 9 例：会话库 cwd 无关（含 wal/shm）/ 仓外目录链接不可读 / 仓外文件链接不可写 / git --output 空格形态 / 等号形态回归锚 / 只读 git 放行锚 / 门禁脚本 cwd 无关 / 遍历面不触及受保护路径 / 遍历面未误伤普通文件 |
+| docs/00-导读/W批次编号对账表.md | W817 | 改：W817 认领行登记（工具层边界加固·5 处同源绕过 + 负样本自证） |
+
 ## W816 门禁判据可信化批（2026-10-20）
 
 | 文件 | W | 说明 |

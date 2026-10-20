@@ -408,3 +408,148 @@ test("T3g 允许域设为 . 等价于未设置（不误伤旧行为）", async (
     assert.equal(r.isError, false, r.content);
   });
 });
+
+// ============ W817：工具层边界加固（C1 会话库黑名单 cwd 无关 / C2 symlink 逃逸 / C3 git --output 空格形态） ============
+//
+// 三项均来自 2026-10-20 全项目审查的实证；每条用例都是「修复前必红、修复后必绿」的负样本。
+// 关键前提（server/chat.ts:134/219）：工具集根 = **请求 cwd**（workingDir → createToolset），
+// 故工具层的一切路径判据都不能假定 cwd 是仓库根。
+
+test("W817-C1 会话库黑名单与 cwd 无关：cwd=子目录时 data/chat.db 仍被拒且不泄内容", async () => {
+  // 成因：黑名单按「仓库根相对」锚定（^xiyouji-agent-web/data/），
+  // 而 relPosix 是**相对 cwd** 计算 → cwd=xiyouji-agent-web 时 relPosix 形如 data/chat.db，原规则失配。
+  const sub = path.join(ROOT, "xiyouji-agent-web");
+  const subToolset = createToolset(sub);
+  const r = await subToolset.execute("read_file", { path: "data/chat.db" });
+  assert.equal(r.isError, true, "会话库在子目录 cwd 下亦须被拒：" + r.content);
+  assert.match(r.content, /受保护路径/, "拒绝原因须可判定：" + r.content);
+  assert.equal(r.content.includes("SQLITE"), false, "不得回泄会话库内容");
+});
+
+test("W817-C1b 会话库三件套一并覆盖（chat.db-wal / chat.db-shm）", async () => {
+  seed("xiyouji-agent-web/data/chat.db-wal", "WAL-FAKE\n");
+  seed("xiyouji-agent-web/data/chat.db-shm", "SHM-FAKE\n");
+  const subToolset = createToolset(path.join(ROOT, "xiyouji-agent-web"));
+  for (const p of ["data/chat.db-wal", "data/chat.db-shm"]) {
+    const r = await subToolset.execute("read_file", { path: p });
+    assert.equal(r.isError, true, `${p} 须被拒：${r.content}`);
+    assert.match(r.content, /受保护路径/);
+  }
+});
+
+test("W817-C2 指向仓外的目录链接不得被读出（symlink/junction 逃逸）", async (t) => {
+  // 成因：guardPath 的 mustExist 分支只 fs.realpathSync(target) 而丢弃返回值
+  // → 注释声称的「symlink 指向仓外则解析后判越界」在代码里并不存在。
+  const outsideDir = path.join(path.dirname(ROOT), `xiyouji-outside-dir-${path.basename(ROOT)}`);
+  fs.mkdirSync(outsideDir, { recursive: true });
+  fs.writeFileSync(path.join(outsideDir, "secret.txt"), "OUTSIDE-SECRET-CANARY\n", "utf8");
+  const link = path.join(ROOT, "escape-dir");
+  try {
+    // Windows 用 junction（目录链接·无需特权）·POSIX 忽略 type 参数即普通符号链接
+    fs.symlinkSync(outsideDir, link, "junction");
+  } catch {
+    fs.rmSync(outsideDir, { recursive: true, force: true });
+    t.skip("本机无建链权限（目录链接）——CI 为 Linux 必执行本例");
+    return;
+  }
+  try {
+    const r = await call("read_file", { path: path.join("escape-dir", "secret.txt") });
+    assert.equal(r.isError, true, "指向仓外的链接不得被读取：" + r.content);
+    assert.match(r.content, /越界/, "须报路径越界：" + r.content);
+    assert.equal(r.content.includes("OUTSIDE-SECRET-CANARY"), false, "不得回泄仓外内容");
+  } finally {
+    try { fs.unlinkSync(link); } catch { try { fs.rmdirSync(link); } catch { /* ignore */ } }
+    fs.rmSync(outsideDir, { recursive: true, force: true });
+  }
+});
+
+test("W817-C2b 指向仓外的文件链接不得被写出（write 面同样解析后判越界）", async (t) => {
+  const outsideDir = path.join(path.dirname(ROOT), `xiyouji-outside-dir-w-${path.basename(ROOT)}`);
+  fs.mkdirSync(outsideDir, { recursive: true });
+  const victim = path.join(outsideDir, "victim.txt");
+  fs.writeFileSync(victim, "ORIGINAL\n", "utf8");
+  const link = path.join(ROOT, "escape-file");
+  try {
+    fs.symlinkSync(victim, link, "file");
+  } catch {
+    fs.rmSync(outsideDir, { recursive: true, force: true });
+    t.skip("本机无文件级建链权限（Windows 需特权）——目录链接面已由 C2 覆盖·CI 为 Linux 必执行本例");
+    return;
+  }
+  try {
+    const r = await call("write_file", { path: "escape-file", content: "EVIL-PAYLOAD" });
+    assert.equal(r.isError, true, "指向仓外的文件链接不得被写入：" + r.content);
+    assert.match(r.content, /越界/);
+    assert.equal(fs.readFileSync(victim, "utf8"), "ORIGINAL\n", "仓外文件必须未被改写");
+  } finally {
+    try { fs.unlinkSync(link); } catch { /* ignore */ }
+    fs.rmSync(outsideDir, { recursive: true, force: true });
+  }
+});
+
+test("W817-C3 git --output 空格形态被拒（写任意路径原语）", async () => {
+  // 成因：GIT_DANGER 只认 `--output=` 带等号形态；`git log --output <file>` 是独立取值形态
+  // → 此前放行，实测确实把输出写到工作目录外的任意路径。
+  execFileSync("git", ["init", "-q"], { cwd: ROOT, stdio: "ignore" });
+  const out = path.join(path.dirname(ROOT), `xiyouji-git-output-${path.basename(ROOT)}.txt`);
+  if (fs.existsSync(out)) fs.rmSync(out, { force: true });
+  try {
+    const r = await call("run_command", { command: `git log --output "${out}"` });
+    assert.equal(r.isError, true, "空格形态须被拒：" + r.content);
+    assert.match(r.content, /被禁止的参数/, "拒绝原因须可判定：" + r.content);
+    assert.equal(fs.existsSync(out), false, "不得在仓外写出文件");
+  } finally {
+    if (fs.existsSync(out)) fs.rmSync(out, { force: true });
+  }
+});
+
+test("W817-C3b git --output 等号形态仍被拒（既有拦截未回退）", async () => {
+  const r = await call("run_command", { command: "git show --output=x" });
+  assert.equal(r.isError, true);
+  assert.match(r.content, /被禁止的参数/);
+});
+
+test("W817-C3c 只读 git 子命令仍放行（修复未误伤正常路径）", async () => {
+  execFileSync("git", ["init", "-q"], { cwd: ROOT, stdio: "ignore" });
+  const r = await call("run_command", { command: "git status" });
+  assert.equal(r.isError, false, "git status 应放行：" + r.content);
+});
+
+test("W817-C4 门禁脚本黑名单与 cwd 无关：cwd=scripts 时 verify_delivery.py 仍不可写", async () => {
+  // 成因：门禁脚本规则按「仓库根相对」锚定（^scripts/(...)\.py$），
+  // 而 relPosix 相对 cwd → cwd=scripts 时 relPosix 形如 verify_delivery.py（无 scripts/ 段）→ 失配。
+  // 分层口径（W680）：门禁脚本只在**写面**受保护（读面按设计放行·脚本本身是公开件），
+  // 故本例只断言写面被拒 + 文件未被改写。
+  seed("scripts/verify_delivery.py", "# ORIGINAL scripts/verify_delivery.py\n");
+  seed("scripts/bump_version.py", "# ORIGINAL scripts/bump_version.py\n");
+  const subToolset = createToolset(path.join(ROOT, "scripts"));
+  for (const p of ["verify_delivery.py", "bump_version.py"]) {
+    const abs = path.join(ROOT, "scripts", p);
+    const before = sha256(abs);
+    const w = await subToolset.execute("write_file", { path: p, content: "EVIL-PAYLOAD" });
+    assert.equal(w.isError, true, `${p} 在 scripts cwd 下须被拒：${w.content}`);
+    assert.match(w.content, /受保护路径/, "拒绝原因须可判定：" + w.content);
+    assert.equal(sha256(abs), before, `${p} 内容必须未被改写`);
+  }
+});
+
+test("W817-C5 遍历类工具（grep/glob）不得触及受保护路径", async () => {
+  // 成因：glob/grep 从不调用 checkProtected ⇒ 会话库内容可经 grep 外泄
+  // （该库历史含工具结果·黑名单的设立目的正是防二次外泄）。
+  const g = await call("grep", { pattern: "SQLITE-FAKE-SESSION-LIB" });
+  assert.equal(g.isError, false, g.content);
+  assert.equal(
+    g.content.includes("SQLITE-FAKE-SESSION-LIB"),
+    false,
+    "grep 不得返回会话库内容：" + g.content.slice(0, 200)
+  );
+  const gl = await call("glob", { pattern: "**/chat.db" });
+  assert.equal(gl.isError, false, gl.content);
+  assert.equal(gl.content.includes("chat.db"), false, "glob 不得列出会话库路径：" + gl.content);
+});
+
+test("W817-C5b 遍历类工具仍能命中普通文件（过滤未误伤正常路径）", async () => {
+  const g = await call("grep", { pattern: "甲" });
+  assert.equal(g.isError, false, g.content);
+  assert.match(g.content, /甲/, "普通文件仍应可 grep：" + g.content);
+});
