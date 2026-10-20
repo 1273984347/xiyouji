@@ -11,6 +11,7 @@ import { test } from "node:test";
 import assert from "node:assert";
 import { spawn } from "node:child_process";
 import fs from "node:fs";
+import http from "node:http";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -19,6 +20,8 @@ import {
   resolveWorkingDir,
   createSseGuard,
   SSE_MAX_MS_DEFAULT,
+  normalizeHostname,
+  isAllowedHost,
 } from "./security.js";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -267,4 +270,96 @@ test("集成：AGENT_WEB_TOKEN 鉴权负样本（无头/错头 401·双正确头
   } finally {
     child.kill();
   }
+});
+
+// ==================== ⑤ Host 头校验（W835·防 DNS rebinding） ====================
+
+const HOST_ALLOW = ["127.0.0.1", "localhost", "::1"];
+
+test("normalizeHostname：去端口 / IPv6 去方括号 / 小写 / 去 FQDN 尾点 / 畸形判空", () => {
+  assert.equal(normalizeHostname("127.0.0.1:3000"), "127.0.0.1");
+  assert.equal(normalizeHostname("127.0.0.1"), "127.0.0.1");
+  assert.equal(normalizeHostname("LOCALHOST:5173"), "localhost");
+  assert.equal(normalizeHostname("[::1]:3000"), "::1");
+  assert.equal(normalizeHostname("[::1]"), "::1");
+  assert.equal(normalizeHostname("example.com."), "example.com");
+  assert.equal(normalizeHostname("  127.0.0.1:3000  "), "127.0.0.1");
+  assert.equal(normalizeHostname(""), "");
+  assert.equal(normalizeHostname(undefined), "");
+  assert.equal(normalizeHostname(null), "");
+  assert.equal(normalizeHostname(42), "");
+  assert.equal(normalizeHostname("[:3000"), "", "畸形 IPv6 应判空");
+});
+
+test("isAllowedHost：白名单内放行（带端口 / 大小写 / IPv6 / 尾点）", () => {
+  for (const h of ["127.0.0.1", "127.0.0.1:3000", "localhost", "localhost:5173", "LOCALHOST:3000", "[::1]:3000", "127.0.0.1."]) {
+    assert.equal(isAllowedHost(h, HOST_ALLOW), true, `应放行 ${h}`);
+  }
+});
+
+test("isAllowedHost：白名单外一律判否（fail-closed）", () => {
+  for (const h of ["evil.com", "evil.com:3000", "127.0.0.1.evil.com", "localhost.evil.com", "", undefined, null, 7]) {
+    assert.equal(isAllowedHost(h, HOST_ALLOW), false, `应拒绝 ${String(h)}`);
+  }
+});
+
+/** 用 node:http 直发（fetch/undici 受 forbidden header 约束，无法自定义 Host）。 */
+function rawGet(
+  port: number,
+  p: string,
+  headers: Record<string, string>
+): Promise<{ status: number; body: string }> {
+  return new Promise((resolve, reject) => {
+    const req = http.request({ host: "127.0.0.1", port, path: p, method: "GET", headers }, (res) => {
+      let body = "";
+      res.on("data", (c) => (body += String(c)));
+      res.on("end", () => resolve({ status: res.statusCode ?? 0, body }));
+    });
+    req.on("error", reject);
+    req.end();
+  });
+}
+
+test("集成：Host 头校验负样本（rebinding 主机名 403·回环主机名 200）", async () => {
+  const child = await spawnServer(3213);
+  try {
+    const evil = await rawGet(3213, "/api/health", { Host: "evil.com" });
+    assert.equal(evil.status, 403, "非白名单 Host 应 403");
+    assert.match(evil.body, /Host/, "错误体应说明是 Host 问题");
+    const evilWithPort = await rawGet(3213, "/api/health", { Host: "evil.com:3213" });
+    assert.equal(evilWithPort.status, 403, "带端口的非白名单 Host 同样应 403");
+    const suffix = await rawGet(3213, "/api/health", { Host: "127.0.0.1.evil.com" });
+    assert.equal(suffix.status, 403, "后缀伪装应 403");
+    const okIp = await rawGet(3213, "/api/health", { Host: "127.0.0.1:3213" });
+    assert.equal(okIp.status, 200, "回环 Host 应放行");
+    const okName = await rawGet(3213, "/api/health", { Host: "localhost:3213" });
+    assert.equal(okName.status, 200, "localhost Host 应放行");
+  } finally {
+    child.kill();
+  }
+});
+
+test("集成：AGENT_WEB_REQUIRE_TOKEN=1 且未设 token → 拒绝启动（fail-closed·不降级为免认证）", async () => {
+  const tsxCli = path.join(WEB, "node_modules", "tsx", "dist", "cli.mjs");
+  const child = spawn(process.execPath, [tsxCli, "server/index.ts"], {
+    cwd: WEB,
+    env: { ...process.env, PORT: "3214", AGENT_WEB_TOKEN: "", AGENT_WEB_REQUIRE_TOKEN: "1" },
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+  let out = "";
+  child.stdout?.on("data", (d) => {
+    out += String(d);
+  });
+  child.stderr?.on("data", (d) => {
+    out += String(d);
+  });
+  const code = await new Promise<number | null>((resolve) => {
+    child.on("exit", (c) => resolve(c));
+    setTimeout(() => {
+      child.kill();
+      resolve(null);
+    }, 20000);
+  });
+  assert.notEqual(code, 0, "应拒绝启动（退出码非 0）");
+  assert.match(out, /AGENT_WEB_REQUIRE_TOKEN/, "应打印拒绝原因");
 });

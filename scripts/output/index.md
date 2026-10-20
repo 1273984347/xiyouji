@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（240）
+## 文件（241）
 
 ### Markdown 文档
 
@@ -233,6 +233,7 @@
 - `_w832_spec.json`
 - `_w833_spec.json`
 - `_w834_spec.json`
+- `_w835_spec.json`
 - `_w836_spec.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`

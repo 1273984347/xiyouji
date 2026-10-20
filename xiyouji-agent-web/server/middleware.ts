@@ -3,10 +3,11 @@
  *
  * 职责边界：只负责「请求进入路由之前」的关卡，按注册顺序装配：
  *   ① request ID（W808 新增·分配/沿用上游 ID + 回写响应头 + 建立日志上下文）
- *   ② /api 限流（W681 · 内存桶 · 每 IP 30 req/min → 429）
- *   ③ 安全响应头（与 site/_headers 一致：防点击劫持 / MIME 嗅探 / Referer 泄露）
- *   ④ 可选 token 鉴权（设置 AGENT_WEB_TOKEN 时对 /api/* 生效；未设置＝本地免认证）
- *   ⑤ 访问日志（W808 新增·请求完成后记一行结构化 JSON）
+ *   ② Host 头校验（W835 新增·防 DNS rebinding·不在白名单即 403·早于限流）
+ *   ③ /api 限流（W681 · 内存桶 · 每 IP 30 req/min → 429）
+ *   ④ 安全响应头（与 site/_headers 一致：防点击劫持 / MIME 嗅探 / Referer 泄露）
+ *   ⑤ 可选 token 鉴权（设置 AGENT_WEB_TOKEN 时对 /api/* 生效；未设置＝本地免认证）
+ *   ⑥ 访问日志（W808 新增·请求完成后记一行结构化 JSON）
  *
  * 顺序即语义：限流在鉴权之前（未授权请求同样计入配额），与重构前一致。
  * 注册条件亦保留原样——未设 token 时**不注册**鉴权中间件（而非注册一个直通件）。
@@ -15,10 +16,11 @@
  * 都拿不到 ID，日志链路断在入口。
  */
 import type { Express, NextFunction, Request, Response } from "express";
-import { AGENT_WEB_TOKEN, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS } from "./config.js";
+import { AGENT_WEB_TOKEN, ALLOWED_HOSTS, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS } from "./config.js";
 import { logger } from "./logger.js";
 import { requestIdMiddleware } from "./requestId.js";
-import { RateLimitError } from "./errors.js";
+import { RateLimitError, ForbiddenError } from "./errors.js";
+import { isAllowedHost } from "./security.js";
 
 /** 限流桶：ip → 窗口内计数与窗口结束时刻。 */
 interface RateBucket {
@@ -98,9 +100,30 @@ function accessLog(req: Request, res: Response, next: NextFunction): void {
   next();
 }
 
-/** 按原 index.ts 顺序装配全局中间件（request ID → 限流 → 安全头 → 可选鉴权 → 访问日志）。 */
+/**
+ * W835：Host 头校验（防 DNS rebinding）。
+ *
+ * 放在 request ID 之后、限流之前：既要拿到 request_id 记日志，又要**尽早**挡掉恶意请求
+ * （不进限流桶、不触达任何路由）。
+ *
+ * 语义：Host 头主机名不在白名单（默认回环三形态 + AGENT_WEB_ALLOWED_HOSTS 追加项）即 403。
+ * 响应体形状沿用既有 AppError 契约 `{ error: <文案> }`（与 401/429 同形），不改前端契约。
+ * 缺失 Host 头（HTTP/1.0 或畸形请求）同样判否——fail-closed。
+ */
+function hostGuard(req: Request, res: Response, next: NextFunction): void {
+  if (isAllowedHost(req.headers.host, ALLOWED_HOSTS)) return next();
+  logger.warn("拒绝非法 Host 头的请求", {
+    request_id: req.requestId,
+    host: String(req.headers.host ?? ""),
+    path: req.originalUrl,
+  });
+  next(new ForbiddenError("请求 Host 不在允许清单内（防 DNS rebinding）"));
+}
+
+/** 按原 index.ts 顺序装配全局中间件（request ID → Host 校验 → 限流 → 安全头 → 可选鉴权 → 访问日志）。 */
 export function installMiddleware(app: Express): void {
   app.use(requestIdMiddleware); // W808：必须最先——后续所有关卡与错误处理器都依赖它
+  app.use(hostGuard); // W835：Host 校验——在限流之前挡掉 rebinding 请求
   app.use("/api", createRateLimiter());
   app.use(securityHeaders);
   if (AGENT_WEB_TOKEN) app.use(apiTokenAuth);

@@ -30,7 +30,28 @@ import { errorHandler, notFoundHandler } from "./errors.js";
 import { logger } from "./logger.js";
 import { closeDatabase } from "./db.js";
 import { registerShutdownHandlers } from "./shutdown.js";
-import { PORT } from "./config.js";
+import { PORT, AGENT_WEB_TOKEN, REQUIRE_TOKEN, ALLOWED_HOSTS } from "./config.js";
+
+/**
+ * W835：启动期暴露面自检（fail-closed 优先于「静默降级」）。
+ *
+ * ① AGENT_WEB_REQUIRE_TOKEN=1 但未设 AGENT_WEB_TOKEN → **拒绝启动**（exit 1）：
+ *    用户显式要求强制认证，而凭证缺失时继续以免认证跑起来＝把「要认证」悄悄降级成「不认证」。
+ * ② 未设 token → 记 WARN 并说明兜底边界（回环绑定 + Host 白名单）：
+ *    免认证不是默认错配（W411 起的口径），但必须让运行者看见当前暴露面。
+ */
+if (REQUIRE_TOKEN && !AGENT_WEB_TOKEN) {
+  console.error(
+    "[FATAL] AGENT_WEB_REQUIRE_TOKEN=1 但未设置 AGENT_WEB_TOKEN —— 拒绝启动（不降级为免认证模式）"
+  );
+  process.exit(1);
+}
+if (!AGENT_WEB_TOKEN) {
+  logger.warn("AGENT_WEB_TOKEN 未设置：/api/* 免认证", {
+    host_allowlist: ALLOWED_HOSTS.join(","),
+    hardening_hint: "如需强制认证：设置 AGENT_WEB_TOKEN 并加 AGENT_WEB_REQUIRE_TOKEN=1",
+  });
+}
 
 const app = express();
 

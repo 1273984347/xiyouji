@@ -78,6 +78,35 @@ export const VERBOSE_LOG = process.env.AGENT_WEB_VERBOSE === "1";
  */
 export const AGENT_WEB_TOKEN = process.env.AGENT_WEB_TOKEN || "";
 
+/**
+ * W835：Host 头白名单（防 DNS rebinding）——默认只认回环三形态。
+ *
+ * 与既有防护模型的关系（W808 已固化「无 CORS 中间件 + 回环绑定 + 可选 token + 限流」）：
+ * 本项**不引入跨源面、不改 CORS 口径**，只是把「回环绑定」这条防线从「服务端不出网」
+ * 补成「连 Host 头也须是回环」——回环绑定防的是外部直连，Host 校验防的是**浏览器经
+ * DNS rebinding 打到回环**这条路（浏览器把 evil.com 解析到 127.0.0.1 后，Host 头是 evil.com）。
+ *
+ * 端口不参与判定（白名单只列主机名）：dev proxy（changeOrigin 改写 Host 为代理目标）、
+ * 随机端口测试、Electron 桌面端都用同一主机名不同端口，判端口会误伤。
+ * 追加而非替换：设 AGENT_WEB_ALLOWED_HOSTS 时在默认回环之外**追加**主机名，
+ * 想要「只认某主机」也仍保留回环（回环本就是本机）。
+ */
+export const ALLOWED_HOSTS: string[] = [
+  "127.0.0.1",
+  "localhost",
+  "::1",
+  ...(process.env.AGENT_WEB_ALLOWED_HOSTS || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean),
+];
+
+/**
+ * W835：token 硬开关——AGENT_WEB_REQUIRE_TOKEN=1 时若未设 AGENT_WEB_TOKEN 则**拒绝启动**
+ * （fail-closed·不静默降级为免认证）。默认不启用（保持 W411 起的「本地免认证」口径不变）。
+ */
+export const REQUIRE_TOKEN = process.env.AGENT_WEB_REQUIRE_TOKEN === "1";
+
 /** W681 CodeQL 处置（missing-rate-limiting）：/api/* 无依赖内存限流参数（每 IP 30 req/min）。 */
 export const RATE_LIMIT_WINDOW_MS = 60 * 1000;
 export const RATE_LIMIT_MAX = 30;
