@@ -11,6 +11,18 @@
 ---
 
 
+## W813 review 修复批（2026-10-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/errors.ts | W813 | 改：全局错误处理中间件的框架层四百类保真（异常自带四百状态码即按原状态码返回·固定文案表防细节外泄·日志新增客户端错误分支记警告不记堆栈） |
+| xiyouji-agent-web/server/api.integration.test.ts | W813 | 改：补两条集成测试（请求体畸形返四百而非五百 + 错误体不含堆栈与异常类名与原始解析消息） |
+| tests/unit/test_ci_wiring.py | W813 | 改：YAML 守卫 J2 判据扩至任意映射键（原只查名称键）+ J3 的依赖缺失由静默跳过改为判红 + 补守卫负样本实证（4 种坏形态必红 + 4 种形态真属解析失败 + 合法形态不误杀 + 依赖已登记回归锁） |
+| scripts/requirements.txt | W813 | 改：登记 PyYAML==6.0.2（使守卫 J3 全量解析在持续集成侧恒生效·原实现因依赖缺失恒静默跳过） |
+| scripts/check_doc_sync.py | W813 | 改：文件清单路径正则扩展覆盖 .ts/.tsx/.cjs/.jsonl/.yaml/.toml/.ini/.cfg/.sh/.ps1/.csv/.svg/.example（原先静默滤除·滤除即不被校验）+ 自测补 T19/T20 两条 |
+| docs/agent/gates.md | W813 | 改：第 31 门禁条目补记 C4-f 覆盖面扩面事实与自测例数 |
+| AGENTS.md | W813 | 改：§4.3 本机环境事实补记 PyYAML 为守卫依赖（持续集成恒有） |
+
 ## W812 去旧厂商 Agent 工具品牌化批（2026-10-20）
 
 | 文件 | W | 说明 |

@@ -8,6 +8,14 @@ markdown==3.10.2
 # dev dependencies
 ruff==0.16.9
 pytest==9.1.1
+# W813：PyYAML 登记——tests/unit/test_ci_wiring.py 的 YAML 可解析性守卫 J3
+# （PyYAML 全量解析）依赖该包。原实现为「PyYAML 不可用即静默跳过」，
+# 而 CI 的 pytest-unit job 只装本文件（当时其中无 PyYAML）→ J3 在 CI 恒跳过，
+# 守卫只剩 J1+J2（且 J2 只查 name 键）→ 本地绿、CI 放行、GitHub 侧 0 秒失败
+# 的缺陷照旧潜伏。登记后 J3 在 CI 恒生效。
+# 版本依据：6.0.2 已修全部 loader 类 CVE（CVE-2020-14343/1747/2019-20477
+# 均在 5.4 前修复）；本机 pip-audit -r 实测「No known vulnerabilities found」。
+PyYAML==6.0.2
 # W776：fonttools/brotli 移除——全仓（含 archive/）零 import（W564 字体子集化一次性
 # 工具的遗留·子集化脚本已归档），CI/pip-audit 无需扫描；字体重子集化时按
 # scripts/font-subset-guide.md §3.1 按需安装（pyftsubset 回退路径）。

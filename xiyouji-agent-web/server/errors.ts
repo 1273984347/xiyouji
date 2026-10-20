@@ -13,7 +13,17 @@
  * 契约红线（对外响应形状）：
  *   运营错误 → `{ error: string }`（与重构前 sendError 的形状一致，**键名与取值零改动**）；
  *   编程错误 → `{ error: "服务器内部错误" }`（不泄细节·与重构前各路由 catch 的兜底文案语义一致）。
+ *   框架层 4xx（W813 修）→ `{ error: string }` + **原状态码**（此前被误降为 500，见下）。
  *   request ID 经 `X-Request-Id` 响应头透出（不塞进 body，避免改变既有 body 形状）。
+ *
+ * W813 修（契约回归）：`express.json()` 的请求体解析失败抛的是 SyntaxError
+ * （body-parser 附带 status=400），既非 AppError 也无 isOperational 语义，
+ * 此前被本文件的错误收敛逻辑归入「编程错误」分支 → 客户端收到 **500** +「服务器内部错误」，
+ * 而重构前（无全局错误处理器）Express 默认处理器返回的是 **400**。
+ * 即：W808 新增全局错误处理器的瞬间，把一类客户端错误升格成了服务端故障——
+ * 前端据此把「请求体畸形」误判为「服务端出错，请稍后重试」并可能重试（errorMessage.ts
+ * 的 isRetryable 对 5xx 判 true、对 4xx 判 false）。
+ * 现改为：异常自带 4xx 状态码即按该状态码返回，文案用固定表（不回显原始解析消息·防细节外泄）。
  */
 import type { NextFunction, Request, Response } from "express";
 import { logger } from "./logger.js";
@@ -123,15 +133,56 @@ export function toErrorResponse(err: unknown): { statusCode: number; body: { err
   if (err instanceof AppError && err.isOperational) {
     return { statusCode: err.statusCode, body: { error: err.message } };
   }
+  // W813 修：框架层 4xx 保真——express.json() 的请求体解析失败抛的是 SyntaxError
+  // （body-parser 附带 status=400），不是 AppError。此前本函数只认 AppError，
+  // 于是这类**客户端错误**被归入「编程错误」分支返回 500 + 通用文案，
+  // 违反本文件既有的「对外契约零改动」红线（重构前 Express 默认处理器返 400）。
+  // 判据：异常自带 4xx 状态码（body-parser / 框架层错误）→ 按该状态码返回，
+  // 但**仍不泄细节**（客户端错误的具体文案由服务端固定，不回显原始异常消息）。
+  const frameworkStatus = frameworkErrorStatus(err);
+  if (frameworkStatus !== null) {
+    return { statusCode: frameworkStatus, body: { error: FRAMEWORK_ERROR_MESSAGES[frameworkStatus] ?? "请求内容有误" } };
+  }
   // 编程错误：兜底 500 + 通用文案（细节只进日志）
   return { statusCode: 500, body: { error: "服务器内部错误" } };
 }
+
+/**
+ * 从异常对象上取「框架层 4xx 状态码」。
+ *
+ * body-parser 的错误对象带 `status` / `statusCode` 属性（400 = 请求体解析失败、
+ * 413 = 请求体过大、415 = 不支持的 Content-Type）。Express 4/5 均如此。
+ *
+ * 只认 4xx：5xx 属服务端问题，一律走 500 通用文案（不把内部状态码直接外泄）。
+ *
+ * @param err 捕获到的异常
+ * @returns 4xx 状态码；非框架层 4xx 返回 null
+ */
+function frameworkErrorStatus(err: unknown): number | null {
+  if (typeof err !== "object" || err === null) return null;
+  const candidate = err as { status?: unknown; statusCode?: unknown };
+  for (const value of [candidate.status, candidate.statusCode]) {
+    if (typeof value === "number" && Number.isInteger(value) && value >= 400 && value <= 499) {
+      return value;
+    }
+  }
+  return null;
+}
+
+/** 框架层 4xx 的固定文案（不回显原始异常消息·防细节外泄）。 */
+const FRAMEWORK_ERROR_MESSAGES: Record<number, string> = {
+  400: "请求内容格式有误，无法解析",
+  413: "请求内容过大",
+  415: "不支持的请求内容类型",
+};
 
 /**
  * 全局错误处理中间件：Express 错误处理四参签名（`next` 必传，否则 Express 不会识别为错误处理器）。
  *
  * 行为：
  *   - 运营错误 → 按其 statusCode 返回原始语义文案（对前端而言与重构前逐字一致）；
+ *   - 框架层 4xx（W813 新增：body-parser 请求体解析失败等）→ 按其状态码返回固定文案
+ *     并记 warn 级日志（客户端问题，不是编程错误，不记堆栈）；
  *   - 编程错误 → 记 error 级结构化日志（含 request ID 与堆栈）后返回通用 500；
  *   - 响应已发出（SSE 流中途抛错）→ 只记日志，不再尝试写响应体（避免 ERR_HTTP_HEADERS_SENT）。
  */
@@ -150,6 +201,9 @@ export function errorHandler(err: unknown, req: Request, res: Response, next: Ne
 
   const { statusCode, body } = toErrorResponse(err);
   const isOperational = err instanceof AppError && err.isOperational;
+  // W813：框架层 4xx 单列——客户端问题（请求体畸形/过大/类型不支持），
+  // 与「运营错误」同类（都是 4xx）但不是本项目定义的语义错误，故记 warn 不记堆栈。
+  const isFrameworkClientError = !isOperational && frameworkErrorStatus(err) !== null;
 
   if (isOperational) {
     logger.warn("请求被拒绝（运营错误）", {
@@ -158,6 +212,14 @@ export function errorHandler(err: unknown, req: Request, res: Response, next: Ne
       path: req.originalUrl,
       status: statusCode,
       code: (err as AppError).code,
+      error: err instanceof Error ? err.message : String(err),
+    });
+  } else if (isFrameworkClientError) {
+    logger.warn("请求被拒绝（框架层客户端错误）", {
+      request_id: req.requestId,
+      method: req.method,
+      path: req.originalUrl,
+      status: statusCode,
       error: err instanceof Error ? err.message : String(err),
     });
   } else {

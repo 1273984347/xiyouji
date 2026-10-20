@@ -64,8 +64,16 @@ RE_STATS_PATTERNS = [  # (正则, (键...), 语境词[None=无·小写包含判�
 RE_CHANGELOG_SCOPE = re.compile(r"^> \*\*全站页数口径\*\*.*$", re.M)  # CHANGELOG 扫描域=口径块行
 RE_FILE_LIST_LINE = re.compile(r"^> - \*\*文件\*\*：(.+)$", re.M)  # W723 C4-f：四件套「文件」行
 RE_FILE_TOKEN = re.compile(
-    r"^(?:CHANGELOG|README|STRUCTURE|AGENTS|CLAUDE|CONTRIBUTING|CITATION)\.cff?$|.+\.(?:py|js|mjs|md|json|cff|txt|html|css|xml|yml)$"
+    r"^(?:CHANGELOG|README|STRUCTURE|AGENTS|CLAUDE|CONTRIBUTING|CITATION)\.cff?$"
+    r"|.+\.(?:py|js|mjs|cjs|ts|tsx|jsx|md|json|jsonl|cff|txt|html|css|xml|yml|yaml|toml|ini|cfg|sh|ps1|csv|svg|example)$"
 )  # 路径 token 判定：根级治理文件白名单 或 带已知后缀（含 / 的子目录路径）
+# W813 扩面：原正则只认 .py/.js/.mjs/.md/.json/.cff/.txt/.html/.css/.xml/.yml，
+# .ts/.tsx/.cjs/.jsonl/.yaml/.toml/.ini/.cfg/.sh/.ps1/.csv/.svg/.example 全部被**静默滤除**——
+# 而滤除即「不被校验」：W808 声明 34 项，C4-f 实际只认 5 项（丢弃 29 项·全是 .ts/.tsx），
+# 于是「手工件漏 add」这条防线在 W808 这类前端批上等于不存在。
+# 实证（负样本对照）：同一漏 add 形态，.py 被判红、.ts 只出 NOTE 静默放行。
+# 覆盖面判据：凡仓内实际存在且会被手工编辑的文本类文件，其后缀都须在列；
+# 二进制资产（.png/.woff2/.ttf 等）不列——「文件」行本就只登记手工编辑件。
 RE_STATS_MARK = re.compile(r"(\d+)\s*[页项篇个类]?\s*<!--stats:([a-z_0-9]+)-->")  # W704 数字实体标记（紧贴/句尾双形态·key 后置·渲染隐藏）
 RE_BARE_AGG = re.compile(r"\d+\s*(?:页|项|篇|个|类)")  # C5c 裸聚合数字（报告型 NOTE·W704 起步）
 C5_DOC_NAMES = {"readme": "README.md", "structure": "STRUCTURE.md", "agents": "AGENTS.md", "xiangmu": "项目说明.md", "contributing": "CONTRIBUTING.md", "koujing": "统计口径说明.md"}  # W713 补 CONTRIBUTING（第 27 门禁叙述面已含·C5 面对齐）；W769 补统计口径说明（自称「唯一口径来源」却不在扫描域·W760 F-9 实证）
@@ -583,6 +591,27 @@ def run_self_test():
             changelog=d["changelog"].replace("### W999（2026-10-05）：自测顶段\n",
                                              "### W999（2026-10-05）：自测顶段\n\n> - **文件**：docs/a.md\n"),
             head_tree=["docs/a.md"], dirty=["docs/a.md"],
+        ),
+        "C4-f",
+    )
+    # W813：.ts/.tsx 扩面用例——原 RE_FILE_TOKEN 静默滤除 .ts/.tsx，
+    # 于是「前端件漏 add」只出 NOTE 放行（实测：同一形态 .py 判红、.ts 放行）。
+    # T19 钉住「.ts 漏 add 必红」，T20 钉住「多扩展名均被识别为路径 token」。
+    case(
+        "T19 .ts 文件清单漏 add 必红（C4-f·W813 扩面）",
+        lambda d: d.update(
+            changelog=d["changelog"].replace("### W999（2026-10-05）：自测顶段\n",
+                                             "### W999（2026-10-05）：自测顶段\n\n> - **文件**：xiyouji-agent-web/server/errors.ts\n"),
+            head_tree=[], dirty=[],
+        ),
+        "C4-f",
+    )
+    case(
+        "T20 .ts/.tsx/.jsonl/.yaml 等扩展名均被识别为路径 token（W813 覆盖面回归锁）",
+        lambda d: d.update(
+            changelog=d["changelog"].replace("### W999（2026-10-05）：自测顶段\n",
+                                             "### W999（2026-10-05）：自测顶段\n\n> - **文件**：a.ts、b.tsx、c.jsonl、d.yaml、e.toml、f.ini\n"),
+            head_tree=[], dirty=[],
         ),
         "C4-f",
     )
