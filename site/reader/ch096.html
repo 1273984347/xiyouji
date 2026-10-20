@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第096回-寇员外喜待高僧唐长老不贪富贵.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch096.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第096回 寇员外喜待高僧 唐长老不贪富贵</h1>
 <blockquote>
@@ -1269,8 +1312,9 @@ td.num, th.num {
 <p><strong>寇员外喜待高僧 唐长老不贪富贵</strong></p>
 <p>回目出自世德堂本第九十六回。十四字二句，前句写"喜"——寇员外斋僧圆满之喜；后句写"不贪"——唐僧辞富西行之志。"喜"与"不贪"对照，是本回最温润也最锋利的张力。<strong>员外之喜，喜在"圆满"；唐僧之不贪，不贪在"圆满"</strong>——一个以"满"为终，一个以"满"为忌。吴承恩把"圆满"二字写得既美又险，正是本回最深的一笔。</p>
 <p>"高僧"与"富贵"亦成对照。寇员外家"虎坐门楼""万僧不阻"，是富而非贵；唐僧是"御弟圣僧"，是贵而非富。<strong>富者求圆满，贵者求取经——富与贵在取经路上第一次正面相遇</strong>。明代商人阶层崛起，富可敌国者众，吴承恩让一个地方员外以"斋僧"求功德，让一个朝廷御僧以"取经"求正果，二者的对照，是明代"富—贵"关系最微妙的写照。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>师徒西行至铜台府地灵县，遇寇员外寇洪。员外年六十四，自四十岁许斋万僧之愿，已斋九千九百九十六员，正缺四众圆满。见唐僧师徒，喜出望外，盛情款待。员外妻、二子寇梁寇栋亦各愿斋半月，唐僧坚辞。做完三昼夜圆满道场，唐僧执意西行，员外苦留不得，遂办彩旗鼓乐僧道，十里长亭相送，放声大哭而别。师徒行四五十里，天晚雨至，避入华光行院破庙，破壁倾墙，杂草丛生，苦捱一夜。回目以"泰极还生否，乐处又逢悲"作结。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、"万僧不阻"牌的功德经济学</h3>
 <p>寇员外门前悬"万僧不阻"牌，是全书最直白的"功德量化"装置。<strong>斋僧一万，二十四年，账目分明，差四圆满——这是把信仰做成了一笔账</strong>。明代寺院经济发达，斋僧放生皆有定数，"功德"被精确计量为"善款"。吴承恩让寇员外以"账"求圆满，既是对民间信仰的写实，也是对"功德形式化"的温和反讽——若功德靠数，则信仰何异于买卖？</p>
@@ -1342,7 +1386,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch095.html">上一回</a> · <a href="ch097.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/character-appearance.html">人物出场数据</a> · <a href="../data/philosophy.html">哲学可视化</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD071 · 铜台府——当善行成为罪证</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1359,7 +1403,8 @@ td.num, th.num {
 </blockquote>
 <p><strong>第84回结束。野茶在粗瓷杯里凉了。茶摊的布棚被风吹得哗哗响，寇洪起身去加固棚绳，腿有点瘸，但手稳。张氏把灶里的柴火拨了拨，火光照在她脸上，手还在抖，但脸上没有泪。寇梁在收拾茶杯，他把悟空喝过的那个杯子单独放在一边——不是供奉，是明天继续用。</strong></p>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>色色原无色，空空亦非空。静喧语默本来同，梦里何劳说梦。有用用中无用，无功功里施功。还如果熟自然红，莫问如何修种。话表唐僧师众，使法力， 阻住那布金寺僧。僧见黑风过处，不见他师徒，以为活佛临凡，磕头而回不题。他师徒们西行，正是春尽夏初时节：清和天气爽，池沼芰荷生。梅逐雨余熟，麦随风 里成。草香花落处，莺老柳枝轻。江燕携雏习，山鸡哺子鸣。斗南当日永，万物显光明，说不尽那朝餐暮宿，转涧寻坡。在那平安路上，行经半月，前边又见一城垣 相近。三藏问道：“徒弟，此又是甚么去处！”行者道：“不知，不知。”八戒笑道：“这路是你行过的，怎说不知！却是又有些儿跷蹊。故意推不认得，捉弄我们 哩。”行者道：“这呆子全不察理！这路虽是走过几遍，那时只在九霄空里，驾云而来，驾云而去，何曾落在此地？事不关心，查他做甚，此所以不知。却有甚跷 蹊，又捉弄你也？”</p>
 <p>说话间，不觉已至边前，三藏下马，过吊桥，径入门里。长街上，只见廊下坐着两个老儿叙话。三藏叫：“徒弟，你们在那街心里站住，低着头，不要放肆，等我去那廊下问个地方。”行者等果依言立住，长老近前合掌叫声“老施主，贫僧问讯了。”</p>
 <p>那二老正在那里闲讲闲论，说甚么兴衰得失，谁圣谁贤，当时的英雄事业，而今安在，诚可谓大叹息，忽听得道声问讯，随答礼道：“长老有何话说？”三藏道： “贫僧乃远
@@ -1475,8 +1520,13 @@ td.num, th.num {
 炡
 抎
 蒑
-㿮</p>
+㿮</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%B9%9D%E5%8D%81%E5%85%AD%E5%9B%9E%20%E5%AF%87%E5%91%98%E5%A4%96%E5%96%9C%E5%BE%85%E9%AB%98%E5%83%A7%20%E5%94%90%E9%95%BF%E8%80%81%E4%B8%8D%E8%B4%AA%E5%AF%8C%E8%B4%B5&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch096.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%B9%9D%E5%8D%81%E5%85%AD%E5%9B%9E%20%E5%AF%87%E5%91%98%E5%A4%96%E5%96%9C%E5%BE%85%E9%AB%98%E5%83%A7%20%E5%94%90%E9%95%BF%E8%80%81%E4%B8%8D%E8%B4%AA%E5%AF%8C%E8%B4%B5&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch096.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch095.html">← 上一篇</a><a href="ch097.html">下一篇 →</a></nav>
 </main>
 </body>

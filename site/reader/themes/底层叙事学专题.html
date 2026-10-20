@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
 <script src="../../js/theme-init.js"></script>
+<script src="../../js/reader-enhance.js" defer></script>
 <style>
   .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
@@ -52,6 +53,35 @@
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -61,6 +91,19 @@
     <a href="../../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/底层叙事学专题.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/themes/底层叙事学专题.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>底层叙事学专题</h1>
 <blockquote>
@@ -270,6 +313,10 @@
 <p>当取经结束、师徒成佛、所有功能性器物都被归还或废弃时,底层叙事学提醒我们:<strong>真正的传记不在灵山的封赏名册上,不在如来的经书里,不在功德簿的数字里,而在那些被反讽命名的小妖身上、被匿名化的三万群像里、被眼泪盐晶渗透的供桌上、被锅底灰针刺的羊皮账本里。</strong> 完成的不是底层被遗忘,而是底层被封存在一片会闪微光的盐晶里、在一根会缝护膝也会记账的绣花针里、在一份"妖怪也要发饷"的信里——永远地留着,像一张永远不会被销账的支用单,让莲花洞的北墙永远在渗水,让精细虫的膝盖永远在破皮,让陈家庄孩子的眼泪永远在结晶,让三万小妖的匿名永远在被这四个被写下名字的小妖所见证。</p>
 <p>底层叙事学最终的伦理命题是:写作不能让精细虫复生,不能让三万小妖复活,不能让陈家庄孩子免于被吃,不能让银角发得出下月的饷。但写作可以"给道具以名字"。名字不能改变命运,但名字是命运被记住的唯一形式。本文写下的每一个名字——精细虫、伶俐虫、巴山虎、倚海龙、陈大锤、银角——都不是考据,是伦理。是在取经工程最庞大的功劳簿之外,在一行没有人会翻到的页边,替那些被借来的、用完不还的、尽皆剿灭的、不许回头的、发不出饷的,留下一个可以被念出来的音节。这个音节不能让他们活过来。但这个音节让他们被念过。被念过,就是被记住过。被记住过,就是底层叙事学能给出的、唯一的、不完美的、但诚实的慈悲。</p>
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E5%BA%95%E5%B1%82%E5%8F%99%E4%BA%8B%E5%AD%A6%E4%B8%93%E9%A2%98&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/themes/%E5%BA%95%E5%B1%82%E5%8F%99%E4%BA%8B%E5%AD%A6%E4%B8%93%E9%A2%98.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E5%BA%95%E5%B1%82%E5%8F%99%E4%BA%8B%E5%AD%A6%E4%B8%93%E9%A2%98&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/themes/%E5%BA%95%E5%B1%82%E5%8F%99%E4%BA%8B%E5%AD%A6%E4%B8%93%E9%A2%98.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="../themes/小妖生命史专题.html">← 上一篇</a><a href="../themes/开篇诗-被跳过的总纲.html">下一篇 →</a></nav>
 </main>
 </body>

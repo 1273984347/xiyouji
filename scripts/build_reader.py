@@ -21,6 +21,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from urllib.parse import quote
 
 import markdown
 
@@ -75,7 +76,101 @@ STYLE = """
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 """
+
+
+# W847 AC-22：这些 H2 段在章节页折叠为 <details>（其余板块页无同名 H2，天然空转）。
+# 「原文全文」一并折叠是实测逼出来的：只折剧情梗概+深度解读时，折叠态高度平均仍有 84.2%
+# （中位 91.6%·100 页里仅 17 页达标），达不到 AC 的 ≤60%——因为原文全文占正文约 48.9%。
+FOLD_SECTIONS = ("剧情梗概", "深度解读", "原文全文")
+ISSUE_NEW = "https://github.com/1273984347/xiyouji/issues/new"
+
+
+def fold_sections(body_html: str, names: tuple[str, ...] = FOLD_SECTIONS) -> tuple[str, int]:
+    """把指定 H2 段包进 <details>（W847）。返回 (新 HTML, 折叠节数)。
+
+    按 <h2> 边界切分正文，命中的段整段（含其后到下一个 h2 之前的内容）包进 details；
+    h2 本身由 summary 承载（不再重复输出），折叠态只留一行标题。
+    """
+    parts = re.split(r"(<h2>[^<]*</h2>)", body_html)
+    if len(parts) < 3:
+        return body_html, 0
+    out = [parts[0]]
+    folded = 0
+    for i in range(1, len(parts), 2):
+        h2 = parts[i]
+        content = parts[i + 1] if i + 1 < len(parts) else ""
+        name = re.sub(r"</?h2>", "", h2).strip()
+        if name in names:
+            out.append('<details class="reader-fold"><summary>%s</summary>'
+                       '<div class="reader-fold-body">' % html.escape(name))
+            out.append(content)
+            out.append("</div></details>\n")
+            folded += 1
+        else:
+            out.append(h2)
+            out.append(content)
+    return "".join(out), folded
+
+
+def toolbar_html(rel_in_reader: str) -> str:
+    """阅读工具条 + 顶部进度条（W847 AC-23）。data-page 供脚本作 localStorage 键。"""
+    return f"""  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/{rel_in_reader}">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>"""
+
+
+def feedback_html(title: str, url: str) -> str:
+    """每页反馈（W847 AC-24）：纯链接跳 GitHub Issue 新建页并预填标题与正文，零外域脚本。"""
+    def link(kind: str, label: str, hint: str) -> str:
+        t = quote(f"[阅读反馈·{kind}] {title}")
+        b = quote(f"页面：{url}\n\n{hint}\n")
+        return f'<a href="{ISSUE_NEW}?title={t}&amp;body={b}" rel="noopener">{label}</a>'
+
+    return ("  <div class=\"reader-feedback\">\n"
+            "    <span>这页有帮助吗？</span>\n"
+            "    <div class=\"fb-row\">%s%s</div>\n"
+            "  </div>" % (link("有帮助", "👍 有帮助", "（可留一句你觉得好的地方）"),
+                          link("待改进", "👎 待改进", "（哪里不清楚、哪里写错了？）")))
 
 
 def rewrite_links(md: str, docs_root: str, up: str, up2: str, up3: str) -> tuple[str, list[str]]:
@@ -162,6 +257,7 @@ def head(rel: str, title: str, desc: str) -> str:
 <link rel="stylesheet" href="{prefix}tokens.css">
 <link rel="stylesheet" href="{prefix}system.css">
 <script src="{prefix}js/theme-init.js"></script>
+<script src="{prefix}js/reader-enhance.js" defer></script>
 <style>{STYLE}</style>"""
 
 
@@ -266,14 +362,18 @@ def _render_one_page(src, docs_root, cat_title, rendered, idx):
     home = (dup + "index.html") if depth else "index.html"
 
     blob = f"{BLOB}{docs_root}/{fname}"
+    body_html, _n_folded = fold_sections(body_html)  # W847 AC-22
+    rel_in_reader = out_rel[len("reader/"):] if out_rel.startswith("reader/") else out_rel
     body = f"""  <nav class="reader-topnav">
     <a class="brand" href="{home}">详解西游记 · 站内阅读</a>
     <a href="{up}../index.html">站点首页</a>
     <a href="{blob}" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+{toolbar_html(rel_in_reader)}
   <article class="reader-body">
 {body_html}
   </article>
+{feedback_html(title, BASE + "reader/" + rel_in_reader)}
   <nav class="reader-pn">{prev_html}{next_html}</nav>"""
     (OUT / out_rel).parent.mkdir(parents=True, exist_ok=True)
     (OUT / out_rel).write_text(

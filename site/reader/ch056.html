@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第056回-神狂诛草寇道昧放心猿.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch056.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第056回 神狂诛草寇 道昧放心猿</h1>
 <blockquote>
@@ -1269,10 +1312,11 @@ td.num, th.num {
 <p><strong>第五十六回 神狂诛草寇 道昧放心猿</strong></p>
 <p>回目两句，一句写悟空，一句写唐僧。"神狂"是悟空杀心起，"诛草寇"是结果；"道昧"是唐僧心昏，"放心猿"是逐徒。<strong>前句是因，后句是果——可因果之间，藏着全书最深的悖论：杀的是该杀之人，逐的是该留之徒。</strong> 吴承恩把"对"与"对"撞在一起，撞出了这一回的悲剧底色。</p>
 <p>"道昧"二字尤冷。昧者，蒙蔽也。唐僧不识妖（如白骨精），是"无明"；识得妖却不许杀，是"慈悲"；可这一次死的不是妖，是人——是草寇，是逆子，是真正的恶人。唐僧的"道"在这一回里蒙了尘：<strong>他以善念为名，放走的不是心猿，是取经路上唯一能护他性命的那只手。</strong></p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>唐僧师徒离了蝎子精琵琶洞，行至端阳时节，路遇高山。下山平阳处，众草寇拦路，两个贼首将唐僧吊在树上。悟空化作小和尚戏弄群贼，取棒将两个贼首当场打死。唐僧大惊，命八戒掩埋尸首，撮土焚香祷告，祷词中竟明言"他姓孙，我姓陈，各居异姓"，将杀人之责尽数推与悟空，叫死者去阴司告状只告行者一人。悟空被激怒，亦于坟前放话——"玉帝认得我，二十八宿惧我，十代阎君曾与我为仆从"，<strong>全三界之权力网，是为自己的免责状</strong>。</p>
 <p>师徒不睦而行，暮投杨家庄借宿。老者杨姓，七十四岁，有一逆子不肖，专好打家截道。老杨暗告逆子五日未归，悟空直言"替你打杀了罢"。当夜果有群贼寻至，老杨之子在内——正是白日逃散之余党。老杨念师徒远来，开后门放其逃生。群贼五更发觉，持刀追来。悟空一棒打散群贼，更问明"穿黄的是杨老儿逆子"，<strong>夺刀割首，血淋淋提至唐僧马前</strong>。</p>
 <p>唐僧惊跌下马，连念紧箍咒十余遍，复将悟空逐走。悟空筋斗云去，无影无踪。回末诗云："心有凶狂丹不熟，神无定位道难成。"——<strong>这一去，便是真假美猴王的伏笔。</strong></p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、暴力的两重边界</h3>
 <p>悟空这一回杀了三批人。第一批是两个贼首——那是拦路抢劫、吊打唐僧的现行歹人，悟空动手时他们刚打完唐僧，<strong>这一棒算是正当防卫的延伸</strong>。第二批是五更追来的一伙——他们持刀追杀，悟空打散他们，汤着即死，这一阵也算自卫。</p>
@@ -1427,7 +1471,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch055.html">上一回</a> · <a href="ch057.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/philosophy.html">哲学可视化</a> · <a href="../data/jurisprudence.html">法理经济可视化</a> · <a href="../data/relationships.html">关系演化可视化</a> · <a href="../data/risk-project.html">风险评估可视化</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/沙僧.html">沙僧</a> · <a href="people/玉帝.html">玉帝</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD101 · 草寇之死——当打杀凡人触碰了取经的底线</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1437,6 +1481,7 @@ td.num, th.num {
 <p>他们打死过白骨精、金角银角、红孩儿、蝎子精——每一次动手，玄奘都在场，念珠一颗一颗捻过去，心里默念《心经》。那些是妖，是魔，是山精水怪，悟空动手时他拦不住，也从不真正阻拦。观音给他的紧箍咒，管的是"这个徒弟不听话"，不是"这个徒弟杀妖太多"。</p>
 <p>但这一次不同。</p>
 <p>这一回拦路的是一伙凡人。二三十个草寇，拿着刀枪棍棒，在荒山野岭劫道。他们不是妖，不是魔，是活生生的、会说话、会求饶、会喊"爷爷饶命"的人。而悟空把他们打死了，一棒一个，毫不犹豫。</p>
+</div></details>
 <h2>一、"神狂"与"道昧"：回目里藏着的两笔账</h2>
 <p>回目八个字，一人一笔账。</p>
 <p>"神狂诛草寇"——神指的是悟空。狂，是放肆，是杀红了眼。诛，是杀伐的正式用词。草寇，是被杀者的身份。这五个字连起来，是定罪的口吻：你的神通狂了，你把凡人当草寇诛了。</p>
@@ -1488,7 +1533,7 @@ td.num, th.num {
 </li>
 </ol>
 <hr />
-<h2>原文全文</h2>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>诗曰：灵台无物谓之清，寂寂全无一念生。猿马牢收休放荡，精神谨慎莫峥嵘。除六贼，悟三乘，万缘都罢自分明。色邪永灭超真界，坐享西方极乐城。 话说唐三藏咬钉嚼铁，以死命留得一个不坏之身，感蒙行者等打死蝎子精，救出琵琶洞。一路无词，又早是朱明时节，但见那：熏风时送野兰香，濯雨才晴新竹凉。 艾叶满山无客采，蒲花盈涧自争芳。海榴娇艳游蜂喜，溪柳阴浓黄雀狂。长路那能包角黍，龙舟应吊汨罗江。他师徒们行赏端阳之景，虚度中天之节，忽又见一座高 山阻路。长老勒马回头叫道：“悟空，前面有山，恐又生妖怪，是必谨防。”行者等道：“师父放心，我等皈命投诚，怕甚妖怪！”长老闻言甚喜，加鞭催骏马，放 辔趱蛟龙。须臾上了山崖，举头观看，真个是：顶巅松柏接云青，石壁荆榛挂野藤。万丈崔巍，千层悬削。</p>
 <p>万丈崔巍峰岭峻，千层悬削壑崖深。 苍苔碧藓铺阴石，古桧高槐结大林。林深处，听幽禽，巧声襕睆实堪吟。涧内水流如泻玉，路旁花落似堆金。山势恶，不堪行，十步全无半步平。狐狸糜鹿成双遇， 白鹿玄猿作对迎。忽闻虎啸惊人胆，鹤鸣振耳透天庭。黄梅红杏堪供食，野草闲花不识名。</p>
 <p>四众进山，缓行良久，过了山头，下西坡，乃是一段 平阳之地。猪八戒卖弄精神，教沙和尚挑着担子，他双手举钯，上前赶马。那马更不惧他，凭那呆子嗒笞笞的赶，只是缓行不紧。行者道：“兄弟，你赶他怎的？让 他慢慢走罢了。”八戒道：“天色将晚，自上山行了这一日，肚里饿了，大家走动些，寻个人家化些斋吃。”行者闻言道：“既如此，等我教他快走。”把金箍棒幌 一幌，喝了一声，那马溜了缰，如飞似箭，顺平路往前去了。你说马不怕八戒，只怕行者何也？行者五百年前曾受玉帝封在大罗天御马监养马，官名弼马温，故此传 留至今，是马皆惧猴子。那长老挽不住缰口，只扳紧着鞍桥，让他放了一路辔头，有二十里向开田地，方才缓步而行。</p>
@@ -1608,8 +1653,13 @@ td.num, th.num {
 煁
 䴝
 䃨
-䔱</p>
+䔱</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%BA%94%E5%8D%81%E5%85%AD%E5%9B%9E%20%E7%A5%9E%E7%8B%82%E8%AF%9B%E8%8D%89%E5%AF%87%20%E9%81%93%E6%98%A7%E6%94%BE%E5%BF%83%E7%8C%BF&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch056.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%BA%94%E5%8D%81%E5%85%AD%E5%9B%9E%20%E7%A5%9E%E7%8B%82%E8%AF%9B%E8%8D%89%E5%AF%87%20%E9%81%93%E6%98%A7%E6%94%BE%E5%BF%83%E7%8C%BF&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch056.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch055.html">← 上一篇</a><a href="ch057.html">下一篇 →</a></nav>
 </main>
 </body>

@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
 <script src="../../js/theme-init.js"></script>
+<script src="../../js/reader-enhance.js" defer></script>
 <style>
   .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
@@ -52,6 +53,35 @@
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -61,6 +91,19 @@
     <a href="../../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/西游渡第十九讲专题.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/themes/西游渡第十九讲专题.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>西游渡 · 第十九讲</h1>
 <blockquote>
@@ -108,6 +151,10 @@ W285（git 创建提交溯源 · W424 回填）
 <p>问：它觉得金兜山和兜率宫有什么不同？</p>
 <p>答：最大的不同：金兜山有水。金兜山山涧里那几条极细极清的溪，溪底有极小的透明虾子——它没眼睛但能感觉到那些虾子在水中极轻微地弹尾，弹尾时产生极细的脉冲，脉冲穿过水面传进空气再传到它刚毛，它觉得那脉冲极凉极甜。它在兜率宫一辈子没见过水——兜率宫极干极热，老君炼丹不用水，老君喝的是甘露。它家族代代在干燥的木纤维里啃甬道、化蛹、羽化，翅膀从蛹壳里抽出来时必须抢在蛹壳被丹炉烤脆之前展开，否则翅脉会烤焦。金兜山不同，山涧里的水汽极丰沛，它第一次感觉到自己翅膀可以完全展开不必担心脱水。它后来在青牛耳根后产卵，卵壳比祖辈在兜率宫产的稍微薄了一点点——因为金兜山的空气湿度让卵壳不需要那么厚，省下来的几丁质留给下一代幼虫啃木纤维用。很久以后，青牛回到兜率宫，它带回去的牛虻后代也回到了干燥里。但那一代在金兜山羽化过的牛虻，翅膀上的翅脉比祖辈多了一条极细极短的分支——那是从金兜山溪水边吸到的水分在羽化时灌满了翅芽，把本来应该萎缩的副脉撑开了。那条副脉在后代身上一代代遗传下去，渐渐退化，越来越短，但一直没有消失。老君有时在丹房里坐着，看到阳光穿过窗棂照进来，照到青牛耳朵上方那一小群极小的飞虫——阳光穿过它们的翅膀，老君能看到它们翅膀上有一条极小极透的细脉，只一瞬——然后虫子飞离光束，消失在丹炉红光里。老君收回目光，继续看竹简。他没有问。但他记得，很久以前他在金兜山牵牛回家时，也看到了同样的细脉——就在青牛跛着蹄子踩过的山涧边，一只水虿最后一次蜕皮，从水里爬上岸。老君和牛虻没有说话。他们只是共用同一段记忆。</p>
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E8%A5%BF%E6%B8%B8%E6%B8%A1%20%C2%B7%20%E7%AC%AC%E5%8D%81%E4%B9%9D%E8%AE%B2&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/themes/%E8%A5%BF%E6%B8%B8%E6%B8%A1%E7%AC%AC%E5%8D%81%E4%B9%9D%E8%AE%B2%E4%B8%93%E9%A2%98.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E8%A5%BF%E6%B8%B8%E6%B8%A1%20%C2%B7%20%E7%AC%AC%E5%8D%81%E4%B9%9D%E8%AE%B2&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/themes/%E8%A5%BF%E6%B8%B8%E6%B8%A1%E7%AC%AC%E5%8D%81%E4%B9%9D%E8%AE%B2%E4%B8%93%E9%A2%98.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="../themes/西游渡第十七讲专题.html">← 上一篇</a><a href="../themes/西游渡第十五讲专题.html">下一篇 →</a></nav>
 </main>
 </body>

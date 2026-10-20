@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第074回-长庚传报魔头狠.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch074.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第 074回 长庚传报魔头狠 行者施为变化能</h1>
 <blockquote>
@@ -1268,8 +1311,9 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>长庚传报魔头狠 行者施为变化能</strong></p>
 <p>回目出自世德堂本《新刻出像官板大字西游记》。上句"长庚"即太白金星李长庚，天庭老臣亲降凡尘示警，可见此难规格之高；下句"变化能"点出悟空应对之策——非力敌而智取，化小妖入洞探听虚实。一句之内，"天意垂警"与"人力周旋"两线齐发，为狮驼岭八百里之险立下叙事纲领。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>师徒四人西行至一座高山，忽见一位老者立于山坡高呼"长老且住！快回去！"。老者实为太白金星李长庚所化，特来示警：前方八百里狮驼岭上有三大魔头，领四万七八千小妖，专吃东来西去之人。三魔乃青毛狮子怪、黄牙老象、大鹏金翅雕，其中大鹏更将狮驼国一国君臣百姓尽皆吃尽，夺了江山，自立为王。金星言毕化作清风而去。悟空安顿师父，自去探听虚实，变作一个小妖名"总钻风"，混入狮驼洞打探军情。洞中甲杖齐整、号令森严，悟空借与小妖攀谈之机套出三魔王各自手段——青狮曾吞十万天兵、白象鼻卷如山、大鹏一翅九万里。悟空正欲回报，却被三魔头识破行藏。</p>
+</div></details>
 <h2>重点要点</h2>
 <ol>
 <li>
@@ -1325,7 +1369,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch073.html">上一回</a> · <a href="ch075.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/81-hardships.html">八十一难数据</a> · <a href="../data/monster-sociology.html">妖怪社会学</a> · <a href="themes/八十一难专题.html">八十一难专题</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/如来.html">如来</a> · <a href="people/观音.html">观音</a> · <a href="people/太上老君.html">太上老君</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD064 · 狮驼岭——当尸山血海铺成了路</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1338,6 +1382,7 @@ td.num, th.num {
 <p>气压不对。不是暴风雨前的低气压，不是高山上的缺氧，是负压——像有人在远处不断抽走这片区域的空气，而周围的空气来不及补充。悟空也感觉到了。金箍棒横在肩上，棒身压着后颈那块蝎子精留下的三层疤，疤下的筋脉在跳，不是疼——是预警。</p>
 <p>狮驼岭是八十一难里面积最大、驻妖密度最高、结果最惨烈的一站。之前所有劫难中“被吃掉”的叙事大多停留在个体层面——两个随从、几个村民、被吞进人种袋或蟒腹。但狮驼岭把“吃人”从个体行为变成了一座全自动工业流水线，从抓捕、分类、加工到消化，每一个环节都有专门的妖怪负责，每一步都有对应的洞穴和刑具。取经团队即将走进的不只是一个妖怪洞府——而是一座以人类骨血为唯一原料、运转了五百年的巨型工厂。它的恐怖不在于某个魔王的法力有多高，而在于每一个环节都如此平常——妖怪们像上工一样走进洞，像换班一样拖出骨头，像倒垃圾一样把骨灰撒进山涧。它们不觉得吃人有什么特别——对它们来说，那不是罪行，是生计。</p>
 <p>这就是取经路上最诚实的一站。没有误会，没有因果，没有被逼无奈的苦衷。只有骨头和吃骨头的人。</p>
+</div></details>
 <h2>一、骨——太白金星的预警</h2>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1407,7 +1452,7 @@ td.num, th.num {
 </li>
 </ol>
 <hr />
-<h2>原文全文</h2>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>情欲原因总一般，有情有欲自如然。沙门修炼纷纷士，断欲忘情即是禅。须着意，要心坚，一尘不染月当天。行功进步休教错，行满功完大觉仙。话表三 藏师徒们打开欲网，跳出情牢，放马西行。走多时，又是夏尽秋初，新凉透体，但见那：急雨收残暑，梧桐一叶惊。萤飞莎径晚，蛩语月华明。黄葵开映露，红蓼遍 沙汀。蒲柳先零落，寒蝉应律鸣。三藏正然行处，忽见一座高山，峰插碧空，真个是摩星碍日。长老心中害怕，叫悟空道：“你看前面这山，十分高耸，但不知有路 通行否。”行者笑道：“师父说那里话。自古道，山高自有客行路，水深自有渡船人，岂无通达之理？可放心前去。”长老闻言，喜笑花生，扬鞭策马而进，径上高 岩。</p>
 <p>行不数里，见一老者，鬓蓬松，白发飘搔；须稀朗，银丝摆动。项挂一串数珠子，手持拐杖现龙头。远远的立在那山坡上高呼：“西进的长 老，且暂住骅骝，紧兜玉勒。这山上有一伙妖魔，吃尽了阎浮世上人，不可前进！”三藏闻言，大惊失色。一是马的足下不平，二是坐个雕鞍不稳，扑的跌下马来， 挣挫不动，睡在草里哼哩。行者近前搀起道：“莫怕莫怕！有我哩！”长老道：“你听那高岩上老者，报道这山上有伙妖魔，吃尽阎浮世上人，谁敢去问他一个真实 端的？”行者道：“你且坐地，等我去问他。”三藏道：“你的相貌丑陋，言语粗俗，怕冲撞了他，问不出个实信。”行者笑道：“我变个俊些儿的去问他。”三藏 道：“你是变了我看。”好大圣，捻着诀，摇身一变，变做个干干净净的小和尚几，真个是目秀眉清，头圆脸正，行动有斯文之气象，开口无俗类之言辞，抖一抖锦 衣直裰，拽步上前，向唐僧道：“师父，我可变得好么？”三藏见了大喜道：“变得好！”八戒道：“怎么不好！只是把我们都比下去了。老猪就滚上二三年，也变 不得这等俊俏！”</p>
 <p>好大圣，躲离了他们，径直近前对那老者躬身道：“老公公，贫僧问讯了。”那老儿见他生得俊雅，年少身轻，待答不答的还了他个礼，用手摸着他头儿笑嘻嘻问道：“小和尚，你是那里来的？”行者道：“我们是东土大唐来的，特上西天拜佛求经。</p>
@@ -1527,8 +1572,13 @@ td.num, th.num {
 腏
 綥
 鶫
-鰭</p>
+鰭</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%B8%83%E5%8D%81%E5%9B%9B%E5%9B%9E%20%E9%95%BF%E5%BA%9A%E4%BC%A0%E6%8A%A5%E9%AD%94%E5%A4%B4%E7%8B%A0%20%E8%A1%8C%E8%80%85%E6%96%BD%E4%B8%BA%E5%8F%98%E5%8C%96%E8%83%BD&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch074.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%B8%83%E5%8D%81%E5%9B%9B%E5%9B%9E%20%E9%95%BF%E5%BA%9A%E4%BC%A0%E6%8A%A5%E9%AD%94%E5%A4%B4%E7%8B%A0%20%E8%A1%8C%E8%80%85%E6%96%BD%E4%B8%BA%E5%8F%98%E5%8C%96%E8%83%BD&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch074.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch073.html">← 上一篇</a><a href="ch075.html">下一篇 →</a></nav>
 </main>
 </body>

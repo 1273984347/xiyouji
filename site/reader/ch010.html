@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第010回-二将军宫门镇鬼唐太宗地府还魂.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch010.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第010回 二将军宫门镇鬼 唐太宗地府还魂</h1>
 <blockquote>
@@ -1268,12 +1311,13 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第十回 二将军宫门镇鬼 唐太宗地府还魂</strong></p>
 <p>回目以两组意象领起：二将军镇鬼（秦琼、尉迟恭宫门守夜）与唐太宗地府还魂。上句是民间门神信仰的起源，下句是取经工程最关键的"恐吓营销"。<strong>这一回用一死一生之间，藏了整部《西游记》最容易被忽略的政治叙事——取经这件事，不是唐太宗主动想要的，是被精心设计出来、让他"不得不做"的一件事。</strong></p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>太宗自梦见泾河龙王提头索命后，身体一日不如一日，女医官诊脉称"皇帝病重，已在垂危"。魏徵写一封信，嘱太宗若到阴司，付与酆都判官崔珏——崔珏生前在唐为官，与魏徵八拜为交，见信必放太宗还阳。太宗收信，瞑目而亡。</p>
 <p>魂魄离宫，飘飘荡荡来到一座城外，遇判官崔珏跪迎——"臣已知陛下必来，在此专候"。崔珏拆魏徵信，信中以"八拜为交"的旧情相托，请崔珏放太宗还阳。崔珏带太宗入森罗殿。十殿阎王——秦广王、初江王、宋帝王、忤官王、阎罗王、平等王、泰山王、都市王、卞城王、转轮王——降阶相迎。秦广王先质问泾河鬼龙告太宗"许救而反杀"之事，太宗以"魏徵梦中斩龙"自辩，阎王们当即驳回龙王诬告。</p>
 <p>判官崔珏取生死簿，簿上写"南赡部洲大唐太宗皇帝，注定贞观一十三年"——今年正是贞观十三年，阳寿该尽。崔珏"吃了一惊"，未呈阎王，提笔在"一"字上添两横，改为"三十三年"，即添二十年阳寿。阎王问登基多少年，崔珏答"贞观三十三年"，阎王遂请太宗返本还阳。</p>
 <p>崔珏带太宗"参观"地府：幽冥背阴山（无生命迹象）、十八层地狱（吊筋狱、幽枉狱、火坑狱、酆都狱、拔舌狱、剥皮狱、磨捱狱、碓捣狱、车崩狱、寒冰狱、脱壳狱、抽肠狱、油锅狱、黑暗狱、刀山狱、血池狱、阿鼻狱、秤杆狱）、奈河桥（金桥、银桥、奈何桥三桥并列）、枉死城（太宗平定天下时杀死的"六十四处烟尘、七十二处草寇"冤魂涌出索命）、六道轮回（仙道、贵道、福道、人道、富道、鬼道）。太宗"心惊胆战，脚软难行"。崔珏指出唯一出路：办水陆大会，超度亡魂。</p>
 <p>太宗从"超生贵道门"还阳，在棺中坐起，将守灵文武吓得半死。自此，太宗不再是以前的太宗——他见过地府，知道欠了多少条命，知道十八层地狱不是比喻。即日下旨：出榜招僧，修建水陆大会。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、魏徵的一封信：跨越阴阳的人脉网络</h3>
 <p>魏徵做了一件极不寻常的事——他写了一封信，交给太宗，说："臣有书一封，进与陛下。若到阴司，将此书付与酆都判官崔珏。他先在唐时为官，与臣八拜为交，相知甚厚。他见臣书，必然放陛下回来。"</p>
@@ -1364,7 +1408,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch009.html">上一回</a> · <a href="ch011.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/philosophy.html">哲学可视化</a> · <a href="../data/karma-reincarnation.html">因果与轮回可视化</a> · <a href="../data/jurisprudence.html">法理经济可视化</a> · <a href="../data/cognitive-psychology.html">认知心理可视化</a>
 关联分析：<a href="people/唐僧.html">唐僧</a> · <a href="people/如来.html">如来</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD010 · 唐太宗在地府看到了什么</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1404,7 +1448,8 @@ td.num, th.num {
 <p>两兄弟和黄袍怪在洞口开战。原著写打了“数十合”，不分胜负。</p>
 <p>这里有一个容易被忽略的细节：黄袍怪使的兵器是一把“钢刀”，不是普通的妖怪兵器。更关键的是，他的武艺路数与八戒非常相似。原著写八戒打的时候心里想的是：“这妖怪好手段，怎么和我一般？”这个感觉不是八戒的错觉——黄袍怪和八戒一样，都曾是天上神将。他的真实身份将在第31回揭晓：二十八星宿中的奎木狼。他和八戒在天庭时代是同事。</p>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>却说太宗与
 魏征
 在便殿对弈，一递一着，摆开阵势。正合《烂柯经》云：博弈之道，贵乎严谨。高者在腹，下者在边，中者在角，此棋家之常法。法曰： 宁输一子，不失一先。击左则视右，攻后则瞻前。有先而后，有后而先。两生勿断，皆活勿连。阔不可太疏，密不可太促。与其恋子以求生，不若弃之而取胜；与其 无事而独行，不若固之而自补。彼众我寡，先谋其生；我众彼寡，务张其势。善胜者不争，善阵者不战；善战者不败，善败者不乱。夫棋始以正合，终以奇胜。凡敌 无事而自补者，有侵绝之意；弃小而不救者，有图大之心。随手而下者，无谋之人；不思而应者，取败之道。《诗》云：“惴惴小心，如临于谷。”此之谓也。诗 曰，</p>
@@ -1563,8 +1608,13 @@ td.num, th.num {
 焱
 噫
 摒
-蛎</p>
+蛎</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC10%E5%9B%9E%20%E4%BA%8C%E5%B0%86%E5%86%9B%E5%AE%AB%E9%97%A8%E9%95%87%E9%AC%BC%20%E5%94%90%E5%A4%AA%E5%AE%97%E5%9C%B0%E5%BA%9C%E8%BF%98%E9%AD%82&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch010.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC10%E5%9B%9E%20%E4%BA%8C%E5%B0%86%E5%86%9B%E5%AE%AB%E9%97%A8%E9%95%87%E9%AC%BC%20%E5%94%90%E5%A4%AA%E5%AE%97%E5%9C%B0%E5%BA%9C%E8%BF%98%E9%AD%82&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch010.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch009.html">← 上一篇</a><a href="ch011.html">下一篇 →</a></nav>
 </main>
 </body>

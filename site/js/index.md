@@ -11,10 +11,11 @@
 
 - （无）
 
-## 文件（3）
+## 文件（4）
 
 ### JavaScript / TypeScript
 
+- `reader-enhance.js`
 - `rum.js`
 - `theme-init.js`
 - `visit-log.js`

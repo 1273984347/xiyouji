@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第082回-姹女求阳元神护道.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch082.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第082回 姹女求阳 元神护道</h1>
 <blockquote>
@@ -1269,8 +1312,9 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第八十二回 姹女求阳 元神护道</strong></p>
 <p>回目十四字二句，前句主"求"——老鼠精欲采唐僧元阳以成太乙金仙；后句主"护"——悟空以元神之变化护持道体。"姹女"对"元神"，"求阳"对"护道"，一妖一圣，一动一守。<strong>"姹女"在内丹学中本指汞、指心中阴火，亦指修炼所采之女鼎</strong>；此处直接落到老鼠精身上，将其色诱之欲升格为炼丹之工。"元神"则双关——既是悟空之法身变化（苍蝇、蟭蟟虫、红桃、饿鹰），亦是唐僧当护的"真阳元神"。<strong>护道即护体，护体即护阳</strong>，吴承恩把"贞洁"二字写成了一具身体的政治学。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>八戒下山寻水，遇两个女妖在井上打"阴阳交媾的好水"，被打后回报悟空。悟空以"杨木檀木"之喻点化八戒，令其变黑胖和尚再去套话，得知妖精"今夜摄了唐僧在洞内，要管待他，晚间成亲"。三众跟踪女妖至陷空山，见一牌楼书"无底洞"，洞口如缸，深三百余里。悟空纵身入洞，见洞中别有日月花木，妖精居其中。变苍蝇探听，闻妖精要排素筵与唐僧成亲。飞至东廊见唐僧，唐僧哭诉"若把真阳丧了，就身堕轮回，永世不得翻身"。悟空设计：教唐僧吃酒时斟起喜花，自己变蟭蟟虫儿隐于酒泡之下，待妖精吞下即破其心肝。不料妖精识破挑出，悟空变饿老鹰掀翻席面，妖精惊惧，仍决意"指天为媒，指地作订"。悟空再入洞，见唐僧垂泪，遂改计——教唐僧哄妖精入园赏桃，自己变红桃，让唐僧将红桃让给妖精吃。妖精张口咬桃，行者一跟头翻入其咽喉，直入肚腹，在其五脏中捣腾。妖精疼倒在地，求小妖将唐僧送出洞外以保性命，遂背唐僧出洞，至洞口遇八戒沙僧接应。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、"姹女求阳"的内丹学：女鼎与元阳的炼丹术</h3>
 <p>妖精命女妖打"阴阳交媾的好水"，安排素果素菜筵席，又言"指天为媒，指地作订"——<strong>这不是粗鄙的劫色，是仪式化的"采阳补阴"</strong>。明代内丹学以"姹女"配"婴儿"，以女鼎采男子元阳，谓之"金丹大药"。老鼠精要的不是唐僧的人，是他的"童身元阳"——十世修行的取经僧，于她而言是一味药材。<strong>"求阳"二字下得极准：求的不是情欲，是工夫；不是结合，是采补。</strong> 这种把人身炼成丹药的逻辑，正是明嘉靖朝陶仲文、邵元节以"红铅""采阴"得宠的现实投影——当修炼需要以他人身体为代价，修炼本身就是妖术。</p>
@@ -1348,7 +1392,7 @@ td.num, th.num {
 <blockquote>
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch081.html">上一回</a> · <a href="ch083.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/relationships.html">人物关系</a> · <a href="../data/character-appearance.html">人物出场</a> · <a href="../data/philosophy.html">哲学可视化</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD066 · 无底洞——当老鼠称自己为半截观音</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1421,7 +1465,8 @@ td.num, th.num {
 </li>
 </ol>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>却说八戒跳下山，寻着一条小路，依路前行，有五六里远近，忽见二个女怪，在那井上打水。他怎么认得是两个女怪？见他头上戴一顶一尺二三寸高的篾 丝鬏髻，甚不时兴。呆子走近前叫声妖怪，那怪闻言大怒，两人互相说道：“这和尚惫懒！我们又不与他相识，平时又没有调得嘴惯，他怎么叫我们做妖怪！”那怪 恼了，轮起抬水的杠子，劈头就打。这呆子手无兵器，遮架不得，被他捞了几下，侮着头跑上山来道：“哥啊，回去罢！</p>
 <p>妖怪凶！”行者道：“怎么凶？”八戒道：“山凹里两个女妖精在井上打水，我只叫了他一声，就被他打了我三四杠子！”行者道：</p>
 <p>“你叫他做甚么的？”八戒道：“我叫他做妖怪。”行者笑道：“打得还少。”八戒道：“谢你照顾！头都打肿了，还说少哩！”行者道：“‘温柔天下去得，刚 强寸步难移’。他们是此地之怪，我们是远来之僧，你一身都是手，也要略温存。你就去叫他做妖怪，他不打你，打我？人将礼乐为先。”八戒道：“一发不晓 得！”行者道：“你自幼在山中吃人，你晓得有两样木么？”八戒道：“不知，是甚么木？”行者道：“一样是杨木，一样是檀木。杨木性格甚软，巧匠取来，或雕 圣象，或刻如来，装金立粉，嵌玉装花，万人烧香礼拜，受了多少无量之福。那檀木性格刚硬，油房里取了去，做柞撒，使铁箍箍了头，又使铁锤往下打，只因刚 强，所以受此苦楚。”八戒道：“哥啊，你这好话儿，早与我说说也好，却不受他打了。”行者道：“你还去问他个端的。”八戒道：“这去他认得我了。”行者 道：“你变化了去。”八戒道：“哥啊，且如我变了，却怎么问么？”行者道：“你变了去，到他跟前，行个礼儿，看他多大年纪，若与我们差不多，叫他声姑娘； 若比我们老些儿，叫他声奶奶。”八戒笑道：“可是蹭蹬！这般许远的田地，认得是甚么亲！”行者道：“不是认亲，要套他的话哩。若是他拿了师父，就好下手； 若不是他，却不误了我们别处干事？”八戒道：</p>
@@ -1530,8 +1575,13 @@ td.num, th.num {
 劔
 鰏
 䥚
-䖷</p>
+䖷</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E5%85%AB%E5%8D%81%E4%BA%8C%E5%9B%9E%20%E5%A7%B9%E5%A5%B3%E6%B1%82%E9%98%B3%20%E5%85%83%E7%A5%9E%E6%8A%A4%E9%81%93&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch082.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E5%85%AB%E5%8D%81%E4%BA%8C%E5%9B%9E%20%E5%A7%B9%E5%A5%B3%E6%B1%82%E9%98%B3%20%E5%85%83%E7%A5%9E%E6%8A%A4%E9%81%93&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch082.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch081.html">← 上一篇</a><a href="ch083.html">下一篇 →</a></nav>
 </main>
 </body>

@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第031回-猪八戒义激猴王孙行者智降妖怪.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch031.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第031回 猪八戒义激猴王 孙行者智降妖怪</h1>
 <blockquote>
@@ -1269,10 +1312,11 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第三十一回 猪八戒义激猴王 孙行者智降妖怪</strong></p>
 <p>本回处于全书叙事的关键修复节点。上承第027回"三打白骨精"以来唐僧驱逐悟空的裂痕——第028回悟空归山、第029回八戒转山林、第030回邪魔侵正法、唐僧被变为虎。本回解决这场延续数回的团队危机：八戒往花果山请回悟空，悟空智降黄袍怪、救唐僧出虎形。下启第032回平顶山金角银角之难。在全书结构上，本回是"心猿归正"母题的第二次显化，亦是取经团队历经裂变后重新合拢的转折点。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>黄袍怪将唐僧变为老虎，宝象国朝野大乱。白龙马夜间化身宫娥刺杀妖精未遂，反被打伤马腿，遂嘱八戒往花果山请悟空。八戒初到花果山，被群猴捉弄，险遭毒打。他先以"师父有难"相请，悟空将信将疑；又以"菩萨之面"相劝，悟空仍半推半就。最终八戒心生一计，谎称黄袍怪当面辱骂悟空"剥皮抽筋、剁碎着油烹"，激得悟空抓耳挠腮、暴躁乱跳，决意下山复仇。</p>
 <p>悟空与八戒驾云西行，途中下海净身以去"妖精气"，恐师父嫌其不洁。至波月洞，悟空以公主二子为质，换出沙僧；又变作公主模样，诓出妖精口中那颗舍利子玲珑内丹，一口吞下。八戒沙僧将二子掼死于宝象国白玉阶前，激妖精回洞。悟空现本相与妖精大战五六十合，一记叶底偷桃势将妖打得无影无踪。</p>
 <p>悟空识出妖精非凡间之物，筋斗直上南天门查勘。天师点算二十八宿，独缺奎木狼——原来黄袍怪即奎木狼下界。玉帝命本部星员收他上界，贬往兜率宫与太上老君烧火。悟空回波月洞引公主归朝，又喷水解了唐僧虎气。唐僧现原身谢悟空，师徒复归一心，辞王西去。</p>
+</div></details>
 <h2>重点要点</h2>
 <ol>
 <li>
@@ -1354,7 +1398,7 @@ td.num, th.num {
 <blockquote>
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch030.html">上一回</a> · <a href="ch032.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/relationships.html">人物关系</a> · <a href="../data/character-appearance.html">人物出场</a> · <a href="../data/philosophy.html">哲学可视化</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD031 · 奎木狼的“情缘”，是天庭最体面的遮羞布</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1371,7 +1415,8 @@ td.num, th.num {
 </ol>
 <hr />
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>义结孔怀，法归本性。金顺木驯成正果，心猿木母合丹元。</p>
 <p>共登极乐世界，同来不二法门。经乃修行之总径，佛配自己之元神。兄和 弟会成三契，妖与魔色应五行。剪除六门趣，即赴大雷音。却说那呆子被一窝猴子捉住了，扛抬扯拉，把一件直裰子揪破，口里劳劳叨叨的，自家念诵道：“罢了！ 罢了！这一去有个打杀的情了！”不一时，到洞口。那大圣坐在石崖之上，骂道：“你这馕糠的劣货！你去便罢了，怎么骂我？”八戒跪在地下道：“哥啊，我不曾 骂你，若骂你，就嚼了舌头根。我只说哥哥不去，我自去报师父便了，怎敢骂你？”行者道：“你怎么瞒得过我？我这左耳往上一扯，晓得三十三天人说话；我这右 耳往下一扯，晓得十代阎王与判官算帐。你今走路把我骂，我岂不听见？”八戒道：“哥啊，我晓得你贼头鼠脑的，一定又变作个甚么东西儿，跟着我听的。”行者 叫：“小的们，选大棍来！先打二十个见面孤拐，再打二十个背花，然后等我使铁棒与他送行！”八戒慌得磕头道：“哥哥，千万看师父面上，饶了我罢！”行者 道：</p>
 <p>“我想那师父好仁义儿哩！”八戒又道：“哥哥，不看师父啊，请看海上菩萨之面，饶了我罢！”</p>
@@ -1496,8 +1541,13 @@ td.num, th.num {
 踺
 蛺
 蝍
-騞</p>
+騞</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%80%E5%9B%9E%20%E7%8C%AA%E5%85%AB%E6%88%92%E4%B9%89%E6%BF%80%E7%8C%B4%E7%8E%8B%20%E5%AD%99%E8%A1%8C%E8%80%85%E6%99%BA%E9%99%8D%E5%A6%96%E6%80%AA&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch031.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%80%E5%9B%9E%20%E7%8C%AA%E5%85%AB%E6%88%92%E4%B9%89%E6%BF%80%E7%8C%B4%E7%8E%8B%20%E5%AD%99%E8%A1%8C%E8%80%85%E6%99%BA%E9%99%8D%E5%A6%96%E6%80%AA&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch031.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch030.html">← 上一篇</a><a href="ch032.html">下一篇 →</a></nav>
 </main>
 </body>

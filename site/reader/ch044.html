@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第044回-法身元运逢车力心正妖邪度脊关.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch044.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第044回 法身元运逢车力 心正妖邪度脊关</h1>
 <blockquote>
@@ -1269,8 +1312,9 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第四十四回 法身元运逢车力 心正妖邪度脊关</strong></p>
 <p>本回承第043回"黑河妖孽擒僧去西洋龙子捉鼍回"——上回黑水河神开路渡师徒，本回即入车迟国；启第045回"三清观大圣留名车迟国猴王显法"——本回末三僧大闹三清观、惊走小道士，下回即与三仙正面斗法。前句"法身元运逢车力"言和尚拉车之苦役，后句"心正妖邪度脊关"言心正方能度此脊关——"脊关"既是车迟国夹脊小路之实，亦是道家修炼通脊关之喻，一语双关。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>师徒过黑水河西行，忽闻千万人呐喊之声。悟空纵云观看，见城外沙滩许多和尚拽车，车上装砖瓦木植，号子齐喊"大力王菩萨"。城内走出两少年道士，众僧见之惊惧加倍用力。悟空变作云水全真，向二道士探得此国名车迟国——二十年前大旱，虎力、鹿力、羊力三仙呼风唤雨救民，国王由此敬道灭僧，拆寺追度牒，赐三仙家为奴。悟空至沙滩，众僧哭诉苦楚：二千余众死六七百、自尽七八百，只剩五百，夜夜有六丁六甲护教伽蓝保护，太白金星托梦传悟空之名。悟空打杀二道士，碎车散僧，拔毫毛分与众僧作护身法——攒紧拳头叫"齐天大圣"即有雷公护持。师徒入城，借宿智渊寺。二更时，悟空闻三清观道士禳星，唤八戒沙僧同去受用供养。三人变作三清，尽吃供品，将三清圣像掷入东厕"五谷轮回之所"。一小道士寻铃跌倒，八戒大笑惊之，老道士闻报点灯来看——本回至此而止。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、车迟国敬道灭僧</h3>
 <p>车迟国二十年前大旱，三仙呼风唤雨救民，国王由是"拆了山门，毁了佛像，追了度牒"，赐僧人为奴。此是取经路上少见的"国策之难"——妖不在洞，在朝堂；难不在斗法，在人心偏颇。吴承恩以"敬道灭僧"四字，写尽明代"崇道抑佛"的时政影子——嘉靖一朝尤甚。</p>
@@ -1340,7 +1384,7 @@ td.num, th.num {
 <blockquote>
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch043.html">上一回</a> · <a href="ch045.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/relationships.html">人物关系</a> · <a href="../data/character-appearance.html">人物出场</a> · <a href="../data/philosophy.html">哲学可视化</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD041 · 车迟国的三个问题</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1349,6 +1393,7 @@ td.num, th.num {
 <p>上回说到，黑水河河神终于拿回了自己的水府。取经团队开始习惯一件事：他们的到来本身，就能打破某地的权力僵局。但这种功能也有代价——每经过一处，当地的隐藏矛盾就会被激活。不是取经人找麻烦，是麻烦本来就在那里，只是需要一个外来者来引爆。</p>
 <p>车迟国，就是这种引爆最剧烈的一次。</p>
 <hr />
+</div></details>
 <h2>一、一座城市的信仰，被三道符咒劫持</h2>
 <p>老远就听到了声响。</p>
 <p>不是风声，不是水声，是几百人一起喊号子的声音。那声音从车迟国城外的一片工地上传来，整齐划一里透着力气耗尽前的嘶哑。玄奘在马上皱了皱眉，悟空已经跃到半空往下看。</p>
@@ -1435,7 +1480,7 @@ td.num, th.num {
 </li>
 </ol>
 <hr />
-<h2>原文全文</h2>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>诗曰：求经脱障向西游，无数名山不尽休。兔走乌飞催昼夜，鸟啼花落自春秋。微尘眼底三千界，锡杖头边四百州。宿水餐风登紫陌，未期何日是回头。 话说唐三藏幸亏龙子降妖，黑水河神开路，师徒们过了黑水河，找大路一直西来。真个是迎风冒雪，戴月披星，行彀多时，又值早春天气，但见三阳转运，万物生 辉。三阳转运，满天明媚开图画；万物生辉，遍地芳菲设绣茵。梅残数点雪，麦涨一川云。渐开冰解山泉溜，尽放萌芽没烧痕。正是那太昊乘震，勾芒御辰，花香风 气暖，云淡日光新。道旁杨柳舒青眼，膏雨滋生万象春。师徒们在路上游观景色，缓马而行，忽听得一声吆喝，好便似千万人呐喊之声。唐三藏心中害怕，兜住马不 能前进，急回头道：悟空，是那里这等响振？”八戒道：“好一似地裂山崩。”沙僧道：“也就如雷声霹雳。”三藏道：“还是人喊马嘶。”孙行者笑道：“你们都 猜不着，且住，待老孙看是何如。”</p>
 <p>好行者，将身一纵，踏云光起在空中，睁眼观看，远见一座城池。又近觑，倒也祥光隐隐，不见甚么凶气纷 纷。行者暗自沉吟道：“好去处！如何有响声振耳？那城中又无旌旗闪灼，戈戟光明，又不是炮声响振，何以若人马喧哗？”正议间，只见那城门外，有一块沙滩空 地，攒簇了许多和尚，在那里扯车儿哩。</p>
 <p>原来是一齐着力打号，齐喊“大力王菩萨”，所以惊动唐僧。行者渐渐按下云头来看处，呀！那车子装 的都是砖瓦木植土坯之类；滩头上坡坂最高，又有一道夹脊小路，两座大关，关下之路都是直立壁陡之崖，那车儿怎么拽得上去？虽是天色和暖，那些人却也衣衫蓝 缕，看此象十分窘迫。行者心疑道：“想是修盖寺院。他这里五谷丰登，寻不出杂工人来，所以这和尚亲自努力。”正自猜疑未定，只见那城门里，摇摇摆摆，走出 两个少年道士来。你看他怎生打扮，但见他：头戴星冠，身披锦绣。头戴星冠光耀耀，身披锦绣彩霞飘。足踏云头履，腰系熟丝绦。面如满月多聪俊，形似瑶天仙客 娇。那些和尚见道士来，一个个心惊胆战，加倍着力，恨苦的拽那车子。行者就晓得了：“咦！想必这和尚们怕那道士。不然啊，怎么这等着力拽扯？我曾听得人 言，西方路上，有个敬道灭僧之处，断乎此间是也。我待要回报师父，奈何事不明白，返惹他怪，敢道这等一个伶俐之人，就不能探个实信？且等下去问得明白，好 回师父话。</p>
@@ -1557,8 +1602,13 @@ td.num, th.num {
 㞞
 㮒
 䇝
-㥷</p>
+㥷</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E5%9B%9B%E5%8D%81%E5%9B%9B%E5%9B%9E%20%E6%B3%95%E8%BA%AB%E5%85%83%E8%BF%90%E9%80%A2%E8%BD%A6%E5%8A%9B%20%E5%BF%83%E6%AD%A3%E5%A6%96%E9%82%AA%E5%BA%A6%E8%84%8A%E5%85%B3&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch044.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E5%9B%9B%E5%8D%81%E5%9B%9B%E5%9B%9E%20%E6%B3%95%E8%BA%AB%E5%85%83%E8%BF%90%E9%80%A2%E8%BD%A6%E5%8A%9B%20%E5%BF%83%E6%AD%A3%E5%A6%96%E9%82%AA%E5%BA%A6%E8%84%8A%E5%85%B3&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch044.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch043.html">← 上一篇</a><a href="ch045.html">下一篇 →</a></nav>
 </main>
 </body>

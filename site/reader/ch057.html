@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第057回-真行者落伽山诉苦假猴王水帘洞誊文.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch057.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第057回 真行者落伽山诉苦 假猴王水帘洞誊文</h1>
 <blockquote>
@@ -1268,10 +1311,11 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第五十七回 真行者落伽山诉苦 假猴王水帘洞誊文</strong></p>
 <p>回目对仗极工。"真行者"对"假猴王"，"落伽山"对"水帘洞"，"诉苦"对"誊文"——一真一假、一观音一妖洞、一哭一写。吴承恩把同一时间发生的两件事并置：真悟空跪在菩萨面前流泪，假悟空坐在石台上念关文。<strong>一个在求归队，一个在另立门户。</strong> 这是全书结构最冷的一次对照——真身失语时，影子正在签字盖章。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>悟空因打死草寇被唐僧念紧箍咒驱逐，翻筋斗竖蜻蜓疼痛难禁，被赶走后走投无路，省悟"这和尚负了我心"，转赴南海落伽山，跪在观音菩萨座前放声大哭，诉说冤屈，求念《松箍儿咒》放归水帘洞。观音告知无《松箍儿咒》可褪金箍，以慧眼观之，预言唐僧顷刻有伤身之难，命悟空暂留落伽山等候。</p>
 <p>与此同时，唐僧因八戒、沙僧先后离去取水化斋，独坐路旁。假悟空乘机现身，捧水求供被拒，遂变脸打倒唐僧，抢走青毡包袱。八戒、沙僧归来救醒师父，沙僧奉命赴花果山水帘洞讨要行李。至洞前，见假悟空高坐石台，朗朗念诵通关文牒，并声称要自去西天取经、"教那南赡部洲人立我为祖"。假悟空另备白马一只、假唐僧、假八戒、假沙僧各一，组建假取经团队。沙僧大怒，一杖打死假沙僧（实为猴精），突围逃至落伽山告状。</p>
 <p>至落伽山，沙僧见真悟空立于菩萨台下，怒掣宝杖便打。观音说明真悟空在山已四日，未尝离去。<strong>真身有口难辩，影子已在外作案三日。</strong> 观音遂命真悟空与沙僧同赴花果山辨真假。本回至此戛然而止，真假对决留至下一回。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、落伽山诉苦：第一次，悟空"无地可去"</h3>
 <p>开篇极冷。悟空被逐后，作者用四个"欲待"写出他的无处可归——欲回花果山恐被小妖笑，欲投天宫恐不容久住，欲奔海岛羞见诸仙，欲投龙宫不伏气求告。<strong>齐天大圣横行三界时四海皆家，被师父赶走后竟无一地可容。</strong> 这不是地理上的无家可归，是身份上的失所流离——取经人身份一旦被剥夺，他在所有旧地缘里都失去了"回去"的资格。</p>
@@ -1363,7 +1407,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch056.html">上一回</a> · <a href="ch058.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/philosophy.html">哲学可视化</a> · <a href="../data/cognitive-psychology.html">认知心理</a> · <a href="../data/relationships.html">团队角色</a> · <a href="../data/risk-project.html">风险评估</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/沙僧.html">沙僧</a> · <a href="people/如来.html">如来</a> · <a href="people/观音.html">观音</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD056 · 六耳猕猴——当另一个你不需要紧箍咒</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1373,6 +1417,7 @@ td.num, th.num {
 <p>他以前判断一个对手危不危险，看的是法力、法宝、后台。现在蝎子精告诉他：还有一种危险叫“纯粹的战力”——不是法力高强，不是法宝逆天，不是后台够硬，是单凭一具肉身的战斗力就能在你最擅长的领域打穿你。这种对手不需要任何体制背书，她自己就是体制。悟空后脑的疤在愈合，但他脑子里有个念头一直在弹——像琵琶断弦时那个不和谐的音。</p>
 <p>如果蝎子精没有天敌，昴日星官那三声鸡叫没响，结果会怎样？答案他很清楚：蝎子精不会打死他，但会一直打下去。打到他搬救兵，打到灵山介入，打到某一方不想打了为止。野妖精够强，但被天敌克制；那如果野妖精没有天敌呢？如果有一种野妖精——不隶属于任何体制，不依赖任何法宝，没有天敌，不被克制——而且战力和他完全相等呢？</p>
 <p>他正想着，树林里走出一个人。一样的毛脸，一样的雷公嘴，一样的火眼金睛，一样的身高，一样的步态，一样的金箍棒扛在肩上的角度——从左肩到右肩，棒子后半截比前半截多伸出两指宽。悟空看着那个自己走过来，像从镜子里走出来的影子。对方看着他的表情不是愤怒，不是嘲讽，而是“你来了，我等了很久”的那种平静。有一种敌意不是来杀你的——是来替代你的。</p>
+</div></details>
 <h2>一、影——两个悟空</h2>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1445,7 +1490,7 @@ td.num, th.num {
 <p>关联：<a href="ch057.html">第57回</a> · <a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/沙僧.html">沙僧</a> · <a href="people/白龙马.html">白龙马</a> <!-- sd-crossref --></p>
 </blockquote>
 <hr />
-<h2>原文全文</h2>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>却说孙大圣恼恼闷闷，起在空中，欲待回花果山水帘洞，恐本洞小妖见笑，笑我出乎尔反乎尔，不是个大丈夫之器；欲待要投奔天宫，又恐天宫内不容久 住；欲待要投海岛，却又羞见那三岛诸仙；欲待要奔龙宫，又不伏气求告龙王。真个是无依无倚，苦自忖量道：“罢！罢！罢！我还去见我师父，还是正果。”遂按 下云头，径至三藏马前侍立道：“师父，恕弟子这遭！</p>
 <p>向后再不敢行凶，一一受师父教诲，千万还得我保你西天去也。”唐僧见了，更不答应，兜住马，即念《紧箍儿咒》，颠来倒去，又念有二十余遍，把大圣咒倒在地，箍儿陷在肉里有一寸来深浅，方才住口道：“你不回去，又来缠我怎的？”行者只教：</p>
 <p>“莫念！莫念！我是有处过日子的，只怕你无我去不得西天。”</p>
@@ -1556,8 +1601,13 @@ td.num, th.num {
 昡
 㯮
 㚫
-嫼</p>
+嫼</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%BA%94%E5%8D%81%E4%B8%83%E5%9B%9E%20%E7%9C%9F%E8%A1%8C%E8%80%85%E8%90%BD%E4%BC%BD%E5%B1%B1%E8%AF%89%E8%8B%A6%20%E5%81%87%E7%8C%B4%E7%8E%8B%E6%B0%B4%E5%B8%98%E6%B4%9E%E8%AA%8A%E6%96%87&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch057.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%BA%94%E5%8D%81%E4%B8%83%E5%9B%9E%20%E7%9C%9F%E8%A1%8C%E8%80%85%E8%90%BD%E4%BC%BD%E5%B1%B1%E8%AF%89%E8%8B%A6%20%E5%81%87%E7%8C%B4%E7%8E%8B%E6%B0%B4%E5%B8%98%E6%B4%9E%E8%AA%8A%E6%96%87&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch057.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch056.html">← 上一篇</a><a href="ch058.html">下一篇 →</a></nav>
 </main>
 </body>

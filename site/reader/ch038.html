@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第038回-婴儿问母知邪正金木参玄见假真.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch038.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第038回 婴儿问母知邪正 金木参玄见假真</h1>
 <blockquote>
@@ -1268,10 +1311,11 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第三十八回 婴儿问母知邪正 金木参玄见假真</strong></p>
 <p>回目两个动作分属两拨人。"婴儿问母"是太子——道教称元神为"婴儿"，此处双关太子问母；"金木参玄"是悟空与八戒——金公悟空、木母八戒，二人夜里参悟玄机（捞尸）。<strong>一个是问真相，一个是找证据。</strong> 问真相靠的是夫妻床笫之变的体察，找证据靠的是骗兄弟下井。吴承恩把"辨假真"写成两套截然不同的路径：一套是人情，一套是手段。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>太子别悟空回城，从后宰门入宫，于锦香亭见正宫娘娘倚栏流泪。太子不直问，迂回试探："三年前夫妻宫里之事，与后三年恩爱同否？"娘娘魂飘魄散，道出实情：三载之前温又暖，三年之后冷如冰，假国王推说"老迈身衰事不兴"。太子取出金厢白玉圭为证，娘娘认出是先王之宝，泪如泉涌，亦言四更时分梦见国王水淋淋诉冤。母子相认真相，太子辞母复命唐僧。</p>
 <p>悟空闻讯，先以神通拘山神土地，捉百千飞禽走兽摆于道旁，助太子搪塞回朝之命。夜深，悟空与唐僧商议，言"拿贼拿赃"——妖精做了三年皇帝，未走马脚，须先取尸首为证方能定罪。悟空哄八戒去御花园"偷宝贝"，二人越墙入园，寻芭蕉树下八角琉璃井。悟空以金箍棒吊八戒下井，井底竟有井龙王水晶宫，乌鸡国王尸首以定颜珠定住未坏。八戒驮尸出井，悟空以狂风送二人回寺。</p>
 <p>八戒怀恨悟空捉弄，将尸首掷于禅堂前，称"行者的外公"，反撺唆唐僧念紧箍咒，逼悟空医活国王。唐僧果念咒勒悟空，眼胀头疼。<strong>被骗者反过来用师父的权力工具反制骗子——这是全书最妙的一次"反制"。</strong></p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、太子问母：以床笫之变辨真假</h3>
 <p>太子不问朝政，不问文武，单问母后"三年前后恩爱同否"。<strong>这是全书最精妙的一次测谎。</strong></p>
@@ -1363,7 +1407,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch037.html">上一回</a> · <a href="ch039.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/jurisprudence.html">法理经济可视化</a> · <a href="../data/monster-sociology.html">妖怪社会学</a> · <a href="../data/karma-reincarnation.html">因果轮回</a> · <a href="../data/relationships.html">团队角色</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/观音.html">观音</a> · <a href="people/太上老君.html">太上老君</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD102 · 婴儿问母——当真相只能从枕边问出</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1371,6 +1415,7 @@ td.num, th.num {
 <p>乌鸡国太子回城，没有去朝堂。</p>
 <p>他没有像正常储君那样去见"父王"，也没有召集文武询问国政。他绕开了正门，从后宰门入宫，在锦香亭见到了倚栏流泪的正宫娘娘，问出了一个谁也不敢问的问题："三年前夫妻宫里之事，与后三年恩爱同否？"</p>
 <p>这一问，问的不是床笫，是国本。三年里满朝文武、黎民百姓都以为坐在龙椅上的是国王；只有一个人知道不是——他的母亲。而太子要确认的，正是母亲三年来不敢说出口的怀疑。</p>
+</div></details>
 <h2>一、为什么是母亲：测谎的最后一层私域</h2>
 <p>假国王统治了三年，没有漏过一次马脚。</p>
 <p>他的声音、面容、礼仪、朝会流程，全部仿得滴水不漏。文武百官见的是"国王"上朝，嫔妃宫女见的是"国王"起居，没有人看出破绽。可吴承恩让太子绕过了一切公开场合，直接去问母亲——因为床笫不可仿。</p>
@@ -1395,7 +1440,7 @@ td.num, th.num {
 <li>井龙王保尸是奉旨还是自发？若是奉旨，奉的是天庭的旨，还是佛派的旨？基层小神究竟站在哪一边？</li>
 <li>八戒借唐僧之手念咒，与悟空直接动棒，两者都是"用别人的权力办事"——弱者借权与强者用武，哪一种更可怕？</li>
 </ol>
-<h2>原文全文</h2>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>逢君只说受生因，便作如来会上人。一念静观尘世佛，十方同看降威神。欲知今日真明主，须问当年嫡母身。别有世间曾未见，一行一步一花新。却说那 乌鸡国王太子，自别大圣，不多时回至城中，果然不奔朝门，不敢报传宣诏，径至后宰门首，见几个太监在那里把守。见太子来，不敢阻滞，让他进去了。好太子， 夹一夹马，撞入里面，忽至锦香亭下，只见那正宫娘娘坐在锦香亭上，两边有数十个嫔妃掌扇，那娘娘倚雕栏儿流泪哩。你道他流泪怎的？原来他四更时也做了一 梦，记得一半，含糊了一半，沉沉思想。这太子下马，跪于亭下，叫：“母亲！”那娘娘强整欢容，叫声“孩儿，喜呀！喜呀！这二三年在前殿与你父王开讲，不得 相见，我甚思量，今日如何得暇来看我一面？诚万千之喜！诚万千之喜！孩儿，你怎么声音悲惨？你父王年纪
 高迈
 ，有一日龙归碧海，凤返丹霄，你就传了帝位，还 有甚么不悦？”太子叩头道：“母亲，我问你：即位登龙是那个？称孤道寡果何人？”娘娘闻言道：“这孩儿发风了！做皇帝的是你父王，你问怎的？”太子叩头 道：“万望母亲敕子无罪，敢问；不敕，不敢问。”娘娘道：“子母家有何罪？敕你，敕你，快快说来。”太子道：</p>
@@ -1516,8 +1561,13 @@ td.num, th.num {
 旰
 鹩
 锰
-蘧</p>
+蘧</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%B8%89%E5%8D%81%E5%85%AB%E5%9B%9E%20%E5%A9%B4%E5%84%BF%E9%97%AE%E6%AF%8D%E7%9F%A5%E9%82%AA%E6%AD%A3%20%E9%87%91%E6%9C%A8%E5%8F%82%E7%8E%84%E8%A7%81%E5%81%87%E7%9C%9F&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch038.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%B8%89%E5%8D%81%E5%85%AB%E5%9B%9E%20%E5%A9%B4%E5%84%BF%E9%97%AE%E6%AF%8D%E7%9F%A5%E9%82%AA%E6%AD%A3%20%E9%87%91%E6%9C%A8%E5%8F%82%E7%8E%84%E8%A7%81%E5%81%87%E7%9C%9F&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch038.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch037.html">← 上一篇</a><a href="ch039.html">下一篇 →</a></nav>
 </main>
 </body>

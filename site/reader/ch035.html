@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第035回-外道施威欺正性心猿获宝伏邪魔.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch035.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第035回 外道施威欺正性 心猿获宝伏邪魔</h1>
 <blockquote>
@@ -1269,8 +1312,9 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第三十五回 外道施威欺正性 心猿获宝伏邪魔</strong></p>
 <p>本回承第034回"魔王巧算困心猿大圣腾挪骗宝贝"——上回悟空被装葫芦，以漱口哄开盖子脱身，又赚得真葫芦，本回即以真葫芦反装银角；启第036回"心猿正处诸缘伏劈破旁门见月明"——本回末老君收宝西行，下回即至宝林寺借宿。前句"外道施威"言金角大王芭蕉扇搧火、七星剑劈砍，后句"心猿获宝"言悟空以葫芦净瓶收二妖，"欺正性"与"伏邪魔"对举，点明本回是心性与外道的正面交锋。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>悟空得了真葫芦，变作"行者孙"在洞外叫阵。二魔银角大王持假葫芦出来，二人斗智——悟空谎称己葫芦是雄、彼葫芦是雌，"雌见了雄就不敢装"，诱二魔先叫。二魔叫"行者孙"连应八九声装不去，悟空跳起叫"银角大王"，二魔应声被装入葫芦，贴上"太上老君急急如律令奉敕"帖。悟空回洞救师，老魔金角大哭。金角点起三百小妖，持七星剑、芭蕉扇出战，搧出五行灵光火，悟空避火逃入洞后，窃得羊脂玉净瓶。金角败阵逃往压龙山，会聚女怪，又请来老舅爷狐阿七大王率兵助阵。悟空与八戒、沙僧迎战，八戒一钯筑死狐阿七，原来是只狐狸精。金角再战不敌，纵云南逃，悟空以净瓶叫声"金角大王"，老魔应声被装。师徒方解救唐僧，忽见一瞽者扯马索宝——乃是太上老君。老君揭示二妖本是看金炉银炉的童子，偷了五件宝贝下界，又言观音菩萨为试师徒真心，曾三次借童子托化妖魔。老君收宝，倒出二童子，相随回天。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、行者孙智斗银角大王</h3>
 <p>悟空自号"行者孙"叫阵，与二魔斗"叫名装人"之术。二魔不知是计，先叫"行者孙"，悟空"不歇气连应了八九声，只是不能装去"。悟空反叫"银角大王"，二魔不敢闭口应声被装。此是"以彼之道还施彼身"——宝贝原是老君的，口诀原是二魔教的，悟空全借敌之利器反制敌身，是谓"心猿获宝"。</p>
@@ -1340,7 +1384,7 @@ td.num, th.num {
 <blockquote>
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch034.html">上一回</a> · <a href="ch036.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/relationships.html">人物关系</a> · <a href="../data/character-appearance.html">人物出场</a> · <a href="../data/philosophy.html">哲学可视化</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD035 · 金角银角的落幕，与一座新山的阴影</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1348,7 +1392,8 @@ td.num, th.num {
 <p>玄奘的团队功能在第35回被定位为“信息接收者”（做梦收信），在第36回进一步升级为“信任中介”——他是整个团队中唯一一个可以与各方势力（太子、王后、国王、朝臣、甚至假国王本人）进行对话的人。因为他是凡人，他没有武力威慑，他说的每一句话都必须靠诚实来建立信用。这种角色在取经团队中不可替代。</p>
 <h3>七、《心经》的第一次外交应用</h3>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>“本性圆明道自通，翻身跳出网罗中。修成变化非容易，炼就长生岂俗同？清浊几番随运转，辟开数劫任西东。逍遥万亿年无计，一点神光永注空。”此 诗暗合孙大圣的道妙。他自得了那魔真宝，笼在袖中，喜道：“泼魔苦苦用心拿我，诚所谓水中捞月；老孙若要擒你，就好似火上弄冰。”藏着葫芦，密密的溜出门 外，现了本相，厉声高叫道：“精怪开门！”旁有小妖道：“你又是甚人，敢来吆喝？”行者道：“快报与你那老泼魔，吾乃行者孙来也。”那小妖急入里报道： “大王，门外有个甚么行者孙来了。”老魔大惊道：“贤弟，不好了！惹动他一窝风了！幌金绳现拴着孙行者，葫芦里现装著者行孙，怎么又有个甚么行者孙？</p>
 <p>想是他几个兄弟都来了。”二魔道：兄长放心，我这葫芦装下一千人哩。我才装了者行孙一个，又怕那甚么行者孙！等我出去看看，一发装来。”老魔道：“兄弟仔细。”</p>
 <p>你看那二魔拿着个假葫芦，还象前番雄纠纠、气昂昂走出门高呼道：“你是那里人氏，敢在此间吆喝？”行者道：“你认不得我？家居花果山，祖贯水帘洞。只为 闹天宫，多时罢争竞。如今幸脱灾，弃道从僧用。秉教上雷音，求经归觉正。相逢野泼魔，却把神通弄。还我大唐僧，上西参佛圣。两家罢战争，各守平安境。休惹 老孙焦，伤残老性命！”那魔道：“你且过来，我不与你相打，但我叫你一声，你敢应么？”行者笑道：“你叫我，我就应了；我若叫你，你可应么？”那魔道： “我叫你，是我有个宝贝葫芦，可以装人；你叫我，却有何物？”行者道：“我也有个葫芦儿。”那魔道：“既有，拿出来我看。”行者就于袖中取出葫芦道：“泼 魔，你看！”幌一幌，复藏在袖中，恐他来抢。那魔见了大惊道：“他葫芦是那里来的？怎么就与我的一般？纵是一根藤上结的，也有个大小不同，偏正不一，却怎 么一般无二？”他便正色叫道：“行者孙，你那葫芦是那里来的？”行者委的不知来历，接过口来就问他一句道：“你那葫芦是那里来的？”那魔不知是个见识，只 道是句老实言语，就将根本从头说出道：“我这葫芦是混沌初分，天开地辟，有一位太上老祖，解化女娲之名，炼石补天，普救阎浮世界；补到乾宫夬地，见一座昆 仑山脚下，有一缕仙藤，上结着这个紫金红葫芦，却便是老君留下到如今者。”大圣闻言，就绰了他口气道：“我的葫芦，也是那里来的。”</p>
@@ -1457,8 +1502,13 @@ td.num, th.num {
 鷄
 䊭
 瀓
-徰</p>
+徰</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%B8%89%E5%8D%81%E4%BA%94%E5%9B%9E%20%E5%A4%96%E9%81%93%E6%96%BD%E5%A8%81%E6%AC%BA%E6%AD%A3%E6%80%A7%20%E5%BF%83%E7%8C%BF%E8%8E%B7%E5%AE%9D%E4%BC%8F%E9%82%AA%E9%AD%94&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch035.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%B8%89%E5%8D%81%E4%BA%94%E5%9B%9E%20%E5%A4%96%E9%81%93%E6%96%BD%E5%A8%81%E6%AC%BA%E6%AD%A3%E6%80%A7%20%E5%BF%83%E7%8C%BF%E8%8E%B7%E5%AE%9D%E4%BC%8F%E9%82%AA%E9%AD%94&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch035.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch034.html">← 上一篇</a><a href="ch036.html">下一篇 →</a></nav>
 </main>
 </body>

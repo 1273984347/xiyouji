@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第060回-牛魔王罢战赴华筵孙行者二调芭蕉扇.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch060.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第060回 牛魔王罢战赴华筵 孙行者二调芭蕉扇</h1>
 <blockquote>
@@ -1268,8 +1311,9 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第六十回 牛魔王罢战赴华筵 孙行者二调芭蕉扇</strong></p>
 <p>回目出自世德堂本《新刻出像官板大字西游记》。此回为"三调芭蕉扇"trilogy（59/60/61）的中段，亦是全书写"骗"最精微的一回。回目两个动作分属两人：上句"罢战赴华筵"是牛魔王，下句"二调芭蕉扇"是孙行者。<strong>一个是弃战贪欢，一个是趁虚而入</strong>。吴承恩用一句回目写尽这对五百年前结义兄弟的相互算计——兄赴宴而弟骗嫂，礼崩乐坏至此。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>土地道破火焰山来历——乃是五百年前悟空蹬倒老君八卦炉、落下火砖所化，土地本是兜率宫守炉道人，因失守被贬。土地指点悟空往积雷山摩云洞寻牛魔王。悟空至积雷山，遇玉面公主——万岁狐王遗女，倒陪百万家私招赘牛魔王为夫，牛魔王弃罗刹女久不回顾。悟空与玉面公主口角，惊动牛魔王。兄弟相认，却因红孩儿之事与借扇之事翻脸，两人大战百十合不分胜负。忽有碧波潭来人邀牛魔王赴宴，牛魔王罢战赴席。悟空变螃蟹潜入碧波潭偷听，窃得辟水金睛兽，复变牛魔王模样回芭蕉洞骗铁扇公主。铁扇公主肉眼难辨，吐露真扇及变长口诀。悟空得真扇而去。牛魔王散席发现坐骑被盗，醒悟回洞，知妻子被骗，持青锋宝剑追赶悟空。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、骗中骗的开端：信任如何成为武器</h3>
 <p>此回最冷的一笔，是悟空骗扇的方式——他不是强抢，不是偷盗，而是<strong>变作牛魔王本人</strong>。</p>
@@ -1377,7 +1421,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch059.html">上一回</a> · <a href="ch061.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/81-hardships.html">八十一难数据</a> · <a href="../data/philosophy.html">哲学可视化</a> · <a href="themes/八十一难专题.html">八十一难专题</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/太上老君.html">太上老君</a> · <a href="people/哪吒.html">哪吒</a> · <a href="people/铁扇公主.html">铁扇公主</a> · <a href="people/牛魔王.html">牛魔王</a> · <a href="people/红孩儿.html">红孩儿</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD050 · 火焰山——当八百里火海是人点的</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1401,6 +1445,7 @@ td.num, th.num {
 <p>兜。</p>
 <p>"兜率宫。"土地说，"五百年前大圣闹天宫，蹬倒丹炉，炉里掉下来几块砖。每一块砖都是一座火焰山。这一块，落在这儿了。"</p>
 <p>悟空站在土地庙前，看着那个写在红土上的"兜"字，很久没有说话。火焰山是他自己点的。</p>
+</div></details>
 <h2>一、五百年前的灰烬，今天的墙</h2>
 <p>五百年前。齐天大圣孙悟空踹翻了太上老君的八卦炉，炉砖带着三昧真火从天而降，在凡间烧了五百年。五百年后，齐天大圣已经变成了孙行者，带着一个凡人和尚要去西天取经。路被当年的自己堵死了。</p>
 <p>因果。最狠的不是报应，是因果。报应是别人给你的惩罚——如来压你五百年，那是报应。因果是你自己给自己留下的障碍——你当年踹翻的炉子，火还在烧。你当年捅破的天，窟窿还在漏风。你当年打碎的东西，碎片还在土里等人踩上去。五百年前的"齐天大圣"是一团烈火，烧了天庭烧地府烧了四海龙宫。五百年后的"孙行者"要做的不是继续烧，是一点一点把当年的火扑灭。</p>
@@ -1608,7 +1653,7 @@ td.num, th.num {
 </li>
 </ol>
 <hr />
-<h2>原文全文</h2>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>土地说：“大力王即牛魔王也。”行者道：“这山本是牛魔王放的火，假名火焰山？”土地道：“不是不是，大圣若肯赦小神之罪，方敢直言。”行者 道：“你有何罪？直说无妨。”土地道：“这火原是大圣放的。”行者怒道：“我在那里，你这等乱谈！我可是放火之辈？”土地道：“是你也认不得我了。此间原 无这座山，因大圣五百年前大闹天宫时，被显圣擒了，压赴老君，将大圣安于八卦炉内，煅炼之后开鼎，被你蹬倒丹炉，落了几个砖来，内有余火，到此处化为火焰 山。我本是兜率宫守炉的道人，当被老君怪我失守，降下此间，就做了火焰山土地也。”猪八戒闻言恨道：“怪道你这等打扮！原来是道士变的土地！”行者半信不 信道：“你且说，早寻大力王何故？’土地道：“大力王乃罗刹女丈夫。他这向撇了罗刹，现在积雷山摩云洞。有个万岁狐王，那狐王死了，遗下一个女儿，叫做玉 面公主。那公主有百万家私，无人掌管，二年前，访着牛魔王神通广大，情愿倒陪家私，招赘为夫。那牛王弃了罗刹，久不回顾。若大圣寻着牛王，拜求来此，方借 得真扇。一则扇息火焰，可保师父前进；二来永除火患，可保此地生灵；三者赦我归天，回缴老君法旨。”行者道：</p>
 <p>“积雪山坐落何处？到彼有多少程途？”土地道：“在正南方。此间到彼，有三千余里。”行者闻言，即吩咐沙僧、八戒保护师父，又教土地，陪伴勿回，随即忽的一声，渺然不见。</p>
 <p>那里消半个时辰，早见一座高山凌汉。按落云头，停立巅峰之上观看，真是好山：高不高，顶摩碧汉；大不大，根扎黄泉。</p>
@@ -1735,8 +1780,13 @@ td.num, th.num {
 诤
 豕
 苯
-嗖</p>
+嗖</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E5%85%AD%E5%8D%81%E5%9B%9E%20%E7%89%9B%E9%AD%94%E7%8E%8B%E7%BD%A2%E6%88%98%E8%B5%B4%E5%8D%8E%E7%AD%B5%20%E5%AD%99%E8%A1%8C%E8%80%85%E4%BA%8C%E8%B0%83%E8%8A%AD%E8%95%89%E6%89%87&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch060.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E5%85%AD%E5%8D%81%E5%9B%9E%20%E7%89%9B%E9%AD%94%E7%8E%8B%E7%BD%A2%E6%88%98%E8%B5%B4%E5%8D%8E%E7%AD%B5%20%E5%AD%99%E8%A1%8C%E8%80%85%E4%BA%8C%E8%B0%83%E8%8A%AD%E8%95%89%E6%89%87&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch060.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch059.html">← 上一篇</a><a href="ch061.html">下一篇 →</a></nav>
 </main>
 </body>

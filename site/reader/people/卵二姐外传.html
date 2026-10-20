@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
 <script src="../../js/theme-init.js"></script>
+<script src="../../js/reader-enhance.js" defer></script>
 <style>
   .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
@@ -52,6 +53,35 @@
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -61,6 +91,19 @@
     <a href="../../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/02-人物深度分析/卵二姐外传.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/people/卵二姐外传.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>卵二姐：猪刚鬣的第一任妻子</h1>
 <blockquote>
@@ -93,6 +136,10 @@
 <p>猪八戒全书中没有对任何人提过卵二姐。他对观音说那段经历时，说卵二姐招他做了家长，她死了，家当尽归他受用。语气平淡，像在报履历。但他给卵二姐刻的墓碑，是全书里唯一一块由取经团队成员亲手为死者立的碑。悟空没有给花果山的四万七千只猴子立碑。沙僧没有给流沙河的九个骷髅头立碑。玄奘没有给两界山被吃的两个从者立碑。只有一头猪，给一只鸟立了一块石头。</p>
 <p>卵二姐的一生很薄。薄到在全书中只占了几十个字，和福陵山上一场不到一年的婚姻。但她死后几百年里，猪刚鬣再也没有提过她。不是因为忘了——是因为他后来在高老庄做了女婿，又去西天取了经，成了净坛使者。他的身份从天蓬元帅变成猪妖变成女婿变成取经人变成净坛使者。净坛使者不能提一个叫卵二姐的鸟精——那是在他被贬最落魄时收留他的女人。提她就是提自己曾经是野猪，没有兵器，没有洞府，蹲在乱草里拱野薯，嘴角沾着母猪的血。这段过去他不会对任何人说。但他给卵二姐立的碑，一直在福陵山崖顶上。青石被风吹了几百年，石头面上那根天然的凹痕被风沙磨浅了一点，但还能看出羽毛的形状。刻的字被苔藓填过，被暴雨冲过，“卵”字中间那两点被雨水泡得比周围石面略低一些，积着薄薄一汪露水。“姐”字最后一笔的刻痕深浅不一——浅的那一下是齿尖崩掉时他手腕偏了，深的后面那下是他把剩下半截齿尖硬推进去的。几百年后的某个黄昏，一只鸟落在碑上，收拢翅膀，歪着头看了看刻痕里的水光，啄了一口水，飞走了。鸟是灰色的，尾羽在夕阳里泛着灰蓝色的金属光。</p>
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E5%8D%B5%E4%BA%8C%E5%A7%90%EF%BC%9A%E7%8C%AA%E5%88%9A%E9%AC%A3%E7%9A%84%E7%AC%AC%E4%B8%80%E4%BB%BB%E5%A6%BB%E5%AD%90&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E5%8D%B5%E4%BA%8C%E5%A7%90%E5%A4%96%E4%BC%A0.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E5%8D%B5%E4%BA%8C%E5%A7%90%EF%BC%9A%E7%8C%AA%E5%88%9A%E9%AC%A3%E7%9A%84%E7%AC%AC%E4%B8%80%E4%BB%BB%E5%A6%BB%E5%AD%90&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E5%8D%B5%E4%BA%8C%E5%A7%90%E5%A4%96%E4%BC%A0.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="../people/南极仙翁外传.html">← 上一篇</a><a href="../people/取经五众关系网络深化.html">下一篇 →</a></nav>
 </main>
 </body>

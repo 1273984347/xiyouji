@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第024回-万寿山大仙留故迹.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch024.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第024回 万寿山大仙留故迹 五庄观行者窃人参</h1>
 <blockquote>
@@ -1269,10 +1312,11 @@ td.num, th.num {
 <p><strong>第二十四回 万寿山大仙留故迹 五庄观行者窃人参</strong></p>
 <p>回目前句"大仙留故迹"是引子，后句"行者窃人参"是主戏。"留故迹"对"窃人参"——一个是主人的体面，一个是客人的失礼。<strong>这一回讲的是：取经队伍到了一位"地主"家里，把人家的镇家之宝给偷了。</strong></p>
 <p>"大仙"指镇元子，地仙之祖。"人参果"是五庄观的镇观之宝，一万年一熟，闻一闻活三百六十岁，吃一个活四万七千年。这是全书里最"贵"的一颗果子。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>师徒行至万寿山五庄观，镇元大仙外出，留二童子清风、明月看观。镇元子临行交代：取经人将至，可打两个人参果待客。二童子照办，但唐僧见果似婴儿，拒而不食。</p>
 <p>悟空夜间闻知人参果之事，偷打三个，与八戒、沙僧分食。八戒囫囵吞下，嫌没尝出味，缠着悟空再打。明月发现果子少了，与清风大骂唐僧师徒"贼"。悟空听得大怒，潜入果园，一棒把人参果树连根推倒。</p>
 <p>次日师徒欲行，二童子锁门大骂。悟空打开门，师徒逃跑。镇元大仙归，赶上师徒，以袍袖一笼，尽数擒拿。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、人参果 = 长生资源的稀缺性</h3>
 <p>人参果是全书"长生资源"的极端样本：</p>
@@ -1469,7 +1513,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch023.html">上一回</a> · <a href="ch025.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/relationships.html">团队关系可视化</a> · <a href="../data/character-appearance.html">人物出场可视化</a> · <a href="../data/business-model.html">商业模型可视化</a> · <a href="../data/risk-project.html">风险与项目可视化</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/沙僧.html">沙僧</a> · <a href="people/观音.html">观音</a> · <a href="people/太上老君.html">太上老君</a> · <a href="people/镇元大仙.html">镇元大仙</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD024 · 一棵树，两颗果，捅破了天</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1513,7 +1557,8 @@ td.num, th.num {
 <p>双方达成的协议是：镇元子放悟空去找医树方法，期限三天。同时做了一件意味深长的事——他当场把绑在柱上的玄奘解了绑，安置在客房休息，还叫人给取经团队送斋饭。镇元子对人不对事：你砸我树，我扣你师父；你答应去医树，我以宾客之礼待你。</p>
 <p>此时距离师徒被捉回观里，其实不过一两天。玄奘被绑在柱子上的时间并不长，但精神上的震慑是持续的。他对悟空说：“你往何处求方？”悟空说：“我今要上东洋大海，遍游三岛十洲，访问仙翁圣老，求一个起死回生之法，管教医得他树活。”玄奘说：“既如此，就依你，与你三日之限。三日之外，我便要念那话儿了。”</p>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>“你可认得那些菩萨么？”八戒道：“我已此晕倒昏迷，眼花撩 乱，那认得是谁？”行者把那简帖儿递与八戒，八戒见了是颂子，更加惭愧。沙僧笑道：“二哥有这般好处哩，感得四位菩萨来与你做亲！”八戒道：“兄弟再莫题 起，不当人子了！从今后，再也不敢妄为。就是累折骨头，也只是摩肩压担，随师父西域去也。”三藏道：“既如此说才是。”</p>
 <p>行者遂领师父上 了大路。在路餐风宿水，行罢多时，忽见有高山挡路，三藏勒马停鞭道：“徒弟，前面一山，必须仔细，恐有妖魔作耗，侵害吾党。”行者道：“马前但有我等三 人，怕甚妖魔？”因此，长老安心前进。只见那座山，真是好山：高山峻极，大势峥嵘。根接昆仑脉，顶摩霄汉中。白鹤每来栖桧柏，玄猿时复挂藤萝。日映晴林， 迭迭千条红雾绕；风生阴壑，飘飘万道彩云飞。幽鸟乱啼青竹里，锦鸡齐斗野花间。只见那千年峰、五福峰、芙蓉峰，巍巍凛凛放毫光；万岁石、虎牙石、三尖石， 突突磷磷生瑞气。崖前草秀，岭上梅香。荆棘密森森，芝兰清淡淡。深林鹰凤聚千禽，古洞麒麟辖万兽。涧水有情，曲曲弯弯多绕顾；峰峦不断，重重迭迭自周回。 又见那绿的槐，斑的竹，青的松，依依千载斗秾华；白的李、红的桃，翠的柳，灼灼三春争艳丽。龙吟虎啸，鹤舞猿啼。麋鹿从花出，青鸾对日鸣。乃是仙山真福 地，蓬莱阆苑只如然。又见些花开花谢山头景，云去云来岭上峰。三藏在马上欢喜道：“徒弟，我一向西来，经历许多山水，都是那嵯峨险峻之处，更不似此山好 景，果然的幽趣非常。若是相近雷音不远路，我们好整肃端严见世尊。”行者笑道：“早哩！早哩！正好不得到哩！”沙僧道：“师兄，我们到雷音有多少远？”行 者道：“十万八千里，十停中还不曾走了一停哩。”八戒道：“哥啊，要走几年才得到？”行者道：“这些路，若论二位贤弟，便十来日也可到；若论我走，一日也 好走五十遭，还见日色；若论师父走，莫想！莫想！”唐僧道：“悟空，你说得几时方可到？”行者道：“你自小时走到老，老了再小，老小千番也还难。只要你见 性志诚，念念回首处，即是灵山。”沙僧道：“师兄，此间虽不是雷音，观此景致，必有个好人居止。”行者道：“此言却当。这里决无邪祟，一定是个圣僧仙辈之 乡，我们游玩慢行。”不题。</p>
 <p>却说这座山名唤万寿山，山中有一座观，名唤五庄观，观里有一尊仙，道号镇元子，混名与世同君。那观里出一般 异宝，乃是混沌初分，鸿蒙始判，天地未开之际，产成这颗灵根。盖天下四大部洲，惟西牛贺洲五庄观出此，唤名草还丹，又名人参果。三千年一开花，三千年一结 果，再三千年才得熟，短头一万年方得吃。似这万年，只结得三十个果子。果子的模样，就如三朝未满的小孩相似，四肢俱全，五官咸备。人若有缘，得那果子闻了 一闻，就活三百六十岁；吃一个，就活四万七千年。</p>
@@ -1634,8 +1679,13 @@ td.num, th.num {
 耏
 販
 眖
-袑</p>
+袑</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%9B%9E%20%E4%B8%87%E5%AF%BF%E5%B1%B1%E5%A4%A7%E4%BB%99%E7%95%99%E6%95%85%E5%8F%8B%20%E4%BA%94%E5%BA%84%E8%A7%82%E8%A1%8C%E8%80%85%E7%AA%83%E4%BA%BA%E5%8F%82&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch024.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%9B%9E%20%E4%B8%87%E5%AF%BF%E5%B1%B1%E5%A4%A7%E4%BB%99%E7%95%99%E6%95%85%E5%8F%8B%20%E4%BA%94%E5%BA%84%E8%A7%82%E8%A1%8C%E8%80%85%E7%AA%83%E4%BA%BA%E5%8F%82&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch024.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch023.html">← 上一篇</a><a href="ch025.html">下一篇 →</a></nav>
 </main>
 </body>

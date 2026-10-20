@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第015回-蛇盘山诸神暗佑鹰愁涧意马收缰.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch015.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第015回 蛇盘山诸神暗佑 鹰愁涧意马收缰</h1>
 <blockquote>
@@ -1268,8 +1311,9 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>蛇盘山诸神暗佑 鹰愁涧意马收缰</strong></p>
 <p>回目出自世德堂本《新刻出像官板大字西游记》第十五回。八字二句，前句主"神"，后句主"马"——"诸神暗佑"是看不见的护法体系，"意马收缰"是看得见的坐骑归附。前回收"心猿"，本回收"意马"，"心猿意马"至此成双。吴承恩以一匹白马的失而复得，写尽了取经队伍从"凡马"到"龙马"的质变——东土凡马走不到灵山，唯有业障偿尽的龙马方能承此重任。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>师徒二人西行，行经蛇盘山鹰愁涧，正值腊月寒天。涧中钻出一条龙，推波掀浪，一口吞下唐僧的白马连鞍辔。悟空与那龙赌斗多时，龙力软筋麻，变作水蛇钻入草中，再不肯出。悟空唤山神土地询问，得知此龙乃西海敖闰之子，因纵火烧了殿上明珠，被父告忤逆，观音亲见玉帝讨下，教他在此等候取经人做个脚力。金头揭谛赴南海请观音，观音亲至，摘去小龙项下明珠，以甘露拂身，喝声"变"，那龙即化为白马毛片。观音又赠悟空三根救命毫毛，许以"叫天天应，叫地地灵"之诺。师徒过涧，渔翁撑筏相渡（实为涧神），至里社祠借宿，老者赠鞍辔缰鞭——及至次日不见祠宇，方知是落伽山山神土地蒙菩萨差送。师徒复行两月太平之路，又见楼台殿阁，径奔借宿，不知此处乃观音禅院。此回是取经队伍"脚力问题"的解决，亦是"心猿意马"组合的正式成型。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、"意马"收缰——心性寓言的第二块拼图</h3>
 <p>第十四回收"心猿"（悟空戴箍），第十五回收"意马"（龙化白马）。"心猿"主神，"意马"主行——神定方能驭行，行稳方能致远。<strong>吴承恩以"心猿意马"这一成语为骨架，分两回搭建取经队伍的"心性双柱"</strong>。龙马非凡马，乃"业障待偿"的龙族——这意味着取经之路不是"凡人的远行"，而是"业力的偿还"。观音对龙说"你须用心了还业障"，一句话点明：白马不是交通工具，而是另一个修行者。</p>
@@ -1342,14 +1386,15 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch014.html">上一回</a> · <a href="ch016.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/relationships.html">团队关系可视化</a> · <a href="../data/character-appearance.html">人物出场可视化</a> · <a href="../data/business-model.html">商业模型可视化</a> · <a href="../data/risk-project.html">风险与项目可视化</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/沙僧.html">沙僧</a> · <a href="people/白龙马.html">白龙马</a> · <a href="people/玉帝.html">玉帝</a> · <a href="people/观音.html">观音</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD015 · 蛇盘山诸神暗佑，鹰愁涧意马收缰</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
 </blockquote>
 <p>这是《西游记》里一个等了十五回的瞬间。从第15回鹰愁涧收编白龙，他一直沉默。黄风岭没有开口，流沙河没有开口，五庄观推倒人参果树没有开口，三打白骨精师徒决裂没有开口。他就安安静静地当一匹马，驮着玄奘翻山过河，旁听所有会议，目击所有矛盾，没有任何存在感。</p>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>却说行者伏侍唐僧西进，行经数日，正是那腊月寒天，朔风凛凛，滑冻凌凌，去的是些悬崖峭壁崎岖路，迭岭层峦险峻山。三藏在马上，遥闻唿喇喇水声 聒耳，回头叫：“悟空，是那里水响？”行者道：“我记得此处叫做蛇盘山鹰愁涧，想必是涧里水响。”说不了，马到涧边，三藏勒缰观看，但见：涓涓寒脉穿云 过，湛湛清波映日红。声摇夜雨闻幽谷，彩发朝霞眩太空。千仞浪飞喷碎玉，一泓水响吼清风。流归万顷烟波去，鸥鹭相忘没钓逢。师徒两个正然看处，只见那涧当 中响一声，钻出一条龙来，推波掀浪，撺出崖山，就抢长老。慌得个行者丢了行李，把师父抱下马来，回头便走。那条龙就赶不上，把他的白马连鞍辔一口吞下肚 去，依然伏水潜踪。行者把师父送在那高阜上坐了，却来牵马挑担，止存得一担行李，不见了马匹。他将行李担送到师父面前道：“师父，那孽龙也不见踪影，只是 惊走我的马了。”三藏道：“徒弟啊，却怎生寻得马着么？”行者道：“放心，放心，等我去看来。”</p>
 <p>他打个唿哨，跳在空中，火眼金睛，用手 搭凉篷，四下里观看，更不见马的踪迹。按落云头报道：“师父，我们的马断乎是那龙吃了，四下里再看不见。”三藏道：“徒弟呀，那厮能有多大口，却将那匹大 马连鞍辔都吃了？想是惊张溜缰，走在那山凹之中。你再仔细看看。”行者道：“你也不知我的本事。我这双眼，白日里常看一千里路的吉凶。象那千里之内，蜻蜓 儿展翅，我也看见，何期那匹大马，我就不见！”三藏道：“既是他吃了，我如何前进！可怜啊！这万水千山，怎生走得！”说着话，泪如雨落。行者见他哭将起 来，他那里忍得住暴燥，发声喊道：“师父莫要这等脓包形么！你坐着！坐着！等老孙去寻着那厮，教他还我马匹便了。”三藏却才扯住道：“徒弟啊，你那里去寻 他？</p>
 <p>只怕他暗地里撺将出来，却不又连我都害了？那时节人马两亡，怎生是好！”行者闻得这话，越加嗔怒，就叫喊如雷道：“你忒不济！不济！又要马骑，又不放我去，似这般看着行李，坐到老罢！”哏哏的吆喝，正难息怒，只听得空中有人言语，叫道：</p>
@@ -1475,8 +1520,13 @@ td.num, th.num {
 妆
 坟
 堤
-猩</p>
+猩</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E5%8D%81%E4%BA%94%E5%9B%9E%20%E8%9B%87%E7%9B%98%E5%B1%B1%E8%AF%B8%E7%A5%9E%E6%9A%97%E4%BD%91%20%E9%B9%B0%E6%84%81%E6%B6%A7%E6%84%8F%E9%A9%AC%E6%94%B6%E7%BC%B0&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch015.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E5%8D%81%E4%BA%94%E5%9B%9E%20%E8%9B%87%E7%9B%98%E5%B1%B1%E8%AF%B8%E7%A5%9E%E6%9A%97%E4%BD%91%20%E9%B9%B0%E6%84%81%E6%B6%A7%E6%84%8F%E9%A9%AC%E6%94%B6%E7%BC%B0&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch015.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch014.html">← 上一篇</a><a href="ch016.html">下一篇 →</a></nav>
 </main>
 </body>

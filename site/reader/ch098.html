@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第098回-猿熟马驯方脱壳功成行满见真如.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch098.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第098回 猿熟马驯方脱壳 功成行满见真如</h1>
 <blockquote>
@@ -1268,8 +1311,9 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>猿熟马驯方脱壳 功成行满见真如</strong></p>
 <p>回目出自世德堂本《新刻出像官板大字西游记》第九十八回。八字二句，前句主"脱"，后句主"见"——"猿熟马驯"对应第十四、十五回收心猿意马，至此方"熟"方"驯"；"方脱壳"指唐僧在凌云渡脱却凡胎肉身；"功成行满"是取经工程的完成态，"见真如"是见到如来（真如即佛性本体）。<strong>前句写"修"，后句写"证"；前句是"因位"，后句是"果位"</strong>。此回是全书倒数第三回，取经队伍抵达灵山，唐僧脱胎、见佛、取经——九九八十一难的"终点线"在此回跨过。吴承恩以一回之力，完成了"凡人成佛"的全套仪式。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>寇员外送行后，师徒四众行经六七日，至灵山脚下玉真观，金顶大仙迎接。大仙笑言观音十年前领佛旨寻取经人，说二三年便到，不料等至今日。大仙沐浴师徒，次日引路——从观宇中堂穿出后门便是灵山本路。师徒登灵山，行五六里见一道活水，约八九里宽阔，四无人迹，唯有凌云渡独木桥一根，又细又滑。八戒不敢走，悟空往返示范。忽见下溜头一人撑无底船来——乃接引佛祖（宝幢光王佛）。唐僧被悟空推上船，跌入水中，被佛祖拉起。船行至中流，上溜头泱下一个死尸——正是唐僧的凡胎肉身。悟空、八戒、沙僧依次道"是你"，接引佛祖亦道"可贺可贺"师徒过凌云渡，脱却凡胎，登彼岸。上灵山至雷音寺，四大金刚通报，如来召聚八菩萨、四金刚、五百阿罗、三千揭谛，传旨引唐僧入。师徒到大雄宝殿拜佛，呈上文牒。如来说东土多贪多杀，有经三藏——法一藏谈天、论一藏说地、经一藏度鬼——共三十五部一万五千一百四十四卷。命阿傩、伽叶引师徒至珍楼用斋后开宝阁取经。阿傩、伽叶索要"人事"，唐僧无物，二尊者遂传无字白本。燃灯古佛在阁上听见，差白雄尊者作法夺经，经包散落，师徒方知是无字空本。四众回雷音寺告状，如来说"经不可轻传，亦不可以空取"，又说"白本者乃无字真经，倒也是好的"。唐僧奉上唐王所赐紫金钵盂为"人事"，阿傩接了，被管阁力士等人羞笑。伽叶检有字真经五千零四十八卷，一藏之数。观音启奏：取经历时十四年五千零四十日，还少八日不合藏数。如来命八大金刚送师徒回东，须八日内完成，以合一藏之数。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、"猿熟马驯"——心性双柱的完成态</h3>
 <p>回目首句"猿熟马驯"四字，遥扣第十四回"心猿归正"与第十五回"意马收缰"。<strong>从"归正"到"熟"，从"收缰"到"驯"，是一个从"被动约束"到"主动内化"的过程</strong>。第十四回悟空戴箍是"不服也得服"，第九十八回悟空在灵山"身轻体快"是"无需再服"。八戒在凌云渡前的"滑！滑！滑！走不得"与沙僧的"难！难！难！"形成对照——八戒仍是凡心未净的"未熟"之态，悟空却能"拽开步跳上独木桥，摇摇摆摆，须臾跑将过去"。<strong>猿已熟，马已驯，猪尚顽</strong>——这一差距，为第一百回各自的果位埋下伏因。</p>
@@ -1343,7 +1387,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch097.html">上一回</a> · <a href="ch099.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/relationships.html">团队关系可视化</a> · <a href="../data/character-appearance.html">人物出场可视化</a> · <a href="../data/business-model.html">商业模型可视化</a> · <a href="../data/risk-project.html">风险与项目可视化</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/猪八戒.html">猪八戒</a> · <a href="people/沙僧.html">沙僧</a> · <a href="people/如来.html">如来</a> · <a href="people/观音.html">观音</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD073 · 凌云渡——当那个旧你死在水里</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1360,6 +1404,7 @@ td.num, th.num {
 <p>玄奘夹了一个最小的，咬开，馅里有一粒没切碎的蛋壳。他把蛋壳挑出来放在碗边，继续吃。悟空又夹了一个。</p>
 <p>沙僧吃了一个后起身去灶房盛汤。他端着汤碗回来时，眼角被灶膛的烟气熏得有点发红。不是哭——烟熏的。悟空问他眼睛怎么了，他说没事。八戒夹了一个自己包的饺子放进沙僧碗里，什么也没说。</p>
 <p>锅底的珍珠被勺子碰到，发出极细的叮当声，像通关文牒上那些被风干的水渍。窗外，灵山没有烟花，没有鞭炮，没有敲钟。只有莲池的水在夜风里轻轻拍打莲叶，和灶房里烧松木柴的噼啪声。</p>
+</div></details>
 <h2>四、贯通前文：散伙饭的另一种可能</h2>
 <p>第19回，八戒刚加入取经团队时，给高翠兰留了退路——“取不成经还来照旧做女婿。”那时取经团队随时可能散伙：悟空被赶走过一次，玄奘不敢管徒弟，沙僧还没到位，白龙马不说话。散伙是悬在取经路上的一把剑。</p>
 <p>后来这把剑慢慢被焊死了。宝象国悟空回来救师父时没有提贬书，是“行动式和解”；莲花洞地窖里玄奘默念《心经》，紧箍咒开始休眠；车迟国斗法前悟空和玄奘交换了一个眼神，不需要说话，心经进入自动护持；女儿国玄奘对女王说“贫僧发过誓”时用意志而非戒律回答；狮驼岭八戒用钉钯推平骨灰时说的是“如果有来世——你们别做妖了”。散伙剑在那一天彻底碎了。没有了退路的取经团队，变成了一群不会散的人。</p>
@@ -1620,7 +1665,7 @@ td.num, th.num {
 <p>“我来吃早饭。”哪吒说，“顺便送点东西。”</p>
 <p>“什么东西？”</p>
 <hr />
-<h2>原文全文</h2>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>话表寇员外既得回生，复整理了幢幡鼓乐，僧道亲友，依旧送行不题。却说唐僧四众，上了大路，果然西方佛地，与他处不同。见了些琪花、瑶草、古 柏、苍松，所过地方，家家向善，户户斋僧，每逢山下人修行，又见林间客诵经。师徒们夜宿晓行，又经有六七日，忽见一带高楼，几层杰阁，真个是冲天百尺，耸 汉凌空。低头观落日，引手摘飞星。豁达窗轩吞宇宙，嵯峨栋宇接云屏，黄鹤信来秋树老，彩鸾书到晚风清。此乃是灵宫宝阙，琳馆珠庭。真堂谈道，宇宙传经。花 向春来美，松临雨过青。</p>
 <p>紫芝仙果年年秀，丹凤仪翔万感灵。三藏举鞭遥指道：“悟空，好去处耶！”行者道：“师父，你在那假境界假佛象 处，倒强要下拜；今日到了这真境界真佛象处，倒还不下马，是怎的说？”三藏闻言，慌得翻身跳下来，已到了那楼阁门首。只见一个道童，斜立山门之前叫道： “那来的莫非东土取经人么？”长老急整衣，抬头观看，见他身披锦衣，手摇玉塵。身披锦衣，宝阁瑶池常赴宴；手摇玉塵，丹台紫府每挥尘。肘悬仙箓，足踏履 鞋。飘然真羽士，秀丽实奇哉。炼就长生居胜境，修成永寿脱尘埃。圣僧不识灵山客，当年金顶大仙来。孙大圣认得他，即叫：“师父，此乃是灵山脚下玉真观金顶 大仙，他来接我们哩。”三藏方才醒悟，进前施礼。大仙笑道：“圣僧今年才到，我被观音菩萨哄了。他十年前领佛金旨，向东土寻取经人，原说二三年就到我处。 我年年等候，渺无消息，不意今年才相逢也。”三藏合掌道：</p>
 <p>“有劳大仙盛意，感激！感激！”遂此四众牵马挑担，同入观里，却又与大仙一一 相见。即命看茶摆斋，又叫小童儿烧香汤与圣僧沐浴了，好登佛地。正是那：功满行完宜沐浴，炼驯本性合天真。千辛万苦今方息，九戒三皈始自新。魔尽果然登佛 地，灾消故得见沙门。洗尘涤垢全无染，反本还原不坏身。师徒们沐浴了，不觉天色将晚，就于玉真观安歇。</p>
@@ -1732,8 +1777,13 @@ td.num, th.num {
 腏
 郖
 綥
-鰭</p>
+鰭</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%B9%9D%E5%8D%81%E5%85%AB%E5%9B%9E%20%E7%8C%BF%E7%86%9F%E9%A9%AC%E9%A9%AF%E6%96%B9%E8%84%B1%E5%A3%B3%20%E5%8A%9F%E6%88%90%E8%A1%8C%E6%BB%A1%E8%A7%81%E7%9C%9F%E5%A6%82&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch098.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%B9%9D%E5%8D%81%E5%85%AB%E5%9B%9E%20%E7%8C%BF%E7%86%9F%E9%A9%AC%E9%A9%AF%E6%96%B9%E8%84%B1%E5%A3%B3%20%E5%8A%9F%E6%88%90%E8%A1%8C%E6%BB%A1%E8%A7%81%E7%9C%9F%E5%A6%82&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch098.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch097.html">← 上一篇</a><a href="ch099.html">下一篇 →</a></nav>
 </main>
 </body>

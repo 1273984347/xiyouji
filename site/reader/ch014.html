@@ -19,6 +19,7 @@
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -1239,6 +1240,35 @@ td.num, th.num {
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
   .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 20px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 8px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1248,6 +1278,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第014回-心猿归正六贼无踪.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch014.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第014回 心猿归正 六贼无踪</h1>
 <blockquote>
@@ -1268,8 +1311,9 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>心猿归正 六贼无踪</strong></p>
 <p>回目出自世德堂本《新刻出像官板大字西游记》第十四回。八字二句，前句主"心"，后句主"贼"——心猿即悟空，六贼即六根。八字之内，把佛学义理与小说情节并置一炉，是全书回目中少见的"直抒教义"型。吴承恩自此回起，正式把"取经"从冒险故事改写为心性寓言。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>唐僧自长安出关西行，过两界山（即五行山），闻山下猴呼"师父"。唐僧揭去如来压帖，悟空脱困，拜唐僧为师，得法名"行者"。师徒同行，遇六名剪径毛贼——眼看喜、耳听怒、鼻嗅爱、舌尝思、意见欲、身本忧——悟空尽皆打死，唐僧责其滥杀。悟空负气离去，至东海龙宫，观圯桥进履图，受张良纳履故事启发回返。观音化身老母，送来紧箍咒与直裰，唐僧骗悟空穿戴，念咒试验。悟空头痛欲裂，欲打唐僧而不得，自此受制于紧箍，归心师门。此回是取经团队的"组建元回"，亦是全书从"神话史诗"转入"心性寓言"的枢纽。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、五行山五百年的"驯化"完成</h3>
 <p>从八卦炉中"齐天大圣"到五行山下"压帖困猴"，五百年的物理囚禁是第一阶段驯化；此回揭帖出山，是第二阶段——从"囚身"到"收心"。但此时所谓"归正"仍属被动：悟空出山即言"我已知你师父是唐僧"，所求仍是脱困，并非真心向道。<strong>真正的归正，要到第27回被贬、第58回降伏二心后方算完成</strong>。</p>
@@ -1338,7 +1382,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch013.html">上一回</a> · <a href="ch015.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/character-appearance.html">人物出场数据</a> · <a href="../data/philosophy.html">哲学可视化</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/如来.html">如来</a> · <a href="people/观音.html">观音</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD014 · 心猿归正，六贼无踪</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1347,7 +1391,8 @@ td.num, th.num {
 <p>紧箍咒从一个“约束工具”，变成了一个“惩罚工具”。这中间的距离，就是悟空对玄奘信任崩塌的距离。</p>
 <p>与紧箍咒的密集使用形成鲜明对照的是——《心经》在此回完全缺席。</p>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>诗曰：佛即心兮心即佛，心佛从来皆要物。若知无物又无心，便是真如法身佛。法身佛，没模样，一颗圆光涵万象。无体之体即真体，无相之相即实相。 非色非空非不空，不来不向不回向。无异无同无有无，难舍难取难听望。内外灵光到处同，一佛国在一沙中。一粒沙含大千界，一个身心万法同。知之须会无心诀， 不染不滞为净业。善恶千端无所为，便是南无释迦叶。却说那刘伯钦与唐三藏惊惊慌慌，又闻得叫声师父来也。</p>
 <p>众家僮道：“这叫的必是那山脚下石匣中老猿。”太保道：“是他！是他！”三藏问：“是甚么老猿？”太保道：“这山旧名五行山，因我大唐王征西定国，改名两界山。先年间曾闻得老人家说：</p>
 <p>‘王莽篡汉之时，天降此山，下压着一个神猴，不怕寒暑，不吃饮食，自有土神监押，教他饥餐铁丸，渴饮铜汁。自昔到今，冻饿不死。’这叫必定是他。长老莫 怕，我们下山去看来。”三藏只得依从，牵马下山。行不数里，只见那石匣之间，果有一猴，露着头，伸着手，乱招手道：“师父，你怎么此时才来？来得好！来得 好！救我出来，我保你上西天去也！”这长老近前细看，你道他是怎生模样：尖嘴缩腮，金睛火眼。头上堆苔藓，耳中生薜萝。鬓边少发多青草，颔下无须有绿莎。 眉间土，鼻凹泥，十分狼狈，指头粗，手掌厚，尘垢余多。还喜得眼睛转动，喉舌声和。</p>
@@ -1464,8 +1509,13 @@ td.num, th.num {
 捄
 樭
 榥
-䨣</p>
+䨣</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E5%8D%81%E5%9B%9B%E5%9B%9E%20%E5%BF%83%E7%8C%BF%E5%BD%92%E6%AD%A3%20%E5%85%AD%E8%B4%BC%E6%97%A0%E8%B8%AA&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch014.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E5%8D%81%E5%9B%9B%E5%9B%9E%20%E5%BF%83%E7%8C%BF%E5%BD%92%E6%AD%A3%20%E5%85%AD%E8%B4%BC%E6%97%A0%E8%B8%AA&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch014.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch013.html">← 上一篇</a><a href="ch015.html">下一篇 →</a></nav>
 </main>
 </body>
