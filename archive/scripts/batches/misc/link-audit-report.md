@@ -127,11 +127,11 @@ W286 将 `source/原文/` 顶层文件（`原著逐回深读.txt`、`原著逐�
 让死链校验真正覆盖 `docs/`，杜绝「假绿」：
 
 1. **扩大扫描范围**：`make links` / `make ci` 中的 `python scripts/lint_links.py` 改为全仓库扫描（`--dir .` 或显式传入需要校验的根目录）。
-2. **增加排除逻辑**：已在 `lint_links.py` 增加 `--exclude` 参数（支持多值，默认排除 `node_modules`、`.workbuddy`、`_template.html`），避免第三方包与生成器模板污染结果。
+2. **增加排除逻辑**：已在 `lint_links.py` 增加 `--exclude` 参数（支持多值，默认排除 `node_modules`、本地工具目录、`_template.html`），避免第三方包与生成器模板污染结果。
 3. **退出码治理**：保持现有 `broken>0 → exit 1`，使 CI 能在引入新死链时失败。
 4. **增量可选**：后续可只对 PR 改动文件跑 lint，但首次需做一次全量清零（即消化本报告 §2 的 56 条）。
 
-> ✅ 已实现：① `lint_links.py` 新增 `--exclude`（默认 `node_modules` / `.workbuddy` / `_template.html`）；② `Makefile` 的 `links` 目标改为 `python scripts/lint_links.py --dir .` 并已在 `ci` 目标调用。实测全仓库 **5178 链接 / 0 broken**（排除 32 个文件）。第 1、2、3 点均已落地，退出码沿用既有 `broken>0 → exit 1`。
+> ✅ 已实现：① `lint_links.py` 新增 `--exclude`（默认 `node_modules` / 本地工具目录 / `_template.html`）；② `Makefile` 的 `links` 目标改为 `python scripts/lint_links.py --dir .` 并已在 `ci` 目标调用。实测全仓库 **5178 链接 / 0 broken**（排除 32 个文件）。第 1、2、3 点均已落地，退出码沿用既有 `broken>0 → exit 1`。
 
 ---
 
@@ -244,7 +244,7 @@ site/_template.html:241  ../dashboard.html
 1. ~~**类别 A（44 条）**：已改链到 `source/原文/分回/第0XX回.md`（part3）。~~
 2. ~~**类别 B + C（11 条）**：已去超链、保留显示文字（part3）。~~
 3. ~~**类别 D（1 条）**：已修正 `.github/workflows/README.md`（删除不存在的 `deploy.yml` 引用 + CD 解耦说明，按「暂不做部署」去部署化）。~~
-4. ~~**类别 E / F（12 条）**：已在 `lint_links.py` 加 `--exclude`（默认 `node_modules`/`.workbuddy`/`_template.html`），CI 排除。~~
+4. ~~**类别 E / F（12 条）**：已在 `lint_links.py` 加 `--exclude`（默认 `node_modules`/本地工具目录/`_template.html`），CI 排除。~~
 5. ~~**CI**：`make links` 改为 `python scripts/lint_links.py --dir .` 并纳入 `make ci`，消除历史「假绿」。最终验收 5178 链接 / 0 broken。~~
 
 > 全部死链专项已闭环：真实内容死链清零，排除项经 CI 排除，全仓库链接校验通过。后续若新增文档，CI 会自动拦截新引入的死链。

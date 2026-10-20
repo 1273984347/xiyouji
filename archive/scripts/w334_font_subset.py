@@ -28,8 +28,9 @@ SRC = ROOT / "assets" / "fonts" / "source"
 OUT = ROOT / "site" / "static" / "fonts"
 GLYPHS_TXT = ROOT / "scripts" / "output" / "glyphs.txt"
 
-VENV_PY = Path(r"C:\Users\12739\.workbuddy\binaries\python\envs\default\Scripts\python.exe")
-PY = str(VENV_PY if VENV_PY.exists() else Path(sys.executable))
+# W812：原硬编码的厂商托管 venv 路径随该工具退役——改为「显式系统解释器优先·否则当前解释器」
+_SYS_PY = Path(r"C:\Users\12739\AppData\Local\Programs\Python\Python312\python.exe")
+PY = str(_SYS_PY if _SYS_PY.exists() else Path(sys.executable))
 
 FONTS = [
     ("NotoSerifSC-var.ttf", "NotoSerifSC-VF.woff2"),

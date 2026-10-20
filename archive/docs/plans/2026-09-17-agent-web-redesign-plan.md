@@ -1,6 +1,6 @@
 # agent-web「渡口问津」重设计方案（方案 R v2 · R0–R5）
 
-> 创建：2026-09-17；**v2 同日修订（用户裁决：不用任何 CodeBuddy / WorkBuddy 相关的一切——v1 的「双引擎」架构作废**，SDK 工程引擎、CODEBUDDY_* 环境变量、CLI 依赖全部移除，改为自研 OpenAI 兼容 Agent 循环；本文件为完整重写版，v1 不再有效）。
+> 创建：2026-09-17；**v2 同日修订（用户裁决：不用任何旧厂商 Agent 相关的一切（含 CodeBuddy）——v1 的「双引擎」架构作废**，SDK 工程引擎、CODEBUDDY_* 环境变量、CLI 依赖全部移除，改为自研 OpenAI 兼容 Agent 循环；本文件为完整重写版，v1 不再有效）。
 >
 > 本文档自包含：全部背景、现状、代码定位、执行步骤、验收标准内嵌于正文；基线数字为 2026-09-17 在本仓库 HEAD `ee077ab`（v2.3.171 W571）工作树实测，复现命令为 `python scripts/_audit_agentweb_baseline.py`（B* 键）+ 本文件 §0 的 C* 残留面扫描（附命令）。执行者无需回溯本次会话即可独立执行。
 >
@@ -8,7 +8,7 @@
 >
 > 与《2026-09-09 体验与服务优化计划（D/E/F/G/H）》的关系（**裁决 C，已获用户确认生效**）：D-H 计划中 agent-web 侧各项并入本方案——F-1 残余→R3、F-2→R1（**其 cost 字段调整为 tokens 计量**，见 R1 步骤 2）、F-3/F-4→R1、G-1→R2、G-3→R3/R4、G-4/G-5→R5、G-2 README 小项→R5；D-H 的 F/G 节降级为需求基线文档不再独立施工，D/E/H 维持原批号。
 >
-> 背景压缩（30 秒版）：D2 已裁决「重新设计 agent-web」，且用户追加裁决**全量移除 CodeBuddy/WorkBuddy**。现状 = 5,527 行的本机单人 demo：对话/会话/权限人审/SSE 流式骨架齐全（W568 刚根治错误链路主体），但（a）SDK 靠 spawn 外部 CLI 工作，**本机 CLI 已删除，产品整体不可用**（仅 ⚠️ 气泡）；（b）SDK 返回的指标被丢弃、零反馈、零检索增强（裸翻 672 篇文档）；（c）dev-only 无服务化件。v2 方案：**自研单引擎**（OpenAI 兼容 function calling + 工具注册表 + 权限人审 + RAG 检索）替换 SDK，SSE 协议对前端零变更，五个批次落地并完成品牌/依赖退役清扫。
+> 背景压缩（30 秒版）：D2 已裁决「重新设计 agent-web」，且用户追加裁决**全量移除旧厂商 Agent 品牌（含 CodeBuddy）**。现状 = 5,527 行的本机单人 demo：对话/会话/权限人审/SSE 流式骨架齐全（W568 刚根治错误链路主体），但（a）SDK 靠 spawn 外部 CLI 工作，**本机 CLI 已删除，产品整体不可用**（仅 ⚠️ 气泡）；（b）SDK 返回的指标被丢弃、零反馈、零检索增强（裸翻 672 篇文档）；（c）dev-only 无服务化件。v2 方案：**自研单引擎**（OpenAI 兼容 function calling + 工具注册表 + 权限人审 + RAG 检索）替换 SDK，SSE 协议对前端零变更，五个批次落地并完成品牌/依赖退役清扫。
 
 > 生成来源：人工撰写
 > 生成模型：GLM-5.3-Flash
@@ -40,7 +40,7 @@
 | F15 | 服务化件现状 | express.static 0、AGENT_WEB_HOST 0、限流 0、服务端输入上限 0 | `B16_serve` |
 | F16 | 模型与登录 | `/api/models` 经 **SDK 会话** `getAvailableModels()` 取数（index.ts:226-236，SDK 移除后须改为静态配置）；`defaultModel = "claude-sonnet-4"` 硬编码（:80）；`/api/check-login` 区分 `env|cli|none`（CLI 分支随 SDK 退役删除）；`/api/health` 仅 `{status,timestamp}` 空壳；`/api/save-env-config` 含 P0-2 守卫（拒绝运行时覆盖 apiKey/baseUrl，:189-198）——姿态保留、字段名改 LLM_* | server/index.ts 实测 |
 | C1 | **CodeBuddy 残留面（退役清扫清单）** | server/index.ts **×12**（SDK 导入 :3、models、check-login CLI 分支、CODEBUDDY_* 读取、sdkQuery :604 等）、SettingsPage.tsx **×8**、README.md **×6**、DEVELOPMENT.md **×9**、.env.example **×5**、package.json 依赖 ×1 | `grep -ric codebuddy <file>` 逐文件 |
-| C2 | WorkBuddy 引用 | 产品面 **0**；仅 CHANGELOG 历史段（禁改）、scripts/archive 归档脚本、`scripts/lint_links.py:257` 排除目录默认值 `".workbuddy"`（历史路径过滤，非产品依赖）——**均不属本方案清扫面**，R5 登记 | `grep -rli workbuddy` |
+| C2 | 旧厂商 Agent 品牌引用 | 产品面 **0**；仅 CHANGELOG 历史段（禁改）、scripts/archive 归档脚本、`scripts/lint_links.py:257` 排除目录默认值（本地工具目录·历史路径过滤，非产品依赖）——**均不属本方案清扫面**，R5 登记 | `grep -rli codebuddy` |
 | C3 | 会话恢复依赖 | sessions 表 `sdk_session_id` 列 + index.ts:610 `resume`——SDK 退役后**停用**（多轮上下文改由 DB 消息装配，R2）；列保留不删（nullable 无害） | db.ts:31 + index.ts:610 |
 
 ---
@@ -51,7 +51,7 @@
 
 | 目标 | 验收口径（全部机判） |
 |---|---|
-| G0 零 CodeBuddy/WorkBuddy | 产品面（xiyouji-agent-web/ 除 node_modules）`grep -ric codebuddy` 全部归 0；`@tencent-ai/agent-sdk` 从 package.json 移除；build/tsc 在无 SDK 状态下通过 |
+| G0 零旧厂商 Agent 品牌（含 CodeBuddy） | 产品面（xiyouji-agent-web/ 除 node_modules）`grep -ric codebuddy` 全部归 0；`@tencent-ai/agent-sdk` 从 package.json 移除；build/tsc 在无 SDK 状态下通过 |
 | G1 可靠性 | 三类故障（流中 error / 非 200 / 进程失联）UI 100% 呈现 + 可重试：e2e ≥5 用例全绿 |
 | G2 可观测 | 每条 assistant 消息落库 4 指标（duration_ms / first_token_ms / prompt_tokens / completion_tokens）；`/api/stats` ≥9 字段含 error_rate |
 | G3 反馈闭环 | assistant 消息 100% 可 👍/👎；stats 含 feedback_rate |
@@ -182,7 +182,7 @@ F-1 残余→R3；F-2→R1（**cost 字段调整为 tokens 计量**——通用 
   2. site/ 入口：index.html ASK 区（:235-237 一带）与页脚导航加「AI 对话」、dashboard.html 补 AI 卡片（S16=0→≥1）——入口形态按三问 3 的 R5 终裁（公网域名 / 本机说明性入口）。
   3. D-H G-4 并入：rag-chat.js 改造既有 checkHealth 时序（init 探测失败不注入 fab）、4 处开发者文案清除（:132/:189/:290/:381）、验收 `grep -c "rag_server.py"==1`。
   4. D-H G-5 并入：index.html 页脚「移动版」链接。
-  5. 文档同步：AGENTS.md §4.4 全段重写（SDK 描述→自研引擎与 LLM_* 环境）；交接文档「三」登记；README 产品线关系（G-2 小项）；**WorkBuddy 遗留登记**（CHANGELOG 历史与 lint_links.py:257 `.workbuddy` 排除默认值不属产品面，不动，仅登记）。
+  5. 文档同步：AGENTS.md §4.4 全段重写（SDK 描述→自研引擎与 LLM_* 环境）；交接文档「三」登记；README 产品线关系（G-2 小项）；**旧厂商 Agent 品牌遗留登记**（CHANGELOG 历史与 lint_links.py:257 本地工具目录排除默认值不属产品面，不动，仅登记）。
 - **验收**：`S16_dashboard_ai_entry_n≥1`、`S14_index_to_mobile_links≥1`、rag-chat `grep -c "rag_server.py"==1`；公网形态时 `curl -H "x-agent-token: $TOKEN" https://<域名>/api/models` 200 且无 token 401；`verify_delivery.py` 核心全绿。
 - **回滚**：各文件 `git checkout --`。
 - **明确非目标**：多租户/配额/内容审核；HTTPS 证书管理；rag_server 公网化。

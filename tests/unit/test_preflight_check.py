@@ -5,7 +5,7 @@ W739 扩展：touches 列解析 / 在途判定 / 交集拒绝（多 Agent 干扰
   - parse_ledger        对账表取号解析（max W + 现势下一自由号 + rows 含 touches）
   - is_inflight         在途批次状态判定（已收官/已闭环 开头为 done）
   - touches_conflict    touches 交集纯函数
-  - summarize_porcelain 工作树态统计（.workbuddy 排除）
+  - summarize_porcelain 工作树态统计（staged/未暂存/未跟踪三态计数）
 
 运行：py -m pytest tests/unit/test_preflight_check.py -v
 """
@@ -19,8 +19,8 @@ if str(SCRIPTS_DIR) not in sys.path:
 import preflight_check  # noqa: E402
 
 LEDGER_SAMPLE = "\n".join([
-    "| W735 | 全仓归档大扫除批 | 1fd372b4 | W735 | 已收官 | WorkBuddy |",
-    "| W739 | touches 机制批 | 认领占位 | W739 | 进行中 | WorkBuddy | AGENTS.md, docs/agent/pitfalls.md |",
+    "| W735 | 全仓归档大扫除批 | 1fd372b4 | W735 | 已收官 | 主会话 |",
+    "| W739 | touches 机制批 | 认领占位 | W739 | 进行中 | 主会话 | AGENTS.md, docs/agent/pitfalls.md |",
     "- **W733**：现势下一自由号（756a7089 w732 收官级联后 checklist 例行）——预留登记豁免。",
     "- **W736**：现势下一自由号（1fd372b4 w735 收官级联后 checklist 例行）——预留登记豁免。",
     "> ## 现势：下一自由号 = **W721**（上一代机制遗留块·不参与解析）",
@@ -34,7 +34,7 @@ def test_parse_ledger_max_and_last_bullet():
 
 
 def test_parse_ledger_claimed_state():
-    text = LEDGER_SAMPLE + "\n| W736 | 发布工具链批 | 待收官 | W736 | 进行中 | WorkBuddy |"
+    text = LEDGER_SAMPLE + "\n| W736 | 发布工具链批 | 待收官 | W736 | 进行中 | 主会话 |"
     got = preflight_check.parse_ledger(text)
     assert got["max_w"] == 739  # max 即已认领号（下一自由号=740）
     w736 = [r for r in got["rows"] if r["w"] == 736]
@@ -55,7 +55,7 @@ def test_parse_ledger_touches_column():
 
 def test_parse_ledger_touches_backcompat_old_format():
     # 6 列旧格式行（无 touches 列）→ touches 空集（向后兼容）
-    got = preflight_check.parse_ledger("| W735 | 归档批 | 1fd372b4 | W735 | 已收官 | WorkBuddy |")
+    got = preflight_check.parse_ledger("| W735 | 归档批 | 1fd372b4 | W735 | 已收官 | 主会话 |")
     assert got["rows"][0]["touches"] == set()
 
 
@@ -86,16 +86,17 @@ def test_inflight_with_bold_status_variants():
     assert preflight_check.is_inflight(" 已认领 ")
 
 
-def test_summarize_porcelain_counts_and_excludes_workbuddy():
+def test_summarize_porcelain_counts():
     text = ("M  scripts/verify_delivery.py\x00"
             " M CHANGELOG.md\x00"
-            "?? .workbuddy/memory/x.md\x00"
+            "?? docs/00-导读/新文档.md\x00"
             "A  tests/unit/test_release_prep.py\x00")
     got = preflight_check.summarize_porcelain(text)
     assert got["staged"] == 2
     assert got["unstaged"] == 1
-    assert got["untracked"] == 0
-    assert all(".workbuddy" not in p for _s, p in got["items"])
+    assert got["untracked"] == 1
+    assert len(got["items"]) == 4
+    assert ("??", "docs/00-导读/新文档.md") in got["items"]
 
 
 def test_summarize_porcelain_untracked_counted():

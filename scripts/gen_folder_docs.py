@@ -62,7 +62,6 @@ EXCLUDE_SUBSTR = (
     "tmpe",
     ".cache",
     ".mimosa",
-    ".workbuddy",
     ".pytest_cache",
     ".ruff_cache",
     ".review-tmp",
