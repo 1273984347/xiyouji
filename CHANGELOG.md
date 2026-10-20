@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W847），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W848），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,18 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W848（2026-10-21）：Q5 裁决落档批（dense 升为显式可选档·默认仍 off）
+
+> **来源**：用户裁决 Q5——dense 档升为显式可选档、默认仍 off。W844 把「dense 增益到底真不真」量清楚了，本批只做落档：把裁决写进人真正会读到的地方。
+> - **文件**：scripts/rag/README.md、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md、scripts/output/_w848_spec.json、docs/00-导读/W批次编号对账表.md。
+> - **代码侧本来就绪**：`RAG_ENHANCE` 四档（off/dense/rerank/rewrite）早已实现，默认 off、零依赖。缺的不是能力，是「让人知道有这回事」。故本批**零代码改动**，只补文档与裁决落点。
+> - **README 新增裁决段**：为什么升（现役索引 100 题 recall@5 从 0.573 升到 0.712，人工 30 题 0.382 → 0.446）／什么时候值得开（查询以自然语言描述为主、能接受约 220 MB 本地产物、可一次性构建）／什么时候别开（要求零依赖直接跑、CI 与离线只读、结果需随仓分发复现）／本机纪律（重计算任务优先 `--device cpu`，守微批与冷却，勿并行多开）。
+> - **顺带修一处同 README 内的口径冲突**：档位表 recall 列还是 T-01 冻结索引（1,077 篇）的旧数，dense 写 0.396；而下方基线表写现役 0.712。两个数并排放着，读者只看上面那行会以为 dense 没用。表头改为「T-01 冻结索引口径·非现役基线」并加一句提醒指向基线表——**数字一个没改，只标口径**。
+> - **架构方案回填**：§12.2 Q5 由「新增未决」翻「已裁决：选 ②（显式可选档）」，§7.1 S8 采纳列同步；状态口径改为「开放项只剩 Q2」。
+> - **验证**：`check_doc_sync.py` 0 FAIL；`verify_delivery.py --scope full` 核心全部通过；页数与 CSP 零漂移（本批不碰 `site/`）。
+> - **未做**：不改检索代码、不改默认档行为、不重建向量产物、不推送远端。
+> - **状态**：已收官。
 
 ### W847（2026-10-21）：阅读页体验封装批（速览折叠 + 进度书签字号 + 每页反馈 + 幂等复验）
 
