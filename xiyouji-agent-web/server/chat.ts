@@ -190,7 +190,9 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
         request_id: req.requestId,
         error: dbError instanceof Error ? dbError.message : String(dbError),
       });
-      return sendError(res, 500, "保存消息失败", { detail: (dbError as { message?: string })?.message });
+      // W829：不回显底层异常原文（SQLite 错误含库文件绝对路径等内部信息）——
+      // 形状不变（detail 字段仍在），取值换固定文案；原文已在上面的 logger 里。
+      return sendError(res, 500, "保存消息失败", { detail: "数据库写入失败" });
     }
 
     // 设置 SSE 头（事件帧格式见 sse.ts）
@@ -326,8 +328,9 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
         stack: (error as Error)?.stack,
       });
 
-      const message2 = (error as Error)?.message || "处理请求时发生错误";
-      sse.error(message2);
+      // W829：对外只给固定文案——上游 LLM 错误体可能回显请求内容/账号信息
+      // （openai-compat.ts 取上游前 300 字原文），原文已进上面的 logger。
+      sse.error("服务器内部错误");
       res.end();
     }
   });

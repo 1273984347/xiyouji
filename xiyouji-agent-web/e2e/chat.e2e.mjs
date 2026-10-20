@@ -14,6 +14,7 @@
 import { spawn } from "node:child_process";
 import { createRequire } from "node:module";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import Database from "better-sqlite3";
@@ -44,12 +45,20 @@ const { chromium } = loadPlaywright();
 async function startBackend(port, llmBaseUrl) {
   const tsxCli = path.join(WEB, "node_modules", "tsx", "dist", "cli.mjs");
   if (!fs.existsSync(tsxCli)) throw new Error(`tsx CLI 不存在：${tsxCli}`);
+  // W829：硬守卫——本 E2E 只允许跑在临时库上。若 DB_PATH 指向仓库真实库（data/chat.db），
+  // 立即拒绝启动：原实现的清理逻辑会按「最近更新的 session」删库，命中真实会话即不可逆丢失。
+  const resolvedDb = path.resolve(DB_PATH);
+  if (DB_IS_REAL) {
+    throw new Error(`E2E 拒绝在真实库上运行（DB_PATH 指向 ${REAL_DB}）——会删除开发者真实会话`);
+  }
   const child = spawn(process.execPath, [tsxCli, "server/index.ts"], {
     cwd: WEB,
     env: {
       ...process.env,
       PORT: String(port),
       AGENT_WEB_TOKEN: "",
+      // W829：库路径指向临时库（server/db.ts 据此覆盖·默认路径不变）
+      AGENT_WEB_DB_PATH: resolvedDb,
       // 引擎三键指向 mock LLM（真实链路·仅外部端点被替身）
       LLM_API_BASE: llmBaseUrl,
       LLM_API_KEY: "w808-e2e-key",
@@ -136,6 +145,32 @@ const BACKEND_PORT = 3231;
 const FRONTEND_PORT = 4232;
 const REPLY = "《西游记》测试回复：这是 mock LLM 产出的确定性文本。";
 
+// W829：E2E 必须跑在**临时库**上。
+// 成因：原实现库路径写死（server/db.ts 硬编码 data/chat.db），E2E 的清理逻辑
+// 按「最近更新的 session」删 feedback/messages/sessions → 若本轮聊天未落库而库中
+// 已有历史会话，被删的就是**开发者的真实会话**（含工具结果原文·不可逆·无备份）。
+// 现在：后端经 AGENT_WEB_DB_PATH 指向临时库；断言与清理只用该临时库；
+// 并在收尾断言**真实库零改动**（大小 + mtime 双比对）。
+const REAL_DB = path.join(WEB, "data", "chat.db");
+// 允许用环境变量覆盖临时库路径（**仅用于负样本自证**：指向真实库时必须拒绝启动）
+const DB_PATH = process.env.AGENT_WEB_DB_PATH
+  ? path.resolve(process.env.AGENT_WEB_DB_PATH)
+  : path.join(os.tmpdir(), `xiyouji-e2e-${process.pid}-${Date.now()}.db`);
+// W829 负样本自证事故订正：守卫必须**三处同源**——① 启动侧拒绝 ② 清理侧不删
+// ③ 断言置于全部清理之后。此前仅①有守卫、②③缺位 ⇒ 一次「指向真实库」的自证
+// 把真实 data/chat.db 连同 -wal/-shm 删掉（已用 W828 批的 VACUUM INTO 快照复原：
+// integrity_check=ok·65 会话/129 消息全量·快照后无新会话故实际零丢失）。
+const DB_IS_REAL = path.resolve(DB_PATH) === path.resolve(REAL_DB);
+function realDbFingerprint() {
+  try {
+    const st = fs.statSync(REAL_DB);
+    return `${st.size}:${st.mtimeMs}`;
+  } catch {
+    return "absent";
+  }
+}
+const REAL_DB_BEFORE = realDbFingerprint();
+
 let backend;
 let frontend;
 let mockLlm;
@@ -198,8 +233,8 @@ try {
     .catch(() => false);
   check("E2E-5 回复文本完整（跨 chunk 解码无断裂）", fullReplyVisible);
 
-  // ---------- 步骤 6：会话与消息真实落库 ----------
-  const db = new Database(path.join(WEB, "data", "chat.db"), { readonly: true });
+  // ---------- 步骤 6：会话与消息真实落库（W829：断言与清理只针对**临时库**） ----------
+  const db = new Database(DB_PATH, { readonly: true });
   const sessions = db.prepare("SELECT id FROM sessions ORDER BY updated_at DESC LIMIT 5").all();
   db.close();
   const sessionId = sessions.length > 0 ? sessions[0].id : "";
@@ -217,7 +252,7 @@ try {
     // 等待反馈行落库（前端在请求成功后写入乐观 UI，故以落库为准）
     let feedbackRow = null;
     for (let i = 0; i < 20; i++) {
-      const db2 = new Database(path.join(WEB, "data", "chat.db"), { readonly: true });
+      const db2 = new Database(DB_PATH, { readonly: true });
       const row = db2
         .prepare(
           `SELECT f.session_id, f.verdict, m.content
@@ -274,17 +309,35 @@ try {
   } catch {
     /* 忽略 */
   }
-  try {
-    const db = new Database(path.join(WEB, "data", "chat.db"));
-    for (const sid of createdSessionIds) {
-      db.prepare("DELETE FROM feedback WHERE session_id = ?").run(sid);
-      db.prepare("DELETE FROM messages WHERE session_id = ?").run(sid);
-      db.prepare("DELETE FROM sessions WHERE id = ?").run(sid);
+  // W829：清理只针对**临时库**——若 DB_PATH 指向真实库则**一律不动**
+  // （事故订正：此前此处无守卫，一次「指向真实库」的负样本自证把真实
+  //   data/chat.db 连同 -wal/-shm 删掉；已用 W828 批的 VACUUM INTO 快照复原）
+  if (!DB_IS_REAL) {
+    try {
+      const db = new Database(DB_PATH);
+      for (const sid of createdSessionIds) {
+        db.prepare("DELETE FROM feedback WHERE session_id = ?").run(sid);
+        db.prepare("DELETE FROM messages WHERE session_id = ?").run(sid);
+        db.prepare("DELETE FROM sessions WHERE id = ?").run(sid);
+      }
+      db.close();
+    } catch {
+      /* 清理失败不影响结论 */
     }
-    db.close();
-  } catch {
-    /* 清理失败不影响结论 */
+    try {
+      for (const suffix of ["", "-wal", "-shm"]) {
+        const f = DB_PATH + suffix;
+        if (fs.existsSync(f)) fs.rmSync(f, { force: true });
+      }
+    } catch {
+      /* 临时库清理失败不影响结论 */
+    }
+  } else {
+    console.log("WARN DB_PATH 指向真实库 → 跳过全部清理（不删任何文件与行）");
   }
+  // W829：终检断言——真实库零改动（大小 + mtime 双比对）·**置于全部清理之后**
+  check("E2E-11 真实库零改动（本 E2E 未触碰 data/chat.db）", realDbFingerprint() === REAL_DB_BEFORE,
+    `before=${REAL_DB_BEFORE} after=${realDbFingerprint()}`);
 }
 
 console.log(`\n== E2E 结果：${passed} 通过 / ${failed} 失败 ==`);
