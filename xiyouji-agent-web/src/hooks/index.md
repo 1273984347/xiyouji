@@ -11,11 +11,12 @@
 
 - （无）
 
-## 文件（6）
+## 文件（7）
 
 ### JavaScript / TypeScript
 
 - `useAgents.ts`
+- `useChat.streaming.test.ts`
 - `useChat.ts`
 - `useModels.ts`
 - `useSessions.test.tsx`
