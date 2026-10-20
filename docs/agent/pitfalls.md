@@ -20,7 +20,7 @@
 
 ### CSS / 视觉渲染（9 条）
 
-- **批量正则改 CSS/JS 后必须验证括号/引号平衡**（`check_structure.py` / `_find_css_breaks.py`）。
+- **批量正则改 CSS/JS 后必须验证括号/引号平衡**（`check_structure.py`）。
 - **批量关键字扫描/门禁必须穷尽同义变体**（W550）：可视化缺陷扫描的关键字要覆盖同义写法（如 饼图/环形图/圆环图/Pie Chart/Donut Chart）——「圆环图」变体曾致漏网；命中后以「可见措辞 × 实现签名（d3.arc/pie/treemap 计数）」双条件定错配，禁止单关键字定性。
 - **SVG 标签量测四坑**（W553）：① `getBBox()` 是元素局部坐标系，跨 `<g>` 比较文本 bbox = 幻影重叠（W550 audit-contentavoid 曾据此单页 display:none 65 个未重叠标签——「行标签缺失」类缺陷根因是补丁遮蔽非布局），跨组比较必须 `getBoundingClientRect()`；② tspan 显式 `x=0` 在「x 属性定位」的 text 中是 g 原点绝对坐标，随节点定位的 text 折行须让 tspan 显式继承同一 x；③ d3 `selection.text()` 覆写 textContent 会抹掉子元素——先 text() 后 append('title')；④ 行宽量测禁用 canvas.measureText 字体串拼装（比真实渲染窄约 9%），用 svg 内隐藏探针 text 的 `getComputedTextLength()`。修复图表 svg 挂 `data-audit-skip` 即可让隐藏型 audit 补丁（axisfix4/contentavoid/labelavoid/labelavoid-all）在 svg 级循环跳过（旋转型 axisfix1/2/3 不识别该属性，维持 W550 已验收外观）。W557 全站复审实证该类缺陷在其余 15 页持续发作（页面级豁免≠类绝迹），已全局根治：20 页 contentavoid 补丁内 `getBBox()`→`getBoundingClientRect()`（探针验证行标签复活），data-audit-skip 保留为页面级豁免机制。
 - **标记与 CSS 演化脱节查「基类是否还在」**（W557）：全站复审 30+ 页同现「KPI 统计条纵向裸排」，根因是页面只用 `.kpi-card.alt-*` 变体而基类 `.kpi-row/.kpi-card` 布局规则在历史批次丢失——「同文案多页同病」信号应立即查共享 CSS 基类；修法为对缺失页注入基类（纯 token 引用，禁裸色回退防 token 覆盖率门禁）。

@@ -13,7 +13,7 @@ generate_csp.py — 全站 CSP（Content Security Policy）生成 / 注入 / 校
       哈希化不可维护）
   - img-src / font-src 'self'（全站资源本地化后无外部图片/字体）
   - connect-src 'self'（dukou-engine 两页追加本地 RAG 引擎 127.0.0.1:8777；
-      全站追加 GoatCounter 计数端点 1273984347.goatcounter.com）
+      W806 起不再放行 GoatCounter 计数端点——统计链已退役，全站零外域）
   - object-src 'none' · base-uri 'self' · form-action 'self' · frame-src 'none'
 
 用法：
@@ -45,8 +45,8 @@ SITE = os.path.join(ROOT, "site")
 
 EXTERNAL_SCRIPT_HOSTS = []  # W695 收紧：W456 禁外域 CDN 后零引用（grep 实证），script-src 仅 self+哈希
 RAG_ORIGIN = "http://127.0.0.1:8777"
-# GoatCounter 计数端点（W425 接入真实跨访客统计）：count.js 回传 PV 到此源
-GOATCOUNTER_COUNT_ORIGIN = "https://1273984347.goatcounter.com"
+# W806：GoatCounter 计数端点已退役（站点代码失效实测 404·统计链无数据），
+# connect-src 不再放行任何外域——全站零外域请求口径。
 # 开发模板（不入站、不入 sitemap）：不注入 CSP，避免模板占位内容干扰哈希门禁
 TEMPLATE_EXCLUDE = {"_template.html"}
 
@@ -81,9 +81,9 @@ def build_policy(html, needs_rag):
     parts.append("img-src 'self'")
     parts.append("font-src 'self'")
     if needs_rag:
-        parts.append("connect-src 'self' %s %s" % (RAG_ORIGIN, GOATCOUNTER_COUNT_ORIGIN))
+        parts.append("connect-src 'self' %s" % RAG_ORIGIN)
     else:
-        parts.append("connect-src 'self' %s" % GOATCOUNTER_COUNT_ORIGIN)
+        parts.append("connect-src 'self'")
     parts.append("object-src 'none'")
     parts.append("base-uri 'self'")
     parts.append("form-action 'self'")

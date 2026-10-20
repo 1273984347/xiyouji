@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（209）
+## 文件（207）
 
 ### Markdown 文档
 
@@ -65,8 +65,6 @@
 - `_check_json_copies.py`
 - `_check_pipeline_consistency.py`
 - `_cite_probe.py`
-- `_find_css_breaks.py`
-- `_fix_css_paren.py`
 - `_s4_audit_a_track_anchors.py`
 - `_s4_audit_doi.py`
 - `_s4_biblio_analysis.py`
@@ -159,6 +157,7 @@
 - `check_js_syntax.py`
 - `check_kpi_card_base.py`
 - `check_motion_ban.py`
+- `check_no_goatcounter.py`
 - `check_script_coverage.py`
 - `check_seo_head.py`
 - `check_story_timeline_sync.py`
@@ -182,7 +181,6 @@
 - `generate_csp.py`
 - `inject_chart_a11y.py`
 - `inject_descriptions.py`
-- `inject_goatcounter.py`
 - `inject_rum.py`
 - `inject_seo_head.py`
 - `inject_visit_log.py`

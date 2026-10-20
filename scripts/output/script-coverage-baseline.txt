@@ -23,7 +23,6 @@ gen_og_cover.py  # ①OG 封面需人工审图
 gen_rss.py  # ③发布链·gen_rss
 inject_chart_a11y.py  # ③发布链·a11y 注入
 inject_descriptions.py  # ①批量注入·人工审形
-inject_goatcounter.py  # ③发布链·计数注入
 inject_rum.py  # ①RUM 信标注入
 inject_seo_head.py  # ③发布链·SEO 注入
 inject_visit_log.py  # ①访问日志注入

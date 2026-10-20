@@ -4,8 +4,9 @@
 //   localStorage["visit_log"] = [{t, p, r, u}, ...]  （上限 500 条，FIFO）
 //
 // 限制（诚实声明）：localStorage 仅本浏览器可见——只能统计"你本地打开过哪些页面"，
-// 无法统计真实读者。外部统计（GoatCounter/Umami Cloud）接入后此文件可弃用，
-// 升级路径见 scripts/inject_goatcounter.py。
+// 无法统计真实读者。外部跨访客统计（GoatCounter）已于 W806 退役（站点代码失效·无数据可采），
+// 本站不再加载任何外域统计脚本——本文件是现役唯一的访问记录面。
+// 若未来接入新的托管统计端点，改 window.__RUM_CONFIG__.endpoint（同 rum.js 口径）。
 //
 // 查看：打开 site/visit-viewer.html（读取本 localStorage 展示 + 导出 JSON）。
 //

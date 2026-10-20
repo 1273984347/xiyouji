@@ -99,8 +99,7 @@ jobs:
                 "numberOfRuns": 3,
                 "settings": {
                   "preset": "desktop",
-                  "chromeFlags": "--no-sandbox --headless",
-                  "blockedUrlPatterns": ["*1273984347.goatcounter.com*"]
+                  "chromeFlags": "--no-sandbox --headless"
                 }
               },
               "assert": {

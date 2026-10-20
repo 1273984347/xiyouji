@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（191）
+## 文件（193）
 
 ### Markdown 文档
 
@@ -105,6 +105,7 @@
 - `_cascade_files_W803.txt`
 - `_cascade_files_W804.txt`
 - `_cascade_files_W805.txt`
+- `_cascade_files_W806.txt`
 - `_sync_analysis_manifest.json`
 - `_w728_spec.json`
 - `_w729_spec.json`
@@ -185,6 +186,7 @@
 - `_w803_spec.json`
 - `_w804_spec.json`
 - `_w805_spec.json`
+- `_w806_spec.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`

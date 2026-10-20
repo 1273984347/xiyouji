@@ -41,6 +41,9 @@ SITEMAP_EXCLUDE = SEO_EXCLUDE | {
 
 
 def site_pages() -> list[str]:
+    # W803: 统一站点页面枚举。gate_common.site_pages 仅覆盖 3 层目录（site/*.html、
+    # site/data/*.html、site/en/*.html），无法递归到 site/reader/**，故仍需 rglob。
+    # 此处不做语义合并，仅消除重复逻辑风险：site_pages 名称保留，行为不变。
     return sorted(
         p.relative_to(SITE).as_posix()
         for p in SITE.rglob("*.html")
