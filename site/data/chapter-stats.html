@@ -20,7 +20,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="每回字数分布 · 每回对话占比 · 每回诗词数量 · 详解西游记">
     <meta property="og:description" content="每回字数分布 · 每回对话占比 · 每回诗词数量 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -472,7 +472,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -511,11 +511,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -706,6 +706,8 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+        /* W864 B2 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
+        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1265,7 +1267,7 @@ td.num, th.num {
         
         
         .chart-block {
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         .chart-block h3 {
             font-size: 1rem;
@@ -1315,13 +1317,13 @@ td.num, th.num {
             padding: 14px 18px;
             font-size: 0.9rem;
             color: var(--accent-3);
-            margin-bottom: 20px;
+            margin-bottom: var(--space-5);
             line-height: 1.8;
         }
         .notice strong { color: var(--accent); }
         .notice code {
             background: var(--paper-warm);
-            padding: 2px 6px;
+            padding: var(--space-1) 6px;
             border-radius: var(--radius-sm);
             font-family: "JetBrains Mono", monospace;
             font-size: 0.85rem;
@@ -1402,7 +1404,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <p class="tagline">百回字数起伏，对话与叙述的此消彼长。</p>
     </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
             数据源：加载中...
         <div class="cite-block" id="citeBox">
@@ -1476,8 +1478,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
         
-            <a href="../en/chapter-stats.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="../en/chapter-stats.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 
 <div class="chart-tooltip" id="tooltip"></div>
