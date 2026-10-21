@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（334）
+## 文件（340）
 
 ### Markdown 文档
 
@@ -325,6 +325,12 @@
 - `_w872_after.json`
 - `_w872_diff_review.json`
 - `_w872_spec.json`
+- `_w873_accent_audit.json`
+- `_w873_after.json`
+- `_w873_canary_after.json`
+- `_w873_canary_review.json`
+- `_w873_diff_review.json`
+- `_w873_spec.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`
