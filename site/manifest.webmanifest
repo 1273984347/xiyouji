@@ -1,6 +1,6 @@
 {
-  "name": "详解西游记",
-  "short_name": "西游记",
+  "name": "取经录",
+  "short_name": "取经录",
   "description": "一源多形的西游解读：逐回深读、人物专题、主题可视化、RAG 渡口问津与结构化数据。",
   "lang": "zh-CN",
   "start_url": "./index.html",

@@ -2,13 +2,13 @@
   "name": "xiyouji-desktop",
   "version": "2.3.0",
   "private": true,
-  "description": "《详解西游记》离线全站桌面版：Electron 壳内嵌全部静态站点内容，支持 GitHub Releases 自动更新。",
+  "description": "《取经录》离线全站桌面版：Electron 壳内嵌全部静态站点内容，支持 GitHub Releases 自动更新。",
   "main": "src/main.cjs",
   "engines": {
     "node": ">=22"
   },
   "license": "MIT",
-  "author": "详解西游记项目",
+  "author": "取经录项目",
   "scripts": {
     "start": "electron .",
     "test": "node --test",

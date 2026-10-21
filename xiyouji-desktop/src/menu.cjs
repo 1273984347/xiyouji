@@ -17,7 +17,7 @@ function buildAboutMessage(app, contentVersion) {
   const batch = version.contentBatch || 'dev';
   const date = version.contentDate ? `（${version.contentDate}）` : '';
   const lines = [
-    `详解西游记 桌面版 v${appVersion}`,
+    `取经录 桌面版 v${appVersion}`,
     `内容批次：${batch}${date}`,
   ];
   if (version.docCount || version.pageCount || version.vizCount) {
@@ -46,8 +46,8 @@ function buildMenu({ app, dialog, shell, checkForUpdates, getWindow }) {
   const showAbout = () => {
     const options = {
       type: 'info',
-      title: `关于${app && app.name ? ` ${app.name}` : '详解西游记'}`,
-      message: '详解西游记 桌面版',
+      title: `关于${app && app.name ? ` ${app.name}` : '取经录'}`,
+      message: '取经录 桌面版',
       detail: buildAboutMessage(app, contentVersion),
       buttons: ['确定'],
       defaultId: 0,
@@ -73,7 +73,7 @@ function buildMenu({ app, dialog, shell, checkForUpdates, getWindow }) {
     template.push({
       label: '应用',
       submenu: [
-        { label: '关于详解西游记', click: showAbout },
+        { label: '关于取经录', click: showAbout },
         { type: 'separator' },
         { label: '退出', role: 'quit' },
       ],

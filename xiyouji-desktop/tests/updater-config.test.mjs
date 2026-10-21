@@ -25,7 +25,7 @@ describe('package.json 契约', () => {
     assert.equal(packageJson.main, 'src/main.cjs');
     assert.equal(packageJson.engines.node, '>=22');
     assert.equal(packageJson.license, 'MIT');
-    assert.equal(packageJson.author, '详解西游记项目');
+    assert.equal(packageJson.author, '取经录项目');
     assert.equal(packageJson.type, undefined, '不应设置 type（主进程使用 CommonJS .cjs）');
   });
 
@@ -52,7 +52,7 @@ describe('package.json 契约', () => {
 describe('electron-builder.yml 契约', () => {
   it('appId / productName / 目录配置', () => {
     assert.match(builderYml, /^appId: com\.xiyouji\.desktop$/m);
-    assert.match(builderYml, /^productName: 详解西游记$/m);
+    assert.match(builderYml, /^productName: 取经录$/m);
     assert.match(builderYml, /^directories:\s*$/m);
     assert.match(builderYml, /buildResources: assets/);
     assert.match(builderYml, /output: dist/);
@@ -94,7 +94,7 @@ describe('electron-builder.yml 契约', () => {
     assert.match(builderYml, /perMachine: false/);
     assert.match(builderYml, /allowToChangeInstallationDirectory: true/);
     assert.match(builderYml, /createDesktopShortcut: true/);
-    assert.match(builderYml, /shortcutName: 详解西游记/);
+    assert.match(builderYml, /shortcutName: 取经录/);
     assert.match(builderYml, /deleteAppDataOnUninstall: false/);
     assert.match(builderYml, /target:\s*\n\s*- dmg\s*\n\s*- zip/);
     assert.match(builderYml, /category: public\.app-category\.education/);

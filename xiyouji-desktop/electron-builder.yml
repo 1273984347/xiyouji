@@ -2,8 +2,8 @@
 # 文档：https://www.electron.build/configuration/configuration
 # 注意：publish 仅用于生成 app-update.yml；本地构建一律 --publish never，实际发布由 CI 执行。
 appId: com.xiyouji.desktop
-productName: 详解西游记
-copyright: Copyright © 详解西游记项目
+productName: 取经录
+copyright: Copyright © 取经录项目
 
 directories:
   buildResources: assets
@@ -47,7 +47,7 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  shortcutName: 详解西游记
+  shortcutName: 取经录
   deleteAppDataOnUninstall: false
 
 mac:
