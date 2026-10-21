@@ -295,6 +295,84 @@
     }
    ],
    "note": "B7 增补。century-dialogue 的 3 个 speech-bubble 条整改后计 3 处（恰在限额内）未豁免；inc-card 单条不超限未动。"
+  },
+  "W871": {
+   "measured_at": "2026-10-22",
+   "exemptions": [
+    {
+     "page": "data/cognitive-psychology.html",
+     "cls": "div.char-card",
+     "count": 1,
+     "reason": "人物分类卡·数据语义"
+    },
+    {
+     "page": "data/social-media.html",
+     "cls": "div.platform-badge",
+     "count": 1,
+     "reason": "平台分类徽章·数据语义"
+    },
+    {
+     "page": "data/business-model.html",
+     "cls": "div.monster-card",
+     "count": 1,
+     "reason": "妖怪分类卡·数据语义"
+    },
+    {
+     "page": "data/game-webnovel.html",
+     "cls": "div.cc-stat-fill",
+     "count": 10,
+     "reason": "数值进度条填充（width% 编码）·数据语义"
+    },
+    {
+     "page": "data/mbti-evolution.html",
+     "cls": "button.stage-btn.active",
+     "count": 1,
+     "reason": "选中态实底（组件卡③同款）"
+    },
+    {
+     "page": "data/risk-project.html",
+     "cls": "div.char-card.c-tang",
+     "count": 1,
+     "reason": "人物分类卡（c-tang 唐系）·数据语义"
+    },
+    {
+     "page": "data/concept-device.html",
+     "cls": "div.cipher-face.cipher-back",
+     "count": 5,
+     "reason": "翻卡背面设计元素（flip 卡面皮肤·非网格装饰；正面用 accent-3）"
+    },
+    {
+     "page": "data/concept-device.html",
+     "cls": "span.idev",
+     "count": 5,
+     "reason": "内联器物标签·数据语义"
+    },
+    {
+     "page": "data/workplace.html",
+     "cls": "span.alert-badge",
+     "count": 7,
+     "reason": "告警等级徽章·数据语义"
+    },
+    {
+     "page": "data/ethics-consumption.html",
+     "cls": "div.ipo-outcome",
+     "count": 5,
+     "reason": "IPO 结果条（结果编码）·数据语义"
+    },
+    {
+     "page": "data/ethics-consumption.html",
+     "cls": "span.veg-badge.veg-no",
+     "count": 4,
+     "reason": "素食分类徽章·数据语义"
+    },
+    {
+     "page": "data/criticism-history.html",
+     "cls": "div.candidate-card.main",
+     "count": 1,
+     "reason": "主候选高亮卡·数据语义"
+    }
+   ],
+   "note": "B8 增补。cipher-back 判为翻卡背面皮肤（组件内部设计面）而非网格顶条——与 narr-card 的网格装饰区分；若后续评审不认此判据，按顶条收敛只需一条 .cipher-back ~ .cipher-back 规则。"
   }
  },
  "note": "裁决 2「豁免清单落 scripts/output/」登记簿：W864 首批建册，随批递增、条目随迁移整改递减。"
