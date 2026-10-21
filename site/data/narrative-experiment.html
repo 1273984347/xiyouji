@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-spW7N/2JAxpeNUiAD7fE76YiYm+dYGyfR4LOzDupAtw=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-dXSczQnS4Nc7oaMsyOQpBETREZG1QTCE+Om8RSwt4Wo=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>叙事实验 · 桌游与卡牌机制 · 详解西游记</title>
@@ -20,7 +20,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="桌游《灵山董事会》 · 游戏阶段 · 三段式流程 · 劫难卡牌 · 10 张 · 详解西游记">
     <meta property="og:description" content="桌游《灵山董事会》 · 游戏阶段 · 三段式流程 · 劫难卡牌 · 10 张 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -472,7 +472,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -511,11 +511,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -706,6 +706,8 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+        /* W869 B6 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
+        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1297,7 +1299,7 @@ td.num, th.num {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
             gap: 12px;
-            margin-bottom: 20px;
+            margin-bottom: var(--space-5);
         }
         .meta-item {
             background: var(--bg);
@@ -1310,7 +1312,7 @@ td.num, th.num {
             color: var(--accent);
             letter-spacing: 0.1em;
             font-family: "JetBrains Mono", monospace;
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
         .meta-item .v {
             font-size: 0.95rem;
@@ -1334,13 +1336,13 @@ td.num, th.num {
             font-size: 0.78rem;
             font-weight: 600;
             letter-spacing: 0.1em;
-            margin-right: 8px;
+            margin-right: var(--space-3);
             font-family: "JetBrains Mono", monospace;
         }
         .quote-block {
             background: var(--bg);
             border-left: 4px solid var(--accent-2);
-            padding: 12px 18px;
+            padding: var(--space-4) 18px;
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
             font-size: 0.92rem;
             color: var(--ink-soft);
@@ -1352,7 +1354,7 @@ td.num, th.num {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
             gap: 16px;
-            margin-top: 12px;
+            margin-top: var(--space-4);
         }
         .player-card {
             background: var(--paper);
@@ -1393,13 +1395,13 @@ td.num, th.num {
             font-size: 1.6rem;
             font-weight: 700;
             color: var(--accent);
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .player-card .pc-merit .unit {
             font-size: 0.78rem;
             color: var(--ink-soft);
             font-weight: 500;
-            margin-left: 4px;
+            margin-left: var(--space-2);
         }
         .player-card .pc-row {
             font-size: 0.84rem;
@@ -1412,7 +1414,7 @@ td.num, th.num {
             letter-spacing: 0.05em;
             font-weight: 600;
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
         .player-card .pc-row .pv { color: var(--ink); }
         .player-card .pc-row.weak .pv { color: var(--accent); font-style: italic; }
@@ -1454,7 +1456,7 @@ td.num, th.num {
             color: var(--paper);
             font-size: 0.7rem;
             font-weight: 700;
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-md);
             letter-spacing: 0.1em;
             font-family: "JetBrains Mono", monospace;
@@ -1473,7 +1475,7 @@ td.num, th.num {
         }
         .hardship-card .hc-type {
             font-size: 0.7rem;
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-md);
             background: var(--accent-soft);
             color: var(--accent-3);
@@ -1483,12 +1485,12 @@ td.num, th.num {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 6px;
-            margin: 8px 0;
+            margin: var(--space-3) 0;
         }
         .hardship-card .hc-stat {
             background: var(--bg);
             border-radius: var(--radius-md);
-            padding: 6px 8px;
+            padding: 6px var(--space-3);
         }
         .hardship-card .hc-stat .sk {
             font-size: 0.7rem;
@@ -1504,7 +1506,7 @@ td.num, th.num {
         .hardship-card .hc-diff {
             font-size: 0.78rem;
             color: var(--ink-soft);
-            margin: 4px 0;
+            margin: var(--space-2) 0;
         }
         .hardship-card .hc-diff .stars {
             color: var(--accent);
@@ -1514,7 +1516,7 @@ td.num, th.num {
         .hardship-card .hc-owner {
             display: inline-block;
             font-size: 0.72rem;
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-lg);
             color: var(--paper);
             font-weight: 600;
@@ -1527,9 +1529,9 @@ td.num, th.num {
         .egg-item {
             background: var(--bg);
             border-left: 4px solid var(--accent-3);
-            padding: 12px 16px 12px 48px;
+            padding: var(--space-4) 16px var(--space-4) var(--space-9);
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
             position: relative;
             font-size: 0.92rem;
             line-height: 1.7;
@@ -1570,7 +1572,7 @@ td.num, th.num {
             font-size: 1rem;
             font-weight: 600;
             color: var(--accent);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .score-card .sc-desc {
             font-size: 0.82rem;
@@ -1579,13 +1581,13 @@ td.num, th.num {
         }
         /* narrative cards */
         .card-group {
-            margin-bottom: 24px;
+            margin-bottom: var(--space-6);
         }
         .group-header {
             display: flex;
             align-items: baseline;
             gap: 12px;
-            padding-bottom: 8px;
+            padding-bottom: var(--space-3);
             border-bottom: 2px solid var(--line);
             margin-bottom: 14px;
         }
@@ -1625,12 +1627,14 @@ td.num, th.num {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: 12px;
+            padding: var(--space-4);
             position: relative;
             transition: transform 0.25s, box-shadow 0.25s;
             border-top: 3px solid var(--accent);
             min-height: 140px;
         }
+        /* W869 B6 裁决 2：narr-card 网格顶条收敛——整页仅首卡可带（12 张全同色=装饰网格，非编码） */
+        .narr-card ~ .narr-card { border-top: 1px solid var(--line); }
         .narr-card:hover {
             transform: translateY(-4px) rotate(1.5deg);
             box-shadow: var(--elev-2);
@@ -1640,7 +1644,7 @@ td.num, th.num {
             font-size: 0.7rem;
             color: var(--ink-soft);
             letter-spacing: 0.05em;
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
         .narr-card .nc-name {
             font-size: 1rem;
@@ -1660,7 +1664,7 @@ td.num, th.num {
             font-weight: 600;
             font-size: 0.7rem;
             letter-spacing: 0.05em;
-            margin-top: 4px;
+            margin-top: var(--space-2);
         }
         /* story combinations */
         .story-grid {
@@ -1688,7 +1692,7 @@ td.num, th.num {
         }
         .story-card .sc-chip {
             font-size: 0.74rem;
-            padding: 3px 8px;
+            padding: 3px var(--space-3);
             border-radius: var(--radius-lg);
             color: var(--paper);
             font-weight: 600;
@@ -1718,7 +1722,7 @@ td.num, th.num {
             letter-spacing: 0.05em;
             font-weight: 600;
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
         .story-card .sc-conflict {
             background: var(--paper-warm);
@@ -1733,16 +1737,16 @@ td.num, th.num {
         .story-card .sc-resonance {
             background: var(--bg);
             border-left: 3px solid var(--accent-2);
-            padding: 8px 12px;
+            padding: var(--space-3) var(--space-4);
             font-size: 0.82rem;
             color: var(--ink-soft);
             font-style: italic;
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         .story-card .sc-cat {
             display: inline-block;
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-lg);
             font-size: 0.72rem;
             font-weight: 600;
@@ -1771,7 +1775,7 @@ td.num, th.num {
             font-weight: 700;
             color: var(--paper-warm);
             line-height: 1;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .gen-hero .gen-total .lab {
             display: block;
@@ -1779,7 +1783,7 @@ td.num, th.num {
             color: color-mix(in srgb, var(--dark-text) 70%, transparent);
             font-weight: 400;
             letter-spacing: 0.1em;
-            margin-top: 4px;
+            margin-top: var(--space-2);
         }
         .gen-categories {
             display: grid;
@@ -1792,13 +1796,13 @@ td.num, th.num {
             border: 1px solid var(--line);
             border-left: 4px solid var(--accent);
             border-radius: var(--radius-md);
-            padding: 12px 14px;
+            padding: var(--space-4) 14px;
         }
         .gen-cat .gc-name {
             font-size: 0.95rem;
             font-weight: 600;
             color: var(--accent);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .gen-cat .gc-ids {
             font-family: "JetBrains Mono", monospace;
@@ -1813,7 +1817,7 @@ td.num, th.num {
         }
         .gen-rules li {
             counter-increment: rule;
-            padding: 8px 0 8px 36px;
+            padding: var(--space-3) 0 var(--space-3) 36px;
             position: relative;
             border-bottom: 1px dashed var(--line);
             font-size: 0.88rem;
@@ -1830,14 +1834,14 @@ td.num, th.num {
             color: var(--accent);
             font-weight: 700;
             background: var(--paper-warm);
-            padding: 2px 6px;
+            padding: var(--space-1) 6px;
             border-radius: var(--radius-md)
         }
         .gen-features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
             gap: 12px;
-            margin-top: 12px;
+            margin-top: var(--space-4);
         }
         .gen-feat {
             background: var(--paper-warm);
@@ -1864,7 +1868,7 @@ td.num, th.num {
             background: var(--dark);
             color: var(--paper-warm);
             border-radius: var(--radius-md);
-            padding: 8px 12px;
+            padding: var(--space-3) var(--space-4);
             font-size: 0.82rem;
             max-width: 375px;
             box-shadow: var(--elev-3);
@@ -1893,9 +1897,9 @@ td.num, th.num {
         .insight-box {
             background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border-left: 4px solid var(--accent);
-            padding: 20px 24px;
+            padding: var(--space-5) var(--space-6);
             border-radius: var(--radius-md);
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         .insight-box h4 {
             color: var(--accent);
@@ -1907,7 +1911,7 @@ td.num, th.num {
             padding-left: 0;
         }
         .insight-box li {
-            padding: 8px 0;
+            padding: var(--space-3) 0;
             border-bottom: 1px dashed var(--line);
             font-size: 0.92rem;
             line-height: 1.7;
@@ -1967,7 +1971,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <p class="tagline">让《西游记》成为无限故事的源泉 · 而非复述</p>
     </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
             数据源：嵌入式 fallback 数据（file:// 协议兼容）。如需加载最新 JSON，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>。
         <div class="cite-block" id="citeBox">
@@ -2174,8 +2178,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
         
-            <a href="../en/narrative-experiment.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="../en/narrative-experiment.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
@@ -2980,8 +2984,8 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 d3.select(this).select("circle:nth-child(2)").transition().duration(MOYUN_RM?0:150).attr("r", r + 6);
                 const cardList = g.cards.slice(0, 4).map(c => c.id + " " + c.name).join(" · ");
                 tip.style("opacity", 1)
-                    .html(`<div style="color:${g.color};font-weight:700;margin-bottom:4px;">${g.name} · ${g.name_en}</div>` +
-                          `<div style="font-size:0.78rem;color:#e9b885;margin-bottom:4px;">共 ${g.count} 张卡牌</div>` +
+                    .html(`<div style="color:${g.color};font-weight:700;margin-bottom:var(--space-2);">${g.name} · ${g.name_en}</div>` +
+                          `<div style="font-size:0.78rem;color:#e9b885;margin-bottom:var(--space-2);">共 ${g.count} 张卡牌</div>` +
                           `<div style="font-size:0.78rem;">${cardList} ...</div>`);
             })
             .on("mousemove", function(e) {

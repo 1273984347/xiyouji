@@ -1,0 +1,1440 @@
+{
+  "data/narrative-experiment.html": {
+    "text_on_bg": [
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "GAME · 游戏名"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "SUBTITLE · 副标题"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "DESIGNER · 设计师"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "PLAYERS · 人数"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "TIME · 时长"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "AGE · 年龄"
+      },
+      {
+        "tag": "span",
+        "cls": "lbl",
+        "txt": "CORE · 核心机制"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "200"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "+600"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "300"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "+900"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "250"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "+700"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "500"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "+1200"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "350"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "+1100"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "600"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "+1500"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "400"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "+1000"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "50"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "+1800"
+      },
+      {
+        "tag": "span",
+        "cls": "stars",
+        "txt": "★★★★★"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "450"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "+1300"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "200"
+      },
+      {
+        "tag": "div",
+        "cls": "sv",
+        "txt": "+800"
+      },
+      {
+        "tag": "div",
+        "cls": "sc-name",
+        "txt": "劫难收视率"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "这不是复述故事"
+      },
+      {
+        "tag": "div",
+        "cls": "gc-name",
+        "txt": "灾难型"
+      },
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "从叙事实验看西游"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "灵山董事会"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "大鹏金翅雕"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "青牛精一役"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "32 张叙事卡"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "执念卡揭示"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "player-card",
+        "kind": "border-top",
+        "area": 1078
+      },
+      {
+        "tag": "span",
+        "cls": "hc-owner",
+        "kind": "background",
+        "area": 2293
+      },
+      {
+        "tag": "span",
+        "cls": "hc-owner",
+        "kind": "background",
+        "area": 2293
+      },
+      {
+        "tag": "span",
+        "cls": "gh-tag",
+        "kind": "background",
+        "area": 1531
+      },
+      {
+        "tag": "div",
+        "cls": "narr-card",
+        "kind": "border-top",
+        "area": 818
+      },
+      {
+        "tag": "div",
+        "cls": "narr-card",
+        "kind": "border-top",
+        "area": 818
+      },
+      {
+        "tag": "div",
+        "cls": "narr-card",
+        "kind": "border-top",
+        "area": 818
+      },
+      {
+        "tag": "div",
+        "cls": "narr-card",
+        "kind": "border-top",
+        "area": 818
+      },
+      {
+        "tag": "div",
+        "cls": "narr-card",
+        "kind": "border-top",
+        "area": 818
+      },
+      {
+        "tag": "div",
+        "cls": "narr-card",
+        "kind": "border-top",
+        "area": 818
+      },
+      {
+        "tag": "div",
+        "cls": "narr-card",
+        "kind": "border-top",
+        "area": 818
+      },
+      {
+        "tag": "div",
+        "cls": "narr-card",
+        "kind": "border-top",
+        "area": 818
+      },
+      {
+        "tag": "div",
+        "cls": "narr-card",
+        "kind": "border-top",
+        "area": 818
+      },
+      {
+        "tag": "div",
+        "cls": "narr-card",
+        "kind": "border-top",
+        "area": 818
+      },
+      {
+        "tag": "div",
+        "cls": "narr-card",
+        "kind": "border-top",
+        "area": 818
+      },
+      {
+        "tag": "div",
+        "cls": "narr-card",
+        "kind": "border-top",
+        "area": 818
+      },
+      {
+        "tag": "span",
+        "cls": "sc-chip",
+        "kind": "background",
+        "area": 3015
+      },
+      {
+        "tag": "span",
+        "cls": "sc-chip",
+        "kind": "background",
+        "area": 3015
+      },
+      {
+        "tag": "div",
+        "cls": "sc-cat",
+        "kind": "background",
+        "area": 1262
+      },
+      {
+        "tag": "span",
+        "cls": "sc-chip",
+        "kind": "background",
+        "area": 3015
+      },
+      {
+        "tag": "span",
+        "cls": "sc-chip",
+        "kind": "background",
+        "area": 3015
+      },
+      {
+        "tag": "span",
+        "cls": "sc-chip",
+        "kind": "background",
+        "area": 3015
+      }
+    ]
+  },
+  "data/narrative-rhythm-curve.html": {
+    "text_on_bg": [
+      {
+        "tag": "a",
+        "cls": "",
+        "txt": "→ 时间线（时间轨）"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "button",
+        "cls": "btn",
+        "kind": "background",
+        "area": 2890
+      }
+    ]
+  },
+  "data/narratology-12d-network.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "section-title alt",
+        "txt": "贰 · 十二维叙事学力导向关系图"
+      },
+      {
+        "tag": "h2",
+        "cls": "section-title alt",
+        "txt": "伍 · W161-W174 叙事学框架演化时间线"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/narratology-16d-network.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "section-title alt",
+        "txt": "贰 · 十六维叙事学力导向关系图"
+      },
+      {
+        "tag": "h2",
+        "cls": "section-title alt",
+        "txt": "伍 · W161-W185 叙事学框架演化时间线"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/intertextuality-network.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "section-title alt",
+        "txt": "贰 · 热奈特五类型 × 前置文本矩阵"
+      },
+      {
+        "tag": "h2",
+        "cls": "section-title alt",
+        "txt": "伍 · 四理论家互文性理论桑基图"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/deconstruction.html": {
+    "text_on_bg": [
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "四象限观察 · 文化接受模式"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "全球影响最大，借名不借魂"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "最严肃的本土解构"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"美少年化\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"爱情化\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"简化叙事\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"忠于原著\"的影视标杆"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"颠覆-严肃\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"颠覆-娱乐\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"热血\"是 51 种 amplified_ele"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "小说 / 网络小说 / 电影 / 电视剧 / 漫"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      }
+    ]
+  },
+  "data/six-senses-narratology-network.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "section-title alt",
+        "txt": "贰 · 七感官-理论家-四层结构力导向图"
+      },
+      {
+        "tag": "h2",
+        "cls": "section-title alt",
+        "txt": "伍 · W161-W167 专题时间线"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/poetry-rhythm-analysis.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "① 诗词类别分布矩形树图"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "② 平仄韵脚分布热力图"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "③ 诗词在 100 回分布时间线"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "④ 诗词五层次堆叠图"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "⑤ 韵律特征分布箱线图"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "progress-fill",
+        "kind": "background",
+        "area": 6758
+      }
+    ]
+  },
+  "data/music-structure.html": {
+    "text_on_bg": [
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "第三乐章·八十一难"
+      },
+      {
+        "tag": "div",
+        "cls": "sym-vs",
+        "txt": "VS"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "原理："
+      },
+      {
+        "tag": "div",
+        "cls": "sym-vs",
+        "txt": "VS"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "原理："
+      },
+      {
+        "tag": "div",
+        "cls": "sym-vs",
+        "txt": "VS"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "原理："
+      },
+      {
+        "tag": "div",
+        "cls": "sym-vs",
+        "txt": "VS"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "原理："
+      },
+      {
+        "tag": "div",
+        "cls": "sym-vs",
+        "txt": "VS"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "原理："
+      },
+      {
+        "tag": "div",
+        "cls": "sym-vs",
+        "txt": "VS"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "原理："
+      },
+      {
+        "tag": "div",
+        "cls": "sym-vs",
+        "txt": "VS"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "原理："
+      },
+      {
+        "tag": "div",
+        "cls": "sym-vs",
+        "txt": "VS"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "原理："
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "1"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "2"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "3"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "4"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "5"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "7"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "14"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "21"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "24"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "25"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "27"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "30"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "32"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "33"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "34"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "41"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "42"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "45"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "46"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "49"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "50"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "51"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "52"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "53"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "54"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "55"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "57"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "58"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "59"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "60"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "61"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "65"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "66"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "71"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "74"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "75"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "76"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "77"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "78"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "89"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "91"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "98"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "100"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "序曲 12 / 交响 85 / 尾声 3"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"三复叙事\"与镜像对偶"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "4.26/5"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "仪式类强度最高"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "mv-card",
+        "kind": "border-top",
+        "area": 813
+      },
+      {
+        "tag": "span",
+        "cls": "sym-badge",
+        "kind": "background",
+        "area": 1603
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 981
+      }
+    ]
+  },
+  "data/language-style-radar.html": {
+    "text_on_bg": [
+      {
+        "tag": "a",
+        "cls": "",
+        "txt": "→ 对话情感分析（情感轨）"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  }
+}

@@ -20,7 +20,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="壹 · 十二维叙事学框架总览 · 贰 · 十二维叙事学力导向关系图 · 叁 · 维度→理论家→应用案例三层桑基图 · 详解西游记">
     <meta property="og:description" content="壹 · 十二维叙事学框架总览 · 贰 · 十二维叙事学力导向关系图 · 叁 · 维度→理论家→应用案例三层桑基图 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -472,7 +472,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -511,11 +511,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -706,6 +706,8 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+        /* W869 B6 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
+        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1277,7 +1279,7 @@ header.hero .meta {
 /* KPI */
 
 .kpi-value { font-size: 1.7em; color: var(--accent); font-weight: 700; }
-.kpi-label { color: var(--ink-soft); font-size: 0.84em; margin-top: 4px; }
+.kpi-label { color: var(--ink-soft); font-size: 0.84em; margin-top: var(--space-2); }
 
 /* 十二维概览卡片网格 */
 .dims-grid {
@@ -1309,7 +1311,7 @@ header.hero .meta {
   font-size: 1.4em;
   font-weight: 700;
   color: var(--ink);
-  margin: 4px 0;
+  margin: var(--space-2) 0;
 }
 .dim-card .dim-topic {
   font-size: 0.86em;
@@ -1333,7 +1335,7 @@ header.hero .meta {
 /* Chart */
 .chart-block { margin: 18px 0; }
 .chart-title { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
-.chart-caption { color: var(--ink-soft); font-size: 0.84em; margin-bottom: 12px; }
+.chart-caption { color: var(--ink-soft); font-size: 0.84em; margin-bottom: var(--space-4); }
 .chart-svg {
   background: var(--paper);
   border: 1px solid var(--line);
@@ -1345,7 +1347,7 @@ header.hero .meta {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 12px;
+  margin-top: var(--space-4);
   justify-content: center;
   font-size: 0.84em;
 }
@@ -1371,7 +1373,7 @@ header.hero .meta {
 .summary-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 12px;
+  margin-top: var(--space-4);
   font-size: 0.86em;
   background: var(--paper);
   border: 1px solid var(--line);
@@ -1379,7 +1381,7 @@ header.hero .meta {
 .summary-table th {
   background: var(--paper-warm);
   color: var(--ink);
-  padding: 10px 12px;
+  padding: 10px var(--space-4);
   text-align: left;
   font-weight: 600;
   border-bottom: 2px solid var(--accent-3);
@@ -1388,7 +1390,7 @@ header.hero .meta {
 }
 .summary-table th:hover { background: var(--accent-3); color: var(--paper); }
 .summary-table td {
-  padding: 9px 12px;
+  padding: 9px var(--space-4);
   border-bottom: 1px solid var(--line);
   vertical-align: top;
 }
@@ -1405,33 +1407,33 @@ header.hero .meta {
 .theorist-block h3 {
   font-size: 1.1em;
   color: var(--accent-2);
-  margin-bottom: 8px;
+  margin-bottom: var(--space-3);
   border-left: 3px solid var(--accent-3);
-  padding-left: 8px;
+  padding-left: var(--space-3);
 }
 .theorist-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 10px;
-  margin-top: 8px;
+  margin-top: var(--space-3);
 }
 .theorist-item {
   background: var(--paper);
-  padding: 10px 12px;
+  padding: 10px var(--space-4);
   border-radius: var(--radius-md);
   border-left: 3px solid var(--line);
   font-size: 0.86em;
 }
 .theorist-item .t-name { font-weight: 600; color: var(--ink); }
-.theorist-item .t-sense { color: var(--ink-soft); font-size: 0.9em; margin-top: 2px; }
-.theorist-item .t-work { color: var(--accent-2); font-size: 0.85em; margin-top: 2px; }
+.theorist-item .t-sense { color: var(--ink-soft); font-size: 0.9em; margin-top: var(--space-1); }
+.theorist-item .t-work { color: var(--accent-2); font-size: 0.85em; margin-top: var(--space-1); }
 
 /* Insight */
 .insight-list { list-style: none; }
 .insight-list li {
   background: var(--paper);
-  margin: 8px 0;
-  padding: 12px 15px;
+  margin: var(--space-3) 0;
+  padding: var(--space-4) 15px;
   border-left: 3px solid var(--accent-2);
   border-radius: var(--radius-sm)
 }
@@ -1443,7 +1445,7 @@ header.hero .meta {
   
   
   .summary-table { font-size: 0.78em; }
-  .summary-table th, .summary-table td { padding: 7px 8px; }
+  .summary-table th, .summary-table td { padding: 7px var(--space-3); }
 }
 @media (max-width: 480px) {
   .dims-grid { grid-template-columns: 1fr; }
@@ -1506,7 +1508,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
         <p class="subtitle">NARRATOLOGY 12-DIMENSION NETWORK</p>
     </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
 <div class="kpi-row">
   <div class="kpi-card"><div class="kpi-value">12</div><div class="kpi-label">叙事学维度</div></div>
   <div class="kpi-card"><div class="kpi-value">14</div><div class="kpi-label">关联理论家</div></div>
@@ -1616,8 +1618,8 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
         
-            <a href="../en/narratology-12d-network.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="../en/narratology-12d-network.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 
 </div>
