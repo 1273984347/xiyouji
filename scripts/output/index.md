@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（280）
+## 文件（283）
 
 ### Markdown 文档
 
@@ -271,6 +271,9 @@
 - `_w851_visual_snapshot_freeze_before.json`
 - `_w852_spec.json`
 - `_w853_spec.json`
+- `_w854_layout_metrics.json`
+- `_w854_layout_metrics_app.json`
+- `_w855_spec.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`
