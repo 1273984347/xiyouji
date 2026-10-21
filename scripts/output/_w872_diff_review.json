@@ -1,0 +1,2266 @@
+{
+  "batch": "W862",
+  "total_diffs": 344,
+  "pages_with_diffs": [
+    "data/aesthetics.html",
+    "data/chart-design.html",
+    "data/cross-time-danmaku.html",
+    "data/emotional-heatmap.html",
+    "data/four-dimensional-research-network.html",
+    "data/four-heavenly-kings-artifacts.html",
+    "data/global-pattern.html",
+    "data/perf-canvas-rendering.html",
+    "data/tag-cloud.html",
+    "data/visual-art.html"
+  ],
+  "groups": [
+    {
+      "page": "data/chart-design.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/chart-design.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/chart-design.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/chart-design.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/four-heavenly-kings-artifacts.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/four-heavenly-kings-artifacts.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/four-heavenly-kings-artifacts.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/four-heavenly-kings-artifacts.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card gold",
+        "div.kpi-card green",
+        "div.kpi-card brown"
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card gold",
+        "div.kpi-card green",
+        "div.kpi-card brown"
+      ]
+    },
+    {
+      "page": "data/aesthetics.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/aesthetics.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/aesthetics.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/aesthetics.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card power",
+        "div.kpi-card culture",
+        "div.kpi-card time"
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card power",
+        "div.kpi-card culture",
+        "div.kpi-card time"
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "font-size",
+      "before": "9px",
+      "after": "10px",
+      "count": 3,
+      "sample_elements": [
+        "text.",
+        "text.",
+        "text."
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "line-height",
+      "before": "15.75px",
+      "after": "17.5px",
+      "count": 3,
+      "sample_elements": [
+        "text.",
+        "text.",
+        "text."
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "font-size",
+      "before": "9px",
+      "after": "10px",
+      "count": 3,
+      "sample_elements": [
+        "text.",
+        "text.",
+        "text."
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "line-height",
+      "before": "15.75px",
+      "after": "17.5px",
+      "count": 3,
+      "sample_elements": [
+        "text.",
+        "text.",
+        "text."
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card alt3",
+        "div.kpi-card alt",
+        "div.kpi-card alt2"
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card alt3",
+        "div.kpi-card alt",
+        "div.kpi-card alt2"
+      ]
+    },
+    {
+      "page": "data/aesthetics.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/aesthetics.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/aesthetics.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/aesthetics.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/aesthetics.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/aesthetics.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/aesthetics.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/aesthetics.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/aesthetics.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/aesthetics.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/chart-design.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/chart-design.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/chart-design.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/chart-design.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/chart-design.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/chart-design.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/chart-design.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/chart-design.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/chart-design.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/chart-design.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cross-time-danmaku.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cross-time-danmaku.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cross-time-danmaku.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cross-time-danmaku.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cross-time-danmaku.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cross-time-danmaku.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cross-time-danmaku.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cross-time-danmaku.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cross-time-danmaku.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cross-time-danmaku.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-heavenly-kings-artifacts.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-heavenly-kings-artifacts.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-heavenly-kings-artifacts.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-heavenly-kings-artifacts.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-heavenly-kings-artifacts.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-heavenly-kings-artifacts.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-heavenly-kings-artifacts.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-heavenly-kings-artifacts.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-heavenly-kings-artifacts.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/four-heavenly-kings-artifacts.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(127, 168, 201)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 2,
+      "sample_elements": [
+        "div.kpi-card alt3",
+        "div.kpi-card alt"
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(58, 107, 140)",
+      "after": "rgb(229, 223, 208)",
+      "count": 2,
+      "sample_elements": [
+        "div.kpi-card alt3",
+        "div.kpi-card alt"
+      ]
+    },
+    {
+      "page": "data/tag-cloud.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/tag-cloud.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/tag-cloud.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/tag-cloud.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/tag-cloud.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/tag-cloud.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/tag-cloud.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/tag-cloud.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/tag-cloud.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/tag-cloud.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(201, 169, 107)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 2,
+      "sample_elements": [
+        "div.kpi-card gold",
+        "div.kpi-card brown"
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(138, 109, 59)",
+      "after": "rgb(229, 223, 208)",
+      "count": 2,
+      "sample_elements": [
+        "div.kpi-card gold",
+        "div.kpi-card brown"
+      ]
+    },
+    {
+      "page": "data/aesthetics.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/aesthetics.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/chart-design.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/chart-design.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/cross-time-danmaku.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/cross-time-danmaku.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(127, 168, 201)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(201, 169, 107)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(157, 185, 138)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(58, 107, 140)",
+      "after": "rgb(229, 223, 208)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(138, 109, 59)",
+      "after": "rgb(229, 223, 208)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/emotional-heatmap.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(107, 142, 90)",
+      "after": "rgb(229, 223, 208)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(127, 168, 201)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card power"
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(201, 160, 99)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card culture"
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(157, 185, 138)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card time"
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "font-size",
+      "before": "10px",
+      "after": "9px",
+      "count": 1,
+      "sample_elements": [
+        "text."
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "line-height",
+      "before": "17.5px",
+      "after": "15.75px",
+      "count": 1,
+      "sample_elements": [
+        "text."
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(58, 107, 140)",
+      "after": "rgb(229, 223, 208)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card power"
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(201, 160, 99)",
+      "after": "rgb(229, 223, 208)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card culture"
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(107, 142, 90)",
+      "after": "rgb(229, 223, 208)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card time"
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "font-size",
+      "before": "10px",
+      "after": "9px",
+      "count": 1,
+      "sample_elements": [
+        "text."
+      ]
+    },
+    {
+      "page": "data/four-dimensional-research-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "line-height",
+      "before": "17.5px",
+      "after": "15.75px",
+      "count": 1,
+      "sample_elements": [
+        "text."
+      ]
+    },
+    {
+      "page": "data/four-heavenly-kings-artifacts.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/four-heavenly-kings-artifacts.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/global-pattern.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(201, 169, 107)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card alt2"
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/perf-canvas-rendering.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(138, 109, 59)",
+      "after": "rgb(229, 223, 208)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card alt2"
+      ]
+    },
+    {
+      "page": "data/tag-cloud.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/tag-cloud.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(157, 185, 138)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card green"
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(127, 168, 201)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card blue"
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(107, 142, 90)",
+      "after": "rgb(229, 223, 208)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card green"
+      ]
+    },
+    {
+      "page": "data/visual-art.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(58, 107, 140)",
+      "after": "rgb(229, 223, 208)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card blue"
+      ]
+    }
+  ]
+}
