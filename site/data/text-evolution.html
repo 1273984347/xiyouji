@@ -20,7 +20,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="版本进化树 · 情节演化路径 · 作者论争矩阵 · 详解西游记">
     <meta property="og:description" content="版本进化树 · 情节演化路径 · 作者论争矩阵 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -472,7 +472,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -511,11 +511,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -706,6 +706,8 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+        /* W870 B7 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
+        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1254,7 +1256,7 @@ td.num, th.num {
         /* e-track-exempt: chart-data-colors 2 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .breadcrumb .sep {
-            margin: 0 8px;
+            margin: 0 var(--space-3);
             color: var(--ink-soft);
             opacity: 0.6;
         }
@@ -1287,7 +1289,7 @@ td.num, th.num {
         .chart-block h3 {
             font-size: 1rem;
             color: var(--accent);
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
             letter-spacing: 0.1em;
         }
         .chart-block svg {
@@ -1299,7 +1301,7 @@ td.num, th.num {
             flex-wrap: wrap;
             justify-content: center;
             gap: 8px 16px;
-            margin-top: 12px;
+            margin-top: var(--space-4);
             font-size: 0.82rem;
         }
         .legend-item {
@@ -1315,14 +1317,14 @@ td.num, th.num {
         .insight-box {
             background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border-left: 4px solid var(--accent);
-            padding: 20px 24px;
+            padding: var(--space-5) var(--space-6);
             border-radius: var(--radius-md);
             margin-top: 16px;
         }
         .insight-box h4 {
             color: var(--accent);
             font-size: 1rem;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .insight-box ul {
             list-style: none;
@@ -1425,7 +1427,7 @@ td.num, th.num {
             font-size: 0.78rem;
             color: var(--ink-soft);
             font-weight: 400;
-            margin-top: 2px;
+            margin-top: var(--space-1);
             font-style: italic;
         }
         .evo-flow {
@@ -1439,7 +1441,7 @@ td.num, th.num {
             background: var(--paper-warm);
             border: 1px solid var(--accent-soft);
             border-radius: 14px;
-            padding: 5px 12px;
+            padding: 5px var(--space-4);
             font-size: 0.84rem;
             color: var(--ink);
             white-space: nowrap;
@@ -1484,12 +1486,12 @@ td.num, th.num {
         .author-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 12px;
+            margin-top: var(--space-4);
             font-size: 0.88rem;
         }
         .author-table th, .author-table td {
             border: 1px solid var(--line);
-            padding: 12px 14px;
+            padding: var(--space-4) 14px;
             vertical-align: top;
             text-align: left;
         }
@@ -1524,7 +1526,7 @@ td.num, th.num {
         .score-bar {
             display: flex;
             gap: 3px;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .score-cell {
             width: 10px;
@@ -1557,7 +1559,7 @@ td.num, th.num {
             margin: 0;
         }
         .author-table td.evidence li {
-            padding: 2px 0 2px 14px;
+            padding: var(--space-1) 0 var(--space-1) 14px;
             position: relative;
         }
         .author-table td.evidence.for li::before {
@@ -1597,7 +1599,7 @@ td.num, th.num {
             align-items: center;
             justify-content: space-between;
             margin-bottom: 10px;
-            padding-bottom: 8px;
+            padding-bottom: var(--space-3);
             border-bottom: 1px dashed var(--line);
         }
         .quote-card .qc-name {
@@ -1622,7 +1624,7 @@ td.num, th.num {
             margin: 0;
         }
         .quote-card li {
-            padding: 4px 0 4px 18px;
+            padding: var(--space-2) 0 var(--space-2) 18px;
             position: relative;
             font-size: 0.88rem;
             color: var(--ink);
@@ -1699,7 +1701,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <p class="tagline">文本考古层位图：从南宋取经诗话到清代丹道评本，四百年文学DNA测序</p>
     </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
             数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
         <div class="cite-block" id="citeBox">
@@ -1825,8 +1827,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
         
-            <a href="../en/text-evolution.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="../en/text-evolution.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
