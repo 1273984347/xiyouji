@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（284）
+## 文件（280）
 
 ### Markdown 文档
 
@@ -136,6 +136,7 @@
 - `_cascade_files_W848.txt`
 - `_cascade_files_W849.txt`
 - `_cascade_files_W850.txt`
+- `_cascade_files_W851.txt`
 - `_sync_analysis_manifest.json`
 - `_w728_spec.json`
 - `_w729_spec.json`
@@ -261,20 +262,15 @@
 - `_w848_spec.json`
 - `_w849_spec.json`
 - `_w850_spec.json`
-- `_w851_floor_a.json`
-- `_w851_floor_b.json`
 - `_w851_j1_name_audit.json`
+- `_w851_j2_evidence.json`
 - `_w851_spec.json`
-- `_w851_stab1.json`
-- `_w851_stab2.json`
-- `_w851_tl_a.json`
-- `_w851_tl_b.json`
+- `_w851_visual_snapshot_after.json`
 - `_w851_visual_snapshot_before.json`
 - `_w851_visual_snapshot_freeze_after.json`
 - `_w851_visual_snapshot_freeze_before.json`
-- `_w851_visual_snapshot_freeze_re1.json`
-- `_w851_visual_snapshot_freeze_re2.json`
 - `_w852_spec.json`
+- `_w853_spec.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`

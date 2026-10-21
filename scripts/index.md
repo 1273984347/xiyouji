@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（231）
+## 文件（223）
 
 ### Markdown 文档
 
@@ -129,14 +129,6 @@
 - `_w826_migration_plan_check.py`
 - `_w851_j1_name_audit.py`
 - `_w851_j2_evidence.py`
-- `_w851_tl_diag.py`
-- `_w851_tl_diag2.py`
-- `_w851_tl_diag3.py`
-- `_w851_tl_diag4.py`
-- `_w851_tl_diag5.py`
-- `_w851_tl_diag6.py`
-- `_w851_tl_diag7.py`
-- `_w851_tl_diag8.py`
 - `_w851_visual_regression_probe.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
