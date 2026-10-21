@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（223）
+## 文件（226）
 
 ### Markdown 文档
 
@@ -240,6 +240,9 @@
 - `_pmc_pdf_fetch.js`
 - `_smoke_batch.js`
 - `_w621_render_png.js`
+- `_w854_cdp.mjs`
+- `_w854_layout_probe.mjs`
+- `_w854_layout_probe_app.mjs`
 - `batch_screenshots.js`
 - `check_chart_values.js`
 - `check_contract_smoke.js`

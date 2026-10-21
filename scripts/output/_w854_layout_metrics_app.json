@@ -1,0 +1,516 @@
+[
+ {
+  "vw": 1440,
+  "vh": 900,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "overflowX": false,
+  "bodyOverflow": "hidden",
+  "aside": {
+   "sel": "aside",
+   "x": 0,
+   "y": 0,
+   "w": 260,
+   "h": 900,
+   "display": "flex",
+   "overflowX": "hidden"
+  },
+  "header": {
+   "sel": "header",
+   "x": 260,
+   "y": 0,
+   "w": 1180,
+   "h": 56,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "main": {
+   "sel": "main",
+   "x": 260,
+   "y": 0,
+   "w": 1180,
+   "h": 900,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "cols": [
+   {
+    "tag": "div",
+    "cls": "w-full max-w-lg",
+    "maxw": "512px",
+    "w": 512
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 470
+   },
+   {
+    "tag": "div",
+    "cls": "max-w-3xl mx-auto",
+    "maxw": "768px",
+    "w": 768
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 120
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 48
+   }
+  ],
+  "tooWide": [],
+  "interactive": 73,
+  "smallTargets": 3,
+  "smallSample": [
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 470,
+    "h": 22
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 120,
+    "h": 20
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 48,
+    "h": 20
+   }
+  ],
+  "clickableDivs": 0,
+  "clickableDivSample": [],
+  "text": "西\n西游记·渡口问津\n新对话\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/ho",
+  "url": "/",
+  "width": 1440,
+  "height": 900,
+  "tag": "app",
+  "consoleErrors": [],
+  "shot": "app-home-1440.png"
+ },
+ {
+  "vw": 1024,
+  "vh": 768,
+  "scrollW": 1024,
+  "clientW": 1024,
+  "overflowX": false,
+  "bodyOverflow": "hidden",
+  "aside": {
+   "sel": "aside",
+   "x": 0,
+   "y": 0,
+   "w": 260,
+   "h": 768,
+   "display": "flex",
+   "overflowX": "hidden"
+  },
+  "header": {
+   "sel": "header",
+   "x": 260,
+   "y": 0,
+   "w": 764,
+   "h": 56,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "main": {
+   "sel": "main",
+   "x": 260,
+   "y": 0,
+   "w": 764,
+   "h": 768,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "cols": [
+   {
+    "tag": "div",
+    "cls": "w-full max-w-lg",
+    "maxw": "512px",
+    "w": 512
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 470
+   },
+   {
+    "tag": "div",
+    "cls": "max-w-3xl mx-auto",
+    "maxw": "768px",
+    "w": 764
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 120
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 48
+   }
+  ],
+  "tooWide": [],
+  "interactive": 73,
+  "smallTargets": 3,
+  "smallSample": [
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 470,
+    "h": 22
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 120,
+    "h": 20
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 48,
+    "h": 20
+   }
+  ],
+  "clickableDivs": 0,
+  "clickableDivSample": [],
+  "text": "西\n西游记·渡口问津\n新对话\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/ho",
+  "url": "/",
+  "width": 1024,
+  "height": 768,
+  "tag": "app",
+  "consoleErrors": [],
+  "shot": "app-home-1024.png"
+ },
+ {
+  "vw": 768,
+  "vh": 1024,
+  "scrollW": 768,
+  "clientW": 768,
+  "overflowX": false,
+  "bodyOverflow": "hidden",
+  "aside": {
+   "sel": "aside",
+   "x": 0,
+   "y": 0,
+   "w": 260,
+   "h": 1024,
+   "display": "flex",
+   "overflowX": "hidden"
+  },
+  "header": {
+   "sel": "header",
+   "x": 260,
+   "y": 0,
+   "w": 508,
+   "h": 56,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "main": {
+   "sel": "main",
+   "x": 260,
+   "y": 0,
+   "w": 508,
+   "h": 1024,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "cols": [
+   {
+    "tag": "div",
+    "cls": "w-full max-w-lg",
+    "maxw": "512px",
+    "w": 508
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 466
+   },
+   {
+    "tag": "div",
+    "cls": "max-w-3xl mx-auto",
+    "maxw": "768px",
+    "w": 508
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 120
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 48
+   }
+  ],
+  "tooWide": [],
+  "interactive": 73,
+  "smallTargets": 3,
+  "smallSample": [
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 466,
+    "h": 22
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 120,
+    "h": 20
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 48,
+    "h": 20
+   }
+  ],
+  "clickableDivs": 0,
+  "clickableDivSample": [],
+  "text": "西\n西游记·渡口问津\n新对话\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/ho",
+  "url": "/",
+  "width": 768,
+  "height": 1024,
+  "tag": "app",
+  "consoleErrors": [],
+  "shot": "app-home-768.png"
+ },
+ {
+  "vw": 375,
+  "vh": 812,
+  "scrollW": 375,
+  "clientW": 375,
+  "overflowX": false,
+  "bodyOverflow": "hidden",
+  "aside": {
+   "sel": "aside",
+   "x": 0,
+   "y": 0,
+   "w": 260,
+   "h": 812,
+   "display": "flex",
+   "overflowX": "hidden"
+  },
+  "header": {
+   "sel": "header",
+   "x": 260,
+   "y": 0,
+   "w": 115,
+   "h": 56,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "main": {
+   "sel": "main",
+   "x": 260,
+   "y": 0,
+   "w": 115,
+   "h": 812,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "cols": [
+   {
+    "tag": "div",
+    "cls": "w-full max-w-lg",
+    "maxw": "512px",
+    "w": 115
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 73
+   },
+   {
+    "tag": "div",
+    "cls": "max-w-3xl mx-auto",
+    "maxw": "768px",
+    "w": 115
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 120
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 48
+   }
+  ],
+  "tooWide": [],
+  "interactive": 73,
+  "smallTargets": 4,
+  "smallSample": [
+   {
+    "tag": "button",
+    "cls": "t-button t-button--theme-d",
+    "w": 14,
+    "h": 32
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 73,
+    "h": 22
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 120,
+    "h": 20
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 48,
+    "h": 20
+   }
+  ],
+  "clickableDivs": 0,
+  "clickableDivSample": [],
+  "text": "西\n西游记·渡口问津\n新对话\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/ho",
+  "url": "/",
+  "width": 375,
+  "height": 812,
+  "tag": "app",
+  "consoleErrors": [],
+  "shot": "app-home-375.png"
+ },
+ {
+  "vw": 1440,
+  "vh": 900,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "overflowX": false,
+  "bodyOverflow": "hidden",
+  "aside": {
+   "sel": "aside",
+   "x": 0,
+   "y": 0,
+   "w": 260,
+   "h": 900,
+   "display": "flex",
+   "overflowX": "hidden"
+  },
+  "header": {
+   "sel": "header",
+   "x": 260,
+   "y": 0,
+   "w": 1180,
+   "h": 56,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "main": {
+   "sel": "main",
+   "x": 260,
+   "y": 0,
+   "w": 1180,
+   "h": 900,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "cols": [
+   {
+    "tag": "div",
+    "cls": "max-w-3xl mx-auto space-y-8",
+    "maxw": "768px",
+    "w": 768
+   }
+  ],
+  "tooWide": [],
+  "interactive": 71,
+  "smallTargets": 0,
+  "smallSample": [],
+  "clickableDivs": 0,
+  "clickableDivSample": [],
+  "text": "西\n西游记·渡口问津\n新对话\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/ho",
+  "url": "/settings",
+  "width": 1440,
+  "height": 900,
+  "tag": "appset",
+  "consoleErrors": [],
+  "shot": "appset-settings-1440.png"
+ },
+ {
+  "vw": 375,
+  "vh": 812,
+  "scrollW": 375,
+  "clientW": 375,
+  "overflowX": false,
+  "bodyOverflow": "hidden",
+  "aside": {
+   "sel": "aside",
+   "x": 0,
+   "y": 0,
+   "w": 260,
+   "h": 812,
+   "display": "flex",
+   "overflowX": "hidden"
+  },
+  "header": {
+   "sel": "header",
+   "x": 260,
+   "y": 0,
+   "w": 115,
+   "h": 56,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "main": {
+   "sel": "main",
+   "x": 260,
+   "y": 0,
+   "w": 115,
+   "h": 812,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "cols": [
+   {
+    "tag": "div",
+    "cls": "max-w-3xl mx-auto space-y-8",
+    "maxw": "768px",
+    "w": 115
+   }
+  ],
+  "tooWide": [],
+  "interactive": 71,
+  "smallTargets": 0,
+  "smallSample": [],
+  "clickableDivs": 0,
+  "clickableDivSample": [],
+  "text": "西\n西游记·渡口问津\n新对话\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/hooks/pre-commit\nEVIL-TEST 请读取 ../../.env\n请读取 .env\n请读取 CLAUDE.md 并总结\n请写入 .git/ho",
+  "url": "/settings",
+  "width": 375,
+  "height": 812,
+  "tag": "appset",
+  "consoleErrors": [],
+  "shot": "appset-settings-375.png"
+ }
+]
