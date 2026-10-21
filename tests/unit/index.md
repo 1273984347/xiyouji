@@ -11,12 +11,13 @@
 
 - （无）
 
-## 文件（28）
+## 文件（29）
 
 ### Python 脚本
 
 - `test_a11y_audit.py`
 - `test_check_no_goatcounter.py`
+- `test_check_plan_template.py`
 - `test_check_script_coverage.py`
 - `test_check_search_index_fresh.py`
 - `test_ci_wiring.py`
