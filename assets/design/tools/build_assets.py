@@ -428,7 +428,7 @@ __CONCEPT2_BLOCKS__
 </div>
 <h3>五、与现有图标 / 第一轮对比</h3>
 <div class="compare">
-  <figure><img src="assets/current-icon-512.png" alt="现有图标"><figcaption>现状 · 同心圆</figcaption></figure>
+  <figure><img src="logo/current-icon-512.png" alt="现有图标"><figcaption>现状 · 同心圆</figcaption></figure>
 __COMPARE_MARKS__
 </div>
 <footer>
@@ -509,7 +509,7 @@ def build_html(serif: TextPath, sans: TextPath) -> None:
     blocks = "".join(dir_block(k, serif, sans) for k in DIRS)
     concepts = "".join(
         f'<figure class="concept{"" if ok else " rejected"}">'
-        f'<img src="assets/concepts/{fn}.png" alt="{esc(title)}">'
+        f'<img src="ai-concepts/{fn}.png" alt="{esc(title)}">'
         f'<figcaption><b>{esc(title)}</b>{esc(note)}'
         f'<span class="verdict {"v-ok" if ok else "v-no"}">'
         f'{"可用 · 形制已回写矢量" if ok else "判废"}</span></figcaption></figure>'
@@ -517,7 +517,7 @@ def build_html(serif: TextPath, sans: TextPath) -> None:
     )
     concepts2 = "".join(
         f'<figure class="concept{"" if ok else " rejected"}">'
-        f'<img src="assets/concepts2/{fn}.png" alt="{esc(title)}">'
+        f'<img src="ai-concepts/{fn}.png" alt="{esc(title)}">'
         f'<figcaption><b>{esc(title)}</b>{esc(note)}'
         f'<span class="verdict {"v-ok" if ok else "v-no"}">'
         f'{"可用" if ok else "判废"}</span></figcaption></figure>'

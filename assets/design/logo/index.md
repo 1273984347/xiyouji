@@ -11,10 +11,11 @@
 
 - （无）
 
-## 文件（10）
+## 文件（11）
 
 ### 样式与资源
 
+- `current-icon-512.png`
 - `favicon-16.png`
 - `favicon-32.png`
 - `favicon-48.png`
