@@ -1,0 +1,2196 @@
+{
+  "batch": "W862",
+  "total_diffs": 372,
+  "pages_with_diffs": [
+    "data/ecology.html",
+    "data/heaven-power-network.html",
+    "data/monster-background.html",
+    "data/monster-capability-radar.html",
+    "data/monster-ecology-network.html",
+    "data/monster-female-network.html",
+    "data/monster-hierarchy-network.html",
+    "data/monster-sociology.html",
+    "data/monster-victims-network.html",
+    "data/underworld-power-network.html"
+  ],
+  "groups": [
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 6,
+      "sample_elements": [
+        "div.kpi-card alt",
+        "div.kpi-card",
+        "div.kpi-card alt"
+      ]
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 6,
+      "sample_elements": [
+        "div.kpi-card alt",
+        "div.kpi-card",
+        "div.kpi-card alt"
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 6,
+      "sample_elements": [
+        "div.kpi-card alt",
+        "div.kpi-card",
+        "div.kpi-card alt"
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 6,
+      "sample_elements": [
+        "div.kpi-card alt",
+        "div.kpi-card",
+        "div.kpi-card alt"
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 6,
+      "sample_elements": [
+        "div.kpi-card alt",
+        "div.kpi-card",
+        "div.kpi-card alt"
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 6,
+      "sample_elements": [
+        "div.kpi-card alt",
+        "div.kpi-card",
+        "div.kpi-card alt"
+      ]
+    },
+    {
+      "page": "data/monster-female-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 5,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/monster-female-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 5,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/monster-female-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 5,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/monster-female-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 5,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 5,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 5,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 5,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 5,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(127, 168, 201)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card alt",
+        "div.kpi-card alt",
+        "div.kpi-card alt"
+      ]
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(58, 107, 140)",
+      "after": "rgb(229, 223, 208)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card alt",
+        "div.kpi-card alt",
+        "div.kpi-card alt"
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card fire",
+        "div.kpi-card water",
+        "div.kpi-card mountain"
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card fire",
+        "div.kpi-card water",
+        "div.kpi-card mountain"
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(127, 168, 201)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card alt",
+        "div.kpi-card alt",
+        "div.kpi-card alt"
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(58, 107, 140)",
+      "after": "rgb(229, 223, 208)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card alt",
+        "div.kpi-card alt",
+        "div.kpi-card alt"
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(127, 168, 201)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card alt",
+        "div.kpi-card alt",
+        "div.kpi-card alt"
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(58, 107, 140)",
+      "after": "rgb(229, 223, 208)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card alt",
+        "div.kpi-card alt",
+        "div.kpi-card alt"
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/ecology.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/ecology.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/ecology.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/ecology.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/ecology.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/ecology.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/ecology.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/ecology.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/ecology.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/ecology.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 2,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card "
+      ]
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 2,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card "
+      ]
+    },
+    {
+      "page": "data/monster-background.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-background.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-background.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-background.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-background.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-background.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-background.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-background.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-background.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-background.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "font-size",
+      "before": "10px",
+      "after": "9px",
+      "count": 2,
+      "sample_elements": [
+        "text.",
+        "text."
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "line-height",
+      "before": "17.5px",
+      "after": "15.75px",
+      "count": 2,
+      "sample_elements": [
+        "text.",
+        "text."
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "font-size",
+      "before": "10px",
+      "after": "9px",
+      "count": 2,
+      "sample_elements": [
+        "text.",
+        "text."
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "line-height",
+      "before": "17.5px",
+      "after": "15.75px",
+      "count": 2,
+      "sample_elements": [
+        "text.",
+        "text."
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-female-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-female-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-female-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-female-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-female-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-female-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-female-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-female-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-female-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-female-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 2,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card "
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 2,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card "
+      ]
+    },
+    {
+      "page": "data/monster-sociology.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-sociology.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-sociology.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-sociology.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-sociology.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-sociology.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-sociology.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-sociology.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-sociology.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-sociology.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 2,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card "
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 2,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card "
+      ]
+    },
+    {
+      "page": "data/ecology.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/ecology.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/heaven-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/monster-background.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/monster-background.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "margin-right",
+      "before": "0px",
+      "after": "80px",
+      "count": 1,
+      "sample_elements": [
+        "footer.site-footer"
+      ]
+    },
+    {
+      "page": "data/monster-background.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "margin-left",
+      "before": "0px",
+      "after": "80px",
+      "count": 1,
+      "sample_elements": [
+        "footer.site-footer"
+      ]
+    },
+    {
+      "page": "data/monster-background.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/monster-background.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "margin-right",
+      "before": "0px",
+      "after": "80px",
+      "count": 1,
+      "sample_elements": [
+        "footer.site-footer"
+      ]
+    },
+    {
+      "page": "data/monster-background.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "margin-left",
+      "before": "0px",
+      "after": "80px",
+      "count": 1,
+      "sample_elements": [
+        "footer.site-footer"
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/monster-capability-radar.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card fire"
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(127, 168, 201)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card water"
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(201, 160, 99)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card mountain"
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(157, 185, 138)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card sky"
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card fire"
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(58, 107, 140)",
+      "after": "rgb(229, 223, 208)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card water"
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(201, 160, 99)",
+      "after": "rgb(229, 223, 208)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card mountain"
+      ]
+    },
+    {
+      "page": "data/monster-ecology-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(107, 142, 90)",
+      "after": "rgb(229, 223, 208)",
+      "count": 1,
+      "sample_elements": [
+        "div.kpi-card sky"
+      ]
+    },
+    {
+      "page": "data/monster-female-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/monster-female-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/monster-hierarchy-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/monster-sociology.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/monster-sociology.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/monster-victims-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/underworld-power-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    }
+  ]
+}
