@@ -20,7 +20,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="AI 名人对话 · 详解西游记">
     <meta property="og:description" content="AI 名人对话 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -472,7 +472,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -511,11 +511,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -706,6 +706,8 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+        /* W866 B3 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
+        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1274,10 +1276,10 @@ td.num, th.num {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-lg);
-            padding: 32px 30px;
+            padding: var(--space-7) 30px;
             box-shadow: var(--shadow);
             margin-bottom: 28px;
-            scroll-margin-top: 20px;
+            scroll-margin-top: var(--space-5);
         }
         .device-title {
             font-size: 1.45rem;
@@ -1311,11 +1313,11 @@ td.num, th.num {
             .celebrity-card { min-width: 180px; flex-shrink: 0; }
         }
         @media (max-width: 480px) {
-            .device { padding: 20px 16px; }
+            .device { padding: var(--space-5) 16px; }
             .message .bubble { max-width: 88%; }
             
-            .chat-history { max-height: 380px; padding: 12px; }
-            .input-area { padding: 10px 12px; }
+            .chat-history { max-height: 380px; padding: var(--space-4); }
+            .input-area { padding: 10px var(--space-4); }
             .input-area button { padding: 10px 14px; font-size: 0.82rem; }
         }
 
@@ -1330,7 +1332,7 @@ td.num, th.num {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: 12px 14px;
+            padding: var(--space-4) 14px;
             cursor: pointer;
             transition: border-color var(--dur-base), transform var(--dur-fast), background var(--dur-base);
             box-shadow: var(--shadow);
@@ -1381,7 +1383,7 @@ td.num, th.num {
             min-height: 520px;
         }
         .chat-header {
-            padding: 12px 16px;
+            padding: var(--space-4) 16px;
             border-bottom: 1px solid var(--line);
             font-size: 0.88rem;
             color: var(--ink-soft);
@@ -1406,7 +1408,7 @@ td.num, th.num {
         .chat-empty {
             text-align: center;
             color: var(--ink-soft);
-            padding: 50px 20px;
+            padding: 50px var(--space-5);
             font-style: italic;
             font-size: 0.88rem;
         }
@@ -1452,7 +1454,7 @@ td.num, th.num {
             font-size: 0.8rem;
             color: var(--accent);
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .message.celebrity .bubble .quote-text {
             font-size: 0.92rem;
@@ -1470,7 +1472,7 @@ td.num, th.num {
             margin-top: 6px;
             font-style: italic;
             border-top: 1px dashed var(--line);
-            padding-top: 4px;
+            padding-top: var(--space-2);
         }
 
         /* 快捷话题 */
@@ -1487,13 +1489,13 @@ td.num, th.num {
             font-size: 0.76rem;
             color: var(--ink-soft);
             width: 100%;
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
         .topic-btn {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: 16px;
-            padding: 5px 12px;
+            padding: 5px var(--space-4);
             font-size: 0.8rem;
             color: var(--ink-soft);
             cursor: pointer;
@@ -1507,7 +1509,7 @@ td.num, th.num {
         .input-area {
             display: flex;
             gap: 8px;
-            padding: 12px 16px;
+            padding: var(--space-4) 16px;
             border-top: 1px solid var(--line);
             background: var(--paper);
             min-width: 0;
@@ -1557,7 +1559,7 @@ td.num, th.num {
         .how-card h3 {
             font-size: 1rem;
             color: var(--accent);
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -1568,8 +1570,8 @@ td.num, th.num {
             justify-content: center;
             width: 24px;
             height: 24px;
-            background: var(--accent);
-            color: var(--paper);
+            background: var(--accent-tint);
+            color: var(--accent);
             border-radius: 50%;
             font-size: 0.78rem;
             font-weight: 600;
@@ -1583,11 +1585,11 @@ td.num, th.num {
 
         .source-list {
             text-align: center;
-            padding: 24px;
+            padding: var(--space-6);
             color: var(--ink-soft);
             font-size: 0.85rem;
             border-top: 1px solid var(--line);
-            margin-top: 40px;
+            margin-top: var(--space-8);
         }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
@@ -1628,7 +1630,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <p class="tagline">与五百年批评家跨时空对话·关键词匹配名人语录。</p>
     </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
     <nav class="breadcrumb"><a href="../dashboard.html">数据看板</a> → AI 名人对话</nav>
 
     <div class="notice" id="dataSource">
@@ -1706,8 +1708,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
         
-            <a href="../en/ai-dialogue.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="../en/ai-dialogue.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 
 <script src="../static/js/d3.v7.min.js"></script>

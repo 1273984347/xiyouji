@@ -69,14 +69,14 @@ def migrate(text, wtag="W864"):
 
 def main(argv):
     dry = "--dry" in argv
-    files = [a for a in argv[1:] if not a.startswith("--")]
+    wtag = argv[argv.index("--wtag") + 1] if "--wtag" in argv else "W864"
+    files = [a for a in argv[1:] if not a.startswith("--") and a != wtag]
     if not files:
         print("用法：--dry|<无> <file...>")
         return 2
     for path in files:
         with open(path, encoding="utf-8") as f:
             text = f.read()
-        wtag = argv[argv.index("--wtag") + 1] if "--wtag" in argv else "W864"
         new, rep = migrate(text, wtag)
         print("%s %s：A=%d·顶条规则=%s·seal=%s"
               % ("[DRY]" if dry else "[APPLY]", path, rep["A"],

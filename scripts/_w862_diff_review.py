@@ -52,8 +52,12 @@ def diff_all(before, after):
 
 
 def main():
-    b = _load(sys.argv[1])
-    a = _load(sys.argv[2])
+    global OUT
+    argv = [x for x in sys.argv[1:] if x != "--out"]
+    if "--out" in sys.argv:
+        OUT = os.path.join(ROOT, sys.argv[sys.argv.index("--out") + 1])
+    b = _load(argv[0])
+    a = _load(argv[1])
     diffs = diff_all(b, a)
     # 聚合：page × theme × kind × prop × before→after
     groups = defaultdict(lambda: {"count": 0, "elements": []})

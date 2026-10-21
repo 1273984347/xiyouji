@@ -20,7 +20,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="壹 · 100 回出场人物数曲线 · 贰 · 主要人物出场回数热力图 · 叁 · Top 10 人物累积出场曲线 · 详解西游记">
     <meta property="og:description" content="壹 · 100 回出场人物数曲线 · 贰 · 主要人物出场回数热力图 · 叁 · Top 10 人物累积出场曲线 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -472,7 +472,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -511,11 +511,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -706,6 +706,8 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+        /* W866 B3 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
+        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1254,7 +1256,7 @@ td.num, th.num {
         /* === 仅本页特有样式 === */
         h1 { text-align: center; color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
 .subtitle { text-align: center; color: var(--ink-soft); margin-bottom: 30px; }
-.section { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md) ; padding: 20px; margin: 20px 0; }
+.section { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md) ; padding: var(--space-5); margin: var(--space-5) 0; }
 .section-title { color: var(--accent); border-left: 4px solid var(--accent); padding-left: 10px; margin-top: 0; }
 .section-title.alt { color: var(--accent-2); border-left-color: var(--accent-2); }
 .section-sub { color: var(--ink-soft); font-size: 0.9em; margin-bottom: 15px; }
@@ -1271,7 +1273,7 @@ td.num, th.num {
 .kpi-value { font-size: 1.4em; font-weight: bold; color: var(--accent); }
 .kpi-label { font-size: 0.8em; color: var(--ink-soft); }
 .insight-list { background: var(--paper); padding: 15px; border-radius: var(--radius-md) }
-.insight-item { margin: 8px 0; padding-left: 20px; position: relative; }
+.insight-item { margin: var(--space-3) 0; padding-left: var(--space-5); position: relative; }
 .insight-item::before { content: "◆"; color: var(--accent); position: absolute; left: 0; }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
@@ -1325,7 +1327,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <p class="subtitle">W131 · 六层 NLP 数据 · 人物出场时间结构</p>
     </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
 <div class="kpi-row">
   <div class="kpi-card"><div class="kpi-value">100</div><div class="kpi-label">总回目</div></div>
   <div class="kpi-card"><div class="kpi-value">35</div><div class="kpi-label">追踪人物</div></div>
@@ -1415,8 +1417,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
         
-            <a href="../en/character-presence-timeline.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="../en/character-presence-timeline.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 <script src="../static/js/d3.v7.min.js"></script>
 <script>
