@@ -1,4 +1,4 @@
-# 📖 详解西游记
+# 📖 取经录
 
 
 > 一源多形 · 数字人文可视化解读《西游记》100 回 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
@@ -22,7 +22,7 @@
 
 **无需安装，点开即读** 👉 [**https://1273984347.github.io/xiyouji/**](https://1273984347.github.io/xiyouji/)
 
-![详解西游记 · 站点首页预览](assets/images/index-preview.png)
+![取经录 · 站点首页预览](assets/images/index-preview.png)
 
 *如果图片加载慢，请直接点击上方链接打开站点。*
 

@@ -1,9 +1,9 @@
 cff-version: 1.2.0
-title: 详解西游记
+title: 取经录
 message: "如果本项目对您的研究或写作有帮助，请按以下格式引用。"
 type: software
 authors:
-  - name: 详解西游记项目
+  - name: 取经录项目
 version: "W851" # 批次号形态（W711 方案 D·非 SemVer·CFF 1.2.0 free string·解析方按字符串处理）
 date-released: "2026-10-21"
 license: MIT
@@ -24,9 +24,9 @@ keywords:
   - 数字人文
 preferred-citation:
   type: software
-  title: "详解西游记"
+  title: "取经录"
   authors:
-    - name: 详解西游记项目
+    - name: 取经录项目
   version: "W737"
   date-released: "2026-10-14"
   # 双许可：代码 MIT + 文本内容 CC BY-NC 4.0（LICENSE-CONTENT.md）——CFF 单 license 字段取代码侧，

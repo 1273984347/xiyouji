@@ -1,6 +1,6 @@
 'use strict';
 
-// 《详解西游记》离线全站桌面版 —— Electron 主进程。
+// 《取经录》离线全站桌面版 —— Electron 主进程。
 // 启动流程：单实例锁 → 本地静态服务（127.0.0.1 随机端口）→ BrowserWindow 加载 → 中文菜单 → 自动更新。
 // 诊断模式：`electron . --self-test` 不创建窗口，只验证内容服务可返回首页后退出（无窗口环境可跑）。
 
@@ -15,7 +15,7 @@ const { buildMenu } = require('./menu.cjs');
 const updater = require('./updater.cjs');
 
 const APP_USER_MODEL_ID = 'com.xiyouji.desktop';
-const APP_TITLE = '详解西游记';
+const APP_TITLE = '取经录';
 const SELF_TEST_FLAG = '--self-test';
 const IS_SELF_TEST = process.argv.includes(SELF_TEST_FLAG);
 
