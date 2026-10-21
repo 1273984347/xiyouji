@@ -21,7 +21,7 @@
     <meta name="description" content="交互式时间线 · 详解西游记">
     <meta property="og:description" content="交互式时间线 · 详解西游记">
     <script defer src="../static/js/d3.v7.min.js"></script>
-    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -473,7 +473,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -512,11 +512,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -1288,10 +1288,10 @@ td.num, th.num {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-lg);
-            padding: 32px 30px;
+            padding: var(--space-7) 30px;
             box-shadow: var(--shadow);
             margin-bottom: 28px;
-            scroll-margin-top: 20px;
+            scroll-margin-top: var(--space-5);
         }
         .device-title {
             font-size: 1.4rem;
@@ -1400,22 +1400,22 @@ td.num, th.num {
             color: var(--paper-warm);
             border: 1px solid var(--accent);
             border-radius: var(--radius-md);
-            padding: 8px 12px;
+            padding: var(--space-3) var(--space-4);
             font-size: 0.82rem;
             max-width: 375px;
             box-shadow: var(--elev-3);
             z-index: 10;
             line-height: 1.5;
         }
-        .tl-tooltip .tt-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 2px; overflow-wrap: anywhere; }
-        .tl-tooltip .tt-meta { font-size: 0.74rem; opacity: 0.8; margin-bottom: 4px; }
+        .tl-tooltip .tt-title { color: var(--accent-soft); font-weight: 600; margin-bottom: var(--space-1); overflow-wrap: anywhere; }
+        .tl-tooltip .tt-meta { font-size: 0.74rem; opacity: 0.8; margin-bottom: var(--space-2); }
         .tl-tooltip .tt-desc { font-size: 0.8rem; opacity: 0.92; overflow-wrap: anywhere; }
 
         /* 垂直时间线（移动端） */
         .vtl {
             position: relative;
             padding-left: 26px;
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         .vtl::before {
             content: "";
@@ -1426,7 +1426,7 @@ td.num, th.num {
         }
         .vtl-item {
             position: relative;
-            padding: 8px 0 16px 8px;
+            padding: var(--space-3) 0 16px var(--space-3);
             cursor: pointer;
             min-width: 0;
         }
@@ -1438,8 +1438,8 @@ td.num, th.num {
             border: 2px solid var(--paper);
             box-shadow: 0 0 0 2px var(--line);
         }
-        .vtl-item .vtl-meta { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 2px; font-family: "JetBrains Mono", monospace; }
-        .vtl-item .vtl-meta .vtl-axis { margin-left: 8px; padding: 1px 7px; border-radius: var(--radius-sm) ; font-size: 0.72rem; }
+        .vtl-item .vtl-meta { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: var(--space-1); font-family: "JetBrains Mono", monospace; }
+        .vtl-item .vtl-meta .vtl-axis { margin-left: var(--space-3); padding: 1px 7px; border-radius: var(--radius-sm) ; font-size: 0.72rem; }
         .vtl-item .vtl-title { font-size: 1rem; font-weight: 600; color: var(--ink); }
         .vtl-item .vtl-desc { font-size: 0.85rem; color: var(--ink-soft); overflow-wrap: anywhere; }
         .vtl-item.dimmed { opacity: 0.3; }
@@ -1448,7 +1448,7 @@ td.num, th.num {
         /* 详情卡片 */
         .detail-empty {
             text-align: center;
-            padding: 28px 12px;
+            padding: 28px var(--space-4);
             color: var(--ink-soft);
             font-size: 0.9rem;
             border: 1px dashed var(--line);
@@ -1469,11 +1469,11 @@ td.num, th.num {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .badge {
             display: inline-block;
-            padding: 2px 10px;
+            padding: var(--space-1) 10px;
             border-radius: var(--radius-pill);
             font-size: 0.76rem;
             font-family: "JetBrains Mono", monospace;
@@ -1486,7 +1486,7 @@ td.num, th.num {
             font-size: 1.5rem;
             font-weight: 600;
             color: var(--ink);
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
             overflow-wrap: anywhere;
         }
         .detail-desc {
@@ -1524,27 +1524,27 @@ td.num, th.num {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
             min-width: 0;
         }
         .event-card .ec-icon { font-size: 1.6rem; flex-shrink: 0; }
         .event-card .ec-title { font-size: 1.05rem; font-weight: 600; color: var(--ink); overflow-wrap: anywhere; min-width: 0; }
-        .event-card .ec-meta { font-size: 0.76rem; color: var(--ink-soft); margin-bottom: 8px; font-family: "JetBrains Mono", monospace; }
+        .event-card .ec-meta { font-size: 0.76rem; color: var(--ink-soft); margin-bottom: var(--space-3); font-family: "JetBrains Mono", monospace; }
         .event-card .ec-meta .ec-axis { margin-left: 6px; }
         .event-card .ec-desc { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.6; overflow-wrap: anywhere; }
 
         footer.source-list {
             text-align: center;
-            padding: 24px;
+            padding: var(--space-6);
             color: var(--ink-soft);
             font-size: 0.85rem;
             border-top: 1px solid var(--line);
-            margin-top: 40px;
+            margin-top: var(--space-8);
         }
         footer.source-list a {
             color: var(--accent-2);
             text-decoration: none;
-            margin: 0 8px;
+            margin: 0 var(--space-3);
         }
         footer.source-list a:hover { text-decoration: underline; }
 
@@ -1597,7 +1597,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <p class="tagline">从大唐到当代·西游文化的千年演变。</p>
     </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <nav class="breadcrumb"><a href="../dashboard.html">数据看板</a> → 交互式时间线</nav>
 
         <div class="notice" id="dataSource">
@@ -1661,8 +1661,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
         
-            <a href="../en/timeline.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="../en/timeline.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 
 <script>

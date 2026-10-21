@@ -1,0 +1,1555 @@
+{
+  "data/chapter-structure-graph.html": {
+    "text_on_bg": [
+      {
+        "tag": "a",
+        "cls": "",
+        "txt": "→ 章节字数与对话统计（统计轨）"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/chapter-stats.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/story-timeline.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 809
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 809
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 809
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 809
+      }
+    ]
+  },
+  "data/timeline.html": {
+    "text_on_bg": [
+      {
+        "tag": "span",
+        "cls": "ec-axis",
+        "txt": "· 成书史"
+      },
+      {
+        "tag": "span",
+        "cls": "ec-axis",
+        "txt": "· 成书史"
+      },
+      {
+        "tag": "span",
+        "cls": "ec-axis",
+        "txt": "· 成书史"
+      },
+      {
+        "tag": "span",
+        "cls": "ec-axis",
+        "txt": "· 成书史"
+      },
+      {
+        "tag": "span",
+        "cls": "ec-axis",
+        "txt": "· 成书史"
+      },
+      {
+        "tag": "span",
+        "cls": "ec-axis",
+        "txt": "· 成书史"
+      },
+      {
+        "tag": "span",
+        "cls": "ec-axis",
+        "txt": "· 成书史"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/relationships.html": {
+    "text_on_bg": [
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "势力分布"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "天庭"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "7"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "6"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "6"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "5"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "5"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "金刚琢"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "芭蕉扇（铁扇公主）"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "紫金红葫芦"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "阴阳二气瓶"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "金箍咒三件"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "金箍棒"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "玉净瓶"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "九齿钉耙"
+      },
+      {
+        "tag": "div",
+        "cls": "ibox-label",
+        "txt": "COUNTER MATRIX INSIGHT"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "最强法宝："
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "弱点规律："
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "平衡洞察："
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "54%"
+      },
+      {
+        "tag": "div",
+        "cls": "ibox-label",
+        "txt": "RESCUE STATS INSIGHT"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "最常求助："
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "最高成本："
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "最佳 ROI："
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "深层规律："
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "推进者+智多星"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "9"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "8"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "9"
+      },
+      {
+        "tag": "div",
+        "cls": "ibox-label",
+        "txt": "BELBIN BALANCE INSIGHT"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"弱协调+强执行+低凝聚\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "最大短板是审议员"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "唐僧-孙悟空"
+      },
+      {
+        "tag": "div",
+        "cls": "ibox-label",
+        "txt": "KEY INSIGHT · 关键洞察"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"核心-卫星\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "取经团队四众 + 观音"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "项目内嵌性"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "猪八戒-沙僧"
+      },
+      {
+        "tag": "div",
+        "cls": "ibox-label",
+        "txt": "KEY INSIGHT · 关键洞察"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"三阶段\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "① 组建期（1-22 回）"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "② 巩固期（23-80 回）"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "③ 收束期（81-100 回）"
+      },
+      {
+        "tag": "div",
+        "cls": "map-label",
+        "txt": "META INSIGHT"
+      },
+      {
+        "tag": "div",
+        "cls": "ibox-label",
+        "txt": "KEY INSIGHT · 关键洞察"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "闭环博弈"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "闭环生态"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "演化曲线"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "项目结构"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "核心-卫星的项目内嵌"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "没有单一最强，只有阶段最优；没有静态平衡，只有动"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "span",
+        "cls": "role-tag primary",
+        "kind": "background",
+        "area": 1031
+      },
+      {
+        "tag": "span",
+        "cls": "role-tag primary",
+        "kind": "background",
+        "area": 1031
+      },
+      {
+        "tag": "span",
+        "cls": "role-tag primary",
+        "kind": "background",
+        "area": 1031
+      },
+      {
+        "tag": "span",
+        "cls": "role-tag primary",
+        "kind": "background",
+        "area": 1031
+      },
+      {
+        "tag": "span",
+        "cls": "role-tag primary",
+        "kind": "background",
+        "area": 776
+      }
+    ]
+  },
+  "data/81-hardships.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 1651
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2418
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      },
+      {
+        "tag": "span",
+        "cls": "tag",
+        "kind": "background",
+        "area": 2006
+      }
+    ]
+  },
+  "data/81-hardships-view.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "keytab active",
+        "kind": "background",
+        "area": 2872
+      },
+      {
+        "tag": "button",
+        "cls": "vt-btn",
+        "kind": "background",
+        "area": 2717
+      },
+      {
+        "tag": "button",
+        "cls": "vt-btn",
+        "kind": "background",
+        "area": 2980
+      }
+    ]
+  },
+  "data/hardship-heatmap.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "① 回目 × 难度系数热力图"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "② 五阶段平均难度演变"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "③ 难度等级 × 起因类型分布"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "④ 难度地形演变洞察"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "button",
+        "cls": "stage-btn active",
+        "kind": "background",
+        "area": 3631
+      }
+    ]
+  },
+  "data/hardship-difficulty-heatmap.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "① 81 难 × 4 维度矩阵热力图"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "② 四维度分布统计"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "20"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "1.00"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "0.15"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "0%"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "29"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "1.28"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "0.45"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "21%"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "24"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "1.75"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "1.21"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "50%"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "8"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "2.63"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "2.75"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "88%"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "③ 四维度交叉洞察"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "④ 八十一难清单（与热力图联动）"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "button",
+        "cls": "dim-btn active",
+        "kind": "background",
+        "area": 3344
+      },
+      {
+        "tag": "button",
+        "cls": "btn sort-btn active",
+        "kind": "background",
+        "area": 3444
+      }
+    ]
+  },
+  "data/methodology-matrix.html": {
+    "text_on_bg": [
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "动机 × 资源"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "编制决定命运"
+      },
+      {
+        "tag": "div",
+        "cls": "axis-name",
+        "txt": "AXIS · 动机来源"
+      },
+      {
+        "tag": "div",
+        "cls": "axis-name",
+        "txt": "AXIS · 资源丰度"
+      },
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "从矩阵分布看「编制决定命运」"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "草根炮灰的宿命"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "编制护身符效应"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "顶级反派的归顺逻辑"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "心魔型反派"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "底层规律"
+      },
+      {
+        "tag": "div",
+        "cls": "cc-key",
+        "txt": "EFFICIENCY · 分子"
+      },
+      {
+        "tag": "div",
+        "cls": "cc-key",
+        "txt": "FAVOR_COST · 分子"
+      },
+      {
+        "tag": "div",
+        "cls": "cc-key",
+        "txt": "MARGINAL_COST · 分子"
+      },
+      {
+        "tag": "div",
+        "cls": "cc-key",
+        "txt": "TIME_COST · 分母"
+      },
+      {
+        "tag": "div",
+        "cls": "cc-key",
+        "txt": "REPUTATION_LOSS · 分母"
+      },
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "从 ROI 演变看悟空的成长曲线"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "黄风怪案例"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "牛魔王案例"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "后期 ROI 反弹"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "观音成为常驻救兵"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "狮驼岭案例"
+      },
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "方法论矩阵 · 五条核心结论"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "编制决定命运"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "40%"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "底层炮灰"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "大鹏金翅雕"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "2.4"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "5.0"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "平移到任何「求助型」主角"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "quadrant-card",
+        "kind": "border-top",
+        "area": 1084
+      },
+      {
+        "tag": "span",
+        "cls": "quad-badge",
+        "kind": "background",
+        "area": 3331
+      },
+      {
+        "tag": "span",
+        "cls": "quad-badge",
+        "kind": "background",
+        "area": 3331
+      },
+      {
+        "tag": "span",
+        "cls": "quad-badge",
+        "kind": "background",
+        "area": 3331
+      },
+      {
+        "tag": "span",
+        "cls": "quad-badge",
+        "kind": "background",
+        "area": 3331
+      },
+      {
+        "tag": "span",
+        "cls": "quad-badge",
+        "kind": "background",
+        "area": 3331
+      },
+      {
+        "tag": "span",
+        "cls": "quad-badge",
+        "kind": "background",
+        "area": 3331
+      },
+      {
+        "tag": "span",
+        "cls": "phase-badge",
+        "kind": "background",
+        "area": 2359
+      },
+      {
+        "tag": "span",
+        "cls": "phase-badge",
+        "kind": "background",
+        "area": 2359
+      },
+      {
+        "tag": "div",
+        "cls": "phase-card",
+        "kind": "border-top",
+        "area": 1465
+      }
+    ]
+  }
+}

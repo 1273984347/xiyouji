@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（231）
+## 文件（234）
 
 ### Markdown 文档
 
@@ -134,6 +134,8 @@
 - `_w862_accent_text_audit.py`
 - `_w862_diff_review.py`
 - `_w862_tokenize_spacing.py`
+- `_w864_accent_audit.py`
+- `_w864_migrate.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
@@ -248,6 +250,7 @@
 - `_w854_cdp.mjs`
 - `_w854_layout_probe.mjs`
 - `_w854_layout_probe_app.mjs`
+- `_w865_layout_probe.mjs`
 - `batch_screenshots.js`
 - `check_chart_values.js`
 - `check_contract_smoke.js`
