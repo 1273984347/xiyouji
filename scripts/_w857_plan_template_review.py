@@ -152,19 +152,43 @@ def banned_hits(lines):
     return ({w: n for w, n in out.items() if n}, ctx)
 
 
+def detect_kind(text, name):
+    """件型判定（内容优先·文件名兜底）。
+
+    W860 实证的坑：仓内存在「审查 + 计划」双合一报告（文件名带「任务计划执行与经验沉淀报告」
+    却内含完整 §5.1~§5.9 计划半边）——若只按文件名判 REPORT，计划半边永不被判（假绿口子）。
+    故按内容判定：计划特征 = 有 §5.x 小节标题或「任务标识」；报告特征 = 有执行记录 / 验收证据 /
+    可行性自评 / 经验沉淀等章节。
+    """
+    heads = re.findall(r'^#{1,4}\s*(.+)$', text, re.M)
+    # 报告半边只看「章节标题」不看正文提及——纯计划件常在自检表/证据列里提到「验收证据」「经验沉淀」，
+    # 那是引用不是章节（实证：执行前计划-T03 正文出现「经验沉淀」6 次但无该章节）。
+    report_head = [h for h in heads
+                   if any(k in h for k in ('验收证据', '可行性自评', '经验沉淀', '风险与偏差'))]
+    has_plan = ('执行前计划' in name
+                or re.search(r'^#{1,4}\s*5\.[1-9]', text, re.M) is not None
+                or '任务标识' in text)
+    has_report = ('任务计划执行与经验沉淀报告' in name) or bool(report_head)
+    if has_plan and has_report:
+        return 'BOTH'
+    if has_plan:
+        return 'PLAN'
+    return 'REPORT'
+
+
 def judge(text, name='<text>'):
     """纯函数判据：按件型分流判 32 项结构判据，返回判据判定表。
 
     供两处复用：① 本探针的全量矩阵输出；② 第 48 门禁 scripts/check_plan_template.py
     （门禁取其「不符合项集合」做增量差集）。
 
-    返回：{'kind': 'PLAN'|'REPORT', 'criteria': {cid: {'verdict','missing','present','need','desc','src'}}}
+    返回：{'kind': 'PLAN'|'REPORT'|'BOTH', 'criteria': {cid: {...}}}
     """
     lines = text.splitlines()
-    kind = 'PLAN' if '执行前计划' in name else 'REPORT'
+    kind = detect_kind(text, name)
     out = {}
     for cid, src, desc, tokens in CRITERIA:
-        if (kind == 'PLAN' and cid in REPORT_ONLY) or (kind == 'REPORT' and cid in PLAN_ONLY):
+        if (cid in PLAN_ONLY and kind == 'REPORT') or (cid in REPORT_ONLY and kind == 'PLAN'):
             out[cid] = {'src': src, 'desc': desc, 'present': None, 'need': len(tokens),
                         'missing': [], 'verdict': 'N/A', 'note': '按件型不适用'}
             continue
