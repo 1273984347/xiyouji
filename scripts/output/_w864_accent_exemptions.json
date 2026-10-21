@@ -241,6 +241,60 @@
     }
    ],
    "note": "B6 增补。narrative-experiment 的 12 张 narr-card 网格顶条按裁决 2 收敛（同色装饰网格=非编码，非豁免）；player-card/mv-card 单条不超限未动。"
+  },
+  "W870": {
+   "measured_at": "2026-10-22",
+   "exemptions": [
+    {
+     "page": "data/text-evolution.html",
+     "cls": "div.evo-step.first",
+     "count": 6,
+     "reason": "演化链条首步的位置编码（first=朱砂/last=accent-4/中段=淡纸）·数据语义"
+    },
+    {
+     "page": "data/linguistics.html",
+     "cls": "span（无类名色片）",
+     "count": 5,
+     "reason": "图例/内联色卡·数据语义"
+    },
+    {
+     "page": "data/linguistics.html",
+     "cls": "div.mbti-card.m-entp",
+     "count": 1,
+     "reason": "MBTI 类型编码卡·数据语义"
+    },
+    {
+     "page": "data/linguistics.html",
+     "cls": "div.char-card.c-buddhist",
+     "count": 3,
+     "reason": "教派分类卡（c-buddhist）·数据语义"
+    },
+    {
+     "page": "data/counterfactual.html",
+     "cls": "span.badge.validity-high",
+     "count": 7,
+     "reason": "可信度等级编码（high/mid/low 三档）·数据语义"
+    },
+    {
+     "page": "data/jurisprudence.html",
+     "cls": "span.severity-pill.sev-high",
+     "count": 8,
+     "reason": "刑罚等级编码（sev-high/mid/low）·数据语义"
+    },
+    {
+     "page": "data/jurisprudence.html",
+     "cls": "div.artifact-card.c-low",
+     "count": 2,
+     "reason": "器物等级分类卡（c-low）·数据语义"
+    },
+    {
+     "page": "data/karma-reincarnation.html",
+     "cls": "div.char-card.c-chusheng",
+     "count": 1,
+     "reason": "轮回道分类卡（c-chusheng 畜生道）·数据语义"
+    }
+   ],
+   "note": "B7 增补。century-dialogue 的 3 个 speech-bubble 条整改后计 3 处（恰在限额内）未豁免；inc-card 单条不超限未动。"
   }
  },
  "note": "裁决 2「豁免清单落 scripts/output/」登记簿：W864 首批建册，随批递增、条目随迁移整改递减。"

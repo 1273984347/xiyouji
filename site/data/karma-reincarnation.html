@@ -20,7 +20,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="导言 · 命运与轮回的四维透镜 · 壹 · 生死簿篡改流转图 · 贰 · 因果报应定律 · 详解西游记">
     <meta property="og:description" content="导言 · 命运与轮回的四维透镜 · 壹 · 生死簿篡改流转图 · 贰 · 因果报应定律 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -472,7 +472,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -511,11 +511,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -706,6 +706,8 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+        /* W870 B7 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
+        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1289,8 +1291,8 @@ td.num, th.num {
         .definition {
             background: var(--paper);
             border-left: 4px solid var(--accent-soft);
-            padding: 12px 16px;
-            margin-bottom: 20px;
+            padding: var(--space-4) 16px;
+            margin-bottom: var(--space-5);
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
             font-size: 0.92rem;
             color: var(--ink-soft);
@@ -1300,19 +1302,19 @@ td.num, th.num {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: var(--space-5);
+            margin-bottom: var(--space-5);
         }
         .chart-title {
             font-size: 1rem;
             font-weight: 600;
             color: var(--ink);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .chart-caption {
             font-size: 0.82rem;
             color: var(--ink-soft);
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
         }
         .chart-svg {
             max-width: 100%;
@@ -1349,11 +1351,11 @@ td.num, th.num {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.88rem;
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         table.data-table th,
         table.data-table td {
-            padding: 10px 12px;
+            padding: 10px var(--space-4);
             text-align: left;
             border-bottom: 1px solid var(--line);
             vertical-align: top;
@@ -1384,7 +1386,7 @@ td.num, th.num {
         }
         .insights-list li {
             counter-increment: insight;
-            padding: 12px 16px 12px 48px;
+            padding: var(--space-4) 16px var(--space-4) var(--space-9);
             position: relative;
             border-bottom: 1px dashed var(--line);
             font-size: 0.92rem;
@@ -1424,24 +1426,24 @@ td.num, th.num {
         .char-card .char-name {
             font-size: 1.05rem;
             font-weight: 600;
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
         .char-card .char-profile {
             font-size: 0.8rem;
             color: var(--ink-soft);
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .char-card .char-score {
             font-family: "JetBrains Mono", "Consolas", monospace;
             font-size: 0.85rem;
             color: var(--accent);
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .char-card .char-row {
             font-size: 0.82rem;
             color: var(--ink-soft);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .char-card .char-row strong {
             color: var(--ink);
@@ -1452,7 +1454,7 @@ td.num, th.num {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
             gap: 16px;
-            margin-bottom: 20px;
+            margin-bottom: var(--space-5);
         }
         .map-card {
             background: var(--paper);
@@ -1469,7 +1471,7 @@ td.num, th.num {
             color: var(--accent-2);
             letter-spacing: 0.12em;
             font-family: "JetBrains Mono", "Consolas", monospace;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .map-card.alt .map-label { color: var(--accent-4); }
         .map-card.alt2 .map-label { color: var(--accent-3); }
@@ -1477,12 +1479,12 @@ td.num, th.num {
         .map-card .map-title {
             font-size: 1.05rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .map-card .map-row {
             font-size: 0.85rem;
             color: var(--ink-soft);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .map-card .map-row strong {
             color: var(--ink);
@@ -1500,7 +1502,7 @@ td.num, th.num {
             font-size: 0.78rem;
             letter-spacing: 0.12em;
             font-family: "JetBrains Mono", "Consolas", monospace;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .summary-card .map-title {
             font-size: 1.05rem;
@@ -1515,7 +1517,7 @@ td.num, th.num {
         /* tooltip */
         .d3-tooltip {
             position: absolute;
-            padding: 8px 12px;
+            padding: var(--space-3) var(--space-4);
             background: var(--dark);
             color: var(--paper-warm);
             font-size: 0.8rem;
@@ -1527,7 +1529,7 @@ td.num, th.num {
             z-index: 100;
         }
         .source-list {
-            margin-top: 8px;
+            margin-top: var(--space-3);
             font-size: 0.78rem;
             color: var(--ink-soft);
             overflow-wrap: anywhere;
@@ -1563,11 +1565,11 @@ td.num, th.num {
             display: inline-block;
             background: var(--paper-warm);
             color: var(--accent-3);
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-sm);
             font-size: 0.75rem;
             font-family: "JetBrains Mono", "Consolas", monospace;
-            margin: 0 4px 4px 0;
+            margin: 0 var(--space-2) var(--space-2) 0;
             border: 1px solid var(--line);
         }
         /* 桑基图节点 */
@@ -1592,14 +1594,14 @@ td.num, th.num {
             .map-grid { grid-template-columns: 1fr; }
             .char-grid { grid-template-columns: 1fr; }
             table.data-table { font-size: 0.78rem; }
-            table.data-table th, table.data-table td { padding: 6px 8px; }
+            table.data-table th, table.data-table td { padding: 6px var(--space-3); }
         }
         @media (max-width: 480px) {
             
             
             
             
-            .chart-block { padding: 12px; }
+            .chart-block { padding: var(--space-4); }
         }
     
     </style>
@@ -1656,7 +1658,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <p class="tagline">业力大于天命·业力大于簿籍——一部可被转化的因果史诗。</p>
     </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
 <div class="container">
         <nav class="breadcrumb">
             <a href="../dashboard.html">仪表盘</a>
@@ -1715,7 +1717,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <div class="map-row">业力大于天命·业力大于簿籍·但转化需付代价：赎罪/收编/归正/修行。</div>
                 </div>
             </div>
-            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:8px;">
+            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:var(--space-3);">
                 数据来源：scripts/K_命运与轮回/karma_reincarnation.py · 共生成 4 份 JSON 输出，本页 fetch 失败时自动回退到内嵌 EMBEDDED 数据，支持 file:// 协议双击打开。
             </p>
         </section>
@@ -1770,7 +1772,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </div>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">8 生死簿篡改案例详表</h3>
+            <h3 style="font-size:1.05rem;margin:18px 0 var(--space-3);color:var(--ink);">8 生死簿篡改案例详表</h3>
             <div style="overflow-x:auto;">
                 <table class="data-table" id="registry-table">
                     <thead>
@@ -1791,10 +1793,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </table>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">篡改类型分布卡片</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">篡改类型分布卡片</h3>
             <div class="map-grid" id="tamper-types-grid"></div>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">生死簿洞察</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">生死簿洞察</h3>
             <ol class="insights-list" id="registry-insights-list"></ol>
         </section>
 
@@ -1832,7 +1834,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </div>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">10 因果案例详表</h3>
+            <h3 style="font-size:1.05rem;margin:18px 0 var(--space-3);color:var(--ink);">10 因果案例详表</h3>
             <div style="overflow-x:auto;">
                 <table class="data-table" id="karma-table">
                     <thead>
@@ -1851,10 +1853,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </table>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">轮回去向分布卡片</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">轮回去向分布卡片</h3>
             <div class="map-grid" id="rebirth-grid"></div>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">因果洞察</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">因果洞察</h3>
             <ol class="insights-list" id="karma-insights-list"></ol>
         </section>
 
@@ -1886,7 +1888,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </div>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">6 道轮回详表</h3>
+            <h3 style="font-size:1.05rem;margin:18px 0 var(--space-3);color:var(--ink);">6 道轮回详表</h3>
             <div style="overflow-x:auto;">
                 <table class="data-table" id="samsara-table">
                     <thead>
@@ -1907,10 +1909,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </table>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">6 道轮回特征卡片</h3>
+            <h3 style="font-size:1.05rem;margin:18px 0 var(--space-3);color:var(--ink);">6 道轮回特征卡片</h3>
             <div class="char-grid" id="realm-grid"></div>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">六道轮回洞察</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">六道轮回洞察</h3>
             <ol class="insights-list" id="samsara-insights-list"></ol>
         </section>
 
@@ -1973,8 +1975,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
         
-            <a href="../en/karma-reincarnation.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="../en/karma-reincarnation.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 
 <!-- ===== EMBEDDED FALLBACK DATA ===== -->
