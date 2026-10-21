@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（226）
+## 文件（227）
 
 ### Markdown 文档
 
@@ -130,6 +130,7 @@
 - `_w851_j1_name_audit.py`
 - `_w851_j2_evidence.py`
 - `_w851_visual_regression_probe.py`
+- `_w857_plan_template_review.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
