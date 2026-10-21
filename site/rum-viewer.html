@@ -25,18 +25,18 @@
             font-family: var(--font-sans);
             line-height: 1.7;
             min-height: 100vh;
-            padding: 32px 24px 64px;
+            padding: var(--space-7) var(--space-6) var(--space-10);
         }
-        .wrap { max-width: 1024px; margin: 0 auto; }
+        .wrap { max-width: var(--container-content); margin: 0 auto; }
         .hero { margin-bottom: 28px; }
         .hero h1 { font-size: 26px; font-weight: 700; color: var(--dark, #3a2820); }
         .hero .sub { color: var(--ink-soft, #6b6b6b); margin-top: 6px; font-size: 14px; }
-        .stat-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+        .stat-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: var(--space-5); }
         .stat {
             background: var(--card, #fffdf8);
             border: 1px solid var(--line, #e8e0d2);
             border-radius: 10px;
-            padding: 14px 20px;
+            padding: 14px var(--space-5);
             min-width: 150px;
         }
         .stat .num { font-size: 24px; font-weight: 700; color: #C8463A; }
@@ -46,10 +46,10 @@
         th { background: var(--dark, #3a2820); color: #f5efe4; font-weight: 600; }
         tr:last-child td { border-bottom: none; }
         .mono { font-family: var(--font-mono, monospace); font-size: 12px; }
-        .empty { color: var(--ink-soft, #6b6b6b); padding: 40px 20px; text-align: center; }
-        .note { margin-top: 20px; font-size: 13px; color: var(--ink-soft, #6b6b6b); border-left: 3px solid var(--accent-3); padding-left: 12px; }
-        .btn { display: inline-block; margin-top: 12px; padding: 8px 16px; border: 1px solid #C8463A; color: #C8463A; border-radius: 6px; background: transparent; cursor: pointer; font-size: 13px; }
-        .btn:hover { background: #C8463A; color: var(--paper); }
+        .empty { color: var(--ink-soft, #6b6b6b); padding: var(--space-8) var(--space-5); text-align: center; }
+        .note { margin-top: var(--space-5); font-size: 13px; color: var(--ink-soft, #6b6b6b); border-left: 3px solid var(--accent-3); padding-left: var(--space-4); }
+        .btn { display: inline-block; margin-top: var(--space-4); padding: var(--space-3) 16px; border: 1px solid var(--accent); color: var(--accent-text); border-radius: 6px; background: transparent; cursor: pointer; font-size: 13px; }
+        .btn:hover { background: var(--accent); color: var(--paper); }
     @media (max-width: 768px){ table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; } }
 </style>
   <script defer src="js/visit-log.js"></script>
@@ -130,6 +130,6 @@
     </script>
 </div>
 
-<div style="padding:16px 8px;text-align:center"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></div>
+<div style="padding:16px var(--space-3);text-align:center"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></div>
 </body>
 </html>

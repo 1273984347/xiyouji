@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（286）
+## 文件（291）
 
 ### Markdown 文档
 
@@ -277,6 +277,11 @@
 - `_w857_plan_template_review.json`
 - `_w857_spec.json`
 - `_w860_spec.json`
+- `_w862_accent_text_audit.json`
+- `_w862_diff_review.json`
+- `_w862_spec.json`
+- `_w862_visual_snapshot_after.json`
+- `_w862_visual_snapshot_before.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`

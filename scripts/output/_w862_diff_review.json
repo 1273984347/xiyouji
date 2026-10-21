@@ -1,0 +1,571 @@
+{
+ "batch": "W862",
+ "total_diffs": 700,
+ "pages_with_diffs": [
+  "curated.html",
+  "dashboard.html",
+  "dukou-engine.html",
+  "guide.html",
+  "index.html",
+  "rum-viewer.html"
+ ],
+ "groups": [
+  {
+   "page": "dashboard.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(201, 79, 63)",
+   "after": "rgb(242, 235, 220)",
+   "count": 60,
+   "sample_elements": [
+    "div.value",
+    "div.value",
+    "div.value"
+   ]
+  },
+  {
+   "page": "dashboard.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(201, 79, 63)",
+   "after": "rgb(242, 235, 220)",
+   "count": 60,
+   "sample_elements": [
+    "div.value",
+    "div.value",
+    "div.value"
+   ]
+  },
+  {
+   "page": "dashboard.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(201, 79, 63)",
+   "after": "rgb(242, 235, 220)",
+   "count": 60,
+   "sample_elements": [
+    "div.value",
+    "div.value",
+    "div.value"
+   ]
+  },
+  {
+   "page": "dashboard.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(201, 79, 63)",
+   "after": "rgb(242, 235, 220)",
+   "count": 60,
+   "sample_elements": [
+    "div.value",
+    "div.value",
+    "div.value"
+   ]
+  },
+  {
+   "page": "dashboard.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(201, 79, 63)",
+   "after": "rgb(242, 235, 220)",
+   "count": 60,
+   "sample_elements": [
+    "div.value",
+    "div.value",
+    "div.value"
+   ]
+  },
+  {
+   "page": "dashboard.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(175, 63, 52)",
+   "after": "rgb(35, 32, 26)",
+   "count": 60,
+   "sample_elements": [
+    "div.value",
+    "div.value",
+    "div.value"
+   ]
+  },
+  {
+   "page": "dashboard.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(175, 63, 52)",
+   "after": "rgb(35, 32, 26)",
+   "count": 60,
+   "sample_elements": [
+    "div.value",
+    "div.value",
+    "div.value"
+   ]
+  },
+  {
+   "page": "dashboard.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(175, 63, 52)",
+   "after": "rgb(35, 32, 26)",
+   "count": 60,
+   "sample_elements": [
+    "div.value",
+    "div.value",
+    "div.value"
+   ]
+  },
+  {
+   "page": "dashboard.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(175, 63, 52)",
+   "after": "rgb(35, 32, 26)",
+   "count": 60,
+   "sample_elements": [
+    "div.value",
+    "div.value",
+    "div.value"
+   ]
+  },
+  {
+   "page": "dashboard.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(175, 63, 52)",
+   "after": "rgb(35, 32, 26)",
+   "count": 60,
+   "sample_elements": [
+    "div.value",
+    "div.value",
+    "div.value"
+   ]
+  },
+  {
+   "page": "dashboard.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 6,
+   "sample_elements": [
+    "div.kicker",
+    "div.section-kick",
+    "div.section-kick"
+   ]
+  },
+  {
+   "page": "dashboard.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 6,
+   "sample_elements": [
+    "div.kicker",
+    "div.section-kick",
+    "div.section-kick"
+   ]
+  },
+  {
+   "page": "dashboard.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 6,
+   "sample_elements": [
+    "div.kicker",
+    "div.section-kick",
+    "div.section-kick"
+   ]
+  },
+  {
+   "page": "dashboard.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 6,
+   "sample_elements": [
+    "div.kicker",
+    "div.section-kick",
+    "div.section-kick"
+   ]
+  },
+  {
+   "page": "dashboard.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 5,
+   "sample_elements": [
+    "div.section-kick",
+    "div.section-kick",
+    "div.section-kick"
+   ]
+  },
+  {
+   "page": "index.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 5,
+   "sample_elements": [
+    "p.kicker",
+    "p.kicker",
+    "p.kicker"
+   ]
+  },
+  {
+   "page": "index.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 5,
+   "sample_elements": [
+    "p.kicker",
+    "p.kicker",
+    "p.kicker"
+   ]
+  },
+  {
+   "page": "index.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 5,
+   "sample_elements": [
+    "p.kicker",
+    "p.kicker",
+    "p.kicker"
+   ]
+  },
+  {
+   "page": "index.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 5,
+   "sample_elements": [
+    "p.kicker",
+    "p.kicker",
+    "p.kicker"
+   ]
+  },
+  {
+   "page": "index.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 5,
+   "sample_elements": [
+    "p.kicker",
+    "p.kicker",
+    "p.kicker"
+   ]
+  },
+  {
+   "page": "curated.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 4,
+   "sample_elements": [
+    "p.kicker",
+    "p.kicker",
+    "p.kicker"
+   ]
+  },
+  {
+   "page": "curated.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 4,
+   "sample_elements": [
+    "p.kicker",
+    "p.kicker",
+    "p.kicker"
+   ]
+  },
+  {
+   "page": "curated.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 4,
+   "sample_elements": [
+    "p.kicker",
+    "p.kicker",
+    "p.kicker"
+   ]
+  },
+  {
+   "page": "curated.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 4,
+   "sample_elements": [
+    "p.kicker",
+    "p.kicker",
+    "p.kicker"
+   ]
+  },
+  {
+   "page": "curated.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 4,
+   "sample_elements": [
+    "p.kicker",
+    "p.kicker",
+    "p.kicker"
+   ]
+  },
+  {
+   "page": "guide.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 3,
+   "sample_elements": [
+    "p.kicker",
+    "p.kicker",
+    "p.kicker"
+   ]
+  },
+  {
+   "page": "guide.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 3,
+   "sample_elements": [
+    "p.kicker",
+    "p.kicker",
+    "p.kicker"
+   ]
+  },
+  {
+   "page": "guide.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 3,
+   "sample_elements": [
+    "p.kicker",
+    "p.kicker",
+    "p.kicker"
+   ]
+  },
+  {
+   "page": "guide.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 3,
+   "sample_elements": [
+    "p.kicker",
+    "p.kicker",
+    "p.kicker"
+   ]
+  },
+  {
+   "page": "guide.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 3,
+   "sample_elements": [
+    "p.kicker",
+    "p.kicker",
+    "p.kicker"
+   ]
+  },
+  {
+   "page": "dukou-engine.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 1,
+   "sample_elements": [
+    "h1."
+   ]
+  },
+  {
+   "page": "dukou-engine.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 1,
+   "sample_elements": [
+    "h1."
+   ]
+  },
+  {
+   "page": "dukou-engine.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 1,
+   "sample_elements": [
+    "h1."
+   ]
+  },
+  {
+   "page": "dukou-engine.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 1,
+   "sample_elements": [
+    "h1."
+   ]
+  },
+  {
+   "page": "dukou-engine.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 1,
+   "sample_elements": [
+    "h1."
+   ]
+  },
+  {
+   "page": "rum-viewer.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "margin-right",
+   "before": "104px",
+   "after": "56px",
+   "count": 1,
+   "sample_elements": [
+    "div.wrap"
+   ]
+  },
+  {
+   "page": "rum-viewer.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "margin-left",
+   "before": "104px",
+   "after": "56px",
+   "count": 1,
+   "sample_elements": [
+    "div.wrap"
+   ]
+  },
+  {
+   "page": "rum-viewer.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 1,
+   "sample_elements": [
+    "button.btn"
+   ]
+  },
+  {
+   "page": "rum-viewer.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "margin-right",
+   "before": "104px",
+   "after": "56px",
+   "count": 1,
+   "sample_elements": [
+    "div.wrap"
+   ]
+  },
+  {
+   "page": "rum-viewer.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "margin-left",
+   "before": "104px",
+   "after": "56px",
+   "count": 1,
+   "sample_elements": [
+    "div.wrap"
+   ]
+  },
+  {
+   "page": "rum-viewer.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(199, 70, 58)",
+   "count": 1,
+   "sample_elements": [
+    "button.btn"
+   ]
+  }
+ ],
+ "evidence": {
+  "before_sha256": "298aeab82a50ca3200bf684119850fd930b0ff4d00407e24cc97c9325788582a",
+  "after_sha256": "9ecc256758cf1e68c5a7560b55befe09a44dfea70a22dd4e31b66a8ed9c3d295",
+  "note": "原始快照不随批入库（探针确定性已实证可复现）·本 sha256 为判词锚"
+ }
+}

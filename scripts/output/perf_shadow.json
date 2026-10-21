@@ -72,6 +72,74 @@
     {
       "batch": "W850",
       "date": "2026-10-21",
+      "captured_at": "2026-10-21T20:31:36",
+      "pages": [
+        {
+          "url": "dashboard.html",
+          "tier": "std",
+          "exists": true,
+          "html_bytes": 91791,
+          "head_bytes": 25084,
+          "inline_script_bytes": 25067,
+          "local_dep_bytes": 375536,
+          "local_dep_count": 9,
+          "remote_refs": 0,
+          "blocking_head_refs": 3
+        },
+        {
+          "url": "index.html",
+          "tier": "std",
+          "exists": true,
+          "html_bytes": 51114,
+          "head_bytes": 20051,
+          "inline_script_bytes": 18220,
+          "local_dep_bytes": 81811,
+          "local_dep_count": 6,
+          "remote_refs": 0,
+          "blocking_head_refs": 3
+        },
+        {
+          "url": "data/timeline.html",
+          "tier": "std",
+          "exists": true,
+          "html_bytes": 93207,
+          "head_bytes": 56673,
+          "inline_script_bytes": 27436,
+          "local_dep_bytes": 369449,
+          "local_dep_count": 9,
+          "remote_refs": 0,
+          "blocking_head_refs": 5
+        },
+        {
+          "url": "data/character-relationship-3d.html",
+          "tier": "3d",
+          "exists": true,
+          "html_bytes": 78575,
+          "head_bytes": 48115,
+          "inline_script_bytes": 20392,
+          "local_dep_bytes": 972894,
+          "local_dep_count": 10,
+          "remote_refs": 0,
+          "blocking_head_refs": 5
+        },
+        {
+          "url": "data/text-search.html",
+          "tier": "std",
+          "exists": true,
+          "html_bytes": 66694,
+          "head_bytes": 55293,
+          "inline_script_bytes": 446,
+          "local_dep_bytes": 89743,
+          "local_dep_count": 8,
+          "remote_refs": 0,
+          "blocking_head_refs": 5
+        }
+      ],
+      "lhci": null
+    },
+    {
+      "batch": "W851",
+      "date": "2026-10-21",
       "captured_at": "2026-10-21T22:32:20",
       "pages": [
         {
@@ -130,6 +198,74 @@
           "head_bytes": 57100,
           "inline_script_bytes": 446,
           "local_dep_bytes": 91983,
+          "local_dep_count": 8,
+          "remote_refs": 0,
+          "blocking_head_refs": 5
+        }
+      ],
+      "lhci": null
+    },
+    {
+      "batch": "W862",
+      "date": "2026-10-22",
+      "captured_at": "2026-10-22T02:02:52",
+      "pages": [
+        {
+          "url": "dashboard.html",
+          "tier": "std",
+          "exists": true,
+          "html_bytes": 92445,
+          "head_bytes": 25640,
+          "inline_script_bytes": 25067,
+          "local_dep_bytes": 378050,
+          "local_dep_count": 9,
+          "remote_refs": 0,
+          "blocking_head_refs": 3
+        },
+        {
+          "url": "index.html",
+          "tier": "std",
+          "exists": true,
+          "html_bytes": 51658,
+          "head_bytes": 20408,
+          "inline_script_bytes": 18214,
+          "local_dep_bytes": 84325,
+          "local_dep_count": 6,
+          "remote_refs": 0,
+          "blocking_head_refs": 3
+        },
+        {
+          "url": "data/timeline.html",
+          "tier": "std",
+          "exists": true,
+          "html_bytes": 95451,
+          "head_bytes": 58480,
+          "inline_script_bytes": 27436,
+          "local_dep_bytes": 371963,
+          "local_dep_count": 9,
+          "remote_refs": 0,
+          "blocking_head_refs": 5
+        },
+        {
+          "url": "data/character-relationship-3d.html",
+          "tier": "3d",
+          "exists": true,
+          "html_bytes": 80819,
+          "head_bytes": 49922,
+          "inline_script_bytes": 20392,
+          "local_dep_bytes": 975408,
+          "local_dep_count": 10,
+          "remote_refs": 0,
+          "blocking_head_refs": 5
+        },
+        {
+          "url": "data/text-search.html",
+          "tier": "std",
+          "exists": true,
+          "html_bytes": 68938,
+          "head_bytes": 57100,
+          "inline_script_bytes": 446,
+          "local_dep_bytes": 92257,
           "local_dep_count": 8,
           "remote_refs": 0,
           "blocking_head_refs": 5
