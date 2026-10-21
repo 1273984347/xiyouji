@@ -194,8 +194,12 @@ BAD = GOOD.replace('## 5.7 风险与备选', '## 5.7 风险') \
            .replace('## 附录 A：数据表\n表格。\n', '')
 
 
-def self_test():
-    """5 例纯逻辑 + 1 例 git 端到端。返回 0 全过。"""
+def self_test(include_git=True):
+    """5 例纯逻辑（+ include_git=True 时追加 2 例 git 端到端）。返回 0 全过。
+
+    git 端到端例会在 计划方案/ 目录内造临时文件（再删），故 pytest 包装层用 include_git=False
+    只跑纯逻辑例——避免 CI 里往仓内写文件。
+    """
     cases = []
 
     def add(name, cond, detail=''):
@@ -218,23 +222,25 @@ def self_test():
         not (R.fail_set(g) - R.fail_set(b)), 'diff=%s' % sorted(R.fail_set(g) - R.fail_set(b)))
 
     # ⑥ git 端到端：造一个未跟踪的缺项文件 → 变更集命中且判红 → 删除后不再命中
-    tmp_rel = PLAN_REL + '/_self_test_tmp_probe.md'
-    tmp_abs = os.path.join(ROOT, tmp_rel)
-    try:
-        with open(tmp_abs, 'w', encoding='utf-8') as f:
-            f.write(BAD)
-        files = changed_plan_files()
-        hit = tmp_rel in files or any(f.endswith('_self_test_tmp_probe.md') for f in files)
-        verdict, d = judge_file(tmp_rel) if hit else ('FAIL', {'error': '未进入变更集'})
-        add('⑥ 端到端：未跟踪缺项文件 → 进变更集且判红',
-            hit and verdict == 'FAIL' and bool(d.get('new_fail')),
-            'hit=%s verdict=%s' % (hit, verdict))
-    finally:
-        if os.path.exists(tmp_abs):
-            os.remove(tmp_abs)
-    after = changed_plan_files()
-    add('⑦ 端到端：清理后不再命中', not any('T_tmp_probe' in f or '_self_test_tmp_probe' in f for f in after),
-        'after=%s' % after)
+    if include_git:
+        tmp_rel = PLAN_REL + '/_self_test_tmp_probe.md'
+        tmp_abs = os.path.join(ROOT, tmp_rel)
+        try:
+            with open(tmp_abs, 'w', encoding='utf-8') as f:
+                f.write(BAD)
+            files = changed_plan_files()
+            hit = tmp_rel in files or any(f.endswith('_self_test_tmp_probe.md') for f in files)
+            verdict, d = judge_file(tmp_rel) if hit else ('FAIL', {'error': '未进入变更集'})
+            add('⑥ 端到端：未跟踪缺项文件 → 进变更集且判红',
+                hit and verdict == 'FAIL' and bool(d.get('new_fail')),
+                'hit=%s verdict=%s' % (hit, verdict))
+        finally:
+            if os.path.exists(tmp_abs):
+                os.remove(tmp_abs)
+        after = changed_plan_files()
+        add('⑦ 端到端：清理后不再命中',
+            not any('T_tmp_probe' in f or '_self_test_tmp_probe' in f for f in after),
+            'after=%s' % after)
 
     ok = True
     for name, passed, detail in cases:
