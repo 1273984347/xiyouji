@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W850），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W851），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -18,6 +18,20 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 
+### W851（2026-10-21）：设计迁移阶段 1 令牌落地批（v4 令牌纯加法·34 个零消费新名 / 35 处定义）
+
+> **来源**：用户令「开工」，接 W850 收官后我改口的推荐——Q2 无截止期而设计迁移自 W826 规格就绪后二十余批零页推进，故先迁设计后裁阈值。W851 = 阶段 1 令牌落地（W826 §7 的 J1-J6 验收）。
+> - **文件**：site/tokens.css、DESIGN.md、scripts/_w851_j1_name_audit.py、scripts/_w851_visual_regression_probe.py、scripts/_w851_j2_evidence.py、tests/unit/test_w851_visual_regression_probe.py、tests/unit/test_w851_j1_name_audit.py、scripts/output/_w851_j1_name_audit.json、scripts/output/_w851_j2_evidence.json、scripts/output/_w851_tokens_prelanding.css、scripts/output/_w851_visual_snapshot_before.json、scripts/output/_w851_visual_snapshot_after.json、scripts/output/_w851_visual_snapshot_freeze_before.json、scripts/output/_w851_visual_snapshot_freeze_after.json、scripts/output/design-tokens.json、docs/00-导读/design.md、site/data/journey-geo-semiotics.html、site/en/journey-geo-semiotics.html、pytest.ini、docs/00-导读/W批次编号对账表.md、scripts/output/_w851_spec.json。
+> - **落地口径**：W826 §4 终稿剔掉 4 组撞名项后落 34 个零消费新名 / 35 处定义——间距刻度 13（4px 基准 + 2/10 半格）+ 语义 gap 6 + 容器三档 3（760/1120/1320·裁决 3）+ 栅格 2 + 排版角色 9 + `--accent-text` 浅暗各 1（裁决 1 修法·暗色同名第二处）。tokens.css 20,799 → 23,039 B（+2,240 B·J4 上限 23,799·§4A.8 预算同批由 +2KB 上调 +3KB·Phase E 的「5.7→7.7KB」为 v3 前口径已废止）。
+> - **撞名项显式 defer**：`--chart-1..6` 重述（`--chart-3` 改值命中 42 消费页）、`--accent-soft` 重述（332 消费页·同值空转）、暗色 `--accent` 改值（#E0604F→#E46250）、暗色 `--chart-3/5` 新增——J1 口径「同名即语义改变 → 破坏纯加法」，随迁移批逐页 proof 后再落。审计脚本对 defer 组做**复证机检**（组内现役名必须确已撞名，否则 defer 理由不成立直接 FAIL）。
+> - **J1 双向真绿**：落地前对拍现役名（tokens.css / system.css / 全页面内联）交集 0、页面内联抢先定义 0、全站 `var()` 引用 0；落地后复验 34 名 / 35 处全在 tokens.css、暗色组同名再定义在位、4 组 defer 项原值未动（浅色 chart-3 #C9A063 / accent-soft #E9B885、暗色 accent #E0604F 未改·暗色组无 chart-3/5 偷新增）。
+> - **零消费机检抓出预支页**：`journey-geo-semiotics` 中英两页早在 W676 前后就以 `var(--space-N, 回退值)` 预支了 v4 名，且回退值（8/12/16px）与终稿刻度（4/8/12px）不一致——直接落地会改这两页渲染。处置：冻结为当前字面值（11 处/页·渲染零变化），令牌 adoption 留到该页迁移批。冻结效果由探针对该两页单独前后对拍证明。
+> - **探针三段实证坑（本批最深的工程收获）**：① 首版把 settle 等在了采集**之后**（`wait_for_timeout` 跟在 evaluate 后），被采页面从未获得 settle；② `chart-audit.js` 六族标签修复按 setTimeout 波次执行（最远 14s·波间空隙最大 3000ms），任何静默窗都在波间空隙提前到期——同态两采出现元素数 124↔125、font-size 9px↔10px 跳变（axesvar/numfix 族直接赋值 `style.fontSize`）；③ diff 在元素数不齐时 `continue` 短路，把整页属性比拍掩掉。修法：采集前 15s 固定地板等待 + MutationObserver 静默收敛 + diff 计数不齐仍对拍公共前缀。修后同态两采 23 页 × 双主题 × 22,328 元素零差异。
+> - **审计脚本自身也抓出一个假绿**：首版 `_DEF_RE` 捕获组漏 `--` 前缀而 `LANDING_NAMES` 带前缀，致「交集」与「落地完整」两个方向全部空转——单向永绿的检查等于没有检查。修为双向可失败（defer 组须报撞、落地名须报在），并抽 `_preflight_verdict` 纯函数锁进单测。
+> - **J2 视觉零变化**：探针对 23 页（J2 采样 21 + 预支页 2）浅暗双主题、15s 地板 + 静默收敛后采集 computed style（29 属性固定序·含 SVG 子元素），置换前（prelanding tokens + 未冻结页）与终态（落地令牌 + 冻结页 + `inline_css.py --force` 同步内联副本）前后对拍**零差异**。
+> - **机器可读导出同批同步**：`export_design_tokens.py` 再生成 `docs/00-导读/design.md` + `scripts/output/design-tokens.json`（132 声明 = light 103 / dark 29·AC-1 键数一致）；`check_design_doc_drift.py` 五层对账 0 问题——反篡改（逐字节再生成）与暗色计数两层不跑就会被 J6 抓红。
+> - **J3 CSP 零漂移**：CSS 增量不走 CSP 哈希面（style-src 为 unsafe-inline·只哈希内联 `<script>`），`generate_csp.py --check` 全站 0 页漂移。
+> - **新增单测 21 例**（pytest 797 → 818）：探针 12 例（计数不齐不掩属性、属性定位、采样面 ≥20、PROPS 固定序、地板/静默常量）+ 审计 9 例（`--` 前缀回归、defer 双向可失败、暗色块并集、落地/defer 集不相交、对真实 tokens.css 的 defer 持有）。
 ### W850（2026-10-21）：Q2 取数基建批（OBS-10 至 14 采样件·显式开关才测·按指标计批）
 
 > **来源**：用户引我上一段结论原话「接下来唯一待办是 Q2（OBS-10 至 14 什么时候升为硬门槛），需要连续 10 批样本才能决定；从现在开始，每批收尾时运行一次 python scripts/check_perf_shadow.py --record，样本就会积累起来」，据此推进取数基建。

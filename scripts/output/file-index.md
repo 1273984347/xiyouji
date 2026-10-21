@@ -11,6 +11,31 @@
 ---
 
 
+## W851 设计迁移阶段 1 令牌落地批（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/tokens.css | W851 | v4 令牌增量落地：34 个零消费新名 / 35 处定义（间距 13 + 语义 gap 6 + 容器三档 3 + 栅格 2 + 排版角色 9 + accent-text 浅暗各 1）·20,799 → 23,039 B |
+| scripts/_w851_j1_name_audit.py | W851 | 新增：J1 命名冲突审计（三面交集 + var() 零消费 + defer 复证 + defer 持有·双向可失败） |
+| scripts/_w851_visual_regression_probe.py | W851 | 新增：J2 视觉回归探针（15s 地板 + DOM 静默收敛 + 29 属性固定序对拍·自测 4/4） |
+| tests/unit/test_w851_visual_regression_probe.py | W851 | 新增：12 例（计数不齐不掩属性·属性定位·采样面 ≥20·PROPS 固定序·地板常量） |
+| tests/unit/test_w851_j1_name_audit.py | W851 | 新增：9 例（-- 前缀回归·defer 双向可失败·暗色块并集·对真实 tokens.css 的 defer 持有） |
+| scripts/output/_w851_j1_name_audit.json | W851 | 新增：J1 审计产物（预检 + 落地复验） |
+| scripts/output/_w851_tokens_prelanding.css | W851 | 新增：落地前 tokens.css 副本（预检对拍基准·git show HEAD 取证） |
+| scripts/output/_w851_visual_snapshot_before.json | W851 | 新增：J2 before 快照（23 页 × 双主题·置换前态） |
+| scripts/output/_w851_visual_snapshot_after.json | W851 | 新增：J2 after 快照（终态·与 before 对拍零差异） |
+| scripts/output/_w851_visual_snapshot_freeze_before.json | W851 | 新增：预支页冻结前快照（探针缺陷发现证据） |
+| scripts/output/_w851_visual_snapshot_freeze_after.json | W851 | 新增：预支页冻结后快照 |
+| scripts/output/design-tokens.json | W851 | 再生成：132 键（light 103 / dark 29·+35 处 v4 增量） |
+| docs/00-导读/design.md | W851 | 再生成：设计令牌消费文档（与 tokens.css 逐字节一致） |
+| DESIGN.md | W851 | §4A.8 tokens 预算 +2KB → +3KB（基线 20,799 → 上限 23,799·废止 v3 前口径）·新增 §4C v4 设计迁移章 |
+| site/data/journey-geo-semiotics.html | W851 | 预支引用冻结：var(--space-N, 回退值) → 当前字面值（11 处·渲染零变化） |
+| site/en/journey-geo-semiotics.html | W851 | 预支引用冻结：同上（11 处） |
+| pytest.ini | W851 | collected 标记 797 比 818（新增 21 例） |
+| docs/00-导读/W批次编号对账表.md | W851 | 认领行订正（34 名/35 处口径·三坑实录）与收官回填 |
+| scripts/output/_w851_spec.json | W851 | 本批 spec 十字段 |
+| scripts/output/_w851_j2_evidence.json | W851 | 新增：J2 判词摘要（零差异 + 双快照 sha256 + 逐页元素计数） |
+
 ## W850 Q2 取数基建批（2026-10-21）
 
 | 文件 | W | 说明 |
