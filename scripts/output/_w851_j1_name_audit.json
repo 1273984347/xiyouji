@@ -1,0 +1,62 @@
+{
+  "schema": 2,
+  "batch": "W851",
+  "captured_at": "2026-10-21T21:25:41",
+  "mode": "verify-landed",
+  "tokens_source": "site/tokens.css",
+  "landing_count": 34,
+  "landing_sites": 35,
+  "existing_counts": {
+    "tokens_css": 103,
+    "system_css": 0,
+    "page_inline_distinct": 94
+  },
+  "deferred": [
+    {
+      "label": "--chart-1..6（浅色组重述）",
+      "names": [
+        "--chart-1",
+        "--chart-2",
+        "--chart-3",
+        "--chart-4",
+        "--chart-5",
+        "--chart-6"
+      ],
+      "reason": "现役名；--chart-3 改值命中 42 消费页"
+    },
+    {
+      "label": "--accent-soft（重述同值）",
+      "names": [
+        "--accent-soft"
+      ],
+      "reason": "现役名；332 消费页；同值重述空转且破 J1"
+    },
+    {
+      "label": "暗色 --accent #E0604F→#E46250",
+      "names": [
+        "--accent"
+      ],
+      "reason": "现役名改值；全站暗色视觉变化"
+    },
+    {
+      "label": "暗色 --chart-3/5 新增",
+      "names": [
+        "--chart-3",
+        "--chart-5"
+      ],
+      "reason": "改暗色回退值；42 消费页暗色观感变化"
+    }
+  ],
+  "checks": {
+    "landing_complete": {
+      "missing": [],
+      "dark_block_missing": [],
+      "definition_sites": 35
+    },
+    "defer_hold": {
+      "value_checks_failed": [],
+      "dark_block_sneaked_new": []
+    }
+  },
+  "ok": true
+}

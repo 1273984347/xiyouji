@@ -515,8 +515,25 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 ### 4A.8 体积预算红线
 
 - tokens.css 与 system.css 内联进约 225 页（data+EN），**每 +1KB = 全站 +225KB**。
-- Phase E 预算：tokens ≤ +2KB（5.7→≤7.7KB）、system ≤ +6KB（18.9→≤24.9KB）；每批以 `wc -c` 复核并写入批次记录。
+- Phase E 预算：system ≤ +6KB（18.9→≤24.9KB）；每批以 `wc -c` 复核并写入批次记录。
+- **tokens 预算（W851 上调 +2KB → +3KB）**：现役基线 20,799 B（W476 纸感层后实测）→ 上限 **23,799 B**。Phase E 原「tokens ≤ +2KB（5.7→≤7.7KB）」为 v3 前口径，W476 增层后未同步，已废止；v4 令牌增量（W851 落地 +2,240 B）按新预算验收（J4）。
 - 超预算时砍微交互工具类，不砍色彩/海拔令牌；perf-budget html 分项 50KB 逐批复核。
+
+### 4C. v4 设计迁移（W826 起·阶段 1 令牌纯加法）
+
+> 上游规格：`docs/11-方案报告/界面视觉重设计细化规格-v4-2026-10-20.md`（W826·五条用户裁决 + §4 令牌终稿 + §7 J1-J6 验收）。本节为规范侧落档，随迁移推进逐批更新。
+
+**阶段 1（W851·令牌落地·纯加法）**：v4 令牌增量落进 `site/tokens.css`，现役页面视觉零变化。
+
+- **只落零消费新名**：34 个新名 / 35 处定义（间距刻度 13 + 语义 gap 6 + 容器三档 3 + 栅格 2 + 排版角色 9 + `--accent-text` 浅暗各 1）。J1 机检（`scripts/_w851_j1_name_audit.py`）：与现役名（tokens.css / system.css / 全页面内联）交集 0、页面内联抢先定义 0、全站 `var()` 引用 0。
+- **撞名项显式 defer**：`--chart-1..6` 重述（`--chart-3` 改值命中 42 消费页）、`--accent-soft` 重述（332 消费页·同值空转）、暗色 `--accent` 改值、暗色 `--chart-3/5` 新增——按 J1「同名即语义改变 → 破坏纯加法」拆出，随迁移批逐页 proof 后再落。
+- **视觉零变化证明（J2）**：`scripts/_w851_visual_regression_probe.py` 对 23 页（J2 采样 21 + 预支引用页 2）浅暗双主题、15s 地板等待 + DOM 静默收敛后采集 computed style 前后对拍，差异 0。
+- **预支引用处置**：`journey-geo-semiotics` 中英两页曾以 `var(--space-N, 回退值)` 预支 v4 名（回退值与终稿刻度不一致·落地即改渲染）——W851 冻结为当前字面值（渲染零变化），令牌 adoption 随该页迁移批执行。
+- **体积（J4）**：tokens.css 20,799 → 23,039 B（+2,240 B·§4A.8 预算同批上调为 +3KB）。
+- **传播与 CSP（J3）**：落地后 `inline_css.py --force` 同步内联副本；CSP 只哈希内联 `<script>`（style-src 为 unsafe-inline），CSS 增量零漂移。
+- **机器可读导出**：`docs/00-导读/design.md` 与 `scripts/output/design-tokens.json` 由 `export_design_tokens.py` 从 tokens.css 再生成（反篡改比对·落地同批同步）。
+
+**阶段 2+（迁移批·每批 ≤10 页·W826 §6）**：根页与入口 8 页（B1）先行，随后 reader 与 data 分批；每批前后各采一次 J2 快照，消费新令牌的页面同时承载 defer 的改值项。
 
 ---
 
