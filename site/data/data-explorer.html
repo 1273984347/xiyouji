@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-EFIIEpgmVg2zBbOhjheM9j9650pnOpoXWTeTbUnbGU8=' 'sha256-xVTEFCKMdoftqCIPFRm8YTDUAdhdJ3W/uWK3lSnVlJI=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-4xklS2UQxWf6nOrq3d7e63rXlJVth1TRjtOHou3aXnM=' 'sha256-xVTEFCKMdoftqCIPFRm8YTDUAdhdJ3W/uWK3lSnVlJI=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>详解西游记 · 数据浏览器</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/data/data-explorer.html">
@@ -470,7 +470,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -509,11 +509,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -704,6 +704,8 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+        /* W873 B10 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
+        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1256,27 +1258,27 @@ td.num, th.num {
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:"Noto Serif SC","Songti SC",serif;color: var(--ink);background: var(--bg);line-height:1.6}
-  header.top{padding:22px 20px 14px;background: linear-gradient(135deg,var(--dark),#3a2820);color: var(--paper-warm)}
+  header.top{padding:22px var(--space-5) 14px;background: linear-gradient(135deg,var(--dark),#3a2820);color: var(--paper-warm)}
   header.top h1{margin:0;font-size:22px}
   header.top p{margin:6px 0 0;font-size:13px;opacity:.85}
-  .banner{margin:12px 16px;padding:10px 14px;border-radius: var(--radius-md); font-size:13px;border: 1px solid var(--line);background: var(--paper-warm)}
+  .banner{margin:var(--space-4) 16px;padding:10px 14px;border-radius: var(--radius-md); font-size:13px;border: 1px solid var(--line);background: var(--paper-warm)}
   .banner.offline{border-color: var(--accent-3);background: var(--paper-warm)}
-  .layout{display:flex;gap:16px;padding:0 16px 40px;align-items:flex-start}
+  .layout{display:flex;gap:16px;padding:0 16px var(--space-8);align-items:flex-start}
   .picker{width:230px;flex:0 0 230px;max-height:70vh;overflow:auto;border: 1px solid var(--line);border-radius: var(--radius-lg); background:var(--paper)}
-  .picker .item{padding:10px 12px;border-bottom: 1px solid var(--line);cursor:pointer;font-size:14px}
+  .picker .item{padding:10px var(--space-4);border-bottom: 1px solid var(--line);cursor:pointer;font-size:14px}
   .picker .item:hover{background: rgba(200,70,58,.06)}
   .picker .item.active{background: rgba(200,70,58,.12);color: var(--accent);font-weight:600}
   .picker .item small{display:block;color: var(--ink-soft);font-size:11px}
   .main{flex:1;min-width:0}
-  .keytabs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
-  .keytab{padding:6px 12px;border: 1px solid var(--line);border-radius: var(--radius-pill); cursor:pointer;font-size:13px;background: var(--paper)}
+  .keytabs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 var(--space-4)}
+  .keytab{padding:6px var(--space-4);border: 1px solid var(--line);border-radius: var(--radius-pill); cursor:pointer;font-size:13px;background: var(--paper)}
   .keytab.active{background: var(--accent);color: var(--paper);border-color: var(--accent)}
-  .chartbox{margin:8px 0 14px;border: 1px solid var(--line);border-radius: var(--radius-lg); background:var(--paper);padding:10px}
-  .chartbox h3{margin:4px 6px 8px;font-size:14px;color: var(--accent-2)}
+  .chartbox{margin:var(--space-3) 0 14px;border: 1px solid var(--line);border-radius: var(--radius-lg); background:var(--paper);padding:10px}
+  .chartbox h3{margin:var(--space-2) 6px var(--space-3);font-size:14px;color: var(--accent-2)}
   .toolbar2{display:flex;gap:8px;margin:0 0 10px;flex-wrap:wrap;align-items:center}
-  .toolbar2 .vt-btn{padding:7px 12px;border: 1px solid var(--accent-2);background: var(--accent-2);color: var(--paper);border-radius: var(--radius-md); cursor:pointer;font-size:13px}
-  .meta{color: var(--ink-soft);font-size:13px;margin:2px 0 8px}
-  .hint{color: var(--ink-soft);font-size:12px;margin-top:8px}
+  .toolbar2 .vt-btn{padding:7px var(--space-4);border: 1px solid var(--accent-2);background: var(--accent-2);color: var(--paper);border-radius: var(--radius-md); cursor:pointer;font-size:13px}
+  .meta{color: var(--ink-soft);font-size:13px;margin:var(--space-1) 0 var(--space-3)}
+  .hint{color: var(--ink-soft);font-size:12px;margin-top:var(--space-3)}
   @media(max-width: 768px){.layout{flex-direction:column}.picker{width:100%;flex:none;max-height:none}}
 </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
@@ -1549,20 +1551,20 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     s.id = "vt-style";
     s.textContent =
       ".vt-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}" +
-      ".vt-search{flex:1;min-width:160px;padding:8px 10px;border:1px solid var(--line,#d9cdb8);" +
+      ".vt-search{flex:1;min-width:160px;padding:var(--space-3) 10px;border:1px solid var(--line,#d9cdb8);" +
       "border-radius:8px;font-size:14px;background:var(--paper,#fff)}" +
       ".vt-count{color:var(--ink-soft,#6B6455);font-size:13px}" +
-      ".vt-btn{padding:7px 12px;border:1px solid var(--accent,#c8463a);background:var(--accent,#c8463a);" +
+      ".vt-btn{padding:7px var(--space-4);border:1px solid var(--accent,#c8463a);background:var(--accent,#c8463a);" +
       "color:#fff;border-radius:8px;cursor:pointer;font-size:13px}" +
       ".vt-btn:hover{opacity:.88}" +
       ".vt-tablewrap{max-height:60vh;overflow:auto;border:1px solid var(--line,#d9cdb8);border-radius:8px}" +
       ".vt-table{width:100%;border-collapse:collapse;font-size:14px}" +
-      ".vt-table th,.vt-table td{padding:8px 10px;border-bottom:1px solid var(--line,#d9cdb8);text-align:left;vertical-align:top}" +
+      ".vt-table th,.vt-table td{padding:var(--space-3) 10px;border-bottom:1px solid var(--line,#d9cdb8);text-align:left;vertical-align:top}" +
       ".vt-table thead th{position:sticky;top:0;background:var(--bg,#faf7f2);z-index:1}" +
       ".vt-table th.vt-sortable{cursor:pointer;user-select:none}" +
       ".vt-table tbody tr{cursor:pointer}" +
       ".vt-table tbody tr:hover{background:rgba(200,70,58,.06)}" +
-      ".vt-empty{text-align:center;color:var(--ink-soft,#6B6455);padding:20px}" +
+      ".vt-empty{text-align:center;color:var(--ink-soft,#6B6455);padding:var(--space-5)}" +
       ".vt-drill{position:fixed;inset:0;z-index:9999;display:none}" +
       ".vt-drill.open{display:block}" +
       ".vt-drill-mask{position:absolute;inset:0;background:rgba(35,32,26,.4)}" +
@@ -1575,8 +1577,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
       ".vt-drill-title{font-weight:600;color:var(--accent,#c8463a)}" +
       ".vt-drill-close{border:none;background:none;font-size:24px;cursor:pointer;color:var(--ink-soft,#6B6455)}" +
       ".vt-drill-body{padding:16px;overflow:auto;line-height:1.7}" +
-      ".vt-drill-body table{width:100%;border-collapse:collapse;margin:8px 0}" +
-      ".vt-drill-body th,.vt-drill-body td{border:1px solid var(--line,#d9cdb8);padding:6px 8px;font-size:13px;text-align:left}";
+      ".vt-drill-body table{width:100%;border-collapse:collapse;margin:var(--space-3) 0}" +
+      ".vt-drill-body th,.vt-drill-body td{border:1px solid var(--line,#d9cdb8);padding:6px var(--space-3);font-size:13px;text-align:left}";
     document.head.appendChild(s);
   }
 
@@ -1793,8 +1795,8 @@ loadDatasets();
 })();
 </script>
 
-<div style="padding:16px 8px;text-align:center"><a href="../en/data-explorer.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></div>
+<div style="padding:16px var(--space-3);text-align:center"><a href="../en/data-explorer.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></div>
 <script defer src="../static/js/cite-box.js"></script>
 <script defer src="../static/js/chart-a11y.js"></script>
 </body>

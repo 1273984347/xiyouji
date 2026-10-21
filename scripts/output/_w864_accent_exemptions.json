@@ -457,6 +457,48 @@
     }
    ],
    "note": "B9 增补。domino-card 判为连锁隐喻展示卡（展示序列）而非列表网格；tag-cloud 的 rc-size 是字号档位图例。"
+  },
+  "W873": {
+   "measured_at": "2026-10-22",
+   "exemptions": [
+    {
+     "page": "data/data-explorer.html",
+     "cls": "button.vt-btn / span.keytab.active",
+     "count": 3,
+     "reason": "选中态实底（组件卡③同款）"
+    },
+    {
+     "page": "data/search.html",
+     "cls": "button.vt-btn",
+     "count": 1,
+     "reason": "选中态实底"
+    },
+    {
+     "page": "data/material-archaeology.html",
+     "cls": "span.tag / span.tag.palace",
+     "count": 3,
+     "reason": "材质/宫苑分类色片·数据语义"
+    },
+    {
+     "page": "data/ming-political-thought-comparison.html",
+     "cls": "a.active",
+     "count": 2,
+     "reason": "选中态实底"
+    },
+    {
+     "page": "data/power-resources.html",
+     "cls": "div.faction-card",
+     "count": 1,
+     "reason": "阵营分类卡·数据语义"
+    },
+    {
+     "page": "data/magic-system.html",
+     "cls": "span.rank-badge.rank-S+",
+     "count": 5,
+     "reason": "法术等级徽章（rank-S+ 档）·数据语义"
+    }
+   ],
+   "note": "B10 增补。material-archaeology 的 8 张 artifact-card 网格顶条按裁决收敛（全同色装饰网格）；type-card 单条不超限未动。"
   }
  },
  "note": "裁决 2「豁免清单落 scripts/output/」登记簿：W864 首批建册，随批递增、条目随迁移整改递减。"
