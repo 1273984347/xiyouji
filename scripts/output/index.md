@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（269）
+## 文件（284）
 
 ### Markdown 文档
 
@@ -261,6 +261,20 @@
 - `_w848_spec.json`
 - `_w849_spec.json`
 - `_w850_spec.json`
+- `_w851_floor_a.json`
+- `_w851_floor_b.json`
+- `_w851_j1_name_audit.json`
+- `_w851_spec.json`
+- `_w851_stab1.json`
+- `_w851_stab2.json`
+- `_w851_tl_a.json`
+- `_w851_tl_b.json`
+- `_w851_visual_snapshot_before.json`
+- `_w851_visual_snapshot_freeze_after.json`
+- `_w851_visual_snapshot_freeze_before.json`
+- `_w851_visual_snapshot_freeze_re1.json`
+- `_w851_visual_snapshot_freeze_re2.json`
+- `_w852_spec.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`
@@ -290,6 +304,10 @@
 - `unwrapped-tables-baseline.txt`
 - `yuanqi_edges.csv`
 - `yuanqi_nodes.csv`
+
+### 样式与资源
+
+- `_w851_tokens_prelanding.css`
 
 ### 其他
 
