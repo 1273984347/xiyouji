@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "target_batches": 10,
+  "samples": [
+    {
+      "batch": "W850",
+      "date": "2026-10-21",
+      "captured_at": "2026-10-21T20:15:09",
+      "obs10": {
+        "measured": true,
+        "max_bytes": 403323,
+        "max_page": "en/relationships.html",
+        "over_budget_pages": 9,
+        "total_pages": 857,
+        "total_bytes": 51934813,
+        "budget_bytes": 204800
+      },
+      "obs11": {
+        "measured": true,
+        "pages": {
+          "dashboard.html": 108.0,
+          "index.html": 192.0,
+          "data/timeline.html": 244.0,
+          "data/character-relationship-3d.html": 272.0,
+          "data/text-search.html": 236.0
+        },
+        "runs": 3,
+        "runs_ms": {
+          "dashboard.html": [
+            108.0,
+            232.0,
+            92.0
+          ],
+          "index.html": [
+            192.0,
+            196.0,
+            188.0
+          ],
+          "data/timeline.html": [
+            252.0,
+            244.0,
+            240.0
+          ],
+          "data/character-relationship-3d.html": [
+            268.0,
+            392.0,
+            272.0
+          ],
+          "data/text-search.html": [
+            236.0,
+            236.0,
+            244.0
+          ]
+        },
+        "max_ms": 272.0,
+        "slo_ms": 1500,
+        "engine": "perf_monitor.py + playwright（无节流本机口径·每页 3 次取中位数）"
+      },
+      "obs14": {
+        "measured": false,
+        "reason": "未测（需 --first-token·默认不读服务）"
+      }
+    }
+  ],
+  "note": "OBS-10/11/14 逐批采样（W850 建·Q2 取数入口）：未测即记 null+原因，按指标分别计 10 批；不判红，阈值升降由 Q2 裁决。"
+}

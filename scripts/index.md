@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（219）
+## 文件（220）
 
 ### Markdown 文档
 
@@ -200,6 +200,7 @@
 - `judge_gate.py`
 - `lint_links.py`
 - `new_page.py`
+- `obs_sample.py`
 - `optimize-html-size.py`
 - `package_analysis_sync.py`
 - `perf_monitor.py`
