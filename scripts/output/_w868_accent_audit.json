@@ -1,0 +1,819 @@
+{
+  "data/guanyin-six-roles-network.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "section-title alt",
+        "txt": "贰 · 六重身份关系力导向图"
+      },
+      {
+        "tag": "h2",
+        "cls": "section-title alt",
+        "txt": "伍 · 关键事件时间线"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "role-card",
+        "kind": "border-top",
+        "area": 1459
+      },
+      {
+        "tag": "div",
+        "cls": "swatch-bar",
+        "kind": "background",
+        "area": 794
+      }
+    ]
+  },
+  "data/pilgrim-team-dynamic-network.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "① Belbin 九角色覆盖度雷达"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "② 五成员关系网络（D3.js force-di"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "③ Tuckman 团队发展五阶段"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "④ 群体动力学：目标对齐度分析"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "⑤ 跨方向整合项目主题 1"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "button",
+        "cls": "ctrl-btn active",
+        "kind": "background",
+        "area": 2567
+      },
+      {
+        "tag": "div",
+        "cls": "phase-card active",
+        "kind": "background",
+        "area": 16330
+      }
+    ]
+  },
+  "data/pilgrim-team-psychology-arc.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "① 五众心理状态雷达图"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "② 100 回心理曲线（时间轴动画）"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "③ 团队凝聚力热力图"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "④ 心理转折点时间线"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "⑤ 五众心理状态分布箱线图"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "⑥ 团队心理演化洞察"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "progress-fill",
+        "kind": "background",
+        "area": 6758
+      }
+    ]
+  },
+  "data/journey-route.html": {
+    "text_on_bg": [
+      {
+        "tag": "span",
+        "cls": "count",
+        "txt": "5"
+      },
+      {
+        "tag": "td",
+        "cls": "span-long",
+        "txt": "8 回"
+      },
+      {
+        "tag": "td",
+        "cls": "span-long",
+        "txt": "5 回"
+      },
+      {
+        "tag": "td",
+        "cls": "span-long",
+        "txt": "71 回"
+      },
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "关键洞察"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "白虎岭（第 27 回） → 灵山雷音寺（第 98"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "71 回"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "寺"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "2 处"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "西番哈必国"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "2 个"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "88 回"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "5"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "17.6 回"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/journey-geo-3d.html": {
+    "text_on_bg": [
+      {
+        "tag": "a",
+        "cls": "",
+        "txt": "→ 取经路线交互式地图（平面轨）"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      }
+    ]
+  },
+  "data/journey-geo-semiotics.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "article",
+        "cls": "mech-card",
+        "kind": "border-top",
+        "area": 1459
+      }
+    ]
+  },
+  "data/journey-map-interactive.html": {
+    "text_on_bg": [
+      {
+        "tag": "a",
+        "cls": "",
+        "txt": "→ 取经全路程图（静态轨）"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "button",
+        "cls": "btn",
+        "kind": "background",
+        "area": 3869
+      }
+    ]
+  },
+  "data/journey-spacetime.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "① 时间 × 空间双轴轨迹图"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "② 四阶段事件密度统计"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "前段"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "15"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "7"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "2"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "6.0"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "中前段"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "18"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "7"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "11"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "7.2"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "中后段"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "19"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "8"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "10"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "7.6"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "终段"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "16"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "5"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "4"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "6.4"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "③ 时空轨迹洞察"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "progress-fill",
+        "kind": "background",
+        "area": 6758
+      }
+    ]
+  },
+  "data/customs-pass-route.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/cave-estate.html": {
+    "text_on_bg": [
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "洞府即家底"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "2 处"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "小雷音寺"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "狮驼洞"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "狮驼洞小妖 48,000"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "43.6%"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "平顶山莲花洞法宝最豪华"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "4 处洞府（蟒蛇精、玉兔精）小妖为 0"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "5 处洞府小妖超千"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "妖王级洞主 19 处 vs 妖将级仅 3 处"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "22 个不同地区"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      },
+      {
+        "tag": "span",
+        "cls": "tag king",
+        "kind": "background",
+        "area": 1300
+      }
+    ]
+  }
+}
