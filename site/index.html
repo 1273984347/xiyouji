@@ -38,10 +38,12 @@
             align-items: flex-end;
             justify-content: space-between;
             gap: 48px;
-            padding: clamp(56px, 9vw, 96px) clamp(24px, 6vw, 96px) clamp(36px, 5vw, 56px);
+            padding: clamp(56px, 9vw, var(--space-12)) clamp(var(--space-6), 6vw, var(--space-12)) clamp(36px, 5vw, 56px);
         }
         .masthead-copy { max-width: 640px; }
-        .masthead-copy .kicker { margin-bottom: 20px; }
+        .masthead-copy .kicker { margin-bottom: var(--space-5); }
+        /* W862 B1 裁决 1：kicker 落 --bg → --accent-text（落点审计 _w862_accent_text_audit.json） */
+        .kicker { color: var(--accent-text); }
         .masthead-copy h1 { margin-bottom: 14px; }
         .masthead-copy .eng {
             font-size: 12px; color: var(--ink-faint);
@@ -58,13 +60,13 @@
         }
         .mega-unit { font-family: var(--font-serif); font-weight: 500; font-size: clamp(28px, 4vw, 52px); }
         .mega-label { margin-top: 10px; font-size: 13px; color: var(--ink-soft); }
-        .mega-sub { margin-top: 4px; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.06em; }
+        .mega-sub { margin-top: var(--space-2); font-size: 11px; color: var(--ink-faint); letter-spacing: 0.06em; }
 
         .ink-mountains { display: block; width: 100%; height: 100px; }
 
         .stats {
             display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
-            padding: 28px clamp(24px, 6vw, 96px);
+            padding: 28px clamp(var(--space-6), 6vw, var(--space-12));
             border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
         }
         .stat .num {
@@ -90,11 +92,11 @@
 
         /* === 首屏提问框：问渡口 === */
         .ask-hero {
-            margin: 0 clamp(24px, 6vw, 96px) 4px;
+            margin: 0 clamp(var(--space-6), 6vw, var(--space-12)) var(--space-2);
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-lg);
-            padding: clamp(24px, 4vw, 40px);
+            padding: clamp(var(--space-6), 4vw, var(--space-8));
             box-shadow: var(--elev-1);
             position: relative;
             overflow: hidden;
@@ -103,13 +105,13 @@
             content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
             background: var(--accent);
         }
-        .ask-hero .kicker { margin-bottom: 10px; }
+        .ask-hero .kicker { margin-bottom: 10px; color: var(--accent); }  /* ask-hero 底为 --paper·裁决 1：落 paper 仍用 --accent */
         .ask-hero h2 { margin: 0 0 6px; font-size: clamp(20px, 3vw, 28px); }
         .ask-hero .ask-sub { color: var(--ink-soft); font-size: 14px; margin-bottom: 18px; }
         .ask-form { display: flex; gap: 12px; max-width: 640px; }
         .ask-form input {
             flex: 1; font-family: var(--font-serif); font-size: 16px;
-            padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--radius-md);
+            padding: var(--space-4) 16px; border: 1px solid var(--line); border-radius: var(--radius-md);
             background: var(--bg); color: var(--ink); outline: none;
             transition: border-color var(--dur-fast) var(--ease-out-quart),
                         box-shadow var(--dur-fast) var(--ease-out-quart);
@@ -120,7 +122,7 @@
         }
         .ask-form button {
             font-family: var(--font-serif); font-size: 15px; font-weight: 600;
-            padding: 12px 26px; border: none; border-radius: var(--radius-md); cursor: pointer;
+            padding: var(--space-4) 26px; border: none; border-radius: var(--radius-md); cursor: pointer;
             background: linear-gradient(180deg, var(--accent), var(--accent-deep));
             color: var(--paper); white-space: nowrap;
             transition: background var(--dur-fast) var(--ease-out-quart),
@@ -162,7 +164,7 @@
         /* === W488：夜读切换器 === */
         .theme-toggle {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 34px; height: 34px; margin-left: 12px;
+            width: 34px; height: 34px; margin-left: var(--space-4);
             border: 1px solid var(--line); border-radius: var(--radius-pill);
             background: var(--paper); color: var(--ink-soft); cursor: pointer;
             transition: border-color var(--dur-fast) var(--ease-out-quart),
@@ -436,25 +438,25 @@
                         <p class="card-kicker">001 · 开篇</p>
                         <h3>灵根育孕源流出</h3>
                         <p>石猴出世、拜师菩提，全书世界观在此定型。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">读第 1 回 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">读第 1 回 →</p>
                     </a>
                     <a class="card" href="reader/ch005.html">
                         <p class="card-kicker">005 · 大闹天宫</p>
                         <h3>乱蟠桃大圣偷丹</h3>
                         <p>蟠桃会、偷金丹，反出天宫的前夜。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">读第 5 回 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">读第 5 回 →</p>
                     </a>
                     <a class="card" href="reader/ch027.html">
                         <p class="card-kicker">027 · 三打白骨精</p>
                         <h3>尸魔三戏唐三藏</h3>
                         <p>辨识与信任的第一次崩裂，圣僧恨逐美猴王。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">读第 27 回 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">读第 27 回 →</p>
                     </a>
                     <a class="card" href="reader/ch058.html">
                         <p class="card-kicker">058 · 真假美猴王</p>
                         <h3>二心搅乱大乾坤</h3>
                         <p>二心相争、一体难修，取经队伍的心性关口。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">读第 58 回 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">读第 58 回 →</p>
                     </a>
                 </div>
                 <p class="note" style="margin-top:16px;"><a href="reader/index.html" style="color:var(--accent-2);">查看全部 100 回总目录 →</a></p>
@@ -473,55 +475,55 @@
                         <p class="card-kicker">G · CHAPTER GRAPH</p>
                         <h3>百回结构图谱</h3>
                         <p>100 回篇幅起伏、八十一难分布一眼看全。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/character-dynamic-network.html">
                         <p class="card-kicker">N · CHARACTER NETWORK</p>
                         <h3>人物动态网络</h3>
                         <p>三界人物关系与共现随时间流动。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/journey-spacetime.html">
                         <p class="card-kicker">R · JOURNEY SPACETIME</p>
                         <h3>取经时空</h3>
                         <p>十万八千里路线与十四年时间并置呈现。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/journey-geo-3d.html">
                         <p class="card-kicker">R · JOURNEY GEO 3D</p>
                         <h3>西游地理 3D</h3>
                         <p>取经路线的立体纵深：示意地形上重走十四年西行（与平面时空图互补）。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/narratology-16d-network.html">
                         <p class="card-kicker">N · NARRATOLOGY 13D</p>
                         <h3>叙事学十三维</h3>
                         <p>全书叙事机制的十三维网络。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/criticism-history.html">
                         <p class="card-kicker">H · CRITICISM 500Y</p>
                         <h3>批评史长卷</h3>
                         <p>五百年解读流变、九批评家、三教争辩。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/emotional-heatmap.html">
                         <p class="card-kicker">E · EMOTIONAL HEATMAP</p>
                         <h3>情感热力图</h3>
                         <p>八批评家 × 二十难的情感温度。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/cross-time-danmaku.html">
                         <p class="card-kicker">D · DANMAKU MUSEUM</p>
                         <h3>跨时空弹幕</h3>
                         <p>从明清到当代的名人弹幕博物馆。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/text-search.html">
                         <p class="card-kicker">S · TEXT SEARCH</p>
                         <h3>原著全文检索</h3>
                         <p>七十万字原著，100 回逐字可查。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                 </div>
             </div>
@@ -621,7 +623,7 @@
                         <h3>数据看板</h3>
                         <p>55 张 KPI 卡片总览项目全貌，87 个 D3.js / Three.js 可视化页面一屏直达，附全站搜索浮层。</p>
                         <p class="card-meta">55 KPI · 86 PAGES · SITE SEARCH</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入看板 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入看板 →</p>
                     </a>
                     <div class="tools-side">
                         <a class="card" href="data/tag-cloud.html">
@@ -651,8 +653,8 @@
             <a href="dashboard.html">数据看板</a>
             <a href="en/">English</a>
         
-            <a href="en/index.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="en/index.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
     <script src="static/js/rag-chat.js"></script>
     <script>

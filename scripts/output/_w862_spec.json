@@ -1,0 +1,27 @@
+{
+  "batch": "W862",
+  "date": "2026-10-22",
+  "title": "W862 设计迁移 B1 根页与入口 8 页（容器归并·朱砂合规·对比度修法·间距令牌化）",
+  "desc": "把 W851 落地的 v4 令牌第一次用起来，在根页 8 页上做有据可依的迁移，每处变化都能归因到 W826 规格条目",
+  "head_entry": "2026-10-22（W862 设计迁移 B1 根页与入口 8 页）",
+  "head_sentence": "令牌落了没人用等于没落，这批把根页 8 页先迁过去，每处变化都能对回规格条目",
+  "changelog_body": "\n\n> **来源**：用户令「下一批就是迁移批本体 B1（根页与入口 8 页），探针已备好」，接 W851 令牌阶段 1 之后。W862 = W826 §6 迁移清单第一批（B1·根页与入口 8 页）。\n> - **文件**：site/index.html、site/guide.html、site/curated.html、site/dashboard.html、site/dukou-engine.html、site/rum-viewer.html、site/visit-viewer.html、scripts/_w862_tokenize_spacing.py、scripts/_w862_accent_text_audit.py、scripts/_w862_diff_review.py、scripts/output/_w862_accent_text_audit.json、scripts/output/_w862_diff_review.json、scripts/output/_w862_spec.json、docs/00-导读/W批次编号对账表.md。\n> - **迁移口径（四渠·每处 diff 必可归因）**：A 容器归并——dashboard `.container` 1536→`--container-wide`（§3.3「1536 降档 1320」）、rum-viewer `.wrap` 1024→`--container-content`（§3.3「根 1 页 1024 归并 1120」）、dukou-engine `.page-wrap` 现役 1320 字面量→`--container-wide`（令牌化·零视觉变化）；B 朱砂合规——dashboard KPI 大字 `--accent-deep`→`--ink`（§5.2②「禁朱砂数字·统一墨色」）、dukou `.seal` 徽章实底→`--accent-tint` 淡底+朱砂字（§3.2「徽章实底改朱砂字+淡底」）、dukou 四处朱砂实底逐处定性后计数 2 处（≤3✓·两处 2px 线走白名单）；C 对比度修法——朱砂文字落 `--bg` 处改 `--accent-text`（§3.1 裁决 1 修法·**机器分类非目测**：`_w862_accent_text_audit.py` 按计算样式解析有效背景，20 处落 bg 收敛到 5 个选择器：`.kicker`×12、`.section-kick`×5、dukou `header h1`、rum `.btn`；`--accent-text` 至此有了第一批消费者）；D 间距令牌化——padding/margin 家族里与 v4 刻度**精确等值**的 132 处字面量换 `var(--space-N)`（不等值一律不动·值保留故零视觉变化）。\n> - **defer 四项本批不动**：`--chart-3` 改值（B1 无图表消费者·随 B2 数据页批）、暗色 `--accent` 改值（全局爆弹·待消费者迁移到位）、暗色 `--chart-3/5`（同 B2）、`--accent-soft` 重述（同值空转·不落）。\n> - **验收方式（迁移批≠零差异）**：J2 探针 24 页（B1 八页 + 探针原 21 面其余 16 页 作全局金丝雀）浅暗双主题前后对拍；`_w862_diff_review.py` 全量归渠聚合——每处 diff 必须落进 A/B/C 三渠，D 令牌化若值保留正确应产生 0 diff；金丝雀页必须 0 diff（证明没碰全局令牌）。**判词：PASS——700 处 diff 全部归渠零剩余**：dashboard 630（60 张 KPI 卡大字 `--accent-deep`→`--ink` 600 + kicker 改 accent-text 30）· index 25 / curated 20 / guide 15（kicker 系）· dukou 5（header h1）· rum-viewer 6（容器 1024→1120 的 margin 位移 4 + btn 字色 2）；**16 页金丝雀与自包含页全部 0 diff**（全局令牌未动·D 令牌化值保留实证）。\n> - **J2 抓到一个真错（本批最值钱的发现）**：404.html 的间距令牌化把全部值坍成 0px——该页第 25 行自注「W572 D-2 自包含 404 页·无 tokens.css 链接·字面值为三色直译，有意设计」，`var(--space-N)` 在无令牌页解析失败落初始值。**处置：整页回退**（该页不在令牌体系内·迁移不适用），复采并入 after 快照后 404 归零。教训：令牌化的前置条件是页面真的引了令牌——D 渠必须先查 `<link tokens.css>` 或内联块，自包含页跳过。另：dukou `.seal` 为死规则（无 DOM 消费者·改动无 diff）——徽章实底改淡底的改动保留（未来启用即合规），如实记录无视觉证明。\n> - **工具三件**：`_w862_tokenize_spacing.py`（值保留式令牌化·dry-run 先行·跳过 INLINED 块防循环定义）、`_w862_accent_text_audit.py`（朱砂文字落点机器分类·按计算样式解析有效背景链）、`_w862_diff_review.py`（全量 diff 归渠聚合·探针内置 20 条上限不够迁移审查用）。\n> - **范围纪律**：只动 site/ 根 8 页（`_template.html` 按 §6 不迁移）；不改 site/tokens.css 与 system.css（金丝雀 13 页 0 diff 即证）；CSP 只哈希内联脚本且本批无脚本改动。",
+  "milestone_block": "- **W862 设计迁移 B1 根页与入口 8 页**：\n  - A 容器归并 3 页：dashboard 1536→--container-wide · rum-viewer 1024→--container-content · dukou 1320→令牌化\n  - B 朱砂合规：dashboard KPI 大字归墨色 · dukou 徽章实底改淡底 · 四处实底逐处定性后 2 处计数 ≤3\n  - C 对比度修法：20 处朱砂文字落 --bg 改 --accent-text（机器分类·--accent-text 首批消费者）\n  - D 间距令牌化 132 处（精确等值才换·零视觉变化）\n  - 验收：24 页双主题前后对拍 + 全量 diff 归渠聚合（每处可归因·金丝雀 13 页 0 diff）",
+  "agents_note": "二〇二六年十月二十二日（W862）令牌落地了就得有人用，这批先迁根页八页。迁移和阶段 1 是两码事：阶段 1 要证明零变化，迁移要证明**每处变化都对得上规格**。所以这批的验收不是「零 diff」，是「all diff 归渠」——A 容器归并、B 朱砂合规、C 对比度修法、D 间距令牌化四条渠，任何一处 diff 归不进去就说明施工错了。四条渠怎么落：容器按 §3.3 的实测映射，dashboard 的 1536 降到 1320、rum-viewer 的 1024 并到 1120、dukou 的 1320 字面量换成令牌（零变化）。朱砂实底逐处数，dukou 四处里两处是 2px 的线走白名单、一处 active tab、一处徽章，计 2 处不超 3；dashboard 60 张 KPI 卡的大字从朱砂深档归了墨色（组件卡②的禁令）。对比度那条最有意思：朱砂文字落 --bg 上要换 --accent-text，但哪块是 bg 哪块是 paper 不能靠眼看——写了个审计器按计算样式往上找有效背景，20 处落 bg 的收敛到 5 个选择器，--accent-text 这个 W851 落的令牌总算有了第一批消费者。间距令牌化 132 处，只换和刻度精确等值的字面量，6px、10px、16px、22px 这些不等值的一律不动。然后 J2 照出了这批唯一的真错，也最值钱：404 页的令牌化把 padding 全坍成了 0px。查下来这页第 25 行自己写着「W572 D-2 自包含 404 页·无 tokens.css 链接·字面值为三色直译，有意设计」——它压根不在令牌体系里，var 解析失败就是初始值。整页回退了。教训一句话：令牌化的前提是页面真的引了令牌，自包含页得跳过。要不是前后对拍把每个元素的 padding 都量了，这个错会安安静静上线。对拍结果：700 处 diff 全部归渠，零剩余——dashboard 630（60 张卡 × 5 属性 × 双主题），三张入口页 60，dukou 5，rum 6；16 页金丝雀零 diff，说明没碰全局令牌。dukou 有个 .seal 的死规则（没有 DOM 消费者），徽章实底改淡底的改动保留、如实记无视觉证明。下一批 B2 结构页 10 页，那时会碰 --chart-3 的改值项——42 个消费页的暗色观感要一起 proof，得先想清楚爆半径。",
+  "file_index_rows": [
+    "| site/index.html | W862 | B1 迁移：kicker 落 --bg 改 --accent-text（ask-hero 内恢复 --accent）· 间距令牌化 25 处 |",
+    "| site/guide.html | W862 | B1 迁移：kicker 改 --accent-text · 间距令牌化 12 处 |",
+    "| site/curated.html | W862 | B1 迁移：kicker 改 --accent-text · 间距令牌化 9 处 |",
+    "| site/dashboard.html | W862 | B1 迁移：容器 1536→--container-wide · KPI 大字归墨色 · masthead/section-kick 改 --accent-text · 间距令牌化 49 处 |",
+    "| site/dukou-engine.html | W862 | B1 迁移：容器 1320→--container-wide · 徽章实底→--accent-tint 淡底 · header h1 改 --accent-text · 间距令牌化 14 处 |",
+    "| site/rum-viewer.html | W862 | B1 迁移：容器 1024→--container-content · .btn 字色改 --accent-text 并令牌化朱砂字面量 · 间距令牌化 10 处 |",
+    "| site/visit-viewer.html | W862 | B1 迁移：间距令牌化 7 处 |",
+    "| scripts/_w862_tokenize_spacing.py | W862 | 新增：值保留式间距令牌化（dry-run·跳过 INLINED 块·负值防护） |",
+    "| scripts/_w862_accent_text_audit.py | W862 | 新增：朱砂文字落点机器分类（计算样式有效背景链） |",
+    "| scripts/_w862_diff_review.py | W862 | 新增：迁移 diff 全量归渠聚合（不截断） |",
+    "| scripts/output/_w862_accent_text_audit.json | W862 | 新增：朱砂文字落点审计产物（20 处落 bg） |",
+    "| scripts/output/_w862_diff_review.json | W862 | 新增：B1 迁移 diff 归渠审查产物 |",
+    "| scripts/output/_w862_spec.json | W862 | 本批 spec 十字段 |",
+    "| docs/00-导读/W批次编号对账表.md | W862 | 认领行与收官回填 |"
+  ]
+}

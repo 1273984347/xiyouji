@@ -19,20 +19,20 @@
   <style>
 :root { color-scheme: light dark; }
     body { font-family: var(--font-sans);
-           max-width: 768px; margin: 24px auto; padding: 0 16px; line-height: 1.6;
+           max-width: 768px; margin: var(--space-6) auto; padding: 0 16px; line-height: 1.6;
            background: var(--bg); color: var(--ink); }
-    h1 { font-size: 22px; margin-bottom: 4px; }
+    h1 { font-size: 22px; margin-bottom: var(--space-2); }
     .sub { color: var(--ink-soft); font-size: 13px; margin-bottom: 16px; }
     .bar { margin-bottom: 14px; }
-    .bar button { margin-right: 8px; padding: 6px 14px; border: 1px solid var(--ink-faint); border-radius: var(--radius-md);
+    .bar button { margin-right: var(--space-3); padding: 6px 14px; border: 1px solid var(--ink-faint); border-radius: var(--radius-md);
                   background: transparent; color: var(--ink); cursor: pointer; }
     .bar button:hover { background: var(--paper-warm); }
     table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 13px; }
-    th, td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top;
+    th, td { border-bottom: 1px solid var(--line); padding: 6px var(--space-3); text-align: left; vertical-align: top;
              overflow-wrap: anywhere; }
     th { position: sticky; top: 0; background: var(--paper-warm); }
     .num { color: var(--ink-soft); font-size: 12px; margin-top: 10px; }
-    .empty { color: var(--ink-faint); padding: 40px 0; text-align: center; }
+    .empty { color: var(--ink-faint); padding: var(--space-8) 0; text-align: center; }
     code { background: var(--paper-warm); padding: 1px 5px; border-radius: 4px; }
   </style>
   <script defer src="js/visit-log.js"></script>
@@ -102,6 +102,6 @@
     })();
   </script>
 
-<div style="padding:16px 8px;text-align:center"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></div>
+<div style="padding:16px var(--space-3);text-align:center"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></div>
 </body>
 </html>

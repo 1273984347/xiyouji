@@ -29,10 +29,12 @@
     <style>
         /* === 精选发布页特有样式 === */
         .curated-hero {
-            padding: clamp(48px, 8vw, 88px) clamp(24px, 6vw, 96px) clamp(28px, 4vw, 44px);
+            padding: clamp(var(--space-9), 8vw, 88px) clamp(var(--space-6), 6vw, var(--space-12)) clamp(28px, 4vw, 44px);
             border-bottom: 1px solid var(--line);
         }
         .curated-hero .kicker { margin-bottom: 16px; }
+        /* W862 B1 裁决 1：kicker 全部落 --bg（审计确认）→ --accent-text */
+        .kicker { color: var(--accent-text); }
         .curated-hero h1 { font-size: clamp(30px, 5vw, 48px); margin: 0 0 14px; }
         .curated-hero .lede { max-width: 768px; font-size: 16px; color: var(--ink-soft); line-height: 1.7; }
         .curated-hero .lede strong { color: var(--ink); font-weight: 600; }
@@ -44,11 +46,11 @@
 
         .curated-grid {
             display: grid; grid-template-columns: repeat(2, 1fr);
-            gap: 16px; margin-top: 8px;
+            gap: 16px; margin-top: var(--space-3);
         }
         .curated-card {
             background: var(--paper); border: 1px solid var(--line);
-            border-radius: var(--radius-lg); padding: 20px 22px;
+            border-radius: var(--radius-lg); padding: var(--space-5) 22px;
             display: flex; flex-direction: column; gap: 10px;
             box-shadow: var(--elev-1);
             transition: border-color var(--dur-base) var(--ease-out-quart),
@@ -96,7 +98,7 @@
                 html[data-theme="dark"] .curated-hero h1 { color: var(--ink); }
         .theme-toggle {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 34px; height: 34px; margin-left: 12px;
+            width: 34px; height: 34px; margin-left: var(--space-4);
             border: 1px solid var(--line); border-radius: var(--radius-pill);
             background: var(--paper); color: var(--ink-soft); cursor: pointer;
             transition: border-color var(--dur-fast) var(--ease-out-quart),
@@ -340,10 +342,10 @@
                 </p>
             </div>
 
-            <div class="guide-cta" style="margin: clamp(24px,4vw,40px) 0; display:flex; flex-wrap:wrap; gap:14px;">
-                <a class="primary" href="index.html" style="font-family:var(--font-serif);font-size:15px;font-weight:600;padding:12px 24px;border-radius:6px;text-decoration:none;background:var(--accent);color:#fff;">← 返回首页</a>
-                <a class="ghost" href="guide.html" style="font-family:var(--font-serif);font-size:15px;font-weight:600;padding:12px 24px;border-radius:6px;text-decoration:none;border:1px solid var(--line);color:var(--ink);">读全站导读 →</a>
-                <a class="ghost" href="dashboard.html" style="font-family:var(--font-serif);font-size:15px;font-weight:600;padding:12px 24px;border-radius:6px;text-decoration:none;border:1px solid var(--line);color:var(--ink);">去看数据看板 →</a>
+            <div class="guide-cta" style="margin: clamp(var(--space-6),4vw,var(--space-8)) 0; display:flex; flex-wrap:wrap; gap:14px;">
+                <a class="primary" href="index.html" style="font-family:var(--font-serif);font-size:15px;font-weight:600;padding:var(--space-4) var(--space-6);border-radius:6px;text-decoration:none;background:var(--accent);color:#fff;">← 返回首页</a>
+                <a class="ghost" href="guide.html" style="font-family:var(--font-serif);font-size:15px;font-weight:600;padding:var(--space-4) var(--space-6);border-radius:6px;text-decoration:none;border:1px solid var(--line);color:var(--ink);">读全站导读 →</a>
+                <a class="ghost" href="dashboard.html" style="font-family:var(--font-serif);font-size:15px;font-weight:600;padding:var(--space-4) var(--space-6);border-radius:6px;text-decoration:none;border:1px solid var(--line);color:var(--ink);">去看数据看板 →</a>
             </div>
         </div>
     </main>
@@ -360,7 +362,7 @@
             <a href="curated.html">精选发布</a>
             <a href="en/guide.html">English</a>
         
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
     <script>
       // W488：滚动显现 reveal-in + 夜读切换
