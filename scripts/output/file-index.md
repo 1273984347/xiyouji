@@ -11,6 +11,21 @@
 ---
 
 
+## W850 Q2 取数基建批（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/obs_sample.py | W850 | 新增：Q2 采样件（OBS-10 静态扫描 / OBS-11 每页 3 次取中位实测 LCP / OBS-14 首 token·显式开关·按指标计十批） |
+| tests/unit/test_obs_sample.py | W850 | 新增：9 例（含启发式拒收、中位数剔除尖峰、代理陷阱、按指标进度、去重覆盖） |
+| scripts/output/obs_samples.json | W850 | 新增：OBS 样本库（首笔含 OBS-10 全站扫描与 OBS-11 五页每页三次中位实测） |
+| pytest.ini | W850 | collected 标记 787 比 797（新增 9 例加新脚本 import 冒烟） |
+| AGENTS.md | W850 | §4.2 导读与正文槽数 46 与 45 顺修至 47·分组头 27-45 顺修至 27-47 |
+| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W850 | §12.2 Q2 行与 §11.2 采样件说明·「46 槽」14 处与 A-04 期望值顺修至 47 |
+| docs/11-方案报告/静态站前端框架化选型对比-2026-10-20.md | W850 | 「46 槽」8 处存量漂移顺修至 47 |
+| scripts/output/stats.json | W850 | pytest_collected 797 刷新（gate_count 仍 47） |
+| scripts/output/_w850_spec.json | W850 | 本批 spec 十字段 |
+| docs/00-导读/W批次编号对账表.md | W850 | 认领行与收官回填 |
+
 ## W849 性能门禁挂槽批（2026-10-21）
 
 | 文件 | W | 说明 |

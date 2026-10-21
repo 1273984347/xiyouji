@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（25）
+## 文件（26）
 
 ### Python 脚本
 
@@ -26,6 +26,7 @@
 - `test_folder_docs_gate.py`
 - `test_lint_links_refactor.py`
 - `test_new_page.py`
+- `test_obs_sample.py`
 - `test_page_router.py`
 - `test_path_guard.py`
 - `test_perf_optimize.py`
