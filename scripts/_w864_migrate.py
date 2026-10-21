@@ -35,7 +35,7 @@ def _block_end(text, start):
     return -1
 
 
-def migrate(text):
+def migrate(text, wtag="W864"):
     """返回 (新文本, 报告 dict)。"""
     report = {"A": 0, "B_bar": False, "B_seal": False}
 
@@ -50,7 +50,7 @@ def migrate(text):
         if end != -1:
             line_end = text.find("\n", end)
             insert_at = (line_end + 1) if line_end != -1 else end + 1
-            text = text[:insert_at] + BAR_RULE + text[insert_at:]
+            text = text[:insert_at] + BAR_RULE.replace("W864", wtag) + text[insert_at:]
             report["B_bar"] = True
 
     # B-seal：实底 → 淡底 + 朱砂字
@@ -76,7 +76,8 @@ def main(argv):
     for path in files:
         with open(path, encoding="utf-8") as f:
             text = f.read()
-        new, rep = migrate(text)
+        wtag = argv[argv.index("--wtag") + 1] if "--wtag" in argv else "W864"
+        new, rep = migrate(text, wtag)
         print("%s %s：A=%d·顶条规则=%s·seal=%s"
               % ("[DRY]" if dry else "[APPLY]", path, rep["A"],
                  "✓" if rep["B_bar"] else "✗", "✓" if rep["B_seal"] else "✗"))

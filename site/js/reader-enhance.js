@@ -203,3 +203,88 @@
     window.addEventListener('load', function () { restore(); paint(); });
   }
 })();
+
+// ===== W865 D2：总目录页检索 / 回号直达 / 命中计数 =====
+// 仅总目录页生效（DOM 守卫：其余 621 个 reader 页无 [data-catalog-tools] → 立即返回·行为零变化）。
+// 纯前端·零外域请求·file:// 双击直开可用（不依赖任何数据源·检索基于当页 615 条目录项文本）。
+(function () {
+  'use strict';
+
+  var tools = document.querySelector('[data-catalog-tools]');
+  if (!tools) return;                       // 守卫：非总目录页直接返回
+
+  var input = tools.querySelector('#catalogFilter');
+  var countEl = tools.querySelector('[data-role=\'count\']');
+  var groups = Array.prototype.slice.call(document.querySelectorAll('.reader-group'));
+  var lists = Array.prototype.slice.call(document.querySelectorAll('.reader-idx'));
+  var total = 0;
+  lists.forEach(function (ul) { total += ul.querySelectorAll('li').length; });
+
+  function norm(s) { return (s || '').replace(/\s+/g, '').toLowerCase(); }
+
+  function noOf(text) {
+    // 「第 042 回」或链接 ch042.html → 042
+    var m = text.match(/第\s*0*(\d{1,3})\s*回/);
+    if (m) return m[1];
+    var h = text.match(/ch(\d{3})\.html/);
+    return h ? h[1] : '';
+  }
+
+  function applyFilter() {
+    var q = norm(input ? input.value : '');
+    var hit = 0;
+    lists.forEach(function (ul, gi) {
+      var lis = Array.prototype.slice.call(ul.querySelectorAll('li'));
+      var shown = 0;
+      lis.forEach(function (li) {
+        var raw = li.textContent || '';
+        var text = norm(raw);
+        var ok = !q || text.indexOf(q) >= 0;
+        if (!ok && /^\d{1,3}$/.test(q)) {
+          var n = noOf(raw + ' ' + (li.querySelector('a') ? li.querySelector('a').getAttribute('href') || '' : ''));
+          ok = !!n && n === q.replace(/^0+/, '');
+        }
+        li.hidden = !ok;
+        if (ok) shown++;
+      });
+      hit += shown;
+      var g = groups[gi];
+      if (g) g.hidden = shown === 0;
+      ul.hidden = shown === 0;
+    });
+    if (countEl) {
+      countEl.textContent = q ? ('命中 ' + hit + ' / ' + total + ' 条') : ('全部 ' + total + ' 条');
+    }
+    return hit;
+  }
+
+  function jumpToNo() {
+    var q = (input ? input.value : '').replace(/\s+/g, '');
+    if (!/^\d{1,3}$/.test(q)) return false;
+    var want = q.replace(/^0+/, '');
+    var target = null;
+    for (var i = 0; i < lists.length && !target; i++) {
+      var lis = lists[i].querySelectorAll('li');
+      for (var j = 0; j < lis.length; j++) {
+        var a = lis[j].querySelector('a');
+        var raw = (lis[j].textContent || '') + ' ' + (a ? a.getAttribute('href') || '' : '');
+        if (noOf(raw) === want) { target = lis[j]; break; }
+      }
+    }
+    if (!target) return false;
+    applyFilter();
+    target.hidden = false;
+    if (target.scrollIntoView) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    target.classList.add('is-flash');
+    window.setTimeout(function () { target.classList.remove('is-flash'); }, 1800);
+    return true;
+  }
+
+  if (input) {
+    input.addEventListener('input', function () { applyFilter(); });
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); if (!jumpToNo()) applyFilter(); }
+    });
+  }
+  applyFilter();
+})();
