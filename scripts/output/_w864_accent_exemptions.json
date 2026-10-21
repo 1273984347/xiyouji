@@ -133,6 +133,60 @@
     }
    ],
    "note": "B4 增补·判据：同一组件颜色随数据值变 = 数据语义（进册）；通用组件固定朱砂 = 装饰（收敛）。"
+  },
+  "W868": {
+   "measured_at": "2026-10-22",
+   "exemptions": [
+    {
+     "page": "data/guanyin-six-roles-network.html",
+     "cls": "div.role-card",
+     "count": 1,
+     "reason": "角色编码条（随角色值变）·数据语义"
+    },
+    {
+     "page": "data/guanyin-six-roles-network.html",
+     "cls": "div.swatch-bar",
+     "count": 1,
+     "reason": "图例色块·数据语义"
+    },
+    {
+     "page": "data/pilgrim-team-dynamic-network.html",
+     "cls": "button.ctrl-btn.active",
+     "count": 1,
+     "reason": "选中态实底（组件卡③同款）"
+    },
+    {
+     "page": "data/pilgrim-team-dynamic-network.html",
+     "cls": "div.phase-card.active",
+     "count": 1,
+     "reason": "阶段激活态编码·数据语义"
+    },
+    {
+     "page": "data/pilgrim-team-psychology-arc.html",
+     "cls": "div.progress-fill",
+     "count": 1,
+     "reason": "进度指示填充（数值编码）"
+    },
+    {
+     "page": "data/journey-map-interactive.html",
+     "cls": "button.btn",
+     "count": 1,
+     "reason": "主行动按钮实底（裁决 2「主行动区可带」）"
+    },
+    {
+     "page": "data/journey-spacetime.html",
+     "cls": "div.progress-fill",
+     "count": 1,
+     "reason": "进度指示填充（数值编码）"
+    },
+    {
+     "page": "data/cave-estate.html",
+     "cls": "span.tag.king",
+     "count": 19,
+     "reason": "妖王分类色片（分类编码·与 B2 的 .tag 同型）·数据语义"
+    }
+   ],
+   "note": "B5 增补。journey-geo-semiotics 的 mech-card 单条不超限未动（整改后该页计 1 处）。"
   }
  },
  "note": "裁决 2「豁免清单落 scripts/output/」登记簿：W864 首批建册，随批递增、条目随迁移整改递减。"

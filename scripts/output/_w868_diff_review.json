@@ -1,0 +1,2162 @@
+{
+  "batch": "W862",
+  "total_diffs": 360,
+  "pages_with_diffs": [
+    "data/cave-estate.html",
+    "data/customs-pass-route.html",
+    "data/guanyin-six-roles-network.html",
+    "data/journey-geo-3d.html",
+    "data/journey-geo-semiotics.html",
+    "data/journey-map-interactive.html",
+    "data/journey-route.html",
+    "data/journey-spacetime.html",
+    "data/pilgrim-team-dynamic-network.html",
+    "data/pilgrim-team-psychology-arc.html"
+  ],
+  "groups": [
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 5,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 5,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 5,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 5,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/journey-map-interactive.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/journey-map-interactive.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/journey-map-interactive.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/journey-map-interactive.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-psychology-arc.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-psychology-arc.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-psychology-arc.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-psychology-arc.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "font-size",
+      "before": "9px",
+      "after": "10px",
+      "count": 3,
+      "sample_elements": [
+        "text.",
+        "text.",
+        "text."
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "line-height",
+      "before": "15.75px",
+      "after": "17.5px",
+      "count": 3,
+      "sample_elements": [
+        "text.",
+        "text.",
+        "text."
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "font-size",
+      "before": "9px",
+      "after": "10px",
+      "count": 3,
+      "sample_elements": [
+        "text.",
+        "text.",
+        "text."
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "line-height",
+      "before": "15.75px",
+      "after": "17.5px",
+      "count": 3,
+      "sample_elements": [
+        "text.",
+        "text.",
+        "text."
+      ]
+    },
+    {
+      "page": "data/customs-pass-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/customs-pass-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/customs-pass-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/customs-pass-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/journey-spacetime.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/journey-spacetime.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/journey-spacetime.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/journey-spacetime.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "font-size",
+      "before": "11.2px",
+      "after": "9px",
+      "count": 2,
+      "sample_elements": [
+        "text.val",
+        "text.val"
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "line-height",
+      "before": "19.6px",
+      "after": "15.75px",
+      "count": 2,
+      "sample_elements": [
+        "text.val",
+        "text.val"
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "font-size",
+      "before": "11.2px",
+      "after": "9px",
+      "count": 2,
+      "sample_elements": [
+        "text.val",
+        "text.val"
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "line-height",
+      "before": "19.6px",
+      "after": "15.75px",
+      "count": 2,
+      "sample_elements": [
+        "text.val",
+        "text.val"
+      ]
+    },
+    {
+      "page": "data/customs-pass-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/customs-pass-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/customs-pass-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/customs-pass-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/customs-pass-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/customs-pass-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/customs-pass-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/customs-pass-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/customs-pass-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/customs-pass-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-3d.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-3d.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-3d.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-3d.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-3d.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-3d.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-3d.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-3d.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-3d.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-3d.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-semiotics.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-semiotics.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-semiotics.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-semiotics.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-semiotics.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-semiotics.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-semiotics.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-semiotics.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-semiotics.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-geo-semiotics.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-map-interactive.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-map-interactive.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-map-interactive.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-map-interactive.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-map-interactive.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-map-interactive.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-map-interactive.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-map-interactive.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-map-interactive.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-map-interactive.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-spacetime.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-spacetime.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-spacetime.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-spacetime.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-spacetime.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-spacetime.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-spacetime.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-spacetime.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-spacetime.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/journey-spacetime.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-psychology-arc.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-psychology-arc.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-psychology-arc.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-psychology-arc.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-psychology-arc.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-psychology-arc.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-psychology-arc.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-psychology-arc.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-psychology-arc.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-psychology-arc.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/cave-estate.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/customs-pass-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/customs-pass-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/guanyin-six-roles-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/journey-geo-3d.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/journey-geo-3d.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/journey-geo-semiotics.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/journey-geo-semiotics.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/journey-map-interactive.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/journey-map-interactive.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "font-size",
+      "before": "10px",
+      "after": "9px",
+      "count": 1,
+      "sample_elements": [
+        "text."
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "line-height",
+      "before": "17.5px",
+      "after": "15.75px",
+      "count": 1,
+      "sample_elements": [
+        "text."
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "font-size",
+      "before": "10px",
+      "after": "9px",
+      "count": 1,
+      "sample_elements": [
+        "text."
+      ]
+    },
+    {
+      "page": "data/journey-route.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "line-height",
+      "before": "17.5px",
+      "after": "15.75px",
+      "count": 1,
+      "sample_elements": [
+        "text."
+      ]
+    },
+    {
+      "page": "data/journey-spacetime.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/journey-spacetime.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-dynamic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-psychology-arc.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/pilgrim-team-psychology-arc.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    }
+  ]
+}

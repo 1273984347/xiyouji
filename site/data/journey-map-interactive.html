@@ -20,7 +20,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="时间轴控制 · 取经路线地图 · 取经时间轴 · 详解西游记">
     <meta property="og:description" content="时间轴控制 · 取经路线地图 · 取经时间轴 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -472,7 +472,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -511,11 +511,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -706,6 +706,8 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+        /* W868 B5 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
+        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1253,7 +1255,7 @@ td.num, th.num {
 <style>
         /* e-track-exempt: chart-data-colors 3 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
-        .breadcrumb .sep { color: color-mix(in srgb, var(--dark-text) 50%, transparent); margin: 0 4px; }
+        .breadcrumb .sep { color: color-mix(in srgb, var(--dark-text) 50%, transparent); margin: 0 var(--space-2); }
         
         
         
@@ -1269,14 +1271,14 @@ td.num, th.num {
         
         
         
-        .chart-block { margin-top: 8px; }
+        .chart-block { margin-top: var(--space-3); }
         .chart-block svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
-        .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; font-size: 0.82rem; justify-content: center; }
+        .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: var(--space-4); font-size: 0.82rem; justify-content: center; }
         .legend-item { display: flex; align-items: center; gap: 6px; }
         .legend-swatch { width: 14px; height: 14px; border-radius: 50% ; display: inline-block; }
         /* 墨韵（W462）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
         .controls { display: flex; align-items: center; gap: 14px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap; }
-        .btn { background: var(--accent); color: var(--paper); border: none; padding: 8px 18px; border-radius: var(--radius-md) ; cursor: pointer; font-size: 0.85rem; font-family: "Noto Serif SC", serif; transition: background var(--dur-base); text-decoration: none; display: inline-block; }
+        .btn { background: var(--accent); color: var(--paper); border: none; padding: var(--space-3) 18px; border-radius: var(--radius-md) ; cursor: pointer; font-size: 0.85rem; font-family: "Noto Serif SC", serif; transition: background var(--dur-base); text-decoration: none; display: inline-block; }
         .btn:hover { background: #c0691a; }
         .btn.secondary { background: var(--accent-2); }
         .btn.secondary:hover { background: #1a2530; }
@@ -1349,7 +1351,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <p class="tagline">取经路线与中国地理的交互式映射——8 处难点标注、时间轴双轴、跨页面联动跳转。</p>
     </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="kpi-row" id="kpiRow"></div>
 
         <!-- 控制面板 -->
@@ -1414,8 +1416,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
         
-            <a href="../en/journey-map-interactive.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="../en/journey-map-interactive.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 
 <!-- FILE_INDEX: journey-map-interactive.html | W236-V | 取经路线交互式地图（D3+TopoJSON+时间轴+9难点） -->
