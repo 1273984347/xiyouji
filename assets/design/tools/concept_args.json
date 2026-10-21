@@ -1,0 +1,40 @@
+{
+  "requests": [
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature. A single centered Chinese motif: an 如意金箍棒 (Ruyi Jingu Bang staff) drawn horizontally, slender tapered shaft with two ornate gold bands at both ends, rendered as elegant traditional Chinese gongbi brush line art. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), one small vermilion seal square accent (#C8463A). Flat vector-like crisp edges, no gradient, no 3D, no shadow, no mockup, no bevel. Restrained scholarly Chinese aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "concept-01-ruyi-staff.png"
+    },
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature. A single centered Chinese motif: an auspicious stylized cloud (祥云 / ruyi cloud) with one elegant spiral scroll, drawn with traditional Chinese gongbi ink-brush line art, fluid calligraphic curves. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), one small vermilion red dot accent (#C8463A). Flat vector-like crisp edges, no gradient, no 3D, no shadow, no mockup, no bevel. Elegant restrained Chinese aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "concept-02-ruyi-cloud.png"
+    },
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature. A single centered Chinese motif: a traditional Chinese scroll / bamboo slip manuscript (经卷), horizontal axis rods at both ends with a slightly unrolled sheet between them and two faint vertical columns suggesting ancient Chinese script, drawn in traditional Chinese gongbi ink-brush line art. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), one small vermilion red annotation dot (#C8463A). Flat vector-like crisp edges, no gradient, no 3D, no shadow, no mockup, no bevel. Scholarly Chinese aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "concept-03-scroll.png"
+    },
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature. A single centered Chinese motif: a minimal ink-brush mountain range (远山) with two or three peaks drawn in one continuous expressive brush stroke, a thin horizon line below and a tiny vermilion dot above the tallest peak like a distant temple lamp, Chinese literati shanshui brush painting style. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), one small vermilion red dot (#C8463A). Flat, no gradient, no 3D, no shadow, no mockup, no bevel. Restrained scholarly Chinese aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "concept-04-mountains.png"
+    },
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature. A single centered Chinese motif: a golden headband ring (紧箍) drawn as one confident calligraphic circular stroke with a small opening and tapered brush entry and exit, like carved jade, Chinese gongbi brush line art. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), two tiny vermilion red dots at the opening (#C8463A). Flat vector-like crisp edges, no gradient, no 3D, no shadow, no mockup, no bevel. Elegant restrained Chinese aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "concept-05-headband-ring.png"
+    },
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature. A single centered Chinese motif: a bodhi leaf (菩提叶) rendered as a refined single-stroke symmetrical outline with a delicate vein, combined with a tiny round seal dot, Chinese gongbi ink-brush line art. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), one small vermilion red seal square accent (#C8463A). Flat vector-like crisp edges, no gradient, no 3D, no shadow, no mockup, no bevel. Scholarly Buddhist Chinese aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "concept-06-bodhi-leaf.png"
+    }
+  ]
+}

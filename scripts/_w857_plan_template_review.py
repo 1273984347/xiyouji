@@ -101,6 +101,8 @@ PAIRS_UNION = [
 # 「本章结论 / 待确认事项」的等效形式（仓内实际写法）
 CONCL_EQUIV = ['本章结论', '本章小结', '本节结论', '小结', '本批不做', '不做项', '不做']
 PENDING_EQUIV = ['待确认事项', '待验证', '待用户', '待批准', '待决']
+# 「执行摘要」的等效形式（计划件多用「0. 任务背景（读者无需回看会话即可理解）」承担同一职能）
+SUMMARY_EQUIV = ['执行摘要', '任务背景', '本批针对', '一页速览', '速览', '摘要', '核心判定']
 
 NUM_PREFIXES = ['G-', 'AC-', 'ASM-', 'ST-', 'D-', 'R-', 'V-', 'E-', 'P-', 'A-', 'WF-', 'SC-', 'PRE-']
 
@@ -150,20 +152,34 @@ def banned_hits(lines):
     return ({w: n for w, n in out.items() if n}, ctx)
 
 
-def review(path):
-    text = load(path)
+def judge(text, name='<text>'):
+    """纯函数判据：按件型分流判 32 项结构判据，返回判据判定表。
+
+    供两处复用：① 本探针的全量矩阵输出；② 第 48 门禁 scripts/check_plan_template.py
+    （门禁取其「不符合项集合」做增量差集）。
+
+    返回：{'kind': 'PLAN'|'REPORT', 'criteria': {cid: {'verdict','missing','present','need','desc','src'}}}
+    """
     lines = text.splitlines()
-    name = os.path.basename(path)
     kind = 'PLAN' if '执行前计划' in name else 'REPORT'
-    res = {'file': name, 'kind': kind, 'bytes': len(text.encode('utf-8')), 'lines': len(lines),
-           'criteria': {}, 'numbers': {}, 'banned': {}, 'banned_ctx': []}
+    out = {}
     for cid, src, desc, tokens in CRITERIA:
         if (kind == 'PLAN' and cid in REPORT_ONLY) or (kind == 'REPORT' and cid in PLAN_ONLY):
-            res['criteria'][cid] = {'src': src, 'desc': desc, 'present': None, 'need': len(tokens),
-                                    'missing': [], 'verdict': 'N/A', 'note': '按件型不适用'}
+            out[cid] = {'src': src, 'desc': desc, 'present': None, 'need': len(tokens),
+                        'missing': [], 'verdict': 'N/A', 'note': '按件型不适用'}
+            continue
+        if cid == 'C02':
+            # 执行摘要：认等效形式（计划件用「0. 任务背景」承担同一职能）
+            hit = [t for t in SUMMARY_EQUIV if hit_any(lines, t)]
+            out[cid] = {
+                'src': src, 'desc': desc,
+                'present': 1 if hit else 0, 'need': 1,
+                'missing': [] if hit else ['执行摘要'],
+                'verdict': '符合' if hit else '不符合',
+                'note': '等价形式命中：%s' % ('、'.join(hit) or '无'),
+            }
             continue
         if cid == 'C32':
-            # 等效形式：结论标记 / 待确认标记分别可由任一等价词满足
             concl = [t for t in CONCL_EQUIV if hit_any(lines, t)]
             pend = [t for t in PENDING_EQUIV if hit_any(lines, t)]
             miss = []
@@ -171,7 +187,7 @@ def review(path):
                 miss.append('本章结论')
             if not pend:
                 miss.append('待确认事项')
-            res['criteria'][cid] = {
+            out[cid] = {
                 'src': src, 'desc': desc,
                 'present': (2 - len(miss)), 'need': 2, 'missing': miss,
                 'verdict': '符合' if not miss else '部分符合',
@@ -179,12 +195,27 @@ def review(path):
             }
             continue
         missing = [t for t in tokens if not hit_any(lines, t)]
-        res['criteria'][cid] = {
+        out[cid] = {
             'src': src, 'desc': desc,
             'present': len(tokens) - len(missing), 'need': len(tokens),
             'missing': missing,
             'verdict': '符合' if not missing else ('部分符合' if len(missing) < len(tokens) else '不符合'),
         }
+    return {'kind': kind, 'criteria': out}
+
+
+def fail_set(judged):
+    """取「不符合」判据的集合（部分符合不计——内容多在，只判「整项缺失」为硬失格）。"""
+    return set(cid for cid, v in judged['criteria'].items() if v['verdict'] == '不符合')
+
+
+def review(path):
+    text = load(path)
+    lines = text.splitlines()
+    name = os.path.basename(path)
+    judged = judge(text, name)
+    res = {'file': name, 'kind': judged['kind'], 'bytes': len(text.encode('utf-8')),
+           'lines': len(lines), 'criteria': judged['criteria'], 'numbers': {}, 'banned': {}, 'banned_ctx': []}
     for p in NUM_PREFIXES:
         res['numbers'][p.rstrip('-')] = count_prefix(text, p)
     res['banned'], res['banned_ctx'] = banned_hits(lines)
