@@ -187,6 +187,60 @@
     }
    ],
    "note": "B5 增补。journey-geo-semiotics 的 mech-card 单条不超限未动（整改后该页计 1 处）。"
+  },
+  "W869": {
+   "measured_at": "2026-10-22",
+   "exemptions": [
+    {
+     "page": "data/narrative-experiment.html",
+     "cls": "span.sc-chip",
+     "count": 4,
+     "reason": "场景分类色片·数据语义"
+    },
+    {
+     "page": "data/narrative-experiment.html",
+     "cls": "div.sc-cat",
+     "count": 1,
+     "reason": "场景类别条·数据语义"
+    },
+    {
+     "page": "data/narrative-experiment.html",
+     "cls": "span.gh-tag",
+     "count": 1,
+     "reason": "分类标签·数据语义"
+    },
+    {
+     "page": "data/narrative-experiment.html",
+     "cls": "span.hc-owner",
+     "count": 2,
+     "reason": "持有者标记徽章·数据语义"
+    },
+    {
+     "page": "data/deconstruction.html",
+     "cls": "span.tag",
+     "count": 5,
+     "reason": "分类色片·数据语义"
+    },
+    {
+     "page": "data/music-structure.html",
+     "cls": "span.tag",
+     "count": 35,
+     "reason": "曲牌/结构分类色片·数据语义"
+    },
+    {
+     "page": "data/poetry-rhythm-analysis.html",
+     "cls": "div.progress-fill",
+     "count": 1,
+     "reason": "进度指示填充（数值编码）"
+    },
+    {
+     "page": "data/narrative-rhythm-curve.html",
+     "cls": "button.btn",
+     "count": 1,
+     "reason": "主行动按钮实底（裁决 2「主行动区可带」）"
+    }
+   ],
+   "note": "B6 增补。narrative-experiment 的 12 张 narr-card 网格顶条按裁决 2 收敛（同色装饰网格=非编码，非豁免）；player-card/mv-card 单条不超限未动。"
   }
  },
  "note": "裁决 2「豁免清单落 scripts/output/」登记簿：W864 首批建册，随批递增、条目随迁移整改递减。"

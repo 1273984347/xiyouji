@@ -20,7 +20,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="角色语言风格五维雷达图 · 角色风格聚类散点图（PCA 降维 2D） · 相关页面 · 详解西游记">
     <meta property="og:description" content="角色语言风格五维雷达图 · 角色风格聚类散点图（PCA 降维 2D） · 相关页面 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -472,7 +472,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -511,11 +511,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -706,6 +706,8 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+        /* W869 B6 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
+        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1253,7 +1255,7 @@ td.num, th.num {
 <style>
         /* e-track-exempt: chart-data-colors 1 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
-        .breadcrumb .sep { color: color-mix(in srgb, var(--dark-text) 50%, transparent); margin: 0 4px; }
+        .breadcrumb .sep { color: color-mix(in srgb, var(--dark-text) 50%, transparent); margin: 0 var(--space-2); }
         
         
         
@@ -1269,7 +1271,7 @@ td.num, th.num {
         
         
         
-        .chart-block { margin-top: 8px; }
+        .chart-block { margin-top: var(--space-3); }
         .chart-block h3 {
             font-size: 0.95rem;
             color: var(--accent);
@@ -1281,7 +1283,7 @@ td.num, th.num {
             display: flex;
             flex-wrap: wrap;
             gap: 8px 18px;
-            margin-top: 12px;
+            margin-top: var(--space-4);
             font-size: 0.82rem;
             justify-content: center;
         }
@@ -1362,7 +1364,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <p class="tagline">七角色对话语言特征对比——词汇、句长、修辞、口语、文言的五维风格图谱。</p>
     </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="kpi-row" id="kpiRow"></div>
 
         <!-- 图1：5 维雷达图 -->
@@ -1411,8 +1413,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
         
-            <a href="../en/language-style-radar.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="../en/language-style-radar.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 
 <!-- FILE_INDEX: language-style-radar.html | W236-V | 语言风格雷达图（7角色5维+PCA聚类） -->
