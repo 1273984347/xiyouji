@@ -11,10 +11,16 @@
 
 - （无）
 
-## 文件（1）
+## 文件（7）
 
 ### 样式与资源
 
+- `hero-01-xihai-yunhai.webp`
+- `hero-02-shitu-wuxing.webp`
+- `hero-03-fabao-qiji.webp`
+- `hero-04-tiangting-yunmo.webp`
+- `hero-05-huangmo-gulu.webp`
+- `hero-06-fotu-chengque.webp`
 - `ink-mountains-hero.webp`
 
 ---
