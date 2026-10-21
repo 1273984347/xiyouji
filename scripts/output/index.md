@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（340）
+## 文件（342）
 
 ### Markdown 文档
 
@@ -139,6 +139,7 @@
 - `_cascade_files_W851.txt`
 - `_cascade_files_W863.txt`
 - `_cascade_files_W864.txt`
+- `_cascade_files_W874.txt`
 - `_sync_analysis_manifest.json`
 - `_w728_spec.json`
 - `_w729_spec.json`
@@ -331,6 +332,7 @@
 - `_w873_canary_review.json`
 - `_w873_diff_review.json`
 - `_w873_spec.json`
+- `_w874_spec.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`
