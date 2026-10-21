@@ -373,6 +373,90 @@
     }
    ],
    "note": "B8 增补。cipher-back 判为翻卡背面皮肤（组件内部设计面）而非网格顶条——与 narr-card 的网格装饰区分；若后续评审不认此判据，按顶条收敛只需一条 .cipher-back ~ .cipher-back 规则。"
+  },
+  "W872": {
+   "measured_at": "2026-10-22",
+   "exemptions": [
+    {
+     "page": "data/aesthetics.html",
+     "cls": "div.scene-bar（热力图行内）",
+     "count": 4,
+     "reason": "热力图行内数据条·数据语义"
+    },
+    {
+     "page": "data/visual-art.html",
+     "cls": "div.sc-cat.cat-danger",
+     "count": 5,
+     "reason": "场景类别条（cat-danger）·数据语义"
+    },
+    {
+     "page": "data/cross-time-danmaku.html",
+     "cls": "div.age-tab.active",
+     "count": 1,
+     "reason": "选中态实底"
+    },
+    {
+     "page": "data/cross-time-danmaku.html",
+     "cls": "button",
+     "count": 1,
+     "reason": "主行动按钮实底"
+    },
+    {
+     "page": "data/emotional-heatmap.html",
+     "cls": "div.scholar-card",
+     "count": 1,
+     "reason": "学者分类卡·数据语义"
+    },
+    {
+     "page": "data/chart-design.html",
+     "cls": "div.domino-card",
+     "count": 4,
+     "reason": "多米诺连锁隐喻展示卡（展示序列·非列表网格）"
+    },
+    {
+     "page": "data/chart-design.html",
+     "cls": "div.domino-hardship",
+     "count": 3,
+     "reason": "难数标记色片·数据语义"
+    },
+    {
+     "page": "data/perf-canvas-rendering.html",
+     "cls": "button",
+     "count": 1,
+     "reason": "主行动按钮实底"
+    },
+    {
+     "page": "data/global-pattern.html",
+     "cls": "span.p-country",
+     "count": 1,
+     "reason": "国家分类色片·数据语义"
+    },
+    {
+     "page": "data/four-dimensional-research-network.html",
+     "cls": "span.badge.cinnabar",
+     "count": 1,
+     "reason": "分类徽章·数据语义"
+    },
+    {
+     "page": "data/four-heavenly-kings-artifacts.html",
+     "cls": "div.king-card",
+     "count": 1,
+     "reason": "天王分类卡·数据语义"
+    },
+    {
+     "page": "data/tag-cloud.html",
+     "cls": "span.rc-size",
+     "count": 5,
+     "reason": "字号图例色片（尺寸档位编码）·数据语义"
+    },
+    {
+     "page": "data/tag-cloud.html",
+     "cls": "button.tab-btn",
+     "count": 1,
+     "reason": "选中态实底"
+    }
+   ],
+   "note": "B9 增补。domino-card 判为连锁隐喻展示卡（展示序列）而非列表网格；tag-cloud 的 rc-size 是字号档位图例。"
   }
  },
  "note": "裁决 2「豁免清单落 scripts/output/」登记簿：W864 首批建册，随批递增、条目随迁移整改递减。"

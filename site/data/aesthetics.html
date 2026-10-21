@@ -20,7 +20,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="壹 · 角色时尚变迁折线 · 贰 · 十二色彩谱系 · 叁 · 场景美学评级热力 · 详解西游记">
     <meta property="og:description" content="壹 · 角色时尚变迁折线 · 贰 · 十二色彩谱系 · 叁 · 场景美学评级热力 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -472,7 +472,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -511,11 +511,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -706,6 +706,8 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+        /* W872 B9 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
+        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1288,7 +1290,7 @@ td.num, th.num {
         .chart-block h3 {
             font-size: 1rem;
             color: var(--accent);
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
             letter-spacing: 0.1em;
         }
         .chart-block svg {
@@ -1300,7 +1302,7 @@ td.num, th.num {
             flex-wrap: wrap;
             justify-content: center;
             gap: 8px 16px;
-            margin-top: 12px;
+            margin-top: var(--space-4);
             font-size: 0.82rem;
         }
         .legend-item {
@@ -1316,21 +1318,21 @@ td.num, th.num {
         .insight-box {
             background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border-left: 4px solid var(--accent);
-            padding: 20px 24px;
+            padding: var(--space-5) var(--space-6);
             border-radius: var(--radius-md);
             margin-top: 16px;
         }
         .insight-box h4 {
             color: var(--accent);
             font-size: 1rem;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .insight-box ul {
             list-style: none;
             padding-left: 0;
         }
         .insight-box li {
-            padding: 8px 0;
+            padding: var(--space-3) 0;
             border-bottom: 1px dashed var(--line);
             font-size: 0.92rem;
         }
@@ -1359,7 +1361,7 @@ td.num, th.num {
         .chart-tooltip strong {
             color: var(--accent);
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
         .chart-tooltip .row {
             color: var(--ink-soft);
@@ -1394,7 +1396,7 @@ td.num, th.num {
             font-size: 0.72rem;
             color: var(--paper);
             background: var(--shadow);
-            padding: 2px 6px;
+            padding: var(--space-1) 6px;
             border-radius: var(--radius-sm);
             letter-spacing: 0.05em;
         }
@@ -1406,7 +1408,7 @@ td.num, th.num {
             font-size: 1rem;
             font-weight: 600;
             color: var(--ink);
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
         .color-body .cat {
             display: inline-block;
@@ -1481,7 +1483,7 @@ td.num, th.num {
             font-family: "JetBrains Mono", monospace;
         }
         .stage-list {
-            padding: 8px;
+            padding: var(--space-3);
             display: flex;
             flex-direction: column;
             gap: 6px;
@@ -1491,7 +1493,7 @@ td.num, th.num {
             grid-template-columns: 6px 1fr auto;
             gap: 10px;
             align-items: center;
-            padding: 8px 10px;
+            padding: var(--space-3) 10px;
             background: var(--paper);
             border-radius: var(--radius-md);
             border-left: 4px solid var(--accent-soft);
@@ -1510,7 +1512,7 @@ td.num, th.num {
             font-size: 0.88rem;
             font-weight: 600;
             color: var(--ink);
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
         .stage-info .stage-look {
             font-size: 0.76rem;
@@ -1520,7 +1522,7 @@ td.num, th.num {
         .stage-info .stage-color-text {
             font-size: 0.72rem;
             color: var(--accent-3);
-            margin-top: 2px;
+            margin-top: var(--space-1);
             font-style: italic;
         }
         .stage-level {
@@ -1540,7 +1542,7 @@ td.num, th.num {
             font-size: 0.6rem;
             color: var(--ink-soft);
             letter-spacing: 0.1em;
-            margin-top: 2px;
+            margin-top: var(--space-1);
         }
         /* Heatmap row */
         .heatmap-row {
@@ -1548,7 +1550,7 @@ td.num, th.num {
             grid-template-columns: 30px 1fr 60px 60px;
             gap: 8px;
             align-items: center;
-            padding: 5px 8px;
+            padding: 5px var(--space-3);
             border-bottom: 1px solid var(--line);
             font-size: 0.85rem;
         }
@@ -1630,7 +1632,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <p class="tagline">金甲宝相庄严色，虎皮裙下野性王——五圣服饰的修证轨迹</p>
     </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
             数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
         <div class="cite-block" id="citeBox">
@@ -1735,8 +1737,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
         
-            <a href="../en/aesthetics.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="../en/aesthetics.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 
 <div class="chart-tooltip" id="tooltip"></div>

@@ -20,7 +20,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="壹 · 渲染对比实验台 · 贰 · 三项关键优化技术 · 叁 · 关键洞察与适用边界 · 详解西游记">
     <meta property="og:description" content="壹 · 渲染对比实验台 · 贰 · 三项关键优化技术 · 叁 · 关键洞察与适用边界 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -472,7 +472,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -511,11 +511,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -706,6 +706,8 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+        /* W872 B9 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
+        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1268,7 +1270,7 @@ header.hero .meta {
         .kpi-row .kpi-card { background: var(--paper-warm); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 10px; padding: 14px 16px; }
         .kpi-row .kpi-card .label { font-size: 0.78rem; color: var(--ink-soft); letter-spacing: 0.04em; }
         .kpi-row .kpi-card .value { font-size: 1.9rem; font-weight: 700; color: var(--accent); font-family: var(--font-mono, monospace); line-height: 1.15; }
-        .kpi-row .kpi-card .desc { font-size: 0.8rem; color: var(--ink-soft); margin-top: 4px; }
+        .kpi-row .kpi-card .desc { font-size: 0.8rem; color: var(--ink-soft); margin-top: var(--space-2); }
 .kpi-card.alt { border-top-color: var(--accent-2); }
 .kpi-card.alt2 { border-top-color: var(--accent-3); }
 .kpi-card.alt3 { border-top-color: var(--accent-2); }
@@ -1281,7 +1283,7 @@ header.hero .meta {
 .kpi-card.alt .kpi-value { color: var(--accent-2); }
 .kpi-card.alt2 .kpi-value { color: var(--accent-3); }
 .kpi-card.alt3 .kpi-value { color: var(--accent-2); }
-.kpi-label { color: var(--ink-soft); font-size: 0.84em; margin-top: 4px; }
+.kpi-label { color: var(--ink-soft); font-size: 0.84em; margin-top: var(--space-2); }
 
 /* Section */
 
@@ -1311,7 +1313,7 @@ header.hero .meta {
 }
 .controls label { font-size: 0.9em; color: var(--ink); }
 .controls select, .controls button {
-  padding: 6px 12px;
+  padding: 6px var(--space-4);
   font-size: 0.9em;
   font-family: inherit;
   background: var(--paper);
@@ -1357,7 +1359,7 @@ header.hero .meta {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-  padding-bottom: 8px;
+  padding-bottom: var(--space-3);
   border-bottom: 1px dashed var(--line);
 }
 .pane-title {
@@ -1367,7 +1369,7 @@ header.hero .meta {
 }
 .pane-badge {
   font-size: 0.76em;
-  padding: 2px 8px;
+  padding: var(--space-1) var(--space-3);
   border-radius: var(--radius-lg);
   letter-spacing: 0.5px;
   font-family: "JetBrains Mono", "Consolas", monospace;
@@ -1378,7 +1380,7 @@ header.hero .meta {
   font-size: 0.82em;
   color: var(--ink-soft);
   font-family: "JetBrains Mono", "Consolas", monospace;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-3);
 }
 .pane-timer .time-value {
   font-weight: 700;
@@ -1416,7 +1418,7 @@ header.hero .meta {
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--line);
-  margin-bottom: 8px;
+  margin-bottom: var(--space-3);
 }
 .bar-seg {
   display: flex;
@@ -1444,13 +1446,13 @@ header.hero .meta {
 /* 优化技术说明列表 */
 .tech-list {
   background: var(--paper);
-  padding: 18px 20px;
+  padding: 18px var(--space-5);
   border-radius: var(--radius-md);
   border-left: 4px solid var(--accent-3);
   margin-top: 18px;
 }
 .tech-item {
-  margin: 12px 0;
+  margin: var(--space-4) 0;
   padding: 10px 14px;
   background: var(--paper);
   border-radius: var(--radius-md);
@@ -1463,12 +1465,12 @@ header.hero .meta {
   font-family: "JetBrains Mono", "Consolas", monospace;
   font-size: 0.96em;
 }
-.tech-item .tech-desc { color: var(--ink); margin-top: 4px; }
+.tech-item .tech-desc { color: var(--ink); margin-top: var(--space-2); }
 .tech-item .tech-code {
   display: block;
   background: var(--ink);
   color: #f5f0e6;
-  padding: 8px 12px;
+  padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-sm);
   font-family: "JetBrains Mono", "Consolas", monospace;
   font-size: 0.84em;
@@ -1483,7 +1485,7 @@ header.hero .meta {
   padding: 15px;
   border-radius: var(--radius-md)
 }
-.insight-item { margin: 8px 0; padding-left: 20px; position: relative; }
+.insight-item { margin: var(--space-3) 0; padding-left: var(--space-5); position: relative; }
 .insight-item::before { content: "◆"; color: var(--accent); position: absolute; left: 0; }
 
 /* tooltip */
@@ -1491,7 +1493,7 @@ header.hero .meta {
   position: absolute;
   background: var(--dark);
   color: var(--paper);
-  padding: 8px 12px;
+  padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-md);
   font-size: 0.84em;
   pointer-events: none;
@@ -1552,7 +1554,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <p class="subtitle">SVG vs CANVAS · W230 E3 · 性能优化示例</p>
     </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
 
   <!-- KPI 行 -->
   <section class="kpi-row">
@@ -1715,8 +1717,8 @@ const visibleEdges = edges.filter(e =>
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
         
-            <a href="../en/perf-canvas-rendering.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="../en/perf-canvas-rendering.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 
 </main>
