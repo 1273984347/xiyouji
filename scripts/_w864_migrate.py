@@ -15,7 +15,7 @@ import re
 import sys
 
 BAR_RULE = (
-    "        /* W864 B2 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */\n"
+    "        /* {W} {B} 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */\n"
     "        .kpi-row > .kpi-card:not([class*=\"alt-\"]) ~ "
     ".kpi-card:not([class*=\"alt-\"]) { border-top: 1px solid var(--line); }\n"
 )
@@ -35,7 +35,7 @@ def _block_end(text, start):
     return -1
 
 
-def migrate(text, wtag="W864"):
+def migrate(text, wtag="W864", blabel="B2"):
     """返回 (新文本, 报告 dict)。"""
     report = {"A": 0, "B_bar": False, "B_seal": False}
 
@@ -50,7 +50,8 @@ def migrate(text, wtag="W864"):
         if end != -1:
             line_end = text.find("\n", end)
             insert_at = (line_end + 1) if line_end != -1 else end + 1
-            text = text[:insert_at] + BAR_RULE.replace("W864", wtag) + text[insert_at:]
+            rule = BAR_RULE.replace("{W}", wtag).replace("{B}", blabel)
+            text = text[:insert_at] + rule + text[insert_at:]
             report["B_bar"] = True
 
     # B-seal：实底 → 淡底 + 朱砂字
@@ -70,14 +71,16 @@ def migrate(text, wtag="W864"):
 def main(argv):
     dry = "--dry" in argv
     wtag = argv[argv.index("--wtag") + 1] if "--wtag" in argv else "W864"
-    files = [a for a in argv[1:] if not a.startswith("--") and a != wtag]
+    blabel = argv[argv.index("--blabel") + 1] if "--blabel" in argv else "B2"
+    files = [a for a in argv[1:] if not a.startswith("--") and a != wtag
+             and a != blabel]
     if not files:
         print("用法：--dry|<无> <file...>")
         return 2
     for path in files:
         with open(path, encoding="utf-8") as f:
             text = f.read()
-        new, rep = migrate(text, wtag)
+        new, rep = migrate(text, wtag, blabel)
         print("%s %s：A=%d·顶条规则=%s·seal=%s"
               % ("[DRY]" if dry else "[APPLY]", path, rep["A"],
                  "✓" if rep["B_bar"] else "✗", "✓" if rep["B_seal"] else "✗"))

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-xpWlzT4xwuwDWDT9wzlUQPGD3anQk5RJGEVaO1vp7e0=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-KvQYWmNWRx2DEXKKi0E1FY0YPsYkd1gfstHv/QDm6E4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪后台论 · 详解西游记</title>
@@ -20,7 +20,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="一、后台类型分类 · 二、有后台 vs 无后台 · 三、典型案例对比 · 详解西游记">
     <meta property="og:description" content="一、后台类型分类 · 二、有后台 vs 无后台 · 三、典型案例对比 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -472,7 +472,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -511,11 +511,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -706,6 +706,8 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+        /* W867 B4 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
+        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1254,9 +1256,9 @@ td.num, th.num {
         /* e-track-exempt: chart-data-colors 2 处 */
         /* === 仅本页特有样式 === */
         .container {
-            max-width: 1280px;
+            max-width: var(--container-content);
             margin: -30px auto 60px;
-            padding: 0 24px;
+            padding: 0 var(--space-6);
             position: relative;
             z-index: 2;
         }
@@ -1289,7 +1291,7 @@ td.num, th.num {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
             gap: 16px;
-            margin-bottom: 32px;
+            margin-bottom: var(--space-7);
         }
         .kpi-card {
             background: var(--paper);
@@ -1317,7 +1319,7 @@ td.num, th.num {
             font-weight: 600;
             color: var(--ink);
             line-height: 1.2;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .kpi-card .desc {
             font-size: 0.85rem;
@@ -1329,7 +1331,7 @@ td.num, th.num {
             border-radius: var(--radius-md);
             padding: 28px;
             box-shadow: var(--shadow);
-            margin-bottom: 24px;
+            margin-bottom: var(--space-6);
         }
         .section-title {
             font-size: 1.3rem;
@@ -1344,13 +1346,13 @@ td.num, th.num {
         .section-sub {
             font-size: 0.88rem;
             color: var(--ink-soft);
-            margin-bottom: 20px;
+            margin-bottom: var(--space-5);
         }
         .definition {
             background: var(--paper);
             border-left: 4px solid var(--accent-soft);
-            padding: 12px 16px;
-            margin-bottom: 20px;
+            padding: var(--space-4) 16px;
+            margin-bottom: var(--space-5);
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
             font-size: 0.92rem;
             color: var(--ink-soft);
@@ -1360,19 +1362,19 @@ td.num, th.num {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: var(--space-5);
+            margin-bottom: var(--space-5);
         }
         .chart-title {
             font-size: 1rem;
             font-weight: 600;
             color: var(--ink);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .chart-caption {
             font-size: 0.82rem;
             color: var(--ink-soft);
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
         }
         .chart-svg {
             max-width: 100%;
@@ -1408,11 +1410,11 @@ td.num, th.num {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.88rem;
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         table.data-table th,
         table.data-table td {
-            padding: 10px 12px;
+            padding: 10px var(--space-4);
             text-align: left;
             border-bottom: 1px solid var(--line);
             vertical-align: top;
@@ -1442,7 +1444,7 @@ td.num, th.num {
         }
         .insights-list li {
             counter-increment: insight;
-            padding: 12px 16px 12px 48px;
+            padding: var(--space-4) 16px var(--space-4) var(--space-9);
             position: relative;
             border-bottom: 1px dashed var(--line);
             font-size: 0.92rem;
@@ -1477,14 +1479,14 @@ td.num, th.num {
         .case-card .case-name {
             font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .case-card .case-badge {
             font-size: 0.72rem;
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-lg);
             font-family: "JetBrains Mono", "Consolas", monospace;
             font-weight: 600;
@@ -1506,7 +1508,7 @@ td.num, th.num {
         .case-card .case-row {
             font-size: 0.82rem;
             color: var(--ink-soft);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .case-card .case-row strong {
             color: var(--ink);
@@ -1521,9 +1523,9 @@ td.num, th.num {
             font-style: italic;
         }
         footer {
-            max-width: 1280px;
-            margin: 40px auto 0;
-            padding: 24px;
+            max-width: var(--container-content);
+            margin: var(--space-8) auto 0;
+            padding: var(--space-6);
             border-top: 1px solid var(--line);
             font-size: 0.82rem;
             color: var(--ink-soft);
@@ -1545,7 +1547,7 @@ td.num, th.num {
             .chart-block { padding: 14px; }
             table.data-table { font-size: 0.78rem; }
             .case-grid { grid-template-columns: 1fr; }
-            .insights-list li { padding: 10px 12px 10px 36px; }
+            .insights-list li { padding: 10px var(--space-4) 10px 36px; }
         }
         .skip-link {
             position: absolute;
@@ -1553,7 +1555,7 @@ td.num, th.num {
             left: 0;
             background: var(--accent-2);
             color: var(--paper);
-            padding: 8px 16px;
+            padding: var(--space-3) 16px;
             z-index: 100;
             text-decoration: none;
             border-radius: 0 0 var(--radius-md) 0;
@@ -1614,7 +1616,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <p class="subtitle">坐骑下凡·有背景妖怪的命运透视</p>
     </section>
 
-    <main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+    <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice">
             本页是「妖怪社会学」的专题深化，聚焦全书最尖锐的讽刺——妖怪的生死不取决于实力，而取决于后台。数据基于《西游记》原著 100 回，共统计 69 名妖怪。统计口径说明：「后台分类存活率」按妖怪所属后台类型聚合，「处置方式计数」按最终结局聚合，两类口径存在 ±2 名交叉误差（逃脱类妖怪的后台归属判定差异所致），不影响核心结论。
         </div>
@@ -1743,8 +1745,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
         
-            <a href="../en/monster-background.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="../en/monster-background.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 <div class="chart-tooltip" id="tooltip" role="tooltip" aria-hidden="true"></div>
 
@@ -1883,7 +1885,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     // ===== Main render =====
     async function main() {
         if (typeof d3 === 'undefined') {
-            document.getElementById('kpi-row').innerHTML = '<p style="color:#c8463a;padding:12px;">图表库（D3.js）加载失败，请检查网络连接后刷新。</p>';
+            document.getElementById('kpi-row').innerHTML = '<p style="color:#c8463a;padding:var(--space-4);">图表库（D3.js）加载失败，请检查网络连接后刷新。</p>';
             return;
         }
         const baseUrl = 'json/';

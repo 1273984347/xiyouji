@@ -79,6 +79,60 @@
     }
    ],
    "note": "B3 人物主线批增补；ai-dialogue 的 4 个 step-num 徽章已整改（转淡底）不在此列。"
+  },
+  "W867": {
+   "measured_at": "2026-10-22",
+   "exemptions": [
+    {
+     "page": "data/monster-ecology-network.html",
+     "cls": "button.tab-btn.active",
+     "count": 1,
+     "reason": "选中态实底：组件卡③明定 --accent 底"
+    },
+    {
+     "page": "data/monster-sociology.html",
+     "cls": "div.signal-card.s-active",
+     "count": 3,
+     "reason": "状态编码：signal-card 三态（s-active/s-passive/s-external）之一"
+    },
+    {
+     "page": "data/monster-victims-network.html",
+     "cls": "div.victim-card",
+     "count": 1,
+     "reason": "高亮标记卡（单例·语义高亮）"
+    },
+    {
+     "page": "data/monster-victims-network.html",
+     "cls": "div.swatch-bar",
+     "count": 1,
+     "reason": "图例色块：数据语义"
+    },
+    {
+     "page": "data/ecology.html",
+     "cls": "span.damage-pill.damage-high",
+     "count": 9,
+     "reason": "伤害等级编码（high/mid/low 三档之一）·数据语义"
+    },
+    {
+     "page": "data/ecology.html",
+     "cls": "div.compare-card.invasive",
+     "count": 1,
+     "reason": "状态变体（invasive vs native）·数据语义"
+    },
+    {
+     "page": "data/heaven-power-network.html",
+     "cls": "div.role-card.r-king",
+     "count": 1,
+     "reason": "角色编码（r-king 用 --chart-1 调色板）·数据语义"
+    },
+    {
+     "page": "data/underworld-power-network.html",
+     "cls": "div.role-card.r-king",
+     "count": 1,
+     "reason": "角色编码（同上）·数据语义"
+    }
+   ],
+   "note": "B4 增补·判据：同一组件颜色随数据值变 = 数据语义（进册）；通用组件固定朱砂 = 装饰（收敛）。"
   }
  },
  "note": "裁决 2「豁免清单落 scripts/output/」登记簿：W864 首批建册，随批递增、条目随迁移整改递减。"
