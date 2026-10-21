@@ -104,6 +104,7 @@ EXPECTED_SECTION_NAMES = [
     "目录文档",
     "搜索索引",
     "性能影子",
+    "计划方案合规",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
@@ -121,7 +122,7 @@ _SITE_FILES_RE = re.compile(
     r"^(site/.+\.(html|css|js|xml)|dataset/.+\.json|scripts/output/data/.+\.json)$")
 SCOPE_DOCS_SECTIONS = {
     "docs链接", "治理契约", "索引健康", "元信息块", "术语一致", "引文核验",
-    "W区间字面量", "文档口径", "CLAUDE速查", "搜索索引",
+    "W区间字面量", "文档口径", "CLAUDE速查", "搜索索引", "计划方案合规",
 }
 SCOPE_SITE_SECTIONS = {
     "双源漂移", "CSP漂移", "腐蚀插件", "内联语法", "CSS平衡", "token覆盖",
@@ -608,6 +609,12 @@ _STRICT_GATES = [
                 fail_msg="性能影子槽采集面缺失（perf.yml collect.url 的页面不在了·先修断链再看数字）",
                 marker_msg="性能影子槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
                 ok_msg="性能影子槽通过（%s）", ok_line=-1),
+    _StrictGate(section="计划方案合规", script="check_plan_template.py", args=("--gate",), timeout=120,
+                marker="---- 第 48 门禁 计划方案合规：",
+                crash_msg="计划方案合规槽执行异常（第 48 槽·crash 即拦）: %s",
+                fail_msg="计划方案模板符合性不达标（新增/修改的计划方案文件引入了缺失判据·补齐后重跑）",
+                marker_msg="计划方案合规槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+                ok_msg="计划方案合规槽通过（%s）", ok_line=-1),
 ]
 
 # ---- 注册表派生与一致性防线（W781 R-1·挂槽「五处同改」收敛）----
