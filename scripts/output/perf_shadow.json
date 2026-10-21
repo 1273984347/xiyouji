@@ -952,6 +952,74 @@
         }
       ],
       "lhci": null
+    },
+    {
+      "batch": "W874",
+      "date": "2026-10-22",
+      "captured_at": "2026-10-22T07:50:02",
+      "pages": [
+        {
+          "url": "dashboard.html",
+          "tier": "std",
+          "exists": true,
+          "html_bytes": 92445,
+          "head_bytes": 25640,
+          "inline_script_bytes": 25067,
+          "local_dep_bytes": 378050,
+          "local_dep_count": 9,
+          "remote_refs": 0,
+          "blocking_head_refs": 3
+        },
+        {
+          "url": "index.html",
+          "tier": "std",
+          "exists": true,
+          "html_bytes": 52394,
+          "head_bytes": 21198,
+          "inline_script_bytes": 18214,
+          "local_dep_bytes": 84325,
+          "local_dep_count": 6,
+          "remote_refs": 0,
+          "blocking_head_refs": 3
+        },
+        {
+          "url": "data/timeline.html",
+          "tier": "std",
+          "exists": true,
+          "html_bytes": 95747,
+          "head_bytes": 58733,
+          "inline_script_bytes": 27436,
+          "local_dep_bytes": 371963,
+          "local_dep_count": 9,
+          "remote_refs": 0,
+          "blocking_head_refs": 5
+        },
+        {
+          "url": "data/character-relationship-3d.html",
+          "tier": "3d",
+          "exists": true,
+          "html_bytes": 81245,
+          "head_bytes": 50241,
+          "inline_script_bytes": 20402,
+          "local_dep_bytes": 975408,
+          "local_dep_count": 10,
+          "remote_refs": 0,
+          "blocking_head_refs": 5
+        },
+        {
+          "url": "data/text-search.html",
+          "tier": "std",
+          "exists": true,
+          "html_bytes": 69386,
+          "head_bytes": 57451,
+          "inline_script_bytes": 446,
+          "local_dep_bytes": 92257,
+          "local_dep_count": 8,
+          "remote_refs": 0,
+          "blocking_head_refs": 5
+        }
+      ],
+      "lhci": null
     }
   ],
   "note": "性能影子槽基线（W849 建）：只采静态成本代理，不判红、不设阈值；真 LCP/CLS/TBT 由 perf.yml 在 CI 采，可经 --ingest 并入同一批样本。"

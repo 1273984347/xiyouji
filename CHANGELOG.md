@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W864），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W874），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,100 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W874（2026-10-22）：递延版段补写批（W865-W873 九段回写·号序链重新接上）
+
+> **来源**：用户令「按建议走」，选「补段批先做」——W865（首页三任务区重组）与 B5-B10 六批全部递延，顶段停在 W864，`batch_cascade` 的「顶段+1」断言会拦住 B11。
+> - **文件**：CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w874_spec.json、docs/00-导读/W批次编号对账表.md。
+> - **做法**：`backfill_changelog.py`（W842 建）第三次上岗。待补九段（W865-W873）——九批 spec 全部在位，无需新建补位 spec；工具按号序把每段插到「第一个号小于自己的段」之前，file-index 同批回写，规则行 W001-W864 → W001-W873。
+> - **本批自身**：顶段推进到 W873 后，本批经 `batch_cascade` 正常立 W874 段并把「当前态六面」统一推进到 W874。
+> - **不改历史**：只插入、不清洗、不重排、不改写既有段任何字符；不动页面与门禁判据。
+> - **判词**：CHANGELOG 162→171 段 + 本批 W874 段（共 172）· file-index 同批 162→171 · 号序降序完好 · 九批的豁免区登记与对账表状态同步翻转。
+### W873（2026-10-22）：设计迁移 B10 工具与检索 8 页（容器归并·朱砂实底合规·间距令牌化）
+
+> **来源**：用户令「B5–B10 一次做完」，六批连做末片。W873 = W826 §6 第十片（工具与检索 8 页）——**数据+根 95 页迁移清单至此收口**。
+> - **文件**：site/data/data-explorer.html、site/data/graph-explorer.html、site/data/search.html、site/data/material-archaeology.html、site/data/ming-political-thought-comparison.html、site/data/power-resources.html、site/data/magic-system.html、site/data/theological-intervention-network.html、scripts/output/_w873_spec.json、scripts/output/_w873_accent_audit.json、scripts/output/_w873_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
+> - **A 容器**：七页 1320px 令牌化；**theological-intervention-network 的 `.container` 1280 → `var(--container-content)` 1120**——§3.3「data 三页 1280」第三户（三户至此全部归并：semantic-network W866 / monster-background W867 / 本页）。
+> - **B 朱砂实底**：KPI 顶条收敛四页（material 4→1 · ming 6→1 · theological 5→1）；**material-archaeology 的 8 张 artifact-card 网格顶条按裁决 2 收敛**（d3 生成·8 张全同色=装饰网格）；`.seal` 五页转淡底。**15 处语义色片进豁免登记簿 W873 分册**：rank-badge rank-S+ ×5（法术等级）· tag.palace ×3 · vt-btn/keytab.active ×4 · a.active ×2 · faction-card ×1。
+> - **D 间距**：186 处（值保留）。
+> - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 135 处·material 48 / magic-system 43 / power-resources 38）。
+> - **验收**：J2 大 before + 本批 after 双主题对拍 + 全量归渠。**判词：PASS——216 处 diff 全部归渠零剩余**（5 页有 diff·data-explorer / graph-explorer / search 纯豁免与零变化令牌化故 0 diff）：顶条 88 处 + `.seal` 110 处 + 标签重判连带 10 处（material / theological）+ **容器归并连带 8 处**（theological 居中 margin 0→3.2px）。D 186 处零 diff；元素数双采无异常。
+### W872（2026-10-22）：设计迁移 B9 视觉与叙事实验 10 页（容器令牌化·朱砂实底合规·间距令牌化）
+
+> **来源**：用户令「B5–B10 一次做完」，六批连做第五片。W872 = W826 §6 第九片（视觉与叙事实验 10 页）。
+> - **文件**：site/data/aesthetics.html、site/data/visual-art.html、site/data/cross-time-danmaku.html、site/data/emotional-heatmap.html、site/data/chart-design.html、site/data/perf-canvas-rendering.html、site/data/global-pattern.html、site/data/four-dimensional-research-network.html、site/data/four-heavenly-kings-artifacts.html、site/data/tag-cloud.html、scripts/output/_w872_spec.json、scripts/output/_w872_accent_audit.json、scripts/output/_w872_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
+> - **A 容器**：十页 1320px 令牌化（含 cross-time-danmaku 与 tag-cloud 两个级联页脚面页·只动 CSS 不动页脚）。
+> - **B 朱砂实底**：KPI 顶条收敛六页（aesthetics 4→1 · chart-design 5→1 · global 4→1 · four-heavenly 5→1）；`.seal` 十页转淡底。**29 处语义色片进豁免登记簿 W872 分册**：scene-bar ×4（热力图行内数据条）· sc-cat ×5 · rc-size ×5（字号档位图例）· domino-card ×4（连锁隐喻展示卡·非列表网格）· domino-hardship ×3 · 分类卡徽章 ×4 · 选中态 ×2 · 主行动按钮 ×2。
+> - **D 间距**：233 处（值保留）。
+> - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 111 处·chart-design 与 emotional-heatmap 各 30 处）。
+> - **验收**：J2 大 before + 本批 after 双主题对拍 + 全量归渠。**判词：PASS——344 处 diff 全部归渠零剩余**：顶条 108 处 + `.seal` 220 处 + 标签重判连带 16 处（global-pattern / four-dimensional 各 2 个 SVG 标签 9↔10px）。D 233 处零 diff；元素数双采无异常。
+### W871（2026-10-22）：设计迁移 B8 跨学科与实验 10 页（容器令牌化·朱砂实底合规·间距令牌化）
+
+> **来源**：用户令「B5–B10 一次做完」，六批连做第四片。W871 = W826 §6 第八片（跨学科与实验 10 页）。
+> - **文件**：site/data/cognitive-psychology.html、site/data/social-media.html、site/data/business-model.html、site/data/game-webnovel.html、site/data/mbti-evolution.html、site/data/risk-project.html、site/data/concept-device.html、site/data/workplace.html、site/data/ethics-consumption.html、site/data/criticism-history.html、scripts/output/_w871_spec.json、scripts/output/_w871_accent_audit.json、scripts/output/_w871_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
+> - **A 容器**：十页 1320px 令牌化。
+> - **B 朱砂实底**：KPI 顶条收敛六页（social 4→1 · business 1 · game 5→1 · mbti 4→1 · workplace 4→1 · ethics 5→1）；`.seal` 十页转淡底。**42 处语义色片进豁免登记簿 W871 分册**：cc-stat-fill ×10（数值进度条）· alert-badge ×7 · ipo-outcome ×5 · cipher-back ×5（翻卡背面皮肤·非网格顶条）· idev ×5 · veg-badge ×4 · 分类卡 ×3 · platform-badge ×1 · stage-btn.active ×1。
+> - **D 间距**：350 处（值保留·六批最多）。
+> - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 259 处）。
+> - **验收**：J2 大 before + 本批 after 双主题对拍 + 全量归渠。**判词：PASS——308 处 diff 全部归渠零剩余**：顶条 80 处 + `.seal` 220 处 + 标签重判连带 8 处（social-media / workplace 各 2 个 SVG 标签 9→10px）。D 350 处零 diff；元素数双采无异常。
+### W870（2026-10-22）：设计迁移 B7 文本与思想 10 页（容器令牌化·朱砂实底合规·间距令牌化）
+
+> **来源**：用户令「B5–B10 一次做完」，六批连做第三片。W870 = W826 §6 第七片（文本与思想 10 页）。
+> - **文件**：site/data/text-evolution.html、site/data/text-search.html、site/data/linguistics.html、site/data/famous-time-travel.html、site/data/cultural-misreading.html、site/data/century-dialogue.html、site/data/counterfactual.html、site/data/philosophy.html、site/data/jurisprudence.html、site/data/karma-reincarnation.html、scripts/output/_w870_spec.json、scripts/output/_w870_accent_audit.json、scripts/output/_w870_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
+> - **A 容器**：十页 1320px 令牌化。
+> - **B 朱砂实底**：KPI 顶条收敛四页（evolution 1 · linguistics 3→1 · misreading 4→1 · counterfactual 1 · karma 1）；`.seal` 十页转淡底。**33 处语义色片进豁免登记簿 W870 分册**：evo-step.first ×6（演化链条首步·位置编码）· linguistics 无类名色片 ×5 + mbti-card ×1 + char-card.c-buddhist ×3 · counterfactual validity-high ×7 · jurisprudence severity-pill ×8 + artifact-card.c-low ×2 · karma char-card.c-chusheng ×1。
+> - **D 间距**：266 处（值保留）。
+> - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 175 处·philosophy 46 / text-evolution 39 / cultural-misreading 21 为最多三页）。
+> - **验收**：J2 大 before + 本批 after 双主题对拍 + 全量归渠。**判词：PASS——260 处 diff 全部归渠零剩余**：顶条 36 处 + `.seal` 220 处 + 标签重判连带 4 处（text-evolution 2 个 SVG 标签 9→10px）。D 266 处零 diff；元素数双采无异常。
+### W869（2026-10-22）：设计迁移 B6 叙事学 10 页（容器令牌化·朱砂实底合规·间距令牌化）
+
+> **来源**：用户令「B5–B10 一次做完」，六批连做第二片。W869 = W826 §6 迁移清单第六片（叙事学 10 页）。
+> - **文件**：site/data/narrative-experiment.html、site/data/narrative-rhythm-curve.html、site/data/narratology-12d-network.html、site/data/narratology-16d-network.html、site/data/intertextuality-network.html、site/data/deconstruction.html、site/data/six-senses-narratology-network.html、site/data/poetry-rhythm-analysis.html、site/data/music-structure.html、site/data/language-style-radar.html、scripts/output/_w869_spec.json、scripts/output/_w869_accent_audit.json、scripts/output/_w869_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
+> - **A 容器**：十页 1320px 令牌化（零视觉变化·本片无 1280 归并）。
+> - **B 朱砂实底**：KPI 顶条收敛九页（5/6/6/6/4/6/5/1/5→1）；**narrative-experiment 的 12 张 narr-card 网格顶条按裁决 2 收敛**（`.narr-card ~ .narr-card` 降 1px 线——12 张全同色是装饰网格、非数据编码，判据见豁免登记簿 W867 分册注释）；`.seal` 徽章九页转淡底。**50 处语义色片进豁免登记簿 W869 分册**：sc-chip ×4 / sc-cat / gh-tag / hc-owner ×2 / tag ×5（deconstruction）/ **tag ×35（music-structure 曲牌分类）** / progress-fill / 主行动 btn。
+> - **D 间距**：211 处精确等值字面量 → `var(--space-N)`（值保留）。
+> - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 128 处·为六批最多——music-structure 65 处、narrative-experiment 37 处）。
+> - **验收**：J2 大 before + 本批 after 双主题对拍 + diff 全量归渠。**判词：PASS——446 处 diff 全部归渠零剩余**：顶条收敛 222 处（KPI 九页 47 张非首卡 + narr-card 网格 11 张 × 2 属性 × 双主题·同组聚合）+ `.seal` 220 处（10 页 × 2 元素 × 6 属性 × 双主题）+ 标签重判连带 4 处（deconstruction 2 个 SVG 标签 9→10px·顶条回流后修复器重判）。**D 211 处零 diff**；元素数双采无异常。
+### W868（2026-10-22）：设计迁移 B5 取经与行迹 10 页（容器令牌化·朱砂实底合规·间距令牌化）
+
+> **来源**：用户令「B5–B10 一次做完」，六批连做第一片。W868 = W826 §6 迁移清单第五片（取经与行迹 10 页）。
+> - **文件**：site/data/guanyin-six-roles-network.html、site/data/pilgrim-team-dynamic-network.html、site/data/pilgrim-team-psychology-arc.html、site/data/journey-route.html、site/data/journey-geo-3d.html、site/data/journey-geo-semiotics.html、site/data/journey-map-interactive.html、site/data/journey-spacetime.html、site/data/customs-pass-route.html、site/data/cave-estate.html、scripts/output/_w868_spec.json、scripts/output/_w868_accent_audit.json、scripts/output/_w868_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
+> - **A 容器**：十页 1320px 字面量 → `var(--container-wide)`（零视觉变化·本片无 1280 归并）。
+> - **B 朱砂实底**：KPI 顶条收敛六页（guanyin 6→1 · dynamic 5→1 · psychology 5→1 · route 4→1 · map-interactive 5→1 · spacetime 4→1 · customs 4→1 · cave-estate 4→1）；`.seal` 徽章十页转淡底。**26 处语义变体进豁免登记簿 W868 分册**：role-card 角色条 / swatch-bar 图例 / ctrl-btn.active / phase-card.active / progress-fill ×2（进度数值） / 主行动 btn / **tag.king ×19（妖王分类色片·与 B2 的 .tag 同型）**。
+> - **冻结解除**：journey-geo-semiotics——W851 审计发现其预支 `var(--space-N)` 且回退值与终稿刻度不符，当时冻结为字面值；本批作为迁移批正式消费 v4 令牌（mech-card 单条不超限未动）。
+> - **D 间距**：166 处精确等值字面量 → `var(--space-N)`（值保留）。
+> - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 64 处）。
+> - **验收**：J2 探针（大 before 68 页同源 + 本批 after 10 页）双主题对拍 + diff 全量归渠。**判词：PASS——360 处 diff 全部归渠零剩余**：KPI 顶条 116（58 张非首卡 × 2 属性 × 双主题）+ `.seal` 220 + 顶条回流连带 24（cave-estate 16 + journey-route 8：SVG 标签 font-size 9↔10 / 11.2→9px 重判）。D 166 处零 diff；元素数双采无异常。
+### W867（2026-10-22）：设计迁移 B4 妖怪与神力 10 页（容器归并·朱砂实底合规·间距令牌化）
+
+> **来源**：用户令「开始」，接 W866（B3）之后。W867 = W826 §6 迁移清单第四片（妖怪与神力 10 页）。
+> - **文件**：site/data/monster-background.html、site/data/monster-capability-radar.html、site/data/monster-ecology-network.html、site/data/monster-female-network.html、site/data/monster-hierarchy-network.html、site/data/monster-sociology.html、site/data/monster-victims-network.html、site/data/ecology.html、site/data/heaven-power-network.html、site/data/underworld-power-network.html、scripts/output/_w867_spec.json、scripts/output/_w867_accent_audit.json、scripts/output/_w867_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
+> - **A 容器**：九页 1320px 令牌化；**monster-background 的 `.container` 与 `footer` 两处 1280 → `var(--container-content)` 1120**——§3.3「data 三页 1280」的第二户，页脚随容器对齐一并归并（否则页脚比正文宽 160px）。
+> - **B 朱砂实底**：KPI 顶条收敛六页（capability-radar 4→1 · female 6→1 · hierarchy 4→每行首卡保留 · victims 6→1 · heaven 4→每行首卡 · underworld 4→每行首卡）；`.seal` 徽章十页转淡底。**语义变体条进豁免登记簿**（`_w864_accent_exemptions.json` 的 W867 分册·18 处）：`.signal-card.s-active`（状态三态之一）、`.compare-card.invasive`（入侵态）、`.role-card.r-king`（角色编码·用 `--chart-1` 调色板）、`.victim-card`（高亮标记）、`.swatch-bar`（图例色块）、`.tab-btn.active`（选中态）、`.damage-pill.damage-high`（伤害等级编码 ×9）。
+> - **发现一处跨批线索**：`role-card.r-judge` 用 `var(--chart-3)` 编码觐官角色——**图表调色板被 UI 消费**，chart-3 值切换专项批须连带审计这类点（不只 SVG 图表）。
+> - **D 间距**：219 处精确等值字面量 → `var(--space-N)`（值保留·零视觉变化）。
+> - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 54 处）。
+> - **验收**：J2 探针 23 页（10 + 13 金丝雀·index 已由 W865 提交、回归金丝雀位）双主题前后对拍 + diff 全量归渠；金丝雀零 diff；令牌化后先 `generate_csp.py` 再采集。**判词：PASS——372 处 diff 全部归渠零剩余**：KPI 顶条收敛 140 处（70 张非首卡 × 2 属性 × 双主题） + `.seal` 徽章 220 处（10 页 × 元素 × 6 属性 × 双主题）+ 容器归并连带 8 处（monster-background 页脚 1280→1120 后居中 margin 0→80px = (1280−1120)/2 精确对账）+ 顶条回流连带 4 处（capability-radar 2 个 SVG 标签 font-size 10→9px：顶条降 2px 后 chart-audit 重判为需压缩）。**D 间距 219 处零 diff**（值保留实证）；金丝雀 13 页 0 diff；元素数双采一致（25,410 == 25,410）。
+### W866（2026-10-22）：设计迁移 B3 人物主线 9 页（容器归并·朱砂实底合规·间距令牌化）
+
+> **来源**：用户令「开始」，接 W864（B2）之后。W866 = W826 §6 迁移清单第三片（人物主线 9 页）。
+> - **文件**：site/data/character-appearance.html、site/data/character-presence-timeline.html、site/data/character-semantic-network.html、site/data/character-dynamic-network.html、site/data/character-sentiment-arc.html、site/data/character-relationship-3d.html、site/data/character-relationship-3d-view.html、site/data/dialogue-sentiment.html、site/data/ai-dialogue.html、scripts/output/_w866_spec.json、scripts/output/_w866_accent_audit.json、scripts/output/_w866_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
+> - **A 容器**：八页 1320px 字面量 → `var(--container-wide)`（零视觉变化）；**character-semantic-network 的 `.container` 1280 → `var(--container-content)` 1120**——§3.3 枚举的「data 三页 1280 归并」之一，本批唯一有视觉位移的容器改动（−160px 居中）。
+> - **B 朱砂实底**：KPI 顶条收敛四页（appearance 4→1 · semantic-network 6→1 · dynamic-network 4→1 · relationship-3d 5→1，非首卡降 1px 线）；`.seal` 徽章八页有效（第九页 character-relationship-3d-view 的规则无 DOM 消费者）转 `--accent-tint` 淡底 + 朱砂字；**ai-dialogue 的 4 个 step-num 编号徽章**（24×24 圆·朱砂底白字）转淡底 + 朱砂字（裁决 2 徽章实底规则）。豁免登记簿升级为多批结构并增补 W866 条目（选中态 4 处·负向指示 1 处·主行动按钮 1 处）。
+> - **D 间距**：149 处精确等值字面量 → `var(--space-N)`（值保留·零视觉变化）。
+> - **C 渠与 `--chart-3` 值切换继续 defer** 至「对比度专项批」（本批文字落 bg 共 58 处·跨多规则·同 W864 口径）。
+> - **验收**：J2 探针 23 页（9 + 14 金丝雀·index.html 因 W865 并行在途剔出）双主题前后对拍 + diff 全量归渠；金丝雀零 diff。**施工纪律（W864 教训）**：令牌化可能改到内联脚本模板字面量里的 CSS，采集前必先 `generate_csp.py` 重算哈希。**判词：PASS——296 处 diff 全部归渠零剩余**：KPI 顶条收敛 68 处（17 张非首卡 × 2 属性 × 双主题） + `.seal` 徽章 204 处（8 页有效 × 2 元素 × 6 属性 × 双主题·character-relationship-3d-view 的 .seal 为死规则无 DOM 消费者） + ai-dialogue step-num 徽章 20 处（字色 white→accent 及 currentColor 边框连带）+ character-semantic-network 容器居中位移 4 处（1280→1120 后 margin 0→3.2px·A 渠唯一真实位移）。**D 间距 149 处零 diff**（值保留实证）；金丝雀 14 页 0 diff；元素数双采完全一致（24,996 == 24,996）——CSP 先重算再采集的纪律生效。
+### W865（2026-10-22）：首页三任务区重组 + 目录页检索动线批（接 W854 审计的 D1/D2 裁决）
+
+> **来源**：用户 2026-10-22 00:39「按你的建议来」（W854 界面布局审计的 D1/D2 裁决获批）+ 02:45「现在做」（开工授权）；框架交付物 T-08。
+> - **文件**：site/index.html、site/reader/**（622 页中 101 页 INLINED 块同步 + 总目录页新功能）、site/js/reader-enhance.js、site/data/search.html、site/en/search.html、scripts/build_reader.py、scripts/_w865_layout_probe.mjs、scripts/output/_w865_layout_metrics.json、scripts/output/_w865_spec.json、scripts/index.md、scripts/output/index.md、scripts/output/stats.json、docs/11-方案报告/计划方案/T08-任务计划执行与经验沉淀报告-2026-10-22.md、docs/11-方案报告/README.md、docs/INDEX.md、STRUCTURE.md、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md、docs/00-导读/W批次编号对账表.md。
+> - **D1 首页**（接 W854 审计 S1/S2/S3/S4）：按「读 / 查 / 看」三任务区重组——① 顶层块 9 → 6（masthead / 读区 / 装饰 SVG 转场 / 查资料区 / 开篇诗转场 / 看数据与工具区）；② 三区各恰 1 个 h2（从哪一回读起 / 查资料 / 看数据与工具）；③ 站内搜索由首屏英雄区降为「查资料」区内的工具条（h2 → 工具级标题，治「占满首屏的标题比内容标题小 12px」的层级倒挂）；④ 装饰 SVG 与开篇诗移出首屏（转场位）；⑤ stats 收进「看数据与工具」区；⑥ ≤768 档 mega 数字降为紧凑计量（桌面保留品牌大字）。**实测**（无头 Chrome·375/768/1440）：顶层块 6 · 首屏可见 h2 = 1（内容类·「从哪一回读起」）· 首屏可见内容入口链接 4 / 5 / 2（改前 0）· 首屏内容起点 497 / 550 / 564px（改前 857 / 1102）· @375 下 h2−h3 字号差 4px（改前 0px·同 20px）。
+> - **D2 目录页**（接 W854 审计 S8/S9）：加检索工具条——即时过滤 + 回号直达 + 6 组跳转锚点 + 命中计数。**目录页是生成产物**（`scripts/build_reader.py` 写）→ 改生成器不手改页面；逻辑落 `site/js/reader-enhance.js` 并以 DOM 守卫（`[data-catalog-tools]`）只对总目录页生效 → 其余 621 页行为零变化，且不写 inline script（守 CSP `script-src 'self'`）。**实测**：输入「42」命中 1 / 615 条 ·「孙悟空」命中 8 条 · 重置回 615 条 · 回号直达「100」定位到 `ch100.html`「第 100回 径回东土五圣成真」（到达第 100 回 = 1 次输入 + 1 次回车 = 2 次操作·原为滚 37 屏）。
+> - **重建纪律（关键）**：全量重建对现役 622 页产生 128,254 行漂移（超 T04 计划立的 2,000 行阈值）→ 漂移源是**后处理链注入**（CSP meta / SEO 块 / INLINED CSS 块）不在生成器输出里；实测 `inject_seo_head.py` + `inline_css.py` + `generate_csp.py` **幂等**（重跑 site/ 零变化）→ 「重建 + 三条链回注」后 621 页逐字节一致，101 页顺带同步了此前陈旧的 INLINED 块（缺 W856 的 `.brand-mark` 样式）·总 diff **1,063 行**（+955 / −108）在阈值内。
+> - **两次翻车与判据修正（留痕）**：① 首跑把 `/^\\d{1,3}$/` 写成双反斜杠 → 回号直达整条链路静默失效（过滤仍「看起来正常」·数字路径单独失效）；② 探针把 href **值**拿去匹配 `href="` 模式 → 首屏内容链接误报 0。两处都是**判据/实现层的转义错误**，不是产品缺陷——修法：正则一律单反斜杠 + 探针对属性值用 `^` 锚定。
+> - **本批边界**：既有计划方案文档 **0 处改动**（用户 2026-10-22 明令「计划方案先不做」）；不碰 `site/data/**`（并行 W864 在途·D4 另批）；不落段（CHANGELOG 顶段不变·指针面零改动·素材交 backfill 按号序补）。
+> - **验证**：无头 Chrome CDP 探针 `scripts/_w865_layout_probe.mjs` 实测双页面 5 组（首页 1440/768/375 + 目录页 1440/375）·度量落 `scripts/output/_w865_layout_metrics.json`；`generate_csp.py --check` 0 漂移；`check_structure.py` 结构平衡通过；全量档 `verify_delivery.py` 核心全部通过。
+> - **状态**：D1/D2 施工完成并经实测；D3（移动端卡片 1 列）/ D4（可视化页 KPI 降级·撞 W864 在途）/ D5（应用响应式）/ D6（死令牌清理）四批待另起。
 
 ### W864（2026-10-22）：设计迁移 B2 结构页 10 页（容器令牌化·朱砂实底合规·间距令牌化）
 
