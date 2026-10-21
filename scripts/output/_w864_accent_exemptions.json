@@ -1,23 +1,85 @@
 {
-  "batch": "W864",
-  "criterion": "W826 裁决 2：朱砂实底每页 ≤3 处（背景填充或 ≥2px 顶条·面积 >400px²）",
-  "measured_at": "2026-10-22",
-  "exemptions": [
-    {"page": "data/81-hardships.html", "cls": "span.tag", "count": 90,
-     "reason": "数据语义色片：cause/ending/difficulty 三列分类编码（与图例同源·图表语义·非界面装饰）"},
-    {"page": "data/relationships.html", "cls": "span.role-tag.primary", "count": 5,
-     "reason": "数据语义色片：势力阵营分类编码"},
-    {"page": "data/methodology-matrix.html", "cls": "span.quad-badge", "count": 6,
-     "reason": "数据语义徽章：象限分类编码"},
-    {"page": "data/methodology-matrix.html", "cls": "span.phase-badge", "count": 2,
-     "reason": "数据语义徽章：阶段分类编码"},
-    {"page": "data/81-hardships-view.html", "cls": "button.vt-btn", "count": 2,
-     "reason": "选中态实底：组件卡③（pill-tab active 底 --accent）明定·交互语义"},
-    {"page": "data/hardship-heatmap.html", "cls": "button.stage-btn.active", "count": 1,
-     "reason": "选中态实底：组件卡③同款明定"},
-    {"page": "data/hardship-difficulty-heatmap.html",
-     "cls": "button.dim-btn.active / button.sort-btn.active", "count": 2,
-     "reason": "选中态实底：组件卡③同款明定"}
-  ],
-  "note": "裁决 2 的「豁免清单落 scripts/output/」机制首批。数据语义色片按白名单「图表语义·不属界面装饰」豁免；选中态实底由组件卡③/④ 明定 --accent 底。本批已收敛的 KPI 顶条（每页留首卡）与 .seal 徽章（转淡底）不在此列——已整改。"
+ "criterion": "W826 裁决 2：朱砂实底每页 ≤3 处（背景填充或 ≥2px 顶条·面积 >400px²）",
+ "updated_at": "2026-10-22",
+ "batches": {
+  "W864": {
+   "measured_at": "2026-10-22",
+   "exemptions": [
+    {
+     "page": "data/81-hardships.html",
+     "cls": "span.tag",
+     "count": 90,
+     "reason": "数据语义色片：cause/ending/difficulty 三列分类编码（与图例同源·图表语义·非界面装饰）"
+    },
+    {
+     "page": "data/relationships.html",
+     "cls": "span.role-tag.primary",
+     "count": 5,
+     "reason": "数据语义色片：势力阵营分类编码"
+    },
+    {
+     "page": "data/methodology-matrix.html",
+     "cls": "span.quad-badge",
+     "count": 6,
+     "reason": "数据语义徽章：象限分类编码"
+    },
+    {
+     "page": "data/methodology-matrix.html",
+     "cls": "span.phase-badge",
+     "count": 2,
+     "reason": "数据语义徽章：阶段分类编码"
+    },
+    {
+     "page": "data/81-hardships-view.html",
+     "cls": "button.vt-btn",
+     "count": 2,
+     "reason": "选中态实底：组件卡③（pill-tab active 底 --accent）明定·交互语义"
+    },
+    {
+     "page": "data/hardship-heatmap.html",
+     "cls": "button.stage-btn.active",
+     "count": 1,
+     "reason": "选中态实底：组件卡③同款明定"
+    },
+    {
+     "page": "data/hardship-difficulty-heatmap.html",
+     "cls": "button.dim-btn.active / button.sort-btn.active",
+     "count": 2,
+     "reason": "选中态实底：组件卡③同款明定"
+    }
+   ],
+   "note": "裁决 2 的「豁免清单落 scripts/output/」机制首批。数据语义色片按白名单「图表语义·不属界面装饰」豁免；选中态实底由组件卡③/④ 明定 --accent 底。本批已收敛的 KPI 顶条（每页留首卡）与 .seal 徽章（转淡底）不在此列——已整改。"
+  },
+  "W866": {
+   "measured_at": "2026-10-22",
+   "exemptions": [
+    {
+     "page": "data/character-dynamic-network.html",
+     "cls": "button.stage-btn.active",
+     "count": 1,
+     "reason": "选中态实底：组件卡③明定 --accent 底"
+    },
+    {
+     "page": "data/character-relationship-3d-view.html",
+     "cls": "button.vt-btn / span.keytab.active",
+     "count": 3,
+     "reason": "选中态实底：组件卡③同款明定"
+    },
+    {
+     "page": "data/dialogue-sentiment.html",
+     "cls": "div.stat-card.negative",
+     "count": 1,
+     "reason": "数据语义：负向情绪指示条（数值编码·非装饰）"
+    },
+    {
+     "page": "data/ai-dialogue.html",
+     "cls": "button（主行动）",
+     "count": 1,
+     "reason": "主行动按钮实底：裁决 2「主行动区可带」"
+    }
+   ],
+   "note": "B3 人物主线批增补；ai-dialogue 的 4 个 step-num 徽章已整改（转淡底）不在此列。"
+  }
+ },
+ "note": "裁决 2「豁免清单落 scripts/output/」登记簿：W864 首批建册，随批递增、条目随迁移整改递减。"
 }

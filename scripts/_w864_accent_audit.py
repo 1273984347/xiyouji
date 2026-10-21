@@ -72,6 +72,9 @@ AUDIT_JS = """
 
 
 def main(argv):
+    global OUT
+    if "--out" in argv:
+        OUT = os.path.join(ROOT, argv[argv.index("--out") + 1])
     pages = DEFAULT_PAGES
     if "--pages" in argv:
         raw = argv[argv.index("--pages") + 1]

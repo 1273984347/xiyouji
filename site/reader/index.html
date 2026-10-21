@@ -20,7 +20,7 @@
 
 <script src="../js/theme-init.js"></script>
 <script src="../js/reader-enhance.js" defer></script>
-        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -518,6 +518,14 @@ h4 { font-size: 18px; font-weight: 500; }
     font-size: 13px;
     line-height: 1.1;
     text-align: center;
+    flex-shrink: 0;
+}
+/* W856 新品牌图形标（方向 H「山·门槛」·SVG 于 static/icons/logo-mark-light.svg）
+   —— 纯加法：.seal 保留，其余页面的旧印面标识不受影响 */
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: block;
     flex-shrink: 0;
 }
 .wordmark {
@@ -1313,8 +1321,39 @@ td.num, th.num {
 </head>
 <body>
 <main class="reader-wrap">
+  <style>
+    .catalog-tools { margin: 0 0 24px; padding: 14px 16px; background: var(--paper-warm);
+      border: 1px solid var(--line); border-radius: var(--radius-md); }
+    .catalog-tools-row { display: flex; gap: 10px; align-items: center; }
+    .catalog-tools input { flex: 1; min-width: 0; font-family: var(--font-sans); font-size: 15px;
+      padding: 9px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm);
+      background: var(--paper); color: var(--ink); }
+    .catalog-tools input:focus { outline: none; border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent); }
+    .catalog-count { font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint);
+      white-space: nowrap; }
+    .catalog-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .catalog-jump a { font-size: 13px; color: var(--accent-2); text-decoration: none;
+      border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 5px 12px;
+      background: var(--paper); }
+    .catalog-jump a:hover { border-color: var(--accent); color: var(--accent); }
+    .reader-idx li.is-flash > a { background: color-mix(in srgb, var(--accent) 16%, var(--paper));
+      border-color: var(--accent); }
+    .reader-idx li[hidden], .reader-group[hidden] { display: none; }
+    @media (max-width: 640px) {
+      .catalog-tools-row { flex-direction: column; align-items: stretch; }
+      .catalog-count { text-align: right; }
+    }
+  </style>
+  <div class="catalog-tools" data-catalog-tools>
+    <div class="catalog-tools-row">
+      <input id="catalogFilter" type="search" autocomplete="off" aria-label="按回号或关键词过滤目录" placeholder="输入回号（如 42）或人物 / 主题关键词">
+      <span class="catalog-count" data-role="count">全部 615 条</span>
+    </div>
+    <nav class="catalog-jump" aria-label="分组跳转"><a href="#catalog-group-0">逐回解读</a><a href="#catalog-group-1">人物深度</a><a href="#catalog-group-2">主题专题</a><a href="#catalog-group-3">文化背景</a><a href="#catalog-group-4">诗词歌赋</a><a href="#catalog-group-5">个人随笔</a></nav>
+  </div>
 <p><a href="themes-hub.html"><strong>主题专题导航 hub</strong>（209 篇·按族分组）</a></p>
-<div class="reader-group">逐回解读（100）</div>
+<div class="reader-group" id="catalog-group-0">逐回解读（100）</div>
 <ul class="reader-idx">
 <li><a href="ch001.html">第001回 灵根育孕源流出 心性修持大道生</a></li>
 <li><a href="ch002.html">第 002回 悟彻菩提真妙理 断魔归本合元神</a></li>
@@ -1417,7 +1456,7 @@ td.num, th.num {
 <li><a href="ch099.html">第099回 九九数完魔刬尽 三三行满道归根</a></li>
 <li><a href="ch100.html">第 100回 径回东土五圣成真</a></li>
 </ul>
-<div class="reader-group">人物深度（215）</div>
+<div class="reader-group" id="catalog-group-1">人物深度（215）</div>
 <ul class="reader-idx">
 <li><a href="people/万圣公主外传.html">万圣公主：碧波潭里那尾没有名字的红鲤</a></li>
 <li><a href="people/严嵩与牛魔王对照专题.html">严嵩与牛魔王对照专题</a></li>
@@ -1635,7 +1674,7 @@ td.num, th.num {
 <li><a href="people/黑熊精-方向二深化.html">黑熊精：一座山的守门人</a></li>
 <li><a href="people/黑熊精.html">黑熊精</a></li>
 </ul>
-<div class="reader-group">主题专题（209）</div>
+<div class="reader-group" id="catalog-group-2">主题专题（209）</div>
 <ul class="reader-idx">
 <li><a href="themes/不可靠叙述专题.html">不可靠叙述专题</a></li>
 <li><a href="themes/二十八星宿专题.html">二十八星宿——星图上的守望者</a></li>
@@ -1847,7 +1886,7 @@ td.num, th.num {
 <li><a href="themes/须菩提祖师-消失的师父.html">须菩提祖师：那个教会悟空一切，却消失在故事里的人</a></li>
 <li><a href="themes/黑神话拒绝金箍专题.html">黑神话拒绝金箍专题</a></li>
 </ul>
-<div class="reader-group">文化背景（34）</div>
+<div class="reader-group" id="catalog-group-3">文化背景（34）</div>
 <ul class="reader-idx">
 <li><a href="culture/三教合一明代思想史深化专题.html">三教合一明代思想史深化专题</a></li>
 <li><a href="culture/佛道思想.html">佛道思想</a></li>
@@ -1884,7 +1923,7 @@ td.num, th.num {
 <li><a href="culture/西游与禅宗公案专题.html">西游与禅宗公案：心印不传之妙 vs 内丹修炼次第</a></li>
 <li><a href="culture/西游与道教全真派专题.html">西游与道教全真派专题</a></li>
 </ul>
-<div class="reader-group">诗词歌赋（13）</div>
+<div class="reader-group" id="catalog-group-4">诗词歌赋（13）</div>
 <ul class="reader-idx">
 <li><a href="poetry/主题诗词创作.html">主题诗词创作</a></li>
 <li><a href="poetry/原著人物赋诗词赏析专题.html">原著人物赋诗词赏析专题</a></li>
@@ -1900,7 +1939,7 @@ td.num, th.num {
 <li><a href="poetry/西游诗词意象谱系专题.html">西游诗词意象谱系专题</a></li>
 <li><a href="poetry/西游诗词韵律分析专题.html">西游诗词韵律分析专题</a></li>
 </ul>
-<div class="reader-group">个人随笔（44）</div>
+<div class="reader-group" id="catalog-group-5">个人随笔（44）</div>
 <ul class="reader-idx">
 <li><a href="essays/现代视角解读.html">现代视角解读</a></li>
 <li><a href="essays/西游与AI时代.html">西游与 AI 时代</a></li>

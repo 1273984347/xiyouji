@@ -391,11 +391,59 @@ def _render_section_index(sub, cat_title, entries) -> None:
         encoding="utf-8", newline="\n")
 
 
+# W865 D2：总目录页检索工具条（样式只在本页生效·不进 page_shell·避免 622 页连带改写）
+CATALOG_TOOLS_CSS = """  <style>
+    .catalog-tools { margin: 0 0 24px; padding: 14px 16px; background: var(--paper-warm);
+      border: 1px solid var(--line); border-radius: var(--radius-md); }
+    .catalog-tools-row { display: flex; gap: 10px; align-items: center; }
+    .catalog-tools input { flex: 1; min-width: 0; font-family: var(--font-sans); font-size: 15px;
+      padding: 9px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm);
+      background: var(--paper); color: var(--ink); }
+    .catalog-tools input:focus { outline: none; border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent); }
+    .catalog-count { font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint);
+      white-space: nowrap; }
+    .catalog-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .catalog-jump a { font-size: 13px; color: var(--accent-2); text-decoration: none;
+      border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 5px 12px;
+      background: var(--paper); }
+    .catalog-jump a:hover { border-color: var(--accent); color: var(--accent); }
+    .reader-idx li.is-flash > a { background: color-mix(in srgb, var(--accent) 16%, var(--paper));
+      border-color: var(--accent); }
+    .reader-idx li[hidden], .reader-group[hidden] { display: none; }
+    @media (max-width: 640px) {
+      .catalog-tools-row { flex-direction: column; align-items: stretch; }
+      .catalog-count { text-align: right; }
+    }
+  </style>
+"""
+
+
+def _catalog_tools_html(groups, n_total):
+    """检索工具条：即时过滤框 + 命中计数 + 分组跳转锚点（W865 D2）"""
+    jump = "".join(
+        '<a href="#catalog-group-%d">%s</a>' % (i, title) for i, title in enumerate(groups))
+    return (
+        '  <div class="catalog-tools" data-catalog-tools>\n'
+        '    <div class="catalog-tools-row">\n'
+        '      <input id="catalogFilter" type="search" autocomplete="off" '
+        'aria-label="按回号或关键词过滤目录" '
+        'placeholder="输入回号（如 42）或人物 / 主题关键词">\n'
+        '      <span class="catalog-count" data-role="count">全部 %d 条</span>\n'
+        '    </div>\n'
+        '    <nav class="catalog-jump" aria-label="分组跳转">%s</nav>\n'
+        '  </div>\n' % (n_total, jump))
+
+
 def _render_root_index(sections_out, n_hub) -> None:
-    """总目录页：六板块分组（顶部附主题 hub 入口）（W733 提取）。"""
-    idx_body = '<p><a href="themes-hub.html"><strong>主题专题导航 hub</strong>（%d 篇·按族分组）</a></p>\n' % n_hub
-    for cat_title, entries in sections_out:
-        idx_body += f'<div class="reader-group">{cat_title}（{len(entries)}）</div>\n<ul class="reader-idx">\n'
+    """总目录页：六板块分组（顶部附主题 hub 入口）+ 检索工具条（W733 提取·W865 D2 扩展）"""
+    n_total = sum(len(entries) for _, entries in sections_out)
+    idx_body = CATALOG_TOOLS_CSS
+    idx_body += _catalog_tools_html([t for t, _ in sections_out], n_total)
+    idx_body += '<p><a href="themes-hub.html"><strong>主题专题导航 hub</strong>（%d 篇·按族分组）</a></p>\n' % n_hub
+    for gi, (cat_title, entries) in enumerate(sections_out):
+        idx_body += (f'<div class="reader-group" id="catalog-group-{gi}">'
+                     f'{cat_title}（{len(entries)}）</div>\n<ul class="reader-idx">\n')
         idx_body += "\n".join(f'<li><a href="{rel}">{disp}</a></li>' for rel, disp in entries)
         idx_body += "\n</ul>\n"
     (OUT / "index.html").write_text(

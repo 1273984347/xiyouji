@@ -64,10 +64,12 @@
 
         .ink-mountains { display: block; width: 100%; height: 100px; }
 
+        /* W865 D1：stats 收进「看数据与工具」区（原为首页顶层独立块） */
         .stats {
             display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
-            padding: 28px clamp(var(--space-6), 6vw, var(--space-12));
+            padding: var(--space-5) 0;
             border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+            margin-bottom: var(--space-6);
         }
         .stat .num {
             font-family: var(--font-mono); font-weight: 500; font-size: 30px;
@@ -86,17 +88,22 @@
             .masthead { flex-direction: column; align-items: flex-start; gap: 28px; }
             .masthead-mega { text-align: left; }
             .mega-row { justify-content: flex-start; }
+            /* W865 D1：移动端 mega 数字降为紧凑计量（首屏减法·@375 省约 50px·桌面保持品牌大字） */
+            .mega-num { font-size: clamp(40px, 12vw, 56px); line-height: 1; }
+            .mega-unit { font-size: clamp(18px, 5vw, 24px); }
+            .mega-label { margin-top: 4px; }
             .stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
             .tools-grid { grid-template-columns: 1fr; }
         }
 
         /* === 首屏提问框：问渡口 === */
+        /* W865 D1：搜索降为「查资料」区内的工具条（不再独占首屏·标题不再与内容区同级） */
         .ask-hero {
-            margin: 0 clamp(var(--space-6), 6vw, var(--space-12)) var(--space-2);
+            margin: 0 0 var(--space-6);
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-lg);
-            padding: clamp(var(--space-6), 4vw, var(--space-8));
+            padding: clamp(var(--space-5), 2.6vw, var(--space-6));
             box-shadow: var(--elev-1);
             position: relative;
             overflow: hidden;
@@ -106,7 +113,10 @@
             background: var(--accent);
         }
         .ask-hero .kicker { margin-bottom: 10px; color: var(--accent); }  /* ask-hero 底为 --paper·裁决 1：落 paper 仍用 --accent */
-        .ask-hero h2 { margin: 0 0 6px; font-size: clamp(20px, 3vw, 28px); }
+        .ask-toolbar-title {
+            margin: 0 0 6px; font-family: var(--font-serif); font-weight: 600;
+            font-size: clamp(18px, 2.2vw, 22px); color: var(--ink);
+        }
         .ask-hero .ask-sub { color: var(--ink-soft); font-size: 14px; margin-bottom: 18px; }
         .ask-form { display: flex; gap: 12px; max-width: 640px; }
         .ask-form input {
@@ -143,6 +153,13 @@
         .ask-chip:active { transform: scale(0.97); }
         .ask-note { margin-top: 14px; font-size: 12px; color: var(--ink-faint); }
         .ask-note code { background: var(--paper-warm); padding: 1px 6px; border-radius: var(--radius-sm); }
+        /* W865 D1：任务区内的段级小标题（h3·与卡片标题同级但有分隔线） */
+        .sub-head {
+            font-family: var(--font-serif); font-weight: 600;
+            font-size: clamp(20px, 2.4vw, 24px); color: var(--ink);
+            margin: var(--space-7) 0 var(--space-4);
+            padding-bottom: var(--space-2); border-bottom: 1px solid var(--line);
+        }
         .curated-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px;
         }
@@ -397,40 +414,11 @@
             </div>
         </section>
 
-        <svg class="ink-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-            <path d="M0 95 L180 32 L340 82 L500 20 L680 88 L860 45 L1040 92 L1220 35 L1440 80" fill="none" stroke="var(--ink)" stroke-opacity="0.10" stroke-width="1.5"/>
-            <path d="M0 110 L220 58 L400 105 L580 48 L780 104 L960 62 L1140 108 L1320 70 L1440 96" fill="none" stroke="var(--ink)" stroke-opacity="0.05" stroke-width="1"/>
-        </svg>
-
-        <section class="ask-hero" aria-label="站内搜索 · 首屏检索">
-            <p class="kicker">SEARCH · 站内搜索</p>
-            <h2>想查点什么？</h2>
-            <p class="ask-sub">输入任意西游人物、妖怪、器物、地名或主题，一站检索全站 772 篇解读文档与全部站内页面。</p>
-            <form class="ask-form" id="askForm" autocomplete="off">
-                <input id="askInput" type="text" name="q" placeholder="例如：孙悟空、紧箍咒、八十一难、狮驼岭…" aria-label="搜索内容">
-                <button type="submit">站内搜索</button>
-            </form>
-            <div class="ask-chips" role="list">
-                <span class="ask-chip" role="listitem" data-q="孙悟空">孙悟空</span>
-                <span class="ask-chip" role="listitem" data-q="八十一难">八十一难</span>
-                <span class="ask-chip" role="listitem" data-q="紧箍咒">紧箍咒</span>
-                <span class="ask-chip" role="listitem" data-q="大闹天宫">大闹天宫</span>
-            </div>
-            <p class="ask-note">离线可搜（全站索引内置）· 想写「被忽略者」档案？试试 <a href="dukou-engine.html">西游·渡口写作引擎</a></p>
-        </section>
-
-        <section class="stats reveal-in" aria-label="项目数据概览">
-            <div class="stat"><div class="num">100</div><div class="lbl">回 · 逐回解读</div></div>
-            <div class="stat"><div class="num">615</div><div class="lbl">篇 · 研究文档</div></div>
-            <div class="stat"><div class="num">87</div><div class="lbl">个 · 可视化页面</div></div>
-            <div class="stat"><div class="num">55</div><div class="lbl">条 · 学术引用</div></div>
-        </section>
-
         <div class="page-wrap">
-            <div class="section reveal-in">
+            <section class="section reveal-in" aria-labelledby="zone-read">
                 <div class="section-head">
                     <p class="kicker">START READING</p>
-                    <h2>从哪一回读起</h2>
+                    <h2 id="zone-read">从哪一回读起</h2>
                     <p class="note">100 回逐回精读，每回附剧情梗概、伏笔悬念、名句赏析与原文全文——点一处直达该回。</p>
                 </div>
                 <div class="curated-grid">
@@ -460,16 +448,40 @@
                     </a>
                 </div>
                 <p class="note" style="margin-top:16px;"><a href="reader/index.html" style="color:var(--accent-2);">查看全部 100 回总目录 →</a></p>
-            </div>
+            </section>
         </div>
 
+        <svg class="ink-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path d="M0 95 L180 32 L340 82 L500 20 L680 88 L860 45 L1040 92 L1220 35 L1440 80" fill="none" stroke="var(--ink)" stroke-opacity="0.10" stroke-width="1.5"/>
+            <path d="M0 110 L220 58 L400 105 L580 48 L780 104 L960 62 L1140 108 L1320 70 L1440 96" fill="none" stroke="var(--ink)" stroke-opacity="0.05" stroke-width="1"/>
+        </svg>
+
         <div class="page-wrap">
-            <div class="section reveal-in">
+            <section class="section reveal-in" aria-labelledby="zone-lookup">
                 <div class="section-head">
-                    <p class="kicker">CURATED</p>
-                    <h2>精选必看</h2>
-                    <p class="note">九个入口先睹为快；全部 87 页见数据看板，另有 133 维数据实验（含趣味跨界）。</p>
+                    <p class="kicker">LOOK UP</p>
+                    <h2 id="zone-lookup">查资料</h2>
+                    <p class="note">站内检索、精选入口与全卷索引——要找的都在这一区。</p>
                 </div>
+                <div class="ask-hero" role="search" aria-label="站内搜索工具">
+                    <p class="kicker">SEARCH · 站内搜索</p>
+                    <p class="ask-toolbar-title">想查点什么？</p>
+                    <p class="ask-sub">输入任意西游人物、妖怪、器物、地名或主题，一站检索全站 772 篇解读文档与全部站内页面。</p>
+                    <form class="ask-form" id="askForm" autocomplete="off">
+                        <input id="askInput" type="text" name="q" placeholder="例如：孙悟空、紧箍咒、八十一难、狮驼岭…" aria-label="搜索内容">
+                        <button type="submit">站内搜索</button>
+                    </form>
+                    <div class="ask-chips" role="list">
+                        <span class="ask-chip" role="listitem" data-q="孙悟空">孙悟空</span>
+                        <span class="ask-chip" role="listitem" data-q="八十一难">八十一难</span>
+                        <span class="ask-chip" role="listitem" data-q="紧箍咒">紧箍咒</span>
+                        <span class="ask-chip" role="listitem" data-q="大闹天宫">大闹天宫</span>
+                    </div>
+                    <p class="ask-note">离线可搜（全站索引内置）· 想写「被忽略者」档案？试试 <a href="dukou-engine.html">西游·渡口写作引擎</a></p>
+                </div>
+
+
+                <h3 class="sub-head">精选必看</h3>
                 <div class="curated-grid">
                     <a class="card" href="data/chapter-structure-graph.html">
                         <p class="card-kicker">G · CHAPTER GRAPH</p>
@@ -526,16 +538,7 @@
                         <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                 </div>
-            </div>
-        </div>
-
-        <div class="page-wrap">
-            <div class="section reveal-in">
-                <div class="section-head">
-                    <p class="kicker">INDEX</p>
-                    <h2>全卷索引</h2>
-                    <p class="note">从开卷导读到精神塑造——全卷通读《西游记》，每一卷都是一个入口。</p>
-                </div>
+                <h3 class="sub-head">全卷索引</h3>
                 <nav class="index-table" aria-label="全站板块索引">
                     <a class="index-row" href="guide.html">
                         <span class="no">00</span><span class="name">开卷有益</span>
@@ -598,9 +601,8 @@
                         <span class="meta">28 篇</span>
                     </a>
                 </nav>
-            </div>
+            </section>
         </div>
-
         <section class="dark-band" aria-label="西游记开篇诗" style="background-image:url('static/images/ink-mountains-hero.webp');background-size:cover;background-position:center;background-blend-mode:soft-light;">
             <div class="rule" aria-hidden="true"></div>
             <blockquote>
@@ -611,12 +613,19 @@
         </section>
 
         <div class="page-wrap">
-            <div class="section reveal-in">
+            <section class="section reveal-in" aria-labelledby="zone-tools">
                 <div class="section-head">
-                    <p class="kicker">TOOLS</p>
-                    <h2>站点工具</h2>
-                    <p class="note">三条快速路：看数据、找标签、查原文。</p>
+                    <p class="kicker">EXPLORE</p>
+                    <h2 id="zone-tools">看数据与工具</h2>
+                    <p class="note">项目量级、可视化看板与两件常用工具。</p>
                 </div>
+        <div class="stats" aria-label="项目数据概览">
+            <div class="stat"><div class="num">100</div><div class="lbl">回 · 逐回解读</div></div>
+            <div class="stat"><div class="num">615</div><div class="lbl">篇 · 研究文档</div></div>
+            <div class="stat"><div class="num">87</div><div class="lbl">个 · 可视化页面</div></div>
+            <div class="stat"><div class="num">55</div><div class="lbl">条 · 学术引用</div></div>
+        </div>
+
                 <div class="tools-grid">
                     <a class="card" href="dashboard.html">
                         <p class="card-kicker">D · DATA DASHBOARD</p>
@@ -638,14 +647,14 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
     </main>
 
     <footer class="site-footer">
         <div>
             <div class="footer-brand">取经录</div>
-            <div class="footer-meta">2026 · MIT License · 持续更新中 · W864 结构页的朱砂实底大多长在数据编码上，收敛只动装饰那一层，数据语义进豁免清单 · W863 把十一个已收官但未立段的批次按号序补回 CHANGELOG 与 file-index，让级联的号序断言重新成立 · W851 把 W826 细化规格 §4 的 v4 令牌增量落进 tokens.css，只落零消费新名、撞名项 defer，用机器证明现役页面视觉零变化 · W850 补齐 Q2 悬空的真因，把等十批样本从口号变成可执行的按批采集机制 · W849 在交付门禁挂上性能影子槽，按批采静态成本代理攒基线，暂不判红也不设阈值 · W848 检索增强默认档不动，把 dense 升为写明适用边界与代价的显式可选档，并修掉档位表旧口径冲突 · W847 阅读页四项体验落地：速览折叠、进度与书签字号、每页反馈，以及重建幂等复验 · W846 按三段管线重建全部阅读页，把 docs 源里积压的字级修复回灌进正文，产物结构与样式零变化 · W845 把待批的阅读页改造先量一遍：在隔离副本里按三段管线重建全部阅读页、逐文件比对出真实影响面，并纠正计划里只跑单个脚本的量法 · W844 四处施工一次落地：会话库备份、首 token 计时、多租户与检索两项裁决回填，以及检索题集迁入仓内并扩到百题 · W843 把上一批施工中新踩的两条坑固化进查坑表，同批校准智能体指南的分节计数与总数 · W842 补段工具一次补齐十二批欠账，让号序链重新接上，并顺手修正 pytest 收集数 785 到 786 的真漂移 · W841 补 precheck 覆盖不到的手工写段路径：三处版本行的 desc 段禁含分隔符，非空文档形态不识别即判红，自测加负样本与防误伤正样本各一例 · …更早批次详见 CHANGELOG.md<a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
+            <div class="footer-meta">2026 · MIT License · 持续更新中 · W864 十页结构页按裁决迁移：KPI 顶条收敛到首卡、徽章转淡底、间距令牌化 216 处，C 渠与 chart-3 拆专项批 · W863 把十一个已收官但未立段的批次按号序补回 CHANGELOG 与 file-index，让级联的号序断言重新成立 · W851 把 W826 细化规格 §4 的 v4 令牌增量落进 tokens.css，只落零消费新名、撞名项 defer，用机器证明现役页面视觉零变化 · W850 补齐 Q2 悬空的真因，把等十批样本从口号变成可执行的按批采集机制 · W849 在交付门禁挂上性能影子槽，按批采静态成本代理攒基线，暂不判红也不设阈值 · W848 检索增强默认档不动，把 dense 升为写明适用边界与代价的显式可选档，并修掉档位表旧口径冲突 · W847 阅读页四项体验落地：速览折叠、进度与书签字号、每页反馈，以及重建幂等复验 · W846 按三段管线重建全部阅读页，把 docs 源里积压的字级修复回灌进正文，产物结构与样式零变化 · W845 把待批的阅读页改造先量一遍：在隔离副本里按三段管线重建全部阅读页、逐文件比对出真实影响面，并纠正计划里只跑单个脚本的量法 · W844 四处施工一次落地：会话库备份、首 token 计时、多租户与检索两项裁决回填，以及检索题集迁入仓内并扩到百题 · W843 把上一批施工中新踩的两条坑固化进查坑表，同批校准智能体指南的分节计数与总数 · W842 补段工具一次补齐十二批欠账，让号序链重新接上，并顺手修正 pytest 收集数 785 到 786 的真漂移 · …更早批次详见 CHANGELOG.md<a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
         </div>
         <nav aria-label="页脚导航">
             <a href="index.html">首页</a>
