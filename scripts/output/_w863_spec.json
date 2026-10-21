@@ -1,0 +1,22 @@
+{
+  "batch": "W863",
+  "date": "2026-10-22",
+  "title": "W863 递延版段补写批（W852-W862 十一段回写·号序链重新接上）",
+  "desc": "把十一个已收官但未立段的批次按号序补回 CHANGELOG 与 file-index，让级联的号序断言重新成立",
+  "head_entry": "2026-10-22（W863 递延版段补写批）",
+  "head_sentence": "号序链断在 W852 会让后面每个新批都过不了级联，先把十一段欠账一次补回",
+  "changelog_body": "\n\n> **来源**：用户令「你决定，继续」。决定先清 CHANGELOG 号序链欠账再进 B2：`batch_cascade` 的 `assert batch == W顶段+1` 是段序保护，但 W852 起十一个批因并行在途全部递延，顶段停在 W851——每立一个新批的段都会被这条断言拦住，B2 也过不去。\n> - **文件**：CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w854_spec.json、scripts/output/_w856_spec.json、scripts/output/_w858_spec.json、scripts/output/_w859_spec.json、scripts/output/_w861_spec.json、scripts/output/_w863_spec.json、docs/00-导读/W批次编号对账表.md。\n> - **做法**：`backfill_changelog.py`（W842 建）第二次使用。待补 11 段（W852-W862）——其中 W852/W853/W855/W857/W860/W862 六批 spec 原本在位；W854/W856/W858/W859/W861 五批 spec 缺失，按各自 feat 提交信息与台账行**新建补位 spec**（内容只照记录、不添油加醋，agents_note 前注明「补位 spec」）。工具按号序把每段插到「第一个号小于自己的段」之前，file-index 同批回写；规则行 W001-W851 → W001-W862。\n> - **本批自身**：顶段推进到 W862 后，本批经 `batch_cascade` 正常立 W863 段并把「当前态六面」（README / STRUCTURE / 项目说明版本行·交接里程碑·AGENTS·CITATION·三简单页脚）统一推进到 W863——这是补段工具不做、必须级联做的部分。\n> - **不改历史**：补段只插入、不清洗、不重排、不改写既有段任何字符；不动任何页面行为与门禁判据（页脚三简面由级联按正常批口径更新）。",
+  "milestone_block": "- **W863 递延版段补写批**：\n  - CHANGELOG 与 file-index 各 149→160 段：W852-W862 十一段按号序回写，规则行推进到 W001-W862\n  - 五个缺失 spec 按 feat 提交与台账记录新建补位（W854/856/858/859/861·内容只照记录）\n  - 顶段恢复为 W862 后本批正常级联立 W863 段 + 当前态六面推进到 W863\n  - 只补历史段与索引，不改历史段字符、不动页面与门禁判据",
+  "agents_note": "二〇二六年十月二十二日（W863）这批是个还债批，债主是号序链。W852 之后连着十一批都是并行会话落的，各自按先例把版段递延了——递延本身没错，错在这条链一断，`batch_cascade` 的「顶段+1」断言就把后面每个新批都挡在门口，B2 也进不来。所以先补段。补段工具是 W842 为同样的问题造的，这次是它第二次上岗。十一段里六批 spec 本来就在，五批没有——W854 那份报告、W856 的 Logo、W858 的交互审查、W859 和 W861 的资产归档——只能照着各自的提交信息和台账行补写 spec，写的时候把「补位 spec」四个字标在 agents_note 开头，不冒充原会话的叙事。工具的判断很干脆：只补「已收官但未立段」的，插位按号序（每段插在第一个号小于自己的段之前，不是插顶部），file-index 同批回写，历史段的字符一个不动。补完 160 段，顶段回到 W862，本批自己的段就能正常级联立上，「当前态六面」也一并推进到 W863。教训一句话：递延是允许的，但递延链必须有到期日——每个递延批都等着「下一个落段批」来收，结果谁都等不来谁。",
+  "file_index_rows": [
+    "| CHANGELOG.md | W863 | 补写 W852-W862 十一段（149→160 段·号序降序完好）+ 本批 W863 段 |",
+    "| scripts/output/file-index.md | W863 | 补写 W852-W862 十一段反向索引（149→160 段） |",
+    "| scripts/output/_w854_spec.json | W863 | 新增：补位 spec（按 W854 feat 提交与台账行整理） |",
+    "| scripts/output/_w856_spec.json | W863 | 新增：补位 spec（Logo 定稿落地·按提交记录整理） |",
+    "| scripts/output/_w858_spec.json | W863 | 新增：补位 spec（交互流程审查·按提交记录整理） |",
+    "| scripts/output/_w859_spec.json | W863 | 新增：补位 spec（设计资产归档·按提交记录整理） |",
+    "| scripts/output/_w861_spec.json | W863 | 新增：补位 spec（设计资产归档收尾·按提交记录整理） |",
+    "| scripts/output/_w863_spec.json | W863 | 本批 spec 十字段 |",
+    "| docs/00-导读/W批次编号对账表.md | W863 | 认领行与收官回填·递延豁免区状态更新 |"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "batch": "W854",
+  "date": "2026-10-21",
+  "title": "W854 界面布局审计批（信息层级·区块分布与留白·操作动线·多屏适配·只审计不动代码）",
+  "desc": "把 v4 规格未覆盖的操作动线与逐档屏幕适配补齐，18 条问题逐条附取证与理由，0 处 HTML/CSS/JS 改动",
+  "head_entry": "2026-10-21（W854 界面布局审计批）",
+  "head_sentence": "布局问题要指到具体元素和具体理由，18 条逐条取证，一行代码不改",
+  "changelog_body": "\n\n> **来源**：用户令「优化现有界面布局·每处调整讲清理由」。答复取「两套都过（先站点后应用）+ 四痛点全查 + 只出审计报告」口径——本批只审计，不改代码。\n> - **文件**：docs/11-方案报告/界面布局审计报告-2026-10-21.md、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、scripts/_w854_cdp.mjs、scripts/_w854_layout_probe.mjs、scripts/_w854_layout_probe_app.mjs、scripts/output/_w854_layout_metrics.json、scripts/output/_w854_layout_metrics_app.json、scripts/index.md、scripts/output/index.md、scripts/output/stats.json、STRUCTURE.md、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md。\n> - **范围**：补 v4 规格（W819 方向 / W826 细化）未覆盖的两面——「操作动线」与「逐档屏幕适配」，并把已定令牌落成 8 条可判定判据。\n> - **产出**：18 条问题逐条附取证（CDP 量测脚本 + 度量 JSON）与调整理由，按影响用户程度排序。\n> - **纪律**：0 处 HTML/CSS/JS 改动（报告批）；落库随并行 W855 会话提交带入 7 件（报告正文 + 3 探针 + 2 度量 JSON + scripts/index.md），归属本批。\n> - **版段**：本批不落段，CHANGELOG 顶段不变、指针面零改动，随补段批（W863）按号序回写。",
+  "milestone_block": "- **W854 界面布局审计批**：\n  - 补 v4 规格未覆盖的「操作动线」与「逐档屏幕适配」两面 + 8 条可判定判据\n  - 18 条问题逐条附 CDP 取证与调整理由，按用户影响排序\n  - 只审计不动代码（0 处 HTML/CSS/JS 改动）；报告 + 探针 + 度量随 W855 提交带入",
+  "agents_note": "W854 补位 spec（W863 补段批按提交记录与台账行整理）：布局审计批只出报告不动代码，18 条问题逐条带 CDP 取证——量出来的证据比「我觉得这里挤」值钱。",
+  "file_index_rows": [
+    "| docs/11-方案报告/界面布局审计报告-2026-10-21.md | W854 | 新增：界面布局审计报告（四痛点全查·18 条问题逐条取证与理由） |",
+    "| scripts/_w854_cdp.mjs | W854 | 新增：布局审计 CDP 量测探针 |",
+    "| scripts/_w854_layout_probe.mjs | W854 | 新增：站点布局度量探针 |",
+    "| scripts/_w854_layout_probe_app.mjs | W854 | 新增：桌面端布局度量探针 |",
+    "| scripts/output/_w854_layout_metrics.json | W854 | 新增：站点布局度量产物 |",
+    "| scripts/output/_w854_layout_metrics_app.json | W854 | 新增：桌面端布局度量产物 |",
+    "| docs/11-方案报告/README.md | W854 | §二 报告登记（随 W855 提交带入） |",
+    "| docs/00-导读/W批次编号对账表.md | W854 | 认领行（随 W855 提交带入）与补段批回填 |"
+  ]
+}

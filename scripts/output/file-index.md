@@ -11,6 +11,171 @@
 ---
 
 
+## W863 递延版段补写批（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CHANGELOG.md | W863 | 补写 W852-W862 十一段（149→160 段·号序降序完好）+ 本批 W863 段 |
+| scripts/output/file-index.md | W863 | 补写 W852-W862 十一段反向索引（149→160 段） |
+| scripts/output/_w854_spec.json | W863 | 新增：补位 spec（按 W854 feat 提交与台账行整理） |
+| scripts/output/_w856_spec.json | W863 | 新增：补位 spec（Logo 定稿落地·按提交记录整理） |
+| scripts/output/_w858_spec.json | W863 | 新增：补位 spec（交互流程审查·按提交记录整理） |
+| scripts/output/_w859_spec.json | W863 | 新增：补位 spec（设计资产归档·按提交记录整理） |
+| scripts/output/_w861_spec.json | W863 | 新增：补位 spec（设计资产归档收尾·按提交记录整理） |
+| scripts/output/_w863_spec.json | W863 | 本批 spec 十字段 |
+| docs/00-导读/W批次编号对账表.md | W863 | 认领行与收官回填·递延豁免区状态更新 |
+
+## W862 设计迁移 B1 根页与入口 8 页（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/index.html | W862 | B1 迁移：kicker 落 --bg 改 --accent-text（ask-hero 内恢复 --accent）· 间距令牌化 25 处 |
+| site/guide.html | W862 | B1 迁移：kicker 改 --accent-text · 间距令牌化 12 处 |
+| site/curated.html | W862 | B1 迁移：kicker 改 --accent-text · 间距令牌化 9 处 |
+| site/dashboard.html | W862 | B1 迁移：容器 1536→--container-wide · KPI 大字归墨色 · masthead/section-kick 改 --accent-text · 间距令牌化 49 处 |
+| site/dukou-engine.html | W862 | B1 迁移：容器 1320→--container-wide · 徽章实底→--accent-tint 淡底 · header h1 改 --accent-text · 间距令牌化 14 处 |
+| site/rum-viewer.html | W862 | B1 迁移：容器 1024→--container-content · .btn 字色改 --accent-text 并令牌化朱砂字面量 · 间距令牌化 10 处 |
+| site/visit-viewer.html | W862 | B1 迁移：间距令牌化 7 处 |
+| scripts/_w862_tokenize_spacing.py | W862 | 新增：值保留式间距令牌化（dry-run·跳过 INLINED 块·负值防护） |
+| scripts/_w862_accent_text_audit.py | W862 | 新增：朱砂文字落点机器分类（计算样式有效背景链） |
+| scripts/_w862_diff_review.py | W862 | 新增：迁移 diff 全量归渠聚合（不截断） |
+| scripts/output/_w862_accent_text_audit.json | W862 | 新增：朱砂文字落点审计产物（20 处落 bg） |
+| scripts/output/_w862_diff_review.json | W862 | 新增：B1 迁移 diff 归渠审查产物 |
+| scripts/output/_w862_spec.json | W862 | 本批 spec 十字段 |
+| docs/00-导读/W批次编号对账表.md | W862 | 认领行与收官回填 |
+
+
+## W861 设计资产归档收尾批（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| assets/design/alternatives/ | W861 | 新增：四个未选定方向的图形标矢量源 4 件 |
+| assets/design/screenshots/ | W861 | 新增：过程截图 13 张（拼版/特写/实拍/预览页） |
+| assets/design/process/RECEIPT-W855.md | W861 | 新增：跨会话回执底稿 |
+| assets/design/README.md | W861 | 索引更新（三块新增登记） |
+| docs/00-导读/W批次编号对账表.md | W861 | 认领行与补段批回填 |
+
+
+## W860 计划方案合规门禁挂槽批（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_plan_template.py | W860 | 新增：第 48 门禁「计划方案合规」的增量判定入口（--gate 门禁模式 / --self-test 7 例负样本） |
+| scripts/_w857_plan_template_review.py | W860 | 改：抽出 judge()/fail_set() 纯函数供门禁复用；新增「执行摘要」等效形式识别 |
+| scripts/verify_delivery.py | W860 | 改：挂载第 48 槽（_StrictGate）+ EXPECTED_SECTION_NAMES 与 SCOPE_DOCS_SECTIONS 同步（门禁段 52→53） |
+| tests/unit/test_check_plan_template.py | W860 | 新增：第 48 槽单测 4 例（纯逻辑面·git 端到端用例不入 pytest） |
+| AGENTS.md · docs/agent/gates.md · README.md · pytest.ini · HANDOVER.md | W860 | 改：门数口径四处同步（47→48 槽 + gate_count 标记 + pytest_collected 标记 + 交接块） |
+| scripts/output/stats.json | W860 | 改：gate_count 47→48 · pytest_collected 818→823（stats.py --w W860 实测刷新） |
+
+
+## W859 设计资产归档批（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| assets/design/logo/ | W859 | 新增：Logo 定稿源文件 10 件（图形标/组合标/图标三档/favicon 四档） |
+| assets/design/ai-concepts/ | W859 | 新增：AI 概念稿 18 张 + 逐张母题判定表 |
+| assets/design/tools/ | W859 | 新增：可复算工具链 |
+| assets/design/README.md | W859 | 新增：素材区索引与口径说明 |
+| docs/00-导读/W批次编号对账表.md | W859 | 认领行与补段批回填 |
+
+
+## W858 站点交互流程审查报告批（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/计划方案/T07-任务计划执行与经验沉淀报告-2026-10-21.md | W858 | 新增：交互流程审查报告（3 条 P0 + 8 条 P1-P3 + 施工计划与经验） |
+| docs/00-导读/文档规范.md | W858 | §4.9 新增「框架类交付物必须落进仓内目录并登记索引」 |
+| CLAUDE.md | W858 | 第 11 条指针（权威正文在文档规范） |
+| docs/11-方案报告/README.md | W858 | §二「计划方案」8→9 篇 |
+| docs/INDEX.md | W858 | 重建（report_docs 42→43） |
+| site/data/search.html、site/en/search.html | W858 | 搜索索引重建 + CSP 哈希重算 |
+| scripts/output/stats.json、stats-index.md、stats-changelog.json | W858 | 报告计数与会话统计刷新 |
+| docs/00-导读/W批次编号对账表.md | W858 | 认领行与补段批回填 |
+
+
+## W857 计划方案模板符合性复核批（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_w857_plan_template_review.py | W857 | 新增：计划方案对模板的结构符合性复核探针（32 项结构判据 + 配对并集 §12 十项覆盖 + 编号体系 + 模糊词；纯标准库·一次性诊断件·不入 CI） |
+| scripts/output/_w857_plan_template_review.json | W857 | 新增：8 份文档 × 32 判据的机器可读矩阵 + 3 组配对并集判定（复核证据原始数据） |
+| scripts/output/_w857_spec.json | W857 | 新增：本批 CHANGELOG 版段素材（10 键齐·供 backfill_changelog.py 按号序补段） |
+
+
+## W856 Logo 定稿落地批（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/icons/ | W856 | icon-192/512/maskable-512 重做 + logo-mark-light.svg + logo-lockup-light.svg |
+| site/index.html | W856 | 六处元信息 + 页眉 seal→图形标 + hero h1 + 页脚品牌位（《取经录》） |
+| site/system.css | W856 | 新增 .brand-mark 纯加法规则（.seal 保留·其余 857 页零影响） |
+| site/manifest.webmanifest | W856 | name / short_name → 取经录 |
+| site/rss.xml | W856 | 随生成脚本重出（RSS 标题同步） |
+| site/static/img/og-cover.png | W856 | 随生成脚本重出 |
+| xiyouji-desktop/ | W856 | 桌面端应用名同步 |
+| README.md、CITATION.cff | W856 | 品牌名与项目名同步 |
+| docs/00-导读/W批次编号对账表.md | W856 | 认领行与补段批回填 |
+
+
+## W855 架构评审报告批（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/架构评审报告-2026-10-21.md | W855 | 新增：现役架构五维体检报告（P0 五条 / P1 十一条 / P2 择要 + 五维评级 + 三梯队 16 项 + 与 W820/W818 边界对齐 + 8 项未验证项 + 12 条复算命令附录） |
+| docs/11-方案报告/README.md | W855 | 目录索引登记（现役报告 32 → 33 篇·新增第 33 行·W854 并行批第 32 行原样保留） |
+| docs/INDEX.md | W855 | 产物级重建（新增报告入索引·docs_index.py 重跑·第 17 门禁逐字节比对依据） |
+| scripts/output/_w855_spec.json | W855 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写 W852 至 W855 四段及双索引） |
+| docs/00-导读/W批次编号对账表.md | W855 | 认领行（touches 声明 4 项 + 版段递延登记·已收官） |
+
+
+## W854 界面布局审计批（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/界面布局审计报告-2026-10-21.md | W854 | 新增：界面布局审计报告（四痛点全查·18 条问题逐条取证与理由） |
+| scripts/_w854_cdp.mjs | W854 | 新增：布局审计 CDP 量测探针 |
+| scripts/_w854_layout_probe.mjs | W854 | 新增：站点布局度量探针 |
+| scripts/_w854_layout_probe_app.mjs | W854 | 新增：桌面端布局度量探针 |
+| scripts/output/_w854_layout_metrics.json | W854 | 新增：站点布局度量产物 |
+| scripts/output/_w854_layout_metrics_app.json | W854 | 新增：桌面端布局度量产物 |
+| docs/11-方案报告/README.md | W854 | §二 报告登记（随 W855 提交带入） |
+| docs/00-导读/W批次编号对账表.md | W854 | 认领行（随 W855 提交带入）与补段批回填 |
+
+
+## W853 卡片封面素材图成套批（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/card-01-huoshan.webp | W853 | 新增：卡片封面 01/12·火焰山（赭金山脊+朱砂山光+一缕烟·净空带 299px） |
+| site/static/images/card-02-tongtianhe.webp | W853 | 新增：卡片封面 02/12·通天河（冰河中央水道+渡舟与旅人剪影·净空带 324px） |
+| site/static/images/card-03-shituoling.webp | W853 | 新增：卡片封面 03/12·狮驼岭（崖上三魔剪影·无面目·净空带 299px） |
+| site/static/images/card-04-dushuangxuejiang.webp | W853 | 新增：卡片封面 04/12·寒江独钓（蓑笠翁与孤舟·大留白·净空带 617px） |
+| site/static/images/card-05-mingyuesongjian.webp | W853 | 新增：卡片封面 05/12·明月松间（赭金月轮+松针枯笔·净空带 424px） |
+| site/static/images/card-06-yunshenzhibu.webp | W853 | 新增：卡片封面 06/12·云深不知处（层叠山脊+云隙小寺与石阶·净空带 311px） |
+| site/static/images/card-07-baiyao.webp | W853 | 新增：卡片封面 07/12·百妖列阵（九种妖形剪影并排·无面目·净空带 443px） |
+| site/static/images/card-08-zhuowuquan.webp | W853 | 新增：卡片封面 08/12·濯垢泉（洞中蛛网+垂丝+泉池·净空带 364px） |
+| site/static/images/card-09-sanyao.webp | W853 | 新增：卡片封面 09/12·三妖剪径（虎鹿羊三形+朱砂残旗·净空带 334px） |
+| site/static/images/card-10-gusichenzhong.webp | W853 | 新增：卡片封面 10/12·古刹晨钟（古刹藏于老松+晨雾+孤僧·净空带 400px） |
+| site/static/images/card-11-songyunshitan.webp | W853 | 新增：卡片封面 11/12·松云石坛（崖上古松+云气+石坛·净空带 300px） |
+| site/static/images/card-12-shuyuanxingtantan.webp | W853 | 新增：卡片封面 12/12·书院杏坛（低案两列+梅枝+学子剪影·净空带 299px） |
+| scripts/output/_w853_spec.json | W853 | 本批 spec 十字段（CHANGELOG 版段递延·待号序链恢复后补写） |
+| docs/00-导读/W批次编号对账表.md | W853 | 认领行与收官回填 |
+
+
+## W852 站点 Hero 素材图成套批（2026-10-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/hero-01-xihai-yunhai.webp | W852 | 新增：Hero 素材 01/06·西行山河云海（山脊云海+七人单行+朱砂小旗·净空带 599px） |
+| site/static/images/hero-02-shitu-wuxing.webp | W852 | 新增：Hero 素材 02/06·师徒五人组像（白马+猴+猪+二僧·净空带 320px·二版） |
+| site/static/images/hero-03-fabao-qiji.webp | W852 | 新增：Hero 素材 03/06·法宝器物静物（金箍棒+七宝妙树+袈裟+九环锡杖·净空带 568px·三版） |
+| site/static/images/hero-04-tiangting-yunmo.webp | W852 | 新增：Hero 素材 04/06·天庭云阙（宫阙+云台+右侧幽冥门与水影·净空带 423px·三版） |
+| site/static/images/hero-05-huangmo-gulu.webp | W852 | 新增：Hero 素材 05/06·荒漠孤旅（风蚀峡谷+孤旅与白马+朱砂布条·净空带 513px·三版） |
+| site/static/images/hero-06-fotu-chengque.webp | W852 | 新增：Hero 素材 06/06·佛国城阙（石柱牌坊+层叠殿顶+五人来朝·净空带 491px） |
+| scripts/output/_w852_spec.json | W852 | 本批 spec 十字段（CHANGELOG 版段递延·待顶段推进后补写） |
+| docs/00-导读/W批次编号对账表.md | W852 | 认领行与收官回填 |
+
+
 ## W851 设计迁移阶段 1 令牌落地批（2026-10-21）
 
 | 文件 | W | 说明 |
