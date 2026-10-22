@@ -1,0 +1,18 @@
+{
+  "batch": "W840",
+  "date": "2026-10-21",
+  "title": "W840 pitfalls 坑位沉淀批（fail-closed 跳过路径入查坑表 + AGENTS §4.3 计数校准 41→47）",
+  "desc": "把 W839 实证的「改 fail-closed 前先识别 scope 跳过伪造结果」写入 pitfalls 流程节（第 47 条），并校准 AGENTS.md 4.3 两处既存计数漂移（坑位总数 41 增至 47、git 节 12 增至 17、流程节 7 增至 8）",
+  "head_entry": "2026-10-21（W840 pitfalls 坑位沉淀批）",
+  "head_sentence": "把 fail-closed 跳过路径这个坑写进查坑表，顺带校准 AGENTS 停在 41 条的计数漂移",
+  "changelog_body": "\n\n> **来源**：用户令「加」——W839 收官后我提出该坑值得进仓内查坑表（凡改 bespoke 门禁的人都会撞上一次），用户批准。\n> - **文件**：docs/agent/pitfalls.md、AGENTS.md、scripts/output/_w840_spec.json、scripts/output/index.md、docs/00-导读/W批次编号对账表.md。\n> - **新增条目（第 47 条·流程/协作/取证 7→8）**：「把 subprocess 输出解析改成 fail-closed 前，先识别 scope 跳过的伪造结果」——根因=_GateContext 把全局 subprocess.run 猴补为 _scoped_run，--scope 不覆盖某段时返回 _SkipResult（rc=0、stdout 只有跳过提示串，消息已由其自打印）；事故=W834 把 a11y 段改 fail-closed 后提示串被送 json.loads → 判「输出不可解析」→ docs 档提交必红而全量档全绿（W838 收官两度被拦）；判据=同一次 --scope auto 同段打出「OK 跳过」+「FAIL 判红」双消息，且绕过 monkeypatch 手动复跑两次均正常（排除瞬态）；修法=rc 检查前 isinstance(_SkipResult) 守卫直接 return（跳过不是判据不可执行·不重复上报），回归锁 2 例；同族口径=凡 bespoke 段自行 parse subprocess 输出（json/正则/结构），改 fail-closed 时必须先过此守卫。\n> - **附带校准（既存漂移·非本批引入）**：AGENTS.md §4.3 两处计数——「41 条坑位」改 47；六主题目录 git/提交/并发 12 改 17（W837 沉淀五条时只改 pitfalls 节标题、未同步本行）、流程/协作/取证 7 改 8；括注补 W840 校准事实。\n> - **验证**：脚本实跑各节计数 9/5/17/4/4/8 = 47，与六节标题声明值逐节相等（0 节不一致）；git diff 3 文件 6 增 3 删（无 Edit 吞行）；doc-sync 0 FAIL；全量 verify 核心全部通过（51 段）；提交后 docs 档 pre-commit 核心全部通过。\n> - **状态**：已落地（本地提交·未推送）；CHANGELOG 版段递延（顶段序约束·spec 已入库）。\n",
+  "milestone_block": "- **W840 pitfalls 坑位沉淀批（fail-closed 跳过路径 + 计数校准）**：\n  - 新增第 47 条：改 subprocess 输出解析为 fail-closed 前先识别 _SkipResult（rc=0·stdout 仅跳过提示串）\n  - 事故锚点：W834 引入（32bcf16d）· W839 修复（99932fff）· docs 档提交必红而全量档全绿的识别特征\n  - 同族口径：凡 bespoke 段 parse subprocess 输出（json/正则/结构）者，改 fail-closed 一律先过此守卫\n  - 附带校准：AGENTS §4.3 坑位总数 41 增至 47、git 节 12 增至 17、流程节 7 增至 8（W837 漏同步）\n  - 验证：各节计数 9/5/17/4/4/8 与标题逐节相等 · doc-sync 0 FAIL · 全量 verify 51 段核心全部通过",
+  "agents_note": "二〇二六年十月二十一日（W840）坑位沉淀批：把上一批踩的坑写进查坑表。那个坑是——把子进程输出的解析改成失败即判错的逻辑时，先要认出「按范围分级时被跳过的段」返回的伪造结果：它报成功，输出里却只有一行跳过提示，直接送去解析必然失败，于是只改文档的提交一律被拦。这条写进流程类，并把识别特征（同一段出现跳过与判错两条消息）和修法一并记下。顺手校准了 AGENTS 速查层的计数：正文早已增至四十七条，头部还停在四十一条，git 节也在上一批沉淀五条时漏同步。",
+  "file_index_rows": [
+    "| docs/agent/pitfalls.md | W840 | 改：流程节新增第 47 条（fail-closed 跳过路径 _SkipResult 守卫）· 节标题 7 条改 8 条 |",
+    "| AGENTS.md | W840 | 改：§4.3 坑位计数校准 41 改 47（git 节 12 改 17 · 流程节 7 改 8） |",
+    "| scripts/output/_w840_spec.json | W840 | 新增：本批 spec 入库（版段递延用） |",
+    "| scripts/output/index.md | W840 | 改：登记 _w840_spec.json + 文件计数 244 改 245 |",
+    "| docs/00-导读/W批次编号对账表.md | W840 | 改：W840 认领行登记与收官回填 |"
+  ]
+}

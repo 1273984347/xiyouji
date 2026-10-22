@@ -1,0 +1,20 @@
+{
+  "batch": "W839",
+  "date": "2026-10-21",
+  "title": "W839 fail-closed 跳过路径回归修复批（_gate_a11y 对 _SkipResult 误判红 + 2 例回归锁）",
+  "desc": "修 W834 引入的回归：scope 跳过时 _scoped_run 返回 _SkipResult 伪造结果（stdout 为跳过提示串），fail-closed 后 a11y 段把提示串送 json.loads 必然判红，致 docs 档提交必红；加 isinstance 守卫直接返回并补 2 例回归锁，行为语义不变",
+  "head_entry": "2026-10-21（W839 fail-closed 跳过路径回归修复批）",
+  "head_sentence": "修掉自己上一批引入的回归：scope 跳过的伪造结果被 fail-closed 误判红，docs 档提交一度必红，已加守卫并钉两例回归锁",
+  "changelog_body": "\n\n> **来源**：W838 收官 chore 提交时被 a11y 段拦截（「审计输出不可解析」）→ 根因定位为 W834 B2 修复自身引入的回归 → 用户「继续」推进下修复。\n> - **文件**：scripts/verify_delivery.py、tests/unit/test_verify_failclosed.py、pytest.ini、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/_w839_spec.json、scripts/output/index.md、docs/00-导读/W批次编号对账表.md。\n> - **回归机理**：_GateContext 把全局 subprocess.run 猴补为 _scoped_run——scope 跳过时返回 _SkipResult（returncode=0·stdout=「（--scope X 跳过）」提示串，跳过行已由其打印）。W834 的 _gate_a11y 改 fail-closed 后对该伪造结果继续走 json.loads → 提示串在 char 0 即失败 → 判「审计输出不可解析」→ **docs 档（auto scope）提交必红**；全量档不受影响（a11y 真跑）。\n> - **实证**：W838 收官 chore 两次被拦；`--scope auto` 实跑显示「OK 跳过 [a11y对比]」后紧接一条 FAIL（同一段双消息）；同形 subprocess 手动复跑两次均正常（3.1M 字符合法 JSON）——排除瞬态，确认为跳过路径回归。\n> - **修复**：_gate_a11y 在 rc 检查前加 `isinstance(r, _SkipResult)` 守卫——跳过不是「判据不可执行」，直接返回、不重复上报；真实路径（rc/解析/结构检查）语义零变化。\n> - **回归锁**：新增 2 例——① _SkipResult 注入 → 零 fail 零 ok 零 warn（不得判红、不得重复上报）；② 简单委托段收到 _SkipResult → 走既有 rc=0 OK 路径不判红（旁证既有 W698 双行噪声非故障）。pytest 收集 783→785。\n> - **验证**：test_verify_failclosed 14 passed；`verify_delivery --scope auto` 原必红场景转绿（a11y 真跑通过）；doc-sync 0 FAIL；ruff 净；stats --w W839 刷新（pytest_collected 783→785）；pytest.ini 标记同步；全量 verify 核心全部通过。\n> - **状态**：已落地（本地提交·未推送）；CHANGELOG 版段递延（顶段序约束·spec 已入库）。\n",
+  "milestone_block": "- **W839 fail-closed 跳过路径回归修复批（自引回归·2 例回归锁）**：\n  - 回归：scope 跳过的 _SkipResult 伪造结果（stdout=跳过提示串）被 W834 fail-closed 的 a11y 段送 json.loads → 判红 → docs 档提交一度必红（全量档不受影响）\n  - 实证：W838 收官 chore 两次被拦 + --scope auto 显示同段双消息（跳过 OK + 判红 FAIL）+ 同形手动复跑正常 → 排除瞬态\n  - 修复：isinstance(_SkipResult) 守卫直接返回（跳过≠判据不可执行）；真实路径语义零变化\n  - 回归锁：2 例（跳过结果零上报 / 简单段跳过不判红）；pytest 783→785\n  - 验证：14 passed · auto 档原必红场景转绿 · doc-sync 0 FAIL · ruff 净 · stats 刷新 · 全量 verify 通过",
+  "agents_note": "二〇二六年十月二十一日（W839）fail-closed 跳过路径回归修复批：修自己上一批引入的回归。上一批把对比度审计段改成判据不可执行即失败，但漏了一种情况——按改动范围分级时，只改文档的提交会把该段判为跳过，而跳过时子进程层返回的是一个伪造的成功结果，里面的输出是跳过提示文字；新逻辑把这行提示也当成审计输出送去解析，当然解析失败，于是只改文档的提交一律被拦下。修法是先认这个伪造结果，认出来就直接返回，跳过不是判据不可执行。补两个回归测试钉住：跳过结果不得判红、也不得重复上报。全量档不受影响，真实路径语义零变化。",
+  "file_index_rows": [
+    "| scripts/verify_delivery.py | W839 | 改：_gate_a11y 加 isinstance(_SkipResult) 守卫（scope 跳过伪造结果不得判红·W834 回归修复） |",
+    "| tests/unit/test_verify_failclosed.py | W839 | 改：新增 2 例回归锁（跳过结果零上报 / 简单段跳过不判红） |",
+    "| pytest.ini | W839 | 改：头注 collected 实体标记 783→785 |",
+    "| scripts/output/stats.json | W839 | 改：pytest_collected 783→785 |",
+    "| scripts/output/_w839_spec.json | W839 | 新增：本批 spec 入库（版段递延用） |",
+    "| scripts/output/index.md | W839 | 改：登记 _w839_spec.json + 文件计数 243→244 |",
+    "| docs/00-导读/W批次编号对账表.md | W839 | 改：W839 认领行登记（回归修复批） |"
+  ]
+}

@@ -1,0 +1,2749 @@
+{
+  "groups": {
+    "data": {
+      "1320": 85,
+      "1280,1320": 3
+    },
+    "en": {
+      "1320": 83,
+      "1024,1320": 7,
+      "1320,768": 44,
+      "1280,1320": 4
+    },
+    "reader": {
+      "1320,760": 102,
+      "760": 520
+    },
+    "(root)": {
+      "(无内联容器声明)": 5,
+      "1280,1320": 1,
+      "1536": 1,
+      "1320": 1,
+      "1024": 1
+    }
+  },
+  "per_page_container_widths": {
+    "404.html": [],
+    "_template.html": [
+      "1280",
+      "1320"
+    ],
+    "curated.html": [],
+    "dashboard.html": [
+      "1536"
+    ],
+    "data/81-hardships-view.html": [
+      "1320"
+    ],
+    "data/81-hardships.html": [
+      "1320"
+    ],
+    "data/_shell.html": [
+      "1320"
+    ],
+    "data/aesthetics.html": [
+      "1320"
+    ],
+    "data/ai-dialogue.html": [
+      "1320"
+    ],
+    "data/business-model.html": [
+      "1320"
+    ],
+    "data/cave-estate.html": [
+      "1320"
+    ],
+    "data/century-dialogue.html": [
+      "1320"
+    ],
+    "data/chapter-stats.html": [
+      "1320"
+    ],
+    "data/chapter-structure-graph.html": [
+      "1320"
+    ],
+    "data/character-appearance.html": [
+      "1320"
+    ],
+    "data/character-dynamic-network.html": [
+      "1320"
+    ],
+    "data/character-presence-timeline.html": [
+      "1320"
+    ],
+    "data/character-relationship-3d-view.html": [
+      "1320"
+    ],
+    "data/character-relationship-3d.html": [
+      "1320"
+    ],
+    "data/character-semantic-network.html": [
+      "1280",
+      "1320"
+    ],
+    "data/character-sentiment-arc.html": [
+      "1320"
+    ],
+    "data/chart-design.html": [
+      "1320"
+    ],
+    "data/cognitive-psychology.html": [
+      "1320"
+    ],
+    "data/concept-device.html": [
+      "1320"
+    ],
+    "data/counterfactual.html": [
+      "1320"
+    ],
+    "data/criticism-history.html": [
+      "1320"
+    ],
+    "data/cross-time-danmaku.html": [
+      "1320"
+    ],
+    "data/cultural-misreading.html": [
+      "1320"
+    ],
+    "data/customs-pass-route.html": [
+      "1320"
+    ],
+    "data/data-explorer.html": [
+      "1320"
+    ],
+    "data/deconstruction.html": [
+      "1320"
+    ],
+    "data/dialogue-sentiment.html": [
+      "1320"
+    ],
+    "data/ecology.html": [
+      "1320"
+    ],
+    "data/emotional-heatmap.html": [
+      "1320"
+    ],
+    "data/ethics-consumption.html": [
+      "1320"
+    ],
+    "data/famous-time-travel.html": [
+      "1320"
+    ],
+    "data/four-dimensional-research-network.html": [
+      "1320"
+    ],
+    "data/four-heavenly-kings-artifacts.html": [
+      "1320"
+    ],
+    "data/game-webnovel.html": [
+      "1320"
+    ],
+    "data/global-pattern.html": [
+      "1320"
+    ],
+    "data/graph-explorer.html": [
+      "1320"
+    ],
+    "data/guanyin-six-roles-network.html": [
+      "1320"
+    ],
+    "data/hardship-difficulty-heatmap.html": [
+      "1320"
+    ],
+    "data/hardship-heatmap.html": [
+      "1320"
+    ],
+    "data/heaven-power-network.html": [
+      "1320"
+    ],
+    "data/intertextuality-network.html": [
+      "1320"
+    ],
+    "data/journey-geo-3d.html": [
+      "1320"
+    ],
+    "data/journey-geo-semiotics.html": [
+      "1320"
+    ],
+    "data/journey-map-interactive.html": [
+      "1320"
+    ],
+    "data/journey-route.html": [
+      "1320"
+    ],
+    "data/journey-spacetime.html": [
+      "1320"
+    ],
+    "data/jurisprudence.html": [
+      "1320"
+    ],
+    "data/karma-reincarnation.html": [
+      "1320"
+    ],
+    "data/language-style-radar.html": [
+      "1320"
+    ],
+    "data/linguistics.html": [
+      "1320"
+    ],
+    "data/magic-system.html": [
+      "1320"
+    ],
+    "data/material-archaeology.html": [
+      "1320"
+    ],
+    "data/mbti-evolution.html": [
+      "1320"
+    ],
+    "data/methodology-matrix.html": [
+      "1320"
+    ],
+    "data/ming-political-thought-comparison.html": [
+      "1320"
+    ],
+    "data/monster-background.html": [
+      "1280",
+      "1320"
+    ],
+    "data/monster-capability-radar.html": [
+      "1320"
+    ],
+    "data/monster-ecology-network.html": [
+      "1320"
+    ],
+    "data/monster-female-network.html": [
+      "1320"
+    ],
+    "data/monster-hierarchy-network.html": [
+      "1320"
+    ],
+    "data/monster-sociology.html": [
+      "1320"
+    ],
+    "data/monster-victims-network.html": [
+      "1320"
+    ],
+    "data/music-structure.html": [
+      "1320"
+    ],
+    "data/narrative-experiment.html": [
+      "1320"
+    ],
+    "data/narrative-rhythm-curve.html": [
+      "1320"
+    ],
+    "data/narratology-12d-network.html": [
+      "1320"
+    ],
+    "data/narratology-16d-network.html": [
+      "1320"
+    ],
+    "data/perf-canvas-rendering.html": [
+      "1320"
+    ],
+    "data/philosophy.html": [
+      "1320"
+    ],
+    "data/pilgrim-team-dynamic-network.html": [
+      "1320"
+    ],
+    "data/pilgrim-team-psychology-arc.html": [
+      "1320"
+    ],
+    "data/poetry-rhythm-analysis.html": [
+      "1320"
+    ],
+    "data/power-resources.html": [
+      "1320"
+    ],
+    "data/relationships.html": [
+      "1320"
+    ],
+    "data/risk-project.html": [
+      "1320"
+    ],
+    "data/search.html": [
+      "1320"
+    ],
+    "data/six-senses-narratology-network.html": [
+      "1320"
+    ],
+    "data/social-media.html": [
+      "1320"
+    ],
+    "data/story-timeline.html": [
+      "1320"
+    ],
+    "data/tag-cloud.html": [
+      "1320"
+    ],
+    "data/text-evolution.html": [
+      "1320"
+    ],
+    "data/text-search.html": [
+      "1320"
+    ],
+    "data/theological-intervention-network.html": [
+      "1280",
+      "1320"
+    ],
+    "data/timeline.html": [
+      "1320"
+    ],
+    "data/underworld-power-network.html": [
+      "1320"
+    ],
+    "data/visual-art.html": [
+      "1320"
+    ],
+    "data/workplace.html": [
+      "1320"
+    ],
+    "dukou-engine.html": [
+      "1320"
+    ],
+    "en/81-hardships-view.html": [
+      "1320"
+    ],
+    "en/81-hardships.html": [
+      "1320"
+    ],
+    "en/academic-papers.html": [
+      "1024",
+      "1320"
+    ],
+    "en/aesthetics.html": [
+      "1320"
+    ],
+    "en/ai-dialogue.html": [
+      "1320"
+    ],
+    "en/bestiary.html": [
+      "1024",
+      "1320"
+    ],
+    "en/business-model.html": [
+      "1320"
+    ],
+    "en/cave-estate.html": [
+      "1320"
+    ],
+    "en/century-dialogue.html": [
+      "1320"
+    ],
+    "en/chapter-stats.html": [
+      "1320"
+    ],
+    "en/chapter-structure-graph.html": [
+      "1320"
+    ],
+    "en/chapters-map.html": [
+      "1024",
+      "1320"
+    ],
+    "en/character-appearance.html": [
+      "1320"
+    ],
+    "en/character-bailongma.html": [
+      "1320",
+      "768"
+    ],
+    "en/character-bajie.html": [
+      "1320",
+      "768"
+    ],
+    "en/character-dynamic-network.html": [
+      "1320"
+    ],
+    "en/character-presence-timeline.html": [
+      "1320"
+    ],
+    "en/character-relationship-3d-view.html": [
+      "1320"
+    ],
+    "en/character-relationship-3d.html": [
+      "1320"
+    ],
+    "en/character-semantic-network.html": [
+      "1280",
+      "1320"
+    ],
+    "en/character-sentiment-arc.html": [
+      "1320"
+    ],
+    "en/character-shaseng.html": [
+      "1320",
+      "768"
+    ],
+    "en/character-tangseng.html": [
+      "1320",
+      "768"
+    ],
+    "en/character-wukong.html": [
+      "1320",
+      "768"
+    ],
+    "en/characters.html": [
+      "1024",
+      "1320"
+    ],
+    "en/chart-design.html": [
+      "1320"
+    ],
+    "en/cognitive-psychology.html": [
+      "1320"
+    ],
+    "en/concept-device.html": [
+      "1320"
+    ],
+    "en/counterfactual.html": [
+      "1320"
+    ],
+    "en/criticism-history.html": [
+      "1320"
+    ],
+    "en/cross-time-danmaku.html": [
+      "1320"
+    ],
+    "en/cultural-misreading.html": [
+      "1320"
+    ],
+    "en/customs-pass-route.html": [
+      "1320"
+    ],
+    "en/dashboard.html": [
+      "1280",
+      "1320"
+    ],
+    "en/data-explorer.html": [
+      "1320"
+    ],
+    "en/deconstruction.html": [
+      "1320"
+    ],
+    "en/dialogue-sentiment.html": [
+      "1320"
+    ],
+    "en/dukou-engine.html": [
+      "1320"
+    ],
+    "en/ecology.html": [
+      "1320"
+    ],
+    "en/emotional-heatmap.html": [
+      "1320"
+    ],
+    "en/essay-ai-era.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-buddhist-chan.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-chapter-couplets.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-character-fu.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-cipai-linjiangxian.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-cipai-mantingfang.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-cipai-shuidiaogetou.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-cipai-xijiangyue.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-composition-origins.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-divine-bureaucracy.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-folk-belief.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-historical-xuanzang.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-information-cocoon.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-ming-economy.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-ming-examination.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-ming-garrison.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-ming-intellectual-history.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-ming-judiciary.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-ming-literary-thought.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-ming-maritime-ban.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-ming-metaphor.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-ming-military.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-ming-politics.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-ming-religion.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-ming-social-customs.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-modern-management.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-original-poetry.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-poetry-imagery.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-poetry-opening.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-quanzhen-daoism.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-rhythm-analysis.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-scenery-poems.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-thematic-poetry.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-three-teachings.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-version-evolution.html": [
+      "1320",
+      "768"
+    ],
+    "en/essay-zen-koan-vs-neidan.html": [
+      "1320",
+      "768"
+    ],
+    "en/ethics-consumption.html": [
+      "1320"
+    ],
+    "en/famous-time-travel.html": [
+      "1320"
+    ],
+    "en/four-dimensional-research-network.html": [
+      "1320"
+    ],
+    "en/four-heavenly-kings-artifacts.html": [
+      "1320"
+    ],
+    "en/game-webnovel.html": [
+      "1320"
+    ],
+    "en/global-pattern.html": [
+      "1320"
+    ],
+    "en/graph-explorer.html": [
+      "1320"
+    ],
+    "en/guanyin-six-roles-network.html": [
+      "1320"
+    ],
+    "en/guide.html": [
+      "1024",
+      "1320"
+    ],
+    "en/hardship-difficulty-heatmap.html": [
+      "1320"
+    ],
+    "en/hardship-heatmap.html": [
+      "1320"
+    ],
+    "en/heaven-power-network.html": [
+      "1320"
+    ],
+    "en/index.html": [
+      "1024",
+      "1320"
+    ],
+    "en/intertextuality-network.html": [
+      "1320"
+    ],
+    "en/journey-geo-semiotics.html": [
+      "1320"
+    ],
+    "en/journey-map-interactive.html": [
+      "1320"
+    ],
+    "en/journey-route.html": [
+      "1320"
+    ],
+    "en/journey-spacetime.html": [
+      "1320"
+    ],
+    "en/jurisprudence.html": [
+      "1320"
+    ],
+    "en/karma-reincarnation.html": [
+      "1320"
+    ],
+    "en/language-style-radar.html": [
+      "1320"
+    ],
+    "en/linguistics.html": [
+      "1320"
+    ],
+    "en/magic-system.html": [
+      "1320"
+    ],
+    "en/material-archaeology.html": [
+      "1320"
+    ],
+    "en/mbti-evolution.html": [
+      "1320"
+    ],
+    "en/methodology-matrix.html": [
+      "1320"
+    ],
+    "en/methodology.html": [
+      "1320",
+      "768"
+    ],
+    "en/ming-political-thought-comparison.html": [
+      "1320"
+    ],
+    "en/monster-background.html": [
+      "1280",
+      "1320"
+    ],
+    "en/monster-capability-radar.html": [
+      "1320"
+    ],
+    "en/monster-ecology-network.html": [
+      "1320"
+    ],
+    "en/monster-female-network.html": [
+      "1320"
+    ],
+    "en/monster-hierarchy-network.html": [
+      "1320"
+    ],
+    "en/monster-sociology.html": [
+      "1320"
+    ],
+    "en/monster-victims-network.html": [
+      "1320"
+    ],
+    "en/music-structure.html": [
+      "1320"
+    ],
+    "en/narrative-experiment.html": [
+      "1320"
+    ],
+    "en/narrative-rhythm-curve.html": [
+      "1320"
+    ],
+    "en/narratology-12d-network.html": [
+      "1320"
+    ],
+    "en/narratology-16d-network.html": [
+      "1320"
+    ],
+    "en/perf-canvas-rendering.html": [
+      "1320"
+    ],
+    "en/philosophy.html": [
+      "1320"
+    ],
+    "en/pilgrim-team-dynamic-network.html": [
+      "1320"
+    ],
+    "en/pilgrim-team-psychology-arc.html": [
+      "1320"
+    ],
+    "en/poetry-rhythm-analysis.html": [
+      "1320"
+    ],
+    "en/power-resources.html": [
+      "1320"
+    ],
+    "en/relationships.html": [
+      "1320"
+    ],
+    "en/risk-project.html": [
+      "1320"
+    ],
+    "en/search.html": [
+      "1320"
+    ],
+    "en/site-map.html": [
+      "1320",
+      "768"
+    ],
+    "en/six-senses-narratology-network.html": [
+      "1320"
+    ],
+    "en/social-media.html": [
+      "1320"
+    ],
+    "en/tag-cloud.html": [
+      "1320"
+    ],
+    "en/text-evolution.html": [
+      "1320"
+    ],
+    "en/text-search.html": [
+      "1320"
+    ],
+    "en/theological-intervention-network.html": [
+      "1280",
+      "1320"
+    ],
+    "en/timeline.html": [
+      "1320"
+    ],
+    "en/tribulations.html": [
+      "1024",
+      "1320"
+    ],
+    "en/underworld-power-network.html": [
+      "1320"
+    ],
+    "en/visual-art.html": [
+      "1320"
+    ],
+    "en/visualizations.html": [
+      "1320",
+      "768"
+    ],
+    "en/workplace.html": [
+      "1320"
+    ],
+    "guide.html": [],
+    "index.html": [],
+    "reader/ch001.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch002.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch003.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch004.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch005.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch006.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch007.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch008.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch009.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch010.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch011.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch012.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch013.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch014.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch015.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch016.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch017.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch018.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch019.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch020.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch021.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch022.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch023.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch024.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch025.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch026.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch027.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch028.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch029.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch030.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch031.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch032.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch033.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch034.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch035.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch036.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch037.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch038.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch039.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch040.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch041.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch042.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch043.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch044.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch045.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch046.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch047.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch048.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch049.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch050.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch051.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch052.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch053.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch054.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch055.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch056.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch057.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch058.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch059.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch060.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch061.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch062.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch063.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch064.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch065.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch066.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch067.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch068.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch069.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch070.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch071.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch072.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch073.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch074.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch075.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch076.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch077.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch078.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch079.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch080.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch081.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch082.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch083.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch084.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch085.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch086.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch087.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch088.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch089.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch090.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch091.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch092.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch093.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch094.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch095.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch096.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch097.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch098.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch099.html": [
+      "1320",
+      "760"
+    ],
+    "reader/ch100.html": [
+      "1320",
+      "760"
+    ],
+    "reader/culture/index.html": [
+      "760"
+    ],
+    "reader/culture/三教合一明代思想史深化专题.html": [
+      "760"
+    ],
+    "reader/culture/佛道思想.html": [
+      "760"
+    ],
+    "reader/culture/历史玄奘与小说玄奘专题.html": [
+      "760"
+    ],
+    "reader/culture/成书背景.html": [
+      "760"
+    ],
+    "reader/culture/明代军事制度对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代医学养生制度对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代卫所制度对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代司法制度深化专题.html": [
+      "760"
+    ],
+    "reader/culture/明代婚姻家庭制度对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代宗教制度对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代宗教政策对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代宫廷与宦官制度对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代市井百态对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代思想史对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代政治制度对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代文学体裁与西游对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代文学思想对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代服饰舆服制度对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代海禁政策对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代盐法开中制度对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代社会风俗对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代神祇官僚体系对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代科举制度对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代经济制度对照专题.html": [
+      "760"
+    ],
+    "reader/culture/明代隐喻.html": [
+      "760"
+    ],
+    "reader/culture/明代驿递交通制度对照专题.html": [
+      "760"
+    ],
+    "reader/culture/版本演变.html": [
+      "760"
+    ],
+    "reader/culture/版本演变补遗-平话层.html": [
+      "760"
+    ],
+    "reader/culture/西游与佛教禅宗专题.html": [
+      "760"
+    ],
+    "reader/culture/西游与明代商业经济专题.html": [
+      "760"
+    ],
+    "reader/culture/西游与明代民间宗教专题.html": [
+      "760"
+    ],
+    "reader/culture/西游与民间信仰专题.html": [
+      "760"
+    ],
+    "reader/culture/西游与禅宗公案专题.html": [
+      "760"
+    ],
+    "reader/culture/西游与道教全真派专题.html": [
+      "760"
+    ],
+    "reader/essays/index.html": [
+      "760"
+    ],
+    "reader/essays/现代视角解读.html": [
+      "760"
+    ],
+    "reader/essays/西游与AI时代.html": [
+      "760"
+    ],
+    "reader/essays/西游与人类学.html": [
+      "760"
+    ],
+    "reader/essays/西游与代理悖论.html": [
+      "760"
+    ],
+    "reader/essays/西游与传播学.html": [
+      "760"
+    ],
+    "reader/essays/西游与伦理学.html": [
+      "760"
+    ],
+    "reader/essays/西游与体育学.html": [
+      "760"
+    ],
+    "reader/essays/西游与信息茧房.html": [
+      "760"
+    ],
+    "reader/essays/西游与化学.html": [
+      "760"
+    ],
+    "reader/essays/西游与医学.html": [
+      "760"
+    ],
+    "reader/essays/西游与博弈论.html": [
+      "760"
+    ],
+    "reader/essays/西游与地理学.html": [
+      "760"
+    ],
+    "reader/essays/西游与天文学.html": [
+      "760"
+    ],
+    "reader/essays/西游与媒介史.html": [
+      "760"
+    ],
+    "reader/essays/西游与宗教学.html": [
+      "760"
+    ],
+    "reader/essays/西游与平台经济.html": [
+      "760"
+    ],
+    "reader/essays/西游与建筑学.html": [
+      "760"
+    ],
+    "reader/essays/西游与心理学.html": [
+      "760"
+    ],
+    "reader/essays/西游与性别政治.html": [
+      "760"
+    ],
+    "reader/essays/西游与情绪劳动.html": [
+      "760"
+    ],
+    "reader/essays/西游与教育学.html": [
+      "760"
+    ],
+    "reader/essays/西游与数学.html": [
+      "760"
+    ],
+    "reader/essays/西游与明代嘉靖镜像.html": [
+      "760"
+    ],
+    "reader/essays/西游与服饰学.html": [
+      "760"
+    ],
+    "reader/essays/西游与比较文学.html": [
+      "760"
+    ],
+    "reader/essays/西游与民俗学.html": [
+      "760"
+    ],
+    "reader/essays/西游与法理政治.html": [
+      "760"
+    ],
+    "reader/essays/西游与流亡者.html": [
+      "760"
+    ],
+    "reader/essays/西游与演化论.html": [
+      "760"
+    ],
+    "reader/essays/西游与物理学.html": [
+      "760"
+    ],
+    "reader/essays/西游与现代组织管理.html": [
+      "760"
+    ],
+    "reader/essays/西游与生态学.html": [
+      "760"
+    ],
+    "reader/essays/西游与社会学.html": [
+      "760"
+    ],
+    "reader/essays/西游与神话学.html": [
+      "760"
+    ],
+    "reader/essays/西游与符号学.html": [
+      "760"
+    ],
+    "reader/essays/西游与经济学.html": [
+      "760"
+    ],
+    "reader/essays/西游与美学.html": [
+      "760"
+    ],
+    "reader/essays/西游与翻译学.html": [
+      "760"
+    ],
+    "reader/essays/西游与考古学.html": [
+      "760"
+    ],
+    "reader/essays/西游与认知科学.html": [
+      "760"
+    ],
+    "reader/essays/西游与语言学.html": [
+      "760"
+    ],
+    "reader/essays/西游与音乐学.html": [
+      "760"
+    ],
+    "reader/essays/西游与项目管理.html": [
+      "760"
+    ],
+    "reader/essays/西游与饮食学.html": [
+      "760"
+    ],
+    "reader/index.html": [
+      "1320",
+      "760"
+    ],
+    "reader/people/index.html": [
+      "760"
+    ],
+    "reader/people/万圣公主外传.html": [
+      "760"
+    ],
+    "reader/people/严嵩与牛魔王对照专题.html": [
+      "760"
+    ],
+    "reader/people/乌巢禅师外传.html": [
+      "760"
+    ],
+    "reader/people/乌鸡国国王-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/九头虫.html": [
+      "760"
+    ],
+    "reader/people/九头驸马外传.html": [
+      "760"
+    ],
+    "reader/people/九灵元圣-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/二十八宿外传.html": [
+      "760"
+    ],
+    "reader/people/二郎神-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/二郎神.html": [
+      "760"
+    ],
+    "reader/people/二郎神外传.html": [
+      "760"
+    ],
+    "reader/people/二郎神深化专题.html": [
+      "760"
+    ],
+    "reader/people/人物分类增补专题.html": [
+      "760"
+    ],
+    "reader/people/人物谱系表.html": [
+      "760"
+    ],
+    "reader/people/六耳猕猴-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/六耳猕猴.html": [
+      "760"
+    ],
+    "reader/people/六耳猕猴深化专题.html": [
+      "760"
+    ],
+    "reader/people/刘伯钦外传.html": [
+      "760"
+    ],
+    "reader/people/南极仙翁外传.html": [
+      "760"
+    ],
+    "reader/people/卵二姐外传.html": [
+      "760"
+    ],
+    "reader/people/取经五众关系网络深化.html": [
+      "760"
+    ],
+    "reader/people/取经团队动力学深化专题.html": [
+      "760"
+    ],
+    "reader/people/变的哲学-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/哪吒.html": [
+      "760"
+    ],
+    "reader/people/哪吒外传.html": [
+      "760"
+    ],
+    "reader/people/哪吒深化专题.html": [
+      "760"
+    ],
+    "reader/people/唐僧-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/唐僧.html": [
+      "760"
+    ],
+    "reader/people/唐僧深化专题.html": [
+      "760"
+    ],
+    "reader/people/四值功曹五方揭谛六丁六甲外传.html": [
+      "760"
+    ],
+    "reader/people/四大天王合集专题.html": [
+      "760"
+    ],
+    "reader/people/四海龙王外传.html": [
+      "760"
+    ],
+    "reader/people/国师王菩萨.html": [
+      "760"
+    ],
+    "reader/people/土地公-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/地府体系深化专题.html": [
+      "760"
+    ],
+    "reader/people/多目怪-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/大鹏金翅雕.html": [
+      "760"
+    ],
+    "reader/people/大鹏金翅雕外传.html": [
+      "760"
+    ],
+    "reader/people/天庭体系深化专题.html": [
+      "760"
+    ],
+    "reader/people/太上老君-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/太上老君.html": [
+      "760"
+    ],
+    "reader/people/太上老君外传.html": [
+      "760"
+    ],
+    "reader/people/太上老君深化专题.html": [
+      "760"
+    ],
+    "reader/people/太宗李世民外传.html": [
+      "760"
+    ],
+    "reader/people/太白金星-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/太白金星.html": [
+      "760"
+    ],
+    "reader/people/奎木狼-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/奎木狼不负前情外传.html": [
+      "760"
+    ],
+    "reader/people/奎木狼外传.html": [
+      "760"
+    ],
+    "reader/people/女儿国国王-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/女儿国国王.html": [
+      "760"
+    ],
+    "reader/people/女儿国国王深化专题.html": [
+      "760"
+    ],
+    "reader/people/如意真仙外传.html": [
+      "760"
+    ],
+    "reader/people/如来.html": [
+      "760"
+    ],
+    "reader/people/如来佛祖-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/如来佛祖-方向二深化B.html": [
+      "760"
+    ],
+    "reader/people/妖怪群体组织形态深化.html": [
+      "760"
+    ],
+    "reader/people/妖怪谱系深度分析.html": [
+      "760"
+    ],
+    "reader/people/嫦娥外传.html": [
+      "760"
+    ],
+    "reader/people/孙悟空-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/孙悟空.html": [
+      "760"
+    ],
+    "reader/people/孙悟空外传.html": [
+      "760"
+    ],
+    "reader/people/孙悟空深化专题.html": [
+      "760"
+    ],
+    "reader/people/宝象国国王后外传.html": [
+      "760"
+    ],
+    "reader/people/宝象国国王外传.html": [
+      "760"
+    ],
+    "reader/people/小妖外传.html": [
+      "760"
+    ],
+    "reader/people/张居正与玉帝权术对照专题.html": [
+      "760"
+    ],
+    "reader/people/弥勒佛外传.html": [
+      "760"
+    ],
+    "reader/people/悟空-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/托塔李天王外传.html": [
+      "760"
+    ],
+    "reader/people/扫塔人外传.html": [
+      "760"
+    ],
+    "reader/people/接引佛祖外传.html": [
+      "760"
+    ],
+    "reader/people/推云童子外传.html": [
+      "760"
+    ],
+    "reader/people/敖广外传.html": [
+      "760"
+    ],
+    "reader/people/文殊与普贤外传.html": [
+      "760"
+    ],
+    "reader/people/日值功曹外传.html": [
+      "760"
+    ],
+    "reader/people/明代历史原型对照专题.html": [
+      "760"
+    ],
+    "reader/people/昴日星官.html": [
+      "760"
+    ],
+    "reader/people/昴日星官外传.html": [
+      "760"
+    ],
+    "reader/people/有来有去外传.html": [
+      "760"
+    ],
+    "reader/people/李贽与悟空对照专题.html": [
+      "760"
+    ],
+    "reader/people/杏仙外传.html": [
+      "760"
+    ],
+    "reader/people/次要人物关系网络深化.html": [
+      "760"
+    ],
+    "reader/people/殷温娇外传.html": [
+      "760"
+    ],
+    "reader/people/沙僧-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/沙僧.html": [
+      "760"
+    ],
+    "reader/people/沙僧外传.html": [
+      "760"
+    ],
+    "reader/people/沙僧深化专题.html": [
+      "760"
+    ],
+    "reader/people/泥鳅外传.html": [
+      "760"
+    ],
+    "reader/people/泾河龙王外传.html": [
+      "760"
+    ],
+    "reader/people/海瑞与悟空直谏对照专题.html": [
+      "760"
+    ],
+    "reader/people/火焰山土地外传.html": [
+      "760"
+    ],
+    "reader/people/灵吉菩萨.html": [
+      "760"
+    ],
+    "reader/people/灵感大王-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/灵感大王.html": [
+      "760"
+    ],
+    "reader/people/灵感大王外传.html": [
+      "760"
+    ],
+    "reader/people/燃灯古佛外传.html": [
+      "760"
+    ],
+    "reader/people/牛魔王-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/牛魔王-方向二深化B.html": [
+      "760"
+    ],
+    "reader/people/牛魔王.html": [
+      "760"
+    ],
+    "reader/people/牛魔王深化专题.html": [
+      "760"
+    ],
+    "reader/people/独角兕大王.html": [
+      "760"
+    ],
+    "reader/people/狮驼岭三魔-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/猪八戒-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/猪八戒.html": [
+      "760"
+    ],
+    "reader/people/猪八戒深化专题.html": [
+      "760"
+    ],
+    "reader/people/玄奘-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/玄奘外传.html": [
+      "760"
+    ],
+    "reader/people/玉兔精-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/玉兔精.html": [
+      "760"
+    ],
+    "reader/people/玉兔精深化专题.html": [
+      "760"
+    ],
+    "reader/people/玉帝.html": [
+      "760"
+    ],
+    "reader/people/玉帝深化专题.html": [
+      "760"
+    ],
+    "reader/people/玉皇大帝-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/玉皇大帝外传.html": [
+      "760"
+    ],
+    "reader/people/玉面狐狸深化专题.html": [
+      "760"
+    ],
+    "reader/people/王母娘娘.html": [
+      "760"
+    ],
+    "reader/people/王母娘娘深化专题.html": [
+      "760"
+    ],
+    "reader/people/王阳明与唐僧心学对照专题.html": [
+      "760"
+    ],
+    "reader/people/白象精.html": [
+      "760"
+    ],
+    "reader/people/白骨精-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/白骨精.html": [
+      "760"
+    ],
+    "reader/people/白骨精外传.html": [
+      "760"
+    ],
+    "reader/people/白骨精深化专题.html": [
+      "760"
+    ],
+    "reader/people/白鹿精-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/白龙马-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/白龙马-方向二深化B.html": [
+      "760"
+    ],
+    "reader/people/白龙马.html": [
+      "760"
+    ],
+    "reader/people/白龙马外传.html": [
+      "760"
+    ],
+    "reader/people/白龙马深化专题.html": [
+      "760"
+    ],
+    "reader/people/百眼魔君.html": [
+      "760"
+    ],
+    "reader/people/百眼魔君外传.html": [
+      "760"
+    ],
+    "reader/people/百花羞-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/百花羞外传.html": [
+      "760"
+    ],
+    "reader/people/紧箍儿的内侧-器物传记.html": [
+      "760"
+    ],
+    "reader/people/紫金铃外传.html": [
+      "760"
+    ],
+    "reader/people/红孩儿-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/红孩儿.html": [
+      "760"
+    ],
+    "reader/people/红孩儿外传.html": [
+      "760"
+    ],
+    "reader/people/红孩儿深化专题.html": [
+      "760"
+    ],
+    "reader/people/红蟒精.html": [
+      "760"
+    ],
+    "reader/people/给孤独长者外传.html": [
+      "760"
+    ],
+    "reader/people/罗刹女外传.html": [
+      "760"
+    ],
+    "reader/people/老鼋外传.html": [
+      "760"
+    ],
+    "reader/people/老鼠精-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/老鼠精.html": [
+      "760"
+    ],
+    "reader/people/老鼠精深化专题.html": [
+      "760"
+    ],
+    "reader/people/芭蕉扇外传.html": [
+      "760"
+    ],
+    "reader/people/荆棘岭外传.html": [
+      "760"
+    ],
+    "reader/people/菩提祖师-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/菩提祖师.html": [
+      "760"
+    ],
+    "reader/people/菩提祖师外传.html": [
+      "760"
+    ],
+    "reader/people/菩提祖师深化专题.html": [
+      "760"
+    ],
+    "reader/people/虎先锋外传.html": [
+      "760"
+    ],
+    "reader/people/虾兵外传.html": [
+      "760"
+    ],
+    "reader/people/虾兵外传B.html": [
+      "760"
+    ],
+    "reader/people/蜘蛛精-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/蜘蛛精.html": [
+      "760"
+    ],
+    "reader/people/蜘蛛精七姐妹合集专题.html": [
+      "760"
+    ],
+    "reader/people/蜘蛛精七姐妹深化专题.html": [
+      "760"
+    ],
+    "reader/people/蜘蛛精外传.html": [
+      "760"
+    ],
+    "reader/people/蝎子精-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/蝎子精.html": [
+      "760"
+    ],
+    "reader/people/蝎子精深化专题.html": [
+      "760"
+    ],
+    "reader/people/袁守诚外传.html": [
+      "760"
+    ],
+    "reader/people/被借来的道具-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/观音.html": [
+      "760"
+    ],
+    "reader/people/观音外传.html": [
+      "760"
+    ],
+    "reader/people/观音菩萨-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/观音菩萨深化专题.html": [
+      "760"
+    ],
+    "reader/people/规矩的多重面孔-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/赛太岁-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/赛太岁.html": [
+      "760"
+    ],
+    "reader/people/车迟国三国师-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/车迟国三国师外传.html": [
+      "760"
+    ],
+    "reader/people/辟寒辟暑辟尘-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/边缘神祇深化专题.html": [
+      "760"
+    ],
+    "reader/people/迦叶外传.html": [
+      "760"
+    ],
+    "reader/people/通臂猿猴外传.html": [
+      "760"
+    ],
+    "reader/people/金刚琢外传.html": [
+      "760"
+    ],
+    "reader/people/金圣宫娘娘-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/金圣宫娘娘外传.html": [
+      "760"
+    ],
+    "reader/people/金圣宫娘娘深化专题.html": [
+      "760"
+    ],
+    "reader/people/金池长老外传.html": [
+      "760"
+    ],
+    "reader/people/金箍棒-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/金蝉子外传.html": [
+      "760"
+    ],
+    "reader/people/金角大王.html": [
+      "760"
+    ],
+    "reader/people/金角银角-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/金角银角外传.html": [
+      "760"
+    ],
+    "reader/people/金角银角深化专题.html": [
+      "760"
+    ],
+    "reader/people/铁扇公主-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/铁扇公主.html": [
+      "760"
+    ],
+    "reader/people/铁扇公主深化专题.html": [
+      "760"
+    ],
+    "reader/people/铜台府外传.html": [
+      "760"
+    ],
+    "reader/people/银角大王.html": [
+      "760"
+    ],
+    "reader/people/镇元大仙-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/镇元大仙.html": [
+      "760"
+    ],
+    "reader/people/阿傩迦叶外传.html": [
+      "760"
+    ],
+    "reader/people/陈关保外传.html": [
+      "760"
+    ],
+    "reader/people/青牛精-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/青狮精.html": [
+      "760"
+    ],
+    "reader/people/驼罗庄外传.html": [
+      "760"
+    ],
+    "reader/people/高翠兰-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/高翠兰外传.html": [
+      "760"
+    ],
+    "reader/people/高翠兰深化专题.html": [
+      "760"
+    ],
+    "reader/people/鱼篮观音外传.html": [
+      "760"
+    ],
+    "reader/people/黄眉老佛外传.html": [
+      "760"
+    ],
+    "reader/people/黄袍怪-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/黄袍怪.html": [
+      "760"
+    ],
+    "reader/people/黄袍怪外传.html": [
+      "760"
+    ],
+    "reader/people/黄风怪-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/黄风怪外传.html": [
+      "760"
+    ],
+    "reader/people/黎山老母外传.html": [
+      "760"
+    ],
+    "reader/people/黑熊精-方向二深化.html": [
+      "760"
+    ],
+    "reader/people/黑熊精.html": [
+      "760"
+    ],
+    "reader/poetry/index.html": [
+      "760"
+    ],
+    "reader/poetry/主题诗词创作.html": [
+      "760"
+    ],
+    "reader/poetry/原著人物赋诗词赏析专题.html": [
+      "760"
+    ],
+    "reader/poetry/原著景物诗分类赏析专题.html": [
+      "760"
+    ],
+    "reader/poetry/原著景物诗赏析专题.html": [
+      "760"
+    ],
+    "reader/poetry/原著诗词赏析.html": [
+      "760"
+    ],
+    "reader/poetry/回目对联分析专题.html": [
+      "760"
+    ],
+    "reader/poetry/开篇诗专题深化.html": [
+      "760"
+    ],
+    "reader/poetry/西游与临江仙词牌赏析专题.html": [
+      "760"
+    ],
+    "reader/poetry/西游与水调歌头词牌赏析专题.html": [
+      "760"
+    ],
+    "reader/poetry/西游与满庭芳词牌赏析专题.html": [
+      "760"
+    ],
+    "reader/poetry/西游与西江月词牌赏析专题.html": [
+      "760"
+    ],
+    "reader/poetry/西游诗词意象谱系专题.html": [
+      "760"
+    ],
+    "reader/poetry/西游诗词韵律分析专题.html": [
+      "760"
+    ],
+    "reader/themes/index.html": [
+      "760"
+    ],
+    "reader/themes/不可靠叙述专题.html": [
+      "760"
+    ],
+    "reader/themes/二十八星宿专题.html": [
+      "760"
+    ],
+    "reader/themes/二郎神与悟空-自由观碰撞.html": [
+      "760"
+    ],
+    "reader/themes/互文性叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/五方揭谛专题.html": [
+      "760"
+    ],
+    "reader/themes/五次蜕变专题.html": [
+      "760"
+    ],
+    "reader/themes/人参果-人与欲望的关系.html": [
+      "760"
+    ],
+    "reader/themes/佛学AI西游三维语义映射表.html": [
+      "760"
+    ],
+    "reader/themes/修辞叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/倒果为因专题.html": [
+      "760"
+    ],
+    "reader/themes/元叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/全世界重写西游记.html": [
+      "760"
+    ],
+    "reader/themes/全球重写专题.html": [
+      "760"
+    ],
+    "reader/themes/八十一难专题.html": [
+      "760"
+    ],
+    "reader/themes/八十一难结构学专题.html": [
+      "760"
+    ],
+    "reader/themes/八十一难风险管理学专题.html": [
+      "760"
+    ],
+    "reader/themes/六丁六甲专题.html": [
+      "760"
+    ],
+    "reader/themes/兵器的自我修养专题.html": [
+      "760"
+    ],
+    "reader/themes/创伤叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/动物研究专题.html": [
+      "760"
+    ],
+    "reader/themes/历史叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/反抗与束缚的永恒循环专题.html": [
+      "760"
+    ],
+    "reader/themes/取经人类学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经传播学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经伦理学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经历史学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经叙事经济学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经团队-凭什么走到西天.html": [
+      "760"
+    ],
+    "reader/themes/取经团队决策论专题.html": [
+      "760"
+    ],
+    "reader/themes/取经团队动力学.html": [
+      "760"
+    ],
+    "reader/themes/取经团队心理学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经团队组织学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经团队身体地理学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经地理学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经地理批评专题.html": [
+      "760"
+    ],
+    "reader/themes/取经声音政治学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经媒介考古学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经密码学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经情感结构专题.html": [
+      "760"
+    ],
+    "reader/themes/取经拓扑学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经政治学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经教育学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经数字人文专题.html": [
+      "760"
+    ],
+    "reader/themes/取经气候学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经生态学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经社会学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经神话政治学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经空间生产专题.html": [
+      "760"
+    ],
+    "reader/themes/取经符号学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经网络叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经网络叙事学深化专题.html": [
+      "760"
+    ],
+    "reader/themes/取经美学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经考古学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经路径地理符号学专题.html": [
+      "760"
+    ],
+    "reader/themes/取经路线地理专题.html": [
+      "760"
+    ],
+    "reader/themes/取经路线社会学研究专题.html": [
+      "760"
+    ],
+    "reader/themes/名字的政治学专题.html": [
+      "760"
+    ],
+    "reader/themes/后人类主义专题.html": [
+      "760"
+    ],
+    "reader/themes/后殖民叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/听觉叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/味觉叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/唐僧-凡躯圣心.html": [
+      "760"
+    ],
+    "reader/themes/嗅觉叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/器物传记学专题.html": [
+      "760"
+    ],
+    "reader/themes/四值功曹专题.html": [
+      "760"
+    ],
+    "reader/themes/增补一三十九位神祇总序与编制表专题.html": [
+      "760"
+    ],
+    "reader/themes/增补七很多很多劫之后专题.html": [
+      "760"
+    ],
+    "reader/themes/增补三土地公与山神专题.html": [
+      "760"
+    ],
+    "reader/themes/增补二全员集结专题.html": [
+      "760"
+    ],
+    "reader/themes/增补五老亥的日常生活专题.html": [
+      "760"
+    ],
+    "reader/themes/增补八值日功曹的最后一笔专题.html": [
+      "760"
+    ],
+    "reader/themes/增补六波罗僧揭谛的前身暗示专题.html": [
+      "760"
+    ],
+    "reader/themes/增补四值月功曹的花册与节气专题.html": [
+      "760"
+    ],
+    "reader/themes/大闹天宫-英雄还是悲剧.html": [
+      "760"
+    ],
+    "reader/themes/大闹天宫专题.html": [
+      "760"
+    ],
+    "reader/themes/女性主义叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/妖怪伦理学专题.html": [
+      "760"
+    ],
+    "reader/themes/妖怪生态学专题.html": [
+      "760"
+    ],
+    "reader/themes/妖怪经济学专题.html": [
+      "760"
+    ],
+    "reader/themes/妖怪身份政治专题.html": [
+      "760"
+    ],
+    "reader/themes/妖魔谱系政治学专题.html": [
+      "760"
+    ],
+    "reader/themes/小妖生命史专题.html": [
+      "760"
+    ],
+    "reader/themes/底层叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/开篇诗-被跳过的总纲.html": [
+      "760"
+    ],
+    "reader/themes/开篇诗专题.html": [
+      "760"
+    ],
+    "reader/themes/情感叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/招安对比重写专题.html": [
+      "760"
+    ],
+    "reader/themes/招安的两种结局专题.html": [
+      "760"
+    ],
+    "reader/themes/接受美学专题.html": [
+      "760"
+    ],
+    "reader/themes/文化记忆专题.html": [
+      "760"
+    ],
+    "reader/themes/无字真经-灵山的玩笑.html": [
+      "760"
+    ],
+    "reader/themes/无字真经专题.html": [
+      "760"
+    ],
+    "reader/themes/时间叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/时间哲学专题.html": [
+      "760"
+    ],
+    "reader/themes/时间的政治学专题.html": [
+      "760"
+    ],
+    "reader/themes/明代司法制度镜像专题.html": [
+      "760"
+    ],
+    "reader/themes/暗数据遗忘者列传.html": [
+      "760"
+    ],
+    "reader/themes/权力五联对照专题.html": [
+      "760"
+    ],
+    "reader/themes/根器专题.html": [
+      "760"
+    ],
+    "reader/themes/比较文学专题.html": [
+      "760"
+    ],
+    "reader/themes/水帘洞-瀑布门的世界.html": [
+      "760"
+    ],
+    "reader/themes/水帘洞专题.html": [
+      "760"
+    ],
+    "reader/themes/沙僧-沉默者的智慧.html": [
+      "760"
+    ],
+    "reader/themes/法宝政治学专题.html": [
+      "760"
+    ],
+    "reader/themes/法宝系统专题.html": [
+      "760"
+    ],
+    "reader/themes/混世四猴专题.html": [
+      "760"
+    ],
+    "reader/themes/物质生态学专题.html": [
+      "760"
+    ],
+    "reader/themes/猪八戒-不愿承认的自己.html": [
+      "760"
+    ],
+    "reader/themes/猴王到行者-五次蜕变.html": [
+      "760"
+    ],
+    "reader/themes/生态批评专题.html": [
+      "760"
+    ],
+    "reader/themes/白龙马-沉默龙的真相.html": [
+      "760"
+    ],
+    "reader/themes/真假美猴王-二心之战.html": [
+      "760"
+    ],
+    "reader/themes/真假美猴王专题.html": [
+      "760"
+    ],
+    "reader/themes/神学干预机制专题.html": [
+      "760"
+    ],
+    "reader/themes/神话学专题.html": [
+      "760"
+    ],
+    "reader/themes/空间叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/空间政治学专题.html": [
+      "760"
+    ],
+    "reader/themes/筋斗云与高铁-速度焦虑.html": [
+      "760"
+    ],
+    "reader/themes/筋斗云专题.html": [
+      "760"
+    ],
+    "reader/themes/紧箍儿咒-四百年回响.html": [
+      "760"
+    ],
+    "reader/themes/紧箍咒专题.html": [
+      "760"
+    ],
+    "reader/themes/缘起即算法-章节体.html": [
+      "760"
+    ],
+    "reader/themes/缘起即算法专题.html": [
+      "760"
+    ],
+    "reader/themes/翻译学专题.html": [
+      "760"
+    ],
+    "reader/themes/芭蕉扇-终极灭火器的关系.html": [
+      "760"
+    ],
+    "reader/themes/蟠桃园-体制内的秘密.html": [
+      "760"
+    ],
+    "reader/themes/西游与信息论专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与全球神话比较专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与后结构主义专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与复杂性科学专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与媒介理论专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与媒介生态学专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与存在主义专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与弗洛伊德精神分析专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与拉康精神分析专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与政治思想史专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与死亡研究专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与游戏学专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与社会理论延伸专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与符号学专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与系统论专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与经济学专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与经济学派深化专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与荣格分析心理学专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与解构主义专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与解释学专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与认知科学专题.html": [
+      "760"
+    ],
+    "reader/themes/西游与记忆技术专题.html": [
+      "760"
+    ],
+    "reader/themes/西游体检-你走到第几回了.html": [
+      "760"
+    ],
+    "reader/themes/西游体检专题.html": [
+      "760"
+    ],
+    "reader/themes/西游四维研究专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡元定义.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第一讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第三十讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第二十一讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第二十七讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第二十三讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第二十九讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第二十二讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第二十五讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第二十八讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第二十六讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第二十四讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第二十讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第二讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第十七讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第十九讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第十五讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第十八讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游渡第十六讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游职场学第一讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游职场学第七讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游职场学第三讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游职场学第二讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游职场学第五讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游职场学第六讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游职场学第四讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游职场学终讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游职场学附篇专题.html": [
+      "760"
+    ],
+    "reader/themes/西游记原著与黑神话悟空长生体系对比总结专题.html": [
+      "760"
+    ],
+    "reader/themes/西游败局第一讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游败局第七讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游败局第三讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游败局第九讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游败局第二讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游败局第五讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游败局第八讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游败局第六讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游败局第十一讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游败局第十二讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游败局第十讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游败局第四讲专题.html": [
+      "760"
+    ],
+    "reader/themes/西游败局终讲专题.html": [
+      "760"
+    ],
+    "reader/themes/视觉叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/触觉叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/认知叙事学专题.html": [
+      "760"
+    ],
+    "reader/themes/记忆之场专题.html": [
+      "760"
+    ],
+    "reader/themes/记忆伦理专题.html": [
+      "760"
+    ],
+    "reader/themes/身体政治学专题.html": [
+      "760"
+    ],
+    "reader/themes/金箍棒的重量-一万三千五百斤的秘密.html": [
+      "760"
+    ],
+    "reader/themes/长生之后神仙为什么死了专题.html": [
+      "760"
+    ],
+    "reader/themes/长生之道专题.html": [
+      "760"
+    ],
+    "reader/themes/长生之道的代价专题.html": [
+      "760"
+    ],
+    "reader/themes/长生之道的政治经济学专题.html": [
+      "760"
+    ],
+    "reader/themes/长生之道的权力谱系专题.html": [
+      "760"
+    ],
+    "reader/themes/长生之道终章专题.html": [
+      "760"
+    ],
+    "reader/themes/集体记忆专题.html": [
+      "760"
+    ],
+    "reader/themes/须菩提祖师-消失的师父.html": [
+      "760"
+    ],
+    "reader/themes/黑神话拒绝金箍专题.html": [
+      "760"
+    ],
+    "reader/themes-hub.html": [
+      "1320",
+      "760"
+    ],
+    "rum-viewer.html": [
+      "1024"
+    ],
+    "visit-viewer.html": []
+  }
+}

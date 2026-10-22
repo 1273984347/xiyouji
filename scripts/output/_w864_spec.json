@@ -1,0 +1,29 @@
+{
+  "batch": "W864",
+  "date": "2026-10-22",
+  "title": "W864 设计迁移 B2 结构页 10 页（容器令牌化·朱砂实底合规·间距令牌化）",
+  "desc": "十页结构页按裁决迁移：KPI 顶条收敛到首卡、徽章转淡底、间距令牌化 216 处，C 渠与 chart-3 拆专项批",
+  "head_entry": "2026-10-22（W864 设计迁移 B2 结构页 10 页）",
+  "head_sentence": "结构页的朱砂实底大多长在数据编码上，收敛只动装饰那一层，数据语义进豁免清单",
+  "changelog_body": "\n\n> **来源**：用户「可以」批准 `--chart-3` 拆专批方案后启动。W864 = W826 §6 迁移清单第二片（结构页 10 页）。\n> - **文件**：site/data/chapter-structure-graph.html、site/data/chapter-stats.html、site/data/story-timeline.html、site/data/timeline.html、site/data/relationships.html、site/data/81-hardships.html、site/data/81-hardships-view.html、site/data/hardship-heatmap.html、site/data/hardship-difficulty-heatmap.html、site/data/methodology-matrix.html、scripts/_w864_migrate.py、scripts/_w864_accent_audit.py、scripts/output/_w864_accent_audit.json、scripts/output/_w864_accent_exemptions.json、scripts/output/_w864_spec.json、docs/00-导读/W批次编号对账表.md。\n> - **A 容器**：十页均现役 1320px（= 目标档），`max-width: 1320px` 字面量换 `var(--container-wide)`，零视觉变化。\n> - **B 朱砂实底**：机检按计算样式量（背景色 == 朱砂且面积 >400px²，或 top 边框色 == 朱砂且 ≥2px 且面积 >400px²）。**KPI 顶条收敛**——八页 `.kpi-row` 的 3px 朱砂顶条按裁决 2「整页仅首屏首卡可带」收敛为：首卡保留 3px 朱砂，其余非 alt 变体卡片降 1px 线（alt-2/3/4 非朱砂不动）；`.seal` 徽章实底（40×40 朱砂块）转 `--accent-tint` 淡底 + 朱砂字（十页同款）。**数据语义色片进豁免清单**（`scripts/output/_w864_accent_exemptions.json`·首批）：81-hardships 的 90 个 `.tag`（cause/ending/difficulty 分类编码）、relationships 的 5 个 `.role-tag.primary`（阵营编码）、methodology 的 8 个 quad/phase 徽章、以及选中态实底（组件卡③明定 `--accent` 底）——白名单「图表语义不属界面装饰」的落地形态。\n> - **D 间距**：216 处精确等值字面量 → `var(--space-N)`（值保留·零视觉变化）。\n> - **C 渠与 chart-3 defer**：数据页的 117 处朱砂文字跨 12 条 scoped 规则（`.design-purpose strong` / `td.num` / `.ec-axis` / `.ibox-label`…），且存在 tint 背景第三态（裁决的两态口径未覆盖），逐规则核对成本与风险高于本批价值——**拆「对比度专项批」**，与 `--chart-3` 值切换（42 消费页）同批，用全站审计 + 专属对拍面一次 proof。\n> - **验收**：J2 探针 24 页（10 页 + 14 页金丝雀）浅暗双主题前后对拍 + 全量 diff 归渠。**判词：PASS——302 处 diff 全部归渠零剩余**：KPI 顶条收敛 96 处（25 张非首卡 × 2 属性 × 双主题）+ `.seal` 徽章 198 处（8 页 × 2 个 seal 元素 × 6 属性 × 双主题）+ **顶条回流连带 8 处**（hardship-heatmap 2 个 SVG 标签 font-size 9→10px：顶条 3px→1px 让布局回流 2px，chart-audit 修复器重判后不再压缩——复采确定性已验证）。A（容器令牌化）与 D（间距 216 处）**零 diff**——值保留实证。金丝雀 13 页 0 diff。**施工中抓到一个 CSP 级事故**：令牌化改动了内联脚本里模板字面量的 CSS（`margin-top:4px` → `margin-top:var(--space-2)`），脚本哈希变化而 CSP 未重算 → 采集时脚本被拦、两页元素数塌陷（905→176/76→52）；并行会话随后重算哈希，本批重采 10 页并合并后归零。**教训：动到内联脚本文本（哪怕只是模板里的 CSS 值）必须同批重算 CSP 哈希**。另：timeline 的 accent-2/3/4 彩条属非朱砂顶条，首轮通用规则压平了它——按「限额只针对朱砂」回退（彩条恢复）。",
+  "milestone_block": "- **W864 设计迁移 B2 结构页 10 页**：\n  - A 容器：十页 1320px 字面量 → `--container-wide`（零视觉变化）\n  - B 朱砂实底：KPI 顶条收敛到首卡（非 alt 变体降 1px 线）+ `.seal` 徽章转淡底 + 数据语义色片豁免清单（首批·90 tag/5 role-tag/8 badge/选中态）\n  - D 间距令牌化 216 处（值保留）\n  - C 渠与 `--chart-3` 值切换拆「对比度专项批」（117 处文字跨 12 规则 + tint 第三态）",
+  "agents_note": "二〇二六年十月二十二日（W864）B2 是结构页，朱砂在这里的角色和根页不一样——根页的朱砂是装饰（kicker、按钮、徽章），结构页的朱砂大半是**数据编码**：81 难表里 cause/ending/difficulty 三列色片、势力阵营标签、象限徽章，颜色本身就是图例。所以这批的朱砂收敛只动装饰那一层：KPI 顶条按裁决收到首卡，`.seal` 印章块转淡底，90 个分类色片进豁免清单——白名单里「图表语义不属界面装饰」这句话的落地形态就是这份清单，以后哪个批要争「这算不算数据语义」，查这份文件。还做了个取舍：C 渠（朱砂文字落 --bg 换 --accent-text）在数据页上散成 117 处、跨 12 条 scoped 规则，还冒出裁决没写的第三态（文字落在 accent 淡底上），逐条核对不如拆专项批——和 chart-3 值切换一起，用全站审计一次 proof，比每批零敲碎打好。这批把 batch_cascade 的段也立了（W863 补段之后顶段恢复正常），采样照常。",
+  "file_index_rows": [
+    "| site/data/chapter-structure-graph.html | W864 | B2 迁移：容器令牌化 + KPI 顶条收敛 + seal 淡底 + 间距令牌化 9 处 |",
+    "| site/data/chapter-stats.html | W864 | B2 迁移：同上（间距 8 处） |",
+    "| site/data/story-timeline.html | W864 | B2 迁移：同上（间距 7 处） |",
+    "| site/data/timeline.html | W864 | B2 迁移：容器令牌化 + seal 淡底 + 间距 23 处（顶条已合规） |",
+    "| site/data/relationships.html | W864 | B2 迁移：容器令牌化 + 顶条收敛（alt 变体不动）+ seal 淡底 + 间距 45 处 |",
+    "| site/data/81-hardships.html | W864 | B2 迁移：容器令牌化 + seal 淡底 + 间距 16 处（90 tag 进豁免清单） |",
+    "| site/data/81-hardships-view.html | W864 | B2 迁移：容器令牌化 + 顶条收敛 + seal 淡底 + 间距 18 处 |",
+    "| site/data/hardship-heatmap.html | W864 | B2 迁移：容器令牌化 + 顶条收敛 + seal 淡底 + 间距 23 处 |",
+    "| site/data/hardship-difficulty-heatmap.html | W864 | B2 迁移：容器令牌化 + 顶条收敛 + seal 淡底 + 间距 20 处 |",
+    "| site/data/methodology-matrix.html | W864 | B2 迁移：容器令牌化 + 顶条收敛 + seal 淡底 + 间距 47 处 |",
+    "| scripts/_w864_migrate.py | W864 | 新增：B2 施工件（A 容器 + B 顶条规则 + B seal·块扫描·dry-run） |",
+    "| scripts/_w864_accent_audit.py | W864 | 新增：朱砂落点审计（文字 + 实底双尺子·计算样式） |",
+    "| scripts/output/_w864_accent_audit.json | W864 | 新增：审计产物（10 页文字与实底落点） |",
+    "| scripts/output/_w864_accent_exemptions.json | W864 | 新增：裁决 2 豁免清单首批（数据语义色片 + 选中态实底） |",
+    "| scripts/output/_w864_spec.json | W864 | 本批 spec 十字段 |",
+    "| docs/00-导读/W批次编号对账表.md | W864 | 认领行与收官回填 |"
+  ]
+}

@@ -327,3 +327,97 @@ def test_agent_web_scan_surface_is_stable():
     files = security_scan.discover_files()
     aw = [f for f in files if "xiyouji-agent-web" in str(f).replace("\\", "/")]
     assert len(aw) >= 30, "agent-web 扫描面仅 %d 个文件，疑似收窄（实测入库源文件 43 个）" % len(aw)
+
+
+# ---------------------------------------------------------------------------
+# W816：XSS 规则覆盖面补齐 + 构建产物排除修复（负样本实证）
+# ---------------------------------------------------------------------------
+
+def test_discover_files_excludes_tsbuild_artifacts():
+    """W816：tsc outDir 产物必须排除（outDir 已迁至 .tsbuild·W757 的旧断言只覆盖 server/ 形态）。
+
+    成因：tsconfig.node.json 的 "outDir": "./.tsbuild"，而 W757 写下的排除只认
+    `xiyouji-agent-web/server/**` 与 `server/engine/**` → .tsbuild/ 下的编译测试夹具
+    （内含假凭证）被纳入扫描 → 本机报 SEC-002 high 而 CI（无该目录）恒绿——
+    正是「本地红 / CI 绿」分裂在 outDir 迁移后的复发。
+    """
+    files = security_scan.discover_files()
+    leaked = [
+        str(f).replace("\\", "/") for f in files
+        if ".tsbuild" in str(f).replace("\\", "/").split("/")
+    ]
+    assert not leaked, "扫描面含 agent-web tsc 产物（.tsbuild/ 应排除）：%s" % leaked[:5]
+
+
+def test_agent_web_build_artifact_regex_covers_tsbuild():
+    """W816：排除正则须覆盖 .tsbuild 前缀（正则层直证·不依赖 discover_files 全量扫描）。"""
+    root = security_scan.ROOT
+    probe = root / "xiyouji-agent-web" / ".tsbuild" / "server" / "engine" / "tools.test.js"
+    assert security_scan._is_agent_web_build_artifact(probe), (
+        "排除正则未覆盖 .tsbuild/ 产物：%s" % probe)
+    legacy = root / "xiyouji-agent-web" / "server" / "engine" / "tools.test.js"
+    assert security_scan._is_agent_web_build_artifact(legacy), (
+        "排除正则回归：旧形态 server/engine/*.js 不再被排除")
+
+
+def _scan_synthetic(tmp_path, monkeypatch, rel_name, content):
+    """在 tmp 仓形下扫描一个合成文件（monkeypatch ROOT·避免污染真实工作树）。"""
+    monkeypatch.setattr(security_scan, "ROOT", tmp_path)
+    target = tmp_path / rel_name
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(content, encoding="utf-8")
+    return security_scan.scan_file(target)
+
+
+def test_xss_rule_covers_d3_html_sink(tmp_path, monkeypatch):
+    """W816：d3 `.html()` 是 innerHTML 等价 sink——XSS-001 不覆盖此形态（原零信号）。"""
+    findings = _scan_synthetic(
+        tmp_path, monkeypatch, "page.html",
+        "<html><body><script>\n"
+        "d3.select('#x').html('<b>' + value + '</b>');\n"
+        "</script></body></html>\n")
+    rules = {f["rule"] for f in findings}
+    assert "XSS-007" in rules, "d3 .html() 未被 XSS 规则捕获（rules=%s）" % sorted(rules)
+
+
+def test_xss_rule_covers_innerhtml_append_sink(tmp_path, monkeypatch):
+    """W816：`.innerHTML +=` 追加赋值——XSS-001 的 `=` 前有 `+` 故不匹配（原零信号）。"""
+    findings = _scan_synthetic(
+        tmp_path, monkeypatch, "page.html",
+        "<html><body><script>\n"
+        "el.innerHTML += '<b>' + value + '</b>';\n"
+        "</script></body></html>\n")
+    rules = {f["rule"] for f in findings}
+    assert "XSS-008" in rules, ".innerHTML += 未被 XSS 规则捕获（rules=%s）" % sorted(rules)
+
+
+def test_xss001_still_fires_for_plain_innerhtml_assignment(tmp_path, monkeypatch):
+    """W816 回归锚：补新规则不得破坏既有 XSS-001（`.innerHTML =` 形态）。"""
+    findings = _scan_synthetic(
+        tmp_path, monkeypatch, "page.html",
+        "<html><body><script>\n"
+        "el.innerHTML = '<b>' + value + '</b>';\n"
+        "</script></body></html>\n")
+    rules = {f["rule"] for f in findings}
+    assert "XSS-001" in rules, "既有 XSS-001 失效（rules=%s）" % sorted(rules)
+
+
+def test_new_xss_rules_use_site_downgrade_semantics(tmp_path, monkeypatch):
+    """W816：新规则须沿用既有 site/ 降级口径（visual 页面 high→medium·非 site/ 仍 high）。"""
+    site_findings = _scan_synthetic(
+        tmp_path, monkeypatch, "site/page.html",
+        "<html><body><script>\n"
+        "d3.select('#x').html('<b>' + v + '</b>');\n"
+        "el.innerHTML += '<i>' + v + '</i>';\n"
+        "</script></body></html>\n")
+    sev = {f["rule"]: f["severity"] for f in site_findings if f["rule"] in ("XSS-007", "XSS-008")}
+    assert sev.get("XSS-007") == "medium", "site/ 内 XSS-007 未按既有口径降级：%s" % sev
+    assert sev.get("XSS-008") == "medium", "site/ 内 XSS-008 未按既有口径降级：%s" % sev
+
+    outside = _scan_synthetic(
+        tmp_path, monkeypatch, "outside/page.html",
+        "<html><body><script>\n"
+        "d3.select('#x').html('<b>' + v + '</b>');\n"
+        "</script></body></html>\n")
+    sev2 = {f["rule"]: f["severity"] for f in outside if f["rule"] == "XSS-007"}
+    assert sev2.get("XSS-007") == "high", "非 site/ 目录的 XSS-007 未保持 high：%s" % sev2

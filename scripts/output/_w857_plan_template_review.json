@@ -1,0 +1,3086 @@
+{
+ "docs": [
+  {
+   "file": "T01-任务计划执行与经验沉淀报告-2026-10-14.md",
+   "kind": "REPORT",
+   "bytes": 26241,
+   "lines": 186,
+   "criteria": {
+    "C01": {
+     "src": "§4.2",
+     "desc": "目录",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C02": {
+     "src": "§4.2",
+     "desc": "执行摘要",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合",
+     "note": "等价形式命中：执行摘要、摘要"
+    },
+    "C03": {
+     "src": "§4.2",
+     "desc": "附录",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C04": {
+     "src": "§5.1",
+     "desc": "任务标识·任务编号",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C05": {
+     "src": "§5.1",
+     "desc": "任务标识·任务名称",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C06": {
+     "src": "§5.1",
+     "desc": "任务标识·任务来源",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C07": {
+     "src": "§5.1",
+     "desc": "任务标识·任务类型",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C08": {
+     "src": "§5.1",
+     "desc": "任务标识·创建时间",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C09": {
+     "src": "§5.1",
+     "desc": "任务标识·计划版本",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C10": {
+     "src": "§5.1",
+     "desc": "任务标识·负责人",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C11": {
+     "src": "§5.1",
+     "desc": "任务标识·验收人",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C12": {
+     "src": "§5.2",
+     "desc": "目标与完成标准",
+     "present": null,
+     "need": 2,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C13": {
+     "src": "§5.2",
+     "desc": "不完成定义",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C14": {
+     "src": "§5.3",
+     "desc": "范围与边界·做什么/不做什么",
+     "present": null,
+     "need": 2,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C15": {
+     "src": "§5.3",
+     "desc": "范围与边界·输入/输出/依赖",
+     "present": null,
+     "need": 3,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C16": {
+     "src": "§5.4",
+     "desc": "信息基础与假设·ASM 表",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C17": {
+     "src": "§5.5",
+     "desc": "执行步骤·ST 表",
+     "present": null,
+     "need": 6,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C18": {
+     "src": "§5.5",
+     "desc": "执行步骤·工具命令与耗时",
+     "present": null,
+     "need": 2,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C19": {
+     "src": "§5.6",
+     "desc": "量化指标·V 表",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C20": {
+     "src": "§5.7",
+     "desc": "风险·R 表",
+     "present": null,
+     "need": 6,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C21": {
+     "src": "§5.8",
+     "desc": "决策记录·D 表",
+     "present": null,
+     "need": 6,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C22": {
+     "src": "§5.9",
+     "desc": "自包含检查（12 项逐项）",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C23": {
+     "src": "§6",
+     "desc": "执行记录·ST 状态/偏差/修正",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C24": {
+     "src": "§7.1",
+     "desc": "验收表·AC",
+     "present": 3,
+     "need": 5,
+     "missing": [
+      "验收项",
+      "整改措施"
+     ],
+     "verdict": "部分符合"
+    },
+    "C25": {
+     "src": "§7.2",
+     "desc": "可行性自评·A 表",
+     "present": 4,
+     "need": 5,
+     "missing": [
+      "实施风险"
+     ],
+     "verdict": "部分符合"
+    },
+    "C26": {
+     "src": "§7.2",
+     "desc": "总体自评结论",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C27": {
+     "src": "§8",
+     "desc": "经验沉淀·E 表",
+     "present": 2,
+     "need": 5,
+     "missing": [
+      "适用场景与边界",
+      "证据来源",
+      "可迁移性"
+     ],
+     "verdict": "部分符合"
+    },
+    "C28": {
+     "src": "§12",
+     "desc": "最终交付物·风险与偏差记录",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C29": {
+     "src": "§12",
+     "desc": "最终交付物·决策记录与理由",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C30": {
+     "src": "§12",
+     "desc": "最终交付物·经验沉淀",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C31": {
+     "src": "§12",
+     "desc": "最终交付物·方案可行性自评",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C32": {
+     "src": "§4.4",
+     "desc": "每章结论与待确认事项（等效形式亦计）",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合",
+     "note": "等价形式命中：不做 / 待用户"
+    }
+   },
+   "numbers": {
+    "G": 1,
+    "AC": 6,
+    "ASM": 7,
+    "ST": 8,
+    "D": 8,
+    "R": 1,
+    "V": 7,
+    "E": 8,
+    "P": 0,
+    "A": 4,
+    "WF": 0,
+    "SC": 0,
+    "PRE": 0
+   },
+   "banned": {
+    "可能": 1
+   },
+   "banned_ctx": [
+    [
+     79,
+     "可能",
+     "**已知局限（如实披露·影响结论解释边界）**：①金标准为标题法——主题词未出现在标题的相关文档不进 gold，各系统同口径、绝对召回被系统性低估（横向比较有效、绝对数保守）；②分块 380 字上限——超长文档语义有截断"
+    ]
+   ],
+   "banned_total": 1,
+   "chapters": {
+    "h2": 10,
+    "conclusion_marks": 0,
+    "pending_marks": 0
+   }
+  },
+  {
+   "file": "T03-任务计划执行与经验沉淀报告-2026-10-20.md",
+   "kind": "REPORT",
+   "bytes": 21367,
+   "lines": 177,
+   "criteria": {
+    "C01": {
+     "src": "§4.2",
+     "desc": "目录",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C02": {
+     "src": "§4.2",
+     "desc": "执行摘要",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合",
+     "note": "等价形式命中：执行摘要、摘要"
+    },
+    "C03": {
+     "src": "§4.2",
+     "desc": "附录",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C04": {
+     "src": "§5.1",
+     "desc": "任务标识·任务编号",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C05": {
+     "src": "§5.1",
+     "desc": "任务标识·任务名称",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C06": {
+     "src": "§5.1",
+     "desc": "任务标识·任务来源",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C07": {
+     "src": "§5.1",
+     "desc": "任务标识·任务类型",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C08": {
+     "src": "§5.1",
+     "desc": "任务标识·创建时间",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C09": {
+     "src": "§5.1",
+     "desc": "任务标识·计划版本",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C10": {
+     "src": "§5.1",
+     "desc": "任务标识·负责人",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C11": {
+     "src": "§5.1",
+     "desc": "任务标识·验收人",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C12": {
+     "src": "§5.2",
+     "desc": "目标与完成标准",
+     "present": null,
+     "need": 2,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C13": {
+     "src": "§5.2",
+     "desc": "不完成定义",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C14": {
+     "src": "§5.3",
+     "desc": "范围与边界·做什么/不做什么",
+     "present": null,
+     "need": 2,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C15": {
+     "src": "§5.3",
+     "desc": "范围与边界·输入/输出/依赖",
+     "present": null,
+     "need": 3,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C16": {
+     "src": "§5.4",
+     "desc": "信息基础与假设·ASM 表",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C17": {
+     "src": "§5.5",
+     "desc": "执行步骤·ST 表",
+     "present": null,
+     "need": 6,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C18": {
+     "src": "§5.5",
+     "desc": "执行步骤·工具命令与耗时",
+     "present": null,
+     "need": 2,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C19": {
+     "src": "§5.6",
+     "desc": "量化指标·V 表",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C20": {
+     "src": "§5.7",
+     "desc": "风险·R 表",
+     "present": null,
+     "need": 6,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C21": {
+     "src": "§5.8",
+     "desc": "决策记录·D 表",
+     "present": null,
+     "need": 6,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C22": {
+     "src": "§5.9",
+     "desc": "自包含检查（12 项逐项）",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C23": {
+     "src": "§6",
+     "desc": "执行记录·ST 状态/偏差/修正",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C24": {
+     "src": "§7.1",
+     "desc": "验收表·AC",
+     "present": 4,
+     "need": 5,
+     "missing": [
+      "整改措施"
+     ],
+     "verdict": "部分符合"
+    },
+    "C25": {
+     "src": "§7.2",
+     "desc": "可行性自评·A 表",
+     "present": 5,
+     "need": 5,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C26": {
+     "src": "§7.2",
+     "desc": "总体自评结论",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C27": {
+     "src": "§8",
+     "desc": "经验沉淀·E 表",
+     "present": 5,
+     "need": 5,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C28": {
+     "src": "§12",
+     "desc": "最终交付物·风险与偏差记录",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C29": {
+     "src": "§12",
+     "desc": "最终交付物·决策记录与理由",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C30": {
+     "src": "§12",
+     "desc": "最终交付物·经验沉淀",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C31": {
+     "src": "§12",
+     "desc": "最终交付物·方案可行性自评",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C32": {
+     "src": "§4.4",
+     "desc": "每章结论与待确认事项（等效形式亦计）",
+     "present": 1,
+     "need": 2,
+     "missing": [
+      "待确认事项"
+     ],
+     "verdict": "部分符合",
+     "note": "等价形式命中：本批不做、不做 / 无"
+    }
+   },
+   "numbers": {
+    "G": 0,
+    "AC": 13,
+    "ASM": 11,
+    "ST": 10,
+    "D": 6,
+    "R": 0,
+    "V": 0,
+    "E": 7,
+    "P": 0,
+    "A": 7,
+    "WF": 0,
+    "SC": 0,
+    "PRE": 0
+   },
+   "banned": {},
+   "banned_ctx": [],
+   "banned_total": 0,
+   "chapters": {
+    "h2": 10,
+    "conclusion_marks": 0,
+    "pending_marks": 0
+   }
+  },
+  {
+   "file": "T04-任务计划执行与经验沉淀报告-2026-10-21.md",
+   "kind": "REPORT",
+   "bytes": 8666,
+   "lines": 85,
+   "criteria": {
+    "C01": {
+     "src": "§4.2",
+     "desc": "目录",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C02": {
+     "src": "§4.2",
+     "desc": "执行摘要",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合",
+     "note": "等价形式命中：执行摘要、速览、摘要"
+    },
+    "C03": {
+     "src": "§4.2",
+     "desc": "附录",
+     "present": 0,
+     "need": 1,
+     "missing": [
+      "附录"
+     ],
+     "verdict": "不符合"
+    },
+    "C04": {
+     "src": "§5.1",
+     "desc": "任务标识·任务编号",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C05": {
+     "src": "§5.1",
+     "desc": "任务标识·任务名称",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C06": {
+     "src": "§5.1",
+     "desc": "任务标识·任务来源",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C07": {
+     "src": "§5.1",
+     "desc": "任务标识·任务类型",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C08": {
+     "src": "§5.1",
+     "desc": "任务标识·创建时间",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C09": {
+     "src": "§5.1",
+     "desc": "任务标识·计划版本",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C10": {
+     "src": "§5.1",
+     "desc": "任务标识·负责人",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C11": {
+     "src": "§5.1",
+     "desc": "任务标识·验收人",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C12": {
+     "src": "§5.2",
+     "desc": "目标与完成标准",
+     "present": null,
+     "need": 2,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C13": {
+     "src": "§5.2",
+     "desc": "不完成定义",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C14": {
+     "src": "§5.3",
+     "desc": "范围与边界·做什么/不做什么",
+     "present": null,
+     "need": 2,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C15": {
+     "src": "§5.3",
+     "desc": "范围与边界·输入/输出/依赖",
+     "present": null,
+     "need": 3,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C16": {
+     "src": "§5.4",
+     "desc": "信息基础与假设·ASM 表",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C17": {
+     "src": "§5.5",
+     "desc": "执行步骤·ST 表",
+     "present": null,
+     "need": 6,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C18": {
+     "src": "§5.5",
+     "desc": "执行步骤·工具命令与耗时",
+     "present": null,
+     "need": 2,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C19": {
+     "src": "§5.6",
+     "desc": "量化指标·V 表",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C20": {
+     "src": "§5.7",
+     "desc": "风险·R 表",
+     "present": null,
+     "need": 6,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C21": {
+     "src": "§5.8",
+     "desc": "决策记录·D 表",
+     "present": null,
+     "need": 6,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C22": {
+     "src": "§5.9",
+     "desc": "自包含检查（12 项逐项）",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C23": {
+     "src": "§6",
+     "desc": "执行记录·ST 状态/偏差/修正",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C24": {
+     "src": "§7.1",
+     "desc": "验收表·AC",
+     "present": 2,
+     "need": 5,
+     "missing": [
+      "验收项",
+      "实际结果",
+      "整改措施"
+     ],
+     "verdict": "部分符合"
+    },
+    "C25": {
+     "src": "§7.2",
+     "desc": "可行性自评·A 表",
+     "present": 1,
+     "need": 5,
+     "missing": [
+      "A-",
+      "实施风险",
+      "依赖条件",
+      "自评结论"
+     ],
+     "verdict": "部分符合"
+    },
+    "C26": {
+     "src": "§7.2",
+     "desc": "总体自评结论",
+     "present": 0,
+     "need": 1,
+     "missing": [
+      "总体自评结论"
+     ],
+     "verdict": "不符合"
+    },
+    "C27": {
+     "src": "§8",
+     "desc": "经验沉淀·E 表",
+     "present": 1,
+     "need": 5,
+     "missing": [
+      "适用场景与边界",
+      "量化效果",
+      "证据来源",
+      "可迁移性"
+     ],
+     "verdict": "部分符合"
+    },
+    "C28": {
+     "src": "§12",
+     "desc": "最终交付物·风险与偏差记录",
+     "present": 0,
+     "need": 1,
+     "missing": [
+      "风险与偏差"
+     ],
+     "verdict": "不符合"
+    },
+    "C29": {
+     "src": "§12",
+     "desc": "最终交付物·决策记录与理由",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C30": {
+     "src": "§12",
+     "desc": "最终交付物·经验沉淀",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C31": {
+     "src": "§12",
+     "desc": "最终交付物·方案可行性自评",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C32": {
+     "src": "§4.4",
+     "desc": "每章结论与待确认事项（等效形式亦计）",
+     "present": 0,
+     "need": 2,
+     "missing": [
+      "本章结论",
+      "待确认事项"
+     ],
+     "verdict": "部分符合",
+     "note": "等价形式命中：无 / 无"
+    }
+   },
+   "numbers": {
+    "G": 0,
+    "AC": 20,
+    "ASM": 0,
+    "ST": 0,
+    "D": 4,
+    "R": 0,
+    "V": 0,
+    "E": 5,
+    "P": 0,
+    "A": 0,
+    "WF": 0,
+    "SC": 0,
+    "PRE": 0
+   },
+   "banned": {},
+   "banned_ctx": [],
+   "banned_total": 0,
+   "chapters": {
+    "h2": 6,
+    "conclusion_marks": 0,
+    "pending_marks": 0
+   }
+  },
+  {
+   "file": "T07-任务计划执行与经验沉淀报告-2026-10-21.md",
+   "kind": "BOTH",
+   "bytes": 49530,
+   "lines": 403,
+   "criteria": {
+    "C01": {
+     "src": "§4.2",
+     "desc": "目录",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C02": {
+     "src": "§4.2",
+     "desc": "执行摘要",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合",
+     "note": "等价形式命中：执行摘要、摘要"
+    },
+    "C03": {
+     "src": "§4.2",
+     "desc": "附录",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C04": {
+     "src": "§5.1",
+     "desc": "任务标识·任务编号",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C05": {
+     "src": "§5.1",
+     "desc": "任务标识·任务名称",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C06": {
+     "src": "§5.1",
+     "desc": "任务标识·任务来源",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C07": {
+     "src": "§5.1",
+     "desc": "任务标识·任务类型",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C08": {
+     "src": "§5.1",
+     "desc": "任务标识·创建时间",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C09": {
+     "src": "§5.1",
+     "desc": "任务标识·计划版本",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C10": {
+     "src": "§5.1",
+     "desc": "任务标识·负责人",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C11": {
+     "src": "§5.1",
+     "desc": "任务标识·验收人",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C12": {
+     "src": "§5.2",
+     "desc": "目标与完成标准",
+     "present": 1,
+     "need": 2,
+     "missing": [
+      "任务目标"
+     ],
+     "verdict": "部分符合"
+    },
+    "C13": {
+     "src": "§5.2",
+     "desc": "不完成定义",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C14": {
+     "src": "§5.3",
+     "desc": "范围与边界·做什么/不做什么",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C15": {
+     "src": "§5.3",
+     "desc": "范围与边界·输入/输出/依赖",
+     "present": 3,
+     "need": 3,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C16": {
+     "src": "§5.4",
+     "desc": "信息基础与假设·ASM 表",
+     "present": 1,
+     "need": 5,
+     "missing": [
+      "影响范围",
+      "验证方法",
+      "验证责任人",
+      "验证时间"
+     ],
+     "verdict": "部分符合"
+    },
+    "C17": {
+     "src": "§5.5",
+     "desc": "执行步骤·ST 表",
+     "present": 6,
+     "need": 6,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C18": {
+     "src": "§5.5",
+     "desc": "执行步骤·工具命令与耗时",
+     "present": 1,
+     "need": 2,
+     "missing": [
+      "预计耗时"
+     ],
+     "verdict": "部分符合"
+    },
+    "C19": {
+     "src": "§5.6",
+     "desc": "量化指标·V 表",
+     "present": 5,
+     "need": 5,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C20": {
+     "src": "§5.7",
+     "desc": "风险·R 表",
+     "present": 6,
+     "need": 6,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C21": {
+     "src": "§5.8",
+     "desc": "决策记录·D 表",
+     "present": 4,
+     "need": 6,
+     "missing": [
+      "选择方案",
+      "选择理由"
+     ],
+     "verdict": "部分符合"
+    },
+    "C22": {
+     "src": "§5.9",
+     "desc": "自包含检查（12 项逐项）",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C23": {
+     "src": "§6",
+     "desc": "执行记录·ST 状态/偏差/修正",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C24": {
+     "src": "§7.1",
+     "desc": "验收表·AC",
+     "present": 4,
+     "need": 5,
+     "missing": [
+      "整改措施"
+     ],
+     "verdict": "部分符合"
+    },
+    "C25": {
+     "src": "§7.2",
+     "desc": "可行性自评·A 表",
+     "present": 5,
+     "need": 5,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C26": {
+     "src": "§7.2",
+     "desc": "总体自评结论",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C27": {
+     "src": "§8",
+     "desc": "经验沉淀·E 表",
+     "present": 5,
+     "need": 5,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C28": {
+     "src": "§12",
+     "desc": "最终交付物·风险与偏差记录",
+     "present": 0,
+     "need": 1,
+     "missing": [
+      "风险与偏差"
+     ],
+     "verdict": "不符合"
+    },
+    "C29": {
+     "src": "§12",
+     "desc": "最终交付物·决策记录与理由",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C30": {
+     "src": "§12",
+     "desc": "最终交付物·经验沉淀",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C31": {
+     "src": "§12",
+     "desc": "最终交付物·方案可行性自评",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C32": {
+     "src": "§4.4",
+     "desc": "每章结论与待确认事项（等效形式亦计）",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合",
+     "note": "等价形式命中：不做 / 待确认事项、待用户"
+    }
+   },
+   "numbers": {
+    "G": 1,
+    "AC": 11,
+    "ASM": 13,
+    "ST": 10,
+    "D": 6,
+    "R": 6,
+    "V": 7,
+    "E": 6,
+    "P": 17,
+    "A": 11,
+    "WF": 0,
+    "SC": 0,
+    "PRE": 5
+   },
+   "banned": {
+    "合理": 1
+   },
+   "banned_ctx": [
+    [
+     11,
+     "合理",
+     "| 用户指令 | 2026-10-21「审一遍我网站的交互流程：页面跳转路径、按钮与状态反馈、表单填写与出错提示、空状态和异常分支是否合理，按影响用户的程度排序给改进建议」 |"
+    ]
+   ],
+   "banned_total": 1,
+   "chapters": {
+    "h2": 15,
+    "conclusion_marks": 0,
+    "pending_marks": 2
+   }
+  },
+  {
+   "file": "执行前计划-T01.md",
+   "kind": "PLAN",
+   "bytes": 11390,
+   "lines": 131,
+   "criteria": {
+    "C01": {
+     "src": "§4.2",
+     "desc": "目录",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C02": {
+     "src": "§4.2",
+     "desc": "执行摘要",
+     "present": 0,
+     "need": 1,
+     "missing": [
+      "执行摘要"
+     ],
+     "verdict": "不符合",
+     "note": "等价形式命中：无"
+    },
+    "C03": {
+     "src": "§4.2",
+     "desc": "附录",
+     "present": 0,
+     "need": 1,
+     "missing": [
+      "附录"
+     ],
+     "verdict": "不符合"
+    },
+    "C04": {
+     "src": "§5.1",
+     "desc": "任务标识·任务编号",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C05": {
+     "src": "§5.1",
+     "desc": "任务标识·任务名称",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C06": {
+     "src": "§5.1",
+     "desc": "任务标识·任务来源",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C07": {
+     "src": "§5.1",
+     "desc": "任务标识·任务类型",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C08": {
+     "src": "§5.1",
+     "desc": "任务标识·创建时间",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C09": {
+     "src": "§5.1",
+     "desc": "任务标识·计划版本",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C10": {
+     "src": "§5.1",
+     "desc": "任务标识·负责人",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C11": {
+     "src": "§5.1",
+     "desc": "任务标识·验收人",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C12": {
+     "src": "§5.2",
+     "desc": "目标与完成标准",
+     "present": 1,
+     "need": 2,
+     "missing": [
+      "任务目标"
+     ],
+     "verdict": "部分符合"
+    },
+    "C13": {
+     "src": "§5.2",
+     "desc": "不完成定义",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C14": {
+     "src": "§5.3",
+     "desc": "范围与边界·做什么/不做什么",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C15": {
+     "src": "§5.3",
+     "desc": "范围与边界·输入/输出/依赖",
+     "present": 3,
+     "need": 3,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C16": {
+     "src": "§5.4",
+     "desc": "信息基础与假设·ASM 表",
+     "present": 5,
+     "need": 5,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C17": {
+     "src": "§5.5",
+     "desc": "执行步骤·ST 表",
+     "present": 6,
+     "need": 6,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C18": {
+     "src": "§5.5",
+     "desc": "执行步骤·工具命令与耗时",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C19": {
+     "src": "§5.6",
+     "desc": "量化指标·V 表",
+     "present": 4,
+     "need": 5,
+     "missing": [
+      "计算公式"
+     ],
+     "verdict": "部分符合"
+    },
+    "C20": {
+     "src": "§5.7",
+     "desc": "风险·R 表",
+     "present": 5,
+     "need": 6,
+     "missing": [
+      "监控指标"
+     ],
+     "verdict": "部分符合"
+    },
+    "C21": {
+     "src": "§5.8",
+     "desc": "决策记录·D 表",
+     "present": 4,
+     "need": 6,
+     "missing": [
+      "选择方案",
+      "权衡"
+     ],
+     "verdict": "部分符合"
+    },
+    "C22": {
+     "src": "§5.9",
+     "desc": "自包含检查（12 项逐项）",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C23": {
+     "src": "§6",
+     "desc": "执行记录·ST 状态/偏差/修正",
+     "present": null,
+     "need": 2,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C24": {
+     "src": "§7.1",
+     "desc": "验收表·AC",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C25": {
+     "src": "§7.2",
+     "desc": "可行性自评·A 表",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C26": {
+     "src": "§7.2",
+     "desc": "总体自评结论",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C27": {
+     "src": "§8",
+     "desc": "经验沉淀·E 表",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C28": {
+     "src": "§12",
+     "desc": "最终交付物·风险与偏差记录",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C29": {
+     "src": "§12",
+     "desc": "最终交付物·决策记录与理由",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C30": {
+     "src": "§12",
+     "desc": "最终交付物·经验沉淀",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C31": {
+     "src": "§12",
+     "desc": "最终交付物·方案可行性自评",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C32": {
+     "src": "§4.4",
+     "desc": "每章结论与待确认事项（等效形式亦计）",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合",
+     "note": "等价形式命中：不做 / 待验证"
+    }
+   },
+   "numbers": {
+    "G": 1,
+    "AC": 6,
+    "ASM": 6,
+    "ST": 8,
+    "D": 6,
+    "R": 6,
+    "V": 7,
+    "E": 0,
+    "P": 0,
+    "A": 0,
+    "WF": 0,
+    "SC": 0,
+    "PRE": 0
+   },
+   "banned": {},
+   "banned_ctx": [],
+   "banned_total": 0,
+   "chapters": {
+    "h2": 10,
+    "conclusion_marks": 0,
+    "pending_marks": 0
+   }
+  },
+  {
+   "file": "执行前计划-T02-工程基础设施薄弱点修复.md",
+   "kind": "PLAN",
+   "bytes": 32541,
+   "lines": 187,
+   "criteria": {
+    "C01": {
+     "src": "§4.2",
+     "desc": "目录",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C02": {
+     "src": "§4.2",
+     "desc": "执行摘要",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合",
+     "note": "等价形式命中：摘要"
+    },
+    "C03": {
+     "src": "§4.2",
+     "desc": "附录",
+     "present": 0,
+     "need": 1,
+     "missing": [
+      "附录"
+     ],
+     "verdict": "不符合"
+    },
+    "C04": {
+     "src": "§5.1",
+     "desc": "任务标识·任务编号",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C05": {
+     "src": "§5.1",
+     "desc": "任务标识·任务名称",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C06": {
+     "src": "§5.1",
+     "desc": "任务标识·任务来源",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C07": {
+     "src": "§5.1",
+     "desc": "任务标识·任务类型",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C08": {
+     "src": "§5.1",
+     "desc": "任务标识·创建时间",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C09": {
+     "src": "§5.1",
+     "desc": "任务标识·计划版本",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C10": {
+     "src": "§5.1",
+     "desc": "任务标识·负责人",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C11": {
+     "src": "§5.1",
+     "desc": "任务标识·验收人",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C12": {
+     "src": "§5.2",
+     "desc": "目标与完成标准",
+     "present": 1,
+     "need": 2,
+     "missing": [
+      "任务目标"
+     ],
+     "verdict": "部分符合"
+    },
+    "C13": {
+     "src": "§5.2",
+     "desc": "不完成定义",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C14": {
+     "src": "§5.3",
+     "desc": "范围与边界·做什么/不做什么",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C15": {
+     "src": "§5.3",
+     "desc": "范围与边界·输入/输出/依赖",
+     "present": 3,
+     "need": 3,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C16": {
+     "src": "§5.4",
+     "desc": "信息基础与假设·ASM 表",
+     "present": 5,
+     "need": 5,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C17": {
+     "src": "§5.5",
+     "desc": "执行步骤·ST 表",
+     "present": 6,
+     "need": 6,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C18": {
+     "src": "§5.5",
+     "desc": "执行步骤·工具命令与耗时",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C19": {
+     "src": "§5.6",
+     "desc": "量化指标·V 表",
+     "present": 4,
+     "need": 5,
+     "missing": [
+      "计算公式"
+     ],
+     "verdict": "部分符合"
+    },
+    "C20": {
+     "src": "§5.7",
+     "desc": "风险·R 表",
+     "present": 5,
+     "need": 6,
+     "missing": [
+      "监控指标"
+     ],
+     "verdict": "部分符合"
+    },
+    "C21": {
+     "src": "§5.8",
+     "desc": "决策记录·D 表",
+     "present": 4,
+     "need": 6,
+     "missing": [
+      "选择方案",
+      "权衡"
+     ],
+     "verdict": "部分符合"
+    },
+    "C22": {
+     "src": "§5.9",
+     "desc": "自包含检查（12 项逐项）",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C23": {
+     "src": "§6",
+     "desc": "执行记录·ST 状态/偏差/修正",
+     "present": null,
+     "need": 2,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C24": {
+     "src": "§7.1",
+     "desc": "验收表·AC",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C25": {
+     "src": "§7.2",
+     "desc": "可行性自评·A 表",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C26": {
+     "src": "§7.2",
+     "desc": "总体自评结论",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C27": {
+     "src": "§8",
+     "desc": "经验沉淀·E 表",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C28": {
+     "src": "§12",
+     "desc": "最终交付物·风险与偏差记录",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C29": {
+     "src": "§12",
+     "desc": "最终交付物·决策记录与理由",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C30": {
+     "src": "§12",
+     "desc": "最终交付物·经验沉淀",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C31": {
+     "src": "§12",
+     "desc": "最终交付物·方案可行性自评",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C32": {
+     "src": "§4.4",
+     "desc": "每章结论与待确认事项（等效形式亦计）",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合",
+     "note": "等价形式命中：不做 / 待验证、待用户"
+    }
+   },
+   "numbers": {
+    "G": 1,
+    "AC": 9,
+    "ASM": 22,
+    "ST": 10,
+    "D": 6,
+    "R": 8,
+    "V": 10,
+    "E": 0,
+    "P": 0,
+    "A": 0,
+    "WF": 0,
+    "SC": 0,
+    "PRE": 0
+   },
+   "banned": {
+    "详细": 1
+   },
+   "banned_ctx": [
+    [
+     16,
+     "详细",
+     "| 任务来源 | 用户 2026-10-17 会话指令链：「你觉得这个项目哪个地方完成度最低最薄弱最差劲有漏洞的」→「感觉不够严格和专业」→「都非常需要详细的技术根因分析与修复 PR 草案」→「先只出计划，暂不动工」+「"
+    ]
+   ],
+   "banned_total": 1,
+   "chapters": {
+    "h2": 11,
+    "conclusion_marks": 0,
+    "pending_marks": 0
+   }
+  },
+  {
+   "file": "执行前计划-T03-全项目审查第一批修复.md",
+   "kind": "PLAN",
+   "bytes": 26708,
+   "lines": 211,
+   "criteria": {
+    "C01": {
+     "src": "§4.2",
+     "desc": "目录",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C02": {
+     "src": "§4.2",
+     "desc": "执行摘要",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合",
+     "note": "等价形式命中：任务背景、本批针对"
+    },
+    "C03": {
+     "src": "§4.2",
+     "desc": "附录",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C04": {
+     "src": "§5.1",
+     "desc": "任务标识·任务编号",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C05": {
+     "src": "§5.1",
+     "desc": "任务标识·任务名称",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C06": {
+     "src": "§5.1",
+     "desc": "任务标识·任务来源",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C07": {
+     "src": "§5.1",
+     "desc": "任务标识·任务类型",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C08": {
+     "src": "§5.1",
+     "desc": "任务标识·创建时间",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C09": {
+     "src": "§5.1",
+     "desc": "任务标识·计划版本",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C10": {
+     "src": "§5.1",
+     "desc": "任务标识·负责人",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C11": {
+     "src": "§5.1",
+     "desc": "任务标识·验收人",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C12": {
+     "src": "§5.2",
+     "desc": "目标与完成标准",
+     "present": 1,
+     "need": 2,
+     "missing": [
+      "任务目标"
+     ],
+     "verdict": "部分符合"
+    },
+    "C13": {
+     "src": "§5.2",
+     "desc": "不完成定义",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C14": {
+     "src": "§5.3",
+     "desc": "范围与边界·做什么/不做什么",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C15": {
+     "src": "§5.3",
+     "desc": "范围与边界·输入/输出/依赖",
+     "present": 3,
+     "need": 3,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C16": {
+     "src": "§5.4",
+     "desc": "信息基础与假设·ASM 表",
+     "present": 5,
+     "need": 5,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C17": {
+     "src": "§5.5",
+     "desc": "执行步骤·ST 表",
+     "present": 6,
+     "need": 6,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C18": {
+     "src": "§5.5",
+     "desc": "执行步骤·工具命令与耗时",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C19": {
+     "src": "§5.6",
+     "desc": "量化指标·V 表",
+     "present": 5,
+     "need": 5,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C20": {
+     "src": "§5.7",
+     "desc": "风险·R 表",
+     "present": 6,
+     "need": 6,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C21": {
+     "src": "§5.8",
+     "desc": "决策记录·D 表",
+     "present": 6,
+     "need": 6,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C22": {
+     "src": "§5.9",
+     "desc": "自包含检查（12 项逐项）",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C23": {
+     "src": "§6",
+     "desc": "执行记录·ST 状态/偏差/修正",
+     "present": null,
+     "need": 2,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C24": {
+     "src": "§7.1",
+     "desc": "验收表·AC",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C25": {
+     "src": "§7.2",
+     "desc": "可行性自评·A 表",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C26": {
+     "src": "§7.2",
+     "desc": "总体自评结论",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C27": {
+     "src": "§8",
+     "desc": "经验沉淀·E 表",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C28": {
+     "src": "§12",
+     "desc": "最终交付物·风险与偏差记录",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C29": {
+     "src": "§12",
+     "desc": "最终交付物·决策记录与理由",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C30": {
+     "src": "§12",
+     "desc": "最终交付物·经验沉淀",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C31": {
+     "src": "§12",
+     "desc": "最终交付物·方案可行性自评",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C32": {
+     "src": "§4.4",
+     "desc": "每章结论与待确认事项（等效形式亦计）",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合",
+     "note": "等价形式命中：本批不做、不做项、不做 / 待验证"
+    }
+   },
+   "numbers": {
+    "G": 1,
+    "AC": 13,
+    "ASM": 11,
+    "ST": 10,
+    "D": 7,
+    "R": 6,
+    "V": 10,
+    "E": 0,
+    "P": 0,
+    "A": 0,
+    "WF": 0,
+    "SC": 0,
+    "PRE": 0
+   },
+   "banned": {},
+   "banned_ctx": [],
+   "banned_total": 0,
+   "chapters": {
+    "h2": 12,
+    "conclusion_marks": 0,
+    "pending_marks": 0
+   }
+  },
+  {
+   "file": "执行前计划-T04-站内阅读入口打通与阅读页体验封装.md",
+   "kind": "PLAN",
+   "bytes": 58108,
+   "lines": 386,
+   "criteria": {
+    "C01": {
+     "src": "§4.2",
+     "desc": "目录",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C02": {
+     "src": "§4.2",
+     "desc": "执行摘要",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合",
+     "note": "等价形式命中：任务背景、本批针对、速览"
+    },
+    "C03": {
+     "src": "§4.2",
+     "desc": "附录",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C04": {
+     "src": "§5.1",
+     "desc": "任务标识·任务编号",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C05": {
+     "src": "§5.1",
+     "desc": "任务标识·任务名称",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C06": {
+     "src": "§5.1",
+     "desc": "任务标识·任务来源",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C07": {
+     "src": "§5.1",
+     "desc": "任务标识·任务类型",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C08": {
+     "src": "§5.1",
+     "desc": "任务标识·创建时间",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C09": {
+     "src": "§5.1",
+     "desc": "任务标识·计划版本",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C10": {
+     "src": "§5.1",
+     "desc": "任务标识·负责人",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C11": {
+     "src": "§5.1",
+     "desc": "任务标识·验收人",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C12": {
+     "src": "§5.2",
+     "desc": "目标与完成标准",
+     "present": 1,
+     "need": 2,
+     "missing": [
+      "任务目标"
+     ],
+     "verdict": "部分符合"
+    },
+    "C13": {
+     "src": "§5.2",
+     "desc": "不完成定义",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C14": {
+     "src": "§5.3",
+     "desc": "范围与边界·做什么/不做什么",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C15": {
+     "src": "§5.3",
+     "desc": "范围与边界·输入/输出/依赖",
+     "present": 3,
+     "need": 3,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C16": {
+     "src": "§5.4",
+     "desc": "信息基础与假设·ASM 表",
+     "present": 5,
+     "need": 5,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C17": {
+     "src": "§5.5",
+     "desc": "执行步骤·ST 表",
+     "present": 6,
+     "need": 6,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C18": {
+     "src": "§5.5",
+     "desc": "执行步骤·工具命令与耗时",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C19": {
+     "src": "§5.6",
+     "desc": "量化指标·V 表",
+     "present": 5,
+     "need": 5,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C20": {
+     "src": "§5.7",
+     "desc": "风险·R 表",
+     "present": 6,
+     "need": 6,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C21": {
+     "src": "§5.8",
+     "desc": "决策记录·D 表",
+     "present": 6,
+     "need": 6,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C22": {
+     "src": "§5.9",
+     "desc": "自包含检查（12 项逐项）",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C23": {
+     "src": "§6",
+     "desc": "执行记录·ST 状态/偏差/修正",
+     "present": null,
+     "need": 2,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C24": {
+     "src": "§7.1",
+     "desc": "验收表·AC",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C25": {
+     "src": "§7.2",
+     "desc": "可行性自评·A 表",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C26": {
+     "src": "§7.2",
+     "desc": "总体自评结论",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C27": {
+     "src": "§8",
+     "desc": "经验沉淀·E 表",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C28": {
+     "src": "§12",
+     "desc": "最终交付物·风险与偏差记录",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C29": {
+     "src": "§12",
+     "desc": "最终交付物·决策记录与理由",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C30": {
+     "src": "§12",
+     "desc": "最终交付物·经验沉淀",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C31": {
+     "src": "§12",
+     "desc": "最终交付物·方案可行性自评",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C32": {
+     "src": "§4.4",
+     "desc": "每章结论与待确认事项（等效形式亦计）",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合",
+     "note": "等价形式命中：本批不做、不做项、不做 / 待验证、待用户"
+    }
+   },
+   "numbers": {
+    "G": 2,
+    "AC": 25,
+    "ASM": 20,
+    "ST": 11,
+    "D": 14,
+    "R": 11,
+    "V": 15,
+    "E": 2,
+    "P": 2,
+    "A": 0,
+    "WF": 0,
+    "SC": 0,
+    "PRE": 0
+   },
+   "banned": {
+    "可能": 1
+   },
+   "banned_ctx": [
+    [
+     256,
+     "可能",
+     "| D-13 | 撞号后本批号最终取哪个 | 坚持初认领 / 让 W825 / 让 W824 | **归位 W824** | 两度撞号后做**三面扫描**（台账行 + 磁盘件 + 代码注释）：W825 归「agent-w"
+    ]
+   ],
+   "banned_total": 1,
+   "chapters": {
+    "h2": 14,
+    "conclusion_marks": 0,
+    "pending_marks": 0
+   }
+  },
+  {
+   "file": "执行前计划-T05-取经编制表落库与编制位补全.md",
+   "kind": "PLAN",
+   "bytes": 41480,
+   "lines": 325,
+   "criteria": {
+    "C01": {
+     "src": "§4.2",
+     "desc": "目录",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C02": {
+     "src": "§4.2",
+     "desc": "执行摘要",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合",
+     "note": "等价形式命中：任务背景、本批针对、速览、摘要"
+    },
+    "C03": {
+     "src": "§4.2",
+     "desc": "附录",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C04": {
+     "src": "§5.1",
+     "desc": "任务标识·任务编号",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C05": {
+     "src": "§5.1",
+     "desc": "任务标识·任务名称",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C06": {
+     "src": "§5.1",
+     "desc": "任务标识·任务来源",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C07": {
+     "src": "§5.1",
+     "desc": "任务标识·任务类型",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C08": {
+     "src": "§5.1",
+     "desc": "任务标识·创建时间",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C09": {
+     "src": "§5.1",
+     "desc": "任务标识·计划版本",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C10": {
+     "src": "§5.1",
+     "desc": "任务标识·负责人",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C11": {
+     "src": "§5.1",
+     "desc": "任务标识·验收人",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C12": {
+     "src": "§5.2",
+     "desc": "目标与完成标准",
+     "present": 1,
+     "need": 2,
+     "missing": [
+      "任务目标"
+     ],
+     "verdict": "部分符合"
+    },
+    "C13": {
+     "src": "§5.2",
+     "desc": "不完成定义",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C14": {
+     "src": "§5.3",
+     "desc": "范围与边界·做什么/不做什么",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C15": {
+     "src": "§5.3",
+     "desc": "范围与边界·输入/输出/依赖",
+     "present": 3,
+     "need": 3,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C16": {
+     "src": "§5.4",
+     "desc": "信息基础与假设·ASM 表",
+     "present": 5,
+     "need": 5,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C17": {
+     "src": "§5.5",
+     "desc": "执行步骤·ST 表",
+     "present": 6,
+     "need": 6,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C18": {
+     "src": "§5.5",
+     "desc": "执行步骤·工具命令与耗时",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C19": {
+     "src": "§5.6",
+     "desc": "量化指标·V 表",
+     "present": 4,
+     "need": 5,
+     "missing": [
+      "计算公式"
+     ],
+     "verdict": "部分符合"
+    },
+    "C20": {
+     "src": "§5.7",
+     "desc": "风险·R 表",
+     "present": 2,
+     "need": 6,
+     "missing": [
+      "概率",
+      "缓解措施",
+      "备选方案",
+      "监控指标"
+     ],
+     "verdict": "部分符合"
+    },
+    "C21": {
+     "src": "§5.8",
+     "desc": "决策记录·D 表",
+     "present": 1,
+     "need": 6,
+     "missing": [
+      "备选方案",
+      "选择方案",
+      "选择理由",
+      "权衡",
+      "可复用结论"
+     ],
+     "verdict": "部分符合"
+    },
+    "C22": {
+     "src": "§5.9",
+     "desc": "自包含检查（12 项逐项）",
+     "present": 1,
+     "need": 1,
+     "missing": [],
+     "verdict": "符合"
+    },
+    "C23": {
+     "src": "§6",
+     "desc": "执行记录·ST 状态/偏差/修正",
+     "present": null,
+     "need": 2,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C24": {
+     "src": "§7.1",
+     "desc": "验收表·AC",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C25": {
+     "src": "§7.2",
+     "desc": "可行性自评·A 表",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C26": {
+     "src": "§7.2",
+     "desc": "总体自评结论",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C27": {
+     "src": "§8",
+     "desc": "经验沉淀·E 表",
+     "present": null,
+     "need": 5,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C28": {
+     "src": "§12",
+     "desc": "最终交付物·风险与偏差记录",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C29": {
+     "src": "§12",
+     "desc": "最终交付物·决策记录与理由",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C30": {
+     "src": "§12",
+     "desc": "最终交付物·经验沉淀",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C31": {
+     "src": "§12",
+     "desc": "最终交付物·方案可行性自评",
+     "present": null,
+     "need": 1,
+     "missing": [],
+     "verdict": "N/A",
+     "note": "按件型不适用"
+    },
+    "C32": {
+     "src": "§4.4",
+     "desc": "每章结论与待确认事项（等效形式亦计）",
+     "present": 2,
+     "need": 2,
+     "missing": [],
+     "verdict": "符合",
+     "note": "等价形式命中：不做 / 待验证、待用户"
+    }
+   },
+   "numbers": {
+    "G": 1,
+    "AC": 14,
+    "ASM": 20,
+    "ST": 12,
+    "D": 10,
+    "R": 10,
+    "V": 8,
+    "E": 0,
+    "P": 0,
+    "A": 0,
+    "WF": 0,
+    "SC": 0,
+    "PRE": 0
+   },
+   "banned": {
+    "可能": 2
+   },
+   "banned_ctx": [
+    [
+     219,
+     "可能",
+     "| R-05 | W830 三性审查（符合实际 / 量化 / 可验证）可能对本批文档提订正 | ST-06 前 | 落件前先过三性自查：每个数字有实跑来源、每个断言有判据、无判定类模糊措辞（禁用词表见 `docs/00-"
+    ],
+    [
+     307,
+     "可能",
+     "| ASM-14 | 避坑 Skill 是否另需仓内副本 | 用户裁决 | 范围边界待定，可能另批 |"
+    ]
+   ],
+   "banned_total": 2,
+   "chapters": {
+    "h2": 13,
+    "conclusion_marks": 0,
+    "pending_marks": 0
+   }
+  }
+ ],
+ "pairs": [
+  {
+   "tag": "T01",
+   "plan": "执行前计划-T01.md",
+   "report": "T01-任务计划执行与经验沉淀报告-2026-10-14.md",
+   "items": [
+    {
+     "item": "执行摘要",
+     "ok": 1,
+     "need": 1,
+     "partial": 0,
+     "verdict": "符合"
+    },
+    {
+     "item": "信息基础与假设",
+     "ok": 1,
+     "need": 1,
+     "partial": 0,
+     "verdict": "符合"
+    },
+    {
+     "item": "执行前计划",
+     "ok": 14,
+     "need": 18,
+     "partial": 4,
+     "verdict": "部分符合"
+    },
+    {
+     "item": "执行记录",
+     "ok": 1,
+     "need": 1,
+     "partial": 0,
+     "verdict": "符合"
+    },
+    {
+     "item": "验收证据",
+     "ok": 0,
+     "need": 1,
+     "partial": 1,
+     "verdict": "部分符合"
+    },
+    {
+     "item": "风险与偏差记录",
+     "ok": 1,
+     "need": 2,
+     "partial": 1,
+     "verdict": "部分符合"
+    },
+    {
+     "item": "决策记录与理由",
+     "ok": 1,
+     "need": 2,
+     "partial": 1,
+     "verdict": "部分符合"
+    },
+    {
+     "item": "经验沉淀",
+     "ok": 1,
+     "need": 2,
+     "partial": 1,
+     "verdict": "部分符合"
+    },
+    {
+     "item": "方案可行性自评",
+     "ok": 2,
+     "need": 3,
+     "partial": 1,
+     "verdict": "部分符合"
+    },
+    {
+     "item": "附录",
+     "ok": 1,
+     "need": 1,
+     "partial": 0,
+     "verdict": "符合"
+    }
+   ],
+   "full": 4,
+   "need": 10
+  },
+  {
+   "tag": "T03",
+   "plan": "执行前计划-T03-全项目审查第一批修复.md",
+   "report": "T03-任务计划执行与经验沉淀报告-2026-10-20.md",
+   "items": [
+    {
+     "item": "执行摘要",
+     "ok": 1,
+     "need": 1,
+     "partial": 0,
+     "verdict": "符合"
+    },
+    {
+     "item": "信息基础与假设",
+     "ok": 1,
+     "need": 1,
+     "partial": 0,
+     "verdict": "符合"
+    },
+    {
+     "item": "执行前计划",
+     "ok": 17,
+     "need": 18,
+     "partial": 1,
+     "verdict": "部分符合"
+    },
+    {
+     "item": "执行记录",
+     "ok": 1,
+     "need": 1,
+     "partial": 0,
+     "verdict": "符合"
+    },
+    {
+     "item": "验收证据",
+     "ok": 0,
+     "need": 1,
+     "partial": 1,
+     "verdict": "部分符合"
+    },
+    {
+     "item": "风险与偏差记录",
+     "ok": 2,
+     "need": 2,
+     "partial": 0,
+     "verdict": "符合"
+    },
+    {
+     "item": "决策记录与理由",
+     "ok": 2,
+     "need": 2,
+     "partial": 0,
+     "verdict": "符合"
+    },
+    {
+     "item": "经验沉淀",
+     "ok": 2,
+     "need": 2,
+     "partial": 0,
+     "verdict": "符合"
+    },
+    {
+     "item": "方案可行性自评",
+     "ok": 3,
+     "need": 3,
+     "partial": 0,
+     "verdict": "符合"
+    },
+    {
+     "item": "附录",
+     "ok": 1,
+     "need": 1,
+     "partial": 0,
+     "verdict": "符合"
+    }
+   ],
+   "full": 8,
+   "need": 10
+  },
+  {
+   "tag": "T04",
+   "plan": "执行前计划-T04-站内阅读入口打通与阅读页体验封装.md",
+   "report": "T04-任务计划执行与经验沉淀报告-2026-10-21.md",
+   "items": [
+    {
+     "item": "执行摘要",
+     "ok": 1,
+     "need": 1,
+     "partial": 0,
+     "verdict": "符合"
+    },
+    {
+     "item": "信息基础与假设",
+     "ok": 1,
+     "need": 1,
+     "partial": 0,
+     "verdict": "符合"
+    },
+    {
+     "item": "执行前计划",
+     "ok": 17,
+     "need": 18,
+     "partial": 1,
+     "verdict": "部分符合"
+    },
+    {
+     "item": "执行记录",
+     "ok": 1,
+     "need": 1,
+     "partial": 0,
+     "verdict": "符合"
+    },
+    {
+     "item": "验收证据",
+     "ok": 0,
+     "need": 1,
+     "partial": 1,
+     "verdict": "部分符合"
+    },
+    {
+     "item": "风险与偏差记录",
+     "ok": 1,
+     "need": 2,
+     "partial": 0,
+     "verdict": "部分符合"
+    },
+    {
+     "item": "决策记录与理由",
+     "ok": 2,
+     "need": 2,
+     "partial": 0,
+     "verdict": "符合"
+    },
+    {
+     "item": "经验沉淀",
+     "ok": 1,
+     "need": 2,
+     "partial": 1,
+     "verdict": "部分符合"
+    },
+    {
+     "item": "方案可行性自评",
+     "ok": 1,
+     "need": 3,
+     "partial": 1,
+     "verdict": "部分符合"
+    },
+    {
+     "item": "附录",
+     "ok": 0,
+     "need": 1,
+     "partial": 0,
+     "verdict": "不符合"
+    }
+   ],
+   "full": 4,
+   "need": 10
+  }
+ ]
+}

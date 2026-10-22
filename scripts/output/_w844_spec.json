@@ -1,0 +1,31 @@
+{
+  "batch": "W844",
+  "date": "2026-10-21",
+  "title": "W844 系统架构批四项落地（会话库备份 + 首 token 计时 + 两项裁决回填 + 检索题集入仓）",
+  "desc": "四处施工一次落地：会话库备份、首 token 计时、多租户与检索两项裁决回填，以及检索题集迁入仓内并扩到百题",
+  "head_entry": "2026-10-21（W844 系统架构批四项落地）",
+  "head_sentence": "把上一轮只出了方案没动手的四件事一次做完，顺带把检索评测的题集从本地工地搬进仓库",
+  "changelog_body": "\n\n> **来源**：用户令「继续做完」。原 W828 批（2026-10-20 用户批「可以」的 Q1/Q3/Q4/OBS-14 四项）因当时 CHANGELOG 号序链断裂（W828 缺口）始终无法级联立段，内容一直停在备料件。W842 修复号序链后，本批以新号 W844 承接落地。\n> - **文件**：xiyouji-agent-web/server/backup.ts、xiyouji-agent-web/server/backup.test.ts、xiyouji-agent-web/server/metrics.ts、xiyouji-agent-web/server/metrics.test.ts、xiyouji-agent-web/server/db.ts、xiyouji-agent-web/server/index.ts、xiyouji-agent-web/server/chat.ts、xiyouji-agent-web/server/routes.ts、xiyouji-agent-web/package.json、docs/agent/agent-web.md、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md、scripts/rag/eval/queries_30q_frozen.jsonl、scripts/rag/eval/queries_100q.jsonl、scripts/rag/eval/make_queries.py、scripts/rag/eval/eval_retrieval.py、scripts/rag/README.md、scripts/output/rag_eval_report.md、scripts/output/_w844_spec.json、docs/00-导读/W批次编号对账表.md。\n> - **Q1 会话库备份**：`chat.db` 是全仓唯一不可重建的数据（gitignored 且无备份）。新增 `server/backup.ts`——用 `VACUUM INTO` 生成一致性快照（**禁文件拷贝**：库有 WAL 伴生文件，只拷主文件会丢最近未 checkpoint 的提交）；备份两件（库快照 + 审计日志副本）、每日一份、留 7 份、清 90 天；份数与天数两条件**独立取并集**（备料件首跑曾把超龄判断嵌进「仅在超份数时才查」，致 90 天规则实际失效）；落点仓外 `%LOCALAPPDATA%\\xiyouji\\backups\\`（`XIYOUJI_BACKUP_DIR` 可覆盖）；年龄以文件名日期为主、mtime 兜底；幂等跳过时仍执行清理。挂载在 `listen` 回调，**失败只记日志不阻断启动**，`NODE_ENV=test` 跳过。回归面 9 例。\n> - **OBS-14 首 token**：`/api/chat` handler **最前**取 `reqStartedAt`（入参校验与会话读写也属用户等待，靠后计时会系统性低估），首个 text delta 记 `firstTokenMs` 并打结构化日志；整轮无文本增量时记 `reason: no_text_delta`，**不把缺样本当 0 ms**。新增 `server/metrics.ts`（滚动 100 样本·最近秩法 p50/p95·脏数据丢弃）与 `GET /api/metrics` 只读端点，不落盘不外发。回归面 7 例。\n> - **Q3 多租户不预加**：三条触发条件写死（第 2 个真实使用者 / 需按用户导出删除 / 会话数超 5,000）+ 提前记账的代价清单（三表改 schema、查询路径加 WHERE、老数据归属规则等约 1 批工作量），回填 §8.2 档 2 与 §12.2 Q3。\n> - **Q4 检索维持现役 + 评测集入仓**：30 题冻结集**逐行原样**迁入（与原件字节一致·sha256 `8d9385b5…`），另由 `make_queries.py` 按文档标题锚点派生 70 题（gold 由脚本解析·只认索引内文档），合计 100 题；`eval_retrieval.py` 为复算入口，出 `scripts/output/rag_eval_report.md`（总表 + 题源分组 + 题型分组 + 逐题明细 + 口径局限）。\n> - **一处必须纠正的旧结论**：备料件写着「dense 仅 +0.003，不成立」。复算后 off 档 100 题 recall@5 = 0.573、frozen 30 = 0.382、dense = 0.712 / 0.446——增益远大于 +0.003。查明原因是历史数字跑在 T-01 冻结索引（1,077 篇）上，与现役索引（768 篇）语料面不同，**不可互引**。故「dense 无增益」论据作废，**默认档仍为 off，但理由换成成本与可移植性**（四重依赖 + 约 96 MB 模型 + 124 MB 产物、离线不可复算），并把「dense 是否升为可选档」登记为**新开放项 Q5** 交用户裁决。体积口径按实测值写，未用估算。\n> - **验证**：`npm run test:server` 98 例中 97 通过（唯一失败 W817-C2b 为**本机环境限制**：沙箱下 `fs.symlinkSync` 不抛错也不建链，用例前置假设不成立，CI 为 Linux 必执行面；该文件本批未改动）；`tsc -b` 零错误；`make_queries --check` 一致；ruff 净；`eval_retrieval` 4.3 s 跑完 100 题。\n> - **状态**：已落地（本地提交·未推送）。\n",
+  "milestone_block": "- **W844 系统架构批四项落地（备份 / 首 token / Q3 / Q4）**：\n  - Q1：`VACUUM INTO` 快照 + 审计副本·留 7 份清 90 天·落点仓外·失败不阻断启动·9 例回归\n  - OBS-14：handler 起算到首个 text delta·无文本时记 no_text_delta·滚动 100 样本 p50/p95 只读端点·7 例回归\n  - Q3：多租户不预加·三条触发条件 + 代价清单回填档 2 与 Q3\n  - Q4：30 题原样迁入 + 70 题标题派生 = 100 题·复算入口与报告入仓·不引外部监控\n  - 纠正：旧「dense 仅 +0.003」作废（历史跑在 1,077 篇冻结索引上）·默认档仍 off 但理由是成本·新增 Q5\n  - 验证：server 97/98（1 例本机建链限制）·tsc 零错误·ruff 净·100 题 4.3 s",
+  "agents_note": "二〇二六年十月二十一日（W844）系统架构批四项落地：把上一轮只写了方案没动手的四件事做完。第一件是备份——整个仓库里只有那个会话库是不可重建的，它既不在版本控制里也没有任何副本，而直接拷文件又会丢掉还没落盘的那部分提交，所以必须让数据库自己吐一份一致的快照。写的时候踩过一个坑：份数上限和天数上限一开始被嵌套成「只有超出份数才检查过期」，结果九十天那条规则实际上从来没生效过。第二件是首 token 计时，起点放在处理函数最前面，因为在更靠后开始计时会系统性低估用户真正等待的时间；没有文本增量的时候明确记「无样本」，不留下空白让人误读成零毫秒。后两件是裁决：多租户字段现在不加，但把三条触发条件和将来要付的代价先写清楚，免得日后变成顺手加个字段；检索增强维持现役，不过复查时发现旧论证是错的——那个「增益只有千分之三」是在一份一千零七十七篇的旧索引上测的，换到现役索引上增益其实有一到两成，所以结论保留、理由换掉，并把「要不要开成可选档」单独交出去裁决。凡是数字都重算过，模型体积也是实测的，没有沿用估算。",
+  "file_index_rows": [
+    "| xiyouji-agent-web/server/backup.ts | W844 | 新增：会话库与审计日志快照（VACUUM INTO 一致性快照 + 保留策略 + 启动钩子） |",
+    "| xiyouji-agent-web/server/backup.test.ts | W844 | 新增：备份 9 例回归（行数一致/幂等/份数/超龄/跳过仍清理/缺失不抛/dry-run） |",
+    "| xiyouji-agent-web/server/metrics.ts | W844 | 新增：首 token 滚动窗口（100 样本·p50/p95·脏数据丢弃） |",
+    "| xiyouji-agent-web/server/metrics.test.ts | W844 | 新增：指标窗 7 例回归（空窗给 null/分位/淘汰/脏数据/快照语义） |",
+    "| xiyouji-agent-web/server/chat.ts | W844 | 改：OBS-14 首 token 计时（handler 起算 + 首个 delta 记录 + 无文本记 no_text_delta） |",
+    "| xiyouji-agent-web/server/routes.ts | W844 | 改：新增只读 GET /api/metrics（首 token 窗口摘要） |",
+    "| xiyouji-agent-web/server/index.ts | W844 | 改：listen 回调挂 backupOnStartup（失败不阻断启动） |",
+    "| xiyouji-agent-web/server/db.ts | W844 | 改：导出 databasePath() 供备份复用同一解析结果 |",
+    "| xiyouji-agent-web/package.json | W844 | 改：test:server 加入 backup.test.ts 与 metrics.test.ts |",
+    "| docs/agent/agent-web.md | W844 | 改：补会话库备份与保留期、OBS-14 首 token 两节 |",
+    "| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W844 | 改：S8 口径纠正（dense 增益实测）+ 档 2 触发条件细化 + Q1/Q3/Q4 裁决回填 + 新增 Q5 |",
+    "| scripts/rag/eval/queries_30q_frozen.jsonl | W844 | 新增：30 题冻结集原样迁入（与工地原件字节一致） |",
+    "| scripts/rag/eval/queries_100q.jsonl | W844 | 新增：100 题评测集（30 冻结 + 70 标题派生·gold 由脚本解析） |",
+    "| scripts/rag/eval/make_queries.py | W844 | 新增：题集生成器（锚点表 + gold 解析 + --check 一致性） |",
+    "| scripts/rag/eval/eval_retrieval.py | W844 | 新增：检索复算入口（三档 + recall@1/5/10 + 报告生成） |",
+    "| scripts/rag/README.md | W844 | 改：补检索评测节（题集构成/复算入口/基线/与历史数字关系/局限） |",
+    "| scripts/output/rag_eval_report.md | W844 | 新增：检索评测报告（生成物·可重跑覆盖） |",
+    "| scripts/output/_w844_spec.json | W844 | 新增：本批 spec（级联唯一来源） |"
+  ]
+}

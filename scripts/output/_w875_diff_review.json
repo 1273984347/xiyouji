@@ -1,0 +1,860 @@
+{
+  "batch": "W862",
+  "total_diffs": 695,
+  "pages_with_diffs": [
+    "reader/ch001.html",
+    "reader/ch050.html",
+    "reader/culture/三教合一明代思想史深化专题.html",
+    "reader/culture/佛道思想.html",
+    "reader/essays/现代视角解读.html",
+    "reader/essays/西游与AI时代.html",
+    "reader/people/万圣公主外传.html",
+    "reader/people/严嵩与牛魔王对照专题.html",
+    "reader/poetry/主题诗词创作.html",
+    "reader/poetry/原著人物赋诗词赏析专题.html",
+    "reader/themes/不可靠叙述专题.html",
+    "reader/themes/二十八星宿专题.html"
+  ],
+  "groups": [
+    {
+      "page": "reader/culture/佛道思想.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 22,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/culture/佛道思想.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 22,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/culture/佛道思想.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 22,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/culture/佛道思想.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 22,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/culture/佛道思想.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 22,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/ch050.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 21,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/ch050.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 21,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/ch050.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 21,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/ch050.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 21,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/ch050.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 21,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/essays/西游与AI时代.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 16,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/essays/西游与AI时代.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 16,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/essays/西游与AI时代.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 16,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/essays/西游与AI时代.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 16,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/essays/西游与AI时代.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 16,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/essays/现代视角解读.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 14,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/essays/现代视角解读.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 14,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/essays/现代视角解读.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 14,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/essays/现代视角解读.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 14,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/essays/现代视角解读.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 14,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/poetry/原著人物赋诗词赏析专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 14,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/poetry/原著人物赋诗词赏析专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 14,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/poetry/原著人物赋诗词赏析专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 14,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/poetry/原著人物赋诗词赏析专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 14,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/poetry/原著人物赋诗词赏析专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 14,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/ch001.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 11,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/ch001.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 11,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/ch001.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 11,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/ch001.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 11,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/ch001.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 11,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/people/严嵩与牛魔王对照专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 11,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/people/严嵩与牛魔王对照专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 11,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/people/严嵩与牛魔王对照专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 11,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/people/严嵩与牛魔王对照专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 11,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/people/严嵩与牛魔王对照专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 11,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/poetry/主题诗词创作.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 11,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/poetry/主题诗词创作.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 11,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/poetry/主题诗词创作.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 11,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/poetry/主题诗词创作.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 11,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/poetry/主题诗词创作.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 11,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/themes/二十八星宿专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 6,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/themes/二十八星宿专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 6,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/themes/二十八星宿专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 6,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/themes/二十八星宿专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 6,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/themes/二十八星宿专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 6,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/people/万圣公主外传.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 5,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/people/万圣公主外传.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 5,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/people/万圣公主外传.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 5,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/people/万圣公主外传.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 5,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/people/万圣公主外传.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 5,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/culture/三教合一明代思想史深化专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 4,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/culture/三教合一明代思想史深化专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 4,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/culture/三教合一明代思想史深化专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 4,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/culture/三教合一明代思想史深化专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 4,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/culture/三教合一明代思想史深化专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 4,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/themes/不可靠叙述专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 4,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/themes/不可靠叙述专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 4,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/themes/不可靠叙述专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 4,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/themes/不可靠叙述专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 4,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    },
+    {
+      "page": "reader/themes/不可靠叙述专题.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(199, 70, 58)",
+      "count": 4,
+      "sample_elements": [
+        "a.",
+        "a.",
+        "a."
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>猪八戒深化专题</title>
 <!-- SEO:INJECTED -->
@@ -12,46 +12,78 @@
 <meta property="og:description" content="猪八戒深化专题——《详解西游记》人物深度">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://1273984347.github.io/xiyouji/reader/people/猪八戒深化专题.html">
-<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+
+
+<script src="../../js/theme-init.js"></script>
+<script src="../../js/reader-enhance.js" defer></script>
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
-<script src="../../js/theme-init.js"></script>
 <style>
-  .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
+  .reader-wrap { max-width: var(--container-read); margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
     padding: 14px 0; border-bottom: 1px solid var(--line); margin-bottom: 28px;
     font-size: 14px; }
-  .reader-topnav a { color: var(--accent); text-decoration: none; }
+  .reader-topnav a { color: var(--accent-text); text-decoration: none; }
   .reader-topnav a:hover { text-decoration: underline; }
   .reader-topnav .brand { color: var(--ink); font-weight: 700; }
   .reader-body { font-family: var(--font-serif, serif); color: var(--ink);
     line-height: 1.9; font-size: 17px; }
-  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: 12px 0 20px; }
-  .reader-body h2 { font-size: 21px; margin: 34px 0 12px; padding-left: 10px;
+  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: var(--space-4) 0 var(--space-5); }
+  .reader-body h2 { font-size: 21px; margin: 34px 0 var(--space-4); padding-left: 10px;
     border-left: 3px solid var(--accent); }
-  .reader-body h3 { font-size: 18px; margin: 24px 0 10px; }
-  .reader-body blockquote { margin: 14px 0; padding: 8px 14px; color: var(--ink-soft);
+  .reader-body h3 { font-size: 18px; margin: var(--space-6) 0 10px; }
+  .reader-body blockquote { margin: 14px 0; padding: var(--space-3) 14px; color: var(--ink-soft);
     background: var(--paper-warm, var(--paper)); border-left: 3px solid var(--ink-faint); }
-  .reader-body a { color: var(--accent); }
-  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+  .reader-body a { color: var(--accent-text); }
+  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: var(--space-7) 0; }
   .reader-meta { color: var(--ink-soft); font-size: 13px; margin: 0 0 26px; }
   .reader-pn { display: flex; justify-content: space-between; gap: 12px; margin-top: 44px;
     padding-top: 18px; border-top: 1px solid var(--line); font-size: 15px; }
-  .reader-pn a { color: var(--accent); text-decoration: none; }
+  .reader-pn a { color: var(--accent-text); text-decoration: none; }
   .reader-pn a:hover { text-decoration: underline; }
   .reader-pn .off { color: var(--ink-faint); }
-  .reader-idx { list-style: none; padding: 0; margin: 24px 0 0;
+  .reader-idx { list-style: none; padding: 0; margin: var(--space-6) 0 0;
     display: grid; grid-template-columns: 1fr; gap: 2px; }
   @media (min-width: 640px) { .reader-idx { grid-template-columns: 1fr 1fr; } }
-  .reader-idx a { display: block; padding: 9px 12px; color: var(--ink); text-decoration: none;
+  .reader-idx a { display: block; padding: 9px var(--space-4); color: var(--ink); text-decoration: none;
     border: 1px solid var(--line); border-radius: var(--radius-sm, 4px); font-size: 14px; }
-  .reader-idx a:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-idx a:hover { border-color: var(--accent); color: var(--accent-text); }
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
-  .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
+  .reader-group { margin: 34px 0 var(--space-3); font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 var(--space-5); padding: var(--space-3) 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent-text); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-text); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 var(--space-3); border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
 </style>
 </head>
 <body>
@@ -61,6 +93,19 @@
     <a href="../../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/02-人物深度分析/猪八戒深化专题.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/people/猪八戒深化专题.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>猪八戒深化专题</h1>
 <blockquote>
@@ -73,7 +118,7 @@
 <hr />
 <h2>一、范围界定</h2>
 <blockquote>
-<p>"那怪道：'我不是野豕，亦不是老彘，我本是天河里天蓬元帅。只因带酒戏弄嫦娥，玉帝把我打了二千锤，贬下尘凡。一灵真性，竟来夺舍投胎，不期错了道路，投在个母猪胎里，变得这般模样。'"——第十九回（云栈洞悟空收八戒）</p>
+<p>"那怪道：'我不是野豕，亦不是老彘，我本是天河里天蓬元帅。只因带酒戏弄嫦娥，玉帝把我打了二千锤，贬下尘凡；一灵真性，竟来夺舍投胎，不期错了道路，投在个母猪胎里，变得这般模样。一灵真性，竟来夺舍投胎，不期错了道路，投在个母猪胎里，变得这般模样。'"——第十九回（云栈洞悟空收八戒）</p>
 <p>"如来道：'猪悟能，本是一员大将军，因醉戏嫦娥，贬下凡尘，转了猪胎。保护圣僧，路上却挑担有功，加升大职正果，汝作净坛使者。'"——第一百回（五圣成真）</p>
 </blockquote>
 <p>《西游记》中的猪八戒不是简单的"喜剧角色"，而是一部<strong>欲望政治的活体编年史</strong>——他从天蓬元帅（天庭主权内的名欲）到贬下凡尘（欲望溢出的惩罚），从高老庄招亲（色欲+食欲的世俗投射）到加入取经（欲望被规训），从动辄散伙（欲望的意识形态反扑）到净坛使者（欲望的最终归化），每一段经历都是欲望政治的一次转换。猪八戒的取经路，本质上是<strong>欲望从"耗费的过度"到"被收编的耗费"的政治归化过程</strong>。这与 W156 孙悟空的"身份政治归化"形成完美对照——悟空是被身份体制收编，八戒是被欲望体制收编，两者共同构成取经五众深化系列的"心猿+木母"二元结构。</p>
@@ -115,7 +160,7 @@
 <h2>四、欲望二：色欲——拉康式的对象a缺失</h2>
 <h3>4.1 广寒宫调戏嫦娥：欲望的"原初缺失"事件</h3>
 <blockquote>
-<p>"只因带酒戏弄嫦娥，玉帝把我打了二千锤，贬下尘凡。"——第十九回</p>
+<p>"只因带酒戏弄嫦娥，玉帝把我打了二千锤，贬下尘凡；一灵真性，竟来夺舍投胎，不期错了道路，投在个母猪胎里，变得这般模样。"——第十九回</p>
 </blockquote>
 <p>第十九回，八戒自述被贬缘由——"带酒戏弄嫦娥"。这是八戒色欲的"原初事件"——他在天庭作为天蓬元帅时，因酒醉调戏嫦娥，被玉帝责罚贬下凡尘。这个事件的政治学意义在于——<strong>色欲是八戒被逐出天庭的根本原因</strong>。如果说悟空是被"大闹天宫"逐出（身份政治的反叛），八戒是被"调戏嫦娥"逐出（欲望政治的过度）。两者构成取经五众深化系列的"心猿+木母"二元——心猿因身份而逐，木母因欲望而逐。</p>
 <p>拉康的"对象a"理论在此显形——嫦娥不是八戒欲望的真正对象，嫦娥是八戒"对象a"的投射载体。八戒作为天蓬元帅，在天庭体制内拥有一切（地位、品秩、俸禄），但他依然"欲望"——这说明欲望不源于"缺失什么具体的东西"，欲望源于"原初的缺失"。拉康说"欲望是他者的欲望"——八戒欲望的不是嫦娥，而是"嫦娥所代表的天庭体制的剩余物"。嫦娥作为广寒宫的女神，是天庭体制内"不可触及"的客体——她的"不可触及性"使她成为完美的对象a。八戒的调戏不是"对嫦娥的欲望"，而是"对不可触及之物的僭越欲"——通过僭越来确认自己的主权（巴塔耶的耗费主权在此与拉康的欲望缺失交汇）。</p>
@@ -365,6 +410,10 @@
 <p><strong>本文数据基础</strong>：基于《西游记》原著猪八戒叙事素材整合（第十八-十九回高老庄收八戒、第二十三回四圣试禅心、第二十四回偷吃人参果、第六十七回稀柿衕、第七十二回盘丝洞濯垢泉、第八十五回灭法国前散伙、第一百回净坛使者等关键节点），结合巴塔耶《色情论》《被诅咒的部分》、拉康《欲望图谱》《第十一研讨班》、齐泽克《意识形态崇高客体》《欢迎来到真实沙漠》、德勒兹与加塔利《反俄狄浦斯》四部理论框架，与 W156/W152/W040/W078 形成交叉印证，构建"心猿+木母"取经五众深化二元结构。</p>
 </blockquote>
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%8C%AA%E5%85%AB%E6%88%92%E6%B7%B1%E5%8C%96%E4%B8%93%E9%A2%98&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E7%8C%AA%E5%85%AB%E6%88%92%E6%B7%B1%E5%8C%96%E4%B8%93%E9%A2%98.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%8C%AA%E5%85%AB%E6%88%92%E6%B7%B1%E5%8C%96%E4%B8%93%E9%A2%98&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E7%8C%AA%E5%85%AB%E6%88%92%E6%B7%B1%E5%8C%96%E4%B8%93%E9%A2%98.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="../people/猪八戒.html">← 上一篇</a><a href="../people/玄奘-方向二深化.html">下一篇 →</a></nav>
 </main>
 </body>

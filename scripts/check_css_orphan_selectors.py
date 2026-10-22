@@ -12,13 +12,22 @@
 用法：默认=只读校验（0 违例才过）；--self-test 注入式合成样本 2 例。本脚本绝不修改任何文件。
 """
 
-import glob
 import os
 import re
 import sys
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+# W803：站点页面清单 / 容错读取 / style 块提取 / 注入式自测跑批四段骨架收敛至 scripts/utils/gate_common.py，
+# 本脚本只保留「第 36 门禁孤立选择器判定内核」这一自有语义（判定逻辑与输出文案逐字未变）。
+# 注意扫描面是本门禁特有的 **data + en 二源**（不含 site/*.html 根页），故 site_pages(root=False)。
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from utils.gate_common import (  # noqa: E402  （须在 sys.path 引导之后·与仓内既有消费形态一致）
+    iter_style_blocks,
+    read_text,
+    relpath,
+    run_case_batch,
+    site_pages,
+)
 
 SEL_RE = re.compile(r"^\s*([.#][^{};]*|[a-zA-Z][\w-]*\.?)\s*$", re.I)
 
@@ -39,16 +48,14 @@ def block_violations(block):
 
 
 def run_scan():
-    files = sorted(glob.glob(os.path.join(ROOT, "site", "data", "*.html"))
-                   + glob.glob(os.path.join(ROOT, "site", "en", "*.html")))
+    files = site_pages(root=False)  # 二源（site/data ∪ site/en）·全局排序——本门禁历来不扫根页
     total = 0
     for f in files:
-        src = open(f, encoding="utf-8", errors="replace").read()
-        for m in re.finditer(r"<style[^>]*>(.*?)</style>", src, re.S | re.I):
-            base = src[:m.start(1)].count("\n") + 1
-            for (i, s) in block_violations(m.group(1)):
+        src = read_text(f)
+        for block, base in iter_style_blocks(src):
+            for (i, s) in block_violations(block):
                 total += 1
-                print("FAIL %s:%d %s" % (os.path.relpath(f, ROOT), base + i, s))
+                print("FAIL %s:%d %s" % (relpath(f), base + i, s))
     print("---- 第 36 门禁 孤立选择器：%d 页扫描 · 违例 %d 处 ----" % (len(files), total))
     return 1 if total else 0
 
@@ -58,15 +65,13 @@ def run_self_test():
         ("残缀行违例", ".a { color: red }\n.\n.b { color: blue }", 1),
         ("裸标签残缺违例", "header\n.hero { color: red }", 1),
     ]
-    fails = 0
-    for name, css, want in cases:
-        got = len(block_violations(css))
-        status = "PASS" if got == want else "FAIL"
-        if got != want:
-            fails += 1
-        print("  %s %s（期望 %d 处）" % (status, name, want))
-    print("---- 第 36 门禁 self-test：%d/%d 通过 ----" % (len(cases) - fails, len(cases)))
-    return 1 if fails else 0
+    # 逐例行 `"  %s %s（期望 %d 处）"` 与收尾行由 gate_common 统一产出（文案逐字同旧版）。
+    return run_case_batch(
+        cases,
+        lambda case: (len(block_violations(case[1])), case[2]),
+        "第 36 门禁",
+        want_text=lambda want: "%d 处" % want,
+    )
 
 
 def main():

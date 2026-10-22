@@ -1,0 +1,28 @@
+{
+  "batch": "W872",
+  "date": "2026-10-22",
+  "title": "W872 设计迁移 B9 视觉与叙事实验 10 页（容器令牌化·朱砂实底合规·间距令牌化）",
+  "desc": "视觉与叙事实验十页迁移：顶条收敛、seal 转淡底、29 处语义色片进豁免（热力条/字号图例/连锁展示卡）",
+  "head_entry": "2026-10-22（W872 设计迁移 B9 视觉与叙事实验 10 页）",
+  "head_sentence": "视觉实验页的朱砂本身就是演示的一部分，热力条与字号图例都得原样留着",
+  "changelog_body": "\n\n> **来源**：用户令「B5–B10 一次做完」，六批连做第五片。W872 = W826 §6 第九片（视觉与叙事实验 10 页）。\n> - **文件**：site/data/aesthetics.html、site/data/visual-art.html、site/data/cross-time-danmaku.html、site/data/emotional-heatmap.html、site/data/chart-design.html、site/data/perf-canvas-rendering.html、site/data/global-pattern.html、site/data/four-dimensional-research-network.html、site/data/four-heavenly-kings-artifacts.html、site/data/tag-cloud.html、scripts/output/_w872_spec.json、scripts/output/_w872_accent_audit.json、scripts/output/_w872_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。\n> - **A 容器**：十页 1320px 令牌化（含 cross-time-danmaku 与 tag-cloud 两个级联页脚面页·只动 CSS 不动页脚）。\n> - **B 朱砂实底**：KPI 顶条收敛六页（aesthetics 4→1 · chart-design 5→1 · global 4→1 · four-heavenly 5→1）；`.seal` 十页转淡底。**29 处语义色片进豁免登记簿 W872 分册**：scene-bar ×4（热力图行内数据条）· sc-cat ×5 · rc-size ×5（字号档位图例）· domino-card ×4（连锁隐喻展示卡·非列表网格）· domino-hardship ×3 · 分类卡徽章 ×4 · 选中态 ×2 · 主行动按钮 ×2。\n> - **D 间距**：233 处（值保留）。\n> - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 111 处·chart-design 与 emotional-heatmap 各 30 处）。\n> - **验收**：J2 大 before + 本批 after 双主题对拍 + 全量归渠。**判词：PASS——344 处 diff 全部归渠零剩余**：顶条 108 处 + `.seal` 220 处 + 标签重判连带 16 处（global-pattern / four-dimensional 各 2 个 SVG 标签 9↔10px）。D 233 处零 diff；元素数双采无异常。",
+  "milestone_block": "- **W872 设计迁移 B9 视觉与叙事实验 10 页**：\n  - A 容器：10 页 1320 令牌化（含两个级联页脚面页·只动 CSS）\n  - B 朱砂实底：KPI 顶条收敛 6 页 + .seal ×10 淡底 + 语义色片 29 处进豁免（热力条/字号图例/连锁展示卡/选中态/主行动）\n  - D 间距 233 处 · C/chart-3 defer",
+  "agents_note": "二〇二六年十月二十二日（W872）B9 是视觉与叙事实验。这批的朱砂很多本身就是被演示的对象：aesthetics 的热力图行内条、tag-cloud 的字号图例（rc-size 五档）、visual-art 的场景类别条——都不该动。chart-design 有个多米诺连锁展示卡，四张卡排成连锁，是隐喻展示不是列表网格，豁免并记了区分。另两页跨-time-danmaku 和 tag-cloud 同时是级联页脚面，本批只动 CSS 不碰页脚。",
+  "file_index_rows": [
+    "| site/data/aesthetics.html | W872 | B9 迁移：容器令牌化 + KPI 顶条 4→1 + seal 淡底（热力条 ×4 进豁免） |",
+    "| site/data/visual-art.html | W872 | B9 迁移：容器令牌化 + seal 淡底（sc-cat ×5 进豁免） |",
+    "| site/data/cross-time-danmaku.html | W872 | B9 迁移：容器令牌化 + seal 淡底（级联页脚面·只动 CSS） |",
+    "| site/data/emotional-heatmap.html | W872 | B9 迁移：容器令牌化 + seal 淡底（scholar-card 进豁免） |",
+    "| site/data/chart-design.html | W872 | B9 迁移：容器令牌化 + KPI 顶条 5→1 + seal 淡底（domino ×7 进豁免） |",
+    "| site/data/perf-canvas-rendering.html | W872 | B9 迁移：容器令牌化 + seal 淡底（主行动 btn 进豁免） |",
+    "| site/data/global-pattern.html | W872 | B9 迁移：容器令牌化 + KPI 顶条 4→1 + seal 淡底（p-country 进豁免） |",
+    "| site/data/four-dimensional-research-network.html | W872 | B9 迁移：容器令牌化 + seal 淡底（badge 进豁免） |",
+    "| site/data/four-heavenly-kings-artifacts.html | W872 | B9 迁移：容器令牌化 + KPI 顶条 5→1 + seal 淡底（king-card 进豁免） |",
+    "| site/data/tag-cloud.html | W872 | B9 迁移：容器令牌化 + seal 淡底（rc-size ×5 / tab-btn 进豁免·级联页脚面） |",
+    "| scripts/output/_w872_accent_audit.json | W872 | 新增：B9 朱砂落点审计 |",
+    "| scripts/output/_w872_diff_review.json | W872 | 新增：B9 diff 归渠审查产物 |",
+    "| scripts/output/_w864_accent_exemptions.json | W872 | 登记簿增 W872 分册（语义色片 29 处） |",
+    "| scripts/output/_w872_spec.json | W872 | 本批 spec 十字段 |",
+    "| docs/00-导读/W批次编号对账表.md | W872 | 认领行与收官回填 |"
+  ]
+}

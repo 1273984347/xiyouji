@@ -24,7 +24,7 @@ const GREP_FILE_MAX_BYTES = 2 * 1024 * 1024;
 const RUN_TIMEOUT_MS = 120 * 1000;
 const RUN_MAX_BUFFER = 1024 * 1024;
 
-const SKIP_DIRS = new Set(["node_modules", ".git", ".venv", "venv", "__pycache__", "dist", ".zcode"]);
+const SKIP_DIRS = new Set(["node_modules", ".git", ".venv", "venv", "__pycache__", "dist", ".local-agent-tools"]);
 
 /** 工具 → 权限分类（index.ts 权限策略消费）。未知工具按 command（最保守）处理。 */
 export const TOOL_PERMISSION_KIND: Record<string, ToolPermissionKind> = {
@@ -40,14 +40,21 @@ export const TOOL_PERMISSION_KIND: Record<string, ToolPermissionKind> = {
 // 相对路径统一 posix 分隔后匹配；读面挡密钥与会话库，写面另加 .git 与门禁脚本。
 const DENY_READ: RegExp[] = [
   /(^|\/)\.env($|\.)/i, // 任意层级的 .env / .env.*（含 xiyouji-agent-web/.env）
-  /^xiyouji-agent-web\/data\//, // 会话库 chat.db（历史含工具结果，防二次外泄）
+  /(^|\/)xiyouji-agent-web\/data\//, // 会话库目录（仓库根相对形态；去掉 ^ 锚——cwd 为更深子目录时 relPosix 不含仓库根前缀）
+  /(^|\/)data\/chat\.db(-wal|-shm)?$/i, // W817：会话库三件套（cwd 无关形态——cwd=xiyouji-agent-web 时 relPosix 即 data/chat.db·原 ^ 锚定规则失配可绕）
   /(^|\/)data\/audit\.jsonl$/i, // W752 操作审计日志（防 LLM 读回自己的操作史；cwd 为仓库根或其子目录均命中）
 ];
 const DENY_WRITE: RegExp[] = [
   ...DENY_READ,
-  /^\.git\//, // hooks 等版本库内部（持久化执行原语）
-  /^scripts\/(verify_delivery|bump_version|batch_cascade)\.py$/, // 门禁脚本（铁律 8）
+  /(^|\/)\.git\//, // hooks 等版本库内部（持久化执行原语）·去掉 ^ 锚（cwd 为子目录时 relPosix 不含仓库根前缀）
+  /(^|\/)(verify_delivery|bump_version|batch_cascade)\.py$/, // 门禁脚本（铁律 8）·基名形态：cwd=scripts 时 relPosix 形如 verify_delivery.py（无 scripts/ 段·原 ^ 锚定规则失配可绕）
 ];
+
+/** 受保护路径判定（read/write 两面）——不抛异常版，供遍历类工具（glob/grep）过滤用。 */
+function isProtected(relPosix: string, mode: "read" | "write"): boolean {
+  const list = mode === "read" ? DENY_READ : DENY_WRITE;
+  return list.some((rx) => rx.test(relPosix));
+}
 
 // —— W752 细粒度写入允许域（AGENT_WEB_WRITE_SCOPE·可选）——
 // 逗号分隔的 posix 前缀（相对工作目录，默认工作目录=仓库根），如 docs/,site/,scripts/output/。
@@ -99,9 +106,22 @@ function guardPath(cwd: string, rel: string, mode: "read" | "write", mustExist: 
   const relPosix = toRelPosix(root, target);
   if (relPosix.startsWith("..")) throw new Error("路径越界：仅允许项目工作目录内的相对路径");
   checkProtected(relPosix, mode);
+  // W817：解析后判越界（此前只 realpathSync(target) 而**丢弃返回值**⇒ 注释声称的
+  // 「symlink 指向仓外则解析后判越界」在代码里并不存在——文件级链接可被读出/写穿）。
   if (mustExist) {
-    fs.realpathSync(target); // 不存在即抛错；symlink 指向仓外则解析后判越界
-    return target;
+    const real = fs.realpathSync(target); // 不存在即抛错
+    if (real !== root && !real.startsWith(root + path.sep)) {
+      throw new Error("路径越界（symlink 解析后）：" + rel);
+    }
+    return real; // 返回解析后的绝对路径（后续读写跟随它·不再二次跟随链接）
+  }
+  // write：目标已存在时（可能是指向仓外的符号链接）先解析后判定
+  if (fs.existsSync(target)) {
+    const real = fs.realpathSync(target);
+    if (real !== root && !real.startsWith(root + path.sep)) {
+      throw new Error("路径越界（symlink 解析后）：" + rel);
+    }
+    return real;
   }
   // write：取最深已存在祖先做 realpath 校验（防 symlink 指向仓外），不存在段交由 mkdir 创建
   let probe = path.dirname(target);
@@ -140,6 +160,9 @@ function walkFiles(cwd: string): string[] {
         if (!SKIP_DIRS.has(e.name)) walk(full);
       } else if (e.isFile()) {
         if (/^\.env($|\.)/i.test(e.name)) continue; // 密钥文件不入枚举面（grep/glob）
+        // W817：遍历类工具（glob/grep）同样不得触及受保护路径——此前二者从不调用
+        // checkProtected ⇒ 会话库（历史含工具结果）内容可经 grep 外泄，正是该黑名单的设立目的。
+        if (isProtected(toRelPosix(cwd, full), "read")) continue;
         out.push(full);
       }
     }
@@ -359,7 +382,13 @@ export function createToolset(cwd: string): Toolset {
           //    （外部 diff 驱动）与 --pager= 同族外呼，一并拦截。
           const GIT_DANGER = /^(--no-index|--output=|--open-files-in-pager|--ext-diff|--pager=)/;
           if (tokens[0] === "git") {
-            const bad = tokens.find((t) => t.startsWith("-O") || GIT_DANGER.test(t));
+            // W817：`--output` 的**空格形态**（`git log --output <file>`）此前不匹配
+            // GIT_DANGER（该正则只认 `--output=` 带等号形态）→ 可把输出写到工作目录外的任意路径
+            // （实测：git diff/log --output <file> 确实落盘）。短形式 `-o` 是 `--only`（限提交），
+            // 非输出重定向，故不拦。
+            const bad = tokens.find(
+              (t) => t === "--output" || t.startsWith("-O") || GIT_DANGER.test(t)
+            );
             if (bad) {
               return { content: `git 子命令含被禁止的参数：${bad.slice(0, 60)}`, isError: true };
             }

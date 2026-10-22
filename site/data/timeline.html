@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qMNKn/HBOJ/gf4W/ox0wpCdTlFoT1+y8eBTF0/hIpMU=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qMNKn/HBOJ/gf4W/ox0wpCdTlFoT1+y8eBTF0/hIpMU=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>交互式时间线 · 详解西游记</title>
@@ -10,7 +10,7 @@
     <meta property="og:title" content="交互式时间线 · 详解西游记">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://1273984347.github.io/xiyouji/data/timeline.html">
-    <meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+    <meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
@@ -21,10 +21,10 @@
     <meta name="description" content="交互式时间线 · 详解西游记">
     <meta property="og:description" content="交互式时间线 · 详解西游记">
     <script defer src="../static/js/d3.v7.min.js"></script>
-    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -108,7 +108,7 @@
     /* —— 图表五色雅集色板（W334 图表规范） —— */
     --chart-1: #C8463A;       /* 朱砂 */
     --chart-2: #3A6B8C;       /* 靛蓝 */
-    --chart-3: #C9A063;       /* 赭金 */
+    --chart-3: #B38F58;       /* 赭金 */
     --chart-4: #6B8E5A;       /* 苔绿 */
     --chart-5: #D8CFBC;       /* 米灰 */
     --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
@@ -204,7 +204,7 @@ html[data-theme="dark"] {
     --paper: #2B2419;
     --paper-warm: #33291B;
     --line: rgba(242, 235, 220, 0.14);
-    --accent: #E0604F;
+    --accent: #E46250;
     --accent-deep: #C94F3F;
     --accent-soft: #E8A99F;
     --accent-tint: rgba(224, 96, 79, 0.14);
@@ -362,6 +362,46 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
   --z-tooltip: 70;
 }
 
+/* ===== v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名） ===== */
+/* 来源：docs/11-方案报告/界面视觉重设计细化规格-v4-2026-10-20.md §4 终稿 */
+/* 口径：34 个零消费新名 / 35 处定义（暗色组 --accent-text 为同名第二处） */
+/* defer 四项随迁移批逐页 proof：--chart-1..6 与 --accent-soft 重述 · 暗色 --accent 改值 · 暗色 --chart-3/5 新增 */
+:root {
+    /* —— 间距刻度（4px 基准 + 2/10 半格） —— */
+    --space-0: 0px;   --space-1: 2px;   --space-2: 4px;   --space-3: 8px;
+    --space-4: 12px;  --space-5: 20px;  --space-6: 24px;  --space-7: 32px;
+    --space-8: 40px;  --space-9: 48px;  --space-10: 64px; --space-11: 80px;
+    --space-12: 96px;
+    /* 间距语义档（tight 紧凑 / base 常规 / loose 疏行 / block 区块 / section 章段 / hero 首屏） */
+    --gap-tight: var(--space-3);   --gap-base: var(--space-5);
+    --gap-loose: var(--space-6);   --gap-block: var(--space-7);
+    --gap-section: var(--space-10); --gap-hero: var(--space-12);
+
+    /* —— 容器三档（裁决 3） —— */
+    --container-read: 760px; --container-content: 1120px; --container-wide: 1320px;
+    /* —— 栅格 —— */
+    --grid-columns: 12; --grid-gutter: var(--space-6);
+
+    /* —— 排版角色（语义层：字重 + 族 + 字号 / 行高） —— */
+    --type-display: 600 var(--font-serif) clamp(34px, 4.4vw, 56px) / 1.15;
+    --type-title:    600 var(--font-serif) 24px / 1.30;
+    --type-subtitle: 500 var(--font-serif) 18px / 1.50;
+    --type-lead:     400 var(--font-sans) 17px / 1.75;
+    --type-body:     400 var(--font-sans) 15px / 1.80;
+    --type-label:    500 var(--font-sans) 13px / 1.50;
+    --type-caption:  400 var(--font-sans) 12px / 1.60;
+    --type-eyebrow:  500 var(--font-mono) 12px / 1.40;
+    --type-number:   500 var(--font-mono) 32px / 1.10;
+
+    /* —— 色彩角色补充（裁决 1 修法·朱砂文字落 --bg 专用档） —— */
+    --accent-text: #C7463A;          /* 朱砂文字落在 --bg 上（4.50:1） */
+}
+
+/* 暗色组补充（裁决 4：双主题平级）——--accent-text 与浅色同名、暗色取值不同 */
+html[data-theme="dark"] {
+    --accent-text: #E0604F;
+}
+
 /*
  * system.css — 详解西游记 · 全站组件设计系统
  * ----------------------------------------------
@@ -433,7 +473,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -472,11 +512,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -1210,7 +1250,41 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    </style>
+    
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
+/* W888：数据页卷末插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .viz-illustration {
+        margin: clamp(32px, 5vw, 64px) auto 0;
+        max-width: 420px;
+    }
+
+    .viz-illustration img {
+        width: 100%;
+        height: auto;
+        display: block;
+        opacity: .92;
+    }
+
+    html[data-theme="dark"] .viz-illustration {
+        display: none;
+    }
+</style>
 <style>
         /* e-track-exempt: chart-data-colors 1 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
@@ -1248,10 +1322,10 @@ td.num, th.num {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-lg);
-            padding: 32px 30px;
+            padding: var(--space-7) 30px;
             box-shadow: var(--shadow);
             margin-bottom: 28px;
-            scroll-margin-top: 20px;
+            scroll-margin-top: var(--space-5);
         }
         .device-title {
             font-size: 1.4rem;
@@ -1360,22 +1434,22 @@ td.num, th.num {
             color: var(--paper-warm);
             border: 1px solid var(--accent);
             border-radius: var(--radius-md);
-            padding: 8px 12px;
+            padding: var(--space-3) var(--space-4);
             font-size: 0.82rem;
             max-width: 375px;
             box-shadow: var(--elev-3);
             z-index: 10;
             line-height: 1.5;
         }
-        .tl-tooltip .tt-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 2px; overflow-wrap: anywhere; }
-        .tl-tooltip .tt-meta { font-size: 0.74rem; opacity: 0.8; margin-bottom: 4px; }
+        .tl-tooltip .tt-title { color: var(--accent-soft); font-weight: 600; margin-bottom: var(--space-1); overflow-wrap: anywhere; }
+        .tl-tooltip .tt-meta { font-size: 0.74rem; opacity: 0.8; margin-bottom: var(--space-2); }
         .tl-tooltip .tt-desc { font-size: 0.8rem; opacity: 0.92; overflow-wrap: anywhere; }
 
         /* 垂直时间线（移动端） */
         .vtl {
             position: relative;
             padding-left: 26px;
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         .vtl::before {
             content: "";
@@ -1386,7 +1460,7 @@ td.num, th.num {
         }
         .vtl-item {
             position: relative;
-            padding: 8px 0 16px 8px;
+            padding: var(--space-3) 0 16px var(--space-3);
             cursor: pointer;
             min-width: 0;
         }
@@ -1398,8 +1472,8 @@ td.num, th.num {
             border: 2px solid var(--paper);
             box-shadow: 0 0 0 2px var(--line);
         }
-        .vtl-item .vtl-meta { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 2px; font-family: "JetBrains Mono", monospace; }
-        .vtl-item .vtl-meta .vtl-axis { margin-left: 8px; padding: 1px 7px; border-radius: var(--radius-sm) ; font-size: 0.72rem; }
+        .vtl-item .vtl-meta { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: var(--space-1); font-family: "JetBrains Mono", monospace; }
+        .vtl-item .vtl-meta .vtl-axis { margin-left: var(--space-3); padding: 1px 7px; border-radius: var(--radius-sm) ; font-size: 0.72rem; }
         .vtl-item .vtl-title { font-size: 1rem; font-weight: 600; color: var(--ink); }
         .vtl-item .vtl-desc { font-size: 0.85rem; color: var(--ink-soft); overflow-wrap: anywhere; }
         .vtl-item.dimmed { opacity: 0.3; }
@@ -1408,7 +1482,7 @@ td.num, th.num {
         /* 详情卡片 */
         .detail-empty {
             text-align: center;
-            padding: 28px 12px;
+            padding: 28px var(--space-4);
             color: var(--ink-soft);
             font-size: 0.9rem;
             border: 1px dashed var(--line);
@@ -1429,11 +1503,11 @@ td.num, th.num {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .badge {
             display: inline-block;
-            padding: 2px 10px;
+            padding: var(--space-1) 10px;
             border-radius: var(--radius-pill);
             font-size: 0.76rem;
             font-family: "JetBrains Mono", monospace;
@@ -1446,7 +1520,7 @@ td.num, th.num {
             font-size: 1.5rem;
             font-weight: 600;
             color: var(--ink);
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
             overflow-wrap: anywhere;
         }
         .detail-desc {
@@ -1484,27 +1558,27 @@ td.num, th.num {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
             min-width: 0;
         }
         .event-card .ec-icon { font-size: 1.6rem; flex-shrink: 0; }
         .event-card .ec-title { font-size: 1.05rem; font-weight: 600; color: var(--ink); overflow-wrap: anywhere; min-width: 0; }
-        .event-card .ec-meta { font-size: 0.76rem; color: var(--ink-soft); margin-bottom: 8px; font-family: "JetBrains Mono", monospace; }
+        .event-card .ec-meta { font-size: 0.76rem; color: var(--ink-soft); margin-bottom: var(--space-3); font-family: "JetBrains Mono", monospace; }
         .event-card .ec-meta .ec-axis { margin-left: 6px; }
         .event-card .ec-desc { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.6; overflow-wrap: anywhere; }
 
         footer.source-list {
             text-align: center;
-            padding: 24px;
+            padding: var(--space-6);
             color: var(--ink-soft);
             font-size: 0.85rem;
             border-top: 1px solid var(--line);
-            margin-top: 40px;
+            margin-top: var(--space-8);
         }
         footer.source-list a {
             color: var(--accent-2);
             text-decoration: none;
-            margin: 0 8px;
+            margin: 0 var(--space-3);
         }
         footer.source-list a:hover { text-decoration: underline; }
 
@@ -1529,7 +1603,6 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
   <script defer src="../js/visit-log.js"></script>
-  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
 <link rel="preload" href="../static/fonts/NotoSansSC-Regular.subset.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../static/fonts/noto-serif-sc-shared.subset.woff2" as="font" type="font/woff2" crossorigin>
 <!-- chart-degrade: stacked -->
@@ -1556,9 +1629,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <h1>交互式时间线</h1>
         <p class="subtitle">TIMELINE</p>
         <p class="tagline">从大唐到当代·西游文化的千年演变。</p>
-    </section>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-04-timeline.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <nav class="breadcrumb"><a href="../dashboard.html">数据看板</a> → 交互式时间线</nav>
 
         <div class="notice" id="dataSource">
@@ -1609,6 +1684,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="device-sub">按时代过滤浏览全部事件，点击卡片可在时间线与详情中定位。</div>
             <div class="event-grid" id="event-grid"></div>
         </section>
+    <figure class="viz-illustration" aria-hidden="true">
+        <img src="../static/images/viz-04-timeline.webp" alt="" loading="lazy" decoding="async">
+    </figure>
     </main>
 
     <footer class="site-footer">
@@ -1622,8 +1700,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
         
-            <a href="../en/timeline.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="../en/timeline.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 
 <script>

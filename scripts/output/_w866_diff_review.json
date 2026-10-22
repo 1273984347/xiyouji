@@ -1,0 +1,1627 @@
+{
+  "batch": "W862",
+  "total_diffs": 296,
+  "pages_with_diffs": [
+    "data/ai-dialogue.html",
+    "data/character-appearance.html",
+    "data/character-dynamic-network.html",
+    "data/character-presence-timeline.html",
+    "data/character-relationship-3d.html",
+    "data/character-semantic-network.html",
+    "data/character-sentiment-arc.html",
+    "data/dialogue-sentiment.html"
+  ],
+  "groups": [
+    {
+      "page": "data/ai-dialogue.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 6,
+      "sample_elements": [
+        "span.seal",
+        "br.",
+        "span.step-num"
+      ]
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 6,
+      "sample_elements": [
+        "span.seal",
+        "br.",
+        "span.step-num"
+      ]
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 6,
+      "sample_elements": [
+        "span.seal",
+        "br.",
+        "span.step-num"
+      ]
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 6,
+      "sample_elements": [
+        "span.seal",
+        "br.",
+        "span.step-num"
+      ]
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 6,
+      "sample_elements": [
+        "span.seal",
+        "br.",
+        "span.step-num"
+      ]
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 5,
+      "sample_elements": [
+        "span.seal",
+        "span.step-num",
+        "span.step-num"
+      ]
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 5,
+      "sample_elements": [
+        "span.seal",
+        "span.step-num",
+        "span.step-num"
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 5,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 5,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 5,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 5,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(43, 36, 25)",
+      "after": "rgb(224, 96, 79)",
+      "count": 4,
+      "sample_elements": [
+        "span.step-num",
+        "span.step-num",
+        "span.step-num"
+      ]
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(43, 36, 25)",
+      "after": "rgb(224, 96, 79)",
+      "count": 4,
+      "sample_elements": [
+        "span.step-num",
+        "span.step-num",
+        "span.step-num"
+      ]
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(43, 36, 25)",
+      "after": "rgb(224, 96, 79)",
+      "count": 4,
+      "sample_elements": [
+        "span.step-num",
+        "span.step-num",
+        "span.step-num"
+      ]
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(43, 36, 25)",
+      "after": "rgb(224, 96, 79)",
+      "count": 4,
+      "sample_elements": [
+        "span.step-num",
+        "span.step-num",
+        "span.step-num"
+      ]
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(43, 36, 25)",
+      "after": "rgb(224, 96, 79)",
+      "count": 4,
+      "sample_elements": [
+        "span.step-num",
+        "span.step-num",
+        "span.step-num"
+      ]
+    },
+    {
+      "page": "data/character-relationship-3d.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/character-relationship-3d.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/character-relationship-3d.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/character-relationship-3d.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/character-sentiment-arc.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/character-sentiment-arc.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 4,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/character-appearance.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/character-appearance.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/character-appearance.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/character-appearance.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/character-dynamic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/character-dynamic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(242, 235, 220, 0.14)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/character-dynamic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-width",
+      "before": "3px",
+      "after": "1px",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/character-dynamic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "rgb(229, 223, 208)",
+      "count": 3,
+      "sample_elements": [
+        "div.kpi-card",
+        "div.kpi-card",
+        "div.kpi-card"
+      ]
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/ai-dialogue.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-appearance.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-appearance.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-appearance.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-appearance.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-appearance.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-appearance.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-appearance.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-appearance.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-appearance.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-appearance.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-dynamic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-dynamic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-dynamic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-dynamic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-dynamic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-dynamic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-dynamic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-dynamic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-dynamic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-dynamic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-presence-timeline.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-presence-timeline.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-presence-timeline.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-presence-timeline.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-presence-timeline.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-presence-timeline.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-presence-timeline.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-presence-timeline.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-presence-timeline.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-presence-timeline.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-relationship-3d.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-relationship-3d.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-relationship-3d.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-relationship-3d.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-relationship-3d.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-relationship-3d.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-relationship-3d.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-relationship-3d.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-relationship-3d.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-relationship-3d.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-sentiment-arc.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-sentiment-arc.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-sentiment-arc.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-sentiment-arc.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-sentiment-arc.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-sentiment-arc.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-sentiment-arc.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-sentiment-arc.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-sentiment-arc.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-sentiment-arc.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/dialogue-sentiment.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/dialogue-sentiment.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/dialogue-sentiment.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/dialogue-sentiment.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/dialogue-sentiment.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(224, 96, 79)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/dialogue-sentiment.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/dialogue-sentiment.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-top-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/dialogue-sentiment.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-right-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/dialogue-sentiment.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-bottom-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/dialogue-sentiment.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "border-left-color",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(200, 70, 58)",
+      "count": 2,
+      "sample_elements": [
+        "span.seal",
+        "br."
+      ]
+    },
+    {
+      "page": "data/character-appearance.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/character-appearance.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/character-dynamic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/character-dynamic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/character-presence-timeline.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/character-presence-timeline.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/character-relationship-3d.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/character-relationship-3d.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "margin-right",
+      "before": "0px",
+      "after": "3.20312px",
+      "count": 1,
+      "sample_elements": [
+        "div.container"
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "margin-left",
+      "before": "0px",
+      "after": "3.20312px",
+      "count": 1,
+      "sample_elements": [
+        "div.container"
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "margin-right",
+      "before": "0px",
+      "after": "3.20312px",
+      "count": 1,
+      "sample_elements": [
+        "div.container"
+      ]
+    },
+    {
+      "page": "data/character-semantic-network.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "margin-left",
+      "before": "0px",
+      "after": "3.20312px",
+      "count": 1,
+      "sample_elements": [
+        "div.container"
+      ]
+    },
+    {
+      "page": "data/character-sentiment-arc.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/character-sentiment-arc.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/dialogue-sentiment.html",
+      "theme": "dark",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(224, 96, 79)",
+      "after": "rgba(224, 96, 79, 0.14)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    },
+    {
+      "page": "data/dialogue-sentiment.html",
+      "theme": "light",
+      "kind": "属性",
+      "prop": "background-color",
+      "before": "rgb(200, 70, 58)",
+      "after": "color(srgb 0.978431 0.927451 0.922745)",
+      "count": 1,
+      "sample_elements": [
+        "span.seal"
+      ]
+    }
+  ]
+}

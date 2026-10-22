@@ -8,7 +8,7 @@
 > 再生成即覆盖。对账门禁 `check_design_doc_drift.py` 校验本文档 ↔ CSS 双向一致（PD-5·AC-2）。
 > 本文件不含生成日期等易变字段——保证「再生成逐字节一致」的反篡改比对（PD-5 检查 1）可长期成立。
 
-覆盖声明总数 **97**（light 69 / dark 28 / 其他 0）·来源节 4 个。修改令牌请改 `site/tokens.css` 后重跑导出。
+覆盖声明总数 **132**（light 103 / dark 29 / 其他 0）·来源节 5 个。修改令牌请改 `site/tokens.css` 后重跑导出。
 
 ## Light 主题（:root）
 
@@ -32,7 +32,7 @@
 | `--rebel` | `#8C2A2A` | 反派 / 警示色：暗朱红 |
 | `--chart-1` | `#C8463A` | 朱砂 |
 | `--chart-2` | `#3A6B8C` | 靛蓝 |
-| `--chart-3` | `#C9A063` | 赭金 |
+| `--chart-3` | `#B38F58` | 赭金 |
 | `--chart-4` | `#6B8E5A` | 苔绿 |
 | `--chart-5` | `#D8CFBC` | 米灰 |
 | `--chart-6` | `#8A6D3B` | 赭石（备用第 6 系列） |
@@ -96,6 +96,45 @@
 | `--z-drawer` | `60` |  |
 | `--z-tooltip` | `70` |  |
 
+### v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）（34）
+
+| 令牌 | 值 | 说明 |
+|---|---|---|
+| `--space-0` | `0px` |  |
+| `--space-1` | `2px` |  |
+| `--space-2` | `4px` |  |
+| `--space-3` | `8px` |  |
+| `--space-4` | `12px` |  |
+| `--space-5` | `20px` |  |
+| `--space-6` | `24px` |  |
+| `--space-7` | `32px` |  |
+| `--space-8` | `40px` |  |
+| `--space-9` | `48px` |  |
+| `--space-10` | `64px` |  |
+| `--space-11` | `80px` |  |
+| `--space-12` | `96px` |  |
+| `--gap-tight` | `var(--space-3)` |  |
+| `--gap-base` | `var(--space-5)` |  |
+| `--gap-loose` | `var(--space-6)` |  |
+| `--gap-block` | `var(--space-7)` |  |
+| `--gap-section` | `var(--space-10)` |  |
+| `--gap-hero` | `var(--space-12)` |  |
+| `--container-read` | `760px` |  |
+| `--container-content` | `1120px` |  |
+| `--container-wide` | `1320px` |  |
+| `--grid-columns` | `12` |  |
+| `--grid-gutter` | `var(--space-6)` |  |
+| `--type-display` | `600 var(--font-serif) clamp(34px, 4.4vw, 56px) / 1.15` |  |
+| `--type-title` | `600 var(--font-serif) 24px / 1.30` |  |
+| `--type-subtitle` | `500 var(--font-serif) 18px / 1.50` |  |
+| `--type-lead` | `400 var(--font-sans) 17px / 1.75` |  |
+| `--type-body` | `400 var(--font-sans) 15px / 1.80` |  |
+| `--type-label` | `500 var(--font-sans) 13px / 1.50` |  |
+| `--type-caption` | `400 var(--font-sans) 12px / 1.60` |  |
+| `--type-eyebrow` | `500 var(--font-mono) 12px / 1.40` |  |
+| `--type-number` | `500 var(--font-mono) 32px / 1.10` |  |
+| `--accent-text` | `#C7463A` | 朱砂文字落在 --bg 上（4.50:1） |
+
 ## Dark 主题（html[data-theme="dark"]·夜读模式）
 
 ### 夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载（28）
@@ -109,7 +148,7 @@
 | `--paper` | `#2B2419` |  |
 | `--paper-warm` | `#33291B` |  |
 | `--line` | `rgba(242, 235, 220, 0.14)` |  |
-| `--accent` | `#E0604F` |  |
+| `--accent` | `#E46250` |  |
 | `--accent-deep` | `#C94F3F` |  |
 | `--accent-soft` | `#E8A99F` |  |
 | `--accent-tint` | `rgba(224, 96, 79, 0.14)` |  |
@@ -130,4 +169,10 @@
 | `--elev-2` | `0 2px 6px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35)` |  |
 | `--elev-3` | `0 4px 10px rgba(0, 0, 0, 0.50), 0 12px 32px rgba(0, 0, 0, 0.45)` |  |
 | `--elev-4` | `0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50)` |  |
+
+### v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）（1）
+
+| 令牌 | 值 | 说明 |
+|---|---|---|
+| `--accent-text` | `#E0604F` |  |
 

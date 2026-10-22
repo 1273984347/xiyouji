@@ -16,6 +16,12 @@ verify_delivery.py — 零依赖交付校验门禁（Senior Developer 设立）
   手工工件，辅助文档升版后必现"不含旧版"噪音 WARN），改为动态取 CHANGELOG 倒序首个
   版段（现役段）；页脚自身降级为新鲜度被检对象，落后现役段仅【WARN 不阻断】。
 
+fail-closed 委派语义（W831·用户批准修 B1/B2·CLAUDE.md 第 10 条授权）：门禁子进程崩溃/
+  超时/输出不可解析/汇总结构缺失 = 判据不可执行 → 一律 FAIL。原 _run_simple_gate 异常记
+  WARN、a11y 段 JSON 解析失败记 OK，使「从未通过的门禁」伪装「通过」、整轮仍报核心全部
+  通过 + exit 0（T03 审查实证·本轮根除）；唯一例外为 Gate.missing_warn 登记的运行期缺失
+  降级（W424 M2·仅 2 个 node 段·显式 opt-in）。
+
 零依赖：仅标准库。可直接运行：
   python scripts/verify_delivery.py            # 静态校验（提交前门禁）
   python scripts/verify_delivery.py --health   # 额外探测 RAG /health（环境项，仅告警不阻断）
@@ -24,8 +30,8 @@ verify_delivery.py — 零依赖交付校验门禁（Senior Developer 设立）
 
 结构（W728 重构：原 905 行单体 main() 拆为五层·行为与输出逐字节不变）：
   模块级常量 → scope 分级工具 → 版本解析工具 → _Reporter/_GateContext（上报与执行态）
-  → 门禁参数表（_SimpleGate×18 / _StrictGate×15）→ 通用 runner×2 → 13 个段函数
-  → 收尾三函数 → main() 编排（49 段执行序 == EXPECTED_SECTION_NAMES 声明序·段自洽锁对账）。
+  → 门禁参数表（_SimpleGate×18 / _StrictGate×16）→ 通用 runner×2 → 13 个段函数
+  → 收尾三函数 → main() 编排（52 段执行序 == EXPECTED_SECTION_NAMES 声明序·段自洽锁对账）。
 """
 
 import json
@@ -96,6 +102,10 @@ EXPECTED_SECTION_NAMES = [
     "可视化数据",
     "英文站",
     "目录文档",
+    "搜索索引",
+    "性能影子",
+    "计划方案合规",
+    "朱砂实底",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
@@ -113,14 +123,15 @@ _SITE_FILES_RE = re.compile(
     r"^(site/.+\.(html|css|js|xml)|dataset/.+\.json|scripts/output/data/.+\.json)$")
 SCOPE_DOCS_SECTIONS = {
     "docs链接", "治理契约", "索引健康", "元信息块", "术语一致", "引文核验",
-    "W区间字面量", "文档口径", "CLAUDE速查",
+    "W区间字面量", "文档口径", "CLAUDE速查", "搜索索引", "计划方案合规",
 }
 SCOPE_SITE_SECTIONS = {
     "双源漂移", "CSP漂移", "腐蚀插件", "内联语法", "CSS平衡", "token覆盖",
     "动效禁令", "a11y对比", "INLINED完整", "动态链接", "图表自洽", "数据一致",
     "SEOhead", "可引用性", "设计令牌对账", "色盲安全", "降级声明", "head内容",
+    "朱砂实底",
     "CSS变量引用", "声明分隔", "孤立选择", "kpi基类", "内嵌残留", "时间线双源", "chapter双源", "可视化数据", "英文站",
-    "文档口径", "W区间字面量", "索引健康", "治理契约", "AGENTS分层",
+    "文档口径", "W区间字面量", "索引健康", "治理契约", "AGENTS分层", "搜索索引", "性能影子",
 }
 _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·旁文档/A4/A1-A6/学术/A1导航/sitemap/内嵌回退 7 段不在任何 scope 集=自洽锁盲区）
     "期望版本", "dukou页脚", "六文档同步", "旁文档同步", "范围漂移",
@@ -358,8 +369,10 @@ class _SimpleGate(NamedTuple):
       tail_out/tail_err——尾行切片（stdout/stderr 各末 N 行）；
       fail_tail——fail 消息中尾行上限（12 段 [:6]·治理契约 [:4]·6 段全量因 tail≤4 条等价）；
       runner——py=sys.executable / node=node；
-      missing_warn——FileNotFoundError 专用 WARN（仅 2 个 node 段：运行时缺失语义）；
-      severity——fail=非零退出即 FAIL / warn=非零退出仅 WARN（治理契约·W499 起不阻断）。
+      missing_warn——FileNotFoundError 专用 WARN（仅 2 个 node 段：运行时缺失语义·W424 M2
+      受控降级；W831 起未登记 missing_warn 的段遇运行器缺失按 fail-closed 记 FAIL）；
+      severity——fail=非零退出即 FAIL / warn=非零退出仅 WARN（治理契约·W499 起不阻断；
+      注意：severity 只管「退出码口径」，子进程崩溃/超时任何段都 FAIL·W831 B1 根修）。
     """
     section: str
     script: str
@@ -470,7 +483,7 @@ _SIMPLE_GATES_POST_A11Y = [
                 warn_msg="SEO head 门禁执行异常（W630）: %s"),
 ]
 
-# 15 个严格委托段（第 28-41 门禁·「第 NN 门禁」字面量即第 41 门禁 C2 对账源·禁改写）
+# 16 个严格委托段（第 28-47 门禁·「第 NN 门禁」字面量即第 41 门禁 C2 对账源·禁改写）
 _STRICT_GATES = [
     _StrictGate(section="可引用性", script="check_citability.py", args=("--gate",),
                 marker="---- 第 28 门禁：",
@@ -586,6 +599,31 @@ _STRICT_GATES = [
                 fail_msg="目录文档新鲜度违规（生成清单与磁盘漂移·重跑 python scripts/gen_folder_docs.py --refresh 刷新·人工维护件自动跳过）",
                 marker_msg="目录文档门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
                 ok_msg="目录文档新鲜度通过（%s）", ok_line=-1),
+    _StrictGate(section="搜索索引", script="check_search_index_fresh.py", args=("--gate",), timeout=300,
+                marker="---- 第 46 门禁 搜索索引新鲜度：",
+                crash_msg="搜索索引新鲜度门禁执行异常（第 46 槽·crash 即拦）: %s",
+                fail_msg="站内搜索索引陈旧（页面内嵌索引 ≠ 生成器实算·重跑 python scripts/_gen_search_index.py 刷新并重算 CSP 哈希）",
+                marker_msg="搜索索引门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+                ok_msg="搜索索引新鲜度通过（%s）", ok_line=-1),
+    _StrictGate(section="性能影子", script="check_perf_shadow.py", args=("--gate",), timeout=120,
+                marker="---- 第 47 门禁 性能影子：",
+                crash_msg="性能影子槽执行异常（第 47 槽·crash 即拦）: %s",
+                fail_msg="性能影子槽采集面缺失（perf.yml collect.url 的页面不在了·先修断链再看数字）",
+                marker_msg="性能影子槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+                ok_msg="性能影子槽通过（%s）", ok_line=-1),
+    _StrictGate(section="计划方案合规", script="check_plan_template.py", args=("--gate",), timeout=120,
+                marker="---- 第 48 门禁 计划方案合规：",
+                crash_msg="计划方案合规槽执行异常（第 48 槽·crash 即拦）: %s",
+                fail_msg="计划方案模板符合性不达标（新增/修改的计划方案文件引入了缺失判据·补齐后重跑）",
+                marker_msg="计划方案合规槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+                ok_msg="计划方案合规槽通过（%s）", ok_line=-1),
+    _StrictGate(section="朱砂实底", script="check_vermilion_solid.js", runner="node",
+                args=("--gate",), timeout=600,
+                marker="---- 第 49 门禁 朱砂实底：",
+                crash_msg="朱砂实底槽执行异常（第 49 槽·crash 即拦）: %s",
+                fail_msg="朱砂实底限额违规（有页面非豁免实底 >3 处·收敛或补登记豁免后重跑）",
+                marker_msg="朱砂实底槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+                ok_msg="朱砂实底限额门禁通过（%s）", ok_line=-1),
 ]
 
 # ---- 注册表派生与一致性防线（W781 R-1·挂槽「五处同改」收敛）----
@@ -628,6 +666,10 @@ def _run_simple_gate(ctx, gate):
     """简单委托门禁通用体（W728 重构）：替代原 18 个同构 try/run/tail 段。
 
     输出口径与逐段内联版逐字节一致；scope 跳过时经 ctx._scoped_run 拿伪造结果走 ok 路径。
+    W831 B1 根修（用户批准·T03 D-01 遗留·CLAUDE.md 第 10 条）：异常路径由 WARN 改 FAIL——
+    子进程崩溃/超时 = 判据不可执行，记 WARN 会使 18/33 委托段崩溃即降级、整轮仍「核心全部
+    通过 ✅」+ exit 0（假绿面根除·对齐 _run_strict_gate 语义）；唯一保留的 WARN 是
+    Gate.missing_warn 登记的运行期缺失降级（W424 M2·仅 2 个 node 段·显式 opt-in）。
     """
     ctx.section(gate.section)
     exe = "node" if gate.runner == "node" else sys.executable
@@ -635,10 +677,13 @@ def _run_simple_gate(ctx, gate):
     try:
         r = subprocess.run(cmd, capture_output=True, text=True, timeout=gate.timeout)
     except FileNotFoundError as e:
-        ctx.rep.warn(gate.missing_warn if gate.missing_warn else gate.warn_msg % e)
+        if gate.missing_warn:
+            ctx.rep.warn(gate.missing_warn)  # W424 M2 登记式降级（node 运行期缺失·受控）
+        else:
+            ctx.rep.fail(gate.warn_msg % e)  # 未登记降级 → fail-closed（判据不可执行即红）
         return
     except Exception as e:
-        ctx.rep.warn(gate.warn_msg % e)
+        ctx.rep.fail(gate.warn_msg % e)  # W831：crash/timeout → FAIL（原 WARN·假绿面根除）
         return
     tail = r.stdout.splitlines()[-gate.tail_out:] + r.stderr.splitlines()[-gate.tail_err:]
     first = tail[0] if tail else "无输出"
@@ -981,30 +1026,47 @@ def _gate_embedded_fallback(ctx):
 
 
 def _gate_a11y(ctx):
-    """a11y 对比度门禁（W493 E6 转正：M1 WCAG AA，P0/P1 阻断；bespoke=JSON 汇总解析）。"""
+    """a11y 对比度门禁（W493 E6 转正：M1 WCAG AA，P0/P1 阻断；bespoke=JSON 汇总解析）。
+
+    W831 B2 根修（用户批准·T03 D-01 遗留）：原实现三处 fail-open——① JSON 解析异常 →
+    rep.ok「summary 解析跳过」；② 缺 summary/E2-2 键 → p01=0 静默判绿（_count_by_rule 虽
+    预置全规则 0 值，但任何输出形态漂移都走这条静默绿路）；③ 外层异常 → rep.warn。三者
+    都使「判据不可执行」伪装成「通过」。现改 fail-closed：解析失败/结构不符/子进程异常
+    一律 FAIL（对齐 _run_strict_gate 与 _run_simple_gate W831 语义）。
+    """
     ctx.section("a11y对比")
     a11y_py = os.path.join(_HERE, "a11y_audit.py")
     try:
         r = subprocess.run(
             [sys.executable, a11y_py, "--dir", "site", "--format", "json", "--quiet"],
             capture_output=True, text=True, timeout=300)
-        if r.returncode == 0:
-            try:
-                rep = json.loads(r.stdout)
-                s = rep.get("summary", {})
-                e22 = s.get("E2-2", {})
-                p01 = (e22.get("P0", 0) or 0) + (e22.get("P1", 0) or 0)
-                if p01 == 0:
-                    ctx.rep.ok("a11y 对比度门禁通过（E2-2 P0/P1=0）")
-                else:
-                    ctx.rep.fail("a11y 对比度 P0+P1=%d（M1 WCAG AA 阻断）" % p01)
-            except Exception:
-                ctx.rep.ok("a11y 审计完成（summary 解析跳过）")
-        else:
-            ctx.rep.fail("a11y_audit 失败（exit %d）：%s"
-                         % (r.returncode, (r.stderr or r.stdout).splitlines()[-1:]))
     except Exception as e:
-        ctx.rep.warn("a11y 对比度门禁执行异常（W493）: %s" % e)
+        ctx.rep.fail("a11y 对比度门禁执行异常（判据不可执行·fail-closed·W831）: %s" % e)
+        return
+    if isinstance(r, _SkipResult):
+        # W839 回归修复：scope 跳过时 _scoped_run 返回伪造结果（stdout 为「（--scope X 跳过）」，
+        # 跳过提示已由其打印）；W834 改 fail-closed 后误把该提示串送 json.loads → docs 档提交必红。
+        # 跳过不是「判据不可执行」，直接返回，不重复上报。
+        return
+    if r.returncode != 0:
+        ctx.rep.fail("a11y_audit 失败（exit %d）：%s"
+                     % (r.returncode, (r.stderr or r.stdout).splitlines()[-1:]))
+        return
+    try:
+        rep = json.loads(r.stdout)
+    except Exception as e:
+        ctx.rep.fail("a11y 审计输出不可解析（判据不可执行·fail-closed·W831）: %s" % str(e)[:120])
+        return
+    s = rep.get("summary") if isinstance(rep, dict) else None
+    e22 = s.get("E2-2") if isinstance(s, dict) else None
+    if not isinstance(e22, dict):
+        ctx.rep.fail("a11y 汇总缺 summary.E2-2 结构（判据不可执行·fail-closed·W831）")
+        return
+    p01 = (e22.get("P0", 0) or 0) + (e22.get("P1", 0) or 0)
+    if p01 == 0:
+        ctx.rep.ok("a11y 对比度门禁通过（E2-2 P0/P1=0）")
+    else:
+        ctx.rep.fail("a11y 对比度 P0+P1=%d（M1 WCAG AA 阻断）" % p01)
 
 
 # ---------------------------------------------------------------------------
@@ -1057,7 +1119,7 @@ def main():
     _assert_registry_consistent()  # W781 R-1：注册表一致性启动期防线
     """交付门禁编排（W728 重构：905 行单体 → 表驱动编排）。
 
-    执行序 = 46 个段名在 EXPECTED_SECTION_NAMES 中的声明序（段自洽锁对账·不得重排）；
+    执行序 = 52 个段名在 EXPECTED_SECTION_NAMES 中的声明序（段自洽锁对账·不得重排）；
     新增/调整门禁段只改对应参数表项或段函数，main() 编排面保持稳定。
     """
     rep = _Reporter()

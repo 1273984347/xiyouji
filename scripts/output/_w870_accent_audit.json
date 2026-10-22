@@ -1,0 +1,1195 @@
+{
+  "data/text-evolution.html": {
+    "text_on_bg": [
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "红"
+      },
+      {
+        "tag": "div",
+        "cls": "evo-element",
+        "txt": "心猿形象猴行者→孙悟空"
+      },
+      {
+        "tag": "div",
+        "cls": "evo-element",
+        "txt": "猪八戒·挑担子无→八戒挑担→沙僧挑担"
+      },
+      {
+        "tag": "div",
+        "cls": "evo-element",
+        "txt": "唐僧出身故事无→外传→入正文"
+      },
+      {
+        "tag": "div",
+        "cls": "evo-element",
+        "txt": "大闹天宫规模简→繁"
+      },
+      {
+        "tag": "div",
+        "cls": "evo-element",
+        "txt": "九九八十一难无→有"
+      },
+      {
+        "tag": "div",
+        "cls": "evo-element",
+        "txt": "沙僧定型深沙神→沙和尚"
+      },
+      {
+        "tag": "td",
+        "cls": "name",
+        "txt": "吴承恩"
+      },
+      {
+        "tag": "td",
+        "cls": "evidence against",
+        "txt": "《淮安府志》'西游记'未注明文体·或为游记吴承恩"
+      },
+      {
+        "tag": "ul",
+        "cls": "",
+        "txt": "《淮安府志》'西游记'未注明文体·或为游记吴承恩"
+      },
+      {
+        "tag": "li",
+        "cls": "",
+        "txt": "《淮安府志》'西游记'未注明文体·或为游记"
+      },
+      {
+        "tag": "li",
+        "cls": "",
+        "txt": "吴承恩文集无相关道教术语"
+      },
+      {
+        "tag": "li",
+        "cls": "",
+        "txt": "明后期方言非单一淮安话"
+      },
+      {
+        "tag": "td",
+        "cls": "name",
+        "txt": "丘处机"
+      },
+      {
+        "tag": "td",
+        "cls": "evidence against",
+        "txt": "丘处机卒于1227·世本刊于1592·中间300"
+      },
+      {
+        "tag": "ul",
+        "cls": "",
+        "txt": "丘处机卒于1227·世本刊于1592·中间300"
+      },
+      {
+        "tag": "li",
+        "cls": "",
+        "txt": "丘处机卒于1227·世本刊于1592·中间300"
+      },
+      {
+        "tag": "li",
+        "cls": "",
+        "txt": "百回本语言为明代·非元初"
+      },
+      {
+        "tag": "li",
+        "cls": "",
+        "txt": "丘处机《长春真人西游记》实为游记·非小说"
+      },
+      {
+        "tag": "td",
+        "cls": "name",
+        "txt": "李春芳"
+      },
+      {
+        "tag": "td",
+        "cls": "evidence against",
+        "txt": "无直接证据首辅身份难以为通俗小说署名"
+      },
+      {
+        "tag": "ul",
+        "cls": "",
+        "txt": "无直接证据首辅身份难以为通俗小说署名"
+      },
+      {
+        "tag": "li",
+        "cls": "",
+        "txt": "无直接证据"
+      },
+      {
+        "tag": "li",
+        "cls": "",
+        "txt": "首辅身份难以为通俗小说署名"
+      },
+      {
+        "tag": "td",
+        "cls": "name",
+        "txt": "华阳洞天主人"
+      },
+      {
+        "tag": "td",
+        "cls": "evidence against",
+        "txt": "为'校'者·非'著'者或为书坊主或编辑者化名"
+      },
+      {
+        "tag": "ul",
+        "cls": "",
+        "txt": "为'校'者·非'著'者或为书坊主或编辑者化名"
+      },
+      {
+        "tag": "li",
+        "cls": "",
+        "txt": "为'校'者·非'著'者"
+      },
+      {
+        "tag": "li",
+        "cls": "",
+        "txt": "或为书坊主或编辑者化名"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "百回本奠基"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "唐僧出身故事"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "已被否定"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "吴承恩"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "丹道解西游最系统"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "2000 条"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "6100 条"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "跨越四百年的\"读书会\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "点旨 2250 条（37%）"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "骂人仅 340 条"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "evo-step first",
+        "kind": "background",
+        "area": 9754
+      },
+      {
+        "tag": "div",
+        "cls": "evo-step first",
+        "kind": "background",
+        "area": 6890
+      },
+      {
+        "tag": "div",
+        "cls": "evo-step first",
+        "kind": "background",
+        "area": 6651
+      },
+      {
+        "tag": "div",
+        "cls": "evo-step first",
+        "kind": "background",
+        "area": 6890
+      },
+      {
+        "tag": "div",
+        "cls": "evo-step first",
+        "kind": "background",
+        "area": 6737
+      },
+      {
+        "tag": "div",
+        "cls": "evo-step first",
+        "kind": "background",
+        "area": 7368
+      },
+      {
+        "tag": "div",
+        "cls": "quote-card",
+        "kind": "border-top",
+        "area": 1094
+      }
+    ]
+  },
+  "data/text-search.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/linguistics.html": {
+    "text_on_bg": [
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "梵语音译"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "三教合一"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "25%"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "9"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "10%"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "4"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "5%"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "3"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "15%"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "7"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "40%"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "10"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "30%"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "9"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "0%"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "0"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "5%"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "1"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "inc-card ",
+        "kind": "border-top",
+        "area": 1098
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "kind": "background",
+        "area": 1981
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "kind": "background",
+        "area": 594
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card ",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "mbti-card m-entp",
+        "kind": "border-top",
+        "area": 813
+      },
+      {
+        "tag": "div",
+        "cls": "char-card c-buddhist",
+        "kind": "border-top",
+        "area": 1098
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "kind": "background",
+        "area": 495
+      },
+      {
+        "tag": "div",
+        "cls": "char-card c-buddhist",
+        "kind": "border-top",
+        "area": 1098
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "kind": "background",
+        "area": 792
+      },
+      {
+        "tag": "div",
+        "cls": "char-card c-buddhist",
+        "kind": "border-top",
+        "area": 1098
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "kind": "background",
+        "area": 594
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card ",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/famous-time-travel.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      }
+    ]
+  },
+  "data/cultural-misreading.html": {
+    "text_on_bg": [
+      {
+        "tag": "td",
+        "cls": "term",
+        "txt": "心猿意马"
+      },
+      {
+        "tag": "td",
+        "cls": "term",
+        "txt": "三昧真火"
+      },
+      {
+        "tag": "td",
+        "cls": "term",
+        "txt": "斗战胜佛"
+      },
+      {
+        "tag": "td",
+        "cls": "term",
+        "txt": "孙悟空"
+      },
+      {
+        "tag": "td",
+        "cls": "term",
+        "txt": "猪八戒"
+      },
+      {
+        "tag": "td",
+        "cls": "term",
+        "txt": "筋斗云"
+      },
+      {
+        "tag": "td",
+        "cls": "term",
+        "txt": "三藏"
+      },
+      {
+        "tag": "td",
+        "cls": "term",
+        "txt": "沙悟净"
+      },
+      {
+        "tag": "td",
+        "cls": "term",
+        "txt": "齐天大圣"
+      },
+      {
+        "tag": "td",
+        "cls": "term",
+        "txt": "九九八十一难"
+      },
+      {
+        "tag": "td",
+        "cls": "term",
+        "txt": "美猴王"
+      },
+      {
+        "tag": "td",
+        "cls": "term",
+        "txt": "金箍棒"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "'心猿意马'、'三昧真火'、'斗战胜佛'"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "'悟空/悟净'法号的修行隐喻"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "美少年+热血"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "爱情+教育"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "最忠于原著"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "'简化叙事'"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "'西方视角重构'"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "'美猴王'与'齐天大圣'"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "intensity ≥ 9"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/century-dialogue.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "speech-bubble",
+        "kind": "border-top",
+        "area": 750
+      },
+      {
+        "tag": "div",
+        "cls": "speech-bubble",
+        "kind": "border-top",
+        "area": 750
+      },
+      {
+        "tag": "div",
+        "cls": "speech-bubble",
+        "kind": "border-top",
+        "area": 750
+      }
+    ]
+  },
+  "data/counterfactual.html": {
+    "text_on_bg": [
+      {
+        "tag": "span",
+        "cls": "quote-mark",
+        "txt": "\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "'考验工程'"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "'九九之数'"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "'必要配乐'"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "'心性契机'"
+      },
+      {
+        "tag": "span",
+        "cls": "marker",
+        "txt": "01"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "'考验工程'"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "'九九之数'"
+      },
+      {
+        "tag": "span",
+        "cls": "marker",
+        "txt": "02"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "紧箍咒"
+      },
+      {
+        "tag": "span",
+        "cls": "marker",
+        "txt": "03"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "大鹏"
+      },
+      {
+        "tag": "span",
+        "cls": "marker",
+        "txt": "04"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "透明化"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "span",
+        "cls": "badge validity-high",
+        "kind": "background",
+        "area": 1410
+      },
+      {
+        "tag": "span",
+        "cls": "badge validity-high",
+        "kind": "background",
+        "area": 1410
+      },
+      {
+        "tag": "span",
+        "cls": "badge validity-high",
+        "kind": "background",
+        "area": 1410
+      },
+      {
+        "tag": "span",
+        "cls": "badge validity-high",
+        "kind": "background",
+        "area": 1410
+      },
+      {
+        "tag": "span",
+        "cls": "badge validity-high",
+        "kind": "background",
+        "area": 1410
+      },
+      {
+        "tag": "span",
+        "cls": "badge validity-high",
+        "kind": "background",
+        "area": 1410
+      },
+      {
+        "tag": "span",
+        "cls": "badge validity-high",
+        "kind": "background",
+        "area": 1410
+      }
+    ]
+  },
+  "data/philosophy.html": {
+    "text_on_bg": [
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "心猿心性曲线"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "微观视角"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "六耳猕猴事件（第 58 回）"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "纵"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "真正的觉悟始于\"降伏二心\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "2"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "9"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "7"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "5"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "3"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "0"
+      },
+      {
+        "tag": "div",
+        "cls": "box-title",
+        "txt": "关键洞察 · 心猿修心的螺旋上升"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"能力\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"嗔怒\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "转化欲望"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "81 难"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "嗔怒"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "三毒"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "嗔怒"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "12"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "15"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "8"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "9"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "11"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "7"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "9"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"破执\""
+      },
+      {
+        "tag": "div",
+        "cls": "map-label",
+        "txt": "ALLEGORY MEANING"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"色不异空\""
+      },
+      {
+        "tag": "div",
+        "cls": "box-title",
+        "txt": "关键洞察 · 八十一难 = 修心次第"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"八十一种相\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "不是冒险故事"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "思想主线"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "实修次第"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "所谓取经·其实是降伏心猿意马的过程"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"破执\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "表层"
+      },
+      {
+        "tag": "div",
+        "cls": "map-label",
+        "txt": "META INSIGHT"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "降伏心猿 = 转化心猿·而非消灭心猿"
+      },
+      {
+        "tag": "div",
+        "cls": "box-title",
+        "txt": "综合结论 · 西游 = 修心寓言"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "修心寓言"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "心猿心性曲线"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "纵→压→悟→觉"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "修心寓言图"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "所谓取经·其实是降伏心猿意马的过程"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/jurisprudence.html": {
+    "text_on_bg": [
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "8"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "10"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "span",
+        "cls": "severity-pill sev-high",
+        "kind": "background",
+        "area": 607
+      },
+      {
+        "tag": "span",
+        "cls": "severity-pill sev-high",
+        "kind": "background",
+        "area": 607
+      },
+      {
+        "tag": "div",
+        "cls": "artifact-card c-low",
+        "kind": "border-top",
+        "area": 1098
+      },
+      {
+        "tag": "span",
+        "cls": "severity-pill sev-high",
+        "kind": "background",
+        "area": 1188
+      },
+      {
+        "tag": "div",
+        "cls": "artifact-card c-low",
+        "kind": "border-top",
+        "area": 1098
+      },
+      {
+        "tag": "span",
+        "cls": "severity-pill sev-high",
+        "kind": "background",
+        "area": 1188
+      },
+      {
+        "tag": "span",
+        "cls": "severity-pill sev-high",
+        "kind": "background",
+        "area": 1188
+      },
+      {
+        "tag": "span",
+        "cls": "severity-pill sev-high",
+        "kind": "background",
+        "area": 2350
+      },
+      {
+        "tag": "span",
+        "cls": "severity-pill sev-high",
+        "kind": "background",
+        "area": 607
+      },
+      {
+        "tag": "span",
+        "cls": "severity-pill sev-high",
+        "kind": "background",
+        "area": 607
+      }
+    ]
+  },
+  "data/karma-reincarnation.html": {
+    "text_on_bg": [
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "生死簿篡改"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "泾河龙王"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "87.5%"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "10 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "7 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "5 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "4 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "8 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "6 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "7 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "6 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "7 案最终成正果/归正"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "最终全部超越轮回"
+      },
+      {
+        "tag": "div",
+        "cls": "map-label",
+        "txt": "META INSIGHT"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "char-card c-chusheng",
+        "kind": "border-top",
+        "area": 1098
+      }
+    ]
+  }
+}

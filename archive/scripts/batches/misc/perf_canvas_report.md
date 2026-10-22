@@ -87,11 +87,11 @@ python scripts/_batch_canvas_links.py
 python scripts/_batch_canvas_links_multi.py
 
 # 冒烟（需先装 playwright + 系统 Chrome）
-NODE_PATH=$HOME/.workbuddy/binaries/node/workspace/node_modules \
+NODE_PATH=$HOME/node-runtime/workspace/node_modules \
   node scripts/_smoke_canvas.js
 
 # 基准（argv: 文件 waitMs）
-NODE_PATH=$HOME/.workbuddy/binaries/node/workspace/node_modules \
+NODE_PATH=$HOME/node-runtime/workspace/node_modules \
   node scripts/_bench_canvas.js site/data/relationships.html 6000
 ```
 

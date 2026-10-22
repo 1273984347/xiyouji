@@ -1,0 +1,1844 @@
+{
+ "batch": "W864",
+ "total_diffs": 302,
+ "pages_with_diffs": [
+  "data/81-hardships.html",
+  "data/chapter-stats.html",
+  "data/chapter-structure-graph.html",
+  "data/hardship-difficulty-heatmap.html",
+  "data/hardship-heatmap.html",
+  "data/methodology-matrix.html",
+  "data/relationships.html",
+  "data/story-timeline.html",
+  "data/timeline.html"
+ ],
+ "groups": [
+  {
+   "page": "data/chapter-stats.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-width",
+   "before": "3px",
+   "after": "1px",
+   "count": 5,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(224, 96, 79)",
+   "after": "rgba(242, 235, 220, 0.14)",
+   "count": 5,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-width",
+   "before": "3px",
+   "after": "1px",
+   "count": 5,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(229, 223, 208)",
+   "count": 5,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-width",
+   "before": "3px",
+   "after": "1px",
+   "count": 5,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(224, 96, 79)",
+   "after": "rgba(242, 235, 220, 0.14)",
+   "count": 5,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-width",
+   "before": "3px",
+   "after": "1px",
+   "count": 5,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(229, 223, 208)",
+   "count": 5,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-width",
+   "before": "3px",
+   "after": "1px",
+   "count": 4,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(224, 96, 79)",
+   "after": "rgba(242, 235, 220, 0.14)",
+   "count": 4,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-width",
+   "before": "3px",
+   "after": "1px",
+   "count": 4,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(229, 223, 208)",
+   "count": 4,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-width",
+   "before": "3px",
+   "after": "1px",
+   "count": 3,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(224, 96, 79)",
+   "after": "rgba(242, 235, 220, 0.14)",
+   "count": 3,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-width",
+   "before": "3px",
+   "after": "1px",
+   "count": 3,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(229, 223, 208)",
+   "count": 3,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-width",
+   "before": "3px",
+   "after": "1px",
+   "count": 3,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(224, 96, 79)",
+   "after": "rgba(242, 235, 220, 0.14)",
+   "count": 3,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-width",
+   "before": "3px",
+   "after": "1px",
+   "count": 3,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(229, 223, 208)",
+   "count": 3,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/story-timeline.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-width",
+   "before": "3px",
+   "after": "1px",
+   "count": 3,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/story-timeline.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(224, 96, 79)",
+   "after": "rgba(242, 235, 220, 0.14)",
+   "count": 3,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/story-timeline.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-width",
+   "before": "3px",
+   "after": "1px",
+   "count": 3,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/story-timeline.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(229, 223, 208)",
+   "count": 3,
+   "sample_elements": [
+    "div.kpi-card",
+    "div.kpi-card",
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/81-hardships.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/81-hardships.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/81-hardships.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/81-hardships.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/81-hardships.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/81-hardships.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/81-hardships.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/81-hardships.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/81-hardships.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/81-hardships.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "font-size",
+   "before": "9px",
+   "after": "10px",
+   "count": 2,
+   "sample_elements": [
+    "text.",
+    "text."
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "line-height",
+   "before": "15.75px",
+   "after": "17.5px",
+   "count": 2,
+   "sample_elements": [
+    "text.",
+    "text."
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "font-size",
+   "before": "9px",
+   "after": "10px",
+   "count": 2,
+   "sample_elements": [
+    "text.",
+    "text."
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "line-height",
+   "before": "15.75px",
+   "after": "17.5px",
+   "count": 2,
+   "sample_elements": [
+    "text.",
+    "text."
+   ]
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/relationships.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/relationships.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/relationships.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/relationships.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/relationships.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/relationships.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/relationships.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/relationships.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/relationships.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/relationships.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/story-timeline.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/story-timeline.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/story-timeline.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/story-timeline.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/story-timeline.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/story-timeline.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/story-timeline.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/story-timeline.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/story-timeline.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/story-timeline.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/timeline.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/timeline.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/timeline.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/timeline.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/timeline.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(224, 96, 79)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/timeline.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/timeline.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/timeline.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-right-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/timeline.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-bottom-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/timeline.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-left-color",
+   "before": "rgb(255, 255, 255)",
+   "after": "rgb(200, 70, 58)",
+   "count": 2,
+   "sample_elements": [
+    "span.seal",
+    "br."
+   ]
+  },
+  {
+   "page": "data/81-hardships.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(224, 96, 79)",
+   "after": "rgba(224, 96, 79, 0.14)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  },
+  {
+   "page": "data/81-hardships.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "color(srgb 0.978431 0.927451 0.922745)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(224, 96, 79)",
+   "after": "rgba(224, 96, 79, 0.14)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "color(srgb 0.978431 0.927451 0.922745)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(224, 96, 79)",
+   "after": "rgba(224, 96, 79, 0.14)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "color(srgb 0.978431 0.927451 0.922745)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(224, 96, 79)",
+   "after": "rgba(224, 96, 79, 0.14)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "color(srgb 0.978431 0.927451 0.922745)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(224, 96, 79)",
+   "after": "rgba(224, 96, 79, 0.14)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "color(srgb 0.978431 0.927451 0.922745)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(224, 96, 79)",
+   "after": "rgba(224, 96, 79, 0.14)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "color(srgb 0.978431 0.927451 0.922745)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  },
+  {
+   "page": "data/relationships.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(224, 96, 79)",
+   "after": "rgba(224, 96, 79, 0.14)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  },
+  {
+   "page": "data/relationships.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-width",
+   "before": "3px",
+   "after": "1px",
+   "count": 1,
+   "sample_elements": [
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/relationships.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(224, 96, 79)",
+   "after": "rgba(242, 235, 220, 0.14)",
+   "count": 1,
+   "sample_elements": [
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/relationships.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "color(srgb 0.978431 0.927451 0.922745)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  },
+  {
+   "page": "data/relationships.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-width",
+   "before": "3px",
+   "after": "1px",
+   "count": 1,
+   "sample_elements": [
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/relationships.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "border-top-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "rgb(229, 223, 208)",
+   "count": 1,
+   "sample_elements": [
+    "div.kpi-card"
+   ]
+  },
+  {
+   "page": "data/story-timeline.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(224, 96, 79)",
+   "after": "rgba(224, 96, 79, 0.14)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  },
+  {
+   "page": "data/story-timeline.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "color(srgb 0.978431 0.927451 0.922745)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  },
+  {
+   "page": "data/timeline.html",
+   "theme": "dark",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(224, 96, 79)",
+   "after": "rgba(224, 96, 79, 0.14)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  },
+  {
+   "page": "data/timeline.html",
+   "theme": "light",
+   "kind": "属性",
+   "prop": "background-color",
+   "before": "rgb(200, 70, 58)",
+   "after": "color(srgb 0.978431 0.927451 0.922745)",
+   "count": 1,
+   "sample_elements": [
+    "span.seal"
+   ]
+  }
+ ],
+ "evidence": {
+  "before_sha256": "283fe36711081bc13f4e67cdb9faddde94e927df79f54a6b535e9a48c1c5f2fb",
+  "after_sha256": "e5f90ed5c0bb5d76263d6b8d726183ed393504ad5188d931b0ce7248689b409e",
+  "note": "原始快照不随批入库·本 sha256 为判词锚；index.html 因 W865 并行在途改动已剔出审查面"
+ }
+}

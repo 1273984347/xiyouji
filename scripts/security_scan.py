@@ -81,6 +81,17 @@ RULES = [
      r"(setTimeout|setInterval)\s*\(\s*['\"]", "medium", {".js", ".html"}),
     ("XSS-006", "outerHTML 赋值",
      r"\.outerHTML\s*=", "medium", {".js", ".html"}),
+    # W816：补主流 sink 形态——XSS-001 只匹配 `.innerHTML =`，漏两类等价/近似形态：
+    #   ① d3 的 `.html()`（innerHTML 等价 sink·site/ 实测 1328 行调用）；
+    #   ② `.innerHTML +=`（追加赋值·`=` 前有 `+` 故 XSS-001 不匹配·site/ 实测 4 行）。
+    # 此前这两类对门禁**完全不可见**（零信号·无 medium 也无 high），现补齐为可见项。
+    # XSS-007 判据只取**动态实参**（真 sink）：整参静态字面量与 d3 回调首参不算
+    # （前者无注入面·后者是 DOM 构造）——判据自检 8/8 合成样本符合预期
+    # （静态字面量/双引号/拼接插值/模板插值/裸标识符/成员访问/回调/非 .html 形态）。
+    ("XSS-007", "d3 .html() 动态实参（innerHTML 等价 sink）",
+     r"\.html\s*\(\s*(?:[^)\n]*(\+|\$\{)|[A-Za-z_$][\w.$]*\s*[,)])", "high", {".js", ".html"}),
+    ("XSS-008", "innerHTML 追加赋值（+= 形态）",
+     r"\.innerHTML\s*\+=", "high", {".js", ".html"}),
     # 敏感信息
     ("SEC-001", "硬编码 API Key 模式",
      r"(?i)(api[_-]?key|apikey)\s*[:=]\s*['\"][A-Za-z0-9]{16,}['\"]", "high", {".py", ".js", ".yml", ".yaml"}),
@@ -139,14 +150,16 @@ COMPILED = [(rid, desc, re.compile(pat), sev, exts) for rid, desc, pat, sev, ext
 # 真实 XSS 风险（用户输入拼接 innerHTML）仍按 high 报告。
 # site/ 整个目录均为静态可视化页面（site/data、site/en、site/chapters、site/characters、site/*.html）。
 VISUAL_PAGE_DIRS = ("site",)
-XSS_DOWNGRADE_RULES = {"XSS-001", "XSS-002", "XSS-006"}
+# W816：XSS-007/008 并入降级集——d3 `.html()` 与 `.innerHTML +=` 同属 D3.js 渲染标准用法，
+# 与既有 XSS-001/002/006 同口径（site/ 降级为 medium·非 site/ 仍为 high）。
+XSS_DOWNGRADE_RULES = {"XSS-001", "XSS-002", "XSS-006", "XSS-007", "XSS-008"}
 
 # W757：agent-web 的 tsc 编译产物（`.gitignore:114-126` 已忽略：server/*.js、server/engine/*.js、
 # vite.config.js 等）。它们是 .ts 源的生成物，CI 上不存在——若纳入扫描会造成「本地红 / CI 绿」
 # 分歧（实测：tools.test.js 内的测试夹具假凭证命中 SEC-002 high）。按 gitignore 同一契约排除，
 # 保证扫描面 == 入库面（源文件 .ts/.tsx 仍全量扫描）。
 _AGENT_WEB_BUILD_ARTIFACT_RE = re.compile(
-    r"^xiyouji-agent-web/(server/[^/]+\.(js|d\.ts)|server/engine/[^/]+\.(js|d\.ts)|vite\.config\.(js|d\.ts))$")
+    r"^xiyouji-agent-web/(\.tsbuild/.*|server/[^/]+\.(js|d\.ts)|server/engine/[^/]+\.(js|d\.ts)|vite\.config\.(js|d\.ts))$")
 
 
 def _is_agent_web_build_artifact(path: Path) -> bool:
@@ -184,7 +197,12 @@ def discover_files():
         for p in root.rglob("*"):
             if p.is_file() and p.suffix.lower() in exts:
                 # 跳过 baseline/current 截图目录、node_modules、构建产物、本地 Playwright 浏览器二进制
-                if any(seg in {"node_modules", "current", "baseline", ".thumbnails", ".pw-browsers", "dist"} for seg in p.parts):
+                # W816：补 `.tsbuild`——agent-web 的 tsc outDir（tsconfig.node.json「outDir」=
+                # "./.tsbuild"），此前不在排除集且 _AGENT_WEB_BUILD_ARTIFACT_RE 也不覆盖该前缀
+                # → 编译产物（.tsbuild/**/server/**/*.test.js 内的测试夹具假凭证）被纳入扫描，
+                #   报 2 条 SEC-002 high；而 .tsbuild/ 已被 .gitignore:124 忽略·CI 不存在
+                #   → 造成「本地红 / CI 绿」分裂（W757 当年为此专门加了排除正则·outDir 迁移后失效）
+                if any(seg in {"node_modules", "current", "baseline", ".thumbnails", ".pw-browsers", "dist", ".tsbuild"} for seg in p.parts):
                     continue
                 # W400 修复：跳过下划线前缀的一次性诊断/开发脚本（如 _chk_*.js）
                 # —— 它们非生产代码，且常含 eval/innerHTML 用于本地调试，不应阻断安全门禁

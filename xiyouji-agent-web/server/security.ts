@@ -51,6 +51,47 @@ export function resolveWorkingDir(cwd: unknown, projectCwd: string): string {
   return base;
 }
 
+/**
+ * W835：Host 头归一化（防 DNS rebinding 的纯函数层）。
+ *
+ * 威胁机理：服务端只绑定回环地址（127.0.0.1）且默认免认证，但**浏览器发往 127.0.0.1 的
+ * 请求会带上攻击者可控的 Host 头**——攻击者把 evil.com 的 DNS 解析到 127.0.0.1
+ * （DNS rebinding），浏览器便以 `Host: evil.com:3000` 请求本地 API；服务端若不校验 Host，
+ * 这次请求与正常本地请求无异 ⇒ 攻击者网页可驱动本地 Agent（读文件 / 执行命令）。
+ * 端口不参与判定（与 Django ALLOWED_HOSTS 同口径）：代理与测试常改端口，判端口会误伤。
+ *
+ * 归一化口径：去端口前缀 → IPv6 去方括号 → 小写 → 去 FQDN 尾点。
+ */
+export function normalizeHostname(hostHeader: unknown): string {
+  if (typeof hostHeader !== "string") return "";
+  let host = hostHeader.trim().toLowerCase();
+  if (!host) return "";
+  if (host.startsWith("[")) {
+    // IPv6 带方括号形态：[::1]:3000 → ::1（方括号后是端口，整体丢弃）
+    const end = host.indexOf("]");
+    if (end === -1) return "";
+    host = host.slice(1, end);
+  } else {
+    // 恰一个冒号 ⇒ host:port（去端口）；两个及以上冒号 ⇒ 裸 IPv6（如 ::1）·整体保留。
+    // （早前实现按「首个冒号」截断，把裸 IPv6 截成空串 —— 白名单里的 ::1 自身被归一化成空，
+    //   导致 [::1]:3000 反而被判否；由本批自测 isAllowedHost 白名单用例当场抓出。）
+    const colons = host.split(":").length - 1;
+    if (colons === 1) host = host.slice(0, host.indexOf(":"));
+  }
+  if (host.length > 1 && host.endsWith(".")) host = host.slice(0, -1);
+  return host;
+}
+
+/**
+ * W835：Host 白名单判定——仅当归一化后的主机名落在白名单内才放行。
+ * 空 / 缺失 / 畸形 Host 一律判否（fail-closed）。
+ */
+export function isAllowedHost(hostHeader: unknown, allowlist: readonly string[]): boolean {
+  const host = normalizeHostname(hostHeader);
+  if (!host) return false;
+  return allowlist.some((entry) => normalizeHostname(entry) === host);
+}
+
 /** SSE 总时长上限默认值（10 分钟·与原实现一致）。 */
 export const SSE_MAX_MS_DEFAULT = 10 * 60 * 1000;
 

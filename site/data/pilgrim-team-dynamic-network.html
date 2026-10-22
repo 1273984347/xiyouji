@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-YXSB5bp6nvGTZOzHGhvdUVNxdYyFd4SqZEyAqbxJexY=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-vMYEbDr3eUcv/0ThDy79LNnk5/oX3B+QH8oKT3dVEsk=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经团队动力学关系网络 · 详解西游记</title>
@@ -10,7 +10,7 @@
     <meta property="og:title" content="取经团队动力学关系网络 · 详解西游记">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://1273984347.github.io/xiyouji/data/pilgrim-team-dynamic-network.html">
-    <meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+    <meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
@@ -20,10 +20,10 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="取经团队动力学关系网络 · 详解西游记">
     <meta property="og:description" content="取经团队动力学关系网络 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -107,7 +107,7 @@
     /* —— 图表五色雅集色板（W334 图表规范） —— */
     --chart-1: #C8463A;       /* 朱砂 */
     --chart-2: #3A6B8C;       /* 靛蓝 */
-    --chart-3: #C9A063;       /* 赭金 */
+    --chart-3: #B38F58;       /* 赭金 */
     --chart-4: #6B8E5A;       /* 苔绿 */
     --chart-5: #D8CFBC;       /* 米灰 */
     --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
@@ -203,7 +203,7 @@ html[data-theme="dark"] {
     --paper: #2B2419;
     --paper-warm: #33291B;
     --line: rgba(242, 235, 220, 0.14);
-    --accent: #E0604F;
+    --accent: #E46250;
     --accent-deep: #C94F3F;
     --accent-soft: #E8A99F;
     --accent-tint: rgba(224, 96, 79, 0.14);
@@ -361,6 +361,46 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
   --z-tooltip: 70;
 }
 
+/* ===== v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名） ===== */
+/* 来源：docs/11-方案报告/界面视觉重设计细化规格-v4-2026-10-20.md §4 终稿 */
+/* 口径：34 个零消费新名 / 35 处定义（暗色组 --accent-text 为同名第二处） */
+/* defer 四项随迁移批逐页 proof：--chart-1..6 与 --accent-soft 重述 · 暗色 --accent 改值 · 暗色 --chart-3/5 新增 */
+:root {
+    /* —— 间距刻度（4px 基准 + 2/10 半格） —— */
+    --space-0: 0px;   --space-1: 2px;   --space-2: 4px;   --space-3: 8px;
+    --space-4: 12px;  --space-5: 20px;  --space-6: 24px;  --space-7: 32px;
+    --space-8: 40px;  --space-9: 48px;  --space-10: 64px; --space-11: 80px;
+    --space-12: 96px;
+    /* 间距语义档（tight 紧凑 / base 常规 / loose 疏行 / block 区块 / section 章段 / hero 首屏） */
+    --gap-tight: var(--space-3);   --gap-base: var(--space-5);
+    --gap-loose: var(--space-6);   --gap-block: var(--space-7);
+    --gap-section: var(--space-10); --gap-hero: var(--space-12);
+
+    /* —— 容器三档（裁决 3） —— */
+    --container-read: 760px; --container-content: 1120px; --container-wide: 1320px;
+    /* —— 栅格 —— */
+    --grid-columns: 12; --grid-gutter: var(--space-6);
+
+    /* —— 排版角色（语义层：字重 + 族 + 字号 / 行高） —— */
+    --type-display: 600 var(--font-serif) clamp(34px, 4.4vw, 56px) / 1.15;
+    --type-title:    600 var(--font-serif) 24px / 1.30;
+    --type-subtitle: 500 var(--font-serif) 18px / 1.50;
+    --type-lead:     400 var(--font-sans) 17px / 1.75;
+    --type-body:     400 var(--font-sans) 15px / 1.80;
+    --type-label:    500 var(--font-sans) 13px / 1.50;
+    --type-caption:  400 var(--font-sans) 12px / 1.60;
+    --type-eyebrow:  500 var(--font-mono) 12px / 1.40;
+    --type-number:   500 var(--font-mono) 32px / 1.10;
+
+    /* —— 色彩角色补充（裁决 1 修法·朱砂文字落 --bg 专用档） —— */
+    --accent-text: #C7463A;          /* 朱砂文字落在 --bg 上（4.50:1） */
+}
+
+/* 暗色组补充（裁决 4：双主题平级）——--accent-text 与浅色同名、暗色取值不同 */
+html[data-theme="dark"] {
+    --accent-text: #E0604F;
+}
+
 /*
  * system.css — 详解西游记 · 全站组件设计系统
  * ----------------------------------------------
@@ -432,7 +472,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -471,11 +511,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -666,6 +706,8 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+        /* W868 B5 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
+        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1209,7 +1251,41 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    </style>
+    
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
+/* W888：数据页卷末插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .viz-illustration {
+        margin: clamp(32px, 5vw, 64px) auto 0;
+        max-width: 420px;
+    }
+
+    .viz-illustration img {
+        width: 100%;
+        height: auto;
+        display: block;
+        opacity: .92;
+    }
+
+    html[data-theme="dark"] .viz-illustration {
+        display: none;
+    }
+</style>
 <style>
         /* e-track-exempt: chart-data-colors 1 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
@@ -1241,56 +1317,56 @@ td.num, th.num {
         .breadcrumb .sep { margin: 0 6px; color: var(--line); }
         .cross-page-nav {
             background: var(--paper-warm); border: 1px solid var(--line); border-radius: var(--radius-md);
-            padding: 10px 16px; margin-bottom: 20px; font-size: 0.88em; color: var(--ink-soft);
+            padding: 10px 16px; margin-bottom: var(--space-5); font-size: 0.88em; color: var(--ink-soft);
         }
-        .cross-page-nav a { color: var(--accent-2); text-decoration: none; padding: 2px 4px; border-radius: var(--radius-sm) }
+        .cross-page-nav a { color: var(--accent-2); text-decoration: none; padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm) }
         .cross-page-nav a:hover { background: var(--paper-warm); color: var(--accent); }
         .cross-page-nav a.active { color: var(--accent); font-weight: 700; background: var(--paper-warm); }
         .notice {
             background: var(--paper-warm); border-left: 4px solid var(--accent-soft);
-            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 var(--radius-md) var(--radius-md) 0
+            padding: 10px 16px; margin-bottom: var(--space-6); font-size: 0.9em; border-radius: 0 var(--radius-md) var(--radius-md) 0
         }
         
         
         .kpi-card .num { font-size: 2em; font-weight: bold; color: var(--accent); line-height: 1.2; }
         
-        .kpi-card .detail { color: var(--ink-soft); font-size: 0.78em; margin-top: 4px; }
+        .kpi-card .detail { color: var(--ink-soft); font-size: 0.78em; margin-top: var(--space-2); }
         
-        .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .section h2 { color: var(--accent-text); border-bottom: 2px solid var(--accent-soft); padding-bottom: var(--space-3); margin-bottom: var(--space-4); }
         .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
         .skip-link {
             position: absolute; top: -40px; left: 0; background: var(--accent-2);
-            color: var(--paper); padding: 8px 16px; z-index: 100; text-decoration: none;
+            color: var(--paper); padding: var(--space-3) 16px; z-index: 100; text-decoration: none;
             border-radius: 0 0 var(--radius-md) 0 ; transition: top var(--dur-base);
         }
         .skip-link:focus { top: 0; }
         
-        .control-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 18px; padding: 12px 16px; background: var(--paper-warm); border: 1px solid var(--line); border-radius: var(--radius-md) }
+        .control-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 18px; padding: var(--space-4) 16px; background: var(--paper-warm); border: 1px solid var(--line); border-radius: var(--radius-md) }
         .control-row .ctrl-label { font-size: 0.88em; color: var(--ink-soft); font-weight: 600; }
         .ctrl-btn { background: var(--paper); border: 1px solid var(--line); color: var(--ink); padding: 6px 14px; border-radius: var(--radius-md) ; cursor: pointer; font-size: 0.88em; }
         .ctrl-btn:hover { background: var(--paper-warm); border-color: var(--accent-soft); }
         .ctrl-btn.active { background: var(--accent); color: var(--paper); border-color: var(--accent); }
-        .chart-wrap { background: var(--paper-warm); border: 1px solid var(--line); border-radius: var(--radius-md) ; padding: 16px; margin-top: 12px; }
-        .legend-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; font-size: 0.85em; color: var(--ink-soft); }
+        .chart-wrap { background: var(--paper-warm); border: 1px solid var(--line); border-radius: var(--radius-md) ; padding: 16px; margin-top: var(--space-4); }
+        .legend-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: var(--space-4); font-size: 0.85em; color: var(--ink-soft); }
         .legend-row .legend-item { display: flex; align-items: center; gap: 6px; }
         .legend-row .legend-dot { width: 12px; height: 12px; border-radius: 50% }
-        .node-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md) ; padding: 14px; margin-top: 12px; }
+        .node-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md) ; padding: 14px; margin-top: var(--space-4); }
         .node-card h3 { color: var(--accent); margin-bottom: 6px; font-size: 1.05em; }
-        .node-card .role-tag { display: inline-block; background: var(--accent-soft); color: var(--ink); padding: 2px 8px; border-radius: var(--radius-sm) ; font-size: 0.78em; margin-right: 4px; margin-bottom: 4px; }
+        .node-card .role-tag { display: inline-block; background: var(--accent-soft); color: var(--ink); padding: var(--space-1) var(--space-3); border-radius: var(--radius-sm) ; font-size: 0.78em; margin-right: var(--space-2); margin-bottom: var(--space-2); }
         .node-card .role-tag.missing { background: #f0d0c0; color: var(--rebel); }
         .phase-timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 16px; }
-        .phase-card { background: var(--paper-warm); border: 1px solid var(--line); border-radius: var(--radius-md) ; padding: 12px; text-align: center; cursor: pointer; transition: all var(--dur-base); }
+        .phase-card { background: var(--paper-warm); border: 1px solid var(--line); border-radius: var(--radius-md) ; padding: var(--space-4); text-align: center; cursor: pointer; transition: all var(--dur-base); }
         .phase-card:hover { border-color: var(--accent-soft); }
         .phase-card.active { background: var(--accent); color: var(--paper); border-color: var(--accent); }
-        .phase-card .phase-name { font-weight: 700; font-size: 0.92em; margin-bottom: 4px; }
+        .phase-card .phase-name { font-weight: 700; font-size: 0.92em; margin-bottom: var(--space-2); }
         .phase-card .phase-range { font-size: 0.78em; opacity: 0.85; }
-        .alignment-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.88em; }
-        .alignment-table th, .alignment-table td { padding: 8px 12px; border: 1px solid var(--line); text-align: left; }
+        .alignment-table { width: 100%; border-collapse: collapse; margin-top: var(--space-4); font-size: 0.88em; }
+        .alignment-table th, .alignment-table td { padding: var(--space-3) var(--space-4); border: 1px solid var(--line); text-align: left; }
         .alignment-table th { background: var(--paper-warm); color: var(--accent); font-weight: 600; }
         .alignment-table .align-high { color: var(--accent-4); font-weight: 600; }
         .alignment-table .align-mid { color: var(--accent-3); }
         .alignment-table .align-low { color: var(--rebel); font-weight: 600; }
-        .footer-idx { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 12px; text-align: left; }
+        .footer-idx { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: var(--space-4); text-align: left; }
         @media (min-width: 760px) { .footer-idx { grid-template-columns: 1fr 1fr; } }
         .footer-idx .idx-block { background: color-mix(in srgb, var(--dark-text) 6%, transparent); border: 1px solid rgba(233,184,133,0.2); border-radius: var(--radius-md) ; padding: 10px 14px; }
         .footer-idx .idx-block h4 { color: var(--paper-warm); font-size: 0.82em; margin-bottom: 6px; font-weight: 700; }
@@ -1311,7 +1387,6 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
   <script defer src="../js/visit-log.js"></script>
-  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
 <link rel="preload" href="../static/js/d3.v7.min.js" as="script" />
 <link rel="preload" href="../static/fonts/NotoSansSC-Regular.subset.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../static/fonts/noto-serif-sc-shared.subset.woff2" as="font" type="font/woff2" crossorigin>
@@ -1353,9 +1428,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <h1>取经团队动力学关系网络</h1>
         <p class="subtitle">W270 · V5 首篇 · 跨方向整合项目主题 1 · 与 W269 A 文档 + W271 E 脚本 + W272 S 短文形成四方向整合</p>
         <p class="tagline">Belbin 团队角色理论 + Tuckman 团队发展模型 + 群体动力学 三框架首次整合可视化</p>
-    </section>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-01-network.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <nav class="breadcrumb" aria-label="面包屑导航">
             <a href="../index.html">首页</a>
             <span class="sep">›</span>
@@ -1494,7 +1571,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </table>
             </div>
             <p style="margin-top:14px;"><strong>关键发现</strong>：决策三角（唐僧→悟空→八戒）与冲突三角（唐僧 vs 悟空→八戒附和）重叠——悟空既是执行者又是冲突方。这种角色重叠导致悟空每次执行都可能引发冲突。</p>
-            <p style="margin-top:8px;"><strong>权力结构</strong>：外部合法性（观音/如来授权→唐僧）与内部合法性（能力最强→悟空）分离，是"三打白骨精"冲突的权力结构根因。</p>
+            <p style="margin-top:var(--space-3);"><strong>权力结构</strong>：外部合法性（观音/如来授权→唐僧）与内部合法性（能力最强→悟空）分离，是"三打白骨精"冲突的权力结构根因。</p>
         </section>
 
         <!-- 板块 5：跨方向整合说明 -->
@@ -1502,7 +1579,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <h2 id="sec-integration">⑤ 跨方向整合项目主题 1</h2>
             <p>本页为<strong>跨方向整合项目主题 1（取经团队动力学）</strong>的 V 方向产出</p>
             <p>四方向整合产出：</p>
-            <ul style="margin-left:20px; color:var(--ink-soft); font-size:0.9em;">
+            <ul style="margin-left:var(--space-5); color:var(--ink-soft); font-size:0.9em;">
                 <li><strong>W269 A 方向</strong>：<a href="#">取经团队动力学深化专题</a>（docs/02-人物深度分析/取经团队动力学深化专题.md）·Belbin + Tuckman + 群体动力学三框架</li>
                 <li><strong>W270 V 方向</strong>：本页 · force-directed 关系网络 + 九角色雷达 + 五阶段时间线</li>
                 <li><strong>W271 E 方向</strong>：a11y 深化（WCAG 2.2 SC 2.4.13 焦点可见 + 屏幕阅读器 + 键盘导航）</li>
@@ -1510,6 +1587,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </ul>
             <p style="margin-top:10px;">本页与 pilgrim-team-psychology-arc.html 形成"心理弧线-关系网络"双层。心理弧线关注个体心理演化，关系网络（本页）关注成员互动结构。两层交叉观察可见：震荡期（ch22-59）是双层共振的关键枢纽。</p>
         </section>
+        <figure class="viz-illustration" aria-hidden="true">
+            <img src="../static/images/viz-01-network.webp" alt="" loading="lazy" decoding="async">
+        </figure>
     </main>
 
     <footer class="site-footer">
@@ -1523,8 +1603,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
         
-            <a href="../en/pilgrim-team-dynamic-network.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="../en/pilgrim-team-dynamic-network.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
@@ -1780,7 +1860,7 @@ const link = networkSvg.append("g").selectAll("line").data(data.links).enter().a
                 <p><strong>回目范围</strong>：${p.range}</p>
                 <p><strong>阶段特征</strong>：${p.feature}</p>
                 <p><strong>关键事件</strong>：</p>
-                <ul style="margin-left:20px; color:var(--ink-soft); font-size:0.88em;">${events}</ul>
+                <ul style="margin-left:var(--space-5); color:var(--ink-soft); font-size:0.88em;">${events}</ul>
             `);
             d3.selectAll(".phase-card").classed("active", false).attr("aria-selected", "false");
             d3.select(`.phase-card[data-phase="${key}"]`).classed("active", true).attr("aria-selected", "true");

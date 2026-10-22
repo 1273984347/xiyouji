@@ -1,0 +1,28 @@
+{
+  "name": "xiyouji-desktop",
+  "version": "2.3.0",
+  "private": true,
+  "description": "《取经录》离线全站桌面版：Electron 壳内嵌全部静态站点内容，支持 GitHub Releases 自动更新。",
+  "main": "src/main.cjs",
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT",
+  "author": "取经录项目",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test",
+    "prepare:content": "node scripts/prepare-content.mjs",
+    "pack:dir": "npm run prepare:content && electron-builder --dir",
+    "dist:win": "npm run prepare:content && electron-builder --win --x64 --publish never",
+    "dist:mac": "npm run prepare:content && electron-builder --mac --universal --publish never",
+    "dist:linux": "npm run prepare:content && electron-builder --linux --x64 --publish never"
+  },
+  "dependencies": {
+    "electron-updater": "6.8.9"
+  },
+  "devDependencies": {
+    "electron": "44.9.0",
+    "electron-builder": "26.15.3"
+  }
+}

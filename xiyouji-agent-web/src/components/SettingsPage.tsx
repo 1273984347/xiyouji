@@ -21,6 +21,8 @@ import {
 } from 'tdesign-icons-react';
 import { Bot, Sparkles, Code, FileText, Globe, Lightbulb } from 'lucide-react';
 import { CustomAgent, PermissionMode } from '../types';
+import { api } from '../utils/api';
+import { getErrorMessage } from '../utils/errorMessage';
 
 interface SettingsPageProps {
   agents: CustomAgent[];
@@ -126,8 +128,9 @@ export function SettingsPage({
     setLoginStatus(prev => ({ ...prev, checking: true, error: undefined }));
     
     try {
-      const response = await fetch('/api/check-login');
-      const data = await response.json();
+      // W808：改走统一 client——此前 401/500 的错误体被当成功数据，
+      // 结果 isLoggedIn 恒为 undefined，界面显示「未配置引擎」而非真实错误原因
+      const data = await api.checkLogin();
       
       setLoginStatus({
         isLoggedIn: data.isLoggedIn,
@@ -139,11 +142,11 @@ export function SettingsPage({
         apiKey: data.apiKey,
         envVars: data.envVars,
       });
-    } catch (error: any) {
+    } catch (error) {
       setLoginStatus({
         isLoggedIn: false,
         checking: false,
-        error: error?.message || '检查登录状态失败',
+        error: getErrorMessage(error),
       });
     }
   }, []);

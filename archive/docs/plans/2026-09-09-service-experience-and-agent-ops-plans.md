@@ -225,7 +225,7 @@
   5. 前端 `useChat.ts` done 分支把 `data.duration` 换算为 `（duration/1000).toFixed(1) + 's'` 存入消息对象，`ChatMessages.tsx` 在消息尾部渲染该耗时（cost 不对外展示——单位未经 SDK 文档确认，仅入库聚合，避免错标货币）。
 - **验收**：
   1. `npx tsc -b`（agent-web 内）0 错误；
-  2. 端到端确定性冒烟（**仅走鉴权错误路径，30s 预验前置**）：以 `CODEBUDDY_API_KEY=`（空值）启动 server → POST `/api/chat` 一条消息，**预验条件：SSE 在 30s 内收到 `{type:"error"}`**（SDK 空凭证快速失败）。预验成立后断言三件事：UI（配合 F-1）出现失败态；`sqlite3` 查询 `SELECT COUNT(*) FROM messages WHERE role='assistant' AND is_error=1` ≥ 1（F28 的 0 反转为有记录）；`curl -s 127.0.0.1:3000/api/stats` 的 JSON 含全部 7 个字段且 errors ≥ 1。**预验不成立（SDK 挂起不出错）时的降级口径**：只断言 F-1 看门狗中止后 UI 失败态 + `/api/stats` 7 字段可达，errors 断言跳过并在 CHANGELOG 登记「挂起场景零落库」——现状服务端语义即客户端中止/挂起不落任何消息（index.ts:639 break 后落入正常完成路径、不带 is_error；纯挂起时 handler 悬置且 ：480 超时定时器对已 aborted 早退），本方案不变更该语义（如需 aborted 落库属新增范围，另行裁决）；
+  2. 端到端确定性冒烟（**仅走鉴权错误路径，30s 预验前置**）：以 `旧厂商_API_KEY=`（空值）启动 server → POST `/api/chat` 一条消息，**预验条件：SSE 在 30s 内收到 `{type:"error"}`**（SDK 空凭证快速失败）。预验成立后断言三件事：UI（配合 F-1）出现失败态；`sqlite3` 查询 `SELECT COUNT(*) FROM messages WHERE role='assistant' AND is_error=1` ≥ 1（F28 的 0 反转为有记录）；`curl -s 127.0.0.1:3000/api/stats` 的 JSON 含全部 7 个字段且 errors ≥ 1。**预验不成立（SDK 挂起不出错）时的降级口径**：只断言 F-1 看门狗中止后 UI 失败态 + `/api/stats` 7 字段可达，errors 断言跳过并在 CHANGELOG 登记「挂起场景零落库」——现状服务端语义即客户端中止/挂起不落任何消息（index.ts:639 break 后落入正常完成路径、不带 is_error；纯挂起时 handler 悬置且 ：480 超时定时器对已 aborted 早退），本方案不变更该语义（如需 aborted 落库属新增范围，另行裁决）；
   3. 正常路径指标入库：配真实 key 手工对话 1 轮 → `SELECT duration_ms, cost FROM messages WHERE role='assistant' ORDER BY created_at DESC LIMIT 1` 两列非 NULL（数值照抄 CHANGELOG）。
 - **回滚**：`git checkout -- xiyouji-agent-web/server/ xiyouji-agent-web/src/`；新列留在库中无害（nullable），无需回滚 db 文件。
 - **明确非目标**：不做成本看板/图表（/api/stats 先以裸 JSON 供给 curl/人工）；不做多用户维度统计（单机单人形态）。
@@ -349,12 +349,12 @@
 
 ## 方案 R（占位，独立成案）：agent-web 重设计
 
-> 2026-09-09 用户裁决：agent-web 走重设计路线，不为本体现状做公网化入口。**重设计方案见 `docs/superpowers/plans/2026-09-17-agent-web-redesign-plan.md`：v1（双引擎）于同日被用户追加裁决取代——全量移除 CodeBuddy/WorkBuddy 后重写为 v2（自研 OpenAI 兼容单引擎：llm/client + agent/loop + 五工具注册表，无 SDK、无 CLI、CODEBUDDY_* 环境变量退役，SSE 协议对前端零变更；专用基线审计脚本 `_audit_agentweb_baseline.py`）。v2 已部分裁决（工具集=五件套、编排维持不变），**R 整体于 2026-09-18 暂停**（用户裁决「暂停开发 agent web」）；恢复前置 = 用户点名 + LLM 接入参数 + E0' 探针通过。站点侧 D/E/H 批次不受影响。**
+> 2026-09-09 用户裁决：agent-web 走重设计路线，不为本体现状做公网化入口。**重设计方案见 `docs/superpowers/plans/2026-09-17-agent-web-redesign-plan.md`：v1（双引擎）于同日被用户追加裁决取代——全量移除旧厂商 Agent 品牌 后重写为 v2（自研 OpenAI 兼容单引擎：llm/client + agent/loop + 五工具注册表，无 SDK、无 CLI、旧厂商_* 环境变量退役，SSE 协议对前端零变更；专用基线审计脚本 `_audit_agentweb_baseline.py`）。v2 已部分裁决（工具集=五件套、编排维持不变），**R 整体于 2026-09-18 暂停**（用户裁决「暂停开发 agent web」）；恢复前置 = 用户点名 + LLM 接入参数 + E0' 探针通过。站点侧 D/E/H 批次不受影响。**
 
 - **触发时点**：默认在方案 D/E（W572–W573）落地后启动 R1（W574 起）；用户可点名提前。A/B/C 已于 W563–W565 完成，不再构成前置。
 - **输入**：① 本计划 F/G 全部验收口径（错误契约三件套、指标 schema、限流、构建链、sysprompt 单源）平移为需求基线；② 本方案基线表 F22–F31（agent 侧审计发现）；③ `scripts/rag/` BM25+图谱索引的接入评估。
 - **并入关系（R 已获批生效，2026-09-17；见 R 文档裁决 C）**：F-1 残余→R3、F-2/F-3/F-4→R1、G-1→R2、G-3→R3/R4、G-4/G-5/G-2 README 小项→R5；本计划 F/G 节降级为 R 的需求基线文档，**不再独立施工**（避免双重改动）；D/E/H 维持原批号不变。
-- **明确约束**：重设计不回退现有安全基线（回环绑定默认值、权限白名单、目录钳制、P0–P3 审计结论、`AGENT_WEB_ALLOW_BYPASS` 门控、save-env-config 的 P0-2 姿态）；**CodeBuddy/WorkBuddy 全量移除**（R v2 裁决 A'：自研 OpenAI 兼容 Agent 循环，`@tencent-ai/agent-sdk` 退役、CLI 概念删除、CODEBUDDY_* 环境变量改 LLM_*）。
+- **明确约束**：重设计不回退现有安全基线（回环绑定默认值、权限白名单、目录钳制、P0–P3 审计结论、`AGENT_WEB_ALLOW_BYPASS` 门控、save-env-config 的 P0-2 姿态）；**旧厂商 Agent 品牌全量移除**（R v2 裁决 A'：自研 OpenAI 兼容 Agent 循环，`@tencent-ai/agent-sdk` 退役、CLI 概念删除、旧厂商_* 环境变量改 LLM_*）。
 
 ---
 

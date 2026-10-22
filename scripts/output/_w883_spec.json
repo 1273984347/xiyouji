@@ -1,0 +1,33 @@
+{
+  "batch": "W883",
+  "date": "2026-10-22",
+  "title": "W883 阶段 5 机检门禁批（朱砂实底常驻门禁第 49 槽 + 四类存量豁免裁决 + W877-W882 六段回补）",
+  "desc": "朱砂实底常驻门禁挂第 49 槽（浏览器计算样式实测 每页非豁免超 3 即拦 增量缓存）且六段递延账一次结清",
+  "head_entry": "2026-10-22（W883 阶段 5 机检门禁批）",
+  "head_sentence": "裁决 2 从一次性收敛变成常驻机器断言，四类存量裁决落簿，六段递延账在补段里一次结清",
+  "changelog_body": "\n\n> **来源**：用户令「继续」。W883 = v4 规格 §3.2「机检口径（阶段 5 门禁落地）」的兑现——W826 裁决 2（朱砂实底每页 ≤3 处）自 W864 起只有一次性收敛、无常驻防线。\n> - **文件**：scripts/check_vermilion_solid.js、tests/unit/test_vermilion_solid.py、scripts/verify_delivery.py、AGENTS.md、docs/agent/gates.md、scripts/output/_w864_accent_exemptions.json（W883 分册 24 条）、scripts/output/_vermilion_solid_cache.json、scripts/output/_vermilion_solid_report.json、site/dashboard.html（seal 淡底）、scripts/_w876_site_audit.py、scripts/output/_w876_site_audit_head.json、scripts/output/_w876_site_audit_final.json、scripts/output/stats.json、site/data/search.html（搜索索引刷新）、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、pytest.ini、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md、scripts/index.md、scripts/output/index.md、scripts/output/README.md、CHANGELOG.md、scripts/output/file-index.md。\n> - **门禁本体（第 49 槽·StrictGate）**：浏览器计算样式实测（浅色·file:// 直开）——元素自身 background-color == --accent 且盒面积 >400px²，或 border-top-color == --accent 且 border-top-width ≥2px 且**条带面积**（宽×边框宽）>400px²；**每页非豁免计数 >3 → FAIL**。豁免读 `_w864_accent_exemptions.json`，跨批次分册按 (page, tag.class) 求和扣减；**复合键族合计**（如「span.tag / span.tag.palace」）按实测量贪婪分配、**批注键**（如「span（无类名色片）」）剥批注匹配、**缺 reason 直接抛错**（防无据豁免）。**增量缓存**：按页内容 sha1 只重扫变页（hash 先于探针计算·防并行改动竞态·损坏自动回退全量·--full 强制全量）——96 页全量约 4.5 分钟，增量秒级，浏览器门禁的全站成本由此可控。fail-closed：探针异常该页即 FAIL；playwright 缺失 exit 2 不出 marker。\n> - **建置即绿的实证路径**：首跑 7 页 FAIL → 复合键/批注键匹配修复救回 material-archaeology → 6 页存量超限 → 四类例外口径裁决（24 条入 W883 分册）+ dashboard `.seal` 按 v4 §3.2「徽章实底改为朱砂字 + 8% 淡底」修复（页面级规则·与 W864 批系统性 .seal 转换同模式）→ **0 FAIL**。\n> - **四类存量口径（④ en 迁移直接复用）**：① **数据语义色片**（零和/严重度/文化元素/场景标签等编码·图表语义非装饰·W864 起登记的同一族）；② **KPI 首卡顶条**（v4「卡片顶条保留（1 处/卡）」条款·linguistics 3 行各 1 处的「整页仅首屏首卡可带」张力已在豁免 reason 里如实注明·待后续收敛批裁决）；③ **功能交互实底**（导出按钮/筛选选中态/问津悬浮钮·v4 §5.2 组件规格设计态）；④ **区块标识横条**（route-strip 节标）。第 ⑤ 类**徽章实底不予放宽**——按 v4 修复而非豁免。\n> - **W876 审计器口径校正**：`_w876_site_audit.py` fill 判据由「≥3px / 盒面积」校正为「≥2px / 条带面积」（与 `_w864_accent_audit.py` 及豁免登记簿 criterion 逐字对齐）——HEAD 快照复跑 **457 处 / 89 页**，与原审计分毫不差（此前差 9 处 2px 顶条即此口径差）；终态复跑 457/89（实底零变动）。\n> - **W877-W882 六段回补**：按 W874 补段批先例，六段 spec 按号序一次回写（CHANGELOG 174→180 段·规则行 W001-W882），对账表六行段状态翻「W883 补段批回写」、W877 豁免条目划销。\n> - **验收**：门禁自检 14/14 · pytest tests/unit/test_vermilion_solid.py 11 passed · 门禁实跑 96 页 0 FAIL · verify 54 段自洽锁全绿 · CSP 856 页 0 漂移。**判词：PASS**。",
+  "milestone_block": "- **W883 阶段 5 机检门禁批（朱砂实底第 49 槽 + 四类裁决 + 六段回补）**：\n  - `check_vermilion_solid.js` 常驻门禁（浏览器实测·每页非豁免 >3 FAIL·豁免登记簿跨批求和含复合键族合计·增量缓存 96 页全量 4.5 分钟/增量秒级）\n  - 建置即绿实证：首跑 7 FAIL → 匹配修复 → 6 页存量 → 四类口径裁决 24 条（W883 分册）+ dashboard seal 按 v4 淡底修复 → **0 FAIL**\n  - 四类例外口径（④ 复用）：数据语义色片 / KPI 首卡顶条 / 功能交互实底 / 区块标识横条；徽章实底不放宽（按 v4 修）\n  - W876 审计器 fill 口径校正（≥2px 条带面积·HEAD 复跑 457/89 与原审计一致）· W877-W882 六段回补（顶段 W882）\n  - 自检 14/14 · pytest 11 passed · verify 54 段自洽锁全绿 · CSP 0 漂移",
+  "agents_note": "二〇二六年十月二十二日（W883）把 W826 裁决 2 从一次性收敛变成常驻防线——「朱砂实底」第 49 槽以浏览器实测守每页 ≤3 处，豁免读登记簿跨批求和（复合键族合计要展开分配、批注键要剥、缺 reason 直接抛错），96 页全量首跑抓出 7 页存量超限、逐页按四类口径裁决后转绿；同批把 W876 审计器 fill 口径校正到 ≥2px 条带面积（HEAD 复跑 457/89 与原审计分毫不差），并一次结清 W877-W882 六段递延账。",
+  "file_index_rows": [
+    "| scripts/check_vermilion_solid.js | W883 | 新增：第 49 门禁朱砂实底限额（浏览器实测+豁免登记簿+增量缓存+自检 14 例） |",
+    "| tests/unit/test_vermilion_solid.py | W883 | 新增：第 49 门禁单测（自检/纯逻辑/接线/范围 11 例） |",
+    "| scripts/verify_delivery.py | W883 | 第 49 槽 StrictGate 接线（段名+scope+gate 定义） |",
+    "| scripts/output/_w864_accent_exemptions.json | W883 | W883 分册 24 条（四类存量裁决·全簿 96 条） |",
+    "| scripts/output/_vermilion_solid_cache.json | W883 | 新增：增量缓存（96 页 sha1+分类计数·随批入库） |",
+    "| scripts/output/_vermilion_solid_report.json | W883 | 新增：门禁报告（每页实测/豁免/非豁免/状态） |",
+    "| site/dashboard.html | W883 | .seal 徽章实底→淡底（v4 §3.2·与 W864 批 .seal 转换同模式） |",
+    "| scripts/_w876_site_audit.py | W883 | fill 口径校正（≥3px/盒面积 → ≥2px/条带面积） |",
+    "| scripts/output/_w876_site_audit_head.json | W883 | 校正复跑（HEAD 快照·fill 457/89 与原审计一致） |",
+    "| scripts/output/_w876_site_audit_final.json | W883 | 校正复跑（终态·457/89） |",
+    "| AGENTS.md | W883 | §4.2 48→49 槽 + 第 49 槽条目 + 组号范围 |",
+    "| docs/agent/gates.md | W883 | 49 槽标题/速查表/第 49 槽完整定义 |",
+    "| README.md STRUCTURE.md docs/00-导读/项目说明.md | W883 | 版本行与门禁计数（48→49） |",
+    "| pytest.ini | W883 | collected 计数 823→834（+11 例） |",
+    "| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W883 | gate_count 48→49 |",
+    "| scripts/output/stats.json | W883 | 刷新（gate_count 49·2 键） |",
+    "| site/data/search.html | W883 | 搜索索引刷新（gates.md 标题变更·CSP 重算） |",
+    "| docs/00-导读/W批次编号对账表.md | W883 | 认领行与收官回填 + W877-W882 六行段状态翻转 + W877 豁免划销 |",
+    "| CHANGELOG.md | W883 | W883 段 + W877-W882 六段按号序回补（174→180 段） |",
+    "| scripts/output/file-index.md | W883 | 同批七段回写（174→180） |"
+  ]
+}

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>金刚琢·外传：被套走的一切还留在套子里</title>
 <!-- SEO:INJECTED -->
@@ -12,46 +12,78 @@
 <meta property="og:description" content="金刚琢·外传：被套走的一切还留在套子里——《详解西游记》人物深度">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://1273984347.github.io/xiyouji/reader/people/金刚琢外传.html">
-<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+
+
+<script src="../../js/theme-init.js"></script>
+<script src="../../js/reader-enhance.js" defer></script>
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
-<script src="../../js/theme-init.js"></script>
 <style>
-  .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
+  .reader-wrap { max-width: var(--container-read); margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
     padding: 14px 0; border-bottom: 1px solid var(--line); margin-bottom: 28px;
     font-size: 14px; }
-  .reader-topnav a { color: var(--accent); text-decoration: none; }
+  .reader-topnav a { color: var(--accent-text); text-decoration: none; }
   .reader-topnav a:hover { text-decoration: underline; }
   .reader-topnav .brand { color: var(--ink); font-weight: 700; }
   .reader-body { font-family: var(--font-serif, serif); color: var(--ink);
     line-height: 1.9; font-size: 17px; }
-  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: 12px 0 20px; }
-  .reader-body h2 { font-size: 21px; margin: 34px 0 12px; padding-left: 10px;
+  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: var(--space-4) 0 var(--space-5); }
+  .reader-body h2 { font-size: 21px; margin: 34px 0 var(--space-4); padding-left: 10px;
     border-left: 3px solid var(--accent); }
-  .reader-body h3 { font-size: 18px; margin: 24px 0 10px; }
-  .reader-body blockquote { margin: 14px 0; padding: 8px 14px; color: var(--ink-soft);
+  .reader-body h3 { font-size: 18px; margin: var(--space-6) 0 10px; }
+  .reader-body blockquote { margin: 14px 0; padding: var(--space-3) 14px; color: var(--ink-soft);
     background: var(--paper-warm, var(--paper)); border-left: 3px solid var(--ink-faint); }
-  .reader-body a { color: var(--accent); }
-  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+  .reader-body a { color: var(--accent-text); }
+  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: var(--space-7) 0; }
   .reader-meta { color: var(--ink-soft); font-size: 13px; margin: 0 0 26px; }
   .reader-pn { display: flex; justify-content: space-between; gap: 12px; margin-top: 44px;
     padding-top: 18px; border-top: 1px solid var(--line); font-size: 15px; }
-  .reader-pn a { color: var(--accent); text-decoration: none; }
+  .reader-pn a { color: var(--accent-text); text-decoration: none; }
   .reader-pn a:hover { text-decoration: underline; }
   .reader-pn .off { color: var(--ink-faint); }
-  .reader-idx { list-style: none; padding: 0; margin: 24px 0 0;
+  .reader-idx { list-style: none; padding: 0; margin: var(--space-6) 0 0;
     display: grid; grid-template-columns: 1fr; gap: 2px; }
   @media (min-width: 640px) { .reader-idx { grid-template-columns: 1fr 1fr; } }
-  .reader-idx a { display: block; padding: 9px 12px; color: var(--ink); text-decoration: none;
+  .reader-idx a { display: block; padding: 9px var(--space-4); color: var(--ink); text-decoration: none;
     border: 1px solid var(--line); border-radius: var(--radius-sm, 4px); font-size: 14px; }
-  .reader-idx a:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-idx a:hover { border-color: var(--accent); color: var(--accent-text); }
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
-  .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
+  .reader-group { margin: 34px 0 var(--space-3); font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 var(--space-5); padding: var(--space-3) 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent-text); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-text); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 var(--space-3); border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
 </style>
 </head>
 <body>
@@ -61,6 +93,19 @@
     <a href="../../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/02-人物深度分析/金刚琢外传.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/people/金刚琢外传.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>金刚琢·外传：被套走的一切还留在套子里</h1>
 <blockquote>
@@ -112,6 +157,10 @@
 <p>悟空后来知道南天门台阶那道裂缝是他磕出来的。不是巨灵神告诉他的——是他自己发现的。取经路上有一次回天庭办事，经过南天门，看到守门力士在交接班时指着第三级台阶上的裂缝说了句“今天没渗水，晴”。悟空蹲下来看那裂缝——裂缝的形状不是天然的。天然的石裂是不规则曲线，这条裂缝的前半段是弯的，后半段忽然变直，收梢处有一个极小的圆形凹坑，是斧刃尖端的弧形截面在石面上磕出来的。他认得这种凹坑——跟巨灵神交手时金箍棒砸在宣花斧斧面上砸出来的凹坑形状完全一样，只是缩小了很多倍。悟空用手指顺着裂缝从台阶边缘摸到收梢处，指腹感受到裂缝内部的粗糙度——里面全是细密的平行磨痕，磨痕的间距比头发丝还窄，方向和巨灵神磨斧时油石移动的方向完全一致。不是斧刃磕的，是修斧之后试斧磕的。每一次磕都代表一次战败，一道裂缝里叠了无数道战败的痕迹。悟空站起来，用脚尖在裂缝旁边磕了一下——磕的是自己的金箍棒。金箍棒尾端在石阶上磕出一个极小的白点，白点旁边就是巨灵神磕出来的裂缝。两个败将的磕痕挨在一起。</p>
 <p>后来，巨灵神路过南天门时看到了那个白点。守门的力士告诉他斗战胜佛来过，在台阶上磕了一下。他蹲下来——缩小法身，单膝跪地，像每次试斧时那样——把手指放在白点上。白点还微微发热——金箍棒尾端和石阶碰撞时的摩擦热没有完全散尽。他的指腹很粗，石匠的指腹，布满几千年握斧磨出的老茧，老茧厚到能直接捏烧红的铁。但这一刻他指腹的触觉穿透厚茧，感受到了石面上一个针尖大的微温——那是一个和他一样经常战败的人留下的一粒热量。他收回手，站起来，重新变回巨人的身高。阳光从他背后照过来，把他的影子投在南天门的台阶上。他的头低着，影子里的头也低着——不是在垂头丧气，是在看台阶。台阶上那些磕痕被阳光斜照，投出极细的阴影，深浅不同。深的阴影宽，浅的阴影窄。那一大片阴影排在他的战靴前面，像一本摊开的册子。册子是从右往左翻的——最右边的痕最深最宽，是第一次战败；往左越来越浅，是后来修斧技术提高了，补料配比更精准，刃口崩得越来越小。最后一道痕极细，细到几乎没有阴影。那是修斧的本事终于大成——但战争已经结束了。没有仗打了。他的宣花斧现在唯一的用途是天庭庆典时在仪仗队里扛着走，斧刃锃亮，刃口锋利如新，从来没有劈过任何东西。他每天在武库里磨斧——不是修，是磨，把从未受伤的斧刃磨到能剃汗毛。他磨斧时把油石拿在手里，拇指压在油石背面，指腹老茧和斧刃之间隔着一层磨石和一层磨油。他能感受到斧刃的锋利度在油石上每一下来回摩擦后的变化，锋利到极限时会发出极尖锐的哨音，哨音穿过武库的窗棂传到南天门，南天门守门力士听到哨音就知道老巨又在磨那把永远用不上的斧头了。</p>
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E9%87%91%E5%88%9A%E7%90%A2%C2%B7%E5%A4%96%E4%BC%A0%EF%BC%9A%E8%A2%AB%E5%A5%97%E8%B5%B0%E7%9A%84%E4%B8%80%E5%88%87%E8%BF%98%E7%95%99%E5%9C%A8%E5%A5%97%E5%AD%90%E9%87%8C&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E9%87%91%E5%88%9A%E7%90%A2%E5%A4%96%E4%BC%A0.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E9%87%91%E5%88%9A%E7%90%A2%C2%B7%E5%A4%96%E4%BC%A0%EF%BC%9A%E8%A2%AB%E5%A5%97%E8%B5%B0%E7%9A%84%E4%B8%80%E5%88%87%E8%BF%98%E7%95%99%E5%9C%A8%E5%A5%97%E5%AD%90%E9%87%8C&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E9%87%91%E5%88%9A%E7%90%A2%E5%A4%96%E4%BC%A0.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="../people/通臂猿猴外传.html">← 上一篇</a><a href="../people/金圣宫娘娘-方向二深化.html">下一篇 →</a></nav>
 </main>
 </body>

@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（13）
+## 文件（12）
 
 ### JavaScript / TypeScript
 
@@ -22,7 +22,6 @@
 - `d3.v7.min.js`
 - `datahub-index.js`
 - `dataset-view.js`
-- `goatcounter.js`
 - `graph-fallback.js`
 - `rag-chat.js`
 - `text-search-app.js`

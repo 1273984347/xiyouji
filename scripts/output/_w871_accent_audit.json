@@ -1,0 +1,1928 @@
+{
+  "data/cognitive-psychology.html": {
+    "text_on_bg": [
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "可得性启发"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"反向的\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "8"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "3"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "5"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "8"
+      },
+      {
+        "tag": "span",
+        "cls": "icon-wrong",
+        "txt": "✗"
+      },
+      {
+        "tag": "span",
+        "cls": "icon-wrong",
+        "txt": "✗"
+      },
+      {
+        "tag": "span",
+        "cls": "icon-wrong",
+        "txt": "✗"
+      },
+      {
+        "tag": "span",
+        "cls": "icon-wrong",
+        "txt": "✗"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "5.6"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "9"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "4.3"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "3.5"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "5"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "6.2"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "从外部控制逐步内化为自我控制"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "7 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "4 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "2 / 10"
+      },
+      {
+        "tag": "div",
+        "cls": "map-label",
+        "txt": "WUKONG CASE"
+      },
+      {
+        "tag": "div",
+        "cls": "map-label",
+        "txt": "META INSIGHT"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "char-card ",
+        "kind": "border-top",
+        "area": 1098
+      }
+    ]
+  },
+  "data/social-media.html": {
+    "text_on_bg": [
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "角色图例 · 8 位"
+      },
+      {
+        "tag": "td",
+        "cls": "col-mbti",
+        "txt": "INFJ提倡者"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "INFJ"
+      },
+      {
+        "tag": "td",
+        "cls": "col-mbti",
+        "txt": "ENTP辩论家"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "ENTP"
+      },
+      {
+        "tag": "td",
+        "cls": "col-mbti",
+        "txt": "ESFP表演者"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "ESFP"
+      },
+      {
+        "tag": "td",
+        "cls": "col-mbti",
+        "txt": "ISFJ守卫者"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "ISFJ"
+      },
+      {
+        "tag": "td",
+        "cls": "col-mbti",
+        "txt": "ISTP鉴赏家"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "ISTP"
+      },
+      {
+        "tag": "td",
+        "cls": "col-mbti",
+        "txt": "ENFJ主人公"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "ENFJ"
+      },
+      {
+        "tag": "td",
+        "cls": "col-mbti",
+        "txt": "INTJ建筑师"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "INTJ"
+      },
+      {
+        "tag": "td",
+        "cls": "col-mbti",
+        "txt": "ESTJ总经理"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "ESTJ"
+      },
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "从 MBTI 看西游团队的人格图谱"
+      },
+      {
+        "tag": "span",
+        "cls": "idx",
+        "txt": "01"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "如来 INTJ 适配度 10/10 满分"
+      },
+      {
+        "tag": "span",
+        "cls": "idx",
+        "txt": "02"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "八戒 ESFP 仅 5/10 全场最低"
+      },
+      {
+        "tag": "span",
+        "cls": "idx",
+        "txt": "03"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "3 外向（悟空/八戒/观音）+ 5 内向（唐僧/"
+      },
+      {
+        "tag": "span",
+        "cls": "idx",
+        "txt": "04"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "稳定/活跃的阴阳互补"
+      },
+      {
+        "tag": "span",
+        "cls": "idx",
+        "txt": "05"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "8 种类型 1:1 覆盖"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "platform-badge",
+        "kind": "background",
+        "area": 1472
+      }
+    ]
+  },
+  "data/business-model.html": {
+    "text_on_bg": [
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "天庭 vs 灵山组织对比"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "蟠桃垄断"
+      },
+      {
+        "tag": "span",
+        "cls": "icon-wrong",
+        "txt": "天庭"
+      },
+      {
+        "tag": "span",
+        "cls": "icon-wrong",
+        "txt": "天庭"
+      },
+      {
+        "tag": "div",
+        "cls": "ibox-label",
+        "txt": "KEY INSIGHT · 组织对比"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"存量维持型\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"增量扩张型\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "不能培养人才"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"创业 → 被招安 → 受挫 → 再创业 → 被"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "L0·创业者/CEO"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "L1·基层管理·天庭最低级官职（未入流）"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "2 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "L2·虚衔顾问·有名无实"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "4 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "L3·项目经理·执行主力"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "L9·佛级高管·合伙人级"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "L10·退休·资深顾问"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "U 型曲线"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "最大教训"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "全员阵亡"
+      },
+      {
+        "tag": "span",
+        "cls": "icon-wrong",
+        "txt": "✗"
+      },
+      {
+        "tag": "span",
+        "cls": "icon-wrong",
+        "txt": "✗"
+      },
+      {
+        "tag": "span",
+        "cls": "icon-wrong",
+        "txt": "✗"
+      },
+      {
+        "tag": "span",
+        "cls": "icon-wrong",
+        "txt": "✗"
+      },
+      {
+        "tag": "span",
+        "cls": "icon-wrong",
+        "txt": "✗"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "100% 被收购"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "妖怪集团本质是\"已被收购的子公司\""
+      },
+      {
+        "tag": "div",
+        "cls": "map-label",
+        "txt": "META INSIGHT"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "monster-card ",
+        "kind": "border-top",
+        "area": 1098
+      },
+      {
+        "tag": "div",
+        "cls": "monster-card m-flaming",
+        "kind": "border-top",
+        "area": 1098
+      }
+    ]
+  },
+  "data/game-webnovel.html": {
+    "text_on_bg": [
+      {
+        "tag": "td",
+        "cls": "col-stat",
+        "txt": "9,999control"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "9,999"
+      },
+      {
+        "tag": "td",
+        "cls": "col-stat",
+        "txt": "9,800atk"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "9,800"
+      },
+      {
+        "tag": "td",
+        "cls": "col-stat",
+        "txt": "9,500control"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "9,500"
+      },
+      {
+        "tag": "td",
+        "cls": "col-stat",
+        "txt": "9,000control"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "9,000"
+      },
+      {
+        "tag": "td",
+        "cls": "col-stat",
+        "txt": "9,300control"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "9,300"
+      },
+      {
+        "tag": "td",
+        "cls": "col-stat",
+        "txt": "4,500atk"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "4,500"
+      },
+      {
+        "tag": "td",
+        "cls": "col-stat",
+        "txt": "3,200atk"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "3,200"
+      },
+      {
+        "tag": "td",
+        "cls": "col-stat",
+        "txt": "10,000control"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "10,000"
+      },
+      {
+        "tag": "td",
+        "cls": "col-stat",
+        "txt": "9,500perception"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "9,500"
+      },
+      {
+        "tag": "td",
+        "cls": "col-stat",
+        "txt": "3rescue"
+      },
+      {
+        "tag": "span",
+        "cls": "",
+        "txt": "3"
+      },
+      {
+        "tag": "span",
+        "cls": "lbl",
+        "txt": "PREMISE · 开局"
+      },
+      {
+        "tag": "span",
+        "cls": "lbl",
+        "txt": "HOOK · 钩子"
+      },
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "从抽卡与网文视角看西游宇宙"
+      },
+      {
+        "tag": "span",
+        "cls": "idx",
+        "txt": "01"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "如来 UR 满分 10000"
+      },
+      {
+        "tag": "span",
+        "cls": "idx",
+        "txt": "02"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "六耳猕猴 SSR power 9700"
+      },
+      {
+        "tag": "span",
+        "cls": "idx",
+        "txt": "03"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "紧箍咒 control 10000"
+      },
+      {
+        "tag": "span",
+        "cls": "idx",
+        "txt": "04"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "退队流网文 9/10 人气最高"
+      },
+      {
+        "tag": "span",
+        "cls": "idx",
+        "txt": "05"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "白骨精 N 卡 power 800"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "cc-stat-fill",
+        "kind": "background",
+        "area": 902
+      },
+      {
+        "tag": "div",
+        "cls": "cc-stat-fill",
+        "kind": "background",
+        "area": 950
+      },
+      {
+        "tag": "div",
+        "cls": "cc-stat-fill",
+        "kind": "background",
+        "area": 807
+      },
+      {
+        "tag": "div",
+        "cls": "cc-stat-fill",
+        "kind": "background",
+        "area": 779
+      },
+      {
+        "tag": "div",
+        "cls": "cc-stat-fill",
+        "kind": "background",
+        "area": 570
+      },
+      {
+        "tag": "div",
+        "cls": "cc-stat-fill",
+        "kind": "background",
+        "area": 427
+      },
+      {
+        "tag": "div",
+        "cls": "cc-stat-fill",
+        "kind": "background",
+        "area": 475
+      },
+      {
+        "tag": "div",
+        "cls": "cc-stat-fill",
+        "kind": "background",
+        "area": 902
+      },
+      {
+        "tag": "div",
+        "cls": "cc-elem",
+        "kind": "background",
+        "area": 867
+      },
+      {
+        "tag": "div",
+        "cls": "cc-stat-fill",
+        "kind": "background",
+        "area": 617
+      },
+      {
+        "tag": "div",
+        "cls": "cc-stat-fill",
+        "kind": "background",
+        "area": 893
+      },
+      {
+        "tag": "span",
+        "cls": "elem-chip",
+        "kind": "background",
+        "area": 665
+      },
+      {
+        "tag": "div",
+        "cls": "nc-genre",
+        "kind": "background",
+        "area": 8569
+      }
+    ]
+  },
+  "data/mbti-evolution.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "板块一 · 阶段切换雷达图"
+      },
+      {
+        "tag": "span",
+        "cls": "li-mbti",
+        "txt": "ENTP"
+      },
+      {
+        "tag": "span",
+        "cls": "li-mbti",
+        "txt": "INFJ"
+      },
+      {
+        "tag": "span",
+        "cls": "li-mbti",
+        "txt": "ESFP"
+      },
+      {
+        "tag": "span",
+        "cls": "li-mbti",
+        "txt": "ISFJ"
+      },
+      {
+        "tag": "span",
+        "cls": "li-mbti",
+        "txt": "ISTP"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "板块二 · 维度演变折线图"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "板块三 · 阶段 × 维度热力图"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "板块四 · 演变洞察"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "button",
+        "cls": "stage-btn active",
+        "kind": "background",
+        "area": 4953
+      }
+    ]
+  },
+  "data/risk-project.html": {
+    "text_on_bg": [
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "PMBOK 风险评估"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "一次失败即项目终止"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "47"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "9"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "12"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "8"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "5"
+      },
+      {
+        "tag": "span",
+        "cls": "ib-label",
+        "txt": "RISK INSIGHT · 关键洞察"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "妖怪袭击"
+      },
+      {
+        "tag": "div",
+        "cls": "ms-year",
+        "txt": "Y1"
+      },
+      {
+        "tag": "div",
+        "cls": "ms-year",
+        "txt": "Y2"
+      },
+      {
+        "tag": "div",
+        "cls": "ms-year",
+        "txt": "Y3"
+      },
+      {
+        "tag": "div",
+        "cls": "ms-year",
+        "txt": "Y5"
+      },
+      {
+        "tag": "div",
+        "cls": "ms-year",
+        "txt": "Y7"
+      },
+      {
+        "tag": "div",
+        "cls": "ms-year",
+        "txt": "Y10"
+      },
+      {
+        "tag": "div",
+        "cls": "ms-year",
+        "txt": "Y13"
+      },
+      {
+        "tag": "div",
+        "cls": "ms-year",
+        "txt": "Y14"
+      },
+      {
+        "tag": "span",
+        "cls": "ib-label",
+        "txt": "KPI INSIGHT · 关键洞察"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "关键成功因素"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "理想主义愿景"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "9"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "9"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "8"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "9"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "7"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "9"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "9"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "6"
+      },
+      {
+        "tag": "span",
+        "cls": "ib-label",
+        "txt": "MBTI INSIGHT · 关键洞察"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "结构性缺位"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "风险减轻机制"
+      },
+      {
+        "tag": "div",
+        "cls": "map-label",
+        "txt": "META INSIGHT"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "治理风险"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "char-card c-tang",
+        "kind": "border-top",
+        "area": 1098
+      }
+    ]
+  },
+  "data/concept-device.html": {
+    "text_on_bg": [
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "折射角度"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "没有哪一个频率是错的"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "一体两面"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "赋予本身也是一种创造"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "是同一种阅读姿势"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "button",
+        "cls": "era-btn active",
+        "kind": "background",
+        "area": 4744
+      },
+      {
+        "tag": "div",
+        "cls": "cipher-face cipher-back",
+        "kind": "border-top",
+        "area": 600
+      },
+      {
+        "tag": "div",
+        "cls": "cipher-face cipher-back",
+        "kind": "border-top",
+        "area": 600
+      },
+      {
+        "tag": "div",
+        "cls": "cipher-face cipher-back",
+        "kind": "border-top",
+        "area": 600
+      },
+      {
+        "tag": "div",
+        "cls": "cipher-face cipher-back",
+        "kind": "border-top",
+        "area": 600
+      },
+      {
+        "tag": "div",
+        "cls": "cipher-face cipher-back",
+        "kind": "border-top",
+        "area": 600
+      },
+      {
+        "tag": "button",
+        "cls": "danmaku-toggle",
+        "kind": "background",
+        "area": 2788
+      },
+      {
+        "tag": "div",
+        "cls": "hu-card",
+        "kind": "border-top",
+        "area": 487
+      },
+      {
+        "tag": "span",
+        "cls": "idev",
+        "kind": "background",
+        "area": 1062
+      },
+      {
+        "tag": "span",
+        "cls": "idev",
+        "kind": "background",
+        "area": 1546
+      },
+      {
+        "tag": "span",
+        "cls": "idev",
+        "kind": "background",
+        "area": 1546
+      },
+      {
+        "tag": "span",
+        "cls": "idev",
+        "kind": "background",
+        "area": 1062
+      },
+      {
+        "tag": "span",
+        "cls": "idev",
+        "kind": "background",
+        "area": 1304
+      }
+    ]
+  },
+  "data/workplace.html": {
+    "text_on_bg": [
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "PROJECT · 项目名"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "CODE · 代号"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "DURATION · 时长"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "SPONSOR · 发起人"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "PM · 项目经理"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "TECH LEAD · 技术负责人"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "TEAM · 团队"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "DELIVERY · 交付"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "RATING · 评级"
+      },
+      {
+        "tag": "td",
+        "cls": "delay",
+        "txt": "+1"
+      },
+      {
+        "tag": "td",
+        "cls": "delay",
+        "txt": "+3"
+      },
+      {
+        "tag": "td",
+        "cls": "delay",
+        "txt": "+2"
+      },
+      {
+        "tag": "td",
+        "cls": "delay",
+        "txt": "+5"
+      },
+      {
+        "tag": "td",
+        "cls": "delay",
+        "txt": "+7"
+      },
+      {
+        "tag": "td",
+        "cls": "delay",
+        "txt": "+5"
+      },
+      {
+        "tag": "td",
+        "cls": "delay",
+        "txt": "+4"
+      },
+      {
+        "tag": "td",
+        "cls": "delay",
+        "txt": "+6"
+      },
+      {
+        "tag": "td",
+        "cls": "delay",
+        "txt": "+8"
+      },
+      {
+        "tag": "td",
+        "cls": "delay",
+        "txt": "+7"
+      },
+      {
+        "tag": "td",
+        "cls": "delay",
+        "txt": "+4"
+      },
+      {
+        "tag": "td",
+        "cls": "delay",
+        "txt": "+12"
+      },
+      {
+        "tag": "h3",
+        "cls": "",
+        "txt": "基本信息 · 孙悟空"
+      },
+      {
+        "tag": "div",
+        "cls": "ic-q",
+        "txt": "Q1 · 压力面试"
+      },
+      {
+        "tag": "div",
+        "cls": "ic-q",
+        "txt": "Q2 · 压力面试"
+      },
+      {
+        "tag": "div",
+        "cls": "ic-q",
+        "txt": "Q3 · 压力面试"
+      },
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "从打工人视角看取经项目"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "14 年强制团建"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "真假美猴王（58回）后飙升 +3 进入规范期"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "SSS 级"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "需发放高温补贴"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "策划天庭压力测试·推动安保与组织升级"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"对齐/闭环/赋能/抓手\""
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "span",
+        "cls": "alert-badge",
+        "kind": "background",
+        "area": 880
+      },
+      {
+        "tag": "span",
+        "cls": "alert-badge",
+        "kind": "background",
+        "area": 2581
+      },
+      {
+        "tag": "span",
+        "cls": "alert-badge",
+        "kind": "background",
+        "area": 1901
+      },
+      {
+        "tag": "span",
+        "cls": "alert-badge",
+        "kind": "background",
+        "area": 880
+      },
+      {
+        "tag": "span",
+        "cls": "alert-badge",
+        "kind": "background",
+        "area": 2581
+      },
+      {
+        "tag": "span",
+        "cls": "alert-badge",
+        "kind": "background",
+        "area": 1901
+      },
+      {
+        "tag": "span",
+        "cls": "alert-badge",
+        "kind": "background",
+        "area": 880
+      },
+      {
+        "tag": "div",
+        "cls": "bw-cat",
+        "kind": "background",
+        "area": 1435
+      }
+    ]
+  },
+  "data/ethics-consumption.html": {
+    "text_on_bg": [
+      {
+        "tag": "h3",
+        "cls": "",
+        "txt": "三界坐骑权益保护协会 · 贞观 27 年"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "TOTAL · 记录坐骑"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "DESCENDED · 下凡数"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "RETURNED · 回归数"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "PUNISHED · 受罚数"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "AVG DURATION · 平均下凡"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "VICTIMS · 受害估计"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "COMPENSATION · 赔付"
+      },
+      {
+        "tag": "div",
+        "cls": "role",
+        "txt": "CEO"
+      },
+      {
+        "tag": "div",
+        "cls": "role",
+        "txt": "CTO"
+      },
+      {
+        "tag": "div",
+        "cls": "role",
+        "txt": "CMO"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "营收"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "利润"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "现金储备"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "负债率"
+      },
+      {
+        "tag": "div",
+        "cls": "role",
+        "txt": "CEO"
+      },
+      {
+        "tag": "div",
+        "cls": "role",
+        "txt": "CTO"
+      },
+      {
+        "tag": "div",
+        "cls": "role",
+        "txt": "CMO"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "营收"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "利润"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "现金储备"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "负债率"
+      },
+      {
+        "tag": "div",
+        "cls": "role",
+        "txt": "CEO"
+      },
+      {
+        "tag": "div",
+        "cls": "role",
+        "txt": "CTO"
+      },
+      {
+        "tag": "div",
+        "cls": "role",
+        "txt": "CMO"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "营收"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "利润"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "现金储备"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "负债率"
+      },
+      {
+        "tag": "div",
+        "cls": "role",
+        "txt": "CEO"
+      },
+      {
+        "tag": "div",
+        "cls": "role",
+        "txt": "CTO"
+      },
+      {
+        "tag": "div",
+        "cls": "role",
+        "txt": "CMO"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "营收"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "利润"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "现金储备"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "负债率"
+      },
+      {
+        "tag": "div",
+        "cls": "role",
+        "txt": "CEO"
+      },
+      {
+        "tag": "div",
+        "cls": "role",
+        "txt": "CTO"
+      },
+      {
+        "tag": "div",
+        "cls": "role",
+        "txt": "CMO"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "营收"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "利润"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "现金储备"
+      },
+      {
+        "tag": "div",
+        "cls": "k",
+        "txt": "负债率"
+      },
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "从现代伦理视角审视西游三界"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "16 只坐骑下凡·无一受罚"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "12000 人·赔付 0 元"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "盘丝洞·比丘国·无底洞"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "5 家妖怪 IPO 全部失败"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "48000 员工最大"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "sev-badge sev-extreme",
+        "kind": "background",
+        "area": 2389
+      },
+      {
+        "tag": "span",
+        "cls": "veg-badge veg-no",
+        "kind": "background",
+        "area": 865
+      },
+      {
+        "tag": "span",
+        "cls": "zero-tag",
+        "kind": "background",
+        "area": 1615
+      },
+      {
+        "tag": "span",
+        "cls": "veg-badge veg-no",
+        "kind": "background",
+        "area": 865
+      },
+      {
+        "tag": "span",
+        "cls": "zero-tag",
+        "kind": "background",
+        "area": 1615
+      },
+      {
+        "tag": "span",
+        "cls": "veg-badge veg-no",
+        "kind": "background",
+        "area": 865
+      },
+      {
+        "tag": "span",
+        "cls": "zero-tag",
+        "kind": "background",
+        "area": 1615
+      },
+      {
+        "tag": "span",
+        "cls": "veg-badge veg-no",
+        "kind": "background",
+        "area": 865
+      },
+      {
+        "tag": "div",
+        "cls": "ipo-outcome",
+        "kind": "border-top",
+        "area": 2157
+      },
+      {
+        "tag": "div",
+        "cls": "ipo-outcome",
+        "kind": "border-top",
+        "area": 2161
+      },
+      {
+        "tag": "div",
+        "cls": "ipo-outcome",
+        "kind": "border-top",
+        "area": 2161
+      },
+      {
+        "tag": "div",
+        "cls": "ipo-outcome",
+        "kind": "border-top",
+        "area": 2161
+      },
+      {
+        "tag": "div",
+        "cls": "ipo-outcome",
+        "kind": "border-top",
+        "area": 2161
+      }
+    ]
+  },
+  "data/criticism-history.html": {
+    "text_on_bg": [
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "上"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "中"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "下"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "儒（张书绅·大学正心）"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "道（陈士斌·内丹金丹）"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "释·文（现代学者·文学本位）"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "原典"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "吴承恩 / 丘处机 / 李春芳 / 华阳洞天主人"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "胡适 1923《西游记考证》→ 推定吴承恩"
+      },
+      {
+        "tag": "div",
+        "cls": "cc-name",
+        "txt": "吴承恩"
+      },
+      {
+        "tag": "h5",
+        "cls": "",
+        "txt": "反对证据 －"
+      },
+      {
+        "tag": "h5",
+        "cls": "",
+        "txt": "反对证据 －"
+      },
+      {
+        "tag": "h5",
+        "cls": "",
+        "txt": "反对证据 －"
+      },
+      {
+        "tag": "h5",
+        "cls": "",
+        "txt": "反对证据 －"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "左"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "右"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "神魔小说"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "赋魅"
+      },
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "批评史本身，是被审视的对象"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "没有\"正解\"，只有时代语言的重写"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "唯一正解"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "赋魅"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "今何在《悟空传》"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "李贽的双重身"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "莫比乌斯环隐喻"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "candidate-card main",
+        "kind": "border-top",
+        "area": 1663
+      },
+      {
+        "tag": "div",
+        "cls": "cc-status",
+        "kind": "background",
+        "area": 3030
+      }
+    ]
+  }
+}

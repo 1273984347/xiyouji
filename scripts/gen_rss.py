@@ -43,7 +43,7 @@ def main():
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<rss version="2.0">\n'
         "  <channel>\n"
-        "    <title>详解西游记 · 更新动态</title>\n"
+        "    <title>取经录 · 更新动态</title>\n"
         f"    <link>{BASE}</link>\n"
         "    <description>一源多形 · 数字人文可视化解读《西游记》100 回——版本发布批次动态（W### 编号·详见 CHANGELOG）。</description>\n"
         "    <language>zh-CN</language>\n"

@@ -1,0 +1,187 @@
+[
+ {
+  "vw": 1440,
+  "vh": 900,
+  "tops": 6,
+  "foldH2": 1,
+  "foldZoneH2": 1,
+  "foldH2Texts": [
+   "从哪一回读起"
+  ],
+  "foldLinks": 4,
+  "foldContentLinks": 4,
+  "foldContentHrefs": [
+   "reader/ch001.html",
+   "reader/ch001.html",
+   "reader/ch005.html",
+   "reader/ch027.html"
+  ],
+  "h2min": 40,
+  "h3min": 20,
+  "mastBottom": 497,
+  "zones": [
+   {
+    "id": "zone-read",
+    "h2": "从哪一回读起",
+    "h2count": 1
+   },
+   {
+    "id": "zone-lookup",
+    "h2": "查资料",
+    "h2count": 1
+   },
+   {
+    "id": "zone-tools",
+    "h2": "看数据与工具",
+    "h2count": 1
+   }
+  ],
+  "docH": 5143,
+  "page": "home",
+  "file": "index.html",
+  "width": 1440,
+  "height": 900,
+  "shot": "home-1440.png"
+ },
+ {
+  "vw": 768,
+  "vh": 1024,
+  "tops": 6,
+  "foldH2": 1,
+  "foldZoneH2": 1,
+  "foldH2Texts": [
+   "从哪一回读起"
+  ],
+  "foldLinks": 5,
+  "foldContentLinks": 5,
+  "foldContentHrefs": [
+   "reader/ch001.html",
+   "reader/ch001.html",
+   "reader/ch005.html",
+   "reader/ch027.html",
+   "reader/ch058.html"
+  ],
+  "h2min": 24,
+  "h3min": 20,
+  "mastBottom": 550,
+  "zones": [
+   {
+    "id": "zone-read",
+    "h2": "从哪一回读起",
+    "h2count": 1
+   },
+   {
+    "id": "zone-lookup",
+    "h2": "查资料",
+    "h2count": 1
+   },
+   {
+    "id": "zone-tools",
+    "h2": "看数据与工具",
+    "h2count": 1
+   }
+  ],
+  "docH": 6242,
+  "page": "home",
+  "file": "index.html",
+  "width": 768,
+  "height": 1024,
+  "shot": "home-768.png"
+ },
+ {
+  "vw": 375,
+  "vh": 812,
+  "tops": 6,
+  "foldH2": 1,
+  "foldZoneH2": 1,
+  "foldH2Texts": [
+   "从哪一回读起"
+  ],
+  "foldLinks": 2,
+  "foldContentLinks": 2,
+  "foldContentHrefs": [
+   "reader/ch001.html",
+   "reader/ch001.html"
+  ],
+  "h2min": 24,
+  "h3min": 20,
+  "mastBottom": 564,
+  "zones": [
+   {
+    "id": "zone-read",
+    "h2": "从哪一回读起",
+    "h2count": 1
+   },
+   {
+    "id": "zone-lookup",
+    "h2": "查资料",
+    "h2count": 1
+   },
+   {
+    "id": "zone-tools",
+    "h2": "看数据与工具",
+    "h2count": 1
+   }
+  ],
+  "docH": 7969,
+  "page": "home",
+  "file": "index.html",
+  "width": 375,
+  "height": 812,
+  "shot": "home-375.png"
+ },
+ {
+  "vw": 1440,
+  "vh": 900,
+  "hasTools": true,
+  "hasInput": true,
+  "count0": "全部 615 条",
+  "groups": 6,
+  "groupIds": 6,
+  "jumpLinks": 6,
+  "items": 615,
+  "docH": 15927,
+  "page": "catalog",
+  "file": "reader/index.html",
+  "width": 1440,
+  "height": 900,
+  "interact": {
+   "count42": "命中 1 / 615 条",
+   "visible42": 1,
+   "countSun": "命中 8 / 615 条",
+   "visibleSun": 8,
+   "countReset": "全部 615 条",
+   "flashHref": "ch100.html",
+   "flashText": "第 100回 径回东土五圣成真",
+   "scrollY": 0
+  },
+  "shot": "catalog-1440.png"
+ },
+ {
+  "vw": 375,
+  "vh": 812,
+  "hasTools": true,
+  "hasInput": true,
+  "count0": "全部 615 条",
+  "groups": 6,
+  "groupIds": 6,
+  "jumpLinks": 6,
+  "items": 615,
+  "docH": 30548,
+  "page": "catalog",
+  "file": "reader/index.html",
+  "width": 375,
+  "height": 812,
+  "interact": {
+   "count42": "命中 1 / 615 条",
+   "visible42": 1,
+   "countSun": "命中 8 / 615 条",
+   "visibleSun": 8,
+   "countReset": "全部 615 条",
+   "flashHref": "ch100.html",
+   "flashText": "第 100回 径回东土五圣成真",
+   "scrollY": 0
+  },
+  "shot": "catalog-375.png"
+ }
+]

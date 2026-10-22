@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-L8D2VJCFVkKYJPwStZTGBF0BKd+f8fb3LkeFRvKb8VM=' 'sha256-TmCeVqie4gN3Zds2o//s3gLFPYc1/7XUMfJlxgsNutE=' 'sha256-AG8dkSbIJIdoyhXBax9MotpSYlOl76kdVYHwmcZbEzI=' 'sha256-Zffu8DOr1R6L8RLpjdRYw2mWd42CdMbtjLLQrJPPl50=' 'sha256-84JVJQY3yctVmkS8rXOF6mFKtKgqxmKAQ1QLjnvwwrg=' 'sha256-G7JWRSZeN4qV3CsTmZNfFh1mJ5CqtyE1lQNIWsFMJD0=' 'sha256-o+QSXoQ5VFi4ItDsbcfyzUpLgyGVt92M5zj8wsRF4js='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777 https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-L8D2VJCFVkKYJPwStZTGBF0BKd+f8fb3LkeFRvKb8VM=' 'sha256-viBTtODwAf12YWRA7g+a6O7/QF76106MtDpL11ol/DA=' 'sha256-AG8dkSbIJIdoyhXBax9MotpSYlOl76kdVYHwmcZbEzI=' 'sha256-Zffu8DOr1R6L8RLpjdRYw2mWd42CdMbtjLLQrJPPl50=' 'sha256-84JVJQY3yctVmkS8rXOF6mFKtKgqxmKAQ1QLjnvwwrg=' 'sha256-G7JWRSZeN4qV3CsTmZNfFh1mJ5CqtyE1lQNIWsFMJD0=' 'sha256-o+QSXoQ5VFi4ItDsbcfyzUpLgyGVt92M5zj8wsRF4js='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
       // 夜读模式（W488）：首屏防 FOUC——先读 localStorage，无则跟随系统；dark 时在 body 渲染前挂 data-theme
@@ -16,11 +16,11 @@
       })();
     </script>
     <meta name="theme-color" content="#FAF7F0">
-    <title>详解西游记 · 项目导航</title>
-        <link rel="alternate" type="application/rss+xml" title="详解西游记 · 更新动态" href="rss.xml">
+    <title>取经录 · 项目导航</title>
+        <link rel="alternate" type="application/rss+xml" title="取经录 · 更新动态" href="rss.xml">
 <link rel="canonical" href="https://1273984347.github.io/xiyouji/index.html">
     <meta property="og:url" content="https://1273984347.github.io/xiyouji/index.html">
-    <meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+    <meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <link rel="alternate" hreflang="zh-CN" href="https://1273984347.github.io/xiyouji/index.html">
@@ -38,10 +38,16 @@
             align-items: flex-end;
             justify-content: space-between;
             gap: 48px;
-            padding: clamp(56px, 9vw, 96px) clamp(24px, 6vw, 96px) clamp(36px, 5vw, 56px);
+            padding: clamp(56px, 9vw, var(--space-12)) clamp(var(--space-6), 6vw, var(--space-12)) clamp(36px, 5vw, 56px);
+            background-image: url('static/images/hero-01-xihai-yunhai.webp');
+            background-size: cover;
+            background-position: center bottom;
+            background-repeat: no-repeat;
         }
         .masthead-copy { max-width: 640px; }
-        .masthead-copy .kicker { margin-bottom: 20px; }
+        .masthead-copy .kicker { margin-bottom: var(--space-5); }
+        /* W862 B1 裁决 1：kicker 落 --bg → --accent-text（落点审计 _w862_accent_text_audit.json） */
+        .kicker { color: var(--accent-text); }
         .masthead-copy h1 { margin-bottom: 14px; }
         .masthead-copy .eng {
             font-size: 12px; color: var(--ink-faint);
@@ -58,14 +64,16 @@
         }
         .mega-unit { font-family: var(--font-serif); font-weight: 500; font-size: clamp(28px, 4vw, 52px); }
         .mega-label { margin-top: 10px; font-size: 13px; color: var(--ink-soft); }
-        .mega-sub { margin-top: 4px; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.06em; }
+        .mega-sub { margin-top: var(--space-2); font-size: 11px; color: var(--ink-faint); letter-spacing: 0.06em; }
 
         .ink-mountains { display: block; width: 100%; height: 100px; }
 
+        /* W865 D1：stats 收进「看数据与工具」区（原为首页顶层独立块） */
         .stats {
             display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
-            padding: 28px clamp(24px, 6vw, 96px);
+            padding: var(--space-5) 0;
             border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+            margin-bottom: var(--space-6);
         }
         .stat .num {
             font-family: var(--font-mono); font-weight: 500; font-size: 30px;
@@ -84,17 +92,22 @@
             .masthead { flex-direction: column; align-items: flex-start; gap: 28px; }
             .masthead-mega { text-align: left; }
             .mega-row { justify-content: flex-start; }
+            /* W865 D1：移动端 mega 数字降为紧凑计量（首屏减法·@375 省约 50px·桌面保持品牌大字） */
+            .mega-num { font-size: clamp(40px, 12vw, 56px); line-height: 1; }
+            .mega-unit { font-size: clamp(18px, 5vw, 24px); }
+            .mega-label { margin-top: 4px; }
             .stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
             .tools-grid { grid-template-columns: 1fr; }
         }
 
         /* === 首屏提问框：问渡口 === */
+        /* W865 D1：搜索降为「查资料」区内的工具条（不再独占首屏·标题不再与内容区同级） */
         .ask-hero {
-            margin: 0 clamp(24px, 6vw, 96px) 4px;
+            margin: 0 0 var(--space-6);
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-lg);
-            padding: clamp(24px, 4vw, 40px);
+            padding: clamp(var(--space-5), 2.6vw, var(--space-6));
             box-shadow: var(--elev-1);
             position: relative;
             overflow: hidden;
@@ -103,13 +116,16 @@
             content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
             background: var(--accent);
         }
-        .ask-hero .kicker { margin-bottom: 10px; }
-        .ask-hero h2 { margin: 0 0 6px; font-size: clamp(20px, 3vw, 28px); }
+        .ask-hero .kicker { margin-bottom: 10px; color: var(--accent); }  /* ask-hero 底为 --paper·裁决 1：落 paper 仍用 --accent */
+        .ask-toolbar-title {
+            margin: 0 0 6px; font-family: var(--font-serif); font-weight: 600;
+            font-size: clamp(18px, 2.2vw, 22px); color: var(--ink);
+        }
         .ask-hero .ask-sub { color: var(--ink-soft); font-size: 14px; margin-bottom: 18px; }
         .ask-form { display: flex; gap: 12px; max-width: 640px; }
         .ask-form input {
             flex: 1; font-family: var(--font-serif); font-size: 16px;
-            padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--radius-md);
+            padding: var(--space-4) 16px; border: 1px solid var(--line); border-radius: var(--radius-md);
             background: var(--bg); color: var(--ink); outline: none;
             transition: border-color var(--dur-fast) var(--ease-out-quart),
                         box-shadow var(--dur-fast) var(--ease-out-quart);
@@ -120,7 +136,7 @@
         }
         .ask-form button {
             font-family: var(--font-serif); font-size: 15px; font-weight: 600;
-            padding: 12px 26px; border: none; border-radius: var(--radius-md); cursor: pointer;
+            padding: var(--space-4) 26px; border: none; border-radius: var(--radius-md); cursor: pointer;
             background: linear-gradient(180deg, var(--accent), var(--accent-deep));
             color: var(--paper); white-space: nowrap;
             transition: background var(--dur-fast) var(--ease-out-quart),
@@ -141,6 +157,13 @@
         .ask-chip:active { transform: scale(0.97); }
         .ask-note { margin-top: 14px; font-size: 12px; color: var(--ink-faint); }
         .ask-note code { background: var(--paper-warm); padding: 1px 6px; border-radius: var(--radius-sm); }
+        /* W865 D1：任务区内的段级小标题（h3·与卡片标题同级但有分隔线） */
+        .sub-head {
+            font-family: var(--font-serif); font-weight: 600;
+            font-size: clamp(20px, 2.4vw, 24px); color: var(--ink);
+            margin: var(--space-7) 0 var(--space-4);
+            padding-bottom: var(--space-2); border-bottom: 1px solid var(--line);
+        }
         .curated-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px;
         }
@@ -162,7 +185,7 @@
         /* === W488：夜读切换器 === */
         .theme-toggle {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 34px; height: 34px; margin-left: 12px;
+            width: 34px; height: 34px; margin-left: var(--space-4);
             border: 1px solid var(--line); border-radius: var(--radius-pill);
             background: var(--paper); color: var(--ink-soft); cursor: pointer;
             transition: border-color var(--dur-fast) var(--ease-out-quart),
@@ -318,7 +341,7 @@
     {
       "@type": "CreativeWork",
       "@id": "https://1273984347.github.io/xiyouji/#site",
-      "name": "详解西游记 · 多维研究项目",
+      "name": "取经录 · 多维研究项目",
       "creator": {
         "@id": "https://1273984347.github.io/xiyouji/#author-wuchengen"
       },
@@ -331,19 +354,18 @@
   ]
 }
 </script>
-    <meta name="description" content="详解西游记·明代吴承恩百回神魔小说的多维学术研究与可视化分析项目，覆盖人物深度分析、八十一难结构、取经地理路线、叙事学十三维网络等十大研究维度。">
+    <meta name="description" content="取经录·明代吴承恩百回神魔小说的多维学术研究与可视化分析项目，覆盖人物深度分析、八十一难结构、取经地理路线、叙事学十三维网络等十大研究维度。">
     <meta name="keywords" content="西游记,吴承恩,孙悟空,唐僧,猪八戒,沙悟净,九九八十一难,取经路线,神魔小说,古典文学,叙事学,人物关系网络,D3可视化">
     <meta name="author" content="西游记研究项目组">
-    <meta property="og:title" content="详解西游记 · 多维研究项目导航">
+    <meta property="og:title" content="取经录 · 多维研究项目导航">
     <meta property="og:description" content="明代吴承恩百回神魔小说的多维学术研究与可视化分析，覆盖人物、情节、主题、文化背景、诗词等十大维度。">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="zh_CN">
-    <meta property="og:site_name" content="详解西游记">
+    <meta property="og:site_name" content="取经录">
     <meta name="twitter:card" content="summary_large_image">
   <script src="js/theme-init.js"></script>
   <script defer src="js/rum.js"></script>
   <script defer src="js/visit-log.js"></script>
-  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="static/js/goatcounter.js"></script>
 <link rel="preload" href="static/fonts/NotoSansSC-Regular.subset.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="static/fonts/noto-serif-sc-shared.subset.woff2" as="font" type="font/woff2" crossorigin>
 </head>
@@ -353,14 +375,15 @@
 
     <header class="topnav">
         <a class="brand" href="index.html">
-            <span class="seal" aria-hidden="true">详<br>解</span>
-            <span class="wordmark">详解西游记</span>
+            <img class="brand-mark" src="static/icons/logo-mark-light.svg" alt="" width="40" height="40" aria-hidden="true">
+            <span class="wordmark">取经录</span>
         </a>
                 <button class="nav-toggle" type="button" aria-label="打开导航菜单" aria-expanded="false">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
         <nav aria-label="主导航">
             <a href="guide.html">导读</a>
+            <a href="reader/index.html">阅读</a>
             <a href="data/chapter-structure-graph.html">逐回</a>
             <a href="data/character-appearance.html">人物</a>
             <a href="data/philosophy.html">专题</a>
@@ -377,10 +400,13 @@
         <section class="masthead" aria-label="站点简介">
             <div class="masthead-copy">
                 <p class="kicker">MING DYNASTY · WU CHENG'EN · 100 CHAPTERS</p>
-                <h1>详解西游记</h1>
-                <p class="eng">A DETAILED READING OF JOURNEY TO THE WEST</p>
+                <h1>取经录</h1>
+                <p class="eng">A DIGITAL HUMANITIES READING OF JOURNEY TO THE WEST</p>
                 <p class="tagline">一百回的山水与人情，一千年的回响与重读。</p>
                 <p class="meta-line">双轨写作 · 大众普及 × 学术研究 · 数据可视化</p>
+                <p class="meta-line" style="margin-top:18px;">
+                    <a href="reader/ch001.html" style="font-weight:600;color:var(--accent-2);">开始阅读 · 第 1 回 灵根育孕源流出 →</a>
+                </p>
             </div>
             <div class="masthead-mega" aria-label="100 回逐回精读">
                 <div class="mega-row" aria-hidden="true">
@@ -392,168 +418,195 @@
             </div>
         </section>
 
+        <div class="page-wrap">
+            <section class="section reveal-in" aria-labelledby="zone-read">
+                <div class="section-head">
+                    <p class="kicker">START READING</p>
+                    <h2 id="zone-read">从哪一回读起</h2>
+                    <p class="note">100 回逐回精读，每回附剧情梗概、伏笔悬念、名句赏析与原文全文——点一处直达该回。</p>
+                </div>
+                <div class="curated-grid">
+                    <a class="card" href="reader/ch001.html">
+                        <p class="card-kicker">001 · 开篇</p>
+                        <h3>灵根育孕源流出</h3>
+                        <p>石猴出世、拜师菩提，全书世界观在此定型。</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">读第 1 回 →</p>
+                    </a>
+                    <a class="card" href="reader/ch005.html">
+                        <p class="card-kicker">005 · 大闹天宫</p>
+                        <h3>乱蟠桃大圣偷丹</h3>
+                        <p>蟠桃会、偷金丹，反出天宫的前夜。</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">读第 5 回 →</p>
+                    </a>
+                    <a class="card" href="reader/ch027.html">
+                        <p class="card-kicker">027 · 三打白骨精</p>
+                        <h3>尸魔三戏唐三藏</h3>
+                        <p>辨识与信任的第一次崩裂，圣僧恨逐美猴王。</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">读第 27 回 →</p>
+                    </a>
+                    <a class="card" href="reader/ch058.html">
+                        <p class="card-kicker">058 · 真假美猴王</p>
+                        <h3>二心搅乱大乾坤</h3>
+                        <p>二心相争、一体难修，取经队伍的心性关口。</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">读第 58 回 →</p>
+                    </a>
+                </div>
+                <p class="note" style="margin-top:16px;"><a href="reader/index.html" style="color:var(--accent-2);">查看全部 100 回总目录 →</a></p>
+            </section>
+        </div>
+
         <svg class="ink-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
             <path d="M0 95 L180 32 L340 82 L500 20 L680 88 L860 45 L1040 92 L1220 35 L1440 80" fill="none" stroke="var(--ink)" stroke-opacity="0.10" stroke-width="1.5"/>
             <path d="M0 110 L220 58 L400 105 L580 48 L780 104 L960 62 L1140 108 L1320 70 L1440 96" fill="none" stroke="var(--ink)" stroke-opacity="0.05" stroke-width="1"/>
         </svg>
 
-        <section class="ask-hero" aria-label="站内搜索 · 首屏检索">
-            <p class="kicker">SEARCH · 站内搜索</p>
-            <h2>想查点什么？</h2>
-            <p class="ask-sub">输入任意西游人物、妖怪、器物、地名或主题，一站检索全站 772 篇解读文档与全部站内页面。</p>
-            <form class="ask-form" id="askForm" autocomplete="off">
-                <input id="askInput" type="text" name="q" placeholder="例如：孙悟空、紧箍咒、八十一难、狮驼岭…" aria-label="搜索内容">
-                <button type="submit">站内搜索</button>
-            </form>
-            <div class="ask-chips" role="list">
-                <span class="ask-chip" role="listitem" data-q="孙悟空">孙悟空</span>
-                <span class="ask-chip" role="listitem" data-q="八十一难">八十一难</span>
-                <span class="ask-chip" role="listitem" data-q="紧箍咒">紧箍咒</span>
-                <span class="ask-chip" role="listitem" data-q="大闹天宫">大闹天宫</span>
-            </div>
-            <p class="ask-note">离线可搜（全站索引内置）· 想写「被忽略者」档案？试试 <a href="dukou-engine.html">西游·渡口写作引擎</a></p>
-        </section>
-
-        <section class="stats reveal-in" aria-label="项目数据概览">
-            <div class="stat"><div class="num">100</div><div class="lbl">回 · 逐回解读</div></div>
-            <div class="stat"><div class="num">615</div><div class="lbl">篇 · 研究文档</div></div>
-            <div class="stat"><div class="num">87</div><div class="lbl">个 · 可视化页面</div></div>
-            <div class="stat"><div class="num">55</div><div class="lbl">条 · 学术引用</div></div>
-        </section>
-
         <div class="page-wrap">
-            <div class="section reveal-in">
+            <section class="section reveal-in" aria-labelledby="zone-lookup">
                 <div class="section-head">
-                    <p class="kicker">CURATED</p>
-                    <h2>精选必看</h2>
-                    <p class="note">九个入口先睹为快；全部 87 页见数据看板，另有 133 维数据实验（含趣味跨界）。</p>
+                    <p class="kicker">LOOK UP</p>
+                    <h2 id="zone-lookup">查资料</h2>
+                    <p class="note">站内检索、精选入口与全卷索引——要找的都在这一区。</p>
                 </div>
+                <div class="ask-hero" role="search" aria-label="站内搜索工具">
+                    <p class="kicker">SEARCH · 站内搜索</p>
+                    <p class="ask-toolbar-title">想查点什么？</p>
+                    <p class="ask-sub">输入任意西游人物、妖怪、器物、地名或主题，一站检索全站 772 篇解读文档与全部站内页面。</p>
+                    <form class="ask-form" id="askForm" autocomplete="off">
+                        <input id="askInput" type="text" name="q" placeholder="例如：孙悟空、紧箍咒、八十一难、狮驼岭…" aria-label="搜索内容">
+                        <button type="submit">站内搜索</button>
+                    </form>
+                    <div class="ask-chips" role="list">
+                        <span class="ask-chip" role="listitem" data-q="孙悟空">孙悟空</span>
+                        <span class="ask-chip" role="listitem" data-q="八十一难">八十一难</span>
+                        <span class="ask-chip" role="listitem" data-q="紧箍咒">紧箍咒</span>
+                        <span class="ask-chip" role="listitem" data-q="大闹天宫">大闹天宫</span>
+                    </div>
+                    <p class="ask-note">离线可搜（全站索引内置）· 想写「被忽略者」档案？试试 <a href="dukou-engine.html">西游·渡口写作引擎</a></p>
+                </div>
+
+
+                <h3 class="sub-head">精选必看</h3>
                 <div class="curated-grid">
                     <a class="card" href="data/chapter-structure-graph.html">
                         <p class="card-kicker">G · CHAPTER GRAPH</p>
                         <h3>百回结构图谱</h3>
                         <p>100 回篇幅起伏、八十一难分布一眼看全。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/character-dynamic-network.html">
                         <p class="card-kicker">N · CHARACTER NETWORK</p>
                         <h3>人物动态网络</h3>
                         <p>三界人物关系与共现随时间流动。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/journey-spacetime.html">
                         <p class="card-kicker">R · JOURNEY SPACETIME</p>
                         <h3>取经时空</h3>
                         <p>十万八千里路线与十四年时间并置呈现。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/journey-geo-3d.html">
                         <p class="card-kicker">R · JOURNEY GEO 3D</p>
                         <h3>西游地理 3D</h3>
                         <p>取经路线的立体纵深：示意地形上重走十四年西行（与平面时空图互补）。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/narratology-16d-network.html">
                         <p class="card-kicker">N · NARRATOLOGY 13D</p>
                         <h3>叙事学十三维</h3>
                         <p>全书叙事机制的十三维网络。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/criticism-history.html">
                         <p class="card-kicker">H · CRITICISM 500Y</p>
                         <h3>批评史长卷</h3>
                         <p>五百年解读流变、九批评家、三教争辩。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/emotional-heatmap.html">
                         <p class="card-kicker">E · EMOTIONAL HEATMAP</p>
                         <h3>情感热力图</h3>
                         <p>八批评家 × 二十难的情感温度。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/cross-time-danmaku.html">
                         <p class="card-kicker">D · DANMAKU MUSEUM</p>
                         <h3>跨时空弹幕</h3>
                         <p>从明清到当代的名人弹幕博物馆。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                     <a class="card" href="data/text-search.html">
                         <p class="card-kicker">S · TEXT SEARCH</p>
                         <h3>原著全文检索</h3>
                         <p>七十万字原著，100 回逐字可查。</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入 →</p>
                     </a>
                 </div>
-            </div>
-        </div>
-
-        <div class="page-wrap">
-            <div class="section reveal-in">
-                <div class="section-head">
-                    <p class="kicker">INDEX</p>
-                    <h2>全卷索引</h2>
-                    <p class="note">从开卷导读到精神塑造——全卷通读《西游记》，每一卷都是一个入口。</p>
-                </div>
+                <h3 class="sub-head">全卷索引</h3>
                 <nav class="index-table" aria-label="全站板块索引">
                     <a class="index-row" href="guide.html">
                         <span class="no">00</span><span class="name">开卷有益</span>
                         <span class="desc">导读 · 项目说明、阅读指南、按身份选阅读路径、术语约定</span>
                         <span class="meta">建议先读</span>
                     </a>
+                    <a class="index-row" href="reader/index.html">
+                        <span class="no">01</span><span class="name">逐回精读</span>
+                        <span class="desc">站内阅读 · 100 回逐回解读：剧情梗概、伏笔悬念、名句赏析与原文全文</span>
+                        <span class="meta">100 回</span>
+                    </a>
                     <a class="index-row" href="data/chapter-structure-graph.html">
-                        <span class="no">01</span><span class="name">百回西行</span>
+                        <span class="no">02</span><span class="name">百回西行</span>
                         <span class="desc">逐回结构 · 章回图谱、叙事节奏、篇幅起伏与八十一难</span>
                         <span class="meta">可视化</span>
                     </a>
                     <a class="index-row" href="data/character-appearance.html">
-                        <span class="no">02</span><span class="name">众生谱</span>
+                        <span class="no">03</span><span class="name">众生谱</span>
                         <span class="desc">人物分析 · 出场形象、动态关系网络、性格演化</span>
                         <span class="meta">可视化</span>
                     </a>
                     <a class="index-row" href="data/philosophy.html">
-                        <span class="no">03</span><span class="name">大闹·取经·归真</span>
+                        <span class="no">04</span><span class="name">大闹·取经·归真</span>
                         <span class="desc">主题专题 · 哲学母题、反事实推演、解构重读</span>
                         <span class="meta">可视化</span>
                     </a>
                     <a class="index-row" href="data/criticism-history.html">
-                        <span class="no">04</span><span class="name">佛道与明代</span>
+                        <span class="no">05</span><span class="name">佛道与明代</span>
                         <span class="desc">文化背景 · 四百年批评史、文本演变、物质考据</span>
                         <span class="meta">可视化</span>
                     </a>
                     <a class="index-row" href="data/poetry-rhythm-analysis.html">
-                        <span class="no">05</span><span class="name">诗词与对联</span>
+                        <span class="no">06</span><span class="name">诗词与对联</span>
                         <span class="desc">诗词歌赋 · 韵律分析、语言风格雷达</span>
                         <span class="meta">可视化</span>
                     </a>
                     <a class="index-row" href="reader/essays/index.html">
-                        <span class="no">06</span><span class="name">个人随笔</span>
+                        <span class="no">07</span><span class="name">个人随笔</span>
                         <span class="desc">随笔集 · 44 篇个人视角的现代解读</span>
                         <span class="meta">阅读</span>
                     </a>
                     <a class="index-row" href="data/workplace.html">
-                        <span class="no">07</span><span class="name">怎么用</span>
+                        <span class="no">08</span><span class="name">怎么用</span>
                         <span class="desc">学以致用 · 职场映射、商业模式、决策模型</span>
                         <span class="meta">可视化</span>
                     </a>
                     <a class="index-row" href="data/cognitive-psychology.html">
-                        <span class="no">08</span><span class="name">看见自己的思考</span>
+                        <span class="no">09</span><span class="name">看见自己的思考</span>
                         <span class="desc">提升认知 · 认知心理学、性格演化、元认知</span>
                         <span class="meta">可视化</span>
                     </a>
                     <a class="index-row" href="data/karma-reincarnation.html">
-                        <span class="no">09</span><span class="name">在苦难中立住自己</span>
+                        <span class="no">10</span><span class="name">在苦难中立住自己</span>
                         <span class="desc">精神塑造 · 因果轮回、消费伦理、价值坐标</span>
                         <span class="meta">可视化</span>
                     </a>
                     <a class="index-row" href="curated.html">
-                        <span class="no">10</span><span class="name">精选发布</span>
+                        <span class="no">11</span><span class="name">精选发布</span>
                         <span class="desc">外部分享 · 13 篇随笔 + 15 篇专题，公众号/知乎风格发布版</span>
                         <span class="meta">28 篇</span>
                     </a>
                 </nav>
-            </div>
+            </section>
         </div>
-
         <section class="dark-band" aria-label="西游记开篇诗" style="background-image:url('static/images/ink-mountains-hero.webp');background-size:cover;background-position:center;background-blend-mode:soft-light;">
             <div class="rule" aria-hidden="true"></div>
             <blockquote>
@@ -564,19 +617,26 @@
         </section>
 
         <div class="page-wrap">
-            <div class="section reveal-in">
+            <section class="section reveal-in" aria-labelledby="zone-tools">
                 <div class="section-head">
-                    <p class="kicker">TOOLS</p>
-                    <h2>站点工具</h2>
-                    <p class="note">三条快速路：看数据、找标签、查原文。</p>
+                    <p class="kicker">EXPLORE</p>
+                    <h2 id="zone-tools">看数据与工具</h2>
+                    <p class="note">项目量级、可视化看板与两件常用工具。</p>
                 </div>
+        <div class="stats" aria-label="项目数据概览">
+            <div class="stat"><div class="num">100</div><div class="lbl">回 · 逐回解读</div></div>
+            <div class="stat"><div class="num">615</div><div class="lbl">篇 · 研究文档</div></div>
+            <div class="stat"><div class="num">87</div><div class="lbl">个 · 可视化页面</div></div>
+            <div class="stat"><div class="num">55</div><div class="lbl">条 · 学术引用</div></div>
+        </div>
+
                 <div class="tools-grid">
                     <a class="card" href="dashboard.html">
                         <p class="card-kicker">D · DATA DASHBOARD</p>
                         <h3>数据看板</h3>
                         <p>55 张 KPI 卡片总览项目全貌，87 个 D3.js / Three.js 可视化页面一屏直达，附全站搜索浮层。</p>
                         <p class="card-meta">55 KPI · 86 PAGES · SITE SEARCH</p>
-                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入看板 →</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:var(--space-4);">进入看板 →</p>
                     </a>
                     <div class="tools-side">
                         <a class="card" href="data/tag-cloud.html">
@@ -591,14 +651,14 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
     </main>
 
     <footer class="site-footer">
         <div>
-            <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">2026 · MIT License · 持续更新中 · W794 PD-3 三项裁决全部落地，首页补随笔入口与全卷命名，数据提示改读者语，专题卡加图例与悬停明细，自查撤回一条假阳性 · W793 产品设计套件两页启发式走查落地，八条发现全部防虚构校验，sync_docs 退休替换为现役门禁，冻结适用范围立单一表述 · W792 全仓待办计划方案状态核查，逐项取证判定无假收敛，五处陈滞修正落地，真开面约三十项多为作者时间类，四项待用户决策 · W791 agent-web 三类攻击面负向测试固化，安全逻辑提取得可测面，真服集成覆盖限流与鉴权，计划状态陈滞回写，服务端测试套件扩充至六十七例 · W790 外部评审第三轮重复投递逐条核查回应，七项与上轮全同且事实已漂移，四项不成立三项部分成立，唯一实质增量为 agent 攻击面负向测试缺口，报告归档并联登四条待办 · W789 外部门禁重构提案对盘登记，逐字节提取五文件与磁盘现势比对，提案十五项改动已全部由此前重构批次落地，余量七处差异均为改号回退或等价噪声，裁定不执行，零代码变更，登记以防重复收编 · W788 重构收尾清理两处无消费点代码，截图门禁删新增死常量公共模块删未用导入，净删两行零行为变化，验收为截图门禁八百五十七页逐页结果相同加破防态负样本可红加自检十二例通过 · W787 外部重构提案收编第六批末批，分隔线与告警线常量化并提步进标题函数，git 状态与体量解析与版本解析拆函数，22 项门禁脚本改动点清单经裁定不执行，对拍验收为完整运行输出与退出码逐字相同 · W786 外部重构提案收编第五批，Cypher 拼装提 _build_cypher 快照组装提 _build_snapshot OUTPUT 中间变量收敛路径拼接，rag 家族其余五件不收留机械通道，对拍验收为两产物与运行日志逐字节相等 · W785 外部重构提案收编第四批重件档其一，CORS 白名单与 MIME 映射与检索片段窗口提模块级常量，do_GET 路由拆四臂处理方法并新增 _send_error_json 统一错误结构，文档页表格行渲染提 _render_dataset_row，全部路由状态码与响应体逐字节保持，对拍为起服务前后十一个端点工件逐字节比对 · W784 外部重构提案收编第三批小件档，chapter_stats 诗词计数拆双函数聚合提 _aggregate_totals，word_frequency 提 _is_valid_token 与最短长度常量，narrative_experiment 拆输出口志函数 build_summary 两次调用改一次复用，hardships_81 三标签字典提模块级并拆交叉统计与 label 化函数，line_check self_test 拆三查并提 _query_one，对拍验收为五脚本前后输出逐字节相等 · W783 外部重构提案收编第二批，character_appearance 拆聚合三函数并提首回计算函数保急切求值语义，character_network 拆共现累积函数 combinations 等价改写，character_nlp 整文件重写提案本批不收留待机械通道，对拍验收为两脚本前后输出逐字节相等 · …更早批次详见 CHANGELOG.md<a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
+            <div class="footer-brand">取经录</div>
+            <div class="footer-meta">2026 · MIT License · 持续更新中 · W890 CI 阻塞项清偿：两处过期测试断言与上游有意变更同步、ruff 六项清零、Windows 存活探针改非终止式查询、Pillow 升级清 25 个 CVE · W889 GitHub 主页展示位复位与首屏重排、载体改名让位、首屏 30 秒上手、元数据补齐、dev 合 main 对齐 Pages · W887 en 收口 110 页合并四批一次做完 第 49 槽门禁范围扩至全 en 138 页 豁免分册增至 302 条 · W886 en 首批 28 页迁到位 C 渠 49 条规则 + seal 淡底 28 页 + KPI 顶条按行收敛 16 页 + 25 条四类豁免登记 · W883 朱砂实底常驻门禁挂第 49 槽（浏览器计算样式实测 每页非豁免超 3 即拦 增量缓存）且六段递延账一次结清 · W876 C 渠规则级换色 173 条（落 bg 1087→253 降 77%）+ chart-3 与暗色 accent 两处值切换 + inline_css 回吞迁移事故修复（328 页自 HEAD 重建） · W874 把九个递延批按号序补回 CHANGELOG 与 file-index，让级联断言重新成立、B11 可进 · W864 十页结构页按裁决迁移：KPI 顶条收敛到首卡、徽章转淡底、间距令牌化 216 处，C 渠与 chart-3 拆专项批 · W863 把十一个已收官但未立段的批次按号序补回 CHANGELOG 与 file-index，让级联的号序断言重新成立 · W851 把 W826 细化规格 §4 的 v4 令牌增量落进 tokens.css，只落零消费新名、撞名项 defer，用机器证明现役页面视觉零变化 · W850 补齐 Q2 悬空的真因，把等十批样本从口号变成可执行的按批采集机制 · W849 在交付门禁挂上性能影子槽，按批采静态成本代理攒基线，暂不判红也不设阈值 · …更早批次详见 CHANGELOG.md<a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
         </div>
         <nav aria-label="页脚导航">
             <a href="index.html">首页</a>
@@ -606,8 +666,8 @@
             <a href="dashboard.html">数据看板</a>
             <a href="en/">English</a>
         
-            <a href="en/index.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="en/index.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
     <script src="static/js/rag-chat.js"></script>
     <script>

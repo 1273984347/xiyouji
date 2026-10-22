@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第9回 袁守诚妙算无私曲 老龙王拙计犯天条</title>
 <!-- SEO:INJECTED -->
@@ -12,13 +12,16 @@
 <meta property="og:description" content="第9回 袁守诚妙算无私曲 老龙王拙计犯天条——《详解西游记》逐回解读">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://1273984347.github.io/xiyouji/reader/ch009.html">
-<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
+
+
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -103,7 +106,7 @@
     /* —— 图表五色雅集色板（W334 图表规范） —— */
     --chart-1: #C8463A;       /* 朱砂 */
     --chart-2: #3A6B8C;       /* 靛蓝 */
-    --chart-3: #C9A063;       /* 赭金 */
+    --chart-3: #B38F58;       /* 赭金 */
     --chart-4: #6B8E5A;       /* 苔绿 */
     --chart-5: #D8CFBC;       /* 米灰 */
     --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
@@ -199,7 +202,7 @@ html[data-theme="dark"] {
     --paper: #2B2419;
     --paper-warm: #33291B;
     --line: rgba(242, 235, 220, 0.14);
-    --accent: #E0604F;
+    --accent: #E46250;
     --accent-deep: #C94F3F;
     --accent-soft: #E8A99F;
     --accent-tint: rgba(224, 96, 79, 0.14);
@@ -357,6 +360,46 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
   --z-tooltip: 70;
 }
 
+/* ===== v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名） ===== */
+/* 来源：docs/11-方案报告/界面视觉重设计细化规格-v4-2026-10-20.md §4 终稿 */
+/* 口径：34 个零消费新名 / 35 处定义（暗色组 --accent-text 为同名第二处） */
+/* defer 四项随迁移批逐页 proof：--chart-1..6 与 --accent-soft 重述 · 暗色 --accent 改值 · 暗色 --chart-3/5 新增 */
+:root {
+    /* —— 间距刻度（4px 基准 + 2/10 半格） —— */
+    --space-0: 0px;   --space-1: 2px;   --space-2: 4px;   --space-3: 8px;
+    --space-4: 12px;  --space-5: 20px;  --space-6: 24px;  --space-7: 32px;
+    --space-8: 40px;  --space-9: 48px;  --space-10: 64px; --space-11: 80px;
+    --space-12: 96px;
+    /* 间距语义档（tight 紧凑 / base 常规 / loose 疏行 / block 区块 / section 章段 / hero 首屏） */
+    --gap-tight: var(--space-3);   --gap-base: var(--space-5);
+    --gap-loose: var(--space-6);   --gap-block: var(--space-7);
+    --gap-section: var(--space-10); --gap-hero: var(--space-12);
+
+    /* —— 容器三档（裁决 3） —— */
+    --container-read: 760px; --container-content: 1120px; --container-wide: 1320px;
+    /* —— 栅格 —— */
+    --grid-columns: 12; --grid-gutter: var(--space-6);
+
+    /* —— 排版角色（语义层：字重 + 族 + 字号 / 行高） —— */
+    --type-display: 600 var(--font-serif) clamp(34px, 4.4vw, 56px) / 1.15;
+    --type-title:    600 var(--font-serif) 24px / 1.30;
+    --type-subtitle: 500 var(--font-serif) 18px / 1.50;
+    --type-lead:     400 var(--font-sans) 17px / 1.75;
+    --type-body:     400 var(--font-sans) 15px / 1.80;
+    --type-label:    500 var(--font-sans) 13px / 1.50;
+    --type-caption:  400 var(--font-sans) 12px / 1.60;
+    --type-eyebrow:  500 var(--font-mono) 12px / 1.40;
+    --type-number:   500 var(--font-mono) 32px / 1.10;
+
+    /* —— 色彩角色补充（裁决 1 修法·朱砂文字落 --bg 专用档） —— */
+    --accent-text: #C7463A;          /* 朱砂文字落在 --bg 上（4.50:1） */
+}
+
+/* 暗色组补充（裁决 4：双主题平级）——--accent-text 与浅色同名、暗色取值不同 */
+html[data-theme="dark"] {
+    --accent-text: #E0604F;
+}
+
 /*
  * system.css — 详解西游记 · 全站组件设计系统
  * ----------------------------------------------
@@ -477,6 +520,14 @@ h4 { font-size: 18px; font-weight: 500; }
     font-size: 13px;
     line-height: 1.1;
     text-align: center;
+    flex-shrink: 0;
+}
+/* W856 新品牌图形标（方向 H「山·门槛」·SVG 于 static/icons/logo-mark-light.svg）
+   —— 纯加法：.seal 保留，其余页面的旧印面标识不受影响 */
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: block;
     flex-shrink: 0;
 }
 .wordmark {
@@ -1207,38 +1258,67 @@ td.num, th.num {
 }
     </style>
 <style>
-  .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
+  .reader-wrap { max-width: var(--container-read); margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
     padding: 14px 0; border-bottom: 1px solid var(--line); margin-bottom: 28px;
     font-size: 14px; }
-  .reader-topnav a { color: var(--accent); text-decoration: none; }
+  .reader-topnav a { color: var(--accent-text); text-decoration: none; }
   .reader-topnav a:hover { text-decoration: underline; }
   .reader-topnav .brand { color: var(--ink); font-weight: 700; }
   .reader-body { font-family: var(--font-serif, serif); color: var(--ink);
     line-height: 1.9; font-size: 17px; }
-  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: 12px 0 20px; }
-  .reader-body h2 { font-size: 21px; margin: 34px 0 12px; padding-left: 10px;
+  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: var(--space-4) 0 var(--space-5); }
+  .reader-body h2 { font-size: 21px; margin: 34px 0 var(--space-4); padding-left: 10px;
     border-left: 3px solid var(--accent); }
-  .reader-body h3 { font-size: 18px; margin: 24px 0 10px; }
-  .reader-body blockquote { margin: 14px 0; padding: 8px 14px; color: var(--ink-soft);
+  .reader-body h3 { font-size: 18px; margin: var(--space-6) 0 10px; }
+  .reader-body blockquote { margin: 14px 0; padding: var(--space-3) 14px; color: var(--ink-soft);
     background: var(--paper-warm, var(--paper)); border-left: 3px solid var(--ink-faint); }
-  .reader-body a { color: var(--accent); }
-  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+  .reader-body a { color: var(--accent-text); }
+  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: var(--space-7) 0; }
   .reader-meta { color: var(--ink-soft); font-size: 13px; margin: 0 0 26px; }
   .reader-pn { display: flex; justify-content: space-between; gap: 12px; margin-top: 44px;
     padding-top: 18px; border-top: 1px solid var(--line); font-size: 15px; }
-  .reader-pn a { color: var(--accent); text-decoration: none; }
+  .reader-pn a { color: var(--accent-text); text-decoration: none; }
   .reader-pn a:hover { text-decoration: underline; }
   .reader-pn .off { color: var(--ink-faint); }
-  .reader-idx { list-style: none; padding: 0; margin: 24px 0 0;
+  .reader-idx { list-style: none; padding: 0; margin: var(--space-6) 0 0;
     display: grid; grid-template-columns: 1fr; gap: 2px; }
   @media (min-width: 640px) { .reader-idx { grid-template-columns: 1fr 1fr; } }
-  .reader-idx a { display: block; padding: 9px 12px; color: var(--ink); text-decoration: none;
+  .reader-idx a { display: block; padding: 9px var(--space-4); color: var(--ink); text-decoration: none;
     border: 1px solid var(--line); border-radius: var(--radius-sm, 4px); font-size: 14px; }
-  .reader-idx a:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-idx a:hover { border-color: var(--accent); color: var(--accent-text); }
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
-  .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
+  .reader-group { margin: 34px 0 var(--space-3); font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 var(--space-5); padding: var(--space-3) 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent-text); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-text); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 var(--space-3); border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
 </style>
 </head>
 <body>
@@ -1248,6 +1328,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第009回-袁守诚妙算无私曲老龙王拙计犯天条.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch009.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第009回 袁守诚妙算无私曲 老龙王拙计犯天条</h1>
 <blockquote>
@@ -1268,9 +1361,10 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第九回 袁守诚妙算无私曲 老龙王拙计犯天条</strong></p>
 <p>回目以两个人物领起：袁守诚与老龙王。上句"妙算无私曲"是算卦先生的精准，下句"拙计犯天条"是龙王的冲动越界。<strong>这一回是全书"取经缘起"的开端——前八回讲悟空的身世与取经项目的立项，从这一回起，故事转向"为什么要取经"的现实推动力。</strong> 一个卖卦先生、一个龙王、一场赌局，引发了把唐太宗送进地府的连锁反应。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>长安城外泾河边，渔翁与樵夫闲聊"水秀山青"。渔翁透露：长安城里有位卖卦先生袁守诚（袁天罡叔父），每日指点他下网方位，因此满载而归。巡水夜叉听闻大惊，回报泾河龙王——水族子孙将被捕尽。龙王大怒，变作白衣秀士去长安探虚实，与袁守诚打赌"明日何时下雨、雨量多少"。袁守诚断言：辰时布云，巳时发雷，午时下雨，未时雨足，共水三尺三寸零四十八点。</p>
 <p>龙王本以为稳赢，不料天庭敕旨恰与此断言分毫不差。军师鲥军师献"拙计"：改时辰、扣点数。龙王照办，推迟一个时辰，克了三寸八点。下完雨后去砸袁守诚卦铺，袁守诚冷言点破他身份——"你是泾河龙王，违了玉帝敕旨，犯了天条，剐龙台上恐难免一刀"。龙王魂飞魄散，跪求救命。袁守诚指点：明日午时三刻赴人曹官魏徵处听斩，须去央告唐太宗，魏徵是唐王驾前丞相，讨个人情可保无事。龙王化风而去，求太宗救命。太宗允诺，次日召魏徵入宫对弈，拖至午时三刻，魏徵却在棋局间酣然入睡——魂魄离身，于剐龙台行刑斩龙。当夜，无头龙王提血淋淋龙头入梦索命："唐太宗！还我命来！"太宗惊醒，从此病重。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、渔樵问答：看似离题的哲学序曲</h3>
 <p>第九回开头不是袁守诚，不是龙王，而是渔翁与樵夫在泾河边的一次闲聊。两人各夸"水秀""山青"，用一整首诗辩论"水上生涯"与"山里日子"哪个更逍遥，谁也说服不了谁，最后各自散去。</p>
@@ -1350,7 +1444,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch008.html">上一回</a> · <a href="ch010.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/philosophy.html">哲学可视化</a> · <a href="../data/jurisprudence.html">法理经济可视化</a> · <a href="../data/cognitive-psychology.html">认知心理可视化</a> · <a href="../data/risk-project.html">风险与项目可视化</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/玉帝.html">玉帝</a> · <a href="people/如来.html">如来</a> · <a href="people/观音.html">观音</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD009 · 长安城外，一场赌局引发的连环地震</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1358,10 +1452,11 @@ td.num, th.num {
 <p>第九回是《西游记》里最接近希腊悲剧的一回。泾河龙王不是反派。他从头到尾都是在捍卫自己的利益——他的水族被大量捕杀，他只是想保护家人。他唯一的错是傲慢（低估了一个卖卦先生）和冲动（改了下雨的时辰和点数）。但他付出的代价是死刑。龙王被押上剐龙台的那一刻，袁守诚安然无恙，渔翁继续打鱼，长安城的老百姓甚至不知道泾河里少了一个龙王。所有因他而死的人，继续过着各自的日子。他的愤怒、恐惧、挣扎，在天庭的规则面前，连一朵水花都没有溅起来。</p>
 <p>袁守诚的身份，《西游记》始终没有直接交代。但他的叔叔是袁天罡——唐代最著名的道士、预言家、李世民的国师。袁守诚能提前知道玉帝的敕旨，暗示他和天庭有某种直接或间接的信息通道。他从头到尾都在钓鱼——不是钓水族，是钓龙王。而龙王吞下了鱼饵。渔翁每天打鱼的信息，就是袁守诚故意放出去的。一个在长安街头摆摊的算命先生，精心布置了一个局，把一个龙王送上了剐龙台，引发了唐太宗的噩梦——然后整个取经工程有了启动的按钮。袁守诚到底是为谁工作的？是袁天罡的自发行为，还是观音更高层面布局的一部分？书中没有写。但这个“空白”，也许恰恰是吴承恩最精妙的一笔——不是所有细节都需要被填满。一个神秘角色的“来路不明”，本身就是他力量的来源。</p>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>诗曰：都城大国实堪观，八水周流绕四山。多少帝王兴此处，古来天下说长安。此单表陕西大国长安城，乃历代帝
 王建
-都之地。自周、秦、汉以来，三州 花似锦，八水绕城流。三十六条花柳巷，七十二座管弦楼。华夷图上看，天下最为头，真是奇胜之方。今却是大唐太宗文皇帝登基，改元龙集贞观。此时已登极十三 年，岁在己巳。且不说他驾前有安邦定国的英豪。与那创业争疆的杰士。</p>
+都之地。自周、秦、汉以来，三州 花似锦，八水绕城流。三十六条花柳巷，七十二座管弦楼。华夷图上看，天下最为头，真是奇胜之方。今却是大唐太宗文皇帝登基，改元龙集贞观。此时已登基十三 年，岁在己巳。且不说他驾前有安邦定国的英豪。与那创业争疆的杰士。</p>
 <p>却说长安城外泾河岸边，有两个贤人：一个是渔翁，名唤张稍；一个是樵子，名唤李定。他两个是不登科的进士，能识字的山人。一日，在长安城里，卖了肩上柴，货了篮中鲤，同入酒馆之中，吃了半酣，各携一瓶，顺泾河岸边，徐步而回。张稍道：</p>
 <p>“李兄，我想那争名的，因名丧体；夺利的，为利亡身；受爵的，抱虎而眠；承恩的，袖蛇而去。算起来，还不如我们水秀山青，逍遥自在，甘淡薄，随缘而过。”李定道：“张兄说得有理。但只是你那水秀，不如我的山青。”张稍道：“你山青不如我的水秀。</p>
 <p>有一《蝶恋花》词为证，词曰：烟波万里扁舟小，静依孤篷，西施声音绕。涤虑洗心名利少，闲攀蓼穗蒹葭草。数点沙鸥堪乐道，柳岸芦湾，妻子同欢笑。一觉安眠风浪俏，无荣无辱无烦恼。”</p>
@@ -1375,7 +1470,7 @@ td.num, th.num {
 <p>“这都是我两个生意，赡身的勾当，你却没有我闲时节的好处，有诗为证，诗曰：闲看天边白鹤飞，停舟溪畔掩苍扉。倚篷教子搓钓线，罢棹同妻晒网围。性定果然知浪静，身安自是觉风微。</p>
 <p>绿蓑青笠随时着，胜挂朝中紫绶衣。”樵夫道：“你那闲时又不如我的闲时好也，亦有诗为证，诗曰：闲观缥缈白云飞，独坐茅庵掩竹扉。无事训儿开卷读，有时对客把棋围。喜来策杖歌芳径，兴到携琴上翠微。草履麻绦粗布被，心宽强似着罗衣。”</p>
 <p>张稍道：“李定，我两个真是微吟可相狎，不须檀板共金樽。但散道词章，不为稀罕，且各联几句，看我们渔樵攀话何如？”李定道：“张兄言之最妙，请兄先 吟。”“舟停绿水烟波内，家住深山旷野中。偏爱溪桥春水涨，最怜岩岫晓云蒙。龙门鲜鲤时烹煮，虫蛀干柴日燎烘。钓网多般堪赡老，担绳二事可容终。小舟仰卧 观飞雁，草径斜敧听唳鸿。口舌场中无我分，是非海内少吾踪。溪边挂晒缯如锦，石上重磨斧似锋。秋月晖晖常独钓，春山寂寂没人逢。鱼多换酒同妻饮，柴剩沽壶 共子丛。</p>
-<p>自唱自斟随放荡，长歌长叹任颠风。呼兄唤弟邀船伙，挈友携朋聚野翁。行令猜拳频递盏，拆牌道字漫传钟。烹虾煮蟹朝朝乐，炒鸭爊 鸡日日丰。愚妇煎茶情散诞，山妻造饭意从容。晓来举杖淘轻浪，日出担柴过大冲。雨后披蓑擒活鲤，风前弄斧伐枯松。潜踪避世妆痴蠢，隐姓埋名作哑聋。”张稍 道：“李兄，我才僭先起句，今到我兄，也先起一联，小弟亦当续之。”“风月佯狂山野汉，江湖寄傲老余丁。清闲有分随潇洒，口舌无闻喜太平。月夜身眠茅屋 稳，天昏体盖箬蓑轻。忘情结识松梅友，乐意相交鸥鹭盟。名利心头无算计，干戈耳畔不闻声。随时一酌香醪酒，度日三餐野菜羹。两束柴薪为活计，一竿钓线是营 生。闲呼稚子磨钢斧，静唤憨儿补旧缯。春到爱观杨柳绿，时融喜看荻芦青。夏天避暑修新竹，六月乘凉摘嫩菱。霜降鸡肥常日宰，重阳蟹壮及时烹。冬来日上还沉 睡，数九天高自不蒸。</p>
+<p>自唱自斟随放荡，长歌长叹任颠风。呼兄唤弟邀船伙，挈友携朋聚野翁。行令猜拳频递盏，拆牌道字漫传钟。烹虾煮蟹朝朝乐，炒鸭爊 鸡日日丰。愚妇煎茶情散诞，山妻造饭意从容。晓来举杖淘轻浪，日出担柴过大冲。雨后披蓑擒活鲤，风前弄斧伐枯松。潜踪避世妆痴蠢，隐姓埋名作哑聋。”张稍 道：“李兄，我才僭先起句，今到我兄，也先起一联，小弟亦当续之：风月佯狂山野汉，江湖寄傲老余丁。清闲有分随潇洒，口舌无闻喜太平。月夜身眠茅屋 稳，天昏体盖箬蓑轻。忘情结识松梅友，乐意相交鸥鹭盟。名利心头无算计，干戈耳畔不闻声。随时一酌香醪酒，度日三餐野菜羹。两束柴薪为活计，一竿钓线是营 生。闲呼稚子磨钢斧，静唤憨儿补旧缯。春到爱观杨柳绿，时融喜看荻芦青。夏天避暑修新竹，六月乘凉摘嫩菱。霜降鸡肥常日宰，重阳蟹壮及时烹。冬来日上还沉 睡，数九天高自不蒸。</p>
 <p>八节山中随放性，四时湖里任陶情。采薪自有仙家兴，垂钓全无世俗形。门外野花香艳艳，船头绿水浪平平。身安不说三 公位，性定强如十里城。十里城高防阃令，三公位显听宣声。乐山乐水真是罕，谢天谢地谢神明。”他二人既各道词章，又相联诗句，行到那分路去处，躬身作别。 张稍道：“李兄呵，途中保重！上山仔细看虎。假若有些凶险，正是明日街头少故人！”李定闻言，大怒道：“你这厮惫懒！好朋友也替得生死，你怎么咒我？我若 遇虎遭害，你必遇浪翻江！”张稍道：“我永世也不得翻江。”李定道：“天有不测风云，人有暂时祸福。你怎么就保得无事？”张稍道：“李兄，你虽这等说，你 还没捉摸；不若我的生意有捉摸，定不遭此等事。”李定道：“你那水面上营生，极凶极险，隐隐暗暗，有甚么捉摸？”张稍道：“你是不晓得。这长安城里，西门 街上，有一个卖卦的先生。我每日送他一尾金色鲤，他就与我袖传一课，依方位，百下百着。今日我又去买卦，他教我在泾河湾头东边下网，西岸抛钓，定获满载鱼 虾而归。明日上城来，卖
 钱
 沽酒，再与老兄相叙。”二人从此叙别。</p>
@@ -1390,10 +1485,10 @@ td.num, th.num {
 王维
 画，座上高悬鬼谷形。</p>
 <p>端溪砚，金烟墨，相衬着霜毫大 笔；火珠林，郭璞数，谨对了台政新经。六爻熟谙，八卦精通。能知天地理，善晓鬼神情。一槃子午安排定，满腹星辰布列清。真个那未来事，过去事，观如月镜； 几家兴，几家败，鉴若神明。知凶定吉，断死言生。开谈风雨迅，下笔鬼神惊。招牌有字书名姓，神课先生袁守诚。此人是谁？原来是当朝钦天监台正先生袁天罡的 叔父，袁守诚是也。那先生果然相貌稀奇，仪容秀丽，名扬大国，术冠长安。龙王入门来，与先生相见。礼毕，请龙上坐，童子献茶。先生问曰：</p>
-<p>“公来问何事？”龙王曰：“请卜天上阴晴事如何。”先生即袖传一课，断曰：“云迷山顶，雾罩林梢。若占雨泽，准在明朝。”龙王曰：“明日甚时下雨？雨有 多少尺寸？”先生道：“明日辰时布云，已时发雷，午时下雨，未时雨足，共得水三尺三寸零四十八点”。龙王笑曰：“此言不可作戏。如是明日有雨，依你断的时 辰数目，我送课金五十两奉谢。若无雨，或不按时辰数目，我与你实说，定要打坏你的门面，扯碎你的招牌，即时赶出长安，不许在此惑众！”先生欣然而答：“这 个一定任你。请了，请了，明朝雨后来会。”</p>
+<p>“公来问何事？”龙王曰：“请卜天上阴晴事如何。”先生即袖传一课，断曰：“云迷山顶，雾罩林梢。若占雨泽，准在明朝。”龙王曰：“明日甚时下雨？雨有 多少尺寸？”先生道：“明日辰时布云，巳时发雷，午时下雨，未时雨足，共得水三尺三寸零四十八点”。龙王笑曰：“此言不可作戏。如是明日有雨，依你断的时 辰数目，我送课金五十两奉谢。若无雨，或不按时辰数目，我与你实说，定要打坏你的门面，扯碎你的招牌，即时赶出长安，不许在此惑众！”先生欣然而答：“这 个一定任你。请了，请了，明朝雨后来会。”</p>
 <p>龙王辞别，出长安，回水府。大小
 水神
-接着，问曰：“大王访那卖卦的如何？”龙王道：“有， 有，有！”但是一个掉嘴口讨春的先生。我问他几时下雨，他就说明日下雨；问他甚么时辰，甚么雨数，他就说辰时布云，已时发雷，午时下雨，未时雨足，得水三 尺三寸零四十八点，我与他打了个赌赛；若果如他言，送他谢金五十两；如略差些，就打破他门面，赶他起身，不许在长安惑众。”众水族笑曰：“大王是八河都总 管，司雨大龙神，有雨无雨，惟大王知之，他怎敢这等胡言？那卖卦的定是输了！定是输了！”</p>
+接着，问曰：“大王访那卖卦的如何？”龙王道：“有， 有，有！”但是一个掉嘴口讨春的先生。我问他几时下雨，他就说明日下雨；问他甚么时辰，甚么雨数，他就说辰时布云，巳时发雷，午时下雨，未时雨足，得水三 尺三寸零四十八点，我与他打了个赌赛；若果如他言，送他谢金五十两；如略差些，就打破他门面，赶他起身，不许在长安惑众。”众水族笑曰：“大王是八河都总 管，司雨大龙神，有雨无雨，惟大王知之，他怎敢这等胡言？那卖卦的定是输了！定是输了！”</p>
 <p>此时龙子龙孙与那鱼鲫蟹士正欢笑谈此事未毕，只听得半空中叫：“泾河龙王接旨。”众抬头上看，是一个金衣力士，手擎玉帝敕旨，径投水府而来。慌得龙王整衣端肃，焚香接了旨。</p>
 <p>金衣力士回空而去。龙王谢恩，拆封看时，上写着：“敕命八河总，驱雷掣电行；明朝施雨泽，普济长安城。”旨意上时辰数目，与那先生判断者毫发不差，唬得 那龙王魂飞魄散。少顷苏醒，对众水族曰：“尘世上有此灵人！真个是能通天彻地，却不输与他呵！”鲥军师奏云：“大王放心。要赢他有何难处？臣有小计，管教 灭那厮的口嘴。”龙
 王问
@@ -1517,8 +1612,13 @@ td.num, th.num {
 痒
 菱
 蹄
-莹</p>
+莹</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC9%E5%9B%9E%20%E8%A2%81%E5%AE%88%E8%AF%9A%E5%A6%99%E7%AE%97%E6%97%A0%E7%A7%81%E6%9B%B2%20%E8%80%81%E9%BE%99%E7%8E%8B%E6%8B%99%E8%AE%A1%E7%8A%AF%E5%A4%A9%E6%9D%A1&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch009.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC9%E5%9B%9E%20%E8%A2%81%E5%AE%88%E8%AF%9A%E5%A6%99%E7%AE%97%E6%97%A0%E7%A7%81%E6%9B%B2%20%E8%80%81%E9%BE%99%E7%8E%8B%E6%8B%99%E8%AE%A1%E7%8A%AF%E5%A4%A9%E6%9D%A1&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch009.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch008.html">← 上一篇</a><a href="ch010.html">下一篇 →</a></nav>
 </main>
 </body>

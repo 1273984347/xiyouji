@@ -1,0 +1,229 @@
+{
+  "generated_for": "W826 界面视觉重设计细化规格",
+  "rule": "WCAG 2.1 相对亮度；目标线 AA+ 7:1（正文）· 红线 AA 4.5:1 · 元信息/图形边界 ≥3:1",
+  "light": [
+    {
+      "label": "正文 ink-1",
+      "fg": "#23201A",
+      "bg": "#FFFFFF",
+      "ratio": 16.24,
+      "target": 7.0,
+      "rule": "AA+ 目标线",
+      "pass": true
+    },
+    {
+      "label": "说明 ink-2",
+      "fg": "#6B6455",
+      "bg": "#FFFFFF",
+      "ratio": 5.87,
+      "target": 4.5,
+      "rule": "AA 红线",
+      "pass": true
+    },
+    {
+      "label": "元信息 ink-3（现役 #9A9280）",
+      "fg": "#9A9280",
+      "bg": "#FFFFFF",
+      "ratio": 3.09,
+      "target": 3.0,
+      "rule": "≥3:1（信息性文本下限）",
+      "pass": true
+    },
+    {
+      "label": "元信息 ink-3（v4 候选 #8A8271）",
+      "fg": "#8A8271",
+      "bg": "#FFFFFF",
+      "ratio": 3.81,
+      "target": 3.0,
+      "rule": "≥3:1",
+      "pass": true
+    },
+    {
+      "label": "朱砂 accent（正文尺寸）",
+      "fg": "#C8463A",
+      "bg": "#FFFFFF",
+      "ratio": 4.78,
+      "target": 4.5,
+      "rule": "AA 红线",
+      "pass": true
+    },
+    {
+      "label": "朱砂 accent（小字 ≤12px）",
+      "fg": "#C8463A",
+      "bg": "#FFFFFF",
+      "ratio": 4.78,
+      "target": 4.5,
+      "rule": "AA 红线·不达标则禁小字",
+      "pass": true
+    },
+    {
+      "label": "朱砂 accent on bg",
+      "fg": "#C8463A",
+      "bg": "#FAF7F0",
+      "ratio": 4.47,
+      "target": 4.5,
+      "rule": "AA 红线",
+      "pass": false
+    },
+    {
+      "label": "accent-deep on paper",
+      "fg": "#AF3F34",
+      "bg": "#FFFFFF",
+      "ratio": 5.86,
+      "target": 4.5,
+      "rule": "AA 红线",
+      "pass": true
+    },
+    {
+      "label": "accent-soft（仅装饰/描边）",
+      "fg": "#E9B885",
+      "bg": "#FFFFFF",
+      "ratio": 1.8,
+      "target": 3.0,
+      "rule": "≥3:1（非文本）",
+      "pass": false
+    },
+    {
+      "label": "数据色 chart-1 on paper",
+      "fg": "#C8463A",
+      "bg": "#FFFFFF",
+      "ratio": 4.78,
+      "target": 3.0,
+      "rule": "≥3:1（图形边界）",
+      "pass": true
+    },
+    {
+      "label": "数据色 chart-2 on paper",
+      "fg": "#3A6B8C",
+      "bg": "#FFFFFF",
+      "ratio": 5.74,
+      "target": 3.0,
+      "rule": "≥3:1",
+      "pass": true
+    },
+    {
+      "label": "数据色 chart-3 on paper",
+      "fg": "#C9A063",
+      "bg": "#FFFFFF",
+      "ratio": 2.42,
+      "target": 3.0,
+      "rule": "≥3:1",
+      "pass": false
+    },
+    {
+      "label": "数据色 chart-4 on paper",
+      "fg": "#6B8E5A",
+      "bg": "#FFFFFF",
+      "ratio": 3.72,
+      "target": 3.0,
+      "rule": "≥3:1",
+      "pass": true
+    },
+    {
+      "label": "数据色 chart-6 on paper",
+      "fg": "#8A6D3B",
+      "bg": "#FFFFFF",
+      "ratio": 4.85,
+      "target": 3.0,
+      "rule": "≥3:1",
+      "pass": true
+    },
+    {
+      "label": "数据色 chart-5（米灰）on paper",
+      "fg": "#D8CFBC",
+      "bg": "#FFFFFF",
+      "ratio": 1.55,
+      "target": 3.0,
+      "rule": "≥3:1（预期不达标→仅作底色）",
+      "pass": false
+    }
+  ],
+  "dark": [
+    {
+      "label": "暗色 正文 ink-1",
+      "fg": "#F2EBDC",
+      "bg": "#2B2419",
+      "ratio": 12.92,
+      "target": 7.0,
+      "rule": "AA+ 目标线",
+      "pass": true
+    },
+    {
+      "label": "暗色 说明 ink-2",
+      "fg": "#CBBFA9",
+      "bg": "#2B2419",
+      "ratio": 8.45,
+      "target": 4.5,
+      "rule": "AA 红线",
+      "pass": true
+    },
+    {
+      "label": "暗色 元信息 ink-3",
+      "fg": "#9C9280",
+      "bg": "#2B2419",
+      "ratio": 4.99,
+      "target": 3.0,
+      "rule": "≥3:1",
+      "pass": true
+    },
+    {
+      "label": "暗色 朱砂 accent",
+      "fg": "#E0604F",
+      "bg": "#2B2419",
+      "ratio": 4.35,
+      "target": 4.5,
+      "rule": "AA 红线",
+      "pass": false
+    },
+    {
+      "label": "暗色 chart-1",
+      "fg": "#E0604F",
+      "bg": "#2B2419",
+      "ratio": 4.35,
+      "target": 3.0,
+      "rule": "≥3:1",
+      "pass": true
+    },
+    {
+      "label": "暗色 chart-2",
+      "fg": "#7FA8C9",
+      "bg": "#2B2419",
+      "ratio": 6.1,
+      "target": 3.0,
+      "rule": "≥3:1",
+      "pass": true
+    },
+    {
+      "label": "暗色 chart-3",
+      "fg": "#C9A96B",
+      "bg": "#2B2419",
+      "ratio": 6.84,
+      "target": 3.0,
+      "rule": "≥3:1",
+      "pass": true
+    },
+    {
+      "label": "暗色 chart-4",
+      "fg": "#9DB98A",
+      "bg": "#2B2419",
+      "ratio": 7.11,
+      "target": 3.0,
+      "rule": "≥3:1",
+      "pass": true
+    }
+  ],
+  "ink3_fix": {
+    "ink3_3to1": "#8A8271",
+    "ink3_45to1": "#7D7668",
+    "ink3_on_surface0_3to1": "#8A8271",
+    "accent_text_on_bg_45to1": "#C7463A",
+    "chart3_on_paper_3to1": "#B38F58",
+    "dark_accent_on_surface1_45to1": "#E46250",
+    "ink3_3to1_ratio": 3.81,
+    "ink3_45to1_ratio": 4.5,
+    "ink3_on_surface0_3to1_ratio": 3.81,
+    "accent_text_on_bg_45to1_ratio": 4.5,
+    "chart3_on_paper_3to1_ratio": 3.01,
+    "dark_accent_on_surface1_45to1_ratio": 4.5
+  }
+}

@@ -35,12 +35,14 @@ Usage:
 Exit code: 0 全部通过 / 1 存在 broken 链接
 """
 import argparse
+import http.client
+import ipaddress
 import os
 import re
+import socket
 import subprocess
 import sys
 import urllib.parse
-import urllib.request
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -186,14 +188,33 @@ def strip_query_fragment(url):
     return path_part, query + fragment
 
 
+def split_local_url(raw_url):
+    """站内链接的统一解析口径：剥离 query/fragment 后百分号解码路径部分。
+
+    返回 (path_part, decoded, rest)：
+      - path_part —— 剥离后的原始路径片段（未解码），用于与重写结果比对
+      - decoded   —— unquote 后的路径片段；空串表示纯 query/fragment 链接
+      - rest      —— 被剥离的 "?query#fragment" 尾部，供重写时原样拼回
+
+    抽为助手的原因（W803）：check_internal 与 try_fix 此前各自内联同一套
+    「strip_query_fragment → unquote」两步；两处口径必须逐字一致，否则
+    「校验判定为存在」与「自动修复重写」会分叉。注意**基准目录不在此处**——
+    check_internal 以 base_file.parent 为基准，try_fix 以 scan_root 为基准，
+    该语义差异由各自调用点保留。
+    """
+    path_part, rest = strip_query_fragment(raw_url.strip())
+    if not path_part:
+        return "", "", rest
+    return path_part, urllib.parse.unquote(path_part), rest
+
+
 def check_internal(base_file, raw_url):
     """校验站内链接。返回 (ok, resolved_path, display)。"""
     url = raw_url.strip()
-    path_part, _rest = strip_query_fragment(url)
+    path_part, decoded, _rest = split_local_url(url)
     if not path_part:
         # 纯锚点 → 指向当前文件，视 base 文件存在即 OK
         return (base_file.exists(), base_file, url)
-    decoded = urllib.parse.unquote(path_part)
     target = (base_file.parent / decoded)
     try:
         target = target.resolve(strict=False)
@@ -204,37 +225,42 @@ def check_internal(base_file, raw_url):
 
 
 def check_external(url, timeout=6):
-    """外链 HTTP 探测：先 HEAD，失败则回退 GET。返回 (ok, info)。"""
+    """外链 HTTP 探测：先 HEAD，失败则回退 GET。返回 (ok, info)。
+
+    安全边界（W424 立·W536 加固，三段式顺序不可调换）：
+      ① 协议白名单 —— 非 http(s) 直接视为通过（不属外链探测面，且挡掉 file:/gopher: 等）
+      ② 私网/保留地址阻断 —— DNS 解析后逐个地址判定，命中即 raise ValueError
+      ③ http.client 直连 —— 仅经 ①② 之后才可达；不用 urllib.request（其会自行
+         跟随重定向并可触达 file: 等 scheme，W536 因此改为 http.client 直连）
+    上述四个标准库模块（urllib.parse / ipaddress / socket / http.client）原为函数内
+    内联 import；W803 提升为模块级（纯标准库·无第三方依赖），语义与就近可见性不变。
+    """
     # W424：非 http(s) 协议（javascript:/mailto:/file: 等）不属外链，直接视为通过
     if not url.lower().startswith(("http://", "https://")):
         return (True, "非 http(s)，跳过")
     # W424：URL 含非 ASCII（中文路径）时先百分号编码，避免 urllib ascii 编码错误误报 broken
-    import urllib.parse as _up
-    url = _up.quote(url, safe=":/?#[]@!$&'()*+,;=%-._~")
-    _u = _up.urlparse(url)
+    url = urllib.parse.quote(url, safe=":/?#[]@!$&'()*+,;=%-._~")
+    _u = urllib.parse.urlparse(url)
     if _u.scheme not in ("http", "https"):
         return (False, "non-http scheme")
-    import ipaddress as _ipa
-    import socket as _socket
     try:
-        _infos = _socket.getaddrinfo(_u.hostname, None)
+        _infos = socket.getaddrinfo(_u.hostname, None)
     except Exception as _e:
         return (False, "dns fail %s" % str(_e)[:60])
     for _info in _infos:
-        _ip = _ipa.ip_address(_info[4][0])
+        _ip = ipaddress.ip_address(_info[4][0])
         if _ip.is_private or _ip.is_loopback or _ip.is_link_local or _ip.is_reserved or _ip.is_multicast or _ip.is_unspecified:
             raise ValueError("blocked private/reserved address: %s" % _ip)
     headers = {"User-Agent": "lint_links/1.0 (+stdlib)"}
     # W536 安全加固：http.client 直连（经上方协议白名单 + 私网 IP 阻断后才可达此处）
-    import http.client as _hc
-    _pq = _up.urlparse(url)
+    _pq = urllib.parse.urlparse(url)
     for method in ("HEAD", "GET"):
         _conn = None
         try:
             if _pq.scheme == "https":
-                _conn = _hc.HTTPSConnection(_pq.hostname, timeout=timeout)
+                _conn = http.client.HTTPSConnection(_pq.hostname, timeout=timeout)
             else:
-                _conn = _hc.HTTPConnection(_pq.hostname, timeout=timeout)
+                _conn = http.client.HTTPConnection(_pq.hostname, timeout=timeout)
             _path = _pq.path or "/"
             if _pq.query:
                 _path += "?" + _pq.query
@@ -266,12 +292,14 @@ def try_fix(base_file, raw_url, scan_root):
     """对 broken 站内链接尝试按 basename 唯一匹配重写相对路径。
 
     返回新 url 字符串；无法修复返回 None。
+
+    解析口径与 check_internal 共用 split_local_url（两者必须逐字一致，否则
+    「判定存在」与「自动修复」会分叉）；差异仅在**基准目录**：本函数按 basename
+    在 scan_root 全树查找唯一匹配，再相对 base_file.parent 生成新相对路径。
     """
-    url = raw_url.strip()
-    path_part, rest = strip_query_fragment(url)
+    path_part, decoded, rest = split_local_url(raw_url)
     if not path_part:
         return None
-    decoded = urllib.parse.unquote(path_part)
     basename = Path(decoded).name
     if not basename:
         return None
@@ -355,33 +383,35 @@ def _collect_scan_files(scan_dir, exclude):
     return files
 
 
-def _process_file(f, do_internal, do_external, do_fix):
-    """处理单文件的全部链接检查与（可选）修复，返回 (checked, broken, fixed)。
+def _extract_links(f, text):
+    """从单文件正文中提取待校验链接，返回 (line_no, raw_url) 列表。
 
-    W730 提取自 main：打印序与旧内联版逐字节一致（OK/BROKEN/FIXED/ERROR 行）；
-    读取失败早退返回全零（等价原 continue）。
+    HTML/HTM 走 HtmlLinkExtractor（href/src 属性），其余（Markdown）走
+    strip_md_code + extract_markdown_links。两条分支的**行号语义不同**且都是
+    对外可观察的（打印行含 :line）：HTML 用标签起始行，Markdown 用链接所在行。
+    HTML 解析异常时静默降级为空链接表（HTMLParser 对畸形标记会抛异常，旧版即
+    此行为：尽力提取已解析部分——ext.links 中 feed 失败前已记录的部分仍保留）。
     """
-    checked = broken = fixed = 0
-    try:
-        text = f.read_text(encoding="utf-8")
-    except Exception as e:
-        print(f"[ERROR] {display_path(f)} 读取失败: {e}", file=sys.stderr)
-        return checked, broken, fixed
-
-    # 收集链接 (line, url)
-    links = []
     if f.suffix.lower() in (".html", ".htm"):
         ext = HtmlLinkExtractor()
         try:
             ext.feed(text)
         except Exception:
             pass
-        links = [(ln, url) for (ln, _, url) in ext.links]
-    else:
-        links = extract_markdown_links(strip_md_code(text))
+        return [(ln, url) for (ln, _, url) in ext.links]
+    return extract_markdown_links(strip_md_code(text))
 
-    pending_fixes = []  # (old_url, new_url)
 
+def _check_links(f, links, do_internal, do_external, do_fix):
+    """逐链接判定并按需收集修复项，返回 (checked, broken, fixed, pending_fixes)。
+
+    打印序即契约：每个链接恰好输出一行 [OK] / [BROKEN] / [FIXED]（跳过项不打印），
+    行内空格对齐与箭头格式不得改动。pending_fixes 为 (old_url, new_url) 列表，
+    由调用方在**本文件全部链接判定完成后**统一写回（旧版即此序，避免边判边改）。
+    do_fix 命中修复时 continue 掉本链接的 broken 计数——修复成功不再计入 broken。
+    """
+    checked = broken = fixed = 0
+    pending_fixes = []
     for line, raw in links:
         url = raw.strip()
         if is_skip(url):
@@ -413,16 +443,45 @@ def _process_file(f, do_internal, do_external, do_fix):
                         continue
                 broken += 1
                 print(f"[BROKEN] {display_path(f)}:{line}  {url}  ->  {disp}")
+    return checked, broken, fixed, pending_fixes
+
+
+def _apply_fixes(f, pending_fixes):
+    """把收集到的修复项写回文件。
+
+    写回前**重读**文件（而非复用解析时的正文）：旧版即此序，且 str.replace 全量
+    替换——同一 old_url 出现多次会全部改写。失败仅打 [ERROR] 到 stderr，不阻断
+    统计（返回的三计数不含写回结果）。
+    """
+    try:
+        content = f.read_text(encoding="utf-8")
+        for old, new in pending_fixes:
+            content = content.replace(old, new)
+        f.write_text(content, encoding="utf-8")
+    except Exception as e:
+        print(f"[ERROR] 写回修复失败 {display_path(f)}: {e}", file=sys.stderr)
+
+
+def _process_file(f, do_internal, do_external, do_fix):
+    """处理单文件的全部链接检查与（可选）修复，返回 (checked, broken, fixed)。
+
+    W730 提取自 main：打印序与旧内联版逐字节一致（OK/BROKEN/FIXED/ERROR 行）；
+    读取失败早退返回全零（等价原 continue）。W803 再拆两段职责：链接提取
+    （_extract_links）与逐链接判定 + 修复收集（_check_links），本函数只做编排。
+    """
+    try:
+        text = f.read_text(encoding="utf-8")
+    except Exception as e:
+        print(f"[ERROR] {display_path(f)} 读取失败: {e}", file=sys.stderr)
+        return 0, 0, 0
+
+    links = _extract_links(f, text)
+    checked, broken, fixed, pending_fixes = _check_links(
+        f, links, do_internal, do_external, do_fix)
 
     # 应用本文件的修复
     if pending_fixes:
-        try:
-            content = f.read_text(encoding="utf-8")
-            for old, new in pending_fixes:
-                content = content.replace(old, new)
-            f.write_text(content, encoding="utf-8")
-        except Exception as e:
-            print(f"[ERROR] 写回修复失败 {display_path(f)}: {e}", file=sys.stderr)
+        _apply_fixes(f, pending_fixes)
     return checked, broken, fixed
 
 

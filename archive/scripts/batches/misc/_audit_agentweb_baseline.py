@@ -104,12 +104,15 @@ print(f'B13_a11y reduced_motion={allsrc.count("prefers-reduced-motion")} '
       f'fixed_sidebar={int("w-[260px]" in tsx_all or "w-[260px]" in allsrc)}')
 
 # B14 SDK 进程依赖线索（CLI 名）
-sdk_dist = glob.glob(os.path.join(AW, 'node_modules', '@tencent-ai', 'agent-sdk', '**', '*.js'), recursive=True)
-cli_hits = set()
-for f in sdk_dist[:80]:
-    for m in re.findall(r'[\'"](codebuddycli|codebud(?:dy)?|comate|claude)[\'"]', rd(f), re.I):
-        cli_hits.add(m.lower())
-print(f'B15_sdk_cli_hints={sorted(cli_hits)} sdk_dist_files={len(sdk_dist)}')
+# W836：本段整体移除——两重理由：① 扫描目标（某厂商 agent SDK 的 node_modules）已在
+# W812/W814 去品牌批中随该依赖退役而消失，本段自此恒为空（扫描能力空转）；② 本段的模式串
+# 本身即被禁品牌字面量（用户 2026-10-20 确认三者在禁令范围·不在允许品牌之列），
+# 留档即违反「全仓明文 0 命中」。
+# 该检测能力已在**活面**承接：scripts/check_no_brand_refs.py（品牌字面量零命中守卫·
+# 字面量以 base64 存储·扫描面为 git 已跟踪文件含 archive/·--self-test 合成样本自检·
+# CI 挂载于 .github/workflows/security.yml）。
+# 本文件其余部分为归档快照（其 ROOT 上溯层级与归档后目录深度不匹配·运行时即崩·
+# 按文档规范 §11.2 不回溯修复·需要的检测能力一律走活面）。
 
 # B16 公网化件现状
 print(f'B16_serve express_static={sv.count("express.static")} host_env={sv.count("AGENT_WEB_HOST")} '

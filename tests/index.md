@@ -12,7 +12,7 @@
 - `e2e/`
 - `unit/`
 
-## 文件（12）
+## 文件（13）
 
 ### Python 脚本
 
@@ -28,6 +28,7 @@
 - `test_text_loader.py`
 - `test_verify_delivery_version.py`
 - `test_xiyouji_mcp.py`
+- `test_xiyouji_mcp_extra.py`
 
 ---
 

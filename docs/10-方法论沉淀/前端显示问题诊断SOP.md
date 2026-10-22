@@ -45,7 +45,7 @@ document.querySelector('style').sheet.cssRules.length  // 若 ≤1 即内联 CSS
    python scripts/generate_csp.py --check # CSP 哈希漂移（C 类）
    ```
 4. **运行时复现**（有浏览器时）：`node scripts/_diag_style_assert.js` 全量断言样式生效 + pageerror；`_smoke_batch.js` 单页冒烟（三者均为手动取证脚本，非 CI 门禁，见第四节）。
-5. **定位到文件/行**：语法错误用 `node -e` 的 vm.Script 编译拿行号；CSS 断点用 `python scripts/_find_css_breaks.py <file>`。
+5. **定位到文件/行**：语法错误用 `node -e` 的 vm.Script 编译拿行号；CSS 断点用 `python scripts/check_structure.py <file>`（第 11 槽常驻门禁的同款定位器，可传单文件定位）。
 6. **修复 + 复验**：修复后重跑对应门禁 + 浏览器复测渲染，留痕截图。
 
 ---

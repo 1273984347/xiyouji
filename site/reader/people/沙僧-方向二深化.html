@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>沙僧：从不惹事的人</title>
 <!-- SEO:INJECTED -->
@@ -12,46 +12,78 @@
 <meta property="og:description" content="沙僧：从不惹事的人——《详解西游记》人物深度">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://1273984347.github.io/xiyouji/reader/people/沙僧-方向二深化.html">
-<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+
+
+<script src="../../js/theme-init.js"></script>
+<script src="../../js/reader-enhance.js" defer></script>
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
-<script src="../../js/theme-init.js"></script>
 <style>
-  .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
+  .reader-wrap { max-width: var(--container-read); margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
     padding: 14px 0; border-bottom: 1px solid var(--line); margin-bottom: 28px;
     font-size: 14px; }
-  .reader-topnav a { color: var(--accent); text-decoration: none; }
+  .reader-topnav a { color: var(--accent-text); text-decoration: none; }
   .reader-topnav a:hover { text-decoration: underline; }
   .reader-topnav .brand { color: var(--ink); font-weight: 700; }
   .reader-body { font-family: var(--font-serif, serif); color: var(--ink);
     line-height: 1.9; font-size: 17px; }
-  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: 12px 0 20px; }
-  .reader-body h2 { font-size: 21px; margin: 34px 0 12px; padding-left: 10px;
+  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: var(--space-4) 0 var(--space-5); }
+  .reader-body h2 { font-size: 21px; margin: 34px 0 var(--space-4); padding-left: 10px;
     border-left: 3px solid var(--accent); }
-  .reader-body h3 { font-size: 18px; margin: 24px 0 10px; }
-  .reader-body blockquote { margin: 14px 0; padding: 8px 14px; color: var(--ink-soft);
+  .reader-body h3 { font-size: 18px; margin: var(--space-6) 0 10px; }
+  .reader-body blockquote { margin: 14px 0; padding: var(--space-3) 14px; color: var(--ink-soft);
     background: var(--paper-warm, var(--paper)); border-left: 3px solid var(--ink-faint); }
-  .reader-body a { color: var(--accent); }
-  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+  .reader-body a { color: var(--accent-text); }
+  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: var(--space-7) 0; }
   .reader-meta { color: var(--ink-soft); font-size: 13px; margin: 0 0 26px; }
   .reader-pn { display: flex; justify-content: space-between; gap: 12px; margin-top: 44px;
     padding-top: 18px; border-top: 1px solid var(--line); font-size: 15px; }
-  .reader-pn a { color: var(--accent); text-decoration: none; }
+  .reader-pn a { color: var(--accent-text); text-decoration: none; }
   .reader-pn a:hover { text-decoration: underline; }
   .reader-pn .off { color: var(--ink-faint); }
-  .reader-idx { list-style: none; padding: 0; margin: 24px 0 0;
+  .reader-idx { list-style: none; padding: 0; margin: var(--space-6) 0 0;
     display: grid; grid-template-columns: 1fr; gap: 2px; }
   @media (min-width: 640px) { .reader-idx { grid-template-columns: 1fr 1fr; } }
-  .reader-idx a { display: block; padding: 9px 12px; color: var(--ink); text-decoration: none;
+  .reader-idx a { display: block; padding: 9px var(--space-4); color: var(--ink); text-decoration: none;
     border: 1px solid var(--line); border-radius: var(--radius-sm, 4px); font-size: 14px; }
-  .reader-idx a:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-idx a:hover { border-color: var(--accent); color: var(--accent-text); }
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
-  .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
+  .reader-group { margin: 34px 0 var(--space-3); font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 var(--space-5); padding: var(--space-3) 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent-text); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-text); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 var(--space-3); border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
 </style>
 </head>
 <body>
@@ -61,6 +93,19 @@
     <a href="../../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/02-人物深度分析/沙僧-方向二深化.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/people/沙僧-方向二深化.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>沙僧：从不惹事的人</h1>
 <blockquote>
@@ -180,7 +225,7 @@
 <p>遇到高山，他怕——“徒弟，这山险峻，恐有妖魔。”遇到大河，他怕——“徒弟，这水宽阔，怎生得过？”遇到美貌女子，他怕——“徒弟，此地不可久留。”遇到城池、荒野、破庙、孤村——他都怕。他的恐惧不是间歇性的，是持续性的。从长安到灵山，十万里路，他怕了十万次。</p>
 <p>他怕妖怪。每到一个新地方，他的第一反应是“这里有妖怪吗”。悟空说没有，他不信。悟空说有，他更怕。他在恐惧中走了十四年。十四年里，他被妖怪抓走、绑住、蒸煮、威胁、欺骗。每一次被救出来，他都要重新上马，继续往妖怪堆里走。</p>
 <p>他怕死。在白虎岭，悟空打死白骨精变化的第一个人，他吓得说“你无故打死平人”。他不是看不出那是妖怪——他是怕万一看错了呢？万一打死的是真人呢？他的恐惧让他不敢冒险，也让他在判断失误时承担了最沉重的负罪感。</p>
-<p>他也怕自己走不到。在女儿国，女王问他：御弟哥哥，你就不想留下吗？他沉默了很久。不是因为他动摇了，是因为他在那一刻发现——自己面对的是一个不需要用武力也能让他留下的对手。女王没有任何恶意，没有威胁，没有逼迫。她只是问了一个问题，然后把通关文牒放在玉玺旁边，等他回答。玄奘最后说的是：“贫僧已发弘誓大愿，不取真经，永堕沉沦地狱。”他不是用戒律回答的，他是用誓言回答的。戒律是佛祖定的，誓言是自己说的。戒律可以破，誓言不能破——破了，他对不起那杯掺了土的素酒。</p>
+<p>他也怕自己走不到。在女儿国，女王问他：御弟哥哥，你就不想留下吗？他沉默了很久。不是因为他动摇了，是因为他在那一刻发现——自己面对的是一个不需要用武力也能让他留下的对手。女王没有任何恶意，没有威胁，没有逼迫。她只是问了一个问题，然后把通关文牒放在玉玺旁边，等他回答。玄奘最后说的是：“我已发了弘誓大愿，不取真经，永堕沉沦地狱。”他不是用戒律回答的，他是用誓言回答的。戒律是佛祖定的，誓言是自己说的。戒律可以破，誓言不能破——破了，他对不起那杯掺了土的素酒。</p>
 <p>他怕的一切，最后都变成了他往前走的原因。</p>
 <p>五、冤枉过悟空的人</p>
 <p>三打白骨精。这是玄奘在取经路上犯过的最大的错。</p>
@@ -198,12 +243,12 @@
 <p>七、不说话的人</p>
 <p>取经路上，玄奘很少说话。不是他不爱说话，是他在用沉默处理太多东西。</p>
 <p>悟空和八戒吵架，他沉默。遇到妖怪，他沉默。在女儿国，女王把所有话都说完了，他还是沉默。他的沉默不是无话可说，是他知道有些话说出来就收不回去。</p>
-<p>在女儿国，女王问：“那唐御弟是什么样子的？”全城女人围观他。他低着头，脸红了。女王把所有他不能说的话都替他说了——“御弟哥哥，你留下，我以一国相托。”然后他抬起头，说了一句：“贫僧已发弘誓大愿。”</p>
+<p>在女儿国，女王问：“那唐御弟是什么样子的？”全城女人围观他。他低着头，脸红了。女王把所有他不能说的话都替他说了——“御弟哥哥，你留下，我以一国相托。”然后他抬起头，说了一句：“我已发了弘誓大愿。”</p>
 <p>他用“发过誓”三个字，回答了女王所有没说出口的问题。他不能说“我愿意”——那是破戒。他不能说“我不愿”——那是说谎。他只能用誓言挡在中间，让誓言替他承受两个人的重量。然后他在通关文牒背面，允许女王盖了凤印，还默许女王塞了一张纸条。纸条上写的是什么，原著没写。可能是“等你回来”，可能是“保重”，可能是空白。玄奘没有看那张纸条，也没有把它从文牒里拿出来。他带着它走了十万里路，直到灵山。</p>
 <p>他的沉默，是全书最重的语言。</p>
 <p>八、通关文牒上的那个人</p>
 <p>通关文牒，是玄奘在取经路上唯一的人类身份证明。文牒上有宝象国印、乌鸡国印、车迟国印、西梁女国凤印、祭赛国印、朱紫国印、狮驼国印、比丘国印、灭法国印、凤仙郡印……每一个印，都是一次通关。</p>
-<p>玄奘在文牒上记录了沿途的一切：车迟国焦痕——那是斗法的火烧的；通天河水渍——那是老鼋掀翻经书时溅的；女儿国凤印旁的小字“贫僧已发弘誓大愿”——那是他用誓言换来的通关；狮驼岭帛书残片——那是太白金星血书的边角；比丘国安魂符碎末——那是鹅笼小孩父母塞进去的；无底洞判词——他第一次替妖怪写判决；凤仙郡黄绸——他替郡侯写的祈雨文。</p>
+<p>玄奘在文牒上记录了沿途的一切：车迟国焦痕——那是斗法的火烧的；通天河水渍——那是老鼋掀翻经书时溅的；女儿国凤印旁的小字“我已发了弘誓大愿”——那是他用誓言换来的通关；狮驼岭帛书残片——那是太白金星血书的边角；比丘国安魂符碎末——那是鹅笼小孩父母塞进去的；无底洞判词——他第一次替妖怪写判决；凤仙郡黄绸——他替郡侯写的祈雨文。</p>
 <p>然后在大雷音寺，他把这本写满的册子交还如来。不是上交——是交还。他的使命完成了，这本册子不需要继续写下去了。但他又拿了一本新的。新册子第一页写的是“今日多云。东风三级”。</p>
 <p>取经结束了，但记录没有结束。他从前记录磨难，现在记录天气。以前记录苦难是怕忘记，现在记录天气是因为天气值得被记住。晴朗值得记住，多云也值得记住。一个从长安走来的凡人，在终点学会了记录云。</p>
 <p>九、凌云渡的旧我</p>
@@ -236,6 +281,10 @@
 </ol>
 <hr />
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E6%B2%99%E5%83%A7%EF%BC%9A%E4%BB%8E%E4%B8%8D%E6%83%B9%E4%BA%8B%E7%9A%84%E4%BA%BA&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E6%B2%99%E5%83%A7-%E6%96%B9%E5%90%91%E4%BA%8C%E6%B7%B1%E5%8C%96.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E6%B2%99%E5%83%A7%EF%BC%9A%E4%BB%8E%E4%B8%8D%E6%83%B9%E4%BA%8B%E7%9A%84%E4%BA%BA&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E6%B2%99%E5%83%A7-%E6%96%B9%E5%90%91%E4%BA%8C%E6%B7%B1%E5%8C%96.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="../people/殷温娇外传.html">← 上一篇</a><a href="../people/沙僧.html">下一篇 →</a></nav>
 </main>
 </body>

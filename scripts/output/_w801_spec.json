@@ -1,0 +1,15 @@
+{
+  "batch": "W801",
+  "date": "2026-10-19",
+  "title": "W801 character_nlp 行为保持重构批",
+  "desc": "两处最大函数拆为职责单一小函数，旧新两版五件产物与标准输出逐字节一致，发现并登记一处生成非确定性",
+  "head_entry": "2026-10-19（W801 character_nlp 行为保持重构批）",
+  "head_sentence": "两处最大函数拆分，五件产物逐字节一致，非确定性登记",
+  "changelog_body": "\n> **来源**：用户令「对本项目进行代码重构·功能不变」。先做真实审计：全仓 ≥60 行函数 47 个，其中 4 个为 `_` 前缀一次性脚本、2 个（check_doc_sync.run_self_test / bump_version.main）W787 已裁定不动、其余按停 churn 纪律不碰；**唯一未被 W782–W787 覆盖的现役模块 = `scripts/B_人物/character_nlp.py`**（995 行·W783 重构的是同目录 character_appearance）。动工前 preflight PASS。\n> - **拆分一（190 行 → 7 个函数）**：`build_dialogue_sentiment` 保留公开签名与 docstring，内部拆出 `_accumulate_dialogue_sentiment`（单循环四组累加）/ `_build_speaker_sentiment` / `_build_chapter_sentiment` / `_build_speaker_chapter_curve` / `_build_top_sentiment_words`；公开函数只做取数与拼装，注记块原位保留。\n> - **拆分二（175 行 → 8 个函数）**：`main` 拆出 `_build_arg_parser` / `_load_chapters` / `_warn_missing_chapters` / `_write_json`（五处重复落盘收敛）/ `_emit_characters` / `_emit_cooccurrence` / `_emit_dialogues`（返回值供 sentiment 复用）/ `_emit_timeline` / `_emit_sentiment`；main 缩为 24 行编排。**print 文案与顺序逐字未变**。\n> - **对拍（五维矩阵简化版）**：旧版（HEAD）与新版本跑同一份 100 回输入——`PYTHONHASHSEED=0` 下 5 件 JSON（characters/cooccurrence/cooccurrence_timeline/dialogue_sentiment/dialogues·最大 2.2MB）与 stdout **逐字节一致**；首轮 base/new 比较 `cooccurrence.json` 差异经查为**集合序非确定性**（同代码两次运行亦不同·固定种子即稳定），**非代码差异**。\n> - **新发现登记**：B-109 `build_cooccurrence` 输出非确定（重跑产生无意义 diff）——修复属行为变更（输出序变），须单独立批，本批不修。\n> - **未动清单（诚实边界）**：47 个 ≥60 行函数中仅 2 个被本批拆分；其余为一次性脚本与已裁定项；命名与风格统一限于本文件（模块内 `_` 私有前缀约定一致）。\n> - **验证（全绿）**：ruff 0；pytest 629 passed / 3 skipped；verify 全量 50 段 0 FAIL。\n> - **状态**：已落地（级联+提交+推送按批次流程执行·PR #51 随批扩入）。\n> - **文件**：scripts/B_人物/character_nlp.py、docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w801_spec.json、scripts/output/_cascade_files_W801.txt\n",
+  "milestone_block": "- **W801 character_nlp 行为保持重构批**：\n  - build_dialogue_sentiment 190 行 → 7 函数；main 175 行 → 9 函数（含 _write_json 收敛五处重复）\n  - 对拍：PYTHONHASHSEED=0 下五件 JSON + stdout 逐字节一致（2.2MB 最大件）；cooccurrence 差异归因集合序非确定\n  - B-109 登记（输出非确定·修复属行为变更）\n  - 验证：ruff 0 + pytest 629 passed + verify 全量 0 FAIL\n",
+  "agents_note": "2026-10-19（W801）character_nlp 行为保持重构批：用户令代码重构功能不变——先审计全仓四十七个六十行以上函数，剔除一次性脚本与已裁定项后唯一现役面是该模块；拆分为情感构建一百九十行改七函数（累加与五组组装各司其职）与命令行一百七十五行改九函数（参数解析回目加载五产物落盘各一函数、五处重复写盘收敛为 _write_json、打印文案与顺序逐字未变）；对拍以固定哈希种子跑旧新两版，五件产物含二点二兆最大件与标准输出逐字节一致，首轮差异查为集合序非确定性并登记 B-109 待单独立批修复；验证等于 ruff 零 加 pytest 六百二十九 passed 加 verify 全量五十段零 FAIL",
+  "file_index_rows": [
+    "| scripts/B_人物/character_nlp.py | W801 | 行为保持重构：情感构建 190→7 函数·main 175→9 函数·五处写盘收敛 |",
+    "| docs/superpowers/plans/2026-09-30-maintenance-backlog-registry.md | W801 | B-109 登记（cooccurrence 输出非确定） |"
+  ]
+}

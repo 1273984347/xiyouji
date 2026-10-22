@@ -7,7 +7,7 @@
 > 本文件逐条列出 仓库根目录 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
 > 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。
 
-## 子目录（16）
+## 子目录（17）
 
 - `.github/`
 - `archive/`
@@ -25,6 +25,7 @@
 - `timeline/`
 - `tools/`
 - `xiyouji-agent-web/`
+- `xiyouji-desktop/`
 
 ## 文件（20）
 

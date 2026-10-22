@@ -11,18 +11,23 @@
 
 - （无）
 
-## 文件（21）
+## 文件（30）
 
 ### Python 脚本
 
 - `test_a11y_audit.py`
+- `test_check_no_goatcounter.py`
+- `test_check_plan_template.py`
 - `test_check_script_coverage.py`
+- `test_check_search_index_fresh.py`
 - `test_ci_wiring.py`
 - `test_d3_data_processors.py`
 - `test_docs_index.py`
 - `test_embed_json.py`
 - `test_folder_docs_gate.py`
+- `test_lint_links_refactor.py`
 - `test_new_page.py`
+- `test_obs_sample.py`
 - `test_page_router.py`
 - `test_path_guard.py`
 - `test_perf_optimize.py`
@@ -34,8 +39,12 @@
 - `test_slice_screenshots.py`
 - `test_tmpe_tidy.py`
 - `test_tool_scripts_cli.py`
+- `test_verify_failclosed.py`
 - `test_verify_registry.py`
+- `test_vermilion_solid.py`
 - `test_visualization_data.py`
+- `test_w851_j1_name_audit.py`
+- `test_w851_visual_regression_probe.py`
 
 ---
 

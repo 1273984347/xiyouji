@@ -1,0 +1,15 @@
+{
+  "batch": "W811",
+  "date": "2026-10-20",
+  "title": "W811 CI 断链修复批（工作流 YAML 歧义语法修复 + 可解析性守卫）",
+  "desc": "CI 断链修复（工作流 YAML 歧义语法 + 可解析性守卫）",
+  "head_entry": "2026-10-20（W811 CI 断链修复批）",
+  "head_sentence": "CI 工作流 YAML 歧义语法修复，工作流恢复可解析并补可解析性守卫",
+  "changelog_body": "\n> **来源**：W806 退役 GoatCounter 时在 `.github/workflows/ci.yml` 新增全站零 goatcounter 引用防回退守卫，step 名写成 `- name: Guard: no GoatCounter references (W806)`——裸标量值内含 \": \"（冒号+空格）在 YAML 映射上下文里属歧义语法，GitHub 解析该工作流时直接报「This run likely failed because of a workflow file issue」，run 0 秒失败，且 pull_request 事件**根本不生成 check**（PR 上看不到 CI 结果）。**潜伏机理三项**：① 既有 CI 接线测试（tests/unit/test_ci_wiring.py）全为 grep/regex 型断言，对 YAML 语法无感 → 本地全绿；② ci.yml 的 `on.push` 只含 `main` → dev 分支 push 从不触发 CI → 缺陷潜伏至推送并开 PR 才暴露；③ W806 的验证只跑本地门禁与 pytest，无任何 YAML 解析步骤。**暴露面声明**：因该工作流此前不可解析，W803-W810 整段从未被 CI 实跑过（dev push 不触发 CI·PR 因工作流解析失败不生成 check）——本批修复后 PR 的 CI 方为该段的首次实跑。\n> - **修复**：step 名加引号（`- name: \"Guard: no GoatCounter references (W806)\"`）→ ci.yml 重新可解析（本地 PyYAML 解析通过·10 个 job 全在：pages-smoke / lighthouse-performance / a11y-audit / dependency-scan / code-quality / pytest-unit / verify-delivery / e2e-interaction / agent-web-build / desktop-build）。\n> - **守卫**：`tests/unit/test_ci_wiring.py` 增 W811 守卫（12 例全过）——J1 无制表符缩进（YAML 禁制表符）/ J2 映射项 name 的裸标量值不得含 \": \"（加引号即合法）/ J3 PyYAML 可用时做全量解析（加严；不可用时由 J1+J2 覆盖本风险类·非静默跳过）。**负样本实证**：把 ci.yml 还原成 W806 形态（去掉引号）后跑真实守卫函数，按预期报错并指到 `ci.yml:353`；真实 9 个 workflow 文件全过。\n> - **验证**：守卫单测 12 passed + 负样本实证按预期报错（指到 ci.yml:353）+ 真实 9 个 workflow 全过 + pytest 全量 726 passed / 3 skipped + verify_delivery 全量 51 段 0 FAIL。\n> - **状态**：已落地（级联+提交按批次流程执行）。\n> - **文件**：.github/workflows/ci.yml、tests/unit/test_ci_wiring.py、docs/00-导读/W批次编号对账表.md、scripts/output/index.md、scripts/output/README.md、scripts/output/_w811_spec.json。\n",
+  "milestone_block": "- **W811 CI 断链修复批**：\n  - 起因：W806 在 ci.yml 新增防回退守卫时 step 名写成未加引号裸标量且含 \": \" → YAML 映射歧义 → GitHub「workflow file issue」0 秒失败该 workflow、PR 不生成 CI check；本地 grep 型接线测试无感 + dev push 不触发 CI → 潜伏至推送才暴露\n  - 暴露面：W803-W810 整段此前从未被 CI 实跑（dev push 不触发 CI + PR 工作流不可解析）——修复后 PR 的 CI 方为该段首次实跑\n  - 落地：step 名加引号（ci.yml 重新可解析·10 job 全在）+ tests/unit/test_ci_wiring.py 增可解析性守卫（J1 无制表符 / J2 裸标量禁含 \": \" / J3 PyYAML 全量解析·加严）\n  - 验证：守卫 12 passed + 负样本实证（指到 ci.yml:353）+ pytest 726 passed / 3 skipped + verify 全量 51 段 0 FAIL\n",
+  "agents_note": "二〇二六年十月二十日（W811）CI 断链修复批：W806 退役 GoatCounter 时在 CI 工作流新增全站零引用防回退守卫，该步骤名误写成未加引号且含冒号空格的裸标量，构成 YAML 映射歧义语法，GitHub 解析工作流时直接判定为工作流文件问题并零秒失败，且拉取请求事件根本不生成检查项，故本批修复为加引号并补可解析性守卫三判据（禁制表符、映射项裸标量禁含冒号空格、有解析器时全量解析），负样本实证可复现并指到具体行号；另声明暴露面：因该工作流此前不可解析，其间批次整段从未被持续集成实跑，本批修复后方为首次实跑",
+  "file_index_rows": [
+    "| .github/workflows/ci.yml | W811 | 修复：step 名加引号（W806 裸标量含冒号空格致 YAML 映射歧义·GitHub 0 秒失败该 workflow） |",
+    "| tests/unit/test_ci_wiring.py | W811 | 增：工作流 YAML 可解析性守卫（三判据·负样本实证·CI 恒生效不依赖 PyYAML） |"
+  ]
+}

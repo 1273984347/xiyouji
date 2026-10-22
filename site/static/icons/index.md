@@ -11,13 +11,15 @@
 
 - （无）
 
-## 文件（3）
+## 文件（5）
 
 ### 样式与资源
 
 - `icon-192.png`
 - `icon-512.png`
 - `icon-maskable-512.png`
+- `logo-lockup-light.svg`
+- `logo-mark-light.svg`
 
 ---
 

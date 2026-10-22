@@ -1,0 +1,24 @@
+{
+  "batch": "W849",
+  "date": "2026-10-21",
+  "title": "W849 性能门禁挂槽批（第 47 槽·影子模式不判红·攒够样本再裁阈值）",
+  "desc": "在交付门禁挂上性能影子槽，按批采静态成本代理攒基线，暂不判红也不设阈值",
+  "head_entry": "2026-10-21（W849 性能门禁挂槽批）",
+  "head_sentence": "给性能装一只只记录不拦路的手，先把基线攒起来，再谈阈值",
+  "changelog_body": "\n\n> **来源**：用户令「开 W849 做性能门禁挂槽」。这是 W828 备料件 §五 单列的审批项，口径写死为「只挂 1 槽·不改阈值·不碰体积预算」。\n> - **文件**：scripts/verify_delivery.py、scripts/check_perf_shadow.py、scripts/output/perf_shadow.json、AGENTS.md、docs/agent/gates.md、pytest.ini、README.md、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md、scripts/output/stats.json、scripts/output/_w849_spec.json、docs/00-导读/W批次编号对账表.md。\n> - **补的是什么洞**：perf.yml 是唯一性能门禁（Lighthouse CI · desktop · 5 URL · 3 runs · LCP ≤4000ms/CLS ≤0.3/TBT ≤300ms·3D 页 12000/900），但它在 pre-commit 路径上**不可执行**（要 Chrome + @lhci/cli，5 URL × 3 runs 分钟级），CI 结果也从未回流成仓内基线——「这次提交有没有让页面变慢」在每次提交时都没有数据可答。\n> - **设计取舍（与 W828 §五 字面的偏离，此处明示）**：约定写「复用既有 LHCI 判据」，落地改为**采静态成本代理**、不跑浏览器。三条理由：① pre-commit 每次提交都跑，分钟级 + 依赖浏览器的门禁会被绕过或拖垮流程；② 影子期要的是同口径连续样本，静态量确定性复算、跨机器同值，而 CI 的 LCP 受 runner 冷启与网络抖动影响、单点不可比；③ 真数不另立口径——`--ingest .lighthouseci/assertion-results.json` 把 CI 的 LCP/CLS/TBT 并进**同一批样本**的 `lhci` 字段。**若要求槽内真跑 LHCI，须换成 `--scope perf` 显式 opt-in 轨道另议。**\n> - **采六项（每页）**：`html_bytes` / `head_bytes` / `inline_script_bytes`（无 src 脚本内容字节）/ `local_dep_bytes`（本地外链依赖实测字节）/ `remote_refs`（外域引用条数）/ `blocking_head_refs`（head 内同步脚本 + 非 print 样式表）。全部零依赖可算。\n> - **判据只有一条会红（C1）**：perf.yml `collect.url` 的 5 页必须真实存在——缺页等于 CI 必 404 的真断链，不是阈值判断；其余数字只记录、不判红。\n> - **自测首跑照出的真 bug**：属性解析只认 `key=value`，`defer`/`async` 这类布尔属性被静默丢掉——首版把 index.html 三个 defer 脚本全算成阻塞，基线第一笔就是脏的。改为布尔属性也收，并把「defer 与 media=print 不计」写进自测锁死。\n> - **本批首笔基线（不判读、不下结论）**：dashboard 91,791 B · 阻塞头 3；index 51,071 B · 3；timeline 93,207 B · 5；3D 78,575 B · 5；text-search 66,694 B · 5。攒满 10 批后再由用户裁决阈值（3D 页单独分档）。段内数字为落盘时实测，权威值以 `scripts/output/perf_shadow.json` 为准。\n> - **连带同步**：门禁段 51→52；AGENTS §4.2 与 gates.md 的第 47 条（含 gates.md 标题从「45 槽」订正为「47 槽」——W809 补第 46 槽时漏改的标题计数）；stats 两键刷新（`gate_count` 47 · `pytest_collected` 787——新脚本被 `test_tool_scripts_cli.py` 的根级脚本参数化收进 import 冒烟，故 +1 属预期）；三处内联标记（README / 架构方案 / pytest.ini）同步。\n> - **验证**：`check_perf_shadow --self-test` 7/7；全量 52 段核心全部通过；`check_doc_sync` 0 FAIL；`check_agents_layers` 0 FAIL（三方编号同为 47）；`check_script_coverage` 0 FAIL；stats 17 键零差异；CSP 与页数零漂移。\n> - **未做**：不改 perf.yml 阈值、不装 lhci、不跑浏览器、不设任何阈值、不推送远端。\n> - **状态**：已收官。\n",
+  "milestone_block": "- **W849 性能门禁挂槽批**：\n  - 第 47 槽「性能影子」：perf.yml 的 5 页 × 六项静态成本代理，按批入库\n  - 影子模式：唯一会红的是缺页（C1），数字只记录不判红、不设阈值\n  - 基线 `scripts/output/perf_shadow.json`，攒满 10 批再裁阈值（3D 页单独分档）\n  - `--ingest` 可并 CI 侧 LHCI 真数（LCP/CLS/TBT）入同一批样本\n  - 自测照出布尔属性解析 bug（defer/async 被丢），已修并锁进用例",
+  "agents_note": "二〇二六年十月二十一日（W849）给性能装了一只只记录不拦路的手。这件事在备料件里躺了一阵，口径早就写好：只挂一个槽、不改阈值、不碰体积预算。真正动手时才发现「复用既有 LHCI 判据」这句没法照字面执行——那玩意要浏览器、要跑五页三遍，是分钟级的事，塞进每次提交的门禁里只会被绕过。所以改成量静态成本：页面多大、内联脚本多重、head 里有几个非等不可的引用、依赖了多少本地文件、有没有外域。这些数和 LCP、TBT 同向，但能确定性复算，跨机器同值，适合攒基线。真数也没丢：CI 那边跑完 LightHouse 的结论可以并进同一批样本，两边共用一条时间线。写的时候踩了个自己挖的坑：属性解析只认等号形态，把 defer 和 async 这类光杆属性整丢了，结果首版把首页三个延迟脚本全算成阻塞——基线第一笔就是脏的。是自测首跑第一个用例把它照出来的。现在这条规则钉死在用例里：defer 不算阻塞，print 样式表也不算",
+  "file_index_rows": [
+    "| scripts/check_perf_shadow.py | W849 | 新增：性能影子槽判据件（六项静态成本代理·C1 缺页即红·--record/--ingest/--self-test） |",
+    "| scripts/verify_delivery.py | W849 | 挂第 47 槽「性能影子」（严格委托段 + EXPECTED + site scope）；段数注释 51→52 订正 |",
+    "| scripts/output/perf_shadow.json | W849 | 新增：影子基线（按批样本·同批重跑覆盖） |",
+    "| AGENTS.md | W849 | §4.2 门禁清单补第 47 条 |",
+    "| docs/agent/gates.md | W849 | 第 47 条全量定义 + 标题计数 45→47 订正 + 速查表分组 27-47 |",
+    "| pytest.ini | W849 | collected 标记 786→787（新脚本入 import 冒烟参数化）·段数 51→52 |",
+    "| README.md | W849 | gate_count 内联标记 46→47 |",
+    "| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W849 | gate_count 内联标记 46→47 |",
+    "| scripts/output/stats.json | W849 | gate_count 47 / pytest_collected 787 刷新 |",
+    "| scripts/output/_w849_spec.json | W849 | 本批 spec 十字段 |",
+    "| docs/00-导读/W批次编号对账表.md | W849 | 认领行与收官回填 |"
+  ]
+}

@@ -9,13 +9,14 @@
 
 ## 这个目录装什么
 
-生成时点含 7 个直属文件（Markdown 文档）；下辖 5 个子目录。详见同目录 `index.md` 的逐文件清单。
+生成时点含 7 个直属文件（Markdown 文档）；下辖 6 个子目录。详见同目录 `index.md` 的逐文件清单。
 
 ## 子目录
 
 - `_dev/`
 - `plans/`
 - `specs/`
+- `templates/`
 - `w550-shot-review/`
 - `复盘报告/`
 
