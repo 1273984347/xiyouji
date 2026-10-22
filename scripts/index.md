@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（234）
+## 文件（243）
 
 ### Markdown 文档
 
@@ -136,6 +136,15 @@
 - `_w862_tokenize_spacing.py`
 - `_w864_accent_audit.py`
 - `_w864_migrate.py`
+- `_w876_backfill_w875.py`
+- `_w876_baseline_probe.py`
+- `_w876_c_text_swap.py`
+- `_w876_diff_audit.py`
+- `_w876_site_audit.py`
+- `_w876_value_check.py`
+- `_w880_og_image_split.py`
+- `_w881_fix_rule_line.py`
+- `_w881_rule_line_scan.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`

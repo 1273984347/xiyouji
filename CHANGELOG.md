@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W874），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W876），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -18,6 +18,22 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 
+### W876（2026-10-22）：对比度专项批·C 渠与值切换（朱砂文字全站落地 + chart-3/暗色 accent 改值 + inline_css 回吞事故修复）
+
+> **来源**：用户令「③④继续」。W876 = W864 起累积 defer 的对比度欠账总清：C 渠（朱砂文字落 --bg）+ 两处令牌改值。
+> - **文件**：site/tokens.css、site/data/（63 页规则级换色）、site/en/ 与 site/reader/（326 页 INLINED 副本令牌值靶向同步）、site/dukou-engine.html（根级 INLINED 页靶向修复）、docs/00-导读/design.md、scripts/output/design-tokens.json、scripts/_w876_c_text_swap.py、scripts/_w876_value_check.py、scripts/_w876_site_audit.py、scripts/_w876_diff_audit.py、scripts/_w876_baseline_probe.py、scripts/_w876_backfill_w875.py、scripts/output/_w876_*.json（8 件）、scripts/index.md、scripts/output/index.md、scripts/output/README.md、docs/00-导读/W批次编号对账表.md。
+> - **C 渠（规则级单遍全量）**：96 页（88 data + 8 根）审计——落 --bg 的朱砂文字 **1,087 处 / 64 页**（重建审计器在 HEAD 快照上精确复现该数·口径：textContent 非空 + 有效背景 = --bg）；单遍换色 **173 条 color 规则 / 63 页**（--accent→--accent-text·#C8463A→#C7463A·4.50:1）；终态 **253 处 / 27 页（降 77%）**——残余 6 页 96 处为 JS 内联样式 strong（复评清单·需逐实例改数据路径·另批处理）。
+> - **值切换（两处）**：--chart-3 #C9A063→#B38F58（2.42→3.01:1·42 消费页 + role-card 等非 SVG 消费点）；暗色 --accent #E0604F→#E46250（4.35→4.50:1）。326 页 INLINED 副本 + dukou-engine 靶向 + tokens.css 本体；外链页天然吃新值。
+> - **inline_css 回吞事故（本批最大发现·已修复）**：收尾验证实证——inline_css.py --force 的 regenerate 会把 W864-W875 迁进页面内联块的规则整段冲掉（system.css 自 W856 起未随迁移更新：.page-wrap 容器令牌化回退 1320px 字面量、.seal 淡底回退实底；朱砂实底审计 457→710 即现形）。本批中途一次全量 --force 已污染 328 页暂存区（且越界新内联 525 个 reader 子目录页）。**修复**：328 页全部自 HEAD 重建（保迁移成果）→ 重放换色 → 靶向替换两处令牌值（不走 regenerate）；静态 diff 分类审计证明 829 处增删全归三类、三类之外与 HEAD 逐字节一致。根因登记 BL-33（system.css 与页面内联块漂移·后续迁移批二选一：写回 system.css 或禁全量 --force）。
+> - **顺带抓出并回退**：换色器正则 color 子串匹配误伤 6 处 border-color（违反「只动 color·border 归 B 渠」与 v4「交互边界一律 --accent」）——已精确回退，diff 审计器加负向查视防复发。
+> - **验收（四轨全绿）**：① 静态 diff 分类审计 PASS（328 文件·829 处增删全归三类·三类之外与 HEAD 逐字节一致）；② C 渠审计 1,087→253（HEAD 快照校准精确复现 + 终态实测一致）；③ 值切换计算样式锚点校验 PASS（chart-3 + dukou 令牌 + 暗色 accent + 残余反向证据四组）；④ CSP 856 页 0 漂移 + 24 页双主题基准对拍全量无截断 PASS（2,195 处差异零未预期：T1 C 渠 407·T2 chart-3 2·T3 暗色 accent 1,781·T4 暗色 color-mix 派生 5——currentColor 传播与混色派生两机理均已实证）。**判词：PASS**。
+### W875（2026-10-22）：设计迁移 B11 阅读页 622 页（生成端一处改动·STYLE 补丁·CSP 重算）
+
+> **来源**：用户令「按建议走」第二步。W875 = W826 §6 第十一片（阅读页 622 页）——站点 73% 的页量，生成端一处改动。
+> - **文件**：scripts/build_reader.py、site/reader/（622 页重生成：100 章回 + 216 人物 + 210 主题 + 35 文化 + 14 诗词 + 45 延伸 + 板块目录/hub）、scripts/output/_w875_spec.json、docs/00-导读/W批次编号对账表.md。
+> - **改动**：`STYLE` 常量 18 处补丁——① `.reader-wrap` 的 `max-width: 760px` → `var(--container-read)`（§3.3 阅读页档 760 本就正确·去字面量）；② 11 处精确等值间距 → `var(--space-N)`（12/20/24/32/8px·值保留）；③ 7 处文本色 `--accent` → `--accent-text`（2.1 R1 两值互换·裁决 1 在生成端的落地）：topnav/body/pn/idx hover/toolbar hover/toolbar pressed/feedback hover——3px 竖线与 ▸ 图标不动。
+> - **为什么不逐页改**：622 页逐页改需 622 次 HTML 手术 + 622 行 diff，生成器一处补丁改完即全站生效，`build_reader.py` 重跑即是他日再生的同一份产物。CSP 在重生成后统一重算。
+> - **验收**：抽样 12 页（六板块×2）全量对拍 + 3 金丝雀零 diff。**判词：PASS——695 处 diff 全部归渠零剩余**：7 处文本色 `--accent`→`--accent-text` 的互换（#C8463A→#C7463A·199,70,58）在 12 个抽样页上共触达 ~22 个元素/页（color 及其 currentColor 传播的 4 边框）——正是 2.1 R1 两值互换的落地；间距 11 处值保留、容器 760 不变，**均零 diff**；3 金丝雀（index/dukou/timeline）零 diff；元素数双采一致（6077 == 6077）。**施工中发现并修复两处架构缺口**：① 重生成丢了 reader 的内联 CSS（`inline_css.py` 的 link 正则只认 `../`，reader 子目录 `../../` 永远同步不到）——脚本已打深度感知补丁；② reader 是混合架构（102 章回页内联 + 520 专题/索引页外链），通扫会误把外链页也内联——已按 HEAD 逐页分类恢复。
 ### W874（2026-10-22）：递延版段补写批（W865-W873 九段回写·号序链重新接上）
 
 > **来源**：用户令「按建议走」，选「补段批先做」——W865（首页三任务区重组）与 B5-B10 六批全部递延，顶段停在 W864，`batch_cascade` 的「顶段+1」断言会拦住 B11。

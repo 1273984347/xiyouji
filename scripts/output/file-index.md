@@ -11,6 +11,45 @@
 ---
 
 
+## W876 对比度专项批·C 渠与值切换（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/tokens.css | W876 | --chart-3 #C9A063→#B38F58 · 暗色 --accent #E0604F→#E46250 |
+| site/data/（63 页） | W876 | C 渠规则级换色 173 条 color 规则（--accent→--accent-text） |
+| site/en/ site/reader/（326 页） | W876 | INLINED 副本两处令牌值靶向同步（不走 regenerate·保迁移成果） |
+| site/dukou-engine.html | W876 | 根级 INLINED 页两处令牌值靶向修复（inline_css 根级 skip 绕过） |
+| scripts/_w876_c_text_swap.py | W876 | C 渠规则级换色器（类名+标签双模式·--audit 指定审计） |
+| scripts/_w876_value_check.py | W876 | 值切换计算样式锚点校验（搜索式断言·重建版·四组锚点） |
+| scripts/_w876_site_audit.py | W876 | 新增：C 渠+朱砂实底审计器（原审计器未入库·按产物校准复现 1087/457） |
+| scripts/_w876_diff_audit.py | W876 | 新增：静态 diff 分类审计（三类之外与 HEAD 逐字节一致·负向查视） |
+| scripts/_w876_baseline_probe.py | W876 | 新增：24 页前后计算样式对拍（只现三类预期变迁） |
+| scripts/_w876_backfill_w875.py | W876 | 新增：W875 单段补数驱动（补段工具无筛选·防误补 W877-W881） |
+| scripts/output/_w876_site_audit.json | W876 | 前置审计（1,087 处落 bg·64 页） |
+| scripts/output/_w876_site_audit_final.json | W876 | 终态审计（253 处·27 页·复评清单 6 页） |
+| scripts/output/_w876_site_audit_head.json | W876 | HEAD 快照校准审计（精确复现 1,087/64·验证快照=审计输入态） |
+| scripts/output/_w876_baseline_before.json | W876 | 24 页 before 计算样式快照（HEAD 树·双主题） |
+| scripts/output/_w876_baseline_after.json | W876 | 24 页 after 计算样式快照（重建树·双主题） |
+| scripts/output/_w876_baseline_diff.json | W876 | 对拍分类结果（2,195 处差异零未预期·T1-T4 四类） |
+| scripts/output/_w876_c_swap_report.json | W876 | 换色报告（63 页·173 规则·复评清单） |
+| scripts/output/_w876_spec.json | W876 | 本批 spec 十字段 |
+| docs/00-导读/design.md | W876 | 设计文档令牌表（两处值切换同步） |
+| scripts/output/design-tokens.json | W876 | 令牌导出版（两处值切换同步） |
+| scripts/index.md | W876 | 脚本册（+4 个 _w876 脚本） |
+| scripts/output/index.md | W876 | 产物册（+4 个 _w876 JSON） |
+| scripts/output/README.md | W876 | 产物目录说明（计数同步） |
+| docs/00-导读/W批次编号对账表.md | W876 | 认领行与收官回填 + BL-33 登记 |
+
+## W875 设计迁移 B11 阅读页 622 页（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/build_reader.py | W875 | STYLE 常量 18 处补丁（容器 760→--container-read · 间距 11 处 · 文本色 7 处两值互换） |
+| site/reader/（622 页） | W875 | 全量重生成（100 章回 + 216 人物 + 210 主题 + 35 文化 + 14 诗词 + 45 延伸 + 目录/hub） |
+| scripts/output/_w875_spec.json | W875 | 本批 spec 十字段 |
+| docs/00-导读/W批次编号对账表.md | W875 | 认领行与收官回填 |
+
+
 ## W874 递延版段补写批（2026-10-22）
 
 | 文件 | W | 说明 |

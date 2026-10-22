@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（339）
+## 文件（348）
 
 ### Markdown 文档
 
@@ -140,6 +140,7 @@
 - `_cascade_files_W863.txt`
 - `_cascade_files_W864.txt`
 - `_cascade_files_W874.txt`
+- `_cascade_files_W876.txt`
 - `_sync_analysis_manifest.json`
 - `_w728_spec.json`
 - `_w729_spec.json`
@@ -323,13 +324,21 @@
 - `_w874_spec.json`
 - `_w875_diff_review.json`
 - `_w875_spec.json`
+- `_w876_baseline_after.json`
+- `_w876_baseline_before.json`
+- `_w876_baseline_diff.json`
 - `_w876_c_swap_report.json`
 - `_w876_site_audit.json`
 - `_w876_site_audit_final.json`
+- `_w876_site_audit_head.json`
 - `_w876_spec.json`
 - `_w877_spec.json`
 - `_w877_template_matrix.json`
 - `_w878_spec.json`
+- `_w879_spec.json`
+- `_w880_spec.json`
+- `_w881_spec.json`
+- `_w882_spec.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`
