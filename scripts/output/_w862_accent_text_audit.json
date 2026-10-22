@@ -1,0 +1,228 @@
+{
+  "index.html": {
+    "accent_text_total": 22,
+    "on_bg": 5,
+    "on_bg_elements": [
+      {
+        "tag": "p",
+        "cls": "kicker",
+        "id": "",
+        "txt": "MING DYNASTY · WU CHENG'EN · 1",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      },
+      {
+        "tag": "p",
+        "cls": "kicker",
+        "id": "",
+        "txt": "START READING",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      },
+      {
+        "tag": "p",
+        "cls": "kicker",
+        "id": "",
+        "txt": "CURATED",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      },
+      {
+        "tag": "p",
+        "cls": "kicker",
+        "id": "",
+        "txt": "INDEX",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      },
+      {
+        "tag": "p",
+        "cls": "kicker",
+        "id": "",
+        "txt": "TOOLS",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      }
+    ]
+  },
+  "guide.html": {
+    "accent_text_total": 35,
+    "on_bg": 3,
+    "on_bg_elements": [
+      {
+        "tag": "p",
+        "cls": "kicker",
+        "id": "",
+        "txt": "READING GUIDE · 导读",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      },
+      {
+        "tag": "p",
+        "cls": "kicker",
+        "id": "",
+        "txt": "PATHS",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      },
+      {
+        "tag": "p",
+        "cls": "kicker",
+        "id": "",
+        "txt": "REFERENCE",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      }
+    ]
+  },
+  "curated.html": {
+    "accent_text_total": 4,
+    "on_bg": 4,
+    "on_bg_elements": [
+      {
+        "tag": "p",
+        "cls": "kicker",
+        "id": "",
+        "txt": "CURATED · 精选发布",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      },
+      {
+        "tag": "p",
+        "cls": "kicker",
+        "id": "",
+        "txt": "ESSAYS · 随笔",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      },
+      {
+        "tag": "p",
+        "cls": "kicker",
+        "id": "",
+        "txt": "TOPICS · 专题",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      },
+      {
+        "tag": "p",
+        "cls": "kicker",
+        "id": "",
+        "txt": "HOW TO USE",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      }
+    ]
+  },
+  "dashboard.html": {
+    "accent_text_total": 91,
+    "on_bg": 6,
+    "on_bg_elements": [
+      {
+        "tag": "div",
+        "cls": "kicker",
+        "id": "",
+        "txt": "DATA DASHBOARD",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      },
+      {
+        "tag": "div",
+        "cls": "section-kick",
+        "id": "",
+        "txt": "EIGHTY-ONE HARDSHIPS",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      },
+      {
+        "tag": "div",
+        "cls": "section-kick",
+        "id": "",
+        "txt": "DATA HUB",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      },
+      {
+        "tag": "div",
+        "cls": "section-kick",
+        "id": "",
+        "txt": "TOPICS",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      },
+      {
+        "tag": "div",
+        "cls": "section-kick",
+        "id": "",
+        "txt": "RESEARCH MATRIX",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      },
+      {
+        "tag": "div",
+        "cls": "section-kick",
+        "id": "",
+        "txt": "FRAMEWORK",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      }
+    ]
+  },
+  "dukou-engine.html": {
+    "accent_text_total": 1,
+    "on_bg": 1,
+    "on_bg_elements": [
+      {
+        "tag": "h1",
+        "cls": "",
+        "id": "",
+        "txt": "西游 · 渡口",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      }
+    ]
+  },
+  "rum-viewer.html": {
+    "accent_text_total": 4,
+    "on_bg": 1,
+    "on_bg_elements": [
+      {
+        "tag": "button",
+        "cls": "btn",
+        "id": "clearBtn",
+        "txt": "清空本地队列",
+        "ownBg": "rgba(0, 0, 0, 0)",
+        "effBg": "rgb(250, 247, 240)",
+        "onBg": true
+      }
+    ]
+  },
+  "visit-viewer.html": {
+    "accent_text_total": 0,
+    "on_bg": 0,
+    "on_bg_elements": []
+  },
+  "404.html": {
+    "accent_text_total": 5,
+    "on_bg": 0,
+    "on_bg_elements": []
+  }
+}

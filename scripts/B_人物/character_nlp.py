@@ -137,30 +137,13 @@ def _find_canonical(alias: str, characters: dict) -> str | None:
     return None
 
 
-def find_dialogues_in_text(
-    text: str,
-    alias_patterns: list,
-    characters: dict,
-) -> list[dict]:
-    """在文本中找出所有引语并归属到人物。
+def _build_dialogue_patterns(alias_alternation: str) -> tuple["re.Pattern", "re.Pattern"]:
+    """编译标准/倒装两套引语正则（拆分自 find_dialogues_in_text·W802）。
 
-    引语模式：
-      1. 标准模式：X (副词)? 道/曰/言/云 (：)? "..."  → "行者笑道：..."
-      2. 倒装模式："..." ，X (副词)? 道/曰/言/云        → "...，" 行者道。
-
-    返回 [{speaker, alias_used, quote, pattern, position, quote_length}, ...]
+    - 标准：别名 + middle? + 道类动词 + 可选冒号 + 引号内容（middle 非贪婪，
+      覆盖「口中嚷」「却又对唐僧」「笑」「大怒」等中间字符）；
+    - 倒装：引号内容 + ≤3 个标点 + 别名 + middle? + 道类动词（防跨句误匹配）。
     """
-    dialogues = []
-
-    # 构建所有别名的统一 alternation（按长度降序避免子串冲突）
-    all_aliases = set()
-    for aliases in characters.values():
-        all_aliases.update(aliases)
-    sorted_all = sorted(all_aliases, key=len, reverse=True)
-    alias_alternation = "|".join(re.escape(a) for a in sorted_all)
-
-    # 标准模式正则：别名 + middle? + 道类动词 + 可选冒号 + 引号内容
-    # middle 非贪婪，覆盖 "口中嚷"/"却又对唐僧"/"笑"/"大怒" 等中间字符
     standard_pattern = re.compile(
         r"(?P<alias>" + alias_alternation + r")"
         + MIDDLE_PATTERN
@@ -171,9 +154,25 @@ def find_dialogues_in_text(
         + r"(?P<quote>[^\"" + chr(0x201D) + chr(0x2019) + r"]+)"
         + r"(?P<q_close>[\"" + chr(0x201D) + chr(0x2019) + r"])"
     )
+    inverted_pattern = re.compile(
+        r"(?P<q_open>[\"" + chr(0x201C) + chr(0x2018) + r"])"
+        + r"(?P<quote>[^\"" + chr(0x201D) + chr(0x2019) + r"]{2,})"
+        + r"(?P<q_close>[\"" + chr(0x201D) + chr(0x2019) + r"])"
+        + r"[，。！？\s]{0,3}"
+        + r"(?P<alias>" + alias_alternation + r")"
+        + MIDDLE_PATTERN
+        + SPEECH_VERB_PATTERN
+    )
+    return standard_pattern, inverted_pattern
 
+
+def _collect_standard_dialogues(
+    text: str, pattern: "re.Pattern", characters: dict
+) -> tuple[list[dict], set[int]]:
+    """标准模式扫描：返回 (引语列表, 引语起始位置集)——位置集供倒装去重。"""
+    dialogues = []
     standard_positions = set()
-    for m in standard_pattern.finditer(text):
+    for m in pattern.finditer(text):
         alias = m.group("alias")
         speaker = _find_canonical(alias, characters)
         if speaker is None:
@@ -189,23 +188,19 @@ def find_dialogues_in_text(
             "position": m.start(),
             "quote_length": len(m.group("quote")),
         })
-        # 记录引语开始位置（q_open 的 start），用于 inverted 模式去重
         standard_positions.add(m.start("q_open"))
+    return dialogues, standard_positions
 
-    # 倒装模式正则：引号内容 + 标点 + 别名 + middle? + 道类动词
-    # 限制：引号结束和 alias 之间最多 3 个标点字符，避免跨句误匹配
-    inverted_pattern = re.compile(
-        r"(?P<q_open>[\"" + chr(0x201C) + chr(0x2018) + r"])"
-        + r"(?P<quote>[^\"" + chr(0x201D) + chr(0x2019) + r"]{2,})"
-        + r"(?P<q_close>[\"" + chr(0x201D) + chr(0x2019) + r"])"
-        + r"[，。！？\s]{0,3}"
-        + r"(?P<alias>" + alias_alternation + r")"
-        + MIDDLE_PATTERN
-        + SPEECH_VERB_PATTERN
-    )
 
-    for m in inverted_pattern.finditer(text):
-        # 用引语开始位置去重，避免与 standard 模式重复匹配同一段引语
+def _collect_inverted_dialogues(
+    text: str,
+    pattern: "re.Pattern",
+    characters: dict,
+    standard_positions: set[int],
+) -> list[dict]:
+    """倒装模式扫描：跳过与标准模式重复的引语起始位置。"""
+    dialogues = []
+    for m in pattern.finditer(text):
         if m.start("q_open") in standard_positions:
             continue
         alias = m.group("alias")
@@ -223,6 +218,40 @@ def find_dialogues_in_text(
             "position": m.start(),
             "quote_length": len(m.group("quote")),
         })
+    return dialogues
+
+
+def find_dialogues_in_text(
+    text: str,
+    alias_patterns: list,
+    characters: dict,
+) -> list[dict]:
+    """在文本中找出所有引语并归属到人物。
+
+    引语模式：
+      1. 标准模式：X (副词)? 道/曰/言/云 (：)? "..."  → "行者笑道：..."
+      2. 倒装模式："..." ，X (副词)? 道/曰/言/云        → "...，" 行者道。
+
+    返回 [{speaker, alias_used, quote, pattern, position, quote_length}, ...]
+
+    W802 行为保持重构：正则编译与两轮扫描拆为 `_build_dialogue_patterns` /
+    `_collect_standard_dialogues` / `_collect_inverted_dialogues`；别名 alternation
+    构建、去重规则与按位置排序均原样保留。
+    """
+    # 构建所有别名的统一 alternation（按长度降序避免子串冲突）
+    all_aliases = set()
+    for aliases in characters.values():
+        all_aliases.update(aliases)
+    sorted_all = sorted(all_aliases, key=len, reverse=True)
+    alias_alternation = "|".join(re.escape(a) for a in sorted_all)
+
+    standard_pattern, inverted_pattern = _build_dialogue_patterns(alias_alternation)
+    dialogues, standard_positions = _collect_standard_dialogues(
+        text, standard_pattern, characters
+    )
+    dialogues += _collect_inverted_dialogues(
+        text, inverted_pattern, characters, standard_positions
+    )
 
     dialogues.sort(key=lambda x: x["position"])
     return dialogues
@@ -302,18 +331,13 @@ def build_cooccurrence(
     }
 
 
-def build_cooccurrence_timeline(
+def _accumulate_timeline(
     chapters: list[tuple[int, str, str]],
-    characters: dict,
     alias_patterns: list,
-) -> dict:
-    """构建按回的共现时间线数据（W102 关系演化可视化基础·精简版）。
+) -> tuple:
+    """按回累加共现：产出 per_chapter、累积边、分桶边、关系对按回序列。
 
-    输出三组数据：
-      - per_chapter: 每回出场人物列表（edges 前端动态计算，避免数据冗余）
-      - cumulative_snapshots: 每 10 回一个累积快照（Top 30 边，用于力导向图时间滑块）
-      - binned: 每 10 回分桶的共现边列表（Top 30 边，用于热力图）
-      - top_pairs_curve: 全书 Top 10 关系对的按回共现序列（用于演化曲线）
+    拆分自 build_cooccurrence_timeline（W802 行为保持重构）——只做遍历累加。
     """
     per_chapter = []
     cumulative_edges = defaultdict(int)
@@ -351,6 +375,11 @@ def build_cooccurrence_timeline(
             }
             cumulative_snapshots.append(snapshot)
 
+    return per_chapter, cumulative_edges, cumulative_snapshots, binned_edges, pair_per_chapter
+
+
+def _build_binned_output(binned_edges: dict) -> list:
+    """按桶组装共现边列表（每桶 Top 30·桶号升序）。"""
     binned_by_bucket = defaultdict(list)
     for (bucket, pair), weight in binned_edges.items():
         binned_by_bucket[bucket].append({
@@ -368,10 +397,13 @@ def build_cooccurrence_timeline(
             "bucket": bucket,
             "edges": edges,
         })
+    return binned_output
 
-    # Top 10 关系对的按回共现序列（用于演化曲线）
+
+def _build_top_pairs_curve(pair_per_chapter: dict) -> list:
+    """全书 Top 10 关系对的按回共现序列（用于演化曲线）。"""
     top_pairs = sorted(pair_per_chapter.items(), key=lambda x: -len(x[1]))[:10]
-    top_pairs_curve = [
+    return [
         {
             "source": pair[0],
             "target": pair[1],
@@ -380,6 +412,28 @@ def build_cooccurrence_timeline(
         }
         for pair, chapters_list in top_pairs
     ]
+
+
+def build_cooccurrence_timeline(
+    chapters: list[tuple[int, str, str]],
+    characters: dict,
+    alias_patterns: list,
+) -> dict:
+    """构建按回的共现时间线数据（W102 关系演化可视化基础·精简版）。
+
+    输出三组数据：
+      - per_chapter: 每回出场人物列表（edges 前端动态计算，避免数据冗余）
+      - cumulative_snapshots: 每 10 回一个累积快照（Top 30 边，用于力导向图时间滑块）
+      - binned: 每 10 回分桶的共现边列表（Top 30 边，用于热力图）
+      - top_pairs_curve: 全书 Top 10 关系对的按回共现序列（用于演化曲线）
+
+    W802 行为保持重构：累加、分桶组装、Top 曲线拆为三个 `_build/_accumulate` 小函数。
+    """
+    per_chapter, cumulative_edges, cumulative_snapshots, binned_edges, pair_per_chapter = (
+        _accumulate_timeline(chapters, alias_patterns)
+    )
+    binned_output = _build_binned_output(binned_edges)
+    top_pairs_curve = _build_top_pairs_curve(pair_per_chapter)
 
     return {
         "per_chapter": per_chapter,
@@ -589,35 +643,20 @@ def analyze_quote_sentiment(quote: str) -> tuple[str, int, list, list]:
     return polarity, score, positive_hits, negative_hits
 
 
-def build_dialogue_sentiment(
-    dialogues_data: dict,
-    top_speakers: int = 10,
-    top_chapter_speakers: int = 5,
-) -> dict:
-    r"""构建引语情感分析数据（W103 人物引语情感分析可视化基础）。
+def _accumulate_dialogue_sentiment(all_dialogues: list) -> tuple:
+    """遍历全部引语，一次累加四组计数。
 
-    输入：dialogues_data（build_dialogue_attribution 输出）
-    输出五组数据：
-      - sentiment_distribution: 全书情感分布（positive/neutral/negative 计数）
-      - speaker_sentiment: 按人物的情感统计（Top N 说话者，含 top 情感词）
-      - chapter_sentiment: 按回目的情感统计（100 回）
-      - speaker_chapter_curve: 主要人物的按回情感曲线（Top N 说话者 × 100 回）
-      - top_sentiment_words: 全书 Top 50 情感词（正向 + 负向）
+    返回 (全书三态计数, speaker 统计, 回目统计, speaker×回目统计)。
+    拆分自 build_dialogue_sentiment（W801 行为保持重构）——纯累加，不做输出组装。
     """
-    all_dialogues = dialogues_data["dialogues"]
-
-    # 全书情感分布
     pos_count = neu_count = neg_count = 0
-    # 按人物统计
     speaker_stats = defaultdict(lambda: {
         "total": 0, "positive": 0, "neutral": 0, "negative": 0,
         "score_sum": 0, "positive_words": Counter(), "negative_words": Counter(),
     })
-    # 按回目统计
     chapter_stats = defaultdict(lambda: {
         "total": 0, "positive": 0, "neutral": 0, "negative": 0, "score_sum": 0,
     })
-    # 按人物 × 回目统计
     speaker_chapter = defaultdict(lambda: defaultdict(lambda: {
         "total": 0, "score_sum": 0,
     }))
@@ -629,7 +668,6 @@ def build_dialogue_sentiment(
 
         polarity, score, pos_words, neg_words = analyze_quote_sentiment(quote)
 
-        # 全书分布
         if polarity == "positive":
             pos_count += 1
         elif polarity == "negative":
@@ -637,35 +675,29 @@ def build_dialogue_sentiment(
         else:
             neu_count += 1
 
-        # 按人物
-        speaker_stats[speaker]["total"] += 1
-        speaker_stats[speaker][polarity] += 1
-        speaker_stats[speaker]["score_sum"] += score
+        s = speaker_stats[speaker]
+        s["total"] += 1
+        s[polarity] += 1
+        s["score_sum"] += score
         for w in pos_words:
-            speaker_stats[speaker]["positive_words"][w] += 1
+            s["positive_words"][w] += 1
         for w in neg_words:
-            speaker_stats[speaker]["negative_words"][w] += 1
+            s["negative_words"][w] += 1
 
-        # 按回目
-        chapter_stats[chapter]["total"] += 1
-        chapter_stats[chapter][polarity] += 1
-        chapter_stats[chapter]["score_sum"] += score
+        c = chapter_stats[chapter]
+        c["total"] += 1
+        c[polarity] += 1
+        c["score_sum"] += score
 
-        # 按人物 × 回目
-        speaker_chapter[speaker][chapter]["total"] += 1
-        speaker_chapter[speaker][chapter]["score_sum"] += score
+        sc = speaker_chapter[speaker][chapter]
+        sc["total"] += 1
+        sc["score_sum"] += score
 
-    # 全书情感词统计
-    all_pos_words = Counter()
-    all_neg_words = Counter()
-    for s in speaker_stats.values():
-        all_pos_words.update(s["positive_words"])
-        all_neg_words.update(s["negative_words"])
+    return (pos_count, neu_count, neg_count), speaker_stats, chapter_stats, speaker_chapter
 
-    # speaker_sentiment 输出（Top N 说话者，按总数排序）
-    speaker_ranking = dialogues_data["speaker_ranking"]
-    top_speakers_list = [s["speaker"] for s in speaker_ranking[:top_speakers]]
 
+def _build_speaker_sentiment(top_speakers_list: list, speaker_stats: dict) -> list:
+    """按人物输出情感统计（Top N 说话者，含 top 情感词）。"""
     speaker_sentiment = []
     for speaker in top_speakers_list:
         s = speaker_stats[speaker]
@@ -691,8 +723,11 @@ def build_dialogue_sentiment(
                 for w, c in s["negative_words"].most_common(10)
             ],
         })
+    return speaker_sentiment
 
-    # chapter_sentiment 输出（100 回）
+
+def _build_chapter_sentiment(chapter_stats: dict) -> list:
+    """按回目输出情感统计（100 回，按回号升序）。"""
     chapter_sentiment = []
     for ch in sorted(chapter_stats.keys()):
         s = chapter_stats[ch]
@@ -709,8 +744,15 @@ def build_dialogue_sentiment(
             "negative_ratio": round(s["negative"] / total, 4),
             "avg_sentiment": round(s["score_sum"] / total, 4),
         })
+    return chapter_sentiment
 
-    # speaker_chapter_curve 输出（Top N 说话者 × 100 回）
+
+def _build_speaker_chapter_curve(
+    top_speakers_list: list,
+    speaker_chapter: dict,
+    top_chapter_speakers: int,
+) -> list:
+    """主要人物的按回情感曲线（Top N 说话者 × 100 回，缺口回补 0）。"""
     speaker_chapter_curve = []
     for speaker in top_speakers_list[:top_chapter_speakers]:
         chapters_data = []
@@ -732,9 +774,17 @@ def build_dialogue_sentiment(
             "speaker": speaker,
             "chapters": chapters_data,
         })
+    return speaker_chapter_curve
 
-    # top_sentiment_words 输出（Top 50）
-    top_sentiment_words = {
+
+def _build_top_sentiment_words(speaker_stats: dict) -> dict:
+    """全书 Top 50 情感词（正/负各 50，跨人物合并计数）。"""
+    all_pos_words = Counter()
+    all_neg_words = Counter()
+    for s in speaker_stats.values():
+        all_pos_words.update(s["positive_words"])
+        all_neg_words.update(s["negative_words"])
+    return {
         "positive": [
             {"word": w, "count": c}
             for w, c in all_pos_words.most_common(50)
@@ -744,6 +794,42 @@ def build_dialogue_sentiment(
             for w, c in all_neg_words.most_common(50)
         ],
     }
+
+
+def build_dialogue_sentiment(
+    dialogues_data: dict,
+    top_speakers: int = 10,
+    top_chapter_speakers: int = 5,
+) -> dict:
+    r"""构建引语情感分析数据（W103 人物引语情感分析可视化基础）。
+
+    输入：dialogues_data（build_dialogue_attribution 输出）
+    输出五组数据：
+      - sentiment_distribution: 全书情感分布（positive/neutral/negative 计数）
+      - speaker_sentiment: 按人物的情感统计（Top N 说话者，含 top 情感词）
+      - chapter_sentiment: 按回目的情感统计（100 回）
+      - speaker_chapter_curve: 主要人物的按回情感曲线（Top N 说话者 × 100 回）
+      - top_sentiment_words: 全书 Top 50 情感词（正向 + 负向）
+
+    W801 行为保持重构：累加与五组组装拆为 `_accumulate_*` / `_build_*` 六个小函数，
+    本函数只做取数与拼装；输出键序、数值与注记文本逐字未变（对拍见 tmpe/w801/）。
+    """
+    all_dialogues = dialogues_data["dialogues"]
+    counts, speaker_stats, chapter_stats, speaker_chapter = (
+        _accumulate_dialogue_sentiment(all_dialogues)
+    )
+    pos_count, neu_count, neg_count = counts
+
+    # speaker_sentiment 输出（Top N 说话者，按总数排序）
+    speaker_ranking = dialogues_data["speaker_ranking"]
+    top_speakers_list = [s["speaker"] for s in speaker_ranking[:top_speakers]]
+
+    speaker_sentiment = _build_speaker_sentiment(top_speakers_list, speaker_stats)
+    chapter_sentiment = _build_chapter_sentiment(chapter_stats)
+    speaker_chapter_curve = _build_speaker_chapter_curve(
+        top_speakers_list, speaker_chapter, top_chapter_speakers
+    )
+    top_sentiment_words = _build_top_sentiment_words(speaker_stats)
 
     result = {
         "total_dialogues": len(all_dialogues),
@@ -814,7 +900,8 @@ def extract_chapters_from_html(html_path: Path) -> list[tuple[int, str, str]]:
 # CLI 主入口
 # ====================================================================
 
-def main():
+def _build_arg_parser() -> argparse.ArgumentParser:
+    """CLI 参数定义（拆分自 main·W801 行为保持重构）。"""
     parser = argparse.ArgumentParser(
         description="《西游记》人物 NLP pipeline（零依赖纯标准库）",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -839,22 +926,25 @@ def main():
         default="all",
         help="输出模式（默认 all）",
     )
-    args = parser.parse_args()
+    return parser
 
-    # 确定数据源
-    if args.input:
-        input_path = Path(args.input)
+
+def _load_chapters(input_arg: str | None) -> list[tuple[int, str, str]]:
+    """解析数据源并加载回目（拆分自 main）。
+
+    三条路径：显式目录（分回 md）/ 显式文件（旧格式 text-search.html）/ 默认分回目录。
+    返回 [(num, title, text)]；缺回只告警不退出，零回退出。
+    """
+    if input_arg:
+        input_path = Path(input_arg)
         if input_path.is_dir():
             print(f"[INFO] 从分回目录加载：{input_path}")
             raw_chapters = load_all_chapters(input_path)
-            chapters = []
-            for name, text in raw_chapters:
-                m = re.search(r"第(\d+)回", name)
-                num = int(m.group(1)) if m else 0
-                chapters.append((num, name, text))
         else:
             print(f"[INFO] 从 HTML 提取原文：{input_path}")
             chapters = extract_chapters_from_html(input_path)
+            _warn_missing_chapters(chapters)
+            return chapters
     else:
         project_root = Path(__file__).resolve().parent.parent.parent
         # W670：默认源切权威分回目录——text-search.html 内嵌语料已被刻意迁出页面（W563 性能批·
@@ -865,130 +955,163 @@ def main():
             sys.exit(1)
         print(f"[INFO] 从默认分回目录加载：{default_dir}")
         raw_chapters = load_all_chapters(default_dir)
-        chapters = []
-        for name, text in raw_chapters:
-            m = re.search(r"第(\d+)回", name)
-            num = int(m.group(1)) if m else 0
-            chapters.append((num, name, text))
 
+    chapters = []
+    for name, text in raw_chapters:
+        m = re.search(r"第(\d+)回", name)
+        num = int(m.group(1)) if m else 0
+        chapters.append((num, name, text))
+    _warn_missing_chapters(chapters)
+    return chapters
+
+
+def _warn_missing_chapters(chapters: list[tuple[int, str, str]]) -> None:
+    """回目载入后的统一校验：零回退出；缺回告警（不阻断）。"""
     print(f"[INFO] 加载了 {len(chapters)} 回")
     if not chapters:
         print("[ERROR] 未加载到任何回目", file=sys.stderr)
         sys.exit(1)
-
-    # 验证回目连续性
     nums = [c[0] for c in chapters]
     missing = set(range(1, 101)) - set(nums)
     if missing:
         print(f"[WARN] 缺失回目：{sorted(missing)}", file=sys.stderr)
 
+
+def _write_json(path: Path, payload: dict) -> None:
+    """统一的 JSON 落盘（ensure_ascii=False·indent=2·UTF-8），五处产物共用。"""
+    path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+
+def _emit_characters(output_dir: Path, chapters, alias_patterns) -> None:
+    """产物一：characters.json（人物统计）。"""
+    print("[INFO] 构建人物统计...")
+    stats = build_character_stats(chapters, CHARACTERS, alias_patterns)
+    out_path = output_dir / "characters.json"
+    _write_json(out_path, stats)
+    print(f"[OK] 人物统计写入：{out_path}")
+    print(f"     人物数：{stats['character_count']}")
+    if stats["characters"]:
+        top1 = stats["characters"][0]
+        print(
+            f"     Top1: {top1['name']} 出场 {top1['appear_chapters']} 回，"
+            f"提及 {top1['total_mentions']} 次"
+        )
+
+
+def _emit_cooccurrence(output_dir: Path, chapters, alias_patterns) -> None:
+    """产物二：cooccurrence.json（分回 + 场景双维度共现）。"""
+    print("[INFO] 构建共现网络（分回维度）...")
+    chapter_co = build_cooccurrence(
+        chapters, CHARACTERS, alias_patterns, mode="chapter"
+    )
+    print("[INFO] 构建共现网络（对话场景维度）...")
+    scene_co = build_cooccurrence(
+        chapters, CHARACTERS, alias_patterns, mode="scene"
+    )
+    cooccurrence = {
+        "chapter_level": chapter_co,
+        "scene_level": scene_co,
+    }
+    out_path = output_dir / "cooccurrence.json"
+    _write_json(out_path, cooccurrence)
+    print(f"[OK] 共现网络写入：{out_path}")
+    print(
+        f"     分回维度：{len(chapter_co['nodes'])} 节点，"
+        f"{len(chapter_co['edges'])} 边"
+    )
+    print(
+        f"     场景维度：{len(scene_co['nodes'])} 节点，"
+        f"{len(scene_co['edges'])} 边"
+    )
+
+
+def _emit_dialogues(output_dir: Path, chapters, alias_patterns) -> dict:
+    """产物三：dialogues.json（引语归属）——返回值供 sentiment 复用。"""
+    print("[INFO] 构建引语归属...")
+    dialogues = build_dialogue_attribution(
+        chapters, CHARACTERS, alias_patterns
+    )
+    out_path = output_dir / "dialogues.json"
+    _write_json(out_path, dialogues)
+    print(f"[OK] 引语归属写入：{out_path}")
+    print(f"     总引语：{dialogues['total_dialogues']} 条")
+    print(f"     说话者：{dialogues['speaker_count']} 人")
+    if dialogues["speaker_ranking"]:
+        top1 = dialogues["speaker_ranking"][0]
+        print(f"     Top1: {top1['speaker']} {top1['count']} 条")
+    return dialogues
+
+
+def _emit_timeline(output_dir: Path, chapters, alias_patterns) -> None:
+    """产物四：cooccurrence_timeline.json（按回 + 累积快照 + 分桶）。"""
+    print("[INFO] 构建共现时间线（按回 + 累积快照 + 分桶）...")
+    timeline = build_cooccurrence_timeline(chapters, CHARACTERS, alias_patterns)
+    out_path = output_dir / "cooccurrence_timeline.json"
+    _write_json(out_path, timeline)
+    print(f"[OK] 共现时间线写入：{out_path}")
+    print(
+        f"     per_chapter: {len(timeline['per_chapter'])} 回，"
+        f"cumulative_snapshots: {len(timeline['cumulative_snapshots'])} 个快照，"
+        f"binned: {len(timeline['binned'])} 个分桶"
+    )
+
+
+def _emit_sentiment(
+    output_dir: Path, chapters, alias_patterns, mode: str, dialogues: dict | None
+) -> None:
+    """产物五：dialogue_sentiment.json（引语情感）。
+
+    mode=all 时 dialogues 已由 _emit_dialogues 构建；mode=sentiment 需自行补建（原逻辑保留）。
+    """
+    print("[INFO] 构建引语情感分析...")
+    if mode == "sentiment":
+        print("[INFO] 引语归属尚未构建，先构建引语归属...")
+        dialogues = build_dialogue_attribution(
+            chapters, CHARACTERS, alias_patterns
+        )
+    sentiment = build_dialogue_sentiment(dialogues)
+    out_path = output_dir / "dialogue_sentiment.json"
+    _write_json(out_path, sentiment)
+    print(f"[OK] 引语情感分析写入：{out_path}")
+    dist = sentiment["sentiment_distribution"]
+    print(
+        f"     全书分布：正向 {dist['positive']} / 中性 {dist['neutral']} / 负向 {dist['negative']}"
+    )
+    if sentiment["speaker_sentiment"]:
+        top1 = sentiment["speaker_sentiment"][0]
+        print(
+            f"     Top1: {top1['speaker']} {top1['total']} 条引语，"
+            f"avg_sentiment={top1['avg_sentiment']}"
+        )
+
+
+def main():
+    """CLI 编排（W801 行为保持重构：源加载与五个产物各成一函数，print 顺序未变）。"""
+    args = _build_arg_parser().parse_args()
+
+    chapters = _load_chapters(args.input)
     alias_patterns = build_alias_regex(CHARACTERS)
 
     output_dir = Path(args.output)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # 输出 characters.json
+    dialogues = None
     if args.mode in ("all", "characters"):
-        print("[INFO] 构建人物统计...")
-        stats = build_character_stats(chapters, CHARACTERS, alias_patterns)
-        out_path = output_dir / "characters.json"
-        out_path.write_text(
-            json.dumps(stats, ensure_ascii=False, indent=2), encoding="utf-8"
-        )
-        print(f"[OK] 人物统计写入：{out_path}")
-        print(f"     人物数：{stats['character_count']}")
-        if stats["characters"]:
-            top1 = stats["characters"][0]
-            print(
-                f"     Top1: {top1['name']} 出场 {top1['appear_chapters']} 回，"
-                f"提及 {top1['total_mentions']} 次"
-            )
+        _emit_characters(output_dir, chapters, alias_patterns)
 
-    # 输出 cooccurrence.json
     if args.mode in ("all", "cooccurrence"):
-        print("[INFO] 构建共现网络（分回维度）...")
-        chapter_co = build_cooccurrence(
-            chapters, CHARACTERS, alias_patterns, mode="chapter"
-        )
-        print("[INFO] 构建共现网络（对话场景维度）...")
-        scene_co = build_cooccurrence(
-            chapters, CHARACTERS, alias_patterns, mode="scene"
-        )
-        cooccurrence = {
-            "chapter_level": chapter_co,
-            "scene_level": scene_co,
-        }
-        out_path = output_dir / "cooccurrence.json"
-        out_path.write_text(
-            json.dumps(cooccurrence, ensure_ascii=False, indent=2), encoding="utf-8"
-        )
-        print(f"[OK] 共现网络写入：{out_path}")
-        print(
-            f"     分回维度：{len(chapter_co['nodes'])} 节点，"
-            f"{len(chapter_co['edges'])} 边"
-        )
-        print(
-            f"     场景维度：{len(scene_co['nodes'])} 节点，"
-            f"{len(scene_co['edges'])} 边"
-        )
+        _emit_cooccurrence(output_dir, chapters, alias_patterns)
 
-    # 输出 dialogues.json
     if args.mode in ("all", "dialogues"):
-        print("[INFO] 构建引语归属...")
-        dialogues = build_dialogue_attribution(
-            chapters, CHARACTERS, alias_patterns
-        )
-        out_path = output_dir / "dialogues.json"
-        out_path.write_text(
-            json.dumps(dialogues, ensure_ascii=False, indent=2), encoding="utf-8"
-        )
-        print(f"[OK] 引语归属写入：{out_path}")
-        print(f"     总引语：{dialogues['total_dialogues']} 条")
-        print(f"     说话者：{dialogues['speaker_count']} 人")
-        if dialogues["speaker_ranking"]:
-            top1 = dialogues["speaker_ranking"][0]
-            print(f"     Top1: {top1['speaker']} {top1['count']} 条")
+        dialogues = _emit_dialogues(output_dir, chapters, alias_patterns)
 
-    # 输出 cooccurrence_timeline.json（W102 关系演化可视化基础）
     if args.mode in ("all", "timeline"):
-        print("[INFO] 构建共现时间线（按回 + 累积快照 + 分桶）...")
-        timeline = build_cooccurrence_timeline(chapters, CHARACTERS, alias_patterns)
-        out_path = output_dir / "cooccurrence_timeline.json"
-        out_path.write_text(
-            json.dumps(timeline, ensure_ascii=False, indent=2), encoding="utf-8"
-        )
-        print(f"[OK] 共现时间线写入：{out_path}")
-        print(
-            f"     per_chapter: {len(timeline['per_chapter'])} 回，"
-            f"cumulative_snapshots: {len(timeline['cumulative_snapshots'])} 个快照，"
-            f"binned: {len(timeline['binned'])} 个分桶"
-        )
+        _emit_timeline(output_dir, chapters, alias_patterns)
 
-    # 输出 dialogue_sentiment.json（W103 人物引语情感分析可视化基础）
     if args.mode in ("all", "sentiment"):
-        print("[INFO] 构建引语情感分析...")
-        # sentiment 独立模式需重新构建引语归属（all 模式下 dialogues 已存在）
-        if args.mode == "sentiment":
-            print("[INFO] 引语归属尚未构建，先构建引语归属...")
-            dialogues = build_dialogue_attribution(
-                chapters, CHARACTERS, alias_patterns
-            )
-        sentiment = build_dialogue_sentiment(dialogues)
-        out_path = output_dir / "dialogue_sentiment.json"
-        out_path.write_text(
-            json.dumps(sentiment, ensure_ascii=False, indent=2), encoding="utf-8"
-        )
-        print(f"[OK] 引语情感分析写入：{out_path}")
-        dist = sentiment["sentiment_distribution"]
-        print(
-            f"     全书分布：正向 {dist['positive']} / 中性 {dist['neutral']} / 负向 {dist['negative']}"
-        )
-        if sentiment["speaker_sentiment"]:
-            top1 = sentiment["speaker_sentiment"][0]
-            print(
-                f"     Top1: {top1['speaker']} {top1['total']} 条引语，"
-                f"avg_sentiment={top1['avg_sentiment']}"
-            )
+        _emit_sentiment(output_dir, chapters, alias_patterns, args.mode, dialogues)
 
 
 if __name__ == "__main__":

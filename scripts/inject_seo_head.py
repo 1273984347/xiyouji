@@ -31,7 +31,13 @@ SITE = ROOT / "site"
 OUT_PAIRS = ROOT / "scripts" / "output" / "hreflang-pairs.json"
 
 BASE = "https://1273984347.github.io/xiyouji/"
-OG_IMAGE = BASE + "static/img/og-cover.png"
+OG_IMAGE_ZH = BASE + "static/img/og-cover-ink-zh.jpg"
+OG_IMAGE_EN = BASE + "static/img/og-cover-ink-en.jpg"
+
+
+def og_image_for(is_en: bool) -> str:
+    """分语言 og:image（W880）：英文站用 EN 图，其余中文页用 ZH 图。"""
+    return OG_IMAGE_EN if is_en else OG_IMAGE_ZH
 EXCLUDE = {"_template.html", "data/_shell.html"}
 MARKER = "<!-- SEO:INJECTED -->"
 JSONLD_SRC_TAG = '<script type="application/ld+json" src="structured-data.jsonld"></script>'
@@ -92,7 +98,7 @@ def head_block(self_url: str, zh_href: str | None, en_href: str | None, og_type:
     if "og:url" not in has:
         add(f'<meta property="og:url" content="{self_url}">', "og:url")
     if "og:image" not in has:
-        add(f'<meta property="og:image" content="{OG_IMAGE}">', "og:image")
+        add(f'<meta property="og:image" content="{og_image_for(is_en)}">', "og:image")
         add('<meta property="og:image:width" content="1200">', "og:image:width")
         add('<meta property="og:image:height" content="630">', "og:image:height")
     if "twitter:card" not in has:

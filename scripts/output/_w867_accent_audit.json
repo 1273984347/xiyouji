@@ -1,0 +1,705 @@
+{
+  "data/monster-background.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card ",
+        "kind": "border-top",
+        "area": 809
+      }
+    ]
+  },
+  "data/monster-capability-radar.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "① 15 妖怪能力雷达图叠加"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "② 五维度能力排名柱状图"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "③ 法力 vs 结局 散点图"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "④ 妖怪分类桑基图（来历→结局）"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "⑤ 能力极值 KPI 卡片"
+      },
+      {
+        "tag": "div",
+        "cls": "ex-monster",
+        "txt": "大鹏金翅雕"
+      },
+      {
+        "tag": "div",
+        "cls": "ex-monster",
+        "txt": "六耳猕猴"
+      },
+      {
+        "tag": "div",
+        "cls": "ex-monster",
+        "txt": "六耳猕猴"
+      },
+      {
+        "tag": "div",
+        "cls": "ex-monster",
+        "txt": "红孩儿"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "⑥ 跨页面导航 · 等级-能力双维"
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "txt": "monster-hierarchy-networ"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/monster-ecology-network.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "一、妖怪生态网络·D3.js 力导向图 Forc"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "二、食物链能量流动·桑基图 Food Chain"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "三、妖怪生态位·雷达图叠加 Ecological"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "四、种群动态时间线 Population Dyn"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "五、四理论家 × 四维度矩阵 Theory Ma"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "六、r-K 选择谱系 r-K Selection"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card fire",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "button",
+        "cls": "tab-btn active",
+        "kind": "background",
+        "area": 3256
+      }
+    ]
+  },
+  "data/monster-female-network.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "section-title alt",
+        "txt": "贰 · 女性妖怪群体力导向关系图"
+      },
+      {
+        "tag": "h2",
+        "cls": "section-title alt",
+        "txt": "伍 · 女妖出场与命运时间线"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/monster-hierarchy-network.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 528
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 528
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card ",
+        "kind": "border-top",
+        "area": 528
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card ",
+        "kind": "border-top",
+        "area": 528
+      }
+    ]
+  },
+  "data/monster-sociology.html": {
+    "text_on_bg": [
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "作案模式分类学"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "25 个数据点"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "变化诈骗"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "变化诈骗"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "武力劫掠"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "色诱"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "法术威胁"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "团队围剿"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "主动信号"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "核心发现："
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "核心发现："
+      },
+      {
+        "tag": "div",
+        "cls": "map-label",
+        "txt": "RADAR INSIGHT"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "2 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "3 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "3 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "2 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "2 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "5 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "2 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "5 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "2 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "2 / 10"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "100% 被处死"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "白骨精"
+      },
+      {
+        "tag": "span",
+        "cls": "icon-wrong",
+        "txt": "✗ 被打死"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "蜘蛛精七姐妹"
+      },
+      {
+        "tag": "span",
+        "cls": "icon-wrong",
+        "txt": "✗ 被打死"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "蝎子精"
+      },
+      {
+        "tag": "span",
+        "cls": "icon-wrong",
+        "txt": "✗ 被杀"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "车迟国三妖"
+      },
+      {
+        "tag": "span",
+        "cls": "icon-wrong",
+        "txt": "✗ 三妖惨死"
+      },
+      {
+        "tag": "div",
+        "cls": "map-label",
+        "txt": "META INSIGHT"
+      },
+      {
+        "tag": "div",
+        "cls": "map-label",
+        "txt": "CONCLUSION"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "signal-card s-active",
+        "kind": "border-top",
+        "area": 1098
+      },
+      {
+        "tag": "div",
+        "cls": "signal-card s-active",
+        "kind": "border-top",
+        "area": 1098
+      },
+      {
+        "tag": "div",
+        "cls": "signal-card s-active",
+        "kind": "border-top",
+        "area": 1098
+      }
+    ]
+  },
+  "data/monster-victims-network.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "section-title alt",
+        "txt": "贰 · 受害者-施害者-旁观者关系力导向图"
+      },
+      {
+        "tag": "h2",
+        "cls": "section-title alt",
+        "txt": "伍 · 受害者命运时间线"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "victim-card",
+        "kind": "border-top",
+        "area": 2221
+      },
+      {
+        "tag": "div",
+        "cls": "swatch-bar",
+        "kind": "background",
+        "area": 1251
+      }
+    ]
+  },
+  "data/ecology.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "span",
+        "cls": "damage-pill damage-high",
+        "kind": "background",
+        "area": 1188
+      },
+      {
+        "tag": "span",
+        "cls": "damage-pill damage-high",
+        "kind": "background",
+        "area": 1188
+      },
+      {
+        "tag": "span",
+        "cls": "damage-pill damage-high",
+        "kind": "background",
+        "area": 1381
+      },
+      {
+        "tag": "div",
+        "cls": "compare-card invasive",
+        "kind": "border-top",
+        "area": 1669
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card ",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "span",
+        "cls": "damage-pill damage-high",
+        "kind": "background",
+        "area": 1188
+      },
+      {
+        "tag": "span",
+        "cls": "damage-pill damage-high",
+        "kind": "background",
+        "area": 1188
+      },
+      {
+        "tag": "span",
+        "cls": "damage-pill damage-high",
+        "kind": "background",
+        "area": 1381
+      },
+      {
+        "tag": "span",
+        "cls": "damage-pill damage-high",
+        "kind": "background",
+        "area": 1381
+      },
+      {
+        "tag": "span",
+        "cls": "damage-pill damage-high",
+        "kind": "background",
+        "area": 1188
+      },
+      {
+        "tag": "span",
+        "cls": "damage-pill damage-high",
+        "kind": "background",
+        "area": 1188
+      },
+      {
+        "tag": "div",
+        "cls": "stage-card during",
+        "kind": "border-top",
+        "area": 1098
+      }
+    ]
+  },
+  "data/heaven-power-network.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 528
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 528
+      },
+      {
+        "tag": "div",
+        "cls": "role-card r-king",
+        "kind": "border-top",
+        "area": 2225
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card ",
+        "kind": "border-top",
+        "area": 528
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card ",
+        "kind": "border-top",
+        "area": 528
+      }
+    ]
+  },
+  "data/underworld-power-network.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 528
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 528
+      },
+      {
+        "tag": "div",
+        "cls": "role-card r-king",
+        "kind": "border-top",
+        "area": 1465
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card ",
+        "kind": "border-top",
+        "area": 528
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card ",
+        "kind": "border-top",
+        "area": 528
+      }
+    ]
+  }
+}

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>金角银角深化专题</title>
 <!-- SEO:INJECTED -->
@@ -12,46 +12,78 @@
 <meta property="og:description" content="金角银角深化专题——《详解西游记》人物深度">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://1273984347.github.io/xiyouji/reader/people/金角银角深化专题.html">
-<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+
+
+<script src="../../js/theme-init.js"></script>
+<script src="../../js/reader-enhance.js" defer></script>
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
-<script src="../../js/theme-init.js"></script>
 <style>
-  .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
+  .reader-wrap { max-width: var(--container-read); margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
     padding: 14px 0; border-bottom: 1px solid var(--line); margin-bottom: 28px;
     font-size: 14px; }
-  .reader-topnav a { color: var(--accent); text-decoration: none; }
+  .reader-topnav a { color: var(--accent-text); text-decoration: none; }
   .reader-topnav a:hover { text-decoration: underline; }
   .reader-topnav .brand { color: var(--ink); font-weight: 700; }
   .reader-body { font-family: var(--font-serif, serif); color: var(--ink);
     line-height: 1.9; font-size: 17px; }
-  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: 12px 0 20px; }
-  .reader-body h2 { font-size: 21px; margin: 34px 0 12px; padding-left: 10px;
+  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: var(--space-4) 0 var(--space-5); }
+  .reader-body h2 { font-size: 21px; margin: 34px 0 var(--space-4); padding-left: 10px;
     border-left: 3px solid var(--accent); }
-  .reader-body h3 { font-size: 18px; margin: 24px 0 10px; }
-  .reader-body blockquote { margin: 14px 0; padding: 8px 14px; color: var(--ink-soft);
+  .reader-body h3 { font-size: 18px; margin: var(--space-6) 0 10px; }
+  .reader-body blockquote { margin: 14px 0; padding: var(--space-3) 14px; color: var(--ink-soft);
     background: var(--paper-warm, var(--paper)); border-left: 3px solid var(--ink-faint); }
-  .reader-body a { color: var(--accent); }
-  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+  .reader-body a { color: var(--accent-text); }
+  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: var(--space-7) 0; }
   .reader-meta { color: var(--ink-soft); font-size: 13px; margin: 0 0 26px; }
   .reader-pn { display: flex; justify-content: space-between; gap: 12px; margin-top: 44px;
     padding-top: 18px; border-top: 1px solid var(--line); font-size: 15px; }
-  .reader-pn a { color: var(--accent); text-decoration: none; }
+  .reader-pn a { color: var(--accent-text); text-decoration: none; }
   .reader-pn a:hover { text-decoration: underline; }
   .reader-pn .off { color: var(--ink-faint); }
-  .reader-idx { list-style: none; padding: 0; margin: 24px 0 0;
+  .reader-idx { list-style: none; padding: 0; margin: var(--space-6) 0 0;
     display: grid; grid-template-columns: 1fr; gap: 2px; }
   @media (min-width: 640px) { .reader-idx { grid-template-columns: 1fr 1fr; } }
-  .reader-idx a { display: block; padding: 9px 12px; color: var(--ink); text-decoration: none;
+  .reader-idx a { display: block; padding: 9px var(--space-4); color: var(--ink); text-decoration: none;
     border: 1px solid var(--line); border-radius: var(--radius-sm, 4px); font-size: 14px; }
-  .reader-idx a:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-idx a:hover { border-color: var(--accent); color: var(--accent-text); }
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
-  .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
+  .reader-group { margin: 34px 0 var(--space-3); font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 var(--space-5); padding: var(--space-3) 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent-text); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-text); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 var(--space-3); border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
 </style>
 </head>
 <body>
@@ -61,6 +93,19 @@
     <a href="../../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/02-人物深度分析/金角银角深化专题.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/people/金角银角深化专题.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>金角银角深化专题</h1>
 <blockquote>
@@ -71,7 +116,7 @@
 <h2>一、引言：被借来的苦难</h2>
 <p>在取经路上遇到的所有妖怪中，金角大王和银角大王是最特殊的一对。他们不是野妖精——不是白骨精那样没有背景的孤魂野鬼，不是蝎子精那样凭个人武力硬扛如来的天才。他们也不是体制逃逸者——不是奎木狼那样私自下凡谈恋爱的星官，不是青毛狮子那样趁主人不注意溜下凡间享受香火的坐骑。他们是"被借来的"。</p>
 <p>原著第35回，太上老君在收走金角银角之后，面对悟空的质问，给出了一个在整部《西游记》中最令人震惊的供述："此乃海上菩萨问我借了三次，送他在此托化妖魔，看你师徒可有真心往西去也。"借了三次。观音向太上老君借两个童子，放到平顶山莲花洞里当妖怪，用来测试取经团队的决心。金角银角不是自己要下凡的，不是偷跑出来的，不是被贬下界的。他们是执行任务——执行一个他们自己可能都不知道全貌的任务。观音借他们来当考官，他们认真地当了。画了唐僧师徒的影图，设了金绳，布了葫芦净瓶，把一个莲花洞经营得井井有条。他们是取经路上唯一一对"敬业"的妖怪——不是为了吃唐僧肉求长生，而是为了完成一份他们可能都不知道全貌的测试任务。</p>
-<p>他们的悲剧在于：考官不是妖怪，考官是道具。道具在完成测试之后，会被收回。太上老君那句"借了三次"，撕开了"八十一难"这个宏大叙事的面纱，露出底下的冰冷机制——你正在经历的苦难，可能不是命运对你的考验，而是某个上层为了某个目的，刻意安排在你路上的障碍。如果苦难是安排好的，那克服苦难还算成就吗？这个问题不是理论问题。它在平顶山一战中被悟空反复掂量。当他得知金角银角是老君的人、是观音借来的时，原著写他对老君吼了一句："你这老官儿，着实无礼！纵放家属为邪，该当何罪？"老君的回答是："不干我事，不可错怪了人。此乃海上菩萨问我借了三次，送他在此托化妖魔。"悟空有没有再说什么？原著没有写。但以悟空的性格，他的沉默本身就是一种态度。他可以接受妖怪拦路——妖怪要吃人是天性。他可以接受体制逃逸者拦路——他们自己造的孽，他来收场。但他很难接受"借来的苦难"——你观音为了测试我的决心，就借两个无辜的童子来当妖怪？那两个童子本来在老君那里炼丹，过着清净日子，凭什么要被借来当妖怪、最后被我一棒差点打死？本专题采用九段式结构，以"被借来的苦难"为核心母题，从莲花洞的账本、紫金红葫芦、羊脂玉净瓶、九尾狐狸精、太上老君的回收五个维度展开深化，最终在与其他专题的交叉对照中，确立金角银角作为"道具悲剧"在西游叙事中的独特位置。</p>
+<p>他们的悲剧在于：考官不是妖怪，考官是道具。道具在完成测试之后，会被收回。太上老君那句"借了三次"，撕开了"八十一难"这个宏大叙事的面纱，露出底下的冰冷机制——你正在经历的苦难，可能不是命运对你的考验，而是某个上层为了某个目的，刻意安排在你路上的障碍。如果苦难是安排好的，那克服苦难还算成就吗？这个问题不是理论问题。它在平顶山一战中被悟空反复掂量。当他得知金角银角是老君的人、是观音借来的时，原著写他对老君吼了一句："你这老官儿，着实无礼，纵放家属为邪，该问个钤束不严的罪名。"老君的回答是："不干我事，不可错怪了人。此乃海上菩萨问我借了三次，送他在此托化妖魔。"悟空有没有再说什么？原著没有写。但以悟空的性格，他的沉默本身就是一种态度。他可以接受妖怪拦路——妖怪要吃人是天性。他可以接受体制逃逸者拦路——他们自己造的孽，他来收场。但他很难接受"借来的苦难"——你观音为了测试我的决心，就借两个无辜的童子来当妖怪？那两个童子本来在老君那里炼丹，过着清净日子，凭什么要被借来当妖怪、最后被我一棒差点打死？本专题采用九段式结构，以"被借来的苦难"为核心母题，从莲花洞的账本、紫金红葫芦、羊脂玉净瓶、九尾狐狸精、太上老君的回收五个维度展开深化，最终在与其他专题的交叉对照中，确立金角银角作为"道具悲剧"在西游叙事中的独特位置。</p>
 <hr />
 <h2>二、莲花洞的账本：妖怪也要发饷</h2>
 <h3>2.1 银角的绣花针</h3>
@@ -279,6 +324,10 @@
 <p>他们的悲剧不在于被借，而在于被借之后多出来的那一部分无处安放。老君收回的是道具，收不回的是日子。日子留在莲花洞的废墟里，跟着那张请母亲来吃唐僧肉的桌子一起，菜凉了，字也凉了。但"请母亲来吃唐僧肉"这个念头——这个在整部《西游记》中独一无二的、抓了人不先吃而是先请妈来吃的念头——会留在平顶山的废墟里，像一个被风吹灭的蜡烛芯，还冒着不被人看见的烟。</p>
 <p>很多年后，老君的炼丹房里有两只银色的飞蛾。一只翅膀上有金纹，一只翅膀上有银纹。它们在八卦炉周围飞了不知道多少年，炉火烤焦了翅膀边缘，但它们不飞走。每次观音来借东西时，它们会同时撞向窗户——不是要出去，是在问：这次借谁。它们撞窗的频率，和当年在莲花洞里给母亲磕头的频率一样。咚，咚，咚。三下。母亲的声音现在还在窗框里震。老君捏着拂尘，看窗外两只蛾子又撞了一下窗。他没赶。本文与 W100/W102/W103/W121/W125/W129/W133/W137/W138 形成"数据-演化-情感-五众-次要-妖怪-器物-底层-观音-金角银角"十层结构，作为 A3 方向第 6 个核心妖怪深化专题，将 A3 人物专题数从 46 篇推进至 47 篇。金角银角深化专题不追求补全正史，它追求的是：在借条与回收的裂缝里，让那些不被记入账本的杂项——绣花针、丝线边、月光下的羊脂玉、"够了"两个字、撞窗的飞蛾——重新发光。这些杂项不是道具的附属品，是被借来的苦难里唯一属于童子自己的部分。借条到期了，杂项还在。</p>
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E9%87%91%E8%A7%92%E9%93%B6%E8%A7%92%E6%B7%B1%E5%8C%96%E4%B8%93%E9%A2%98&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E9%87%91%E8%A7%92%E9%93%B6%E8%A7%92%E6%B7%B1%E5%8C%96%E4%B8%93%E9%A2%98.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E9%87%91%E8%A7%92%E9%93%B6%E8%A7%92%E6%B7%B1%E5%8C%96%E4%B8%93%E9%A2%98&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E9%87%91%E8%A7%92%E9%93%B6%E8%A7%92%E6%B7%B1%E5%8C%96%E4%B8%93%E9%A2%98.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="../people/金角银角外传.html">← 上一篇</a><a href="../people/铁扇公主-方向二深化.html">下一篇 →</a></nav>
 </main>
 </body>

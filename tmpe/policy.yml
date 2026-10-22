@@ -2,7 +2,7 @@
   "_comment": "tmpe 临时区策略（W738 建·JSON 兼容语法=YAML 子集·yaml/json 双路解析零依赖）。规则唯一权威源=本文件；README 只做解释不承载规则。",
   "_schema": "v1",
   "buckets": ["w###", "_bak", "_shot", "_profile", "_misc", "_inbox", "_hold", "_trash", "_reports"],
-  "ttl_days": { "_shot": 30, "_misc": 90, "_inbox": 7, "_trash": 7 },
+  "ttl_days": { "_shot": 7, "_misc": 90, "_inbox": 7, "_trash": 7 },
   "generations": { "dxbak": 2, "_bak": 2, "default": 2 },
   "protect_globs": [
     "匿名稿", "装饰投稿版", "投稿", "mqxs_anon", "mqxs_submission",

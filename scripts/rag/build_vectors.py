@@ -16,7 +16,7 @@ build_vectors.py — 构建稠密检索向量产物（W744·供 rag_enhance 增�
   py -3.12 scripts/rag/build_vectors.py --device cpu  # 强制 CPU（较慢·无 GPU 风险）
   py -3.12 scripts/rag/build_vectors.py --rebuild     # 分块变化后全量重建
 
-注意：本脚本是重计算任务（首次运行还会下载模型约 92MB）。请勿并行多开；
+注意：本脚本是重计算任务（首次运行还会下载模型约 92 MiB／≈96 MB）。请勿并行多开；
 GPU 模式运行期间勿再挂其他重负载（本机散热纪律）。
 """
 import argparse

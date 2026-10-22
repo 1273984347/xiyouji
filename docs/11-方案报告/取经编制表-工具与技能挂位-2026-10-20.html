@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>取经编制表 · 工具与技能挂位（详解西游记）</title>
+<style>
+/* ============================================================
+   取经编制表 · 零外域依赖 · file:// 双击直开
+   令牌沿用 docs/11-方案报告/v4-design-language-preview.html 的 v4 提案值
+   本页为「建议面」：不改动 site/ 任何现役页面，不改 DESIGN.md 宪法
+   ============================================================ */
+:root{
+  --surface-0:#FAF7F0; --surface-1:#FFFFFF; --surface-2:#F1EBDD; --surface-3:#E8E0CE;
+  --ink-1:#23201A; --ink-2:#6B6455; --ink-3:#8A8271; --ink-4:#E5DFD0;
+  --accent:#C8463A; --accent-deep:#AF3F34; --accent-soft:#E9B885;
+  --accent-050:color-mix(in srgb,var(--accent) 5%,var(--surface-0));
+  --accent-100:color-mix(in srgb,var(--accent) 10%,var(--surface-1));
+  --accent-2:#3A6B8C; --accent-3:#8A6D3B; --accent-4:#6B8E5A; --rebel:#8C2A2A;
+  --night-1:#221D16; --night-2:#2B2419; --night-text:#F2EBDC;
+  --chart-1:#C8463A; --chart-2:#3A6B8C; --chart-3:#C9A063; --chart-4:#6B8E5A; --chart-5:#D8CFBC; --chart-6:#8A6D3B;
+  --space-1:2px; --space-2:4px; --space-3:8px; --space-4:12px; --space-5:20px; --space-6:24px;
+  --space-7:32px; --space-8:40px; --space-9:48px; --space-10:64px; --space-11:80px; --space-12:96px;
+  --gap-tight:var(--space-3); --gap-base:var(--space-5); --gap-loose:var(--space-6);
+  --gap-block:var(--space-7); --gap-section:var(--space-10); --gap-hero:var(--space-12);
+  --container-read:760px; --container-content:1120px; --container-wide:1320px;
+  --grid-gutter:var(--space-6);
+  --font-serif:'Noto Serif SC','Source Han Serif SC','Songti SC','STSong','SimSun',serif;
+  --font-sans:'Noto Sans SC','Source Han Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-mono:'JetBrains Mono','Consolas','Menlo',monospace;
+  --dur-fast:150ms; --dur-base:250ms; --dur-slow:600ms;
+  --ease-out-quart:cubic-bezier(.25,1,.5,1);
+  --radius-sm:2px; --radius-md:6px; --radius-lg:10px; --radius-pill:999px;
+  --elev-1:0 1px 3px rgba(35,32,26,.06),0 4px 12px rgba(35,32,26,.05);
+  --elev-2:0 2px 6px rgba(35,32,26,.08),0 8px 24px rgba(35,32,26,.08);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--surface-0); color:var(--ink-1);
+  font-family:var(--font-sans); font-size:15px; line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(200,70,58,.045), transparent 42%),
+    radial-gradient(circle at 88% 4%, rgba(58,107,140,.04), transparent 40%);
+}
+.wrap{max-width:var(--container-wide); margin:0 auto; padding:0 var(--space-6);}
+section{max-width:var(--container-content); margin:0 auto; padding:var(--gap-section) var(--space-6) 0;}
+.read{max-width:var(--container-read);}
+
+/* —— 页头 —— */
+header.hero{padding:var(--gap-hero) var(--space-6) var(--gap-section);}
+.seal{
+  display:inline-block; background:var(--accent); color:#fff; font-family:var(--font-serif);
+  font-size:12px; letter-spacing:.22em; padding:5px 14px; border-radius:var(--radius-sm);
+  box-shadow:var(--elev-1); margin-bottom:var(--space-5);
+}
+h1{
+  font-family:var(--font-serif); font-weight:700; font-size:clamp(28px,4.2vw,44px);
+  line-height:1.28; margin:0 0 var(--space-4); letter-spacing:.01em;
+}
+h1 .accent{color:var(--accent);}
+.sub{font-size:16px; color:var(--ink-2); max-width:62ch; margin:0 0 var(--space-6);}
+.meta{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(158px,1fr)); gap:var(--space-4);
+  border-top:1px solid var(--ink-4); border-bottom:1px solid var(--ink-4);
+  padding:var(--space-5) 0; font-size:13px;
+}
+.meta div span{display:block; color:var(--ink-3); font-size:11px; letter-spacing:.14em; margin-bottom:3px;}
+.meta div b{font-weight:600; color:var(--ink-1);}
+.meta div b.ok{color:var(--accent-4);} .meta div b.warn{color:var(--accent);}
+
+/* —— 小节 —— */
+h2{
+  font-family:var(--font-serif); font-size:23px; font-weight:700; margin:0 0 var(--space-4);
+  padding-left:var(--space-4); border-left:4px solid var(--accent); line-height:1.4;
+}
+h2 .en{font-family:var(--font-mono); font-size:11px; color:var(--ink-3); letter-spacing:.2em; display:block; margin-top:2px; font-weight:400;}
+.lede{color:var(--ink-2); margin:0 0 var(--gap-block); max-width:68ch;}
+h3{font-family:var(--font-serif); font-size:17px; margin:0 0 var(--space-3);}
+
+/* —— 结论条 —— */
+.verdict{
+  background:var(--surface-1); border:1px solid var(--ink-4); border-left:5px solid var(--accent);
+  border-radius:var(--radius-md); padding:var(--space-6); box-shadow:var(--elev-1);
+}
+.verdict p{margin:0 0 var(--space-3);} .verdict p:last-child{margin:0;}
+.verdict strong{color:var(--accent-deep);}
+
+/* —— 编制总表 —— */
+table.grid{width:100%; border-collapse:collapse; font-size:13.5px; background:var(--surface-1);
+  border:1px solid var(--ink-4); border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--elev-1);}
+table.grid th, table.grid td{padding:11px 13px; text-align:left; vertical-align:top; border-bottom:1px solid var(--ink-4);}
+table.grid thead th{background:var(--surface-2); font-weight:600; font-size:12px; letter-spacing:.08em; color:var(--ink-2);}
+table.grid tbody tr:last-child td{border-bottom:none;}
+table.grid tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface-2) 42%,var(--surface-1));}
+.role{font-family:var(--font-serif); font-weight:700; font-size:15px; white-space:nowrap;}
+.post{color:var(--accent-deep); font-size:12.5px; font-weight:600; white-space:nowrap;}
+.chap{font-family:var(--font-mono); font-size:11px; color:var(--ink-3); white-space:nowrap;}
+.tools{font-family:var(--font-mono); font-size:11.5px; color:var(--ink-2); line-height:1.6;}
+.status{font-size:11.5px; white-space:nowrap; font-weight:600;}
+.s-on{color:var(--accent-4);} .s-gap{color:var(--accent);} .s-new{color:var(--accent-2);}
+
+/* —— 编制卡 —— */
+.band{margin:0 0 var(--gap-section);}
+.band-head{display:flex; align-items:baseline; gap:var(--space-4); margin:0 0 var(--space-5);
+  padding-bottom:var(--space-3); border-bottom:1px dashed var(--ink-4);}
+.band-head .no{font-family:var(--font-mono); font-size:12px; color:#fff; background:var(--ink-2);
+  padding:3px 9px; border-radius:var(--radius-sm); letter-spacing:.1em;}
+.band-head h3{margin:0; font-size:19px;}
+.band-head .note{font-size:12.5px; color:var(--ink-3); margin-left:auto;}
+.cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(316px,1fr)); gap:var(--gap-base);}
+.card{
+  background:var(--surface-1); border:1px solid var(--ink-4); border-radius:var(--radius-md);
+  padding:var(--space-5); box-shadow:var(--elev-1); display:flex; flex-direction:column;
+  transition:transform var(--dur-base) var(--ease-out-quart), box-shadow var(--dur-base) var(--ease-out-quart);
+}
+.card:hover{transform:translateY(-2px); box-shadow:var(--elev-2);}
+.card .top{display:flex; align-items:flex-start; justify-content:space-between; gap:var(--space-3); margin-bottom:var(--space-2);}
+.card .nm{font-family:var(--font-serif); font-size:19px; font-weight:700; line-height:1.3;}
+.card .chp{font-family:var(--font-mono); font-size:10.5px; color:var(--ink-3); background:var(--surface-2);
+  padding:2px 7px; border-radius:var(--radius-pill); white-space:nowrap;}
+.card .po{font-size:12px; font-weight:700; color:var(--accent-deep); letter-spacing:.05em; margin-bottom:var(--space-3);}
+.card .duty{font-size:13.5px; color:var(--ink-2); margin:0 0 var(--space-4);}
+.card .mount{margin-top:auto;}
+.card .lbl{font-family:var(--font-mono); font-size:10px; color:var(--ink-3); letter-spacing:.16em; margin-bottom:5px;}
+.chips{display:flex; flex-wrap:wrap; gap:5px;}
+.chip{font-family:var(--font-mono); font-size:11px; padding:3px 9px; border-radius:var(--radius-sm);
+  background:var(--surface-2); color:var(--ink-1); border:1px solid var(--ink-4);}
+.chip.on{background:var(--accent-050); border-color:color-mix(in srgb,var(--accent) 30%,var(--ink-4)); color:var(--accent-deep);}
+.chip.new{background:color-mix(in srgb,var(--accent-2) 10%,var(--surface-1)); border-color:color-mix(in srgb,var(--accent-2) 32%,var(--ink-4)); color:var(--accent-2);}
+blockquote{
+  margin:var(--space-4) 0 0; padding:var(--space-3) var(--space-4); background:var(--surface-2);
+  border-left:3px solid var(--accent-soft); font-family:var(--font-serif); font-size:13px;
+  color:var(--ink-1); line-height:1.7; border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+}
+blockquote .src{display:block; margin-top:5px; font-family:var(--font-mono); font-size:10.5px; color:var(--ink-3);}
+
+/* —— 诊断块 —— */
+.diag{display:grid; grid-template-columns:repeat(auto-fit,minmax(268px,1fr)); gap:var(--gap-base);}
+.diag .box{background:var(--surface-1); border:1px solid var(--ink-4); border-radius:var(--radius-md);
+  padding:var(--space-5); box-shadow:var(--elev-1); border-top:3px solid var(--accent);}
+.diag .box.b2{border-top-color:var(--accent-2);} .diag .box.b3{border-top-color:var(--accent-3);}
+.diag .box h3{font-size:16px; margin-bottom:var(--space-2);}
+.diag .box .big{font-family:var(--font-mono); font-size:26px; font-weight:700; color:var(--accent); line-height:1.2;}
+.diag .box.b2 .big{color:var(--accent-2);} .diag .box.b3 .big{color:var(--accent-3);}
+.diag .box p{font-size:12.5px; color:var(--ink-2); margin:var(--space-2) 0 0;}
+.diag .box .fix{margin-top:var(--space-4); padding-top:var(--space-3); border-top:1px dashed var(--ink-4);
+  font-family:var(--font-mono); font-size:11.5px; color:var(--ink-1); line-height:1.7;}
+.diag .box .fix b{color:var(--accent-deep);}
+
+/* —— 编号步骤 —— */
+.steps{counter-reset:s; list-style:none; padding:0; margin:0;}
+.steps li{counter-increment:s; position:relative; padding:0 0 var(--space-5) 44px; margin-bottom:var(--space-5);
+  border-bottom:1px dashed var(--ink-4);}
+.steps li:last-child{border-bottom:none;}
+.steps li::before{content:counter(s); position:absolute; left:0; top:0; width:28px; height:28px;
+  background:var(--ink-1); color:var(--surface-0); border-radius:50%; display:grid; place-items:center;
+  font-family:var(--font-mono); font-size:13px; font-weight:700;}
+.steps h3{margin-bottom:var(--space-2);}
+.steps p{margin:0 0 var(--space-2); font-size:13.5px; color:var(--ink-2);}
+.steps code{font-family:var(--font-mono); font-size:12px; background:var(--surface-2); padding:2px 6px;
+  border-radius:var(--radius-sm); color:var(--accent-deep); border:1px solid var(--ink-4);}
+pre{background:var(--night-1); color:var(--night-text); padding:var(--space-4) var(--space-5); border-radius:var(--radius-md);
+  font-family:var(--font-mono); font-size:12.5px; line-height:1.75; overflow-x:auto; margin:var(--space-3) 0;}
+pre .c{color:#8A8271;} pre .k{color:#E9B885;} pre .v{color:#9CC49A;} pre .p{color:#7FA8C4;}
+
+.note-box{background:var(--accent-050); border:1px solid color-mix(in srgb,var(--accent) 24%,var(--ink-4));
+  border-radius:var(--radius-md); padding:var(--space-5); font-size:13.5px; color:var(--ink-1);}
+.note-box b{color:var(--accent-deep);}
+
+footer{margin-top:var(--gap-section); padding:var(--gap-section) var(--space-6); background:var(--surface-2);
+  border-top:1px solid var(--ink-4);}
+footer .fw{max-width:var(--container-content); margin:0 auto; font-size:12.5px; color:var(--ink-2);}
+footer .fw p{margin:0 0 var(--space-2);}
+footer .chain{font-family:var(--font-mono); font-size:11.5px; color:var(--ink-3); margin-top:var(--space-4);
+  padding-top:var(--space-4); border-top:1px dashed var(--ink-4);}
+@media (max-width:640px){
+  .wrap,section{padding-left:var(--space-4); padding-right:var(--space-4);}
+  header.hero{padding:var(--gap-section) var(--space-4);}
+  .cards{grid-template-columns:1fr;}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important;
+    transition-duration:.01ms !important; scroll-behavior:auto !important;}
+}
+@media print{
+  body{background:#fff;} .card:hover{transform:none;} .wrap,section{max-width:none;}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="seal">详解西游记 · 编制面</div>
+    <h1>取经编制表<br><span class="accent">工具与技能挂位</span></h1>
+    <p class="sub">工具推荐不该是一张通用清单。本项目自有现成的团队隐喻——取经编制。
+      下表把每个角色的「原典行为」逐条对齐到项目流水线上一个真实环节，再把可用工具、已装技能、待建 Agent 挂到那个位上。
+      编制位是空的，先补编制；位是满的，直接上岗。</p>
+    <div class="meta">
+      <div><span>版本</span><b>v1.1 · 2026-10-20</b></div>
+      <div><span>范围</span><b>工具 / 技能 / Agent 建议面</b></div>
+      <div><span>核验状态</span><b class="ok">回目锚点与原句已实测提取</b></div>
+      <div><span>环境现状</span><b class="warn">MCP 空 · 自定义 Agent 空</b></div>
+      <div><span>是否改现役</span><b class="ok">否 · 零外域依赖</b></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <h2>结论 <span class="en">VERDICT</span></h2>
+  <div class="verdict">
+    <p><strong>缺的不是技能，是编制。</strong>已装技能目录里够用的有十几项，真正卡住的是三处「编制位空缺」：</p>
+    <p>① <strong>工具层无统一供给面</strong>——仓内自带的 <code style="font-family:var(--font-mono)">mcp-server/</code>（5 个只读工具）从未接入，MCP 服务器列表实测为空；</p>
+    <p>② <strong>审查与施工缺专职角色</strong>——3 个内置 Agent 通用，仓内 46 条门禁的「收官官」不存在；</p>
+    <p>③ <strong>坑位经验未沉淀成技能</strong>——<code style="font-family:var(--font-mono)">docs/agent/pitfalls.md</code> 有了，技能形态没有。</p>
+    <p>所以推荐的第一动作不是「装技能」，而是<strong>把仓里已有的三个位置填上</strong>——成本最低、且立刻在下一批次见效。</p>
+  </div>
+</section>
+
+<section>
+  <h2>编制总表 <span class="en">ROSTER</span></h2>
+  <p class="lede">「回目标」一列由 <code style="font-family:var(--font-mono)">py scripts/_cite_probe.py</code> 从
+    <code style="font-family:var(--font-mono)">dataset/text-search.json</code> 实测提取，非记忆填写。</p>
+  <table class="grid">
+    <thead>
+      <tr><th style="width:11%">编制位</th><th style="width:9%">职位</th><th style="width:8%">回目锚点</th>
+      <th style="width:27%">项目职责</th><th style="width:30%">挂载载体</th><th style="width:15%">状态</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="role">孙悟空</td><td class="post">施工官</td><td class="chap">—</td>
+        <td>一次只打一个妖怪；只取经不伤路人</td><td class="tools">worker Agent · 手术式修改 · 一批只动一面</td>
+        <td class="status s-on">在役</td></tr>
+      <tr><td class="role">唐僧</td><td class="post">持经人</td><td class="chap">全篇</td>
+        <td>目标权威、口径唯一、禁擅改历史段</td><td class="tools">文档规范 · AGENTS.md §1–§8 · 版本段只增不删</td>
+        <td class="status s-on">在役</td></tr>
+      <tr><td class="role">猪八戒</td><td class="post">挑刺官</td><td class="chap">18 · 19 · 63</td>
+        <td>敢说真话、能干粗活，但懒 → 审查须带证据清单</td><td class="tools">verifier Agent · code-review 技能 · 对抗性审查报告</td>
+        <td class="status s-on">在役</td></tr>
+      <tr><td class="role">沙悟净</td><td class="post">收官官</td><td class="chap">22 · 29 · 100</td>
+        <td>挑担不甩担、标准回执句、从不改口</td><td class="tools">verify_delivery.py · 收官回填 · 跨会话书面告知</td>
+        <td class="status s-new">位空 · 建议建</td></tr>
+      <tr><td class="role">玉皇大帝</td><td class="post">号牌官</td><td class="chap">15 · 17 · 63 · 71</td>
+        <td>不发活只管号牌与秩序</td><td class="tools">W 号段对账表 · 取号规则 · preflight 交集拒绝</td>
+        <td class="status s-on">在役</td></tr>
+      <tr><td class="role">太白金星</td><td class="post">传令官</td><td class="chap">3 · 4 · 21 · 44</td>
+        <td>招安传诏、往返两界；只传话不动工程</td><td class="tools">跨会话告知通道 · lark-cli（bot 身份可用）</td>
+        <td class="status s-new">位空 · 建议建</td></tr>
+      <tr><td class="role">太上老君</td><td class="post">器物官</td><td class="chap">5 · 6 · 15 · 26</td>
+        <td>炼丹炼器、赐金刚琢：工具供给面</td><td class="tools">mcp-server（5 只读工具）· 技能库</td>
+        <td class="status s-new">位空 · 建议建</td></tr>
+      <tr><td class="role">观音菩萨</td><td class="post">仲裁官</td><td class="chap">6 · 8 · 22 · 58 · 100</td>
+        <td>点化、救场、赐紧箍咒；授权与仲裁</td><td class="tools">用户本人（用户令）· 外部评审 · mavis-doctor</td>
+        <td class="status s-on">在役</td></tr>
+      <tr><td class="role">如来佛祖</td><td class="post">框架官</td><td class="chap">58 · 100</td>
+        <td>定取经之纲、识破六耳：宪法与架构</td><td class="tools">项目说明 · DESIGN.md 宪法 · 系统架构方案批</td>
+        <td class="status s-on">在役</td></tr>
+      <tr><td class="role">菩提祖师</td><td class="post">授业官</td><td class="chap">1</td>
+        <td>教完不留名：留本事不留人设</td><td class="tools">docs/10-方法论沉淀 · pitfalls.md → skill 固化</td>
+        <td class="status s-new">位空 · 建议建</td></tr>
+      <tr><td class="role">千里眼 · 顺风耳</td><td class="post">取证官</td><td class="chap">—</td>
+        <td>远望与聆听：只看、只听、只取证</td><td class="tools">一次性取证脚本 · drl_spotcheck · lint_links · a11y_audit</td>
+        <td class="status s-on">在役</td></tr>
+      <tr><td class="role">谛听</td><td class="post">只验证</td><td class="chap">58</td>
+        <td>知而不敢言 → 真相须第三方证据，不由当事人自陈</td><td class="tools">独立验证工具 · 门禁 0 FAIL 证据链</td>
+        <td class="status s-new">位空 · 建议建</td></tr>
+      <tr><td class="role">六耳猕猴</td><td class="post">反面角色</td><td class="chap">58</td>
+        <td>真假莫辨、自证其真 → 假收敛检测</td><td class="tools">E1 铁律 · 撤销源码验证法 · 控制组须保持绿</td>
+        <td class="status s-on">在役</td></tr>
+      <tr><td class="role">红孩儿</td><td class="post">高风险项</td><td class="chap">—</td>
+        <td>三昧真火：量大、难熄、需先量化</td><td class="tools">622 页 reader 重建（diff 阈值 2000 行 · W829 候选）</td>
+        <td class="status s-new">位空 · 未获批</td></tr>
+      <tr><td class="role">牛魔王</td><td class="post">失控面</td><td class="chap">—</td>
+        <td>能力强而不受治理：反面教材</td><td class="tools">禁不带 pathspec 整仓提交 · 禁对共享面 git restore</td>
+        <td class="status s-on">在役（禁令）</td></tr>
+      <tr><td class="role">酆都判官崔珏</td><td class="post">档案官</td><td class="chap">10 · 11 · 58</td>
+        <td>掌生死文簿：只追加、禁回溯修改、登记造册、按名可查</td><td class="tools">archive/ · archive/README.md 归档台账 · archive_file.py · 文档规范 §5</td>
+        <td class="status s-on">在役</td></tr>
+      <tr><td class="role">扫地道人</td><td class="post">场地官</td><td class="chap">2 · 14 · 27 · 36 · 44</td>
+        <td>扫地锄园、撞钟打勤劳；清场须禀报管家</td><td class="tools">tmpe/ 桶约定 · tmpe_tidy.py · tmpe/policy.yml</td>
+        <td class="status s-on">在役</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>编制卡 <span class="en">CARDS</span></h2>
+
+  <div class="band">
+    <div class="band-head"><span class="no">甲</span><h3>取经四众 · 常驻流水线</h3>
+      <span class="note">一批一批推进的核心岗</span></div>
+    <div class="cards">
+      <article class="card">
+        <div class="top"><div class="nm">孙悟空</div><div class="chp">施工位</div></div>
+        <div class="po">施工官 · worker</div>
+        <p class="duty">七十二变不是万能钥匙，是「一次只解一个难」。悟空的纪律是：这一难只打这一难，旁的不碰。
+          这正好是仓内「最小连贯改动」与「一批只动一面」的古典表述。</p>
+        <blockquote>对应载体：<span class="src">worker Agent · karpathy-guidelines（手术式修改）· 批次协议「一批一面」</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip on">worker</span><span class="chip on">karpathy-guidelines</span><span class="chip">batch_cascade</span></div></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><div class="nm">唐僧</div><div class="chp">全篇</div></div>
+        <div class="po">持经人 · 宪法与口径</div>
+        <p class="duty">肉身凡胎，权威却最高。他不生产内容，他定「什么算取到经」。项目里同一位是文档规范与版本段：
+          口径一旦定版即成历史段，只增不删、禁改——任何人的施工都不得回填它。</p>
+        <blockquote>「与真悟空同象同音者，六耳猕猴也。」<span class="src">第 58 回（探针实测提取）</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip on">文档规范.md</span><span class="chip on">AGENTS.md §1–§8</span><span class="chip">CHANGELOG 顶段</span></div></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><div class="nm">猪八戒</div><div class="chp">18 · 19 · 63</div></div>
+        <div class="po">挑刺官 · verifier</div>
+        <p class="duty">天蓬元帅下界，资质极高但贪懒。它的价值恰恰在「敢当面说难听话」。
+          但要用对：八戒的毛病是懒，所以审查必须带证据清单与触发条件，不能凭印象发难。</p>
+        <blockquote>「我因有罪错投胎，俗名唤做猪刚鬣。」<span class="src">第 19 回（探针实测提取）</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip on">verifier</span><span class="chip on">code-review</span><span class="chip">对抗性审查报告</span></div></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><div class="nm">沙悟净</div><div class="chp">22 · 29 · 100</div></div>
+        <div class="po">收官官 · 建议新建 Agent</div>
+        <p class="duty">流沙河挑担、任劳任怨、从不改口。取经路上那句标准回执——
+          「大师兄，师父被妖怪抓走了」——正是项目里「收官回执 + 跨会话书面告知」的原型。
+          缺的就是这个专职位：只跑门禁、补旁文档指针面，不施工、不背锅。</p>
+        <blockquote>「弟子向蒙菩萨教化，指河为姓，与我起了法名，唤做沙悟净，岂有不从师父之理！」<span class="src">第 22 回（探针实测提取）</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip new">待建 Agent：沙悟净</span><span class="chip on">verify_delivery.py</span><span class="chip on">收官回填</span></div></div>
+      </article>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="band-head"><span class="no">乙</span><h3>天庭编制 · 治理与供给</h3>
+      <span class="note">不发活，但定秩序</span></div>
+    <div class="cards">
+      <article class="card">
+        <div class="top"><div class="nm">玉皇大帝</div><div class="chp">15 · 17 · 63 · 71</div></div>
+        <div class="po">号牌官 · 治理中枢</div>
+        <p class="duty">玉帝极少亲自下场（原文仅 6 处直呼其名），但天庭的秩序全靠他定。
+          项目里同一位是 W 号段：谁取号、谁让号、顶段如何推进、preflight 如何按共享面交集拒绝。
+          玉皇不发活，只管号牌——这正是对账表与取号规则的古典原型。</p>
+        <blockquote>「老孙自小儿做好汉，不晓得拜人，就是见了玉皇大帝、太上老君，我也只是唱个喏便罢了。」<span class="src">第 15 回（探针实测提取）</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip on">W 批次编号对账表</span><span class="chip on">preflight_check.py</span><span class="chip">batch_cascade 顶段+1</span></div></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><div class="nm">太白金星</div><div class="chp">3 · 4 · 21 · 44</div></div>
+        <div class="po">传令官 · 沟通层</div>
+        <p class="duty">下界招安、上天请旨、两界往返。太白不动一砖一瓦，只把话带到。
+          项目里同一位是「跨会话告知通道」：让号依据、共享面、写顺序。
+          现在这些写在共享 git 文件里——那正好是并发冲突面；搬到仓外通道，就不占号段、不触发交集拒绝。</p>
+        <blockquote>「我是西方太白金星，奉玉帝招安圣旨，下界请你上天，拜受仙录。」<span class="src">第 3 回（探针实测提取）</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip new">待建通道：太白金星</span><span class="chip">lark-cli（bot 身份可用）</span><span class="chip">gh run list</span></div></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><div class="nm">太上老君</div><div class="chp">5 · 6 · 15 · 26</div></div>
+        <div class="po">器物官 · 工具供给面</div>
+        <p class="duty">丹炉里炼出金刚琢、紫金红葫芦、芭蕉扇——道家最硬的部分是「器」。
+          项目里同一位是 MCP 与技能库：仓里已写好 5 个只读工具的 MCP server，却从未接进会话。
+          器已铸好，只是没上架。</p>
+        <blockquote>「时有太上老君在上，王母娘娘在后。」<span class="src">第 6 回（探针实测提取）</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip new">待接 MCP：xiyouji</span><span class="chip on">mcp-server/</span><span class="chip">5 只读工具</span></div></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><div class="nm">观音菩萨</div><div class="chp">6 · 8 · 22 · 58 · 100</div></div>
+        <div class="po">仲裁官 · 授权与救场</div>
+        <p class="duty">赐紧箍咒、点化沙僧、收红孩儿、救命解厄——她不管日常，但关键时刻出手定分寸。
+          项目里同一位是「用户本人」：所有「用户令」都是她下的定。此外还有外部评审回应与运行期排障。</p>
+        <blockquote>「吾乃李天王第二太子木吒，今在观音菩萨宝座前为徒弟护教，法名惠岸是也。」<span class="src">第 6 回（探针实测提取）</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip on">用户（用户令）</span><span class="chip on">外部评审回应</span><span class="chip">mavis-doctor</span></div></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><div class="nm">如来佛祖</div><div class="chp">58 · 100</div></div>
+        <div class="po">框架官 · 宪法与架构</div>
+        <p class="duty">如来不教人做事，他定「这件事的框架是什么、终点在哪里」。
+          第 58 回他一句话断真假，第 100 回他给整段取经定性。
+          项目里同一位是定位与宪法：项目说明、DESIGN.md、系统架构方案。</p>
+        <blockquote>「地藏早已省悟，即对行者道：“你两个形容如一，神通无二，若要辨明，须到雷音寺释迦如来那里，方得明白。”」<span class="src">第 58 回（探针实测提取）</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip on">项目说明.md</span><span class="chip on">DESIGN.md</span><span class="chip">系统架构方案批</span></div></div>
+      </article>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="band-head"><span class="no">丙</span><h3>旁证与方法 · 不在编制内，但不可缺</h3>
+      <span class="note">验证、取证、沉淀，以及两个反面角色</span></div>
+    <div class="cards">
+      <article class="card">
+        <div class="top"><div class="nm">菩提祖师</div><div class="chp">1</div></div>
+        <div class="po">授业官 · 方法论沉淀</div>
+        <p class="duty">第 1 回只出场一次：教完本事，不留姓名，不受香火。
+          留下的是本事，不是人设。项目里同一件事：<code style="font-family:var(--font-mono)">docs/agent/pitfalls.md</code>
+          记着一批「定点改写自伤」的坑，但模型改文件前并不会主动去读它。固化成技能，才真的变成「已授业」。</p>
+        <blockquote>「那洞中有一个神仙，称名须菩提祖师。」<span class="src">第 1 回（探针实测提取）</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip new">待建 Skill：避坑表</span><span class="chip on">skill-creator</span><span class="chip">docs/10-方法论沉淀</span></div></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><div class="nm">千里眼 · 顺风耳</div><div class="chp">—</div></div>
+        <div class="po">取证官 · 只读取证</div>
+        <p class="duty">一个看、一个听，都是「只取事实，不下结论」。
+          项目里所有一次性取证脚本都属此位：盘现状、数页面、量体积、跑实测。
+          这两个岗位的纪律是：不许改任何东西——正好对应 MCP 工具的 readOnlyHint。</p>
+        <blockquote>对应载体：<span class="src">一次性取证脚本 · lint_links · a11y_audit · drl_spotcheck（全部只读）</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip on">explore Agent</span><span class="chip on">取证脚本</span><span class="chip">readOnlyHint</span></div></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><div class="nm">谛听</div><div class="chp">58</div></div>
+        <div class="po">只验证 · 真相不可自陈</div>
+        <p class="duty">谛听伏在地藏案下，听得懂真假，却不敢说。整段取经最锋利的一笔在这里：
+          <b>当事人无法自证</b>。真假悟空打到分不出，最后只能去雷音寺问如来。
+          项目里的同构命题正是 E1 铁律：落地与否不由施工者自述，须由独立证据判定。</p>
+        <blockquote>「谛听道：“当面说出，恐妖精恶发，搔扰宝殿，致令阴府不安。”」<span class="src">第 58 回（探针实测提取）</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip new">待接：drl_spotcheck</span><span class="chip on">门禁 0 FAIL 证据链</span><span class="chip on">E1 铁律</span></div></div>
+      </article>
+
+      <article class="card">
+        <div="top"><div class="nm">六耳猕猴</div><div class="chp">58</div></div>
+        <div class="po">反面角色 · 假收敛</div>
+        <p class="duty">与真悟空同象同音，悟空自己也认不出，最后由如来定性。
+          它是「声明≠落地=假收敛」的具象化：系统看起来完全正常，只是里面已经错了。
+          唯一可靠的检出法是<b>撤销源码看新用例是否逐条变红</b>——控制组必须保持绿。</p>
+        <blockquote>「第四是六耳猕猴，善聆音，能察理，知前后，万物皆明。」<span class="src">第 58 回（探针实测提取）</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip on">E1 铁律</span><span class="chip">控制组须保持绿</span><span class="chip">verifier 独立判定</span></div></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><div class="nm">红孩儿</div><div class="chp">未获批</div></div>
+        <div class="po">高风险项 · 需先量化</div>
+        <p class="duty">三昧真火，观音也只得以杨柳净瓶压之，收得极费周折。
+          项目里的红孩儿级项是 622 页 reader 重建：改一次生成器即重排 622 个文件。
+          按既定规矩，diff 未量化前不动手（阈值 2000 行），这正是「红孩儿须先被定性」。</p>
+        <blockquote>对应载体：<span class="src">W829 阅读页体验封装候选 · diff 阈值 2000 行 · 未获批</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip new">W829 候选</span><span class="chip">build_reader.py</span><span class="chip">diff 阈值 2000 行</span></div></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><div class="nm">牛魔王</div><div class="chp">—</div></div>
+        <div class="po">失控面 · 反面教材</div>
+        <p class="duty">本事高强、不服管束，牵一发动全身。
+          项目里的牛魔王是并发会话的「陈旧暂存区整仓提交」：一次能把他方已落地的收官回填一并回退，
+          把他方批次永远卡在 preflight 在途集合里。处置已定：<b>禁不带 pathspec 的整仓提交、禁对共享面 git restore</b>。</p>
+        <blockquote>对应载体：<span class="src">并发提交回退·已实证事故 · 处置纪律已成条</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip on">safe_commit.py -F</span><span class="chip on">显式 pathspec</span><span class="chip">禁 git restore 共享面</span></div></div>
+      </article>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="band-head"><span class="no">丁</span><h3>归档与工地 · 两套仓内治理系统</h3>
+      <span class="note">V1.1 增补 · 管的是已建成的系统</span></div>
+    <div class="cards">
+      <article class="card">
+        <div class="top"><div class="nm">酆都判官崔珏</div><div class="chp">10 · 11 · 58</div></div>
+        <div class="po">档案官 · archive/</div>
+        <p class="duty">判官不判生死，只掌册、造册、按册检索——生死簿一改，幽冥秩序便跟着动。
+          项目里同一位是归档区：只追加、禁回溯修改、按类归置、台账登记、引用可查。归档件是退役但仍有引用价值的东西，不是垃圾。</p>
+        <blockquote>「命掌生死簿判官：“急取簿子来，看陛下阳寿天禄该有几何？”」<span class="src">第 10 回（探针实测提取）</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip on">archive/</span><span class="chip on">archive_file.py</span><span class="chip">归档台账</span><span class="chip">文档规范 §5</span></div></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><div class="nm">扫地道人</div><div class="chp">2 · 14 · 27 · 36 · 44</div></div>
+        <div class="po">场地官 · tmpe/</div>
+        <p class="duty">扫地锄园、撞钟打勤劳——他们不生产东西，只负责让场地干净。
+          项目里同一位是临时区：过程件按桶堆放、使命终即可弃、到期先列清单再报主人、主人点头才动、扫而不焚（移动而非删除）、近 48 小时有写入的桶一律不碰。</p>
+        <blockquote>「我是这里扫地撞钟打勤劳的道人，里面还有个管家的老师父哩，待我进去禀他一声。」<span class="src">第 36 回（探针实测提取）</span></blockquote>
+        <div class="mount"><div class="lbl">MOUNT</div><div class="chips">
+          <span class="chip on">tmpe/ 桶约定</span><span class="chip on">tmpe_tidy.py</span><span class="chip">policy.yml</span><span class="chip">禁 rm -rf</span></div></div>
+      </article>
+    </div>
+  </div>
+
+</section>
+
+<section>
+  <h2>缺位诊断 <span class="en">GAPS</span></h2>
+  <p class="lede">以下三项均为本会话实跑结果，非推断。</p>
+  <div class="diag">
+    <div class="box">
+      <div class="big">0</div>
+      <h3>已接入的 MCP 服务器</h3>
+      <p>器物官位空。仓内 <code style="font-family:var(--font-mono)">mcp-server/xiyouji_mcp.py</code> 已写好 5 个只读工具，
+        其背后 5 个脚本实测全部在位；唯独 <code style="font-family:var(--font-mono)">fastmcp</code> 未装，MCP 列表为空。</p>
+      <div class="fix"><b>修法：</b>
+        <div style="margin-top:4px;">py -3 -m pip install fastmcp</div>
+        <div style="margin-top:2px;">mavis mcp create --name xiyouji --transport stdio</div>
+        <div style="margin-top:2px;">&nbsp;&nbsp;--command py --args -3 D:\xiyouji\mcp-server\xiyouji_mcp.py</div>
+        <b>注：</b>command 必须是 py -3，本机 python 是应用执行存根。</div>
+    </div>
+    <div class="box b2">
+      <div class="big">3</div>
+      <h3>自定义 Agent（含内置共 3 个）</h3>
+      <p>只有 explore / worker / verifier 三个通用角色，没有专职收官官。
+        并行会话已两次替本会话检出「旁文档指针面滞后」——这类缺陷批次自查几乎必然漏。</p>
+      <div class="fix"><b>修法：</b>新建 Agent「沙悟净」——只跑 verify_delivery 全量档 + 补 9 处旁文档指针面，不施工。<br>
+        <b>前置：</b>需用户明确批准后才可创建。</div>
+    </div>
+    <div class="box b3">
+      <div class="big">0</div>
+      <h3>自定义 Skill</h3>
+      <p>本地技能目录为空，而 <code style="font-family:var(--font-mono)">docs/agent/pitfalls.md</code> 已沉淀了大量可复用避坑条目。
+        它们目前只靠人记得去读。</p>
+      <div class="fix"><b>修法：</b>以 pitfalls.md + docs/agent/gates.md 为素材，用 skill-creator 固化为「取经避坑」技能，
+        改文件前主动加载。<br><b>前置：</b>需用户明确批准后才可创建。</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>与批次协议的衔接 <span class="en">PROTOCOL</span></h2>
+  <p class="lede">本页是「建议面」：不改动 site/ 任何现役页面，不改 DESIGN.md 宪法，不占任何 W 号段。
+    若要把它正式落仓，仍按仓内既有协议走。</p>
+  <ol class="steps">
+    <li><h3>取号</h3>
+      <p>按「CHANGELOG 顶段 + 1」取号，并先在
+        <code>docs/00-导读/W批次编号对账表.md</code> 登记认领行（严格 7 格，touches 落到末格）。
+        当前顶段与其他在途号需先做四面扫描：台账行 / 磁盘件 / spec / 源码行内注释。</p></li>
+    <li><h3>落件</h3>
+      <p>本页移入 <code>docs/11-方案报告/</code>，同步该目录 README 索引行（按「节」定位插入点，追加后三项自校验：
+        表内无断裂空行、编号升序连续、表头计数 == 实际行数）。</p></li>
+    <li><h3>级联</h3>
+      <p>跑 <code>python scripts/batch_cascade.py</code> 落 CHANGELOG 版段，<b>顶段随之推进</b>；
+        随后逐面补旁文档指针面（CHANGELOG 编号规则行 / README / STRUCTURE / 项目说明 / HANDOVER×4 /
+        CITATION.cff / file-index / 站点页脚×4），共 9 处。</p></li>
+    <li><h3>门禁</h3>
+      <p>跑 <code>python scripts/verify_delivery.py</code> 全量档 + 第 31 门禁 <code>check_doc_sync.py</code> +
+        索引健康门禁，须 0 FAIL。本页为纯建议件，不改任何受门禁管控的脚本。</p></li>
+    <li><h3>收官</h3>
+      <p>回填认领行状态与提交 hash，复验 <b>HEAD 中该行</b>（不只看工作树），
+        并书面告知并行会话本次触及的共享面。</p></li>
+  </ol>
+</section>
+
+<section>
+  <h2>一句话 <span class="en">TL;DR</span></h2>
+  <div class="note-box">
+    <p><b>工具不缺，编制缺。</b>最贴合本项目的三步是：</p>
+    <p>① <b>接上架的器</b>——把 <code>mcp-server/</code> 接入 MCode，让「落地验证」从人工 grep 变成一条工具调用（太上老君位）；</p>
+    <p>② <b>补上收官官</b>——新建 Agent「沙悟净」，专职跑门禁 + 补旁文档指针面（沙悟净位）；</p>
+    <p>③ <b>让坑位变本事</b>——把 <code>pitfalls.md</code> 固化成技能，改文件前主动加载（菩提祖师位）。</p>
+    <p>三者都不占 W 号段、不触碰号段链，可在下一批次开工前完成。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="fw">
+    <p><b>核验说明：</b>本页全部「回目标」与全部引号内原句，均由
+      <code>py scripts/_cite_probe.py</code> 从 <code>dataset/text-search.json</code> 实测提取，
+      非凭记忆填写；引文候选为该数据集正文的精确子串。环境现状（MCP 为空 / Agent 仅 3 个 / 技能目录为空 /
+      fastmcp 未装 / lark-cli 已绑 bot 但用户 token 过期 / gh、node、py 在位）均为本会话实跑所得。</p>
+    <p><b>未核验项：</b>fastmcp 装后 MCP server 能否在 MCode 正常握手（依赖未装，未实跑）；飞书 bot 的目标 chat_id 未确认；
+      matrix 各工具的账号额度未实测。</p>
+    <p><b>落仓状态：</b>本页暂存于 <code>tmpe/_shot/</code>（依 <code>tmpe/README.md</code> 桶约定：html/png 归 <code>_shot/</code>，
+      一次性 py 归 <code>_misc/</code>；<code>tmpe/</code> 为本地过程区，gitignore 未跟踪，不入库、不影响门禁、不撞并行会话）。
+      若需正式入库，走上文「与批次协议的衔接」五步，并先取得用户批准。</p>
+    <div class="chain">批次链 W822 → W823 → W824 → W825 → W826 → W827 →（W828 已被系统架构方案批占用）→ W829 候选未获批</div>
+  </div>
+</footer>
+
+</body>
+</html>

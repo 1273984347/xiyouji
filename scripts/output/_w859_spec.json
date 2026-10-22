@@ -1,0 +1,18 @@
+{
+  "batch": "W859",
+  "date": "2026-10-22",
+  "title": "W859 设计资产归档批（AI 概念稿 18 张 + Logo 源文件 + 可复算工具链 → assets/design/）",
+  "desc": "把只住在临时区的设计资产搬进仓内正式存档：Logo 源文件 10 件、概念稿 18 张、可复算工具链",
+  "head_entry": "2026-10-22（W859 设计资产归档批）",
+  "head_sentence": "设计资产不能住在临时区，TTL 七天一清，搬进仓内才叫留档",
+  "changelog_body": "\n\n> **来源**：Logo 设计资产此前只存在于临时区 tmpe/_reports/（`_shot` 桶 TTL 7 天），到期即清、无正式留档位置。本批把有长期价值的资产移入仓内 `assets/design/` 单独存档。\n> - **文件**：assets/design/logo/（10 件）、assets/design/ai-concepts/（18 张 + 逐张判定表）、assets/design/tools/（可复算工具链）、assets/design/README.md、docs/00-导读/W批次编号对账表.md。\n> - **为什么放 assets/ 而非 site/static/**：`site/` 是站点构建面（桌面端把整个 site/ 打进安装包），设计源资产（概念稿与工具链）不进站点；`assets/` 是仓级素材区，与 fonts / images / maps 并列。\n> - **目录**：`logo/` 10 件——矢量图形标与组合标 SVG、icon-192/512/maskable-512、favicon-16/32/48 与 favicon.ico（站点在用版本在 site/static/icons/，同批产出两处一致）；`ai-concepts/` 18 张——AI 纯图形概念稿（两批），附逐张「母题 / 判定 / 说明」表；`tools/` 可复算工具链。\n> - **纪律**：只新增 assets/ 下素材与登记，不改任何页面与门禁件；版段不落（随补段批 W863 按号序回写）。",
+  "milestone_block": "- **W859 设计资产归档批**：\n  - assets/design/ 三块：logo 源文件 10 件 + AI 概念稿 18 张（附判定表）+ 可复算工具链\n  - 归档口径：设计源资产进 assets/ 不进 site/（站点构建面与仓级素材区分开）",
+  "agents_note": "W859 补位 spec（W863 补段批按提交记录与台账行整理）：临时区 TTL 七天，设计资产住那里等于没留档；搬进 assets/ 并与 site/static/icons 的同批产出对齐，两处一致才敢说资产安全。",
+  "file_index_rows": [
+    "| assets/design/logo/ | W859 | 新增：Logo 定稿源文件 10 件（图形标/组合标/图标三档/favicon 四档） |",
+    "| assets/design/ai-concepts/ | W859 | 新增：AI 概念稿 18 张 + 逐张母题判定表 |",
+    "| assets/design/tools/ | W859 | 新增：可复算工具链 |",
+    "| assets/design/README.md | W859 | 新增：素材区索引与口径说明 |",
+    "| docs/00-导读/W批次编号对账表.md | W859 | 认领行与补段批回填 |"
+  ]
+}

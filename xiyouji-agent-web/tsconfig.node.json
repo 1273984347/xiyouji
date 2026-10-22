@@ -5,7 +5,15 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
-    "strict": true
+    "strict": true,
+    // W808 根修：编译产物落到独立目录，**不与源文件同层**。
+    // 起因：`tsc -b` 此前把 `vite.config.js` 直接吐在项目根，而 Vite 的配置解析顺序
+    // 是 `vite.config.js` **优先于** `vite.config.ts` —— 故一旦有人改了 vite.config.ts，
+    // Vite 实际加载的仍是那份陈旧的编译产物（配置改动静默失效·典型的「latent 接线缺失」）。
+    // 产物移出源目录后，Vite 只看得到 vite.config.ts，配置改动即刻生效。
+    // 注：server/*.js 此前同样落在源目录（tsx 运行时按 .ts 解析·未造成问题），
+    // 一并移出以免混淆「哪些是产物、哪些是源」。
+    "outDir": "./.tsbuild"
   },
   "include": ["vite.config.ts", "server/**/*.ts"]
 }

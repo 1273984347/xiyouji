@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-9OkUXteNIj8ZSMia0tipN2atSxyVs3xShe5jYms8Y54='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-9OkUXteNIj8ZSMia0tipN2atSxyVs3xShe5jYms8Y54='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>跨时空弹幕博物馆 · 详解西游记</title>
@@ -10,7 +10,7 @@
     <meta property="og:title" content="跨时空弹幕博物馆 · 详解西游记">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://1273984347.github.io/xiyouji/data/cross-time-danmaku.html">
-    <meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+    <meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
@@ -20,15 +20,15 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="跨时空弹幕博物馆 · 详解西游记">
     <meta property="og:description" content="跨时空弹幕博物馆 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
  * ----------------------------------------------
- * W711 方案D形态改造批 · W712 方案档挑刺补正批 · W713 挑刺第十四次补正批 · W714 停用守卫与考古补库批 · W715 工作复盘报告批 · W716 stats 实体化补正批 · v2.3.304 · W710 BL-25与BL-21收口批 · v2.3.303 · W709 BL-24分层搬迁批 · v2.3.302 · W708 全变动对抗复审修复批 · v2.3.301 · W707 分层重构先行件与阅读契约批 · v2.3.300 · W706 编号空间盘点与元规则批 · v2.3.299 · W705 Agent开局状态摘要批 · v2.3.298 · W704 数字实体化批 · v2.3.297 · W703 聚合数字对账门禁批 · v2.3.296 · W702 六文档口径清债批 · v2.3.295 · W701 BL-20动工与S-26工具化批 · v2.3.294 · W700 docs全量链接门禁与断链清债批 · v2.3.293 · W699 三卡工具化与三报告批 · v2.3.292 · W698 门禁scope分级与提交重试批 · v2.3.291 · W697 复盘报告第四篇入库批 · v2.3.290 · W696 复盘报告第二篇入库批次 · v2.3.289 · W695 第 39 门禁挂载与 CSP 全站收紧批 · v2.3.288 · W694 故事内时间线可视化页落地批 · v3 · W476 纸感轻立体（在 v2/W334 基础上增层 · 见 DESIGN.md §4A）
+ * v3 · W476 纸感轻立体（在 v2/W334 基础上增层 · 见 DESIGN.md §4A）
  * 全站统一设计令牌 + 字体分层 + hero 覆写层。
  *
  * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
@@ -107,7 +107,7 @@
     /* —— 图表五色雅集色板（W334 图表规范） —— */
     --chart-1: #C8463A;       /* 朱砂 */
     --chart-2: #3A6B8C;       /* 靛蓝 */
-    --chart-3: #C9A063;       /* 赭金 */
+    --chart-3: #B38F58;       /* 赭金 */
     --chart-4: #6B8E5A;       /* 苔绿 */
     --chart-5: #D8CFBC;       /* 米灰 */
     --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
@@ -203,7 +203,7 @@ html[data-theme="dark"] {
     --paper: #2B2419;
     --paper-warm: #33291B;
     --line: rgba(242, 235, 220, 0.14);
-    --accent: #E0604F;
+    --accent: #E46250;
     --accent-deep: #C94F3F;
     --accent-soft: #E8A99F;
     --accent-tint: rgba(224, 96, 79, 0.14);
@@ -361,6 +361,46 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
   --z-tooltip: 70;
 }
 
+/* ===== v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名） ===== */
+/* 来源：docs/11-方案报告/界面视觉重设计细化规格-v4-2026-10-20.md §4 终稿 */
+/* 口径：34 个零消费新名 / 35 处定义（暗色组 --accent-text 为同名第二处） */
+/* defer 四项随迁移批逐页 proof：--chart-1..6 与 --accent-soft 重述 · 暗色 --accent 改值 · 暗色 --chart-3/5 新增 */
+:root {
+    /* —— 间距刻度（4px 基准 + 2/10 半格） —— */
+    --space-0: 0px;   --space-1: 2px;   --space-2: 4px;   --space-3: 8px;
+    --space-4: 12px;  --space-5: 20px;  --space-6: 24px;  --space-7: 32px;
+    --space-8: 40px;  --space-9: 48px;  --space-10: 64px; --space-11: 80px;
+    --space-12: 96px;
+    /* 间距语义档（tight 紧凑 / base 常规 / loose 疏行 / block 区块 / section 章段 / hero 首屏） */
+    --gap-tight: var(--space-3);   --gap-base: var(--space-5);
+    --gap-loose: var(--space-6);   --gap-block: var(--space-7);
+    --gap-section: var(--space-10); --gap-hero: var(--space-12);
+
+    /* —— 容器三档（裁决 3） —— */
+    --container-read: 760px; --container-content: 1120px; --container-wide: 1320px;
+    /* —— 栅格 —— */
+    --grid-columns: 12; --grid-gutter: var(--space-6);
+
+    /* —— 排版角色（语义层：字重 + 族 + 字号 / 行高） —— */
+    --type-display: 600 var(--font-serif) clamp(34px, 4.4vw, 56px) / 1.15;
+    --type-title:    600 var(--font-serif) 24px / 1.30;
+    --type-subtitle: 500 var(--font-serif) 18px / 1.50;
+    --type-lead:     400 var(--font-sans) 17px / 1.75;
+    --type-body:     400 var(--font-sans) 15px / 1.80;
+    --type-label:    500 var(--font-sans) 13px / 1.50;
+    --type-caption:  400 var(--font-sans) 12px / 1.60;
+    --type-eyebrow:  500 var(--font-mono) 12px / 1.40;
+    --type-number:   500 var(--font-mono) 32px / 1.10;
+
+    /* —— 色彩角色补充（裁决 1 修法·朱砂文字落 --bg 专用档） —— */
+    --accent-text: #C7463A;          /* 朱砂文字落在 --bg 上（4.50:1） */
+}
+
+/* 暗色组补充（裁决 4：双主题平级）——--accent-text 与浅色同名、暗色取值不同 */
+html[data-theme="dark"] {
+    --accent-text: #E0604F;
+}
+
 /*
  * system.css — 详解西游记 · 全站组件设计系统
  * ----------------------------------------------
@@ -432,7 +472,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -471,11 +511,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -666,6 +706,8 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+        /* W872 B9 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
+        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1209,11 +1251,45 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    </style>
+    
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
+/* W888：数据页卷末插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .viz-illustration {
+        margin: clamp(32px, 5vw, 64px) auto 0;
+        max-width: 420px;
+    }
+
+    .viz-illustration img {
+        width: 100%;
+        height: auto;
+        display: block;
+        opacity: .92;
+    }
+
+    html[data-theme="dark"] .viz-illustration {
+        display: none;
+    }
+</style>
 <style>
         /* e-track-exempt: chart-data-colors 2 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
-        .breadcrumb .sep { margin: 0 8px; color: var(--ink-soft); opacity: 0.6; }
+        .breadcrumb .sep { margin: 0 var(--space-3); color: var(--ink-soft); opacity: 0.6; }
 
         .notice {
             background: var(--paper-warm);
@@ -1236,10 +1312,10 @@ td.num, th.num {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-lg);
-            padding: 32px 30px;
+            padding: var(--space-7) 30px;
             box-shadow: var(--shadow);
             margin-bottom: 28px;
-            scroll-margin-top: 20px;
+            scroll-margin-top: var(--space-5);
         }
         .device-title {
             font-size: 1.45rem;
@@ -1249,8 +1325,8 @@ td.num, th.num {
         }
 
         /* 年龄段 tab */
-        .age-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-        .age-tab { padding: 8px 16px; border: 1px solid var(--line); border-radius: var(--radius-md);
+        .age-tabs { display: flex; gap: 8px; margin-bottom: var(--space-5); flex-wrap: wrap; }
+        .age-tab { padding: var(--space-3) 16px; border: 1px solid var(--line); border-radius: var(--radius-md);
                    cursor: pointer; background: var(--paper); transition: all var(--dur-base); }
         .age-tab.active { background: var(--accent); color: var(--paper-warm); border-color: var(--accent); }
 
@@ -1260,18 +1336,18 @@ td.num, th.num {
         .danmaku-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md);
                         padding: 16px; box-shadow: var(--shadow); transition: transform 0.18s; }
         .danmaku-card:hover { transform: translateY(-3px); border-color: var(--accent); }
-        .danmaku-card .celebrity { font-weight: 600; color: var(--accent); margin-bottom: 4px; }
-        .danmaku-card .quote { font-size: 0.9rem; color: var(--ink); line-height: 1.6; margin-bottom: 8px; }
+        .danmaku-card .celebrity { font-weight: 600; color: var(--accent); margin-bottom: var(--space-2); }
+        .danmaku-card .quote { font-size: 0.9rem; color: var(--ink); line-height: 1.6; margin-bottom: var(--space-3); }
         .danmaku-card .modern { font-size: 0.78rem; color: var(--ink-soft); font-style: italic; }
 
         /* 嘴替大卡片 */
         .mouthpiece-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 28px 0; }
         @media (max-width: 768px) { .mouthpiece-row { grid-template-columns: 1fr; } }
         .mouthpiece-card { background: linear-gradient(160deg, var(--paper-warm), var(--paper-warm)); border: 1px solid var(--accent-soft);
-                           border-radius: var(--radius-lg) ; padding: 24px; position: relative; }
-        .mouthpiece-card .char-name { font-size: 1.3rem; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
-        .mouthpiece-card .char-role { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 12px; }
-        .mouthpiece-card .quote { font-size: 1rem; color: var(--ink); line-height: 1.7; margin-bottom: 8px; }
+                           border-radius: var(--radius-lg) ; padding: var(--space-6); position: relative; }
+        .mouthpiece-card .char-name { font-size: 1.3rem; font-weight: 600; color: var(--accent); margin-bottom: var(--space-2); }
+        .mouthpiece-card .char-role { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: var(--space-4); }
+        .mouthpiece-card .quote { font-size: 1rem; color: var(--ink); line-height: 1.7; margin-bottom: var(--space-3); }
         .mouthpiece-card .modern { font-size: 0.82rem; color: var(--accent-3); font-style: italic; }
 
         /* 名人看当下 */
@@ -1279,33 +1355,33 @@ td.num, th.num {
         .commentary-card { background: var(--paper); border: 1px solid var(--line);
                            border-radius: var(--radius-md) ; padding: 18px; border-left: 3px solid var(--accent-2); }
         .commentary-card .c-name { font-weight: 600; color: var(--accent-2); font-size: 0.95rem; }
-        .commentary-card .c-topic { font-size: 0.78rem; color: var(--ink-soft); margin: 2px 0 10px; }
+        .commentary-card .c-topic { font-size: 0.78rem; color: var(--ink-soft); margin: var(--space-1) 0 10px; }
         .commentary-card .c-text { font-size: 0.88rem; color: var(--ink); line-height: 1.7; }
         .commentary-card .c-aside { font-size: 0.78rem; color: var(--accent-3); font-style: italic; margin-top: 10px; }
 
         /* 国际名人弹幕组 */
-        .intl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 16px; margin-bottom: 20px; }
+        .intl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 16px; margin-bottom: var(--space-5); }
         .intl-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md);
                      padding: 18px; border-top: 3px solid var(--accent-4); }
-        .intl-card .i-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+        .intl-card .i-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: var(--space-3); }
         .intl-card .i-flag { font-size: 1.2rem; }
         .intl-card .i-name { font-weight: 600; color: var(--accent-4); }
         .intl-card .i-country { font-size: 0.78rem; color: var(--ink-soft); }
-        .intl-card .i-role { font-size: 0.8rem; color: var(--ink-soft); margin-bottom: 8px; }
+        .intl-card .i-role { font-size: 0.8rem; color: var(--ink-soft); margin-bottom: var(--space-3); }
         .intl-card .i-view { font-size: 0.88rem; color: var(--ink); line-height: 1.7; font-style: italic; }
-        .intl-card .i-work { font-size: 0.78rem; color: var(--accent-3); margin-top: 8px; }
+        .intl-card .i-work { font-size: 0.78rem; color: var(--accent-3); margin-top: var(--space-3); }
         .adaptations { display: flex; flex-wrap: wrap; gap: 10px; }
         .adaptation-chip { background: var(--paper-warm); border: 1px solid var(--accent-soft); border-radius: 16px
                            padding: 6px 14px; font-size: 0.8rem; }
-        .adaptation-chip .a-flag { margin-right: 4px; }
+        .adaptation-chip .a-flag { margin-right: var(--space-2); }
 
         /* 留言博物馆 */
         .message-museum { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg);
-                          padding: 24px; margin-top: 28px; }
-        .message-form { display: grid; gap: 10px; margin-bottom: 20px; }
+                          padding: var(--space-6); margin-top: 28px; }
+        .message-form { display: grid; gap: 10px; margin-bottom: var(--space-5); }
         .message-form textarea { width: 100%; min-height: 80px; padding: 10px; border: 1px solid var(--line);
                                  border-radius: var(--radius-md) ; font-family: inherit; resize: vertical; }
-        .message-form button { padding: 8px 20px; background: var(--accent); color: var(--paper-warm); border: none;
+        .message-form button { padding: var(--space-3) var(--space-5); background: var(--accent); color: var(--paper-warm); border: none;
                                border-radius: var(--radius-md) ; cursor: pointer; justify-self: start; }
         .message-form button:hover { background: var(--accent-3); }
 
@@ -1333,7 +1409,7 @@ td.num, th.num {
             background: var(--dark);
             border: 1px solid var(--accent-soft);
             border-radius: var(--radius-md);
-            padding: 12px 16px;
+            padding: var(--space-4) 16px;
             max-width: 375px;
             font-size: 0.84rem;
             color: var(--paper-warm);
@@ -1344,7 +1420,7 @@ td.num, th.num {
             z-index: 100;
         }
         .hero-quote-tooltip.visible { opacity: 1; }
-        .hero-quote-tooltip .t-name { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        .hero-quote-tooltip .t-name { color: var(--accent-soft); font-weight: 600; margin-bottom: var(--space-2); }
         .hero-quote-tooltip .t-quote { font-style: italic; color: color-mix(in srgb, var(--dark-text) 90%, transparent); }
         .hero-quote-tooltip .t-modern { color: var(--accent-soft); font-size: 0.78rem; margin-top: 6px; opacity: 0.75; }
 
@@ -1423,7 +1499,7 @@ td.num, th.num {
             border-radius: var(--radius-lg);
             border: 1px solid var(--line);
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: var(--space-5);
         }
         .world-map svg { width: 100%; height: 100%; display: block; }
         .map-continent { fill: rgba(122, 82, 48, 0.1); stroke: rgba(122, 82, 48, 0.22); stroke-width: 0.8; }
@@ -1473,7 +1549,6 @@ main { overflow-x: clip; }
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
   <script defer src="../js/visit-log.js"></script>
-  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
 <link rel="preload" href="../static/js/d3.v7.min.js" as="script" />
 <link rel="preload" href="../static/fonts/NotoSansSC-Regular.subset.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../static/fonts/noto-serif-sc-shared.subset.woff2" as="font" type="font/woff2" crossorigin>
@@ -1503,9 +1578,11 @@ main { overflow-x: clip; }
         <p class="tagline">五百年批评史·全年龄共鸣·你就是批评家。</p>
         <svg id="hero-canvas" aria-label="跨时空人物星图" role="img"></svg>
         <div class="chart-tooltip" id="hero-tooltip"></div>
-    </section>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
     <nav class="breadcrumb"><a href="../dashboard.html">数据看板</a> → 跨时空弹幕博物馆</nav>
 
     <!-- dataSource 提示（main() 中根据 fetchStatus 更新内容） -->
@@ -1554,7 +1631,7 @@ main { overflow-x: clip; }
         <p style="font-size:0.85rem;color:var(--ink-soft);margin-bottom:16px;">《西游记》走向世界·跨文化共鸣</p>
         <div class="world-map" id="world-map" aria-label="国际名人世界地图"></div>
         <div id="intl-grid" class="intl-grid"></div>
-        <h3 style="font-size:1rem;color:var(--ink);margin:20px 0 10px;">全球改编作品</h3>
+        <h3 style="font-size:1rem;color:var(--ink);margin:var(--space-5) 0 10px;">全球改编作品</h3>
         <div id="adaptations" class="adaptations"></div>
     </section>
 
@@ -1571,12 +1648,15 @@ main { overflow-x: clip; }
             </div>
         </div>
     </section>
+    <figure class="viz-illustration" aria-hidden="true">
+        <img src="../static/images/viz-02-heatmap.webp" alt="" loading="lazy" decoding="async">
+    </figure>
 </main>
 
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">W794 PD-3 三项裁决全部落地，首页补随笔入口与全卷命名，数据提示改读者语，专题卡加图例与悬停明细，自查撤回一条假阳性 · W793 产品设计套件两页启发式走查落地，八条发现全部防虚构校验，sync_docs 退休替换为现役门禁，冻结适用范围立单一表述 · W792 全仓待办计划方案状态核查，逐项取证判定无假收敛，五处陈滞修正落地，真开面约三十项多为作者时间类，四项待用户决策 · W791 agent-web 三类攻击面负向测试固化，安全逻辑提取得可测面，真服集成覆盖限流与鉴权，计划状态陈滞回写，服务端测试套件扩充至六十七例 · W790 外部评审第三轮重复投递逐条核查回应，七项与上轮全同且事实已漂移，四项不成立三项部分成立，唯一实质增量为 agent 攻击面负向测试缺口，报告归档并联登四条待办 · W789 外部门禁重构提案对盘登记，逐字节提取五文件与磁盘现势比对，提案十五项改动已全部由此前重构批次落地，余量七处差异均为改号回退或等价噪声，裁定不执行，零代码变更，登记以防重复收编 · W788 重构收尾清理两处无消费点代码，截图门禁删新增死常量公共模块删未用导入，净删两行零行为变化，验收为截图门禁八百五十七页逐页结果相同加破防态负样本可红加自检十二例通过 · W787 外部重构提案收编第六批末批，分隔线与告警线常量化并提步进标题函数，git 状态与体量解析与版本解析拆函数，22 项门禁脚本改动点清单经裁定不执行，对拍验收为完整运行输出与退出码逐字相同 · W786 外部重构提案收编第五批，Cypher 拼装提 _build_cypher 快照组装提 _build_snapshot OUTPUT 中间变量收敛路径拼接，rag 家族其余五件不收留机械通道，对拍验收为两产物与运行日志逐字节相等 · W785 外部重构提案收编第四批重件档其一，CORS 白名单与 MIME 映射与检索片段窗口提模块级常量，do_GET 路由拆四臂处理方法并新增 _send_error_json 统一错误结构，文档页表格行渲染提 _render_dataset_row，全部路由状态码与响应体逐字节保持，对拍为起服务前后十一个端点工件逐字节比对 · W784 外部重构提案收编第三批小件档，chapter_stats 诗词计数拆双函数聚合提 _aggregate_totals，word_frequency 提 _is_valid_token 与最短长度常量，narrative_experiment 拆输出口志函数 build_summary 两次调用改一次复用，hardships_81 三标签字典提模块级并拆交叉统计与 label 化函数，line_check self_test 拆三查并提 _query_one，对拍验收为五脚本前后输出逐字节相等 · W783 外部重构提案收编第二批，character_appearance 拆聚合三函数并提首回计算函数保急切求值语义，character_network 拆共现累积函数 combinations 等价改写，character_nlp 整文件重写提案本批不收留待机械通道，对拍验收为两脚本前后输出逐字节相等 · …更早批次详见 CHANGELOG.md</div>
+            <div class="footer-meta">W890 CI 阻塞项清偿：两处过期测试断言与上游有意变更同步、ruff 六项清零、Windows 存活探针改非终止式查询、Pillow 升级清 25 个 CVE · W889 GitHub 主页展示位复位与首屏重排、载体改名让位、首屏 30 秒上手、元数据补齐、dev 合 main 对齐 Pages · W887 en 收口 110 页合并四批一次做完 第 49 槽门禁范围扩至全 en 138 页 豁免分册增至 302 条 · W886 en 首批 28 页迁到位 C 渠 49 条规则 + seal 淡底 28 页 + KPI 顶条按行收敛 16 页 + 25 条四类豁免登记 · W883 朱砂实底常驻门禁挂第 49 槽（浏览器计算样式实测 每页非豁免超 3 即拦 增量缓存）且六段递延账一次结清 · W876 C 渠规则级换色 173 条（落 bg 1087→253 降 77%）+ chart-3 与暗色 accent 两处值切换 + inline_css 回吞迁移事故修复（328 页自 HEAD 重建） · W874 把九个递延批按号序补回 CHANGELOG 与 file-index，让级联断言重新成立、B11 可进 · W864 十页结构页按裁决迁移：KPI 顶条收敛到首卡、徽章转淡底、间距令牌化 216 处，C 渠与 chart-3 拆专项批 · W863 把十一个已收官但未立段的批次按号序补回 CHANGELOG 与 file-index，让级联的号序断言重新成立 · W851 把 W826 细化规格 §4 的 v4 令牌增量落进 tokens.css，只落零消费新名、撞名项 defer，用机器证明现役页面视觉零变化 · W850 补齐 Q2 悬空的真因，把等十批样本从口号变成可执行的按批采集机制 · W849 在交付门禁挂上性能影子槽，按批采静态成本代理攒基线，暂不判红也不设阈值 · …更早批次详见 CHANGELOG.md</div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../index.html">首页</a>
@@ -1584,8 +1664,8 @@ main { overflow-x: clip; }
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
         
-            <a href="../en/cross-time-danmaku.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="../en/cross-time-danmaku.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 
 <script src="../static/js/d3.v7.min.js"></script>

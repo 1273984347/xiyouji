@@ -4,7 +4,7 @@
 > **📖 阅读契约（W707）**：通读型——本文件 ≤60 行一屏读完即全部；正文唯一权威在指针目标。
 > **定位**：宿主自动加载的 1 分钟速查层——只放「一行规则 + 权威指针」，正文唯一权威在指针目标，本文件禁展开正文；**禁写会漂移的数字与现役值**（版本/计数/门数一律指针化），因此无逐批维护成本、本文件不带版本号。
 > **维护契约**：新增必守规则先落权威位置（AGENTS.md §6 或 docs/00-导读/文档规范.md），再在此登记一行；每次改动须复核全部指针目标真实存在；行数上限 60。
-> 生成来源：人工撰写（Agent 起草）·生成模型：GLM（ZCode 2026-10-05）·生成日期：2026-10-05·核验状态：已核验（指针逐条 grep 实证·W664）
+> 生成来源：人工撰写（Agent 起草）·生成模型：GLM（本地 Agent 会话 2026-10-05）·生成日期：2026-10-05·核验状态：已核验（指针逐条 grep 实证·W664）
 
 ## 必守规则速查（每条一行 · 权威在指针目标）
 
@@ -18,6 +18,7 @@
 8. **级联与并发**：batch_cascade 落盘后按 `_cascade_files_<批号>.txt` 逐面 add；并行批次 pathspec 提交互斥；W 编号动工前在 docs/00-导读/W批次编号对账表.md 登记认领 → AGENTS.md §4.3
 9. **commit 规范**：多行信息 Write 临时文件 + `git commit -F`，禁 heredoc；并行会话提交走 `python scripts/safe_commit.py -F <file> <pathspec...>`（ref-lock 竞争自动重试）；`type(scope): 描述` → AGENTS.md §4.3 / docs/00-导读/文档规范.md §6
 10. **禁擅改**：CHANGELOG 历史段、归档、verify_delivery.py、bump_version.py 等管控文件，改动须经用户批准 → docs/00-导读/文档规范.md §11.2
+11. **框架报告必落盘**：按《任务计划、执行与经验沉淀》框架产出的交付物必须落 `docs/11-方案报告/计划方案/` 并在同目录 README §二 登记，禁只在会话里答复 → docs/00-导读/文档规范.md §4.9
 
 ## 常用命令（可直接复制）
 
@@ -37,6 +38,7 @@ make ci                                  # lint+test+audit+links 本地预跑 CI
 - 批量改 md 一律 Python `open(encoding='utf-8')`，禁 PowerShell Set-Content（默认写 UTF-8 BOM）→ AGENTS.md §4.3
 - 同文件多个 Edit 必须串行（并行 Edit 基于同一原始内容，后写覆盖先写）→ AGENTS.md §4.3
 - 跨 session 动手前先 `git log --oneline -5` + `gh run list` 识别并行增量 → AGENTS.md §4.3
+- 本节与工具表里的 `python …` 是可移植形态（CI/Linux/macOS 通用）；**本机 PowerShell 侧** `python` 是应用执行存根（调用即静默失败）→ 该侧改写 `py -3 …` → AGENTS.md §4.3
 
 ## 接手导航（5 分钟动手）
 

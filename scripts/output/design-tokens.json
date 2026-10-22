@@ -1,20 +1,20 @@
 {
  "meta": {
   "generator": "scripts/export_design_tokens.py",
-  "generated": "2026-10-04",
+  "generated": "2026-10-22",
   "source": [
    "site/tokens.css",
    "site/system.css"
   ],
   "spec": "W3C Design Tokens 风格（DTCG 简化：$value/$type/$description + group/line 元数据）",
   "counts": {
-   "declarations": 97,
-   "tokens": 97,
+   "declarations": 132,
+   "tokens": 132,
    "themes": {
-    "light": 69,
-    "dark": 28
+    "light": 103,
+    "dark": 29
    },
-   "sections": 4
+   "sections": 5
   },
   "warnings": []
  },
@@ -148,7 +148,7 @@
    "line": 82
   },
   "light/chart-3": {
-   "$value": "#C9A063",
+   "$value": "#B38F58",
    "$type": "color",
    "$description": "赭金",
    "name": "--chart-3",
@@ -596,7 +596,7 @@
    "line": 178
   },
   "dark/accent": {
-   "$value": "#E0604F",
+   "$value": "#E46250",
    "$type": "color",
    "$description": "",
    "name": "--accent",
@@ -794,6 +794,286 @@
    "name": "--z-tooltip",
    "group": "z-index 层级令牌：topnav/遮罩/抽屉/tooltip 统一层级（tooltip 高于 topnav 防遮挡）",
    "line": 334
+  },
+  "light/space-0": {
+   "$value": "0px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-0",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 343
+  },
+  "light/space-1": {
+   "$value": "2px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-1",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 343
+  },
+  "light/space-2": {
+   "$value": "4px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-2",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 343
+  },
+  "light/space-3": {
+   "$value": "8px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-3",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 343
+  },
+  "light/space-4": {
+   "$value": "12px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-4",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 344
+  },
+  "light/space-5": {
+   "$value": "20px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-5",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 344
+  },
+  "light/space-6": {
+   "$value": "24px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-6",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 344
+  },
+  "light/space-7": {
+   "$value": "32px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-7",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 344
+  },
+  "light/space-8": {
+   "$value": "40px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-8",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 345
+  },
+  "light/space-9": {
+   "$value": "48px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-9",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 345
+  },
+  "light/space-10": {
+   "$value": "64px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-10",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 345
+  },
+  "light/space-11": {
+   "$value": "80px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-11",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 345
+  },
+  "light/space-12": {
+   "$value": "96px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--space-12",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 346
+  },
+  "light/gap-tight": {
+   "$value": "var(--space-3)",
+   "$type": "other",
+   "$description": "",
+   "name": "--gap-tight",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 348
+  },
+  "light/gap-base": {
+   "$value": "var(--space-5)",
+   "$type": "other",
+   "$description": "",
+   "name": "--gap-base",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 348
+  },
+  "light/gap-loose": {
+   "$value": "var(--space-6)",
+   "$type": "other",
+   "$description": "",
+   "name": "--gap-loose",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 349
+  },
+  "light/gap-block": {
+   "$value": "var(--space-7)",
+   "$type": "other",
+   "$description": "",
+   "name": "--gap-block",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 349
+  },
+  "light/gap-section": {
+   "$value": "var(--space-10)",
+   "$type": "other",
+   "$description": "",
+   "name": "--gap-section",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 350
+  },
+  "light/gap-hero": {
+   "$value": "var(--space-12)",
+   "$type": "other",
+   "$description": "",
+   "name": "--gap-hero",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 350
+  },
+  "light/container-read": {
+   "$value": "760px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--container-read",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 353
+  },
+  "light/container-content": {
+   "$value": "1120px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--container-content",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 353
+  },
+  "light/container-wide": {
+   "$value": "1320px",
+   "$type": "dimension",
+   "$description": "",
+   "name": "--container-wide",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 353
+  },
+  "light/grid-columns": {
+   "$value": "12",
+   "$type": "number",
+   "$description": "",
+   "name": "--grid-columns",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 355
+  },
+  "light/grid-gutter": {
+   "$value": "var(--space-6)",
+   "$type": "other",
+   "$description": "",
+   "name": "--grid-gutter",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 355
+  },
+  "light/type-display": {
+   "$value": "600 var(--font-serif) clamp(34px, 4.4vw, 56px) / 1.15",
+   "$type": "fontFamily",
+   "$description": "",
+   "name": "--type-display",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 358
+  },
+  "light/type-title": {
+   "$value": "600 var(--font-serif) 24px / 1.30",
+   "$type": "fontFamily",
+   "$description": "",
+   "name": "--type-title",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 359
+  },
+  "light/type-subtitle": {
+   "$value": "500 var(--font-serif) 18px / 1.50",
+   "$type": "fontFamily",
+   "$description": "",
+   "name": "--type-subtitle",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 360
+  },
+  "light/type-lead": {
+   "$value": "400 var(--font-sans) 17px / 1.75",
+   "$type": "fontFamily",
+   "$description": "",
+   "name": "--type-lead",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 361
+  },
+  "light/type-body": {
+   "$value": "400 var(--font-sans) 15px / 1.80",
+   "$type": "fontFamily",
+   "$description": "",
+   "name": "--type-body",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 362
+  },
+  "light/type-label": {
+   "$value": "500 var(--font-sans) 13px / 1.50",
+   "$type": "fontFamily",
+   "$description": "",
+   "name": "--type-label",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 363
+  },
+  "light/type-caption": {
+   "$value": "400 var(--font-sans) 12px / 1.60",
+   "$type": "fontFamily",
+   "$description": "",
+   "name": "--type-caption",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 364
+  },
+  "light/type-eyebrow": {
+   "$value": "500 var(--font-mono) 12px / 1.40",
+   "$type": "fontFamily",
+   "$description": "",
+   "name": "--type-eyebrow",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 365
+  },
+  "light/type-number": {
+   "$value": "500 var(--font-mono) 32px / 1.10",
+   "$type": "fontFamily",
+   "$description": "",
+   "name": "--type-number",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 366
+  },
+  "light/accent-text": {
+   "$value": "#C7463A",
+   "$type": "color",
+   "$description": "朱砂文字落在 --bg 上（4.50:1）",
+   "name": "--accent-text",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 369
+  },
+  "dark/accent-text": {
+   "$value": "#E0604F",
+   "$type": "color",
+   "$description": "",
+   "name": "--accent-text",
+   "group": "v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名）",
+   "line": 374
   }
  }
 }

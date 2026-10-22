@@ -1,0 +1,4172 @@
+{
+ "en/bestiary.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 2,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/character-appearance.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   }
+  ]
+ },
+ "en/character-bailongma.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/character-bajie.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/character-dynamic-network.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Stage 1"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Stage 2"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Stage 3"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Stage 4"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "button",
+    "cls": "stage-btn active",
+    "kind": "background",
+    "area": 6860
+   }
+  ]
+ },
+ "en/character-presence-timeline.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": []
+ },
+ "en/character-relationship-3d-view.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "span",
+    "cls": "keytab active",
+    "kind": "background",
+    "area": 2220
+   },
+   {
+    "tag": "button",
+    "cls": "vt-btn",
+    "kind": "background",
+    "area": 2912
+   },
+   {
+    "tag": "button",
+    "cls": "vt-btn",
+    "kind": "background",
+    "area": 3158
+   }
+  ]
+ },
+ "en/character-relationship-3d.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "a",
+    "cls": "",
+    "txt": "→ Character Dynamic "
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   }
+  ]
+ },
+ "en/character-semantic-network.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 603
+   }
+  ]
+ },
+ "en/character-sentiment-arc.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   }
+  ]
+ },
+ "en/character-shaseng.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/character-tangseng.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/character-wukong.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/ecology.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "span",
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "area": 1188
+   },
+   {
+    "tag": "span",
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "area": 1188
+   },
+   {
+    "tag": "span",
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "area": 1381
+   },
+   {
+    "tag": "div",
+    "cls": "compare-card invasive",
+    "kind": "border-top",
+    "area": 1669
+   },
+   {
+    "tag": "div",
+    "cls": "kpi-card ",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "span",
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "area": 1188
+   },
+   {
+    "tag": "span",
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "area": 1188
+   },
+   {
+    "tag": "span",
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "area": 1381
+   },
+   {
+    "tag": "span",
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "area": 1381
+   },
+   {
+    "tag": "span",
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "area": 1188
+   },
+   {
+    "tag": "span",
+    "cls": "damage-pill damage-high",
+    "kind": "background",
+    "area": 1188
+   },
+   {
+    "tag": "div",
+    "cls": "stage-card during",
+    "kind": "border-top",
+    "area": 1098
+   }
+  ]
+ },
+ "en/essay-ai-era.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-buddhist-chan.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-chapter-couplets.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-character-fu.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-cipai-linjiangxian.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-cipai-mantingfang.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-cipai-shuidiaogetou.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-cipai-xijiangyue.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-composition-origins.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-divine-bureaucracy.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-folk-belief.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-historical-xuanzang.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-information-cocoon.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-ming-economy.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-ming-examination.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-ming-garrison.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-ming-intellectual-history.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-ming-judiciary.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-ming-literary-thought.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-ming-maritime-ban.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-ming-metaphor.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-ming-military.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-ming-politics.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-ming-religion.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-ming-social-customs.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-modern-management.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-original-poetry.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-poetry-imagery.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-poetry-opening.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-quanzhen-daoism.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-rhythm-analysis.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-scenery-poems.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-thematic-poetry.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-three-teachings.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-version-evolution.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/essay-zen-koan-vs-neidan.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/four-dimensional-research-network.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "span",
+    "cls": "badge cinnabar",
+    "kind": "background",
+    "area": 1154
+   }
+  ]
+ },
+ "en/four-heavenly-kings-artifacts.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "king-card",
+    "kind": "border-top",
+    "area": 1078
+   },
+   {
+    "tag": "div",
+    "cls": "swatch-bar",
+    "kind": "background",
+    "area": 575
+   }
+  ]
+ },
+ "en/game-webnovel.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 4,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "area": 902
+   },
+   {
+    "tag": "div",
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "area": 950
+   },
+   {
+    "tag": "div",
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "area": 807
+   },
+   {
+    "tag": "div",
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "area": 779
+   },
+   {
+    "tag": "div",
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "area": 570
+   },
+   {
+    "tag": "div",
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "area": 427
+   },
+   {
+    "tag": "div",
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "area": 475
+   },
+   {
+    "tag": "div",
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "area": 902
+   },
+   {
+    "tag": "div",
+    "cls": "cc-elem",
+    "kind": "background",
+    "area": 1196
+   },
+   {
+    "tag": "div",
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "area": 617
+   },
+   {
+    "tag": "div",
+    "cls": "cc-stat-fill",
+    "kind": "background",
+    "area": 893
+   },
+   {
+    "tag": "span",
+    "cls": "elem-chip",
+    "kind": "background",
+    "area": 912
+   },
+   {
+    "tag": "div",
+    "cls": "nc-genre",
+    "kind": "background",
+    "area": 8569
+   }
+  ]
+ },
+ "en/global-pattern.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "span",
+    "cls": "p-country",
+    "kind": "background",
+    "area": 4250
+   }
+  ]
+ },
+ "en/graph-explorer.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": []
+ },
+ "en/guanyin-six-roles-network.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "role-card",
+    "kind": "border-top",
+    "area": 1459
+   },
+   {
+    "tag": "div",
+    "cls": "swatch-bar",
+    "kind": "background",
+    "area": 794
+   }
+  ]
+ },
+ "en/guide.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 2,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "primary",
+    "kind": "background",
+    "area": 11763
+   }
+  ]
+ },
+ "en/hardship-difficulty-heatmap.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "button",
+    "cls": "dim-btn active",
+    "kind": "background",
+    "area": 4801
+   }
+  ]
+ },
+ "en/hardship-heatmap.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "button",
+    "cls": "stage-btn active",
+    "kind": "background",
+    "area": 4464
+   }
+  ]
+ },
+ "en/heaven-power-network.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 528
+   },
+   {
+    "tag": "div",
+    "cls": "role-card r-king",
+    "kind": "border-top",
+    "area": 2225
+   },
+   {
+    "tag": "div",
+    "cls": "kpi-card ",
+    "kind": "border-top",
+    "area": 528
+   }
+  ]
+ },
+ "en/index.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 2,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": []
+ },
+ "en/intertextuality-network.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   }
+  ]
+ },
+ "en/journey-geo-semiotics.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "article",
+    "cls": "mech-card",
+    "kind": "border-top",
+    "area": 1459
+   }
+  ]
+ },
+ "en/journey-map-interactive.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "a",
+    "cls": "",
+    "txt": "→ Full Journey Route"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "button",
+    "cls": "btn",
+    "kind": "background",
+    "area": 4478
+   }
+  ]
+ },
+ "en/journey-route.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   }
+  ]
+ },
+ "en/journey-spacetime.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Early"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Early-Middle"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Late-Middle"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Final"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "progress-fill",
+    "kind": "background",
+    "area": 6758
+   }
+  ]
+ },
+ "en/jurisprudence.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "8"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "10"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "span",
+    "cls": "severity-pill sev-high",
+    "kind": "background",
+    "area": 607
+   },
+   {
+    "tag": "span",
+    "cls": "severity-pill sev-high",
+    "kind": "background",
+    "area": 607
+   },
+   {
+    "tag": "div",
+    "cls": "artifact-card c-low",
+    "kind": "border-top",
+    "area": 1098
+   },
+   {
+    "tag": "span",
+    "cls": "severity-pill sev-high",
+    "kind": "background",
+    "area": 1188
+   },
+   {
+    "tag": "div",
+    "cls": "artifact-card c-low",
+    "kind": "border-top",
+    "area": 1098
+   },
+   {
+    "tag": "span",
+    "cls": "severity-pill sev-high",
+    "kind": "background",
+    "area": 1188
+   },
+   {
+    "tag": "span",
+    "cls": "severity-pill sev-high",
+    "kind": "background",
+    "area": 1188
+   },
+   {
+    "tag": "span",
+    "cls": "severity-pill sev-high",
+    "kind": "background",
+    "area": 2736
+   },
+   {
+    "tag": "span",
+    "cls": "severity-pill sev-high",
+    "kind": "background",
+    "area": 607
+   },
+   {
+    "tag": "span",
+    "cls": "severity-pill sev-high",
+    "kind": "background",
+    "area": 607
+   }
+  ]
+ },
+ "en/karma-reincarnation.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Life-and-Death Regis"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "the Jing River Drago"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "87.5%"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "10 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "7 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "5 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "4 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "8 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "6 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "7 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "6 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "7 ultimately attain "
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "ultimately all trans"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "char-card c-chusheng",
+    "kind": "border-top",
+    "area": 1098
+   }
+  ]
+ },
+ "en/language-style-radar.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "a",
+    "cls": "",
+    "txt": "→ Dialogue Sentiment"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   }
+  ]
+ },
+ "en/linguistics.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Sanskrit translitera"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Three-Teachings synt"
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "txt": "25%"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "txt": "10%"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "4"
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "txt": "5%"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "3"
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "txt": "15%"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "7"
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "txt": "40%"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "10"
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "txt": "30%"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "txt": "0%"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "0"
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "txt": "5%"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "1"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "inc-card ",
+    "kind": "border-top",
+    "area": 1098
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "kind": "background",
+    "area": 1981
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "kind": "background",
+    "area": 594
+   },
+   {
+    "tag": "div",
+    "cls": "kpi-card ",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "mbti-card m-entp",
+    "kind": "border-top",
+    "area": 813
+   },
+   {
+    "tag": "div",
+    "cls": "char-card c-buddhist",
+    "kind": "border-top",
+    "area": 1098
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "kind": "background",
+    "area": 495
+   },
+   {
+    "tag": "div",
+    "cls": "char-card c-buddhist",
+    "kind": "border-top",
+    "area": 1098
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "kind": "background",
+    "area": 792
+   },
+   {
+    "tag": "div",
+    "cls": "char-card c-buddhist",
+    "kind": "border-top",
+    "area": 1098
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "kind": "background",
+    "area": 594
+   },
+   {
+    "tag": "div",
+    "cls": "kpi-card ",
+    "kind": "border-top",
+    "area": 3379
+   }
+  ]
+ },
+ "en/magic-system.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "span",
+    "cls": "intensity-bar",
+    "kind": "background",
+    "area": 768
+   },
+   {
+    "tag": "span",
+    "cls": "rank-badge rank-S+",
+    "kind": "background",
+    "area": 904
+   },
+   {
+    "tag": "span",
+    "cls": "rank-badge rank-S+",
+    "kind": "background",
+    "area": 904
+   },
+   {
+    "tag": "span",
+    "cls": "rank-badge rank-S+",
+    "kind": "background",
+    "area": 904
+   },
+   {
+    "tag": "span",
+    "cls": "rank-badge rank-S+",
+    "kind": "background",
+    "area": 904
+   },
+   {
+    "tag": "span",
+    "cls": "rank-badge rank-S+",
+    "kind": "background",
+    "area": 904
+   }
+  ]
+ },
+ "en/material-archaeology.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "h3",
+    "cls": "",
+    "txt": "Chart 1.1 · 8 artifa"
+   },
+   {
+    "tag": "h3",
+    "cls": "",
+    "txt": "Chart 1.2 · Hardness"
+   },
+   {
+    "tag": "h3",
+    "cls": "",
+    "txt": "8 Artifact Material "
+   },
+   {
+    "tag": "h3",
+    "cls": "",
+    "txt": "Crafting Process"
+   },
+   {
+    "tag": "h3",
+    "cls": "",
+    "txt": "Material Classificat"
+   },
+   {
+    "tag": "h3",
+    "cls": "",
+    "txt": "Chart 2.1 · Social s"
+   },
+   {
+    "tag": "h3",
+    "cls": "",
+    "txt": "Costume Evolution of"
+   },
+   {
+    "tag": "h3",
+    "cls": "",
+    "txt": "19 Costume Stages De"
+   },
+   {
+    "tag": "h3",
+    "cls": "",
+    "txt": "Ming Dynasty Costume"
+   },
+   {
+    "tag": "h3",
+    "cls": "",
+    "txt": "Chart 3.1 · Average "
+   },
+   {
+    "tag": "h3",
+    "cls": "",
+    "txt": "5 Architecture Type "
+   },
+   {
+    "tag": "h3",
+    "cls": "",
+    "txt": "14 Caves Detailed Ta"
+   },
+   {
+    "tag": "td",
+    "cls": "center",
+    "txt": "8/10"
+   },
+   {
+    "tag": "td",
+    "cls": "center",
+    "txt": "6/10"
+   },
+   {
+    "tag": "td",
+    "cls": "center",
+    "txt": "7/10"
+   },
+   {
+    "tag": "td",
+    "cls": "center",
+    "txt": "4/10"
+   },
+   {
+    "tag": "td",
+    "cls": "center",
+    "txt": "6/10"
+   },
+   {
+    "tag": "td",
+    "cls": "center",
+    "txt": "10/10"
+   },
+   {
+    "tag": "td",
+    "cls": "center",
+    "txt": "8/10"
+   },
+   {
+    "tag": "td",
+    "cls": "center",
+    "txt": "10/10"
+   },
+   {
+    "tag": "td",
+    "cls": "center",
+    "txt": "7/10"
+   },
+   {
+    "tag": "td",
+    "cls": "center",
+    "txt": "3/10"
+   },
+   {
+    "tag": "td",
+    "cls": "center",
+    "txt": "6/10"
+   },
+   {
+    "tag": "td",
+    "cls": "center",
+    "txt": "7/10"
+   },
+   {
+    "tag": "td",
+    "cls": "center",
+    "txt": "9/10"
+   },
+   {
+    "tag": "h3",
+    "cls": "",
+    "txt": "Architecture Classif"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "artifact-card",
+    "kind": "border-top",
+    "area": 1094
+   },
+   {
+    "tag": "div",
+    "cls": "artifact-card",
+    "kind": "border-top",
+    "area": 1094
+   },
+   {
+    "tag": "div",
+    "cls": "artifact-card",
+    "kind": "border-top",
+    "area": 1094
+   },
+   {
+    "tag": "div",
+    "cls": "artifact-card",
+    "kind": "border-top",
+    "area": 1094
+   },
+   {
+    "tag": "div",
+    "cls": "artifact-card",
+    "kind": "border-top",
+    "area": 1094
+   },
+   {
+    "tag": "div",
+    "cls": "artifact-card",
+    "kind": "border-top",
+    "area": 1094
+   },
+   {
+    "tag": "div",
+    "cls": "artifact-card",
+    "kind": "border-top",
+    "area": 1094
+   },
+   {
+    "tag": "div",
+    "cls": "artifact-card",
+    "kind": "border-top",
+    "area": 1094
+   },
+   {
+    "tag": "div",
+    "cls": "type-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1295
+   },
+   {
+    "tag": "span",
+    "cls": "tag palace",
+    "kind": "background",
+    "area": 2761
+   },
+   {
+    "tag": "span",
+    "cls": "tag palace",
+    "kind": "background",
+    "area": 2761
+   }
+  ]
+ },
+ "en/mbti-evolution.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "button",
+    "cls": "stage-btn active",
+    "kind": "background",
+    "area": 6179
+   }
+  ]
+ },
+ "en/methodology-matrix.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 4,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "quadrant-card",
+    "kind": "border-top",
+    "area": 1084
+   },
+   {
+    "tag": "span",
+    "cls": "quad-badge",
+    "kind": "background",
+    "area": 6605
+   },
+   {
+    "tag": "span",
+    "cls": "quad-badge",
+    "kind": "background",
+    "area": 6605
+   },
+   {
+    "tag": "span",
+    "cls": "quad-badge",
+    "kind": "background",
+    "area": 6605
+   },
+   {
+    "tag": "span",
+    "cls": "quad-badge",
+    "kind": "background",
+    "area": 6605
+   },
+   {
+    "tag": "span",
+    "cls": "quad-badge",
+    "kind": "background",
+    "area": 6605
+   },
+   {
+    "tag": "span",
+    "cls": "quad-badge",
+    "kind": "background",
+    "area": 6605
+   },
+   {
+    "tag": "span",
+    "cls": "phase-badge",
+    "kind": "background",
+    "area": 3478
+   },
+   {
+    "tag": "span",
+    "cls": "phase-badge",
+    "kind": "background",
+    "area": 3478
+   },
+   {
+    "tag": "div",
+    "cls": "phase-card",
+    "kind": "border-top",
+    "area": 1465
+   }
+  ]
+ },
+ "en/methodology.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/ming-political-thought-comparison.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 2,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "active",
+    "kind": "background",
+    "area": 5963
+   },
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "a",
+    "cls": "active",
+    "kind": "background",
+    "area": 5963
+   }
+  ]
+ },
+ "en/monster-background.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card ",
+    "kind": "border-top",
+    "area": 809
+   }
+  ]
+ },
+ "en/monster-capability-radar.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "a",
+    "cls": "",
+    "txt": "monster-hierarchy-ne"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   }
+  ]
+ },
+ "en/monster-ecology-network.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "button",
+    "cls": "tab-btn active",
+    "kind": "background",
+    "area": 5107
+   }
+  ]
+ },
+ "en/monster-female-network.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   }
+  ]
+ },
+ "en/monster-hierarchy-network.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 528
+   },
+   {
+    "tag": "div",
+    "cls": "kpi-card ",
+    "kind": "border-top",
+    "area": 528
+   }
+  ]
+ },
+ "en/monster-sociology.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Crime Pattern Taxono"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "25 data points"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Transformation Fraud"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Transformation Fraud"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Forceful Plunder"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Seduction"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Magic Threat"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Team Siege"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Active Signals"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Key finding:"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Key finding:"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "2 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "3 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "3 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "2 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "2 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "5 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "2 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "5 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "2 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "2 / 10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "100% were executed"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "White Bone Demon"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Seven Spider Demon S"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Scorpion Demon"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Three Demons of Chec"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "signal-card s-active",
+    "kind": "border-top",
+    "area": 1098
+   },
+   {
+    "tag": "div",
+    "cls": "signal-card s-active",
+    "kind": "border-top",
+    "area": 1098
+   },
+   {
+    "tag": "div",
+    "cls": "signal-card s-active",
+    "kind": "border-top",
+    "area": 1098
+   }
+  ]
+ },
+ "en/monster-victims-network.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "victim-card",
+    "kind": "border-top",
+    "area": 2221
+   },
+   {
+    "tag": "div",
+    "cls": "swatch-bar",
+    "kind": "background",
+    "area": 1251
+   }
+  ]
+ },
+ "en/music-structure.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "h4",
+    "cls": "",
+    "txt": "Movement III · The E"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "mv-card",
+    "kind": "border-top",
+    "area": 813
+   },
+   {
+    "tag": "span",
+    "cls": "sym-badge",
+    "kind": "background",
+    "area": 2566
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   },
+   {
+    "tag": "span",
+    "cls": "tag",
+    "kind": "background",
+    "area": 1897
+   }
+  ]
+ },
+ "en/narrative-experiment.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 3,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "div",
+    "cls": "sc-name",
+    "txt": "Hardship Ratings"
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "txt": "This is not a retell"
+   },
+   {
+    "tag": "div",
+    "cls": "gc-name",
+    "txt": "Disaster"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "player-card",
+    "kind": "border-top",
+    "area": 1078
+   },
+   {
+    "tag": "span",
+    "cls": "hc-owner",
+    "kind": "background",
+    "area": 3902
+   },
+   {
+    "tag": "span",
+    "cls": "hc-owner",
+    "kind": "background",
+    "area": 3902
+   },
+   {
+    "tag": "span",
+    "cls": "gh-tag",
+    "kind": "background",
+    "area": 2702
+   },
+   {
+    "tag": "div",
+    "cls": "narr-card",
+    "kind": "border-top",
+    "area": 818
+   },
+   {
+    "tag": "div",
+    "cls": "narr-card",
+    "kind": "border-top",
+    "area": 818
+   },
+   {
+    "tag": "div",
+    "cls": "narr-card",
+    "kind": "border-top",
+    "area": 818
+   },
+   {
+    "tag": "div",
+    "cls": "narr-card",
+    "kind": "border-top",
+    "area": 818
+   },
+   {
+    "tag": "div",
+    "cls": "narr-card",
+    "kind": "border-top",
+    "area": 818
+   },
+   {
+    "tag": "div",
+    "cls": "narr-card",
+    "kind": "border-top",
+    "area": 818
+   },
+   {
+    "tag": "div",
+    "cls": "narr-card",
+    "kind": "border-top",
+    "area": 818
+   },
+   {
+    "tag": "div",
+    "cls": "narr-card",
+    "kind": "border-top",
+    "area": 818
+   },
+   {
+    "tag": "div",
+    "cls": "narr-card",
+    "kind": "border-top",
+    "area": 818
+   },
+   {
+    "tag": "div",
+    "cls": "narr-card",
+    "kind": "border-top",
+    "area": 818
+   },
+   {
+    "tag": "div",
+    "cls": "narr-card",
+    "kind": "border-top",
+    "area": 818
+   },
+   {
+    "tag": "div",
+    "cls": "narr-card",
+    "kind": "border-top",
+    "area": 818
+   },
+   {
+    "tag": "span",
+    "cls": "sc-chip",
+    "kind": "background",
+    "area": 7008
+   },
+   {
+    "tag": "span",
+    "cls": "sc-chip",
+    "kind": "background",
+    "area": 8241
+   },
+   {
+    "tag": "div",
+    "cls": "sc-cat",
+    "kind": "background",
+    "area": 1606
+   },
+   {
+    "tag": "span",
+    "cls": "sc-chip",
+    "kind": "background",
+    "area": 15503
+   },
+   {
+    "tag": "span",
+    "cls": "sc-chip",
+    "kind": "background",
+    "area": 8447
+   },
+   {
+    "tag": "span",
+    "cls": "sc-chip",
+    "kind": "background",
+    "area": 8036
+   }
+  ]
+ },
+ "en/narrative-rhythm-curve.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "a",
+    "cls": "",
+    "txt": "→ Timeline (time tra"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "button",
+    "cls": "btn",
+    "kind": "background",
+    "area": 2932
+   }
+  ]
+ },
+ "en/narratology-12d-network.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   }
+  ]
+ },
+ "en/narratology-16d-network.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   }
+  ]
+ },
+ "en/perf-canvas-rendering.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 813
+   },
+   {
+    "tag": "button",
+    "cls": "",
+    "kind": "background",
+    "area": 5760
+   },
+   {
+    "tag": "div",
+    "cls": "bar-seg svg-seg",
+    "kind": "background",
+    "area": 20416
+   }
+  ]
+ },
+ "en/philosophy.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Mind-Monkey Nature C"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "micro perspective"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Six-Eared Macaque in"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Indulgence"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "true awakening begin"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "2"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "7"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "5"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "3"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "0"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "81 hardships"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "anger"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Three Poisons"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "prone to anger"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "12"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "15"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "8"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "11"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "7"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "\"breaking attachment"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "\"form is not differe"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "the so-called script"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "\"breaking attachment"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "surface layer"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "subduing the mind-mo"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "the so-called script"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   }
+  ]
+ },
+ "en/pilgrim-team-dynamic-network.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "button",
+    "cls": "ctrl-btn active",
+    "kind": "background",
+    "area": 3551
+   },
+   {
+    "tag": "div",
+    "cls": "phase-card active",
+    "kind": "background",
+    "area": 16330
+   }
+  ]
+ },
+ "en/pilgrim-team-psychology-arc.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "progress-fill",
+    "kind": "background",
+    "area": 6758
+   }
+  ]
+ },
+ "en/poetry-rhythm-analysis.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "progress-fill",
+    "kind": "background",
+    "area": 6758
+   }
+  ]
+ },
+ "en/power-resources.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Three Realms Power S"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Demon Realm"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "6"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "5"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "7"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "5"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "7"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9.0"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Tang Sanzang’s Flesh"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "10"
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "txt": "Heaven"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "txt": "Heaven"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "6"
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "txt": "Heaven"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "8"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   },
+   {
+    "tag": "span",
+    "cls": "",
+    "txt": "Heaven"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "faction-card",
+    "kind": "border-top",
+    "area": 1098
+   }
+  ]
+ },
+ "en/relationships.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Faction Distribution"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Heaven"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "7"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "6"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "6"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "5"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "5"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Vajra Ring"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Palm-Leaf Fan (Princ"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Purple-Gold Red Gour"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Yin-Yang Two-Qi Vase"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "the three golden cuf"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Golden-Banded Staff"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Jade Vase"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Nine-Toothed Rake"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "54%"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Shaper + Plant"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "8"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "10"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Tang Sanzang–Sun Wuk"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Zhu Bajie–Sha Wujing"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "span",
+    "cls": "role-tag primary",
+    "kind": "background",
+    "area": 1949
+   },
+   {
+    "tag": "span",
+    "cls": "role-tag primary",
+    "kind": "background",
+    "area": 1184
+   },
+   {
+    "tag": "span",
+    "cls": "role-tag primary",
+    "kind": "background",
+    "area": 3480
+   },
+   {
+    "tag": "span",
+    "cls": "role-tag primary",
+    "kind": "background",
+    "area": 1949
+   },
+   {
+    "tag": "span",
+    "cls": "role-tag primary",
+    "kind": "background",
+    "area": 1796
+   }
+  ]
+ },
+ "en/risk-project.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "PMBOK Risk Assessmen"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "one failure ends the"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "47"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "12"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "8"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "5"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Monster attacks"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "key success factor"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "idealistic vision"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "8"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "7"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "9"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "6"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "structural absence"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "risk mitigation"
+   },
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "governing risk"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "char-card c-tang",
+    "kind": "border-top",
+    "area": 1098
+   }
+  ]
+ },
+ "en/search.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "button",
+    "cls": "vt-btn",
+    "kind": "background",
+    "area": 2632
+   }
+  ]
+ },
+ "en/site-map.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/six-senses-narratology-network.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   }
+  ]
+ },
+ "en/social-media.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "platform-badge",
+    "kind": "background",
+    "area": 2623
+   }
+  ]
+ },
+ "en/tag-cloud.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "button",
+    "cls": "tab-btn",
+    "kind": "background",
+    "area": 3045
+   },
+   {
+    "tag": "span",
+    "cls": "rc-size",
+    "kind": "background",
+    "area": 2092
+   },
+   {
+    "tag": "span",
+    "cls": "rc-size",
+    "kind": "background",
+    "area": 1951
+   },
+   {
+    "tag": "span",
+    "cls": "rc-size",
+    "kind": "background",
+    "area": 1951
+   },
+   {
+    "tag": "span",
+    "cls": "rc-size",
+    "kind": "background",
+    "area": 1951
+   },
+   {
+    "tag": "span",
+    "cls": "rc-size",
+    "kind": "background",
+    "area": 1951
+   }
+  ]
+ },
+ "en/text-evolution.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "strong",
+    "cls": "",
+    "txt": "Red"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "evo-step first",
+    "kind": "background",
+    "area": 24137
+   },
+   {
+    "tag": "div",
+    "cls": "evo-step first",
+    "kind": "background",
+    "area": 13878
+   },
+   {
+    "tag": "div",
+    "cls": "evo-step first",
+    "kind": "background",
+    "area": 18338
+   },
+   {
+    "tag": "div",
+    "cls": "evo-step first",
+    "kind": "background",
+    "area": 15959
+   },
+   {
+    "tag": "div",
+    "cls": "evo-step first",
+    "kind": "background",
+    "area": 10928
+   },
+   {
+    "tag": "div",
+    "cls": "evo-step first",
+    "kind": "background",
+    "area": 18817
+   },
+   {
+    "tag": "div",
+    "cls": "quote-card",
+    "kind": "border-top",
+    "area": 1094
+   }
+  ]
+ },
+ "en/text-search.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   }
+  ]
+ },
+ "en/theological-intervention-network.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 623
+   }
+  ]
+ },
+ "en/timeline.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [
+   {
+    "tag": "span",
+    "cls": "ec-axis",
+    "txt": "· Composition Histor"
+   },
+   {
+    "tag": "span",
+    "cls": "ec-axis",
+    "txt": "· Composition Histor"
+   },
+   {
+    "tag": "span",
+    "cls": "ec-axis",
+    "txt": "· Composition Histor"
+   },
+   {
+    "tag": "span",
+    "cls": "ec-axis",
+    "txt": "· Composition Histor"
+   },
+   {
+    "tag": "span",
+    "cls": "ec-axis",
+    "txt": "· Composition Histor"
+   },
+   {
+    "tag": "span",
+    "cls": "ec-axis",
+    "txt": "· Composition Histor"
+   },
+   {
+    "tag": "span",
+    "cls": "ec-axis",
+    "txt": "· Composition Histor"
+   }
+  ],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   }
+  ]
+ },
+ "en/tribulations.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 2,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/underworld-power-network.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 528
+   },
+   {
+    "tag": "div",
+    "cls": "role-card r-king",
+    "kind": "border-top",
+    "area": 1465
+   },
+   {
+    "tag": "div",
+    "cls": "kpi-card ",
+    "kind": "border-top",
+    "area": 528
+   }
+  ]
+ },
+ "en/visual-art.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 3,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "div",
+    "cls": "chant-card amp-high",
+    "kind": "border-top",
+    "area": 642
+   },
+   {
+    "tag": "span",
+    "cls": "ch-amp-bar",
+    "kind": "background",
+    "area": 643
+   },
+   {
+    "tag": "div",
+    "cls": "sc-cat cat-danger",
+    "kind": "background",
+    "area": 1200
+   },
+   {
+    "tag": "div",
+    "cls": "sc-cat cat-danger",
+    "kind": "background",
+    "area": 1200
+   },
+   {
+    "tag": "div",
+    "cls": "sc-cat cat-danger",
+    "kind": "background",
+    "area": 1200
+   },
+   {
+    "tag": "div",
+    "cls": "sc-cat cat-danger",
+    "kind": "background",
+    "area": 1200
+   },
+   {
+    "tag": "div",
+    "cls": "sc-cat cat-danger",
+    "kind": "background",
+    "area": 1200
+   },
+   {
+    "tag": "div",
+    "cls": "idea-card",
+    "kind": "border-top",
+    "area": 642
+   },
+   {
+    "tag": "div",
+    "cls": "id-form",
+    "kind": "background",
+    "area": 7950
+   }
+  ]
+ },
+ "en/visualizations.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "a",
+    "cls": "nav-back",
+    "kind": "background",
+    "area": 6850
+   }
+  ]
+ },
+ "en/workplace.html": {
+  "static": {
+   "token_old": false,
+   "container_lit": 1,
+   "container_tok": 0,
+   "accent_text_def": true
+  },
+  "text_on_bg": [],
+  "fill": [
+   {
+    "tag": "div",
+    "cls": "kpi-card",
+    "kind": "border-top",
+    "area": 3379
+   },
+   {
+    "tag": "span",
+    "cls": "alert-badge",
+    "kind": "background",
+    "area": 1201
+   },
+   {
+    "tag": "span",
+    "cls": "alert-badge",
+    "kind": "background",
+    "area": 4050
+   },
+   {
+    "tag": "span",
+    "cls": "alert-badge",
+    "kind": "background",
+    "area": 2708
+   },
+   {
+    "tag": "span",
+    "cls": "alert-badge",
+    "kind": "background",
+    "area": 1201
+   },
+   {
+    "tag": "span",
+    "cls": "alert-badge",
+    "kind": "background",
+    "area": 4050
+   },
+   {
+    "tag": "span",
+    "cls": "alert-badge",
+    "kind": "background",
+    "area": 4048
+   },
+   {
+    "tag": "span",
+    "cls": "alert-badge",
+    "kind": "background",
+    "area": 1201
+   },
+   {
+    "tag": "div",
+    "cls": "bw-cat",
+    "kind": "background",
+    "area": 2567
+   }
+  ]
+ }
+}

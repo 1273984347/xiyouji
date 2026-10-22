@@ -1,0 +1,577 @@
+{
+  "data/character-appearance.html": {
+    "text_on_bg": [
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "孙悟空"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "30.5%"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "孙悟空"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "30.5%"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "孙悟空"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "1"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "铁扇公主"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "430"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "戏份高度集中"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/character-presence-timeline.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      }
+    ]
+  },
+  "data/character-semantic-network.html": {
+    "text_on_bg": [
+      {
+        "tag": "h1",
+        "cls": "",
+        "txt": "人物语义网络可视化"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 603
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 603
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 603
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 603
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 603
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 603
+      }
+    ]
+  },
+  "data/character-dynamic-network.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "① 人物关系动态力导向图"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "② 四阶段关系演化统计"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "阶段一"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "14"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "12"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "6"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "2"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "3"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "1"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "阶段二"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "27"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "38"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "7"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "17"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "12"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "2"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "阶段三"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "18"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "22"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "5"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "6"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "8"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "3"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "阶段四"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "10"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "8"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "4"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "0"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "3"
+      },
+      {
+        "tag": "td",
+        "cls": "num",
+        "txt": "1"
+      },
+      {
+        "tag": "h2",
+        "cls": "",
+        "txt": "③ 关系演化洞察"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "button",
+        "cls": "stage-btn active",
+        "kind": "background",
+        "area": 5517
+      }
+    ]
+  },
+  "data/character-sentiment-arc.html": {
+    "text_on_bg": [
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "孙悟空情感波动最大"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "唐僧情感最稳定偏负"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "猪八戒持续偏负"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "沙僧最接近中性"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "唐僧-孙悟空主轴关系"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "U 型曲线三阶段证据"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "6 个关键转折点"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "数据局限"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/character-relationship-3d.html": {
+    "text_on_bg": [
+      {
+        "tag": "a",
+        "cls": "",
+        "txt": "→ 人物动态网络（2D 轨）"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      }
+    ]
+  },
+  "data/character-relationship-3d-view.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "keytab active",
+        "kind": "background",
+        "area": 2220
+      },
+      {
+        "tag": "button",
+        "cls": "vt-btn",
+        "kind": "background",
+        "area": 2717
+      },
+      {
+        "tag": "button",
+        "cls": "vt-btn",
+        "kind": "background",
+        "area": 2980
+      }
+    ]
+  },
+  "data/dialogue-sentiment.html": {
+    "text_on_bg": [
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "全书负向引语（29.6%）高于正向引语（12.6"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "孙悟空是 Top 1 说话者（3515 条 / "
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "唐僧 avg_sentiment 偏正向"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "猪八戒 avg_sentiment 中性偏负"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "沙僧引语较少（318 条）"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "观音 avg_sentiment 正向偏多"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "中性引语占比最高（57.8%）"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "数据基于零依赖情感词典"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "stat-card negative",
+        "kind": "border-top",
+        "area": 1094
+      }
+    ]
+  },
+  "data/ai-dialogue.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "button",
+        "cls": "",
+        "kind": "background",
+        "area": 2759
+      },
+      {
+        "tag": "span",
+        "cls": "step-num",
+        "kind": "background",
+        "area": 576
+      },
+      {
+        "tag": "span",
+        "cls": "step-num",
+        "kind": "background",
+        "area": 576
+      },
+      {
+        "tag": "span",
+        "cls": "step-num",
+        "kind": "background",
+        "area": 576
+      },
+      {
+        "tag": "span",
+        "cls": "step-num",
+        "kind": "background",
+        "area": 576
+      }
+    ]
+  }
+}

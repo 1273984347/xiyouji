@@ -24,7 +24,6 @@ from __future__ import annotations
 
 import json
 import re
-import subprocess
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
@@ -78,16 +77,197 @@ mcp = FastMCP(
 
 
 # ---------------------------------------------------------------------------
+# 模块级常量（原在函数体内定义，W803-B 提升为模块级；逐项取值与语义不变）
+# ---------------------------------------------------------------------------
+# 5 个工具共用的 MCP annotations：全部只读、不破坏、幂等、不依赖外部世界。
+# 抽成一份常量复用，装饰器行为与原先逐处字面量完全一致。
+READONLY_TOOL_ANNOTATIONS: dict[str, bool] = {
+    "readOnlyHint": True,
+    "destructiveHint": False,
+    "idempotentHint": True,
+    "openWorldHint": False,
+}
+
+# xiyouji_data_validate 的类型契约表：已知文件名 → 期望的顶层类型。
+# 未登记的文件不做类型校验（仅做语法/非空校验）。
+EXPECTED_TYPES: dict[str, type] = {
+    "characters.json": dict,
+    "cooccurrence.json": dict,
+    "hardships_81.json": dict,
+    "journey_route.json": dict,
+    "chapter_stats_sample.json": dict,
+    "character_appearance_sample.json": dict,
+}
+
+# xiyouji_docs_index 的 docs/ 子目录名 → 展示标题映射；未登记目录回退为目录名本身。
+SECTION_TITLES: dict[str, str] = {
+    "00-导读": "00 · 导读",
+    "01-全书逐回解读": "01 · 全书逐回解读",
+    "02-人物深度分析": "02 · 人物深度分析",
+    "03-主题与情节专题": "03 · 主题与情节专题",
+    "04-文化与历史背景": "04 · 文化与历史背景",
+    "05-诗词歌赋": "05 · 诗词歌赋",
+    "06-个人随笔": "06 · 个人随笔",
+    "07-学以致用": "07 · 学以致用",
+    "08-外部资源": "08 · 外部资源",
+    "09-站点": "09 · 站点",
+    "10-方法论沉淀": "10 · 方法论沉淀",
+}
+
+
+# ---------------------------------------------------------------------------
+# 私有助手：扫描 / 解析 / 计数（与各工具返回 dict 一一对应，本身不构成 MCP 契约）
+# ---------------------------------------------------------------------------
+def _resolve_or_none(root: Path, p: str | Path, what: str) -> tuple[Path | None, str | None]:
+    """`_resolve_within` 的「不抛异常」包装：越界时返回 (None, 越界原因文案)。
+
+    供各工具在 try/except PathEscapeError 骨架处替换为一次调用；
+    各工具仍自行决定越界时的返回结构（不同工具的报文形态本就不同），
+    此处只收敛「解析 + 取原因字符串」这一重复动作，越界文案由 _resolve_within 生成。
+    """
+    try:
+        return _resolve_within(root, p, what), None
+    except PathEscapeError as e:
+        return None, str(e)
+
+
+def _empty_links_result(ok: bool, message: str) -> dict[str, Any]:
+    """lint_links 的零值结果（契约键集：ok/scanned_files/total_links/internal_links/external_links/broken/message）。
+
+    用于「越界」与「扫描目录不存在」两个提前返回点：除 ok 与 message 外全部为零值。
+    """
+    return {
+        "ok": ok,
+        "scanned_files": 0,
+        "total_links": 0,
+        "internal_links": 0,
+        "external_links": 0,
+        "broken": [],
+        "message": message,
+    }
+
+
+def _count_severities(issues: list[dict[str, Any]]) -> tuple[int, int, int]:
+    """a11y issues → (P0, P1, P2) 计数；非 P0/P1 的严重度计入 P2（沿用原 else 语义）。"""
+    counts = {"P0": 0, "P1": 0, "P2": 0}
+    for issue in issues:
+        severity = issue["severity"]
+        counts[severity if severity in counts else "P2"] += 1
+    return counts["P0"], counts["P1"], counts["P2"]
+
+
+def _empty_a11y_result(ok: bool, message: str) -> dict[str, Any]:
+    """a11y_audit 的零值结果（契约键集：ok/scanned_files/p0..p2_count/issues_by_file/message）。
+
+    用于三处提前返回：file 越界、scan_dir 越界、未找到 HTML 文件。
+    三处 OK 语义一致（无文件可查 → 不阻断），仅 message 文案不同。
+    """
+    return {
+        "ok": ok,
+        "scanned_files": 0,
+        "p0_count": 0,
+        "p1_count": 0,
+        "p2_count": 0,
+        "issues_by_file": [],
+        "message": message,
+    }
+
+
+def _fail_result(file: Any, reason: str) -> dict[str, Any]:
+    """data_validate 的「参数路径越界」结果：issues 记一条、failed=1、total=0、无 all_results。"""
+    return {
+        "ok": False, "total": 0, "passed": 0, "failed": 1,
+        "issues": [{"file": str(file), "reason": reason}],
+    }
+
+
+# ---------------------------------------------------------------------------
+# Tool 1 助手：DRL spot-check
+# ---------------------------------------------------------------------------
+def _check_replacement(target: Path, old: str, new: str) -> dict[str, Any]:
+    """replacement 模式单项检查 → 契约 checks[] 的一项 {check, passed, message}。
+
+    四种命中数组合的判定顺序与文案逐字保持（old 命中数 → new 命中数）：
+        old>0 & new==0  → [FAIL] 修复未落地
+        old>0 & new>0   → [WARN] 部分修复
+        old==0 & new==0 → [WARN] 两值均未命中
+        其余(old==0 & new>0) → [OK] 修复已落地
+    文件不存在时不读取内容，直接返回 [MISS] 项（两种模式共用同一文案）。
+    """
+    if not target.exists():
+        return {
+            "check": "replacement",
+            "passed": False,
+            "message": f"[MISS] 文件不存在: {target}",
+        }
+    text = target.read_text(encoding="utf-8")
+    old_hits = len(re.findall(re.escape(old), text))
+    new_hits = len(re.findall(re.escape(new), text))
+    if old_hits > 0 and new_hits == 0:
+        return {
+            "check": "replacement",
+            "passed": False,
+            "message": f"[FAIL] 修复未落地：old 命中 {old_hits} 次，new 命中 0 次",
+        }
+    if old_hits > 0 and new_hits > 0:
+        return {
+            "check": "replacement",
+            "passed": False,
+            "message": f"[WARN] 部分修复：old 仍命中 {old_hits} 次，new 已命中 {new_hits} 次",
+        }
+    if old_hits == 0 and new_hits == 0:
+        return {
+            "check": "replacement",
+            "passed": False,
+            "message": "[WARN] 两值均未命中（可能行号/路径有误）",
+        }
+    return {
+        "check": "replacement",
+        "passed": True,
+        "message": f"[OK] 修复已落地：old 0 次，new {new_hits} 次",
+    }
+
+
+def _check_must_contain(target: Path, keyword: str) -> dict[str, Any]:
+    """must_still_contain 模式单项检查 → 契约 checks[] 的一项 {check, passed, message}。
+
+    命中 >0 → passed=True；文案里「0 次」为字面量（未找到时恒为 0 次）。
+    """
+    if not target.exists():
+        return {
+            "check": "must_contain",
+            "passed": False,
+            "message": f"[MISS] 文件不存在: {target}",
+        }
+    text = target.read_text(encoding="utf-8")
+    hits = len(re.findall(re.escape(keyword), text))
+    return {
+        "check": "must_contain",
+        "passed": hits > 0,
+        "message": (
+            f"[OK] 关键词仍存在：{hits} 次" if hits > 0
+            else "[FAIL] 关键词未找到：0 次"
+        ),
+    }
+
+
+def _summarize_checks(checks: list[dict[str, Any]]) -> dict[str, Any]:
+    """checks 列表 → 工具返回 dict（契约键集：ok / checks / summary）。
+
+    ok = 全部 check 通过；summary 为「全部通过 | 存在失败 · N 项检查」。
+    """
+    ok = all(c["passed"] for c in checks)
+    return {
+        "ok": ok,
+        "checks": checks,
+        "summary": f"{'全部通过' if ok else '存在失败'} · {len(checks)} 项检查",
+    }
+
+
+# ---------------------------------------------------------------------------
 # Tool 1: DRL spot-check
 # ---------------------------------------------------------------------------
-@mcp.tool(
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": False,
-    }
-)
+@mcp.tool(annotations=READONLY_TOOL_ANNOTATIONS)
 def xiyouji_drl_spotcheck(
     file_path: str,
     old: str | None = None,
@@ -116,66 +296,17 @@ def xiyouji_drl_spotcheck(
             "summary": str        # 人类可读总结
         }
     """
-    try:
-        target = _resolve_within(ROOT, file_path, "file_path")
-    except PathEscapeError as e:
-        return {"ok": False, "checks": [], "summary": f"ERROR: {e}"}
+    target, escape_error = _resolve_or_none(ROOT, file_path, "file_path")
+    if target is None:
+        return {"ok": False, "checks": [], "summary": f"ERROR: {escape_error}"}
     checks: list[dict[str, Any]] = []
 
+    # 参数校验：两种模式都未提供 → 空 checks（由下方统一返回 ERROR 汇总）
     if old is not None and new is not None:
-        if not target.exists():
-            checks.append({
-                "check": "replacement",
-                "passed": False,
-                "message": f"[MISS] 文件不存在: {target}",
-            })
-        else:
-            text = target.read_text(encoding="utf-8")
-            old_hits = len(re.findall(re.escape(old), text))
-            new_hits = len(re.findall(re.escape(new), text))
-            if old_hits > 0 and new_hits == 0:
-                checks.append({
-                    "check": "replacement",
-                    "passed": False,
-                    "message": f"[FAIL] 修复未落地：old 命中 {old_hits} 次，new 命中 0 次",
-                })
-            elif old_hits > 0 and new_hits > 0:
-                checks.append({
-                    "check": "replacement",
-                    "passed": False,
-                    "message": f"[WARN] 部分修复：old 仍命中 {old_hits} 次，new 已命中 {new_hits} 次",
-                })
-            elif old_hits == 0 and new_hits == 0:
-                checks.append({
-                    "check": "replacement",
-                    "passed": False,
-                    "message": "[WARN] 两值均未命中（可能行号/路径有误）",
-                })
-            else:
-                checks.append({
-                    "check": "replacement",
-                    "passed": True,
-                    "message": f"[OK] 修复已落地：old 0 次，new {new_hits} 次",
-                })
+        checks.append(_check_replacement(target, old, new))
 
     if must_still_contain is not None:
-        if not target.exists():
-            checks.append({
-                "check": "must_contain",
-                "passed": False,
-                "message": f"[MISS] 文件不存在: {target}",
-            })
-        else:
-            text = target.read_text(encoding="utf-8")
-            hits = len(re.findall(re.escape(must_still_contain), text))
-            checks.append({
-                "check": "must_contain",
-                "passed": hits > 0,
-                "message": (
-                    f"[OK] 关键词仍存在：{hits} 次" if hits > 0
-                    else f"[FAIL] 关键词未找到：0 次"
-                ),
-            })
+        checks.append(_check_must_contain(target, must_still_contain))
 
     if not checks:
         return {
@@ -184,25 +315,46 @@ def xiyouji_drl_spotcheck(
             "summary": "[ERROR] 未提供验证参数（需传 old+new 或 must_still_contain）",
         }
 
-    ok = all(c["passed"] for c in checks)
-    return {
-        "ok": ok,
-        "checks": checks,
-        "summary": f"{'全部通过' if ok else '存在失败'} · {len(checks)} 项检查",
-    }
+    return _summarize_checks(checks)
+
+
+# ---------------------------------------------------------------------------
+# Tool 2 助手：data_validate
+# ---------------------------------------------------------------------------
+def _validate_one_json(path: Path) -> tuple[bool, str]:
+    """校验单个 JSON 文件 → (passed, issue)；通过时 issue 为空串。
+
+    issue 文案即工具契约 issues[].reason 与 all_results[].reason 的取值，覆盖面：
+        「文件不存在」/「读取失败: {e}」/「JSON 语法错误: {e}」/
+        「空对象/空数组」/「类型契约不符：期望 X，实际 Y」
+    只读失败类分支被捕获（OSError / JSONDecodeError）；解码失败等其他异常
+    与重构前一致地向外抛出（不在本函数内兜底）。
+    调用方负责把同一 (passed, issue) 同时写入 issues 与 all_results——
+    「两个列表同步追加、文案同源」是既有的可观察行为。
+    """
+    name = path.name
+    if not path.exists():
+        return False, "文件不存在"
+    try:
+        text = path.read_text(encoding="utf-8")
+    except OSError as e:
+        return False, f"读取失败: {e}"
+    try:
+        data = json.loads(text)
+    except json.JSONDecodeError as e:
+        return False, f"JSON 语法错误: {e}"
+    if data is None or (isinstance(data, (dict, list)) and len(data) == 0):
+        return False, "空对象/空数组"
+    expected = EXPECTED_TYPES.get(name)
+    if expected and not isinstance(data, expected):
+        return False, f"类型契约不符：期望 {expected.__name__}，实际 {type(data).__name__}"
+    return True, ""
 
 
 # ---------------------------------------------------------------------------
 # Tool 2: data_validate
 # ---------------------------------------------------------------------------
-@mcp.tool(
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": False,
-    }
-)
+@mcp.tool(annotations=READONLY_TOOL_ANNOTATIONS)
 def xiyouji_data_validate(
     file: str | None = None,
     quiet: bool = True,
@@ -228,23 +380,12 @@ def xiyouji_data_validate(
             "all_results": list[dict]  # 仅 quiet=False 时
         }
     """
-    EXPECTED_TYPES = {
-        "characters.json": dict,
-        "cooccurrence.json": dict,
-        "hardships_81.json": dict,
-        "journey_route.json": dict,
-        "chapter_stats_sample.json": dict,
-        "character_appearance_sample.json": dict,
-    }
-
+    # 参数校验：file 指定单个文件（越界即返回），否则扫描 output/data/ 全部 .json
     if file:
-        try:
-            targets = [_resolve_within(OUTPUT_DATA, file, "file")]
-        except PathEscapeError as e:
-            return {
-                "ok": False, "total": 0, "passed": 0, "failed": 1,
-                "issues": [{"file": str(file), "reason": str(e)}],
-            }
+        target, escape_error = _resolve_or_none(OUTPUT_DATA, file, "file")
+        if target is None:
+            return _fail_result(file, escape_error or "")
+        targets = [target]
     else:
         targets = sorted(OUTPUT_DATA.glob("*.json"))
 
@@ -254,37 +395,10 @@ def xiyouji_data_validate(
 
     for path in targets:
         name = path.name
-        if not path.exists():
-            issues.append({"file": name, "reason": "文件不存在"})
-            all_results.append({"file": name, "ok": False, "reason": "文件不存在"})
-            continue
-        try:
-            text = path.read_text(encoding="utf-8")
-        except OSError as e:
-            issues.append({"file": name, "reason": f"读取失败: {e}"})
-            all_results.append({"file": name, "ok": False, "reason": f"读取失败: {e}"})
-            continue
-        try:
-            data = json.loads(text)
-        except json.JSONDecodeError as e:
-            issues.append({"file": name, "reason": f"JSON 语法错误: {e}"})
-            all_results.append({"file": name, "ok": False, "reason": f"JSON 语法错误: {e}"})
-            continue
-        if data is None or (isinstance(data, (dict, list)) and len(data) == 0):
-            issues.append({"file": name, "reason": "空对象/空数组"})
-            all_results.append({"file": name, "ok": False, "reason": "空对象/空数组"})
-            continue
-        expected = EXPECTED_TYPES.get(name)
-        if expected and not isinstance(data, expected):
-            issues.append({
-                "file": name,
-                "reason": f"类型契约不符：期望 {expected.__name__}，实际 {type(data).__name__}",
-            })
-            all_results.append({
-                "file": name,
-                "ok": False,
-                "reason": f"类型契约不符：期望 {expected.__name__}，实际 {type(data).__name__}",
-            })
+        passed, reason = _validate_one_json(path)
+        if not passed:
+            issues.append({"file": name, "reason": reason})
+            all_results.append({"file": name, "ok": False, "reason": reason})
             continue
         passed_count += 1
         all_results.append({"file": name, "ok": True, "reason": ""})
@@ -304,14 +418,7 @@ def xiyouji_data_validate(
 # ---------------------------------------------------------------------------
 # Tool 3: docs_index (--check 只读模式)
 # ---------------------------------------------------------------------------
-@mcp.tool(
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": False,
-    }
-)
+@mcp.tool(annotations=READONLY_TOOL_ANNOTATIONS)
 def xiyouji_docs_index(
     include_dev: bool = False,
 ) -> dict[str, Any]:
@@ -331,20 +438,6 @@ def xiyouji_docs_index(
             "message": str
         }
     """
-    SECTION_TITLES = {
-        "00-导读": "00 · 导读",
-        "01-全书逐回解读": "01 · 全书逐回解读",
-        "02-人物深度分析": "02 · 人物深度分析",
-        "03-主题与情节专题": "03 · 主题与情节专题",
-        "04-文化与历史背景": "04 · 文化与历史背景",
-        "05-诗词歌赋": "05 · 诗词歌赋",
-        "06-个人随笔": "06 · 个人随笔",
-        "07-学以致用": "07 · 学以致用",
-        "08-外部资源": "08 · 外部资源",
-        "09-站点": "09 · 站点",
-        "10-方法论沉淀": "10 · 方法论沉淀",
-    }
-
     if not DOCS_DIR.exists():
         return {
             "ok": False,
@@ -354,6 +447,7 @@ def xiyouji_docs_index(
             "message": f"docs/ 目录不存在: {DOCS_DIR}",
         }
 
+    # 规模统计：仅统计一级子目录（可跳过 _ 前缀目录），标题取 SECTION_TITLES 映射
     sections: list[str] = []
     total_files = 0
     for sub in sorted(DOCS_DIR.iterdir()):
@@ -406,14 +500,58 @@ def _is_internal(url: str) -> bool:
     return not url.startswith(("http://", "https://", "mailto:", "tel:", "#", "data:"))
 
 
-@mcp.tool(
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": False,
-    }
-)
+def _collect_html_links(html_file: Path) -> list[str]:
+    """解析单个 HTML 文件 → href/src 链接原文列表；文件读不了返回空列表。
+
+    单文件的读取失败（OSError）与解析异常（HTMLParser.feed 抛出）都与重构前
+    一致地就地跳过，不阻断整轮扫描。
+    """
+    try:
+        text = html_file.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return []
+    extractor = _LinkExtractor()
+    try:
+        extractor.feed(text)
+    except Exception:
+        pass
+    return extractor.links
+
+
+def _classify_and_check(html_file: Path, links: list[str], broken: list[dict[str, Any]]) -> tuple[int, int, int]:
+    """按链接逐条分类计数，并把站内失效链接追加进 broken。
+
+    返回 (total, internal, external)。每条链接先计入 total（含锚点-only/空链接），
+    清理掉 `#锚点` 与 `?查询串` 后为空的链接不再计入站内外（沿用原 continue 语义）。
+    """
+    total = internal = external = 0
+    for link in links:
+        total += 1
+        # 去除锚点和查询参数
+        clean = link.split("#")[0].split("?")[0]
+        if not clean:
+            continue
+        if _is_internal(clean):
+            internal += 1
+            # 解析相对路径：目标不存在即记为 broken（reason 带 ROOT 内相对路径，
+            # 越出 ROOT 时回退为绝对路径，与重构前同）
+            target = (html_file.parent / clean).resolve()
+            if not target.exists():
+                broken.append({
+                    "file": str(html_file.relative_to(ROOT)),
+                    "link": link,
+                    "reason": f"站内文件不存在: {target.relative_to(ROOT) if target.is_relative_to(ROOT) else target}",
+                })
+        else:
+            external += 1
+            # 外链默认跳过
+    return total, internal, external
+
+
+# ---------------------------------------------------------------------------
+# Tool 4: lint_links
+# ---------------------------------------------------------------------------
+@mcp.tool(annotations=READONLY_TOOL_ANNOTATIONS)
 def xiyouji_lint_links(
     scan_dir: str = "site",
     external: bool = False,
@@ -439,28 +577,11 @@ def xiyouji_lint_links(
             "message": str
         }
     """
-    try:
-        target_dir = _resolve_within(ROOT, scan_dir, "scan_dir")
-    except PathEscapeError as e:
-        return {
-            "ok": False,
-            "scanned_files": 0,
-            "total_links": 0,
-            "internal_links": 0,
-            "external_links": 0,
-            "broken": [],
-            "message": f"ERROR: {e}",
-        }
+    target_dir, escape_error = _resolve_or_none(ROOT, scan_dir, "scan_dir")
+    if target_dir is None:
+        return _empty_links_result(False, f"ERROR: {escape_error}")
     if not target_dir.exists():
-        return {
-            "ok": False,
-            "scanned_files": 0,
-            "total_links": 0,
-            "internal_links": 0,
-            "external_links": 0,
-            "broken": [],
-            "message": f"扫描目录不存在: {target_dir}",
-        }
+        return _empty_links_result(False, f"扫描目录不存在: {target_dir}")
 
     html_files = sorted(target_dir.rglob("*.html")) + sorted(target_dir.rglob("*.htm"))
     broken: list[dict[str, Any]] = []
@@ -469,34 +590,11 @@ def xiyouji_lint_links(
     external_count = 0
 
     for html_file in html_files:
-        try:
-            text = html_file.read_text(encoding="utf-8", errors="ignore")
-        except OSError:
-            continue
-        extractor = _LinkExtractor()
-        try:
-            extractor.feed(text)
-        except Exception:
-            pass
-        for link in extractor.links:
-            total_links += 1
-            # 去除锚点和查询参数
-            clean = link.split("#")[0].split("?")[0]
-            if not clean:
-                continue
-            if _is_internal(clean):
-                internal_count += 1
-                # 解析相对路径
-                target = (html_file.parent / clean).resolve()
-                if not target.exists():
-                    broken.append({
-                        "file": str(html_file.relative_to(ROOT)),
-                        "link": link,
-                        "reason": f"站内文件不存在: {target.relative_to(ROOT) if target.is_relative_to(ROOT) else target}",
-                    })
-            else:
-                external_count += 1
-                # 外链默认跳过
+        links = _collect_html_links(html_file)
+        total, internal, external = _classify_and_check(html_file, links, broken)
+        total_links += total
+        internal_count += internal
+        external_count += external
 
     return {
         "ok": len(broken) == 0,
@@ -575,14 +673,29 @@ class _A11yChecker(HTMLParser):
             })
 
 
-@mcp.tool(
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": False,
-    }
-)
+def _scan_html_file(html_file: Path) -> dict[str, Any] | None:
+    """解析单个 HTML 文件 → 契约 issues_by_file[] 的一项 {file, issues}；无问题返回 None。
+
+    读取失败（OSError）与解析异常（HTMLParser.feed 抛出）逐字沿用原实现：
+    就地跳过（返回 None）并仍计入 scanned_files。
+    """
+    try:
+        text = html_file.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return None
+    checker = _A11yChecker()
+    try:
+        checker.feed(text)
+    except Exception:
+        pass
+    if not checker.issues:
+        return None
+    # 相对路径展示：越出 ROOT 的路径回退为绝对路径（与重构前同）
+    rel = str(html_file.relative_to(ROOT)) if html_file.is_relative_to(ROOT) else str(html_file)
+    return {"file": rel, "issues": checker.issues}
+
+
+@mcp.tool(annotations=READONLY_TOOL_ANNOTATIONS)
 def xiyouji_a11y_audit(
     file: str | None = None,
     scan_dir: str = "site/data",
@@ -609,61 +722,33 @@ def xiyouji_a11y_audit(
             "message": str
         }
     """
+    # 参数校验：file 优先于 scan_dir；file 指定时只查该文件（不存在 → 空扫描而非报错）
     if file:
-        try:
-            target = _resolve_within(ROOT, file, "file")
-        except PathEscapeError as e:
-            return {
-                "ok": True, "scanned_files": 0,
-                "p0_count": 0, "p1_count": 0, "p2_count": 0,
-                "issues_by_file": [], "message": f"ERROR: {e}",
-            }
+        target, escape_error = _resolve_or_none(ROOT, file, "file")
+        if target is None:
+            return _empty_a11y_result(True, f"ERROR: {escape_error}")
         html_files = [target] if target.exists() else []
     else:
-        try:
-            target_dir = _resolve_within(ROOT, scan_dir, "scan_dir")
-        except PathEscapeError as e:
-            return {
-                "ok": True, "scanned_files": 0,
-                "p0_count": 0, "p1_count": 0, "p2_count": 0,
-                "issues_by_file": [], "message": f"ERROR: {e}",
-            }
+        target_dir, escape_error = _resolve_or_none(ROOT, scan_dir, "scan_dir")
+        if target_dir is None:
+            return _empty_a11y_result(True, f"ERROR: {escape_error}")
         html_files = sorted(target_dir.rglob("*.html")) if target_dir.exists() else []
 
     if not html_files:
-        return {
-            "ok": True,
-            "scanned_files": 0,
-            "p0_count": 0,
-            "p1_count": 0,
-            "p2_count": 0,
-            "issues_by_file": [],
-            "message": "未找到 HTML 文件",
-        }
+        return _empty_a11y_result(True, "未找到 HTML 文件")
 
     issues_by_file: list[dict[str, Any]] = []
     p0 = p1 = p2 = 0
 
     for html_file in html_files:
-        try:
-            text = html_file.read_text(encoding="utf-8", errors="ignore")
-        except OSError:
+        scanned = _scan_html_file(html_file)
+        if scanned is None:
             continue
-        checker = _A11yChecker()
-        try:
-            checker.feed(text)
-        except Exception:
-            pass
-        if checker.issues:
-            rel = str(html_file.relative_to(ROOT)) if html_file.is_relative_to(ROOT) else str(html_file)
-            issues_by_file.append({"file": rel, "issues": checker.issues})
-            for issue in checker.issues:
-                if issue["severity"] == "P0":
-                    p0 += 1
-                elif issue["severity"] == "P1":
-                    p1 += 1
-                else:
-                    p2 += 1
+        issues_by_file.append(scanned)
+        c0, c1, c2 = _count_severities(scanned["issues"])
+        p0 += c0
+        p1 += c1
+        p2 += c2
 
     return {
         "ok": p0 == 0 and p1 == 0,

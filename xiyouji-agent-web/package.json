@@ -12,7 +12,11 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "server": "tsx server/index.ts",
-    "test:server": "node --import tsx --test server/engine/tools.test.ts server/audit.test.ts server/citationGuard.test.ts server/security.test.ts",
+    "test:server": "node --import tsx --test server/engine/tools.test.ts server/audit.test.ts server/citationGuard.test.ts server/security.test.ts server/backup.test.ts server/metrics.test.ts",
+    "test:integration": "node --import tsx --test server/api.integration.test.ts",
+    "test:client": "vitest run",
+    "test:e2e": "node e2e/chat.e2e.mjs",
+    "test:all": "npm run test:server && npm run test:integration && npm run test:client",
     "smoke:engine": "node server/engine.smoke.mjs"
   },
   "dependencies": {
@@ -28,10 +32,14 @@
     "react-router-dom": "^7.18.4",
     "tdesign-icons-react": "^0.6.11",
     "tdesign-react": "^1.18.3",
-    "uuid": "^14.0.2"
+    "uuid": "^14.0.2",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.3",
     "@types/better-sqlite3": "^9.6.0",
     "@types/express": "^5.0.6",
     "@types/node": "^26.6.2",
@@ -39,13 +47,16 @@
     "@types/react-dom": "^19.3.0",
     "@types/uuid": "^11.0.0",
     "@vitejs/plugin-react": "^6.1.1",
+    "@vitest/coverage-v8": "^5.0.5",
     "concurrently": "^10.0.5",
+    "jsdom": "^25.0.1",
     "less": "^4.9.1",
     "postcss": "^8.5.28",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
-    "vite": "^8.3.1"
+    "vite": "^8.3.1",
+    "vitest": "^5.0.5"
   },
   "overrides": {
     "cherry-markdown": "^0.11.9",

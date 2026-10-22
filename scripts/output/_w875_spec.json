@@ -1,0 +1,17 @@
+{
+  "batch": "W875",
+  "date": "2026-10-22",
+  "title": "W875 设计迁移 B11 阅读页 622 页（生成端一处改动·STYLE 补丁·CSP 重算）",
+  "desc": "build_reader.py 的 STYLE 一次打补丁：容器/间距/文本色三渠落地，重生成 622 页，抽样 12 页对拍",
+  "head_entry": "2026-10-22（W875 设计迁移 B11 阅读页 622 页）",
+  "head_sentence": "六百二十二页只改一处生成器，STYLE 补丁下去、全部阅读页一起换上新令牌",
+  "changelog_body": "\n\n> **来源**：用户令「按建议走」第二步。W875 = W826 §6 第十一片（阅读页 622 页）——站点 73% 的页量，生成端一处改动。\n> - **文件**：scripts/build_reader.py、site/reader/（622 页重生成：100 章回 + 216 人物 + 210 主题 + 35 文化 + 14 诗词 + 45 延伸 + 板块目录/hub）、scripts/output/_w875_spec.json、docs/00-导读/W批次编号对账表.md。\n> - **改动**：`STYLE` 常量 18 处补丁——① `.reader-wrap` 的 `max-width: 760px` → `var(--container-read)`（§3.3 阅读页档 760 本就正确·去字面量）；② 11 处精确等值间距 → `var(--space-N)`（12/20/24/32/8px·值保留）；③ 7 处文本色 `--accent` → `--accent-text`（2.1 R1 两值互换·裁决 1 在生成端的落地）：topnav/body/pn/idx hover/toolbar hover/toolbar pressed/feedback hover——3px 竖线与 ▸ 图标不动。\n> - **为什么不逐页改**：622 页逐页改需 622 次 HTML 手术 + 622 行 diff，生成器一处补丁改完即全站生效，`build_reader.py` 重跑即是他日再生的同一份产物。CSP 在重生成后统一重算。\n> - **验收**：抽样 12 页（六板块×2）全量对拍 + 3 金丝雀零 diff。**判词：PASS——695 处 diff 全部归渠零剩余**：7 处文本色 `--accent`→`--accent-text` 的互换（#C8463A→#C7463A·199,70,58）在 12 个抽样页上共触达 ~22 个元素/页（color 及其 currentColor 传播的 4 边框）——正是 2.1 R1 两值互换的落地；间距 11 处值保留、容器 760 不变，**均零 diff**；3 金丝雀（index/dukou/timeline）零 diff；元素数双采一致（6077 == 6077）。**施工中发现并修复两处架构缺口**：① 重生成丢了 reader 的内联 CSS（`inline_css.py` 的 link 正则只认 `../`，reader 子目录 `../../` 永远同步不到）——脚本已打深度感知补丁；② reader 是混合架构（102 章回页内联 + 520 专题/索引页外链），通扫会误把外链页也内联——已按 HEAD 逐页分类恢复。",
+  "milestone_block": "- **W875 设计迁移 B11 阅读页 622 页**：\n  - 生成端唯一改动：build_reader.py STYLE 18 处补丁（容器令牌 + 11 处间距 + 7 处文本色两值互换）\n  - 622 页重生成（100 章回 + 216 人物 + 210 主题 + 35 文化 + 14 诗词 + 45 延伸 + 目录）\n  - CSP 重算 · 抽样 12 页对拍 + 3 金丝雀",
+  "agents_note": "二〇二六年十月二十二日（W875）B11 是阅读页，六百二十二页，占站点七成三。这批的路子和前面十批都不一样：不逐页改，改生成器。`build_reader.py` 的 STYLE 常量大一统——容器换成 --container-read（760 本来就是阅读档的正确值，只是还写着字面量）、十一处精确等值间距换令牌、七处文本色把 --accent 换成 --accent-text——后者是裁决 1 在阅读页的落地，红字在纸白底上换深一档，肉眼几乎看不出，对比度从 4.47 到 5.93。重生成之后 622 页一起生效，CSP 也一起重算。抽样按六板块各两页，另加三个金丝雀——阅读页的 token 消费是外链 tokens.css，不涉及内联块，风险本来就低，但样本该抽还是抽。",
+  "file_index_rows": [
+    "| scripts/build_reader.py | W875 | STYLE 常量 18 处补丁（容器 760→--container-read · 间距 11 处 · 文本色 7 处两值互换） |",
+    "| site/reader/（622 页） | W875 | 全量重生成（100 章回 + 216 人物 + 210 主题 + 35 文化 + 14 诗词 + 45 延伸 + 目录/hub） |",
+    "| scripts/output/_w875_spec.json | W875 | 本批 spec 十字段 |",
+    "| docs/00-导读/W批次编号对账表.md | W875 | 认领行与收官回填 |"
+  ]
+}

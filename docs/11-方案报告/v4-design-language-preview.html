@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>v4 视觉语言预览 · 界面视觉重设计方向（详解西游记）</title>
+<style>
+/* ============================================================
+   v4 视觉语言预览页 · 零外域依赖 · file:// 双击直开
+   对应文档：docs/11-方案报告/界面视觉重设计方向-v4-2026-10-20.md
+   本页只演示「提案」令牌与组件形态，未改动 site/ 任何现役页面。
+   ============================================================ */
+
+/* —— 本地字体（相对路径指向站内自托管子集；加载失败时回退系统字体） —— */
+@font-face{font-family:'Noto Serif SC';font-style:normal;font-weight:200 900;font-display:optional;src:url('../../site/static/fonts/noto-serif-sc-shared.subset.woff2') format('woff2-variations');}
+@font-face{font-family:'Noto Sans SC';font-style:normal;font-weight:400;font-display:optional;src:url('../../site/static/fonts/NotoSansSC-Regular.subset.woff2') format('woff2');}
+@font-face{font-family:'Noto Sans SC';font-style:normal;font-weight:500;font-display:optional;src:url('../../site/static/fonts/NotoSansSC-Medium.subset.woff2') format('woff2');}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url('../../site/static/fonts/JetBrainsMono-Regular.woff2') format('woff2');}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url('../../site/static/fonts/JetBrainsMono-Medium.woff2') format('woff2');}
+
+/* ============================================================
+   1 · 提案令牌（v4 草案·纯加法：现役取值一律不动）
+   ============================================================ */
+:root{
+  /* 纸 */
+  --surface-0:#FAF7F0; --surface-1:#FFFFFF; --surface-2:#F1EBDD; --surface-3:#E8E0CE;
+  /* 墨 */
+  --ink-1:#23201A; --ink-2:#6B6455; --ink-3:#8A8271; --ink-4:#E5DFD0;
+  /* 彩 */
+  --accent:#C8463A; --accent-deep:#AF3F34; --accent-soft:#E9B885;
+  --accent-050:color-mix(in srgb,var(--accent) 5%,var(--surface-0));
+  --accent-100:color-mix(in srgb,var(--accent) 10%,var(--surface-1));
+  --accent-2:#3A6B8C; --accent-3:#8A6D3B; --accent-4:#6B8E5A; --rebel:#8C2A2A;
+  /* 夜 */
+  --night-1:#221D16; --night-2:#2B2419; --night-text:#F2EBDC;
+  /* 图表色板 · 浅色组 */
+  --chart-1:#C8463A; --chart-2:#3A6B8C; --chart-3:#C9A063;
+  --chart-4:#6B8E5A; --chart-5:#D8CFBC; --chart-6:#8A6D3B;
+  /* 间距刻度 */
+  --space-0:0px; --space-1:2px; --space-2:4px; --space-3:8px; --space-4:12px;
+  --space-5:20px; --space-6:24px; --space-7:32px; --space-8:40px; --space-9:48px;
+  --space-10:64px; --space-11:80px; --space-12:96px;
+  --gap-tight:var(--space-3); --gap-base:var(--space-5); --gap-loose:var(--space-6);
+  --gap-block:var(--space-7); --gap-section:var(--space-10); --gap-hero:var(--space-12);
+  /* 容器三档 */
+  --container-read:760px; --container-content:1120px; --container-wide:1320px;
+  --grid-gutter:var(--space-6);
+  /* 字体族 */
+  --font-serif:'Noto Serif SC','Source Han Serif SC','Songti SC','STSong','SimSun',serif;
+  --font-sans:'Noto Sans SC','Source Han Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-mono:'JetBrains Mono','Consolas','Menlo',monospace;
+  /* 动效 */
+  --dur-fast:150ms; --dur-base:250ms;
+  --ease-out-quart:cubic-bezier(.25,1,.5,1);
+  --radius-sm:2px; --radius-md:6px; --radius-lg:10px; --radius-pill:999px;
+  --elev-1:0 1px 3px rgba(35,32,26,.06),0 4px 12px rgba(35,32,26,.05);
+  --elev-2:0 2px 6px rgba(35,32,26,.08),0 8px 24px rgba(35,32,26,.08);
+}
+
+/* —— 暗色作用域：仅作用于容器，不改整页 —— */
+.dark-scope{
+  --surface-0:#221D16; --surface-1:#2B2419; --surface-2:#33291B; --surface-3:#3E3324;
+  --ink-1:#F2EBDC; --ink-2:#CBBFA9; --ink-3:#9C9280; --ink-4:rgba(242,235,220,.14);
+  --accent:#E0604F; --accent-deep:#C94F3F; --accent-soft:#E8A99F;
+  --accent-050:rgba(224,96,79,.10); --accent-100:rgba(224,96,79,.16);
+  --accent-2:#7FA8C9; --accent-3:#C9A96B; --accent-4:#9DB98A; --rebel:#D96C5C;
+  --chart-1:#E0604F; --chart-2:#7FA8C9; --chart-3:#C9A96B;
+  --chart-4:#9DB98A; --chart-5:#6E6656; --chart-6:#C9A96B;
+  --elev-1:0 1px 3px rgba(0,0,0,.4),0 4px 12px rgba(0,0,0,.3);
+  --elev-2:0 2px 6px rgba(0,0,0,.45),0 8px 24px rgba(0,0,0,.35);
+  background:var(--surface-0); color:var(--ink-1);
+}
+
+/* ============================================================
+   2 · 预览页自身外壳（刻意沿用现役视觉，便于对比）
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:var(--surface-0); color:var(--ink-1);
+  font-family:var(--font-sans); font-size:15px; line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--container-wide);margin:0 auto;padding:0 clamp(20px,4vw,64px);}
+.pv-head{padding:var(--gap-hero) 0 var(--gap-block);border-bottom:1px solid var(--ink-4);}
+.pv-head .kicker{font-family:var(--font-mono);font-size:12px;font-weight:500;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:var(--space-4);}
+.pv-head h1{font-family:var(--font-serif);font-size:clamp(30px,4vw,48px);font-weight:600;line-height:1.2;letter-spacing:-.02em;margin-bottom:var(--space-4);}
+.pv-head .lead{font-size:17px;color:var(--ink-2);max-width:62ch;margin-bottom:var(--space-6);}
+.pv-meta{font-family:var(--font-mono);font-size:12px;color:var(--ink-3);letter-spacing:.03em;}
+.pv-nav{display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-5);margin-top:var(--space-6);}
+.pv-nav a{font-family:var(--font-mono);font-size:12px;color:var(--ink-2);text-decoration:none;padding:4px 10px;border:1px solid var(--ink-4);border-radius:var(--radius-pill);}
+.pv-nav a:hover{border-color:var(--accent-soft);color:var(--accent);}
+
+.pv-sec{padding:var(--gap-hero) 0;border-bottom:1px solid var(--ink-4);}
+.pv-sec:last-of-type{border-bottom:none;}
+.sec-title{font-family:var(--font-serif);font-size:24px;font-weight:600;line-height:1.3;letter-spacing:-.01em;
+  border-left:3px solid var(--accent);padding-left:var(--space-4);margin-bottom:var(--space-3);}
+.sec-note{font-size:15px;color:var(--ink-2);max-width:60ch;margin-bottom:var(--gap-block);}
+h3.sub{font-family:var(--font-serif);font-size:18px;font-weight:600;margin:var(--space-8) 0 var(--space-4);}
+h4.sub2{font-size:14px;font-weight:500;color:var(--ink-2);margin:var(--space-6) 0 var(--space-3);letter-spacing:.02em;}
+p.note{font-size:13px;color:var(--ink-3);max-width:70ch;margin-top:var(--space-3);}
+
+/* —— 现状 / 提案 对照骨架 —— */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap-block);align-items:start;}
+@media (max-width:900px){.compare{grid-template-columns:1fr;}}
+.panel{border:1px solid var(--ink-4);border-radius:var(--radius-md);background:var(--surface-1);overflow:hidden;}
+.panel > .cap{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);
+  padding:var(--space-3) var(--space-5);background:var(--surface-2);
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--ink-2);
+  border-bottom:1px solid var(--ink-4);
+}
+.panel > .cap b{font-weight:500;color:var(--ink-1);}
+.panel .body{padding:var(--space-6);}
+.panel.dark > .cap{background:var(--surface-2);}
+
+/* —— 通用小样张元素 —— */
+.demo{padding:var(--space-6);}
+.demo + .demo{border-top:1px solid var(--ink-4);}
+.demo-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);margin-bottom:var(--space-4);text-transform:uppercase;}
+
+/* ① 页级五段式 */
+.frame .eyebrow{font-family:var(--font-mono);font-size:12px;font-weight:500;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:var(--space-4);}
+.frame .title{font-family:var(--font-serif);font-size:clamp(28px,3.4vw,40px);font-weight:600;line-height:1.18;letter-spacing:-.02em;margin-bottom:var(--space-3);}
+.frame .lead{font-size:16px;color:var(--ink-2);max-width:58ch;margin-bottom:var(--space-4);}
+.frame .meta{font-family:var(--font-mono);font-size:12px;color:var(--ink-3);margin-bottom:var(--space-6);}
+.frame .actions{display:flex;gap:var(--space-3);flex-wrap:wrap;}
+
+/* ② 区块三段式 */
+.blockframe{border-left:3px solid var(--accent);padding-left:var(--space-5);}
+.blockframe .bt{font-family:var(--font-serif);font-size:22px;font-weight:600;letter-spacing:-.01em;margin-bottom:var(--space-2);}
+.blockframe .bn{font-size:14px;color:var(--ink-2);max-width:56ch;margin-bottom:var(--space-5);}
+
+/* ③ 旧区块标题三形态（现状） */
+.old-titles{display:flex;flex-direction:column;gap:var(--space-5);}
+.old-a h3{font-family:var(--font-serif);font-size:24px;font-weight:600;margin-bottom:6px;}
+.old-b .st{font-family:var(--font-serif);font-size:20px;display:inline-block;border-bottom:2px solid var(--accent);padding-bottom:6px;margin-bottom:8px;}
+.old-c h3{font-family:var(--font-serif);font-size:18px;font-weight:600;margin-bottom:6px;}
+.old-c .k{font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:.08em;}
+
+/* ④ 色卡 */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:var(--space-3);}
+.sw{border:1px solid var(--ink-4);border-radius:var(--radius-sm);overflow:hidden;background:var(--surface-1);}
+.sw .chip{height:56px;}
+.sw .lab{padding:6px 10px;font-family:var(--font-mono);font-size:10.5px;line-height:1.6;color:var(--ink-2);background:var(--surface-1);}
+.sw .lab b{display:block;color:var(--ink-1);font-weight:500;}
+.sw .lab code{color:var(--ink-3);font-size:10px;}
+
+/* ⑤ 图表色板 */
+.palette{display:flex;flex-direction:column;gap:var(--space-3);}
+.pal-row{display:flex;align-items:center;gap:var(--space-2);}
+.pal-row .tag{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3);width:76px;flex:none;letter-spacing:.05em;}
+.pal{display:flex;gap:4px;flex:1;}
+.pal i{flex:1;height:30px;border-radius:var(--radius-sm);display:block;}
+
+/* ⑥ 排版角色样张 */
+.roles{border-top:1px solid var(--ink-4);}
+.role{display:grid;grid-template-columns:132px 1fr;gap:var(--space-5);align-items:baseline;padding:var(--space-4) 0;border-bottom:1px solid var(--ink-4);}
+.role .meta{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3);line-height:1.7;}
+.role .meta b{display:block;color:var(--accent);font-weight:500;letter-spacing:.06em;text-transform:uppercase;}
+.role .sample{color:var(--ink-1);}
+.r-display{font-family:var(--font-serif);font-weight:600;font-size:clamp(30px,3.6vw,44px);line-height:1.15;letter-spacing:-.02em;}
+.r-title{font-family:var(--font-serif);font-weight:600;font-size:24px;line-height:1.3;letter-spacing:-.01em;}
+.r-subtitle{font-family:var(--font-serif);font-weight:500;font-size:18px;line-height:1.5;}
+.r-lead{font-family:var(--font-sans);font-size:17px;line-height:1.75;color:var(--ink-2);}
+.r-body{font-family:var(--font-sans);font-size:15px;line-height:1.8;}
+.r-label{font-family:var(--font-sans);font-weight:500;font-size:13px;line-height:1.5;color:var(--ink-2);letter-spacing:.02em;}
+.r-caption{font-family:var(--font-sans);font-size:12px;line-height:1.6;color:var(--ink-3);letter-spacing:.03em;}
+.r-eyebrow{font-family:var(--font-mono);font-weight:500;font-size:12px;line-height:1.4;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;}
+.r-number{font-family:var(--font-mono);font-weight:500;font-size:32px;line-height:1.1;font-variant-numeric:tabular-nums;}
+
+/* ⑦ 间距刻度 */
+.scale{display:flex;flex-direction:column;gap:6px;}
+.scale-row{display:flex;align-items:center;gap:var(--space-3);}
+.scale-row .k{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3);width:104px;flex:none;}
+.scale-row .bar{height:13px;background:var(--accent-100);border-left:2px solid var(--accent);border-radius:1px;}
+.scale-row .v{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-2);}
+
+/* ⑧ 容器三档 */
+.containers{display:flex;flex-direction:column;gap:var(--space-4);}
+.ct{border:1px dashed var(--ink-4);border-radius:var(--radius-sm);padding:var(--space-3) var(--space-4);background:var(--surface-2);}
+.ct .ct-k{font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:.06em;margin-bottom:4px;}
+.ct .ct-v{font-size:13px;color:var(--ink-2);}
+.ct.read{max-width:var(--container-read);}
+.ct.content{max-width:var(--container-content);}
+.ct.wide{max-width:var(--container-wide);}
+
+/* ⑨ 12 栏栅格 */
+.grid12{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--grid-gutter);}
+.grid12 i{height:34px;background:var(--accent-100);border-radius:var(--radius-sm);display:block;}
+
+/* ⑩ 组件样张 */
+.comp-row{display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center;margin-bottom:var(--space-5);}
+.btn-v4{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;padding:10px 20px;border-radius:var(--radius-md);border:1px solid var(--ink-4);background:var(--surface-1);color:var(--ink-1);transition:all var(--dur-fast) var(--ease-out-quart);}
+.btn-v4.primary{background:linear-gradient(180deg,var(--accent),var(--accent-deep));border-color:var(--accent-deep);color:#fff;}
+.btn-v4.ghost{border-color:var(--accent);color:var(--accent);background:transparent;}
+.btn-v4:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+.pill{display:inline-flex;align-items:center;font-family:var(--font-mono);font-size:12px;padding:6px 14px;border-radius:var(--radius-pill);border:1px solid var(--ink-4);background:var(--surface-1);color:var(--ink-2);}
+.pill.on{background:var(--accent);border-color:var(--accent);color:#fff8ec;}
+.search-v4{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid var(--ink-4);border-radius:var(--radius-pill);background:var(--surface-1);color:var(--ink-3);font-size:13px;min-width:230px;}
+.bdg{display:inline-flex;align-items:center;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.04em;padding:3px 10px;border-radius:var(--radius-pill);border:1px solid;}
+.bdg.a{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 25%,transparent);background:var(--accent-100);}
+.bdg.b{color:var(--accent-2);border-color:color-mix(in srgb,var(--accent-2) 25%,transparent);background:color-mix(in srgb,var(--accent-2) 10%,var(--surface-1));}
+.bdg.c{color:var(--accent-3);border-color:color-mix(in srgb,var(--accent-3) 25%,transparent);background:color-mix(in srgb,var(--accent-3) 10%,var(--surface-1));}
+.bdg.d{color:var(--accent-4);border-color:color-mix(in srgb,var(--accent-4) 25%,transparent);background:color-mix(in srgb,var(--accent-4) 10%,var(--surface-1));}
+
+/* ⑪ KPI 卡片：现状异形 vs v4 统一 */
+.kpi-old{background:var(--surface-1);border:1px solid var(--ink-4);border-radius:var(--radius-md);padding:22px;box-shadow:var(--elev-1);}
+.kpi-old .lab{font-size:12px;font-weight:500;color:var(--accent);letter-spacing:.08em;margin-bottom:10px;}
+.kpi-old .val{font-family:var(--font-mono);font-size:34px;font-weight:500;color:var(--accent-deep);line-height:1.2;margin-bottom:6px;font-variant-numeric:tabular-nums;}
+.kpi-old .dsc{font-size:13px;color:var(--ink-2);}
+.kpi-new{position:relative;background:var(--surface-1);border:1px solid var(--ink-4);border-radius:var(--radius-md);box-shadow:var(--elev-1);padding:20px;}
+.kpi-new .lab{font-size:13px;color:var(--ink-2);margin-bottom:8px;}
+.kpi-new .val{font-family:var(--font-mono);font-size:32px;font-weight:500;color:var(--ink-1);line-height:1.1;font-variant-numeric:tabular-nums;}
+.kpi-new .val.text{font-family:var(--font-sans);font-weight:600;font-size:26px;letter-spacing:.01em;font-variant-numeric:normal;}
+.kpi-new .dsc{font-size:12px;color:var(--ink-3);margin-top:4px;}
+.kpi-new::before{content:"";position:absolute;left:20px;right:20px;top:0;height:2px;background:var(--accent);border-radius:0 0 2px 2px;}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--gap-base);}
+
+/* ⑫ stat 数字条（新增组件） */
+.statbar{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap-base);border-top:1px solid var(--ink-4);border-bottom:1px solid var(--ink-4);padding:var(--gap-block) 0;}
+@media (max-width:700px){.statbar{grid-template-columns:repeat(2,1fr);}}
+.statbar .n{font-family:var(--font-mono);font-size:30px;font-weight:500;line-height:1.1;font-variant-numeric:tabular-nums;}
+.statbar .l{font-size:12px;color:var(--ink-2);margin-top:6px;}
+
+/* ⑬ 洞察框（现状 79 页各自实现 vs 公共层统一） */
+.insight-old{background:linear-gradient(135deg,#fff8ec 0%,#f5e9d4 100%);border-left:4px solid var(--accent);padding:20px 24px;border-radius:4px;font-size:14px;color:#3a3226;}
+.insight-new{background:var(--accent-050);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:var(--gap-loose) var(--gap-loose);font-size:14px;color:var(--ink-1);}
+.insight-new b{color:var(--accent);}
+
+/* ⑭ 表格 */
+.tbl{width:100%;border-collapse:collapse;font-size:14px;}
+.tbl th{font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--ink-2);text-align:left;padding:12px 16px;background:var(--surface-2);border-bottom:1px solid var(--ink-4);white-space:nowrap;}
+.tbl td{padding:12px 16px;border-bottom:1px solid var(--ink-4);color:var(--ink-1);}
+.tbl td.num{font-family:var(--font-mono);font-variant-numeric:tabular-nums;text-align:right;color:var(--ink-2);}
+
+/* ⑮ 空态 / 骨架 */
+.empty{padding:44px 24px;text-align:center;color:var(--ink-2);font-size:14px;border:1px dashed var(--ink-4);border-radius:var(--radius-md);background:var(--surface-1);}
+.empty b{color:var(--accent);}
+.skel{height:16px;border-radius:3px;background:linear-gradient(100deg,transparent 40%,rgba(107,100,85,.08) 50%,transparent 60%) var(--surface-2);background-size:200% 100%;animation:sk 1.2s ease-in-out infinite;}
+@keyframes sk{0%,100%{background-position:120% 0,0 0}50%{background-position:-20% 0,0 0}}
+
+/* ⑯ 图例 */
+.legend{display:flex;flex-wrap:wrap;gap:var(--space-3) var(--space-5);font-size:12px;color:var(--ink-2);}
+.legend span{display:inline-flex;align-items:center;gap:6px;}
+.legend i{width:10px;height:10px;border-radius:2px;display:block;}
+
+/* ⑰ 迷你柱图（图表色板示例） */
+.bars{display:flex;align-items:flex-end;gap:8px;height:110px;}
+.bars i{flex:1;border-radius:2px 2px 0 0;display:block;}
+
+/* 页脚 */
+.pv-foot{padding:var(--gap-hero) 0 var(--gap-section);border-top:1px solid var(--ink-4);}
+.pv-foot .meta{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-3);line-height:1.9;}
+.pv-foot a{color:var(--accent);}
+</style>
+</head>
+<body>
+
+<header class="pv-head">
+  <div class="wrap">
+    <p class="kicker">W819 · 界面视觉重设计方向 · v4 提案</p>
+    <h1>不换风格，换秩序</h1>
+    <p class="lead">
+      保留「宣纸 · 墨骨 · 朱砂单点强调」的项目气质不变，把当前靠 857 页各自手写形成的视觉一致性，
+      改造成由一套令牌、一套组件、两套版式语法保证的一致性。功能结构、DOM 类名、数据链路、交互逻辑一律不动。
+    </p>
+    <p class="pv-meta">本页为方向预览 · 提案令牌未落地 · site/ 857 页 0 改动 · 2026-10-20</p>
+    <nav class="pv-nav">
+      <a href="#s1">A 视觉层级</a>
+      <a href="#s2">B 配色</a>
+      <a href="#s3">C 字体</a>
+      <a href="#s4">D 间距栅格</a>
+      <a href="#s5">E 组件统一</a>
+      <a href="#s6">F 页面骨架</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================ A 视觉层级 ============================ -->
+<section class="pv-sec" id="s1">
+  <div class="wrap">
+    <h2 class="sec-title">A · 视觉层级：两套固定版式语法</h2>
+    <p class="sec-note">
+      现状是三套首屏语法、三个区块标题形态并存 —— 每页都得重新发明一次首屏。
+      v4 把它收敛成两套语法：页级五段式与区块三段式。
+    </p>
+
+    <div class="compare">
+      <div class="panel">
+        <div class="cap"><b>现状 v3</b><span>三套首屏 · 三种标题</span></div>
+        <div class="body">
+          <h4 class="sub2">首屏段序各异</h4>
+          <div class="old-titles">
+            <div class="old-a">
+              <div class="old-c kicker" style="margin-bottom:6px;">MING DYNASTY · 100 CHAPTERS</div>
+              <h3>详解西游记</h3>
+              <div style="font-size:13px;color:var(--ink-2);">A DETAILED READING…（英文副标）→ tagline → meta</div>
+            </div>
+            <div class="old-b">
+              <div class="old-c kicker" style="margin-bottom:6px;">数据可视化</div>
+              <div class="st">回目结构图谱</div>
+              <div style="font-size:13px;color:var(--ink-2);">CHAPTER STRUCTURE GRAPH → tagline</div>
+            </div>
+            <div class="old-c">
+              <h3>数据看板</h3>
+              <div style="font-size:13px;color:var(--ink-2);">container → kpi-row → filter-bar（无眉标无导语）</div>
+            </div>
+          </div>
+          <h4 class="sub2">区块标题三形态</h4>
+          <div class="old-titles">
+            <div class="old-a"><h3>首页区块标题（24px 无标记）</h3></div>
+            <div class="old-b"><span class="st">带 2px 朱砂下划线</span></div>
+            <div class="old-c"><h3>图表块标题 18px</h3></div>
+          </div>
+          <p class="note">实测：页面层自建同名组件 —— .kpi-card 119 页 · .chart-block 98 页 · .hero 58 页 · .section 35 页。</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="cap"><b>提案 v4</b><span>一套语法 · 顺序不可乱</span></div>
+        <div class="body">
+          <h4 class="sub2">页级五段式</h4>
+          <div class="frame">
+            <p class="eyebrow">数据可视化</p>
+            <h3 class="title">回目结构图谱</h3>
+            <p class="lead">百回对仗回目的聚类、矩阵与字数分布 —— 结构视角的西游记叙事骨架。</p>
+            <p class="meta">数据源：EMBEDDED 快照 2026-10-04 · 10 图 · 1 表</p>
+            <div class="actions">
+              <span class="btn-v4 primary">进入看板 →</span>
+              <span class="btn-v4">查看数据口径</span>
+            </div>
+          </div>
+          <h4 class="sub2">区块三段式</h4>
+          <div class="blockframe">
+            <div class="bt">结构分布</div>
+            <div class="bn">按回目聚类展开的十类结构模式，条长为回目数。</div>
+            <div class="bars" style="height:78px;">
+              <i style="height:62%;background:var(--chart-1)"></i>
+              <i style="height:44%;background:var(--chart-2)"></i>
+              <i style="height:82%;background:var(--chart-3)"></i>
+              <i style="height:30%;background:var(--chart-4)"></i>
+              <i style="height:52%;background:var(--chart-5)"></i>
+              <i style="height:22%;background:var(--chart-6)"></i>
+            </div>
+          </div>
+          <p class="note">层级靠三杠杆建立：留白（96→32→16→8）· 墨色深浅（ink-1/2/3）· 朱砂单点（每页至多 3 处实底）。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ B 配色 ============================ -->
+<section class="pv-sec" id="s2">
+  <div class="wrap">
+    <h2 class="sec-title">B · 配色：四族角色 + 色阶 + 色板驱动暗色</h2>
+    <p class="sec-note">
+      12 个基础色 + 三处 color-mix 派生 → 四族角色（纸 / 墨 / 彩 / 夜），每族三档色阶统一走 color-mix；
+      暗色模式由图表色板双组驱动，删掉 tokens.css 里约 200 条 hex 补丁表。
+    </p>
+
+    <h3 class="sub">B1 · 四族色卡</h3>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:var(--surface-0)"></div><div class="lab"><b>surface-0</b><code>#FAF7F0</code>页面底</div></div>
+      <div class="sw"><div class="chip" style="background:var(--surface-1)"></div><div class="lab"><b>surface-1</b><code>#FFFFFF</code>卡片</div></div>
+      <div class="sw"><div class="chip" style="background:var(--surface-2)"></div><div class="lab"><b>surface-2</b><code>#F1EBDD</code>内嵌块</div></div>
+      <div class="sw"><div class="chip" style="background:var(--surface-3)"></div><div class="lab"><b>surface-3</b><code>#E8E0CE</code>压深块</div></div>
+      <div class="sw"><div class="chip" style="background:var(--ink-1)"></div><div class="lab"><b>ink-1</b><code>#23201A</code>正文</div></div>
+      <div class="sw"><div class="chip" style="background:var(--ink-2)"></div><div class="lab"><b>ink-2</b><code>#6B6455</code>说明</div></div>
+      <div class="sw"><div class="chip" style="background:var(--ink-3)"></div><div class="lab"><b>ink-3</b><code>#8A8271</code>元信息</div></div>
+      <div class="sw"><div class="chip" style="background:var(--ink-4)"></div><div class="lab"><b>ink-4</b><code>#E5DFD0</code>发丝线</div></div>
+      <div class="sw"><div class="chip" style="background:var(--accent)"></div><div class="lab"><b>accent</b><code>#C8463A</code>朱砂·唯一强调</div></div>
+      <div class="sw"><div class="chip" style="background:var(--accent-deep)"></div><div class="lab"><b>accent-deep</b><code>#AF3F34</code>按压/终点</div></div>
+      <div class="sw"><div class="chip" style="background:var(--accent-soft)"></div><div class="lab"><b>accent-soft</b><code>#E9B885</code>淡金</div></div>
+      <div class="sw"><div class="chip" style="background:var(--night-1)"></div><div class="lab"><b>night-1</b><code>#221D16</code>深色段</div></div>
+    </div>
+
+    <h3 class="sub">B2 · 图表色板双组（替代 200 条 hex 补丁表）</h3>
+    <div class="palette">
+      <div class="pal-row"><span class="tag">浅色组</span><span class="pal">
+        <i style="background:var(--chart-1)"></i><i style="background:var(--chart-2)"></i><i style="background:var(--chart-3)"></i>
+        <i style="background:var(--chart-4)"></i><i style="background:var(--chart-5)"></i><i style="background:var(--chart-6)"></i>
+      </span></div>
+      <div class="pal-row dark-scope" style="padding:8px 10px;border-radius:6px;">
+        <span class="tag" style="color:var(--ink-3)">暗色组</span><span class="pal">
+          <i style="background:var(--chart-1)"></i><i style="background:var(--chart-2)"></i><i style="background:var(--chart-3)"></i>
+          <i style="background:var(--chart-4)"></i><i style="background:var(--chart-5)"></i><i style="background:var(--chart-6)"></i>
+        </span></div>
+    </div>
+    <p class="note">
+      现状：tokens.css 用 <code>html[data-theme="dark"] svg [fill="#xxxxxx" i]</code> 逐色列举暗色替身，约 200 条规则被复制进 330 页（公共层裸 hex 实测 72,934 个）。
+      v4：SVG 填充写 <code>fill="var(--chart-N)"</code>，暗色只需覆盖 6 个变量。
+    </p>
+
+    <h3 class="sub">B3 · 对比度硬指标</h3>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:var(--surface-1);display:flex;align-items:center;justify-content:center;font-size:13px;">正文 14.9:1</div><div class="lab"><b>ink-1 / surface-1</b><code>目标 ≥ 7:1</code>达标</div></div>
+      <div class="sw"><div class="chip" style="background:var(--surface-1);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--ink-2);">说明 5.9:1</div><div class="lab"><b>ink-2 / surface-1</b><code>目标 ≥ 4.5:1</code>达标</div></div>
+      <div class="sw"><div class="chip" style="background:var(--surface-1);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--ink-3);">元信息 3.1:1</div><div class="lab"><b>ink-3 / surface-1</b><code>目标 ≥ 3:1</code>加深后达标</div></div>
+      <div class="sw"><div class="chip" style="background:var(--surface-1);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--accent);">朱砂 4.8:1</div><div class="lab"><b>accent / surface-1</b><code>≥ 4.5:1·禁 ≤12px</code>达标</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ C 字体 ============================ -->
+<section class="pv-sec" id="s3">
+  <div class="wrap">
+    <h2 class="sec-title">C · 字体体系：三族分工保留 + 九个排版角色</h2>
+    <p class="sec-note">
+      宋（标题）/ 黑（正文）/ 等宽（数字与拉丁标记）的分工是项目气质资产，v4 不动。
+      新增的是「角色层」：语义 → 族 + 字重 + 字号 + 行高 + 字距 + 颜色，一次定义、全站引用。
+    </p>
+    <div class="roles">
+      <div class="role"><div class="meta"><b>--type-display</b>宋 600 · 1.15 · −.02em</div><div class="sample r-display">回目结构图谱</div></div>
+      <div class="role"><div class="meta"><b>--type-title</b>宋 600 · 24px · 1.30</div><div class="sample r-title">结构分布与矩阵</div></div>
+      <div class="role"><div class="meta"><b>--type-subtitle</b>宋 500 · 18px · 1.50</div><div class="sample r-subtitle">回目聚类与叙事骨架</div></div>
+      <div class="role"><div class="meta"><b>--type-lead</b>黑 400 · 17px · 1.75</div><div class="sample r-lead">百回对仗回目，按结构而非情节切分，取其骨架以见叙事节奏。</div></div>
+      <div class="role"><div class="meta"><b>--type-body</b>黑 400 · 15px · 1.80</div><div class="sample r-body">中文方块字面需要更大行距：正文行高由 1.75 提到 1.80，字距 +0.01em。</div></div>
+      <div class="role"><div class="meta"><b>--type-label</b>黑 500 · 13px · 1.50</div><div class="sample r-label">全部回目</div></div>
+      <div class="role"><div class="meta"><b>--type-caption</b>黑 400 · 12px · 1.60</div><div class="sample r-caption">数据源：EMBEDDED 快照 2026-10-04 · 生成脚本 scripts/run_all.py</div></div>
+      <div class="role"><div class="meta"><b>--type-eyebrow</b>等宽 500 · 12px · 0.12em</div><div class="sample r-eyebrow">数据可视化 · CHAPTER GRAPH</div></div>
+      <div class="role"><div class="meta"><b>--type-number</b>等宽 500 · 32px · tabular</div><div class="sample r-number">6,580</div></div>
+    </div>
+    <p class="note">
+      字重预算：本地无衬线子集只有 400 / 500 两档，黑体侧只用这两档（禁 600/700 伪粗体）；宋体为可变字重 200–900，可用 500/600/700。
+      等宽只用于数字、编号与拉丁标记 —— 现状 <code>.kpi-card .value</code> 套 mono 导致「第 41 回」这类中文值也走等宽，属字体分工越界，v4 修正。
+    </p>
+  </div>
+</section>
+
+<!-- ============================ D 间距栅格 ============================ -->
+<section class="pv-sec" id="s4">
+  <div class="wrap">
+    <h2 class="sec-title">D · 间距栅格：4px 基准十三级 + 容器三档</h2>
+    <p class="sec-note">
+      现状 <code>--space*</code> 令牌命中 0 —— 全站没有间距令牌层。页面层间距字面量 25+ 种，
+      其中六类刻度外值（9/34/26/22/5/30px）合计 2,760 处。v4 收敛为十三级刻度。
+    </p>
+
+    <div class="compare">
+      <div class="panel">
+        <div class="cap"><b>刻度（13 级）</b><span>4px 基准 + 2px/12px 半格</span></div>
+        <div class="body">
+          <div class="scale">
+            <div class="scale-row"><span class="k">--space-0</span><span class="bar" style="width:0px"></span><span class="v">0</span></div>
+            <div class="scale-row"><span class="k">--space-1</span><span class="bar" style="width:2px"></span><span class="v">2px</span></div>
+            <div class="scale-row"><span class="k">--space-2</span><span class="bar" style="width:4px"></span><span class="v">4px</span></div>
+            <div class="scale-row"><span class="k">--space-3</span><span class="bar" style="width:8px"></span><span class="v">8px</span></div>
+            <div class="scale-row"><span class="k">--space-4</span><span class="bar" style="width:12px"></span><span class="v">12px</span></div>
+            <div class="scale-row"><span class="k">--space-5</span><span class="bar" style="width:20px"></span><span class="v">20px</span></div>
+            <div class="scale-row"><span class="k">--space-6</span><span class="bar" style="width:24px"></span><span class="v">24px</span></div>
+            <div class="scale-row"><span class="k">--space-7</span><span class="bar" style="width:32px"></span><span class="v">32px</span></div>
+            <div class="scale-row"><span class="k">--space-8</span><span class="bar" style="width:40px"></span><span class="v">40px</span></div>
+            <div class="scale-row"><span class="k">--space-9</span><span class="bar" style="width:48px"></span><span class="v">48px</span></div>
+            <div class="scale-row"><span class="k">--space-10</span><span class="bar" style="width:64px"></span><span class="v">64px</span></div>
+            <div class="scale-row"><span class="k">--space-11</span><span class="bar" style="width:80px"></span><span class="v">80px</span></div>
+            <div class="scale-row"><span class="k">--space-12</span><span class="bar" style="width:96px"></span><span class="v">96px</span></div>
+          </div>
+          <p class="note">语义别名：--gap-tight 8 · --gap-base 16 · --gap-loose 24 · --gap-block 32 · --gap-section 64 · --gap-hero 96</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="cap"><b>容器与栅格</b><span>4 档 → 3 档</span></div>
+        <div class="body">
+          <div class="containers">
+            <div class="ct read"><div class="ct-k">--container-read · 760px</div><div class="ct-v">reader 长文 / 摘要（现状 .reader-wrap ✅）</div></div>
+            <div class="ct content"><div class="ct-k">--container-content · 1120px</div><div class="ct-v">数据页 / 专题页（归并 DESIGN.md §3.1 的 1200px）</div></div>
+            <div class="ct wide"><div class="ct-k">--container-wide · 1320px</div><div class="ct-v">看板 / 大网格（dashboard 1536px 降档至此）</div></div>
+          </div>
+          <h4 class="sub2">12 栏 · gutter 24px（≤768 → 16px）</h4>
+          <div class="grid12">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <p class="note">卡片网格统一为栏宽倍数：内容宽 3 栏 · 阅读宽 1 栏 · 宽版 4 栏（现状 minmax 200/240/280px 三套并存 → 收敛）。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ E 组件统一 ============================ -->
+<section class="pv-sec" id="s5">
+  <div class="wrap">
+    <h2 class="sec-title">E · 组件样式统一：一个组件一个实现</h2>
+    <p class="sec-note">
+      dashboard.html 自建了与 system.css 同名的 .kpi-card / .filter-tab / .search-box / .category-badge 四套异形实现；
+      .insight-box 在 DESIGN.md §4.8 有规范而公共层实现 0 处，79 个页面各自实现。v4 全部收回公共层。
+    </p>
+
+    <h3 class="sub">E1 · KPI 卡片：两套异形 → 一套统一</h3>
+    <div class="compare">
+      <div class="panel">
+        <div class="cap"><b>现状 dashboard 版</b><span>119 页另写各自版本</span></div>
+        <div class="body">
+          <div class="kpi-old">
+            <div class="lab">CHAPTERS · 总回数</div>
+            <div class="val">100</div>
+            <div class="dsc">全部回目</div>
+          </div>
+          <p class="note">padding 22px · 数字 34px 朱砂 · 无顶部横条 —— 与公共层（padding 20px · 数字 32px 墨色 · 顶部 3px 朱砂横条）并存。</p>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="cap"><b>提案 v4 统一版</b><span>一组件一实现 · 五态齐备</span></div>
+        <div class="body">
+          <div class="kpi-grid">
+            <div class="kpi-new"><div class="lab">总回数</div><div class="val">100</div><div class="dsc">全部回目</div></div>
+            <div class="kpi-new"><div class="lab">平均字数</div><div class="val">6,580</div><div class="dsc">每回平均字数</div></div>
+            <div class="kpi-new"><div class="lab">最长回</div><div class="val text">第 41 回</div><div class="dsc">约 9,820 字</div></div>
+          </div>
+          <p class="note">中文值不再套等宽字体；数字统一 tabular-nums；顶部 2px 朱砂细线替代 3px 实条（减重一档）。</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub">E2 · 组件族样张（浅色 / 暗色双列）</h3>
+    <div class="compare">
+      <div class="panel">
+        <div class="cap"><b>浅色</b><span>surface-0 底</span></div>
+        <div class="body">
+          <div class="demo-label">按钮 · 五态</div>
+          <div class="comp-row">
+            <span class="btn-v4 primary">主按钮</span>
+            <span class="btn-v4">次按钮</span>
+            <span class="btn-v4 ghost">幽灵按钮</span>
+            <span class="btn-v4" style="opacity:.45;pointer-events:none;">禁用</span>
+          </div>
+          <div class="demo-label">药丸 Tab · 搜索 · 徽章</div>
+          <div class="comp-row">
+            <span class="pill on">全部 34</span><span class="pill">A-L 基础 7</span><span class="pill">M-U 12</span>
+          </div>
+          <div class="comp-row">
+            <span class="search-v4">⌕ 搜索专题…</span>
+            <span class="bdg a">A-L</span><span class="bdg b">M-U</span><span class="bdg c">V-AH</span><span class="bdg d">Q+</span>
+          </div>
+          <div class="demo-label">统计条 stat（新增组件）</div>
+          <div class="statbar">
+            <div><div class="n">100</div><div class="l">回 · 逐回解读</div></div>
+            <div><div class="n">615</div><div class="l">篇 · 研究文档</div></div>
+            <div><div class="n">87</div><div class="l">个 · 可视化页面</div></div>
+            <div><div class="n">55</div><div class="l">条 · 学术引用</div></div>
+          </div>
+          <div class="demo-label">洞察框 insight-box（公共层统一实现）</div>
+          <div class="insight-new">
+            回目字数分布呈<b>双峰</b>：第 1–20 回均值 5,240 字，第 61–100 回均值 7,890 字 —— 取经段明显更密。
+          </div>
+        </div>
+      </div>
+
+      <div class="panel dark">
+        <div class="cap"><b>暗色（夜读）</b><span>变量覆盖</span></div>
+        <div class="body dark-scope">
+          <div class="demo-label">按钮 · 五态</div>
+          <div class="comp-row">
+            <span class="btn-v4 primary">主按钮</span>
+            <span class="btn-v4">次按钮</span>
+            <span class="btn-v4 ghost">幽灵按钮</span>
+          </div>
+          <div class="demo-label">药丸 Tab · 徽章</div>
+          <div class="comp-row">
+            <span class="pill on">全部 34</span><span class="pill">A-L 基础 7</span>
+            <span class="bdg a">A-L</span><span class="bdg b">M-U</span><span class="bdg c">V-AH</span>
+          </div>
+          <div class="demo-label">统计条 stat</div>
+          <div class="statbar">
+            <div><div class="n">100</div><div class="l">回 · 逐回解读</div></div>
+            <div><div class="n">615</div><div class="l">篇 · 研究文档</div></div>
+            <div><div class="n">87</div><div class="l">个 · 可视化页面</div></div>
+            <div><div class="n">55</div><div class="l">条 · 学术引用</div></div>
+          </div>
+          <div class="demo-label">表格 + 图例</div>
+          <table class="tbl">
+            <thead><tr><th>回目</th><th>字数</th><th>结构</th></tr></thead>
+            <tbody>
+              <tr><td>第七回</td><td class="num">5,914</td><td>神魔</td></tr>
+              <tr><td>第四十一回</td><td class="num">9,820</td><td>取经</td></tr>
+            </tbody>
+          </table>
+          <div class="legend" style="margin-top:12px;">
+            <span><i style="background:var(--chart-1)"></i>神魔</span>
+            <span><i style="background:var(--chart-2)"></i>取经</span>
+            <span><i style="background:var(--chart-3)"></i>世俗</span>
+            <span><i style="background:var(--chart-4)"></i>战斗</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub">E3 · 空态与骨架</h3>
+    <div class="compare">
+      <div class="panel"><div class="cap"><b>空态</b><span>empty-state</span></div><div class="body">
+        <div class="empty">未找到与「<b>紧箍咒</b>」相关的专题。</div>
+      </div></div>
+      <div class="panel"><div class="cap"><b>骨架</b><span>chart-loading</span></div><div class="body">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="skel" style="width:62%"></div>
+          <div class="skel" style="width:88%"></div>
+          <div class="skel" style="width:40%"></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ F 页面骨架 ============================ -->
+<section class="pv-sec" id="s6">
+  <div class="wrap">
+    <h2 class="sec-title">F · 页面骨架：新版一整页</h2>
+    <p class="sec-note">
+      以下是把 §3–§7 叠在一起的一页：页级五段式 + 区块三段式 + KPI 行 + 图表块 + 表格 + 洞察框。
+      功能结构与现役页面一致（同样的信息、同样的顺序），差别只在秩序。
+    </p>
+
+    <div class="panel" style="background:var(--surface-0)">
+      <div class="cap"><b>浅色整页</b><span>回目结构图谱</span></div>
+      <div class="body" style="background:var(--surface-0)">
+        <div class="frame" style="padding:var(--space-6) 0;">
+          <p class="eyebrow">数据可视化</p>
+          <h3 class="title">回目结构图谱</h3>
+          <p class="lead">百回对仗回目的聚类、矩阵与字数分布 —— 结构视角的西游记叙事骨架。</p>
+          <p class="meta">数据源：EMBEDDED 快照 2026-10-04 · 10 图 · 1 表 · 由 scripts/run_all.py 生成</p>
+        </div>
+
+        <div class="blockframe" style="margin-bottom:var(--gap-block);">
+          <div class="bt">结构分布</div>
+          <div class="bn">按回目聚类展开的十类结构模式，条长为回目数。</div>
+          <div class="bars">
+            <i style="height:62%;background:var(--chart-1)"></i><i style="height:44%;background:var(--chart-2)"></i>
+            <i style="height:82%;background:var(--chart-3)"></i><i style="height:30%;background:var(--chart-4)"></i>
+            <i style="height:52%;background:var(--chart-5)"></i><i style="height:22%;background:var(--chart-6)"></i>
+            <i style="height:70%;background:var(--chart-1)"></i><i style="height:36%;background:var(--chart-2)"></i>
+          </div>
+          <div class="legend" style="margin-top:12px;">
+            <span><i style="background:var(--chart-1)"></i>神魔</span><span><i style="background:var(--chart-2)"></i>取经</span>
+            <span><i style="background:var(--chart-3)"></i>世俗</span><span><i style="background:var(--chart-4)"></i>战斗</span>
+          </div>
+        </div>
+
+        <div class="kpi-grid" style="margin-bottom:var(--gap-block);">
+          <div class="kpi-new"><div class="lab">总回数</div><div class="val">100</div><div class="dsc">全部回目</div></div>
+          <div class="kpi-new"><div class="lab">平均字数</div><div class="val">6,580</div><div class="dsc">每回平均字数</div></div>
+          <div class="kpi-new"><div class="lab">最长回</div><div class="val text">第 41 回</div><div class="dsc">约 9,820 字</div></div>
+          <div class="kpi-new"><div class="lab">最短回</div><div class="val text">第 9 回</div><div class="dsc">约 4,150 字</div></div>
+        </div>
+
+        <div class="blockframe" style="margin-bottom:var(--gap-block);">
+          <div class="bt">回目字数表</div>
+          <div class="bn">节选前六回，完整 100 回见数据看板。</div>
+          <table class="tbl">
+            <thead><tr><th>回目</th><th>标题</th><th>字数</th><th>结构</th></tr></thead>
+            <tbody>
+              <tr><td>第一回</td><td>灵根育孕源流出</td><td class="num">4,512</td><td>缘起</td></tr>
+              <tr><td>第七回</td><td>八卦炉中逃大圣</td><td class="num">5,914</td><td>神魔</td></tr>
+              <tr><td>第二十二回</td><td>八戒大战流沙河</td><td class="num">6,102</td><td>取经</td></tr>
+              <tr><td>第四十一回</td><td>心猿遭火败木母</td><td class="num">9,820</td><td>取经</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="insight-new">
+          回目字数分布呈<b>双峰</b>：第 1–20 回均值 5,240 字，第 61–100 回均值 7,890 字 —— 取经段明显更密，
+          与「章回体愈到后愈密」的常识相反，值得追问其叙事机制。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="pv-foot">
+  <div class="wrap">
+    <p class="meta">
+      配套文档：<a href="界面视觉重设计方向-v4-2026-10-20.md">界面视觉重设计方向-v4-2026-10-20.md</a>（同目录）<br>
+      批次：W819 · 2026-10-20 · 主会话认领 · 本页零外域依赖，file:// 双击直开<br>
+      状态：设计方向提案（未落地）· site/ 857 页 0 改动 · DESIGN.md 宪法 0 改动
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -13,8 +13,8 @@ import os
 import re
 import sys
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+from utils.gate_common import ROOT, SelfTestTally, cli_main, read_text_strict
+
 LINE_LIMIT = 60
 
 
@@ -34,8 +34,11 @@ def subitem_exists(text, topnum, sub):
 def evaluate(claude, files):
     """files: {相对路径: 文件内容}；返回 (issues, notes)。issues 以前缀 C1:/C2:/C3:/C4: 定性。"""
     issues, notes = [], []
-    # C3 行数
-    n = claude.count("\n") + (0 if claude.endswith("\n") else 0) + (1 if claude and not claude.endswith("\n") else 0)
+    # C3 行数：以「逻辑行数」计——结尾换行不算一行（`a\nb\n` 与 `a\nb` 同为 2 行）。
+    # W803 清理：此处原有两行连续赋值，第 1 行算法含两项恒为 0 的加法（`+ 0` 与
+    # `+ (1 if … else 0)` 的 `+ 0` 分支），其结果立即被第 2 行覆盖、从未被读取——
+    # 属死代码。已用 7 个边界样本（空串/无尾换行/有尾换行/仅换行/双换行）+ 真实
+    # CLAUDE.md 实算旧新等值（0 处不一致）后删除，保留实际生效的算法。
     n = claude.count("\n") + 1 if claude and not claude.endswith("\n") else claude.count("\n")
     if n > LINE_LIMIT:
         issues.append("C3: CLAUDE.md %d 行 > 上限 %d（维护契约）" % (n, LINE_LIMIT))
@@ -68,13 +71,15 @@ def evaluate(claude, files):
 
 def gather():
     def rd(p):
-        return open(os.path.join(ROOT, p), encoding="utf-8").read()
+        """读治理档（严格 UTF-8：本门禁读的是仓自有文件，编码坏了应当立刻炸出来，
+        不像站点扫描型门禁那样需要容错跳过——见 utils/gate_common.read_text_strict 注释）。"""
+        return read_text_strict(os.path.join(ROOT, p))
 
     claude = rd("CLAUDE.md")
     files = {}
     for tk in sorted(set(re.findall(r"(AGENTS\.md|CHANGELOG\.md|(?:scripts|docs)/[^\s（）」，。]*?\.(?:py|md))", claude))):
         p = os.path.join(ROOT, tk)
-        files[tk] = open(p, encoding="utf-8").read() if os.path.exists(p) else None
+        files[tk] = read_text_strict(p) if os.path.exists(p) else None
     return claude, files
 
 
@@ -91,8 +96,14 @@ def run_check():
 
 
 def run_self_test():
-    agents = open(os.path.join(ROOT, "AGENTS.md"), encoding="utf-8").read()
-    gf = open(os.path.join(ROOT, "docs", "00-导读", "文档规范.md"), encoding="utf-8").read()
+    """注入式负样本自测：在合成 CLAUDE.md 上打变异，断言对应检查项必红。
+
+    计数与收尾行交给 SelfTestTally（W803 收敛）；逐例输出形态（`PASS  <用例名>`
+    与失败时的 `      -> <issue>` 明细）是本门禁自有文案，保留在本地。
+    T7 是「反向断言」用例（`absent=True`）：断言某检查项**不得**触发（元信息块血缘豁免）。
+    """
+    agents = read_text_strict(os.path.join(ROOT, "AGENTS.md"))
+    gf = read_text_strict(os.path.join(ROOT, "docs", "00-导读", "文档规范.md"))
     good = ("1. **E1 铁律**：声明≠落地 → AGENTS.md §6-2\n"
             "2. **写作纪律**：禁模糊措辞 → docs/00-导读/文档规范.md §4.9\n"
             "3. 常用命令 `python scripts/verify_delivery.py` 与 `scripts/_cite_probe.py`\n")
@@ -110,25 +121,22 @@ def run_self_test():
     case("T5 现役版本字面量必红", good + "6. 当前版本 v2.3.262\n", "C4")
     case("T6 W 区间字面量必红", good + "7. 覆盖 W001-W999\n", "C4")
     case("T7 元信息块血缘豁免", "> 生成来源：人工撰写·W664\n" + good, "C4", True)
-    fails = 0
+
+    tally = SelfTestTally("CLAUDE.md 门禁")
     for name, claude, expect, absent in cases:
         issues, _ = evaluate(claude, files)
         ok = (not issues) if expect is None else (
             any(i.startswith(expect) for i in issues) if not absent
             else not any(i.startswith(expect) for i in issues))
         print("%s  %s" % ("PASS" if ok else "FAIL", name))
-        fails += 0 if ok else 1
-        if not ok:
+        if not tally.add(ok):
             for i in issues:
                 print("      -> " + i)
-    print("---- CLAUDE.md 门禁 self-test：%d/%d 通过 ----" % (len(cases) - fails, len(cases)))
-    return 1 if fails else 0
+    return tally.report()
 
 
 def main():
-    if "--self-test" in sys.argv:
-        return run_self_test()
-    return run_check()
+    return cli_main(run_check, run_self_test)
 
 
 if __name__ == "__main__":

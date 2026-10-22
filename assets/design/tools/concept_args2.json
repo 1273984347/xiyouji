@@ -1,0 +1,76 @@
+{
+  "requests": [
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature, no seal script. A single centered Chinese motif: a golden cudgel staff (Ruyi Jingu Bang) drawn horizontally, slender tapered dark shaft with two ornate gilded bands featuring fine scrollwork at both ends, and one tiny vermilion square seal mark beside it. Traditional Chinese gongbi brush line art. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), gilded bands in antique gold (#B98A4A), one small vermilion seal accent (#C8463A). Flat vector-like crisp edges, no gradient, no 3D, no shadow, no mockup, no bevel. Restrained scholarly Chinese aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "c2-01-ruyi-staff-v2.png"
+    },
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature. A single centered Chinese motif: a nine-ring Buddhist monk's staff (九环锡杖) standing upright, slender shaft with a ring finial at the top and small rings along the upper shaft, drawn in traditional Chinese gongbi ink-brush line art. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), one small vermilion red dot accent (#C8463A). Flat vector-like crisp edges, no gradient, no 3D, no shadow, no mockup, no bevel. Restrained scholarly Chinese Buddhist aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "c2-02-nine-ring-staff.png"
+    },
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature. A single centered Chinese motif: a lotus blossom in side profile, layered petals opening upward, drawn in traditional Chinese gongbi ink-brush line art with elegant thin contour lines and no fill. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), one small vermilion red dot at the heart (#C8463A). Flat vector-like crisp edges, no gradient, no 3D, no shadow, no mockup, no bevel. Restrained Buddhist Chinese aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "c2-03-lotus.png"
+    },
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature. A single centered Chinese motif: one corner of a traditional Chinese temple roof eave (飞檐斗拱) with an upturned ridge end, a few bracket sets and a hanging bell, drawn in traditional Chinese gongbi ink-brush line art. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), one small vermilion red dot accent (#C8463A). Flat vector-like crisp edges, no gradient, no 3D, no shadow, no mockup, no bevel. Restrained scholarly Chinese architectural aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "c2-04-eave.png"
+    },
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature. A single centered Chinese motif: a strand of Buddhist prayer beads (佛珠) forming a loose circle with one larger bead, drawn in traditional Chinese gongbi ink-brush line art. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), one small vermilion red tassel accent (#C8463A). Flat vector-like crisp edges, no gradient, no 3D, no shadow, no mockup, no bevel. Restrained Buddhist Chinese aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "c2-05-prayer-beads.png"
+    },
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature. A single centered Chinese motif: a slender porcelain vase (净瓶) with one graceful willow twig rising from its mouth, drawn in traditional Chinese gongbi ink-brush line art. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), one small vermilion red dot accent (#C8463A). Flat vector-like crisp edges, no gradient, no 3D, no shadow, no mockup, no bevel. Restrained Chinese Buddhist aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "c2-06-vase-willow.png"
+    },
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature. A single centered Chinese motif: a monk's moon-spade staff (月牙铲) with a crescent blade at the top of a slender shaft, drawn in traditional Chinese gongbi ink-brush line art. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), one small vermilion red dot accent (#C8463A). Flat vector-like crisp edges, no gradient, no 3D, no shadow, no mockup, no bevel. Restrained scholarly Chinese martial-temple aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "c2-07-moon-spade.png"
+    },
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature, no map labels. A single centered Chinese motif: a partially unrolled ancient Chinese itinerary map scroll (舆图) lying in shallow perspective, blank cartographic coastline and mountain marks, a route line with small circular waypoints crossing it and one red waypoint. Traditional Chinese gongbi ink-brush line art, slight isometric tilt. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), one vermilion red waypoint (#C8463A). Flat vector-like crisp edges, no gradient, no 3D, no shadow, no mockup, no bevel. Scholarly Chinese cartography aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "c2-08-itinerary-map.png"
+    },
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature. A single centered Chinese motif: a traditional Chinese bronze compass (司南) with a ladle-shaped needle on a round dish, drawn in traditional Chinese gongbi ink-brush line art. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), one small vermilion red dot accent (#C8463A). Flat vector-like crisp edges, no gradient, no 3D, no shadow, no mockup, no bevel. Restrained ancient Chinese scientific aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "c2-09-sinan-compass.png"
+    },
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature, no seal script inside. A single centered Chinese motif: a square jade seal stamp (玉印) seen from directly above, a plain square block with a small knob on top and a blank carved face with abstract seal-pattern lines, drawn in traditional Chinese gongbi ink-brush line art. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), one small vermilion red ink smudge accent (#C8463A). Flat vector-like crisp edges, no gradient, no 3D, no shadow, no mockup, no bevel. Restrained scholarly Chinese aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "c2-10-jade-seal.png"
+    },
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature. A single centered Chinese motif: an old banana-leaf fan (芭蕉扇) shown as a folded leaf with a ribbed texture and a short handle, drawn in traditional Chinese gongbi ink-brush line art. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), one small vermilion red dot accent (#C8463A). Flat vector-like crisp edges, no gradient, no 3D, no shadow, no mockup, no bevel. Restrained Chinese literati aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "c2-11-banana-fan.png"
+    },
+    {
+      "prompt": "Logo symbol mark only. No text, no letters, no Chinese characters, no signature. A single centered Chinese motif: a small ancient bronze temple bell (晨钟) hanging from a short yoke, with a clapper and two small side lugs, drawn in traditional Chinese gongbi ink-brush line art. Deep ink black linework (#23201A) on warm rice paper (#FAF7F0), one small vermilion red dot accent (#C8463A). Flat vector-like crisp edges, no gradient, no 3D, no shadow, no mockup, no bevel. Restrained scholarly Chinese Buddhist aesthetics, generous negative space, square composition.",
+      "aspect_ratio": "1:1",
+      "resolution": "1K",
+      "output_file": "c2-12-bell.png"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "batch": "W860",
+  "date": "2026-10-22",
+  "title": "W860 计划方案合规门禁挂槽批（第 48 槽·用户明令「探针进门禁」·既有计划方案先不做）",
+  "desc": "把 W857 复核批的模板符合性判据接成常驻门禁槽：32 项结构判据 + 增量判定（只判本次变更引入的新缺项）+ 负样本自证 7 例 + pytest 单测 4 例；既有计划文档 0 处改动",
+  "head_entry": "2026-10-22（W860 计划方案合规门禁挂槽批）",
+  "head_sentence": "计划方案模板符合性接成第 48 槽常驻门禁：增量口径只判新引入的缺项，存量不合规文档豁免提示不判红",
+  "changelog_body": "\n\n> **来源**：用户 2026-10-22 会话指令「探针进门禁，计划方案先不做」——前半句批准把 W857 复核批的模板符合性探针接成常驻门禁槽，后半句明确**既有计划文档本批不动**（补齐属后续施工批）。本批为管控件改动（`scripts/verify_delivery.py` 属管控文件），经用户明示批准。\n> - **文件**：scripts/check_plan_template.py、scripts/_w857_plan_template_review.py、scripts/verify_delivery.py、tests/unit/test_check_plan_template.py、AGENTS.md、docs/agent/gates.md、README.md、pytest.ini、HANDOVER.md、scripts/output/stats.json、scripts/index.md、scripts/output/index.md、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md。\n> - **落地口径**：第 48 槽「计划方案合规」挂进 `verify_delivery.py`（`_StrictGate`·crash 即拦 + 汇总行防静默跳过）；门禁段 52→53；`EXPECTED_SECTION_NAMES` 与 `SCOPE_DOCS_SECTIONS` 同步；判据表（32 项结构判据）复用 W857 的 `_w857_plan_template_review.py`，本批只加增量判定层。\n> - **增量口径（核心设计）**：新增文件全项判（任一「不符合」判红）；修改文件取 HEAD 版本同判据求差集（**只判本次引入的新不符合项**·存量不符合项只 NOTE 提示）；未变更文件不看。**为何必须增量**：W857 实测存量 8 份里最弱的仅 6/13 判据符合，若整量判红则本槽上线即全红、形同虚设。\n> - **判据三处校准（继承 W857·先质疑判据再质疑产物）**：① 模板 §12 要求「一份交付物含十项」，仓内惯例拆《执行前计划》+《执行记录报告》两件落库 → 判据按件型分流（不适用项判 N/A·不计不符合）+ 另判两件并集覆盖度；② 「执行摘要/本章结论/待确认事项」认等效形式（「0. 任务背景」「本批不做」「待验证」「待用户」）；③ 模糊词扫描排除文档自证行与引文块（否则自命中假红）。\n> - **负样本自证 7 例（--self-test，全过）**：新增合规→绿 / 新增缺项→必红 / 存量缺项仅改别处→不误判红 / 存量合规改出缺项→必红 / 补齐→恢复必绿 / git 端到端（未跟踪缺项文件进变更集→必红）/ 清理后不再命中；另 pytest 单测 4 例（纯逻辑面·git 级用例不进 pytest 避免 CI 里往仓内写文件）。\n> - **端到端实跑（负样本真拦）**：在 计划方案/ 内造一份缺整节文档 → 第 48 槽 FAIL → `verify_delivery.py --scope docs` exit=1 阻断提交 → 撤除后复跑 exit=0 转绿。\n> - **口径同步四处**：AGENTS.md §4.2（新增第 48 条 + 两处「47 槽」→48 槽）、docs/agent/gates.md（标题 47→48 槽 + 第 48 槽全量定义 + 根级脚本数 103→118 实数）、README.md 与 系统架构方案 的 `<!--stats:gate_count-->` 标记（47→48，架构方案另同步 17 处裸「47 槽」字面量）、stats.json（gate_count 47→48·pytest_collected 818→823）+ pytest.ini 标记（818→823·实测值非 +1：新脚本被根级脚本覆盖测试参数化自动纳入 +1、新单测 +4）。\n> - **本批边界**：**既有计划文档 0 处改动**（用户令「计划方案先不做」）；不落段（CHANGELOG 顶段不变·指针面零改动）；不改门禁脚本的其他判据。\n> - **验证**：全量档 `verify_delivery.py --scope full` exit=0（52→53 段·第 48 槽 0 FAIL）；`check_doc_sync.py` 0 FAIL；`check_folder_docs.py` 0 FAIL；`stats.py --check` 17 键零差异；pytest 新增 4 例全过 + 脚本自证 7/7。\n> - **状态**：门禁已挂载；补齐既有计划文档属后续施工批（框架号 T-06·施工批号待定）。\n",
+  "milestone_block": "- **W860 计划方案合规门禁挂槽批**：\n- 第 48 槽「计划方案合规」上线：32 项模板结构判据 + 增量口径（只判本次变更引入的新缺项·存量豁免只提示）\n- 负样本自证 7 例 + pytest 单测 4 例 + 端到端实跑（不合规计划文档 → 槽 FAIL → exit=1 阻断 → 撤除转绿）\n- 门禁段 52→53；口径四处同步（AGENTS §4.2 / gates.md / README + 架构方案标记 / stats + pytest.ini）\n- 本批 0 处既有计划文档改动（用户令「计划方案先不做」）\n",
+  "agents_note": "二〇二六年十月二十二日（W860）用户让我把上一轮那个复核探针接进门禁，但补一句「计划方案先不做」。这句话我读了两遍：第一遍以为「计划方案」指那八份要补齐的旧文档，第二遍才想明白用户是在划两条线——工具要上线，存量不动。于是我把判据改成增量口径：新增文件全项判，修改文件只判这次新引入的缺项，存量八份不合规的文档只提示不判红。写完自测，脚本自己说七例全过，我又造了一份缺整节的文档丢进目录，门禁真拦了，撤掉又真绿——这才敢算它接上了。回头看这一夜，最费劲的不是写判据，是三次差点把判据说反：一次是件型归属搞反，一次是「执行摘要」不认「任务背景」这个等效写法，一次是我自己把补齐前后的差集方向写反。工具要能骗过人，才配叫门禁。",
+  "file_index_rows": [
+    "| scripts/check_plan_template.py | W860 | 新增：第 48 门禁「计划方案合规」的增量判定入口（--gate 门禁模式 / --self-test 7 例负样本） |",
+    "| scripts/_w857_plan_template_review.py | W860 | 改：抽出 judge()/fail_set() 纯函数供门禁复用；新增「执行摘要」等效形式识别 |",
+    "| scripts/verify_delivery.py | W860 | 改：挂载第 48 槽（_StrictGate）+ EXPECTED_SECTION_NAMES 与 SCOPE_DOCS_SECTIONS 同步（门禁段 52→53） |",
+    "| tests/unit/test_check_plan_template.py | W860 | 新增：第 48 槽单测 4 例（纯逻辑面·git 端到端用例不入 pytest） |",
+    "| AGENTS.md · docs/agent/gates.md · README.md · pytest.ini · HANDOVER.md | W860 | 改：门数口径四处同步（47→48 槽 + gate_count 标记 + pytest_collected 标记 + 交接块） |",
+    "| scripts/output/stats.json | W860 | 改：gate_count 47→48 · pytest_collected 818→823（stats.py --w W860 实测刷新） |"
+  ]
+}

@@ -1,20 +1,20 @@
-# agent-web 引擎去 CodeBuddy 化方案（Engine Swap Plan · V1.0）
+# agent-web 引擎去 旧厂商 Agent 品牌 化方案（Engine Swap Plan · V1.0）
 
 > **头五要素**
 > - **版本**：V1.0（首发）
 > - **日期**：2026-10-07
-> - **来源**：用户两次指令（「不用 CodeBuddy」「完全删除关于 CodeBuddy 和 WorkBuddy 的所有内容」）+ 本日裁决三选一结果 = **保留渡口问津但更换驱动引擎**；集成面为 2026-10-07 对 `server/index.ts`（826 行）实读实测
+> - **来源**：用户两次指令（「不用 旧厂商 Agent 品牌」「完全删除关于 旧厂商 Agent 品牌 等旧厂商 Agent 的所有内容」）+ 本日裁决三选一结果 = **保留渡口问津但更换驱动引擎**；集成面为 2026-10-07 对 `server/index.ts`（826 行）实读实测
 > - **状态**：待开工——本档为执行蓝图；W680-W682 三批推进（§六），动工批按对账表认领（避开预留号）
 > - **读者**：执行 Agent（跨 session）/ 项目维护者。自包含：集成面、新引擎规格、删除清单、验收命令均在本档内。
 >
-> 生成来源：人工撰写（Agent 起草）·生成模型：GLM（ZCode session 2026-10-07）·生成日期：2026-10-07·核验状态：已核验（§二集成面全部来自当日 server/index.ts 实读；历史段豁免边界见 §五）
+> 生成来源：人工撰写（Agent 起草）·生成模型：GLM（本地 Agent 会话 2026-10-07）·生成日期：2026-10-07·核验状态：已核验（§二集成面全部来自当日 server/index.ts 实读；历史段豁免边界见 §五）
 
 ---
 
 ## 一、裁决与目标
 
-1. **用户裁决链**：① 项目不用 CodeBuddy（含 CLI 登录路线排除）；② 完全删除关于 CodeBuddy 和 WorkBuddy 的所有内容；③ agent-web 的命运 = **保留但换引擎**（三选一裁决：整体退役/保留换引擎/只清提及——用户选保留换引擎）。
-2. **目标**：`xiyouji-agent-web` 后端引擎从 `@tencent-ai/agent-sdk`（CodeBuddy Agent SDK）整体替换为 **OpenAI-compatible chat-completions 协议驱动**（可配置 BASE_URL/MODEL，覆盖 GLM/DeepSeek/Moonshot/ollama/vLLM 等一切兼容端点）；全仓现役面 CodeBuddy/WorkBuddy 品牌引用清零；前端 SSE 协议与交互行为保持不变。
+1. **用户裁决链**：① 项目不用 旧厂商 Agent 品牌（含 CLI 登录路线排除）；② 完全删除关于 旧厂商 Agent 品牌 等旧厂商 Agent 的所有内容；③ agent-web 的命运 = **保留但换引擎**（三选一裁决：整体退役/保留换引擎/只清提及——用户选保留换引擎）。
+2. **目标**：`xiyouji-agent-web` 后端引擎从 `@tencent-ai/agent-sdk`（旧厂商 Agent SDK）整体替换为 **OpenAI-compatible chat-completions 协议驱动**（可配置 BASE_URL/MODEL，覆盖 GLM/DeepSeek/Moonshot/ollama/vLLM 等一切兼容端点）；全仓现役面旧厂商 Agent 品牌引用清零；前端 SSE 协议与交互行为保持不变。
 3. **唯一豁免面（铁律 8 推论）**：CHANGELOG 历史段、归档 3 份、file-index-archive 中的历史提及**不改写**（历史事实记录）。若用户要求连历史段一并清除，须明确推翻铁律 8 后另立批执行。
 
 ## 二、集成面清单（2026-10-07 实测）
@@ -36,7 +36,7 @@
 
 ### 2.3 其余引用面（tracked 全仓 grep 实测 35 文件）
 
-- **代码/配置（功能性）**：`xiyouji-agent-web/package.json`（`@tencent-ai/agent-sdk: ^0.3.266` 唯一依赖处）、`server/index.ts`、`evals/run_eval.mjs`（动态 import + W679 补丁的 `CODEBUDDY_*` dotenv 引导）、`src/components/SettingsPage.tsx`（L300-488 凭证 UI 整段）、`.env.example`（`CODEBUDDY_*` 五键）。
+- **代码/配置（功能性）**：`xiyouji-agent-web/package.json`（`@tencent-ai/agent-sdk: ^0.3.266` 唯一依赖处）、`server/index.ts`、`evals/run_eval.mjs`（动态 import + W679 补丁的 `旧厂商_*` dotenv 引导）、`src/components/SettingsPage.tsx`（L300-488 凭证 UI 整段）、`.env.example`（`旧厂商_*` 五键）。
 - **治理/叙述文档**：AGENTS.md（§2/§4.4）、README.md、STRUCTURE.md、交接文档.md、Makefile、.gitignore、docs/superpowers/plans/ 3 份历史方案、`docs/_dev/` 1 份、`site/dukou-engine.html`、agent-web 三份 md。
 - **历史面（豁免）**：CHANGELOG.md 历史段、CHANGELOG-ARCHIVE、file-index-archive、docs/archive/、scripts/archive/。
 - **本日 W679 批产物**：`2026-10-07-workflow-industrialization-plan.md`（WF-1 建在 SDK 上）+ `scripts/output/_w679_spec.json`——随本方案修订。
@@ -77,9 +77,9 @@
 |---|---|
 | 依赖 | `package.json` 移除 `@tencent-ai/agent-sdk`；lockfile 同步；npm audit 复验 |
 | 代码 | `server/index.ts` SDK 导入与调用点全部替换；`evals/run_eval.mjs` 重写为驱动新引擎（直调 engine 模块，保留机判三规则与 --self-check）；SettingsPage 凭证区改 LLM_* 三字段 |
-| 配置 | `.env.example`：删 `CODEBUDDY_*` 五键，增 `LLM_API_BASE/LLM_API_KEY/LLM_MODEL` |
-| 文档 | AGENTS §2 技术栈行 + §4.4 改写（「渡口问津」引擎描述）、README/STRUCTURE/交接/Makefile/`.gitignore`/agent-web 三 md/`site/dukou-engine.html` 相应提及清零（`grep -ric "codebuddy\|workbuddy"` 现役面 = 0） |
-| W679 产物修订 | workflow-industrialization-plan.md：§5.6 P0-1 改判（CODEBUDDY 键作废→LLM_* 键）、WF-1 状态改「待新引擎就位后执行（W682）」 |
+| 配置 | `.env.example`：删 `旧厂商_*` 五键，增 `LLM_API_BASE/LLM_API_KEY/LLM_MODEL` |
+| 文档 | AGENTS §2 技术栈行 + §4.4 改写（「渡口问津」引擎描述）、README/STRUCTURE/交接/Makefile/`.gitignore`/agent-web 三 md/`site/dukou-engine.html` 相应提及清零（`grep -ric "旧厂商"` 现役面 = 0） |
+| W679 产物修订 | workflow-industrialization-plan.md：§5.6 P0-1 改判（旧厂商 键作废→LLM_* 键）、WF-1 状态改「待新引擎就位后执行（W682）」 |
 
 **历史段豁免**：§一.3 所列面不改写。
 
@@ -88,7 +88,7 @@
 | 批 | 内容 | 验收（可复算） |
 |---|---|---|
 | W680 | engine 四模块 + agent-loop + 工具集 + 权限映射 + run_eval 重写 + SettingsPage/.env.example 切换 + package.json 去依赖 | ① `npm run build` exit 0；② `npm audit --omit=dev --audit-level=high` exit 0 且 `npm ls @tencent-ai/agent-sdk` 空；③ 起服 + 假端点冒烟：/api/chat SSE 事件序列含 init/text/done（mock LLM 或录制响应）；④ 现有 pytest/集成测试中涉 SDK 用例改写后全绿 |
-| W681 | 真端点联调（用户配 LLM_* 三键）+ 权限四模式实测 + citationGuard/e2e 回归 + 文档面引用清零 + W679 方案修订入库 | ① 用户端点真跑一轮含工具调用的对话（读 docs 文件并引用）SSE 全 8 事件各 ≥1 次；② 四权限模式 × write_file 行为矩阵实测记录；③ `git -c core.quotePath=false grep -il "codebuddy\|workbuddy" -- .` 仅余 §一.3 豁免面 |
+| W681 | 真端点联调（用户配 LLM_* 三键）+ 权限四模式实测 + citationGuard/e2e 回归 + 文档面引用清零 + W679 方案修订入库 | ① 用户端点真跑一轮含工具调用的对话（读 docs 文件并引用）SSE 全 8 事件各 ≥1 次；② 四权限模式 × write_file 行为矩阵实测记录；③ `git -c core.quotePath=false grep -il "旧厂商" -- .` 仅余 §一.3 豁免面 |
 | W682 | WF-1 复活：新引擎跑 golden-50 基线（原 §5.3 WP-1.1/1.2/验收 A1-1~6 全口径，timeout 公式不变） | workflow-industrialization-plan §5.4 验收表全过（对象=新引擎） |
 
 **用户侧前置（W681 前）**：提供任一 OpenAI-compatible 端点写入 `xiyouji-agent-web/.env`：`LLM_API_BASE` / `LLM_API_KEY` / `LLM_MODEL` 三键（GLM/DeepSeek/Moonshot/ollama 均可）。
@@ -107,6 +107,6 @@
 
 1. `npm ls @tencent-ai/agent-sdk` 空输出且 `git grep -i "agent-sdk"` 现役面 0 命中；
 2. §五 W680-W682 验收列逐条勾毕；
-3. `git -c core.quotePath=false grep -il "codebuddy\|workbuddy" -- .` 输出 ⊆ §一.3 豁免面清单；
+3. `git -c core.quotePath=false grep -il "旧厂商" -- .` 输出 ⊆ §一.3 豁免面清单；
 4. `python scripts/verify_delivery.py` 核心全绿 + CI 五工作流绿；
 5. WF-1 基线（golden-50）在新引擎上产出 results json（A1-1/A1-2 达标）。

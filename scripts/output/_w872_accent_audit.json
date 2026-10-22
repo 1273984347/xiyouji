@@ -1,0 +1,1038 @@
+{
+  "data/aesthetics.html": {
+    "text_on_bg": [
+      {
+        "tag": "div",
+        "cls": "level-num",
+        "txt": "10"
+      },
+      {
+        "tag": "div",
+        "cls": "level-num",
+        "txt": "10"
+      },
+      {
+        "tag": "div",
+        "cls": "level-num",
+        "txt": "10"
+      },
+      {
+        "tag": "div",
+        "cls": "level-num",
+        "txt": "10"
+      },
+      {
+        "tag": "div",
+        "cls": "level-num",
+        "txt": "9"
+      },
+      {
+        "tag": "div",
+        "cls": "level-num",
+        "txt": "9"
+      },
+      {
+        "tag": "div",
+        "cls": "level-num",
+        "txt": "8"
+      },
+      {
+        "tag": "div",
+        "cls": "level-num",
+        "txt": "8"
+      },
+      {
+        "tag": "div",
+        "cls": "level-num",
+        "txt": "7"
+      },
+      {
+        "tag": "div",
+        "cls": "level-num",
+        "txt": "4"
+      },
+      {
+        "tag": "div",
+        "cls": "level-num",
+        "txt": "3"
+      },
+      {
+        "tag": "div",
+        "cls": "level-num",
+        "txt": "2"
+      },
+      {
+        "tag": "div",
+        "cls": "level-num",
+        "txt": "2"
+      },
+      {
+        "tag": "div",
+        "cls": "level-num",
+        "txt": "1"
+      },
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "五点观察"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "美学两极分化："
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "悟空 U 型曲线："
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "12 色 7 类："
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "狮驼岭美学最低(1)："
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "凡俗·朴实占 12 场景居首："
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "color-swatch",
+        "kind": "background",
+        "area": 16146
+      },
+      {
+        "tag": "div",
+        "cls": "scene-bar",
+        "kind": "background",
+        "area": 26219
+      },
+      {
+        "tag": "div",
+        "cls": "scene-bar",
+        "kind": "background",
+        "area": 26219
+      },
+      {
+        "tag": "div",
+        "cls": "scene-bar",
+        "kind": "background",
+        "area": 26219
+      },
+      {
+        "tag": "div",
+        "cls": "scene-bar",
+        "kind": "background",
+        "area": 26219
+      }
+    ]
+  },
+  "data/visual-art.html": {
+    "text_on_bg": [
+      {
+        "tag": "h3",
+        "cls": "",
+        "txt": "心经的物质形态"
+      },
+      {
+        "tag": "h3",
+        "cls": "",
+        "txt": "西游记气味地图"
+      },
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "从视觉艺术视角看西游"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "而是在恐惧与安定之间的反复拉锯"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "从波谷（白虎岭/比丘国）到归零（灵山成佛）"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "转化为可感的嗅觉体验"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "base_note 为\"无·洁净\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "50%（5/10）"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "chant-card amp-high",
+        "kind": "border-top",
+        "area": 642
+      },
+      {
+        "tag": "span",
+        "cls": "ch-amp-bar",
+        "kind": "background",
+        "area": 801
+      },
+      {
+        "tag": "div",
+        "cls": "sc-cat cat-danger",
+        "kind": "background",
+        "area": 1063
+      },
+      {
+        "tag": "div",
+        "cls": "sc-cat cat-danger",
+        "kind": "background",
+        "area": 1063
+      },
+      {
+        "tag": "div",
+        "cls": "sc-cat cat-danger",
+        "kind": "background",
+        "area": 1063
+      },
+      {
+        "tag": "div",
+        "cls": "sc-cat cat-danger",
+        "kind": "background",
+        "area": 1063
+      },
+      {
+        "tag": "div",
+        "cls": "sc-cat cat-danger",
+        "kind": "background",
+        "area": 1063
+      },
+      {
+        "tag": "div",
+        "cls": "idea-card",
+        "kind": "border-top",
+        "area": 642
+      },
+      {
+        "tag": "div",
+        "cls": "id-form",
+        "kind": "background",
+        "area": 2576
+      }
+    ]
+  },
+  "data/cross-time-danmaku.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "age-tab active",
+        "kind": "background",
+        "area": 5480
+      },
+      {
+        "tag": "button",
+        "cls": "",
+        "kind": "background",
+        "area": 3080
+      }
+    ]
+  },
+  "data/emotional-heatmap.html": {
+    "text_on_bg": [
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "反应强度"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "hover"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "click"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "线段颜色"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "端点圆点"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "hover"
+      },
+      {
+        "tag": "span",
+        "cls": "neg",
+        "txt": "负面"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "hover"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "click"
+      },
+      {
+        "tag": "span",
+        "cls": "num",
+        "txt": "2"
+      },
+      {
+        "tag": "span",
+        "cls": "num",
+        "txt": "0"
+      },
+      {
+        "tag": "span",
+        "cls": "num",
+        "txt": "2"
+      },
+      {
+        "tag": "span",
+        "cls": "num",
+        "txt": "0"
+      },
+      {
+        "tag": "span",
+        "cls": "num",
+        "txt": "2"
+      },
+      {
+        "tag": "span",
+        "cls": "num",
+        "txt": "1"
+      },
+      {
+        "tag": "span",
+        "cls": "num",
+        "txt": "0"
+      },
+      {
+        "tag": "span",
+        "cls": "num",
+        "txt": "3"
+      },
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "同一种文本，八种心跳"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "李卓吾与毛泽东"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "胡适的\"全中性\"曲线"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "情感扁平化"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "三打白骨精（第 27 回）"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "毛泽东 × 郭沫若的 1961 年对话"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "相交而不同向"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "金圣叹的拟作曲线"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "第 27 回三打白骨精"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "钱钟书的低波动"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "收悟空（第 14 回）"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "自由被驯"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "取经圆满（第 100 回）"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "scholar-card",
+        "kind": "border-top",
+        "area": 809
+      }
+    ]
+  },
+  "data/chart-design.html": {
+    "text_on_bg": [
+      {
+        "tag": "div",
+        "cls": "domino-chain-title",
+        "txt": "袈裟事件链·金箍咒的诞生"
+      },
+      {
+        "tag": "div",
+        "cls": "domino-arrow",
+        "txt": "→"
+      },
+      {
+        "tag": "div",
+        "cls": "domino-arrow",
+        "txt": "→"
+      },
+      {
+        "tag": "div",
+        "cls": "domino-arrow",
+        "txt": "→"
+      },
+      {
+        "tag": "span",
+        "cls": "wk",
+        "txt": "悟空 · 躁动·桀骜"
+      },
+      {
+        "tag": "span",
+        "cls": "off-wk",
+        "txt": "悟空偏移 0.8"
+      },
+      {
+        "tag": "div",
+        "cls": "spiral-stage-name",
+        "txt": "S2 · 风暴期·心猿意马"
+      },
+      {
+        "tag": "span",
+        "cls": "wk",
+        "txt": "悟空 · 怒火·傲慢"
+      },
+      {
+        "tag": "span",
+        "cls": "off-wk",
+        "txt": "悟空偏移 1.5"
+      },
+      {
+        "tag": "span",
+        "cls": "wk",
+        "txt": "悟空 · 克制·谨慎"
+      },
+      {
+        "tag": "span",
+        "cls": "off-wk",
+        "txt": "悟空偏移 0.6"
+      },
+      {
+        "tag": "span",
+        "cls": "wk",
+        "txt": "悟空 · 平和·智慧"
+      },
+      {
+        "tag": "span",
+        "cls": "off-wk",
+        "txt": "悟空偏移 0.3"
+      },
+      {
+        "tag": "span",
+        "cls": "wk",
+        "txt": "悟空 · 圆满·觉悟"
+      },
+      {
+        "tag": "span",
+        "cls": "off-wk",
+        "txt": "悟空偏移 0.1"
+      },
+      {
+        "tag": "span",
+        "cls": "stress",
+        "txt": "压力 9.5"
+      },
+      {
+        "tag": "span",
+        "cls": "stress",
+        "txt": "压力 2.0"
+      },
+      {
+        "tag": "span",
+        "cls": "stress",
+        "txt": "压力 5.0"
+      },
+      {
+        "tag": "span",
+        "cls": "stress",
+        "txt": "压力 7.0"
+      },
+      {
+        "tag": "span",
+        "cls": "stress",
+        "txt": "压力 9.0"
+      },
+      {
+        "tag": "span",
+        "cls": "stress",
+        "txt": "压力 4.0"
+      },
+      {
+        "tag": "div",
+        "cls": "ic-num",
+        "txt": "01 · DOMINO"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "图表即是装置·信息流等于物理联动"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"因果机器\""
+      },
+      {
+        "tag": "h4",
+        "cls": "",
+        "txt": "从图表设计看取经叙事"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"因果机器\""
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "核心管理工具（紧箍咒）"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "\"心猿归正\"的新阶段"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "侦查·伪装·等待机会"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "喝茶·下棋·睡觉"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "domino-card",
+        "kind": "border-top",
+        "area": 737
+      },
+      {
+        "tag": "div",
+        "cls": "domino-hardship",
+        "kind": "background",
+        "area": 2035
+      },
+      {
+        "tag": "div",
+        "cls": "domino-card",
+        "kind": "border-top",
+        "area": 737
+      },
+      {
+        "tag": "div",
+        "cls": "domino-card",
+        "kind": "border-top",
+        "area": 737
+      },
+      {
+        "tag": "div",
+        "cls": "domino-hardship",
+        "kind": "background",
+        "area": 2035
+      },
+      {
+        "tag": "div",
+        "cls": "domino-card",
+        "kind": "border-top",
+        "area": 737
+      },
+      {
+        "tag": "div",
+        "cls": "domino-hardship",
+        "kind": "background",
+        "area": 3884
+      },
+      {
+        "tag": "div",
+        "cls": "sundial-card highlight-stress",
+        "kind": "border-top",
+        "area": 1090
+      }
+    ]
+  },
+  "data/perf-canvas-rendering.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "section-title alt",
+        "txt": "贰 · 三项关键优化技术"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 813
+      },
+      {
+        "tag": "button",
+        "cls": "",
+        "kind": "background",
+        "area": 3842
+      },
+      {
+        "tag": "div",
+        "cls": "bar-seg svg-seg",
+        "kind": "background",
+        "area": 16484
+      }
+    ]
+  },
+  "data/global-pattern.html": {
+    "text_on_bg": [
+      {
+        "tag": "td",
+        "cls": "",
+        "txt": "出发脱离旧有生活·踏上未知"
+      },
+      {
+        "tag": "td",
+        "cls": "cell-xiyou",
+        "txt": "长安出城·唐僧受命"
+      },
+      {
+        "tag": "td",
+        "cls": "",
+        "txt": "向导/启示获得上界/智慧指引"
+      },
+      {
+        "tag": "td",
+        "cls": "",
+        "txt": "第一次大考验初次考验·动摇初心"
+      },
+      {
+        "tag": "td",
+        "cls": "cell-xiyou",
+        "txt": "双叉岭·寅将军·熊山君·特处士"
+      },
+      {
+        "tag": "td",
+        "cls": "",
+        "txt": "强力妖魔/罪对抗邪魔/原罪"
+      },
+      {
+        "tag": "td",
+        "cls": "",
+        "txt": "诱惑/女色感官与欲望诱惑"
+      },
+      {
+        "tag": "td",
+        "cls": "cell-xiyou",
+        "txt": "女儿国·蝎子精·玉兔精"
+      },
+      {
+        "tag": "td",
+        "cls": "",
+        "txt": "同伴·考验同伴考验·信任危机"
+      },
+      {
+        "tag": "td",
+        "cls": "",
+        "txt": "终极考验·圣地终极考验·到达目标"
+      },
+      {
+        "tag": "td",
+        "cls": "cell-xiyou",
+        "txt": "凌云渡·灵山取经"
+      },
+      {
+        "tag": "td",
+        "cls": "",
+        "txt": "归来/圆满圆满·秩序重建"
+      },
+      {
+        "tag": "td",
+        "cls": "dest-cell",
+        "txt": "印度·那烂陀寺"
+      },
+      {
+        "tag": "td",
+        "cls": "dest-cell",
+        "txt": "灵山·雷音寺"
+      },
+      {
+        "tag": "td",
+        "cls": "dest-cell",
+        "txt": "天堂·得见三位一体"
+      },
+      {
+        "tag": "td",
+        "cls": "dest-cell",
+        "txt": "伊萨卡·故土"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "8 文化圈、2300 年"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "九九八十一难"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "观音→Evangelist→维吉尔→雅典娜"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "女儿国对应塞壬、Circe、浮华市"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "灵山·天国·天堂·伊萨卡·涅槃"
+      },
+      {
+        "tag": "strong",
+        "cls": "",
+        "txt": "跨越 2300 年"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "span",
+        "cls": "p-country",
+        "kind": "background",
+        "area": 2738
+      }
+    ]
+  },
+  "data/four-dimensional-research-network.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "span",
+        "cls": "badge cinnabar",
+        "kind": "background",
+        "area": 676
+      }
+    ]
+  },
+  "data/four-heavenly-kings-artifacts.html": {
+    "text_on_bg": [
+      {
+        "tag": "h2",
+        "cls": "section-title alt",
+        "txt": "贰 · 四器物象征维度雷达图"
+      },
+      {
+        "tag": "h2",
+        "cls": "section-title alt",
+        "txt": "伍 · 伤痕时间线"
+      }
+    ],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "kpi-card",
+        "kind": "border-top",
+        "area": 3379
+      },
+      {
+        "tag": "div",
+        "cls": "king-card",
+        "kind": "border-top",
+        "area": 1078
+      },
+      {
+        "tag": "div",
+        "cls": "swatch-bar",
+        "kind": "background",
+        "area": 575
+      }
+    ]
+  },
+  "data/tag-cloud.html": {
+    "text_on_bg": [],
+    "fill": [
+      {
+        "tag": "span",
+        "cls": "seal",
+        "kind": "background",
+        "area": 1600
+      },
+      {
+        "tag": "button",
+        "cls": "tab-btn",
+        "kind": "background",
+        "area": 3514
+      },
+      {
+        "tag": "span",
+        "cls": "rc-size",
+        "kind": "background",
+        "area": 1205
+      },
+      {
+        "tag": "span",
+        "cls": "rc-size",
+        "kind": "background",
+        "area": 1063
+      },
+      {
+        "tag": "span",
+        "cls": "rc-size",
+        "kind": "background",
+        "area": 1063
+      },
+      {
+        "tag": "span",
+        "cls": "rc-size",
+        "kind": "background",
+        "area": 1063
+      },
+      {
+        "tag": "span",
+        "cls": "rc-size",
+        "kind": "background",
+        "area": 1063
+      }
+    ]
+  }
+}

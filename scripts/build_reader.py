@@ -21,6 +21,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from urllib.parse import quote
 
 import markdown
 
@@ -28,7 +29,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "site" / "reader"
 BLOB = "https://github.com/1273984347/xiyouji/blob/main/docs/"
 BASE = "https://1273984347.github.io/xiyouji/"
-OG_IMAGE = BASE + "static/img/og-cover.png"
+OG_IMAGE = BASE + "static/img/og-cover-ink-zh.jpg"   # W880：reader 生成器仅产出中文页 → 取中文站分享图
 
 # 板块表：源目录名 → (子目录, 板块标题)。01 特殊：chNNN 命名+数字 prev/next。
 SECTIONS = [
@@ -43,39 +44,147 @@ SUB = {src: sub for src, sub, _ in SECTIONS}
 BOARD_DIRS = {src for src, _, _ in SECTIONS}
 
 STYLE = """
-  .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
+  .reader-wrap { max-width: var(--container-read); margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
     padding: 14px 0; border-bottom: 1px solid var(--line); margin-bottom: 28px;
     font-size: 14px; }
-  .reader-topnav a { color: var(--accent); text-decoration: none; }
+  .reader-topnav a { color: var(--accent-text); text-decoration: none; }
   .reader-topnav a:hover { text-decoration: underline; }
   .reader-topnav .brand { color: var(--ink); font-weight: 700; }
   .reader-body { font-family: var(--font-serif, serif); color: var(--ink);
     line-height: 1.9; font-size: 17px; }
-  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: 12px 0 20px; }
-  .reader-body h2 { font-size: 21px; margin: 34px 0 12px; padding-left: 10px;
+  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: var(--space-4) 0 var(--space-5); }
+  .reader-body h2 { font-size: 21px; margin: 34px 0 var(--space-4); padding-left: 10px;
     border-left: 3px solid var(--accent); }
-  .reader-body h3 { font-size: 18px; margin: 24px 0 10px; }
-  .reader-body blockquote { margin: 14px 0; padding: 8px 14px; color: var(--ink-soft);
+  .reader-body h3 { font-size: 18px; margin: var(--space-6) 0 10px; }
+  .reader-body blockquote { margin: 14px 0; padding: var(--space-3) 14px; color: var(--ink-soft);
     background: var(--paper-warm, var(--paper)); border-left: 3px solid var(--ink-faint); }
-  .reader-body a { color: var(--accent); }
-  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+  .reader-body a { color: var(--accent-text); }
+  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: var(--space-7) 0; }
   .reader-meta { color: var(--ink-soft); font-size: 13px; margin: 0 0 26px; }
   .reader-pn { display: flex; justify-content: space-between; gap: 12px; margin-top: 44px;
     padding-top: 18px; border-top: 1px solid var(--line); font-size: 15px; }
-  .reader-pn a { color: var(--accent); text-decoration: none; }
+  .reader-pn a { color: var(--accent-text); text-decoration: none; }
   .reader-pn a:hover { text-decoration: underline; }
   .reader-pn .off { color: var(--ink-faint); }
-  .reader-idx { list-style: none; padding: 0; margin: 24px 0 0;
+  .reader-idx { list-style: none; padding: 0; margin: var(--space-6) 0 0;
     display: grid; grid-template-columns: 1fr; gap: 2px; }
   @media (min-width: 640px) { .reader-idx { grid-template-columns: 1fr 1fr; } }
-  .reader-idx a { display: block; padding: 9px 12px; color: var(--ink); text-decoration: none;
+  .reader-idx a { display: block; padding: 9px var(--space-4); color: var(--ink); text-decoration: none;
     border: 1px solid var(--line); border-radius: var(--radius-sm, 4px); font-size: 14px; }
-  .reader-idx a:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-idx a:hover { border-color: var(--accent); color: var(--accent-text); }
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
-  .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
+  .reader-group { margin: 34px 0 var(--space-3); font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 var(--space-5); padding: var(--space-3) 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent-text); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-text); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 var(--space-3); border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
+  /* W888：百回母版插画（浅底宣纸版·暗色模式下隐藏——浅底图贴深底会成亮斑） */
+  .chapter-plate { margin: 28px auto 36px; max-width: 420px; }
+  .chapter-plate img { width: 100%; height: auto; display: block; opacity: .92; }
+  html[data-theme="dark"] .chapter-plate { display: none; }
 """
+
+
+# W847 AC-22：这些 H2 段在章节页折叠为 <details>（其余板块页无同名 H2，天然空转）。
+# 「原文全文」一并折叠是实测逼出来的：只折剧情梗概+深度解读时，折叠态高度平均仍有 84.2%
+# （中位 91.6%·100 页里仅 17 页达标），达不到 AC 的 ≤60%——因为原文全文占正文约 48.9%。
+FOLD_SECTIONS = ("剧情梗概", "深度解读", "原文全文")
+# W888：百回母版插画（chap-07/14/15/23/27/30 六张 1:1 母版·同一母版按「可参数化铺一百回」设计·
+# 本批只落有图的六回·其余 94 回无母版图——母版是「该回的配图」而非全站装饰）。
+CHAPTER_PLATES = {
+    "ch007.html": "chap-07.webp",
+    "ch014.html": "chap-14.webp",
+    "ch015.html": "chap-15.webp",
+    "ch023.html": "chap-23.webp",
+    "ch027.html": "chap-27.webp",
+    "ch030.html": "chap-30.webp",
+}
+ISSUE_NEW = "https://github.com/1273984347/xiyouji/issues/new"
+
+
+def fold_sections(body_html: str, names: tuple[str, ...] = FOLD_SECTIONS) -> tuple[str, int]:
+    """把指定 H2 段包进 <details>（W847）。返回 (新 HTML, 折叠节数)。
+
+    按 <h2> 边界切分正文，命中的段整段（含其后到下一个 h2 之前的内容）包进 details；
+    h2 本身由 summary 承载（不再重复输出），折叠态只留一行标题。
+    """
+    parts = re.split(r"(<h2>[^<]*</h2>)", body_html)
+    if len(parts) < 3:
+        return body_html, 0
+    out = [parts[0]]
+    folded = 0
+    for i in range(1, len(parts), 2):
+        h2 = parts[i]
+        content = parts[i + 1] if i + 1 < len(parts) else ""
+        name = re.sub(r"</?h2>", "", h2).strip()
+        if name in names:
+            out.append('<details class="reader-fold"><summary>%s</summary>'
+                       '<div class="reader-fold-body">' % html.escape(name))
+            out.append(content)
+            out.append("</div></details>\n")
+            folded += 1
+        else:
+            out.append(h2)
+            out.append(content)
+    return "".join(out), folded
+
+
+def toolbar_html(rel_in_reader: str) -> str:
+    """阅读工具条 + 顶部进度条（W847 AC-23）。data-page 供脚本作 localStorage 键。"""
+    return f"""  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/{rel_in_reader}">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>"""
+
+
+def feedback_html(title: str, url: str) -> str:
+    """每页反馈（W847 AC-24）：纯链接跳 GitHub Issue 新建页并预填标题与正文，零外域脚本。"""
+    def link(kind: str, label: str, hint: str) -> str:
+        t = quote(f"[阅读反馈·{kind}] {title}")
+        b = quote(f"页面：{url}\n\n{hint}\n")
+        return f'<a href="{ISSUE_NEW}?title={t}&amp;body={b}" rel="noopener">{label}</a>'
+
+    return ("  <div class=\"reader-feedback\">\n"
+            "    <span>这页有帮助吗？</span>\n"
+            "    <div class=\"fb-row\">%s%s</div>\n"
+            "  </div>" % (link("有帮助", "👍 有帮助", "（可留一句你觉得好的地方）"),
+                          link("待改进", "👎 待改进", "（哪里不清楚、哪里写错了？）")))
 
 
 def rewrite_links(md: str, docs_root: str, up: str, up2: str, up3: str) -> tuple[str, list[str]]:
@@ -162,6 +271,7 @@ def head(rel: str, title: str, desc: str) -> str:
 <link rel="stylesheet" href="{prefix}tokens.css">
 <link rel="stylesheet" href="{prefix}system.css">
 <script src="{prefix}js/theme-init.js"></script>
+<script src="{prefix}js/reader-enhance.js" defer></script>
 <style>{STYLE}</style>"""
 
 
@@ -266,14 +376,29 @@ def _render_one_page(src, docs_root, cat_title, rendered, idx):
     home = (dup + "index.html") if depth else "index.html"
 
     blob = f"{BLOB}{docs_root}/{fname}"
+    body_html, _n_folded = fold_sections(body_html)  # W847 AC-22
+    # W888：百回母版插画（仅六回有母版图·插在回目 H1 之后）
+    plate = CHAPTER_PLATES.get(out_rel.rsplit("/", 1)[-1])
+    if plate:
+        plate_html = (
+            "\n<figure class=\"chapter-plate\" aria-hidden=\"true\">"
+            "\n<img src=\"%s../static/images/%s\" alt=\"\" loading=\"lazy\" decoding=\"async\">"
+            "\n</figure>" % (up, plate)
+        )
+        m_h1 = re.search(r"</h1>", body_html)
+        if m_h1:
+            body_html = body_html[:m_h1.end()] + plate_html + body_html[m_h1.end():]
+    rel_in_reader = out_rel[len("reader/"):] if out_rel.startswith("reader/") else out_rel
     body = f"""  <nav class="reader-topnav">
     <a class="brand" href="{home}">详解西游记 · 站内阅读</a>
     <a href="{up}../index.html">站点首页</a>
     <a href="{blob}" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+{toolbar_html(rel_in_reader)}
   <article class="reader-body">
 {body_html}
   </article>
+{feedback_html(title, BASE + "reader/" + rel_in_reader)}
   <nav class="reader-pn">{prev_html}{next_html}</nav>"""
     (OUT / out_rel).parent.mkdir(parents=True, exist_ok=True)
     (OUT / out_rel).write_text(
@@ -291,11 +416,59 @@ def _render_section_index(sub, cat_title, entries) -> None:
         encoding="utf-8", newline="\n")
 
 
+# W865 D2：总目录页检索工具条（样式只在本页生效·不进 page_shell·避免 622 页连带改写）
+CATALOG_TOOLS_CSS = """  <style>
+    .catalog-tools { margin: 0 0 24px; padding: 14px 16px; background: var(--paper-warm);
+      border: 1px solid var(--line); border-radius: var(--radius-md); }
+    .catalog-tools-row { display: flex; gap: 10px; align-items: center; }
+    .catalog-tools input { flex: 1; min-width: 0; font-family: var(--font-sans); font-size: 15px;
+      padding: 9px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm);
+      background: var(--paper); color: var(--ink); }
+    .catalog-tools input:focus { outline: none; border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent); }
+    .catalog-count { font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint);
+      white-space: nowrap; }
+    .catalog-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .catalog-jump a { font-size: 13px; color: var(--accent-2); text-decoration: none;
+      border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 5px 12px;
+      background: var(--paper); }
+    .catalog-jump a:hover { border-color: var(--accent); color: var(--accent); }
+    .reader-idx li.is-flash > a { background: color-mix(in srgb, var(--accent) 16%, var(--paper));
+      border-color: var(--accent); }
+    .reader-idx li[hidden], .reader-group[hidden] { display: none; }
+    @media (max-width: 640px) {
+      .catalog-tools-row { flex-direction: column; align-items: stretch; }
+      .catalog-count { text-align: right; }
+    }
+  </style>
+"""
+
+
+def _catalog_tools_html(groups, n_total):
+    """检索工具条：即时过滤框 + 命中计数 + 分组跳转锚点（W865 D2）"""
+    jump = "".join(
+        '<a href="#catalog-group-%d">%s</a>' % (i, title) for i, title in enumerate(groups))
+    return (
+        '  <div class="catalog-tools" data-catalog-tools>\n'
+        '    <div class="catalog-tools-row">\n'
+        '      <input id="catalogFilter" type="search" autocomplete="off" '
+        'aria-label="按回号或关键词过滤目录" '
+        'placeholder="输入回号（如 42）或人物 / 主题关键词">\n'
+        '      <span class="catalog-count" data-role="count">全部 %d 条</span>\n'
+        '    </div>\n'
+        '    <nav class="catalog-jump" aria-label="分组跳转">%s</nav>\n'
+        '  </div>\n' % (n_total, jump))
+
+
 def _render_root_index(sections_out, n_hub) -> None:
-    """总目录页：六板块分组（顶部附主题 hub 入口）（W733 提取）。"""
-    idx_body = '<p><a href="themes-hub.html"><strong>主题专题导航 hub</strong>（%d 篇·按族分组）</a></p>\n' % n_hub
-    for cat_title, entries in sections_out:
-        idx_body += f'<div class="reader-group">{cat_title}（{len(entries)}）</div>\n<ul class="reader-idx">\n'
+    """总目录页：六板块分组（顶部附主题 hub 入口）+ 检索工具条（W733 提取·W865 D2 扩展）"""
+    n_total = sum(len(entries) for _, entries in sections_out)
+    idx_body = CATALOG_TOOLS_CSS
+    idx_body += _catalog_tools_html([t for t, _ in sections_out], n_total)
+    idx_body += '<p><a href="themes-hub.html"><strong>主题专题导航 hub</strong>（%d 篇·按族分组）</a></p>\n' % n_hub
+    for gi, (cat_title, entries) in enumerate(sections_out):
+        idx_body += (f'<div class="reader-group" id="catalog-group-{gi}">'
+                     f'{cat_title}（{len(entries)}）</div>\n<ul class="reader-idx">\n')
         idx_body += "\n".join(f'<li><a href="{rel}">{disp}</a></li>' for rel, disp in entries)
         idx_body += "\n</ul>\n"
     (OUT / "index.html").write_text(

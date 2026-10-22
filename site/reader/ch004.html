@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第4回 官封弼马心何足 名注齐天意未宁</title>
 <!-- SEO:INJECTED -->
@@ -12,13 +12,16 @@
 <meta property="og:description" content="第4回 官封弼马心何足 名注齐天意未宁——《详解西游记》逐回解读">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://1273984347.github.io/xiyouji/reader/ch004.html">
-<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
+
+
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -103,7 +106,7 @@
     /* —— 图表五色雅集色板（W334 图表规范） —— */
     --chart-1: #C8463A;       /* 朱砂 */
     --chart-2: #3A6B8C;       /* 靛蓝 */
-    --chart-3: #C9A063;       /* 赭金 */
+    --chart-3: #B38F58;       /* 赭金 */
     --chart-4: #6B8E5A;       /* 苔绿 */
     --chart-5: #D8CFBC;       /* 米灰 */
     --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
@@ -199,7 +202,7 @@ html[data-theme="dark"] {
     --paper: #2B2419;
     --paper-warm: #33291B;
     --line: rgba(242, 235, 220, 0.14);
-    --accent: #E0604F;
+    --accent: #E46250;
     --accent-deep: #C94F3F;
     --accent-soft: #E8A99F;
     --accent-tint: rgba(224, 96, 79, 0.14);
@@ -357,6 +360,46 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
   --z-tooltip: 70;
 }
 
+/* ===== v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名） ===== */
+/* 来源：docs/11-方案报告/界面视觉重设计细化规格-v4-2026-10-20.md §4 终稿 */
+/* 口径：34 个零消费新名 / 35 处定义（暗色组 --accent-text 为同名第二处） */
+/* defer 四项随迁移批逐页 proof：--chart-1..6 与 --accent-soft 重述 · 暗色 --accent 改值 · 暗色 --chart-3/5 新增 */
+:root {
+    /* —— 间距刻度（4px 基准 + 2/10 半格） —— */
+    --space-0: 0px;   --space-1: 2px;   --space-2: 4px;   --space-3: 8px;
+    --space-4: 12px;  --space-5: 20px;  --space-6: 24px;  --space-7: 32px;
+    --space-8: 40px;  --space-9: 48px;  --space-10: 64px; --space-11: 80px;
+    --space-12: 96px;
+    /* 间距语义档（tight 紧凑 / base 常规 / loose 疏行 / block 区块 / section 章段 / hero 首屏） */
+    --gap-tight: var(--space-3);   --gap-base: var(--space-5);
+    --gap-loose: var(--space-6);   --gap-block: var(--space-7);
+    --gap-section: var(--space-10); --gap-hero: var(--space-12);
+
+    /* —— 容器三档（裁决 3） —— */
+    --container-read: 760px; --container-content: 1120px; --container-wide: 1320px;
+    /* —— 栅格 —— */
+    --grid-columns: 12; --grid-gutter: var(--space-6);
+
+    /* —— 排版角色（语义层：字重 + 族 + 字号 / 行高） —— */
+    --type-display: 600 var(--font-serif) clamp(34px, 4.4vw, 56px) / 1.15;
+    --type-title:    600 var(--font-serif) 24px / 1.30;
+    --type-subtitle: 500 var(--font-serif) 18px / 1.50;
+    --type-lead:     400 var(--font-sans) 17px / 1.75;
+    --type-body:     400 var(--font-sans) 15px / 1.80;
+    --type-label:    500 var(--font-sans) 13px / 1.50;
+    --type-caption:  400 var(--font-sans) 12px / 1.60;
+    --type-eyebrow:  500 var(--font-mono) 12px / 1.40;
+    --type-number:   500 var(--font-mono) 32px / 1.10;
+
+    /* —— 色彩角色补充（裁决 1 修法·朱砂文字落 --bg 专用档） —— */
+    --accent-text: #C7463A;          /* 朱砂文字落在 --bg 上（4.50:1） */
+}
+
+/* 暗色组补充（裁决 4：双主题平级）——--accent-text 与浅色同名、暗色取值不同 */
+html[data-theme="dark"] {
+    --accent-text: #E0604F;
+}
+
 /*
  * system.css — 详解西游记 · 全站组件设计系统
  * ----------------------------------------------
@@ -477,6 +520,14 @@ h4 { font-size: 18px; font-weight: 500; }
     font-size: 13px;
     line-height: 1.1;
     text-align: center;
+    flex-shrink: 0;
+}
+/* W856 新品牌图形标（方向 H「山·门槛」·SVG 于 static/icons/logo-mark-light.svg）
+   —— 纯加法：.seal 保留，其余页面的旧印面标识不受影响 */
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: block;
     flex-shrink: 0;
 }
 .wordmark {
@@ -1207,38 +1258,67 @@ td.num, th.num {
 }
     </style>
 <style>
-  .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
+  .reader-wrap { max-width: var(--container-read); margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
     padding: 14px 0; border-bottom: 1px solid var(--line); margin-bottom: 28px;
     font-size: 14px; }
-  .reader-topnav a { color: var(--accent); text-decoration: none; }
+  .reader-topnav a { color: var(--accent-text); text-decoration: none; }
   .reader-topnav a:hover { text-decoration: underline; }
   .reader-topnav .brand { color: var(--ink); font-weight: 700; }
   .reader-body { font-family: var(--font-serif, serif); color: var(--ink);
     line-height: 1.9; font-size: 17px; }
-  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: 12px 0 20px; }
-  .reader-body h2 { font-size: 21px; margin: 34px 0 12px; padding-left: 10px;
+  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: var(--space-4) 0 var(--space-5); }
+  .reader-body h2 { font-size: 21px; margin: 34px 0 var(--space-4); padding-left: 10px;
     border-left: 3px solid var(--accent); }
-  .reader-body h3 { font-size: 18px; margin: 24px 0 10px; }
-  .reader-body blockquote { margin: 14px 0; padding: 8px 14px; color: var(--ink-soft);
+  .reader-body h3 { font-size: 18px; margin: var(--space-6) 0 10px; }
+  .reader-body blockquote { margin: 14px 0; padding: var(--space-3) 14px; color: var(--ink-soft);
     background: var(--paper-warm, var(--paper)); border-left: 3px solid var(--ink-faint); }
-  .reader-body a { color: var(--accent); }
-  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+  .reader-body a { color: var(--accent-text); }
+  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: var(--space-7) 0; }
   .reader-meta { color: var(--ink-soft); font-size: 13px; margin: 0 0 26px; }
   .reader-pn { display: flex; justify-content: space-between; gap: 12px; margin-top: 44px;
     padding-top: 18px; border-top: 1px solid var(--line); font-size: 15px; }
-  .reader-pn a { color: var(--accent); text-decoration: none; }
+  .reader-pn a { color: var(--accent-text); text-decoration: none; }
   .reader-pn a:hover { text-decoration: underline; }
   .reader-pn .off { color: var(--ink-faint); }
-  .reader-idx { list-style: none; padding: 0; margin: 24px 0 0;
+  .reader-idx { list-style: none; padding: 0; margin: var(--space-6) 0 0;
     display: grid; grid-template-columns: 1fr; gap: 2px; }
   @media (min-width: 640px) { .reader-idx { grid-template-columns: 1fr 1fr; } }
-  .reader-idx a { display: block; padding: 9px 12px; color: var(--ink); text-decoration: none;
+  .reader-idx a { display: block; padding: 9px var(--space-4); color: var(--ink); text-decoration: none;
     border: 1px solid var(--line); border-radius: var(--radius-sm, 4px); font-size: 14px; }
-  .reader-idx a:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-idx a:hover { border-color: var(--accent); color: var(--accent-text); }
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
-  .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
+  .reader-group { margin: 34px 0 var(--space-3); font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 var(--space-5); padding: var(--space-3) 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent-text); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-text); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 var(--space-3); border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
 </style>
 </head>
 <body>
@@ -1248,6 +1328,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第004回-官封弼马心何足.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch004.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第004回 官封弼马心何足 注名齐天意未宁</h1>
 <blockquote>
@@ -1269,9 +1362,10 @@ td.num, th.num {
 <p><strong>第四回 官封弼马心何足 注名齐天意未宁</strong></p>
 <p>回目是七言对句，"官封弼马"对"注名齐天"，"心何足"对"意未宁"。<strong>前半句写"给的"，后半句写"想要的"——给的是弼马温，想要的是齐天大圣。</strong> 两句之间隔着整整一个天庭的等级，也隔着一只猴子永不餍足的心。</p>
 <p>题眼在两个虚字："何足"与"未宁"。"何足"是已经给的嫌不够，"未宁"是给了更多的还不安。<strong>这一回讲的不是悟空的贪，是体制填不满个体时的结构性焦虑。</strong></p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>悟空被太白金星招安上天，玉帝封其为"弼马温"，令其管理御马监。悟空初到任，勤勉养马，半月间马匹肥壮。后与众监官饮酒，问及"弼马温"是几品官，方知此职"未入流"，是末等末职。悟空大怒，推倒公案，取出金箍棒，打出南天门，回花果山自封"齐天大圣"。</p>
 <p>玉帝闻讯，遣托塔李天王与哪吒三太子率兵围剿。巨灵神挑战被悟空一棒打断斧柄，哪吒三头六臂亦败于悟空。李天王回报天庭，太白金星再奏招安，建议封"齐天大圣"虚衔，"有名无实，不与他事管"。玉帝准奏，悟空二次上天，受封"齐天大圣"，赐府邸一座，自此日日在天庭无事游荡。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、弼马温的侮辱性：末等职官 vs 自我定位</h3>
 <p>悟空初上任时极认真，"半月之间，马养得肉肥膘满"。他不是不肯干活的猴，他是"想干出一番事业"的猴。可他问官品时，监官答得极冷：</p>
@@ -1433,7 +1527,7 @@ td.num, th.num {
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch003.html">上一回</a> · <a href="ch005.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/relationships.html">团队关系可视化</a> · <a href="../data/character-appearance.html">人物出场可视化</a> · <a href="../data/business-model.html">商业模型可视化</a> · <a href="../data/risk-project.html">风险与项目可视化</a>
 关联分析：<a href="people/孙悟空.html">孙悟空</a> · <a href="people/唐僧.html">唐僧</a> · <a href="people/玉帝.html">玉帝</a> · <a href="people/如来.html">如来</a> · <a href="people/二郎神.html">二郎神</a> · <a href="people/哪吒.html">哪吒</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD004 · 天庭的傲慢，从一封聘书开始</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1448,7 +1542,8 @@ td.num, th.num {
 <p>太白金星两次建议招安——第一次给实职但级别低，第二次给虚衔但名号大。哪一个"更好"？如果你是悟空，你会接受哪一个？</p>
 <p>在今天的职场中，"空衔有官无禄"（给头衔不给实际权力）是否仍然常见？这种管理手段有效吗？它解决的是什么问题，制造的是什么问题？</p>
 <hr />
-<h2>原文全文</h2>
+</div></details>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>那太白金星与美猴王，同出了洞天深处，一齐驾云而起。原来悟空筋斗云比众不同，十分快疾，把个金星撇在脑后，先至南天门外。正欲收云前进，被增 长天王领着庞、刘、苟、毕、邓、辛、张、陶，一路大力天丁，枪刀剑戟，挡住天门，不肯放进。猴王道：“这个金星老儿，乃奸诈之徒！既请老孙，如何教人动刀 动枪，阻塞门路？”正嚷间，金星倏到。悟空就觌面发狠道：“你这老儿，怎么哄我？被你说奉玉帝招安旨意来请，却怎么教这些人阻住天门，不放老孙进去？”金 星笑道：“大王息怒。你自来未曾到此天堂，却又
 无名
 ，众天丁又与你素不相识，他怎肯放你擅入？等如今见了天尊，授了仙录，注了官名，向后随你出入，谁复挡 也？”悟空道：“这等说，也罢，我不进去了。”金星又用手扯住道：“你还同我进去。”</p>
@@ -1478,7 +1573,7 @@ td.num, th.num {
 <p>尖嘴咨牙弼马温，心高要做齐天圣。</p>
 <p>巨灵神厉声高叫道：“那泼猴！你认得我么？”大圣听言，急问道：“你是那路毛神，老孙不
 曾会
-你，你快报名来。”巨灵神道：“我把你那欺心的猢狲！你是认 不得我！我乃高上神灵托塔李天王部下先锋，巨灵天将！今奉玉帝圣旨，到此收降你。你快卸了装束，归顺天恩，免得这满山诸畜遭诛；若道半个‘不’字，教你顷 刻化为齑粉！”猴王听说，心中大怒道：“泼毛神，休夸大口，少弄长舌！我本待一棒打死你，恐无人去报信；且留你性命，快早回天，对玉皇说：他甚不用贤！老 孙有无穷的本事，为何教我替他养马？你看我这旌旗上字号。若依此字号升官，我就不动刀兵，自然的天地清泰；如若不依时间，就打上灵霄宝殿，教他龙床定坐不 成！”这巨灵神闻此言，急睁睛迎风观看，果见门外竖一高竿，竿上有旌旗一面，上写着“齐天大圣”四大字。巨灵神冷笑三声道：“这泼猴，这等不知人事，辄敢 无状，你就要做齐天大圣！好好的吃吾一斧！”劈头就砍将去。那猴王正是会家不忙，将金箍棒应手相迎。这一场好杀：</p>
+你，你快报名来。”巨灵神道：“我怕你那欺心的猢狲！你是认 不得我！我乃高上神灵托塔李天王部下先锋，巨灵天将！今奉玉帝圣旨，到此收降你。你快卸了装束，归顺天恩，免得这满山诸畜遭诛；若道半个‘不’字，教你顷 刻化为齑粉！”猴王听说，心中大怒道：“泼毛神，休夸大口，少弄长舌！我本待一棒打死你，恐无人去报信；且留你性命，快早回天，对玉皇说：他甚不用贤！老 孙有无穷的本事，为何教我替他养马？你看我这旌旗上字号。若依此字号升官，我就不动刀兵，自然的天地清泰；如若不依时间，就打上灵霄宝殿，教他龙床定坐不 成！”这巨灵神闻此言，急睁睛迎风观看，果见门外竖一高竿，竿上有旌旗一面，上写着“齐天大圣”四大字。巨灵神冷笑三声道：“这泼猴，这等不知人事，辄敢 无状，你就要做齐天大圣！好好的吃吾一斧！”劈头就砍将去。那猴王正是会家不忙，将金箍棒应手相迎。这一场好杀：</p>
 <p>棒名如意，斧号宣花。 他两个乍相逢，不知深浅；斧和棒，左右交加。一个暗藏神妙，一个大口称夸。使动法，喷云嗳雾；展开手，播土扬沙。天将神通就有道，猴王变化实无涯。棒举却 如龙戏水，斧来犹似凤穿花。巨灵名望传天下，原来本事不如他；大圣轻轻轮铁棒，着头一下满身麻。巨灵神抵敌他不住，被猴王劈头一棒，慌忙将斧架隔，呵嚓的 一声，把个斧柄打做两截，急撤身败阵逃生。猴王笑道：“脓包！脓包！我已饶了你，你快去报信！快去报信！”</p>
 <p>巨灵神回至营门，径见托塔天王，忙哈哈下跪道：“弼马温果是神通广大！末将战他不得，败阵回来请罪。”李天王发怒道：“这厮锉吾锐气，推出斩之！”旁边闪出哪吒太子，拜告：“父王息怒，且恕巨灵之罪，待孩儿出师一遭，便知深浅。”天王听谏，且教回营待罪管事。</p>
 <p>这哪吒太子，甲胄齐整，跳出营盘，撞至水帘洞外。那悟空正来收兵，见哪吒来的勇猛。好太子：</p>
@@ -1489,7 +1584,7 @@ td.num, th.num {
 <p>你看那猴王得胜归山，那七十二洞妖王与那六弟兄，俱来贺喜。在洞天 福地，饮乐无比。他却对六弟兄说：“小弟既称齐天大圣，你们亦可以大圣称之。”内有牛魔王忽然高声叫道：“贤弟言之有理，我即称做个平天大圣。”蛟魔王 道：“我称覆海大圣。”鹏魔王道：“我称混天大圣。”狮驼王道：“我称移山大圣。”猕猴王道：“我称通风大圣。”□【左“反犬”右“禺”】狨王道：“我称 驱神大圣。”此时七大圣自作自为，自称自号，耍乐一日，各散讫。</p>
 <p>却说那李天王与三太子领着众将，直至灵霄殿。启奏道：“臣等奉圣旨出师 下界，收伏妖仙孙悟空，不期他神通广大，不能取胜，仍望万岁添兵剿除。”玉帝道：“谅一妖猴，有多少本事，还要添兵？”太子又近前奏道：“望万岁赦臣死 罪！那妖猴使一条铁棒，先败了巨灵神，又打伤臣臂膊。洞门外立一竿旗，上书‘齐天大圣’四字，道是封他这官职，即便休兵来投；若不是此官，还要打上灵霄宝 殿也。”玉帝闻言，惊讶道：“这妖猴何敢这般狂妄！着众将即刻诛之。”正说间，班部中又闪出太白金星，奏道：“那妖猴只知出言，不知大小。欲加兵与他争 斗，想一时不能收伏，反又劳师。不若万岁大舍恩慈，还降招安旨意，就教他做个齐天大圣。只是加他个空衔，有官无禄便了。”玉帝道：“怎么唤做‘有官无 禄’？”金星道：“名是齐天大圣，只不与他事管，不与他俸禄，且养在天壤之间，收他的邪心，使不生狂妄，庶乾坤安靖，海宇得清宁也。”玉帝闻言道：“依卿 所奏。”即命降了诏书，仍着金星领去。</p>
 <p>金星复出南天门，直至花果山水帘洞外观看。这番比前不同，威风凛凛，杀气森森，各样妖精，无般不 有。一个个都执剑拈枪，拿刀弄杖的，在那里咆哮跳跃。一见金星，皆上前动手。金星道：“那众头目来！累你去报你大圣知之。吾乃上帝遣来天使，有圣旨在此请 他。”众妖即跑入报道：“外面有一老者，他说是上界天使，有旨意请你。”悟空道：“来得好！来得好！想是前番来的那太白金星。那次请我上界，虽是官爵不 堪，却也天上走了一次，认得那天门内外之路。今番又来，定有好意。”教众头目大开旗鼓，摆队迎接。大圣即带引群猴，顶冠贯甲，甲上罩了赭黄袍，足踏云履， 急出洞门，躬身施礼，高叫道：“老星请进，恕我失迎之罪。”</p>
-<p>金星趋步向前，径入洞内，面南立着道：“今告大圣，前者因大圣嫌恶官小，躲 离御马监，当有本监中大小官员奏了玉帝。玉帝传旨道：‘凡授官者，皆由卑而尊，为何嫌小？’即有李天王领哪吒下界取战。不知大圣神通，故遭败北，回天奏 道：‘大圣立一竿旗，要做“齐天大圣”。’众武将还要支吾，是老汉力为大圣冒罪奏闻，免兴师旅，请大王授录。玉帝准奏，因此来请。”悟空笑道：“前番勤 劳，今又蒙爱，多谢！多谢！但不知上天可有此‘齐天大圣’之官衔也？”金星道：“老汉以此衔奏准，方敢岭旨而来；如有不遂，只坐罪老汉便是。”</p>
+<p>金星趋步向前，径入洞内，面南立着道：“今告大圣，前者因大圣嫌恶官小，躲 离御马监，当有本监中大小官员奏了玉帝。玉帝传旨道：‘凡授官者，皆由卑而尊，为何嫌小？’即有李天王领哪吒下界取战。不知大圣神通，故遭败北，回天奏 道：‘大圣立一竿旗，要做“齐天大圣”。’众武将还要支吾，是老汉力为大圣冒罪奏闻，免兴师旅，请大王授录。玉帝准奏，因此来请。”悟空笑道：“前番勤 劳，今又蒙爱，多谢！多谢！但不知上天可有此‘齐天大圣’之官衔也？”金星道：“老汉以此衔奏准，方敢领旨而来；如有不遂，只坐罪老汉便是。”</p>
 <p>悟空大喜，恳留饮宴不肯，遂与金星纵着祥云，到南天门外。那些天丁天将，都拱手相迎。径入灵霄殿下。金星拜奏道：“臣奉诏宣弼马温孙悟空已到。”玉帝 道：“那孙悟空过来。今宣你做个‘齐天大圣’，官品极矣，但切不可胡为。”这猴亦止朝上唱个喏，道声谢恩。玉帝即命工干官——张、鲁二班——在蟠桃园右 首，起一座齐天大圣府，府内设个二司：一名安静司，一名宁神司。司俱有仙吏，左右扶持。又差五斗星君送悟空去到任，外赐御酒二瓶，金花十朵，着他安心定 志，再勿胡为。那猴
 王信
 受奉行，即日与五斗星君到府，打开酒瓶，同众尽饮。送星官回转本宫，他才遂心满意，喜地欢天，在于天宫快乐，无挂无碍。正是：仙名 永注长生录，不堕轮回万古传。毕竟不知向后如何，且听下回分解。</p>
@@ -1570,8 +1665,13 @@ td.num, th.num {
 鄨
 詖
 袐
-驟</p>
+驟</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC4%E5%9B%9E%20%E5%AE%98%E5%B0%81%E5%BC%BC%E9%A9%AC%E5%BF%83%E4%BD%95%E8%B6%B3%20%E5%90%8D%E6%B3%A8%E9%BD%90%E5%A4%A9%E6%84%8F%E6%9C%AA%E5%AE%81&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch004.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC4%E5%9B%9E%20%E5%AE%98%E5%B0%81%E5%BC%BC%E9%A9%AC%E5%BF%83%E4%BD%95%E8%B6%B3%20%E5%90%8D%E6%B3%A8%E9%BD%90%E5%A4%A9%E6%84%8F%E6%9C%AA%E5%AE%81&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch004.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch003.html">← 上一篇</a><a href="ch005.html">下一篇 →</a></nav>
 </main>
 </body>

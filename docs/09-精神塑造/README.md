@@ -19,6 +19,6 @@
 
 ## 文档协作
 
-- 新文档骨架：[article-template.md](../_templates/article-template.md)
-- 交接清单：[handoff-checklist.md](../_templates/handoff-checklist.md)
+- 新文档骨架：[文档规范](../00-导读/文档规范.md)
+- 交接清单：[文档规范 §12](../00-导读/文档规范.md)
 - 协作流程详见 [项目说明「如何参与」](../00-导读/项目说明.md)

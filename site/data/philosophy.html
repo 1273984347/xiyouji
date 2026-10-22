@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-UfhN7H+9NOTngM2+/Euxs8ey98LzMzBEOzGteDf/cGU=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-UfhN7H+9NOTngM2+/Euxs8ey98LzMzBEOzGteDf/cGU=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>哲学与心性 · 详解西游记</title>
@@ -10,7 +10,7 @@
     <meta property="og:title" content="哲学与心性 · 详解西游记">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://1273984347.github.io/xiyouji/data/philosophy.html">
-    <meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+    <meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
@@ -20,10 +20,10 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="导言 · 西游的修心寓言本质 · 壹 · 心猿心性曲线 · 贰 · 修心寓言图 · 详解西游记">
     <meta property="og:description" content="导言 · 西游的修心寓言本质 · 壹 · 心猿心性曲线 · 贰 · 修心寓言图 · 详解西游记">
-    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -107,7 +107,7 @@
     /* —— 图表五色雅集色板（W334 图表规范） —— */
     --chart-1: #C8463A;       /* 朱砂 */
     --chart-2: #3A6B8C;       /* 靛蓝 */
-    --chart-3: #C9A063;       /* 赭金 */
+    --chart-3: #B38F58;       /* 赭金 */
     --chart-4: #6B8E5A;       /* 苔绿 */
     --chart-5: #D8CFBC;       /* 米灰 */
     --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
@@ -203,7 +203,7 @@ html[data-theme="dark"] {
     --paper: #2B2419;
     --paper-warm: #33291B;
     --line: rgba(242, 235, 220, 0.14);
-    --accent: #E0604F;
+    --accent: #E46250;
     --accent-deep: #C94F3F;
     --accent-soft: #E8A99F;
     --accent-tint: rgba(224, 96, 79, 0.14);
@@ -361,6 +361,46 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
   --z-tooltip: 70;
 }
 
+/* ===== v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名） ===== */
+/* 来源：docs/11-方案报告/界面视觉重设计细化规格-v4-2026-10-20.md §4 终稿 */
+/* 口径：34 个零消费新名 / 35 处定义（暗色组 --accent-text 为同名第二处） */
+/* defer 四项随迁移批逐页 proof：--chart-1..6 与 --accent-soft 重述 · 暗色 --accent 改值 · 暗色 --chart-3/5 新增 */
+:root {
+    /* —— 间距刻度（4px 基准 + 2/10 半格） —— */
+    --space-0: 0px;   --space-1: 2px;   --space-2: 4px;   --space-3: 8px;
+    --space-4: 12px;  --space-5: 20px;  --space-6: 24px;  --space-7: 32px;
+    --space-8: 40px;  --space-9: 48px;  --space-10: 64px; --space-11: 80px;
+    --space-12: 96px;
+    /* 间距语义档（tight 紧凑 / base 常规 / loose 疏行 / block 区块 / section 章段 / hero 首屏） */
+    --gap-tight: var(--space-3);   --gap-base: var(--space-5);
+    --gap-loose: var(--space-6);   --gap-block: var(--space-7);
+    --gap-section: var(--space-10); --gap-hero: var(--space-12);
+
+    /* —— 容器三档（裁决 3） —— */
+    --container-read: 760px; --container-content: 1120px; --container-wide: 1320px;
+    /* —— 栅格 —— */
+    --grid-columns: 12; --grid-gutter: var(--space-6);
+
+    /* —— 排版角色（语义层：字重 + 族 + 字号 / 行高） —— */
+    --type-display: 600 var(--font-serif) clamp(34px, 4.4vw, 56px) / 1.15;
+    --type-title:    600 var(--font-serif) 24px / 1.30;
+    --type-subtitle: 500 var(--font-serif) 18px / 1.50;
+    --type-lead:     400 var(--font-sans) 17px / 1.75;
+    --type-body:     400 var(--font-sans) 15px / 1.80;
+    --type-label:    500 var(--font-sans) 13px / 1.50;
+    --type-caption:  400 var(--font-sans) 12px / 1.60;
+    --type-eyebrow:  500 var(--font-mono) 12px / 1.40;
+    --type-number:   500 var(--font-mono) 32px / 1.10;
+
+    /* —— 色彩角色补充（裁决 1 修法·朱砂文字落 --bg 专用档） —— */
+    --accent-text: #C7463A;          /* 朱砂文字落在 --bg 上（4.50:1） */
+}
+
+/* 暗色组补充（裁决 4：双主题平级）——--accent-text 与浅色同名、暗色取值不同 */
+html[data-theme="dark"] {
+    --accent-text: #E0604F;
+}
+
 /*
  * system.css — 详解西游记 · 全站组件设计系统
  * ----------------------------------------------
@@ -432,7 +472,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -471,11 +511,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -666,6 +706,8 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+        /* W870 B7 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
+        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1209,7 +1251,41 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    </style>
+    
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
+/* W888：数据页卷末插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .viz-illustration {
+        margin: clamp(32px, 5vw, 64px) auto 0;
+        max-width: 420px;
+    }
+
+    .viz-illustration img {
+        width: 100%;
+        height: auto;
+        display: block;
+        opacity: .92;
+    }
+
+    html[data-theme="dark"] .viz-illustration {
+        display: none;
+    }
+</style>
 <style>
         /* e-track-exempt: chart-data-colors 5 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
@@ -1248,8 +1324,8 @@ td.num, th.num {
         .definition {
             background: var(--paper);
             border-left: 4px solid var(--accent-soft);
-            padding: 12px 16px;
-            margin-bottom: 20px;
+            padding: var(--space-4) 16px;
+            margin-bottom: var(--space-5);
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
             font-size: 0.92rem;
             color: var(--ink-soft);
@@ -1259,19 +1335,19 @@ td.num, th.num {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: var(--space-5);
+            margin-bottom: var(--space-5);
         }
         .chart-title {
             font-size: 1rem;
             font-weight: 600;
             color: var(--ink);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .chart-caption {
             font-size: 0.82rem;
             color: var(--ink-soft);
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
         }
         .chart-svg {
             max-width: 100%;
@@ -1307,11 +1383,11 @@ td.num, th.num {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.88rem;
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         table.data-table th,
         table.data-table td {
-            padding: 10px 12px;
+            padding: 10px var(--space-4);
             text-align: left;
             border-bottom: 1px solid var(--line);
             vertical-align: top;
@@ -1333,7 +1409,7 @@ td.num, th.num {
         }
         .insights-list li {
             counter-increment: insight;
-            padding: 12px 16px 12px 48px;
+            padding: var(--space-4) 16px var(--space-4) var(--space-9);
             position: relative;
             border-bottom: 1px dashed var(--line);
             font-size: 0.92rem;
@@ -1354,14 +1430,14 @@ td.num, th.num {
             background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border: 1px solid var(--accent-soft);
             border-radius: var(--radius-md);
-            padding: 22px 24px;
+            padding: 22px var(--space-6);
             margin-top: 14px;
         }
         .insight-box .box-title {
             font-size: 1.05rem;
             font-weight: 600;
-            color: var(--accent);
-            margin-bottom: 12px;
+            color: var(--accent-text);
+            margin-bottom: var(--space-4);
             padding-bottom: 6px;
             border-bottom: 1px dashed var(--accent-soft);
         }
@@ -1370,12 +1446,12 @@ td.num, th.num {
             color: var(--ink);
             line-height: 1.85;
         }
-        .insight-box .box-content strong { color: var(--accent); }
+        .insight-box .box-content strong { color: var(--accent-text); }
         .map-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
             gap: 16px;
-            margin-bottom: 20px;
+            margin-bottom: var(--space-5);
         }
         .map-card {
             background: var(--paper);
@@ -1392,20 +1468,20 @@ td.num, th.num {
             color: var(--accent-2);
             letter-spacing: 0.12em;
             font-family: "JetBrains Mono", "Consolas", monospace;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .map-card.alt .map-label { color: var(--accent-4); }
         .map-card.alt2 .map-label { color: var(--accent-3); }
-        .map-card.alt3 .map-label { color: var(--accent); }
+        .map-card.alt3 .map-label { color: var(--accent-text); }
         .map-card .map-title {
             font-size: 1.05rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .map-card .map-row {
             font-size: 0.85rem;
             color: var(--ink-soft);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .map-card .map-row strong {
             color: var(--ink);
@@ -1419,11 +1495,11 @@ td.num, th.num {
             grid-column: 1 / -1;
         }
         .summary-card .map-label {
-            color: var(--accent);
+            color: var(--accent-text);
             font-size: 0.78rem;
             letter-spacing: 0.12em;
             font-family: "JetBrains Mono", "Consolas", monospace;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .summary-card .map-title {
             font-size: 1.05rem;
@@ -1437,7 +1513,7 @@ td.num, th.num {
         }
         .d3-tooltip {
             position: absolute;
-            padding: 8px 12px;
+            padding: var(--space-3) var(--space-4);
             background: var(--dark);
             color: var(--paper-warm);
             font-size: 0.8rem;
@@ -1449,7 +1525,7 @@ td.num, th.num {
             z-index: 100;
         }
         .source-list {
-            margin-top: 8px;
+            margin-top: var(--space-3);
             font-size: 0.78rem;
             color: var(--ink-soft);
             overflow-wrap: anywhere;
@@ -1481,11 +1557,11 @@ td.num, th.num {
             display: inline-block;
             background: var(--paper-warm);
             color: var(--accent-3);
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-sm);
             font-size: 0.75rem;
             font-family: "JetBrains Mono", "Consolas", monospace;
-            margin: 0 4px 4px 0;
+            margin: 0 var(--space-2) var(--space-2) 0;
             border: 1px solid var(--line);
         }
         /* heatmap cell */
@@ -1501,14 +1577,14 @@ td.num, th.num {
             
             .map-grid { grid-template-columns: 1fr; }
             table.data-table { font-size: 0.78rem; }
-            table.data-table th, table.data-table td { padding: 6px 8px; }
+            table.data-table th, table.data-table td { padding: 6px var(--space-3); }
         }
         @media (max-width: 480px) {
             
             
             
             
-            .chart-block { padding: 12px; }
+            .chart-block { padding: var(--space-4); }
         }
     
     </style>
@@ -1521,7 +1597,6 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
   <script defer src="../js/visit-log.js"></script>
-  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
 <link rel="preload" href="../static/js/d3.v7.min.js" as="script" />
 <link rel="preload" href="../static/fonts/NotoSansSC-Regular.subset.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../static/fonts/noto-serif-sc-shared.subset.woff2" as="font" type="font/woff2" crossorigin>
@@ -1563,9 +1638,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <h1>哲学与心性 · 心猿意马的修心寓言</h1>
         <p class="subtitle">PHILOSOPHY &amp; MIND CULTIVATION OF XIYOUJI</p>
         <p class="tagline">纵→压→悟→觉——一部降伏心猿意马的修心寓言。</p>
-    </section>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
 <div class="container">
         <nav class="breadcrumb">
             <a href="../dashboard.html">仪表盘</a>
@@ -1635,7 +1712,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <div class="map-row">八十一难对应《多心经》八十一种相·心经（第 19 回传授）是全书思想主线·非冒险故事。</div>
                 </div>
             </div>
-            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:8px;">
+            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:var(--space-3);">
                 数据来源：scripts/G_哲学与心性/ 目录生成的 3 份 JSON 输出，本页 fetch 失败时自动回退到内嵌 EMBEDDED 数据，支持 file:// 协议双击打开。
             </p>
         </section>
@@ -1664,7 +1741,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
         </div>
 
-        <p class="narrative" style="background:#fdfaf4;border-left:4px solid var(--accent-soft);padding:14px 18px;border-radius:0 6px 6px 0;margin-bottom:24px;">
+        <p class="narrative" style="background:#fdfaf4;border-left:4px solid var(--accent-soft);padding:14px 18px;border-radius:0 6px 6px 0;margin-bottom:var(--space-6);">
             <strong>KPI 概览说明：</strong>
             <strong style="color:var(--accent);">6 心性阶段</strong>——悟空从"石猴出世"到"成佛·斗战胜佛"的完整修心轨迹·
             每阶段对应不同的心性状态（嗔/慢/贪/智/律的 5 维度评分）；
@@ -1743,7 +1820,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </div>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">6 阶段心性详表</h3>
+            <h3 style="font-size:1.05rem;margin:18px 0 var(--space-3);color:var(--ink);">6 阶段心性详表</h3>
             <div style="overflow-x:auto;">
                 <table class="data-table" id="phase-table">
                     <thead>
@@ -1764,13 +1841,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </table>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">心性曲线分析</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">心性曲线分析</h3>
             <ol class="insights-list" id="monkey-insights-list"></ol>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">哲学洞察（六则）</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">哲学洞察（六则）</h3>
             <ol class="insights-list" id="philosophical-insights-list"></ol>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">现代对应 · 心性修炼的现代映射</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">现代对应 · 心性修炼的现代映射</h3>
             <div class="map-grid" id="modern-grid">
                 <div class="map-card alt3">
                     <div class="map-label">ANGER MANAGEMENT</div>
@@ -1796,7 +1873,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <div class="box-title">关键洞察 · 心猿修心的螺旋上升</div>
                 <div class="box-content" id="monkey-insight-box">
                     <p>心性曲线下降的不是<strong>"能力"</strong>而是<strong>"嗔怒"</strong>——悟空成佛后能力反而更强。</p>
-                    <p style="margin-top:8px;">修心不是消灭欲望·而是<strong>转化欲望</strong>：嗔怒→勇气·傲慢→自信·贪欲→愿力。这是"心猿归一·从外力约束转为内力自觉"的螺旋上升过程。</p>
+                    <p style="margin-top:var(--space-3);">修心不是消灭欲望·而是<strong>转化欲望</strong>：嗔怒→勇气·傲慢→自信·贪欲→愿力。这是"心猿归一·从外力约束转为内力自觉"的螺旋上升过程。</p>
                 </div>
             </div>
         </section>
@@ -1886,7 +1963,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <div class="legend-row" id="pie-legend"></div>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">8 类寓言详表</h3>
+            <h3 style="font-size:1.05rem;margin:18px 0 var(--space-3);color:var(--ink);">8 类寓言详表</h3>
             <div style="overflow-x:auto;">
                 <table class="data-table" id="allegory-table">
                     <thead>
@@ -1904,10 +1981,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </table>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">修心寓言核心发现</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">修心寓言核心发现</h3>
             <ol class="insights-list" id="allegory-insights-list"></ol>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">心经与八十一难的对应关系</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">心经与八十一难的对应关系</h3>
             <div class="definition" style="border-left-color:var(--accent-2);background:#f0f6fa;">
                 <strong style="color:var(--accent-2);">般若波罗蜜多心经 · 第 19 回·乌巢禅师传授</strong><br>
                 <em style="color:var(--ink-soft);">"色不异空·空不异色·色即是空·空即是色"</em>
@@ -1954,8 +2031,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <div class="box-title">关键洞察 · 八十一难 = 修心次第</div>
                 <div class="box-content" id="allegory-insight-box">
                     <p>八十一难的"难数"与《多心经》的<strong>"八十一种相"</strong>对应·非偶然数字。</p>
-                    <p style="margin-top:8px;">整部西游<strong>不是冒险故事</strong>·而是一部"降伏心猿意马"的修心寓言——每一次劫难对应一次心性破执·每一个妖怪对应一种内心障碍。</p>
-                    <p style="margin-top:8px;">心经（第 19 回）是<strong>思想主线</strong>·八十一难是<strong>实修次第</strong>·两者共同构成"色即是空·破执归真"的修心体系。</p>
+                    <p style="margin-top:var(--space-3);">整部西游<strong>不是冒险故事</strong>·而是一部"降伏心猿意马"的修心寓言——每一次劫难对应一次心性破执·每一个妖怪对应一种内心障碍。</p>
+                    <p style="margin-top:var(--space-3);">心经（第 19 回）是<strong>思想主线</strong>·八十一难是<strong>实修次第</strong>·两者共同构成"色即是空·破执归真"的修心体系。</p>
                 </div>
             </div>
         </section>
@@ -2036,7 +2113,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
 
             <!-- 哲学核心命题 -->
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">哲学核心命题 · 整体统计</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">哲学核心命题 · 整体统计</h3>
             <div class="map-grid">
                 <div class="map-card alt3">
                     <div class="map-label">PHILOSOPHICAL CORE</div>
@@ -2063,13 +2140,16 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <div class="box-title">综合结论 · 西游 = 修心寓言</div>
                 <div class="box-content">
                     <p>《西游记》不是神魔冒险小说·而是一部完整的<strong>修心寓言</strong>。</p>
-                    <p style="margin-top:8px;"><strong>心猿心性曲线</strong>揭示了悟空从"齐天大圣"到"斗战胜佛"的<strong>纵→压→悟→觉</strong>四阶段螺旋上升·其本质是从"我执"到"无我"的修心过程。</p>
-                    <p style="margin-top:8px;"><strong>修心寓言图</strong>揭示了八十一难对应佛教 8 种心性考验（贪/嗔/痴/慢/疑/色/名/死）·每难皆是一次心性破执。</p>
-                    <p style="margin-top:8px;">两者共同指向一个深层命题：<strong style="color:var(--accent);">所谓取经·其实是降伏心猿意马的过程</strong>——所谓成佛·其实是<strong style="color:var(--accent-2);">紧箍自褪</strong>的内在自觉。</p>
+                    <p style="margin-top:var(--space-3);"><strong>心猿心性曲线</strong>揭示了悟空从"齐天大圣"到"斗战胜佛"的<strong>纵→压→悟→觉</strong>四阶段螺旋上升·其本质是从"我执"到"无我"的修心过程。</p>
+                    <p style="margin-top:var(--space-3);"><strong>修心寓言图</strong>揭示了八十一难对应佛教 8 种心性考验（贪/嗔/痴/慢/疑/色/名/死）·每难皆是一次心性破执。</p>
+                    <p style="margin-top:var(--space-3);">两者共同指向一个深层命题：<strong style="color:var(--accent);">所谓取经·其实是降伏心猿意马的过程</strong>——所谓成佛·其实是<strong style="color:var(--accent-2);">紧箍自褪</strong>的内在自觉。</p>
                 </div>
             </div>
         </section>
     </div>
+        <figure class="viz-illustration" aria-hidden="true">
+            <img src="../static/images/viz-02-heatmap.webp" alt="" loading="lazy" decoding="async">
+        </figure>
     </main>
 
     <footer class="site-footer">
@@ -2083,8 +2163,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="tag-cloud.html">标签云</a>
             <a href="text-search.html">全文检索</a>
         
-            <a href="../en/philosophy.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></nav>
+            <a href="../en/philosophy.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></nav>
     </footer>
 
 <!-- FILE_INDEX: philosophy.html | W313-V3 | footer-cross 补全 -->

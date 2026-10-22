@@ -63,6 +63,9 @@ npm run dev
 - **写操作持久化审计（W752）**：每次工具调用按 JSONL 追加到 `data/audit.jsonl`（已 gitignore），记录 `ts/sessionId/tool/phase/decision/kind/path|command/bytes/isError/reason`——`acceptEdits` 下自动放行的写入同样留痕。只读回放端点 `GET /api/audit?limit=100`（上限 1000，与其余 `/api` 同受 `AGENT_WEB_TOKEN` 保护）；`AGENT_WEB_AUDIT_LOG` 可改路径。审计写入 **fail-open**（磁盘满/权限异常只打 `console.error`，不影响工具调用），且审计文件本身对工具层禁读（LLM 读不回自己的操作史）。
 - **细粒度写入允许域（W752·可选）**：设置 `AGENT_WEB_WRITE_SCOPE=docs/,site/,scripts/output/` 后，`write_file`/`edit_file` 仅允许落在这些前缀内，越界拒绝并回显允许域；与受保护路径黑名单叠加（黑名单优先）。**诚实说明：不设置时仍为「全工作目录可写」**（W680 及以前行为，向后兼容零回归）；把 Agent 当文档助手用时建议收紧到 `docs/,site/`。
 - **工具安全专项单测（W752）**：`npm run test:server`——30 例工具面安全断言（越界/读写黑名单含 sha256 未改写实证/命令白名单精度含 python -c、-m、scripts/../、git --no-index、--output=/允许域/环境过滤/尺寸上限）+ 7 例审计断言 + 5 例引用守卫；改引擎工具面必跑，与 `npm run smoke:engine`（12 组全链路断言）配套。
+- **三层测试（W808）**：`npm run test:all` 一次跑完——① `test:server`（既有服务端单测）+ ② `test:integration`（**真实起服 + 真实 HTTP + 真实 SQLite**，不用 mock 冒充）+ ③ `test:client`（vitest 前端单测）；另有 `npm run test:e2e`（Playwright 真实浏览器全流程：输入 → 发送 → 流式渲染 → 落库 → 反馈，外部大模型端点以 `e2e/mockLlm.mjs` 替身·被测系统全部真实实现）。三层均已接入 CI（`agent-web-build` job）。
+- **结构化日志与 request ID（W808）**：服务端口输出结构化 JSON 日志（含 `request_id`），凭证类字段自动脱敏；每个响应回写 `X-Request-Id` 头（上游已带则沿用），便于跨服务链路串联排障。
+- **就绪探针（W808）**：`GET /api/health` 为存活探针，`GET /api/ready` 为就绪探针（检查 SQLite 可达性，依赖不可用返 503）——供容器编排区分「进程活着」与「可接流量」。
 - 在 `acceptEdits` / `default` 下，Agent 的 Bash/写文件等操作会逐项请求人工确认（内联权限卡片）。
 
 ## API / 二次开发
@@ -71,8 +74,16 @@ npm run dev
 
 - `server/index.ts` —— `PROJECT_CWD` 默认工作目录、`defaultSystemPrompt` 兜底系统提示词、权限桥（`canUseTool` 审计接线）
 - `server/audit.ts` —— 写操作审计（JSONL 追加 + fail-open 读回），端点 `GET /api/audit?limit=100`
+- `server/errors.ts` —— 类型化错误层级 + 全局错误处理中间件（运营错结构化返回·编程错只记日志返通用 500·不泄堆栈）
+- `server/logger.ts` —— 结构化 JSON 日志 + 凭证脱敏 + request ID 上下文
+- `server/validation.ts` —— Zod 边界校验（全部 `/api` 端点入参·零信任客户端）
+- `server/shutdown.ts` —— 优雅关闭（SIGTERM/SIGINT 排空在途请求 + WAL checkpoint + 关库）
 - `server/engine/tools.ts` —— 六工具与安全边界（越界守卫/受保护路径黑名单/命令白名单/写入允许域）
 - `server/engine/tools.test.ts` · `server/audit.test.ts` —— W752 安全专项单测（`npm run test:server`）
+- `server/api.integration.test.ts` —— W808 集成测试（真实起服 + 真实 HTTP + 真实 SQLite·`npm run test:integration`）
+- `src/utils/api.ts` —— 统一 API client（判 `res.ok` + 类型化 `ApiError` + token 注入 + 可配基址）
+- `src/utils/apiTypes.ts` —— 前后端共享 API 契约类型（字段改名即编译期报错）
+- `src/utils/errorMessage.ts` —— 状态码 → 用户可读文案映射
 - `src/hooks/useAgents.ts` —— `DEFAULT_AGENT`（项目专属 Agent 配置）
 - `src/config.ts` —— 应用名称/主题色
 - `src/pages/ChatPage.tsx` —— 新对话默认 `cwd`

@@ -1,0 +1,22 @@
+{
+  "batch": "W856",
+  "date": "2026-10-21",
+  "title": "W856 Logo 定稿落地批（方向 H「山·门槛」·品牌名《取经录》·一级品牌位统一）",
+  "desc": "两轮探索收敛到定稿：方向 H 图形 + 品牌名《取经录》，站点图标、页眉组合标、manifest 与桌面端应用名一次落地",
+  "head_entry": "2026-10-21（W856 Logo 定稿落地批）",
+  "head_sentence": "两轮探索收敛到一个方案，山脊一笔、山顶一灯，全图朱砂只此一处",
+  "changelog_body": "\n\n> **来源**：用户令做站点 Logo 与品牌名。两轮探索——抽象制图 4 向经用户否决作废；具象符号 5 向（棒 / 幡 / 卷 / 山 / 图）+ AI 概念稿 18 张（14 可用 4 判废）——收敛到方向 H「山·门槛」图形，品牌名《取经录》。\n> - **文件**：site/static/icons/（icon-192/512/maskable-512 重做 + logo-mark-light.svg + logo-lockup-light.svg）、site/index.html（六处元信息 + 页眉图形标 + hero h1 + 页脚品牌位）、site/system.css（新增 .brand-mark 纯加法规则）、site/manifest.webmanifest、site/rss.xml、site/static/img/og-cover.png、xiyouji-desktop/、README.md、CITATION.cff、docs/00-导读/W批次编号对账表.md。\n> - **图形口径**：64 单位域 · 思源宋体 Heavy 字标路径化 · 零字体依赖；山脊一笔连绵（起收顿挫、提按变化）；地平线与云气为淡墨次级；山顶一点朱砂（远寺的灯）全图只此一处；四向并排按视觉面积归一化，体量差 ≤15%。\n> - **落地面**：图标三档（图形占比 72%·maskable 收到 56% 留圆形裁切安全区）+ 页眉图形标与组合标；index 六处元信息（title / RSS title / JSON-LD name / meta description / og:title / og:site_name）+ 页眉 seal→图形标 + hero h1 + 页脚品牌位；manifest name/short_name → 取经录；system.css `.brand-mark` 纯加法（`.seal` 保留·其余 857 页旧印面标识不受影响）；桌面端应用名同步。\n> - **版段**：本批不落段（并行会话在途），随补段批（W863）按号序回写。",
+  "milestone_block": "- **W856 Logo 定稿落地批**：\n  - 方向 H「山·门槛」+ 品牌名《取经录》定稿（山脊一笔 / 山顶一点朱砂 / 视觉面积归一化）\n  - 图标三档 + 页眉图形标与组合标 + index 六处元信息 + manifest + 桌面端应用名\n  - system.css `.brand-mark` 纯加法（`.seal` 保留·其余 857 页零影响）",
+  "agents_note": "W856 补位 spec（W863 补段批按提交记录与台账行整理）：Logo 两轮探索，抽象那轮被否后转具象母题，五向 + 18 张概念稿收敛到方向 H；图形纪律是「山脊一笔、山顶一点朱砂」，全图朱砂只此一处是这套标识的辨识锚。",
+  "file_index_rows": [
+    "| site/static/icons/ | W856 | icon-192/512/maskable-512 重做 + logo-mark-light.svg + logo-lockup-light.svg |",
+    "| site/index.html | W856 | 六处元信息 + 页眉 seal→图形标 + hero h1 + 页脚品牌位（《取经录》） |",
+    "| site/system.css | W856 | 新增 .brand-mark 纯加法规则（.seal 保留·其余 857 页零影响） |",
+    "| site/manifest.webmanifest | W856 | name / short_name → 取经录 |",
+    "| site/rss.xml | W856 | 随生成脚本重出（RSS 标题同步） |",
+    "| site/static/img/og-cover.png | W856 | 随生成脚本重出 |",
+    "| xiyouji-desktop/ | W856 | 桌面端应用名同步 |",
+    "| README.md、CITATION.cff | W856 | 品牌名与项目名同步 |",
+    "| docs/00-导读/W批次编号对账表.md | W856 | 认领行与补段批回填 |"
+  ]
+}

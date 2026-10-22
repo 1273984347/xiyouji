@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第四十八回 魔弄寒风飘大雪 僧思拜佛履层冰</title>
 <!-- SEO:INJECTED -->
@@ -12,13 +12,16 @@
 <meta property="og:description" content="第四十八回 魔弄寒风飘大雪 僧思拜佛履层冰——《详解西游记》逐回解读">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://1273984347.github.io/xiyouji/reader/ch048.html">
-<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 
 
 <script src="../js/theme-init.js"></script>
+<script src="../js/reader-enhance.js" defer></script>
+
+
     <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
@@ -103,7 +106,7 @@
     /* —— 图表五色雅集色板（W334 图表规范） —— */
     --chart-1: #C8463A;       /* 朱砂 */
     --chart-2: #3A6B8C;       /* 靛蓝 */
-    --chart-3: #C9A063;       /* 赭金 */
+    --chart-3: #B38F58;       /* 赭金 */
     --chart-4: #6B8E5A;       /* 苔绿 */
     --chart-5: #D8CFBC;       /* 米灰 */
     --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
@@ -199,7 +202,7 @@ html[data-theme="dark"] {
     --paper: #2B2419;
     --paper-warm: #33291B;
     --line: rgba(242, 235, 220, 0.14);
-    --accent: #E0604F;
+    --accent: #E46250;
     --accent-deep: #C94F3F;
     --accent-soft: #E8A99F;
     --accent-tint: rgba(224, 96, 79, 0.14);
@@ -357,6 +360,46 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
   --z-tooltip: 70;
 }
 
+/* ===== v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名） ===== */
+/* 来源：docs/11-方案报告/界面视觉重设计细化规格-v4-2026-10-20.md §4 终稿 */
+/* 口径：34 个零消费新名 / 35 处定义（暗色组 --accent-text 为同名第二处） */
+/* defer 四项随迁移批逐页 proof：--chart-1..6 与 --accent-soft 重述 · 暗色 --accent 改值 · 暗色 --chart-3/5 新增 */
+:root {
+    /* —— 间距刻度（4px 基准 + 2/10 半格） —— */
+    --space-0: 0px;   --space-1: 2px;   --space-2: 4px;   --space-3: 8px;
+    --space-4: 12px;  --space-5: 20px;  --space-6: 24px;  --space-7: 32px;
+    --space-8: 40px;  --space-9: 48px;  --space-10: 64px; --space-11: 80px;
+    --space-12: 96px;
+    /* 间距语义档（tight 紧凑 / base 常规 / loose 疏行 / block 区块 / section 章段 / hero 首屏） */
+    --gap-tight: var(--space-3);   --gap-base: var(--space-5);
+    --gap-loose: var(--space-6);   --gap-block: var(--space-7);
+    --gap-section: var(--space-10); --gap-hero: var(--space-12);
+
+    /* —— 容器三档（裁决 3） —— */
+    --container-read: 760px; --container-content: 1120px; --container-wide: 1320px;
+    /* —— 栅格 —— */
+    --grid-columns: 12; --grid-gutter: var(--space-6);
+
+    /* —— 排版角色（语义层：字重 + 族 + 字号 / 行高） —— */
+    --type-display: 600 var(--font-serif) clamp(34px, 4.4vw, 56px) / 1.15;
+    --type-title:    600 var(--font-serif) 24px / 1.30;
+    --type-subtitle: 500 var(--font-serif) 18px / 1.50;
+    --type-lead:     400 var(--font-sans) 17px / 1.75;
+    --type-body:     400 var(--font-sans) 15px / 1.80;
+    --type-label:    500 var(--font-sans) 13px / 1.50;
+    --type-caption:  400 var(--font-sans) 12px / 1.60;
+    --type-eyebrow:  500 var(--font-mono) 12px / 1.40;
+    --type-number:   500 var(--font-mono) 32px / 1.10;
+
+    /* —— 色彩角色补充（裁决 1 修法·朱砂文字落 --bg 专用档） —— */
+    --accent-text: #C7463A;          /* 朱砂文字落在 --bg 上（4.50:1） */
+}
+
+/* 暗色组补充（裁决 4：双主题平级）——--accent-text 与浅色同名、暗色取值不同 */
+html[data-theme="dark"] {
+    --accent-text: #E0604F;
+}
+
 /*
  * system.css — 详解西游记 · 全站组件设计系统
  * ----------------------------------------------
@@ -477,6 +520,14 @@ h4 { font-size: 18px; font-weight: 500; }
     font-size: 13px;
     line-height: 1.1;
     text-align: center;
+    flex-shrink: 0;
+}
+/* W856 新品牌图形标（方向 H「山·门槛」·SVG 于 static/icons/logo-mark-light.svg）
+   —— 纯加法：.seal 保留，其余页面的旧印面标识不受影响 */
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: block;
     flex-shrink: 0;
 }
 .wordmark {
@@ -1207,38 +1258,67 @@ td.num, th.num {
 }
     </style>
 <style>
-  .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
+  .reader-wrap { max-width: var(--container-read); margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
     padding: 14px 0; border-bottom: 1px solid var(--line); margin-bottom: 28px;
     font-size: 14px; }
-  .reader-topnav a { color: var(--accent); text-decoration: none; }
+  .reader-topnav a { color: var(--accent-text); text-decoration: none; }
   .reader-topnav a:hover { text-decoration: underline; }
   .reader-topnav .brand { color: var(--ink); font-weight: 700; }
   .reader-body { font-family: var(--font-serif, serif); color: var(--ink);
     line-height: 1.9; font-size: 17px; }
-  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: 12px 0 20px; }
-  .reader-body h2 { font-size: 21px; margin: 34px 0 12px; padding-left: 10px;
+  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: var(--space-4) 0 var(--space-5); }
+  .reader-body h2 { font-size: 21px; margin: 34px 0 var(--space-4); padding-left: 10px;
     border-left: 3px solid var(--accent); }
-  .reader-body h3 { font-size: 18px; margin: 24px 0 10px; }
-  .reader-body blockquote { margin: 14px 0; padding: 8px 14px; color: var(--ink-soft);
+  .reader-body h3 { font-size: 18px; margin: var(--space-6) 0 10px; }
+  .reader-body blockquote { margin: 14px 0; padding: var(--space-3) 14px; color: var(--ink-soft);
     background: var(--paper-warm, var(--paper)); border-left: 3px solid var(--ink-faint); }
-  .reader-body a { color: var(--accent); }
-  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+  .reader-body a { color: var(--accent-text); }
+  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: var(--space-7) 0; }
   .reader-meta { color: var(--ink-soft); font-size: 13px; margin: 0 0 26px; }
   .reader-pn { display: flex; justify-content: space-between; gap: 12px; margin-top: 44px;
     padding-top: 18px; border-top: 1px solid var(--line); font-size: 15px; }
-  .reader-pn a { color: var(--accent); text-decoration: none; }
+  .reader-pn a { color: var(--accent-text); text-decoration: none; }
   .reader-pn a:hover { text-decoration: underline; }
   .reader-pn .off { color: var(--ink-faint); }
-  .reader-idx { list-style: none; padding: 0; margin: 24px 0 0;
+  .reader-idx { list-style: none; padding: 0; margin: var(--space-6) 0 0;
     display: grid; grid-template-columns: 1fr; gap: 2px; }
   @media (min-width: 640px) { .reader-idx { grid-template-columns: 1fr 1fr; } }
-  .reader-idx a { display: block; padding: 9px 12px; color: var(--ink); text-decoration: none;
+  .reader-idx a { display: block; padding: 9px var(--space-4); color: var(--ink); text-decoration: none;
     border: 1px solid var(--line); border-radius: var(--radius-sm, 4px); font-size: 14px; }
-  .reader-idx a:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-idx a:hover { border-color: var(--accent); color: var(--accent-text); }
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
-  .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
+  .reader-group { margin: 34px 0 var(--space-3); font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 var(--space-5); padding: var(--space-3) 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent-text); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-text); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 var(--space-3); border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
 </style>
 </head>
 <body>
@@ -1248,6 +1328,19 @@ td.num, th.num {
     <a href="../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/01-全书逐回解读/第048回-魔弄寒风飘大雪僧思拜佛履层冰.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch048.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第048回 魔弄寒风飘大雪 僧思拜佛履层冰</h1>
 <blockquote>
@@ -1269,8 +1362,9 @@ td.num, th.num {
 <h2>原文回目</h2>
 <p><strong>第四十八回 魔弄寒风飘大雪 僧思拜佛履层冰</strong></p>
 <p>本回处全书百回之第四十八，承第047回"圣僧夜阻通天水"——上回师徒至通天河陈家庄，得知灵感大王要吃童男女；本回续写行者八戒代祭、妖邪降雪擒唐僧之事，启第049回"三藏有灾沉水宅观音救难现鱼篮"——本回末唐僧被擒藏于石匣，下回即观音收鱼篮降妖。八字二句，前句言妖邪作法降雪，后句言唐僧踏冰而被擒——一施一受，结构对仗。</p>
-<h2>剧情梗概</h2>
+<details class="reader-fold"><summary>剧情梗概</summary><div class="reader-fold-body">
 <p>陈家庄众信将童男女猪羊牲醴抬至灵感庙。八戒欲散去，行者坚持等大王来吃了愿心。须臾妖邪至——金甲金盔，眼如明星，牙似锯齿。怪问童男女胆大善应，欲先吃童女。八戒现本相筑之，怪化狂风钻入通天河。回府后，妖邪与鳜婆谋，鳜婆献"降雪结冰"之计——使怪作法起寒风下大雪，冻通天河，变人形于冰上行走以诱唐僧踏冰。唐僧师徒在陈家被雪困住，闻通天河冻住有人行走，决意踏冰过河。陈老苦留不住，赠干粮相送。八戒以稻草包马蹄防滑，又教众人横担兵器以防凌眼——行者暗笑"这呆子倒是个积年走冰的"。师徒行至半夜，冰底忽响。妖邪在冰下弄神通，滑喇迸开冰冻，唐僧落水被擒，藏于宫后六尺长石匣中。鳜婆劝妖邪先忍耐两日再享用。八戒沙僧负水而出，唯不见师父。八戒笑言"师父姓陈，名到底了"。行者决意寻妖救师——"老孙知道，决然是那灵感大王弄法算计去了"。</p>
+</div></details>
 <h2>重点要点</h2>
 <h3>一、灵感大王与鳜婆的"谋臣"结构</h3>
 <p>鳜婆献"降雪结冰"之计，是全书中少有的"妖精用计"——且是女谋臣。此结构在第075回三魔用调虎离山之计、第091回犀牛精假佛受供养中再现。妖精不再仅凭武力，开始用智——这暗示西行路上妖魔层次渐高。</p>
@@ -1351,7 +1445,7 @@ td.num, th.num {
 <blockquote>
 <p>导航：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/00-导读/阅读指南.md">返回导读</a> · <a href="ch047.html">上一回</a> · <a href="ch049.html">下一回</a> · <a href="../index.html">站点首页</a> · <a href="../data/relationships.html">人物关系</a> · <a href="../data/character-appearance.html">人物出场</a> · <a href="../data/philosophy.html">哲学可视化</a></p>
 </blockquote>
-<h2>深度解读</h2>
+<details class="reader-fold"><summary>深度解读</summary><div class="reader-fold-body">
 <h3>SD045 · 冰层下的眼睛</h3>
 <blockquote>
 <p>【文学演绎】本小节为基于原著的原创虚构叙事——人物对白、场景与细节均为再创作，<strong>不构成原著文本</strong>；本小节内凡未以「原文引文（第N回）」规范语法标注的引号内容，一律视为再创作，请勿作为原文引用。</p>
@@ -1360,6 +1454,7 @@ td.num, th.num {
 <p>这一难与以往不同。</p>
 <p>以往的妖怪，或占山，或据洞，守着一个固定的地盘等取经人路过。灵感大王反了过来——他主动封住了取经人的路。通天河横在面前，八百里宽，没有船，没有桥。他要的不是追上去抓人，而是把取经团队困在河边，等他们犯错。</p>
 <p>悟空一眼看穿了这一层。但他看穿的，只是第一层。</p>
+</div></details>
 <h2>一、封河——不是拒绝通行，是逼你走我让你走的路</h2>
 <p>第二天清晨，陈家庄的人推开门的瞬间，都愣住了。</p>
 <p>通天河结了冰。</p>
@@ -1466,7 +1561,7 @@ td.num, th.num {
 </blockquote>
 <p><strong>第89回结束。河水流淌的声音盖住了营地的鼾声，星星在天上转了半圈。悟空翻了个身，手背上的疤蹭到粗糙的石头，微微发痒。他挠了挠痒，没有挠破。他以前挠痒会挠破，现在不会了——这是十四年学会的另一个技能：挠痒的力度刚好止痒，不伤皮肤。</strong></p>
 <hr />
-<h2>原文全文</h2>
+<details class="reader-fold"><summary>原文全文</summary><div class="reader-fold-body">
 <p>话说陈家庄众信人等，将猪羊牲醴与行者八戒，喧喧嚷嚷，直抬至灵感庙里排下，将童男女设在上首。行者回头，看见那供桌上香花蜡烛，正面一个金字 牌位，上写灵感大王之神，更无别的神象。众信摆列停当，一齐朝上叩头道：“大王爷爷，今年今月今日今时，陈家庄祭主陈澄等众信，年甲不齐，谨遵年例，供献 童男一名陈关保，童女一名陈一秤金，猪羊牲醴如数，奉上大王享用，保祐风调雨顺，五谷丰登。”祝罢，烧了纸马，各回本宅不题。</p>
 <p>那八戒见 人散了，对行者道：“我们家去罢。”行者道：“你家在那里？”八戒道：“往老陈家睡觉去。”行者道：“呆子又乱谈了，既允了他，须与他了这愿心才是哩。” 八戒道：“你倒不是呆子，反说我是呆子！只哄他耍耍便罢，怎么就与他祭赛，当起真来！”行者道：“莫胡说，为人为彻，一定等那大王来吃了，才是个全始全 终；不然，又教他降灾贻害，反为不美。”正说间，只听得呼呼风响。八戒道：“不好了！风响是那话儿来了！”行者只叫：“莫言语，等我答应。”顷刻间，庙门 外来了一个妖邪，你看他怎生模样：金甲金盔灿烂新，腰缠宝带绕红云。眼如晚出明星皎，牙似重排锯齿分。足下烟霞飘荡荡，身边雾霭暖熏熏。行时阵阵阴风冷， 立处层层煞气温。却似卷帘扶驾将，犹如镇寺大门神。那怪物拦住庙门问道：“今年祭祀的是那家？”行者笑吟吟的答道：“承下问，庄头是陈澄、陈清家。”那怪 闻答，心中疑似道：“这童男胆大，言谈伶俐，常来供养受用的，问一声不言语，再问声，唬了魂，用手去捉，已是死人。怎么今日这童男善能应对？”怪物不敢来 拿，又问：“童男女叫甚名字？”行者笑道：“童男陈关保，童女一秤金。”怪物道：“这祭赛乃上年旧规，如今供献我，当吃你。”行者道：“不敢抗拒，请自在 受用。”怪物听说，又不敢动手，拦住门喝道：“你莫顶嘴！我常年先吃童男，今年倒要先吃童女！”八戒慌了道：“大王还照旧罢，不要吃坏例子。”</p>
 <p>那怪不容分说，放开手，就捉八戒。呆子扑的跳下来，现了本相，掣钉钯，劈手一筑，那怪物缩了手，往前就走，只听得当的一声响。八戒道：“筑破甲了！”行 者也现本相看处，原来是冰盘大小两个鱼鳞，喝声“赶上！”二人跳到空中。那怪物因来赴会，不曾带得兵器，空手在云端里问道：“你是那方和尚，到此欺人，破 了我的香火，坏了我的名声！”行者道：“这泼物原来不知，我等乃东土大唐圣僧三藏奉钦差西天取经之徒弟。昨因夜寓陈家，闻有邪魔，假号灵感，年年要童男女 祭赛，是我等慈悲，拯救生灵，捉你这泼物！趁早实实供来！一年吃两个童男女，你在这里称了几年大王，吃了多少男女？一个个算还我，饶你死罪！”那怪闻言就 走，被八戒又一钉钯，未曾打着，他化一阵狂风，钻入通天河内。行者道：“不消赶他了，这怪想是河中之物。且待明日设法拿他，送我师父过河。”八戒依言，径 回庙里，把那猪羊祭醴，连桌面一齐搬到陈家。此时唐长老、沙和尚共陈家兄弟，正在厅中候信，忽见他二人将猪羊等物都丢在天井里。三藏迎来问道：“悟空，祭 赛之事何如？”行者将那称名赶怪钻入河中之事，说了一遍，二老十分欢喜，即命打扫厢房，安排床铺，请他师徒就寝不题。</p>
@@ -1589,8 +1684,13 @@ td.num, th.num {
 口
 州
 义
-表</p>
+表</p></div></details>
+
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E5%9B%9B%E5%8D%81%E5%85%AB%E5%9B%9E%20%E9%AD%94%E5%BC%84%E5%AF%92%E9%A3%8E%E9%A3%98%E5%A4%A7%E9%9B%AA%20%E5%83%A7%E6%80%9D%E6%8B%9C%E4%BD%9B%E5%B1%A5%E5%B1%82%E5%86%B0&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch048.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E5%9B%9B%E5%8D%81%E5%85%AB%E5%9B%9E%20%E9%AD%94%E5%BC%84%E5%AF%92%E9%A3%8E%E9%A3%98%E5%A4%A7%E9%9B%AA%20%E5%83%A7%E6%80%9D%E6%8B%9C%E4%BD%9B%E5%B1%A5%E5%B1%82%E5%86%B0&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch048.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="ch047.html">← 上一篇</a><a href="ch049.html">下一篇 →</a></nav>
 </main>
 </body>

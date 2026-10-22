@@ -1,0 +1,29 @@
+{
+  "batch": "W879",
+  "date": "2026-10-22",
+  "title": "W879 暗底/夜读适配水墨素材批（四张 1792×1024·浅底浓墨显影版三张 + 深底浅墨直显一张 + 全站分享图换水墨）",
+  "desc": "四张暗底适配水墨底图、三张浅底浓墨显影版一张深底直显版、全站 og 分享图换水墨",
+  "head_entry": "2026-10-22（W879 暗底/夜读适配水墨素材批）",
+  "head_sentence": "四张暗底适配底图、显影跨度实测提升九倍、全站分享图换成水墨",
+  "changelog_body": "\n\n> **来源**：用户就「素材图还缺什么」清单令「按顺序开始做」，并就第 1+2 项四问已定：分段交付·**新生成深底水墨图**·**4 张 1792×1024**（多一张夜读模式专用）·**允许改中英文两站 meta og:image**。\n> - **文件**：site/static/images/ink-mountains-hero.webp、site/static/images/ink-mountains-path.webp、site/static/images/ink-mountains-pine.webp、site/static/images/ink-mountains-night.webp、site/static/img/og-cover.png、site/static/img/og-cover-ink-zh.jpg、site/static/img/og-cover-ink-zh.png、site/static/img/og-cover-ink-en.jpg、site/static/img/og-cover-ink-en.png、scripts/output/_w879_spec.json、docs/00-导读/W批次编号对账表.md。\n> - **根因实测（先质疑判据再动手·不是「图不够好看」）**：`.hero` 在 reader 与 data 页是同一套合成（`background: var(--dark)` #221D16 + `background-image: ink-mountains-hero.webp` + `background-blend-mode: soft-light`），**848 个页面共用一张**。按 soft-light 数学（背板 b=0.115<0.5 时 result=b−(1−2b)·b·(1−s)）：**源越暗越显影、源越亮越隐形**。现有那张「浅底淡墨」（纸 s≈0.93、山 s≈0.85）合成后亮度跨度仅 **0.0080** ⇒ 肉眼几乎不可见——这才是「叠完看不见」的机制性根因。\n> - **据此修正做法**：诗段底图必须是「**浅/亮底 + 浓墨山影**」（源 p05 落到 0.081–0.160、p50 仍 0.96 的大面积浅纸），深墨区才会在合成后显影为剪影；用户所选「深底浅墨」款则留给**夜读模式直显**场景（不做合成），保留为第 4 张。\n> - **显影度验收（合成模拟·可复算）**：把成品按 soft-light 叠到 #221D16 后量输出亮度跨度——基线 0.0080 → 新三张 **0.0718 / 0.0768 / 0.0789（×9.0 / ×9.6 / ×9.9）**；深底直显版自身对比度 0.5205。\n> - **交付形态**：第 1 张**原地替换** `ink-mountains-hero.webp`（同文件名同尺寸 1792×1024）⇒ **848 页零页面改动即同时改善**，旧图存于 git 历史；其余三张新增待后续接线。\n> - **第 2 项 og 分享图（按仓内契约调整了做法·据实记账）**：原计划是「中英文两站各改一行 meta og:image 指向自己的水墨图」，实测被第 33/SEO head 门禁否掉——`scripts/check_seo_head.py` 的 `OG_IMAGE = BASE + \"static/img/og-cover.png\"` 是硬编码常量，R1 逐页要求 head 里含**完全相同**的 og:image 绝对 URL（全站 855 页一条 URL），R4 另要求该文件 ≤300KB。改 URL 即红，且改门禁常量属管控件（CLAUDE.md 第 10 条须用户批准）⇒ **本批改为共享资产原地替换**：`site/static/img/og-cover.png` 换成水墨图（取 og-09 山口关隘，PNG-8 256 色 143.0 KB，目视无色带、朱砂印准确），**全站 855 页一次性换水墨分享图，URL 不变故 R1/R4 全绿**。分语言版（中文 og-09/英文 og-03 的 JPG 与 PNG）**已备好但未接线**——按页分语言需改 855 页引用（含 reader 生成器）且动门禁常量，须用户批准后另批。**遗留说明**：URL 不变，社交平台按 URL 缓存 og:image，新图生效可能滞后于平台缓存过期。\n> - **一处自我更正（据实记账）**：W878 批里我按磁盘实算刷新的 `inline_css_pages` 当时读到 850，那是并行会话重跑 `inline_css.py --force` 的中途瞬时值；该重生成落定后全站含 INLINED 标记页数 HEAD 与工作树一致为 328/330（与 W875 批自述「约 225 至 330 页」吻合），**850 才是异常值**。本批一并更正：stats.json 刷新为 330（磁盘实算零差异），两处实体标记同步回 330（CHANGELOG 顶部「全站页数口径」块及其键值枚举、架构方案 §113「内联 CSS 覆盖页」表行），变更史如实留痕（W878 记 330→850、W879 记 850→330）。\n> - **范围纪律**：只动 4 张底图 + 4 个分语言 OG 文件 + 1 个共享 og-cover + 目录索引刷新件 + 口径标记更正，不改任何页面结构、样式、生成器与门禁件，不推送远端。\n> - **CHANGELOG 版段递延**：现役顶段 W874，W875–W878 段待补且 W876 在途中 → batch_cascade 断言「批次号应为顶段+1」不成立，按仓内现行节奏递延，spec 已入库，待补段批按号序一并回写。",
+  "milestone_block": "- **W879 暗底/夜读适配水墨素材批**：\n  - 四张 1792×1024 暗底适配底图：三张浅底浓墨（供 soft-light 合成显影）+ 一张深底浅墨（夜读直显）\n  - 根因实测：soft-light 在暗底上「源越暗越显影」——旧图合成后亮度跨度仅 0.0080（等于隐形）\n  - 显影度验收：合成模拟后跨度 0.0718 / 0.0768 / 0.0789，较基线 ×9.0 至 ×9.9\n  - 原地替换 ink-mountains-hero.webp ⇒ 848 个页面零改动即改善\n  - 全站 og 分享图换水墨（共享 og-cover 原地替换·PNG-8 256 色 143KB·门禁 R1/R4 全绿）\n  - 更正 W878 刷入的 inline_css_pages 瞬时值 850 → 330（磁盘实算）",
+  "agents_note": "二〇二二年十月二十二日（W879）用户看完我列的素材缺口清单，说按顺序开始做，并就第一项问了几件事：分段交付先做前两项、暗底图新生成而不是处理旧的、四张 1792×1024 多一张夜读专用、允许改两站的分享图。动手前我先算了一笔账，结果推翻了我自己原来的方案。我原先提议「深底浅墨」，理由是夜读模式是深色的、图也该是深色的。但翻出 `.hero` 的真实 CSS 才发现它的合成方式是 `background: var(--dark)` 配 `background-blend-mode: soft-light`，而 soft-light 在暗底上的数学是：背板越暗、结果越接近背板，源图越亮越等于隐形，越暗才越显影。算下来旧图合成后亮度跨度只有 0.0080，这就是「叠完几乎不可见」的机制性原因——不是图不好看，是调子正好被合成吃掉。真正的解法是反过来：底要浅、山要浓，浓墨在合成后才成为剪影。用户选的深底浅墨款我没扔，留给夜读模式直接显示、不做合成的场景，正好两块都要。验收也不靠眼睛：把成品按 soft-light 叠到那个深色上量输出跨度，基线 0.0080，新三张 0.0718 到 0.0789，九倍。第二项又撞了一次仓内契约。我以为改两行 meta 就完事，结果 SEO head 门禁的 R1 逐页要求 head 里有完全一样的 og:image 绝对 URL——那个 URL 是硬编码常量，全站八百五十五页共用一条；改 URL 就红，而改门禁常量属于管控件、要用户批准。于是改成共享资产原地替换：把 og-cover.png 换成水墨图，PNG-8 两百五十六色压到一百四十三 KB（门禁 R4 的上限是三百 KB），目视没有色带、朱砂印也准，全站一次性换了分享图，URL 不变故 R1 R4 都绿。分语言的两版留库待接线，要按页分语言得改八百五十五页引用和门禁常量，那要另批。还有一件据实记账的事：上一批我刷 stats 时读到的 inline_css_pages 是 850，那是并行会话重生成跑到一半的瞬时值，他们落定后真值是三百三十，HEAD 与工作树也一致——八百五十才是异常。本批把它更正回来，连两处实体标记一起改回三百三十，变更史里留了痕。最后一个遗留：og:image 的 URL 没变，社交平台按 URL 缓存，新图生效可能要等缓存过期，这一条也写进了提交信息与报告。",
+  "file_index_rows": [
+    "| site/static/images/ink-mountains-hero.webp | W879 | 改：现役 848 页共用的暗色诗段底图·原地替换为「浅底浓墨」显影版（合成后亮度跨度 0.0080→0.0789·×9.9） |",
+    "| site/static/images/ink-mountains-path.webp | W879 | 新增：暗底适配底图 02/04·长路入山（浓墨林影+朱砂灯点·显影跨度 0.0768·×9.6） |",
+    "| site/static/images/ink-mountains-pine.webp | W879 | 新增：暗底适配底图 03/04·松崖孤塔（浓墨崖松+朱砂崖印·显影跨度 0.0718·×9.0） |",
+    "| site/static/images/ink-mountains-night.webp | W879 | 新增：暗底适配底图 04/04·深底浅墨直显版（夜读模式专用·自身对比度 0.5205） |",
+    "| site/static/img/og-cover.png | W879 | 改：全站 855 页共用的 og 分享图·原地替换为水墨图（取 og-09 山口关隘·PNG-8 256 色 143.0KB·门禁 R4 上限 300KB·URL 不变故 R1 全绿） |",
+    "| site/static/img/og-cover-ink-zh.jpg | W879 | 新增：分语言版分享图（中文·取 og-09 山口关隘·JPG 129.6KB·微信与 Facebook 不吃 webp 故出 JPG·备而未接线） |",
+    "| site/static/img/og-cover-ink-en.jpg | W879 | 新增：分语言版分享图（英文·取 og-03 白龙马·JPG 53.1KB·备而未接线） |",
+    "| site/static/img/og-cover-ink-zh.png | W879 | 新增：分语言版分享图无损母版（中文·PNG 497.2KB） |",
+    "| site/static/img/og-cover-ink-en.png | W879 | 新增：分语言版分享图无损母版（英文·PNG 162.7KB） |",
+    "| scripts/output/stats.json | W879 | 改：inline_css_pages 850→330（更正 W878 刷入的并行重生成中途瞬时值·磁盘实算零差异） |",
+    "| scripts/output/stats-changelog.json | W879 | 改：随 stats 刷新的变更史追加一条 |",
+    "| scripts/output/stats-index.md | W879 | 改：随 stats 刷新的反向索引重渲染 |",
+    "| CHANGELOG.md | W879 | 改：顶部「全站页数口径」块与键值枚举的 inline_css_pages 标记 850→330 |",
+    "| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W879 | 改：§113「内联 CSS 覆盖页」表行标记 850→330 |",
+    "| scripts/output/_w879_spec.json | W879 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |",
+    "| docs/00-导读/W批次编号对账表.md | W879 | 认领行与收官回填 |"
+  ]
+}

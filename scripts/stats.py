@@ -27,6 +27,7 @@ import glob
 import json
 import os
 import re
+import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -82,7 +83,32 @@ META = {
     "methodology_docs": {"domain": "docs/10-方法论沉淀/*.md（含索引 README）", "introduced_by": "W070"},
     "script_classes": {"domain": "scripts/[A-Z]_* 类目录数", "introduced_by": "W528"},
     "report_docs": {"domain": "docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化）", "introduced_by": "W737"},
+    # W830：测试集收集数实体化——原 pytest.ini 头注「602 passed」字面量无任何对账，
+    # W830 审查实证其漂移至 770（W808 测试三件套 + W816/W825 修复批新增）而无门禁兜底
+    "pytest_collected": {"domain": "pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议）", "introduced_by": "W830"},
 }
+
+
+def _pytest_collected():
+    """pytest 收集数实算（W830）：`--collect-only -q` 解析末行「N tests collected」。
+
+    fail-closed：pytest 不可用 / 收集失败 / 解析失败 → RuntimeError（调用方转 FAIL·判据未执行即红·
+    与「不允许从未运行/从未通过的门禁存在」铁则同族）——禁静默返回 None 写坏 stats.json。
+    """
+    try:
+        r = subprocess.run(
+            [sys.executable, "-m", "pytest", "--collect-only", "-q"],
+            cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="ignore", timeout=180,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise RuntimeError("pytest --collect-only 执行失败：%s" % exc) from exc
+    m = re.search(r"(\d+) tests? collected", (r.stdout or "") + (r.stderr or ""))
+    if r.returncode != 0 or not m:
+        tail = ((r.stdout or "") + (r.stderr or "")).strip().splitlines()
+        raise RuntimeError(
+            "pytest --collect-only rc=%s 且无 collected 行（尾行：%s）" % (r.returncode, tail[-1][:120] if tail else "无输出")
+        )
+    return int(m.group(1))
 
 
 def build():
@@ -133,7 +159,8 @@ def build():
         # json_count 键已移除（W716）：scripts/output/data/ 系 gitignored 本地产物（.gitignore:59），
         # 依赖它的键在无本地产物环境 --check 必红，违反「tracked 基准 CI 可复现」原则（W703 声明对它不成立）
         "script_classes": len(classes),
-    "report_docs": len(glob.glob(os.path.join(ROOT, "docs", "11-方案报告", "**", "*.md"), recursive=True)),
+        "report_docs": len(glob.glob(os.path.join(ROOT, "docs", "11-方案报告", "**", "*.md"), recursive=True)),
+        "pytest_collected": _pytest_collected(),  # W830：fail-closed（ RuntimeError → main 转 FAIL）
     }
 
 
@@ -188,9 +215,13 @@ def main():
     ap.add_argument("--check", action="store_true", help="与磁盘现存 stats.json 对账（应零差异）")
     args = ap.parse_args()
 
-    values = build()
+    try:
+        values = build()
+    except RuntimeError as exc:
+        # W830：pytest_collected fail-closed——判据未执行即红（--check 与写盘两路同语义）
+        print("FAIL  %s（fail-closed·判据未执行即红·修好 pytest 再跑）" % exc)
+        return 1
     old_entities = load_json(OUT, {})
-
     if args.check:
         diffs = {k: ((old_entities.get(k) or {}).get("value"), v) for k, v in values.items() if (old_entities.get(k) or {}).get("value") != v}
         for k, (o, n) in sorted(diffs.items()):

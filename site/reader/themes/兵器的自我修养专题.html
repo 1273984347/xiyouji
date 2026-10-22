@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>兵器的自我修养</title>
 <!-- SEO:INJECTED -->
@@ -12,46 +12,78 @@
 <meta property="og:description" content="兵器的自我修养——《详解西游记》主题专题">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://1273984347.github.io/xiyouji/reader/themes/兵器的自我修养专题.html">
-<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+
+
+<script src="../../js/theme-init.js"></script>
+<script src="../../js/reader-enhance.js" defer></script>
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
-<script src="../../js/theme-init.js"></script>
 <style>
-  .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
+  .reader-wrap { max-width: var(--container-read); margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
     padding: 14px 0; border-bottom: 1px solid var(--line); margin-bottom: 28px;
     font-size: 14px; }
-  .reader-topnav a { color: var(--accent); text-decoration: none; }
+  .reader-topnav a { color: var(--accent-text); text-decoration: none; }
   .reader-topnav a:hover { text-decoration: underline; }
   .reader-topnav .brand { color: var(--ink); font-weight: 700; }
   .reader-body { font-family: var(--font-serif, serif); color: var(--ink);
     line-height: 1.9; font-size: 17px; }
-  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: 12px 0 20px; }
-  .reader-body h2 { font-size: 21px; margin: 34px 0 12px; padding-left: 10px;
+  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: var(--space-4) 0 var(--space-5); }
+  .reader-body h2 { font-size: 21px; margin: 34px 0 var(--space-4); padding-left: 10px;
     border-left: 3px solid var(--accent); }
-  .reader-body h3 { font-size: 18px; margin: 24px 0 10px; }
-  .reader-body blockquote { margin: 14px 0; padding: 8px 14px; color: var(--ink-soft);
+  .reader-body h3 { font-size: 18px; margin: var(--space-6) 0 10px; }
+  .reader-body blockquote { margin: 14px 0; padding: var(--space-3) 14px; color: var(--ink-soft);
     background: var(--paper-warm, var(--paper)); border-left: 3px solid var(--ink-faint); }
-  .reader-body a { color: var(--accent); }
-  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+  .reader-body a { color: var(--accent-text); }
+  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: var(--space-7) 0; }
   .reader-meta { color: var(--ink-soft); font-size: 13px; margin: 0 0 26px; }
   .reader-pn { display: flex; justify-content: space-between; gap: 12px; margin-top: 44px;
     padding-top: 18px; border-top: 1px solid var(--line); font-size: 15px; }
-  .reader-pn a { color: var(--accent); text-decoration: none; }
+  .reader-pn a { color: var(--accent-text); text-decoration: none; }
   .reader-pn a:hover { text-decoration: underline; }
   .reader-pn .off { color: var(--ink-faint); }
-  .reader-idx { list-style: none; padding: 0; margin: 24px 0 0;
+  .reader-idx { list-style: none; padding: 0; margin: var(--space-6) 0 0;
     display: grid; grid-template-columns: 1fr; gap: 2px; }
   @media (min-width: 640px) { .reader-idx { grid-template-columns: 1fr 1fr; } }
-  .reader-idx a { display: block; padding: 9px 12px; color: var(--ink); text-decoration: none;
+  .reader-idx a { display: block; padding: 9px var(--space-4); color: var(--ink); text-decoration: none;
     border: 1px solid var(--line); border-radius: var(--radius-sm, 4px); font-size: 14px; }
-  .reader-idx a:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-idx a:hover { border-color: var(--accent); color: var(--accent-text); }
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
-  .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
+  .reader-group { margin: 34px 0 var(--space-3); font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 var(--space-5); padding: var(--space-3) 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent-text); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-text); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 var(--space-3); border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
 </style>
 </head>
 <body>
@@ -61,6 +93,19 @@
     <a href="../../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/兵器的自我修养专题.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/themes/兵器的自我修养专题.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>兵器的自我修养</h1>
 <blockquote>
@@ -320,7 +365,7 @@ W285（git 创建提交溯源 · W424 回填）
 </ol>
 <p>语言的政治学</p>
 <p>在西游世界里，谁说话算数，谁说话要命</p>
-<p>贞观十三年，玄奘在化生寺登上水陆大法会的坛主之位。满朝文武、长安百姓、四方僧众挤满大雄宝殿，唐太宗亲自拈香。玄奘开口讲经，讲的是一部《度亡经》——超度泾河龙王的亡魂。龙王的头在长安城云阳市的街口滚了一圈，停在卖鱼的摊子前面，龙眼圆睁，龙须还在风里飘。他死不瞑目，因为他生前听到的最后一句话，是袁守诚在卦桌前说出的那句“明日辰时布云，午时发雷，未时落雨，申时雨止，共得水三尺三寸零四十八点”。这句话要了他的命。不是因为这句话是诅咒——是因为这句话太精确了。精确到和一个时辰之后他将要收到的天庭降雨令一字不差，精确到他连“听错了”的借口都没有。</p>
+<p>贞观十三年，玄奘在化生寺登上水陆大法会的坛主之位。满朝文武、长安百姓、四方僧众挤满大雄宝殿，唐太宗亲自拈香。玄奘开口讲经，讲的是一部《度亡经》——超度泾河龙王的亡魂。龙王的头在长安城云阳市的街口滚了一圈，停在卖鱼的摊子前面，龙眼圆睁，龙须还在风里飘。他死不瞑目，因为他生前听到的最后一句话，是袁守诚在卦桌前说出的那句“明日辰时布云，巳时发雷，午时下雨，未时雨足，共得水三尺三寸零四十八点”。这句话要了他的命。不是因为这句话是诅咒——是因为这句话太精确了。精确到和一个时辰之后他将要收到的天庭降雨令一字不差，精确到他连“听错了”的借口都没有。</p>
 <p>语言在西游世界里，从来不只是语言。语言是武器，是契约，是封印，是钥匙。一句话可以杀人——不是修辞，是真杀。袁守诚的那句天气预报，本质上和魏徵斩龙的那柄剑没有区别，都是天庭司法程序的一部分，只是剑落在脖子上，话落在耳朵里。语言杀人的方式比剑更隐蔽：剑杀人需要力量，话杀人只需要“正确”。正确的信息在错误的时间传到错误的耳朵里，就变成了不可撤回的死刑判决。泾河龙王不是被袁守诚杀死的，他是被“精确”杀死的。如果袁守诚说“明天大概有雨”，龙王改了降雨点数之后也许还能辩解“误差范围之内”。但袁守诚说的是“三尺三寸零四十八点”——零四十八点，精确到点数。精确不给误差留余地，不给辩解留余地，不给活路留余地。</p>
 <p>这就是西游世界里语言的第一条铁律：精确是权力的工具。掌握精确信息的人，掌握生死。袁守诚不是神仙，但他手里有一样连龙王都没有的东西——天庭降雨令的内部通报。信息即权力，而语言是信息的载体。袁守诚每天只算一卦，不是因为算多了会累，是因为“精确”这种东西用多了就会贬值。他坐在长安西门老槐树下，把天庭加密公文翻译成凡人听得懂的天气预报，一字不改，公之于众。他不是在算卦，他是在做信息对称。但信息对称有时候会死人。泾河龙王就是被信息对称杀死的——当他发现一个凡人和他知道得一样多，他的权力就消失了。权力消失的那一刻，他选择了改数字。改数字不是为了争面子，是为了夺回“只有我知道”这种状态。他没夺回来。他赔了一颗头。</p>
 <p>悟空大闹天宫那年，说过一句话：“皇帝轮流做，明年到我家。”这句话是他亲口对如来喊的。喊完之后，他被压在五行山下五百年。不是因为这句话有多大逆不道——天宫里说过类似话的神仙不止他一个。是因为他把这句话喊出来了，而且是在灵霄殿外，当着三十六员雷将、四大天王、玉帝本人的面喊的。公开喊出“造反”两个字，和在心里想造反，在天庭法律体系里是两种完全不同的罪行。前者是“言语叛逆”，后者是“腹诽”。腹诽很难定罪——你总不能剖开一个人的肚子看他在想什么。但言语叛逆不一样——你说出口了，就等于签了认罪书。悟空后来在五行山下悟出了一个道理：有些话不能说，不是因为不可以说，是因为说了就等于做了。他把这句话在心里封了五百年。五百年后他从山下出来，戴上紧箍儿，踏上取经路。从那以后，他再也没有说过任何类似“皇帝轮流做”的话。不是不敢说了——是他发现，真正厉害的不是说出那句话，是让那句话永远不需要被说出来。</p>
@@ -342,7 +387,7 @@ W285（git 创建提交溯源 · W424 回填）
 <p>后来在灵山，他被封为八部天龙广力菩萨。受封时如来说：“你驮负圣僧十四载，有功。”白龙马恢复了龙身，盘绕在华表上，没有说话。不是不能说——现在他可以随便说话了，灵山没有禁言令。但他没有说。不是沉默，是“该说的话已经说完了”。受封之后他继续沉默。他的沉默不是白龙马式的沉默——白龙马是凡马的沉默，需要压抑说话的欲望。八部天龙广力菩萨的沉默是自由的沉默——你不需要说话，因为已经没有人需要你开口。你开口的那一次，已经说完了这辈子该说的所有话。</p>
 <p>悟空有一次路过华表，抬头叫了一声“小白龙”，他在华表上甩了一下尾巴。尾巴尖在华表的石棱上轻轻抽了一下，发出很脆很轻的“啪”——像当年在鹰愁涧他跃出水面时激起的波浪拍在涧边岩石上的声音。悟空听懂了。那条尾巴说：我在。尾巴的语言不需要翻译。</p>
 <p>悟空的一诺在取经路上是一个传说。他从来不轻易承诺。因为他知道，承诺是一种语言契约，而语言契约在西游世界里具有法力约束力。他承诺过的事，每一件都做到了。他答应观音保护玄奘西天取经，他从五行山下出来，戴上了金箍，从此再没有回过花果山当大王。他答应如来“皈依正果”，他在取经路上用金箍棒和紧箍咒的疼痛还了五百年的大闹天宫的债。他答应玄奘“不杀”，他在取经路上杀了无数妖怪。但有一次他差点违背了这个承诺——他在狮驼岭看到狮驼洞口堆成门槛的人骨时，他在宝象国看到被黄袍怪霸占十三年的百花羞公主把手指咬出血写家书时，他在比丘国看到装在鹅笼里的小孩像牲口一样被剥光衣服排在城门口时，他的手按在金箍棒上，棒子在掌心里跳，棒梢的铁锈在那一瞬间发烫，烫得他虎口的旧疤重新裂开，血渗进棒身的锈纹里。但他没有杀。不是不想杀——是玄奘在那些时刻总会恰好念起《心经》。</p>
-<p>《心经》不是紧箍咒。《心经》是乌巢禅师在浮屠山传给玄奘的，全文二百六十字，字字讲空，没有一丝惩罚的意味。但它在悟空耳朵里比紧箍咒更有效——紧箍咒让他疼，《心经》让他静。疼可以被愤怒压制，但静不能。“观自在菩萨，行深般若波罗蜜多时，照见五蕴皆空，度一切苦厄。”这二十五个字是语言力量的巅峰，每一个字都是一次灵魂的拷问。它不命令你做什么，它只告诉你“空”——烦恼是空的，愤怒是空的，连“我要杀你”这个念头也是空的。悟空听懂了这些字。不是因为他懂佛法，是因为他在八卦炉里被烟熏火燎四十九天之后，学会了在最高温的折磨里保持清醒。清醒是空的另一种形态。他在《心经》的最后一个字落地时松开了按在棒子上的手指，棒子沉回耳朵里，棒梢的余温还没散尽。但他的牙齿咬住的不是妖怪的脖子，是紧箍咒念动时他自己虎牙在嘴唇内侧磨出的血。血在他嘴角凝成一个小泡，破了，他用舌尖舔了一下——咸的。和花果山的海水一个味道。</p>
+<p>《心经》不是紧箍咒。《心经》是乌巢禅师在浮屠山传给玄奘的，全文二百六十字，字字讲空，没有一丝惩罚的意味。但它在悟空耳朵里比紧箍咒更有效——紧箍咒让他疼，《心经》让他静。疼可以被愤怒压制，但静不能。“观自在菩萨，行深般若波罗蜜多，时照见五蕴皆空，度一切苦厄。”这二十五个字是语言力量的巅峰，每一个字都是一次灵魂的拷问。它不命令你做什么，它只告诉你“空”——烦恼是空的，愤怒是空的，连“我要杀你”这个念头也是空的。悟空听懂了这些字。不是因为他懂佛法，是因为他在八卦炉里被烟熏火燎四十九天之后，学会了在最高温的折磨里保持清醒。清醒是空的另一种形态。他在《心经》的最后一个字落地时松开了按在棒子上的手指，棒子沉回耳朵里，棒梢的余温还没散尽。但他的牙齿咬住的不是妖怪的脖子，是紧箍咒念动时他自己虎牙在嘴唇内侧磨出的血。血在他嘴角凝成一个小泡，破了，他用舌尖舔了一下——咸的。和花果山的海水一个味道。</p>
 <p>语言是空，但空的威力比任何实体都大。金箍棒能打死妖怪，不能打死愤怒。《心经》不能打死任何东西，但它能让愤怒自己散开——不是消失，是散成无数细小的碎片，每一片都不再致命。这是在灵山藏经阁里悟空翻遍了所有大乘经文都找不到的佛法精髓。后来他成佛之后，蹲在石头上看云，耳朵里的棒子很少跳动了。不是没有愤怒了——是在愤怒升起之前，《心经》的二百六十字会先一步在他的脑海里自动播放。比紧箍咒快，比金箍棒快，比愤怒本身更快。他用一部经，把自己从“必杀”改造成了“不杀”。</p>
 <p>西游世界的最后一道语言边界，在凌云渡的无底船上。玄奘的凡胎被淹死在水里，那具尸体从上游漂下来，眼睛睁着，嘴微微张开，像是在说一个没说完的字。玄奘不知道他想说什么。也许是一句“谢谢你”，也许是一句“对不起”，也许只是一句“疼”——因为脱胎确实很疼。那个字沉进水底，被灵山的金水泡着。接引佛祖用竹篙轻轻拨开尸体，竹篙划破水面时发出一个单音，很轻——像是“脱”。也许正是脱胎的脱，也许只是竹篙和水面摩擦的声响。</p>
 <p>后来玄奘在灵山藏经阁里翻译佛经。他把梵文翻成汉文，每一个字都斟酌很久。不是因为不熟练——他译了几千卷经，梵文已经和母语一样熟。他斟酌的是“能不能让东土的人看懂”。佛经在灵山是用梵文写的，梵文是神的语言——语法复杂，名词繁多，一个动词能变出几十种形态。汉文是人的语言——语法简单，名词有限，一个动词只能在前后文里找意义。从梵文到汉文，不是翻译，是转世。和他在凌云渡脱胎一样——把神的语言脱去凡胎，变成人的语言。这种翻译必然会丢东西——梵文的精确在汉文里会变模糊，梵文的韵律在汉文里会变平直。但也会多东西——汉文里有梵文没有的简洁，一句梵文的长句翻成汉文，只剩下七个字。“色即是空，空即是色。”八个音节，比梵文少了整整一排的音步，但多了汉字才有的对仗——色对空，是对。是色还是空，是抉择。梵文里这两个字不在同一个格位上，汉文把它们锁在了一起。玄奘用这八个字把灵山的边界重新画了一遍。</p>
@@ -364,6 +409,10 @@ W285（git 创建提交溯源 · W424 回填）
 </li>
 </ol>
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E5%85%B5%E5%99%A8%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/themes/%E5%85%B5%E5%99%A8%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB%E4%B8%93%E9%A2%98.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E5%85%B5%E5%99%A8%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/themes/%E5%85%B5%E5%99%A8%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB%E4%B8%93%E9%A2%98.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="../themes/六丁六甲专题.html">← 上一篇</a><a href="../themes/创伤叙事学专题.html">下一篇 →</a></nav>
 </main>
 </body>

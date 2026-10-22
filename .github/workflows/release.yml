@@ -1,0 +1,322 @@
+name: Release Desktop
+
+# W804 桌面版发布流水线：tag push / workflow_dispatch 触发三平台 electron-builder 构建
+# → 汇总 dist/ 产物 → 发布 GitHub Release（含 latest*.yml 自动更新元数据）。
+#
+# 设计要点（与 xiyouji-desktop/ 的 electron-builder 契约对齐）：
+# - 构建一律 `--publish never`（electron-builder 配置只声明 publish provider，不自行上传），
+#   由本 workflow 的 release job 用 GITHUB_TOKEN 统一上传，避免三平台并发抢发布。
+# - latest*.yml 与 *.blockmap 是 electron-updater 自动更新的必需资产，必须随 Release 上传。
+# - release notes 的「本版内容批次 W###」从 tag commit 的 CHANGELOG 首段动态提取，不写死批次号。
+# - 全部 actions 钉 full SHA（仓库铁律：W663/T4 权限收敛 + W417 全量 SHA 钉）。
+#   upload-artifact/download-artifact 复用仓库现役 v7 大版本，避免回退到 v4 重新引入
+#   Node 20 deprecation（W417 记录：48 处 actions 全量升级 v7）。
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "版本号（不含 v 前缀，示例：2.3.0；须与 xiyouji-desktop/package.json 的 version 一致）"
+        required: true
+        type: string
+      prerelease:
+        description: "标记为 Pre-release（补发测试版时勾选）"
+        required: false
+        type: boolean
+        default: false
+
+# 仓库默认 contents: read（W663/T4 最小权限）；建 Release / 传资产需 workflow 级提权，
+# 先例：pages.yml 在 workflow 级声明 pages/id-token 写权限。
+permissions:
+  contents: write
+
+# 同 tag 的发布串行执行、不取消进行中的发布（避免 release 资产只传一半）
+concurrency:
+  group: release-desktop-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # ---------------------------------------------------------------- preflight
+  # 版本一致性闸门：tag（或 dispatch 输入）必须形如 vX.Y.Z 且与 xiyouji-desktop/
+  # package.json 的 version 完全一致；顺带跑单测 + 内容准备，避免三平台重复跑。
+  preflight:
+    name: Preflight (版本一致性校验)
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.version.outputs.tag }}
+      version: ${{ steps.version.outputs.version }}
+      content_batch: ${{ steps.content_batch.outputs.content_batch }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          # 与 agent-web-build job 同用 Node 22（W791：better-sqlite3 要求 node>=22）
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: xiyouji-desktop/package-lock.json
+
+      - name: Resolve tag/version + assert consistency
+        id: version
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REF_NAME: ${{ github.ref_name }}
+          INPUT_VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            # workflow_dispatch：tag 尚未创建，由 release job 的 gh release create 基于默认分支建 tag
+            VERSION="${INPUT_VERSION#v}"
+            TAG="v${VERSION}"
+          else
+            # push tag：ref 名即 tag 名
+            TAG="$REF_NAME"
+            VERSION="${TAG#v}"
+          fi
+          if ! [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::tag 必须形如 vX.Y.Z（实际：$TAG）"
+            exit 1
+          fi
+          PKG_VERSION=$(node -p "require('./xiyouji-desktop/package.json').version")
+          if [ "$VERSION" != "$PKG_VERSION" ]; then
+            echo "::error::tag 版本 $VERSION 与 xiyouji-desktop/package.json version $PKG_VERSION 不一致"
+            exit 1
+          fi
+          echo "TAG=$TAG" >> "$GITHUB_OUTPUT"
+          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "版本一致性校验通过：tag=$TAG package.json=$PKG_VERSION"
+
+      # 内容批次号动态提取（不写死）：tag commit 上的 CHANGELOG 首段即本版内容批次（W###）。
+      # 桌面版内嵌的内容与站点同源，release notes 的「本版内容批次」据此渲染。
+      - name: Extract content batch (CHANGELOG 首段 W###)
+        id: content_batch
+        shell: bash
+        run: |
+          set -euo pipefail
+          CONTENT_BATCH=$(grep -m1 -oE '^### (v[0-9.]+（[^）]*）：)?W[0-9]{3}' CHANGELOG.md | grep -oE 'W[0-9]{3}' | head -n1)
+          if [ -z "$CONTENT_BATCH" ]; then
+            echo "::error::无法从 CHANGELOG.md 首段提取 W### 内容批次号"
+            exit 1
+          fi
+          echo "content_batch=$CONTENT_BATCH" >> "$GITHUB_OUTPUT"
+          echo "内容批次：$CONTENT_BATCH"
+
+      - name: Install deps
+        run: npm --prefix xiyouji-desktop ci
+
+      - name: Unit tests (node --test)
+        run: npm --prefix xiyouji-desktop test
+
+      - name: Prepare bundled content
+        run: npm --prefix xiyouji-desktop run prepare:content
+
+  # --------------------------------------------------------------------- build
+  # 三平台并行构建安装包；产物经 artifact 汇总到 release job 统一发布。
+  build:
+    name: Build (${{ matrix.platform }})
+    needs: preflight
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            platform: windows
+            script: dist:win
+          - os: macos-latest
+            platform: macos
+            script: dist:mac
+          - os: ubuntu-latest
+            platform: linux
+            script: dist:linux
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: xiyouji-desktop/package-lock.json
+
+      - name: Install deps
+        run: npm --prefix xiyouji-desktop ci
+
+      # Linux 构建提示（W804）：ubuntu-latest 若 electron-builder 报缺系统库
+      # （典型报错涉及 libarchive-tools / bsdtar），在本步骤前追加：
+      #   sudo apt-get update && sudo apt-get install -y libarchive-tools
+      # 首版刻意不预装（AppImage 目标通常无需），失败再按实际报错补，避免无依据安装。
+      - name: Build installers (electron-builder --publish never)
+        env:
+          # macOS 未做代码签名：禁用 electron-builder 证书自动发现，避免无证书时构建失败
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"
+          # 不需要 GH_TOKEN：publish 由 release job 统一执行（dist:* 脚本内固定 --publish never）
+        run: npm --prefix xiyouji-desktop run ${{ matrix.script }}
+
+      - name: Upload platform artifacts
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: desktop-${{ matrix.platform }}
+          path: |
+            xiyouji-desktop/dist/*.exe
+            xiyouji-desktop/dist/*.blockmap
+            xiyouji-desktop/dist/*.dmg
+            xiyouji-desktop/dist/*.zip
+            xiyouji-desktop/dist/*.AppImage
+            xiyouji-desktop/dist/latest*.yml
+          if-no-files-found: error
+          retention-days: 7
+
+  # ------------------------------------------------------------------- release
+  # 汇总三平台产物 → 断言完整性 → 生成中文 release notes → 幂等建/更新 Release。
+  release:
+    name: Publish GitHub Release
+    needs: [preflight, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all platform artifacts
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0（v7 系列 full SHA·仓库此前未使用 download-artifact）
+        with:
+          path: release-assets
+          merge-multiple: true
+
+      - name: Verify expected assets (三平台完整性)
+        shell: bash
+        run: |
+          set -euo pipefail
+          missing=0
+          # Windows：NSIS 安装包 + electron-updater 元数据
+          for f in xiyouji-desktop-win-x64.exe latest.yml; do
+            if [ ! -f "release-assets/$f" ]; then
+              echo "::error::缺少资产：$f"
+              missing=1
+            fi
+          done
+          # macOS：universal dmg + 免安装 zip + electron-updater 元数据
+          for f in xiyouji-desktop-mac-universal.dmg xiyouji-desktop-mac-universal.zip latest-mac.yml; do
+            if [ ! -f "release-assets/$f" ]; then
+              echo "::error::缺少资产：$f"
+              missing=1
+            fi
+          done
+          # Linux：AppImage 的 arch token 由 electron-builder 的 getArtifactArchName 决定
+          # （AppImage 目标 x64 → x86_64），A 侧 electron-builder.yml 已定稿此固定名。
+          # 先断固定名，再保留 glob 兜底提示（产物名若漂移此处即红，防 README 直链失配）。
+          if [ ! -f "release-assets/xiyouji-desktop-linux-x86_64.AppImage" ]; then
+            echo "::error::缺少资产：xiyouji-desktop-linux-x86_64.AppImage"
+            missing=1
+          fi
+          if ! ls release-assets/xiyouji-desktop-linux-*.AppImage >/dev/null 2>&1; then
+            echo "::error::缺少 AppImage 产物（xiyouji-desktop-linux-*）"
+            missing=1
+          fi
+          if [ ! -f "release-assets/latest-linux.yml" ]; then
+            echo "::error::缺少资产：latest-linux.yml"
+            missing=1
+          fi
+          if [ "$missing" -ne 0 ]; then
+            echo "=== release-assets 实收文件（便于排查）==="
+            ls -la release-assets || true
+            exit 1
+          fi
+          echo "=== release-assets 实收文件 ==="
+          ls -la release-assets
+
+      - name: Generate release notes (中文)
+        shell: bash
+        env:
+          TAG: ${{ needs.preflight.outputs.tag }}
+          VERSION: ${{ needs.preflight.outputs.version }}
+          CONTENT_BATCH: ${{ needs.preflight.outputs.content_batch }}
+        run: |
+          set -euo pipefail
+          # 静态文案用带引号 heredoc（禁 shell 展开），运行期值用 __占位符__ + sed 注入
+          cat > release-notes.md <<'EOF'
+          ## 🐒 详解西游记 · 桌面版 v__VERSION__
+
+          离线安装包：内置 **87 个数据可视化页 + 615 篇解读文档**，无需 Node/Python，安装后即可离线阅读全部内容。
+
+          > 本版内容批次：**__CONTENT_BATCH__**（内容变更见 [CHANGELOG](https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md)）。
+
+          ### 📥 下载（三平台）
+
+          | 平台 | 文件 | 说明 |
+          | --- | --- | --- |
+          | Windows | `xiyouji-desktop-win-x64.exe` | NSIS 安装包（x64） |
+          | macOS | `xiyouji-desktop-mac-universal.dmg` | Universal 安装镜像（Intel + Apple Silicon 通用） |
+          | macOS（备用） | `xiyouji-desktop-mac-universal.zip` | 免安装 zip 包 |
+          | Linux | `xiyouji-desktop-linux-x86_64.AppImage` | AppImage（x64，`chmod +x` 后运行） |
+
+          固定直链（始终指向最新发布，适合文档长期引用）：
+
+          - Windows: https://github.com/1273984347/xiyouji/releases/latest/download/xiyouji-desktop-win-x64.exe
+          - macOS: https://github.com/1273984347/xiyouji/releases/latest/download/xiyouji-desktop-mac-universal.dmg
+          - Linux: https://github.com/1273984347/xiyouji/releases/latest/download/xiyouji-desktop-linux-x86_64.AppImage
+
+          ### 🔄 自动更新（electron-updater）
+
+          - 安装后**启动 3 秒检查更新**，此后每 4 小时检查一次；菜单 **帮助 → 检查更新…** 可手动触发。
+          - 更新包下载完成后**重启应用生效**；更新元数据为 latest.yml / latest-mac.yml / latest-linux.yml，增量差分依赖 *.blockmap。
+
+          ### ⚠️ 未签名提示（当前构建未做代码签名）
+
+          - macOS 首次打开若提示「无法验证开发者」：右键 App → 打开 → 仍要打开（或 系统设置 → 隐私与安全性 → 仍要打开）。
+          - Windows 若弹出 SmartScreen：点「更多信息」→「仍要运行」。
+
+          ### 🔐 完整性校验
+
+          - 各平台安装包的 SHA512 校验值见 latest*.yml（latest.yml / latest-mac.yml / latest-linux.yml）的 sha512 字段。
+
+          完整内容变更见 [CHANGELOG.md](https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md)。
+          EOF
+          sed -i \
+            -e "s/__VERSION__/${VERSION}/g" \
+            -e "s/__CONTENT_BATCH__/${CONTENT_BATCH}/g" \
+            release-notes.md
+          if grep -q '__[A-Z][A-Z_]*__' release-notes.md; then
+            echo "::error::release notes 仍有未替换占位符"
+            grep -n '__[A-Z][A-Z_]*__' release-notes.md
+            exit 1
+          fi
+          echo "=== release notes 预览 ==="
+          cat release-notes.md
+
+      - name: Publish release (idempotent)
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ needs.preflight.outputs.tag }}
+          VERSION: ${{ needs.preflight.outputs.version }}
+          PRERELEASE: ${{ inputs.prerelease }}
+        run: |
+          set -euo pipefail
+          TITLE="详解西游记 · 桌面版 v${VERSION}"
+          EXTRA=()
+          if [ "${PRERELEASE:-false}" = "true" ]; then
+            EXTRA+=(--prerelease)
+          fi
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            # 幂等：Release 已存在 → 覆盖上传资产 + 刷新标题/notes（重跑/补发不报错）
+            echo "Release $TAG 已存在 → 覆盖更新资产（--clobber）"
+            gh release upload "$TAG" release-assets/* --clobber
+            gh release edit "$TAG" --title "$TITLE" --notes-file release-notes.md
+          else
+            # dispatch 场景 tag 可能尚未创建：gh release create 会基于默认分支自动建 tag。
+            # 注意：资产必须作为 create 的位置参数一次带上（tag 之后的 release-assets/*），
+            # 否则首跑会建出「空 Release」→ 固定直链 404 + electron-updater 找不到 latest*.yml。
+            echo "Release $TAG 不存在 → 创建并上传资产"
+            gh release create "$TAG" release-assets/* \
+              --title "$TITLE" \
+              --notes-file release-notes.md \
+              --latest \
+              "${EXTRA[@]}"
+          fi
+          echo "=== Release $TAG 资产清单 ==="
+          gh release view "$TAG" --json assets --jq '.assets[].name'

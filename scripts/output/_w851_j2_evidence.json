@@ -1,0 +1,219 @@
+{
+  "schema": 1,
+  "batch": "W851",
+  "criterion": "J2",
+  "verdict": "PASS",
+  "method": "probe._diff_snapshots（29 属性固定序·元素身份 + 逐属性对拍）",
+  "diff_count": 0,
+  "diffs_head": [],
+  "notes": [],
+  "before": {
+    "captured_at": "2026-10-21T22:05:51",
+    "meta": {
+      "page_count": 23,
+      "floor_ms": 15000,
+      "quiet_ms": 400,
+      "quiesce_cap_ms": 15000
+    },
+    "sha256": "2c22f4975dda55b756e9a6370ef41cb8bad2ecbd11a125b6a41bbe6cd9ef7e45",
+    "element_counts": {
+      "index.html": {
+        "light": 254,
+        "dark": 255
+      },
+      "guide.html": {
+        "light": 263,
+        "dark": 264
+      },
+      "dashboard.html": {
+        "light": 732,
+        "dark": 733
+      },
+      "curated.html": {
+        "light": 319,
+        "dark": 320
+      },
+      "404.html": {
+        "light": 15,
+        "dark": 15
+      },
+      "data/character-relationship-3d.html": {
+        "light": 98,
+        "dark": 99
+      },
+      "data/relationships.html": {
+        "light": 2519,
+        "dark": 2520
+      },
+      "data/timeline.html": {
+        "light": 424,
+        "dark": 425
+      },
+      "data/text-search.html": {
+        "light": 226,
+        "dark": 227
+      },
+      "data/chapter-stats.html": {
+        "light": 898,
+        "dark": 899
+      },
+      "data/tag-cloud.html": {
+        "light": 201,
+        "dark": 202
+      },
+      "data/cross-time-danmaku.html": {
+        "light": 209,
+        "dark": 210
+      },
+      "data/hardship-heatmap.html": {
+        "light": 465,
+        "dark": 466
+      },
+      "reader/ch001.html": {
+        "light": 198,
+        "dark": 199
+      },
+      "reader/ch030.html": {
+        "light": 176,
+        "dark": 177
+      },
+      "reader/ch060.html": {
+        "light": 452,
+        "dark": 453
+      },
+      "reader/ch081.html": {
+        "light": 235,
+        "dark": 236
+      },
+      "en/relationships.html": {
+        "light": 2505,
+        "dark": 2506
+      },
+      "en/timeline.html": {
+        "light": 410,
+        "dark": 411
+      },
+      "en/text-search.html": {
+        "light": 215,
+        "dark": 216
+      },
+      "en/character-relationship-3d.html": {
+        "light": 85,
+        "dark": 86
+      },
+      "data/journey-geo-semiotics.html": {
+        "light": 126,
+        "dark": 127
+      },
+      "en/journey-geo-semiotics.html": {
+        "light": 128,
+        "dark": 129
+      }
+    }
+  },
+  "after": {
+    "captured_at": "2026-10-21T22:19:15",
+    "meta": {
+      "page_count": 23,
+      "floor_ms": 15000,
+      "quiet_ms": 400,
+      "quiesce_cap_ms": 15000
+    },
+    "sha256": "76062bfb4e151b28f1f5c4abbad604851c97364d94fc5d72a76550587c06b8e1",
+    "element_counts": {
+      "index.html": {
+        "light": 254,
+        "dark": 255
+      },
+      "guide.html": {
+        "light": 263,
+        "dark": 264
+      },
+      "dashboard.html": {
+        "light": 732,
+        "dark": 733
+      },
+      "curated.html": {
+        "light": 319,
+        "dark": 320
+      },
+      "404.html": {
+        "light": 15,
+        "dark": 15
+      },
+      "data/character-relationship-3d.html": {
+        "light": 98,
+        "dark": 99
+      },
+      "data/relationships.html": {
+        "light": 2519,
+        "dark": 2520
+      },
+      "data/timeline.html": {
+        "light": 424,
+        "dark": 425
+      },
+      "data/text-search.html": {
+        "light": 226,
+        "dark": 227
+      },
+      "data/chapter-stats.html": {
+        "light": 898,
+        "dark": 899
+      },
+      "data/tag-cloud.html": {
+        "light": 201,
+        "dark": 202
+      },
+      "data/cross-time-danmaku.html": {
+        "light": 209,
+        "dark": 210
+      },
+      "data/hardship-heatmap.html": {
+        "light": 465,
+        "dark": 466
+      },
+      "reader/ch001.html": {
+        "light": 198,
+        "dark": 199
+      },
+      "reader/ch030.html": {
+        "light": 176,
+        "dark": 177
+      },
+      "reader/ch060.html": {
+        "light": 452,
+        "dark": 453
+      },
+      "reader/ch081.html": {
+        "light": 235,
+        "dark": 236
+      },
+      "en/relationships.html": {
+        "light": 2505,
+        "dark": 2506
+      },
+      "en/timeline.html": {
+        "light": 410,
+        "dark": 411
+      },
+      "en/text-search.html": {
+        "light": 215,
+        "dark": 216
+      },
+      "en/character-relationship-3d.html": {
+        "light": 85,
+        "dark": 86
+      },
+      "data/journey-geo-semiotics.html": {
+        "light": 126,
+        "dark": 127
+      },
+      "en/journey-geo-semiotics.html": {
+        "light": 128,
+        "dark": 129
+      }
+    }
+  },
+  "raw_snapshots": "随批入库（file-index C4-f 要求·判词的原始证据）·本文件 sha256 字段为判词的防篡改锚"
+}

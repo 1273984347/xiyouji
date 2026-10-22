@@ -16,6 +16,13 @@
 令牌来源：环境变量 GOATCOUNTER_API_TOKEN，或仓库根 .env（已 gitignore，禁止入库）。
 生成方式：GoatCounter 后台右上角用户名 → API → 生成密钥。
 
+W806 现状声明（2026-10-20）：站点代码 1273984347 已失效，本脚本实测返回
+HTTP 404「not found」（断链自 2026-09-30，未恢复），跨访客统计链已随 W806
+裁决整体退役（见 docs/00-导读/访问统计方案.md）。**本脚本保留在库**：它是纯
+CLI 工具（无运行时成本、不被任何页面或门禁引用），账号重建后写入新 token
+即可复用，取数口径与判定链无需重写。在重建之前，本脚本的取数结果不得用作
+任何裁决输入。
+
 用法：
     py -3 scripts/fetch_gate_stats.py                     # 输出 uv7 / uv30 + 推荐命令
     py -3 scripts/fetch_gate_stats.py --json              # 机器可读输出

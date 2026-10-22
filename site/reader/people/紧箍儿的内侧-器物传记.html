@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>紧箍儿的内侧</title>
 <!-- SEO:INJECTED -->
@@ -12,46 +12,78 @@
 <meta property="og:description" content="紧箍儿的内侧——《详解西游记》人物深度">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://1273984347.github.io/xiyouji/reader/people/紧箍儿的内侧-器物传记.html">
-<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+<meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+
+
+<script src="../../js/theme-init.js"></script>
+<script src="../../js/reader-enhance.js" defer></script>
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
-<script src="../../js/theme-init.js"></script>
 <style>
-  .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
+  .reader-wrap { max-width: var(--container-read); margin: 0 auto; padding: 0 16px 72px; }
   .reader-topnav { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
     padding: 14px 0; border-bottom: 1px solid var(--line); margin-bottom: 28px;
     font-size: 14px; }
-  .reader-topnav a { color: var(--accent); text-decoration: none; }
+  .reader-topnav a { color: var(--accent-text); text-decoration: none; }
   .reader-topnav a:hover { text-decoration: underline; }
   .reader-topnav .brand { color: var(--ink); font-weight: 700; }
   .reader-body { font-family: var(--font-serif, serif); color: var(--ink);
     line-height: 1.9; font-size: 17px; }
-  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: 12px 0 20px; }
-  .reader-body h2 { font-size: 21px; margin: 34px 0 12px; padding-left: 10px;
+  .reader-body h1 { font-size: 28px; line-height: var(--leading-tight); margin: var(--space-4) 0 var(--space-5); }
+  .reader-body h2 { font-size: 21px; margin: 34px 0 var(--space-4); padding-left: 10px;
     border-left: 3px solid var(--accent); }
-  .reader-body h3 { font-size: 18px; margin: 24px 0 10px; }
-  .reader-body blockquote { margin: 14px 0; padding: 8px 14px; color: var(--ink-soft);
+  .reader-body h3 { font-size: 18px; margin: var(--space-6) 0 10px; }
+  .reader-body blockquote { margin: 14px 0; padding: var(--space-3) 14px; color: var(--ink-soft);
     background: var(--paper-warm, var(--paper)); border-left: 3px solid var(--ink-faint); }
-  .reader-body a { color: var(--accent); }
-  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+  .reader-body a { color: var(--accent-text); }
+  .reader-body hr { border: 0; border-top: 1px solid var(--line); margin: var(--space-7) 0; }
   .reader-meta { color: var(--ink-soft); font-size: 13px; margin: 0 0 26px; }
   .reader-pn { display: flex; justify-content: space-between; gap: 12px; margin-top: 44px;
     padding-top: 18px; border-top: 1px solid var(--line); font-size: 15px; }
-  .reader-pn a { color: var(--accent); text-decoration: none; }
+  .reader-pn a { color: var(--accent-text); text-decoration: none; }
   .reader-pn a:hover { text-decoration: underline; }
   .reader-pn .off { color: var(--ink-faint); }
-  .reader-idx { list-style: none; padding: 0; margin: 24px 0 0;
+  .reader-idx { list-style: none; padding: 0; margin: var(--space-6) 0 0;
     display: grid; grid-template-columns: 1fr; gap: 2px; }
   @media (min-width: 640px) { .reader-idx { grid-template-columns: 1fr 1fr; } }
-  .reader-idx a { display: block; padding: 9px 12px; color: var(--ink); text-decoration: none;
+  .reader-idx a { display: block; padding: 9px var(--space-4); color: var(--ink); text-decoration: none;
     border: 1px solid var(--line); border-radius: var(--radius-sm, 4px); font-size: 14px; }
-  .reader-idx a:hover { border-color: var(--accent); color: var(--accent); }
+  .reader-idx a:hover { border-color: var(--accent); color: var(--accent-text); }
   .reader-idx .no { color: var(--ink-faint); font-family: var(--font-mono, monospace); margin-right: 8px; }
-  .reader-group { margin: 34px 0 8px; font-size: 19px; font-weight: 700; color: var(--ink);
+  .reader-group { margin: 34px 0 var(--space-3); font-size: 19px; font-weight: 700; color: var(--ink);
     border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  /* W847 阅读页体验封装：工具条 / 进度条 / 折叠段 / 每页反馈 */
+  .reader-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; margin: 0 0 var(--space-5); padding: var(--space-3) 10px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    font-size: 13px; color: var(--ink-soft); }
+  .reader-toolbar .grp { display: flex; align-items: center; gap: 6px; }
+  .reader-toolbar button { font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--radius-sm, 4px);
+    padding: 3px 10px; cursor: pointer; }
+  .reader-toolbar button:hover { border-color: var(--accent); color: var(--accent-text); }
+  .reader-toolbar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-text); }
+  .reader-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--accent); z-index: 50; }
+  .reader-body details.reader-fold { margin: 18px 0; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: var(--radius-sm, 4px);
+    background: var(--paper-warm, var(--paper)); }
+  .reader-body details.reader-fold > summary { cursor: pointer; padding: 10px 14px;
+    font-size: 21px; font-weight: 700; color: var(--ink); }
+  .reader-body details.reader-fold > summary::before { content: "▸ "; color: var(--accent); }
+  .reader-body details.reader-fold[open] > summary::before { content: "▾ "; }
+  .reader-body details.reader-fold[open] > summary { border-bottom: 1px solid var(--line); }
+  .reader-fold-body { padding: 6px 14px 10px; }
+  .reader-feedback { margin-top: 44px; padding: 18px 0 var(--space-3); border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-soft); }
+  .reader-feedback .fb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 10px; }
+  .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+    border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
+  .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
 </style>
 </head>
 <body>
@@ -61,6 +93,19 @@
     <a href="../../index.html">站点首页</a>
     <a href="https://github.com/1273984347/xiyouji/blob/main/docs/02-人物深度分析/紧箍儿的内侧-器物传记.md" rel="noopener">在 GitHub 查看源文件</a>
   </nav>
+  <div class="reader-toolbar" data-reader-tools="1" data-page="reader/people/紧箍儿的内侧-器物传记.html">
+    <div class="grp">
+      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <span data-role="status" aria-live="polite"></span>
+    </div>
+    <div class="grp">
+      <button type="button" data-act="toggle-all">展开全部</button>
+      <span>字号</span>
+      <button type="button" data-act="font-minus" aria-label="减小字号">A−</button>
+      <button type="button" data-act="font-plus" aria-label="增大字号">A＋</button>
+    </div>
+  </div>
+  <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>紧箍儿的内侧</h1>
 <blockquote>
@@ -719,7 +764,7 @@
 <p>如来的成本核算</p>
 <p>取经人到达灵山。阿傩迦叶领他们去藏经阁取经。经卷搬出来，阿傩伸手：“人事呢？”</p>
 <p>玄奘愣住。悟空骂阿傩。阿傩不恼，只是站着，手伸着。</p>
-<p>如来后来解释：“经不可轻传，亦不可以空取。向时众比丘圣僧下山，曾将此经在舍卫国赵长者家与他诵了一遍，只讨得他三斗三升米粒黄金回来。我还说他们忒卖贱了，教后代儿孙没钱使用。”</p>
+<p>如来后来解释：“经不可轻传，亦不可以空取，向时众比丘圣僧下山，曾将此经在舍卫国赵长者家与他诵了一遍，保他家生者安全，亡者超脱，只讨得他三斗三升米粒黄金回来，我还说他们忒卖贱了，教后代儿孙没钱使用。”</p>
 <p>这段话是全本《西游记》里最容易被误解的段落之一。如来说的不是钱——如来说的是分量。经书的重量需要用等重的黄金来称。不是交易，是物理：经书的每一页纸都有重量，贝叶经的贝叶是菩提树叶，一片叶子压干了大约三钱。三藏真经一万五千一百四十四卷，总重量大约四十万钱——约两千五百斤。阿傩迦叶不可能把这些全给玄奘——他们只拣了一藏之数，五千零四十八卷，大约八百斤。</p>
 <p>八百斤的经书，需要等重的黄金来称量它从灵山到东土的路程。不是运费——是重量的对应。经不可轻传，轻是轻重的轻，不是轻易的轻。</p>
 <p>玄奘没有黄金。他只有紫金钵盂。</p>
@@ -912,7 +957,7 @@
 <p>沙弥看不懂地图。他把文牒折好放回架子，爬下梯子，跑出库房。外面是灵山的午后阳光。悟空在莲池边打盹，八戒在膳堂偷吃，沙僧在第三级台阶上修补竹篮，玄奘在藏经阁窗边抄经。白龙马在马厩里打了一个喷嚏——他闻到了一种味道，不是草料，是麻纸和陈年印泥混合的、被太阳晒暖了的味道。通关文牒放在库房的窗边，午后阳光透过窗棂照在文牒的麻纸上，把纸里的凤仙花汁加热了一点点。花汁挥发了一丝极微的香气，顺着窗缝飘出去，飘过膳堂，被八戒闻到了。</p>
 <p>八戒停下吃饺子，说：“谁在熬花茶？”沙僧在台阶上抬头，说没有花茶。悟空在莲池边翻了个身，说：“不是花茶。是女儿国。”他梦里闻到了凤仙花汁的味道。那个味道他在取经路上闻过一次——玄奘在女儿国喝完莲子羹，袖口沾了一滴羹汤，羹汤里有凤仙花汁。凤印的汁，女王亲手调的，沾在袖口上，悟空当时站得近，闻到了。他记住了那个味道。几百年后还能在梦里分辨出凤仙花汁和别的花香的不同——凤仙花汁有一股铁腥味，因为捣花瓣的石臼是铁臼。铁腥味极淡，只有被太阳晒过之后才挥发出来。</p>
 <p>通关文牒在窗边被午后阳光晒暖。铁腥味混着凤仙花的甜，飘进悟空的梦里。他梦见自己走在女儿国的大街上，玄奘在前面拄着锡杖，锡杖上的铜环叮当响，响声里有采莲曲。他回头看，八戒跟在后面，沙僧挑着担，白龙马走在最后。他们正在通过女儿国的城门。城门口站着女王，手里拿着一本通关文牒——不是他们的文牒，是一本新的，空白的，还没有任何章。她把文牒展开，递过来，说：“这一页留给你写。”</p>
-<p>悟空接过来，不知道写什么。他回头问玄奘：“师父，写什么？”玄奘没说话。玄奘已经醒了。他在藏经阁窗边抄经，笔在纸上走。抄到这一句：“心无挂碍，无挂碍故，无有恐怖，远离颠倒梦想，究竟涅槃。”他把笔放下，看着窗外莲池边的悟空。悟空在梦里翻了个身，嘴里嘟哝了一句。</p>
+<p>悟空接过来，不知道写什么。他回头问玄奘：“师父，写什么？”玄奘没说话。玄奘已经醒了。他在藏经阁窗边抄经，笔在纸上走。抄到这一句：“心无挂碍，无挂碍故，无有恐怖。远离颠倒梦想，究竟涅槃，三世诸佛，依般若波罗蜜多故，得阿耨多罗三藐三菩提。”他把笔放下，看着窗外莲池边的悟空。悟空在梦里翻了个身，嘴里嘟哝了一句。</p>
 <p>玄奘没有听清那句嘟哝。但通关文牒在库房窗台上被午后的风吹开了一页——正好是最后一页，那张白纸。风从窗棂的缝隙钻进来，轻轻顶起白纸，纸在半空中停了一下，然后落回去。落下时纸面碰到前面一页的批注——“这”。那个字和最后一页的白纸之间隔着一张纸的厚度，是麻纸的纤维直径乘以一层纸。风声里，这两个字轻轻碰了一下。通关文牒没有盖章的最后一页，终于有了一个声音。</p>
 <p>那是路在纸上走过的声音。不是字的读音。是纤维之间互相摩擦的声音。纸在响。路在走。还在走。</p>
 <p>延伸思考</p>
@@ -941,7 +986,7 @@
 <p>第八年春天。悟空开始学法术。须菩提教他七十二变和筋斗云。七十二变的教学方法不是口诀——是临摹。须菩提带他到后山，指着一棵松树说“变这棵树”。悟空变了，变成一棵松树，树干笔直，松针茂密。须菩提看了一眼说不像。“那棵松树的松针每一根都朝南——山南向阳，松针趋光。你的松针朝四面八方，那是刺猬不是松树。”悟空收了法，仔细看那棵松树——松针果然都朝南。须菩提说：“变不是变形状，是变道理。松树的道理是趋光。你不懂松树的道理，变的松树就是假的。”悟空从此学法不再只记口诀。他变成什么之前先观察什么。变成水之前先看水的流向，变成云之前先感受云的浮力，变成鱼之前先跟鱼一起游两个时辰——他不会游泳，是憋着气在水底走，水没过他的头顶时他第一次知道水的重量。七十二变的每一变都先有一课观察。须菩提没有给过他任何口诀，只给过观察的时间。时间到了，他自然就会变了。不是法术教的，是观察教的。</p>
 <p>观音后来在取经路上收黑熊精、红孩儿、灵感大王时用过的“变”——变凌虚子、变红孩儿的模样、变卖鱼婆——都是从须菩提这一脉传下来的。斜月三星洞的变不是障眼法，是理解。理解对方是什么，才能变成对方。不理解就变不像——蝎子精能破如来的金身，但变不成人形。她的变是强制变形，皮变了，骨没变，走路时脊骨还是蝎尾的弧度。那是妖怪的变。斜月三星洞的变是连骨骼一起变，因为理解对方的道理——筋斗云是云的浮力，七十二变是万物的道理。筋斗云的教学只用了三句话。须菩提带他到悬崖边，说：“跳。”悟空跳了。须菩提在他坠地之前说：“云。”悟空在半空中抓了一把云，云没托住他——手抓云是抓不住的，云不是固体。他摔进山涧，浑身湿透。第二次须菩提又说“跳”，悟空又跳。这次他没抓云，他躺在空气里。不是躺——是信任。信任空气能托住他。空气没有托，他又摔了。第三次他注意到一个细节——他摔下去的时候，山风把他身上的水吹干了一部分，水变成水汽往上飘，水汽飘过他眼前时，他看到水汽的颗粒在阳光下发光。那些颗粒不是在往下坠，是在往上浮。不是浮力——是热气流托着水汽上升。水汽的颗粒比空气轻一丝，所以能浮。如果他能变得比空气轻一丝，他也能浮。他第三次跳下去时没有想着“飞”，也没有想着“托”，他只是把自己的重量减到比空气轻一丝。</p>
 <p>他浮起来了。不是飞——飞是用力，浮是不用力。筋斗云的本质不是速度，是轻。轻到极致，一个筋斗就是十万八千里——不是用力的翻，是不用力的飘。须菩提在山崖上看到悟空浮起来，没夸他。转身回洞里去了。石桌上那盘没有下完的棋还在——黑子围住了白子，白子只剩一口气。须菩提坐下来，拈起一颗白子，放在棋盘上一个完全没有攻击性的位置。那一手不是活棋，不是做眼，不是脱困。是把白子放在黑子的大空里——送死。送死之后，白子的那口气反而通了。不是活棋，是死棋变通了。悟空从山崖上飘下来，走进讲堂，全身还是轻的。他往棋盘上看了一眼——他不懂围棋，但他知道黑子是须菩提，白子是自己。白子被围住只剩一口气，但须菩提把白子放在了死地。死地反而通气。他不明白。须菩提没解释。很多年以后悟空在灵山和如来聊天，说起这一局棋。如来说：“你师父下了一步禅棋——死中求活。那个死地不是死地，是活眼。”悟空说那口气在死地怎么通？如来说：“死地和生地之间没有路，但气可以通。气不是从路上走的，气是从没有路的地方自己开辟路的。你师父把白子放在死地，是把你的未来交给了你自己。”悟空想了很久，说：“我那十年学的不是本事。是气。”</p>
-<p>悟空离开方寸山那天，须菩提说：“你这去定生不良。凭你怎么惹祸行凶，却不许说是我的徒弟。你说出半个字来，我就知之，把你这猢狲剥皮锉骨，将神魂贬在九幽之处，教你万劫不得翻身。”这话说得很重。悟空跪在地上，说“决不敢提起师父一字”。然后他驾起筋斗云回花果山。</p>
+<p>悟空离开方寸山那天，须菩提说：“你这去，定生不良。凭你怎么惹祸行凶，却不许说是我的徒弟。你说出半个字来，我就知之，把你这猢狲剥皮锉骨，将神魂贬在九幽之处，教你万劫不得翻身！”这话说得很重。悟空跪在地上，说“决不敢提起师父一字”。然后他驾起筋斗云回花果山。</p>
 <p>须菩提站在山门口看他走远。悟空的身影消失在天边时，须菩提伸手关上山门。山门在关闭的一刹那变成了一整块完整的岩石。石纹连续，没有门框，没有门槛。斜月三星洞消失了。不是隐形——是从来没有存在过。那十年是方寸山做了一个梦，梦里有扫帚、松针、棋盘、桑皮纸。梦醒了，山还是山，石头还是石头。</p>
 <p>悟空成佛之后回来找过一次。灵台方寸山还在，方寸山上的岩石还是那块岩石。他用火眼金睛看了——岩石内部没有任何空洞，没有门，没有洞，没有院子，没有松树。他把手放在岩石上，石面是常温的，被太阳晒了一整天之后的温热。他慢慢把手移开，指尖划过石面。指尖触到一道极浅极细的凹痕——是松针的划痕。那根松针他扫了七年没扫掉，松针在风里反复划过石面，在石面上划出了一道头发丝细的槽。这道槽不在门上，不在洞里——在石头上。是真实的物理划痕。他找到了。找到的不是门，是扫帚没扫掉的松针。那道槽在石面上延伸的方向是斜月三星洞曾经的门框线——松针被风夹在门缝里，每次开门关门，松针划一下石面。关了十年门，划了十年槽。关门之后松针被碾碎成了纤维屑，粘在石槽里。悟空把指甲伸进槽里，挑出一点纤维屑——纤维已经石化了一部分，另一半还是植物。石化的一半是方寸山的梦，植物的一半是斜月三星洞的记忆。两者粘在一起，分不开。</p>
 <p>他把纤维屑放在掌心。闻了一下——没有松脂味，什么味都没有。时间太长，气味分子已经全部挥发。但手掌的温度激发了纤维屑的残余应力——纤维屑曾经被夹在门缝里反复碾压，积累了应力。应力在手掌的温度下释放，纤维屑在他掌心里轻轻跳了一下。不是物理的跳——是心跳。松针纤维的心跳。须菩提当年在讲堂里讲“一切众生皆有佛性”，悟空在窗外扫地，听到这句话时扫帚停了。他想：“松针有没有佛性？”现在他知道答案了。松针有佛性。佛性是跳。</p>
@@ -1041,7 +1086,7 @@
 <p>这个技术他不是跟谁学的——是天河自己教他的。他在天河边走了一千年，每天用钯齿敲闸体，敲了一千年的频率积累下来，他的额骨已经变成了天晶的频率数据库。他的耳朵能分辨出天河水的流速变化引起的水波频率波动——上游星尘含量高了，流速就慢，水波频率就低；下游星尘含量低了，流速快，频率高。他把每天的频率变化记录在闸体旁边的石板上——用钉钯刻的数字，一天一行。刻了一千年，石板刻满了，背面也刻满了，侧边也刻满了。后来他把数字刻在自己钯柄上——九齿钉钯的柄是镔铁打的，他刻了几千年，钯柄上的数字密密麻麻，比任何水文档案都完整。</p>
 <p>被贬那天，他把钉钯带走了。天庭没有收回钉钯——那是他的兵器，也是他的水文记录。他从天河边往下掉的时候，紧紧握着钯柄。风从指缝间灌过去，吹在钯柄的数字上，发出极细微的哨音——每个数字一个音，几千个数字连成一首无调的曲。那是天河水闸的挽歌。他听了一千年，现在闸听不到了，曲还在。</p>
 <p><strong>调戏嫦娥</strong></p>
-<p>这件事八戒从来不主动讲。书里写得很简单：“只因带酒戏弄嫦娥，被玉帝打了二千锤，贬下尘凡。”十字一句，交代了一千年的结束。但八戒在云栈洞里跟悟空打斗时说过一段话——不是解释，是愤怒之下漏出来的真相。</p>
+<p>这件事八戒从来不主动讲。书里写得很简单：“只因带酒戏弄嫦娥，玉帝把我打了二千锤，贬下尘凡；一灵真性，竟来夺舍投胎，不期错了道路，投在个母猪胎里，变得这般模样。”十字一句，交代了一千年的结束。但八戒在云栈洞里跟悟空打斗时说过一段话——不是解释，是愤怒之下漏出来的真相。</p>
 <p>“那时酒醉意昏沉，东倒西歪乱撒泼。逞雄撞入广寒宫，风流仙子来相接。见他容貌挟人魂，旧日凡心难得灭。全无上下失尊卑，扯住嫦娥要陪歇。”</p>
 <p>八戒说自己是“酒醉”。但酒怎么醉一个元帅？天蓬元帅的酒量在天庭排前三——他每年参加蟠桃宴，玉帝赐的琼浆玉液他一个人能喝三斗。广寒宫那次，他喝了多少？他从来没说过。他只说“酒醉意昏沉”。这个“意昏沉”不是酒精中毒——是站在天河水闸边连续巡查了三个月没睡觉之后的疲劳叠加酒精之后的意识模糊。</p>
 <p>他在供词里没有提这件事——不是不敢，是不值得提。被玉帝打二千锤的时候他一声没吭。贬下凡时他手里还握着钉钯。从天庭往下掉的过程中，他经过了天河。天河水在月光下泛着银色，和他在闸边看了一千年的银色一模一样。他伸手想碰一下水面——手指还没碰到，身体已经穿过了天河底，坠入云层。那一瞬间他感到天河水从他的指缝间流过，流速是他用额骨测过几百万次的那个频率。天河在跟他说再见。</p>
@@ -1289,6 +1334,10 @@
 <p>土地蹲在那盆土前，像几千年来每次巡园时蹲在桃树下数落叶的姿势。落叶的数量代表土壤的湿度，湿度影响菌丝活性，菌丝活性决定来年的花量。他这一辈子都在把复杂的生命现象还原成可计数的数字。现在他面前这盆土里正在发生的事超出了他几千年的所有经验。他没有拿木牍来记，没有拿尺子来量。只是蹲着，把右手放在花盆的豁口上，手心朝向土面。手掌感觉不到温度变化——息壤是恒温的。但他感觉掌心下有一阵极轻的搏动，像心脏在泵送。息壤不需要心跳。在跳的是他自己的手。他的手掌里那根猴毛复合纱——在袖子里压了上千年的那一小块布——在花盆口的湿气和菌丝代谢产生的微弱生物电作用下，被激活了残余的神经传导功能。猴毛里残留的毛囊干细胞分化出了极原始的神经元，神经元在织物里发射了一个动作电位。电位从他的虎口传入桡神经，桡神经上行到臂丛，臂丛进入脊髓，脊髓上传到丘脑，丘脑投射到体感皮层。他那几千年没有出过蟠桃园的右手，在那一刹那间感受到了悟空的手掌几千年前第一次摸到蟠桃树皮时的触觉——树皮粗粝，金猴毛和树皮角质层摩擦产生静电，静电在毛尖上跳动，悟空的手掌被树皮硌得痒痒的。那一份痒穿越几千年，穿过八卦炉的烈火、五行山的严冰、水帘洞瀑布的水雾、取经路上风沙的打磨、成佛时斗战胜佛金身的凝固——最后传到一只蟠桃园土地被息壤侵蚀了几千年的手掌上。手心痒了一下。他把手翻过来看，手心什么都没有。挠了一下——挠的不是手心，是被悟空拍过的那边肩膀。肩膀在上午被他拍过之后一直微微发热，不是烫，是温度比另一边肩膀高半度。那是他几千年职业生涯里第一次被上级之外的人拍肩膀。他以后还会被拍很多次——锄树力士渴了会拍他背问井在哪，运水力士搬缸会拍他肩让一让。但只有这一次拍肩膀的人，让他把那个写了又划掉的“零”在心里默默补上了。他重新写了一个“零”，没有划掉。他把那个完整的“零”交给了几千年前那个在木牍上撒谎的自己，说：没关系，今天就是零。零不代表出事。零代表这只猴子来过这里，把树上所有的桃子都吃光了。零是完整。零是圆满。</p>
 <p>他站起身，膝盖咔嗒响了一声——老寒腿，在蟠桃园湿气里蹲了几千年落下的病根。息壤保湿但不保温，他的膝盖软骨在长期跪地培土中磨薄了一层，骨缝里积了息壤的微粒，每一粒微粒都是活的，在他关节腔里继续呼吸，释放微量元素。疼痛是他的老伙伴。他拍了拍膝盖上的土，往园门口走。门口的木牍架子上放着今天的记录——今天没有偷桃的，没有落果，没有病虫害，没有异常。他在木牍上写了一个“零”，又在“零”下面用小字加了一行注：“斗战胜佛今日过园，无桃可偷。”写完把木牍插回架子上。风吹过园门口，木牍在风里轻轻晃。第一行注的墨迹还没干，被风吹皱，在“偷”字的最后一笔上晕开一小朵墨花。土地转身回园里，继续给那盆不知名的树浇水。</p>
   </article>
+  <div class="reader-feedback">
+    <span>这页有帮助吗？</span>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%B4%A7%E7%AE%8D%E5%84%BF%E7%9A%84%E5%86%85%E4%BE%A7&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E7%B4%A7%E7%AE%8D%E5%84%BF%E7%9A%84%E5%86%85%E4%BE%A7-%E5%99%A8%E7%89%A9%E4%BC%A0%E8%AE%B0.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%B4%A7%E7%AE%8D%E5%84%BF%E7%9A%84%E5%86%85%E4%BE%A7&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/people/%E7%B4%A7%E7%AE%8D%E5%84%BF%E7%9A%84%E5%86%85%E4%BE%A7-%E5%99%A8%E7%89%A9%E4%BC%A0%E8%AE%B0.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+  </div>
   <nav class="reader-pn"><a href="../people/百花羞外传.html">← 上一篇</a><a href="../people/紫金铃外传.html">下一篇 →</a></nav>
 </main>
 </body>

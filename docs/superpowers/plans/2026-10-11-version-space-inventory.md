@@ -1,4 +1,4 @@
-<!-- 元信息块（W706）：生成来源=人工撰写（Agent 起草·scripts/_w706_vscan.py 机器扫描取数）·生成模型=GLM（ZCode 2026-10-11）·生成日期=2026-10-11·核验状态=已核验（v2 修正版：首跑踩 W523 quotePath 坑漏扫约 1100 处·加 -c core.quotePath=false 后全量重扫） -->
+<!-- 元信息块（W706）：生成来源=人工撰写（Agent 起草·scripts/_w706_vscan.py 机器扫描取数）·生成模型=GLM（本地 Agent 会话 2026-10-11）·生成日期=2026-10-11·核验状态=已核验（v2 修正版：首跑踩 W523 quotePath 坑漏扫约 1100 处·加 -c core.quotePath=false 后全量重扫） -->
 
 # v 号使用点全量盘点（W706 v2 · 方案 D 形态改造前置测绘）
 

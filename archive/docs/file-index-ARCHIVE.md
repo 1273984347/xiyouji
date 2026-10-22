@@ -3626,7 +3626,7 @@
 | docs/_templates/（3 文件） | W413 | 恢复入库·模板资产无敏感内容 |
 | docs/superpowers/（11 文件） | W413 | 恢复入库·specs/plans 过程文档无敏感内容 |
 | docs/10-方法论沉淀/（14 篇） | W413 | 恢复入库·方法论沉淀无敏感内容（初版 W413 曾 gitignore） |
-| .gitignore | W413 | 修改·移除 W413 初版本地化规则（6 文档/方法论/_dev/_templates/superpowers）·保留 .workbuddy/ 与硬性排除规则（.env/审计档/依赖/构建产物/RAG 索引/基线） |
+| .gitignore | W413 | 修改·移除 W413 初版本地化规则（6 文档/方法论/_dev/_templates/superpowers）·保留本地工具目录与硬性排除规则（.env/审计档/依赖/构建产物/RAG 索引/基线） |
 | scripts/verify_delivery.py | W413 | 修改·CORE_DOCS 恢复 CHANGELOG + 交接文档两份硬门禁·移除 LOCAL_OPT_DOCS 逻辑·A4_DOCS 恢复 4 份 |
 | assets/fonts/source/（5 文件） | W413 | 入库·字体源 git add -f 强制入库（NotoSerifSC-var.ttf 24MB + JetBrainsMono ×2 + NotoSansSC woff2 ×2） |
 | README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W413 | 文档同步·头部版本描述改 W413 修正（严格审查入库边界·全部恢复入库）·项目说明 45 行 v2.3.27→v2.3.28 |

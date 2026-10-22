@@ -3,7 +3,7 @@
 
 > **📖 阅读契约（W707）**：索引型——找「东西在哪」时读顶层结构表+目标目录所在段；各板块下的建置沿革（v0.x W0xx 补齐…）是历史记录见 CHANGELOG，勿通读；计数与口径以磁盘实数与 [统计口径说明](docs/00-导读/统计口径说明.md) 为准。
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前批次：W794（2026-10-19）— PD-3 三项裁决全部落地，首页补随笔入口与全卷命名，数据提示改读者语，专题卡加图例与悬停明细，自查撤回一条假阳性—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前批次：W890（2026-10-23）— CI 阻塞项清偿：两处过期测试断言与上游有意变更同步、ruff 违规清零、Windows 存活探针改非终止式查询、依赖漏洞清零—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构
@@ -19,6 +19,7 @@
 | `references/` | 参考文献索引 |
 | `tools/` | 辅助工具脚本（章节切分等） |
 | `xiyouji-agent-web/` | Web Agent「西游记·渡口问津」·自研 OpenAI-compatible 引擎（server/engine/·全主流大模型端点·W680）·`PROJECT_CWD`=仓库根（自动解析）直接对话/检索 docs/ + 跑 scripts/ + 写 dataset/·引擎三键 `LLM_API_BASE`/`LLM_API_KEY`/`LLM_MODEL` 配于服务端 .env（与 scripts/rag 检索式生成并行·详见其 README） |
+| `xiyouji-desktop/` | 桌面版「离线全站客户端」（Electron·W804）：构建时把 `site/` 全量内容打进安装包，运行时经本地 127.0.0.1 静态服务打开；Windows NSIS / macOS universal / Linux AppImage 三平台安装包由 `.github/workflows/release.yml` 发布 GitHub Releases，electron-updater 自动更新（详见该目录 README） |
 | `README.md` | 项目说明 |
 | `CLAUDE.md` | AI 速查层（宿主自动加载·一行规则+权威指针·禁写会漂移的数字与现役值·W664） |
 | `STRUCTURE.md` | 本文件 |
@@ -120,7 +121,10 @@
 - `双索引可追溯改造.md`：CHANGELOG W### ID（正向时间线）+ file-index.md（反向文件索引）+ 双向链接字段 + 4 个使用场景（时间点→变更 / 文件→W### / 跨文件影响面追溯 / 改动后影响面扫描）+ file-index.md 结构 + CHANGELOG.md W### 段结构 + 维护规则
 
 ### 11-方案报告/（W737 新增·W758 改名并子目录化）
-报告复盘层——全部工作复盘/审查/调研报告的统一归档与索引（W737 对抗性审查后归置·承接 10-方法论沉淀 的报告类条目、根目录调研报告与 tmpe 审查产物）。目录下 27<!--stats:report_docs--> 篇 .md（现役报告 23 篇 + 索引 README + 计划方案 3 篇；复盘系列 12 篇归入 `工作复盘与优化分析报告/` 子目录；历史归档 9 篇在 archive/docs/复盘报告/ 以指针形式引用；全量篇目见 [README.md](docs/11-方案报告/README.md) 索引）。与 10-方法论沉淀 的分工：本目录收「报告」（过去周期发生了什么），10 收「方法论」（以后同类事怎么做）。
+报告复盘层——全部工作复盘/审查/调研报告的统一归档与索引（W737 对抗性审查后归置·承接 10-方法论沉淀 的报告类条目、根目录调研报告与 tmpe 审查产物）。目录下 51<!--stats:report_docs--> 篇 .md（现役报告 33 篇 + 索引 README + 计划方案 14 篇·W885 复测计入磁盘实数）。与 10-方法论沉淀 的分工：本目录收「报告」（过去周期发生了什么），10 收「方法论」（以后同类事怎么做）。
+
+### 12-提示词库/（W796 新增·素材归档）
+用户桌面 Prompt.txt 的整理入库（966 行 → 12 文件·原文照录）。性质=**素材库非任务清单**——执行其中任务须单独授权；色值冲突以 HEX 为准（校准表见 11-colors§二）。入口：`00-总目录.md`（模块索引+整理决策）。
 
 ### S2-外部分享/（W404 新增·内容分发）
 
@@ -146,11 +150,11 @@
 
 开发内部推进计划/执行方案（v07v08 等）。
 
-### _templates/（内容模板）
+### _templates/（现役模板位·W797 起）
 
-通用内容模板（article-template/handoff-checklist/validation-checklist）。
+该目录留作**现役模板位**（当前 0 直属文件）。
 
-> ⚠️ 注意：`article-template.md` 的六段式与线上人物/主题内容实际结构**脱节**（L1 贴合率 0%），新增内容以各类实际结构为准，勿直接套用。
+> 历史模板（article-template/handoff-checklist/validation-checklist）已于 W797 归馆 `archive/docs/templates/`（采用率 0%·馆藏说明含退休依据）；现行交付自检与结构约定见 `docs/00-导读/文档规范.md` §12。
 
 ## source/ 子目录
 

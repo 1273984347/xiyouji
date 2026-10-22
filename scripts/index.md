@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（209）
+## 文件（252）
 
 ### Markdown 文档
 
@@ -65,8 +65,7 @@
 - `_check_json_copies.py`
 - `_check_pipeline_consistency.py`
 - `_cite_probe.py`
-- `_find_css_breaks.py`
-- `_fix_css_paren.py`
+- `_gen_search_index.py`
 - `_s4_audit_a_track_anchors.py`
 - `_s4_audit_doi.py`
 - `_s4_biblio_analysis.py`
@@ -121,11 +120,45 @@
 - `_w757_footer_bump.py`
 - `_w757_negative_check.py`
 - `_w757_rename_cascade.py`
+- `_w818_file_protocol_probe.py`
+- `_w818_inventory.py`
+- `_w819_design_audit.py`
+- `_w823_db_schema_probe.py`
+- `_w826_container_survey.py`
+- `_w826_contrast_audit.py`
+- `_w826_migration_plan_check.py`
+- `_w851_j1_name_audit.py`
+- `_w851_j2_evidence.py`
+- `_w851_visual_regression_probe.py`
+- `_w857_plan_template_review.py`
+- `_w862_accent_text_audit.py`
+- `_w862_diff_review.py`
+- `_w862_tokenize_spacing.py`
+- `_w864_accent_audit.py`
+- `_w864_migrate.py`
+- `_w876_backfill_w875.py`
+- `_w876_baseline_probe.py`
+- `_w876_c_text_swap.py`
+- `_w876_diff_audit.py`
+- `_w876_site_audit.py`
+- `_w876_value_check.py`
+- `_w880_og_image_split.py`
+- `_w881_fix_rule_line.py`
+- `_w881_rule_line_scan.py`
+- `_w885_index_revert.py`
+- `_w885_viz_alpha.py`
+- `_w885_wire.py`
+- `_w886_en_audit.py`
+- `_w886_en_migrate.py`
+- `_w888_chapter_plate.py`
+- `_w888_index_revert.py`
+- `_w888_wire.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
 - `agg_entities.py`
 - `archive_file.py`
+- `backfill_changelog.py`
 - `baseline_snapshot.py`
 - `batch_cascade.py`
 - `build_reader.py`
@@ -159,7 +192,12 @@
 - `check_js_syntax.py`
 - `check_kpi_card_base.py`
 - `check_motion_ban.py`
+- `check_no_brand_refs.py`
+- `check_no_goatcounter.py`
+- `check_perf_shadow.py`
+- `check_plan_template.py`
 - `check_script_coverage.py`
+- `check_search_index_fresh.py`
 - `check_seo_head.py`
 - `check_story_timeline_sync.py`
 - `check_structure.py`
@@ -182,7 +220,6 @@
 - `generate_csp.py`
 - `inject_chart_a11y.py`
 - `inject_descriptions.py`
-- `inject_goatcounter.py`
 - `inject_rum.py`
 - `inject_seo_head.py`
 - `inject_visit_log.py`
@@ -190,6 +227,7 @@
 - `judge_gate.py`
 - `lint_links.py`
 - `new_page.py`
+- `obs_sample.py`
 - `optimize-html-size.py`
 - `package_analysis_sync.py`
 - `perf_monitor.py`
@@ -226,6 +264,10 @@
 - `_pmc_pdf_fetch.js`
 - `_smoke_batch.js`
 - `_w621_render_png.js`
+- `_w854_cdp.mjs`
+- `_w854_layout_probe.mjs`
+- `_w854_layout_probe_app.mjs`
+- `_w865_layout_probe.mjs`
 - `batch_screenshots.js`
 - `check_chart_values.js`
 - `check_contract_smoke.js`
@@ -233,6 +275,7 @@
 - `check_data_drift.js`
 - `check_js_syntax.js`
 - `check_screenshot_gates.js`
+- `check_vermilion_solid.js`
 - `debug_page.js`
 - `diagnose_overflow.js`
 - `extract_datasets.js`

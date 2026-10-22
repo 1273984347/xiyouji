@@ -144,7 +144,6 @@ jobs:
               --output-path=lighthouse-report \
               --only-categories=performance,accessibility,best-practices,seo \
               --throttling-method=simulate \
-              --blocked-url-patterns="*1273984347.goatcounter.com*" \
               --chrome-flags="--headless --no-sandbox"
 
       - name: Stop static server
@@ -280,7 +279,13 @@ jobs:
         run: python scripts/check_js_syntax.py --all
 
       - name: Run mypy (report-only, W422)
-        run: mypy scripts/ --ignore-missing-imports --non-interactive || true
+        # W833：去掉 --non-interactive——mypy ≥ 1.11 起该选项**必须**搭配 --install-types，
+        # 单独使用直接在参数解析阶段报错（实测：error: --non-interactive is only supported
+        # with --install-types）→ 配合 `|| true` 整条命令静默失败 ⇒ **类型检查从未真正执行过**
+        # （去掉该参数后实跑：Found 3353 errors in 275 files·此前一次都没跑过）。
+        # 保持 report-only 不阻断；输出截尾 5 行（避免 3000+ 行日志淹没 CI 输出），
+        # 计数行本身即含总量与文件数。
+        run: mypy scripts/ --ignore-missing-imports 2>&1 | tail -5 || true
 
   pytest-unit:
     name: Unit Tests (pytest)
@@ -350,6 +355,10 @@ jobs:
       - name: Run verify_delivery.py
         run: python scripts/verify_delivery.py
 
+      # W806：GoatCounter 统计链退役防回退守卫（全站零 goatcounter 引用）
+      - name: "Guard: no GoatCounter references (W806)"
+        run: python scripts/check_no_goatcounter.py
+
   e2e-interaction:
     name: E2E Interaction (test_site_quality.js)
     runs-on: ubuntu-latest
@@ -403,14 +412,35 @@ jobs:
       - name: Install deps
         run: npm --prefix xiyouji-agent-web ci
 
+      # W808：E2E 需要 Playwright + chromium（仓内 playwright 装在 scripts/·与 tests/e2e 同一份）
+      - name: Install scripts deps + Playwright chromium (E2E 运行条件·W808)
+        run: |
+          npm ci --prefix scripts
+          cd scripts
+          npx playwright install --with-deps chromium
+
       # W757 修复：W752 落地的安全单测（tools.test.ts 权限边界 44 例 / audit.test.ts 审计落盘 /
       # citationGuard.test.ts 引文守卫）此前只在本地跑——全 workflow grep `test:server` 零命中，
       # CI 只做 build + golden-evals（结构校验），这批安全防线在 CI 中不设防。
       - name: Security unit tests (tools 权限边界 / audit 审计 / citationGuard·W757)
         run: npm --prefix xiyouji-agent-web run test:server
 
+      # W808：新增第二层集成测试——真实起服 + 真实 HTTP + 真实 SQLite，断言真实响应与落库状态
+      # （不用 mock 冒充）。覆盖就绪探针 / request ID 全链路 / 边界校验 / 错误体形状 / 会话 CRUD。
+      - name: Integration tests (真实起服·契约与落库断言·W808)
+        run: npm --prefix xiyouji-agent-web run test:integration
+
+      # W808：新增第一层前端单元测试（vitest·api client / 错误文案映射 / 会话 hook 失败态）
+      - name: Client unit tests (vitest·api client + 错误映射 + hooks·W808)
+        run: npm --prefix xiyouji-agent-web run test:client
+
       - name: Build (tsc -b && vite build)
         run: npm --prefix xiyouji-agent-web run build
+
+      # W808：新增第三层 E2E——真实浏览器 + 真实构建产物 + 真实后端 + 真实 SQLite，
+      # 走完「输入 → 发送 → 流式渲染 → 落库 → 反馈」全流程（外部大模型端点用 e2e/mockLlm.mjs 替身）。
+      - name: E2E chat flow (Playwright·真实浏览器全链路·W808)
+        run: npm --prefix xiyouji-agent-web run test:e2e
 
       - name: Golden evals validate (W598·schema+路径真实性·无 LLM)
         run: node xiyouji-agent-web/evals/validate.mjs
@@ -423,3 +453,33 @@ jobs:
           path: xiyouji-agent-web/dist
           if-no-files-found: ignore
           retention-days: 30
+
+  desktop-build:
+    # W804：桌面版构建回归（xiyouji-desktop/ 为 Electron 壳 + 内嵌站点内容；
+    # 发布流水线见 release.yml，本 job 只验证「安装包能打出来」，不产 Release）
+    name: Desktop Build (xiyouji-desktop)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          # 桌面版 electron 44 / electron-builder 26 与 agent-web 同用 Node 22
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: xiyouji-desktop/package-lock.json
+
+      - name: Install deps
+        run: npm --prefix xiyouji-desktop ci
+
+      # prepare:content 生成桌面版内置内容清单（generated/ 为生成物，不入库）
+      - name: Prepare bundled content
+        run: npm --prefix xiyouji-desktop run prepare:content
+
+      - name: Unit tests (node --test)
+        run: npm --prefix xiyouji-desktop test
+
+      # electron-builder --dir 只解包不产安装包：验证 asar/extraResources/publish 配置可构建
+      - name: Pack check (electron-builder --dir)
+        run: npm --prefix xiyouji-desktop run pack:dir

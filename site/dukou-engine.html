@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-If6roWejloBn4giuSBxZGrd8vCODgFvv37ap29JgCTE='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777 https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-If6roWejloBn4giuSBxZGrd8vCODgFvv37ap29JgCTE='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
   // 夜读模式（W488）：首屏防 FOUC
@@ -20,7 +20,7 @@
     <meta property="og:title" content="西游·渡口 — 无我写作引擎（原型）">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://1273984347.github.io/xiyouji/dukou-engine.html">
-    <meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+    <meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
@@ -30,7 +30,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="西游·渡口 — 无我写作引擎（原型） · 详解西游记">
     <meta property="og:description" content="西游·渡口 — 无我写作引擎（原型） · 详解西游记">
-                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -114,7 +114,7 @@
     /* —— 图表五色雅集色板（W334 图表规范） —— */
     --chart-1: #C8463A;       /* 朱砂 */
     --chart-2: #3A6B8C;       /* 靛蓝 */
-    --chart-3: #C9A063;       /* 赭金 */
+    --chart-3: #B38F58;       /* 赭金 */
     --chart-4: #6B8E5A;       /* 苔绿 */
     --chart-5: #D8CFBC;       /* 米灰 */
     --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
@@ -210,7 +210,7 @@ html[data-theme="dark"] {
     --paper: #2B2419;
     --paper-warm: #33291B;
     --line: rgba(242, 235, 220, 0.14);
-    --accent: #E0604F;
+    --accent: #E46250;
     --accent-deep: #C94F3F;
     --accent-soft: #E8A99F;
     --accent-tint: rgba(224, 96, 79, 0.14);
@@ -368,6 +368,46 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
   --z-tooltip: 70;
 }
 
+/* ===== v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名） ===== */
+/* 来源：docs/11-方案报告/界面视觉重设计细化规格-v4-2026-10-20.md §4 终稿 */
+/* 口径：34 个零消费新名 / 35 处定义（暗色组 --accent-text 为同名第二处） */
+/* defer 四项随迁移批逐页 proof：--chart-1..6 与 --accent-soft 重述 · 暗色 --accent 改值 · 暗色 --chart-3/5 新增 */
+:root {
+    /* —— 间距刻度（4px 基准 + 2/10 半格） —— */
+    --space-0: 0px;   --space-1: 2px;   --space-2: 4px;   --space-3: 8px;
+    --space-4: 12px;  --space-5: 20px;  --space-6: 24px;  --space-7: 32px;
+    --space-8: 40px;  --space-9: 48px;  --space-10: 64px; --space-11: 80px;
+    --space-12: 96px;
+    /* 间距语义档（tight 紧凑 / base 常规 / loose 疏行 / block 区块 / section 章段 / hero 首屏） */
+    --gap-tight: var(--space-3);   --gap-base: var(--space-5);
+    --gap-loose: var(--space-6);   --gap-block: var(--space-7);
+    --gap-section: var(--space-10); --gap-hero: var(--space-12);
+
+    /* —— 容器三档（裁决 3） —— */
+    --container-read: 760px; --container-content: 1120px; --container-wide: 1320px;
+    /* —— 栅格 —— */
+    --grid-columns: 12; --grid-gutter: var(--space-6);
+
+    /* —— 排版角色（语义层：字重 + 族 + 字号 / 行高） —— */
+    --type-display: 600 var(--font-serif) clamp(34px, 4.4vw, 56px) / 1.15;
+    --type-title:    600 var(--font-serif) 24px / 1.30;
+    --type-subtitle: 500 var(--font-serif) 18px / 1.50;
+    --type-lead:     400 var(--font-sans) 17px / 1.75;
+    --type-body:     400 var(--font-sans) 15px / 1.80;
+    --type-label:    500 var(--font-sans) 13px / 1.50;
+    --type-caption:  400 var(--font-sans) 12px / 1.60;
+    --type-eyebrow:  500 var(--font-mono) 12px / 1.40;
+    --type-number:   500 var(--font-mono) 32px / 1.10;
+
+    /* —— 色彩角色补充（裁决 1 修法·朱砂文字落 --bg 专用档） —— */
+    --accent-text: #C7463A;          /* 朱砂文字落在 --bg 上（4.50:1） */
+}
+
+/* 暗色组补充（裁决 4：双主题平级）——--accent-text 与浅色同名、暗色取值不同 */
+html[data-theme="dark"] {
+    --accent-text: #E0604F;
+}
+
 /*
  * system.css — 详解西游记 · 全站组件设计系统
  * ----------------------------------------------
@@ -439,7 +479,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -478,11 +518,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -1229,22 +1269,22 @@ td.num, th.num {
     background: var(--paper); color: var(--ink); line-height:1.8;
   }
   header{
-    padding:32px 24px 16px; border-bottom: 2px solid var(--cinnabar);
+    padding:var(--space-7) var(--space-6) 16px; border-bottom: 2px solid var(--cinnabar);
     background: linear-gradient(180deg,#f3ece0,var(--paper));
   }
-  header h1{margin:0; font-size:30px; color: var(--cinnabar); letter-spacing:2px; line-height:1.3;}
+  header h1{margin:0; font-size:30px; color: var(--accent-text); letter-spacing:2px; line-height:1.3;}
   header p{margin:6px 0 0; color: var(--umber); font-size:13px;}
-  main{max-width: 768px; margin:0 auto; padding:24px;}
+  main{max-width: 768px; margin:0 auto; padding:var(--space-6);}
   .panel{
     border: 1px solid var(--line); border-radius: 10px; padding:18px;
-    background: var(--paper); margin-bottom:20px;
+    background: var(--paper); margin-bottom:var(--space-5);
   }
-  label{display:block; font-size:13px; color: var(--indigo); margin-bottom:8px;}
+  label{display:block; font-size:13px; color: var(--indigo); margin-bottom:var(--space-3);}
   input[type=text]{
-    width:100%; padding:10px 12px; font-size:15px; font-family:inherit;
+    width:100%; padding:10px var(--space-4); font-size:15px; font-family:inherit;
     border: 1px solid var(--line); border-radius: 6px; background: var(--paper);
   }
-  .row{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;}
+  .row{display:flex; gap:10px; margin-top:var(--space-4); flex-wrap:wrap;}
   button{
     font-family:inherit; font-size:14px; padding:9px 18px; cursor:pointer;
     border: 1px solid var(--cinnabar); border-radius: 6px; color: var(--paper);
@@ -1254,11 +1294,11 @@ td.num, th.num {
   button:hover{opacity:.88;}
   #out{
     white-space:pre-wrap; font-size:15px; color: var(--ink);
-    border-left: 4px solid var(--moss); padding:4px 0 4px 16px; min-height:120px;
+    border-left: 4px solid var(--moss); padding:var(--space-2) 0 var(--space-2) 16px; min-height:120px;
   }
   .meta{font-size:12px; color: var(--umber); margin-top:10px;}
   footer{
-    text-align:center; padding:20px; color: var(--umber); font-size:12px;
+    text-align:center; padding:var(--space-5); color: var(--umber); font-size:12px;
     border-top: 1px solid var(--line);
   }
   code{background: #f0e9dc; padding:1px 5px; border-radius: 4px;}
@@ -1289,7 +1329,7 @@ td.num, th.num {
   html[data-theme="dark"] #out{border-left-color: var(--moss);}
   .theme-toggle{
     display:inline-flex; align-items:center; justify-content:center;
-    width:34px; height:34px; margin-top:4px;
+    width:34px; height:34px; margin-top:var(--space-2);
     border: 1px solid var(--line); border-radius: 999px;
     background: transparent; color: var(--indigo); cursor:pointer;
     transition:border-color .15s, color .15s, transform .15s;
@@ -1307,7 +1347,6 @@ td.num, th.num {
   <script src="js/theme-init.js"></script>
   <script defer src="js/rum.js"></script>
   <script defer src="js/visit-log.js"></script>
-  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="static/js/goatcounter.js"></script>
 <link rel="preload" href="static/fonts/NotoSansSC-Regular.subset.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="static/fonts/noto-serif-sc-shared.subset.woff2" as="font" type="font/woff2" crossorigin>
 </head>
@@ -1318,8 +1357,8 @@ td.num, th.num {
       <h1>西游 · 渡口</h1>
       <p>无我写作引擎（原型）— 输入任意路人 / 器物 / 地名，生成一篇约 300 字"渡口档案"草稿</p>
     </div>
-    <a href="index.html" style="font-size:13px;color:var(--indigo);text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:8px 14px;white-space:nowrap;margin-top:4px;">← 返回详解西游记首页</a>
-    <a href="en/dukou-engine.html" style="font-size:13px;color:var(--indigo);text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:8px 14px;white-space:nowrap;margin-top:4px;">EN / 英文 →</a>
+    <a href="index.html" style="font-size:13px;color:var(--indigo);text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:var(--space-3) 14px;white-space:nowrap;margin-top:var(--space-2);">← 返回详解西游记首页</a>
+    <a href="en/dukou-engine.html" style="font-size:13px;color:var(--indigo);text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:var(--space-3) 14px;white-space:nowrap;margin-top:var(--space-2);">EN / 英文 →</a>
     <button id="themeToggle" class="theme-toggle" type="button" aria-label="切换夜读模式" title="夜读模式">
       <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
@@ -1347,9 +1386,9 @@ td.num, th.num {
     <label>佛法=AI 图谱（W326 · 可视化 · 来自 /graph）</label>
     <div class="row" style="margin:6px 0 10px;">
       <span class="meta" style="margin:0;">点击任意节点展开其关联 ·</span>
-      <button id="graphReset" class="ghost" style="font-size:12px;padding:2px 12px;">重置图谱</button>
+      <button id="graphReset" class="ghost" style="font-size:12px;padding:var(--space-1) var(--space-4);">重置图谱</button>
     </div>
     <div id="graphBox"></div>
   </div>
 </main>
-<footer>佛法=AI · 缘起即算法 · W794 PD-3 三项裁决全部落地，首页补随笔入口与全卷命名，数据提示改读者语，专题卡加图例与悬停明细，自查撤回一条假阳性（PD-3 三项裁决落地，随笔入口与全卷命名就位，假阳性自查撤回） · W793 产品设计套件两页启发式走查落地，八条发现全部防虚构校验，sync_docs 退休替换为现役门禁，冻结适用范围立单一表述（两页走查八条发现全部防虚构校验，sync_docs 退休，冻结范围立单一表述） · W792 全仓待办计划方案状态核查，逐项取证判定无假收敛，五处陈滞修正落地，真开面约三十项多为作者时间类，四项待用户决策（全仓待办逐项取证无假收敛，五处陈滞修正落地，真开面多为作者时间类） · W791 agent-web 三类攻击面负向测试固化，安全逻辑提取得可测面，真服集成覆盖限流与鉴权，计划状态陈滞回写，服务端测试套件扩充至六十七例（三类攻击面负向测试十七例固化，安全逻辑提取获回归面，计划状态陈滞回写） · W790 外部评审第三轮重复投递逐条核查回应，七项与上轮全同且事实已漂移，四项不成立三项部分成立，唯一实质增量为 agent 攻击面负向测试缺口，报告归档并联登四条待办（外部评审第三轮七项核查四不成立三部分成立，唯一实质增量登记待办，报告归档） · W789 外部门禁重构提案对盘登记，逐字节提取五文件与磁盘现势比对，提案十五项改动已全部由此前重构批次落地，余量七处差异均为改号回退或等价噪声，裁定不执行，零代码变更，登记以防重复收编（外部重构提案对盘后裁定不执行，十五项改动均已在此前重构批落地，七处余量差异全部驳回） · W788 重构收尾清理两处无消费点代码，截图门禁删新增死常量公共模块删未用导入，净删两行零行为变化，验收为截图门禁八百五十七页逐页结果相同加破防态负样本可红加自检十二例通过（JS 门禁两处死代码清理，八百五十七页逐页结果相同，破防态负样本可红） · W787 外部重构提案收编第六批末批，分隔线与告警线常量化并提步进标题函数，git 状态与体量解析与版本解析拆函数，22 项门禁脚本改动点清单经裁定不执行，对拍验收为完整运行输出与退出码逐字相同（release.py 常量化与拆函数，完整运行输出逐字相同，门禁清单裁定不执行） · W786 外部重构提案收编第五批，Cypher 拼装提 _build_cypher 快照组装提 _build_snapshot OUTPUT 中间变量收敛路径拼接，rag 家族其余五件不收留机械通道，对拍验收为两产物与运行日志逐字节相等（graph_seed_neo4j 拆产物构建双函数，输出逐字节相等） · W785 外部重构提案收编第四批重件档其一，CORS 白名单与 MIME 映射与检索片段窗口提模块级常量，do_GET 路由拆四臂处理方法并新增 _send_error_json 统一错误结构，文档页表格行渲染提 _render_dataset_row，全部路由状态码与响应体逐字节保持，对拍为起服务前后十一个端点工件逐字节比对（api_server 路由拆臂与常量提级，端点响应对拍逐字节相等） · W784 外部重构提案收编第三批小件档，chapter_stats 诗词计数拆双函数聚合提 _aggregate_totals，word_frequency 提 _is_valid_token 与最短长度常量，narrative_experiment 拆输出口志函数 build_summary 两次调用改一次复用，hardships_81 三标签字典提模块级并拆交叉统计与 label 化函数，line_check self_test 拆三查并提 _query_one，对拍验收为五脚本前后输出逐字节相等（五小件行为保持重构，前后输出逐字节相等，全部溯源注释保留） · W783 外部重构提案收编第二批，character_appearance 拆聚合三函数并提首回计算函数保急切求值语义，character_network 拆共现累积函数 combinations 等价改写，character_nlp 整文件重写提案本批不收留待机械通道，对拍验收为两脚本前后输出逐字节相等（B_人物两脚本行为保持重构，前后输出逐字节相等，nlp 整文件重写留待机械通道） · …更早批次详见 CHANGELOG.md 
+<footer>佛法=AI · 缘起即算法 · W890 CI 阻塞项清偿：两处过期测试断言与上游有意变更同步、ruff 六项清零、Windows 存活探针改非终止式查询、Pillow 升级清 25 个 CVE（CI 阻塞项清偿：两处过期测试断言与上游有意变更同步、ruff 六项清零、Windows 存活探针改非终止式查询、Pillow 升级清 25 个 CVE） · W889 GitHub 主页展示位复位与首屏重排、载体改名让位、首屏 30 秒上手、元数据补齐、dev 合 main 对齐 Pages（GitHub 主页展示位复位、.github 目录导读改名让位给根 README、首屏重排为 30 秒上手与项目定位与在线体验与下载与目录导航、topics 与描述补齐、dev 合 main 使 Pages 对齐最新批次） · W887 en 收口 110 页合并四批一次做完 第 49 槽门禁范围扩至全 en 138 页 豁免分册增至 302 条（英文站剩下的四批合成一批一次做完，机检门禁的范围也扩到了全站英文页） · W886 en 首批 28 页迁到位 C 渠 49 条规则 + seal 淡底 28 页 + KPI 顶条按行收敛 16 页 + 25 条四类豁免登记（英文站第一批二十八页把朱砂文字换成深档、实底按四类口径收敛或豁免，剩下四批照此推进） · W883 朱砂实底常驻门禁挂第 49 槽（浏览器计算样式实测 每页非豁免超 3 即拦 增量缓存）且六段递延账一次结清（裁决 2 从一次性收敛变成常驻机器断言，四类存量裁决落簿，六段递延账在补段里一次结清） · W876 C 渠规则级换色 173 条（落 bg 1087→253 降 77%）+ chart-3 与暗色 accent 两处值切换 + inline_css 回吞迁移事故修复（328 页自 HEAD 重建）（朱砂文字落在纸白底上就换深档，两处令牌改值让对比度全部过线，回吞事故在收尾审计里现形并修复） · W874 把九个递延批按号序补回 CHANGELOG 与 file-index，让级联断言重新成立、B11 可进（九段欠账一次补回，号序链接上之后 B11 的级联才有落脚的地方） · W864 十页结构页按裁决迁移：KPI 顶条收敛到首卡、徽章转淡底、间距令牌化 216 处，C 渠与 chart-3 拆专项批（结构页的朱砂实底大多长在数据编码上，收敛只动装饰那一层，数据语义进豁免清单） · W863 把十一个已收官但未立段的批次按号序补回 CHANGELOG 与 file-index，让级联的号序断言重新成立（号序链断在 W852 会让后面每个新批都过不了级联，先把十一段欠账一次补回） · W851 把 W826 细化规格 §4 的 v4 令牌增量落进 tokens.css，只落零消费新名、撞名项 defer，用机器证明现役页面视觉零变化（设计迁移空转了二十多批，缺的不是页面而是令牌，这批把令牌落下去，并且用机器证明落下去之后一个像素都没动） · W850 补齐 Q2 悬空的真因，把等十批样本从口号变成可执行的按批采集机制（悬空的不是十批数字，是从没存在过的采集机制，现在把它造出来） · W849 在交付门禁挂上性能影子槽，按批采静态成本代理攒基线，暂不判红也不设阈值（给性能装一只只记录不拦路的手，先把基线攒起来，再谈阈值） · …更早批次详见 CHANGELOG.md 

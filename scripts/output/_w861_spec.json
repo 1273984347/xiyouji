@@ -1,0 +1,18 @@
+{
+  "batch": "W861",
+  "date": "2026-10-22",
+  "title": "W861 设计资产归档收尾批（过程截图 13 张 + 4 个未选定方向备选 SVG + 跨会话回执底件）",
+  "desc": "把临时区里还有留档价值的过程材料搬进 assets/design/，其余随临时区清空，另附修 19 条死链",
+  "head_entry": "2026-10-22（W861 设计资产归档收尾批）",
+  "head_sentence": "归档的收尾是把有留档价值的过程材料也搬进仓，其余随临时区清空",
+  "changelog_body": "\n\n> **来源**：W859 把 Logo 源文件、18 张概念稿与可复算工具链归档进 assets/design/ 后，临时区 tmpe/_reports/ 下仍留有过程材料。本批把其中**有留档价值**的部分移入仓内，其余（工具脚本、门禁输出、提交信息、已入库的资产副本）随临时区一并清空。\n> - **文件**：assets/design/alternatives/（4 件）、assets/design/screenshots/（13 张）、assets/design/process/RECEIPT-W855.md（1 件）、assets/design/README.md、docs/00-导读/W批次编号对账表.md。\n> - **新增三块**：`alternatives/` 4 件——四个未选定方向的图形标矢量源（棒《取经录》/ 幡《问津》/ 卷《拾遗》/ 图《十万八千里》），与定稿共用同一套笔触引擎与配色令牌，改方向不必重画；`screenshots/` 13 张——视觉留档（五方向 × 深浅底拼版、两批概念稿拼版、四方向分区呈现、落地图标三档实测、组合标预览、方向 I 特写、站点实拍、预览页整页）；`process/` 1 件——跨会话回执底稿 RECEIPT-W855.md。\n> - **附修**：19 条死链 hotfix（临时区文件搬走后引用路径失效，随批修正）。\n> - **纪律**：只新增 assets/ 下素材与引用修正，不改任何页面行为与门禁判据；版段不落（随补段批 W863 按号序回写）。",
+  "milestone_block": "- **W861 设计资产归档收尾批**：\n  - assets/design/ 补三块：未选定方向备选 SVG 4 件 + 过程截图 13 张 + 跨会话回执底稿 1 件\n  - 其余过程材料随临时区清空；附修 19 条死链",
+  "agents_note": "W861 补位 spec（W863 补段批按提交记录与台账行整理）：归档收尾的判断标准是「以后还会不会看」——备选方向留着改方向不用重画，过程截图留着回看视觉决策，其余全清。",
+  "file_index_rows": [
+    "| assets/design/alternatives/ | W861 | 新增：四个未选定方向的图形标矢量源 4 件 |",
+    "| assets/design/screenshots/ | W861 | 新增：过程截图 13 张（拼版/特写/实拍/预览页） |",
+    "| assets/design/process/RECEIPT-W855.md | W861 | 新增：跨会话回执底稿 |",
+    "| assets/design/README.md | W861 | 索引更新（三块新增登记） |",
+    "| docs/00-导读/W批次编号对账表.md | W861 | 认领行与补段批回填 |"
+  ]
+}

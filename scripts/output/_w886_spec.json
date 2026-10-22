@@ -1,0 +1,23 @@
+{
+  "batch": "W886",
+  "date": "2026-10-22",
+  "title": "W886 en 迁移批 1·入口与结构 28 页（C 渠换色 + 实底机械收敛 + 四类豁免·④ 首批）",
+  "desc": "en 首批 28 页迁到位 C 渠 49 条规则 + seal 淡底 28 页 + KPI 顶条按行收敛 16 页 + 25 条四类豁免登记",
+  "head_entry": "2026-10-22（W886 en 迁移批 1·入口与结构 28 页）",
+  "head_sentence": "英文站第一批二十八页把朱砂文字换成深档、实底按四类口径收敛或豁免，剩下四批照此推进",
+  "changelog_body": "\n\n> **来源**：用户令「继续」。④ en 138 页迁移首批（5 批拆分：core 76 / character 12 / myth 14 / essay 36·按字母序确定性切批）。\n> - **文件**：site/en/ 28 页、scripts/_w886_en_audit.py、scripts/_w886_en_migrate.py、scripts/output/_w886_en_audit.json、scripts/output/_w886_en_audit_b1.json、scripts/output/_w886_en_audit_b1_after.json、scripts/output/_w864_accent_exemptions.json（W886 分册 25 条）、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md。\n> - **en 全量现状审计（先量后切）**：138 页四渠测量——C 渠落 bg 朱砂文字 **1,084 处 / 62 页**（与 zh 数据页 1,087 处同量级）；朱砂实底 **767 处 / 135 页**（zh 同口径 457 处 / 89 页·en 从未进迁移面）；令牌旧值 **0 页**（W876 的 326 页同步已顺带覆盖 en 138 页）；容器字面量 164 处（A 渠道属另一笔迁移欠账·本批不动并如实记账）。\n> - **批 1（28 页·core 前 28）**：C 渠规则级换色 **49 条规则 / 14 页**（--accent→--accent-text·复用 W876 换色器与批内审计子集）；B 渠机械化两步——`.seal` 实底→淡底 **28 页**（v4 §3.2 徽章条款·background→--accent-tint、白字→--accent）与 KPI 顶条按行收敛规则 **+16 页**（同排首卡保顶条·口径同 zh 页 W870 逐字规则·插页尾 style 保级联序）；余量按四类口径登记 **W886 分册 25 条豁免**（数据语义色片 15 条 / 首卡顶条 5 条 / 功能交互 5 条·全簿累计 121 条）。\n> - **验收**：实底 259→205（−54）·C 渠 275→38（−237·残留为 JS 内联样式元素·与 zh 的 253 同族）；28 页非豁免全部 ≤3（第 49 槽 judgePage 同款判据实算）；CSP 856 页 0 漂移。\n> - **注**：第 49 槽门禁范围本批不扩 en（未迁移的 110 页会红）——第 5 批收口时统一扩至全 en 并按批递减豁免。\n> - **段链**：W885 递延段由本批补段回写（顶段 W885）；W884 为无 spec 空洞（并行批未落 spec·如实记账）。",
+  "milestone_block": "- **W886 en 迁移批 1（入口与结构 28 页·④ 首批）**：\n  - en 全量审计：C 1,084/62 页 · 实底 767/135 页（从未收敛）· 令牌值 W876 已同步 · 容器字面量 164（A 渠欠账另记）\n  - 批 1：C 渠 49 条/14 页 · seal→淡底 28 页 · KPI 顶条规则 +16 页 · 25 条四类豁免（W886 分册·全簿 121）\n  - 实底 259→205（−54）· C 渠 275→38（−237）· 28 页非豁免全 ≤3 · CSP 0 漂移\n  - 第 49 槽范围收口时扩 en（第 5 批）· W885 段回补（W884 无 spec 空洞如实记账）",
+  "agents_note": "二〇二六年十月二十二日（W886）开 en 迁移首批——先把 138 页四渠量清（C 1,084 处·实底 767 处从未收敛），再按 core/character/myth/essay 分桶切五批；机械化只做 seal 淡底与顶条按行收敛两条，语义色片与功能交互按四类口径进豁免登记簿，首批 28 页验到非豁免全 ≤3、CSP 零漂移。",
+  "file_index_rows": [
+    "| scripts/_w886_en_audit.py | W886 | 新增：en 四渠现状审计（C/实底 浏览器实测 + 令牌旧值/容器字面量静态） |",
+    "| scripts/_w886_en_migrate.py | W886 | 新增：en B 渠机械化驱动（seal→淡底 + KPI 顶条按行规则 + 批审计子集导出） |",
+    "| scripts/output/_w886_en_audit.json | W886 | en 全量审计（C 1,084/62 页·实底 767/135 页） |",
+    "| scripts/output/_w886_en_audit_b1.json | W886 | 批 1 前置审计子集（C 275·实底 259） |",
+    "| scripts/output/_w886_en_audit_b1_after.json | W886 | 批 1 迁移后审计（C 38·实底 205） |",
+    "| site/en/（28 页） | W886 | C 渠 49 条规则 + seal 淡底 28 页 + KPI 顶条规则 16 页 |",
+    "| scripts/output/_w864_accent_exemptions.json | W886 | W886 分册 25 条（四类口径·全簿 121 条） |",
+    "| docs/00-导读/W批次编号对账表.md | W886 | 认领行与收官回填 + W885 段状态翻转 |",
+    "| CHANGELOG.md | W886 | W886 段 + W885 段回补 |",
+    "| scripts/output/file-index.md | W886 | 同批两段回写 |"
+  ]
+}

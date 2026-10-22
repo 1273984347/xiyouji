@@ -1,0 +1,71 @@
+# electron-builder 配置（W804 桌面版）
+# 文档：https://www.electron.build/configuration/configuration
+# 注意：publish 仅用于生成 app-update.yml；本地构建一律 --publish never，实际发布由 CI 执行。
+appId: com.xiyouji.desktop
+productName: 取经录
+copyright: Copyright © 取经录项目
+
+directories:
+  buildResources: assets
+  output: dist
+
+# 本项目没有原生模块（electron-updater 为纯 JS），跳过 electron-rebuild 步骤，加快打包。
+npmRebuild: false
+
+# 打进 app.asar 的只有主进程/预加载/菜单等 JS 代码与 package.json；
+# 站点静态内容走 extraResources（不打进 asar，便于整目录替换与增量升级）。
+files:
+  - "src/**"
+  - "package.json"
+
+# from 相对于本目录（xiyouji-desktop/）：站点内容直接取仓库根 site/，不在本目录复制副本。
+extraResources:
+  - from: "../site"
+    to: "site"
+  - from: "generated/content-version.json"
+    to: "content-version.json"
+
+# electron-updater 依据此配置在打包产物 resources/app-update.yml 中生成更新源。
+publish:
+  - provider: github
+    owner: "1273984347"
+    repo: "xiyouji"
+    releaseType: release
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  icon: assets/icon.png
+  # 产物名使用字面量（不用 ${arch}），保证发布工作流与 README 直链可硬编码断言。
+  artifactName: "xiyouji-desktop-win-x64.${ext}"
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: 取经录
+  deleteAppDataOnUninstall: false
+
+mac:
+  target:
+    - dmg
+    - zip
+  category: public.app-category.education
+  icon: assets/icon.png
+  artifactName: "xiyouji-desktop-mac-universal.${ext}"
+  # 未签名构建（CI 设 CSC_IDENTITY_AUTO_DISCOVERY=false）；macOS 自动更新受限，见 README。
+  identity: null
+
+linux:
+  target:
+    - AppImage
+  category: Education
+  icon: assets/icon.png
+  # electron-builder 26.x 的 ${arch} 在 Linux 上展开为 x64（不是 x86_64），
+  # 因此这里直接字面量 x86_64，与 GitHub Releases 固定直链保持一致。
+  artifactName: "xiyouji-desktop-linux-x86_64.${ext}"
+

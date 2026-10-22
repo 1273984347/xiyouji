@@ -2,14 +2,14 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-yCXTnUMkHSnCvwT+endQT4WorLN/5SUrQzccMO16IZg=' 'sha256-pVwevihBl7gWe8Vq8rsXNoUPZDaY8B7QRGg7QuBg7VQ=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-yCXTnUMkHSnCvwT+endQT4WorLN/5SUrQzccMO16IZg=' 'sha256-jwyG2KgyU3N1MZIwvAdhuhNIiPvlQA07wxPHKezkQU8=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>知识图谱探索器 · 详解西游记</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/data/graph-explorer.html">
     <meta property="og:title" content="知识图谱探索器 · 详解西游记">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://1273984347.github.io/xiyouji/data/graph-explorer.html">
-    <meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover.png">
+    <meta property="og:image" content="https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
@@ -21,7 +21,7 @@
     <meta property="og:description" content="知识图谱探索器 · 详解西游记">
 
 
-                                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -105,7 +105,7 @@
     /* —— 图表五色雅集色板（W334 图表规范） —— */
     --chart-1: #C8463A;       /* 朱砂 */
     --chart-2: #3A6B8C;       /* 靛蓝 */
-    --chart-3: #C9A063;       /* 赭金 */
+    --chart-3: #B38F58;       /* 赭金 */
     --chart-4: #6B8E5A;       /* 苔绿 */
     --chart-5: #D8CFBC;       /* 米灰 */
     --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
@@ -201,7 +201,7 @@ html[data-theme="dark"] {
     --paper: #2B2419;
     --paper-warm: #33291B;
     --line: rgba(242, 235, 220, 0.14);
-    --accent: #E0604F;
+    --accent: #E46250;
     --accent-deep: #C94F3F;
     --accent-soft: #E8A99F;
     --accent-tint: rgba(224, 96, 79, 0.14);
@@ -359,6 +359,46 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
   --z-tooltip: 70;
 }
 
+/* ===== v4 · W826 令牌增量（W851 阶段 1 落地·纯加法·零消费新名） ===== */
+/* 来源：docs/11-方案报告/界面视觉重设计细化规格-v4-2026-10-20.md §4 终稿 */
+/* 口径：34 个零消费新名 / 35 处定义（暗色组 --accent-text 为同名第二处） */
+/* defer 四项随迁移批逐页 proof：--chart-1..6 与 --accent-soft 重述 · 暗色 --accent 改值 · 暗色 --chart-3/5 新增 */
+:root {
+    /* —— 间距刻度（4px 基准 + 2/10 半格） —— */
+    --space-0: 0px;   --space-1: 2px;   --space-2: 4px;   --space-3: 8px;
+    --space-4: 12px;  --space-5: 20px;  --space-6: 24px;  --space-7: 32px;
+    --space-8: 40px;  --space-9: 48px;  --space-10: 64px; --space-11: 80px;
+    --space-12: 96px;
+    /* 间距语义档（tight 紧凑 / base 常规 / loose 疏行 / block 区块 / section 章段 / hero 首屏） */
+    --gap-tight: var(--space-3);   --gap-base: var(--space-5);
+    --gap-loose: var(--space-6);   --gap-block: var(--space-7);
+    --gap-section: var(--space-10); --gap-hero: var(--space-12);
+
+    /* —— 容器三档（裁决 3） —— */
+    --container-read: 760px; --container-content: 1120px; --container-wide: 1320px;
+    /* —— 栅格 —— */
+    --grid-columns: 12; --grid-gutter: var(--space-6);
+
+    /* —— 排版角色（语义层：字重 + 族 + 字号 / 行高） —— */
+    --type-display: 600 var(--font-serif) clamp(34px, 4.4vw, 56px) / 1.15;
+    --type-title:    600 var(--font-serif) 24px / 1.30;
+    --type-subtitle: 500 var(--font-serif) 18px / 1.50;
+    --type-lead:     400 var(--font-sans) 17px / 1.75;
+    --type-body:     400 var(--font-sans) 15px / 1.80;
+    --type-label:    500 var(--font-sans) 13px / 1.50;
+    --type-caption:  400 var(--font-sans) 12px / 1.60;
+    --type-eyebrow:  500 var(--font-mono) 12px / 1.40;
+    --type-number:   500 var(--font-mono) 32px / 1.10;
+
+    /* —— 色彩角色补充（裁决 1 修法·朱砂文字落 --bg 专用档） —— */
+    --accent-text: #C7463A;          /* 朱砂文字落在 --bg 上（4.50:1） */
+}
+
+/* 暗色组补充（裁决 4：双主题平级）——--accent-text 与浅色同名、暗色取值不同 */
+html[data-theme="dark"] {
+    --accent-text: #E0604F;
+}
+
 /*
  * system.css — 详解西游记 · 全站组件设计系统
  * ----------------------------------------------
@@ -430,7 +470,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -469,11 +509,11 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
@@ -664,6 +704,8 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+        /* W873 B10 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
+        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1214,7 +1256,7 @@ td.num, th.num {
   *{box-sizing:border-box}
   html,body{height:100%}
   body{margin:0;font-family:"Noto Sans SC","PingFang SC",system-ui,sans-serif;background: var(--xuan);color: var(--ink);display:flex;flex-direction:column}
-  header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding:14px 20px;border-bottom: 1px solid var(--line);background: var(--paper)}
+  header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding:14px var(--space-5);border-bottom: 1px solid var(--line);background: var(--paper)}
   header h1{font-family:"Noto Serif SC",serif;font-size:20px;margin:0;color: var(--zhu)}
   header .sub{font-size:13px;color: var(--ink-soft)}
   #banner{margin-left:auto;font-size:12px;padding:3px 10px;border-radius: 20px;background:#f0e7d6;color: /* W675-review：修复 WP-2.3 对粘词残缀的错位插入（原两属性均失效） */ var(--ink-soft)}
@@ -1225,7 +1267,7 @@ td.num, th.num {
   .layout.no-side{grid-template-columns:0 1fr 280px}
   .layout.no-side.no-drill{grid-template-columns:0 1fr 0px}
   .layout.no-side .side{border-right: none;overflow:hidden}
-  #sideToggle{margin-left:10px;font-size:16px;line-height:1;padding:4px 9px;border: 1px solid var(--line);border-radius: var(--radius-md); background:var(--paper);cursor:pointer;color: var(--ink)}
+  #sideToggle{margin-left:10px;font-size:16px;line-height:1;padding:var(--space-2) 9px;border: 1px solid var(--line);border-radius: var(--radius-md); background:var(--paper);cursor:pointer;color: var(--ink)}
   #sideToggle:hover{border-color: var(--zhu);color: var(--zhu)}
   .side{border-right: 1px solid var(--line);padding:14px;overflow:auto;background: var(--paper)}
   .stage{position:relative;overflow:hidden;background: radial-gradient(circle at 50% 40%,var(--paper),#f4ece0)}
@@ -1233,8 +1275,8 @@ td.num, th.num {
   .drill.show{display:block}
   .side h3{font-size:12px;letter-spacing:.08em;color: #8a7d68;margin:14px 0 6px;text-transform:uppercase}
   .side h3:first-child{margin-top:0}
-  select,input[type=text]{width:100%;padding:6px 8px;border: 1px solid var(--line);border-radius: var(--radius-md); font-size:13px;background: var(--paper);color: var(--ink)}
-  .grp{display:flex;align-items:center;gap:7px;font-size:13px;margin:4px 0;cursor:pointer}
+  select,input[type=text]{width:100%;padding:6px var(--space-3);border: 1px solid var(--line);border-radius: var(--radius-md); font-size:13px;background: var(--paper);color: var(--ink)}
+  .grp{display:flex;align-items:center;gap:7px;font-size:13px;margin:var(--space-2) 0;cursor:pointer}
   .grp input{accent-color: var(--zhu)}
   .swatch{width:12px;height:12px;border-radius: 50%; display:inline-block;border: 1px solid var(--paper)}
   .dimbtns{display:flex;gap:5px;flex-wrap:wrap}
@@ -1249,23 +1291,23 @@ td.num, th.num {
   #graphBox text{font-family:"Noto Serif SC",serif;pointer-events:none}
   .gnode{cursor:pointer;user-select:none}
   .gnode:hover{opacity:.78}
-  .drill h2{font-family:"Noto Serif SC",serif;font-size:18px;margin:2px 0 4px;color: var(--zhu)}
-  .drill .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius: var(--radius-lg); background:#f0e7d6;color: var(--ink-soft);margin-bottom:8px}
+  .drill h2{font-family:"Noto Serif SC",serif;font-size:18px;margin:var(--space-1) 0 var(--space-2);color: var(--zhu)}
+  .drill .tag{display:inline-block;font-size:11px;padding:var(--space-1) var(--space-3);border-radius: var(--radius-lg); background:#f0e7d6;color: var(--ink-soft);margin-bottom:var(--space-3)}
   .drill .desc{font-size:13px;line-height:1.7;color: #4a4136}
-  .drill .alias{margin:8px 0;padding:8px 10px;background: #f7f1e6;border-radius: var(--radius-md); font-size:13px}
+  .drill .alias{margin:var(--space-3) 0;padding:var(--space-3) 10px;background: #f7f1e6;border-radius: var(--radius-md); font-size:13px}
   .drill .alias b{color: var(--qing)}
   .drill .nbr{list-style:none;padding:0;margin:6px 0}
-  .drill .nbr li{font-size:13px;padding:6px 8px;border: 1px solid var(--line);border-radius: var(--radius-md); margin:4px 0;cursor:pointer}
+  .drill .nbr li{font-size:13px;padding:6px var(--space-3);border: 1px solid var(--line);border-radius: var(--radius-md); margin:var(--space-2) 0;cursor:pointer}
   .drill .nbr li:hover{border-color: var(--zhu)}
   .drill .nbr li .row{display:flex;justify-content:space-between;gap:8px;align-items:center}
   .drill .nbr .rel{color: #8a7d68;font-size:12px}
   .hint{font-size:12px;color: #9a8f7c;margin-top:10px;line-height:1.6}
   .edge-label{font-size:10px;pointer-events:none;font-family:"Noto Sans SC",sans-serif}
   .relchip{display:inline-block;font-size:10px;padding:1px 6px;border-radius: var(--radius-lg); color:var(--paper);margin-left:6px;vertical-align:middle}
-  .relsum{font-size:12px;color: #5a5040;background: #f7f1e6;border-radius: var(--radius-md); padding:7px 10px;margin:8px 0;line-height:1.9}
+  .relsum{font-size:12px;color: #5a5040;background: #f7f1e6;border-radius: var(--radius-md); padding:7px 10px;margin:var(--space-3) 0;line-height:1.9}
   .relsum b{color: var(--zhu)}
-  .relsum .rs{display:inline-block;margin:0 6px 2px 0}
-  .relsum .rs i{font-style:normal;width:9px;height:9px;border-radius: 50%; display:inline-block;margin-right:4px;vertical-align:middle}
+  .relsum .rs{display:inline-block;margin:0 6px var(--space-1) 0}
+  .relsum .rs i{font-style:normal;width:9px;height:9px;border-radius: 50%; display:inline-block;margin-right:var(--space-2);vertical-align:middle}
   @media (max-width: 768px){
     body{display:block}
     .layout,.layout.no-drill,.layout.no-side,.layout.no-side.no-drill{grid-template-columns:1fr;grid-template-rows:auto 1fr auto;flex:none;height:auto}
@@ -1283,7 +1325,6 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
   <script defer src="../js/visit-log.js"></script>
-  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
 <link rel="preload" href="../static/fonts/NotoSansSC-Regular.subset.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../static/fonts/noto-serif-sc-shared.subset.woff2" as="font" type="font/woff2" crossorigin>
 <!-- chart-degrade: simplified -->
@@ -1541,7 +1582,7 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph", "title": "佛法=AI=西游 三元�
     var edges=GRAPH.edges.filter(function(e){return vis.has(e.source)&&vis.has(e.target)&&activeRels.has(edgeRel(e));});
     var ids=[];
     vis.forEach(function(id){ ids.push(id); });
-    if(!ids.length){ document.getElementById("graphBox").innerHTML='<p style="padding:20px;color:#9a8f7c">无匹配节点，调整筛选条件。</p>'; return; }
+    if(!ids.length){ document.getElementById("graphBox").innerHTML='<p style="padding:var(--space-5);color:#9a8f7c">无匹配节点，调整筛选条件。</p>'; return; }
     var dims=layout(ids,edges);
     var deg=new Map(); edges.forEach(function(e){ deg.set(e.source,(deg.get(e.source)||0)+1); deg.set(e.target,(deg.get(e.target)||0)+1); });
     var maxDeg=Math.max.apply(null,ids.map(function(i){return deg.get(i)||0;})), minDeg=Math.min.apply(null,ids.map(function(i){return deg.get(i)||0;}));
@@ -1625,13 +1666,13 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph", "title": "佛法=AI=西游 三元�
     });
     // 语义关系汇总：按关系类型计数
     var relCount={}; nbrs.forEach(function(x){ if(x.rel) relCount[x.rel]=(relCount[x.rel]||0)+1; });
-    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:12px 0 4px">语义关系汇总（'+nbrs.length+' 条关系）</h3>';
+    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:var(--space-4) 0 var(--space-2)">语义关系汇总（'+nbrs.length+' 条关系）</h3>';
     html+='<div class="relsum">';
     Object.keys(relCount).sort().forEach(function(r){
       html+='<span class="rs"><i style="background:'+relationColor(r)+'"></i><b>'+xmlEsc(r)+'</b>×'+relCount[r]+'</span>';
     });
     html+='</div>';
-    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:12px 0 4px">邻居与关系</h3>';
+    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:var(--space-4) 0 var(--space-2)">邻居与关系</h3>';
     html+='<ul class="nbr">';
     nbrs.forEach(function(x){
       var on=null; GRAPH.nodes.forEach(function(y){ if(y.id===x.other)on=y; });
@@ -1642,7 +1683,7 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph", "title": "佛法=AI=西游 三元�
     });
     html+='</ul>';
     var lab=labelOf(n);
-    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:12px 0 4px">相关研究</h3>';
+    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:var(--space-4) 0 var(--space-2)">相关研究</h3>';
     html+='<div class="alias"><a href="./search.html?q='+encodeURIComponent(lab)+'" target="_blank" rel="noopener" style="color:#3a6b8c;text-decoration:none">🔍 站内检索「'+xmlEsc(lab)+'」的相关解读 →</a></div>';
     panel.innerHTML=html;
     var closeBtn=panel.querySelector(".drill-close");
@@ -1695,7 +1736,7 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph", "title": "佛法=AI=西游 三元�
   async function loadAndRender(){
     focusNode=null; nodePos=new Map(); activeGroups=new Set(); activeRels=new Set();
     GRAPH=await loadGraph(GRAPH_NAME);
-    if(!GRAPH){ document.getElementById("graphBox").innerHTML='<p style="padding:20px;color:#9a8f7c">图谱加载失败（离线且无内嵌数据）。</p>'; return; }
+    if(!GRAPH){ document.getElementById("graphBox").innerHTML='<p style="padding:var(--space-5);color:#9a8f7c">图谱加载失败（离线且无内嵌数据）。</p>'; return; }
     buildControls();
     var saved=loadSaved();
     if(saved && saved.name===GRAPH_NAME){
@@ -1749,8 +1790,8 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph", "title": "佛法=AI=西游 三元�
 })();
 </script>
 
-<div style="padding:16px 8px;text-align:center"><a href="../en/graph-explorer.html" hreflang="en" style="display:inline-block;padding:6px 4px">English</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">反馈</a></div>
+<div style="padding:16px var(--space-3);text-align:center"><a href="../en/graph-explorer.html" hreflang="en" style="display:inline-block;padding:6px var(--space-2)">English</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></div>
 <script defer src="../static/js/cite-box.js"></script>
 <script defer src="../static/js/chart-a11y.js"></script>
 </body>

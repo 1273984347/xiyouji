@@ -22,6 +22,21 @@ import sys
 
 LOCK_MARK = "cannot lock ref"
 
+# W821：§8 干扰日志的机器触发点提示（真触发才输出·用户裁决 2026-10-20）。
+# 背景同 preflight_check.py：两周干扰日志无机器防线 → 断档 4 天零登记，
+# 而该期间实际发生 ≥2 次强制触发事件。本提示在 **ref-lock 竞争真正发生** 时喊一声，
+# 把「靠人记得写日志」变成「机器在真发生时喊一声」，**不改变任何判定与退出码**。
+INTERFERENCE_LOG_HINT = (
+    "⚠     §8 干扰日志待登记：本次命中强制录入触发（路线图 §8·窗口 2026-10-14 → 10-28）"
+    "——请在 docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md "
+    "的 §8 表追加一行（日期/会话/事件类/共享面/读时状态/写时状态/损失返工）"
+)
+
+
+def interference_log_hint(reason):
+    """构造 §8 干扰日志待登记提示行（带命中原因）。返回单行字符串。"""
+    return "%s（命中：%s）" % (INTERFERENCE_LOG_HINT, reason)
+
 
 def _run(cmd, **kw):
     return subprocess.run(cmd, capture_output=True, text=True, **kw)
@@ -71,6 +86,8 @@ def commit(msg_args, pathspecs, max_retry=1):
             if retry:
                 print("[safe_commit] ref-lock 竞争（HEAD %s → %s）：%s，重试第 %d 次"
                       % ((old or "?")[:9], (new or "?")[:9], reason, attempted))
+                # W821：触发②（safe_commit 触发重试）——真触发才提示登记 §8 干扰日志
+                print(interference_log_hint("safe_commit ref-lock 竞争触发重试"))
                 continue
             if LOCK_MARK in out:
                 print("[safe_commit] 竞争不可自动重试：%s" % reason)
