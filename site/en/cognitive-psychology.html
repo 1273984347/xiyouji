@@ -510,7 +510,7 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
@@ -1389,7 +1389,7 @@ td.num, th.num {
             font-weight: 700;
         }
         .icon-wrong {
-            color: var(--accent);
+            color: var(--accent-text);
             font-weight: 700;
         }
         /* 洞察列表 */
@@ -1508,7 +1508,7 @@ td.num, th.num {
             grid-column: 1 / -1;
         }
         .summary-card .map-label {
-            color: var(--accent);
+            color: var(--accent-text);
             font-size: 0.78rem;
             letter-spacing: 0.12em;
             font-family: "JetBrains Mono", "Consolas", monospace;
@@ -1614,6 +1614,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <style>/* W558: 多列表格防挤压——横向滚动 + 单行不折 */
 table.data-table { display: block; overflow-x: auto; }
 table.data-table th, table.data-table td { white-space: nowrap; }
+
+/* en 迁移批：KPI 顶条按行收敛（同排首卡保顶条·其余转细线·口径同 zh 页 W870） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 </style>
 <link rel="preload" href="../static/js/d3.v7.min.js" as="script" />
 <link rel="preload" href="../static/fonts/NotoSansSC-Regular.subset.woff2" as="font" type="font/woff2" crossorigin>

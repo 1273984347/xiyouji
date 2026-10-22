@@ -510,7 +510,7 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
@@ -1338,7 +1338,7 @@ td.num, th.num {
             margin-top: 16px;
         }
         .insight-box h4 {
-            color: var(--accent);
+            color: var(--accent-text);
             font-size: 1rem;
             margin-bottom: 8px;
         }
@@ -1353,7 +1353,7 @@ td.num, th.num {
         }
         .insight-box li:last-child { border-bottom: none; }
         .insight-box li strong {
-            color: var(--accent);
+            color: var(--accent-text);
             font-weight: 600;
         }
         .notice {
@@ -1612,7 +1612,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
   <script defer src="../js/visit-log.js"></script>
-<style>/* W558: chart svg overflow visible——探针实测标签越出视口被裁（见 .review-tmp/w558-detect.json） */main svg{overflow:visible}</style>
+<style>/* W558: chart svg overflow visible——探针实测标签越出视口被裁（见 .review-tmp/w558-detect.json） */main svg{overflow:visible}
+/* en 迁移批：KPI 顶条按行收敛（同排首卡保顶条·其余转细线·口径同 zh 页 W870） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+</style>
 <link rel="preload" href="../static/js/d3.v7.min.js" as="script" />
 <link rel="preload" href="../static/fonts/NotoSansSC-Regular.subset.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../static/fonts/noto-serif-sc-shared.subset.woff2" as="font" type="font/woff2" crossorigin>

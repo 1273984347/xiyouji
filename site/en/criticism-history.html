@@ -510,7 +510,7 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
@@ -1288,7 +1288,7 @@ td.num, th.num {
         
         
         
-        .section-sub strong { color: var(--accent); font-weight: 600; }
+        .section-sub strong { color: var(--accent-text); font-weight: 600; }
 
         .legend {
             display: flex;
@@ -1441,7 +1441,7 @@ td.num, th.num {
             font-weight: 600;
             color: var(--ink);
         }
-        .candidate-card.main .cc-name { color: var(--accent); }
+        .candidate-card.main .cc-name { color: var(--accent-text); }
         .candidate-card .cc-meta {
             font-size: 0.74rem;
             color: var(--accent-3);
@@ -1478,7 +1478,7 @@ td.num, th.num {
             border-bottom: 1px solid var(--line);
         }
         .evidence-col.for h5 { color: var(--accent-4); }
-        .evidence-col.against h5 { color: var(--accent); }
+        .evidence-col.against h5 { color: var(--accent-text); }
         .evidence-col ul { list-style: none; padding: 0; margin: 0; }
         .evidence-col li {
             padding: 3px 0 3px 14px;
@@ -1590,7 +1590,7 @@ td.num, th.num {
             padding: 6px 14px; cursor: pointer;
         }
         .scalpel-replay:hover { border-color: var(--accent); color: var(--accent); }
-        .scalpel-note strong { color: var(--accent); }
+        .scalpel-note strong { color: var(--accent-text); }
         .scalpel-note em { color: var(--accent-2); font-style: italic; }
         @keyframes wordFloat {
             0%   { opacity: 0; transform: scale(0.6); }
@@ -1630,7 +1630,7 @@ td.num, th.num {
             border-radius: var(--radius-md)
         }
         .insight-box h4 {
-            color: var(--accent);
+            color: var(--accent-text);
             font-size: 1rem;
             margin-bottom: 10px;
             letter-spacing: 0.05em;
@@ -1643,7 +1643,7 @@ td.num, th.num {
             line-height: 1.7;
         }
         .insight-box li:last-child { border-bottom: none; }
-        .insight-box li strong { color: var(--accent); font-weight: 600; }
+        .insight-box li strong { color: var(--accent-text); font-weight: 600; }
         .insight-box li em { color: var(--accent-2); font-style: italic; }
 
         .notice {
@@ -1677,7 +1677,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
   <script defer src="../js/visit-log.js"></script>
-<style>/* W558: chart svg overflow visible——探针实测标签越出视口被裁（见 .review-tmp/w558-detect.json） */main svg{overflow:visible}</style>
+<style>/* W558: chart svg overflow visible——探针实测标签越出视口被裁（见 .review-tmp/w558-detect.json） */main svg{overflow:visible}
+/* en 迁移批：KPI 顶条按行收敛（同排首卡保顶条·其余转细线·口径同 zh 页 W870） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+</style>
 <link rel="preload" href="../static/js/d3.v7.min.js" as="script" />
 <link rel="preload" href="../static/fonts/NotoSansSC-Regular.subset.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../static/fonts/noto-serif-sc-shared.subset.woff2" as="font" type="font/woff2" crossorigin>
