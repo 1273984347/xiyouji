@@ -1,7 +1,7 @@
 {
  "gate": "第 49 门禁 朱砂实底",
  "criterion": "每页非豁免朱砂实底 ≤3 处（背景=--accent 盒面积>400·或 ≥2 朱砂顶条条带面积>400）",
- "scope": 96,
+ "scope": 234,
  "exemptions_file": "scripts/output/_w864_accent_exemptions.json",
  "pages": {
   "data/81-hardships-view.html": {
@@ -1739,11 +1739,2285 @@
    "nonExempt": 0,
    "fail": false,
    "perCls": {}
+  },
+  "en/81-hardships-view.html": {
+   "measured": 3,
+   "exempted": 0,
+   "nonExempt": 3,
+   "fail": false,
+   "perCls": {
+    "span.keytab.active": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    },
+    "button.vt-btn": {
+     "measured": 2,
+     "exempted": 0,
+     "nonExempt": 2
+    }
+   }
+  },
+  "en/81-hardships.html": {
+   "measured": 91,
+   "exempted": 91,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "span.tag": {
+     "measured": 91,
+     "exempted": 91,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/academic-papers.html": {
+   "measured": 1,
+   "exempted": 0,
+   "nonExempt": 1,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    }
+   }
+  },
+  "en/aesthetics.html": {
+   "measured": 8,
+   "exempted": 8,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.color-swatch": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.scene-bar": {
+     "measured": 4,
+     "exempted": 4,
+     "nonExempt": 0
+    },
+    "div.stage-color-bar": {
+     "measured": 2,
+     "exempted": 2,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/ai-dialogue.html": {
+   "measured": 5,
+   "exempted": 5,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "button": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.step-num": {
+     "measured": 4,
+     "exempted": 4,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/bestiary.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/business-model.html": {
+   "measured": 3,
+   "exempted": 0,
+   "nonExempt": 3,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    },
+    "div.monster-card": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    },
+    "div.monster-card.m-flaming": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    }
+   }
+  },
+  "en/cave-estate.html": {
+   "measured": 20,
+   "exempted": 20,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.tag.king": {
+     "measured": 19,
+     "exempted": 19,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/century-dialogue.html": {
+   "measured": 3,
+   "exempted": 0,
+   "nonExempt": 3,
+   "fail": false,
+   "perCls": {
+    "div.speech-bubble": {
+     "measured": 3,
+     "exempted": 0,
+     "nonExempt": 3
+    }
+   }
+  },
+  "en/chapter-stats.html": {
+   "measured": 1,
+   "exempted": 0,
+   "nonExempt": 1,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    }
+   }
+  },
+  "en/chapter-structure-graph.html": {
+   "measured": 1,
+   "exempted": 0,
+   "nonExempt": 1,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    }
+   }
+  },
+  "en/chapters-map.html": {
+   "measured": 1,
+   "exempted": 0,
+   "nonExempt": 1,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    }
+   }
+  },
+  "en/character-appearance.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/character-bailongma.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/character-bajie.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/character-dynamic-network.html": {
+   "measured": 2,
+   "exempted": 2,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "button.stage-btn.active": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/character-presence-timeline.html": {
+   "measured": 0,
+   "exempted": 0,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {}
+  },
+  "en/character-relationship-3d-view.html": {
+   "measured": 3,
+   "exempted": 3,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "span.keytab.active": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "button.vt-btn": {
+     "measured": 2,
+     "exempted": 2,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/character-relationship-3d.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/character-semantic-network.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/character-sentiment-arc.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/character-shaseng.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/character-tangseng.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/character-wukong.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/characters.html": {
+   "measured": 1,
+   "exempted": 0,
+   "nonExempt": 1,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    }
+   }
+  },
+  "en/chart-design.html": {
+   "measured": 9,
+   "exempted": 9,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.domino-card": {
+     "measured": 4,
+     "exempted": 4,
+     "nonExempt": 0
+    },
+    "div.domino-hardship": {
+     "measured": 3,
+     "exempted": 3,
+     "nonExempt": 0
+    },
+    "div.sundial-card.highlight-stress": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/cognitive-psychology.html": {
+   "measured": 2,
+   "exempted": 0,
+   "nonExempt": 2,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    },
+    "div.char-card": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    }
+   }
+  },
+  "en/concept-device.html": {
+   "measured": 13,
+   "exempted": 12,
+   "nonExempt": 1,
+   "fail": false,
+   "perCls": {
+    "button.era-btn.active": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.cipher-face.cipher-back": {
+     "measured": 5,
+     "exempted": 5,
+     "nonExempt": 0
+    },
+    "button.danmaku-toggle": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.hu-card": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    },
+    "span.idev": {
+     "measured": 5,
+     "exempted": 5,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/counterfactual.html": {
+   "measured": 8,
+   "exempted": 8,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.badge.validity-high": {
+     "measured": 7,
+     "exempted": 7,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/criticism-history.html": {
+   "measured": 3,
+   "exempted": 0,
+   "nonExempt": 3,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    },
+    "div.candidate-card.main": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    },
+    "div.cc-status": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    }
+   }
+  },
+  "en/cross-time-danmaku.html": {
+   "measured": 2,
+   "exempted": 0,
+   "nonExempt": 2,
+   "fail": false,
+   "perCls": {
+    "div.age-tab.active": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    },
+    "button": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    }
+   }
+  },
+  "en/cultural-misreading.html": {
+   "measured": 1,
+   "exempted": 0,
+   "nonExempt": 1,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    }
+   }
+  },
+  "en/customs-pass-route.html": {
+   "measured": 1,
+   "exempted": 0,
+   "nonExempt": 1,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    }
+   }
+  },
+  "en/dashboard.html": {
+   "measured": 0,
+   "exempted": 0,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {}
+  },
+  "en/data-explorer.html": {
+   "measured": 3,
+   "exempted": 0,
+   "nonExempt": 3,
+   "fail": false,
+   "perCls": {
+    "span.keytab.active": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    },
+    "button.vt-btn": {
+     "measured": 2,
+     "exempted": 0,
+     "nonExempt": 2
+    }
+   }
+  },
+  "en/deconstruction.html": {
+   "measured": 6,
+   "exempted": 6,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.tag": {
+     "measured": 5,
+     "exempted": 5,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/dialogue-sentiment.html": {
+   "measured": 2,
+   "exempted": 0,
+   "nonExempt": 2,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    },
+    "div.stat-card.negative": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    }
+   }
+  },
+  "en/dukou-engine.html": {
+   "measured": 1,
+   "exempted": 0,
+   "nonExempt": 1,
+   "fail": false,
+   "perCls": {
+    "button": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    }
+   }
+  },
+  "en/ecology.html": {
+   "measured": 13,
+   "exempted": 13,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 2,
+     "exempted": 2,
+     "nonExempt": 0
+    },
+    "span.damage-pill.damage-high": {
+     "measured": 9,
+     "exempted": 9,
+     "nonExempt": 0
+    },
+    "div.compare-card.invasive": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.stage-card.during": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/emotional-heatmap.html": {
+   "measured": 2,
+   "exempted": 0,
+   "nonExempt": 2,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    },
+    "div.scholar-card": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    }
+   }
+  },
+  "en/essay-ai-era.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-buddhist-chan.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-chapter-couplets.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-character-fu.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-cipai-linjiangxian.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-cipai-mantingfang.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-cipai-shuidiaogetou.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-cipai-xijiangyue.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-composition-origins.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-divine-bureaucracy.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-folk-belief.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-historical-xuanzang.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-information-cocoon.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-ming-economy.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-ming-examination.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-ming-garrison.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-ming-intellectual-history.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-ming-judiciary.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-ming-literary-thought.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-ming-maritime-ban.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-ming-metaphor.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-ming-military.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-ming-politics.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-ming-religion.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-ming-social-customs.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-modern-management.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-original-poetry.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-poetry-imagery.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-poetry-opening.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-quanzhen-daoism.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-rhythm-analysis.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-scenery-poems.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-thematic-poetry.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-three-teachings.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-version-evolution.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/essay-zen-koan-vs-neidan.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/ethics-consumption.html": {
+   "measured": 14,
+   "exempted": 13,
+   "nonExempt": 1,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.sev-badge.sev-extreme": {
+     "measured": 1,
+     "exempted": 0,
+     "nonExempt": 1
+    },
+    "span.veg-badge.veg-no": {
+     "measured": 4,
+     "exempted": 4,
+     "nonExempt": 0
+    },
+    "span.zero-tag": {
+     "measured": 3,
+     "exempted": 3,
+     "nonExempt": 0
+    },
+    "div.ipo-outcome": {
+     "measured": 5,
+     "exempted": 5,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/famous-time-travel.html": {
+   "measured": 0,
+   "exempted": 0,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {}
+  },
+  "en/four-dimensional-research-network.html": {
+   "measured": 2,
+   "exempted": 2,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.badge.cinnabar": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/four-heavenly-kings-artifacts.html": {
+   "measured": 3,
+   "exempted": 3,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.king-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.swatch-bar": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/game-webnovel.html": {
+   "measured": 14,
+   "exempted": 14,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.cc-stat-fill": {
+     "measured": 10,
+     "exempted": 10,
+     "nonExempt": 0
+    },
+    "div.cc-elem": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.elem-chip": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.nc-genre": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/global-pattern.html": {
+   "measured": 2,
+   "exempted": 2,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.p-country": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/graph-explorer.html": {
+   "measured": 0,
+   "exempted": 0,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {}
+  },
+  "en/guanyin-six-roles-network.html": {
+   "measured": 3,
+   "exempted": 3,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.role-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.swatch-bar": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/guide.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.primary": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/hardship-difficulty-heatmap.html": {
+   "measured": 2,
+   "exempted": 2,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "button.dim-btn.active": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/hardship-heatmap.html": {
+   "measured": 2,
+   "exempted": 2,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "button.stage-btn.active": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/heaven-power-network.html": {
+   "measured": 3,
+   "exempted": 3,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 2,
+     "exempted": 2,
+     "nonExempt": 0
+    },
+    "div.role-card.r-king": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/index.html": {
+   "measured": 0,
+   "exempted": 0,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {}
+  },
+  "en/intertextuality-network.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/journey-geo-semiotics.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "article.mech-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/journey-map-interactive.html": {
+   "measured": 2,
+   "exempted": 2,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "button.btn": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/journey-route.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/journey-spacetime.html": {
+   "measured": 2,
+   "exempted": 2,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.progress-fill": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/jurisprudence.html": {
+   "measured": 11,
+   "exempted": 11,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.severity-pill.sev-high": {
+     "measured": 8,
+     "exempted": 8,
+     "nonExempt": 0
+    },
+    "div.artifact-card.c-low": {
+     "measured": 2,
+     "exempted": 2,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/karma-reincarnation.html": {
+   "measured": 2,
+   "exempted": 2,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.char-card.c-chusheng": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/language-style-radar.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/linguistics.html": {
+   "measured": 13,
+   "exempted": 13,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 3,
+     "exempted": 3,
+     "nonExempt": 0
+    },
+    "div.inc-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span": {
+     "measured": 5,
+     "exempted": 5,
+     "nonExempt": 0
+    },
+    "div.mbti-card.m-entp": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.char-card.c-buddhist": {
+     "measured": 3,
+     "exempted": 3,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/magic-system.html": {
+   "measured": 7,
+   "exempted": 7,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.intensity-bar": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.rank-badge.rank-S+": {
+     "measured": 5,
+     "exempted": 5,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/material-archaeology.html": {
+   "measured": 13,
+   "exempted": 13,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.artifact-card": {
+     "measured": 8,
+     "exempted": 8,
+     "nonExempt": 0
+    },
+    "div.type-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.tag": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.tag.palace": {
+     "measured": 2,
+     "exempted": 2,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/mbti-evolution.html": {
+   "measured": 2,
+   "exempted": 2,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "button.stage-btn.active": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/methodology-matrix.html": {
+   "measured": 11,
+   "exempted": 11,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.quadrant-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.quad-badge": {
+     "measured": 6,
+     "exempted": 6,
+     "nonExempt": 0
+    },
+    "span.phase-badge": {
+     "measured": 2,
+     "exempted": 2,
+     "nonExempt": 0
+    },
+    "div.phase-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/methodology.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/ming-political-thought-comparison.html": {
+   "measured": 3,
+   "exempted": 3,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.active": {
+     "measured": 2,
+     "exempted": 2,
+     "nonExempt": 0
+    },
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/monster-background.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/monster-capability-radar.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/monster-ecology-network.html": {
+   "measured": 2,
+   "exempted": 2,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "button.tab-btn.active": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/monster-female-network.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/monster-hierarchy-network.html": {
+   "measured": 2,
+   "exempted": 2,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 2,
+     "exempted": 2,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/monster-sociology.html": {
+   "measured": 4,
+   "exempted": 4,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.signal-card.s-active": {
+     "measured": 3,
+     "exempted": 3,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/monster-victims-network.html": {
+   "measured": 3,
+   "exempted": 3,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.victim-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.swatch-bar": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/music-structure.html": {
+   "measured": 38,
+   "exempted": 38,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.mv-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.sym-badge": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.tag": {
+     "measured": 35,
+     "exempted": 35,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/narrative-experiment.html": {
+   "measured": 23,
+   "exempted": 23,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.player-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.hc-owner": {
+     "measured": 2,
+     "exempted": 2,
+     "nonExempt": 0
+    },
+    "span.gh-tag": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.narr-card": {
+     "measured": 12,
+     "exempted": 12,
+     "nonExempt": 0
+    },
+    "span.sc-chip": {
+     "measured": 5,
+     "exempted": 5,
+     "nonExempt": 0
+    },
+    "div.sc-cat": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/narrative-rhythm-curve.html": {
+   "measured": 2,
+   "exempted": 2,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "button.btn": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/narratology-12d-network.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/narratology-16d-network.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/perf-canvas-rendering.html": {
+   "measured": 3,
+   "exempted": 3,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "button": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.bar-seg.svg-seg": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/philosophy.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/pilgrim-team-dynamic-network.html": {
+   "measured": 3,
+   "exempted": 3,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "button.ctrl-btn.active": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.phase-card.active": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/pilgrim-team-psychology-arc.html": {
+   "measured": 2,
+   "exempted": 2,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.progress-fill": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/poetry-rhythm-analysis.html": {
+   "measured": 2,
+   "exempted": 2,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.progress-fill": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/power-resources.html": {
+   "measured": 2,
+   "exempted": 2,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.faction-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/relationships.html": {
+   "measured": 6,
+   "exempted": 6,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.role-tag.primary": {
+     "measured": 5,
+     "exempted": 5,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/risk-project.html": {
+   "measured": 2,
+   "exempted": 2,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.char-card.c-tang": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/search.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "button.vt-btn": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/site-map.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/six-senses-narratology-network.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/social-media.html": {
+   "measured": 2,
+   "exempted": 2,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.platform-badge": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/tag-cloud.html": {
+   "measured": 6,
+   "exempted": 6,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "button.tab-btn": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.rc-size": {
+     "measured": 5,
+     "exempted": 5,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/text-evolution.html": {
+   "measured": 8,
+   "exempted": 8,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.evo-step.first": {
+     "measured": 6,
+     "exempted": 6,
+     "nonExempt": 0
+    },
+    "div.quote-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/text-search.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/theological-intervention-network.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/timeline.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/tribulations.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/underworld-power-network.html": {
+   "measured": 3,
+   "exempted": 3,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 2,
+     "exempted": 2,
+     "nonExempt": 0
+    },
+    "div.role-card.r-king": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/visual-art.html": {
+   "measured": 10,
+   "exempted": 10,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.chant-card.amp-high": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.ch-amp-bar": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.sc-cat.cat-danger": {
+     "measured": 5,
+     "exempted": 5,
+     "nonExempt": 0
+    },
+    "div.idea-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "div.id-form": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/visualizations.html": {
+   "measured": 1,
+   "exempted": 1,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "a.nav-back": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
+  },
+  "en/workplace.html": {
+   "measured": 9,
+   "exempted": 9,
+   "nonExempt": 0,
+   "fail": false,
+   "perCls": {
+    "div.kpi-card": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    },
+    "span.alert-badge": {
+     "measured": 7,
+     "exempted": 7,
+     "nonExempt": 0
+    },
+    "div.bw-cat": {
+     "measured": 1,
+     "exempted": 1,
+     "nonExempt": 0
+    }
+   }
   }
  },
  "fails": [],
  "notes": [
   "data/hardship-difficulty-heatmap.html 陈旧豁免（类已不在）：button.dim-btn.active / button.sort-btn.active（族合计 2·实测不足 1）"
  ],
- "generated_at": "2026-10-22T16:17:35.496Z"
+ "generated_at": "2026-10-22T17:51:20.697Z"
 }

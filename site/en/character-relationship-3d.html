@@ -511,7 +511,7 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
@@ -558,7 +558,7 @@ h4 { font-size: 18px; font-weight: 500; }
 .topnav nav a.active::after,
 .topnav nav a.nav-strong::after,
 .topnav nav a[aria-current="page"]::after { transform: scaleX(1); }
-.topnav nav a:hover { color: var(--accent); }
+.topnav nav a:hover { color: var(--accent-text); }
 .topnav nav a.active { color: var(--ink); font-weight: 500; }
 @media (max-width: 768px) {
     .topnav { padding: 16px 20px; }
@@ -980,7 +980,7 @@ td.num, th.num {
     font-size: 13px;
     color: var(--ink-soft);
 }
-.site-footer nav a:hover { color: var(--accent); }
+.site-footer nav a:hover { color: var(--accent-text); }
 
 /* ===== 深色节奏段（引文/分隔） ===== */
 .dark-band {
@@ -1304,6 +1304,9 @@ td.num, th.num {
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+
+/* en 迁移批：KPI 顶条按行收敛（同排首卡保顶条·其余转细线·口径同 zh 页 W870） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 </style>
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>

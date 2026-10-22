@@ -510,7 +510,7 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
@@ -1291,7 +1291,7 @@ td.num, th.num {
         
         .kpi-card .detail { color: var(--ink-soft); font-size: 0.78em; margin-top: 4px; }
         
-        .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .section h2 { color: var(--accent-text); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
         .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
         .skip-link {
             position: absolute; top: -40px; left: 0; background: var(--accent-2);
@@ -1366,6 +1366,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 @media (max-width: 768px){ .chart-block, .chart-wrap { overflow-x: auto; } }
 @media (max-width: 768px){ main { overflow-x: clip; } }
 @media (max-width: 768px){ h3 { white-space: normal; } }
+
+/* en 迁移批：KPI 顶条按行收敛（同排首卡保顶条·其余转细线·口径同 zh 页 W870） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 </style>
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>

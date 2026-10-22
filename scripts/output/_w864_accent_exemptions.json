@@ -791,6 +791,1097 @@
      "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
     }
    ]
+  },
+  "W887": {
+   "measured_at": "2026-10-23",
+   "exemptions": [
+    {
+     "page": "en/bestiary.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/character-appearance.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/character-bailongma.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/character-bajie.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/character-dynamic-network.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/character-dynamic-network.html",
+     "cls": "button.stage-btn.active",
+     "count": 1,
+     "reason": "功能交互实底：stage-btn.active（v4 §5.2 组件规格设计态）"
+    },
+    {
+     "page": "en/character-relationship-3d-view.html",
+     "cls": "span.keytab.active",
+     "count": 1,
+     "reason": "功能交互实底：keytab.active（v4 §5.2 组件规格设计态）"
+    },
+    {
+     "page": "en/character-relationship-3d-view.html",
+     "cls": "button.vt-btn",
+     "count": 2,
+     "reason": "功能交互实底：vt-btn（v4 §5.2 组件规格设计态）"
+    },
+    {
+     "page": "en/character-relationship-3d.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/character-semantic-network.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/character-sentiment-arc.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/character-shaseng.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/character-tangseng.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/character-wukong.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/ecology.html",
+     "cls": "div.kpi-card",
+     "count": 2,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/ecology.html",
+     "cls": "span.damage-pill.damage-high",
+     "count": 9,
+     "reason": "数据语义色片：damage-pill.damage-high 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/ecology.html",
+     "cls": "div.compare-card.invasive",
+     "count": 1,
+     "reason": "数据语义色片：compare-card.invasive 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/ecology.html",
+     "cls": "div.stage-card.during",
+     "count": 1,
+     "reason": "数据语义色片：stage-card.during 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/essay-ai-era.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-buddhist-chan.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-chapter-couplets.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-character-fu.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-cipai-linjiangxian.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-cipai-mantingfang.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-cipai-shuidiaogetou.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-cipai-xijiangyue.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-composition-origins.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-divine-bureaucracy.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-folk-belief.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-historical-xuanzang.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-information-cocoon.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-ming-economy.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-ming-examination.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-ming-garrison.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-ming-intellectual-history.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-ming-judiciary.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-ming-literary-thought.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-ming-maritime-ban.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-ming-metaphor.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-ming-military.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-ming-politics.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-ming-religion.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-ming-social-customs.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-modern-management.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-original-poetry.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-poetry-imagery.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-poetry-opening.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-quanzhen-daoism.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-rhythm-analysis.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-scenery-poems.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-thematic-poetry.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-three-teachings.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-version-evolution.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/essay-zen-koan-vs-neidan.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/four-dimensional-research-network.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/four-dimensional-research-network.html",
+     "cls": "span.badge.cinnabar",
+     "count": 1,
+     "reason": "数据语义色片：badge.cinnabar 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/four-heavenly-kings-artifacts.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/four-heavenly-kings-artifacts.html",
+     "cls": "div.king-card",
+     "count": 1,
+     "reason": "数据语义色片：king-card 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/four-heavenly-kings-artifacts.html",
+     "cls": "div.swatch-bar",
+     "count": 1,
+     "reason": "数据语义色片：swatch-bar 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/game-webnovel.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/game-webnovel.html",
+     "cls": "div.cc-stat-fill",
+     "count": 10,
+     "reason": "数据语义色片：cc-stat-fill 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/game-webnovel.html",
+     "cls": "div.cc-elem",
+     "count": 1,
+     "reason": "数据语义色片：cc-elem 数据编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/game-webnovel.html",
+     "cls": "span.elem-chip",
+     "count": 1,
+     "reason": "数据语义色片：elem-chip 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/game-webnovel.html",
+     "cls": "div.nc-genre",
+     "count": 1,
+     "reason": "数据语义色片：nc-genre 数据编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/global-pattern.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/global-pattern.html",
+     "cls": "span.p-country",
+     "count": 1,
+     "reason": "数据语义色片：p-country 数据编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/guanyin-six-roles-network.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/guanyin-six-roles-network.html",
+     "cls": "div.role-card",
+     "count": 1,
+     "reason": "数据语义色片：role-card 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/guanyin-six-roles-network.html",
+     "cls": "div.swatch-bar",
+     "count": 1,
+     "reason": "数据语义色片：swatch-bar 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/guide.html",
+     "cls": "a.primary",
+     "count": 1,
+     "reason": "功能交互实底：primary（v4 §5.2 组件规格设计态）"
+    },
+    {
+     "page": "en/hardship-difficulty-heatmap.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/hardship-difficulty-heatmap.html",
+     "cls": "button.dim-btn.active",
+     "count": 1,
+     "reason": "功能交互实底：dim-btn.active（v4 §5.2 组件规格设计态）"
+    },
+    {
+     "page": "en/hardship-heatmap.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/hardship-heatmap.html",
+     "cls": "button.stage-btn.active",
+     "count": 1,
+     "reason": "功能交互实底：stage-btn.active（v4 §5.2 组件规格设计态）"
+    },
+    {
+     "page": "en/heaven-power-network.html",
+     "cls": "div.kpi-card",
+     "count": 2,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/heaven-power-network.html",
+     "cls": "div.role-card.r-king",
+     "count": 1,
+     "reason": "数据语义色片：role-card.r-king 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/intertextuality-network.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/journey-geo-semiotics.html",
+     "cls": "article.mech-card",
+     "count": 1,
+     "reason": "数据语义色片：mech-card 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/journey-map-interactive.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/journey-map-interactive.html",
+     "cls": "button.btn",
+     "count": 1,
+     "reason": "功能交互实底：btn（v4 §5.2 组件规格设计态）"
+    },
+    {
+     "page": "en/journey-route.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/journey-spacetime.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/journey-spacetime.html",
+     "cls": "div.progress-fill",
+     "count": 1,
+     "reason": "数据语义色片：progress-fill 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/jurisprudence.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/jurisprudence.html",
+     "cls": "span.severity-pill.sev-high",
+     "count": 8,
+     "reason": "数据语义色片：severity-pill.sev-high 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/jurisprudence.html",
+     "cls": "div.artifact-card.c-low",
+     "count": 2,
+     "reason": "数据语义色片：artifact-card.c-low 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/karma-reincarnation.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/karma-reincarnation.html",
+     "cls": "div.char-card.c-chusheng",
+     "count": 1,
+     "reason": "数据语义色片：char-card.c-chusheng 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/language-style-radar.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/linguistics.html",
+     "cls": "div.kpi-card",
+     "count": 3,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/linguistics.html",
+     "cls": "div.inc-card",
+     "count": 1,
+     "reason": "数据语义色片：inc-card 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/linguistics.html",
+     "cls": "span",
+     "count": 5,
+     "reason": "数据语义色片：span 数据编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/linguistics.html",
+     "cls": "div.mbti-card.m-entp",
+     "count": 1,
+     "reason": "数据语义色片：mbti-card.m-entp 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/linguistics.html",
+     "cls": "div.char-card.c-buddhist",
+     "count": 3,
+     "reason": "数据语义色片：char-card.c-buddhist 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/magic-system.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/magic-system.html",
+     "cls": "span.intensity-bar",
+     "count": 1,
+     "reason": "数据语义色片：intensity-bar 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/magic-system.html",
+     "cls": "span.rank-badge.rank-S+",
+     "count": 5,
+     "reason": "数据语义色片：rank-badge.rank-S+ 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "cls": "div.artifact-card",
+     "count": 8,
+     "reason": "数据语义色片：artifact-card 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "cls": "div.type-card",
+     "count": 1,
+     "reason": "数据语义色片：type-card 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "cls": "span.tag",
+     "count": 1,
+     "reason": "数据语义色片：tag 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/material-archaeology.html",
+     "cls": "span.tag.palace",
+     "count": 2,
+     "reason": "数据语义色片：tag.palace 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/mbti-evolution.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/mbti-evolution.html",
+     "cls": "button.stage-btn.active",
+     "count": 1,
+     "reason": "功能交互实底：stage-btn.active（v4 §5.2 组件规格设计态）"
+    },
+    {
+     "page": "en/methodology-matrix.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/methodology-matrix.html",
+     "cls": "div.quadrant-card",
+     "count": 1,
+     "reason": "数据语义色片：quadrant-card 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/methodology-matrix.html",
+     "cls": "span.quad-badge",
+     "count": 6,
+     "reason": "数据语义色片：quad-badge 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/methodology-matrix.html",
+     "cls": "span.phase-badge",
+     "count": 2,
+     "reason": "数据语义色片：phase-badge 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/methodology-matrix.html",
+     "cls": "div.phase-card",
+     "count": 1,
+     "reason": "数据语义色片：phase-card 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/methodology.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/ming-political-thought-comparison.html",
+     "cls": "a.active",
+     "count": 2,
+     "reason": "功能交互实底：active（v4 §5.2 组件规格设计态）"
+    },
+    {
+     "page": "en/ming-political-thought-comparison.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/monster-background.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/monster-capability-radar.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/monster-ecology-network.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/monster-ecology-network.html",
+     "cls": "button.tab-btn.active",
+     "count": 1,
+     "reason": "功能交互实底：tab-btn.active（v4 §5.2 组件规格设计态）"
+    },
+    {
+     "page": "en/monster-female-network.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/monster-hierarchy-network.html",
+     "cls": "div.kpi-card",
+     "count": 2,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/monster-sociology.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/monster-sociology.html",
+     "cls": "div.signal-card.s-active",
+     "count": 3,
+     "reason": "数据语义色片：signal-card.s-active 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/monster-victims-network.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/monster-victims-network.html",
+     "cls": "div.victim-card",
+     "count": 1,
+     "reason": "数据语义色片：victim-card 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/monster-victims-network.html",
+     "cls": "div.swatch-bar",
+     "count": 1,
+     "reason": "数据语义色片：swatch-bar 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/music-structure.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/music-structure.html",
+     "cls": "div.mv-card",
+     "count": 1,
+     "reason": "数据语义色片：mv-card 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/music-structure.html",
+     "cls": "span.sym-badge",
+     "count": 1,
+     "reason": "数据语义色片：sym-badge 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/music-structure.html",
+     "cls": "span.tag",
+     "count": 35,
+     "reason": "数据语义色片：tag 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/narrative-experiment.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/narrative-experiment.html",
+     "cls": "div.player-card",
+     "count": 1,
+     "reason": "数据语义色片：player-card 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/narrative-experiment.html",
+     "cls": "span.hc-owner",
+     "count": 2,
+     "reason": "数据语义色片：hc-owner 数据编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/narrative-experiment.html",
+     "cls": "span.gh-tag",
+     "count": 1,
+     "reason": "数据语义色片：gh-tag 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/narrative-experiment.html",
+     "cls": "div.narr-card",
+     "count": 12,
+     "reason": "数据语义色片：narr-card 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/narrative-experiment.html",
+     "cls": "span.sc-chip",
+     "count": 5,
+     "reason": "数据语义色片：sc-chip 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/narrative-experiment.html",
+     "cls": "div.sc-cat",
+     "count": 1,
+     "reason": "数据语义色片：sc-cat 数据编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/narrative-rhythm-curve.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/narrative-rhythm-curve.html",
+     "cls": "button.btn",
+     "count": 1,
+     "reason": "功能交互实底：btn（v4 §5.2 组件规格设计态）"
+    },
+    {
+     "page": "en/narratology-12d-network.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/narratology-16d-network.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/perf-canvas-rendering.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/perf-canvas-rendering.html",
+     "cls": "button",
+     "count": 1,
+     "reason": "数据语义色片：button 数据编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/perf-canvas-rendering.html",
+     "cls": "div.bar-seg.svg-seg",
+     "count": 1,
+     "reason": "数据语义色片：bar-seg.svg-seg 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/philosophy.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/pilgrim-team-dynamic-network.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/pilgrim-team-dynamic-network.html",
+     "cls": "button.ctrl-btn.active",
+     "count": 1,
+     "reason": "功能交互实底：ctrl-btn.active（v4 §5.2 组件规格设计态）"
+    },
+    {
+     "page": "en/pilgrim-team-dynamic-network.html",
+     "cls": "div.phase-card.active",
+     "count": 1,
+     "reason": "功能交互实底：phase-card.active（v4 §5.2 组件规格设计态）"
+    },
+    {
+     "page": "en/pilgrim-team-psychology-arc.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/pilgrim-team-psychology-arc.html",
+     "cls": "div.progress-fill",
+     "count": 1,
+     "reason": "数据语义色片：progress-fill 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/poetry-rhythm-analysis.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/poetry-rhythm-analysis.html",
+     "cls": "div.progress-fill",
+     "count": 1,
+     "reason": "数据语义色片：progress-fill 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/power-resources.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/power-resources.html",
+     "cls": "div.faction-card",
+     "count": 1,
+     "reason": "数据语义色片：faction-card 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/relationships.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/relationships.html",
+     "cls": "span.role-tag.primary",
+     "count": 5,
+     "reason": "数据语义色片：role-tag.primary 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/risk-project.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/risk-project.html",
+     "cls": "div.char-card.c-tang",
+     "count": 1,
+     "reason": "数据语义色片：char-card.c-tang 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/search.html",
+     "cls": "button.vt-btn",
+     "count": 1,
+     "reason": "功能交互实底：vt-btn（v4 §5.2 组件规格设计态）"
+    },
+    {
+     "page": "en/site-map.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/six-senses-narratology-network.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/social-media.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/social-media.html",
+     "cls": "div.platform-badge",
+     "count": 1,
+     "reason": "数据语义色片：platform-badge 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/tag-cloud.html",
+     "cls": "button.tab-btn",
+     "count": 1,
+     "reason": "功能交互实底：tab-btn（v4 §5.2 组件规格设计态）"
+    },
+    {
+     "page": "en/tag-cloud.html",
+     "cls": "span.rc-size",
+     "count": 5,
+     "reason": "数据语义色片：rc-size 数据编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/text-evolution.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/text-evolution.html",
+     "cls": "div.evo-step.first",
+     "count": 6,
+     "reason": "数据语义色片：evo-step.first 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/text-evolution.html",
+     "cls": "div.quote-card",
+     "count": 1,
+     "reason": "数据语义色片：quote-card 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/text-search.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/theological-intervention-network.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/timeline.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/tribulations.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/underworld-power-network.html",
+     "cls": "div.kpi-card",
+     "count": 2,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/underworld-power-network.html",
+     "cls": "div.role-card.r-king",
+     "count": 1,
+     "reason": "数据语义色片：role-card.r-king 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/visual-art.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/visual-art.html",
+     "cls": "div.chant-card.amp-high",
+     "count": 1,
+     "reason": "数据语义色片：chant-card.amp-high 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/visual-art.html",
+     "cls": "span.ch-amp-bar",
+     "count": 1,
+     "reason": "数据语义色片：ch-amp-bar 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/visual-art.html",
+     "cls": "div.sc-cat.cat-danger",
+     "count": 5,
+     "reason": "数据语义色片：sc-cat.cat-danger 数据编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/visual-art.html",
+     "cls": "div.idea-card",
+     "count": 1,
+     "reason": "数据语义色片：idea-card 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/visual-art.html",
+     "cls": "div.id-form",
+     "count": 1,
+     "reason": "数据语义色片：id-form 数据编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/visualizations.html",
+     "cls": "a.nav-back",
+     "count": 1,
+     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
+    },
+    {
+     "page": "en/workplace.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/workplace.html",
+     "cls": "span.alert-badge",
+     "count": 7,
+     "reason": "数据语义色片：alert-badge 分类编码（图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/workplace.html",
+     "cls": "div.bw-cat",
+     "count": 1,
+     "reason": "数据语义色片：bw-cat 数据编码（图表语义·非界面装饰）"
+    }
+   ]
   }
  },
  "note": "裁决 2「豁免清单落 scripts/output/」登记簿：W864 首批建册，随批递增、条目随迁移整改递减。"

@@ -11,6 +11,22 @@
 ---
 
 
+## W887 en 迁移批 2·收口批（2026-10-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/（110 页） | W887 | C 渠 126 条规则 + seal 淡底 110 页 + KPI 顶条规则 57 页 |
+| scripts/_w886_en_migrate.py | W887 | 批 6 合并定义（批 2-5 合一） |
+| scripts/output/_w886_en_audit_b6.json | W887 | 批 6 前置审计子集（C 809·实底 508） |
+| scripts/output/_w886_en_audit_b6_after.json | W887 | 批 6 迁移后审计（C 213·实底 313） |
+| scripts/output/_w887_needed.json | W887 | 待登记豁免清单（181 条·生成输入） |
+| scripts/output/_w864_accent_exemptions.json | W887 | W887 分册 181 条（语义 64/功能 61/首卡 56·全簿 302） |
+| scripts/check_vermilion_solid.js | W887 | scopePages 并入 en（范围 96→234 页） |
+| scripts/output/_vermilion_solid_cache.json | W887 | 缓存重建（234 页） |
+| docs/00-导读/W批次编号对账表.md | W887 | 认领行与收官回填 |
+| CHANGELOG.md | W887 | W887 段 |
+| scripts/output/file-index.md | W887 | 同批段回写 |
+
 ## W886 en 迁移批 1·入口与结构 28 页（2026-10-22）
 
 | 文件 | W | 说明 |

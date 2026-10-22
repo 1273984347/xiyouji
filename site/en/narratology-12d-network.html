@@ -510,7 +510,7 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
@@ -1279,7 +1279,7 @@ header.hero .meta {
 
 /* Section */
 
-.section-title.alt { color: var(--accent); border-left-color: var(--accent-2); }
+.section-title.alt { color: var(--accent-text); border-left-color: var(--accent-2); }
 .section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
 
 .definition {
@@ -1494,6 +1494,9 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
 <style>/* W558: 多列表格防挤压——横向滚动 + 单行不折 */
 table.data-table { display: block; overflow-x: auto; }
 table.data-table th, table.data-table td { white-space: nowrap; }
+
+/* en 迁移批：KPI 顶条按行收敛（同排首卡保顶条·其余转细线·口径同 zh 页 W870） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 </style>
 <link rel="preload" href="../static/js/d3.v7.min.js" as="script" />
 <link rel="preload" href="../static/js/d3-sankey.min.js" as="script" />
