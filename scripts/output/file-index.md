@@ -11,6 +11,37 @@
 ---
 
 
+## W889 展示面复位批（2026-10-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| `.github/README.md` → `.github/README-internal.md` | W889 | 目录导读改名让位——原名会抢占 GitHub 仓库主页展示位（优先级 `.github/` > 根目录 > `docs/`）·转人工维护件（去生成来源标记） |
+| `.github/index.md` | W889 | 目录清单刷新（文件 2→3 项·导读指针自适应指向 README-internal.md） |
+| `scripts/gen_folder_docs.py` | W889 | 新增「主页展示位保护」常量与判定（精确单文件排除·不排整个 .github 树）+ index.md 导读指针自适应 |
+| `scripts/check_folder_docs.py` | W889 | 第 45 门禁 C1 豁免与生成器同源（共用 gen.showcase_guarded） |
+| `scripts/check_doc_sync.py` | W889 | 第 31 门禁新增 C7 断言（根 README 在位时 .github/README.md 必须不存在·self-test 增至 26 例） |
+| `README.md` | W889 | 首屏整体重排 + 30 秒上手速览块 + 抬头四行降噪入开发者专区 |
+| `docs/11-方案报告/计划方案/T13-任务计划执行与经验沉淀报告-2026-10-23.md` | W889 | 本批框架交付物（计划 / 决策 / 验收 / 复盘） |
+| `docs/00-导读/W批次编号对账表.md` | W889 | W889 认领行登记（touches 12 项） |
+| `docs/11-方案报告/README.md` | W889 | 计划方案目录索引登记 |
+| `scripts/output/stats.json` | W889 | stats 实算刷新 |
+| `scripts/output/_w889_spec.json` | W889 | 本批级联 spec（10 键） |
+
+## W888 剩余素材接线批·两路（2026-10-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/（83 页） | W888 | 路 A：viz 4 张浅底图接中文数据页卷末位（插入锚点在 `</main>` 之前·不触碰图表容器与正文） |
+| site/reader/（6 页：ch007/014/015/023/027/030） | W888 | 路 B：chap 1:1 百回母版接对应回目页页头（回目 H1 之后·配图位非封面位） |
+| site/system.css | W888 | `.viz-illustration` / `.chapter-plate` 规则源（与各页内联副本双写·file:// 下 CSP 拦外链样式表） |
+| scripts/build_reader.py | W888 | 生成器条件化（STYLE 常量 + CHAPTER_PLATES 映射 + `_render_one_page` 条件化插入） |
+| scripts/_w888_wire.py | W888 | 路 A 接线脚本（母题映射 + 内联副本补规则 + 暗色模式隐藏） |
+| scripts/_w888_chapter_plate.py | W888 | 路 B 母版接线脚本 |
+| scripts/_w888_index_revert.py | W888 | 索引回退脚本 |
+| scripts/output/_w888_spec.json | W888 | 本批级联 spec |
+| docs/11-方案报告/计划方案/T12-任务计划执行与经验沉淀报告-2026-10-23.md | W888 | 本批框架交付物（消费位侦察先行 + 四类不做留证） |
+| docs/11-方案报告/README.md | W888 | 计划方案目录索引登记 |
+
 ## W887 en 迁移批 2·收口批（2026-10-23）
 
 | 文件 | W | 说明 |

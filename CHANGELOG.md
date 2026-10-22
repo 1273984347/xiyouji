@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W887），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W889），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,26 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W889（2026-10-23）：展示面复位批（GitHub 主页载体 / 首屏 / 时间三层）
+
+> **来源**：用户 2026-10-23 三轮问答拍板——「那我的展示面怎么做呢」→ ① `.github/README.md` 改名 `README-internal.md` ② 推 dev 走 PR 合 main ③ 根 README 首屏整体重排 + 增补「30 秒上手」速览块。
+> - **根因**：GitHub 仓库主页 README 查找优先级为 `.github/` > 根目录 > `docs/`（抓线上渲染 HTML 实证：主页渲染的是 .github 目录导读而非项目门面）；而 `scripts/gen_folder_docs.py` 的排除规则「排除全部点开头顶层目录」唯独给 `.github` 开了例外（W779 批生成所致）→ 真实门面根 README 从未上主页。展示层另有时间错位：Pages 部署源为 main 分支 site/ 目录，而 main 停在 W794、展示落后开发 94 个批次。
+> - **文件**：.github/README.md（改名 .github/README-internal.md）、.github/index.md、scripts/gen_folder_docs.py、scripts/check_folder_docs.py、scripts/check_doc_sync.py、README.md、docs/11-方案报告/计划方案/T13-任务计划执行与经验沉淀报告-2026-10-23.md、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md、scripts/output/stats.json、scripts/output/_w889_spec.json。
+> - **载体复位**：目录导读改名让位 + 生成器「主页展示位保护」精确单文件排除（只排该文件不排整个 .github 树·保住 workflows 索引刷新与级联面）+ 门禁 45 同源豁免（共用 gen.showcase_guarded）+ 第 31 门禁新增 C7 断言（根 README 在位时 .github/README.md 必须不存在·self-test 26/26）。
+> - **首屏重排**：抬头四行（阅读契约 / 当前批次 / 版本号说明 / 维护契约）降噪入开发者专区（版本行整行原样搬运·C1 门禁与 C6 形态检查与级联锚点三处实测仍命中）；首屏新序 = 30 秒上手 → 项目定位 → 在线体验 → 桌面版下载 → 目录导航。
+> - **元数据**：topics 10 个（digital-humanities / chinese-classics / visualization / data-visualization / d3js / threejs / nlp / static-site / javascript / python）+ description 改读者向 + contactLinks 重排（REST PATCH 的 contact_links 字段被 GitHub 忽略·响应 null 且值不变·留证待 UI 补）。
+> - **验证**：gen_folder_docs --refresh 后 .github/README.md 仍不存在且 .github/index.md 已刷新（342 件重写零漂移·仅 1 件 diff）；门禁 45 目录文档新鲜度 0 FAIL / 186 目录；第 31 门禁 self-test 26/26；全量交付门禁 0 FAIL；抓线上主页 HTML 复核展示位已让位。
+> - **状态**：本批已收官。
+### W888（2026-10-23）：剩余素材接线批·两路（viz 卷末插画 85 页 + 百回母版 6 个回目页）
+
+> **来源**：用户令「继续」（承接 W885 接线批后的 63 件未接线素材）。侦察先行再定范围——全站 `<img>` 213 处全属 W885 页头装饰插画、其余页面零配图；`aspect-ratio` 全站 0 命中、3:4 竖版容器 0 个、卡片网格 9 类全无图位、8 个根页首屏全是浅色纯文字带——71 件素材里能直接接的只有 10 件，故本批只接两路，其余四类逐条留证不做。
+> - **文件**：site/data/（83 页）、site/reader/（6 页）、site/system.css、scripts/build_reader.py、scripts/_w888_wire.py、scripts/_w888_chapter_plate.py、scripts/_w888_index_revert.py、scripts/output/_w888_spec.json、docs/11-方案报告/计划方案/T12-任务计划执行与经验沉淀报告-2026-10-23.md、docs/11-方案报告/README.md。
+> - **路 A**：viz 4 张（浅底 640×640）接中文数据页卷末位（85 页·其中 2 页随并行 W887 批 66641736 入库）；插入锚点在 `</main>` 之前、最后一个 section 之后（古籍卷末题跋位·不触碰图表容器与正文）；规则源与内联副本双写（file:// 下 CSP `style-src self` 拦外链样式表·页面样式实际只认内联副本）；暗色模式隐藏（浅底宣纸图贴暗底会成亮斑）。
+> - **路 B**：chap 6 张（1:1 百回母版）接对应回目页页头（ch007/014/015/023/027/030·插在回目 H1 之后·配图位非封面位）；改生成器 `scripts/build_reader.py` 条件化 + 精准注入 6 页——不跑全量重生成（实测 reader 622 页全量重生成漂移 132,812 行·且其处理范围含 site/en 138 页与在途批写面冲突）。
+> - **验证**：目标 6 页母版 markup 与规则段与生成器输出逐字节一致（剥离 INLINED CSS 块与 CSP meta 后残留仅 4 行 inline_css 空行留痕·非目标页残留差异集合与目标页同构）；第 48 槽 32/32 判据符合；模糊词 0 命中；门禁 54 段核心 0 FAIL；CSP 856 页 0 漂移；浏览器实拍两页通过。
+> - **本批三处自造 bug 被自身探针抓出并全部修复**：注入代码的「字符串内换行」误写真换行（`py_compile` 当场拦下·未落到任何页面）；生成器输出的图片相对路径少一层 `../`（逐字节对拍抓出·注入是对的、生成器是错的）；注入端与生成器端 CSS 规则注释措辞不一致（同批抓出·会在全量重生成时造成一次无意义漂移）。另踩行尾不匹配——`scripts/build_reader.py` 是 CRLF 而 `site/` 产物全 LF，脚本改为按目标文件字节判定行尾并自适应构造锚点。
+> - **状态**：已收官（提交 3f04aaa3·内容批 97 文件 +2619/−5）。
 
 ### W887（2026-10-23）：en 迁移批 2·收口批（110 页合并四批·第 49 槽范围扩至全 en 138 页）
 
