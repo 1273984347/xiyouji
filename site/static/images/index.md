@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（46）
+## 文件（62）
 
 ### 样式与资源
 
@@ -39,6 +39,12 @@
 - `card-22-shaseng-fuzhong.webp`
 - `card-23-shixiong-bingli.webp`
 - `card-24-shixiong-shanmen.webp`
+- `chap-07.webp`
+- `chap-14.webp`
+- `chap-15.webp`
+- `chap-23.webp`
+- `chap-27.webp`
+- `chap-30.webp`
 - `hero-01-xihai-yunhai.webp`
 - `hero-02-shitu-wuxing.webp`
 - `hero-03-fabao-qiji.webp`
@@ -61,6 +67,16 @@
 - `og-10-canjuan.webp`
 - `og-11-gudeng.webp`
 - `og-12-tongjing.webp`
+- `post-01-wukong.webp`
+- `post-02-tangseng.webp`
+- `post-03-bajie.webp`
+- `post-04-shaseng.webp`
+- `post-05-bailongma.webp`
+- `post-06-changlu.webp`
+- `viz-01-network.webp`
+- `viz-02-heatmap.webp`
+- `viz-03-radar.webp`
+- `viz-04-timeline.webp`
 
 ---
 
