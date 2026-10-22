@@ -1,0 +1,750 @@
+{
+ "dry": false,
+ "pages": {
+  "data/aesthetics.html": {
+   "classes": [
+    "level-num"
+   ],
+   "elements": 20,
+   "unclassed": 6,
+   "rules": [
+    ".insight-box h4",
+    ".insight-box li strong",
+    "/* 墨韵（W462）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */         .chart-",
+    ".heatmap-row .level-num"
+   ]
+  },
+  "data/business-model.html": {
+   "classes": [
+    "ibox-label",
+    "icon-wrong",
+    "map-label"
+   ],
+   "elements": 28,
+   "unclassed": 19,
+   "rules": [
+    ".icon-wrong",
+    ".insight-box .ibox-label",
+    ".insight-box .ibox-body strong",
+    ".summary-card .map-label"
+   ]
+  },
+  "data/cave-estate.html": {
+   "classes": [],
+   "elements": 11,
+   "unclassed": 11,
+   "rules": [
+    ".insight-box h4",
+    ".insight-box li strong"
+   ]
+  },
+  "data/chapter-structure-graph.html": {
+   "classes": [],
+   "elements": 1,
+   "unclassed": 1,
+   "rules": [
+    ".topnav nav a:hover",
+    ".site-footer nav a:hover"
+   ]
+  },
+  "data/character-appearance.html": {
+   "classes": [],
+   "elements": 9,
+   "unclassed": 9,
+   "rules": [
+    ".insight-box li strong"
+   ]
+  },
+  "data/character-dynamic-network.html": {
+   "classes": [
+    "num"
+   ],
+   "elements": 31,
+   "unclassed": 7,
+   "rules": [
+    ".kpi-card .num",
+    ".section h2",
+    ".rel-table td.num",
+    ".insight-box strong"
+   ]
+  },
+  "data/character-relationship-3d.html": {
+   "classes": [],
+   "elements": 1,
+   "unclassed": 1,
+   "rules": [
+    ".topnav nav a:hover",
+    ".site-footer nav a:hover"
+   ]
+  },
+  "data/character-semantic-network.html": {
+   "classes": [],
+   "elements": 1,
+   "unclassed": 1,
+   "rules": [
+    "header h1"
+   ]
+  },
+  "data/character-sentiment-arc.html": {
+   "classes": [],
+   "elements": 8,
+   "unclassed": 8,
+   "rules": [
+    ".insights-list li strong"
+   ]
+  },
+  "data/chart-design.html": {
+   "classes": [
+    "domino-arrow",
+    "domino-chain-title",
+    "ic-num",
+    "off-wk",
+    "spiral-stage-name",
+    "stress",
+    "wk"
+   ],
+   "elements": 30,
+   "unclassed": 8,
+   "rules": [
+    ".section-principle strong",
+    ".spiral-stage-emotions .wk",
+    ".spiral-stage-offsets .off-wk",
+    ".sundial-indices .stress",
+    ".insight-box h4",
+    ".insight-box li strong"
+   ]
+  },
+  "data/cognitive-psychology.html": {
+   "classes": [
+    "icon-wrong",
+    "map-label"
+   ],
+   "elements": 22,
+   "unclassed": 16,
+   "rules": [
+    ".icon-wrong",
+    ".summary-card .map-label"
+   ]
+  },
+  "data/concept-device.html": {
+   "classes": [],
+   "elements": 5,
+   "unclassed": 5,
+   "rules": [
+    ".insight-box li strong"
+   ]
+  },
+  "data/counterfactual.html": {
+   "classes": [
+    "marker",
+    "quote-mark"
+   ],
+   "elements": 14,
+   "unclassed": 9,
+   "rules": [
+    ".core-conclusion-box .quote-mark",
+    ".core-conclusion-box .core-text strong",
+    ".insight-box li .marker",
+    ".insight-box li strong"
+   ]
+  },
+  "data/criticism-history.html": {
+   "classes": [
+    "cc-name"
+   ],
+   "elements": 25,
+   "unclassed": 24,
+   "rules": [
+    ".section-sub strong",
+    ".candidate-card.main .cc-name",
+    ".evidence-col.against h5",
+    ".scalpel-note strong",
+    ".insight-box h4",
+    ".insight-box li strong"
+   ]
+  },
+  "data/cultural-misreading.html": {
+   "classes": [
+    "term"
+   ],
+   "elements": 21,
+   "unclassed": 9,
+   "rules": [
+    ".insight-box li strong",
+    "#bias-table td.term",
+    "/* 墨韵（W462）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */         .chart-"
+   ]
+  },
+  "data/deconstruction.html": {
+   "classes": [],
+   "elements": 11,
+   "unclassed": 11,
+   "rules": [
+    ".insight-box h4",
+    ".insight-box li strong"
+   ]
+  },
+  "data/dialogue-sentiment.html": {
+   "classes": [],
+   "elements": 8,
+   "unclassed": 8,
+   "rules": [
+    ".insights-list li strong"
+   ]
+  },
+  "data/emotional-heatmap.html": {
+   "classes": [
+    "neg",
+    "num"
+   ],
+   "elements": 30,
+   "unclassed": 21,
+   "rules": [
+    ".section-sub strong",
+    ".section-sub .neg",
+    ".sc-stat.neg .num",
+    ".insight-box h4",
+    ".insight-box li strong"
+   ]
+  },
+  "data/ethics-consumption.html": {
+   "classes": [
+    "k",
+    "role"
+   ],
+   "elements": 49,
+   "unclassed": 7,
+   "rules": [
+    ".kicker",
+    ".kpi:hover",
+    ".kpi-card:hover",
+    ".org-card h3",
+    ".stat-card .k",
+    ".ipo-mgmt .mi .role",
+    ".fin-cell .k",
+    ".insight-box h4",
+    ".insight-box li strong"
+   ]
+  },
+  "data/four-heavenly-kings-artifacts.html": {
+   "classes": [
+    "section-title"
+   ],
+   "elements": 2,
+   "unclassed": 0,
+   "rules": [
+    "/* Section */  .section-title.alt"
+   ]
+  },
+  "data/game-webnovel.html": {
+   "classes": [
+    "col-stat",
+    "idx",
+    "lbl"
+   ],
+   "elements": 33,
+   "unclassed": 16,
+   "rules": [
+    ".pie-legend h4",
+    "#artifact-table td.col-stat",
+    ".nc-block .lbl",
+    ".insight-box h4",
+    ".insight-box li .idx",
+    ".insight-box li strong"
+   ]
+  },
+  "data/global-pattern.html": {
+   "classes": [
+    "cell-xiyou",
+    "dest-cell"
+   ],
+   "elements": 22,
+   "unclassed": 14,
+   "rules": [
+    ".insight-box li strong",
+    ".journey-table tbody td:first-child",
+    ".journey-table .cell-xiyou",
+    ".dest-table tbody td.dest-cell"
+   ]
+  },
+  "data/guanyin-six-roles-network.html": {
+   "classes": [
+    "section-title"
+   ],
+   "elements": 2,
+   "unclassed": 0,
+   "rules": [
+    "/* Section */  .section-title.alt"
+   ]
+  },
+  "data/hardship-difficulty-heatmap.html": {
+   "classes": [
+    "num"
+   ],
+   "elements": 20,
+   "unclassed": 4,
+   "rules": [
+    ".kpi-card .num",
+    ".section h2",
+    ".dim-stat-table td.num"
+   ]
+  },
+  "data/hardship-heatmap.html": {
+   "classes": [],
+   "elements": 4,
+   "unclassed": 4,
+   "rules": [
+    ".section h2"
+   ]
+  },
+  "data/intertextuality-network.html": {
+   "classes": [
+    "section-title"
+   ],
+   "elements": 2,
+   "unclassed": 0,
+   "rules": [
+    "/* Section */  .section-title.alt"
+   ]
+  },
+  "data/journey-geo-3d.html": {
+   "classes": [],
+   "elements": 1,
+   "unclassed": 1,
+   "rules": [
+    ".topnav nav a:hover",
+    ".site-footer nav a:hover"
+   ]
+  },
+  "data/journey-map-interactive.html": {
+   "classes": [],
+   "elements": 1,
+   "unclassed": 1,
+   "rules": [
+    ".topnav nav a:hover",
+    ".site-footer nav a:hover"
+   ]
+  },
+  "data/journey-route.html": {
+   "classes": [
+    "count",
+    "span-long"
+   ],
+   "elements": 14,
+   "unclassed": 10,
+   "rules": [
+    ".filter-bar .count",
+    ".segment-table .span-long",
+    ".insight-box h4",
+    ".insight-box li strong"
+   ]
+  },
+  "data/journey-spacetime.html": {
+   "classes": [
+    "num"
+   ],
+   "elements": 23,
+   "unclassed": 7,
+   "rules": [
+    ".kpi-card .num",
+    ".section h2",
+    ".insight-box strong",
+    ".stage-table td.num"
+   ]
+  },
+  "data/jurisprudence.html": {
+   "classes": [],
+   "elements": 2,
+   "unclassed": 2,
+   "rules": []
+  },
+  "data/karma-reincarnation.html": {
+   "classes": [
+    "map-label"
+   ],
+   "elements": 14,
+   "unclassed": 13,
+   "rules": [
+    ".map-card.alt3 .map-label",
+    ".summary-card .map-label"
+   ]
+  },
+  "data/language-style-radar.html": {
+   "classes": [],
+   "elements": 1,
+   "unclassed": 1,
+   "rules": [
+    ".topnav nav a:hover",
+    ".site-footer nav a:hover"
+   ]
+  },
+  "data/linguistics.html": {
+   "classes": [],
+   "elements": 18,
+   "unclassed": 18,
+   "rules": []
+  },
+  "data/magic-system.html": {
+   "classes": [
+    "amt",
+    "num"
+   ],
+   "elements": 43,
+   "unclassed": 14,
+   "rules": [
+    ".energy-law strong",
+    ".data-table td.num",
+    ".budget-detail li .amt",
+    ".insight-box li strong"
+   ]
+  },
+  "data/material-archaeology.html": {
+   "classes": [
+    "center"
+   ],
+   "elements": 48,
+   "unclassed": 35,
+   "rules": [
+    ".chart-block h3",
+    ".insight-box h4",
+    ".insight-box li strong"
+   ]
+  },
+  "data/mbti-evolution.html": {
+   "classes": [
+    "li-mbti"
+   ],
+   "elements": 9,
+   "unclassed": 4,
+   "rules": [
+    ".section h2",
+    ".legend-item .li-mbti"
+   ]
+  },
+  "data/methodology-matrix.html": {
+   "classes": [
+    "axis-name",
+    "cc-key"
+   ],
+   "elements": 29,
+   "unclassed": 22,
+   "rules": [
+    ".design-purpose strong",
+    ".axis-card .axis-name",
+    ".component-card .cc-key",
+    ".insight-box h4",
+    ".insight-box li strong"
+   ]
+  },
+  "data/ming-political-thought-comparison.html": {
+   "classes": [],
+   "elements": 6,
+   "unclassed": 6,
+   "rules": [
+    ".section h2"
+   ]
+  },
+  "data/monster-capability-radar.html": {
+   "classes": [
+    "ex-monster"
+   ],
+   "elements": 11,
+   "unclassed": 7,
+   "rules": [
+    ".topnav nav a:hover",
+    ".site-footer nav a:hover",
+    ".section h2",
+    ".extreme-card .ex-monster"
+   ]
+  },
+  "data/monster-ecology-network.html": {
+   "classes": [],
+   "elements": 6,
+   "unclassed": 6,
+   "rules": [
+    ".section h2"
+   ]
+  },
+  "data/monster-female-network.html": {
+   "classes": [
+    "section-title"
+   ],
+   "elements": 2,
+   "unclassed": 0,
+   "rules": [
+    "/* Section */  .section-title.alt"
+   ]
+  },
+  "data/monster-sociology.html": {
+   "classes": [
+    "icon-wrong",
+    "map-label"
+   ],
+   "elements": 33,
+   "unclassed": 26,
+   "rules": [
+    ".icon-wrong",
+    ".summary-card .map-label"
+   ]
+  },
+  "data/monster-victims-network.html": {
+   "classes": [
+    "section-title"
+   ],
+   "elements": 2,
+   "unclassed": 0,
+   "rules": [
+    "/* Section */  .section-title.alt"
+   ]
+  },
+  "data/music-structure.html": {
+   "classes": [
+    "num",
+    "sym-vs"
+   ],
+   "elements": 65,
+   "unclassed": 14,
+   "rules": [
+    ".sym-vs",
+    ".sym-principle strong",
+    "#climax-table td.num",
+    ".insight-box li strong"
+   ]
+  },
+  "data/narrative-experiment.html": {
+   "classes": [
+    "gc-name",
+    "k",
+    "lbl",
+    "sc-name",
+    "stars",
+    "sv"
+   ],
+   "elements": 37,
+   "unclassed": 7,
+   "rules": [
+    ".kicker",
+    ".kpi:hover",
+    ".kpi-card:hover",
+    ".meta-item .k",
+    ".highlight-block .lbl",
+    ".hardship-card .hc-stat .sv",
+    ".hardship-card .hc-diff .stars",
+    ".score-card .sc-name",
+    ".gen-cat .gc-name",
+    ".insight-box h4",
+    ".insight-box li strong"
+   ]
+  },
+  "data/narrative-rhythm-curve.html": {
+   "classes": [],
+   "elements": 1,
+   "unclassed": 1,
+   "rules": [
+    ".topnav nav a:hover",
+    ".site-footer nav a:hover"
+   ]
+  },
+  "data/narratology-12d-network.html": {
+   "classes": [
+    "section-title"
+   ],
+   "elements": 2,
+   "unclassed": 0,
+   "rules": [
+    "/* Section */  .section-title.alt"
+   ]
+  },
+  "data/narratology-16d-network.html": {
+   "classes": [
+    "section-title"
+   ],
+   "elements": 2,
+   "unclassed": 0,
+   "rules": [
+    "/* Section */  .section-title.alt"
+   ]
+  },
+  "data/perf-canvas-rendering.html": {
+   "classes": [
+    "section-title"
+   ],
+   "elements": 1,
+   "unclassed": 0,
+   "rules": [
+    "/* Section */  .section-title.alt"
+   ]
+  },
+  "data/philosophy.html": {
+   "classes": [
+    "box-title",
+    "map-label"
+   ],
+   "elements": 46,
+   "unclassed": 41,
+   "rules": [
+    ".insight-box .box-title",
+    ".insight-box .box-content strong",
+    ".map-card.alt3 .map-label",
+    ".summary-card .map-label"
+   ]
+  },
+  "data/pilgrim-team-dynamic-network.html": {
+   "classes": [],
+   "elements": 5,
+   "unclassed": 5,
+   "rules": [
+    ".section h2"
+   ]
+  },
+  "data/pilgrim-team-psychology-arc.html": {
+   "classes": [],
+   "elements": 6,
+   "unclassed": 6,
+   "rules": [
+    ".section h2"
+   ]
+  },
+  "data/poetry-rhythm-analysis.html": {
+   "classes": [],
+   "elements": 5,
+   "unclassed": 5,
+   "rules": [
+    ".section h2",
+    ".cross-page-section h2"
+   ]
+  },
+  "data/power-resources.html": {
+   "classes": [
+    "path-label"
+   ],
+   "elements": 38,
+   "unclassed": 37,
+   "rules": [
+    ".summary-card .path-label",
+    ".insight-box .ibox-row strong"
+   ]
+  },
+  "data/relationships.html": {
+   "classes": [
+    "ibox-label",
+    "map-label"
+   ],
+   "elements": 56,
+   "unclassed": 49,
+   "rules": [
+    ".insight-box .ibox-label",
+    ".insight-box .ibox-body strong",
+    ".map-card.alt3 .map-label",
+    ".summary-card .map-label"
+   ]
+  },
+  "data/risk-project.html": {
+   "classes": [
+    "ib-label",
+    "map-label",
+    "ms-year"
+   ],
+   "elements": 33,
+   "unclassed": 21,
+   "rules": [
+    ".insight-box .ib-label",
+    ".summary-card .map-label",
+    ".milestone-list .ms-year"
+   ]
+  },
+  "data/six-senses-narratology-network.html": {
+   "classes": [
+    "section-title"
+   ],
+   "elements": 2,
+   "unclassed": 0,
+   "rules": [
+    "/* Section */  .section-title.alt"
+   ]
+  },
+  "data/social-media.html": {
+   "classes": [
+    "col-mbti",
+    "idx"
+   ],
+   "elements": 28,
+   "unclassed": 15,
+   "rules": [
+    ".radar-legend h4",
+    "#mbti-table td.col-mbti",
+    ".insight-box h4",
+    ".insight-box li .idx",
+    ".insight-box li strong"
+   ]
+  },
+  "data/text-evolution.html": {
+   "classes": [
+    "evidence",
+    "evo-element",
+    "name"
+   ],
+   "elements": 39,
+   "unclassed": 25,
+   "rules": [
+    ".insight-box li strong",
+    ".evo-element",
+    ".author-table td.name",
+    ".author-table td.evidence.against",
+    ".author-table td.evidence.against li::before",
+    ".quote-card li::before",
+    ".quote-card li::after"
+   ]
+  },
+  "data/timeline.html": {
+   "classes": [
+    "ec-axis"
+   ],
+   "elements": 7,
+   "unclassed": 0,
+   "rules": []
+  },
+  "data/visual-art.html": {
+   "classes": [],
+   "elements": 8,
+   "unclassed": 8,
+   "rules": [
+    ".project-intro h3",
+    ".insight-box h4",
+    ".insight-box li strong"
+   ]
+  },
+  "data/workplace.html": {
+   "classes": [
+    "delay",
+    "ic-q",
+    "k"
+   ],
+   "elements": 32,
+   "unclassed": 8,
+   "rules": [
+    ".kicker",
+    ".kpi:hover",
+    ".kpi-card:hover",
+    ".meta-item .k",
+    "#trip-table td.delay",
+    ".resume-basic h3",
+    ".interview-card .ic-q",
+    ".insight-box h4",
+    ".insight-box li strong"
+   ]
+  }
+ },
+ "review": [
+  {
+   "page": "data/jurisprudence.html",
+   "reason": "无类名且标签规则未命中",
+   "count": 2
+  },
+  {
+   "page": "data/linguistics.html",
+   "reason": "无类名且标签规则未命中",
+   "count": 18
+  }
+ ]
+}

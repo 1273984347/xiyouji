@@ -1,7 +1,7 @@
 {
  "meta": {
   "generator": "scripts/export_design_tokens.py",
-  "generated": "2026-10-21",
+  "generated": "2026-10-22",
   "source": [
    "site/tokens.css",
    "site/system.css"
@@ -148,7 +148,7 @@
    "line": 82
   },
   "light/chart-3": {
-   "$value": "#C9A063",
+   "$value": "#B38F58",
    "$type": "color",
    "$description": "赭金",
    "name": "--chart-3",
@@ -596,7 +596,7 @@
    "line": 178
   },
   "dark/accent": {
-   "$value": "#E0604F",
+   "$value": "#E46250",
    "$type": "color",
    "$description": "",
    "name": "--accent",
