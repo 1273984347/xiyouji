@@ -27,10 +27,13 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 SITEMAP = SITE / "sitemap.xml"
 PAIRS = ROOT / "scripts" / "output" / "hreflang-pairs.json"
-COVER = SITE / "static" / "img" / "og-cover.png"
+COVER = SITE / "static" / "img" / "og-cover.png"          # 旧排版卡（gen_og_cover.py 生成物·保留作回退）
+COVER_ZH = SITE / "static" / "img" / "og-cover-ink-zh.jpg"  # 现役中文站分享图（W879 水墨图）
+COVER_EN = SITE / "static" / "img" / "og-cover-ink-en.jpg"  # 现役英文站分享图（W879 水墨图）
 
 BASE = "https://1273984347.github.io/xiyouji/"
-OG_IMAGE = BASE + "static/img/og-cover.png"
+OG_IMAGE_ZH = BASE + "static/img/og-cover-ink-zh.jpg"
+OG_IMAGE_EN = BASE + "static/img/og-cover-ink-en.jpg"
 # 两个排除面语义不同：SEO 注入面=855 页（只排模板壳，W771 现役实测）；
 # sitemap 收录面=851 页（与 verify_delivery 现役 sitemap 门禁期望集一致：另排本地工具页两页 + 两个 data/-view 辅助页；404.html 按门禁要求收录）
 SEO_EXCLUDE = {"_template.html", "data/_shell.html"}
@@ -55,11 +58,26 @@ def en_candidate(zh_rel: str) -> str:
     return "en/" + (zh_rel[len("data/"):] if zh_rel.startswith("data/") else zh_rel)
 
 
+def og_image_for(rel: str) -> str:
+    """分语言 og:image 期望值（W880·用户 2026-10-22 批准改管控件）：en/ 前缀为英文站，其余为中文站。"""
+    return OG_IMAGE_EN if rel.replace("\\", "/").startswith("en/") else OG_IMAGE_ZH
+
+
 def _check_og_cover() -> list[str]:
-    """R4 og-cover 存在性 + 尺寸（1200x630）+ 体积（≤300KB）（W733 提取）。"""
+    """R4 og 分享图存在性 + 尺寸（1200x630）+ 体积（≤300KB）（W733 提取·W880 改校两张现役图）。"""
     violations = []
+    for label, path in (("og-cover-ink-zh.jpg", COVER_ZH), ("og-cover-ink-en.jpg", COVER_EN)):
+        if not path.exists():
+            violations.append(f"R4 {label} 不存在")
+            continue
+        from PIL import Image
+        with Image.open(path) as im:
+            if im.size != (1200, 630):
+                violations.append(f"R4 {label} 尺寸 {im.size} != (1200,630)")
+        if path.stat().st_size > 300 * 1024:
+            violations.append(f"R4 {label} 超 300KB: {path.stat().st_size}B")
     if not COVER.exists():
-        violations.append("R4 og-cover.png 不存在")
+        violations.append("R4 og-cover.png 不存在（旧排版卡·gen_og_cover.py 生成物·保留作回退）")
     else:
         from PIL import Image
         with Image.open(COVER) as im:
@@ -82,7 +100,7 @@ def _check_head(pages) -> list[str]:
             ('name="description"', "description"),
             (f'<link rel="canonical" href="{url}">', "canonical"),
             ('property="og:title"', "og:title"),
-            (f'<meta property="og:image" content="{OG_IMAGE}">', "og:image"),
+            (f'<meta property="og:image" content="{og_image_for(rel)}">', "og:image"),
             (f'<meta property="og:url" content="{url}">', "og:url"),
             ('name="twitter:card"', "twitter:card"),
         ]

@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """gen_og_cover.py — 生成社交分享封面 site/static/img/og-cover.png（W591 SEO 清零）。
 
+W880 起**现行 og:image 已改指两张水墨图**（中文 og-cover-ink-zh.jpg / 英文 og-cover-ink-en.jpg），
+本脚本产出的排版卡降级为**旧版留档与回退**（855 页已不再引用它）——保留本脚本是为了让该文件
+仍可复现；切勿再把 og-cover.png 当作现行分享图来手工覆盖（生成物被手改会被下次生成冲掉）。
+
 规格（docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md WP-C 第 1 条）：
   - 精确 1200x630 px，PNG ≤ 300KB
   - 宣纸底 #faf7f2 + 朱砂 #c8463a 主标题「取经录」+ 副题「一源多形 · 数字人文解读 100 回」+ 站点 URL 小字

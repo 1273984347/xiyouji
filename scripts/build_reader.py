@@ -29,7 +29,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "site" / "reader"
 BLOB = "https://github.com/1273984347/xiyouji/blob/main/docs/"
 BASE = "https://1273984347.github.io/xiyouji/"
-OG_IMAGE = BASE + "static/img/og-cover.png"
+OG_IMAGE = BASE + "static/img/og-cover-ink-zh.jpg"   # W880：reader 生成器仅产出中文页 → 取中文站分享图
 
 # 板块表：源目录名 → (子目录, 板块标题)。01 特殊：chNNN 命名+数字 prev/next。
 SECTIONS = [
