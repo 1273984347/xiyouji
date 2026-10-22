@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（333）
+## 文件（339）
 
 ### Markdown 文档
 
@@ -301,7 +301,6 @@
 - `_w867_accent_audit.json`
 - `_w867_diff_review.json`
 - `_w867_spec.json`
-- `_w867_visual_snapshot_before.json`
 - `_w868_accent_audit.json`
 - `_w868_diff_review.json`
 - `_w868_spec.json`
@@ -324,6 +323,13 @@
 - `_w874_spec.json`
 - `_w875_diff_review.json`
 - `_w875_spec.json`
+- `_w876_c_swap_report.json`
+- `_w876_site_audit.json`
+- `_w876_site_audit_final.json`
+- `_w876_spec.json`
+- `_w877_spec.json`
+- `_w877_template_matrix.json`
+- `_w878_spec.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`
