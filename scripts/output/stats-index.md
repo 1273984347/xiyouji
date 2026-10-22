@@ -14,7 +14,7 @@
 | csp_covered | 856 | html_total − _template.html（generate_csp TEMPLATE_EXCLUDE） | W459 | W459 |
 | gate_count | 48 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | 860 |
 | html_total | 857 | site/**/*.html（递归全站） | W459 | W459 |
-| inline_css_pages | 850 | site 全树含 INLINED 标记页 | W459 | W875 |
+| inline_css_pages | 330 | site 全树含 INLINED 标记页 | W459 | W879 |
 | methodology_docs | 24 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W755 |
 | pytest_collected | 823 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | 860 |
 | report_docs | 46 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W877 |
@@ -28,6 +28,9 @@
 | visualization_pages | 87 | site/data_html − _shell.html | W459 | W459 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W879（2026-10-22 20:55:33）
+- inline_css_pages: 850 → 330
 
 ### W875（2026-10-22 20:25:37）
 - inline_css_pages: 330 → 850
