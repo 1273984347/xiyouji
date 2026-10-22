@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W889），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W890），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -18,6 +18,18 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 
+### W890（2026-10-23）：CI 阻塞项清偿批（过期断言同步 / ruff 清零 / 跨平台探针 / 依赖漏洞）
+
+> **来源**：承接 W889 展示面复位批合 main 时的 CI 实证——`Unit Tests (pytest)` 2 failed（required check·阻塞合并）、`Code Quality (ruff + black)` 6 errors、`pip audit` 25 漏洞。三类红项**均非 W889 引入**，而是 W836/W860/W876/W887 四批的成果未同步判据/测试留下的欠账。
+> - **文件**：tests/unit/test_vermilion_solid.py、scripts/_w851_j1_name_audit.py、scripts/tmpe_tidy.py、scripts/check_no_brand_refs.py、scripts/check_plan_template.py、scripts/requirements.txt、README.md、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md、docs/11-方案报告/计划方案/T14-任务计划执行与经验沉淀报告-2026-10-23.md、scripts/output/_w890_spec.json、scripts/output/_cascade_files_W890.txt、scripts/output/_w851_j1_name_audit.json、CHANGELOG.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、AGENTS.md、CITATION.cff、.github/workflows/README.md、scripts/output/file-index.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html。
+> - **过期断言同步①（required check 阻塞项）**：`test_scope_matches_audit_surface` 断言「门禁范围 == zh 审计面 96 页」，而 W887 已**有意**把第 49 槽 `scopePages` 并入 `site/en` 138 页（en 侧豁免由 W886/W887 分册承接）→ 按新契约改判为「范围 == zh 审计面 ∪ en 全量」，并保留「zh 审计面必须被完整覆盖」这条原前提。
+> - **过期断言同步②（required check 阻塞项）**：`DEFER_HOLD_CHECKS` 的「浅色 --chart-3 未改值 #C9A063」与「暗色 --accent 未改值 #E0604F」两条，被 W876 的值切换（浅色 chart-3 → #B38F58、暗色 accent → #E46250）**有意**打破——「原值未动」契约对已落地项不再适用 → 收敛为仅剩尚未改值的「浅色 --accent-soft 未改值 #E9B885」（实测 tokens.css 仍为该值）。
+> - **跨平台存活探针修复**：`scripts/tmpe_tidy.py` 的 `os.kill(pid, 0)` 在 Windows 上等价 TerminateProcess（**会杀掉调用方自己**）→ pytest 跑到 `test_tmpe_tidy` 的 RunLock 复验时读到锁里的当前 pytest pid 即自杀，表现为「静默退出·零输出·exit 1」的本地红/CI 绿分歧族（CI 跑 ubuntu-latest 走 POSIX 分支）。修法=新增 `_pid_alive()`：POSIX 用 `os.kill(pid,0)`+ProcessLookupError/PermissionError 分支；Windows 用 OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION)+GetExitCodeProcess 的**非终止式**存在性查询。
+> - **测试隔离缺陷修复**：`RunLock.__init__(self, path=RUN_LOCK)` 的默认参数在**类定义时**求值 → `monkeypatch.setattr(tt, "RUN_LOCK", ...)` 对已绑定默认值无效 → 测试构造 `RunLock()` 落到**真**锁路径（读写仓库真实 tmpe/.locks/）→ 改为 `path=None` 运行时解析，monkeypatch 恢复生效。
+> - **ruff 六项清零**：`check_no_brand_refs.py` UP009（删 encoding 声明）/UP015（删冗余 mode）/F841（删未使用的死变量 `args`）/B007（未用循环变量 `pat` → `_pat`）+ `check_plan_template.py` UP009/E741（歧义变量名 `l` → `ln`）→ `ruff check scripts/` 从 6 errors 归零（全仓口径·非增量）。
+> - **依赖漏洞清零**：`pip-audit -r scripts/requirements.txt --strict` 实测 25 个 CVE 全为 Pillow 12.3.0（fix 13.0.0·含 GHSA-78g4-xqwv-q3g8）→ Pillow 升 13.0.0（与 W412 当年 11.3.0→12.3.0 同型复发·上游新版本→旧版本出现新 CVE）。
+> - **验证**：pytest 全量 **831 passed / 3 skipped**（含 test_vermilion_solid 与 test_w851_j1_name_audit 与 test_tmpe_tidy 三处原红面）+ Pillow 13.0.0 下 `test_slice_screenshots` 12 例切片面全绿 + 第 33 门禁 head 内容链路读图正常 + `ruff check scripts/` All checks passed + pip-audit 0 漏洞 + 全量交付门禁 54 段核心全部通过。
+> - **状态**：本批已收官。
 ### W889（2026-10-23）：展示面复位批（GitHub 主页载体 / 首屏 / 时间三层）
 
 > **来源**：用户 2026-10-23 三轮问答拍板——「那我的展示面怎么做呢」→ ① `.github/README.md` 改名 `README-internal.md` ② 推 dev 走 PR 合 main ③ 根 README 首屏整体重排 + 增补「30 秒上手」速览块。

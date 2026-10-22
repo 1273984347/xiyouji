@@ -136,12 +136,23 @@ def test_gate_marker_is_last_line_of_self_test_output():
 # ---------- 5. 范围与基线件 ----------
 
 def test_scope_matches_audit_surface():
-    """门禁范围（96 页）必须与 W876 审计面一致——否则豁免扣减对不上账。"""
+    """门禁范围必须覆盖审计面——W887 收口后 = zh 审计面 + en 全量。
+
+    W876 时期的断言是「门禁范围 == 审计面（zh 96 页）」；W887 把第 49 槽
+    `scopePages` 并入 `site/en`（138 页·en 侧豁免由 W886/W887 分册承接）后，
+    门禁范围 = zh 审计面 ∪ en 全量，而审计分册（`_w876_site_audit_final.json`）
+    仍只覆盖 zh 96 页——旧断言与新契约不符（W889 CI 实证：pytest 2 failed 之
+    一即此）。本测试按新契约改判：范围 == zh 审计面 ∪ en 全量，且 zh 审计面
+    必须被门禁完整覆盖（豁免扣减对账的前提不变）。
+    """
     out = node_eval("JSON.stringify(g.scopePages(require('path').resolve('site')))")
     scope = set(json.loads(out))
     audit_pages = set(json.loads(AUDIT.read_text(encoding="utf-8")).keys())
-    assert scope == audit_pages, (
-        f"范围不一致：仅门禁有 {sorted(scope - audit_pages)[:5]}·仅审计有 {sorted(audit_pages - scope)[:5]}")
+    en_pages = {"en/%s" % p.name for p in (ROOT / "site" / "en").glob("*.html")}
+    expect = audit_pages | en_pages
+    assert scope == expect, (
+        f"范围不一致：仅门禁有 {sorted(scope - expect)[:5]}·仅期望有 {sorted(expect - scope)[:5]}")
+    assert audit_pages <= scope, "zh 审计面未被门禁覆盖——豁免扣减将对不上账"
 
 
 def test_report_and_cache_exist_after_run():

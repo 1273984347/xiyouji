@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """check_no_brand_refs.py — 品牌字面量零命中守卫（W836·N2「归档检测器复活到活面」）
 
 为什么有这个东西（W812/W814 去品牌批留下的缺口）：
@@ -111,7 +110,7 @@ def scan_repo(root=ROOT):
     for rel in files:
         path = os.path.join(root, rel.replace("/", os.sep))
         try:
-            with open(path, "r", encoding="utf-8", errors="ignore") as fh:
+            with open(path, encoding="utf-8", errors="ignore") as fh:
                 text = fh.read()
         except OSError:
             continue
@@ -168,7 +167,6 @@ def _exit_code_for_error():
 
 
 def main(argv):
-    args = [a for a in argv[1:] if a != "--self-test"]
     if "--self-test" in argv[1:]:
         return _self_test()
     root = ROOT
@@ -179,7 +177,7 @@ def main(argv):
         return _exit_code_for_error()
     if hits:
         print("FAIL 品牌字面量命中 %d 处（扫描 %d 个已跟踪文件）：" % (len(hits), scanned))
-        for rel, pat, snippet in hits[:40]:
+        for rel, _pat, snippet in hits[:40]:
             print("  %s :: %s" % (rel, snippet))
         if len(hits) > 40:
             print("  ……另有 %d 处未列" % (len(hits) - 40))

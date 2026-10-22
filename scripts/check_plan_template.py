@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """check_plan_template.py — 第 48 门禁：计划方案模板符合性（增量口径·W860）
 
 判据：`docs/11-方案报告/计划方案/*.md` 对《任务计划、执行与经验沉淀系统提示词（AI Agent 专用版）》
@@ -108,8 +107,8 @@ def run_gate():
             notes += len(d['old_fail'])
             lines.append('  NOTE %s：存量不符合项 %d 项（不判红·存量豁免）：%s'
                          % (rel, len(d['old_fail']), '、'.join(d['old_fail'])))
-    for l in lines:
-        print(l)
+    for ln in lines:
+        print(ln)
     print('%s%d FAIL / %d 文件（存量缺项 %d 项仅提示）'
           % (MARKER, fails, len(files), notes))
     return 1 if fails else 0
