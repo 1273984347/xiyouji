@@ -510,7 +510,7 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
@@ -1352,7 +1352,7 @@ td.num, th.num {
         }
         .insight-box li:last-child { border-bottom: none; }
         .insight-box li strong {
-            color: var(--accent);
+            color: var(--accent-text);
             font-weight: 600;
         }
         .notice {
@@ -1434,7 +1434,7 @@ td.num, th.num {
         .evo-path-row:last-child { border-bottom: none; }
         .evo-element {
             font-weight: 600;
-            color: var(--accent);
+            color: var(--accent-text);
             font-size: 0.98rem;
         }
         .evo-element .evo-arrow {
@@ -1522,7 +1522,7 @@ td.num, th.num {
         .author-table td.name {
             background: var(--bg);
             font-weight: 600;
-            color: var(--accent);
+            color: var(--accent-text);
             font-size: 1rem;
             width: 90px;
         }
@@ -1567,7 +1567,7 @@ td.num, th.num {
             line-height: 1.55;
         }
         .author-table td.evidence.for { color: var(--accent-4); }
-        .author-table td.evidence.against { color: var(--accent); }
+        .author-table td.evidence.against { color: var(--accent-text); }
         .author-table td.evidence ul {
             list-style: none;
             padding: 0;
@@ -1588,7 +1588,7 @@ td.num, th.num {
             content: "－";
             position: absolute;
             left: 0;
-            color: var(--accent);
+            color: var(--accent-text);
             font-weight: 600;
         }
 
@@ -1649,12 +1649,12 @@ td.num, th.num {
             content: "「";
             position: absolute;
             left: 0;
-            color: var(--accent);
+            color: var(--accent-text);
             font-weight: 600;
         }
         .quote-card li::after {
             content: "」";
-            color: var(--accent);
+            color: var(--accent-text);
         }
 
         /* ===== Chart 5: Stacked Bar ===== */
@@ -1687,6 +1687,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 @media (max-width: 768px){ main { overflow-x: clip; } }
 @media (max-width: 768px){ .evo-step { max-width: 100%; overflow-wrap: anywhere; } }
 @media (max-width: 768px){ #commentary-count-bar, #commentary-stacked { min-width: 800px; } }
+
+/* en 迁移批：KPI 顶条按行收敛（同排首卡保顶条·其余转细线·口径同 zh 页 W870） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 </style>
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>

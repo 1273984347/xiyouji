@@ -1,0 +1,24 @@
+{
+  "batch": "W887",
+  "date": "2026-10-23",
+  "title": "W887 en 迁移批 2·收口批（110 页合并四批·第 49 槽范围扩至全 en 138 页）",
+  "desc": "en 收口 110 页合并四批一次做完 第 49 槽门禁范围扩至全 en 138 页 豁免分册增至 302 条",
+  "head_entry": "2026-10-23（W887 en 迁移批 2·收口批）",
+  "head_sentence": "英文站剩下的四批合成一批一次做完，机检门禁的范围也扩到了全站英文页",
+  "changelog_body": "\n\n> **来源**：用户令「合成一批做完，别拖」。W887 = ④ 剩余四批（core 28-56 · core 余 20 + character 12 · myth 14 · essay 36）合并为一批一次做完。\n> - **文件**：site/en/（110 页）、scripts/_w886_en_migrate.py（批 6 合并定义）、scripts/output/_w886_en_audit_b6.json、scripts/output/_w886_en_audit_b6_after.json、scripts/output/_w887_needed.json、scripts/output/_w864_accent_exemptions.json（W887 分册 181 条·全簿 302）、scripts/check_vermilion_solid.js（scope 扩 en）、scripts/output/_vermilion_solid_cache.json、scripts/output/_vermilion_solid_report.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md。\n> - **迁移**：C 渠规则级换色 **126 条规则 / 48 页**（复用换色器 + 批审计子集）；`.seal` 实底→淡底 **110 页**；KPI 顶条按行收敛规则 **+57 页**（同排首卡保顶条）。\n> - **四类口径豁免 181 条**（W887 分册·全簿 302）：数据语义色片 64 / 功能交互实底 61（含 en 专有 `a.nav-back` 返回导航 ×46·zh 页无此组件·样式统一候选另批）/ KPI 首卡顶条 56。\n> - **第 49 槽范围收口**：`scopePages` 并入 site/en/*.html → 门禁范围 96→**234 页**（全 en 138 + zh 96）；en 豁免由 W886/W887 两分册承接；缓存随批重建（增量恢复秒级）。\n> - **验收**：W887 110 页实底 **508→313（−195）**·C 渠 **809→213（−596）**；en 138 页迁移后合计实底 518（原 767）·C 渠残留 251（原 1,084·与 zh 253 同族·JS 内联样式类）；**全 en 138 页非豁免全部 ≤3**（第 49 槽 judgePage 同款判据逐页实算）+ 门禁全量 234 页 0 FAIL + 自检 14/14。\n> - **A 渠欠账（如实记账）**：en 页容器字面量 164 处（1320px/1536px/1024px）与 D 渠间距令牌化未在本批范围（属 v4 §6 四渠道迁移的 A/D 两道·另批）。",
+  "milestone_block": "- **W887 en 迁移批 2·收口批（110 页合并四批·④ 收官）**：\n  - 迁移：C 渠 126 条/48 页 · seal→淡底 110 页 · KPI 顶条规则 +57 页\n  - 豁免 181 条（语义 64 / 功能 61 含 nav-back ×46 / 首卡 56）· 全簿 302 条\n  - **第 49 槽范围扩至全 en**：234 页（zh 96 + en 138）· 全量 0 FAIL · 自检 14/14\n  - en 全局：实底 767→518 · C 渠 1,084→251（JS 内联族同 zh 253）· 逐页非豁免全 ≤3\n  - A/D 渠道（容器 164 处 + 间距）属另一笔迁移欠账·如实记账",
+  "agents_note": "二〇二六年十月二十三日（W887）把 en 剩余四批合成一批做完：110 页 seal 淡底、57 页顶条收敛、126 条规则换色，181 条语义/功能/首卡豁免入簿，第 49 槽门禁范围随之扩到全 en 138 页并全量跑绿——英文站与中文站至此同标准；en 的 A/D 两道渠道（容器字面量 164 处与间距令牌化）仍是另一笔账，不混进对比度口径。",
+  "file_index_rows": [
+    "| site/en/（110 页） | W887 | C 渠 126 条规则 + seal 淡底 110 页 + KPI 顶条规则 57 页 |",
+    "| scripts/_w886_en_migrate.py | W887 | 批 6 合并定义（批 2-5 合一） |",
+    "| scripts/output/_w886_en_audit_b6.json | W887 | 批 6 前置审计子集（C 809·实底 508） |",
+    "| scripts/output/_w886_en_audit_b6_after.json | W887 | 批 6 迁移后审计（C 213·实底 313） |",
+    "| scripts/output/_w887_needed.json | W887 | 待登记豁免清单（181 条·生成输入） |",
+    "| scripts/output/_w864_accent_exemptions.json | W887 | W887 分册 181 条（语义 64/功能 61/首卡 56·全簿 302） |",
+    "| scripts/check_vermilion_solid.js | W887 | scopePages 并入 en（范围 96→234 页） |",
+    "| scripts/output/_vermilion_solid_cache.json | W887 | 缓存重建（234 页） |",
+    "| docs/00-导读/W批次编号对账表.md | W887 | 认领行与收官回填 |",
+    "| CHANGELOG.md | W887 | W887 段 |",
+    "| scripts/output/file-index.md | W887 | 同批段回写 |"
+  ]
+}

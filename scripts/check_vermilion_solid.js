@@ -304,6 +304,13 @@ function scopePages(siteDir) {
   for (const fn of fs.readdirSync(siteDir).sort()) {
     if (fn.endsWith('.html') && fn !== '_template.html') rels.push(fn);
   }
+  // W887 收口：en 138 页并入范围（④ en 迁移完成·豁免分册 W886/W887 已入簿）
+  const enDir = path.join(siteDir, 'en');
+  if (fs.existsSync(enDir)) {
+    for (const fn of fs.readdirSync(enDir).sort()) {
+      if (fn.endsWith('.html')) rels.push(`en/${fn}`);
+    }
+  }
   return rels;
 }
 

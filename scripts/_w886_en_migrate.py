@@ -89,13 +89,15 @@ def load_batches():
         g["character"][8:] + g["myth"][:14] + g["essay"][:10],
         g["essay"][10:],
     ]
+    # 批 6 = 批 2-5 合并（W887 收口批·用户令「合成一批做完」）
+    b.append(b[1] + b[2] + b[3] + b[4])
     return b
 
 
 def main(argv):
     ap = argparse.ArgumentParser(description="en 迁移批 B 渠机械化驱动")
     ap.add_argument("--pages", default="")
-    ap.add_argument("--batch", type=int, default=0, choices=(0, 1, 2, 3, 4, 5))
+    ap.add_argument("--batch", type=int, default=0, choices=(0, 1, 2, 3, 4, 5, 6))
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args(argv[1:])
 

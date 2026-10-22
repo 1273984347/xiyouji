@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W886），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W887），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -18,6 +18,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 
+### W887（2026-10-23）：en 迁移批 2·收口批（110 页合并四批·第 49 槽范围扩至全 en 138 页）
+
+> **来源**：用户令「合成一批做完，别拖」。W887 = ④ 剩余四批（core 28-56 · core 余 20 + character 12 · myth 14 · essay 36）合并为一批一次做完。
+> - **文件**：site/en/（110 页）、scripts/_w886_en_migrate.py（批 6 合并定义）、scripts/output/_w886_en_audit_b6.json、scripts/output/_w886_en_audit_b6_after.json、scripts/output/_w887_needed.json、scripts/output/_w864_accent_exemptions.json（W887 分册 181 条·全簿 302）、scripts/check_vermilion_solid.js（scope 扩 en）、scripts/output/_vermilion_solid_cache.json、scripts/output/_vermilion_solid_report.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md。
+> - **迁移**：C 渠规则级换色 **126 条规则 / 48 页**（复用换色器 + 批审计子集）；`.seal` 实底→淡底 **110 页**；KPI 顶条按行收敛规则 **+57 页**（同排首卡保顶条）。
+> - **四类口径豁免 181 条**（W887 分册·全簿 302）：数据语义色片 64 / 功能交互实底 61（含 en 专有 `a.nav-back` 返回导航 ×46·zh 页无此组件·样式统一候选另批）/ KPI 首卡顶条 56。
+> - **第 49 槽范围收口**：`scopePages` 并入 site/en/*.html → 门禁范围 96→**234 页**（全 en 138 + zh 96）；en 豁免由 W886/W887 两分册承接；缓存随批重建（增量恢复秒级）。
+> - **验收**：W887 110 页实底 **508→313（−195）**·C 渠 **809→213（−596）**；en 138 页迁移后合计实底 518（原 767）·C 渠残留 251（原 1,084·与 zh 253 同族·JS 内联样式类）；**全 en 138 页非豁免全部 ≤3**（第 49 槽 judgePage 同款判据逐页实算）+ 门禁全量 234 页 0 FAIL + 自检 14/14。
+> - **A 渠欠账（如实记账）**：en 页容器字面量 164 处（1320px/1536px/1024px）与 D 渠间距令牌化未在本批范围（属 v4 §6 四渠道迁移的 A/D 两道·另批）。
 ### W886（2026-10-22）：en 迁移批 1·入口与结构 28 页（C 渠换色 + 实底机械收敛 + 四类豁免·④ 首批）
 
 > **来源**：用户令「继续」。④ en 138 页迁移首批（5 批拆分：core 76 / character 12 / myth 14 / essay 36·按字母序确定性切批）。

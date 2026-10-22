@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（249）
+## 文件（252）
 
 ### Markdown 文档
 
@@ -150,6 +150,9 @@
 - `_w885_wire.py`
 - `_w886_en_audit.py`
 - `_w886_en_migrate.py`
+- `_w888_chapter_plate.py`
+- `_w888_index_revert.py`
+- `_w888_wire.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
