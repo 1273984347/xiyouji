@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（342）
+## 文件（333）
 
 ### Markdown 文档
 
@@ -298,41 +298,32 @@
 - `_w866_accent_audit.json`
 - `_w866_diff_review.json`
 - `_w866_spec.json`
-- `_w866_visual_snapshot_after.json`
-- `_w866_visual_snapshot_before.json`
 - `_w867_accent_audit.json`
 - `_w867_diff_review.json`
 - `_w867_spec.json`
-- `_w867_visual_snapshot_after.json`
 - `_w867_visual_snapshot_before.json`
 - `_w868_accent_audit.json`
-- `_w868_after.json`
-- `_w868_big_before.json`
 - `_w868_diff_review.json`
 - `_w868_spec.json`
 - `_w869_accent_audit.json`
-- `_w869_after.json`
 - `_w869_diff_review.json`
 - `_w869_spec.json`
 - `_w870_accent_audit.json`
-- `_w870_after.json`
 - `_w870_diff_review.json`
 - `_w870_spec.json`
 - `_w871_accent_audit.json`
-- `_w871_after.json`
 - `_w871_diff_review.json`
 - `_w871_spec.json`
 - `_w872_accent_audit.json`
-- `_w872_after.json`
 - `_w872_diff_review.json`
 - `_w872_spec.json`
 - `_w873_accent_audit.json`
-- `_w873_after.json`
-- `_w873_canary_after.json`
 - `_w873_canary_review.json`
 - `_w873_diff_review.json`
 - `_w873_spec.json`
 - `_w874_spec.json`
+- `_w875_diff_review.json`
+- `_w875_spec.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`

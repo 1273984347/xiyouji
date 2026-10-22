@@ -42,8 +42,17 @@ def process(path, force, dry):
     with open(path, encoding="utf-8") as f:
         html = f.read()
 
-    has_tokens_link = LINK_TOKENS in html
-    has_system_link = LINK_SYSTEM in html
+    # W875：深度感知——reader 子目录页用 ../../ 前缀（原固定 ../ 永远同步不到）
+    _rel = os.path.relpath(path, SITE_DIR)
+    _depth = _rel.count(os.sep)
+    if _depth == 0:
+        return "skip-no-link"   # 根级页面用 tokens.css（无前缀），无需处理
+    _prefix = "../" * _depth
+    link_tokens = '<link rel="stylesheet" href="%stokens.css">' % _prefix
+    link_system = '<link rel="stylesheet" href="%ssystem.css">' % _prefix
+
+    has_tokens_link = link_tokens in html
+    has_system_link = link_system in html
     already = MARKER in html
 
     if not (has_tokens_link or has_system_link) and not already:
@@ -75,8 +84,8 @@ def process(path, force, dry):
         inlined = inlined.replace("url('static/", "url('%sstatic/" % _prefix)
         inlined = inlined.replace('url("static/', 'url("%sstatic/' % _prefix)
 
-    html = html.replace(LINK_TOKENS, "")
-    html = html.replace(LINK_SYSTEM, "")
+    html = html.replace(link_tokens, "")
+    html = html.replace(link_system, "")
 
     if "<style" in html:
         html = html.replace("<style", inlined + "<style", 1)
