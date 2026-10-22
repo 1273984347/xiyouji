@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（34）
+## 文件（46）
 
 ### 样式与资源
 
@@ -27,6 +27,18 @@
 - `card-10-gusichenzhong.webp`
 - `card-11-songyunshitan.webp`
 - `card-12-shuyuanxingtantan.webp`
+- `card-13-bajie-yuexia.webp`
+- `card-14-bajie-choupa.webp`
+- `card-15-bajie-zuoxie.webp`
+- `card-16-bajie-yunzhong.webp`
+- `card-17-bajie-denggao.webp`
+- `card-18-bajie-daodan.webp`
+- `card-19-shaseng-dujiang.webp`
+- `card-20-shaseng-zhenshui.webp`
+- `card-21-shaseng-shouye.webp`
+- `card-22-shaseng-fuzhong.webp`
+- `card-23-shixiong-bingli.webp`
+- `card-24-shixiong-shanmen.webp`
 - `hero-01-xihai-yunhai.webp`
 - `hero-02-shitu-wuxing.webp`
 - `hero-03-fabao-qiji.webp`
