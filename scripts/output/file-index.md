@@ -11,6 +11,22 @@
 ---
 
 
+## W890 CI 阻塞项清偿批（2026-10-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| `tests/unit/test_vermilion_solid.py` | W890 | scope 断言改判为新契约（zh 审计面 ∪ en 全量·W887 扩范围后） |
+| `scripts/_w851_j1_name_audit.py` | W890 | DEFER_HOLD_CHECKS 收敛为 1 条（删 W876 已改值的两项·原值未动契约对已落地项不适用） |
+| `scripts/tmpe_tidy.py` | W890 | 新增 `_pid_alive()` 跨平台存活探针（Windows 用 OpenProcess+GetExitCodeProcess·非终止式）+ RunLock 默认参数改运行时解析 |
+| `scripts/check_no_brand_refs.py` | W890 | ruff 四项清零（UP009 删 encoding 声明 / UP015 删冗余 mode / F841 删死变量 args / B007 循环变量改名） |
+| `scripts/check_plan_template.py` | W890 | ruff 两项清零（UP009 删 encoding 声明 / E741 歧义变量名改名） |
+| `scripts/requirements.txt` | W890 | Pillow 12.3.0→13.0.0（清 25 个 CVE·含 GHSA-78g4-xqwv-q3g8） |
+| `docs/11-方案报告/计划方案/T14-任务计划执行与经验沉淀报告-2026-10-23.md` | W890 | 本批框架交付物（取证 / 修复 / 验收 / 复盘） |
+| `docs/00-导读/W批次编号对账表.md` | W890 | W890 认领行 + 收官回填 |
+| `docs/11-方案报告/README.md` | W890 | 计划方案目录索引登记 |
+| `scripts/output/_w890_spec.json` | W890 | 本批级联 spec（10 键） |
+| `scripts/output/_cascade_files_W890.txt` | W890 | 本批级联落盘清单 |
+
 ## W889 展示面复位批（2026-10-23）
 
 | 文件 | W | 说明 |

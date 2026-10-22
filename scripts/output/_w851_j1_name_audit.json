@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "batch": "W851",
-  "captured_at": "2026-10-21T21:25:41",
+  "captured_at": "2026-10-23T03:57:18",
   "mode": "verify-landed",
   "tokens_source": "site/tokens.css",
   "landing_count": 34,
@@ -9,7 +9,7 @@
   "existing_counts": {
     "tokens_css": 103,
     "system_css": 0,
-    "page_inline_distinct": 94
+    "page_inline_distinct": 128
   },
   "deferred": [
     {

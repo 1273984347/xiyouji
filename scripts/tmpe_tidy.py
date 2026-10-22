@@ -216,11 +216,62 @@ def check_same_volume(src, dst):
     return a == b
 
 
-class RunLock:
-    """运行锁：防两个会话同时归桶。stale 锁（pid 死）自动接管。"""
+def _pid_alive(pid: int) -> bool:
+    """进程存活探针（跨平台安全·W890）。
 
-    def __init__(self, path=RUN_LOCK):
-        self.path = path
+    POSIX：`os.kill(pid, 0)` = 只检查存在性（不杀进程）。
+    **Windows：`os.kill(pid, 0)` 走 TerminateProcess ⇒ 会真的杀掉目标进程
+    （含调用方自己）**——W889 实证：pytest 跑到 test_tmpe_tidy 的 RunLock 复验时，
+    锁文件里存的是**当前 pytest 进程的 pid**（锁被 monkeypatch 失效后写到真路径），
+    `os.kill(pid, 0)` 把 pytest 自己杀了 → 表现为「pytest 静默退出·无任何输出·
+    exit 1」的本地红 / CI 绿分歧族（CI 跑 ubuntu-latest 走 POSIX 分支不受影响）。
+    故 Windows 侧改用非终止式的存在性查询：OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION)
+    + GetExitCodeProcess（进程已结束则退出码非 STILL_ACTIVE）。
+    """
+    if pid <= 0:
+        return False
+    if os.name == "posix":
+        try:
+            os.kill(pid, 0)
+        except ProcessLookupError:
+            return False
+        except PermissionError:
+            return True  # 存在·但无权发信号（仍算存活）
+        except OSError:
+            return False
+        return True
+    try:  # pragma: no cover - Windows 分支（CI 在 ubuntu-latest 不覆盖）
+        import ctypes
+
+        PROCESS_QUERY_LIMITED_INFORMATION = 0x1000
+        STILL_ACTIVE = 259
+        kernel32 = ctypes.windll.kernel32
+        handle = kernel32.OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, False, int(pid))
+        if not handle:
+            return False
+        try:
+            code = ctypes.c_ulong()
+            if not kernel32.GetExitCodeProcess(handle, ctypes.byref(code)):
+                return False
+            return code.value == STILL_ACTIVE
+        finally:
+            kernel32.CloseHandle(handle)
+    except Exception:
+        return False
+
+
+class RunLock:
+    """运行锁：防两个会话同时归桶。stale 锁（pid 死）自动接管。
+
+    W890：`path` 默认值改为**运行时**解析（`path=None` → 取模块级 RUN_LOCK）。
+    原实现 `def __init__(self, path=RUN_LOCK)` 的默认参数在**类定义时**求值，
+    后续 `monkeypatch.setattr(tt, "RUN_LOCK", ...)` 对已绑定的默认值无效 →
+    测试构造 `RunLock()` 会落到**真**锁路径（读写仓库真实 tmpe/.locks/），
+    既污染真实锁又让测试与真实状态耦合（本次即因此触发 os.kill 自杀）。
+    """
+
+    def __init__(self, path=None):
+        self.path = path if path is not None else RUN_LOCK
         self.acquired = False
 
     def acquire(self):
@@ -228,8 +279,9 @@ class RunLock:
         if os.path.exists(self.path):
             try:
                 data = json.load(open(self.path, encoding="utf-8"))
-                os.kill(int(data.get("pid", -1)), 0)
-                raise SystemExit(f"FAIL 运行锁被占用：pid={data.get('pid')} since={data.get('ts')}（另会话在跑）")
+                if _pid_alive(int(data.get("pid", -1))):
+                    raise SystemExit(
+                        f"FAIL 运行锁被占用：pid={data.get('pid')} since={data.get('ts')}（另会话在跑）")
             except SystemExit:
                 raise
             except (ValueError, OSError):

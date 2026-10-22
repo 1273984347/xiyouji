@@ -90,10 +90,12 @@ DEFERRED_ITEMS = (
 )
 
 # defer 持有复验（verify-landed）：撞名项落地后必须原样未动
+# W890：W876 批已把浅色 --chart-3（#C9A063→#B38F58）与暗色 --accent
+# （#E0604F→#E46250）两项「落地值」改掉——「原值未动」契约对这两项已不适用，
+# 继续断言等于用过期期望判红（W889 CI 实证：pytest 2 failed 中的一项即此）。
+# 保留项 = 尚未改值的撞名项（浅色 --accent-soft 仍为 #E9B885·实测 site/tokens.css）。
 DEFER_HOLD_CHECKS = (
-    ("浅色 --chart-3 未改值", r"--chart-3:\s*#C9A063"),
     ("浅色 --accent-soft 未改值", r"--accent-soft:\s*#E9B885"),
-    ("暗色 --accent 未改值", r"--accent:\s*#E0604F"),
 )
 # defer 持有复验：暗色组不得偷新增这些名（新增即改变暗色回退值）
 DEFER_HOLD_DARK_SNEAK = ("--chart-3", "--chart-5")
@@ -231,8 +233,10 @@ def main(argv):
             print("J1 复验 PASS：%d 个新名 / %d 处定义全部落地（含暗色组 %d 处同名再定义）"
                   % (len(LANDING_NAMES), len(LANDING_NAMES) + len(DARK_ONLY_DEFS),
                      len(DARK_ONLY_DEFS)))
-            print("   defer 持有：4 组撞名项原样未动（浅色 chart-3 / accent-soft 值未改"
-                  " · 暗色 accent 值未改 · 暗色组无 chart-3/5 新增）")
+            print("   defer 持有：%d 组撞名项原样未动（%s · 暗色组无 %s 新增）"
+                  % (len(DEFER_HOLD_CHECKS),
+                     " · ".join(lbl.replace(" 未改值", " 值未改") for lbl, _ in DEFER_HOLD_CHECKS),
+                     "/".join(DEFER_HOLD_DARK_SNEAK)))
         else:
             if missing:
                 print("J1 复验 FAIL：落地不完整，缺 %s" % "、".join(missing))
