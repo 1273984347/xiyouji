@@ -1269,6 +1269,22 @@ td.num, th.num {
             display: none;
         }
     }
+/* W888：数据页卷末插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .viz-illustration {
+        margin: clamp(32px, 5vw, 64px) auto 0;
+        max-width: 420px;
+    }
+
+    .viz-illustration img {
+        width: 100%;
+        height: auto;
+        display: block;
+        opacity: .92;
+    }
+
+    html[data-theme="dark"] .viz-illustration {
+        display: none;
+    }
 </style>
 <style>
         /* e-track-exempt: chart-data-colors 7 处 */
@@ -1670,6 +1686,9 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     <li><strong>地府事件集中于首尾两段：</strong>7 个关键事件中，5 个集中在第3-11回（太宗地府线 + 悟空销名 + 刘全进瓜），2 个分布于第58回与第100回。这种分布揭示：地府在取经叙事中是"起点装置"（确立生死簿规则）与"终局装置"（五圣成真跨越阴阳），中段几乎缺席——地府的戏剧功能是结构性的，而非过程性的。</li>
   </ul>
 </section>
+<figure class="viz-illustration" aria-hidden="true">
+    <img src="../static/images/viz-01-network.webp" alt="" loading="lazy" decoding="async">
+</figure>
     </main>
 
     <footer class="site-footer">

@@ -1269,6 +1269,22 @@ td.num, th.num {
             display: none;
         }
     }
+/* W888：数据页卷末插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .viz-illustration {
+        margin: clamp(32px, 5vw, 64px) auto 0;
+        max-width: 420px;
+    }
+
+    .viz-illustration img {
+        width: 100%;
+        height: auto;
+        display: block;
+        opacity: .92;
+    }
+
+    html[data-theme="dark"] .viz-illustration {
+        display: none;
+    }
 </style>
 <style>
         /* e-track-exempt: chart-data-colors 1 处 */
@@ -1585,6 +1601,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <li><strong>失败编年史：</strong>八处伤痕按节点分布——金箍棒留 3 处（大闹天宫）、金刚琢留 4 处（围剿青牛精）、时间留 1 处（成佛后）。围剿青牛精是伤痕最密集的节点，因金刚琢「只套不杀」留下的是物证而非伤口。</li>
   </ul>
 </section>
+<figure class="viz-illustration" aria-hidden="true">
+    <img src="../static/images/viz-02-heatmap.webp" alt="" loading="lazy" decoding="async">
+</figure>
     </main>
 
     <footer class="site-footer">

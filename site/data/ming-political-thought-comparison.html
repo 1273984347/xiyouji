@@ -1269,6 +1269,22 @@ td.num, th.num {
             display: none;
         }
     }
+/* W888：数据页卷末插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .viz-illustration {
+        margin: clamp(32px, 5vw, 64px) auto 0;
+        max-width: 420px;
+    }
+
+    .viz-illustration img {
+        width: 100%;
+        height: auto;
+        display: block;
+        opacity: .92;
+    }
+
+    html[data-theme="dark"] .viz-illustration {
+        display: none;
+    }
 </style>
 <style>
         /* e-track-exempt: chart-data-colors 2 处 */
@@ -1529,6 +1545,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <strong>海瑞谏诤与悟空反抗的精神同源</strong>。两者谏诤传统/反抗精神皆达 9 分。差异在"个人体制"维度：海瑞 8 分（体制内死谏），悟空 7 分（体制外反抗）——同源不同路。
             </div>
         </section>
+        <figure class="viz-illustration" aria-hidden="true">
+            <img src="../static/images/viz-02-heatmap.webp" alt="" loading="lazy" decoding="async">
+        </figure>
     </main>
 
     <footer class="site-footer">

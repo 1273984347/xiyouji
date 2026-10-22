@@ -1269,6 +1269,22 @@ td.num, th.num {
             display: none;
         }
     }
+/* W888：数据页卷末插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .viz-illustration {
+        margin: clamp(32px, 5vw, 64px) auto 0;
+        max-width: 420px;
+    }
+
+    .viz-illustration img {
+        width: 100%;
+        height: auto;
+        display: block;
+        opacity: .92;
+    }
+
+    html[data-theme="dark"] .viz-illustration {
+        display: none;
+    }
 </style>
 <style>
         /* e-track-exempt: chart-data-colors 1 处 */
@@ -1571,6 +1587,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </ul>
             <p style="margin-top:10px;">本页与 pilgrim-team-psychology-arc.html 形成"心理弧线-关系网络"双层。心理弧线关注个体心理演化，关系网络（本页）关注成员互动结构。两层交叉观察可见：震荡期（ch22-59）是双层共振的关键枢纽。</p>
         </section>
+        <figure class="viz-illustration" aria-hidden="true">
+            <img src="../static/images/viz-01-network.webp" alt="" loading="lazy" decoding="async">
+        </figure>
     </main>
 
     <footer class="site-footer">
