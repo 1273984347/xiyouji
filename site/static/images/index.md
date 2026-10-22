@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（19）
+## 文件（31）
 
 ### 样式与资源
 
@@ -34,6 +34,18 @@
 - `hero-05-huangmo-gulu.webp`
 - `hero-06-fotu-chengque.webp`
 - `ink-mountains-hero.webp`
+- `og-01-kongkong.webp`
+- `og-02-tangseng.webp`
+- `og-03-bailongma.webp`
+- `og-04-jingubang.webp`
+- `og-05-bajiaoshan.webp`
+- `og-06-jingping.webp`
+- `og-07-qujingchuanshan.webp`
+- `og-08-hequshiqiao.webp`
+- `og-09-shankouguanai.webp`
+- `og-10-canjuan.webp`
+- `og-11-gudeng.webp`
+- `og-12-tongjing.webp`
 
 ---
 
