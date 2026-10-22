@@ -1441,7 +1441,25 @@ td.num, th.num {
         footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
         footer a:hover { text-decoration: underline; }
         .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
-    </style>
+    
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
+</style>
 
 <!-- W334-RESKIN -->
   <script src="../js/theme-init.js"></script>
@@ -1461,7 +1479,9 @@ td.num, th.num {
         <h1>Visualizations — An English Tour</h1>
         <div class="subtitle">GUIDE · 85 INTERACTIVE PAGES</div>
         <div class="tagline">A categorized gallery of the project's D3.js visualizations, with what each shows and how to read it.</div>
-    </header>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </header>
 
     <main class="container">
         <div class="source-note">

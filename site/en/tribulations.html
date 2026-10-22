@@ -1349,6 +1349,23 @@ td.num, th.num {
             .bar-row .val { flex-basis: 70px; }
         }
 @media (max-width: 768px){ table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; } }
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
 </style>
 
 <!-- W334-RESKIN -->
@@ -1369,7 +1386,9 @@ td.num, th.num {
         <h1>The Eighty-One Tribulations</h1>
         <div class="subtitle">DATA · A CALAMITY LEDGER</div>
         <div class="tagline">Eighty-one trials, read not as monsters but as a system of causes, outcomes, and who must solve them.</div>
-    </header>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </header>
     <main class="container">
         <div class="source-note">
             <strong>Source:</strong> A curated data view of <a href="https://github.com/1273984347/xiyouji/blob/main/dataset/81-hardships.json">dataset/81-hardships.json</a>, bridged from the project's authoritative classifier <a href="https://github.com/1273984347/xiyouji/blob/main/scripts/C_情节/hardships_81.py">scripts/C_Plot/hardships_81.py</a> (the Chapter-99 "catalogue of calamities" as skeleton, cross-checked against the received text). The four aggregate axes are reproduced exactly; the 81-row ledger is verbatim. Chinese labels appear alongside English glosses.

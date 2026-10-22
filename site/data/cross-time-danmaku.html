@@ -1251,7 +1251,25 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    </style>
+    
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
+</style>
 <style>
         /* e-track-exempt: chart-data-colors 2 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
@@ -1544,7 +1562,9 @@ main { overflow-x: clip; }
         <p class="tagline">五百年批评史·全年龄共鸣·你就是批评家。</p>
         <svg id="hero-canvas" aria-label="跨时空人物星图" role="img"></svg>
         <div class="chart-tooltip" id="hero-tooltip"></div>
-    </section>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </section>
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
     <nav class="breadcrumb"><a href="../dashboard.html">数据看板</a> → 跨时空弹幕博物馆</nav>
@@ -1617,7 +1637,7 @@ main { overflow-x: clip; }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">W876 C 渠规则级换色 173 条（落 bg 1087→253 降 77%）+ chart-3 与暗色 accent 两处值切换 + inline_css 回吞迁移事故修复（328 页自 HEAD 重建） · W874 把九个递延批按号序补回 CHANGELOG 与 file-index，让级联断言重新成立、B11 可进 · W864 十页结构页按裁决迁移：KPI 顶条收敛到首卡、徽章转淡底、间距令牌化 216 处，C 渠与 chart-3 拆专项批 · W863 把十一个已收官但未立段的批次按号序补回 CHANGELOG 与 file-index，让级联的号序断言重新成立 · W851 把 W826 细化规格 §4 的 v4 令牌增量落进 tokens.css，只落零消费新名、撞名项 defer，用机器证明现役页面视觉零变化 · W850 补齐 Q2 悬空的真因，把等十批样本从口号变成可执行的按批采集机制 · W849 在交付门禁挂上性能影子槽，按批采静态成本代理攒基线，暂不判红也不设阈值 · W848 检索增强默认档不动，把 dense 升为写明适用边界与代价的显式可选档，并修掉档位表旧口径冲突 · W847 阅读页四项体验落地：速览折叠、进度与书签字号、每页反馈，以及重建幂等复验 · W846 按三段管线重建全部阅读页，把 docs 源里积压的字级修复回灌进正文，产物结构与样式零变化 · W845 把待批的阅读页改造先量一遍：在隔离副本里按三段管线重建全部阅读页、逐文件比对出真实影响面，并纠正计划里只跑单个脚本的量法 · W844 四处施工一次落地：会话库备份、首 token 计时、多租户与检索两项裁决回填，以及检索题集迁入仓内并扩到百题 · …更早批次详见 CHANGELOG.md</div>
+            <div class="footer-meta">W883 朱砂实底常驻门禁挂第 49 槽（浏览器计算样式实测 每页非豁免超 3 即拦 增量缓存）且六段递延账一次结清 · W876 C 渠规则级换色 173 条（落 bg 1087→253 降 77%）+ chart-3 与暗色 accent 两处值切换 + inline_css 回吞迁移事故修复（328 页自 HEAD 重建） · W874 把九个递延批按号序补回 CHANGELOG 与 file-index，让级联断言重新成立、B11 可进 · W864 十页结构页按裁决迁移：KPI 顶条收敛到首卡、徽章转淡底、间距令牌化 216 处，C 渠与 chart-3 拆专项批 · W863 把十一个已收官但未立段的批次按号序补回 CHANGELOG 与 file-index，让级联的号序断言重新成立 · W851 把 W826 细化规格 §4 的 v4 令牌增量落进 tokens.css，只落零消费新名、撞名项 defer，用机器证明现役页面视觉零变化 · W850 补齐 Q2 悬空的真因，把等十批样本从口号变成可执行的按批采集机制 · W849 在交付门禁挂上性能影子槽，按批采静态成本代理攒基线，暂不判红也不设阈值 · W848 检索增强默认档不动，把 dense 升为写明适用边界与代价的显式可选档，并修掉档位表旧口径冲突 · W847 阅读页四项体验落地：速览折叠、进度与书签字号、每页反馈，以及重建幂等复验 · W846 按三段管线重建全部阅读页，把 docs 源里积压的字级修复回灌进正文，产物结构与样式零变化 · W845 把待批的阅读页改造先量一遍：在隔离副本里按三段管线重建全部阅读页、逐文件比对出真实影响面，并纠正计划里只跑单个脚本的量法 · …更早批次详见 CHANGELOG.md</div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../index.html">首页</a>

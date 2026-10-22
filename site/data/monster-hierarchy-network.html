@@ -1251,7 +1251,25 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    </style>
+    
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
+</style>
 <style>
         /* e-track-exempt: chart-data-colors 7 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
@@ -1529,7 +1547,9 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
         <p class="kicker">数据可视化</p>
         <h1>妖怪等级制度可视化</h1>
         <p class="subtitle">MONSTER HIERARCHY · FOUR-TIER POWER ATLAS</p>
-    </section>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-01-network.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </section>
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
 <div class="kpi-row">

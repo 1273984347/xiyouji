@@ -1251,7 +1251,25 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    </style>
+    
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
+</style>
 <style>
         /* e-track-exempt: chart-data-colors 7 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
@@ -1678,7 +1696,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <h1>妖怪社会学 · 西游世界的犯罪与司法</h1>
         <p class="subtitle">DATA-DRIVEN MONSTER SOCIOLOGY OF XIYOUJI</p>
         <p class="tagline">从作案模式到求救信号，再到坐骑下凡——一部西游司法双标的活档案。</p>
-    </section>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </section>
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
 <div class="container">

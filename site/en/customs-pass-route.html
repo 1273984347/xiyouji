@@ -1248,7 +1248,25 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    </style>
+    
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
+</style>
 <style>
         /* 页面局部样式（W383·v2.3.11 新建·自包含，随 inline_css.py 内联） */
         .pass-legend { display:flex; flex-wrap:wrap; gap:10px 18px; margin:10px 0 4px; font-size:13px; color:var(--ink-soft); }
@@ -1298,7 +1316,9 @@ td.num, th.num {
         <h1>Passport · Pilgrimage Courier-Route Map</h1>
         <p class="subtitle">W383 · Based on the W370 Ming courier-transport comparison · The passport as an "imperial document" along the scripture-seeking road</p>
         <p class="tagline">— One passport, fifteen city-states: nine verified, three unverified, one scripture-granted without verification</p>
-    </section>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </section>
 
 <main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
         <nav class="breadcrumb" aria-label="Breadcrumb">

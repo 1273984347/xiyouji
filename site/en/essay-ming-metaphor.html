@@ -1335,6 +1335,23 @@ td.num, th.num {
         .sm-cluster a:hover { text-decoration: underline; }
         .sm-cluster .d { color: var(--ink-soft); font-size: 0.84rem; display: block; margin-top: 1px; }
         @media (max-width: 640px) { .sm-grid { grid-template-columns: 1fr; } }@media (max-width: 768px){ table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; } }
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
 </style>
 
 <!-- W334-RESKIN -->
@@ -1353,7 +1370,9 @@ td.num, th.num {
         <h1>The Ming in Disguise: Six Layers of Social Satire</h1>
         <div class="subtitle">ESSAY &middot; E14 &middot; SATIRE</div>
         <div class="tagline">Heaven is the Ming court projected skyward &mdash; and a demon's fate turns on who its master is.</div>
-    </header>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </header>
 
     <main class="container">
         <div class="source-note">A curated English summary of the project's Chinese essay <strong>Míngdài Yǐnyù</strong> (A5 &middot; Social Metaphor &middot; six metaphor dimensions). The officialdom table and the demon-backing table are taken directly from that source; no figures are invented. This is a summary translation, not a full rendering.</div>

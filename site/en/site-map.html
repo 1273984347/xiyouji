@@ -1334,7 +1334,25 @@ td.num, th.num {
         .sm-cluster a { color: var(--accent-2); text-decoration: none; font-weight: 600; }
         .sm-cluster a:hover { text-decoration: underline; }
         .sm-cluster .d { color: var(--ink-soft); font-size: 0.84rem; display: block; margin-top: 1px; }
-        @media (max-width: 640px) { .sm-grid { grid-template-columns: 1fr; } }</style>
+        @media (max-width: 640px) { .sm-grid { grid-template-columns: 1fr; } }
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
+</style>
 
 <!-- W334-RESKIN -->
   <script src="../js/theme-init.js"></script>
@@ -1352,7 +1370,9 @@ td.num, th.num {
         <h1>Site Map: A Thematic Index to the English Edition</h1>
         <div class="subtitle">SITE MAP &middot; NAVIGATION</div>
         <div class="tagline">Every English page, grouped by what it does &mdash; your doorway into a 580-essay Chinese project.</div>
-    </header>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </header>
 
     <main class="container">
         <div class="source-note">A navigation capstone for this English edition. It links to every other English page and out to the canonical Chinese site. No data is invented &mdash; descriptions reflect each page's actual content.</div>

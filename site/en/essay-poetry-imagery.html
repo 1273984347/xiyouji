@@ -1301,6 +1301,23 @@ td.num, th.num {
         footer a:hover { text-decoration: underline; }
         .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
     @media (max-width: 768px){ table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; } }
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
 </style>
 
   <script src="../js/theme-init.js"></script>
@@ -1320,7 +1337,9 @@ td.num, th.num {
         <h1>An Imagery Lineage — Stone, Peach, Bone, Sutra</h1>
         <div class="subtitle">ESSAY E33 &middot; SUMMARY TRANSLATION</div>
         <div class="tagline">Four images (stone-monkey, peach, white-bone, true-sutra) trace Creation→Desire→Illusion→Awakening, read through Pound, Eliot, Bachelard, Liu Xie.</div>
-    </header>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </header>
     <main class="container">
         <div class="source-note">
             A summary translation of <a href="https://github.com/1273984347/xiyouji/blob/main/docs/05-诗词歌赋/西游诗词意象谱系专题.md">Journey to the West Poetry Imagery Genealogy (essay, Chinese)</a>. The Chinese original reads the novel's verse through three poet theorists and six frame couplets (E31), three classes of scene-poem (E32), and four imagery theorists reading a four-image lineage (E33). All line numbers and chapter titles are carried over from the source without fabrication.

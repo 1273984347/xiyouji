@@ -1420,7 +1420,25 @@ td.num, th.num {
             font-size: 0.78rem;
             color: var(--ink-soft);
         }
-    </style>
+    
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
+</style>
 
 <!-- W334-RESKIN -->
   <script src="../js/theme-init.js"></script>
@@ -1437,7 +1455,9 @@ td.num, th.num {
         <h1>Journey to the West · Annotated</h1>
         <div class="subtitle">A HYBRID READING PROJECT</div>
         <div class="tagline">A hundred chapters of mountains, waters, and human hearts — a thousand years of echoes and rereadings.</div>
-    </header>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </header>
 
     <main class="container">
         <div class="notice">

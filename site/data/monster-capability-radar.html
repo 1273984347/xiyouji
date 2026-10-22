@@ -1251,7 +1251,25 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    </style>
+    
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
+</style>
 <style>
         /* e-track-exempt: chart-data-colors 6 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
@@ -1413,7 +1431,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <h1>妖怪能力雷达图</h1>
         <p class="subtitle">W233-3 · V3 · 与 monster-hierarchy-network 形成 等级-能力 双维</p>
         <p class="tagline">—— 15 代表妖怪 × 5 能力维度（法力 / 智谋 / 法宝 / 背景 / 结局）半透明叠加 · 来历→结局桑基流向</p>
-    </section>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-03-radar.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </section>
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <nav class="breadcrumb" aria-label="面包屑">
