@@ -14,8 +14,8 @@ committed 产物（_w876_site_audit.json：1087 处 / 64 页 + fill 457 处 / 89
   ——即「朱砂文字落在页面底上」（落 --paper 的按规格豁免：--accent 4.78:1 已过 AA）；
 - fill（朱砂实底·阶段 5 门禁同款测量）：元素**自身** background-color = --accent
   且盒面积 > 400px²（kind=background），或自身 border-top-color = --accent、
-  border-top-width **≥ 3px**（3px 横条/卡片顶条计实底·<3px 细线不计）且盒
-  面积 > 400px²（kind=border-top·KPI 顶条族）；
+  border-top-width **≥ 2px** 且**条带面积**（宽 × 边框宽）> 400px²（kind=border-top·
+  KPI 顶条族·口径与 _w864_accent_audit.py 及豁免登记簿 criterion 逐字对齐）；
 -  settle：networkidle + 2s 地板（chart-audit.js 修复波最远 14s·但其只动尺寸/避让
   不动色·2s 足以覆盖首波；对拍场景另用 15s 地板的 W851 探针）。
 
@@ -68,8 +68,11 @@ _AUDIT_JS = """
     if (area > 400) {
       if (cs.backgroundColor === accent) {
         out.fill.push({tag: tag, cls: cls, kind: 'background', area: Math.round(area)});
-      } else if (cs.borderTopColor === accent && parseFloat(cs.borderTopWidth) >= 3) {
-        out.fill.push({tag: tag, cls: cls, kind: 'border-top', area: Math.round(area)});
+      } else if (cs.borderTopColor === accent && parseFloat(cs.borderTopWidth) >= 2) {
+        const strip = r.width * parseFloat(cs.borderTopWidth);
+        if (strip > 400) {
+          out.fill.push({tag: tag, cls: cls, kind: 'border-top', area: Math.round(strip)});
+        }
       }
     }
   }

@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（29）
+## 文件（30）
 
 ### Python 脚本
 
@@ -41,6 +41,7 @@
 - `test_tool_scripts_cli.py`
 - `test_verify_failclosed.py`
 - `test_verify_registry.py`
+- `test_vermilion_solid.py`
 - `test_visualization_data.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`

@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（243）
+## 文件（247）
 
 ### Markdown 文档
 
@@ -145,6 +145,9 @@
 - `_w880_og_image_split.py`
 - `_w881_fix_rule_line.py`
 - `_w881_rule_line_scan.py`
+- `_w885_index_revert.py`
+- `_w885_viz_alpha.py`
+- `_w885_wire.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
@@ -267,6 +270,7 @@
 - `check_data_drift.js`
 - `check_js_syntax.js`
 - `check_screenshot_gates.js`
+- `check_vermilion_solid.js`
 - `debug_page.js`
 - `diagnose_overflow.js`
 - `extract_datasets.js`
