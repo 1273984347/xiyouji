@@ -229,6 +229,30 @@ def _check_c6_version_desc_seps(inp, issues, notes):
                           % (name, "".join(hit)))
 
 
+def _check_c7_homepage_showcase(inp, issues, notes):
+    """C7：GitHub 仓库主页展示位断言（W889）。
+
+    GitHub 查找 README 的优先级是 `.github/` > 根目录 > `docs/`——`.github/README.md`
+    一旦存在即**抢占仓库主页展示位**，真实项目门面（根 README.md）永远上不了主页。
+    W889 抓线上渲染 HTML 实证：主页渲染的是 `.github/` 目录导读（"这个目录装什么"），
+    而非项目门面（在线体验/桌面版下载/内容规模）。
+    故：根 README.md 在位时，`.github/README.md` 必须不存在。
+
+    `docs/README.md` 在优先级链第三位：根 README.md 在位时它不抢位（不判红）；根 README.md
+    若被删则它上位——记 NOTE 提示，不判红（本仓 `docs/README.md` 为 W779 生成物·超出本批处置范围）。
+    """
+    sc = inp.get("showcase")
+    if not sc:
+        return
+    if sc.get("root_readme") and sc.get("github_readme"):
+        issues.append("C7: `.github/README.md` 存在且根 README.md 在位——GitHub 主页 README 优先级为"
+                      "`.github/` > 根目录 > `docs/`，该文件会抢占仓库主页展示位（真实门面永不上主页）。"
+                      "改名 `.github/README-internal.md` 或删除（社区解法·GitHub 讨论 #163997）")
+    if sc.get("docs_readme") and sc.get("root_readme"):
+        notes.append("C7: `docs/README.md` 处于优先级链第三位——根 README.md 在位时它不抢位；"
+                     "若根 README.md 被删则它上位，须同步处置")
+
+
 def evaluate(inp):
     """纯函数核对：inputs 为注入真值与文档文本的 dict，返回 (issues, notes)。
 
@@ -249,6 +273,7 @@ def evaluate(inp):
     _check_c5_aggregate_stats(inp, issues, notes)
     _check_c5d_stats_recheck(inp, issues)
     _check_c6_version_desc_seps(inp, issues, notes)
+    _check_c7_homepage_showcase(inp, issues, notes)
     return issues, notes
 
 
@@ -498,6 +523,12 @@ def gather():
         },
         "subjects": [],
         "shallow": os.path.exists(os.path.join(ROOT, ".git", "shallow")),
+        # W889：GitHub 仓库主页展示位实况（.github/README.md 存在即抢占仓库主页）
+        "showcase": {
+            "root_readme": os.path.isfile(os.path.join(ROOT, "README.md")),
+            "github_readme": os.path.isfile(os.path.join(ROOT, ".github", "README.md")),
+            "docs_readme": os.path.isfile(os.path.join(ROOT, "docs", "README.md")),
+        },
     }
     try:
         r = subprocess.run(
@@ -567,7 +598,7 @@ def run_check():
 
 
 def run_self_test():
-    """24 例注入式负样本/正样本（纯合成输入，不改真实文件）。"""
+    """26 例注入式负样本/正样本（纯合成输入，不改真实文件）。"""
     base = {
         "changelog": "### W999（2026-10-05）：自测顶段\n\n### v9.9.8（2026-10-04）：W998 旧段\n",
         "readme": "> **当前批次 W999（2026-10-05）**：自测抬头行\n",
@@ -596,6 +627,7 @@ def run_self_test():
             }.items()
         },
         "shallow": False,
+        "showcase": {"root_readme": True, "github_readme": False, "docs_readme": False},
     }
     cases = []
 
@@ -745,6 +777,20 @@ def run_self_test():
             xiangmu="> 当前批次 W999（2026-10-05）：甲、乙、丙·详细变更见 CHANGELOG\n",
         ),
         "C6",
+        expect_absent=True,
+    )
+    # W889：C7 主页展示位——`.github/README.md` 存在即抢占 GitHub 仓库主页
+    case(
+        "T25 主页展示位被抢必红（C7·W889）",
+        lambda d: d.update(
+            showcase={"root_readme": True, "github_readme": True, "docs_readme": False}),
+        "C7",
+    )
+    case(
+        "T26 主页展示位已改名则放行（C7·W889 防误伤）",
+        lambda d: d.update(
+            showcase={"root_readme": True, "github_readme": False, "docs_readme": True}),
+        "C7",
         expect_absent=True,
     )
 

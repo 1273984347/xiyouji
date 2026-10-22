@@ -109,7 +109,9 @@ def check_dir(abs_dir: str) -> list[str]:
     rdm_path = os.path.join(abs_dir, "README.md")
     if not os.path.isfile(idx_path):
         fails.append("C1 缺 index.md：%s" % label)
-    if not os.path.isfile(rdm_path):
+    if not os.path.isfile(rdm_path) and not gen.showcase_guarded(rel, "README.md"):
+        # W889：.github/ 的目录导读改存 README-internal.md（避免抢占 GitHub 仓库主页展示位）
+        # ——豁免判定与生成器共用 gen.showcase_guarded（单一事实源·两处口径同源）
         fails.append("C1 缺 README.md：%s" % label)
     if not os.path.isfile(idx_path):
         return fails  # 清单不在，对拍无意义

@@ -78,6 +78,23 @@ EXCLUDE_SUBSTR = (
 EXCLUDE_TOP = set(EXCLUDE_SUBSTR) | {".git"} | {
     d for d in os.listdir(ROOT) if d.startswith(".") and d != ".github"
 }
+# GitHub 仓库主页展示位保护（W889）——
+# GitHub 查找 README 的优先级是 `.github/` > 根目录 > `docs/`（官方文档 + 社区讨论 #163997
+# + 抓线上渲染 HTML 实证）：`.github/README.md` 一旦存在就**抢占仓库主页展示位**，真实项目
+# 门面（根 README.md：在线体验/桌面版下载/内容规模）永远上不了主页。
+# 处置只排除**这一个目标文件**，不排除整个 `.github/` 树：`.github/workflows/` 下的 index.md
+# 仍需刷新，且 `workflows/README.md` 是 batch_cascade 的级联面（另一脚本管·误碰会打架）。
+# 目录导读改存 `.github/README-internal.md`（人工维护件·不带「生成来源」标记）。
+SHOWCASE_GUARD_DIRS = {".github"}
+
+
+def showcase_guarded(rel_dir: str, kind: str) -> bool:
+    """目标路径是否属「GitHub 主页展示位保护集」（.github/README.md → 不生成·不报缺件）。
+
+    生成器与第 45 门禁（check_folder_docs.py）**共用本判定**——两处口径同源，
+    杜绝「生成器跳了、门禁仍按缺 README.md 判红」的漂移。
+    """
+    return kind == "README.md" and rel_dir in SHOWCASE_GUARD_DIRS
 # 构建/打包产物目录名（packaging/xiyouji-analysis/build · dist · *.egg-info·非源码面无导航价值）
 EXCLUDE_SEGMENTS = {"build", "dist"}
 EXCLUDE_SUFFIX = (".egg-info",)
@@ -313,6 +330,18 @@ def case_collides(abs_dir: str) -> bool:
                and n not in ("index.md", "README.md") for n in names)
 
 
+def _guide_name(abs_dir: str) -> str | None:
+    """同目录「目录导读」文件名（README.md → README-internal.md → 无）。
+
+    W889：`.github/` 的目录导读改存 `README-internal.md`（避免抢占 GitHub 仓库主页
+    展示位），故 index.md 的导读指针须自适应——指向不存在的文件即为死指针。
+    """
+    for name in ("README.md", "README-internal.md"):
+        if os.path.isfile(os.path.join(abs_dir, name)):
+            return name
+    return None
+
+
 def build_index(abs_dir: str) -> str:
     """index.md：机器可读逐文件清单（定位=「这个目录里有什么」·不含叙述与约定）。"""
     rel = rel_of(abs_dir)
@@ -323,7 +352,11 @@ def build_index(abs_dir: str) -> str:
 
     lines = [f"# 文件索引 · {title}", ""]
     lines.append(f"> 本文件逐条列出 {here} 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。")
-    lines.append("> 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。")
+    guide = _guide_name(abs_dir)
+    if guide:
+        lines.append("> 目录导读与维护约定见同目录 `%s`；全仓目录用途见根目录 `STRUCTURE.md`。" % guide)
+    else:
+        lines.append("> 全仓目录用途见根目录 `STRUCTURE.md`。")
     lines.append("")
 
     lines.append("## 子目录（%d）" % len(subdirs))
@@ -452,12 +485,17 @@ def main() -> int:
     dirs = [d for d in dirs_all if not case_collides(d)]
     skipped_collision = len(dirs_all) - len(dirs)
     written, skipped_exist, skipped_readme, skipped_hand, failed = [], [], [], [], []
+    skipped_showcase = []
 
     for d in dirs:
         if not in_scope(d):
             continue
+        rel_d = rel_of(d)
 
         for kind in ("index.md", "README.md"):
+            if showcase_guarded(rel_d, kind):
+                skipped_showcase.append("%s/%s" % (rel_d, kind))
+                continue
             exists_kind = _kind_exists(d, kind)
             if exists_kind and not (args.force or args.refresh):
                 if kind == "README.md":
@@ -506,6 +544,11 @@ def main() -> int:
         sum(1 for w in written if w.lower().endswith("readme.md")),
     ))
     print("已存在跳过：index.md %d · README.md %d" % (len(skipped_exist), len(skipped_readme)))
+    if skipped_showcase:
+        print("GitHub 主页展示位保护跳过 %d 个（.github/README.md 会抢占仓库主页·不生成）："
+              % len(skipped_showcase))
+        for rel_t in skipped_showcase:
+            print("  GUARD " + rel_t)
     if skipped_hand:
         print("人工维护件跳过 %d 个（--refresh 所有权判定不等·未覆写）：" % len(skipped_hand))
         for rel_t in skipped_hand:
