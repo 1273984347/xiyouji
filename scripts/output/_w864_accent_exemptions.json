@@ -499,6 +499,143 @@
     }
    ],
    "note": "B10 增补。material-archaeology 的 8 张 artifact-card 网格顶条按裁决收敛（全同色装饰网格）；type-card 单条不超限未动。"
+  },
+  "W883": {
+   "measured_at": "2026-10-22",
+   "exemptions": [
+    {
+     "page": "data/ethics-consumption.html",
+     "cls": "span.zero-tag",
+     "count": 3,
+     "reason": "数据语义色片：零和结果分类编码（与图例同源·图表语义·非界面装饰）"
+    },
+    {
+     "page": "data/ethics-consumption.html",
+     "cls": "div.sev-badge.sev-extreme",
+     "count": 1,
+     "reason": "数据语义色片：严重度最高档编码"
+    },
+    {
+     "page": "data/game-webnovel.html",
+     "cls": "div.cc-elem",
+     "count": 1,
+     "reason": "数据语义色片：文化循环元素编码"
+    },
+    {
+     "page": "data/game-webnovel.html",
+     "cls": "span.elem-chip",
+     "count": 1,
+     "reason": "数据语义色片：元素标签"
+    },
+    {
+     "page": "data/game-webnovel.html",
+     "cls": "div.nc-genre",
+     "count": 1,
+     "reason": "数据语义色片：叙事品类编码"
+    },
+    {
+     "page": "data/linguistics.html",
+     "cls": "div.inc-card",
+     "count": 1,
+     "reason": "数据语义色片：inclusion 态卡片"
+    },
+    {
+     "page": "data/narrative-experiment.html",
+     "cls": "span.sc-chip",
+     "count": 1,
+     "reason": "数据语义色片：场景标签族实测增至 5（原登记 4）·补登增量 1"
+    },
+    {
+     "page": "data/narrative-experiment.html",
+     "cls": "div.player-card",
+     "count": 1,
+     "reason": "数据语义色片：玩家类型编码"
+    },
+    {
+     "page": "data/narrative-experiment.html",
+     "cls": "div.narr-card",
+     "count": 1,
+     "reason": "数据语义色片：叙事类型编码"
+    },
+    {
+     "page": "data/visual-art.html",
+     "cls": "div.chant-card.amp-high",
+     "count": 1,
+     "reason": "数据语义色片：高振幅唱诵卡"
+    },
+    {
+     "page": "data/visual-art.html",
+     "cls": "span.ch-amp-bar",
+     "count": 1,
+     "reason": "数据语义色片：振幅条（DOM 数据条·图表语义）"
+    },
+    {
+     "page": "data/visual-art.html",
+     "cls": "div.idea-card",
+     "count": 1,
+     "reason": "数据语义色片：创意点卡片"
+    },
+    {
+     "page": "data/visual-art.html",
+     "cls": "div.id-form",
+     "count": 1,
+     "reason": "数据语义色片：身份形态编码"
+    },
+    {
+     "page": "data/ethics-consumption.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "data/game-webnovel.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "data/linguistics.html",
+     "cls": "div.kpi-card",
+     "count": 3,
+     "reason": "KPI 首卡顶条（3 行各 1 处·v4 §3.2 保留条款·与「整页仅首屏首卡可带」存在张力·W870 审计即实测 3·登记待后续收敛批裁决）"
+    },
+    {
+     "page": "data/narrative-experiment.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "data/visual-art.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "dashboard.html",
+     "cls": "button.vt-btn",
+     "count": 2,
+     "reason": "功能交互实底：数据导出按钮（v4 §5.2 组件规格设计态）"
+    },
+    {
+     "page": "dashboard.html",
+     "cls": "button.filter-tab.active",
+     "count": 1,
+     "reason": "功能交互实底：筛选选中态（v4 §5.2 pill-tab active 实底设计）"
+    },
+    {
+     "page": "dashboard.html",
+     "cls": "button.rag-fab",
+     "count": 1,
+     "reason": "功能交互实底：问津悬浮钮（主行动区·v4 §3.2 主行动区条款）"
+    },
+    {
+     "page": "dashboard.html",
+     "cls": "section.route-strip",
+     "count": 1,
+     "reason": "区块标识横条（取经路线概要节标·v4 §3.2 横条形态）"
+    }
+   ]
   }
  },
  "note": "裁决 2「豁免清单落 scripts/output/」登记簿：W864 首批建册，随批递增、条目随迁移整改递减。"
