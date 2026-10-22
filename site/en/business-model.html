@@ -510,7 +510,7 @@ h4 { font-size: 18px; font-weight: 500; }
 .seal {
     width: 40px;
     height: 40px;
-    background: var(--accent);
+    background: var(--accent-tint);
     border-radius: 3px;
     display: grid;
     place-items: center;
@@ -1389,7 +1389,7 @@ td.num, th.num {
             font-weight: 700;
         }
         .icon-wrong {
-            color: var(--accent);
+            color: var(--accent-text);
             font-weight: 700;
         }
         /* 洞察列表 */
@@ -1430,7 +1430,7 @@ td.num, th.num {
         .insight-box.alt-3 { border-left-color: var(--accent-4); }
         .insight-box .ibox-label {
             font-size: 0.78rem;
-            color: var(--accent);
+            color: var(--accent-text);
             letter-spacing: 0.15em;
             font-family: "JetBrains Mono", "Consolas", monospace;
             margin-bottom: 6px;
@@ -1443,7 +1443,7 @@ td.num, th.num {
             color: var(--ink);
             margin-bottom: 8px;
         }
-        .insight-box .ibox-body strong { color: var(--accent); font-weight: 600; }
+        .insight-box .ibox-body strong { color: var(--accent-text); font-weight: 600; }
         /* 神经科学 / 现代对应 卡片 */
         .map-grid {
             display: grid;
@@ -1491,7 +1491,7 @@ td.num, th.num {
             grid-column: 1 / -1;
         }
         .summary-card .map-label {
-            color: var(--accent);
+            color: var(--accent-text);
             font-size: 0.78rem;
             letter-spacing: 0.12em;
             font-family: "JetBrains Mono", "Consolas", monospace;
@@ -1636,6 +1636,9 @@ td.num, th.num {
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+
+/* en 迁移批：KPI 顶条按行收敛（同排首卡保顶条·其余转细线·口径同 zh 页 W870） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
 </style>
   <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>

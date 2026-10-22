@@ -11,6 +11,40 @@
 ---
 
 
+## W886 en 迁移批 1·入口与结构 28 页（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_w886_en_audit.py | W886 | 新增：en 四渠现状审计（C/实底 浏览器实测 + 令牌旧值/容器字面量静态） |
+| scripts/_w886_en_migrate.py | W886 | 新增：en B 渠机械化驱动（seal→淡底 + KPI 顶条按行规则 + 批审计子集导出） |
+| scripts/output/_w886_en_audit.json | W886 | en 全量审计（C 1,084/62 页·实底 767/135 页） |
+| scripts/output/_w886_en_audit_b1.json | W886 | 批 1 前置审计子集（C 275·实底 259） |
+| scripts/output/_w886_en_audit_b1_after.json | W886 | 批 1 迁移后审计（C 38·实底 205） |
+| site/en/（28 页） | W886 | C 渠 49 条规则 + seal 淡底 28 页 + KPI 顶条规则 16 页 |
+| scripts/output/_w864_accent_exemptions.json | W886 | W886 分册 25 条（四类口径·全簿 121 条） |
+| docs/00-导读/W批次编号对账表.md | W886 | 认领行与收官回填 + W885 段状态翻转 |
+| CHANGELOG.md | W886 | W886 段 + W885 段回补 |
+| scripts/output/file-index.md | W886 | 同批两段回写 |
+
+## W885 素材接线批（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/*.html（87 页） | W885 | 改：`.hero` 暗带接入深底直显版装饰插画 img + 内联副本补 .hero-ornament 规则（按页名映射四类母题） |
+| site/en/*.html（126 页） | W885 | 改：同 site/data（英文侧同款装饰插画与规则） |
+| site/system.css | W885 | 改：追加 .hero-ornament 规则（源·下次 inline_css 重跑继承） |
+| site/index.html | W885 | 改：浅色 .masthead 铺 hero-01 山河云海横幅（文字落在图底部留白带） |
+| site/static/images/viz-dark-01-network.webp | W885 | 新增：深底直显版装饰插画 01/04·根须网（640×640·深底映射为 alpha 渐变） |
+| site/static/images/viz-dark-02-heatmap.webp | W885 | 新增：深底直显版装饰插画 02/04·疏密墨点阵（640×640·默认母题） |
+| site/static/images/viz-dark-03-radar.webp | W885 | 新增：深底直显版装饰插画 03/04·放射线（640×640） |
+| site/static/images/viz-dark-04-timeline.webp | W885 | 新增：深底直显版装饰插画 04/04·纵向刻痕序列（640×640） |
+| scripts/_w885_wire.py | W885 | 新增：接线批处理脚本（system.css 规则 + 213 页装饰 img + 内联副本补规则 + 首页底图·幂等） |
+| scripts/_w885_viz_alpha.py | W885 | 新增：深底插画 alpha 化脚本（按亮度把深底映射为透明渐变·消除方框） |
+| scripts/_w885_index_revert.py | W885 | 新增：搜索索引他方在途条目回退器（逐条比对·源文件未入库者按 HEAD 版回退） |
+| scripts/output/_w885_spec.json | W885 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
+| docs/00-导读/W批次编号对账表.md | W885 | 认领行与收官回填 |
+
+
 ## W883 阶段 5 机检门禁批（2026-10-22）
 
 | 文件 | W | 说明 |

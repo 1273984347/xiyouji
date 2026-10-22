@@ -636,6 +636,161 @@
      "reason": "区块标识横条（取经路线概要节标·v4 §3.2 横条形态）"
     }
    ]
+  },
+  "W886": {
+   "measured_at": "2026-10-22",
+   "exemptions": [
+    {
+     "page": "en/81-hardships.html",
+     "cls": "span.tag",
+     "count": 91,
+     "reason": "数据语义色片：八十一难 cause/ending/difficulty 三列分类编码（与图例同源·图表语义·非界面装饰）"
+    },
+    {
+     "page": "en/aesthetics.html",
+     "cls": "div.scene-bar",
+     "count": 4,
+     "reason": "数据语义色片：场景色条（热力图行内数据编码）"
+    },
+    {
+     "page": "en/aesthetics.html",
+     "cls": "div.stage-color-bar",
+     "count": 2,
+     "reason": "数据语义色片：阶段色条"
+    },
+    {
+     "page": "en/aesthetics.html",
+     "cls": "div.color-swatch",
+     "count": 1,
+     "reason": "数据语义色片：色板样本"
+    },
+    {
+     "page": "en/aesthetics.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/ai-dialogue.html",
+     "cls": "span.step-num",
+     "count": 4,
+     "reason": "数据语义色片：步骤编号编码"
+    },
+    {
+     "page": "en/ai-dialogue.html",
+     "cls": "button",
+     "count": 1,
+     "reason": "功能交互实底：对话操作按钮（v4 §5.2 组件规格设计态）"
+    },
+    {
+     "page": "en/cave-estate.html",
+     "cls": "span.tag.king",
+     "count": 19,
+     "reason": "数据语义色片：洞府等级分类编码"
+    },
+    {
+     "page": "en/cave-estate.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/chart-design.html",
+     "cls": "div.domino-card",
+     "count": 4,
+     "reason": "数据语义色片：多米诺图表卡（难数序列编码）"
+    },
+    {
+     "page": "en/chart-design.html",
+     "cls": "div.domino-hardship",
+     "count": 3,
+     "reason": "数据语义色片：难数编码段"
+    },
+    {
+     "page": "en/chart-design.html",
+     "cls": "div.sundial-card.highlight-stress",
+     "count": 1,
+     "reason": "数据语义色片：日晷卡强调态（数据高亮）"
+    },
+    {
+     "page": "en/chart-design.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/concept-device.html",
+     "cls": "div.cipher-face.cipher-back",
+     "count": 5,
+     "reason": "数据语义色片：密码卡背面（翻卡数据面）"
+    },
+    {
+     "page": "en/concept-device.html",
+     "cls": "span.idev",
+     "count": 5,
+     "reason": "数据语义色片：器物编码标签"
+    },
+    {
+     "page": "en/concept-device.html",
+     "cls": "button.era-btn.active",
+     "count": 1,
+     "reason": "功能交互实底：年代筛选选中态（v4 §5.2 pill-tab 设计态）"
+    },
+    {
+     "page": "en/concept-device.html",
+     "cls": "button.danmaku-toggle",
+     "count": 1,
+     "reason": "功能交互实底：弹幕开关（组件设计态）"
+    },
+    {
+     "page": "en/counterfactual.html",
+     "cls": "span.badge.validity-high",
+     "count": 7,
+     "reason": "数据语义色片：反事实效度徽章（高有效档）"
+    },
+    {
+     "page": "en/counterfactual.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/deconstruction.html",
+     "cls": "span.tag",
+     "count": 5,
+     "reason": "数据语义色片：解构分类编码"
+    },
+    {
+     "page": "en/deconstruction.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    },
+    {
+     "page": "en/ethics-consumption.html",
+     "cls": "div.ipo-outcome",
+     "count": 5,
+     "reason": "数据语义色片：投入产出结果编码"
+    },
+    {
+     "page": "en/ethics-consumption.html",
+     "cls": "span.veg-badge.veg-no",
+     "count": 4,
+     "reason": "数据语义色片：素食判定徽章（否）"
+    },
+    {
+     "page": "en/ethics-consumption.html",
+     "cls": "span.zero-tag",
+     "count": 3,
+     "reason": "数据语义色片：零和结果编码"
+    },
+    {
+     "page": "en/ethics-consumption.html",
+     "cls": "div.kpi-card",
+     "count": 1,
+     "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
+    }
+   ]
   }
  },
  "note": "裁决 2「豁免清单落 scripts/output/」登记簿：W864 首批建册，随批递增、条目随迁移整改递减。"
