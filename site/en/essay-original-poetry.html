@@ -1301,6 +1301,23 @@ td.num, th.num {
         footer a:hover { text-decoration: underline; }
         .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
     @media (max-width: 768px){ table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; } }
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
 </style>
 
   <script src="../js/theme-init.js"></script>
@@ -1320,7 +1337,9 @@ td.num, th.num {
         <h1>The Novel's Own Verse &mdash; Eight Hundred Poems in a Hundred Chapters</h1>
         <div class="subtitle">ESSAY 37 &middot; SUMMARY TRANSLATION</div>
         <div class="tagline">An umbrella overview of the ~800 poems: four functions, thematic groupings, the hundred chapter-couplets, genre distribution, and a character-praise comparison.</div>
-    </header>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </header>
     <main class="container">
         <div class="source-note">
             A summary translation of <a href="https://github.com/1273984347/xiyouji/blob/main/docs/05-诗词歌赋/原著诗词赏析.md">Appreciation of Original Poetry (essay, Chinese)</a>. the Chinese original surveys the novel's verse &mdash; preface / descriptive / closing / character-composed functions, thematic groupings, the hundred 7+7 chapter couplets, genre distribution (~800 poems, ~8 per chapter), and a character-praise comparison table. This essay is the companion overview to E6 / E31 / E33.

@@ -1251,7 +1251,25 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    </style>
+    
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
+</style>
 <style>
         /* e-track-exempt: chart-data-colors 1 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
@@ -1437,7 +1455,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <h1>取经路线时空双轴可视化</h1>
         <p class="subtitle">JST · 时间（回目 1-100）× 空间（长安→灵山 24 地点）双轴叙事图</p>
         <p class="tagline">—— 一万八千里取经路、一百回章回、二十四坐标，化为一张时空轨迹图</p>
-    </section>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </section>
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <nav class="breadcrumb" aria-label="面包屑">

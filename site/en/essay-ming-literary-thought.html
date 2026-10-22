@@ -1301,6 +1301,23 @@ td.num, th.num {
         footer a:hover { text-decoration: underline; }
         .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
     @media (max-width: 768px){ table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; } }
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
 </style>
 
   <script src="../js/theme-init.js"></script>
@@ -1320,7 +1337,9 @@ td.num, th.num {
         <h1>From Archaism to Xinling — Ming Literary Thought · Annotated English Edition</h1>
         <div class="subtitle">ESSAY E29 &middot; SUMMARY TRANSLATION</div>
         <div class="tagline">A transitional text: the novel inherits the Tang-Song School's 'writing conveys the Way' and anticipates the Gong'an School's 'give voice to one's own xinling.'</div>
-    </header>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </header>
     <main class="container">
         <div class="source-note">
             A summary translation of <a href="https://github.com/1273984347/xiyouji/blob/main/docs/04-文化与历史背景/明代文学思想对照专题.md">Ming Literary-Thought Comparison (essay, Chinese)</a>. The Chinese original places the novel in the Ming literary genealogy &mdash; laterally against the four great novels, longitudinally across cabinet style, the Seven Masters, the Tang-Song and Gong'an Schools &mdash; triangulated through Li Zhi, Yuan Hongdao, Gui Youguang, and Li Mengyang.

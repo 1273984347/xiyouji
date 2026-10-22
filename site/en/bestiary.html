@@ -1348,6 +1348,23 @@ td.num, th.num {
             .bar-row .tag { flex-basis: 120px; font-size: 0.78rem; }
             .bar-row .val { flex-basis: 70px; }
         }
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
 </style>
 
 <!-- W334-RESKIN -->
@@ -1368,7 +1385,9 @@ td.num, th.num {
         <h1>The Bestiary</h1>
         <div class="subtitle">DEMONS · AN ECOLOGY</div>
         <div class="tagline">Thirty named species, four social types, a 73% extinction rate — and the nagging sense that the scariest monsters are the connected ones.</div>
-    </header>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </header>
     <main class="container">
         <div class="source-note">
             <strong>Source:</strong> Curated from three datasets: <a href="https://github.com/1273984347/xiyouji/blob/main/dataset/monster-ecology-network.json">monster-ecology-network.json</a> (30 species, niches, symbiosis links, 73% extinction), <a href="https://github.com/1273984347/xiyouji/blob/main/dataset/monster-hierarchy-network.json">monster-hierarchy-network.json</a> (4 social tiers + fate/origin summaries), and <a href="https://github.com/1273984347/xiyouji/blob/main/dataset/monster-capability-radar.json">monster-capability-radar.json</a> (15 demons × 5 capability dimensions, extremes).

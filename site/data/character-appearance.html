@@ -1251,7 +1251,25 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    </style>
+    
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
+</style>
 <style>
         /* e-track-exempt: chart-data-colors 1 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
@@ -1440,7 +1458,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <h1>人物出场频次与戏份分析</h1>
         <p class="subtitle">CHARACTER APPEARANCE</p>
         <p class="tagline">取经队伍与各路神魔，谁的戏份最重？</p>
-    </section>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </section>
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <a href="../dashboard.html" class="back-link">← 返回仪表盘</a>

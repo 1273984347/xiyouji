@@ -1251,7 +1251,25 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    </style>
+    
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
+</style>
 <style>
         /* e-track-exempt: chart-data-colors 3 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
@@ -1579,7 +1597,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <h1>法术阵法体系</h1>
         <p class="subtitle">MAGIC · ARRAY · ENERGY CONSERVATION</p>
         <p class="tagline">5 项修炼 · 5 种火系 · 6 座阵法 · 8 件法宝 —— 法力守恒第一律：能量不灭，只在源-中转-耗三态间流转。</p>
-    </section>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </section>
 
 <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">

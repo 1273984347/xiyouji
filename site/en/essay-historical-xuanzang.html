@@ -1442,6 +1442,23 @@ td.num, th.num {
         footer a:hover { text-decoration: underline; }
         .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
     @media (max-width: 768px){ table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; } }
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
 </style>
 
 <!-- W334-RESKIN -->
@@ -1462,7 +1479,9 @@ td.num, th.num {
         <h1>The Historical and the Fictional Xuanzang</h1>
         <div class="subtitle">ESSAY E7 · SUMMARY TRANSLATION</div>
         <div class="tagline">From a lone monk who smuggled himself west, to a divinely mandated pilgrim — how Ming authors rewrote a seventh-century traveler.</div>
-    </header>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </header>
 
     <main class="container">
         <div class="source-note">

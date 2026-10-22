@@ -1349,6 +1349,23 @@ td.num, th.num {
             .bar-row .val { flex-basis: 70px; }
         }
 @media (max-width: 768px){ table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; } }
+/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .hero-ornament {
+        position: absolute;
+        right: clamp(var(--space-6), 5vw, var(--space-12));
+        bottom: clamp(var(--space-5), 4vw, var(--space-9));
+        width: clamp(140px, 18vw, 240px);
+        height: auto;
+        opacity: .9;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-ornament {
+            display: none;
+        }
+    }
 </style>
 
 <!-- W334-RESKIN -->
@@ -1369,7 +1386,9 @@ td.num, th.num {
         <h1>100 Chapters, Mapped</h1>
         <div class="subtitle">STRUCTURE · FOUR MOVEMENTS</div>
         <div class="tagline">The hundred chapters as four movements — origin, call, the long road, and return — with every chapter's original couplet, figures, and places.</div>
-    </header>
+    
+            <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </header>
     <main class="container">
         <div class="source-note">
             <strong>Source:</strong> Curated from <a href="https://github.com/1273984347/xiyouji/blob/main/dataset/chapters-metadata.json">dataset/chapters-metadata.json</a> (W344), which derives each chapter's couplet, principal figures, and localities from the received text via frequency analysis — zero newly-invented facts. The four-arc grouping is the project's editorial framing.

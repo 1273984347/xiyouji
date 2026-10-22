@@ -1,0 +1,26 @@
+{
+  "batch": "W885",
+  "date": "2026-10-22",
+  "title": "W885 素材接线批（213 页页头装饰插画 + 首页水墨底图 + 4 张深底直显版插画·源与内联副本双写）",
+  "desc": "二百一十三页页头装饰插画与首页水墨底图接线、四张深底直显版插画、规则源与内联副本双写",
+  "head_entry": "2026-10-22（W885 素材接线批）",
+  "head_sentence": "七十一件素材终于接进页面、装饰插画与首页底图各自归位",
+  "changelog_body": "\n\n> **来源**：用户就「素材图还缺什么」清单令「按顺序开始做」，在第 1–6 项素材做完、并列出「接线到页面」这一项后，用户于 2026-10-22 22:50「继续」、23:24 催办，本批执行第 6 项：把已入库的水墨素材真正接到站面上。\n> - **文件**：site/data/*.html（87）、site/en/*.html（126）共 213 页、site/system.css、site/index.html、site/static/images/viz-dark-01-network.webp、site/static/images/viz-dark-02-heatmap.webp、site/static/images/viz-dark-03-radar.webp、site/static/images/viz-dark-04-timeline.webp、site/static/images/README.md、site/static/images/index.md、scripts/_w885_wire.py、scripts/_w885_viz_alpha.py、scripts/_w885_index_revert.py、scripts/output/_w885_spec.json、docs/00-导读/W批次编号对账表.md。\n> - **接了什么**：① **213 页**（site/data 87 + site/en 126）在 `.hero` 暗色带内挂一张**深底直显版**装饰插画，按页名映射四类母题（network/relationships/social-media→根须网、heatmap→墨点阵、radar→放射线、timeline→刻痕序列，其余默认墨点阵）；② **首页 site/index.html** 的浅色 `.masthead` 铺 hero-01 山河云海横幅（文字正落在图底部特意留出的空白带上）；③ 另出 **4 张深底直显版** viz 插画（640×640·viz-dark-01..04）供暗带使用——浅底宣纸图贴在暗色带上会成一块亮斑，故暗带必须用深底版。\n> - **两条实测结论（据实记账·都不是猜的）**：① **file:// 下 CSP 的 `style-src 'self'` 会拦掉外链样式表**，页面样式实际全部来自每页的内联副本（inline_css.py 从 site/system.css 注入的那份·每页约 55 KB）⇒ 新规则必须**源与内联副本双写**：源（site/system.css）保证下次 inline_css 重跑时仍被继承，内联副本保证当前即生效。首轮只改源 ⇒ 规则在页面上完全不生效，浏览器实拍见装饰图撑成 990 px 方块盖住整页（截图存证）。② 深底方图贴在暖褐 hero 上有色差、可见方框 ⇒ 按亮度把深底映射为 alpha 渐变（近底色→透明、笔触→不透明），插画变成**悬浮的米白笔触层**，无方框且不依赖具体底色。\n> - **验收（浏览器实拍·两页）**：数据页确认装饰插画为 240 px 角饰、落在右下不压标题不压文字，W879 的 soft-light 山形底图在暗带上显影为剪影；首页确认水墨底图铺满首屏、kicker 与「取经录」与英文副题全部落在图的留白带上完全可读、「100 回」与山脊相映。**搜索索引**按「他方在途条目按 HEAD 版回退」处理：重跑 `_gen_search_index.py` 后逐条比对，差异仅他方在途的 docs/agent/gates.md 一条 → 已回退，两个索引文件恢复 HEAD 版（我方改动不改变任何页面条目）；**CSP 重算 0 页更新**（未触及内联脚本·零漂移）。\n> - **范围纪律**：只动 213 页的一条装饰 img + 各自内联副本的一条规则 + 首页三条背景 + system.css 一条规则 + 4 张新图 + 3 个脚本，不改任何页面结构、正文与门禁判据，不推送远端。\n> - **CHANGELOG 版段递延**：现役顶段 W874（W851 已落段），W875–W884 段待补且 W883 在途中 → batch_cascade 断言「批次号应为顶段+1」不成立，按仓内现行节奏递延，spec 已入库，待补段批按号序一并回写。",
+  "milestone_block": "- **W885 素材接线批**：\n  - 213 页（site/data 87 + site/en 126）`.hero` 暗带接入深底直显版装饰插画（按页名映射四类母题）\n  - 首页浅色 `.masthead` 铺 hero-01 山河云海横幅（文字落在图底部留白带上）\n  - 另出 4 张深底直显版 viz 插画（640×640）供暗带使用\n  - 实测一：file:// 下 CSP 拦外链样式表⇒ 规则**源与内联副本双写**（只改源则页面完全不生效）\n  - 实测二：深底方图有色差可见方框 ⇒ 深底映射为 alpha 渐变，插画成悬浮米白笔触层\n  - 验收：浏览器实拍两页确认不压标题、首页文字完全可读；索引他方在途条目已按 HEAD 版回退；CSP 零漂移",
+  "agents_note": "二〇二二年十月二十二日（W885）素材做了六十一件却一页都没用上，这批就是把它们接进站点。接线这件事本身不难，难的是发现页面样式到底从哪来：我在 site/system.css 里加了 .hero-ornament 规则，页面里插了 img，然后浏览器实拍一看——装饰图撑成九百九十像素的方块把整页盖住了。原因是 file:// 下 CSP 的 style-src 'self' 会拦掉外链样式表，页面真正生效的样式是每页那份内联副本，也就是 inline_css.py 从 system.css 注进去的五十五 KB。这才想明白为什么每个页面都拖着那么大的内联样式块——它不是冗余，是现场。所以规则得双写：源里写一份保证下次重跑继承，内联副本里再写一份保证现在生效，只写源等于没写。这条比规则本身更值得记。第二道坎是深底插画贴在暗色 hero 上，深墨方块和暖褐的底色有色差，一眼能看见方框，于是按亮度把深底映射成 alpha 渐变，插画变成悬浮的米白笔触层，贴在任何暗底上都自然。顺带按并行 W884 会话的交接把搜索索引处理了：重跑索引后逐条比对，差异只有他方在途的 gates.md 一条，按纪律回退成 HEAD 版，索引文件恢复原状——我方改的是页面装饰，不是文案，索引条目本就不该动。还有一件事本来想一上来就问的：这批要不要先问你三问？后来想想不对，页面接线不是出图，三问那套是给「生成素材」用的，参数早就定死了，直接做更省事。现在七十一件素材里，头图、分享图、人物图、回目母版、页头装饰都已经各归其位，只剩回目页的母版还没接（那一百回的内容页是 build_reader.py 生成的，要改得动生成器，等号序链松一点再做）。",
+  "file_index_rows": [
+    "| site/data/*.html（87 页） | W885 | 改：`.hero` 暗带接入深底直显版装饰插画 img + 内联副本补 .hero-ornament 规则（按页名映射四类母题） |",
+    "| site/en/*.html（126 页） | W885 | 改：同 site/data（英文侧同款装饰插画与规则） |",
+    "| site/system.css | W885 | 改：追加 .hero-ornament 规则（源·下次 inline_css 重跑继承） |",
+    "| site/index.html | W885 | 改：浅色 .masthead 铺 hero-01 山河云海横幅（文字落在图底部留白带） |",
+    "| site/static/images/viz-dark-01-network.webp | W885 | 新增：深底直显版装饰插画 01/04·根须网（640×640·深底映射为 alpha 渐变） |",
+    "| site/static/images/viz-dark-02-heatmap.webp | W885 | 新增：深底直显版装饰插画 02/04·疏密墨点阵（640×640·默认母题） |",
+    "| site/static/images/viz-dark-03-radar.webp | W885 | 新增：深底直显版装饰插画 03/04·放射线（640×640） |",
+    "| site/static/images/viz-dark-04-timeline.webp | W885 | 新增：深底直显版装饰插画 04/04·纵向刻痕序列（640×640） |",
+    "| scripts/_w885_wire.py | W885 | 新增：接线批处理脚本（system.css 规则 + 213 页装饰 img + 内联副本补规则 + 首页底图·幂等） |",
+    "| scripts/_w885_viz_alpha.py | W885 | 新增：深底插画 alpha 化脚本（按亮度把深底映射为透明渐变·消除方框） |",
+    "| scripts/_w885_index_revert.py | W885 | 新增：搜索索引他方在途条目回退器（逐条比对·源文件未入库者按 HEAD 版回退） |",
+    "| scripts/output/_w885_spec.json | W885 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |",
+    "| docs/00-导读/W批次编号对账表.md | W885 | 认领行与收官回填 |"
+  ]
+}

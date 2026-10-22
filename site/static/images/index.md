@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（62）
+## 文件（66）
 
 ### 样式与资源
 
@@ -77,6 +77,10 @@
 - `viz-02-heatmap.webp`
 - `viz-03-radar.webp`
 - `viz-04-timeline.webp`
+- `viz-dark-01-network.webp`
+- `viz-dark-02-heatmap.webp`
+- `viz-dark-03-radar.webp`
+- `viz-dark-04-timeline.webp`
 
 ---
 
