@@ -1269,6 +1269,22 @@ td.num, th.num {
             display: none;
         }
     }
+/* W888：数据页卷末插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .viz-illustration {
+        margin: clamp(32px, 5vw, 64px) auto 0;
+        max-width: 420px;
+    }
+
+    .viz-illustration img {
+        width: 100%;
+        height: auto;
+        display: block;
+        opacity: .92;
+    }
+
+    html[data-theme="dark"] .viz-illustration {
+        display: none;
+    }
 </style>
 <style>
         /* e-track-exempt: chart-data-colors 1 处 */
@@ -1572,6 +1588,9 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     <li><strong>退场的伦理：</strong>观音退场时没有带走任何东西——没有带走敬畏、感恩、功绩。她从「掌握紧箍咒的菩萨」变成「种竹子的邻居」。退场的干净是一种自觉选择——真正的成功不是「项目离了我不行」，是「项目离了我照样行」。慈悲与精算的悖论在此和解。</li>
   </ul>
 </section>
+<figure class="viz-illustration" aria-hidden="true">
+    <img src="../static/images/viz-01-network.webp" alt="" loading="lazy" decoding="async">
+</figure>
     </main>
 
     <footer class="site-footer">

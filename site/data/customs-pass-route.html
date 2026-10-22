@@ -1269,6 +1269,22 @@ td.num, th.num {
             display: none;
         }
     }
+/* W888：数据页卷末插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .viz-illustration {
+        margin: clamp(32px, 5vw, 64px) auto 0;
+        max-width: 420px;
+    }
+
+    .viz-illustration img {
+        width: 100%;
+        height: auto;
+        display: block;
+        opacity: .92;
+    }
+
+    html[data-theme="dark"] .viz-illustration {
+        display: none;
+    }
 </style>
 <style>
         /* 页面局部样式（W383·v2.3.11 新建·自包含，随 inline_css.py 内联） */
@@ -1436,6 +1452,9 @@ td.num, th.num {
                 <strong>灵山·传经不验</strong>。第98回传经（line 1）却得无字真经（line 43），阿傩迦叶索人事——经与牒在灵山分道：文牒管"人过境"，真经管"法过境"；第100回（line 7）关文复验、五圣成真（line 45），文牒使命闭环。
             </div>
         </section>
+        <figure class="viz-illustration" aria-hidden="true">
+            <img src="../static/images/viz-02-heatmap.webp" alt="" loading="lazy" decoding="async">
+        </figure>
     </main>
 
     <footer class="site-footer">

@@ -1319,6 +1319,10 @@ td.num, th.num {
   .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
     border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
   .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
+  /* W888：百回母版插画（浅底宣纸版·暗色模式下隐藏——浅底图贴深底会成亮斑） */
+  .chapter-plate { margin: 28px auto 36px; max-width: 420px; }
+  .chapter-plate img { width: 100%; height: auto; display: block; opacity: .92; }
+  html[data-theme="dark"] .chapter-plate { display: none; }
 </style>
 </head>
 <body>
@@ -1343,6 +1347,9 @@ td.num, th.num {
   <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>第023回 三藏不忘本 四圣试禅心</h1>
+<figure class="chapter-plate" aria-hidden="true">
+<img src="../static/images/chap-23.webp" alt="" loading="lazy" decoding="async">
+</figure>
 <blockquote>
 <blockquote>
 <p>生成来源：初始批量导入（W602 溯源回填·首次提交 2026-07-30）

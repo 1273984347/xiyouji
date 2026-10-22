@@ -1268,6 +1268,22 @@ td.num, th.num {
             display: none;
         }
     }
+/* W888：数据页卷末插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+    .viz-illustration {
+        margin: clamp(32px, 5vw, 64px) auto 0;
+        max-width: 420px;
+    }
+
+    .viz-illustration img {
+        width: 100%;
+        height: auto;
+        display: block;
+        opacity: .92;
+    }
+
+    html[data-theme="dark"] .viz-illustration {
+        display: none;
+    }
 </style>
 <style>
         /* e-track-exempt: chart-data-colors 1 处 */
@@ -1423,6 +1439,9 @@ td.num, th.num {
 }</pre><button type="button" class="cite-copy" data-cite-target="next">复制</button></div>
   </details>
         </div>
+        <figure class="viz-illustration" aria-hidden="true">
+            <img src="../static/images/viz-04-timeline.webp" alt="" loading="lazy" decoding="async">
+        </figure>
 </main>
 
 <div style="padding:16px var(--space-3);text-align:center"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">反馈</a></div>

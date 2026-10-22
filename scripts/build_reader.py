@@ -105,6 +105,10 @@ STYLE = """
   .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
     border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
   .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
+  /* W888：百回母版插画（浅底宣纸版·暗色模式下隐藏——浅底图贴深底会成亮斑） */
+  .chapter-plate { margin: 28px auto 36px; max-width: 420px; }
+  .chapter-plate img { width: 100%; height: auto; display: block; opacity: .92; }
+  html[data-theme="dark"] .chapter-plate { display: none; }
 """
 
 
@@ -112,6 +116,16 @@ STYLE = """
 # 「原文全文」一并折叠是实测逼出来的：只折剧情梗概+深度解读时，折叠态高度平均仍有 84.2%
 # （中位 91.6%·100 页里仅 17 页达标），达不到 AC 的 ≤60%——因为原文全文占正文约 48.9%。
 FOLD_SECTIONS = ("剧情梗概", "深度解读", "原文全文")
+# W888：百回母版插画（chap-07/14/15/23/27/30 六张 1:1 母版·同一母版按「可参数化铺一百回」设计·
+# 本批只落有图的六回·其余 94 回无母版图——母版是「该回的配图」而非全站装饰）。
+CHAPTER_PLATES = {
+    "ch007.html": "chap-07.webp",
+    "ch014.html": "chap-14.webp",
+    "ch015.html": "chap-15.webp",
+    "ch023.html": "chap-23.webp",
+    "ch027.html": "chap-27.webp",
+    "ch030.html": "chap-30.webp",
+}
 ISSUE_NEW = "https://github.com/1273984347/xiyouji/issues/new"
 
 
@@ -363,6 +377,17 @@ def _render_one_page(src, docs_root, cat_title, rendered, idx):
 
     blob = f"{BLOB}{docs_root}/{fname}"
     body_html, _n_folded = fold_sections(body_html)  # W847 AC-22
+    # W888：百回母版插画（仅六回有母版图·插在回目 H1 之后）
+    plate = CHAPTER_PLATES.get(out_rel.rsplit("/", 1)[-1])
+    if plate:
+        plate_html = (
+            "\n<figure class=\"chapter-plate\" aria-hidden=\"true\">"
+            "\n<img src=\"%s../static/images/%s\" alt=\"\" loading=\"lazy\" decoding=\"async\">"
+            "\n</figure>" % (up, plate)
+        )
+        m_h1 = re.search(r"</h1>", body_html)
+        if m_h1:
+            body_html = body_html[:m_h1.end()] + plate_html + body_html[m_h1.end():]
     rel_in_reader = out_rel[len("reader/"):] if out_rel.startswith("reader/") else out_rel
     body = f"""  <nav class="reader-topnav">
     <a class="brand" href="{home}">详解西游记 · 站内阅读</a>
