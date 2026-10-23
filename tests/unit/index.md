@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（30）
+## 文件（32）
 
 ### Python 脚本
 
@@ -20,6 +20,7 @@
 - `test_check_plan_template.py`
 - `test_check_script_coverage.py`
 - `test_check_search_index_fresh.py`
+- `test_ci_sim.py`
 - `test_ci_wiring.py`
 - `test_d3_data_processors.py`
 - `test_docs_index.py`
@@ -39,6 +40,7 @@
 - `test_slice_screenshots.py`
 - `test_tmpe_tidy.py`
 - `test_tool_scripts_cli.py`
+- `test_tracked_files.py`
 - `test_verify_failclosed.py`
 - `test_verify_registry.py`
 - `test_vermilion_solid.py`
