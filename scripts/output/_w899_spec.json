@@ -1,0 +1,32 @@
+{
+  "batch": "W899",
+  "date": "2026-10-23",
+  "title": "W899 合并后收尾修正（output 目录计数口径订正 + 朱砂门禁增量缓存重建）",
+  "desc": "合并后收尾修正：output 目录计数口径订正与朱砂门禁增量缓存重建",
+  "head_entry": "2026-10-23（W899 合并后收尾修正批）",
+  "head_sentence": "把入库件与实况对齐：output 目录计数订正为六件、朱砂门禁增量缓存重建",
+  "changelog_body": "\n\n\n\n> **来源**：用户 2026-10-23 批准「B 推送 dev 并开 PR 合 main」，主会话在合并落地核对中自查发现两处入库件与实况不符，本批为合并后收尾修正。\n\n> - **文件**：assets/promo/output/README.md、scripts/output/_vermilion_solid_cache.json、scripts/output/_w899_spec.json、scripts/output/_cascade_files_W899.txt、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md。\n\n> - **执行**：① **output 目录计数口径订正**——`assets/promo/output/README.md` 的「生成时点含 N 个直属文件」由 3 订正为 6（W898 落地英文版 3 件产物时只刷新了 `index.md` 清单，README 散文计数行未同步 ⇒ main 上出现「声明 3 实况 6」的自相矛盾）；② **朱砂门禁增量缓存重建**——W898 级联改写四页脚后未重扫第 49 槽，缓存中 3 页 sha1 与当前页面字节不一致（缓存不自愈 ⇒ 每轮 CI 白扫这 3 页），本批按 `scripts/check_vermilion_solid.js` 的 `sha1File` 同口径重建并全量对账；③ **级联面随批同步**——按仓库规约走 `scripts/batch_cascade.py` 立 W899 段（CHANGELOG 与 README 与 STRUCTURE 与项目说明与 HANDOVER 与 AGENTS 与 workflows README 与四页脚与 file-index 与 CITATION.cff 共 10 面）。\n\n> - **验证**：缓存全量对账 234 条 → 命中 234 · 陈旧 0 · 幽灵 0（对账脚本 `tmpe/_w899_cache_audit.py`·口径与门禁 `sha1File` 一致）；单测 27 passed（`tests/unit/test_vermilion_solid.py` 11 例 + `tests/unit/test_folder_docs_gate.py` 16 例）；CI 侧预演 `scripts/ci_sim.py` 7/7 PASS；PR #56 required checks 全绿后已合 main（merge commit 21f04ee8·main 上中英双份物料与投放接线逐条核对落地）。\n\n> - **状态**：已收官（合并后收尾修正·两处入库件与实况对齐）。",
+  "milestone_block": "- **W899 合并后收尾修正批**：\n  - output 目录 README 计数口径订正：3 → 6（英文版 3 件产物落地时只刷新了 index.md 清单，README 散文计数行漏同步）\n  - 朱砂门禁增量缓存重建：3 页 sha1 与当前页面字节对齐（实测 234 条全命中 · 陈旧 0 · 幽灵 0）\n  - 级联 10 面同步落盘（W899 段 + 四页脚 + 交接文档 + file-index + CITATION.cff）\n  - 验证：单测 27 passed · CI 侧预演 7/7 PASS · PR #56 已合 main（21f04ee8）",
+  "agents_note": "二〇二六年十月二十三日（W899）做了一次合并后的收尾核对。PR #56 落地后发现两处入库件与实况对不上：一是宣传物料 output 目录的 README 还写着三个直属文件，实际已经有六件（英文版三个产物落地时只刷新了清单，散文那句计数漏同步），二是朱砂门禁的增量缓存有三页哈希停在旧版本（级联改页脚后没重扫，缓存不自愈，每轮 CI 都要白扫这三页）。两条都修掉并做了全量对账：缓存二百三十四条全命中、零陈旧、零幽灵。记一条：目录导读里的计数句是散文，批量落地时最容易漏同步，而清单是机器生成的总是对的——核对要对着清单数，别对着散文数。",
+  "file_index_rows": [
+    "| assets/promo/output/README.md | W899 | output 目录导读计数订正为实况 6 件 |",
+    "| scripts/output/_vermilion_solid_cache.json | W899 | 增量缓存重建（3 页 sha1 对齐当前页面字节） |",
+    "| scripts/output/_w899_spec.json | W899 | 本批级联 spec（10 面改写参数） |",
+    "| scripts/output/_cascade_files_W899.txt | W899 | 级联落盘清单 |",
+    "| docs/00-导读/W批次编号对账表.md | W899 | 认领行与收官回填 |",
+    "| CHANGELOG.md | W899 | W899 段 |",
+    "| HANDOVER.md | W899 | 头尾链与里程碑块 |",
+    "| README.md | W899 | 当前批次版本行 |",
+    "| STRUCTURE.md | W899 | 当前批次版本行 |",
+    "| docs/00-导读/项目说明.md | W899 | 当前批次版本行 |",
+    "| .github/workflows/README.md | W899 | 工作流层区间与里程碑尾标记 |",
+    "| site/index.html | W899 | 页脚批次链插入 W899 |",
+    "| site/data/cross-time-danmaku.html | W899 | 页脚批次链插入 W899 |",
+    "| site/data/tag-cloud.html | W899 | 页脚批次链插入 W899 |",
+    "| site/dukou-engine.html | W899 | 页脚批次链插入 W899 |",
+    "| AGENTS.md | W899 | 版本脚注条目 |",
+    "| archive/docs/AGENTS-ARCHIVE.md | W899 | 脚注滚动迁入的最老条目 |",
+    "| CITATION.cff | W899 | version 同步为 W899 |",
+    "| scripts/output/file-index.md | W899 | W899 段插入 |"
+  ]
+}

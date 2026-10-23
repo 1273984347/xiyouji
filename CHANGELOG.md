@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W898），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W899），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -18,6 +18,19 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 
+### W899（2026-10-23）：合并后收尾修正（output 目录计数口径订正 + 朱砂门禁增量缓存重建）
+
+
+
+> **来源**：用户 2026-10-23 批准「B 推送 dev 并开 PR 合 main」，主会话在合并落地核对中自查发现两处入库件与实况不符，本批为合并后收尾修正。
+
+> - **文件**：assets/promo/output/README.md、scripts/output/_vermilion_solid_cache.json、scripts/output/_w899_spec.json、scripts/output/_cascade_files_W899.txt、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md。
+
+> - **执行**：① **output 目录计数口径订正**——`assets/promo/output/README.md` 的「生成时点含 N 个直属文件」由 3 订正为 6（W898 落地英文版 3 件产物时只刷新了 `index.md` 清单，README 散文计数行未同步 ⇒ main 上出现「声明 3 实况 6」的自相矛盾）；② **朱砂门禁增量缓存重建**——W898 级联改写四页脚后未重扫第 49 槽，缓存中 3 页 sha1 与当前页面字节不一致（缓存不自愈 ⇒ 每轮 CI 白扫这 3 页），本批按 `scripts/check_vermilion_solid.js` 的 `sha1File` 同口径重建并全量对账；③ **级联面随批同步**——按仓库规约走 `scripts/batch_cascade.py` 立 W899 段（CHANGELOG 与 README 与 STRUCTURE 与项目说明与 HANDOVER 与 AGENTS 与 workflows README 与四页脚与 file-index 与 CITATION.cff 共 10 面）。
+
+> - **验证**：缓存全量对账 234 条 → 命中 234 · 陈旧 0 · 幽灵 0（对账脚本 `tmpe/_w899_cache_audit.py`·口径与门禁 `sha1File` 一致）；单测 27 passed（`tests/unit/test_vermilion_solid.py` 11 例 + `tests/unit/test_folder_docs_gate.py` 16 例）；CI 侧预演 `scripts/ci_sim.py` 7/7 PASS；PR #56 required checks 全绿后已合 main（merge commit 21f04ee8·main 上中英双份物料与投放接线逐条核对落地）。
+
+> - **状态**：已收官（合并后收尾修正·两处入库件与实况对齐）。
 ### W898（2026-10-23）：宣传物料投放接线与派生（README 物料小节 + 站内入口 + 英文版单页 + 社媒分享图指引 + 规范受管资产登记）
 
 > **来源**：用户 2026-10-23 批准「D 宣传单页投放接线（README 物料说明 / 站内入口 / 英文版 / 社媒长图）」。
