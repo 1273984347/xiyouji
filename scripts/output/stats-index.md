@@ -14,10 +14,10 @@
 | csp_covered | 856 | html_total − _template.html（generate_csp TEMPLATE_EXCLUDE） | W459 | W459 |
 | gate_count | 49 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | W883 |
 | html_total | 857 | site/**/*.html（递归全站） | W459 | W459 |
-| inline_css_pages | 330 | site 全树含 INLINED 标记页 | W459 | W879 |
+| inline_css_pages | 850 | site 全树含 INLINED 标记页 | W459 | W894 |
 | methodology_docs | 24 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W755 |
-| pytest_collected | 834 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W883 |
-| report_docs | 53 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W893 |
+| pytest_collected | 836 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W894 |
+| report_docs | 54 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W893 |
 | scan_files | 855 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W459 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
 | seo_scanned | 855 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | W591 |
@@ -28,6 +28,18 @@
 | visualization_pages | 87 | site/data_html − _shell.html | W459 | W459 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W894（2026-10-23）
+- 注：W894 门禁实算口径改造（磁盘扫描→Git 索引）：新增 scripts/tracked_files.py 与 scripts/ci_sim.py ⇒ pytest 收集数 +1。inline_css_pages 本批不动（其 850→330 漂移属并行 W895 在途改动·按 CI-HEAD 实况保持 850）。
+- pytest_collected: 836 → 836
+
+### W894（2026-10-23）
+- 注：W894 门禁实算口径改造（磁盘扫描→Git 索引）：新增 scripts/tracked_files.py 与 scripts/ci_sim.py ⇒ pytest 收集数 +1。inline_css_pages 本批不动（其 850→330 漂移属并行 W895 在途改动·按 CI-HEAD 实况保持 850）。
+- pytest_collected: 835 → 836
+
+### W894（2026-10-23 20:30:21）
+- inline_css_pages: 330 → 850
+- pytest_collected: 834 → 835
 
 ### W893（2026-10-23 20:07:08）
 - report_docs: 52 → 53

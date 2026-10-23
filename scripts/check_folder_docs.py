@@ -43,8 +43,22 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import gen_folder_docs as gen  # noqa: E402  单一事实源：在管目录集与清单算法全在此
+import tracked_files as tf  # noqa: E402  W894：目标提交树口径（git ls-files）
 
 MARKER = "---- 第 45 门禁 目录文档新鲜度："
+
+# W894（用户批准根修）：门禁实算对象 = **目标提交树**（Git 索引 = 已跟踪 + 已暂存新增
+# = 将要入库的内容），不再是物理工作树扫描。并行批的未落库件（未跟踪）因此不再污染
+# 判据 ⇒ 本地不再「他方在途红」、pre-commit 不必被绕过。
+#
+# 判定规则（索引口径）：
+#   · 索引有、清单无          → FAIL（已入库文件漏登记——真问题）
+#   · 清单有、索引无、磁盘也无 → FAIL（预引幽灵文件——提交后 CI 侧必红）
+#   · 清单有、索引无、磁盘有   → 容忍（未跟踪的新文件，允许在提交前存在）
+#   · 清单内部计数与条目数不符 → FAIL（截断/自相矛盾——与口径无关）
+#
+# self-test 走**磁盘口径**（合成树不在 Git 索引内）：由 _USE_TRACKED 开关切换。
+_USE_TRACKED = True
 
 _H1_RE = re.compile(r"^# 文件索引 · (.+?)\s*$")
 _SUBSEC_RE = re.compile(r"^## 子目录（(\d+)）\s*$")
@@ -120,18 +134,46 @@ def check_dir(abs_dir: str) -> list[str]:
     if parsed is None:
         fails.append("C2 index.md 结构不合生成器模板（疑手改/旧版/截断）：%s" % label)
         return fails
-    want_sub = gen.list_subdirs(abs_dir)
-    want_files = gen.list_files(abs_dir)
-    if parsed["sub_n"] != len(want_sub) or sorted(parsed["subdirs"]) != sorted(want_sub):
-        miss = sorted(set(want_sub) - set(parsed["subdirs"]))[:5]
-        extra = sorted(set(parsed["subdirs"]) - set(want_sub))[:5]
-        fails.append("C2 子目录清单漂移：%s（文档 %d 项/实算 %d 项·盘上多 %r·文档多 %r）"
-                     % (label, len(parsed["subdirs"]), len(want_sub), miss, extra))
-    if parsed["file_n"] != len(want_files) or sorted(parsed["files"]) != sorted(want_files):
-        miss = sorted(set(want_files) - set(parsed["files"]))[:5]
-        extra = sorted(set(parsed["files"]) - set(want_files))[:5]
-        fails.append("C3 文件清单漂移：%s（文档 %d 项/实算 %d 项·盘上多 %r·文档多 %r）"
-                     % (label, len(parsed["files"]), len(want_files), miss, extra))
+    if _USE_TRACKED:
+        # 子目录口径与生成器同源：EXCLUDE_SUBSTR / EXCLUDE_TOP 命中的目录不进清单
+        # （例：tmpe 整目录被排除，但其 README.md 与 policy.yml 仍入库·W738 策略件）
+        want_sub = {n for n in tf.tracked_subdirs(rel)
+                    if not gen._is_excluded(os.path.join(abs_dir, n))}
+        # 与生成器同源排除清单自身与占位件（SKIP_NAMES 是单一事实源）
+        want_files = tf.tracked_in_dir(rel) - set(gen.SKIP_NAMES)
+        doc_sub, doc_files = set(parsed["subdirs"]), set(parsed["files"])
+        miss_sub = sorted(want_sub - doc_sub)
+        miss_files = sorted(want_files - doc_files)
+        ghost_sub = sorted(n for n in doc_sub - want_sub
+                           if not os.path.isdir(os.path.join(abs_dir, n)))
+        ghost_files = sorted(n for n in doc_files - want_files
+                             if not os.path.isfile(os.path.join(abs_dir, n)))
+        if miss_sub or ghost_sub:
+            fails.append("C2 子目录清单漂移：%s（索引有清单无 %r·幽灵预引 %r）"
+                         % (label, miss_sub[:5], ghost_sub[:5]))
+        if miss_files or ghost_files:
+            fails.append("C3 文件清单漂移：%s（索引有清单无 %r·幽灵预引 %r）"
+                         % (label, miss_files[:5], ghost_files[:5]))
+        # 计数自洽（抓清单截断/自相矛盾；与口径无关）
+        if parsed["sub_n"] != len(parsed["subdirs"]):
+            fails.append("C2 子目录计数自相矛盾：%s（计数 %d/条目 %d）"
+                         % (label, parsed["sub_n"], len(parsed["subdirs"])))
+        if parsed["file_n"] != len(parsed["files"]):
+            fails.append("C3 文件计数自相矛盾：%s（计数 %d/条目 %d）"
+                         % (label, parsed["file_n"], len(parsed["files"])))
+    else:
+        want_sub = gen.list_subdirs_disk(abs_dir)
+        want_files = gen.list_files_disk(abs_dir)
+        if parsed["sub_n"] != len(want_sub) or sorted(parsed["subdirs"]) != sorted(want_sub):
+            miss = sorted(set(want_sub) - set(parsed["subdirs"]))[:5]
+            extra = sorted(set(parsed["subdirs"]) - set(want_sub))[:5]
+            fails.append("C2 子目录清单漂移：%s（文档 %d 项/实算 %d 项·盘上多 %r·文档多 %r）"
+                         % (label, len(parsed["subdirs"]), len(want_sub), miss, extra))
+        if parsed["file_n"] != len(want_files) or sorted(parsed["files"]) != sorted(want_files):
+            miss = sorted(set(want_files) - set(parsed["files"]))[:5]
+            extra = sorted(set(parsed["files"]) - set(want_files))[:5]
+            fails.append("C3 文件清单漂移：%s（文档 %d 项/实算 %d 项·盘上多 %r·文档多 %r）"
+                         % (label, len(parsed["files"]), len(want_files), miss, extra))
     want_title = os.path.basename(abs_dir) if rel else "仓库根目录"
     if parsed["title"] != want_title:
         fails.append("C4 H1 标题漂移：%s（文档 %r/实际 %r）" % (label, parsed["title"], want_title))
@@ -161,7 +203,11 @@ def self_test() -> int:
 
     base = tempfile.mkdtemp(prefix="cfd_selftest_")
     old_root, old_ignored = gen.ROOT, gen._GITIGNORED_DIRS
+    global _USE_TRACKED
+    old_tracked = _USE_TRACKED
     try:
+        # 合成树不在 Git 索引内 ⇒ 走磁盘口径（self-test 的 6 个负样本按旧语义构造）
+        _USE_TRACKED = False
         gen.ROOT = base
         gen._GITIGNORED_DIRS = set()  # 合成树无 git 仓·gitignored 过滤自然为空集
         d1 = os.path.join(base, "alpha")
@@ -171,7 +217,7 @@ def self_test() -> int:
                 pass
         for kind in ("index.md", "README.md"):
             with open(os.path.join(d1, kind), "w", encoding="utf-8", newline="\n") as f:
-                f.write(gen.render(d1, kind))
+                f.write(gen.render(d1, kind, disk=True))
 
         def write_idx(content: str) -> None:
             with open(os.path.join(d1, "index.md"), "w", encoding="utf-8", newline="\n") as f:
@@ -201,11 +247,11 @@ def self_test() -> int:
         os.remove(os.path.join(d1, "README.md"))
         cases.append(("missing-readme-must-red", check_dir(d1), ["C1"]))
         with open(os.path.join(d1, "README.md"), "w", encoding="utf-8", newline="\n") as f:
-            f.write(gen.render(d1, "README.md"))
+            f.write(gen.render(d1, "README.md", disk=True))
 
         write_idx(fresh_idx().replace("- `a.md`\n", ""))
         cases.append(("tampered-list-must-red", check_dir(d1), ["C3"]))
-        write_idx(gen.render(d1, "index.md"))
+        write_idx(gen.render(d1, "index.md", disk=True))
 
         write_idx(fresh_idx().replace("# 文件索引 · alpha", "# 文件索引 · alpha-old"))
         cases.append(("title-drift-must-red", check_dir(d1), ["C4"]))
@@ -220,6 +266,7 @@ def self_test() -> int:
         return 0 if ok else 1
     finally:
         gen.ROOT, gen._GITIGNORED_DIRS = old_root, old_ignored
+        _USE_TRACKED = old_tracked
         shutil.rmtree(base, ignore_errors=True)
 
 
