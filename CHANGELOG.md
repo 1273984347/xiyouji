@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W893），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W895），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -18,6 +18,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 
+### W895（2026-10-23）：BL-33 收敛批（system.css 单一事实源 + inline_css 护栏 + 330 内联页按源重生成）
+
+> **来源**：用户令「继续」（W891 收官报告的唯一剩余欠账 BL-33）。
+> - **文件**：site/system.css、scripts/inline_css.py、site/data/（88）、site/en/（138）、site/reader/（102 个已内联页）、site/dukou-engine.html、site/_template.html、scripts/_w895_bl33_inventory.py、scripts/_w895_regen_preview.py、scripts/_w895_verify_blocks.py、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md。
+> - **根因（BL-33·双向漂移实证）**：system.css 自 W856 起停更，W864-W891 各迁移批把组件改动（`.seal` 淡底、KPI 顶条按行规则、`.page-wrap` 容器令牌）只写进**页内联副本**——于是单一事实源落后于页面，而页面又缺 system.css 后加的块（W856 品牌标、W885 页头插画、W888 卷末插画）。任何 `inline_css --force` 通扫都会把迁移成果反向冲掉（W875 已实证一次）。
+> - **处置三步**：① **system.css 补齐三处**（`.page-wrap` 1320px→`var(--container-wide)`、`.seal` 实底→`--accent-tint` 底 + `--accent` 字、KPI 顶条按行规则升为全局）；② **inline_css.py 护栏**——`--force` 只重同步**已内联页**，外链页转内联须显式 `--inline-links`（W875/W895 两次实证通扫会把 520 个外链 reader 页全部转内联·66.7 万行抖动）；③ **按源重生成 330 个内联页**（88 data + 138 en + 102 reader 双容器页 + 2 根页）。重生成前先跑 `_w895_regen_preview.py` 预演（证明未 sync 时重生成会反冲三处迁移成果）、重生成后用 `_w895_verify_blocks.py` 集合差校验。
+> - **验收**：内联块集合差 **226/226 data+en 零差异（0 缺 0 多）**·reader 102 页 +4,386/−408 行（同源增量）·520 外链 reader 页**零触碰**·CSP 856 页 0 漂移·第 49 槽门禁 **234 页 0 FAIL**·a11y data/en 双目录无 P0·豁免簿按新实测保守核查（4 条复合/批注键对不上者保留·余 256 条）。
+> - **踩坑记录**：首跑 `--force` 未加护栏前把 622 个 reader 页全部内联（66.7 万行）——按 W875 先例整目录 `git checkout HEAD -- site/reader` 恢复后，再在护栏下精确重跑（102 个本就 INLINED 的双容器页补上同源增量，520 个外链页保持原形态）。
 ### W893（2026-10-23）：四画幅素材图成套批（十二张·16:9/1:1/3:4/1200×630 各三张·拉丁方主题·沿用 W882 改写锚点）
 
 

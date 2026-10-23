@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（260）
+## 文件（265）
 
 ### Markdown 文档
 
@@ -159,6 +159,9 @@
 - `_w893_finalize_ledger.py`
 - `_w893_gen_args.py`
 - `_w893_verify.py`
+- `_w895_bl33_inventory.py`
+- `_w895_regen_preview.py`
+- `_w895_verify_blocks.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
@@ -210,6 +213,7 @@
 - `check_token_coverage.py`
 - `check_untracked.py`
 - `check_w_range_literal.py`
+- `ci_sim.py`
 - `data_validate.py`
 - `detect_unwrapped_tables.py`
 - `doc_areas.py`
@@ -253,6 +257,7 @@
 - `stats.py`
 - `sync_data_json.py`
 - `tmpe_tidy.py`
+- `tracked_files.py`
 - `validate_en.py`
 - `verify_chapters.py`
 - `verify_delivery.py`
