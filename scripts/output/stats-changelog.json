@@ -821,6 +821,18 @@
       "note": "W894 门禁实算口径改造（磁盘扫描→Git 索引）：新增 scripts/tracked_files.py 与 scripts/ci_sim.py ⇒ pytest 收集数 +1。inline_css_pages 本批不动（其 850→330 漂移属并行 W895 在途改动·按 CI-HEAD 实况保持 850）。",
       "time": null,
       "w": "W894"
+    },
+    {
+      "changes": [
+        {
+          "from": 850,
+          "key": "inline_css_pages",
+          "to": 330
+        }
+      ],
+      "date": "2026-10-23",
+      "time": "20:46:20",
+      "w": "W895"
     }
   ]
 }

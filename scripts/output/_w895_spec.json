@@ -1,0 +1,23 @@
+{
+  "batch": "W895",
+  "date": "2026-10-23",
+  "title": "W895 BL-33 收敛批（system.css 单一事实源 + inline_css 护栏 + 330 内联页按源重生成）",
+  "desc": "BL-33 收敛 system.css 补齐三处全局组件 inline_css 加护栏 330 内联页按源重生成 520 外链页零触碰",
+  "head_entry": "2026-10-23（W895 BL-33 收敛批）",
+  "head_sentence": "把停更两月的组件事实源补回来，内联副本按源重生成，通扫误伤的坑也堵上了",
+  "changelog_body": "\n\n> **来源**：用户令「继续」（W891 收官报告的唯一剩余欠账 BL-33）。\n> - **文件**：site/system.css、scripts/inline_css.py、site/data/（88）、site/en/（138）、site/reader/（102 个已内联页）、site/dukou-engine.html、site/_template.html、scripts/_w895_bl33_inventory.py、scripts/_w895_regen_preview.py、scripts/_w895_verify_blocks.py、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md。\n> - **根因（BL-33·双向漂移实证）**：system.css 自 W856 起停更，W864-W891 各迁移批把组件改动（`.seal` 淡底、KPI 顶条按行规则、`.page-wrap` 容器令牌）只写进**页内联副本**——于是单一事实源落后于页面，而页面又缺 system.css 后加的块（W856 品牌标、W885 页头插画、W888 卷末插画）。任何 `inline_css --force` 通扫都会把迁移成果反向冲掉（W875 已实证一次）。\n> - **处置三步**：① **system.css 补齐三处**（`.page-wrap` 1320px→`var(--container-wide)`、`.seal` 实底→`--accent-tint` 底 + `--accent` 字、KPI 顶条按行规则升为全局）；② **inline_css.py 护栏**——`--force` 只重同步**已内联页**，外链页转内联须显式 `--inline-links`（W875/W895 两次实证通扫会把 520 个外链 reader 页全部转内联·66.7 万行抖动）；③ **按源重生成 330 个内联页**（88 data + 138 en + 102 reader 双容器页 + 2 根页）。重生成前先跑 `_w895_regen_preview.py` 预演（证明未 sync 时重生成会反冲三处迁移成果）、重生成后用 `_w895_verify_blocks.py` 集合差校验。\n> - **验收**：内联块集合差 **226/226 data+en 零差异（0 缺 0 多）**·reader 102 页 +4,386/−408 行（同源增量）·520 外链 reader 页**零触碰**·CSP 856 页 0 漂移·第 49 槽门禁 **234 页 0 FAIL**·a11y data/en 双目录无 P0·豁免簿按新实测保守核查（4 条复合/批注键对不上者保留·余 256 条）。\n> - **踩坑记录**：首跑 `--force` 未加护栏前把 622 个 reader 页全部内联（66.7 万行）——按 W875 先例整目录 `git checkout HEAD -- site/reader` 恢复后，再在护栏下精确重跑（102 个本就 INLINED 的双容器页补上同源增量，520 个外链页保持原形态）。",
+  "milestone_block": "- **W895 BL-33 收敛批（事实源补齐 + 护栏 + 330 页重生成）**：\n  - system.css：`.page-wrap` 令牌化 · `.seal` 淡底 · KPI 顶条按行规则升全局\n  - inline_css 护栏：`--force` 只重同步已内联页 · 外链转内联须 `--inline-links`（520 页零误伤实证）\n  - 330 内联页按源重生成 · 集合差 226/226 零差异 · 520 外链页零触碰\n  - CSP 0 漂移 · 门禁 234 页 0 FAIL · a11y 无 P0\n  - 预演/校验双脚本（_w895_regen_preview / _w895_verify_blocks）留作复发检测工具",
+  "agents_note": "二〇二六年十月二十三日（W895）收 BL-33：根因是组件事实源停更、迁移批只改页内联副本，双向漂移让任何通扫都可能反冲成果。本批把三处组件补回 system.css、给 inline_css 装上「--force 不碰外链页」的护栏、330 个内联页按源重生成并做集合差零差异校验——首跑时亲身踩了一次 66.7 万行误伤（整目录恢复后精确重跑），这个坑从此有护栏挡着。",
+  "file_index_rows": [
+    "| site/system.css | W895 | BL-33 收敛：page-wrap 令牌 / seal 淡底 / kpi-row 规则升全局 |",
+    "| scripts/inline_css.py | W895 | 护栏：--force 只重同步已内联页·外链转内联须 --inline-links |",
+    "| site/data/（88）site/en/（138）site/reader/（102） | W895 | 内联块按源重生成（集合差零差异） |",
+    "| scripts/_w895_bl33_inventory.py | W895 | 新增：内联块与事实源差异盘点 |",
+    "| scripts/_w895_regen_preview.py | W895 | 新增：重生成预演（sync 前证明反冲风险） |",
+    "| scripts/_w895_verify_blocks.py | W895 | 新增：重生成后集合差校验（226/226 零差异） |",
+    "| scripts/output/_w864_accent_exemptions.json | W895 | 按新实测保守核查（余 256 条） |",
+    "| docs/00-导读/W批次编号对账表.md | W895 | 认领行与收官回填 |",
+    "| CHANGELOG.md | W895 | W895 段 |",
+    "| scripts/output/file-index.md | W895 | 同批段回写 |"
+  ]
+}

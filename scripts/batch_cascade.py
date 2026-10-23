@@ -96,9 +96,18 @@ def _face_changelog(ctx):
     assert m, "CHANGELOG 未找到现役段"
     cur_anchor = m.group(0)
     cur_w = int(m.group(1) or m.group(2))
-    new_w = cur_w + 1
+    # W895：显式缺口许可（并行在途批的现实）——--allow-gap 列出的 W 号须在台账有认领行、
+    # 且在 CHANGELOG 尚无段（其落段自理：晚到者用 backfill_changelog.py 按号序补）。
+    gaps = getattr(ctx, "allow_gap", [])
+    if gaps:
+        ledger = open(os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md"), encoding="utf-8").read()
+        for g in gaps:
+            assert re.search(rf"^\| {re.escape(g)} ", ledger, re.M), f"缺口 {g} 在台账无认领行"
+            assert f"### {g}" not in s, f"缺口 {g} 已有段（无需允许）"
+        print("  缺口许可：%s（在途·台账已有认领行）" % "、".join(gaps))
+    new_w = cur_w + 1 + len(gaps)
     ctx.new_w = new_w
-    assert ctx.batch == "W" + str(new_w), f"批次号应为 W{new_w}"
+    assert ctx.batch == "W" + str(new_w), f"批次号应为 W{new_w}" + (f"（含缺口 {gaps}）" if gaps else "")
     assert ("### " + ctx.batch) not in s, ctx.batch + " 段已存在"
     old_rule, new_rule = f"（W001-W{cur_w}）", f"（W001-W{new_w}）"
     ctx.new_rule = new_rule
@@ -464,6 +473,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--spec", required=True)
     ap.add_argument("--apply", action="store_true")
+    ap.add_argument("--allow-gap", default="",
+                    help="允许的在途缺口 W 号（逗号分隔·须台账有认领行且 CHANGELOG 无段·W895 新增）")
     args = ap.parse_args()
     spec = json.load(open(args.spec, encoding="utf-8"))
     pre_issues = precheck(spec)
@@ -473,6 +484,7 @@ def main():
         print("[PRECHECK] %d 项违例——修正 spec 后重跑（参照 AGENTS §4.3 desc 分隔符规则）" % len(pre_issues))
         return 1
     ctx = _Ctx(spec)
+    ctx.allow_gap = [x.strip() for x in args.allow_gap.split(",") if x.strip()]
     assert ctx.entry.endswith("）"), "head_entry 必须以闭合括号结尾"
     assert "（" not in ctx.spec["head_sentence"] and "）" not in ctx.spec["head_sentence"], (
         "head_sentence 禁含全角括号——会破坏下一批「当前 HEAD 句」断言的 [^）]* 匹配（W649 实证：W648 嵌套括号致本批断言 FAIL，交接文档已手工修复）"

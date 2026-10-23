@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -523,6 +523,14 @@ h4 { font-size: 18px; font-weight: 500; }
     text-align: center;
     flex-shrink: 0;
 }
+/* W856 新品牌图形标（方向 H「山·门槛」·SVG 于 static/icons/logo-mark-light.svg）
+   —— 纯加法：.seal 保留，其余页面的旧印面标识不受影响 */
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: block;
+    flex-shrink: 0;
+}
 .wordmark {
     font-family: var(--font-serif);
     font-weight: 600;
@@ -706,8 +714,10 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
-        /* W872 B9 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
-        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+/* BL-33 收敛（W895）：KPI 顶条按行收敛——同排首个 kpi-card 保顶条、其余转细线
+   （原 W864-W873 逐页写入内联副本·此处升为 system.css 单一事实源·防 inline_css --force 回吞） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1251,41 +1261,42 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    
-/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+
+/* W885：数据页/可视化页页头装饰插画（深底直显版·浅底宣纸图贴在暗色 hero 上会成亮斑） */
+.hero-ornament {
+    position: absolute;
+    right: clamp(var(--space-6), 5vw, var(--space-12));
+    bottom: clamp(var(--space-5), 4vw, var(--space-9));
+    width: clamp(140px, 18vw, 240px);
+    height: auto;
+    opacity: .9;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+
     .hero-ornament {
-        position: absolute;
-        right: clamp(var(--space-6), 5vw, var(--space-12));
-        bottom: clamp(var(--space-5), 4vw, var(--space-9));
-        width: clamp(140px, 18vw, 240px);
-        height: auto;
-        opacity: .9;
-        pointer-events: none;
-    }
-
-    @media (max-width: 768px) {
-
-        .hero-ornament {
-            display: none;
-        }
-    }
-/* W888：数据页卷末插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
-    .viz-illustration {
-        margin: clamp(32px, 5vw, 64px) auto 0;
-        max-width: 420px;
-    }
-
-    .viz-illustration img {
-        width: 100%;
-        height: auto;
-        display: block;
-        opacity: .92;
-    }
-
-    html[data-theme="dark"] .viz-illustration {
         display: none;
     }
-</style>
+}
+
+/* W888：数据页卷末插画（浅底宣纸版·暗色模式下隐藏——浅底图贴深底会成亮斑） */
+.viz-illustration {
+    margin: clamp(32px, 5vw, 64px) auto 0;
+    max-width: 420px;
+}
+
+.viz-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: .92;
+}
+
+html[data-theme="dark"] .viz-illustration {
+    display: none;
+}
+    </style>
 <style>
         /* e-track-exempt: chart-data-colors 2 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
@@ -1656,7 +1667,7 @@ main { overflow-x: clip; }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">W893 十二张素材图按四画幅各三张成套交付、四主题各三张以拉丁方排布、锚点沿用 W882 改写版（纯否定式构图句、零规则线） · W892 宣传单页 A4 竖版双面 卖点层级栅格配图联系区块一次规划齐备 HTML 源导出 PDF 与 PNG 三件套 · W891 en 收尾清欠账 容器归并 11 页 nav-back 实底转文字态 49 页 间距令牌化 3,353 处值保留 · W890 CI 阻塞项清偿：两处过期测试断言与上游有意变更同步、ruff 六项清零、Windows 存活探针改非终止式查询、Pillow 升级清 25 个 CVE · W889 GitHub 主页展示位复位与首屏重排、载体改名让位、首屏 30 秒上手、元数据补齐、dev 合 main 对齐 Pages · W887 en 收口 110 页合并四批一次做完 第 49 槽门禁范围扩至全 en 138 页 豁免分册增至 302 条 · W886 en 首批 28 页迁到位 C 渠 49 条规则 + seal 淡底 28 页 + KPI 顶条按行收敛 16 页 + 25 条四类豁免登记 · W883 朱砂实底常驻门禁挂第 49 槽（浏览器计算样式实测 每页非豁免超 3 即拦 增量缓存）且六段递延账一次结清 · W876 C 渠规则级换色 173 条（落 bg 1087→253 降 77%）+ chart-3 与暗色 accent 两处值切换 + inline_css 回吞迁移事故修复（328 页自 HEAD 重建） · W874 把九个递延批按号序补回 CHANGELOG 与 file-index，让级联断言重新成立、B11 可进 · W864 十页结构页按裁决迁移：KPI 顶条收敛到首卡、徽章转淡底、间距令牌化 216 处，C 渠与 chart-3 拆专项批 · W863 把十一个已收官但未立段的批次按号序补回 CHANGELOG 与 file-index，让级联的号序断言重新成立 · …更早批次详见 CHANGELOG.md</div>
+            <div class="footer-meta">W895 BL-33 收敛 system.css 补齐三处全局组件 inline_css 加护栏 330 内联页按源重生成 520 外链页零触碰 · W893 十二张素材图按四画幅各三张成套交付、四主题各三张以拉丁方排布、锚点沿用 W882 改写版（纯否定式构图句、零规则线） · W892 宣传单页 A4 竖版双面 卖点层级栅格配图联系区块一次规划齐备 HTML 源导出 PDF 与 PNG 三件套 · W891 en 收尾清欠账 容器归并 11 页 nav-back 实底转文字态 49 页 间距令牌化 3,353 处值保留 · W890 CI 阻塞项清偿：两处过期测试断言与上游有意变更同步、ruff 六项清零、Windows 存活探针改非终止式查询、Pillow 升级清 25 个 CVE · W889 GitHub 主页展示位复位与首屏重排、载体改名让位、首屏 30 秒上手、元数据补齐、dev 合 main 对齐 Pages · W887 en 收口 110 页合并四批一次做完 第 49 槽门禁范围扩至全 en 138 页 豁免分册增至 302 条 · W886 en 首批 28 页迁到位 C 渠 49 条规则 + seal 淡底 28 页 + KPI 顶条按行收敛 16 页 + 25 条四类豁免登记 · W883 朱砂实底常驻门禁挂第 49 槽（浏览器计算样式实测 每页非豁免超 3 即拦 增量缓存）且六段递延账一次结清 · W876 C 渠规则级换色 173 条（落 bg 1087→253 降 77%）+ chart-3 与暗色 accent 两处值切换 + inline_css 回吞迁移事故修复（328 页自 HEAD 重建） · W874 把九个递延批按号序补回 CHANGELOG 与 file-index，让级联断言重新成立、B11 可进 · W864 十页结构页按裁决迁移：KPI 顶条收敛到首卡、徽章转淡底、间距令牌化 216 处，C 渠与 chart-3 拆专项批 · …更早批次详见 CHANGELOG.md</div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../index.html">首页</a>

@@ -12,9 +12,10 @@ inline_css.py — 将数据页的外部 ../tokens.css + ../system.css <link> 标
 - 幂等：已内联（带 INLINED CSS 标记）的页面默认跳过；--force 重新同步。
 
 用法：
-    python scripts/inline_css.py            # 内联所有未处理的页面
-    python scripts/inline_css.py --force    # 强制重新同步（重内联）
-    python scripts/inline_css.py --dry      # 仅统计，不写文件
+    python scripts/inline_css.py                 # 内联所有未处理的页面
+    python scripts/inline_css.py --force         # 强制重新同步**已内联页**（不再顺带把外链页转内联）
+    python scripts/inline_css.py --force --inline-links  # 显式把外链页也转为内联（大动作·W895 护栏）
+    python scripts/inline_css.py --dry           # 仅统计，不写文件
 """
 import os
 import re
@@ -38,7 +39,7 @@ def safe(css):
     return css.replace("</style", "<\\/style")
 
 
-def process(path, force, dry):
+def process(path, force, dry, inline_links=False):
     with open(path, encoding="utf-8") as f:
         html = f.read()
 
@@ -59,6 +60,11 @@ def process(path, force, dry):
         return "skip-no-link"   # 根级页面用 tokens.css（无 ../ 且无标记），无需处理
     if already and not force:
         return "skip-inlined"
+    # W895 护栏（BL-33）：--force 只重同步已内联页；外链页转内联会把整站样式的
+    # 维护形态从「外链」换成「内联」（W875/W895 两次实证 66 万行格式抖动），
+    # 必须显式加 --inline-links 才做，避免通扫误伤 520+ 外链 reader 页。
+    if force and not already and not inline_links:
+        return "skip-external"
     if already and force:
         # 移除旧内联块（从标记注释到对应 </style>）
         html = re.sub(r"<!-- %s.*?-->\s*<style>.*?</style>\s*" % re.escape(MARKER),
@@ -101,7 +107,8 @@ def process(path, force, dry):
 def main():
     force = "--force" in sys.argv
     dry = "--dry" in sys.argv
-    count = {"inlined": 0, "re-synced": 0, "skip-no-link": 0, "skip-inlined": 0}
+    inline_links = "--inline-links" in sys.argv   # W895 护栏：外链页转内联须显式
+    count = {"inlined": 0, "re-synced": 0, "skip-no-link": 0, "skip-inlined": 0, "skip-external": 0}
     processed = []
 
     for root, _, files in os.walk(SITE_DIR):
@@ -113,7 +120,7 @@ def main():
                 continue
             p = os.path.join(root, fn)
             try:
-                r = process(p, force, dry)
+                r = process(p, force, dry, inline_links)
             except Exception as e:
                 print("ERR  %s -> %s" % (p, e))
                 continue
