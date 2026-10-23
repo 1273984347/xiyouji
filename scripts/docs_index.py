@@ -24,8 +24,8 @@ import argparse
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-import tracked_files as tf  # noqa: E402  W894：目标提交树口径（git ls-files）
+# W894：目标提交树口径（git ls-files）——同目录模块·Python 自动可导入
+import tracked_files as tf
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_DOCS_DIR = ROOT / "docs"

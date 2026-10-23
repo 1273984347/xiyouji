@@ -267,7 +267,7 @@ class TestLintLinks:
         target.write_text("<html></html>", encoding="utf-8")
         html = site / "index.html"
         html.write_text(
-            f'<a href="target.html">link</a>', encoding="utf-8"
+            '<a href="target.html">link</a>', encoding="utf-8"
         )
         monkeypatch.setattr(xiyouji_mcp, "ROOT", tmp_path)
         result = xiyouji_mcp.xiyouji_lint_links(scan_dir="site")

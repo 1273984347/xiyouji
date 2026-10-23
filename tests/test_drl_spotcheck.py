@@ -19,8 +19,7 @@ check_must_contain 分支：
 from pathlib import Path
 
 import pytest
-
-from drl_spotcheck import check_replacement, check_must_contain
+from drl_spotcheck import check_must_contain, check_replacement
 
 
 @pytest.fixture

@@ -23,12 +23,14 @@ stats-index.md 反向段（本文件渲染产物）。首条 W704（changes=[]�
 
 import argparse
 import datetime
-import glob
 import json
 import os
 import re
 import subprocess
 import sys
+
+# W894：目标提交树口径（git ls-files）——同目录模块·无需 sys.path 调整
+import tracked_files as tf
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -36,8 +38,6 @@ OUT = os.path.join(HERE, "output", "stats.json")
 HIST = os.path.join(HERE, "output", "stats-changelog.json")
 INDEX = os.path.join(HERE, "output", "stats-index.md")
 
-sys.path.insert(0, HERE)
-import tracked_files as tf  # noqa: E402  W894：目标提交树口径（git ls-files）
 
 CONTENT_DIRS = ["01-全书逐回解读", "02-人物深度分析", "03-主题与情节专题", "04-文化与历史背景", "05-诗词歌赋", "06-个人随笔"]
 INLINED_MARK = "(tokens.css + system.css)"  # inline_css.py 注入的标记行特征
@@ -128,7 +128,6 @@ def build():
         「索引内 scripts/<Dir>/ 下有文件」的目录数（未跟踪目录不计入）。
     """
     tracked = tf.tracked_files()
-    site = os.path.join(ROOT, "site")
 
     def _in(prefix: str, suffix: str, direct: bool = False) -> list[str]:
         out = []

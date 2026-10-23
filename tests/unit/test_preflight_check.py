@@ -141,8 +141,8 @@ def test_interference_log_hint_mentions_carrier_and_window():
 
 def test_interference_log_hint_is_not_emitted_unless_triggered():
     """W821：提示只在真触发时输出——不产生常态噪音（用户裁决核心）。"""
-    import io as _io
     import contextlib
+    import io as _io
     # 正常态（无在途批次·无交集·工作树干净）→ 输出中不得含提示
     buf = _io.StringIO()
     with contextlib.redirect_stdout(buf):
