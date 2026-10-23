@@ -11,6 +11,30 @@
 ---
 
 
+## W901 C5b 对账面恢复 + W900 披露项清偿（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_sync.py | W901 | C5b 扩展面 glob 根层改递归（管控件·用户 2026-10-24 批准；计划方案/ 时点快照豁免原样保留——实测该子目录 8 件带冻结 stats 标记·入面即假红） |
+| docs/11-方案报告/README.md | W901 | T-16/T-17 两件补登计划方案表（W893/W896 遗留登记缺口）+ 节头计数订正 + C5b 提示行更新为已恢复口径 + 登记缺口披露行撤除 |
+| CHANGELOG.md | W901 | W757 段 1 条审计报告链接随批准改指新址（仅地址不改叙事）+ W901 段 |
+| docs/00-导读/W批次编号对账表.md | W901 | W901 认领行与收官回填 |
+| HANDOVER.md | W901 | 级联头尾链与里程碑块 |
+| README.md | W901 | 当前批次版本行 |
+| STRUCTURE.md | W901 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W901 | 当前批次版本行 |
+| .github/workflows/README.md | W901 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W901 | 页脚批次链插入 W901 |
+| site/data/cross-time-danmaku.html | W901 | 页脚批次链插入 W901 |
+| site/data/tag-cloud.html | W901 | 页脚批次链插入 W901 |
+| site/dukou-engine.html | W901 | 页脚批次链插入 W901 |
+| AGENTS.md | W901 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W901 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W901 | version 同步为 W901 |
+| scripts/output/file-index.md | W901 | W901 段插入 |
+| scripts/output/_w901_spec.json | W901 | 本批级联 spec |
+| scripts/output/_cascade_files_W901.txt | W901 | 级联落盘清单 |
+
 ## W900 11-方案报告目录分类重组（2026-10-24）
 
 | 文件 | W | 说明 |

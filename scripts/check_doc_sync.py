@@ -13,7 +13,8 @@
   C5 聚合数字对账（W703 建·W704 实体化）：18 式高危聚合句式 × 现役叙述面（README/STRUCTURE/AGENTS/项目说明全文 +
      CHANGELOG 仅「全站页数口径」块行）vs scripts/output/stats.json（scripts/stats.py 磁盘实算·实体化 tracked）；
      C5b 数字实体标记：<!--stats:KEY--> 前置数字 == stats.json[KEY].value（键未登记=fail-closed；
-          W830 扩展面：docs/11-方案报告/ 根层现役报告 *.md + pytest.ini 亦入标记对账——只跑标记、
+          W830 扩展面：docs/11-方案报告 现役报告 *.md（W830-W900 根层·W901 起递归）+ pytest.ini
+          亦入标记对账——只跑标记、
           不跑句式白名单与 C5c 裸数字（辅助叙述面宁窄勿误）；计划方案/ 子目录刻意除外：计划件为
           时点快照，其引用的基线数字随批次冻结（同 CHANGELOG 历史段纪律·禁回溯改写），由计划自身的
           「聚合数字当批现测」条款在开工批复核（T04 AC-07 34/35 vs 现役 37 实例））；
@@ -115,13 +116,20 @@ def c5b_extra_surfaces():
     """W830：C5b 实体标记对账扩展面（只跑标记·不跑句式与裸数字·宁窄勿误）。
 
     ① pytest.ini：头注 collected 计数实体化——原 602 字面量无任何对账，W830 审查实证其已漂移至 770；
-    ② docs/11-方案报告/*.md 根层（非递归 glob·不含子目录）：现役报告自称「当前态盘点」，其 stats
-       实体标记须随 stats.json 活——W830 审查实证系统架构方案 report_docs=30 过期（现役 37）却无门禁兜底。
+    ② docs/11-方案报告/**/*.md 递归（W901 起随目录分区改递归·W830-W900 为根层非递归 glob）：
+       现役报告自称「当前态盘点」，其 stats 实体标记须随 stats.json 活——W830 审查实证系统架构方案
+       report_docs=30 过期（现役 37）却无门禁兜底；W900 目录分区把带标记件移入子目录后根层 glob
+       失明（披露于 W900 段），W901 经用户批准改递归恢复覆盖。
     **计划方案/ 子目录刻意除外**：计划件是时点快照，其引用的基线数字随批次冻结（同 CHANGELOG 历史段
-    纪律·禁回溯改写），由计划自身的「聚合数字当批现测」条款在开工批复核（T04 AC-07 34/35 实例）。
+    纪律·禁回溯改写），由计划自身的「聚合数字当批现测」条款在开工批复核（T04 AC-07 34/35 实例；
+    W901 实测该子目录 8 件带冻结 stats 标记·入面即假红·除外条款随递归化原样保留）。
     """
     paths = [os.path.join(ROOT, "pytest.ini")]
-    paths += sorted(glob.glob(os.path.join(ROOT, "docs", "11-方案报告", "*.md")))
+    paths += sorted(
+        p for p in glob.glob(
+            os.path.join(ROOT, "docs", "11-方案报告", "**", "*.md"), recursive=True)
+        if os.sep + "计划方案" + os.sep not in p
+    )
     return paths
 EXEMPT_MARK = "<!--doc-sync:exempt"
 ARCHIVE_CHANGELOGS = [
