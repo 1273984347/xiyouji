@@ -11,6 +11,30 @@
 ---
 
 
+## W899 合并后收尾修正（2026-10-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| assets/promo/output/README.md | W899 | output 目录导读计数订正为实况 6 件 |
+| scripts/output/_vermilion_solid_cache.json | W899 | 增量缓存重建（3 页 sha1 对齐当前页面字节） |
+| scripts/output/_w899_spec.json | W899 | 本批级联 spec（10 面改写参数） |
+| scripts/output/_cascade_files_W899.txt | W899 | 级联落盘清单 |
+| docs/00-导读/W批次编号对账表.md | W899 | 认领行与收官回填 |
+| CHANGELOG.md | W899 | W899 段 |
+| HANDOVER.md | W899 | 头尾链与里程碑块 |
+| README.md | W899 | 当前批次版本行 |
+| STRUCTURE.md | W899 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W899 | 当前批次版本行 |
+| .github/workflows/README.md | W899 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W899 | 页脚批次链插入 W899 |
+| site/data/cross-time-danmaku.html | W899 | 页脚批次链插入 W899 |
+| site/data/tag-cloud.html | W899 | 页脚批次链插入 W899 |
+| site/dukou-engine.html | W899 | 页脚批次链插入 W899 |
+| AGENTS.md | W899 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W899 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W899 | version 同步为 W899 |
+| scripts/output/file-index.md | W899 | W899 段插入 |
+
 ## W898 宣传物料投放接线与派生（2026-10-23）
 
 | 文件 | W | 说明 |
