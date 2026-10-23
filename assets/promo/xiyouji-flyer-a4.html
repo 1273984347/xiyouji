@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>取经录 · 宣传单页（A4 双面）</title>
+<style>
+/* ===================================================================
+   取经录 · 宣传单页 A4 竖版双面
+   -------------------------------------------------------------------
+   栅格：12 栏 · 栏距 4mm · 页边 14mm · 内容区 182 × 269mm
+   令牌：宣纸底 #FAF7F0 / 卡面 #FFFFFF / 墨 #23201A / 次墨 #6B6455
+         朱砂 #C8463A / 赭金 #B38F58（与 site/tokens.css 同源）
+   字体：思源宋体 VF（仓内完整字集·相对路径·零外域）→ 系统衬线回退
+   依赖：零外域请求；file:// 双击直开
+   =================================================================== */
+
+@font-face {
+  font-family: 'Noto Serif SC VF';
+  src: url('../fonts/source/NotoSerifSC-VF.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../../site/static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  --bg: #FAF7F0;
+  --paper: #FFFFFF;
+  --paper-warm: #F4F0E5;
+  --ink: #23201A;
+  --ink-soft: #6B6455;
+  --ink-faint: #A79E8C;
+  --accent: #C8463A;
+  --gold: #B38F58;
+  --rule: #E3DCCB;
+  --serif: 'Noto Serif SC VF', 'Source Han Serif SC', 'Noto Serif CJK SC', 'Songti SC', 'STSong', SimSun, serif;
+  --mono: 'JetBrains Mono', 'Cascadia Mono', Consolas, monospace;
+  --gutter: 4mm;
+  --pad: 14mm;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* 页面为 flex 纵向容器：子块一律不参与收缩，否则固定高度的主视觉会被压扁 */
+.page > * { flex: none; }
+
+html, body { background: #E6E1D6; }
+
+body {
+  font-family: var(--serif);
+  color: var(--ink);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  padding: 10mm 0;
+}
+
+.page {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  margin: 0 auto 10mm;
+  padding: var(--pad);
+  background: var(--bg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 3mm 9mm rgba(35, 32, 26, .18);
+}
+
+/* ---- 12 栏栅格 ----
+   列定义用 minmax(0,1fr) 而非 1fr：1fr 的轨道下限是 auto(=min-content)，
+   长 URL / 代码块会把所在轨道撑爆并把邻栏挤成一条（实测 .g7 被压到 40px）。 */
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
+.g3 { grid-column: span 3; } .g4 { grid-column: span 4; } .g5 { grid-column: span 5; }
+.g6 { grid-column: span 6; } .g8 { grid-column: span 8; } .g9 { grid-column: span 9; }
+.g12 { grid-column: span 12; }
+
+/* ============================ 正面 ============================ */
+
+/* L0 页眉 */
+.front-head { display: flex; align-items: center; justify-content: space-between; gap: 8mm; }
+.brand { display: flex; align-items: baseline; gap: 3mm; }
+.brand img { height: 11mm; display: block; }
+.brand-tag {
+  font-size: 9.2pt; letter-spacing: .16em; color: var(--ink-soft);
+  text-transform: none; white-space: nowrap;
+}
+.front-head .seal-note { font-size: 7.4pt; color: var(--ink-faint); letter-spacing: .04em; text-align: right; line-height: 1.5; }
+
+/* L1 主视觉 */
+.hero {
+  margin-top: 5mm;
+  height: 79mm;
+  overflow: hidden;
+  background: var(--bg);
+}
+.hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 62%; display: block; }
+
+/* L1 主张 */
+.claim { margin-top: 8mm; align-items: start; }
+.claim h1 {
+  font-size: 29pt; font-weight: 700; line-height: 1.24; letter-spacing: .01em;
+  margin-bottom: 3mm;
+}
+.claim .sub {
+  font-size: 10.5pt; line-height: 1.85; color: var(--ink-soft); max-width: 108mm;
+}
+.claim .sub b { color: var(--ink); font-weight: 600; }
+
+/* KPI 2×2 */
+.kpis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3.4mm 4mm; }
+.kpi {
+  background: var(--paper); border: 1px solid var(--rule);
+  padding: 3.8mm 3.4mm; border-radius: 2mm;
+}
+.kpi .num {
+  font-family: var(--serif); font-size: 20.5pt; font-weight: 700; line-height: 1.05;
+  color: var(--ink); display: block;
+}
+.kpi .num i { font-style: normal; font-size: 9.5pt; font-weight: 500; color: var(--ink-soft); margin-left: 1mm; }
+.kpi .lbl { font-size: 7.6pt; color: var(--ink-soft); letter-spacing: .04em; margin-top: 1mm; white-space: nowrap; }
+
+/* L3 卖点卡 */
+.features { margin-top: 9mm; }
+.feature {
+  background: var(--paper); border: 1px solid var(--rule); border-radius: 2mm;
+  padding: 5mm 4.6mm 4.2mm; display: flex; flex-direction: column;
+}
+.feature .ico { color: var(--accent); margin-bottom: 2.6mm; }
+.feature .ico svg { width: 7.4mm; height: 7.4mm; display: block; }
+.feature .big {
+  font-size: 17.5pt; font-weight: 700; line-height: 1.2; margin-bottom: 1.8mm;
+}
+.feature .big em { font-style: normal; color: var(--ink-soft); font-size: 9pt; font-weight: 400; margin-left: 1.4mm; }
+.feature p { font-size: 8.4pt; line-height: 1.88; color: var(--ink-soft); }
+.feature .proof {
+  margin-top: auto; padding-top: 3.4mm; border-top: 1px dashed var(--rule);
+  font-size: 7.4pt; color: var(--ink-faint); letter-spacing: .02em; line-height: 1.6;
+}
+
+/* L4 CTA */
+.cta {
+  margin-top: auto;
+  background: #221D16; color: #F3EEE2;
+  border-radius: 2.5mm; padding: 6mm 7mm 5mm;
+  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: var(--gutter);
+  align-items: center;
+}
+.cta h2 { font-size: 13.5pt; font-weight: 700; line-height: 1.35; color: #FBF7EC; }
+.cta .cta-sub { font-size: 8pt; color: #B9AE99; margin-top: 1.6mm; line-height: 1.6; }
+/* CTA 内部是 7:5 两栏（非 12 等分），故覆盖 span 规则并归零轨道下限 */
+.cta > div { grid-column: auto; min-width: 0; }
+.cta .btns { display: flex; flex-direction: column; gap: 2.4mm; min-width: 0; }
+.btn {
+  display: flex; align-items: center; gap: 2.4mm; text-decoration: none;
+  border-radius: 1.6mm; padding: 2.6mm 3.4mm; font-size: 8.6pt; line-height: 1.3;
+  min-width: 0; flex-wrap: wrap;
+}
+.btn-primary { background: var(--accent); color: #FFF8F2; font-weight: 600; }
+.btn-ghost { border: 1px solid #4A4034; color: #E4DBC8; }
+.btn svg { width: 4.6mm; height: 4.6mm; flex: none; }
+.btn .u { font-family: var(--mono); font-size: 7.4pt; opacity: .82; margin-left: auto; min-width: 0; overflow-wrap: anywhere; }
+.cta .legal { font-size: 6.7pt; color: #8E836F; line-height: 1.62; }
+.cta .legal b { color: #C6BBA6; font-weight: 600; }
+
+/* ============================ 背面 ============================ */
+.back-head { align-items: end; }
+.back-head h2 { font-size: 19pt; font-weight: 700; line-height: 1.25; }
+.back-head .lede { font-size: 9pt; color: var(--ink-soft); margin-top: 2mm; line-height: 1.6; }
+.back-head .side-note {
+  font-size: 7.2pt; color: var(--ink-faint); text-align: right; line-height: 1.7;
+  border-left: 1px solid var(--rule); padding-left: 3mm;
+}
+
+/* L1 四资产 */
+.assets { margin-top: 3.6mm; gap: 3mm; }
+.asset {
+  background: var(--paper); border: 1px solid var(--rule); border-radius: 2mm;
+  padding: 3.4mm 4.2mm; position: relative;
+}
+.asset .ico { color: var(--accent); float: left; margin-right: 3mm; }
+.asset .ico svg { width: 6.4mm; height: 6.4mm; display: block; }
+.asset h3 { font-size: 12.5pt; font-weight: 700; line-height: 1.2; margin-bottom: 1.6mm; }
+.asset p { font-size: 8.3pt; line-height: 1.58; color: var(--ink-soft); clear: both; padding-top: 1.8mm; }
+.asset .anchor {
+  margin-top: 2mm; font-size: 7.3pt; color: var(--ink-faint); line-height: 1.5;
+  border-top: 1px dashed var(--rule); padding-top: 1.6mm;
+}
+.asset .anchor code { font-family: var(--mono); font-size: 6.9pt; color: var(--ink-soft); }
+
+/* L2 内容地图 */
+.atlas { margin-top: 3.6mm; }
+.atlas-t {
+  font-size: 8pt; font-weight: 700; letter-spacing: .18em; color: var(--ink-faint);
+  border-bottom: 1px solid var(--rule); padding-bottom: 1.4mm; margin-bottom: 2mm;
+}
+.atlas-item { padding: 1.8mm 0; }
+.atlas-item .n {
+  font-family: var(--mono); font-size: 7pt; color: var(--accent); letter-spacing: .06em;
+}
+.atlas-item h4 { font-size: 10.2pt; font-weight: 700; margin: .8mm 0 1mm; }
+.atlas-item p { font-size: 7.5pt; line-height: 1.58; color: var(--ink-soft); }
+
+/* L3 联系区 */
+.contact { margin-top: 3.6mm; align-items: start; }
+.contact-list { display: flex; flex-direction: column; gap: 2.4mm; }
+.c-item { display: grid; grid-template-columns: 7mm minmax(0, 1fr); gap: 3mm; align-items: start; }
+.c-item > div { min-width: 0; }
+.c-item .ico { color: var(--accent); padding-top: .6mm; }
+.c-item .ico svg { width: 5.4mm; height: 5.4mm; display: block; }
+.c-item h4 { font-size: 9.4pt; font-weight: 700; margin-bottom: .8mm; }
+.c-item p { font-size: 7.6pt; color: var(--ink-soft); line-height: 1.48; }
+.c-item code, .c-item .u {
+  font-family: var(--mono); font-size: 7.2pt; color: var(--ink);
+  background: var(--paper-warm); border: 1px solid var(--rule); border-radius: 1mm;
+  padding: .6mm 1.4mm; display: inline-block; margin-top: 1.2mm;
+}
+.cite {
+  background: var(--paper); border: 1px solid var(--rule); border-radius: 2mm;
+  padding: 2.4mm 3.6mm; margin-top: 2.4mm;
+}
+.cite .cite-h { font-size: 8pt; font-weight: 700; letter-spacing: .1em; color: var(--ink-faint); margin-bottom: 1.8mm; }
+.cite pre {
+  font-family: var(--mono); font-size: 6.9pt; line-height: 1.45; color: var(--ink);
+  white-space: pre-wrap; word-break: break-all;
+}
+.cite .cite-f { font-size: 7pt; color: var(--ink-faint); margin-top: 1.6mm; }
+
+.side-imgs { display: flex; flex-direction: column; gap: 2mm; }
+.side-imgs img { width: 100%; display: block; border-radius: 1.4mm; }
+.lic { margin-top: 1mm; }
+.lic .row { display: flex; gap: 2mm; font-size: 7.4pt; line-height: 1.55; margin-bottom: 1mm; }
+/* 朱砂菱形用 CSS 绘制（字符 ◆ 不在思源宋体子集内，会回退到系统字体） */
+.lic .dot { color: var(--accent); flex: none; width: 1.6mm; height: 1.6mm; background: var(--accent); transform: rotate(45deg); margin-top: .9mm; font-size: 0; }
+.lic b { font-weight: 700; }
+.fine {
+  margin-top: 1.6mm; border-top: 1px solid var(--rule); padding-top: 1.5mm;
+  font-size: 6.8pt; line-height: 1.58; color: var(--ink-faint);
+}
+.fine b { color: var(--ink-soft); font-weight: 700; }
+
+/* L4 页脚 */
+.foot {
+  margin-top: auto; border-top: 1px solid var(--rule); padding-top: 2mm;
+  display: flex; justify-content: space-between; align-items: baseline; gap: 6mm;
+  font-size: 6.8pt; color: var(--ink-faint); letter-spacing: .02em;
+}
+.foot .r { font-family: var(--mono); font-size: 6.6pt; }
+
+/* ============================ 打印 ============================ */
+@page { size: A4 portrait; margin: 0; }
+@media print {
+  html, body { background: #fff; padding: 0; }
+  .page { margin: 0; box-shadow: none; break-after: page; page-break-after: always; }
+  .page:last-of-type { break-after: auto; page-break-after: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== 第 1 面 · 大众读者路径 ==================== -->
+<section class="page front">
+
+  <!-- L0 品牌 -->
+  <div class="front-head">
+    <div class="brand">
+      <img src="../design/logo/logo-lockup-light.svg" alt="取经录">
+      <span class="brand-tag">一源多形 · 数字人文解读《西游记》100 回</span>
+    </div>
+    <div class="seal-note">开源 · 双协议授权<br>MIT + CC BY-NC 4.0</div>
+  </div>
+
+  <!-- L1 主视觉 -->
+  <div class="hero">
+    <img src="hero-main-visual.png" alt="宣纸水墨山影：浓墨山峦间一条蜿蜒的取经路径，右上一枚朱砂钤记">
+  </div>
+
+  <!-- L1 主张 + L2 证据 -->
+  <div class="grid claim">
+    <div class="g8">
+      <h1>读《西游记》，<br>这次有地图</h1>
+      <p class="sub">
+        100 回原著、<b>615 篇</b>逐回与专题解读、<b>87 个</b>可点的可视化、<b>133 个</b>数据维度——
+        不再是一本读不完的书，而是一张能查、能引、能复现的地图。
+      </p>
+    </div>
+    <div class="g4">
+      <div class="kpis">
+        <div class="kpi"><span class="num">615<i>篇</i></span><span class="lbl">解读文档</span></div>
+        <div class="kpi"><span class="num">87<i>个</i></span><span class="lbl">可视化页</span></div>
+        <div class="kpi"><span class="num">133<i>维</i></span><span class="lbl">数据维度</span></div>
+        <div class="kpi"><span class="num">34<i>类</i></span><span class="lbl">分析脚本</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- L3 卖点 -->
+  <div class="grid features">
+    <div class="feature g4">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V4Z"/><path d="M5 6.5A2.5 2.5 0 0 1 7.5 4H19"/><path d="M9.5 9.5h6M9.5 13h4.5"/></svg></span>
+      <span class="big">读得全<em>100 回全覆盖</em></span>
+      <p>逐回原文与深度解读并列向上，还有五百余篇人物、主题、文化、诗词与随笔。想知道哪一回，站内直达。</p>
+      <span class="proof">A1 逐回 100 · A2 随笔 44 · A3 人物 215 · A4 主题 209 · A5 文化 34 · A6 诗词 13</span>
+    </div>
+    <div class="feature g4">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M5 16.5l4.2-5.1 3.3 2.9L17 8"/><path d="M17 8h-3.6M17 8v3.6"/><circle cx="19.2" cy="5.4" r="1.9"/></svg></span>
+      <span class="big">看得见<em>133 个维度</em></span>
+      <p>人物关系网络、八十一难情感热力图、取经路线、弹幕博物馆、AI 名人对话——故事不再只是文字，是能点的图。</p>
+      <span class="proof">D3.js / Three.js 绘制 · 34 类分析脚本产出 · 站内 fetch 失败自动回退，file:// 也能看</span>
+    </div>
+    <div class="feature g4">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v10"/><path d="M7.8 9.8 12 14l4.2-4.2"/><path d="M4.5 16v3.2A1.3 1.3 0 0 0 5.8 20.5h12.4a1.3 1.3 0 0 0 1.3-1.3V16"/></svg></span>
+      <span class="big">拿得走<em>零门槛</em></span>
+      <p>不注册、不登录、不联网：克隆仓库双击即开；也可装成桌面版离线读，三平台安装包、自动更新。</p>
+      <span class="proof">Windows · macOS · Linux 安装包 · 纯静态 file:// 直开 · 桌面版内嵌离线全站</span>
+    </div>
+  </div>
+
+  <!-- L4 行动 -->
+  <div class="cta">
+    <div class="g7">
+      <h2>点开即读，不用注册</h2>
+      <p class="cta-sub">在线站点覆盖全部 100 回、人物、专题与可视化；桌面版把全站装进你的电脑。</p>
+      <p class="legal" style="margin-top:2.6mm">
+        源代码与脚本 <b>MIT</b> · 文本内容 <b>CC BY-NC 4.0</b>（署名·非商业性使用）· 学术引用请见 <b>CITATION.cff</b>
+      </p>
+    </div>
+    <div class="g5">
+      <div class="btns">
+        <a class="btn btn-primary" href="https://1273984347.github.io/xiyouji/">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.2"/><path d="M3.8 12h16.4"/><path d="M12 3.8c2.2 2.3 3.4 5.1 3.4 8.2s-1.2 5.9-3.4 8.2c-2.2-2.3-3.4-5.1-3.4-8.2S9.8 6.1 12 3.8Z"/></svg>
+          <span>在线阅读（推荐）</span><span class="u">1273984347.github.io/xiyouji</span>
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/1273984347/xiyouji/releases/latest">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v10"/><path d="M7.8 9.8 12 14l4.2-4.2"/><path d="M4.5 16v3.2A1.3 1.3 0 0 0 5.8 20.5h12.4a1.3 1.3 0 0 0 1.3-1.3V16"/></svg>
+          <span>桌面版下载（Win / mac / Linux）</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 第 2 面 · 学术与机构路径 ==================== -->
+<section class="page back">
+
+  <!-- L0 标题 -->
+  <div class="grid back-head">
+    <div class="g8">
+      <h2>给研究者与机构：四条硬资产</h2>
+      <p class="lede">可引用 · 可核验 · 可复现 · 可复核——每一条都落到可查的路径，而不是口号。</p>
+    </div>
+    <div class="g4 side-note">
+      取经录 · A4 宣传单页 · 第 2 面<br>
+      github.com/1273984347/xiyouji
+    </div>
+  </div>
+
+  <!-- L1 四资产 -->
+  <div class="grid assets">
+    <div class="asset g6">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.8h12v16.4l-2.6-1.8-3.4 1.8-3.4-1.8L6 20.2V3.8Z"/><path d="M9.4 8.4h5.2M9.4 11.8h5.2M9.4 15.2h3"/></svg></span>
+      <h3>可引用</h3>
+      <p>有正式引用格式、有学术论文索引、有批评史长卷。研究引用不必靠「听说这个网站不错」。</p>
+      <div class="anchor">
+        <code>CITATION.cff</code>（BibTeX / APA / Chicago）· 学术论文索引 · 批评史双联（9 位批评家 · 500 年解读流变 · 三教争辩 · 内丹密码）
+      </div>
+    </div>
+    <div class="asset g6">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.4 15.4 20 20"/><path d="M8 10.9l2 2 3.6-3.8"/></svg></span>
+      <h3>可核验</h3>
+      <p>每一句「原文引文」逐字比对原著全文数据集，未命中即阻断提交——AI 编不出假引文，门禁不放水。</p>
+      <div class="anchor">
+        引文硬验证 + <code>49</code> 项自动化门禁 · 每篇文首元信息块（生成来源 / 模型 / 日期 / 核验状态）· 门禁保真不保质：证明没有编造，不证明值得读
+      </div>
+    </div>
+    <div class="asset g6">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.4 8.6 4.2 12l3.2 3.4"/><path d="M16.6 8.6 19.8 12l-3.2 3.4"/><path d="M13.8 5.4 10.2 18.6"/></svg></span>
+      <h3>可复现</h3>
+      <p>分析脚本与数据集全部开放，谁都能重跑一遍；站点产物由源文件单一事实源生成，可逐字节核对。</p>
+      <div class="anchor">
+        <code>scripts/</code> 34 类分析（A–AH）· <code>dataset/</code> 与 <code>scripts/output/data/</code> · 源文件 → 生成物单向派生
+      </div>
+    </div>
+    <div class="asset g6">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.6" cy="8" r="2.7"/><path d="M3.6 19.2c0-2.8 2.2-4.6 5-4.6s5 1.8 5 4.6"/><path d="M15.2 6.1a2.5 2.5 0 0 1 0 4.8"/><path d="M17 14.9c2 .6 3.4 2.1 3.4 4.3"/></svg></span>
+      <h3>可复核</h3>
+      <p>AI 代理在文档骨架、术语规范与轨标约束下产出初稿，维护者逐篇审定后入库；分工写在明处，不藏。</p>
+      <div class="anchor">
+        五条轨标（大众普及 / 学术研究 / 教学讲解 / 个人创作 / 跨界趣谈）· 每篇文首标注生成来源与核验状态 · 责任边界由维护者承担
+      </div>
+    </div>
+  </div>
+
+  <!-- L2 内容地图 -->
+  <div class="atlas">
+    <div class="atlas-t">内容地图 · 八个板块</div>
+    <div class="grid">
+      <div class="atlas-item g3"><span class="n">01</span><h4>逐回解读</h4><p>100 回原文 + 深度解读 + 批点</p></div>
+      <div class="atlas-item g3"><span class="n">02</span><h4>人物分析</h4><p>主角 · 观音 · 妖怪谱系 · 女性角色</p></div>
+      <div class="atlas-item g3"><span class="n">03</span><h4>主题专题</h4><p>大闹天宫 · 八十一难 · 真假美猴王</p></div>
+      <div class="atlas-item g3"><span class="n">04</span><h4>文化背景</h4><p>成书史 · 佛道思想 · 明代隐喻 · 版本演变</p></div>
+      <div class="atlas-item g3"><span class="n">05</span><h4>诗词歌赋</h4><p>原著诗词赏析 · 回目对联</p></div>
+      <div class="atlas-item g3"><span class="n">06</span><h4>个人随笔</h4><p>44 篇现代视角解读与时代观察</p></div>
+      <div class="atlas-item g3"><span class="n">07</span><h4>方法论沉淀</h4><p>决策模型 · 角色思维 · 元认知地图</p></div>
+      <div class="atlas-item g3"><span class="n">08</span><h4>数据可视化</h4><p>87 页 D3 / Three.js 交互页</p></div>
+    </div>
+  </div>
+
+  <!-- L3 联系与行动 -->
+  <div class="grid contact">
+    <div class="g8">
+      <div class="contact-list">
+        <div class="c-item">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.2"/><path d="M3.8 12h16.4"/><path d="M12 3.8c2.2 2.3 3.4 5.1 3.4 8.2s-1.2 5.9-3.4 8.2c-2.2-2.3-3.4-5.1-3.4-8.2S9.8 6.1 12 3.8Z"/></svg></span>
+          <div>
+            <h4>在线站点</h4>
+            <p>无需安装，点开即读；首页可直达任意回目、人物、专题与可视化页。</p>
+            <code class="u">https://1273984347.github.io/xiyouji/</code>
+          </div>
+        </div>
+        <div class="c-item">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v10"/><path d="M7.8 9.8 12 14l4.2-4.2"/><path d="M4.5 16v3.2A1.3 1.3 0 0 0 5.8 20.5h12.4a1.3 1.3 0 0 0 1.3-1.3V16"/></svg></span>
+          <div>
+            <h4>桌面版下载</h4>
+            <p>Windows / macOS / Linux 三平台安装包，启动后自动检查更新；离线可读全部内容。</p>
+            <code class="u">github.com/1273984347/xiyouji/releases/latest</code>
+          </div>
+        </div>
+        <div class="c-item">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.2 5.4h15.6v10.2H9.4L5 19.4V5.4Z"/><path d="M8 9h8M8 12h5"/></svg></span>
+          <div>
+            <h4>反馈 · 勘误 · 想法</h4>
+            <p>发现错误或想讨论某个读法，欢迎提 Issue；每条都会被读到。</p>
+            <code class="u">github.com/1273984347/xiyouji/issues</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="cite">
+        <div class="cite-h">引用格式 · CITATION.cff</div>
+        <pre>@misc{xiyouji,
+  title  = {取经录：一源多形·数字人文解读《西游记》100 回},
+  author = {取经录项目组},
+  year   = {2026},
+  url    = {https://1273984347.github.io/xiyouji/}
+}</pre>
+        <div class="cite-f">文本内容采用 CC BY-NC 4.0（署名·非商业性使用）· 引用与改编请按 CITATION.cff 标注</div>
+      </div>
+    </div>
+
+    <div class="g4">
+      <div class="side-imgs">
+        <img src="../../site/static/images/hero-01-xihai-yunhai.webp" alt="西海云海水墨图：取经队伍行于山脊">
+        <img src="../../site/static/images/ink-mountains-hero.webp" alt="浓墨山影与金色路径">
+      </div>
+      <div class="lic">
+        <div class="row"><span class="dot">◆</span><span><b>源代码与项目文档</b> · MIT License</span></div>
+        <div class="row"><span class="dot">◆</span><span><b>文本内容与原创解读</b> · CC BY-NC 4.0</span></div>
+        <div class="row"><span class="dot">◆</span><span>原著文本已入公共领域；外部引用版权归原作者</span></div>
+      </div>
+      <div class="fine">
+        <b>透明与许可</b>：内容由 AI 代理协作产出、人工逐篇审定；自动化门禁保障可机器判定的形式面（引文真实、结构一致、术语规范），<b>不保障内容判断</b>——论点是否扎实由作者审读承担。
+      </div>
+    </div>
+  </div>
+
+  <!-- L4 页脚 -->
+  <div class="foot">
+    <span>取经录 · 宣传单页 A4 双面 · 2026-10-23（W892）· 生成来源：人工撰写（Agent 起草）</span>
+    <span class="r">1273984347.github.io/xiyouji</span>
+  </div>
+</section>
+
+</body>
+</html>

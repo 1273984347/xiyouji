@@ -275,7 +275,6 @@
 - `_w865_layout_probe.mjs`
 - `_w892_export_flyer.mjs`
 - `_w892_probe.mjs`
-- `_w892_probe2.mjs`
 - `batch_screenshots.js`
 - `check_chart_values.js`
 - `check_contract_smoke.js`
