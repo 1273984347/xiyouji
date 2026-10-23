@@ -11,6 +11,25 @@
 ---
 
 
+## W892 宣传单页批（2026-10-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| assets/promo/xiyouji-flyer-a4.html | W892 | 宣传单页唯一真源（A4 双面·12 栏栅格·10 枚内联 SVG·零外域） |
+| assets/promo/hero-main-visual.png | W892 | 本批新生成专属主视觉（宣纸浓墨山影 + 朱砂钤记·色归一化到 #FAF7F0） |
+| assets/promo/output/xiyouji-flyer-a4.pdf | W892 | 双面 PDF（2 页 A4·子集嵌入思源宋体） |
+| assets/promo/output/xiyouji-flyer-a4-front.png | W892 | 正面 PNG（1240×1754·150dpi） |
+| assets/promo/output/xiyouji-flyer-a4-back.png | W892 | 背面 PNG（1240×1754·150dpi） |
+| assets/promo/README.md | W892 | 目录导读（真源说明 + 复算命令 + 数字口径警示） |
+| scripts/_w892_export_flyer.mjs | W892 | 三件套导出（内置静态服务器 + 字体/外域/溢出三探针） |
+| scripts/_w892_probe.mjs | W892 | 版式判据探针（末块底边 vs 内容底边·两页须 0px 溢出） |
+| docs/11-方案报告/计划方案/T15-任务计划执行与经验沉淀报告-2026-10-23.md | W892 | 框架第十五次执行（规划五表 + AC 验收 + 5 条经验） |
+| docs/11-方案报告/README.md | W892 | §二 补登记 T-15（篇数 17→18） |
+| STRUCTURE.md | W892 | assets 段新增 promo/ 登记 + report_docs 标记同步 |
+| docs/00-导读/W批次编号对账表.md | W892 | 认领行与收官回填 |
+| CHANGELOG.md | W892 | W892 段 |
+| scripts/output/file-index.md | W892 | 同批段回写 |
+
 ## W891 en 收尾批（2026-10-23）
 
 | 文件 | W | 说明 |
