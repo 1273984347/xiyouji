@@ -11,10 +11,11 @@
 
 - （无）
 
-## 文件（10）
+## 文件（11）
 
 ### 数据与配置
 
+- `ci-sim.yml`
 - `ci.yml`
 - `dependency-review.yml`
 - `pages.yml`

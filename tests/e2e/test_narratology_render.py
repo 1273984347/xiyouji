@@ -62,7 +62,7 @@ class TestRenderNonEmpty:
         text_count = svg.locator("text").count()
         assert circle_count > 0, f"force circle 数为 0，line={line_count}, text={text_count}"
         assert line_count > 0, f"force line 数为 0，circle={circle_count}"
-        assert text_count > 0, f"force text 数为 0"
+        assert text_count > 0, "force text 数为 0"
 
     def test_sankey_svg_non_empty(self, page):
         """桑基图：path 或 rect 节点数 > 0。"""
@@ -87,7 +87,6 @@ class TestRenderNonEmpty:
         expect(svg).to_be_visible()
         circle_count = svg.locator("circle").count()
         line_count = svg.locator("line").count()
-        text_count = svg.locator("text").count()
         assert circle_count > 0 or line_count > 0, f"timeline circle={circle_count}, line={line_count} 均为 0"
 
     def test_dim_cards_count(self, page):

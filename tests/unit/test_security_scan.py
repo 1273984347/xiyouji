@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """W266 E5 测试深化·security_scan.py 单元测试·pytest 风格
 
 覆盖 3 大扫描入口：
@@ -20,7 +19,6 @@ if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
 import security_scan  # noqa: E402
-
 
 # ---------------------------------------------------------------------------
 # 辅助：在 security_scan 中没有的扫描能力时，以独立函数补齐

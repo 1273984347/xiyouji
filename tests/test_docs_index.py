@@ -10,14 +10,12 @@
 from pathlib import Path
 
 import pytest
-
 from docs_index import (
-    extract_title,
-    scan_docs,
-    render_index,
     SECTION_TITLES,
+    extract_title,
+    render_index,
+    scan_docs,
 )
-
 
 # ---------------- extract_title ----------------
 

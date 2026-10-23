@@ -730,6 +730,133 @@
       "date": "2026-10-23",
       "time": "03:48:18",
       "w": "W890"
+    },
+    {
+      "changes": [
+        {
+          "from": 51,
+          "key": "report_docs",
+          "to": 52
+        }
+      ],
+      "date": "2026-10-23",
+      "time": "19:02:59",
+      "w": "W891"
+    },
+    {
+      "changes": [
+        {
+          "from": 52,
+          "key": "report_docs",
+          "to": 53
+        }
+      ],
+      "date": "2026-10-23",
+      "time": "19:48:01",
+      "w": "W893"
+    },
+    {
+      "changes": [
+        {
+          "from": 53,
+          "key": "report_docs",
+          "to": 52
+        }
+      ],
+      "date": "2026-10-23",
+      "time": "19:58:26",
+      "w": "W892"
+    },
+    {
+      "changes": [
+        {
+          "from": 52,
+          "key": "report_docs",
+          "to": 53
+        }
+      ],
+      "date": "2026-10-23",
+      "time": "20:07:08",
+      "w": "W893"
+    },
+    {
+      "changes": [
+        {
+          "from": 330,
+          "key": "inline_css_pages",
+          "to": 850
+        },
+        {
+          "from": 834,
+          "key": "pytest_collected",
+          "to": 835
+        }
+      ],
+      "date": "2026-10-23",
+      "time": "20:30:21",
+      "w": "W896"
+    },
+    {
+      "changes": [
+        {
+          "from": 835,
+          "key": "pytest_collected",
+          "to": 836
+        }
+      ],
+      "date": "2026-10-23",
+      "note": "W896 门禁实算口径改造（磁盘扫描→Git 索引）：新增 scripts/tracked_files.py 与 scripts/ci_sim.py ⇒ pytest 收集数 +1。inline_css_pages 本批不动（其 850→330 漂移属并行 W895 在途改动·按 CI-HEAD 实况保持 850）。",
+      "time": null,
+      "w": "W896"
+    },
+    {
+      "changes": [
+        {
+          "from": 836,
+          "key": "pytest_collected",
+          "to": 836
+        }
+      ],
+      "date": "2026-10-23",
+      "note": "W896 门禁实算口径改造（磁盘扫描→Git 索引）：新增 scripts/tracked_files.py 与 scripts/ci_sim.py ⇒ pytest 收集数 +1。inline_css_pages 本批不动（其 850→330 漂移属并行 W895 在途改动·按 CI-HEAD 实况保持 850）。",
+      "time": null,
+      "w": "W896"
+    },
+    {
+      "changes": [
+        {
+          "from": 850,
+          "key": "inline_css_pages",
+          "to": 330
+        }
+      ],
+      "date": "2026-10-23",
+      "time": "20:46:57",
+      "w": "W896"
+    },
+    {
+      "changes": [
+        {
+          "from": 836,
+          "key": "pytest_collected",
+          "to": 844
+        }
+      ],
+      "date": "2026-10-23",
+      "time": "21:39:14",
+      "w": "W896"
+    },
+    {
+      "changes": [
+        {
+          "from": 844,
+          "key": "pytest_collected",
+          "to": 855
+        }
+      ],
+      "date": "2026-10-23",
+      "time": "22:08:01",
+      "w": "W897"
     }
   ]
 }

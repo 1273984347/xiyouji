@@ -796,28 +796,10 @@
    "measured_at": "2026-10-23",
    "exemptions": [
     {
-     "page": "en/bestiary.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
      "page": "en/character-appearance.html",
      "cls": "div.kpi-card",
      "count": 1,
      "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
-    },
-    {
-     "page": "en/character-bailongma.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/character-bajie.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
     },
     {
      "page": "en/character-dynamic-network.html",
@@ -862,24 +844,6 @@
      "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
     },
     {
-     "page": "en/character-shaseng.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/character-tangseng.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/character-wukong.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
      "page": "en/ecology.html",
      "cls": "div.kpi-card",
      "count": 2,
@@ -902,222 +866,6 @@
      "cls": "div.stage-card.during",
      "count": 1,
      "reason": "数据语义色片：stage-card.during 分类编码（图表语义·非界面装饰）"
-    },
-    {
-     "page": "en/essay-ai-era.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-buddhist-chan.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-chapter-couplets.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-character-fu.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-cipai-linjiangxian.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-cipai-mantingfang.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-cipai-shuidiaogetou.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-cipai-xijiangyue.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-composition-origins.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-divine-bureaucracy.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-folk-belief.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-historical-xuanzang.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-information-cocoon.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-ming-economy.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-ming-examination.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-ming-garrison.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-ming-intellectual-history.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-ming-judiciary.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-ming-literary-thought.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-ming-maritime-ban.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-ming-metaphor.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-ming-military.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-ming-politics.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-ming-religion.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-ming-social-customs.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-modern-management.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-original-poetry.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-poetry-imagery.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-poetry-opening.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-quanzhen-daoism.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-rhythm-analysis.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-scenery-poems.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-thematic-poetry.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-three-teachings.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-version-evolution.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
-     "page": "en/essay-zen-koan-vs-neidan.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
     },
     {
      "page": "en/four-dimensional-research-network.html",
@@ -1450,12 +1198,6 @@
      "reason": "数据语义色片：phase-card 分类编码（图表语义·非界面装饰）"
     },
     {
-     "page": "en/methodology.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
      "page": "en/ming-political-thought-comparison.html",
      "cls": "a.active",
      "count": 2,
@@ -1732,12 +1474,6 @@
      "reason": "功能交互实底：vt-btn（v4 §5.2 组件规格设计态）"
     },
     {
-     "page": "en/site-map.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
      "page": "en/six-senses-narratology-network.html",
      "cls": "div.kpi-card",
      "count": 1,
@@ -1804,12 +1540,6 @@
      "reason": "KPI 首卡顶条（1 处/卡·v4 §3.2 保留条款）"
     },
     {
-     "page": "en/tribulations.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
-    },
-    {
      "page": "en/underworld-power-network.html",
      "cls": "div.kpi-card",
      "count": 2,
@@ -1856,12 +1586,6 @@
      "cls": "div.id-form",
      "count": 1,
      "reason": "数据语义色片：id-form 数据编码（图表语义·非界面装饰）"
-    },
-    {
-     "page": "en/visualizations.html",
-     "cls": "a.nav-back",
-     "count": 1,
-     "reason": "功能交互实底：返回导航按钮（en 专有组件·v4 §5.2 组件设计态·样式统一候选另批）"
     },
     {
      "page": "en/workplace.html",

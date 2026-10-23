@@ -19,10 +19,10 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="Century Dialogue · Annotated Journey to the West">
     <meta property="og:description" content="Century Dialogue · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
-                                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -471,7 +471,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -514,12 +514,20 @@ h4 { font-size: 18px; font-weight: 500; }
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
     line-height: 1.1;
     text-align: center;
+    flex-shrink: 0;
+}
+/* W856 新品牌图形标（方向 H「山·门槛」·SVG 于 static/icons/logo-mark-light.svg）
+   —— 纯加法：.seal 保留，其余页面的旧印面标识不受影响 */
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: block;
     flex-shrink: 0;
 }
 .wordmark {
@@ -705,6 +713,10 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+/* BL-33 收敛（W895）：KPI 顶条按行收敛——同排首个 kpi-card 保顶条、其余转细线
+   （原 W864-W873 逐页写入内联副本·此处升为 system.css 单一事实源·防 inline_css --force 回吞） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1248,29 +1260,46 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    
-/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+
+/* W885：数据页/可视化页页头装饰插画（深底直显版·浅底宣纸图贴在暗色 hero 上会成亮斑） */
+.hero-ornament {
+    position: absolute;
+    right: clamp(var(--space-6), 5vw, var(--space-12));
+    bottom: clamp(var(--space-5), 4vw, var(--space-9));
+    width: clamp(140px, 18vw, 240px);
+    height: auto;
+    opacity: .9;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+
     .hero-ornament {
-        position: absolute;
-        right: clamp(var(--space-6), 5vw, var(--space-12));
-        bottom: clamp(var(--space-5), 4vw, var(--space-9));
-        width: clamp(140px, 18vw, 240px);
-        height: auto;
-        opacity: .9;
-        pointer-events: none;
+        display: none;
     }
+}
 
-    @media (max-width: 768px) {
+/* W888：数据页卷末插画（浅底宣纸版·暗色模式下隐藏——浅底图贴深底会成亮斑） */
+.viz-illustration {
+    margin: clamp(32px, 5vw, 64px) auto 0;
+    max-width: 420px;
+}
 
-        .hero-ornament {
-            display: none;
-        }
-    }
-</style>
+.viz-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: .92;
+}
+
+html[data-theme="dark"] .viz-illustration {
+    display: none;
+}
+    </style>
 <style>
         /* e-track-exempt: chart-data-colors 2 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
-        .breadcrumb .sep { margin: 0 8px; color: var(--ink-soft); opacity: 0.6; }
+        .breadcrumb .sep { margin: 0 var(--space-3); color: var(--ink-soft); opacity: 0.6; }
 
         .notice {
             background: var(--paper-warm);
@@ -1293,10 +1322,10 @@ td.num, th.num {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-lg);
-            padding: 32px 30px;
+            padding: var(--space-7) 30px;
             box-shadow: var(--shadow);
             margin-bottom: 28px;
-            scroll-margin-top: 20px;
+            scroll-margin-top: var(--space-5);
         }
         .device-title {
             font-size: 1.45rem;
@@ -1315,10 +1344,10 @@ td.num, th.num {
         .speech-bubble:nth-child(2) { animation-delay: 1.2s; }
         .speech-bubble:nth-child(3) { animation-delay: 2.2s; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .speech-bubble .speaker { font-weight: 600; color: var(--accent); margin-bottom: 4px; }
-        .speech-bubble .position { font-size: 0.75rem; color: var(--ink-soft); margin-bottom: 8px; }
+        .speech-bubble .speaker { font-weight: 600; color: var(--accent); margin-bottom: var(--space-2); }
+        .speech-bubble .position { font-size: 0.75rem; color: var(--ink-soft); margin-bottom: var(--space-3); }
         .speech-bubble .argument { font-size: 0.88rem; line-height: 1.6; }
-        .speech-bubble .quote { font-size: 0.82rem; color: var(--accent-3); font-style: italic; margin-top: 8px; }
+        .speech-bubble .quote { font-size: 0.82rem; color: var(--accent-3); font-style: italic; margin-top: var(--space-3); }
 
         /* 角色圆桌 */
         .roundtable { position: relative; height: 500px; background: var(--paper); border: 1px solid var(--line);
@@ -1327,18 +1356,18 @@ td.num, th.num {
                         width: 120px; height: 120px; border-radius: 50% ; background: var(--accent-soft);
                         display: flex; align-items: center; justify-content: center; font-size: 3rem; }
         .roundtable-view { position: absolute; width: 180px; background: var(--paper-warm); border: 1px solid var(--line);
-                           border-radius: var(--radius-md) ; padding: 12px; transition: transform var(--dur-base); }
+                           border-radius: var(--radius-md) ; padding: var(--space-4); transition: transform var(--dur-base); }
         .roundtable-view:hover { transform: scale(1.05); border-color: var(--accent); }
         .roundtable-view .speaker { font-weight: 600; color: var(--accent); font-size: 0.9rem; }
-        .roundtable-view .view { font-size: 0.82rem; color: var(--ink); margin-top: 4px; }
+        .roundtable-view .view { font-size: 0.82rem; color: var(--ink); margin-top: var(--space-2); }
 
         @media (max-width: 768px) {
             .triangle-stage { height: auto; min-height: 600px; }
             .speech-bubble { position: relative; top: auto !important; left: auto !important; right: auto !important;
                              max-width: 100%; margin-bottom: 16px; }
             .roundtable { height: auto; min-height: 700px; }
-            .bajie-center { position: relative; top: auto; left: auto; transform: none; margin: 0 auto 20px; }
-            .roundtable-view { position: relative; left: auto !important; top: auto !important; margin: 12px auto; }
+            .bajie-center { position: relative; top: auto; left: auto; transform: none; margin: 0 auto var(--space-5); }
+            .roundtable-view { position: relative; left: auto !important; top: auto !important; margin: var(--space-4) auto; }
         }
     
     </style>
@@ -1367,7 +1396,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/century-dialogue.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/century-dialogue.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -1381,7 +1410,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
     <nav class="breadcrumb"><a href="dashboard.html">Dashboard</a> → Century Dialogue</nav>
 
     <div class="notice" id="dataSource">
@@ -1408,10 +1437,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/century-dialogue.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/century-dialogue.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
 <script>

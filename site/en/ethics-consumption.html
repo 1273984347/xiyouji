@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-wmBZLk8mhr0aRVzES1Hav9Rm+njkft7+t6c0drGSbFg=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/LewMY0RkjZHgXE/mqYYpHqqYN+n6Cwpn2AV2kQ7ndY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Ethics & Consumption · Mount Rights and Monster IPOs · Annotated Journey to the West</title>
@@ -19,10 +19,10 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="Three Realms Mount Rights Protection Association · Annual Report · Tang Sanzang Food Vlog · 12-Place Rating Board · Tang Sanzang Food Rating Distribution… · Annotated Journey to the West">
     <meta property="og:description" content="Three Realms Mount Rights Protection Association · Annual Report · Tang Sanzang Food Vlog · 12-Place Rating Board · Tang Sanzang Food Rating Distribution… · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
-                                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -464,14 +464,14 @@ h4 { font-size: 18px; font-weight: 500; }
 .kicker {
     font-size: 12px;
     font-weight: 500;
-    color: var(--accent-text);
+    color: var(--accent);
     letter-spacing: 0.1em;
     text-transform: uppercase;
 }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -514,12 +514,20 @@ h4 { font-size: 18px; font-weight: 500; }
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
     line-height: 1.1;
     text-align: center;
+    flex-shrink: 0;
+}
+/* W856 新品牌图形标（方向 H「山·门槛」·SVG 于 static/icons/logo-mark-light.svg）
+   —— 纯加法：.seal 保留，其余页面的旧印面标识不受影响 */
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: block;
     flex-shrink: 0;
 }
 .wordmark {
@@ -667,7 +675,7 @@ h4 { font-size: 18px; font-weight: 500; }
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
 .kpi:hover {
-    border-color: var(--accent-text);
+    border-color: var(--accent);
     transform: translateY(-3px);
     box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
                 var(--elev-2);
@@ -705,8 +713,12 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+/* BL-33 收敛（W895）：KPI 顶条按行收敛——同排首个 kpi-card 保顶条、其余转细线
+   （原 W864-W873 逐页写入内联副本·此处升为 system.css 单一事实源·防 inline_css --force 回吞） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+
 .kpi-card:hover {
-    border-color: var(--accent-text);
+    border-color: var(--accent);
     transform: translateY(-3px);
     box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
                 var(--elev-2);
@@ -1248,25 +1260,42 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    
-/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+
+/* W885：数据页/可视化页页头装饰插画（深底直显版·浅底宣纸图贴在暗色 hero 上会成亮斑） */
+.hero-ornament {
+    position: absolute;
+    right: clamp(var(--space-6), 5vw, var(--space-12));
+    bottom: clamp(var(--space-5), 4vw, var(--space-9));
+    width: clamp(140px, 18vw, 240px);
+    height: auto;
+    opacity: .9;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+
     .hero-ornament {
-        position: absolute;
-        right: clamp(var(--space-6), 5vw, var(--space-12));
-        bottom: clamp(var(--space-5), 4vw, var(--space-9));
-        width: clamp(140px, 18vw, 240px);
-        height: auto;
-        opacity: .9;
-        pointer-events: none;
+        display: none;
     }
+}
 
-    @media (max-width: 768px) {
+/* W888：数据页卷末插画（浅底宣纸版·暗色模式下隐藏——浅底图贴深底会成亮斑） */
+.viz-illustration {
+    margin: clamp(32px, 5vw, 64px) auto 0;
+    max-width: 420px;
+}
 
-        .hero-ornament {
-            display: none;
-        }
-    }
-</style>
+.viz-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: .92;
+}
+
+html[data-theme="dark"] .viz-illustration {
+    display: none;
+}
+    </style>
 <style>
         /* e-track-exempt: chart-data-colors 4 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
@@ -1300,7 +1329,7 @@ td.num, th.num {
             color: var(--accent-2);
             margin: 18px 0 10px;
             letter-spacing: 0.05em;
-            padding-left: 8px;
+            padding-left: var(--space-3);
             border-left: 3px solid var(--accent-2);
         }
         /* 协会信息卡 */
@@ -1317,13 +1346,13 @@ td.num, th.num {
             grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
             gap: 6px 24px;
             font-size: 0.88rem;
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         .org-card .field { color: var(--ink-soft); }
         .org-card .field strong { color: var(--ink); }
         .org-card .mission {
             margin-top: 10px;
-            padding: 8px 12px;
+            padding: var(--space-3) var(--space-4);
             background: var(--paper);
             border-left: 3px solid var(--accent);
             font-size: 0.86rem;
@@ -1335,13 +1364,13 @@ td.num, th.num {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
             gap: 12px;
-            margin-bottom: 20px;
+            margin-bottom: var(--space-5);
         }
         .stat-card {
             background: var(--bg);
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: 12px 14px;
+            padding: var(--space-4) 14px;
             text-align: center;
         }
         .stat-card .k {
@@ -1349,7 +1378,7 @@ td.num, th.num {
             color: var(--accent-text);
             letter-spacing: 0.1em;
             font-family: "JetBrains Mono", monospace;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .stat-card .v {
             font-size: 1.4rem;
@@ -1360,14 +1389,14 @@ td.num, th.num {
         .stat-card .n {
             font-size: 0.76rem;
             color: var(--ink-soft);
-            margin-top: 2px;
+            margin-top: var(--space-1);
         }
         /* finding 卡片 */
         .finding-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 14px;
-            margin-bottom: 24px;
+            margin-bottom: var(--space-6);
         }
         .finding-card {
             background: var(--bg);
@@ -1403,7 +1432,7 @@ td.num, th.num {
         }
         .sev-badge {
             display: inline-block;
-            padding: 2px 10px;
+            padding: var(--space-1) 10px;
             border-radius: var(--radius-lg);
             font-size: 0.72rem;
             font-weight: 600;
@@ -1417,12 +1446,12 @@ td.num, th.num {
             font-size: 0.88rem;
             color: var(--ink);
             line-height: 1.65;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
         .chip {
             display: inline-block;
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-lg);
@@ -1439,7 +1468,7 @@ td.num, th.num {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
             gap: 14px;
-            margin-bottom: 24px;
+            margin-bottom: var(--space-6);
         }
         .case-card {
             background: var(--paper);
@@ -1457,7 +1486,7 @@ td.num, th.num {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
             gap: 8px;
         }
         .case-id {
@@ -1474,7 +1503,7 @@ td.num, th.num {
         .case-owner {
             font-size: 0.78rem;
             color: var(--ink-soft);
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .case-row {
             font-size: 0.84rem;
@@ -1484,7 +1513,7 @@ td.num, th.num {
         .case-row .lbl {
             color: var(--accent-3);
             font-weight: 600;
-            margin-right: 4px;
+            margin-right: var(--space-2);
         }
         .case-resolution {
             background: var(--bg);
@@ -1511,8 +1540,8 @@ td.num, th.num {
         .rec-list li {
             counter-increment: rec;
             position: relative;
-            padding: 10px 12px 10px 44px;
-            margin-bottom: 8px;
+            padding: 10px var(--space-4) 10px 44px;
+            margin-bottom: var(--space-3);
             background: var(--bg);
             border-left: 3px solid var(--accent-4);
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
@@ -1571,7 +1600,7 @@ td.num, th.num {
             font-size: 0.74rem;
             color: var(--ink-soft);
             font-family: "JetBrains Mono", monospace;
-            margin-top: 2px;
+            margin-top: var(--space-1);
         }
         .rating-big {
             font-family: "JetBrains Mono", monospace;
@@ -1583,22 +1612,22 @@ td.num, th.num {
         }
         .food-type {
             display: inline-block;
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             background: var(--accent-soft);
             color: var(--accent-3);
             border-radius: var(--radius-lg);
             font-size: 0.74rem;
-            margin: 4px 0;
+            margin: var(--space-2) 0;
         }
         .food-dish {
             font-size: 0.88rem;
             color: var(--ink);
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .food-dish .lbl {
             color: var(--accent-3);
             font-size: 0.76rem;
-            margin-right: 4px;
+            margin-right: var(--space-2);
         }
         .food-review {
             font-size: 0.84rem;
@@ -1606,10 +1635,10 @@ td.num, th.num {
             font-style: italic;
             background: var(--bg);
             border-left: 3px solid var(--accent-soft);
-            padding: 8px 10px;
+            padding: var(--space-3) 10px;
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
             line-height: 1.6;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .food-meta {
             display: flex;
@@ -1621,7 +1650,7 @@ td.num, th.num {
         }
         .veg-badge {
             display: inline-block;
-            padding: 1px 8px;
+            padding: 1px var(--space-3);
             border-radius: var(--radius-lg);
             font-size: 0.72rem;
             font-weight: 600;
@@ -1630,7 +1659,7 @@ td.num, th.num {
         .veg-no { background: var(--accent); color: var(--paper); }
         .zero-tag {
             display: inline-block;
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             background: var(--accent);
             color: var(--paper);
             border-radius: var(--radius-lg);
@@ -1640,7 +1669,7 @@ td.num, th.num {
         }
         .best-tag {
             display: inline-block;
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             background: var(--accent-3);
             color: var(--paper);
             border-radius: var(--radius-lg);
@@ -1653,7 +1682,7 @@ td.num, th.num {
             background: var(--bg);
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: 12px;
+            padding: var(--space-4);
         }
         #food-bar-svg, #ipo-scatter-svg {
             width: 100%;
@@ -1665,7 +1694,7 @@ td.num, th.num {
             background: var(--dark);
             color: var(--paper-warm);
             border-radius: var(--radius-md);
-            padding: 8px 12px;
+            padding: var(--space-3) var(--space-4);
             font-size: 0.82rem;
             max-width: 375px;
             box-shadow: var(--elev-3);
@@ -1673,13 +1702,13 @@ td.num, th.num {
             transition: opacity var(--dur-fast);
             z-index: 10;
         }
-        .chart-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        .chart-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: var(--space-2); }
         /* IPO 招股书 */
         .ipo-card {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-lg);
-            padding: 20px 22px;
+            padding: var(--space-5) 22px;
             margin-bottom: 18px;
             box-shadow: var(--shadow);
             transition: transform var(--dur-fast), box-shadow var(--dur-fast);
@@ -1714,7 +1743,7 @@ td.num, th.num {
             gap: 12px;
             padding-bottom: 10px;
             border-bottom: 2px solid var(--accent);
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
             flex-wrap: wrap;
         }
         .ipo-name { font-size: 1.2rem; font-weight: 600; color: var(--ink); }
@@ -1723,7 +1752,7 @@ td.num, th.num {
             font-size: 0.85rem;
             color: var(--accent-2);
             background: #f0f4f8;
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-md)
         }
         .ipo-year {
@@ -1735,7 +1764,7 @@ td.num, th.num {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
             gap: 8px;
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
         }
         .ipo-mgmt .mi {
             background: var(--bg);
@@ -1752,14 +1781,14 @@ td.num, th.num {
         }
         .ipo-mgmt .mi .name { color: var(--ink); font-weight: 600; }
         .ipo-biz { font-size: 0.88rem; margin-bottom: 10px; line-height: 1.65; }
-        .ipo-biz .lbl { color: var(--accent-3); font-weight: 600; margin-right: 4px; }
+        .ipo-biz .lbl { color: var(--accent-3); font-weight: 600; margin-right: var(--space-2); }
         .ipo-market {
             background: var(--dark);
             color: var(--paper-warm);
-            padding: 8px 12px;
+            padding: var(--space-3) var(--space-4);
             border-radius: var(--radius-md);
             font-size: 0.86rem;
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
             font-family: "JetBrains Mono", monospace;
         }
         .ipo-market .lbl { color: var(--accent-soft); margin-right: 6px; }
@@ -1767,14 +1796,14 @@ td.num, th.num {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 8px;
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
         }
         @media (max-width: 640px) { .fin-row { grid-template-columns: repeat(2, 1fr); } }
         .fin-cell {
             background: var(--bg);
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: 8px 10px;
+            padding: var(--space-3) 10px;
             text-align: center;
         }
         .fin-cell .k {
@@ -1782,7 +1811,7 @@ td.num, th.num {
             color: var(--accent-text);
             letter-spacing: 0.05em;
             font-family: "JetBrains Mono", monospace;
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
         .fin-cell .v {
             font-size: 0.92rem;
@@ -1801,7 +1830,7 @@ td.num, th.num {
         .ipo-outcome {
             background: linear-gradient(135deg, #c8463a 0%, #8c2820 100%);
             color: var(--paper);
-            padding: 12px 16px;
+            padding: var(--space-4) 16px;
             border-radius: var(--radius-md);
             margin: 14px 0 10px;
             border: 2px solid var(--accent);
@@ -1816,7 +1845,7 @@ td.num, th.num {
             letter-spacing: 0.15em;
             background: var(--paper);
             color: var(--accent);
-            padding: 4px 12px;
+            padding: var(--space-2) var(--space-4);
             border-radius: var(--radius-md);
             border: 2px dashed var(--accent);
             white-space: nowrap;
@@ -1829,7 +1858,7 @@ td.num, th.num {
         .ipo-lesson {
             background: var(--paper-warm);
             border-left: 3px solid var(--accent-3);
-            padding: 8px 12px;
+            padding: var(--space-3) var(--space-4);
             font-size: 0.84rem;
             font-style: italic;
             color: var(--accent-3);
@@ -1863,7 +1892,7 @@ td.num, th.num {
         }
         .use-list li {
             counter-increment: use;
-            padding: 4px 0 4px 28px;
+            padding: var(--space-2) 0 var(--space-2) 28px;
             position: relative;
             font-size: 0.84rem;
             line-height: 1.55;
@@ -1889,14 +1918,14 @@ td.num, th.num {
         .insight-box {
             background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border-left: 4px solid var(--accent);
-            padding: 20px 24px;
+            padding: var(--space-5) var(--space-6);
             border-radius: var(--radius-md);
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         .insight-box h4 { color: var(--accent-text); font-size: 1rem; margin-bottom: 10px; }
         .insight-box ul { list-style: none; padding-left: 0; }
         .insight-box li {
-            padding: 8px 0;
+            padding: var(--space-3) 0;
             border-bottom: 1px dashed var(--line);
             font-size: 0.92rem;
             line-height: 1.7;
@@ -1941,7 +1970,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/ethics-consumption.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/ethics-consumption.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -1955,7 +1984,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
             Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
         </div>
@@ -2059,10 +2088,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/ethics-consumption.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/ethics-consumption.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
 <script>
@@ -2523,7 +2552,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                               `<div>Type: ${f.restaurant_type}</div>` +
                               `<div>Signature dish: ${f.signature_dish}</div>` +
                               `<div>Rating: <strong style="color:var(--accent-soft);">${f.rating.toFixed(1)}</strong> · ${ratingLabel(f.rating)}</div>` +
-                              `<div style="margin-top:4px;font-size:0.78rem;color:#e9b885;">"${f.tang_monk_review}"</div>`);
+                              `<div style="margin-top:var(--space-2);font-size:0.78rem;color:#e9b885;">"${f.tang_monk_review}"</div>`);
                 })
                 .on("mousemove", function(e) {
                     const rect = el.parentElement.getBoundingClientRect();
@@ -2750,7 +2779,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                           `<div>Code: ${d.ticker}</div>` +
                           `<div>Employees: <strong style="color:var(--accent-soft);">${d.empText}</strong></div>` +
                           `<div>Annual revenue: <strong style="color:var(--accent-soft);">${d.revText}</strong></div>` +
-                          `<div style="margin-top:4px;color:#ffb;">${d.outcome}</div>`);
+                          `<div style="margin-top:var(--space-2);color:#ffb;">${d.outcome}</div>`);
             })
             .on("mousemove", function(e) {
                 const rect = el.parentElement.getBoundingClientRect();

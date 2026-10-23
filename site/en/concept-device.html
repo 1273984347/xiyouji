@@ -19,10 +19,10 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="Key Insights · Annotated Journey to the West">
     <meta property="og:description" content="Key Insights · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
-                                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -471,7 +471,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -514,12 +514,20 @@ h4 { font-size: 18px; font-weight: 500; }
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
     line-height: 1.1;
     text-align: center;
+    flex-shrink: 0;
+}
+/* W856 新品牌图形标（方向 H「山·门槛」·SVG 于 static/icons/logo-mark-light.svg）
+   —— 纯加法：.seal 保留，其余页面的旧印面标识不受影响 */
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: block;
     flex-shrink: 0;
 }
 .wordmark {
@@ -705,6 +713,10 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+/* BL-33 收敛（W895）：KPI 顶条按行收敛——同排首个 kpi-card 保顶条、其余转细线
+   （原 W864-W873 逐页写入内联副本·此处升为 system.css 单一事实源·防 inline_css --force 回吞） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1248,25 +1260,42 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    
-/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+
+/* W885：数据页/可视化页页头装饰插画（深底直显版·浅底宣纸图贴在暗色 hero 上会成亮斑） */
+.hero-ornament {
+    position: absolute;
+    right: clamp(var(--space-6), 5vw, var(--space-12));
+    bottom: clamp(var(--space-5), 4vw, var(--space-9));
+    width: clamp(140px, 18vw, 240px);
+    height: auto;
+    opacity: .9;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+
     .hero-ornament {
-        position: absolute;
-        right: clamp(var(--space-6), 5vw, var(--space-12));
-        bottom: clamp(var(--space-5), 4vw, var(--space-9));
-        width: clamp(140px, 18vw, 240px);
-        height: auto;
-        opacity: .9;
-        pointer-events: none;
+        display: none;
     }
+}
 
-    @media (max-width: 768px) {
+/* W888：数据页卷末插画（浅底宣纸版·暗色模式下隐藏——浅底图贴深底会成亮斑） */
+.viz-illustration {
+    margin: clamp(32px, 5vw, 64px) auto 0;
+    max-width: 420px;
+}
 
-        .hero-ornament {
-            display: none;
-        }
-    }
-</style>
+.viz-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: .92;
+}
+
+html[data-theme="dark"] .viz-illustration {
+    display: none;
+}
+    </style>
 <style>
         /* e-track-exempt: chart-data-colors 10 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
@@ -1288,7 +1317,7 @@ td.num, th.num {
         
         
         
-        .breadcrumb .sep { margin: 0 8px; opacity: 0.5; }
+        .breadcrumb .sep { margin: 0 var(--space-3); opacity: 0.5; }
         .breadcrumb .current { color: var(--ink-soft); }
         .notice {
             background: var(--paper-warm);
@@ -1297,7 +1326,7 @@ td.num, th.num {
             padding: 10px 14px;
             font-size: 0.82rem;
             color: var(--accent-3);
-            margin-bottom: 20px;
+            margin-bottom: var(--space-5);
         }
         /* ===== 装置导览卡片 ===== */
         .nav-grid {
@@ -1337,14 +1366,14 @@ td.num, th.num {
             font-size: 1rem;
             font-weight: 600;
             color: var(--ink);
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
         .nav-card .body .en-name {
             font-size: 0.72rem;
             color: var(--ink-soft);
             letter-spacing: 0.12em;
             font-style: italic;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .nav-card .body .desc {
             font-size: 0.82rem;
@@ -1356,10 +1385,10 @@ td.num, th.num {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-lg);
-            padding: 32px 30px;
+            padding: var(--space-7) 30px;
             box-shadow: var(--shadow);
             margin-bottom: 28px;
-            scroll-margin-top: 20px;
+            scroll-margin-top: var(--space-5);
         }
         .device-head {
             display: flex;
@@ -1375,7 +1404,7 @@ td.num, th.num {
             background: #fff1ec;
             border: 1px solid var(--accent-soft);
             border-radius: var(--radius-md);
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
         }
         .device-title {
             font-size: 1.45rem;
@@ -1399,11 +1428,11 @@ td.num, th.num {
         .prism-stage {
             background: linear-gradient(180deg, var(--dark) 0%, #2a2018 100%);
             border-radius: var(--radius-md);
-            padding: 30px 20px 24px;
+            padding: 30px var(--space-5) var(--space-6);
             position: relative;
             overflow: visible;
         }
-        .prism-svg { display: block; width: 100%; height: auto; max-width: 1024px; margin: 0 auto; }
+        .prism-svg { display: block; width: 100%; height: auto; max-width: var(--container-content); margin: 0 auto; }
         .prism-spectrums {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1425,13 +1454,13 @@ td.num, th.num {
             color: var(--sp-color, var(--paper));
             font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
         .spectrum-card .school {
             font-size: 0.74rem;
             color: color-mix(in srgb, var(--dark-text) 55%, transparent);
             letter-spacing: 0.1em;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .spectrum-card .core {
             font-size: 0.82rem;
@@ -1443,7 +1472,7 @@ td.num, th.num {
             background: var(--shadow);
             border-left: 3px solid var(--accent-soft);
             border-radius: var(--radius-md);
-            padding: 12px 16px;
+            padding: var(--space-4) 16px;
             font-size: 0.85rem;
             color: var(--paper-warm);
             min-height: 48px;
@@ -1453,7 +1482,7 @@ td.num, th.num {
         .prism-tooltip .label {
             color: var(--accent-soft);
             font-weight: 600;
-            margin-right: 8px;
+            margin-right: var(--space-3);
             white-space: nowrap;
         }
         /* ===== 装置2 复古收音机 ===== */
@@ -1467,7 +1496,7 @@ td.num, th.num {
         .radio-box {
             background: linear-gradient(160deg, #8b5a3a 0%, #6b4226 100%);
             border-radius: 14px;
-            padding: 24px 26px;
+            padding: var(--space-6) 26px;
             box-shadow: inset 0 2px 6px rgba(255,255,255,0.12), 0 8px 20px rgba(60,30,15,0.3);
             border: 2px solid #5a3820;
             position: relative;
@@ -1483,7 +1512,7 @@ td.num, th.num {
         .radio-scale {
             background: var(--dark);
             border-radius: var(--radius-md);
-            padding: 14px 18px 8px;
+            padding: 14px 18px var(--space-3);
             position: relative;
             margin-bottom: 16px;
             border: 1px solid #4a2a18;
@@ -1499,7 +1528,7 @@ td.num, th.num {
             font-size: 0.66rem;
             color: var(--accent-soft);
             font-family: "Courier New", monospace;
-            padding-top: 2px;
+            padding-top: var(--space-1);
         }
         .scale-ticks span { cursor: default; }
         .freq-pointer {
@@ -1544,7 +1573,7 @@ td.num, th.num {
             color: var(--accent-soft);
             border: 1px solid #6a4a2a;
             border-radius: var(--radius-md);
-            padding: 10px 4px;
+            padding: 10px var(--space-2);
             font-family: inherit;
             font-size: 0.82rem;
             cursor: pointer;
@@ -1563,7 +1592,7 @@ td.num, th.num {
             border: 1px solid var(--line);
             border-left: 4px solid var(--accent-3);
             border-radius: var(--radius-md);
-            padding: 22px 24px;
+            padding: 22px var(--space-6);
             min-height: 200px;
         }
         .radio-out .on-air {
@@ -1585,14 +1614,14 @@ td.num, th.num {
         .radio-out .speaker {
             font-size: 0.78rem;
             color: var(--ink-soft);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .radio-out .quote {
             font-size: 1.15rem;
             color: var(--ink);
             font-weight: 600;
             line-height: 1.6;
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
             font-style: italic;
         }
         .radio-out .quote::before { content: "「"; color: var(--accent-3); }
@@ -1608,10 +1637,10 @@ td.num, th.num {
         .mobius-stage {
             background: linear-gradient(180deg, var(--paper-warm) 0%, #ece3d2 100%);
             border-radius: var(--radius-md);
-            padding: 24px 16px;
+            padding: var(--space-6) 16px;
             border: 1px solid var(--line);
         }
-        .mobius-svg { display: block; width: 100%; max-width: 1024px; margin: 0 auto; height: auto; }
+        .mobius-svg { display: block; width: 100%; max-width: var(--container-content); margin: 0 auto; height: auto; }
         .mobius-node { cursor: pointer; }
         .mobius-node circle { transition: r var(--dur-base) ease, fill var(--dur-base) ease; }
         .mobius-node:hover circle { r: 13; }
@@ -1620,7 +1649,7 @@ td.num, th.num {
             display: flex;
             gap: 24px;
             justify-content: center;
-            margin-top: 12px;
+            margin-top: var(--space-4);
             font-size: 0.82rem;
             flex-wrap: wrap;
         }
@@ -1632,20 +1661,20 @@ td.num, th.num {
             border: 1px solid var(--line);
             border-left: 4px solid var(--accent-2);
             border-radius: var(--radius-md);
-            padding: 16px 20px;
+            padding: 16px var(--space-5);
             min-height: 70px;
         }
         .mobius-detail .who {
             font-size: 0.95rem;
             font-weight: 600;
             color: var(--accent-2);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .mobius-detail .who .meta {
             font-weight: 400;
             font-size: 0.78rem;
             color: var(--ink-soft);
-            margin-left: 8px;
+            margin-left: var(--space-3);
         }
         .mobius-detail .thesis {
             font-size: 0.9rem;
@@ -1681,7 +1710,7 @@ td.num, th.num {
             inset: 0;
             backface-visibility: hidden;
             border-radius: var(--radius-lg);
-            padding: 20px 16px;
+            padding: var(--space-5) 16px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -1728,7 +1757,7 @@ td.num, th.num {
         .cipher-front .hint {
             font-size: 0.7rem;
             color: var(--ink-soft);
-            margin-top: 12px;
+            margin-top: var(--space-4);
             font-style: italic;
         }
         .cipher-back .tag {
@@ -1746,7 +1775,7 @@ td.num, th.num {
         .cipher-back .hint {
             font-size: 0.7rem;
             color: color-mix(in srgb, var(--dark-text) 60%, transparent);
-            margin-top: 12px;
+            margin-top: var(--space-4);
         }
         .cipher-source {
             text-align: center;
@@ -1754,7 +1783,7 @@ td.num, th.num {
             color: var(--ink-soft);
             margin-top: 16px;
             font-style: italic;
-            padding-top: 12px;
+            padding-top: var(--space-4);
             border-top: 1px dashed var(--line);
         }
         /* ===== 装置5 弹幕重映 ===== */
@@ -1762,7 +1791,7 @@ td.num, th.num {
             background: #fdfaf3;
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: 24px 26px;
+            padding: var(--space-6) 26px;
             position: relative;
             overflow: hidden;
         }
@@ -1826,7 +1855,7 @@ td.num, th.num {
             white-space: nowrap;
             font-size: 1rem;
             font-weight: 600;
-            padding: 2px 10px;
+            padding: var(--space-1) 10px;
             border-radius: var(--radius-lg);
             background: rgba(255,255,255,0.7);
             border: 1px solid currentColor;
@@ -1862,7 +1891,7 @@ td.num, th.num {
                 #c9a87a;
             border: 8px solid #6b4226;
             border-radius: 0 0 var(--radius-md) var(--radius-md);
-            padding: 28px 24px;
+            padding: 28px var(--space-6);
             position: relative;
             min-height: 440px;
         }
@@ -1903,18 +1932,18 @@ td.num, th.num {
             font-weight: 600;
             color: var(--ink);
             border-bottom: 2px solid var(--accent-3);
-            padding-bottom: 4px;
+            padding-bottom: var(--space-2);
             margin-bottom: 6px;
         }
         .suspect-card .smeta {
             font-size: 0.72rem;
             color: var(--ink-soft);
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .suspect-card .evi {
             font-size: 0.76rem;
             line-height: 1.5;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .suspect-card .evi.for::before { content: "✓ "; color: var(--accent-4); font-weight: 700; }
         .suspect-card .evi.against::before { content: "✗ "; color: var(--accent); font-weight: 700; }
@@ -1937,7 +1966,7 @@ td.num, th.num {
             background: linear-gradient(160deg, var(--paper-warm), var(--paper-warm));
             border: 2px solid var(--accent);
             border-radius: var(--radius-md);
-            padding: 16px 20px;
+            padding: 16px var(--space-5);
             text-align: center;
             box-shadow: var(--elev-1);
             position: relative;
@@ -1955,7 +1984,7 @@ td.num, th.num {
             font-size: 1.2rem;
             font-weight: 600;
             color: var(--accent);
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
         .hu-card .hyear {
             font-size: 0.78rem;
@@ -1966,7 +1995,7 @@ td.num, th.num {
         .hu-card .hwork {
             font-size: 0.82rem;
             color: var(--ink);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .hu-card .hconc {
             font-size: 0.78rem;
@@ -1991,11 +2020,11 @@ td.num, th.num {
         .insight-box h4 {
             color: var(--accent);
             font-size: 1.05rem;
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
         }
         .insight-box ul { list-style: none; padding-left: 0; }
         .insight-box li {
-            padding: 8px 0;
+            padding: var(--space-3) 0;
             border-bottom: 1px dashed var(--line);
             font-size: 0.92rem;
             line-height: 1.65;
@@ -2006,9 +2035,9 @@ td.num, th.num {
             background: var(--accent);
             color: var(--paper-warm);
             font-size: 0.72rem;
-            padding: 1px 8px;
+            padding: 1px var(--space-3);
             border-radius: var(--radius-sm);
-            margin-right: 8px;
+            margin-right: var(--space-3);
             font-family: "Courier New", monospace;
         }
         .insight-box li strong { color: var(--accent-text); font-weight: 600; }
@@ -2043,7 +2072,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/concept-device.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/concept-device.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -2057,7 +2086,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
     <nav class="breadcrumb">
         <a href="index.html">EN Home</a>
         <span class="sep">/</span>
@@ -2205,10 +2234,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/concept-device.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/concept-device.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
 <script>

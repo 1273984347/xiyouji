@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-PDaq+rcqgJhQvKqtW1EuZ2rPkETrCmt6JMuSZqGjLj8=' 'sha256-g9HXMhZf9+ECG5SXJvswVJrfa1u2KkOj9WODvEy9nTs=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-PDaq+rcqgJhQvKqtW1EuZ2rPkETrCmt6JMuSZqGjLj8=' 'sha256-kyery746trViwY5p0+UBgd8EesZOuZokfqKYCO9nJqY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Graph Explorer · Annotated Journey to the West</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/en/graph-explorer.html">
@@ -20,7 +20,7 @@
     <meta property="og:description" content="Graph Explorer · Annotated Journey to the West">
 
 
-                                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -469,7 +469,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -512,12 +512,20 @@ h4 { font-size: 18px; font-weight: 500; }
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
     line-height: 1.1;
     text-align: center;
+    flex-shrink: 0;
+}
+/* W856 新品牌图形标（方向 H「山·门槛」·SVG 于 static/icons/logo-mark-light.svg）
+   —— 纯加法：.seal 保留，其余页面的旧印面标识不受影响 */
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: block;
     flex-shrink: 0;
 }
 .wordmark {
@@ -703,6 +711,10 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+/* BL-33 收敛（W895）：KPI 顶条按行收敛——同排首个 kpi-card 保顶条、其余转细线
+   （原 W864-W873 逐页写入内联副本·此处升为 system.css 单一事实源·防 inline_css --force 回吞） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1246,6 +1258,41 @@ td.num, th.num {
         max-width: 220px;
     }
 }
+
+/* W885：数据页/可视化页页头装饰插画（深底直显版·浅底宣纸图贴在暗色 hero 上会成亮斑） */
+.hero-ornament {
+    position: absolute;
+    right: clamp(var(--space-6), 5vw, var(--space-12));
+    bottom: clamp(var(--space-5), 4vw, var(--space-9));
+    width: clamp(140px, 18vw, 240px);
+    height: auto;
+    opacity: .9;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+
+    .hero-ornament {
+        display: none;
+    }
+}
+
+/* W888：数据页卷末插画（浅底宣纸版·暗色模式下隐藏——浅底图贴深底会成亮斑） */
+.viz-illustration {
+    margin: clamp(32px, 5vw, 64px) auto 0;
+    max-width: 420px;
+}
+
+.viz-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: .92;
+}
+
+html[data-theme="dark"] .viz-illustration {
+    display: none;
+}
     </style>
 <style>/* e-track-exempt: chart-data-colors 11 处 */
 
@@ -1253,7 +1300,7 @@ td.num, th.num {
   *{box-sizing:border-box}
   html,body{height:100%}
   body{margin:0;font-family:"Noto Sans SC","PingFang SC",system-ui,sans-serif;background: var(--xuan);color: var(--ink);display:flex;flex-direction:column}
-  header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding:14px 20px;border-bottom: 1px solid var(--line);background: var(--paper)}
+  header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding:14px var(--space-5);border-bottom: 1px solid var(--line);background: var(--paper)}
   header h1{font-family:"Noto Serif SC",serif;font-size:20px;margin:0;color: var(--zhu)}
   header .sub{font-size:13px;color: var(--ink-soft)}
   #banner{margin-left:auto;font-size:12px;padding:3px 10px;border-radius: 20px;background:#f0e7d6;color: /* W675-review：修复 WP-2.3 对粘词残缀的错位插入（原两属性均失效） */ var(--ink-soft)}
@@ -1264,7 +1311,7 @@ td.num, th.num {
   .layout.no-side{grid-template-columns:0 1fr 280px}
   .layout.no-side.no-drill{grid-template-columns:0 1fr 0px}
   .layout.no-side .side{border-right: none;overflow:hidden}
-  #sideToggle{margin-left:10px;font-size:16px;line-height:1;padding:4px 9px;border: 1px solid var(--line);border-radius: var(--radius-md); background:var(--paper);cursor:pointer;color: var(--ink)}
+  #sideToggle{margin-left:10px;font-size:16px;line-height:1;padding:var(--space-2) 9px;border: 1px solid var(--line);border-radius: var(--radius-md); background:var(--paper);cursor:pointer;color: var(--ink)}
   #sideToggle:hover{border-color: var(--zhu);color: var(--zhu)}
   .side{border-right: 1px solid var(--line);padding:14px;overflow:auto;background: var(--paper)}
   .stage{position:relative;overflow:hidden;background: radial-gradient(circle at 50% 40%,var(--paper),#f4ece0)}
@@ -1272,8 +1319,8 @@ td.num, th.num {
   .drill.show{display:block}
   .side h3{font-size:12px;letter-spacing:.08em;color: #8a7d68;margin:14px 0 6px;text-transform:uppercase}
   .side h3:first-child{margin-top:0}
-  select,input[type=text]{width:100%;padding:6px 8px;border: 1px solid var(--line);border-radius: var(--radius-md); font-size:13px;background: var(--paper);color: var(--ink)}
-  .grp{display:flex;align-items:center;gap:7px;font-size:13px;margin:4px 0;cursor:pointer}
+  select,input[type=text]{width:100%;padding:6px var(--space-3);border: 1px solid var(--line);border-radius: var(--radius-md); font-size:13px;background: var(--paper);color: var(--ink)}
+  .grp{display:flex;align-items:center;gap:7px;font-size:13px;margin:var(--space-2) 0;cursor:pointer}
   .grp input{accent-color: var(--zhu)}
   .swatch{width:12px;height:12px;border-radius: 50%; display:inline-block;border: 1px solid var(--paper)}
   .dimbtns{display:flex;gap:5px;flex-wrap:wrap}
@@ -1288,23 +1335,23 @@ td.num, th.num {
   #graphBox text{font-family:"Noto Serif SC",serif;pointer-events:none}
   .gnode{cursor:pointer;user-select:none}
   .gnode:hover{opacity:.78}
-  .drill h2{font-family:"Noto Serif SC",serif;font-size:18px;margin:2px 0 4px;color: var(--zhu)}
-  .drill .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius: var(--radius-lg); background:#f0e7d6;color: var(--ink-soft);margin-bottom:8px}
+  .drill h2{font-family:"Noto Serif SC",serif;font-size:18px;margin:var(--space-1) 0 var(--space-2);color: var(--zhu)}
+  .drill .tag{display:inline-block;font-size:11px;padding:var(--space-1) var(--space-3);border-radius: var(--radius-lg); background:#f0e7d6;color: var(--ink-soft);margin-bottom:var(--space-3)}
   .drill .desc{font-size:13px;line-height:1.7;color: #4a4136}
-  .drill .alias{margin:8px 0;padding:8px 10px;background: #f7f1e6;border-radius: var(--radius-md); font-size:13px}
+  .drill .alias{margin:var(--space-3) 0;padding:var(--space-3) 10px;background: #f7f1e6;border-radius: var(--radius-md); font-size:13px}
   .drill .alias b{color: var(--qing)}
   .drill .nbr{list-style:none;padding:0;margin:6px 0}
-  .drill .nbr li{font-size:13px;padding:6px 8px;border: 1px solid var(--line);border-radius: var(--radius-md); margin:4px 0;cursor:pointer}
+  .drill .nbr li{font-size:13px;padding:6px var(--space-3);border: 1px solid var(--line);border-radius: var(--radius-md); margin:var(--space-2) 0;cursor:pointer}
   .drill .nbr li:hover{border-color: var(--zhu)}
   .drill .nbr li .row{display:flex;justify-content:space-between;gap:8px;align-items:center}
   .drill .nbr .rel{color: #8a7d68;font-size:12px}
   .hint{font-size:12px;color: #9a8f7c;margin-top:10px;line-height:1.6}
   .edge-label{font-size:10px;pointer-events:none;font-family:"Noto Sans SC",sans-serif}
   .relchip{display:inline-block;font-size:10px;padding:1px 6px;border-radius: var(--radius-lg); color:var(--paper);margin-left:6px;vertical-align:middle}
-  .relsum{font-size:12px;color: #5a5040;background: #f7f1e6;border-radius: var(--radius-md); padding:7px 10px;margin:8px 0;line-height:1.9}
+  .relsum{font-size:12px;color: #5a5040;background: #f7f1e6;border-radius: var(--radius-md); padding:7px 10px;margin:var(--space-3) 0;line-height:1.9}
   .relsum b{color: var(--zhu)}
-  .relsum .rs{display:inline-block;margin:0 6px 2px 0}
-  .relsum .rs i{font-style:normal;width:9px;height:9px;border-radius: 50%; display:inline-block;margin-right:4px;vertical-align:middle}
+  .relsum .rs{display:inline-block;margin:0 6px var(--space-1) 0}
+  .relsum .rs i{font-style:normal;width:9px;height:9px;border-radius: 50%; display:inline-block;margin-right:var(--space-2);vertical-align:middle}
   @media (max-width: 768px){
     body{display:block}
     .layout,.layout.no-drill,.layout.no-side,.layout.no-side.no-drill{grid-template-columns:1fr;grid-template-rows:auto 1fr auto;flex:none;height:auto}
@@ -1561,7 +1608,7 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph","title": "Buddhism = AI = Journey t
     var edges=GRAPH.edges.filter(function(e){return vis.has(e.source)&&vis.has(e.target)&&activeRels.has(edgeRel(e));});
     var ids=[];
     vis.forEach(function(id){ ids.push(id); });
-    if(!ids.length){ document.getElementById("graphBox").innerHTML='<p style="padding:20px;color:#9a8f7c">No matching nodes — adjust the filters.</p>'; return; }
+    if(!ids.length){ document.getElementById("graphBox").innerHTML='<p style="padding:var(--space-5);color:#9a8f7c">No matching nodes — adjust the filters.</p>'; return; }
     var dims=layout(ids,edges);
     var deg=new Map(); edges.forEach(function(e){ deg.set(e.source,(deg.get(e.source)||0)+1); deg.set(e.target,(deg.get(e.target)||0)+1); });
     var maxDeg=Math.max.apply(null,ids.map(function(i){return deg.get(i)||0;})), minDeg=Math.min.apply(null,ids.map(function(i){return deg.get(i)||0;}));
@@ -1645,13 +1692,13 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph","title": "Buddhism = AI = Journey t
     });
     // 语义关系汇总：按关系类型计数
     var relCount={}; nbrs.forEach(function(x){ if(x.rel) relCount[x.rel]=(relCount[x.rel]||0)+1; });
-    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:12px 0 4px">Semantic relation summary ('+nbrs.length+' relations)</h3>';
+    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:var(--space-4) 0 var(--space-2)">Semantic relation summary ('+nbrs.length+' relations)</h3>';
     html+='<div class="relsum">';
     Object.keys(relCount).sort().forEach(function(r){
       html+='<span class="rs"><i style="background:'+relationColor(r)+'"></i><b>'+xmlEsc(r)+'</b>×'+relCount[r]+'</span>';
     });
     html+='</div>';
-    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:12px 0 4px">Neighbors and relations</h3>';
+    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:var(--space-4) 0 var(--space-2)">Neighbors and relations</h3>';
     html+='<ul class="nbr">';
     nbrs.forEach(function(x){
       var on=null; GRAPH.nodes.forEach(function(y){ if(y.id===x.other)on=y; });
@@ -1662,7 +1709,7 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph","title": "Buddhism = AI = Journey t
     });
     html+='</ul>';
     var lab=labelOf(n);
-    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:12px 0 4px">Related research</h3>';
+    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:var(--space-4) 0 var(--space-2)">Related research</h3>';
     html+='<div class="alias"><a href="./search.html?q='+encodeURIComponent(lab)+'" target="_blank" rel="noopener" style="color:#3a6b8c;text-decoration:none">🔍 Site search for “'+xmlEsc(lab)+'” interpretations →</a></div>';
     panel.innerHTML=html;
     var closeBtn=panel.querySelector(".drill-close");
@@ -1715,7 +1762,7 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph","title": "Buddhism = AI = Journey t
   async function loadAndRender(){
     focusNode=null; nodePos=new Map(); activeGroups=new Set(); activeRels=new Set();
     GRAPH=await loadGraph(GRAPH_NAME);
-    if(!GRAPH){ document.getElementById("graphBox").innerHTML='<p style="padding:20px;color:#9a8f7c">Graph failed to load (offline with no embedded data).</p>'; return; }
+    if(!GRAPH){ document.getElementById("graphBox").innerHTML='<p style="padding:var(--space-5);color:#9a8f7c">Graph failed to load (offline with no embedded data).</p>'; return; }
     buildControls();
     var saved=loadSaved();
     if(saved && saved.name===GRAPH_NAME){
@@ -1975,8 +2022,8 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph","title": "Buddhism = AI = Journey t
 </script>
 
 
-<div style="padding:16px 8px;text-align:center"><a href="../data/graph-explorer.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div>
+<div style="padding:16px var(--space-3);text-align:center"><a href="../data/graph-explorer.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div>
 <script defer src="../static/js/chart-a11y.js"></script>
 </body>
 </html>

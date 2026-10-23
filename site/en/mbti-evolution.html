@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-HxID7FB8/vxzL5Qx7Tv8lA8tcgnUkr+ngmBdmTxIvTA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-fcGqTHj3sTPuUcV+pU2FNDFniR7aD7MKEi7DLNAovHc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Pilgrimage Team MBTI Evolution · Annotated Journey to the West</title>
@@ -19,10 +19,10 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="Pilgrimage Team MBTI Evolution · Annotated Journey to the West">
     <meta property="og:description" content="Pilgrimage Team MBTI Evolution · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
-                                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -471,7 +471,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -514,12 +514,20 @@ h4 { font-size: 18px; font-weight: 500; }
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
     line-height: 1.1;
     text-align: center;
+    flex-shrink: 0;
+}
+/* W856 新品牌图形标（方向 H「山·门槛」·SVG 于 static/icons/logo-mark-light.svg）
+   —— 纯加法：.seal 保留，其余页面的旧印面标识不受影响 */
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: block;
     flex-shrink: 0;
 }
 .wordmark {
@@ -705,6 +713,10 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+/* BL-33 收敛（W895）：KPI 顶条按行收敛——同排首个 kpi-card 保顶条、其余转细线
+   （原 W864-W873 逐页写入内联副本·此处升为 system.css 单一事实源·防 inline_css --force 回吞） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1248,25 +1260,42 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    
-/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+
+/* W885：数据页/可视化页页头装饰插画（深底直显版·浅底宣纸图贴在暗色 hero 上会成亮斑） */
+.hero-ornament {
+    position: absolute;
+    right: clamp(var(--space-6), 5vw, var(--space-12));
+    bottom: clamp(var(--space-5), 4vw, var(--space-9));
+    width: clamp(140px, 18vw, 240px);
+    height: auto;
+    opacity: .9;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+
     .hero-ornament {
-        position: absolute;
-        right: clamp(var(--space-6), 5vw, var(--space-12));
-        bottom: clamp(var(--space-5), 4vw, var(--space-9));
-        width: clamp(140px, 18vw, 240px);
-        height: auto;
-        opacity: .9;
-        pointer-events: none;
+        display: none;
     }
+}
 
-    @media (max-width: 768px) {
+/* W888：数据页卷末插画（浅底宣纸版·暗色模式下隐藏——浅底图贴深底会成亮斑） */
+.viz-illustration {
+    margin: clamp(32px, 5vw, 64px) auto 0;
+    max-width: 420px;
+}
 
-        .hero-ornament {
-            display: none;
-        }
-    }
-</style>
+.viz-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: .92;
+}
+
+html[data-theme="dark"] .viz-illustration {
+    display: none;
+}
+    </style>
 <style>
         /* e-track-exempt: chart-data-colors 2 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
@@ -1283,25 +1312,25 @@ td.num, th.num {
         .breadcrumb .sep { margin: 0 6px; color: var(--line); }
         .notice {
             background: var(--paper-warm); border-left: 4px solid var(--accent-soft);
-            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 var(--radius-md) var(--radius-md) 0
+            padding: 10px 16px; margin-bottom: var(--space-6); font-size: 0.9em; border-radius: 0 var(--radius-md) var(--radius-md) 0
         }
         
         
         .kpi-card .num { font-size: 2em; font-weight: bold; color: var(--accent); line-height: 1.2; }
         
         
-        .section h2 { color: var(--accent-text); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .section h2 { color: var(--accent-text); border-bottom: 2px solid var(--accent-soft); padding-bottom: var(--space-3); margin-bottom: var(--space-4); }
         .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
         .skip-link {
             position: absolute; top: -40px; left: 0; background: var(--accent-2);
-            color: var(--paper); padding: 8px 16px; z-index: 100; text-decoration: none;
+            color: var(--paper); padding: var(--space-3) 16px; z-index: 100; text-decoration: none;
             border-radius: 0 0 var(--radius-md) 0 ; transition: top var(--dur-base);
         }
         .skip-link:focus { top: 0; }
         
-        .stage-switcher { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .stage-switcher { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: var(--space-5); }
         .stage-btn {
-            padding: 8px 16px; border: 1px solid var(--line); background: var(--paper);
+            padding: var(--space-3) 16px; border: 1px solid var(--line); background: var(--paper);
             color: var(--ink); border-radius: var(--radius-md) ; cursor: pointer; font-size: 0.9em;
             font-family: inherit; transition: background var(--dur-base), color var(--dur-base), border-color var(--dur-base);
         }
@@ -1314,13 +1343,13 @@ td.num, th.num {
         .radar-container { position: relative; }
         .radar-tip, .heat-tip {
             position: absolute; pointer-events: none; background: var(--dark);
-            color: var(--paper-warm); padding: 8px 12px; border-radius: var(--radius-md) ; font-size: 0.8rem;
+            color: var(--paper-warm); padding: var(--space-3) var(--space-4); border-radius: var(--radius-md) ; font-size: 0.8rem;
             opacity: 0; transition: opacity var(--dur-base); z-index: 10; max-width: 375px;
         }
-        .radar-tip .tip-title, .heat-tip .tip-title { font-weight: bold; color: var(--accent-soft); margin-bottom: 4px; }
+        .radar-tip .tip-title, .heat-tip .tip-title { font-weight: bold; color: var(--accent-soft); margin-bottom: var(--space-2); }
         .legend h4 { color: var(--accent-3); margin-bottom: 10px; font-size: 1em; }
         .legend-item {
-            display: flex; align-items: center; gap: 8px; padding: 6px 8px;
+            display: flex; align-items: center; gap: 8px; padding: 6px var(--space-3);
             border-radius: var(--radius-md) ; cursor: pointer; font-size: 0.88em; transition: background var(--dur-base);
         }
         .legend-item:hover, .legend-item:focus { background: var(--paper-warm); }
@@ -1330,7 +1359,7 @@ td.num, th.num {
         .legend-item .li-dom { color: var(--ink-soft); font-size: 0.8em; margin-left: auto; font-family: "JetBrains Mono", monospace; }
         .small-multiples { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 16px; }
         .sm-card { border: 1px solid var(--line); border-radius: var(--radius-md) ; padding: 14px; background: var(--paper-warm); }
-        .sm-card h4 { font-size: 0.95em; margin-bottom: 2px; color: var(--ink); }
+        .sm-card h4 { font-size: 0.95em; margin-bottom: var(--space-1); color: var(--ink); }
         .sm-card .sm-mbti { font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: var(--accent); margin-bottom: 6px; display: inline-block; }
         .sm-card svg { width: 100%; height: 160px; display: block; }
         .sm-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; font-size: 0.72em; color: var(--ink-soft); }
@@ -1342,7 +1371,7 @@ td.num, th.num {
         .heat-cell:hover { opacity: 0.72; }
         .insight-box {
             background: var(--paper-warm); border-left: 4px solid var(--accent-soft);
-            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 var(--radius-md) var(--radius-md) 0 ; font-size: 0.92em;
+            padding: var(--space-4) 16px; margin-bottom: var(--space-4); border-radius: 0 var(--radius-md) var(--radius-md) 0 ; font-size: 0.92em;
         }
         .insight-box strong { color: var(--accent); font-weight: 700; }
         .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
@@ -1353,7 +1382,7 @@ td.num, th.num {
             
             
             
-            .stage-btn { padding: 6px 12px; font-size: 0.82em; }
+            .stage-btn { padding: 6px var(--space-4); font-size: 0.82em; }
         }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
@@ -1385,7 +1414,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/mbti-evolution.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/mbti-evolution.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -1399,7 +1428,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice">
             <strong>Data note:</strong>Personality drift for the five pilgrimage-team members across four narrative stages is encoded on the eight MBTI dimensions (E/I/S/N/T/F/J/P), each scored 0-10.
             Stage boundaries follow chapters: Formation (Ch. 8-22), Conflict (Ch. 27-58), Harmony (Ch. 59-90), Consummation (Ch. 91-100).
@@ -1465,10 +1494,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/mbti-evolution.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/mbti-evolution.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
 <script>
@@ -1637,7 +1666,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .html(`<div class="tip-title">${char.name} · ${char.mbti}</div>` +
                           `<div>Stage: ${sd.stage} (Ch. ${sd.chapters})</div>` +
                           `<div>Dominant: ${sd.dominant}</div>` +
-                          `<div style="margin-top:4px;color:#e9b885;font-size:0.78rem;">${sd.note}</div>`);
+                          `<div style="margin-top:var(--space-2);color:#e9b885;font-size:0.78rem;">${sd.note}</div>`);
             })
             .on("mousemove", function(e) {
                 const rect = elParent.getBoundingClientRect();

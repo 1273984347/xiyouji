@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """W236-E E5 测试深化·D3.js 数据处理函数单元测试·pytest 风格
 
 本测试模块以 Python 等价逻辑模拟 site/data/*.html 中 D3.js 的核心数据处理流程，
@@ -24,7 +23,6 @@ import json
 from pathlib import Path
 
 import pytest
-
 
 # ---------------------------------------------------------------------------
 # 被测函数：以 Python 实现 D3.js 等价数据处理逻辑

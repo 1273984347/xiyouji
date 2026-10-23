@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """test_check_plan_template.py — 第 48 门禁「计划方案合规」单测（纯逻辑面）
 
 包住 scripts/check_plan_template.py 的判据自证：5 例纯逻辑（新增合规 / 新增缺项必红 /

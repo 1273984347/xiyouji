@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Journey to the West · Flyer (A4, two-sided)</title>
+<style>
+/* ===================================================================
+   取经录 · 宣传单页 A4 竖版双面
+   -------------------------------------------------------------------
+   栅格：12 栏 · 栏距 4mm · 页边 14mm · 内容区 182 × 269mm
+   令牌：宣纸底 #FAF7F0 / 卡面 #FFFFFF / 墨 #23201A / 次墨 #6B6455
+         朱砂 #C8463A / 赭金 #B38F58（与 site/tokens.css 同源）
+   字体：思源宋体 VF（仓内完整字集·相对路径·零外域）→ 系统衬线回退
+   依赖：零外域请求；file:// 双击直开
+   =================================================================== */
+
+@font-face {
+  font-family: 'Noto Serif SC VF';
+  src: url('../fonts/source/NotoSerifSC-VF.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../../site/static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  --bg: #FAF7F0;
+  --paper: #FFFFFF;
+  --paper-warm: #F4F0E5;
+  --ink: #23201A;
+  --ink-soft: #6B6455;
+  --ink-faint: #A79E8C;
+  --accent: #C8463A;
+  --gold: #B38F58;
+  --rule: #E3DCCB;
+  --serif: 'Noto Serif SC VF', 'Source Han Serif SC', 'Noto Serif CJK SC', 'Songti SC', 'STSong', SimSun, serif;
+  --mono: 'JetBrains Mono', 'Cascadia Mono', Consolas, monospace;
+  --gutter: 4mm;
+  --pad: 14mm;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* 页面为 flex 纵向容器：子块一律不参与收缩，否则固定高度的主视觉会被压扁 */
+.page > * { flex: none; }
+
+html, body { background: #E6E1D6; }
+
+body {
+  font-family: var(--serif);
+  color: var(--ink);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  padding: 10mm 0;
+}
+
+.page {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  margin: 0 auto 10mm;
+  padding: var(--pad);
+  background: var(--bg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 3mm 9mm rgba(35, 32, 26, .18);
+}
+
+/* ---- 12 栏栅格 ----
+   列定义用 minmax(0,1fr) 而非 1fr：1fr 的轨道下限是 auto(=min-content)，
+   长 URL / 代码块会把所在轨道撑爆并把邻栏挤成一条（实测 .g7 被压到 40px）。 */
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
+.g3 { grid-column: span 3; } .g4 { grid-column: span 4; } .g5 { grid-column: span 5; }
+.g6 { grid-column: span 6; } .g8 { grid-column: span 8; } .g9 { grid-column: span 9; }
+.g12 { grid-column: span 12; }
+
+/* ============================ 正面 ============================ */
+
+/* L0 页眉 */
+.front-head { display: flex; align-items: center; justify-content: space-between; gap: 8mm; }
+.brand { display: flex; align-items: baseline; gap: 3mm; }
+.brand img { height: 11mm; display: block; }
+.brand-tag {
+  font-size: 9.2pt; letter-spacing: .16em; color: var(--ink-soft);
+  text-transform: none; white-space: nowrap;
+}
+.front-head .seal-note { font-size: 7.4pt; color: var(--ink-faint); letter-spacing: .04em; text-align: right; line-height: 1.5; }
+
+/* L1 主视觉 */
+.hero {
+  margin-top: 5mm;
+  height: 79mm;
+  overflow: hidden;
+  background: var(--bg);
+}
+.hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 62%; display: block; }
+
+/* L1 主张 */
+.claim { margin-top: 8mm; align-items: start; }
+.claim h1 {
+  font-size: 29pt; font-weight: 700; line-height: 1.24; letter-spacing: .01em;
+  margin-bottom: 3mm;
+}
+.claim .sub {
+  font-size: 10.5pt; line-height: 1.85; color: var(--ink-soft); max-width: 108mm;
+}
+.claim .sub b { color: var(--ink); font-weight: 600; }
+
+/* KPI 2×2 */
+.kpis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3.4mm 4mm; }
+.kpi {
+  background: var(--paper); border: 1px solid var(--rule);
+  padding: 3.8mm 3.4mm; border-radius: 2mm;
+}
+.kpi .num {
+  font-family: var(--serif); font-size: 20.5pt; font-weight: 700; line-height: 1.05;
+  color: var(--ink); display: block;
+}
+.kpi .num i { font-style: normal; font-size: 9.5pt; font-weight: 500; color: var(--ink-soft); margin-left: 1mm; }
+.kpi .lbl { font-size: 7.6pt; color: var(--ink-soft); letter-spacing: .04em; margin-top: 1mm; white-space: nowrap; }
+
+/* L3 卖点卡 */
+.features { margin-top: 9mm; }
+.feature {
+  background: var(--paper); border: 1px solid var(--rule); border-radius: 2mm;
+  padding: 5mm 4.6mm 4.2mm; display: flex; flex-direction: column;
+}
+.feature .ico { color: var(--accent); margin-bottom: 2.6mm; }
+.feature .ico svg { width: 7.4mm; height: 7.4mm; display: block; }
+.feature .big {
+  font-size: 17.5pt; font-weight: 700; line-height: 1.2; margin-bottom: 1.8mm;
+}
+.feature .big em { font-style: normal; color: var(--ink-soft); font-size: 9pt; font-weight: 400; margin-left: 1.4mm; }
+.feature p { font-size: 8.4pt; line-height: 1.88; color: var(--ink-soft); }
+.feature .proof {
+  margin-top: auto; padding-top: 3.4mm; border-top: 1px dashed var(--rule);
+  font-size: 7.4pt; color: var(--ink-faint); letter-spacing: .02em; line-height: 1.6;
+}
+
+/* L4 CTA */
+.cta {
+  margin-top: auto;
+  background: #221D16; color: #F3EEE2;
+  border-radius: 2.5mm; padding: 6mm 7mm 5mm;
+  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: var(--gutter);
+  align-items: center;
+}
+.cta h2 { font-size: 13.5pt; font-weight: 700; line-height: 1.35; color: #FBF7EC; }
+.cta .cta-sub { font-size: 8pt; color: #B9AE99; margin-top: 1.6mm; line-height: 1.6; }
+/* CTA 内部是 7:5 两栏（非 12 等分），故覆盖 span 规则并归零轨道下限 */
+.cta > div { grid-column: auto; min-width: 0; }
+.cta .btns { display: flex; flex-direction: column; gap: 2.4mm; min-width: 0; }
+.btn {
+  display: flex; align-items: center; gap: 2.4mm; text-decoration: none;
+  border-radius: 1.6mm; padding: 2.6mm 3.4mm; font-size: 8.6pt; line-height: 1.3;
+  min-width: 0; flex-wrap: wrap;
+}
+.btn-primary { background: var(--accent); color: #FFF8F2; font-weight: 600; }
+.btn-ghost { border: 1px solid #4A4034; color: #E4DBC8; }
+.btn svg { width: 4.6mm; height: 4.6mm; flex: none; }
+.btn .u { font-family: var(--mono); font-size: 7.4pt; opacity: .82; margin-left: auto; min-width: 0; overflow-wrap: anywhere; }
+.cta .legal { font-size: 6.7pt; color: #8E836F; line-height: 1.62; }
+.cta .legal b { color: #C6BBA6; font-weight: 600; }
+
+/* ============================ 背面 ============================ */
+.back-head { align-items: end; }
+.back-head h2 { font-size: 19pt; font-weight: 700; line-height: 1.25; }
+.back-head .lede { font-size: 9pt; color: var(--ink-soft); margin-top: 2mm; line-height: 1.6; }
+.back-head .side-note {
+  font-size: 7.2pt; color: var(--ink-faint); text-align: right; line-height: 1.7;
+  border-left: 1px solid var(--rule); padding-left: 3mm;
+}
+
+/* L1 四资产 */
+.assets { margin-top: 3.6mm; gap: 3mm; }
+.asset {
+  background: var(--paper); border: 1px solid var(--rule); border-radius: 2mm;
+  padding: 3.4mm 4.2mm; position: relative;
+}
+.asset .ico { color: var(--accent); float: left; margin-right: 3mm; }
+.asset .ico svg { width: 6.4mm; height: 6.4mm; display: block; }
+.asset h3 { font-size: 12.5pt; font-weight: 700; line-height: 1.2; margin-bottom: 1.6mm; }
+.asset p { font-size: 8.3pt; line-height: 1.58; color: var(--ink-soft); clear: both; padding-top: 1.8mm; }
+.asset .anchor {
+  margin-top: 2mm; font-size: 7.3pt; color: var(--ink-faint); line-height: 1.5;
+  border-top: 1px dashed var(--rule); padding-top: 1.6mm;
+}
+.asset .anchor code { font-family: var(--mono); font-size: 6.9pt; color: var(--ink-soft); }
+
+/* L2 内容地图 */
+.atlas { margin-top: 3.6mm; }
+.atlas-t {
+  font-size: 8pt; font-weight: 700; letter-spacing: .18em; color: var(--ink-faint);
+  border-bottom: 1px solid var(--rule); padding-bottom: 1.4mm; margin-bottom: 2mm;
+}
+.atlas-item { padding: 1.4mm 0; }
+.atlas-item .n {
+  font-family: var(--mono); font-size: 7pt; color: var(--accent); letter-spacing: .06em;
+}
+.atlas-item h4 { font-size: 10.2pt; font-weight: 700; margin: .8mm 0 1mm; }
+.atlas-item p { font-size: 7.5pt; line-height: 1.58; color: var(--ink-soft); }
+
+/* L3 联系区 */
+.contact { margin-top: 3.6mm; align-items: start; }
+.contact-list { display: flex; flex-direction: column; gap: 2.4mm; }
+.c-item { display: grid; grid-template-columns: 7mm minmax(0, 1fr); gap: 3mm; align-items: start; }
+.c-item > div { min-width: 0; }
+.c-item .ico { color: var(--accent); padding-top: .6mm; }
+.c-item .ico svg { width: 5.4mm; height: 5.4mm; display: block; }
+.c-item h4 { font-size: 9.4pt; font-weight: 700; margin-bottom: .8mm; }
+.c-item p { font-size: 7.6pt; color: var(--ink-soft); line-height: 1.48; }
+.c-item code, .c-item .u {
+  font-family: var(--mono); font-size: 7.2pt; color: var(--ink);
+  background: var(--paper-warm); border: 1px solid var(--rule); border-radius: 1mm;
+  padding: .6mm 1.4mm; display: inline-block; margin-top: 1.2mm;
+}
+.cite {
+  background: var(--paper); border: 1px solid var(--rule); border-radius: 2mm;
+  padding: 2.4mm 3.6mm; margin-top: 2.4mm;
+}
+.cite .cite-h { font-size: 8pt; font-weight: 700; letter-spacing: .1em; color: var(--ink-faint); margin-bottom: 1.8mm; }
+.cite pre {
+  font-family: var(--mono); font-size: 6.9pt; line-height: 1.45; color: var(--ink);
+  white-space: pre-wrap; word-break: break-all;
+}
+.cite .cite-f { font-size: 7pt; color: var(--ink-faint); margin-top: 1.6mm; }
+
+.side-imgs { display: flex; flex-direction: column; gap: 2mm; }
+.side-imgs img { width: 100%; display: block; border-radius: 1.4mm; }
+.lic { margin-top: 1mm; }
+.lic .row { display: flex; gap: 2mm; font-size: 7.4pt; line-height: 1.55; margin-bottom: 1mm; }
+/* 朱砂菱形用 CSS 绘制（字符 ◆ 不在思源宋体子集内，会回退到系统字体） */
+.lic .dot { color: var(--accent); flex: none; width: 1.6mm; height: 1.6mm; background: var(--accent); transform: rotate(45deg); margin-top: .9mm; font-size: 0; }
+.lic b { font-weight: 700; }
+.fine {
+  margin-top: 1.6mm; border-top: 1px solid var(--rule); padding-top: 1.5mm;
+  font-size: 6.8pt; line-height: 1.58; color: var(--ink-faint);
+}
+.fine b { color: var(--ink-soft); font-weight: 700; }
+
+/* L4 页脚 */
+.foot {
+  margin-top: auto; border-top: 1px solid var(--rule); padding-top: 2mm;
+  display: flex; justify-content: space-between; align-items: baseline; gap: 6mm;
+  font-size: 6.8pt; color: var(--ink-faint); letter-spacing: .02em;
+}
+.foot .r { font-family: var(--mono); font-size: 6.6pt; }
+
+/* ============================ EN 版排版微调 ============================
+   英文词长、字面比中文长约 30% ⇒ 中文版的字号/行高在英文版会溢出 A4。
+   本段只作用于英文版（中文版文件不含此段），逐档收紧到零溢出。 */
+.claim h1 { font-size: 24pt; }
+.brand-tag { white-space: normal; font-size: 8.4pt; line-height: 1.35; max-width: 96mm; }
+.brand { gap: 2.4mm; }
+.hero { height: 76mm; }
+.btn { flex-wrap: wrap; row-gap: 1mm; }
+.btn .u { font-size: 6pt; overflow-wrap: anywhere; }
+.claim .sub { font-size: 8.8pt; line-height: 1.56; max-width: 96mm; }
+.kpi { padding: 2.9mm 2.8mm; }
+.kpi .num { font-size: 18pt; }
+.kpi .lbl { font-size: 7pt; white-space: normal; line-height: 1.3; }
+.feature { padding: 3.8mm 3.6mm 3.2mm; }
+.feature .big { font-size: 14.5pt; margin-bottom: 1.2mm; }
+.feature .big em { font-size: 8.2pt; margin-left: 1mm; }
+.feature p { font-size: 7.1pt; line-height: 1.52; }
+.feature .proof { font-size: 6.5pt; line-height: 1.4; padding-top: 2.2mm; }
+.cta { padding: 5mm 5.6mm 4.6mm; }
+.cta h2 { font-size: 12pt; }
+.cta .cta-sub { font-size: 7.4pt; line-height: 1.5; }
+.cta .legal { font-size: 6.3pt; line-height: 1.5; }
+.btn { font-size: 8pt; padding: 2.2mm 3mm; }
+.btn .u { font-size: 6.9pt; }
+.back-head h2 { font-size: 17pt; }
+.back-head .lede { font-size: 8.2pt; line-height: 1.45; }
+.asset { padding: 2.6mm 3.2mm; }
+.asset h3 { font-size: 11.5pt; }
+.asset p { font-size: 6.9pt; line-height: 1.42; padding-top: 1.2mm; }
+.asset .anchor { font-size: 6.1pt; line-height: 1.32; margin-top: 1mm; padding-top: 1mm; }
+.atlas-item { padding: 1.4mm 0; }
+.atlas-item h4 { font-size: 9.4pt; }
+.atlas-item p { font-size: 6.5pt; line-height: 1.36; }
+.c-item h4 { font-size: 8.8pt; }
+.c-item p { font-size: 6.6pt; line-height: 1.36; }
+.c-item code, .c-item .u { font-size: 6.7pt; }
+.cite { padding: 1.9mm 2.6mm; }
+.cite pre { font-size: 5.8pt; line-height: 1.34; }
+.cite .cite-f { font-size: 6.6pt; line-height: 1.4; }
+.lic .row { font-size: 6.5pt; line-height: 1.4; }
+.fine { font-size: 5.8pt; line-height: 1.4; }
+.foot { font-size: 6.3pt; }
+
+
+.atlas-t { padding-bottom: 1.1mm; }
+.contact-list { gap: 2.1mm; }
+/* ============================ 打印 ============================ */
+@page { size: A4 portrait; margin: 0; }
+@media print {
+  html, body { background: #fff; padding: 0; }
+  .page { margin: 0; box-shadow: none; break-after: page; page-break-after: always; }
+  .page:last-of-type { break-after: auto; page-break-after: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== 第 1 面 · 大众读者路径 ==================== -->
+<section class="page front">
+
+  <!-- L0 品牌 -->
+  <div class="front-head">
+    <div class="brand">
+      <img src="../design/logo/logo-mark-light.svg" alt="Journey to the West">
+      <span class="brand-tag">One source, many forms · A digital-humanities reading of Journey to the West</span>
+    </div>
+    <div class="seal-note">Open source · dual licence<br>MIT + CC BY-NC 4.0</div>
+  </div>
+
+  <!-- L1 主视觉 -->
+  <div class="hero">
+    <img src="hero-main-visual.png" alt="Rice-paper ink landscape: a winding pilgrimage path between dense black ridges, one vermilion seal at upper right">
+  </div>
+
+  <!-- L1 主张 + L2 证据 -->
+  <div class="grid claim">
+    <div class="g8">
+      <h1>Read <em>Journey to the West</em><br>— with a map this time</h1>
+      <p class="sub">
+        100 chapters, <b>615 essays</b> on chapters and themes, <b>87 explorable visualisations</b>, <b>133 data dimensions</b> — not another book you cannot finish, but a map you can look up, cite and reproduce.
+      </p>
+    </div>
+    <div class="g4">
+      <div class="kpis">
+        <div class="kpi"><span class="num">615</span><span class="lbl">essays</span></div>
+        <div class="kpi"><span class="num">87</span><span class="lbl">visualisations</span></div>
+        <div class="kpi"><span class="num">133</span><span class="lbl">dimensions</span></div>
+        <div class="kpi"><span class="num">34</span><span class="lbl">analysis scripts</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- L3 卖点 -->
+  <div class="grid features">
+    <div class="feature g4">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V4Z"/><path d="M5 6.5A2.5 2.5 0 0 1 7.5 4H19"/><path d="M9.5 9.5h6M9.5 13h4.5"/></svg></span>
+      <span class="big">Read it all<em>all 100 chapters</em></span>
+      <p>Every one of the 100 chapters is covered, alongside 500+ essays on characters, themes, culture, poetry and personal readings. Looking for one chapter? It is one click away.</p>
+      <span class="proof">100 chapters · 44 essays · 215 character studies · 209 theme essays · 34 culture essays · 13 poems</span>
+    </div>
+    <div class="feature g4">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M5 16.5l4.2-5.1 3.3 2.9L17 8"/><path d="M17 8h-3.6M17 8v3.6"/><circle cx="19.2" cy="5.4" r="1.9"/></svg></span>
+      <span class="big">See it<em>133 dimensions</em></span>
+      <p>Character networks, an 81-trial emotion heatmap, the pilgrimage route, a danmaku museum, conversations with famous readers — the story is no longer only text; it is a set of pages you can click.</p>
+      <span class="proof">Drawn with D3.js / Three.js · produced by 34 analysis pipelines · embedded data fallback, so file:// works too</span>
+    </div>
+    <div class="feature g4">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v10"/><path d="M7.8 9.8 12 14l4.2-4.2"/><path d="M4.5 16v3.2A1.3 1.3 0 0 0 5.8 20.5h12.4a1.3 1.3 0 0 0 1.3-1.3V16"/></svg></span>
+      <span class="big">Take it<em>no friction</em></span>
+      <p>No sign-up, no login, no network: clone the repo and double-click. Or install the desktop app and read offline — installers for three platforms, with auto-updates.</p>
+      <span class="proof">Windows · macOS · Linux installers · pure static, opens from file:// · the desktop app bundles the whole site offline</span>
+    </div>
+  </div>
+
+  <!-- L4 行动 -->
+  <div class="cta">
+    <div class="g7">
+      <h2>Open it and read — no sign-up</h2>
+      <p class="cta-sub">The online site covers all 100 chapters, the character studies, the topic essays and every visualisation; the desktop app keeps the whole site on your machine.</p>
+      <p class="legal" style="margin-top:2.6mm">
+        Code &amp; scripts <b>MIT</b> · text content <b>CC BY-NC 4.0</b> (attribution, non-commercial) · cite via <b>CITATION.cff</b>
+      </p>
+    </div>
+    <div class="g5">
+      <div class="btns">
+        <a class="btn btn-primary" href="https://1273984347.github.io/xiyouji/">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.2"/><path d="M3.8 12h16.4"/><path d="M12 3.8c2.2 2.3 3.4 5.1 3.4 8.2s-1.2 5.9-3.4 8.2c-2.2-2.3-3.4-5.1-3.4-8.2S9.8 6.1 12 3.8Z"/></svg>
+          <span>Read online (recommended)</span><span class="u">1273984347.github.io/xiyouji</span>
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/1273984347/xiyouji/releases/latest">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v10"/><path d="M7.8 9.8 12 14l4.2-4.2"/><path d="M4.5 16v3.2A1.3 1.3 0 0 0 5.8 20.5h12.4a1.3 1.3 0 0 0 1.3-1.3V16"/></svg>
+          <span>Desktop app (Win / mac / Linux)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 第 2 面 · 学术与机构路径 ==================== -->
+<section class="page back">
+
+  <!-- L0 标题 -->
+  <div class="grid back-head">
+    <div class="g8">
+      <h2>For researchers and institutions: four hard assets</h2>
+      <p class="lede">Citable · Verifiable · Reproducible · Reviewable — each one points at a path you can open, not a slogan.</p>
+    </div>
+    <div class="g4 side-note">
+      Journey to the West flyer · A4 · Back<br>
+      github.com/1273984347/xiyouji
+    </div>
+  </div>
+
+  <!-- L1 四资产 -->
+  <div class="grid assets">
+    <div class="asset g6">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.8h12v16.4l-2.6-1.8-3.4 1.8-3.4-1.8L6 20.2V3.8Z"/><path d="M9.4 8.4h5.2M9.4 11.8h5.2M9.4 15.2h3"/></svg></span>
+      <h3>Citable</h3>
+      <p>A formal citation format, an academic bibliography, and a 500-year history of interpretation. You never have to cite a site because someone said it was good.</p>
+      <div class="anchor">
+        <code>CITATION.cff</code> (BibTeX / APA / Chicago) · academic paper index · criticism history (9 critics · 500 years of interpretation · three teachings · inner alchemy)
+      </div>
+    </div>
+    <div class="asset g6">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.4 15.4 20 20"/><path d="M8 10.9l2 2 3.6-3.8"/></svg></span>
+      <h3>Verifiable</h3>
+      <p>Every quoted line is matched character-by-character against the full text; an unmatched quote blocks the commit. An AI cannot invent a quote here, and the gates do not let it through.</p>
+      <div class="anchor">
+        Hard quote verification + <code>49</code> automated gates · per-file provenance (source / model / date / verification) · the gates guarantee fidelity, not judgement: they prove nothing was invented, not that it is worth reading
+      </div>
+    </div>
+    <div class="asset g6">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.4 8.6 4.2 12l3.2 3.4"/><path d="M16.6 8.6 19.8 12l-3.2 3.4"/><path d="M13.8 5.4 10.2 18.6"/></svg></span>
+      <h3>Reproducible</h3>
+      <p>All analysis scripts and datasets are open, so anyone can re-run them. Every artefact on the site derives from a single source of truth and can be compared byte by byte.</p>
+      <div class="anchor">
+        <code>scripts/</code> 34 analysis classes (A–AH) · <code>dataset/</code> and <code>scripts/output/data/</code> · one-directional: source → artefact
+      </div>
+    </div>
+    <div class="asset g6">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.6" cy="8" r="2.7"/><path d="M3.6 19.2c0-2.8 2.2-4.6 5-4.6s5 1.8 5 4.6"/><path d="M15.2 6.1a2.5 2.5 0 0 1 0 4.8"/><path d="M17 14.9c2 .6 3.4 2.1 3.4 4.3"/></svg></span>
+      <h3>Reviewable</h3>
+      <p>AI agents draft under document skeletons, term rules and track labels; a human editor reviews every file before it lands. The division of labour is written down, not hidden.</p>
+      <div class="anchor">
+        Five tracks (general / academic / teaching / personal / cross-disciplinary) · per-file provenance and verification status · final responsibility stays with the editor
+      </div>
+    </div>
+  </div>
+
+  <!-- L2 内容地图 -->
+  <div class="atlas">
+    <div class="atlas-t">Contents · eight collections</div>
+    <div class="grid">
+      <div class="atlas-item g3"><span class="n">01</span><h4>Chapters</h4><p>Original text + deep readings + notes</p></div>
+      <div class="atlas-item g3"><span class="n">02</span><h4>Characters</h4><p>Protagonists · Guanyin · monster lineages · women</p></div>
+      <div class="atlas-item g3"><span class="n">03</span><h4>Themes</h4><p>Heaven · 81 trials · the true and false Monkey King</p></div>
+      <div class="atlas-item g3"><span class="n">04</span><h4>Culture</h4><p>Composition history · Buddhism &amp; Taoism · Ming allegory · editions</p></div>
+      <div class="atlas-item g3"><span class="n">05</span><h4>Poetry</h4><p>Poems and couplets from the original</p></div>
+      <div class="atlas-item g3"><span class="n">06</span><h4>Essays</h4><p>44 personal readings from a modern angle</p></div>
+      <div class="atlas-item g3"><span class="n">07</span><h4>Method</h4><p>Decision models · role thinking · metacognitive maps</p></div>
+      <div class="atlas-item g3"><span class="n">08</span><h4>Visualisations</h4><p>87 interactive pages in D3 / Three.js</p></div>
+    </div>
+  </div>
+
+  <!-- L3 联系与行动 -->
+  <div class="grid contact">
+    <div class="g8">
+      <div class="contact-list">
+        <div class="c-item">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.2"/><path d="M3.8 12h16.4"/><path d="M12 3.8c2.2 2.3 3.4 5.1 3.4 8.2s-1.2 5.9-3.4 8.2c-2.2-2.3-3.4-5.1-3.4-8.2S9.8 6.1 12 3.8Z"/></svg></span>
+          <div>
+            <h4>Online site</h4>
+            <p>Nothing to install — open and read. The homepage reaches any chapter, character, topic or visualisation.</p>
+            <code class="u">https://1273984347.github.io/xiyouji/</code>
+          </div>
+        </div>
+        <div class="c-item">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v10"/><path d="M7.8 9.8 12 14l4.2-4.2"/><path d="M4.5 16v3.2A1.3 1.3 0 0 0 5.8 20.5h12.4a1.3 1.3 0 0 0 1.3-1.3V16"/></svg></span>
+          <div>
+            <h4>Desktop download</h4>
+            <p>Installers for Windows, macOS and Linux; it checks for updates on launch and reads everything offline.</p>
+            <code class="u">github.com/1273984347/xiyouji/releases/latest</code>
+          </div>
+        </div>
+        <div class="c-item">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.2 5.4h15.6v10.2H9.4L5 19.4V5.4Z"/><path d="M8 9h8M8 12h5"/></svg></span>
+          <div>
+            <h4>Feedback &amp; corrections</h4>
+            <p>Found an error, or want to argue with a reading? Open an issue — every one of them is read.</p>
+            <code class="u">github.com/1273984347/xiyouji/issues</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="cite">
+        <div class="cite-h">Citation format · CITATION.cff</div>
+        <pre>@misc{xiyouji,
+  title  = {Journey to the West: One Source, Many Forms},
+  author = {The Journey to the West Project},
+  year   = {2026},
+  url    = {https://1273984347.github.io/xiyouji/}
+}</pre>
+        <div class="cite-f">Text is CC BY-NC 4.0 (attribution, non-commercial) · cite and adapt per CITATION.cff</div>
+      </div>
+    </div>
+
+    <div class="g4">
+      <div class="side-imgs">
+        <img src="../../site/static/images/hero-01-xihai-yunhai.webp" alt="Ink landscape of the western sea: the pilgrim party crossing a ridge">
+        <img src="../../site/static/images/ink-mountains-hero.webp" alt="Dense ink ridges with a golden path">
+      </div>
+      <div class="lic">
+        <div class="row"><span class="dot">◆</span><span><b>Source code &amp; project docs</b> · MIT License</span></div>
+        <div class="row"><span class="dot">◆</span><span><b>Text content &amp; original readings</b> · CC BY-NC 4.0</span></div>
+        <div class="row"><span class="dot">◆</span><span>The original text is in the public domain; quoted external material remains © its authors</span></div>
+      </div>
+      <div class="fine">
+        <b>Provenance &amp; licence</b>: content is drafted by AI agents and reviewed file by file by a human. Automated gates secure what machines can judge (quotes are real, structure is consistent, terms are consistent); they do not certify judgement — whether an argument is worth reading is the editor’s call.
+      </div>
+    </div>
+  </div>
+
+  <!-- L4 页脚 -->
+  <div class="foot">
+    <span>Journey to the West flyer · A4 two-sided · 2026-10-23 (W896) · source: written by hand (drafted by an agent)</span>
+    <span class="r">1273984347.github.io/xiyouji</span>
+  </div>
+</section>
+
+</body>
+</html>

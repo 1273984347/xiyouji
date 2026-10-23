@@ -1,0 +1,52 @@
+name: CI Sim
+
+# W897：把「CI 侧预演」接进 CI —— 在**干净检出**里跑关键门禁，产出「CI 侧结论」。
+#
+# 背景：多 Agent 共享工作树时，「本地门禁红 ≠ CI 门禁红」（本地工作树含并行批的
+# 未落库件）。此前只能靠人手工建 worktree 预演（易忘、易漏清）；
+# 本 workflow 把它固化为**每次 PR 自动跑**，让「本地红/CI 绿」从人工推理变成机器结论。
+#
+# 范围：只跑 `scripts/ci_sim.py` 内置的 7 项关键门禁（纯 Python·不需浏览器与
+# node_modules）；**不跑**全量 verify_delivery（其第 43/49 段需 Playwright 浏览器·
+# 由 ci.yml 的既有 job 覆盖）。
+
+on:
+  pull_request:
+    branches: [main, dev]
+  push:
+    branches: [dev]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-sim-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  ci-sim:
+    name: CI-side simulation (clean checkout gates)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          # ci_sim 的预演需要完整历史（worktree 检出 + 台账/索引口径对拍）⇒ 取全量历史
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.12"
+
+      # stats.py 的 pytest_collected 键是 fail-closed 实测（无 pytest 即判红），
+      # 且 pytest --collect-only 在缺包环境会以 rc=2 失败（收集期 import 错误）
+      # ⇒ 须装**全量测试依赖**（scripts/requirements.txt 含 pytest / PyYAML /
+      #    Pillow / markdown / jieba），只装 pytest 会让收集期报错
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r scripts/requirements.txt
+
+      - name: CI-side simulation
+        run: python scripts/ci_sim.py
