@@ -1,0 +1,22 @@
+{
+  "batch": "W897",
+  "date": "2026-10-23",
+  "title": "W897 协作防护修复（preflight touches 分隔符根修 + ci_sim 接进 CI）",
+  "desc": "preflight touches 分隔符根修 兼容五种分隔符 单测 11 例 ci_sim 接进 CI workflow 每次 PR 自动出 CI 侧预演结论",
+  "head_entry": "2026-10-23（W897 协作防护修复批）",
+  "head_sentence": "把「撞面检查恒空假绿」修成真能拦住：分隔符兼容 + CI 每次 PR 自动出 CI 侧结论",
+  "changelog_body": "\n\n> **来源**：用户 2026-10-23 批准「A 修 preflight 的 touches 分隔符 bug」+「C 把 ci_sim.py 接进 CI workflow」。\n> - **文件**：scripts/preflight_check.py、tests/unit/test_preflight_touches.py、.github/workflows/ci-sim.yml、.github/workflows/README.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、pytest.ini、docs/00-导读/W批次编号对账表.md。\n> - **病根（实测）**：`preflight_check.py` 的台账 touches 列解析与命令行 `--touches` 解析**都只按逗号切分**，而台账自 W739 起实际用「·」分隔 ⇒ 整串被当成一项 ⇒ **交集检查恒空假绿** ⇒ W896 批实测的「PREFLIGHT PASS·无交集」是**无效结论**，那两次撞面实为人工核对发现而非机器拦住。\n> - **修法**：新增 `_split_touches()` 统一切分，兼容 `,` `，` `、` `·` `•` 五种分隔符（**不含空白**——仓内文件名不含空格，避免把文件名切碎）；台账列解析与命令行解析**同源**走该函数。\n> - **配套单测**：新增 `tests/unit/test_preflight_touches.py`（11 例）锁定多分隔符切分 / 台账列解析 / 占位符归一 / 交集真能报出且不误报。\n> - **ci_sim 接进 CI**：新增 `.github/workflows/ci-sim.yml`（PR 与 push dev 触发·干净检出跑 `scripts/ci_sim.py` 的 7 项关键门禁·纯 Python 不需浏览器与 node_modules·fetch-depth 0 取全量历史）⇒ 「本地红 vs CI 绿」从人工推理变成机器结论。\n> - **验收**：修复后 preflight 的 NOTE 行能把本批 touches 正确切成 5 项（修复前整串当 1 项）·单测 11 例全过 ·第 42 门禁根级脚本覆盖 0 FAIL（两个新脚本各有测试面引用）。",
+  "milestone_block": "- **W897 协作防护修复批（撞面防护从假绿到真拦）**：\n  - preflight touches 分隔符根修：台账侧与命令行侧同源走 `_split_touches()`（兼容 `,` `，` `、` `·` `•`）\n  - 新增单测 `tests/unit/test_preflight_touches.py`（11 例·锁定多分隔符 / 台账列解析 / 交集真能报出且不误报）\n  - `ci-sim.yml` 接进 CI：每次 PR 在干净检出里跑 7 项关键门禁 ⇒ CI 侧结论自动化\n  - 此前 W896 批实测的「preflight 无交集」结论据此作废（实为解析失效）",
+  "agents_note": "二〇二六年十月二十三日（W897）修了一处让整套协作防护失效的 bug：批次开工前置核验器的 touches 解析只按逗号切分，而台账里一直是用中点分隔的，整串被当成一项，于是交集检查恒空——上一批跑出来的「无交集」其实什么都没查。修法是抽一个统一函数，兼容逗号、中文逗号、顿号、中点、项目符号五种分隔符，但不含空白，免得把文件名本身切碎；再加 11 条单测把行为钉住。同时把 CI 侧预演接进了 CI，以后每次 PR 都会在干净检出里跑一遍关键门禁，本地红还是 CI 红不用再靠人推理。",
+  "file_index_rows": [
+    "| scripts/preflight_check.py | W897 | touches 分隔符根修（`_split_touches` 兼容五种分隔符·台账与命令行同源） |",
+    "| tests/unit/test_preflight_touches.py | W897 | 新增单测 11 例（多分隔符 / 台账列解析 / 占位符归一 / 交集判定） |",
+    "| .github/workflows/ci-sim.yml | W897 | CI 侧预演 workflow（PR + push dev·干净检出跑 7 项关键门禁） |",
+    "| .github/workflows/README.md | W897 | 里程碑行上限随现役号同步 |",
+    "| scripts/output/stats.json | W897 | pytest_collected 随新增单测刷新 |",
+    "| pytest.ini | W897 | pytest_collected 标记同步 |",
+    "| docs/00-导读/W批次编号对账表.md | W897 | 认领行与收官回填 |",
+    "| CHANGELOG.md | W897 | W897 段 |",
+    "| scripts/output/file-index.md | W897 | 同批段回写 |"
+  ]
+}

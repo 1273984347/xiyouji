@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W896），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W898），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -18,6 +18,25 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 
+### W898（2026-10-23）：宣传物料投放接线与派生（README 物料小节 + 站内入口 + 英文版单页 + 社媒分享图指引 + 规范受管资产登记）
+
+> **来源**：用户 2026-10-23 批准「D 宣传单页投放接线（README 物料说明 / 站内入口 / 英文版 / 社媒长图）」。
+> - **文件**：assets/promo/xiyouji-flyer-a4-en.html、assets/promo/output/xiyouji-flyer-a4-en.pdf、assets/promo/output/xiyouji-flyer-a4-en-front.png、assets/promo/output/xiyouji-flyer-a4-en-back.png、assets/promo/README.md、assets/promo/index.md、assets/promo/output/index.md、scripts/_w892_export_flyer.mjs、README.md、site/index.html、docs/00-导读/文档规范.md、docs/00-导读/W批次编号对账表.md。
+> - **README 物料小节**：新增「📄 宣传单页（A4 双面 · 可打印可转发）」——中英双份的 PDF 打印稿 / 分享图 / 可编辑源三列表 + 重出命令 + 社媒分享图指引（站内已有 15 张 1200×630 分享图 `og-*.webp` 可直接取用）。
+> - **站内入口**：`site/index.html` 的「看数据与工具」区新增一行指向**仓库**物料目录的链接——Pages 只发布 `site/` 目录，站内不可用相对路径，故走 GitHub 仓 URL；纯 HTML 改动不动内联脚本 ⇒ CSP 哈希零漂移。
+> - **英文版单页**：新增 `xiyouji-flyer-a4-en.html` + 双面 PDF + 正反 PNG；导出脚本加 `--en` 档（同一脚本同一栅格，仅换文案）。英文词长、字面比中文长约 30%，中文版字号在英文版必溢出 ⇒ 单独一段 EN 版排版微调（四轮收紧：页眉 tagline 改可换行限宽、卖点卡与资产卡字号行高逐档收紧、内容地图与联系区行距压缩）⇒ **两页 0px 溢出**；并做三处本地化修正：纯图形 logo 替中文字标、KPI 去中文单位（615 essays / 87 visualisations / 133 dimensions / 34 analysis scripts）、两张配图 alt 全译。
+> - **规范受管资产登记**：`docs/00-导读/文档规范.md` §11.2 受管文件清单新增 `assets/promo/` 一行（禁止删除/重命名·删除后 README 与站内入口变死链）。
+> - **验收**：中文版与英文版**两页均 0px 溢出**（探针：末子元素底边 − 内容底边）·导出零外域请求 ·思源宋体真加载 ·PDF 实测 2 页 A4（中文版 6.27 MB / 英文版 4.69 MB）·PNG 1240×1754（150dpi）·CSP 856 页 0 漂移 ·全仓链接 20759 个 0 broken ·CSS 结构平衡通过。
+> - **踩坑记录**：EN 版第一轮溢出 270px/266px（英文长句叠行）⇒ 修法不是继续压字号而是先修**宽度根因**（页眉 tagline 的 `white-space: nowrap` 使整列溢出 82px）；第二轮仍高 57/131px ⇒ 再逐档收紧到零溢出。教训：**先分「宽度溢出」与「高度溢出」两类**，宽度问题不修则高度怎么压都不对。
+### W897（2026-10-23）：协作防护修复（preflight touches 分隔符根修 + ci_sim 接进 CI）
+
+> **来源**：用户 2026-10-23 批准「A 修 preflight 的 touches 分隔符 bug」+「C 把 ci_sim.py 接进 CI workflow」。
+> - **文件**：scripts/preflight_check.py、tests/unit/test_preflight_touches.py、.github/workflows/ci-sim.yml、.github/workflows/README.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、pytest.ini、docs/00-导读/W批次编号对账表.md。
+> - **病根（实测）**：`preflight_check.py` 的台账 touches 列解析与命令行 `--touches` 解析**都只按逗号切分**，而台账自 W739 起实际用「·」分隔 ⇒ 整串被当成一项 ⇒ **交集检查恒空假绿** ⇒ W896 批实测的「PREFLIGHT PASS·无交集」是**无效结论**，那两次撞面实为人工核对发现而非机器拦住。
+> - **修法**：新增 `_split_touches()` 统一切分，兼容 `,` `，` `、` `·` `•` 五种分隔符（**不含空白**——仓内文件名不含空格，避免把文件名切碎）；台账列解析与命令行解析**同源**走该函数。
+> - **配套单测**：新增 `tests/unit/test_preflight_touches.py`（11 例）锁定多分隔符切分 / 台账列解析 / 占位符归一 / 交集真能报出且不误报。
+> - **ci_sim 接进 CI**：新增 `.github/workflows/ci-sim.yml`（PR 与 push dev 触发·干净检出跑 `scripts/ci_sim.py` 的 7 项关键门禁·纯 Python 不需浏览器与 node_modules·fetch-depth 0 取全量历史）⇒ 「本地红 vs CI 绿」从人工推理变成机器结论。
+> - **验收**：修复后 preflight 的 NOTE 行能把本批 touches 正确切成 5 项（修复前整串当 1 项）·单测 11 例全过 ·第 42 门禁根级脚本覆盖 0 FAIL（两个新脚本各有测试面引用）。
 ### W896（2026-10-23）：门禁实算口径改造（磁盘扫描 → Git 索引·目标提交树）+ ci_sim 预演工具
 
 > **来源**：用户 2026-10-23「批准」——指认 T-15 §十 提出的两条根修方案（① 门禁实算按目标提交树 ② 新增 `scripts/ci_sim.py`）。本批为该根修的施工批（**原拟 W894·因并行 W895 先落地·按「先落地者保留」让号为 W896**）。
