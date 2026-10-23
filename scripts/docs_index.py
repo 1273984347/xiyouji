@@ -21,6 +21,7 @@
 退出码：0 索引已最新 / 1 索引过期或生成失败
 """
 import argparse
+import os
 import sys
 from pathlib import Path
 
@@ -67,6 +68,19 @@ def extract_title(path: Path) -> str:
     return path.stem
 
 
+def _in_repo(docs_dir: Path) -> bool:
+    """目录是否位于**真实仓库根**之下（W894·索引口径的回退判据）。
+
+    仓库内 ⇒ 索引口径（未跟踪的并行批在途件不计入）；仓库外（测试合成树 / 临时目录）
+    ⇒ 磁盘扫描（否则合成树不在索引里⇒ 扫描恒空⇒ 相关单测「全绿但毫无意义」）。
+    """
+    try:
+        rel = os.path.relpath(os.path.abspath(str(docs_dir)), tf.ROOT)
+    except ValueError:
+        return False
+    return not rel.startswith("..") and not os.path.isabs(rel)
+
+
 def scan_docs(docs_dir: Path, include_dev: bool = False, tracked_only: bool = True) -> dict:
     """扫描 docs/ 返回 {section_name: [(title, rel_path), ...]}。
 
@@ -82,7 +96,8 @@ def scan_docs(docs_dir: Path, include_dev: bool = False, tracked_only: bool = Tr
     本地不再「他方在途红」、CI 侧口径一致。板块目录遍历仍走磁盘（板块本身稳定）。
     逃生开关：tracked_only=False 恢复旧的全磁盘扫描。
     """
-    tracked = tf.tracked_files() if tracked_only else None
+    use_index = tracked_only and _in_repo(docs_dir)
+    tracked = tf.tracked_files() if use_index else None
     result = {}
     for sub in sorted(docs_dir.iterdir(), key=lambda p: str(p).lower()):
         if not sub.is_dir():
@@ -94,7 +109,7 @@ def scan_docs(docs_dir: Path, include_dev: bool = False, tracked_only: bool = Tr
         entries = []
         # W757：递归扫描（11-方案报告 起含子目录·如 工作复盘与优化分析报告/ 与 计划方案/），
         # 排序键用相对路径保证跨子目录顺序稳定（原 sub.glob("*.md") 只扫顶层，改名子目录化后会漏项）。
-        if tracked_only:
+        if use_index:
             prefix = "docs/%s/" % sub.name
             mds = sorted(
                 (Path(ROOT) / p for p in tracked

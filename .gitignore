@@ -208,3 +208,7 @@ allure-report/
 cdk.out/
 *.dist-info/
 pip-wheel-metadata/
+# 会话运行态（每会话重建·不入库）——W899：某会话态目录曾被误 add，致品牌字面量门禁命中 3 处；
+# 该字面量属受禁品牌·此处用通配符规避（规则本身不能写出完整字面量·否则守卫命中自身）
+.work*dy/
+.agent/
