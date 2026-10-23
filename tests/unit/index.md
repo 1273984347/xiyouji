@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（32）
+## 文件（33）
 
 ### Python 脚本
 
@@ -33,6 +33,7 @@
 - `test_path_guard.py`
 - `test_perf_optimize.py`
 - `test_preflight_check.py`
+- `test_preflight_touches.py`
 - `test_rag_enhance.py`
 - `test_rag_fusion.py`
 - `test_release_prep.py`
