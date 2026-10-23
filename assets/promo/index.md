@@ -11,10 +11,11 @@
 
 - `output/`
 
-## 文件（2）
+## 文件（3）
 
 ### HTML 页面
 
+- `xiyouji-flyer-a4-en.html`
 - `xiyouji-flyer-a4.html`
 
 ### 样式与资源
