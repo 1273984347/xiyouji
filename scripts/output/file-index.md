@@ -11,6 +11,29 @@
 ---
 
 
+## W893 四画幅素材图成套批（2026-10-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/hero-07-liudao-lingyun.webp | W893 | 新增：Hero 素材 07/09·六盘山岭云海（山脊云海+七人单行+朱砂小旗·净空带 473px） |
+| site/static/images/hero-08-yunhai-chengqiao.webp | W893 | 新增：Hero 素材 08/09·云海石拱桥（云海+石桥+白马与僧影+朱砂彩带·净空带 451px） |
+| site/static/images/hero-09-shijue-wangluo.webp | W893 | 新增：Hero 素材 09/09·石觉网罗（根须网+朱砂节点+赭金连接弧·净空带 485px） |
+| site/static/images/card-25-santiebaigujing.webp | W893 | 新增：卡片封面 25/27·三打白骨精（石窟+骷髅剪影+朱砂布条·净空带 378px） |
+| site/static/images/card-26-wukong-jingu.webp | W893 | 新增：卡片封面 26/27·悟空金箍棒（背身持棒+虎纹围裙+朱砂绦·净空带 392px） |
+| site/static/images/card-27-rejiao-fenxi.webp | W893 | 新增：卡片封面 27/27·热力分析（情感点阵+朱砂色带+赭金散点·净空带 404px） |
+| site/static/images/post-07-gu-shan-yingxue.webp | W893 | 新增：竖版长图 07/09·孤山映雪（古峰+崖松+朱砂塔灯·净空带 456px） |
+| site/static/images/post-08-tangseng-chanshi.webp | W893 | 新增：竖版长图 08/09·唐僧禅释（背身持锡杖+背光晕+朱砂念珠·净空带 534px） |
+| site/static/images/post-09-bajiaoshan-zhaoyun.webp | W893 | 新增：竖版长图 09/09·八戒造云（背身扛耙+朱砂领结·净空带 487px） |
+| site/static/images/og-13-changgui-shanmen.webp | W893 | 新增：分享图 13/15·残破山门（断门+荒草薄雾+朱砂经幡·净空带 169px） |
+| site/static/images/og-14-shaseng-denggao.webp | W893 | 新增：分享图 14/15·沙僧登高（石矶+苍鹭展翅+朱砂浮标·净空带 253px） |
+| site/static/images/og-15-shijian-liejian.webp | W893 | 新增：分享图 15/15·时间刻痕（刻痕序列+朱砂刻度+赭金标记·净空带 264px） |
+| scripts/_w893_gen_args.py | W893 | 十二张生成参数（锚点沿用 W882 改写版·四画幅各三张·拉丁方主题） |
+| scripts/_w893_finalize.py | W893 | 定稿脚本（覆盖缩放 + 保主体/保净空带裁切 + WebP 落盘） |
+| scripts/_w893_verify.py | W893 | 五道量化验收脚本（尺寸/净空带/主体墨量/朱砂/规则线） |
+| scripts/output/_w893_spec.json | W893 | 本批 spec 十字段（CHANGELOG 版段递延·待顶段推进后补写） |
+| docs/11-方案报告/计划方案/T16-任务计划执行与经验沉淀报告-2026-10-23.md | W893 | 新增：T-16 框架报告（四画幅素材图成套批） |
+| docs/00-导读/W批次编号对账表.md | W893 | 认领行与收官回填 |
+
 ## W892 宣传单页批（2026-10-23）
 
 | 文件 | W | 说明 |

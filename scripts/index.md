@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（256）
+## 文件（260）
 
 ### Markdown 文档
 
@@ -155,6 +155,10 @@
 - `_w888_wire.py`
 - `_w891_en_migrate.py`
 - `_w891_en_survey.py`
+- `_w893_finalize.py`
+- `_w893_finalize_ledger.py`
+- `_w893_gen_args.py`
+- `_w893_verify.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
