@@ -29,18 +29,18 @@
 
 ## 反向：W → stats key 变更（新→旧）
 
-### W894（2026-10-23 20:46:57）
+### W896（2026-10-23 20:46:57）
 - inline_css_pages: 850 → 330
 
-### W894（2026-10-23）
-- 注：W894 门禁实算口径改造（磁盘扫描→Git 索引）：新增 scripts/tracked_files.py 与 scripts/ci_sim.py ⇒ pytest 收集数 +1。inline_css_pages 本批不动（其 850→330 漂移属并行 W895 在途改动·按 CI-HEAD 实况保持 850）。
+### W896（2026-10-23）
+- 注：W896 门禁实算口径改造（磁盘扫描→Git 索引）：新增 scripts/tracked_files.py 与 scripts/ci_sim.py ⇒ pytest 收集数 +1。inline_css_pages 本批不动（其 850→330 漂移属并行 W895 在途改动·按 CI-HEAD 实况保持 850）。
 - pytest_collected: 836 → 836
 
-### W894（2026-10-23）
-- 注：W894 门禁实算口径改造（磁盘扫描→Git 索引）：新增 scripts/tracked_files.py 与 scripts/ci_sim.py ⇒ pytest 收集数 +1。inline_css_pages 本批不动（其 850→330 漂移属并行 W895 在途改动·按 CI-HEAD 实况保持 850）。
+### W896（2026-10-23）
+- 注：W896 门禁实算口径改造（磁盘扫描→Git 索引）：新增 scripts/tracked_files.py 与 scripts/ci_sim.py ⇒ pytest 收集数 +1。inline_css_pages 本批不动（其 850→330 漂移属并行 W895 在途改动·按 CI-HEAD 实况保持 850）。
 - pytest_collected: 835 → 836
 
-### W894（2026-10-23 20:30:21）
+### W896（2026-10-23 20:30:21）
 - inline_css_pages: 330 → 850
 - pytest_collected: 834 → 835
 

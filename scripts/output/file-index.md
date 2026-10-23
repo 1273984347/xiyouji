@@ -11,25 +11,25 @@
 ---
 
 
-## W894 门禁实算口径改造（2026-10-23）
+## W896 门禁实算口径改造（2026-10-23）
 
 | 文件 | W | 说明 |
 |---|---|---|
-| scripts/tracked_files.py | W894 | 目标提交树口径单一事实源（tracked_files / tracked_in_dir / tracked_subdirs / is_tracked） |
-| scripts/ci_sim.py | W894 | CI 侧预演工具（worktree 干净检出 + 关键门禁 + 自动清理·只读零风险） |
-| scripts/check_folder_docs.py | W894 | 第 45 槽实算改索引口径 + 三态判据 + 计数自洽 + 口径开关 |
-| scripts/gen_folder_docs.py | W894 | 生成器同步改索引口径 + 磁盘口径平行实现（自测与降级用） |
-| scripts/stats.py | W894 | 全部 glob 计数改索引口径（目标提交树实算） |
-| scripts/docs_index.py | W894 | scan_docs 默认 tracked_only（写盘与门禁比对共用同一函数） |
-| scripts/output/stats.json | W894 | report_docs 53→54·pytest_collected 835→836·inline_css_pages 归实况 330 |
-| scripts/output/stats-changelog.json | W894 | W894 变更史登记 |
-| scripts/output/stats-index.md | W894 | 反向索引同步 |
-| scripts/index.md | W894 | 目录清单同步（新增两脚本） |
-| docs/INDEX.md | W894 | 文档索引重建（745 篇·索引口径） |
-| docs/11-方案报告/计划方案/T17-任务计划执行与经验沉淀报告-2026-10-23.md | W894 | 框架第十七次执行（口径改造 + AC 表 + 3 条经验） |
-| docs/00-导读/W批次编号对账表.md | W894 | 认领行与收官回填 |
-| CHANGELOG.md | W894 | W894 段 |
-| scripts/output/file-index.md | W894 | 同批段回写 |
+| scripts/tracked_files.py | W896 | 目标提交树口径单一事实源（tracked_files / tracked_in_dir / tracked_subdirs / is_tracked） |
+| scripts/ci_sim.py | W896 | CI 侧预演工具（worktree 干净检出 + 关键门禁 + 自动清理·只读零风险） |
+| scripts/check_folder_docs.py | W896 | 第 45 槽实算改索引口径 + 三态判据 + 计数自洽 + 口径开关 |
+| scripts/gen_folder_docs.py | W896 | 生成器同步改索引口径 + 磁盘口径平行实现（自测与降级用） |
+| scripts/stats.py | W896 | 全部 glob 计数改索引口径（目标提交树实算） |
+| scripts/docs_index.py | W896 | scan_docs 默认 tracked_only（写盘与门禁比对共用同一函数） |
+| scripts/output/stats.json | W896 | report_docs 53→54·pytest_collected 835→836·inline_css_pages 归实况 330 |
+| scripts/output/stats-changelog.json | W896 | W896 变更史登记 |
+| scripts/output/stats-index.md | W896 | 反向索引同步 |
+| scripts/index.md | W896 | 目录清单同步（新增两脚本） |
+| docs/INDEX.md | W896 | 文档索引重建（745 篇·索引口径） |
+| docs/11-方案报告/计划方案/T17-任务计划执行与经验沉淀报告-2026-10-23.md | W896 | 框架第十七次执行（口径改造 + AC 表 + 3 条经验） |
+| docs/00-导读/W批次编号对账表.md | W896 | 认领行与收官回填 |
+| CHANGELOG.md | W896 | W896 段 |
+| scripts/output/file-index.md | W896 | 同批段回写 |
 
 ## W893 四画幅素材图成套批（2026-10-23）
 

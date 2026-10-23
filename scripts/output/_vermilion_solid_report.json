@@ -36,17 +36,11 @@
    }
   },
   "data/_shell.html": {
-   "measured": 1,
+   "measured": 0,
    "exempted": 0,
-   "nonExempt": 1,
+   "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "span.seal": {
-     "measured": 1,
-     "exempted": 0,
-     "nonExempt": 1
-    }
-   }
+   "perCls": {}
   },
   "data/aesthetics.html": {
    "measured": 6,
@@ -1772,17 +1766,11 @@
    }
   },
   "en/academic-papers.html": {
-   "measured": 1,
+   "measured": 0,
    "exempted": 0,
-   "nonExempt": 1,
+   "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 0,
-     "nonExempt": 1
-    }
-   }
+   "perCls": {}
   },
   "en/aesthetics.html": {
    "measured": 8,
@@ -1831,17 +1819,11 @@
    }
   },
   "en/bestiary.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/business-model.html": {
    "measured": 3,
@@ -1924,17 +1906,11 @@
    }
   },
   "en/chapters-map.html": {
-   "measured": 1,
+   "measured": 0,
    "exempted": 0,
-   "nonExempt": 1,
+   "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 0,
-     "nonExempt": 1
-    }
-   }
+   "perCls": {}
   },
   "en/character-appearance.html": {
    "measured": 1,
@@ -1950,30 +1926,18 @@
    }
   },
   "en/character-bailongma.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/character-bajie.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/character-dynamic-network.html": {
    "measured": 2,
@@ -2058,56 +2022,32 @@
    }
   },
   "en/character-shaseng.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/character-tangseng.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/character-wukong.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/characters.html": {
-   "measured": 1,
+   "measured": 0,
    "exempted": 0,
-   "nonExempt": 1,
+   "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 0,
-     "nonExempt": 1
-    }
-   }
+   "perCls": {}
   },
   "en/chart-design.html": {
    "measured": 9,
@@ -2394,472 +2334,256 @@
    }
   },
   "en/essay-ai-era.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-buddhist-chan.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-chapter-couplets.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-character-fu.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-cipai-linjiangxian.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-cipai-mantingfang.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-cipai-shuidiaogetou.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-cipai-xijiangyue.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-composition-origins.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-divine-bureaucracy.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-folk-belief.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-historical-xuanzang.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-information-cocoon.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-ming-economy.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-ming-examination.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-ming-garrison.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-ming-intellectual-history.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-ming-judiciary.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-ming-literary-thought.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-ming-maritime-ban.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-ming-metaphor.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-ming-military.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-ming-politics.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-ming-religion.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-ming-social-customs.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-modern-management.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-original-poetry.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-poetry-imagery.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-poetry-opening.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-quanzhen-daoism.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-rhythm-analysis.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-scenery-poems.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-thematic-poetry.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-three-teachings.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-version-evolution.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/essay-zen-koan-vs-neidan.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/ethics-consumption.html": {
    "measured": 14,
@@ -3367,17 +3091,11 @@
    }
   },
   "en/methodology.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/ming-political-thought-comparison.html": {
    "measured": 3,
@@ -3786,17 +3504,11 @@
    }
   },
   "en/site-map.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/six-senses-narratology-network.html": {
    "measured": 1,
@@ -3910,17 +3622,11 @@
    }
   },
   "en/tribulations.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/underworld-power-network.html": {
    "measured": 3,
@@ -3979,17 +3685,11 @@
    }
   },
   "en/visualizations.html": {
-   "measured": 1,
-   "exempted": 1,
+   "measured": 0,
+   "exempted": 0,
    "nonExempt": 0,
    "fail": false,
-   "perCls": {
-    "a.nav-back": {
-     "measured": 1,
-     "exempted": 1,
-     "nonExempt": 0
-    }
-   }
+   "perCls": {}
   },
   "en/workplace.html": {
    "measured": 9,
@@ -4019,5 +3719,5 @@
  "notes": [
   "data/hardship-difficulty-heatmap.html 陈旧豁免（类已不在）：button.dim-btn.active / button.sort-btn.active（族合计 2·实测不足 1）"
  ],
- "generated_at": "2026-10-22T17:51:20.697Z"
+ "generated_at": "2026-10-23T12:44:28.845Z"
 }
