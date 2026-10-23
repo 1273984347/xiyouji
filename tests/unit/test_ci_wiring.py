@@ -409,7 +409,7 @@ def test_bad_forms_are_genuinely_unparseable(form):
     """W813：上述形态确属真缺陷——PyYAML 同样解析失败（证明守卫不是误报）。"""
     import yaml
 
-    with pytest.raises(Exception):
+    with pytest.raises(yaml.YAMLError):
         yaml.safe_load(_BAD_WORKFLOW_FORMS[form])
 
 

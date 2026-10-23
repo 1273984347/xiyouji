@@ -129,7 +129,7 @@ def test_gate_wired_into_verify_delivery():
 
 def test_gate_marker_is_last_line_of_self_test_output():
     proc = run_node(["--self-test"])
-    lines = [l for l in proc.stdout.splitlines() if l.strip()]
+    lines = [line for line in proc.stdout.splitlines() if line.strip()]
     assert lines[-1].startswith("---- 第 49 门禁 朱砂实底自检："), lines[-1]
 
 

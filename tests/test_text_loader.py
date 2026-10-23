@@ -5,7 +5,7 @@ text_loader.py 仅依赖 pathlib（标准库），无外部依赖，测试可独
 from pathlib import Path
 
 import pytest
-from utils.text_loader import load_text, load_all_chapters, count_chars
+from utils.text_loader import count_chars, load_all_chapters, load_text
 
 
 def test_load_text_encoding(tmp_path):

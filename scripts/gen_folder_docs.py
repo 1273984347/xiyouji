@@ -51,8 +51,8 @@ import re
 import subprocess
 import sys
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import tracked_files as tf  # noqa: E402  W894：目标提交树口径（git ls-files）
+# W894：目标提交树口径（git ls-files）——同目录模块·Python 自动可导入
+import tracked_files as tf
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -161,6 +161,27 @@ def _build_gitignored_dirs() -> set[str]:
     return rels
 
 
+def tracked_dirs() -> list[str]:
+    """在管目录绝对路径（**索引口径**·W894：只含已有被跟踪文件的目录）。
+
+    用途：门禁的「在管目录集」——并行批**在途的新目录**（全部文件未跟踪）不在集内，
+    ⇒ 不会被判「C1 缺 README.md/index.md」（那是对方施工中的状态，不是已入库缺陷）。
+    真正该抓的形态仍在集内：目录**已有被跟踪文件**却缺 index.md ⇒ 判红。
+    """
+    dirs = set()
+    for rel in tf.tracked_files():
+        d = os.path.dirname(rel)
+        while d:
+            dirs.add(d)
+            d = os.path.dirname(d)
+    out = []
+    for rel in sorted(dirs):
+        abs_dir = os.path.join(ROOT, rel)
+        if os.path.isdir(abs_dir) and not _is_excluded(abs_dir):
+            out.append(abs_dir)
+    return out
+
+
 def scan_dirs() -> list[str]:
     """返回在管目录绝对路径（递归·排除见 EXCLUDE_*）。"""
     out = []
@@ -185,6 +206,22 @@ def list_files_raw_names(abs_dir: str) -> list[str]:
     ]
 
 
+def _in_repo(abs_dir: str) -> bool:
+    """目录是否位于**真实仓库根**之下（W894·索引口径的回退判据）。
+
+    仓库内目录 ⇒ 索引口径（未跟踪的并行批在途件不计入·W894 根修目标）；
+    仓库外目录（测试合成树 / 临时目录）⇒ 磁盘口径（否则合成树不在索引里，
+    清单恒为空、自测与门禁单测会「全绿但毫无意义」）。
+    判据用 `tracked_files.ROOT`（真实仓库根）而非 `gen.ROOT`——后者在 self-test
+    里被指向临时目录，会把合成树误判成仓库内。
+    """
+    try:
+        rel = os.path.relpath(os.path.abspath(abs_dir), tf.ROOT)
+    except ValueError:
+        return False
+    return not rel.startswith("..") and not os.path.isabs(rel)
+
+
 def list_files(abs_dir: str) -> list[str]:
     """目录直属文件名（**索引口径**·W894·跳过清单自身与占位件）·排序稳定。
 
@@ -199,6 +236,8 @@ def list_files(abs_dir: str) -> list[str]:
     **开发注意**：新建文件后需先 `git add` 再刷新清单（未跟踪文件不在索引）——
     这与提交前本来就要 add 的次序一致。
     """
+    if not _in_repo(abs_dir):
+        return list_files_disk(abs_dir)
     rel = rel_of(abs_dir)
     return sorted(n for n in tf.tracked_in_dir(rel) if n not in SKIP_NAMES)
 
@@ -269,6 +308,8 @@ def list_subdirs(abs_dir: str) -> list[str]:
     W894：实算基准改为 Git 索引（`git ls-files`）——未跟踪的新目录不进清单，
     并行批的在途目录因此不污染判据（磁盘口径下会判「子目录清单漂移」）。
     """
+    if not _in_repo(abs_dir):
+        return list_subdirs_disk(abs_dir)
     rel = rel_of(abs_dir)
     out = []
     for n in sorted(tf.tracked_subdirs(rel)):

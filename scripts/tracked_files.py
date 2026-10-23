@@ -52,10 +52,10 @@ def _run_ls_files(repo_root: str | None = None) -> set[str] | None:
             capture_output=True, timeout=60, check=False,
         )
     except (OSError, subprocess.SubprocessError) as e:
-        warnings.warn("tracked_files: git 不可用（%s）⇒ 实算回退磁盘扫描" % e, RuntimeWarning)
+        warnings.warn("tracked_files: git 不可用（%s）⇒ 实算回退磁盘扫描" % e, RuntimeWarning, stacklevel=2)
         return None
     if out.returncode != 0:
-        warnings.warn("tracked_files: git ls-files 失败（rc=%d）⇒ 实算回退磁盘扫描" % out.returncode, RuntimeWarning)
+        warnings.warn("tracked_files: git ls-files 失败（rc=%d）⇒ 实算回退磁盘扫描" % out.returncode, RuntimeWarning, stacklevel=2)
         return None
     raw = out.stdout.decode("utf-8", errors="replace")
     return {p for p in raw.split("\0") if p}

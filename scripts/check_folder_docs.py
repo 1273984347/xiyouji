@@ -134,7 +134,7 @@ def check_dir(abs_dir: str) -> list[str]:
     if parsed is None:
         fails.append("C2 index.md 结构不合生成器模板（疑手改/旧版/截断）：%s" % label)
         return fails
-    if _USE_TRACKED:
+    if _USE_TRACKED and gen._in_repo(abs_dir):
         # 子目录口径与生成器同源：EXCLUDE_SUBSTR / EXCLUDE_TOP 命中的目录不进清单
         # （例：tmpe 整目录被排除，但其 README.md 与 policy.yml 仍入库·W738 策略件）
         want_sub = {n for n in tf.tracked_subdirs(rel)
@@ -183,7 +183,9 @@ def check_dir(abs_dir: str) -> list[str]:
 def run_gate() -> int:
     """门禁主流程：逐在管目录对拍，汇总行恒输出（防静默跳过）。"""
     gen._GITIGNORED_DIRS = gen._build_gitignored_dirs()
-    dirs_all = [d for d in gen.scan_dirs() if gen.in_scope(d)]
+    # W894：在管目录集改**索引口径**（只含已有被跟踪文件的目录）——并行批在途的
+    # 新目录（未跟踪）不进集 ⇒ 不被判「C1 缺 README.md」；已入库目录缺文档仍判红。
+    dirs_all = [d for d in gen.tracked_dirs() if gen.in_scope(d)]
     dirs = [d for d in dirs_all if not _case_collides(d)]
     exempt = len(dirs_all) - len(dirs)
     all_fails: list[str] = []

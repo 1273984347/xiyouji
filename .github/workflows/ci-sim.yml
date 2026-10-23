@@ -39,5 +39,12 @@ jobs:
         with:
           python-version: "3.12"
 
+      # stats.py 的 pytest_collected 键是 fail-closed 实测（无 pytest 即判红）
+      # ⇒ 预演环境必须装 pytest，否则 stats 对账与第 31 门禁 C5d 会假红
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest
+
       - name: CI-side simulation
         run: python scripts/ci_sim.py

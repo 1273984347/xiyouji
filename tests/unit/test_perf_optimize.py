@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """W265 E3 性能深化·perf_optimize.py 单元测试·pytest 风格
 
 覆盖 6 个核心模块：
@@ -22,7 +21,6 @@ if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
 import perf_optimize  # noqa: E402
-
 
 # ---------------------------------------------------------------------------
 # 公共 fixture
