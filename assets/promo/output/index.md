@@ -11,15 +11,18 @@
 
 - （无）
 
-## 文件（3）
+## 文件（6）
 
 ### 样式与资源
 
 - `xiyouji-flyer-a4-back.png`
+- `xiyouji-flyer-a4-en-back.png`
+- `xiyouji-flyer-a4-en-front.png`
 - `xiyouji-flyer-a4-front.png`
 
 ### 文档产物
 
+- `xiyouji-flyer-a4-en.pdf`
 - `xiyouji-flyer-a4.pdf`
 
 ---
