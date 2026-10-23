@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（252）
+## 文件（260）
 
 ### Markdown 文档
 
@@ -153,6 +153,11 @@
 - `_w888_chapter_plate.py`
 - `_w888_index_revert.py`
 - `_w888_wire.py`
+- `_w891_en_migrate.py`
+- `_w891_en_survey.py`
+- `_w893_finalize.py`
+- `_w893_gen_args.py`
+- `_w893_verify.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
@@ -268,6 +273,9 @@
 - `_w854_layout_probe.mjs`
 - `_w854_layout_probe_app.mjs`
 - `_w865_layout_probe.mjs`
+- `_w892_export_flyer.mjs`
+- `_w892_probe.mjs`
+- `_w892_probe2.mjs`
 - `batch_screenshots.js`
 - `check_chart_values.js`
 - `check_contract_smoke.js`

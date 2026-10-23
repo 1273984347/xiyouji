@@ -19,7 +19,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="River of Interpretations · Triangle of Three Teachings · The Author Whodunit · Annotated Journey to the West">
     <meta property="og:description" content="River of Interpretations · Triangle of Three Teachings · The Author Whodunit · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1270,7 +1270,7 @@ td.num, th.num {
 <style>
         /* e-track-exempt: chart-data-colors 5 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
-        .breadcrumb .sep { margin: 0 8px; color: var(--ink-soft); opacity: 0.6; }
+        .breadcrumb .sep { margin: 0 var(--space-3); color: var(--ink-soft); opacity: 0.6; }
 
         
         @media (max-width: 768px) {  }
@@ -1346,7 +1346,7 @@ td.num, th.num {
             position: absolute;
             background: var(--dark);
             color: var(--paper-warm);
-            padding: 12px 14px;
+            padding: var(--space-4) 14px;
             border-radius: var(--radius-md);
             font-size: 0.84rem;
             line-height: 1.55;
@@ -1360,7 +1360,7 @@ td.num, th.num {
         }
         .river-tooltip .rt-name { color: var(--accent-soft); font-weight: 600; font-size: 0.95rem; }
         .river-tooltip .rt-meta { color: color-mix(in srgb, var(--dark-text) 70%, transparent); font-size: 0.76rem; margin-bottom: 6px; font-family: "JetBrains Mono", monospace; }
-        .river-tooltip .rt-quote { color: var(--accent-soft); font-style: italic; margin: 4px 0 6px; }
+        .river-tooltip .rt-quote { color: var(--accent-soft); font-style: italic; margin: var(--space-2) 0 6px; }
 
         /* ===== Chart 2: 三教争辩三角形 ===== */
         #triangle-chart {
@@ -1405,7 +1405,7 @@ td.num, th.num {
         .detective-header {
             background: var(--dark);
             color: var(--paper-warm);
-            padding: 12px 16px;
+            padding: var(--space-4) 16px;
             border-radius: var(--radius-md);
             font-size: 0.9rem;
             margin-bottom: 22px;
@@ -1432,8 +1432,8 @@ td.num, th.num {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 4px;
-            padding-bottom: 8px;
+            margin-bottom: var(--space-2);
+            padding-bottom: var(--space-3);
             border-bottom: 1px dashed var(--line);
         }
         .candidate-card .cc-name {
@@ -1456,7 +1456,7 @@ td.num, th.num {
         .candidate-card .cc-status {
             display: inline-block;
             font-size: 0.74rem;
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-lg);
             background: var(--accent-soft);
             color: var(--accent-3);
@@ -1509,12 +1509,12 @@ td.num, th.num {
         .alchemy-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 8px;
+            margin-top: var(--space-3);
             font-size: 0.88rem;
         }
         .alchemy-table th, .alchemy-table td {
             border: 1px solid var(--line);
-            padding: 12px 14px;
+            padding: var(--space-4) 14px;
             vertical-align: top;
             text-align: left;
         }
@@ -1564,7 +1564,7 @@ td.num, th.num {
             background: linear-gradient(180deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: 30px 20px;
+            padding: 30px var(--space-5);
             min-height: 420px;
             overflow: hidden;
         }
@@ -1583,7 +1583,7 @@ td.num, th.num {
             line-height: 1.7;
             border-radius: 0 var(--radius-md) var(--radius-md) 0
         }
-                .scalpel-replay-row { margin-top: 12px; text-align: right; }
+                .scalpel-replay-row { margin-top: var(--space-4); text-align: right; }
         .scalpel-replay {
             font-family: var(--font-sans); font-size: 0.85rem; color: var(--ink-soft);
             background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-sm);
@@ -1637,7 +1637,7 @@ td.num, th.num {
         }
         .insight-box ul { list-style: none; padding-left: 0; }
         .insight-box li {
-            padding: 8px 0;
+            padding: var(--space-3) 0;
             border-bottom: 1px dashed var(--line);
             font-size: 0.92rem;
             line-height: 1.7;
@@ -1694,7 +1694,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/criticism-history.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/criticism-history.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -1708,7 +1708,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
             Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
         </div>
@@ -1833,10 +1833,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/criticism-history.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/criticism-history.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
 <script>

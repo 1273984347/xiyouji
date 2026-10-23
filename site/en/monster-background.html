@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-d5u0IGTOK3FRexskjAHuibjMv/1NfHzIf9+q9IQ2dyg=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-M0LRQHnFCmo5r+gExXhiwL1GPGOpAd+5OdCk//nW46U=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster Background Theory · Annotated Journey to the West</title>
@@ -19,7 +19,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="1. Background Type Classification · 2. Backed vs. Unbacked · 3. Typical Case Comparison · Annotated Journey to the West">
     <meta property="og:description" content="1. Background Type Classification · 2. Backed vs. Unbacked · 3. Typical Case Comparison · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1271,9 +1271,9 @@ td.num, th.num {
         /* e-track-exempt: chart-data-colors 2 处 */
         /* === 仅本页特有样式 === */
         .container {
-            max-width: 1280px;
+            max-width: var(--container-content);
             margin: -30px auto 60px;
-            padding: 0 24px;
+            padding: 0 var(--space-6);
             position: relative;
             z-index: 2;
         }
@@ -1306,7 +1306,7 @@ td.num, th.num {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
             gap: 16px;
-            margin-bottom: 32px;
+            margin-bottom: var(--space-7);
         }
         .kpi-card {
             background: var(--paper);
@@ -1334,7 +1334,7 @@ td.num, th.num {
             font-weight: 600;
             color: var(--ink);
             line-height: 1.2;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .kpi-card .desc {
             font-size: 0.85rem;
@@ -1346,7 +1346,7 @@ td.num, th.num {
             border-radius: var(--radius-md);
             padding: 28px;
             box-shadow: var(--shadow);
-            margin-bottom: 24px;
+            margin-bottom: var(--space-6);
         }
         .section-title {
             font-size: 1.3rem;
@@ -1361,13 +1361,13 @@ td.num, th.num {
         .section-sub {
             font-size: 0.88rem;
             color: var(--ink-soft);
-            margin-bottom: 20px;
+            margin-bottom: var(--space-5);
         }
         .definition {
             background: var(--paper);
             border-left: 4px solid var(--accent-soft);
-            padding: 12px 16px;
-            margin-bottom: 20px;
+            padding: var(--space-4) 16px;
+            margin-bottom: var(--space-5);
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
             font-size: 0.92rem;
             color: var(--ink-soft);
@@ -1377,19 +1377,19 @@ td.num, th.num {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: var(--space-5);
+            margin-bottom: var(--space-5);
         }
         .chart-title {
             font-size: 1rem;
             font-weight: 600;
             color: var(--ink);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .chart-caption {
             font-size: 0.82rem;
             color: var(--ink-soft);
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
         }
         .chart-svg {
             max-width: 100%;
@@ -1425,11 +1425,11 @@ td.num, th.num {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.88rem;
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         table.data-table th,
         table.data-table td {
-            padding: 10px 12px;
+            padding: 10px var(--space-4);
             text-align: left;
             border-bottom: 1px solid var(--line);
             vertical-align: top;
@@ -1459,7 +1459,7 @@ td.num, th.num {
         }
         .insights-list li {
             counter-increment: insight;
-            padding: 12px 16px 12px 48px;
+            padding: var(--space-4) 16px var(--space-4) var(--space-9);
             position: relative;
             border-bottom: 1px dashed var(--line);
             font-size: 0.92rem;
@@ -1494,14 +1494,14 @@ td.num, th.num {
         .case-card .case-name {
             font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .case-card .case-badge {
             font-size: 0.72rem;
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-lg);
             font-family: "JetBrains Mono", "Consolas", monospace;
             font-weight: 600;
@@ -1523,7 +1523,7 @@ td.num, th.num {
         .case-card .case-row {
             font-size: 0.82rem;
             color: var(--ink-soft);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .case-card .case-row strong {
             color: var(--ink);
@@ -1538,9 +1538,9 @@ td.num, th.num {
             font-style: italic;
         }
         footer {
-            max-width: 1280px;
-            margin: 40px auto 0;
-            padding: 24px;
+            max-width: var(--container-content);
+            margin: var(--space-8) auto 0;
+            padding: var(--space-6);
             border-top: 1px solid var(--line);
             font-size: 0.82rem;
             color: var(--ink-soft);
@@ -1574,7 +1574,7 @@ td.num, th.num {
             .chart-block { padding: 14px; }
             table.data-table { font-size: 0.78rem; }
             .case-grid { grid-template-columns: 1fr; }
-            .insights-list li { padding: 10px 12px 10px 36px; }
+            .insights-list li { padding: 10px var(--space-4) 10px 36px; }
         }
         .skip-link {
             position: absolute;
@@ -1582,7 +1582,7 @@ td.num, th.num {
             left: 0;
             background: var(--accent-2);
             color: var(--paper);
-            padding: 8px 16px;
+            padding: var(--space-3) 16px;
             z-index: 100;
             text-decoration: none;
             border-radius: 0 0 var(--radius-md) 0;
@@ -1617,7 +1617,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/monster-background.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/monster-background.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -1630,7 +1630,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-    <main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+    <main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice">
             This page is a focused deep-dive into "Monster Sociology", zeroing in on the book's sharpest satire — whether a demon lives or dies depends not on its strength but on its backing. The data draws on the 100 chapters of the original Journey to the West, covering 69 demons in total. A note on methodology: "background-type survival rate" aggregates by each demon's backing type, while "disposition count" aggregates by final outcome; the two measures have a cross error of ±2 (stemming from differing judgments about which backing category escaped demons belong to), which does not affect the core conclusion.
         </div>
@@ -1754,10 +1754,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/monster-background.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/monster-background.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 <div class="tooltip" id="tooltip" role="tooltip" aria-hidden="true"></div>
 
         <script src="../static/js/d3.v7.min.js"></script>
@@ -1892,7 +1892,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     // ===== Main render =====
     async function main() {
         if (typeof d3 === 'undefined') {
-            document.getElementById('kpi-row').innerHTML = '<p style="color:#c8463a;padding:12px;">Chart library (D3.js) failed to load. Please check your network connection and refresh.</p>';
+            document.getElementById('kpi-row').innerHTML = '<p style="color:#c8463a;padding:var(--space-4);">Chart library (D3.js) failed to load. Please check your network connection and refresh.</p>';
             return;
         }
         const baseUrl = '../data/json/';

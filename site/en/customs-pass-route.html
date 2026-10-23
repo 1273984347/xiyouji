@@ -19,7 +19,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="Passport · Pilgrimage Courier-Route Map · Annotated Journey to the West">
     <meta property="og:description" content="Passport · Pilgrimage Courier-Route Map · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1269,10 +1269,10 @@ td.num, th.num {
 </style>
 <style>
         /* 页面局部样式（W383·v2.3.11 新建·自包含，随 inline_css.py 内联） */
-        .pass-legend { display:flex; flex-wrap:wrap; gap:10px 18px; margin:10px 0 4px; font-size:13px; color:var(--ink-soft); }
+        .pass-legend { display:flex; flex-wrap:wrap; gap:10px 18px; margin:10px 0 var(--space-2); font-size:13px; color:var(--ink-soft); }
         .pass-legend span { display:inline-flex; align-items:center; gap:6px; }
         .dot { width:10px; height:10px; border-radius: 50% ; display:inline-block; }
-        #pass-svg { width:100%; height:760px; display:block; margin:8px 0; }
+        #pass-svg { width:100%; height:760px; display:block; margin:var(--space-3) 0; }
         #pass-svg .node-rect { rx:6px; }
         #pass-svg text { font-family:var(--font-sans); }
         #pass-svg .t-title { font-size:13px; font-weight:600; }
@@ -1280,10 +1280,10 @@ td.num, th.num {
         #pass-svg .t-cite { font-family:var(--font-mono); font-size:10px; fill:var(--ink-faint); }
         .pass-table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
         .pass-table { border-collapse:collapse; width:100%; font-size:14px; }
-        .pass-table th, .pass-table td { border:1px solid var(--line); padding:8px 12px; text-align:left; vertical-align:top; }
+        .pass-table th, .pass-table td { border:1px solid var(--line); padding:var(--space-3) var(--space-4); text-align:left; vertical-align:top; }
         .pass-table th { background:var(--paper-warm); font-weight:600; white-space:nowrap; }
         .pass-table td:first-child { white-space:nowrap; font-weight:600; }
-        .status-pill { display:inline-block; padding:1px 8px; border-radius: var(--radius-lg) ; font-size:12px; color:var(--paper); white-space:nowrap; }
+        .status-pill { display:inline-block; padding:1px var(--space-3); border-radius: var(--radius-lg) ; font-size:12px; color:var(--paper); white-space:nowrap; }
         .st-issue { background:var(--chart-2); }
         .st-pass { background:var(--chart-4); }
         .st-unv { background:var(--chart-3); }
@@ -1309,7 +1309,7 @@ td.num, th.num {
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/customs-pass-route.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/customs-pass-route.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -1323,7 +1323,7 @@ td.num, th.num {
             <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <nav class="breadcrumb" aria-label="Breadcrumb">
             <a href="index.html">EN Home</a>
             <span class="sep">›</span>
@@ -1426,10 +1426,10 @@ td.num, th.num {
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/customs-pass-route.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/customs-pass-route.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
 <script>

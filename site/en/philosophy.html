@@ -20,7 +20,7 @@
     <meta name="description" content="Introduction · Journey to the West as a Cultivation Allegory · One · Mind-Monkey Nature Curve · Two · Cultivation Allegory Map · Annotated Journey to the West">
     <meta property="og:description" content="Introduction · Journey to the West as a Cultivation Allegory · One · Mind-Monkey Nature Curve · Two · Cultivation Allegory Map · Annotated Journey to the West">
     <script src="../static/js/d3.v7.min.js"></script>
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1306,8 +1306,8 @@ td.num, th.num {
         .definition {
             background: var(--paper);
             border-left: 4px solid var(--accent-soft);
-            padding: 12px 16px;
-            margin-bottom: 20px;
+            padding: var(--space-4) 16px;
+            margin-bottom: var(--space-5);
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
             font-size: 0.92rem;
             color: var(--ink-soft);
@@ -1317,19 +1317,19 @@ td.num, th.num {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: var(--space-5);
+            margin-bottom: var(--space-5);
         }
         .chart-title {
             font-size: 1rem;
             font-weight: 600;
             color: var(--ink);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .chart-caption {
             font-size: 0.82rem;
             color: var(--ink-soft);
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
         }
         .chart-svg {
             max-width: 100%;
@@ -1365,11 +1365,11 @@ td.num, th.num {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.88rem;
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         table.data-table th,
         table.data-table td {
-            padding: 10px 12px;
+            padding: 10px var(--space-4);
             text-align: left;
             border-bottom: 1px solid var(--line);
             vertical-align: top;
@@ -1391,7 +1391,7 @@ td.num, th.num {
         }
         .insights-list li {
             counter-increment: insight;
-            padding: 12px 16px 12px 48px;
+            padding: var(--space-4) 16px var(--space-4) var(--space-9);
             position: relative;
             border-bottom: 1px dashed var(--line);
             font-size: 0.92rem;
@@ -1412,14 +1412,14 @@ td.num, th.num {
             background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border: 1px solid var(--accent-soft);
             border-radius: var(--radius-md);
-            padding: 22px 24px;
+            padding: 22px var(--space-6);
             margin-top: 14px;
         }
         .insight-box .box-title {
             font-size: 1.05rem;
             font-weight: 600;
             color: var(--accent-text);
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
             padding-bottom: 6px;
             border-bottom: 1px dashed var(--accent-soft);
         }
@@ -1433,7 +1433,7 @@ td.num, th.num {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
             gap: 16px;
-            margin-bottom: 20px;
+            margin-bottom: var(--space-5);
         }
         .map-card {
             background: var(--paper);
@@ -1450,7 +1450,7 @@ td.num, th.num {
             color: var(--accent-2);
             letter-spacing: 0.12em;
             font-family: "JetBrains Mono", "Consolas", monospace;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .map-card.alt .map-label { color: var(--accent-4); }
         .map-card.alt2 .map-label { color: var(--accent-3); }
@@ -1458,12 +1458,12 @@ td.num, th.num {
         .map-card .map-title {
             font-size: 1.05rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .map-card .map-row {
             font-size: 0.85rem;
             color: var(--ink-soft);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .map-card .map-row strong {
             color: var(--ink);
@@ -1481,7 +1481,7 @@ td.num, th.num {
             font-size: 0.78rem;
             letter-spacing: 0.12em;
             font-family: "JetBrains Mono", "Consolas", monospace;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .summary-card .map-title {
             font-size: 1.05rem;
@@ -1495,7 +1495,7 @@ td.num, th.num {
         }
         .d3-tooltip {
             position: absolute;
-            padding: 8px 12px;
+            padding: var(--space-3) var(--space-4);
             background: var(--dark);
             color: var(--paper-warm);
             font-size: 0.8rem;
@@ -1507,7 +1507,7 @@ td.num, th.num {
             z-index: 100;
         }
         .source-list {
-            margin-top: 8px;
+            margin-top: var(--space-3);
             font-size: 0.78rem;
             color: var(--ink-soft);
             overflow-wrap: anywhere;
@@ -1539,11 +1539,11 @@ td.num, th.num {
             display: inline-block;
             background: var(--paper-warm);
             color: var(--accent-3);
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-sm);
             font-size: 0.75rem;
             font-family: "JetBrains Mono", "Consolas", monospace;
-            margin: 0 4px 4px 0;
+            margin: 0 var(--space-2) var(--space-2) 0;
             border: 1px solid var(--line);
         }
         /* heatmap cell */
@@ -1559,14 +1559,14 @@ td.num, th.num {
             
             .map-grid { grid-template-columns: 1fr; }
             table.data-table { font-size: 0.78rem; }
-            table.data-table th, table.data-table td { padding: 6px 8px; }
+            table.data-table th, table.data-table td { padding: 6px var(--space-3); }
         }
         @media (max-width: 480px) {
             
             
             
             
-            .chart-block { padding: 12px; }
+            .chart-block { padding: var(--space-4); }
         }
     
     </style>
@@ -1594,7 +1594,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/philosophy.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/philosophy.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -1608,7 +1608,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
 <div class="container">
         <nav class="breadcrumb" aria-label="Breadcrumb">
             <a href="dashboard.html">Dashboard</a>
@@ -1678,7 +1678,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <div class="map-row">The 81 hardships correspond to the "eighty-one aspects" of the Duoxin Jing; the Heart Sutra (taught in Ch. 19) is the book's intellectual through-line, not an adventure story.</div>
                 </div>
             </div>
-            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:8px;">
+            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:var(--space-3);">
                 Data source: 3 JSON outputs generated by the scripts/G_Philosophy/ directory; this page automatically falls back to the inlined EMBEDDED data when fetch fails, and supports double-click opening via the file:// protocol.
             </p>
         </section>
@@ -1707,7 +1707,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
         </div>
 
-        <p class="narrative" style="background:#fdfaf4;border-left:4px solid var(--accent-soft);padding:14px 18px;border-radius:0 6px 6px 0;margin-bottom:24px;">
+        <p class="narrative" style="background:#fdfaf4;border-left:4px solid var(--accent-soft);padding:14px 18px;border-radius:0 6px 6px 0;margin-bottom:var(--space-6);">
             <strong>KPI overview notes:</strong>
             <strong style="color:var(--accent);">6 mind-nature stages</strong> — Wukong's complete mind-cultivation arc from "birth of the Stone Monkey" to "buddhahood as the Victorious Fighting Buddha",
             each stage corresponding to a different mind state (5-dimension scores of anger / pride / greed / wisdom / restraint);
@@ -1786,7 +1786,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </div>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">Detailed Table of the 6 Mind-Nature Stages</h3>
+            <h3 style="font-size:1.05rem;margin:18px 0 var(--space-3);color:var(--ink);">Detailed Table of the 6 Mind-Nature Stages</h3>
             <div style="overflow-x:auto;">
                 <table class="data-table" id="phase-table">
                     <thead>
@@ -1807,13 +1807,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </table>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Mind-Nature Curve Analysis</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">Mind-Nature Curve Analysis</h3>
             <ol class="insights-list" id="monkey-insights-list"></ol>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Philosophical Insights (six)</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">Philosophical Insights (six)</h3>
             <ol class="insights-list" id="philosophical-insights-list"></ol>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Modern Parallels · Modern Mapping of Mind-Nature Cultivation</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">Modern Parallels · Modern Mapping of Mind-Nature Cultivation</h3>
             <div class="map-grid" id="modern-grid">
                 <div class="map-card alt3">
                     <div class="map-label">ANGER MANAGEMENT</div>
@@ -1839,7 +1839,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <div class="box-title">Key Insight · The Spiral Ascent of Mind-Monkey Cultivation</div>
                 <div class="box-content" id="monkey-insight-box">
                     <p>What the mind-nature curve descends in is not <strong>"ability"</strong> but <strong>"anger"</strong> — Wukong's power grows stronger after buddhahood.</p>
-                    <p style="margin-top:8px;">Mind-cultivation is not eliminating desire but <strong>transforming desire</strong>: anger→courage, pride→confidence, greed→aspiration. This is the spiral-ascent process of "the mind-monkey unified, turning from external constraint to inner self-awareness".</p>
+                    <p style="margin-top:var(--space-3);">Mind-cultivation is not eliminating desire but <strong>transforming desire</strong>: anger→courage, pride→confidence, greed→aspiration. This is the spiral-ascent process of "the mind-monkey unified, turning from external constraint to inner self-awareness".</p>
                 </div>
             </div>
         </section>
@@ -1929,7 +1929,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <div class="legend-row" id="pie-legend"></div>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">Detailed Table of the 8 Allegory Categories</h3>
+            <h3 style="font-size:1.05rem;margin:18px 0 var(--space-3);color:var(--ink);">Detailed Table of the 8 Allegory Categories</h3>
             <div style="overflow-x:auto;">
                 <table class="data-table" id="allegory-table">
                     <thead>
@@ -1947,10 +1947,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </table>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Core Findings of the Cultivation Allegory</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">Core Findings of the Cultivation Allegory</h3>
             <ol class="insights-list" id="allegory-insights-list"></ol>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">The Correspondence between the Heart Sutra and the 81 Hardships</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">The Correspondence between the Heart Sutra and the 81 Hardships</h3>
             <div class="definition" style="border-left-color:var(--accent-2);background:#f0f6fa;">
                 <strong style="color:var(--accent-2);">Prajñāpāramitā Heart Sutra · Ch. 19, taught by Wuchao Chan Master</strong><br>
                 <em style="color:var(--ink-soft);">"form is not different from emptiness, emptiness is not different from form; form is emptiness, emptiness is form"</em>
@@ -1997,8 +1997,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <div class="box-title">Key Insight · The 81 Hardships = the Mind-Cultivation Sequence</div>
                 <div class="box-content" id="allegory-insight-box">
                     <p>The "count" of the 81 hardships corresponds to the <strong>"eighty-one aspects"</strong> of the Duoxin Jing — not a coincidence.</p>
-                    <p style="margin-top:8px;">The whole of Xiyouji is <strong>not an adventure story</strong>, but a "taming-the-mind-monkey-and-thought-horse" cultivation allegory — each hardship corresponds to a breaking of mental attachment, each monster to an inner obstacle.</p>
-                    <p style="margin-top:8px;">The Heart Sutra (Ch. 19) is the <strong>intellectual through-line</strong>, the 81 hardships are the <strong>practical cultivation sequence</strong>, and together they form the cultivation system of "form is emptiness, breaking attachment and returning to truth".</p>
+                    <p style="margin-top:var(--space-3);">The whole of Xiyouji is <strong>not an adventure story</strong>, but a "taming-the-mind-monkey-and-thought-horse" cultivation allegory — each hardship corresponds to a breaking of mental attachment, each monster to an inner obstacle.</p>
+                    <p style="margin-top:var(--space-3);">The Heart Sutra (Ch. 19) is the <strong>intellectual through-line</strong>, the 81 hardships are the <strong>practical cultivation sequence</strong>, and together they form the cultivation system of "form is emptiness, breaking attachment and returning to truth".</p>
                 </div>
             </div>
         </section>
@@ -2079,7 +2079,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
 
             <!-- Philosophical core proposition -->
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Philosophical Core Proposition · Overall Statistics</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">Philosophical Core Proposition · Overall Statistics</h3>
             <div class="map-grid">
                 <div class="map-card alt3">
                     <div class="map-label">PHILOSOPHICAL CORE</div>
@@ -2106,9 +2106,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <div class="box-title">Synthesis · Xiyouji = a Cultivation Allegory</div>
                 <div class="box-content">
                     <p>Journey to the West is not a divine-monster adventure novel, but a complete <strong>cultivation allegory</strong>.</p>
-                    <p style="margin-top:8px;">The <strong>Mind-Monkey Nature Curve</strong> reveals Wukong's <strong>indulgence → suppression → awakening → enlightenment</strong> four-stage spiral ascent from "Great Sage Equal to Heaven" to "Victorious Fighting Buddha"; its essence is the mind-cultivation process from "ego-attachment" to "no-self".</p>
-                    <p style="margin-top:8px;">The <strong>Cultivation Allegory Map</strong> reveals that the 81 hardships map to 8 Buddhist mind-nature trials (greed / anger / ignorance / pride / doubt / lust / fame / death), each hardship an act of breaking mental attachment.</p>
-                    <p style="margin-top:8px;">Together they point to a deeper proposition: <strong style="color:var(--accent);">the so-called scripture quest is really the process of taming the mind-monkey and thought-horse</strong> — and the so-called buddhahood is really the inner self-awareness of <strong style="color:var(--accent-2);">the fillet falling off by itself</strong>.</p>
+                    <p style="margin-top:var(--space-3);">The <strong>Mind-Monkey Nature Curve</strong> reveals Wukong's <strong>indulgence → suppression → awakening → enlightenment</strong> four-stage spiral ascent from "Great Sage Equal to Heaven" to "Victorious Fighting Buddha"; its essence is the mind-cultivation process from "ego-attachment" to "no-self".</p>
+                    <p style="margin-top:var(--space-3);">The <strong>Cultivation Allegory Map</strong> reveals that the 81 hardships map to 8 Buddhist mind-nature trials (greed / anger / ignorance / pride / doubt / lust / fame / death), each hardship an act of breaking mental attachment.</p>
+                    <p style="margin-top:var(--space-3);">Together they point to a deeper proposition: <strong style="color:var(--accent);">the so-called scripture quest is really the process of taming the mind-monkey and thought-horse</strong> — and the so-called buddhahood is really the inner self-awareness of <strong style="color:var(--accent-2);">the fillet falling off by itself</strong>.</p>
                 </div>
             </div>
         </section>
@@ -2121,10 +2121,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/philosophy.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/philosophy.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <!-- FILE_INDEX: philosophy.html | W313-V3 | footer-cross completion -->
     <!-- CHANGELOG: v2.2.65 W313 V3 cross-page navigation enhancement -->

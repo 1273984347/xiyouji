@@ -19,7 +19,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="I · Introduction to the Female Demon Network · II · Force-Directed Graph of the Female Demon Group · III · Sankey Diagram of the Female Demons’ Fates · Annotated Journey to the West">
     <meta property="og:description" content="I · Introduction to the Female Demon Network · II · Force-Directed Graph of the Female Demon Group · III · Sankey Diagram of the Female Demons’ Fates · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1294,12 +1294,12 @@ header.hero .meta {
 /* KPI */
 
 .kpi-value { font-size: 1.7em; color: var(--accent); font-weight: 700; }
-.kpi-label { color: var(--ink-soft); font-size: 0.84em; margin-top: 4px; }
+.kpi-label { color: var(--ink-soft); font-size: 0.84em; margin-top: var(--space-2); }
 
 /* Chart */
 .chart-block { margin: 18px 0; }
 .chart-title { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
-.chart-caption { color: var(--ink-soft); font-size: 0.84em; margin-bottom: 12px; }
+.chart-caption { color: var(--ink-soft); font-size: 0.84em; margin-bottom: var(--space-4); }
 .chart-svg {
   background: var(--paper);
   border: 1px solid var(--line);
@@ -1311,7 +1311,7 @@ header.hero .meta {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 12px;
+  margin-top: var(--space-4);
   justify-content: center;
   font-size: 0.84em;
 }
@@ -1323,7 +1323,7 @@ header.hero .meta {
   position: absolute;
   background: var(--dark);
   color: var(--paper);
-  padding: 8px 12px;
+  padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-md);
   font-size: 0.84em;
   pointer-events: none;
@@ -1347,7 +1347,7 @@ header.hero .meta {
 .summary-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 12px;
+  margin-top: var(--space-4);
   font-size: 0.84em;
   background: var(--paper);
   border: 1px solid var(--line);
@@ -1364,7 +1364,7 @@ header.hero .meta {
 }
 .summary-table th:hover { background: var(--accent-3); color: var(--paper); }
 .summary-table td {
-  padding: 8px 10px;
+  padding: var(--space-3) 10px;
   border-bottom: 1px solid var(--line);
   vertical-align: top;
 }
@@ -1382,8 +1382,8 @@ header.hero .meta {
 .insight-list { list-style: none; }
 .insight-list li {
   background: var(--paper);
-  margin: 8px 0;
-  padding: 12px 15px;
+  margin: var(--space-3) 0;
+  padding: var(--space-4) 15px;
   border-left: 3px solid var(--accent-2);
   border-radius: var(--radius-sm)
 }
@@ -1430,7 +1430,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/monster-female-network.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/monster-female-network.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -1443,7 +1443,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
             <img class="hero-ornament" src="../static/images/viz-dark-01-network.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
 <div class="kpi-row">
   <div class="kpi-card"><div class="kpi-value">17</div><div class="kpi-label">Total Nodes</div></div>
   <div class="kpi-card"><div class="kpi-value">7</div><div class="kpi-label">Spider Sisters</div></div>
@@ -1549,10 +1549,10 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/monster-female-network.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/monster-female-network.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 </div>
 

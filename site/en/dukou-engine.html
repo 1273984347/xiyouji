@@ -1257,22 +1257,22 @@ td.num, th.num {
     background: var(--paper); color: var(--ink); line-height:1.8;
   }
   header{
-    padding:32px 24px 16px; border-bottom: 2px solid var(--line);
+    padding:var(--space-7) var(--space-6) 16px; border-bottom: 2px solid var(--line);
     background: linear-gradient(180deg,#f3ece0,var(--paper));
   }
   header h1{margin:0; font-size:26px; color: var(--cinnabar); letter-spacing:2px;}
   header p{margin:6px 0 0; color: var(--umber); font-size:13px;}
-  main{max-width: 768px; margin:0 auto; padding:24px;}
+  main{max-width: 768px; margin:0 auto; padding:var(--space-6);}
   .panel{
     border: 1px solid var(--line); border-radius: 10px; padding:18px;
-    background: var(--paper); margin-bottom:20px;
+    background: var(--paper); margin-bottom:var(--space-5);
   }
-  label{display:block; font-size:13px; color: var(--indigo); margin-bottom:8px;}
+  label{display:block; font-size:13px; color: var(--indigo); margin-bottom:var(--space-3);}
   input[type=text]{
-    width:100%; padding:10px 12px; font-size:15px; font-family:inherit;
+    width:100%; padding:10px var(--space-4); font-size:15px; font-family:inherit;
     border: 1px solid var(--line); border-radius: 6px; background: var(--paper);
   }
-  .row{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;}
+  .row{display:flex; gap:10px; margin-top:var(--space-4); flex-wrap:wrap;}
   button{
     font-family:inherit; font-size:14px; padding:9px 18px; cursor:pointer;
     border: 1px solid var(--cinnabar); border-radius: 6px; color: var(--paper);
@@ -1282,11 +1282,11 @@ td.num, th.num {
   button:hover{opacity:.88;}
   #out{
     white-space:pre-wrap; font-size:15px; color: var(--ink);
-    border-left: 4px solid var(--moss); padding:4px 0 4px 16px; min-height:120px;
+    border-left: 4px solid var(--moss); padding:var(--space-2) 0 var(--space-2) 16px; min-height:120px;
   }
   .meta{font-size:12px; color: var(--umber); margin-top:10px;}
   footer{
-    text-align:center; padding:20px; color: var(--umber); font-size:12px;
+    text-align:center; padding:var(--space-5); color: var(--umber); font-size:12px;
     border-top: 1px solid var(--line);
   }
   code{background: #f0e9dc; padding:1px 5px; border-radius: 4px;}
@@ -1312,7 +1312,7 @@ td.num, th.num {
       <h1>Ferry Crossing &middot; Journey to the West</h1>
       <p>Self-less writing engine (prototype) — enter any passer-by / object / place name to generate a ~300-character &ldquo;ferry dossier&rdquo; draft</p>
     </div>
-    <a href="index.html" style="font-size:13px;color:var(--indigo);text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:8px 14px;white-space:nowrap;margin-top:4px;">&larr; Back to English home</a>
+    <a href="index.html" style="font-size:13px;color:var(--indigo);text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:var(--space-3) 14px;white-space:nowrap;margin-top:var(--space-2);">&larr; Back to English home</a>
   </div>
 </header>
 <main>
@@ -1336,14 +1336,14 @@ td.num, th.num {
     <label>Buddhism = AI graph (W326 &middot; visualization &middot; from /graph)</label>
     <div class="row" style="margin:6px 0 10px;">
       <span class="meta" style="margin:0;">Click any node to expand its connections ·</span>
-      <button id="graphReset" class="ghost" style="font-size:12px;padding:2px 12px;">Reset graph</button>
+      <button id="graphReset" class="ghost" style="font-size:12px;padding:var(--space-1) var(--space-4);">Reset graph</button>
     </div>
     <div id="graphBox"></div>
   </div>
 </main>
 <footer>Buddhism = AI &middot; conditionality is the algorithm &middot; v2.3.17 W393 engineering wrap-up: deploy GitHub Pages + RUM metrics (W390) &middot; homepage &ldquo;Ask the Ferry&rdquo; box + offline-capable ferry engine (W391) &middot; site reading-guide layer guide.html + fix homepage dead links (W392) &middot; downgrade six-doc sync to 2-core + 4-aux auto &middot; bump_version.py (W393)
-<div style="margin-top:8px"><a href="../dukou-engine.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="../dukou-engine.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <script>
 // ---- Ferry knowledge base (extracted from the project’s “Xiyoudu · flip-side” methodology) ----

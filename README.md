@@ -104,7 +104,7 @@
 
 > **📖 阅读契约（W707）**：普通读者通读「普通读者专区」；Agent/开发者只读「开发者/维护者专区」与「AI 生成说明」。先读「是什么/为什么」（下一行），再按路径深入。
 >
-> **当前批次 W890（2026-10-23）**：CI 阻塞项清偿：两处过期测试断言与上游有意变更同步、ruff 违规清零、Windows 存活探针改非终止式查询、依赖漏洞清零·A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> **当前批次 W891（2026-10-23）**：en 收尾清欠账 容器归并 11 页 nav-back 实底转文字态 49 页 间距令牌化 3,353 处值保留·A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 >
 > **版本号说明（W711 方案 D 起）**：本项目的批次编号为 **W###**（单调递增·永不复用·唯一对账键），`v2.3` 为内容阶段标签（定性·无 patch 位·不适用 SemVer）；W710 及更早的历史版本号 `vX.Y.Z` 保留原文。判断「这批改了什么」看 [CHANGELOG.md](CHANGELOG.md) 顶段。
 >

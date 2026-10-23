@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-sfR4uFCcTct3vZ+AqK555CSAN/MueYkM/KwrctOuyDM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qH5sdiJXfByHuRHeWbXLGFaUrE7jqipP+rmRk3AE2gk=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Social Media Persona · MBTI Personality Map · Annotated Journey to the West</title>
@@ -19,7 +19,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="Social Media Persona Card Grid · MBTI Eight-Dimension Radar Chart · Workplace Fit Bar Chart · Annotated Journey to the West">
     <meta property="og:description" content="Social Media Persona Card Grid · MBTI Eight-Dimension Radar Chart · Workplace Fit Bar Chart · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1321,7 +1321,7 @@ td.num, th.num {
             border: 1px solid var(--line);
             border-left: 4px solid var(--accent);
             border-radius: var(--radius-md);
-            padding: 18px 20px;
+            padding: 18px var(--space-5);
             box-shadow: var(--shadow);
             transition: transform 0.18s ease, box-shadow 0.18s ease;
             position: relative;
@@ -1337,7 +1337,7 @@ td.num, th.num {
             justify-content: space-between;
             align-items: flex-start;
             gap: 8px;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .pc-character {
             font-size: 1.2rem;
@@ -1362,7 +1362,7 @@ td.num, th.num {
             font-family: "JetBrains Mono", monospace;
             font-size: 0.8rem;
             color: var(--accent-3);
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .pc-followers {
             font-family: "JetBrains Mono", monospace;
@@ -1370,13 +1370,13 @@ td.num, th.num {
             font-weight: 700;
             color: var(--accent);
             line-height: 1.1;
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
         .pc-followers .unit {
             font-size: 0.78rem;
             color: var(--ink-soft);
             font-weight: 500;
-            margin-left: 4px;
+            margin-left: var(--space-2);
             letter-spacing: 0.1em;
         }
         .pc-sample {
@@ -1390,7 +1390,7 @@ td.num, th.num {
             color: var(--ink);
             line-height: 1.6;
             margin: 10px 0;
-            padding: 8px 10px;
+            padding: var(--space-3) 10px;
             background: var(--bg);
             border-left: 2px solid var(--accent-soft);
             border-radius: 0 var(--radius-md) var(--radius-md) 0
@@ -1400,7 +1400,7 @@ td.num, th.num {
             color: var(--ink-soft);
             line-height: 1.6;
             margin-bottom: 10px;
-            padding: 8px 10px;
+            padding: var(--space-3) 10px;
             background: var(--paper-warm);
             border-radius: var(--radius-md);
             display: flex;
@@ -1409,7 +1409,7 @@ td.num, th.num {
         }
         .pc-pinned svg {
             flex-shrink: 0;
-            margin-top: 2px;
+            margin-top: var(--space-1);
         }
         .pc-pinned-text { flex: 1; }
         .pc-pinned-text .pin-label {
@@ -1418,7 +1418,7 @@ td.num, th.num {
             color: var(--accent);
             font-weight: 600;
             letter-spacing: 0.1em;
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
         .pc-tags {
             display: flex;
@@ -1428,7 +1428,7 @@ td.num, th.num {
         }
         .pc-tag {
             display: inline-block;
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-md);
             font-size: 0.72rem;
             background: rgba(122, 82, 48, 0.08);
@@ -1440,7 +1440,7 @@ td.num, th.num {
             font-size: 0.8rem;
             color: var(--accent-3);
             font-style: italic;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
             padding-top: 6px;
             border-top: 1px dashed var(--line);
         }
@@ -1459,7 +1459,7 @@ td.num, th.num {
             align-items: center;
             gap: 6px;
             margin-top: auto;
-            padding-top: 8px;
+            padding-top: var(--space-3);
             border-top: 1px dashed var(--line);
         }
         .pc-interaction .ic-label {
@@ -1488,7 +1488,7 @@ td.num, th.num {
             background: var(--bg);
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: 12px 14px;
+            padding: var(--space-4) 14px;
         }
         .radar-legend h4 {
             font-size: 0.85rem;
@@ -1502,7 +1502,7 @@ td.num, th.num {
             gap: 8px;
             font-size: 0.82rem;
             color: var(--ink);
-            padding: 4px 6px;
+            padding: var(--space-2) 6px;
             border-radius: var(--radius-md);
             cursor: pointer;
             transition: background var(--dur-fast);
@@ -1528,7 +1528,7 @@ td.num, th.num {
             background: var(--dark);
             color: var(--paper-warm);
             border-radius: var(--radius-md);
-            padding: 8px 12px;
+            padding: var(--space-3) var(--space-4);
             font-size: 0.82rem;
             max-width: 375px;
             box-shadow: var(--elev-3);
@@ -1536,7 +1536,7 @@ td.num, th.num {
             transition: opacity var(--dur-fast);
             z-index: 10;
         }
-        .radar-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        .radar-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: var(--space-2); }
         /* ===== 职场适配度条形图 ===== */
         #fit-svg {
             width: 100%;
@@ -1557,7 +1557,7 @@ td.num, th.num {
             transition: opacity var(--dur-fast);
             z-index: 10;
         }
-        .fit-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        .fit-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: var(--space-2); }
         /* ===== MBTI 强弱项对比表 ===== */
         .table-wrap {
             overflow-x: auto;
@@ -1573,7 +1573,7 @@ td.num, th.num {
         #mbti-table thead th {
             background: var(--dark);
             color: var(--paper-warm);
-            padding: 11px 12px;
+            padding: 11px var(--space-4);
             text-align: left;
             position: sticky;
             top: 0;
@@ -1583,7 +1583,7 @@ td.num, th.num {
         #mbti-table tbody tr { border-bottom: 1px solid var(--line); }
         #mbti-table tbody tr:nth-child(even) { background: var(--bg); }
         #mbti-table tbody tr:hover { background: var(--paper-warm); }
-        #mbti-table td { padding: 10px 12px; vertical-align: top; }
+        #mbti-table td { padding: 10px var(--space-4); vertical-align: top; }
         #mbti-table td.col-char { font-weight: 600; color: var(--ink); width: 90px; }
         #mbti-table td.col-mbti {
             font-family: "JetBrains Mono", monospace;
@@ -1597,7 +1597,7 @@ td.num, th.num {
             font-weight: 500;
             color: var(--ink-soft);
             font-size: 0.78rem;
-            margin-top: 2px;
+            margin-top: var(--space-1);
         }
         #mbti-table td.col-strength {
             background: rgba(90, 122, 58, 0.08);
@@ -1614,8 +1614,8 @@ td.num, th.num {
         }
         .trait-chip {
             display: inline-block;
-            padding: 2px 6px;
-            margin: 1px 2px;
+            padding: var(--space-1) 6px;
+            margin: 1px var(--space-1);
             font-size: 0.74rem;
             border-radius: var(--radius-md);
             background: var(--paper);
@@ -1627,9 +1627,9 @@ td.num, th.num {
         .insight-box {
             background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border-left: 4px solid var(--accent);
-            padding: 20px 24px;
+            padding: var(--space-5) var(--space-6);
             border-radius: var(--radius-md);
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         .insight-box h4 {
             color: var(--accent-text);
@@ -1698,7 +1698,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/social-media.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/social-media.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -1712,7 +1712,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <img class="hero-ornament" src="../static/images/viz-dark-01-network.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
             Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory).
         </div>
@@ -1812,10 +1812,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/social-media.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/social-media.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
 <script>
@@ -2293,7 +2293,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 tip.style("opacity", 1)
                     .html(`<div class="tip-title">${m.character} · ${m.mbti} · ${m.mbti_label}</div>` +
                           `<div>Role: ${m.role}</div>` +
-                          `<div style="margin-top:4px;color:var(--sm-gold-ink);font-size:0.78rem;">Hit axes: ${m.mbti.split("").join(" / ")}</div>`);
+                          `<div style="margin-top:var(--space-2);color:var(--sm-gold-ink);font-size:0.78rem;">Hit axes: ${m.mbti.split("").join(" / ")}</div>`);
             })
             .on("mousemove", function(e) {
                 const rect = elParent.getBoundingClientRect();
@@ -2468,7 +2468,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .html(`<div class="tip-title">${m.character} · ${m.mbti} · ${m.mbti_label}</div>` +
                           `<div>Role: ${m.role}</div>` +
                           `<div>Fit: <strong style="color:var(--accent-soft);">${val}/10</strong></div>` +
-                          `<div style="margin-top:4px;font-size:0.78rem;color:var(--sm-gold-ink);">${m.note}</div>`);
+                          `<div style="margin-top:var(--space-2);font-size:0.78rem;color:var(--sm-gold-ink);">${m.note}</div>`);
             })
             .on("mousemove", function(e) {
                 const rect = elParent.getBoundingClientRect();
