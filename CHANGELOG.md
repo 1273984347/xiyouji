@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W902），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W903），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,22 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W903（2026-10-24）：审查发现修复（preflight touches 语义归一 + 门禁 45 提示语补序）
+
+
+
+> **来源**：用户 2026-10-24 对机制审查报告（W902）F1/F2 两项管控件修复裁决「批准」。
+
+> - **文件**：scripts/preflight_check.py、scripts/verify_delivery.py、tests/unit/test_preflight_touches.py、docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w903_spec.json、scripts/output/_cascade_files_W903.txt（逐件行见 file-index W903 段）。
+
+**F1 preflight touches 语义归一（假绿闭口）**：`_split_touches` 改扫描式 tokenizer——**全角括号内不切分且注记整段丢弃**（注记内常含中点·先切后剥必碎·本批实现首版即踩此坑由负样本测试暴露后改扫描式）；`touches_conflict` 由字面集合交集扩为**对称目录前缀匹配**（`X/**` 与 `X/` 归一到 `X`·对方任一元素等于 `X` 或以 `X/` 开头即命中·双向·前缀锚定整段防兄弟路径误报）——W900 认领行的通配+注记形态与并行批具体文件声明从此能真撞真报。**先红后绿**：新增单测 6 例（注记剥离 / 通配 vs 文件内 / 斜杠目录形态 / 双向 / 兄弟路径不误报 / W900 行原文回放）旧码下 5 例红实证、新码 17/17 绿；实现期两个真 bug（注记内中点切碎、`/**` 剥位少一）均被自己的负样本当场抓出——「建置即红检测法」再次闭环。安全性前提入档：仓内路径零全角括号（git ls-files 实证）。
+
+**F2 第 45 门禁提示语补序**：verify_delivery gate-45 fail_msg 由「重跑 refresh 刷新」扩为「**先 git add 本批新件再重跑 refresh**（生成器按 Git 索引收集·W896 口径·W900/W901 连踩）」——一行文案闭掉连续两批踩中的操作顺序坑。
+
+**随批订正**：审查报告状态行与 README 登记行 34 的 F1/F2「待批」改「已由 W903 修复」。
+
+**验证**：单测 17/17（先红后绿留证）·pytest 全量 858 passed 3 skipped·ruff scripts/+tests/ All checks passed·verify 全量 54 段核心全绿。
 
 ### W902（2026-10-24）：机制脚本门禁全量审查与记忆固化入仓（四发现 + pitfalls/AGENTS/文档规范增补）
 
