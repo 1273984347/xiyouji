@@ -9,11 +9,21 @@
 
 | 交付物 | 说明 |
 | --- | --- |
-| `xiyouji-flyer-a4.html` | **唯一真源**。改文案 / 改版式只动这一个文件 |
+| `xiyouji-flyer-a4.html` | **中文版唯一真源**。改文案 / 改版式只动这一个文件 |
+| `xiyouji-flyer-a4-en.html` | **英文版唯一真源**（同一栅格与令牌·EN 版专属排版微调·英文长句需更紧的字号行高） |
 | `hero-main-visual.png` | 本批新生成的专属主视觉（宣纸底浓墨剪影·朱砂钤记·2400×1017） |
 | `output/xiyouji-flyer-a4.pdf` | 双面 PDF·2 页 A4 竖版·594.96×841.92 pt·含嵌入字体 |
+| `output/xiyouji-flyer-a4-en.pdf` | 英文版双面 PDF（2 页 A4） |
 | `output/xiyouji-flyer-a4-front.png` | 正面 PNG·1240×1754 px（150 dpi A4） |
+| `output/xiyouji-flyer-a4-en-front.png` | 英文版正面 PNG（1240×1754） |
 | `output/xiyouji-flyer-a4-back.png` | 背面 PNG·1240×1754 px |
+| `output/xiyouji-flyer-a4-en-back.png` | 英文版背面 PNG（1240×1754） |
+
+## 投放接线（W898 起）
+
+- **README**：「📄 宣传单页（A4 双面 · 可打印可转发）」小节（中英双份 PDF / 分享图 / 可编辑源三列表 + 重出命令）。
+- **站内入口**：`site/index.html` 的「看数据与工具」区一行链接——Pages 只发布 `site/` 目录，故链接指向**仓库**物料目录（GitHub URL），不用相对路径。
+- **社媒分享图**：站内另有 15 张 1200×630 分享图（`site/static/images/og-*.webp`）可直接取用；单页分享图从上面的 PNG 裁切。
 
 ## 正反面分工
 
@@ -38,8 +48,12 @@
 
 ```bash
 node scripts/_w892_export_flyer.mjs          # 起本地静态服务器导出（推荐·字体必加载）
+node scripts/_w892_export_flyer.mjs --en     # 重出英文版 PDF + PNG
 node scripts/_w892_export_flyer.mjs --file   # 走 file:// 复核「双击直开」的降级表现
 ```
+
+**导出后必看两项**：① 探针报的溢出像素须为 **0**（两页各一次）；② 外域请求须为 **0**。
+**EN 版与中文版各自独立校准**——英文词长、字面比中文长约 30%，中文版的字号在英文版必溢出；故 EN 版文件内有一段「EN 版排版微调」样式段专门收紧（改文案时**先跑一次导出看溢出量**，再按需微调那段样式，**不要直接压中文版**）。
 
 导出脚本会顺带打印三项探针：**思源宋体是否真加载**、**外域请求数（应为 0）**、**每页溢出像素（应为 0）**。三项任一异常即不可交付。
 

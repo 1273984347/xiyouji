@@ -27,7 +27,9 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
-const HTML_REL = 'assets/promo/xiyouji-flyer-a4.html';
+const EN = process.argv.includes('--en');
+const HTML_REL = EN ? 'assets/promo/xiyouji-flyer-a4-en.html' : 'assets/promo/xiyouji-flyer-a4.html';
+const OUT_SUFFIX = EN ? '-en' : '';
 const OUT_DIR = path.join(ROOT, 'assets', 'promo', 'output');
 
 const MIME = {
@@ -47,7 +49,7 @@ const MIME = {
 function serve(root) {
   const server = http.createServer((req, res) => {
     const urlPath = decodeURIComponent(req.url.split('?')[0]);
-    const rel = urlPath === '/' ? '/assets/promo/xiyouji-flyer-a4.html' : urlPath;
+    const rel = urlPath === '/' ? '/' + HTML_REL : urlPath;
     const abs = path.join(root, rel);
     if (!abs.startsWith(root) || !fs.existsSync(abs) || fs.statSync(abs).isDirectory()) {
       res.writeHead(404); res.end('not found'); return;
@@ -115,7 +117,7 @@ try {
 
   // PDF（print 媒体）
   await page.emulateMedia({ media: 'print' });
-  const pdfPath = path.join(OUT_DIR, 'xiyouji-flyer-a4.pdf');
+  const pdfPath = path.join(OUT_DIR, `xiyouji-flyer-a4${OUT_SUFFIX}.pdf`);
   await page.pdf({
     path: pdfPath,
     format: 'A4',
@@ -130,7 +132,7 @@ try {
   const els = await page.$$('.page');
   const names = ['front', 'back'];
   for (let i = 0; i < els.length; i++) {
-    const out = path.join(OUT_DIR, `xiyouji-flyer-a4-${names[i]}.png`);
+    const out = path.join(OUT_DIR, `xiyouji-flyer-a4${OUT_SUFFIX}-${names[i]}.png`);
     await els[i].screenshot({ path: out });
     console.log(`PNG：${out.replace(ROOT + path.sep, '')}（${(fs.statSync(out).size / 1024).toFixed(0)} KB）`);
   }

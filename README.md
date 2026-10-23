@@ -69,6 +69,19 @@
 
 **未签名提示**：macOS 首次打开请右键 App →「打开」；Windows 若弹 SmartScreen 选择「更多信息」→「仍要运行」。详见 [xiyouji-desktop/README.md](xiyouji-desktop/README.md)。
 
+## 📄 宣传单页（A4 双面 · 可打印可转发）
+
+一张 A4 纸的正反两面：正面走大众读者路径（主张 · 主视觉 · 四个数字 · 三条卖点 · 行动入口），背面走学术与机构路径（四条硬资产 · 内容地图 · 引用格式 · 透明与许可）。可直接送印，也可截长图发社媒。
+
+| 物料 | 中文 | English |
+| --- | --- | --- |
+| 打印稿（双面 PDF · 2 页 A4） | [xiyouji-flyer-a4.pdf](assets/promo/output/xiyouji-flyer-a4.pdf) | [xiyouji-flyer-a4-en.pdf](assets/promo/output/xiyouji-flyer-a4-en.pdf) |
+| 分享图（150dpi PNG） | [正面](assets/promo/output/xiyouji-flyer-a4-front.png) · [背面](assets/promo/output/xiyouji-flyer-a4-back.png) | [Front](assets/promo/output/xiyouji-flyer-a4-en-front.png) · [Back](assets/promo/output/xiyouji-flyer-a4-en-back.png) |
+| 可编辑源（唯一真源） | [xiyouji-flyer-a4.html](assets/promo/xiyouji-flyer-a4.html) | [xiyouji-flyer-a4-en.html](assets/promo/xiyouji-flyer-a4-en.html) |
+
+- **改文案后重出三件套**：`node scripts/_w892_export_flyer.mjs`（英文版加 `--en`）——详情见 [assets/promo/README.md](assets/promo/README.md)。
+- **社媒分享图**：站内已有 15 张 1200×630 分享图（`site/static/images/og-*.webp`），可直接取用；单页分享图请从上面的 PNG 裁切。
+
 ## 🗂️ 目录导航
 
 - 📖 **全书逐回解读**：100 回逐回讲解 + 深度解读 + 原文全文 → [docs/01-全书逐回解读/](docs/01-全书逐回解读/)
@@ -104,7 +117,7 @@
 
 > **📖 阅读契约（W707）**：普通读者通读「普通读者专区」；Agent/开发者只读「开发者/维护者专区」与「AI 生成说明」。先读「是什么/为什么」（下一行），再按路径深入。
 >
-> **当前批次 W896（2026-10-23）**：门禁实算口径改目标提交树 目录清单与 stats 与文档索引三处同步 新增 ci_sim 预演工具 未落库件不再污染判据·A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> **当前批次 W898（2026-10-23）**：宣传物料投放接线 README 新增物料小节 站内入口指向仓库 英文版单页与 PDF 分享图指引 规范受管资产登记·A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 >
 > **版本号说明（W711 方案 D 起）**：本项目的批次编号为 **W###**（单调递增·永不复用·唯一对账键），`v2.3` 为内容阶段标签（定性·无 patch 位·不适用 SemVer）；W710 及更早的历史版本号 `vX.Y.Z` 保留原文。判断「这批改了什么」看 [CHANGELOG.md](CHANGELOG.md) 顶段。
 >
