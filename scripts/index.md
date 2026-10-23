@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（262）
+## 文件（265）
 
 ### Markdown 文档
 
@@ -159,6 +159,9 @@
 - `_w893_finalize_ledger.py`
 - `_w893_gen_args.py`
 - `_w893_verify.py`
+- `_w895_bl33_inventory.py`
+- `_w895_regen_preview.py`
+- `_w895_verify_blocks.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
