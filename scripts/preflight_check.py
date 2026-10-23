@@ -102,7 +102,7 @@ def _locate_status(cells):
 
 
 def _split_touches(text):
-    """touches 串切分（**多分隔符兼容**·W897 修）。
+    """touches 串切分（**多分隔符兼容**·W897 修）+ 尾注归一（W903 修）。
 
     病根（实测 W896）：本函数与命令行解析**都只按逗号切分**，而台账的 touches 列
     自 W739 起实际用「**·**」（中点）分隔 ⇒ 整串被当成**一个** touches ⇒
@@ -110,8 +110,45 @@ def _split_touches(text):
 
     兼容分隔符：逗号 `,` / 中文逗号 `，` / 顿号 `、` / 中点 `·` / 项目符号 `•`
     （**不含空白**——仓内文件名不含空格·避免把文件名本身切碎）。
+
+    尾注归一（W903·机制审查报告 F1）：台账元素常带说明性尾注（如
+    ``docs/11-方案报告/**（22 文件移动）``、``scripts/x.py（管控件·已批）``）——
+    **全角括号内不切分且整段丢弃**（注记内常含中点·先切后剥必碎·W903 实现首版
+    即踩此坑由负样本测试暴露）。安全性前提：仓内路径零全角括号（W903
+    `git ls-files` 实证）；新文件名引入全角括号即破坏此前提。
     """
-    return {t.strip() for t in re.split(r"[,，、·•]+", text or "") if t.strip()}
+    out: set[str] = set()
+    buf: list[str] = []
+    depth = 0
+    for ch in text or "":
+        if ch == "（":
+            depth += 1
+            continue
+        if ch == "）":
+            depth = max(0, depth - 1)
+            continue
+        if depth > 0:
+            continue  # 注记内容整体丢弃
+        if ch in ",，、·•":
+            tok = "".join(buf).strip()
+            buf = []
+            if tok:
+                out.add(tok)
+            continue
+        buf.append(ch)
+    tok = "".join(buf).strip()
+    if tok:
+        out.add(tok)
+    return out
+
+
+def _dir_base(tok):
+    """目录形态归一：``X/**`` 与 ``X/`` → ``X``；文件路径返回 None。"""
+    if tok.endswith("/**") and len(tok) > 3:
+        return tok[:-3]
+    if tok.endswith("/") and len(tok) > 1:
+        return tok[:-1]
+    return None
 
 
 def _locate_touches(cells):
@@ -156,8 +193,30 @@ def is_inflight(status):
 
 
 def touches_conflict(inflight_touches, mine):
-    """纯函数：在途批次 touches ∩ 本批 touches → 排序冲突清单（空=可并行）。"""
-    return sorted(set(inflight_touches) & set(mine))
+    """纯函数：在途批次 touches 与本批 touches 的冲突元素清单（空=可并行）。
+
+    W903 语义归一（机制审查报告 F1·用户批准）：由字面集合交集扩为**对称目录前缀
+    匹配**——目录声明（``X/**`` / ``X/``）与对方集合中任一 ``X`` 本身或以 ``X/``
+    开头的路径即命中；返回**参与命中的双方元素**（排序）。前缀锚定整段 ``X/``，
+    兄弟同名路径（``docs/x`` vs ``docs2/y``）不误报。
+    旧病根（W897 修分隔符后的同族语义残余）：通配/带注记声明与对方具体文件
+    **字面不等恒不命中**——W900 认领行 ``docs/11-方案报告/**（…）`` 实证，
+    W825/W893 两起真实撞面未被机器拦下与之相关。
+    """
+    hits = set()
+    for a in set(inflight_touches):
+        for b in set(mine):
+            if a == b:
+                hits.update((a, b))
+                continue
+            ab = _dir_base(a)
+            if ab is not None and (b == ab or b.startswith(ab + "/")):
+                hits.update((a, b))
+                continue
+            bb = _dir_base(b)
+            if bb is not None and (a == bb or a.startswith(bb + "/")):
+                hits.update((a, b))
+    return sorted(hits)
 
 
 def summarize_porcelain(text):
