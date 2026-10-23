@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W901），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W902），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,25 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W902（2026-10-24）：机制脚本门禁全量审查与记忆固化入仓（四发现 + pitfalls/AGENTS/文档规范增补）
+
+
+
+> **来源**：用户 2026-10-24 两令——「顺便再审查一遍之前所有批次的机制、脚本、门禁有没有问题」+「本项目是多 Agent 协作，写入 Agent 私有记忆文件作用有限，写入项目文件才真实可靠·盘点记忆文件需入仓内容」。
+
+> - **文件**：docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md（新增）、docs/11-方案报告/README.md、docs/agent/pitfalls.md、AGENTS.md、docs/00-导读/文档规范.md、CLAUDE.md、docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w902_spec.json、scripts/output/_cascade_files_W902.txt（逐件行见 file-index W902 段）。
+
+**① 机制层全量审查（报告落 审查与评审/·登记行 34）**：三层审查——机器面（26 个带自测门禁 `--self-test` 全绿·verify 54 段·pytest 852 passed·`ci_sim.py` 干净检出 7/7 PASS 含全仓 20761 链接 0 broken·CSP 856 页零漂移）+ 代码面（preflight/batch_cascade/check_folder_docs/check_doc_sync 语义审计）+ 流程面（干扰日志考古对拍）。**四发现**：
+
+- **F1【中高·假绿族】preflight touches 交集为字面字符串比对**——`docs/11-方案报告/**（注记）` 这类通配/带注记声明与对方具体文件声明**字面不等恒不命中**（W900 认领行实证）·W897 修分隔符后同族的语义面残余·两起真实撞面（W825/W893）均未被机器拦下；修法（剥注记 + `X/**` 前缀展开 + 双向对称 + 负样本单测）**待批**（管控件）。
+- **F2【低】第 45 门禁 FAIL 提示语缺「先 git add 再 refresh」顺序**——W896 生成器按 Git 索引收集·refresh 先于 add 必漏新件·W900/W901 连踩；一行文案修法**待批**（管控件）。
+- **F3【流程·本批闭合】§8 干扰日志窗口内两起覆盖事件漏登**（W825 解析层修复被并行提交覆盖·W893 台账认领行被替换）——事件路径不经过 W822 两触发点·与断档同源；本批补 2 行延迟登记（如实标注·机制不擅改）。
+- **F4【在账】C5c 裸聚合 74 处 NOTE 未推进**（W703 起步策略·列入遗留盘点）。
+
+**② 记忆固化入仓（用户指令执行·报告 §3 全清单）**：文档规范 §11.1 立**常设指令行**「方案/审查/调研/复盘/计划类交付物唯一落盘位 = docs/11-方案报告/」+ 11-方案报告 README 维护契约与 CLAUDE.md 速查层同源指针；AGENTS §4.3 本机环境事实补 4 条（curl `--ssl-no-revoke`·`/tmp` 对 Windows Python 不可见·PMC→Europe PMC 兜底·`gh api` 中文 `-f`）；pitfalls.md 补 3 条（力导向 canvas 边层·CSP 写路径 `--check` 盲区·暗色审计 http 前置假 0）·三节计数同步（CSS 9→10·JS 5→6·数据 5→6·总数 49→52·AGENTS 六主题句同批订正）。逐条盘点 22 项记忆：8 项入仓 / 11 项仓内已覆盖（grep 实证）/ 3 类刻意不入（S4 双盲·他仓·宿主层）；保真度 22 犯模板与图表判定三教训列「建议后续批」。
+
+**验证**：verify 全量 54 段核心全绿（含第 32 门禁 CLAUDE.md 速查层 46 行过）·lint_links docs 5481 链接 0 broken·pytest 852 passed 3 skipped·ruff scripts/ 口径过·ci_sim 7/7 PASS。
 
 ### W901（2026-10-24）：C5b 对账面恢复 + W900 披露项清偿（递归 glob / W757 链接新址 / T-16·T-17 补登）
 

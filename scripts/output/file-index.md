@@ -11,6 +11,35 @@
 ---
 
 
+## W902 机制脚本门禁全量审查与记忆固化入仓（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md | W902 | 新增：机制层全量审查（三层面·四发现·记忆固化迁移清单·遗留盘点） |
+| docs/11-方案报告/README.md | W902 | 审查报告登记行 34 + 维护契约 ① 补「唯一落盘位」常设指令句 |
+| docs/agent/pitfalls.md | W902 | 记忆固化 +3 条（canvas 边层 / CSP 写路径盲区 / 暗色审计 http 前置假 0）+ 三节计数 9→10·5→6·5→6 |
+| AGENTS.md | W902 | 六主题计数同步（49→52）+ §4.3 本机环境事实补 4 条（curl --ssl-no-revoke / /tmp 不可见 / Europe PMC 兜底 / gh api -f） |
+| docs/00-导读/文档规范.md | W902 | §11.1 管控表新增「常设指令」行：方案/审查/调研/复盘/计划类交付物唯一落盘位 = docs/11-方案报告/ |
+| CLAUDE.md | W902 | 速查层新增「报告落位」条目（46 行·预算 60 内） |
+| docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md | W902 | §8 干扰日志补 2 行延迟登记（W825/W893 覆盖事件·考古补·如实标注） |
+| docs/00-导读/W批次编号对账表.md | W902 | W902 认领行与收官回填 |
+| CHANGELOG.md | W902 | W902 段 |
+| HANDOVER.md | W902 | 级联头尾链与里程碑块 |
+| README.md | W902 | 当前批次版本行 |
+| STRUCTURE.md | W902 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W902 | 当前批次版本行 |
+| .github/workflows/README.md | W902 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W902 | 页脚批次链插入 W902 |
+| site/data/cross-time-danmaku.html | W902 | 页脚批次链插入 W902 |
+| site/data/tag-cloud.html | W902 | 页脚批次链插入 W902 |
+| site/dukou-engine.html | W902 | 页脚批次链插入 W902 |
+| AGENTS.md（版本脚注） | W902 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W902 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W902 | version 同步为 W902 |
+| scripts/output/file-index.md | W902 | W902 段插入 |
+| scripts/output/_w902_spec.json | W902 | 本批级联 spec |
+| scripts/output/_cascade_files_W902.txt | W902 | 级联落盘清单 |
+
 ## W901 C5b 对账面恢复 + W900 披露项清偿（2026-10-24）
 
 | 文件 | W | 说明 |
