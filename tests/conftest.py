@@ -6,12 +6,11 @@ import sys
 from pathlib import Path
 
 # 将 scripts/ 加入 sys.path（character_nlp.py 内部 `from utils.text_loader import ...` 依赖此设置）
+import pytest
+
 SCRIPTS_DIR = Path(__file__).resolve().parent.parent / "scripts"
 if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
-
-
-import pytest
 
 
 @pytest.fixture

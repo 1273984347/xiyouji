@@ -51,6 +51,9 @@ import re
 import subprocess
 import sys
 
+# W894：目标提交树口径（git ls-files）——同目录模块·Python 自动可导入
+import tracked_files as tf
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # 目录遍历排除（机器相关/不入库产物/缓存·按路径片段匹配·两侧均归一为 /frag/ 形态）
@@ -158,6 +161,27 @@ def _build_gitignored_dirs() -> set[str]:
     return rels
 
 
+def tracked_dirs() -> list[str]:
+    """在管目录绝对路径（**索引口径**·W894：只含已有被跟踪文件的目录）。
+
+    用途：门禁的「在管目录集」——并行批**在途的新目录**（全部文件未跟踪）不在集内，
+    ⇒ 不会被判「C1 缺 README.md/index.md」（那是对方施工中的状态，不是已入库缺陷）。
+    真正该抓的形态仍在集内：目录**已有被跟踪文件**却缺 index.md ⇒ 判红。
+    """
+    dirs = set()
+    for rel in tf.tracked_files():
+        d = os.path.dirname(rel)
+        while d:
+            dirs.add(d)
+            d = os.path.dirname(d)
+    out = []
+    for rel in sorted(dirs):
+        abs_dir = os.path.join(ROOT, rel)
+        if os.path.isdir(abs_dir) and not _is_excluded(abs_dir):
+            out.append(abs_dir)
+    return out
+
+
 def scan_dirs() -> list[str]:
     """返回在管目录绝对路径（递归·排除见 EXCLUDE_*）。"""
     out = []
@@ -182,17 +206,40 @@ def list_files_raw_names(abs_dir: str) -> list[str]:
     ]
 
 
-def list_files(abs_dir: str) -> list[str]:
-    """目录直属文件名（跳过占位/自身三类文档·跳过 gitignored 本地件）·排序稳定。
+def _in_repo(abs_dir: str) -> bool:
+    """目录是否位于**真实仓库根**之下（W894·索引口径的回退判据）。
 
-    gitignored 过滤是硬要求（W779 整改·首版实测 344 条）：`.gitignore` 排除的
-    敏感/本地产物（S4 双盲件、`03-PRD-第28门禁…` 真名 PRD、`.env`、
-    `SECURITY-AUDIT-*.password` 等）一旦被 index.md 列名并入库，等于把「不入仓」
-    的路径本身公开——正是 W620/W650 两轮裁决要防的泄漏面。
+    仓库内目录 ⇒ 索引口径（未跟踪的并行批在途件不计入·W894 根修目标）；
+    仓库外目录（测试合成树 / 临时目录）⇒ 磁盘口径（否则合成树不在索引里，
+    清单恒为空、自测与门禁单测会「全绿但毫无意义」）。
+    判据用 `tracked_files.ROOT`（真实仓库根）而非 `gen.ROOT`——后者在 self-test
+    里被指向临时目录，会把合成树误判成仓库内。
     """
-    names_all = list_files_raw_names(abs_dir)
-    ignored = _gitignored_set(abs_dir, names_all)
-    return [n for n in sorted(names_all) if n not in ignored]
+    try:
+        rel = os.path.relpath(os.path.abspath(abs_dir), tf.ROOT)
+    except ValueError:
+        return False
+    return not rel.startswith("..") and not os.path.isabs(rel)
+
+
+def list_files(abs_dir: str) -> list[str]:
+    """目录直属文件名（**索引口径**·W894·跳过清单自身与占位件）·排序稳定。
+
+    W894（用户批准根修）：实算基准从「物理工作树扫描」改为「Git 索引」
+    （`git ls-files`）——索引 = 已跟踪 + 已暂存新增 = **将要入库的内容**。
+    并行批的未落库件（未跟踪）因此不再进清单 ⇒ 本地不再「他方在途红」、
+    CI 侧口径一致。
+
+    gitignored 文件天然不在索引里 ⇒ 原 `_gitignored_set` 过滤不再需要（W779
+    的泄漏面防护由「不入索引」保证得更强：不入索引 = 不入库 = 不会被列名公开）。
+
+    **开发注意**：新建文件后需先 `git add` 再刷新清单（未跟踪文件不在索引）——
+    这与提交前本来就要 add 的次序一致。
+    """
+    if not _in_repo(abs_dir):
+        return list_files_disk(abs_dir)
+    rel = rel_of(abs_dir)
+    return sorted(n for n in tf.tracked_in_dir(rel) if n not in SKIP_NAMES)
 
 
 def _kind_exists(abs_dir: str, kind: str) -> bool:
@@ -256,18 +303,46 @@ def _kind_exists(abs_dir: str, kind: str) -> bool:
 
 
 def list_subdirs(abs_dir: str) -> list[str]:
-    """直属子目录名（排除：非目录 / EXCLUDE_TOP / gitignored 目录如 docs/S2-*）。"""
+    """直属子目录名（**索引口径**·W894·排除：EXCLUDE_TOP / 排除片段命中的目录）。
+
+    W894：实算基准改为 Git 索引（`git ls-files`）——未跟踪的新目录不进清单，
+    并行批的在途目录因此不污染判据（磁盘口径下会判「子目录清单漂移」）。
+    """
+    if not _in_repo(abs_dir):
+        return list_subdirs_disk(abs_dir)
+    rel = rel_of(abs_dir)
+    out = []
+    for n in sorted(tf.tracked_subdirs(rel)):
+        p = os.path.join(abs_dir, n)
+        if os.path.isdir(p) and not _is_excluded(p):
+            out.append(n)
+    return out
+
+
+def list_files_disk(abs_dir: str) -> list[str]:
+    """目录直属文件名（**磁盘口径**·W894 后仅供 self-test 与降级路径使用）。
+
+    生成器主路径已改索引口径（`list_files`）；本函数保留旧行为，供：
+      · `check_folder_docs.py --self-test` 的合成树（不在 Git 索引内）；
+      · Git 不可用时的降级路径。
+    gitignored 过滤保留（W779 泄漏面防护：不入索引 = 不入库 = 不会被列名公开）。
+    """
+    names_all = list_files_raw_names(abs_dir)
+    ignored = _gitignored_set(abs_dir, names_all)
+    return [n for n in sorted(names_all) if n not in ignored]
+
+
+def list_subdirs_disk(abs_dir: str) -> list[str]:
+    """直属子目录名（**磁盘口径**·W894 后仅供 self-test 与降级路径使用）。"""
     try:
         names = os.listdir(abs_dir)
     except OSError:
         return []
-    # 归一化比对：_gitignored_set 返回的是**名字**（去前缀），故用 n 直接判成员
     ignored_names = _gitignored_set(abs_dir, names, is_dir=True)
-    out = [n for n in sorted(names)
-           if os.path.isdir(os.path.join(abs_dir, n))
-           and not _is_excluded(os.path.join(abs_dir, n))
-           and n not in ignored_names]
-    return out
+    return [n for n in sorted(names)
+            if os.path.isdir(os.path.join(abs_dir, n))
+            and not _is_excluded(os.path.join(abs_dir, n))
+            and n not in ignored_names]
 
 
 def group_label(fname: str) -> str:
@@ -342,13 +417,16 @@ def _guide_name(abs_dir: str) -> str | None:
     return None
 
 
-def build_index(abs_dir: str) -> str:
-    """index.md：机器可读逐文件清单（定位=「这个目录里有什么」·不含叙述与约定）。"""
+def build_index(abs_dir: str, disk: bool = False) -> str:
+    """index.md：机器可读逐文件清单（定位=「这个目录里有什么」·不含叙述与约定）。
+
+    `disk=True` 走磁盘口径清单（仅供 self-test 合成树用·W894）。
+    """
     rel = rel_of(abs_dir)
     title = os.path.basename(abs_dir) if rel else "仓库根目录"
     here = f"`{rel}/`" if rel else "仓库根目录"
-    subdirs = list_subdirs(abs_dir)
-    files = list_files(abs_dir)
+    subdirs = list_subdirs_disk(abs_dir) if disk else list_subdirs(abs_dir)
+    files = list_files_disk(abs_dir) if disk else list_files(abs_dir)
 
     lines = [f"# 文件索引 · {title}", ""]
     lines.append(f"> 本文件逐条列出 {here} 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。")
@@ -398,13 +476,16 @@ def build_index(abs_dir: str) -> str:
     return "\n".join(lines)
 
 
-def build_readme(abs_dir: str) -> str:
-    """README.md：人读目录导读（定位=「这里装什么、怎么加东西」·不含逐文件清单）。"""
+def build_readme(abs_dir: str, disk: bool = False) -> str:
+    """README.md：人读目录导读（定位=「这里装什么、怎么加东西」·不含逐文件清单）。
+
+    `disk=True` 走磁盘口径清单（仅供 self-test 合成树用·W894）。
+    """
     rel = rel_of(abs_dir)
     title = os.path.basename(abs_dir) if rel else "仓库根目录"
     here = f"`{rel}/`" if rel else "仓库根目录"
-    subdirs = list_subdirs(abs_dir)
-    files = list_files(abs_dir)
+    subdirs = list_subdirs_disk(abs_dir) if disk else list_subdirs(abs_dir)
+    files = list_files_disk(abs_dir) if disk else list_files(abs_dir)
     groups = {group_label(f) for f in files}
 
     lines = [f"# {title}", ""]
@@ -447,9 +528,13 @@ def _describe(abs_dir: str, rel: str, subdirs: list[str], files: list[str], grou
     return "".join(bits) + "。详见同目录 `index.md` 的逐文件清单。"
 
 
-def render(abs_dir: str, kind: str) -> str:
-    """渲染目标文件：H1 标题 → 血缘元信息块 → 正文（§4.1：H1 须为首个非空行）。"""
-    body = build_index(abs_dir) if kind == "index.md" else build_readme(abs_dir)
+def render(abs_dir: str, kind: str, disk: bool = False) -> str:
+    """渲染目标文件：H1 标题 → 血缘元信息块 → 正文（§4.1：H1 须为首个非空行）。
+
+    `disk=True` 走**磁盘口径**清单（仅供 self-test 的合成树用——它不在 Git 索引内）。
+    """
+    body = (build_index(abs_dir, disk=disk) if kind == "index.md"
+            else build_readme(abs_dir, disk=disk))
     role = ("逐文件索引（机器可读·与 README.md 分工：本文件列清单、README 讲用途约定）"
             if kind == "index.md" else
             "目录导读（人读·与 index.md 分工：本文件讲用途约定、index.md 列清单）")

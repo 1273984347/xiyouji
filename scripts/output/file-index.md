@@ -11,6 +11,126 @@
 ---
 
 
+## W898 宣传物料投放接线与派生（2026-10-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| assets/promo/xiyouji-flyer-a4-en.html | W898 | 英文版单页（同一栅格·EN 版专属排版微调·两页 0px 溢出） |
+| assets/promo/output/xiyouji-flyer-a4-en.pdf | W898 | 英文版双面 PDF（2 页 A4） |
+| assets/promo/output/xiyouji-flyer-a4-en-front.png | W898 | 英文版正面 PNG（1240×1754） |
+| assets/promo/output/xiyouji-flyer-a4-en-back.png | W898 | 英文版背面 PNG（1240×1754） |
+| assets/promo/README.md | W898 | 目录导读补英文版与投放接线说明 |
+| scripts/_w892_export_flyer.mjs | W898 | 导出脚本加 `--en` 档（英文版 PDF + PNG） |
+| README.md | W898 | 新增「📄 宣传单页（A4 双面）」物料小节 |
+| site/index.html | W898 | 「看数据与工具」区新增宣传单页入口（指向仓库物料目录） |
+| docs/00-导读/文档规范.md | W898 | §11.2 受管资产表新增 assets/promo/ 一行 |
+| docs/00-导读/W批次编号对账表.md | W898 | 认领行与收官回填 |
+| CHANGELOG.md | W898 | W898 段 |
+| scripts/output/file-index.md | W898 | 同批段回写 |
+
+## W897 协作防护修复（2026-10-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/preflight_check.py | W897 | touches 分隔符根修（`_split_touches` 兼容五种分隔符·台账与命令行同源） |
+| tests/unit/test_preflight_touches.py | W897 | 新增单测 11 例（多分隔符 / 台账列解析 / 占位符归一 / 交集判定） |
+| .github/workflows/ci-sim.yml | W897 | CI 侧预演 workflow（PR + push dev·干净检出跑 7 项关键门禁） |
+| .github/workflows/README.md | W897 | 里程碑行上限随现役号同步 |
+| scripts/output/stats.json | W897 | pytest_collected 随新增单测刷新 |
+| pytest.ini | W897 | pytest_collected 标记同步 |
+| docs/00-导读/W批次编号对账表.md | W897 | 认领行与收官回填 |
+| CHANGELOG.md | W897 | W897 段 |
+| scripts/output/file-index.md | W897 | 同批段回写 |
+
+## W896 门禁实算口径改造（2026-10-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/tracked_files.py | W896 | 目标提交树口径单一事实源（tracked_files / tracked_in_dir / tracked_subdirs / is_tracked） |
+| scripts/ci_sim.py | W896 | CI 侧预演工具（worktree 干净检出 + 关键门禁 + 自动清理·只读零风险） |
+| scripts/check_folder_docs.py | W896 | 第 45 槽实算改索引口径 + 三态判据 + 计数自洽 + 口径开关 |
+| scripts/gen_folder_docs.py | W896 | 生成器同步改索引口径 + 磁盘口径平行实现（自测与降级用） |
+| scripts/stats.py | W896 | 全部 glob 计数改索引口径（目标提交树实算） |
+| scripts/docs_index.py | W896 | scan_docs 默认 tracked_only（写盘与门禁比对共用同一函数） |
+| scripts/output/stats.json | W896 | report_docs 53→54·pytest_collected 835→836·inline_css_pages 归实况 330 |
+| scripts/output/stats-changelog.json | W896 | W896 变更史登记 |
+| scripts/output/stats-index.md | W896 | 反向索引同步 |
+| scripts/index.md | W896 | 目录清单同步（新增两脚本） |
+| docs/INDEX.md | W896 | 文档索引重建（745 篇·索引口径） |
+| docs/11-方案报告/计划方案/T17-任务计划执行与经验沉淀报告-2026-10-23.md | W896 | 框架第十七次执行（口径改造 + AC 表 + 3 条经验） |
+| docs/00-导读/W批次编号对账表.md | W896 | 认领行与收官回填 |
+| CHANGELOG.md | W896 | W896 段 |
+| scripts/output/file-index.md | W896 | 同批段回写 |
+
+## W895 BL-33 收敛批（2026-10-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/system.css | W895 | BL-33 收敛：page-wrap 令牌 / seal 淡底 / kpi-row 规则升全局 |
+| scripts/inline_css.py | W895 | 护栏：--force 只重同步已内联页·外链转内联须 --inline-links |
+| site/data/（88）site/en/（138）site/reader/（102） | W895 | 内联块按源重生成（集合差零差异） |
+| scripts/_w895_bl33_inventory.py | W895 | 新增：内联块与事实源差异盘点 |
+| scripts/_w895_regen_preview.py | W895 | 新增：重生成预演（sync 前证明反冲风险） |
+| scripts/_w895_verify_blocks.py | W895 | 新增：重生成后集合差校验（226/226 零差异） |
+| scripts/output/_w864_accent_exemptions.json | W895 | 按新实测保守核查（余 256 条） |
+| docs/00-导读/W批次编号对账表.md | W895 | 认领行与收官回填 |
+| CHANGELOG.md | W895 | W895 段 |
+| scripts/output/file-index.md | W895 | 同批段回写 |
+
+## W893 四画幅素材图成套批（2026-10-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/hero-07-liudao-lingyun.webp | W893 | 新增：Hero 素材 07/09·六盘山岭云海（山脊云海+七人单行+朱砂小旗·净空带 473px） |
+| site/static/images/hero-08-yunhai-chengqiao.webp | W893 | 新增：Hero 素材 08/09·云海石拱桥（云海+石桥+白马与僧影+朱砂彩带·净空带 451px） |
+| site/static/images/hero-09-shijue-wangluo.webp | W893 | 新增：Hero 素材 09/09·石觉网罗（根须网+朱砂节点+赭金连接弧·净空带 485px） |
+| site/static/images/card-25-santiebaigujing.webp | W893 | 新增：卡片封面 25/27·三打白骨精（石窟+骷髅剪影+朱砂布条·净空带 378px） |
+| site/static/images/card-26-wukong-jingu.webp | W893 | 新增：卡片封面 26/27·悟空金箍棒（背身持棒+虎纹围裙+朱砂绦·净空带 392px） |
+| site/static/images/card-27-rejiao-fenxi.webp | W893 | 新增：卡片封面 27/27·热力分析（情感点阵+朱砂色带+赭金散点·净空带 404px） |
+| site/static/images/post-07-gu-shan-yingxue.webp | W893 | 新增：竖版长图 07/09·孤山映雪（古峰+崖松+朱砂塔灯·净空带 456px） |
+| site/static/images/post-08-tangseng-chanshi.webp | W893 | 新增：竖版长图 08/09·唐僧禅释（背身持锡杖+背光晕+朱砂念珠·净空带 534px） |
+| site/static/images/post-09-bajiaoshan-zhaoyun.webp | W893 | 新增：竖版长图 09/09·八戒造云（背身扛耙+朱砂领结·净空带 487px） |
+| site/static/images/og-13-changgui-shanmen.webp | W893 | 新增：分享图 13/15·残破山门（断门+荒草薄雾+朱砂经幡·净空带 169px） |
+| site/static/images/og-14-shaseng-denggao.webp | W893 | 新增：分享图 14/15·沙僧登高（石矶+苍鹭展翅+朱砂浮标·净空带 253px） |
+| site/static/images/og-15-shijian-liejian.webp | W893 | 新增：分享图 15/15·时间刻痕（刻痕序列+朱砂刻度+赭金标记·净空带 264px） |
+| scripts/_w893_gen_args.py | W893 | 十二张生成参数（锚点沿用 W882 改写版·四画幅各三张·拉丁方主题） |
+| scripts/_w893_finalize.py | W893 | 定稿脚本（覆盖缩放 + 保主体/保净空带裁切 + WebP 落盘） |
+| scripts/_w893_verify.py | W893 | 五道量化验收脚本（尺寸/净空带/主体墨量/朱砂/规则线） |
+| scripts/output/_w893_spec.json | W893 | 本批 spec 十字段（CHANGELOG 版段递延·待顶段推进后补写） |
+| docs/11-方案报告/计划方案/T16-任务计划执行与经验沉淀报告-2026-10-23.md | W893 | 新增：T-16 框架报告（四画幅素材图成套批） |
+| docs/00-导读/W批次编号对账表.md | W893 | 认领行与收官回填 |
+
+## W892 宣传单页批（2026-10-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| assets/promo/xiyouji-flyer-a4.html | W892 | 宣传单页唯一真源（A4 双面·12 栏栅格·10 枚内联 SVG·零外域） |
+| assets/promo/hero-main-visual.png | W892 | 本批新生成专属主视觉（宣纸浓墨山影 + 朱砂钤记·色归一化到 #FAF7F0） |
+| assets/promo/output/xiyouji-flyer-a4.pdf | W892 | 双面 PDF（2 页 A4·子集嵌入思源宋体） |
+| assets/promo/output/xiyouji-flyer-a4-front.png | W892 | 正面 PNG（1240×1754·150dpi） |
+| assets/promo/output/xiyouji-flyer-a4-back.png | W892 | 背面 PNG（1240×1754·150dpi） |
+| assets/promo/README.md | W892 | 目录导读（真源说明 + 复算命令 + 数字口径警示） |
+| scripts/_w892_export_flyer.mjs | W892 | 三件套导出（内置静态服务器 + 字体/外域/溢出三探针） |
+| scripts/_w892_probe.mjs | W892 | 版式判据探针（末块底边 vs 内容底边·两页须 0px 溢出） |
+| docs/11-方案报告/计划方案/T15-任务计划执行与经验沉淀报告-2026-10-23.md | W892 | 框架第十五次执行（规划五表 + AC 验收 + 5 条经验） |
+| docs/11-方案报告/README.md | W892 | §二 补登记 T-15（篇数 17→18） |
+| STRUCTURE.md | W892 | assets 段新增 promo/ 登记 + report_docs 标记同步 |
+| docs/00-导读/W批次编号对账表.md | W892 | 认领行与收官回填 |
+| CHANGELOG.md | W892 | W892 段 |
+| scripts/output/file-index.md | W892 | 同批段回写 |
+
+## W891 en 收尾批（2026-10-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/（138 页） | W891 | A 渠 15 处容器归并 + nav-back 49 页文字态 + 间距令牌化 3,353 处 |
+| scripts/_w891_en_survey.py | W891 | en 收尾前置盘点（容器值/断点/nav-back 变体/间距量） |
+| scripts/_w891_en_migrate.py | W891 | A 渠 + nav-back 迁移驱动（INLINED 跳过·@media 占位保护） |
+| scripts/output/_w864_accent_exemptions.json | W891 | W887 分册 −46 条 nav-back（随批递减·全簿 256） |
+| docs/00-导读/W批次编号对账表.md | W891 | 认领行与收官回填 |
+| CHANGELOG.md | W891 | W891 段 |
+| scripts/output/file-index.md | W891 | 同批段回写 |
+
 ## W890 CI 阻塞项清偿批（2026-10-23）
 
 | 文件 | W | 说明 |

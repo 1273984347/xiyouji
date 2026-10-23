@@ -19,10 +19,10 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="I · Data Source &amp;amp; Three Subnetworks · II · Divine-System Subnetwork Force Graph · III · Demon-Faction Subnetwork Force Graph · Annotated Journey to the West">
     <meta property="og:description" content="I · Data Source &amp;amp; Three Subnetworks · II · Divine-System Subnetwork Force Graph · III · Demon-Faction Subnetwork Force Graph · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
-                                                                                                                                                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -471,7 +471,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -514,12 +514,20 @@ h4 { font-size: 18px; font-weight: 500; }
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
     line-height: 1.1;
     text-align: center;
+    flex-shrink: 0;
+}
+/* W856 新品牌图形标（方向 H「山·门槛」·SVG 于 static/icons/logo-mark-light.svg）
+   —— 纯加法：.seal 保留，其余页面的旧印面标识不受影响 */
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: block;
     flex-shrink: 0;
 }
 .wordmark {
@@ -705,6 +713,10 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+/* BL-33 收敛（W895）：KPI 顶条按行收敛——同排首个 kpi-card 保顶条、其余转细线
+   （原 W864-W873 逐页写入内联副本·此处升为 system.css 单一事实源·防 inline_css --force 回吞） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1248,58 +1260,75 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    
-/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+
+/* W885：数据页/可视化页页头装饰插画（深底直显版·浅底宣纸图贴在暗色 hero 上会成亮斑） */
+.hero-ornament {
+    position: absolute;
+    right: clamp(var(--space-6), 5vw, var(--space-12));
+    bottom: clamp(var(--space-5), 4vw, var(--space-9));
+    width: clamp(140px, 18vw, 240px);
+    height: auto;
+    opacity: .9;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+
     .hero-ornament {
-        position: absolute;
-        right: clamp(var(--space-6), 5vw, var(--space-12));
-        bottom: clamp(var(--space-5), 4vw, var(--space-9));
-        width: clamp(140px, 18vw, 240px);
-        height: auto;
-        opacity: .9;
-        pointer-events: none;
+        display: none;
     }
+}
 
-    @media (max-width: 768px) {
+/* W888：数据页卷末插画（浅底宣纸版·暗色模式下隐藏——浅底图贴深底会成亮斑） */
+.viz-illustration {
+    margin: clamp(32px, 5vw, 64px) auto 0;
+    max-width: 420px;
+}
 
-        .hero-ornament {
-            display: none;
-        }
-    }
-</style>
+.viz-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: .92;
+}
+
+html[data-theme="dark"] .viz-illustration {
+    display: none;
+}
+    </style>
 <style>
         /* e-track-exempt: chart-data-colors 1 处 */
         /* === 仅本页特有样式 === */
-        .container { max-width: 1280px; margin: 0 auto; }
-header { text-align: center; margin-bottom: 40px; padding: 30px 0; border-bottom: 2px solid var(--line); }
+        .container { max-width: var(--container-content); margin: 0 auto; }
+header { text-align: center; margin-bottom: var(--space-8); padding: 30px 0; border-bottom: 2px solid var(--line); }
 header h1 { font-size: 2.2em; color: var(--accent-text); margin-bottom: 10px; font-weight: 600; }
 header .subtitle { color: var(--ink-soft); font-size: 1.1em; }
-header .meta { color: var(--accent-3); font-size: 0.9em; margin-top: 8px; }
+header .meta { color: var(--accent-3); font-size: 0.9em; margin-top: var(--space-3); }
 .section { background: var(--paper); margin: 30px 0; padding: 30px; border: 1px solid var(--line); border-radius: var(--radius-md) }
-.section-title { font-size: 1.6em; color: var(--accent-2); margin-bottom: 8px; font-weight: 600; border-left: 4px solid var(--accent); padding-left: 12px; }
+.section-title { font-size: 1.6em; color: var(--accent-2); margin-bottom: var(--space-3); font-weight: 600; border-left: 4px solid var(--accent); padding-left: var(--space-4); }
 .section-title.alt { color: var(--accent); border-left-color: var(--accent-2); }
 .section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
-.section-sub { color: var(--ink-soft); font-size: 0.9em; margin-bottom: 20px; letter-spacing: 1px; }
-.definition { background: var(--paper-warm); padding: 15px; margin-bottom: 20px; border-left: 3px solid var(--accent-3); font-size: 0.95em; }
-.chart-block { margin: 20px 0; }
-.chart-title { font-weight: 600; color: var(--ink); margin-bottom: 8px; }
-.chart-caption { color: var(--ink-soft); font-size: 0.85em; margin-bottom: 12px; }
+.section-sub { color: var(--ink-soft); font-size: 0.9em; margin-bottom: var(--space-5); letter-spacing: 1px; }
+.definition { background: var(--paper-warm); padding: 15px; margin-bottom: var(--space-5); border-left: 3px solid var(--accent-3); font-size: 0.95em; }
+.chart-block { margin: var(--space-5) 0; }
+.chart-title { font-weight: 600; color: var(--ink); margin-bottom: var(--space-3); }
+.chart-caption { color: var(--ink-soft); font-size: 0.85em; margin-bottom: var(--space-4); }
 .chart-svg { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md) }
-.legend-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; font-size: 0.85em; }
+.legend-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: var(--space-4); font-size: 0.85em; }
 .legend-item { display: flex; align-items: center; gap: 6px; }
 .legend-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
-.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin: 20px 0; }
+.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin: var(--space-5) 0; }
 .kpi-card { background: var(--paper-warm); padding: 15px; border-radius: var(--radius-md) ; text-align: center; }
 .kpi-value { font-size: 1.8em; color: var(--accent); font-weight: 700; }
-.kpi-label { color: var(--ink-soft); font-size: 0.85em; margin-top: 4px; }
+.kpi-label { color: var(--ink-soft); font-size: 0.85em; margin-top: var(--space-2); }
 .insight-list { list-style: none; }
-.insight-list li { background: var(--paper-warm); margin: 8px 0; padding: 12px 15px; border-left: 3px solid var(--accent-2); border-radius: var(--radius-sm) }
+.insight-list li { background: var(--paper-warm); margin: var(--space-3) 0; padding: var(--space-4) 15px; border-left: 3px solid var(--accent-2); border-radius: var(--radius-sm) }
 .insight-list li strong { color: var(--accent); }
 .node-label { font-size: 11px; fill: var(--ink); pointer-events: none; }
 .node-circle { cursor: pointer; }
 .node-circle:hover { stroke: var(--accent); stroke-width: 2px; }
-.tooltip { position: absolute; background: var(--dark); color: var(--paper); padding: 8px 12px; border-radius: var(--radius-md) ; font-size: 0.85em; pointer-events: none; z-index: 100; max-width: 375px; }
-footer { text-align: center; margin-top: 40px; padding: 20px 0; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: 0.85em; }
+.tooltip { position: absolute; background: var(--dark); color: var(--paper); padding: var(--space-3) var(--space-4); border-radius: var(--radius-md) ; font-size: 0.85em; pointer-events: none; z-index: 100; max-width: 375px; }
+footer { text-align: center; margin-top: var(--space-8); padding: var(--space-5) 0; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: 0.85em; }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -1330,7 +1359,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
         <nav aria-label="Main">
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
-            <a href="../data/character-semantic-network.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/character-semantic-network.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
             <a href="../data/tag-cloud.html">Tag Cloud</a>
             <a href="../data/text-search.html">Full-Text Search</a>
         </nav>
@@ -1345,7 +1374,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
             <img class="hero-ornament" src="../static/images/viz-dark-01-network.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
 <div class="container">
 <header>
 <h1>Character Semantic Network</h1>
@@ -1452,12 +1481,12 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
         <nav aria-label="Footer">
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
-            <a href="../data/character-semantic-network.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/character-semantic-network.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
             <a href="../data/tag-cloud.html">Tag Cloud</a>
             <a href="../data/text-search.html">Full-Text Search</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 </div>
 
 <script src="../static/js/d3.v7.min.js"></script>

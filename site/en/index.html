@@ -19,7 +19,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="English Pages · Annotated Journey to the West">
     <meta property="og:description" content="English Pages · Annotated Journey to the West">
-                                                                                                                                                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -468,7 +468,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -511,12 +511,20 @@ h4 { font-size: 18px; font-weight: 500; }
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
     line-height: 1.1;
     text-align: center;
+    flex-shrink: 0;
+}
+/* W856 新品牌图形标（方向 H「山·门槛」·SVG 于 static/icons/logo-mark-light.svg）
+   —— 纯加法：.seal 保留，其余页面的旧印面标识不受影响 */
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: block;
     flex-shrink: 0;
 }
 .wordmark {
@@ -702,6 +710,10 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+/* BL-33 收敛（W895）：KPI 顶条按行收敛——同排首个 kpi-card 保顶条、其余转细线
+   （原 W864-W873 逐页写入内联副本·此处升为 system.css 单一事实源·防 inline_css --force 回吞） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1245,6 +1257,41 @@ td.num, th.num {
         max-width: 220px;
     }
 }
+
+/* W885：数据页/可视化页页头装饰插画（深底直显版·浅底宣纸图贴在暗色 hero 上会成亮斑） */
+.hero-ornament {
+    position: absolute;
+    right: clamp(var(--space-6), 5vw, var(--space-12));
+    bottom: clamp(var(--space-5), 4vw, var(--space-9));
+    width: clamp(140px, 18vw, 240px);
+    height: auto;
+    opacity: .9;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+
+    .hero-ornament {
+        display: none;
+    }
+}
+
+/* W888：数据页卷末插画（浅底宣纸版·暗色模式下隐藏——浅底图贴深底会成亮斑） */
+.viz-illustration {
+    margin: clamp(32px, 5vw, 64px) auto 0;
+    max-width: 420px;
+}
+
+.viz-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: .92;
+}
+
+html[data-theme="dark"] .viz-illustration {
+    display: none;
+}
     </style>
 <style>
         :root {
@@ -1280,7 +1327,7 @@ td.num, th.num {
         .lang-switch a {
             color: var(--accent-soft);
             text-decoration: none;
-            padding: 4px 10px;
+            padding: var(--space-2) 10px;
             border: 1px solid color-mix(in srgb, var(--dark-text) 35%, transparent);
             border-radius: 4px;
             transition: background 0.15s, color 0.15s;
@@ -1289,7 +1336,7 @@ td.num, th.num {
         .hero {
             background: linear-gradient(135deg, var(--dark) 0%, #3a2820 50%, #5a3828 100%);
             color: var(--dark-text);
-            padding: 80px 24px 60px;
+            padding: var(--space-11) var(--space-6) 60px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -1305,7 +1352,7 @@ td.num, th.num {
             font-size: 2.6rem;
             font-weight: 600;
             letter-spacing: 0.08em;
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
             position: relative;
             text-wrap: balance;
             z-index: 1;
@@ -1326,16 +1373,16 @@ td.num, th.num {
             z-index: 1;
         }
         .container {
-            max-width: 1024px;
+            max-width: var(--container-content);
             margin: -40px auto 60px;
-            padding: 0 24px;
+            padding: 0 var(--space-6);
             position: relative;
             z-index: 2;
         }
         .section-title {
             font-size: 1.5rem;
-            margin: 32px 0 16px;
-            padding-bottom: 8px;
+            margin: var(--space-7) 0 16px;
+            padding-bottom: var(--space-3);
             border-bottom: 2px solid var(--accent);
             display: inline-block;
             text-wrap: balance;
@@ -1349,13 +1396,13 @@ td.num, th.num {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            margin-bottom: 40px;
+            margin-bottom: var(--space-8);
         }
         .card {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: 8px;
-            padding: 28px 24px;
+            padding: 28px var(--space-6);
             box-shadow: var(--shadow);
             transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
             text-decoration: none;
@@ -1376,34 +1423,34 @@ td.num, th.num {
         }
         .card h2 {
             font-size: 1.35rem;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
             font-weight: 600;
             text-wrap: balance;
         }
         .card p {
             color: var(--ink-soft);
             font-size: 0.92rem;
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
         }
         .card .meta {
             font-size: 0.78rem;
             color: var(--ink-soft);
             border-top: 1px dashed var(--line);
             padding-top: 10px;
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         .notice {
             background: var(--paper-warm);
             border: 1px solid var(--accent-soft);
             border-radius: 6px;
-            padding: 12px 16px;
+            padding: var(--space-4) 16px;
             font-size: 0.88rem;
             color: var(--accent-3);
-            margin-bottom: 24px;
+            margin-bottom: var(--space-6);
         }
         footer {
             text-align: center;
-            padding: 24px;
+            padding: var(--space-6);
             color: var(--ink-soft);
             font-size: 0.85rem;
             border-top: 1px solid var(--line);
@@ -1412,7 +1459,7 @@ td.num, th.num {
         footer a {
             color: var(--accent-2);
             text-decoration: none;
-            margin: 0 8px;
+            margin: 0 var(--space-3);
         }
         footer a:hover { text-decoration: underline; }
         .footer-index {
@@ -1450,8 +1497,8 @@ td.num, th.num {
 <body>
     <header class="hero">
         <div class="lang-switch">
-            <a href="../index.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
-         · <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div>
+            <a href="../index.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
+         · <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div>
         <h1>Journey to the West · Annotated</h1>
         <div class="subtitle">A HYBRID READING PROJECT</div>
         <div class="tagline">A hundred chapters of mountains, waters, and human hearts — a thousand years of echoes and rereadings.</div>

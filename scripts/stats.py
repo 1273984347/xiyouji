@@ -23,18 +23,21 @@ stats-index.md 反向段（本文件渲染产物）。首条 W704（changes=[]�
 
 import argparse
 import datetime
-import glob
 import json
 import os
 import re
 import subprocess
 import sys
 
+# W894：目标提交树口径（git ls-files）——同目录模块·无需 sys.path 调整
+import tracked_files as tf
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 OUT = os.path.join(HERE, "output", "stats.json")
 HIST = os.path.join(HERE, "output", "stats-changelog.json")
 INDEX = os.path.join(HERE, "output", "stats-index.md")
+
 
 CONTENT_DIRS = ["01-全书逐回解读", "02-人物深度分析", "03-主题与情节专题", "04-文化与历史背景", "05-诗词歌赋", "06-个人随笔"]
 INLINED_MARK = "(tokens.css + system.css)"  # inline_css.py 注入的标记行特征
@@ -112,12 +115,36 @@ def _pytest_collected():
 
 
 def build():
-    """磁盘实算：返回 {key: value} 平面值（实体包装在 main 做）。"""
-    site = os.path.join(ROOT, "site")
-    htmls = glob.glob(os.path.join(site, "**", "*.html"), recursive=True)
-    data_htmls = glob.glob(os.path.join(site, "data", "*.html"))
-    template_n = sum(1 for p in htmls if os.path.basename(p) == "_template.html")
-    shell_n = sum(1 for p in htmls if os.path.basename(p) == "_shell.html")
+    """目标提交树实算（W894·用户批准根修）：返回 {key: value} 平面值（实体包装在 main 做）。
+
+    W894 起实算基准从「物理工作树扫描」改为「Git 索引（`git ls-files`）」——索引
+    = 已跟踪 + 已暂存新增 = **将要入库的内容**。并行批的未落库件（未跟踪）因此
+    不再把计数算高 ⇒ 本地 `--check` 不再因他方在途件判红、CI 侧口径一致。
+
+    口径细节：
+      · `htmls` 等价原 `glob(site/**/*.html)`（含 _template/_shell 两个模板壳）；
+      · `inlined` 仍逐文件读内容（判 INLINED 标记）——读取对象限定在索引内文件；
+      · `classes` 原为 `scripts/` 下首字母大写的**目录**数（磁盘口径）→ 改为
+        「索引内 scripts/<Dir>/ 下有文件」的目录数（未跟踪目录不计入）。
+    """
+    tracked = tf.tracked_files()
+
+    def _in(prefix: str, suffix: str, direct: bool = False) -> list[str]:
+        out = []
+        for p in tracked:
+            if not p.startswith(prefix) or not p.endswith(suffix):
+                continue
+            rest = p[len(prefix):]
+            if direct and "/" in rest:
+                continue
+            out.append(p)
+        return out
+
+    htmls_rel = _in("site/", ".html")
+    htmls = [os.path.join(ROOT, p) for p in htmls_rel]
+    data_htmls_rel = _in("site/data/", ".html", direct=True)
+    template_n = sum(1 for p in htmls_rel if os.path.basename(p) == "_template.html")
+    shell_n = sum(1 for p in htmls_rel if os.path.basename(p) == "_shell.html")
 
     inlined = 0
     for p in htmls:
@@ -132,25 +159,29 @@ def build():
         gate_max = max(int(x) for x in re.findall(r"第\s*(\d+)\s*(?:槽|门禁)", f.read()))
 
     a1_a6 = sum(
-        len([p for p in glob.glob(os.path.join(ROOT, "docs", d, "*.md")) if not os.path.basename(p).startswith("README")])
+        len([p for p in _in("docs/%s/" % d, ".md", direct=True)
+             if not os.path.basename(p).startswith("README")])
         for d in CONTENT_DIRS
     )  # 口径对齐 verify 第 3 门禁：板块顶层内容 .md（排除各板块 README.md·615=621-6）
-    a4 = len([p for p in glob.glob(os.path.join(ROOT, "docs", "03-主题与情节专题", "*.md")) if not os.path.basename(p).startswith("README")])
-    methodology = len(glob.glob(os.path.join(ROOT, "docs", "10-方法论沉淀", "*.md")))
-    classes = [d for d in os.listdir(HERE) if os.path.isdir(os.path.join(HERE, d)) and d[:1].isalpha() and d[:1].isupper()]
+    a4 = len([p for p in _in("docs/03-主题与情节专题/", ".md", direct=True)
+              if not os.path.basename(p).startswith("README")])
+    methodology = len(_in("docs/10-方法论沉淀/", ".md", direct=True))
+    classes = sorted({p.split("/")[1] for p in tracked
+                      if p.startswith("scripts/") and p.count("/") == 2
+                      and p.split("/")[1][:1].isalpha() and p.split("/")[1][:1].isupper()})
 
     return {
-        "html_total": len(htmls),
-        "site_data_html": len(data_htmls),
-        "site_en_html": len(glob.glob(os.path.join(site, "en", "*.html"))),
-        "site_root_html": len(glob.glob(os.path.join(site, "*.html"))),
-        "site_reader_html": len(glob.glob(os.path.join(site, "reader", "**", "*.html"), recursive=True)),
-        "visualization_pages": len(data_htmls) - shell_n,
-        "csp_covered": len(htmls) - template_n,
+        "html_total": len(htmls_rel),
+        "site_data_html": len(data_htmls_rel),
+        "site_en_html": len(_in("site/en/", ".html", direct=True)),
+        "site_root_html": len(_in("site/", ".html", direct=True)),
+        "site_reader_html": len(_in("site/reader/", ".html")),
+        "visualization_pages": len(data_htmls_rel) - shell_n,
+        "csp_covered": len(htmls_rel) - template_n,
         # W716：两键当前同算式系近似实算——分母以各器实际排除集为准（三器现同分母=全站减两模板壳），
         # 某器排除面将来变化时须同批改本算式（scan_files/seo_scanned 为两门禁独立分母·刻意不合并）
-        "scan_files": len(htmls) - template_n - shell_n,
-        "seo_scanned": len(htmls) - template_n - shell_n,
+        "scan_files": len(htmls_rel) - template_n - shell_n,
+        "seo_scanned": len(htmls_rel) - template_n - shell_n,
         "inline_css_pages": inlined,
         "gate_count": gate_max,
         "a1_a6_docs": a1_a6,
@@ -159,7 +190,7 @@ def build():
         # json_count 键已移除（W716）：scripts/output/data/ 系 gitignored 本地产物（.gitignore:59），
         # 依赖它的键在无本地产物环境 --check 必红，违反「tracked 基准 CI 可复现」原则（W703 声明对它不成立）
         "script_classes": len(classes),
-        "report_docs": len(glob.glob(os.path.join(ROOT, "docs", "11-方案报告", "**", "*.md"), recursive=True)),
+        "report_docs": len(_in("docs/11-方案报告/", ".md")),
         "pytest_collected": _pytest_collected(),  # W830：fail-closed（ RuntimeError → main 转 FAIL）
     }
 

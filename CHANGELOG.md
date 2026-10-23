@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W890），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W898），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -18,6 +18,78 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 
+### W898（2026-10-23）：宣传物料投放接线与派生（README 物料小节 + 站内入口 + 英文版单页 + 社媒分享图指引 + 规范受管资产登记）
+
+> **来源**：用户 2026-10-23 批准「D 宣传单页投放接线（README 物料说明 / 站内入口 / 英文版 / 社媒长图）」。
+> - **文件**：assets/promo/xiyouji-flyer-a4-en.html、assets/promo/output/xiyouji-flyer-a4-en.pdf、assets/promo/output/xiyouji-flyer-a4-en-front.png、assets/promo/output/xiyouji-flyer-a4-en-back.png、assets/promo/README.md、assets/promo/index.md、assets/promo/output/index.md、scripts/_w892_export_flyer.mjs、README.md、site/index.html、docs/00-导读/文档规范.md、docs/00-导读/W批次编号对账表.md。
+> - **README 物料小节**：新增「📄 宣传单页（A4 双面 · 可打印可转发）」——中英双份的 PDF 打印稿 / 分享图 / 可编辑源三列表 + 重出命令 + 社媒分享图指引（站内已有 15 张 1200×630 分享图 `og-*.webp` 可直接取用）。
+> - **站内入口**：`site/index.html` 的「看数据与工具」区新增一行指向**仓库**物料目录的链接——Pages 只发布 `site/` 目录，站内不可用相对路径，故走 GitHub 仓 URL；纯 HTML 改动不动内联脚本 ⇒ CSP 哈希零漂移。
+> - **英文版单页**：新增 `xiyouji-flyer-a4-en.html` + 双面 PDF + 正反 PNG；导出脚本加 `--en` 档（同一脚本同一栅格，仅换文案）。英文词长、字面比中文长约 30%，中文版字号在英文版必溢出 ⇒ 单独一段 EN 版排版微调（四轮收紧：页眉 tagline 改可换行限宽、卖点卡与资产卡字号行高逐档收紧、内容地图与联系区行距压缩）⇒ **两页 0px 溢出**；并做三处本地化修正：纯图形 logo 替中文字标、KPI 去中文单位（615 essays / 87 visualisations / 133 dimensions / 34 analysis scripts）、两张配图 alt 全译。
+> - **规范受管资产登记**：`docs/00-导读/文档规范.md` §11.2 受管文件清单新增 `assets/promo/` 一行（禁止删除/重命名·删除后 README 与站内入口变死链）。
+> - **验收**：中文版与英文版**两页均 0px 溢出**（探针：末子元素底边 − 内容底边）·导出零外域请求 ·思源宋体真加载 ·PDF 实测 2 页 A4（中文版 6.27 MB / 英文版 4.69 MB）·PNG 1240×1754（150dpi）·CSP 856 页 0 漂移 ·全仓链接 20759 个 0 broken ·CSS 结构平衡通过。
+> - **CI 收尾修正（推送后 CI 实证）**：① `ci-sim.yml` 首跑红——CI 环境**未装 pytest**，而 `stats.py` 的 `pytest_collected` 键是 fail-closed 实测（无 pytest 即判红）⇒ 连带第 31 门禁 C5d 假红⇒ workflow 补装 pytest；② **ruff 24 项**（含本批引入的 5 项 + 存量 19 项）⇒ 机械清理至 **0 error**（`stats.py` 删未用 import/变量并把 `tracked_files` 导入移到文件头、三个脚本同款、`tracked_files.py` 补 `stacklevel`、tests/ 存量 19 项同步清理·零行为变更）；③ **第 45 门禁既有单测 7 项失败**（`tests/unit/test_folder_docs_gate.py`）——根因是门禁新口径只认 git 索引，而测试用的**合成树在仓库外**⇒ 补「**仓库外目录回退磁盘口径**」（真实仓库根判定·合成树/临时目录走磁盘口径）⇒ 16 项全过；④ 进一步把**在管目录集**也改索引口径（`gen.tracked_dirs()`）——并行批**在途的新目录**（全部文件未跟踪）不进集 ⇒ 不再被判「C1 缺 README.md」；已入库目录缺文档仍判红。⑤ **全量 pytest 11 项失败**（`test_docs_index.py` / `unit/test_docs_index.py`）——与 ③ 同根因：`docs_index.scan_docs` 默认走索引口径，而其单测同样用**仓库外合成树** ⇒ 补同款「仓库外 ⇒ 磁盘扫描」回退 ⇒ 30/30 过；⑥ **品牌字面量门禁命中 3 处**——某**会话运行态目录**（每会话重建·本不该入库）此前被误 `add` 进仓 ⇒ `git rm --cached` 移出索引 + `.gitignore` 补排除规则（**该字面量本身受禁·故规则用通配符写、注释亦不点名**）⇒ 品牌门禁 **0 命中**。
+**复验**：造 1 个未跟踪文件 + 1 个未跟踪目录时第 45 门禁 **0 FAIL**（核心目标达成）·self-test 7/7 ·ruff **0 error** ·16 项单测全过。
+> - **踩坑记录**：EN 版第一轮溢出 270px/266px（英文长句叠行）⇒ 修法不是继续压字号而是先修**宽度根因**（页眉 tagline 的 `white-space: nowrap` 使整列溢出 82px）；第二轮仍高 57/131px ⇒ 再逐档收紧到零溢出。教训：**先分「宽度溢出」与「高度溢出」两类**，宽度问题不修则高度怎么压都不对。
+### W897（2026-10-23）：协作防护修复（preflight touches 分隔符根修 + ci_sim 接进 CI）
+
+> **来源**：用户 2026-10-23 批准「A 修 preflight 的 touches 分隔符 bug」+「C 把 ci_sim.py 接进 CI workflow」。
+> - **文件**：scripts/preflight_check.py、tests/unit/test_preflight_touches.py、.github/workflows/ci-sim.yml、.github/workflows/README.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、pytest.ini、docs/00-导读/W批次编号对账表.md。
+> - **病根（实测）**：`preflight_check.py` 的台账 touches 列解析与命令行 `--touches` 解析**都只按逗号切分**，而台账自 W739 起实际用「·」分隔 ⇒ 整串被当成一项 ⇒ **交集检查恒空假绿** ⇒ W896 批实测的「PREFLIGHT PASS·无交集」是**无效结论**，那两次撞面实为人工核对发现而非机器拦住。
+> - **修法**：新增 `_split_touches()` 统一切分，兼容 `,` `，` `、` `·` `•` 五种分隔符（**不含空白**——仓内文件名不含空格，避免把文件名切碎）；台账列解析与命令行解析**同源**走该函数。
+> - **配套单测**：新增 `tests/unit/test_preflight_touches.py`（11 例）锁定多分隔符切分 / 台账列解析 / 占位符归一 / 交集真能报出且不误报。
+> - **ci_sim 接进 CI**：新增 `.github/workflows/ci-sim.yml`（PR 与 push dev 触发·干净检出跑 `scripts/ci_sim.py` 的 7 项关键门禁·纯 Python 不需浏览器与 node_modules·fetch-depth 0 取全量历史）⇒ 「本地红 vs CI 绿」从人工推理变成机器结论。
+> - **验收**：修复后 preflight 的 NOTE 行能把本批 touches 正确切成 5 项（修复前整串当 1 项）·单测 11 例全过 ·第 42 门禁根级脚本覆盖 0 FAIL（两个新脚本各有测试面引用）。
+### W896（2026-10-23）：门禁实算口径改造（磁盘扫描 → Git 索引·目标提交树）+ ci_sim 预演工具
+
+> **来源**：用户 2026-10-23「批准」——指认 T-15 §十 提出的两条根修方案（① 门禁实算按目标提交树 ② 新增 `scripts/ci_sim.py`）。本批为该根修的施工批（**原拟 W894·因并行 W895 先落地·按「先落地者保留」让号为 W896**）。
+> - **文件**：scripts/tracked_files.py（新增·口径单一事实源）、scripts/ci_sim.py（新增·CI 侧预演）、scripts/check_folder_docs.py（第 45 槽）、scripts/gen_folder_docs.py（生成器）、scripts/stats.py、scripts/docs_index.py、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/index.md、docs/INDEX.md、docs/11-方案报告/计划方案/T17-任务计划执行与经验沉淀报告-2026-10-23.md、docs/00-导读/W批次编号对账表.md。
+> - **核心判断**：**提交门禁的实算对象应是「将要提交的内容」，不是「物理工作树现状」**——Git 索引（`git ls-files`）= 已跟踪 + 已暂存新增 = 将要入库的内容；并行批的未落库件（未跟踪）因此不再污染判据 ⇒ 本地不再「他方在途红」、pre-commit 不必被绕过、CI 与本地口径一致。
+> - **三处实算同步改造**：① 第 45 门禁（目录清单对拍）② `stats.py`（全部 glob 计数）③ `docs_index.py`（文档索引扫描·`tracked_only` 默认开启·写盘与门禁比对共用同一函数⇒逐字节一致）。**生成器 `gen_folder_docs.py` 同步改口径**——否则刷新出的清单会列未跟踪文件 ⇒ 提交后 CI 侧判「幽灵预引」红 ⇒ 改造不彻底。
+> - **三态判据**（不是一律红/一律绿）：索引有清单无 ⇒ 红（已入库漏登记·真问题）；清单有索引无**且磁盘也无** ⇒ 红（幽灵预引·CI 侧必红）；清单有索引无**但磁盘有** ⇒ 容忍（未跟踪在途件）；清单计数与条目数不符 ⇒ 红（截断）。另保留「清单计数自洽」判据与 `_USE_TRACKED` 口径开关（self-test 走磁盘口径·合成树不在索引内）。
+> - **`scripts/ci_sim.py`（新增）**：CI 侧预演一条命令（worktree 干净检出 + 7 项关键门禁 + 自动清理·只读零风险）·`--ref`/`--full`/`--keep` 三档；把「本地红 vs CI 红」从人工推理变成可执行判据。
+> - **验收**：造 1 个未跟踪文件后第 45 门禁仍 **0 FAIL**（旧口径此处红「盘上多 1 项」）·第 45 门禁 self-test **7/7** 全过 ·实跑 0 FAIL / 188 目录 ·索引口径与磁盘口径对拍 site html **857 = 857**（含内联标记 330 = 330）·索引健康门禁 PASS（docs/INDEX.md 产物级一致 745 篇）·CSP 856 页 0 漂移 ·全仓链接 0 broken ·门禁 54 段编排未动（段数不变）。
+> - **踩坑记录**：① 生成器改口径后 self-test 的合成树不在索引内 ⇒ 必须保留磁盘口径平行实现（`list_files_disk`/`render(disk=True)`），否则自测「全绿但毫无意义」；② `inline_css_pages` 的 850→330 曾被误判为「并行批在途漂移」——实为 **stats.json 陈旧**（CI-HEAD 实况本就是 330·文档侧早已写 330）⇒ 按「以 CI-HEAD 实况为准」修正；③ 写 `scripts/output/` 下文件遇 `OSError: [Errno 22]`（并行会话占用）⇒ 写盘带重试。
+### W895（2026-10-23）：BL-33 收敛批（system.css 单一事实源 + inline_css 护栏 + 330 内联页按源重生成）
+
+> **来源**：用户令「继续」（W891 收官报告的唯一剩余欠账 BL-33）。
+> - **文件**：site/system.css、scripts/inline_css.py、site/data/（88）、site/en/（138）、site/reader/（102 个已内联页）、site/dukou-engine.html、site/_template.html、scripts/_w895_bl33_inventory.py、scripts/_w895_regen_preview.py、scripts/_w895_verify_blocks.py、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md。
+> - **根因（BL-33·双向漂移实证）**：system.css 自 W856 起停更，W864-W891 各迁移批把组件改动（`.seal` 淡底、KPI 顶条按行规则、`.page-wrap` 容器令牌）只写进**页内联副本**——于是单一事实源落后于页面，而页面又缺 system.css 后加的块（W856 品牌标、W885 页头插画、W888 卷末插画）。任何 `inline_css --force` 通扫都会把迁移成果反向冲掉（W875 已实证一次）。
+> - **处置三步**：① **system.css 补齐三处**（`.page-wrap` 1320px→`var(--container-wide)`、`.seal` 实底→`--accent-tint` 底 + `--accent` 字、KPI 顶条按行规则升为全局）；② **inline_css.py 护栏**——`--force` 只重同步**已内联页**，外链页转内联须显式 `--inline-links`（W875/W895 两次实证通扫会把 520 个外链 reader 页全部转内联·66.7 万行抖动）；③ **按源重生成 330 个内联页**（88 data + 138 en + 102 reader 双容器页 + 2 根页）。重生成前先跑 `_w895_regen_preview.py` 预演（证明未 sync 时重生成会反冲三处迁移成果）、重生成后用 `_w895_verify_blocks.py` 集合差校验。
+> - **验收**：内联块集合差 **226/226 data+en 零差异（0 缺 0 多）**·reader 102 页 +4,386/−408 行（同源增量）·520 外链 reader 页**零触碰**·CSP 856 页 0 漂移·第 49 槽门禁 **234 页 0 FAIL**·a11y data/en 双目录无 P0·豁免簿按新实测保守核查（4 条复合/批注键对不上者保留·余 256 条）。
+> - **踩坑记录**：首跑 `--force` 未加护栏前把 622 个 reader 页全部内联（66.7 万行）——按 W875 先例整目录 `git checkout HEAD -- site/reader` 恢复后，再在护栏下精确重跑（102 个本就 INLINED 的双容器页补上同源增量，520 个外链页保持原形态）。
+### W893（2026-10-23）：四画幅素材图成套批（十二张·16:9/1:1/3:4/1200×630 各三张·拉丁方主题·沿用 W882 改写锚点）
+
+
+> **来源**：用户第四回令「再帮我做几张素材图」，开工前同样先问三事；本会话按用户选择（数量=12 张、参考=无参考由本会话按项目气质定一版、主题=数据可视化插画/通用意象/回目场景/主要人物四类全要、画幅=每种都要按平均分每种三张、范围=只出图交付到 site/static/images/ 不接线）执行。
+> - **文件**：site/static/images/ 下十二个素材文件、scripts/_w893_gen_args.py、scripts/_w893_finalize.py、scripts/_w893_verify.py、scripts/output/_w893_spec.json、scripts/output/_cascade_files_W893.txt、docs/11-方案报告/计划方案/T16-任务计划执行与经验沉淀报告-2026-10-23.md、docs/00-导读/W批次编号对账表.md。
+> - **取号与认领**：台账 max(W#)=W892 → 本批取 W893（表头 max+1 规则）；`preflight_check.py --touches` 跑通；**W892 段已由并行批立段·顶段推进 ⇒ 本批 W893 正常立段**（原按 W852/W853/W878 先例预备的「版段递延」解除）。
+> - **开工前的反问与应答**：用户第一次问卷反问「我现在都有哪些素材是可以用的、都可以用在哪」→ 先做**磁盘实算 + 引用实算**双口径盘点：站内 71 件素材（images 66 + img 5），**已接线仅 8 组覆盖 856 处引用、闲置 50 件 0 引用**；两个真实缺口＝① 102 个 reader 回目页中 96 页无专属封面（chap 仅 6 页有）② 全站 855 页 og:image 共用 static/img/ 的 2 张图（images/og-01~12 实为 0 引用孤儿）。用户据此拍板「每种都要、按平均分每种三张」。
+> - **四画幅各三张 + 四主题各三张（拉丁方）**：16:9 Hero ×3 + 1:1 卡片 ×3 + 3:4 竖版 ×3 + 1200×630 分享图 ×3 = 12 张；每画幅内三张主题互不相同、每主题跨 3 画幅出现（脚本自检 `{'16:9': 3, '1:1': 3, '3:4': 3, '630': 3}`）。
+> - **锚点沿用 W882 改写版（非 W852 原版）**：art direction 段（宣纸 #FAF7F0 纸底 / 玄墨 #221D16 墨线 / 淡墨 #6B6455 / 单一朱砂 #C8463A 强调 / 赭金 #E9B885 点彩）、松散枯笔湿染笔触句、禁项清单逐字复用；**构图句取 W882 的纯否定式改写版**（删掉「clear horizontal composition boundary」类正面几何描述词，改为「主体坐于上方三分之二 + 下三分之一为空白宣纸」+ 禁项补 ruled line/horizon line/border/frame）——依 W881 实证「正面描述会被字面执行、否定式禁项不会」。**锚点原文在 tmpe/_misc/（不在 scripts/output/）**。
+> - **四画幅并存仍成套**：画幅差异全部在交付端机械处理（源图按生成器支持比例出图 → 覆盖缩放到目标 → 按「顶部深墨是否溢出画幅上沿」分流裁顶/裁底），提示词锚点四批完全同源，不靠事后调色凑一致。
+> - **量化验收**（脚本量测·非目视断言·12/12 PASS）：尺寸精确（2560×1440 / 1200×1200 / 1200×1600 / 1200×630）·底部净空带 **169 至 534 px**（26.8% 至 41.9%）·上 72% 主体墨量 **15.32% 至 62.44%**·严格朱砂 **0.00% 至 2.32%**（暖色总量口径单列 0.16% 至 6.60%）·**规则线扫描 0 命中**（W881 判据）·主底色 11 值全落暖白同族·单件 26.5 至 277.1 KB。目视复核：**零文字、零水印、零落款、零印章**。
+> - **交付端两个自造 bug 被自己的探针抓出**：① 缩放方向错（按「缩放到宽度」得 2560×1428·高度不足 12px ⇒ 底部补出纸色边带）→ 改覆盖缩放 `max(tw/w, th/h)`；② `over_y == 0` 被误判为高度不足（1:1 档 2048×2048 恰好命中目标）→ 拆分为 `< 0` 才补纸、`== 0` 直接裁到目标宽。
+> - **无文字纪律**：十二张均无文字、落款、印章与水印；每张至多一处朱砂点强调。
+> - **范围纪律**：只新增 site/static/images/ 下十二个素材文件 + 三个脚本 + 一份 spec + 报告与索引面；**不接线任何页面、不改门禁件、不推送远端**（级联仅触及页脚版本行·各 1 行·仓内标准行为）。
+> - **共享面与归属声明**：① docs/11-方案报告/README.md 的 T-16 登记行（§二 表格行 19 + §二 抬头补登记段）已被并行 W892 批的提交 76945671 带走——内容完整无损·不重做不回退·以 HEAD 版为准；② 并行提交对台账的改动是 **+3/-1（替换而非追加）** ⇒ 本批 W893 认领行被覆盖消失 ⇒ 按 git 实证补回（第 31 门禁 C4 判红 → 转绿）；③ W854/W857 状态列由「已交付」订正为「已收官」（git log --grep 实证两批已落库·台账陈滞致假在途锁死共享面）；④ **交底一处门禁判据缺陷**——`preflight_check.py:111` 的 touches 解析只按英文逗号切分，而台账实际用中文间隔号「·」分隔 ⇒ 在途批次 touches 整串被当成一个集合元素 ⇒ **交集检查恒为空、恒判「无冲突」（假绿）**；该文件属管控件，依 CLAUDE.md 第 10 条**未擅改**，已留痕待批。
+### W892（2026-10-23）：宣传单页批（A4 双面·HTML 源 + PDF + PNG 三件套）
+
+> **来源**：用户令「帮我做一套宣传单页：卖点提炼与信息层级、版式栅格、配图与图标、联系方式区块都规划好，正反面内容分工清晰」+ 四问拍板（投放场景 / 成品形态 / 配图来源 / 联系方式区块）。
+> - **文件**：assets/promo/xiyouji-flyer-a4.html、assets/promo/hero-main-visual.png、assets/promo/output/xiyouji-flyer-a4.pdf、assets/promo/output/xiyouji-flyer-a4-front.png、assets/promo/output/xiyouji-flyer-a4-back.png、assets/promo/README.md、assets/promo/index.md、assets/promo/output/index.md、scripts/_w892_export_flyer.mjs、scripts/_w892_probe.mjs、docs/11-方案报告/计划方案/T15-任务计划执行与经验沉淀报告-2026-10-23.md、docs/11-方案报告/README.md、STRUCTURE.md、docs/00-导读/W批次编号对账表.md。
+> - **正反分工**：正面走大众读者路径（品牌 → 主视觉 → 一句话主张 → 4 个 KPI → 3 条卖点 → CTA），背面走学术与机构路径（四条硬资产：可引用 / 可核验 / 可复现 / 可复核 → 内容地图 → 联系与引用格式 → 透明与许可小字块）——双轨在同一套两页内以分层实现，不另出第二套印刷品。
+> - **版式栅格**：A4 竖版 210×297mm，页边 14mm，统一 12 栏基准，栏距 4mm，槽宽 11.5mm，正反两页共用同一套栅格；色板取站令牌（宣纸底 #FAF7F0 / 墨 #23201A / 朱砂 #C8463A），朱砂只作单点强调。
+> - **配图与图标**：复用站内 logo 与两张横向墨山图；本批新生成 1 张专属主视觉（宣纸底浓墨山影 + 朱砂钤记，色归一化到页面底色后零色差）；10 枚图标全部手写内联 SVG，零外域依赖。二维码按用户问卷未圈选故不做。
+> - **验收**：两页版面溢出均 0px（探针判据：末子元素底边减内容底边）；导出过程外域请求 0 个；思源宋体真加载（document.fonts.check 断言）；PDF 实测 2 页 A4（MediaBox 594.96×841.92 pt，含子集嵌入 STSong）；PNG 1240×1754（150dpi）；主视觉朱砂占比 0.153%；单页数字与链接 8/8 条与仓库实况相符。
+> - **踩坑记录**：三条实测教训已沉淀为 T-15 §九 经验（CSS Grid 的 1fr 轨道下限是 min-content，长 URL 会把邻栏挤成 40px 窄条；flex 子项默认收缩会把固定高主视觉压扁到 118px；判溢出不能用子块高度合计或 scrollHeight，二者分别漏算 margin 与混算 padding，真实溢出 39px 与 42px）。
+### W891（2026-10-23）：en 收尾批（A 渠容器归并 11 页 + nav-back 样式统一 49 页 + 间距令牌化 3,353 处）
+
+> **来源**：用户令「继续」（引 W887 收官报告的欠账清单）。W891 = en 的 A/D 两道渠道 + nav-back 样式统一三笔欠账一次清。
+> - **文件**：site/en/（138 页）、scripts/_w891_en_survey.py、scripts/_w891_en_migrate.py、scripts/output/_w864_accent_exemptions.json（W887 分册 −46 条）、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md。
+> - **A 渠（v4 §3.3 裁决 3）**：`max-width: 1024px / 1280px`（容器用法）→ `var(--container-content)`（1120）——**11 页 15 处**；@media 断点先占位保护后还原（768/640/480 等断点与小固定宽一律不动）；`1320px` 字面量在 INLINED 块内（页级 0 处）→ 归 BL-33 的 system.css 同步处理（不在此批动内联块·防再造漂移）。
+> - **nav-back 样式统一**：49 页同款 `.nav-back`（实底 `var(--accent)` + 白字 `--paper-warm`）→ 透明底 + `var(--accent-text)` 朱砂字（落 bg 4.5:1·白名单「朱砂文字（字色）」内）+ hover `--rebel` 实底 → `--accent-tint` 淡底；padding/圆角保留（可点击形状不变）。**W887 分册 46 条 nav-back 豁免随批递减移除**（全簿 302→256 条）。
+> - **D 渠间距令牌化**：复用 `_w862_tokenize_spacing.py`（值保留·跳过 INLINED 块·只认 padding/margin 家族）——138 页 **3,353 处**刻度内等值 → `var(--space-N)`（预盘点 3,149 + 内联 style 属性）。
+> - **验收**：CSP 856 页 0 漂移（3,272 处值等替换·差值即 token 写法长度）· nav-back 计算样式实测（transparent / rgb(199,70,58) / padding 8px 16px）· 门禁 234 页 0 FAIL（nav-back 实底消失后无新超限）· en a11y 无回归。
+> - **踩坑记录**：Git Bash heredoc 会把 Python 正则的 `\s`/`\d` 反向转义成 `/s`/`/d`（MSYS 路径转换）——本次两次「0 命中」假象即此坑；凡含正则的多行 Python 一律用 Write 工具落文件，不走 heredoc（W514 铁则的复发实证）。
 ### W890（2026-10-23）：CI 阻塞项清偿批（过期断言同步 / ruff 清零 / 跨平台探针 / 依赖漏洞）
 
 > **来源**：承接 W889 展示面复位批合 main 时的 CI 实证——`Unit Tests (pytest)` 2 failed（required check·阻塞合并）、`Code Quality (ruff + black)` 6 errors、`pip audit` 25 漏洞。三类红项**均非 W889 引入**，而是 W836/W860/W876/W887 四批的成果未同步判据/测试留下的欠账。

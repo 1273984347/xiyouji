@@ -17,7 +17,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="How to Read This Site — Annotated English Edition · Annotated Journey to the West">
     <meta property="og:description" content="How to Read This Site — Annotated English Edition · Annotated Journey to the West">
-                                                                                                                                                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -466,7 +466,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -509,12 +509,20 @@ h4 { font-size: 18px; font-weight: 500; }
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
     line-height: 1.1;
     text-align: center;
+    flex-shrink: 0;
+}
+/* W856 新品牌图形标（方向 H「山·门槛」·SVG 于 static/icons/logo-mark-light.svg）
+   —— 纯加法：.seal 保留，其余页面的旧印面标识不受影响 */
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: block;
     flex-shrink: 0;
 }
 .wordmark {
@@ -700,6 +708,10 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+/* BL-33 收敛（W895）：KPI 顶条按行收敛——同排首个 kpi-card 保顶条、其余转细线
+   （原 W864-W873 逐页写入内联副本·此处升为 system.css 单一事实源·防 inline_css --force 回吞） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1243,6 +1255,41 @@ td.num, th.num {
         max-width: 220px;
     }
 }
+
+/* W885：数据页/可视化页页头装饰插画（深底直显版·浅底宣纸图贴在暗色 hero 上会成亮斑） */
+.hero-ornament {
+    position: absolute;
+    right: clamp(var(--space-6), 5vw, var(--space-12));
+    bottom: clamp(var(--space-5), 4vw, var(--space-9));
+    width: clamp(140px, 18vw, 240px);
+    height: auto;
+    opacity: .9;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+
+    .hero-ornament {
+        display: none;
+    }
+}
+
+/* W888：数据页卷末插画（浅底宣纸版·暗色模式下隐藏——浅底图贴深底会成亮斑） */
+.viz-illustration {
+    margin: clamp(32px, 5vw, 64px) auto 0;
+    max-width: 420px;
+}
+
+.viz-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: .92;
+}
+
+html[data-theme="dark"] .viz-illustration {
+    display: none;
+}
     </style>
 <style>
         :root {
@@ -1271,7 +1318,7 @@ td.num, th.num {
         .hero {
             background: linear-gradient(135deg, var(--dark) 0%, #3a2820 50%, #5a3828 100%);
             color: var(--dark-text);
-            padding: 60px 24px 48px;
+            padding: 60px var(--space-6) var(--space-9);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -1293,7 +1340,7 @@ td.num, th.num {
         .lang-switch a {
             color: var(--accent-soft);
             text-decoration: none;
-            padding: 4px 10px;
+            padding: var(--space-2) 10px;
             border: 1px solid color-mix(in srgb, var(--dark-text) 35%, transparent);
             border-radius: 4px;
         }
@@ -1302,7 +1349,7 @@ td.num, th.num {
             font-size: 2.1rem;
             font-weight: 600;
             letter-spacing: 0.06em;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
             position: relative;
             z-index: 1;
         }
@@ -1314,7 +1361,7 @@ td.num, th.num {
             z-index: 1;
         }
         .hero .tagline {
-            margin-top: 12px;
+            margin-top: var(--space-4);
             font-size: 0.85rem;
             color: color-mix(in srgb, var(--dark-text) 65%, transparent);
             font-style: italic;
@@ -1324,7 +1371,7 @@ td.num, th.num {
         .breadcrumb {
             font-size: 0.82rem;
             color: var(--ink-soft);
-            padding: 10px 24px;
+            padding: 10px var(--space-6);
             background: var(--bg);
             border-bottom: 1px solid var(--line);
         }
@@ -1333,7 +1380,7 @@ td.num, th.num {
         .container {
             max-width: 768px;
             margin: -30px auto 60px;
-            padding: 0 24px;
+            padding: 0 var(--space-6);
             position: relative;
             z-index: 2;
         }
@@ -1341,9 +1388,9 @@ td.num, th.num {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: 8px;
-            padding: 16px 20px;
+            padding: 16px var(--space-5);
             box-shadow: var(--shadow);
-            margin-bottom: 32px;
+            margin-bottom: var(--space-7);
             font-size: 0.88rem;
             color: var(--ink-soft);
         }
@@ -1353,13 +1400,13 @@ td.num, th.num {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: 8px;
-            padding: 36px 40px;
+            padding: 36px var(--space-8);
             box-shadow: var(--shadow);
         }
         article h2 {
             font-size: 1.35rem;
             color: var(--accent);
-            margin: 28px 0 12px;
+            margin: 28px 0 var(--space-4);
             padding-bottom: 6px;
             border-bottom: 2px solid var(--accent-soft);
             letter-spacing: 0.03em;
@@ -1369,7 +1416,7 @@ td.num, th.num {
             font-size: 0.78rem;
             color: var(--accent-2);
             font-family: "JetBrains Mono", monospace;
-            margin-left: 8px;
+            margin-left: var(--space-3);
             letter-spacing: 0.1em;
             font-weight: 400;
         }
@@ -1382,9 +1429,9 @@ td.num, th.num {
         article p em { color: var(--accent-3); font-style: italic; }
         article p strong { color: var(--accent); }
         article ul { margin: 0 0 18px 22px; }
-        article li { margin-bottom: 8px; font-size: 1rem; }
-        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
-        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article li { margin-bottom: var(--space-3); font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 var(--space-5); font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: var(--space-3) 10px; text-align: left; vertical-align: top; }
         article th { background: var(--paper-warm); color: var(--accent-3); font-weight: 600; }
         .divider {
             text-align: center;
@@ -1396,17 +1443,17 @@ td.num, th.num {
         .nav-back {
             display: inline-block;
             margin-top: 28px;
-            padding: 8px 16px;
-            background: var(--accent);
-            color: var(--paper-warm);
+            padding: var(--space-3) 16px;
+            background: transparent;
+            color: var(--accent-text);
             border-radius: 4px;
             text-decoration: none;
             font-size: 0.88rem;
             transition: background 0.15s;
         }
-        .nav-back:hover { background: var(--rebel); }
+        .nav-back:hover { background: var(--accent-tint); }
         .related {
-            margin-top: 24px;
+            margin-top: var(--space-6);
             padding: 14px 18px;
             background: var(--paper-warm);
             border-left: 4px solid var(--accent-2);
@@ -1414,7 +1461,7 @@ td.num, th.num {
             font-size: 0.86rem;
             color: var(--ink-soft);
         }
-        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 var(--space-2); }
         .related a:hover { text-decoration: underline; }
         /* gallery cards for visualizations page */
         .cat { margin-top: 30px; }
@@ -1424,21 +1471,21 @@ td.num, th.num {
             background: var(--paper-warm);
             border: 1px solid var(--line);
             border-radius: 6px;
-            padding: 12px 14px;
+            padding: var(--space-4) 14px;
         }
         .vcard a { color: var(--accent-2); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
         .vcard a:hover { text-decoration: underline; }
-        .vcard p { font-size: 0.82rem; color: var(--ink-soft); margin: 4px 0 0; }
-        @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } article { padding: 24px 20px; } }
+        .vcard p { font-size: 0.82rem; color: var(--ink-soft); margin: var(--space-2) 0 0; }
+        @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } article { padding: var(--space-6) var(--space-5); } }
         footer {
             text-align: center;
-            padding: 24px;
+            padding: var(--space-6);
             color: var(--ink-soft);
             font-size: 0.85rem;
             border-top: 1px solid var(--line);
-            margin-top: 40px;
+            margin-top: var(--space-8);
         }
-        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 var(--space-3); }
         footer a:hover { text-decoration: underline; }
         .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
     
@@ -1474,8 +1521,8 @@ td.num, th.num {
     </nav>
     <header class="hero">
         <div class="lang-switch">
-            <a href="../index.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
-         · <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div>
+            <a href="../index.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
+         · <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div>
         <h1>How to Read This Site</h1>
         <div class="subtitle">METHODOLOGY · READING GUIDE</div>
         <div class="tagline">A hybrid, static-first annotated edition of Journey to the West — how it is built, and why you can trust the numbers.</div>

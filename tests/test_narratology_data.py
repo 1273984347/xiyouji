@@ -230,7 +230,6 @@ def test_sankey_count(narratology):
 def test_sankey_three_layer(narratology):
     """sankey 应为三层结构：前 16 条 维度名→理论家，后 16 条 理论家→应用案例。"""
     dim_names = {d["维度"] for d in narratology["dimensions"]}
-    theorist_names = {t["name"] for t in narratology["theorists"]}
     # 注意：sankey 中理论家名可能用简称（如"德罗布尼克" vs theorists.name "吉姆·德罗布尼克"）
     # 因此检查 sankey 前段 source 必为维度名，后段 source 必出现在 sankeyTheoristColors 的 key 中
     color_keys = set(narratology["sankeyTheoristColors"].keys())

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-+vfi1VNQy75zL4DNqRGYhU1dyUeQySG35kVb7+QFuEU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zkioBi70TFCnCblf9xTONT45U2LuZmI+BOo45kgaCYc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Emotional Heatmap · Annotated Journey to the West</title>
@@ -19,10 +19,10 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="Heatmap Matrix · Sentiment Curves · Scholar Cards · Annotated Journey to the West">
     <meta property="og:description" content="Heatmap Matrix · Sentiment Curves · Scholar Cards · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
-                                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -471,7 +471,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -514,12 +514,20 @@ h4 { font-size: 18px; font-weight: 500; }
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
     line-height: 1.1;
     text-align: center;
+    flex-shrink: 0;
+}
+/* W856 新品牌图形标（方向 H「山·门槛」·SVG 于 static/icons/logo-mark-light.svg）
+   —— 纯加法：.seal 保留，其余页面的旧印面标识不受影响 */
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: block;
     flex-shrink: 0;
 }
 .wordmark {
@@ -705,6 +713,10 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+/* BL-33 收敛（W895）：KPI 顶条按行收敛——同排首个 kpi-card 保顶条、其余转细线
+   （原 W864-W873 逐页写入内联副本·此处升为 system.css 单一事实源·防 inline_css --force 回吞） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1248,29 +1260,46 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    
-/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+
+/* W885：数据页/可视化页页头装饰插画（深底直显版·浅底宣纸图贴在暗色 hero 上会成亮斑） */
+.hero-ornament {
+    position: absolute;
+    right: clamp(var(--space-6), 5vw, var(--space-12));
+    bottom: clamp(var(--space-5), 4vw, var(--space-9));
+    width: clamp(140px, 18vw, 240px);
+    height: auto;
+    opacity: .9;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+
     .hero-ornament {
-        position: absolute;
-        right: clamp(var(--space-6), 5vw, var(--space-12));
-        bottom: clamp(var(--space-5), 4vw, var(--space-9));
-        width: clamp(140px, 18vw, 240px);
-        height: auto;
-        opacity: .9;
-        pointer-events: none;
+        display: none;
     }
+}
 
-    @media (max-width: 768px) {
+/* W888：数据页卷末插画（浅底宣纸版·暗色模式下隐藏——浅底图贴深底会成亮斑） */
+.viz-illustration {
+    margin: clamp(32px, 5vw, 64px) auto 0;
+    max-width: 420px;
+}
 
-        .hero-ornament {
-            display: none;
-        }
-    }
-</style>
+.viz-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: .92;
+}
+
+html[data-theme="dark"] .viz-illustration {
+    display: none;
+}
+    </style>
 <style>
         /* e-track-exempt: chart-data-colors 1 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
-        .breadcrumb .sep { margin: 0 8px; color: var(--ink-soft); opacity: 0.6; }
+        .breadcrumb .sep { margin: 0 var(--space-3); color: var(--ink-soft); opacity: 0.6; }
 
         
         @media (max-width: 768px) {  }
@@ -1350,7 +1379,7 @@ td.num, th.num {
             position: absolute;
             background: var(--dark);
             color: var(--paper-warm);
-            padding: 12px 14px;
+            padding: var(--space-4) 14px;
             border-radius: var(--radius-md);
             font-size: 0.84rem;
             line-height: 1.55;
@@ -1363,7 +1392,7 @@ td.num, th.num {
             z-index: 10;
         }
         .heat-tooltip .ht-scholar { color: var(--accent-soft); font-weight: 600; font-size: 0.96rem; }
-        .heat-tooltip .ht-meta { color: color-mix(in srgb, var(--dark-text) 70%, transparent); font-size: 0.76rem; margin: 2px 0 6px; font-family: "JetBrains Mono", monospace; }
+        .heat-tooltip .ht-meta { color: color-mix(in srgb, var(--dark-text) 70%, transparent); font-size: 0.76rem; margin: var(--space-1) 0 6px; font-family: "JetBrains Mono", monospace; }
         .heat-tooltip .ht-pill {
             display: inline-block;
             font-size: 0.72rem;
@@ -1418,7 +1447,7 @@ td.num, th.num {
             position: absolute;
             background: var(--dark);
             color: var(--paper-warm);
-            padding: 10px 12px;
+            padding: 10px var(--space-4);
             border-radius: var(--radius-md);
             font-size: 0.82rem;
             line-height: 1.5;
@@ -1459,8 +1488,8 @@ td.num, th.num {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 4px;
-            padding-bottom: 8px;
+            margin-bottom: var(--space-2);
+            padding-bottom: var(--space-3);
             border-bottom: 1px dashed var(--line);
             gap: 8px;
         }
@@ -1481,14 +1510,14 @@ td.num, th.num {
             font-size: 0.82rem;
             color: var(--ink-soft);
             font-style: italic;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .scholar-card .sc-motto {
             font-size: 0.82rem;
             color: var(--accent-2);
             line-height: 1.55;
             margin-bottom: 10px;
-            padding: 6px 8px;
+            padding: 6px var(--space-3);
             background: rgba(58,107,140,0.06);
             border-left: 2px solid var(--accent-2);
             border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
@@ -1500,14 +1529,14 @@ td.num, th.num {
             gap: 6px;
             font-size: 0.74rem;
         }
-        .sc-stat { text-align: center; padding: 4px 0; }
+        .sc-stat { text-align: center; padding: var(--space-2) 0; }
         .sc-stat .num { font-size: 1rem; font-weight: 600; display: block; }
         .sc-stat.pos .num { color: var(--accent-4); }
         .sc-stat.neu .num { color: var(--accent-3); }
         .sc-stat.neg .num { color: var(--accent-text); }
         .sc-stat .lbl { color: var(--ink-soft); font-size: 0.7rem; }
         .sc-avg {
-            margin-top: 8px;
+            margin-top: var(--space-3);
             font-size: 0.74rem;
             color: var(--ink-soft);
             font-family: "JetBrains Mono", monospace;
@@ -1538,7 +1567,7 @@ td.num, th.num {
         }
         .insight-box ul { list-style: none; padding-left: 0; }
         .insight-box li {
-            padding: 8px 0;
+            padding: var(--space-3) 0;
             border-bottom: 1px dashed var(--line);
             font-size: 0.92rem;
             line-height: 1.7;
@@ -1615,7 +1644,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/emotional-heatmap.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/emotional-heatmap.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -1629,7 +1658,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <nav class="breadcrumb">
             <a href="dashboard.html">Dashboard</a>
             <span class="sep">›</span>
@@ -1725,10 +1754,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/emotional-heatmap.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/emotional-heatmap.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
 <script>
@@ -2228,9 +2257,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                         tooltip.style("opacity", 1);
                         tooltip.html(
                             `<div class="ct-name">${s.name} <span style="color:rgba(245,233,212,0.6);font-size:0.78rem;">· Ch. ${p.r.chapter} ${p.h.title}</span></div>` +
-                            `<div style="margin-top:4px;"><span class="ht-pill ${p.r.sentiment}">${sentimentLabel(p.r.sentiment)}</span>` +
+                            `<div style="margin-top:var(--space-2);"><span class="ht-pill ${p.r.sentiment}">${sentimentLabel(p.r.sentiment)}</span>` +
                             `<span style="color:rgba(245,233,212,0.7);font-size:0.78rem;font-family:'JetBrains Mono',monospace;"> intensity ${p.r.intensity}/10</span></div>` +
-                            `<div style="color:var(--accent-soft);font-style:italic;margin-top:4px;overflow-wrap:anywhere;">「${p.r.quote}」</div>`
+                            `<div style="color:var(--accent-soft);font-style:italic;margin-top:var(--space-2);overflow-wrap:anywhere;">「${p.r.quote}」</div>`
                         );
                         state.hoveredScholar = s.key;
                         applyCurvesHighlight();

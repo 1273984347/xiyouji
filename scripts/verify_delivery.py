@@ -617,8 +617,11 @@ _STRICT_GATES = [
                 fail_msg="计划方案模板符合性不达标（新增/修改的计划方案文件引入了缺失判据·补齐后重跑）",
                 marker_msg="计划方案合规槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
                 ok_msg="计划方案合规槽通过（%s）", ok_line=-1),
+    # W899：timeout 600 → 1800——CI runner 上 856 页 browser 实测慢于本地（本地约 4.5 分钟·
+    # CI 慢 2~3 倍）⇒ 600s 超时即被判「crash 即拦」红（W831 语义·非判据失败）。
+    # 只放宽时限，不改判据与阈值。
     _StrictGate(section="朱砂实底", script="check_vermilion_solid.js", runner="node",
-                args=("--gate",), timeout=600,
+                args=("--gate",), timeout=1800,
                 marker="---- 第 49 门禁 朱砂实底：",
                 crash_msg="朱砂实底槽执行异常（第 49 槽·crash 即拦）: %s",
                 fail_msg="朱砂实底限额违规（有页面非豁免实底 >3 处·收敛或补登记豁免后重跑）",

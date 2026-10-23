@@ -19,10 +19,10 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="Pilgrim Team Psychology Arc · Annotated Journey to the West">
     <meta property="og:description" content="Pilgrim Team Psychology Arc · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
-                                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -471,7 +471,7 @@ h4 { font-size: 18px; font-weight: 500; }
 
 /* ===== 布局容器 ===== */
 .page-wrap {
-    max-width: 1320px;
+    max-width: var(--container-wide);
     margin: 0 auto;
     padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -514,12 +514,20 @@ h4 { font-size: 18px; font-weight: 500; }
     border-radius: 3px;
     display: grid;
     place-items: center;
-    color: #fff;
+    color: var(--accent);
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: 13px;
     line-height: 1.1;
     text-align: center;
+    flex-shrink: 0;
+}
+/* W856 新品牌图形标（方向 H「山·门槛」·SVG 于 static/icons/logo-mark-light.svg）
+   —— 纯加法：.seal 保留，其余页面的旧印面标识不受影响 */
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: block;
     flex-shrink: 0;
 }
 .wordmark {
@@ -705,6 +713,10 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
+/* BL-33 收敛（W895）：KPI 顶条按行收敛——同排首个 kpi-card 保顶条、其余转细线
+   （原 W864-W873 逐页写入内联副本·此处升为 system.css 单一事实源·防 inline_css --force 回吞） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1248,25 +1260,42 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    
-/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+
+/* W885：数据页/可视化页页头装饰插画（深底直显版·浅底宣纸图贴在暗色 hero 上会成亮斑） */
+.hero-ornament {
+    position: absolute;
+    right: clamp(var(--space-6), 5vw, var(--space-12));
+    bottom: clamp(var(--space-5), 4vw, var(--space-9));
+    width: clamp(140px, 18vw, 240px);
+    height: auto;
+    opacity: .9;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+
     .hero-ornament {
-        position: absolute;
-        right: clamp(var(--space-6), 5vw, var(--space-12));
-        bottom: clamp(var(--space-5), 4vw, var(--space-9));
-        width: clamp(140px, 18vw, 240px);
-        height: auto;
-        opacity: .9;
-        pointer-events: none;
+        display: none;
     }
+}
 
-    @media (max-width: 768px) {
+/* W888：数据页卷末插画（浅底宣纸版·暗色模式下隐藏——浅底图贴深底会成亮斑） */
+.viz-illustration {
+    margin: clamp(32px, 5vw, 64px) auto 0;
+    max-width: 420px;
+}
 
-        .hero-ornament {
-            display: none;
-        }
-    }
-</style>
+.viz-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: .92;
+}
+
+html[data-theme="dark"] .viz-illustration {
+    display: none;
+}
+    </style>
 <style>
         /* e-track-exempt: chart-data-colors 9 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
@@ -1298,34 +1327,34 @@ td.num, th.num {
         .breadcrumb .sep { margin: 0 6px; color: var(--line); }
         .cross-page-nav {
             background: var(--paper-warm); border: 1px solid var(--line); border-radius: var(--radius-md);
-            padding: 10px 16px; margin-bottom: 20px; font-size: 0.88em; color: var(--ink-soft);
+            padding: 10px 16px; margin-bottom: var(--space-5); font-size: 0.88em; color: var(--ink-soft);
         }
-        .cross-page-nav a { color: var(--accent-2); text-decoration: none; padding: 2px 4px; border-radius: var(--radius-sm) }
+        .cross-page-nav a { color: var(--accent-2); text-decoration: none; padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm) }
         .cross-page-nav a:hover { background: var(--paper-warm); color: var(--accent); }
         .cross-page-nav a.active { color: var(--accent); font-weight: 700; background: var(--paper-warm); }
         .notice {
             background: var(--paper-warm); border-left: 4px solid var(--accent-soft);
-            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 var(--radius-md) var(--radius-md) 0
+            padding: 10px 16px; margin-bottom: var(--space-6); font-size: 0.9em; border-radius: 0 var(--radius-md) var(--radius-md) 0
         }
         
         
         .kpi-card .num { font-size: 2em; font-weight: bold; color: var(--accent); line-height: 1.2; }
         
-        .kpi-card .detail { color: var(--ink-soft); font-size: 0.78em; margin-top: 4px; }
+        .kpi-card .detail { color: var(--ink-soft); font-size: 0.78em; margin-top: var(--space-2); }
         
-        .section h2 { color: var(--accent-text); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .section h2 { color: var(--accent-text); border-bottom: 2px solid var(--accent-soft); padding-bottom: var(--space-3); margin-bottom: var(--space-4); }
         .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
         .skip-link {
             position: absolute; top: -40px; left: 0; background: var(--accent-2);
-            color: var(--paper); padding: 8px 16px; z-index: 100; text-decoration: none;
+            color: var(--paper); padding: var(--space-3) 16px; z-index: 100; text-decoration: none;
             border-radius: 0 0 var(--radius-md) 0 ; transition: top var(--dur-base);
         }
         .skip-link:focus { top: 0; }
         
-        .control-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 18px; padding: 12px 16px; background: var(--paper-warm); border: 1px solid var(--line); border-radius: var(--radius-md) }
+        .control-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 18px; padding: var(--space-4) 16px; background: var(--paper-warm); border: 1px solid var(--line); border-radius: var(--radius-md) }
         .control-row .ctrl-label { font-size: 0.88em; color: var(--ink-soft); font-weight: 600; }
         .ctrl-btn {
-            padding: 8px 16px; border: 1px solid var(--line); background: var(--paper);
+            padding: var(--space-3) 16px; border: 1px solid var(--line); background: var(--paper);
             color: var(--ink); border-radius: var(--radius-md) ; cursor: pointer; font-size: 0.9em;
             font-family: inherit; transition: background var(--dur-base), color var(--dur-base), border-color var(--dur-base);
         }
@@ -1353,13 +1382,13 @@ td.num, th.num {
             color: var(--ink); border-radius: var(--radius-md) ; cursor: pointer; font-size: 0.85em;
             font-family: inherit;
         }
-        .progress-bar { position: relative; height: 6px; background: var(--line); border-radius: var(--radius-sm) ; margin-top: 8px; overflow: hidden; }
+        .progress-bar { position: relative; height: 6px; background: var(--line); border-radius: var(--radius-sm) ; margin-top: var(--space-3); overflow: hidden; }
         .progress-bar .progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--accent); width: 0%; transition: width 0.3s; }
         .chart-wrap { position: relative; overflow-x: auto; }
         #radar-svg, #arc-svg, #cohesion-svg, #timeline-svg, #boxplot-svg { display: block; }
         #arc-svg { min-width: 980px; }
         .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
-        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: var(--radius-md) ; background: var(--paper-warm); }
+        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: var(--space-2) 10px; border-radius: var(--radius-md) ; background: var(--paper-warm); }
         .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
         .legend-row .lg-swatch.line { width: 22px; height: 3px; border-radius: var(--radius-sm) }
         .legend-row .lg-swatch.dot { border-radius: 50% }
@@ -1373,11 +1402,11 @@ td.num, th.num {
         .event-tip .tip-meta, .heat-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: var(--ink-faint); margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--ink-soft); }
         .insight-box {
             background: var(--paper-warm); border-left: 4px solid var(--accent-soft);
-            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 var(--radius-md) var(--radius-md) 0 ; font-size: 0.92em;
+            padding: var(--space-4) 16px; margin-bottom: var(--space-4); border-radius: 0 var(--radius-md) var(--radius-md) 0 ; font-size: 0.92em;
         }
         .insight-box strong { color: var(--accent); font-weight: 700; }
         .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
-        .footer-idx { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 12px; text-align: left; }
+        .footer-idx { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: var(--space-4); text-align: left; }
         @media (min-width: 760px) { .footer-idx { grid-template-columns: 1fr 1fr; } }
         .footer-idx .idx-block { background: color-mix(in srgb, var(--dark-text) 6%, transparent); border: 1px solid rgba(233,184,133,0.2); border-radius: var(--radius-md) ; padding: 10px 14px; }
         .footer-idx .idx-block h4 { color: var(--paper-warm); font-size: 0.82em; margin-bottom: 6px; font-weight: 700; }
@@ -1390,7 +1419,7 @@ td.num, th.num {
             
             
             
-            .ctrl-btn { padding: 6px 12px; font-size: 0.82em; }
+            .ctrl-btn { padding: 6px var(--space-4); font-size: 0.82em; }
         }
     </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
@@ -1419,7 +1448,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/pilgrim-team-psychology-arc.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/pilgrim-team-psychology-arc.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -1433,7 +1462,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <nav class="breadcrumb" aria-label="Breadcrumb">
             <a href="../index.html">EN Home</a>
             <span class="sep">›</span>
@@ -1606,10 +1635,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/pilgrim-team-psychology-arc.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/pilgrim-team-psychology-arc.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
 <script>

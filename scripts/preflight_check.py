@@ -101,6 +101,19 @@ def _locate_status(cells):
     return cells[4] if len(cells) > 4 else ""
 
 
+def _split_touches(text):
+    """touches 串切分（**多分隔符兼容**·W897 修）。
+
+    病根（实测 W896）：本函数与命令行解析**都只按逗号切分**，而台账的 touches 列
+    自 W739 起实际用「**·**」（中点）分隔 ⇒ 整串被当成**一个** touches ⇒
+    **交集检查恒空假绿**⇒「PREFLIGHT PASS·无交集」是无效结论，撞面防护形同虚设。
+
+    兼容分隔符：逗号 `,` / 中文逗号 `，` / 顿号 `、` / 中点 `·` / 项目符号 `•`
+    （**不含空白**——仓内文件名不含空格·避免把文件名本身切碎）。
+    """
+    return {t.strip() for t in re.split(r"[,，、·•]+", text or "") if t.strip()}
+
+
 def _locate_touches(cells):
     """touches 列定位：末格（列序固定·末列恒为 touches）；占位符归一为空集。"""
     if len(cells) < 7:
@@ -108,7 +121,7 @@ def _locate_touches(cells):
     last = cells[-1].strip()
     if last in _TOUCHES_PLACEHOLDERS:
         return set()
-    return {t.strip() for t in last.split(",") if t.strip()}
+    return _split_touches(last)
 
 # W821：§8 干扰日志的机器触发点提示（真触发才输出·用户裁决 2026-10-20）。
 # 背景：W741 立的两周干扰日志（路线图 §8）自 2026-10-16 起断档 4 天 128 提交零登记，
@@ -273,7 +286,7 @@ def main():
     else:
         print("OK    touches：无在途批次声明 touches（级联面由 batch_cascade 单写路径保护·无需声明）")
     if args.touches:
-        mine = {t.strip() for t in args.touches.split(",") if t.strip()}
+        mine = _split_touches(args.touches)
         bad = [(r["w"], touches_conflict(r["touches"], mine)) for r in inflight]
         bad = [(w, c) for w, c in bad if c]
         for w, c in bad:

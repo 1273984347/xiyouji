@@ -21,8 +21,12 @@
 退出码：0 索引已最新 / 1 索引过期或生成失败
 """
 import argparse
+import os
 import sys
 from pathlib import Path
+
+# W894：目标提交树口径（git ls-files）——同目录模块·Python 自动可导入
+import tracked_files as tf
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_DOCS_DIR = ROOT / "docs"
@@ -64,7 +68,20 @@ def extract_title(path: Path) -> str:
     return path.stem
 
 
-def scan_docs(docs_dir: Path, include_dev: bool = False) -> dict:
+def _in_repo(docs_dir: Path) -> bool:
+    """目录是否位于**真实仓库根**之下（W894·索引口径的回退判据）。
+
+    仓库内 ⇒ 索引口径（未跟踪的并行批在途件不计入）；仓库外（测试合成树 / 临时目录）
+    ⇒ 磁盘扫描（否则合成树不在索引里⇒ 扫描恒空⇒ 相关单测「全绿但毫无意义」）。
+    """
+    try:
+        rel = os.path.relpath(os.path.abspath(str(docs_dir)), tf.ROOT)
+    except ValueError:
+        return False
+    return not rel.startswith("..") and not os.path.isabs(rel)
+
+
+def scan_docs(docs_dir: Path, include_dev: bool = False, tracked_only: bool = True) -> dict:
     """扫描 docs/ 返回 {section_name: [(title, rel_path), ...]}。
 
     W773 修：排序键显式取 `str(p).lower()`——裸 `sorted(Path)` 在 Windows 用
@@ -72,7 +89,15 @@ def scan_docs(docs_dir: Path, include_dev: bool = False) -> dict:
     10-方法论沉淀 的大小写混排条目在两平台序不同（第 17 门禁 INDEX 产物级
     校验 CI 首跑即红·「本地绿/CI 红」分歧族）。小写键为纯 Python 串比较、
     平台无关；与存量 INDEX.md 顺序字节一致（实测零 churn）。
+
+    W894（用户批准根修）：文件清单实算基准从「磁盘扫描」改为「Git 索引」
+    （`git ls-files`·tracked_only=True 默认）——索引 = 已跟踪 + 已暂存新增 =
+    将要入库的内容。并行批的未落库 md（未跟踪）因此不再进 INDEX.md ⇒
+    本地不再「他方在途红」、CI 侧口径一致。板块目录遍历仍走磁盘（板块本身稳定）。
+    逃生开关：tracked_only=False 恢复旧的全磁盘扫描。
     """
+    use_index = tracked_only and _in_repo(docs_dir)
+    tracked = tf.tracked_files() if use_index else None
     result = {}
     for sub in sorted(docs_dir.iterdir(), key=lambda p: str(p).lower()):
         if not sub.is_dir():
@@ -84,7 +109,16 @@ def scan_docs(docs_dir: Path, include_dev: bool = False) -> dict:
         entries = []
         # W757：递归扫描（11-方案报告 起含子目录·如 工作复盘与优化分析报告/ 与 计划方案/），
         # 排序键用相对路径保证跨子目录顺序稳定（原 sub.glob("*.md") 只扫顶层，改名子目录化后会漏项）。
-        for md in sorted(sub.rglob("*.md"), key=lambda p: str(p).lower()):
+        if use_index:
+            prefix = "docs/%s/" % sub.name
+            mds = sorted(
+                (Path(ROOT) / p for p in tracked
+                 if p.startswith(prefix) and p.endswith(".md")),
+                key=lambda p: str(p).lower(),
+            )
+        else:
+            mds = sorted(sub.rglob("*.md"), key=lambda p: str(p).lower())
+        for md in mds:
             if md.name == "INDEX.md":
                 continue
             title = extract_title(md)

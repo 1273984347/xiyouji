@@ -16,8 +16,7 @@ import json
 from pathlib import Path
 
 import pytest
-
-from data_validate import validate_one, EXPECTED_TYPES
+from data_validate import EXPECTED_TYPES, validate_one
 
 
 @pytest.fixture
