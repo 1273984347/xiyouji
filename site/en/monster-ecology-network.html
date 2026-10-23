@@ -19,7 +19,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="Monster Ecology Network · Annotated Journey to the West">
     <meta property="og:description" content="Monster Ecology Network · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1294,7 +1294,7 @@ td.num, th.num {
         .breadcrumb .sep { margin: 0 6px; color: var(--line); }
         .cross-page-nav {
             background: var(--paper-warm); border: 1px solid var(--line); border-left: 4px solid var(--accent);
-            padding: 12px 16px; margin-bottom: 24px; font-size: 0.9em;
+            padding: var(--space-4) 16px; margin-bottom: var(--space-6); font-size: 0.9em;
         }
         .cross-page-nav a { color: var(--accent-2); margin-right: 14px; text-decoration: none; }
         .cross-page-nav a:hover { text-decoration: underline; }
@@ -1304,30 +1304,30 @@ td.num, th.num {
         .kpi-card.fire { border-top-color: var(--chart-1); }
         .kpi-card.mountain { border-top-color: var(--chart-3); }
         .kpi-card.sky { border-top-color: var(--chart-4); }
-        .kpi-card .kpi-label { font-size: 0.82em; color: var(--ink-soft); margin-bottom: 4px; }
+        .kpi-card .kpi-label { font-size: 0.82em; color: var(--ink-soft); margin-bottom: var(--space-2); }
         .kpi-card .kpi-value { font-size: 1.8em; font-weight: 600; color: var(--ink); font-family: "JetBrains Mono", monospace; }
-        .kpi-card .kpi-unit { font-size: 0.8em; color: var(--ink-soft); margin-left: 4px; }
-        .kpi-card .kpi-note { font-size: 0.75em; color: var(--ink-soft); margin-top: 4px; }
+        .kpi-card .kpi-unit { font-size: 0.8em; color: var(--ink-soft); margin-left: var(--space-2); }
+        .kpi-card .kpi-note { font-size: 0.75em; color: var(--ink-soft); margin-top: var(--space-2); }
         
         .section h2 {
             font-size: 1.4em; color: var(--accent-text); margin-bottom: 6px;
-            border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent-soft); padding-bottom: var(--space-3);
         }
-        .section h2 .en { font-size: 0.6em; color: var(--ink-soft); font-family: "JetBrains Mono", monospace; margin-left: 8px; }
+        .section h2 .en { font-size: 0.6em; color: var(--ink-soft); font-family: "JetBrains Mono", monospace; margin-left: var(--space-3); }
         .section .lead { color: var(--ink-soft); font-size: 0.92em; margin-bottom: 16px; }
         .chart-box { width: 100%; overflow-x: auto; }
         .chart-box svg { display: block; margin: 0 auto; }
-        .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; font-size: 0.85em; justify-content: center; }
+        .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: var(--space-4); font-size: 0.85em; justify-content: center; }
         .legend-item { display: flex; align-items: center; gap: 6px; }
         .legend-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
-        .theory-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.88em; }
-        .theory-table th, .theory-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
+        .theory-table { width: 100%; border-collapse: collapse; margin-top: var(--space-4); font-size: 0.88em; }
+        .theory-table th, .theory-table td { border: 1px solid var(--line); padding: var(--space-3) 10px; text-align: left; }
         .theory-table th { background: var(--paper-warm); color: var(--accent-3); font-weight: 600; }
         .theory-table tr:nth-child(even) { background: var(--paper); }
-        .tabs { display: flex; gap: 4px; margin-bottom: 12px; flex-wrap: wrap; }
+        .tabs { display: flex; gap: 4px; margin-bottom: var(--space-4); flex-wrap: wrap; }
         .tab-btn {
             background: var(--paper); border: 1px solid var(--line); border-bottom: none;
-            padding: 8px 16px; cursor: pointer; font-size: 0.9em; color: var(--ink-soft);
+            padding: var(--space-3) 16px; cursor: pointer; font-size: 0.9em; color: var(--ink-soft);
             border-radius: var(--radius-md) var(--radius-md) 0 0 ; font-family: inherit;
         }
         .tab-btn.active { background: var(--accent); color: var(--paper); border-color: var(--accent); }
@@ -1335,13 +1335,13 @@ td.num, th.num {
         .tab-content.active { display: block; }
         .node-card {
             background: var(--paper-warm); border: 1px solid var(--line); border-left: 4px solid var(--accent);
-            padding: 12px 16px; margin-top: 12px; font-size: 0.9em; border-radius: var(--radius-md)
+            padding: var(--space-4) 16px; margin-top: var(--space-4); font-size: 0.9em; border-radius: var(--radius-md)
         }
-        .node-card h4 { color: var(--accent); margin-bottom: 4px; }
+        .node-card h4 { color: var(--accent); margin-bottom: var(--space-2); }
         .node-card .meta { font-size: 0.82em; color: var(--ink-soft); }
         
         
-        footer .footer-index { margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: var(--ink-faint); }
+        footer .footer-index { margin-top: var(--space-3); font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: var(--ink-faint); }
         footer .footer-cross { margin-top: 6px; font-size: 0.82em; }
         @media (max-width: 768px) {
             
@@ -1376,7 +1376,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/monster-ecology-network.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/monster-ecology-network.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -1390,7 +1390,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <img class="hero-ornament" src="../static/images/viz-dark-01-network.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
 <div class="container">
         <nav class="breadcrumb" aria-label="Breadcrumb">
             <a href="dashboard.html">Dashboard</a>
@@ -1410,7 +1410,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
         <section class="kpi-row" aria-label="Key metrics">
             <div class="kpi-card">
-                <div class="kpi-label">Total Demon Population · <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div>
+                <div class="kpi-label">Total Demon Population · <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div>
                 <div class="kpi-value">30<span class="kpi-unit">units</span></div>
                 <div class="kpi-note">15 representative demons + 15 group units</div>
             </div>
@@ -1602,7 +1602,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/monster-ecology-network.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/monster-ecology-network.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </footer>
 

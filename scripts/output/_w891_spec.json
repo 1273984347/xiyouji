@@ -1,0 +1,20 @@
+{
+  "batch": "W891",
+  "date": "2026-10-23",
+  "title": "W891 en 收尾批（A 渠容器归并 11 页 + nav-back 样式统一 49 页 + 间距令牌化 3,353 处）",
+  "desc": "en 收尾清欠账 容器归并 11 页 nav-back 实底转文字态 49 页 间距令牌化 3,353 处值保留",
+  "head_entry": "2026-10-23（W891 en 收尾批）",
+  "head_sentence": "英文站把容器档位、返回键与间距刻度三笔欠账一次清掉，四渠道全部走完",
+  "changelog_body": "\n\n> **来源**：用户令「继续」（引 W887 收官报告的欠账清单）。W891 = en 的 A/D 两道渠道 + nav-back 样式统一三笔欠账一次清。\n> - **文件**：site/en/（138 页）、scripts/_w891_en_survey.py、scripts/_w891_en_migrate.py、scripts/output/_w864_accent_exemptions.json（W887 分册 −46 条）、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md。\n> - **A 渠（v4 §3.3 裁决 3）**：`max-width: 1024px / 1280px`（容器用法）→ `var(--container-content)`（1120）——**11 页 15 处**；@media 断点先占位保护后还原（768/640/480 等断点与小固定宽一律不动）；`1320px` 字面量在 INLINED 块内（页级 0 处）→ 归 BL-33 的 system.css 同步处理（不在此批动内联块·防再造漂移）。\n> - **nav-back 样式统一**：49 页同款 `.nav-back`（实底 `var(--accent)` + 白字 `--paper-warm`）→ 透明底 + `var(--accent-text)` 朱砂字（落 bg 4.5:1·白名单「朱砂文字（字色）」内）+ hover `--rebel` 实底 → `--accent-tint` 淡底；padding/圆角保留（可点击形状不变）。**W887 分册 46 条 nav-back 豁免随批递减移除**（全簿 302→256 条）。\n> - **D 渠间距令牌化**：复用 `_w862_tokenize_spacing.py`（值保留·跳过 INLINED 块·只认 padding/margin 家族）——138 页 **3,353 处**刻度内等值 → `var(--space-N)`（预盘点 3,149 + 内联 style 属性）。\n> - **验收**：CSP 856 页 0 漂移（3,272 处值等替换·差值即 token 写法长度）· nav-back 计算样式实测（transparent / rgb(199,70,58) / padding 8px 16px）· 门禁 234 页 0 FAIL（nav-back 实底消失后无新超限）· en a11y 无回归。\n> - **踩坑记录**：Git Bash heredoc 会把 Python 正则的 `\\s`/`\\d` 反向转义成 `/s`/`/d`（MSYS 路径转换）——本次两次「0 命中」假象即此坑；凡含正则的多行 Python 一律用 Write 工具落文件，不走 heredoc（W514 铁则的复发实证）。",
+  "milestone_block": "- **W891 en 收尾批（三笔欠账一次清·四渠道全走完）**：\n  - A 渠：11 页 15 处 1024/1280 → `--container-content`（@media 断点保护不动）\n  - nav-back：49 页实底 → 透明底 + accent-text 朱砂字（hover 淡底）· W887 豁免 −46 条（302→256）\n  - D 渠：138 页 3,353 处间距刻度令牌化（值保留零视觉）\n  - CSP 0 漂移 · 门禁 234 页 0 FAIL · nav-back 计算样式实测通过\n  - 1320 字面量在 INLINED 块 → 归 BL-33 system.css 同步（不在此批动内联块）",
+  "agents_note": "二〇二六年十月二十三日（W891）把 en 的最后三笔账清掉：容器按 v4 §3.3 归并到 1120、返回键从实底改成朱砂字、间距刻度令牌化三千余处全部等值替换，CSP 零漂移、门禁零 FAIL；1320 字面量留在内联块里没动，那是 BL-33 要一并收的账。顺带记一个真坑：Git Bash heredoc 会把正则里的反斜杠转成正斜杠，写正则脚本必须走文件不能走 heredoc。",
+  "file_index_rows": [
+    "| site/en/（138 页） | W891 | A 渠 15 处容器归并 + nav-back 49 页文字态 + 间距令牌化 3,353 处 |",
+    "| scripts/_w891_en_survey.py | W891 | en 收尾前置盘点（容器值/断点/nav-back 变体/间距量） |",
+    "| scripts/_w891_en_migrate.py | W891 | A 渠 + nav-back 迁移驱动（INLINED 跳过·@media 占位保护） |",
+    "| scripts/output/_w864_accent_exemptions.json | W891 | W887 分册 −46 条 nav-back（随批递减·全簿 256） |",
+    "| docs/00-导读/W批次编号对账表.md | W891 | 认领行与收官回填 |",
+    "| CHANGELOG.md | W891 | W891 段 |",
+    "| scripts/output/file-index.md | W891 | 同批段回写 |"
+  ]
+}

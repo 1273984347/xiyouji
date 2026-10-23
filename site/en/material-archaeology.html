@@ -19,7 +19,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="I. Artifact Material Science · II. Costume Archaeology · III. Cave Architecture Typology · Annotated Journey to the West">
     <meta property="og:description" content="I. Artifact Material Science · II. Costume Archaeology · III. Cave Architecture Typology · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1302,7 +1302,7 @@ td.num, th.num {
             grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
             gap: 24px;
             align-items: start;
-            margin-bottom: 20px;
+            margin-bottom: var(--space-5);
         }
         .chart-block {
             text-align: center;
@@ -1310,7 +1310,7 @@ td.num, th.num {
         .chart-block h3 {
             font-size: 1rem;
             color: var(--accent-text);
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
             letter-spacing: 0.1em;
         }
         .chart-block svg, .chart-full svg {
@@ -1318,7 +1318,7 @@ td.num, th.num {
             height: auto;
         }
         .chart-full {
-            margin-top: 8px;
+            margin-top: var(--space-3);
             margin-bottom: 16px;
         }
         .legend {
@@ -1326,7 +1326,7 @@ td.num, th.num {
             flex-wrap: wrap;
             justify-content: center;
             gap: 8px 16px;
-            margin-top: 12px;
+            margin-top: var(--space-4);
             font-size: 0.82rem;
         }
         .legend-item {
@@ -1343,7 +1343,7 @@ td.num, th.num {
             position: absolute;
             background: var(--dark);
             color: var(--paper-warm);
-            padding: 8px 12px;
+            padding: var(--space-3) var(--space-4);
             border-radius: var(--radius-md);
             font-size: 0.82rem;
             pointer-events: none;
@@ -1357,14 +1357,14 @@ td.num, th.num {
         .insight-box {
             background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border-left: 4px solid var(--accent);
-            padding: 20px 24px;
+            padding: var(--space-5) var(--space-6);
             border-radius: var(--radius-md);
             margin-top: 16px;
         }
         .insight-box h4 {
             color: var(--accent-text);
             font-size: 1rem;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .insight-box ul {
             list-style: none;
@@ -1386,7 +1386,7 @@ td.num, th.num {
             overflow-y: auto;
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         .table-wrap::-webkit-scrollbar {
             width: 8px;
@@ -1404,7 +1404,7 @@ td.num, th.num {
         .data-table thead th {
             background: var(--dark);
             color: var(--paper-warm);
-            padding: 10px 12px;
+            padding: 10px var(--space-4);
             text-align: left;
             position: sticky;
             top: 0;
@@ -1423,7 +1423,7 @@ td.num, th.num {
             background: var(--paper-warm);
         }
         .data-table td {
-            padding: 8px 12px;
+            padding: var(--space-3) var(--space-4);
             vertical-align: top;
         }
         .data-table td.num {
@@ -1438,7 +1438,7 @@ td.num, th.num {
         }
         .tag {
             display: inline-block;
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-lg);
             font-size: 0.75rem;
             font-weight: 500;
@@ -1468,7 +1468,7 @@ td.num, th.num {
             font-size: 0.76rem;
             color: var(--accent);
             letter-spacing: 0.12em;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
             font-family: "JetBrains Mono", monospace;
         }
         .stat-card .stat-value {
@@ -1480,7 +1480,7 @@ td.num, th.num {
         .stat-card .stat-desc {
             font-size: 0.78rem;
             color: var(--ink-soft);
-            margin-top: 2px;
+            margin-top: var(--space-1);
         }
         .artifact-grid {
             display: grid;
@@ -1499,7 +1499,7 @@ td.num, th.num {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
             flex-wrap: wrap;
             gap: 6px;
         }
@@ -1522,14 +1522,14 @@ td.num, th.num {
             color: var(--accent-3);
         }
         .craft-steps {
-            margin-top: 8px;
+            margin-top: var(--space-3);
             padding-left: 0;
             list-style: none;
             counter-reset: step;
         }
         .craft-steps li {
             counter-increment: step;
-            padding: 4px 0 4px 28px;
+            padding: var(--space-2) 0 var(--space-2) 28px;
             position: relative;
             font-size: 0.84rem;
             color: var(--ink);
@@ -1561,7 +1561,7 @@ td.num, th.num {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
             flex-wrap: wrap;
             gap: 6px;
         }
@@ -1621,7 +1621,7 @@ td.num, th.num {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
             flex-wrap: wrap;
             gap: 6px;
         }
@@ -1636,14 +1636,14 @@ td.num, th.num {
             font-family: "JetBrains Mono", monospace;
         }
         .type-card .type-features {
-            margin: 8px 0;
+            margin: var(--space-3) 0;
             font-size: 0.84rem;
             color: var(--ink-soft);
         }
         .type-card .type-features .feat-tag {
             display: inline-block;
             padding: 1px 6px;
-            margin: 2px 4px 2px 0;
+            margin: var(--space-1) var(--space-2) var(--space-1) 0;
             border: 1px dashed var(--line);
             border-radius: var(--radius-sm);
             font-size: 0.76rem;
@@ -1675,7 +1675,7 @@ td.num, th.num {
             opacity: 0.7;
         }
         .ming-table th, .ming-table td {
-            padding: 8px 12px;
+            padding: var(--space-3) var(--space-4);
             border: 1px solid var(--line);
             font-size: 0.86rem;
             vertical-align: top;
@@ -1716,7 +1716,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/material-archaeology.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/material-archaeology.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -1730,7 +1730,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
             Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>xiyouji/</code> directory, then visit <code>http://localhost:8000/site/data/material-archaeology.html</code>)
         </div>
@@ -1766,20 +1766,20 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             <!-- Chart 1: horizontal hardness bar chart -->
             <div class="chart-full">
-                <h3 style="font-size:1rem;color:var(--accent);margin-bottom:12px;letter-spacing:0.1em;">Chart 1.1 · 8 artifacts ranked by hardness (Mohs scale, color gradient blue→yellow→red)</h3>
+                <h3 style="font-size:1rem;color:var(--accent);margin-bottom:var(--space-4);letter-spacing:0.1em;">Chart 1.1 · 8 artifacts ranked by hardness (Mohs scale, color gradient blue→yellow→red)</h3>
                 <svg id="chart-hardness"></svg>
                 <div class="legend" id="legend-hardness"></div>
             </div>
 
             <!-- Chart 2: scatter plot -->
-            <div class="chart-full" style="margin-top:24px;">
-                <h3 style="font-size:1rem;color:var(--accent);margin-bottom:12px;letter-spacing:0.1em;">Chart 1.2 · Hardness × Density scatter plot (dot size = relative value, color = material class)</h3>
+            <div class="chart-full" style="margin-top:var(--space-6);">
+                <h3 style="font-size:1rem;color:var(--accent);margin-bottom:var(--space-4);letter-spacing:0.1em;">Chart 1.2 · Hardness × Density scatter plot (dot size = relative value, color = material class)</h3>
                 <svg id="chart-scatter"></svg>
                 <div class="legend" id="legend-scatter"></div>
             </div>
 
             <!-- 8-artifact profile table -->
-            <h3 style="font-size:1rem;color:var(--accent);margin:24px 0 12px;letter-spacing:0.1em;">8 Artifact Material Profiles</h3>
+            <h3 style="font-size:1rem;color:var(--accent);margin:var(--space-6) 0 var(--space-4);letter-spacing:0.1em;">8 Artifact Material Profiles</h3>
             <div class="table-wrap" style="max-height:none;">
                 <table class="data-table" id="artifact-table">
                     <thead>
@@ -1800,11 +1800,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
 
             <!-- Crafting-process cards -->
-            <h3 style="font-size:1rem;color:var(--accent);margin:24px 0 12px;letter-spacing:0.1em;">Crafting Process</h3>
+            <h3 style="font-size:1rem;color:var(--accent);margin:var(--space-6) 0 var(--space-4);letter-spacing:0.1em;">Crafting Process</h3>
             <div class="artifact-grid" id="craft-grid"></div>
 
             <!-- Material classification stats -->
-            <h3 style="font-size:1rem;color:var(--accent);margin:24px 0 12px;letter-spacing:0.1em;">Material Classification Stats</h3>
+            <h3 style="font-size:1rem;color:var(--accent);margin:var(--space-6) 0 var(--space-4);letter-spacing:0.1em;">Material Classification Stats</h3>
             <div class="stat-grid" id="material-stats"></div>
 
             <!-- Material insights -->
@@ -1821,7 +1821,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             <!-- Chart 1: multi-stage line chart for 4 characters -->
             <div class="chart-full">
-                <h3 style="font-size:1rem;color:var(--accent);margin-bottom:12px;letter-spacing:0.1em;">Chart 2.1 · Social status evolution line chart for 4 characters (Y-axis: social rank 1-10)</h3>
+                <h3 style="font-size:1rem;color:var(--accent);margin-bottom:var(--space-4);letter-spacing:0.1em;">Chart 2.1 · Social status evolution line chart for 4 characters (Y-axis: social rank 1-10)</h3>
                 <svg id="chart-costume-line"></svg>
                 <div class="legend" id="legend-costume-line"></div>
             </div>
@@ -1846,11 +1846,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
 
             <!-- 4-character cards -->
-            <h3 style="font-size:1rem;color:var(--accent);margin:24px 0 4px;letter-spacing:0.1em;">Costume Evolution of 4 Characters</h3>
+            <h3 style="font-size:1rem;color:var(--accent);margin:var(--space-6) 0 var(--space-2);letter-spacing:0.1em;">Costume Evolution of 4 Characters</h3>
             <div id="character-cards"></div>
 
             <!-- 19 costume-stage table -->
-            <h3 style="font-size:1rem;color:var(--accent);margin:24px 0 12px;letter-spacing:0.1em;">19 Costume Stages Detailed Table</h3>
+            <h3 style="font-size:1rem;color:var(--accent);margin:var(--space-6) 0 var(--space-4);letter-spacing:0.1em;">19 Costume Stages Detailed Table</h3>
             <div class="table-wrap" style="max-height:none;">
                 <table class="data-table" id="costume-table">
                     <thead>
@@ -1869,7 +1869,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
 
             <!-- Ming Dynasty Costume Comparison Table -->
-            <h3 style="font-size:1rem;color:var(--accent);margin:24px 0 12px;letter-spacing:0.1em;">Ming Dynasty Costume Comparison Table</h3>
+            <h3 style="font-size:1rem;color:var(--accent);margin:var(--space-6) 0 var(--space-4);letter-spacing:0.1em;">Ming Dynasty Costume Comparison Table</h3>
             <div style="overflow-x:auto;">
                 <table class="ming-table" id="ming-table">
                     <thead>
@@ -1897,7 +1897,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             <!-- Chart 1: average luxury bar chart for 5 types -->
             <div class="chart-full">
-                <h3 style="font-size:1rem;color:var(--accent);margin-bottom:12px;letter-spacing:0.1em;">Chart 3.1 · Average luxury of 5 architecture types (color-coded by type)</h3>
+                <h3 style="font-size:1rem;color:var(--accent);margin-bottom:var(--space-4);letter-spacing:0.1em;">Chart 3.1 · Average luxury of 5 architecture types (color-coded by type)</h3>
                 <svg id="chart-cave-bar"></svg>
                 <div class="legend" id="legend-cave-bar"></div>
             </div>
@@ -1916,11 +1916,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
 
             <!-- 5-type cards -->
-            <h3 style="font-size:1rem;color:var(--accent);margin:24px 0 4px;letter-spacing:0.1em;">5 Architecture Type Cards</h3>
+            <h3 style="font-size:1rem;color:var(--accent);margin:var(--space-6) 0 var(--space-2);letter-spacing:0.1em;">5 Architecture Type Cards</h3>
             <div id="type-cards"></div>
 
             <!-- 14-cave table -->
-            <h3 style="font-size:1rem;color:var(--accent);margin:24px 0 12px;letter-spacing:0.1em;">14 Caves Detailed Table</h3>
+            <h3 style="font-size:1rem;color:var(--accent);margin:var(--space-6) 0 var(--space-4);letter-spacing:0.1em;">14 Caves Detailed Table</h3>
             <div class="table-wrap" style="max-height:none;">
                 <table class="data-table" id="cave-table">
                     <thead>
@@ -1941,7 +1941,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
 
             <!-- Architecture classification stats -->
-            <h3 style="font-size:1rem;color:var(--accent);margin:24px 0 12px;letter-spacing:0.1em;">Architecture Classification Stats</h3>
+            <h3 style="font-size:1rem;color:var(--accent);margin:var(--space-6) 0 var(--space-4);letter-spacing:0.1em;">Architecture Classification Stats</h3>
             <div class="stat-grid" id="cave-stats"></div>
 
             <!-- Architecture insights -->
@@ -1958,10 +1958,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/material-archaeology.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/material-archaeology.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <div class="tooltip" id="tooltip"></div>
 

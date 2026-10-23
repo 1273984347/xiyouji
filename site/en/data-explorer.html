@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-kRoRP4tclUEda51OamCaRAqGFuCNDu0AlkJ3B5owAFw=' 'sha256-izS4O1zsaUbkksG5yyvsEPqRVN32Xk5t/YmQKUqbuic=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-A3/DexFL+ST8WtDykt5aoPfupHDTNl6iZKVO7o00y3A=' 'sha256-izS4O1zsaUbkksG5yyvsEPqRVN32Xk5t/YmQKUqbuic=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Annotated Journey to the West · Data Explorer</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/en/data-explorer.html">
@@ -1255,27 +1255,27 @@ td.num, th.num {
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:"Noto Serif SC","Songti SC",serif;color: var(--ink);background: var(--bg);line-height:1.6}
-  header.top{padding:22px 20px 14px;background: linear-gradient(135deg,var(--dark),#3a2820);color: var(--paper-warm)}
+  header.top{padding:22px var(--space-5) 14px;background: linear-gradient(135deg,var(--dark),#3a2820);color: var(--paper-warm)}
   header.top h1{margin:0;font-size:22px}
   header.top p{margin:6px 0 0;font-size:13px;opacity:.85}
-  .banner{margin:12px 16px;padding:10px 14px;border-radius: var(--radius-md); font-size:13px;border: 1px solid var(--line);background: var(--paper-warm)}
+  .banner{margin:var(--space-4) 16px;padding:10px 14px;border-radius: var(--radius-md); font-size:13px;border: 1px solid var(--line);background: var(--paper-warm)}
   .banner.offline{border-color: var(--accent-3);background: var(--paper-warm)}
-  .layout{display:flex;gap:16px;padding:0 16px 40px;align-items:flex-start}
+  .layout{display:flex;gap:16px;padding:0 16px var(--space-8);align-items:flex-start}
   .picker{width:230px;flex:0 0 230px;max-height:70vh;overflow:auto;border: 1px solid var(--line);border-radius: var(--radius-lg); background:var(--paper)}
-  .picker .item{padding:10px 12px;border-bottom: 1px solid var(--line);cursor:pointer;font-size:14px}
+  .picker .item{padding:10px var(--space-4);border-bottom: 1px solid var(--line);cursor:pointer;font-size:14px}
   .picker .item:hover{background: rgba(200,70,58,.06)}
   .picker .item.active{background: rgba(200,70,58,.12);color: var(--accent);font-weight:600}
   .picker .item small{display:block;color: var(--ink-soft);font-size:11px}
   .main{flex:1;min-width:0}
-  .keytabs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
-  .keytab{padding:6px 12px;border: 1px solid var(--line);border-radius: var(--radius-pill); cursor:pointer;font-size:13px;background: var(--paper)}
+  .keytabs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 var(--space-4)}
+  .keytab{padding:6px var(--space-4);border: 1px solid var(--line);border-radius: var(--radius-pill); cursor:pointer;font-size:13px;background: var(--paper)}
   .keytab.active{background: var(--accent);color: var(--paper);border-color: var(--accent)}
-  .chartbox{margin:8px 0 14px;border: 1px solid var(--line);border-radius: var(--radius-lg); background:var(--paper);padding:10px}
-  .chartbox h3{margin:4px 6px 8px;font-size:14px;color: var(--accent-2)}
+  .chartbox{margin:var(--space-3) 0 14px;border: 1px solid var(--line);border-radius: var(--radius-lg); background:var(--paper);padding:10px}
+  .chartbox h3{margin:var(--space-2) 6px var(--space-3);font-size:14px;color: var(--accent-2)}
   .toolbar2{display:flex;gap:8px;margin:0 0 10px;flex-wrap:wrap;align-items:center}
-  .toolbar2 .vt-btn{padding:7px 12px;border: 1px solid var(--accent-2);background: var(--accent-2);color: var(--paper);border-radius: var(--radius-md); cursor:pointer;font-size:13px}
-  .meta{color: var(--ink-soft);font-size:13px;margin:2px 0 8px}
-  .hint{color: var(--ink-soft);font-size:12px;margin-top:8px}
+  .toolbar2 .vt-btn{padding:7px var(--space-4);border: 1px solid var(--accent-2);background: var(--accent-2);color: var(--paper);border-radius: var(--radius-md); cursor:pointer;font-size:13px}
+  .meta{color: var(--ink-soft);font-size:13px;margin:var(--space-1) 0 var(--space-3)}
+  .hint{color: var(--ink-soft);font-size:12px;margin-top:var(--space-3)}
   @media(max-width: 768px){.layout{flex-direction:column}.picker{width:100%;flex:none;max-height:none}}
 </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
@@ -1532,20 +1532,20 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     s.id = "vt-style";
     s.textContent =
       ".vt-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}" +
-      ".vt-search{flex:1;min-width:160px;padding:8px 10px;border:1px solid var(--line,#d9cdb8);" +
+      ".vt-search{flex:1;min-width:160px;padding:var(--space-3) 10px;border:1px solid var(--line,#d9cdb8);" +
       "border-radius:8px;font-size:14px;background:var(--paper,#fff)}" +
       ".vt-count{color:var(--ink-soft,#6B6455);font-size:13px}" +
-      ".vt-btn{padding:7px 12px;border:1px solid var(--accent,#c8463a);background:var(--accent,#c8463a);" +
+      ".vt-btn{padding:7px var(--space-4);border:1px solid var(--accent,#c8463a);background:var(--accent,#c8463a);" +
       "color:#fff;border-radius:8px;cursor:pointer;font-size:13px}" +
       ".vt-btn:hover{opacity:.88}" +
       ".vt-tablewrap{max-height:60vh;overflow:auto;border:1px solid var(--line,#d9cdb8);border-radius:8px}" +
       ".vt-table{width:100%;border-collapse:collapse;font-size:14px}" +
-      ".vt-table th,.vt-table td{padding:8px 10px;border-bottom:1px solid var(--line,#d9cdb8);text-align:left;vertical-align:top}" +
+      ".vt-table th,.vt-table td{padding:var(--space-3) 10px;border-bottom:1px solid var(--line,#d9cdb8);text-align:left;vertical-align:top}" +
       ".vt-table thead th{position:sticky;top:0;background:var(--bg,#faf7f2);z-index:1}" +
       ".vt-table th.vt-sortable{cursor:pointer;user-select:none}" +
       ".vt-table tbody tr{cursor:pointer}" +
       ".vt-table tbody tr:hover{background:rgba(200,70,58,.06)}" +
-      ".vt-empty{text-align:center;color:var(--ink-soft,#6B6455);padding:20px}" +
+      ".vt-empty{text-align:center;color:var(--ink-soft,#6B6455);padding:var(--space-5)}" +
       ".vt-drill{position:fixed;inset:0;z-index:9999;display:none}" +
       ".vt-drill.open{display:block}" +
       ".vt-drill-mask{position:absolute;inset:0;background:rgba(35,32,26,.4)}" +
@@ -1558,8 +1558,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
       ".vt-drill-title{font-weight:600;color:var(--accent,#c8463a)}" +
       ".vt-drill-close{border:none;background:none;font-size:24px;cursor:pointer;color:var(--ink-soft,#6B6455)}" +
       ".vt-drill-body{padding:16px;overflow:auto;line-height:1.7}" +
-      ".vt-drill-body table{width:100%;border-collapse:collapse;margin:8px 0}" +
-      ".vt-drill-body th,.vt-drill-body td{border:1px solid var(--line,#d9cdb8);padding:6px 8px;font-size:13px;text-align:left}";
+      ".vt-drill-body table{width:100%;border-collapse:collapse;margin:var(--space-3) 0}" +
+      ".vt-drill-body th,.vt-drill-body td{border:1px solid var(--line,#d9cdb8);padding:6px var(--space-3);font-size:13px;text-align:left}";
     document.head.appendChild(s);
   }
 
@@ -1982,8 +1982,8 @@ loadDatasets();
 </script>
 
 
-<div style="padding:16px 8px;text-align:center"><a href="../data/data-explorer.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
-            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div>
+<div style="padding:16px var(--space-3);text-align:center"><a href="../data/data-explorer.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
+            <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div>
 <script defer src="../static/js/chart-a11y.js"></script>
 </body>
 </html>

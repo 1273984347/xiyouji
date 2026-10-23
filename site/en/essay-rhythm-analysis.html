@@ -1257,47 +1257,47 @@ td.num, th.num {
             font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
             line-height: 1.8; min-height: 100vh; }
         .hero { background: linear-gradient(135deg, var(--dark) 0%, #3a2820 50%, #5a3828 100%);
-            color: var(--dark-text); padding: 60px 24px 48px; text-align: center; position: relative; overflow: hidden; }
+            color: var(--dark-text); padding: 60px var(--space-6) var(--space-9); text-align: center; position: relative; overflow: hidden; }
         .hero::after { content: ""; position: absolute; inset: 0;
             background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%); pointer-events: none; }
         .lang-switch { position: absolute; top: 18px; right: 24px; font-size: 0.85rem; z-index: 5; }
-        .lang-switch a { color: var(--accent-soft); text-decoration: none; padding: 4px 10px;
+        .lang-switch a { color: var(--accent-soft); text-decoration: none; padding: var(--space-2) 10px;
             border: 1px solid color-mix(in srgb, var(--dark-text) 35%, transparent); border-radius: 4px; }
         .lang-switch a:hover { background: color-mix(in srgb, var(--dark-text) 15%, transparent); color: var(--paper); }
-        .hero h1 { font-size: 2.1rem; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 8px; position: relative; z-index: 1; }
+        .hero h1 { font-size: 2.1rem; font-weight: 600; letter-spacing: 0.06em; margin-bottom: var(--space-3); position: relative; z-index: 1; }
         .hero .subtitle { font-size: 0.95rem; color: var(--accent-soft); letter-spacing: 0.25em; position: relative; z-index: 1; }
-        .hero .tagline { margin-top: 12px; font-size: 0.85rem; color: color-mix(in srgb, var(--dark-text) 65%, transparent); font-style: italic; position: relative; z-index: 1; }
-        .breadcrumb { font-size: 0.82rem; color: var(--ink-soft); padding: 10px 24px; background: var(--bg); border-bottom: 1px solid var(--line); }
+        .hero .tagline { margin-top: var(--space-4); font-size: 0.85rem; color: color-mix(in srgb, var(--dark-text) 65%, transparent); font-style: italic; position: relative; z-index: 1; }
+        .breadcrumb { font-size: 0.82rem; color: var(--ink-soft); padding: 10px var(--space-6); background: var(--bg); border-bottom: 1px solid var(--line); }
         .breadcrumb a { color: var(--accent-2); text-decoration: none; }
         .breadcrumb a:hover { text-decoration: underline; }
-        .container { max-width: 768px; margin: -30px auto 60px; padding: 0 24px; position: relative; z-index: 2; }
+        .container { max-width: 768px; margin: -30px auto 60px; padding: 0 var(--space-6); position: relative; z-index: 2; }
         .source-note { background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
-            padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 32px; font-size: 0.88rem; color: var(--ink-soft); }
+            padding: 16px var(--space-5); box-shadow: var(--shadow); margin-bottom: var(--space-7); font-size: 0.88rem; color: var(--ink-soft); }
         .source-note strong { color: var(--accent); }
         .source-note a { color: var(--accent-2); }
-        article { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 36px 40px; box-shadow: var(--shadow); }
-        article h2 { font-size: 1.35rem; color: var(--accent); margin: 28px 0 12px; padding-bottom: 6px;
+        article { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 36px var(--space-8); box-shadow: var(--shadow); }
+        article h2 { font-size: 1.35rem; color: var(--accent); margin: 28px 0 var(--space-4); padding-bottom: 6px;
             border-bottom: 2px solid var(--accent-soft); letter-spacing: 0.03em; }
         article h2:first-child { margin-top: 0; }
-        article h2 .anchor { font-size: 0.78rem; color: var(--accent-2); font-family: "JetBrains Mono", monospace; margin-left: 8px; letter-spacing: 0.1em; font-weight: 400; }
+        article h2 .anchor { font-size: 0.78rem; color: var(--accent-2); font-family: "JetBrains Mono", monospace; margin-left: var(--space-3); letter-spacing: 0.1em; font-weight: 400; }
         article p { margin-bottom: 18px; font-size: 1rem; color: var(--ink); text-wrap: pretty; }
         article p em { color: var(--accent-3); font-style: italic; }
         article p strong { color: var(--accent); }
         article ul { margin: 0 0 18px 22px; }
-        article li { margin-bottom: 8px; font-size: 1rem; }
-        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
-        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article li { margin-bottom: var(--space-3); font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 var(--space-5); font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: var(--space-3) 10px; text-align: left; vertical-align: top; }
         article th { background: var(--paper-warm); color: var(--accent-3); font-weight: 600; }
         .divider { text-align: center; color: var(--accent-soft); margin: 28px 0; letter-spacing: 0.5em; font-size: 1rem; }
-        .nav-back { display: inline-block; margin-top: 28px; padding: 8px 16px; background: var(--accent);
-            color: var(--paper-warm); border-radius: 4px; text-decoration: none; font-size: 0.88rem; transition: background 0.15s; }
-        .nav-back:hover { background: var(--rebel); }
-        .related { margin-top: 24px; padding: 14px 18px; background: var(--paper-warm); border-left: 4px solid var(--accent-2); border-radius: 4px; font-size: 0.86rem; color: var(--ink-soft); }
-        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .nav-back { display: inline-block; margin-top: 28px; padding: var(--space-3) 16px; background: transparent;
+            color: var(--accent-text); border-radius: 4px; text-decoration: none; font-size: 0.88rem; transition: background 0.15s; }
+        .nav-back:hover { background: var(--accent-tint); }
+        .related { margin-top: var(--space-6); padding: 14px 18px; background: var(--paper-warm); border-left: 4px solid var(--accent-2); border-radius: 4px; font-size: 0.86rem; color: var(--ink-soft); }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 var(--space-2); }
         .related a:hover { text-decoration: underline; }
-        @media (max-width: 640px) { article { padding: 24px 20px; } }
-        footer { text-align: center; padding: 24px; color: var(--ink-soft); font-size: 0.85rem; border-top: 1px solid var(--line); margin-top: 40px; }
-        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        @media (max-width: 640px) { article { padding: var(--space-6) var(--space-5); } }
+        footer { text-align: center; padding: var(--space-6); color: var(--ink-soft); font-size: 0.85rem; border-top: 1px solid var(--line); margin-top: var(--space-8); }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 var(--space-3); }
         footer a:hover { text-decoration: underline; }
         .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
     @media (max-width: 768px){ table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; } }
@@ -1333,7 +1333,7 @@ td.num, th.num {
     <header class="hero">
         <div class="lang-switch">
             <a href="../index.html" lang="zh-CN">&#20013;&#25991;</a>
-         · <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div>
+         · <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div>
         <h1>The Music of the Verse &mdash; Four Dimensions of Sound-Law</h1>
         <div class="subtitle">ESSAY 35 &middot; SUMMARY TRANSLATION</div>
         <div class="tagline">Four rhythm theorists (Wang Li, Qi Gong, Zhou Zhenfu, Zhu Guangqian) read four nodes (opening / furnace / spell / finale) through tone-level, parallelism, rhythm, and rounding-completion.</div>

@@ -19,7 +19,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="One · Heaven Power Structure Overview · Two · Heaven Power Force-Directed Graph · Three · Heaven–Underworld–Mortal Realm–Western Heaven Power-Flow Sankey D… · Annotated Journey to the West">
     <meta property="og:description" content="One · Heaven Power Structure Overview · Two · Heaven Power Force-Directed Graph · Three · Heaven–Underworld–Mortal Realm–Western Heaven Power-Flow Sankey D… · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1302,7 +1302,7 @@ header.hero .meta {
         .kpi-row .kpi-card { background: var(--paper-warm); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 10px; padding: 14px 16px; }
         .kpi-row .kpi-card .label { font-size: 0.78rem; color: var(--ink-soft); letter-spacing: 0.04em; }
         .kpi-row .kpi-card .value { font-size: 1.9rem; font-weight: 700; color: var(--accent); font-family: var(--font-mono, monospace); line-height: 1.15; }
-        .kpi-row .kpi-card .desc { font-size: 0.8rem; color: var(--ink-soft); margin-top: 4px; }
+        .kpi-row .kpi-card .desc { font-size: 0.8rem; color: var(--ink-soft); margin-top: var(--space-2); }
 .kpi-card.alt { border-top-color: var(--accent-2); }
 .kpi-card.alt-2 { border-top-color: var(--accent-3); }
 .kpi-card.alt-3 { border-top-color: var(--chart-4); }
@@ -1318,7 +1318,7 @@ header.hero .meta {
 .kpi-label {
   color: var(--ink-soft);
   font-size: 0.84em;
-  margin-top: 4px;
+  margin-top: var(--space-2);
 }
 
 /* 角色类别卡片 */
@@ -1351,14 +1351,14 @@ header.hero .meta {
 .role-card .r-name {
   font-size: 1.15em;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: var(--space-2);
   color: var(--ink);
 }
 .role-card .r-tag {
   font-size: 0.78em;
   color: var(--accent-3);
   font-family: "JetBrains Mono", "Consolas", monospace;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-3);
   letter-spacing: 1px;
 }
 .role-card .r-desc {
@@ -1370,7 +1370,7 @@ header.hero .meta {
   font-size: 0.82em;
   color: var(--ink-soft);
   font-style: italic;
-  padding-top: 8px;
+  padding-top: var(--space-3);
   border-top: 1px dashed var(--line);
 }
 
@@ -1379,13 +1379,13 @@ header.hero .meta {
 .chart-title {
   font-weight: 600;
   color: var(--ink);
-  margin-bottom: 4px;
+  margin-bottom: var(--space-2);
   font-size: 1.02em;
 }
 .chart-caption {
   color: var(--ink-soft);
   font-size: 0.84em;
-  margin-bottom: 12px;
+  margin-bottom: var(--space-4);
 }
 .chart-svg {
   background: var(--paper);
@@ -1399,7 +1399,7 @@ header.hero .meta {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  margin-top: 12px;
+  margin-top: var(--space-4);
   justify-content: center;
   font-size: 0.84em;
 }
@@ -1414,7 +1414,7 @@ header.hero .meta {
   position: absolute;
   background: var(--dark);
   color: var(--paper);
-  padding: 9px 12px;
+  padding: 9px var(--space-4);
   border-radius: var(--radius-md);
   font-size: 0.84em;
   pointer-events: none;
@@ -1422,7 +1422,7 @@ header.hero .meta {
   max-width: 375px;
   line-height: 1.55;
 }
-.tooltip div + div { margin-top: 4px; }
+.tooltip div + div { margin-top: var(--space-2); }
 
 /* Insight list */
 .insight-list { list-style: none; padding: 0; counter-reset: insight; }
@@ -1430,7 +1430,7 @@ header.hero .meta {
   counter-increment: insight;
   background: var(--paper);
   margin: 10px 0;
-  padding: 12px 16px 12px 48px;
+  padding: var(--space-4) 16px var(--space-4) var(--space-9);
   border-left: 3px solid var(--accent-2);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   position: relative;
@@ -1490,7 +1490,7 @@ header.hero .meta {
   font-size: 0.9em;
 }
 .stat-table th, .stat-table td {
-  padding: 8px 10px;
+  padding: var(--space-3) 10px;
   border: 1px solid var(--line);
   text-align: left;
 }
@@ -1511,7 +1511,7 @@ header.hero .meta {
   
   
   .stat-table { font-size: 0.82em; }
-  .stat-table th, .stat-table td { padding: 6px 8px; }
+  .stat-table th, .stat-table td { padding: 6px var(--space-3); }
 }
 @media (max-width: 480px) {
   .role-grid { grid-template-columns: 1fr; }
@@ -1556,7 +1556,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/heaven-power-network.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/heaven-power-network.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -1569,7 +1569,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
             <img class="hero-ornament" src="../static/images/viz-dark-01-network.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
 <div class="kpi-row">
   <div class="kpi-card"><div class="kpi-value">1</div><div class="kpi-label">Sovereign of Heaven</div></div>
   <div class="kpi-card alt"><div class="kpi-value">20</div><div class="kpi-label">Heaven Core Figures</div></div>
@@ -1711,10 +1711,10 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/heaven-power-network.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/heaven-power-network.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 </div>
 

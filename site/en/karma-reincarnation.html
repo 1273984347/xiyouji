@@ -19,7 +19,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="Introduction · A Four-Dimensional Lens on Fate &amp; Reincarnation · I · The Life-and-Death Register Tampering Flow · II · The Law of Karma and Retribution · Annotated Journey to the West">
     <meta property="og:description" content="Introduction · A Four-Dimensional Lens on Fate &amp; Reincarnation · I · The Life-and-Death Register Tampering Flow · II · The Law of Karma and Retribution · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1306,8 +1306,8 @@ td.num, th.num {
         .definition {
             background: var(--paper);
             border-left: 4px solid var(--accent-soft);
-            padding: 12px 16px;
-            margin-bottom: 20px;
+            padding: var(--space-4) 16px;
+            margin-bottom: var(--space-5);
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
             font-size: 0.92rem;
             color: var(--ink-soft);
@@ -1317,19 +1317,19 @@ td.num, th.num {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: var(--space-5);
+            margin-bottom: var(--space-5);
         }
         .chart-title {
             font-size: 1rem;
             font-weight: 600;
             color: var(--ink);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .chart-caption {
             font-size: 0.82rem;
             color: var(--ink-soft);
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
         }
         .chart-svg {
             max-width: 100%;
@@ -1366,11 +1366,11 @@ td.num, th.num {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.88rem;
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         table.data-table th,
         table.data-table td {
-            padding: 10px 12px;
+            padding: 10px var(--space-4);
             text-align: left;
             border-bottom: 1px solid var(--line);
             vertical-align: top;
@@ -1401,7 +1401,7 @@ td.num, th.num {
         }
         .insights-list li {
             counter-increment: insight;
-            padding: 12px 16px 12px 48px;
+            padding: var(--space-4) 16px var(--space-4) var(--space-9);
             position: relative;
             border-bottom: 1px dashed var(--line);
             font-size: 0.92rem;
@@ -1441,24 +1441,24 @@ td.num, th.num {
         .char-card .char-name {
             font-size: 1.05rem;
             font-weight: 600;
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
         .char-card .char-profile {
             font-size: 0.8rem;
             color: var(--ink-soft);
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .char-card .char-score {
             font-family: "JetBrains Mono", "Consolas", monospace;
             font-size: 0.85rem;
             color: var(--accent);
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .char-card .char-row {
             font-size: 0.82rem;
             color: var(--ink-soft);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .char-card .char-row strong {
             color: var(--ink);
@@ -1469,7 +1469,7 @@ td.num, th.num {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
             gap: 16px;
-            margin-bottom: 20px;
+            margin-bottom: var(--space-5);
         }
         .map-card {
             background: var(--paper);
@@ -1486,7 +1486,7 @@ td.num, th.num {
             color: var(--accent-2);
             letter-spacing: 0.12em;
             font-family: "JetBrains Mono", "Consolas", monospace;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .map-card.alt .map-label { color: var(--accent-4); }
         .map-card.alt2 .map-label { color: var(--accent-3); }
@@ -1494,12 +1494,12 @@ td.num, th.num {
         .map-card .map-title {
             font-size: 1.05rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .map-card .map-row {
             font-size: 0.85rem;
             color: var(--ink-soft);
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .map-card .map-row strong {
             color: var(--ink);
@@ -1517,7 +1517,7 @@ td.num, th.num {
             font-size: 0.78rem;
             letter-spacing: 0.12em;
             font-family: "JetBrains Mono", "Consolas", monospace;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .summary-card .map-title {
             font-size: 1.05rem;
@@ -1532,7 +1532,7 @@ td.num, th.num {
         /* tooltip */
         .d3-tooltip {
             position: absolute;
-            padding: 8px 12px;
+            padding: var(--space-3) var(--space-4);
             background: var(--dark);
             color: var(--paper-warm);
             font-size: 0.8rem;
@@ -1544,7 +1544,7 @@ td.num, th.num {
             z-index: 100;
         }
         .source-list {
-            margin-top: 8px;
+            margin-top: var(--space-3);
             font-size: 0.78rem;
             color: var(--ink-soft);
             overflow-wrap: anywhere;
@@ -1580,11 +1580,11 @@ td.num, th.num {
             display: inline-block;
             background: var(--paper-warm);
             color: var(--accent-3);
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-sm);
             font-size: 0.75rem;
             font-family: "JetBrains Mono", "Consolas", monospace;
-            margin: 0 4px 4px 0;
+            margin: 0 var(--space-2) var(--space-2) 0;
             border: 1px solid var(--line);
         }
         /* 桑基图节点 */
@@ -1609,14 +1609,14 @@ td.num, th.num {
             .map-grid { grid-template-columns: 1fr; }
             .char-grid { grid-template-columns: 1fr; }
             table.data-table { font-size: 0.78rem; }
-            table.data-table th, table.data-table td { padding: 6px 8px; }
+            table.data-table th, table.data-table td { padding: 6px var(--space-3); }
         }
         @media (max-width: 480px) {
             
             
             
             
-            .chart-block { padding: 12px; }
+            .chart-block { padding: var(--space-4); }
         }
     
     </style>
@@ -1645,7 +1645,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/karma-reincarnation.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/karma-reincarnation.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -1659,7 +1659,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
 <div class="container">
         <nav class="breadcrumb">
             <a href="dashboard.html">Dashboard</a>
@@ -1718,7 +1718,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <div class="map-row">Karma outweighs Heaven's decree and the registers, but transformation comes at a cost: atonement / recruitment / reform / cultivation.</div>
                 </div>
             </div>
-            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:8px;">
+            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:var(--space-3);">
                 Data source: scripts/K_Fate-Reincarnation/karma_reincarnation.py · generates 4 JSON outputs; this page automatically falls back to the embedded EMBEDDED data when fetch fails, and supports double-click opening via the file:// protocol.
             </p>
         </section>
@@ -1773,7 +1773,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </div>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">Detailed Table of the 8 Register-Tampering Cases</h3>
+            <h3 style="font-size:1.05rem;margin:18px 0 var(--space-3);color:var(--ink);">Detailed Table of the 8 Register-Tampering Cases</h3>
             <div style="overflow-x:auto;">
                 <table class="data-table" id="registry-table">
                     <thead>
@@ -1794,10 +1794,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </table>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Tampering-Type Distribution Cards</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">Tampering-Type Distribution Cards</h3>
             <div class="map-grid" id="tamper-types-grid"></div>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Register Insights</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">Register Insights</h3>
             <ol class="insights-list" id="registry-insights-list"></ol>
         </section>
 
@@ -1835,7 +1835,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </div>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">Detailed Table of the 10 Karma Cases</h3>
+            <h3 style="font-size:1.05rem;margin:18px 0 var(--space-3);color:var(--ink);">Detailed Table of the 10 Karma Cases</h3>
             <div style="overflow-x:auto;">
                 <table class="data-table" id="karma-table">
                     <thead>
@@ -1854,10 +1854,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </table>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Rebirth-Destination Distribution Cards</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">Rebirth-Destination Distribution Cards</h3>
             <div class="map-grid" id="rebirth-grid"></div>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Karma Insights</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">Karma Insights</h3>
             <ol class="insights-list" id="karma-insights-list"></ol>
         </section>
 
@@ -1889,7 +1889,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </div>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">Detailed Table of the 6 Realms</h3>
+            <h3 style="font-size:1.05rem;margin:18px 0 var(--space-3);color:var(--ink);">Detailed Table of the 6 Realms</h3>
             <div style="overflow-x:auto;">
                 <table class="data-table" id="samsara-table">
                     <thead>
@@ -1909,10 +1909,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </table>
             </div>
 
-            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">Feature Cards of the 6 Realms</h3>
+            <h3 style="font-size:1.05rem;margin:18px 0 var(--space-3);color:var(--ink);">Feature Cards of the 6 Realms</h3>
             <div class="char-grid" id="realm-grid"></div>
 
-            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Samsara Insights</h3>
+            <h3 style="font-size:1.05rem;margin:22px 0 var(--space-3);color:var(--ink);">Samsara Insights</h3>
             <ol class="insights-list" id="samsara-insights-list"></ol>
         </section>
 
@@ -1970,10 +1970,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/karma-reincarnation.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/karma-reincarnation.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <!-- ===== EMBEDDED FALLBACK DATA ===== -->
     <!--

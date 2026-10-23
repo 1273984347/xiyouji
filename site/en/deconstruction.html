@@ -19,7 +19,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="Deconstruction Four Quadrants: Loyalty × Seriousness · Country Distribution &amp;amp; Amplified Element Word Cloud · Timeline: 1979 - 2024 · Annotated Journey to the West">
     <meta property="og:description" content="Deconstruction Four Quadrants: Loyalty × Seriousness · Country Distribution &amp;amp; Amplified Element Word Cloud · Timeline: 1979 - 2024 · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1305,7 +1305,7 @@ td.num, th.num {
         .chart-block h3 {
             font-size: 1rem;
             color: var(--accent);
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
             letter-spacing: 0.1em;
         }
         .chart-block svg {
@@ -1317,7 +1317,7 @@ td.num, th.num {
             flex-wrap: wrap;
             justify-content: center;
             gap: 8px 16px;
-            margin-top: 12px;
+            margin-top: var(--space-4);
             font-size: 0.82rem;
         }
         .legend-item {
@@ -1333,14 +1333,14 @@ td.num, th.num {
         .insight-box {
             background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border-left: 4px solid var(--accent);
-            padding: 20px 24px;
+            padding: var(--space-5) var(--space-6);
             border-radius: var(--radius-md);
             margin-top: 16px;
         }
         .insight-box h4 {
             color: var(--accent-text);
             font-size: 1rem;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .insight-box ul {
             list-style: none;
@@ -1428,17 +1428,17 @@ td.num, th.num {
         .scatter-tooltip .tt-title {
             color: var(--accent-soft);
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .scatter-tooltip .tt-meta {
             color: color-mix(in srgb, var(--dark-text) 70%, transparent);
             font-size: 0.75rem;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .scatter-tooltip .tt-line {
             color: color-mix(in srgb, var(--dark-text) 92%, transparent);
             font-size: 0.78rem;
-            margin-top: 2px;
+            margin-top: var(--space-1);
         }
         .scatter-wrapper {
             position: relative;
@@ -1457,12 +1457,12 @@ td.num, th.num {
             justify-content: center;
             align-items: center;
             gap: 6px 14px;
-            padding: 16px 8px;
+            padding: 16px var(--space-3);
             min-height: 220px;
         }
         .tag-cloud span {
             display: inline-block;
-            padding: 2px 6px;
+            padding: var(--space-1) 6px;
             color: var(--ink);
             cursor: default;
             transition: color var(--dur-fast) ease, transform var(--dur-fast) ease;
@@ -1526,7 +1526,7 @@ td.num, th.num {
         #works-table thead th {
             background: var(--dark);
             color: var(--paper-warm);
-            padding: 10px 12px;
+            padding: 10px var(--space-4);
             text-align: left;
             position: sticky;
             top: 0;
@@ -1544,7 +1544,7 @@ td.num, th.num {
             background: var(--paper-warm);
         }
         #works-table td {
-            padding: 8px 12px;
+            padding: var(--space-3) var(--space-4);
             vertical-align: top;
         }
         #works-table td.num {
@@ -1564,13 +1564,13 @@ td.num, th.num {
         }
         .tag {
             display: inline-block;
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-lg);
             font-size: 0.74rem;
             font-weight: 500;
             color: var(--paper);
             white-space: nowrap;
-            margin: 1px 2px;
+            margin: 1px var(--space-1);
         }
         .tag-mini {
             display: inline-block;
@@ -1579,7 +1579,7 @@ td.num, th.num {
             font-size: 0.7rem;
             background: var(--paper-warm);
             color: var(--accent-3);
-            margin: 1px 2px;
+            margin: 1px var(--space-1);
             white-space: nowrap;
         }
         .badge-origin {
@@ -1588,7 +1588,7 @@ td.num, th.num {
             border-radius: var(--radius-md);
             font-size: 0.7rem;
             font-weight: 600;
-            margin-left: 4px;
+            margin-left: var(--space-2);
         }
         .badge-origin.decon {
             background: #fde8e6;
@@ -1629,7 +1629,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/deconstruction.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/deconstruction.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -1643,7 +1643,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
             Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
         </div>
@@ -1748,10 +1748,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/deconstruction.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/deconstruction.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
 <script>

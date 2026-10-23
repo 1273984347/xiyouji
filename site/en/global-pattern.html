@@ -19,7 +19,7 @@
     <!-- SEO:INJECTED -->
     <meta name="description" content="World Pilgrim Family Cards · Journey Nodes Comparison · Core · Cultural Spheres &amp; Timeline · Annotated Journey to the West">
     <meta property="og:description" content="World Pilgrim Family Cards · Journey Nodes Comparison · Core · Cultural Spheres &amp; Timeline · Annotated Journey to the West">
-    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
                                                                                                                                                                                 <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1282,7 +1282,7 @@ td.num, th.num {
         .chart-block h3 {
             font-size: 1rem;
             color: var(--accent);
-            margin-bottom: 12px;
+            margin-bottom: var(--space-4);
             letter-spacing: 0.1em;
         }
         .chart-block svg {
@@ -1294,7 +1294,7 @@ td.num, th.num {
             flex-wrap: wrap;
             justify-content: center;
             gap: 8px 16px;
-            margin-top: 12px;
+            margin-top: var(--space-4);
             font-size: 0.82rem;
         }
         .legend-item {
@@ -1310,21 +1310,21 @@ td.num, th.num {
         .insight-box {
             background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border-left: 4px solid var(--accent);
-            padding: 20px 24px;
+            padding: var(--space-5) var(--space-6);
             border-radius: var(--radius-md);
             margin-top: 16px;
         }
         .insight-box h4 {
             color: var(--accent);
             font-size: 1rem;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .insight-box ul {
             list-style: none;
             padding-left: 0;
         }
         .insight-box li {
-            padding: 8px 0;
+            padding: var(--space-3) 0;
             border-bottom: 1px dashed var(--line);
             font-size: 0.92rem;
             line-height: 1.6;
@@ -1339,7 +1339,7 @@ td.num, th.num {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
             gap: 18px;
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         .pilgrim-card {
             background: var(--paper);
@@ -1361,7 +1361,7 @@ td.num, th.num {
             font-size: 1.15rem;
             font-weight: 600;
             color: var(--ink);
-            margin-bottom: 2px;
+            margin-bottom: var(--space-1);
         }
         .pilgrim-card .p-work {
             font-size: 0.88rem;
@@ -1380,7 +1380,7 @@ td.num, th.num {
         }
         .pilgrim-card .p-country {
             display: inline-block;
-            padding: 2px 8px;
+            padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-lg);
             font-size: 0.74rem;
             color: var(--paper);
@@ -1417,7 +1417,7 @@ td.num, th.num {
         }
         .journey-table th, .journey-table td {
             border: 1px solid var(--line);
-            padding: 10px 12px;
+            padding: 10px var(--space-4);
             vertical-align: top;
             line-height: 1.5;
         }
@@ -1447,7 +1447,7 @@ td.num, th.num {
             color: var(--ink-soft);
             font-weight: 400;
             font-style: italic;
-            margin-top: 2px;
+            margin-top: var(--space-1);
         }
         .journey-table tbody tr:nth-child(even) td:not(:first-child) {
             background: var(--paper);
@@ -1464,7 +1464,7 @@ td.num, th.num {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.88rem;
-            margin-top: 8px;
+            margin-top: var(--space-3);
         }
         .dest-table th, .dest-table td {
             border: 1px solid var(--line);
@@ -1526,7 +1526,7 @@ td.num, th.num {
         @media (max-width: 640px) {
             
             .pilgrim-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .pilgrim-card { padding: 12px; }
+            .pilgrim-card { padding: var(--space-4); }
             .pilgrim-card .p-name { font-size: 1rem; }
             
             
@@ -1561,7 +1561,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/global-pattern.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/global-pattern.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     </header>
 
@@ -1575,7 +1575,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
 
-<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<main id="main" class="page-wrap" style="padding-top:var(--space-7);padding-bottom:var(--space-10);">
         <div class="notice" id="dataSource">
             Data source: embedded build. (To load the latest data, from the <code>site/</code> directory run <code>py -m http.server 8000</code>)
         </div>
@@ -1684,10 +1684,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="index.html">EN Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="visualizations.html">Visualizations</a>
-            <a href="../data/global-pattern.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
+            <a href="../data/global-pattern.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
         </nav>
     
-<div style="margin-top:8px"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div></footer>
+<div style="margin-top:var(--space-3)"><a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div></footer>
 
 <script src="../static/js/d3.v7.min.js"></script>
 <div class="chart-tooltip" id="tooltip"></div>

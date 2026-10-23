@@ -1279,7 +1279,7 @@ td.num, th.num {
         .hero {
             background: linear-gradient(135deg, var(--dark) 0%, #3a2820 50%, #5a3828 100%);
             color: var(--dark-text);
-            padding: 50px 24px 40px;
+            padding: 50px var(--space-6) var(--space-8);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -1301,7 +1301,7 @@ td.num, th.num {
         .lang-switch a {
             color: var(--accent-soft);
             text-decoration: none;
-            padding: 4px 10px;
+            padding: var(--space-2) 10px;
             border: 1px solid color-mix(in srgb, var(--dark-text) 35%, transparent);
             border-radius: 4px;
         }
@@ -1310,7 +1310,7 @@ td.num, th.num {
             font-size: 2.2rem;
             font-weight: 600;
             letter-spacing: 0.08em;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
             position: relative;
             z-index: 1;
         }
@@ -1322,7 +1322,7 @@ td.num, th.num {
             z-index: 1;
         }
         .hero .tagline {
-            margin-top: 12px;
+            margin-top: var(--space-4);
             font-size: 0.85rem;
             color: color-mix(in srgb, var(--dark-text) 65%, transparent);
             font-style: italic;
@@ -1332,7 +1332,7 @@ td.num, th.num {
         .breadcrumb {
             font-size: 0.82rem;
             color: var(--ink-soft);
-            padding: 10px 24px;
+            padding: 10px var(--space-6);
             background: var(--bg);
             border-bottom: 1px solid var(--line);
         }
@@ -1342,9 +1342,9 @@ td.num, th.num {
         }
         .breadcrumb a:hover { text-decoration: underline; }
         .container {
-            max-width: 1280px;
+            max-width: var(--container-content);
             margin: -30px auto 60px;
-            padding: 0 24px;
+            padding: 0 var(--space-6);
             position: relative;
             z-index: 2;
         }
@@ -1352,7 +1352,7 @@ td.num, th.num {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 16px;
-            margin-bottom: 32px;
+            margin-bottom: var(--space-7);
         }
         .kpi-card {
             background: var(--paper);
@@ -1382,14 +1382,14 @@ td.num, th.num {
             font-weight: 600;
             color: var(--ink);
             line-height: 1.2;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2);
         }
         .kpi-card .desc {
             font-size: 0.85rem;
             color: var(--ink-soft);
         }
         .kpi-card .detail {
-            margin-top: 8px;
+            margin-top: var(--space-3);
             font-size: 0.78rem;
             color: var(--accent-2);
             border-top: 1px dashed var(--line);
@@ -1401,7 +1401,7 @@ td.num, th.num {
             border-radius: 8px;
             padding: 28px;
             box-shadow: var(--shadow);
-            margin-bottom: 24px;
+            margin-bottom: var(--space-6);
         }
         .section-title {
             font-size: 1.3rem;
@@ -1413,19 +1413,19 @@ td.num, th.num {
         .section-sub {
             font-size: 0.88rem;
             color: var(--ink-soft);
-            margin-bottom: 20px;
+            margin-bottom: var(--space-5);
         }
         .insight-box {
             background: linear-gradient(135deg, var(--paper-warm) 0%, var(--dark-text) 100%);
             border-left: 4px solid var(--accent);
-            padding: 20px 24px;
+            padding: var(--space-5) var(--space-6);
             border-radius: 4px;
             margin-top: 16px;
         }
         .insight-box h4 {
             color: var(--accent);
             font-size: 1rem;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-3);
         }
         .insight-box ul {
             list-style: none;
@@ -1452,16 +1452,16 @@ td.num, th.num {
         }
         footer {
             text-align: center;
-            padding: 24px;
+            padding: var(--space-6);
             color: var(--ink-soft);
             font-size: 0.85rem;
             border-top: 1px solid var(--line);
-            margin-top: 40px;
+            margin-top: var(--space-8);
         }
         footer a {
             color: var(--accent-2);
             text-decoration: none;
-            margin: 0 8px;
+            margin: 0 var(--space-3);
         }
         footer a:hover { text-decoration: underline; }
         .footer-index {
@@ -1505,8 +1505,8 @@ td.num, th.num {
     </nav>
     <header class="hero">
         <div class="lang-switch">
-            <a href="../dashboard.html" lang="zh-CN" style="display:inline-block;padding:6px 4px">中文</a>
-         · <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px 4px">Feedback</a></div>
+            <a href="../dashboard.html" lang="zh-CN" style="display:inline-block;padding:6px var(--space-2)">中文</a>
+         · <a href="https://github.com/1273984347/xiyouji/issues/new" rel="noopener" style="display:inline-block;padding:6px var(--space-2)">Feedback</a></div>
         <h1>Journey to the West · Data Dashboard</h1>
         <div class="subtitle">DATA DASHBOARD — ENGLISH SUMMARY</div>
         <div class="tagline">Five core KPIs across the hundred-chapter pilgrimage.</div>

@@ -11,6 +11,18 @@
 ---
 
 
+## W891 en 收尾批（2026-10-23）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/（138 页） | W891 | A 渠 15 处容器归并 + nav-back 49 页文字态 + 间距令牌化 3,353 处 |
+| scripts/_w891_en_survey.py | W891 | en 收尾前置盘点（容器值/断点/nav-back 变体/间距量） |
+| scripts/_w891_en_migrate.py | W891 | A 渠 + nav-back 迁移驱动（INLINED 跳过·@media 占位保护） |
+| scripts/output/_w864_accent_exemptions.json | W891 | W887 分册 −46 条 nav-back（随批递减·全簿 256） |
+| docs/00-导读/W批次编号对账表.md | W891 | 认领行与收官回填 |
+| CHANGELOG.md | W891 | W891 段 |
+| scripts/output/file-index.md | W891 | 同批段回写 |
+
 ## W890 CI 阻塞项清偿批（2026-10-23）
 
 | 文件 | W | 说明 |
