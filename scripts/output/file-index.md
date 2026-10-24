@@ -11,6 +11,29 @@
 ---
 
 
+## W921 CHANGELOG 主动瘦身批（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CHANGELOG.md | W921 | B-W855-05 主动瘦身：W700-W802 共 102 段迁一级归档（679KB→363KB·低于 503KB 基线）·段守恒 693 断言过
+| archive/docs/CHANGELOG-ARCHIVE.md | W921 | 承接 102 段迁入（978KB·未触 1MB tier2 阈·滚动分支零启用）·头部归档注记
+| docs/00-导读/W批次编号对账表.md | W921 | W921 认领行与收官回填 |
+| HANDOVER.md | W921 | 级联头尾链与里程碑块 |
+| README.md | W921 | 当前批次版本行 |
+| STRUCTURE.md | W921 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W921 | 当前批次版本行 |
+| .github/workflows/README.md | W921 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W921 | 页脚批次链插入 W921 |
+| site/data/cross-time-danmaku.html | W921 | 页脚批次链插入 W921 |
+| site/data/tag-cloud.html | W921 | 页脚批次链插入 W921 |
+| site/dukou-engine.html | W921 | 页脚批次链插入 W921 |
+| AGENTS.md | W921 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W921 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W921 | version 同步为 W921 |
+| scripts/output/file-index.md | W921 | W921 段插入 |
+| scripts/output/_w921_spec.json | W921 | 本批级联 spec |
+| scripts/output/_cascade_files_W921.txt | W921 | 级联落盘清单 |
+
 ## W920 副本链值级对账门禁批（2026-10-24）
 
 | 文件 | W | 说明 |
