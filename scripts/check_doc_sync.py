@@ -18,7 +18,8 @@
           不跑句式白名单与 C5c 裸数字（辅助叙述面宁窄勿误）；计划方案/ 子目录刻意除外：计划件为
           时点快照，其引用的基线数字随批次冻结（同 CHANGELOG 历史段纪律·禁回溯改写），由计划自身的
           「聚合数字当批现测」条款在开工批复核（T04 AC-07 34/35 vs 现役 37 实例））；
-     C5c 裸聚合数字：标记/句式覆盖外的 N[页项篇个类] 记 NOTE 报告型（起步策略·收敛后转 FAIL）；
+     C5c 裸聚合数字：标记/句式覆盖外的 N[页项篇个类] 判红（W904 收口——W703 起步策略的终态·74 处清零后转；
+          实体化加 <!--stats:KEY--> 或豁免：整行 EXEMPT_MARK 前缀 / 命中后置紧跟 EXEMPT_MARK·W904 新增只豁免该命中）；
      C5d stats 实算对账（W718）：scripts/stats.py --check（stats.json vs 磁盘实算）零差异——
      「检查过零差异」有机器背书，漂移未刷新（漏跑 --w）当场 FAIL（W715 实例的防线）；
      基线/首跑等时点值靠句式表设计豁免（不进句式形态），新聚合量须先登记 stats.py META 键表
@@ -87,7 +88,7 @@ RE_FILE_TOKEN = re.compile(
 # 覆盖面判据：凡仓内实际存在且会被手工编辑的文本类文件，其后缀都须在列；
 # 二进制资产（.png/.woff2/.ttf 等）不列——「文件」行本就只登记手工编辑件。
 RE_STATS_MARK = re.compile(r"(\d+)\s*[页项篇个类]?\s*<!--stats:([a-z_0-9]+)-->")  # W704 数字实体标记（紧贴/句尾双形态·key 后置·渲染隐藏）
-RE_BARE_AGG = re.compile(r"\d+\s*(?:页|项|篇|个|类)")  # C5c 裸聚合数字（报告型 NOTE·W704 起步）
+RE_BARE_AGG = re.compile(r"(?<![A-Za-z])\d+\s*(?:页|项|篇|个|类)")  # C5c 裸聚合数字（W704 起步·W904 起判红；W904 补词边界——「S1 项目/A2 个人随笔」类编号假阳性实证·字母后邻数字不计）
 C5_DOC_NAMES = {"readme": "README.md", "structure": "STRUCTURE.md", "agents": "AGENTS.md", "xiangmu": "项目说明.md", "contributing": "CONTRIBUTING.md", "koujing": "统计口径说明.md"}  # W713 补 CONTRIBUTING（第 27 门禁叙述面已含·C5 面对齐）；W769 补统计口径说明（自称「唯一口径来源」却不在扫描域·W760 F-9 实证）
 
 # C6 版本行 desc 分隔符体检（W841）——手工写段绕过 batch_cascade.precheck 的兜底。
@@ -404,7 +405,7 @@ def _check_c5_aggregate_stats(inp, issues, notes):
     """C5 聚合数字对账 + C5b 实体标记 + C5c 裸数字报告（W703/W704）。
 
     W730 提取：句式白名单 × 现役叙述面（README/STRUCTURE/AGENTS/项目说明/CONTRIBUTING +
-    CHANGELOG 口径块）vs stats.json；标记键未登记/数字失配 fail-closed；裸聚合数字 NOTE。
+    CHANGELOG 口径块）vs stats.json；标记键未登记/数字失配 fail-closed；裸聚合数字 W904 起判红。
     stats 缺失 fail-closed 早退（原 else 分支等价）。
     """
     stats = inp.get("stats")
@@ -442,10 +443,14 @@ def _check_c5_aggregate_stats(inp, issues, notes):
                     )
 
     # C5b 数字实体标记对账（W704）：<!--stats:KEY--> 前置数字 == stats.json[KEY].value；键未登记 fail-closed
-    # C5c 裸聚合数字（报告型 NOTE·标记/句式覆盖位之外·起步策略收敛后转 FAIL）
+    # C5c 裸聚合数字（W904 起判红·W703「收敛后转 FAIL」终态；标记/句式覆盖位之外）
+    # 豁免两形态：①整行前缀 EXEMPT_MARK（W704 起的行级豁免·跳过整行一切判定；W904 收紧为**行首**形态——
+    #              原「行内含即整行跳」会吞掉后置豁免行上的标记对账·T30 负样本实证·现存零使用零迁移）
+    #            ②命中后置豁免（W904 新增）：裸命中后紧跟（可隔空白）EXEMPT_MARK 只豁免该命中，
+    #              行内其余判定（句式/标记对账）照跑——供「混排行」（如既有 stats 标记又含常量数字）精确豁免。
     bare_hits = []
     for where, ln in scans:
-        if EXEMPT_MARK in ln:
+        if ln.lstrip().startswith(EXEMPT_MARK):
             continue
         covered = set()
         for pat, _keys, ctx in RE_STATS_PATTERNS:
@@ -456,11 +461,15 @@ def _check_c5_aggregate_stats(inp, issues, notes):
             covered.update(range(m.start(), m.end()))
             _check_stats_marker(m, where, stats, issues)
         for m in RE_BARE_AGG.finditer(ln):
-            if m.start() not in covered:
-                bare_hits.append("%s「%s」" % (where, m.group(0)))
+            if m.start() in covered:
+                continue
+            if ln[m.end():].lstrip().startswith(EXEMPT_MARK):
+                continue  # 后置精确豁免（W904）：只豁免本命中
+            bare_hits.append("%s「%s」" % (where, m.group(0)))
     if bare_hits:
-        notes.append(
-            "C5c: 裸聚合数字 %d 处未实体化（报告型·前 20）：%s%s"
+        issues.append(
+            "C5c: 裸聚合数字 %d 处未实体化（W904 起判红——实体化加 <!--stats:KEY-->；豁免：整行或命中后置 "
+            "<!--doc-sync:exempt-->·常量/历史时点/功能描述适用·前 20）：%s%s"
             % (len(bare_hits), "；".join(bare_hits[:20]), "…" if len(bare_hits) > 20 else "")
         )
 
@@ -767,6 +776,35 @@ def run_self_test():
         "T22 报告扩展面标记一致放行（C5b·W830）",
         lambda d: d.update(reports_extra={"docs/11-方案报告/x.md": "全站 HTML 共 100<!--stats:html_total--> 页\n"}),
         "C5b",
+        expect_absent=True,
+    )
+    # W904：C5c 转 FAIL 双向锁 + 后置精确豁免两向（豁免命中不红 / 同行既有标记对账不被豁免拆掉）
+    case(
+        "T27 裸聚合数字必红（C5c·W904 转判红）",
+        lambda d: d.update(readme=d["readme"] + "另有 9 篇文档\n"),
+        "C5c",
+    )
+    case(
+        "T28 命中后置豁免放行（C5c·W904）",
+        lambda d: d.update(readme=d["readme"] + "另有 9 篇<!--doc-sync:exempt--> 常量文档\n"),
+        "C5c",
+        expect_absent=True,
+    )
+    case(
+        "T29 后置豁免不拆同行标记对账（C5b 照跑·W904）",
+        lambda d: d.update(readme=d["readme"] + "共 100<!--stats:html_total--> 页 + 9 篇<!--doc-sync:exempt--> 常量\n"),
+        "C5c",
+        expect_absent=True,
+    )
+    case(
+        "T30 后置豁免行内标记失配仍红（C5b 不受豁免影响·W904）",
+        lambda d: d.update(readme=d["readme"] + "共 200<!--stats:html_total--> 页 + 9 篇<!--doc-sync:exempt--> 常量\n"),
+        "C5b",
+    )
+    case(
+        "T31 编号假阳性不计（C5c·W904 词边界——S1 项目/A2 个人随笔类）",
+        lambda d: d.update(readme=d["readme"] + "S1 项目方法论 + A2 个人随笔板块\n"),
+        "C5c",
         expect_absent=True,
     )
 

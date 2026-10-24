@@ -83,6 +83,14 @@ META = {
     "gate_count": {"domain": "scripts/verify_delivery.py「第 N 槽/门禁」max", "introduced_by": "W493"},
     "a1_a6_docs": {"domain": "docs/01-06 六板块顶层内容 .md（排除 README）", "introduced_by": "W505"},
     "a4_docs": {"domain": "docs/03-主题与情节专题/*.md（排除 README）", "introduced_by": "W722"},  # W722：A4 计数实体化（三处同改·用户裁决 6A）
+    # W904：C5c 收敛——分板块/分层板块键（口径对齐 a4_docs：顶层 .md 排 README；STRUCTURE A5「4 篇」陈旧值即由本批键当场纠正）
+    "a2_docs": {"domain": "docs/06-个人随笔/*.md（排除 README）", "introduced_by": "W904"},
+    "a3_docs": {"domain": "docs/02-人物深度分析/*.md（排除 README）", "introduced_by": "W904"},
+    "a5_docs": {"domain": "docs/04-文化与历史背景/*.md（排除 README）", "introduced_by": "W904"},
+    "a6_docs": {"domain": "docs/05-诗词歌赋/*.md（排除 README）", "introduced_by": "W904"},
+    "learn_docs": {"domain": "docs/07-学以致用/*.md（排除 README）", "introduced_by": "W904"},
+    "cognition_docs": {"domain": "docs/08-提升认知/*.md（排除 README）", "introduced_by": "W904"},
+    "spirit_docs": {"domain": "docs/09-精神塑造/*.md（排除 README）", "introduced_by": "W904"},
     "methodology_docs": {"domain": "docs/10-方法论沉淀/*.md（含索引 README）", "introduced_by": "W070"},
     "script_classes": {"domain": "scripts/[A-Z]_* 类目录数", "introduced_by": "W528"},
     "report_docs": {"domain": "docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化）", "introduced_by": "W737"},
@@ -166,6 +174,9 @@ def build():
     a4 = len([p for p in _in("docs/03-主题与情节专题/", ".md", direct=True)
               if not os.path.basename(p).startswith("README")])
     methodology = len(_in("docs/10-方法论沉淀/", ".md", direct=True))
+    _sec = lambda d: len([p for p in _in(d, ".md", direct=True) if os.path.basename(p) not in ("README.md", "index.md")])  # noqa: E731  # W904 分板块键同口径
+    a2_docs, a3_docs, a5_docs, a6_docs = _sec("docs/06-个人随笔/"), _sec("docs/02-人物深度分析/"), _sec("docs/04-文化与历史背景/"), _sec("docs/05-诗词歌赋/")
+    learn_docs, cognition_docs, spirit_docs = _sec("docs/07-学以致用/"), _sec("docs/08-提升认知/"), _sec("docs/09-精神塑造/")
     classes = sorted({p.split("/")[1] for p in tracked
                       if p.startswith("scripts/") and p.count("/") == 2
                       and p.split("/")[1][:1].isalpha() and p.split("/")[1][:1].isupper()})
@@ -186,6 +197,8 @@ def build():
         "gate_count": gate_max,
         "a1_a6_docs": a1_a6,
         "a4_docs": a4,
+        "a2_docs": a2_docs, "a3_docs": a3_docs, "a5_docs": a5_docs, "a6_docs": a6_docs,  # W904
+        "learn_docs": learn_docs, "cognition_docs": cognition_docs, "spirit_docs": spirit_docs,
         "methodology_docs": methodology,
         # json_count 键已移除（W716）：scripts/output/data/ 系 gitignored 本地产物（.gitignore:59），
         # 依赖它的键在无本地产物环境 --check 必红，违反「tracked 基准 CI 可复现」原则（W703 声明对它不成立）

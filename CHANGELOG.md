@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W903），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W904），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,29 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W904（2026-10-24）：C5c 裸聚合收敛（74 处清零·判据转 FAIL·stats 增 7 板块键·后置精确豁免）
+
+
+
+> **来源**：用户 2026-10-24 引用 W902 审查报告 F4 遗留项「C5c 裸聚合 74 处收敛债」令处理——W703 建槽时「起步策略·收敛后转 FAIL」设计终态的执行批。
+
+> - **文件**：scripts/stats.py、scripts/check_doc_sync.py、README.md、STRUCTURE.md、AGENTS.md、docs/00-导读/项目说明.md、CONTRIBUTING.md、docs/00-导读/统计口径说明.md、docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md、docs/11-方案报告/README.md、scripts/output/stats.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w904_spec.json、scripts/output/_cascade_files_W904.txt（逐件行见 file-index W904 段）。
+
+**① stats.py 增 7 板块键**：a2/a3/a5/a6/learn/cognition/spirit（口径对齐 a4_docs——板块顶层 .md 排 README·Git 索引实算），首刷值 44/215/34/13/4/3/4。
+
+**② check_doc_sync 判据四升级（管控件·F4 处理令）**：
+- **C5c 由 NOTE 转 FAIL**（W703 终态·防回退）；
+- **命中后置精确豁免**：裸命中后紧跟 `<!--doc-sync:exempt-->` 只豁免该命中，同行句式/标记对账照跑（供「既有 stats 标记又含常量」的混排行）；
+- **整行豁免收紧为行首形态**——原「行内含即整行跳过」会吞掉后置豁免行上的标记对账（T30 负样本实证·现存零使用零迁移）；
+- **RE_BARE_AGG 词边界** `(?<![A-Za-z])`——「S1 项目」「A2 个人随笔」「S3 项目」类编号假阳性不计（实测 3 处）。
+- self-test 增 T27-T31 五例（先红后绿·含假阳性防回归）·31/31。
+
+**③ 存量 74 处三分治清零（C5c 实测 74 → 0）**：实体化 24 处（13 个键位）/ 后置豁免 44 处（常量·历史时点·功能描述）/ 改写去漂移数 2 处。**两处陈旧值随批纠正**：STRUCTURE「A5 已建 4 篇」实数 34（无对账期漂移的实锤案例）；「docs/INDEX 321 篇」陈旧计数改写为不带数表述。README「docs 18 个板块」同改描述式。
+
+**④ F4 状态收口**：审查报告状态行/遗留盘点表/README 登记行 34 同步订正。
+
+**验证**：check_doc_sync self-test 31/31·主判据 C5c 0 处·ruff scripts/ All checks passed·pytest 858 passed 3 skipped·verify 全量核心全绿。
 
 ### W903（2026-10-24）：审查发现修复（preflight touches 语义归一 + 门禁 45 提示语补序）
 

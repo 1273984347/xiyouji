@@ -11,6 +11,39 @@
 ---
 
 
+## W904 C5c 裸聚合收敛（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/stats.py | W904 | 增 7 板块键（a2/a3/a5/a6/learn/cognition/spirit·口径对齐 a4_docs 顶层排 README）——C5c 收敛的键位供给
+| scripts/check_doc_sync.py | W904 | C5c 由 NOTE 转 FAIL（W703 终态）+ 新增命中后置精确豁免（只豁免该命中·同行标记对账照跑）+ 整行豁免收紧为行首形态（原「行内含即整行跳」会吞后置豁免行的标记对账·T30 负样本实证）+ RE_BARE_AGG 词边界（S1 项目/A2 个人类编号假阳性修复）+ self-test 增 T27-T31（31/31）
+| README.md | W904 | C5c 三分治：34 类实体化 / 44 篇实体化 / 常量豁免×2 / 「18 个板块」陈旧数改写为描述式
+| STRUCTURE.md | W904 | C5c 三分治 32 处：A3/A5/learn/cognition/spirit/A2/A4/site_en 实体化（**A5「已建 4 篇」陈旧值纠正为实数 34**）/ 六子目录构成与时点史实后置豁免 / 「321 篇」陈旧索引数改写去数
+| AGENTS.md | W904 | C5c 三分治 6 处：a2/site_data/site_en 实体化 / 133 维度与 §11 十项常量豁免 / EXPECT_A4 判据字面量转述豁免
+| docs/00-导读/项目说明.md | W904 | C5c 三分治 20 处：A2/A3/A5/A6/可视化实体化 / S1-S3 时点史实与功能常量豁免
+| CONTRIBUTING.md | W904 | §12 自检十项与 fallback 三项常量豁免×3
+| docs/00-导读/统计口径说明.md | W904 | 615/87 实体化 / W505 历史事件计数豁免×2
+| docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md | W904 | F4 状态订正为已收口 + 遗留盘点表更新
+| docs/11-方案报告/README.md（登记行 34） | W904 | F4 状态订正为已由 W904 收口
+| scripts/output/stats.json | W904 | 新 7 键落盘（--w W904 刷新）
+| docs/00-导读/W批次编号对账表.md | W904 | W904 认领行与收官回填 |
+| CHANGELOG.md | W904 | W904 段 |
+| HANDOVER.md | W904 | 级联头尾链与里程碑块 |
+| README.md（版本行） | W904 | 当前批次版本行 |
+| STRUCTURE.md（版本行） | W904 | 当前批次版本行 |
+| docs/00-导读/项目说明.md（版本行） | W904 | 当前批次版本行 |
+| .github/workflows/README.md | W904 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W904 | 页脚批次链插入 W904 |
+| site/data/cross-time-danmaku.html | W904 | 页脚批次链插入 W904 |
+| site/data/tag-cloud.html | W904 | 页脚批次链插入 W904 |
+| site/dukou-engine.html | W904 | 页脚批次链插入 W904 |
+| AGENTS.md（版本脚注） | W904 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W904 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W904 | version 同步为 W904 |
+| scripts/output/file-index.md | W904 | W904 段插入 |
+| scripts/output/_w904_spec.json | W904 | 本批级联 spec |
+| scripts/output/_cascade_files_W904.txt | W904 | 级联落盘清单 |
+
 ## W903 审查发现修复（2026-10-24）
 
 | 文件 | W | 说明 |

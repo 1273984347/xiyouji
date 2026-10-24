@@ -1,6 +1,6 @@
 {
   "_format": "entity-v1",
-  "_generated": "2026-10-24T01:59:44",
+  "_generated": "2026-10-24T17:49:07",
   "_generator": "scripts/stats.py（W704 实体化·第 31 门禁 C5 对账基准·改口径批次须同批 --w 刷新）",
   "a1_a6_docs": {
     "domain": "docs/01-06 六板块顶层内容 .md（排除 README）",
@@ -9,12 +9,47 @@
     "last_changed_by": "W505",
     "value": 615
   },
+  "a2_docs": {
+    "domain": "docs/06-个人随笔/*.md（排除 README）",
+    "generator": "scripts/stats.py",
+    "introduced_by": "W904",
+    "last_changed_by": "W904",
+    "value": 44
+  },
+  "a3_docs": {
+    "domain": "docs/02-人物深度分析/*.md（排除 README）",
+    "generator": "scripts/stats.py",
+    "introduced_by": "W904",
+    "last_changed_by": "W904",
+    "value": 215
+  },
   "a4_docs": {
     "domain": "docs/03-主题与情节专题/*.md（排除 README）",
     "generator": "scripts/stats.py",
     "introduced_by": "W722",
     "last_changed_by": "W722",
     "value": 209
+  },
+  "a5_docs": {
+    "domain": "docs/04-文化与历史背景/*.md（排除 README）",
+    "generator": "scripts/stats.py",
+    "introduced_by": "W904",
+    "last_changed_by": "W904",
+    "value": 34
+  },
+  "a6_docs": {
+    "domain": "docs/05-诗词歌赋/*.md（排除 README）",
+    "generator": "scripts/stats.py",
+    "introduced_by": "W904",
+    "last_changed_by": "W904",
+    "value": 13
+  },
+  "cognition_docs": {
+    "domain": "docs/08-提升认知/*.md（排除 README）",
+    "generator": "scripts/stats.py",
+    "introduced_by": "W904",
+    "last_changed_by": "W904",
+    "value": 3
   },
   "csp_covered": {
     "domain": "html_total − _template.html（generate_csp TEMPLATE_EXCLUDE）",
@@ -43,6 +78,13 @@
     "introduced_by": "W459",
     "last_changed_by": "W894",
     "value": 330
+  },
+  "learn_docs": {
+    "domain": "docs/07-学以致用/*.md（排除 README）",
+    "generator": "scripts/stats.py",
+    "introduced_by": "W904",
+    "last_changed_by": "W904",
+    "value": 4
   },
   "methodology_docs": {
     "domain": "docs/10-方法论沉淀/*.md（含索引 README）",
@@ -113,6 +155,13 @@
     "introduced_by": "W459",
     "last_changed_by": "W459",
     "value": 9
+  },
+  "spirit_docs": {
+    "domain": "docs/09-精神塑造/*.md（排除 README）",
+    "generator": "scripts/stats.py",
+    "introduced_by": "W904",
+    "last_changed_by": "W904",
+    "value": 4
   },
   "visualization_pages": {
     "domain": "site/data_html − _shell.html",
