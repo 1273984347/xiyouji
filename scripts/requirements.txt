@@ -5,7 +5,7 @@
 jieba==0.42.1
 Pillow==13.0.0
 # W758：markdown 为 build_reader.py 渲染依赖（CI 首跑暴露本地有装而未登记→第 42 门禁可导入性必红）
-markdown==3.10.2
+markdown==3.11.1
 
 # dev dependencies
 ruff==0.16.9
