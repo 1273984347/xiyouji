@@ -537,7 +537,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "653beead7deeafc240c6165ba02d789b1802df76",
+   "sha1": "7d87d0f7bd75270998900ad40d4e715090321c7f",
    "counts": {
     "button.vt-btn": 1
    }
@@ -652,7 +652,7 @@
    }
   },
   "index.html": {
-   "sha1": "4b47ed75fe3a85727022da878eb45c06ce07ea0c",
+   "sha1": "d8ef6189bff05b1e1000bcaa137f1ece515a5d95",
    "counts": {
     "button.rag-fab": 1
    }
@@ -1398,7 +1398,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "2d44131f1f2fcf2f1c5911ce5024b3dfd3a275fe",
+   "sha1": "889cdbb6ebf85facf09e72950024f048069fb7b0",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1488,5 +1488,5 @@
    }
   }
  },
- "generated_at": "2026-10-24T12:28:42.583Z"
+ "generated_at": "2026-10-24T12:47:28.407Z"
 }
