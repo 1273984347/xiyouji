@@ -81,7 +81,7 @@ db.exec(`
 // 迁移框架（W919 B-DB-04·W823 包四）：version 单调·事务内执行·user_version 记账。
 // 教训固化：改表定义对已存在的库无效（SQLite 无 ADD CONSTRAINT）——一切 schema 变更走本清单。
 // v1 吸收原手写迁移（sdk_session_id 列·try/catch 形态按 W823 判定为「静默吞错」反模式）。
-const MIGRATIONS: Array<{ version: number; up(d: import("better-sqlite3").Database) }> = [
+const MIGRATIONS: Array<{ version: number; up(d: import("better-sqlite3").Database): void }> = [
   {
     version: 1,
     up(d) {
