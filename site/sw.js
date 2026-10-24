@@ -18,7 +18,7 @@ const CACHE = "xiyouji-shell-v3"; /* W564：字体切换 subset 产物 */
 const SHELL = [
   "./",
   "./index.html",
-  "./mobile-index.html",
+  "./index.html",
   "./manifest.webmanifest",
   "./tokens.css",
   "./system.css",
@@ -74,7 +74,7 @@ self.addEventListener("fetch", function (e) {
         caches.open(CACHE).then(function (c) { c.put(req, copy); });
         return res;
       }).catch(function () {
-        return caches.match("./index.html").then(function (r) { return r || caches.match("./mobile-index.html"); });
+        return caches.match("./index.html").then(function (r) { return r || caches.match("./index.html"); });
       })
     );
     return;

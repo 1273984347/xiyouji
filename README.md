@@ -1,5 +1,7 @@
 # 📖 取经录
 
+[English](README.en.md) | 简体中文
+
 > 一源多形 · 数字人文可视化解读《西游记》100 回 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
 > **怎么读**：普通读者从下面的「30 秒上手」与「目录导航」进即可；开发者 / Agent 请直接跳到文末的「开发者 / 维护者专区」。
 
@@ -132,7 +134,7 @@
 
 > **📖 阅读契约（W707）**：普通读者通读「普通读者专区」；Agent/开发者只读「开发者/维护者专区」与「AI 生成说明」。先读「是什么/为什么」（下一行），再按路径深入。
 >
-> **当前批次 W909（2026-10-24）**：README 专业化改版：结构层级统一、配图补齐、头部与文案修正·A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> **当前批次 W914（2026-10-24）**：新增英文版 README：完整对照翻译、双向语言互链、站内链接指向英文站·A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 >
 > **版本号说明（W711 方案 D 起）**：本项目的批次编号为 **W###**（单调递增·永不复用·唯一对账键），`v2.3` 为内容阶段标签（定性·无 patch 位·不适用 SemVer）；W710 及更早的历史版本号 `vX.Y.Z` 保留原文。判断「这批改了什么」看 [CHANGELOG.md](CHANGELOG.md) 顶段。
 >
@@ -188,6 +190,7 @@ xiyouji/
 ├── xiyouji-desktop/       # 桌面版（Electron 离线全站客户端 · W804）
 ├── .github/workflows/     # CI/Security/Deploy Pages/Lighthouse/截图审查
 ├── README.md              # 本文件（用户手册 + 开发者分区）
+├── README.en.md           # 英文版导读（与本文件结构对应·入口互链）
 ├── STRUCTURE.md           # 目录结构详细说明
 ├── CHANGELOG.md           # 更新日志（编号上限见现役版段）
 └── LICENSE                # 双协议授权声明

@@ -95,3 +95,20 @@ def test_w900_ledger_row_replay():
     other = pf._split_touches("docs/11-方案报告/审查与评审/架构评审报告-2026-10-21.md · site/index.html")
     hits = pf.touches_conflict(w900, other)
     assert any("架构评审报告" in h for h in hits), "目录面撞车必须被机器拦下（W825/W893 两起漏拦的根因）"
+
+# ---- W908：状态列定位放宽（嵌套括号长尾收官格·A-T07 族配套 ST-07）----
+
+def test_locate_status_nested_paren_tail():
+    """W906 式长尾收官格（含嵌套括号证据）必须被识别为已收官——原单层紧匹配拒识。"""
+    cells = ["W906", "主题", "hash", "版段",
+             "**已收官**（b7e2d697·self-test 33/33（T32/T33 双向锁）·verify 全绿）",
+             "主会话", "a.py·b.py"]
+    assert pf._locate_status(cells).startswith("**已收官**")
+    assert not pf.is_inflight(pf._locate_status(cells))
+
+
+def test_locate_status_pipe_split_row_still_finds_status():
+    """主题含竖线切碎行（W825 形态）时·长尾收官格仍能右起定位（不再依赖 cells[4] 回退）。"""
+    cells = ["W906", "主题左", "主题右含竖线段", "hash", "版段",
+             "**已收官**（hash·证据（嵌套））", "主会话", "a.py"]
+    assert "已收官" in pf._locate_status(cells)
