@@ -11,6 +11,199 @@
 ---
 
 
+## W905 两项存量红项清理（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/character-semantic-network.html | W905 | 暗色态补色规则（rgb(163, 1, 38) → #ce7e88·修 W674 色阶变更遗留的 invisible 缺陷） |
+| site/en/character-semantic-network.html | W905 | 暗色态补色规则（同上·英文版同步） |
+| xiyouji-agent-web/package.json | W905 | 依赖升级（dompurify ^3.4.17）+ overrides 抬版（markdown-it ^14.3.3 / zod ^4.6.7 / vite ^8.3.5） |
+| xiyouji-agent-web/package-lock.json | W905 | 锁文件同步（4 包版本推进·lock 变更最小化） |
+| scripts/output/_vermilion_solid_cache.json | W905 | 朱砂门禁增量缓存刷新（本批级联改四页脚后按 sha1 重扫对齐） |
+| scripts/output/_w905_spec.json | W905 | 本批级联 spec（10 面改写参数） |
+| scripts/output/_cascade_files_W905.txt | W905 | 级联落盘清单 |
+| docs/00-导读/W批次编号对账表.md | W905 | 认领行与收官回填 |
+| CHANGELOG.md | W905 | W905 段 |
+| HANDOVER.md | W905 | 头尾链与里程碑块 |
+| README.md | W905 | 当前批次版本行 |
+| STRUCTURE.md | W905 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W905 | 当前批次版本行 |
+| .github/workflows/README.md | W905 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W905 | 页脚批次链插入 W905 |
+| site/data/cross-time-danmaku.html | W905 | 页脚批次链插入 W905 |
+| site/data/tag-cloud.html | W905 | 页脚批次链插入 W905 |
+| site/dukou-engine.html | W905 | 页脚批次链插入 W905 |
+| AGENTS.md | W905 | 版本脚注条目 |
+| CITATION.cff | W905 | version 同步为 W905 |
+| scripts/output/file-index.md | W905 | W905 段插入 |
+
+## W904 C5c 裸聚合收敛（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/stats.py | W904 | 增 7 板块键（a2/a3/a5/a6/learn/cognition/spirit·口径对齐 a4_docs 顶层排 README）——C5c 收敛的键位供给
+| scripts/check_doc_sync.py | W904 | C5c 由 NOTE 转 FAIL（W703 终态）+ 新增命中后置精确豁免（只豁免该命中·同行标记对账照跑）+ 整行豁免收紧为行首形态（原「行内含即整行跳」会吞后置豁免行的标记对账·T30 负样本实证）+ RE_BARE_AGG 词边界（S1 项目/A2 个人类编号假阳性修复）+ self-test 增 T27-T31（31/31）
+| README.md | W904 | C5c 三分治：34 类实体化 / 44 篇实体化 / 常量豁免×2 / 「18 个板块」陈旧数改写为描述式
+| STRUCTURE.md | W904 | C5c 三分治 32 处：A3/A5/learn/cognition/spirit/A2/A4/site_en 实体化（**A5「已建 4 篇」陈旧值纠正为实数 34**）/ 六子目录构成与时点史实后置豁免 / 「321 篇」陈旧索引数改写去数
+| AGENTS.md | W904 | C5c 三分治 6 处：a2/site_data/site_en 实体化 / 133 维度与 §11 十项常量豁免 / EXPECT_A4 判据字面量转述豁免
+| docs/00-导读/项目说明.md | W904 | C5c 三分治 20 处：A2/A3/A5/A6/可视化实体化 / S1-S3 时点史实与功能常量豁免
+| CONTRIBUTING.md | W904 | §12 自检十项与 fallback 三项常量豁免×3
+| docs/00-导读/统计口径说明.md | W904 | 615/87 实体化 / W505 历史事件计数豁免×2
+| docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md | W904 | F4 状态订正为已收口 + 遗留盘点表更新
+| docs/11-方案报告/README.md（登记行 34） | W904 | F4 状态订正为已由 W904 收口
+| scripts/output/stats.json | W904 | 新 7 键落盘（--w W904 刷新）
+| docs/00-导读/W批次编号对账表.md | W904 | W904 认领行与收官回填 |
+| CHANGELOG.md | W904 | W904 段 |
+| HANDOVER.md | W904 | 级联头尾链与里程碑块 |
+| README.md（版本行） | W904 | 当前批次版本行 |
+| STRUCTURE.md（版本行） | W904 | 当前批次版本行 |
+| docs/00-导读/项目说明.md（版本行） | W904 | 当前批次版本行 |
+| .github/workflows/README.md | W904 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W904 | 页脚批次链插入 W904 |
+| site/data/cross-time-danmaku.html | W904 | 页脚批次链插入 W904 |
+| site/data/tag-cloud.html | W904 | 页脚批次链插入 W904 |
+| site/dukou-engine.html | W904 | 页脚批次链插入 W904 |
+| AGENTS.md（版本脚注） | W904 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W904 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W904 | version 同步为 W904 |
+| scripts/output/file-index.md | W904 | W904 段插入 |
+| scripts/output/_w904_spec.json | W904 | 本批级联 spec |
+| scripts/output/_cascade_files_W904.txt | W904 | 级联落盘清单 |
+
+## W903 审查发现修复（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/preflight_check.py | W903 | F1 修复（管控件·用户批准）：_split_touches 注记归一（全角括号内不切且整段丢弃·扫描式 tokenizer）+ touches_conflict 对称目录前缀匹配（X/** 与 X/ 形态）——通配/带注记声明不再恒不命中假绿 |
+| scripts/verify_delivery.py | W903 | F2 修复（管控件·用户批准）：第 45 门禁 fail_msg 补「先 git add 本批新件再 refresh」顺序（生成器按 Git 索引收集·W896 口径·W900/W901 连踩） |
+| tests/unit/test_preflight_touches.py | W903 | 新增语义归一族单测 6 例（先红后绿：旧码下 5 例红实证·新码 17/17 绿） |
+| docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md | W903 | 状态行 F1/F2「待批」订正为已落地 |
+| docs/11-方案报告/README.md | W903 | 登记行 34 的 F1/F2 状态订正为已由 W903 修复 |
+| docs/00-导读/W批次编号对账表.md | W903 | W903 认领行与收官回填 |
+| CHANGELOG.md | W903 | W903 段 |
+| HANDOVER.md | W903 | 级联头尾链与里程碑块 |
+| README.md | W903 | 当前批次版本行 |
+| STRUCTURE.md | W903 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W903 | 当前批次版本行 |
+| .github/workflows/README.md | W903 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W903 | 页脚批次链插入 W903 |
+| site/data/cross-time-danmaku.html | W903 | 页脚批次链插入 W903 |
+| site/data/tag-cloud.html | W903 | 页脚批次链插入 W903 |
+| site/dukou-engine.html | W903 | 页脚批次链插入 W903 |
+| AGENTS.md | W903 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W903 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W903 | version 同步为 W903 |
+| scripts/output/file-index.md | W903 | W903 段插入 |
+| scripts/output/_w903_spec.json | W903 | 本批级联 spec |
+| scripts/output/_cascade_files_W903.txt | W903 | 级联落盘清单 |
+
+## W902 机制脚本门禁全量审查与记忆固化入仓（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md | W902 | 新增：机制层全量审查（三层面·四发现·记忆固化迁移清单·遗留盘点） |
+| docs/11-方案报告/README.md | W902 | 审查报告登记行 34 + 维护契约 ① 补「唯一落盘位」常设指令句 |
+| docs/agent/pitfalls.md | W902 | 记忆固化 +3 条（canvas 边层 / CSP 写路径盲区 / 暗色审计 http 前置假 0）+ 三节计数 9→10·5→6·5→6 |
+| AGENTS.md | W902 | 六主题计数同步（49→52）+ §4.3 本机环境事实补 4 条（curl --ssl-no-revoke / /tmp 不可见 / Europe PMC 兜底 / gh api -f） |
+| docs/00-导读/文档规范.md | W902 | §11.1 管控表新增「常设指令」行：方案/审查/调研/复盘/计划类交付物唯一落盘位 = docs/11-方案报告/ |
+| CLAUDE.md | W902 | 速查层新增「报告落位」条目（46 行·预算 60 内） |
+| docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md | W902 | §8 干扰日志补 2 行延迟登记（W825/W893 覆盖事件·考古补·如实标注） |
+| docs/00-导读/W批次编号对账表.md | W902 | W902 认领行与收官回填 |
+| CHANGELOG.md | W902 | W902 段 |
+| HANDOVER.md | W902 | 级联头尾链与里程碑块 |
+| README.md | W902 | 当前批次版本行 |
+| STRUCTURE.md | W902 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W902 | 当前批次版本行 |
+| .github/workflows/README.md | W902 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W902 | 页脚批次链插入 W902 |
+| site/data/cross-time-danmaku.html | W902 | 页脚批次链插入 W902 |
+| site/data/tag-cloud.html | W902 | 页脚批次链插入 W902 |
+| site/dukou-engine.html | W902 | 页脚批次链插入 W902 |
+| AGENTS.md（版本脚注） | W902 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W902 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W902 | version 同步为 W902 |
+| scripts/output/file-index.md | W902 | W902 段插入 |
+| scripts/output/_w902_spec.json | W902 | 本批级联 spec |
+| scripts/output/_cascade_files_W902.txt | W902 | 级联落盘清单 |
+
+## W901 C5b 对账面恢复 + W900 披露项清偿（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_sync.py | W901 | C5b 扩展面 glob 根层改递归（管控件·用户 2026-10-24 批准；计划方案/ 时点快照豁免原样保留——实测该子目录 8 件带冻结 stats 标记·入面即假红） |
+| docs/11-方案报告/README.md | W901 | T-16/T-17 两件补登计划方案表（W893/W896 遗留登记缺口）+ 节头计数订正 + C5b 提示行更新为已恢复口径 + 登记缺口披露行撤除 |
+| CHANGELOG.md | W901 | W757 段 1 条审计报告链接随批准改指新址（仅地址不改叙事）+ W901 段 |
+| docs/00-导读/W批次编号对账表.md | W901 | W901 认领行与收官回填 |
+| HANDOVER.md | W901 | 级联头尾链与里程碑块 |
+| README.md | W901 | 当前批次版本行 |
+| STRUCTURE.md | W901 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W901 | 当前批次版本行 |
+| .github/workflows/README.md | W901 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W901 | 页脚批次链插入 W901 |
+| site/data/cross-time-danmaku.html | W901 | 页脚批次链插入 W901 |
+| site/data/tag-cloud.html | W901 | 页脚批次链插入 W901 |
+| site/dukou-engine.html | W901 | 页脚批次链插入 W901 |
+| AGENTS.md | W901 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W901 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W901 | version 同步为 W901 |
+| scripts/output/file-index.md | W901 | W901 段插入 |
+| scripts/output/_w901_spec.json | W901 | 本批级联 spec |
+| scripts/output/_cascade_files_W901.txt | W901 | 级联落盘清单 |
+
+## W900 11-方案报告目录分类重组（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/审查与评审/对抗性审查报告-2026-10-14.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/审查与评审/全量对抗审查报告-2026-10-16.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/审查与评审/工程基础设施薄弱点审计报告-2026-10-16.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/审查与评审/外部评审回应与逐项核查报告-2026-10-17.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/审查与评审/外部评审回应与逐项核查报告-2026-10-18.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/审查与评审/计划方案三性审查报告-2026-10-20.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/审查与评审/架构评审报告-2026-10-21.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/审查与评审/界面布局审计报告-2026-10-21.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/审查与评审/数据库表设计审查报告-2026-10-20.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/审查与评审/难簿序与dataset对拍报告-2026-10-11.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/设计与架构方案/界面视觉重设计方向-v4-2026-10-20.md | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/设计与架构方案/界面视觉重设计细化规格-v4-2026-10-20.md | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/设计与架构方案/v4-design-language-preview.html | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/设计与架构方案/静态站前端框架化选型对比-2026-10-20.md | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.html | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/治理与核查/W761工具链可维护性重构报告-2026-10-16.md | W900 | 根层迁入分类子目录「治理与核查」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/治理与核查/多Agent干扰治理评估与实施记录-2026-10-14.md | W900 | 根层迁入分类子目录「治理与核查」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/治理与核查/全仓待办计划方案状态核查报告-2026-10-18.md | W900 | 根层迁入分类子目录「治理与核查」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/调研与数据复盘/项目GitHub参考调研报告.md | W900 | 根层迁入分类子目录「调研与数据复盘」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/调研与数据复盘/读者数据复盘.md | W900 | 根层迁入分类子目录「调研与数据复盘」（链接面同步见 README/INDEX/搜索索引行） |
+| docs/11-方案报告/调研与数据复盘/读者数据截图/dashboard-pages-2026-09-30.png | W900 | 随读者数据复盘迁入「调研与数据复盘」 |
+| docs/11-方案报告/调研与数据复盘/读者数据截图/dashboard-top-2026-09-30.png | W900 | 随读者数据复盘迁入「调研与数据复盘」 |
+| docs/11-方案报告/调研与数据复盘/读者数据截图/dashboard-top-2026-10-02.png | W900 | 随读者数据复盘迁入「调研与数据复盘」 |
+| docs/11-方案报告/调研与数据复盘/读者数据截图/dashboard-topref-2026-10-02.png | W900 | 随读者数据复盘迁入「调研与数据复盘」 |
+| docs/11-方案报告/调研与数据复盘/读者数据截图/uv-curve-2026-09.svg | W900 | 随读者数据复盘迁入「调研与数据复盘」 |
+| docs/11-方案报告/README.md | W900 | 唯一索引分区重构（目录树 + 33 行总表机械分五区编号不重排 + 计划方案游离行合并 + T-16/T-17 登记缺口披露 + C5b 覆盖提示） |
+| docs/10-方法论沉淀/多Agent干扰治理与touches纪律.md | W900 | 2 条入链随迁修正（多 Agent 干扰治理评估全文新址） |
+| docs/INDEX.md | W900 | 再生成（20 行路径随迁） |
+| site/data/search.html | W900 | 站内搜索索引再生成（zh 848 条）+ CSP 哈希重算 |
+| site/en/search.html | W900 | 站内搜索索引再生成（en 890 条）+ CSP 哈希重算 |
+| HANDOVER.md | W900 | 零段「复盘存档」陈旧路径（W757 改名前旧址）订正 + 级联头尾链与里程碑块 |
+| STRUCTURE.md | W900 | §11 构成散文行按分区实况改写（54 总数不变）+ 版本行 |
+| docs/00-导读/W批次编号对账表.md | W900 | W900 认领行与收官回填 |
+| CHANGELOG.md | W900 | W900 段 |
+| README.md | W900 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W900 | 当前批次版本行 |
+| .github/workflows/README.md | W900 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W900 | 页脚批次链插入 W900 |
+| site/data/cross-time-danmaku.html | W900 | 页脚批次链插入 W900 |
+| site/data/tag-cloud.html | W900 | 页脚批次链插入 W900 |
+| site/dukou-engine.html | W900 | 页脚批次链插入 W900 |
+| AGENTS.md | W900 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W900 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W900 | version 同步为 W900 |
+| scripts/output/file-index.md | W900 | W900 段插入 |
+| scripts/output/_w900_spec.json | W900 | 本批级联 spec |
+| scripts/output/_cascade_files_W900.txt | W900 | 级联落盘清单 |
+
 ## W899 合并后收尾修正（2026-10-23）
 
 | 文件 | W | 说明 |

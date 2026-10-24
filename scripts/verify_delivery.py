@@ -596,7 +596,7 @@ _STRICT_GATES = [
     _StrictGate(section="目录文档", script="check_folder_docs.py", args=("--gate",), timeout=240,
                 marker="---- 第 45 门禁 目录文档新鲜度：",
                 crash_msg="目录文档新鲜度门禁执行异常（第 45 槽·crash 即拦）: %s",
-                fail_msg="目录文档新鲜度违规（生成清单与磁盘漂移·重跑 python scripts/gen_folder_docs.py --refresh 刷新·人工维护件自动跳过）",
+                fail_msg="目录文档新鲜度违规（生成清单与磁盘漂移·先 git add 本批新件再重跑 python scripts/gen_folder_docs.py --refresh——生成器按 Git 索引收集·refresh 先于 add 必漏新件（W896 口径·W900/W901 连踩）·人工维护件自动跳过）",
                 marker_msg="目录文档门禁输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
                 ok_msg="目录文档新鲜度通过（%s）", ok_line=-1),
     _StrictGate(section="搜索索引", script="check_search_index_fresh.py", args=("--gate",), timeout=300,

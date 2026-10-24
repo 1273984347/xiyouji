@@ -23,7 +23,7 @@
     "@tdesign-react/aigc": "^0.1.0-alpha.1",
     "@tdesign-react/chat": "^1.1.0",
     "better-sqlite3": "^13.0.3",
-    "dompurify": "^3.4.16",
+    "dompurify": "^3.4.17",
     "dotenv": "^18.0.4",
     "express": "^5.2.1",
     "lucide-react": "^1.48.0",
@@ -55,7 +55,7 @@
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
-    "vite": "^8.3.1",
+    "vite": "^8.3.5",
     "vitest": "^5.0.5"
   },
   "overrides": {
@@ -65,6 +65,8 @@
     "fast-uri": "^4.2.1",
     "proxy-addr": "^2.0.8",
     "shell-quote": "1.11.0",
-    "katex": "^0.18.2"
+    "katex": "^0.18.2",
+    "markdown-it": "^14.3.3",
+    "zod": "^4.6.7"
   }
 }

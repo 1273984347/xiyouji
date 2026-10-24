@@ -40,6 +40,8 @@ make ci                                  # lint+test+audit+links 本地预跑 CI
 - 跨 session 动手前先 `git log --oneline -5` + `gh run list` 识别并行增量 → AGENTS.md §4.3
 - 本节与工具表里的 `python …` 是可移植形态（CI/Linux/macOS 通用）；**本机 PowerShell 侧** `python` 是应用执行存根（调用即静默失败）→ 该侧改写 `py -3 …` → AGENTS.md §4.3
 
+- **报告落位**：方案/审查/调研/复盘/计划类交付物唯一落盘位 = `docs/11-方案报告/`（六子目录·分区沿革见 CHANGELOG），入库即在目录 README 对应分区登记 → 文档规范 §11.1
+
 ## 接手导航（5 分钟动手）
 
 本文件（1 分钟）→ `python scripts/agent_start.py`（当前事实摘要·实读磁盘防记忆代读）→ AGENTS.md 通读（3 分钟）→ HANDOVER「零、当前阻塞」「一、当前进度」（1 分钟）→ 动手前跑 `python scripts/verify_delivery.py` 确认基线全绿。

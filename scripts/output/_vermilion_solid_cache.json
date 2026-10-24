@@ -96,7 +96,7 @@
    }
   },
   "data/character-semantic-network.html": {
-   "sha1": "eb44b6e54fd3da7a380b8f2bacc5d36e63ba4a35",
+   "sha1": "a8e8255e171fd23947942ad568913214c2e0d271",
    "counts": {
     "div.kpi-card": 1
    }
@@ -149,7 +149,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "e9218d2879be1ce39105e6ed2af52dd8c1f7ed8d",
+   "sha1": "306ffc17562fcf77d25eba17b9b20e1329f659d3",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -537,7 +537,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "c22fb21379617e8ff6b22ab77480203c4eb409a7",
+   "sha1": "653beead7deeafc240c6165ba02d789b1802df76",
    "counts": {
     "button.vt-btn": 1
    }
@@ -562,7 +562,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "7aebd58a3a5057d1e9561b43e63555fdd545b5e0",
+   "sha1": "3cda529f82a6a37a532ca6beec1815d6614906e8",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -641,7 +641,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "1e0a6f0f7dcd977c4cb1ee75e4dfcff93e6773ce",
+   "sha1": "b917456ce07925af5617f60442ce23fc40e244cd",
    "counts": {
     "button": 1
    }
@@ -654,7 +654,7 @@
    }
   },
   "index.html": {
-   "sha1": "aea13d38627c03103e5449f83be93c625f5dc5af",
+   "sha1": "5f29b9c06ddf7a379761eb95e5f585b1ab3ae417",
    "counts": {
     "button.rag-fab": 1
    }
@@ -780,7 +780,7 @@
    }
   },
   "en/character-semantic-network.html": {
-   "sha1": "58aa8e5fcbfffbb765aa0d36b3eef5d481ef89ff",
+   "sha1": "3d4e965dcce70fb8330aa5dbaffb529cb43e4353",
    "counts": {
     "div.kpi-card": 1
    }
@@ -1400,7 +1400,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "ee7d058649228470053f4ebfda81e34942678285",
+   "sha1": "2d44131f1f2fcf2f1c5911ce5024b3dfd3a275fe",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1490,5 +1490,5 @@
    }
   }
  },
- "generated_at": "2026-10-23T15:58:47.112Z"
+ "generated_at": "2026-10-24T10:29:10.234Z"
 }
