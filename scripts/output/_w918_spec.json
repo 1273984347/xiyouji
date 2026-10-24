@@ -1,0 +1,31 @@
+{
+ "batch": "W918",
+ "date": "2026-10-24",
+ "title": "W918 检索降级批（B-ARCH-01 清偿·波二九件全清）",
+ "desc": "LLM 上游不可达时问答链路降级说明替代裸错误，波二小项全部清偿",
+ "head_entry": "2026-10-24（W918 检索降级批）",
+ "head_sentence": "上游不可达时降级说明替代裸错误，已送达检索引用保持有效，波二九件全清",
+ "changelog_body": "\n\n\n\n> **来源**：用户 2026-10-24 令「继续」——T-18 C 档波二第四件（B-ARCH-01·波二至此九件全清）。\n\n> - **文件**：xiyouji-agent-web/server/chat.ts、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w918_spec.json、scripts/output/_cascade_files_W918.txt（逐件行见 file-index W918 段）。\n\n**B-ARCH-01 检索降级落地**：chat 路由 catch 分流——LLM 上游不可达（`LLM API 5xx/429`·ECONNREFUSED/ETIMEDOUT/ENOTFOUND/EAI_AGAIN·fetch failed）时，SSE 以降级说明 text + done 收尾（声明模式切换·本轮已送达的 tool_result 检索引用仍有效·不重复推送防半截重放），仅其余异常维持 W829 固定文案路径。W821 架构方案「容灾主战场是降级可用」在问答链路的落点闭合。\n\n**验证**：tsc --noEmit 零错·test:server 97 passed 零挂·test:integration 19 passed 零挂·test:client 51 passed 零挂（5 文件）。\n",
+ "milestone_block": "- **W918 检索降级批（B-ARCH-01 清偿·波二九件全清）**：\n  - LLM 上游不可达时 SSE 降级说明+done（已送达检索引用仍有效）·非裸 5xx\n  - 验证：tsc 零错·server 97+integration 19+client 51 全过零挂",
+ "agents_note": "二〇二六年十月二十四日（W918）把问答链路的容灾补上：大模型端点挂掉的时候，以前用户拿到的是一个干巴巴的服务器错误，现在改为一段明确的降级说明——本轮已经检索到的引用依然有效、稍后重试或去站内检索页。判断上游真挂的口径收得很窄（连接类错误和上游明确回的限流或五开头的错才降级），其它异常仍走原错误路径，不把真缺陷藏进降级文案里。应用侧三条测试链一百六十七个用例全过。波二九件至此全部清完。",
+ "file_index_rows": [
+  "| xiyouji-agent-web/server/chat.ts | W918 | B-ARCH-01 检索降级：LLM 上游不可达（5xx/429/ECONNREFUSED 族）时 SSE 返回降级说明+done 而非裸 5xx（已送达的 tool_result 检索引用仍有效·W821「降级可用」语义落地）",
+  "| docs/00-导读/W批次编号对账表.md | W918 | W918 认领行与收官回填 |",
+  "| CHANGELOG.md | W918 | W918 段 |",
+  "| HANDOVER.md | W918 | 级联头尾链与里程碑块 |",
+  "| README.md | W918 | 当前批次版本行 |",
+  "| STRUCTURE.md | W918 | 当前批次版本行 |",
+  "| docs/00-导读/项目说明.md | W918 | 当前批次版本行 |",
+  "| .github/workflows/README.md | W918 | 工作流层区间与里程碑尾标记 |",
+  "| site/index.html | W918 | 页脚批次链插入 W918 |",
+  "| site/data/cross-time-danmaku.html | W918 | 页脚批次链插入 W918 |",
+  "| site/data/tag-cloud.html | W918 | 页脚批次链插入 W918 |",
+  "| site/dukou-engine.html | W918 | 页脚批次链插入 W918 |",
+  "| AGENTS.md | W918 | 版本脚注条目 |",
+  "| archive/docs/AGENTS-ARCHIVE.md | W918 | 脚注滚动迁入的最老条目 |",
+  "| CITATION.cff | W918 | version 同步为 W918 |",
+  "| scripts/output/file-index.md | W918 | W918 段插入 |",
+  "| scripts/output/_w918_spec.json | W918 | 本批级联 spec |",
+  "| scripts/output/_cascade_files_W918.txt | W918 | 级联落盘清单 |"
+ ]
+}

@@ -356,6 +356,20 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
         stack: (error as Error)?.stack,
       });
 
+      // W917 B-ARCH-01 检索降级：LLM 端点不可达时返回降级说明而非裸 5xx——
+      // 本轮已发出的 tool_result（检索引用）事件前端已收到，降级 text 声明模式切换，
+      // 引用内容以已送达的 tool_result 帧为准（不重复推送·防半截重放）。
+      const msg = String((error as Error)?.message ?? "");
+      const code = (error as NodeJS.ErrnoException)?.code ?? "";
+      const upstreamDown = /LLM API\s*(5\d\d|429)/.test(msg)
+        || ["ECONNREFUSED", "ETIMEDOUT", "ENOTFOUND", "EAI_AGAIN"].includes(code)
+        || /fetch failed/i.test(msg);
+      if (upstreamDown) {
+        sse.text("⚠ LLM 端点当前不可用（降级模式）：本次回答未能生成。上方如已有工具检索结果，其引用内容仍然有效；请稍后重试，或在站点版使用全文检索页。");
+        sse.done(0);
+        res.end();
+        return;
+      }
       // W829：对外只给固定文案——上游 LLM 错误体可能回显请求内容/账号信息
       // （openai-compat.ts 取上游前 300 字原文），原文已进上面的 logger。
       sse.error("服务器内部错误");

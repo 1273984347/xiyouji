@@ -11,6 +11,29 @@
 ---
 
 
+## W918 检索降级批（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/chat.ts | W918 | B-ARCH-01 检索降级：LLM 上游不可达（5xx/429/ECONNREFUSED 族）时 SSE 返回降级说明+done 而非裸 5xx（已送达的 tool_result 检索引用仍有效·W821「降级可用」语义落地）
+| docs/00-导读/W批次编号对账表.md | W918 | W918 认领行与收官回填 |
+| CHANGELOG.md | W918 | W918 段 |
+| HANDOVER.md | W918 | 级联头尾链与里程碑块 |
+| README.md | W918 | 当前批次版本行 |
+| STRUCTURE.md | W918 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W918 | 当前批次版本行 |
+| .github/workflows/README.md | W918 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W918 | 页脚批次链插入 W918 |
+| site/data/cross-time-danmaku.html | W918 | 页脚批次链插入 W918 |
+| site/data/tag-cloud.html | W918 | 页脚批次链插入 W918 |
+| site/dukou-engine.html | W918 | 页脚批次链插入 W918 |
+| AGENTS.md | W918 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W918 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W918 | version 同步为 W918 |
+| scripts/output/file-index.md | W918 | W918 段插入 |
+| scripts/output/_w918_spec.json | W918 | 本批级联 spec |
+| scripts/output/_cascade_files_W918.txt | W918 | 级联落盘清单 |
+
 ## W917 DB 正确性包一（2026-10-24）
 
 | 文件 | W | 说明 |
