@@ -11,6 +11,33 @@
 ---
 
 
+## W917 DB 正确性包一（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/db.ts | W917 | B-DB-01 四 P0 之三：pragma foreign_keys=ON（级联生效）/ clearAllData 补 feedback / 反馈唯一索引 (message_id,verdict)→(message_id) 单维 + upsert 改判 / INSERT OR IGNORE→ON CONFLICT 覆盖
+| xiyouji-agent-web/server/chat.ts | W917 | B-DB-01 P0 之四：会话主键服务端生成 uuidv4()（客户端可控 id 是串档路径·真值经响应返回）
+| scripts/check_db_schema.py | W917 | 新增：DB schema 门禁（四不变量静态锁定·self-test 3/3）——B-DB-05 清偿
+| tests/unit/test_check_db_schema.py | W917 | 新增：门禁专项单测 2 例
+| scripts/ci_sim.py | W917 | GATES 清单 +DB schema（第 10 项）
+| docs/00-导读/W批次编号对账表.md | W917 | W917 认领行与收官回填 |
+| CHANGELOG.md | W917 | W917 段 |
+| HANDOVER.md | W917 | 级联头尾链与里程碑块 |
+| README.md | W917 | 当前批次版本行 |
+| STRUCTURE.md | W917 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W917 | 当前批次版本行 |
+| .github/workflows/README.md | W917 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W917 | 页脚批次链插入 W917 |
+| site/data/cross-time-danmaku.html | W917 | 页脚批次链插入 W917 |
+| site/data/tag-cloud.html | W917 | 页脚批次链插入 W917 |
+| site/dukou-engine.html | W917 | 页脚批次链插入 W917 |
+| AGENTS.md | W917 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W917 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W917 | version 同步为 W917 |
+| scripts/output/file-index.md | W917 | W917 段插入 |
+| scripts/output/_w917_spec.json | W917 | 本批级联 spec |
+| scripts/output/_cascade_files_W917.txt | W917 | 级联落盘清单 |
+
 ## W916 波二第三件批（2026-10-24）
 
 | 文件 | W | 说明 |

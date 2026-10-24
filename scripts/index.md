@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（267）
+## 文件（268）
 
 ### Markdown 文档
 
@@ -186,6 +186,7 @@
 - `check_css_decl_separators.py`
 - `check_css_orphan_selectors.py`
 - `check_css_var_refs.py`
+- `check_db_schema.py`
 - `check_design_doc_drift.py`
 - `check_doc_sync.py`
 - `check_dual_source_scan.py`

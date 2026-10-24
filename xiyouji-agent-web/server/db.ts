@@ -35,6 +35,7 @@ const db: Database.Database = new Database(dbPath);
 
 // 启用 WAL 模式以提高性能
 db.pragma('journal_mode = WAL');
+db.pragma('foreign_keys = ON'); // W917 B-DB-01：外键强制（此前 DDL 声明 FOREIGN KEY 但 pragma 从未开启·级联删除从未生效——W823 审查四 P0 之一）
 
 // 初始化数据库表
 db.exec(`
@@ -72,8 +73,9 @@ db.exec(`
     comment TEXT,
     created_at TEXT NOT NULL
   );
-  -- 同一消息同一 verdict 幂等
-  CREATE UNIQUE INDEX IF NOT EXISTS idx_feedback_message_verdict ON feedback(message_id, verdict);
+  -- 同一消息唯一 verdict（W917 B-DB-01：维度由 (message_id, verdict) 收紧为 (message_id)——
+  -- 原维度允许同一消息同时存在赞与踩两条互相矛盾的记录·W823 审查 P0 之三；改判走 upsert 覆盖）
+  CREATE UNIQUE INDEX IF NOT EXISTS idx_feedback_message ON feedback(message_id);
 `);
 
 // 数据库迁移：添加 sdk_session_id 列（如果不存在）
@@ -99,7 +101,7 @@ export interface DbFeedback {
 }
 
 export function insertFeedback(f: Omit<DbFeedback, 'created_at'>): number {
-  const r = db.prepare("INSERT OR IGNORE INTO feedback (id, session_id, message_id, verdict, comment, created_at) VALUES (?, ?, ?, ?, ?, ?)")
+  const r = db.prepare("INSERT INTO feedback (id, session_id, message_id, verdict, comment, created_at) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT(message_id) DO UPDATE SET verdict = excluded.verdict, comment = excluded.comment, created_at = excluded.created_at")
     .run(f.id, f.session_id, f.message_id, f.verdict, f.comment ?? null, new Date().toISOString());
   return r.changes;
 }
@@ -269,6 +271,9 @@ export function createMessages(messages: DbMessage[]): void {
 
 // 清空所有数据
 export function clearAllData(): void {
+  // W917 B-DB-01：清库须含 feedback（此前漏清——反馈表跨「清空全部」存活·W823 审查 P0 之二）；
+  // 外键已强制，sessions 级联删 messages，三表按依赖序显式清理（幂等）
+  db.exec('DELETE FROM feedback');
   db.exec('DELETE FROM messages');
   db.exec('DELETE FROM sessions');
 }
