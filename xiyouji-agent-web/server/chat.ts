@@ -162,7 +162,7 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
       // 创建新会话
       logger.info("创建新会话", { request_id: req.requestId, session_id: sessionId ?? null });
       session = db.createSession({
-        id: sessionId || uuidv4(),
+        id: uuidv4(), // W917 B-DB-01：服务端生成会话主键（客户端可控 id 是「旧会话正文泄漏进新建同名会话」串档路径·W823 审查 P0 之四；真值经响应 session_id 返回前端）
         title: titleFromMessage(message),
         model: model || defaultModel,
         sdk_session_id: null, // W680：SDK resume 退役，历史从 SQLite 重建
