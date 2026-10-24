@@ -199,11 +199,19 @@ test("集成：POST /api/feedback 缺 sessionId 返回 400（W808 修的真实�
 test("集成：POST /api/feedback 三字段齐备时 200 且真实落库（集成断言落库状态）", async () => {
   const { child, base } = await spawnServer(3219);
   const mark = `w808-int-${Date.now()}`;
+  // W919：feedback 表已挂真实外键（v3 重建）——先落真实 session/message 底数再反馈（虚构 ID 会被外键正确拒绝）
+  {
+    const wdb = new Database(path.join(WEB, "data", "chat.db"));
+    const now = new Date().toISOString();
+    wdb.prepare("INSERT OR IGNORE INTO sessions (id, title, model, sdk_session_id, created_at, updated_at) VALUES (?, 't', 'm', NULL, ?, ?)").run(mark, now, now);
+    wdb.prepare("INSERT OR IGNORE INTO messages (id, session_id, role, content, model, created_at) VALUES (?, ?, 'user', 't', 'm', ?)").run(mark + "-msg", mark, now);
+    wdb.close();
+  }
   try {
     const r = await fetch(`${base}/api/feedback`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sessionId: "w808-sess", messageId: mark, verdict: "up" }),
+      body: JSON.stringify({ sessionId: mark, messageId: mark + "-msg", verdict: "up" }),
     });
     assert.equal(r.status, 200);
     const body = (await r.json()) as { ok: boolean; inserted: number };
@@ -212,19 +220,21 @@ test("集成：POST /api/feedback 三字段齐备时 200 且真实落库（集�
 
     // 真实查 SQLite（不是查 mock）
     const db = new Database(path.join(WEB, "data", "chat.db"), { readonly: true });
-    const row = db.prepare("SELECT session_id, verdict FROM feedback WHERE message_id = ?").get(mark) as
+    const row = db.prepare("SELECT session_id, verdict FROM feedback WHERE message_id = ?").get(mark + "-msg") as
       | { session_id: string; verdict: string }
       | undefined;
     db.close();
     assert.ok(row, "反馈行应真实落库");
-    assert.equal(row.session_id, "w808-sess");
+    assert.equal(row.session_id, mark); // W919：随外键底数对齐（虚构 ID 时代写死值退役）
     assert.equal(row.verdict, "up");
   } finally {
     child.kill();
     // 清理测试行
     try {
       const db = new Database(path.join(WEB, "data", "chat.db"));
-      db.prepare("DELETE FROM feedback WHERE message_id = ?").run(mark);
+      db.prepare("DELETE FROM feedback WHERE message_id = ?").run(mark + "-msg");
+      db.prepare("DELETE FROM messages WHERE session_id = ?").run(mark);
+      db.prepare("DELETE FROM sessions WHERE id = ?").run(mark);
       db.close();
     } catch {
       /* 清理失败不影响断言结论 */

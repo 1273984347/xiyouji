@@ -67,11 +67,11 @@ interface LoginStatusResponse {
 }
 
 /** 会话与消息列表（含 messageCount；tool_calls 由 JSON 文本解析回数组）。 */
-function listSessionsWithCount(): Array<Record<string, unknown>> {
-  return db.getAllSessions().map((session) => ({
-    ...session,
-    messageCount: db.getMessagesBySession(session.id).length,
-  }));
+function listSessionsWithCount(limit = 50): Array<Record<string, unknown>> {
+  // W919 B-DB-02：N+1 改写——单 SQL 子查询（原 getAllSessions().map(getMessagesBySession.length) 每会话一查）
+  const capped = Math.min(Math.max(1, limit), 200); // 上限 200（W823 §7.2 契约）
+  const rows = db.listSessionsWithMessageCount(capped) as Array<Record<string, unknown>>;
+  return rows;
 }
 
 /**
@@ -210,7 +210,8 @@ function registerSessionRoutes(app: Express): void {
     // 解析 tool_calls JSON
     const parsedMessages = messages.map((msg) => ({
       ...msg,
-      tool_calls: msg.tool_calls ? JSON.parse(msg.tool_calls) : null,
+      // W919 B-DB-03：单行脏数据降级为 null（原裸 parse 会让整个会话不可读）
+      tool_calls: (() => { if (!msg.tool_calls) return null; try { return JSON.parse(msg.tool_calls); } catch { return null; } })(),
     }));
 
     res.json({ session, messages: parsedMessages });

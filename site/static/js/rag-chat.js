@@ -111,7 +111,7 @@
   fab.className = 'rag-fab';
   fab.innerHTML = '问';
   fab.setAttribute('aria-label', '渡口检索 · 本地检索助手');
-  fab.title = '渡口检索（本地）· 问悟空、问妖怪、问任何西游';
+  fab.title = '渡口语料检索（本地）· 生成式问答请用桌面版「渡口问津」（xiyouji-agent-web）';
 
   const panel = document.createElement('div');
   panel.className = 'rag-panel';

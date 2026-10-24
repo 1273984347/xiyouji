@@ -141,7 +141,7 @@
    }
   },
   "data/criticism-history.html": {
-   "sha1": "272bd7cd0b5ee0f6232e1ba74f82f43c4e3d80f5",
+   "sha1": "d3f2c432c7eb97aa6623f0e2fb04a5c411d0f53f",
    "counts": {
     "div.kpi-card": 1,
     "div.candidate-card.main": 1,
@@ -149,7 +149,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "dacbe8f506f892ac7aede005748af05a29dab4a6",
+   "sha1": "568c4c860fa3eee0cc9ca4d194ac867e100b6193",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -162,7 +162,7 @@
    }
   },
   "data/customs-pass-route.html": {
-   "sha1": "0b4bf26b5da67968e0b9b21aaf0442de9275ed42",
+   "sha1": "6edb5a7dc42952655bd96de3a48838a304906519",
    "counts": {
     "div.kpi-card": 1
    }
@@ -226,7 +226,7 @@
    }
   },
   "data/four-heavenly-kings-artifacts.html": {
-   "sha1": "0eb5e3c4c34d4039436ac8a5a2c0b23c872a1778",
+   "sha1": "daf8ad4e235dfc01aafe13d58cfc76d2bd4612d0",
    "counts": {
     "div.kpi-card": 1,
     "div.king-card": 1,
@@ -255,7 +255,7 @@
    "counts": {}
   },
   "data/guanyin-six-roles-network.html": {
-   "sha1": "30546a1f3b72a5b6294523be7fa6d4b07a1ff324",
+   "sha1": "9c22b5eec61025cd0b392cd5cf5f4a71411b5a3a",
    "counts": {
     "div.kpi-card": 1,
     "div.role-card": 1,
@@ -271,7 +271,7 @@
    }
   },
   "data/hardship-heatmap.html": {
-   "sha1": "fdf49cfa6d956ef3b9c8b6dc8d073e599dab99a3",
+   "sha1": "1b3c94fb6d97b3e92a7a54b3e7ccea0c212f9c07",
    "counts": {
     "div.kpi-card": 1,
     "button.stage-btn.active": 1
@@ -301,14 +301,14 @@
    }
   },
   "data/journey-map-interactive.html": {
-   "sha1": "0bf4dbcf580b44d33abffb2647f910b2de9c5759",
+   "sha1": "03b59ea3569698392062a847b10564c8e08e2f46",
    "counts": {
     "div.kpi-card": 1,
     "button.btn": 1
    }
   },
   "data/journey-route.html": {
-   "sha1": "1e2ff34f635d80a44b9ba67260b6a077aff4bc69",
+   "sha1": "ba6e60a6d72e9d36053e4a9f1c6e8a841a6df814",
    "counts": {
     "div.kpi-card": 1
    }
@@ -562,14 +562,14 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "b1d9016ef5c46a6e15173e01267527b52031b38b",
+   "sha1": "31118fe88067bfbd9caebd663bc694f80296e5c4",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
    }
   },
   "data/text-evolution.html": {
-   "sha1": "aaf5341d7da074911529533e73fe720a28107931",
+   "sha1": "6af4299ee1d275627acefd2927d6c41c3bf2bf88",
    "counts": {
     "div.kpi-card": 1,
     "div.evo-step.first": 6,
@@ -621,11 +621,11 @@
    }
   },
   "404.html": {
-   "sha1": "d21d7bb1a2711c09d43eb33077cbaf402a55408d",
+   "sha1": "f32f34d163fa54fab08af7f925ab72f51e775033",
    "counts": {}
   },
   "curated.html": {
-   "sha1": "ff9e96c79c42daac3d7725323905dbe7398ec17a",
+   "sha1": "819005d7b5a1f9b4af4f180008ffb0a3dd3727b7",
    "counts": {
     "a.primary": 1
    }
@@ -640,7 +640,7 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "882cfb96752127d6e66401060f1e79ead1f861f0",
+   "sha1": "09d1cd66898ab450db8026c318b7d479b85ce7d4",
    "counts": {
     "button": 1
    }
@@ -652,7 +652,7 @@
    }
   },
   "index.html": {
-   "sha1": "6b3032fa59e5559a7c5365e1a2988b7e426fae94",
+   "sha1": "135b4063f320516ede54dd9ab6eb3719d6c3506d",
    "counts": {
     "button.rag-fab": 1
    }
@@ -1488,5 +1488,5 @@
    }
   }
  },
- "generated_at": "2026-10-24T12:57:23.562Z"
+ "generated_at": "2026-10-24T15:36:01.000Z"
 }

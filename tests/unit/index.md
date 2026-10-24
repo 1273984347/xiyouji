@@ -11,13 +11,16 @@
 
 - （无）
 
-## 文件（34）
+## 文件（37）
 
 ### Python 脚本
 
 - `test_a11y_audit.py`
+- `test_check_data_copy_chain.py`
+- `test_check_db_schema.py`
 - `test_check_interaction_binding.py`
 - `test_check_no_goatcounter.py`
+- `test_check_page_admission.py`
 - `test_check_plan_template.py`
 - `test_check_script_coverage.py`
 - `test_check_search_index_fresh.py`
