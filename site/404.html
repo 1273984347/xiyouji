@@ -22,6 +22,7 @@
   零 JS、零外域、零图片；入口四链接（首页/数据看板/标签云/全文检索）。
 -->
 <style>
+  :root { --space-6: 24px; --space-8: 40px; --space-9: 48px; }  /* W914 C-B02：v4 间距令牌页内副本（与 site/tokens.css 同值·404 为自含小页不参与 inline_css 分发） */
   /* e-track-exempt: chart-data-colors 9 处 —— W572 D-2 自包含 404 页（无 tokens.css 链接，字面值为 tokens.css 三色直译，有意设计） */
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -32,7 +33,7 @@
     background: #F1EBDD;
     color: #23201A;
     font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
-    padding: 24px;
+    padding: var(--space-6);
   }
   .card {
     max-width: 560px;
@@ -40,7 +41,7 @@
     background: #FFFFFF;
     border: 1px solid #E3DBC8;
     border-radius: 8px;
-    padding: 48px 40px;
+    padding: var(--space-9) var(--space-8);
     text-align: center;
   }
   .code {
