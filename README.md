@@ -1,18 +1,17 @@
 # 📖 取经录
 
-
 > 一源多形 · 数字人文可视化解读《西游记》100 回 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
 > **怎么读**：普通读者从下面的「30 秒上手」与「目录导航」进即可；开发者 / Agent 请直接跳到文末的「开发者 / 维护者专区」。
 
-[![在线访问](https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E8%AE%BF%E9%97%AE-%E7%AB%8B%E5%8D%B3%E4%BD%93%E9%AA%8C-brightgreen?style=for-the-badge&logo=githubpages&logoColor=white)](https://1273984347.github.io/xiyouji/)
-[![双协议授权](https://img.shields.io/badge/%E5%8F%8C%E5%8D%8F%E8%AE%AE-MIT%20%2B%20CC%20BY--NC%204.0-blue)](LICENSE)
-[![部署状态](https://img.shields.io/github/actions/workflow/status/1273984347/xiyouji/pages.yml?label=%E9%83%A8%E7%BD%B2%E7%8A%B6%E6%80%81)](.github/workflows/pages.yml)
+<img src="site/static/images/ink-mountains-hero.webp" alt="取经录 · 水墨山景主视觉" width="100%">
+
+[![在线访问](https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E8%AE%BF%E9%97%AE-%E7%AB%8B%E5%8D%B3%E4%BD%93%E9%AA%8C-brightgreen?style=for-the-badge&logo=githubpages&logoColor=white)](https://1273984347.github.io/xiyouji/) [![双协议授权](https://img.shields.io/badge/%E5%8F%8C%E5%8D%8F%E8%AE%AE-MIT%20%2B%20CC%20BY--NC%204.0-blue)](LICENSE) [![部署状态](https://img.shields.io/github/actions/workflow/status/1273984347/xiyouji/pages.yml?label=%E9%83%A8%E7%BD%B2%E7%8A%B6%E6%80%81)](.github/workflows/pages.yml) [![CI 门禁](https://img.shields.io/badge/CI%20gates-pass-brightgreen)](https://github.com/1273984347/xiyouji/actions)
 
 ---
 
-# 📖 普通读者专区
+## 📖 普通读者专区
 
-## 🚀 30 秒上手
+### 🚀 30 秒上手
 
 | 你想做的事 | 直接去 |
 |:---|:---|
@@ -23,13 +22,13 @@
 | 看数据长什么样 | [87<!--stats:visualization_pages--> 个可视化页](site/data/) —— D3.js 绘制，含弹幕博物馆、情感热力图、AI 名人对话 |
 | 查一个内丹术语 | [术语表](docs/00-导读/术语表.md) —— 「心猿」「木母」「黄婆」等 |
 
-## 🗺️ 项目定位
+### 🗺️ 项目定位
 
 本项目以「**一源多形**」的方式组织《西游记》的解读工作：
 
 - **文档（Docs）**：以 Markdown 写就的逐回解读、人物分析、主题专题、文化背景、诗词赏析、个人随笔
 - **站点（Site）**：可浏览的 HTML 页面，含导航、时间线、人物关系图等
-- **数据可视化**：所有数据维度均配套 D3.js 可视化页面（古典宣纸风配色 #faf7f2/#c8463a/#3a6b8c），含折线图、柱状图、桑基图、雷达图、散点图、饼图、热力图、矩阵图等，覆盖 34<!--stats:script_classes--> 类主题（A-AH）+ 批评史双联 + 弹幕博物馆 + 新功能三页面
+- **数据可视化**：所有数据维度均配套 D3.js 可视化页面（古典宣纸风配色 #faf7f2/#c8463a/#3a6b8c），含折线图、柱状图、桑基图、雷达图、散点图、饼图、热力图、矩阵图等，覆盖 34<!--stats:script_classes--> 类主题（A-AH），另设批评史双联、弹幕博物馆与工具页三组专题
 
 **数据维度全景（133 维）**：
 
@@ -45,7 +44,19 @@
 > 口径：133 维为维度清单合计（含趣味实验维度），统计算法见 [统计口径说明](docs/00-导读/统计口径说明.md)。
 > **性质分层（W800）**：A-L 与 Q+ 为学术向；M-U、V-AH、Q++ 含趣味跨界实验（职场黑话/MBTI/卡牌/招股书等），引用前请按维度名判断；Q+++ 为工具向（检索/时间线/热力图）。趣味维度是刻意保留的「雅集」成分，不承担学术论证。
 
-## 🚀 在线体验（推荐所有读者）
+### 📊 可视化样例
+
+站点以 D3.js 绘制全部数据可视化，下列为代表性样例（浅色与暗色双主题均为原创宣纸风）：
+
+<p align="center">
+<img src="site/static/images/viz-01-network.webp" alt="人物关系网络图" width="24%"><img src="site/static/images/viz-02-heatmap.webp" alt="情感热力图" width="24%"><img src="site/static/images/viz-03-radar.webp" alt="多维雷达图" width="24%"><img src="site/static/images/viz-04-timeline.webp" alt="交互式时间线" width="24%">
+</p>
+
+<p align="center">
+<img src="site/static/images/viz-dark-01-network.webp" alt="人物关系网络图 · 暗色主题" width="32%"><img src="site/static/images/viz-dark-02-heatmap.webp" alt="情感热力图 · 暗色主题" width="32%">
+</p>
+
+### 🚀 在线体验（推荐所有读者）
 
 **无需安装，点开即读** 👉 [**https://1273984347.github.io/xiyouji/**](https://1273984347.github.io/xiyouji/)
 
@@ -55,7 +66,7 @@
 
 **本地浏览**：克隆仓库后双击 `site/index.html`（纯静态站点，支持 `file://` 协议直接打开，无需安装任何软件）。
 
-## 📥 桌面版下载（可安装 · 自动更新）
+### 📥 桌面版下载（可安装 · 自动更新）
 
 **无需 Node/Python**，安装后离线阅读全部内容（87<!--stats:visualization_pages--> 个可视化页 + 615<!--stats:a1_a6_docs--> 篇解读内置）👉 [**前往 Releases 下载最新版**](https://github.com/1273984347/xiyouji/releases/latest)
 
@@ -69,7 +80,7 @@
 
 **未签名提示**：macOS 首次打开请右键 App →「打开」；Windows 若弹 SmartScreen 选择「更多信息」→「仍要运行」。详见 [xiyouji-desktop/README.md](xiyouji-desktop/README.md)。
 
-## 📄 宣传单页（A4 双面 · 可打印可转发）
+### 📄 宣传单页（A4 双面 · 可打印可转发）
 
 一张 A4 纸的正反两面：正面走大众读者路径（主张 · 主视觉 · 四个数字 · 三条卖点 · 行动入口），背面走学术与机构路径（四条硬资产 · 内容地图 · 引用格式 · 透明与许可）。可直接送印，也可截长图发社媒。
 
@@ -79,10 +90,14 @@
 | 分享图（150dpi PNG） | [正面](assets/promo/output/xiyouji-flyer-a4-front.png) · [背面](assets/promo/output/xiyouji-flyer-a4-back.png) | [Front](assets/promo/output/xiyouji-flyer-a4-en-front.png) · [Back](assets/promo/output/xiyouji-flyer-a4-en-back.png) |
 | 可编辑源（唯一真源） | [xiyouji-flyer-a4.html](assets/promo/xiyouji-flyer-a4.html) | [xiyouji-flyer-a4-en.html](assets/promo/xiyouji-flyer-a4-en.html) |
 
+<p align="center">
+<img src="assets/promo/output/xiyouji-flyer-a4-front.png" alt="宣传单页正面预览（A4 竖版）" width="360">
+</p>
+
 - **改文案后重出三件套**：`node scripts/_w892_export_flyer.mjs`（英文版加 `--en`）——详情见 [assets/promo/README.md](assets/promo/README.md)。
 - **社媒分享图**：站内已有 15 张 1200×630 分享图（`site/static/images/og-*.webp`），可直接取用；单页分享图请从上面的 PNG 裁切。
 
-## 🗂️ 目录导航
+### 🗂️ 目录导航
 
 - 📖 **全书逐回解读**：100 回逐回讲解 + 深度解读 + 原文全文 → [docs/01-全书逐回解读/](docs/01-全书逐回解读/)
 - 🕸️ **人物深度分析**：孙悟空/唐僧/八戒/沙僧/观音/妖怪谱系/女性角色 → [docs/02-人物深度分析/](docs/02-人物深度分析/)
@@ -97,7 +112,7 @@
 >
 > **统计口径**：文中所有数字（篇数 / 页面 / 维度 / 引用）的统计算法见 [统计口径说明](docs/00-导读/统计口径说明.md)。
 
-## 🎯 目标读者
+### 🎯 目标读者
 
 - **大众读者**：从本文档「在线体验」直达，或 `docs/00-导读/` 与 `site/` 之间穿梭
 - **逐回解读读者**：`docs/01-全书逐回解读/` 100 回全覆盖（开篇·学艺·龙宫借宝·闹天宫·取经启动·组建·团队集结·决裂·中段斗法·整合·火焰山·狮驼岭·后期识魔·终回 + 批 1-13 补全）
@@ -111,13 +126,13 @@
 
 ---
 
-# 🔧 开发者 / 维护者专区
+## 🔧 开发者 / 维护者专区
 
 > 以下为工程维护内容，普通读者可完全忽略。想直接读内容请回到 [普通读者专区](#-普通读者专区)。
 
 > **📖 阅读契约（W707）**：普通读者通读「普通读者专区」；Agent/开发者只读「开发者/维护者专区」与「AI 生成说明」。先读「是什么/为什么」（下一行），再按路径深入。
 >
-> **当前批次 W905（2026-10-24）**：存量红项清理：暗色门禁补色规则与 npm 生产依赖漏洞清偿·A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> **当前批次 W909（2026-10-24）**：README 专业化改版：结构层级统一、配图补齐、头部与文案修正·A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 >
 > **版本号说明（W711 方案 D 起）**：本项目的批次编号为 **W###**（单调递增·永不复用·唯一对账键），`v2.3` 为内容阶段标签（定性·无 patch 位·不适用 SemVer）；W710 及更早的历史版本号 `vX.Y.Z` 保留原文。判断「这批改了什么」看 [CHANGELOG.md](CHANGELOG.md) 顶段。
 >
@@ -126,7 +141,7 @@
 <details>
 <summary>点击展开：工程与维护文档</summary>
 
-## 技术栈
+### 技术栈
 
 - **可视化**：D3.js（数据图表）、Three.js（3D 页面）
 - **文本分析**：Python（词频/共现/情感/术语 NLP）
@@ -134,7 +149,7 @@
 - **Web Agent**：自研 OpenAI-compatible 引擎·全主流大模型端点适配（`xiyouji-agent-web/`）
 - **CI/CD**：GitHub Actions（pytest/Playwright/Lighthouse/pip-audit/npm-audit）
 
-## 目录结构
+### 目录结构
 
 ```
 xiyouji/
@@ -180,7 +195,7 @@ xiyouji/
 
 详细结构说明见 [STRUCTURE.md](STRUCTURE.md)。
 
-## 运行分析脚本
+### 运行分析脚本
 
 ```bash
 cd scripts
@@ -188,7 +203,7 @@ pip install -r requirements.txt
 python word_frequency.py --input ../source/原文/西游记-全文.txt --output output/data/word_freq.json
 ```
 
-## 测试（pytest + Playwright E2E）
+### 测试（pytest + Playwright E2E）
 
 ```bash
 # pytest 全量（含 MCP 工具测试）
@@ -200,7 +215,7 @@ npm install
 npm run test:e2e
 ```
 
-## 截图审查（发布前自动布局检查）
+### 截图审查（发布前自动布局检查）
 
 ```bash
 cd scripts
@@ -211,7 +226,7 @@ python detect_unwrapped_tables.py   # 静态表格扫描（双轨之二）
 
 详细收敛记录见 [CHANGELOG.md](CHANGELOG.md) 对应 W 批次段。
 
-## 文档索引（双索引可追溯）
+### 文档索引（双索引可追溯）
 
 - **正向索引（时间线）**：[CHANGELOG.md](CHANGELOG.md) — 按版本记录变更，每版本段标注唯一 W### ID + 四件套（来源/文件/验证/状态；编号上限见现役版段）。历史段归档口径见 CHANGELOG 头部
 - **反向索引（文件）**：[scripts/output/file-index.md](scripts/output/file-index.md) — 给定文件查改过几次、对应哪个 W 条目
@@ -223,7 +238,7 @@ python detect_unwrapped_tables.py   # 静态表格扫描（双轨之二）
 2. 给定文件查改过几次 → 查 file-index 反向索引
 3. 跨文件交叉追溯同一 W 条目的完整影响面 → 两个索引配合使用
 
-## 文档维护规范
+### 文档维护规范
 
 - 更新项目文档前请先阅读 [文档规范](docs/00-导读/文档规范.md)（防膨胀·归档规则·Keep a Changelog/SemVer/Conventional Commits/Diátaxis）
 - 跨 session 接续流程见 [HANDOVER.md](HANDOVER.md)
@@ -248,7 +263,6 @@ python detect_unwrapped_tables.py   # 静态表格扫描（双轨之二）
 - **引文核验**：所有 `> 原文引文（第N回）` 格式的引用行均经脚本对《西游记》原著全文数据集逐字匹配验证，未命中即阻断提交，防止 AI 幻觉引文。
 - **门禁体系**：每次提交需通过 49<!--stats:gate_count--> 项自动化门禁（术语一致性、内容一致性、CSP、可访问性等），协作流程与验证标准见 [CONTRIBUTING.md](CONTRIBUTING.md)，门禁清单见 [AGENTS.md](AGENTS.md)。
 - **责任边界**：AI 参与初稿与整理，内容的取舍、核实与最终责任由维护者承担。
-
 - **门禁边界（保真不保质）**：自动化门禁保障的是**可机器判定的形式面**——引文真实（逐字对原文）、结构一致（六文档同源）、术语规范、可达性与安全；**不保障**内容判断——论点是否平庸、论证是否扎实、阐释是否有生命体验，这些由作者审读承担，且不同篇目深浅不一。**门禁数量不是学术质量的背书**：它证明「没有编造」，不证明「值得读」。
 
 ## 授权
@@ -266,4 +280,4 @@ python detect_unwrapped_tables.py   # 静态表格扫描（双轨之二）
 
 ---
 
-> 项目目录创建于 2026-07-21，初版骨架。W334（v2.2.86）全站设计系统·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 项目创建于 2026-07-21，持续更新中。完整变更史见 [CHANGELOG.md](CHANGELOG.md)。

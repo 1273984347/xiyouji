@@ -1,0 +1,32 @@
+{
+  "batch": "W909",
+  "date": "2026-10-24",
+  "title": "W909 README 专业化改版（结构层级 + 配图 + 头部与文案修正）",
+  "desc": "README 专业化改版：结构层级统一、配图补齐、头部与文案修正",
+  "head_entry": "2026-10-24（W909 README 专业化改版批）",
+  "head_sentence": "让仓库门面像样：层级统一、配图补齐、文案收拾干净",
+  "changelog_body": "\n\n\n\n> **来源**：用户 2026-10-24 令（本批原拟 W907·并行会话先落地认领 W907 ⇒ 让号；让至 W908 后双方仍同号 ⇒ 再让一次·本批最终取 W909）「把 README 优化一下看起来专业一点·顺便你看看有哪些图片是可以添加进的」。\n\n> - **文件**：README.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w909_spec.json、scripts/output/_cascade_files_W909.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/file-index.md、CHANGELOG.md、HANDOVER.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/data/search.html、site/en/search.html、AGENTS.md、CITATION.cff。\n\n> - **结构层级**：单一 H1 + 两个 H2 分区（普通读者 / 开发者维护者），其下子标题统一降 H3——GitHub 仓库首页此前三个 H1 并列，锚点与大纲都不专业；仓内无 README 锚点引用（已 grep 全仓确认）⇒ 降级零影响。\n\n> - **配图（本次核心）**：顶部加主视觉 banner（`site/static/images/ink-mountains-hero.webp`·水墨山景·轻量）；新增「📊 可视化样例」小节（浅色四张 `viz-*.webp` + 暗色两张 `viz-dark-*.webp`·并排居中·宽度受控）；宣传单页小节补正面预览图（`assets/promo/output/xiyouji-flyer-a4-front.png`）。选图原则：只用仓内已有资产·零外域依赖·控制体积（新增图片合计约 1.4 MB 以内）·alt 全中文描述。\n\n> - **头部与文案**：三枚徽章并为一行 + 补一枚 CI 门禁徽章；项目定位收尾表述去内部叫法（「新功能三页面」→「工具页」）；删末尾指向旧批次的陈旧收尾行（与顶部现役批次行矛盾·且 README 禁写批次细节）；「AI 生成说明」孤立 bullet 归并回列表。\n\n> - **顺带修台账两处结构损坏**：W892 行尾重复粘连的 W893 整段（W896 批同类残留·本批补清）+ W764 与 W906 描述列内未转义管道符导致的列错位（仅加转义符·不改文字语义）——全表未转义管道符体检复检为零异常。\n\n> - **增行预算说明**：README 常规增行预算为 0（文档规范 §1 表）——本批属用户明示授权的一次性结构优化·净增 14 行·后续批次仍守 0 行预算。\n\n> - **验证**：全仓链接校验 20763 条 0 broken（含新增图片路径）·C5c 裸聚合数字判红面零新增（新增文字与 alt 均避「数字+量词」形态）·搜索索引与 CSP 内联脚本哈希已同批刷新（zh 272743 B / en 292765 B·856 页零漂移）·`verify_delivery.py --scope auto` 核心全部通过（54 段自洽锁绿）·pre-commit 钩子同判据通过。\n\n> - **状态**：已收官（README 门面改版完成·台账结构归位·门禁全绿）。",
+  "milestone_block": "- **W909 README 专业化改版批**：\n  - 结构层级：单一 H1 + 两个 H2 分区，子标题统一降 H3（仓内无 README 锚点引用·降级零影响）\n  - 配图：顶部主视觉 banner + 新增「可视化样例」小节（浅色四张 + 暗色两张）+ 宣传单页正面预览\n  - 头部与文案：徽章并行 + 补 CI 门禁徽章 + 去内部叫法 + 删陈旧收尾行 + 孤立 bullet 归并\n  - 顺带修台账结构损坏：W892 行尾重复粘连段 + W764/W906 描述列未转义管道符（复检零异常）",
+  "agents_note": "二〇二六年十月二十四日（W909）把仓库门面收拾了一遍。README 此前三个一级标题并列，读起来像三份文件拼的，改成单一标题加两个分区、副标题降一级之后，大纲立刻清爽。配图是这批的重点：顶部放一张水墨山景当主视觉，另开一节摆可视化样例，浅色深色各挑几张并排放，宣传单页那边也补了正面预览。选图只用仓里已有的东西，不引外链，体积也压在可接受范围，免得首页加载变慢。文案上顺手去掉了内部叫法和一行指向旧批次的收尾话。还清了两处台账的结构坏损：W892 那行尾巴上重复粘了一整行 W893，另有两行的描述里写了竖线没转义，把表格切错位了。记一条：Markdown 表格单元格里的竖线必须转义，否则整行会错列——这类问题肉眼扫表格很难发现，用「数未转义竖线」来查最省事。",
+  "file_index_rows": [
+    "| README.md | W909 | README 专业化改版（单一 H1 + 两个 H2 分区 + 顶部主视觉 banner + 可视化样例小节 + 宣传单页预览图 + 徽章并行 + 文案修正） |",
+    "| docs/00-导读/W批次编号对账表.md | W909 | W909 认领行与收官回填 + 顺带修三处表格结构损坏（W892 粘连段 · W764/W906 未转义管道符） |",
+    "| scripts/output/_w909_spec.json | W909 | 本批级联 spec（10 面改写参数） |",
+    "| scripts/output/_cascade_files_W909.txt | W909 | 级联落盘清单 |",
+    "| scripts/output/_vermilion_solid_cache.json | W909 | 朱砂门禁增量缓存刷新（本批级联改四页脚后按 sha1 重扫对齐） |",
+    "| CHANGELOG.md | W909 | W909 段 |",
+    "| HANDOVER.md | W909 | 头尾链与里程碑块 |",
+    "| STRUCTURE.md | W909 | 当前批次版本行 |",
+    "| docs/00-导读/项目说明.md | W909 | 当前批次版本行 |",
+    "| .github/workflows/README.md | W909 | 工作流层区间与里程碑尾标记 |",
+    "| site/index.html | W909 | 页脚批次链插入 W909 |",
+    "| site/data/cross-time-danmaku.html | W909 | 页脚批次链插入 W909 |",
+    "| site/data/tag-cloud.html | W909 | 页脚批次链插入 W909 |",
+    "| site/dukou-engine.html | W909 | 页脚批次链插入 W909 |",
+    "| AGENTS.md | W909 | 版本脚注条目 |",
+    "| CITATION.cff | W909 | version 同步为 W909 |",
+    "| scripts/output/file-index.md | W909 | W909 段插入 |",
+    "| site/data/search.html | W909 | 站内搜索索引内嵌刷新（zh） |",
+    "| site/en/search.html | W909 | 站内搜索索引内嵌刷新（en） |"
+  ]
+}

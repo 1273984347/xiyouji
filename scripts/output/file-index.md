@@ -11,6 +11,54 @@
 ---
 
 
+## W909 README 专业化改版（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| README.md | W909 | README 专业化改版（单一 H1 + 两个 H2 分区 + 顶部主视觉 banner + 可视化样例小节 + 宣传单页预览图 + 徽章并行 + 文案修正） |
+| docs/00-导读/W批次编号对账表.md | W909 | W909 认领行与收官回填 + 顺带修三处表格结构损坏（W892 粘连段 · W764/W906 未转义管道符） |
+| scripts/output/_w909_spec.json | W909 | 本批级联 spec（10 面改写参数） |
+| scripts/output/_cascade_files_W909.txt | W909 | 级联落盘清单 |
+| scripts/output/_vermilion_solid_cache.json | W909 | 朱砂门禁增量缓存刷新（本批级联改四页脚后按 sha1 重扫对齐） |
+| CHANGELOG.md | W909 | W909 段 |
+| HANDOVER.md | W909 | 头尾链与里程碑块 |
+| STRUCTURE.md | W909 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W909 | 当前批次版本行 |
+| .github/workflows/README.md | W909 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W909 | 页脚批次链插入 W909 |
+| site/data/cross-time-danmaku.html | W909 | 页脚批次链插入 W909 |
+| site/data/tag-cloud.html | W909 | 页脚批次链插入 W909 |
+| site/dukou-engine.html | W909 | 页脚批次链插入 W909 |
+| AGENTS.md | W909 | 版本脚注条目 |
+| CITATION.cff | W909 | version 同步为 W909 |
+| scripts/output/file-index.md | W909 | W909 段插入 |
+| site/data/search.html | W909 | 站内搜索索引内嵌刷新（zh） |
+| site/en/search.html | W909 | 站内搜索索引内嵌刷新（en） |
+
+## W906 C4-f 三态化（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_sync.py | W906 | C4-f 三态化（管控件·用户批准）：declared 文件残留为「他方批次登记行纯追加」（零删改+全 | WNNN 形态）降 NOTE 放行·在位编辑仍红；新增 _foreign_append_only 探测（git diff 逐 dirty 文件）+ RE_BATCH_REGISTRY_ROW + self-test T32/T33（33/33） |
+| docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md | W906 | 新增 F5 节（C4-f 并行误拦实录与修复）+ 遗留盘点表两行更新（F1 已修/W906 落地） |
+| docs/00-导读/W批次编号对账表.md | W906 | W906 认领行与收官回填 |
+| CHANGELOG.md | W906 | W906 段 |
+| HANDOVER.md | W906 | 级联头尾链与里程碑块 |
+| README.md | W906 | 当前批次版本行 |
+| STRUCTURE.md | W906 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W906 | 当前批次版本行 |
+| .github/workflows/README.md | W906 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W906 | 页脚批次链插入 W906 |
+| site/data/cross-time-danmaku.html | W906 | 页脚批次链插入 W906 |
+| site/data/tag-cloud.html | W906 | 页脚批次链插入 W906 |
+| site/dukou-engine.html | W906 | 页脚批次链插入 W906 |
+| AGENTS.md | W906 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W906 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W906 | version 同步为 W906 |
+| scripts/output/file-index.md | W906 | W906 段插入 |
+| scripts/output/_w906_spec.json | W906 | 本批级联 spec |
+| scripts/output/_cascade_files_W906.txt | W906 | 级联落盘清单 |
+
 ## W905 两项存量红项清理（2026-10-24）
 
 | 文件 | W | 说明 |
