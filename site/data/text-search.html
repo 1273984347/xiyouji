@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-EGxgoN2NkhTBgO2fAlwCgzS4lxML5TxITqNF4wEWdF8='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-hZEbCb6jpz0jMw6wwRaVr6LqxZ7Az8KNxW2wVPcT/1g='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>原著全文检索 · 详解西游记</title>
@@ -1735,7 +1735,14 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     window.addEventListener('load', function () {
       var s = document.createElement('script');
       s.src = '../static/js/text-search-app.js';
-      s.onerror = function () { console.warn('[text-search] text-search-app.js 加载失败，站内检索功能不可用'); };
+      s.onerror = function () {
+          console.warn('[text-search] text-search-app.js 加载失败，站内检索功能不可用');
+          var bar = document.createElement('div');
+          bar.setAttribute('role', 'alert');
+          bar.style.cssText = 'margin:var(--space-4,16px) auto;padding:var(--space-3,12px) var(--space-4,16px);max-width:720px;border:1px solid var(--accent,#c8463a);border-radius:8px;color:var(--ink-2,#5a4a3f);font-size:14px';
+          bar.textContent = '检索组件加载失败：本页离线检索不可用（file:// 或资源缺失）。可返回首页用目录导航，或经 http 服务访问本页。';
+          (document.querySelector('main') || document.body).prepend(bar);
+        };
       document.head.appendChild(s);
     });
   </script>

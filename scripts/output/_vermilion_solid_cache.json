@@ -149,7 +149,7 @@
    }
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "b3bf30004b74795c7b0e25f307d1156f144105c3",
+   "sha1": "ac80f7a808e37f13a1758eff60cfe67149c8e316",
    "counts": {
     "div.age-tab.active": 1,
     "button": 1
@@ -537,7 +537,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "0ea04703cb8843dec82546e59fa34984c0866f7a",
+   "sha1": "653beead7deeafc240c6165ba02d789b1802df76",
    "counts": {
     "button.vt-btn": 1
    }
@@ -562,7 +562,7 @@
    }
   },
   "data/tag-cloud.html": {
-   "sha1": "e00f9072f218f958061aebbf519cad345b95b766",
+   "sha1": "fcdd9f9df9abca6a2bebeeb61f6065d013c78e51",
    "counts": {
     "button.tab-btn": 1,
     "span.rc-size": 5
@@ -577,7 +577,7 @@
    }
   },
   "data/text-search.html": {
-   "sha1": "8489de55d0bce55d104cd26c1aadc3de3cc7ab4a",
+   "sha1": "fed09c30d59dfde4c4db9365ede6eed22e9397a9",
    "counts": {
     "div.kpi-card": 1
    }
@@ -621,18 +621,17 @@
    }
   },
   "404.html": {
-   "sha1": "97ecfcbfd6fbf2ac7431c1162ac36a64ed374a7e",
+   "sha1": "d21d7bb1a2711c09d43eb33077cbaf402a55408d",
    "counts": {}
   },
   "curated.html": {
-   "sha1": "2498bc5f55ba5d657a6422b9476307b553315fb6",
+   "sha1": "ff9e96c79c42daac3d7725323905dbe7398ec17a",
    "counts": {
-    "span.seal": 1,
     "a.primary": 1
    }
   },
   "dashboard.html": {
-   "sha1": "02c1cacaccdb7da5699ff8af4321bd493314d378",
+   "sha1": "d569887cedd29bd628c0ac65fb35b0e250c916c3",
    "counts": {
     "section.route-strip": 1,
     "button.vt-btn": 2,
@@ -641,20 +640,19 @@
    }
   },
   "dukou-engine.html": {
-   "sha1": "b64402644b86d13b2a473370f6a172d3e3bfd6a5",
+   "sha1": "3dc1fa5f117312b23b19a6e4432b09f023a03d1c",
    "counts": {
     "button": 1
    }
   },
   "guide.html": {
-   "sha1": "d9ad86d624503e5daf29492e1aa6a77a0d2b2b09",
+   "sha1": "ebf1f2c60b1ca8d23785bd286bd33597f9e2ff31",
    "counts": {
-    "span.seal": 1,
     "a.primary": 1
    }
   },
   "index.html": {
-   "sha1": "ea7348d4c6304f6f16296657f68da7d336867071",
+   "sha1": "4b47ed75fe3a85727022da878eb45c06ce07ea0c",
    "counts": {
     "button.rag-fab": 1
    }
@@ -1400,7 +1398,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "f881102a51762f949580ba846317ea40aca0b4e8",
+   "sha1": "2d44131f1f2fcf2f1c5911ce5024b3dfd3a275fe",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1490,5 +1488,5 @@
    }
   }
  },
- "generated_at": "2026-10-24T11:41:38.081Z"
+ "generated_at": "2026-10-24T12:28:42.583Z"
 }

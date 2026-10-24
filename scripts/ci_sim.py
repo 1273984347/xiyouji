@@ -49,6 +49,7 @@ GATES = [
     ("计划方案合规(第48槽)", "{py} scripts/check_plan_template.py --gate"),
     ("CSP 零漂移", "{py} scripts/generate_csp.py --check"),
     ("全仓链接", "{py} scripts/lint_links.py --dir ."),
+    ("交互绑定(W908建)", "{py} scripts/check_interaction_binding.py --gate"),
 ]
 
 
