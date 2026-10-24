@@ -50,6 +50,7 @@ GATES = [
     ("CSP 零漂移", "{py} scripts/generate_csp.py --check"),
     ("全仓链接", "{py} scripts/lint_links.py --dir ."),
     ("交互绑定(W908建)", "{py} scripts/check_interaction_binding.py --gate"),
+    ("页准入(W916建)", "{py} scripts/check_page_admission.py --gate"),
 ]
 
 
