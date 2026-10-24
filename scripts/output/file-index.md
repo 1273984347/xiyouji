@@ -11,6 +11,31 @@
 ---
 
 
+## W916 波二第三件批（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_page_admission.py | W916 | 新增：新建页准入门禁（静态版·禁 type=module + 零外域 script src·857 页 0 FAIL·self-test 3/3）——C-W818-01 清偿
+| tests/unit/test_check_page_admission.py | W916 | 新增：门禁专项单测 2 例
+| scripts/ci_sim.py | W916 | GATES 清单 +页准入（第 9 项·每 PR 实跑）
+| docs/00-导读/W批次编号对账表.md | W916 | W916 认领行与收官回填 |
+| CHANGELOG.md | W916 | W916 段 |
+| HANDOVER.md | W916 | 级联头尾链与里程碑块 |
+| README.md | W916 | 当前批次版本行 |
+| STRUCTURE.md | W916 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W916 | 当前批次版本行 |
+| .github/workflows/README.md | W916 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W916 | 页脚批次链插入 W916 |
+| site/data/cross-time-danmaku.html | W916 | 页脚批次链插入 W916 |
+| site/data/tag-cloud.html | W916 | 页脚批次链插入 W916 |
+| site/dukou-engine.html | W916 | 页脚批次链插入 W916 |
+| AGENTS.md | W916 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W916 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W916 | version 同步为 W916 |
+| scripts/output/file-index.md | W916 | W916 段插入 |
+| scripts/output/_w916_spec.json | W916 | 本批级联 spec |
+| scripts/output/_cascade_files_W916.txt | W916 | 级联落盘清单 |
+
 ## W915 波二余件一·二批（2026-10-24）
 
 | 文件 | W | 说明 |
