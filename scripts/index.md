@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（265）
+## 文件（266）
 
 ### Markdown 文档
 
@@ -198,6 +198,7 @@
 - `check_html_head_content.py`
 - `check_index_health.py`
 - `check_inlined_css.py`
+- `check_interaction_binding.py`
 - `check_js_syntax.py`
 - `check_kpi_card_base.py`
 - `check_motion_ban.py`

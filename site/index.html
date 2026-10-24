@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-L8D2VJCFVkKYJPwStZTGBF0BKd+f8fb3LkeFRvKb8VM=' 'sha256-viBTtODwAf12YWRA7g+a6O7/QF76106MtDpL11ol/DA=' 'sha256-AG8dkSbIJIdoyhXBax9MotpSYlOl76kdVYHwmcZbEzI=' 'sha256-Zffu8DOr1R6L8RLpjdRYw2mWd42CdMbtjLLQrJPPl50=' 'sha256-84JVJQY3yctVmkS8rXOF6mFKtKgqxmKAQ1QLjnvwwrg=' 'sha256-G7JWRSZeN4qV3CsTmZNfFh1mJ5CqtyE1lQNIWsFMJD0=' 'sha256-o+QSXoQ5VFi4ItDsbcfyzUpLgyGVt92M5zj8wsRF4js='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-L8D2VJCFVkKYJPwStZTGBF0BKd+f8fb3LkeFRvKb8VM=' 'sha256-viBTtODwAf12YWRA7g+a6O7/QF76106MtDpL11ol/DA=' 'sha256-AG8dkSbIJIdoyhXBax9MotpSYlOl76kdVYHwmcZbEzI=' 'sha256-Zffu8DOr1R6L8RLpjdRYw2mWd42CdMbtjLLQrJPPl50=' 'sha256-84JVJQY3yctVmkS8rXOF6mFKtKgqxmKAQ1QLjnvwwrg=' 'sha256-G7JWRSZeN4qV3CsTmZNfFh1mJ5CqtyE1lQNIWsFMJD0=' 'sha256-TRMqPiB8dk3yeRtOwuNSuVt3hHiGm0XElRv7kga6q24=' 'sha256-LY+Pq/ATRZQREEIn+OCkrNIO4v+EDFhhATTTjX0ZW+k='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
       // 夜读模式（W488）：首屏防 FOUC——先读 localStorage，无则跟随系统；dark 时在 body 渲染前挂 data-theme
@@ -476,10 +476,10 @@
                         <button type="submit">站内搜索</button>
                     </form>
                     <div class="ask-chips" role="list">
-                        <span class="ask-chip" role="listitem" data-q="孙悟空">孙悟空</span>
-                        <span class="ask-chip" role="listitem" data-q="八十一难">八十一难</span>
-                        <span class="ask-chip" role="listitem" data-q="紧箍咒">紧箍咒</span>
-                        <span class="ask-chip" role="listitem" data-q="大闹天宫">大闹天宫</span>
+                        <span class="ask-chip" tabindex="0" role="button" role="listitem" data-q="孙悟空">孙悟空</span>
+                        <span class="ask-chip" tabindex="0" role="button" role="listitem" data-q="八十一难">八十一难</span>
+                        <span class="ask-chip" tabindex="0" role="button" role="listitem" data-q="紧箍咒">紧箍咒</span>
+                        <span class="ask-chip" tabindex="0" role="button" role="listitem" data-q="大闹天宫">大闹天宫</span>
                     </div>
                     <p class="ask-note">离线可搜（全站索引内置）· 想写「被忽略者」档案？试试 <a href="dukou-engine.html">西游·渡口写作引擎</a></p>
                 </div>
@@ -661,7 +661,7 @@
     <footer class="site-footer">
         <div>
             <div class="footer-brand">取经录</div>
-            <div class="footer-meta">2026 · MIT License · 持续更新中 · W909 README 专业化改版：结构层级统一、配图补齐、头部与文案修正 · W908 README 专业化改版：结构层级统一、配图补齐、头部与文案修正 · W907 README 专业化改版：结构层级统一、配图补齐、头部与文案修正 · W906 旁文档门禁残留判定三态化：他方登记行纯追加降提示放行，在位编辑照旧判红 · W905 存量红项清理：暗色门禁补色规则与 npm 生产依赖漏洞清偿 · W904 C5c 裸聚合七十四处清零并转判红，统计器增七个分板块键，豁免机制补命中后置精确形态 · W903 touches 注记归一与对称目录前缀匹配闭假绿，门禁45提示语补暂存顺序 · W902 机制层三层审查四发现（touches 假绿待批），记忆固化八项入仓（报告落位常设指令与坑表三条） · W901 对账面随递归恢复，历史段链接改指新址，两件计划档补登索引 · W900 11-方案报告目录分类重组：根层二十余件归入四个分类子目录，唯一索引分区重构，入链与索引派生面全量同步 · W899 合并后收尾修正：output 目录计数口径订正与朱砂门禁增量缓存重建 · W898 宣传物料投放接线 README 新增物料小节 站内入口指向仓库 英文版单页与 PDF 分享图指引 规范受管资产登记 · …更早批次详见 CHANGELOG.md<a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
+            <div class="footer-meta">2026 · MIT License · 持续更新中 · W912 未落地任务全量盘点五档排期，站内交互债首波清偿，渡口页主脚本考古回灌与门禁建置 · W909 README 专业化改版：结构层级统一、配图补齐、头部与文案修正 · W908 README 专业化改版：结构层级统一、配图补齐、头部与文案修正 · W907 README 专业化改版：结构层级统一、配图补齐、头部与文案修正 · W906 旁文档门禁残留判定三态化：他方登记行纯追加降提示放行，在位编辑照旧判红 · W905 存量红项清理：暗色门禁补色规则与 npm 生产依赖漏洞清偿 · W904 C5c 裸聚合七十四处清零并转判红，统计器增七个分板块键，豁免机制补命中后置精确形态 · W903 touches 注记归一与对称目录前缀匹配闭假绿，门禁45提示语补暂存顺序 · W902 机制层三层审查四发现（touches 假绿待批），记忆固化八项入仓（报告落位常设指令与坑表三条） · W901 对账面随递归恢复，历史段链接改指新址，两件计划档补登索引 · W900 11-方案报告目录分类重组：根层二十余件归入四个分类子目录，唯一索引分区重构，入链与索引派生面全量同步 · W899 合并后收尾修正：output 目录计数口径订正与朱砂门禁增量缓存重建 · …更早批次详见 CHANGELOG.md<a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
         </div>
         <nav aria-label="页脚导航">
             <a href="index.html">首页</a>
@@ -772,7 +772,7 @@
         if (!btn || !nav || !mask) return;
         function close() {
           nav.classList.remove('open'); mask.classList.remove('open'); btn.setAttribute('aria-expanded', 'false');
-          setTimeout(function () { if (!nav.classList.contains('open')) nav.style.display = 'none'; }, 350);
+          setTimeout(function () { if (!nav.classList.contains('open')) nav.style.display = (window.innerWidth <= 768 ? 'none' : ''); }, 350);
         }
         btn.addEventListener('click', function () {
           if (nav.classList.contains('open')) { close(); return; }
@@ -784,5 +784,15 @@
         window.addEventListener('resize', function () { if (window.innerWidth > 768) close(); });
       })();
     </script>
+<script>
+// W908 ask-chip 键盘可达：Enter/Space 等价点击（与 tabindex=0 配套）
+(function () {
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var el = e.target;
+    if (el && el.classList && el.classList.contains('ask-chip')) { e.preventDefault(); el.click(); }
+  });
+})();
+</script>
 </body>
 </html>

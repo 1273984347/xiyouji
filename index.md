@@ -27,7 +27,7 @@
 - `xiyouji-agent-web/`
 - `xiyouji-desktop/`
 
-## 文件（20）
+## 文件（21）
 
 ### Markdown 文档
 
@@ -39,6 +39,7 @@
 - `DESIGN.md`
 - `HANDOVER.md`
 - `LICENSE-CONTENT.md`
+- `README.en.md`
 - `SECURITY.md`
 - `新Agent启动Prompt.md`
 

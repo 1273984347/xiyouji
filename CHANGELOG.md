@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W909），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W912），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,30 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W912（2026-10-24）：未落地任务首波清偿（T-18 全量盘点 + 站内交互债整包：渡口脚本考古回灌 + 抽屉修复 + 交互门禁建置）
+
+
+
+> **来源**：用户 2026-10-24 令「docs/11-方案报告 把这个文件里面所有没做的任务全部列出来按照模板排一下今天做掉」——T-18 计划件（全量盘点）+ 本批为首波施工。
+
+> - **文件**：site/dukou-engine.html、site/index.html、site/curated.html、site/dashboard.html、site/guide.html、site/sw.js、site/data/text-search.html、site/data/cross-time-danmaku.html、site/404.html、scripts/check_interaction_binding.py、tests/unit/test_check_interaction_binding.py、tests/unit/test_preflight_touches.py、scripts/preflight_check.py、scripts/ci_sim.py、docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md、pytest.ini、scripts/output/stats.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/data/tag-cloud.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w912_spec.json、scripts/output/_cascade_files_W912.txt（逐件行见 file-index W912 段）。
+
+**① T-18 全量盘点件**（落 计划方案/·32 判据全项过）：以 T-09 四簇 217 项为基线 × 10-24 机器复核——8 项已被 W876–W906 核销（A 档留档）；余项分 **B 今日（本批）/ C 近日波二（站点数字门禁·gates 判据收敛·bump 测试·404 补迁移·DB 包一等九项）/ D1 真债大项（按依赖排）/ D2 零受众冻结（显式不排期·解冻条件=judge_gate 重判 UV≥30——把「报告承诺」重排为「价值驱动」的结构性优化）/ E 待用户裁决十二项集中清单**。
+
+**② 渡口页根修（W858 P0·线上交互全失效）**：考古发现主脚本在 W333 后某批被整段剥离（历史各版均有 5 处绑定·当前页零监听）——**自 git 历史（9a1c0306·W333）提取原装 10.4KB 主脚本回灌**（优于重写：本地 RAG 8777 + 零依赖 SVG 力导向 + 渡口知识库全对版），另补 themeToggle 绑定（历史原装即缺·与全站 xy-theme 键一致）；CSP 重算 860 哈希零漂移。
+
+**③ 四根页抽屉桌面误隐修复**：close() 的 350ms 延迟置 none 改为仅移动端（≤768）生效、桌面清内联回 CSS 默认——resize/ESC 不再永久隐藏桌面导航（index/curated/dashboard/guide 四页）。
+
+**④ 小项五连**：sw.js 预缓存死链（mobile-index 两处）清理；text-search 注入失败加可见错误条（role=alert）；假 LIVE 文案改真实口径（「LIVE 弹幕」→「弹幕回放」·aria 同步）；ask-chip 键盘可达（tabindex+Enter/Space 委托）；404 页补夜读防 FOUC。P-06 弹幕表单复核不成立（无 HTML 级禁用）、P-11 FAB 已消失（零元素）、P-09 归并 B-W855-01——定性留档 T-18 件。
+
+**⑤ 交互绑定门禁建置**（A-T07-05）：`check_interaction_binding.py`——注册控件对账 P1（页面脚本区须有控件引用·缺一即红）+ 泛化 NOTE P2（起步策略·W904 C5c 同款治理路径）+ fail-closed + self-test 3/3 + 专项单测 3 例（注册表锚点防漂）；**接 ci_sim 第 8 项**（每 PR 干净检出实跑·挂 verify 槽位涉五处对账另批处理——D-06 披露）。
+
+**⑥ preflight 状态列定位根修**：`_STATUS_CELL_RE` 由单层括号紧匹配放宽为前缀匹配——原形态拒识「已收官（hash·自测 33/33（嵌套）·…）」长尾格→回退固定下标→被含转义竖线碎行击穿（本批认领被误拦一次的实测根因·W825 修法 ① 的残余缺口）；单测 +2 锁定（19/19）。
+
+**协作事件**：本批原拟之号两度被同日并行会话先落地占用（README 专业化批与其后续批·页脚署名在 HEAD 为证），按「先落地者保留」连续让号（T-06 让号同款·T-18 D-04 留档）。
+
+**验证**：交互门禁 self-test 3/3 + 主判据 0 FAIL（渡口全控件达标）·pytest 全量 867 collected 864 passed 3 skipped·preflight 单测 19/19·ruff All checks passed·CSP 860 哈希零漂移·verify 全量核心全绿·第 48 门禁 32 判据过（新增件全项）。
 
 ### W909（2026-10-24）：README 专业化改版（结构层级 + 配图 + 头部与文案修正）
 
