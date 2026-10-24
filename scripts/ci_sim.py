@@ -52,6 +52,7 @@ GATES = [
     ("交互绑定(W908建)", "{py} scripts/check_interaction_binding.py --gate"),
     ("页准入(W916建)", "{py} scripts/check_page_admission.py --gate"),
     ("DB schema(W917建)", "{py} scripts/check_db_schema.py --gate"),
+    ("副本链对账(W920建)", "{py} scripts/check_data_copy_chain.py --gate"),
 ]
 
 
