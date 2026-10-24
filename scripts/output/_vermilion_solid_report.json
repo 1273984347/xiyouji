@@ -1631,16 +1631,11 @@
    "perCls": {}
   },
   "curated.html": {
-   "measured": 2,
+   "measured": 1,
    "exempted": 0,
-   "nonExempt": 2,
+   "nonExempt": 1,
    "fail": false,
    "perCls": {
-    "span.seal": {
-     "measured": 1,
-     "exempted": 0,
-     "nonExempt": 1
-    },
     "a.primary": {
      "measured": 1,
      "exempted": 0,
@@ -1690,16 +1685,11 @@
    }
   },
   "guide.html": {
-   "measured": 2,
+   "measured": 1,
    "exempted": 0,
-   "nonExempt": 2,
+   "nonExempt": 1,
    "fail": false,
    "perCls": {
-    "span.seal": {
-     "measured": 1,
-     "exempted": 0,
-     "nonExempt": 1
-    },
     "a.primary": {
      "measured": 1,
      "exempted": 0,
@@ -3719,5 +3709,5 @@
  "notes": [
   "data/hardship-difficulty-heatmap.html 陈旧豁免（类已不在）：button.dim-btn.active / button.sort-btn.active（族合计 2·实测不足 1）"
  ],
- "generated_at": "2026-10-23T12:44:28.845Z"
+ "generated_at": "2026-10-24T12:08:03.564Z"
 }

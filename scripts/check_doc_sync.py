@@ -153,7 +153,7 @@ def c5b_extra_surfaces():
     纪律·禁回溯改写），由计划自身的「聚合数字当批现测」条款在开工批复核（T04 AC-07 34/35 实例；
     W901 实测该子目录 8 件带冻结 stats 标记·入面即假红·除外条款随递归化原样保留）。
     """
-    paths = [os.path.join(ROOT, "pytest.ini")]
+    paths = [os.path.join(ROOT, "pytest.ini"), os.path.join(ROOT, "site", "index.html")]  # W913：站点聚合数字失真面（B-W855-01·772 篇漂移实证）纳入标记对账
     paths += sorted(
         p for p in glob.glob(
             os.path.join(ROOT, "docs", "11-方案报告", "**", "*.md"), recursive=True)

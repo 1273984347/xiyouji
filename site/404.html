@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-v1JmEW7gO5gLIS4w/YA0kjLqLY67iu3QvAlXRrF6Vwk='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
 <title>404 · 此页不在航线上 — 详解西游记</title>
@@ -75,6 +75,12 @@
   .entries a:hover { background: #C8463A; color: #FFFFFF; }
   .foot { margin-top: 24px; font-size: 12px; color: #6B6455; }
 </style>
+<script>
+// 夜读防 FOUC（与全站 W488 同款）
+(function(){var t=null;try{t=localStorage.getItem('xy-theme')}catch(e){}
+if(t==='dark'){document.documentElement.setAttribute('data-theme','dark')}
+else if(!t&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.setAttribute('data-theme','dark')}})();
+</script>
 </head>
 <body>
   <main class="card">
