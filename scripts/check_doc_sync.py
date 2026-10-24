@@ -9,7 +9,8 @@
      C4 提交-版段对账：近 15 条 commit subject 中的 W### ⊆ CHANGELOG 版段集合 ∪ 对账表登记行；
      认领行强制（W720）：CHANGELOG 现役段 W 号须有对账表「表格行」——预留豁免 bullet 不算认领；
      C4-e 级联清单强校验（W722）：pre-commit staged ⊇ 当批 _cascade_files 清单（无清单 NOTE·staged 空不适用）；
-     C4-f 文件清单入库对账（W723）：现役段「文件」行路径 ⊆ HEAD 树 且 无工作树残留（W537③ 清偿·手工件唯一防线·缺行 NOTE）
+     C4-f 文件清单入库对账（W723）：现役段「文件」行路径 ⊆ HEAD 树 且 无工作树残留（W537③ 清偿·手工件唯一防线·缺行 NOTE）；
+          W906 三态：残留为「他方批次登记行纯追加」（| WNNN 形态·零删改）时降 NOTE——并行在途非漏 add（W904 实录）
   C5 聚合数字对账（W703 建·W704 实体化）：18 式高危聚合句式 × 现役叙述面（README/STRUCTURE/AGENTS/项目说明全文 +
      CHANGELOG 仅「全站页数口径」块行）vs scripts/output/stats.json（scripts/stats.py 磁盘实算·实体化 tracked）；
      C5b 数字实体标记：<!--stats:KEY--> 前置数字 == stats.json[KEY].value（键未登记=fail-closed；
@@ -76,6 +77,7 @@ RE_STATS_PATTERNS = [  # (正则, (键...), 语境词[None=无·小写包含判�
 ]
 RE_CHANGELOG_SCOPE = re.compile(r"^> \*\*全站页数口径\*\*.*$", re.M)  # CHANGELOG 扫描域=口径块行
 RE_FILE_LIST_LINE = re.compile(r"^> - \*\*文件\*\*：(.+)$", re.M)  # W723 C4-f：四件套「文件」行
+RE_BATCH_REGISTRY_ROW = re.compile(r"^\| W\d{3} ")  # W906 C4-f 三态：他方批次登记行形态
 RE_FILE_TOKEN = re.compile(
     r"^(?:CHANGELOG|README|STRUCTURE|AGENTS|CLAUDE|CONTRIBUTING|CITATION)\.cff?$"
     r"|.+\.(?:py|js|mjs|cjs|ts|tsx|jsx|md|json|jsonl|cff|txt|html|css|xml|yml|yaml|toml|ini|cfg|sh|ps1|csv|svg|example)$"
@@ -111,6 +113,32 @@ C6_SURFACES = (
 )
 C6_BANNED_SEPS = ("·", "；", "—")  # 与 batch_cascade.precheck 的 desc 黑名单同口径（双源一致性由本支兜底）
 
+
+
+def _foreign_append_only(paths):
+    """W906：判定哪些 dirty 文件的未暂存改动是「他方批次登记行的纯追加」。
+
+    口径：`git diff -- <path>` 正文行中零「-」行，且全部非空「+」行 strip 后匹配
+    RE_BATCH_REGISTRY_ROW（台账认领行「| WNNN 」形态）。只认纯追加——他方在位
+    编辑（改状态列等）含删改行，仍属真残留照旧判红。git 探测不可用（None）时该
+    文件不计入（判据保守回退原 FAIL 语义·fail-closed 方向）。
+    """
+    out = set()
+    for p in paths:
+        lines = _git_output_lines(["diff", "--", p], strip=False)
+        if lines is None:
+            continue
+        adds, dels = [], 0
+        for ln in lines:
+            if ln.startswith("---") or ln.startswith("+++"):
+                continue
+            if ln.startswith("-"):
+                dels += 1
+            elif ln.startswith("+"):
+                adds.append(ln[1:].strip())
+        if dels == 0 and adds and all(RE_BATCH_REGISTRY_ROW.match(a) for a in adds):
+            out.add(p)
+    return out
 
 
 def c5b_extra_surfaces():
@@ -384,7 +412,12 @@ def _check_c4_commit_ledger(inp, issues, notes):
                 if f not in _tree2:
                     issues.append("C4-f: 文件清单 %s 未入提交树（W537③·手工件漏 add 族）" % f)
                 elif f in _dirty:
-                    issues.append("C4-f: 文件清单 %s 有工作树未提交残留（漏 add）" % f)
+                    if f in (inp.get("foreign_append_only") or set()):
+                        notes.append(
+                            "C4-f: 文件清单 %s 工作树残留为并行批次登记行纯追加"
+                            "（他方在途·非漏 add·W906 三态——以 HEAD 为准不重做）" % f)
+                    else:
+                        issues.append("C4-f: 文件清单 %s 有工作树未提交残留（漏 add）" % f)
 
 
 def _check_stats_marker(m, where, stats, issues):
@@ -581,6 +614,9 @@ def gather():
             if len(ln) > 3 and (ln[1] != " " or ln[:2] == "??"):
                 _dirty.append(ln[3:].strip().strip('"'))
     inputs["dirty"] = _dirty
+    # W906 C4-f 三态：dirty 文件中未暂存 diff 为「他方批次登记行纯追加」者单列——
+    # 并行会话在台账落认领行属他方在途（W904 收官提交被此形态拦停的实录），非本方漏 add
+    inputs["foreign_append_only"] = _foreign_append_only(_dirty)
     try:
         _top = changelog_top(inputs["changelog"])
         _mp = os.path.join(ROOT, "scripts", "output", "_cascade_files_W%03d.txt" % _top[1]) if _top else None
@@ -806,6 +842,29 @@ def run_self_test():
         lambda d: d.update(readme=d["readme"] + "S1 项目方法论 + A2 个人随笔板块\n"),
         "C5c",
         expect_absent=True,
+    )
+    # W906：C4-f 三态双向锁——他方登记行纯追加残留放行（W904 被并行 W905 认领行
+    # 拦停的实录）/ 非追加形态（foreign 集不含）照旧必红
+    case(
+        "T32 他方登记行纯追加残留放行（C4-f·W906 三态）",
+        lambda d: d.update(
+            changelog=d["changelog"].replace("### W999（2026-10-05）：自测顶段\n",
+                                             "### W999（2026-10-05）：自测顶段\n\n> - **文件**：docs/00-导读/W批次编号对账表.md\n"),
+            head_tree=["docs/00-导读/W批次编号对账表.md"],
+            dirty=["docs/00-导读/W批次编号对账表.md"],
+            foreign_append_only={"docs/00-导读/W批次编号对账表.md"},
+        ),
+        "C4-f",
+        expect_absent=True,
+    )
+    case(
+        "T33 残留非纯追加形态仍红（C4-f·W906 防误放——foreign 集不含即回退原语义）",
+        lambda d: d.update(
+            changelog=d["changelog"].replace("### W999（2026-10-05）：自测顶段\n",
+                                             "### W999（2026-10-05）：自测顶段\n\n> - **文件**：docs/a.md\n"),
+            head_tree=["docs/a.md"], dirty=["docs/a.md"], foreign_append_only=set(),
+        ),
+        "C4-f",
     )
 
     # W841：C6 版本行 desc 分隔符体检双向锁——含分隔符必红（手工写段绕过 batch_cascade.precheck 的兜底）
