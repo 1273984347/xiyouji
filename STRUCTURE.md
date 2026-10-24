@@ -3,7 +3,7 @@
 
 > **📖 阅读契约（W707）**：索引型——找「东西在哪」时读顶层结构表+目标目录所在段；各板块下的建置沿革（v0.x W0xx 补齐…）是历史记录见 CHANGELOG，勿通读；计数与口径以磁盘实数与 [统计口径说明](docs/00-导读/统计口径说明.md) 为准。
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前批次：W903（2026-10-24）— touches 注记归一与对称目录前缀匹配闭假绿，门禁45提示语补暂存顺序—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前批次：W904（2026-10-24）— C5c 裸聚合七十四处清零并转判红，统计器增七个分板块键，豁免机制补命中后置精确形态—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构
@@ -76,59 +76,59 @@
 **回目选取策略**：覆盖全书结构关键节点——开篇（001）、学艺（002）、龙宫借宝招安伏笔（003）、闹天宫引爆（005）、闹天宫转折（007）、取经项目启动（008）、取经组建（014）、团队集结完成（022）、首次决裂（027）、中段斗法（045）、心性整合（058）、火焰山主战（059）、最大外患（074）、后期识魔（078）、终回成佛（100）。每篇均采用六段式模板 + 4 条关联数据可视化链接。
 
 ### 02-人物深度分析/
-按人物立文件，例如 `孙悟空.md`、`唐僧.md` 等。已建 215 篇（A3 人物·谱系表+五众+妖魔+神佛+妖怪次级全覆盖·六段式模板·建置沿革见 [STRUCTURE-ARCHIVE](archive/docs/STRUCTURE-ARCHIVE.md) 与 CHANGELOG）。
+按人物立文件，例如 `孙悟空.md`、`唐僧.md` 等。已建 215<!--stats:a3_docs--> 篇（A3 人物·谱系表+五众+妖魔+神佛+妖怪次级全覆盖·六段式模板·建置沿革见 [STRUCTURE-ARCHIVE](archive/docs/STRUCTURE-ARCHIVE.md) 与 CHANGELOG）。
 
 ### 03-主题与情节专题/
 按主题立文件（七段式模板），现 209<!--stats:a4_docs--> 篇；建置沿革见 archive/docs/STRUCTURE-ARCHIVE.md 与 CHANGELOG。
 
 ### 04-文化与历史背景/
-成书背景、佛道思想、明代社会隐喻、版本演变、历史玄奘与小说玄奘等。已建 4 篇（成书背景/版本演变/佛道思想/明代隐喻·七段式模板·沿革见 [STRUCTURE-ARCHIVE](archive/docs/STRUCTURE-ARCHIVE.md) 与 CHANGELOG）。
+成书背景、佛道思想、明代社会隐喻、版本演变、历史玄奘与小说玄奘等。已建 34<!--stats:a5_docs--> 篇（成书背景/版本演变/佛道思想/明代隐喻等·七段式模板·沿革见 [STRUCTURE-ARCHIVE](archive/docs/STRUCTURE-ARCHIVE.md) 与 CHANGELOG）。
 
 ### 05-诗词歌赋/
 原著诗词赏析、回目对联分析、主题诗词创作（个人创作）。
 
 ### 06-个人随笔/
-现代视角解读、职场映射、时代变迁中的西游。独立随笔以六段式（古今对位 + 加粗金句）建设，现 44 篇；建置沿革见 archive/docs/STRUCTURE-ARCHIVE.md 与 CHANGELOG。
+现代视角解读、职场映射、时代变迁中的西游。独立随笔以六段式（古今对位 + 加粗金句）建设，现 44<!--stats:a2_docs--> 篇；建置沿革见 archive/docs/STRUCTURE-ARCHIVE.md 与 CHANGELOG。
 
 ### 07-学以致用/（v0.11 W016 新增）
-学以致用层——把《西游记》读到的"是什么"和"为什么"延伸到"怎么用"。已建 4 篇（六段式模板：教学讲解轨标）：
+学以致用层——把《西游记》读到的"是什么"和"为什么"延伸到"怎么用"。已建 4<!--stats:learn_docs--> 篇（六段式模板：教学讲解轨标）：
 - `学习路径.md`：4 条阅读路径（初读/精读/研究/创作）+ 当代信息过载语境
-- `决策模型.md`：4 类决策范式（悟空式/唐僧式/团队/陷阱）+ 卡尼曼系统1/系统2 + 奥斯特罗姆治理八原则
+- `决策模型.md`：4 类<!--doc-sync:exempt--> 决策范式（悟空式/唐僧式/团队/陷阱）+ 卡尼曼系统1/系统2 + 奥斯特罗姆治理八原则
 - `领导力.md`：信念权力悖论 + 5 阶段领导力演变 + 变革型/仆从型/分布式领导理论对照
-- `危机应对.md`：4 类危机分类 + 3 套识别机制 + 塔勒布反脆弱 + 分级响应原则
+- `危机应对.md`：4 类<!--doc-sync:exempt--> 危机分类 + 3 套识别机制 + 塔勒布反脆弱 + 分级响应原则
 
 ### 08-提升认知/（v0.11 W017 新增）
-提升认知层——从角色思维模型出发，训练读者的反事实推断与元认知地图。已建 3 篇（六段式模板：教学讲解轨标）：
+提升认知层——从角色思维模型出发，训练读者的反事实推断与元认知地图。已建 3<!--stats:cognition_docs--> 篇（六段式模板：教学讲解轨标）：
 - `角色思维模型.md`：5 人 = 5 种思维范式（直觉/信念/感受/执行/承载）+ 加德纳多元智能 + 卡尼曼系统1 + 韦伯价值理性
-- `反事实训练.md`：4 个反事实思想实验 + 塔勒布反事实推理铁律"只改一处"
+- `反事实训练.md`：4 个<!--doc-sync:exempt--> 反事实思想实验 + 塔勒布反事实推理铁律"只改一处"
 - `元认知地图.md`：悟空心性曲线 4 阶段 + 弗拉维尔元认知 + 阳明心学"破心中贼" + 费斯汀格认知失调
 
 ### 09-精神塑造/（v0.11 W018 新增）
-精神塑造层——把八十一难读作人生隐喻，讨论自我整合、价值坐标系与苦难意义论。已建 4 篇（六段式模板：教学讲解轨标）：
+精神塑造层——把八十一难读作人生隐喻，讨论自我整合、价值坐标系与苦难意义论。已建 4<!--stats:spirit_docs--> 篇（六段式模板：教学讲解轨标）：
 - `八十一难人生隐喻.md`：81 难 = 81 次结构性遇见 + 加缪西西弗 + 坎贝尔英雄之旅 17 阶段 + 现代人生四类磨难
 - `自我整合.md`：荣格个体化 4 阶段 + 58 回六耳猕猴阴影整合 + 唐僧灵肉分裂 + 整合临界点
 - `价值坐标系.md`：韦伯价值理性 vs 工具理性 + 罗克奇终值 vs 工具值 + 5 人 = 5 种价值维度
 - `苦难意义论.md`：弗兰克尔 logotherapy 三种价值 + 加缪"想象西西弗是幸福的" + 态度性价值
 
 ### 10-方法论沉淀/（v2.0.43 W070 新增·S1 方向）
-项目方法论沉淀层——把项目过程中积累的可复利方法论经验集中沉淀为教学材料。已建 24<!--stats:methodology_docs--> 篇（目录实数·含索引 README；统一结构：问题背景 + 方法论/判据 + 复现案例 + 修复策略 + 关联文档；全量篇目与阅读路径见 [README.md](docs/10-方法论沉淀/README.md) 索引。W754 口径整改 + W755 扩建后本目录只收方法论深度篇，报告类入 docs/11-报告复盘/）。奠基 6 篇：
+项目方法论沉淀层——把项目过程中积累的可复利方法论经验集中沉淀为教学材料。已建 24<!--stats:methodology_docs--> 篇（目录实数·含索引 README；统一结构：问题背景 + 方法论/判据 + 复现案例 + 修复策略 + 关联文档；全量篇目与阅读路径见 [README.md](docs/10-方法论沉淀/README.md) 索引。W754 口径整改 + W755 扩建后本目录只收方法论深度篇，报告类入 docs/11-报告复盘/）。奠基 6 篇<!--doc-sync:exempt-->：
 
 - `README.md`：索引文件·目录索引 24 行 + 阅读路径（新读者 5 分钟 / 项目接手者 / 方法论作者三路径）+ 复利经验总览（W086 时点快照）+ 与协议层/现役载体的关系 + 维护规则（含报告分流与载体铁律）
-- `DRL真循环.md`：DRL 真循环 + 4 层过拟合防护（P2 残留 N / 边际收益 gate / 过拟合警报 / 严重度门槛）+ R0-R3 完整流程 + 收敛曲线记录要求 + 3 个复现案例（W069 27 P1 / Phase F v1.1 14.3%→0% / Phase B v0.8 12→0→3→0→0）+ Verdict 字眼禁令 + 修复策略三件套
-- `三skill闭环.md`：DRL→mem-wrap-up→self-evolution 单向闭环 + 正反向触发链 + L5 运行时检查 + L1 版本联动 + L3 显式声明 + L5+L3 当前 session 立即验证 + P2/P3 跨 skill 语义统一 + 4 个复现案例（2026-07-22 首次 / v1.0 阶段 / W039 / W069）
+- `DRL真循环.md`：DRL 真循环 + 4 层过拟合防护（P2 残留 N / 边际收益 gate / 过拟合警报 / 严重度门槛）+ R0-R3 完整流程 + 收敛曲线记录要求 + 3 个<!--doc-sync:exempt--> 复现案例（W069 27 P1 / Phase F v1.1 14.3%→0% / Phase B v0.8 12→0→3→0→0）+ Verdict 字眼禁令 + 修复策略三件套
+- `三skill闭环.md`：DRL→mem-wrap-up→self-evolution 单向闭环 + 正反向触发链 + L5 运行时检查 + L1 版本联动 + L3 显式声明 + L5+L3 当前 session 立即验证 + P2/P3 跨 skill 语义统一 + 4 个<!--doc-sync:exempt--> 复现案例（2026-07-22 首次 / v1.0 阶段 / W039 / W069）
 - `E1铁律.md`：E1 跨 session git tracked（9/9 复现）+ E1 升级版修复落地验证（2/2 复现）+ Subagent 工具证据不可盲信（多次复现）+ W069 系统性编造 line 号（1/1 严重级别）+ 三层 spot-check 协议 + Preflight fact verification 扩展 + 5Why 根因分析
 - `Preflight与Subagent模板.md`：Preflight interface analysis（1/1 复现·Anthropic T14）+ Preflight fact verification（1/1 复现·xiyouji W058）+ Scope-lock constraint（1/1 复现·Anthropic T13）+ Subagent fallback 模式（3/3 复现·W067/W068/W069）+ 完整 subagent prompt 模板 + W069 新增约束（禁止编造 line 号）
-- `双索引可追溯改造.md`：CHANGELOG W### ID（正向时间线）+ file-index.md（反向文件索引）+ 双向链接字段 + 4 个使用场景（时间点→变更 / 文件→W### / 跨文件影响面追溯 / 改动后影响面扫描）+ file-index.md 结构 + CHANGELOG.md W### 段结构 + 维护规则
+- `双索引可追溯改造.md`：CHANGELOG W### ID（正向时间线）+ file-index.md（反向文件索引）+ 双向链接字段 + 4 个<!--doc-sync:exempt--> 使用场景（时间点→变更 / 文件→W### / 跨文件影响面追溯 / 改动后影响面扫描）+ file-index.md 结构 + CHANGELOG.md W### 段结构 + 维护规则
 
 ### 11-方案报告/（W737 新增·W758 改名并子目录化）
-报告复盘层——全部工作复盘/审查/调研报告的统一归档与索引（W737 对抗性审查后归置·承接 10-方法论沉淀 的报告类条目、根目录调研报告与 tmpe 审查产物）。目录下 55<!--stats:report_docs--> 篇 .md（W900 分区后六子目录：审查与评审 10 篇 · 设计与架构方案 5 篇（另附 HTML 预览页 2 件） · 治理与核查 3 篇 · 调研与数据复盘 2 篇（另附读者数据截图 5 件） · 工作复盘与优化分析报告 13 篇 · 计划方案 20 篇 · 加索引 README；根层仅留索引）。与 10-方法论沉淀 的分工：本目录收「报告」（过去周期发生了什么），10 收「方法论」（以后同类事怎么做）。
+报告复盘层——全部工作复盘/审查/调研报告的统一归档与索引（W737 对抗性审查后归置·承接 10-方法论沉淀 的报告类条目、根目录调研报告与 tmpe 审查产物）。目录下 55<!--stats:report_docs--> 篇 .md（W900 分区后六子目录：审查与评审 10 篇<!--doc-sync:exempt--> · 设计与架构方案 5 篇<!--doc-sync:exempt-->（另附 HTML 预览页 2 件） · 治理与核查 3 篇<!--doc-sync:exempt--> · 调研与数据复盘 2 篇<!--doc-sync:exempt-->（另附读者数据截图 5 件） · 工作复盘与优化分析报告 13 篇<!--doc-sync:exempt--> · 计划方案 20 篇<!--doc-sync:exempt--> · 加索引 README；根层仅留索引）。与 10-方法论沉淀 的分工：本目录收「报告」（过去周期发生了什么），10 收「方法论」（以后同类事怎么做）。
 
 ### 12-提示词库/（W796 新增·素材归档）
 用户桌面 Prompt.txt 的整理入库（966 行 → 12 文件·原文照录）。性质=**素材库非任务清单**——执行其中任务须单独授权；色值冲突以 HEX 为准（校准表见 11-colors§二）。入口：`00-总目录.md`（模块索引+整理决策）。
 
 ### S2-外部分享/（W404 新增·内容分发）
 
-精选发布版内容（W404 精选 27 篇 + W405 第二批 27 篇随笔），面向外部分发。
+精选发布版内容（W404 精选 27 篇<!--doc-sync:exempt--> + W405 第二批 27 篇<!--doc-sync:exempt--> 随笔），面向外部分发。
 
 ### S2-学术投稿/（W404 新增）
 
@@ -160,7 +160,7 @@
 
 ### 原文/
 - `分回/`：每回单独一个文件 `第NNN回.md`（W286 从古诗文网批量抓取 100 回原文·W286b 从 .txt 转为 .md 并添加 `# 第NNN回 回目` 标题头·W286c 清除第069/099回网页垃圾内容）
-- `shendu/`：100 篇深读切片 `SD001-SD100.md`（W286 从 5 个原著逐回深读*.txt 拆分·每篇含 `<!-- 元数据注释 -->` 标注推测原著回号映射·W286b 从 temp_shendu/ 重命名为 shendu/ 并从 .txt 转为 .md 添加 `# SDnnn · 标题` 标题头）
+- `shendu/`：100 篇<!--doc-sync:exempt--> 深读切片 `SD001-SD100.md`（W286 从 5 个<!--doc-sync:exempt--> 原著逐回深读*.txt 拆分·每篇含 `<!-- 元数据注释 -->` 标注推测原著回号映射·W286b 从 temp_shendu/ 重命名为 shendu/ 并从 .txt 转为 .md 添加 `# SDnnn · 标题` 标题头）
 
 ### 引用与网络解读/
 - `学术论文索引.md`：学术论文与专著引用（已收录 55 条，覆盖原著版本/古代评点/现代学术/当代整理/海外译本/思想渊源/现代名家解读/近 5 年新研究 8 大类，GB/T 7714 格式）
@@ -193,14 +193,14 @@
 | **D. 关系** | `D_关系/` | relationships.py | relationships.html | 7 势力分布·8 法宝克制链·15 搬救兵·贝尔宾 9 角色适配度 |
 | **E. 地理** | `E_地理/` | journey_route.py | journey-route.html | 取经全路程图、国别风俗饮食、四大部洲风物、天庭-灵山-地府三维剖面 |
 | **F. 时间** | `F_时间/` | timeline.py | story-timeline.html（W694 起·第 39 门禁双源同步） | 三重平行时间线、关键事件时间线 |
-| **G. 哲学** | `G_哲学/` | philosophy.py | philosophy.html | 6 阶段心猿心性曲线·8 类修心寓言·81 难因果分类·心经第 19 回传授 |
+| **G. 哲学** | `G_哲学/` | philosophy.py | philosophy.html | 6 阶段心猿心性曲线·8 类<!--doc-sync:exempt--> 修心寓言·81 难因果分类·心经第 19 回传授 |
 | **H. 风险与项目** | `H_风险与项目/` | risk_project.py | risk-project.html | 5 风险类别 81 难评估·7 KPI·8 里程碑·8 角色 MBTI（avg 8.25） |
-| **I. 妖怪社会学** | `I_妖怪社会学/` | monster_sociology.py | monster-sociology.html | 5 类作案 69 起·10 种求救信号·10 坐骑下凡档案（实质惩罚率 0%） |
+| **I. 妖怪社会学** | `I_妖怪社会学/` | monster_sociology.py | monster-sociology.html | 5 类<!--doc-sync:exempt--> 作案 69 起·10 种求救信号·10 坐骑下凡档案（实质惩罚率 0%） |
 | **J. 权力与资源** | `J_权力与资源/` | power_resources.py | power-resources.html | 7 势力名义 vs 实权·8 晋升通道·10 长生资源链（蟠桃稀缺度 9.5） |
 | **K. 命运与轮回** | `K_命运与轮回/` | karma_reincarnation.py | karma-reincarnation.html | 8 生死簿篡改案·10 因果案例·6 道轮回系统·业力转化 70% |
 | **L. 商业模型** | `L_商业模型/` | business_model.py | business-model.html | 13 维度组织对比·6 阶段悟空职业 U 型曲线·5 妖怪公司 IPO 100% 失败 |
 
-### Phase 5 专题类（M-U，9 类，已全部完成）
+### Phase 5 专题类（M-U，9 类<!--doc-sync:exempt-->，已全部完成）
 
 | 类别 | 子目录 | 脚本 | 可视化页 | 关键维度 |
 |---|---|---|---|---|
@@ -216,7 +216,7 @@
 | **T. 反事实推断** | `T_反事实推断/` | counterfactual.py | counterfactual.html | 10 场景·和平共处/透明化监管/阴阳二气瓶实验等 |
 | **U. 文化错位** | `U_文化错位/` | cultural_misreading.py | cultural-misreading.html | 12 术语翻译认知偏差·东亚放大元素热力图 |
 
-### Phase 6 跨学科创意类（V-AH，13 类，已全部完成）
+### Phase 6 跨学科创意类（V-AH，13 类<!--doc-sync:exempt-->，已全部完成）
 
 | 类别 | 子目录 | 脚本 | 可视化页 | 关键维度 |
 |---|---|---|---|---|
@@ -243,8 +243,8 @@
 | **DRL 产物** | `output/drl-r1-findings.md`、`output/audit-baseline.md`、`output/v08-data-check.md`、`output/v08-embedded-data.js`、`output/drl-screenshot-review.md` | v0.7 baseline 审查 + v0.8 DRL R1→R4 收敛记录 + B1 数据检查 + EMBEDDED_DATA 统一命名 + W010.2 截图审查 DRL 收敛记录 |
 | **截图审查工具** | `batch_screenshots.js`、`slice_screenshots.py`、`detect_unwrapped_tables.py`、`package.json` | Playwright 批量全页截图 + Pillow 800px 切片 + 静态/运行时表格溢出双轨检查 + Node 依赖声明 |
 | **截图审查产物** | `output/screenshots/` | full-page 截图（desktop/ + mobile/）、800px 切片（slices/）、`layout-audit-report.md`、`screenshot-summary.md`、`slice-index.md` |
-| **反向索引** | `output/file-index.md` | 文件→W 条目反向索引（400+ 行，45 HTML + 34 类 scripts + docs + 根目录 + Top 5 多次改动文件），与 CHANGELOG.md 双向链接 |
-| **工程化工具**（v2.2.16 新增） | `run_all.py`、`new_page.py`、`release.py`、`drl_spotcheck.py`、`data_validate.py`、`docs_index.py`、`sync_docs.py --fix` | 批量调度 34 类分析脚本 + 页面脚手架 + 版本发布体检 + DRL spot-check + JSON 结构校验（131 文件）+ 文档索引生成（321 篇·`docs/INDEX.md`）+ 6 文件文档一致性自动修复 |
+| **反向索引** | `output/file-index.md` | 文件→W 条目反向索引（400+ 行，45 HTML + 34<!--stats:script_classes--> 类 scripts + docs + 根目录 + Top 5 多次改动文件），与 CHANGELOG.md 双向链接 |
+| **工程化工具**（v2.2.16 新增） | `run_all.py`、`new_page.py`、`release.py`、`drl_spotcheck.py`、`data_validate.py`、`docs_index.py`、`sync_docs.py --fix` | 批量调度 34<!--stats:script_classes--> 类分析脚本 + 页面脚手架 + 版本发布体检 + DRL spot-check + JSON 结构校验（131 文件）+ 文档索引生成（`docs/INDEX.md` 全量条目）+ 6 文件文档一致性自动修复 |
 | **目录索引生成**（W779 新增） | `gen_folder_docs.py` | 为在管目录补齐 `index.md`（逐文件清单·机器可读）+ `README.md`（目录导读·人读）；幂等（已存在跳过·大小写不敏感判重防覆写 `INDEX.md`）·自动排除 gitignored 路径、治理树（10-方法论沉淀/11-方案报告/docs 01-06 顶层）与构建产物；`--dry-run`/`--force` |
 
 ## timeline/ 时间线专题
@@ -270,7 +270,7 @@
 
 | 脚本 | 用途 |
 |---|---|
-| `章节切分.py` | 将全文按"第N回 标题"切分为 100 个分回文件，支持中文数字与阿拉伯数字，可清理杂质 |
+| `章节切分.py` | 将全文按"第N回 标题"切分为 100 个<!--doc-sync:exempt--> 分回文件，支持中文数字与阿拉伯数字，可清理杂质 |
 
 ## 命名规范
 
@@ -289,5 +289,5 @@
 
 - **v0.x-v1.0**（2026-07-21 至 07-23）：项目骨架 + A-AH 34 类脚本 + docs 内容体系 + Phase 7 逐回解读启动
 - **v2.0-v2.1**（2026-07-23 至 07-27）：A1 逐回解读 100 回收束 + A2/A3/A4 方向批量扩容 + BookNLP 集成（W100）
-- **v2.2**（2026-07-28 至 08-05）：多方向并行批次 + 叙事学专题矩阵 + 测试体系建立 + A4 209 篇收束
-- **v2.3**（2026-08-05 至今）：设计系统统一 + CI/CD 深化（a11y/CSP/截图回归）+ 英文站 138 页英文化闭环 + S4 学术投稿准备 + RAG provider 化
+- **v2.2**（2026-07-28 至 08-05）：多方向并行批次 + 叙事学专题矩阵 + 测试体系建立 + A4 209<!--stats:a4_docs--> 篇收束
+- **v2.3**（2026-08-05 至今）：设计系统统一 + CI/CD 深化（a11y/CSP/截图回归）+ 英文站 138<!--stats:site_en_html--> 页英文化闭环 + S4 学术投稿准备 + RAG provider 化

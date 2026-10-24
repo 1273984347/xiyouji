@@ -29,7 +29,7 @@
 
 - **文档（Docs）**：以 Markdown 写就的逐回解读、人物分析、主题专题、文化背景、诗词赏析、个人随笔
 - **站点（Site）**：可浏览的 HTML 页面，含导航、时间线、人物关系图等
-- **数据可视化**：所有数据维度均配套 D3.js 可视化页面（古典宣纸风配色 #faf7f2/#c8463a/#3a6b8c），含折线图、柱状图、桑基图、雷达图、散点图、饼图、热力图、矩阵图等，覆盖 34 类主题（A-AH）+ 批评史双联 + 弹幕博物馆 + 新功能三页面
+- **数据可视化**：所有数据维度均配套 D3.js 可视化页面（古典宣纸风配色 #faf7f2/#c8463a/#3a6b8c），含折线图、柱状图、桑基图、雷达图、散点图、饼图、热力图、矩阵图等，覆盖 34<!--stats:script_classes--> 类主题（A-AH）+ 批评史双联 + 弹幕博物馆 + 新功能三页面
 
 **数据维度全景（133 维）**：
 
@@ -75,7 +75,7 @@
 
 | 物料 | 中文 | English |
 | --- | --- | --- |
-| 打印稿（双面 PDF · 2 页 A4） | [xiyouji-flyer-a4.pdf](assets/promo/output/xiyouji-flyer-a4.pdf) | [xiyouji-flyer-a4-en.pdf](assets/promo/output/xiyouji-flyer-a4-en.pdf) |
+| 打印稿（双面 PDF · 2 页<!--doc-sync:exempt--> A4） | [xiyouji-flyer-a4.pdf](assets/promo/output/xiyouji-flyer-a4.pdf) | [xiyouji-flyer-a4-en.pdf](assets/promo/output/xiyouji-flyer-a4-en.pdf) |
 | 分享图（150dpi PNG） | [正面](assets/promo/output/xiyouji-flyer-a4-front.png) · [背面](assets/promo/output/xiyouji-flyer-a4-back.png) | [Front](assets/promo/output/xiyouji-flyer-a4-en-front.png) · [Back](assets/promo/output/xiyouji-flyer-a4-en-back.png) |
 | 可编辑源（唯一真源） | [xiyouji-flyer-a4.html](assets/promo/xiyouji-flyer-a4.html) | [xiyouji-flyer-a4-en.html](assets/promo/xiyouji-flyer-a4-en.html) |
 
@@ -89,7 +89,7 @@
 - 🗺️ **主题与情节专题**：大闹天宫/八十一难/真假美猴王/取经团队动力学 → [docs/03-主题与情节专题/](docs/03-主题与情节专题/)
 - 📚 **文化与历史背景**：成书背景/佛道思想/明代社会隐喻/版本演变 → [docs/04-文化与历史背景/](docs/04-文化与历史背景/)
 - 📜 **诗词歌赋**：原著诗词赏析/回目对联/主题诗词创作 → [docs/05-诗词歌赋/](docs/05-诗词歌赋/)
-- 💭 **个人随笔**：现代视角解读/职场映射/时代变迁中的西游（44 篇）→ [docs/06-个人随笔/](docs/06-个人随笔/)
+- 💭 **个人随笔**：现代视角解读/职场映射/时代变迁中的西游（44<!--stats:a2_docs--> 篇）→ [docs/06-个人随笔/](docs/06-个人随笔/)
 - 📊 **数据可视化**：87<!--stats:visualization_pages--> 个 D3.js 可视化/交互页（弹幕博物馆/情感热力图/AI 名人对话/原著检索等）→ [site/data/](site/data/)
 - 🔍 **术语速查**："心猿""木母""黄婆"等内丹术语 → [术语表](docs/00-导读/术语表.md)
 
@@ -106,7 +106,7 @@
 - **教学者**：参考 `docs/01-全书逐回解读/` 与 `timeline/`
 - **同好创作者**：在 `docs/05-诗词歌赋/` 与 `docs/06-个人随笔/` 自由发挥
 - **数据可视化爱好者**：`site/data/` 87<!--stats:visualization_pages--> 个可视化页（含 V3 标签云全站导航 W313）
-- **跨学科研究者**：重点看 V-AH 13 类（认知心理/生态学/法理经济/物质考古/语言学等）
+- **跨学科研究者**：重点看 V-AH 13 类<!--doc-sync:exempt-->（认知心理/生态学/法理经济/物质考古/语言学等）
 - **全年龄段读者**：Q++ 名人弹幕博物馆（幼儿表情包墙·初中观点 PK·高中政治隐喻解码·大学学术谱系·打工人看金圣叹反内卷）
 
 ---
@@ -117,7 +117,7 @@
 
 > **📖 阅读契约（W707）**：普通读者通读「普通读者专区」；Agent/开发者只读「开发者/维护者专区」与「AI 生成说明」。先读「是什么/为什么」（下一行），再按路径深入。
 >
-> **当前批次 W903（2026-10-24）**：touches 注记归一与对称目录前缀匹配闭假绿，门禁45提示语补暂存顺序·A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> **当前批次 W904（2026-10-24）**：C5c 裸聚合七十四处清零并转判红，统计器增七个分板块键，豁免机制补命中后置精确形态·A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 >
 > **版本号说明（W711 方案 D 起）**：本项目的批次编号为 **W###**（单调递增·永不复用·唯一对账键），`v2.3` 为内容阶段标签（定性·无 patch 位·不适用 SemVer）；W710 及更早的历史版本号 `vX.Y.Z` 保留原文。判断「这批改了什么」看 [CHANGELOG.md](CHANGELOG.md) 顶段。
 >
@@ -138,7 +138,7 @@
 
 ```
 xiyouji/
-├── docs/                  # Markdown 文档主体（18 个板块）
+├── docs/                  # Markdown 文档主体（编号板块 00-12 + 专项目录）
 │   ├── 00-导读/           # 项目说明、阅读指南、版本概览、术语表
 │   ├── 01-全书逐回解读/   # 100 回逐回解读
 │   ├── 02-人物深度分析/   # 主要人物谱系分析
