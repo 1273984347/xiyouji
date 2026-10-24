@@ -34,6 +34,14 @@ COVER_EN = SITE / "static" / "img" / "og-cover-ink-en.jpg"  # 现役英文站分
 BASE = "https://1273984347.github.io/xiyouji/"
 OG_IMAGE_ZH = BASE + "static/img/og-cover-ink-zh.jpg"
 OG_IMAGE_EN = BASE + "static/img/og-cover-ink-en.jpg"
+# W922（用户裁决批准改管控件）：og:image 由单值改白名单——W893 十二张主题分享图
+#（og-01..og-12.webp·1200x630）按页接线·zh 页允许集 = 现役水墨封面 + 12 张；en 页维持单值。
+OG_ZH_ALLOWED = {OG_IMAGE_ZH} | {
+    BASE + "static/images/og-%02d-%s.webp" % (i, kw)
+    for i, kw in enumerate(
+        ["kongkong", "tangseng", "bailongma", "jingubang", "bajiaoshan", "jingping",
+         "qujingchuanshan", "hequshiqiao", "shankouguanai", "canjuan", "gudeng", "tongjing"], 1)
+}
 # 两个排除面语义不同：SEO 注入面=855 页（只排模板壳，W771 现役实测）；
 # sitemap 收录面=851 页（与 verify_delivery 现役 sitemap 门禁期望集一致：另排本地工具页两页 + 两个 data/-view 辅助页；404.html 按门禁要求收录）
 SEO_EXCLUDE = {"_template.html", "data/_shell.html"}
@@ -61,6 +69,13 @@ def en_candidate(zh_rel: str) -> str:
 def og_image_for(rel: str) -> str:
     """分语言 og:image 期望值（W880·用户 2026-10-22 批准改管控件）：en/ 前缀为英文站，其余为中文站。"""
     return OG_IMAGE_EN if rel.replace("\\", "/").startswith("en/") else OG_IMAGE_ZH
+
+
+def og_image_ok(rel: str, content: str) -> bool:
+    """og:image 合法性（W922 白名单·用户裁决批准改管控件）：en 页 == 英文封面；zh 页 ∈ 白名单（现役+12 张主题图）。"""
+    if rel.replace("\\", "/").startswith("en/"):
+        return content == OG_IMAGE_EN
+    return content in OG_ZH_ALLOWED
 
 
 def _check_og_cover() -> list[str]:
@@ -100,13 +115,20 @@ def _check_head(pages) -> list[str]:
             ('name="description"', "description"),
             (f'<link rel="canonical" href="{url}">', "canonical"),
             ('property="og:title"', "og:title"),
-            (f'<meta property="og:image" content="{og_image_for(rel)}">', "og:image"),
+            ("og:image", None),  # W922：og:image 存在性与白名单由循环下方统一断言
             (f'<meta property="og:url" content="{url}">', "og:url"),
             ('name="twitter:card"', "twitter:card"),
         ]
         for probe, name in checks:
+            if probe is None:
+                continue
             if probe not in head:
                 violations.append(f"R1 {rel} 缺 {name}")
+        m = re.search(r'property="og:image" content="([^"]+)"', head)
+        if not m:
+            violations.append(f"R1 {rel} 缺 og:image")
+        elif not og_image_ok(rel, m.group(1)):
+            violations.append(f"R1 {rel} og:image 不在白名单：{m.group(1)}")
     return violations
 
 

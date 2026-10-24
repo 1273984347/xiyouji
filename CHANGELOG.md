@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W921），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W922），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,20 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W922（2026-10-24）：E 裁决落地批（12 项闭环：浮窗文案+日志收官+og 白名单接线+NOTE 盘点+八项登记）
+
+
+
+> **来源**：用户 2026-10-24 对 T-18 E 档 12 项裁决「全部按建议」——W922 落地批（四件工程 + 八项登记）。
+
+> - **文件**：site/static/js/rag-chat.js、docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md、scripts/preflight_check.py、scripts/check_seo_head.py、site/index.html、site/reader/index.html、site/curated.html、site/data/ 十页（og 接线）、docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w922_spec.json、scripts/output/_cascade_files_W922.txt（逐件行见 file-index W922 段）。
+
+**四件工程落地**：① 浮窗文案订正（生成式问答指向桌面版渡口问津）；② 干扰日志窗口收官归档（15 行封档·机器触发点常驻·preflight 提示常量同步）；③ og:image 判据白名单化（现役两图 + W893 十二张主题图·管控件经裁决批准）并按主题接线 12 页（index/reader 总目/curated + 九个 data 页）；④ NOTE 毕业盘点复核——C5c 已毕业（W904）、余 C7 与色盲 WARN 均为合法常驻说明，**无待毕业项**。
+
+**八项登记性裁决**落 T-18 E 档：Phase-1 选 ONNX（随批执行）/ agent-web 三项与 PD 套件随 D2 冻结（UV≥30 复议）/ 仓外编制位缓 / BL 维持登记 / S2·S4 待用户定时点 / 计划补齐维持冻结 / Q2 等满 10 批。
+
+**验证**：check_seo_head 855 页全过（含 12 页新图白名单）·交互门禁 0 FAIL·preflight 单测 19/19·ruff 过。
 
 ### W921（2026-10-24）：CHANGELOG 主动瘦身批（B-W855-05 清偿·102 段迁一级归档·D1 全清）
 
