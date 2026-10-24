@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W904），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W905），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -18,6 +18,21 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 
+### W905（2026-10-24）：两项存量红项清理（暗色门禁补色 + npm 依赖漏洞清偿）
+
+
+
+> **来源**：用户 2026-10-24 令「清」——清 CI 上两项非 required 的存量红项（npm audit 依赖漏洞 / Dark-state gate 暗色门禁）。
+
+> - **文件**：site/data/character-semantic-network.html、site/en/character-semantic-network.html、xiyouji-agent-web/package.json、xiyouji-agent-web/package-lock.json、scripts/output/_vermilion_solid_cache.json、scripts/output/_w905_spec.json、scripts/output/_cascade_files_W905.txt、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、scripts/output/file-index.md。
+
+> - **暗色门禁根修（补色规则而非改判据）**：红项仅 2 条——中英两版 `character-semantic-network.html` 的热力图各有 1 个 `invisible` 形状（`rgb(163, 1, 38)`·亮度 0.0795 < 0.16）。取证链：页面暗色态用**枚举式**提亮清单（`html[data-theme="dark"] svg [fill="rgb(128, 0, 38)" i] { fill: #c1858d !important; }` 等 16 条）覆盖深色填充，而 **W674（88431cee）修正热力图色阶二次归一化**（`d3.scaleSequential(d => d3.interpolateYlOrRd(d / maxWeight)).domain([0, maxWeight])` → `d3.scaleSequential(d3.interpolateYlOrRd).domain([0, maxWeight])`）后色阶满映射，新增中间值 `rgb(163, 1, 38)` 不在枚举清单内 ⇒ 漏网变暗。**修法**：两页各补 1 条同族提亮规则（`rgb(163, 1, 38)` → `#ce7e88`·亮度 0.2982），与既有 16 条同构，不改判据、不改基线、不改色阶语义。
+
+> - **npm 依赖漏洞清偿（4 包）**：`dompurify` 3.4.16→3.4.17（critical·SAFE_FOR_TEMPLATES 绕过 / IN_PLACE 分离子树 / XHTML SMIL 三则公告）、`markdown-it` 14.3.2→14.3.3（high·两次二次时间 DoS·经 cherry-markdown 传递引入·用 `overrides` 抬版）、`body-parser` 2.3.0→2.4.0（high·压缩体尾字节 DoS·经 express 传递）、`vite` 8.3.1→8.3.5（high·dev 侧 6 则公告·launch-editor 命令注入与 fs.allow 绕过）；另加 `overrides` 强制 `zod` 4.6.7（`@tdesign-react/chat` 声明 zod ^3.24.2·漏洞范围 `zod <4.6.6` 覆盖全部 v3 且 v3 已 EOL 无修复版·而顶层 zod 4.6.7 才是运行时校验实际所用·override 后编译与测试均无回归）。
+
+> - **验收**：暗色门禁判据权威脚本复验——164 页全量 S2-desktop-dark 审计（`node scripts/_audit_render_states.js --states S2-desktop-dark --scope charts` + `node scripts/check_dark_state_gate.js`）→「OK 同页同类型缺陷数零新增，暗色门禁通过」（修前同一命令判红 2 项）；`npm audit --omit=dev --audit-level=high` → `found 0 vulnerabilities`（CI 口径·exit 0），全量口径（含 dev）亦 0；`npm run build`（tsc -b && vite build）exit 0；`npm run test:all` exit 0（集成 19 passed / 1 skipped·Windows 无 SIGTERM 语义属 CI 实跑项；客户端 5 文件 51 tests passed）。
+
+> - **状态**：已收官（两项存量红项均已消除·判据与基线未改·依赖升级零回归）。
 ### W904（2026-10-24）：C5c 裸聚合收敛（74 处清零·判据转 FAIL·stats 增 7 板块键·后置精确豁免）
 
 
