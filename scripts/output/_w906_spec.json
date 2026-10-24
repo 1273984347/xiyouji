@@ -1,0 +1,32 @@
+{
+ "batch": "W906",
+ "date": "2026-10-24",
+ "title": "W906 C4-f 三态化（并行批次登记行纯追加残留放行·多 Agent 误拦根修）",
+ "desc": "旁文档门禁残留判定三态化：他方登记行纯追加降提示放行，在位编辑照旧判红",
+ "head_entry": "2026-10-24（W906 C4-f 三态化批）",
+ "head_sentence": "残留判定三态化分流并行在途与漏加文件，纯追加放行删改照红，双向锁自测实证",
+ "changelog_body": "\n\n\n\n> **来源**：用户 2026-10-24 对「C4-f 三态化（多 Agent 并行误拦根修）」建议裁决「可以」——W904 收官提交被并行 W905 会话的台账认领行（未暂存）拦停一次的实录驱动。\n\n> - **文件**：scripts/check_doc_sync.py、docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w906_spec.json、scripts/output/_cascade_files_W906.txt（逐件行见 file-index W906 段）。\n\n**C4-f 三态化（并行在途与漏 add 分流）**：declared 文件的工作树残留，原二态判「漏 add」必红；现若该文件未暂存 diff 为**纯追加**（零删改行 + 新增行全部 `| WNNN ` 批次登记行形态）→ 降 NOTE 放行（他方在途·以 HEAD 为准不重做）——与 W896「未跟踪在途件容忍」同族收口。**在位编辑（如状态列收官回填）含删改行照旧必红**，判据无弱化。实现：`_foreign_append_only()` 在 build_inputs 逐 dirty 文件 `git diff` 判形（git 探测不可用则该文件不计入·保守回退原 FAIL·fail-closed 方向）；self-test 增 T32（纯追加放行）/T33（非追加仍红）双向锁，33/33；主判据实跑在本批未暂存认领行在场时出 NOTE 零红——修复目标当场实证。\n\n**审查报告增 F5 节**：C4-f 并行误拦的实录（含 package.json 混入暂存的处置）、根因（二态盲区）、修复与配套操作纪律（按清单 add / 他方件只移暂存不动磁盘 / 他方认领行随批携带标注归属）；遗留盘点表 F1 行订正为已修、新增本项已落地行。\n\n**验证**：self-test 33/33·主判据 C4-f 三态 NOTE 实证·ruff scripts/ All checks passed·pytest 858 passed 3 skipped·verify 全量核心全绿。\n",
+ "milestone_block": "- **W906 C4-f 三态化批**（用户批准「可以」·多 Agent 并行误拦根修）：\n  - declared 文件残留=「他方登记行纯追加」（零删改+全 | WNNN 形态）→ NOTE 放行；在位编辑仍红（判据无弱化）\n  - _foreign_append_only 探测 + T32/T33 双向锁（33/33）；主判据实跑 NOTE 零红当场实证\n  - 审查报告增 F5 节（实录/根因/修复/操作纪律）；pytest 858 passed",
+ "agents_note": "二〇二六年十月二十四日（W906）给旁文档门禁的残留判定装上了并 行分流。事情的起因是上一批收官提交被拦停了一次：另一个会话恰好在台账上登记了它的批次认领行，还没暂存，门禁一看这个文件有未提交改动就当成本会话漏加文件判了红——把「他方在途」误当「我方漏账」。修法是把判定从二态拆成三态：如果残留的改动是纯追加、且新增的每一行都是批次登记行的形态，就降级为提示放行；一旦混有删改（比如改状态列），照旧判红，判据没有半点弱化。两个负样本测试锁住两个方向，主判据当场拿自己未暂存的认领行实证了放行路径。配套的操作纪律一并写进审查报告：按清单加文件、他方在途件只移暂存不动磁盘、他方认领行随批携带入库时标注归属。八百五十八个测试全过。",
+ "file_index_rows": [
+  "| scripts/check_doc_sync.py | W906 | C4-f 三态化（管控件·用户批准）：declared 文件残留为「他方批次登记行纯追加」（零删改+全 | WNNN 形态）降 NOTE 放行·在位编辑仍红；新增 _foreign_append_only 探测（git diff 逐 dirty 文件）+ RE_BATCH_REGISTRY_ROW + self-test T32/T33（33/33） |",
+  "| docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md | W906 | 新增 F5 节（C4-f 并行误拦实录与修复）+ 遗留盘点表两行更新（F1 已修/W906 落地） |",
+  "| docs/00-导读/W批次编号对账表.md | W906 | W906 认领行与收官回填 |",
+  "| CHANGELOG.md | W906 | W906 段 |",
+  "| HANDOVER.md | W906 | 级联头尾链与里程碑块 |",
+  "| README.md | W906 | 当前批次版本行 |",
+  "| STRUCTURE.md | W906 | 当前批次版本行 |",
+  "| docs/00-导读/项目说明.md | W906 | 当前批次版本行 |",
+  "| .github/workflows/README.md | W906 | 工作流层区间与里程碑尾标记 |",
+  "| site/index.html | W906 | 页脚批次链插入 W906 |",
+  "| site/data/cross-time-danmaku.html | W906 | 页脚批次链插入 W906 |",
+  "| site/data/tag-cloud.html | W906 | 页脚批次链插入 W906 |",
+  "| site/dukou-engine.html | W906 | 页脚批次链插入 W906 |",
+  "| AGENTS.md | W906 | 版本脚注条目 |",
+  "| archive/docs/AGENTS-ARCHIVE.md | W906 | 脚注滚动迁入的最老条目 |",
+  "| CITATION.cff | W906 | version 同步为 W906 |",
+  "| scripts/output/file-index.md | W906 | W906 段插入 |",
+  "| scripts/output/_w906_spec.json | W906 | 本批级联 spec |",
+  "| scripts/output/_cascade_files_W906.txt | W906 | 级联落盘清单 |"
+ ]
+}
