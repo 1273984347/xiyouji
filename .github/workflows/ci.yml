@@ -44,7 +44,7 @@ jobs:
 
       - name: Install Playwright
         run: |
-          npm install playwright @playwright/test
+          npm install playwright@1.63.0 @playwright/test@1.63.0  # W913 钉版对齐 scripts/package-lock.json（T10 实证无约束安装绕过 lockfile 为真漂移面）
           npx playwright install --with-deps chromium
 
       - name: Start static server

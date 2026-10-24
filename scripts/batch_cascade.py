@@ -162,6 +162,10 @@ def _handover_rotate_oldest(s, ctx, nl, h1pos):
     oldest_w = pm.group(1)
     # W713 双形态 + 窗口限定进度段内（防后文待办/方法论区 bullet 误入旋转窗）
     blocks_all = [b for b in re.finditer(r"- \*\*(?:v[\d.]+ )?(W\d+)[^*]*\*+：", s) if b.start() > h1pos]
+    # W913：窗口不足 2 块不滚动（契约「只留最近 5 版」——不足时无盈可滚；原无条件滚动在
+    # 单块窗口必致空窗异常·阻断后续一切级联·W912/W913 两批连续实证）
+    if len(blocks_all) < 2:
+        return s
     tgt = [b for b in blocks_all if b.group(1) == "W" + oldest_w]
     if not tgt:
         raise AssertionError(f"未找到最老里程碑块 W{oldest_w}；现存块 {[b.group(1) for b in blocks_all]}")
