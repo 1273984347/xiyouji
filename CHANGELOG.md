@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W918），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W919），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,24 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W919（2026-10-24）：DB 三包批（B-DB-04 迁移框架 + B-DB-02 索引查询 + B-DB-03 约束降级）
+
+
+
+> **来源**：用户 2026-10-24 令「继续」——T-18 D1 真债首项（B-DB-02/03/04 三包·承接 W917 包一）。
+
+> - **文件**：xiyouji-agent-web/server/db.ts、xiyouji-agent-web/server/routes.ts、xiyouji-agent-web/server/api.integration.test.ts、docs/agent/agent-web.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w919_spec.json、scripts/output/_cascade_files_W919.txt（逐件行见 file-index W919 段）。
+
+**B-DB-04 迁移框架**：`MIGRATIONS[]` version 单调 + 事务执行 + user_version 记账（v1 吸收原 try/catch 手写探测迁移——W823 判定的静默吞错反模式退役；v2 包二四索引；v3 feedback 表重建——存量库补外键引用/message_id 单维唯一索引/created_at CHECK·重建期外键 OFF 后复位）。「改表定义对已有库无效」规范固化进 docs/agent/agent-web.md。实现期一真缺陷被集成测试当场抓出：v3 DROP TABLE 连带删索引、迁移漏重建致 ON CONFLICT 无约束可撞——补建后转绿。
+
+**B-DB-02 索引与查询**：sessions(updated_at)/messages(session,created)/feedback 两索引落位；会话列表 N+1 改写为单 SQL 子查询（limit 默认 50·上限 200·keyset 前端取页留应用批——当前会话量无截断·披露）。
+
+**B-DB-03 约束降级**：tool_calls JSON.parse 脏数据降级 null（原裸 parse 单行脏数据让整会话不可读）。
+
+**测试对齐**：反馈集成测试从虚构 ID 时代（无外键约束的写法）改为先落真实 session/message 底数——外键正确拒绝虚构引用正是 W917 修复本体的回归证明。
+
+**验证**：tsc 零错·test:server 97 passed 零挂·test:integration 19 passed 零挂·test:client 51 passed 零挂。
 
 ### W918（2026-10-24）：检索降级批（B-ARCH-01 清偿·波二九件全清）
 

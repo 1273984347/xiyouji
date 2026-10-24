@@ -78,17 +78,65 @@ db.exec(`
   CREATE UNIQUE INDEX IF NOT EXISTS idx_feedback_message ON feedback(message_id);
 `);
 
-// 数据库迁移：添加 sdk_session_id 列（如果不存在）
-try {
-  const tableInfo = db.prepare("PRAGMA table_info(sessions)").all() as Array<{ name: string }>;
-  const hasColumn = tableInfo.some(col => col.name === 'sdk_session_id');
-  if (!hasColumn) {
-    db.exec("ALTER TABLE sessions ADD COLUMN sdk_session_id TEXT");
-    console.log("[DB] Added sdk_session_id column to sessions table");
+// 迁移框架（W919 B-DB-04·W823 包四）：version 单调·事务内执行·user_version 记账。
+// 教训固化：改表定义对已存在的库无效（SQLite 无 ADD CONSTRAINT）——一切 schema 变更走本清单。
+// v1 吸收原手写迁移（sdk_session_id 列·try/catch 形态按 W823 判定为「静默吞错」反模式）。
+const MIGRATIONS: Array<{ version: number; up(d: import("better-sqlite3").Database) }> = [
+  {
+    version: 1,
+    up(d) {
+      const tableInfo = d.prepare("PRAGMA table_info(sessions)").all() as Array<{ name: string }>;
+      if (!tableInfo.some(col => col.name === 'sdk_session_id')) {
+        d.exec("ALTER TABLE sessions ADD COLUMN sdk_session_id TEXT");
+      }
+    },
+  },
+  // v2（W919 B-DB-02 包二）：查询模式索引——纯性能·IF NOT EXISTS 幂等
+  {
+    version: 2,
+    up(d) {
+      d.exec(`
+        CREATE INDEX IF NOT EXISTS idx_sessions_updated_at ON sessions(updated_at DESC);
+        CREATE INDEX IF NOT EXISTS idx_messages_session_created ON messages(session_id, created_at);
+        CREATE INDEX IF NOT EXISTS idx_feedback_created_at ON feedback(created_at);
+        CREATE INDEX IF NOT EXISTS idx_feedback_session_id ON feedback(session_id);
+      `);
+    },
+  },
+  // v3（W919 B-DB-03 包三）：feedback 表重建——旧库补外键引用与 message_id 单维唯一
+  // （新库 DDL 已含·本迁移对存量库生效；重建期外键必须 OFF·W823 §7.1 口径）
+  {
+    version: 3,
+    up(d) {
+      d.pragma('foreign_keys = OFF');
+      d.exec(`
+        CREATE TABLE feedback_new (
+          id TEXT PRIMARY KEY,
+          session_id TEXT NOT NULL REFERENCES sessions(id) ON DELETE CASCADE,
+          message_id TEXT NOT NULL REFERENCES messages(id) ON DELETE CASCADE,
+          verdict TEXT NOT NULL CHECK (verdict IN ('up','down')),
+          comment TEXT,
+          created_at TEXT NOT NULL CHECK (created_at GLOB '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]T[0-9][0-9]:[0-9][0-9]:[0-9][0-9].[0-9][0-9][0-9]Z')
+        );
+        INSERT INTO feedback_new SELECT id, session_id, message_id, verdict, comment, created_at FROM feedback;
+        DROP TABLE feedback;
+        ALTER TABLE feedback_new RENAME TO feedback;
+        CREATE UNIQUE INDEX IF NOT EXISTS idx_feedback_message ON feedback(message_id);
+      `);
+      d.pragma('foreign_keys = ON');
+    },
+  },
+];
+function migrate(d: import("better-sqlite3").Database): void {
+  const cur = (d.pragma('user_version', { simple: true }) as unknown as number);
+  for (const m of MIGRATIONS) {
+    if (m.version > cur) {
+      d.transaction(() => m.up(d))();
+      d.pragma(`user_version = ${m.version}`);
+    }
   }
-} catch (e) {
-  // 忽略错误（列可能已存在）
 }
+migrate(db);
 
 // 反馈（W600）
 export interface DbFeedback {
@@ -135,6 +183,14 @@ export interface DbMessage {
 // ============= 会话操作 =============
 
 // 获取所有会话
+// W919 B-DB-02：会话列表单 SQL 版（含 message_count 子查询·ORDER BY updated_at DESC·LIMIT）
+export function listSessionsWithMessageCount(limit: number): Array<Record<string, unknown>> {
+  return db.prepare(`
+    SELECT s.*, (SELECT COUNT(*) FROM messages m WHERE m.session_id = s.id) AS message_count, message_count AS messageCount
+    FROM (SELECT s2.*, (SELECT COUNT(*) FROM messages m2 WHERE m2.session_id = s2.id) AS message_count FROM sessions s2 ORDER BY s2.updated_at DESC LIMIT ?) AS s
+  `).all(limit) as Array<Record<string, unknown>>;
+}
+
 export function getAllSessions(): DbSession[] {
   const stmt = db.prepare('SELECT * FROM sessions ORDER BY updated_at DESC');
   return stmt.all() as DbSession[];
