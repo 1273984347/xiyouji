@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W913），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W914），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -18,6 +18,25 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 
+### W914（2026-10-24）：英文版 README（完整对照版 + 双向语言互链）
+
+
+
+> **来源**：用户 2026-10-24 令「增加一个英文版的 README」（本批原拟 W911·并行会话本地连立 W912/W913·为免与在途号段冲突，改取下一号 W914）。
+
+> - **文件**：README.en.md、README.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w914_spec.json、scripts/output/_cascade_files_W914.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/file-index.md、CHANGELOG.md、HANDOVER.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff。
+
+> - **交付形态**：完整对照版（非精简摘要）——与中文 README 逐段对应，标题沿用英文站官方名「Journey to the West · Annotated」。
+
+> - **三条设计决策**：① **零版本号**——英文版不写「当前批次 W###」行（该字段由级联单写），改指 CHANGELOG 顶段 ⇒ 英文版不必随批次逐次维护、不会漂移；② **语言边界如实标注**——站内英文版是完整版（`/en/`），但 `docs/` 长文仍为中文，英文版开头直接写明；③ **站内链接指向英文站**——在线体验与宣传单页预览均指向 `/en/` 与 `-en` 资产。
+
+> - **配图**：沿用中文版同款（复用仓内已有资产·零外域依赖）——顶部水墨山景 banner + 「📊 Visualization Samples」浅色四张（关系网络/热力图/雷达图/时间线）+ 暗色两张 + 宣传单页英文版正面预览；alt 全英文描述。
+
+> - **双向互链**：中文 README 顶部加 `[English](README.en.md) | 简体中文` 语言切换行，目录树补 `README.en.md` 一行；英文版顶部反向互链。
+
+> - **验证**：全仓链接校验 20814 条 0 broken（英文版新增 51 条链接全有效）·英文版本地渲染逐屏核对（标题/语言切换/banner/四枚徽章/可视化样例组/单页预览/开发者区折叠块）全部正常 ·英文版内数字沿用 `<!--stats:*-->` 实体化标记（与中文版同键）⇒ 数据变更时同源。
+
+> - **状态**：已收官（英文版 README 入库·双链互通）。
 ### W913（2026-10-24）：波二小项四件批（T04 头订正 + bump 测试关闭 + E2E 钉版 + 站点数字失真修正与对账面扩展）
 
 
