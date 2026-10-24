@@ -10,14 +10,20 @@
 > **字段语义（W716 注）**：`introduced_by`=口径首次**正式化**批次（非历史首次出现批次）；`last_changed_by`=stats.py **检出**值变更的最近批次（建账前变更不记，如 site/reader 621→622 系主题枢纽页批次新增、早于建账）；`generator` 恒为 `scripts/stats.py` 故省略列。
 
 | a1_a6_docs | 615 | docs/01-06 六板块顶层内容 .md（排除 README） | W505 | W505 |
+| a2_docs | 44 | docs/06-个人随笔/*.md（排除 README） | W904 | W904 |
+| a3_docs | 215 | docs/02-人物深度分析/*.md（排除 README） | W904 | W904 |
 | a4_docs | 209 | docs/03-主题与情节专题/*.md（排除 README） | W722 | W722 |
+| a5_docs | 34 | docs/04-文化与历史背景/*.md（排除 README） | W904 | W904 |
+| a6_docs | 13 | docs/05-诗词歌赋/*.md（排除 README） | W904 | W904 |
+| cognition_docs | 3 | docs/08-提升认知/*.md（排除 README） | W904 | W904 |
 | csp_covered | 856 | html_total − _template.html（generate_csp TEMPLATE_EXCLUDE） | W459 | W459 |
 | gate_count | 49 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | W883 |
 | html_total | 857 | site/**/*.html（递归全站） | W459 | W459 |
 | inline_css_pages | 330 | site 全树含 INLINED 标记页 | W459 | W894 |
+| learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W904 |
 | methodology_docs | 24 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W755 |
-| pytest_collected | 855 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W897 |
-| report_docs | 54 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W893 |
+| pytest_collected | 861 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W903 |
+| report_docs | 55 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W902 |
 | scan_files | 855 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W459 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
 | seo_scanned | 855 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | W591 |
@@ -25,9 +31,25 @@
 | site_en_html | 138 | site/en/*.html | W528 | W528 |
 | site_reader_html | 622 | site/reader/**/*.html | W593 | W593 |
 | site_root_html | 9 | site/*.html | W459 | W459 |
+| spirit_docs | 4 | docs/09-精神塑造/*.md（排除 README） | W904 | W904 |
 | visualization_pages | 87 | site/data_html − _shell.html | W459 | W459 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W904（2026-10-24 17:49:07）
+- a2_docs: None → 44
+- a3_docs: None → 215
+- a5_docs: None → 34
+- a6_docs: None → 13
+- cognition_docs: None → 3
+- learn_docs: None → 4
+- spirit_docs: None → 4
+
+### W903（2026-10-24 01:59:44）
+- pytest_collected: 855 → 861
+
+### W902（2026-10-24 01:35:09）
+- report_docs: 54 → 55
 
 ### W897（2026-10-23 22:08:01）
 - pytest_collected: 844 → 855

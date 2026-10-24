@@ -56,3 +56,42 @@ def test_conflict_is_detected_across_separators():
     assert pf.touches_conflict(ledger_touches, mine) == ["scripts/b.py"]
     # 反向：完全不相交时不得误报
     assert pf.touches_conflict(pf._split_touches("x.py·y.py"), pf._split_touches("z.py")) == []
+
+
+# ---- W903：语义归一族（注记剥离 + 目录前缀匹配·机制审查报告 F1）----
+
+def test_split_touches_strips_annotation():
+    """带尾注声明的元素须归一为纯路径（W901 认领行实证形态）。"""
+    assert pf._split_touches("scripts/check_doc_sync.py（管控件·用户已批）") == {"scripts/check_doc_sync.py"}
+
+
+def test_wildcard_dir_conflicts_with_file_inside():
+    """X/** 目录声明 vs 对方具体文件声明必须报冲突（旧字面比对恒空·假绿）。"""
+    ledger = pf._split_touches("docs/11-方案报告/**（22 文件移动 + README 重构）")
+    mine = pf._split_touches("docs/11-方案报告/README.md")
+    assert pf.touches_conflict(ledger, mine) != []
+
+
+def test_dir_slash_form_conflicts_with_file_inside():
+    """X/ 斜杠目录形态同样前缀命中。"""
+    assert pf.touches_conflict({"docs/11-方案报告/"}, {"docs/11-方案报告/计划方案/T01.md"}) != []
+
+
+def test_prefix_match_is_bidirectional():
+    """本方声明目录、对方声明具体文件时同样命中（对称）。"""
+    assert pf.touches_conflict({"docs/agent/pitfalls.md"}, {"docs/agent/**"}) != []
+
+
+def test_prefix_match_no_false_positive_on_sibling_names():
+    """前缀须整段（X/）——同名前缀的兄弟路径不得误报。"""
+    assert pf.touches_conflict({"CHANGELOG.md"}, {"CHANGELOGS.md"}) == []
+    assert pf.touches_conflict({"docs/x"}, {"docs2/y"}) == []
+
+
+def test_w900_ledger_row_replay():
+    """W900 认领行原文回放：通配+注记形态 vs 并行批可能声明的任一子目录文件。"""
+    w900 = pf._split_touches(
+        "docs/11-方案报告/**（22 文件移动 + README 重构）· docs/10-方法论沉淀/多Agent干扰治理与touches纪律.md · CHANGELOG.md")
+    other = pf._split_touches("docs/11-方案报告/审查与评审/架构评审报告-2026-10-21.md · site/index.html")
+    hits = pf.touches_conflict(w900, other)
+    assert any("架构评审报告" in h for h in hits), "目录面撞车必须被机器拦下（W825/W893 两起漏拦的根因）"

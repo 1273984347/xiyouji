@@ -1,0 +1,32 @@
+{
+ "batch": "W901",
+ "date": "2026-10-24",
+ "title": "W901 C5b 对账面恢复 + W900 披露项清偿（递归 glob / W757 链接新址 / T-16·T-17 补登）",
+ "desc": "对账面随递归恢复，历史段链接改指新址，两件计划档补登索引",
+ "head_entry": "2026-10-24（W901 C5b 对账面恢复与披露项清偿批）",
+ "head_sentence": "旁文档对账面改递归恢复覆盖，历史段一条链接改指新址，两件计划档补登索引",
+ "changelog_body": "\n\n\n\n> **来源**：用户 2026-10-24 对 W900 批披露项裁决「批准；改。落库」——三件披露项/遗留项随批清偿；管控件改动（check_doc_sync.py）经用户明示批准。\n\n> - **文件**：scripts/check_doc_sync.py、docs/11-方案报告/README.md、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w901_spec.json、scripts/output/_cascade_files_W901.txt（逐件行见 file-index W901 段）。\n\n**① C5b 对账面恢复（管控件·已批）**：`check_doc_sync.py` 的 `c5b_extra_surfaces()` 第二面由「`docs/11-方案报告/*.md` 根层非递归 glob」改为「`**/*.md` 递归收集、`计划方案/` 子目录除外」——W900 目录分区把带 stats 实体标记的《系统架构方案》《取经编制表》移入子目录后根层 glob 失明（W900 段披露的对账面缩水），本批经用户批准恢复覆盖；**计划方案豁免条款原样保留并补实证**：该子目录实测 8 件计划档带冻结 stats 标记（时点快照纪律·同 CHANGELOG 历史段），入面对账即假红，docstring 与文件头描述同步更新。\n\n**② W757 段链接改指新址（历史段改动·经用户明示批准）**：CHANGELOG W757 段内 1 条工程基础设施审计报告链接由旧址改指 `docs/11-方案报告/审查与评审/工程基础设施薄弱点审计报告-2026-10-16.md`——仅地址订正，叙事零改动；该链接为 CHANGELOG 全文唯一指向本目录的真实链接，改后无断链（lint 复验 5480 链接 0 broken）。\n\n**③ T-16/T-17 补登**：README 计划方案表补第 19/20 行（摘要据两件自述与 W893/W896 台账行提炼），节头「表格登记 18 行」订正为 20 件全登记，W900 的登记缺口披露行撤除、按补登记惯例（W858/W884 同式）在节首注记区留 W901 补登记注记；README §二 C5b 提示行由「待批」更新为「W901 恢复」口径。\n\n**验证**：check_doc_sync 实跑 C5b 递归新面零 FAIL（系统架构方案/取经编制表恢复对账·README 内占位标记串不受影响）；ruff（CI 口径 `ruff check scripts/`）All checks passed；pytest 全量 852 passed 3 skipped；lint_links --dir docs 5480 链接 0 broken。\n",
+ "milestone_block": "- **W901 C5b 对账面恢复 + W900 披露项清偿批**（用户批准「批准；改。落库」）：\n  - check_doc_sync C5b 扩展面 glob 根层改递归（管控件·已批）·计划方案/ 时点快照豁免保留（8 件冻结标记实证）\n  - CHANGELOG W757 段 1 条链接随批准改指新址（仅地址）；README 补登 T-16/T-17 两行 + C5b 提示行更新\n  - 验证：C5b 递归面零 FAIL · pytest 852 passed · ruff 过 · lint 5480 链接 0 broken",
+ "agents_note": "二〇二六年十月二十四日（W901）清偿上一批登记的三笔账。第一笔是用户批准的门禁修复：旁文档同步门禁里那个只扫方案报告根层的通配，在目录分区后漏掉了两篇带统计标记的现役报告，本批改成递归收集——但计划方案子目录照旧豁免，因为那八件计划档里的数字是落笔时冻结的基线，拿去对活账只会假红。第二笔是变更日志七五七段里那条审计报告链接，经用户明示批准改指新址，只动地址不动叙事。第三笔是索引欠账：两件早已入库的计划报告补登进目录表，节点计数随之订正。三笔都有机器复验：递归新面零红、八百五十二个测试全过、五千四百八十条链接零断链。",
+ "file_index_rows": [
+  "| scripts/check_doc_sync.py | W901 | C5b 扩展面 glob 根层改递归（管控件·用户 2026-10-24 批准；计划方案/ 时点快照豁免原样保留——实测该子目录 8 件带冻结 stats 标记·入面即假红） |",
+  "| docs/11-方案报告/README.md | W901 | T-16/T-17 两件补登计划方案表（W893/W896 遗留登记缺口）+ 节头计数订正 + C5b 提示行更新为已恢复口径 + 登记缺口披露行撤除 |",
+  "| CHANGELOG.md | W901 | W757 段 1 条审计报告链接随批准改指新址（仅地址不改叙事）+ W901 段 |",
+  "| docs/00-导读/W批次编号对账表.md | W901 | W901 认领行与收官回填 |",
+  "| HANDOVER.md | W901 | 级联头尾链与里程碑块 |",
+  "| README.md | W901 | 当前批次版本行 |",
+  "| STRUCTURE.md | W901 | 当前批次版本行 |",
+  "| docs/00-导读/项目说明.md | W901 | 当前批次版本行 |",
+  "| .github/workflows/README.md | W901 | 工作流层区间与里程碑尾标记 |",
+  "| site/index.html | W901 | 页脚批次链插入 W901 |",
+  "| site/data/cross-time-danmaku.html | W901 | 页脚批次链插入 W901 |",
+  "| site/data/tag-cloud.html | W901 | 页脚批次链插入 W901 |",
+  "| site/dukou-engine.html | W901 | 页脚批次链插入 W901 |",
+  "| AGENTS.md | W901 | 版本脚注条目 |",
+  "| archive/docs/AGENTS-ARCHIVE.md | W901 | 脚注滚动迁入的最老条目 |",
+  "| CITATION.cff | W901 | version 同步为 W901 |",
+  "| scripts/output/file-index.md | W901 | W901 段插入 |",
+  "| scripts/output/_w901_spec.json | W901 | 本批级联 spec |",
+  "| scripts/output/_cascade_files_W901.txt | W901 | 级联落盘清单 |"
+ ]
+}

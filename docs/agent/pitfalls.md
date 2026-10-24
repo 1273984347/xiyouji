@@ -22,7 +22,7 @@
 
 ## 六主题坑位（原文全量·内容零改动）
 
-### CSS / 视觉渲染（9 条）
+### CSS / 视觉渲染（10 条）
 
 - **批量正则改 CSS/JS 后必须验证括号/引号平衡**（`check_structure.py`）。
 - **批量关键字扫描/门禁必须穷尽同义变体**（W550）：可视化缺陷扫描的关键字要覆盖同义写法（如 饼图/环形图/圆环图/Pie Chart/Donut Chart）——「圆环图」变体曾致漏网；命中后以「可见措辞 × 实现签名（d3.arc/pie/treemap 计数）」双条件定错配，禁止单关键字定性。
@@ -34,14 +34,16 @@
 - **改 tokens.css/system.css 后必跑 `python scripts/inline_css.py --force` 分发**（W571）：与 generate_csp 同级必要——精修 tokens 规则后漏跑，:has 豁免只存在于源、未分发到 226 页内联副本（hardship-heatmap tick 实测 #F2EBDC 揭示）；分发后须实拍/样式探针复验。**--force 会按源重建 INLINED 块——历史批次追加在该块*内部*的页面私有规则会被静默洗掉**（W694 实证：四页 10 行〔语义网中英双页暗色 YlOrRd 重映射 + criticism-history 中英双页 reduce-motion〕被吞，暗色门禁 invisible 0→1 拦截后回灌）——运行 --force 后必须核对当批 diff 删除行是否仅标记行；页内私有规则一律写独立 `<style>` 块，禁追加进 INLINED 块内部。
 - **d3.select 静态快照空选区族**（W575）：`d3.select('#x')` 在元素声明前执行、元素根本不存在、或把选区方法调在自建门面对象（仅 show/hide）上，均为永久空选区/静默 no-op——tooltip 类功能**桌面鼠标同样失效**且常无报错（一报错反而是 `node().offsetWidth` 型 TypeError）；修法三态=惰性取用/按 W460 形态补元素（必须置于捕获脚本之前）/门面补齐缺失方法。静态扫描「select 行号 vs 元素 id 行号」即可穷尽（W575 四例三型，81-hardships/ecology/global-pattern/cross-time-danmaku）。
 - **触屏 tooltip e2e 三坑**（W575）：① tooltip 显隐多带 CSS transition，合成派发后同步读 `getComputedStyle().opacity` 恒为过渡起始值——探针以「预清空 tip 内容→派发→内容非空」同步信号判定，并 stash/restore 防污染页面；快照键不可含显隐态 class（visible 翻转致键漂移跨快照失配），用 id 或顶层序号；② Chrome 在 touchend 后把 hover 同步回真实鼠标位置并补发 mouseout——e2e 中一旦先动过真实鼠标，后续 tap 的 compat mouseout 会杀掉 tooltip 显示态（浏览器行为非页面缺陷），触屏断言序列须全部先于鼠标动作完成；③ 泛选择器 `[class*="tip"]` 会误伤 `small-multiple`（子串撞车）与 tooltip 内层元素（容器 opacity:0 隐藏时内层 computed opacity 仍 1）——精确化（tooltip 子串/tip 结尾）+ 顶层容器过滤；常显换内容型面板（prismTooltip 类）无隐藏态，隐藏断言以「触屏≡鼠标」经验对照替代硬编码 hidden 期望；④（W581）d3.drag 的 touchstarted 会 stopImmediatePropagation——document 冒泡层 touch 委托收不到可拖拽节点的触摸事件，注入须挂 document 捕获阶段（capture:true·先于目标阶段·免疫下游拦截）；⑤（W581）touchscreen.tap 的 tooltip 显隐在 Playwright 由 compat 事件随机承载（注入派发与断言错位·tap 式 PASS 可能是 compat 代劳）——断言改合成 TouchEvent 与取点同 tick 派发（兼顾力导向节点漂移），并以事件流取证甄别派发真身。
+- **力导向图的边渲染在 canvas 层·SVG line 只是样式载体**（W551 族图谱 36 页实证·W902 自 Agent 记忆固化入仓）：力导向关系图「边看不见」先查 svg 背景是否不透明/边是否 zero-opacity——真正的命中判定画在 canvas 覆盖层，SVG line 元素仅承载 hover 样式与事件代理；改边视觉若只动 SVG 属性则画面不变。排查口：devtools 里 canvas 元素与 svg 元素并存且同 bbox 即此架构。
 
-### JS / CSP / 运行时（5 条）
+### JS / CSP / 运行时（6 条）
 
 - **改任何内联脚本后，必须重跑 `python scripts/generate_csp.py`**——否则 CSP sha256 哈希失配，整个内联脚本被浏览器拒执行（症状：无 pageerror 但内容空白、`window.__data` 未设置）。
 - **fullPage 截图不触发 IntersectionObserver**（W554）：凡含 `.reveal-in`（js-reveal 滚动显现）的页面，截图/审查前必须逐屏滚动穿透（步进 innerHeight、回顶后等待），否则下方区块渲染为空白——W550 G4 教训的截图侧二犯（试审判 curated「整屏空白 FAIL」实为伪影）；已固化进 `scripts/_w554_review.js`。
 - ** Express 5 / Node 20+ 的 req 'close' 语义陷阱**（W568）：`req.on("close")` 在请求体读取完毕即触发（并非连接断开），SSE 路由据此提前 `res.end()` 会吞掉后续全部事件（实证：init 之后 error 事件整段丢失、前端「思考中」永久挂起）；SSE 断开清理改挂 `res.on("close")`（已完成）。副作用教训：P2-3 类「断开清理」修复在运行时大版本升级后须复核语义。
 - **ML 栈在 handler 子线程首次 import → SIGSEGV**（W746）：http.server 的 ThreadingHTTPServer handler 子线程内首次 `import torch` / `sentence_transformers` → 段错误 exit 139 静默死亡（无 traceback；实证：rag_server /route 54s 后 empty reply、服务进程非零终止）。修复：**模型必须在主线程启动时预热**（`rag_server.py` main 里 `_get_router()` 范式）·handler 只做 encode（torch 已初始化后子线程使用安全）。诊断注意：静默 139 会被管道 `2>&1 | grep | tail` 掩盖——用 `${PIPESTATUS[0]}` 或不过滤直跑验退出码。
 - **ruff --fix 的 isort 会改坏「ST 先于 torch」顺序**（W746）：isort 排序规则把 plain import（`import torch`）排到 from-import（`from sentence_transformers import ...`）之前——正是本机段错误坑的关键顺序，铁则注释写在旁边也会被改坏（实证：--fix 后 CLI 静默 139）。修复：**ML 脚本的 ST import 块必须加 `# noqa: I001` 防守**（`scripts/rag/page_router.py` `_load_model` 范式），并复跑该脚本确认可跑。
+- **CSP 哈希链「只读绿 ≠ 写路径健康」**（W536 实证·W902 自 Agent 记忆固化入仓）：generate_csp 的 --check 只走读路径，守卫对根目录的误算曾令重生成自阻（写路径损坏而校验恒绿）；凡改 generate_csp/守卫逻辑，验收必须真跑一次写入（注入或重算）再 --check，禁以 --check 单绿收工。
 
 ### git / 提交 / 并发（17 条）
 
@@ -74,7 +76,7 @@
 
 - **spec 的 `desc` 禁含内嵌 W 号**（W842 实证 · `_foot_insert` 的 W724 防线当场炸）：`_face_footers` 把 `desc` 拼进四页脚批次链（`f"{ctx.batch} {desc}"`），`_foot_insert` 末行断言 `len(_wns) == len(set(_wns))` 防 token 重复。W781 建的剥离防线只有 `re.sub(r"^W\d{3}\s*", "", desc)`——**只治行首**，治不了行内嵌：首版 desc 写「补段工具一次补齐 W830 到 W841 十二批欠账…」→ `AssertionError: 页脚链 token 重复（W724 防线）`，链上已有的 W841 与 desc 里的 W841 撞。**同族口径**：`desc` 是唯一被拼进「批次链」的自由文本，凡 desc 出现别批 W 号（范围表述、批号引用、引上一批）都会撞链上既有 token；三处版本行不会撞，但为一致性一并按此纪律。判据 = batch_cascade dry-run 抛「页脚链 token 重复」；改法 = desc 用不含 W 号的量词表述（「十二批欠账」），批号引用移到 `changelog_body`（body 不进链）。
 
-### 数据 / 内容可信度（5 条）
+### 数据 / 内容可信度（6 条）
 
 - **CHANGELOG/方案档验收数字必须当批现测**（W496 铁律）：写 M 指标/内联字节数等数字前先跑 `python scripts/acceptance_snapshot.py` 从输出抄，禁止从上一批 CHANGELOG 复制（W493「28385B」跨批复制曾掩盖全站 INLINED 清空事故）。
 - **写 `> 原文引文` 行前先跑 `python scripts/_cite_probe.py --kw <关键词> --chap <回目>`** 从 text-search.json 提取候选，禁止凭记忆编造（W503 门禁只拦截"写入后未命中"，无法拦截"恰好像原文的编造"）；新文档（非基线豁免）用变体称谓（行者/唐僧/圣僧等）必须同时含 canonical（孙悟空/玄奘），写作前 Grep `dataset/glossary.json` 称谓组。
@@ -82,6 +84,7 @@
 - **部署态冒烟与 file:// 审查是两条独立覆盖面**（W565 实证，P04）：EMBEDDED 回退机制使 fetch 成功（部署）与 fetch 失败（file://）走上不同代码路径，character-appearance 契约失配在生产崩溃数日而 file:// 截图审查全绿。凡改动「数据装载层 / fetch 链路」的批次，收尾必跑 `scripts/_deploy_smoke.js`（http.server + Playwright 断言 4xx/pageerror）。**修复 site/data/json 部署副本的批次，收尾必配「旧值标记全页面扫描」（W691 实证 6 页漏网）：json 与页内嵌副本是双路径，只改 json 必产生静默分叉——以修复前旧值为标记 grep 全站 data/en 页面，命中即同步重灌（W678 十六项 json 修复全未配此步，review 批补扫 cave-estate/geo3d/ethics 双语/game-webnovel/visual-art/workplace 六页；text-search-app.js 内嵌语料属同族第三容器，语料重建须三处同改：dataset json+部署副本+app 内嵌）。**
 
 - **双源互锁在「两侧都停在旧值」时必然假绿**（W842 实证 · pytest 收集数 785 虚挂两批）：`check_doc_sync` 的 C5b 比对 `pytest.ini` 标记 vs `stats.json` 值，C5d 才是 `stats.json` vs 磁盘实算。W839 收官刷新少记一例（该批正文写「783→785」而实算 786），C5b 因为 `pytest.ini` 与 `stats.json` **两边都是 785** 而一路绿——直到 W842 跑 `stats.py --w` 触发 C5d（换源头实算）才照出来。教训：**标记↔缓存的对账只能证明两者彼此一致，不能证明它们与事实一致**；任何「X 抄自 Y」的互锁都必须配一条「Y 由 Z 实算」的独立支路，否则同源污染会静默通过。同族检查面 = `report_docs` 标记、A4/A1-A6 计数、`stats.json` 各键——凡存在实算源，就必须让实算支路常驻门禁（C5d 即这条）。
+- **暗色/站点审计须先起 site 根 http 服务·否则探针全 404 假 0**（W621 实证·W902 自 Agent 记忆固化入仓）：审计探针直击 file:// 或错误根路径时拿到的 0 命中会被当成「无问题」——先 `python -m http.server` 起 site 根再跑；且「探针报 0」必须配内容在位断言（已知应有的样本数 >0）才可信，双保险防「0=好」与「0=没跑成」混淆。
 
 ### 流程 / 协作 / 取证（8 条）
 

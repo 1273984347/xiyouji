@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W899），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W905），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,124 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W905（2026-10-24）：两项存量红项清理（暗色门禁补色 + npm 依赖漏洞清偿）
+
+
+
+> **来源**：用户 2026-10-24 令「清」——清 CI 上两项非 required 的存量红项（npm audit 依赖漏洞 / Dark-state gate 暗色门禁）。
+
+> - **文件**：site/data/character-semantic-network.html、site/en/character-semantic-network.html、xiyouji-agent-web/package.json、xiyouji-agent-web/package-lock.json、scripts/output/_vermilion_solid_cache.json、scripts/output/_w905_spec.json、scripts/output/_cascade_files_W905.txt、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、scripts/output/file-index.md。
+
+> - **暗色门禁根修（补色规则而非改判据）**：红项仅 2 条——中英两版 `character-semantic-network.html` 的热力图各有 1 个 `invisible` 形状（`rgb(163, 1, 38)`·亮度 0.0795 < 0.16）。取证链：页面暗色态用**枚举式**提亮清单（`html[data-theme="dark"] svg [fill="rgb(128, 0, 38)" i] { fill: #c1858d !important; }` 等 16 条）覆盖深色填充，而 **W674（88431cee）修正热力图色阶二次归一化**（`d3.scaleSequential(d => d3.interpolateYlOrRd(d / maxWeight)).domain([0, maxWeight])` → `d3.scaleSequential(d3.interpolateYlOrRd).domain([0, maxWeight])`）后色阶满映射，新增中间值 `rgb(163, 1, 38)` 不在枚举清单内 ⇒ 漏网变暗。**修法**：两页各补 1 条同族提亮规则（`rgb(163, 1, 38)` → `#ce7e88`·亮度 0.2982），与既有 16 条同构，不改判据、不改基线、不改色阶语义。
+
+> - **npm 依赖漏洞清偿（4 包）**：`dompurify` 3.4.16→3.4.17（critical·SAFE_FOR_TEMPLATES 绕过 / IN_PLACE 分离子树 / XHTML SMIL 三则公告）、`markdown-it` 14.3.2→14.3.3（high·两次二次时间 DoS·经 cherry-markdown 传递引入·用 `overrides` 抬版）、`body-parser` 2.3.0→2.4.0（high·压缩体尾字节 DoS·经 express 传递）、`vite` 8.3.1→8.3.5（high·dev 侧 6 则公告·launch-editor 命令注入与 fs.allow 绕过）；另加 `overrides` 强制 `zod` 4.6.7（`@tdesign-react/chat` 声明 zod ^3.24.2·漏洞范围 `zod <4.6.6` 覆盖全部 v3 且 v3 已 EOL 无修复版·而顶层 zod 4.6.7 才是运行时校验实际所用·override 后编译与测试均无回归）。
+
+> - **验收**：暗色门禁判据权威脚本复验——164 页全量 S2-desktop-dark 审计（`node scripts/_audit_render_states.js --states S2-desktop-dark --scope charts` + `node scripts/check_dark_state_gate.js`）→「OK 同页同类型缺陷数零新增，暗色门禁通过」（修前同一命令判红 2 项）；`npm audit --omit=dev --audit-level=high` → `found 0 vulnerabilities`（CI 口径·exit 0），全量口径（含 dev）亦 0；`npm run build`（tsc -b && vite build）exit 0；`npm run test:all` exit 0（集成 19 passed / 1 skipped·Windows 无 SIGTERM 语义属 CI 实跑项；客户端 5 文件 51 tests passed）。
+
+> - **状态**：已收官（两项存量红项均已消除·判据与基线未改·依赖升级零回归）。
+### W904（2026-10-24）：C5c 裸聚合收敛（74 处清零·判据转 FAIL·stats 增 7 板块键·后置精确豁免）
+
+
+
+> **来源**：用户 2026-10-24 引用 W902 审查报告 F4 遗留项「C5c 裸聚合 74 处收敛债」令处理——W703 建槽时「起步策略·收敛后转 FAIL」设计终态的执行批。
+
+> - **文件**：scripts/stats.py、scripts/check_doc_sync.py、README.md、STRUCTURE.md、AGENTS.md、docs/00-导读/项目说明.md、CONTRIBUTING.md、docs/00-导读/统计口径说明.md、docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md、docs/11-方案报告/README.md、scripts/output/stats.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w904_spec.json、scripts/output/_cascade_files_W904.txt（逐件行见 file-index W904 段）。
+
+**① stats.py 增 7 板块键**：a2/a3/a5/a6/learn/cognition/spirit（口径对齐 a4_docs——板块顶层 .md 排 README·Git 索引实算），首刷值 44/215/34/13/4/3/4。
+
+**② check_doc_sync 判据四升级（管控件·F4 处理令）**：
+- **C5c 由 NOTE 转 FAIL**（W703 终态·防回退）；
+- **命中后置精确豁免**：裸命中后紧跟 `<!--doc-sync:exempt-->` 只豁免该命中，同行句式/标记对账照跑（供「既有 stats 标记又含常量」的混排行）；
+- **整行豁免收紧为行首形态**——原「行内含即整行跳过」会吞掉后置豁免行上的标记对账（T30 负样本实证·现存零使用零迁移）；
+- **RE_BARE_AGG 词边界** `(?<![A-Za-z])`——「S1 项目」「A2 个人随笔」「S3 项目」类编号假阳性不计（实测 3 处）。
+- self-test 增 T27-T31 五例（先红后绿·含假阳性防回归）·31/31。
+
+**③ 存量 74 处三分治清零（C5c 实测 74 → 0）**：实体化 24 处（13 个键位）/ 后置豁免 44 处（常量·历史时点·功能描述）/ 改写去漂移数 2 处。**两处陈旧值随批纠正**：STRUCTURE「A5 已建 4 篇」实数 34（无对账期漂移的实锤案例）；「docs/INDEX 321 篇」陈旧计数改写为不带数表述。README「docs 18 个板块」同改描述式。
+
+**④ F4 状态收口**：审查报告状态行/遗留盘点表/README 登记行 34 同步订正。
+
+**验证**：check_doc_sync self-test 31/31·主判据 C5c 0 处·ruff scripts/ All checks passed·pytest 858 passed 3 skipped·verify 全量核心全绿。
+
+### W903（2026-10-24）：审查发现修复（preflight touches 语义归一 + 门禁 45 提示语补序）
+
+
+
+> **来源**：用户 2026-10-24 对机制审查报告（W902）F1/F2 两项管控件修复裁决「批准」。
+
+> - **文件**：scripts/preflight_check.py、scripts/verify_delivery.py、tests/unit/test_preflight_touches.py、docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w903_spec.json、scripts/output/_cascade_files_W903.txt（逐件行见 file-index W903 段）。
+
+**F1 preflight touches 语义归一（假绿闭口）**：`_split_touches` 改扫描式 tokenizer——**全角括号内不切分且注记整段丢弃**（注记内常含中点·先切后剥必碎·本批实现首版即踩此坑由负样本测试暴露后改扫描式）；`touches_conflict` 由字面集合交集扩为**对称目录前缀匹配**（`X/**` 与 `X/` 归一到 `X`·对方任一元素等于 `X` 或以 `X/` 开头即命中·双向·前缀锚定整段防兄弟路径误报）——W900 认领行的通配+注记形态与并行批具体文件声明从此能真撞真报。**先红后绿**：新增单测 6 例（注记剥离 / 通配 vs 文件内 / 斜杠目录形态 / 双向 / 兄弟路径不误报 / W900 行原文回放）旧码下 5 例红实证、新码 17/17 绿；实现期两个真 bug（注记内中点切碎、`/**` 剥位少一）均被自己的负样本当场抓出——「建置即红检测法」再次闭环。安全性前提入档：仓内路径零全角括号（git ls-files 实证）。
+
+**F2 第 45 门禁提示语补序**：verify_delivery gate-45 fail_msg 由「重跑 refresh 刷新」扩为「**先 git add 本批新件再重跑 refresh**（生成器按 Git 索引收集·W896 口径·W900/W901 连踩）」——一行文案闭掉连续两批踩中的操作顺序坑。
+
+**随批订正**：审查报告状态行与 README 登记行 34 的 F1/F2「待批」改「已由 W903 修复」。
+
+**验证**：单测 17/17（先红后绿留证）·pytest 全量 858 passed 3 skipped·ruff scripts/+tests/ All checks passed·verify 全量 54 段核心全绿。
+
+### W902（2026-10-24）：机制脚本门禁全量审查与记忆固化入仓（四发现 + pitfalls/AGENTS/文档规范增补）
+
+
+
+> **来源**：用户 2026-10-24 两令——「顺便再审查一遍之前所有批次的机制、脚本、门禁有没有问题」+「本项目是多 Agent 协作，写入 Agent 私有记忆文件作用有限，写入项目文件才真实可靠·盘点记忆文件需入仓内容」。
+
+> - **文件**：docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md（新增）、docs/11-方案报告/README.md、docs/agent/pitfalls.md、AGENTS.md、docs/00-导读/文档规范.md、CLAUDE.md、docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w902_spec.json、scripts/output/_cascade_files_W902.txt（逐件行见 file-index W902 段）。
+
+**① 机制层全量审查（报告落 审查与评审/·登记行 34）**：三层审查——机器面（26 个带自测门禁 `--self-test` 全绿·verify 54 段·pytest 852 passed·`ci_sim.py` 干净检出 7/7 PASS 含全仓 20761 链接 0 broken·CSP 856 页零漂移）+ 代码面（preflight/batch_cascade/check_folder_docs/check_doc_sync 语义审计）+ 流程面（干扰日志考古对拍）。**四发现**：
+
+- **F1【中高·假绿族】preflight touches 交集为字面字符串比对**——`docs/11-方案报告/**（注记）` 这类通配/带注记声明与对方具体文件声明**字面不等恒不命中**（W900 认领行实证）·W897 修分隔符后同族的语义面残余·两起真实撞面（W825/W893）均未被机器拦下；修法（剥注记 + `X/**` 前缀展开 + 双向对称 + 负样本单测）**待批**（管控件）。
+- **F2【低】第 45 门禁 FAIL 提示语缺「先 git add 再 refresh」顺序**——W896 生成器按 Git 索引收集·refresh 先于 add 必漏新件·W900/W901 连踩；一行文案修法**待批**（管控件）。
+- **F3【流程·本批闭合】§8 干扰日志窗口内两起覆盖事件漏登**（W825 解析层修复被并行提交覆盖·W893 台账认领行被替换）——事件路径不经过 W822 两触发点·与断档同源；本批补 2 行延迟登记（如实标注·机制不擅改）。
+- **F4【在账】C5c 裸聚合 74 处 NOTE 未推进**（W703 起步策略·列入遗留盘点）。
+
+**② 记忆固化入仓（用户指令执行·报告 §3 全清单）**：文档规范 §11.1 立**常设指令行**「方案/审查/调研/复盘/计划类交付物唯一落盘位 = docs/11-方案报告/」+ 11-方案报告 README 维护契约与 CLAUDE.md 速查层同源指针；AGENTS §4.3 本机环境事实补 4 条（curl `--ssl-no-revoke`·`/tmp` 对 Windows Python 不可见·PMC→Europe PMC 兜底·`gh api` 中文 `-f`）；pitfalls.md 补 3 条（力导向 canvas 边层·CSP 写路径 `--check` 盲区·暗色审计 http 前置假 0）·三节计数同步（CSS 9→10·JS 5→6·数据 5→6·总数 49→52·AGENTS 六主题句同批订正）。逐条盘点 22 项记忆：8 项入仓 / 11 项仓内已覆盖（grep 实证）/ 3 类刻意不入（S4 双盲·他仓·宿主层）；保真度 22 犯模板与图表判定三教训列「建议后续批」。
+
+**验证**：verify 全量 54 段核心全绿（含第 32 门禁 CLAUDE.md 速查层 46 行过）·lint_links docs 5481 链接 0 broken·pytest 852 passed 3 skipped·ruff scripts/ 口径过·ci_sim 7/7 PASS。
+
+### W901（2026-10-24）：C5b 对账面恢复 + W900 披露项清偿（递归 glob / W757 链接新址 / T-16·T-17 补登）
+
+
+
+> **来源**：用户 2026-10-24 对 W900 批披露项裁决「批准；改。落库」——三件披露项/遗留项随批清偿；管控件改动（check_doc_sync.py）经用户明示批准。
+
+> - **文件**：scripts/check_doc_sync.py、docs/11-方案报告/README.md、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w901_spec.json、scripts/output/_cascade_files_W901.txt（逐件行见 file-index W901 段）。
+
+**① C5b 对账面恢复（管控件·已批）**：`check_doc_sync.py` 的 `c5b_extra_surfaces()` 第二面由「`docs/11-方案报告/*.md` 根层非递归 glob」改为「`**/*.md` 递归收集、`计划方案/` 子目录除外」——W900 目录分区把带 stats 实体标记的《系统架构方案》《取经编制表》移入子目录后根层 glob 失明（W900 段披露的对账面缩水），本批经用户批准恢复覆盖；**计划方案豁免条款原样保留并补实证**：该子目录实测 8 件计划档带冻结 stats 标记（时点快照纪律·同 CHANGELOG 历史段），入面对账即假红，docstring 与文件头描述同步更新。
+
+**② W757 段链接改指新址（历史段改动·经用户明示批准）**：CHANGELOG W757 段内 1 条工程基础设施审计报告链接由旧址改指 `docs/11-方案报告/审查与评审/工程基础设施薄弱点审计报告-2026-10-16.md`——仅地址订正，叙事零改动；该链接为 CHANGELOG 全文唯一指向本目录的真实链接，改后无断链（lint 复验 5480 链接 0 broken）。
+
+**③ T-16/T-17 补登**：README 计划方案表补第 19/20 行（摘要据两件自述与 W893/W896 台账行提炼），节头「表格登记 18 行」订正为 20 件全登记，W900 的登记缺口披露行撤除、按补登记惯例（W858/W884 同式）在节首注记区留 W901 补登记注记；README §二 C5b 提示行由「待批」更新为「W901 恢复」口径。
+
+**验证**：check_doc_sync 实跑 C5b 递归新面零 FAIL（系统架构方案/取经编制表恢复对账·README 内占位标记串不受影响）；ruff（CI 口径 `ruff check scripts/`）All checks passed；pytest 全量 852 passed 3 skipped；lint_links --dir docs 5480 链接 0 broken。
+
+### W900（2026-10-24）：11-方案报告目录分类重组（根层归四区 + 索引重构 + 链接与派生面全量同步）
+
+
+
+> **来源**：用户 2026-10-24 令「docs/11-方案报告 重新给文件夹整理分类下，现在看着太乱了」——该目录根层此前 20 文件平铺（审查/方案/调研/治理混置），本批为目录分类重组。
+
+> - **文件**：docs/11-方案报告/审查与评审/（10 件迁入）、docs/11-方案报告/设计与架构方案/（7 件迁入）、docs/11-方案报告/治理与核查/（3 件迁入）、docs/11-方案报告/调研与数据复盘/（2 件 + 读者数据截图 5 件迁入）、docs/11-方案报告/README.md、docs/10-方法论沉淀/多Agent干扰治理与touches纪律.md、docs/INDEX.md、site/data/search.html、site/en/search.html、HANDOVER.md、STRUCTURE.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w900_spec.json、scripts/output/_cascade_files_W900.txt（逐件行见 file-index W900 段）。
+
+**根层分类重组（22 文件 + 截图 5 件归入 4 个新子目录）**：
+
+- `审查与评审/`（10 篇）：对抗性审查、全量对抗审查、工程基础设施薄弱点审计、外部评审回应（17/18 两篇）、计划方案三性审查、架构评审、界面布局审计、数据库表设计审查、难簿序与 dataset 对拍
+- `设计与架构方案/`（7 件·含 2 件 HTML 预览页）：界面视觉重设计方向与细化规格（v4）、v4 预览页、系统架构方案、静态站前端框架化选型对比、取经编制表（md + html）
+- `治理与核查/`（3 篇）：W761 工具链可维护性重构报告、多 Agent 干扰治理评估与实施记录、全仓待办计划方案状态核查
+- `调研与数据复盘/`（2 篇 + 读者数据截图 5 件）：项目 GitHub 参考调研报告、读者数据复盘
+- 既有 `工作复盘与优化分析报告/`（13 篇）与 `计划方案/`（20 件）不动；**根层仅留 README**（report_docs 递归口径计数 54 不变）
+
+**索引与链接全量同步**：
+
+- **README 唯一索引分区重构**：目录树 + 原「现役报告」33 行总表按链接目标机械分为五区（编号沿用入库时间序不重排）+ 计划方案节 5 条游离单行表（14-18 行）合并回主表 + T-16/T-17 两件已入库未及登记行的缺口披露
+- **40 对带期望次数断言的精确子串替换**（all-or-nothing）：目录内互链与上溯链（`../../CHANGELOG.md` 等加深一层）、方法论沉淀入链 ×2、工作复盘 2026-10-19 入链 ×2；修复后 `lint_links --dir docs` 实测 **5478 链接 0 broken**
+- **派生面再生成**：`docs/INDEX.md`（20 行路径随迁·第 17 门禁字节级对拍）+ 站内搜索索引两页（zh 848 / en 890 条·第 46 槽对拍通过）+ 两页 CSP 哈希重算（856 页零漂移）
+
+**两处随动影响披露（均未随批擅改·留待裁决）**：
+
+- **C5b 根层对账面缩水**：系统架构方案与取经编制表两篇含 `<!--stats:*-->` 实体标记，移出根层后 `check_doc_sync.py` 的 `docs/11-方案报告/*.md` 非递归 glob 不再覆盖二者——门禁不判红但防线缩水；该脚本属管控件，glob 扩为递归的一行改动待用户批准（README §二已留提示行）
+- **CHANGELOG W757 段 1 条链接旧址**：历史段内工程基础设施审计报告链接因移动指向旧址，按「历史段禁改」未就地改写，新址为 `docs/11-方案报告/审查与评审/工程基础设施薄弱点审计报告-2026-10-16.md`；另全站约 850 页 CSS 来源注释（v4 令牌出处标注）中的旧路径为注释性文本非链接，按 W757「历史性叙述不改写」先例保留
+
+**顺手修正**：HANDOVER 零段「复盘存档」反引号路径仍指向 W757 改名前的 `docs/11-报告复盘/`（陈旧纯文本·非链接）订正为新址；STRUCTURE.md 目录构成散文行按分区后实况改写（54 总数与 stats 标记不变）。
 
 ### W899（2026-10-23）：合并后收尾修正（output 目录计数口径订正 + 朱砂门禁增量缓存重建）
 
@@ -1511,7 +1629,7 @@
 > - **文件**：tests/unit/test_tmpe_tidy.py、scripts/requirements.txt、scripts/check_seo_head.py、scripts/check_chart_values.js、docs/00-导读/W批次编号对账表.md、scripts/output/_w758_spec.json、scripts/output/_w758_rotate.py、scripts/output/_cascade_files_W758.txt、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、.github/workflows/README.md、site/index.html、site/dukou-engine.html、site/data/tag-cloud.html、site/data/cross-time-danmaku.html、archive/docs/AGENTS-ARCHIVE.md、AGENTS.md、CITATION.cff、scripts/output/file-index.md。
 
 ### W757（2026-10-16）：CI 门禁接线缺陷修复批
-> **来源**：用户令「对项目工程基础设施薄弱点取证并修复」——本 session 对用户三轮共 22 条论断逐条实读磁盘对拍（结论：已消解 8 / 证伪 6 / 成立 8），并**新发现四条用户未提及的硬缺陷**。动工前 `preflight_check.py --touches` 全绿（对账表 max=W756 → W757 认领·交集 0）。审计报告见 [docs/11-方案报告/工程基础设施薄弱点审计报告-2026-10-16.md](docs/11-方案报告/工程基础设施薄弱点审计报告-2026-10-16.md)。
+> **来源**：用户令「对项目工程基础设施薄弱点取证并修复」——本 session 对用户三轮共 22 条论断逐条实读磁盘对拍（结论：已消解 8 / 证伪 6 / 成立 8），并**新发现四条用户未提及的硬缺陷**。动工前 `preflight_check.py --touches` 全绿（对账表 max=W756 → W757 认领·交集 0）。审计报告见 [docs/11-方案报告/审查与评审/工程基础设施薄弱点审计报告-2026-10-16.md](docs/11-方案报告/审查与评审/工程基础设施薄弱点审计报告-2026-10-16.md)。
 > - **D1 第 43 门禁 CI 必红（最高优先级）**：`verify_delivery.py` 第 43 槽委托 `check_chart_values.js --gate`，该脚本第 904 行硬依赖 `require('playwright')`；而 `ci.yml` 的 verify-delivery job 只装 Python + Node，**从未安装 Playwright**（`scripts/node_modules` 被 `.gitignore` 忽略）。缺失即 `MODULE_NOT_FOUND` → `main().catch` 打印「1 FAIL」→ `_StrictGate` 记 FAIL → `verify_delivery.py` 整体 FAIL。**违反项目 E36-E42 铁则②「门禁建置即绿」**。修复=该 job 补 `actions/cache` 浏览器缓存（复用 W421 模式·key 绑 `scripts/package-lock.json`）+ `npm ci --prefix scripts` + `npx playwright install --with-deps chromium`。
 > - **D2 W752 安全单测未接线**：`xiyouji-agent-web/package.json` 的 `test:server`（tools.test.ts 权限边界 / audit.test.ts 审计落盘 / citationGuard.test.ts 引文守卫）在**全部 workflow 中零引用**，CI 只做 build + golden-evals（结构校验）。修复=`agent-web-build` job 补 `npm run test:server` 步骤（本地实测 44/44 通过·0.5s）。
 > - **D3 安全扫描盲区**：`security_scan.py` 的 `discover_files()` roots 不含 `xiyouji-agent-web/`、exts 不含 `.ts/.tsx/.mjs`——对「能读写仓库文件、运行脚本」的 React+Express 服务（项目自身认定的安全风险最集中处）**零覆盖**（全文件 grep `agent-web` 命中 0）。修复=roots 增 agent-web、exts 增三扩展名，并加 `_is_agent_web_build_artifact()` 按 `.gitignore` 同一契约排除 tsc 编译产物（`server/*.js`、`server/engine/*.js`、`vite.config.js` 及其 `.d.ts`），使**扫描面 == 入库面**。实测扫描面 1122 文件、agent-web 源文件 43 个入面、`high=0`（与改前基线一致）。
