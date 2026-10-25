@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-yCXTnUMkHSnCvwT+endQT4WorLN/5SUrQzccMO16IZg=' 'sha256-56rKb+oAha7Bq3S7Vxv8xTlwAc5ug/Ai1rwdGyOexqM=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-yCXTnUMkHSnCvwT+endQT4WorLN/5SUrQzccMO16IZg=' 'sha256-StsV3NIXAbtjYHkNX/MRWkk+mi/Lsld6w4oz+qXeFvI=' 'sha256-nMSWf2BX1l7NlxlwtaeUpGC0XaR1UxCpr/bf6doI8DU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>知识图谱探索器 · 详解西游记</title>
     <link rel="canonical" href="https://1273984347.github.io/xiyouji/data/graph-explorer.html">
@@ -1420,7 +1420,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   <h1>知识图谱探索器</h1>
   <span class="sub">佛法=AI=西游 · 取经人物关系 · 力导向可交互</span>
   <span id="banner">加载中…</span>
-  <button id="sideToggle" title="折叠 / 展开左侧控制栏"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.2h16M4 12h13M4 16.8h16"/></svg></button>
+  <button id="sideToggle" title="折叠 / 展开左侧控制栏"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" transform="translate(-1.6364 -1.6364) scale(1.1364)"/></svg></button>
 </header>
 <div class="layout no-drill">
   <aside class="side">
@@ -1721,7 +1721,7 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph", "title": "佛法=AI=西游 三元�
     var n=null; GRAPH.nodes.forEach(function(x){ if(x.id===id)n=x; }); if(!n)return;
     var panel=document.getElementById("drill"); panel.className="drill show";
     document.querySelector(".layout").classList.remove("no-drill");
-    var html='<button class="drill-close" style="float:right;border:none;background:none;cursor:pointer;color:#9a8f7c" aria-label="关闭"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.9h10a2.1 2.1 0 0 1 2.1 2.1v10a2.1 2.1 0 0 1-2.1 2.1H7a2.1 2.1 0 0 1-2.1-2.1V7A2.1 2.1 0 0 1 7 4.9zM9.8 9.8l4.4 4.4M14.2 9.8l-4.4 4.4"/></svg></button>';
+    var html='<button class="drill-close" style="float:right;border:none;background:none;cursor:pointer;color:#9a8f7c" aria-label="关闭"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.9h10a2.1 2.1 0 0 1 2.1 2.1v10a2.1 2.1 0 0 1-2.1 2.1H7a2.1 2.1 0 0 1-2.1-2.1V7A2.1 2.1 0 0 1 7 4.9zM9.8 9.8l4.4 4.4M14.2 9.8l-4.4 4.4" transform="translate(-3.1899 -3.1899) scale(1.2658)"/></svg></button>';
     html+='<h2>'+xmlEsc(labelOf(n))+'</h2>';
     if(n.aliases) html+='<div class="tag">'+(n.aliases["佛学"]||"")+' · '+(n.aliases["AI"]||"")+' · '+(n.aliases["西游"]||"")+'</div>';
     else if(n.group) html+='<div class="tag">'+xmlEsc(n.group)+'</div>';
@@ -1756,7 +1756,7 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph", "title": "佛法=AI=西游 三元�
     html+='</ul>';
     var lab=labelOf(n);
     html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:var(--space-4) 0 var(--space-2)">相关研究</h3>';
-    html+='<div class="alias"><a href="./search.html?q='+encodeURIComponent(lab)+'" target="_blank" rel="noopener" style="color:#3a6b8c;text-decoration:none"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.6a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM15.9 15.9l5 5"/></svg>站内检索「'+xmlEsc(lab)+'」的相关解读 →</a></div>';
+    html+='<div class="alias"><a href="./search.html?q='+encodeURIComponent(lab)+'" target="_blank" rel="noopener" style="color:#3a6b8c;text-decoration:none"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.6a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM15.9 15.9l5 5" transform="translate(-0.963 -0.963) scale(1.0582)"/></svg>站内检索「'+xmlEsc(lab)+'」的相关解读 →</a></div>';
     panel.innerHTML=html;
     var closeBtn=panel.querySelector(".drill-close");
     if(closeBtn) closeBtn.addEventListener("click",function(){ panel.className="drill"; document.querySelector(".layout").classList.add("no-drill"); });

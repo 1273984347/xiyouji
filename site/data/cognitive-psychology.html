@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-xs1UnPp2EHNM62zqXxET8RbyajcUD7h0Fdn1VXT5OWU=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-MDI6PUYW7NF2bSeUHczpj5Ws+iojtN0+E/lC6zHyKA0=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>认知心理 · 详解西游记</title>
@@ -2388,8 +2388,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         rows.append('td').text(d => d.actual);
         rows.append('td').text(d => d.wukong_judgment);
         rows.append('td').html(d => d.judgment_correct
-            ? '<span class="icon-correct"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.8 12.4l4.7 4.9L19.2 6.8"/></svg></span>'
-            : '<span class="icon-wrong"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 6.4l11.2 11.2M17.6 6.4L6.4 17.6"/></svg></span>');
+            ? '<span class="icon-correct"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.8 12.4l4.7 4.9L19.2 6.8" transform="translate(-3.0 -3.0625) scale(1.25)"/></svg></span>'
+            : '<span class="icon-wrong"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 6.4l11.2 11.2M17.6 6.4L6.4 17.6" transform="translate(-6.75 -6.75) scale(1.5625)"/></svg></span>');
         rows.append('td').text(d => d.cognitive_error);
         rows.append('td').text(d => d.consequence);
     }

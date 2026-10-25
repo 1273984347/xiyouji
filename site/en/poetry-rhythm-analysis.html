@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-NacmCpOrFQwkgkHPSXikGNRdmdK2ct3/+euyGXoXfro=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-TXxHqMdpyZBsWEegBim+s4vLtbjrRmPlwcG/bLIrYrA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Poetry Rhythm Analysis Atlas · Annotated Journey to the West</title>
@@ -1583,7 +1583,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <h2 id="sec-timeline">③ Poem Distribution Timeline Across 100 Chapters</h2>
             <p>Split the 100 chapters into 10 segments (10 chapters each) and count poems per segment. The first segment (chapters 1–10, opening concentration) and the last (chapters 91–100, homeward summary) are the densest, with the middle segments relatively even. Click "Play" to advance the animation segment by segment, or drag the slider to jump manually (cf. the W229 spacetime dual-axis animation pattern).</p>
             <div class="control-row" role="group" aria-label="Timeline controls">
-                <button class="ctrl-btn play" id="play-btn" aria-label="Play/Pause"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>Play</button>
+                <button class="ctrl-btn play" id="play-btn" aria-label="Play/Pause"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z" transform="translate(-6.1081 -4.2162) scale(1.3514)"/></svg>Play</button>
                 <div class="slider-wrap">
                     <span class="ctrl-label">Segment:</span>
                     <input type="range" id="seg-slider" min="1" max="10" value="10" aria-label="Segment slider" />
@@ -2022,14 +2022,14 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const btn = document.getElementById("play-btn");
         if (playTimer) {
             clearInterval(playTimer); playTimer = null;
-            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>Play'; btn.classList.remove("playing");
+            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z" transform="translate(-6.1081 -4.2162) scale(1.3514)"/></svg>Play'; btn.classList.remove("playing");
         } else {
             if (currentSeg >= 10) currentSeg = 1;
-            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 5.6v12.8M14.8 5.6v12.8"/></svg>Pause'; btn.classList.add("playing");
+            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 5.6v12.8M14.8 5.6v12.8" transform="translate(-3.0 -3.0) scale(1.25)"/></svg>Pause'; btn.classList.add("playing");
             playTimer = setInterval(() => {
                 if (currentSeg >= 10) {
                     clearInterval(playTimer); playTimer = null;
-                    btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>Play'; btn.classList.remove("playing");
+                    btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z" transform="translate(-6.1081 -4.2162) scale(1.3514)"/></svg>Play'; btn.classList.remove("playing");
                     return;
                 }
                 currentSeg += 1;
@@ -2043,7 +2043,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     document.getElementById("reset-btn").addEventListener("click", function() {
         if (playTimer) { clearInterval(playTimer); playTimer = null; }
         const btn = document.getElementById("play-btn");
-        btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>Play'; btn.classList.remove("playing");
+        btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z" transform="translate(-6.1081 -4.2162) scale(1.3514)"/></svg>Play'; btn.classList.remove("playing");
         currentSeg = 10;
         document.getElementById("seg-slider").value = 10;
         renderTimeline(10);
@@ -2052,7 +2052,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         if (playTimer) {
             clearInterval(playTimer); playTimer = null;
             const btn = document.getElementById("play-btn");
-            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>Play'; btn.classList.remove("playing");
+            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z" transform="translate(-6.1081 -4.2162) scale(1.3514)"/></svg>Play'; btn.classList.remove("playing");
         }
         currentSeg = +e.target.value;
         renderTimeline(currentSeg);

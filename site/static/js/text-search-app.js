@@ -6929,7 +6929,7 @@
             summary.style.display = 'none';
             region.innerHTML = `
                 <div class="empty-state">
-                    <span class="es-icon"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.6C10.6 5.1 8.6 4.6 6 4.6H3.6v12.8c2.6 0 4.6.5 6 1.9 1.4-1.4 3.4-1.9 6-1.9V4.6c-2.6 0-4.6.5-6 2zM12 6.6v12.7"/></svg></span>
+                    <span class="es-icon"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.6C10.6 5.1 8.6 4.6 6 4.6H3.6v12.8c2.6 0 4.6.5 6 1.9 1.4-1.4 3.4-1.9 6-1.9V4.6c-2.6 0-4.6.5-6 2zM12 6.6v12.7" transform="translate(0.2209 -2.6626) scale(1.227)"/></svg></span>
                     在上方输入关键词，或点击人物/法宝标签开始检索。
                     <div class="es-hint">提示：试试「孙悟空」「花果山」「菩提祖师」</div>
                 </div>`;
@@ -6941,7 +6941,7 @@
             summary.innerHTML = `共找到 <strong>0</strong> 处匹配「<span class="q">${escapeHtml(result.query)}</span>」${state.chapterFilter !== 'all' ? '（当前范围：第 ' + state.chapterFilter + ' 回）' : ''}，未在原文中找到该关键词。`;
             region.innerHTML = `
                 <div class="empty-state">
-                    <span class="es-icon"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.6a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM15.9 15.9l5 5"/></svg></span>
+                    <span class="es-icon"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.6a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM15.9 15.9l5 5" transform="translate(-0.963 -0.963) scale(1.0582)"/></svg></span>
                     未找到匹配「<strong style="color:var(--accent)">${escapeHtml(result.query)}</strong>」的内容。
                     <div class="es-hint">该词可能出现在尚未收录的回目中，或尝试更换关键词。</div>
                 </div>`;

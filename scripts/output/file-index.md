@@ -1956,6 +1956,10 @@
 | scripts/check_icon_fields.py | W949 | 新增：字段图标位判据（avatar/icon/flag/stage·与白名单逐条比对） |
 | scripts/check_emoji_icons.py | W949 | 第 50 门禁新增 A2 段（挂入字段图标位判据） |
 | scripts/output/_w949_icon_field_allowlist.json | W949 | 新增：字段图标位白名单（71 条·扫描器实测产出） |
+| scripts/_w950_normalize.py | W950 | 新增：图标光学尺寸归一器（量墨色外接框 → 统一边长 + 居中） |
+| scripts/_w950_refresh_icon_paths.py | W950 | 新增：图标图形同步刷新器（资产 → 内联 SVG·复合键反查） |
+| scripts/output/_w950_icon_normalize.json | W950 | 新增：45 枚图标的光学尺寸归一参数 |
+| scripts/output/_cascade_files_W950.txt | W950 | 新增：本批级联清单 |
 
 ## W899 合并后收尾修正（2026-10-23）
 
