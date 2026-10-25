@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（408）
+## 文件（409）
 
 ### Markdown 文档
 
@@ -325,6 +325,7 @@
 - `check_folder_docs.py`
 - `check_frontmatter.py`
 - `check_glossary.py`
+- `check_gov_doc_claims.py`
 - `check_governance_docs.py`
 - `check_gsap_motion.py`
 - `check_html_head_content.py`
