@@ -41,6 +41,15 @@ def test_evaluate_missing_file_fails_closed():
 
 
 def test_real_files_within_window():
-    """现网树必须在窗内（本批归档后 109+级联 1=110）——防回退锚。"""
-    counts, _ = dsb.collect()
+    """现网树必须在窗内（归档批后 109+级联=110）+ 脚注 ≤4KB——防回退锚。"""
+    counts, _, extra_fails = dsb.collect()
     assert dsb.evaluate(counts) == []
+    assert extra_fails == []
+
+
+def test_footnote_cap_fail_closed(tmp_path, monkeypatch):
+    """负样本：AGENTS 脚注超 4KB 必须产出 C3 FAIL（W964 病根回归锁）。"""
+    big = "*本文件由 x" + "；2026-10-20（W807）" + "y" * (5 * 1024)
+    monkeypatch.setattr(dsb, "_read", lambda rel: big if "AGENTS" in rel else "")
+    counts, _, extra = dsb.collect()
+    assert any("C3" in f and "4 KB" in f for f in extra)
