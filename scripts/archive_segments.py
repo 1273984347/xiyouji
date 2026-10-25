@@ -79,6 +79,14 @@ def plan(src_text, re_seg, keep):
     return cut, moved_ws
 
 
+def _to_nl(text, target_nl):
+    """任意行尾归一到目标行尾（W960 实证：正本 CRLF 块直插 LF 归档容器会造出混行尾·fail-closed 自锁）。"""
+    t = text.replace("\r\n", "\n").replace("\r", "\n")
+    if target_nl != "\n":
+        t = t.replace("\n", target_nl)
+    return t
+
+
 def move(target, keep, apply, batch_tag):
     """执行单面迁移。返回 (迁出段号清单, 描述行清单)。dry-run 时零落盘。"""
     cfg = TARGETS[target]
@@ -100,25 +108,29 @@ def move(target, keep, apply, batch_tag):
 
     # ---- A5 归档序（仅 top 模式）----
     arc_ws = [_wnum(m) for m in re_seg.finditer(a)]
+    moved_arc = _to_nl(moved_text, anl)  # 迁出块按归档容器行尾转译（防混行尾·W960 实证）
     if arc_mode == "top":
         assert arc_ws and max(arc_ws) < min(moved_ws), \
             "归档既有最大段号 %s ≥ 迁出最小段号 %s——top 插入会破坏 newest-at-top 语义" % (
                 max(arc_ws), min(moved_ws))
         first_seg = re_seg.search(a)
         assert first_seg, "归档文件无段锚（结构异常）"
-        new_arc = a[:first_seg.start()] + moved_text.rstrip() + nl + nl + a[first_seg.start():]
+        new_arc = a[:first_seg.start()] + moved_arc.rstrip() + anl + anl + a[first_seg.start():]
         insert_desc = "插在归档顶段 W%d 之前" % arc_ws[0]
     else:
         # append 模式：追加在末尾 + 头部「> 归档时间：」链追加注记
         new_arc = a
         if not new_arc.endswith(anl):
             new_arc += anl
-        new_arc += moved_text.rstrip() + anl
+        new_arc += moved_arc.rstrip() + anl
         mnote = re.search(r"(?m)^> 归档时间：.*$", new_arc)
         note = " + %s（%s 迁入 W%d-W%d）" % (datetime.date.today().isoformat(), batch_tag,
                                            min(moved_ws), max(moved_ws))
         if mnote:
-            new_arc = new_arc[:mnote.end()] + note + new_arc[mnote.end():]
+            note_at = mnote.end()
+            if new_arc[note_at - 1] == "\r":  # CRLF 文件上 $ 匹配含 \r（W960 实证：注记插进 \r 后成孤立 CR）
+                note_at -= 1
+            new_arc = new_arc[:note_at] + note + new_arc[note_at:]
         else:
             sys.exit("FAIL  归档文件缺「> 归档时间：」头注行（append 记账锚缺失·人工补后再跑）")
         insert_desc = "追加在归档末尾（其后 W%d-W%d）" % (min(moved_ws), max(moved_ws))
@@ -134,8 +146,8 @@ def move(target, keep, apply, batch_tag):
         src_before, src_after, len(moved_ws))
     assert arc_after_n == len(arc_ws) + len(moved_ws), "A1 段数守恒失败（归档）"
 
-    # ---- A2 内容守恒 ----
-    assert moved_text.rstrip() and (moved_text.rstrip() in new_arc), "A2 内容守恒失败（迁出块未逐字节出现在归档）"
+    # ---- A2 内容守恒（行尾归一后逐字比对——迁出块已按归档行尾转译）----
+    assert moved_arc.rstrip() and (moved_arc.rstrip() in new_arc), "A2 内容守恒失败（迁出块未出现在归档）"
 
     # ---- A3 锚点不动 ----
     assert new_src == s[:cut], "A3 留存前缀被改动"

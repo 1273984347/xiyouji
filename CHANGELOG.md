@@ -52,6 +52,13 @@
 
 **状态**：**已收官**（挂槽 + 订正 + 截图工具；**差异化推广批待开工**——按页型差异化：入口层上 intro/fold，内容层 reader 正文暂不铺 sections）
 
+### W960（2026-10-26）：治理文档体积归档批（§8 窗口制机器化 + 常驻搬段工具 + 实跑归档）
+
+> **来源**：用户审问「我们不是有归档系统吗为什么没有进行归档」——取证结论为归档系统有条文有容器无触发器（§8 三次全人工批：W417/W511/W921），用户裁决「走」立项；本批认领于顶段 W957 之前（W958/W960 两轮让号留痕后以 W960 成型），低于现役顶段故走 backfill_changelog 补段路径（当前态版本行正确指向最高号·不回拉）。
+> **摘要**：① **check_doc_size_budget.py 新门禁**——CHANGELOG 与 file-index 正本各 110 段窗口（W921 先例沉淀为正式口径），段数为判据、KB/行数为报告值，超窗即红接 preflight 开工判据，修法唯一指向常驻工具；自测含窗口边界与缺件 fail-closed。② **archive_segments.py 常驻搬段工具**——W921 三道守恒断言沉淀为五道（A1 段数守恒 / A2 迁出块逐字节出现于归档 / A3 留存前缀与编号规则与顶段逐字节不动 / A4 双侧降序 / A5 归档 newest-at-top 序），CHANGELOG 归档插顶、file-index 归档尾追并记头部归档时间链。③ **本批实跑归档**——CHANGELOG 147→109 段（484.9→332.6 KB·迁出 38 段 W803-W842 入 CHANGELOG-ARCHIVE 顶部）、file-index 249→109 段（435.0→291.4 KB·迁出 140 段 W700-W842 入 FILE-INDEX-ARCHIVE 尾部），合计减重约 296 KB。④ **文档规范 §8 重标**——窗口制替代 50KB/500 行旧线（旧线按 W921 后实态废止），消除「条文 50KB vs 现实 480KB」的两制打架。⑤ **batch_cascade 落盘后体积提示位**——每批收官报一次四文件体积态。⑥ 顺带：pytest 收集数标记被并行会话竞态写成三数字拼接（910910902）归一回 910（磁盘实算对拍）。
+> **文件**：scripts/check_doc_size_budget.py · scripts/archive_segments.py · scripts/preflight_check.py · scripts/batch_cascade.py · docs/00-导读/文档规范.md · archive/docs/CHANGELOG-ARCHIVE.md · archive/docs/FILE-INDEX-ARCHIVE.md · CHANGELOG.md · scripts/output/file-index.md · tests/unit/test_doc_size_budget.py · tests/unit/test_archive_segments.py · pytest.ini · docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md · scripts/output/stats.json
+> **验证**：两新工具 --self-test 全过（窗口边界 / 缺件 fail-closed / 三种段形态解析）+ 新增单测 8 例全绿；归档五道断言实跑全过（38 段与 140 段守恒·逐字节内容对拍·留存前缀逐字节不变）；pytest 全量 910 收集全绿（收集 899→910·标记三方同步）；体积门禁现网 0 FAIL（109/110 双绿）。
+> **状态**：在途（认领登记 W960·待提交入库）
 ### W959（2026-10-26）：T10《Playwright 历史问题全谱审计报告》V1.1 计数口径订正批
 
 > **来源**：用户 2026-10-26 审查意见——「方法论质量是 A 级，但作为审计件有一处**必须先修的硬伤**：核心计数不自洽（审计件的第一价值是可复验，数字对不上就不可复验）」。
@@ -1563,41 +1570,4 @@
 > - **验证**：`generate_csp.py --check` 856 页 0 漂移；`stats.py --check` 17 键零差异（页数四项 88/138/622/9 不变）；`check_doc_sync.py` 0 FAIL；`verify_delivery.py --scope full` 核心全部通过。
 > - **未做**：未改 `build_reader.py` 任何逻辑（折叠/进度/字号/反馈属 W847）、未动 `docs/` 源、未推送远端。
 > - **状态**：已收官。
-
-### W845（2026-10-21）：阅读页重建影响面量化批（W829 前置门槛实测 262 行）
-
-> **来源**：用户令「继续」。候选批 W829（阅读页体验封装）在计划里留了一道前置门槛（AC-21）：重建 diff ≤ 2000 行才允许进入施工。本批把这道门槛实测掉，同时纠正量法本身。
-> - **文件**：docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w845_spec.json。
-> - **口径纠正（本批最有价值的产出）**：计划原写法是「临时副本试跑 `build_reader.py` 量 diff」。实测单跑这一步得到 **122,366 行**（622 页全变）——因为 reader 页现状是三段管线的产物，只跑第一步会把已内联的 CSS（`tokens.css` + `system.css`）与 CSP meta 全部剥掉，等于拿「少了两道后处理」当「内容漂移」。正确量法是 `build_reader.py` → `inline_css.py` → `generate_csp.py` 三段跑完再比。**按旧口径执行会直接假红（12.2 万 > 2000），把一个本来可做的批挡在门外。**
-> - **实测**：隔离副本 43 MB（六板块源 + reader 基线 + 三脚本 + 两份 CSS，不复制 1.1 GB 的 `docs/S4-学术投稿`）按三段管线重建 622 页，逐文件比对得 **51 文件 · 131 增 131 删 · 合计 262 行**，占 622 页的 8.2%，距阈值一个数量级余量。
-> - **漂移性质（比行数更有价值）**：51 处全是正文文字差异（头防→头陀、般苦→般若、锡枚→锡杖、盂兰盆会、迦叶 等），即 `docs/` 源的字级修复（W763 那批 97 处）从未回灌到 reader 页。分布 people 28 / themes 13 / 回目 10。**mtime 新不等于内容新**：这些页 2026-10-20 被 W806 为删埋点机械改过，mtime 比源新，正文却停在 10-16 之前。
-> - **幂等与收尾**：三段连跑两次 → 二次 diff = **0**，AC-25 的生成侧风险先行证伪；副本内 `generate_csp.py --check` 报 622 页 0 漂移。
-> - **结论**：AC-21 达标（262 ≤ 2000），W829 可进入施工。副产品：全量重建会顺带把 51 页正文拉回与源一致——这不是纯改造，也是一次欠账清偿。
-> - **未做**：未改 `site/reader` 任何一页（W829 未获批）、未动生成器、未推送远端。
-> - **验证**：`check_doc_sync.py` 0 FAIL；`verify_delivery.py --scope full` 核心全部通过；页数四项（88/138/622/9）零漂移。
-> - **状态**：已收官。
-
-### W844（2026-10-21）：系统架构批四项落地（会话库备份 + 首 token 计时 + 两项裁决回填 + 检索题集入仓）
-
-> **来源**：用户令「继续做完」。原 W828 批（2026-10-20 用户批「可以」的 Q1/Q3/Q4/OBS-14 四项）因当时 CHANGELOG 号序链断裂（W828 缺口）始终无法级联立段，内容一直停在备料件。W842 修复号序链后，本批以新号 W844 承接落地。
-> - **文件**：xiyouji-agent-web/server/backup.ts、xiyouji-agent-web/server/backup.test.ts、xiyouji-agent-web/server/metrics.ts、xiyouji-agent-web/server/metrics.test.ts、xiyouji-agent-web/server/db.ts、xiyouji-agent-web/server/index.ts、xiyouji-agent-web/server/chat.ts、xiyouji-agent-web/server/routes.ts、xiyouji-agent-web/package.json、docs/agent/agent-web.md、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md、scripts/rag/eval/queries_30q_frozen.jsonl、scripts/rag/eval/queries_100q.jsonl、scripts/rag/eval/make_queries.py、scripts/rag/eval/eval_retrieval.py、scripts/rag/README.md、scripts/output/rag_eval_report.md、scripts/output/_w844_spec.json、docs/00-导读/W批次编号对账表.md。
-> - **Q1 会话库备份**：`chat.db` 是全仓唯一不可重建的数据（gitignored 且无备份）。新增 `server/backup.ts`——用 `VACUUM INTO` 生成一致性快照（**禁文件拷贝**：库有 WAL 伴生文件，只拷主文件会丢最近未 checkpoint 的提交）；备份两件（库快照 + 审计日志副本）、每日一份、留 7 份、清 90 天；份数与天数两条件**独立取并集**（备料件首跑曾把超龄判断嵌进「仅在超份数时才查」，致 90 天规则实际失效）；落点仓外 `%LOCALAPPDATA%\xiyouji\backups\`（`XIYOUJI_BACKUP_DIR` 可覆盖）；年龄以文件名日期为主、mtime 兜底；幂等跳过时仍执行清理。挂载在 `listen` 回调，**失败只记日志不阻断启动**，`NODE_ENV=test` 跳过。回归面 9 例。
-> - **OBS-14 首 token**：`/api/chat` handler **最前**取 `reqStartedAt`（入参校验与会话读写也属用户等待，靠后计时会系统性低估），首个 text delta 记 `firstTokenMs` 并打结构化日志；整轮无文本增量时记 `reason: no_text_delta`，**不把缺样本当 0 ms**。新增 `server/metrics.ts`（滚动 100 样本·最近秩法 p50/p95·脏数据丢弃）与 `GET /api/metrics` 只读端点，不落盘不外发。回归面 7 例。
-> - **Q3 多租户不预加**：三条触发条件写死（第 2 个真实使用者 / 需按用户导出删除 / 会话数超 5,000）+ 提前记账的代价清单（三表改 schema、查询路径加 WHERE、老数据归属规则等约 1 批工作量），回填 §8.2 档 2 与 §12.2 Q3。
-> - **Q4 检索维持现役 + 评测集入仓**：30 题冻结集**逐行原样**迁入（与原件字节一致·sha256 `8d9385b5…`），另由 `make_queries.py` 按文档标题锚点派生 70 题（gold 由脚本解析·只认索引内文档），合计 100 题；`eval_retrieval.py` 为复算入口，出 `scripts/output/rag_eval_report.md`（总表 + 题源分组 + 题型分组 + 逐题明细 + 口径局限）。
-> - **一处必须纠正的旧结论**：备料件写着「dense 仅 +0.003，不成立」。复算后 off 档 100 题 recall@5 = 0.573、frozen 30 = 0.382、dense = 0.712 / 0.446——增益远大于 +0.003。查明原因是历史数字跑在 T-01 冻结索引（1,077 篇）上，与现役索引（768 篇）语料面不同，**不可互引**。故「dense 无增益」论据作废，**默认档仍为 off，但理由换成成本与可移植性**（四重依赖 + 约 96 MB 模型 + 124 MB 产物、离线不可复算），并把「dense 是否升为可选档」登记为**新开放项 Q5** 交用户裁决。体积口径按实测值写，未用估算。
-> - **验证**：`npm run test:server` 98 例中 97 通过（唯一失败 W817-C2b 为**本机环境限制**：沙箱下 `fs.symlinkSync` 不抛错也不建链，用例前置假设不成立，CI 为 Linux 必执行面；该文件本批未改动）；`tsc -b` 零错误；`make_queries --check` 一致；ruff 净；`eval_retrieval` 4.3 s 跑完 100 题。
-> - **状态**：已落地（本地提交·未推送）。
-
-### W843（2026-10-21）：pitfalls 增补批（第 48 条 desc 内嵌 W 号 + 第 49 条双源同旧值假绿）
-
-> **来源**：用户令「继续做完」——W842 收尾时我提了两条建议，第一条是「先写个小批把今天新踩的坑固化进 pitfalls」，用户批准按此顺序推进。
-> - **文件**：docs/agent/pitfalls.md、AGENTS.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w843_spec.json、scripts/output/_cascade_files_W843.txt。
-> - **第 48 条（级联 / CHANGELOG 节 · 4→5）**：`spec` 的 `desc` 禁含**内嵌** W 号。`_face_footers` 把 `desc` 拼进四页脚批次链（`f"{ctx.batch} {desc}"`），`_foot_insert` 末行断言 `len(_wns) == len(set(_wns))`。W781 建的剥离防线只有 `re.sub(r"^W\d{3}\s*", "", desc)`——**只治行首**。W842 首版 desc 写「补段工具一次补齐 W830 到 W841 十二批欠账…」，链上已有的 W841 与 desc 里的 W841 撞，`batch_cascade` dry-run 直接抛 `AssertionError: 页脚链 token 重复（W724 防线）`。改法 = desc 用不含 W 号的量词表述，批号引用移到 `changelog_body`（body 不进链）。
-> - **第 49 条（数据 / 内容可信度节 · 4→5）**：双源互锁在两侧都停在旧值时**必然假绿**。C5b 比对 `pytest.ini` 标记与 `stats.json` 值，C5d 才是 `stats.json` 与磁盘实算。W839 收官刷新少记一例（该批正文写「783→785」而实算 786），C5b 因为两边都是 785 而一路绿，直到 W842 跑 `stats.py --w` 触发 C5d 才照出来。结论：**标记↔缓存的对账只能证明两者彼此一致，不能证明它们与事实一致**，凡存在实算源就必须让实算支路常驻门禁。
-> - **同批校准 AGENTS §4.3**：坑位总数 47→**49**、级联节（4）→（5）、数据节（4）→（5），并在计数口径注里补 W843 一行说明。这不是形式主义——W840 刚实证过「沉淀时只改 pitfalls 节标题、不改本行」会让总数静默漂移。
-> - **实跑校准**：计数脚本按 `^### ` 切节、按 `^- \*\*` 数顶层条目，得 9/5/17/5/5/8 = **49**，与六个节标题、与 AGENTS 本行三者自洽。
-> - **顺带**：台账「现势下一自由号」bullet 从 W827 轮换到 W843——preflight 的 WARN「现势 bullet 与 max+1 不衔接」由黄转 NOTE。
-> - **验证**：check_doc_sync 0 FAIL；全量 verify 核心全部通过（51/51）；ruff 净；目录文档新鲜度 0 FAIL。
-> - **状态**：已落地（本地提交·未推送）。
 
