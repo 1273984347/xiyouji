@@ -526,6 +526,15 @@ def main():
         return 0
     _apply_pend(ctx.pend, ctx.batch)
     selfcheck = _post_check(ctx.pend, ctx.batch)
+    # W960：治理文档体积提示位（每批收官报一次·判据本体在 preflight 开工面）
+    try:
+        import check_doc_size_budget as _dsb
+
+        _dsb_counts, _dsb_lines = _dsb.collect()
+        for _line in _dsb_lines:
+            print("[SIZE]", _line)
+    except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"[SIZE] 体积提示位不可用（{_exc}）")
     print(f"[APPLY] 级联完成：{ctx.batch} / {ctx.new_rule}，共 {len(ctx.pend)} 个文件；写后自检 {'发现 %d 项' % len(selfcheck) if selfcheck else '全部通过'}")
     return 0
 
