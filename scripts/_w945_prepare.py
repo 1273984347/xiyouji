@@ -30,7 +30,9 @@ RAW_DIRS = [os.path.join(SET_DIR, "raw", "round5"),
             os.path.join(SET_DIR, "raw")]
 SITE_IMG = os.path.join(REPO, "site", "static", "images")
 TARGET = (250, 247, 240)          # 页面底色 #FAF7F0
-OUT_W, OUT_H = 1200, 1600         # 站点版尺寸（3:4 · 420px 显示 @2x 富余）
+OUT_W, OUT_H = 1200, 1600         # 母版尺寸（3:4）
+SITE_W, SITE_H = 1200, 1152       # 站点版尺寸（主体对齐顶部后的统一画布）
+SITE_TOP_PAD = 6                  # 站点版主体顶距画布顶的余量（px）
 LABEL = "plate-line-0%d-"
 
 
@@ -90,6 +92,18 @@ def collect_raws():
     return [picked[k] for k in sorted(picked)]
 
 
+def ink_top(im, tol=26):
+    """母版墨迹包围盒的顶边（主体顶）——站点版对齐顶部时用"""
+    from PIL import ImageChops
+    reg = im.convert("RGB")
+    d = ImageChops.difference(reg, Image.new("RGB", reg.size, TARGET))
+    r, g, b = d.split()
+    m = ImageChops.lighter(ImageChops.lighter(r, g), b)
+    mask = m.point(lambda v: 255 if v > tol else 0)
+    bbox = mask.getbbox()
+    return bbox[1] if bbox else 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
@@ -128,10 +142,21 @@ def main() -> int:
             continue
         out_png = os.path.join(SET_DIR, stem + ".png")
         im.save(out_png, "PNG", optimize=True)
+        # assets 内的 webp = 完整母版（含上部 28% 留白·供卡片叠字 / 分享图裁切用）
         out_webp = os.path.join(SET_DIR, stem + ".webp")
         im.save(out_webp, "WEBP", quality=90, method=6)
-        import shutil
-        shutil.copy2(out_webp, os.path.join(SITE_IMG, stem + ".webp"))
+        # 站点版 = **只裁掉主体上方的留白**（W951 用户裁决「裁掉·页面更紧凑」）
+        #   做法：裁切线 cut = 该张主体顶 − 6 px 余量 ⇒ 主体顶落在画布 6 px 处（页面标题紧贴主体）。
+        #   **必须保留下部空白**——那是画师留的「地面留白」，裁掉会把人物从地面上「拔起来」，
+        #   破坏「人物站在地上」的构图关系（W951 实测教训：初版把下部也裁了 ⇒ 人物悬空）。
+        #   逐张裁切 ⇒ 站点版高度随主体顶浮动（1056–1189），页面呈现高度差 ≤ 46 px。
+        top_i = ink_top(im)
+        cut = max(0, top_i - SITE_TOP_PAD)
+        site_im = im.crop((0, cut, OUT_W, OUT_H))
+        site_webp = os.path.join(SITE_IMG, stem + ".webp")
+        site_im.save(site_webp, "WEBP", quality=90, method=6)
+        print("      站点版：主体顶 %d → 裁掉上部 %d px（保留下部地面留白）→ %dx%d（%s）" % (
+            top_i, cut, site_im.size[0], site_im.size[1], os.path.basename(site_webp)))
         thumbs.append((base, im))
 
     # ---- 拼图：4 列 · 行数随张数自适应（16 张 → 4×4）----

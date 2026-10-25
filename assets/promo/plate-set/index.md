@@ -12,7 +12,7 @@
 - `raw/`
 - `zoom-w948/`
 
-## 文件（36）
+## 文件（38）
 
 ### 样式与资源
 
@@ -51,6 +51,8 @@
 - `preview-contact-sheet.png`
 - `preview-contact-sheet.webp`
 - `preview-detail-sheet.png`
+- `preview-site-sheet.png`
+- `preview-site-sheet.webp`
 - `preview-zoom-final.png`
 
 ---

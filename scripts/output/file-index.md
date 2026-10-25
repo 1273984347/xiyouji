@@ -11,6 +11,22 @@
 ---
 
 
+## W951 题图版式批（站点版裁掉上部留白·16 张）（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/plate-line-0[1-8]-*.webp | W951 | 16 张站点版重出（只裁上部留白·主体顶对齐 6 px·保留下部地面留白） |
+| assets/promo/plate-set/plate-line-*.png / *.webp | W951 | 完整母版 16 张（1200×1600·含上部留白·供卡片叠字用） |
+| assets/promo/plate-set/preview-site-sheet.png / .webp | W951 | 站点版拼图（16 张·页面实际呈现） |
+| assets/promo/plate-set/README.md | W951 | 资产分层说明 + 四版方案迭代记录 |
+| scripts/_w951_check_crop.py | W951 | 站点版验算判据（主体顶/底未切 + 地面留白 > 0） |
+| scripts/_w951_site_sheet.py | W951 | 站点版拼图生成器 |
+| scripts/_w945_prepare.py | W951 | 站点版生成逻辑改为「只裁上部留白·保留下部地面留白」 |
+| scripts/_w951_cascade.py | W951 | 四面登记 + 当前态指针（含共享面精确暂存） |
+| scripts/output/_cascade_files_W951.txt | W951 | 当批级联清单 |
+| CHANGELOG.md | W951 | W951 版段 |
+| docs/00-导读/W批次编号对账表.md | W951 | W951 认领行 |
+
 ## W948 内页专题题图续批（8 张线描人物题图·累计 16 张）（2026-10-25）
 
 | 文件 | W | 说明 |
