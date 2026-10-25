@@ -49,6 +49,22 @@
 | CHANGELOG.md | W961 | 新增：W961 版段（四件套） |
 | scripts/output/file-index.md | W961 | 登记：W961 段（本段） |
 
+## W960 治理文档体积归档批（2026-10-26）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_size_budget.py | W960 | 新建体积窗口门禁（CHANGELOG/file-index 各 110 段窗·超窗 preflight 判红·KB 行数为报告值） |
+| scripts/archive_segments.py | W960 | 新建常驻搬段工具（W921 守恒断言沉淀为五道·changelog 插顶与 file-index 尾追双模式） |
+| scripts/preflight_check.py | W960 | 体积窗口硬判据接线（超窗拦截开工·故障降级 WARN 禁静默） |
+| scripts/batch_cascade.py | W960 | 落盘后体积提示位（每批收官报四文件体积态） |
+| docs/00-导读/文档规范.md | W960 | §8 重标：窗口制替代 50KB/500 行旧线（两制打架消除） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W960 | 迁入 38 段（W803-W842·插顶） |
+| archive/docs/FILE-INDEX-ARCHIVE.md | W960 | 迁入 140 段（W700-W842·尾追+归档时间链） |
+| tests/unit/test_doc_size_budget.py | W960 | 体积门禁单测 4 例（含现网防回退锚） |
+| tests/unit/test_archive_segments.py | W960 | 搬段工具单测 4 例（三种段形态解析与负样本） |
+| pytest.ini · 系统架构方案v2 | W960 | pytest_collected 标记归一 910（并行竞态三数字拼接修复） |
+
+
 ## W959 T10 V1.1 计数口径订正批（2026-10-26）
 
 | 文件 | W | 说明 |
@@ -3172,44 +3188,4 @@
 | site/reader/ch010.html | W846 | 重建回灌：正文字级修正（代表页） |
 | scripts/output/_w846_spec.json | W846 | 本批 spec 十字段 |
 | docs/00-导读/W批次编号对账表.md | W846 | 认领行与收官回填 |
-
-## W845 阅读页重建影响面量化批（2026-10-21）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md | W845 | AC-21 改判已达标（262 行 ≤ 2000）·AC-25 生成侧已证·V-15 转实测·新增附录 C 口径与复现命令 |
-| docs/00-导读/W批次编号对账表.md | W845 | 认领行与收官回填 |
-| scripts/output/_w845_spec.json | W845 | 本批 spec 十字段 |
-
-## W844 系统架构批四项落地（2026-10-21）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/server/backup.ts | W844 | 新增：会话库与审计日志快照（VACUUM INTO 一致性快照 + 保留策略 + 启动钩子） |
-| xiyouji-agent-web/server/backup.test.ts | W844 | 新增：备份 9 例回归（行数一致/幂等/份数/超龄/跳过仍清理/缺失不抛/dry-run） |
-| xiyouji-agent-web/server/metrics.ts | W844 | 新增：首 token 滚动窗口（100 样本·p50/p95·脏数据丢弃） |
-| xiyouji-agent-web/server/metrics.test.ts | W844 | 新增：指标窗 7 例回归（空窗给 null/分位/淘汰/脏数据/快照语义） |
-| xiyouji-agent-web/server/chat.ts | W844 | 改：OBS-14 首 token 计时（handler 起算 + 首个 delta 记录 + 无文本记 no_text_delta） |
-| xiyouji-agent-web/server/routes.ts | W844 | 改：新增只读 GET /api/metrics（首 token 窗口摘要） |
-| xiyouji-agent-web/server/index.ts | W844 | 改：listen 回调挂 backupOnStartup（失败不阻断启动） |
-| xiyouji-agent-web/server/db.ts | W844 | 改：导出 databasePath() 供备份复用同一解析结果 |
-| xiyouji-agent-web/package.json | W844 | 改：test:server 加入 backup.test.ts 与 metrics.test.ts |
-| docs/agent/agent-web.md | W844 | 改：补会话库备份与保留期、OBS-14 首 token 两节 |
-| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W844 | 改：S8 口径纠正（dense 增益实测）+ 档 2 触发条件细化 + Q1/Q3/Q4 裁决回填 + 新增 Q5 |
-| scripts/rag/eval/queries_30q_frozen.jsonl | W844 | 新增：30 题冻结集原样迁入（与工地原件字节一致） |
-| scripts/rag/eval/queries_100q.jsonl | W844 | 新增：100 题评测集（30 冻结 + 70 标题派生·gold 由脚本解析） |
-| scripts/rag/eval/make_queries.py | W844 | 新增：题集生成器（锚点表 + gold 解析 + --check 一致性） |
-| scripts/rag/eval/eval_retrieval.py | W844 | 新增：检索复算入口（三档 + recall@1/5/10 + 报告生成） |
-| scripts/rag/README.md | W844 | 改：补检索评测节（题集构成/复算入口/基线/与历史数字关系/局限） |
-| scripts/output/rag_eval_report.md | W844 | 新增：检索评测报告（生成物·可重跑覆盖） |
-| scripts/output/_w844_spec.json | W844 | 新增：本批 spec（级联唯一来源） |
-
-## W843 pitfalls 增补批（2026-10-21）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/agent/pitfalls.md | W843 | 改：级联节增第 48 条（desc 禁含内嵌 W 号·页脚链 token 撞车）+ 数据节增第 49 条（双源同旧值假绿）；节标题 4→5、4→5 |
-| AGENTS.md | W843 | 改：§4.3 坑位总数 47→49、六主题目录级联节 4→5 与数据节 4→5、补 W843 计数口径注 |
-| scripts/output/_w843_spec.json | W843 | 新增：本批 spec（级联唯一来源） |
-| scripts/output/index.md | W843 | 改：登记 _w843_spec.json 与 _cascade_files_W843.txt |
 

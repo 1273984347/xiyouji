@@ -438,3 +438,8 @@
 ```text
 2026-10-19（W805）跨平台测试守卫热修批：W804 推送后 dev 到 main 的 PR CI 首跑在 Linux 暴露 W803 引入的测试缺陷——tests/test_xiyouji_mcp_extra.py 的目录目标守卫断言 pytest.raises(PermissionError) 绑定 Windows 专属异常子类，而 Linux 与 macOS 读目录抛 IsADirectoryError（同属 OSError），导致单元测试任务一失败七百二十九通过；修复仅动测试面（断言改为跨平台 OSError、测试更名为 test_directory_as_target_file_raises_os_error、docstring 明写 Windows PermissionError 与 Linux IsADirectoryError 同属 OSError 且守卫点等于目录当文件会抛异常不绑定平台子类），被测 xiyouji_drl_spotcheck 生产代码零改动行为不变；验证等于目标测试六十七 passed 加全量排除既有挂起文件七百一十四 passed 三 skipped 加 ruff 零加 verify 全量五十段零 FAIL 加以推送后 PR CI 复跑转绿为准
 ```
+以下为 AGENTS.md 版本脚注早期条目（W806-W806）段的原文（单行沿革链·W960 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-20（W806）GoatCounter 统计链彻底退役批：站点代码 1273984347 失效，fetch_gate_stats 实测 HTTP 404 且断链自 2026-09-30 未恢复——页面埋点采不到任何数据，却仍每页加载并产生一次无效外域请求，用户裁决彻底退役；落地为 site 根 8 加 site/data 88 加 site/en 138 共 234 页移除埋点标签且全站 data-goatcounter 残留归零，CSP 生成源去掉计数端点后重算 856 页 meta（其中 546 页原含该域放行）并同步 site/_headers，搜索两页摘除活的 window.goatcounter.count 分支，删除注入器 scripts/inject_goatcounter.py 与自托管 count.js，rum.js 删除改道分支与随之失效的 bucket 死函数并改为本地 dev 回流、显式配置外发、纯静态托管零外发三条通道，新建防回退守卫 scripts/check_no_goatcounter.py（四项判据加自测 1 正 4 负加单测 5 项并接入 ci.yml），访问统计方案改写为现状与退役记录并同步四处文档口径；验证等于守卫实跑 0 FAIL 加自测 SELF_TEST_OK 加单测 5 passed 加 CSP 零漂移加 pytest 七百一十九 passed 三 skipped（退出时挂起为 HEAD worktree 对拍复现的既有现象非本批引入）加 verify 全量五十段零 FAIL
+```
