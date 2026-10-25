@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（270）
+## 文件（276）
 
 ### Markdown 文档
 
@@ -162,6 +162,12 @@
 - `_w895_bl33_inventory.py`
 - `_w895_regen_preview.py`
 - `_w895_verify_blocks.py`
+- `_w926_fix_report.py`
+- `_w926_fix_report2.py`
+- `_w926_ia_audit.py`
+- `_w926_ia_extract.py`
+- `_w926_verify_numbers.py`
+- `_w926_visible_leak.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
