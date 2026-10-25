@@ -11,6 +11,28 @@
 ---
 
 
+## W948 内页专题题图续批（8 张线描人物题图·累计 16 张）（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/plate-line-01-jinjiao.webp | W948 | 新增·金角大王（紫金红葫芦 + 朱红封带） |
+| site/static/images/plate-line-02-niumowang.webp | W948 | 新增·牛魔王（牛首 + 混铁棍） |
+| site/static/images/plate-line-03-tieshanggongzhu.webp | W948 | 新增·铁扇公主（叶形芭蕉扇） |
+| site/static/images/plate-line-04-xiezi.webp | W948 | 新增·蝎子精（上翘蝎尾毒钩 + 倒马毒桩） |
+| site/static/images/plate-line-05-huangpaoguai.webp | W948 | 新增·黄袍怪（狼首 + 金钢琢） |
+| site/static/images/plate-line-06-zhenyuan.webp | W948 | 新增·镇元大仙（人参果 + 拂尘） |
+| site/static/images/plate-line-07-dapeng.webp | W948 | 新增·大鹏金翅雕（鹏翼 + 阴阳二气瓶） |
+| site/static/images/plate-line-08-taishanglaojun.webp | W948 | 新增·太上老君（太极图 + 拂尘） |
+| assets/promo/plate-set/ | W948 | 成品 16 张 + raw/round4 原件 + README 扩写 + 拼图 |
+| scripts/_w948_make_prompts.py | W948 | 母版逐字复用生成器（读上批 JSON 取母版） |
+| scripts/_w948_insert_plates.py | W948 | 8 页 chapter-plate 接入（幂等） |
+| scripts/_w948_cascade.py | W948 | 四面登记 + 当前态指针 |
+| scripts/_w945_plates_verify.py | W948 | 判据扩面：写死清单 → 目录扫描（16 张） |
+| scripts/output/_w948_batch1.json | W948 | 出图参数 01–04 |
+| scripts/output/_w948_batch2.json | W948 | 出图参数 05–08 |
+| CHANGELOG.md | W948 | W948 版段 |
+| docs/00-导读/W批次编号对账表.md | W948 | W948 认领行 |
+
 ## W945 内页专题题图成套（8 张 3:4 线描人物题图）（2026-10-25）
 
 | 文件 | W | 说明 |
