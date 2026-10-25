@@ -9,6 +9,7 @@
 """
 from __future__ import annotations
 
+import json
 import pathlib
 
 HEAD = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" '
@@ -45,14 +46,14 @@ ICONS: dict[str, tuple[str, str, str]] = {
     "radio": ("播讲（广播匣·天线与声纹）",
               "M4.2 9.6h15.6v8.9a1.5 1.5 0 0 1-1.5 1.5H5.7a1.5 1.5 0 0 1-1.5-1.5zM8.4 9.6l3.6-5.1 3.6 5.1M8 13.2h8M8 16.4h5"),
     "pin": ("钉住（图钉·圆头斜肩与钉尖）",
-            "M12 3.4a2.7 2.7 0 0 0-2.7 2.7v2.1L6.5 11.4h11L15.7 8.2V6.1A2.7 2.7 0 0 0 12 3.4zM12 11.4v9.2"),
+            "M9.4 3.6h5.2l-.8 5.1 2.4 2.2H7.8l2.4-2.2zM12 10.9v9.5M10.2 3.6h3.6"),
     "warn": ("警示（三角叹号·顶角锐立）",
              "M12 3.4l9.4 16.2H2.6zM12 9.4v4.8M12 16.8v.6"),
     "quote": ("引语（双曲引号·竖排双勾）",
-              "M9.4 6.6c-2.6 0-4.2 2.1-4.2 4.6 0 2 1.3 3.4 3 3.4 1.5 0 2.6-1.1 2.6-2.6 0-1.4-1-2.5-2.4-2.5-.3 0-.6 0-.9.1.4-1.1 1.3-1.8 2.6-2l-.7-1zM18.6 6.6c-2.6 0-4.2 2.1-4.2 4.6 0 2 1.3 3.4 3 3.4 1.5 0 2.6-1.1 2.6-2.6 0-1.4-1-2.5-2.4-2.5-.3 0-.6 0-.9.1.4-1.1 1.3-1.8 2.6-2l-.7-1z"),
+              "M6.2 15.4V9.8c0-2.5 1.6-4.3 4-4.8l.5 1.7c-1.4.5-2.2 1.4-2.3 2.6h2.4v6.1zM14.6 15.4V9.8c0-2.5 1.6-4.3 4-4.8l.5 1.7c-1.4.5-2.2 1.4-2.3 2.6H19v6.1z"),
     # —— 人物与学阶 ——
     "child": ("幼学（童蒙·圆头身）",
-              "M12 4.6a2.7 2.7 0 1 0 0 5.4 2.7 2.7 0 0 0 0-5.4zM6.4 20.6c0-3.5 2.5-5.9 5.6-5.9s5.6 2.4 5.6 5.9"),
+              "M12 4.4a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM8.2 20.4c0-2.7 1.7-4.6 3.8-4.6s3.8 1.9 3.8 4.6M6.4 12.4l2.4 1.6M17.6 12.4l-2.4 1.6"),
     "schoolbag": ("初学（书囊·提梁与横带）",
                   "M6.4 9.6h11.2a1.6 1.6 0 0 1 1.6 1.6v8a1.6 1.6 0 0 1-1.6 1.6H6.4a1.6 1.6 0 0 1-1.6-1.6v-8a1.6 1.6 0 0 1 1.6-1.6zM9.2 9.6V7.8a2.8 2.8 0 0 1 5.6 0v1.8M7.6 14.6h8.8"),
     "cap": ("高学（士冠·垂缨）",
@@ -72,8 +73,8 @@ ICONS: dict[str, tuple[str, str, str]] = {
     "note": ("便签与文档（折角纸页）",
              "M6 3.6h8l4 4v12.8H6zM14 3.6v4h4M9.2 12h5.6M9.2 15.4h3.6"),
     "link": ("链接（双环相扣）",
-             "M9.7 14.3a3.5 3.5 0 0 0 5 0l2.6-2.6a3.5 3.5 0 0 0-5-5l-1.3 1.3M14.3 9.7a3.5 3.5 0 0 0-5 0l-2.6 2.6a3.5 3.5 0 0 0 5 5l1.3-1.3"),
-    "menu": ("菜单（三横·中线略短）", "M4 7.2h16M4 12h13M4 16.8h16"),
+             "M8.4 12.2a3.4 3.4 0 0 0 2.4 5.9l1.6-1.6a3.4 3.4 0 0 0 0-4.8M15.6 11.8a3.4 3.4 0 0 0-2.4-5.9l-1.6 1.6a3.4 3.4 0 0 0 0 4.8M9.9 14.1l4.2-4.2"),
+    "menu": ("菜单（三横·中线略短）", "M4 7h16M4 12h16M4 17h16"),
     "close": ("关闭（方框内叉·与判定叉区分）",
               "M7 4.9h10a2.1 2.1 0 0 1 2.1 2.1v10a2.1 2.1 0 0 1-2.1 2.1H7a2.1 2.1 0 0 1-2.1-2.1V7A2.1 2.1 0 0 1 7 4.9zM9.8 9.8l4.4 4.4M14.2 9.8l-4.4 4.4"),
     "play": ("播放（实心三角·尖朝右）", "M8.4 5.4l10 6.6-10 6.6z"),
@@ -82,6 +83,14 @@ ICONS: dict[str, tuple[str, str, str]] = {
 
 
 def main() -> int:
+    # W950：光学尺寸归一参数（视觉边长统一 + 网格居中）· 生成 scripts/output/_w950_icon_normalize.json
+    NORM = {}
+    _norm_file = pathlib.Path("scripts/output/_w950_icon_normalize.json")
+    if _norm_file.exists():
+        try:
+            NORM = json.loads(_norm_file.read_text(encoding="utf-8"))
+        except Exception:
+            NORM = {}
     out = pathlib.Path("site/static/icons/ui")
     out.mkdir(parents=True, exist_ok=True)
     for name, spec in ICONS.items():
@@ -89,6 +98,18 @@ def main() -> int:
         tr = spec[2] if len(spec) > 2 else ""
         fill = ' fill="currentColor"' if name.endswith("-solid") else ""
         body = f'<path d="{d}"{tr}{fill}/>' if (tr or fill) else f'<path d="{d}"/>'
+        _n = NORM.get(name)
+        if _n:
+            # 归一参数须与既有 transform（镜像等）合并进**同一个** transform 属性，
+            # 否则会拼出「d="…" translate(..) transform=".."」这种非法 XML。
+            _pre = f'translate({_n["tx"]} {_n["ty"]}) scale({_n["s"]})'
+            if tr:
+                _inner = tr.strip()
+                _inner = _inner[_inner.index('"') + 1:-1]
+                tr = f' transform="{_pre} {_inner}"'
+            else:
+                tr = f' transform="{_pre}"'
+            body = f'<path d="{d}"{tr}{fill}/>'
         svg = f"{HEAD}\n  {body}\n{TAIL}"
         (out / f"{name}.svg").write_text(svg, encoding="utf-8")
         print(f"{name:12s} {len(svg):4d}B  {desc}")
