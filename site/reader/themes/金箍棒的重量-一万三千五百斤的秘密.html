@@ -84,6 +84,10 @@
   .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
     border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
   .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
+    /* W953：专题题图（线描主题立像·沿用章回页 chapter-plate 范式·浅底宣纸图暗色模式隐藏） */
+    .chapter-plate { margin: 28px auto 36px; max-width: 420px; }
+    .chapter-plate img { width: 100%; height: auto; display: block; opacity: .92; }
+    html[data-theme="dark"] .chapter-plate { display: none; }
 </style>
 </head>
 <body>
@@ -108,6 +112,9 @@
   <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>金箍棒的重量：一万三千五百斤，藏着什么秘密？</h1>
+<figure class="chapter-plate">
+<img src="../../static/images/plate-line-11-jingubang-zhongliang.webp" alt="金箍棒重量主题线描立像：如意金箍棒横置，下方一杆大秤、秤砣是一只金箍环，旁边猴王侧身托起秤杆" loading="lazy" decoding="async">
+</figure>
 <blockquote>
 <p>W286（git 创建提交溯源 · W424 回填）
 核验状态：未核验</p>

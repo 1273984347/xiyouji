@@ -23,7 +23,10 @@ from PIL import Image, ImageDraw
 REPO = r"D:\xiyouji"
 SET_DIR = os.path.join(REPO, "assets", "promo", "plate-set")
 # 出图轮次目录：靠前者优先（重出张落在后一轮），缺失的靠后者补齐
-RAW_DIRS = [os.path.join(SET_DIR, "raw", "round7"),
+RAW_DIRS = [os.path.join(SET_DIR, "raw", "round10"),
+            os.path.join(SET_DIR, "raw", "round9"),
+            os.path.join(SET_DIR, "raw", "round8"),
+            os.path.join(SET_DIR, "raw", "round7"),
             os.path.join(SET_DIR, "raw", "round6"),
             os.path.join(SET_DIR, "raw", "round5"),
             os.path.join(SET_DIR, "raw", "round4"),
