@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-BcTe2W+RcJSC8r8nbcQmgahL+KT/XoFvW/PnnwlvtIk=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/y32s3NApwi6/KTGXI5edCiacUM6LpDr2OwAHTB9P+g=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Pilgrim Team Psychology Arc · Annotated Journey to the West</title>
@@ -1560,7 +1560,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <h2 id="sec-arc">② 100-Chapter Psychology Curve (Timeline Animation)</h2>
             <p>Evolution of the five pilgrims’ psychological states (0–10 composite score) across 16 key chapters. Hollow dots mark key turning points. Drag the slider or click Play to advance the animation chapter by chapter; speed is adjustable.</p>
             <div class="control-row" role="group" aria-label="Timeline controls">
-                <button class="ctrl-btn play" id="play-btn" aria-label="Play/Pause"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>Play</button>
+                <button class="ctrl-btn play" id="play-btn" aria-label="Play/Pause"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z" transform="translate(-6.1081 -4.2162) scale(1.3514)"/></svg>Play</button>
                 <div class="slider-wrap">
                     <span class="ctrl-label">Chapter:</span>
                     <input type="range" id="chapter-slider" min="1" max="100" value="100" aria-label="Chapter slider" />
@@ -2378,17 +2378,17 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         if (playTimer) {
             clearInterval(playTimer);
             playTimer = null;
-            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>Play';
+            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z" transform="translate(-6.1081 -4.2162) scale(1.3514)"/></svg>Play';
             btn.classList.remove("playing");
         } else {
             if (currentChapter >= 100) currentChapter = 1;
-            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 5.6v12.8M14.8 5.6v12.8"/></svg>Pause';
+            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 5.6v12.8M14.8 5.6v12.8" transform="translate(-3.0 -3.0) scale(1.25)"/></svg>Pause';
             btn.classList.add("playing");
             playTimer = setInterval(() => {
                 if (currentChapter >= 100) {
                     clearInterval(playTimer);
                     playTimer = null;
-                    btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>Play';
+                    btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z" transform="translate(-6.1081 -4.2162) scale(1.3514)"/></svg>Play';
                     btn.classList.remove("playing");
                     return;
                 }
@@ -2412,7 +2412,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     document.getElementById("reset-btn").addEventListener("click", function() {
         if (playTimer) { clearInterval(playTimer); playTimer = null; }
         const btn = document.getElementById("play-btn");
-        btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>Play';
+        btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z" transform="translate(-6.1081 -4.2162) scale(1.3514)"/></svg>Play';
         btn.classList.remove("playing");
         currentChapter = 100;
         document.getElementById("chapter-slider").value = 100;
@@ -2423,7 +2423,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             clearInterval(playTimer);
             playTimer = null;
             const btn = document.getElementById("play-btn");
-            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>Play';
+            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z" transform="translate(-6.1081 -4.2162) scale(1.3514)"/></svg>Play';
             btn.classList.remove("playing");
         }
         updateChapter(e.target.value);

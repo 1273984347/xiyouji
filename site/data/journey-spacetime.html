@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-fOWE1zUs0vn6EhWaqlpQCXCDdfbfdfgYIQAP2TmUIqA=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-eGIoCeTe2yP1tlpFpk5qUYW8NpuwDOse2Y3dE6B7l34=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经路线时空双轴可视化 · 详解西游记</title>
@@ -1557,7 +1557,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <h2 id="sec-spacetime">① 时间 × 空间双轴轨迹图</h2>
             <p>横轴为回目（1-100），纵轴为地理位置（自下而上：长安→灵山）。每个圆点为一次关键事件，颜色按事件类型区分；同地点多事件按 X 轴顺序展开。点击"播放"按回目顺序推进，或拖动滑块手动定位。</p>
             <div class="control-row" role="group" aria-label="时间轴控制">
-                <button class="ctrl-btn play" id="play-btn" aria-label="播放/暂停"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>播放</button>
+                <button class="ctrl-btn play" id="play-btn" aria-label="播放/暂停"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z" transform="translate(-6.1081 -4.2162) scale(1.3514)"/></svg>播放</button>
                 <div class="slider-wrap">
                     <span class="ctrl-label">回目：</span>
                     <input type="range" id="chapter-slider" min="1" max="100" value="100" aria-label="回目滑块" />
@@ -2158,17 +2158,17 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         if (playTimer) {
             clearInterval(playTimer);
             playTimer = null;
-            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>播放';
+            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z" transform="translate(-6.1081 -4.2162) scale(1.3514)"/></svg>播放';
             btn.classList.remove("playing");
         } else {
             if (currentChapter >= 100) currentChapter = 1;
-            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 5.6v12.8M14.8 5.6v12.8"/></svg>暂停';
+            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 5.6v12.8M14.8 5.6v12.8" transform="translate(-3.0 -3.0) scale(1.25)"/></svg>暂停';
             btn.classList.add("playing");
             playTimer = setInterval(() => {
                 if (currentChapter >= 100) {
                     clearInterval(playTimer);
                     playTimer = null;
-                    btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>播放';
+                    btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z" transform="translate(-6.1081 -4.2162) scale(1.3514)"/></svg>播放';
                     btn.classList.remove("playing");
                     return;
                 }
@@ -2183,7 +2183,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
     document.getElementById("reset-btn").addEventListener("click", function() {
         if (playTimer) { clearInterval(playTimer); playTimer = null; }
         const btn = document.getElementById("play-btn");
-        btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>播放';
+        btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z" transform="translate(-6.1081 -4.2162) scale(1.3514)"/></svg>播放';
         btn.classList.remove("playing");
         currentChapter = 100;
         document.getElementById("chapter-slider").value = 100;
@@ -2194,7 +2194,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             clearInterval(playTimer);
             playTimer = null;
             const btn = document.getElementById("play-btn");
-            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>播放';
+            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z" transform="translate(-6.1081 -4.2162) scale(1.3514)"/></svg>播放';
             btn.classList.remove("playing");
         }
         updateChapter(e.target.value);

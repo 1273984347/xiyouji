@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W949），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W950），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,26 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W950（2026-10-25）：图标集打磨优化批（重画 13 枚 + 光学尺寸归一 + 1967 处内联 SVG 图形同步 + 唯一事实源刷新器）
+
+> **来源**：用户 2026-10-25 令「先把已经做好的图标进行打磨优化」⇒ 本批只打磨既有 45 枚（29 通用 + 16 时间线专属），不扩展新图标。
+
+> - **文件**：site/static/icons/ui/（45 枚 SVG 资产重生成）、scripts/_w939_gen_icons.py、scripts/_w946_gen_timeline_icons.py（生成器接入归一参数）、scripts/_w950_normalize.py（新增·光学尺寸归一器）、scripts/_w950_refresh_icon_paths.py（新增·图形同步刷新器）、scripts/output/_w950_icon_normalize.json（新增·45 枚归一参数）、scripts/output/_w946_timeline_icons.js、scripts/output/_cascade_files_W950.txt、xiyouji-agent-web/src/components/UiIcons.tsx（由资产重建）、site/**（1967 处内联 SVG 图形同步 · 646 个文件）、docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、CITATION.cff。
+
+**打磨前的问题（量化 + 目视双证）**：① 视觉边长 **12.8~20.4（极差 7.6 · 比值 1.59×）**——逐枚渲染量「墨色外接框」得出，目测只觉「有点不齐」；② **9 枚中心偏移**（如 `tl-pilgrim` 中心 x=14.5 明显偏右）；③ **11 枚辨识度弱**（link / menu / quote / child / pin / tl-pilgrim / tl-punctuation / tl-critical-edition / tl-newyear-print / tl-brush-comment / tl-mask）；④ **与既有重复** 2 处（`tl-scroll` ≡ 通用 `scroll`；`tl-pencil` ≈ 通用 `pen`）。
+
+**重画 13 枚**（逐条记明改什么）：link（水平对置交叠双环）· menu（三横等长）· quote（加大并底部对齐）· child（加童蒙姿态：身+手+足）· pin（梯形钉头+顶帽+钉身）· tl-brush-comment（笔 + 三枚**独立**评点）· tl-critical-edition（两册并排 + 侧栏校注条）· tl-mask（戏曲脸谱：额饰+对称眉眼+口）· tl-newyear-print（竖幅挂轴 + 画中人物 + 边框）· tl-pencil（笔 + 下方三道批注线）· tl-pilgrim（侧身行脚僧：背经卷+持杖+日轮）· tl-punctuation（逗号+句号+一对引号横排居中）· tl-scroll（竖轴 + 展开卷面，与短轴头版区分）。
+
+**光学尺寸归一**（系统化那一半）：生成器接入归一参数环节——渲染量测每枚墨色外接框 ⇒ 统一缩放到目标视觉边长（20；细长形符号按 18，避免三角/双竖被撑得过重）⇒ 平移到 24 网格中心 (12,12)；参数落 `scripts/output/_w950_icon_normalize.json`（生成器读取 ⇒ 仍是单一事实源）。**视觉边长极差 7.6 → 2.2 · 最大/最小比 1.59× → 1.12× · 中心偏移 9 枚 → 0 枚**；实开页面内 timeline 的 22 枚图标**尺寸全同 25.6px**。
+
+**图形同步刷新器**（资产改了必须能同步到页面）：站点的内联 SVG 把 path **写死在 HTML 里** ⇒ 改了资产文件页面不会变 ⇒ 新增 `scripts/_w950_refresh_icon_paths.py`：A 通用集内联 SVG 按 path 的 **(d, transform, fill) 复合键**反查图标名 → 替换为新资产 path（含归一 transform）⇒ **1967 处 / 646 个文件**（复合键是必需的：单靠 `d` 有三组歧义 scroll/tl-scroll、star/star-solid、thumb-up/thumb-down）；B timeline 的 `TL_ICO` 映射块整段替换；C agent-web 的 `UiIcons.tsx` **由资产重建**（手抄 path 必然漂移）。幂等。
+
+**当场修掉的一处真缺陷**：改了内联脚本（`TL_ICO` 块）后未重算 CSP 哈希 ⇒ 浏览器报 `Executing inline script violates Content Security Policy 'sha256-j4fJLNv…'` ⇒ **整个内联脚本被拒执行** ⇒ 时间线事件卡渲染中断（实测 `svgIco=0` / `eventCards=0`）⇒ 补跑 `generate_csp.py` 后恢复（22 事件卡 / 22 图标 / CSP 856 页 0 漂移）。这是仓内铁律第 3 条的第二次现场复现。
+
+**经验 3 条**：E-19 矢量资产改动必须配「图形同步刷新器」（复合键反查·单靠 d 会因同形异义歧义）· E-20 视觉尺寸归一是图标集打磨最系统的一步（机器量测比目测可靠）· E-21 改内联脚本必须立刻跑 `generate_csp.py` 并 `--check`（哈希失配让整个脚本被拒执行·表现为「数据不渲染」而非报错）。
+
+**未改**：任何管控脚本逻辑；正文装饰 emoji 与箭头符号；并行会话 W948 批在途件（对方已完成收官·当前无在途共享面内容）。
 
 ### W949（2026-10-25）：图标治理换路径复核批（第二次追问「确定做完了吗」· 堵数据源回归漏洞 + 字段图标位判据入机检 + 登记剩余 71 条）
 

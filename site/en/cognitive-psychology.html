@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-YqwNNLH+UZLKntVZqfNHsch+UpvNe0XLtuAf+Exru5w=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1gK2vbrCgVylWNR7w106o8BbtlI1iY4S0e1Eh4pTdws=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Cognitive Psychology · Annotated Journey to the West</title>
@@ -2370,8 +2370,8 @@ table.data-table th, table.data-table td { white-space: nowrap; }
         rows.append('td').text(d => d.actual);
         rows.append('td').text(d => d.wukong_judgment);
         rows.append('td').html(d => d.judgment_correct
-            ? '<span class="icon-correct"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.8 12.4l4.7 4.9L19.2 6.8"/></svg></span>'
-            : '<span class="icon-wrong"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 6.4l11.2 11.2M17.6 6.4L6.4 17.6"/></svg></span>');
+            ? '<span class="icon-correct"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.8 12.4l4.7 4.9L19.2 6.8" transform="translate(-3.0 -3.0625) scale(1.25)"/></svg></span>'
+            : '<span class="icon-wrong"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 6.4l11.2 11.2M17.6 6.4L6.4 17.6" transform="translate(-6.75 -6.75) scale(1.5625)"/></svg></span>');
         rows.append('td').text(d => d.cognitive_error);
         rows.append('td').text(d => d.consequence);
     }

@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（27）
+## 文件（45）
 
 ### 样式与资源
 
@@ -26,7 +26,9 @@
 - `cross.svg`
 - `globe.svg`
 - `inspect.svg`
+- `link.svg`
 - `menu.svg`
+- `note.svg`
 - `pause.svg`
 - `pen.svg`
 - `pin.svg`
@@ -41,6 +43,22 @@
 - `star.svg`
 - `thumb-down.svg`
 - `thumb-up.svg`
+- `tl-brush-comment.svg`
+- `tl-codex.svg`
+- `tl-comic.svg`
+- `tl-critical-edition.svg`
+- `tl-database.svg`
+- `tl-film.svg`
+- `tl-gamepad.svg`
+- `tl-mask.svg`
+- `tl-newyear-print.svg`
+- `tl-pencil.svg`
+- `tl-pilgrim.svg`
+- `tl-punctuation.svg`
+- `tl-scroll.svg`
+- `tl-star-spark.svg`
+- `tl-taiji.svg`
+- `tl-tv.svg`
 - `warn.svg`
 
 ---
