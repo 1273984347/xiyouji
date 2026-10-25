@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W947），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W949），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,41 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W949（2026-10-25）：图标治理换路径复核批（第二次追问「确定做完了吗」· 堵数据源回归漏洞 + 字段图标位判据入机检 + 登记剩余 71 条）
+
+> **来源**：用户 2026-10-25 第二次追问「你确定现在已经做完图标了吗」⇒ 本批**刻意避开前三轮已用过的三条路径**，改查没查过的地方。
+
+> - **文件**：dataset/timeline.json（数据源 22 个 icon 字段 emoji → 图标名）、scripts/_w949_fix_dataset.py、scripts/_w949_allowlist.py、scripts/check_icon_fields.py（字段图标位判据）、scripts/check_emoji_icons.py（第 50 门禁挂入 A2 段）、scripts/output/_w949_icon_field_allowlist.json、docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、CITATION.cff。
+
+**换路径复核**：① 扫描范围从「4 个目录」扩到**全仓 17 个顶层目录 · 全部文件类型**（前三轮从未覆盖 `scripts/` `docs/` `archive/` `dataset/` `tests/` `.github/`）；② 新增**字段图标位**判据（`avatar:` / `icon:` / `flag:` / `STAGE_EMOJI`）；③ 数据源与页面内嵌副本**逐位对拍**。
+
+**抓出的真遗漏**：① **`dataset/timeline.json` 仍含 22 个 emoji icon 字段** ⇒ ⚠️ **回归漏洞**：任何一次跑生成器都会把 emoji 灌回页面，治理结果不可复现（假收敛）；② `dataset/ai-dialogue.json` 6 处 `avatar`；③ `dataset/cross-time-danmaku.json` 4 处 `flag` + `site/en/json/rescue_roi.json` 4 处 `icon`；④ `ai-dialogue`（中英）12 处 `avatar:` 名人头像位；⑤ `narrative-experiment`（中英）18 处 `avatar:`/`icon:`；⑥ `methodology-matrix`（中英）9 处 `icon:`；⑦ `chart-design`（中英）10 处 `STAGE_EMOJI`；⑧ `cross-time-danmaku`（中英）8 处 `flag:` 国籍标识。
+
+**本批已做**：① **堵回归漏洞**——修 `dataset/timeline.json` 的 22 个 icon 字段，并与中英页面内嵌副本逐位对拍（22==22 且逐位相同）⇒ 该数据源剩余具象字符 **0**；② **把漏网变成机检可抓**——新增 `scripts/check_icon_fields.py` 与白名单 `scripts/output/_w949_icon_field_allowlist.json`（**由扫描器实测产出 + 程序附理由**，非手写字符：手写会与扫描器口径漂移，ZWJ 序列被拆 / VS16 丢失 / 国旗逐字排序三类漂移都真实发生过）⇒ 白名单外的新命中判红、白名单条目已消失判红（防腐化）、白名单清空即自然转绿（不设恒红豁免）⇒ 第 50 门禁新增 **A2 段**，现状命中 **71 条 / 13 个文件**、白名单外 0、待核销 0。
+
+**剩余 71 条已登记逐类治理方案**（下一批施工）：名人头像 26（需每人专属头像）· 剧本角色头像 8 · 指标卡图标 9 · 情景卡图标 9 · 螺旋阶段符号 10 · 国籍标识 12（⚠️ 国旗是复杂旗帜图案，线描图标集无法表达 ⇒ **待用户裁决**：改文字国名 / 两字母代码，还是自绘国旗图形）。
+
+**经验补充 3 条**：E-16 治理必须同时改「页面」与「数据源」（只改内嵌副本 ⇒ 不可复现 ⇒ 须逐位对拍）· E-17 机检白名单必须由扫描器产出、不可手写（规范化口径漂移）· E-18 「扫过某目录」与「覆盖该目录」是两件事（复核面要按**产物形态**枚举）。
+
+### W948（2026-10-25）：内页专题题图续批（8 张线描人物题图·与上批同族·累计 16 张）
+
+> **来源**：用户 2026-10-25 令「再继续帮我做几张素材图」，并要求开工前先问三件事。
+>
+> **三问答复**：① 用途与画幅 = **内页专题题图续批 · 3:4 竖版** ② 张数 = **8 张** ③ 参考风格 = **沿用站内线描墨稿风**（附加题材范围 = **人物专题扩批**）。
+>
+> - **文件**：site/static/images/plate-line-01-jinjiao.webp … plate-line-08-taishanglaojun.webp、assets/promo/plate-set/**、8 个 reader 人物页、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/_w948_*.py、scripts/output/_w948_batch*.json
+
+**承接 W945**：站内线描人物题图由 8 张扩到 **16 张**，规格与画幅完全一致（3:4 · 1200×1600 · 宣纸底 + 单色墨线 + 赭金细节 + 单处朱砂点睛 · 上部 28% 纯纸面留白 · 主体完整全身立像占高五成）。
+
+**母版逐字复用由构造保证**：`scripts/_w948_make_prompts.py` 读上批 `_w945_batch1.json`，取「主体：」之前的 252 字符风格母版直接拼本批 SUBJECT 段 ⇒ 母版不靠人手抄、不靠人眼核对；再由 `_w945_check_prompts.py` 的 `==` 断言二次确认。
+
+**题材**（取经路上的妖怪与神将组，每张一个独占标志物）：牛魔王（牛首 + 混铁棍）、铁扇公主（叶形芭蕉扇 + 短柄缠绳）、蝎子精（上翘蝎尾毒钩 + 倒马毒桩）、金角大王（紫金红葫芦 + 朱红封带）、黄袍怪（狼首 + 金钢琢）、镇元大仙（人形人参果 + 拂尘）、大鹏金翅雕（鹏翼 + 阴阳二气瓶）、太上老君（太极图 + 拂尘）。
+
+**判据扩面**：`_w945_plates_verify.py` 由写死的 8 张清单改为**扫目录取全部 `plate-line-*.png`** ⇒ 一套判据（J1–J9 + 负样本自检）一次覆盖 16 张。
+
+> - **验证**：（见本批脚本输出与对账表回填）
+> - **状态**：在途（认领登记 W948·待提交入库）
 
 ### W947（2026-10-25）：图标治理复验与补治批（用户追问「你确定现在已经做完图标了吗」→ 三路全量复验 + 补治两处遗漏范围 + 更正一处误判）
 

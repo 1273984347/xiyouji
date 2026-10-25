@@ -1950,6 +1950,12 @@
 | xiyouji-agent-web/src/components/PermissionDialog.tsx | W947 | ⚠️📝 纯图标位 → 内联 SVG 组件（W947） |
 | xiyouji-agent-web/src/components/InlinePermissionCard.tsx | W947 | ⚠️ 图标位 → 内联 SVG 组件（W947） |
 | scripts/_w947_add_icons.py | W947 | 新增：通用图标集补 2 枚（note / link） |
+| dataset/timeline.json | W949 | 数据源：22 个 icon 字段 emoji → 语义专属图标名（与中英页面逐位对拍·堵回归漏洞） |
+| scripts/_w949_fix_dataset.py | W949 | 新增：数据源 icon 字段治理器（含与页面副本逐位对拍） |
+| scripts/_w949_allowlist.py | W949 | 新增：字段图标位白名单重建器（扫描器实测产出 + 程序附理由） |
+| scripts/check_icon_fields.py | W949 | 新增：字段图标位判据（avatar/icon/flag/stage·与白名单逐条比对） |
+| scripts/check_emoji_icons.py | W949 | 第 50 门禁新增 A2 段（挂入字段图标位判据） |
+| scripts/output/_w949_icon_field_allowlist.json | W949 | 新增：字段图标位白名单（71 条·扫描器实测产出） |
 
 ## W899 合并后收尾修正（2026-10-23）
 

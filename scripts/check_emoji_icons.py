@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""W947 · 第 50 门禁：UI 图标位 emoji 残留 + 图标渲染正确性
+"""W949 · 第 50 门禁：UI 图标位 emoji 残留 + 图标渲染正确性
 
 两段判据（缺一不可）：
   A 静态：全仓 UI 图标位不得残留 emoji 表情/图形字符
@@ -280,10 +280,23 @@ def main() -> int:
     args = ap.parse_args()
 
     hits = scan_static()
+    # ---- 字段图标位扩展判据（avatar / icon / flag / stage·W949 起）----
+    field_hits, field_stale, field_new = [], [], []
+    try:
+        import importlib.util as _il
+        _spec = _il.spec_from_file_location(
+            'wif', str(ROOT / 'scripts' / 'check_icon_fields.py'))
+        _wif = _il.module_from_spec(_spec)
+        _spec.loader.exec_module(_wif)
+        field_hits = _wif.scan_field_icons()
+        field_new, field_stale = _wif.compare(field_hits)
+    except Exception as _e:
+        print(f'  字段图标位判据未执行: {_e}')
     print("=" * 72)
-    print("W947 · 第 50 门禁 UI 图标位 emoji 残留与图标渲染正确性")
+    print("W949 · 第 50 门禁 UI 图标位 emoji 残留与图标渲染正确性")
     print("=" * 72)
     print(f"A 静态段：UI 图标位 emoji 命中 {len(hits)} 处")
+    print(f"A2 字段位判据：命中 {len(field_hits)} 条 · 白名单外 {len(field_new)} · 已消失待核销 {len(field_stale)}")
     for h in hits[:20]:
         print(f"  {h['file']}:{h['line']}  [{h['cat']}]  {h['chars']}  :: {h['snippet'][:50]}")
 
