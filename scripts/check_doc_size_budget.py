@@ -78,8 +78,8 @@ def _read(rel):
 
 
 def collect():
-    """实盘取数 → (counts, report_lines)。"""
-    counts, lines = {}, []
+    """实盘取数 → (counts, report_lines, extra_fails)。"""
+    counts, lines, extra_fails = {}, [], []
     for rel in REPORT_FILES:
         try:
             t = _read(rel)
@@ -105,14 +105,23 @@ def collect():
                 blocks = len(RE_HANDOVER_BLOCK.findall(t[h1:pm])) if 0 <= h1 < pm else -1
                 extra = "  概要块 %d" % blocks
                 extra += "（>6 须滚·W511 留 5 版口径）" if blocks > 6 else ""
+            if "AGENTS" in rel:
+                fs = t.find("*本文件由")
+                if fs >= 0:
+                    fkb = len(t[fs:t.find("\n", fs)].encode("utf-8")) / 1024
+                    extra = "  版本脚注 %.1f KB" % fkb
+                    if fkb > 4:
+                        extra_fails.append(
+                            "体积窗口 C3: AGENTS.md 版本脚注 %.1f KB > 4 KB——滚动器切分失明或条目超长"
+                            "（W964 定形契约·修法=双形态切分+条目 ≤300 字+存量迁归档）" % fkb)
             lines.append("体积报告  %-38s %7.1f KB %6d 行%s" % (rel, kb, nlines, extra))
-    return counts, lines
+    return counts, lines, extra_fails
 
 
 def gate_lines():
     """门禁入口：返回 (FAIL 清单, 输出行)。"""
-    counts, lines = collect()
-    return evaluate(counts), lines
+    counts, lines, extra_fails = collect()
+    return evaluate(counts) + extra_fails, lines
 
 
 def main() -> int:

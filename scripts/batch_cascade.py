@@ -66,8 +66,18 @@ def precheck(spec):
     if not str(spec.get("title", "")).startswith(str(spec.get("batch", ""))):
         issues.append("spec.title 未以 batch 号领衔（现役段解析取标题首个 W###·合并段场景必须显式领衔）")
     if "**文件**：" not in str(spec.get("changelog_body", "")):
-        issues.append("spec.changelog_body 缺「**文件**：」行（四件套必填·W723 起第 31 门禁 C4-f 据其对账手工件入库·"
+        issues.append("spec.changelog_body 缺「**文件**」行（四件套必填·W723 起第 31 门禁 C4-f 据其对账手工件入库·"
                       "路径须写 repo 相对路径·见 pitfalls git 类）")
+    # W964 定形契约：脚注条目头必须是「阿拉伯日期（W###）」——中文数字日期形态对滚动切分器
+    # 不可见（实证 52 条二〇二六形态条目黏成 67.1KB 巨段使「保留 5 条」契约名存实亡·AGENTS.md
+    # 被撑到 110KB）；条目是索引不是摘要，长度一并封顶。
+    _note = str(spec.get("agents_note", ""))
+    if not re.match(r"^20\d{2}-\d{2}-\d{2}（W\d{3}）", _note):
+        issues.append("spec.agents_note 未以「阿拉伯日期（W###）」条目头开场（W964 定形契约·"
+                      "中文数字日期会让滚动器失明）：%r" % _note[:40])
+    if len(_note) > 300:
+        issues.append("spec.agents_note 长 %d 字 > 300 上限（W964 定形契约·脚注是索引不是摘要·"
+                      "细节归 CHANGELOG）" % len(_note))
     return issues
 
 
@@ -179,7 +189,7 @@ def _handover_rotate_oldest(s, ctx, nl, h1pos):
     assert pm, "未找到历史概要指针"
     oldest_w = pm.group(1)
     # W713 双形态 + 窗口限定进度段内（防后文待办/方法论区 bullet 误入旋转窗）
-    blocks_all = [b for b in re.finditer(r"- \*\*(?:v[\d.]+ )?(W\d+)[^*]*\*+：", s) if b.start() > h1pos]
+    blocks_all = [b for b in re.finditer(r"- \*\*(?:v[\d.]+ )?(W\d+)[^*]*\*+[^\r\n:*]{0,30}：", s) if b.start() > h1pos]
     # W913：窗口不足 2 块不滚动（契约「只留最近 5 版」——不足时无盈可滚；原无条件滚动在
     # 单块窗口必致空窗异常·阻断后续一切级联·W912/W913 两批连续实证）
     if len(blocks_all) < 2:
@@ -210,7 +220,7 @@ def _handover_rotate_oldest(s, ctx, nl, h1pos):
     # W713 旋转语义修正：pm ← 淘汰后窗口剩余最老块（W534 滚动窗口意图——原实现 pm←new_w
     # 使下一批淘汰上批最新块、更老块永不滚动，W710→W711 实证行为）
     _win = s[h1pos:s.find("> 历史概要（W")]
-    _remain = [int(x[1:]) for x in re.findall(r"- \*\*(?:v[\d.]+ )?(W\d+)[^*]*\*+：", _win)]
+    _remain = [int(x[1:]) for x in re.findall(r"- \*\*(?:v[\d.]+ )?(W\d+)[^*]*\*+[^\r\n:*]{0,30}：", _win)]
     assert _remain, "淘汰后里程碑窗口为空（异常）"
     s = s.replace(f"> 历史概要（W{oldest_w} 及更早）的详细记录见",
                   f"> 历史概要（W{min(_remain)} 及更早）的详细记录见", 1)
@@ -365,7 +375,12 @@ def _face_agents(ctx):
     # ARCHIVE 尾块（第 12 面），指针上界同步；制度自此有执行机制，不再依赖手工 trim（W713/W719 两度）。
     _fs = s.find("*本文件由")
     _fline = s[_fs:].split(nl, 1)[0]
-    _segs = re.split(r"；(?=20\d{2}-\d{2}-\d{2}（)", _fline)
+    # W964：切分器双日期形态——阿拉伯（20\d\d-\d\d-\d\d）与中文数字（二〇二六年十月二十日）。
+    # 病根实证：仅认阿拉伯形态时，52 条中文日期条目黏进相邻条目成 67.1KB 巨段，
+    # 切分器恒报 5 条 ⇒ 滚动永不触发（5 不大于 5）⇒「保留最近 5 条」名存实亡。
+    _segs = re.split(
+        r"；(?=(?:20\d{2}-\d{2}-\d{2}|二〇[一二三四五六七八九〇零十廿卅]+年[一二三四五六七八九〇零十廿卅]+月[一二三四五六七八九〇零十廿卅]+日)[（])",
+        _fline)
     assert _fline.rstrip().endswith(tail) and len(_segs) >= 3, "脚注段解析异常（head/pointer/条目）"
     _entries = list(_segs[1:])
     _entries[-1] = _entries[-1][: -len(tail)]
