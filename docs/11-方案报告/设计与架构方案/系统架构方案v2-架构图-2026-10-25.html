@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>系统架构方案 v2 · 架构图（详解西游记）</title>
+<!--
+  ============================================================
+  系统架构方案 v2 · 架构图可视化页
+  ------------------------------------------------------------
+  · 零外域依赖：无 CDN、无外链字体、无远程图片 —— file:// 双击直开
+  · 图形全部为手写内联 SVG（全仓无本地 mermaid 副本，见方案附录 B-11）
+  · 事实源 = 《系统架构方案v2-目标态与落地路线-2026-10-25.md》正文 Mermaid 代码块
+    本页为派生物，不得反向成为事实源（承接 W821 铁律 2）
+  · 令牌沿用 v4 设计语言（与 设计与架构方案/ 取经编制表预览页同源）
+  ============================================================
+-->
+<style>
+:root{
+  --surface-0:#FAF7F0; --surface-1:#FFFFFF; --surface-2:#F1EBDD; --surface-3:#E8E0CE;
+  --ink-1:#23201A; --ink-2:#6B6455; --ink-3:#8A8271; --ink-4:#E5DFD0;
+  --accent:#C8463A; --accent-deep:#AF3F34; --accent-soft:#E9B885;
+  --accent-2:#3A6B8C; --accent-3:#8A6D3B; --accent-4:#6B8E5A; --rebel:#8C2A2A;
+  --chart-1:#C8463A; --chart-2:#3A6B8C; --chart-3:#C9A063; --chart-4:#6B8E5A; --chart-5:#D8CFBC; --chart-6:#8A6D3B;
+  --space-1:2px; --space-2:4px; --space-3:8px; --space-4:12px; --space-5:20px; --space-6:24px;
+  --space-7:32px; --space-8:40px; --space-9:48px; --space-10:64px; --space-11:80px; --space-12:96px;
+  --gap-tight:var(--space-3); --gap-base:var(--space-5); --gap-loose:var(--space-6);
+  --gap-block:var(--space-7); --gap-section:var(--space-10); --gap-hero:var(--space-12);
+  --container-read:760px; --container-content:1120px; --container-wide:1480px;
+  --grid-gutter:var(--space-6);
+  --font-serif:'Noto Serif SC','Source Han Serif SC','Songti SC','STSong','SimSun',serif;
+  --font-sans:'Noto Sans SC','Source Han Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --font-mono:'JetBrains Mono','Consolas','Menlo',monospace;
+  --dur-fast:150ms; --dur-base:250ms; --dur-slow:600ms;
+  --ease-out-quart:cubic-bezier(.25,1,.5,1);
+  --radius-sm:2px; --radius-md:6px; --radius-lg:10px; --radius-pill:999px;
+  --elev-1:0 1px 3px rgba(35,32,26,.06),0 4px 12px rgba(35,32,26,.05);
+  --elev-2:0 2px 6px rgba(35,32,26,.08),0 8px 24px rgba(35,32,26,.08);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--surface-0); color:var(--ink-1);
+  font-family:var(--font-sans); font-size:15px; line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--container-wide); margin:0 auto; padding:var(--space-8) var(--space-6) var(--space-12);}
+
+/* ---------- 页头 ---------- */
+.masthead{padding:var(--space-9) 0 var(--space-7); border-bottom:1px solid var(--ink-4); margin-bottom:var(--gap-section);}
+.eyebrow{font-family:var(--font-mono); font-size:12px; letter-spacing:.14em; color:var(--ink-3); text-transform:uppercase; margin:0 0 var(--space-3);}
+h1{font-family:var(--font-serif); font-size:clamp(26px,3.4vw,40px); line-height:1.3; font-weight:700; margin:0 0 var(--space-4); letter-spacing:.01em;}
+.lede{max-width:var(--container-read); font-size:16px; color:var(--ink-2); margin:0 0 var(--space-5);}
+.meta{display:flex; flex-wrap:wrap; gap:var(--space-3); margin:0; padding:0; list-style:none;}
+.meta li{font-family:var(--font-mono); font-size:12px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--ink-4); border-radius:var(--radius-pill); padding:3px 12px;}
+
+/* ---------- 章节 ---------- */
+section{margin-bottom:var(--gap-section);}
+h2{font-family:var(--font-serif); font-size:22px; font-weight:700; margin:0 0 var(--space-4); padding-bottom:var(--space-3); border-bottom:2px solid var(--accent); display:inline-block;}
+.fig-note{font-size:13px; color:var(--ink-2); max-width:var(--container-read); margin:0 0 var(--space-5);}
+
+/* ---------- 图件卡片 ---------- */
+figure{margin:0 0 var(--gap-block); background:var(--surface-1); border:1px solid var(--ink-4); border-radius:var(--radius-lg); box-shadow:var(--elev-1); overflow:hidden;}
+figcaption{padding:var(--space-4) var(--space-5); border-bottom:1px solid var(--ink-4); background:var(--surface-2); display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--space-3);}
+.fig-no{font-family:var(--font-mono); font-size:12px; font-weight:700; color:var(--surface-1); background:var(--accent); border-radius:var(--radius-sm); padding:2px 8px; letter-spacing:.06em;}
+.fig-title{font-family:var(--font-serif); font-size:16px; font-weight:700;}
+.fig-desc{font-size:12.5px; color:var(--ink-2); flex:1 1 100%;}
+.fig-body{padding:var(--space-5); background:var(--surface-1);}
+svg{display:block; width:100%; height:auto;}
+
+/* SVG 内部样式 */
+.node-box{fill:var(--surface-1); stroke:var(--ink-2); stroke-width:1.2;}
+.node-box.warn{fill:#FBF0EE; stroke:var(--accent);}
+.node-box.go{fill:#EDF3F6; stroke:var(--accent-2);}
+.node-box.ok{fill:#F0F5EC; stroke:var(--accent-4);}
+.node-box.gold{fill:var(--surface-2); stroke:var(--accent-3);}
+.node-title{font-family:var(--font-sans); font-size:12.5px; font-weight:700; fill:var(--ink-1);}
+.node-sub{font-family:var(--font-sans); font-size:10.5px; fill:var(--ink-2);}
+.layer-label{font-family:var(--font-sans); font-size:11px; font-weight:700; fill:var(--ink-2); letter-spacing:.04em;}
+.edge{stroke:var(--ink-3); stroke-width:1.3; fill:none;}
+.edge.dashed{stroke-dasharray:5 4;}
+.edge.accent{stroke:var(--accent); stroke-width:1.6;}
+.edge-label{font-family:var(--font-sans); font-size:10px; fill:var(--ink-2);}
+.svg-title{font-family:var(--font-serif); font-size:14px; font-weight:700; fill:var(--ink-1);}
+
+/* ---------- 表格 ---------- */
+.tbl-wrap{overflow-x:auto; background:var(--surface-1); border:1px solid var(--ink-4); border-radius:var(--radius-lg); box-shadow:var(--elev-1);}
+table{border-collapse:collapse; width:100%; min-width:640px; font-size:13.5px;}
+th,td{padding:var(--space-3) var(--space-4); text-align:left; border-bottom:1px solid var(--ink-4); vertical-align:top;}
+th{background:var(--surface-2); font-size:12.5px; font-weight:700; color:var(--ink-2); white-space:nowrap;}
+tbody tr:last-child td{border-bottom:none;}
+td code{font-family:var(--font-mono); font-size:12px; background:var(--surface-2); padding:1px 5px; border-radius:var(--radius-sm);}
+.badge{display:inline-block; font-family:var(--font-mono); font-size:11px; font-weight:700; border-radius:var(--radius-sm); padding:1px 7px;}
+.badge.keep{background:#EDF3F6; color:var(--accent-2);}
+.badge.rev{background:#FBF0EE; color:var(--accent-deep);}
+
+/* ---------- 尾部 ---------- */
+footer{padding-top:var(--space-6); border-top:1px solid var(--ink-4); font-size:12.5px; color:var(--ink-3); font-family:var(--font-mono);}
+footer p{margin:var(--space-2) 0;}
+a{color:var(--accent-deep);}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} }
+@media (max-width:720px){
+  .wrap{padding:var(--space-5) var(--space-4) var(--space-9);}
+  .fig-body{padding:var(--space-3);}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Architecture · v2 · W925</p>
+  <h1>系统架构方案 v2 · 架构图</h1>
+  <p class="lede">六张图覆盖整体分层、模块依赖、数据流、存储演进、降级拓扑与私有化部署拓扑。本页为《系统架构方案v2-目标态与落地路线-2026-10-25.md》的派生物；图意以上述文档正文的 Mermaid 代码块为唯一事实源。</p>
+  <ul class="meta">
+    <li>零外域依赖 · file:// 直开</li>
+    <li>手写内联 SVG</li>
+    <li>6 图</li>
+    <li>W925 · 2026-10-25</li>
+    <li>修订 W821 存储裁定</li>
+    <li>新增合规横切面</li>
+  </ul>
+</header>
+
+<section>
+  <h2>一、整体分层（L0–L4 + 双横切面）</h2>
+  <p class="fig-note">依赖单向向下。治理面（门禁 + 批次台账）与合规面（分级 + 审计）横切各层，而非独立层——做成独立层会迫使 L0–L3 反向依赖它，破坏单向依赖。</p>
+  <figure>
+    <figcaption>
+      <span class="fig-no">图 1</span>
+      <span class="fig-title">整体分层图</span>
+      <span class="fig-desc">实线 = 数据流；虚线 = 治理断言。L2 静态层不依赖任何有状态组件 ⇒ 故障时永远可用。</span>
+    </figcaption>
+    <div class="fig-body">
+      <svg viewBox="0 0 1000 660" role="img" aria-label="整体分层图：L0 事实源层、L1 加工层、L2 交付层、L3 服务层、L4 消费层，治理面 G 与合规面 A 作为左右侧带横切各层">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#8A8271"/>
+          </marker>
+          <marker id="ar-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#C8463A"/>
+          </marker>
+        </defs>
+
+        <!-- 治理横切面 G（左侧带 · 贯穿各层） -->
+        <rect x="20" y="40" width="95" height="600" rx="8" fill="#E8E0CE" stroke="#8A6D3B" stroke-width="1"/>
+        <text x="48" y="340" text-anchor="middle" class="node-title" transform="rotate(-90 48 340)">治理横切面 G</text>
+        <text x="85" y="340" text-anchor="middle" class="node-sub" transform="rotate(-90 85 340)">W 批次台账 + 门禁 + 四件套文档</text>
+
+        <!-- 合规横切面 A（右侧带 · 贯穿各层） -->
+        <rect x="925" y="40" width="70" height="600" rx="8" fill="#E8E0CE" stroke="#6B8E5A" stroke-width="1"/>
+        <text x="950" y="340" text-anchor="middle" class="node-title" transform="rotate(-90 950 340)">合规横切面 A</text>
+        <text x="978" y="340" text-anchor="middle" class="node-sub" transform="rotate(-90 978 340)">分级 · 审计 · 加密 · 留存</text>
+
+        <!-- L0 -->
+        <rect x="130" y="40" width="785" height="90" rx="8" fill="#FAF7F0" stroke="#6B6455" stroke-width="1"/>
+        <text x="146" y="62" class="layer-label">L0 事实源层 · 人可读的真</text>
+        <rect x="170" y="72" width="170" height="44" rx="6" class="node-box"/>
+        <text x="255" y="92" text-anchor="middle" class="node-title">source/</text>
+        <text x="255" y="107" text-anchor="middle" class="node-sub">原著分回 + 引用</text>
+        <rect x="390" y="72" width="210" height="44" rx="6" class="node-box"/>
+        <text x="495" y="92" text-anchor="middle" class="node-title">docs/</text>
+        <text x="495" y="107" text-anchor="middle" class="node-sub">解读文档 615 篇</text>
+        <rect x="650" y="72" width="210" height="44" rx="6" class="node-box"/>
+        <text x="755" y="92" text-anchor="middle" class="node-title">dataset/</text>
+        <text x="755" y="107" text-anchor="middle" class="node-sub">结构化 JSON</text>
+
+        <!-- L1 -->
+        <rect x="130" y="160" width="785" height="98" rx="8" fill="#F1EBDD" stroke="#6B6455" stroke-width="1"/>
+        <text x="146" y="182" class="layer-label">L1 加工层 · 确定性变换</text>
+        <rect x="170" y="192" width="160" height="44" rx="6" class="node-box gold"/>
+        <text x="250" y="212" text-anchor="middle" class="node-title">49 槽门禁</text>
+        <text x="250" y="227" text-anchor="middle" class="node-sub">verify_delivery</text>
+        <rect x="390" y="192" width="210" height="44" rx="6" class="node-box gold"/>
+        <text x="495" y="212" text-anchor="middle" class="node-title">34 类分析器</text>
+        <text x="495" y="227" text-anchor="middle" class="node-sub">scripts/</text>
+        <rect x="640" y="192" width="220" height="44" rx="6" class="node-box gold"/>
+        <text x="750" y="212" text-anchor="middle" class="node-title">生成器</text>
+        <text x="750" y="227" text-anchor="middle" class="node-sub">reader / en / 索引</text>
+
+        <!-- L2 -->
+        <rect x="130" y="288" width="785" height="90" rx="8" fill="#FFFFFF" stroke="#3A6B8C" stroke-width="1.2"/>
+        <text x="146" y="310" class="layer-label">L2 交付层 · 零服务端</text>
+        <rect x="170" y="320" width="350" height="44" rx="6" class="node-box go"/>
+        <text x="345" y="340" text-anchor="middle" class="node-title">site/ 857 页</text>
+        <text x="345" y="355" text-anchor="middle" class="node-sub">静态 HTML 产物</text>
+        <rect x="560" y="320" width="300" height="44" rx="6" class="node-box go"/>
+        <text x="710" y="340" text-anchor="middle" class="node-title">EMBEDDED 回退</text>
+        <text x="710" y="355" text-anchor="middle" class="node-sub">file:// 双击可开</text>
+
+        <!-- L3 -->
+        <rect x="130" y="408" width="785" height="90" rx="8" fill="#F1EBDD" stroke="#C8463A" stroke-width="1.2"/>
+        <text x="146" y="430" class="layer-label">L3 服务层 · 有状态（唯一出网）</text>
+        <rect x="170" y="440" width="200" height="44" rx="6" class="node-box warn"/>
+        <text x="270" y="460" text-anchor="middle" class="node-title">检索层</text>
+        <text x="270" y="475" text-anchor="middle" class="node-sub">scripts/rag/</text>
+        <rect x="410" y="440" width="260" height="44" rx="6" class="node-box warn"/>
+        <text x="540" y="460" text-anchor="middle" class="node-title">Node.js 20 + TS</text>
+        <text x="540" y="475" text-anchor="middle" class="node-sub">Express 5 · SSE · 工具集</text>
+        <rect x="710" y="440" width="205" height="44" rx="6" class="node-box warn"/>
+        <text x="812" y="460" text-anchor="middle" class="node-title">PostgreSQL 16</text>
+        <text x="812" y="475" text-anchor="middle" class="node-sub">会话 / 反馈 / 审计</text>
+
+        <!-- L4 -->
+        <rect x="130" y="528" width="785" height="80" rx="8" fill="#FAF7F0" stroke="#8A8271" stroke-width="1"/>
+        <text x="146" y="550" class="layer-label">L4 消费层</text>
+        <rect x="170" y="560" width="210" height="34" rx="6" class="node-box"/>
+        <text x="275" y="581" text-anchor="middle" class="node-title">浏览器</text>
+        <rect x="430" y="560" width="210" height="34" rx="6" class="node-box"/>
+        <text x="535" y="581" text-anchor="middle" class="node-title">桌面端 Electron</text>
+        <rect x="690" y="560" width="170" height="34" rx="6" class="node-box"/>
+        <text x="775" y="581" text-anchor="middle" class="node-title">MCP 工具</text>
+
+        <!-- 连线 -->
+        <!-- L0 → L1：三个事实源汇入分析器 -->
+        <path d="M255,116 L255,146 L420,146 L420,192" class="edge" marker-end="url(#ar)"/>
+        <path d="M495,116 L495,192" class="edge" marker-end="url(#ar)"/>
+        <path d="M755,116 L755,146 L570,146 L570,192" class="edge" marker-end="url(#ar)"/>
+        <!-- 分析器 → 生成器 -->
+        <path d="M600,214 L640,214" class="edge" marker-end="url(#ar)"/>
+        <!-- 生成器 → site/ -->
+        <path d="M750,236 L750,272 L345,272 L345,320" class="edge" marker-end="url(#ar)"/>
+        <!-- site/ → EMBEDDED 回退 -->
+        <path d="M520,342 L560,342" class="edge" marker-end="url(#ar)"/>
+        <!-- 治理面 G → 门禁（门禁断言） -->
+        <path d="M115,214 L170,214" class="edge dashed" marker-end="url(#ar)"/>
+        <text x="118" y="206" class="edge-label">门禁断言</text>
+        <!-- 门禁 -.不通过则阻断.-> 分析器 -->
+        <path d="M330,214 L390,214" class="edge dashed" marker-end="url(#ar)"/>
+        <text x="334" y="206" class="edge-label">不通过则阻断</text>
+        <!-- 检索层 → docs/（读真源，虚线上行） -->
+        <path d="M270,440 L270,428 L122,428 L122,150 L430,150 L430,116" class="edge dashed" marker-end="url(#ar)"/>
+        <text x="130" y="144" class="edge-label">检索真源</text>
+        <!-- Node → 检索层 / Node → PG -->
+        <path d="M410,462 L370,462" class="edge" marker-end="url(#ar)"/>
+        <path d="M670,462 L710,462" class="edge" marker-end="url(#ar)"/>
+        <!-- PG → 合规面 A -->
+        <path d="M915,462 L925,462" class="edge dashed" marker-end="url(#ar)"/>
+        <!-- Node → 合规面 A（审计事件写入） -->
+        <path d="M400,484 L400,624 L925,624" class="edge dashed" marker-end="url(#ar)"/>
+        <text x="560" y="618" class="edge-label">审计事件 · 数据分级</text>
+        <!-- 消费层 → Node 服务（三条上行） -->
+        <path d="M275,560 L275,540 L450,540 L450,484" class="edge accent" marker-end="url(#ar-accent)"/>
+        <path d="M535,560 L535,484" class="edge accent" marker-end="url(#ar-accent)"/>
+        <path d="M775,560 L775,540 L620,540 L620,484" class="edge accent" marker-end="url(#ar-accent)"/>
+      </svg>
+    </div>
+  </figure>
+</section>
+
+<section>
+  <h2>二、模块拆分与依赖</h2>
+  <p class="fig-note">六个模块组、21 个模块。M-A 内容组不依赖任何组；M-B 交付组不依赖服务/数据/合规组；合规组可依赖全部组，但其余组不得依赖其内部实现。</p>
+  <figure>
+    <figcaption>
+      <span class="fig-no">图 4</span>
+      <span class="fig-title">模块依赖图</span>
+      <span class="fig-desc">箭头 = 允许的依赖方向。虚线 = 横切校验或治理断言。</span>
+    </figcaption>
+    <div class="fig-body">
+      <svg viewBox="0 0 1000 560" role="img" aria-label="模块依赖图：M-A 内容组、M-B 交付组、M-C 服务组、M-D 数据组、M-E 合规组、M-F 消费组六组之间的允许依赖方向">
+        <defs>
+          <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#8A8271"/>
+          </marker>
+        </defs>
+
+        <!-- M-A 内容组 -->
+        <rect x="60" y="40" width="330" height="90" rx="8" fill="#FAF7F0" stroke="#6B6455" stroke-width="1.2"/>
+        <text x="225" y="66" text-anchor="middle" class="node-title">M-A 内容组</text>
+        <text x="225" y="86" text-anchor="middle" class="node-sub">M01 事实源 · M02 分析加工 · M03 生成器</text>
+        <text x="225" y="108" text-anchor="middle" class="node-sub">依赖：无（事实源不被任何组反向影响）</text>
+
+        <!-- M-B 交付组 -->
+        <rect x="60" y="175" width="330" height="90" rx="8" fill="#FFFFFF" stroke="#3A6B8C" stroke-width="1.2"/>
+        <text x="225" y="201" text-anchor="middle" class="node-title">M-B 交付组</text>
+        <text x="225" y="221" text-anchor="middle" class="node-sub">M04 静态站 · M05 门禁 · M06 批次治理</text>
+        <text x="225" y="243" text-anchor="middle" class="node-sub">禁依赖：服务 / 数据 / 合规组</text>
+
+        <!-- M-C 服务组 -->
+        <rect x="500" y="175" width="440" height="90" rx="8" fill="#F1EBDD" stroke="#C8463A" stroke-width="1.2"/>
+        <text x="720" y="201" text-anchor="middle" class="node-title">M-C 服务组</text>
+        <text x="720" y="221" text-anchor="middle" class="node-sub">M07 API 网关 · M08 会话服务 · M09 问答引擎</text>
+        <text x="720" y="239" text-anchor="middle" class="node-sub">M10 检索服务 · M11 权限与工具</text>
+        <text x="720" y="259" text-anchor="middle" class="node-sub">可依赖：内容 / 数据 / 合规组</text>
+
+        <!-- M-D 数据组 -->
+        <rect x="500" y="310" width="440" height="90" rx="8" fill="#E8E0CE" stroke="#8A6D3B" stroke-width="1.2"/>
+        <text x="720" y="336" text-anchor="middle" class="node-title">M-D 数据组</text>
+        <text x="720" y="356" text-anchor="middle" class="node-sub">M12 PG 存储层 · M13 审计流水 · M14 备份恢复</text>
+        <text x="720" y="378" text-anchor="middle" class="node-sub">可依赖：内容组 · 合规组</text>
+
+        <!-- M-E 合规组（横切） -->
+        <rect x="500" y="445" width="440" height="90" rx="8" fill="#E8E0CE" stroke="#6B8E5A" stroke-width="1.2"/>
+        <text x="720" y="471" text-anchor="middle" class="node-title">M-E 合规组（横切）</text>
+        <text x="720" y="491" text-anchor="middle" class="node-sub">M15 分级目录 · M16 加密与密钥 · M17 数据留存</text>
+        <text x="720" y="513" text-anchor="middle" class="node-sub">可依赖全部组；其余组禁依赖其内部实现</text>
+
+        <!-- M-F 消费组 -->
+        <rect x="60" y="445" width="330" height="90" rx="8" fill="#FAF7F0" stroke="#8A8271" stroke-width="1.2"/>
+        <text x="225" y="471" text-anchor="middle" class="node-title">M-F 消费组</text>
+        <text x="225" y="491" text-anchor="middle" class="node-sub">M18 Web · M19 桌面端 · M20 MCP · M21 检索客户端</text>
+        <text x="225" y="513" text-anchor="middle" class="node-sub">可依赖：内容 / 交付 / 服务 / 合规组</text>
+
+        <!-- 连线 -->
+        <!-- 内容组 → 交付组 -->
+        <path d="M225,130 L225,175" class="edge" marker-end="url(#ar2)"/>
+        <!-- 内容组 → 服务组 -->
+        <path d="M390,120 L470,120 L470,220 L500,220" class="edge" marker-end="url(#ar2)"/>
+        <!-- 内容组 → 数据组 -->
+        <path d="M390,74 L440,74 L440,355 L500,355" class="edge" marker-end="url(#ar2)"/>
+        <!-- 交付组 → 消费组 -->
+        <path d="M225,265 L225,445" class="edge" marker-end="url(#ar2)"/>
+        <!-- 服务组 → 数据组 -->
+        <path d="M720,265 L720,310" class="edge" marker-end="url(#ar2)"/>
+        <!-- 服务组 → 消费组（长回流） -->
+        <path d="M500,235 L420,235 L420,300 L395,300 L395,490 L390,490" class="edge" marker-end="url(#ar2)"/>
+        <!-- 数据组 → 合规组 -->
+        <path d="M720,400 L720,445" class="edge" marker-end="url(#ar2)"/>
+        <!-- 服务组 -.横切校验.-> 合规组 -->
+        <path d="M905,265 L905,445" class="edge dashed" marker-end="url(#ar2)"/>
+        <text x="913" y="360" class="edge-label">横切校验</text>
+        <!-- 合规组 -.合规注入.-> 服务组 -->
+        <path d="M560,445 L560,285 L530,285 L530,265" class="edge dashed" marker-end="url(#ar2)"/>
+        <text x="466" y="279" class="edge-label">合规注入</text>
+        <!-- 消费组 -.检索真源.-> 内容组 -->
+        <path d="M225,445 L225,300 L120,300 L120,130" class="edge dashed" marker-end="url(#ar2)"/>
+        <text x="128" y="294" class="edge-label">检索真源</text>
+      </svg>
+    </div>
+  </figure>
+</section>
+
+<section>
+  <h2>三、数据流（四条主链路）</h2>
+  <p class="fig-note">链路 ① 内容生产是唯一事实源路径；链路 ③ 问答交互是唯一有状态、唯一出网的路径；链路 ④ 合规审计横切所有数据面。</p>
+  <figure>
+    <figcaption>
+      <span class="fig-no">图 2</span>
+      <span class="fig-title">数据流图</span>
+      <span class="fig-desc">读路径优先级：静态直出 ≥ 95% · 客户端检索 3–4% · 问答服务 ≤ 1%。</span>
+    </figcaption>
+    <div class="fig-body">
+      <svg viewBox="0 0 1000 470" role="img" aria-label="数据流图：内容生产链路、交付发布链路、问答交互链路、合规审计链路">
+        <defs>
+          <marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#8A8271"/>
+          </marker>
+          <marker id="ar3g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#6B8E5A"/>
+          </marker>
+        </defs>
+
+        <!-- 链路1 -->
+        <rect x="30" y="30" width="940" height="92" rx="8" fill="#F1EBDD" stroke="#6B6455" stroke-width="1"/>
+        <text x="46" y="50" class="layer-label">链路① 内容生产 · 确定性可重跑</text>
+        <rect x="46" y="60" width="150" height="44" rx="5" class="node-box"/>
+        <text x="121" y="78" text-anchor="middle" class="node-title">docs/ 编辑</text>
+        <text x="121" y="93" text-anchor="middle" class="node-sub">事实源</text>
+        <rect x="230" y="60" width="150" height="44" rx="5" class="node-box"/>
+        <text x="305" y="78" text-anchor="middle" class="node-title">门禁自测</text>
+        <text x="305" y="93" text-anchor="middle" class="node-sub">提交前拦截</text>
+        <rect x="414" y="60" width="150" height="44" rx="5" class="node-box"/>
+        <text x="489" y="78" text-anchor="middle" class="node-title">34 类分析器</text>
+        <text x="489" y="93" text-anchor="middle" class="node-sub">产出 JSON</text>
+        <rect x="598" y="60" width="150" height="44" rx="5" class="node-box"/>
+        <text x="673" y="78" text-anchor="middle" class="node-title">生成器</text>
+        <text x="673" y="93" text-anchor="middle" class="node-sub">reader/en/索引</text>
+        <rect x="782" y="60" width="170" height="44" rx="5" class="node-box ok"/>
+        <text x="867" y="78" text-anchor="middle" class="node-title">site/ 产物</text>
+        <text x="867" y="93" text-anchor="middle" class="node-sub">门禁断言通过</text>
+        <path d="M196,82 L230,82" class="edge" marker-end="url(#ar3)"/>
+        <path d="M380,82 L414,82" class="edge" marker-end="url(#ar3)"/>
+        <path d="M564,82 L598,82" class="edge" marker-end="url(#ar3)"/>
+        <path d="M748,82 L782,82" class="edge" marker-end="url(#ar3)"/>
+
+        <!-- 链路2 -->
+        <rect x="30" y="140" width="940" height="92" rx="8" fill="#FFFFFF" stroke="#3A6B8C" stroke-width="1"/>
+        <text x="46" y="160" class="layer-label">链路② 交付发布 · 只进不退可回滚</text>
+        <rect x="46" y="170" width="190" height="44" rx="5" class="node-box go"/>
+        <text x="141" y="188" text-anchor="middle" class="node-title">pre-commit 门禁</text>
+        <text x="141" y="203" text-anchor="middle" class="node-sub">本地分级</text>
+        <rect x="270" y="170" width="190" height="44" rx="5" class="node-box go"/>
+        <text x="365" y="188" text-anchor="middle" class="node-title">CI 全量 49 槽</text>
+        <text x="365" y="203" text-anchor="middle" class="node-sub">+ 11 workflow</text>
+        <rect x="494" y="170" width="190" height="44" rx="5" class="node-box go"/>
+        <text x="589" y="188" text-anchor="middle" class="node-title">原子部署</text>
+        <text x="589" y="203" text-anchor="middle" class="node-sub">失败保留上一版</text>
+        <rect x="718" y="170" width="234" height="44" rx="5" class="node-box go"/>
+        <text x="835" y="188" text-anchor="middle" class="node-title">可回滚</text>
+        <text x="835" y="203" text-anchor="middle" class="node-sub">git revert / 部署回退 / PITR</text>
+        <path d="M236,192 L270,192" class="edge" marker-end="url(#ar3)"/>
+        <path d="M460,192 L494,192" class="edge" marker-end="url(#ar3)"/>
+        <path d="M684,192 L718,192" class="edge" marker-end="url(#ar3)"/>
+
+        <!-- 链路3 -->
+        <rect x="30" y="250" width="940" height="92" rx="8" fill="#F1EBDD" stroke="#C8463A" stroke-width="1"/>
+        <text x="46" y="270" class="layer-label">链路③ 问答交互 · 唯一有状态 · 唯一出网</text>
+        <rect x="46" y="280" width="150" height="44" rx="5" class="node-box warn"/>
+        <text x="121" y="298" text-anchor="middle" class="node-title">浏览器提问</text>
+        <text x="121" y="313" text-anchor="middle" class="node-sub">消费层</text>
+        <rect x="230" y="280" width="150" height="44" rx="5" class="node-box warn"/>
+        <text x="305" y="298" text-anchor="middle" class="node-title">鉴权 + 限流</text>
+        <text x="305" y="313" text-anchor="middle" class="node-sub">v2 强制鉴权</text>
+        <rect x="414" y="280" width="150" height="44" rx="5" class="node-box warn"/>
+        <text x="489" y="298" text-anchor="middle" class="node-title">检索 + 引用守卫</text>
+        <text x="489" y="313" text-anchor="middle" class="node-sub">引文可溯源</text>
+        <rect x="598" y="280" width="150" height="44" rx="5" class="node-box warn"/>
+        <text x="673" y="298" text-anchor="middle" class="node-title">LLM 端点</text>
+        <text x="673" y="313" text-anchor="middle" class="node-sub">唯一出网</text>
+        <rect x="782" y="280" width="170" height="44" rx="5" class="node-box warn"/>
+        <text x="867" y="298" text-anchor="middle" class="node-title">SSE 流 + 落库</text>
+        <text x="867" y="313" text-anchor="middle" class="node-sub">追加审计</text>
+        <path d="M196,302 L230,302" class="edge" marker-end="url(#ar3)"/>
+        <path d="M380,302 L414,302" class="edge" marker-end="url(#ar3)"/>
+        <path d="M564,302 L598,302" class="edge" marker-end="url(#ar3)"/>
+        <path d="M748,302 L782,302" class="edge" marker-end="url(#ar3)"/>
+
+        <!-- 链路4 -->
+        <rect x="30" y="360" width="940" height="92" rx="8" fill="#E8E0CE" stroke="#6B8E5A" stroke-width="1"/>
+        <text x="46" y="380" class="layer-label">链路④ 合规审计 · 只追加不可篡改（v2 新增）</text>
+        <rect x="46" y="390" width="170" height="44" rx="5" class="node-box ok"/>
+        <text x="131" y="408" text-anchor="middle" class="node-title">数据入库</text>
+        <text x="131" y="423" text-anchor="middle" class="node-sub">链路③ 落库</text>
+        <rect x="250" y="390" width="170" height="44" rx="5" class="node-box ok"/>
+        <text x="335" y="408" text-anchor="middle" class="node-title">分级打标</text>
+        <text x="335" y="423" text-anchor="middle" class="node-sub">L1–L4 强制校验</text>
+        <rect x="454" y="390" width="170" height="44" rx="5" class="node-box ok"/>
+        <text x="539" y="408" text-anchor="middle" class="node-title">审计事件追加</text>
+        <text x="539" y="423" text-anchor="middle" class="node-sub">失败即告警</text>
+        <rect x="658" y="390" width="140" height="44" rx="5" class="node-box ok"/>
+        <text x="728" y="408" text-anchor="middle" class="node-title">留存期管理</text>
+        <text x="728" y="423" text-anchor="middle" class="node-sub">≥ 180 天</text>
+        <rect x="832" y="390" width="120" height="44" rx="5" class="node-box ok"/>
+        <text x="892" y="408" text-anchor="middle" class="node-title">销毁留证</text>
+        <text x="892" y="423" text-anchor="middle" class="node-sub">只留事件</text>
+        <path d="M216,412 L250,412" class="edge" marker-end="url(#ar3g)"/>
+        <path d="M420,412 L454,412" class="edge" marker-end="url(#ar3g)"/>
+        <path d="M624,412 L658,412" class="edge" marker-end="url(#ar3g)"/>
+        <path d="M798,412 L832,412" class="edge" marker-end="url(#ar3g)"/>
+        <path d="M867,324 L867,390" class="edge dashed" marker-end="url(#ar3g)"/>
+      </svg>
+    </div>
+  </figure>
+</section>
+
+<section>
+  <h2>四、存储演进路线</h2>
+  <p class="fig-note">v2 的核心修订：W821 曾裁定「不采纳 Postgres」，其理由写的是「当前 DAU 百级、站点零服务端」。规模前提被改写后，W821 自己写明的档 2 触发条件已命中 ⇒ 档 2 由「触发后建设」提前为「本批启动」。</p>
+  <figure>
+    <figcaption>
+      <span class="fig-no">图 5</span>
+      <span class="fig-title">存储演进路线图</span>
+      <span class="fig-desc">任何一档都保留 S1：内容真源永不因规模迁出 Git。</span>
+    </figcaption>
+    <div class="fig-body">
+      <svg viewBox="0 0 1000 400" role="img" aria-label="存储演进路线图：当前形态 → v2 目标态 → 规模化档">
+        <defs>
+          <marker id="ar4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#8A8271"/>
+          </marker>
+          <marker id="ar4r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#C8463A"/>
+          </marker>
+        </defs>
+
+        <rect x="40" y="60" width="250" height="130" rx="8" fill="#FAF7F0" stroke="#6B6455" stroke-width="1"/>
+        <text x="60" y="84" class="layer-label">当前形态</text>
+        <text x="165" y="112" text-anchor="middle" class="node-title">S1 Git + S2 JSON</text>
+        <text x="165" y="132" text-anchor="middle" class="node-title">+ S3 SQLite</text>
+        <text x="165" y="156" text-anchor="middle" class="node-sub">单机 · 零服务端</text>
+        <text x="165" y="174" text-anchor="middle" class="node-sub">会话库明文单文件</text>
+
+        <rect x="375" y="60" width="250" height="130" rx="8" fill="#F1EBDD" stroke="#C8463A" stroke-width="1.4"/>
+        <text x="395" y="84" class="layer-label">v2 目标态（本批启动）</text>
+        <text x="500" y="112" text-anchor="middle" class="node-title">S1 Git + S2 JSON</text>
+        <text x="500" y="132" text-anchor="middle" class="node-title">+ S4 PostgreSQL 16</text>
+        <text x="500" y="156" text-anchor="middle" class="node-sub">自建单机 · 不上托管</text>
+        <text x="500" y="174" text-anchor="middle" class="node-sub">多用户隔离 + 合规承载</text>
+
+        <rect x="710" y="60" width="250" height="130" rx="8" fill="#FFFFFF" stroke="#3A6B8C" stroke-width="1"/>
+        <text x="730" y="84" class="layer-label">规模化档</text>
+        <text x="835" y="112" text-anchor="middle" class="node-title">S1 + S2 + S4</text>
+        <text x="835" y="132" text-anchor="middle" class="node-title">+ PG 主从/读副本</text>
+        <text x="835" y="156" text-anchor="middle" class="node-sub">对象存储 + 独立检索</text>
+
+        <rect x="375" y="240" width="250" height="72" rx="6" fill="#E8E0CE" stroke="#8A6D3B" stroke-width="1"/>
+        <text x="500" y="264" text-anchor="middle" class="node-title">档 2 触发条件已命中</text>
+        <text x="500" y="282" text-anchor="middle" class="node-sub">DAU 量级千级 &gt; 5,000</text>
+        <text x="500" y="298" text-anchor="middle" class="node-sub">需多用户鉴权与租户隔离 · 需跨机部署</text>
+
+        <rect x="710" y="240" width="250" height="72" rx="6" fill="#E8E0CE" stroke="#8A6D3B" stroke-width="1"/>
+        <text x="835" y="264" text-anchor="middle" class="node-title">档 3 触发条件</text>
+        <text x="835" y="282" text-anchor="middle" class="node-sub">DAU &gt; 50,000</text>
+        <text x="835" y="298" text-anchor="middle" class="node-sub">或需跨地域部署</text>
+
+        <path d="M290,125 L375,125" class="edge accent" marker-end="url(#ar4r)"/>
+        <path d="M625,125 L710,125" class="edge" marker-end="url(#ar4)"/>
+        <path d="M500,240 L500,190" class="edge dashed" marker-end="url(#ar4)"/>
+        <path d="M835,240 L835,190" class="edge dashed" marker-end="url(#ar4)"/>
+        <path d="M165,190 L165,330 L835,330 L835,330" class="edge dashed" marker-end="url(#ar4)"/>
+        <text x="430" y="350" class="edge-label">任何一档都保留 S1：内容真源永不因规模迁出 Git</text>
+      </svg>
+    </div>
+  </figure>
+</section>
+
+<section>
+  <h2>五、故障域降级拓扑</h2>
+  <p class="fig-note">两条降级主线：向下（PG 不可用 ⇒ 问答不可用，静态站零影响）与向左（LLM 不可用 ⇒ 退化为「只检索」，仍返回可溯源引用）。审计环节在所有路径末端，且其失败不静默。</p>
+  <figure>
+    <figcaption>
+      <span class="fig-no">图 6</span>
+      <span class="fig-title">故障域降级拓扑图</span>
+      <span class="fig-desc">F1 LLM 不可用 · F9 PG 不可用 · F10 审计断裂。静态层永远优先降级为「可用」而非「报错」。</span>
+    </figcaption>
+    <div class="fig-body">
+      <svg viewBox="0 0 1000 470" role="img" aria-label="故障域降级拓扑图：请求进入后按静态层、鉴权、PG 可用性、LLM 可用性逐级降级">
+        <defs>
+          <marker id="ar5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#8A8271"/>
+          </marker>
+          <marker id="ar5g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#6B8E5A"/>
+          </marker>
+          <marker id="ar5o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#8A6D3B"/>
+          </marker>
+        </defs>
+
+        <rect x="60" y="30" width="180" height="44" rx="6" class="node-box"/>
+        <text x="150" y="57" text-anchor="middle" class="node-title">请求进入</text>
+
+        <path d="M240,52 L300,52" class="edge" marker-end="url(#ar5)"/>
+        <polygon points="380,30 460,52 380,74 300,52" fill="#FAF7F0" stroke="#6B6455" stroke-width="1.2"/>
+        <text x="380" y="48" text-anchor="middle" class="node-sub">静态层</text>
+        <text x="380" y="62" text-anchor="middle" class="node-sub">可命中？</text>
+
+        <path d="M460,52 L560,52" class="edge" marker-end="url(#ar5)"/>
+        <text x="505" y="42" text-anchor="middle" class="edge-label">是 ≥95%</text>
+        <rect x="560" y="30" width="230" height="44" rx="6" class="node-box go"/>
+        <text x="675" y="49" text-anchor="middle" class="node-title">L2 静态站</text>
+        <text x="675" y="65" text-anchor="middle" class="node-sub">零有状态依赖 · 永远可用</text>
+
+        <path d="M380,74 L380,130" class="edge" marker-end="url(#ar5)"/>
+        <text x="398" y="106" class="edge-label">否·长尾</text>
+        <polygon points="380,130 460,152 380,174 300,152" fill="#FAF7F0" stroke="#6B6455" stroke-width="1.2"/>
+        <text x="380" y="148" text-anchor="middle" class="node-sub">鉴权</text>
+        <text x="380" y="162" text-anchor="middle" class="node-sub">通过？</text>
+
+        <path d="M300,152 L200,152 L200,230" class="edge" marker-end="url(#ar5)"/>
+        <text x="240" y="142" text-anchor="middle" class="edge-label">否</text>
+        <rect x="60" y="222" width="200" height="44" rx="6" class="node-box"/>
+        <text x="160" y="241" text-anchor="middle" class="node-title">拒绝 + 审计</text>
+        <text x="160" y="257" text-anchor="middle" class="node-sub">Deny 留痕</text>
+
+        <path d="M460,152 L560,152" class="edge" marker-end="url(#ar5)"/>
+        <text x="505" y="142" text-anchor="middle" class="edge-label">是</text>
+        <polygon points="600,130 680,152 600,174 520,152" fill="#FAF7F0" stroke="#6B6455" stroke-width="1.2"/>
+        <text x="600" y="148" text-anchor="middle" class="node-sub">PG</text>
+        <text x="600" y="162" text-anchor="middle" class="node-sub">可用？</text>
+
+        <path d="M600,174 L600,230" class="edge" marker-end="url(#ar5)"/>
+        <text x="618" y="204" class="edge-label">是</text>
+        <rect x="520" y="222" width="230" height="44" rx="6" class="node-box warn"/>
+        <text x="635" y="241" text-anchor="middle" class="node-title">L3 服务</text>
+        <text x="635" y="257" text-anchor="middle" class="node-sub">检索 → LLM → SSE</text>
+
+        <path d="M520,152 L430,152 L430,300" class="edge" marker-end="url(#ar5o)"/>
+        <text x="466" y="142" text-anchor="middle" class="edge-label">否·F9</text>
+        <rect x="330" y="300" width="230" height="50" rx="6" fill="#E8E0CE" stroke="#8A6D3B" stroke-width="1.2"/>
+        <text x="445" y="320" text-anchor="middle" class="node-title">降级：只检索</text>
+        <text x="445" y="338" text-anchor="middle" class="node-sub">RTO ≤ 30min · RPO ≤ 5min</text>
+
+        <path d="M750,244 L830,244 L830,300" class="edge" marker-end="url(#ar5)"/>
+        <polygon points="870,278 950,300 870,322 790,300" fill="#FAF7F0" stroke="#6B6455" stroke-width="1.2"/>
+        <text x="870" y="296" text-anchor="middle" class="node-sub">LLM 端点</text>
+        <text x="870" y="310" text-anchor="middle" class="node-sub">可用？</text>
+
+        <path d="M870,322 L870,360" class="edge" marker-end="url(#ar5)"/>
+        <text x="888" y="345" class="edge-label">是</text>
+        <rect x="790" y="360" width="180" height="44" rx="6" class="node-box warn"/>
+        <text x="880" y="379" text-anchor="middle" class="node-title">完整回答</text>
+        <text x="880" y="395" text-anchor="middle" class="node-sub">SSE 流式</text>
+
+        <path d="M790,300 L700,300 L700,330" class="edge" marker-end="url(#ar5o)"/>
+        <text x="742" y="290" text-anchor="middle" class="edge-label">否·F1</text>
+        <rect x="510" y="330" width="200" height="44" rx="6" fill="#E8E0CE" stroke="#8A6D3B" stroke-width="1.2"/>
+        <text x="610" y="349" text-anchor="middle" class="node-title">降级：只返回引用</text>
+        <text x="610" y="365" text-anchor="middle" class="node-sub">RTO ≤ 5min · RPO 0</text>
+
+        <rect x="330" y="380" width="230" height="50" rx="6" fill="#E8E0CE" stroke="#6B8E5A" stroke-width="1.2"/>
+        <text x="445" y="400" text-anchor="middle" class="node-title">审计追加（所有路径末端）</text>
+        <text x="445" y="418" text-anchor="middle" class="node-sub">F10 失败即告警·不静默</text>
+
+        <path d="M160,266 L160,405 L330,405" class="edge dashed" marker-end="url(#ar5g)"/>
+        <path d="M445,350 L445,380" class="edge dashed" marker-end="url(#ar5g)"/>
+        <path d="M880,404 L880,420 L560,420 L560,430" class="edge dashed" marker-end="url(#ar5g)"/>
+        <path d="M330,405 L160,405 L160,430" class="edge dashed" marker-end="url(#ar5g)"/>
+      </svg>
+    </div>
+  </figure>
+</section>
+
+<section>
+  <h2>六、私有化部署拓扑</h2>
+  <p class="fig-note">10 台以内、全部自建、不用托管服务。成本敏感口径下：数据库自建 1 台 4C8G、反代用系统 Nginx、监控用门禁报告 + 自建审计流水、推理用内网端点。</p>
+  <figure>
+    <figcaption>
+      <span class="fig-no">图 3</span>
+      <span class="fig-title">私有化部署拓扑图</span>
+      <span class="fig-desc">离线可用；TLS 在内网同样强制（等保视角下「内网可信」不是可接受假设）。</span>
+    </figcaption>
+    <div class="fig-body">
+      <svg viewBox="0 0 1000 520" role="img" aria-label="私有化部署拓扑图：接入层 2 台、应用层 2 台、数据层 1 台、推理层">
+        <defs>
+          <marker id="ar6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#8A8271"/>
+          </marker>
+        </defs>
+
+        <rect x="30" y="24" width="940" height="470" rx="10" fill="#FAF7F0" stroke="#6B6455" stroke-width="1.2"/>
+        <text x="48" y="48" class="layer-label">私有化内网（离线可用 · 零外域依赖）</text>
+
+        <!-- 接入层 -->
+        <rect x="60" y="64" width="880" height="96" rx="8" fill="#FFFFFF" stroke="#3A6B8C" stroke-width="1.2"/>
+        <text x="78" y="86" class="layer-label">接入层 · 2 台</text>
+        <rect x="150" y="96" width="290" height="48" rx="6" class="node-box go"/>
+        <text x="295" y="116" text-anchor="middle" class="node-title">Nginx #1</text>
+        <text x="295" y="132" text-anchor="middle" class="node-sub">静态站 + API 反代 · TLS 终止</text>
+        <rect x="560" y="96" width="290" height="48" rx="6" class="node-box go"/>
+        <text x="705" y="116" text-anchor="middle" class="node-title">Nginx #2</text>
+        <text x="705" y="132" text-anchor="middle" class="node-sub">静态站 + API 反代 · TLS 终止</text>
+
+        <!-- 应用层 -->
+        <rect x="60" y="186" width="880" height="96" rx="8" fill="#F1EBDD" stroke="#C8463A" stroke-width="1.2"/>
+        <text x="78" y="208" class="layer-label">应用层 · 2 台（可多副本）</text>
+        <rect x="150" y="218" width="290" height="48" rx="6" class="node-box warn"/>
+        <text x="295" y="238" text-anchor="middle" class="node-title">Node.js 20 + TS</text>
+        <text x="295" y="254" text-anchor="middle" class="node-sub">Express 5 · 端口 3000</text>
+        <rect x="560" y="218" width="290" height="48" rx="6" class="node-box warn"/>
+        <text x="705" y="238" text-anchor="middle" class="node-title">Node.js 20 + TS</text>
+        <text x="705" y="254" text-anchor="middle" class="node-sub">Express 5 · 端口 3000</text>
+
+        <!-- 数据层 -->
+        <rect x="60" y="308" width="560" height="96" rx="8" fill="#E8E0CE" stroke="#8A6D3B" stroke-width="1.2"/>
+        <text x="78" y="330" class="layer-label">数据层 · 1 台</text>
+        <rect x="140" y="340" width="290" height="48" rx="6" class="node-box gold"/>
+        <text x="285" y="360" text-anchor="middle" class="node-title">PostgreSQL 16</text>
+        <text x="285" y="376" text-anchor="middle" class="node-sub">4C8G · WAL 归档 · ssl=on</text>
+        <rect x="460" y="340" width="140" height="48" rx="6" class="node-box gold"/>
+        <text x="530" y="360" text-anchor="middle" class="node-title">备份卷</text>
+        <text x="530" y="376" text-anchor="middle" class="node-sub">每日全量 + WAL</text>
+
+        <!-- 推理层 -->
+        <rect x="650" y="308" width="290" height="96" rx="8" fill="#E8E0CE" stroke="#6B8E5A" stroke-width="1.2"/>
+        <text x="668" y="330" class="layer-label">推理层</text>
+        <rect x="690" y="340" width="210" height="48" rx="6" class="node-box ok"/>
+        <text x="795" y="360" text-anchor="middle" class="node-title">LLM 端点</text>
+        <text x="795" y="376" text-anchor="middle" class="node-sub">OpenAI-compatible · 内网</text>
+
+        <!-- 用户 -->
+        <rect x="60" y="430" width="290" height="44" rx="6" class="node-box"/>
+        <text x="205" y="457" text-anchor="middle" class="node-title">内网用户 / 桌面端 / MCP</text>
+
+        <!-- 连线 -->
+        <path d="M295,430 L295,144" class="edge" marker-end="url(#ar6)"/>
+        <path d="M205,430 L205,430" class="edge"/>
+        <path d="M705,430 L705,144" class="edge" marker-end="url(#ar6)"/>
+        <path d="M295,144 L295,218" class="edge" marker-end="url(#ar6)"/>
+        <path d="M705,144 L705,218" class="edge" marker-end="url(#ar6)"/>
+        <path d="M295,266 L295,340" class="edge" marker-end="url(#ar6)"/>
+        <path d="M705,266 L705,300 L530,300 L530,340" class="edge" marker-end="url(#ar6)"/>
+        <path d="M430,364 L460,364" class="edge" marker-end="url(#ar6)"/>
+        <path d="M795,266 L795,308" class="edge" marker-end="url(#ar6)"/>
+        <path d="M350,452 L350,470 L795,470 L795,388" class="edge dashed" marker-end="url(#ar6)"/>
+      </svg>
+    </div>
+  </figure>
+</section>
+
+<section>
+  <h2>七、相对 W821 的修订裁定</h2>
+  <p class="fig-note">三条根本裁定保持；存储裁定的规模前提被改写，故修订。修订依据是 W821 自己写明的触发条件命中，不是偏好之争。</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>#</th><th>W821 原裁定</th><th>v2 裁定</th><th>变更根因</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>依赖单向向下，产物不得反向成为事实源</td><td><span class="badge keep">保持</span></td><td>与栈、规模均无关，是最稳的底层约束</td></tr>
+        <tr><td>2</td><td>存储沿用 Git + JSON + 单文件 SQLite，不引入外部数据库</td><td><span class="badge rev">修订</span></td><td>原理由写「当前 DAU 百级、站点零服务端」，前提被规模改写</td></tr>
+        <tr><td>3</td><td>扩展走三档触发式演进，不预先建设</td><td><span class="badge rev">档位前移</span></td><td>档 2 触发条件按新规模已命中 ⇒ 由「触发后」提前为「本批启动」</td></tr>
+        <tr><td>4</td><td>容灾主战场是降级可用而非备份恢复</td><td><span class="badge keep">保持</span> + 加一条</td><td>PG 引入后备份恢复重回主战场（静态站仍以降级为主）</td></tr>
+        <tr><td>5</td><td>监控即门禁，零付费前提下不做付费 APM</td><td><span class="badge keep">保持</span> 并强化</td><td>成本敏感约束未变；合规审计面成为第二观测面</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>八、数据分级与合规缺口</h2>
+  <p class="fig-note">四级分级是 v2 相对 W821 的最大结构性增量——W821 全文无分级概念。右侧为逐项对应现役实证的整改清单。</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>级别</th><th>名称</th><th>判定标准</th><th>本项目落点</th><th>存储要求</th><th>传输要求</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>L1</strong></td><td>公开</td><td>已公开发布、泄露无损失</td><td>原著原文、解读文档、公开可视化数据</td><td>Git 明文</td><td>无特殊要求</td></tr>
+        <tr><td><strong>L2</strong></td><td>内部</td><td>仅内部可见、泄露有轻微损失</td><td>反馈数据、构建元数据、内部报告</td><td>DB 明文或列级加密</td><td>内网即可</td></tr>
+        <tr><td><strong>L3</strong></td><td>受限</td><td>泄露有实际损失</td><td>会话与消息（含用户提问内容）、检索上下文</td><td><strong>列级加密</strong></td><td><strong>必须 TLS</strong></td></tr>
+        <tr><td><strong>L4</strong></td><td>敏感</td><td>泄露有重大损失或触法</td><td>审计事件、密钥、凭证</td><td><strong>加密存储 + 只追加</strong></td><td><strong>必须 TLS</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <p>系统架构方案 v2 · 架构图 · W925 · 2026-10-25</p>
+  <p>事实源：<a href="系统架构方案v2-目标态与落地路线-2026-10-25.md">系统架构方案v2-目标态与落地路线-2026-10-25.md</a>（正文 Mermaid 代码块）</p>
+  <p>本页为派生物 · 零外域依赖 · file:// 双击直开 · 手写内联 SVG</p>
+</footer>
+
+</div>
+</body>
+</html>

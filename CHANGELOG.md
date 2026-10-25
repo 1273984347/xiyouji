@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W924），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W925），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,30 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W925（2026-10-25）：系统架构方案 v2（目标态与落地路线·分层·模块·数据流·存储·扩展·容灾·部署·监控）
+
+
+
+> **来源**：用户 2026-10-25 令「帮我设计一套系统架构方案：整体分层、模块拆分与依赖、数据流与存储选型、扩展性与容灾、部署与监控都写到位，附几张架构图说明图」+ 四项确认（场景=内容/文档平台型·单机到 10 台·月活十万级·读多写少；技术栈=TypeScript/Node.js 全栈 + PostgreSQL；硬约束=私有化/离线禁外域依赖 + 成本敏感少用托管服务 + 合规等保审计日志与数据分级；交付形态=HTML + Mermaid + PNG 三件套）。
+
+> - **文件**：docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-架构图-2026-10-25.html、docs/11-方案报告/设计与架构方案/系统架构方案v2-架构图/（6 张 PNG）、docs/11-方案报告/计划方案/执行前计划-T19-系统架构方案v2.md、docs/11-方案报告/计划方案/T19-任务计划执行与经验沉淀报告-2026-10-25.md、docs/11-方案报告/README.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、scripts/_render_arch_png.mjs、docs/INDEX.md、scripts/index.md、STRUCTURE.md、scripts/output/stats.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w925_spec.json、scripts/output/_cascade_files_W925.txt（逐件行见 file-index W925 段）。
+
+**对 W821 的修订裁定（三条根本裁定保持，存储裁定修订）**：
+- **保持**：依赖单向向下、产物不得反向成为事实源、内容真源永不因规模迁出 Git——三条与规模无关，保留成本低。
+- **修订**：W821 §7.1 S5 裁定「不采纳 Postgres」，其理由原文为「当前 DAU 百级、站点零服务端」——**该前提被规模改写**；且 W821 自载升级触发条件（DAU > 5,000 或并发写会话 > 50 或需要多用户鉴权与租户隔离）**按新规模已命中** ⇒ 档 2 由「触发式演进」提前为「既定选型」。
+- **新增**：合规横切面（数据分级 L1–L4 + 三类审计留痕 + 加密口径 + 留存期 ≥ 180 天 + 8 行合规缺口清单）——W821 全文无对应内容。
+- **让步**：若要求严格遵守 W821 原裁定，则该修订应撤回（列为开放项 O-1，待用户裁决）。
+
+**八维成文**：L0–L4 五层 + 治理/合规双横切面（7 行分层表 + 6 条层间铁律）· 6 组 21 模块 + 6×6 依赖矩阵 + 7 条禁止依赖形态 + 7 条契约 · 四条主链路（内容生产/交付发布/问答交互/合规审计）+ 读路径占比契约（静态直出 ≥ 95%）· 9 个存储候选逐项裁定（含量化触发条件）+ 7 阶段会话生命周期 + SQLite→PG 迁移映射 · 四档演进（档 2 本批启动，拆 D-1/D-2/D-3 三批）+ 10 条容量阈值 · 10 个故障域降级矩阵（RTO/RPO/恢复/演练齐全）+ 7 对象备份表 · 五条交付通道 + 私有化 10 台拓扑 + 5 步发布流水线 + 5 情形回滚 · 5 层观测面 + 18 条指标 + 6 条 SLO + 6 频率巡检。
+
+**架构图三形态（单向派生 · 派生铁律 3 条）**：Mermaid 源码为**事实源**（正文 6 处）→ 零外域 HTML 可视化页（手写内联 SVG·全仓实测无本地 mermaid 副本）→ PNG 6 张（Playwright 实测渲染）。导出脚本内建「file:// 加载期间 http(s) 请求数 = 0」断言，实测 0。
+
+**验证**：Mermaid 围栏计数 = 6 · PNG 6/6 导出成功（各 > 1 KB）· 零外域请求 = 0 · 存储候选 9 行 · 降级矩阵 10 行 · 指标 18 条 · 分级 4 级 · 合规缺口 8 行 · check_plan_template 2/2 全项符合 · verify_delivery 全量核心 0 FAIL。
+
+**执行中最大发现**：逐图语义核对——6 图中 3 张在代码审读阶段判「通过」，经读图发现语义错误（PG 直连浏览器 / 箭头落进空隙 / 连线穿组）⇒ 修正 3 处（E-01~E-03 经验沉淀）。
+
+**未验证项（6 条 · 显式声明）**：DAU/MAU 与 QPS 为行业经验区间推算（非本站实测）；**PG 性能与备份流程未实跑**（本机无 psql/pg_ctl）；等保条款按通用口径书写未核对本单位备案方案；HTML 图未做多浏览器交叉核对；10 台拓扑未压测；W821「≈ 1 批工作量」估计未复核。
 
 ### W924（2026-10-24）：Q2 裁决落地批（OBS-10 升双层判红 + OBS-11 归并 LHCI + OBS-14 挂解冻条件）
 
