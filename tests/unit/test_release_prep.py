@@ -30,10 +30,12 @@ def test_w_form_extraction_catches_lowercase_function_name():
     assert "w268" in [h.lower() for h in hits]
 
 
-def test_w_form_ignores_four_digit_forms():
-    text = "W0731 与 w1234 均非批次号形态"
+def test_w_form_matches_four_digit_batches():
+    """W969 起（W1000 临近）四位号为真批次形态：必须被提取并交注册表核验
+    （原「四位号一律忽略」是三位号时代的设计·W969 迁移 {3,4} 后反转）。"""
+    text = "W0731 与 w1234 均为批次号形态（四位号时代）"
     hits = [m.group(0) for m in re.finditer(release_prep.RE_W_FORM, text)]
-    assert hits == []
+    assert hits == ["W0731", "w1234"]
 
 
 def test_find_unregistered_reports_only_unknown():
