@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W953），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W954），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,25 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W954（2026-10-26）：第 43 篇《工作复盘与优化分析报告》入库批（W795–W953 全区间·149 段 / 154 行 / 354 提交）
+
+> **来源**：用户 2026-10-26 问「多长时间没做复盘了」→ 实测主线复盘断档 **167.5 小时**（6 天 23 小时 32 分·跨 159 个 W 号 / 354 笔提交）→ 经问卷裁决「**补做 · 覆盖 W795–W953 全区间**」。
+
+> - **文件**：docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-26.md、docs/11-方案报告/计划方案/执行前计划-T27-第43篇工作复盘批.md、docs/11-方案报告/计划方案/T27-任务计划执行与经验沉淀报告-2026-10-26.md、scripts/_w954_review_evidence.py、scripts/_w954_ledger_backfill.py、scripts/output/_w954_review_evidence.json、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、HANDOVER.md、scripts/output/file-index.md
+
+**断档事实**：第 42 篇（2026-10-19 01:10）至本篇 **167.5 小时零复盘**——该系列建立以来最长空窗（历史节奏 2026-10-07→10-19 共 12 天 14 篇·约 0.85 篇/天·本空窗约等欠 **6 篇**）。
+
+**取证脚本化**：新建 `scripts/_w954_review_evidence.py` 作全篇统计数字的**唯一源头**——CHANGELOG 现役面 + **归档面** + 对账表 + git 提交图**四源合取**（只读现役面会漏 W795–W802 共 8 段·归档面须合看）；产物 `scripts/output/_w954_review_evidence.json`。
+
+**五类登记漂移量化（事实源=git·声明源=登记面）**：CHANGELOG 段状态字段滞后 **91 批** / 台账滞后 **7 批**（W931/936/938/940/942/943/944·各有 1–3 笔提交已落库）/ 零提交 **6 批**（W907/908/910/911/929/937）/ 台账有行两面无段 **6 批** / 有段台账无行 **1 批**（W895）。
+
+**本批开工即被 preflight 拒绝**：8 个陈旧「在途」批次的 touches 与本批交集非空（CHANGELOG.md / scripts/output/file-index.md）⇒ **并发保护被自身历史欠账卡死**；按台账规则③「以 git 历史为唯一事实源判定并回写」订正 7 批状态 + W937 标「已停止·未收官」并清零其 touches（残留经 git 核实为零改动）⇒ preflight 由 **8 条 FAIL 恢复 EXIT=0**。
+
+**新经验与改进项**：E-25~E-31（登记面不是事实源 / 并发保护被欠账阻塞 / 归档面须合看 / 段状态串行错位 / 用户二次复核是第四道门 / 同族由构造保证 / 人工判据边界）· FAM-40~42 · WF-08~09 · P-43-01~05。
+
+> - **验证**：取证脚本实跑 ⇒ 149 段 / 154 行 / 354 提交 / 12 组主题分组 / 五类漂移分档全部可复算（复算命令见报告附录 B）· preflight 回写后 **EXIT=0** 且 touches 交集检查 OK · 台账 8 行状态逐行 grep 核对 · 文档面门禁见 T27 报告 §4.4。
+> - **状态**：已收官（提交 hash 见文末回填）
 
 ### W953（2026-10-26）：themes 库专题题图批（12 张·专题 + 器物静物·站内线描题图累计 40 张）
 

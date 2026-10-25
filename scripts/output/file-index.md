@@ -11,6 +11,22 @@
 ---
 
 
+## W954 第 43 篇工作复盘批（2026-10-26）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-26.md | W954 | 新增：第 43 篇复盘（W795–W953 全区间·149 段 / 154 行 / 354 提交·八条核心发现·E-25~E-31 / FAM-40~42 / WF-08~09 / P-43-01~05） |
+| docs/11-方案报告/计划方案/执行前计划-T27-第43篇工作复盘批.md | W954 | 新增：T-27 执行前计划（9 条 AC / 9 步 ST / 7 项 V 指标 / 8 条决策 / 12 项自包含检查） |
+| docs/11-方案报告/计划方案/T27-任务计划执行与经验沉淀报告-2026-10-26.md | W954 | 新增：T-27 执行与经验沉淀报告（9 步执行记录 / 验收表 / 6 条偏差 / 6 条经验 E-01~E-06） |
+| scripts/_w954_review_evidence.py | W954 | 新增：复盘取证脚本（CHANGELOG 现役面 + 归档面 + 对账表 + git 提交图四源合取 + 五类漂移分类 + 12 组主题分组） |
+| scripts/_w954_ledger_backfill.py | W954 | 新增：台账回写脚本（8 行状态订正 + 认领行追加·先断言后写·幂等可重跑） |
+| scripts/output/_w954_review_evidence.json | W954 | 新增：取证产物（区间事实与漂移分档的机器可读快照） |
+| docs/11-方案报告/README.md | W954 | 登记：§五 增第 43 篇行（序号 25）+ §六 增 T-27 两行（序号 31/32）+ 件数刷新 |
+| docs/00-导读/W批次编号对账表.md | W954 | 登记：W954 认领行 + 回写 7 批陈旧在途状态 + W937 标「已停止」并清零 touches |
+| HANDOVER.md | W954 | 同步：一、当前进度增 W954 条目 + 最后更新链前置 W954 |
+| CHANGELOG.md | W954 | 新增：W954 版段（四件套） |
+| scripts/output/file-index.md | W954 | 登记：W954 段（本段） |
+
 ## W953 themes 库专题题图批（12 张）（2026-10-26）
 
 | 文件 | W | 说明 |
@@ -101,6 +117,48 @@
 | CHANGELOG.md | W951 | W951 版段 |
 | docs/00-导读/W批次编号对账表.md | W951 | W951 认领行 |
 
+## W950 图标集打磨优化批（重画 13 枚 + 光学尺寸归一 + 1967 处内联 SVG 图形同步 + 唯一事实源刷新器）（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/icons/ui/（45 枚 SVG 资产重生成） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+| scripts/_w939_gen_icons.py | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+| scripts/_w946_gen_timeline_icons.py（生成器接入归一参数） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+| scripts/_w950_normalize.py（新增·光学尺寸归一器） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+| scripts/_w950_refresh_icon_paths.py（新增·图形同步刷新器） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+| scripts/output/_w950_icon_normalize.json（新增·45 枚归一参数） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+| scripts/output/_w946_timeline_icons.js | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+| scripts/output/_cascade_files_W950.txt | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+| xiyouji-agent-web/src/components/UiIcons.tsx（由资产重建） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+| site/**（1967 处内联 SVG 图形同步 · 646 个文件） | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+| docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+| docs/00-导读/W批次编号对账表.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+| CHANGELOG.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+| HANDOVER.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+| README.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+| STRUCTURE.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+| docs/00-导读/项目说明.md | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+| CITATION.cff。 | W950 | 批次产物（据 CHANGELOG W950 段「文件」字段补录） |
+
+## W949 图标治理换路径复核批（第二次追问「确定做完了吗」· 堵数据源回归漏洞 + 字段图标位判据入机检 + 登记剩余 71 条）（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| dataset/timeline.json（数据源 22 个 icon 字段 emoji → 图标名） | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
+| scripts/_w949_fix_dataset.py | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
+| scripts/_w949_allowlist.py | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
+| scripts/check_icon_fields.py（字段图标位判据） | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
+| scripts/check_emoji_icons.py（第 50 门禁挂入 A2 段） | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
+| scripts/output/_w949_icon_field_allowlist.json | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
+| docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
+| docs/00-导读/W批次编号对账表.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
+| CHANGELOG.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
+| HANDOVER.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
+| README.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
+| STRUCTURE.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
+| docs/00-导读/项目说明.md | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
+| CITATION.cff。 | W949 | 批次产物（据 CHANGELOG W949 段「文件」字段补录） |
+
 ## W948 内页专题题图续批（8 张线描人物题图·累计 16 张）（2026-10-25）
 
 | 文件 | W | 说明 |
@@ -122,6 +180,50 @@
 | scripts/output/_w948_batch2.json | W948 | 出图参数 05–08 |
 | CHANGELOG.md | W948 | W948 版段 |
 | docs/00-导读/W批次编号对账表.md | W948 | W948 认领行 |
+
+## W947 图标治理复验与补治批（用户追问「你确定现在已经做完图标了吗」→ 三路全量复验 + 补治两处遗漏范围 + 更正一处误判）（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_w947_add_icons.py（通用图标集补 2 枚） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
+| scripts/_w939_gen_icons.py（并入 note / link） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
+| site/static/icons/ui/note.svg | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
+| site/static/icons/ui/link.svg | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
+| site/static/js/rag-chat.js（🔗 前缀 → 内联 SVG） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
+| xiyouji-agent-web/src/components/UiIcons.tsx（新建·内联 SVG 图标组件） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
+| xiyouji-agent-web/src/components/PermissionDialog.tsx（⚠️ 📝 → 组件） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
+| xiyouji-agent-web/src/components/InlinePermissionCard.tsx（⚠️ → 组件） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
+| scripts/check_emoji_icons.py（标题改号） | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
+| docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
+| docs/00-导读/W批次编号对账表.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
+| CHANGELOG.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
+| HANDOVER.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
+| README.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
+| STRUCTURE.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
+| docs/00-导读/项目说明.md | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
+| CITATION.cff。 | W947 | 批次产物（据 CHANGELOG W947 段「文件」字段补录） |
+
+## W946 图标治理续作批（.ico 描边参数修复 + 时间线专属图标 16 枚 + 第 50 门禁「UI 图标位零残留 · 图标渲染正确性」）（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/system.css（`.ico` 基类补 fill/stroke/linecap/linejoin 描边参数） | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
+| site/static/icons/ui/tl-*.svg（16 枚时间线专属图标） | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
+| site/data/timeline.html | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
+| site/en/timeline.html（22 条事件数据字段 + 渲染改内联 SVG + TL_ICO 映射内联 + CSP 重算） | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
+| scripts/_w946_gen_timeline_icons.py | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
+| scripts/_w946_apply_timeline_icons.py | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
+| scripts/check_emoji_icons.py（第 50 门禁） | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
+| scripts/_w939_emoji_to_svg.py（svg_tag 模板补 SVG 属性） | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
+| scripts/output/_w946_timeline_icons.js | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
+| docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
+| docs/00-导读/W批次编号对账表.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
+| CHANGELOG.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
+| HANDOVER.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
+| README.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
+| STRUCTURE.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
+| docs/00-导读/项目说明.md | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
+| scripts/output/file-index.md。 | W946 | 批次产物（据 CHANGELOG W946 段「文件」字段补录） |
 
 ## W945 内页专题题图成套（8 张 3:4 线描人物题图）（2026-10-25）
 

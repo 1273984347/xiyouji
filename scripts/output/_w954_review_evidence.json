@@ -1,0 +1,4381 @@
+{
+ "range": {
+  "from_w": 795,
+  "to_w": 953,
+  "since": "2026-10-19 01:10"
+ },
+ "totals": {
+  "changelog_segments": 149,
+  "ledger_rows_in_range": 154,
+  "commits_since": 354,
+  "days": 8,
+  "closed_batches": 140,
+  "in_flight_batches": 8
+ },
+ "only_changelog": [
+  895
+ ],
+ "only_ledger": [
+  884,
+  907,
+  908,
+  910,
+  911,
+  929
+ ],
+ "loose_segment_titles": {},
+ "drift": {
+  "A_台账滞后": [
+   931,
+   936,
+   938,
+   940,
+   942,
+   943,
+   944
+  ],
+  "B_CHANGELOG状态滞后": [
+   808,
+   813,
+   814,
+   815,
+   820,
+   822,
+   823,
+   824,
+   831,
+   850,
+   851,
+   852,
+   853,
+   854,
+   855,
+   856,
+   857,
+   858,
+   859,
+   860,
+   861,
+   862,
+   863,
+   864,
+   865,
+   866,
+   867,
+   868,
+   869,
+   870,
+   871,
+   872,
+   873,
+   874,
+   875,
+   876,
+   877,
+   878,
+   879,
+   880,
+   881,
+   882,
+   883,
+   885,
+   886,
+   887,
+   891,
+   892,
+   893,
+   896,
+   897,
+   898,
+   900,
+   901,
+   902,
+   903,
+   904,
+   906,
+   912,
+   913,
+   915,
+   916,
+   917,
+   918,
+   919,
+   920,
+   921,
+   922,
+   923,
+   924,
+   925,
+   926,
+   927,
+   928,
+   930,
+   931,
+   932,
+   934,
+   935,
+   936,
+   938,
+   940,
+   941,
+   942,
+   943,
+   944,
+   946,
+   947,
+   949,
+   950,
+   952
+  ],
+  "C_零提交未收官": [
+   907,
+   908,
+   910,
+   911,
+   929,
+   937
+  ],
+  "D_台账有行无段": [
+   884,
+   907,
+   910,
+   911,
+   908,
+   929
+  ],
+  "E_有段台账无行": [
+   895
+  ]
+ },
+ "daily_commits": {
+  "2026-10-19": 22,
+  "2026-10-20": 67,
+  "2026-10-21": 44,
+  "2026-10-22": 59,
+  "2026-10-23": 48,
+  "2026-10-24": 42,
+  "2026-10-25": 65,
+  "2026-10-26": 7
+ },
+ "commit_types": {
+  "chore": 123,
+  "docs": 91,
+  "feat": 82,
+  "fix": 51,
+  "refactor": 7
+ },
+ "groups": {
+  "素材图与题图流水线": {
+   "count": 27,
+   "w_list": [
+    852,
+    853,
+    878,
+    879,
+    881,
+    882,
+    885,
+    888,
+    893,
+    909,
+    931,
+    932,
+    936,
+    938,
+    940,
+    941,
+    942,
+    944,
+    945,
+    946,
+    947,
+    948,
+    949,
+    950,
+    951,
+    952,
+    953
+   ]
+  },
+  "设计迁移与视觉令牌": {
+   "count": 24,
+   "w_list": [
+    826,
+    851,
+    862,
+    864,
+    866,
+    867,
+    868,
+    869,
+    870,
+    871,
+    872,
+    873,
+    875,
+    876,
+    883,
+    886,
+    887,
+    891,
+    899,
+    905,
+    915,
+    919,
+    934,
+    937
+   ]
+  },
+  "递延补段与元规则门禁": {
+   "count": 20,
+   "w_list": [
+    809,
+    812,
+    834,
+    841,
+    842,
+    849,
+    860,
+    863,
+    874,
+    895,
+    896,
+    898,
+    901,
+    904,
+    906,
+    913,
+    916,
+    917,
+    920,
+    933
+   ]
+  },
+  "工具链与工程加固": {
+   "count": 17,
+   "w_list": [
+    803,
+    804,
+    805,
+    808,
+    811,
+    815,
+    817,
+    832,
+    833,
+    835,
+    836,
+    837,
+    840,
+    859,
+    890,
+    897,
+    924
+   ]
+  },
+  "审查与评审": {
+   "count": 16,
+   "w_list": [
+    800,
+    813,
+    816,
+    820,
+    823,
+    825,
+    830,
+    831,
+    855,
+    857,
+    877,
+    902,
+    903,
+    922,
+    923,
+    943
+   ]
+  },
+  "其他": {
+   "count": 15,
+   "w_list": [
+    795,
+    796,
+    797,
+    798,
+    799,
+    801,
+    802,
+    822,
+    839,
+    843,
+    848,
+    861,
+    880,
+    914,
+    921
+   ]
+  },
+  "交互与界面走查": {
+   "count": 7,
+   "w_list": [
+    819,
+    854,
+    858,
+    865,
+    889,
+    926,
+    930
+   ]
+  },
+  "阅读页重建与内容回灌": {
+   "count": 7,
+   "w_list": [
+    824,
+    827,
+    845,
+    846,
+    847,
+    912,
+    935
+   ]
+  },
+  "架构与设计方案": {
+   "count": 6,
+   "w_list": [
+    818,
+    821,
+    838,
+    844,
+    925,
+    927
+   ]
+  },
+  "索引与搜索": {
+   "count": 4,
+   "w_list": [
+    807,
+    810,
+    900,
+    918
+   ]
+  },
+  "数据与观测": {
+   "count": 3,
+   "w_list": [
+    806,
+    850,
+    928
+   ]
+  },
+  "品牌与宣传物料": {
+   "count": 3,
+   "w_list": [
+    814,
+    856,
+    892
+   ]
+  }
+ },
+ "rows": [
+  {
+   "w": 795,
+   "date": "2026-10-19",
+   "title": "第 42 篇复盘报告入库批",
+   "group": "其他",
+   "segment_source": "归档",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 796,
+   "date": "2026-10-19",
+   "title": "提示词库整理入库批",
+   "group": "其他",
+   "segment_source": "归档",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 797,
+   "date": "2026-10-19",
+   "title": "历史模板归档批",
+   "group": "其他",
+   "segment_source": "归档",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 798,
+   "date": "2026-10-19",
+   "title": "对拍模板转正批",
+   "group": "其他",
+   "segment_source": "归档",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 799,
+   "date": "2026-10-19",
+   "title": "截图桶 TTL 收紧批",
+   "group": "其他",
+   "segment_source": "归档",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 800,
+   "date": "2026-10-19",
+   "title": "第四轮外部评审回应批",
+   "group": "审查与评审",
+   "segment_source": "归档",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 801,
+   "date": "2026-10-19",
+   "title": "character_nlp 行为保持重构批",
+   "group": "其他",
+   "segment_source": "归档",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 802,
+   "date": "2026-10-19",
+   "title": "character_nlp 行为保持重构批·二",
+   "group": "其他",
+   "segment_source": "归档",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 803,
+   "date": "2026-10-19",
+   "title": "工具链行为保持重构批：公共骨架提取与长函数拆分",
+   "group": "工具链与工程加固",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 804,
+   "date": "2026-10-19",
+   "title": "桌面版三平台安装包与自动更新批",
+   "group": "工具链与工程加固",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 805,
+   "date": "2026-10-19",
+   "title": "跨平台测试守卫热修批",
+   "group": "工具链与工程加固",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 806,
+   "date": "2026-10-20",
+   "title": "GoatCounter 统计链彻底退役批",
+   "group": "数据与观测",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 807,
+   "date": "2026-10-20",
+   "title": "站内搜索索引刷新批",
+   "group": "索引与搜索",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 808,
+   "date": "2026-10-20",
+   "title": "Web Agent 全栈加固批",
+   "group": "工具链与工程加固",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 3
+  },
+  {
+   "w": 809,
+   "date": "2026-10-20",
+   "title": "站内搜索索引新鲜度门禁挂载批",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 810,
+   "date": "2026-10-20",
+   "title": "站内搜索死代码清理批",
+   "group": "索引与搜索",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 811,
+   "date": "2026-10-20",
+   "title": "CI 断链修复批（工作流 YAML 歧义语法修复 + 可解析性守卫）",
+   "group": "工具链与工程加固",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 812,
+   "date": "2026-10-20",
+   "title": "去旧厂商 Agent 工具品牌化批（工具环境解耦 + 全仓去品牌 + 多 Agent 机制保全）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 8
+  },
+  {
+   "w": 813,
+   "date": "2026-10-20",
+   "title": "review 修复批（W806-W812 对抗审读三项实证缺陷）",
+   "group": "审查与评审",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 814,
+   "date": "2026-10-20",
+   "title": "去品牌扩展批（另两个同类品牌字面全量清除）",
+   "group": "品牌与宣传物料",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 815,
+   "date": "2026-10-20",
+   "title": "shell 查坑表补两条（PowerShell $ 变量展开 + 引号配对冲突）",
+   "group": "工具链与工程加固",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 816,
+   "date": "2026-10-20",
+   "title": "门禁判据可信化批（审查第一批）",
+   "group": "审查与评审",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 817,
+   "date": "2026-10-20",
+   "title": "agent-web 工具层边界加固批（会话库黑名单 cwd 无关 + symlink 逃逸 + git --output 空格形态 + 遍历面过黑名单）",
+   "group": "工具链与工程加固",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 818,
+   "date": "2026-10-20",
+   "title": "静态站前端框架化选型评估批",
+   "group": "架构与设计方案",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 4
+  },
+  {
+   "w": 819,
+   "date": "2026-10-20",
+   "title": "界面视觉重设计方向批（v4 刻本秩序 · 五轴决策 + 零外域视觉预览）",
+   "group": "交互与界面走查",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 820,
+   "date": "2026-10-20",
+   "title": "干扰治理日志补登与机制自身缺陷修复批",
+   "group": "审查与评审",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 821,
+   "date": "2026-10-20",
+   "title": "系统架构方案批（分层模块数据流存储扩展容灾部署监控八维成文）",
+   "group": "架构与设计方案",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 822,
+   "date": "2026-10-20",
+   "title": "§8 干扰日志机器触发点批",
+   "group": "其他",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 3
+  },
+  {
+   "w": 823,
+   "date": "2026-10-20",
+   "title": "数据库表设计审查报告落档批（agent-web SQLite 存储层·13 项发现·修复未动工）",
+   "group": "审查与评审",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 824,
+   "date": "2026-10-20",
+   "title": "站内阅读入口打通批（T-04 执行前计划落库·实证 622 页 reader 阅读内容站内入链为 0·施工待下一轮）",
+   "group": "阅读页重建与内容回灌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 7
+  },
+  {
+   "w": 825,
+   "date": "2026-10-20",
+   "title": "审查发现第二批修复批（前端流式链路三项 + 门禁解析层格式鲁棒性）",
+   "group": "审查与评审",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 826,
+   "date": "2026-10-20",
+   "title": "界面视觉重设计细化规格批（五项裁决落地 + 实算参数 + 迁移批次清单）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 5
+  },
+  {
+   "w": 827,
+   "date": "2026-10-21",
+   "title": "站内阅读入口打通施工批（622 页 reader 从站内 0 入链到首页一跳可达）",
+   "group": "阅读页重建与内容回灌",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 830,
+   "date": "2026-10-20",
+   "title": "计划方案三性审查与快照漂移门禁修复批（9 份文档约 60 断言复算 + C5b 扩展面 + pytest_collected 键 + 六处订正）",
+   "group": "审查与评审",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 831,
+   "date": "2026-10-20",
+   "title": "取经编制表落库与编制位补全批（17 位编制表 + 归档与工地两套治理系统纳入 + 零前置知识速览 + 三处编制位空缺诊断）",
+   "group": "审查与评审",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 3
+  },
+  {
+   "w": 832,
+   "date": "2026-10-20",
+   "title": "agent-web 生产面加固批（错误原文回显收口 + 端到端测试改跑临时库）",
+   "group": "工具链与工程加固",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 833,
+   "date": "2026-10-20",
+   "title": "交付链与工具链静默失效根修批（分支保护零强制点 + 独立工作流守卫 + 锁失配即红 + 类型检查真跑）",
+   "group": "工具链与工程加固",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 834,
+   "date": "2026-10-20",
+   "title": "门禁 fail-open 根修批（B1/B2 用户批准·verify_delivery fail-closed 化 + 12 例负样本）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 835,
+   "date": "2026-10-20",
+   "title": "服务端暴露面收口批（Host 头白名单防 DNS rebinding + token 硬开关 + 启动暴露面告警）",
+   "group": "工具链与工程加固",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 836,
+   "date": "2026-10-20",
+   "title": "品牌字面量零命中守卫批（归档检测器活面复活 + 三处品牌回退修复 + CI 挂载）",
+   "group": "工具链与工程加固",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 837,
+   "date": "2026-10-20",
+   "title": "并发实况沉淀批（部分提交临时索引 + index.lock 全程持锁 + C5b/C5d 互锁 + 管道 BOM + 守卫自指）",
+   "group": "工具链与工程加固",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 838,
+   "date": "2026-10-21",
+   "title": "取经编制表勘误批（V1.1a·自查脚本正则/指针面计数/附录时点行/交叉引用/术语）",
+   "group": "架构与设计方案",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 839,
+   "date": "2026-10-21",
+   "title": "fail-closed 跳过路径回归修复批（_gate_a11y 对 _SkipResult 误判红 + 2 例回归锁）",
+   "group": "其他",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 840,
+   "date": "2026-10-21",
+   "title": "pitfalls 坑位沉淀批（fail-closed 跳过路径入查坑表 + AGENTS §4.3 计数校准 41→47）",
+   "group": "工具链与工程加固",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 841,
+   "date": "2026-10-21",
+   "title": "版本行分隔符兜底门禁批（check_doc_sync C6 + 自测 22 增至 24 例）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 842,
+   "date": "2026-10-21",
+   "title": "CHANGELOG 递延补段工具批（backfill_changelog.py + 12 批欠账一次补齐）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 843,
+   "date": "2026-10-21",
+   "title": "pitfalls 增补批（第 48 条 desc 内嵌 W 号 + 第 49 条双源同旧值假绿）",
+   "group": "其他",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 844,
+   "date": "2026-10-21",
+   "title": "系统架构批四项落地（会话库备份 + 首 token 计时 + 两项裁决回填 + 检索题集入仓）",
+   "group": "架构与设计方案",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 845,
+   "date": "2026-10-21",
+   "title": "阅读页重建影响面量化批（W829 前置门槛实测 262 行）",
+   "group": "阅读页重建与内容回灌",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 846,
+   "date": "2026-10-21",
+   "title": "阅读页正文回灌批（三段管线重建·字级修复回灌 51 页）",
+   "group": "阅读页重建与内容回灌",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 847,
+   "date": "2026-10-21",
+   "title": "阅读页体验封装批（速览折叠 + 进度书签字号 + 每页反馈 + 幂等复验）",
+   "group": "阅读页重建与内容回灌",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 848,
+   "date": "2026-10-21",
+   "title": "Q5 裁决落档批（dense 升为显式可选档·默认仍 off）",
+   "group": "其他",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 5
+  },
+  {
+   "w": 849,
+   "date": "2026-10-21",
+   "title": "性能门禁挂槽批（第 47 槽·影子模式不判红·攒够样本再裁阈值）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 6
+  },
+  {
+   "w": 850,
+   "date": "2026-10-21",
+   "title": "Q2 取数基建批（OBS-10 至 14 采样件·显式开关才测·按指标计批）",
+   "group": "数据与观测",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 851,
+   "date": "2026-10-21",
+   "title": "设计迁移阶段 1 令牌落地批（v4 令牌纯加法·34 个零消费新名 / 35 处定义）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 852,
+   "date": "2026-10-21",
+   "title": "站点 Hero 素材图成套批（六张 16:9 水墨淡彩·风格锚点统一·底部净空带供叠字）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 853,
+   "date": "2026-10-21",
+   "title": "卡片封面素材图成套批（十二张 1:1 水墨淡彩·沿用 W852 提示词锚点·底部净空带供叠字）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 854,
+   "date": "2026-10-21",
+   "title": "界面布局审计批（信息层级·区块分布与留白·操作动线·多屏适配·只审计不动代码）",
+   "group": "交互与界面走查",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 855,
+   "date": "2026-10-21",
+   "title": "架构评审报告批（现役架构五维体检·模块耦合/性能瓶颈/可用性隐患/扩展性天花板/运维复杂度·只审计不动代码）",
+   "group": "审查与评审",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 856,
+   "date": "2026-10-21",
+   "title": "Logo 定稿落地批（方向 H「山·门槛」·品牌名《取经录》·一级品牌位统一）",
+   "group": "品牌与宣传物料",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 3
+  },
+  {
+   "w": 857,
+   "date": "2026-10-21",
+   "title": "计划方案模板符合性复核批（既有 8 份计划文档 × 模板 32 项结构判据·只复核不改文档）",
+   "group": "审查与评审",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 858,
+   "date": "2026-10-21",
+   "title": "站点交互流程审查报告批（857 页 / 2876 控件全量审查·只审查不改代码）",
+   "group": "交互与界面走查",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 859,
+   "date": "2026-10-22",
+   "title": "设计资产归档批（AI 概念稿 18 张 + Logo 源文件 + 可复算工具链 → assets/design/）",
+   "group": "工具链与工程加固",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 3
+  },
+  {
+   "w": 860,
+   "date": "2026-10-22",
+   "title": "计划方案合规门禁挂槽批（第 48 槽·用户明令「探针进门禁」·既有计划方案先不做）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 3
+  },
+  {
+   "w": 861,
+   "date": "2026-10-22",
+   "title": "设计资产归档收尾批（过程截图 13 张 + 4 个未选定方向备选 SVG + 跨会话回执底件）",
+   "group": "其他",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 3
+  },
+  {
+   "w": 862,
+   "date": "2026-10-22",
+   "title": "设计迁移 B1 根页与入口 8 页（容器归并·朱砂合规·对比度修法·间距令牌化）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 863,
+   "date": "2026-10-22",
+   "title": "递延版段补写批（W852-W862 十一段回写·号序链重新接上）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 864,
+   "date": "2026-10-22",
+   "title": "设计迁移 B2 结构页 10 页（容器令牌化·朱砂实底合规·间距令牌化）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 865,
+   "date": "2026-10-22",
+   "title": "首页三任务区重组 + 目录页检索动线批（接 W854 审计的 D1/D2 裁决）",
+   "group": "交互与界面走查",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 866,
+   "date": "2026-10-22",
+   "title": "设计迁移 B3 人物主线 9 页（容器归并·朱砂实底合规·间距令牌化）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 867,
+   "date": "2026-10-22",
+   "title": "设计迁移 B4 妖怪与神力 10 页（容器归并·朱砂实底合规·间距令牌化）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 868,
+   "date": "2026-10-22",
+   "title": "设计迁移 B5 取经与行迹 10 页（容器令牌化·朱砂实底合规·间距令牌化）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 869,
+   "date": "2026-10-22",
+   "title": "设计迁移 B6 叙事学 10 页（容器令牌化·朱砂实底合规·间距令牌化）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 870,
+   "date": "2026-10-22",
+   "title": "设计迁移 B7 文本与思想 10 页（容器令牌化·朱砂实底合规·间距令牌化）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 871,
+   "date": "2026-10-22",
+   "title": "设计迁移 B8 跨学科与实验 10 页（容器令牌化·朱砂实底合规·间距令牌化）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 872,
+   "date": "2026-10-22",
+   "title": "设计迁移 B9 视觉与叙事实验 10 页（容器令牌化·朱砂实底合规·间距令牌化）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 873,
+   "date": "2026-10-22",
+   "title": "设计迁移 B10 工具与检索 8 页（容器归并·朱砂实底合规·间距令牌化）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 874,
+   "date": "2026-10-22",
+   "title": "递延版段补写批（W865-W873 九段回写·号序链重新接上）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 875,
+   "date": "2026-10-22",
+   "title": "设计迁移 B11 阅读页 622 页（生成端一处改动·STYLE 补丁·CSP 重算）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 876,
+   "date": "2026-10-22",
+   "title": "对比度专项批·C 渠与值切换（朱砂文字全站落地 + chart-3/暗色 accent 改值 + inline_css 回吞事故修复）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 877,
+   "date": "2026-10-22",
+   "title": "计划方案未落地项核查批（92 项未做核销 + 模板符合性矩阵 + README 模板规范）",
+   "group": "审查与评审",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 878,
+   "date": "2026-10-22",
+   "title": "OG 分享缩略图素材成套批（十二张 1200×630 水墨淡彩·沿用 W852/W853 提示词锚点·底部净空带供叠字）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 879,
+   "date": "2026-10-22",
+   "title": "暗底/夜读适配水墨素材批（四张 1792×1024·浅底浓墨显影版三张 + 深底浅墨直显一张 + 全站分享图换水墨）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 880,
+   "date": "2026-10-22",
+   "title": "分语言 og:image 接线批（855 页改指新 URL·中文 og-09 山口关隘 / 英文 og-03 白龙马·生成端与判据端同步）",
+   "group": "其他",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 881,
+   "date": "2026-10-22",
+   "title": "人物补位素材批（十二张 1:1 方图·八戒 6 + 沙僧 4 + 师徒同框 2·沿用前三批宣纸水墨锚点）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 3
+  },
+  {
+   "w": 882,
+   "date": "2026-10-22",
+   "title": "缺口第 4–6 项合并批（竖版海报 3:4 六张 + 百回体系化封面六张 + 可视化页插画四张·构图句改写）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 883,
+   "date": "2026-10-22",
+   "title": "阶段 5 机检门禁批（朱砂实底常驻门禁第 49 槽 + 四类存量豁免裁决 + W877-W882 六段回补）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 885,
+   "date": "2026-10-22",
+   "title": "素材接线批（213 页页头装饰插画 + 首页水墨底图 + 4 张深底直显版插画·源与内联副本双写）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 3
+  },
+  {
+   "w": 886,
+   "date": "2026-10-22",
+   "title": "en 迁移批 1·入口与结构 28 页（C 渠换色 + 实底机械收敛 + 四类豁免·④ 首批）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 887,
+   "date": "2026-10-23",
+   "title": "en 迁移批 2·收口批（110 页合并四批·第 49 槽范围扩至全 en 138 页）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 888,
+   "date": "2026-10-23",
+   "title": "剩余素材接线批·两路（viz 卷末插画 85 页 + 百回母版 6 个回目页）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 889,
+   "date": "2026-10-23",
+   "title": "展示面复位批（GitHub 主页载体 / 首屏 / 时间三层）",
+   "group": "交互与界面走查",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 890,
+   "date": "2026-10-23",
+   "title": "CI 阻塞项清偿批（过期断言同步 / ruff 清零 / 跨平台探针 / 依赖漏洞）",
+   "group": "工具链与工程加固",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 891,
+   "date": "2026-10-23",
+   "title": "en 收尾批（A 渠容器归并 11 页 + nav-back 样式统一 49 页 + 间距令牌化 3,353 处）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 892,
+   "date": "2026-10-23",
+   "title": "宣传单页批（A4 双面·HTML 源 + PDF + PNG 三件套）",
+   "group": "品牌与宣传物料",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 7
+  },
+  {
+   "w": 893,
+   "date": "2026-10-23",
+   "title": "四画幅素材图成套批（十二张·16:9/1:1/3:4/1200×630 各三张·拉丁方主题·沿用 W882 改写锚点）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 895,
+   "date": "2026-10-23",
+   "title": "BL-33 收敛批（system.css 单一事实源 + inline_css 护栏 + 330 内联页按源重生成）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": null,
+   "ledger_in_flight": null,
+   "commits": 2
+  },
+  {
+   "w": 896,
+   "date": "2026-10-23",
+   "title": "门禁实算口径改造（磁盘扫描 → Git 索引·目标提交树）+ ci_sim 预演工具",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 10
+  },
+  {
+   "w": 897,
+   "date": "2026-10-23",
+   "title": "协作防护修复（preflight touches 分隔符根修 + ci_sim 接进 CI）",
+   "group": "工具链与工程加固",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 898,
+   "date": "2026-10-23",
+   "title": "宣传物料投放接线与派生（README 物料小节 + 站内入口 + 英文版单页 + 社媒分享图指引 + 规范受管资产登记）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 7
+  },
+  {
+   "w": 899,
+   "date": "2026-10-23",
+   "title": "合并后收尾修正（output 目录计数口径订正 + 朱砂门禁增量缓存重建）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 900,
+   "date": "2026-10-24",
+   "title": "11-方案报告目录分类重组（根层归四区 + 索引重构 + 链接与派生面全量同步）",
+   "group": "索引与搜索",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 901,
+   "date": "2026-10-24",
+   "title": "C5b 对账面恢复 + W900 披露项清偿（递归 glob / W757 链接新址 / T-16·T-17 补登）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 902,
+   "date": "2026-10-24",
+   "title": "机制脚本门禁全量审查与记忆固化入仓（四发现 + pitfalls/AGENTS/文档规范增补）",
+   "group": "审查与评审",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 903,
+   "date": "2026-10-24",
+   "title": "审查发现修复（preflight touches 语义归一 + 门禁 45 提示语补序）",
+   "group": "审查与评审",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 904,
+   "date": "2026-10-24",
+   "title": "C5c 裸聚合收敛（74 处清零·判据转 FAIL·stats 增 7 板块键·后置精确豁免）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 905,
+   "date": "2026-10-24",
+   "title": "两项存量红项清理（暗色门禁补色 + npm 依赖漏洞清偿）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 906,
+   "date": "2026-10-24",
+   "title": "C4-f 三态化（并行批次登记行纯追加残留放行·多 Agent 误拦根修）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 909,
+   "date": "2026-10-24",
+   "title": "README 专业化改版（结构层级 + 配图 + 头部与文案修正）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 3
+  },
+  {
+   "w": 912,
+   "date": "2026-10-24",
+   "title": "未落地任务首波清偿（T-18 全量盘点 + 站内交互债整包：渡口脚本考古回灌 + 抽屉修复 + 交互门禁建置）",
+   "group": "阅读页重建与内容回灌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 913,
+   "date": "2026-10-24",
+   "title": "波二小项四件批（T04 头订正 + bump 测试关闭 + E2E 钉版 + 站点数字失真修正与对账面扩展）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 914,
+   "date": "2026-10-24",
+   "title": "英文版 README（完整对照版 + 双向语言互链）",
+   "group": "其他",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 915,
+   "date": "2026-10-24",
+   "title": "波二余件一·二批（gates.md 时点快照收敛 + 404 页令牌补迁移）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 916,
+   "date": "2026-10-24",
+   "title": "波二第三件批（新建页准入门禁建置·C-W818-01 清偿）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 917,
+   "date": "2026-10-24",
+   "title": "DB 正确性包一（B-DB-01 四 P0 落地 + B-DB-05 schema 门禁建置）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 918,
+   "date": "2026-10-24",
+   "title": "检索降级批（B-ARCH-01 清偿·波二九件全清）",
+   "group": "索引与搜索",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 919,
+   "date": "2026-10-24",
+   "title": "DB 三包批（B-DB-04 迁移框架 + B-DB-02 索引查询 + B-DB-03 约束降级）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 920,
+   "date": "2026-10-24",
+   "title": "副本链值级对账门禁批（B-W855-04 清偿·基线冻结 24 件存量）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 921,
+   "date": "2026-10-24",
+   "title": "CHANGELOG 主动瘦身批（B-W855-05 清偿·102 段迁一级归档·D1 全清）",
+   "group": "其他",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 922,
+   "date": "2026-10-24",
+   "title": "E 裁决落地批（12 项闭环：浮窗文案+日志收官+og 白名单接线+NOTE 盘点+八项登记）",
+   "group": "审查与评审",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 4
+  },
+  {
+   "w": 923,
+   "date": "2026-10-24",
+   "title": "review 修复批（PR #63 复审两处低危登记缺陷）",
+   "group": "审查与评审",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 924,
+   "date": "2026-10-24",
+   "title": "Q2 裁决落地批（OBS-10 升双层判红 + OBS-11 归并 LHCI + OBS-14 挂解冻条件）",
+   "group": "工具链与工程加固",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 925,
+   "date": "2026-10-25",
+   "title": "系统架构方案 v2（目标态与落地路线·分层·模块·数据流·存储·扩展·容灾·部署·监控）",
+   "group": "架构与设计方案",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 926,
+   "date": "2026-10-25",
+   "title": "站点交互流程审查复核报告批（857 页全量复核 + 当前状态排序建议·只审查不改代码）",
+   "group": "交互与界面走查",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 6
+  },
+  {
+   "w": 927,
+   "date": "2026-10-25",
+   "title": "架构方案 v2 裁决落档 + D-1 离线施工件 + W926 交叉对账",
+   "group": "架构与设计方案",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 928,
+   "date": "2026-10-25",
+   "title": "D-1 实跑批（真实 PostgreSQL 16.4·免安装二进制路径·抓出 4 个静态查不出的真缺陷）",
+   "group": "数据与观测",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 930,
+   "date": "2026-10-25",
+   "title": "界面布局复核与落地方案（信息层级四维复核 + 三条新发现 + 六批可施工方案）",
+   "group": "交互与界面走查",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 931,
+   "date": "2026-10-25",
+   "title": "首页 Hero 横幅素材图成套批（线描版 8 张 · 2400×1017 · 左半留白供叠字）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": false,
+   "ledger_in_flight": true,
+   "commits": 3
+  },
+  {
+   "w": 932,
+   "date": "2026-10-25",
+   "title": "站点 Hero 素材图成套批（六张 16:9 浓墨剪影·锚点复用成熟段·底部净空带供叠字）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 933,
+   "date": "2026-10-25",
+   "title": "共享面串行化机制批（规则三条 + 五个机检判据·把台账与 CHANGELOG 的写顺序从自律变成机制）",
+   "group": "递延补段与元规则门禁",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 3
+  },
+  {
+   "w": 934,
+   "date": "2026-10-25",
+   "title": "D-2 应用迁移批第一子批（M12 存储层抽象 + PG 适配器 + 三表迁移器·真实数据迁移三重对账全一致）",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 1
+  },
+  {
+   "w": 935,
+   "date": "2026-10-25",
+   "title": "速赢两处批（R-05 渡口正文溯源去工程化 + R-12 英文站目录死链消除）",
+   "group": "阅读页重建与内容回灌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 936,
+   "date": "2026-10-25",
+   "title": "首屏图集接入 + 专题题图落位（线描 9 张轮播 · 浓墨 5 张题图）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": false,
+   "ledger_in_flight": true,
+   "commits": 1
+  },
+  {
+   "w": 937,
+   "date": "2026-10-25",
+   "title": "首屏版式修正——「100 回」数据块移入左侧文字区",
+   "group": "设计迁移与视觉令牌",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": false,
+   "ledger_in_flight": true,
+   "commits": 0
+  },
+  {
+   "w": 938,
+   "date": "2026-10-25",
+   "title": "首屏版式重做 + 图集逐张复核（左侧文字重排 · 切换器归位 · 9 张构图全部完整）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": false,
+   "ledger_in_flight": true,
+   "commits": 2
+  },
+  {
+   "w": 940,
+   "date": "2026-10-25",
+   "title": "Hero 素材题材辨识度修正（09 换筋斗云 · 04 换紧箍儿 · 补题材关判据）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": false,
+   "ledger_in_flight": true,
+   "commits": 1
+  },
+  {
+   "w": 941,
+   "date": "2026-10-25",
+   "title": "UI 图标位 emoji 治理批（禁 emoji 充当图标 + 东方线描图标集自绘 27 枚 + UI 图标位 1,957 处归零）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 4
+  },
+  {
+   "w": 942,
+   "date": "2026-10-25",
+   "title": "Hero 素材全量复审（14 张逐张放大目视 · 修正 2 处形制偏差）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": false,
+   "ledger_in_flight": true,
+   "commits": 1
+  },
+  {
+   "w": 943,
+   "date": "2026-10-25",
+   "title": "全站图片审查（227 张逐类目视 · 修 3 处真缺陷）",
+   "group": "审查与评审",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": false,
+   "ledger_in_flight": true,
+   "commits": 1
+  },
+  {
+   "w": 944,
+   "date": "2026-10-25",
+   "title": "章回插画新组（6 张按回目情节重出·打破「挑担人赶路」同构）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": false,
+   "ledger_in_flight": true,
+   "commits": 1
+  },
+  {
+   "w": 945,
+   "date": "2026-10-25",
+   "title": "内页专题题图成套（8 张 3:4 线描人物题图·622 页仅 11 页有题图的缺口）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 3
+  },
+  {
+   "w": 946,
+   "date": "2026-10-25",
+   "title": "图标治理续作批（.ico 描边参数修复 + 时间线专属图标 16 枚 + 第 50 门禁「UI 图标位零残留 · 图标渲染正确性」）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 3
+  },
+  {
+   "w": 947,
+   "date": "2026-10-25",
+   "title": "图标治理复验与补治批（用户追问「你确定现在已经做完图标了吗」→ 三路全量复验 + 补治两处遗漏范围 + 更正一处误判）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 4
+  },
+  {
+   "w": 948,
+   "date": "2026-10-25",
+   "title": "内页专题题图续批（8 张线描人物题图·与上批同族·累计 16 张）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 4
+  },
+  {
+   "w": 949,
+   "date": "2026-10-25",
+   "title": "图标治理换路径复核批（第二次追问「确定做完了吗」· 堵数据源回归漏洞 + 字段图标位判据入机检 + 登记剩余 71 条）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 4
+  },
+  {
+   "w": 950,
+   "date": "2026-10-25",
+   "title": "图标集打磨优化批（重画 13 枚 + 光学尺寸归一 + 1967 处内联 SVG 图形同步 + 唯一事实源刷新器）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 6
+  },
+  {
+   "w": 951,
+   "date": "2026-10-25",
+   "title": "题图版式批（站点版裁掉上部留白·16 张题图页面呈现紧凑化）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 2
+  },
+  {
+   "w": 952,
+   "date": "2026-10-25",
+   "title": "内页人物题图续批第二组（12 张·人物 + 主题混合·站内线描题图累计 28 张）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": false,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 4
+  },
+  {
+   "w": 953,
+   "date": "2026-10-26",
+   "title": "themes 库专题题图批（12 张·专题 + 器物静物·站内线描题图累计 40 张）",
+   "group": "素材图与题图流水线",
+   "segment_source": "现役",
+   "changelog_closed": true,
+   "ledger_closed": true,
+   "ledger_in_flight": false,
+   "commits": 3
+  }
+ ],
+ "commits": [
+  {
+   "sha": "1e333d09",
+   "when": "2026-10-26 00:36",
+   "subject": "chore(w953): 拼图刷新——站点版 40 张拼图（含本批 12 张）"
+  },
+  {
+   "sha": "f3b8148d",
+   "when": "2026-10-26 00:36",
+   "subject": "docs(w953): 收官回填——台账 hash/状态/touches + CHANGELOG 段状态与文件行（精确暂存）"
+  },
+  {
+   "sha": "7481e4f2",
+   "when": "2026-10-26 00:32",
+   "subject": "feat(w953): themes 库专题题图批（12 张·站内线描题图累计 40 张）"
+  },
+  {
+   "sha": "49f2f558",
+   "when": "2026-10-26 00:05",
+   "subject": "chore(w952): 拼图刷新——站点版 28 张拼图 + 主体特写 28 张（含本批 12 张）"
+  },
+  {
+   "sha": "0221e64e",
+   "when": "2026-10-26 00:05",
+   "subject": "chore(w952): 目录生成件同步——site/static/images 的 index.md / README.md 补入本批新增的 12 张站点版"
+  },
+  {
+   "sha": "19b71add",
+   "when": "2026-10-26 00:01",
+   "subject": "docs(w952): 收官回填——台账 hash/状态/touches + CHANGELOG 段状态（精确暂存）"
+  },
+  {
+   "sha": "7bcf3ed8",
+   "when": "2026-10-26 00:00",
+   "subject": "feat(w952): 内页人物题图续批第二组（12 张·人物 + 主题混合·站内线描题图累计 28 张）"
+  },
+  {
+   "sha": "6bd75e22",
+   "when": "2026-10-25 23:26",
+   "subject": "docs(w951): 收官回填——台账 hash/状态/touches + CHANGELOG 段状态（精确暂存）"
+  },
+  {
+   "sha": "d5c3a5d5",
+   "when": "2026-10-25 23:25",
+   "subject": "feat(w951): 题图版式批（站点版裁掉上部留白·16 张题图页面呈现紧凑化）"
+  },
+  {
+   "sha": "7908c96c",
+   "when": "2026-10-25 23:23",
+   "subject": "fix(w950): 重算 timeline 两页的 CSP 哈希（改内联脚本后的必做步骤·本批第三次现场复现）"
+  },
+  {
+   "sha": "f2d32dc7",
+   "when": "2026-10-25 23:21",
+   "subject": "docs(w950): 台账补记本批 4 笔提交 hash"
+  },
+  {
+   "sha": "69527162",
+   "when": "2026-10-25 23:21",
+   "subject": "fix(w950): 刷新器幂等性修复（TL_ICO 注释行重复 + UiIcons.tsx 重复包裹）"
+  },
+  {
+   "sha": "7a94698e",
+   "when": "2026-10-25 23:02",
+   "subject": "fix(w950): 补提交图标资产与生成器（上一笔清单漏了 .py 与 .svg 后缀）"
+  },
+  {
+   "sha": "eb820ad2",
+   "when": "2026-10-25 23:01",
+   "subject": "docs(w950): 台账 hash 回填 + 报告 §9 补提交 hash"
+  },
+  {
+   "sha": "671557b0",
+   "when": "2026-10-25 23:01",
+   "subject": "feat(w950): 图标集打磨优化（重画 13 枚 + 光学尺寸归一 + 1967 处内联 SVG 图形同步）"
+  },
+  {
+   "sha": "62365964",
+   "when": "2026-10-25 22:56",
+   "subject": "chore(w948): 目录生成件补入——本批新建目录（raw/round4·raw/round5·zoom-w948）的 index.md"
+  },
+  {
+   "sha": "f7918a9b",
+   "when": "2026-10-25 22:55",
+   "subject": "chore(w948): 目录生成件收敛——scripts/output/index.md 补入当批级联清单"
+  },
+  {
+   "sha": "150bc921",
+   "when": "2026-10-25 22:53",
+   "subject": "docs(w948): 收官回填——台账 hash/状态/touches + CHANGELOG 段状态"
+  },
+  {
+   "sha": "88fa5952",
+   "when": "2026-10-25 22:52",
+   "subject": "feat(w948): 内页专题题图续批（8 张线描人物题图·与上批同族·站内累计 16 张）"
+  },
+  {
+   "sha": "a59a7499",
+   "when": "2026-10-25 22:47",
+   "subject": "docs(w949): 收官回填（台账 hash + 版本行分隔符/裸数字修正 + stats 数字钉同步）"
+  },
+  {
+   "sha": "1cfcf988",
+   "when": "2026-10-25 22:46",
+   "subject": "docs(w949): 版本行 desc 分隔符清理（W949 收官补记）"
+  },
+  {
+   "sha": "a84ba0b1",
+   "when": "2026-10-25 22:45",
+   "subject": "docs(w949): 版本行 desc 分隔符清理（W949 收官补记）"
+  },
+  {
+   "sha": "276eaa4b",
+   "when": "2026-10-25 22:45",
+   "subject": "feat(w949): 图标治理换路径复核批（第二次追问「确定做完了吗」⇒ 堵数据源回归漏洞 + 字段图标位判据入机检）"
+  },
+  {
+   "sha": "02ef09ee",
+   "when": "2026-10-25 22:37",
+   "subject": "docs(w947): file-index 纳入提交 + 台账登记跨会话竞态（现役段已被并行批次推进至 W948）"
+  },
+  {
+   "sha": "29a182ff",
+   "when": "2026-10-25 22:36",
+   "subject": "docs(w947): agent-web 编译验证实测补记（取代交付时的「未编译验证」声明）"
+  },
+  {
+   "sha": "d3be6620",
+   "when": "2026-10-25 22:28",
+   "subject": "docs(w947): 台账 W947 行 hash 回填 + 报告 §7 补提交 hash"
+  },
+  {
+   "sha": "b1043ab5",
+   "when": "2026-10-25 22:28",
+   "subject": "feat(w947): 图标治理复验与补治批（三路全量复验 + 补治 2 处遗漏范围 + 更正 1 处误判）"
+  },
+  {
+   "sha": "7f05e47f",
+   "when": "2026-10-25 22:26",
+   "subject": "docs(w945): 目录 README 补记「图内留白 × 页面标题位置」取舍"
+  },
+  {
+   "sha": "4d8d0657",
+   "when": "2026-10-25 22:22",
+   "subject": "docs(w945): 收官回填——台账 hash/状态/touches + CHANGELOG 段状态"
+  },
+  {
+   "sha": "83f31387",
+   "when": "2026-10-25 22:20",
+   "subject": "feat(w945): 内页专题题图成套批（8 张 3:4 线描人物题图·接入 8 个 reader 专题页）"
+  },
+  {
+   "sha": "88eacc8a",
+   "when": "2026-10-25 22:16",
+   "subject": "docs(w946): 交接文档「当前 HEAD」行同步 W946 + file-index 纳入提交"
+  },
+  {
+   "sha": "923afc4c",
+   "when": "2026-10-25 22:13",
+   "subject": "docs(w946): 台账 hash 回填 + 报告 §6 补提交 hash"
+  },
+  {
+   "sha": "ed09a65e",
+   "when": "2026-10-25 22:13",
+   "subject": "feat(w946): 图标治理续作批（描边参数修复 + 时间线专属图标 16 枚 + 第 50 门禁）"
+  },
+  {
+   "sha": "6d042d08",
+   "when": "2026-10-25 21:48",
+   "subject": "feat(w944): 章回插画新组（6 张按各自回目情节重出·打破「挑担人赶路」同构）"
+  },
+  {
+   "sha": "42f4560d",
+   "when": "2026-10-25 21:41",
+   "subject": "fix(w943): 全站图片审查 227 张·修 3 处真缺陷（分享图字母残留 / 卷轴伪文字 / 菩提叶形制）"
+  },
+  {
+   "sha": "6e47596b",
+   "when": "2026-10-25 21:37",
+   "subject": "docs(w941): 报告 §4.5 结论表述订正（W942 已入库·红项不再表述为「待消解」）"
+  },
+  {
+   "sha": "d40b1466",
+   "when": "2026-10-25 21:36",
+   "subject": "docs(w941): 收官回填——台账 hash + 报告最终验收结论"
+  },
+  {
+   "sha": "4ce0eca6",
+   "when": "2026-10-25 21:33",
+   "subject": "chore(cascade): 代提 W941 批漏 add 的台账行（W941 主体已入库 4e94aa58·台账行留工作树致 C4-f 残留）"
+  },
+  {
+   "sha": "13ad66a4",
+   "when": "2026-10-25 21:32",
+   "subject": "feat(w942): Hero 素材全量复审（14 张逐张放大目视 · 修正 2 处形制偏差）"
+  },
+  {
+   "sha": "4e94aa58",
+   "when": "2026-10-25 21:31",
+   "subject": "feat(w941): UI 图标位 emoji 归零 + 东方线描图标集自绘 27 枚"
+  },
+  {
+   "sha": "95495824",
+   "when": "2026-10-25 21:24",
+   "subject": "feat(w940): Hero 素材题材辨识度修正（09 换筋斗云 · 04 换紧箍儿 · 补题材关判据 J8）"
+  },
+  {
+   "sha": "db5328b5",
+   "when": "2026-10-25 20:54",
+   "subject": "feat(w938): 首屏版式重做 + contain 适配任意视口比例 + 纸色归一消边界"
+  },
+  {
+   "sha": "fb7803db",
+   "when": "2026-10-25 20:44",
+   "subject": "feat(w938): 首屏版式重做 + 背景渲染改 contain（任意视口比例构图一致）"
+  },
+  {
+   "sha": "fc0060af",
+   "when": "2026-10-25 20:20",
+   "subject": "feat(w936): 首屏图集接入 + 专题题图落位（线描 9 张轮播 · 浓墨 5 张题图）"
+  },
+  {
+   "sha": "b130f7a1",
+   "when": "2026-10-25 20:14",
+   "subject": "docs(w935): 台账回填收官 hash 与三件套状态"
+  },
+  {
+   "sha": "5079051f",
+   "when": "2026-10-25 20:14",
+   "subject": "feat(w935): 速赢两处（R-05 渡口正文溯源去工程化 + R-12 英文站目录死链消除）"
+  },
+  {
+   "sha": "0f210974",
+   "when": "2026-10-25 18:30",
+   "subject": "chore(docs): 目录索引刷新·补登记 _w931_hero_fit.py（第 45 门禁目录新鲜度归零）"
+  },
+  {
+   "sha": "a6306896",
+   "when": "2026-10-25 18:30",
+   "subject": "docs(w933): 台账 W933 描述措辞订正（四个 → 五个机检判据）"
+  },
+  {
+   "sha": "08f1f927",
+   "when": "2026-10-25 18:28",
+   "subject": "docs(w931): hero 容器适配实测入 README + 可复跑脚本（1440×520 cover 裁切实测·先以 hero-01 校准复现「主体被裁没」再给本批结论：垂直溢出 90px·裁切后左侧 46% 仍 100% 纯纸色·两种 background-position 差异 <0.5% ⇒ 沿用 .hero 现有参数即可）"
+  },
+  {
+   "sha": "4b25833b",
+   "when": "2026-10-25 18:26",
+   "subject": "docs(w934): 台账收官回填 + 框架两件终值回填（V-12 门禁 0 FAIL / AC-16 通过 / 偏差 §6-10 如实登记提交落点）"
+  },
+  {
+   "sha": "378e158d",
+   "when": "2026-10-25 18:10",
+   "subject": "docs(w930): 界面布局复核与落地方案（18 条现状重测 + 3 条新发现 + 6 批可施工方案）"
+  },
+  {
+   "sha": "4f889096",
+   "when": "2026-10-25 18:06",
+   "subject": "chore(cascade): 级联面代做 26 件·代提 W932 批产物 + 口径同步（解开 C4-f 自举死锁）"
+  },
+  {
+   "sha": "1978f0e8",
+   "when": "2026-10-25 18:06",
+   "subject": "feat(w933): 共享面串行化机制（CHANGELOG W933 段 + 13 个级联面 + 刷新链产物）"
+  },
+  {
+   "sha": "da1e3d6e",
+   "when": "2026-10-25 17:54",
+   "subject": "feat(w931): Hero 线描横幅成套素材批（8 张 · 2400×1017 · 左侧留白供叠字）"
+  },
+  {
+   "sha": "a9f12deb",
+   "when": "2026-10-25 17:54",
+   "subject": "feat(w933): 共享面串行化机制（规则三条 + 五个机检判据·主体批）"
+  },
+  {
+   "sha": "4dd57cee",
+   "when": "2026-10-25 17:24",
+   "subject": "docs(w928): 台账回填收官 hash（解除后续批次的 touches 伪阻塞）"
+  },
+  {
+   "sha": "57762fa3",
+   "when": "2026-10-25 17:01",
+   "subject": "feat(w928): D-1 实跑批（真实 PostgreSQL 16.4·免安装二进制路径·抓出 4 个静态查不出的真缺陷）"
+  },
+  {
+   "sha": "51f4c2ca",
+   "when": "2026-10-25 16:13",
+   "subject": "docs(w927): 台账回填收官 hash + 新目录生成件入库"
+  },
+  {
+   "sha": "b606547f",
+   "when": "2026-10-25 16:11",
+   "subject": "feat(w927): 架构方案 v2 裁决落档 + D-1 离线施工件 + W926 交叉对账"
+  },
+  {
+   "sha": "9f3ab8a6",
+   "when": "2026-10-25 15:42",
+   "subject": "docs(w926): 台账补注重排批 hash 与 §0.4 执行序"
+  },
+  {
+   "sha": "33b59165",
+   "when": "2026-10-25 15:39",
+   "subject": "docs(w926): 按选定痛点（功能可用性优先）重排执行序 + 新增 §0.4"
+  },
+  {
+   "sha": "686cebde",
+   "when": "2026-10-25 15:19",
+   "subject": "docs(w926): 台账补注修订批 hash 与终态口径"
+  },
+  {
+   "sha": "c2442eeb",
+   "when": "2026-10-25 15:17",
+   "subject": "docs(w926): 报告与对拍脚本修订（吸收独立盲审 3 阻断 + 8 建议修）"
+  },
+  {
+   "sha": "7ae0898d",
+   "when": "2026-10-25 14:48",
+   "subject": "docs(w926): 台账回填收官 hash"
+  },
+  {
+   "sha": "43582f05",
+   "when": "2026-10-25 14:42",
+   "subject": "docs(w926): 站点交互流程审查复核报告（857 页四维复核 + 12 条问题按访客影响排序·只审查不改代码）"
+  },
+  {
+   "sha": "ce459934",
+   "when": "2026-10-25 14:31",
+   "subject": "docs(w925): 台账回填收官 hash"
+  },
+  {
+   "sha": "a9960d0b",
+   "when": "2026-10-25 14:28",
+   "subject": "docs(w925): 系统架构方案 v2（增量修订·存储裁定改采 PG 自建单机·新增等保合规横切面·架构图三形态交付）"
+  },
+  {
+   "sha": "f58cd86f",
+   "when": "2026-10-25 13:12",
+   "subject": "docs(w924): 台账回填收官 hash"
+  },
+  {
+   "sha": "11a0ce0e",
+   "when": "2026-10-25 13:10",
+   "subject": "feat(w924): Q2 裁决落地批（OBS-10 升双层判红·硬 500KB/软 200KB 观察清单·自测 9 例 + OBS-11 归并 LHCI + OBS-14 挂解冻条件·用户裁决「好」）"
+  },
+  {
+   "sha": "1503c9c4",
+   "when": "2026-10-25 12:31",
+   "subject": "docs(w923): 台账回填收官 hash（f51cb6b1）"
+  },
+  {
+   "sha": "f51cb6b1",
+   "when": "2026-10-25 12:26",
+   "subject": "docs(w923): review 修复批（W907 让号行前缀消幻影在途 + W910/W911 补登记·复审十一项实抽全过）"
+  },
+  {
+   "sha": "a8b974a6",
+   "when": "2026-10-25 00:25",
+   "subject": "fix(w922): CI e2e 修复二连（MIGRATIONS void 注解 + 会话 id 形态卡定稿 + 降级判据收紧去 fetch-failed 泛匹配——chat.e2e 实证拦下·11/11 全绿）"
+  },
+  {
+   "sha": "6e31bc5d",
+   "when": "2026-10-24 23:59",
+   "subject": "fix(w922): CI Agent Web Build 修复（MIGRATIONS up 补 void 返回类型注解·TS7010·tsc -b 严格面·本地 build 复现转绿）"
+  },
+  {
+   "sha": "e07e3aa3",
+   "when": "2026-10-24 23:45",
+   "subject": "docs(w922): 台账回填收官 hash"
+  },
+  {
+   "sha": "dd8a6057",
+   "when": "2026-10-24 23:44",
+   "subject": "feat(w922): E 裁决落地批（12 项闭环：浮窗文案+干扰日志收官+og 白名单 12 页接线+NOTE 盘点+八项登记·用户裁决「全部按建议」）"
+  },
+  {
+   "sha": "072000af",
+   "when": "2026-10-24 23:20",
+   "subject": "docs(w921): 台账回填收官 hash"
+  },
+  {
+   "sha": "4ab32ad1",
+   "when": "2026-10-24 23:18",
+   "subject": "docs(w921): CHANGELOG 瘦身批（B-W855-05：102 段迁一级归档·679KB→363KB·守恒 693 段断言护航·D1 全清）"
+  },
+  {
+   "sha": "a85018d7",
+   "when": "2026-10-24 23:07",
+   "subject": "docs(w920): 台账回填收官 hash"
+  },
+  {
+   "sha": "e4842ae5",
+   "when": "2026-10-24 23:05",
+   "subject": "feat(w920): 副本链值级对账门禁批（B-W855-04：24 件存量基线冻结·新漂移判红·接 ci_sim 第 11 项）"
+  },
+  {
+   "sha": "4f5e2157",
+   "when": "2026-10-24 22:52",
+   "subject": "docs(w919): 台账回填收官 hash"
+  },
+  {
+   "sha": "acf3ec34",
+   "when": "2026-10-24 22:50",
+   "subject": "feat(w919): DB 三包批（迁移框架 MIGRATIONS v1-v3 + 四索引/N+1 单SQL + JSON.parse 降级·集成测试抓出 v3 漏建索引真缺陷）"
+  },
+  {
+   "sha": "73c95f49",
+   "when": "2026-10-24 22:15",
+   "subject": "docs(w918): 台账回填收官 hash"
+  },
+  {
+   "sha": "81432db2",
+   "when": "2026-10-24 22:13",
+   "subject": "feat(w918): 检索降级批（B-ARCH-01：LLM 上游不可达时 SSE 降级说明+done·检索引用仍有效·波二九件全清）"
+  },
+  {
+   "sha": "a63e5a21",
+   "when": "2026-10-24 22:02",
+   "subject": "docs(w917): 台账回填收官 hash"
+  },
+  {
+   "sha": "eb1d754d",
+   "when": "2026-10-24 22:00",
+   "subject": "fix(w917): DB 正确性包一（B-DB-01 四 P0：外键生效/清库补反馈/索引单维+upsert/主键服务端生成 + B-DB-05 schema 门禁）"
+  },
+  {
+   "sha": "ed3b55ec",
+   "when": "2026-10-24 21:44",
+   "subject": "docs(w916): 台账回填收官 hash"
+  },
+  {
+   "sha": "7fd1ef71",
+   "when": "2026-10-24 21:43",
+   "subject": "feat(w916): 波二第三件批（新建页准入门禁建置·禁 module+零外域·857 页 0 FAIL·接 ci_sim 第 9 项）"
+  },
+  {
+   "sha": "ec6cf06a",
+   "when": "2026-10-24 21:24",
+   "subject": "docs(w915): 台账回填收官 hash + 恢复并行 W914 spec（改号删除误伤同名件·自 bb76449e 恢复·目录清单同步）"
+  },
+  {
+   "sha": "0fa2ae85",
+   "when": "2026-10-24 21:15",
+   "subject": "docs(w915): 波二余件一·二批（gates.md 时点快照收敛 + 404 页令牌补迁移·四度让号）——C5c 判红首战：抓下本批级联 desc 自引入的裸聚合"
+  },
+  {
+   "sha": "64cfb290",
+   "when": "2026-10-24 20:59",
+   "subject": "docs(w914): 台账回填 W914 收官 hash（bb76449e）"
+  },
+  {
+   "sha": "bb76449e",
+   "when": "2026-10-24 20:58",
+   "subject": "feat(w914): 英文版 README 落盘收尾（版本行推进 + 级联面）"
+  },
+  {
+   "sha": "e164819d",
+   "when": "2026-10-24 20:55",
+   "subject": "docs(w913): 台账回填 W913 收官 hash"
+  },
+  {
+   "sha": "f205d1c4",
+   "when": "2026-10-24 20:53",
+   "subject": "fix(w913): 波二小项四件批（T04 头订正 + bump 测试需求随工具停用关闭 + ci.yml E2E 钉版 + site 772→615 实体标记与 C5b 扩展面）+ batch_cascade 滚动窗口下限修（单块窗口不再空窗异常）"
+  },
+  {
+   "sha": "f33d185a",
+   "when": "2026-10-24 20:39",
+   "subject": "docs(w912): 台账回填 W912 收官 hash"
+  },
+  {
+   "sha": "371db7d8",
+   "when": "2026-10-24 20:37",
+   "subject": "feat(w912): 未落地任务首波清偿·站内交互债整包（T-18 全量盘点五档排期 + 渡口页原装脚本考古回灌 + 四页抽屉修复 + 交互门禁建置 + preflight 定位根修·三度让号并行批）"
+  },
+  {
+   "sha": "e8697fcd",
+   "when": "2026-10-24 20:27",
+   "subject": "fix(w909): CI 收尾修正（搜索索引去掉未入库文档条目·W909 产物漂移清偿）"
+  },
+  {
+   "sha": "1d16ac5c",
+   "when": "2026-10-24 19:42",
+   "subject": "docs(w909): 台账回填 W909 收官 hash（392d2c5c）"
+  },
+  {
+   "sha": "392d2c5c",
+   "when": "2026-10-24 19:41",
+   "subject": "feat(w909): README 专业化改版（结构层级 + 配图 + 头部与文案修正）"
+  },
+  {
+   "sha": "831b5436",
+   "when": "2026-10-24 19:04",
+   "subject": "docs(w906): 台账回填 W906 收官 hash"
+  },
+  {
+   "sha": "b7e2d697",
+   "when": "2026-10-24 19:02",
+   "subject": "feat(w906): C4-f 三态化（并行批次登记行纯追加残留降 NOTE 放行·在位编辑照旧判红·T32/T33 双向锁）——多 Agent 并行误拦根修"
+  },
+  {
+   "sha": "8c18b31f",
+   "when": "2026-10-24 18:37",
+   "subject": "docs(w905): 台账回填 W905 收官 hash（af2622a0）"
+  },
+  {
+   "sha": "af2622a0",
+   "when": "2026-10-24 18:34",
+   "subject": "fix(w905): 两项存量红项清理（暗色门禁补色 + npm 依赖漏洞清偿）"
+  },
+  {
+   "sha": "69ae9e89",
+   "when": "2026-10-24 18:23",
+   "subject": "docs(w904): 台账回填 W904 收官 hash（364b06a6）"
+  },
+  {
+   "sha": "364b06a6",
+   "when": "2026-10-24 18:21",
+   "subject": "feat(w904): C5c 裸聚合收敛（74 处清零·判据转 FAIL·stats 增 7 板块键·后置精确豁免·词边界防编号假阳性·纠正 A5 陈旧值）——台账随批携带并行 W905 认领行（归属该会话·append-only 不重做）"
+  },
+  {
+   "sha": "941fe414",
+   "when": "2026-10-24 02:08",
+   "subject": "docs(w903): 台账回填 W903 收官 hash（7f249168）"
+  },
+  {
+   "sha": "7f249168",
+   "when": "2026-10-24 02:06",
+   "subject": "fix(w903): 审查发现修复（preflight touches 语义归一闭通配假绿 + 门禁45提示语补暂存顺序·单测先红后绿 17/17）"
+  },
+  {
+   "sha": "82bb8ff7",
+   "when": "2026-10-24 01:45",
+   "subject": "docs(w902): 台账回填 W902 收官 hash（cca1adc6）"
+  },
+  {
+   "sha": "cca1adc6",
+   "when": "2026-10-24 01:43",
+   "subject": "docs(w902): 机制脚本门禁全量审查与记忆固化入仓（四发现报告落盘 + pitfalls/AGENTS/文档规范/CLAUDE 增补 + 干扰日志补登）"
+  },
+  {
+   "sha": "25b27066",
+   "when": "2026-10-24 01:15",
+   "subject": "docs(w901): 台账回填 W901 收官 hash（99ffd952）"
+  },
+  {
+   "sha": "99ffd952",
+   "when": "2026-10-24 01:13",
+   "subject": "fix(w901): C5b 对账面恢复与 W900 披露项清偿（递归 glob·计划方案豁免保留 / W757 段链接改指新址 / T-16·T-17 补登）"
+  },
+  {
+   "sha": "568ca457",
+   "when": "2026-10-24 00:53",
+   "subject": "docs(w900): 台账回填 W900 收官 hash（09103776）"
+  },
+  {
+   "sha": "09103776",
+   "when": "2026-10-24 00:51",
+   "subject": "docs(w900): 11-方案报告目录分类重组（根层归四区 + 索引重构 + 链接与派生面全量同步）"
+  },
+  {
+   "sha": "68f1a7bf",
+   "when": "2026-10-24 00:06",
+   "subject": "docs(w899): 台账回填 W899 收官 hash（ab3933b1）"
+  },
+  {
+   "sha": "ab3933b1",
+   "when": "2026-10-24 00:04",
+   "subject": "fix(w899): 合并后收尾修正（output 目录计数口径订正 + 朱砂门禁增量缓存重建）"
+  },
+  {
+   "sha": "b2334ad8",
+   "when": "2026-10-23 23:34",
+   "subject": "fix(w898): 第 49 槽 timeout 600→1800（CI runner 上 856 页 browser 实测超时被判 crash 即拦·只放宽时限不改判据）"
+  },
+  {
+   "sha": "7459a089",
+   "when": "2026-10-23 23:07",
+   "subject": "fix(w898): ci-sim workflow 改装全量测试依赖（pytest --collect-only 在缺包环境 rc=2 致收集期失败）"
+  },
+  {
+   "sha": "614a6355",
+   "when": "2026-10-23 23:04",
+   "subject": "fix(w898): CI 收尾修正二（docs_index 仓库外回退 + 会话运行态目录移出索引）"
+  },
+  {
+   "sha": "3398c5d9",
+   "when": "2026-10-23 22:59",
+   "subject": "fix(w898): CI 收尾修正二（docs_index 仓库外回退 + 会话运行态目录移出索引）"
+  },
+  {
+   "sha": "189ad540",
+   "when": "2026-10-23 22:50",
+   "subject": "fix(w898): CI 收尾修正（ci-sim 装 pytest + ruff 清零 + 门禁单测全过 + 未落库件不误红复验）"
+  },
+  {
+   "sha": "ef17aeed",
+   "when": "2026-10-23 22:36",
+   "subject": "fix(w898): 目录清单补列本批新增件（英文版单页 4 件 + W897/W898 的 spec 与级联清单 4 件）"
+  },
+  {
+   "sha": "66f5b5c1",
+   "when": "2026-10-23 22:34",
+   "subject": "feat(promo): W898 宣传物料投放接线与派生（README 物料小节 + 站内入口 + 英文版单页 + 规范受管资产登记）"
+  },
+  {
+   "sha": "2d1f6553",
+   "when": "2026-10-23 22:09",
+   "subject": "fix(gates): W897 协作防护修复（preflight touches 分隔符根修 + ci_sim 接进 CI）"
+  },
+  {
+   "sha": "93108fad",
+   "when": "2026-10-23 22:01",
+   "subject": "chore(w896): 台账收官（W896 状态翻转「已收官」+ hash 回填 dffbebee/681943e7）"
+  },
+  {
+   "sha": "681943e7",
+   "when": "2026-10-23 21:59",
+   "subject": "chore(w896): T-17 报告补记 CI 侧终验结论与让号/撞面记账"
+  },
+  {
+   "sha": "8e8d45ee",
+   "when": "2026-10-23 21:55",
+   "subject": "fix(w896): workflows README 历史串末尾的里程碑行上限同步 W896"
+  },
+  {
+   "sha": "e5715af7",
+   "when": "2026-10-23 21:43",
+   "subject": "fix(w896): pytest.ini 的 pytest_collected 标记同步为 CI 侧实况 844"
+  },
+  {
+   "sha": "5fabe1ef",
+   "when": "2026-10-23 21:39",
+   "subject": "fix(w896): 站内搜索索引按目标提交树重刷（zh 848/en 890·与生成器实算一致）+ CSP 哈希重算"
+  },
+  {
+   "sha": "0a366d92",
+   "when": "2026-10-23 21:39",
+   "subject": "fix(w896): 补两个新脚本的单测（第 42 门禁四面覆盖）+ 搜索索引与 CSP 重刷 + workflows README 版本号同步 + stats 随 pytest 收集数刷新"
+  },
+  {
+   "sha": "930c200a",
+   "when": "2026-10-23 21:31",
+   "subject": "fix(w896): 从提交树移除改名前的旧 spec 文件（并行批持续占用锁·本次重试）"
+  },
+  {
+   "sha": "ffae9770",
+   "when": "2026-10-23 21:24",
+   "subject": "fix(w896): 目录清单去除改名前的旧 spec 文件条目（索引已同步改名·清单随之刷新）"
+  },
+  {
+   "sha": "928c8e35",
+   "when": "2026-10-23 21:23",
+   "subject": "fix(w896): 反向索引与目录清单补回并行 W895 的登记条目（我方重建时覆盖了他方在途登记）"
+  },
+  {
+   "sha": "0a590fb9",
+   "when": "2026-10-23 21:19",
+   "subject": "fix(w896): 收官级联修正（让号 W894→W896 + 台账认领行补回 + 清单与索引同步 + 标记归实况）"
+  },
+  {
+   "sha": "101e1f47",
+   "when": "2026-10-23 21:13",
+   "subject": "chore(w894): 收官级联（W894 段 + 13 面版本行 + stats 归实况 + 三处标记同步 + 清单与索引刷新）"
+  },
+  {
+   "sha": "03d60c61",
+   "when": "2026-10-23 20:54",
+   "subject": "chore(w895): 收官回填（台账 hash 3173c59f + 状态翻转）"
+  },
+  {
+   "sha": "3173c59f",
+   "when": "2026-10-23 20:54",
+   "subject": "feat(w895): BL-33 收敛批（system.css 补齐三处 + inline_css 护栏 + 330 内联页按源重生成）"
+  },
+  {
+   "sha": "dffbebee",
+   "when": "2026-10-23 20:41",
+   "subject": "feat(gates): W894 门禁实算口径改造（磁盘扫描 → Git 索引·目标提交树）+ ci_sim 预演工具"
+  },
+  {
+   "sha": "a06e27b6",
+   "when": "2026-10-23 20:22",
+   "subject": "chore(w893): 收官回填（台账 hash 5488e2aa + 状态翻转 + stats/实体化标记对账）"
+  },
+  {
+   "sha": "5488e2aa",
+   "when": "2026-10-23 20:14",
+   "subject": "feat(w893): 四画幅素材图成套批（12 张·16:9/1:1/3:4/1200×630 各三张·四主题拉丁方·锚点沿用 W882 改写版）"
+  },
+  {
+   "sha": "8137c8fd",
+   "when": "2026-10-23 20:13",
+   "subject": "chore(w892): 收官记账补记（竞态二次修正 9296cbe8 + 最终 CI 侧验收结论：实质红项 0）"
+  },
+  {
+   "sha": "9296cbe8",
+   "when": "2026-10-23 20:12",
+   "subject": "fix(w892): 目录清单去除对并行 W893 未入库文件的预引（竞态二次修正）"
+  },
+  {
+   "sha": "84542a18",
+   "when": "2026-10-23 20:07",
+   "subject": "chore(w892): 收官改账（CI 侧全量预演结论 + 本批六处真错的逐项记账 + E-07 沉淀）"
+  },
+  {
+   "sha": "554a6952",
+   "when": "2026-10-23 20:05",
+   "subject": "fix(w892): 修正本批三处真错（搜索索引写坏 / 目录清单预引他方未入库文件 / stats 竞态）"
+  },
+  {
+   "sha": "d8cbbbec",
+   "when": "2026-10-23 19:50",
+   "subject": "fix(w892): stats 派生值按 CI-HEAD 实况回退（report_docs 53→52）+ 两处标记同步 + T-15 改账"
+  },
+  {
+   "sha": "e273dea3",
+   "when": "2026-10-23 19:40",
+   "subject": "chore(w892): 目录清单生成件同步（assets/promo 子目录 + scripts/output 新增两件 + scripts 文件计数 260→259）"
+  },
+  {
+   "sha": "98f03932",
+   "when": "2026-10-23 19:34",
+   "subject": "chore(w892): 收官回填（台账 hash 76945671 + 报告落库形态与撞面处置补记）"
+  },
+  {
+   "sha": "76945671",
+   "when": "2026-10-23 19:29",
+   "subject": "feat(promo): 宣传单页批（A4 双面·HTML 源 + PDF + PNG 三件套）"
+  },
+  {
+   "sha": "4042f448",
+   "when": "2026-10-23 19:21",
+   "subject": "chore(w891): 收官回填（台账 hash 4c5e2163 + 状态翻转）"
+  },
+  {
+   "sha": "4c5e2163",
+   "when": "2026-10-23 19:21",
+   "subject": "feat(w891): en 收尾批（A 渠容器归并 11 页 + nav-back 样式统一 49 页 + 间距令牌化 3,353 处）"
+  },
+  {
+   "sha": "715f27c7",
+   "when": "2026-10-23 04:12",
+   "subject": "chore(w889-w890): 收官回填（展示面复位已合 main + 线上主页复核 + 两批台账回填）"
+  },
+  {
+   "sha": "654a289c",
+   "when": "2026-10-23 03:57",
+   "subject": "fix(w890): CI 阻塞项清偿批（过期断言同步 / ruff 清零 / 跨平台存活探针 / 依赖漏洞）"
+  },
+  {
+   "sha": "5b156543",
+   "when": "2026-10-23 03:18",
+   "subject": "feat(w889): 展示面复位批（GitHub 主页载体 / 首屏 / 时间三层）"
+  },
+  {
+   "sha": "76d3adba",
+   "when": "2026-10-23 02:36",
+   "subject": "chore(w888): 收官回填（台账 hash 3f04aaa3 + 状态翻转）"
+  },
+  {
+   "sha": "3f04aaa3",
+   "when": "2026-10-23 02:33",
+   "subject": "feat(w888): 剩余素材接线批·两路（viz 卷末插画 85 页 + 百回母版 6 个回目页）"
+  },
+  {
+   "sha": "14366f23",
+   "when": "2026-10-23 02:21",
+   "subject": "chore(w887): 收官回填（台账 hash 66641736 + 状态翻转）"
+  },
+  {
+   "sha": "66641736",
+   "when": "2026-10-23 02:19",
+   "subject": "feat(w887): en 迁移批 2·收口批（110 页合并四批·第 49 槽范围扩至全 en 138 页）"
+  },
+  {
+   "sha": "36dd0ccd",
+   "when": "2026-10-23 01:27",
+   "subject": "chore(w886): 收官回填（台账 hash b9055346 + 状态翻转）"
+  },
+  {
+   "sha": "b9055346",
+   "when": "2026-10-23 01:25",
+   "subject": "feat(w886): en 迁移批 1·入口与结构 28 页（C 渠换色 + 实底机械收敛 + 四类豁免·④ 首批）"
+  },
+  {
+   "sha": "dcfc348a",
+   "when": "2026-10-23 00:47",
+   "subject": "chore(w885): 台账提交号回填（收官终态回填 ccf39d73）"
+  },
+  {
+   "sha": "ccf39d73",
+   "when": "2026-10-23 00:43",
+   "subject": "chore(w885): 收官终态回填（落库形态据实记账 + 并行 W883 批收官后的实测结论）"
+  },
+  {
+   "sha": "e750a047",
+   "when": "2026-10-23 00:35",
+   "subject": "chore(w883): 收官回填（台账 hash 73ef1843 + 状态翻转）"
+  },
+  {
+   "sha": "73ef1843",
+   "when": "2026-10-23 00:33",
+   "subject": "feat(w883): 阶段 5 机检门禁批（朱砂实底第 49 槽 + 四类存量裁决 + W877-W882 六段回补）"
+  },
+  {
+   "sha": "8ca180b2",
+   "when": "2026-10-23 00:01",
+   "subject": "feat(w885): 素材接线批（213 页页头装饰插画 + 首页水墨底图 + 4 张深底直显版插画·源与内联副本双写）"
+  },
+  {
+   "sha": "1af88bb3",
+   "when": "2026-10-22 23:26",
+   "subject": "chore(w884): 台账提交号补全（三提交并记）"
+  },
+  {
+   "sha": "5266741c",
+   "when": "2026-10-22 23:26",
+   "subject": "chore(w884): 报告正文回填实测值（连带面 8 处 / 交付件 11 件 / 交底明细）"
+  },
+  {
+   "sha": "92175003",
+   "when": "2026-10-22 23:23",
+   "subject": "chore(w884): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "e5b262e7",
+   "when": "2026-10-22 23:23",
+   "subject": "docs(w884): Playwright 历史问题全谱审计（T-10 落盘）"
+  },
+  {
+   "sha": "25bfa5d1",
+   "when": "2026-10-22 22:49",
+   "subject": "chore(w882): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "b7377115",
+   "when": "2026-10-22 22:34",
+   "subject": "feat(w882): 缺口第 4–6 项合并批（竖版海报 3:4 六张 + 百回体系化封面六张 + 可视化页插画四张·构图句改写）"
+  },
+  {
+   "sha": "4a3d2f3f",
+   "when": "2026-10-22 22:25",
+   "subject": "chore(w876): 收官回填（台账 hash 8043fb34 + 状态翻转）"
+  },
+  {
+   "sha": "8043fb34",
+   "when": "2026-10-22 22:22",
+   "subject": "feat(w876): 对比度专项批·C 渠与值切换（朱砂文字落 bg 换 --accent-text·chart-3/暗色 accent 两处令牌改值·inline_css 回吞事故修复）"
+  },
+  {
+   "sha": "bbbb070e",
+   "when": "2026-10-22 21:55",
+   "subject": "fix(w881): 台账重复行更正（W881 认领行去重·保留已收官行）"
+  },
+  {
+   "sha": "8c797af0",
+   "when": "2026-10-22 21:52",
+   "subject": "chore(w881): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "b5868c99",
+   "when": "2026-10-22 21:48",
+   "subject": "feat(w881): 人物补位素材批（十二张 1:1 方图·八戒 6 + 沙僧 4 + 师徒同框 2·沿用前三批宣纸水墨锚点）"
+  },
+  {
+   "sha": "2446f94e",
+   "when": "2026-10-22 21:27",
+   "subject": "chore(w880): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "dbf242f6",
+   "when": "2026-10-22 21:24",
+   "subject": "feat(w880): 分语言 og:image 接线批（855 页改指新 URL·中文 og-09 山口关隘 / 英文 og-03 白龙马·生成端与判据端同步）"
+  },
+  {
+   "sha": "40a0ef23",
+   "when": "2026-10-22 21:05",
+   "subject": "chore(w879): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "421aa80e",
+   "when": "2026-10-22 21:02",
+   "subject": "feat(w879): 暗底/夜读适配水墨素材批（四张 1792×1024 + 中英文 og:image 接线）"
+  },
+  {
+   "sha": "35da6b0e",
+   "when": "2026-10-22 20:30",
+   "subject": "chore(w878): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "937022fa",
+   "when": "2026-10-22 20:26",
+   "subject": "feat(w878): OG 分享缩略图素材成套批（十二张 1200×630 水墨淡彩·沿用 W852/W853 提示词锚点·底部净空带供叠字）"
+  },
+  {
+   "sha": "f38e4888",
+   "when": "2026-10-22 20:26",
+   "subject": "docs(w877): 计划方案未落地项核查 + 提示词模板符合性复核（T-09 落盘）"
+  },
+  {
+   "sha": "54419721",
+   "when": "2026-10-22 08:20",
+   "subject": "chore(w875): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "13a2c62c",
+   "when": "2026-10-22 08:18",
+   "subject": "feat(w875): 设计迁移 B11 阅读页 622 页（生成端一处改动·STYLE 补丁·CSP 重算）"
+  },
+  {
+   "sha": "6e24428e",
+   "when": "2026-10-22 07:54",
+   "subject": "chore(w874): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "cc949fb8",
+   "when": "2026-10-22 07:52",
+   "subject": "feat(w874): 递延版段补写批（W865-W873 九段回写·号序链重新接上）"
+  },
+  {
+   "sha": "0b56990b",
+   "when": "2026-10-22 07:00",
+   "subject": "chore(w873): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "ec4202bd",
+   "when": "2026-10-22 06:58",
+   "subject": "feat(w873): 设计迁移 B10 工具与检索 8 页（容器归并·朱砂实底合规·间距令牌化）"
+  },
+  {
+   "sha": "5cb1b8b2",
+   "when": "2026-10-22 06:42",
+   "subject": "chore(w872): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "9af837f7",
+   "when": "2026-10-22 06:40",
+   "subject": "feat(w872): 设计迁移 B9 视觉与叙事实验 10 页（容器令牌化·朱砂实底合规·间距令牌化）"
+  },
+  {
+   "sha": "f1197e31",
+   "when": "2026-10-22 06:30",
+   "subject": "chore(w871): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "e7409f86",
+   "when": "2026-10-22 06:28",
+   "subject": "feat(w871): 设计迁移 B8 跨学科与实验 10 页（容器令牌化·朱砂实底合规·间距令牌化）"
+  },
+  {
+   "sha": "c000e406",
+   "when": "2026-10-22 06:18",
+   "subject": "chore(w870): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "fd8cf51e",
+   "when": "2026-10-22 06:16",
+   "subject": "feat(w870): 设计迁移 B7 文本与思想 10 页（容器令牌化·朱砂实底合规·间距令牌化）"
+  },
+  {
+   "sha": "118618fc",
+   "when": "2026-10-22 06:06",
+   "subject": "chore(w869): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "b20817e6",
+   "when": "2026-10-22 06:04",
+   "subject": "feat(w869): 设计迁移 B6 叙事学 10 页（容器令牌化·朱砂实底合规·间距令牌化）"
+  },
+  {
+   "sha": "aa8e97c5",
+   "when": "2026-10-22 05:51",
+   "subject": "chore(w868): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "fa94cba9",
+   "when": "2026-10-22 05:48",
+   "subject": "feat(w868): 设计迁移 B5 取经与行迹 10 页（容器令牌化·朱砂实底合规·间距令牌化）"
+  },
+  {
+   "sha": "66274869",
+   "when": "2026-10-22 04:55",
+   "subject": "chore(w867): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "8c7c3842",
+   "when": "2026-10-22 04:53",
+   "subject": "feat(w867): 设计迁移 B4 妖怪与神力 10 页（容器归并·朱砂实底合规·间距令牌化）"
+  },
+  {
+   "sha": "89432726",
+   "when": "2026-10-22 04:13",
+   "subject": "chore(w866): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "e661e9da",
+   "when": "2026-10-22 04:10",
+   "subject": "feat(w866): 设计迁移 B3 人物主线 9 页（容器归并·朱砂实底合规·间距令牌化）"
+  },
+  {
+   "sha": "1dd17a7c",
+   "when": "2026-10-22 03:45",
+   "subject": "feat(w865): 首页三任务区重组 + 目录页检索动线（D1 + D2·接 W854 界面布局审计）"
+  },
+  {
+   "sha": "3b3d77fb",
+   "when": "2026-10-22 03:30",
+   "subject": "chore(w864): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "18823dfe",
+   "when": "2026-10-22 03:24",
+   "subject": "feat(w864): 设计迁移 B2 结构页 10 页（容器令牌化·朱砂实底合规·间距令牌化）"
+  },
+  {
+   "sha": "a8e66ffb",
+   "when": "2026-10-22 02:31",
+   "subject": "chore(w863): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "892326e6",
+   "when": "2026-10-22 02:29",
+   "subject": "feat(w863): 递延版段补写批（W852-W862 十一段回写·号序链重新接上）"
+  },
+  {
+   "sha": "e561ae95",
+   "when": "2026-10-22 02:15",
+   "subject": "chore(w862): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "77122a6b",
+   "when": "2026-10-22 02:13",
+   "subject": "feat(w862): 设计迁移 B1 根页与入口 8 页（容器归并·朱砂合规·对比度修法·间距令牌化）"
+  },
+  {
+   "sha": "42b3d245",
+   "when": "2026-10-22 01:15",
+   "subject": "chore(w860): 报告索引 §二 计数订正（9 篇 → 10 篇·补 W860 末笔）"
+  },
+  {
+   "sha": "9f3723e6",
+   "when": "2026-10-22 01:15",
+   "subject": "chore(w861): 收官回填（台账 hash + 状态翻转 + 现势轮换 W862）"
+  },
+  {
+   "sha": "6821c4c1",
+   "when": "2026-10-22 01:10",
+   "subject": "feat(w861): 设计资产归档收尾（过程截图 13 张 + 4 个未选定方向备选 SVG + 回执底件 → assets/design/）"
+  },
+  {
+   "sha": "acec1fa5",
+   "when": "2026-10-22 01:05",
+   "subject": "feat(w861): 设计资产归档收尾（过程截图 13 张 + 4 个未选定方向备选 SVG + 回执底件 → assets/design/）"
+  },
+  {
+   "sha": "3fa28e5c",
+   "when": "2026-10-22 01:01",
+   "subject": "chore(w860): T-06 框架交付物落盘（报告正文 + 索引登记 + 搜索索引/CSP/stats 连带面）"
+  },
+  {
+   "sha": "9bafb5f3",
+   "when": "2026-10-22 00:53",
+   "subject": "chore(w859): 收官回填（台账 hash + 状态翻转 + 现势轮换 W860）"
+  },
+  {
+   "sha": "5ce4c66c",
+   "when": "2026-10-22 00:50",
+   "subject": "feat(w860): 第 48 门禁「计划方案合规」挂载（增量口径·用户明令「探针进门禁」）"
+  },
+  {
+   "sha": "fa96ca03",
+   "when": "2026-10-22 00:42",
+   "subject": "feat(w859): 设计资产归档（AI 概念稿 18 张 + Logo 源文件 + 可复算工具链 → assets/design/）"
+  },
+  {
+   "sha": "28f3c504",
+   "when": "2026-10-22 00:31",
+   "subject": "chore(w859): 认领 设计资产归档批（AI 概念稿 18 张 + Logo 源文件 归入 assets/design/）"
+  },
+  {
+   "sha": "7d18eb6a",
+   "when": "2026-10-22 00:26",
+   "subject": "chore(w856): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "e74286c6",
+   "when": "2026-10-22 00:26",
+   "subject": "chore(w858): 规范条文批次号订正（框架交付物落盘纪律条 W856 → W858）"
+  },
+  {
+   "sha": "39c40477",
+   "when": "2026-10-22 00:23",
+   "subject": "feat(w856): Logo 定稿落地（方向 H「山·门槛」· 品牌名《取经录》）"
+  },
+  {
+   "sha": "0f2508ec",
+   "when": "2026-10-22 00:20",
+   "subject": "docs(w858): 站点交互流程审查报告落盘（T-07·含 W859 施工批执行前计划）"
+  },
+  {
+   "sha": "9b4059f5",
+   "when": "2026-10-22 00:17",
+   "subject": "docs(w857): 计划方案模板符合性复核批（既有 8 份计划文档 × 模板 32 项结构判据·只复核不改文档）"
+  },
+  {
+   "sha": "e2216405",
+   "when": "2026-10-21 23:53",
+   "subject": "chore(w856): 认领 Logo 定稿落地批（方向 H「山·门槛」+ 品牌名《取经录》·一级品牌位统一）"
+  },
+  {
+   "sha": "324bc3c1",
+   "when": "2026-10-21 23:39",
+   "subject": "chore(w854): 台账回填落库 hash（37ad250b·随 W855 提交落库）"
+  },
+  {
+   "sha": "37ad250b",
+   "when": "2026-10-21 23:35",
+   "subject": "docs(w855): 架构评审报告入库（现役架构五维体检·只审计不动代码）"
+  },
+  {
+   "sha": "9985da6d",
+   "when": "2026-10-21 23:34",
+   "subject": "chore(w851): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "e0b01817",
+   "when": "2026-10-21 23:32",
+   "subject": "feat(w851): 设计迁移阶段 1 令牌落地（v4 令牌纯加法·34 个零消费新名 / 35 处定义）"
+  },
+  {
+   "sha": "c2a2da12",
+   "when": "2026-10-21 23:00",
+   "subject": "chore(w853): 收官回填（台账 hash + 状态翻转 + 现势轮换 W855）"
+  },
+  {
+   "sha": "8448e46c",
+   "when": "2026-10-21 22:57",
+   "subject": "feat(w853): 卡片封面素材图成套批（十二张 1:1 水墨淡彩·沿用 W852 提示词锚点·底部净空带供叠字）"
+  },
+  {
+   "sha": "7206fac2",
+   "when": "2026-10-21 22:33",
+   "subject": "chore(w852): 收官回填（台账 hash + 状态翻转 + 现势轮换 W853）"
+  },
+  {
+   "sha": "8ff25829",
+   "when": "2026-10-21 22:32",
+   "subject": "feat(w852): 站点 Hero 素材图成套批（六张 16:9 水墨淡彩·风格锚点统一·底部净空带供叠字）"
+  },
+  {
+   "sha": "d51d778b",
+   "when": "2026-10-21 20:41",
+   "subject": "chore(w850): 收官回填（台账 hash + 状态翻转 + 现势轮换 W851）"
+  },
+  {
+   "sha": "a1422f0f",
+   "when": "2026-10-21 20:36",
+   "subject": "feat(w850): Q2 取数基建（obs_sample 采样件·OBS-10/11/14 按批采集）"
+  },
+  {
+   "sha": "1e0e87b9",
+   "when": "2026-10-21 04:23",
+   "subject": "chore(w849): 台账补记第二次 fixup a23645e6"
+  },
+  {
+   "sha": "a23645e6",
+   "when": "2026-10-21 04:20",
+   "subject": "fix(w849): 同批重跑不再打「相对上一批 +0.0%」"
+  },
+  {
+   "sha": "1b5bdd16",
+   "when": "2026-10-21 04:20",
+   "subject": "chore(w849): 台账补记 fixup 57a20411"
+  },
+  {
+   "sha": "57a20411",
+   "when": "2026-10-21 04:17",
+   "subject": "fix(w849): 自测补缺页判红负样本（6→7 例）+ 订正两处失实表述"
+  },
+  {
+   "sha": "f2b84399",
+   "when": "2026-10-21 04:16",
+   "subject": "chore(w849): 收官回填（台账 hash + 状态翻转 + 现势轮换 W850）"
+  },
+  {
+   "sha": "418eee0b",
+   "when": "2026-10-21 04:14",
+   "subject": "feat(w849): 性能门禁挂槽（第 47 槽·影子模式不判红）"
+  },
+  {
+   "sha": "5c352657",
+   "when": "2026-10-21 03:48",
+   "subject": "chore(w848): 台账补记两次 fixup"
+  },
+  {
+   "sha": "7daf4e67",
+   "when": "2026-10-21 03:45",
+   "subject": "fix(w848): 模型体积口径统一（92 MiB ≈ 96 MB 双单位标注）"
+  },
+  {
+   "sha": "510b7582",
+   "when": "2026-10-21 03:42",
+   "subject": "fix(w848): 段内两处如实记账修正"
+  },
+  {
+   "sha": "dac4df14",
+   "when": "2026-10-21 03:40",
+   "subject": "chore(w848): 收官回填（台账 hash + 状态翻转 + 现势轮换 W849）"
+  },
+  {
+   "sha": "dbc73caf",
+   "when": "2026-10-21 03:37",
+   "subject": "docs(w848): Q5 裁决落档（dense 升为显式可选档·默认仍 off）"
+  },
+  {
+   "sha": "f188f169",
+   "when": "2026-10-21 03:26",
+   "subject": "chore(w847): 收官回填（台账 hash + 状态翻转 + 现势轮换 W848）"
+  },
+  {
+   "sha": "579d858e",
+   "when": "2026-10-21 03:23",
+   "subject": "feat(w847): 阅读页体验封装（速览折叠 + 进度书签字号 + 每页反馈）"
+  },
+  {
+   "sha": "bcbf1069",
+   "when": "2026-10-21 03:17",
+   "subject": "chore(w846): 收官回填（台账 hash + 状态翻转 + 现势轮换 W847）"
+  },
+  {
+   "sha": "7fe31a86",
+   "when": "2026-10-21 03:15",
+   "subject": "fix(w846): 阅读页正文回灌（三段管线重建·51 页字级修复落地）"
+  },
+  {
+   "sha": "f5aa57f9",
+   "when": "2026-10-21 03:10",
+   "subject": "chore(w845): 收官回填（台账 hash + 状态翻转 + 现势 bullet 轮换 W846）"
+  },
+  {
+   "sha": "eef4437c",
+   "when": "2026-10-21 03:07",
+   "subject": "docs(w845): 阅读页重建影响面量化（262 行 ≤ 2000·口径纠正为三段管线）"
+  },
+  {
+   "sha": "b888bb45",
+   "when": "2026-10-21 02:54",
+   "subject": "chore(w844): 收官回填（台账 hash + 状态翻转 + W842/W843 列位对齐）"
+  },
+  {
+   "sha": "a2140fd4",
+   "when": "2026-10-21 02:50",
+   "subject": "feat(w844): 系统架构批四项落地（会话库备份 / 首 token 计时 / Q3-Q4 回填 / 检索题集入仓）"
+  },
+  {
+   "sha": "81c08bb7",
+   "when": "2026-10-21 02:29",
+   "subject": "chore(w843): 收官回填（台账 hash + 状态翻转 + touches 列归位）"
+  },
+  {
+   "sha": "72c6b81a",
+   "when": "2026-10-21 02:27",
+   "subject": "docs(w843): pitfalls 增补两条 + AGENTS §4.3 计数校准"
+  },
+  {
+   "sha": "d905d62d",
+   "when": "2026-10-21 02:04",
+   "subject": "chore(w842): 收官回填（台账 hash + 状态翻转）"
+  },
+  {
+   "sha": "b1982e6a",
+   "when": "2026-10-21 02:03",
+   "subject": "feat(w842): CHANGELOG 递延补段工具（12 批欠账补齐 + 号序链恢复）"
+  },
+  {
+   "sha": "00dacd97",
+   "when": "2026-10-21 01:38",
+   "subject": "chore(w841): 收官回填（对账表认领行 hash e65d0ac4 + 状态翻已收官）"
+  },
+  {
+   "sha": "e65d0ac4",
+   "when": "2026-10-21 01:36",
+   "subject": "feat(w841): 版本行分隔符兜底门禁（check_doc_sync 新增 C6 + 自测 22→24 例）"
+  },
+  {
+   "sha": "5a8c3602",
+   "when": "2026-10-21 01:29",
+   "subject": "chore(w827): 收官回填（对账表认领行 hash b353d43e + 状态翻已收官 + 版段已立）"
+  },
+  {
+   "sha": "b353d43e",
+   "when": "2026-10-21 01:27",
+   "subject": "feat(w827): 站内阅读入口打通（622 页 reader 从站内 0 入链到首页一跳可达）"
+  },
+  {
+   "sha": "760f811e",
+   "when": "2026-10-21 01:01",
+   "subject": "chore(w840): 收官回填（对账表认领行 hash 376f8cd9 + 状态翻已收官 + spec 入库）"
+  },
+  {
+   "sha": "376f8cd9",
+   "when": "2026-10-21 01:00",
+   "subject": "docs(w840): fail-closed 跳过路径坑入查坑表 + AGENTS §4.3 计数校准（47 条）"
+  },
+  {
+   "sha": "1dd1887a",
+   "when": "2026-10-21 00:51",
+   "subject": "chore(w839): 收官回填（对账表认领行 hash 99932fff + 状态翻已收官）"
+  },
+  {
+   "sha": "99932fff",
+   "when": "2026-10-21 00:49",
+   "subject": "fix(w839): fail-closed 跳过路径回归修复（a11y 段对 _SkipResult 误判红 + 2 例回归锁）"
+  },
+  {
+   "sha": "07cb6c77",
+   "when": "2026-10-21 00:33",
+   "subject": "docs(w838): 取经编制表勘误（V1.1a·自查脚本正则/指针面计数/时点行/引用/术语）"
+  },
+  {
+   "sha": "604e237a",
+   "when": "2026-10-21 00:12",
+   "subject": "chore(w831,w834,w837): 三批收官回填（并行积压清扫·用户令「把这三个批次你接管做掉」）"
+  },
+  {
+   "sha": "91fc0be7",
+   "when": "2026-10-20 23:58",
+   "subject": "docs(w831): 编制表 V1.1 增补——archive/ 与 tmpe/ 两套治理系统纳入编制位（15 位 → 17 位）"
+  },
+  {
+   "sha": "82718c48",
+   "when": "2026-10-20 23:54",
+   "subject": "docs(w837): 并发实况沉淀（五条并行交付/门禁坑位入仓内查坑表）"
+  },
+  {
+   "sha": "579d9ba7",
+   "when": "2026-10-20 23:49",
+   "subject": "chore(w833,w835,w836): 三批收官回填（认领行 hash 回填 + 状态翻已收官 + 版段递延说明）"
+  },
+  {
+   "sha": "a37b96c0",
+   "when": "2026-10-20 23:46",
+   "subject": "fix(w835): 服务端暴露面收口（Host 头白名单防 DNS rebinding + token 硬开关 + 启动暴露面告警）"
+  },
+  {
+   "sha": "74b37859",
+   "when": "2026-10-20 23:40",
+   "subject": "fix(w836): 品牌字面量机器防线（归档检测器活面复活 + 三处明文回退修复 + CI 挂载）"
+  },
+  {
+   "sha": "d9c786dd",
+   "when": "2026-10-20 23:29",
+   "subject": "fix(w833): 交付链与工具链四处静默失效根修（分支保护零强制点 + 守卫与被守卫同生共死 + 锁失配被回退吞掉 + 类型检查从未执行）"
+  },
+  {
+   "sha": "32bcf16d",
+   "when": "2026-10-20 22:50",
+   "subject": "fix(w834): 门禁 fail-open 根修（B1/B2 用户批准·verify_delivery fail-closed 化 + 12 例负样本）"
+  },
+  {
+   "sha": "d560a8d7",
+   "when": "2026-10-20 22:04",
+   "subject": "docs(w831): 取经编制表落库与编制位补全批（15 位编制表 + 零前置知识可读 + 三处编制位空缺诊断）"
+  },
+  {
+   "sha": "990fa068",
+   "when": "2026-10-20 22:01",
+   "subject": "fix(w832): agent-web 生产面加固（错误原文回显收口 + 端到端测试改跑临时库）"
+  },
+  {
+   "sha": "901f45d8",
+   "when": "2026-10-20 21:37",
+   "subject": "chore(w830): 收官回填（对账表认领行 hash 4eebc95a + 状态翻已收官 + 递延补写说明）"
+  },
+  {
+   "sha": "4eebc95a",
+   "when": "2026-10-20 21:34",
+   "subject": "docs(w830): 计划方案三性审查与快照漂移门禁修复（C5b 扩展面 + pytest_collected 键 + 六处订正）"
+  },
+  {
+   "sha": "fa86574d",
+   "when": "2026-10-20 20:33",
+   "subject": "chore(w824): W828 候选号让给系统架构方案批·我方阅读页体验封装候选顺延 W829"
+  },
+  {
+   "sha": "10a3c58b",
+   "when": "2026-10-20 19:50",
+   "subject": "chore(w824): 补 W828 预留登记（修复第 31 门禁 C4 提交-版段对账）"
+  },
+  {
+   "sha": "ac0cda39",
+   "when": "2026-10-20 19:48",
+   "subject": "chore(w826): 补四页脚批次链的 W826 条目（页脚面滞后一格·辅助 WARN 清零）"
+  },
+  {
+   "sha": "60e624b9",
+   "when": "2026-10-20 19:46",
+   "subject": "chore(w824): W824 收官回填 + 施工批号改判 W827（候选批 W828）"
+  },
+  {
+   "sha": "481856ab",
+   "when": "2026-10-20 19:39",
+   "subject": "chore(w825): 补 W825 收官登记（W825 段级联落盘 + 认领行 hash 回填 + 顶段推进至 W825）"
+  },
+  {
+   "sha": "14f8c38d",
+   "when": "2026-10-20 19:36",
+   "subject": "chore(w826): 补 W826 落段后的五处旁文档指针（W499/W525 同型·旁文档滞后复发）"
+  },
+  {
+   "sha": "66c7c9bf",
+   "when": "2026-10-20 19:34",
+   "subject": "chore(w824): 补 W824 记账（计划文档 R-11 解除 + §8 干扰日志补登）"
+  },
+  {
+   "sha": "7f564ca5",
+   "when": "2026-10-20 19:31",
+   "subject": "docs(w826): 补 W826 CHANGELOG 版段 + 版本指针同步（顶段 W825 就位后落段）"
+  },
+  {
+   "sha": "3def766c",
+   "when": "2026-10-20 19:26",
+   "subject": "docs(w824): 站内阅读入口打通批·W824 段级联落盘（方案件 + 十三面级联）"
+  },
+  {
+   "sha": "78986265",
+   "when": "2026-10-20 19:21",
+   "subject": "chore(w823): 补 W823 收官登记（对账表行 hash 回填 + W827 bullet 标已消费）"
+  },
+  {
+   "sha": "b1cc82be",
+   "when": "2026-10-20 19:19",
+   "subject": "fix(w825): 审查发现第二批修复（前端流式链路三项 + 门禁解析层格式鲁棒性）"
+  },
+  {
+   "sha": "a2be1ce9",
+   "when": "2026-10-20 19:16",
+   "subject": "docs(w823): 数据库表设计审查报告落档（agent-web SQLite 存储层四维审查 + 取证脚本）"
+  },
+  {
+   "sha": "fb1fef5c",
+   "when": "2026-10-20 19:07",
+   "subject": "docs(w824): 站内阅读入口打通批·T-04 执行前计划落库（方案件·施工待下一轮）"
+  },
+  {
+   "sha": "6b02c346",
+   "when": "2026-10-20 19:07",
+   "subject": "docs(w824): 站内阅读入口打通批·T-04 执行前计划落库（方案件·施工待下一轮）"
+  },
+  {
+   "sha": "9ab0b094",
+   "when": "2026-10-20 19:06",
+   "subject": "chore(w826): 补 W826 收官登记（对账表行 hash 回填 + W827 现势 bullet）"
+  },
+  {
+   "sha": "053d812e",
+   "when": "2026-10-20 19:03",
+   "subject": "docs(w822): 事实订正·「误覆盖对方 spec」不成立（经对方复算 + 我方复核）"
+  },
+  {
+   "sha": "19dbea70",
+   "when": "2026-10-20 19:01",
+   "subject": "chore(w822): 补 W822 收官登记（对账表认领行 hash 回填 + 状态转已收官）"
+  },
+  {
+   "sha": "9114d968",
+   "when": "2026-10-20 19:00",
+   "subject": "docs(w826): 界面视觉重设计细化规格（五项裁决落地 + 实算参数 + 迁移批次清单）"
+  },
+  {
+   "sha": "7fa31d82",
+   "when": "2026-10-20 19:00",
+   "subject": "fix(w822): §8 干扰日志机器触发点（真触发才提示·不改判定与退出码）"
+  },
+  {
+   "sha": "7e73735a",
+   "when": "2026-10-20 18:54",
+   "subject": "chore(w818): 修正 W818 段状态行形态（补「未推送」与右括号）"
+  },
+  {
+   "sha": "23f12fa4",
+   "when": "2026-10-20 18:53",
+   "subject": "chore(w818): 补回 W818 收官回填（被并行会话的陈旧暂存区提交回退）"
+  },
+  {
+   "sha": "20a25644",
+   "when": "2026-10-20 18:51",
+   "subject": "chore(w821): 补 W821 收官登记（对账表行 hash 回填 + 现势 bullet 轮换至 W823）"
+  },
+  {
+   "sha": "37287c80",
+   "when": "2026-10-20 18:48",
+   "subject": "docs(w821): 系统架构方案八维成文（分层 + 模块 + 数据流 + 存储 + 扩展 + 容灾 + 部署 + 监控 + 五张架构图）"
+  },
+  {
+   "sha": "c94bc177",
+   "when": "2026-10-20 18:37",
+   "subject": "chore(w818): 补 W818 收官登记（对账表行 hash 回填 + CHANGELOG 状态行）"
+  },
+  {
+   "sha": "088e1bf2",
+   "when": "2026-10-20 18:35",
+   "subject": "docs(w818): 静态站前端框架化选型评估（五维对齐 + 推荐结论）"
+  },
+  {
+   "sha": "4fedbbf2",
+   "when": "2026-10-20 18:33",
+   "subject": "docs(w820): 干扰治理日志补登与机制自身缺陷修复批"
+  },
+  {
+   "sha": "f14bf4a8",
+   "when": "2026-10-20 18:25",
+   "subject": "chore(w819): 补 W819 收官登记（对账表行 hash 回填 + W820 现势预留）"
+  },
+  {
+   "sha": "062ad3e8",
+   "when": "2026-10-20 18:24",
+   "subject": "docs(w819): 界面视觉重设计方向 v4 提案（方向文档 + 零外域视觉预览页）"
+  },
+  {
+   "sha": "462f3732",
+   "when": "2026-10-20 17:44",
+   "subject": "chore(w817): 补 W817 收官登记（对账表行 hash 回填 + W818 现势预留）"
+  },
+  {
+   "sha": "b1d125fc",
+   "when": "2026-10-20 17:42",
+   "subject": "fix(w817): agent-web 工具层边界加固（会话库 cwd 无关 + symlink 逃逸 + git --output 空格形态 + 遍历面过黑名单）"
+  },
+  {
+   "sha": "a0265e52",
+   "when": "2026-10-20 17:28",
+   "subject": "chore(w816): 补 W816 收官登记（对账表行 hash 回填 + 终稿报告 + W817 现势预留）"
+  },
+  {
+   "sha": "55b9b8c0",
+   "when": "2026-10-20 17:24",
+   "subject": "fix(w816): 门禁判据可信化（引文 cwd 依赖 + 排除失效 + XSS 规则缺口）"
+  },
+  {
+   "sha": "4bc6dede",
+   "when": "2026-10-20 15:23",
+   "subject": "docs(w815): shell 查坑表补两条（内联 Python 的 $ 展开 + 引号配对冲突）"
+  },
+  {
+   "sha": "fa1c2b4f",
+   "when": "2026-10-20 15:12",
+   "subject": "chore(w814): 收尾修正·清除认领行与 spec 内的残留字面"
+  },
+  {
+   "sha": "09b1b27e",
+   "when": "2026-10-20 15:10",
+   "subject": "refactor(w814): 去品牌扩展批（另两个同类品牌字面全量清除）"
+  },
+  {
+   "sha": "4fb0f300",
+   "when": "2026-10-20 14:52",
+   "subject": "fix(w813): review 修复批（W806-W812 对抗审读三项实证缺陷）"
+  },
+  {
+   "sha": "8c9ea260",
+   "when": "2026-10-20 14:20",
+   "subject": "chore(w812): 订正⑥ 调用形态指引入清单面（工具表 + 速查层各加一行指针·不刷可移植形态）"
+  },
+  {
+   "sha": "a0eb2a53",
+   "when": "2026-10-20 14:12",
+   "subject": "chore(w812): 订正⑤ 收窄「py -3」口径——三语境分清（可移植 python / 本机 PowerShell py -3 / git-bash python）"
+  },
+  {
+   "sha": "fdab0559",
+   "when": "2026-10-20 14:06",
+   "subject": "chore(w812): 订正④ 同源全量同步——spec 另三个字段与其消费面一并改为清单口径"
+  },
+  {
+   "sha": "4f2397e5",
+   "when": "2026-10-20 14:04",
+   "subject": "chore(w812): 订正对账表 W812 行主题的 hook 取法措辞（去掉已作废做法）"
+  },
+  {
+   "sha": "0f2ee26d",
+   "when": "2026-10-20 14:01",
+   "subject": "chore(w812): 订正 hook 解释器取法——改为遵循仓内工具清单（全局 Python 3.12·PATH 无关）"
+  },
+  {
+   "sha": "32e663b0",
+   "when": "2026-10-20 13:48",
+   "subject": "chore(w812): 清掉 W812 自身记录里残留的品牌字面（CHANGELOG 段 + spec 同源同步）"
+  },
+  {
+   "sha": "e7c3ed6b",
+   "when": "2026-10-20 13:45",
+   "subject": "chore(w812): 补 W812 收官登记（对账表行 hash 回填 + W812 现势预留标记已消费）"
+  },
+  {
+   "sha": "14eeabcd",
+   "when": "2026-10-20 13:42",
+   "subject": "refactor(w812): 去旧厂商 Agent 工具品牌化批（工具环境解耦 + 全仓去品牌 + 多 Agent 机制保全）"
+  },
+  {
+   "sha": "c3e77d95",
+   "when": "2026-10-20 13:28",
+   "subject": "chore(w811): 补 W811 收官登记（对账表行 hash 回填 + W813 现势预留）"
+  },
+  {
+   "sha": "2cf31a8d",
+   "when": "2026-10-20 13:25",
+   "subject": "fix(w811): CI 断链修复批（工作流 YAML 歧义语法修复 + 可解析性守卫）"
+  },
+  {
+   "sha": "55628e3e",
+   "when": "2026-10-20 13:09",
+   "subject": "chore(w809): 补齐 W809 段「文件」行的 4 项手工编辑件（级联后补写）"
+  },
+  {
+   "sha": "bf3195cf",
+   "when": "2026-10-20 13:00",
+   "subject": "chore(w808): 清掉 W808 提交误带入仓的两份会话临时件 + 目录清单刷新"
+  },
+  {
+   "sha": "693e91cf",
+   "when": "2026-10-20 12:54",
+   "subject": "chore(w810): 补 W809/W810 收官登记（CHANGELOG 段 + 级联落盘 + 对账表 hash 回填 + W811 现势预留）"
+  },
+  {
+   "sha": "981e1827",
+   "when": "2026-10-20 12:46",
+   "subject": "chore(w808): 补 W808 收官登记（对账表行 hash 回填 + W809 现势预留）"
+  },
+  {
+   "sha": "549161f9",
+   "when": "2026-10-20 12:44",
+   "subject": "chore(w810): 清理站内搜索两页 legacy 死数组（各 −2.3KB · 零引用）"
+  },
+  {
+   "sha": "5b43f2f9",
+   "when": "2026-10-20 12:42",
+   "subject": "feat(w808): Web Agent 全栈加固批（后端生产化 + 前端集成层 + 测试三件套）"
+  },
+  {
+   "sha": "75a032f0",
+   "when": "2026-10-20 11:38",
+   "subject": "chore(w807): 补 W807 收官登记（对账表行 hash 回填 + W808 现势预留）"
+  },
+  {
+   "sha": "ab11e92e",
+   "when": "2026-10-20 11:35",
+   "subject": "refactor(w807): 站内搜索索引刷新批（生成器归位 + 771→822 条 + 9 条失效目录链接归零 + e2e 两条常驻断言）"
+  },
+  {
+   "sha": "e8358a58",
+   "when": "2026-10-20 11:13",
+   "subject": "chore(w806): 补 W806 收官登记（对账表行 hash 回填 + W807 现势预留）"
+  },
+  {
+   "sha": "fca23784",
+   "when": "2026-10-20 11:11",
+   "subject": "refactor(w806): GoatCounter 统计链彻底退役批（234 页埋点清零 + CSP 外域放行回收 + 防回退守卫）"
+  },
+  {
+   "sha": "5c17d928",
+   "when": "2026-10-19 07:55",
+   "subject": "chore(w805): 补 W805 收官登记（对账表行 hash 回填 + W806 现势预留）"
+  },
+  {
+   "sha": "16977f88",
+   "when": "2026-10-19 07:51",
+   "subject": "fix(w805): 跨平台测试守卫热修（W803 引入的 Linux CI 红）"
+  },
+  {
+   "sha": "2b1c71e9",
+   "when": "2026-10-19 07:40",
+   "subject": "chore(w804): 补 W804 收官登记（对账表行 hash 回填 + W805 现势预留）"
+  },
+  {
+   "sha": "18204650",
+   "when": "2026-10-19 07:38",
+   "subject": "feat(w804): 桌面版三平台安装包与自动更新发布流水线"
+  },
+  {
+   "sha": "1a53790f",
+   "when": "2026-10-19 06:41",
+   "subject": "chore(w803): 补 W803 收官登记（对账表行 hash 回填 + W804 现势预留）"
+  },
+  {
+   "sha": "890f9c26",
+   "when": "2026-10-19 06:39",
+   "subject": "refactor(w803): 工具链行为保持重构批——公共骨架提取 + 长函数拆分 + 服务端分文件"
+  },
+  {
+   "sha": "d370f917",
+   "when": "2026-10-19 04:31",
+   "subject": "chore(w802): 补 W802 收官登记（对账表行 hash 回填 + W803 现势预留）"
+  },
+  {
+   "sha": "c3ab7c50",
+   "when": "2026-10-19 04:28",
+   "subject": "refactor(w802): character_nlp 行为保持重构·二——引语扫描 89→4 函数·时间线 85→4 函数"
+  },
+  {
+   "sha": "d4341830",
+   "when": "2026-10-19 04:13",
+   "subject": "chore(w801): 补 W801 收官登记（对账表行 hash 回填 + W802 现势预留）"
+  },
+  {
+   "sha": "3e85a0cf",
+   "when": "2026-10-19 04:10",
+   "subject": "refactor(w801): character_nlp 行为保持重构——情感构建 190→7 函数·main 175→9 函数"
+  },
+  {
+   "sha": "6238a6e6",
+   "when": "2026-10-19 03:57",
+   "subject": "chore(w800): 补 W800 收官登记（对账表行 hash 回填 + W801 现势预留）"
+  },
+  {
+   "sha": "5d901d6b",
+   "when": "2026-10-19 03:55",
+   "subject": "docs(w800): 第四轮外部评审回应——门禁边界公开·阅读契约后移·数据限制成文"
+  },
+  {
+   "sha": "30e702b0",
+   "when": "2026-10-19 03:43",
+   "subject": "chore(w799): 补 W799 收官登记（对账表行 hash 回填 + W800 现势预留）"
+  },
+  {
+   "sha": "16687b34",
+   "when": "2026-10-19 03:40",
+   "subject": "chore(w799): 截图桶 TTL 收紧至 7 天 + 新规清理 40.3MB + 总量口径复核"
+  },
+  {
+   "sha": "b8033f93",
+   "when": "2026-10-19 03:28",
+   "subject": "chore(w798): 补 W798 收官登记（对账表行 hash 回填 + W799 现势预留）"
+  },
+  {
+   "sha": "c1bddd9a",
+   "when": "2026-10-19 03:25",
+   "subject": "docs(w798): 对拍模板转正 + tmpe 清理——1.8GB→615MB"
+  },
+  {
+   "sha": "9c0395ce",
+   "when": "2026-10-19 03:09",
+   "subject": "chore(w797): 补 W797 收官登记（对账表行 hash 回填 + W798 现势预留）"
+  },
+  {
+   "sha": "32f37255",
+   "when": "2026-10-19 03:06",
+   "subject": "docs(w797): 历史模板归档——三件归馆 + 交付自检十项入规范 + 26 处断链改指"
+  },
+  {
+   "sha": "86a3e415",
+   "when": "2026-10-19 02:27",
+   "subject": "chore(w796): 补 W796 收官登记（对账表行 hash 回填 + W797 现势预留）"
+  },
+  {
+   "sha": "cba9a309",
+   "when": "2026-10-19 02:24",
+   "subject": "docs(w796): 提示词库整理入库——桌面 Prompt.txt 拆 12 文件·9 篇润色·05 补全 5 段截断"
+  },
+  {
+   "sha": "27b05900",
+   "when": "2026-10-19 01:50",
+   "subject": "chore(w795): 补 W795 收官登记（对账表行 hash 回填 + W796 现势预留）"
+  },
+  {
+   "sha": "e174f89f",
+   "when": "2026-10-19 01:47",
+   "subject": "docs(w795): 第 42 篇复盘报告入库——W777-W794 十八段 39 提交·E-17~E-24·WF-06/07"
+  }
+ ],
+ "multi_w_commits": [
+  {
+   "sha": "02ef09ee",
+   "ws": [
+    947,
+    948
+   ],
+   "subject": "docs(w947): file-index 纳入提交 + 台账登记跨会话竞态（现役段已被并行批次推进至 W948）"
+  },
+  {
+   "sha": "6e47596b",
+   "ws": [
+    941,
+    942
+   ],
+   "subject": "docs(w941): 报告 §4.5 结论表述订正（W942 已入库·红项不再表述为「待消解」）"
+  },
+  {
+   "sha": "b606547f",
+   "ws": [
+    927,
+    926
+   ],
+   "subject": "feat(w927): 架构方案 v2 裁决落档 + D-1 离线施工件 + W926 交叉对账"
+  },
+  {
+   "sha": "f51cb6b1",
+   "ws": [
+    923,
+    907,
+    910,
+    911
+   ],
+   "subject": "docs(w923): review 修复批（W907 让号行前缀消幻影在途 + W910/W911 补登记·复审十一项实抽全过）"
+  },
+  {
+   "sha": "4ab32ad1",
+   "ws": [
+    921,
+    855
+   ],
+   "subject": "docs(w921): CHANGELOG 瘦身批（B-W855-05：102 段迁一级归档·679KB→363KB·守恒 693 段断言护航·D1 全清）"
+  },
+  {
+   "sha": "e4842ae5",
+   "ws": [
+    920,
+    855
+   ],
+   "subject": "feat(w920): 副本链值级对账门禁批（B-W855-04：24 件存量基线冻结·新漂移判红·接 ci_sim 第 11 项）"
+  },
+  {
+   "sha": "ec6cf06a",
+   "ws": [
+    915,
+    914
+   ],
+   "subject": "docs(w915): 台账回填收官 hash + 恢复并行 W914 spec（改号删除误伤同名件·自 bb76449e 恢复·目录清单同步）"
+  },
+  {
+   "sha": "364b06a6",
+   "ws": [
+    904,
+    905
+   ],
+   "subject": "feat(w904): C5c 裸聚合收敛（74 处清零·判据转 FAIL·stats 增 7 板块键·后置精确豁免·词边界防编号假阳性·纠正 A5 陈旧值）—"
+  },
+  {
+   "sha": "99ffd952",
+   "ws": [
+    901,
+    900,
+    757
+   ],
+   "subject": "fix(w901): C5b 对账面恢复与 W900 披露项清偿（递归 glob·计划方案豁免保留 / W757 段链接改指新址 / T-16·T-17 补登）"
+  },
+  {
+   "sha": "ef17aeed",
+   "ws": [
+    898,
+    897,
+    898
+   ],
+   "subject": "fix(w898): 目录清单补列本批新增件（英文版单页 4 件 + W897/W898 的 spec 与级联清单 4 件）"
+  },
+  {
+   "sha": "928c8e35",
+   "ws": [
+    896,
+    895
+   ],
+   "subject": "fix(w896): 反向索引与目录清单补回并行 W895 的登记条目（我方重建时覆盖了他方在途登记）"
+  },
+  {
+   "sha": "0a590fb9",
+   "ws": [
+    896,
+    894,
+    896
+   ],
+   "subject": "fix(w896): 收官级联修正（让号 W894→W896 + 台账认领行补回 + 清单与索引同步 + 标记归实况）"
+  },
+  {
+   "sha": "5488e2aa",
+   "ws": [
+    893,
+    882
+   ],
+   "subject": "feat(w893): 四画幅素材图成套批（12 张·16:9/1:1/3:4/1200×630 各三张·四主题拉丁方·锚点沿用 W882 改写版）"
+  },
+  {
+   "sha": "9296cbe8",
+   "ws": [
+    892,
+    893
+   ],
+   "subject": "fix(w892): 目录清单去除对并行 W893 未入库文件的预引（竞态二次修正）"
+  },
+  {
+   "sha": "715f27c7",
+   "ws": [
+    889,
+    890
+   ],
+   "subject": "chore(w889-w890): 收官回填（展示面复位已合 main + 线上主页复核 + 两批台账回填）"
+  },
+  {
+   "sha": "ccf39d73",
+   "ws": [
+    885,
+    883
+   ],
+   "subject": "chore(w885): 收官终态回填（落库形态据实记账 + 并行 W883 批收官后的实测结论）"
+  },
+  {
+   "sha": "73ef1843",
+   "ws": [
+    883,
+    877,
+    882
+   ],
+   "subject": "feat(w883): 阶段 5 机检门禁批（朱砂实底第 49 槽 + 四类存量裁决 + W877-W882 六段回补）"
+  },
+  {
+   "sha": "937022fa",
+   "ws": [
+    878,
+    852,
+    853
+   ],
+   "subject": "feat(w878): OG 分享缩略图素材成套批（十二张 1200×630 水墨淡彩·沿用 W852/W853 提示词锚点·底部净空带供叠字）"
+  },
+  {
+   "sha": "cc949fb8",
+   "ws": [
+    874,
+    865,
+    873
+   ],
+   "subject": "feat(w874): 递延版段补写批（W865-W873 九段回写·号序链重新接上）"
+  },
+  {
+   "sha": "1dd17a7c",
+   "ws": [
+    865,
+    854
+   ],
+   "subject": "feat(w865): 首页三任务区重组 + 目录页检索动线（D1 + D2·接 W854 界面布局审计）"
+  },
+  {
+   "sha": "892326e6",
+   "ws": [
+    863,
+    852,
+    862
+   ],
+   "subject": "feat(w863): 递延版段补写批（W852-W862 十一段回写·号序链重新接上）"
+  },
+  {
+   "sha": "9f3723e6",
+   "ws": [
+    861,
+    862
+   ],
+   "subject": "chore(w861): 收官回填（台账 hash + 状态翻转 + 现势轮换 W862）"
+  },
+  {
+   "sha": "9bafb5f3",
+   "ws": [
+    859,
+    860
+   ],
+   "subject": "chore(w859): 收官回填（台账 hash + 状态翻转 + 现势轮换 W860）"
+  },
+  {
+   "sha": "e74286c6",
+   "ws": [
+    858,
+    856,
+    858
+   ],
+   "subject": "chore(w858): 规范条文批次号订正（框架交付物落盘纪律条 W856 → W858）"
+  },
+  {
+   "sha": "0f2508ec",
+   "ws": [
+    858,
+    859
+   ],
+   "subject": "docs(w858): 站点交互流程审查报告落盘（T-07·含 W859 施工批执行前计划）"
+  },
+  {
+   "sha": "324bc3c1",
+   "ws": [
+    854,
+    855
+   ],
+   "subject": "chore(w854): 台账回填落库 hash（37ad250b·随 W855 提交落库）"
+  },
+  {
+   "sha": "c2a2da12",
+   "ws": [
+    853,
+    855
+   ],
+   "subject": "chore(w853): 收官回填（台账 hash + 状态翻转 + 现势轮换 W855）"
+  },
+  {
+   "sha": "8448e46c",
+   "ws": [
+    853,
+    852
+   ],
+   "subject": "feat(w853): 卡片封面素材图成套批（十二张 1:1 水墨淡彩·沿用 W852 提示词锚点·底部净空带供叠字）"
+  },
+  {
+   "sha": "7206fac2",
+   "ws": [
+    852,
+    853
+   ],
+   "subject": "chore(w852): 收官回填（台账 hash + 状态翻转 + 现势轮换 W853）"
+  },
+  {
+   "sha": "d51d778b",
+   "ws": [
+    850,
+    851
+   ],
+   "subject": "chore(w850): 收官回填（台账 hash + 状态翻转 + 现势轮换 W851）"
+  },
+  {
+   "sha": "f2b84399",
+   "ws": [
+    849,
+    850
+   ],
+   "subject": "chore(w849): 收官回填（台账 hash + 状态翻转 + 现势轮换 W850）"
+  },
+  {
+   "sha": "dac4df14",
+   "ws": [
+    848,
+    849
+   ],
+   "subject": "chore(w848): 收官回填（台账 hash + 状态翻转 + 现势轮换 W849）"
+  },
+  {
+   "sha": "f188f169",
+   "ws": [
+    847,
+    848
+   ],
+   "subject": "chore(w847): 收官回填（台账 hash + 状态翻转 + 现势轮换 W848）"
+  },
+  {
+   "sha": "bcbf1069",
+   "ws": [
+    846,
+    847
+   ],
+   "subject": "chore(w846): 收官回填（台账 hash + 状态翻转 + 现势轮换 W847）"
+  },
+  {
+   "sha": "f5aa57f9",
+   "ws": [
+    845,
+    846
+   ],
+   "subject": "chore(w845): 收官回填（台账 hash + 状态翻转 + 现势 bullet 轮换 W846）"
+  },
+  {
+   "sha": "b888bb45",
+   "ws": [
+    844,
+    842,
+    843
+   ],
+   "subject": "chore(w844): 收官回填（台账 hash + 状态翻转 + W842/W843 列位对齐）"
+  },
+  {
+   "sha": "604e237a",
+   "ws": [
+    831,
+    834,
+    837
+   ],
+   "subject": "chore(w831,w834,w837): 三批收官回填（并行积压清扫·用户令「把这三个批次你接管做掉」）"
+  },
+  {
+   "sha": "579d9ba7",
+   "ws": [
+    833,
+    835,
+    836
+   ],
+   "subject": "chore(w833,w835,w836): 三批收官回填（认领行 hash 回填 + 状态翻已收官 + 版段递延说明）"
+  },
+  {
+   "sha": "fa86574d",
+   "ws": [
+    824,
+    828,
+    829
+   ],
+   "subject": "chore(w824): W828 候选号让给系统架构方案批·我方阅读页体验封装候选顺延 W829"
+  },
+  {
+   "sha": "10a3c58b",
+   "ws": [
+    824,
+    828
+   ],
+   "subject": "chore(w824): 补 W828 预留登记（修复第 31 门禁 C4 提交-版段对账）"
+  },
+  {
+   "sha": "60e624b9",
+   "ws": [
+    824,
+    824,
+    827,
+    828
+   ],
+   "subject": "chore(w824): W824 收官回填 + 施工批号改判 W827（候选批 W828）"
+  },
+  {
+   "sha": "14f8c38d",
+   "ws": [
+    826,
+    826,
+    499,
+    525
+   ],
+   "subject": "chore(w826): 补 W826 落段后的五处旁文档指针（W499/W525 同型·旁文档滞后复发）"
+  },
+  {
+   "sha": "7f564ca5",
+   "ws": [
+    826,
+    826,
+    825
+   ],
+   "subject": "docs(w826): 补 W826 CHANGELOG 版段 + 版本指针同步（顶段 W825 就位后落段）"
+  },
+  {
+   "sha": "78986265",
+   "ws": [
+    823,
+    823,
+    827
+   ],
+   "subject": "chore(w823): 补 W823 收官登记（对账表行 hash 回填 + W827 bullet 标已消费）"
+  },
+  {
+   "sha": "9ab0b094",
+   "ws": [
+    826,
+    826,
+    827
+   ],
+   "subject": "chore(w826): 补 W826 收官登记（对账表行 hash 回填 + W827 现势 bullet）"
+  },
+  {
+   "sha": "20a25644",
+   "ws": [
+    821,
+    821,
+    823
+   ],
+   "subject": "chore(w821): 补 W821 收官登记（对账表行 hash 回填 + 现势 bullet 轮换至 W823）"
+  },
+  {
+   "sha": "f14bf4a8",
+   "ws": [
+    819,
+    819,
+    820
+   ],
+   "subject": "chore(w819): 补 W819 收官登记（对账表行 hash 回填 + W820 现势预留）"
+  },
+  {
+   "sha": "462f3732",
+   "ws": [
+    817,
+    817,
+    818
+   ],
+   "subject": "chore(w817): 补 W817 收官登记（对账表行 hash 回填 + W818 现势预留）"
+  },
+  {
+   "sha": "a0265e52",
+   "ws": [
+    816,
+    816,
+    817
+   ],
+   "subject": "chore(w816): 补 W816 收官登记（对账表行 hash 回填 + 终稿报告 + W817 现势预留）"
+  },
+  {
+   "sha": "4fb0f300",
+   "ws": [
+    813,
+    806,
+    812
+   ],
+   "subject": "fix(w813): review 修复批（W806-W812 对抗审读三项实证缺陷）"
+  },
+  {
+   "sha": "c3e77d95",
+   "ws": [
+    811,
+    811,
+    813
+   ],
+   "subject": "chore(w811): 补 W811 收官登记（对账表行 hash 回填 + W813 现势预留）"
+  },
+  {
+   "sha": "693e91cf",
+   "ws": [
+    810,
+    809,
+    810,
+    811
+   ],
+   "subject": "chore(w810): 补 W809/W810 收官登记（CHANGELOG 段 + 级联落盘 + 对账表 hash 回填 + W811 现势预留）"
+  },
+  {
+   "sha": "981e1827",
+   "ws": [
+    808,
+    808,
+    809
+   ],
+   "subject": "chore(w808): 补 W808 收官登记（对账表行 hash 回填 + W809 现势预留）"
+  },
+  {
+   "sha": "75a032f0",
+   "ws": [
+    807,
+    807,
+    808
+   ],
+   "subject": "chore(w807): 补 W807 收官登记（对账表行 hash 回填 + W808 现势预留）"
+  },
+  {
+   "sha": "e8358a58",
+   "ws": [
+    806,
+    806,
+    807
+   ],
+   "subject": "chore(w806): 补 W806 收官登记（对账表行 hash 回填 + W807 现势预留）"
+  },
+  {
+   "sha": "5c17d928",
+   "ws": [
+    805,
+    805,
+    806
+   ],
+   "subject": "chore(w805): 补 W805 收官登记（对账表行 hash 回填 + W806 现势预留）"
+  },
+  {
+   "sha": "16977f88",
+   "ws": [
+    805,
+    803
+   ],
+   "subject": "fix(w805): 跨平台测试守卫热修（W803 引入的 Linux CI 红）"
+  },
+  {
+   "sha": "2b1c71e9",
+   "ws": [
+    804,
+    804,
+    805
+   ],
+   "subject": "chore(w804): 补 W804 收官登记（对账表行 hash 回填 + W805 现势预留）"
+  },
+  {
+   "sha": "1a53790f",
+   "ws": [
+    803,
+    803,
+    804
+   ],
+   "subject": "chore(w803): 补 W803 收官登记（对账表行 hash 回填 + W804 现势预留）"
+  },
+  {
+   "sha": "d370f917",
+   "ws": [
+    802,
+    802,
+    803
+   ],
+   "subject": "chore(w802): 补 W802 收官登记（对账表行 hash 回填 + W803 现势预留）"
+  },
+  {
+   "sha": "d4341830",
+   "ws": [
+    801,
+    801,
+    802
+   ],
+   "subject": "chore(w801): 补 W801 收官登记（对账表行 hash 回填 + W802 现势预留）"
+  },
+  {
+   "sha": "6238a6e6",
+   "ws": [
+    800,
+    800,
+    801
+   ],
+   "subject": "chore(w800): 补 W800 收官登记（对账表行 hash 回填 + W801 现势预留）"
+  },
+  {
+   "sha": "30e702b0",
+   "ws": [
+    799,
+    799,
+    800
+   ],
+   "subject": "chore(w799): 补 W799 收官登记（对账表行 hash 回填 + W800 现势预留）"
+  },
+  {
+   "sha": "b8033f93",
+   "ws": [
+    798,
+    798,
+    799
+   ],
+   "subject": "chore(w798): 补 W798 收官登记（对账表行 hash 回填 + W799 现势预留）"
+  },
+  {
+   "sha": "9c0395ce",
+   "ws": [
+    797,
+    797,
+    798
+   ],
+   "subject": "chore(w797): 补 W797 收官登记（对账表行 hash 回填 + W798 现势预留）"
+  },
+  {
+   "sha": "86a3e415",
+   "ws": [
+    796,
+    796,
+    797
+   ],
+   "subject": "chore(w796): 补 W796 收官登记（对账表行 hash 回填 + W797 现势预留）"
+  },
+  {
+   "sha": "27b05900",
+   "ws": [
+    795,
+    795,
+    796
+   ],
+   "subject": "chore(w795): 补 W795 收官登记（对账表行 hash 回填 + W796 现势预留）"
+  },
+  {
+   "sha": "e174f89f",
+   "ws": [
+    795,
+    777,
+    794
+   ],
+   "subject": "docs(w795): 第 42 篇复盘报告入库——W777-W794 十八段 39 提交·E-17~E-24·WF-06/07"
+  }
+ ]
+}
