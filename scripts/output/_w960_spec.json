@@ -1,0 +1,23 @@
+{
+  "batch": "W960",
+  "date": "2026-10-26",
+  "title": "W960 治理文档体积归档批（§8 窗口制机器化 + 常驻搬段工具 + 实跑归档）",
+  "desc": "治理文档体积归档批（体积窗口门禁与常驻搬段工具落地）",
+  "head_entry": "2026-10-26（W960 治理文档体积归档批）",
+  "head_sentence": "体积窗口门禁与常驻搬段工具落地",
+  "changelog_body": "\n\n> **来源**：用户审问「我们不是有归档系统吗为什么没有进行归档」——取证结论为归档系统有条文有容器无触发器（§8 三次全人工批：W417/W511/W921），用户裁决「走」立项；本批认领于顶段 W957 之前（W958/W960 两轮让号留痕后以 W960 成型），低于现役顶段故走 backfill_changelog 补段路径（当前态版本行正确指向最高号·不回拉）。\n> **摘要**：① **check_doc_size_budget.py 新门禁**——CHANGELOG 与 file-index 正本各 110 段窗口（W921 先例沉淀为正式口径），段数为判据、KB/行数为报告值，超窗即红接 preflight 开工判据，修法唯一指向常驻工具；自测含窗口边界与缺件 fail-closed。② **archive_segments.py 常驻搬段工具**——W921 三道守恒断言沉淀为五道（A1 段数守恒 / A2 迁出块逐字节出现于归档 / A3 留存前缀与编号规则与顶段逐字节不动 / A4 双侧降序 / A5 归档 newest-at-top 序），CHANGELOG 归档插顶、file-index 归档尾追并记头部归档时间链。③ **本批实跑归档**——CHANGELOG 147→109 段（484.9→332.6 KB·迁出 38 段 W803-W842 入 CHANGELOG-ARCHIVE 顶部）、file-index 249→109 段（435.0→291.4 KB·迁出 140 段 W700-W842 入 FILE-INDEX-ARCHIVE 尾部），合计减重约 296 KB。④ **文档规范 §8 重标**——窗口制替代 50KB/500 行旧线（旧线按 W921 后实态废止），消除「条文 50KB vs 现实 480KB」的两制打架。⑤ **batch_cascade 落盘后体积提示位**——每批收官报一次四文件体积态。⑥ 顺带：pytest 收集数标记被并行会话竞态写成三数字拼接（910910902）归一回 910（磁盘实算对拍）。\n> **文件**：scripts/check_doc_size_budget.py · scripts/archive_segments.py · scripts/preflight_check.py · scripts/batch_cascade.py · docs/00-导读/文档规范.md · archive/docs/CHANGELOG-ARCHIVE.md · archive/docs/FILE-INDEX-ARCHIVE.md · CHANGELOG.md · scripts/output/file-index.md · tests/unit/test_doc_size_budget.py · tests/unit/test_archive_segments.py · pytest.ini · docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md · scripts/output/stats.json\n> **验证**：两新工具 --self-test 全过（窗口边界 / 缺件 fail-closed / 三种段形态解析）+ 新增单测 8 例全绿；归档五道断言实跑全过（38 段与 140 段守恒·逐字节内容对拍·留存前缀逐字节不变）；pytest 全量 910 收集全绿（收集 899→910·标记三方同步）；体积门禁现网 0 FAIL（109/110 双绿）。\n> **状态**：在途（认领登记 W960·待提交入库）",
+  "milestone_block": "- **W960 治理文档体积归档批**：§8 窗口制机器化（CHANGELOG/file-index 各 110 段窗·超窗 preflight 判红）+ archive_segments.py 常驻搬段工具（W921 三道守恒断言沉淀为五道）+ 实跑归档减重约 296 KB（CHANGELOG 484.9→332.6 KB·file-index 435.0→291.4 KB·双 109 段）+ 文档规范窗口制重标",
+  "agents_note": "2026-10-26（W960）治理文档体积归档批：§8 窗口制机器化（110 段窗·preflight 硬判据）+ archive_segments.py 常驻搬段工具（守恒断言五道）+ 实跑归档减重约 296 KB（双 109 段）+ 文档规范窗口制重标",
+  "file_index_rows": [
+    "| scripts/check_doc_size_budget.py | W960 | 新建体积窗口门禁（CHANGELOG/file-index 各 110 段窗·超窗 preflight 判红·KB 行数为报告值） |",
+    "| scripts/archive_segments.py | W960 | 新建常驻搬段工具（W921 守恒断言沉淀为五道·changelog 插顶与 file-index 尾追双模式） |",
+    "| scripts/preflight_check.py | W960 | 体积窗口硬判据接线（超窗拦截开工·故障降级 WARN 禁静默） |",
+    "| scripts/batch_cascade.py | W960 | 落盘后体积提示位（每批收官报四文件体积态） |",
+    "| docs/00-导读/文档规范.md | W960 | §8 重标：窗口制替代 50KB/500 行旧线（两制打架消除） |",
+    "| archive/docs/CHANGELOG-ARCHIVE.md | W960 | 迁入 38 段（W803-W842·插顶） |",
+    "| archive/docs/FILE-INDEX-ARCHIVE.md | W960 | 迁入 140 段（W700-W842·尾追+归档时间链） |",
+    "| tests/unit/test_doc_size_budget.py | W960 | 体积门禁单测 4 例（含现网防回退锚） |",
+    "| tests/unit/test_archive_segments.py | W960 | 搬段工具单测 4 例（三种段形态解析与负样本） |",
+    "| pytest.ini · 系统架构方案v2 | W960 | pytest_collected 标记归一 910（并行竞态三数字拼接修复） |"
+  ]
+}

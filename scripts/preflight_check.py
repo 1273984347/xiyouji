@@ -559,6 +559,19 @@ def main():
     except Exception as _exc:  # noqa: BLE001 — 提示位兜底（W822 语义）
         print(f"WARN  复盘触发器不可用（{_exc}）——本回合跳过复盘周期提示")
 
+    # 5.6) 治理文档体积窗口（W960·文档规范 §8 机器化）——硬判据：超窗 FAIL 拦截开工。
+    # 修法唯一 = scripts/archive_segments.py 归档（守恒断言五道）；门禁故障降级 WARN 禁静默跳过。
+    try:
+        import check_doc_size_budget as _dsb
+
+        _dsb_fails, _dsb_lines = _dsb.gate_lines()
+        for _line in _dsb_lines:
+            print(("FAIL  " if "超窗!" in _line else "NOTE  ") + _line)
+        for _f in _dsb_fails:
+            problems.append(_f)
+    except Exception as _exc:  # noqa: BLE001 — 判据不可执行须留痕（W809 fail-closed 族）
+        print(f"WARN  体积窗口门禁不可用（{_exc}）——本回合跳过（禁静默·W960 建置纪律）")
+
     print("== 结论 ==")
     if problems:
         for p in problems:
