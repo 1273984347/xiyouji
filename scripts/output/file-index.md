@@ -11,6 +11,17 @@
 ---
 
 
+## W964 AGENTS 版本脚注治理批（2026-10-26）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_cascade.py | W964 | 滚动切分器双日期形态 + precheck agents_note 定形断言 + 里程碑块正则括注放宽 |
+| scripts/check_doc_size_budget.py | W960 | 体积门禁 C3：AGENTS 脚注 >4KB 硬判据（W964 加） |
+| tests/unit/test_doc_size_budget.py | W964 | 脚注 4KB 负样本回归锁 |
+| AGENTS.md | W964 | 版本脚注 85.7→3.3 KB（75 真条目拆分·留 5 定形）·文件 110.1→27.2 KB |
+| archive/docs/AGENTS-ARCHIVE.md | W964 | 迁入 70 条（W807-W928·新 fenced 块） |
+| HANDOVER.md | W964 | 里程碑窗口 15→5 归一（6 失明块现形）·指针 W956 |
+
 ## W963 GSAP 动效差异化推广批（入口层 8 页 + cards 模式）（2026-10-26）
 
 | 文件 | W | 说明 |
