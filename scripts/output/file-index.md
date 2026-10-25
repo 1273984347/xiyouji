@@ -11,6 +11,79 @@
 ---
 
 
+## W934 D-2 应用迁移批第一子批（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/storage/types.ts | W934 | 新增：M12 存储层接口 `StorageBackend` + DTO + 语义约定（两后端必须一致的 7 条） |
+| xiyouji-agent-web/server/storage/sqlite.ts | W934 | 新增：现役 SQLite 实现逐字搬迁 + `kind` + `healthCheck`（DDL / 3 版迁移 / 12 函数零语义改写） |
+| xiyouji-agent-web/server/storage/postgres.ts | W934 | 新增：PG 后端（连接池 + 事务 + 参数化查询 + 健康探针 + schema 隔离 + 时间列边界转换） |
+| xiyouji-agent-web/server/storage/index.ts | W934 | 新增：后端工厂（缺省 sqlite·非法值 fail-closed）+ StorageBackend 契约逐项转发 |
+| xiyouji-agent-web/server/storage/storage.test.ts | W934 | 新增：双后端契约测试（同一套断言跑 SQLite 与 PostgreSQL·PG 侧隔离在专用 schema） |
+| xiyouji-agent-web/server/db.ts | W934 | 由「SQLite 实现本体」降为**门面**（16 个现役导出名齐备·实现搬进 server/storage/） |
+| xiyouji-agent-web/server/routes.ts | W934 | 存储调用改 await（接口异步化·业务逻辑零改动）+ 就绪探针改走 healthCheck |
+| xiyouji-agent-web/server/chat.ts | W934 | 存储调用改 await + rebuildHistory 改异步 |
+| xiyouji-agent-web/server/index.ts | W934 | 启动日志按实际后端取值（不再写死 SQLite）+ PG 后端跳过文件级快照（走 pg_basebackup） |
+| xiyouji-agent-web/server/shutdown.ts | W934 | closeDatabase 契约放宽为 `void | Promise<void>` 并 await（PG 池关闭是 Promise） |
+| xiyouji-agent-web/package.json | W934 | 新增依赖 `pg@8.23.1` + `@types/pg`；test:server 纳入契约测试 |
+| xiyouji-agent-web/package-lock.json | W934 | 随 pg / @types/pg 锁定 |
+| xiyouji-agent-web/deploy/pg/migrations/0002_app_tables.sql | W934 | 新增：业务三表 schema（sessions / messages / feedback + 索引 + role CHECK + message_id 唯一维度 + 外键级联·时间列 TIMESTAMPTZ） |
+| xiyouji-agent-web/deploy/pg/bin/migrate-sqlite-to-pg.ts | W934 | 新增：SQLite→PG 迁移器（源库只读 + 参数化 + 迁移序列记账 + 行数/主键集合/逐行内容三重对账） |
+| xiyouji-agent-web/deploy/pg/bin/initdb-bootstrap.sh | W934 | 授权模型修三处：ALTER DEFAULT PRIVILEGES 补 FOR ROLE + 权限先于建表 + 记账表 owner 转给应用账号 |
+| xiyouji-agent-web/deploy/pg/bin/verify-baseline.py | W934 | 71 → 95 项（新增 C5 组）+ 新增 strip_ts_comments（断言不再命中文档注释里的示例代码） |
+| xiyouji-agent-web/deploy/pg/bin/_mutation_test.py | W934 | 14 → 23 组变异（M14~M22·逐条证明 C5 组新判据可证伪） |
+| xiyouji-agent-web/deploy/pg/README.md | W934 | §4.3 待实跑清单 3→2 项（迁移器端到端已收官）+ 新增 §4.5 W934 实跑结果与三处授权缺陷 |
+| docs/11-方案报告/计划方案/执行前计划-T23-D2应用迁移批.md | W934 | 新增：执行前计划（16 AC + 20 ASM + 22 ST + 13 V + 11 风险 + 11 决策 + 12 项自包含检查） |
+| docs/11-方案报告/计划方案/T23-任务计划执行与经验沉淀报告-2026-10-25.md | W934 | 新增：交付报告（执行记录 + 16 条 AC 验收 + 8 条经验沉淀 + 9 条偏差 + 7 项未验证项声明） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W934 | 新增 §13.6 W934 实跑结果（7 项实跑 + 3 个静默型真缺陷 + D-2 未完成声明） |
+| docs/11-方案报告/README.md | W934 | 登记表新增 T-23 两行（执行前计划 + 交付报告） |
+| docs/00-导读/W批次编号对账表.md | W934 | W934 认领行与收官回填 |
+| scripts/output/_w934_d2a_migrate.json | W934 | 迁移实跑机器证据（三重对账结果） |
+| scripts/output/_w934_d2a_residue_before.txt | W934 | 清理前演练残留快照（证明清理对象是 W928 演练产物而非应用数据） |
+| scripts/output/_w934_d2a_grants.txt | W934 | 授权模型实查（owner / acl / 只读账号写入被拒） |
+| scripts/output/_w934_spec.json | W934 | 本批级联 spec |
+| scripts/output/_cascade_files_W934.txt | W934 | 级联落盘清单 |
+| CHANGELOG.md | W934 | W934 段 |
+| HANDOVER.md | W934 | 级联头尾链与里程碑块 |
+| README.md | W934 | 当前批次版本行 |
+| STRUCTURE.md | W934 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W934 | 当前批次版本行 |
+| .github/workflows/README.md | W934 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W934 | 页脚批次链插入 W934 |
+| site/data/cross-time-danmaku.html | W934 | 页脚批次链插入 W934 |
+| site/data/tag-cloud.html | W934 | 页脚批次链插入 W934 |
+| site/dukou-engine.html | W934 | 页脚批次链插入 W934 |
+| AGENTS.md | W934 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W934 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W934 | version 同步为 W934 |
+| scripts/output/file-index.md | W934 | W934 段插入 |
+
+## W933 共享面串行化机制批（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/计划方案/T22-任务计划执行与经验沉淀报告-2026-10-25.md | W933 | 共享面串行化机制交付报告（计划/执行/验收/复盘/经验沉淀·32/32 判据符合） |
+| docs/00-导读/文档规范.md | W933 | §11.0 共享面并发纪律（认领即占号 / 回填独占 / 收官回填三件套） |
+| scripts/preflight_check.py | W933 | 判据 A 撞号检测（台账同号多行）+ B′ 台账脏行提示 + D 反引号剥离 + E 登记类共享面排除 |
+| scripts/ledger_backfill.py | W933 | 判据 B 独占回填工具（--expect 基线指纹 / --verify 提交前复核 / --append-claim 纯追加认领） |
+| scripts/ledger_close_check.py | W933 | 判据 C 收官回填体检（现役段 W 号须 hash 非占位 + 状态以已收官开头·不挂 verify_delivery 阻塞段） |
+| scripts/_w933_mutation_test.py | W933 | 四判据可证伪性验证（4 组突变 + 4 组对照） |
+| Makefile | W933 | 新增 ledger 目标并接进 ci（第 42 门禁四面引用口径） |
+| scripts/output/_w933_spec.json | W933 | 本批级联 spec |
+| docs/00-导读/W批次编号对账表.md | W933 | W933 认领行与收官回填 |
+| docs/11-方案报告/README.md | W933 | 计划方案分区登记（第 26 行·T-22） |
+| CHANGELOG.md | W933 | W933 段 |
+| HANDOVER.md | W933 | 级联头尾链与里程碑块 |
+| README.md | W933 | 当前批次版本行 |
+| STRUCTURE.md | W933 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W933 | 当前批次版本行 |
+| site/index.html | W933 | 页脚批次链插入 W933 |
+| site/dukou-engine.html | W933 | 页脚批次链插入 W933 |
+| AGENTS.md | W933 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W933 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W933 | version 同步为 W933 |
+| scripts/output/file-index.md | W933 | W933 段插入 |
+
 ## W932 站点 Hero 素材图成套批（2026-10-25）
 
 | 文件 | W | 说明 |
