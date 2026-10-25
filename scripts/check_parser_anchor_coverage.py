@@ -35,22 +35,22 @@ CHECKS = [
     {
         "name": "M1 AGENTS 脚注条目",
         "files": ["AGENTS.md"],
-        "raw": r"；" + BOTH_DATE + r"（W\d{3}）",
+        "raw": r"；" + BOTH_DATE + r"（W\d{3,4}）",
         "anchor": r"；(?=" + BOTH_DATE + r"（)",  # 滚动器按此切分
         "pos_sensitive": True,
     },
     {
         "name": "M2 HANDOVER 里程碑块",
         "files": ["HANDOVER.md"],
-        "raw": r"(?m)^- \*\*(?:v[\d.]+ )?W\d{3}",
-        "anchor": r"(?m)^- \*\*(?:v[\d.]+ )?W\d{3}[^*]*\*+[^\r\n:*]{0,30}：",
+        "raw": r"(?m)^- \*\*(?:v[\d.]+ )?W\d{3,4}",
+        "anchor": r"(?m)^- \*\*(?:v[\d.]+ )?W\d{3,4}[^*]*\*+[^\r\n:*]{0,30}：",
         "pos_sensitive": True,
     },
     {
         "name": "M3 HANDOVER 头尾链条目",
         "files": ["HANDOVER.md"],
-        "raw": r"[；·]" + BOTH_DATE + r"（W\d{3}\b",
-        "anchor": r"[；·]" + BOTH_DATE + r"（W\d{3}\b",
+        "raw": r"[；·]" + BOTH_DATE + r"（W\d{3,4}\b",
+        "anchor": r"[；·]" + BOTH_DATE + r"（W\d{3,4}\b",
         "pos_sensitive": True,
     },
     {
@@ -74,8 +74,8 @@ CHECKS = [
         "name": "M5 台账认领行",
         "files": [os.path.join("docs", "00-导读", "W批次编号对账表.md"),
                   os.path.join("archive", "docs", "W批次编号对账表-ARCHIVE.md")],
-        "raw": r"(?m)^\|[ 狦]?W\d{3}",
-        "anchor": r"(?m)^\|\s*W\d{3}\s*\|",
+        "raw": r"(?m)^\|[ 狦]?W\d{3,4}",
+        "anchor": r"(?m)^\|\s*W\d{3,4}\s*\|",
         "pos_sensitive": True,
     },
     {
@@ -138,9 +138,9 @@ def _self_test() -> int:
 
     # M1 形态：中文日期条目对「仅阿拉伯锚点」必须报盲区（W964 病根复现）
     txt = "头；二〇二六年十月二十日（W808）条目；2026-10-20（W818）条目"
-    if make_pair(txt, r"；" + BOTH_DATE + r"（W\d{3}）", r"；(?=" + AR_DATE + r"（)") != 1:
+    if make_pair(txt, r"；" + BOTH_DATE + r"（W\d{3,4}）", r"；(?=" + AR_DATE + r"（)") != 1:
         fails.append("中文日期盲区未被探针报出（W964 病根必须可复现）")
-    if make_pair(txt, r"；" + BOTH_DATE + r"（W\d{3}）", r"；(?=" + BOTH_DATE + r"（)") != 0:
+    if make_pair(txt, r"；" + BOTH_DATE + r"（W\d{3,4}）", r"；(?=" + BOTH_DATE + r"（)") != 0:
         fails.append("双形态锚点下不应有盲区")
     print()
     if fails:

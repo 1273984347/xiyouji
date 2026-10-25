@@ -10,7 +10,7 @@ P = "scripts/output/file-index.md"
 s = io.open(P, encoding="utf-8", newline="").read()
 nl = "\r\n" if "\r\n" in s else "\n"
 lines = s.split(nl)
-pat = re.compile(r"^## (W\d{3}) \1 ")
+pat = re.compile(r"^## (W\d{3,4}) \1 ")
 hits = [i for i, ln in enumerate(lines) if pat.match(ln)]
 for i in hits:
     lines[i] = pat.sub(r"## \1 ", lines[i])

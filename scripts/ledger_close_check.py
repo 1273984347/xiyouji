@@ -41,7 +41,7 @@ LEDGER_REL = "docs/00-导读/W批次编号对账表.md"
 CHANGELOG_REL = "CHANGELOG.md"
 
 RE_SECTION_HEAD = re.compile(r"^### (?:v[\d.]+（[^）]*）：W(\d+)|W(\d+)（[^）]*）)", re.M)
-RE_W_ROW = re.compile(r"^\|\s*W(\d{3})\s*\|")
+RE_W_ROW = re.compile(r"^\|\s*W(\d{3,4})\s*\|")
 RE_DONE = re.compile(r"^(?:已收官|已闭环)")
 # hash 列的占位形态：空 / 破折号开头 / 含「待回填」/「认领登记」/「施工中」
 #   用 search 而非 match——占位词常被包在括注里（如「—（待回填）」），match 只能匹配到串首。

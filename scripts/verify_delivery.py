@@ -764,11 +764,11 @@ def _gate_dukou_footer(ctx):
     html = _read(HTML)
     if not html:
         ctx.rep.fail("找不到 %s（未生成或被忽略）" % HTML)
-    html_w = [int(x) for x in re.findall(r"W(\d{3})", html)]
+    html_w = [int(x) for x in re.findall(r"W(\d{3,4})", html)]
     ctx.max_w_html = max(html_w) if html_w else 0
 
     # W711：footer 标签内联正则（页面正文含治理文档版本链引用·宽锚会误命中——锚定 <footer> 标签内首链目）
-    m_f = re.search(r"<footer>.{0,200}?(?:v([\d.]+)\s+)?W(\d{3})", html, re.S)
+    m_f = re.search(r"<footer>.{0,200}?(?:v([\d.]+)\s+)?W(\d{3,4})", html, re.S)
     fver, fwnum = (m_f.group(1), m_f.group(2)) if m_f else (None, None)
     if fwnum:  # W711：fver 可 None（W-only 新条目）·批次键比对
         if ctx.wnum and int(fwnum) < int(ctx.wnum):
@@ -831,7 +831,7 @@ def _gate_side_docs(ctx):
                            % (("v%s " % wf_v) if wf_v else "", wf_w))
         else:
             ctx.rep.fail(".github/workflows/README.md 未解析出头部版本标记（W### 或历史 vX.Y.Z W###）")
-        mw = re.search(r"W450-W(\d{3})", wf)
+        mw = re.search(r"W450-W(\d{3,4})", wf)
         if mw:
             if ctx.wnum and mw.group(1) != ctx.wnum:
                 ctx.rep.fail(".github/workflows/README.md 里程碑行上限 W%s != 现役 W%s（里程碑滞后）"
@@ -846,9 +846,9 @@ def _gate_side_docs(ctx):
 def _gate_scope_drift(ctx):
     """范围漂移检测：html 引用 W### 不得超出六文档+归档已记录范围（W417 归档纳入扫描）。"""
     ctx.section("范围漂移")
-    doc_w = [int(x) for x in re.findall(r"W(\d{3})", ctx.doc_all)]
+    doc_w = [int(x) for x in re.findall(r"W(\d{3,4})", ctx.doc_all)]
     for a in ARCHIVE_DOCS:
-        doc_w += [int(x) for x in re.findall(r"W(\d{3})", _read(os.path.join(ROOT, a)))]
+        doc_w += [int(x) for x in re.findall(r"W(\d{3,4})", _read(os.path.join(ROOT, a)))]
     max_w_doc = max(doc_w) if doc_w else 0
     if ctx.max_w_html > max_w_doc:
         ctx.rep.fail("范围漂移：%s 引用到 W%d，但六文档+归档最高仅记到 W%d（疑似未记录的改动，需补记或回退）"

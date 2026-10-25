@@ -55,11 +55,11 @@ def parse_ledger(text):
     rows=[{w, status, touches}]——touches 列自 W739 起（历史行空·空集不参与交集判定）；
     兼容缺列旧格式（无第 7 列时 touches=空集）与历史不齐行（W687/W688 补空列后同为 7 列）。
     """
-    rows_table = [int(x) for x in re.findall(r"^\|\s*W(\d{3})\s*\|", text, re.M)]
-    bullets = re.findall(r"\*\*W(\d{3})\*\*：现势下一自由号", text)
+    rows_table = [int(x) for x in re.findall(r"^\|\s*W(\d{3,4})\s*\|", text, re.M)]
+    bullets = re.findall(r"\*\*W(\d{3,4})\*\*：现势下一自由号", text)
     rows = []
     for line in text.splitlines():
-        m = re.match(r"^\|\s*W(\d{3})\s*\|", line)
+        m = re.match(r"^\|\s*W(\d{3,4})\s*\|", line)
         if not m:
             continue
         cells = [c.strip() for c in line.strip().strip("|").split("|")]
@@ -260,7 +260,7 @@ def is_inflight(status):
 # 口径：git 提交识别只认 subject 的批次标签形态 ``type(w###):``（仓内提交信息统一形态·
 # 大小写不敏感）——正文/散文里提及别批号（「承接 W###」「W### 教训」）**不计**，
 # 防止引用性提及误降真在途批次的 touches 防护。
-_RE_COMMIT_TAG = re.compile(r"\((w\d{3})\)", re.IGNORECASE)
+_RE_COMMIT_TAG = re.compile(r"\((w\d{3,4})\)", re.IGNORECASE)
 
 
 def wnum_commit_index(subjects):

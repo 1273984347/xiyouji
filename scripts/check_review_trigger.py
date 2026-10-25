@@ -34,7 +34,7 @@ CHANGELOG = os.path.join("CHANGELOG.md")
 CHANGELOG_ARCHIVE = os.path.join("archive", "docs", "CHANGELOG-ARCHIVE.md")
 
 RE_SEG_HEAD = re.compile(r"^### (?:v[\d.]+（[^）]*）：W(\d+)|W(\d+)（(20\d{2}-\d{2}-\d{2})）：)([^\n]*)", re.M)
-RE_LEDGER_ROW = re.compile(r"^\|\s*W(\d{3})\s*\|")
+RE_LEDGER_ROW = re.compile(r"^\|\s*W(\d{3,4})\s*\|")
 # 非批次行：让号留痕（占号无产出属合规登记）与已停止（零提交会话终止·W954 标注口径）
 NON_BATCH_MARKS = ("让号留痕", "已停止")
 THRESHOLDS = {"days": 3, "batches": 30, "commits": 80}
