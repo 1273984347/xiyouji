@@ -11,6 +11,38 @@
 ---
 
 
+## W938 首屏版式重做 + 图集逐张复核（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/index.html | W938 | 左侧文字重排（眉题→标题组→主张句→细线→数据带→标签→CTA→切换器）+ 插画切换器归位左侧文字列内 + 第 9 张换图 |
+| site/static/images/hero-line-09-pilgrim-four.webp | W938 | 新增收尾图（取经四众西行·2400×1017·站点版） |
+| assets/promo/hero-set/hero-line-09-pilgrim-four.png | W938 | 收尾图母版（PNG） |
+| assets/promo/hero-set/hero-line-09-pilgrim-four.webp | W938 | 收尾图 WebP |
+| assets/promo/hero-set/raw/hero-09-pilgrim-four.jpg | W938 | 收尾图出图原件（重出基准） |
+| assets/promo/hero-set/hero-line-07-banana-fan.png | W938 | 芭蕉扇重出（首版扇面顶边被裁成半截圆面） |
+| assets/promo/hero-set/hero-line-07-banana-fan.webp | W938 | 芭蕉扇重出 WebP |
+| assets/promo/hero-set/raw/hero-07-banana-fan.jpg | W938 | 芭蕉扇重出原件（覆盖首版） |
+| assets/promo/hero-set/preview-contact-sheet.png | W938 | 9 张成套拼图刷新 |
+| assets/promo/hero-set/preview-contact-sheet.webp | W938 | 9 张成套拼图 WebP |
+| assets/promo/hero-set/README.md | W938 | 目录导读更新（8 张 → 9 张 + 第 9 张换图留证） |
+| scripts/_w931_hero_verify.py | W938 | 判据清单加第 9 张（9/9 PASS） |
+| scripts/_w938_cascade.py | W938 | 三面级联登记脚本（认领行 + CHANGELOG 段 + file-index 段·含段序断言） |
+| CHANGELOG.md | W938 | W938 版段（四件套） |
+| docs/00-导读/W批次编号对账表.md | W938 | W938 认领行 |
+
+## W937 首屏版式修正——「100 回」数据块移入左侧文字区（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/index.html | W937 | 「100 回」数据块由右侧巨型块移入左侧文字区做横排一行（数字降档 clamp 44–64px）·删纸色渐变遮罩 · 移动端 mega 尺寸规则改作用域形式 · 删 `.masthead-mega` 死规则 |
+| CHANGELOG.md | W937 | W937 版段（四件套） |
+| docs/00-导读/W批次编号对账表.md | W937 | W937 认领行 |
+| scripts/_w937_cascade.py | W937 | 三面级联登记脚本（认领行 + CHANGELOG 段 + file-index 段·含段序断言） |
+| site/reader/themes/取经路线地理专题.html | W937 | 题图落位修正：五行山与两界山（原在「取经地理学专题」——地理学理论页·题材不贴） |
+| site/reader/people/灵感大王外传.html | W937 | 题图落位修正：东海龙宫水殿（原在「四海龙王：下雨的人」——讲降雨职能·题材不贴） |
+| scripts/_w937_move_plates.py | W937 | 题图移动脚本（旧页移除 figure 与 chapter-plate CSS·不留死规则） |
+
 ## W936 首屏图集接入 + 专题题图落位（2026-10-25）
 
 | 文件 | W | 说明 |

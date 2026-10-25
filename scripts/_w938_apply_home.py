@@ -163,6 +163,16 @@ PAIRS = [
     ("JS 注释·图集构成",
      "// W935：首屏插画图集（9 张 = W931 线描 8 张 + W932 持瓶菩萨收尾重音）",
      "// W938：首屏插画图集（9 张 = W931 线描 8 张 + W938 取经四众收尾重音·全部 2400×1017）"),
+    # —— 以下两条曾被并行会话的 site/index.html pathspec 提交覆盖（他们提交的是自己工作树版本）——
+    ("CSS 切换器标签不折行",
+     "        .hero-dots-label { font-size: 11px; color: var(--ink-faint); letter-spacing: .12em; }",
+     "        .hero-dots-label { font-size: 11px; color: var(--ink-faint); letter-spacing: .12em; white-space: nowrap; flex-shrink: 0; }"),
+    ("CSS 窄屏插画置顶",
+     "            .masthead-cta { flex-wrap: wrap; gap: 14px; }",
+     "            .masthead-cta { flex-wrap: wrap; gap: 14px; }\n"
+     "            /* W938：窄屏 masthead 变 column 布局（文字在上）⇒ 插画移到容器顶部，首屏即可见\n"
+     "               （contain 下按宽贴合·375px 视口图高约 159px·完整不裁切） */\n"
+     "            .masthead { background-position: right top; }"),
 ]
 
 

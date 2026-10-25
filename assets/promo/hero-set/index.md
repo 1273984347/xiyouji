@@ -11,7 +11,7 @@
 
 - `raw/`
 
-## 文件（18）
+## 文件（20）
 
 ### 样式与资源
 
@@ -31,6 +31,8 @@
 - `hero-line-07-banana-fan.webp`
 - `hero-line-08-jade-vase.png`
 - `hero-line-08-jade-vase.webp`
+- `hero-line-09-pilgrim-four.png`
+- `hero-line-09-pilgrim-four.webp`
 - `preview-contact-sheet.png`
 - `preview-contact-sheet.webp`
 

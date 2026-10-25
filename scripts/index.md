@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（308）
+## 文件（313）
 
 ### Markdown 文档
 
@@ -196,6 +196,11 @@
 - `_w933_mutation_test.py`
 - `_w936_cascade.py`
 - `_w936_insert_plates.py`
+- `_w937_cascade.py`
+- `_w937_move_plates.py`
+- `_w938_apply_home.py`
+- `_w938_cascade.py`
+- `_w938_paper_normalize.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`

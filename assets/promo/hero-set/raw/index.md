@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（8）
+## 文件（9）
 
 ### 样式与资源
 
@@ -23,6 +23,7 @@
 - `hero-06-nine-ring-staff.jpg`
 - `hero-07-banana-fan.jpg`
 - `hero-08-jade-vase.jpg`
+- `hero-09-pilgrim-four.jpg`
 
 ---
 
