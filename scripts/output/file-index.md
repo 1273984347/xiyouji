@@ -11,6 +11,43 @@
 ---
 
 
+## W952 内页人物题图续批第二组（12 张·人物+主题混合）（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/plate-line-01-bailongma.webp | W952 | 新增·白龙马 |
+| site/static/images/plate-line-02-dujiao-shengwang.webp | W952 | 新增·独角兕大王 |
+| site/static/images/plate-line-03-linggan.webp | W952 | 新增·灵感大王 |
+| site/static/images/plate-line-04-huangfengguai.webp | W952 | 新增·黄风怪 |
+| site/static/images/plate-line-05-saitaisui.webp | W952 | 新增·赛太岁 |
+| site/static/images/plate-line-06-jiuLingyuansheng.webp | W952 | 新增·九灵元圣 |
+| site/static/images/plate-line-07-nezha.webp | W952 | 新增·哪吒 |
+| site/static/images/plate-line-08-angrixingguan.webp | W952 | 新增·昴日星官 |
+| site/static/images/plate-line-09-jingu-topic.webp | W952 | 新增·紧箍咒专题 |
+| site/static/images/plate-line-10-jindouyun-topic.webp | W952 | 新增·筋斗云专题 |
+| site/static/images/plate-line-11-fabao-topic.webp | W952 | 新增·法宝系统专题 |
+| site/static/images/plate-line-12-wuzi-jing-topic.webp | W952 | 新增·无字真经专题 |
+| site/reader/people/白龙马.html | W952 | 接入题图（白龙马） |
+| site/reader/people/独角兕大王.html | W952 | 接入题图（独角兕大王） |
+| site/reader/people/灵感大王.html | W952 | 接入题图（灵感大王） |
+| site/reader/people/黄风怪外传.html | W952 | 接入题图（黄风怪） |
+| site/reader/people/赛太岁.html | W952 | 接入题图（赛太岁） |
+| site/reader/people/九灵元圣-方向二深化.html | W952 | 接入题图（九灵元圣） |
+| site/reader/people/哪吒.html | W952 | 接入题图（哪吒） |
+| site/reader/people/昴日星官.html | W952 | 接入题图（昴日星官） |
+| site/reader/themes/紧箍咒专题.html | W952 | 接入题图（紧箍咒主题） |
+| site/reader/themes/筋斗云专题.html | W952 | 接入题图（筋斗云主题） |
+| site/reader/themes/法宝系统专题.html | W952 | 接入题图（法宝系统主题） |
+| site/reader/themes/无字真经专题.html | W952 | 接入题图（无字真经主题） |
+| assets/promo/plate-set/ | W952 | 母版 + 站点版 + 拼图 + README（累计 28 张） |
+| scripts/_w952_make_prompts.py | W952 | 母版复用生成器 + 两条断言（批内一致 / 风格段与上批一致） |
+| scripts/_w952_insert_plates.py | W952 | 12 页 chapter-plate 接入（幂等） |
+| scripts/_w952_cascade.py | W952 | 四面登记 + 当前态指针（共享面精确暂存） |
+| scripts/_w945_plates_verify.py | W952 | J2 顶部留白带口径 28% → 10%（新旧两批交集） |
+| scripts/output/_w952_batch1~3.json | W952 | 出图参数 12 条 |
+| CHANGELOG.md | W952 | W952 版段 |
+| docs/00-导读/W批次编号对账表.md | W952 | W952 认领行 |
+
 ## W951 题图版式批（站点版裁掉上部留白·16 张）（2026-10-25）
 
 | 文件 | W | 说明 |

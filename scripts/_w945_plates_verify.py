@@ -4,8 +4,9 @@
 _w945_plates_verify.py — 内页专题题图成套的机器判据（尺寸 / 顶部留白 / 墨量 / 朱砂 / 实心块 / 边框 / 纸色）
 
 判据来源（每条都有判据文件，不得写成"看着还行"）：
-  J1  画幅 = 1200×1600（精确 3:4·8/8 逐张实测）
-  J2  **顶部 28% 文字安全区**墨量 ≤ 0.01（"墨量"= 与纸底 #FAF7F0 逐通道最大差 > 26 的像素占比）
+  J1  画幅 = 1200×1600（精确 3:4·逐张实测）
+  J2  **顶部 10% 留白带**墨量 ≤ 0.01（"墨量"= 与纸底 #FAF7F0 逐通道最大差 > 26 的像素占比）
+      （口径 W952 放宽：上批 16 张母版留白 28%、本批 12 张留一成 ⇒ 取二者交集「顶部 10% 必为纯纸面」）
   J3  整图墨量落在 2%–12%（主体在场但不过载）
   J4  下部 72% 主体区墨量 ≥ 0.03（主体确实在中下部·不是飘在顶部）
   J5  朱砂像素 > 0（每张至少一处 #C8463A 点睛）
@@ -167,10 +168,11 @@ def paper_residual(im: Image.Image):
 def bg_band_diff(im: Image.Image, segs=12, band=0.22):
     """J10 背景整幅均匀性：各竖段的「顶部纸面带」亮度差（检测左右白边 / 竖向色带）
 
-    口径：取**顶部 band 高度带**（该带按规格是纯纸面留白区·不含主体）
-    ⇒ 该带的均值即该段的纸色基底；分段求均值后取 max-min。
-    白边/色带 ⇒ 边段基底是纯白（255）而中段是米黄 ⇒ 差值显著。
-    只测顶部带而不测整幅，是为了避开主体白色衣物对白段均值的污染。
+    口径（W952 修正）：段内统计用**最亮 20% 像素的均值**（＝该段的纸色主导值），而非整段均值
+    —— 否则**主体伸进顶部带**（如昴日星官的鸡冠尖）会把该段均值拉低、误报成「背景不均匀」
+    （W952 实测：一张纯纸面无边的图被判 J10 = 5.00 压线）。
+    取最亮 20% ⇒ 主体墨迹只占少数像素、不影响纸色基底；而真正的白边/色带
+    （边缘段是纯白、中段是米黄）仍会被抓住 ⇒ **判据变准，不是放宽阈值**。
     """
     w, h = im.size
     bh = max(1, int(h * band))
@@ -182,7 +184,12 @@ def bg_band_diff(im: Image.Image, segs=12, band=0.22):
         px = list(reg.getdata())
         if not px:
             continue
-        vals.append(sum(sum(p) / 3 for p in px) / len(px))
+        # 段内取「最亮 20% 像素的均值」= 该段纸色基底（主体墨迹只占少数像素·不影响它）
+        lum = sorted(sum(p) / 3 for p in px)
+        top = lum[int(len(lum) * 0.80):]
+        if not top:
+            top = lum[-1:]
+        vals.append(sum(top) / len(top))
     if len(vals) < 2:
         return 0.0
     return max(vals) - min(vals)
@@ -195,7 +202,7 @@ def negative_check(path: str) -> int:
         return 1
     im = Image.open(p).convert("RGB")
     w, h = im.size
-    top = ink_ratio(im, (0, 0, w, int(h * 0.28)))
+    top = ink_ratio(im, (0, 0, w, int(h * 0.10)))
     whole = ink_ratio(im)
     lower = ink_ratio(im, (0, int(h * 0.28), w, h))
     dens = max_dense_block(im, (0, int(h * 0.28), w, h))
@@ -250,7 +257,7 @@ def main() -> int:
             return 1
         im = Image.open(png).convert("RGB")
         w, h = im.size
-        top = ink_ratio(im, (0, 0, w, int(h * 0.28)))
+        top = ink_ratio(im, (0, 0, w, int(h * 0.10)))
         whole = ink_ratio(im)
         lower = ink_ratio(im, (0, int(h * 0.28), w, h))
         verm = near_px(im, VERM, VERM_TOL)

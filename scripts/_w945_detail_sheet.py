@@ -28,6 +28,18 @@ STEMS = [
     ("plate-line-06-zhenyuan", "14 镇元大仙·人参果+拂尘"),
     ("plate-line-07-dapeng", "15 大鹏金翅雕·鹏翼+二气瓶"),
     ("plate-line-08-taishanglaojun", "16 太上老君·太极图+拂尘"),
+    ("plate-line-01-bailongma", "17 白龙马·三叉戟+龙影"),
+    ("plate-line-02-dujiao-shengwang", "18 独角兕大王·独角+钢叉"),
+    ("plate-line-03-linggan", "19 灵感大王·鱼尾+玉钵"),
+    ("plate-line-04-huangfengguai", "20 黄风怪·黄鼠狼+芭蕉扇"),
+    ("plate-line-05-saitaisui", "21 赛太岁·金毛犼+紫金铃"),
+    ("plate-line-06-jiuLingyuansheng", "22 九灵元圣·九头狮"),
+    ("plate-line-07-nezha", "23 哪吒·乾坤圈+火尖枪"),
+    ("plate-line-08-angrixingguan", "24 昴日星官·公鸡+长鞭"),
+    ("plate-line-09-jingu-topic", "25 紧箍咒·九倒刺金箍"),
+    ("plate-line-10-jindouyun-topic", "26 筋斗云·祥云涡卷"),
+    ("plate-line-11-fabao-topic", "27 法宝系统·五法宝列阵"),
+    ("plate-line-12-wuzi-jing-topic", "28 无字真经·空白经卷"),
 ]
 PAPER = (250, 247, 240)
 
