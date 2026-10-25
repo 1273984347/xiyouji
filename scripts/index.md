@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（277）
+## 文件（304）
 
 ### Markdown 文档
 
@@ -169,6 +169,29 @@
 - `_w926_mutation_test.py`
 - `_w926_verify_numbers.py`
 - `_w926_visible_leak.py`
+- `_w929_gen_args.py`
+- `_w929_gen_args_v2.py`
+- `_w929_gen_args_v3.py`
+- `_w929_ledger_spec.py`
+- `_w929_process.py`
+- `_w929_seal_normalize.py`
+- `_w929_stats_sync.py`
+- `_w929_verify.py`
+- `_w930_claim_row.py`
+- `_w930_layout_attr.py`
+- `_w930_layout_detail.py`
+- `_w930_layout_diff.py`
+- `_w930_layout_residual.py`
+- `_w930_layout_static.py`
+- `_w930_rename_prefix.py`
+- `_w930_report_normalize.py`
+- `_w930_spec_build.py`
+- `_w931_changelog_seg.py`
+- `_w931_claim_row.py`
+- `_w931_file_index_seg.py`
+- `_w931_hero_verify.py`
+- `_w931_sync_stats_marks.py`
+- `_w933_mutation_test.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
@@ -246,6 +269,8 @@
 - `inject_visit_log.py`
 - `inline_css.py`
 - `judge_gate.py`
+- `ledger_backfill.py`
+- `ledger_close_check.py`
 - `lint_links.py`
 - `new_page.py`
 - `obs_sample.py`
@@ -293,6 +318,8 @@
 - `_w865_layout_probe.mjs`
 - `_w892_export_flyer.mjs`
 - `_w892_probe.mjs`
+- `_w930_layout_probe.mjs`
+- `_w930_layout_probe_app.mjs`
 - `batch_screenshots.js`
 - `check_chart_values.js`
 - `check_contract_smoke.js`
