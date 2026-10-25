@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（99）
+## 文件（107）
 
 ### 样式与资源
 
@@ -94,6 +94,14 @@
 - `og-15-shijian-liejian.webp`
 - `plate-donghai-longgong.webp`
 - `plate-jingu-jingangchui.webp`
+- `plate-line-01-wukong.webp`
+- `plate-line-02-tangseng.webp`
+- `plate-line-03-bajie.webp`
+- `plate-line-04-shaseng.webp`
+- `plate-line-05-guanyin.webp`
+- `plate-line-06-erlangshen.webp`
+- `plate-line-07-baigujing.webp`
+- `plate-line-08-honghaier.webp`
 - `plate-liudao-lunhui.webp`
 - `plate-mingfu-panwang.webp`
 - `plate-wujingshan-liangjie.webp`
