@@ -22,7 +22,7 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATS = os.path.join(ROOT, "scripts", "output", "stats.json")
 SKIP_DIRS = {".git", "node_modules", "archive", "tmpe", ".mypy_cache", ".pytest_cache",
-             ".ruff_cache", "__pycache__", ".review-tmp", ".agent", ".mimosa", ".workbuddy"}
+             ".ruff_cache", "__pycache__", ".review-tmp", ".agent"}
 SKIP_FILES = {os.path.join("scripts", "output", "stats.json"),
               "CHANGELOG.md",          # 历史段禁改面（CLAUDE.md 规则 10·CHANGELOG 历史段禁改）
               }
