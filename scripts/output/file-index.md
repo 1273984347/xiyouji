@@ -11,6 +11,26 @@
 ---
 
 
+## W963 GSAP 动效差异化推广批（入口层 8 页 + cards 模式）（2026-10-26）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/js/motion-gsap.js | W963 | 修改：新增 cards 模式（data-gsap-target 可配置 + stagger 自适应）+ sections 单元收窄为 h2 |
+| site/reader/index.html | W963 | 修改：入口层接线（cards 模式·目标 .reader-idx a·增量 229 B） |
+| site/reader/themes-hub.html | W963 | 修改：入口层接线（增量 229 B） |
+| site/reader/themes/index.html | W963 | 修改：入口层接线（增量 238 B） |
+| site/reader/people/index.html | W963 | 修改：入口层接线（增量 238 B） |
+| site/reader/essays/index.html | W963 | 修改：入口层接线（增量 238 B） |
+| site/reader/culture/index.html | W963 | 修改：入口层接线（增量 238 B） |
+| site/reader/poetry/index.html | W963 | 修改：入口层接线（增量 238 B） |
+| site/guide.html | W963 | 修改：入口层接线（cards 模式·目标 .path-card·增量 215 B） |
+| scripts/_w962_wire_entry.py | W963 | 新增：入口层接线器（字节级·断言命中数·幂等·单页增量上限 250 B） |
+| scripts/_w957_motion_probe.py | W963 | 修改：加 --pages 参数（默认清单不变）以便按新接入面实跑 |
+| docs/00-导读/W批次编号对账表.md | W963 | 登记：W963 认领行（让号留痕）+ 收官回填 |
+| HANDOVER.md | W963 | 同步：一、当前进度增 W963 条目 + 最后更新链前置 + 当前 HEAD |
+| CHANGELOG.md | W963 | 新增：W963 版段（四件套） |
+| scripts/output/file-index.md | W963 | 登记：W963 段（本段） |
+
 ## W961 GSAP 写法机检挂槽批 + F9 假阳性订正批（2026-10-26）
 
 | 文件 | W | 说明 |

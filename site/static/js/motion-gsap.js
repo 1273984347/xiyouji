@@ -11,9 +11,10 @@
  *   ③ 显式 opt-in：只处理带 `data-gsap` 标记的容器，不做全站扫描
  *   ④ 只动 transform 与 opacity（x / y / autoAlpha），不动布局属性
  *
- * 用法：容器上标 data-gsap="intro" | "sections" | "fold"
+ * 用法：容器上标 data-gsap="intro" | "sections" | "cards" | "fold"（空格分隔可多值）
  *   intro    —— 入场编排：容器直接子元素按序进场（Timeline + stagger）
- *   sections —— 滚动叙事：分节单元进入视口时一次性进场（批量协调）
+ *   sections —— 滚动叙事：容器内 h2 分节标题进入视口时一次性进场（批量协调）
+ *   cards    —— 卡片 / 分组网格进场：容器内匹配 data-gsap-target（缺省 .card）的元素按序进场
  *   fold     —— 微交互联动：折叠块展开时内容序列进场
  *
  * 同批待确认项（见《执行前计划-T28》Q-01）：是否把本文件的写法判据挂成常驻门禁槽；
@@ -58,10 +59,30 @@
     return out;
   }
 
-  /* 分节单元：容器内的 h2 分节标题 + 折叠块（回目页用折叠块，专题/人物页用 h2） */
+  /* 分节单元：容器内的 h2 分节标题。
+     W962 收窄：初版含 details（折叠块）⇒ 但折叠块默认折叠、进场时不可见 ⇒ 属**无效动效**，
+     改为只取 h2；折叠块的展开编排由 fold 模式负责（职责分离）。 */
   function sectionsOf(el) {
     var out = [];
-    var nodes = el.querySelectorAll('h2, details');
+    var nodes = el.querySelectorAll('h2');
+    for (var i = 0; i < nodes.length; i++) {
+      if (claimable(nodes[i])) { out.push(nodes[i]); }
+    }
+    return out;
+  }
+
+  /* 卡片 / 分组网格单元：容器内匹配选择器的元素。
+     选择器由容器上的 data-gsap-target 指定（缺省 .card）——入口层 hub 页的卡片类名各异
+     （.reader-group / .reader-idx / .curated-card / .path-card）⇒ 须可配置。 */
+  function cardsOf(el) {
+    var sel = el.getAttribute('data-gsap-target') || '.card';
+    var out = [];
+    var nodes;
+    try {
+      nodes = el.querySelectorAll(sel);
+    } catch (e) {
+      return out;
+    }
     for (var i = 0; i < nodes.length; i++) {
       if (claimable(nodes[i])) { out.push(nodes[i]); }
     }
@@ -150,6 +171,28 @@
     }
   }
 
+  /* —— 模式 B2：卡片 / 分组网格进场（入口层 hub 页与卡片网格页）—— */
+  function initCards(scope) {
+    var containers = scope.querySelectorAll('[data-gsap~="cards"]');
+    for (var c = 0; c < containers.length; c++) {
+      var box = containers[c];
+      var units = cardsOf(box);
+      if (!units.length) { continue; }
+      GSAP.set(units, { autoAlpha: 0, y: 8 });
+      /* stagger 自适应：单条入场 0.5 s（§5.1 入场档）· 序列总时长封顶 ≈1.2 s
+         （28 张卡片时 stagger 0.025 而非 0.04 ⇒ 避免整屏拖尾过长） */
+      var st = Math.min(0.06, 0.7 / units.length);
+      GSAP.to(units, {
+        autoAlpha: 1,
+        y: 0,
+        duration: DUR.enter,
+        ease: EASE.enter,
+        stagger: st,
+        overwrite: true
+      });
+    }
+  }
+
   /* —— 模式 C：微交互联动（折叠块展开时内容序列进场）—— */
   function initFold(scope) {
     var containers = scope.querySelectorAll('[data-gsap~="fold"]');
@@ -195,6 +238,7 @@
     try {
       initIntro(scope);
       initSections(scope);
+      initCards(scope);
       initFold(scope);
       if (window.MotionGsap) { window.MotionGsap.stats.init += 1; }
     } catch (err) {
