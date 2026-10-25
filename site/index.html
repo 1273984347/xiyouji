@@ -100,7 +100,7 @@
         .masthead-cta > a:hover { text-decoration: underline; }
         /* W938：插画切换器归位左侧文字列内（与 CTA 同排会撑破 620px 容器伸进插画区·被金箍棒压住） */
         .hero-dots-row { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
-        .hero-dots-label { font-size: 11px; color: var(--ink-faint); letter-spacing: .12em; }
+        .hero-dots-label { font-size: 11px; color: var(--ink-faint); letter-spacing: .12em; white-space: nowrap; flex-shrink: 0; }
 
         .ink-mountains { display: block; width: 100%; height: 100px; }
 
@@ -132,6 +132,9 @@
             .masthead-facts .mega-unit { font-size: clamp(18px, 5vw, 22px); }
             .masthead-facts .mega-label { margin-top: 2px; }
             .masthead-cta { flex-wrap: wrap; gap: 14px; }
+            /* W938：窄屏 masthead 变 column 布局（文字在上）⇒ 插画移到容器顶部，首屏即可见
+               （contain 下按宽贴合·375px 视口图高约 159px·完整不裁切） */
+            .masthead { background-position: right top; }
             .stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
             .tools-grid { grid-template-columns: 1fr; }
         }
