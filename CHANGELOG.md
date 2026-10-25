@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W950），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W951），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,36 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W951（2026-10-25）：题图版式批（站点版裁掉上部留白·16 张题图页面呈现紧凑化）
+
+> **来源**：用户 2026-10-25 在问卷中裁决「裁掉·页面更紧凑」——承接 W945/W948 两批共 16 张线描人物题图。
+>
+> - **文件**：site/static/images/plate-line-0[1-8]-*.webp（16 张站点版重出）、assets/promo/plate-set/preview-site-sheet.png（站点版拼图）、assets/promo/plate-set/README.md、scripts/_w945_prepare.py、scripts/_w951_check_crop.py、scripts/_w951_site_sheet.py、scripts/_w951_cascade.py、scripts/output/_cascade_files_W951.txt、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md
+
+**问题**：出图规格要求「画面上方 28% 纯纸面留白（供叠字）」，而内页版式里页面标题 `<h1>` 本就在图的**外面上方**
+⇒ 标题与画面主体之间多出约 **190 px** 冗余空白（浏览器实跑 1280 视口量得），第一眼像「图缺了一块」。
+
+**方案迭代（三次才收敛·每版均经浏览器实跑 + 机器验算后才否决）**：
+
+| 版本 | 做法 | 实测结果 | 处置 |
+|---|---|---|---|
+| v1 | 页面 CSS：`.chapter-plate{overflow:hidden}` + `img{margin-top:-37.33%}` | 浏览器实跑**人物下半身丢失**（画面被截断） | 弃（CSS 整体回退，页面零改动） |
+| v2 | 资产层统一裁 28%（源图 448 px） | 机器验算**会削到 6 张的主体顶端**（观音主体顶 419 ⇒ 削 29 px；太上老君 417 ⇒ 削 31 px） | 弃 |
+| v3 | 主体对齐画布顶部 + **一并裁掉下部** | 浏览器实跑**人物悬空**——母版下部 62–141 px 是画师留的「地面留白」，裁掉即破坏「人物站在地上」的构图关系 | 弃 |
+| **v4（落地）** | **只裁上部留白**：逐张裁切线 = 该张主体顶 − 6 px，**保留下部地面留白** | 主体顶落在画布 6 px（标题紧贴主体）· 人物完整 · 人物不悬空 · 人物大小不变（不缩放） | ✅ |
+
+**新增判据** `scripts/_w951_check_crop.py`：验站点版宽 = 1200、**主体顶未被切**（墨迹 bbox 顶 ≥ 1 px）、**主体底未被切**（bbox 底 < 画布高）、**下部地面留白 > 0**（人物不悬空）⇒ **16/16 PASS**（主体顶 6–7 px·地面留白 62–141 px·站点版高 1056–1189）。
+
+**资产分层**：`assets/promo/plate-set/` 仍是**完整母版**（1200×1600·含上部留白·供卡片叠字 / 分享图裁切用）；
+`site/static/images/` 是**页面版**（已裁上部留白）。两者不再相同——这是本批引入的结构变化，已在目录 README 登记。
+
+**页面零改动**：16 个 reader 页的 HTML/CSS **一行未改**（v1 的 CSS 方案已整体 `git checkout` 回退），版式调整全在资产层完成 ⇒ 无 HTML 副作用、无 CSP 漂移。
+
+**并发纪律**：本批共享面**按内容粒度精确暂存**（`git update-index --cacheinfo`·以 `HEAD:<file>` 为基底叠加本批段）⇒ 对方会话 W950 起宣布的新纪律我方先行践行，不整份 add ⇒ 不会把对方在途的共享面内容带进我的提交。
+
+> - **验证**：站点版验算 16/16 PASS（`_w951_check_crop.py`）· 母版判据 J1–J10 16/16 PASS（`_w945_plates_verify.py`）· 浏览器实跑 `people/太上老君` 页：标题紧贴题图、人物完整、脚下地面留白保留
+> - **状态**：在途（认领登记 W951·待提交入库）
 
 ### W950（2026-10-25）：图标集打磨优化批（重画 13 枚 + 光学尺寸归一 + 1967 处内联 SVG 图形同步 + 唯一事实源刷新器）
 
