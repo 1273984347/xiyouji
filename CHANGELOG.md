@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W944），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W946），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,59 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W946（2026-10-25）：图标治理续作批（.ico 描边参数修复 + 时间线专属图标 16 枚 + 第 50 门禁「UI 图标位零残留 · 图标渲染正确性」）
+
+> **来源**：用户 2026-10-25 令「禁止使用 emoji 表情当做图标，你审查一下。你要么进行设计一下图标」，经问卷两问裁决（范围=仅 UI 图标位 / 风格=东方线描）后分两批执行：W941（主体：1,910 处图标位归零 + 通用图标集 27 枚）→ **W946（本批：补齐 W941 的三处缺口）**。
+
+> - **文件**：site/system.css（`.ico` 基类补 fill/stroke/linecap/linejoin 描边参数）、site/static/icons/ui/tl-*.svg（16 枚时间线专属图标）、site/data/timeline.html、site/en/timeline.html（22 条事件数据字段 + 渲染改内联 SVG + TL_ICO 映射内联 + CSP 重算）、scripts/_w946_gen_timeline_icons.py、scripts/_w946_apply_timeline_icons.py、scripts/check_emoji_icons.py（第 50 门禁）、scripts/_w939_emoji_to_svg.py（svg_tag 模板补 SVG 属性）、scripts/output/_w946_timeline_icons.js、docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、scripts/output/file-index.md。
+
+**缺口 ①（严重·视觉）：内联 SVG 丢了描边参数 ⇒ 图标渲染成黑块**。W941 批的静态判据全绿（图标位 0 残留、尺寸正确），但 **Playwright 实开 file:// 才发现**：内联 `<svg>` 片段只带了 class/width/height/viewBox，**漏了 `fill="none" stroke="currentColor"`** ⇒ 图形落回 SVG 默认样式（黑填充、无描边）⇒ 1,957 处图标全是黑块。**修法**：把描边参数写进 `.ico` 基类 CSS（CSS 优先级高于 presentation attribute，且 `.ico` 类选择器特异性高于站内 `svg` 元素规则）⇒ **零 HTML 改动、全站立即生效**；同时给替换器 `svg_tag()` 模板补上 SVG 属性（未来重跑产出更稳的 HTML）。实测复核：浅色模式 stroke=墨色 `rgb(35,32,26)`、暗色模式 stroke 自动变朱砂 `rgb(224,96,79)`（主题自适应确认）、尺寸 13–16px 跟随字号（非 300×150 巨图）。
+
+**缺口 ②：时间线的 15 种 emoji 承载 22 事件、且「📖」一符两义**（佛经西行 vs 连环画普及）⇒ **通用图标集表达不了「成书/游记/评点/戏曲/影剧/数字化」的语义差** ⇒ 另设计 **16 枚语义专属图标**（`tl-*` 前缀）：行脚僧（玄奘西行）、立轴（大唐西域记）、灵光（取经诗话）、脸谱（戏曲与影视）、百回刻本、太极（丹道评点）、整理校注本、评点笺注、新式标点、校注笔、数字库、连环画格、清代年画、胶片、显像管、手柄。**按事件语义而非按字符拆分** ⇒ 数据字段由 emoji 改为图标名（`icon: 'tl-pilgrim'`），渲染改 `.html(d => TL_ICO[d.icon] || '')`，映射表内联进页面（保持自包含）。两页 emoji 序列一致性作断言（22 == 22 且逐位相同）。目视复核重画 2 枚（`tl-pilgrim` 语义太弱 → 加持杖与日轮；`tl-punctuation` 读不出标点 → 改逗号+句号+引号三件套）。
+
+**缺口 ③：没有防回归的机检** ⇒ 新增 **第 50 门禁 `scripts/check_emoji_icons.py`**，两段判据：
+- **A 静态**：全仓 UI 图标位零 emoji 残留（判据与基准扫描器同源：控件首位 / 图标槽 class / 标题前缀 / CSS content）；
+- **B 实测**：浏览器实开 4 个代表页 × **2 套环境**（`file://` 与 `http://127.0.0.1`）——校验内联 SVG 的 computed `stroke≠none` 且 `fill=none`、尺寸跟随字号（非巨图）、CSS content 位的同源 mask 已加载、自建图标资产零加载失败。
+- **B 段的存在理由**：W941 批的静态判据全绿却漏掉「黑块」⇒ **静态判据无法覆盖「渲染正确」**，必须有浏览器实跑。
+
+**门禁在双环境下的判据设计（如实登记）**：`http://`（= 线上同源·真实用户环境）全部判据严格——CSS `content` 位的同源 mask 在此环境**全部加载成功**（实测 7/7）；`file://`（本地双击）下同源 mask 被 CORS 拦 ⇒ 该 22 处图标在本地不显示、线上正常 ⇒ 门禁在 file:// 下记 NOTE 不判红（与该环境既有的字体子集 CORS、fetch 不支持 file scheme 同级），在 http 下判红。**待修项已登记**：把这 22 处改为真实内联 SVG 元素（11 个选择器 × 中英两版）可彻底消除该降级，属独立批。
+
+**顺带修掉两个自查发现的真 bug**：① `TL_ICO` 映射曾被插到使用点之后（`TL_ICO is not defined`）⇒ 改为插入使用点所在 script 块开头；② 映射表的对象键含连字符（`tl-critical-edition`）未加引号 ⇒ JS 语法错误（`Unexpected token '-'`）⇒ 键一律加引号；③ 渲染从 `.text(d => d.icon)` 改写时**漏掉 D3 回调箭头**（`.html(TL_ICO[d.icon])`）⇒ `d is not defined` ⇒ 改回 `.html(d => TL_ICO[d.icon] || '')`。
+
+**验收**：第 50 门禁 **PASS**（静态 0 处残留 + 双环境实测 0 判红项）· timeline 22 事件 22 个内联 SVG 渲染正确（file:// 实测 `svgIco=22`、无 pageerror）· 内联 SVG 描边浅色=墨色/暗色=朱砂 · CSP 856 页 0 漂移。
+
+**未改**：正文装饰 emoji 与箭头符号（按裁决保留）；W941 已入库的 1,957 处 HTML 结构（仅修 CSS 与模板）；并行批次在途件（hero 素材批 / W945 题图批等）一律未纳入本提交。
+
+### W945（2026-10-25）：内页专题题图成套（8 张 3:4 线描人物题图·622 页仅 11 页有题图的缺口）
+
+> **来源**：用户 2026-10-25 令「在继续帮我做几张素材图：用途与画幅、风格与配色统一、主体清晰、留好放文字的空间都考虑到，成套出图保证风格一致」，并要求开工前先问三件事。
+>
+> **三问答复**：① 用途与画幅 = **内页专题题图 · 3:4 竖版** ② 张数 = **8 张** ③ 参考风格 = **沿用站内线描墨稿风**（附加题材范围 = **人物专题**）。
+>
+> - **文件**：site/static/images/plate-line-01~08-*.webp、assets/promo/plate-set/**、8 个 reader 专题页、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/_w945_cascade.py、scripts/_w945_plates_verify.py、scripts/_w945_insert_plates.py
+
+**缺口**：站内 `site/reader/` 共 **622 页**，其中**仅 11 页**有题图（6 个回目页 + 5 个专题页）——people / themes / essays / poetry / culture 五库绝大部分页面无题图。
+
+**产出**：8 张**线描墨稿风人物题图**，3:4 竖版（`1200×1600`），沿用站内线描语言（宣纸底 `#FAF7F0` + 单色墨线 + 赭金 `#8A6D3B` 细节 + 单处朱砂 `#C8463A` 点睛），**上部 28% 保持纯纸面留白**供标题叠字，主体居中偏下：
+
+| # | 主体 | 独占标志物（形制级） | 接入页 |
+|---|---|---|---|
+| 01 | 大圣悟空 | 如意金箍棒（两端金箍 + 云纹）+ 凤翅紫金冠 | themes/猴王到行者-五次蜕变 |
+| 02 | 唐僧 | 五佛冠 + 念珠 + 九环锡杖 | themes/唐僧-凡躯圣心 |
+| 03 | 猪八戒 | 九齿钉耙 + 蒲扇耳 | people/猪八戒 |
+| 04 | 沙僧 | 降妖宝杖（月牙刃）+ 骷髅念珠 | themes/沙僧-沉默者的智慧 |
+| 05 | 观音菩萨 | 玉净瓶插杨柳枝 + 莲花座 | people/观音 |
+| 06 | 二郎神 | 三尖两刃刀 + 额间竖目 | people/二郎神 |
+| 07 | 白骨精 | 三变残影（村姑 / 老妇 / 老翁） | people/白骨精 |
+| 08 | 红孩儿 | 火尖枪 + 三昧真火 | people/红孩儿 |
+
+**接入范式**：沿用站内 `chapter-plate`（`max-width: 420px` 居中 + 描述性 alt + 浅底图暗色模式隐藏）。
+
+**判据**：J1–J7 机器关（尺寸 / 顶部留白 / 墨量 / 朱砂点 / 实心块 / 伪文字 / 裁切）+ **J8 人工关**（独占标志物 + 形制级细节）——题材与形制机器判据查不出，只能人眼核。
+
+> - **验证**：（见本批脚本输出与对账表回填）
+> - **状态**：在途（认领登记 W945·待提交入库）
 
 ### W944（2026-10-25）：章回插画新组（6 张按回目情节重出·打破「挑担人赶路」同构）
 
