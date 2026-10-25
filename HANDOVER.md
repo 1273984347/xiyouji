@@ -195,6 +195,7 @@
 - ~~**图谱关系语义增强**~~：✅ 已完成（W340·边按关系类型着色+语义权重粗细+关系类型筛选+钻取面板「语义关系汇总」+属性/取值富展示+悬停边见关系·属性·取值+整数id钻取修复）
 - ~~**RAG 真实生成（需 LLM key·档 B·原唯独阻塞）**~~：✅ 已完成（W402·provider 化 Base URL + LLM_API_KEY 配于本地 .env 即接通真实生成·key 存在即生成/无 key 回退模板·可选 embedding 向量检索增强；W358 前端 draft 渲染 + 后端 history 多轮上下文接缝）。**平行替代入口**：启用 `xiyouji-agent-web`（Web Agent「西游记·渡口问津」·OpenAI-compatible 自研引擎·引擎三键配于服务端 .env·PROJECT_CWD=仓库根（自动解析·W596）·直接对话/检索 docs/ + 跑 scripts/ + 写 dataset/），配好引擎三键即开箱"能问"（W680 起），与 scripts/rag 档B 二选一或并行（详见 `xiyouji-agent-web/README.md`）
 - ~~**发布与可发现性**~~：✅ 已完成（W390 GitHub Pages 上线 `https://1273984347.github.io/xiyouji/` + W399 SEO 域名补全 sitemap/robots + W394-W398 英文站 batch1-5 扩至 65 文件）
+- **手搓绕过级联治理批（候选·W965 立项登记）**：并行会话手写版本面绕过 batch_cascade 的模式治理——实证三起（W955 手搓版本面同步破坏 README·A1-A6 锚尾与 STRUCTURE 现势行、W961/W963 连环手搓致 HEAD 句尾失范与尾链 4 条粘连、里程碑块只插不旋致窗口积 19 块）；候选方案三层：① 级联单写路径文件锁（级联运行期对十面文件加锁·他方写即拒）、② 版本行契约硬门禁挂 verify（·A1-A6 锚尾/HEAD 句尾/尾链 ≤3 的形态判据——现在只在级联 assert 与 review 时现形）、③ 手搓前置劝导（preflight 检测工作树含十面文件未提交改动即提示「请走 batch_cascade」）；评审口径：②最薄（纯判据不挡路）优先，①最强但需处理级联自身的临时索引写。
 - **内容质量深化（非增量）**：A1 逐回补交叉引用/结构化元数据、A5/A6 提质、全站死链与术语统一
 
 ### A 方向：docs 内容扩容

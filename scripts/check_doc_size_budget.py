@@ -108,12 +108,24 @@ def collect():
             if "AGENTS" in rel:
                 fs = t.find("*本文件由")
                 if fs >= 0:
-                    fkb = len(t[fs:t.find("\n", fs)].encode("utf-8")) / 1024
+                    fline = t[fs:t.find("\n", fs)]
+                    fkb = len(fline.encode("utf-8")) / 1024
                     extra = "  版本脚注 %.1f KB" % fkb
                     if fkb > 4:
                         extra_fails.append(
                             "体积窗口 C3: AGENTS.md 版本脚注 %.1f KB > 4 KB——滚动器切分失明或条目超长"
                             "（W964 定形契约·修法=双形态切分+条目 ≤300 字+存量迁归档）" % fkb)
+                    # W965 C4：逐条定形判据（比聚合 4KB 更细——五条各 290 字的脚注可绕过 C3）
+                    bad = []
+                    for e in re.split(r"；(?=20\d{2}-\d{2}-\d{2}（)", fline)[1:]:
+                        if not re.match(r"^20\d{2}-\d{2}-\d{2}（W\d{3}）", e):
+                            bad.append("条目头非阿拉伯形态：" + e[:24])
+                        elif len(e) > 300:
+                            bad.append("条目 %d 字 > 300：%s…" % (len(e), e[:24]))
+                    if bad:
+                        extra_fails.append(
+                            "体积窗口 C4: AGENTS.md 脚注 %d 条违规定形（W965 逐条判据）：%s"
+                            % (len(bad), "；".join(bad[:3])))
             lines.append("体积报告  %-38s %7.1f KB %6d 行%s" % (rel, kb, nlines, extra))
     return counts, lines, extra_fails
 
