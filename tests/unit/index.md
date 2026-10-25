@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（41）
+## 文件（42）
 
 ### Python 脚本
 
@@ -34,6 +34,7 @@
 - `test_embed_json.py`
 - `test_folder_docs_gate.py`
 - `test_lint_links_refactor.py`
+- `test_milestone_block_regex.py`
 - `test_new_page.py`
 - `test_obs_sample.py`
 - `test_page_router.py`
