@@ -11,6 +11,13 @@
 ---
 
 
+## W971 存量段状态回填批（2026-10-26）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CHANGELOG.md | W971 | 102 段补状态行（99 已收官+1 补号+2 保留） |
+| scripts/_w929_stats_sync.py | W971 | 品牌字面量残留清偿（PR #66 品牌检查红项） |
+
 ## W970 台账归档行工具批（2026-10-26）
 
 | 文件 | W | 说明 |
@@ -3131,78 +3138,4 @@
 | docs/11-方案报告/README.md | W854 | §二 报告登记（随 W855 提交带入） |
 | docs/00-导读/W批次编号对账表.md | W854 | 认领行（随 W855 提交带入）与补段批回填 |
 
-
-## W853 卡片封面素材图成套批（2026-10-21）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/card-01-huoshan.webp | W853 | 新增：卡片封面 01/12·火焰山（赭金山脊+朱砂山光+一缕烟·净空带 299px） |
-| site/static/images/card-02-tongtianhe.webp | W853 | 新增：卡片封面 02/12·通天河（冰河中央水道+渡舟与旅人剪影·净空带 324px） |
-| site/static/images/card-03-shituoling.webp | W853 | 新增：卡片封面 03/12·狮驼岭（崖上三魔剪影·无面目·净空带 299px） |
-| site/static/images/card-04-dushuangxuejiang.webp | W853 | 新增：卡片封面 04/12·寒江独钓（蓑笠翁与孤舟·大留白·净空带 617px） |
-| site/static/images/card-05-mingyuesongjian.webp | W853 | 新增：卡片封面 05/12·明月松间（赭金月轮+松针枯笔·净空带 424px） |
-| site/static/images/card-06-yunshenzhibu.webp | W853 | 新增：卡片封面 06/12·云深不知处（层叠山脊+云隙小寺与石阶·净空带 311px） |
-| site/static/images/card-07-baiyao.webp | W853 | 新增：卡片封面 07/12·百妖列阵（九种妖形剪影并排·无面目·净空带 443px） |
-| site/static/images/card-08-zhuowuquan.webp | W853 | 新增：卡片封面 08/12·濯垢泉（洞中蛛网+垂丝+泉池·净空带 364px） |
-| site/static/images/card-09-sanyao.webp | W853 | 新增：卡片封面 09/12·三妖剪径（虎鹿羊三形+朱砂残旗·净空带 334px） |
-| site/static/images/card-10-gusichenzhong.webp | W853 | 新增：卡片封面 10/12·古刹晨钟（古刹藏于老松+晨雾+孤僧·净空带 400px） |
-| site/static/images/card-11-songyunshitan.webp | W853 | 新增：卡片封面 11/12·松云石坛（崖上古松+云气+石坛·净空带 300px） |
-| site/static/images/card-12-shuyuanxingtantan.webp | W853 | 新增：卡片封面 12/12·书院杏坛（低案两列+梅枝+学子剪影·净空带 299px） |
-| scripts/output/_w853_spec.json | W853 | 本批 spec 十字段（CHANGELOG 版段递延·待号序链恢复后补写） |
-| docs/00-导读/W批次编号对账表.md | W853 | 认领行与收官回填 |
-
-
-## W852 站点 Hero 素材图成套批（2026-10-21）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/hero-01-xihai-yunhai.webp | W852 | 新增：Hero 素材 01/06·西行山河云海（山脊云海+七人单行+朱砂小旗·净空带 599px） |
-| site/static/images/hero-02-shitu-wuxing.webp | W852 | 新增：Hero 素材 02/06·师徒五人组像（白马+猴+猪+二僧·净空带 320px·二版） |
-| site/static/images/hero-03-fabao-qiji.webp | W852 | 新增：Hero 素材 03/06·法宝器物静物（金箍棒+七宝妙树+袈裟+九环锡杖·净空带 568px·三版） |
-| site/static/images/hero-04-tiangting-yunmo.webp | W852 | 新增：Hero 素材 04/06·天庭云阙（宫阙+云台+右侧幽冥门与水影·净空带 423px·三版） |
-| site/static/images/hero-05-huangmo-gulu.webp | W852 | 新增：Hero 素材 05/06·荒漠孤旅（风蚀峡谷+孤旅与白马+朱砂布条·净空带 513px·三版） |
-| site/static/images/hero-06-fotu-chengque.webp | W852 | 新增：Hero 素材 06/06·佛国城阙（石柱牌坊+层叠殿顶+五人来朝·净空带 491px） |
-| scripts/output/_w852_spec.json | W852 | 本批 spec 十字段（CHANGELOG 版段递延·待顶段推进后补写） |
-| docs/00-导读/W批次编号对账表.md | W852 | 认领行与收官回填 |
-
-
-## W851 设计迁移阶段 1 令牌落地批（2026-10-21）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/tokens.css | W851 | v4 令牌增量落地：34 个零消费新名 / 35 处定义（间距 13 + 语义 gap 6 + 容器三档 3 + 栅格 2 + 排版角色 9 + accent-text 浅暗各 1）·20,799 → 23,039 B |
-| scripts/_w851_j1_name_audit.py | W851 | 新增：J1 命名冲突审计（三面交集 + var() 零消费 + defer 复证 + defer 持有·双向可失败） |
-| scripts/_w851_visual_regression_probe.py | W851 | 新增：J2 视觉回归探针（15s 地板 + DOM 静默收敛 + 29 属性固定序对拍·自测 4/4） |
-| tests/unit/test_w851_visual_regression_probe.py | W851 | 新增：12 例（计数不齐不掩属性·属性定位·采样面 ≥20·PROPS 固定序·地板常量） |
-| tests/unit/test_w851_j1_name_audit.py | W851 | 新增：9 例（-- 前缀回归·defer 双向可失败·暗色块并集·对真实 tokens.css 的 defer 持有） |
-| scripts/output/_w851_j1_name_audit.json | W851 | 新增：J1 审计产物（预检 + 落地复验） |
-| scripts/output/_w851_tokens_prelanding.css | W851 | 新增：落地前 tokens.css 副本（预检对拍基准·git show HEAD 取证） |
-| scripts/output/_w851_visual_snapshot_before.json | W851 | 新增：J2 before 快照（23 页 × 双主题·置换前态） |
-| scripts/output/_w851_visual_snapshot_after.json | W851 | 新增：J2 after 快照（终态·与 before 对拍零差异） |
-| scripts/output/_w851_visual_snapshot_freeze_before.json | W851 | 新增：预支页冻结前快照（探针缺陷发现证据） |
-| scripts/output/_w851_visual_snapshot_freeze_after.json | W851 | 新增：预支页冻结后快照 |
-| scripts/output/design-tokens.json | W851 | 再生成：132 键（light 103 / dark 29·+35 处 v4 增量） |
-| docs/00-导读/design.md | W851 | 再生成：设计令牌消费文档（与 tokens.css 逐字节一致） |
-| DESIGN.md | W851 | §4A.8 tokens 预算 +2KB → +3KB（基线 20,799 → 上限 23,799·废止 v3 前口径）·新增 §4C v4 设计迁移章 |
-| site/data/journey-geo-semiotics.html | W851 | 预支引用冻结：var(--space-N, 回退值) → 当前字面值（11 处·渲染零变化） |
-| site/en/journey-geo-semiotics.html | W851 | 预支引用冻结：同上（11 处） |
-| pytest.ini | W851 | collected 标记 797 比 818（新增 21 例） |
-| docs/00-导读/W批次编号对账表.md | W851 | 认领行订正（34 名/35 处口径·三坑实录）与收官回填 |
-| scripts/output/_w851_spec.json | W851 | 本批 spec 十字段 |
-| scripts/output/_w851_j2_evidence.json | W851 | 新增：J2 判词摘要（零差异 + 双快照 sha256 + 逐页元素计数） |
-
-## W850 Q2 取数基建批（2026-10-21）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/obs_sample.py | W850 | 新增：Q2 采样件（OBS-10 静态扫描 / OBS-11 每页 3 次取中位实测 LCP / OBS-14 首 token·显式开关·按指标计十批） |
-| tests/unit/test_obs_sample.py | W850 | 新增：9 例（含启发式拒收、中位数剔除尖峰、代理陷阱、按指标进度、去重覆盖） |
-| scripts/output/obs_samples.json | W850 | 新增：OBS 样本库（首笔含 OBS-10 全站扫描与 OBS-11 五页每页三次中位实测） |
-| pytest.ini | W850 | collected 标记 787 比 797（新增 9 例加新脚本 import 冒烟） |
-| AGENTS.md | W850 | §4.2 导读与正文槽数 46 与 45 顺修至 47·分组头 27-45 顺修至 27-47 |
-| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W850 | §12.2 Q2 行与 §11.2 采样件说明·「46 槽」14 处与 A-04 期望值顺修至 47 |
-| docs/11-方案报告/静态站前端框架化选型对比-2026-10-20.md | W850 | 「46 槽」8 处存量漂移顺修至 47 |
-| scripts/output/stats.json | W850 | pytest_collected 797 刷新（gate_count 仍 47） |
-| scripts/output/_w850_spec.json | W850 | 本批 spec 十字段 |
-| docs/00-导读/W批次编号对账表.md | W850 | 认领行与收官回填 |
 
