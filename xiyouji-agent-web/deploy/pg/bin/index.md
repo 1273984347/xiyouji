@@ -11,12 +11,16 @@
 
 - （无）
 
-## 文件（5）
+## 文件（6）
 
 ### Python 脚本
 
 - `_mutation_test.py`
 - `verify-baseline.py`
+
+### JavaScript / TypeScript
+
+- `migrate-sqlite-to-pg.ts`
 
 ### 其他
 

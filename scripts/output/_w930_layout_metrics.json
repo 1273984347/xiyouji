@@ -1,0 +1,2554 @@
+[
+ {
+  "vw": 1440,
+  "vh": 900,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "overflowX": false,
+  "docH": 5152,
+  "blocks": [
+   {
+    "tag": "section",
+    "cls": "masthead",
+    "top": 81,
+    "h": 416,
+    "w": 1440,
+    "inFold": true,
+    "text": "MING DYNASTY · WU CHENG'EN · 100 C"
+   },
+   {
+    "tag": "div",
+    "cls": "page-wrap",
+    "top": 497,
+    "h": 774,
+    "w": 1320,
+    "inFold": true,
+    "text": "START READING 从哪一回读起 100 回逐回精读，每回附"
+   },
+   {
+    "tag": "svg",
+    "cls": "[object SVGAnimatedString]",
+    "top": 1271,
+    "h": 100,
+    "w": 1440,
+    "inFold": false,
+    "text": ""
+   },
+   {
+    "tag": "div",
+    "cls": "page-wrap",
+    "top": 1371,
+    "h": 2300,
+    "w": 1320,
+    "inFold": false,
+    "text": "LOOK UP 查资料 站内检索、精选入口与全卷索引——要找的都在这"
+   },
+   {
+    "tag": "section",
+    "cls": "dark-band",
+    "top": 3671,
+    "h": 358,
+    "w": 1440,
+    "inFold": false,
+    "text": "混沌未分天地乱，茫茫渺渺无人见。 自从盘古破鸿蒙，开辟从兹清浊辨。 "
+   },
+   {
+    "tag": "div",
+    "cls": "page-wrap",
+    "top": 4029,
+    "h": 853,
+    "w": 1320,
+    "inFold": false,
+    "text": "EXPLORE 看数据与工具 项目量级、可视化看板与两件常用工具。 "
+   }
+  ],
+  "aboveFoldEls": 56,
+  "textEls": 182,
+  "interactive": 61,
+  "smallTargets": 14,
+  "smallSample": [
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 28,
+    "h": 25
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 28,
+    "h": 25
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 28,
+    "h": 25
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 28,
+    "h": 25
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 28,
+    "h": 25
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 56,
+    "h": 25
+   },
+   {
+    "tag": "a",
+    "cls": "text-mono text-xs text-faint",
+    "w": 18,
+    "h": 25
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 220,
+    "h": 19
+   }
+  ],
+  "paraSample": [],
+  "containers": {
+   ".page-wrap": {
+    "w": 1320,
+    "maxw": "1320px",
+    "pad": "86.4px/86.4px"
+   },
+   "main": {
+    "w": 1440,
+    "maxw": "none",
+    "pad": "0px/0px"
+   },
+   ".masthead": {
+    "w": 1440,
+    "maxw": "none",
+    "pad": "86.4px/86.4px"
+   },
+   ".ask-hero": {
+    "w": 1147,
+    "maxw": "none",
+    "pad": "24px/24px"
+   }
+  },
+  "heads": [
+   {
+    "t": "H1",
+    "text": "取经录",
+    "fs": "56px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "从哪一回读起",
+    "fs": "40px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "灵根育孕源流出",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "乱蟠桃大圣偷丹",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "尸魔三戏唐三藏",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "二心搅乱大乾坤",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "查资料",
+    "fs": "40px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "精选必看",
+    "fs": "24px",
+    "mt": "32px"
+   },
+   {
+    "t": "H3",
+    "text": "百回结构图谱",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "人物动态网络",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "取经时空",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "西游地理 3D",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "叙事学十三维",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "批评史长卷",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "情感热力图",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "跨时空弹幕",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "原著全文检索",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "全卷索引",
+    "fs": "24px",
+    "mt": "32px"
+   },
+   {
+    "t": "H2",
+    "text": "看数据与工具",
+    "fs": "40px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "数据看板",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "标签云",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "全文检索",
+    "fs": "20px",
+    "mt": "0px"
+   }
+  ],
+  "gridCols": 3,
+  "file": "index.html",
+  "tag": "home",
+  "width": 1440,
+  "height": 900,
+  "consoleErrors": [
+   "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+  ],
+  "shot": "home-index_html-1440.png"
+ },
+ {
+  "vw": 768,
+  "vh": 1024,
+  "scrollW": 768,
+  "clientW": 768,
+  "overflowX": false,
+  "docH": 6255,
+  "blocks": [
+   {
+    "tag": "section",
+    "cls": "masthead",
+    "top": 73,
+    "h": 477,
+    "w": 768,
+    "inFold": true,
+    "text": "MING DYNASTY · WU CHENG'EN · 100 C"
+   },
+   {
+    "tag": "div",
+    "cls": "page-wrap",
+    "top": 550,
+    "h": 648,
+    "w": 768,
+    "inFold": true,
+    "text": "START READING 从哪一回读起 100 回逐回精读，每回附"
+   },
+   {
+    "tag": "svg",
+    "cls": "[object SVGAnimatedString]",
+    "top": 1198,
+    "h": 100,
+    "w": 768,
+    "inFold": false,
+    "text": ""
+   },
+   {
+    "tag": "div",
+    "cls": "page-wrap",
+    "top": 1298,
+    "h": 3289,
+    "w": 768,
+    "inFold": false,
+    "text": "LOOK UP 查资料 站内检索、精选入口与全卷索引——要找的都在这"
+   },
+   {
+    "tag": "section",
+    "cls": "dark-band",
+    "top": 4587,
+    "h": 260,
+    "w": 768,
+    "inFold": false,
+    "text": "混沌未分天地乱，茫茫渺渺无人见。 自从盘古破鸿蒙，开辟从兹清浊辨。 "
+   },
+   {
+    "tag": "div",
+    "cls": "page-wrap",
+    "top": 4847,
+    "h": 1032,
+    "w": 768,
+    "inFold": false,
+    "text": "EXPLORE 看数据与工具 项目量级、可视化看板与两件常用工具。 "
+   }
+  ],
+  "aboveFoldEls": 54,
+  "textEls": 182,
+  "interactive": 61,
+  "smallTargets": 7,
+  "smallSample": [
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 220,
+    "h": 19
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 170,
+    "h": 21
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 108,
+    "h": 17
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 284,
+    "h": 21
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 72,
+    "h": 17
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 26,
+    "h": 35
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 26,
+    "h": 35
+   }
+  ],
+  "paraSample": [],
+  "containers": {
+   ".page-wrap": {
+    "w": 768,
+    "maxw": "1320px",
+    "pad": "46.08px/46.08px"
+   },
+   "main": {
+    "w": 768,
+    "maxw": "none",
+    "pad": "0px/0px"
+   },
+   ".masthead": {
+    "w": 768,
+    "maxw": "none",
+    "pad": "46.08px/46.08px"
+   },
+   ".ask-hero": {
+    "w": 676,
+    "maxw": "none",
+    "pad": "20px/20px"
+   }
+  },
+  "heads": [
+   {
+    "t": "H1",
+    "text": "取经录",
+    "fs": "28px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "从哪一回读起",
+    "fs": "24px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "灵根育孕源流出",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "乱蟠桃大圣偷丹",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "尸魔三戏唐三藏",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "二心搅乱大乾坤",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "查资料",
+    "fs": "24px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "精选必看",
+    "fs": "20px",
+    "mt": "32px"
+   },
+   {
+    "t": "H3",
+    "text": "百回结构图谱",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "人物动态网络",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "取经时空",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "西游地理 3D",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "叙事学十三维",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "批评史长卷",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "情感热力图",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "跨时空弹幕",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "原著全文检索",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "全卷索引",
+    "fs": "20px",
+    "mt": "32px"
+   },
+   {
+    "t": "H2",
+    "text": "看数据与工具",
+    "fs": "24px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "数据看板",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "标签云",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "全文检索",
+    "fs": "20px",
+    "mt": "0px"
+   }
+  ],
+  "gridCols": 2,
+  "file": "index.html",
+  "tag": "home",
+  "width": 768,
+  "height": 1024,
+  "consoleErrors": [
+   "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+  ],
+  "shot": "home-index_html-768.png"
+ },
+ {
+  "vw": 375,
+  "vh": 812,
+  "scrollW": 375,
+  "clientW": 375,
+  "overflowX": false,
+  "docH": 7942,
+  "blocks": [
+   {
+    "tag": "section",
+    "cls": "masthead",
+    "top": 73,
+    "h": 491,
+    "w": 375,
+    "inFold": true,
+    "text": "MING DYNASTY · WU CHENG'EN · 100 C"
+   },
+   {
+    "tag": "div",
+    "cls": "page-wrap",
+    "top": 564,
+    "h": 1023,
+    "w": 375,
+    "inFold": true,
+    "text": "START READING 从哪一回读起 100 回逐回精读，每回附"
+   },
+   {
+    "tag": "svg",
+    "cls": "[object SVGAnimatedString]",
+    "top": 1587,
+    "h": 100,
+    "w": 375,
+    "inFold": false,
+    "text": ""
+   },
+   {
+    "tag": "div",
+    "cls": "page-wrap",
+    "top": 1687,
+    "h": 4275,
+    "w": 375,
+    "inFold": false,
+    "text": "LOOK UP 查资料 站内检索、精选入口与全卷索引——要找的都在这"
+   },
+   {
+    "tag": "section",
+    "cls": "dark-band",
+    "top": 5962,
+    "h": 247,
+    "w": 375,
+    "inFold": false,
+    "text": "混沌未分天地乱，茫茫渺渺无人见。 自从盘古破鸿蒙，开辟从兹清浊辨。 "
+   },
+   {
+    "tag": "div",
+    "cls": "page-wrap",
+    "top": 6209,
+    "h": 1124,
+    "w": 375,
+    "inFold": false,
+    "text": "EXPLORE 看数据与工具 项目量级、可视化看板与两件常用工具。 "
+   }
+  ],
+  "aboveFoldEls": 38,
+  "textEls": 182,
+  "interactive": 61,
+  "smallTargets": 6,
+  "smallSample": [
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 220,
+    "h": 19
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 170,
+    "h": 21
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 108,
+    "h": 17
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 72,
+    "h": 17
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 25,
+    "h": 58
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 25,
+    "h": 58
+   }
+  ],
+  "paraSample": [],
+  "containers": {
+   ".page-wrap": {
+    "w": 375,
+    "maxw": "1320px",
+    "pad": "24px/24px"
+   },
+   "main": {
+    "w": 375,
+    "maxw": "none",
+    "pad": "0px/0px"
+   },
+   ".masthead": {
+    "w": 375,
+    "maxw": "none",
+    "pad": "24px/24px"
+   },
+   ".ask-hero": {
+    "w": 327,
+    "maxw": "none",
+    "pad": "20px/20px"
+   }
+  },
+  "heads": [
+   {
+    "t": "H1",
+    "text": "取经录",
+    "fs": "28px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "从哪一回读起",
+    "fs": "24px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "灵根育孕源流出",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "乱蟠桃大圣偷丹",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "尸魔三戏唐三藏",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "二心搅乱大乾坤",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "查资料",
+    "fs": "24px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "精选必看",
+    "fs": "20px",
+    "mt": "32px"
+   },
+   {
+    "t": "H3",
+    "text": "百回结构图谱",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "人物动态网络",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "取经时空",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "西游地理 3D",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "叙事学十三维",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "批评史长卷",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "情感热力图",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "跨时空弹幕",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "原著全文检索",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "全卷索引",
+    "fs": "20px",
+    "mt": "32px"
+   },
+   {
+    "t": "H2",
+    "text": "看数据与工具",
+    "fs": "24px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "数据看板",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "标签云",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "全文检索",
+    "fs": "20px",
+    "mt": "0px"
+   }
+  ],
+  "gridCols": 1,
+  "file": "index.html",
+  "tag": "home",
+  "width": 375,
+  "height": 812,
+  "consoleErrors": [
+   "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+  ],
+  "shot": "home-index_html-375.png"
+ },
+ {
+  "vw": 1440,
+  "vh": 900,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "overflowX": false,
+  "docH": 4734,
+  "blocks": [
+   {
+    "tag": "div",
+    "cls": "kpi-row",
+    "top": 553,
+    "h": 789,
+    "w": 1147,
+    "inFold": true,
+    "text": "CHAPTERS · 总回数 100 全部回目 AVG · 平均字数"
+   },
+   {
+    "tag": "section",
+    "cls": "section",
+    "top": 1342,
+    "h": 849,
+    "w": 1147,
+    "inFold": false,
+    "text": "章节聚类树状图 基于回目主题与情节单元，将 100 回层次聚类为 8"
+   },
+   {
+    "tag": "section",
+    "cls": "section",
+    "top": 2191,
+    "h": 1372,
+    "w": 1147,
+    "inFold": false,
+    "text": "回目对偶矩阵 10×10 网格：横轴为上联字数对仗强度，纵轴为下联字"
+   },
+   {
+    "tag": "section",
+    "cls": "section",
+    "top": 3563,
+    "h": 615,
+    "w": 1147,
+    "inFold": false,
+    "text": "回目字数分布 100 回字数分布柱状图，橙色为最长回目（第 41 回"
+   },
+   {
+    "tag": "section",
+    "cls": "section",
+    "top": 4177,
+    "h": 283,
+    "w": 1147,
+    "inFold": false,
+    "text": "相关页面 本页与 chapter-stats.html 形成\"统计-"
+   },
+   {
+    "tag": "figure",
+    "cls": "viz-illustration",
+    "top": 4524,
+    "h": 0,
+    "w": 420,
+    "inFold": false,
+    "text": ""
+   }
+  ],
+  "aboveFoldEls": 49,
+  "textEls": 211,
+  "interactive": 20,
+  "smallTargets": 13,
+  "smallSample": [
+   {
+    "tag": "button",
+    "cls": "cite-copy",
+    "w": 44,
+    "h": 26
+   },
+   {
+    "tag": "button",
+    "cls": "cite-copy",
+    "w": 44,
+    "h": 26
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 28,
+    "h": 25
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 56,
+    "h": 25
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 42,
+    "h": 25
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 56,
+    "h": 25
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 24,
+    "h": 17
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 48,
+    "h": 17
+   }
+  ],
+  "paraSample": [
+   {
+    "w": 1147,
+    "fs": "14.72px",
+    "lh": "29.44px",
+    "n": 73
+   }
+  ],
+  "containers": {
+   ".page-wrap": {
+    "w": 1320,
+    "maxw": "1320px",
+    "pad": "86.4px/86.4px"
+   },
+   "main": {
+    "w": 1320,
+    "maxw": "1320px",
+    "pad": "86.4px/86.4px"
+   }
+  },
+  "heads": [
+   {
+    "t": "H1",
+    "text": "回目结构图谱",
+    "fs": "44px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "章节聚类树状图",
+    "fs": "40px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "回目对偶矩阵",
+    "fs": "40px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "回目字数分布",
+    "fs": "40px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "相关页面",
+    "fs": "40px",
+    "mt": "0px"
+   }
+  ],
+  "gridCols": null,
+  "file": "data/chapter-structure-graph.html",
+  "tag": "viz",
+  "width": 1440,
+  "height": 900,
+  "consoleErrors": [],
+  "shot": "viz-data_chapter-structure-graph_html-1440.png"
+ },
+ {
+  "vw": 375,
+  "vh": 812,
+  "scrollW": 375,
+  "clientW": 375,
+  "overflowX": false,
+  "docH": 3388,
+  "blocks": [
+   {
+    "tag": "div",
+    "cls": "kpi-row",
+    "top": 522,
+    "h": 789,
+    "w": 327,
+    "inFold": true,
+    "text": "CHAPTERS · 总回数 100 全部回目 AVG · 平均字数"
+   },
+   {
+    "tag": "section",
+    "cls": "section",
+    "top": 1311,
+    "h": 579,
+    "w": 327,
+    "inFold": false,
+    "text": "章节聚类树状图 基于回目主题与情节单元，将 100 回层次聚类为 8"
+   },
+   {
+    "tag": "section",
+    "cls": "section",
+    "top": 1890,
+    "h": 625,
+    "w": 327,
+    "inFold": false,
+    "text": "回目对偶矩阵 10×10 网格：横轴为上联字数对仗强度，纵轴为下联字"
+   },
+   {
+    "tag": "section",
+    "cls": "section",
+    "top": 2515,
+    "h": 311,
+    "w": 327,
+    "inFold": false,
+    "text": "回目字数分布 100 回字数分布柱状图，橙色为最长回目（第 41 回"
+   },
+   {
+    "tag": "section",
+    "cls": "section",
+    "top": 2826,
+    "h": 238,
+    "w": 327,
+    "inFold": false,
+    "text": "相关页面 本页与 chapter-stats.html 形成\"统计-"
+   },
+   {
+    "tag": "figure",
+    "cls": "viz-illustration",
+    "top": 3096,
+    "h": 0,
+    "w": 327,
+    "inFold": false,
+    "text": ""
+   }
+  ],
+  "aboveFoldEls": 41,
+  "textEls": 210,
+  "interactive": 20,
+  "smallTargets": 8,
+  "smallSample": [
+   {
+    "tag": "button",
+    "cls": "cite-copy",
+    "w": 44,
+    "h": 26
+   },
+   {
+    "tag": "button",
+    "cls": "cite-copy",
+    "w": 44,
+    "h": 26
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 24,
+    "h": 17
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 48,
+    "h": 17
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 224,
+    "h": 21
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 62,
+    "h": 21
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 26,
+    "h": 58
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 26,
+    "h": 58
+   }
+  ],
+  "paraSample": [
+   {
+    "w": 327,
+    "fs": "14.72px",
+    "lh": "29.44px",
+    "n": 73
+   }
+  ],
+  "containers": {
+   ".page-wrap": {
+    "w": 375,
+    "maxw": "1320px",
+    "pad": "24px/24px"
+   },
+   "main": {
+    "w": 375,
+    "maxw": "1320px",
+    "pad": "24px/24px"
+   }
+  },
+  "heads": [
+   {
+    "t": "H1",
+    "text": "回目结构图谱",
+    "fs": "28px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "章节聚类树状图",
+    "fs": "24px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "回目对偶矩阵",
+    "fs": "24px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "回目字数分布",
+    "fs": "24px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "相关页面",
+    "fs": "24px",
+    "mt": "0px"
+   }
+  ],
+  "gridCols": null,
+  "file": "data/chapter-structure-graph.html",
+  "tag": "viz",
+  "width": 375,
+  "height": 812,
+  "consoleErrors": [],
+  "shot": "viz-data_chapter-structure-graph_html-375.png"
+ },
+ {
+  "vw": 1440,
+  "vh": 900,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "overflowX": false,
+  "docH": 3072,
+  "blocks": [
+   {
+    "tag": "nav",
+    "cls": "reader-topnav",
+    "top": 0,
+    "h": 54,
+    "w": 728,
+    "inFold": true,
+    "text": "详解西游记 · 站内阅读 站点首页 在 GitHub 查看源文件"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-toolbar",
+    "top": 82,
+    "h": 49,
+    "w": 728,
+    "inFold": true,
+    "text": "☆ 收藏本页 展开全部 字号 A− A＋"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-progress",
+    "top": 0,
+    "h": 3,
+    "w": 0,
+    "inFold": true,
+    "text": ""
+   },
+   {
+    "tag": "article",
+    "cls": "reader-body",
+    "top": 150,
+    "h": 2618,
+    "w": 728,
+    "inFold": true,
+    "text": "第001回 灵根育孕源流出 心性修持大道生 生成来源：初始批量导入（"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-feedback",
+    "top": 2812,
+    "h": 98,
+    "w": 728,
+    "inFold": false,
+    "text": "这页有帮助吗？ 👍 有帮助👎 待改进"
+   },
+   {
+    "tag": "nav",
+    "cls": "reader-pn",
+    "top": 2954,
+    "h": 45,
+    "w": 728,
+    "inFold": false,
+    "text": "← 上一篇（无）下一篇 →"
+   }
+  ],
+  "aboveFoldEls": 36,
+  "textEls": 148,
+  "interactive": 19,
+  "smallTargets": 16,
+  "smallSample": [
+   {
+    "tag": "a",
+    "cls": "brand",
+    "w": 146,
+    "h": 25
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 56,
+    "h": 25
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 136,
+    "h": 25
+   },
+   {
+    "tag": "button",
+    "cls": "",
+    "w": 90,
+    "h": 31
+   },
+   {
+    "tag": "button",
+    "cls": "",
+    "w": 74,
+    "h": 31
+   },
+   {
+    "tag": "button",
+    "cls": "",
+    "w": 37,
+    "h": 31
+   },
+   {
+    "tag": "button",
+    "cls": "",
+    "w": 43,
+    "h": 31
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 68,
+    "h": 25
+   }
+  ],
+  "paraSample": [
+   {
+    "w": 666,
+    "fs": "17px",
+    "lh": "32.3px",
+    "n": 72
+   },
+   {
+    "w": 728,
+    "fs": "17px",
+    "lh": "32.3px",
+    "n": 68
+   },
+   {
+    "w": 696,
+    "fs": "17px",
+    "lh": "32.3px",
+    "n": 94
+   },
+   {
+    "w": 696,
+    "fs": "17px",
+    "lh": "32.3px",
+    "n": 81
+   },
+   {
+    "w": 728,
+    "fs": "17px",
+    "lh": "32.3px",
+    "n": 117
+   },
+   {
+    "w": 728,
+    "fs": "17px",
+    "lh": "32.3px",
+    "n": 100
+   },
+   {
+    "w": 728,
+    "fs": "17px",
+    "lh": "32.3px",
+    "n": 99
+   },
+   {
+    "w": 728,
+    "fs": "17px",
+    "lh": "32.3px",
+    "n": 97
+   }
+  ],
+  "containers": {
+   ".reader-wrap": {
+    "w": 760,
+    "maxw": "760px",
+    "pad": "16px/16px"
+   },
+   "main": {
+    "w": 760,
+    "maxw": "760px",
+    "pad": "16px/16px"
+   }
+  },
+  "heads": [
+   {
+    "t": "H1",
+    "text": "第001回 灵根育孕源流出 心性修持大道生",
+    "fs": "28px",
+    "mt": "12px"
+   },
+   {
+    "t": "H2",
+    "text": "原文回目",
+    "fs": "21px",
+    "mt": "34px"
+   },
+   {
+    "t": "H2",
+    "text": "重点要点",
+    "fs": "21px",
+    "mt": "34px"
+   },
+   {
+    "t": "H3",
+    "text": "一、宇宙观的开场",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H3",
+    "text": "二、石猴的\"天生地长\"",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H3",
+    "text": "三、称王的逻辑",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H3",
+    "text": "四、远虑与道心",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H2",
+    "text": "伏笔与悬念",
+    "fs": "21px",
+    "mt": "34px"
+   },
+   {
+    "t": "H2",
+    "text": "名句赏析",
+    "fs": "21px",
+    "mt": "34px"
+   },
+   {
+    "t": "H2",
+    "text": "个人札记",
+    "fs": "21px",
+    "mt": "34px"
+   },
+   {
+    "t": "H3",
+    "text": "SD001 · 那块石头里，藏着所有故事的起点",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H3",
+    "text": "一、十二万九千六百岁的「留白」",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H3",
+    "text": "二、金光射斗府：灵性的第一次外显",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H3",
+    "text": "三、水帘洞：一场「敢」与「不敢」的筛选",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H3",
+    "text": "四、三五百年后的 existential crisi",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H3",
+    "text": "五、从傲来国到斜月三星洞：寻仙即寻心",
+    "fs": "18px",
+    "mt": "24px"
+   }
+  ],
+  "gridCols": null,
+  "file": "reader/ch001.html",
+  "tag": "reader",
+  "width": 1440,
+  "height": 900,
+  "consoleErrors": [],
+  "shot": "reader-reader_ch001_html-1440.png"
+ },
+ {
+  "vw": 375,
+  "vh": 812,
+  "scrollW": 375,
+  "clientW": 375,
+  "overflowX": false,
+  "docH": 4243,
+  "blocks": [
+   {
+    "tag": "nav",
+    "cls": "reader-topnav",
+    "top": 0,
+    "h": 92,
+    "w": 343,
+    "inFold": true,
+    "text": "详解西游记 · 站内阅读 站点首页 在 GitHub 查看源文件"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-toolbar",
+    "top": 120,
+    "h": 49,
+    "w": 343,
+    "inFold": true,
+    "text": "☆ 收藏本页 展开全部 字号 A− A＋"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-progress",
+    "top": 0,
+    "h": 3,
+    "w": 0,
+    "inFold": true,
+    "text": ""
+   },
+   {
+    "tag": "article",
+    "cls": "reader-body",
+    "top": 189,
+    "h": 3751,
+    "w": 343,
+    "inFold": true,
+    "text": "第001回 灵根育孕源流出 心性修持大道生 生成来源：初始批量导入（"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-feedback",
+    "top": 3983,
+    "h": 98,
+    "w": 343,
+    "inFold": false,
+    "text": "这页有帮助吗？ 👍 有帮助👎 待改进"
+   },
+   {
+    "tag": "nav",
+    "cls": "reader-pn",
+    "top": 4125,
+    "h": 45,
+    "w": 343,
+    "inFold": false,
+    "text": "← 上一篇（无）下一篇 →"
+   }
+  ],
+  "aboveFoldEls": 28,
+  "textEls": 148,
+  "interactive": 19,
+  "smallTargets": 15,
+  "smallSample": [
+   {
+    "tag": "a",
+    "cls": "brand",
+    "w": 146,
+    "h": 25
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 56,
+    "h": 25
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 136,
+    "h": 25
+   },
+   {
+    "tag": "button",
+    "cls": "",
+    "w": 90,
+    "h": 31
+   },
+   {
+    "tag": "button",
+    "cls": "",
+    "w": 74,
+    "h": 31
+   },
+   {
+    "tag": "button",
+    "cls": "",
+    "w": 37,
+    "h": 31
+   },
+   {
+    "tag": "button",
+    "cls": "",
+    "w": 43,
+    "h": 31
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 68,
+    "h": 25
+   }
+  ],
+  "paraSample": [
+   {
+    "w": 281,
+    "fs": "17px",
+    "lh": "32.3px",
+    "n": 72
+   },
+   {
+    "w": 343,
+    "fs": "17px",
+    "lh": "32.3px",
+    "n": 68
+   },
+   {
+    "w": 311,
+    "fs": "17px",
+    "lh": "32.3px",
+    "n": 94
+   },
+   {
+    "w": 311,
+    "fs": "17px",
+    "lh": "32.3px",
+    "n": 81
+   },
+   {
+    "w": 343,
+    "fs": "17px",
+    "lh": "32.3px",
+    "n": 117
+   },
+   {
+    "w": 343,
+    "fs": "17px",
+    "lh": "32.3px",
+    "n": 100
+   },
+   {
+    "w": 343,
+    "fs": "17px",
+    "lh": "32.3px",
+    "n": 99
+   },
+   {
+    "w": 343,
+    "fs": "17px",
+    "lh": "32.3px",
+    "n": 97
+   }
+  ],
+  "containers": {
+   ".reader-wrap": {
+    "w": 375,
+    "maxw": "760px",
+    "pad": "16px/16px"
+   },
+   "main": {
+    "w": 375,
+    "maxw": "760px",
+    "pad": "16px/16px"
+   }
+  },
+  "heads": [
+   {
+    "t": "H1",
+    "text": "第001回 灵根育孕源流出 心性修持大道生",
+    "fs": "28px",
+    "mt": "12px"
+   },
+   {
+    "t": "H2",
+    "text": "原文回目",
+    "fs": "21px",
+    "mt": "34px"
+   },
+   {
+    "t": "H2",
+    "text": "重点要点",
+    "fs": "21px",
+    "mt": "34px"
+   },
+   {
+    "t": "H3",
+    "text": "一、宇宙观的开场",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H3",
+    "text": "二、石猴的\"天生地长\"",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H3",
+    "text": "三、称王的逻辑",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H3",
+    "text": "四、远虑与道心",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H2",
+    "text": "伏笔与悬念",
+    "fs": "21px",
+    "mt": "34px"
+   },
+   {
+    "t": "H2",
+    "text": "名句赏析",
+    "fs": "21px",
+    "mt": "34px"
+   },
+   {
+    "t": "H2",
+    "text": "个人札记",
+    "fs": "21px",
+    "mt": "34px"
+   },
+   {
+    "t": "H3",
+    "text": "SD001 · 那块石头里，藏着所有故事的起点",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H3",
+    "text": "一、十二万九千六百岁的「留白」",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H3",
+    "text": "二、金光射斗府：灵性的第一次外显",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H3",
+    "text": "三、水帘洞：一场「敢」与「不敢」的筛选",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H3",
+    "text": "四、三五百年后的 existential crisi",
+    "fs": "18px",
+    "mt": "24px"
+   },
+   {
+    "t": "H3",
+    "text": "五、从傲来国到斜月三星洞：寻仙即寻心",
+    "fs": "18px",
+    "mt": "24px"
+   }
+  ],
+  "gridCols": null,
+  "file": "reader/ch001.html",
+  "tag": "reader",
+  "width": 375,
+  "height": 812,
+  "consoleErrors": [],
+  "shot": "reader-reader_ch001_html-375.png"
+ },
+ {
+  "vw": 1440,
+  "vh": 900,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "overflowX": false,
+  "docH": 15927,
+  "blocks": [
+   {
+    "tag": "style",
+    "cls": "",
+    "top": 0,
+    "h": 0,
+    "w": 0,
+    "inFold": true,
+    "text": ".catalog-tools { margin: 0 0 24px;"
+   },
+   {
+    "tag": "div",
+    "cls": "catalog-tools",
+    "top": 0,
+    "h": 118,
+    "w": 728,
+    "inFold": true,
+    "text": "全部 615 条 逐回解读人物深度主题专题文化背景诗词歌赋个人随笔"
+   },
+   {
+    "tag": "p",
+    "cls": "",
+    "top": 142,
+    "h": 26,
+    "w": 728,
+    "inFold": true,
+    "text": "主题专题导航 hub（209 篇·按族分组）"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-group",
+    "top": 202,
+    "h": 41,
+    "w": 728,
+    "inFold": true,
+    "text": "逐回解读（100）"
+   },
+   {
+    "tag": "ul",
+    "cls": "reader-idx",
+    "top": 267,
+    "h": 2323,
+    "w": 728,
+    "inFold": true,
+    "text": "第001回 灵根育孕源流出 心性修持大道生 第 002回 悟彻菩提真"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-group",
+    "top": 2624,
+    "h": 41,
+    "w": 728,
+    "inFold": false,
+    "text": "人物深度（215）"
+   },
+   {
+    "tag": "ul",
+    "cls": "reader-idx",
+    "top": 2690,
+    "h": 5069,
+    "w": 728,
+    "inFold": false,
+    "text": "万圣公主：碧波潭里那尾没有名字的红鲤 严嵩与牛魔王对照专题 乌巢禅师"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-group",
+    "top": 7793,
+    "h": 41,
+    "w": 728,
+    "inFold": false,
+    "text": "主题专题（209）"
+   },
+   {
+    "tag": "ul",
+    "cls": "reader-idx",
+    "top": 7858,
+    "h": 5542,
+    "w": 728,
+    "inFold": false,
+    "text": "不可靠叙述专题 二十八星宿——星图上的守望者 二郎神与孙悟空：那场棋"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-group",
+    "top": 13434,
+    "h": 41,
+    "w": 728,
+    "inFold": false,
+    "text": "文化背景（34）"
+   },
+   {
+    "tag": "ul",
+    "cls": "reader-idx",
+    "top": 13499,
+    "h": 813,
+    "w": 728,
+    "inFold": false,
+    "text": "三教合一明代思想史深化专题 佛道思想 历史玄奘与小说玄奘专题 成书背"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-group",
+    "top": 14346,
+    "h": 41,
+    "w": 728,
+    "inFold": false,
+    "text": "诗词歌赋（13）"
+   },
+   {
+    "tag": "ul",
+    "cls": "reader-idx",
+    "top": 14411,
+    "h": 324,
+    "w": 728,
+    "inFold": false,
+    "text": "主题诗词创作 原著人物赋诗词赏析专题 原著景物诗分类赏析：山水禅心与"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-group",
+    "top": 14769,
+    "h": 41,
+    "w": 728,
+    "inFold": false,
+    "text": "个人随笔（44）"
+   },
+   {
+    "tag": "ul",
+    "cls": "reader-idx",
+    "top": 14834,
+    "h": 1021,
+    "w": 728,
+    "inFold": false,
+    "text": "现代视角解读 西游与 AI 时代 西游与人类学：礼物、亲属与图腾的交"
+   }
+  ],
+  "aboveFoldEls": 76,
+  "textEls": 630,
+  "interactive": 624,
+  "smallTargets": 1,
+  "smallSample": [
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 271,
+    "h": 21
+   }
+  ],
+  "paraSample": [],
+  "containers": {
+   ".reader-wrap": {
+    "w": 760,
+    "maxw": "760px",
+    "pad": "16px/16px"
+   },
+   "main": {
+    "w": 760,
+    "maxw": "760px",
+    "pad": "16px/16px"
+   }
+  },
+  "heads": [],
+  "gridCols": null,
+  "file": "reader/index.html",
+  "tag": "catalog",
+  "width": 1440,
+  "height": 900,
+  "consoleErrors": [],
+  "shot": "catalog-reader_index_html-1440.png"
+ },
+ {
+  "vw": 375,
+  "vh": 812,
+  "scrollW": 375,
+  "clientW": 375,
+  "overflowX": false,
+  "docH": 30548,
+  "blocks": [
+   {
+    "tag": "style",
+    "cls": "",
+    "top": 0,
+    "h": 0,
+    "w": 0,
+    "inFold": true,
+    "text": ".catalog-tools { margin: 0 0 24px;"
+   },
+   {
+    "tag": "div",
+    "cls": "catalog-tools",
+    "top": 0,
+    "h": 192,
+    "w": 343,
+    "inFold": true,
+    "text": "全部 615 条 逐回解读人物深度主题专题文化背景诗词歌赋个人随笔"
+   },
+   {
+    "tag": "p",
+    "cls": "",
+    "top": 216,
+    "h": 26,
+    "w": 343,
+    "inFold": true,
+    "text": "主题专题导航 hub（209 篇·按族分组）"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-group",
+    "top": 276,
+    "h": 41,
+    "w": 343,
+    "inFold": true,
+    "text": "逐回解读（100）"
+   },
+   {
+    "tag": "ul",
+    "cls": "reader-idx",
+    "top": 341,
+    "h": 4648,
+    "w": 343,
+    "inFold": true,
+    "text": "第001回 灵根育孕源流出 心性修持大道生 第 002回 悟彻菩提真"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-group",
+    "top": 5023,
+    "h": 41,
+    "w": 343,
+    "inFold": false,
+    "text": "人物深度（215）"
+   },
+   {
+    "tag": "ul",
+    "cls": "reader-idx",
+    "top": 5088,
+    "h": 10094,
+    "w": 343,
+    "inFold": false,
+    "text": "万圣公主：碧波潭里那尾没有名字的红鲤 严嵩与牛魔王对照专题 乌巢禅师"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-group",
+    "top": 15216,
+    "h": 41,
+    "w": 343,
+    "inFold": false,
+    "text": "主题专题（209）"
+   },
+   {
+    "tag": "ul",
+    "cls": "reader-idx",
+    "top": 15281,
+    "h": 10623,
+    "w": 343,
+    "inFold": false,
+    "text": "不可靠叙述专题 二十八星宿——星图上的守望者 二郎神与孙悟空：那场棋"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-group",
+    "top": 25938,
+    "h": 41,
+    "w": 343,
+    "inFold": false,
+    "text": "文化背景（34）"
+   },
+   {
+    "tag": "ul",
+    "cls": "reader-idx",
+    "top": 26003,
+    "h": 1604,
+    "w": 343,
+    "inFold": false,
+    "text": "三教合一明代思想史深化专题 佛道思想 历史玄奘与小说玄奘专题 成书背"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-group",
+    "top": 27641,
+    "h": 41,
+    "w": 343,
+    "inFold": false,
+    "text": "诗词歌赋（13）"
+   },
+   {
+    "tag": "ul",
+    "cls": "reader-idx",
+    "top": 27706,
+    "h": 603,
+    "w": 343,
+    "inFold": false,
+    "text": "主题诗词创作 原著人物赋诗词赏析专题 原著景物诗分类赏析：山水禅心与"
+   },
+   {
+    "tag": "div",
+    "cls": "reader-group",
+    "top": 28343,
+    "h": 41,
+    "w": 343,
+    "inFold": false,
+    "text": "个人随笔（44）"
+   },
+   {
+    "tag": "ul",
+    "cls": "reader-idx",
+    "top": 28408,
+    "h": 2069,
+    "w": 343,
+    "inFold": false,
+    "text": "现代视角解读 西游与 AI 时代 西游与人类学：礼物、亲属与图腾的交"
+   }
+  ],
+  "aboveFoldEls": 42,
+  "textEls": 630,
+  "interactive": 624,
+  "smallTargets": 1,
+  "smallSample": [
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 271,
+    "h": 21
+   }
+  ],
+  "paraSample": [],
+  "containers": {
+   ".reader-wrap": {
+    "w": 375,
+    "maxw": "760px",
+    "pad": "16px/16px"
+   },
+   "main": {
+    "w": 375,
+    "maxw": "760px",
+    "pad": "16px/16px"
+   }
+  },
+  "heads": [],
+  "gridCols": null,
+  "file": "reader/index.html",
+  "tag": "catalog",
+  "width": 375,
+  "height": 812,
+  "consoleErrors": [],
+  "shot": "catalog-reader_index_html-375.png"
+ },
+ {
+  "vw": 1440,
+  "vh": 900,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "overflowX": false,
+  "docH": 7588,
+  "blocks": [
+   {
+    "tag": "div",
+    "cls": "notice-wrap",
+    "top": 336,
+    "h": 65,
+    "w": 1320,
+    "inFold": true,
+    "text": "数据源：实时加载自 ./data/json/hardships_81"
+   },
+   {
+    "tag": "div",
+    "cls": "kpi-row",
+    "top": 400,
+    "h": 241,
+    "w": 1320,
+    "inFold": true,
+    "text": "A · 章节统计A-L 100 回逐回字数与对话占比 对话占比 42"
+   },
+   {
+    "tag": "section",
+    "cls": "section",
+    "top": 642,
+    "h": 1380,
+    "w": 1320,
+    "inFold": true,
+    "text": "EIGHTY-ONE HARDSHIPS 八十一难 · 三维透视 按"
+   },
+   {
+    "tag": "section",
+    "cls": "route-strip",
+    "top": 2021,
+    "h": 236,
+    "w": 1320,
+    "inFold": false,
+    "text": "取经路线概要 53 个地点，跨越 26 个地区，从长安化生寺到灵山雷"
+   },
+   {
+    "tag": "section",
+    "cls": "section",
+    "top": 2257,
+    "h": 1032,
+    "w": 1320,
+    "inFold": false,
+    "text": "#datahub .datahub-cards{display:gr"
+   },
+   {
+    "tag": "section",
+    "cls": "section",
+    "top": 3289,
+    "h": 2671,
+    "w": 1320,
+    "inFold": false,
+    "text": "TOPICS 专题数据看板 51 个专题页，37 大门类可视化总览，"
+   },
+   {
+    "tag": "div",
+    "cls": "banner-wrap",
+    "top": 5961,
+    "h": 205,
+    "w": 1320,
+    "inFold": false,
+    "text": "N · TAG CLOUD 全站标签云 · 可视化导航中心 87 个"
+   },
+   {
+    "tag": "section",
+    "cls": "section",
+    "top": 6166,
+    "h": 924,
+    "w": 1320,
+    "inFold": false,
+    "text": "RESEARCH MATRIX 项目研究矩阵 · docs/ 内容总"
+   },
+   {
+    "tag": "section",
+    "cls": "section",
+    "top": 7090,
+    "h": 376,
+    "w": 1320,
+    "inFold": false,
+    "text": "FRAMEWORK 三层架构 · 从读懂到用活 把《西游记》读到的\""
+   }
+  ],
+  "aboveFoldEls": 77,
+  "textEls": 471,
+  "interactive": 97,
+  "smallTargets": 10,
+  "smallSample": [
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 28,
+    "h": 24
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 28,
+    "h": 24
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 28,
+    "h": 24
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 28,
+    "h": 24
+   },
+   {
+    "tag": "a",
+    "cls": "nav-strong",
+    "w": 56,
+    "h": 24
+   },
+   {
+    "tag": "a",
+    "cls": "nav-en",
+    "w": 16,
+    "h": 22
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 68,
+    "h": 19
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 48,
+    "h": 20
+   }
+  ],
+  "paraSample": [],
+  "containers": {
+   ".container": {
+    "w": 1320,
+    "maxw": "1320px",
+    "pad": "0px/0px"
+   },
+   "main": {
+    "w": 1320,
+    "maxw": "1320px",
+    "pad": "0px/0px"
+   },
+   ".masthead": {
+    "w": 1440,
+    "maxw": "none",
+    "pad": "96px/96px"
+   }
+  },
+  "heads": [
+   {
+    "t": "H1",
+    "text": "数据看板",
+    "fs": "52px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "八十一难 · 三维透视",
+    "fs": "36px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "按起因分类",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "按结局分类",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "按难度分类",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "交叉统计：起因 × 结局",
+    "fs": "20px",
+    "mt": "36px"
+   },
+   {
+    "t": "H4",
+    "text": "关键洞察",
+    "fs": "16px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "取经路线概要",
+    "fs": "20px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "数据中枢 · 42 个结构化数据集",
+    "fs": "36px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "专题数据看板",
+    "fs": "36px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "全站标签云 · 可视化导航中心",
+    "fs": "22px",
+    "mt": "8px"
+   },
+   {
+    "t": "H2",
+    "text": "项目研究矩阵 · docs/ 内容总览",
+    "fs": "36px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "三层架构 · 从读懂到用活",
+    "fs": "36px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "怎么用",
+    "fs": "18px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "如何看见自己的思考",
+    "fs": "18px",
+    "mt": "0px"
+   },
+   {
+    "t": "H3",
+    "text": "在苦难中如何立住自己",
+    "fs": "18px",
+    "mt": "0px"
+   }
+  ],
+  "gridCols": 4,
+  "file": "dashboard.html",
+  "tag": "dash",
+  "width": 1440,
+  "height": 900,
+  "consoleErrors": [
+   "Failed to load resource: net::ERR_FILE_NOT_FOUND",
+   "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+  ],
+  "shot": "dash-dashboard_html-1440.png"
+ },
+ {
+  "vw": 375,
+  "vh": 812,
+  "scrollW": 375,
+  "clientW": 375,
+  "overflowX": false,
+  "docH": 3936,
+  "blocks": [
+   {
+    "tag": "nav",
+    "cls": "breadcrumb",
+    "top": 383,
+    "h": 26,
+    "w": 327,
+    "inFold": true,
+    "text": "数据看板 › 原著全文检索"
+   },
+   {
+    "tag": "div",
+    "cls": "notice",
+    "top": 410,
+    "h": 295,
+    "w": 327,
+    "inFold": true,
+    "text": "数据源：独立脚本 text-search-app.js（load 后"
+   },
+   {
+    "tag": "div",
+    "cls": "kpi-row",
+    "top": 721,
+    "h": 527,
+    "w": 327,
+    "inFold": true,
+    "text": "CHAPTERS · 回目 100 全书 100 回原文 CHARS"
+   },
+   {
+    "tag": "section",
+    "cls": "section",
+    "top": 1247,
+    "h": 297,
+    "w": 327,
+    "inFold": false,
+    "text": "关键词检索 输入任意关键词，全文匹配，返回所有命中位置（前后各 50"
+   },
+   {
+    "tag": "section",
+    "cls": "section",
+    "top": 1544,
+    "h": 1679,
+    "w": 327,
+    "inFold": false,
+    "text": "快速检索 点击预设人物或法宝名，立即搜索其在全文的出现次数与上下文。"
+   },
+   {
+    "tag": "section",
+    "cls": "section",
+    "top": 3223,
+    "h": 407,
+    "w": 327,
+    "inFold": false,
+    "text": "检索结果 结果按回目顺序排列，每条含上下文与命中次数。 📖 在上方"
+   },
+   {
+    "tag": "figure",
+    "cls": "viz-illustration",
+    "top": 3662,
+    "h": 0,
+    "w": 327,
+    "inFold": false,
+    "text": ""
+   }
+  ],
+  "aboveFoldEls": 37,
+  "textEls": 185,
+  "interactive": 148,
+  "smallTargets": 7,
+  "smallSample": [
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 24,
+    "h": 17
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 48,
+    "h": 17
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 60,
+    "h": 21
+   },
+   {
+    "tag": "button",
+    "cls": "cite-copy",
+    "w": 44,
+    "h": 26
+   },
+   {
+    "tag": "button",
+    "cls": "cite-copy",
+    "w": 44,
+    "h": 26
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 26,
+    "h": 58
+   },
+   {
+    "tag": "a",
+    "cls": "",
+    "w": 26,
+    "h": 58
+   }
+  ],
+  "paraSample": [],
+  "containers": {
+   ".page-wrap": {
+    "w": 375,
+    "maxw": "1320px",
+    "pad": "24px/24px"
+   },
+   "main": {
+    "w": 375,
+    "maxw": "1320px",
+    "pad": "24px/24px"
+   }
+  },
+  "heads": [
+   {
+    "t": "H1",
+    "text": "原著全文检索",
+    "fs": "28px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "关键词检索",
+    "fs": "24px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "快速检索",
+    "fs": "24px",
+    "mt": "0px"
+   },
+   {
+    "t": "H2",
+    "text": "检索结果",
+    "fs": "24px",
+    "mt": "0px"
+   }
+  ],
+  "gridCols": null,
+  "file": "data/text-search.html",
+  "tag": "search",
+  "width": 375,
+  "height": 812,
+  "consoleErrors": [],
+  "shot": "search-data_text-search_html-375.png"
+ }
+]
