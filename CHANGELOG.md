@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W955），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W956），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -18,6 +18,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 
+### W956（2026-10-26）：登记面治理批（W954 复盘报告 P-43 五项落地）
+
+> **来源**：W954 第 43 篇《工作复盘与优化分析报告》§7.1/§8 登记的下一治理批（用户令「现在做完，然后进行推送」·P-43-01/02/03/05 本批全落地·P-43-04 载体为下一出图批、其建制面随 E-31 入坑表）。
+> **摘要**：① **preflight 在途判定加 git 条件**（P-43-01/WF-08-a）——「在途」参与 touches 拒绝须满足「台账标在途 AND git 无该 W 提交」；台账标在途但 git 已有提交 = **登记滞后**（告警不拒绝·消 W954 开工 8 条 FAIL 的历史欠账误阻）；git 识别只认提交 subject 的 type(w###): 批次标签形态，散文提及别批号不计（防引用性提及误降真在途防护）；git 读取失败退化纯登记面口径从严保护。② **ledger_backfill 新增 --from-git**——收官状态列由脚本从 git 反填（「已收官（首笔hash·git 反填·共 N 笔）」），不再人工手写。③ **复盘触发器**（P-43-02/WF-08-b）——新建 scripts/check_review_trigger.py：距上篇复盘 ≥3 天 / 后续台账批次 ≥30（排除让号留痕与已停止）/ 后续提交 ≥80 三判据任一触发即输出触发清单；preflight 提示位接线（只提示不拦截·故障降级 WARN 禁静默跳过）；触发器不持台账写面（检查器写共享面风险，W820 教训）。④ **段状态 W 号一致性断言**（P-43-05/WF-08-c）——batch_cascade 与 backfill_changelog 两个段状态写入点断言状态文本「认领登记 W###」== 本段号（E-28 段状态串行错位防线·W941 实例形态）；引用别批形态不锁。⑤ **空壳号清账**（P-43-03）——W884（有 4 笔提交而两面无段）以补位 spec 补立 CHANGELOG/file-index 段（Playwright 全谱审计·按 W863 先例标注补位）；W907/908/910/911/929 经三面取证定性为**合规让号留痕**（工作分别改号 W909/W912 落库·非登记空壳，订正 W954 报告的分类），W908/W910/W939 的遗留 spec 判定不立段；backfill_changelog 同批修 E-27（归档面合看·原实现把 67 个已归档段误报待补）并新增 --only 限域。⑥ **复盘经验上移**——E-25/26/27/28/31 五条入 docs/agent/pitfalls.md（级联 5→8·git 17→18·流程 8→9·总数 52→57）+ AGENTS §4.3 计数链追记；E-31 载体即 P-43-04 建制面（素材出图人工关前置为逐张自检表 + 图形同步器前置到每次出图批）。
+> **文件**：scripts/preflight_check.py · scripts/check_review_trigger.py · scripts/ledger_backfill.py · scripts/batch_cascade.py · scripts/backfill_changelog.py · scripts/output/_w884_spec.json · scripts/output/_w956_spec.json · tests/unit/test_preflight_check.py · tests/unit/test_review_trigger.py · tests/unit/test_batch_cascade_status_wnum.py · docs/agent/pitfalls.md · AGENTS.md · docs/00-导读/W批次编号对账表.md · CHANGELOG.md · scripts/output/file-index.md · HANDOVER.md · README.md · STRUCTURE.md · docs/00-导读/项目说明.md · .github/workflows/README.md · CITATION.cff · site/index.html · site/data/cross-time-danmaku.html · site/data/tag-cloud.html · site/dukou-engine.html · pytest.ini · docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md · scripts/output/stats.json · scripts/output/stats-changelog.json · scripts/output/stats-index.md · scripts/check_db_schema.py · scripts/check_emoji_icons.py · tests/unit/test_check_data_copy_chain.py · tests/unit/test_check_db_schema.py · tests/unit/test_check_interaction_binding.py · tests/unit/test_check_page_admission.py
+⑦ **顺带修复（并行批遗留·本批开工实跑暴露）**——ruff 全仓清理 11 处（W949 门禁脚本与四个 W912/W917/W920 测试文件·机械修复不改语义）+ check_db_schema 门禁路径跟上 W934 存储层门面化（P1-P3 目标 db.ts→storage/sqlite.ts·自 W934 起全量 pytest 本地挂红的假红·不变量实测健在·自测 3/3·负样本保留）+ 第 42 门禁基线补登记 2 条（check_emoji_icons/check_icon_fields·W949 图标门禁族会话直跑类·四面无引用孤儿）
+> **验证**：三工具 --self-test 全过（触发器 12 断言 / ledger 反填 10 例 / 级联断言 4 例）+ 新增单测 18 例（preflight 5 · 触发器 9 · 段状态断言 4）全绿；pytest 全量通过（收集 880→899·stats 与 pytest.ini/架构方案 v2 标记三方同步）；verify_delivery 全量零 FAIL；preflight 带 touches 放行；backfill_changelog 补段断言全过（143→144 段降序完好）。
+> **状态**：在途（认领登记 W956·待提交入库）
 ### W955（2026-10-26）：GSAP 动效体系引入批第一子批（前置体检 + 执行前计划）
 
 > **来源**：用户 2026-10-26 携 GSAP Skills 插件发起 → 问卷裁定「**四类动效全都要**（滚动叙事 / 入场编排 / 微交互 / 现有动画体检）· 载体 = `site/` 静态站 · 交付 = **先出计划再施工**」。
@@ -1091,6 +1099,13 @@
 > - **验收（浏览器实拍·两页）**：数据页确认装饰插画为 240 px 角饰、落在右下不压标题不压文字，W879 的 soft-light 山形底图在暗带上显影为剪影；首页确认水墨底图铺满首屏、kicker 与「取经录」与英文副题全部落在图的留白带上完全可读、「100 回」与山脊相映。**搜索索引**按「他方在途条目按 HEAD 版回退」处理：重跑 `_gen_search_index.py` 后逐条比对，差异仅他方在途的 docs/agent/gates.md 一条 → 已回退，两个索引文件恢复 HEAD 版（我方改动不改变任何页面条目）；**CSP 重算 0 页更新**（未触及内联脚本·零漂移）。
 > - **范围纪律**：只动 213 页的一条装饰 img + 各自内联副本的一条规则 + 首页三条背景 + system.css 一条规则 + 4 张新图 + 3 个脚本，不改任何页面结构、正文与门禁判据，不推送远端。
 > - **CHANGELOG 版段递延**：现役顶段 W874（W851 已落段），W875–W884 段待补且 W883 在途中 → batch_cascade 断言「批次号应为顶段+1」不成立，按仓内现行节奏递延，spec 已入库，待补段批按号序一并回写。
+### W884（2026-10-22）：Playwright 历史问题全谱审计（T-10 落盘）
+
+> **来源**：用户令对全仓 Playwright 引用做历史问题全谱审计（T-10 任务）。
+> **摘要**：全仓 256 处 Playwright 引用逐项取证 → 25 项 / 8 族问题全谱（环境依赖 7 · file:// 协议 4 · 断言可信度 6 · 触屏模拟 5 · 产物资源 3 · 门禁成本 1 · 平台分歧 2 · 依赖浮版 3），每项带「文件:行号」或批次号锚点并标状态三态（已修复 22 / 仍开放 3）。核心实证三处对评审初判的修正：① package-lock.json 已入库并钉死 playwright 1.63.0 ⇒「浮版解析漂移」初判不成立；② 真漂移面是 ci.yml 的 npm install playwright（无版本约束·绕过 lockfile）⇒ 同一 CI run 并存两个 Playwright；③ 截图审查已有三档 scope ⇒ 真实缺口是「映射停在目录级」而非「没有影响面概念」。另新发现 pages-smoke job 安装 Playwright 与 chromium 但从不调用浏览器（全 job 零浏览器调用）。
+> **文件**：docs/11-方案报告/计划方案/T10-任务计划执行与经验沉淀报告-2026-10-22.md · docs/11-方案报告/README.md · docs/00-导读/W批次编号对账表.md · scripts/output/stats.json · scripts/output/stats-changelog.json · scripts/output/stats-index.md · STRUCTURE.md · docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md · docs/INDEX.md · site/data/search.html · site/en/search.html
+> **验证**：第 48 门禁 0 FAIL（新增文件全项符合·32/32 判据）·lint_links 5466 链接 0 broken·check_index_health 通过·generate_csp --check 856 页 0 漂移。
+> **状态**：**已收官**（e5b262e7 内容批 + 92175003 收官回填 + 5266741c 报告正文回填实测值 + 1af88bb3 台账提交号补全·台账行早已收官；本段系 W956/P-43-03 按台账「有行无段」欠账以补位 spec 补立——**补位 spec**·非原会话叙事·正文以提交信息与报告原文为准）
 ### W883（2026-10-22）：阶段 5 机检门禁批（朱砂实底常驻门禁第 49 槽 + 四类存量豁免裁决 + W877-W882 六段回补）
 
 > **来源**：用户令「继续」。W883 = v4 规格 §3.2「机检口径（阶段 5 门禁落地）」的兑现——W826 裁决 2（朱砂实底每页 ≤3 处）自 W864 起只有一次性收敛、无常驻防线。

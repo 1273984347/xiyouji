@@ -71,6 +71,24 @@ def precheck(spec):
     return issues
 
 
+def _assert_status_wnum(spec, batch):
+    """段内「状态」字段的认领登记 W 号必须等于本段号（W956 建 · E-28 段状态串行错位防线）。
+
+    病根（W954 复盘报告实例 4）：收官回填按写顺序推进时，W941 段的状态字段曾写成
+    「在途（认领登记 W940·待提交入库）」——段号与状态所述批次错位（后已被订正）。
+    凡**写入段内状态字段**的动作（正常级联 _face_changelog 与递延补段 backfill_changelog
+    两个写入点共用本断言），断言状态文本里「认领登记 W###」这一自我指称形态所指的
+    W 号 == 本段号；状态文本引用别批（承接 / 让号最终落点 / 回填锚注等）不受限——
+    只锁「认领登记」形态，防错位不防合法引用。
+    """
+    m = re.search(r"认领登记\s*W(\d+)", str(spec.get("changelog_body", "")))
+    if m:
+        assert int(m.group(1)) == int(str(batch)[1:]), (
+            "spec.changelog_body 状态字段写「认领登记 W%s」≠ 本段号 %s——E-28 段状态串行错位"
+            "（段号与状态所述批次必须同批·W956/P-43-05 防线）" % (m.group(1), batch)
+        )
+
+
 class _Ctx:
     """级联上下文：spec 字段 + 派生量 + 落盘队列（W731 提取）。"""
 
@@ -493,6 +511,7 @@ def main():
     assert "（" not in ctx.spec["head_sentence"] and "）" not in ctx.spec["head_sentence"], (
         "head_sentence 禁含全角括号——会破坏下一批「当前 HEAD 句」断言的 [^）]* 匹配（W649 实证：W648 嵌套括号致本批断言 FAIL，交接文档已手工修复）"
     )
+    _assert_status_wnum(spec, ctx.batch)  # W956/P-43-05：段状态认领登记 W 号 == 本段号（E-28 防线）
     _face_changelog(ctx)
     _face_three_docs(ctx)
     _face_handover(ctx)

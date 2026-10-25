@@ -433,3 +433,8 @@
 ```text
 2026-10-19（W804）桌面版三平台安装包与自动更新批：用户令给项目在 GitHub 仓库增加可直接下载的安装包并支持自动更新——方案裁定离线全站桌面版，新建 xiyouji-desktop 桌面工程（Electron 四十四主进程加本地静态服务仅监听 127.0.0.1 随机端口并做路径穿越防护且仅接受 GET 与 HEAD 加中文菜单与原生更新对话框加单实例锁与崩溃文件日志加无窗口 self-test 冒烟）；自动更新基于 electron-updater 六点八（发布源指向本仓库 Releases），启动三秒后首次检查且此后每四小时复查并支持菜单手动检查，发现新版本询问下载、下载进度回显、下载完成询问重启安装（选择稍后则退出时安装），开发态与禁用环境变量下安全降级；发布流水线新建 .github/workflows/release.yml（tag v 星号或 workflow_dispatch 触发，版本一致性闸门校验 tag 与桌面工程 package.json 严格相等并从 CHANGELOG 首段动态提取内容批次，三平台并行构建 Windows NSIS 与 macOS universal dmg 加 zip 与 Linux AppImage，汇总上传 GitHub Release 含 latest 系列 yml 与 blockmap 自动更新元数据并生成中文 release notes，Release 已存在时 clobber 幂等更新）；ci.yml 末尾新增 desktop-build job 做 npm ci 加 node --test 加内容准备加 electron-builder --dir 打包回归；根 README 新增桌面版下载段（三平台固定直链）且 STRUCTURE 顶层目录与 README 目录树登记 xiyouji-desktop；验证等于 npm install 成功加 npm test 三十三项通过加 self-test 输出 SELF_TEST_OK（开发态与打包产物双跑）加 Windows 安装包 130705240 字节且 latest.yml 的 sha512 与安装包实算一致并对拍 app-update.yml 发布源正确加 pytest 七百一十四 passed 三 skipped（可视化数据测试文件末尾挂起为改动前既有现象，本批排除该文件实跑）加 ruff 零加 actionlint 零错误加 verify 全量五十段零 FAIL
 ```
+以下为 AGENTS.md 版本脚注早期条目（W805-W805）段的原文（单行沿革链·W956 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-19（W805）跨平台测试守卫热修批：W804 推送后 dev 到 main 的 PR CI 首跑在 Linux 暴露 W803 引入的测试缺陷——tests/test_xiyouji_mcp_extra.py 的目录目标守卫断言 pytest.raises(PermissionError) 绑定 Windows 专属异常子类，而 Linux 与 macOS 读目录抛 IsADirectoryError（同属 OSError），导致单元测试任务一失败七百二十九通过；修复仅动测试面（断言改为跨平台 OSError、测试更名为 test_directory_as_target_file_raises_os_error、docstring 明写 Windows PermissionError 与 Linux IsADirectoryError 同属 OSError 且守卫点等于目录当文件会抛异常不绑定平台子类），被测 xiyouji_drl_spotcheck 生产代码零改动行为不变；验证等于目标测试六十七 passed 加全量排除既有挂起文件七百一十四 passed 三 skipped 加 ruff 零加 verify 全量五十段零 FAIL 加以推送后 PR CI 复跑转绿为准
+```

@@ -11,11 +11,12 @@
 
 - （无）
 
-## 文件（37）
+## 文件（39）
 
 ### Python 脚本
 
 - `test_a11y_audit.py`
+- `test_batch_cascade_status_wnum.py`
 - `test_check_data_copy_chain.py`
 - `test_check_db_schema.py`
 - `test_check_interaction_binding.py`
@@ -41,6 +42,7 @@
 - `test_rag_enhance.py`
 - `test_rag_fusion.py`
 - `test_release_prep.py`
+- `test_review_trigger.py`
 - `test_security_scan.py`
 - `test_slice_screenshots.py`
 - `test_tmpe_tidy.py`

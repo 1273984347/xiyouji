@@ -45,7 +45,7 @@
 - **ruff --fix 的 isort 会改坏「ST 先于 torch」顺序**（W746）：isort 排序规则把 plain import（`import torch`）排到 from-import（`from sentence_transformers import ...`）之前——正是本机段错误坑的关键顺序，铁则注释写在旁边也会被改坏（实证：--fix 后 CLI 静默 139）。修复：**ML 脚本的 ST import 块必须加 `# noqa: I001` 防守**（`scripts/rag/page_router.py` `_load_model` 范式），并复跑该脚本确认可跑。
 - **CSP 哈希链「只读绿 ≠ 写路径健康」**（W536 实证·W902 自 Agent 记忆固化入仓）：generate_csp 的 --check 只走读路径，守卫对根目录的误算曾令重生成自阻（写路径损坏而校验恒绿）；凡改 generate_csp/守卫逻辑，验收必须真跑一次写入（注入或重算）再 --check，禁以 --check 单绿收工。
 
-### git / 提交 / 并发（17 条）
+### git / 提交 / 并发（18 条）
 
 - **批量改 md 一律 Python `open(encoding='utf-8')`，禁用 PowerShell `Set-Content`**（后者默认写 UTF-8 BOM，项目 W427 曾全库清 BOM；`Add-Content` 同理慎用）。
 - **同文件多个 Edit 必须串行执行**（并行 Edit 基于同一原始内容计算 diff，后写覆盖先写——W505 复现 4 次：金角银角「唐僧肉」/CHANGELOG W506 段/项目说明头部/交接文档标题均丢失）；并行批次后必须 Grep 验证所有修改点。
@@ -66,8 +66,9 @@
 - **C5d 与 C5b 双向绑定：stats.json 刷新后实体标记必须同步**（W836 实证）：`stats.py --w <批号>` 刷新 stats.json 后，**实体标记**（`<!--stats:KEY-->` 形态的数字·如 pytest.ini 头注与 `docs/11-方案报告/` 根层报告内的标记）若未同步，C5b 反向判红（标记 782 ≠ stats 783）；而 stats.json 不刷新时 C5d 又判红——**两侧互锁** ⇒ 改任一侧后两侧都要刷。（本批即因并行会话新增 1 例收集项后两侧同时滞后而被门禁挡下。）
 - **PowerShell 管道会给行文本加 BOM**（W836 实证）：`Get-Content x | py -3 script.py` 传入的行首带 U+FEFF ⇒ 写入台账后该行成为 `U+FEFF| W836 | …` ⇒ 第 31 门禁 C4 的登记正则 `^\|\s*W(\d{3})\s*\|` 不匹配 ⇒ 判「该 W 号未在对账表登记」红——而**明面完全看不见**（编辑器不显示行首 BOM）。纪律：**登记行必须以文件直写传入**（`open(..., encoding="utf-8")`），禁经管道；写入后核 `git show HEAD:<file>` 的行首。
 - **守卫不能把自己判红**（W836 实证）：扫描被禁字面量的守卫若①在注释里写出字面量、②在自检样本里硬编码字面量，①会被自己命中、②入库后即自指违规 ⇒ 字面量以 **base64 存储·运行时解码**（明文扫描仍为 0 而守卫仍能检出回归）；自检的**正例探针由解码结果在运行时派生**（`pat` / `pat.upper()` / `pat.capitalize()` / 词内嵌形态），只有反例才硬编码。守卫上线后先跑自身扫描——它会当场报出你刚写下的字面量。
+- **并发保护会被自身的登记欠账阻塞**（W954 实证·W956 修·E-26 上移）：touches 交集拒绝若纯以登记面判「在途」，历史陈旧行会把新批次**恒红拒绝**——W954 开工即 8 条 FAIL（8 个陈旧「在途」批次的 touches 与新批交集 CHANGELOG/file-index 非空·实为 7 批已落库 + 1 批已停止）。修法 = 在途判定加 git 条件（见级联组「登记面不是事实源」条）：登记滞后降级为告警不拒绝，真在途（git 无提交）照旧拒绝；git 读取失败时退化回纯登记面口径（从严保护）。教训泛化：**防护机制的输入数据自身欠账时，机制会先于真实冲突失效**——先清历史欠账或让判据以事实源为准，二选一。
 
-### 级联 / CHANGELOG（5 条）
+### 级联 / CHANGELOG（8 条）
 
 - **bump_version.py** 一键补齐辅助 4 文档版本行（W576 起恢复可用：W536 写路径守卫根目录曾误算为 scripts/ 致任何调用必误判越界，经用户批准修复为项目根——与 W550 修复的 generate_csp 同款；其「全文件 W001-W### 范围替换」覆盖 batch_cascade 不触及的 README 目录树/交接 CHANGELOG 范围行等存量漂移面，整文件 text-mode 重写兼带孤立 \r 损伤归一）；**三个已知坑（①②多次复现 W524 扩证·③W528 实证）**：① 全局替换会污染 file-index 历史段（生成「WXXX WXXX」重复标题的空壳段、登记表为空，需手工补全当批文件表）；② `--desc` 与 `--note` **均会**往 STRUCTURE.md 头部 / docs/00-导读/项目说明.md 的上一版本行**追加**「 + WXYY(...)」而非替换主描述（W523 实测 `--note` 同样触发——此前仅登记 `--desc` 单触发面）；③ 三简单页脚（index/cross-time-danmaku/tag-cloud）同步为替换式、只匹配"链首 == 解析版本"的条目，页脚一旦滞后就永不被命中（W528 实证停在 W453 脱节 74 批）——跑完必须 Grep 校验版本行三处 + 三页脚版本实际前进并手工净化。
 - **CHANGELOG 多版段插入/重排只用脚本 + 结构断言**（锚点唯一性 + 版段 order 校验），手工 Edit 大段会吞相邻版段标题；**新批版本号先 Grep 现役段取 max+1 再写**（防撞号）。
@@ -75,6 +76,9 @@
 - **级联落盘清单与 partial commit 三犯根治**（W649·W595 sitemap 漏 add/W632 CITATION 三连漏/W647 版本行六面漏——同族三犯，病根均为「级联已落盘但未进提交」的检出树≠工作树脱节）：batch_cascade.py --apply 落盘后输出持久清单 `scripts/output/_cascade_files_<批号>.txt`，提交时按清单逐面 `git add`；级联外 chore 提交的版段对账由下一级联批追记（7b27cf1→W649 先例）；**并行批次在途时用 pathspec 提交互斥**（`git commit -F msg -- <paths>` 不动对方 index·动手前必须 `git log` 识别并行增量·跨批共享文件 AGENTS/CHANGELOG 等让行给暂存方）；**W 批编号动工前在对账表登记认领，唯一对账依据 = docs/00-导读/W批次编号对账表.md（W663 起·「Grep 现役段 max+1」在版段递延时可能滞后于已认领号）**。
 
 - **spec 的 `desc` 禁含内嵌 W 号**（W842 实证 · `_foot_insert` 的 W724 防线当场炸）：`_face_footers` 把 `desc` 拼进四页脚批次链（`f"{ctx.batch} {desc}"`），`_foot_insert` 末行断言 `len(_wns) == len(set(_wns))` 防 token 重复。W781 建的剥离防线只有 `re.sub(r"^W\d{3}\s*", "", desc)`——**只治行首**，治不了行内嵌：首版 desc 写「补段工具一次补齐 W830 到 W841 十二批欠账…」→ `AssertionError: 页脚链 token 重复（W724 防线）`，链上已有的 W841 与 desc 里的 W841 撞。**同族口径**：`desc` 是唯一被拼进「批次链」的自由文本，凡 desc 出现别批 W 号（范围表述、批号引用、引上一批）都会撞链上既有 token；三处版本行不会撞，但为一致性一并按此纪律。判据 = batch_cascade dry-run 抛「页脚链 token 重复」；改法 = desc 用不含 W 号的量词表述（「十二批欠账」），批号引用移到 `changelog_body`（body 不进链）。
+- **登记面不是事实源**（W954 实证·W956 上移 E-25 并机器化）：台账状态列与 CHANGELOG 段状态字段都是**声明**不是事实——第 43 篇复盘以 git 为事实源对拍量化出五类漂移（CHANGELOG 段状态滞后 91 批 / 台账滞后 7 批 / 让号 5 行 / 有行无段 6 / 有段无行 1）。机器判据一律读 git；「在途」参与 touches 拒绝须满足「台账标在途 AND git 无该 W 提交」（preflight P-43-01——台账标在途但 git 已有提交 = **登记滞后**·告警不拒绝）；收官状态回填用 `ledger_backfill.py --from-git` 由脚本反填，不再人工手写「已收官（hash…）」。
+- **归档面与现役面必须合看**（W954 实证·W956 上移 E-27 并修工具）：CHANGELOG 自 W921 瘦身起把百段级老段移入 `archive/docs/CHANGELOG-ARCHIVE.md`，只读现役文件会把已归档段误判「不存在」——第 43 篇复盘首轮取证 141 段实为 149（漏 W795–W802 共 8 段）；backfill_changelog 的待补清单同期误报 74 段（W728-W802 全是归档段假阳性）。凡跨区间统计/立段判定一律两面合扫；工具侧已修（collect_pending 合并归档面·补段另用 `--only` 限域）。
+- **段状态串行错位**（W954 实证·W956 上移 E-28 并建防线）：收官回填按写顺序推进时会把上一批的状态文案写进下一批的段（W941 段曾写「认领登记 W940」——段号与状态所述批次错位）。两个段状态写入点（batch_cascade `_face_changelog` / backfill_changelog 补段）已断言状态文本「认领登记 W###」== 本段号，错位即 AssertionError（P-43-05）；状态文本引用别批（承接 / 让号落点）不受限——只锁自我指称形态。
 
 ### 数据 / 内容可信度（6 条）
 
@@ -86,7 +90,7 @@
 - **双源互锁在「两侧都停在旧值」时必然假绿**（W842 实证 · pytest 收集数 785 虚挂两批）：`check_doc_sync` 的 C5b 比对 `pytest.ini` 标记 vs `stats.json` 值，C5d 才是 `stats.json` vs 磁盘实算。W839 收官刷新少记一例（该批正文写「783→785」而实算 786），C5b 因为 `pytest.ini` 与 `stats.json` **两边都是 785** 而一路绿——直到 W842 跑 `stats.py --w` 触发 C5d（换源头实算）才照出来。教训：**标记↔缓存的对账只能证明两者彼此一致，不能证明它们与事实一致**；任何「X 抄自 Y」的互锁都必须配一条「Y 由 Z 实算」的独立支路，否则同源污染会静默通过。同族检查面 = `report_docs` 标记、A4/A1-A6 计数、`stats.json` 各键——凡存在实算源，就必须让实算支路常驻门禁（C5d 即这条）。
 - **暗色/站点审计须先起 site 根 http 服务·否则探针全 404 假 0**（W621 实证·W902 自 Agent 记忆固化入仓）：审计探针直击 file:// 或错误根路径时拿到的 0 命中会被当成「无问题」——先 `python -m http.server` 起 site 根再跑；且「探针报 0」必须配内容在位断言（已知应有的样本数 >0）才可信，双保险防「0=好」与「0=没跑成」混淆。
 
-### 流程 / 协作 / 取证（8 条）
+### 流程 / 协作 / 取证（9 条）
 
 - **门禁「建置即红」检测法**（W757 实证·D1）：凡门禁脚本依赖外部运行时（Playwright 浏览器 / Node 包 / 系统工具），**必须核对其 CI job 是否安装该依赖**——脚本本地有依赖所以本地全绿，CI 无依赖则 `require` 抛 `MODULE_NOT_FOUND` → fail-closed 分支打印 FAIL → 整条 `verify_delivery` 红。实证：`check_chart_values.js:904` 硬依赖 `require('playwright')`，而 `ci.yml` 的 verify-delivery job 只装 Python+Node（`scripts/node_modules` 被 gitignore），故第 43 门禁自 W753 建置起在 CI 中**必红**；且因本地 HEAD 领先公开 main 63 提交，长期无人发现（违反 E36-E42 铁则②「门禁建置即绿」）。查法：① 列脚本的 `require`/`import` 外部依赖；② 在对应 job 的 `run:` 块内查安装步骤；③ 缺失即缺陷。
 - **接线回归断言必须锚 `run:` 块，禁字符串存在性**（W757 实证·E-02）：断言「CI 是否执行 X」时，若只做 `"X" in ci_yml`，会被**步骤名/注释**骗过——负样本实测：把 `run: npm run test:server` 改成 `run: echo skipped` 后，`test:server` 仍在 `- name:` 里，断言**假绿**。正确做法：提取 job 正文的 `run:` 命令体（单行 `run: <cmd>` + `run: |` 多行块），只在该文本内匹配。同理，新增防回归测试必须用「摘除接线」负样本证明其会红，否则是假防线（本批 4/4 真防线验证）。
@@ -97,4 +101,5 @@
 - **latent 三问 + 双平台断言禁例**（W773/W774/W775 三次实证·W778 沉淀）：长期绿但「从未失败过」的防线按三问体检——① **接线缺失型**「最近一次真实运行是什么时候」：套件写了但 workflow/测试从未执行（K11 动画规则自 W674 潜伏 6 周·E2E 零接线；查法=列 E2E/测试文件在 `run:` 块的出现次数）；② **平台序差型**「两平台的排序/大小写/盘符语义是否一致」：`sorted(Path)` 在 Windows 用 normcase、Linux 大小写敏感（INDEX 门禁 CI 红/本地绿·W774）；查法=平台语义敏感处显式键（`str(p).lower()`）+ 负样本双平台可判；③ **引号腐蚀型**「静态扫描器的字符级常量是否被吞」：`c === '"'` 在改写中被吞成 `c === ""` 空串比较·分支死代码五批（安全加固→W775），查法=改写后逐字节验引号字符 + 五维对拍矩阵（流水线 §八）。**双平台断言禁例**：依赖盘符存在性（`Z:`→不同卷）、大小写不敏感排序、`os.name` 默认值的断言在 Windows 上负样本不可辨——必须登记「真实执行位=CI（Linux）」并在 docstring 注明（处置例：`test_tmpe_tidy::test_check_same_volume` W757 修复）。
 
 - **把 subprocess 输出解析改成 fail-closed 前，先识别 scope 跳过的伪造结果**（W834 引入 · W839 修复 · W838 收官两度被拦实证）：`_GateContext` 把全局 `subprocess.run` 猴补为 `_scoped_run`，`--scope` 不覆盖某段时返回 `_SkipResult`（**rc=0**、`stdout` 只有「（--scope X 跳过）」这句提示串，跳过消息已由它自己打印）。W834 把 a11y 段由 fail-open 改 fail-closed 后，该提示串被送进 `json.loads` → `Expecting value: line 1 column 1` → 判「输出不可解析」→ **docs 档提交必红、全量档却全绿**（同形 subprocess 手动复跑两次均正常，故极易误判为瞬态）。识别判据：① 同一次 `--scope auto` 里同一段打出「OK 跳过」+「FAIL 判红」双消息；② 绕过 monkeypatch 手动复跑正常。修法 = rc 检查前加 `isinstance(r, _SkipResult)` 守卫直接 return——**跳过 ≠ 判据不可执行**，不进 FAIL 也不重复上报；回归锁 2 例（跳过结果 fail/ok/warn 三桶全空 + 简单委托段跳过不判红）。**同族口径**：凡 bespoke 段自行 parse `subprocess` 输出（json / 正则 / 结构），改 fail-closed 时必须先过这道守卫。
+- **素材出图的人工关必须前置为逐张自检表**（W940/W942/W953 三批实证·W956 上移 E-31·P-43-04 载体）：机器判据（尺寸/留白/墨量/伪文字/裁切）抓不了「题材是否属于西游」与「形制对不对」——W953 十二张里机器抓 2 张、人眼另抓 2 张 ⇒ 重出 6 张；W942 两处形制偏差（紧箍儿缺九个倒刺钩 / 芭蕉扇画成正圆团扇）纯人眼发现。落地口径：出图前逐张写明「靠哪个西游元素认出 + 形制关键特征是什么」（判据 J8 形制级自检表·`assets/promo/hero-set/README.md` 有样例），重出时逐条对照；且图形同步器（`_w950_refresh_icon_paths.py`·复合键 d/transform/fill 对账）必须**前置到每次出图批**而非等打磨批才补——资产落盘而页面没同步是静默分叉（W949 堵的数据源回归漏洞同族）。
 
