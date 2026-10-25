@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（401）
+## 文件（407）
 
 ### Markdown 文档
 
@@ -284,11 +284,16 @@
 - `_w957_wire_pilot.py`
 - `_w959_t10_v11.py`
 - `_w959_version_sync.py`
+- `_w960_pilot_shots.py`
+- `_w961_version_sync.py`
+- `_w962_wire_entry.py`
+- `_w963_version_sync.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
 - `agg_entities.py`
 - `archive_file.py`
+- `archive_segments.py`
 - `backfill_changelog.py`
 - `baseline_snapshot.py`
 - `batch_cascade.py`
@@ -311,6 +316,7 @@
 - `check_data_copy_chain.py`
 - `check_db_schema.py`
 - `check_design_doc_drift.py`
+- `check_doc_size_budget.py`
 - `check_doc_sync.py`
 - `check_dual_source_scan.py`
 - `check_dynamic_links.py`
