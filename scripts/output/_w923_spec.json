@@ -1,0 +1,30 @@
+{
+ "batch": "W923",
+ "date": "2026-10-24",
+ "title": "W923 review 修复批（PR #63 复审两处低危登记缺陷）",
+ "desc": "复审让号行幻影在途与前缀修复，跳号补登记，十一项实抽全过",
+ "head_entry": "2026-10-24（W923 review 修复批）",
+ "head_sentence": "复审抓出幻影在途与漏登记两处低危，修复后开工核验在途清单归零",
+ "changelog_body": "\n\n\n\n> **来源**：用户 2026-10-24 令「review 一遍」——PR #63（W900-W922）合并后独立复审发现两处低危登记缺陷，本批修复。\n\n> - **文件**：docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w923_spec.json、scripts/output/_cascade_files_W923.txt（逐件行见 file-index W923 段）。\n\n**复审结论（十一项实抽全过 + 两处低危发现）**：渡口绑定/交互门禁/og 十二页图实体/C5c 零/迁移段可寻性（W750-W802 全在 ARCHIVE）/e2e 诊断零残留/降级正则写入正确/真实会话库迁移健康（user_version=3·外键与 CHECK 在位·零孤儿行·70 会话 134 消息 4 反馈数据完整）/listSessions SQL 形态实测（messageCount 键在·总数 70 对上）/W914 spec 恢复一致/CI 34/34。\n\n**两处发现修复**：① W907 让号登记行状态列无「已收官」前缀 → preflight 永真幻影在途（W825 修复过的同族·让号行状态须无害化）——补前缀后在途清单归零；② W910/W911 号在连环让号中跳过且无登记行（违反「跳号须登记」字典规则）——补两行让号登记行。\n",
+ "milestone_block": "- **W923 review 修复批（PR #63 复审两处低危）**：\n  - W907 让号行状态前缀消幻影在途 + W910/W911 补让号登记行\n  - 复审十一项实抽全过（含真实会话库迁移健康零孤儿）",
+ "agents_note": "二〇二六年十月二十四日（W923）应 review 令把合并进主线的二十多个批次复了一遍。机器面三十四项 CI 全绿之外，另抽了十一项声明对拍——渡口页绑定、十二张分享图接线、真实会话库迁移后的数据完整性、归档段可寻性——全部属实。抓出两处低危登记缺陷：一条让号登记行的状态写法会让开工核验器把它永远当成在途批次（幻影）；两个在连环让号中跳过的批次号没按规矩登记防复用。都修了。修的过程中自己又踩了一脚——第一处修复脚本只改了内存忘了写盘，复跑核验当场照出来补上。",
+ "file_index_rows": [
+  "| docs/00-导读/W批次编号对账表.md | W923 | review 修复：W907 让号行状态前缀消幻影在途 + W910/W911 补让号登记行（跳号须登记字典规则） |",
+  "| CHANGELOG.md | W923 | W923 段 |",
+  "| HANDOVER.md | W923 | 级联头尾链与里程碑块 |",
+  "| README.md | W923 | 当前批次版本行 |",
+  "| STRUCTURE.md | W923 | 当前批次版本行 |",
+  "| docs/00-导读/项目说明.md | W923 | 当前批次版本行 |",
+  "| .github/workflows/README.md | W923 | 工作流层区间与里程碑尾标记 |",
+  "| site/index.html | W923 | 页脚批次链插入 W923 |",
+  "| site/data/cross-time-danmaku.html | W923 | 页脚批次链插入 W923 |",
+  "| site/data/tag-cloud.html | W923 | 页脚批次链插入 W923 |",
+  "| site/dukou-engine.html | W923 | 页脚批次链插入 W923 |",
+  "| AGENTS.md | W923 | 版本脚注条目 |",
+  "| archive/docs/AGENTS-ARCHIVE.md | W923 | 脚注滚动迁入的最老条目 |",
+  "| CITATION.cff | W923 | version 同步为 W923 |",
+  "| scripts/output/file-index.md | W923 | W923 段插入 |",
+  "| scripts/output/_w923_spec.json | W923 | 本批级联 spec |",
+  "| scripts/output/_cascade_files_W923.txt | W923 | 级联落盘清单 |"
+ ]
+}
