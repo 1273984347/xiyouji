@@ -62,6 +62,36 @@ CHANGELOG_STATUS = (
 )
 
 
+MISSING_FILE_ITEMS = [
+    "scripts/output/_w953_batch4.json", "scripts/output/_w953_batch5.json",
+    "scripts/_w953_prep_raws2.py", "scripts/_w953_prep_raws3.py",
+    "scripts/_w953_update_readme.py", "scripts/_w953_zoom.py",
+    "scripts/_w953_fix_cascade.py", "scripts/_w953_backfill_stage.py",
+    "assets/promo/plate-set/zoom-w953/w953-recheck.png",
+]
+
+
+def fill_file_line(t):
+    """把 W953 段的「文件」行补齐缺项（返回新文本）"""
+    lines = t.split("\n")
+    idx, in_seg = None, False
+    for i, ln in enumerate(lines):
+        if ln.startswith("### W953（"):
+            in_seg = True
+            continue
+        if in_seg and ln.startswith("> - **文件**："):
+            idx = i
+            break
+        if in_seg and ln.startswith("### "):
+            break
+    if idx is None:
+        return t
+    add = [f for f in MISSING_FILE_ITEMS if f not in lines[idx]]
+    if add:
+        lines[idx] = lines[idx].rstrip() + "、" + "、".join(add)
+    return "\n".join(lines)
+
+
 def git_show(rel):
     p = subprocess.run(["git", "show", "HEAD:" + rel], cwd=REPO, capture_output=True)
     if p.returncode != 0:
@@ -107,13 +137,17 @@ def main() -> int:
     if new_ledger != head:
         stage(LEDGER_REL, new_ledger)
 
-    # ---- CHANGELOG ----
-    head_cl = git_show(CHANGELOG_REL)
+    # ---- CHANGELOG（基底 = 当前索引版·避免与文件行补齐互相覆盖）----
+    head_cl = subprocess.run(["git", "show", ":" + CHANGELOG_REL], cwd=REPO,
+                             capture_output=True).stdout.decode("utf-8")
+    if not head_cl:
+        head_cl = git_show(CHANGELOG_REL)
     new_cl = head_cl
     if "> - **验证**：（见本批脚本输出与对账表回填）" in new_cl:
         new_cl = new_cl.replace("> - **验证**：（见本批脚本输出与对账表回填）", verify, 1)
     if "> - **状态**：在途（认领登记 W953·待提交入库）" in new_cl:
         new_cl = new_cl.replace("> - **状态**：在途（认领登记 W953·待提交入库）", cstatus, 1)
+    new_cl = fill_file_line(new_cl)
     if new_cl != head_cl:
         stage(CHANGELOG_REL, new_cl)
 
