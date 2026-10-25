@@ -11,6 +11,207 @@
 ---
 
 
+## W922 E 裁决落地批（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/js/rag-chat.js | W922 | 裁决①浮窗文案：生成式问答指向桌面版渡口问津（本地检索预期说对）
+| docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md | W922 | 裁决⑧干扰日志窗口收官归档（15 行封档·机器触发点常驻·新事件改登对账表）
+| scripts/preflight_check.py | W922 | 触发点提示常量随窗口收官更新
+| scripts/check_seo_head.py | W922 | 裁决⑨og:image 判据白名单化（现役+12 张主题图·管控件经用户裁决批准）
+| site/index.html 等 12 页 | W922 | og:image 主题接线（og-01..12 按页分配·855 页 SEO 门禁全过）
+| docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md | W922 | 裁决⑫项全部登记（四件落地+八项结论）
+| docs/00-导读/W批次编号对账表.md | W922 | W922 认领行与收官回填 |
+| CHANGELOG.md | W922 | W922 段 |
+| HANDOVER.md | W922 | 级联头尾链与里程碑块 |
+| README.md | W922 | 当前批次版本行 |
+| STRUCTURE.md | W922 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W922 | 当前批次版本行 |
+| .github/workflows/README.md | W922 | 工作流层区间与里程碑尾标记 |
+| site/data/cross-time-danmaku.html | W922 | 页脚批次链插入 W922 |
+| site/data/tag-cloud.html | W922 | 页脚批次链插入 W922 |
+| site/dukou-engine.html | W922 | 页脚批次链插入 W922 |
+| AGENTS.md | W922 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W922 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W922 | version 同步为 W922 |
+| scripts/output/file-index.md | W922 | W922 段插入 |
+| scripts/output/_w922_spec.json | W922 | 本批级联 spec |
+| scripts/output/_cascade_files_W922.txt | W922 | 级联落盘清单 |
+
+## W921 CHANGELOG 主动瘦身批（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CHANGELOG.md | W921 | B-W855-05 主动瘦身：W700-W802 共 102 段迁一级归档（679KB→363KB·低于 503KB 基线）·段守恒 693 断言过
+| archive/docs/CHANGELOG-ARCHIVE.md | W921 | 承接 102 段迁入（978KB·未触 1MB tier2 阈·滚动分支零启用）·头部归档注记
+| docs/00-导读/W批次编号对账表.md | W921 | W921 认领行与收官回填 |
+| HANDOVER.md | W921 | 级联头尾链与里程碑块 |
+| README.md | W921 | 当前批次版本行 |
+| STRUCTURE.md | W921 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W921 | 当前批次版本行 |
+| .github/workflows/README.md | W921 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W921 | 页脚批次链插入 W921 |
+| site/data/cross-time-danmaku.html | W921 | 页脚批次链插入 W921 |
+| site/data/tag-cloud.html | W921 | 页脚批次链插入 W921 |
+| site/dukou-engine.html | W921 | 页脚批次链插入 W921 |
+| AGENTS.md | W921 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W921 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W921 | version 同步为 W921 |
+| scripts/output/file-index.md | W921 | W921 段插入 |
+| scripts/output/_w921_spec.json | W921 | 本批级联 spec |
+| scripts/output/_cascade_files_W921.txt | W921 | 级联落盘清单 |
+
+## W920 副本链值级对账门禁批（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_data_copy_chain.py | W920 | 新增：数据副本链值级对账门禁（JSON 深度相等·基线冻结防增量·CI 态 NOTE 登记·self-test 5/5）——B-W855-04 清偿
+| scripts/output/data-copy-chain-baseline.json | W920 | 存量漂移基线（24 件登记态·方向定性另批）
+| tests/unit/test_check_data_copy_chain.py | W920 | 新增：门禁专项单测 2 例
+| scripts/ci_sim.py | W920 | GATES 清单 +副本链对账（第 11 项）
+| docs/00-导读/W批次编号对账表.md | W920 | W920 认领行与收官回填 |
+| CHANGELOG.md | W920 | W920 段 |
+| HANDOVER.md | W920 | 级联头尾链与里程碑块 |
+| README.md | W920 | 当前批次版本行 |
+| STRUCTURE.md | W920 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W920 | 当前批次版本行 |
+| .github/workflows/README.md | W920 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W920 | 页脚批次链插入 W920 |
+| site/data/cross-time-danmaku.html | W920 | 页脚批次链插入 W920 |
+| site/data/tag-cloud.html | W920 | 页脚批次链插入 W920 |
+| site/dukou-engine.html | W920 | 页脚批次链插入 W920 |
+| AGENTS.md | W920 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W920 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W920 | version 同步为 W920 |
+| scripts/output/file-index.md | W920 | W920 段插入 |
+| scripts/output/_w920_spec.json | W920 | 本批级联 spec |
+| scripts/output/_cascade_files_W920.txt | W920 | 级联落盘清单 |
+
+## W919 DB 三包批（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/db.ts | W919 | B-DB-04 迁移框架（MIGRATIONS v1-v3 单调记账·删 try/catch 手写探测迁移）+ B-DB-02 四查询索引 + v3 feedback 表重建（旧库补外键/单维唯一索引/CHECK·含索引重建修复）+ listSessionsWithMessageCount 单 SQL 版
+| xiyouji-agent-web/server/routes.ts | W919 | B-DB-02 N+1 改写（子查询·limit 默认 50 上限 200）+ B-DB-03 JSON.parse 脏数据降级 null
+| xiyouji-agent-web/server/api.integration.test.ts | W919 | 反馈集成测试对齐外键时代（先落真实 session/message 底数·断言与清理同步）
+| docs/agent/agent-web.md | W919 | schema 变更规范固化（改表定义对旧库无效·一律走 MIGRATIONS·禁探测式迁移）
+| docs/00-导读/W批次编号对账表.md | W919 | W919 认领行与收官回填 |
+| CHANGELOG.md | W919 | W919 段 |
+| HANDOVER.md | W919 | 级联头尾链与里程碑块 |
+| README.md | W919 | 当前批次版本行 |
+| STRUCTURE.md | W919 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W919 | 当前批次版本行 |
+| .github/workflows/README.md | W919 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W919 | 页脚批次链插入 W919 |
+| site/data/cross-time-danmaku.html | W919 | 页脚批次链插入 W919 |
+| site/data/tag-cloud.html | W919 | 页脚批次链插入 W919 |
+| site/dukou-engine.html | W919 | 页脚批次链插入 W919 |
+| AGENTS.md | W919 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W919 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W919 | version 同步为 W919 |
+| scripts/output/file-index.md | W919 | W919 段插入 |
+| scripts/output/_w919_spec.json | W919 | 本批级联 spec |
+| scripts/output/_cascade_files_W919.txt | W919 | 级联落盘清单 |
+
+## W918 检索降级批（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/chat.ts | W918 | B-ARCH-01 检索降级：LLM 上游不可达（5xx/429/ECONNREFUSED 族）时 SSE 返回降级说明+done 而非裸 5xx（已送达的 tool_result 检索引用仍有效·W821「降级可用」语义落地）
+| docs/00-导读/W批次编号对账表.md | W918 | W918 认领行与收官回填 |
+| CHANGELOG.md | W918 | W918 段 |
+| HANDOVER.md | W918 | 级联头尾链与里程碑块 |
+| README.md | W918 | 当前批次版本行 |
+| STRUCTURE.md | W918 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W918 | 当前批次版本行 |
+| .github/workflows/README.md | W918 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W918 | 页脚批次链插入 W918 |
+| site/data/cross-time-danmaku.html | W918 | 页脚批次链插入 W918 |
+| site/data/tag-cloud.html | W918 | 页脚批次链插入 W918 |
+| site/dukou-engine.html | W918 | 页脚批次链插入 W918 |
+| AGENTS.md | W918 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W918 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W918 | version 同步为 W918 |
+| scripts/output/file-index.md | W918 | W918 段插入 |
+| scripts/output/_w918_spec.json | W918 | 本批级联 spec |
+| scripts/output/_cascade_files_W918.txt | W918 | 级联落盘清单 |
+
+## W917 DB 正确性包一（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/db.ts | W917 | B-DB-01 四 P0 之三：pragma foreign_keys=ON（级联生效）/ clearAllData 补 feedback / 反馈唯一索引 (message_id,verdict)→(message_id) 单维 + upsert 改判 / INSERT OR IGNORE→ON CONFLICT 覆盖
+| xiyouji-agent-web/server/chat.ts | W917 | B-DB-01 P0 之四：会话主键服务端生成 uuidv4()（客户端可控 id 是串档路径·真值经响应返回）
+| scripts/check_db_schema.py | W917 | 新增：DB schema 门禁（四不变量静态锁定·self-test 3/3）——B-DB-05 清偿
+| tests/unit/test_check_db_schema.py | W917 | 新增：门禁专项单测 2 例
+| scripts/ci_sim.py | W917 | GATES 清单 +DB schema（第 10 项）
+| docs/00-导读/W批次编号对账表.md | W917 | W917 认领行与收官回填 |
+| CHANGELOG.md | W917 | W917 段 |
+| HANDOVER.md | W917 | 级联头尾链与里程碑块 |
+| README.md | W917 | 当前批次版本行 |
+| STRUCTURE.md | W917 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W917 | 当前批次版本行 |
+| .github/workflows/README.md | W917 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W917 | 页脚批次链插入 W917 |
+| site/data/cross-time-danmaku.html | W917 | 页脚批次链插入 W917 |
+| site/data/tag-cloud.html | W917 | 页脚批次链插入 W917 |
+| site/dukou-engine.html | W917 | 页脚批次链插入 W917 |
+| AGENTS.md | W917 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W917 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W917 | version 同步为 W917 |
+| scripts/output/file-index.md | W917 | W917 段插入 |
+| scripts/output/_w917_spec.json | W917 | 本批级联 spec |
+| scripts/output/_cascade_files_W917.txt | W917 | 级联落盘清单 |
+
+## W916 波二第三件批（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_page_admission.py | W916 | 新增：新建页准入门禁（静态版·禁 type=module + 零外域 script src·857 页 0 FAIL·self-test 3/3）——C-W818-01 清偿
+| tests/unit/test_check_page_admission.py | W916 | 新增：门禁专项单测 2 例
+| scripts/ci_sim.py | W916 | GATES 清单 +页准入（第 9 项·每 PR 实跑）
+| docs/00-导读/W批次编号对账表.md | W916 | W916 认领行与收官回填 |
+| CHANGELOG.md | W916 | W916 段 |
+| HANDOVER.md | W916 | 级联头尾链与里程碑块 |
+| README.md | W916 | 当前批次版本行 |
+| STRUCTURE.md | W916 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W916 | 当前批次版本行 |
+| .github/workflows/README.md | W916 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W916 | 页脚批次链插入 W916 |
+| site/data/cross-time-danmaku.html | W916 | 页脚批次链插入 W916 |
+| site/data/tag-cloud.html | W916 | 页脚批次链插入 W916 |
+| site/dukou-engine.html | W916 | 页脚批次链插入 W916 |
+| AGENTS.md | W916 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W916 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W916 | version 同步为 W916 |
+| scripts/output/file-index.md | W916 | W916 段插入 |
+| scripts/output/_w916_spec.json | W916 | 本批级联 spec |
+| scripts/output/_cascade_files_W916.txt | W916 | 级联落盘清单 |
+
+## W915 波二余件一·二批（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/agent/gates.md | W915 | 第 43 槽去时点快照数字（缺口三数/耗时/770→指向报告与基线文件·时点快照不入判据文档）——A-T02-01 清偿
+| site/404.html | W915 | v4 间距令牌迁移（:root 页内副本 + 24/48/40 等值替换 var(--space-6/9/8)·非刻度值按 W891 等值纪律保留）——C-B02 清偿
+| docs/00-导读/W批次编号对账表.md | W915 | W915 认领行与收官回填 |
+| CHANGELOG.md | W915 | W915 段 |
+| HANDOVER.md | W915 | 级联头尾链与里程碑块 |
+| README.md | W915 | 当前批次版本行 |
+| STRUCTURE.md | W915 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W915 | 当前批次版本行 |
+| .github/workflows/README.md | W915 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W915 | 页脚批次链插入 W915 |
+| site/data/cross-time-danmaku.html | W915 | 页脚批次链插入 W915 |
+| site/data/tag-cloud.html | W915 | 页脚批次链插入 W915 |
+| site/dukou-engine.html | W915 | 页脚批次链插入 W915 |
+| AGENTS.md | W915 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W915 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W915 | version 同步为 W915 |
+| scripts/output/file-index.md | W915 | W915 段插入 |
+| scripts/output/_w914_spec.json | W915 | 本批级联 spec |
+| scripts/output/_cascade_files_W915.txt | W915 | 级联落盘清单 |
+
 ## W914 英文版 README（2026-10-24）
 
 | 文件 | W | 说明 |

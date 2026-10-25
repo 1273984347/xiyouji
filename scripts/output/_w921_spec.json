@@ -1,0 +1,31 @@
+{
+ "batch": "W921",
+ "date": "2026-10-24",
+ "title": "W921 CHANGELOG 主动瘦身批（B-W855-05 清偿·102 段迁一级归档·D1 全清）",
+ "desc": "变更日志百零二段迁一级归档，体积回基线以下，守恒断言全程护航",
+ "head_entry": "2026-10-24（W921 CHANGELOG 瘦身批）",
+ "head_sentence": "百零二段老版本迁一级归档，变更日志回到基线以下，真实欠账清单全部清完",
+ "changelog_body": "\n\n\n\n> **来源**：用户 2026-10-24 令「继续」——T-18 D1 真债第三件（B-W855-05 治理文档瘦身）。\n\n> - **文件**：CHANGELOG.md、archive/docs/CHANGELOG-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w921_spec.json、scripts/output/_cascade_files_W921.txt（逐件行见 file-index W921 段）。\n\n**B-W855-05 CHANGELOG 主动瘦身**：679KB（201 段现役·W711 审计时已超基线 11%+ 后继续涨至超基线 35%）——按文档规范 §5 归档规则执行 W736 同款一级迁移：**W700-W802 共 102 段迁 archive/docs/CHANGELOG-ARCHIVE.md**（迁后 CHANGELOG 363KB·低于 503KB 基线达标；ARCHIVE 978KB 未触 1MB tier2 阈·滚动分支零启用）。迁移脚本全断言（三文件段 W 号并集守恒 693 / 全局无重号 / 迁后倒序）·任一不符零落盘——首版 tier2 滚动分支缺陷即被守恒断言当场拦下（零落盘）后收缩窗口绕开。段内容零改动（纯位置迁移·历史段禁改纪律保持）。\n\n**验证**：第 17 门禁索引健康全过（段完整性/倒序/编号上限）·第 31 门禁 C4 仅批内在途残留。\n",
+ "milestone_block": "- **W921 CHANGELOG 瘦身批（B-W855-05 清偿·D1 第三件·T-18 D1 全清）**：\n  - W700-W802 共 102 段迁一级归档·679KB→363KB（低于基线）·ARCHIVE 978KB 未触 tier2 阈\n  - 全断言迁移（693 段守恒/无重号/倒序）·守恒断言拦下首版滚动缺陷\n  - 验证：第 17 门禁全过",
+ "agents_note": "二〇二六年十月二十四日（W921）把变更日志瘦身了。这份文件涨到六百七十九 KB，比健康基线高出三成多，全靠主动归档才压得回去。做法是老式的搬段：把一百零二个老版本段原封不动移进归档文件，正本只剩最近一百一十段，体积回到基线以下。搬移脚本带三道守恒断言，第一版里 tier2 滚动分支有个会丢段的缺陷，被守恒断言当场拦下，一个字节都没落盘，改用不触发滚动的窗口绕开。段内容一个字没动，只挪位置。至此真实欠账清单全部清完。",
+ "file_index_rows": [
+  "| CHANGELOG.md | W921 | B-W855-05 主动瘦身：W700-W802 共 102 段迁一级归档（679KB→363KB·低于 503KB 基线）·段守恒 693 断言过",
+  "| archive/docs/CHANGELOG-ARCHIVE.md | W921 | 承接 102 段迁入（978KB·未触 1MB tier2 阈·滚动分支零启用）·头部归档注记",
+  "| docs/00-导读/W批次编号对账表.md | W921 | W921 认领行与收官回填 |",
+  "| HANDOVER.md | W921 | 级联头尾链与里程碑块 |",
+  "| README.md | W921 | 当前批次版本行 |",
+  "| STRUCTURE.md | W921 | 当前批次版本行 |",
+  "| docs/00-导读/项目说明.md | W921 | 当前批次版本行 |",
+  "| .github/workflows/README.md | W921 | 工作流层区间与里程碑尾标记 |",
+  "| site/index.html | W921 | 页脚批次链插入 W921 |",
+  "| site/data/cross-time-danmaku.html | W921 | 页脚批次链插入 W921 |",
+  "| site/data/tag-cloud.html | W921 | 页脚批次链插入 W921 |",
+  "| site/dukou-engine.html | W921 | 页脚批次链插入 W921 |",
+  "| AGENTS.md | W921 | 版本脚注条目 |",
+  "| archive/docs/AGENTS-ARCHIVE.md | W921 | 脚注滚动迁入的最老条目 |",
+  "| CITATION.cff | W921 | version 同步为 W921 |",
+  "| scripts/output/file-index.md | W921 | W921 段插入 |",
+  "| scripts/output/_w921_spec.json | W921 | 本批级联 spec |",
+  "| scripts/output/_cascade_files_W921.txt | W921 | 级联落盘清单 |"
+ ]
+}

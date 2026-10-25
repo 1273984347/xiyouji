@@ -1,0 +1,30 @@
+{
+ "drift": [
+  "cave_by_owner_rank.json",
+  "cave_by_region.json",
+  "cave_top_luxury.json",
+  "character_cards.json",
+  "counterfactual_summary.json",
+  "cultural_misreading_summary.json",
+  "deconstruction_summary.json",
+  "domino_causality.json",
+  "east_asia_amplification.json",
+  "east_asia_receptions.json",
+  "heart_sutra_sculpture.json",
+  "journey_route.json",
+  "monster_ipo.json",
+  "narrative_cards.json",
+  "project_review.json",
+  "rescue_roi.json",
+  "scent_map.json",
+  "social_media_summary.json",
+  "spiral_progress.json",
+  "team_effectiveness.json",
+  "translation_bias.json",
+  "trip_report.json",
+  "villain_matrix.json",
+  "webnovel_adaptations.json"
+ ],
+ "recorded_by": "W920",
+ "note": "存量漂移登记态（方向定性另批）·新漂移判红"
+}
