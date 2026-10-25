@@ -35,6 +35,7 @@ STEMS = [
     "hero-line-03-classic-scroll", "hero-line-04-sinan-compass",
     "hero-line-05-lotus", "hero-line-06-nine-ring-staff",
     "hero-line-07-banana-fan", "hero-line-08-jade-vase",
+    "hero-line-09-pilgrim-four",
 ]
 
 PAPER = (250, 247, 240)
