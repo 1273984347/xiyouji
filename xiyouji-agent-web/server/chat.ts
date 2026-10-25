@@ -52,9 +52,10 @@ interface TrailToolCall {
   isError?: boolean;
 }
 
-/** 从 SQLite 重建本轮消息序列（W680：替代 SDK resume）。 */
-function rebuildHistory(sessionId: string): ChatMessage[] {
-  const rows = db.getMessagesBySession(sessionId);
+/** 从存储层重建本轮消息序列（W680：替代 SDK resume）。 */
+async function rebuildHistory(sessionId: string): Promise<ChatMessage[]> {
+  // W934：存储层抽象后为异步（PG 是网络库）
+  const rows = await db.getMessagesBySession(sessionId);
   const history: ChatMessage[] = [];
   for (const m of rows.slice(-21)) { // 最近 20 条 + 本轮 user 消息，控 token 上限
     if (m.role === "user" && m.content) history.push({ role: "user", content: m.content });
@@ -155,13 +156,13 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
     }
 
     // 获取或创建会话
-    let session = sessionId ? db.getSession(sessionId) : null;
+    let session = sessionId ? await db.getSession(sessionId) : null;
     const now = new Date().toISOString();
 
     if (!session) {
       // 创建新会话
       logger.info("创建新会话", { request_id: req.requestId, session_id: sessionId ?? null });
-      session = db.createSession({
+      session = await db.createSession({
         // W917/W922 B-DB-01 串档防护：客户端 id 须为标准 UUID 形态才沿用（撞已有号由上方 getSession 分支处理）
         // ——「旧会话正文泄漏进新建同名会话」的串档路径在「任意形态 id 撞库」；形态卡死后前端契约不破坏
         id: (sessionId && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(sessionId))
@@ -185,7 +186,7 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
 
     // 保存用户消息到数据库
     try {
-      db.createMessage({
+      await db.createMessage({
         id: userMessageId,
         session_id: session.id,
         role: "user",
@@ -227,7 +228,7 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
       });
 
       // 会话历史（W680：从 SQLite 重建，替代 SDK resume——消息表已存全量 user/assistant 文本）
-      const history = rebuildHistory(session.id);
+      const history = await rebuildHistory(session.id);
       const toolset = createToolset(workingDir);
       // W752：被权限桥拒绝的工具调用 id——agent-loop 对拒绝回执的 isError 恒为 false，
       // 故工具结果处需借此区分「权限拒绝（根本没执行）」与「执行成功」（见 auditToolResult）。
@@ -328,7 +329,7 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
       res.off("close", abortStream); // W791：注销侧修正为 res（监听注册在 res·W568 改挂时漏改注销）
 
       // 保存助手消息到数据库
-      db.createMessage({
+      await db.createMessage({
         id: assistantMessageId,
         session_id: session.id,
         role: "assistant",
@@ -339,9 +340,9 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
       });
 
       // 更新会话标题（如果是第一条消息）
-      const messages = db.getMessagesBySession(session.id);
+      const messages = await db.getMessagesBySession(session.id);
       if (messages.length <= 2) {
-        db.updateSession(session.id, {
+        await db.updateSession(session.id, {
           title: titleFromMessage(message),
           model: selectedModel,
         });

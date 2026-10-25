@@ -9,7 +9,7 @@
 
 ## 这个目录装什么
 
-生成时点含 5 个直属文件（Python 脚本、其他）。详见同目录 `index.md` 的逐文件清单。
+生成时点含 6 个直属文件（JavaScript / TypeScript、Python 脚本、其他）。详见同目录 `index.md` 的逐文件清单。
 
 ## 维护约定
 

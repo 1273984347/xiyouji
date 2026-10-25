@@ -343,6 +343,135 @@ def check_migrations(res: Result, root: Path) -> None:
                 "" if not hash_comments else "命中 %d 行：%s" % (len(hash_comments), hash_comments[0].strip()[:60]))
 
 
+def strip_ts_comments(text: str) -> str:
+    """去掉 TS/JS 注释（块注释 + 行注释），只留代码。
+
+    为什么需要（W934 实跑踩坑）：本校验器多处断言形如「源码里必须出现 X」，
+    而**文档注释里同样会出现 X**（迁移器头部就写着一段示例代码）。
+    不剥注释 ⇒ 断言会读到注释里的示例 ⇒ 真代码被改坏也照样报绿（假阴性）。
+    反向验证 M17 首跑即栽在这上面（rc=0·判据未命中）。
+    """
+    text = re.sub(r"/\*.*?\*/", "", text, flags=re.S)
+    text = re.sub(r"//[^\n]*", "", text)
+    return text
+
+
+def check_app_migration(res: Result, root: Path) -> None:
+    """C5 应用迁移批不变量（W934 · D-2a）。
+
+    覆盖两类东西：
+      ① **业务三表 schema**（migrations/0002_app_tables.sql）——字段类型 / CHECK / 唯一维度 / 外键级联；
+      ② **迁移器与授权模型**（bin/migrate-sqlite-to-pg.ts、bin/initdb-bootstrap.sh）——
+         源库只读、禁拼 SQL、禁出口令、三重对账、默认权限 FOR ROLE、授权先于建表。
+
+    这些判据不是「文本洁癖」，每一条都对应一个**已经踩过的坑**或一个**会导致静默错误**的形态：
+      - 源库可写 ⇒ 可能改坏全仓唯一不可重建的数据；
+      - 模板串拼 SQL ⇒ SQL 注入面；
+      - 默认权限缺 FOR ROLE ⇒ 只读账号读不到业务表（**静默失效**，不报错）；
+      - 授权晚于建表 ⇒ 记账表无授权（实测 permission denied）；
+      - 只比行数 ⇒ 假对账（删一行补一行仍相等）。
+    """
+    # ---------- ① 业务三表 schema ----------
+    app_sql = root / "migrations" / "0002_app_tables.sql"
+    if not app_sql.exists():
+        res.add("C5", "业务三表迁移文件存在（0002_app_tables.sql）", False,
+                "缺文件：%s" % app_sql.name)
+        return
+    sql = read_text(app_sql)
+
+    for tbl in ("sessions", "messages", "feedback"):
+        res.add("C5", "0002 建表 %s" % tbl,
+                re.search(r"CREATE TABLE IF NOT EXISTS\s+%s\b" % tbl, sql, re.I) is not None)
+    # TIMESTAMPTZ 必须出现在**列定义**里（不在注释里）——用行首列名锚定，
+    # 裸词计数会把 COMMENT 里的提及也算进去 ⇒ 断言强度虚高。
+    ts_cols = re.findall(r"^\s+[a-z_]+\s+TIMESTAMPTZ\b", sql, re.M | re.I)
+    res.add("C5", "0002 时间列用 TIMESTAMPTZ（§7.4 生命周期需日期算术）",
+            len(ts_cols) >= 4,
+            "列定义中 TIMESTAMPTZ %d 处（sessions×2 + messages×1 + feedback×1）" % len(ts_cols))
+    res.add("C5", "0002 保留 role CHECK 约束（§7.3：enum 或 CHECK 等价·取 CHECK）",
+            re.search(r"role\s+TEXT\s+NOT NULL\s+CHECK\s*\(\s*role\s+IN\s*\(\s*'user'\s*,\s*'assistant'", sql, re.I) is not None)
+    res.add("C5", "0002 保留 feedback.message_id 唯一维度（W917 B-DB-01·§7.3 要求）",
+            re.search(r"CREATE UNIQUE INDEX IF NOT EXISTS idx_feedback_message\s+ON\s+feedback\s*\(\s*message_id\s*\)", sql, re.I) is not None)
+    res.add("C5", "0002 外键级联 ON DELETE CASCADE（两后端级联语义一致）",
+            len(re.findall(r"ON DELETE CASCADE", sql, re.I)) >= 2,
+            "出现 %d 次" % len(re.findall(r"ON DELETE CASCADE", sql, re.I)))
+    res.add("C5", "0002 含 message_count 查询所需的 (session_id, created_at) 复合索引",
+            re.search(r"idx_messages_session_created\s+ON\s+messages\s*\(\s*session_id\s*,\s*created_at\s*\)", sql, re.I) is not None)
+
+    # ---------- ② 迁移器 ----------
+    mig = root / "bin" / "migrate-sqlite-to-pg.ts"
+    if not mig.exists():
+        res.add("C5", "迁移器存在（bin/migrate-sqlite-to-pg.ts）", False, "缺文件")
+        return
+    mtext = read_text(mig)
+    mcode = strip_ts_comments(mtext)   # 只看代码·不看文档注释里的示例
+
+    res.add("C5", "迁移器**只读**打开源库（readonly: true·chat.db 是全仓唯一不可重建数据）",
+            re.search(r"new\s+Database\(\s*sqlitePath\s*,\s*\{[^)]*readonly\s*:\s*true", mcode, re.S) is not None)
+    res.add("C5", "迁移器源库必须带 fileMustExist（禁静默新建空库冒充源库）",
+            re.search(r"new\s+Database\(\s*sqlitePath\s*,\s*\{[^)]*fileMustExist\s*:\s*true", mcode, re.S) is not None)
+    # 禁模板串拼 SQL：抽出所有反引号字符串，含 SQL 关键字且含 ${} 即判红
+    sql_tpls = [t for t in re.findall(r"`([^`]*)`", mcode)
+                if re.search(r"\b(SELECT|INSERT|UPDATE|DELETE)\b", t, re.I) and "${" in t]
+    res.add("C5", "迁移器禁模板串拼 SQL（参数化查询）", not sql_tpls,
+            "" if not sql_tpls else "命中：%s" % sql_tpls[0][:60])
+    res.add("C5", "迁移器使用 $n 占位符（确为参数化形态）",
+            re.search(r"\$\d", mcode) is not None)
+    res.add("C5", "迁移器禁把口令写进输出",
+            re.search(r"console\.(log|error|warn)\s*\([^)]*password", mcode, re.I) is None
+            and "postgres://" not in mcode)
+    # 三重对账：锚定**计算式**（不是接口声明里的字段名——声明恒在，改计算式才判红）
+    res.add("C5", "迁移器做**三重对账**（行数 + 主键集合 + 逐行内容）",
+            all(re.search(p, mcode) is not None for p in (
+                r"rows_equal\s*:\s*sourceRows\.length\s*===\s*targetRows\.length",
+                r"pk_sets_equal\s*:\s*pkSetsEqual",
+                r"content_equal\s*:\s*contentEqual",
+            )),
+            "三个判据须各自锚定到计算式（只匹配字段名会被接口声明蒙混）")
+    res.add("C5", "迁移器对账须覆盖全部三表",
+            all(('"%s"' % t) in mcode for t in ("sessions", "messages", "feedback")))
+    res.add("C5", "迁移器不借道应用写接口（否则 createMessage 会把会话 updated_at 刷成现在·破坏保真）",
+            re.search(r"createMessage\s*\(", mcode) is None
+            and re.search(r"createSession\s*\(", mcode) is None)
+
+    # ---------- ③ 授权模型（D-1 缺陷修复的固化） ----------
+    boot = root / "bin" / "initdb-bootstrap.sh"
+    if not boot.exists():
+        res.add("C5", "引导脚本存在", False, "缺文件")
+        return
+    btext = read_text(boot)
+
+    # 全部 ALTER DEFAULT PRIVILEGES 都必须带 FOR ROLE（逐条比计数，不靠「有没有出现过」——
+    # 只查「出现过一次」会被「三条里只改对一条」蒙混过去）。
+    # ⚠ 计数必须**排除注释行**：本文件的头注里就写了「ALTER DEFAULT PRIVILEGES」这个词，
+    #   若把注释一起数，计数会多出一条 ⇒ 断言既虚高又难解释（实测踩过）。
+    bcode = "\n".join(
+        ln for ln in btext.splitlines() if not ln.lstrip().startswith("#")
+    )
+    dp_total = len(re.findall(r"ALTER DEFAULT PRIVILEGES", bcode))
+    dp_for_role = len(re.findall(r"ALTER DEFAULT PRIVILEGES\s+FOR\s+ROLE\s+\$\{APP_USER\}", bcode))
+    res.add("C5", "引导脚本 ALTER DEFAULT PRIVILEGES **全部带 FOR ROLE**（缺则只对执行者生效·静默失效）",
+            dp_total >= 3 and dp_total == dp_for_role,
+            "代码行中共 %d 条·带 FOR ROLE 的 %d 条（注释行不计）" % (dp_total, dp_for_role))
+    res.add("C5", "引导脚本对**既有表**显式 GRANT（默认权限只覆盖未来新建的表）",
+            re.search(r"GRANT SELECT ON ALL TABLES IN SCHEMA public TO \$\{RO_USER\}", btext) is not None)
+    res.add("C5", "引导脚本对记账表 schema_migrations 显式 GRANT（否则应用账号读它 permission denied）",
+            re.search(r"GRANT SELECT, INSERT, UPDATE ON TABLE schema_migrations TO \$\{APP_USER\}", btext) is not None)
+    # W934 实跑实证（静态层原本查不出）：记账表由 postgres 建 ⇒ 迁移序列以应用账号执行时
+    #   `COMMENT ON TABLE schema_migrations` 报「must be owner of table schema_migrations」
+    #   ⇒ 迁移序列**根本跑不起来**。这是**所有权**问题，不是形态问题。
+    #   守卫：引导脚本必须把记账表的 owner 转给应用账号。
+    res.add("C5", "引导脚本把记账表 owner 转给应用账号（否则 COMMENT ON TABLE 报 must be owner）",
+            re.search(r"ALTER TABLE schema_migrations OWNER TO \$\{APP_USER\}", btext) is not None)
+
+    # 顺序断言：默认权限必须**先于**建表设置（同样只看代码行·注释不算）
+    i_default = bcode.find("ALTER DEFAULT PRIVILEGES FOR ROLE")
+    i_create = bcode.find("CREATE TABLE IF NOT EXISTS schema_migrations")
+    res.add("C5", "引导脚本**先设默认权限后建表**（顺序反了 ⇒ 先建的表无授权）",
+            i_default >= 0 and i_create >= 0 and i_default < i_create,
+            "默认权限@%d · 建表@%d（代码行内偏移）" % (i_default, i_create))
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="PG 部署基线静态校验器")
     ap.add_argument("--report", action="store_true", help="报告模式（不判退出码）")
@@ -358,6 +487,7 @@ def main() -> int:
     check_hba(res, root)
     check_scripts(res, root)
     check_migrations(res, root)
+    check_app_migration(res, root)
 
     total = len(res.checks)
     failed = len(res.fails)

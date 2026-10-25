@@ -1,0 +1,51 @@
+=== 清理前快照（W928 演练残留）  2026-10-25 17:49:29 ===
+--- 表清单 / owner / acl ---
+      relname      |  owner   |                                     relacl                                     
+-------------------+----------+--------------------------------------------------------------------------------
+ audit_archive     | postgres | {postgres=arwdDxt/postgres,xiyouji_app=arwdDxt/postgres,xiyouji_ro=r/postgres}
+ feedback          | postgres | {postgres=arwdDxt/postgres,xiyouji_app=arwdDxt/postgres,xiyouji_ro=r/postgres}
+ messages          | postgres | {postgres=arwdDxt/postgres,xiyouji_app=arwdDxt/postgres,xiyouji_ro=r/postgres}
+ schema_migrations | postgres | 
+ sessions          | postgres | {postgres=arwdDxt/postgres,xiyouji_app=arwdDxt/postgres,xiyouji_ro=r/postgres}
+(5 rows)
+
+--- 行数 ---
+ sessions | messages | feedback | migrations 
+----------+----------+----------+------------
+        6 |       50 |       20 |          1
+(1 row)
+
+--- schema_migrations 内容（checksum 为占位串即演练残留） ---
+ version |     name      |  checksum   |          applied_at           | applied_by 
+---------+---------------+-------------+-------------------------------+------------
+       1 | 0001_baseline | w927-verify | 2026-10-25 08:34:25.646207+00 | postgres
+(1 row)
+
+--- sessions 桩结构（只有 3 列·与现役 6 列不符） ---
+                        Table "public.sessions"
+   Column   |           Type           | Collation | Nullable | Default 
+------------+--------------------------+-----------+----------+---------
+ id         | text                     |           | not null | 
+ title      | text                     |           | not null | 
+ created_at | timestamp with time zone |           | not null | now()
+Indexes:
+    "sessions_pkey" PRIMARY KEY, btree (id)
+
+--- 抽样数据 ---
+    id     |     title     |          created_at           
+-----------+---------------+-------------------------------
+ sess_1    | 验证会话 1    | 2026-10-25 08:34:25.642573+00
+ sess_2    | 验证会话 2    | 2026-10-25 08:34:25.642573+00
+ sess_3    | 验证会话 3    | 2026-10-25 08:34:25.642573+00
+ sess_4    | 验证会话 4    | 2026-10-25 08:34:25.642573+00
+ sess_5    | 验证会话 5    | 2026-10-25 08:34:25.642573+00
+ wal_probe | 触发 WAL 归档 | 2026-10-25 08:34:26.042018+00
+(6 rows)
+
+--- 默认权限（for_role=postgres 即缺陷 ① 的现场） ---
+ for_role | defaclobjtype |                      defaclacl                       
+----------+---------------+------------------------------------------------------
+ postgres | r             | {xiyouji_app=arwdDxt/postgres,xiyouji_ro=r/postgres}
+ postgres | S             | {xiyouji_app=rwU/postgres}
+(2 rows)
+

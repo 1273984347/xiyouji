@@ -78,7 +78,33 @@ fi
 # --- ④ 应用库内的对象与权限 ---------------------------------------------------
 PSQL_APP=(psql -v ON_ERROR_STOP=1 -U postgres -d "${APP_DB}")
 
+# W934 修（授权缺陷 ①）：`ALTER DEFAULT PRIVILEGES` 必须带 `FOR ROLE`。
+#   病根：原写法缺 FOR ROLE ⇒ 默认权限挂在**执行本语句的角色**（postgres）名下，
+#   而业务表是由**应用账号**创建的 ⇒ 默认权限对它们**静默失效** ⇒ 只读账号读不到业务表。
+#   修法：显式 `FOR ROLE ${APP_USER}`，让「谁建表谁挂默认权限」这件事对上号。
+#
+# W934 修（授权缺陷 ②）：**默认权限必须设在建表之前**。
+#   病根：原顺序是「先建 schema_migrations·后设默认权限」⇒ 该表落在授权之前 ⇒
+#   实测应用账号读它报 `permission denied for table schema_migrations`。
+#   修法：调换顺序，并在建表后补一条既有表的显式 GRANT（默认权限只覆盖「未来新建」）。
+log "设置权限矩阵（默认权限 FOR ROLE=${APP_USER}·先设权限后建表）"
+
+# 业务账号的库级权限（最小权限：只给 CONNECT + 未来建表权，不给超级用户）
+"${PSQL_APP[@]}" -c "GRANT CONNECT ON DATABASE ${APP_DB} TO ${APP_USER}" >/dev/null
+"${PSQL_APP[@]}" -c "GRANT CONNECT ON DATABASE ${APP_DB} TO ${RO_USER}" >/dev/null
+
+# 只读账号：只给 CONNECT + schema USAGE + 表 SELECT（未来表由默认权限覆盖）
+"${PSQL_APP[@]}" -c "GRANT USAGE ON SCHEMA public TO ${RO_USER}" >/dev/null
+"${PSQL_APP[@]}" -c "ALTER DEFAULT PRIVILEGES FOR ROLE ${APP_USER} IN SCHEMA public GRANT SELECT ON TABLES TO ${RO_USER}" >/dev/null
+
+# 应用账号在 public schema 的建表权（迁移脚本需要 DDL）
+"${PSQL_APP[@]}" -c "GRANT ALL ON SCHEMA public TO ${APP_USER}" >/dev/null
+"${PSQL_APP[@]}" -c "ALTER DEFAULT PRIVILEGES FOR ROLE ${APP_USER} IN SCHEMA public GRANT ALL ON TABLES TO ${APP_USER}" >/dev/null
+"${PSQL_APP[@]}" -c "ALTER DEFAULT PRIVILEGES FOR ROLE ${APP_USER} IN SCHEMA public GRANT ALL ON SEQUENCES TO ${APP_USER}" >/dev/null
+
 # 迁移序列表（迁移机制的记账表 · 见 migrations/README.md）
+# 注意：本表由超级用户 postgres 创建 ⇒ **拿不到上面 FOR ROLE ${APP_USER} 的默认权限**
+#      ⇒ 建表后必须显式 GRANT（这就是原缺陷 ② 的现场）。
 "${PSQL_APP[@]}" -c "
 CREATE TABLE IF NOT EXISTS schema_migrations (
   version     INTEGER     PRIMARY KEY,
@@ -89,20 +115,21 @@ CREATE TABLE IF NOT EXISTS schema_migrations (
 );
 COMMENT ON TABLE schema_migrations IS '迁移序列记账（version 单调递增·与 SQLite user_version 同职能但换机制）';
 " >/dev/null
-log "迁移序列表就绪：schema_migrations"
+# W934 修（授权缺陷 ③）：**记账表必须归应用账号所有**。
+#   病根：上表由超级用户 postgres 建 ⇒ 迁移序列以应用账号执行时，
+#         `COMMENT ON TABLE schema_migrations` 直接报
+#         「must be owner of table schema_migrations」⇒ 迁移序列**跑不起来**。
+#         （W934 实跑实证·静态校验层查不出——它不是形态问题·是所有权问题。）
+#   修法：建表后立即把 owner 转给应用账号 ⇒ 应用账号可 COMMENT、可 INSERT 记账，
+#         且「谁跑迁移谁拥有迁移对象」的所有权模型自洽。
+"${PSQL_APP[@]}" -c "ALTER TABLE schema_migrations OWNER TO ${APP_USER}" >/dev/null
+log "迁移序列表就绪：schema_migrations（owner=${APP_USER}）"
 
-# 业务账号的库级权限（最小权限：只给 CONNECT + 未来建表权，不给超级用户）
-"${PSQL_APP[@]}" -c "GRANT CONNECT ON DATABASE ${APP_DB} TO ${APP_USER}" >/dev/null
-"${PSQL_APP[@]}" -c "GRANT CONNECT ON DATABASE ${APP_DB} TO ${RO_USER}" >/dev/null
-
-# 只读账号：只给 CONNECT + schema USAGE + 表 SELECT（未来表由默认权限覆盖）
-"${PSQL_APP[@]}" -c "GRANT USAGE ON SCHEMA public TO ${RO_USER}" >/dev/null
-"${PSQL_APP[@]}" -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO ${RO_USER}" >/dev/null
-
-# 应用账号在 public schema 的建表权（迁移脚本需要 DDL）
-"${PSQL_APP[@]}" -c "GRANT ALL ON SCHEMA public TO ${APP_USER}" >/dev/null
-"${PSQL_APP[@]}" -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO ${APP_USER}" >/dev/null
-"${PSQL_APP[@]}" -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO ${APP_USER}" >/dev/null
+# W934 修（授权缺陷 ② 的补齐）：既有表的只读授权。
+#   默认权限只覆盖「之后新建」的表；已存在的表（含 schema_migrations 与迁移序列建的业务表）
+#   必须显式 GRANT —— 否则只读账号看不到已建好的表。
+"${PSQL_APP[@]}" -c "GRANT SELECT, INSERT, UPDATE ON TABLE schema_migrations TO ${APP_USER}" >/dev/null
+"${PSQL_APP[@]}" -c "GRANT SELECT ON ALL TABLES IN SCHEMA public TO ${RO_USER}" >/dev/null
 log "权限矩阵就绪（§12.2 缺口 2 对应：应用层账号与超级用户分离）"
 
 # --- ⑤ 只读库连接挂载（供报表/巡检直连）---------------------------------------

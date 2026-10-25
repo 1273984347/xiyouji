@@ -65,6 +65,46 @@ MUTATIONS = [
     ("M13-脚本：目录格式配压缩", "bin/backup.sh",
      'pg_basebackup -D "$TARGET" -X none -R -c fast',
      'pg_basebackup -D "$TARGET" -X none -R -z -c fast', "压缩"),
+    # ---- W934 · D-2a：C5 组（应用迁移批不变量） ----
+    # M14：去掉 role CHECK 约束 ⇒ 方案 §7.3 要求的等价约束丢失
+    ("M14-迁移：去掉 role CHECK 约束", "migrations/0002_app_tables.sql",
+     "role       TEXT        NOT NULL CHECK (role IN ('user', 'assistant')),",
+     "role       TEXT        NOT NULL,", "role CHECK"),
+    # M15：feedback 唯一维度退回普通索引 ⇒ W917 B-DB-01 的「同消息双 verdict」防线消失
+    ("M15-迁移：feedback 唯一索引退化", "migrations/0002_app_tables.sql",
+     "CREATE UNIQUE INDEX IF NOT EXISTS idx_feedback_message ON feedback (message_id);",
+     "CREATE INDEX IF NOT EXISTS idx_feedback_message ON feedback (message_id);", "唯一维度"),
+    # M16：时间列退回 TEXT ⇒ §7.4 生命周期的日期算术无从谈起
+    ("M16-迁移：时间列退回 TEXT", "migrations/0002_app_tables.sql",
+     "    created_at    TIMESTAMPTZ NOT NULL,",
+     "    created_at    TEXT NOT NULL,", "TIMESTAMPTZ"),
+    # M17：迁移器去掉只读 ⇒ 可能改坏全仓唯一不可重建的数据
+    ("M17-迁移器：源库可写", "bin/migrate-sqlite-to-pg.ts",
+     "new Database(sqlitePath, { readonly: true, fileMustExist: true })",
+     "new Database(sqlitePath, { fileMustExist: true })", "只读"),
+    # M18：默认权限漏一条 FOR ROLE ⇒ 该条只对执行者生效（静默失效）
+    ("M18-授权：漏 FOR ROLE", "bin/initdb-bootstrap.sh",
+     "ALTER DEFAULT PRIVILEGES FOR ROLE ${APP_USER}",
+     "ALTER DEFAULT PRIVILEGES FOR ROLE postgres", "FOR ROLE"),
+    # M19：把记账表的建表提到设权限之前 ⇒ 顺序反了，先建的表无授权
+    ("M19-授权：建表早于设权限", "bin/initdb-bootstrap.sh",
+     'log "设置权限矩阵（默认权限 FOR ROLE=${APP_USER}·先设权限后建表）"',
+     'log "设置权限矩阵（默认权限 FOR ROLE=${APP_USER}·先设权限后建表）"\n'
+     '"${PSQL_APP[@]}" -c "CREATE TABLE IF NOT EXISTS schema_migrations (version INTEGER PRIMARY KEY)" >/dev/null',
+     "先设默认权限后建表"),
+    # M20：三重对账少一项 ⇒ 退化成「只比行数」的假对账
+    ("M20-对账：少一项", "bin/migrate-sqlite-to-pg.ts",
+     "content_equal: contentEqual,", "content_equality: contentEqual,", "三重对账"),
+    # M21：迁移器改用模板串拼 SQL ⇒ 参数化防线被拆
+    ("M21-迁移器：模板串拼 SQL", "bin/migrate-sqlite-to-pg.ts",
+     '      "SELECT id, title, model, sdk_session_id, created_at, updated_at FROM sessions",',
+     "      `SELECT ${cols.join(', ')} FROM sessions`,",
+     "禁模板串拼 SQL"),
+    # M22：去掉记账表的 owner 转移 ⇒ 迁移序列以应用账号跑时报「must be owner of table」
+    #   （W934 实跑实证·静态层原本查不出——是所有权问题不是形态问题）
+    ("M22-授权：不转记账表 owner", "bin/initdb-bootstrap.sh",
+     "ALTER TABLE schema_migrations OWNER TO ${APP_USER}",
+     "-- owner 不转移", "owner"),
 ]
 
 

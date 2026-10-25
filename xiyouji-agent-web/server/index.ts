@@ -30,6 +30,7 @@ import { errorHandler, notFoundHandler } from "./errors.js";
 import { logger } from "./logger.js";
 import { closeDatabase } from "./db.js";
 import { databasePath } from "./db.js";
+import { backendKind } from "./db.js";
 import { backupOnStartup } from "./backup.js";
 import { auditLogPath } from "./audit.js";
 import { registerShutdownHandlers } from "./shutdown.js";
@@ -78,21 +79,31 @@ app.use(errorHandler);
 
 // 启动服务器（P0-1 修复：仅绑定回环地址，默认不暴露到局域网/公网）
 const server = app.listen(PORT, "127.0.0.1", () => {
+  // W934：启动日志按**实际后端**取值（不再写死「SQLite」）——
+  //   写死会在切到 PG 后产生「日志说 SQLite、实际是 PG」的口径漂移。
+  const backend = backendKind();
+  const backendLabel = backend === "postgres" ? "PostgreSQL 16" : "SQLite (data/chat.db)";
   logger.info("API 服务器已启动", {
     port: PORT,
     host: "127.0.0.1",
-    database: "SQLite (data/chat.db)",
+    database: backendLabel,
   });
   // W844：启动期会话库快照（每日一份·留 7 份·清 90 天）。失败只记日志、绝不阻断启动——
   // chat.db 是全仓唯一「不可重建」的数据，备份缺席是风险，但启动失败是立即故障，故降级不抛。
-  backupOnStartup(databasePath(), auditLogPath());
+  //
+  // W934：文件级快照只对 SQLite 有效——PG 后端的数据备份走 `deploy/pg/bin/backup.sh`
+  //   （pg_basebackup + WAL 归档 + PITR），是**计划任务**而非启动期动作，
+  //   在这里对 PG 调 VACUUM INTO 会备份一个根本不会被写到的 SQLite 文件。
+  if (backend === "sqlite") {
+    backupOnStartup(databasePath(), auditLogPath());
+  }
   console.log(`
 ╔════════════════════════════════════════════╗
 ║                                            ║
 ║     ◉ API 服务器已启动                      ║
 ║                                            ║
 ║     地址: http://127.0.0.1:${PORT}            ║
-║     数据库: SQLite (data/chat.db)          ║
+║     数据库: ${backendLabel.padEnd(30)}║
 ║                                            ║
 ╚════════════════════════════════════════════╝
   `);

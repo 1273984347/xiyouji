@@ -1,0 +1,147 @@
+{
+ "meta": {
+  "batch": "W928",
+  "purpose": "W854 界面布局审计 4 天后复核（静态侧）",
+  "html_files": 857,
+  "w854_claims": {
+   "spacing_total": 29285,
+   "spacing_on_scale_pct": 43.3,
+   "off_scale_kinds": 22,
+   "token_pages": {
+    "--space-*": 330,
+    "--container-*": 0,
+    "--type-*": 0,
+    "--gap-*": 0
+   }
+  }
+ },
+ "1_spacing": {
+  "total": 24127,
+  "on_scale_kinds": 10,
+  "on_scale_hits": 7517,
+  "on_scale_pct": 31.2,
+  "tokenized_decls": 17342,
+  "revised_total": 41469,
+  "revised_on_scale": 24859,
+  "revised_pct": 59.9,
+  "off_scale_kinds": 22,
+  "off_scale_top10": {
+   "10": 3651,
+   "6": 2532,
+   "14": 2259,
+   "18": 1466,
+   "16": 1266,
+   "34": 1244,
+   "3": 990,
+   "9": 655,
+   "5": 651,
+   "22": 463
+  },
+  "distribution": {
+   "1": 124,
+   "2": 624,
+   "3": 990,
+   "4": 20,
+   "5": 651,
+   "6": 2532,
+   "7": 359,
+   "8": 1480,
+   "9": 655,
+   "10": 3651,
+   "11": 4,
+   "12": 2033,
+   "14": 2259,
+   "15": 14,
+   "16": 1266,
+   "18": 1466,
+   "20": 2334,
+   "22": 463,
+   "24": 363,
+   "26": 2,
+   "28": 457,
+   "30": 39,
+   "32": 1,
+   "34": 1244,
+   "36": 48,
+   "40": 331,
+   "44": 3,
+   "48": 1,
+   "50": 4,
+   "60": 49,
+   "64": 330,
+   "72": 330
+  }
+ },
+ "2_token_consumption": {
+  "pages": {
+   "--space-*": 857,
+   "--container-*": 851,
+   "--type-*": 0,
+   "--gap-*": 0
+  },
+  "uses": {
+   "--space-*": 17345,
+   "--container-*": 972,
+   "--type-*": 0,
+   "--gap-*": 0
+  }
+ },
+ "3_css_breakpoints": {
+  "system.css": {
+   "max-width:768": 5,
+   "max-width:480": 1,
+   "max-width:640": 1
+  },
+  "tokens.css": {}
+ },
+ "4_inline_breakpoints_html": {
+  "total": 3373,
+  "distribution": {
+   "max-width:768": 1886,
+   "min-width:640": 622,
+   "max-width:480": 420,
+   "max-width:640": 397,
+   "max-width:1024": 33,
+   "min-width:900": 6,
+   "min-width:760": 4,
+   "max-width:375": 3,
+   "min-width:720": 2
+  },
+  "files_with_media": 760
+ },
+ "5_used_token_families": {
+  "space": 17345,
+  "accent": 14639,
+  "ink": 13592,
+  "dur": 11966,
+  "ease-out": 11578,
+  "font": 10895,
+  "radius": 8546,
+  "elev": 4186,
+  "paper": 3592,
+  "z": 1650,
+  "dark": 1583,
+  "container": 972,
+  "leading": 952,
+  "shadow": 332,
+  "row": 330,
+  "ease-in-out": 330,
+  "chart": 296,
+  "chain": 22,
+  "innov": 6,
+  "t": 6,
+  "sm-gold": 6,
+  "stage": 4,
+  "sp": 4,
+  "badge-a-l": 2,
+  "badge-m-u": 2,
+  "badge-v-ah": 2,
+  "badge-q-plus": 2,
+  "badge-q-plusplus": 2,
+  "badge-q-plusplusplus": 2,
+  "r": 2,
+  "cross-table-header": 1,
+  "cross-table-highlight": 1,
+  "focus-ring": 1
+ }
+}
