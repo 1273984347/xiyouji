@@ -29,9 +29,9 @@ def test_count_segments_two_forms():
 
 
 def test_evaluate_window_boundary():
-    counts = {"CHANGELOG.md": 110, "scripts/output/file-index.md": 110}
+    counts = {"CHANGELOG.md": 110, "scripts/output/file-index.md": 110, "docs/00-导读/W批次编号对账表.md": 60}
     assert dsb.evaluate(counts) == []
-    counts2 = {"CHANGELOG.md": 111, "scripts/output/file-index.md": 5}
+    counts2 = {"CHANGELOG.md": 111, "scripts/output/file-index.md": 5, "docs/00-导读/W批次编号对账表.md": 60}
     out = dsb.evaluate(counts2)
     assert len(out) == 1 and "111" in out[0] and "archive_segments" in out[0]
 
