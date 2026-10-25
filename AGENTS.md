@@ -1,10 +1,10 @@
 # AGENTS.md — 《详解西游记》项目 Agent 指南
 
-> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 46 条门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
+> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 50 槽门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
 >
-> 本文件面向进入本仓库工作的 AI Agent（及新接手的人类维护者），提供项目的用途、技术栈、目录结构、关键模块、依赖关系、构建运行方式与必须遵守的铁律。动手前请通读；更细的规则以文末「权威文档」为准。
+> 本文件面向进入本仓库工作的 AI Agent（及新接手的人类维护者），提供项目的用途、技术栈、目录结构、关键模块、依赖关系、构建运行方式与必须遵守的铁律。动手前按 §7 路径按需读节；更细的规则以文末「权威文档」为准。
 >
-> **维护契约（防乱写）**：本文档是 Agent 协作指南，只允许结构性编辑——① 保持 §1–§8 骨架不变；② 新增铁律/规则必须**就地并入对应章节**并全篇去重（禁止追加「速记 / 补充」尾部段落）；③ 版本脚注更新须与当前 HEAD（vX.Y.Z W###，用 `git rev-parse --short HEAD` 核对）一致；④ 与 HANDOVER / 文档规范 / CHANGELOG 冲突时以后三者为准。
+> **维护契约（防乱写）**：本文档是 Agent 协作指南，只允许结构性编辑——① 保持 §1–§8 骨架不变；② 新增铁律/规则必须**就地并入对应章节**并全篇去重（禁止追加「速记 / 补充」尾部段落）；③ 版本脚注更新须与当前 HEAD（vX.Y.Z W###，用 `git rev-parse --short HEAD` 核对）一致；④ 与 HANDOVER / 文档规范 / CHANGELOG 冲突时以后三者为准；⑤ 摘要层纪律：条目一行一事，叙事与验证细节归 L2（gates/pitfalls/CHANGELOG），过期数字随批纠偏。
 
 ---
 
@@ -103,9 +103,9 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 
 ### 4.2 交付门禁体系（verify_delivery.py，pre-commit 强制 · 摘要层）
 
-> **📖 阅读契约（W709）**：索引型——本节=49 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
+> **📖 阅读契约（W709）**：索引型——本节=50 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
 
-verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 49 槽，五组：
+verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 50 槽，五组：
 
 **内容与同步类（1-5）**：
 1. **六文档同步**
@@ -141,7 +141,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 25. **数据内容一致性**
 26. **SEO head**
 
-**编号与质量防线类（27-49）**：
+**编号与质量防线类（27-50）**：
 27. **W 号区间字面量**
 28. **可视化可引用性**
 29. **色盲安全**
@@ -165,28 +165,28 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 47. **性能影子槽**（check_perf_shadow.py·W849·影子模式不判红）
 48. **计划方案合规槽**（check_plan_template.py·W860·增量口径·只判本次变更引入的新缺项）
 49. **朱砂实底限额**（check_vermilion_solid.js·W883·v4 规格 §3.2 阶段 5 落地·浏览器计算样式实测·每页非豁免 >3 处 FAIL·豁免读 _w864_accent_exemptions.json·增量缓存按页 hash）
-50. **GSAP 动效写法槽**（check_gsap_motion.py·W961·用户 2026-10-26 批准挂槽·site/static/js/ 下自有 JS 原不在任何静态门禁扫描域内——check_motion_ban 只扫 HTML + 两份 CSS、check_js_syntax 只扫 HTML 内联脚本 ⇒ 载体写坏时全站门禁全绿·判据含时长 ≤600ms / 缓动白名单 / 禁大角度旋转 / 禁无限循环 / 只动 transform 与 opacity / 零禁词字面量·豁免仅对写法类规则（J3/J4/J7）开放且逐条打印不静默·J2 宪法级禁词不可豁免·自带负样本自测 8/8）
+50. **GSAP 动效写法槽**（check_gsap_motion.py·W961·site/static/js/ 自有 JS 动效判据——时长 ≤600ms/缓动白名单/禁大角度旋转与无限循环/只动 transform+opacity·J2 宪法级禁词不可豁免）
 
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
 ### 4.3 工具链要点（摘要层 · 坑位全量已迁 L2）
 
-> **📖 阅读契约（W709）**：索引型——49 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
+> **📖 阅读契约（W709）**：索引型——57 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
 
 **主题视图（W706·按需查坑·正文按批次序不动）**：CSS 类=W557 基类丢失/W558 缺分号/W673 三门禁/W571 inline_css 分发/W582-W589 暗色族；JS 类=W575 空选区与触屏坑/W568 Express close 语义/W674 defer 时序/W656 audit 单模块；git 提交类=W649 级联清单与并行互斥/W698 scope+safe_commit/W537 三新规/W514 heredoc/W509 BOM 禁；级联类=W553 CRLF 翻倍/W664 desc 分隔符/W663 跳号手工先例/W679 日期串误报/W705 插入保留锚点；数据类=W691 计数钉与旧值扫描/W693 残留标记门禁/W565 部署态冒烟/W703-704 stats 对账；文档类=W520 字面量禁/W496 数字现测/W663 doc-sync/W706 元规则与标识符禁令；Windows 类=W509 BOM/W514 heredoc/W535 路径实参/W706 终端编码兜底。
 
 **最高频铁则（全文见 pitfalls.md）**：改内联脚本必跑 generate_csp.py；批量改 CSS/JS 验括号平衡；多行逻辑禁 shell heredoc 落 Python 文件；同文件 Edit 串行；级联后按清单 git add；认领批次登记 touches·动工前 `preflight_check.py --touches <清单> --self W###` 查在途交集（跨 Agent 版「同文件串行」）。
 
-**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS/视觉渲染（10）· JS/CSP/运行时（6）· git/提交/并发（18）· 级联/CHANGELOG（8）· 数据/内容可信度（6）· 流程/协作/取证（9）。计数口径 = 各节顶层「- **」条目数（W757 校：流程节新增 2 条「门禁建置即红检测法·接线断言锚 run 块」由 4 升至 6；W778 增「latent 三问 + 双平台断言禁例」升至 7；W840 实跑校准：git 节 W837 沉淀五条时已由 12 升至 17 而本行漏同步、流程节本批增第 47 条升至 8，总数 41→47；W843 增第 48 条「desc 禁含内嵌 W 号」与第 49 条「双源同旧值假绿」，级联节 4→5、数据节 4→5，总数 47→49；W902 自 Agent 记忆固化三条「canvas 边层（CSS 节）/CSP 写路径盲区（JS 节）/暗色审计 http 前置假 0（数据节）」，CSS 9→10、JS 5→6、数据 5→6，总数 49→52；W956 上移 W954 复盘批经验五条（级联节 E-25 登记面非事实源 / E-27 归档现役合看 / E-28 段状态错位，git 节 E-26 并发保护被欠账阻塞，流程节 E-31 素材人工关前置），级联 5→8、git 17→18、流程 8→9，总数 52→57）。
+**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS/视觉渲染（10）· JS/CSP/运行时（6）· git/提交/并发（18）· 级联/CHANGELOG（8）· 数据/内容可信度（6）· 流程/协作/取证（9）。计数口径 = 各节顶层「- **」条目数（现役 57 条·增量沿革见各条目自注与 CHANGELOG·W966 校）。
 
-**本机环境事实（Windows 单机·2026-10-17 实测·机器相关不入 L2）**：
+**本机环境事实（Windows 单机·机器相关不入 L2·随实测滚动更新）**：
 - `make` 未安装：Makefile 目标不可用，直调 `python scripts/<对应脚本>`（映射见 Makefile 注释）。
-- 全局 Python 3.12·无项目 `.venv`：`pytest`/`playwright`/`pip_audit` 约定加 `-m` 前缀调用，**三语境分清**——① **仓内文档 / 工具表 / CI / Makefile 一律写可移植形态 `python -m <工具>`**（CI 跑在 `ubuntu-latest`·`py` 在 Linux/macOS 不存在·Makefile 亦注明「Windows 兼容：使用 python（非 python3）」）；② **本机 PowerShell 侧**用 `py -3 -m <工具>`——该侧 `python`/`python3` 指向 `WindowsApps/python.exe` 应用执行存根（**命令存在但调用即 exit 9009·无输出无报错**）；③ **本机 git-bash 侧** `python`/`python3` 均为实解释器（`C:\Users\12739\bin\`）·可直接写 `python`。**2026-10-20 实测（本机两 shell 解析不同·写文档时勿凭直觉）**：`py -3` 两 shell 一致指向全局 Python 3.12（`AppData\Local\Programs\Python\Python312`）且能吃 git-bash 的 POSIX 路径——故**本机 PowerShell 侧统一用 `py -3`**，但**不得把它写成全仓约定**（`py` 非跨平台·会令文档在 CI/Linux 上失效）。`ruff`/`uv`/`node`/`npm`/`git`/`gh`/`pwsh` 可直呼。
+- 全局 Python 3.12·无项目 `.venv`：`pytest`/`playwright`/`pip_audit` 加 `-m` 前缀调用，**三语境分清**——① 仓内文档/工具表/CI/Makefile 一律写可移植形态 `python -m <工具>`（CI 在 Linux·`py` 不存在）；② 本机 PowerShell 侧统一 `py -3 -m`（该侧 `python` 是应用执行存根·调用即 exit 9009 无输出）；③ 本机 git-bash 侧 `python` 为实解释器可直呼。`py -3` 两 shell 一致指向全局 3.12，但**不得写成全仓约定**（`py` 非跨平台·CI/Linux 失效）。`ruff`/`uv`/`node`/`npm`/`git`/`gh`/`pwsh` 可直呼。
 - `pwsh`（PowerShell 7）与 `powershell`（5.1）并存：需 PowerShell 时一律用 `pwsh`（默认 UTF-8 无 BOM）；`powershell` 是 5.1（GBK 默认·W509 BOM 坑源），且仍遵守仓内「禁 PowerShell 写仓内文件」铁则。
 - 提交门禁 hook（.git/hooks/pre-commit）与本清单同口径取解释器：首选 `py -3`，回退系统 Python 3.12 绝对路径，两者均须实测可运行（`-c "import sys"` 返回 0）才选用；**不按 PATH 上的 `python`/`python3` 形状挑选**（两 shell 解析不同·见上一条）·不依赖任何厂商托管运行时路径。
 - pre-commit 框架未装且**禁装**：`pre-commit install` 会覆盖手写 `.git/hooks/pre-commit`，破坏零依赖门禁。
 - 本机取数与命令坑（W902 自 Agent 记忆固化·长期实测）：`curl` 必须 `--ssl-no-revoke`（本机代理链下否则大面积失败）；`/tmp` 对 Windows Python 不可见（Git Bash 的 /tmp 是 MSYS 虚拟路径·Python 侧须用 `tempfile` 或仓内 tmpe/）；`gh api` 查询含中文的 search 语句必须走 `-f` 参数（URL 参数形态中文被编码截断）；PMC 取 PDF 常挂 Cloudflare → 用 Europe PMC `fullTextXML` 端点兜底。
-- `PyYAML==6.0.2` 已登记进 `scripts/requirements.txt`（W813）：它是 `tests/unit/test_ci_wiring.py` 工作流 YAML 可解析性守卫的**依赖**——J3 判据（PyYAML 全量解析）依赖该包，原实现为「不可用即静默跳过」而 CI 的 `pytest-unit` job 只装 requirements.txt（当时其中无 PyYAML）→ J3 在 CI 侧恒失效、守卫形同虚设。登记后 J3 恒生效，且该守卫的依赖缺失分支已改为**判红**（禁静默跳过假绿）。
+- `PyYAML==6.0.2` 已登记进 `scripts/requirements.txt`（W813）：工作流 YAML 可解析性守卫（test_ci_wiring.py J3）依赖它，依赖缺失即**判红**（禁静默跳过假绿）。
 
 ### 4.4 Web Agent（xiyouji-agent-web/ · 摘要层）
 
@@ -293,4 +293,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W932-W932 级联自动滚动·脚注保留最近 5 条·每条 ≤300 字·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-10-25（W934）D-2 应用迁移批第一子批：M12 存储层抽象（db.ts 门面化+PG 适配器+三表迁移器），真实数据迁移三重对账全一致；三处权限暗坑（只读账号不可见、授权次序倒置、迁移属主不符）由真跑撞出——单行合法合起来跑不通，静态检查抓不住。；2026-10-26（W956）登记面治理批：preflight 在途判定加 git 条件（登记滞后告警不拒绝）+ 复盘触发器 + 段状态 W 号断言（级联/补段双写入点）+ W884 补位立段与让号定性 + ledger 状态 git 反填 + 复盘经验五条上移坑表（52→57）；2026-10-26（W960）治理文档体积归档批：§8 窗口制机器化（110 段窗·preflight 硬判据）+ archive_segments.py 常驻搬段工具（守恒断言五道）+ 实跑归档减重约 296 KB（双 109 段）+ 文档规范窗口制重标；2026-10-26（W964）版本脚注治理批：滚动器双日期形态修复 + 条目定形契约（阿拉伯日期头+300 字上限）+ 存量清理（75 真条目拆分·留 5·70 迁归档·文件 110→27KB）+ 里程碑旋转器括注块修复 + 体积门禁脚注判据；2026-10-26（W965）脚注重生成与探针沉淀批：留存五条重写（全阿拉伯头）+ 体积门禁 C4 逐条定形 + 扫描探针常驻化（七机制·建置即抓自身假阴性）+ HANDOVER 立手搓绕过级联候选议题。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W934-W934 级联自动滚动·脚注保留最近 5 条·每条 ≤300 字·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-10-26（W956）登记面治理批：preflight 在途判定加 git 条件（登记滞后告警不拒绝）+ 复盘触发器 + 段状态 W 号断言（级联/补段双写入点）+ W884 补位立段与让号定性 + ledger 状态 git 反填 + 复盘经验五条上移坑表（52→57）；2026-10-26（W960）治理文档体积归档批：§8 窗口制机器化（110 段窗·preflight 硬判据）+ archive_segments.py 常驻搬段工具（守恒断言五道）+ 实跑归档减重约 296 KB（双 109 段）+ 文档规范窗口制重标；2026-10-26（W964）版本脚注治理批：滚动器双日期形态修复 + 条目定形契约（阿拉伯日期头+300 字上限）+ 存量清理（75 真条目拆分·留 5·70 迁归档·文件 110→27KB）+ 里程碑旋转器括注块修复 + 体积门禁脚注判据；2026-10-26（W965）脚注重生成与探针沉淀批：留存五条重写（全阿拉伯头）+ 体积门禁 C4 逐条定形 + 扫描探针常驻化（七机制·建置即抓自身假阴性）+ HANDOVER 立手搓绕过级联候选议题；2026-10-26（W966）AGENTS 摘要层纠偏与去冗：过期数字四处纠偏（50 槽·57 条）+ 请通读矛盾消除 + 第 50 槽与 PyYAML 条目收敛 + 计数链压缩 + 维护契约补摘要层纪律。如与上述权威文档冲突，以权威文档为准。*
