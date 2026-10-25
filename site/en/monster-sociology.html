@@ -22,7 +22,7 @@
     <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
-                                                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -1295,6 +1295,26 @@ td.num, th.num {
 html[data-theme="dark"] .viz-illustration {
     display: none;
 }
+
+/* ===== W939 图标系统 · 东方线描（24×24 网格 / 1.5px 描边 / currentColor 随主题） =====
+   用途：替代以 emoji 表情充当图标的做法（图标位一律用矢量图形）。
+   形态：内联 svg 元素（HTML 结构位·class 属性取 ico / ico-t）+ mask-image（同源 SVG·CSS content 位）。
+   图形资产：site/static/icons/ui/*.svg（单一事实源·scripts/_w939_gen_icons.py 生成）。
+   风格：与既有 .icon-moon / .icon-sun 同族（同为 24×24 线描 · stroke 1.5 · currentColor）。
+   色彩：描边走 currentColor ⇒ 跟随所在文字色，暗色模式自动适配，无需第二套配色。
+   尺寸：以 em 为单位 ⇒ 跟随宿主 font-size（.es-icon 2rem / .pc-emoji 22px 等）。
+   间距：ico 本身无外边距（供纯图标位）；「图标 + 文字」处加 ico-t 补 0.32em。 */
+.ico {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.14em;
+    flex: none;
+}
+
+.ico-t {
+    margin-right: 0.32em;
+}
     </style>
 <style>
         /* e-track-exempt: chart-data-colors 7 处 */
@@ -2046,7 +2066,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
                             <td><strong style="color:var(--accent);">White Bone Demon</strong></td>
                             <td>three-fold transformation fraud · scheming for Tang Sanzang's flesh</td>
                             <td>Ch. 27</td>
-                            <td><span class="icon-wrong">✗ Beaten to death</span></td>
+                            <td><span class="icon-wrong"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 6.4l11.2 11.2M17.6 6.4L6.4 17.6"/></svg> Beaten to death</span></td>
                             <td>Transformation-fraud type</td>
                             <td>No backing · executed despite only an attempted scheme</td>
                         </tr>
@@ -2054,7 +2074,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
                             <td><strong style="color:var(--accent);">Seven Spider Demon Sisters</strong></td>
                             <td>seducing Tang Sanzang · trapping people at the Zhuogou Spring</td>
                             <td>Ch. 72-73</td>
-                            <td><span class="icon-wrong">✗ Beaten to death</span></td>
+                            <td><span class="icon-wrong"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 6.4l11.2 11.2M17.6 6.4L6.4 17.6"/></svg> Beaten to death</span></td>
                             <td>seduction + team siege</td>
                             <td>No backing · all seven demons wiped out · compared to the lenient treatment of mount gangs</td>
                         </tr>
@@ -2062,7 +2082,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
                             <td><strong style="color:var(--accent);">Scorpion Demon</strong></td>
                             <td>forced marriage at Pipa Cave · trying to break Tang Sanzang's chastity</td>
                             <td>Ch. 55</td>
-                            <td><span class="icon-wrong">✗ Killed</span></td>
+                            <td><span class="icon-wrong"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 6.4l11.2 11.2M17.6 6.4L6.4 17.6"/></svg> Killed</span></td>
                             <td>Seduction type</td>
                             <td>No backing · killed by the Star Lord of the Pleiades · no owner to take it back</td>
                         </tr>
@@ -2070,7 +2090,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
                             <td><strong style="color:var(--accent);">Three Demons of Chechi Kingdom</strong></td>
                             <td>Tiger Strength / Deer Strength / Goat Strength · persecuting monks through magical contests</td>
                             <td>Ch. 44-46</td>
-                            <td><span class="icon-wrong">✗ All three died miserably</span></td>
+                            <td><span class="icon-wrong"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 6.4l11.2 11.2M17.6 6.4L6.4 17.6"/></svg> All three died miserably</span></td>
                             <td>Team-siege type</td>
                             <td>No backing · all died after losing the contests · compared to the three demons of Lion-Camel Ridge who all survived</td>
                         </tr>

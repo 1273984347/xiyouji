@@ -3,7 +3,7 @@
 
 > **📖 阅读契约（W707）**：索引型——找「东西在哪」时读顶层结构表+目标目录所在段；各板块下的建置沿革（v0.x W0xx 补齐…）是历史记录见 CHANGELOG，勿通读；计数与口径以磁盘实数与 [统计口径说明](docs/00-导读/统计口径说明.md) 为准。
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前批次：W939（2026-10-25）— 把全站 UI 图标位（控件图标 / 图标槽 / CSS content 图标 / 运行时按钮文本图标）的 emoji 字符全部换成自绘的东方线描 SVG 图标：自绘 27 枚<!--doc-sync:exempt-->图标资产 + 建 2 个<!--doc-sync:exempt-->可复跑机检脚本 + 替换 1,957 处<!--doc-sync:exempt--> + CSS 级联 328 页<!--doc-sync:exempt--> + CSP 重算 14 页<!--doc-sync:exempt-->，正文装饰 emoji 与箭头符号零损伤—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前批次：W941（2026-10-25）— 把全站 UI 图标位（控件图标 / 图标槽 / CSS content 图标 / 运行时按钮文本图标）的 emoji 字符全部换成自绘的东方线描 SVG 图标：自绘 27 枚<!--doc-sync:exempt-->图标资产 + 建 2 个<!--doc-sync:exempt-->可复跑机检脚本 + 替换 1,957 处<!--doc-sync:exempt--> + CSS 级联 328 页<!--doc-sync:exempt--> + CSP 重算 14 页<!--doc-sync:exempt-->，正文装饰 emoji 与箭头符号零损伤—A1-A6 共 615 篇<!--stats:a1_a6_docs--> + 87 可视化页<!--stats:visualization_pages-->（A4 209<!--stats:a4_docs--> 篇已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-AxWitGQ9+QubNMDuYcEZwXudZJuUKMqWnNIXKCbG1Nc=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-WUPHm/bWvjIWTRfjP8EqZCgBvV7O10fSOStNO03i/NE=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>观念装置 · Concept Devices · 详解西游记</title>
@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -1296,6 +1296,26 @@ td.num, th.num {
 html[data-theme="dark"] .viz-illustration {
     display: none;
 }
+
+/* ===== W939 图标系统 · 东方线描（24×24 网格 / 1.5px 描边 / currentColor 随主题） =====
+   用途：替代以 emoji 表情充当图标的做法（图标位一律用矢量图形）。
+   形态：内联 svg 元素（HTML 结构位·class 属性取 ico / ico-t）+ mask-image（同源 SVG·CSS content 位）。
+   图形资产：site/static/icons/ui/*.svg（单一事实源·scripts/_w939_gen_icons.py 生成）。
+   风格：与既有 .icon-moon / .icon-sun 同族（同为 24×24 线描 · stroke 1.5 · currentColor）。
+   色彩：描边走 currentColor ⇒ 跟随所在文字色，暗色模式自动适配，无需第二套配色。
+   尺寸：以 em 为单位 ⇒ 跟随宿主 font-size（.es-icon 2rem / .pc-emoji 22px 等）。
+   间距：ico 本身无外边距（供纯图标位）；「图标 + 文字」处加 ico-t 补 0.32em。 */
+.ico {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.14em;
+    flex: none;
+}
+
+.ico-t {
+    margin-right: 0.32em;
+}
     </style>
 <style>
         /* e-track-exempt: chart-data-colors 10 处 */
@@ -1633,7 +1653,7 @@ html[data-theme="dark"] .viz-illustration {
             border-top: 1px dashed var(--line);
             padding-top: 10px;
         }
-        .radio-out .caption::before { content: "📻 "; }
+        .radio-out .caption::before { content: ""; display: inline-block; width: 1em; height: 1em; vertical-align: -0.14em; margin-right: 0.3em; background-color: currentColor; -webkit-mask: url("../static/icons/ui/radio.svg") center / contain no-repeat; mask: url("../static/icons/ui/radio.svg") center / contain no-repeat; }
         /* ===== 装置3 莫比乌斯环 ===== */
         .mobius-stage {
             background: linear-gradient(180deg, var(--paper-warm) 0%, #ece3d2 100%);
@@ -1884,7 +1904,7 @@ html[data-theme="dark"] .viz-illustration {
             border-radius: var(--radius-md) var(--radius-md) 0 0;
             font-family: "Courier New", monospace;
         }
-        .detective-banner::before { content: "🔍 "; }
+        .detective-banner::before { content: ""; display: inline-block; width: 1em; height: 1em; vertical-align: -0.14em; margin-right: 0.3em; background-color: currentColor; -webkit-mask: url("../static/icons/ui/search.svg") center / contain no-repeat; mask: url("../static/icons/ui/search.svg") center / contain no-repeat; }
         .cork-board {
             background: radial-gradient(circle at 20% 30%, rgba(139,90,43,0.15), transparent 40%),
                 radial-gradient(circle at 80% 70%, rgba(122,82,48,0.12), transparent 40%),
@@ -1922,7 +1942,7 @@ html[data-theme="dark"] .viz-illustration {
         }
         .suspect-card:hover { transform: rotate(0deg) scale(1.03); z-index: 5; }
         .suspect-card::before {
-            content: "📌";
+            content: ""; display: inline-block; width: 1em; height: 1em; vertical-align: -0.14em; margin-right: 0.3em; background-color: currentColor; -webkit-mask: url("../static/icons/ui/pin.svg") center / contain no-repeat; mask: url("../static/icons/ui/pin.svg") center / contain no-repeat;
             position: absolute;
             top: -10px; left: 50%;
             transform: translateX(-50%);
@@ -1946,8 +1966,8 @@ html[data-theme="dark"] .viz-illustration {
             line-height: 1.5;
             margin-bottom: var(--space-2);
         }
-        .suspect-card .evi.for::before { content: "✓ "; color: var(--accent-4); font-weight: 700; }
-        .suspect-card .evi.against::before { content: "✗ "; color: var(--accent); font-weight: 700; }
+        .suspect-card .evi.for::before { content: ""; display: inline-block; width: 1em; height: 1em; vertical-align: -0.14em; margin-right: 0.3em; background-color: currentColor; -webkit-mask: url("../static/icons/ui/check.svg") center / contain no-repeat; mask: url("../static/icons/ui/check.svg") center / contain no-repeat; color: var(--accent-4); font-weight: 700; }
+        .suspect-card .evi.against::before { content: ""; display: inline-block; width: 1em; height: 1em; vertical-align: -0.14em; margin-right: 0.3em; background-color: currentColor; -webkit-mask: url("../static/icons/ui/cross.svg") center / contain no-repeat; mask: url("../static/icons/ui/cross.svg") center / contain no-repeat; color: var(--accent); font-weight: 700; }
         .suspect-card .verdict {
             font-size: 0.78rem;
             color: var(--accent-3);
@@ -1975,7 +1995,7 @@ html[data-theme="dark"] .viz-illustration {
             min-width: 200px;
         }
         .hu-card::before {
-            content: "🔍";
+            content: ""; display: inline-block; width: 1em; height: 1em; vertical-align: -0.14em; margin-right: 0.3em; background-color: currentColor; -webkit-mask: url("../static/icons/ui/search.svg") center / contain no-repeat; mask: url("../static/icons/ui/search.svg") center / contain no-repeat;
             position: absolute;
             top: -12px; left: 50%;
             transform: translateX(-50%);
@@ -2749,7 +2769,7 @@ function renderDetective() {
         card.append("div").attr("class","smeta").text(`${c.era} · ${c.identity}`);
         c.for_.forEach(e => card.append("div").attr("class","evi for").text(e));
         c.against.forEach(e => card.append("div").attr("class","evi against").text(e));
-        card.append("div").attr("class","verdict").text("🔎 " + c.verdict);
+        card.append("div").attr("class","verdict").text('<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.6a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM15.9 15.9l5 5M7.9 10.6h5.4M10.6 7.9v5.4"/></svg>' + c.verdict);
     });
     // 中心胡适卡
     const center = grid.append("div").attr("class","detective-center")

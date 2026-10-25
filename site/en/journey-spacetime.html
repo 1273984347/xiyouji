@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-kJEIO8JNT4TO4RKodmfWjYyz6IVIIQhu4ASfWh4EcFE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-30XVoV85xXnul+0V5zTyjvEQpA+80RGW/tIXmsCdtiE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Pilgrimage Route Spacetime Dual-Axis Visualization · Annotated Journey to the West</title>
@@ -22,7 +22,7 @@
     <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
-                                                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -1295,6 +1295,26 @@ td.num, th.num {
 html[data-theme="dark"] .viz-illustration {
     display: none;
 }
+
+/* ===== W939 图标系统 · 东方线描（24×24 网格 / 1.5px 描边 / currentColor 随主题） =====
+   用途：替代以 emoji 表情充当图标的做法（图标位一律用矢量图形）。
+   形态：内联 svg 元素（HTML 结构位·class 属性取 ico / ico-t）+ mask-image（同源 SVG·CSS content 位）。
+   图形资产：site/static/icons/ui/*.svg（单一事实源·scripts/_w939_gen_icons.py 生成）。
+   风格：与既有 .icon-moon / .icon-sun 同族（同为 24×24 线描 · stroke 1.5 · currentColor）。
+   色彩：描边走 currentColor ⇒ 跟随所在文字色，暗色模式自动适配，无需第二套配色。
+   尺寸：以 em 为单位 ⇒ 跟随宿主 font-size（.es-icon 2rem / .pc-emoji 22px 等）。
+   间距：ico 本身无外边距（供纯图标位）；「图标 + 文字」处加 ico-t 补 0.32em。 */
+.ico {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.14em;
+    flex: none;
+}
+
+.ico-t {
+    margin-right: 0.32em;
+}
     </style>
 <style>
         /* e-track-exempt: chart-data-colors 5 处 */
@@ -1483,7 +1503,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <h2 id="sec-spacetime">① Time × Space Dual-Axis Trajectory</h2>
             <p>The horizontal axis is chapter (1–100); the vertical axis is geographic location (bottom-to-top: Chang'an → Lingshan). Each dot is a key event, colored by event type; multiple events at the same location spread along the X axis in order. Click "Play" to advance chapter by chapter, or drag the slider to jump manually.</p>
             <div class="control-row" role="group" aria-label="Timeline controls">
-                <button class="ctrl-btn play" id="play-btn" aria-label="Play/Pause">▶ Play</button>
+                <button class="ctrl-btn play" id="play-btn" aria-label="Play/Pause"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>Play</button>
                 <div class="slider-wrap">
                     <span class="ctrl-label">Chapter:</span>
                     <input type="range" id="chapter-slider" min="1" max="100" value="100" aria-label="Chapter slider" />
@@ -1879,17 +1899,17 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         if (playTimer) {
             clearInterval(playTimer);
             playTimer = null;
-            btn.textContent = "▶ Play";
+            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>Play';
             btn.classList.remove("playing");
         } else {
             if (currentChapter >= 100) currentChapter = 1;
-            btn.textContent = "⏸ Pause";
+            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 5.6v12.8M14.8 5.6v12.8"/></svg>Pause';
             btn.classList.add("playing");
             playTimer = setInterval(() => {
                 if (currentChapter >= 100) {
                     clearInterval(playTimer);
                     playTimer = null;
-                    btn.textContent = "▶ Play";
+                    btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>Play';
                     btn.classList.remove("playing");
                     return;
                 }
@@ -1904,7 +1924,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     document.getElementById("reset-btn").addEventListener("click", function() {
         if (playTimer) { clearInterval(playTimer); playTimer = null; }
         const btn = document.getElementById("play-btn");
-        btn.textContent = "▶ Play";
+        btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>Play';
         btn.classList.remove("playing");
         currentChapter = 100;
         document.getElementById("chapter-slider").value = 100;
@@ -1915,7 +1935,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             clearInterval(playTimer);
             playTimer = null;
             const btn = document.getElementById("play-btn");
-            btn.textContent = "▶ Play";
+            btn.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.4l10 6.6-10 6.6z"/></svg>Play';
             btn.classList.remove("playing");
         }
         updateChapter(e.target.value);
