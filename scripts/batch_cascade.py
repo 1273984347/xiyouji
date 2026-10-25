@@ -545,7 +545,7 @@ def main():
     try:
         import check_doc_size_budget as _dsb
 
-        _dsb_counts, _dsb_lines = _dsb.collect()
+        _dsb_counts, _dsb_lines, _dsb_extra = _dsb.collect()
         for _line in _dsb_lines:
             print("[SIZE]", _line)
     except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
