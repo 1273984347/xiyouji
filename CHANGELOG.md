@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W952），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W953），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,29 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W953（2026-10-26）：themes 库专题题图批（12 张·专题 + 器物静物·站内线描题图累计 40 张）
+
+> **来源**：用户 2026-10-26 令「再继续帮我做几张素材图」，并要求开工前先问三件事。
+>
+> **三问答复**：① 用途与画幅 = **内页专题题图续批 · 3:4 竖版** ② 张数 = **12 张** ③ 参考风格 = **沿用站内线描墨稿风**（附加题材范围 = **themes 库专题题图**）。
+>
+> - **文件**：site/static/images/plate-line-01-zhenjia-meihouwang.webp、site/static/images/plate-line-02-pantao-yuan.webp、site/static/images/plate-line-03-danaotian-gong.webp、site/static/images/plate-line-04-shuilandong.webp、site/static/images/plate-line-05-hunshi-sihou.webp、site/static/images/plate-line-06-bingqi-xiuyang.webp、site/static/images/plate-line-07-ershiba-xingsu.webp、site/static/images/plate-line-08-sizhi-gongcao.webp、site/static/images/plate-line-09-wufang-jiedi.webp、site/static/images/plate-line-10-liuding-liujia.webp、site/static/images/plate-line-11-jingubang-zhongliang.webp、site/static/images/plate-line-12-qiwu-zhuanji.webp、site/reader/themes/真假美猴王专题.html、site/reader/themes/蟠桃园-体制内的秘密.html、site/reader/themes/大闹天宫-英雄还是悲剧.html、site/reader/themes/水帘洞专题.html、site/reader/themes/混世四猴专题.html、site/reader/themes/兵器的自我修养专题.html、site/reader/themes/二十八星宿专题.html、site/reader/themes/四值功曹专题.html、site/reader/themes/五方揭谛专题.html、site/reader/themes/六丁六甲专题.html、site/reader/themes/金箍棒的重量-一万三千五百斤的秘密.html、site/reader/themes/器物传记学专题.html、scripts/_w953_make_prompts.py、scripts/_w953_make_insert.py、scripts/_w953_insert_plates.py、scripts/_w953_cascade.py、scripts/_w953_prep_raws.py、scripts/_w953_prep_raws2.py、scripts/_w953_prep_raws3.py、scripts/_w953_update_readme.py、scripts/_w945_prepare.py、scripts/_w945_plates_verify.py、scripts/_w951_check_crop.py、scripts/_w951_site_sheet.py、scripts/output/_w953_batch1.json、scripts/output/_w953_batch2.json、scripts/output/_w953_batch3.json、scripts/output/_w953_batch4.json、scripts/output/_w953_batch5.json、scripts/output/_cascade_files_W953.txt、scripts/output/file-index.md、assets/promo/plate-set/README.md、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-site-sheet.png、assets/promo/plate-set/index.md、CHANGELOG.md、README.md、HANDOVER.md、docs/00-导读/W批次编号对账表.md
+
+**缺口**：reader 622 页中仅 39 页有题图；**themes 库 209 页只有 9 页有题图**，essays / culture / poetry 三库 91 页仍零题图 ⇒ 本批专攻 themes 库空白专题。
+
+**选题原则**：只选**有具象标志物**的专题（抽象概念题既难画成器物静物、也做不了人眼形制核）。
+
+**母版一字未改**：直接读上批 `_w952_batch1.json` 取母版（249 字符）拼本批 SUBJECT 段 ⇒ 跨批同族由**构造**保证（脚本断言：批内 12 条母版逐字一致 + 与 W952 母版逐字相同）。
+
+**防画中画**：并列型题材（混世四猴 / 兵器 / 四值功曹 / 五方揭谛 / 六丁六甲 / 器物传记）统一带「四周不得有任何边框、格子、展板或深色底板」措辞——W952 的 11-法宝系统正是栽在「展柜」上，重出后有效的措辞。
+
+**接入**：沿用站内 `chapter-plate` 范式（420px 居中 + 描述性 alt + 浅底图暗色模式隐藏）。
+
+**并发纪律**：共享面按内容粒度**精确暂存**（`git update-index --cacheinfo`·HEAD 为基底叠加本批段）⇒ 不把对方在途内容带进本批提交。
+
+> - **验证**：（见本批脚本输出与对账表回填）
+> - **状态**：在途（认领登记 W953·待提交入库）
 
 ### W952（2026-10-25）：内页人物题图续批第二组（12 张·人物 + 主题混合·站内线描题图累计 28 张）
 

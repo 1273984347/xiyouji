@@ -11,6 +11,43 @@
 ---
 
 
+## W953 themes 库专题题图批（12 张）（2026-10-26）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/plate-line-01-zhenjia-meihouwang.webp | W953 | 新增·真假美猴王专题 |
+| site/static/images/plate-line-02-pantao-yuan.webp | W953 | 新增·蟠桃园-体制内的秘密 |
+| site/static/images/plate-line-03-danaotian-gong.webp | W953 | 新增·大闹天宫-英雄还是悲剧 |
+| site/static/images/plate-line-04-shuilandong.webp | W953 | 新增·水帘洞专题 |
+| site/static/images/plate-line-05-hunshi-sihou.webp | W953 | 新增·混世四猴专题 |
+| site/static/images/plate-line-06-bingqi-xiuyang.webp | W953 | 新增·兵器的自我修养专题 |
+| site/static/images/plate-line-07-ershiba-xingsu.webp | W953 | 新增·二十八星宿专题 |
+| site/static/images/plate-line-08-sizhi-gongcao.webp | W953 | 新增·四值功曹专题 |
+| site/static/images/plate-line-09-wufang-jiedi.webp | W953 | 新增·五方揭谛专题 |
+| site/static/images/plate-line-10-liuding-liujia.webp | W953 | 新增·六丁六甲专题 |
+| site/static/images/plate-line-11-jingubang-zhongliang.webp | W953 | 新增·金箍棒的重量专题 |
+| site/static/images/plate-line-12-qiwu-zhuanji.webp | W953 | 新增·器物传记学专题 |
+| site/reader/themes/真假美猴王专题.html | W953 | 接入题图（真假美猴王专题） |
+| site/reader/themes/蟠桃园-体制内的秘密.html | W953 | 接入题图（蟠桃园-体制内的秘密） |
+| site/reader/themes/大闹天宫-英雄还是悲剧.html | W953 | 接入题图（大闹天宫-英雄还是悲剧） |
+| site/reader/themes/水帘洞专题.html | W953 | 接入题图（水帘洞专题） |
+| site/reader/themes/混世四猴专题.html | W953 | 接入题图（混世四猴专题） |
+| site/reader/themes/兵器的自我修养专题.html | W953 | 接入题图（兵器的自我修养专题） |
+| site/reader/themes/二十八星宿专题.html | W953 | 接入题图（二十八星宿专题） |
+| site/reader/themes/四值功曹专题.html | W953 | 接入题图（四值功曹专题） |
+| site/reader/themes/五方揭谛专题.html | W953 | 接入题图（五方揭谛专题） |
+| site/reader/themes/六丁六甲专题.html | W953 | 接入题图（六丁六甲专题） |
+| site/reader/themes/金箍棒的重量-一万三千五百斤的秘密.html | W953 | 接入题图（金箍棒的重量专题） |
+| site/reader/themes/器物传记学专题.html | W953 | 接入题图（器物传记学专题） |
+| assets/promo/plate-set/ | W953 | 母版 + 站点版 + 拼图 + README（累计 40 张） |
+| scripts/_w953_make_prompts.py | W953 | 母版复用生成器（读上批 JSON 取母版·断言逐字一致） |
+| scripts/_w953_insert_plates.py | W953 | 12 页 chapter-plate 接入（幂等） |
+| scripts/_w953_cascade.py | W953 | 四面登记 + 当前态指针（共享面精确暂存·文件行自动生成） |
+| scripts/output/_w953_batch1~3.json | W953 | 出图参数 12 条 |
+| scripts/output/_cascade_files_W953.txt | W953 | 当批级联清单 |
+| CHANGELOG.md | W953 | W953 版段 |
+| docs/00-导读/W批次编号对账表.md | W953 | W953 认领行 |
+
 ## W952 内页人物题图续批第二组（12 张·人物+主题混合）（2026-10-25）
 
 | 文件 | W | 说明 |

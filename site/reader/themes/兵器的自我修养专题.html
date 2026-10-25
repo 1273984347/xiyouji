@@ -84,6 +84,10 @@
   .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
     border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
   .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
+    /* W953：专题题图（线描主题立像·沿用章回页 chapter-plate 范式·浅底宣纸图暗色模式隐藏） */
+    .chapter-plate { margin: 28px auto 36px; max-width: 420px; }
+    .chapter-plate img { width: 100%; height: auto; display: block; opacity: .92; }
+    html[data-theme="dark"] .chapter-plate { display: none; }
 </style>
 </head>
 <body>
@@ -108,6 +112,9 @@
   <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>兵器的自我修养</h1>
+<figure class="chapter-plate">
+<img src="../../static/images/plate-line-06-bingqi-xiuyang.webp" alt="兵器专题线描立像：如意金箍棒、九齿钉耙、月牙铲、火尖枪四件悬浮排开，下方一位武僧抱拳而立" loading="lazy" decoding="async">
+</figure>
 <blockquote>
 <p>轨标：个人创作
 来源：主题.txt 章节 "# 兵器的自我修养"

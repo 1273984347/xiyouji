@@ -84,6 +84,10 @@
   .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
     border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
   .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
+    /* W953：专题题图（线描主题立像·沿用章回页 chapter-plate 范式·浅底宣纸图暗色模式隐藏） */
+    .chapter-plate { margin: 28px auto 36px; max-width: 420px; }
+    .chapter-plate img { width: 100%; height: auto; display: block; opacity: .92; }
+    html[data-theme="dark"] .chapter-plate { display: none; }
 </style>
 </head>
 <body>
@@ -108,6 +112,9 @@
   <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>器物传记学专题</h1>
+<figure class="chapter-plate">
+<img src="../../static/images/plate-line-12-qiwu-zhuanji.webp" alt="器物传记主题线描立像：牛首妖王持混铁棍与白衣龙君托玉净瓶并立，两人之间悬着一只紫金红葫芦" loading="lazy" decoding="async">
+</figure>
 <blockquote>
 <p><strong>W133 A4 多方向并行批次第四次第 2 个新维度</strong>·七段式·基于人物六.txt + 人物七.txt 素材整合·与 W082 物品符号学 + W101 身体地理学 + W118 取经政治学形成"符号+身体+政治+传记"四层结构·A4 方向第 30 个新维度
 出处：v2.2.42 初始导入（无 W 编号·W424 溯源回填）
