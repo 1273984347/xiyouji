@@ -123,7 +123,7 @@ def write_ledger(path: str, lines: list[str]) -> None:
     """
     joined = "\n".join(lines)
     nl = "\r\n" if joined.count("\r\n") * 20 >= joined.count("\n") else "\n"
-    out = nl.join(l.rstrip("\r\n") for l in lines)
+    out = nl.join(ln.rstrip("\r\n") for ln in lines)
     if not out.endswith(nl):
         out += nl
     with open(path, "w", encoding="utf-8", newline="") as f:
