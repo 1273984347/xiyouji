@@ -161,8 +161,10 @@ def cmd_backfill(args, path: str) -> int:
     if args.from_git:
         # P-43-01 后半：状态/hash 由 git 反填（机器事实源·人工不再手写「已收官（hash…）」）。
         # 显式 --hash/--status 仍可覆盖（机器反填是默认值不是强制值）。
-        idx = git_commit_index()
-        auto_status = compose_git_status(args.w, idx)
+        # 注意：此处变量名用 cidx——cmd_backfill 的 idx 是行下标（W956 首版曾被 dict 遮蔽·
+        # 干跑路径不落盘故未暴露，实跑在 lines[idx] 处 TypeError）
+        cidx = git_commit_index()
+        auto_status = compose_git_status(args.w, cidx)
         if auto_status is None:
             print("FAIL  W%03d 在 git 无批次标签提交（type(w###): 形态）——不能反填收官状态"
                   "（批次可能仍在途·先落库再回填）" % args.w)
@@ -171,7 +173,7 @@ def cmd_backfill(args, path: str) -> int:
             args.status = auto_status
             changes.append(("status", loc["status"], args.status))
         if args.hash is None:
-            args.hash = idx[args.w][1]
+            args.hash = cidx[args.w][1]
             changes.append(("hash", loc["hash"], args.hash))
     else:
         if args.hash is not None:
