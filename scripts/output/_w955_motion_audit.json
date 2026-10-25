@@ -108,15 +108,33 @@
     "page_total": 857,
     "js_reveal_ratio": 0.3886,
     "inline_js_blocks_total": 863,
-    "inline_js_chars_total": 7804858,
+    "inline_js_chars_total": 7806078,
     "conclusion": "W471 规划的公共载体未落地；滚动显现实现为逐页内联复制（js-reveal 钩子 333/857 页）"
   },
   "F9_bare_ease_scan": {
-    "hits": 4,
-    "files": 2,
+    "hits": 49,
+    "files": 25,
     "sample_files": [
+      "site/dashboard.html",
+      "site/data/81-hardships-view.html",
+      "site/data/character-relationship-3d-view.html",
       "site/data/chart-design.html",
-      "site/en/chart-design.html"
+      "site/data/concept-device.html",
+      "site/data/data-explorer.html",
+      "site/data/deconstruction.html",
+      "site/data/game-webnovel.html",
+      "site/data/journey-route.html",
+      "site/data/perf-canvas-rendering.html",
+      "site/data/social-media.html",
+      "site/en/81-hardships-view.html",
+      "site/en/character-relationship-3d-view.html",
+      "site/en/chart-design.html",
+      "site/en/concept-device.html",
+      "site/en/data-explorer.html",
+      "site/en/deconstruction.html",
+      "site/en/game-webnovel.html",
+      "site/en/guide.html",
+      "site/en/index.html"
     ],
     "design_ref": "DESIGN.md §5.2 禁止裸 ease/linear 新增使用"
   }

@@ -53,7 +53,14 @@ RE_JS_REVEAL = re.compile(r"js-reveal")
 RE_RM = re.compile(r"prefers-reduced-motion")
 RE_ANIM = re.compile(r"(?<![\w-])animation\s*:")
 RE_TRANS = re.compile(r"(?<![\w-])transition\s*:")
-RE_BARE_EASE = re.compile(r"(?:ease\s*:|[\"']linear[\"']|ease\s*:\s*[\"']none[\"']|transition-timing-function\s*:\s*linear)")
+RE_BARE_EASE = re.compile(
+    r"(?<![\w-])ease\s*;"                       # CSS 裸 ease（如 transition: opacity .3s ease;）
+    r"|(?<![\w-])ease\s*:\s*['\"]none"          # GSAP ease:'none'
+    r"|['\"]linear['\"]"                          # 线性缓动字面量
+    r"|(?<![\w-])transition-timing-function\s*:\s*linear"
+    # W961 订正：原正则 `ease\s*:` 无负向前查 ⇒ 命中数据字段名（avg_ease: 5.33 / most_ease: "青牛精"）
+    # 与令牌定义（--ease-out-quart:）⇒ 「裸 ease 违规 4 处」为**假阳性**（实测 CSS 裸 ease = 0 处）。
+)
 RE_DURATION = re.compile(r"\.duration\(\s*(\d+)\s*\)")
 RE_INLINE_CSS_BLOCK = re.compile(r"<style>(.*?)</style>", re.S)
 RE_INLINE_JS_BLOCK = re.compile(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>", re.S | re.I)
