@@ -22,7 +22,7 @@
 <script src="../js/reader-enhance.js" defer></script>
 
 
-        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -1295,6 +1295,26 @@ td.num, th.num {
 html[data-theme="dark"] .viz-illustration {
     display: none;
 }
+
+/* ===== W939 图标系统 · 东方线描（24×24 网格 / 1.5px 描边 / currentColor 随主题） =====
+   用途：替代以 emoji 表情充当图标的做法（图标位一律用矢量图形）。
+   形态：内联 svg 元素（HTML 结构位·class 属性取 ico / ico-t）+ mask-image（同源 SVG·CSS content 位）。
+   图形资产：site/static/icons/ui/*.svg（单一事实源·scripts/_w939_gen_icons.py 生成）。
+   风格：与既有 .icon-moon / .icon-sun 同族（同为 24×24 线描 · stroke 1.5 · currentColor）。
+   色彩：描边走 currentColor ⇒ 跟随所在文字色，暗色模式自动适配，无需第二套配色。
+   尺寸：以 em 为单位 ⇒ 跟随宿主 font-size（.es-icon 2rem / .pc-emoji 22px 等）。
+   间距：ico 本身无外边距（供纯图标位）；「图标 + 文字」处加 ico-t 补 0.32em。 */
+.ico {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.14em;
+    flex: none;
+}
+
+.ico-t {
+    margin-right: 0.32em;
+}
     </style>
 <style>
   .reader-wrap { max-width: var(--container-read); margin: 0 auto; padding: 0 16px 72px; }
@@ -1373,7 +1393,7 @@ html[data-theme="dark"] .viz-illustration {
   </nav>
   <div class="reader-toolbar" data-reader-tools="1" data-page="reader/ch030.html">
     <div class="grp">
-      <button type="button" data-act="bookmark" aria-pressed="false">☆ 收藏本页</button>
+      <button type="button" data-act="bookmark" aria-pressed="false"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.4l2.55 5.17 5.7.83-4.12 4.02.97 5.68L12 16.45l-5.1 2.68.97-5.68-4.12-4.02 5.7-.83z"/></svg>收藏本页</button>
       <span data-role="status" aria-live="polite"></span>
     </div>
     <div class="grp">
@@ -1608,7 +1628,7 @@ html[data-theme="dark"] .viz-illustration {
   </article>
   <div class="reader-feedback">
     <span>这页有帮助吗？</span>
-    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%B8%89%E5%8D%81%E5%9B%9E%20%E9%82%AA%E9%AD%94%E4%BE%B5%E6%AD%A3%E6%B3%95%20%E6%84%8F%E9%A9%AC%E5%BF%86%E5%BF%83%E7%8C%BF&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch030.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener">👍 有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%B8%89%E5%8D%81%E5%9B%9E%20%E9%82%AA%E9%AD%94%E4%BE%B5%E6%AD%A3%E6%B3%95%20%E6%84%8F%E9%A9%AC%E5%BF%86%E5%BF%83%E7%8C%BF&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch030.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener">👎 待改进</a></div>
+    <div class="fb-row"><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E6%9C%89%E5%B8%AE%E5%8A%A9%5D%20%E7%AC%AC%E4%B8%89%E5%8D%81%E5%9B%9E%20%E9%82%AA%E9%AD%94%E4%BE%B5%E6%AD%A3%E6%B3%95%20%E6%84%8F%E9%A9%AC%E5%BF%86%E5%BF%83%E7%8C%BF&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch030.html%0A%0A%EF%BC%88%E5%8F%AF%E7%95%99%E4%B8%80%E5%8F%A5%E4%BD%A0%E8%A7%89%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89%0A" rel="noopener"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 9.4V5.6a2.8 2.8 0 0 0-2.8-2.8L7.6 11.4v10.2h10.6a1.9 1.9 0 0 0 1.85-1.55l1.3-8.2a1.9 1.9 0 0 0-1.85-2.25zM7.6 21.6H4.6a1.9 1.9 0 0 1-1.9-1.9v-6.6a1.9 1.9 0 0 1 1.9-1.9h3"/></svg>有帮助</a><a href="https://github.com/1273984347/xiyouji/issues/new?title=%5B%E9%98%85%E8%AF%BB%E5%8F%8D%E9%A6%88%C2%B7%E5%BE%85%E6%94%B9%E8%BF%9B%5D%20%E7%AC%AC%E4%B8%89%E5%8D%81%E5%9B%9E%20%E9%82%AA%E9%AD%94%E4%BE%B5%E6%AD%A3%E6%B3%95%20%E6%84%8F%E9%A9%AC%E5%BF%86%E5%BF%83%E7%8C%BF&amp;body=%E9%A1%B5%E9%9D%A2%EF%BC%9Ahttps%3A//1273984347.github.io/xiyouji/reader/ch030.html%0A%0A%EF%BC%88%E5%93%AA%E9%87%8C%E4%B8%8D%E6%B8%85%E6%A5%9A%E3%80%81%E5%93%AA%E9%87%8C%E5%86%99%E9%94%99%E4%BA%86%EF%BC%9F%EF%BC%89%0A" rel="noopener"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 9.4V5.6a2.8 2.8 0 0 0-2.8-2.8L7.6 11.4v10.2h10.6a1.9 1.9 0 0 0 1.85-1.55l1.3-8.2a1.9 1.9 0 0 0-1.85-2.25zM7.6 21.6H4.6a1.9 1.9 0 0 1-1.9-1.9v-6.6a1.9 1.9 0 0 1 1.9-1.9h3" transform="translate(0 24) scale(1 -1)"/></svg>待改进</a></div>
   </div>
   <nav class="reader-pn"><a href="ch029.html">← 上一篇</a><a href="ch031.html">下一篇 →</a></nav>
 </main>

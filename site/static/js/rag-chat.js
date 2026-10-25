@@ -332,7 +332,7 @@
       if (data.snippets && data.snippets.length) {
         const ex = document.createElement('div');
         ex.className = 'rag-source';
-        ex.innerHTML = '📚 相关语料：' + data.snippets.slice(0, 3).map(s => {
+        ex.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 4.6h10.4a2.4 2.4 0 0 1 2.4 2.4v12.4H7.6a2.4 2.4 0 0 1-2.4-2.4zM18 19.4V7M8.4 8.8h6.6M8.4 12.2h6.6"/></svg> 相关语料：' + data.snippets.slice(0, 3).map(s => {
           const text = typeof s === 'string' ? s : (s.excerpt || '');
           return '<div style="margin:4px 0;line-height:1.6">' + highlight(text.slice(0, 140), q) + (text.length > 140 ? '…' : '') + '</div>';
         }).join('');
@@ -347,7 +347,7 @@
       if (sources.length) {
         const srcDiv = document.createElement('div');
         srcDiv.className = 'rag-source';
-        srcDiv.innerHTML = '📖 来源：' + sources.map(s => s.href
+        srcDiv.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.6C10.6 5.1 8.6 4.6 6 4.6H3.6v12.8c2.6 0 4.6.5 6 1.9 1.4-1.4 3.4-1.9 6-1.9V4.6c-2.6 0-4.6.5-6 2zM12 6.6v12.7"/></svg> 来源：' + sources.map(s => s.href
           ? `<a href="${escapeAttr(s.href)}" target="_blank" rel="noopener" style="color:#3a6b8c;text-decoration:none">${escapeHtml(s.name)} ↗</a>`
           : escapeHtml(s.name)).join(' · ');
         bubble.appendChild(srcDiv);

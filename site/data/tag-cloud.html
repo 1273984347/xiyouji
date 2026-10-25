@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -523,6 +523,14 @@ h4 { font-size: 18px; font-weight: 500; }
     text-align: center;
     flex-shrink: 0;
 }
+/* W856 新品牌图形标（方向 H「山·门槛」·SVG 于 static/icons/logo-mark-light.svg）
+   —— 纯加法：.seal 保留，其余页面的旧印面标识不受影响 */
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: block;
+    flex-shrink: 0;
+}
 .wordmark {
     font-family: var(--font-serif);
     font-weight: 600;
@@ -706,8 +714,10 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
-        /* W872 B9 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
-        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+/* BL-33 收敛（W895）：KPI 顶条按行收敛——同排首个 kpi-card 保顶条、其余转细线
+   （原 W864-W873 逐页写入内联副本·此处升为 system.css 单一事实源·防 inline_css --force 回吞） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1251,41 +1261,62 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    
-/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+
+/* W885：数据页/可视化页页头装饰插画（深底直显版·浅底宣纸图贴在暗色 hero 上会成亮斑） */
+.hero-ornament {
+    position: absolute;
+    right: clamp(var(--space-6), 5vw, var(--space-12));
+    bottom: clamp(var(--space-5), 4vw, var(--space-9));
+    width: clamp(140px, 18vw, 240px);
+    height: auto;
+    opacity: .9;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+
     .hero-ornament {
-        position: absolute;
-        right: clamp(var(--space-6), 5vw, var(--space-12));
-        bottom: clamp(var(--space-5), 4vw, var(--space-9));
-        width: clamp(140px, 18vw, 240px);
-        height: auto;
-        opacity: .9;
-        pointer-events: none;
-    }
-
-    @media (max-width: 768px) {
-
-        .hero-ornament {
-            display: none;
-        }
-    }
-/* W888：数据页卷末插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
-    .viz-illustration {
-        margin: clamp(32px, 5vw, 64px) auto 0;
-        max-width: 420px;
-    }
-
-    .viz-illustration img {
-        width: 100%;
-        height: auto;
-        display: block;
-        opacity: .92;
-    }
-
-    html[data-theme="dark"] .viz-illustration {
         display: none;
     }
-</style>
+}
+
+/* W888：数据页卷末插画（浅底宣纸版·暗色模式下隐藏——浅底图贴深底会成亮斑） */
+.viz-illustration {
+    margin: clamp(32px, 5vw, 64px) auto 0;
+    max-width: 420px;
+}
+
+.viz-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: .92;
+}
+
+html[data-theme="dark"] .viz-illustration {
+    display: none;
+}
+
+/* ===== W939 图标系统 · 东方线描（24×24 网格 / 1.5px 描边 / currentColor 随主题） =====
+   用途：替代以 emoji 表情充当图标的做法（图标位一律用矢量图形）。
+   形态：内联 svg 元素（HTML 结构位·class 属性取 ico / ico-t）+ mask-image（同源 SVG·CSS content 位）。
+   图形资产：site/static/icons/ui/*.svg（单一事实源·scripts/_w939_gen_icons.py 生成）。
+   风格：与既有 .icon-moon / .icon-sun 同族（同为 24×24 线描 · stroke 1.5 · currentColor）。
+   色彩：描边走 currentColor ⇒ 跟随所在文字色，暗色模式自动适配，无需第二套配色。
+   尺寸：以 em 为单位 ⇒ 跟随宿主 font-size（.es-icon 2rem / .pc-emoji 22px 等）。
+   间距：ico 本身无外边距（供纯图标位）；「图标 + 文字」处加 ico-t 补 0.32em。 */
+.ico {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.14em;
+    flex: none;
+}
+
+.ico-t {
+    margin-right: 0.32em;
+}
+    </style>
 <style>
         /* e-track-exempt: chart-data-colors 7 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
@@ -1389,7 +1420,7 @@ td.num, th.num {
             box-shadow: var(--elev-1);
         }
         .search-box::before {
-            content: "🔍";
+            content: ""; display: inline-block; width: 1em; height: 1em; vertical-align: -0.14em; margin-right: 0.3em; background-color: currentColor; -webkit-mask: url("../static/icons/ui/search.svg") center / contain no-repeat; mask: url("../static/icons/ui/search.svg") center / contain no-repeat;
             position: absolute;
             left: 14px;
             top: 50%;
@@ -1704,7 +1735,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">W935 渡口档案正文 4 条工程引用改为对读者有意义的正文,溯源移入源码注释 + 英文站索引页目录型死链改纯文本,全仓真死链 1→0 · W934 把架构方案里的「M12 PG 存储层」变成可运行的代码层：存储层四件 + 门面化 + PG 三表 schema + 迁移器，并把现役 70/134/4 条真实数据迁入 PG 16.4 且三重对账全一致 · W933 认领即占号/回填独占/收官回填三件套规则 + 撞号检测与行指纹与收官体检与反引号剥离与登记类共享面排除五个机检判据 · W932 六张 16:9 宽幅浓墨剪影成套 Hero 素材图、锚点复用 W852→W893 成熟段、底部净空带供标题叠字 · W930 十八条四天后现状复核 + 三条新发现 + 六批可施工落地方案 · W928 无 Docker 改走官方免安装二进制实跑 PG 16.4，6 项实跑通过，4 个真缺陷固化为守卫 · W927 四项开放项裁决落档，PG 部署基线离线施工件交付，交互审查交叉对账补一处设计遗漏 · W926 交互流程四维复核/跳转路径/按钮反馈/表单报错/空状态异常分支/对照前次审查逐条给闭环状态并出当前状态排序建议 · W925 对 W821 架构方案的增量修订：按新规模（月活十万级）改采 PG 自建单机，新增等保合规横切面，架构图三形态交付 · W924 性能三指标分治落地：页体积双层门槛升格判红，首屏归并既有防线，首 token 挂解冻条件 · W923 复审让号行幻影在途与前缀修复，跳号补登记，十一项实抽全过 · W922 十二项裁决落地：四件工程当场做掉，八项方向性结论登记在案，清单全闭环 · …更早批次详见 CHANGELOG.md</div>
+            <div class="footer-meta">W939 把全站 UI 图标位（控件图标 / 图标槽 / CSS content 图标 / 运行时按钮文本图标）的 emoji 字符全部换成自绘的东方线描 SVG 图标：自绘 27 枚图标资产 + 建 2 个可复跑机检脚本 + 替换 1,957 处 + CSS 级联 328 页 + CSP 重算 14 页，正文装饰 emoji 与箭头符号零损伤 · W935 渡口档案正文 4 条工程引用改为对读者有意义的正文,溯源移入源码注释 + 英文站索引页目录型死链改纯文本,全仓真死链 1→0 · W934 把架构方案里的「M12 PG 存储层」变成可运行的代码层：存储层四件 + 门面化 + PG 三表 schema + 迁移器，并把现役 70/134/4 条真实数据迁入 PG 16.4 且三重对账全一致 · W933 认领即占号/回填独占/收官回填三件套规则 + 撞号检测与行指纹与收官体检与反引号剥离与登记类共享面排除五个机检判据 · W932 六张 16:9 宽幅浓墨剪影成套 Hero 素材图、锚点复用 W852→W893 成熟段、底部净空带供标题叠字 · W930 十八条四天后现状复核 + 三条新发现 + 六批可施工落地方案 · W928 无 Docker 改走官方免安装二进制实跑 PG 16.4，6 项实跑通过，4 个真缺陷固化为守卫 · W927 四项开放项裁决落档，PG 部署基线离线施工件交付，交互审查交叉对账补一处设计遗漏 · W926 交互流程四维复核/跳转路径/按钮反馈/表单报错/空状态异常分支/对照前次审查逐条给闭环状态并出当前状态排序建议 · W925 对 W821 架构方案的增量修订：按新规模（月活十万级）改采 PG 自建单机，新增等保合规横切面，架构图三形态交付 · W924 性能三指标分治落地：页体积双层门槛升格判红，首屏归并既有防线，首 token 挂解冻条件 · W923 复审让号行幻影在途与前缀修复，跳号补登记，十一项实抽全过 · …更早批次详见 CHANGELOG.md</div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../index.html">首页</a>

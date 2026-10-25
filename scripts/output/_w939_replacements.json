@@ -1,0 +1,333 @@
+{
+ "stats": [
+  {
+   "rule": "reader-bookmark",
+   "desc": "阅读页收藏按钮 ☆ → 星标图标",
+   "expected": 615,
+   "actual": 615,
+   "new_hits": 608,
+   "already_done": 7,
+   "files": 608,
+   "kind": "literal"
+  },
+  {
+   "rule": "reader-thumb-up",
+   "desc": "阅读页反馈「有帮助」👍 → 拇指图标",
+   "expected": 615,
+   "actual": 615,
+   "new_hits": 608,
+   "already_done": 7,
+   "files": 608,
+   "kind": "literal"
+  },
+  {
+   "rule": "reader-thumb-down",
+   "desc": "阅读页反馈「待改进」👎 → 拇指图标",
+   "expected": 615,
+   "actual": 615,
+   "new_hits": 608,
+   "already_done": 7,
+   "files": 608,
+   "kind": "literal"
+  },
+  {
+   "rule": "js-icon-wrong-plain",
+   "desc": "icon-wrong 空图标（JS 串）",
+   "expected": 4,
+   "actual": 4,
+   "new_hits": 4,
+   "already_done": 0,
+   "files": 4,
+   "kind": "literal"
+  },
+  {
+   "rule": "js-icon-correct-plain",
+   "desc": "icon-correct 空图标（JS 串）",
+   "expected": 2,
+   "actual": 2,
+   "new_hits": 2,
+   "already_done": 0,
+   "files": 2,
+   "kind": "literal"
+  },
+  {
+   "rule": "es-icon-book",
+   "desc": "空态书本图标 📖（含 text-search-app.js）",
+   "expected": 3,
+   "actual": 3,
+   "new_hits": 3,
+   "already_done": 0,
+   "files": 3,
+   "kind": "literal"
+  },
+  {
+   "rule": "es-icon-search",
+   "desc": "空态检索图标 🔍（text-search-app.js）",
+   "expected": 1,
+   "actual": 1,
+   "new_hits": 1,
+   "already_done": 0,
+   "files": 1,
+   "kind": "literal"
+  },
+  {
+   "rule": "alias-search-link",
+   "desc": "关联检索链接前缀 🔍（中文 JS 串）",
+   "expected": 1,
+   "actual": 1,
+   "new_hits": 1,
+   "already_done": 0,
+   "files": 1,
+   "kind": "literal"
+  },
+  {
+   "rule": "alias-search-link-en",
+   "desc": "关联检索链接前缀 🔍（英文 JS 串）",
+   "expected": 1,
+   "actual": 1,
+   "new_hits": 1,
+   "already_done": 0,
+   "files": 1,
+   "kind": "literal"
+  },
+  {
+   "rule": "reader-mark-js",
+   "desc": "收藏按钮 JS 状态切换（★/☆ → 图标）",
+   "expected": 1,
+   "actual": 1,
+   "new_hits": 1,
+   "already_done": 0,
+   "files": 1,
+   "kind": "literal"
+  },
+  {
+   "rule": "verdict-inspect-js",
+   "desc": "侦探卡结论标签前缀 🔎",
+   "expected": 2,
+   "actual": 2,
+   "new_hits": 2,
+   "already_done": 0,
+   "files": 2,
+   "kind": "literal"
+  },
+  {
+   "rule": "rag-src-icon",
+   "desc": "检索来源标签前缀 📖",
+   "expected": 1,
+   "actual": 1,
+   "new_hits": 1,
+   "already_done": 0,
+   "files": 1,
+   "kind": "literal"
+  },
+  {
+   "rule": "rag-snippet-icon",
+   "desc": "相关语料标签前缀 📚",
+   "expected": 1,
+   "actual": 1,
+   "new_hits": 1,
+   "already_done": 0,
+   "files": 1,
+   "kind": "literal"
+  },
+  {
+   "rule": "criticism-pin",
+   "desc": "批驳史段首提示标记 📌",
+   "expected": 2,
+   "actual": 2,
+   "new_hits": 2,
+   "already_done": 0,
+   "files": 2,
+   "kind": "literal"
+  },
+  {
+   "rule": "html-icon-wrong-text",
+   "desc": "icon-wrong 带文字（怪物结局）",
+   "expected": 8,
+   "actual": 8,
+   "files": 2,
+   "kind": "regex"
+  },
+  {
+   "rule": "pc-emoji-guide",
+   "desc": "英文指南卡片图标槽",
+   "expected": 7,
+   "actual": 7,
+   "files": 1,
+   "kind": "regex"
+  },
+  {
+   "rule": "age-tab",
+   "desc": "弹幕墙年龄段页签",
+   "expected": 8,
+   "actual": 8,
+   "files": 2,
+   "kind": "regex"
+  },
+  {
+   "rule": "btn-play",
+   "desc": "播放按钮 ▶",
+   "expected": 4,
+   "actual": 4,
+   "files": 4,
+   "kind": "regex"
+  },
+  {
+   "rule": "btn-menu",
+   "desc": "侧栏折叠按钮 ☰（中英各一）",
+   "expected": 2,
+   "actual": 2,
+   "files": 2,
+   "kind": "regex"
+  },
+  {
+   "rule": "btn-close",
+   "desc": "抽屉关闭按钮 ✕（中英各一·JS 串）",
+   "expected": 2,
+   "actual": 2,
+   "files": 2,
+   "kind": "regex"
+  },
+  {
+   "rule": "btn-pause",
+   "desc": "暂停按钮 ⏸（中英各二）",
+   "expected": 4,
+   "actual": 4,
+   "files": 4,
+   "kind": "regex"
+  },
+  {
+   "rule": "btn-textcontent-play-zh",
+   "desc": "JS 按钮文本 ▶ 播放",
+   "expected": 12,
+   "actual": 12,
+   "files": 3,
+   "kind": "regex"
+  },
+  {
+   "rule": "btn-textcontent-play-en",
+   "desc": "JS 按钮文本 ▶ Play",
+   "expected": 12,
+   "actual": 12,
+   "files": 3,
+   "kind": "regex"
+  },
+  {
+   "rule": "btn-textcontent-pause-zh",
+   "desc": "JS 按钮文本 ⏸ 暂停",
+   "expected": 3,
+   "actual": 3,
+   "files": 3,
+   "kind": "regex"
+  },
+  {
+   "rule": "btn-textcontent-pause-en",
+   "desc": "JS 按钮文本 ⏸ Pause",
+   "expected": 3,
+   "actual": 3,
+   "files": 3,
+   "kind": "regex"
+  },
+  {
+   "rule": "btn-play-static",
+   "desc": "静态播放按钮 ▶（中英各三）",
+   "expected": 6,
+   "actual": 6,
+   "files": 6,
+   "kind": "regex"
+  }
+ ],
+ "css": [
+  {
+   "selector": ".search-box::before",
+   "literal": "\"🔍\"",
+   "icon": "search",
+   "expected": 2,
+   "actual": 2,
+   "files": 2
+  },
+  {
+   "selector": ".radio-out .caption::before",
+   "literal": "\"📻 \"",
+   "icon": "radio",
+   "expected": 2,
+   "actual": 2,
+   "files": 2
+  },
+  {
+   "selector": ".nc-quote::before",
+   "literal": "\"❝ \"",
+   "icon": "quote",
+   "expected": 2,
+   "actual": 2,
+   "files": 2
+  },
+  {
+   "selector": ".detective-banner::before",
+   "literal": "\"🔍 \"",
+   "icon": "search",
+   "expected": 2,
+   "actual": 2,
+   "files": 2
+  },
+  {
+   "selector": ".suspect-card::before",
+   "literal": "\"📌\"",
+   "icon": "pin",
+   "expected": 2,
+   "actual": 2,
+   "files": 2
+  },
+  {
+   "selector": ".hu-card::before",
+   "literal": "\"🔍\"",
+   "icon": "search",
+   "expected": 2,
+   "actual": 2,
+   "files": 2
+  },
+  {
+   "selector": ".idea-card .id-innovation::before",
+   "literal": "\"★ 创新 · \"",
+   "icon": "star",
+   "expected": 2,
+   "actual": 2,
+   "files": 2
+  },
+  {
+   "selector": ".warn-item::before",
+   "literal": "\"⚠\"",
+   "icon": "warn",
+   "expected": 2,
+   "actual": 2,
+   "files": 2
+  },
+  {
+   "selector": ".cc-acq::before",
+   "literal": "\"📜 \"",
+   "icon": "scroll",
+   "expected": 2,
+   "actual": 2,
+   "files": 2
+  },
+  {
+   "selector": ".suspect-card .evi.for::before",
+   "literal": "\"✓ \"",
+   "icon": "check",
+   "expected": 2,
+   "actual": 2,
+   "files": 2
+  },
+  {
+   "selector": ".suspect-card .evi.against::before",
+   "literal": "\"✗ \"",
+   "icon": "cross",
+   "expected": 2,
+   "actual": 2,
+   "files": 2
+  }
+ ],
+ "files_changed": 646,
+ "total_expected": 1957,
+ "total_actual": 1957
+}
