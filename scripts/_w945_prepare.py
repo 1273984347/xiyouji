@@ -23,7 +23,9 @@ from PIL import Image, ImageDraw
 REPO = r"D:\xiyouji"
 SET_DIR = os.path.join(REPO, "assets", "promo", "plate-set")
 # 出图轮次目录：靠前者优先（重出张落在后一轮），缺失的靠后者补齐
-RAW_DIRS = [os.path.join(SET_DIR, "raw", "round3"),
+RAW_DIRS = [os.path.join(SET_DIR, "raw", "round5"),
+            os.path.join(SET_DIR, "raw", "round4"),
+            os.path.join(SET_DIR, "raw", "round3"),
             os.path.join(SET_DIR, "raw", "round2"),
             os.path.join(SET_DIR, "raw")]
 SITE_IMG = os.path.join(REPO, "site", "static", "images")
@@ -97,8 +99,8 @@ def main() -> int:
     if not raws:
         print("FAIL  raw/ 下无 plate-line-*.png")
         return 1
-    if len(raws) != 8:
-        print("WARN  原件数 = %d（应为 8）" % len(raws))
+    if len(raws) < 8:
+        print("WARN  原件数 = %d（应 ≥ 8）" % len(raws))
 
     thumbs = []
     for rp in raws:
@@ -107,10 +109,13 @@ def main() -> int:
         im = Image.open(rp).convert("RGB")
         src_size = im.size
         im = crop_3_4(im).resize((OUT_W, OUT_H), Image.LANCZOS)
-        for _ in range(2):
+        # 归一迭代：最多 6 轮，收敛条件收紧到 |delta| < 0.3
+        # （W948 实证：偏色较重的纸面 2 轮不够，收敛在 1.36/255 ⇒ 越过 J9 阈值；
+        #  正确处置是让归一收敛，而不是放宽判据）
+        for _ in range(6):
             avg = measure_paper(im)
             delta = tuple(TARGET[i] - avg[i] for i in range(3))
-            if all(abs(d) < 0.6 for d in delta):
+            if all(abs(d) < 0.3 for d in delta):
                 break
             im = normalize(im, delta)
         avg = measure_paper(im)
@@ -129,13 +134,16 @@ def main() -> int:
         shutil.copy2(out_webp, os.path.join(SITE_IMG, stem + ".webp"))
         thumbs.append((base, im))
 
-    # ---- 拼图 4 列 × 2 行 ----
+    # ---- 拼图：4 列 · 行数随张数自适应（16 张 → 4×4）----
+    cols = 4
     tw, th = 300, 400
     pad, label_h = 14, 26
-    sheet = Image.new("RGB", (4 * tw + 5 * pad, 2 * (th + label_h) + 3 * pad), TARGET)
+    rows = (len(thumbs) + cols - 1) // cols
+    sheet = Image.new("RGB", (cols * tw + (cols + 1) * pad,
+                              rows * (th + label_h) + (rows + 1) * pad), TARGET)
     dr = ImageDraw.Draw(sheet)
     for i, (name, im) in enumerate(thumbs):
-        r, c = divmod(i, 4)
+        r, c = divmod(i, cols)
         x = pad + c * (tw + pad)
         y = pad + r * (th + label_h + pad)
         sheet.paste(im.resize((tw, th), Image.LANCZOS), (x, y))

@@ -15,6 +15,9 @@ FILES = [
     os.path.join(REPO, "scripts", "output", "_w945_batch1.json"),
     os.path.join(REPO, "scripts", "output", "_w945_batch2.json"),
     os.path.join(REPO, "scripts", "output", "_w945_batch3.json"),
+    os.path.join(REPO, "scripts", "output", "_w948_batch1.json"),
+    os.path.join(REPO, "scripts", "output", "_w948_batch2.json"),
+    os.path.join(REPO, "scripts", "output", "_w948_batch3.json"),
 ]
 
 errs = []

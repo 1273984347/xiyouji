@@ -34,12 +34,20 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SET_DIR = os.path.join(REPO, "assets", "promo", "plate-set")
 SITE_IMG = os.path.join(REPO, "site", "static", "images")
 
-STEMS = [
-    "plate-line-01-wukong", "plate-line-02-tangseng",
-    "plate-line-03-bajie", "plate-line-04-shaseng",
-    "plate-line-05-guanyin", "plate-line-06-erlangshen",
-    "plate-line-07-baigujing", "plate-line-08-honghaier",
-]
+
+def collect_stems():
+    """扫目录取全部成品（W948 起扩面）——由写死 8 张清单改为目录扫描 ⇒ 一套判据覆盖全部成套图。
+
+    只取 plate-line-*.png（线描人物题图成套）；raw/ 原件与 preview-* 核对图不在此目录层，不受影响。
+    """
+    if not os.path.isdir(SET_DIR):
+        return []
+    stems = []
+    for fn in sorted(os.listdir(SET_DIR)):
+        if fn.startswith("plate-line-") and fn.endswith(".png"):
+            stems.append(fn[:-4])
+    return stems
+
 
 PAPER = (250, 247, 240)
 VERM = (200, 70, 58)
@@ -55,6 +63,7 @@ J6_MAX = 0.75
 J6_COLS, J6_ROWS, J6_WIN = 12, 8, 3
 J8_MAX = 0.02
 J9_MAX = 1.0
+J10_MAX = 5.0          # 背景竖向亮度差上限（/255）·超限即疑白边或色带
 
 
 def near_px(im: Image.Image, color, tol: int, box=None) -> int:
@@ -155,6 +164,30 @@ def paper_residual(im: Image.Image):
     return max(abs(avg[i] - PAPER[i]) for i in range(3))
 
 
+def bg_band_diff(im: Image.Image, segs=12, band=0.22):
+    """J10 背景整幅均匀性：各竖段的「顶部纸面带」亮度差（检测左右白边 / 竖向色带）
+
+    口径：取**顶部 band 高度带**（该带按规格是纯纸面留白区·不含主体）
+    ⇒ 该带的均值即该段的纸色基底；分段求均值后取 max-min。
+    白边/色带 ⇒ 边段基底是纯白（255）而中段是米黄 ⇒ 差值显著。
+    只测顶部带而不测整幅，是为了避开主体白色衣物对白段均值的污染。
+    """
+    w, h = im.size
+    bh = max(1, int(h * band))
+    vals = []
+    for i in range(segs):
+        x0 = i * w // segs
+        x1 = (i + 1) * w // segs
+        reg = im.crop((x0, 0, x1, bh)).convert("RGB")
+        px = list(reg.getdata())
+        if not px:
+            continue
+        vals.append(sum(sum(p) / 3 for p in px) / len(px))
+    if len(vals) < 2:
+        return 0.0
+    return max(vals) - min(vals)
+
+
 def negative_check(path: str) -> int:
     p = path if os.path.isabs(path) else os.path.join(REPO, path)
     if not os.path.exists(p):
@@ -204,7 +237,11 @@ def main() -> int:
         return negative_check(args.negative)
 
     rows = []
-    for stem in STEMS:
+    stems = collect_stems()
+    if not stems:
+        print("FAIL  %s 下无 plate-line-*.png" % SET_DIR)
+        return 1
+    for stem in stems:
         png = os.path.join(SET_DIR, stem + ".png")
         webp = os.path.join(SET_DIR, stem + ".webp")
         site = os.path.join(SITE_IMG, stem + ".webp")
@@ -221,6 +258,7 @@ def main() -> int:
         frame = frame_ink(im)
         is_frame, frame_desc = frame_line(im)
         resid = paper_residual(im)
+        bgdiff = bg_band_diff(im)
         webp_ok = os.path.exists(webp) and os.path.getsize(webp) > 0 and os.path.exists(site)
 
         fails = []
@@ -242,17 +280,19 @@ def main() -> int:
             fails.append("J8 检出相框（贯穿暗线）：" + frame_desc)
         if resid > J9_MAX:
             fails.append("J9 纸色残差=" + format(resid, ".2f"))
+        if bgdiff > J10_MAX:
+            fails.append("J10 背景竖向不均匀（顶部带分段亮度差=" + format(bgdiff, ".2f") + "·疑白边/色带）")
 
-        rows.append((stem, (w, h), top, whole, lower, verm, dens, frame, resid, fails))
+        rows.append((stem, (w, h), top, whole, lower, verm, dens, frame, resid, bgdiff, fails))
 
-    print("=== W945 内页专题题图成套判据 ===")
-    hdr = "%-26s %-11s %7s %7s %7s %7s %7s %6s %6s  %s" % (
-        "stem", "尺寸", "顶留白", "整图墨", "下部墨", "朱砂px", "暗格", "边带", "纸残差", "判定")
+    print("=== W945/W948 内页专题题图成套判据（目录扫描·覆盖全部成品） ===")
+    hdr = "%-30s %-11s %7s %7s %7s %7s %7s %6s %6s %6s  %s" % (
+        "stem", "尺寸", "顶留白", "整图墨", "下部墨", "朱砂px", "暗格", "边框", "纸残差", "背景差", "判定")
     print(hdr)
-    for stem, size, top, whole, lower, verm, dens, frame, resid, fails in rows:
+    for stem, size, top, whole, lower, verm, dens, frame, resid, bgdiff, fails in rows:
         mark = "PASS" if not fails else "FAIL"
-        print("%-26s %-11s %7.4f %7.4f %7.4f %7d %7.3f %6.3f %6.2f  %s" % (
-            stem, "%dx%d" % size, top, whole, lower, verm, dens, frame, resid, mark))
+        print("%-30s %-11s %7.4f %7.4f %7.4f %7d %7.3f %6.3f %6.2f %6.2f  %s" % (
+            stem, "%dx%d" % size, top, whole, lower, verm, dens, frame, resid, bgdiff, mark))
         for f in fails:
             print("      -> " + f)
 

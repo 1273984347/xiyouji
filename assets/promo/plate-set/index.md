@@ -7,30 +7,47 @@
 > 本文件逐条列出 `assets/promo/plate-set/` 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
 > 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。
 
-## 子目录（1）
+## 子目录（2）
 
 - `raw/`
+- `zoom-w948/`
 
-## 文件（20）
+## 文件（36）
 
 ### 样式与资源
 
+- `plate-line-01-jinjiao.png`
+- `plate-line-01-jinjiao.webp`
 - `plate-line-01-wukong.png`
 - `plate-line-01-wukong.webp`
+- `plate-line-02-niumowang.png`
+- `plate-line-02-niumowang.webp`
 - `plate-line-02-tangseng.png`
 - `plate-line-02-tangseng.webp`
 - `plate-line-03-bajie.png`
 - `plate-line-03-bajie.webp`
+- `plate-line-03-tieshanggongzhu.png`
+- `plate-line-03-tieshanggongzhu.webp`
 - `plate-line-04-shaseng.png`
 - `plate-line-04-shaseng.webp`
+- `plate-line-04-xiezi.png`
+- `plate-line-04-xiezi.webp`
 - `plate-line-05-guanyin.png`
 - `plate-line-05-guanyin.webp`
+- `plate-line-05-huangpaoguai.png`
+- `plate-line-05-huangpaoguai.webp`
 - `plate-line-06-erlangshen.png`
 - `plate-line-06-erlangshen.webp`
+- `plate-line-06-zhenyuan.png`
+- `plate-line-06-zhenyuan.webp`
 - `plate-line-07-baigujing.png`
 - `plate-line-07-baigujing.webp`
+- `plate-line-07-dapeng.png`
+- `plate-line-07-dapeng.webp`
 - `plate-line-08-honghaier.png`
 - `plate-line-08-honghaier.webp`
+- `plate-line-08-taishanglaojun.png`
+- `plate-line-08-taishanglaojun.webp`
 - `preview-contact-sheet.png`
 - `preview-contact-sheet.webp`
 - `preview-detail-sheet.png`
