@@ -11,6 +11,20 @@
 ---
 
 
+## W944 章回插画新组（6 张按回目情节重出）（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/chap-07.webp | W944 | 重出·第 007 回 八卦炉（三足丹炉 + 火焰） |
+| site/static/images/chap-14.webp | W944 | 重出·第 014 回 心猿归正（猴形剪影 + 金箍 + 勒绳） |
+| site/static/images/chap-15.webp | W944 | 重出·第 015 回 鹰愁涧（惊马扬蹄 + 缰绳 + 瀑布崖） |
+| site/static/images/chap-23.webp | W944 | 重出·第 023 回 四圣试禅心（打坐僧 + 孤灯 + 雾中两影·去黑框） |
+| site/static/images/chap-27.webp | W944 | 重出·第 027 回 尸魔三戏（三道人影渐次消散 + 月 + 茅屋） |
+| site/static/images/chap-30.webp | W944 | 重出·第 030 回 邪魔侵正法（蛇形妖影 + 洞口 + 螺旋墨风） |
+| scripts/_w944_cascade.py | W944 | 四面登记 + 当前态指针 |
+| CHANGELOG.md | W944 | W944 版段（四件套） |
+| docs/00-导读/W批次编号对账表.md | W944 | W944 认领行 |
+
 ## W943 全站图片审查（227 张逐类目视·修 3 处真缺陷）（2026-10-25）
 
 | 文件 | W | 说明 |
