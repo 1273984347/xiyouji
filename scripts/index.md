@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（321）
+## 文件（350）
 
 ### Markdown 文档
 
@@ -209,6 +209,32 @@
 - `_w942_cascade.py`
 - `_w943_cascade.py`
 - `_w944_cascade.py`
+- `_w945_archive_round1.py`
+- `_w945_cascade.py`
+- `_w945_check_prompts.py`
+- `_w945_cleanup.py`
+- `_w945_detail_sheet.py`
+- `_w945_download.py`
+- `_w945_insert_plates.py`
+- `_w945_make_frame_sample.py`
+- `_w945_plates_verify.py`
+- `_w945_prepare.py`
+- `_w945_probe_changelog.py`
+- `_w945_probe_handover.py`
+- `_w945_probe_sizes.py`
+- `_w945_zoom.py`
+- `_w945_zoom2.py`
+- `_w945_zoom3.py`
+- `_w946_apply_timeline_icons.py`
+- `_w946_gen_timeline_icons.py`
+- `_w946_make_spec.py`
+- `_w947_add_icons.py`
+- `_w948_cascade.py`
+- `_w948_insert_plates.py`
+- `_w948_make_prompts.py`
+- `_w948_zoom.py`
+- `_w949_allowlist.py`
+- `_w949_fix_dataset.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
@@ -240,11 +266,13 @@
 - `check_dual_source_scan.py`
 - `check_dynamic_links.py`
 - `check_embedded_stale_markers.py`
+- `check_emoji_icons.py`
 - `check_folder_docs.py`
 - `check_frontmatter.py`
 - `check_glossary.py`
 - `check_governance_docs.py`
 - `check_html_head_content.py`
+- `check_icon_fields.py`
 - `check_index_health.py`
 - `check_inlined_css.py`
 - `check_interaction_binding.py`
@@ -337,6 +365,7 @@
 - `_w892_probe.mjs`
 - `_w930_layout_probe.mjs`
 - `_w930_layout_probe_app.mjs`
+- `_w946_icon_probe.js`
 - `batch_screenshots.js`
 - `check_chart_values.js`
 - `check_contract_smoke.js`

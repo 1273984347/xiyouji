@@ -66,7 +66,9 @@ def svg_tag(icons: dict, name: str, gap: bool = False) -> str:
     tr_attr = f' transform="{tr}"' if tr else ""
     fill_attr = ' fill="currentColor"' if name.endswith("-solid") else ""
     cls = "ico ico-t" if gap else "ico"
-    return (f'<svg class="{cls}" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">'
+    return (f'<svg class="{cls}" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" '
+            f'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" '
+            f'stroke-linejoin="round">'
             f'<path d="{d}"{tr_attr}{fill_attr}/></svg>')
 
 

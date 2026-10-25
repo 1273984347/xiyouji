@@ -11,7 +11,7 @@
 
 - `toolCalls/`
 
-## 文件（11）
+## 文件（12）
 
 ### JavaScript / TypeScript
 
@@ -26,6 +26,7 @@
 - `SettingsPage.tsx`
 - `Sidebar.tsx`
 - `ToolCallsCollapse.tsx`
+- `UiIcons.tsx`
 
 ---
 
