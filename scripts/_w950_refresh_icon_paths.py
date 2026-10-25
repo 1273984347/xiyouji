@@ -114,7 +114,12 @@ def main() -> int:
         text = p.read_text(encoding="utf-8")
         if "var TL_ICO" not in text:
             continue
-        new_text, n = re.subn(r"var TL_ICO = \{.*?\n\};", mapping_js.strip(), text, count=1, flags=re.S)
+        # 连同紧邻上方的「// W9xx · 时间线专属图标映射」注释行一并替换——
+        # 否则每次跑都会在块外多插一份注释（幂等性缺陷·本批实测出现 3 份）
+        new_text, n = re.subn(
+            r"(?:^//[^\n]*时间线专属图标映射[^\n]*\n)*var TL_ICO = \{.*?\n\};",
+            lambda _m: mapping_js.strip(),
+            text, count=1, flags=re.M | re.S)
         if n and new_text != text:
             total_b += 1
             if not args.dry:
@@ -124,24 +129,33 @@ def main() -> int:
     ui = ROOT / "xiyouji-agent-web" / "src" / "components" / "UiIcons.tsx"
     total_c = 0
     if ui.exists():
+        # C 段改为**由资产整体重建**：逐 path 替换会重复包裹（实测产出畸形 JSX）且非幂等
+        def body_of(name: str) -> str:
+            m = re.search(r"<path ([^/]+)/>", (ICON_DIR / f"{name}.svg").read_text(encoding="utf-8"))
+            d = re.search(r'd="([^"]+)"', m.group(1)).group(1)
+            tr = re.search(r'transform="([^"]+)"', m.group(1))
+            if tr:
+                return f'<path d="{d}" transform="{tr.group(1)}" />'
+            return f'<path d="{d}" />'
+
+        def rebuild(text: str) -> str:
+            for name in ("warn", "note", "link"):
+                b = body_of(name)
+                # 定位该图标函数体：function XIcon(...) { ... <path .../> ... }
+                m = re.search(r"(export function " + name.capitalize() + r"Icon\(\{ style \}: \{ style\?: CSSProperties \}\) \{\s*return \(\s*<Svg style=\{style\}>\s*)(.*?)(\s*</Svg>)",
+                              text, re.S)
+                if not m:
+                    continue
+                text = text[:m.start(2)] + b + text[m.end(2):]
+            return text
+
         text = ui.read_text(encoding="utf-8")
-        orig = text
-        for cand in ("note", "link", "warn"):
-            nd, ntr, nfl = new_by_name[cand]
-            pat = re.compile(r'd="' + re.escape(nd) + r'"')
-            if not pat.search(text):
-                # 旧 d（未重画或已改）→ 也要同步：按图标名定位函数体
-                continue
-            if ntr:
-                nums = [x.strip() for x in ntr.replace(",", " ").split()]
-                text = pat.sub(
-                    f'<g transform="translate({nums[0]} {nums[1]}) scale({nums[2]})">'
-                    f'<path d="{nd}" /></g>', text, count=1)
-            total_c += 1
-        if text != orig:
+        new_text = rebuild(text)
+        if new_text != text:
+            total_c = 1
             if not args.dry:
-                ui.write_text(text, encoding="utf-8")
-            print(f"C) UiIcons.tsx 同步 {total_c} 处")
+                ui.write_text(new_text, encoding="utf-8")
+            print(f"C) UiIcons.tsx 由资产重建（{total_c} 处）")
 
     if args.dry:
         print("[DRY] 未写盘")
