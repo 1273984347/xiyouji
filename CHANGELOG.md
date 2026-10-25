@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W938），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W940），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,43 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W940（2026-10-25）：Hero 素材题材辨识度修正（09 换筋斗云 · 04 换紧箍儿 · 补题材关判据）
+
+> **来源**：用户 2026-10-25 质疑「你确定这个图片符合主题吗？符合西游记吗？」——指向第 9 张「取经四众」。
+
+> - **文件**：assets/promo/hero-set/hero-line-04-tight-crown.png、assets/promo/hero-set/hero-line-04-tight-crown.webp、assets/promo/hero-set/hero-line-09-somersault-cloud.png、assets/promo/hero-set/hero-line-09-somersault-cloud.webp、assets/promo/hero-set/raw/hero-04b-tight-crown.jpg、assets/promo/hero-set/raw/hero-05b-somersault-cloud.png、assets/promo/hero-set/preview-contact-sheet.png、assets/promo/hero-set/preview-contact-sheet.webp、assets/promo/hero-set/README.md、site/static/images/hero-line-04-tight-crown.webp、site/static/images/hero-line-09-somersault-cloud.webp、site/index.html、scripts/_w931_hero_verify.py、scripts/_w938_apply_home.py、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/_w940_cascade.py
+
+**问题定性**：第 9 张「取经四众」被画成「农夫挑担」——金箍棒 / 九齿钉耙 / 月牙铲 / 僧帽**一个都没有**，且四人组侵入文字安全区（左留白 0.0174、整图墨量 0.1250 超判据上限）⇒ 题材与版面双不合格。根因在**判据缺口**：原判据只查尺寸 / 留白 / 墨量 / 伪文字 / 裁切五项，**没有「题材辨识度」这一关**。
+
+**本批修正**：① **09 换「筋斗云」**（悟空专属符号·器物路线与 c2 同语言·左留白 0.0005·整图墨量 0.0431）—— 人物群像路线经「缩小右移」变体实测仍偏重、版面放不下 ⇒ 弃用；② **04 换「紧箍儿」**（「司南」属通用意象、非西游独占 ⇒ 换成第一回的独占物件：金圈 + 朱砂红绦）；③ **03 经卷保留**（「取经成果」贴题；候选「紫金钵」复核后视觉偏「饭碗」、与取经主线关联弱 ⇒ 不采用）；④ 旧文件（`hero-line-04-sinan-compass.*`、`hero-line-09-pilgrim-four.*`）在素材目录与站点两侧同步清理。
+
+**补判据 J8（题材辨识度·人工关）**：目录 README 新增逐张「靠哪个《西游记》具体元素认出」自检表——每张须能答出其独占标志物（金箍棒 / 紧箍儿 / 九环锡杖 / 芭蕉扇 / 玉净瓶 / 筋斗云 为**强**；行程图 / 经卷 / 莲花 为**语境型**，靠站点文案与上下文成立）。**重出任一张后须逐条自检该表**，这是本次漏检的补口。
+
+> - **验证**：判据脚本 9/9 PASS（尺寸 2400×1017 · 左留白 0.0000–0.0039 · 整图墨量 0.0211–0.0809 · 朱砂点 9/9 在场）· 成套拼图逐张目视 · 素材与站点两侧文件同步清理核验
+> - **状态**：在途（认领登记 W940·待提交入库）
+
+### W939（2026-10-25）：UI 图标位 emoji 治理批（禁 emoji 充当图标 + 东方线描图标集自绘 27 枚 + UI 图标位 1,957 处归零）
+
+> **来源**：用户 2026-10-25 令「禁止使用 emoji 表情当做图标，你审查一下。你要么进行设计一下图标」，经问卷两问裁决——① 治理范围 = **仅 UI 图标位**（正文装饰 emoji 与箭头符号保留）② 图标风格 = **东方线描**（24×24 / 1.5px 描边 / currentColor 随主题）。
+
+> - **文件**：site/static/icons/ui/（27 枚 SVG 图标资产 + 目录文档 2 件）、site/system.css（新增 `.ico` / `.ico-t` 基类）、site/reader/**（615 个阅读页：收藏 ★ → 星标图标、反馈 👍👎 → 拇指图标）、site/data/** 与 site/en/**（30 余个页面的判定符号 / 检索图标 / 年龄段页签 / 播放暂停按钮 / 侦探卡结论标签 / 批驳史段首标记）、site/js/reader-enhance.js（收藏按钮运行时态切换）、site/static/js/rag-chat.js（检索来源与相关语料标签前缀）、site/static/js/text-search-app.js（空态图标）、scripts/_w939_gen_icons.py、scripts/_w939_scan_targets.py、scripts/_w939_emoji_to_svg.py、scripts/output/_w939_targets.json、scripts/output/_w939_replacements.json、docs/11-方案报告/计划方案/执行前计划-T26-UI图标emoji治理批.md、docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、scripts/output/file-index.md、scripts/output/stats-index.md。
+
+**问题量化（先审查·后施工）**：全仓 emoji 共 34,530 处 / 2,189 文件，绝大部分在 Markdown 正文（题材内容）。真正承担「图标职能」的是 **1,910 处 UI 图标位**，分布 **629 个页面**，只用 **21 种字符**（👍👎☆🔍📚📜📖📻📌👶🎒🎓🌱🜂✒📊🌐⏸☰✕✓✗★ 等）——这类用法的代价是**跨平台字形不一致**（Windows/macOS/Linux/移动端渲染各异）、**暗色模式不可控**（emoji 自带彩色，无法跟随主题）、**无语义**（屏幕阅读器读「thumbs up」而非「赞同」）。
+
+**自绘图标集（27 枚·东方线描）**：`site/static/icons/ui/*.svg` 为单一事实源，规格 **24×24 viewBox / stroke 1.5 / round cap+join / fill:none / stroke:currentColor**——与既有 `.icon-moon` / `.icon-sun` **同参数同族**，不是另起一套风格。图形含星标与实心星、竖/倒拇指、对勾与叉、放大镜与检视镜、线装书与展卷、卷轴、广播匣、图钉、警示、引语、童蒙/书囊/士冠、幼苗、炼金方符、墨笔、柱状图、地球、菜单、关闭、播放与暂停。生成器 `scripts/_w939_gen_icons.py` 落盘，**目视复核出图**（`tmpe/_w939_icons_preview.png`）并据此重画 6 枚（`close` 与 `cross` 视觉重复→`close` 改方框内叉；`pin` 补圆头斜肩；`schoolbag` 扣袋方块改横带；`scroll` 轴身加宽；`thumb-down` 改垂直镜像；`thumb-up` 换镜像同构）。
+
+**承载机制的三重约束（实测得出·非偏好）**：① 站点 CSP 是 `img-src 'self'`（**无 `data:`**）⇒ data-URI + mask 方案会被 CSP 拦掉；② 520 个阅读页走**外链 CSS**、328 个走内联块 ⇒ 写在 `site/system.css` 的相对路径 `url(static/…)` 随目录深度失效（`site/reader/culture/` 深度 2）；③ `file://` 直开是铁律 ⇒ 外部 `<use>` sprite 受限。⇒ **唯一同时满足 file:// + CSP + 多层目录的矢量承载方式 = 内联 SVG**；例外只有 CSS `content` 位（放不了 SVG 元素），该 22 处宿主页全部位于深度 1（`site/data/` 与 `site/en/`）⇒ 用同源 `mask-image` + `../static/icons/ui/` 相对路径成立。每枚内联 SVG 另带 `width="1em" height="1em"` 兜底属性——CSS 未加载时不会退化成 300×150 巨图。
+
+**两个可复跑机检脚本（判据可证伪）**：① `scripts/_w939_scan_targets.py`——把全仓 emoji 分为「UI 图标位」（控件首位 / 图标槽 class / 标题前缀 / CSS content）与「正文装饰」两类，输出逐条明细；② `scripts/_w939_emoji_to_svg.py`——每条替换规则带**独立预期命中数**（取自 ① 的基准清单，非实测反推），实际不符即**退出码 2** 拒绝写盘。规则命中一致率 **32/32 = 100%**。
+
+**治理结果**：UI 图标位 **1,910 → 0**（基准扫描器复扫，M-01）；另补治 47 处后续发现（兜底 grep 揪出扫描器漏检：JS 按钮文本 ▶⏸ 共 30 处、静态播放按钮 6 处、检索来源/语料标签前缀 2 处、段首提示标记 2 处、侦探卡结论标签前缀 2 处），累计替换 **1,957 处**；CSS 级联 **328 内联页**重同步（520 外链页自动生效）；CSP **14 页**重算、856 页 **0 漂移**。
+
+**正文零损伤（HEAD↔工作树字符净差核验）**：逐文件对比 git HEAD 与工作树，净减少仅限图标位应有的 25 种字符（☆👍👎 各 608 + 零散 46 处），**正文型字符（✅78 / ✓200 / 🧑20 / 🎭8 / ★8 / ☆4）净差为 0**；箭头 `→`/`←` 因承担正文流程语义（5,000+ 处）按用户裁决**原样保留**。
+
+**保留项登记（如实披露·非遗漏）**：① 星级评分 `★`/`☆` 12 处（难度与强度评分，**评分可视化**而非图标）；② `site/data/timeline.html` 与英文版的**数据字段** `icon:` 共 12 处（📖📚📜✒ 等，每条时间线事件的专属象征——通用图标集无法表达「成书/游记/评点」语义差，属**专属设计任务**）；③ `site/data/ai-dialogue.html` 人物**头像** emoji 4 处（🧑‍🎓，身份标识，通用图标会丢身份信息）；④ `site/data/methodology-matrix.html` 评分项 `icon:` 1 处；⑤ `site/data/business-model.html` 区间标注 `◀…▶` 2 处（内容表达）。
+
+**未改**：任何管控脚本（`verify_delivery.py` / `bump_version.py` / `batch_cascade.py` / `preflight_check.py`）；既有 `.icon-moon` / `.icon-sun` 体系；正文装饰 emoji 与箭头符号；并行批次 W936 在途的共享面（提交用显式 pathspec 隔离）。
 
 ### W938（2026-10-25）：首屏版式重做 + 图集逐张复核（左侧文字重排 · 切换器归位 · 9 张构图全部完整）
 

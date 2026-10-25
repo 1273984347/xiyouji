@@ -155,8 +155,17 @@ PAIRS = [
     ("HTML masthead 结构", HTML_OLD, HTML_NEW),
     ("HTML 第 9 张按钮 + 闭合", HTML_DOTS_OLD, HTML_DOTS_NEW),
     ("SLIDES 第 9 张",
-     "    { src: 'static/images/hero-11-chiping-boshan.webp', label: '持瓶菩萨立像' }",
-     "    { src: 'static/images/hero-line-09-pilgrim-four.webp', label: '取经四众西行' }"),
+     "    { src: 'static/images/hero-line-09-pilgrim-four.webp', label: '取经四众西行' }",
+     "    { src: 'static/images/hero-line-09-somersault-cloud.webp', label: '筋斗云' }"),
+    ("SLIDES 第 4 张",
+     "    { src: 'static/images/hero-line-04-sinan-compass.webp', label: '司南' }",
+     "    { src: 'static/images/hero-line-04-tight-crown.webp', label: '紧箍儿' }"),
+    ("HTML 第 4 张按钮",
+     'aria-label="第 4 张插画：司南"',
+     'aria-label="第 4 张插画：紧箍儿"'),
+    ("HTML 第 9 张按钮",
+     'aria-label="第 9 张插画：取经四众西行"',
+     'aria-label="第 9 张插画：筋斗云"'),
     ("CSS 注释·图集构成",
      "/* W935：首屏插画图集（9 张 = W931 线描 8 张 + W932 持瓶菩萨收尾重音）",
      "/* W938：首屏插画图集（9 张 = W931 线描 8 张 + W938 取经四众收尾重音·全部 2400×1017）"),
@@ -188,7 +197,7 @@ def main() -> int:
 
     applied, skipped, failed = [], [], []
     for name, old, new in PAIRS:
-        if new in t and old not in t:
+        if new in t:
             skipped.append(name)
             continue
         if old not in t:

@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（313）
+## 文件（318）
 
 ### Markdown 文档
 
@@ -201,6 +201,11 @@
 - `_w938_apply_home.py`
 - `_w938_cascade.py`
 - `_w938_paper_normalize.py`
+- `_w939_emoji_to_svg.py`
+- `_w939_gen_icons.py`
+- `_w939_make_spec.py`
+- `_w939_scan_targets.py`
+- `_w940_cascade.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`

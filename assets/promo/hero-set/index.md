@@ -21,8 +21,8 @@
 - `hero-line-02-journey-scroll.webp`
 - `hero-line-03-classic-scroll.png`
 - `hero-line-03-classic-scroll.webp`
-- `hero-line-04-sinan-compass.png`
-- `hero-line-04-sinan-compass.webp`
+- `hero-line-04-tight-crown.png`
+- `hero-line-04-tight-crown.webp`
 - `hero-line-05-lotus.png`
 - `hero-line-05-lotus.webp`
 - `hero-line-06-nine-ring-staff.png`
@@ -31,8 +31,8 @@
 - `hero-line-07-banana-fan.webp`
 - `hero-line-08-jade-vase.png`
 - `hero-line-08-jade-vase.webp`
-- `hero-line-09-pilgrim-four.png`
-- `hero-line-09-pilgrim-four.webp`
+- `hero-line-09-somersault-cloud.png`
+- `hero-line-09-somersault-cloud.webp`
 - `preview-contact-sheet.png`
 - `preview-contact-sheet.webp`
 
