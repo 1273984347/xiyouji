@@ -20,6 +20,14 @@ STEMS = [
     ("plate-line-06-erlangshen", "06 二郎神·天眼+三尖刃"),
     ("plate-line-07-baigujing", "07 白骨精·三变残影"),
     ("plate-line-08-honghaier", "08 红孩儿·火尖枪+真火"),
+    ("plate-line-01-jinjiao", "09 金角大王·紫金红葫芦"),
+    ("plate-line-02-niumowang", "10 牛魔王·牛首+混铁棍"),
+    ("plate-line-03-tieshanggongzhu", "11 铁扇公主·叶形芭蕉扇"),
+    ("plate-line-04-xiezi", "12 蝎子精·蝎尾毒钩+毒桩"),
+    ("plate-line-05-huangpaoguai", "13 黄袍怪·狼首+金钢琢"),
+    ("plate-line-06-zhenyuan", "14 镇元大仙·人参果+拂尘"),
+    ("plate-line-07-dapeng", "15 大鹏金翅雕·鹏翼+二气瓶"),
+    ("plate-line-08-taishanglaojun", "16 太上老君·太极图+拂尘"),
 ]
 PAPER = (250, 247, 240)
 
@@ -42,7 +50,8 @@ def ink_bbox(im: Image.Image, tol=26):
 
 def main(argv):
     out = argv[0] if argv else os.path.join(SET_DIR, "preview-detail-sheet.png")
-    cols, rows = 4, 2
+    cols = 4
+    rows = (len(STEMS) + cols - 1) // cols
     cw, ch = 600, 800
     pad, lab = 12, 24
     sheet = Image.new("RGB", (cols * cw + (cols + 1) * pad,
