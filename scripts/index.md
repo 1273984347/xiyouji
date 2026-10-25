@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（269）
+## 文件（270）
 
 ### Markdown 文档
 
@@ -277,6 +277,7 @@
 - `_p1_viz_audit.js`
 - `_pd3_finding_probe.js`
 - `_pmc_pdf_fetch.js`
+- `_render_arch_png.mjs`
 - `_smoke_batch.js`
 - `_w621_render_png.js`
 - `_w854_cdp.mjs`
