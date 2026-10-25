@@ -24,7 +24,7 @@
 > **摘要**：① **留存五条脚注重写**——去掉两条截断残迹（「…（W964 定形截断…）」句中省略号形态）与两条中文日期头，五条全部重写为「阿拉伯日期（W###）」头+完整成句 ≤300 字（W932/W934 从各自 CHANGELOG 段事实重写），脚注 2.4→1.9 KB。② **体积门禁 C4 逐条定形判据**——脚注每条 >300 字或条目头不可解析即红（比 C3 聚合 4KB 更细：五条各 290 字可绕过 C3 但逃不过 C4）。③ **扫描探针常驻化**——W964 挖出双虫的「解析器锚点 vs 原始形态全集」对拍法沉淀为 scripts/check_parser_anchor_coverage.py（七机制：脚注条目/里程碑块/头尾链/CHANGELOG 段/file-index 段/台账行/实体标记；报告型·基线 ② 类登记）；建置即抓自身假阴性一次——M3 探针假定「（W963）」紧闭形态而真实尾链是「（W963 描述）」，修后 4/4 全过。④ **HANDOVER 候选清单立「手搓绕过级联治理」独立议题**——实证三起（W955 版本面锚点破坏、W961/W963 连环手搓、里程碑只插不旋），候选三层方案（级联文件锁/版本行契约门禁/手搓前置劝导）附评审口径（②最薄优先）。⑤ 顺带：ruff 清零 2 处（含 verify_delivery 缺文件尾换行的 W292）。
 > **文件**：AGENTS.md · HANDOVER.md · scripts/check_doc_size_budget.py · scripts/check_parser_anchor_coverage.py · scripts/check_gsap_motion.py · scripts/verify_delivery.py · scripts/output/script-coverage-baseline.txt · tests/unit/test_doc_size_budget.py · CHANGELOG.md · scripts/output/file-index.md · pytest.ini · docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md
 > **验证**：探针 --self-test 过（盲区可报出+干净可放行）+ 现网七机制全绿（5/5·5/5·4/4·242⊆600·562/562·313/313·10/10）+ 体积门禁 C4 负样本单测 + pytest 全量 916 收集全绿（915→916 标记三方同步）+ ruff 全仓清零。
-> **状态**：在途（认领登记 W965·待提交入库）
+> **状态**：**已收官**（597fc061 主提交 + 9e80fe6f 级联落盘·git 反填）
 ### W964（2026-10-26）：AGENTS 版本脚注治理批（滚动器双形态 + 条目定形 + 存量清理 + 同族扫描）
 
 > **来源**：用户审问「AGENTS.md 文件下面的内容都是什么东西？没用的内容为什么这么多」——取证为版本脚注 85.7KB 冻结，用户裁决「开始」并令全仓同族扫描。
