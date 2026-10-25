@@ -11,10 +11,11 @@
 
 - （无）
 
-## 文件（12）
+## 文件（15）
 
 ### JavaScript / TypeScript
 
+- `ScrollTrigger.min.js`
 - `chart-a11y.js`
 - `chart-audit.js`
 - `cite-box.js`
@@ -23,6 +24,8 @@
 - `datahub-index.js`
 - `dataset-view.js`
 - `graph-fallback.js`
+- `gsap.min.js`
+- `motion-gsap.js`
 - `rag-chat.js`
 - `text-search-app.js`
 - `three.r128.min.js`
