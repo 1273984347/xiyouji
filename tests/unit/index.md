@@ -11,11 +11,12 @@
 
 - （无）
 
-## 文件（39）
+## 文件（41）
 
 ### Python 脚本
 
 - `test_a11y_audit.py`
+- `test_archive_segments.py`
 - `test_batch_cascade_status_wnum.py`
 - `test_check_data_copy_chain.py`
 - `test_check_db_schema.py`
@@ -28,6 +29,7 @@
 - `test_ci_sim.py`
 - `test_ci_wiring.py`
 - `test_d3_data_processors.py`
+- `test_doc_size_budget.py`
 - `test_docs_index.py`
 - `test_embed_json.py`
 - `test_folder_docs_gate.py`
