@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W951），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W952），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,29 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W952（2026-10-25）：内页人物题图续批第二组（12 张·人物 + 主题混合·站内线描题图累计 28 张）
+
+> **来源**：用户 2026-10-25 令「再继续帮我做几张素材图」，并要求开工前先问三件事。
+>
+> **三问答复**：① 用途与画幅 = **内页人物题图续批 · 3:4 竖版** ② 张数 = **12 张** ③ 参考风格 = **沿用站内线描墨稿风**（附加题材范围 = **人物 + 主题混合**）。
+>
+> - **文件**：site/static/images/plate-line-01-bailongma.webp、site/static/images/plate-line-02-dujiao-shengwang.webp、site/static/images/plate-line-03-linggan.webp、site/static/images/plate-line-04-huangfengguai.webp、site/static/images/plate-line-05-saitaisui.webp、site/static/images/plate-line-06-jiuLingyuansheng.webp、site/static/images/plate-line-07-nezha.webp、site/static/images/plate-line-08-angrixingguan.webp、site/static/images/plate-line-09-jingu-topic.webp、site/static/images/plate-line-10-jindouyun-topic.webp、site/static/images/plate-line-11-fabao-topic.webp、site/static/images/plate-line-12-wuzi-jing-topic.webp、assets/promo/plate-set/README.md、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-site-sheet.png、site/reader/people/白龙马.html、site/reader/people/独角兕大王.html、site/reader/people/灵感大王.html、site/reader/people/黄风怪外传.html、site/reader/people/赛太岁.html、site/reader/people/九灵元圣-方向二深化.html、site/reader/people/哪吒.html、site/reader/people/昴日星官.html、site/reader/themes/紧箍咒专题.html、site/reader/themes/筋斗云专题.html、site/reader/themes/法宝系统专题.html、site/reader/themes/无字真经专题.html、scripts/_w952_make_prompts.py、scripts/_w952_insert_plates.py、scripts/_w952_cascade.py、scripts/_w952_fix_c6.py、scripts/_w952_fix_j10.py、scripts/_w952_make_edge_sample.py、scripts/_w952_update_readme.py、scripts/_w952_zoom.py、scripts/_w945_prepare.py、scripts/_w945_plates_verify.py、scripts/_w945_detail_sheet.py、scripts/output/_w952_batch1.json、scripts/output/_w952_batch2.json、scripts/output/_w952_batch3.json、scripts/output/_w952_batch4.json、scripts/output/_w952_batch5.json、scripts/output/_cascade_files_W952.txt、scripts/output/file-index.md、CHANGELOG.md、README.md、HANDOVER.md、docs/00-导读/W批次编号对账表.md
+
+**缺口**：reader 共 622 页，本批之前仅 **27 页**有题图（缺口 595 页）；本批 12 张接入 12 个页面 ⇒ 累计 **39 页**有题图。
+
+**题材（人物 8 + 主题 4·每张一个独占标志物）**：白龙马（白衣龙君 + 三叉戟 + 龙影）、独角兕大王（青牛独角 + 方头钢叉）、灵感大王（鱼尾龙袍 + 玉钵）、黄风怪（黄鼠狼身 + 叶形芭蕉扇 + 风纹）、赛太岁（金毛犼 + 紫金铃）、九灵元圣（九头狮）、哪吒（乾坤圈 + 火尖枪 + 混天绫 + 风火轮）、昴日星官（公鸡形貌 + 长鞭）｜紧箍咒（金箍九倒刺 + 朱砂红绦）、筋斗云（祥云涡卷 + 悟空端坐）、法宝系统（五件法宝弧形列阵）、无字真经（空白经卷 + 淡赭金横纹）。
+
+**风格同族由构造保证**：母版的**风格段 211 字符**从上批母版程序化复用（`scripts/_w952_make_prompts.py` 读上批 JSON 取母版），**只替换构图句**——由「上部 28% 留白供叠字」改为「主体上方只留约一成呼吸空间·不设专用标题区」（因用户上批已裁决页面上裁掉留白，本批直接按无标题区构图）。脚本自带两条断言：批内 12 条母版逐字一致 + 风格段与上批母版逐字一致。
+
+**判据口径调整**：J2「顶部留白带」由 28% 放宽为 **10%**（上批留 28% / 本批留一成 ⇒ 取交集·顶部 10% 必为纯纸面），其余 J1/J3–J10 不变；站点版验算（主体顶未切 + 主体底未切 + 下部地面留白 > 0）同步覆盖本批。
+
+**接入**：沿用站内 `chapter-plate` 范式（420px 居中 + 描述性 alt + 浅底图暗色模式隐藏）。
+
+**并发纪律**：共享面按内容粒度**精确暂存**（`git update-index --cacheinfo`·HEAD 为基底叠加本批段）⇒ 不把对方在途内容带进本批提交。
+
+> - **验证**：（见本批脚本输出与对账表回填）
+> - **状态**：在途（认领登记 W952·待提交入库）
 
 ### W951（2026-10-25）：题图版式批（站点版裁掉上部留白·16 张题图页面呈现紧凑化）
 

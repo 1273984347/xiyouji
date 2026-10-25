@@ -7,27 +7,36 @@
 > 本文件逐条列出 `assets/promo/plate-set/` 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
 > 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。
 
-## 子目录（2）
+## 子目录（3）
 
 - `raw/`
 - `zoom-w948/`
+- `zoom-w952/`
 
-## 文件（38）
+## 文件（62）
 
 ### 样式与资源
 
+- `plate-line-01-bailongma.png`
+- `plate-line-01-bailongma.webp`
 - `plate-line-01-jinjiao.png`
 - `plate-line-01-jinjiao.webp`
 - `plate-line-01-wukong.png`
 - `plate-line-01-wukong.webp`
+- `plate-line-02-dujiao-shengwang.png`
+- `plate-line-02-dujiao-shengwang.webp`
 - `plate-line-02-niumowang.png`
 - `plate-line-02-niumowang.webp`
 - `plate-line-02-tangseng.png`
 - `plate-line-02-tangseng.webp`
 - `plate-line-03-bajie.png`
 - `plate-line-03-bajie.webp`
+- `plate-line-03-linggan.png`
+- `plate-line-03-linggan.webp`
 - `plate-line-03-tieshanggongzhu.png`
 - `plate-line-03-tieshanggongzhu.webp`
+- `plate-line-04-huangfengguai.png`
+- `plate-line-04-huangfengguai.webp`
 - `plate-line-04-shaseng.png`
 - `plate-line-04-shaseng.webp`
 - `plate-line-04-xiezi.png`
@@ -36,18 +45,34 @@
 - `plate-line-05-guanyin.webp`
 - `plate-line-05-huangpaoguai.png`
 - `plate-line-05-huangpaoguai.webp`
+- `plate-line-05-saitaisui.png`
+- `plate-line-05-saitaisui.webp`
 - `plate-line-06-erlangshen.png`
 - `plate-line-06-erlangshen.webp`
+- `plate-line-06-jiuLingyuansheng.png`
+- `plate-line-06-jiuLingyuansheng.webp`
 - `plate-line-06-zhenyuan.png`
 - `plate-line-06-zhenyuan.webp`
 - `plate-line-07-baigujing.png`
 - `plate-line-07-baigujing.webp`
 - `plate-line-07-dapeng.png`
 - `plate-line-07-dapeng.webp`
+- `plate-line-07-nezha.png`
+- `plate-line-07-nezha.webp`
+- `plate-line-08-angrixingguan.png`
+- `plate-line-08-angrixingguan.webp`
 - `plate-line-08-honghaier.png`
 - `plate-line-08-honghaier.webp`
 - `plate-line-08-taishanglaojun.png`
 - `plate-line-08-taishanglaojun.webp`
+- `plate-line-09-jingu-topic.png`
+- `plate-line-09-jingu-topic.webp`
+- `plate-line-10-jindouyun-topic.png`
+- `plate-line-10-jindouyun-topic.webp`
+- `plate-line-11-fabao-topic.png`
+- `plate-line-11-fabao-topic.webp`
+- `plate-line-12-wuzi-jing-topic.png`
+- `plate-line-12-wuzi-jing-topic.webp`
 - `preview-contact-sheet.png`
 - `preview-contact-sheet.webp`
 - `preview-detail-sheet.png`
