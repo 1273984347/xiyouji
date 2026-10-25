@@ -47,11 +47,22 @@ cp assets/promo/hero-set/hero-line-01-ruyi-staff.webp site/static/images/
 
 ```css
 background-image: url('static/images/hero-line-01-ruyi-staff.webp');
-background-size: cover;
-background-position: right center;   /* 主体在右，文字压在左侧留白 */
+background-size: cover;              /* 沿用现有值即可 */
+background-position: center bottom;  /* 沿用现有值即可（实测差异 <0.5%） */
 ```
 
-`background-position` 取 `right center` 保住「主体在右、文字在左」的版面约定；不要用 `center`，否则会把主体推回画面中部、压掉左侧留白。
+### 容器适配实测（1440×520 容器·模拟 `background-size: cover`）
+
+| 素材 | 源尺寸 | cover 缩放后 | 垂直溢出 | 裁切后左 46% | 裁切后右区墨量 |
+|---|---|---|---|---|---|
+| 本批 `hero-line-*` | 2400×1017（2.36:1） | 1440×610 | **90 px** | **100% 纯纸色**（零墨量） | 7.2%–10.0% |
+| 既有 hero-01（16:9 渲染型） | 2560×1440 | 1440×810 | 290 px | — | 主体几乎被裁没 |
+
+- 本批 8 张在 1440×520 下**垂直只溢出 90 px**（16:9 素材溢出 290 px）⇒ 主体几乎不被裁；
+- 裁切后**左侧 46% 仍是 100% 纯纸色** ⇒ 标题 / 副题 / CTA 叠加不受影响；
+- `background-position` 取 `center bottom` 与 `center` 对裁切结果影响 **<0.5%** ⇒ **沿用 `.hero` 现有参数即可，不必改 CSS**；
+- 模拟器先以既有 hero-01 校准（能复现「16:9 素材在同容器下主体几乎被裁没」这一已知现象）⇒ 结论可信；
+- ⚠️ **窄屏另测**：`@375` 下 cover 裁切行为与宽屏相反（背景被放大、主体下移而文字上移）——窄屏验收要额外查「背景主体是否压正文文字」。
 
 ## 维护约定
 
