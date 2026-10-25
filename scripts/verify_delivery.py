@@ -106,6 +106,7 @@ EXPECTED_SECTION_NAMES = [
     "性能影子",
     "计划方案合规",
     "朱砂实底",
+    "GSAP写法",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
@@ -135,7 +136,7 @@ SCOPE_SITE_SECTIONS = {
 }
 _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·旁文档/A4/A1-A6/学术/A1导航/sitemap/内嵌回退 7 段不在任何 scope 集=自洽锁盲区）
     "期望版本", "dukou页脚", "六文档同步", "旁文档同步", "范围漂移",
-    "A4计数", "A1-A6计数", "学术引用", "A1导航", "sitemap覆盖", "内嵌回退",
+    "A4计数", "A1-A6计数", "学术引用", "A1导航", "sitemap覆盖", "内嵌回退", "GSAP写法",
 }
 # _GATE_SUMMARY_MARKERS 已由 _STRICT_GATES 元组派生（W781 R-1·见 _STRICT_GATES 定义后），
 # 手工字典删除——挂槽漏登记即启动期断言红（W780 实证：漏登记会在 --scope 跳过路径爆「缺汇总行」假红）
@@ -627,6 +628,16 @@ _STRICT_GATES = [
                 fail_msg="朱砂实底限额违规（有页面非豁免实底 >3 处·收敛或补登记豁免后重跑）",
                 marker_msg="朱砂实底槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
                 ok_msg="朱砂实底限额门禁通过（%s）", ok_line=-1),
+    # W960（用户 2026-10-26 批准）：GSAP 动效写法门禁挂第 50 槽——
+    # site/static/js/ 下的自有 JS 原不在任何静态门禁扫描域内（check_motion_ban 只扫 HTML + 两份 CSS；
+    # check_js_syntax 只扫 HTML 内联脚本）⇒ 载体写坏（回弹缓动 / 超时长 / 大角度旋转 / 视差字面量）时
+    # 全站门禁全绿。判据自带负样本自测（8/8），豁免只对写法类规则（J3/J4/J7）开放且逐条打印不静默。
+    _StrictGate(section="GSAP写法", script="check_gsap_motion.py", args=("--gate",), timeout=120,
+                marker="---- 第 50 门禁 GSAP 写法：",
+                crash_msg="GSAP 写法槽执行异常（第 50 槽·crash 即拦）: %s",
+                fail_msg="GSAP 动效写法违例（时长 / 缓动白名单 / 禁旋转 / 禁循环 / 布局属性·详见脚本输出）",
+                marker_msg="GSAP 写法槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+                ok_msg="GSAP 动效写法门禁通过（%s）", ok_line=-1),
 ]
 
 # ---- 注册表派生与一致性防线（W781 R-1·挂槽「五处同改」收敛）----

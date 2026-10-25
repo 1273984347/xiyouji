@@ -63,6 +63,31 @@ def _read(path: Path) -> str:
     return path.read_text(encoding="utf-8", errors="ignore")
 
 
+# 显式豁免机制（W960·用户批准挂槽时附带）：
+#   在被检文件内写 `gsap-motion: waive J3 J4` ⇒ 对应规则对该文件跳过；
+#   · **J2（禁止类：视差 / 无限循环 / 大角度旋转 / 回弹 / 线性 / 无缓动）不可豁免**——它是宪法级红线，
+#     请求豁免 J2 一律判红（防止「用豁免绕过宪法」）；
+#   · 豁免**不静默**：门禁输出逐条打印豁免项（规则号 + 文件名 + 原文行），可被台账复核。
+WAIVE_RE = re.compile(r"gsap-motion:\s*waive\s+([A-Z0-9 ]+)")
+NON_WAIVABLE = {"J2"}
+
+
+def _waivers(text: str):
+    """返回 (可豁免规则集合, 非法豁免列表, 豁免原文行列表)。"""
+    ok, bad, lines = set(), [], []
+    for m in WAIVE_RE.finditer(text):
+        for rule in m.group(1).split():
+            rule = rule.strip().upper()
+            if not rule:
+                continue
+            if rule in NON_WAIVABLE:
+                bad.append(rule)
+            else:
+                ok.add(rule)
+        lines.append(m.group(0).strip())
+    return ok, bad, lines
+
+
 def check_carrier() -> list[str]:
     """返回问题清单（空 = 全过）。"""
     issues: list[str] = []
@@ -70,6 +95,11 @@ def check_carrier() -> list[str]:
         return ["J1 载体缺失：site/static/js/motion-gsap.js"]
 
     text = _read(CARRIER)
+    waived, bad_waive, waive_lines = _waivers(text)
+    for rule in bad_waive:
+        issues.append("J2 宪法级规则不可豁免：%s 请求 waive（豁免仅对 J3/J4/J7 开放）" % rule)
+    for rule in sorted(waived - {"J3", "J4", "J7"}):
+        issues.append("豁免规则号不存在的规则：%s（可豁免范围 J3 / J4 / J7）" % rule)
 
     # J1 语法：node --check 优先（node 缺失则退化为括号/引号平衡粗检）
     node = None
@@ -98,26 +128,28 @@ def check_carrier() -> list[str]:
 
     # J3 时长上限（两形态：① 直接 duration 字面量 ② 时长常量表内的字面量）
     #   自证实证：初版只扫 ① ⇒ 时长表 `{ enter: 1.2 }` 形态越限不被抓（负样本 case5 未被抓住）
-    for m in re.finditer(r"duration\s*:\s*([0-9]*\.?[0-9]+)", text):
-        v = float(m.group(1))
-        if v > 0.6:
-            issues.append("J3 动画时长 %s s 超 0.6 s 上限" % v)
-    for m in re.finditer(r"\b(?:DUR|TIMING|DURATION)\w*\s*=\s*\{([^}]*)\}", text):
-        for num in re.finditer(r":\s*([0-9]*\.?[0-9]+)", m.group(1)):
-            v = float(num.group(1))
+    if "J3" not in waived:
+        for m in re.finditer(r"duration\s*:\s*([0-9]*\.?[0-9]+)", text):
+            v = float(m.group(1))
             if v > 0.6:
-                issues.append("J3 时长常量表内 %s s 超 0.6 s 上限" % v)
+                issues.append("J3 动画时长 %s s 超 0.6 s 上限" % v)
+        for m in re.finditer(r"\b(?:DUR|TIMING|DURATION)\w*\s*=\s*\{([^}]*)\}", text):
+            for num in re.finditer(r":\s*([0-9]*\.?[0-9]+)", m.group(1)):
+                v = float(num.group(1))
+                if v > 0.6:
+                    issues.append("J3 时长常量表内 %s s 超 0.6 s 上限" % v)
 
     # J4 缓动白名单（两形态：① 直接 ease 字面量 ② 缓动常量表内的字面量）
     #   自证实证：初版只扫 ① ⇒ 常量表形态的越权缓动不被抓（负样本 case8 未被抓住）
-    for m in re.finditer(r"ease\s*:\s*['\"]([^'\"]+)['\"]", text):
-        if m.group(1) not in EASE_WHITELIST:
-            issues.append("J4 缓动 '%s' 不在白名单 %s" % (m.group(1), sorted(EASE_WHITELIST)))
-    for m in re.finditer(r"\b(?:EASE|EASING)\w*\s*=\s*\{([^}]*)\}", text):
-        for e in re.finditer(r":\s*['\"]([^'\"]+)['\"]", m.group(1)):
-            if e.group(1) not in EASE_WHITELIST:
-                issues.append("J4 缓动常量表内 '%s' 不在白名单 %s"
-                              % (e.group(1), sorted(EASE_WHITELIST)))
+    if "J4" not in waived:
+        for m in re.finditer(r"ease\s*:\s*['\"]([^'\"]+)['\"]", text):
+            if m.group(1) not in EASE_WHITELIST:
+                issues.append("J4 缓动 '%s' 不在白名单 %s" % (m.group(1), sorted(EASE_WHITELIST)))
+        for m in re.finditer(r"\b(?:EASE|EASING)\w*\s*=\s*\{([^}]*)\}", text):
+            for e in re.finditer(r":\s*['\"]([^'\"]+)['\"]", m.group(1)):
+                if e.group(1) not in EASE_WHITELIST:
+                    issues.append("J4 缓动常量表内 '%s' 不在白名单 %s"
+                                  % (e.group(1), sorted(EASE_WHITELIST)))
 
     # J5 RM 双守卫
     if "prefers-reduced-motion" not in text:
@@ -162,6 +194,12 @@ def check_wiring() -> list[str]:
 
 def run_gate() -> int:
     issues = check_carrier() + check_wiring()
+    # 豁免不静默：逐条打印（规则号 + 原文行），供台账/评审复核
+    if CARRIER.exists():
+        _ok, _bad, waive_lines = _waivers(_read(CARRIER))
+        for ln in waive_lines:
+            print("  WAIVE %s：%s" % (CARRIER.name, ln))
+    print("---- 第 50 门禁 GSAP 写法：%s" % ("FAIL" if issues else "PASS"))
     if issues:
         print("GSAP 动效写法门禁：%d 项 FAIL" % len(issues))
         for it in issues:

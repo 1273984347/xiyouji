@@ -165,6 +165,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 47. **性能影子槽**（check_perf_shadow.py·W849·影子模式不判红）
 48. **计划方案合规槽**（check_plan_template.py·W860·增量口径·只判本次变更引入的新缺项）
 49. **朱砂实底限额**（check_vermilion_solid.js·W883·v4 规格 §3.2 阶段 5 落地·浏览器计算样式实测·每页非豁免 >3 处 FAIL·豁免读 _w864_accent_exemptions.json·增量缓存按页 hash）
+50. **GSAP 动效写法槽**（check_gsap_motion.py·W961·用户 2026-10-26 批准挂槽·site/static/js/ 下自有 JS 原不在任何静态门禁扫描域内——check_motion_ban 只扫 HTML + 两份 CSS、check_js_syntax 只扫 HTML 内联脚本 ⇒ 载体写坏时全站门禁全绿·判据含时长 ≤600ms / 缓动白名单 / 禁大角度旋转 / 禁无限循环 / 只动 transform 与 opacity / 零禁词字面量·豁免仅对写法类规则（J3/J4/J7）开放且逐条打印不静默·J2 宪法级禁词不可豁免·自带负样本自测 8/8）
 
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
