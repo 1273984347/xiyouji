@@ -62,6 +62,16 @@ CHANGELOG = os.path.join(ROOT, "CHANGELOG.md")
 MARKER = "---- 第 47 门禁 性能影子："
 SHADOW_BATCH_TARGET = 10  # 满 10 批后另行裁决阈值（W828 §五）
 
+# Q2 裁决落地（W924·用户 2026-10-24 批准三指标分治）：
+#   OBS-10 页体积由影子升格判红——硬上限 500KB/页（现役最大约 405KB·留约 21% 余量·
+#   只拦新增劣化）+ 软预算 200KB 维持 WARN 观察清单（现役 10 页超标系 en 页内联双份与
+#   reader 全文页·根治随 BL-33 CSS 物化改革·本槽不阻断）。
+#   OBS-11 归并既有 LHCI（perf.yml 每 push 已硬拦 LCP·含 3D 分档）——不再另攒样本。
+#   OBS-14 首 token 挂解冻条件（UV≥30 或 agent-web 有真实使用后重议·数据源为
+#   /api/metrics 真实使用滚动窗口·零访客=零数据）。状态回填见系统架构方案 §12.2。
+OBS10_HARD = 500_000
+OBS10_SOFT = 204_800
+
 # perf.yml collect.url 的 5 页（相对 site/）·档位沿用该 workflow 的分档：3D 重页单独一档
 PERF_PAGES = (
     ("dashboard.html", "std"),
@@ -252,8 +262,8 @@ def _fmt_delta(cur, prev, key):
     return " %+.1f%%" % ratio
 
 
-def report(pages, baseline_path=BASELINE):
-    """打印明细 + 汇总行；返回 (exit_code, summary)。C1 缺页 = 1。"""
+def report(pages, baseline_path=BASELINE, site_dir=SITE):
+    """打印明细 + 汇总行；返回 (exit_code, summary)。C1 缺页 / C2 OBS-10 硬上限超标 = 1。"""
     missing = [p["url"] for p in pages if not p.get("exists")]
     data = _load_baseline(baseline_path)
     samples = data["samples"]
@@ -281,8 +291,28 @@ def report(pages, baseline_path=BASELINE):
 
     batch = _current_batch()
     recorded = any(s.get("batch") == batch for s in samples) if batch else False
-    summary = ("%s%d 页采样 · 基线 %d 批 · 影子模式不判红（阈值待 %d 批后裁决）%s----" % (
-        MARKER, len(pages), len(samples), SHADOW_BATCH_TARGET,
+    # C2 OBS-10 全站体积（W924 Q2 裁决升格·全站扫描排除两模板壳）：>500KB 判红·>200KB 记观察清单
+    over_hard, over_soft = [], []
+    for dirpath, _dirs, files in os.walk(site_dir):
+        for f in sorted(files):
+            if not f.endswith(".html") or f in ("_template.html", "_shell.html"):
+                continue
+            full = os.path.join(dirpath, f)
+            size = os.path.getsize(full)
+            rel = os.path.relpath(full, site_dir).replace(os.sep, "/")
+            if size > OBS10_HARD:
+                over_hard.append(rel)
+            elif size > OBS10_SOFT:
+                over_soft.append(rel)
+    if over_hard:
+        print("C2 OBS-10 硬上限超标 %d 页（>%dKB·W924 Q2 裁决升格·只拦新增劣化）：%s"
+              % (len(over_hard), OBS10_HARD // 1024, "、".join(over_hard[:6])))
+    if over_soft:
+        print("OBS-10 观察清单：%d 页超软预算 %dKB（WARN·根治随 BL-33 CSS 物化改革）"
+              % (len(over_soft), OBS10_SOFT // 1024))
+
+    summary = ("%s%d 页采样 · 基线 %d 批 · OBS-10 已升格判红（W924 Q2 裁决·硬 500KB/软 200KB）·其余影子%s----" % (
+        MARKER, len(pages), len(samples),
         "" if recorded else " · 本批样本未入库（收官跑 --record）"))
     if missing:
         print(summary)
@@ -294,11 +324,11 @@ def report(pages, baseline_path=BASELINE):
         print("影子进度：%d 批已满 %d 批目标——可申请阈值裁决（3D 页单独分档）"
               % (len(samples), SHADOW_BATCH_TARGET))
     print(summary)
-    return 0, summary
+    return (1 if missing or over_hard else 0), summary
 
 
 def _self_test():
-    """5 例：解析口径 / 缺页判红 / 记录去重 / ingest 落位 / 汇总行存在。"""
+    """9 例：解析口径 / 缺页判红 / 记录去重 / ingest 落位 / 汇总行 / OBS-10 双层（W924）。"""
     cases = []
     tmp = tempfile.mkdtemp(prefix="perfshadow_")
     page = """<html><head>
@@ -351,14 +381,22 @@ def _self_test():
     cases.append(("T5 ingest：三条指标落位·未登记指标忽略",
                   got == {"p.html": {"lcp_ms": 1979.6, "cls": 0.02, "tbt_ms": 41.0}}))
 
+    # C2 负样本（W924）：tmp 树造超限页——软预算页不红·硬上限页必红
+    open(os.path.join(tmp, "data", "soft.html"), "w", encoding="utf-8").write("x" * (OBS10_SOFT + 1))
+    code_soft, _ = report(pages, base, site_dir=tmp)
+    cases.append(("T6 OBS-10 软预算超标仅 WARN 不红", code_soft == 0))
+    open(os.path.join(tmp, "data", "hard.html"), "w", encoding="utf-8").write("x" * (OBS10_HARD + 1))
+    code_hard, _ = report(pages, base, site_dir=tmp)
+    cases.append(("T7 OBS-10 硬上限超标必红（fail-closed）", code_hard == 1))
+
     code, summary = report(pages, base)
-    cases.append(("T6 汇总行含门禁标记与「不判红」口径",
-                  code == 0 and summary.startswith(MARKER) and "不判红" in summary))
+    cases.append(("T8 汇总行含门禁标记与升格口径",
+                  code == 0 and summary.startswith(MARKER) and "升格判红" in summary))
 
     # T7 负样本：缺页必须真的红（fail-closed）——只测 measure_page 的 exists 不够，
     # 判据在 report 的 C1 分支上，这里直接打那条路径
     code_bad, _ = report([missing], base)
-    cases.append(("T7 缺页 → C1 判红 exit 1（不是只记录）", code_bad == 1))
+    cases.append(("T9 缺页 → C1 判红 exit 1（不是只记录）", code_bad == 1))
 
     ok = 0
     for name, passed in cases:
