@@ -11,6 +11,41 @@
 ---
 
 
+## W928 D-1 实跑批（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/deploy/pg/postgresql.conf.base | W928 | 删除 server_encoding（initdb 固定参数·写进 conf 致 PG FATAL 拒绝启动）+ 增补实测口径注释 |
+| xiyouji-agent-web/deploy/pg/pg_hba.conf.base | W928 | 实跑核验（最小权限 + 兜底 reject 生效·scram 认证通过） |
+| xiyouji-agent-web/deploy/pg/bin/initdb-bootstrap.sh | W928 | 实跑核验幂等性（连跑两次·第二次全「已存在，跳过创建」） |
+| xiyouji-agent-web/deploy/pg/bin/backup.sh | W928 | 去 -z（目录格式不能压缩·PG 报错）+ 显式 -U（pg_basebackup 默认用当前 OS 用户）+ 跨平台 df 分盘判据（MINGW/MSYS 族） |
+| xiyouji-agent-web/deploy/pg/bin/restore-drill.sh | W928 | 重写恢复逻辑：铺满整个备份目录（base/ 与 global/ 是兄弟）+ 删 standby.signal + 接 WAL 归档做 PITR + 重写 postgresql.auto.conf + 业务库断言 + 源库行数一致比对 + 跨平台 restore_command 适配 |
+| xiyouji-agent-web/deploy/pg/bin/verify-baseline.py | W928 | 66 → 71 项（新增禁形态：server_encoding / `#` 注释 / `-D` 配 `-z`） |
+| xiyouji-agent-web/deploy/pg/bin/_mutation_test.py | W928 | 11 → 14 组变异（新增 M11/M12/M13 对应上述三个禁形态） |
+| xiyouji-agent-web/deploy/pg/migrations/0001_baseline.sql | W928 | `#` 注释全改 `--`（PG 的 SQL 只认 `--`·否则 psql 语法错误） |
+| xiyouji-agent-web/deploy/pg/README.md | W928 | §4 待实跑清单 → 实跑状态（已通过 6 项 / 真缺陷 4 条 / 仍待实跑 3 项 / 平台适配与两处跨平台判据坑） |
+| scripts/output/_w927_pg_runtime_evidence.txt | W928 | D-1 实跑机器证据（真实 PG 16.4·111 行原始输出） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W928 | §13.3 第 2 条（PG 未实跑）改判 + 新增 §13.5 实跑结果（6 项通过 + 4 个真缺陷 + 跨平台判据坑） |
+| docs/11-方案报告/计划方案/T20-任务计划执行与经验沉淀报告-2026-10-25.md | W928 | 附录 A.3 改写为实跑结果（6 项通过 + 4 个真缺陷 + 两处跨平台坑 + 仍待实跑 3 项） |
+| docs/11-方案报告/README.md | W928 | §二 架构方案行补 W928 实跑摘要 + §六 T-20 报告行补实跑结果 |
+| docs/00-导读/W批次编号对账表.md | W928 | W928 认领行与收官回填 |
+| CHANGELOG.md | W928 | W928 段 |
+| HANDOVER.md | W928 | 级联头尾链与里程碑块 |
+| README.md | W928 | 当前批次版本行 |
+| STRUCTURE.md | W928 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W928 | 当前批次版本行 |
+| .github/workflows/README.md | W928 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W928 | 页脚批次链插入 W928 |
+| site/data/cross-time-danmaku.html | W928 | 页脚批次链插入 W928 |
+| site/data/tag-cloud.html | W928 | 页脚批次链插入 W928 |
+| site/dukou-engine.html | W928 | 页脚批次链插入 W928 |
+| AGENTS.md | W928 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W928 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W928 | version 同步为 W928 |
+| scripts/output/file-index.md | W928 | W928 段插入 |
+| scripts/output/_w928_spec.json | W928 | 本批级联 spec |
+| scripts/output/_cascade_files_W928.txt | W928 | 级联落盘清单 |
+
 ## W927 架构方案 v2 裁决落档 + D-1 离线施工件 + W926 交叉对账（2026-10-25）
 
 | 文件 | W | 说明 |

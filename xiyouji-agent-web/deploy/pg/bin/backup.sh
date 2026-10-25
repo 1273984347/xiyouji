@@ -41,8 +41,21 @@ command -v pg_basebackup >/dev/null 2>&1 || die "缺 pg_basebackup（pg_baseback
 [ -d "$ARCHIVE_DIR" ] || die "WAL 归档目录不存在：${ARCHIVE_DIR}"
 
 # 归档目录与数据目录不得同盘（否则 F8 磁盘故障同时毁掉数据与备份）
-PG_DEV="$(df -P "$PGDATA" | awk 'NR==2{print $1}')"
-BK_DEV="$(df -P "$BACKUP_ROOT" 2>/dev/null | awk 'NR==2{print $1}')" || BK_DEV=""
+# 跨平台注意：Windows 的 df -P 输出**无设备列**（只有 容量/已用/可用/挂载点），
+#   Linux 首列才是设备名 ⇒ 统一改取「挂载点」列比对，跨平台一致。
+# ⚠ 判据坑：git-bash 的 `uname -s` 返回 `MINGW64_NT-…`（不是 "Windows"）⇒
+#   判 Windows 必须覆盖 MINGW*/MSYS*/CYGWIN*/Windows* 全族。
+OS_NAME="$(uname -s 2>/dev/null || echo Windows)"
+case "$OS_NAME" in
+  MINGW*|MSYS*|CYGWIN*|Windows*|windows*)
+    _dev_of() { df -P "$1" 2>/dev/null | awk 'NR==2{print $NF}'; }
+    ;;
+  *)
+    _dev_of() { df -P "$1" 2>/dev/null | awk 'NR==2{print $1}'; }
+    ;;
+esac
+PG_DEV="$(_dev_of "$PGDATA")"
+BK_DEV="$(_dev_of "$BACKUP_ROOT" 2>/dev/null || true)"
 if [ -n "$BK_DEV" ] && [ "$PG_DEV" = "$BK_DEV" ]; then
   die "备份目录与 PGDATA 同盘（${PG_DEV}）⇒ F8 磁盘故障会同时毁掉数据与备份（§9.2 F8）"
 fi
@@ -50,11 +63,20 @@ log "分盘检查通过：PGDATA=${PG_DEV} BACKUP=${BK_DEV:-未知}"
 
 mkdir -p "$BACKUP_ROOT"
 
+# 备份用户：默认 postgres（pg_basebackup 默认用**当前 OS 用户**，
+#   在非 postgres 账号下执行会因「角色不存在」失败 ⇒ 必须显式 -U）。
+#   认证：走 PGPASSWORD 或 ~/.pgpass（--no-password 禁交互提示，cron 友好）。
+PG_SUPERUSER="${PG_SUPERUSER:-postgres}"
+
 # --- ② 全量备份 --------------------------------------------------------------
 TARGET="${BACKUP_ROOT}/full_${STAMP}"
-log "开始全量备份 → ${TARGET}"
+log "开始全量备份 → ${TARGET}（用户 ${PG_SUPERUSER}·主机 ${PGHOST:-默认}）"
 # -D 目录式 · -X none（不额外带 WAL，靠归档目录）· -R 写恢复配置
-pg_basebackup -D "$TARGET" -X none -R -z -c fast --no-password 2>&1 | sed 's/^/[backup]   /'
+# ⚠ **禁加 -z**：PG 只允许 **tar 格式**（-Ft）压缩，目录格式（-D）配 -z 会直接报错：
+#     pg_basebackup: error: only tar mode backups can be compressed
+#   本脚本用目录格式（restore-drill.sh 依赖 base/ 目录结构恢复）⇒ 不压缩。
+#   若将来要压缩归档：改用 -Ft -z，并把 restore-drill.sh 的解包步骤一并改为 tar 解包。
+pg_basebackup -D "$TARGET" -X none -R -c fast -U "$PG_SUPERUSER" --no-password 2>&1 | sed 's/^/[backup]   /'
 log "全量备份完成：${TARGET}"
 
 # --- ③ 备份可读性自检（备份不是空壳）------------------------------------------

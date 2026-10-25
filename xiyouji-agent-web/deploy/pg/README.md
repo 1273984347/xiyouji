@@ -102,21 +102,56 @@ bash bin/restore-drill.sh
 
 ---
 
-## 4. **待实跑清单（本批未验证项 · 不得当作已验证）**
+## 4. 实跑状态（2026-10-25 · 真实 PostgreSQL 16.4 实例）
 
-以下每一项都**必须**在有 PG 16 环境后实跑并留证；未做之前，对外不得声称「PG 已验证」。
+> **环境**：Windows 11 + **PostgreSQL 16.4 免安装二进制**（官方 EDB zip，解压即用，**不需要 Docker / 不需要管理员 / 不进仓库**）。本机无 Docker ⇒ 该路径是可行替代。
+> **完整原始输出**：`scripts/output/_w927_pg_runtime_evidence.txt`（111 行机器证据）。
+
+### 4.1 已实跑通过（6 项）
+
+| # | 项 | 实测结果 |
+|:--:|:---|:---|
+| 1 | `initdb-bootstrap.sh` 幂等性 | ✅ 连跑两次：第一次建角色/库/权限，第二次全部「已存在，跳过创建」 |
+| 2 | `backup.sh` 真实备份 | ✅ `pg_basebackup` rc=0；自检通过（`backup_label` + `postgresql.conf` + `base/` 均在位）；保留期轮转 + WAL 归档轮转正常 |
+| 3 | **恢复演练行数一致** | ✅ **真·PITR 演练**：PG 经 `restore_command` 从归档取回 `000000010000000000000019`；**逐表比对源库 == 恢复实例**：`sessions 6==6` · `messages 50==50` · `feedback 20==20` · `schema_migrations 1==1` |
+| 4 | WAL 归档连续性 | ✅ 段 `…0001` → `…001B` **连续无缺口**（27 段） |
+| 5 | 备份/归档**分盘校验** | ✅ **两次都验到**：同盘（C: vs C:）被脚本**如实拦下**（`FATAL: 备份目录与 PGDATA 同盘`）；分盘（C: vs D:）通过 |
+| 6 | TLS 实握手 | ✅ `pg_stat_ssl.ssl = true` · **TLSv1.3** · cipher `TLS_AES_256_GCM_SHA384` |
+
+基线参数生效核验（实读 `pg_settings`）：`archive_mode=on` · `ssl=on` · `ssl_min_protocol_version=TLSv1.2` · `wal_level=replica` · `max_connections=200` · `client_encoding=UTF8` · `fsync=on` · `synchronous_commit=on` · `full_page_writes=on` · `log_min_duration_statement=1000` · `logging_collector=on` · `statement_timeout=30000`。
+
+### 4.2 实跑抓出的 4 个真缺陷（静态校验查不出 · 已全部修掉并固化为守卫）
+
+| # | 缺陷 | 症状 | 固化守卫 |
+|:--:|:---|:---|:---|
+| 1 | `server_encoding` 写进 `postgresql.conf` | PG **直接 FATAL 拒绝启动**（`parameter "server_encoding" cannot be changed`）——它是 initdb 固定参数 | 静态校验器列**禁形态** + 变异 M11 |
+| 2 | 迁移文件用 `#` 注释 | `psql` **语法错误**（`syntax error at or near "#"`）——PG 的 SQL 只认 `--` | 静态校验器列**禁形态** + 变异 M12 |
+| 3 | `pg_basebackup -D` 配 `-z` | 备份报错（`only tar mode backups can be compressed`） | 静态校验器列**禁形态** + 变异 M13 |
+| 4 | 恢复演练对备份目录结构的假设错 | 演练实例起不来（`could not open file ".../global/pg_control"`）——`pg_basebackup -D` 的输出目录**本身就是 PGDATA 镜像**（`base/` 与 `global/` 是**兄弟**） | 恢复脚本内自校验（缺 `PG_VERSION` / `global/pg_control` 即 FATAL） |
+
+> 第 4 项连**变异测试都测不出来**（它是语义误解，不是文本形态）⇒ **只有真跑能暴露**。这是「静态背书 ≠ 运行时可用」的第一份实证。
+
+### 4.3 仍待实跑（3 项 · 不得当作已验证）
 
 | # | 待实跑项 | 验收判据 | 计划批次 |
-|:--|:---|:---|:---|
-| 1 | `initdb-bootstrap.sh` 幂等性 | 连跑两次，第二次输出全为「已存在，跳过创建」，且表/角色/库数量不变 | D-1 实跑 |
-| 2 | `backup.sh` 真实备份 | 产出目录含 `backup_label` + `base/` + `PG_VERSION`；`pg_basebackup` rc=0 | D-1 实跑 |
-| 3 | **恢复演练** | `restore-drill.sh` 恢复后 `schema_migrations` 行数与源库一致（**这是 §9.4 RTO/RPO 的唯一实证**） | D-1 实跑 · 每月 |
-| 4 | WAL 归档连续性 | 归档目录有连续段、无缺口；`archive_timeout` 生效（切段间隔 ≤ 5 min） | D-1 实跑 |
-| 5 | 备份/归档**分盘校验** | 备份脚本的同盘检查在本机拓扑上真的能拦住（构造同盘场景） | D-1 实跑 |
-| 6 | TLS 实握手 | `ssl_is_used` 在应用连接上为 on；证书链有效 | D-1 实跑 |
-| 7 | 迁移器端到端 | `0001_baseline.sql` 经迁移器执行后记账表有正确 version/checksum | **D-2 批**（迁移器在 D-2 实现） |
-| 8 | 容量实测 | 按 §7.2 测算的读/写 QPS 压测，PG 单实例余量 ≥ 1 个数量级 | D-2 批 |
-| 9 | 审计归档表 | `audit_archive` 分级 CHECK 生效；留存期 ≥ 180 天与销毁留证跑通 | **D-3 批** |
+|:--:|:---|:---|:---|
+| 7 | **迁移器端到端** | `0001_baseline.sql` 经**迁移器**（非 psql 直跑）执行后，记账表 version/checksum 正确、失败可整段回滚 | **D-2 批**（迁移器在 D-2 实现） |
+| 8 | **容量实测** | 按 §7.2 测算的读/写 QPS 压测，PG 单实例余量 ≥ 1 个数量级 | D-2 批 |
+| 9 | **审计留存与销毁留证** | `audit_archive` 分级 CHECK 生效；留存期 ≥ 180 天与销毁留证跑通 | **D-3 批** |
+
+> **结论**：D-1 的**基础设施层**（配置 / 初始化 / 备份 / 恢复演练 / 分盘 / TLS / 归档）已在真实 PG 16.4 上验证通过；**应用迁移器、容量、审计留存**三项属 D-2 / D-3 范围，仍未验证。
+
+### 4.4 本次验证跑的平台适配（**产品基线保持 Linux 形态不变**）
+
+| 项 | 验证跑（Windows） | 产品基线（Linux） |
+|:---|:---|:---|
+| `archive_command` | cmd 等价式 | POSIX `test ! -f … && cp` |
+| `restore_command` | 薄包装批处理（cmd 的 `copy` + `%p` 正斜杠适配） | `cp` |
+| `shared_buffers` | 1GB（本机空闲内存 5 GB） | 2GB（4C8G 目标机） |
+| `unix_socket_directories` | **不设**（Windows 版 PG 不支持） | 设（真类 Unix） |
+
+> ⚠ **跨平台判据坑**：**git-bash 的 `uname -s` 返回 `MINGW64_NT-…` 而不是 `Windows`** ⇒ 只写 `= "Windows"` 判等会误判为类 Unix ⇒ 把 POSIX 路径（`/c/Users/…`）写给 Windows 版 PG ⇒ 启动即 FATAL（`could not create lock file`）。判据必须覆盖 `MINGW*` / `MSYS*` / `CYGWIN*` / `Windows*` 全族。
+> ⚠ **PG 配置串里反斜杠是转义符** ⇒ Windows 路径在配置里要双写 `\`。
 
 ---
 

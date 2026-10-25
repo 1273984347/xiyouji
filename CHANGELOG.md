@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W927），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W928），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,42 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W928（2026-10-25）：D-1 实跑批（真实 PostgreSQL 16.4·免安装二进制路径·抓出 4 个静态查不出的真缺陷）
+
+
+
+> **来源**：用户 2026-10-25 答「没有 Docker」⇒ 原定「起 Docker Desktop 实跑」路径作废 ⇒ 改用**PostgreSQL 官方 EDB 免安装二进制包（zip·338 MB·解压即用·不需要 Docker·不需要管理员·不进仓库）**，在 `%LOCALAPPDATA%\pg16` 起真实实例实测。
+
+> - **文件**：xiyouji-agent-web/deploy/pg/postgresql.conf.base、xiyouji-agent-web/deploy/pg/pg_hba.conf.base、xiyouji-agent-web/deploy/pg/bin/initdb-bootstrap.sh、xiyouji-agent-web/deploy/pg/bin/backup.sh、xiyouji-agent-web/deploy/pg/bin/restore-drill.sh、xiyouji-agent-web/deploy/pg/bin/verify-baseline.py、xiyouji-agent-web/deploy/pg/bin/_mutation_test.py、xiyouji-agent-web/deploy/pg/migrations/0001_baseline.sql、xiyouji-agent-web/deploy/pg/README.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/11-方案报告/计划方案/T20-任务计划执行与经验沉淀报告-2026-10-25.md、docs/11-方案报告/README.md、scripts/output/_w927_pg_runtime_evidence.txt、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w928_spec.json、scripts/output/_cascade_files_W928.txt（逐件行见 file-index W928 段）。
+
+**实跑通过 6 项（原待实跑清单 9 项中）**：
+- **初始化幂等性**：`initdb-bootstrap.sh` 连跑两次——第一次建角色/库/权限，第二次全部「已存在，跳过创建」。
+- **真实备份**：`pg_basebackup` rc=0；空壳自检通过（`backup_label` + `postgresql.conf` + `base/` 均在位）；保留期轮转 + WAL 归档轮转正常。
+- **恢复演练行数一致（§9.4 核心主张）**：**真·PITR 演练**——PG 经 `restore_command` 从归档取回 `000000010000000000000019`；**逐表比对源库 == 恢复实例**：`sessions 6==6` · `messages 50==50` · `feedback 20==20` · `schema_migrations 1==1`。
+- **WAL 归档连续性**：段 `000000010000000000000001` → `00000001000000000000001B` 连续无缺口（27 段）。
+- **分盘校验（两次都验到）**：同盘场景（C: vs C:）被脚本**如实拦下**（`FATAL: 备份目录与 PGDATA 同盘`）；分盘场景（C: vs D:）通过。
+- **TLS 实握手**：`pg_stat_ssl.ssl = true` · **TLSv1.3** · cipher `TLS_AES_256_GCM_SHA384`。
+
+基线参数生效核验（实读 `pg_settings`）：`archive_mode=on` · `ssl=on` · `ssl_min_protocol_version=TLSv1.2` · `wal_level=replica` · `max_connections=200` · `client_encoding=UTF8` · `fsync=on` · `synchronous_commit=on` · `full_page_writes=on` · `log_min_duration_statement=1000` · `logging_collector=on` · `statement_timeout=30000`。
+
+**实跑抓出 4 个真缺陷（静态校验 66 项全绿也查不出 · 已全部修掉并固化为守卫）**：
+1. `server_encoding` 写进 `postgresql.conf` ⇒ PG **直接 FATAL 拒绝启动**（initdb 固定参数）⇒ 从基线删除，改由 `initdb -E UTF8` 确定。
+2. 迁移文件用 `#` 注释 ⇒ `psql` **语法错误**（PG 的 SQL 只认 `--`）⇒ 全部改 `--`。
+3. `pg_basebackup -D` 配 `-z` ⇒ 备份报错（`only tar mode backups can be compressed`）⇒ 去 `-z`。
+4. **恢复演练对备份目录结构的语义误解** ⇒ 演练实例起不来（`could not open file ".../global/pg_control"`）——`pg_basebackup -D` 的输出目录**本身就是 PGDATA 镜像**（`base/` 与 `global/`、`pg_wal/` 是**兄弟**），不是「base/ 里才是数据目录」⇒ 恢复时铺满整个备份目录 + 删 `standby.signal` + 接 WAL 归档做 PITR + 重写 `postgresql.auto.conf`。
+
+> **第 4 项连变异测试都测不出来**（它是语义误解，不是文本形态）⇒ **只有真跑能暴露**。这是「静态背书 ≠ 运行时可用」的第一份实证。
+
+**守卫升级**：静态校验器 **66 → 71 项**（新增 3 条禁形态：server_encoding / `#` 注释 / `-D` 配 `-z`）+ 反向验证 **11 → 14 组**（新增 M11/M12/M13）。
+
+**两处跨平台判据坑（已修）**：① **git-bash 的 `uname -s` 返回 `MINGW64_NT-…` 而不是 `Windows`** ⇒ 只写 `= "Windows"` 判等会误判为类 Unix ⇒ 把 POSIX 路径（`/c/Users/…`）写给 Windows 版 PG ⇒ 启动即 FATAL（`could not create lock file`）⇒ 判据须覆盖 `MINGW*`/`MSYS*`/`CYGWIN*`/`Windows*` 全族；② **PG 配置串里反斜杠是转义符** ⇒ Windows 路径要双写 `\\`，且 `cmd.exe` 的 `copy` 与 PG 的 `%p`（正斜杠）需薄包装批处理适配。
+
+**仍待实跑（3 项 · 不得当作已验证）**：迁移器端到端（D-2）· 容量实测（D-2）· 审计留存与销毁留证（D-3）。
+
+**机器证据**：`scripts/output/_w927_pg_runtime_evidence.txt`（111 行原始输出）。
+
+**未改**：xiyouji-agent-web 的 server/ 与 src/（应用代码一行未动）· site/ 任何页面 · 任何管控脚本。
 
 ### W927（2026-10-25）：架构方案 v2 裁决落档 + D-1 离线施工件 + W926 交叉对账
 

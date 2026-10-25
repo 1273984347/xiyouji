@@ -115,8 +115,13 @@ ssl_min_protocol_version = 'TLSv1.2'
 # ------------------------------------------------------------------------------
 # 编码与本地化（中文语料 + 跨平台）
 # ------------------------------------------------------------------------------
+# client_encoding：客户端侧编码，可运行时设置 ⇒ 写在 conf 里有效。
 client_encoding = 'UTF8'
-server_encoding = 'UTF8'
+# server_encoding：**禁写本文件**（W927 实跑实证）——它是 initdb 固定参数
+#   （GUC_POSTMASTER），写进 postgresql.conf 会让 PG 直接 FATAL 拒绝启动：
+#     FATAL: parameter "server_encoding" cannot be changed
+#   正确做法：由 initdb 阶段确定（initdb -E UTF8），本文件不得再声明。
+#   ⇒ 静态校验器把「本文件含 server_encoding」列为禁形态（见 bin/verify-baseline.py C1）。
 lc_messages = 'C'
 lc_monetary = 'C'
 lc_numeric = 'C'

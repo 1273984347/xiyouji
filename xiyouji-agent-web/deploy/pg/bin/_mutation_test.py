@@ -53,6 +53,18 @@ MUTATIONS = [
      "CREATE INDEX IF NOT EXISTS idx_schema_migrations_applied_at",
      "DROP TABLE schema_migrations CASCADE;\nCREATE INDEX IF NOT EXISTS idx_schema_migrations_applied_at",
      "DROP/TRUNCATE"),
+    # W927 实跑实证：server_encoding 写进 conf ⇒ PG FATAL 拒绝启动（静态层原本查不出）
+    ("M11-配置：写回 initdb 固定参数", "postgresql.conf.base",
+     "client_encoding = 'UTF8'",
+     "client_encoding = 'UTF8'\nserver_encoding = 'UTF8'", "server_encoding"),
+    # W927 实跑实证：PG 的 SQL 注释只认 `--`；`#` 头注释让 psql 直接语法错误
+    ("M12-迁移：混入 MySQL 风格 # 注释", "migrations/0001_baseline.sql",
+     "-- 职责：建立「迁移机制本身」",
+     "# 职责：建立「迁移机制本身」", "`#` 注释"),
+    # W927 实跑实证：目录格式(-D)配压缩(-z) ⇒ pg_basebackup 直接报错
+    ("M13-脚本：目录格式配压缩", "bin/backup.sh",
+     'pg_basebackup -D "$TARGET" -X none -R -c fast',
+     'pg_basebackup -D "$TARGET" -X none -R -z -c fast', "压缩"),
 ]
 
 
