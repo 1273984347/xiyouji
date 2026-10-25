@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（467）
+## 文件（480）
 
 ### Markdown 文档
 
@@ -29,6 +29,10 @@
 - `_w756_corpus_fix.py`
 - `_w758_rotate.py`
 - `_w759_negative_check.py`
+
+### JavaScript / TypeScript
+
+- `_w946_timeline_icons.js`
 
 ### 数据与配置
 
@@ -186,6 +190,8 @@
 - `_cascade_files_W935.txt`
 - `_cascade_files_W939.txt`
 - `_cascade_files_W941.txt`
+- `_cascade_files_W945.txt`
+- `_cascade_files_W948.txt`
 - `_sync_analysis_manifest.json`
 - `_vermilion_solid_cache.json`
 - `_vermilion_solid_report.json`
@@ -457,6 +463,16 @@
 - `_w939_replacements.json`
 - `_w939_spec.json`
 - `_w939_targets.json`
+- `_w945_batch1.json`
+- `_w945_batch2.json`
+- `_w945_batch3.json`
+- `_w945_round1_batch1.json`
+- `_w945_round1_batch2.json`
+- `_w946_spec.json`
+- `_w948_batch1.json`
+- `_w948_batch2.json`
+- `_w948_batch3.json`
+- `_w949_icon_field_allowlist.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`
