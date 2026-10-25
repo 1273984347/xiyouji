@@ -11,6 +11,17 @@
 ---
 
 
+## W943 全站图片审查（227 张逐类目视·修 3 处真缺陷）（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/og-15-shijian-liejian.webp | W943 | 重出（线上分享图·去掉抽象墨块中 3 处「LI」字母残留） |
+| assets/design/ai-concepts/concept-03-scroll.png | W943 | 重出（去掉卷面潦草伪汉字·改空白纸面 + 抽象笔触） |
+| assets/design/ai-concepts/concept-06-bodhi-leaf.png | W943 | 重出（菩提叶形制：水滴 / 火苗形 → 心形叶 + 中脉分叉叶脉 + 叶柄 + 露珠） |
+| scripts/_w943_cascade.py | W943 | 四面登记 + 当前态指针 |
+| CHANGELOG.md | W943 | W943 版段（四件套） |
+| docs/00-导读/W批次编号对账表.md | W943 | W943 认领行 |
+
 ## W942 Hero 素材全量复审（14 张逐张放大目视·修正 2 处形制偏差）（2026-10-25）
 
 | 文件 | W | 说明 |
