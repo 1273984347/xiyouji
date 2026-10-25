@@ -357,7 +357,7 @@
       if (data.graph && data.graph.length) {
         const graphDiv = document.createElement('div');
         graphDiv.className = 'rag-graph';
-        graphDiv.innerHTML = '🔗 ' + data.graph.slice(0, 6).map(g => {
+        graphDiv.innerHTML = '<svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.7 14.3a3.5 3.5 0 0 0 5 0l2.6-2.6a3.5 3.5 0 0 0-5-5l-1.3 1.3M14.3 9.7a3.5 3.5 0 0 0-5 0l-2.6 2.6a3.5 3.5 0 0 0 5 5l1.3-1.3"/></svg> ' + data.graph.slice(0, 6).map(g => {
           const from = g.from || g[0] || '';
           const rel = g.relation || g[1] || '';
           const to = g.to || g[2] || '';

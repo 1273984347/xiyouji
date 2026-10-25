@@ -1922,6 +1922,12 @@
 | scripts/output/file-index.md | W900 | W900 段插入 |
 | scripts/output/_w900_spec.json | W900 | 本批级联 spec |
 | scripts/output/_cascade_files_W900.txt | W900 | 级联落盘清单 |
+| site/static/icons/ui/note.svg | W947 | 新增：便签与文档图标（折角纸页·替 📝） |
+| site/static/icons/ui/link.svg | W947 | 新增：双环链条图标（替 🔗） |
+| xiyouji-agent-web/src/components/UiIcons.tsx | W947 | 新增：agent-web 内联 SVG 图标组件（WarnIcon / NoteIcon / LinkIcon·与静态站资产同源） |
+| xiyouji-agent-web/src/components/PermissionDialog.tsx | W947 | ⚠️📝 纯图标位 → 内联 SVG 组件（W947） |
+| xiyouji-agent-web/src/components/InlinePermissionCard.tsx | W947 | ⚠️ 图标位 → 内联 SVG 组件（W947） |
+| scripts/_w947_add_icons.py | W947 | 新增：通用图标集补 2 枚（note / link） |
 
 ## W899 合并后收尾修正（2026-10-23）
 

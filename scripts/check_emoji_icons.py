@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""W946 · 第 50 门禁：UI 图标位 emoji 残留 + 图标渲染正确性
+"""W947 · 第 50 门禁：UI 图标位 emoji 残留 + 图标渲染正确性
 
 两段判据（缺一不可）：
   A 静态：全仓 UI 图标位不得残留 emoji 表情/图形字符
@@ -281,7 +281,7 @@ def main() -> int:
 
     hits = scan_static()
     print("=" * 72)
-    print("W946 · 第 50 门禁 UI 图标位 emoji 残留与图标渲染正确性")
+    print("W947 · 第 50 门禁 UI 图标位 emoji 残留与图标渲染正确性")
     print("=" * 72)
     print(f"A 静态段：UI 图标位 emoji 命中 {len(hits)} 处")
     for h in hits[:20]:

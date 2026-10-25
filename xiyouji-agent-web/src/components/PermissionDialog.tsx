@@ -1,4 +1,5 @@
 import { Dialog, Button, Tag, Descriptions } from 'tdesign-react';
+import { WarnIcon, NoteIcon } from './UiIcons';
 import { 
   TerminalIcon, 
   FileIcon, 
@@ -179,7 +180,7 @@ export function PermissionDialog({ visible, request, onAllow, onDeny }: Permissi
               color: 'var(--td-error-color)'
             }}
           >
-            <span className="flex-shrink-0">⚠️</span>
+            <span className="flex-shrink-0"><WarnIcon /></span>
             <span>此操作将在您的系统上执行命令，请确认命令内容安全可信。</span>
           </div>
         )}
@@ -191,7 +192,7 @@ export function PermissionDialog({ visible, request, onAllow, onDeny }: Permissi
               color: 'var(--td-brand-color)'
             }}
           >
-            <span className="flex-shrink-0">📝</span>
+            <span className="flex-shrink-0"><NoteIcon /></span>
             <span>此操作将修改您的文件系统，请确认操作正确。</span>
           </div>
         )}
