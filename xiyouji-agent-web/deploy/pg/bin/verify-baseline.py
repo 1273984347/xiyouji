@@ -65,6 +65,9 @@ FORBIDDEN_PG_PATTERNS = [
     (r"rm\s+-rf\s+\"?\$\{?PGDATA", "禁 rm -rf PGDATA"),
     (r"rm\s+-rf\s+\"?\$BACKUP_ROOT\"?\s*$", "禁对备份根目录整体 rm -rf（轮转须逐份删）"),
     (r"^\s*cp\s+-[a-zA-Z]*r.*PGDATA", "禁以文件拷贝做备份（会丢 WAL 中未 checkpoint 的提交）"),
+    # W927 实跑实证：目录格式（-D）配压缩（-z）会直接报错
+    #   「pg_basebackup: only tar mode backups can be compressed」⇒ 禁二者同现。
+    (r"pg_basebackup[^\n]*\s-D[^\n]*\s-z", "禁目录格式(-D)配压缩(-z)（PG 只允许 tar 格式压缩）"),
 ]
 
 # 必须在脚本中出现的安全开关
@@ -106,8 +109,9 @@ CONF_REQUIRED = [
     ("idle_in_transaction_session_timeout", r"^\d+(ms|s|min|h)$", "必须设空闲事务超时"),
     ("log_min_duration_statement", r"^\d+$", "必须开慢查询日志"),
     ("logging_collector", r"^on$", "必须开日志收集（§12.3 审计面技术前置）"),
-    ("client_encoding", r"^'?'?UTF8'?$", "编码必须 UTF8（中文语料）"),
-    ("server_encoding", r"^'?'?UTF8'?$", "编码必须 UTF8（中文语料）"),
+    ("client_encoding", r"^'?'?UTF8'?$", "编码必须 UTF8（中文语料）·client_encoding 可运行时设置"),
+    # 注：server_encoding **不在此列**——它是 initdb 固定参数，写进 conf 致 PG FATAL
+    #   （W927 实跑实证）⇒ 改列为禁形态（见 CONF_FORBIDDEN），不是必备项。
 ]
 
 # 禁出现的配置项
@@ -116,6 +120,12 @@ CONF_FORBIDDEN = [
     (r"^\s*ssl\s*=\s*off", "禁 ssl=off（§12.4 必须 TLS）"),
     (r"^\s*fsync\s*=\s*off", "禁 fsync=off（会丢已确认事务）"),
     (r"^\s*synchronous_commit\s*=\s*off", "禁 synchronous_commit=off"),
+    # W927 实跑实证：server_encoding 是 initdb 固定参数（GUC_POSTMASTER），
+    # 写进 postgresql.conf ⇒ PG 直接 FATAL「parameter "server_encoding" cannot be changed」。
+    # 这条是**静态校验查不出、只有真跑能暴露**的缺陷 ⇒ 固化为禁形态防复发。
+    (r"^\s*server_encoding\s*=", "禁 server_encoding（initdb 固定参数·写进 conf 致 PG 拒绝启动）"),
+    # 同族：unified 写进 conf 同样触发 FATAL
+    (r"^\s*unified\s*=", "禁 unified（initdb 固定参数·同 server_encoding）"),
 ]
 
 # pg_hba 必须满足
@@ -325,6 +335,12 @@ def check_migrations(res: Result, root: Path) -> None:
         # 禁破坏性语句
         res.add("C4", "%s 禁 DROP/TRUNCATE" % p.name,
                 re.search(r"^\s*(DROP\s+(TABLE|SCHEMA|DATABASE)|TRUNCATE)\b", text, re.M | re.I) is None)
+        # W927 实跑实证：PG 的 SQL 注释只认 `--`；`#` 会让 psql 直接语法错误
+        #   `ERROR: syntax error at or near "#"` ⇒ 固化为禁形态防复发。
+        hash_comments = re.findall(r"^\s*#.*$", text, re.M)
+        res.add("C4", "%s 禁 `#` 注释（PG 只认 `--`·否则 psql 语法错误）" % p.name,
+                not hash_comments,
+                "" if not hash_comments else "命中 %d 行：%s" % (len(hash_comments), hash_comments[0].strip()[:60]))
 
 
 def main() -> int:
