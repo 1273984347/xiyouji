@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-L8D2VJCFVkKYJPwStZTGBF0BKd+f8fb3LkeFRvKb8VM=' 'sha256-viBTtODwAf12YWRA7g+a6O7/QF76106MtDpL11ol/DA=' 'sha256-AG8dkSbIJIdoyhXBax9MotpSYlOl76kdVYHwmcZbEzI=' 'sha256-Zffu8DOr1R6L8RLpjdRYw2mWd42CdMbtjLLQrJPPl50=' 'sha256-84JVJQY3yctVmkS8rXOF6mFKtKgqxmKAQ1QLjnvwwrg=' 'sha256-G7JWRSZeN4qV3CsTmZNfFh1mJ5CqtyE1lQNIWsFMJD0=' 'sha256-TRMqPiB8dk3yeRtOwuNSuVt3hHiGm0XElRv7kga6q24=' 'sha256-LY+Pq/ATRZQREEIn+OCkrNIO4v+EDFhhATTTjX0ZW+k='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-L8D2VJCFVkKYJPwStZTGBF0BKd+f8fb3LkeFRvKb8VM=' 'sha256-viBTtODwAf12YWRA7g+a6O7/QF76106MtDpL11ol/DA=' 'sha256-AG8dkSbIJIdoyhXBax9MotpSYlOl76kdVYHwmcZbEzI=' 'sha256-Zffu8DOr1R6L8RLpjdRYw2mWd42CdMbtjLLQrJPPl50=' 'sha256-84JVJQY3yctVmkS8rXOF6mFKtKgqxmKAQ1QLjnvwwrg=' 'sha256-G7JWRSZeN4qV3CsTmZNfFh1mJ5CqtyE1lQNIWsFMJD0=' 'sha256-TRMqPiB8dk3yeRtOwuNSuVt3hHiGm0XElRv7kga6q24=' 'sha256-LY+Pq/ATRZQREEIn+OCkrNIO4v+EDFhhATTTjX0ZW+k=' 'sha256-mdCrI2TwgQdgHC4zTl/HbjsblAVd5PYaqDS5FPsPx38='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
       // 夜读模式（W488）：首屏防 FOUC——先读 localStorage，无则跟随系统；dark 时在 body 渲染前挂 data-theme
@@ -39,11 +39,27 @@
             justify-content: space-between;
             gap: 48px;
             padding: clamp(56px, 9vw, var(--space-12)) clamp(var(--space-6), 6vw, var(--space-12)) clamp(36px, 5vw, 56px);
-            background-image: url('static/images/hero-01-xihai-yunhai.webp');
+            background-image: url('static/images/hero-line-01-ruyi-staff.webp');
             background-size: cover;
             background-position: center bottom;
             background-repeat: no-repeat;
         }
+        /* W935：首屏插画图集（9 张 = W931 线描 8 张 + W932 持瓶菩萨收尾重音）
+           选型依据（实测 scripts/_w931_hero_fit.py + 容器适配对比）：左侧 46% 文字安全区墨量 0.0000（8/8 张）
+           ·与首页左对齐标题区零冲突；2400×1017（2.36:1）在 1440×520 容器下垂直溢出仅 90px
+           （16:9 素材溢出 290px·主体被裁没）；dots 为装饰性切换器·JS 不可用时整组隐藏 */
+        .hero-dots { display: flex; gap: 8px; margin-top: var(--space-5); }
+        .hero-dots[hidden] { display: none; }
+        .hero-dots button {
+            width: 26px; height: 26px; padding: 0; cursor: pointer;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: transparent;
+            transition: background-color 200ms ease, border-color 200ms ease;
+        }
+        .hero-dots button:hover { border-color: var(--accent); }
+        .hero-dots button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .hero-dots button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); }
         .masthead-copy { max-width: 640px; }
         .masthead-copy .kicker { margin-bottom: var(--space-5); }
         /* W862 B1 裁决 1：kicker 落 --bg → --accent-text（落点审计 _w862_accent_text_audit.json） */
@@ -55,7 +71,11 @@
         }
         .masthead-copy .tagline { font-size: 16px; color: var(--ink-soft); margin-bottom: 10px; }
         .masthead-copy .meta-line { font-size: 13px; color: var(--accent-3); }
-        .masthead-mega { text-align: right; flex-shrink: 0; }
+        /* W935：右侧「100 回」数字区加纸色渐变底——首屏图集主体落在右侧，裸排会与大字叠字
+           （实测：九环锡杖竖杆直穿「100」·金箍棒斜贯亦压数字）⇒ 纸色渐变保证任何一张下数字都清晰 */
+        .masthead-mega { text-align: right; flex-shrink: 0;
+            padding: 12px 0 12px 32px;
+            background: linear-gradient(to left, var(--bg) 0%, var(--bg) 46%, transparent 100%); }
         .mega-row { display: flex; align-items: baseline; gap: 12px; justify-content: flex-end; }
         .mega-num {
             font-family: var(--font-serif); font-weight: 900;
@@ -397,7 +417,7 @@
     </header>
 
     <main id="main">
-        <section class="masthead" aria-label="站点简介">
+        <section class="masthead" id="heroGallery" aria-label="站点简介">
             <div class="masthead-copy">
                 <p class="kicker">MING DYNASTY · WU CHENG'EN · 100 CHAPTERS</p>
                 <h1>取经录</h1>
@@ -407,6 +427,17 @@
                 <p class="meta-line" style="margin-top:18px;">
                     <a href="reader/ch001.html" style="font-weight:600;color:var(--accent-2);">开始阅读 · 第 1 回 灵根育孕源流出 →</a>
                 </p>
+                <div class="hero-dots" role="group" aria-label="首屏插画切换（共 9 张）" hidden>
+                    <button type="button" data-hero-dot="0" aria-label="第 1 张插画：如意金箍棒" aria-pressed="true"></button>
+                    <button type="button" data-hero-dot="1" aria-label="第 2 张插画：行程图卷轴" aria-pressed="false"></button>
+                    <button type="button" data-hero-dot="2" aria-label="第 3 张插画：经卷与篆香" aria-pressed="false"></button>
+                    <button type="button" data-hero-dot="3" aria-label="第 4 张插画：司南" aria-pressed="false"></button>
+                    <button type="button" data-hero-dot="4" aria-label="第 5 张插画：莲花" aria-pressed="false"></button>
+                    <button type="button" data-hero-dot="5" aria-label="第 6 张插画：九环锡杖" aria-pressed="false"></button>
+                    <button type="button" data-hero-dot="6" aria-label="第 7 张插画：芭蕉扇" aria-pressed="false"></button>
+                    <button type="button" data-hero-dot="7" aria-label="第 8 张插画：玉净瓶" aria-pressed="false"></button>
+                    <button type="button" data-hero-dot="8" aria-label="第 9 张插画：持瓶菩萨立像" aria-pressed="false"></button>
+                </div>
             </div>
             <div class="masthead-mega" aria-label="100 回逐回精读">
                 <div class="mega-row" aria-hidden="true">
@@ -661,7 +692,7 @@
     <footer class="site-footer">
         <div>
             <div class="footer-brand">取经录</div>
-            <div class="footer-meta">2026 · MIT License · 持续更新中 · W934 把架构方案里的「M12 PG 存储层」变成可运行的代码层：存储层四件 + 门面化 + PG 三表 schema + 迁移器，并把现役 70/134/4 条真实数据迁入 PG 16.4 且三重对账全一致 · W933 认领即占号/回填独占/收官回填三件套规则 + 撞号检测与行指纹与收官体检与反引号剥离与登记类共享面排除五个机检判据 · W932 六张 16:9 宽幅浓墨剪影成套 Hero 素材图、锚点复用 W852→W893 成熟段、底部净空带供标题叠字 · W930 十八条四天后现状复核 + 三条新发现 + 六批可施工落地方案 · W928 无 Docker 改走官方免安装二进制实跑 PG 16.4，6 项实跑通过，4 个真缺陷固化为守卫 · W927 四项开放项裁决落档，PG 部署基线离线施工件交付，交互审查交叉对账补一处设计遗漏 · W926 交互流程四维复核/跳转路径/按钮反馈/表单报错/空状态异常分支/对照前次审查逐条给闭环状态并出当前状态排序建议 · W925 对 W821 架构方案的增量修订：按新规模（月活十万级）改采 PG 自建单机，新增等保合规横切面，架构图三形态交付 · W924 性能三指标分治落地：页体积双层门槛升格判红，首屏归并既有防线，首 token 挂解冻条件 · W923 复审让号行幻影在途与前缀修复，跳号补登记，十一项实抽全过 · W922 十二项裁决落地：四件工程当场做掉，八项方向性结论登记在案，清单全闭环 · W921 变更日志百零二段迁一级归档，体积回基线以下，守恒断言全程护航 · …更早批次详见 CHANGELOG.md<a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
+            <div class="footer-meta">2026 · MIT License · 持续更新中 · W935 渡口档案正文 4 条工程引用改为对读者有意义的正文,溯源移入源码注释 + 英文站索引页目录型死链改纯文本,全仓真死链 1→0 · W934 把架构方案里的「M12 PG 存储层」变成可运行的代码层：存储层四件 + 门面化 + PG 三表 schema + 迁移器，并把现役 70/134/4 条真实数据迁入 PG 16.4 且三重对账全一致 · W933 认领即占号/回填独占/收官回填三件套规则 + 撞号检测与行指纹与收官体检与反引号剥离与登记类共享面排除五个机检判据 · W932 六张 16:9 宽幅浓墨剪影成套 Hero 素材图、锚点复用 W852→W893 成熟段、底部净空带供标题叠字 · W930 十八条四天后现状复核 + 三条新发现 + 六批可施工落地方案 · W928 无 Docker 改走官方免安装二进制实跑 PG 16.4，6 项实跑通过，4 个真缺陷固化为守卫 · W927 四项开放项裁决落档，PG 部署基线离线施工件交付，交互审查交叉对账补一处设计遗漏 · W926 交互流程四维复核/跳转路径/按钮反馈/表单报错/空状态异常分支/对照前次审查逐条给闭环状态并出当前状态排序建议 · W925 对 W821 架构方案的增量修订：按新规模（月活十万级）改采 PG 自建单机，新增等保合规横切面，架构图三形态交付 · W924 性能三指标分治落地：页体积双层门槛升格判红，首屏归并既有防线，首 token 挂解冻条件 · W923 复审让号行幻影在途与前缀修复，跳号补登记，十一项实抽全过 · W922 十二项裁决落地：四件工程当场做掉，八项方向性结论登记在案，清单全闭环 · …更早批次详见 CHANGELOG.md<a href="https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md" rel="noopener">完整更新日志</a></div>
         </div>
         <nav aria-label="页脚导航">
             <a href="index.html">首页</a>
@@ -792,6 +823,54 @@
     var el = e.target;
     if (el && el.classList && el.classList.contains('ask-chip')) { e.preventDefault(); el.click(); }
   });
+})();
+</script>
+<script>
+// W935：首屏插画图集（9 张 = W931 线描 8 张 + W932 持瓶菩萨收尾重音）
+// 实现约束：
+//   · 用 JS 定时切换而非 CSS 无限循环关键帧（D4 动效禁令禁无限循环动画·注释不写该字面量以免自触发）；
+//   · 暂停机制（WCAG 2.2.2 自动更新内容）：悬停 / 焦点在图集内 / 页面不可见 → 停；
+//   · reduced-motion → 不自动播放（仍可手动点选）；
+//   · fail-open：JS 不可用时保持首张静态图（dots 容器带 hidden·不渲染死控件）。
+(function () {
+  var el = document.getElementById('heroGallery');
+  if (!el) return;
+  var SLIDES = [
+    { src: 'static/images/hero-line-01-ruyi-staff.webp', label: '如意金箍棒' },
+    { src: 'static/images/hero-line-02-journey-scroll.webp', label: '行程图卷轴' },
+    { src: 'static/images/hero-line-03-classic-scroll.webp', label: '经卷与篆香' },
+    { src: 'static/images/hero-line-04-sinan-compass.webp', label: '司南' },
+    { src: 'static/images/hero-line-05-lotus.webp', label: '莲花' },
+    { src: 'static/images/hero-line-06-nine-ring-staff.webp', label: '九环锡杖' },
+    { src: 'static/images/hero-line-07-banana-fan.webp', label: '芭蕉扇' },
+    { src: 'static/images/hero-line-08-jade-vase.webp', label: '玉净瓶' },
+    { src: 'static/images/hero-11-chiping-boshan.webp', label: '持瓶菩萨立像' }
+  ];
+  var group = el.querySelector('.hero-dots');
+  if (!group) return;
+  var dots = Array.prototype.slice.call(group.querySelectorAll('[data-hero-dot]'));
+  if (!dots.length) return;
+  group.removeAttribute('hidden');
+  var reduced = false;
+  try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (_) {}
+  var idx = 0, timer = null, INTERVAL = 6000;
+  function apply(i) {
+    idx = (i + SLIDES.length) % SLIDES.length;
+    el.style.backgroundImage = 'url("' + SLIDES[idx].src + '")';
+    dots.forEach(function (d, k) { d.setAttribute('aria-pressed', k === idx ? 'true' : 'false'); });
+  }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  function start() { stop(); if (reduced) return; timer = setInterval(function () { apply(idx + 1); }, INTERVAL); }
+  dots.forEach(function (d, k) {
+    d.addEventListener('click', function () { apply(k); start(); });
+  });
+  el.addEventListener('mouseenter', stop);
+  el.addEventListener('mouseleave', start);
+  el.addEventListener('focusin', stop);
+  el.addEventListener('focusout', start);
+  document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else start(); });
+  apply(0);
+  start();
 })();
 </script>
 </body>
