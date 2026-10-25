@@ -131,11 +131,11 @@ def test_touches_conflict_multi_path():
 
 
 def test_interference_log_hint_mentions_carrier_and_window():
-    """W821：提示行须含日志载体路径与窗口（被提醒者据此知道往哪写）。"""
+    """W821 建提示含载体与窗口；W922 窗口收官（用户裁决）后改为锁定收官表述与载体。"""
     hint = preflight_check.interference_log_hint("preflight 交集拒绝")
     assert "interference-governance-roadmap.md" in hint, "提示须指向 §8 干扰日志载体"
     assert "§8" in hint, "提示须点明是 §8 干扰日志"
-    assert "2026-10-14" in hint and "10-28" in hint, "提示须含登记窗口"
+    assert "收官归档" in hint, "W922 起须点明窗口已收官（2026-10-24）"
     assert "命中：preflight 交集拒绝" in hint, "提示须带命中原因"
 
 

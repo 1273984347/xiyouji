@@ -1,0 +1,32 @@
+{
+ "batch": "W915",
+ "date": "2026-10-24",
+ "title": "W915 波二余件一·二批（gates.md 时点快照收敛 + 404 页令牌补迁移）",
+ "desc": "判据文档时点数字剥离归产物文件，404 页补 v4 间距令牌等值迁移",
+ "head_entry": "2026-10-24（W915 波二余件一·二批）",
+ "head_sentence": "判据文档快照数字收敛归产物文件，404 页补间距令牌等值迁移",
+ "changelog_body": "\n\n\n\n> **来源**：用户 2026-10-24 令「按顺序全部都做了」——T-18 C 档波二余项顺序执行（本批第 1-2 件）。\n\n> - **文件**：docs/agent/gates.md、site/404.html、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w914_spec.json、scripts/output/_cascade_files_W915.txt（逐件行见 file-index W915 段）。\n\n**A-T02-01 gates.md 判据收敛**：第 43 槽描述内嵌的 W753 时点快照数字（缺口 V3/V4/V2 三数·首跑耗时·另一处 770 计数）全部剥离，改为指向 chart-values-report.json 与基线文件——判据文档只留判据与阈值（p00=0.82 阈值语义保留），时点值归报告与产物文件，杜绝「判据文档养快照数字必漂移」。\n\n**C-B02 404 页补迁移**：B1 唯一漏页——:root 补 v4 间距令牌页内副本（--space-6/8/9·与 tokens.css 同值·404 为自含小页不参与 inline_css 分发），24px/48px 40px 两处等值替换；非刻度值（9px/18px/16px 等）按 W891 等值替换纪律保留字面量。\n\n**验证**：check_js_syntax 855 文件过·check_structure 1412 块平衡过·var(--space- 命中 0→3。\n",
+ "milestone_block": "- **W915 波二余件一·二批**：\n  - gates.md 第 43 槽时点快照数字剥离（判据文档只留判据与阈值·快照归产物文件）\n  - 404 页 v4 间距令牌迁移（B1 唯一漏页·等值替换·非刻度值保留）\n  - 验证：JS 语法/CSS 结构全过·令牌命中 0→3",
+ "agents_note": "二〇二六年十月二十四日（W915）按顺序清波二的第一二件。头一件是判据文档里养着的时点数字——首跑缺口几页、耗时几秒、某次计数七百七，这类数字写进判据文档那天就开始烂，全部剥掉改成指向报告和基线文件，判据只留判据。第二件是把上个设计迁移批唯一漏掉的四十4页补上间距令牌，能等值换的三处换掉，不在刻度上的值按纪律保留字面量。",
+ "file_index_rows": [
+  "| docs/agent/gates.md | W915 | 第 43 槽去时点快照数字（缺口三数/耗时/770→指向报告与基线文件·时点快照不入判据文档）——A-T02-01 清偿",
+  "| site/404.html | W915 | v4 间距令牌迁移（:root 页内副本 + 24/48/40 等值替换 var(--space-6/9/8)·非刻度值按 W891 等值纪律保留）——C-B02 清偿",
+  "| docs/00-导读/W批次编号对账表.md | W915 | W915 认领行与收官回填 |",
+  "| CHANGELOG.md | W915 | W915 段 |",
+  "| HANDOVER.md | W915 | 级联头尾链与里程碑块 |",
+  "| README.md | W915 | 当前批次版本行 |",
+  "| STRUCTURE.md | W915 | 当前批次版本行 |",
+  "| docs/00-导读/项目说明.md | W915 | 当前批次版本行 |",
+  "| .github/workflows/README.md | W915 | 工作流层区间与里程碑尾标记 |",
+  "| site/index.html | W915 | 页脚批次链插入 W915 |",
+  "| site/data/cross-time-danmaku.html | W915 | 页脚批次链插入 W915 |",
+  "| site/data/tag-cloud.html | W915 | 页脚批次链插入 W915 |",
+  "| site/dukou-engine.html | W915 | 页脚批次链插入 W915 |",
+  "| AGENTS.md | W915 | 版本脚注条目 |",
+  "| archive/docs/AGENTS-ARCHIVE.md | W915 | 脚注滚动迁入的最老条目 |",
+  "| CITATION.cff | W915 | version 同步为 W915 |",
+  "| scripts/output/file-index.md | W915 | W915 段插入 |",
+  "| scripts/output/_w914_spec.json | W915 | 本批级联 spec |",
+  "| scripts/output/_cascade_files_W915.txt | W915 | 级联落盘清单 |"
+ ]
+}

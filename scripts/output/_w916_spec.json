@@ -1,0 +1,33 @@
+{
+ "batch": "W916",
+ "date": "2026-10-24",
+ "title": "W916 波二第三件批（新建页准入门禁建置·C-W818-01 清偿）",
+ "desc": "准入门禁静态版建置并接入 CI 预演，双铁律上锁，波二余件排续批",
+ "head_entry": "2026-10-24（W916 波二第三件批）",
+ "head_sentence": "准入门禁静态版建置接入 CI 预演，双铁律上锁，波二后两件排续批",
+ "changelog_body": "\n\n\n\n> **来源**：用户 2026-10-24 令「按顺序全部都做了」——T-18 C 档波二第三件。\n\n> - **文件**：scripts/check_page_admission.py、tests/unit/test_check_page_admission.py、scripts/ci_sim.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w916_spec.json、scripts/output/_cascade_files_W916.txt（逐件行见 file-index W916 段）。\n\n**C-W818-01 准入门禁建置（静态版）**：file:// 两铁律（禁 type=module·零外域 script src）此前只有 W818 取证探针无常驻防线——新建 `check_page_admission.py`（857 页静态扫描·秒级·fail-closed·self-test 3/3 + 专项单测 2 例），接 ci_sim 第 9 项每 PR 实跑；浏览器级三判据仍归探针（取证件定位不变）。现状实测 857 页 0 FAIL（零 module·零外域——纪律现状即达标，本批给现状上锁）。\n\n**波二余项状态**：第三件完成；第四件（B-ARCH-01 检索降级）与第五件（B-DB-01+05 数据正确性包）为 agent-web 中大型工程，连同 D1 大项排续批（保质优先于赶量）。\n\n**验证**：self-test 3/3·857 页 0 FAIL·第 42 门禁覆盖 0 FAIL·pytest 单测 2 例过。\n",
+ "milestone_block": "- **W916 波二第三件批（准入门禁建置）**：\n  - check_page_admission.py：禁 type=module + 零外域 script src·857 页 0 FAIL·self-test 3/3·接 ci_sim 第 9 项\n  - C-W818-01 清偿；第四五件（检索降级/DB 包一）排续批\n  - 验证：门禁全绿·单测过",
+ "agents_note": "二〇二六年十月二十四日（W916）按顺序做波二第三件。这条的实质是给「新建页面不许用会被浏览器协议拦掉的写法、不许引外部脚本」这两条老规矩上锁——以前全靠纪律，全站现状确实是零违例，可一旦哪天有人手滑引入，没有任何门禁会红。建了个秒级静态门禁，八百五十七页扫一遍零违例，接进 CI 预演清单，从此每批次自动体检。后面两件是应用后端的中型工程，保质优先，排进续批。",
+ "file_index_rows": [
+  "| scripts/check_page_admission.py | W916 | 新增：新建页准入门禁（静态版·禁 type=module + 零外域 script src·857 页 0 FAIL·self-test 3/3）——C-W818-01 清偿",
+  "| tests/unit/test_check_page_admission.py | W916 | 新增：门禁专项单测 2 例",
+  "| scripts/ci_sim.py | W916 | GATES 清单 +页准入（第 9 项·每 PR 实跑）",
+  "| docs/00-导读/W批次编号对账表.md | W916 | W916 认领行与收官回填 |",
+  "| CHANGELOG.md | W916 | W916 段 |",
+  "| HANDOVER.md | W916 | 级联头尾链与里程碑块 |",
+  "| README.md | W916 | 当前批次版本行 |",
+  "| STRUCTURE.md | W916 | 当前批次版本行 |",
+  "| docs/00-导读/项目说明.md | W916 | 当前批次版本行 |",
+  "| .github/workflows/README.md | W916 | 工作流层区间与里程碑尾标记 |",
+  "| site/index.html | W916 | 页脚批次链插入 W916 |",
+  "| site/data/cross-time-danmaku.html | W916 | 页脚批次链插入 W916 |",
+  "| site/data/tag-cloud.html | W916 | 页脚批次链插入 W916 |",
+  "| site/dukou-engine.html | W916 | 页脚批次链插入 W916 |",
+  "| AGENTS.md | W916 | 版本脚注条目 |",
+  "| archive/docs/AGENTS-ARCHIVE.md | W916 | 脚注滚动迁入的最老条目 |",
+  "| CITATION.cff | W916 | version 同步为 W916 |",
+  "| scripts/output/file-index.md | W916 | W916 段插入 |",
+  "| scripts/output/_w916_spec.json | W916 | 本批级联 spec |",
+  "| scripts/output/_cascade_files_W916.txt | W916 | 级联落盘清单 |"
+ ]
+}

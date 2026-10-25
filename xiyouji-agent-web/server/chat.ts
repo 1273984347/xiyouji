@@ -162,7 +162,11 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
       // 创建新会话
       logger.info("创建新会话", { request_id: req.requestId, session_id: sessionId ?? null });
       session = db.createSession({
-        id: sessionId || uuidv4(),
+        // W917/W922 B-DB-01 串档防护：客户端 id 须为标准 UUID 形态才沿用（撞已有号由上方 getSession 分支处理）
+        // ——「旧会话正文泄漏进新建同名会话」的串档路径在「任意形态 id 撞库」；形态卡死后前端契约不破坏
+        id: (sessionId && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(sessionId))
+          ? sessionId
+          : uuidv4(),
         title: titleFromMessage(message),
         model: model || defaultModel,
         sdk_session_id: null, // W680：SDK resume 退役，历史从 SQLite 重建
@@ -356,6 +360,19 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
         stack: (error as Error)?.stack,
       });
 
+      // W922/W918 B-ARCH-01 检索降级（判据收紧版）：LLM 上游确定性不可达时返回降级说明而非裸 5xx——
+      // 只认 OS 级连接错误码与上游显式 5xx/429（原 /fetch failed/i 泛匹配在 e2e mock 环境
+      // 误触发被 chat.e2e 实证拦下·W922 收紧）；已送达的 tool_result 检索引用仍有效。
+      const _msg = String((error as Error)?.message ?? "");
+      const _code = (error as NodeJS.ErrnoException)?.code ?? "";
+      const upstreamDown = /LLM API\s*(5\d\d|429)/.test(_msg)
+        || ["ECONNREFUSED", "ETIMEDOUT", "ENOTFOUND", "EAI_AGAIN"].includes(_code);
+      if (upstreamDown) {
+        sse.text("⚠ LLM 端点当前不可用（降级模式）：本次回答未能生成。上方如已有工具检索结果，其引用内容仍然有效；请稍后重试，或在站点版使用全文检索页。");
+        sse.done(0);
+        res.end();
+        return;
+      }
       // W829：对外只给固定文案——上游 LLM 错误体可能回显请求内容/账号信息
       // （openai-compat.ts 取上游前 300 字原文），原文已进上面的 logger。
       sse.error("服务器内部错误");

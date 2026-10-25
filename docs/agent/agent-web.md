@@ -15,3 +15,7 @@
 
 - 核心入口：`server/index.ts`、`src/hooks/useAgents.ts`（DEFAULT_AGENT）、`src/config.ts`（主题色 #c8463a「西」Logo）、`src/pages/ChatPage.tsx`。
 - 权威入口：[xiyouji-agent-web/README.md](../../xiyouji-agent-web/README.md)（运行/部署/扩展指南）。
+
+## 存储层 schema 变更规范（W919 立·B-DB-04 配套）
+
+**改表定义对已存在的库无效**（SQLite 无 ADD CONSTRAINT·DDL 的 CREATE TABLE IF NOT EXISTS 不会更新旧表）——一切 schema 变更必须走 `server/db.ts` 的 `MIGRATIONS[]`（version 单调·事务内执行·`user_version` 记账·建库即跑）。新增变更 = 追加一条 `{ version: N, up(d) }`，禁止 try/catch 手写探测式迁移（静默吞错反模式·W823 判定）。存量索引/约束不变量由 `scripts/check_db_schema.py` 门禁锁定（ci_sim 第 10 项）。
