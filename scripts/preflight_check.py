@@ -572,6 +572,18 @@ def main():
     except Exception as _exc:  # noqa: BLE001 — 判据不可执行须留痕（W809 fail-closed 族）
         print(f"WARN  体积窗口门禁不可用（{_exc}）——本回合跳过（禁静默·W960 建置纪律）")
 
+    # 5.7) 治理文档数字断言对账提示位（W967·报告型 WARN 不拦截·挂 verify 槽需另行批准）
+    try:
+        import check_gov_doc_claims as _gdc
+
+        _gdc_lines, _gdc_fails = _gdc.check()
+        for _line in _gdc_lines:
+            print("NOTE  " + _line)
+        for _f in _gdc_fails:
+            print("WARN  " + _f)
+    except Exception as _exc2:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"WARN  数字断言对账器不可用（{_exc2}）——本回合跳过（禁静默）")
+
     print("== 结论 ==")
     if problems:
         for p in problems:
