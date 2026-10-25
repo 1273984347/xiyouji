@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（85）
+## 文件（98）
 
 ### 样式与资源
 
@@ -63,6 +63,14 @@
 - `hero-13-wujingshan-liangjie.webp`
 - `hero-14-donghai-longgong.webp`
 - `hero-15-liudao-lunhui.webp`
+- `hero-line-01-ruyi-staff.webp`
+- `hero-line-02-journey-scroll.webp`
+- `hero-line-03-classic-scroll.webp`
+- `hero-line-04-sinan-compass.webp`
+- `hero-line-05-lotus.webp`
+- `hero-line-06-nine-ring-staff.webp`
+- `hero-line-07-banana-fan.webp`
+- `hero-line-08-jade-vase.webp`
 - `hero-set-w932-preview.webp`
 - `ink-mountains-hero.webp`
 - `ink-mountains-night.webp`
@@ -83,6 +91,11 @@
 - `og-13-changgui-shanmen.webp`
 - `og-14-shaseng-denggao.webp`
 - `og-15-shijian-liejian.webp`
+- `plate-donghai-longgong.webp`
+- `plate-jingu-jingangchui.webp`
+- `plate-liudao-lunhui.webp`
+- `plate-mingfu-panwang.webp`
+- `plate-wujingshan-liangjie.webp`
 - `post-01-wukong.webp`
 - `post-02-tangseng.webp`
 - `post-03-bajie.webp`

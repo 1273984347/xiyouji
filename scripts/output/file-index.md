@@ -11,6 +11,23 @@
 ---
 
 
+## W936 首屏图集接入 + 专题题图落位（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/index.html | W936 | 首页 9 张图集轮播（JS 定时切换 + WCAG 2.2.2 暂停机制 + reduced-motion 降级）+ 右侧「100 回」数字区纸色渐变底 |
+| site/reader/people/地府体系深化专题.html | W936 | 题图：冥府判官队列浓墨剪影 |
+| site/reader/people/紧箍儿的内侧-器物传记.html | W936 | 题图：紧箍与金刚杵静物对置 |
+| site/reader/themes/取经地理学专题.html | W936 | 题图：五行山与两界山（浓墨山峦 + 锁链） |
+| site/reader/people/四海龙王外传.html | W936 | 题图：东海龙宫水殿 |
+| site/reader/themes/西游与死亡研究专题.html | W936 | 题图：六道轮回抽象水墨 |
+| site/static/images/hero-line-01~08.webp | W936 | W931 线描横幅接入站点（8 件·首页图集用） |
+| site/static/images/plate-*.webp | W936 | W932 浓墨 5 张题图副本（plate- 前缀·避开 hero- 序列语义） |
+| scripts/_w936_insert_plates.py | W936 | 题图插入脚本（chapter-plate 范式·行尾归一修正） |
+| scripts/_w936_cascade.py | W936 | 三面级联登记脚本（认领行 + CHANGELOG 段 + file-index 段·含段序断言） |
+| CHANGELOG.md | W936 | W936 版段（四件套） |
+| docs/00-导读/W批次编号对账表.md | W936 | W936 认领行（W935 在途跳号依据） |
+
 ## W935 速赢两处批（2026-10-25）
 
 | 文件 | W | 说明 |
