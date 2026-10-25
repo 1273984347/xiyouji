@@ -11,6 +11,16 @@
 ---
 
 
+## W965 脚注重生成与探针沉淀批（2026-10-26）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W965 | 留存五条脚注重写（全阿拉伯日期头·无截断残迹·≤300 字） |
+| scripts/check_parser_anchor_coverage.py | W965 | 新建解析器锚点覆盖面扫描（七机制·报告型·基线 ② 登记·W964 双虫探针常驻化） |
+| scripts/check_doc_size_budget.py | W965 | C4 脚注逐条定形判据（>300 字或头不可解析即红） |
+| HANDOVER.md | W965 | 候选清单立「手搓绕过级联治理」议题（三起实证·三层候选方案） |
+| tests/unit/test_doc_size_budget.py | W965 | C4 负样本单测 |
+
 ## W964 AGENTS 版本脚注治理批（2026-10-26）
 
 | 文件 | W | 说明 |
@@ -3178,25 +3188,4 @@
 | docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W848 | §12.2 Q5 翻已裁决、§7.1 S8 采纳列同步、状态口径改为开放项只剩 Q2 |
 | scripts/output/_w848_spec.json | W848 | 本批 spec 十字段 |
 | docs/00-导读/W批次编号对账表.md | W848 | 认领行与收官回填 |
-
-## W847 阅读页体验封装批（2026-10-21）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/build_reader.py | W847 | 折叠段/工具条/反馈块的生成逻辑 + 对应样式（FOLD_SECTIONS / fold_sections / toolbar_html / feedback_html） |
-| site/js/reader-enhance.js | W847 | 新增：进度记忆/书签/字号/进度条/展开全部（localStorage 三键·file:// 可用·降级不抛错） |
-| docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md | W847 | AC-22~25 改判 + 附录 D 实测分布与根因 |
-| scripts/output/_w847_spec.json | W847 | 本批 spec 十字段 |
-| docs/00-导读/W批次编号对账表.md | W847 | 认领行与收官回填 |
-| site/reader/ch008.html | W847 | 代表页：折叠/工具条/进度条/反馈块（全部 622 页同批重建） |
-
-## W846 阅读页正文回灌批（2026-10-21）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/reader/ch008.html | W846 | 重建回灌：正文头防→头陀等字级修正（代表页·本批共 51 页） |
-| site/reader/ch009.html | W846 | 重建回灌：正文字级修正（代表页） |
-| site/reader/ch010.html | W846 | 重建回灌：正文字级修正（代表页） |
-| scripts/output/_w846_spec.json | W846 | 本批 spec 十字段 |
-| docs/00-导读/W批次编号对账表.md | W846 | 认领行与收官回填 |
 
