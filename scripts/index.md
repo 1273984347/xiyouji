@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（305）
+## 文件（306）
 
 ### Markdown 文档
 
@@ -190,6 +190,7 @@
 - `_w931_changelog_seg.py`
 - `_w931_claim_row.py`
 - `_w931_file_index_seg.py`
+- `_w931_hero_fit.py`
 - `_w931_hero_verify.py`
 - `_w931_sync_stats_marks.py`
 - `_w933_mutation_test.py`
