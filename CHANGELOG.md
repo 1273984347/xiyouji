@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W923），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W924），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,22 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W924（2026-10-24）：Q2 裁决落地批（OBS-10 升双层判红 + OBS-11 归并 LHCI + OBS-14 挂解冻条件）
+
+
+
+> **来源**：用户 2026-10-24 对 Q2 三指标分治建议裁决「好」——W850 建的采样机制（15 批样本）兑现为门槛。
+
+> - **文件**：scripts/check_perf_shadow.py、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、scripts/output/obs_samples.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w924_spec.json、scripts/output/_cascade_files_W924.txt（逐件行见 file-index W924 段）。
+
+**Q2 裁决落地（三指标分治）**：
+- **OBS-10 页体积升双层制**：第 47 槽（W849 影子槽·设计即预留「满 10 批后裁决」）新增 C2 全站扫描——硬上限 500KB/页判红（现役最大约 405KB·留 21% 余量·今天升今天绿·只拦新增劣化）+ 软预算 200KB 维持 WARN 观察清单（现役 10 页·构成 en 内联双份 ×4 / reader 全文页 ×4 / dialogue-sentiment ×2·根治随 BL-33 CSS 物化改革）；自测 5→9 例（双层正负样本）；实跑零红。
+- **OBS-11 归并既有 LHCI**：perf.yml 每 push 已硬拦 LCP（含 3D 分档）——1.5s SLO 定为记录值·执法由 LHCI 承担·原「攒满 10 批」动作取消（更强防线在岗）。
+- **OBS-14 挂解冻条件**：UV≥30 或 agent-web 真实使用后重议——/api/metrics 滚动窗口零访客=零数据·2s SLO 维持告警级。
+- 数据支撑：15 批样本（W850-W875）静态口径稳定（max 403-413KB·超限 9-10 页·零恶化）+ 本批现势补采；§12.2 Q2 行与 §11.5 三行状态回填系统架构方案。
+
+**验证**：check_perf_shadow 自测 9/9·实跑 C2 零红（10 页观察清单）·verify 全量核心全绿。
 
 ### W923（2026-10-24）：review 修复批（PR #63 复审两处低危登记缺陷）
 

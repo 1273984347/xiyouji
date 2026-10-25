@@ -368,6 +368,28 @@
         "measured": false,
         "reason": "未测（需 --first-token·默认不读服务）"
       }
+    },
+    {
+      "batch": "W924",
+      "date": "2026-10-25",
+      "captured_at": "2026-10-25T13:06:11",
+      "obs10": {
+        "measured": true,
+        "max_bytes": 415307,
+        "max_page": "en/relationships.html",
+        "over_budget_pages": 10,
+        "total_pages": 857,
+        "total_bytes": 54322871,
+        "budget_bytes": 204800
+      },
+      "obs11": {
+        "measured": false,
+        "reason": "未测（需 --lcp·默认不跑浏览器）"
+      },
+      "obs14": {
+        "measured": false,
+        "reason": "未测（需 --first-token·默认不读服务）"
+      }
     }
   ],
   "note": "OBS-10/11/14 逐批采样（W850 建·Q2 取数入口）：未测即记 null+原因，按指标分别计 10 批；不判红，阈值升降由 Q2 裁决。"
