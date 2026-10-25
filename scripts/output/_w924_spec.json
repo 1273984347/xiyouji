@@ -1,0 +1,33 @@
+{
+ "batch": "W924",
+ "date": "2026-10-24",
+ "title": "W924 Q2 裁决落地批（OBS-10 升双层判红 + OBS-11 归并 LHCI + OBS-14 挂解冻条件）",
+ "desc": "性能三指标分治落地：页体积双层门槛升格判红，首屏归并既有防线，首 token 挂解冻条件",
+ "head_entry": "2026-10-24（W924 Q2 裁决落地批）",
+ "head_sentence": "页体积双层门槛升格判红只拦新增劣化，首屏归并灯塔防线，首 token 挂解冻条件",
+ "changelog_body": "\n\n\n\n> **来源**：用户 2026-10-24 对 Q2 三指标分治建议裁决「好」——W850 建的采样机制（15 批样本）兑现为门槛。\n\n> - **文件**：scripts/check_perf_shadow.py、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、scripts/output/obs_samples.json、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w924_spec.json、scripts/output/_cascade_files_W924.txt（逐件行见 file-index W924 段）。\n\n**Q2 裁决落地（三指标分治）**：\n- **OBS-10 页体积升双层制**：第 47 槽（W849 影子槽·设计即预留「满 10 批后裁决」）新增 C2 全站扫描——硬上限 500KB/页判红（现役最大约 405KB·留 21% 余量·今天升今天绿·只拦新增劣化）+ 软预算 200KB 维持 WARN 观察清单（现役 10 页·构成 en 内联双份 ×4 / reader 全文页 ×4 / dialogue-sentiment ×2·根治随 BL-33 CSS 物化改革）；自测 5→9 例（双层正负样本）；实跑零红。\n- **OBS-11 归并既有 LHCI**：perf.yml 每 push 已硬拦 LCP（含 3D 分档）——1.5s SLO 定为记录值·执法由 LHCI 承担·原「攒满 10 批」动作取消（更强防线在岗）。\n- **OBS-14 挂解冻条件**：UV≥30 或 agent-web 真实使用后重议——/api/metrics 滚动窗口零访客=零数据·2s SLO 维持告警级。\n- 数据支撑：15 批样本（W850-W875）静态口径稳定（max 403-413KB·超限 9-10 页·零恶化）+ 本批现势补采；§12.2 Q2 行与 §11.5 三行状态回填系统架构方案。\n\n**验证**：check_perf_shadow 自测 9/9·实跑 C2 零红（10 页观察清单）·verify 全量核心全绿。\n",
+ "milestone_block": "- **W924 Q2 裁决落地批（OBS-10 升双层判红）**：\n  - 第 47 槽 C2：硬 500KB FAIL + 软 200KB 观察清单（现役 10 页·根治随 BL-33）·自测 9/9\n  - OBS-11 归并 LHCI·OBS-14 挂 UV≥30·架构方案 §12.2 回填\n  - 数据：15 批样本稳定 + 现势补采",
+ "agents_note": "二〇二六年十月二十四日（W924）把挂了两个月的一个裁决兑现了。性能三指标里页体积这条攒够了十五批样本——最大页稳定在四百 KB 上下、零恶化——于是按用户批的分治方案升了双层门槛：五百 KB 一刀切判红拦新增劣化，二百 KB 维持观察名单不拦存量（那十页的病根是内联样式双份，要等样式物化改革一起治）。首屏那条不用另攒样本——CI 里的灯塔预算早就在拦，定为记录值就好。首 token 那条挂上解冻条件：零访客等于零数据，等有真实使用再议。半个月前那个「等连续十批」的空转口号，到今天算是走完了从取数到执法的全程。",
+ "file_index_rows": [
+  "| scripts/check_perf_shadow.py | W924 | Q2 裁决落地：第 47 槽 C2 OBS-10 双层判红（硬 500KB FAIL·软 200KB WARN 观察清单·全站扫描）·汇总行升格口径·自测 5→9 例（OBS-10 双层正负样本） |",
+  "| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W924 | §12.2 Q2 行裁决回填（三指标分治）+ §11.5 OBS-10/11/14 三行状态更新 |",
+  "| scripts/output/obs_samples.json | W924 | 现势补采（16→17 批·静态口径） |",
+  "| docs/00-导读/W批次编号对账表.md | W924 | W924 认领行与收官回填 |",
+  "| CHANGELOG.md | W924 | W924 段 |",
+  "| HANDOVER.md | W924 | 级联头尾链与里程碑块 |",
+  "| README.md | W924 | 当前批次版本行 |",
+  "| STRUCTURE.md | W924 | 当前批次版本行 |",
+  "| docs/00-导读/项目说明.md | W924 | 当前批次版本行 |",
+  "| .github/workflows/README.md | W924 | 工作流层区间与里程碑尾标记 |",
+  "| site/index.html | W924 | 页脚批次链插入 W924 |",
+  "| site/data/cross-time-danmaku.html | W924 | 页脚批次链插入 W924 |",
+  "| site/data/tag-cloud.html | W924 | 页脚批次链插入 W924 |",
+  "| site/dukou-engine.html | W924 | 页脚批次链插入 W924 |",
+  "| AGENTS.md | W924 | 版本脚注条目 |",
+  "| archive/docs/AGENTS-ARCHIVE.md | W924 | 脚注滚动迁入的最老条目 |",
+  "| CITATION.cff | W924 | version 同步为 W924 |",
+  "| scripts/output/file-index.md | W924 | W924 段插入 |",
+  "| scripts/output/_w924_spec.json | W924 | 本批级联 spec |",
+  "| scripts/output/_cascade_files_W924.txt | W924 | 级联落盘清单 |"
+ ]
+}

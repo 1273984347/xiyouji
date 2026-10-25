@@ -11,6 +11,31 @@
 ---
 
 
+## W924 Q2 裁决落地批（2026-10-24）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_perf_shadow.py | W924 | Q2 裁决落地：第 47 槽 C2 OBS-10 双层判红（硬 500KB FAIL·软 200KB WARN 观察清单·全站扫描）·汇总行升格口径·自测 5→9 例（OBS-10 双层正负样本） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W924 | §12.2 Q2 行裁决回填（三指标分治）+ §11.5 OBS-10/11/14 三行状态更新 |
+| scripts/output/obs_samples.json | W924 | 现势补采（16→17 批·静态口径） |
+| docs/00-导读/W批次编号对账表.md | W924 | W924 认领行与收官回填 |
+| CHANGELOG.md | W924 | W924 段 |
+| HANDOVER.md | W924 | 级联头尾链与里程碑块 |
+| README.md | W924 | 当前批次版本行 |
+| STRUCTURE.md | W924 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W924 | 当前批次版本行 |
+| .github/workflows/README.md | W924 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W924 | 页脚批次链插入 W924 |
+| site/data/cross-time-danmaku.html | W924 | 页脚批次链插入 W924 |
+| site/data/tag-cloud.html | W924 | 页脚批次链插入 W924 |
+| site/dukou-engine.html | W924 | 页脚批次链插入 W924 |
+| AGENTS.md | W924 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W924 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W924 | version 同步为 W924 |
+| scripts/output/file-index.md | W924 | W924 段插入 |
+| scripts/output/_w924_spec.json | W924 | 本批级联 spec |
+| scripts/output/_cascade_files_W924.txt | W924 | 级联落盘清单 |
+
 ## W923 review 修复批（2026-10-24）
 
 | 文件 | W | 说明 |
