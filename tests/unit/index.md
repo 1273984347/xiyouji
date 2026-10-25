@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（42）
+## 文件（43）
 
 ### Python 脚本
 
@@ -33,6 +33,7 @@
 - `test_docs_index.py`
 - `test_embed_json.py`
 - `test_folder_docs_gate.py`
+- `test_four_digit_wnum.py`
 - `test_lint_links_refactor.py`
 - `test_milestone_block_regex.py`
 - `test_new_page.py`
