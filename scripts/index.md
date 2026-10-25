@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（350）
+## 文件（382）
 
 ### Markdown 文档
 
@@ -235,6 +235,38 @@
 - `_w948_zoom.py`
 - `_w949_allowlist.py`
 - `_w949_fix_dataset.py`
+- `_w950_normalize.py`
+- `_w950_refresh_icon_paths.py`
+- `_w951_backfill_stage.py`
+- `_w951_cascade.py`
+- `_w951_check_crop.py`
+- `_w951_site_sheet.py`
+- `_w952_backfill_stage.py`
+- `_w952_cascade.py`
+- `_w952_fix_backfill.py`
+- `_w952_fix_c6.py`
+- `_w952_fix_c6b.py`
+- `_w952_fix_c6c.py`
+- `_w952_fix_j10.py`
+- `_w952_insert_plates.py`
+- `_w952_make_backfill.py`
+- `_w952_make_edge_sample.py`
+- `_w952_make_prompts.py`
+- `_w952_update_readme.py`
+- `_w952_zoom.py`
+- `_w953_backfill_stage.py`
+- `_w953_cascade.py`
+- `_w953_fix_cascade.py`
+- `_w953_fix_file_line.py`
+- `_w953_insert_plates.py`
+- `_w953_make_insert.py`
+- `_w953_make_prompts.py`
+- `_w953_patch_backfill.py`
+- `_w953_prep_raws.py`
+- `_w953_prep_raws2.py`
+- `_w953_prep_raws3.py`
+- `_w953_update_readme.py`
+- `_w953_zoom.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
