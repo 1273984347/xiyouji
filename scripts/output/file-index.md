@@ -11,6 +11,13 @@
 ---
 
 
+## W972 CodeQL 三高危修复批（2026-10-26）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_w955_motion_audit.py · scripts/check_interaction_binding.py | W972 | 内联脚本块正则宽容空白变体 |
+| scripts/check_data_drift.js | W972 | 转义先反斜杠后引号（顺序正确性） |
+
 ## W971 存量段状态回填批（2026-10-26）
 
 | 文件 | W | 说明 |
