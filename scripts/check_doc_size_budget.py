@@ -37,6 +37,7 @@ RE_HANDOVER_BLOCK = re.compile(r"^- \*\*(?:v[\d.]+ )?W\d+[^*]*\*+：", re.M)
 WINDOWS = {
     os.path.join("CHANGELOG.md"): 110,
     os.path.join("scripts", "output", "file-index.md"): 110,
+    os.path.join("docs", "00-导读", "W批次编号对账表.md"): 60,
 }
 REPORT_FILES = WINDOWS | {
     os.path.join("AGENTS.md"): None,
@@ -48,6 +49,8 @@ def count_segments(text, kind):
     """按文件种类数正本段数（kind: changelog|file-index）。"""
     if kind == "changelog":
         return len(RE_CL_SEG.findall(text))
+    if kind == "ledger":
+        return len(re.findall(r"(?m)^\| W\d{3} ", text))
     return len(RE_FI_SEG.findall(text))
 
 
@@ -90,7 +93,10 @@ def collect():
         kb = len(t.encode("utf-8")) / 1024
         nlines = t.count("\n") + 1
         if rel in WINDOWS:
-            kind = "changelog" if "CHANGELOG" in rel else "file-index"
+            if "对账表" in rel:
+                kind = "ledger"
+            else:
+                kind = "changelog" if "CHANGELOG" in rel else "file-index"
             n = count_segments(t, kind)
             counts[rel] = n
             window = WINDOWS[rel]
@@ -170,9 +176,9 @@ def _self_test() -> int:
         fails.append("file-index 段计数应 2")
 
     # evaluate：窗口边界（110 过 / 111 红）+ 缺文件 fail-closed
-    if evaluate({"CHANGELOG.md": 110, os.path.join("scripts", "output", "file-index.md"): 110}) != []:
+    if evaluate({"CHANGELOG.md": 110, os.path.join("scripts", "output", "file-index.md"): 110, os.path.join("docs", "00-导读", "W批次编号对账表.md"): 60}) != []:
         fails.append("负样本：恰在窗口上必须 0 FAIL")
-    out = evaluate({"CHANGELOG.md": 111, os.path.join("scripts", "output", "file-index.md"): 5})
+    out = evaluate({"CHANGELOG.md": 111, os.path.join("scripts", "output", "file-index.md"): 5, os.path.join("docs", "00-导读", "W批次编号对账表.md"): 60})
     if len(out) != 1 or "111" not in out[0]:
         fails.append("111 段必须恰好产出 1 条 FAIL 且带计数")
     if evaluate({}) == []:

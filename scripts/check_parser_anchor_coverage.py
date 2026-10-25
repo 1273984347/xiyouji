@@ -72,7 +72,8 @@ CHECKS = [
     },
     {
         "name": "M5 台账认领行",
-        "files": [os.path.join("docs", "00-导读", "W批次编号对账表.md")],
+        "files": [os.path.join("docs", "00-导读", "W批次编号对账表.md"),
+                  os.path.join("archive", "docs", "W批次编号对账表-ARCHIVE.md")],
         "raw": r"(?m)^\|[ 狦]?W\d{3}",
         "anchor": r"(?m)^\|\s*W\d{3}\s*\|",
         "pos_sensitive": True,
