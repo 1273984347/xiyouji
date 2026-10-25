@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W932），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W934），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,49 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W934（2026-10-25）：D-2 应用迁移批第一子批（M12 存储层抽象 + PG 适配器 + 三表迁移器·真实数据迁移三重对账全一致）
+
+> **来源**：用户 2026-10-25 架构设计令（「整体分层、模块拆分与依赖、数据流与存储选型、扩展性与容灾、部署与监控都写到位，附几张架构图说明图」）经 O-1~O-4 裁决「接受·按 v2 档 2 施工」后，按方案 §8.2 施工序推进 **D-2 应用迁移批的第一子批（W934）**——把「M12 PG 存储层」这行模块说明变成**可运行、可切换、可回归**的代码层。
+
+> - **文件**：xiyouji-agent-web/server/storage/types.ts、xiyouji-agent-web/server/storage/sqlite.ts、xiyouji-agent-web/server/storage/postgres.ts、xiyouji-agent-web/server/storage/index.ts、xiyouji-agent-web/server/storage/storage.test.ts、xiyouji-agent-web/server/db.ts、xiyouji-agent-web/server/routes.ts、xiyouji-agent-web/server/chat.ts、xiyouji-agent-web/server/index.ts、xiyouji-agent-web/server/shutdown.ts、xiyouji-agent-web/package.json、xiyouji-agent-web/package-lock.json、xiyouji-agent-web/deploy/pg/migrations/0002_app_tables.sql、xiyouji-agent-web/deploy/pg/bin/migrate-sqlite-to-pg.ts、xiyouji-agent-web/deploy/pg/bin/initdb-bootstrap.sh、xiyouji-agent-web/deploy/pg/bin/verify-baseline.py、xiyouji-agent-web/deploy/pg/bin/_mutation_test.py、xiyouji-agent-web/deploy/pg/README.md、docs/11-方案报告/计划方案/执行前计划-T23-D2应用迁移批.md、docs/11-方案报告/计划方案/T23-任务计划执行与经验沉淀报告-2026-10-25.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、scripts/output/_w934_d2a_migrate.json、scripts/output/_w934_d2a_residue_before.txt、scripts/output/_w934_d2a_grants.txt、scripts/output/_w934_spec.json、scripts/output/_cascade_files_W934.txt、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md。
+
+**M12 存储层抽象落地**：新增 `server/storage/` 四件——`types.ts`（`StorageBackend` 接口 + DTO + 语义约定）、`sqlite.ts`（现役实现**逐字搬迁** + `kind` + `healthCheck`）、`postgres.ts`（连接池 + 事务 + 参数化查询 + 健康探针 + schema 隔离）、`index.ts`（后端工厂 + 契约转发）。`server/db.ts` 由「SQLite 实现」降为**门面**（16 个现役导出名齐备）⇒ **三个调用点仅加 `await` 与 `async`·业务逻辑零改动**；默认后端**仍是 SQLite**（`AGENT_WEB_DB_BACKEND` 未设即 sqlite·取值非法则**启动失败**不静默回落）⇒ 现役行为与全部既有测试零影响。
+
+**接口为何是异步的**（规划期假设被实跑证伪）：PG 走网络协议，而 Node 生态**没有同步 PG 驱动**（`pg` 的 socket 只有异步接口）⇒ 同步接口下 PG 后端只能是内存镜像或自研阻塞协议栈（皆不可接受）⇒ 接口定为异步，SQLite 后端实现体仍是同步调用。这是「**抽象层形状由最贵的那个后端决定**」的实证。
+
+**真实数据迁移端到端（真·PG 16.4 实例）**：现役 `data/chat.db`（**70 会话 / 134 消息 / 4 反馈**）真实迁入 PG 16.4——迁移序列 v1 `0001_baseline` + v2 `0002_app_tables` 逐条记账（`checksum` 为**真实 sha256**）；**三重对账全一致**：逐表**行数相等** + **主键集合逐位相等** + **逐行内容摘要一致**，时间列 **278/278 逐字节相等**（sessions 140 + messages 134 + feedback 4）。迁移器**只读**打开源库（chat.db 是全仓唯一不可重建的数据）且**不借道应用写接口**（`createMessage` 会把会话 `updated_at` 刷成「现在」⇒ 破坏逐字节保真）。
+
+**双后端契约测试**：**同一套**断言跑 SQLite 与 PostgreSQL 两个后端，均全过（2/2）——抽象层「换后端不动业务」的证据不是「两边各测一遍」，而是「一套用例两个实现」。
+
+**实跑抓出 3 个真缺陷（静态层查不出 · 已全部固化为守卫）**：
+1. `ALTER DEFAULT PRIVILEGES` **缺 `FOR ROLE`** ⇒ 默认权限挂在执行者名下 ⇒ 由**应用账号**创建的表拿不到只读授权 ⇒ **静默失效**（不报错）。
+2. 引导脚本**先建表后授权** ⇒ 记账表落在授权之前 ⇒ 应用账号读它 `permission denied`。
+3. 记账表**所有权**不属于应用账号 ⇒ 迁移序列以应用账号执行时 `COMMENT ON TABLE` 报 **`must be owner of table schema_migrations`** ⇒ **迁移序列根本跑不起来**——这是**所有权**问题，没有任何「看起来不对」的形态 ⇒ 只有真跑能暴露。
+
+> 这 3 项与 W928 抓出的 4 项是**同一族**：**静态背书 ≠ 运行时可用**。W928 抓到的是「形态错」，W934 抓到的是「**权限与所有权错**」——后者每一行单独看都合法 ⇒ 更难被静态断言覆盖 ⇒ 所有权、运行时语义、跨版本行为一律留真跑项。
+
+**守卫升级**：静态校验器 **71 → 95 项**（新增 C5 组：三表 schema 不变量 / 迁移器只读与参数化与三重对账 / 授权模型的 FOR ROLE·顺序·owner 三项）+ 反向验证 **14 → 23 组**（新增 M14~M22，逐条证明新判据可证伪）。
+
+**另自证出 3 处工具自身缺陷**（先红后绿）：① ESM 把**接口当值导出**（`export { DbFeedback }`）⇒ 运行时炸而 `tsc` 不报（未开 `isolatedModules`）⇒ 改 `export type`；② 计数型断言把**注释行**算进去 ⇒ 基线假红 ⇒ **掩盖了 M17/M20 的真实结论** ⇒ 计数只取非注释行 + 新增 `strip_ts_comments()`；③ 断言命中文档注释里的**示例代码** ⇒ 真代码改坏仍报绿（变异 rc=0）⇒ 断言改锚真实调用构造。
+
+**D-2 整体尚未完成（不得对外宣称「已切 PG」）**：双写对账期 → 切读 → 停写旧库属 **W935**；检索层接入（O-4）+ 客户端侧服务地址注入（契约 C-8）属 **W936**；容量实测属 **W937**；合规面属 **D-3**。
+
+**机器证据**：`scripts/output/_w934_d2a_migrate.json`（迁移对账）· `_w934_d2a_residue_before.txt`（清理前演练残留快照）· `_w934_d2a_grants.txt`（授权模型实查）。
+
+**未改**：site/ 任何页面的**内容**（仅级联页脚批次链为全批标准机制）· 任何管控脚本（verify_delivery.py / bump_version.py / batch_cascade.py / preflight_check.py 等）。
+
+### W933（2026-10-25）：共享面串行化机制批（规则三条 + 五个机检判据·把台账与 CHANGELOG 的写顺序从自律变成机制）
+
+
+
+> **来源**：W926 站点交互流程审查批收官复盘时，我方主动指出「号段已分开，但台账与 CHANGELOG 的写顺序仍是串行资源——目前靠各方『先登记认领行、后立段』的自律维持，没有机制保证」，并请用户裁决；用户 2026-10-25 答「按你推荐」并选定：**落地上限＝层 1 + 层 2**（规则三条 + 3 个机检判据）、**开工时点＝立即开工并由我方取号**。
+> - **文件**：docs/00-导读/文档规范.md（§11.0 规则三条）、scripts/preflight_check.py（判据 A/B′/D/E）、scripts/ledger_backfill.py（判据 B）、scripts/ledger_close_check.py（判据 C）、scripts/_w933_mutation_test.py（四判据可证伪性）、scripts/output/_w933_spec.json、docs/11-方案报告/计划方案/T22-任务计划执行与经验沉淀报告-2026-10-25.md、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md。
+> - **产出**：① **层 1 规则三条**（写入 docs/00-导读/文档规范.md §11.0）——**认领即占号**（登记认领行并单独提交后再施工，登记后复跑 preflight 做乐观并发校验）、**回填独占**（回填既有行必须走行指纹校验，禁整文件 git add 台账）、**收官回填三件套**（hash 列非占位 + 状态列以「已收官/已闭环」开头 + touches 列为终值，缺一即视为在途）；② **层 2 五个机检判据**——**A 撞号检测**（台账同一 W 号出现多行 = 撞号，机器可检；插队仅出 NOTE 因后补登记合法）、**B 回填独占**（scripts/ledger_backfill.py：--expect 基线指纹不符即拒写、--verify 提交前复核、--append-claim 纯追加认领）、**C 收官回填体检**（scripts/ledger_close_check.py：现役段 W 号须 hash 非占位且状态以「已收官/已闭环」开头；**不挂 verify_delivery 阻塞段**，避免把伪阻塞从 preflight 挪到门禁）、**D 反引号剥离**（_split_touches 具反引号感知）、**E 登记类共享面排除**（台账与方案报告 README 天然并发，不计入并行写拒绝）；③ **Makefile 新增 ledger 目标并接进 ci**（第 42 门禁四面引用口径）；④ **可证伪性证明**：三工具自测 5 正例 + 8 负例 + 四判据突变 4/4 按预期。
+> - **本批自证出并当场修复的两处机制缺陷**：**D 假绿**——架构会话（W934 批）实测报出「_split_touches 不剥反引号，而台账 touches 列的路径带反引号 ⇒ 与命令行传入的无反引号路径字面不等 ⇒ touches_conflict 恒返空 ⇒『PREFLIGHT PASS·无交集』在真实撞面时假绿」；**E 恒红**——修复 D 后本批立即实跑，发现交集拒绝把「台账认领行」与「方案报告 README 登记行」当普通共享面 ⇒ 每个批次都要写这两面 ⇒ 交集在准入阶段恒红 ⇒ 纪律被架空 ⇒ 改为登记类共享面排除出拒绝，并发保障改由「纯追加 + 精确暂存（update-index --cacheinfo）+ 回填行指纹」承担。**判据 A 的初版语义亦被本批自身实战证伪**（把「并发插队」当「撞号」会误伤合法的后补登记 ⇒ 修订为「同号多行 = 撞号」+ 插队仅 NOTE，见 T22 报告 E-06）。
+> - **交付**：docs/11-方案报告/计划方案/T22-任务计划执行与经验沉淀报告-2026-10-25.md（框架第二十二次执行·32/32 判据符合·模糊词 0·含 §2 号段协调实录与 §4 可行性自评与 §5 六条经验）。
+> - **纪律**：本批 0 处 site/ 与应用代码改动；未改 verify_delivery.py 等禁擅改管控文件（判据改走 Makefile 编排面）；不代改他方台账行与 CHANGELOG 历史段。
+> - **状态**：已落地（本地）。
 
 ### W932（2026-10-25）：站点 Hero 素材图成套批（六张 16:9 浓墨剪影·锚点复用成熟段·底部净空带供叠字）
 
