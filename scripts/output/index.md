@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（502）
+## 文件（505）
 
 ### Markdown 文档
 
@@ -199,6 +199,7 @@
 - `_cascade_files_W954.txt`
 - `_cascade_files_W955.txt`
 - `_cascade_files_W956.txt`
+- `_cascade_files_W957.txt`
 - `_sync_analysis_manifest.json`
 - `_vermilion_solid_cache.json`
 - `_vermilion_solid_report.json`
@@ -494,7 +495,9 @@
 - `_w953_batch5.json`
 - `_w954_review_evidence.json`
 - `_w955_motion_audit.json`
+- `_w956_pilot_pick.json`
 - `_w956_spec.json`
+- `_w957_motion_probe.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`
