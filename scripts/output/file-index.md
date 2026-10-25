@@ -11,6 +11,24 @@
 ---
 
 
+## W956 登记面治理批（2026-10-26）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/preflight_check.py | W956 | 在途判定加 git 条件（登记滞后告警不拒绝·P-43-01）+ 复盘触发器提示位接线 |
+| scripts/check_review_trigger.py | W956 | 新建复盘触发器（天数/批次/提交三判据任一触发即提示·preflight 接线·不持台账写面） |
+| scripts/ledger_backfill.py | W956 | --from-git 收官状态 git 反填（P-43-01 后半·显式值可覆盖） |
+| scripts/batch_cascade.py | W956 | 段状态认领登记 W 号一致性断言（E-28/P-43-05 防线） |
+| scripts/backfill_changelog.py | W956 | 归档面合看修复（E-27·原实现 67 归档段误报待补）+ --only 限域 + 同款段状态断言 |
+| scripts/check_db_schema.py | W956 | 门禁路径跟上 W934 存储层门面化（P1-P3 db.ts→storage/sqlite.ts·假红修复） |
+| scripts/check_emoji_icons.py | W956 | ruff 机械清理（死赋值移除·UP009/I001/F841） |
+| scripts/output/_w884_spec.json | W956 | W884 补位 spec（Playwright 全谱审计·按 W863 先例标补位） |
+| tests/unit/test_preflight_check.py | W956 | 提交索引与在途二分单测 5 例 |
+| tests/unit/test_review_trigger.py | W956 | 复盘触发器单测 9 例（含负样本） |
+| tests/unit/test_batch_cascade_status_wnum.py | W956 | 段状态断言单测 4 例（含 E-28 实形态负样本） |
+| docs/agent/pitfalls.md | W956 | 复盘经验五条上移（级联 5→8·git 17→18·流程 8→9·总数 52→57） |
+| AGENTS.md | W956 | §4.3 坑位计数链追记（总数 52→57） |
+
 ## W955 GSAP 动效体系引入批第一子批（前置体检 + 执行前计划）（2026-10-26）
 
 | 文件 | W | 说明 |
@@ -2415,6 +2433,17 @@
 | scripts/_w885_index_revert.py | W885 | 新增：搜索索引他方在途条目回退器（逐条比对·源文件未入库者按 HEAD 版回退） |
 | scripts/output/_w885_spec.json | W885 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
 | docs/00-导读/W批次编号对账表.md | W885 | 认领行与收官回填 |
+
+
+## W884 Playwright 历史问题全谱审计（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/计划方案/T10-任务计划执行与经验沉淀报告-2026-10-22.md | W884 | Playwright 历史问题全谱审计报告（T-10·25 项 8 族·已修复 22 仍开放 3） |
+| docs/00-导读/W批次编号对账表.md | W884 | 认领行 + 收官回填 + 提交号补全 |
+| scripts/output/stats.json | W884 | report_docs 计数 46→47（连带 stats-changelog/stats-index/STRUCTURE 标记同步） |
+| docs/INDEX.md | W884 | 重建（737→738 篇·13 板块） |
+| site/data/search.html · site/en/search.html | W884 | 站内搜索索引刷新（+T-10 条目） |
 
 
 ## W883 阶段 5 机检门禁批（2026-10-22）

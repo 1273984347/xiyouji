@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """W949 · 第 50 门禁：UI 图标位 emoji 残留 + 图标渲染正确性
 
 两段判据（缺一不可）：
@@ -77,7 +76,6 @@ def scan_static() -> list[dict]:
                 text = f.read_text(encoding="utf-8")
             except Exception:
                 continue
-            lines = text.split("\n")
             covered = [False] * len(text)
             for m in TAG_RE.finditer(text):
                 tag = m.group(1).lower()
@@ -199,9 +197,9 @@ def run_browser() -> tuple[list[str], dict]:
         "  await browser.close();\n"
         "  console.log(JSON.stringify(report));\n"
         "})();\n", encoding="utf-8")
-    import subprocess
     # 起本地 http server（真实用户环境·同源 ⇒ mask 可加载）
     import atexit
+    import subprocess
     import time
     srv = subprocess.Popen([sys.executable, "-m", "http.server", "8899",
                             "--bind", "127.0.0.1"],
@@ -223,7 +221,7 @@ def run_browser() -> tuple[list[str], dict]:
     #   · 字体子集 CORS（file:// 加载 woff2 被拦）——全站既有行为
     #   · Fetch API 不支持 file scheme——数据走 EMBEDDED 回退，全站既有行为
     # 但凡指向本批自建图标资产（icons/ui）的加载失败，一律判红
-    PREEXISTING = ("font", "Fetch API", "ERR_FAILED", "net::")
+    # （原 PREEXISTING 元组为死赋值·过滤字面量在下方循环内·W956 ruff 清理移除）
     for key, rep in data.items():
         rel = rep.get("env", "?") + "|" + key.split("|", 1)[-1]
         env = rep.get("env", "file")

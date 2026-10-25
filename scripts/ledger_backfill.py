@@ -37,7 +37,10 @@ import argparse
 import hashlib
 import os
 import re
+import subprocess
 import tempfile
+
+from preflight_check import wnum_commit_index  # W956/P-43-01：提交识别判据单源（复用 preflight 同一函数）
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LEDGER_REL = "docs/00-导读/W批次编号对账表.md"
@@ -46,6 +49,36 @@ LEDGER = os.path.join(ROOT, LEDGER_REL)
 RE_W_ROW = re.compile(r"^\|\s*W(\d{3})\s*\|")
 RE_STATUS_CELL = re.compile(r"^(?:已收官|已闭环|在途|进行中|未复核)")
 PLACEHOLDER_HASH = "—（待回填）"
+
+SYSTEM_GIT = r"C:\Program Files\Git\bin\git.exe"
+
+
+def _git_bin():
+    """与 preflight_check 同口径：Windows 优先系统 Git，其余回退 PATH。"""
+    return SYSTEM_GIT if os.path.exists(SYSTEM_GIT) else "git"
+
+
+def git_commit_index():
+    """git log --all（%h %s）→ wnum_commit_index 索引；git 不可用抛 RuntimeError。"""
+    git = _git_bin()
+    r = subprocess.run([git, "log", "--all", "--format=%h %s"],
+                       capture_output=True, text=True, encoding="utf-8",
+                       errors="replace", timeout=120)
+    if r.returncode != 0:
+        raise RuntimeError("git log 失败（rc=%s）：%s" % (r.returncode, (r.stderr or "").strip()[:120]))
+    return wnum_commit_index(r.stdout.splitlines())
+
+
+def compose_git_status(w, index):
+    """P-43-01 后半：由提交索引合成收官状态文本（不再人工手写「已收官（hash…）」）。
+
+    返回 None = 该 W 号在 git 无批次标签提交——**不能**反填收官状态（可能仍在途·判红不走此路）。
+    """
+    rec = index.get(w)
+    if not rec:
+        return None
+    count, first = rec
+    return "**已收官**（%s·git 反填·共 %d 笔·P-43-01）" % (first, count)
 
 
 def fingerprint(text: str) -> str:
@@ -125,16 +158,32 @@ def cmd_backfill(args, path: str) -> int:
         return 1
 
     changes = []
-    if args.hash is not None:
-        changes.append(("hash", loc["hash"], args.hash))
-    if args.cascade is not None:
-        changes.append(("cascade", loc["cascade"], args.cascade))
-    if args.status is not None:
-        changes.append(("status", loc["status"], args.status))
+    if args.from_git:
+        # P-43-01 后半：状态/hash 由 git 反填（机器事实源·人工不再手写「已收官（hash…）」）。
+        # 显式 --hash/--status 仍可覆盖（机器反填是默认值不是强制值）。
+        idx = git_commit_index()
+        auto_status = compose_git_status(args.w, idx)
+        if auto_status is None:
+            print("FAIL  W%03d 在 git 无批次标签提交（type(w###): 形态）——不能反填收官状态"
+                  "（批次可能仍在途·先落库再回填）" % args.w)
+            return 1
+        if args.status is None:
+            args.status = auto_status
+            changes.append(("status", loc["status"], args.status))
+        if args.hash is None:
+            args.hash = idx[args.w][1]
+            changes.append(("hash", loc["hash"], args.hash))
+    else:
+        if args.hash is not None:
+            changes.append(("hash", loc["hash"], args.hash))
+        if args.cascade is not None:
+            changes.append(("cascade", loc["cascade"], args.cascade))
+        if args.status is not None:
+            changes.append(("status", loc["status"], args.status))
     if args.touches is not None:
         changes.append(("touches", loc["touches"], args.touches))
     if not changes:
-        print("FAIL  未指定任何要改的列（--hash/--cascade/--status/--touches）")
+        print("FAIL  未指定任何要改的列（--hash/--cascade/--status/--touches/--from-git）")
         return 1
 
     new_cells = list(cells)
@@ -199,7 +248,7 @@ def _self_test() -> int:
     # 正例 1：回填 hash + 状态 → 成功、指纹变化
     rc = cmd_backfill(argparse.Namespace(w=930, hash="abc1234", cascade=None,
                                         status="**已收官**（abc1234·全绿）", touches=None,
-                                        expect=None, verify=None, dry_run=True),
+                                        expect=None, verify=None, dry_run=True, from_git=False),
                       path)
     if rc != 0:
         fails.append("正例1 回填干跑应成功")
@@ -208,28 +257,41 @@ def _self_test() -> int:
     idx = find_row(lines, 930)
     new_fp = fingerprint(lines[idx])
     rc = cmd_backfill(argparse.Namespace(w=930, hash=None, cascade=None, status=None,
-                                        touches=None, expect=None, verify=new_fp, dry_run=False),
+                                        touches=None, expect=None, verify=new_fp, dry_run=False,
+                                        from_git=False),
                       path)
     if rc != 0:
         fails.append("正例2 指纹复核应通过")
     # 负例 1：--verify 旧指纹（行已变）→ 必须红
     rc = cmd_backfill(argparse.Namespace(w=930, hash=None, cascade=None, status=None,
-                                        touches=None, expect=None, verify="deadbeef0000", dry_run=False),
+                                        touches=None, expect=None, verify="deadbeef0000", dry_run=False,
+                                        from_git=False),
                       path)
     if rc == 0:
         fails.append("负例1 陈旧指纹必须判红")
     # 负例 2：--expect 基线不符 → 必须红
     rc = cmd_backfill(argparse.Namespace(w=930, hash="zzz", cascade=None, status=None,
-                                        touches=None, expect="deadbeef0000", verify=None, dry_run=False),
+                                        touches=None, expect="deadbeef0000", verify=None, dry_run=False,
+                                        from_git=False),
                       path)
     if rc == 0:
         fails.append("负例2 基线指纹不符必须判红")
     # 负例 3：不存在的 W 号 → 必须红
     rc = cmd_backfill(argparse.Namespace(w=777, hash="zzz", cascade=None, status=None,
-                                        touches=None, expect=None, verify=None, dry_run=False),
+                                        touches=None, expect=None, verify=None, dry_run=False,
+                                        from_git=False),
                       path)
     if rc == 0:
         fails.append("负例3 行不存在必须判红")
+    # W956/P-43-01：compose_git_status 纯函数（正例绿 + 无提交负例 None）
+    _idx = wnum_commit_index(["d093bf64 docs(w955): GSAP 计划子批", "e5b262e7 docs(w884): 审计落盘",
+                             "92175003 chore(w884): 收官回填"])
+    if compose_git_status(884, _idx) != "**已收官**（e5b262e7·git 反填·共 2 笔·P-43-01）":
+        fails.append("compose_git_status 正例应合成 2 笔收官文本")
+    if compose_git_status(777, _idx) is not None:
+        fails.append("compose_git_status 无提交号必须返回 None（不可反填）")
+    if wnum_commit_index(["chore: 提及 W940 教训但不带批次标签"]):
+        fails.append("散文提及 W 号（无 type(w###): 标签）不得计入提交索引")
     # 正例 3：追加认领行（纯追加）
     rc = cmd_append_claim(argparse.Namespace(w=931, desc="机制批", session="主会话", touches="x.py"),
                            path)
@@ -245,7 +307,7 @@ def _self_test() -> int:
     if fails:
         print("自测 %d 项不一致：%s" % (len(fails), fails))
         return 1
-    print("自测通过：3 正例绿 + 4 负例红（判据可证伪）")
+    print("自测通过：3 正例绿 + 4 负例红 + git 反填纯函数 3 例（判据可证伪）")
     return 0
 
 
@@ -255,6 +317,9 @@ def main() -> int:
     ap.add_argument("--hash", default=None, help="回填：提交 hash 列")
     ap.add_argument("--cascade", default=None, help="回填：级联 hash 列")
     ap.add_argument("--status", default=None, help="回填：状态列（须以「已收官/已闭环」开头才算收官）")
+    ap.add_argument("--from-git", action="store_true",
+                    help="P-43-01：状态/hash 由 git 反填（读该 W 号的 type(w###): 批次标签提交·"
+                         "自动生成「已收官（首笔hash·git 反填·共 N 笔）」）；显式 --hash/--status 可覆盖")
     ap.add_argument("--touches", default=None, help="回填：touches 列")
     ap.add_argument("--expect", default=None, help="基线指纹断言：与当前行指纹不符则拒绝改写")
     ap.add_argument("--verify", default=None, help="提交前复核：当前行指纹是否等于给定值")

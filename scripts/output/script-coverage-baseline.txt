@@ -38,3 +38,7 @@ sync_data_json.py  # ③发布链·数据同步
 verify_chapters.py  # ①分回校验
 verify_v2_pages.js  # ④V2 页面检查
 worktree_rehearse.py  # ②worktree 预演
+# W956 补登记：W941-W950 图标治理族的两支独立门禁（带 argv 契约·批收尾会话直跑·未挂 verify 槽）
+# 佐证：check_emoji_icons.py 自带正负样本运行形态；check_icon_fields.py 同族；登记类别=②会话直接执行类
+check_emoji_icons.py  # ②批收尾会话直跑门禁（UI 图标位 emoji 残留·W941-W950 族·W956 补登记）
+check_icon_fields.py  # ②批收尾会话直跑门禁（图标资产字段完整性·W949 族·W956 补登记）

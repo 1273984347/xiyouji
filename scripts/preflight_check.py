@@ -7,7 +7,9 @@
   2. origin/main 顶部 —— 提交哈希 + 标题（供撞号判定）
   3. 对账表取号 —— 已认领最大 W 号 + 现势下一自由号（二者不衔接时告警）
   4. touches 在途盘点 + 交集拒绝 —— W739 建：在途批次 touches 列盘点；
-     传 --touches 声明本批手工共享面，与在途批次有交集 → FAIL（拒绝并行·等对方收官）
+     传 --touches 声明本批手工共享面，与在途批次有交集 → FAIL（拒绝并行·等对方收官）；
+     W956 起（P-43-01）「在途」加 git 条件：台账标在途而 git 已有该 W 提交 = 登记滞后，
+     告警不拒绝（并发保护不再被自身历史欠账卡死——W954 开工 8 条 FAIL 实证）
   5. 工作树态 —— staged / 未暂存 / 未跟踪 简表
   6. 环境 —— 仓库根校验 + python/pytest/ruff 可用性
 
@@ -240,8 +242,58 @@ def is_inflight(status):
     任何强调/空白变体都不影响判定（回归形态见 test_inflight_with_bold_status 族）。
     W681 式「进行中（剩余=真端点联调待用户三键）」判在途——但其 touches 为空（历史行），
     空集与任何清单交集为空，天然不挡路（旧在途批次无害化）。
+
+    W956 起（P-43-01）本函数只答「登记面语义」；**是否参与 touches 交集拒绝**由
+    main() 里的 git 条件二分（split_inflight_lagged）裁定——登记面说在途而 git 已有
+    该 W 提交的行是「登记滞后」，告警不拒绝（W954 实证：8 个陈旧在途行曾把开工恒红卡死）。
     """
     return not re.sub(r"[\s*]+", "", status).startswith(DONE_PREFIXES)
+
+
+# W956（P-43-01·WF-08-a）：登记面自愈——「在途」判定加 git 条件。
+# 病根（W954 复盘报告 FAM-40 实证）：台账状态列是**声明**不是事实源——8 个陈旧「在途」
+# 批次（实为 7 批已落库 + 1 批已停止）的 touches 与新批次交集非空 ⇒ preflight 被**自身的
+# 历史欠账**恒红拒绝（并发保护被欠账卡死·本系列第一次开工即 8 条 FAIL）。
+# 修法：参与交集拒绝的「在途」须同时满足「台账标在途 AND git 无该 W 提交」；
+# 台账标在途但 git 已有提交 ⇒ **登记滞后**——告警不拒绝（不改退出码语义），
+# 由该批自己按收官流程回填状态列（ledger_backfill.py --from-git 支持脚本反填）。
+# 口径：git 提交识别只认 subject 的批次标签形态 ``type(w###):``（仓内提交信息统一形态·
+# 大小写不敏感）——正文/散文里提及别批号（「承接 W###」「W### 教训」）**不计**，
+# 防止引用性提及误降真在途批次的 touches 防护。
+_RE_COMMIT_TAG = re.compile(r"\((w\d{3})\)", re.IGNORECASE)
+
+
+def wnum_commit_index(subjects):
+    """git log ``%h %s`` 行列表 → {W 号(int): [提交数, 首笔短 hash]}。
+
+    只认 subject 内批次标签 ``type(w###):`` 形态（见 _RE_COMMIT_TAG 注释·防散文引用误计）；
+    一笔提交含多个批次标签时各号各计一笔（跨批提交对每个被标签批次都是事实存在）。
+    """
+    idx = {}
+    for line in subjects or []:
+        m = _RE_COMMIT_TAG.search(line)
+        if not m:
+            continue
+        rec = idx.setdefault(int(m.group(1)[1:]), [0, ""])
+        rec[0] += 1
+        if not rec[1]:
+            rec[1] = line.split(" ", 1)[0]  # 首列 = %h 短 hash
+    return idx
+
+
+def split_inflight_lagged(inflight_all, committed, self_num=None):
+    """登记面在途行二分为 (真在途, 登记滞后)——P-43-01 纯函数形态（供单测直接断言）。
+
+    committed = wnum_commit_index 产物；self 行永不入 lagged（自己的在途行在主流程里
+    本就排除出交集检查，lagged 告警只指向**他方**陈旧行）。
+    """
+    truly, lagged = [], []
+    for r in inflight_all:
+        if r["w"] != self_num and r["w"] in committed:
+            lagged.append(r)
+        else:
+            truly.append(r)
+    return truly, lagged
 
 
 def touches_conflict(inflight_touches, mine):
@@ -423,15 +475,27 @@ def main():
               "提交时**勿整文件 git add**（会把他方在途行代提交）："
               "用 git update-index --cacheinfo 精确暂存本批行，或用 scripts/ledger_backfill.py 回填")
 
-    # 3.5) touches 在途盘点 + 交集拒绝（W739）
+    # 3.5) touches 在途盘点 + 交集拒绝（W739）+ git 条件二分（W956·P-43-01）
     self_norm = args.self_w.strip().lstrip("Ww")
     self_num = int(self_norm) if self_norm.isdigit() else None
     inflight_all = [r for r in ledger.get("rows", []) if is_inflight(r["status"]) and r["touches"]]
-    inflight = [r for r in inflight_all if self_num is None or r["w"] != self_num]
+    _r_log = run([git, "log", "--all", "--format=%h %s"])
+    if _r_log.returncode == 0 and _r_log.stdout.strip():
+        committed = wnum_commit_index(_r_log.stdout.splitlines())
+    else:
+        committed = {}
+        print("WARN  git 提交面读取失败（rc=%s）——登记滞后判定退化：全部按真在途从严保护" % _r_log.returncode)
+    inflight, lagged = split_inflight_lagged(inflight_all, committed, self_num)
+    for lr in lagged:
+        _n, _first = committed[lr["w"]]
+        print(f"WARN  登记滞后 W{lr['w']}：台账标在途·git 已有 {_n} 笔提交（首笔 {_first}）——"
+              "不计入在途拒绝（P-43-01·告警不拒绝）·请按收官流程回填状态列"
+              "（ledger_backfill.py --from-git 可脚本反填）")
     if inflight_all:
         for r in inflight_all:
             print(f"NOTE  在途批次 W{r['w']} touches：{', '.join(sorted(r['touches']))}"
-                  + ("（本批自己·交集检查已排除）" if r["w"] == self_num else ""))
+                  + ("（本批自己·交集检查已排除）" if r["w"] == self_num else "")
+                  + ("（登记滞后·已退出拒绝集）" if any(lr is r for lr in lagged) else ""))
     else:
         print("OK    touches：无在途批次声明 touches（级联面由 batch_cascade 单写路径保护·无需声明）")
     if args.touches:
@@ -483,6 +547,17 @@ def main():
         print(("OK    " if env_ok else "WARN  ") + line)
     if not env_ok:
         problems.append("环境缺件（pytest/ruff）")
+
+    # 5.5) 复盘触发器提示位（W956·P-43-02）：只提示不拦截（W822「只输出提示行·不改任何
+    # 判定与退出码」语义）——触发清单由 scripts/check_review_trigger.py 产出；提示位故障
+    # 降级为 WARN 不阻断开工，但**禁静默跳过**（必须留下不可用痕迹）。
+    try:
+        import check_review_trigger as _crt
+
+        for _line in _crt.notice_lines(git):
+            print(("WARN  " if _line.startswith("⚠") else "NOTE  ") + _line)
+    except Exception as _exc:  # noqa: BLE001 — 提示位兜底（W822 语义）
+        print(f"WARN  复盘触发器不可用（{_exc}）——本回合跳过复盘周期提示")
 
     print("== 结论 ==")
     if problems:

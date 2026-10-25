@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（382）
+## 文件（393）
 
 ### Markdown 文档
 
@@ -267,6 +267,16 @@
 - `_w953_prep_raws3.py`
 - `_w953_update_readme.py`
 - `_w953_zoom.py`
+- `_w954_closeout.py`
+- `_w954_fileindex_backfill.py`
+- `_w954_ledger_backfill.py`
+- `_w954_register_surfaces.py`
+- `_w954_review_evidence.py`
+- `_w954_selfcheck.py`
+- `_w954_version_sync.py`
+- `_w955_ledger_claim.py`
+- `_w955_motion_audit.py`
+- `_w955_version_sync.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
@@ -316,6 +326,7 @@
 - `check_page_admission.py`
 - `check_perf_shadow.py`
 - `check_plan_template.py`
+- `check_review_trigger.py`
 - `check_script_coverage.py`
 - `check_search_index_fresh.py`
 - `check_seo_head.py`
