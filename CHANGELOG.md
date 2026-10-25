@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W956），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W957），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,22 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W957（2026-10-26）：GSAP 动效体系引入批·施工批（公共动效载体 + 试点 5 页三类动效 + 机检）
+
+> **来源**：用户 2026-10-26 携 GSAP Skills 插件发起「滚动叙事 / 入场编排 / 微交互 / 现有动画体检」四类全都要 → 问卷裁定载体 = `site/` 静态站、交付 = 先出计划再施工 → W955 出计划 → 用户令「开工」→ W957 施工。
+>
+> - **文件**：site/static/js/motion-gsap.js、site/static/js/gsap.min.js、site/static/js/ScrollTrigger.min.js、site/index.html、site/reader/ch007.html、site/reader/themes/西游与死亡研究专题.html、site/reader/people/黄风怪外传.html、site/reader/people/白骨精.html、scripts/_w956_pilot_pick.py、scripts/_w957_wire_pilot.py、scripts/_w957_motion_probe.py、scripts/check_gsap_motion.py、scripts/_w957_ledger_claim.py、docs/11-方案报告/计划方案/T28-任务计划执行与经验沉淀报告-2026-10-26.md
+
+**让号留痕**：W956 已被并行会话「登记面治理批」（`5b1d3e38`）占用并收官 ⇒ 本批按「先落地者保留」让号至 **W957**（preflight 取号 = max+1 = 957 · 无撞号 · touches 无交集）。
+
+**落地四件**：① **公共动效载体** `site/static/js/motion-gsap.js`（GSAP 3.12.5 两文件外链 vendored·72,214 + 43,380 = 115,594 B·**不内联**：内联方案 857 页约 99.1 MB）；② **试点页机选**——`_w956_pilot_pick.py` 按三条规则扫 **527** 候选 → 入选 5 页（首页 + 回目正文 + 专题 + 人物×2·覆盖四类页型），单页增量 **187 / 199 / 208 / 208 / 208 B**（合计 +1,010 B）；③ **三类动效**——入场编排（首页首屏 8 元素 Timeline）/ 滚动叙事（分节单元批量进场·**非视差**：DESIGN §5 禁止清单）/ 微交互（折叠块展开编排）；④ **写法机检**——独立脚本 `check_gsap_motion.py`（8 项判据 + 自测 8/8；**不改管控文件**，挂槽待用户批准）。
+
+**实测**：浏览器实跑 **30 组**（5 页 × 3 视口 × 2 动效偏好态）**0 FAIL**（RM 态载体执行数 = 0 · ScrollTrigger 实例 = 0 · 编排单元残留初始态 = 0）；pageerror = 0；CSP 856 页 0 漂移；禁词基线 0 命中。
+
+**三条自纠**：探针 RM 判据改用「载体自报执行数」（GSAP 全局时间轴恒含库自身 tween ⇒ 原口径恒红）；站内 RAG 请求环境类 error 归 NOTE；机检自测抓出自身两处盲区（时长表 / 缓动常量表形态）并补判据。
+
+**状态**：**已收官**（施工批完成；**推广批与门禁挂载待用户裁决**——Q-01 机检挂槽、Q-02 推广范围）
 
 ### W956（2026-10-26）：登记面治理批（W954 复盘报告 P-43 五项落地）
 

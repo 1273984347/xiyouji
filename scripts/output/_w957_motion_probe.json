@@ -1,0 +1,564 @@
+{
+  "batch": "W957",
+  "generated_by": "scripts/_w957_motion_probe.py",
+  "captured_at": "2026-10-26T03:38:17",
+  "pages": [
+    "index.html",
+    "reader/ch007.html",
+    "reader/themes/西游与死亡研究专题.html",
+    "reader/people/黄风怪外传.html",
+    "reader/people/白骨精.html"
+  ],
+  "viewports": [
+    "375x812",
+    "768x1024",
+    "1440x900"
+  ],
+  "modes": [
+    [
+      "full",
+      "no-preference"
+    ],
+    [
+      "reduce",
+      "reduce"
+    ]
+  ],
+  "results": [
+    {
+      "page": "index.html",
+      "mode": "full",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [
+        "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+        "Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))"
+      ],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": "1",
+        "units": 8,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/ch007.html",
+      "mode": "full",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 2,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 8,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes/西游与死亡研究专题.html",
+      "mode": "full",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 1,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 12,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/黄风怪外传.html",
+      "mode": "full",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 11,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/白骨精.html",
+      "mode": "full",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 1,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 6,
+        "stuck": []
+      }
+    },
+    {
+      "page": "index.html",
+      "mode": "full",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [
+        "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+        "Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))"
+      ],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": "1",
+        "units": 8,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/ch007.html",
+      "mode": "full",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 2,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 8,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes/西游与死亡研究专题.html",
+      "mode": "full",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 2,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 12,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/黄风怪外传.html",
+      "mode": "full",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 1,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 11,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/白骨精.html",
+      "mode": "full",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 1,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 6,
+        "stuck": []
+      }
+    },
+    {
+      "page": "index.html",
+      "mode": "full",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [
+        "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+        "Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))"
+      ],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": "1",
+        "units": 8,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/ch007.html",
+      "mode": "full",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 2,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 8,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes/西游与死亡研究专题.html",
+      "mode": "full",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 2,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 12,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/黄风怪外传.html",
+      "mode": "full",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 11,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/白骨精.html",
+      "mode": "full",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 1,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 6,
+        "stuck": []
+      }
+    },
+    {
+      "page": "index.html",
+      "mode": "reduce",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [
+        "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+      ],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": "1",
+        "units": 8,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/ch007.html",
+      "mode": "reduce",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 8,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes/西游与死亡研究专题.html",
+      "mode": "reduce",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 12,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/黄风怪外传.html",
+      "mode": "reduce",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 11,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/白骨精.html",
+      "mode": "reduce",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 6,
+        "stuck": []
+      }
+    },
+    {
+      "page": "index.html",
+      "mode": "reduce",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [
+        "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+      ],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": "1",
+        "units": 8,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/ch007.html",
+      "mode": "reduce",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 8,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes/西游与死亡研究专题.html",
+      "mode": "reduce",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 12,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/黄风怪外传.html",
+      "mode": "reduce",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 11,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/白骨精.html",
+      "mode": "reduce",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 6,
+        "stuck": []
+      }
+    },
+    {
+      "page": "index.html",
+      "mode": "reduce",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [
+        "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+      ],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": "1",
+        "units": 8,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/ch007.html",
+      "mode": "reduce",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 8,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes/西游与死亡研究专题.html",
+      "mode": "reduce",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 12,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/黄风怪外传.html",
+      "mode": "reduce",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 11,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/白骨精.html",
+      "mode": "reduce",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 6,
+        "stuck": []
+      }
+    }
+  ],
+  "fails": [],
+  "rag_env_notes": [
+    "index.html [full 375x812]：rag_env_error×2",
+    "index.html [full 768x1024]：rag_env_error×2",
+    "index.html [full 1440x900]：rag_env_error×2",
+    "index.html [reduce 375x812]：rag_env_error×1",
+    "index.html [reduce 768x1024]：rag_env_error×1",
+    "index.html [reduce 1440x900]：rag_env_error×1"
+  ],
+  "verdict": "PASS"
+}
