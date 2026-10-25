@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W946），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W947），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,25 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W947（2026-10-25）：图标治理复验与补治批（用户追问「你确定现在已经做完图标了吗」→ 三路全量复验 + 补治两处遗漏范围 + 更正一处误判）
+
+> **来源**：用户 2026-10-25 追问「你确定现在已经做完图标了吗」⇒ 全量复验（本批起因）。
+> 承接 W941（UI 图标位 emoji 归零 + 通用图标集 27 枚）与 W946（描边参数修复 + 时间线专属图标 16 枚 + 第 50 门禁）。
+
+> - **文件**：scripts/_w947_add_icons.py（通用图标集补 2 枚）、scripts/_w939_gen_icons.py（并入 note / link）、site/static/icons/ui/note.svg、site/static/icons/ui/link.svg、site/static/js/rag-chat.js（🔗 前缀 → 内联 SVG）、xiyouji-agent-web/src/components/UiIcons.tsx（新建·内联 SVG 图标组件）、xiyouji-agent-web/src/components/PermissionDialog.tsx（⚠️ 📝 → 组件）、xiyouji-agent-web/src/components/InlinePermissionCard.tsx（⚠️ → 组件）、scripts/check_emoji_icons.py（标题改号）、docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、CITATION.cff。
+
+**三路全量复验**：① 静态口径（基准扫描器·UI 图标位）**0 命中**；② 全仓兜底 grep 剩余 **559 处 / 58 种**，逐类判定为**内容语义**（✅156 正文结论标记 / ✓200 判定文本 / 人物头像 20 / 勋章奖牌 / ⚡12 / 国旗 / 图表符号）⇒ 按用户裁决保留；③ 渲染实测（8 页 × `file://` + `http://` 双环境 + **像素级取证**）。
+
+**补治两处此前遗漏的范围**：**agent-web React 组件**（PermissionDialog 的 ⚠️📝、InlinePermissionCard 的 ⚠️）与**共享 JS**（rag-chat.js 的 🔗）共 **4 处界面图标位**。该应用已有成熟 TDesign 图标体系，但 `@tdesign-icons-react` **依赖未安装** ⇒ 无法验证未用过的图标名 ⇒ 改为新建 `UiIcons.tsx`（内联 SVG·图形与静态站资产逐字同源·零新增依赖·颜色跟随 `currentColor`）；通用图标集补 **2 枚**（`note` 折角纸页 / `link` 双环链条）⇒ 27 → **29 枚**。
+
+**保留并登记**：useChat.ts 与 rag-chat.js 错误消息文本内的 ⚠️ 共 **7 处**——它们随消息流输出、可复制、会被读屏朗读 ⇒ 属**语义标记**而非界面图标位 ⇒ 按「仅 UI 图标位」裁决保留。
+
+**更正上批一处误判（像素级取证推翻）**：上批据控制台 CORS 报错推断「CSS `content` 位的 22 处图标在 `file://` 下不显示、线上正常」，本批像素取证（mask 宿主左上角 30×26 区域深色像素计数，file:// 与 http:// 同位比较：`data/concept-device.html` 17 vs 20、`data/game-webnovel.html` 18 vs 22）证明**两环境均真实绘制** ⇒ 该结论作废，「22 处改内联 SVG」从缺陷修复项**降级为可选优化**。教训：**报错文本 ≠ 渲染结果**，渲染正确性判据必须做像素级取证。
+
+**经验补充 3 条**：E-13「报错文本不等于渲染结果」· E-14「扫过某个目录不等于覆盖那个目录」（治理范围须按**产物类型**枚举：静态页 / 共享 JS / React 组件）· E-15「用户追问『做完了吗』是最有效的自查触发器」。
+
+**共享面纪律（采纳并行 W945 会话书面建议）**：本批提交用**显式 pathspec 只列自己批的文件**，不再用宽 pathspec——同仓有在途批次时宽 pathspec 会把他人在途件一并提交（W946 的 `ed09a65e` / `923afc4c` 即因此代提交了 W945 的题图资产与脚本，已由该会话收官并留痕）。
 
 ### W946（2026-10-25）：图标治理续作批（.ico 描边参数修复 + 时间线专属图标 16 枚 + 第 50 门禁「UI 图标位零残留 · 图标渲染正确性」）
 
