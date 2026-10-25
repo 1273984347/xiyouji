@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（306）
+## 文件（308）
 
 ### Markdown 文档
 
@@ -194,6 +194,8 @@
 - `_w931_hero_verify.py`
 - `_w931_sync_stats_marks.py`
 - `_w933_mutation_test.py`
+- `_w936_cascade.py`
+- `_w936_insert_plates.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`

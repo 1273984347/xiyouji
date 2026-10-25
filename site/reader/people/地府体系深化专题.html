@@ -84,6 +84,10 @@
   .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
     border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
   .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
+  /* W935：专题题图（浓墨无字视觉·沿用章回页 chapter-plate 范式·浅底宣纸图暗色模式隐藏） */
+  .chapter-plate { margin: 28px auto 36px; max-width: 420px; }
+  .chapter-plate img { width: 100%; height: auto; display: block; opacity: .92; }
+  html[data-theme="dark"] .chapter-plate { display: none; }
 </style>
 </head>
 <body>
@@ -108,6 +112,9 @@
   <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>地府体系深化专题</h1>
+<figure class="chapter-plate">
+<img src="../../static/images/plate-mingfu-panwang.webp" alt="冥府判官队列的浓墨剪影：黑帽判官执生死簿列队而下" loading="lazy" decoding="async">
+</figure>
 <blockquote>
 <p>W148·A3 方向第 8 个深化专题
 基于人物四.txt 素材

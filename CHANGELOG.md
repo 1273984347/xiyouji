@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W935），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W936），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,21 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W936（2026-10-25）：首屏图集接入 + 专题题图落位（线描 9 张轮播 · 浓墨 5 张题图）
+
+> **来源**：用户 2026-10-25 令「帮我做几张素材图」——素材本体已由 W931 交付（8 张线描 Hero 横幅）；本批做**接入层**：把 W931 线描 8 张接成首页 9 张图集轮播（末位为 W932 持瓶菩萨作收尾重音），并把 W932 浓墨 5 张按站内 `chapter-plate` 范式插入 5 个专题页。
+
+> - **文件**：site/index.html、site/reader/people/地府体系深化专题.html、site/reader/people/紧箍儿的内侧-器物传记.html、site/reader/themes/取经地理学专题.html、site/reader/people/四海龙王外传.html、site/reader/themes/西游与死亡研究专题.html、site/static/images/hero-line-01~08.webp、site/static/images/plate-mingfu-panwang.webp、plate-jingu-jingangchui.webp、plate-wujingshan-liangjie.webp、plate-donghai-longgong.webp、plate-liudao-lunhui.webp、scripts/_w936_insert_plates.py、scripts/_w936_cascade.py
+
+**两套素材分层用（容器实测，非主观）**：首页 masthead 为 1440×520 容器、左侧 46% 是 640px 宽标题区——W931 线描该区墨量 **0.0000**（8/8 张，裁切后仍 100% 纯纸色），W932 浓墨均值 **0.1772**（最高 0.4825 · 五行山）⇒ 浓墨压字；纵横比上 2.36:1 垂直溢出 90px 而 16:9 为 290px（16:9 素材主体会被裁没）⇒ **首页 = 线描 9 张，内页无字视觉 = 浓墨 5 张**。
+
+**轮播实现约束**：D4 动效禁令禁 CSS 无限循环动画 ⇒ 改 JS 定时切换（6s）；WCAG 2.2.2 暂停机制（悬停 / 焦点在图集内 / 页面不可见均停）；`prefers-reduced-motion` 下不自动播放（仍可手动点选）；9 个切换按钮静态写入 HTML（`aria-label` + `aria-pressed`），JS 不可用时整组 `hidden`，不留死控件。右侧「100 回」数字区加纸色渐变底——浏览器实测九环锡杖竖杆直穿「100」，渐变使主体进入数字区时自然隐去。
+
+**内页题图**：沿用章回页 `chapter-plate` 范式（420px 居中题图 + 浅底宣纸图在暗色模式隐藏，避免贴深底成亮斑），题图带描述性 `alt`（区别于章回装饰图的空 alt）。
+
+> - **验证**：浏览器实测首页轮播（点击第 5 张 → 背景同步切换 + `aria-pressed` 跟随 + 6s 自动推进）与内页题图渲染；全量门禁 54 段 0 FAIL；CSP 861 个内联脚本哈希零漂移；W 号跳号（W935 在途）已留台账行
+> - **状态**：在途（接入完成·认领登记 W936·待提交入库）
 
 ### W935（2026-10-25）：速赢两处批（R-05 渡口正文溯源去工程化 + R-12 英文站目录死链消除）
 
