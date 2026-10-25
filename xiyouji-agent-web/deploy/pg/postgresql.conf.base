@@ -1,0 +1,137 @@
+# ==============================================================================
+# postgresql.conf.base — PostgreSQL 16 部署基线（xiyouji 架构方案 v2 · D-1 批）
+# ==============================================================================
+# 用途：私有化部署的服务端存储基线。自建单机，不上托管。
+# 来源：docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md
+#       §7.2 容量测算（DAU 3,000–10,000 · 峰值读 QPS ≤ 50 · 峰值写 QPS ≤ 1）
+#       §9.4 备份与恢复（PG 数据目录进备份集合 · RTO ≤ 30 min · RPO ≤ 5 min）
+#       §12.4 加密口径（服务端 ↔ PG 必须 TLS）
+#
+# 用法（目标机）：
+#   1) 改写本文件中的 @@ 占位符（部署期注入，禁止把口令写进本文件）
+#   2) cp postgresql.conf.base "$PGDATA/postgresql.conf"
+#   3) pg_ctl reload   （改归档/日志类参数）
+#      pg_ctl restart  （改监听/内存/SSL 类参数）
+#
+# 纪律：
+#   - 本文件是**基线**不是现役配置：真实生效值以 $PGDATA/postgresql.conf 为准。
+#   - 口令 / 私钥**禁写本文件**（见 pg_hba.conf.base 与 §12.4 密钥管理）。
+#   - 改本文件后必须重跑：python bin/verify-baseline.py（CI 同轨）。
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 连接与监听
+# ------------------------------------------------------------------------------
+# 只监听内网地址：127.0.0.1（本地运维）+ 内网网段（应用层）。
+# 禁 listen_addresses = '*'（私有化部署不暴露到公网/办公网）。
+listen_addresses = '127.0.0.1,@@INTERNAL_CIDR@@'
+port = 5432
+
+# 最大连接数：应用层 Node 进程池 + 运维 + 迁移脚本余量。
+# 上限按 §7.2 测算留一个数量级余量；PG 自身连接上限受 OS fd 限制，
+# 故 app 层连接池必须小于此值（见 §10.2 应用层 2 副本 × 池 20 = 40 连接）。
+max_connections = 200
+
+# 超级用户保留连接：迁移/备份脚本需要单独保留通道，不能被业务连接占满。
+superuser_reserved_connections = 3
+
+# ------------------------------------------------------------------------------
+# WAL 与归档（备份与 PITR 的地基 · RPO ≤ 5 min 由此保障）
+# ------------------------------------------------------------------------------
+wal_level = replica
+fsync = on                 # 提交必须落盘（关掉 = 崩溃丢已确认事务）
+synchronous_commit = on    # 同步提交（等保向：不接受「已确认但未落盘」）
+full_page_writes = on      # 大页写全页，防断电后页撕裂
+wal_compression = on
+wal_buffers = 16MB
+checkpoint_completion_target = 0.9   # 平滑检查点，减少 IO 尖峰
+max_wal_size = 2GB
+min_wal_size = 1GB
+wal_keep_size = 2GB        # 保留 2GB WAL 供 PITR（不依赖归档也能短窗回退）
+
+# 归档：连续 WAL 归档到独立目录，是 PITR 的唯一来源。
+# 归档失败会**堆积 WAL**（不会丢数据，但会撑爆磁盘）⇒ 归档目录必须与数据目录
+# 分盘，且监控必须盯 archive 失败（见方案 §11.2 OBS-16 主库体量）。
+archive_mode = on
+archive_command = 'test ! -f @@PGDATA@@/backup_label && cp %p @@ARCHIVE_DIR@@/%f'
+archive_timeout = 300     # 5 分钟强制切换归档（≤ RPO 5 min）
+
+# 恢复目标：只恢复到崩溃前一致状态，不追求零损（一致性优先于完整性）。
+# 崩溃恢复目标由 archive_command 的 cp 语义保证：只复制完整写入的 WAL 段。
+restore_command = 'cp @@ARCHIVE_DIR@@/%f %p'
+
+# ------------------------------------------------------------------------------
+# 内存与并发（按 4C8G 机器规格）
+# ------------------------------------------------------------------------------
+shared_buffers = 2GB       # 约 25% 物理内存
+effective_cache_size = 5GB # 供查询规划器参考（≈ 共享缓冲 + OS 页缓存）
+work_mem = 16MB
+maintenance_work_mem = 512MB
+max_worker_processes = 4
+max_parallel_workers = 2
+max_parallel_workers_per_gather = 1   # 单机 4 核，避免并行抢 CPU
+
+# ------------------------------------------------------------------------------
+# 查询与事务行为
+# ------------------------------------------------------------------------------
+# 读已提交足够（会话读写无跨行一致性需求；§5.1 M08 不要求可串行化）。
+default_transaction_isolation = 'read committed'
+default_transaction_deferrable = off
+
+# 幂等迁移需要：同一事务内的 SAVEPOINT 行为正常，且 DDL 事务性可用。
+# （PG 的 DDL 本身是事务性的 ⇒ 迁移脚本可整段回滚，见 migrations/README.md）
+
+# 语句超时：防止单条慢查询占满连接（§11.5 SLO 问答首 token < 2 s 的上游保障）。
+statement_timeout = 30s
+idle_in_transaction_session_timeout = 60s
+
+# ------------------------------------------------------------------------------
+# 日志（审计面 §12.3 的技术前置：运行期事件须可回放）
+# ------------------------------------------------------------------------------
+logging_collector = on
+log_directory = 'log'                 # 相对 $PGDATA
+log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'
+log_rotation_age = 7d
+log_rotation_size = 100MB
+log_truncate_on_rotation = off
+log_min_duration_statement = 1000     # 慢查询（> 1s）落日志
+log_checkpoints = on
+log_connections = on
+log_disconnections = on
+log_lock_waits = on
+log_temp_files = 0                    # 临时文件记 0 字节级（等价 log_temp_files=0 表示记录所有）
+log_autovacuum_min_duration = 0
+
+# ------------------------------------------------------------------------------
+# SSL / TLS（§12.4：服务端 ↔ PG 必须 TLS）
+# ------------------------------------------------------------------------------
+ssl = on
+ssl_cert_file = '@@SSL_CERT@@'
+ssl_key_file = '@@SSL_KEY@@'
+ssl_ca_file = '@@SSL_CA@@'
+# 私钥口令禁写本文件 ⇒ 用文件权限保护（0600 + 属主 postgres）。
+ssl_min_protocol_version = 'TLSv1.2'
+
+# ------------------------------------------------------------------------------
+# 编码与本地化（中文语料 + 跨平台）
+# ------------------------------------------------------------------------------
+client_encoding = 'UTF8'
+server_encoding = 'UTF8'
+lc_messages = 'C'
+lc_monetary = 'C'
+lc_numeric = 'C'
+lc_time = 'C'
+default_text_search_config = 'pg_catalog.simple'
+
+# 不启用额外扩展：§7.1 S9 裁定「向量库不采纳（若将来启用优先 pgvector 而非独立服务）」，
+# 本基线**不预装** pgvector —— 启用时机由 §8.2 档 3 触发条件决定（YAGNI）。
+# shared_preload_libraries 保持默认，不预加载。
+
+# ------------------------------------------------------------------------------
+# 自动清理
+# ------------------------------------------------------------------------------
+autovacuum = on
+autovacuum_max_workers = 3
+autovacuum_naptime = 60s
+autovacuum_vacuum_scale_factor = 0.05
+autovacuum_analyze_scale_factor = 0.02

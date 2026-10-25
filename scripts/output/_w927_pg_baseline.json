@@ -1,0 +1,403 @@
+{
+  "total": 66,
+  "passed": 66,
+  "failed": 0,
+  "checks": [
+    {
+      "id": "C1",
+      "name": "配置 archive_mode（WAL 归档必须开启（PITR 的唯一来源））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置 wal_level（WAL 级别需 replica（支持归档与 PITR））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置 fsync（fsync 必须开（提交落盘））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置 synchronous_commit（同步提交（等保向：不接受已确认但未落盘））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置 full_page_writes（全页写（防断电页撕裂））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置 ssl（SSL 必须开（§12.4 服务端↔PG 必须 TLS））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置 ssl_min_protocol_version（TLS 下限 1.2）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置 listen_addresses（监听必须含回环且禁 '*'（私有化不暴露公网））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置 max_connections（必须显式设上限）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置 statement_timeout（必须设语句超时（防慢查询占满连接））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置 idle_in_transaction_session_timeout（必须设空闲事务超时）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置 log_min_duration_statement（必须开慢查询日志）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置 logging_collector（必须开日志收集（§12.3 审计面技术前置））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置 client_encoding（编码必须 UTF8（中文语料））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置 server_encoding（编码必须 UTF8（中文语料））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置禁项（禁 listen_addresses='*'（私有化禁暴露））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置禁项（禁 ssl=off（§12.4 必须 TLS））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置禁项（禁 fsync=off（会丢已确认事务））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置禁项（禁 synchronous_commit=off）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C1",
+      "name": "配置含 @@ 占位符（部署期注入·禁把口令写进文件）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C2",
+      "name": "认证禁项（禁全网段 trust（明文无认证））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C2",
+      "name": "认证禁项（禁 local all trust（本地也须身份校验））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C2",
+      "name": "认证禁项（禁明文口令认证（须 scram-sha-256））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C2",
+      "name": "认证必备（必须使用 scram-sha-256）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C2",
+      "name": "认证必备（必须有兜底 reject 规则）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C2",
+      "name": "认证必备（必须显式放行回环）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C2",
+      "name": "认证文件不含明文口令赋值",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "initdb-bootstrap.sh 禁危险操作（禁 DROP DATABASE（脚本只增不删））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "initdb-bootstrap.sh 禁危险操作（禁 DROP SCHEMA（脚本只增不删））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "initdb-bootstrap.sh 禁危险操作（禁 TRUNCATE（会毁数据且不可回滚））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "initdb-bootstrap.sh 禁危险操作（禁 rm -rf PGDATA）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "initdb-bootstrap.sh 禁危险操作（禁对备份根目录整体 rm -rf（轮转须逐份删））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "initdb-bootstrap.sh 禁危险操作（禁以文件拷贝做备份（会丢 WAL 中未 checkpoint 的提交））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "initdb-bootstrap.sh 必备安全项（必须幂等（IF NOT EXISTS / 先查后建））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "initdb-bootstrap.sh 必备安全项（必须校验 PG 版本（方案裁定 PG 16））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "initdb-bootstrap.sh 必备安全项（必须收紧只读角色权限（最小权限））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "initdb-bootstrap.sh 语法检查（bash -n）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "initdb-bootstrap.sh 开启严格模式（set -euo pipefail）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "backup.sh 禁危险操作（禁 DROP DATABASE（脚本只增不删））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "backup.sh 禁危险操作（禁 DROP SCHEMA（脚本只增不删））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "backup.sh 禁危险操作（禁 TRUNCATE（会毁数据且不可回滚））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "backup.sh 禁危险操作（禁 rm -rf PGDATA）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "backup.sh 禁危险操作（禁对备份根目录整体 rm -rf（轮转须逐份删））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "backup.sh 禁危险操作（禁以文件拷贝做备份（会丢 WAL 中未 checkpoint 的提交））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "backup.sh 必备安全项（必须真的调用 pg_basebackup -D（不是只在注释里提））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "backup.sh 必备安全项（备份必须走 pg_basebackup（禁文件拷贝做备份））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "backup.sh 必备安全项（必须有 backup_label 空壳备份自检（实际守卫语句））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "backup.sh 必备安全项（必须使用 BACKUP_ROOT 环境变量（不写死路径））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "backup.sh 语法检查（bash -n）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "backup.sh 开启严格模式（set -euo pipefail）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "restore-drill.sh 禁危险操作（禁 DROP DATABASE（脚本只增不删））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "restore-drill.sh 禁危险操作（禁 DROP SCHEMA（脚本只增不删））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "restore-drill.sh 禁危险操作（禁 TRUNCATE（会毁数据且不可回滚））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "restore-drill.sh 禁危险操作（禁 rm -rf PGDATA）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "restore-drill.sh 禁危险操作（禁对备份根目录整体 rm -rf（轮转须逐份删））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "restore-drill.sh 禁危险操作（禁以文件拷贝做备份（会丢 WAL 中未 checkpoint 的提交））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "restore-drill.sh 必备安全项（演练实例必须用独立端口（不碰生产实例））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "restore-drill.sh 必备安全项（演练必须注册清理 trap（异常路径不留垃圾））",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "restore-drill.sh 必备安全项（演练实例必须只监听回环）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "restore-drill.sh 语法检查（bash -n）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C3",
+      "name": "restore-drill.sh 开启严格模式（set -euo pipefail）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "C4",
+      "name": "迁移序列非空（至少 1 个 .sql）",
+      "ok": true,
+      "detail": "实际 1 个"
+    },
+    {
+      "id": "C4",
+      "name": "迁移文件版本号四位零填充且可解析",
+      "ok": true,
+      "detail": "可解析 1 / 共 1"
+    },
+    {
+      "id": "C4",
+      "name": "迁移版本号单调递增（无重复·无倒序）",
+      "ok": true,
+      "detail": "版本序列=[1]"
+    },
+    {
+      "id": "C4",
+      "name": "0001_baseline.sql 单事务包裹（BEGIN/COMMIT）",
+      "ok": true,
+      "detail": "BEGIN=True COMMIT=True"
+    },
+    {
+      "id": "C4",
+      "name": "0001_baseline.sql 禁 DROP/TRUNCATE",
+      "ok": true,
+      "detail": ""
+    }
+  ]
+}

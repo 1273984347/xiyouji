@@ -11,6 +11,43 @@
 ---
 
 
+## W927 架构方案 v2 裁决落档 + D-1 离线施工件 + W926 交叉对账（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/deploy/pg/README.md | W927 | D-1 施工件说明（口径对照 + 目标机执行顺序 + 机器背书 + 9 项待实跑清单 + 边界声明） |
+| xiyouji-agent-web/deploy/pg/postgresql.conf.base | W927 | PG 16 配置基线（WAL 归档 / TLS / 内存 / 日志 / 编码 / 自动清理·禁 listen_addresses='*'） |
+| xiyouji-agent-web/deploy/pg/pg_hba.conf.base | W927 | 认证基线（最小权限 + 兜底 reject + 禁 trust + 禁明文口令） |
+| xiyouji-agent-web/deploy/pg/bin/initdb-bootstrap.sh | W927 | 幂等初始化（角色/库/权限/迁移记账表·PG 版本门槛 + 只读角色最小权限） |
+| xiyouji-agent-web/deploy/pg/bin/backup.sh | W927 | 每日全量备份（pg_basebackup）+ 保留期轮转（7 份 / WAL 14 天）+ 空壳自检 + 备份归档分盘校验 |
+| xiyouji-agent-web/deploy/pg/bin/restore-drill.sh | W927 | 恢复演练（独立端口临时实例 + 表/列/行数断言 + trap 清理） |
+| xiyouji-agent-web/deploy/pg/bin/verify-baseline.py | W927 | 静态校验器（C1 配置 / C2 认证 / C3 脚本 / C4 迁移·66 项不变量·本批实跑 66/66） |
+| xiyouji-agent-web/deploy/pg/bin/_mutation_test.py | W927 | 反向验证（11 组变异改坏必红 + 基线未变异必绿·本批实跑 11/11 可证伪） |
+| xiyouji-agent-web/deploy/pg/migrations/0001_baseline.sql | W927 | 迁移序列骨架（schema_migrations 记账 + audit_archive 带 data_class CHECK L1–L4·单事务包裹） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W927 | 裁决落档（O-1~O-4 + 六处连带更新）+ 交叉对账 §13.4 + 新增 §10.6 配置面缺口 + 契约 C-8 + 禁止依赖形态 #8 |
+| docs/11-方案报告/计划方案/执行前计划-T20-裁决落档与D1施工件.md | W927 | T-20 框架件·执行前计划（12 AC + 15 ASM + 18 ST + 12 V + 8 风险 + 7 决策 + 14 自检） |
+| docs/11-方案报告/计划方案/T20-任务计划执行与经验沉淀报告-2026-10-25.md | W927 | T-20 框架件·执行报告（18 步执行记录 + 12 条验收 + 7 条可行性自评 + 7 条经验 + 5 条偏差 + PG 未验证声明） |
+| docs/11-方案报告/README.md | W927 | §六 计划方案 +2 行（篇数 22→24）· §二 架构方案行更新为「W925 建 / W927 裁决落档 + 施工件 + 对账」 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W927 | report_docs 实体标记随 stats.json 刷新（60→62·C5b 对账） |
+| STRUCTURE.md | W927 | report_docs 标记刷新 + 六子目录篇数同步（计划方案 22→24） |
+| scripts/output/_w927_pg_baseline.json | W927 | 静态校验证据（total=66 / passed=66 / failed=0） |
+| docs/00-导读/W批次编号对账表.md | W927 | W927 认领行与收官回填 |
+| CHANGELOG.md | W927 | W927 段 |
+| HANDOVER.md | W927 | 级联头尾链与里程碑块 |
+| README.md | W927 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W927 | 当前批次版本行 |
+| .github/workflows/README.md | W927 | 工作流层区间与里程碑尾标记 |
+| site/index.html | W927 | 页脚批次链插入 W927 |
+| site/data/cross-time-danmaku.html | W927 | 页脚批次链插入 W927 |
+| site/data/tag-cloud.html | W927 | 页脚批次链插入 W927 |
+| site/dukou-engine.html | W927 | 页脚批次链插入 W927 |
+| AGENTS.md | W927 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W927 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W927 | version 同步为 W927 |
+| scripts/output/file-index.md | W927 | W927 段插入 |
+| scripts/output/_w927_spec.json | W927 | 本批级联 spec |
+| scripts/output/_cascade_files_W927.txt | W927 | 级联落盘清单 |
+
 ## W926 站点交互流程审查复核报告批（2026-10-25）
 
 | 文件 | W | 说明 |
