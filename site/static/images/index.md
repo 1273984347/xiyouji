@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（78）
+## 文件（85）
 
 ### 样式与资源
 
@@ -57,6 +57,13 @@
 - `hero-07-liudao-lingyun.webp`
 - `hero-08-yunhai-chengqiao.webp`
 - `hero-09-shijue-wangluo.webp`
+- `hero-10-mingfu-panwang.webp`
+- `hero-11-chiping-boshan.webp`
+- `hero-12-jingu-jingangchui.webp`
+- `hero-13-wujingshan-liangjie.webp`
+- `hero-14-donghai-longgong.webp`
+- `hero-15-liudao-lunhui.webp`
+- `hero-set-w932-preview.webp`
 - `ink-mountains-hero.webp`
 - `ink-mountains-night.webp`
 - `ink-mountains-path.webp`
