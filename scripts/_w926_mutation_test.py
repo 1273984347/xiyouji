@@ -77,7 +77,29 @@ def m_report_sub(old, new):
         s = rep_text(root)
         if old not in s:
             raise SystemExit("MUT 目标串不存在：%r" % old[:60])
-        rep_write(root, s.replace(old, new, 1))
+        mutated = s.replace(old, new, 1)
+        if old in mutated:
+            raise SystemExit("MUT 未生效：替换后原串仍在（可能命中多处）")
+        if mutated == s:
+            raise SystemExit("MUT 未生效：内容无变化")
+        rep_write(root, mutated)
+    return go
+
+
+def m_section_sub(start, end, old, new):
+    """只在 [start, end) 段内替换 —— 防止同名串在别处先命中导致变异没打到目标点。"""
+    def go(root):
+        s = rep_text(root)
+        if start not in s or end not in s:
+            raise SystemExit("MUT 段落边界不存在")
+        head, tail = s.split(start, 1)
+        body, rest = tail.split(end, 1)
+        if old not in body:
+            raise SystemExit("MUT 段内目标串不存在：%r" % old[:60])
+        mutated_body = body.replace(old, new, 1)
+        if old in mutated_body or mutated_body == body:
+            raise SystemExit("MUT 段内替换未生效")
+        rep_write(root, head + start + mutated_body + end + rest)
     return go
 
 
@@ -96,6 +118,10 @@ CASES = [
     ("M8 报告 §1.3 节头「四条」→「五条」", "S-06",
      m_report_sub("### 1.3 判据自纠四条", "### 1.3 判据自纠五条")),
     ("M9 证据零入链清单 9→8 页", "S-12", m_zero_inbound_drop),
+    ("M10 报告 §0.4 的 P1 行去掉 R-05（低成本项被埋回大批）", "S-15",
+     m_section_sub("### 0.4 执行序重排", "## 1. 审查范围", "| R-05 |", "| — |")),
+    ("M11 报告 §0.4 的 P0 行去掉 R-01（阻断项被降级）", "S-15",
+     m_section_sub("### 0.4 执行序重排", "## 1. 审查范围", "| R-01 R-06 |", "| R-06 |")),
 ]
 
 

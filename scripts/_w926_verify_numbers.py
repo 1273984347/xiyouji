@@ -148,7 +148,9 @@ else:
         print(f"FAIL S-06  §1.3 表 {n13_rows} 行·声明「{declared13}条」")
 
 # S-07：§0.3 三批建议必须覆盖清单全部 12 个编号，且不得出现清单外编号
-sec03 = section(text, "### 0.3 建议路线", "## 1. 审查范围")
+sec03 = section(text, "### 0.3 建议路线", "### 0.4 执行序重排")
+if sec03 is None:
+    sec03 = section(text, "### 0.3 建议路线", "## 1. 审查范围")
 if sec03 is None:
     fails.append(("S-07", "§0.3 覆盖 12 编号", "段落缺失", "报告 §0.3", False, False))
     print("FAIL S-07  §0.3 段落缺失")
@@ -163,7 +165,9 @@ else:
         print(f"FAIL S-07  §0.3 缺 {missing_plan}·多 {extra_plan}")
 
 # S-08：§0.3 每个编号只出现一次（一个 R- 不得同时落进两批）
-sec03b = section(text, "### 0.3 建议路线", "## 1. 审查范围")
+sec03b = section(text, "### 0.3 建议路线", "### 0.4 执行序重排")
+if sec03b is None:
+    sec03b = section(text, "### 0.3 建议路线", "## 1. 审查范围")
 if sec03b is None:
     fails.append(("S-08", "§0.3 编号不重", "段落缺失", "报告 §0.3", False, False))
 else:
@@ -267,7 +271,38 @@ else:
     fails.append(("S-13", "R-11 十控件", f"命中 {r11_found}/10·{r11_problems[:3]}", "site/ 实读", True, True))
     print(f"FAIL S-13  命中 {r11_found}/10·{r11_problems[:3]}")
 
-N_STRUCT = 13
+# S-14：§0.4 执行序重排必须覆盖清单全部 12 个编号，且不得出现清单外编号
+sec04 = section(text, "### 0.4 执行序重排", "## 1. 审查范围")
+plan04: dict[str, set[str]] = {}
+if sec04 is None:
+    fails.append(("S-14", "§0.4 覆盖 12 编号", "段落缺失", "报告 §0.4", False, False))
+    print("FAIL S-14  §0.4 段落缺失")
+else:
+    for ln in sec04.split("\n"):
+        if re.match(r"^\| \*\*P\d\*\* \|", ln):
+            cc = ln.split("|")
+            plan04[cc[1].strip().strip("*")] = set(re.findall(r"R-(\d+)", cc[3]))
+    all04 = set().union(*plan04.values()) if plan04 else set()
+    missing04 = sorted(listed - all04)
+    extra04 = sorted(all04 - listed)
+    if not missing04 and not extra04 and len(all04) == 12:
+        print(f"OK  S-14  §0.4 执行序覆盖清单全部 12 个编号（{len(plan04)} 个序位·无遗漏·无清单外编号）")
+    else:
+        fails.append(("S-14", "§0.4 覆盖 12 编号", f"缺 {missing04}·多 {extra04}", "报告 §0.4", True, True))
+        print(f"FAIL S-14  §0.4 缺 {missing04}·多 {extra04}")
+
+# S-15：守住两条排序原则 —— 阻断项（R-01）必须在首序；低成本项（R-05）不得被埋进多批次
+if sec04 is not None and plan04:
+    p0 = plan04.get("P0", set())
+    p1 = plan04.get("P1", set())
+    seq_ok = set(plan04) == {"P0", "P1", "P2", "P3", "P4"}
+    if "01" in p0 and "05" in p1 and seq_ok:
+        print("OK  S-15  §0.4 排序原则成立：R-01（唯一 100% 阻断）在 P0·R-05（10 分钟项）单列 P1·序位 P0–P4 完整")
+    else:
+        fails.append(("S-15", "§0.4 排序原则", f"P0={sorted(p0)}·P1={sorted(p1)}·序位={sorted(plan04)}", "报告 §0.4", True, True))
+        print(f"FAIL S-15  P0={sorted(p0)}·P1={sorted(p1)}·序位={sorted(plan04)}")
+
+N_STRUCT = 15
 print("\n=== 对拍结果 ===")
 if fails:
     print(f"{len(fails)} 项不一致：")
