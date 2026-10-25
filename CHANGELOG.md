@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W943），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W944），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,21 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W944（2026-10-25）：章回插画新组（6 张按回目情节重出·打破「挑担人赶路」同构）
+
+> **来源**：用户 2026-10-25 认可 W943 记录的弱项「章回 6 张「挑担人赶路」重复度极高，若要丰富可另出一组」并答「可以」。
+
+> - **文件**：site/static/images/chap-07.webp、site/static/images/chap-14.webp、site/static/images/chap-15.webp、site/static/images/chap-23.webp、site/static/images/chap-27.webp、site/static/images/chap-30.webp、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/_w944_cascade.py
+
+**问题**：站内 6 张章回插画（chap-07 / 14 / 15 / 23 / 27 / 30）原为**同一构图**（挑担僧人赶路）仅换山水，与所在回目无对应关系。
+
+**改法**：按各自回目情节另出一组 6 张（水墨浓墨剪影风：宣纸底 + 浓墨剪影 + 淡赭金远山 + 单个朱砂方印，正方 1200×1200）——第 007 回 八卦炉（三足丹炉 + 火焰）、第 014 回 心猿归正（猴形剪影 + 金箍 + 勒绳）、第 015 回 鹰愁涧（惊马扬蹄 + 缰绳 + 瀑布崖）、第 023 回 四圣试禅心（打坐僧 + 孤灯 + 雾中两道人影）、第 027 回 尸魔三戏（三道人影渐次消散 + 月 + 茅屋）、第 030 回 邪魔侵正法（蛇形妖影 + 洞口 + 螺旋墨风）——**每张现与回目情节对应**。
+
+**一处模型伪影已修**：第 023 回新图自带一圈黑边框（模型给禅心图套了相框）⇒ 按四边近黑像素带自动检测裁除（每边 66 px）后重存。
+
+> - **验证**：6 张逐张放大目视（构图与回目情节对应 + 无黑框 + 无伪文字）+ 旧版 6 张备份于 %TEMP%/bak_chap-*.webp 可回退 · 第 31 与第 45 门禁 0 FAIL
+> - **状态**：在途（认领登记 W944·待提交入库）
 
 ### W943（2026-10-25）：全站图片审查（227 张逐类目视 · 修 3 处真缺陷）
 
