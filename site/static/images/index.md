@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（98）
+## 文件（99）
 
 ### 样式与资源
 
@@ -66,11 +66,12 @@
 - `hero-line-01-ruyi-staff.webp`
 - `hero-line-02-journey-scroll.webp`
 - `hero-line-03-classic-scroll.webp`
-- `hero-line-04-sinan-compass.webp`
+- `hero-line-04-tight-crown.webp`
 - `hero-line-05-lotus.webp`
 - `hero-line-06-nine-ring-staff.webp`
 - `hero-line-07-banana-fan.webp`
 - `hero-line-08-jade-vase.webp`
+- `hero-line-09-somersault-cloud.webp`
 - `hero-set-w932-preview.webp`
 - `ink-mountains-hero.webp`
 - `ink-mountains-night.webp`

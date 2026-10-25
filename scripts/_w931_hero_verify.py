@@ -32,10 +32,10 @@ DIR = REPO / "assets" / "promo" / "hero-set"
 
 STEMS = [
     "hero-line-01-ruyi-staff", "hero-line-02-journey-scroll",
-    "hero-line-03-classic-scroll", "hero-line-04-sinan-compass",
+    "hero-line-03-classic-scroll", "hero-line-04-tight-crown",
     "hero-line-05-lotus", "hero-line-06-nine-ring-staff",
     "hero-line-07-banana-fan", "hero-line-08-jade-vase",
-    "hero-line-09-pilgrim-four",
+    "hero-line-09-somersault-cloud",
 ]
 
 PAPER = (250, 247, 240)

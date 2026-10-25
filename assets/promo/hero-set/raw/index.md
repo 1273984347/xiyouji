@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（9）
+## 文件（12）
 
 ### 样式与资源
 
@@ -19,11 +19,14 @@
 - `hero-02-journey-scroll.jpg`
 - `hero-03-classic-scroll.jpg`
 - `hero-04-sinan-compass.jpg`
+- `hero-04b-tight-crown.jpg`
 - `hero-05-lotus.jpg`
+- `hero-05b-somersault-cloud.png`
 - `hero-06-nine-ring-staff.jpg`
 - `hero-07-banana-fan.jpg`
 - `hero-08-jade-vase.jpg`
 - `hero-09-pilgrim-four.jpg`
+- `hero-09a-four-pilgrims.jpg`
 
 ---
 
