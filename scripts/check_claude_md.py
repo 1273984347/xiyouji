@@ -47,7 +47,7 @@ def evaluate(claude, files):
     body = "\n".join(body_lines)
     if re.search(r"\bv\d+\.\d+\.\d+\b", body):
         issues.append("C4: 正文出现现役版本号字面量（速查层零漂移设计·一律指针化）")
-    for pat, name in ((r"\bW\d{3}\b", "W###"), (r"W001-W\d+", "W 区间")):
+    for pat, name in ((r"\bW\d{3,4}\b", "W###"), (r"W001-W\d+", "W 区间")):
         if re.search(pat, body):
             issues.append("C4: 正文出现 %s 字面量（禁写会漂移的现役值）" % name)
     # C1 文件指针存在

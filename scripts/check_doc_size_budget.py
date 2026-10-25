@@ -50,7 +50,7 @@ def count_segments(text, kind):
     if kind == "changelog":
         return len(RE_CL_SEG.findall(text))
     if kind == "ledger":
-        return len(re.findall(r"(?m)^\| W\d{3} ", text))
+        return len(re.findall(r"(?m)^\| W\d{3,4} ", text))
     return len(RE_FI_SEG.findall(text))
 
 
@@ -124,7 +124,7 @@ def collect():
                     # W965 C4：逐条定形判据（比聚合 4KB 更细——五条各 290 字的脚注可绕过 C3）
                     bad = []
                     for e in re.split(r"；(?=20\d{2}-\d{2}-\d{2}（)", fline)[1:]:
-                        if not re.match(r"^20\d{2}-\d{2}-\d{2}（W\d{3}）", e):
+                        if not re.match(r"^20\d{2}-\d{2}-\d{2}（W\d{3,4}）", e):
                             bad.append("条目头非阿拉伯形态：" + e[:24])
                         elif len(e) > 300:
                             bad.append("条目 %d 字 > 300：%s…" % (len(e), e[:24]))

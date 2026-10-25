@@ -10,7 +10,7 @@ PAGES = [
     ("site/data/tag-cloud.html", 'class="footer-meta">', True),
     ("site/dukou-engine.html", "<footer>", False),
 ]
-W = re.compile(r"W(\d{3})")
+W = re.compile(r"W(\d{3,4})")
 KEEP = 11
 
 for p, anchor, quoted in PAGES:

@@ -3,7 +3,7 @@
 
 判据（先质疑判据再质疑结论）：
   · 只看 <body> 内可见文本 —— script/style/HTML 注释/meta 一律剥离
-  · 命中两类内部术语：① 批次号 W\\d{3}  ② 门禁/工程黑话词
+  · 命中两类内部术语：① 批次号 W\\d{3,4}  ② 门禁/工程黑话词
 用法：py -3 scripts/_w926_visible_leak.py [--out <path>]
 """
 from __future__ import annotations
@@ -23,7 +23,7 @@ COMMENT_RE = re.compile(r"<!--.*?-->", re.S)
 TAG_RE = re.compile(r"<[^>]+>")
 WS_RE = re.compile(r"[ \t\u00a0]+")
 
-BATCH_RE = re.compile(r"\bW\d{3}\b")
+BATCH_RE = re.compile(r"\bW\d{3,4}\b")
 JARGON_RE = re.compile(
     r"(门禁|判红|假绿|假收敛|在途|级联|台账|批次号|自测|复算|口径|实跑|"
     r"取证|快照|漂移|根修|批次|议题|抽象|收敛|谱系化|实体标记|首屏归并|"
@@ -59,7 +59,7 @@ def main() -> int:
             total_jargon += len(j)
             pages_batch += 1
             snippets = []
-            for m in re.finditer(r"[^。！？\n]{0,60}(?:W\d{3}|门禁|判红|假绿|假收敛|在途|级联|台账|判据|全绿|根修|存量脚本|实体标记)[^。！？\n]{0,60}", txt):
+            for m in re.finditer(r"[^。！？\n]{0,60}(?:W\d{3,4}|门禁|判红|假绿|假收敛|在途|级联|台账|判据|全绿|根修|存量脚本|实体标记)[^。！？\n]{0,60}", txt):
                 s = m.group(0).strip()
                 if s and s not in snippets:
                     snippets.append(s)

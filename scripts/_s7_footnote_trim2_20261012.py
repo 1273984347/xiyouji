@@ -26,7 +26,7 @@ entries[-1] = last[: -len(TAIL)]
 
 
 def wnum(part):
-    m = re.search(r"（(?:v[\d.]+ )?W(\d{3})）", part)
+    m = re.search(r"（(?:v[\d.]+ )?W(\d{3,4})）", part)
     assert m, "条目批次号解析失败: " + part[:40]
     return int(m.group(1))
 

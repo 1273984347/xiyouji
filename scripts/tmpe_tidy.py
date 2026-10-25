@@ -173,7 +173,7 @@ def scan(policy, freeze_hours=None):
         elif (now - newest) < fh * 3600:  # ③ freeze
             row.update(bucket="_hold", rule="freeze", action="FREEZE",
                        note=f"{fh}h 内有写入（并行/本地在用）")
-        elif re.match(r"^w\d{3}", name, re.IGNORECASE):  # ④ standard_bucket
+        elif re.match(r"^w\d{3,4}", name, re.IGNORECASE):  # ④ standard_bucket
             row.update(bucket="w###", rule="w_batch", action="MOVE", note="批次桶")
         else:  # ⑤ classify_rule → ⑥ fallback _inbox
             hit = _match_classify_rule(name, os.path.splitext(name)[1].lower(), is_dir, policy)
@@ -397,7 +397,7 @@ def _score_dim(name, text, lines, stem, root):
     dim = {}
     low = text.lower()
     # 1 复用频率（0=一次性特征 1=中性 2=有跨批/外部引用）
-    if re.search(r"^w\d{3}", name, re.IGNORECASE):
+    if re.search(r"^w\d{3,4}", name, re.IGNORECASE):
         dim["复用频率"] = 0
     else:
         dim["复用频率"] = 1

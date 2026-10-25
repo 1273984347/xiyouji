@@ -46,7 +46,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LEDGER_REL = "docs/00-导读/W批次编号对账表.md"
 LEDGER = os.path.join(ROOT, LEDGER_REL)
 
-RE_W_ROW = re.compile(r"^\|\s*W(\d{3})\s*\|")
+RE_W_ROW = re.compile(r"^\|\s*W(\d{3,4})\s*\|")
 RE_STATUS_CELL = re.compile(r"^(?:已收官|已闭环|在途|进行中|未复核)")
 PLACEHOLDER_HASH = "—（待回填）"
 

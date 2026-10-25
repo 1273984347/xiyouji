@@ -51,7 +51,7 @@ def file_index_sections(text: str) -> list[tuple[int, int, int]]:
     lines = text.splitlines()
     starts = []
     for i, ln in enumerate(lines):
-        m = re.match(r"^## W(\d{3})\b", ln)
+        m = re.match(r"^## W(\d{3,4})\b", ln)
         if m:
             starts.append((int(m.group(1)), i))
     return [
@@ -75,7 +75,7 @@ def check_file_index(errors: list[str]) -> None:
             continue
         body = "\n".join(text.splitlines()[s + 1:e])
         has_header = bool(re.search(r"^\| 文件 \| W \| 说明 \|", body, flags=re.M))
-        has_row = bool(re.search(r"^\| .+ \| W\d{3} \| .+", body, flags=re.M))
+        has_row = bool(re.search(r"^\| .+ \| W\d{3,4} \| .+", body, flags=re.M))
         if not (has_header and has_row):
             errors.append(f"file-index W{w:03d} 段为空壳（无登记表格/登记行，第 {s + 1} 行起）")
 
@@ -105,7 +105,7 @@ def check_file_index(errors: list[str]) -> None:
     # 5) 段缺失检测（W526 新增：W525 实证 W504 段缺失漏网——CHANGELOG 现役版段须均有登记段）
     cl_text = CHANGELOG.read_text(encoding="utf-8-sig")
     cl_w = {int(m.group(1) or m.group(2)) for m in re.finditer(
-        r"^### (?:v\d+\.\d+\.\d+（[^）]*?）：W(\d{3})|W(\d{3})（[^）]*?）：)", cl_text, flags=re.M)}  # W713 双形态（W711 起新段无 v 前缀·与检查 6 同款）
+        r"^### (?:v\d+\.\d+\.\d+（[^）]*?）：W(\d{3,4})|W(\d{3,4})（[^）]*?）：)", cl_text, flags=re.M)}  # W713 双形态（W711 起新段无 v 前缀·与检查 6 同款）
     fi_w = {w for w, _, _ in sections}
     missing = sorted(w for w in cl_w if w not in fi_w and w not in EXEMPT_W)
     if missing:
@@ -134,8 +134,8 @@ def check_methodology_readme(errors: list[str]) -> None:
 
 def check_changelog_w_upper(errors: list[str]) -> None:
     text = CHANGELOG.read_text(encoding="utf-8-sig")
-    latest = re.search(r"^### (?:v\d+\.\d+\.\d+（[^）]*?）：W(\d{3})|W(\d{3})（[^）]*?）：)", text, flags=re.M)  # W711 双形态
-    rule = re.search(r"W### ID（W001-W(\d{3})）", text)
+    latest = re.search(r"^### (?:v\d+\.\d+\.\d+（[^）]*?）：W(\d{3,4})|W(\d{3,4})（[^）]*?）：)", text, flags=re.M)  # W711 双形态
+    rule = re.search(r"W### ID（W001-W(\d{3,4})）", text)
     if not latest or not rule:
         errors.append("CHANGELOG 无法解析最新 W 段或编号规则段（W### ID（W001-W###））")
         return

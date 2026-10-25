@@ -72,7 +72,7 @@ def precheck(spec):
     # 不可见（实证 52 条二〇二六形态条目黏成 67.1KB 巨段使「保留 5 条」契约名存实亡·AGENTS.md
     # 被撑到 110KB）；条目是索引不是摘要，长度一并封顶。
     _note = str(spec.get("agents_note", ""))
-    if not re.match(r"^20\d{2}-\d{2}-\d{2}（W\d{3}）", _note):
+    if not re.match(r"^20\d{2}-\d{2}-\d{2}（W\d{3,4}）", _note):
         issues.append("spec.agents_note 未以「阿拉伯日期（W###）」条目头开场（W964 定形契约·"
                       "中文数字日期会让滚动器失明）：%r" % _note[:40])
     if len(_note) > 300:
@@ -314,7 +314,7 @@ def _face_workflows(ctx):
 # 落 token 中间（「v2.3.28W722」粘连实证）。根修=完整 footer 节点内定位首 token·纯前插不回写·
 # 插入后批次段裁剪至 12 条+尾注（链长治理落地·历史权威在 CHANGELOG 零信息损失）·去重断言。
 _FOOT_RE = re.compile(r"<footer[^>]*>")
-_FOOT_TOKEN = re.compile(r"(?:v[\d.]+(?:\s*·\s*)?)?W\d{3}")
+_FOOT_TOKEN = re.compile(r"(?:v[\d.]+(?:\s*·\s*)?)?W\d{3,4}")
 _FOOT_MAX = 12
 
 def _foot_insert(s_html, new_token):
@@ -329,14 +329,14 @@ def _foot_insert(s_html, new_token):
     n_end = s_html.find("<", mm.start())
     node = s_html[n_start:n_end]
     parts = node.split(" · ")
-    first = next(i for i, seg in enumerate(parts) if re.search(r"W\d{3}", seg))
+    first = next(i for i, seg in enumerate(parts) if re.search(r"W\d{3,4}", seg))
     batch = [new_token] + parts[first:]
     if len(batch) > _FOOT_MAX:
         batch = batch[:_FOOT_MAX] + ["…更早批次详见 CHANGELOG.md"]
     elif len(batch) == _FOOT_MAX:
         batch = batch + ["…更早批次详见 CHANGELOG.md"]
     new_node = " · ".join(parts[:first] + batch)
-    _wns = re.findall(r"W\d{3}", new_node)
+    _wns = re.findall(r"W\d{3,4}", new_node)
     assert len(_wns) == len(set(_wns)), "页脚链 token 重复（W724 防线）"
     return s_html[:n_start] + new_node + s_html[n_start + len(node):]
 
@@ -345,7 +345,7 @@ def _face_footers(ctx):
     """四页脚批次链插入（W717 锚定·W724 双重缺陷根修+链长治理·W781 防御性剥离前导批次号）。"""
     # W781 R-2：desc 以 W### 开头会叠成「W779 W779…」双 token（W779 四页实证·存量缺陷
     # 由 W780 顺修）——插入前无条件剥离，与 release_prep 的 spec 时点校验构成双防线。
-    desc = re.sub(r"^W\d{3}\s*", "", ctx.desc)
+    desc = re.sub(r"^W\d{3,4}\s*", "", ctx.desc)
     for p in ["site/index.html", "site/data/cross-time-danmaku.html", "site/data/tag-cloud.html"]:
         s, _ = load(p)
         ctx.pend.append((p, _foot_insert(s, f"{ctx.batch} {desc}"), None))
@@ -357,7 +357,7 @@ def _face_footers(ctx):
 
 def _agents_entry_wn(part):
     """解析脚注条目批次号（W### 形态）·W721 滚动切分用。"""
-    m = re.search(r"（(?:v[\d.]+ )?W(\d{3})）", part)
+    m = re.search(r"（(?:v[\d.]+ )?W(\d{3,4})）", part)
     assert m, "脚注条目批次号解析失败: " + part[:40]
     return int(m.group(1))
 
@@ -409,8 +409,8 @@ def _face_agents(ctx):
         # 「W719 续迁 W708-W714·」回插，而现役脚注前缀已漂移为 W713 形态→回插静默失新；
         # 就地替换 token 保持「仅留最新区间」语义，无 token 时锚「脚注保留最近 5 条」前插）
         _note = "W%d-W%d 级联自动滚动·" % (_lo, _hi)
-        if re.search(r"W\d{3}-W\d{3} 级联自动滚动·", _newline):
-            _newline = re.sub(r"(?:W\d{3}-W\d{3} 级联自动滚动·)+", _note, _newline, count=1)
+        if re.search(r"W\d{3,4}-W\d{3,4} 级联自动滚动·", _newline):
+            _newline = re.sub(r"(?:W\d{3,4}-W\d{3,4} 级联自动滚动·)+", _note, _newline, count=1)
         else:
             assert "脚注保留最近 5 条" in _newline, "指针注记缺位且无插入锚点"
             _newline = _newline.replace("脚注保留最近 5 条", _note + "脚注保留最近 5 条", 1)

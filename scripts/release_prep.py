@@ -30,7 +30,7 @@ REGISTRY_FILES = [
 ]
 REQUIRED_FIELDS = ("batch", "date", "title", "desc", "head_entry", "head_sentence",
                    "changelog_body", "milestone_block", "agents_note", "file_index_rows")
-RE_W_FORM = re.compile(r"(?<![A-Za-z0-9])[Ww]\d{3}(?!\d)")
+RE_W_FORM = re.compile(r"(?<![A-Za-z0-9])[Ww]\d{3,4}(?!\d)")
 RE_PATH_TOKEN = re.compile(
     r"[A-Za-z0-9_\-./\u4e00-\u9fff]+\.(?:py|js|mjs|md|json|html|cff|yml|yaml|txt|toml|css)$")
 BANNED = {"desc": ("·", "；", "—"), "head_sentence": ("；", "—", "（", "）")}
@@ -112,7 +112,7 @@ def load_registry(root):
             text = open(os.path.join(root, rel), encoding="utf-8", errors="replace").read()
         except OSError:
             continue
-        reg.update(int(x) for x in re.findall(r"[Ww](\d{3})", text))
+        reg.update(int(x) for x in re.findall(r"[Ww](\d{3,4})", text))
     return reg
 
 
@@ -141,10 +141,10 @@ def check_fields(spec):
                 issues.append(f"spec.{field} 含禁用分隔符 {sep!r}（会使下一批锚点正则失配）")
     if not str(spec.get("title", "")).startswith(str(spec.get("batch", ""))):
         issues.append("spec.title 未以 batch 号领衔（现役段解析取标题首个 W###）")
-    if not re.fullmatch(r"W\d{3}", str(spec.get("batch", ""))):
+    if not re.fullmatch(r"W\d{3,4}", str(spec.get("batch", ""))):
         issues.append(f"spec.batch 形态非法：{spec.get('batch')!r}（应 W+三位数字）")
     for field in ("desc", "head_sentence"):
-        if re.match(r"^W\d{3}", str(spec.get(field, ""))):
+        if re.match(r"^W\d{3,4}", str(spec.get(field, ""))):
             issues.append(
                 f"spec.{field} 以批次号开头（页脚 token 形态为「batch + desc」·W779 实证叠成"
                 f"「W779 W779…」双 token 且 W724 防线只能下一批拦截——防线前移到 spec 时点·W781 R-2）")
