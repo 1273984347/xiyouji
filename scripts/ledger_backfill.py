@@ -115,8 +115,19 @@ def read_ledger(path: str) -> list[str]:
 
 
 def write_ledger(path: str, lines: list[str]) -> None:
+    """写回台账（W965 修：按文件主导行尾重建全部边界）。
+
+    病根：`"\\n".join` 对 CRLF 文件的**新插入行**留下裸 LF 尾边界（原既有行的 \\r
+    挂在行尾幸存、新行没有）——每次 append-claim 引入一个裸 LF，五次认领五处混行尾。
+    现按主导行尾 rstrip 后统一重建：内容零变化、行尾全量归一。
+    """
+    joined = "\n".join(lines)
+    nl = "\r\n" if joined.count("\r\n") * 20 >= joined.count("\n") else "\n"
+    out = nl.join(l.rstrip("\r\n") for l in lines)
+    if not out.endswith(nl):
+        out += nl
     with open(path, "w", encoding="utf-8", newline="") as f:
-        f.write("\n".join(lines))
+        f.write(out)
 
 
 def find_row(lines: list[str], wnum: int) -> int:
