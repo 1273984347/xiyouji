@@ -71,7 +71,11 @@ COLLECT_JS = r"""
       for (const c of box.children) { units.push(c); }
     }
     if (modes.indexOf('sections') >= 0) {
-      box.querySelectorAll('h2, details').forEach(e => units.push(e));
+      box.querySelectorAll('h2').forEach(e => units.push(e));
+    }
+    if (modes.indexOf('cards') >= 0) {
+      const sel = box.getAttribute('data-gsap-target') || '.card';
+      try { box.querySelectorAll(sel).forEach(e => units.push(e)); } catch (e) { }
     }
     out.units += units.length;
     for (const u of units) {
@@ -119,7 +123,13 @@ def serve(port: int):
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--port", type=int, default=8931)
-    args = ap.parse_args()
+    ap.add_argument("--out", default="", help="产物输出文件（缺省为默认）：不同页集应写不同文件，避免覆盖历史批次产物")
+    ap.add_argument("--pages", default="",
+                    help="逗号分隔的页面相对路径（相对 site/）·缺省用内置 PAGES 清单")
+    args, _unknown = ap.parse_known_args()
+    pages = PAGES
+    if args.pages:
+        pages = [x.strip() for x in args.pages.split(",") if x.strip()]
 
     try:
         from playwright.sync_api import sync_playwright
@@ -141,7 +151,7 @@ def main() -> int:
                     for vw, vh in VIEWPORTS:
                         ctx = browser.new_context(viewport={"width": vw, "height": vh},
                                                   reduced_motion=motion)
-                        for rel in PAGES:
+                        for rel in pages:
                             page = ctx.new_page()
                             perrors = []
                             cerrors = []
@@ -233,11 +243,12 @@ def main() -> int:
         "rag_env_notes": rag_notes,
         "verdict": "FAIL" if fails else "PASS",
     }
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    out_path = Path(args.out) if args.out else OUT
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    print("motion probe written: %s" % OUT)
-    print("  采集 %d 组（%d 页 × %d 视口 × %d 模式）" % (len(results), len(PAGES), len(VIEWPORTS), len(MODES)))
+    print("motion probe written: %s" % out_path)
+    print("  采集 %d 组（%d 页 × %d 视口 × %d 模式）" % (len(results), len(pages), len(VIEWPORTS), len(MODES)))
     for n in rag_notes[:8]:
         print("  NOTE %s" % n)
     for f in fails:

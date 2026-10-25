@@ -20,6 +20,8 @@
 
 <script src="../js/theme-init.js"></script>
 <script src="../js/reader-enhance.js" defer></script>
+<script defer src="../static/js/gsap.min.js"></script><script defer src="../static/js/ScrollTrigger.min.js"></script><script defer src="../static/js/motion-gsap.js"></script>
+
 
 
                             <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -1388,7 +1390,7 @@ html[data-theme="dark"] .viz-illustration {
 </style>
 </head>
 <body>
-<main class="reader-wrap">
+<main class="reader-wrap"> data-gsap="cards" data-gsap-target=".reader-idx a"
 <div class="reader-topnav">
     <a class="brand" href="index.html">详解西游记 · 站内阅读</a>
     <a href="../index.html">站点首页</a>

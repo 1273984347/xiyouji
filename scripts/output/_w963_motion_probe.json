@@ -1,0 +1,858 @@
+{
+  "batch": "W957",
+  "generated_by": "scripts/_w957_motion_probe.py",
+  "captured_at": "2026-10-26T04:14:39",
+  "pages": [
+    "index.html",
+    "reader/ch007.html",
+    "reader/themes/西游与死亡研究专题.html",
+    "reader/people/黄风怪外传.html",
+    "reader/people/白骨精.html"
+  ],
+  "viewports": [
+    "375x812",
+    "768x1024",
+    "1440x900"
+  ],
+  "modes": [
+    [
+      "full",
+      "no-preference"
+    ],
+    [
+      "reduce",
+      "reduce"
+    ]
+  ],
+  "results": [
+    {
+      "page": "reader/index.html",
+      "mode": "full",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes-hub.html",
+      "mode": "full",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes/index.html",
+      "mode": "full",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/index.html",
+      "mode": "full",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/essays/index.html",
+      "mode": "full",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/culture/index.html",
+      "mode": "full",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/poetry/index.html",
+      "mode": "full",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "guide.html",
+      "mode": "full",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [
+        "Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))"
+      ],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/index.html",
+      "mode": "full",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes-hub.html",
+      "mode": "full",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes/index.html",
+      "mode": "full",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/index.html",
+      "mode": "full",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/essays/index.html",
+      "mode": "full",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/culture/index.html",
+      "mode": "full",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/poetry/index.html",
+      "mode": "full",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "guide.html",
+      "mode": "full",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [
+        "Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))"
+      ],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/index.html",
+      "mode": "full",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes-hub.html",
+      "mode": "full",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes/index.html",
+      "mode": "full",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/index.html",
+      "mode": "full",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/essays/index.html",
+      "mode": "full",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/culture/index.html",
+      "mode": "full",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/poetry/index.html",
+      "mode": "full",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "guide.html",
+      "mode": "full",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [
+        "Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))"
+      ],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 1,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/index.html",
+      "mode": "reduce",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes-hub.html",
+      "mode": "reduce",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes/index.html",
+      "mode": "reduce",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/index.html",
+      "mode": "reduce",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/essays/index.html",
+      "mode": "reduce",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/culture/index.html",
+      "mode": "reduce",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/poetry/index.html",
+      "mode": "reduce",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "guide.html",
+      "mode": "reduce",
+      "viewport": "375x812",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/index.html",
+      "mode": "reduce",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes-hub.html",
+      "mode": "reduce",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes/index.html",
+      "mode": "reduce",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/index.html",
+      "mode": "reduce",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/essays/index.html",
+      "mode": "reduce",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/culture/index.html",
+      "mode": "reduce",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/poetry/index.html",
+      "mode": "reduce",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "guide.html",
+      "mode": "reduce",
+      "viewport": "768x1024",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/index.html",
+      "mode": "reduce",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes-hub.html",
+      "mode": "reduce",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/themes/index.html",
+      "mode": "reduce",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/people/index.html",
+      "mode": "reduce",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/essays/index.html",
+      "mode": "reduce",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/culture/index.html",
+      "mode": "reduce",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "reader/poetry/index.html",
+      "mode": "reduce",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    },
+    {
+      "page": "guide.html",
+      "mode": "reduce",
+      "viewport": "1440x900",
+      "pageerror": [],
+      "console_error": [],
+      "data": {
+        "gsap": true,
+        "st": true,
+        "stCount": 0,
+        "tweens": 1,
+        "motionInit": 0,
+        "heroOpacity": null,
+        "units": 0,
+        "stuck": []
+      }
+    }
+  ],
+  "fails": [],
+  "rag_env_notes": [
+    "guide.html [full 375x812]：rag_env_error×1",
+    "guide.html [full 768x1024]：rag_env_error×1",
+    "guide.html [full 1440x900]：rag_env_error×1"
+  ],
+  "verdict": "PASS"
+}
