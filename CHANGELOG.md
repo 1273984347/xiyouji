@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W942），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W943），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,25 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W943（2026-10-25）：全站图片审查（227 张逐类目视 · 修 3 处真缺陷）
+
+> **来源**：用户 2026-10-25 令「不要只审查这几个图片，审查全部」——W940 修题材、W942 修形制之后的第三次加严。
+
+> - **文件**：site/static/images/og-15-shijian-liejian.webp、assets/design/ai-concepts/concept-03-scroll.png、assets/design/ai-concepts/concept-06-bodhi-leaf.png、CHANGELOG.md、docs/00-导读/W批次编号对账表.md、scripts/output/file-index.md、scripts/_w943_cascade.py
+
+**审查范围**：全仓 **227 张**（>400×200 的位图）逐类拼图目视——卡片图 27 / 章回插画 6 / hero 24（15 渲染 + 9 线描）/ 分享图 15 / 设计概念稿 18 / 杂项 12（封面 / 单页正反面 / 站点截图 / 主视觉 / 淡墨远山），另含本批线描 9 张与内页浓墨题图 5 张。
+
+**查出 3 处真缺陷并已重出修复**：① **`site/static/images/og-15-shijian-liejian.webp`（线上分享图）**——抽象墨块序列中夹 3 处「LI」字母残留（模型伪文字）⇒ 重出去字母版；② **`assets/design/ai-concepts/concept-03-scroll.png`**——卷面有潦草伪汉字（写「孙悟空 / 取经路线」样字）⇒ 重出为空白纸面 + 抽象笔触；③ **`assets/design/ai-concepts/concept-06-bodhi-leaf.png`**——文件名「菩提叶」但画成水滴 / 火苗形（形制不符）⇒ 重出为心形叶 + 中脉分叉叶脉 + 叶柄 + 露珠。
+
+**其余全部题材对题**：卡片 27 张（场景人物）、章回 6 张（取经路途）、hero 24 张（法器场景）、og 15 张（器物特写）、概念稿 18 张（法器线描）、杂项 12 张（版面产物）。
+
+**一条方法论结论**：机器阈值对渲染型素材**无效**——按线描图设的「纸色偏离 / 墨量」阈值在水墨渲染图上必然误报（实测 30+ 张假阳）⇒ **题材关与形制关只能人眼核**，已并入 J8（机器判据只管「画得好不好」，管不了「画的是什么 / 形制对不对」）。
+
+**两处弱项（不构成错图·记录备查）**：`concept-05-headband-ring` 是纯黑墨圈（紧箍意象弱；线上正确版本为 W942 的金圈 + 九倒刺）、章回 6 张「挑担人赶路」高度同质。
+
+> - **验证**：3 张重出件逐张放大目视（字母消失 / 伪文字消失 / 叶形正确）· 227 张全量拼图目视两轮（题材级 + 可疑项放大级）· 第 31 与第 45 门禁 0 FAIL
+> - **状态**：在途（认领登记 W943·待提交入库）
 
 ### W942（2026-10-25）：Hero 素材全量复审（14 张逐张放大目视 · 修正 2 处形制偏差）
 
