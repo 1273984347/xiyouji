@@ -11,28 +11,23 @@
 ---
 
 
-## W940 Hero 素材题材辨识度修正（2026-10-25）
+## W942 Hero 素材全量复审（14 张逐张放大目视·修正 2 处形制偏差）（2026-10-25）
 
 | 文件 | W | 说明 |
 |---|---|---|
-| assets/promo/hero-set/hero-line-04-tight-crown.png | W940 | 新增「紧箍儿」母版（西游独占物件·替代司南） |
-| assets/promo/hero-set/hero-line-04-tight-crown.webp | W940 | 同上 WebP |
-| assets/promo/hero-set/hero-line-09-somersault-cloud.png | W940 | 新增「筋斗云」母版（替代判不合格的取经四众） |
-| assets/promo/hero-set/hero-line-09-somersault-cloud.webp | W940 | 同上 WebP |
-| assets/promo/hero-set/raw/hero-04b-tight-crown.jpg | W940 | 紧箍儿出图原件（重出基准） |
-| assets/promo/hero-set/raw/hero-05b-somersault-cloud.png | W940 | 筋斗云出图原件 |
-| assets/promo/hero-set/hero-line-04-sinan-compass.png | W940 | 删除（司南·通用意象非西游独占） |
-| assets/promo/hero-set/hero-line-09-pilgrim-four.png | W940 | 删除（画成农夫挑担·无西游标志物） |
-| assets/promo/hero-set/preview-contact-sheet.png | W940 | 9 张成套拼图刷新 |
-| assets/promo/hero-set/README.md | W940 | 逐张清单更新 + 新增「题材辨识度自检表（J8 人工关）」 |
-| site/static/images/hero-line-04-tight-crown.webp | W940 | 站点版（新增） |
-| site/static/images/hero-line-09-somersault-cloud.webp | W940 | 站点版（新增） |
-| site/index.html | W940 | 图集引用换图（04→紧箍儿·09→筋斗云） |
-| scripts/_w931_hero_verify.py | W940 | 判据清单换名（04/09） |
-| scripts/_w938_apply_home.py | W940 | 幂等补丁同步（含 SLIDES/aria-label 换图） |
-| scripts/_w940_cascade.py | W940 | 四面登记脚本（认领行 + CHANGELOG 段 + file-index 段 + 当前态指针） |
-| CHANGELOG.md | W940 | W940 版段（四件套） |
-| docs/00-导读/W批次编号对账表.md | W940 | W940 认领行 |
+| assets/promo/hero-set/hero-line-04-tight-crown.png | W942 | 重出「紧箍儿」母版（金圈内缘补足九个倒刺钩） |
+| assets/promo/hero-set/hero-line-04-tight-crown.webp | W942 | 同上 WebP |
+| assets/promo/hero-set/hero-line-07-banana-fan.png | W942 | 重出「芭蕉扇」母版（正圆团扇 → 叶形扇 + 中脉细脉 + 短柄缠绳） |
+| assets/promo/hero-set/hero-line-07-banana-fan.webp | W942 | 同上 WebP |
+| assets/promo/hero-set/raw/hero-04c-tight-crown.jpg | W942 | 紧箍儿重出原件 |
+| assets/promo/hero-set/raw/hero-07c-banana-fan.jpg | W942 | 芭蕉扇重出原件 |
+| assets/promo/hero-set/preview-contact-sheet.png | W942 | 9 张成套拼图刷新 |
+| assets/promo/hero-set/README.md | W942 | J8 自检表细化到形制级（倒刺钩数 / 扇形 / 环数 / 瓶插枝） |
+| site/static/images/hero-line-04-tight-crown.webp | W942 | 站点版重出（带九倒刺） |
+| site/static/images/hero-line-07-banana-fan.webp | W942 | 站点版重出（叶形扇） |
+| scripts/_w942_cascade.py | W942 | 四面登记 + 自检表更新 + 当前态指针 |
+| CHANGELOG.md | W942 | W942 版段（四件套） |
+| docs/00-导读/W批次编号对账表.md | W942 | W942 认领行 |
 
 ## W941 UI 图标位 emoji 治理批（2026-10-25）
 
@@ -913,6 +908,29 @@
 | docs/11-方案报告/计划方案/T26-任务计划执行与经验沉淀报告-2026-10-25.md | W941 | 新增：交付报告（T26） |
 | docs/11-方案报告/README.md | W941 | 新增：T-26 登记行 |
 | docs/00-导读/W批次编号对账表.md | W941 | W941 认领行与收官回填 |
+
+## W940 Hero 素材题材辨识度修正（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| assets/promo/hero-set/hero-line-04-tight-crown.png | W940 | 新增「紧箍儿」母版（西游独占物件·替代司南） |
+| assets/promo/hero-set/hero-line-04-tight-crown.webp | W940 | 同上 WebP |
+| assets/promo/hero-set/hero-line-09-somersault-cloud.png | W940 | 新增「筋斗云」母版（替代判不合格的取经四众） |
+| assets/promo/hero-set/hero-line-09-somersault-cloud.webp | W940 | 同上 WebP |
+| assets/promo/hero-set/raw/hero-04b-tight-crown.jpg | W940 | 紧箍儿出图原件（重出基准） |
+| assets/promo/hero-set/raw/hero-05b-somersault-cloud.png | W940 | 筋斗云出图原件 |
+| assets/promo/hero-set/hero-line-04-sinan-compass.png | W940 | 删除（司南·通用意象非西游独占） |
+| assets/promo/hero-set/hero-line-09-pilgrim-four.png | W940 | 删除（画成农夫挑担·无西游标志物） |
+| assets/promo/hero-set/preview-contact-sheet.png | W940 | 9 张成套拼图刷新 |
+| assets/promo/hero-set/README.md | W940 | 逐张清单更新 + 新增「题材辨识度自检表（J8 人工关）」 |
+| site/static/images/hero-line-04-tight-crown.webp | W940 | 站点版（新增） |
+| site/static/images/hero-line-09-somersault-cloud.webp | W940 | 站点版（新增） |
+| site/index.html | W940 | 图集引用换图（04→紧箍儿·09→筋斗云） |
+| scripts/_w931_hero_verify.py | W940 | 判据清单换名（04/09） |
+| scripts/_w938_apply_home.py | W940 | 幂等补丁同步（含 SLIDES/aria-label 换图） |
+| scripts/_w940_cascade.py | W940 | 四面登记脚本（认领行 + CHANGELOG 段 + file-index 段 + 当前态指针） |
+| CHANGELOG.md | W940 | W940 版段（四件套） |
+| docs/00-导读/W批次编号对账表.md | W940 | W940 认领行 |
 
 ## W938 首屏版式重做 + 图集逐张复核（2026-10-25）
 
@@ -4633,21 +4651,3 @@
 | docs/03-主题与情节专题 | W700 | 13d→16d 死链修复×4 |
 | docs/S2-学术投稿 | W700 | 13d→16d 死链修复×4 |
 | docs/10-方法论沉淀 | W700 | skills 去链×7+归档深度×5+决策清单去链 |
-## W942 Hero 素材全量复审（14 张逐张放大目视·修正 2 处形制偏差）（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| assets/promo/hero-set/hero-line-04-tight-crown.png | W942 | 重出「紧箍儿」母版（金圈内缘补足九个倒刺钩） |
-| assets/promo/hero-set/hero-line-04-tight-crown.webp | W942 | 同上 WebP |
-| assets/promo/hero-set/hero-line-07-banana-fan.png | W942 | 重出「芭蕉扇」母版（正圆团扇 → 叶形扇 + 中脉细脉 + 短柄缠绳） |
-| assets/promo/hero-set/hero-line-07-banana-fan.webp | W942 | 同上 WebP |
-| assets/promo/hero-set/raw/hero-04c-tight-crown.jpg | W942 | 紧箍儿重出原件 |
-| assets/promo/hero-set/raw/hero-07c-banana-fan.jpg | W942 | 芭蕉扇重出原件 |
-| assets/promo/hero-set/preview-contact-sheet.png | W942 | 9 张成套拼图刷新 |
-| assets/promo/hero-set/README.md | W942 | J8 自检表细化到形制级（倒刺钩数 / 扇形 / 环数 / 瓶插枝） |
-| site/static/images/hero-line-04-tight-crown.webp | W942 | 站点版重出（带九倒刺） |
-| site/static/images/hero-line-07-banana-fan.webp | W942 | 站点版重出（叶形扇） |
-| scripts/_w942_cascade.py | W942 | 四面登记 + 自检表更新 + 当前态指针 |
-| CHANGELOG.md | W942 | W942 版段（四件套） |
-| docs/00-导读/W批次编号对账表.md | W942 | W942 认领行 |
-
