@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（431）
+## 文件（436）
 
 ### Markdown 文档
 
@@ -176,6 +176,7 @@
 - `_cascade_files_W923.txt`
 - `_cascade_files_W924.txt`
 - `_cascade_files_W925.txt`
+- `_cascade_files_W926.txt`
 - `_sync_analysis_manifest.json`
 - `_vermilion_solid_cache.json`
 - `_vermilion_solid_report.json`
@@ -421,6 +422,10 @@
 - `_w923_spec.json`
 - `_w924_spec.json`
 - `_w925_spec.json`
+- `_w926_ia_audit.json`
+- `_w926_ia_evidence.json`
+- `_w926_spec.json`
+- `_w926_visible_leak.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`
