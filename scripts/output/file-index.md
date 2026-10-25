@@ -11,6 +11,28 @@
 ---
 
 
+## W935 速赢两处批（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/dukou-engine.html | W935 | 渡口档案 LINE 数组 4 条工程引用去除（溯源移入源码注释） |
+| site/en/visualizations.html | W935 | source-note 段目录型死链改纯文本（site/data/ 无 index.html·线上 404） |
+| docs/11-方案报告/计划方案/T25-任务计划执行与经验沉淀报告-2026-10-25.md | W935 | 速赢两处批交付报告（32/32 判据符合） |
+| docs/00-导读/W批次编号对账表.md | W935 | W935 认领行与收官回填 |
+| docs/11-方案报告/README.md | W935 | 计划方案分区登记（第 27 行·T-25） |
+| scripts/output/_w935_spec.json | W935 | 本批级联 spec |
+| CHANGELOG.md | W935 | W935 段 |
+| HANDOVER.md | W935 | 级联头尾链与里程碑块 |
+| README.md | W935 | 当前批次版本行 |
+| STRUCTURE.md | W935 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W935 | 当前批次版本行 |
+| site/index.html | W935 | 页脚批次链插入 W935 |
+| site/dukou-engine.html | W935 | 页脚批次链插入 W935 |
+| AGENTS.md | W935 | 版本脚注条目 |
+| archive/docs/AGENTS-ARCHIVE.md | W935 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W935 | version 同步为 W935 |
+| scripts/output/file-index.md | W935 | W935 段插入 |
+
 ## W934 D-2 应用迁移批第一子批（2026-10-25）
 
 | 文件 | W | 说明 |
