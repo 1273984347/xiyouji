@@ -11,6 +11,25 @@
 ---
 
 
+## W945 内页专题题图成套（8 张 3:4 线描人物题图）（2026-10-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/plate-line-01-wukong.webp | W945 | 新增·大圣悟空（金箍棒 + 凤翅紫金冠） |
+| site/static/images/plate-line-02-tangseng.webp | W945 | 新增·唐僧（五佛冠 + 念珠 + 九环锡杖） |
+| site/static/images/plate-line-03-bajie.webp | W945 | 新增·猪八戒（九齿钉耙 + 蒲扇耳） |
+| site/static/images/plate-line-04-shaseng.webp | W945 | 新增·沙僧（降妖宝杖 + 骷髅念珠） |
+| site/static/images/plate-line-05-guanyin.webp | W945 | 新增·观音（玉净瓶插杨柳 + 莲座） |
+| site/static/images/plate-line-06-erlangshen.webp | W945 | 新增·二郎神（三尖两刃刀 + 额间竖目） |
+| site/static/images/plate-line-07-baigujing.webp | W945 | 新增·白骨精（三变残影） |
+| site/static/images/plate-line-08-honghaier.webp | W945 | 新增·红孩儿（火尖枪 + 三昧真火） |
+| assets/promo/plate-set/ | W945 | 出图原件 + 逐张清单 + J8 自检表 + 拼图 |
+| scripts/_w945_plates_verify.py | W945 | J1–J7 机器判据 + J8 题材自检表 |
+| scripts/_w945_insert_plates.py | W945 | 8 页 chapter-plate 接入（幂等） |
+| scripts/_w945_cascade.py | W945 | 四面登记 + 当前态指针 |
+| CHANGELOG.md | W945 | W945 版段 |
+| docs/00-导读/W批次编号对账表.md | W945 | W945 认领行 |
+
 ## W944 章回插画新组（6 张按回目情节重出）（2026-10-25）
 
 | 文件 | W | 说明 |
