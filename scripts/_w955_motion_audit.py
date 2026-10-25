@@ -63,7 +63,7 @@ RE_BARE_EASE = re.compile(
 )
 RE_DURATION = re.compile(r"\.duration\(\s*(\d+)\s*\)")
 RE_INLINE_CSS_BLOCK = re.compile(r"<style>(.*?)</style>", re.S)
-RE_INLINE_JS_BLOCK = re.compile(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>", re.S | re.I)
+RE_INLINE_JS_BLOCK = re.compile(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script\s*>", re.S | re.I)
 RE_SCRIPT_SRC = re.compile(r"<script[^>]*\bsrc=[\"']([^\"']+)[\"']", re.I)
 
 
