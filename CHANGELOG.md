@@ -32,7 +32,7 @@
 
 **验证**：迁移后 `git status` scripts/ 零未跟踪（152 件为 gitignore 屏蔽态）；gen_folder_docs --refresh 后 scripts/index.md 与 output/index.md 零僵尸行（output/ 自有 _w7xx 件与 spec 属在位实件）；ruff 豁免面核实（pyproject `**/_*.py` + `archive/` W400 前例）；全量 verify + pytest + ruff 见验证行。
 
-> - **状态**：在途（认领登记 W977·收官回填随批尾提交补 hash）
+> - **状态**：已收官（9eaa41e3·verify 全量 rc=0 + pytest 922 过/3 跳 + ruff 0 + lint_links 5545 链接 0 broken）
 
 ### W976（2026-10-27）：工具链体检修复批（台账修剪器 A5 + C3 修路指引 + preflight 自撞 + 三窗回窗 + 坑表沉淀）
 
