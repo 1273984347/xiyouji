@@ -11,6 +11,31 @@
 ---
 
 
+## W982 手搓绕过级联治理批（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_size_budget.py | W982 | C7 版本面契约（三层方案②）：三面锚尾/HEAD 句/链条≤3（排除创建于误计）/概要块>6 判红·挂 verify+开工双面
+| scripts/preflight_check.py | W982 | ③手搓前置劝导：级联面脏件 NOTE（quotePath=false 二次取数·实弹验证过）
+| tests/unit/test_doc_size_budget.py | W982 | C7 单测 2 例（良构零 FAIL/三破坏 FAIL 锁）
+| HANDOVER.md | W982 | 候选条目标记 W982 落地（①文件锁缓建裁决）+ 级联头尾链与里程碑块
+| docs/00-导读/W批次编号对账表.md | W982 | W982 认领行与收官回填
+| CHANGELOG.md | W982 | W982 段
+| README.md | W982 | 当前批次版本行
+| STRUCTURE.md | W982 | 当前批次版本行
+| docs/00-导读/项目说明.md | W982 | 当前批次版本行
+| .github/workflows/README.md | W982 | 工作流层版本面推进 W982
+| site/index.html | W982 | 页脚批次链插入 W982
+| site/data/cross-time-danmaku.html | W982 | 页脚批次链插入 W982
+| site/data/tag-cloud.html | W982 | 页脚批次链插入 W982
+| site/dukou-engine.html | W982 | 页脚批次链插入 W982
+| AGENTS.md | W982 | 版本脚注条目
+| archive/docs/AGENTS-ARCHIVE.md | W982 | 脚注滚动迁入的最老条目
+| CITATION.cff | W982 | version 同步为 W982
+| scripts/output/file-index.md | W982 | W982 段插入
+| scripts/output/_w982_spec.json | W982 | 本批级联 spec
+| scripts/output/_cascade_files_W982.txt | W982 | 级联落盘清单
+
 ## W981 数据链恢复重判批（2026-10-27）
 
 | 文件 | W | 说明 |

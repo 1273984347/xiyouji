@@ -115,6 +115,21 @@ def collect():
                 blocks = len(RE_HANDOVER_BLOCK.findall(t[h1:pm])) if 0 <= h1 < pm else -1
                 extra = "  概要块 %d" % blocks
                 extra += "（>6 须滚·W511 留 5 版口径）" if blocks > 6 else ""
+                # ---- C7-4/5/6：HANDOVER 版本面契约（W982·三层方案②——W973/W961 手搓实证的开工面防线）----
+                if not re.search(r"当前 HEAD = W\d{3,4}（[^）]*；详见 CHANGELOG）。", t):
+                    extra_fails.append(
+                        "体积窗口 C7: HANDOVER「当前 HEAD」句形态失配（W973 清理批实证·级联下批锚点被破坏）"
+                        "——修法=恢复「当前 HEAD = W###（…；详见 CHANGELOG）。」")
+                for hl in re.findall(r"[^\n]*最后更新：[^\n]*", t):
+                    _seg = hl[hl.find("最后更新：") + len("最后更新："):]  # W982 修：只数更新条目——尾链行含「创建于 2026-07-25」同 line 会误计
+                    if len(re.findall(r"20\d{2}-\d{2}-\d{2}（", _seg)) > 3:
+                        extra_fails.append(
+                            "体积窗口 C7: HANDOVER 更新链条目 >3（W961/W963 手搓粘连实证·维护契约②）"
+                            "——修法=保留最新 3 条其余迁 CHANGELOG")
+                if blocks > 6:
+                    extra_fails.append(
+                        "体积窗口 C7: HANDOVER 概要块 %d > 6（里程碑只插不旋·W961/W963 积 19 块实证）"
+                        "——修法=走 batch_cascade 滚动淘汰最老块" % blocks)
             if "AGENTS" in rel:
                 fs = t.find("*本文件由")
                 if fs >= 0:
@@ -143,6 +158,25 @@ def collect():
                             "体积窗口 C4: AGENTS.md 脚注 %d 条违规定形（W965 逐条判据）：%s"
                             % (len(bad), "；".join(bad[:3])))
             lines.append("体积报告  %-38s %7.1f KB %6d 行%s" % (rel, kb, nlines, extra))
+
+    # ---- C7-1/2/3：三文档版本行锚尾（W982·三层方案②——锚尾是下批级联的 regex 依赖·手搓删除即全仓级联瘫痪）----
+    c7_faces = (
+        ("README.md",
+         r"(?m)^> \*\*当前批次 W\d{3,4}（20\d{2}-\d{2}-\d{2}）\*\*：.*·A1-A6", "锚尾 ·A1-A6"),
+        ("STRUCTURE.md",
+         r"(?m)^> 当前批次：W\d{3,4}（20\d{2}-\d{2}-\d{2}）— .*—\s*A1-A6", "锚尾 —A1-A6"),
+        (os.path.join("docs", "00-导读", "项目说明.md"),
+         r"(?m)^> 当前批次 W\d{3,4}（20\d{2}-\d{2}-\d{2}）：.*·详细变更见", "锚尾 ·详细变更见"),
+    )
+    for rel, pat, tail_name in c7_faces:
+        try:
+            ft = _read(rel)
+        except OSError:
+            continue  # 文件缺失归 C5/C4-f 等既有判据管
+        if not re.search(pat, ft):
+            extra_fails.append(
+                "体积窗口 C7: %s 版本行 %s 失配（手搓破坏级联锚点·W955/W961/W963 实证）"
+                "——修法=恢复「当前批次 W###（日期）：…%s」形态或走 batch_cascade 级联" % (rel, tail_name, tail_name))
     return counts, lines, extra_fails
 
 

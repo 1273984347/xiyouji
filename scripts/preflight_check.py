@@ -549,6 +549,23 @@ def main():
     print(f"OK    工作树：staged={tree['staged']} 未暂存={tree['unstaged']} 未跟踪={tree['untracked']}")
     for status, path in tree["items"][:8]:
         print(f"       [{status}] {path}")
+    # W982 三层方案③：手搓前置劝导——工作树含级联面未提交改动即提示走 batch_cascade
+    # （只提示不拦截·W822 语义；中文路径经 core.quotepath=false 二次取数防转义漏配）
+    try:
+        _faces = ("CHANGELOG.md", "HANDOVER.md", "README.md", "STRUCTURE.md",
+                  "docs/00-导读/项目说明.md", ".github/workflows/README.md",
+                  "site/index.html", "site/data/cross-time-danmaku.html",
+                  "site/data/tag-cloud.html", "site/dukou-engine.html",
+                  "AGENTS.md", "CITATION.cff", "scripts/output/file-index.md")
+        _r2 = run([git, "-c", "core.quotepath=false", "status", "--porcelain", "-z"])
+        _dirty = {it[1] for it in summarize_porcelain(_r2.stdout)["items"] if it[0] != "??"}
+        _hit = sorted(_dirty & set(_faces))
+        if _hit:
+            print("NOTE  手搓劝导：工作树含级联面未提交改动 "
+                  + ", ".join(_hit[:3]) + ("…共 %d 项" % len(_hit) if len(_hit) > 3 else "")
+                  + "——版本面请走 batch_cascade 级联（手搓破坏锚点实证 W955/W961/W963·C7 门禁已在开工面把守）")
+    except Exception as _exc:  # noqa: BLE001 — 劝导故障留痕不阻断（W822 语义）
+        print(f"NOTE  手搓劝导不可用（{_exc}）")
     if len(tree["items"]) > 8:
         print(f"       ……另 {len(tree['items']) - 8} 项")
     # W821 注：原拟的「触发①（开工 git status 发现非本会话变更）」已按用户裁决删除
