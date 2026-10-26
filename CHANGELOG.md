@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W975），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W976），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,26 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W976（2026-10-27）：工具链体检修复批（台账修剪器 A5 + C3 修路指引 + preflight 自撞 + 三窗回窗 + 坑表沉淀）
+
+
+
+> **来源**：用户 2026-10-27 令「检查一下项目所有的工具、脚本、探针、门禁，有没有问题是否需要优化；临时文件系统和归档系统现在是否能够正常运转」并批准处置清单开工。
+
+> - **文件**：scripts/archive_ledger_rows.py、scripts/check_doc_size_budget.py、scripts/preflight_check.py、scripts/batch_cascade.py、tests/unit/test_doc_size_budget.py、tests/unit/test_preflight_touches.py、docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、docs/00-导读/W批次编号对账表.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、scripts/output/file-index.md、scripts/output/_w976_spec.json、scripts/output/_cascade_files_W976.txt、scripts/output/_vermilion_solid_cache.json（逐件行见 file-index W976 段）。
+
+**体检结论（修复前）**：门禁与探针基本面健康（verify 50 槽全绿、pytest 919/923、ruff 0、engine.smoke 12/12、anchor 探针 0 盲区），但三窗齐超窗（CHANGELOG 111/110、file-index 111/110、台账 61/60——C 族挂 preflight 开工判据不在 verify，W976 开工即被拦）+ 工具链三缺陷：① 台账修剪器 archive_ledger_rows.py 的 A5 断言（迁出行物理序须升序）与自身文档「行序穿插是常态（W968 实证 52 处）」矛盾，真实台账（待迁出 {914,915} 物理序 [915,914]）首跑即 AssertionError，且自测样本恰好构造升序穿插测不出该形态——台账修剪回路断链；② C3 超窗修法指引统一指向段式 archive_segments.py，而该工具不管台账——修路指引死路；③ preflight_check 拒绝循环不排本批自身，认领后复跑必然自撞 FAIL（docstring 与 NOTE 均声称已排除）。
+
+**三缺陷修复**：① A5 改为「归档内迁出块 == 注记行 + 迁出行按源相对顺序逐字节一致」+ move() 参数化 + 自测重写为走 move() 全链路三形态（升序穿插/降序穿插/无迁出）；② evaluate() 修法指引按文件种类分治（台账指向 archive_ledger_rows.py --apply）+ 自测与单测各补台账案例；③ 新增 rejection_pairs 纯函数（排除 self_num）+ 主流程换用 + 单测锁行为。
+
+**回窗与台账治理**：archive_ledger_rows.py --apply 迁出 W914-W916 三行（61→59 回窗）+ archive_segments.py --apply 迁出 W856-W857 两段（CHANGELOG/file-index 111→109 回窗）；W962 孤儿认领核伪并闭环回填（无 commit、无 CHANGELOG 段，五大交付面随 W960 a6fed505 落地——ledger_close_check 诊断的「事实已收官、字段没回填」伪阻塞，其 touches 曾挡死本批两个文件）。
+
+**沉淀面**：坑表数据/内容可信度 +1 条「自测样本必须覆盖判据会失败的最小形态」（8→9 条·计数链同步 AGENTS/HANDOVER 共 4 处·N4 门禁 64=64）；batch_cascade 收官新增 [TMPE] 提示位（批次桶计数 + tmpe_tidy --tool-candidates 沉淀扫描指引——清理闭环自 W738 建制至本批只运转过一次，防「只进不出」复发）；tmpe 工具晋升机制实证结论：10-14/10-16 五次扫描 298 件最高 11/18 无一达晋升线 14（批次命名件复用频率维结构性 0 分），沉淀主通道是「教训入坑表/方法论篇」而非脚本搬迁。
+
+**验证**：archive_ledger_rows --self-test 三形态全过 + 真实台账 dry-run/apply 成功；check_doc_size_budget --self-test 过 + 实盘 0 FAIL（109/109/59）；pytest 单测 27 过（doc_size_budget 6 + preflight touches 20 + cascade 5 中相关）；ruff 全过；N4 坑位数 64=64；preflight 复跑 PASS 不再自撞。
+
+> - **状态**：在途（认领登记 W976·收官回填随批尾提交补 hash）
 
 ### W975（2026-10-27）：跨 Agent 经验沉淀入仓批（坑表 57 → 63 条 + 深度篇 1 篇 + 计数链同步）
 
@@ -177,7 +197,7 @@
 
 > **来源**：用户审问「我们不是有归档系统吗为什么没有进行归档」——取证结论为归档系统有条文有容器无触发器（§8 三次全人工批：W417/W511/W921），用户裁决「走」立项；本批认领于顶段 W957 之前（W958/W960 两轮让号留痕后以 W960 成型），低于现役顶段故走 backfill_changelog 补段路径（当前态版本行正确指向最高号·不回拉）。
 > **摘要**：① **check_doc_size_budget.py 新门禁**——CHANGELOG 与 file-index 正本各 110 段窗口（W921 先例沉淀为正式口径），段数为判据、KB/行数为报告值，超窗即红接 preflight 开工判据，修法唯一指向常驻工具；自测含窗口边界与缺件 fail-closed。② **archive_segments.py 常驻搬段工具**——W921 三道守恒断言沉淀为五道（A1 段数守恒 / A2 迁出块逐字节出现于归档 / A3 留存前缀与编号规则与顶段逐字节不动 / A4 双侧降序 / A5 归档 newest-at-top 序），CHANGELOG 归档插顶、file-index 归档尾追并记头部归档时间链。③ **本批实跑归档**——CHANGELOG 147→109 段（484.9→332.6 KB·迁出 38 段 W803-W842 入 CHANGELOG-ARCHIVE 顶部）、file-index 249→109 段（435.0→291.4 KB·迁出 140 段 W700-W842 入 FILE-INDEX-ARCHIVE 尾部），合计减重约 296 KB。④ **文档规范 §8 重标**——窗口制替代 50KB/500 行旧线（旧线按 W921 后实态废止），消除「条文 50KB vs 现实 480KB」的两制打架。⑤ **batch_cascade 落盘后体积提示位**——每批收官报一次四文件体积态。⑥ 顺带：pytest 收集数标记被并行会话竞态写成三数字拼接（910910902）归一回 910（磁盘实算对拍）。
-> **文件**：scripts/check_doc_size_budget.py · scripts/archive_segments.py · scripts/preflight_check.py · scripts/batch_cascade.py · docs/00-导读/文档规范.md · archive/docs/CHANGELOG-ARCHIVE.md · archive/docs/FILE-INDEX-ARCHIVE.md · CHANGELOG.md · scripts/output/file-index.md · tests/unit/test_doc_size_budget.py · tests/unit/test_archive_segments.py · pytest.ini · docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md · scripts/output/stats.json
+> **文件**：scripts/check_doc_size_budget.py · scripts/archive_segments.py · scripts/preflight_check.py · scripts/batch_cascade.py · docs/00-导读/文档规范.md · archive/docs/CHANGELOG-ARCHIVE.md · archive/docs/file-index-ARCHIVE.md · CHANGELOG.md · scripts/output/file-index.md · tests/unit/test_doc_size_budget.py · tests/unit/test_archive_segments.py · pytest.ini · docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md · scripts/output/stats.json
 > **验证**：两新工具 --self-test 全过（窗口边界 / 缺件 fail-closed / 三种段形态解析）+ 新增单测 8 例全绿；归档五道断言实跑全过（38 段与 140 段守恒·逐字节内容对拍·留存前缀逐字节不变）；pytest 全量 910 收集全绿（收集 899→910·标记三方同步）；体积门禁现网 0 FAIL（109/110 双绿）。
 > **状态**：**已收官**（W960 a6fed505 主提交 + d9d3765d 段补立·git 反填·共 2 笔·P-43-01）
 
@@ -1741,25 +1761,4 @@
 > - **登记与索引**：docs/11-方案报告/README.md §二「计划方案」8→9 篇；report_docs 42→43（stats.py 实算）；docs/INDEX.md 重建；搜索索引与 CSP 哈希随生成器重算。
 > - **纪律**：只审查不改代码；版段不落（随补段批 W863 按号序回写）。
 > **状态**：**已收官**（W858 e74286c6·git 反填·共 2 笔·W971 存量回填）
-
-### W857（2026-10-21）：计划方案模板符合性复核批（既有 8 份计划文档 × 模板 32 项结构判据·只复核不改文档）
-
-> **来源**：用户 2026-10-21 23:50 会话指令「按你的建议来。先把计划方案 review 一遍是否符合模板」；模板全文由用户同会话 23:44 提供（本批为该模板在仓内既有计划文档上的首次符合性复核）
-> - **文件**：scripts/_w857_plan_template_review.py、scripts/output/_w857_plan_template_review.json、scripts/output/_w857_spec.json、scripts/index.md、scripts/output/index.md、docs/00-导读/W批次编号对账表.md。
-> - **落地口径**：8 份文档（5 份《执行前计划》+ 3 份《任务计划执行与经验沉淀报告》）逐份对模板 32 项结构判据机械判定，并另判「计划件 + 报告件」配对并集对 §12 十项的覆盖。**本批 0 处既有文档改动**——复核只出结论与判据，改文档属后续 T-06 批。
-> - **核心判定**：① 5 份计划件按 §5.1~§5.9 严格排布，最佳 21/23 判据全符合；② 3 份报告件是**裁剪版**（T04 报告仅 85 行、3/13 编号种类），模板 §12 十项无一全量落在单件内；③ 配对并集 T03 达 8/10、T01 与 T04 仅 4/10；④ 真·模糊词违规 ≤4 处（其余命中均为文档自身「模糊词已清除 ✅」自检行或引文，已在探针内排除）；⑤ 编号 13 类中 G/P/A/WF/SC/PRE 七类基本未落地。
-> - **判据校准三处（先质疑判据再质疑产物）**：① 模板把一份报告拆两件落库 → 判据须按件型分判，不适用项判 N/A；② 「本章结论/待确认事项」仓内用「本批不做/待验证/待用户」等效形式 → 增等效识别；③ 模糊词命中先排除自检行与引文块，剩余为真违规。
-> - **验证**：py -3 scripts/_w857_plan_template_review.py 复算 8/8 文档矩阵（单件 + 配对并集）；人工抽查 2 份（执行前计划-T01、T04 报告）与探针判定一致；门禁全量档核心全部通过。
-> - **状态**：复核完成；既有计划文档的补齐属后续 T-06 批（首页三任务区重组 + 目录页动线）范围。
-> **状态**：**已收官**（W857 9b4059f5·git 反填·共 1 笔·W971 存量回填）
-
-
-### W856（2026-10-21）：Logo 定稿落地批（方向 H「山·门槛」·品牌名《取经录》·一级品牌位统一）
-
-> **来源**：用户令做站点 Logo 与品牌名。两轮探索——抽象制图 4 向经用户否决作废；具象符号 5 向（棒 / 幡 / 卷 / 山 / 图）+ AI 概念稿 18 张（14 可用 4 判废）——收敛到方向 H「山·门槛」图形，品牌名《取经录》。
-> - **文件**：site/static/icons/（icon-192/512/maskable-512 重做 + logo-mark-light.svg + logo-lockup-light.svg）、site/index.html（六处元信息 + 页眉图形标 + hero h1 + 页脚品牌位）、site/system.css（新增 .brand-mark 纯加法规则）、site/manifest.webmanifest、site/rss.xml、site/static/img/og-cover.png、xiyouji-desktop/、README.md、CITATION.cff、docs/00-导读/W批次编号对账表.md。
-> - **图形口径**：64 单位域 · 思源宋体 Heavy 字标路径化 · 零字体依赖；山脊一笔连绵（起收顿挫、提按变化）；地平线与云气为淡墨次级；山顶一点朱砂（远寺的灯）全图只此一处；四向并排按视觉面积归一化，体量差 ≤15%。
-> - **落地面**：图标三档（图形占比 72%·maskable 收到 56% 留圆形裁切安全区）+ 页眉图形标与组合标；index 六处元信息（title / RSS title / JSON-LD name / meta description / og:title / og:site_name）+ 页眉 seal→图形标 + hero h1 + 页脚品牌位；manifest name/short_name → 取经录；system.css `.brand-mark` 纯加法（`.seal` 保留·其余 857 页旧印面标识不受影响）；桌面端应用名同步。
-> - **版段**：本批不落段（并行会话在途），随补段批（W863）按号序回写。
-> **状态**：**已收官**（W856 7d18eb6a·git 反填·共 3 笔·W971 存量回填）
 

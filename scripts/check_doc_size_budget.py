@@ -68,10 +68,14 @@ def evaluate(counts):
         if n is None:
             fails.append("体积窗口 C%s: %s 不可读（fail-closed）" % (len(fails) + 1, rel))
         elif n > window:
+            # 修法指引按文件种类分治（W976）：台账是表格行且行序穿插，归档工具是
+            # archive_ledger_rows.py（W970 建）——段式 archive_segments.py 不管台账，
+            # 旧文案对台账是死路指引（实测：C3 超窗期台账修剪器恰在 A5 崩溃期）。
+            tool = ("scripts/archive_ledger_rows.py --apply（台账行归档）"
+                    if "对账表" in rel else "scripts/archive_segments.py 归档")
             fails.append(
-                "体积窗口 C%d: %s 正本 %d 段 > 窗口 %d 段——先跑 "
-                "scripts/archive_segments.py 归档再动工（文档规范 §8·W960 立窗）"
-                % (len(fails) + 1, rel, n, window))
+                "体积窗口 C%d: %s 正本 %d 段 > 窗口 %d 段——先跑 %s 再动工（文档规范 §8·W960 立窗）"
+                % (len(fails) + 1, rel, n, window, tool))
     return fails
 
 
@@ -163,7 +167,7 @@ def main() -> int:
     if fails:
         for f in fails:
             print("FAIL ", f)
-        print("---- 体积窗口门禁：%d FAIL（修法=scripts/archive_segments.py 归档）----" % len(fails))
+        print("---- 体积窗口门禁：%d FAIL（修法=按各 FAIL 行内指引跑对应归档工具）----" % len(fails))
         return 1
     print("---- 体积窗口门禁：0 FAIL（窗口 %s）----" % WINDOWS)
     return 0
@@ -189,6 +193,12 @@ def _self_test() -> int:
         fails.append("111 段必须恰好产出 1 条 FAIL 且带计数")
     if evaluate({}) == []:
         fails.append("负样本：文件缺失必须 fail-closed 判红（禁静默跳过）")
+
+    # 修法指引分治（W976）：台账超窗必须指向 archive_ledger_rows（段式工具不管台账）
+    out_led = evaluate({"CHANGELOG.md": 110, os.path.join("scripts", "output", "file-index.md"): 110,
+                        os.path.join("docs", "00-导读", "W批次编号对账表.md"): 61})
+    if len(out_led) != 1 or "61" not in out_led[0] or "archive_ledger_rows" not in out_led[0]:
+        fails.append("台账超窗必须恰好 1 条 FAIL 且指引 archive_ledger_rows")
 
     print()
     if fails:

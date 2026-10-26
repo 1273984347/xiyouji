@@ -49,6 +49,25 @@ def test_locate_touches_placeholder_is_empty_set():
         assert pf._locate_touches(cells) == set(), "占位符 %r 应归一为空集" % ph
 
 
+def test_rejection_pairs_excludes_self_claim():
+    """认领后的 preflight 复跑不得自撞（W976 修）：self_num 行必须退出拒绝集。
+
+    旧病根：拒绝循环遍历全部在途行含自己 ⇒ 认领 W976 后自查必红，
+    而代码 docstring 与 NOTE 文案都声称「本批自己·交集检查已排除」。
+    """
+    inflight = [
+        {"w": 962, "touches": ["scripts/batch_cascade.py"]},
+        {"w": 976, "touches": ["scripts/batch_cascade.py", "CHANGELOG.md"]},
+    ]
+    bad = pf.rejection_pairs(inflight, {"scripts/batch_cascade.py"}, self_num=976)
+    assert bad == [(962, ["scripts/batch_cascade.py"])]
+    # 不传 self_num 时保持旧行为（全量拒绝集·返回参与命中的双方元素去重排序）
+    assert pf.rejection_pairs(inflight, {"scripts/batch_cascade.py"}) == [
+        (962, ["scripts/batch_cascade.py"]),
+        (976, ["scripts/batch_cascade.py"]),
+    ]
+
+
 def test_conflict_is_detected_across_separators():
     """回归锁定：台账侧用「·」、命令行侧用「·」时，交集必须报得出（不再恒空）。"""
     ledger_touches = pf._split_touches("scripts/a.py·scripts/b.py")

@@ -323,6 +323,23 @@ def touches_conflict(inflight_touches, mine):
     return sorted(hits)
 
 
+def rejection_pairs(inflight, mine_hard, self_num=None):
+    """纯函数：交集拒绝集——排除本批自身（W976 修）。
+
+    旧病根：认领行先入台账后，preflight 复跑时自己的在途行照进拒绝循环，必然
+    自撞 FAIL——docstring 与 NOTE 文案都声称「本批自己·交集检查已排除」，代码却
+    未排除（W976 实证：认领 W976 后自查即红）。
+    """
+    bad = []
+    for r in inflight:
+        if r["w"] == self_num:
+            continue
+        c = touches_conflict(r["touches"], mine_hard)
+        if c:
+            bad.append((r["w"], c))
+    return bad
+
+
 def summarize_porcelain(text):
     """porcelain -z 输出 → {staged, unstaged, untracked, items}。"""
     out = {"staged": 0, "unstaged": 0, "untracked": 0, "items": []}
@@ -505,13 +522,13 @@ def main():
         #   并发保障改由「纯追加 + 精确暂存 + 回填行指纹」承担（规范 §11.0 规则二）。
         mine_hard = {t for t in mine if not _is_register_surface(t)}
         mine_reg = {t for t in mine if _is_register_surface(t)}
+        inflight_others = [r for r in inflight if r["w"] != self_num]
         reg_hits = []
-        for r in inflight:
+        for r in inflight_others:
             c = touches_conflict(r["touches"], mine_reg)
             if c:
                 reg_hits.append((r["w"], sorted(c)))
-        bad = [(r["w"], touches_conflict(r["touches"], mine_hard)) for r in inflight]
-        bad = [(w, c) for w, c in bad if c]
+        bad = rejection_pairs(inflight, mine_hard, self_num)
         for w, c in bad:
             print(f"FAIL  touches 交集（在途 W{w}）：{', '.join(c)}——共享文件并行写风险·等对方收官或人工裁决")
             problems.append(f"touches 与在途批次 W{w} 冲突：{', '.join(c)}")
@@ -524,7 +541,7 @@ def main():
         if bad:
             print(interference_log_hint("preflight 交集拒绝"))
         if not bad:
-            print(f"OK    touches 交集检查：本批声明 {len(mine)} 项·与在途批次（{len(inflight)} 个声明方）无交集")
+            print(f"OK    touches 交集检查：本批声明 {len(mine)} 项·与在途批次（{len(inflight_others)} 个声明方）无交集")
 
     # 4) 工作树态
     r = run([git, "status", "--porcelain", "-z"])

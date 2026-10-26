@@ -37,9 +37,9 @@ ARC = os.path.join("archive", "docs", "W批次编号对账表-ARCHIVE.md")
 ROW_RE = re.compile(r"^\| W(\d{3,4}) ")
 
 
-def move(keep, apply):
-    src_p = os.path.join(ROOT, SRC)
-    arc_p = os.path.join(ROOT, ARC)
+def move(keep, apply, src_p=None, arc_p=None):
+    src_p = src_p or os.path.join(ROOT, SRC)
+    arc_p = arc_p or os.path.join(ROOT, ARC)
     lines = open(src_p, encoding="utf-8", newline="").read().split("\n")
     row_idx = [i for i, ln in enumerate(lines) if ROW_RE.match(ln)]
     assert row_idx, "正本无行（结构异常）"
@@ -60,7 +60,7 @@ def move(keep, apply):
     new_arc = arc_txt
     if new_arc and not new_arc.endswith(anl):
         new_arc += anl
-    note = "- %s（W970 迁入 %d 行·W%d-W%d·号序切分）" % (
+    note = "- %s（修剪迁入 %d 行·W%d-W%d·号序切分）" % (
         datetime.date.today().isoformat(), len(moved_lines), min(moved_ws), max(moved_ws))
     new_arc += note + anl + "\n".join(moved_lines).replace("\n", anl) + anl
 
@@ -84,8 +84,11 @@ def move(keep, apply):
     inflight_before = [r["w"] for r in led_before["rows"] if pf.is_inflight(r["status"]) and r["touches"]]
     inflight_after = [r["w"] for r in led["rows"] if pf.is_inflight(r["status"]) and r["touches"]]
     assert inflight_before == inflight_after, "在途行集合变化"
-    # A5 归档内迁出行序 = 原文件相对顺序
-    assert moved_ws == sorted(moved_ws), "归档内迁出行序错乱"
+    # A5 归档内迁出块 = 注记行 + 迁出行按**源文件相对顺序**逐字节一致。
+    # 按号切分、不要求号升序——台账行序穿插是常态（W968 实证 52 处）；旧断言
+    # moved_ws == sorted(moved_ws) 与此矛盾，迁出段物理序降序时必崩（W976 修）。
+    assert new_arc.endswith(note + anl + "\n".join(moved_lines).replace("\n", anl) + anl), \
+        "归档内迁出块与源相对顺序不一致"
 
     print("迁出 %d 行（W%d-W%d）·正本留 %d 行（W%d-W%d）"
           % (len(moved_lines), min(moved_ws), max(moved_ws), len(kept_ws), min(kept_ws), max(kept_ws)))
@@ -99,25 +102,45 @@ def move(keep, apply):
 
 
 def _self_test() -> int:
-    """自测：合成穿插行账本（行序≠号序·W968 实证形态），号序切分必须正确。"""
+    """自测（W976 重写）：不再复算切分逻辑，直接走 move() 全链路——
+    升序穿插（W968 形态）、降序穿插（旧 A5 断言必崩形态）、无迁出三形态都必须成功；
+    守恒五道（A1-A5）在 move() 内部生效，rc=0 即全过。旧自测的病根：自建样本的
+    迁出集恰好物理升序，测不出判据会失败的最小形态（自测通过≠判据正确）。"""
     import tempfile
-    rows = ["| W%d | 行%d | a | b | 已收官 | s | x |" % (w, w) for w in (910, 905, 912, 908, 911)]
-    txt = "# 台账样本\n\n" + "\n".join(rows) + "\n\n## ASCII\n- W# 三位数零填充（W001 形态）。\n"
-    td = tempfile.mkdtemp()
-    sp = os.path.join(td, "l.md")
-    open(sp, "w", encoding="utf-8", newline="").write(txt)
-    row_pairs = [(i, int(ROW_RE.match(ln).group(1))) for i, ln in enumerate(txt.split("\n")) if ROW_RE.match(ln)]
-    ordered = sorted(row_pairs, key=lambda t2: -t2[1])
-    keep_ids = {i for i, _ in ordered[:3]}
-    got_moved = sorted(w for i, w in row_pairs if i not in keep_ids)
+
+    def _run(rows_ws, keep):
+        lines = ["| W%d | 行%d | a | b | 已收官 | s | x |" % (w, w) for w in rows_ws]
+        txt = "# 台账样本\n\n" + "\n".join(lines) + "\n\n## ASCII\n- W# 三位数零填充（W001 形态）。\n"
+        td = tempfile.mkdtemp()
+        sp = os.path.join(td, "l.md")
+        open(sp, "w", encoding="utf-8", newline="").write(txt)
+        ap = os.path.join(td, "a.md")
+        rc = move(keep, True, src_p=sp, arc_p=ap)
+        src_after = open(sp, encoding="utf-8", newline="").read()
+        arc_after = open(ap, encoding="utf-8", newline="").read() if os.path.exists(ap) else ""
+        return rc, src_after, arc_after
+
     fails = []
-    if got_moved != [905, 908]:
-        fails.append("穿插形态号序切分错误：%s" % got_moved)
+    # 形态一（W968 实证）：行序≠号序·迁出集 {905,908} 物理序恰升序
+    rc, src, arc = _run([910, 905, 912, 908, 911], 3)
+    if rc != 0 or not all("| W%d " % w in arc for w in (905, 908)) or "| W905 " in src:
+        fails.append("升序穿插形态失败（迁出/留存不符）")
+    # 形态二：迁出集物理序**降序**（旧 A5 必崩的形态·W976 实证 914/915 真实台账）
+    rc, src, arc = _run([914, 915, 913], 1)
+    if rc != 0:
+        fails.append("降序穿插形态失败（旧 A5 必崩形态未被修复覆盖）")
+    elif arc.find("| W914 ") > arc.find("| W913 ") or "| W915 " not in src:
+        fails.append("降序穿插形态归档序/留存错误")
+    # 形态三：行数 ≤ keep·无需迁出（不建归档文件）
+    rc, src, arc = _run([920, 919], 5)
+    if rc != 0 or arc:
+        fails.append("无迁出形态失败（不应落归档）")
+
     print()
     if fails:
         print("自测 %d 项不一致：%s" % (len(fails), fails))
         return 1
-    print("自测通过：穿插形态号序切分正确（判据可证伪）")
+    print("自测通过：升序/降序穿插 + 无迁出三形态 move() 全链路（判据可证伪）")
     return 0
 
 
