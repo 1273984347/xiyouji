@@ -11,6 +11,14 @@
 ---
 
 
+## W973 HANDOVER 五区清理批（2026-10-26）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| HANDOVER.md | W973 | 五区清理：87.2→40.6KB（历史迁档+指针化） |
+| archive/docs/HANDOVER-ARCHIVE.md | W973 | 迁入五区历史（零阻塞+候选+方法论+雷区+待办） |
+| scripts/check_doc_size_budget.py | W973 | C6 HANDOVER 45KB 硬判据 |
+
 ## W972 CodeQL 三高危修复批（2026-10-26）
 
 | 文件 | W | 说明 |
@@ -3119,30 +3127,5 @@
 | xiyouji-desktop/ | W856 | 桌面端应用名同步 |
 | README.md、CITATION.cff | W856 | 品牌名与项目名同步 |
 | docs/00-导读/W批次编号对账表.md | W856 | 认领行与补段批回填 |
-
-
-## W855 架构评审报告批（2026-10-21）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/架构评审报告-2026-10-21.md | W855 | 新增：现役架构五维体检报告（P0 五条 / P1 十一条 / P2 择要 + 五维评级 + 三梯队 16 项 + 与 W820/W818 边界对齐 + 8 项未验证项 + 12 条复算命令附录） |
-| docs/11-方案报告/README.md | W855 | 目录索引登记（现役报告 32 → 33 篇·新增第 33 行·W854 并行批第 32 行原样保留） |
-| docs/INDEX.md | W855 | 产物级重建（新增报告入索引·docs_index.py 重跑·第 17 门禁逐字节比对依据） |
-| scripts/output/_w855_spec.json | W855 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写 W852 至 W855 四段及双索引） |
-| docs/00-导读/W批次编号对账表.md | W855 | 认领行（touches 声明 4 项 + 版段递延登记·已收官） |
-
-
-## W854 界面布局审计批（2026-10-21）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/界面布局审计报告-2026-10-21.md | W854 | 新增：界面布局审计报告（四痛点全查·18 条问题逐条取证与理由） |
-| scripts/_w854_cdp.mjs | W854 | 新增：布局审计 CDP 量测探针 |
-| scripts/_w854_layout_probe.mjs | W854 | 新增：站点布局度量探针 |
-| scripts/_w854_layout_probe_app.mjs | W854 | 新增：桌面端布局度量探针 |
-| scripts/output/_w854_layout_metrics.json | W854 | 新增：站点布局度量产物 |
-| scripts/output/_w854_layout_metrics_app.json | W854 | 新增：桌面端布局度量产物 |
-| docs/11-方案报告/README.md | W854 | §二 报告登记（随 W855 提交带入） |
-| docs/00-导读/W批次编号对账表.md | W854 | 认领行（随 W855 提交带入）与补段批回填 |
 
 
