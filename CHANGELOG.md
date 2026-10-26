@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W979），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W980），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,24 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W980（2026-10-27）：stats 标记同步机器化批（P-44-05 + W681 事实收官订正 + GoatCounter 取证中）
+
+
+
+> **来源**：用户 2026-10-27 令「做」（P-44-05 stats 三方同步机器化）+ 两项事实纠偏（agent-web 的 LLM 实测早已完成；GoatCounter API 可用——与仓内 W806 退役记录冲突，取证中）。
+
+> - **文件**：scripts/stats.py、tests/unit/test_stats_sync.py、pytest.ini、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、archive/docs/W批次编号对账表-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w980_spec.json、scripts/output/_cascade_files_W980.txt。
+
+**P-44-05（stats 标记自动跟随）**：stats.py 新增 `sweep_markers()`——`--w` 落盘后自动把 C5b 对账面上的 `N<!--stats:KEY-->` 前置数字刷成本批实算值。**面 = check_doc_sync 权威面**（C5_DOC_NAMES 六文件 + CHANGELOG 口径块 + c5b_extra_surfaces：pytest.ini/site/index.html/11-方案报告递归排除计划方案）——面漂移即门禁与跟随同源漂移，不自造第二份清单。**两条防线内嵌**：① CHANGELOG 只扫首个「### W」段之前的口径块（历史段含字面标记叙述 W913 段实证·整文件扫必污染）；② 标记正则与 RE_STATS_MARK 同源（`[a-z_0-9]+` 含数字键——首版 `[a-z_]+` 被 a1_a6_docs 当场打回）。**首跑自证**：本批新增 4 例单测 → pytest_collected 925→929 → pytest.ini 与架构方案 v2 双标记自动跟随——P-44-05 立项时的手工杂务（W976/W978 两轮手工刷）自此消失。单测 4 例（失配更新/相等不动/历史段防污染/计划方案目录排除回归锁）。
+
+**W681 事实收官订正**：用户确认 agent-web 的 LLM 真端点实测早已完成——归档台账 W681 行定格「进行中（待三键）」属登记滞后（W971 回填只覆盖 W850-W963），按追加合规落订正注（原行未动）：进行中→**已闭环**（W680 主批落地 + engine.smoke 12/12·附记 agent-web 当前无 .env 本体=历史测试后未留档）。`Fetch_gate_stats` 同理见下条。
+
+**GoatCounter 数据链（取证中·待用户一信息）**：仓内 W806 裁决（2026-10-20）记载站点代码 `1273984347` 已失效并整体退役；用户 2026-10-27 口述「API 可以用」——最可能为账号/站点已重建（新站点代码不在仓内任何记录）。token 在位（51 字符），待用户提供现用站点地址后 `--site` 重探 + `judge_gate` 正式重判（W626 冻结的机器解冻条件：30 日 UV≥30）。本批不动 W806 退役记录。
+
+**验证**：单测 4/4 · ruff 0 · stats.py --w 实跑 sweep 跟随 2 处 + C5b 0 FAIL · check_doc_sync 0 FAIL · 全量 verify + pytest 见状态行。
+
+> - **状态**：在途（认领登记 W980·收官回填随批尾提交补 hash）
 
 ### W979（2026-10-27）：收官提示位扩展批（P-44-01/02/03 落地 + P-44-04 活面零残留裁定免迁）
 
