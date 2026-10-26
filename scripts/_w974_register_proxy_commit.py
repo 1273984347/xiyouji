@@ -66,12 +66,15 @@ def stage_exact(rel, text):
 
 
 def t_ledger(text):
-    """台账 W974 行的 touches 列末尾追加 `scripts/index.md`"""
-    if "`scripts/index.md`" in text:
-        return text
+    """台账 W974 行的 touches 列末尾追加 `scripts/index.md`
+
+    ⚠️ 幂等判定必须**在 W974 行内**做——扫全文会因其它批次行也含该路径而误判「已登记」。
+    """
     lines = text.split("\n")
     for i, ln in enumerate(lines):
         if ln.startswith("| W974 |"):
+            if "`scripts/index.md`" in ln:
+                return text
             if not ln.rstrip().endswith("|"):
                 raise SystemExit("FATAL 台账 W974 行格式异常")
             lines[i] = ln.rstrip()[:-1].rstrip() + " · `scripts/index.md` |"
