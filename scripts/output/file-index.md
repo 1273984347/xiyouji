@@ -11,6 +11,43 @@
 ---
 
 
+## W977 一次性件批量退役批（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| archive/README.md | W977 | 归档台账组行 5 条（misc 60 + w6xx 2 + w7xx 31 + w8xx 42 + w9xx 152 = 287 件）
+| scripts/index.md | W977 | 目录文档刷新（顶层 _ 件 454 → 167：286 入档 + 152 S4 本地件 + 15 现役保留）
+| scripts/output/index.md | W977 | 目录文档刷新核对（output/ 自有 _w7xx 件与 spec 在位·零僵尸行）
+| archive/scripts/batches/README.md | W977 | 目录文档刷新（batches 总览）
+| archive/scripts/batches/index.md | W977 | 目录文档刷新（batches 索引）
+| archive/scripts/batches/misc/README.md | W977 | 目录文档刷新（misc 组）
+| archive/scripts/batches/misc/index.md | W977 | 目录文档刷新（misc 索引）
+| archive/scripts/batches/w6xx/README.md | W977 | 目录文档刷新
+| archive/scripts/batches/w6xx/index.md | W977 | 目录文档刷新
+| archive/scripts/batches/w7xx/README.md | W977 | 目录文档刷新
+| archive/scripts/batches/w7xx/index.md | W977 | 目录文档刷新
+| archive/scripts/batches/w8xx/README.md | W977 | 目录文档刷新（w8xx 新建组）
+| archive/scripts/batches/w8xx/index.md | W977 | 目录文档刷新（w8xx 新建组）
+| archive/scripts/batches/w9xx/README.md | W977 | 目录文档刷新（w9xx 本批最大组 +152）
+| archive/scripts/batches/w9xx/index.md | W977 | 目录文档刷新
+| docs/00-导读/W批次编号对账表.md | W977 | W977 认领行与收官回填
+| CHANGELOG.md | W977 | W977 段
+| HANDOVER.md | W977 | 级联头尾链与里程碑块
+| README.md | W977 | 当前批次版本行
+| STRUCTURE.md | W977 | 当前批次版本行
+| docs/00-导读/项目说明.md | W977 | 当前批次版本行
+| .github/workflows/README.md | W977 | 工作流层版本面推进 W977
+| site/index.html | W977 | 页脚批次链插入 W977
+| site/data/cross-time-danmaku.html | W977 | 页脚批次链插入 W977
+| site/data/tag-cloud.html | W977 | 页脚批次链插入 W977
+| site/dukou-engine.html | W977 | 页脚批次链插入 W977
+| AGENTS.md | W977 | 版本脚注条目
+| archive/docs/AGENTS-ARCHIVE.md | W977 | 脚注滚动迁入的最老条目
+| CITATION.cff | W977 | version 同步为 W977
+| scripts/output/file-index.md | W977 | W977 段插入
+| scripts/output/_w977_spec.json | W977 | 本批级联 spec
+| scripts/output/_cascade_files_W977.txt | W977 | 级联落盘清单
+
 ## W976 工具链体检修复批（2026-10-27）
 
 | 文件 | W | 说明 |
@@ -3169,30 +3206,5 @@
 | tests/unit/test_check_plan_template.py | W860 | 新增：第 48 槽单测 4 例（纯逻辑面·git 端到端用例不入 pytest） |
 | AGENTS.md · docs/agent/gates.md · README.md · pytest.ini · HANDOVER.md | W860 | 改：门数口径四处同步（47→48 槽 + gate_count 标记 + pytest_collected 标记 + 交接块） |
 | scripts/output/stats.json | W860 | 改：gate_count 47→48 · pytest_collected 818→823（stats.py --w W860 实测刷新） |
-
-
-## W859 设计资产归档批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| assets/design/logo/ | W859 | 新增：Logo 定稿源文件 10 件（图形标/组合标/图标三档/favicon 四档） |
-| assets/design/ai-concepts/ | W859 | 新增：AI 概念稿 18 张 + 逐张母题判定表 |
-| assets/design/tools/ | W859 | 新增：可复算工具链 |
-| assets/design/README.md | W859 | 新增：素材区索引与口径说明 |
-| docs/00-导读/W批次编号对账表.md | W859 | 认领行与补段批回填 |
-
-
-## W858 站点交互流程审查报告批（2026-10-21）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/计划方案/T07-任务计划执行与经验沉淀报告-2026-10-21.md | W858 | 新增：交互流程审查报告（3 条 P0 + 8 条 P1-P3 + 施工计划与经验） |
-| docs/00-导读/文档规范.md | W858 | §4.9 新增「框架类交付物必须落进仓内目录并登记索引」 |
-| CLAUDE.md | W858 | 第 11 条指针（权威正文在文档规范） |
-| docs/11-方案报告/README.md | W858 | §二「计划方案」8→9 篇 |
-| docs/INDEX.md | W858 | 重建（report_docs 42→43） |
-| site/data/search.html、site/en/search.html | W858 | 搜索索引重建 + CSP 哈希重算 |
-| scripts/output/stats.json、stats-index.md、stats-changelog.json | W858 | 报告计数与会话统计刷新 |
-| docs/00-导读/W批次编号对账表.md | W858 | 认领行与补段批回填 |
 
 

@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（226）
+## 文件（228）
 
 ### Python 脚本
 
@@ -28,6 +28,7 @@
 - `_w616_zhuangshi_folder.py`
 - `_w617_humanize.py`
 - `_w621_dark_data_colors_fix.py`
+- `_w621_svg_figures.py`
 - `_w624_cascade_block_test.py`
 - `_w624_inspect_milestone.py`
 - `_w624_repair_milestone.py`
@@ -82,6 +83,7 @@
 - `_w621_capture_shots.js`
 - `_w621_content_probe.js`
 - `_w621_probe_dark_fills.js`
+- `_w621_render_png.js`
 - `_w621_reshoot_en_appearance.js`
 - `_w622_probe_en_names.js`
 - `_w625_capture.js`
