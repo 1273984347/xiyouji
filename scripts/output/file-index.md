@@ -11,6 +11,31 @@
 ---
 
 
+## W981 数据链恢复重判批（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/judge_gate.py | W981 | --report 路径随目录分区修正（10-方法论沉淀→11-方案报告/调研与数据复盘·旧路径静默不落盘）
+| docs/11-方案报告/调研与数据复盘/读者数据复盘.md | W981 | W806 声明追加订正注（数据链实测恢复·账号 10-01 重启·重判中间态 78）+ 末尾判定记录（judge_gate --report 首次真正落盘）
+| docs/00-导读/访问统计方案.md | W981 | W981 恢复注记（API 侧恢复·beacon 链退役裁决不变·守卫维持）
+| docs/00-导读/W批次编号对账表.md | W981 | W981 认领行与收官回填
+| CHANGELOG.md | W981 | W981 段
+| HANDOVER.md | W981 | 零段冻结表述订正 + 级联头尾链与里程碑块
+| README.md | W981 | 当前批次版本行
+| STRUCTURE.md | W981 | 当前批次版本行
+| docs/00-导读/项目说明.md | W981 | 当前批次版本行
+| .github/workflows/README.md | W981 | 工作流层版本面推进 W981
+| site/index.html | W981 | 页脚批次链插入 W981
+| site/data/cross-time-danmaku.html | W981 | 页脚批次链插入 W981
+| site/data/tag-cloud.html | W981 | 页脚批次链插入 W981
+| site/dukou-engine.html | W981 | 页脚批次链插入 W981
+| AGENTS.md | W981 | 版本脚注条目
+| archive/docs/AGENTS-ARCHIVE.md | W981 | 脚注滚动迁入的最老条目
+| CITATION.cff | W981 | version 同步为 W981
+| scripts/output/file-index.md | W981 | W981 段插入
+| scripts/output/_w981_spec.json | W981 | 本批级联 spec
+| scripts/output/_cascade_files_W981.txt | W981 | 级联落盘清单
+
 ## W980 stats 标记同步机器化批（2026-10-27）
 
 | 文件 | W | 说明 |
@@ -3229,38 +3254,4 @@
 | scripts/output/_w864_accent_exemptions.json | W864 | 新增：裁决 2 豁免清单首批（数据语义色片 + 选中态实底） |
 | scripts/output/_w864_spec.json | W864 | 本批 spec 十字段 |
 | docs/00-导读/W批次编号对账表.md | W864 | 认领行与收官回填 |
-
-## W863 递延版段补写批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| CHANGELOG.md | W863 | 补写 W852-W862 十一段（149→160 段·号序降序完好）+ 本批 W863 段 |
-| scripts/output/file-index.md | W863 | 补写 W852-W862 十一段反向索引（149→160 段） |
-| scripts/output/_w854_spec.json | W863 | 新增：补位 spec（按 W854 feat 提交与台账行整理） |
-| scripts/output/_w856_spec.json | W863 | 新增：补位 spec（Logo 定稿落地·按提交记录整理） |
-| scripts/output/_w858_spec.json | W863 | 新增：补位 spec（交互流程审查·按提交记录整理） |
-| scripts/output/_w859_spec.json | W863 | 新增：补位 spec（设计资产归档·按提交记录整理） |
-| scripts/output/_w861_spec.json | W863 | 新增：补位 spec（设计资产归档收尾·按提交记录整理） |
-| scripts/output/_w863_spec.json | W863 | 本批 spec 十字段 |
-| docs/00-导读/W批次编号对账表.md | W863 | 认领行与收官回填·递延豁免区状态更新 |
-
-## W862 设计迁移 B1 根页与入口 8 页（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/index.html | W862 | B1 迁移：kicker 落 --bg 改 --accent-text（ask-hero 内恢复 --accent）· 间距令牌化 25 处 |
-| site/guide.html | W862 | B1 迁移：kicker 改 --accent-text · 间距令牌化 12 处 |
-| site/curated.html | W862 | B1 迁移：kicker 改 --accent-text · 间距令牌化 9 处 |
-| site/dashboard.html | W862 | B1 迁移：容器 1536→--container-wide · KPI 大字归墨色 · masthead/section-kick 改 --accent-text · 间距令牌化 49 处 |
-| site/dukou-engine.html | W862 | B1 迁移：容器 1320→--container-wide · 徽章实底→--accent-tint 淡底 · header h1 改 --accent-text · 间距令牌化 14 处 |
-| site/rum-viewer.html | W862 | B1 迁移：容器 1024→--container-content · .btn 字色改 --accent-text 并令牌化朱砂字面量 · 间距令牌化 10 处 |
-| site/visit-viewer.html | W862 | B1 迁移：间距令牌化 7 处 |
-| scripts/_w862_tokenize_spacing.py | W862 | 新增：值保留式间距令牌化（dry-run·跳过 INLINED 块·负值防护） |
-| scripts/_w862_accent_text_audit.py | W862 | 新增：朱砂文字落点机器分类（计算样式有效背景链） |
-| scripts/_w862_diff_review.py | W862 | 新增：迁移 diff 全量归渠聚合（不截断） |
-| scripts/output/_w862_accent_text_audit.json | W862 | 新增：朱砂文字落点审计产物（20 处落 bg） |
-| scripts/output/_w862_diff_review.json | W862 | 新增：B1 迁移 diff 归渠审查产物 |
-| scripts/output/_w862_spec.json | W862 | 本批 spec 十字段 |
-| docs/00-导读/W批次编号对账表.md | W862 | 认领行与收官回填 |
-
 

@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W980），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W981），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,26 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W981（2026-10-27）：数据链恢复重判批（账号重启实证·重判中间态·judge_gate 路径修复·三处登记面订正）
+
+
+
+> **来源**：用户 2026-10-27 纠偏「GoatCounter API 可以用啊」——实测证实，W806「账号失效」判断过时；数据链恢复触发 judge_gate 正式重判。
+
+> - **文件**：scripts/judge_gate.py、docs/11-方案报告/调研与数据复盘/读者数据复盘.md、docs/00-导读/访问统计方案.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w981_spec.json、scripts/output/_cascade_files_W981.txt。
+
+**数据链恢复实证（三 API 直探）**：`/api/v0/me` 200（用户 82739·站点 98962·**open_at 2026-10-01**——账号 9 月末暂停、10-01 重启，暂停期即 W806 所记 404 窗口；token 全程在位未被重建）·`/api/v0/stats/total` 200（10 月累计 111 访问）·子域 1273984347 无鉴权 303（站点存活实证）。原「404=账号失效」结论过时。
+
+**重判（judge_gate 正式跑）**：输入 7 日 UV=5 · 30 日 UV=78 → **中间态**（阈值：分发=7 日 ≥100 或 30 日 ≥200 · 归档=30 日 <30）——归档线已脱离、分发线未达，**W793 二选一维持**（内容扩容仍须用户点名或重判继续分发）。
+
+**同批修复**：judge_gate `--report` 路径随目录分区失效（文件 W737 时代迁 11-方案报告，脚本仍指 10-方法论沉淀 → 追加静默跳过）——修正后判定记录首次真正落盘至读者数据复盘.md 末尾。
+
+**三处登记面订正**：① 读者数据复盘.md——W806 声明后追加订正注（原文保留）；② 访问统计方案.md——恢复注记（API 侧恢复·beacon 链退役裁决与 check_no_goatcounter 守卫不变·后端 10 月数据来源口径待核：页面 beacon 已全部移除）；③ HANDOVER 零段冻结表述——「数据链中断」改为重判现势（中间态·二选一维持）。
+
+**验证**：judge_gate 两次实跑（输出判定 + --report 落盘）·子域存活 303 实证 · 全量 verify + pytest 见状态行。
+
+> - **状态**：在途（认领登记 W981·收官回填随批尾提交补 hash）
 
 ### W980（2026-10-27）：stats 标记同步机器化批（P-44-05 + W681 事实收官订正 + GoatCounter 取证中）
 
@@ -1770,25 +1790,4 @@
 > - **C 渠与 chart-3 defer**：数据页的 117 处朱砂文字跨 12 条 scoped 规则（`.design-purpose strong` / `td.num` / `.ec-axis` / `.ibox-label`…），且存在 tint 背景第三态（裁决的两态口径未覆盖），逐规则核对成本与风险高于本批价值——**拆「对比度专项批」**，与 `--chart-3` 值切换（42 消费页）同批，用全站审计 + 专属对拍面一次 proof。
 > - **验收**：J2 探针 24 页（10 页 + 14 页金丝雀）浅暗双主题前后对拍 + 全量 diff 归渠。**判词：PASS——302 处 diff 全部归渠零剩余**：KPI 顶条收敛 96 处（25 张非首卡 × 2 属性 × 双主题）+ `.seal` 徽章 198 处（8 页 × 2 个 seal 元素 × 6 属性 × 双主题）+ **顶条回流连带 8 处**（hardship-heatmap 2 个 SVG 标签 font-size 9→10px：顶条 3px→1px 让布局回流 2px，chart-audit 修复器重判后不再压缩——复采确定性已验证）。A（容器令牌化）与 D（间距 216 处）**零 diff**——值保留实证。金丝雀 13 页 0 diff。**施工中抓到一个 CSP 级事故**：令牌化改动了内联脚本里模板字面量的 CSS（`margin-top:4px` → `margin-top:var(--space-2)`），脚本哈希变化而 CSP 未重算 → 采集时脚本被拦、两页元素数塌陷（905→176/76→52）；并行会话随后重算哈希，本批重采 10 页并合并后归零。**教训：动到内联脚本文本（哪怕只是模板里的 CSS 值）必须同批重算 CSP 哈希**。另：timeline 的 accent-2/3/4 彩条属非朱砂顶条，首轮通用规则压平了它——按「限额只针对朱砂」回退（彩条恢复）。
 > **状态**：**已收官**（W864 3b3d77fb·git 反填·共 2 笔·W971 存量回填）
-
-### W863（2026-10-22）：递延版段补写批（W852-W862 十一段回写·号序链重新接上）
-
-> **来源**：用户令「你决定，继续」。决定先清 CHANGELOG 号序链欠账再进 B2：`batch_cascade` 的 `assert batch == W顶段+1` 是段序保护，但 W852 起十一个批因并行在途全部递延，顶段停在 W851——每立一个新批的段都会被这条断言拦住，B2 也过不去。
-> - **文件**：CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w854_spec.json、scripts/output/_w856_spec.json、scripts/output/_w858_spec.json、scripts/output/_w859_spec.json、scripts/output/_w861_spec.json、scripts/output/_w863_spec.json、docs/00-导读/W批次编号对账表.md。
-> - **做法**：`backfill_changelog.py`（W842 建）第二次使用。待补 11 段（W852-W862）——其中 W852/W853/W855/W857/W860/W862 六批 spec 原本在位；W854/W856/W858/W859/W861 五批 spec 缺失，按各自 feat 提交信息与台账行**新建补位 spec**（内容只照记录、不添油加醋，agents_note 前注明「补位 spec」）。工具按号序把每段插到「第一个号小于自己的段」之前，file-index 同批回写；规则行 W001-W851 → W001-W862。
-> - **本批自身**：顶段推进到 W862 后，本批经 `batch_cascade` 正常立 W863 段并把「当前态六面」（README / STRUCTURE / 项目说明版本行·交接里程碑·AGENTS·CITATION·三简单页脚）统一推进到 W863——这是补段工具不做、必须级联做的部分。
-> - **不改历史**：补段只插入、不清洗、不重排、不改写既有段任何字符；不动任何页面行为与门禁判据（页脚三简面由级联按正常批口径更新）。
-> **状态**：**已收官**（W863 a8e66ffb·git 反填·共 2 笔·W971 存量回填）
-
-### W862（2026-10-22）：设计迁移 B1 根页与入口 8 页（容器归并·朱砂合规·对比度修法·间距令牌化）
-
-> **来源**：用户令「下一批就是迁移批本体 B1（根页与入口 8 页），探针已备好」，接 W851 令牌阶段 1 之后。W862 = W826 §6 迁移清单第一批（B1·根页与入口 8 页）。
-> - **文件**：site/index.html、site/guide.html、site/curated.html、site/dashboard.html、site/dukou-engine.html、site/rum-viewer.html、site/visit-viewer.html、scripts/_w862_tokenize_spacing.py、scripts/_w862_accent_text_audit.py、scripts/_w862_diff_review.py、scripts/output/_w862_accent_text_audit.json、scripts/output/_w862_diff_review.json、scripts/output/_w862_spec.json、docs/00-导读/W批次编号对账表.md。
-> - **迁移口径（四渠·每处 diff 必可归因）**：A 容器归并——dashboard `.container` 1536→`--container-wide`（§3.3「1536 降档 1320」）、rum-viewer `.wrap` 1024→`--container-content`（§3.3「根 1 页 1024 归并 1120」）、dukou-engine `.page-wrap` 现役 1320 字面量→`--container-wide`（令牌化·零视觉变化）；B 朱砂合规——dashboard KPI 大字 `--accent-deep`→`--ink`（§5.2②「禁朱砂数字·统一墨色」）、dukou `.seal` 徽章实底→`--accent-tint` 淡底+朱砂字（§3.2「徽章实底改朱砂字+淡底」）、dukou 四处朱砂实底逐处定性后计数 2 处（≤3✓·两处 2px 线走白名单）；C 对比度修法——朱砂文字落 `--bg` 处改 `--accent-text`（§3.1 裁决 1 修法·**机器分类非目测**：`_w862_accent_text_audit.py` 按计算样式解析有效背景，20 处落 bg 收敛到 5 个选择器：`.kicker`×12、`.section-kick`×5、dukou `header h1`、rum `.btn`；`--accent-text` 至此有了第一批消费者）；D 间距令牌化——padding/margin 家族里与 v4 刻度**精确等值**的 132 处字面量换 `var(--space-N)`（不等值一律不动·值保留故零视觉变化）。
-> - **defer 四项本批不动**：`--chart-3` 改值（B1 无图表消费者·随 B2 数据页批）、暗色 `--accent` 改值（全局爆弹·待消费者迁移到位）、暗色 `--chart-3/5`（同 B2）、`--accent-soft` 重述（同值空转·不落）。
-> - **验收方式（迁移批≠零差异）**：J2 探针 24 页（B1 八页 + 探针原 21 面其余 16 页 作全局金丝雀）浅暗双主题前后对拍；`_w862_diff_review.py` 全量归渠聚合——每处 diff 必须落进 A/B/C 三渠，D 令牌化若值保留正确应产生 0 diff；金丝雀页必须 0 diff（证明没碰全局令牌）。**判词：PASS——700 处 diff 全部归渠零剩余**：dashboard 630（60 张 KPI 卡大字 `--accent-deep`→`--ink` 600 + kicker 改 accent-text 30）· index 25 / curated 20 / guide 15（kicker 系）· dukou 5（header h1）· rum-viewer 6（容器 1024→1120 的 margin 位移 4 + btn 字色 2）；**16 页金丝雀与自包含页全部 0 diff**（全局令牌未动·D 令牌化值保留实证）。
-> - **J2 抓到一个真错（本批最值钱的发现）**：404.html 的间距令牌化把全部值坍成 0px——该页第 25 行自注「W572 D-2 自包含 404 页·无 tokens.css 链接·字面值为三色直译，有意设计」，`var(--space-N)` 在无令牌页解析失败落初始值。**处置：整页回退**（该页不在令牌体系内·迁移不适用），复采并入 after 快照后 404 归零。教训：令牌化的前置条件是页面真的引了令牌——D 渠必须先查 `<link tokens.css>` 或内联块，自包含页跳过。另：dukou `.seal` 为死规则（无 DOM 消费者·改动无 diff）——徽章实底改淡底的改动保留（未来启用即合规），如实记录无视觉证明。
-> - **工具三件**：`_w862_tokenize_spacing.py`（值保留式令牌化·dry-run 先行·跳过 INLINED 块防循环定义）、`_w862_accent_text_audit.py`（朱砂文字落点机器分类·按计算样式解析有效背景链）、`_w862_diff_review.py`（全量 diff 归渠聚合·探针内置 20 条上限不够迁移审查用）。
-> - **范围纪律**：只动 site/ 根 8 页（`_template.html` 按 §6 不迁移）；不改 site/tokens.css 与 system.css（金丝雀 13 页 0 diff 即证）；CSP 只哈希内联脚本且本批无脚本改动。
-> **状态**：**已收官**（W862 e561ae95·git 反填·共 2 笔·W971 存量回填）
 
