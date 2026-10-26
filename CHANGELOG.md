@@ -36,7 +36,7 @@
 
 **验证**：archive_ledger_rows --self-test 三形态全过 + 真实台账 dry-run/apply 成功；check_doc_size_budget --self-test 过 + 实盘 0 FAIL（109/109/59）；pytest 单测 27 过（doc_size_budget 6 + preflight touches 20 + cascade 5 中相关）；ruff 全过；N4 坑位数 64=64；preflight 复跑 PASS 不再自撞。
 
-> - **状态**：在途（认领登记 W976·收官回填随批尾提交补 hash）
+> - **状态**：已收官（`766c70ac`·verify 全量 rc=0 + pytest 922 过/3 跳 + ruff 0 + N4 64=64·三窗现势 110/110/59）
 
 ### W975（2026-10-27）：跨 Agent 经验沉淀入仓批（坑表 57 → 63 条 + 深度篇 1 篇 + 计数链同步）
 
