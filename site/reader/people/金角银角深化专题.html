@@ -84,6 +84,10 @@
   .reader-feedback a { color: var(--ink); text-decoration: none; border: 1px solid var(--line);
     border-radius: var(--radius-sm, 4px); padding: 5px 14px; }
   .reader-feedback a:hover { border-color: var(--accent); color: var(--accent-text); }
+    /* W974：题图（线描人物/主题立像·沿用章回页 chapter-plate 范式·浅底宣纸图暗色模式隐藏） */
+    .chapter-plate { margin: 28px auto 36px; max-width: 420px; }
+    .chapter-plate img { width: 100%; height: auto; display: block; opacity: .92; }
+    html[data-theme="dark"] .chapter-plate { display: none; }
 </style>
 </head>
 <body>
@@ -108,6 +112,9 @@
   <div class="reader-progress" aria-hidden="true" data-reader-progress="1"></div>
   <article class="reader-body">
 <h1>金角银角深化专题</h1>
+<figure class="chapter-plate">
+<img src="../../static/images/plate-line-13-jinjiaodawang.webp" alt="金角大王线描立像：头戴紫金冠、身着杏黄道袍，左手托细颈紫金红葫芦、右手托白瓷羊脂玉净瓶" loading="lazy" decoding="async">
+</figure>
 <blockquote>
 <p><strong>W140 A3 多方向并行批次第五次第 1 个新维度</strong>·九段式·基于人物二.txt 素材整合·金角银角"被借来的苦难"深化·与 W100/W102/W103/W121/W125/W129 形成"数据-演化-情感-五众-次要-妖怪-金角银角"七层结构·A3 方向第 6 个核心妖怪深化专题·A3 人物 46→47 篇
 核验状态：未核验</p>
