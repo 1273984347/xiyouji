@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W973），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W974），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,29 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W974（2026-10-27）：内页题图成套批·第三组（12 张·人物 6 + 主题 6·站内线描题图累计 52 张）
+
+> **来源**：用户 2026-10-27 令「帮我做几张素材图：用途与画幅、风格与配色统一、主体清晰、留好放文字的空间都考虑到，成套出图保证风格一致」，并明文要求「开始前先问我：素材用在哪里、需要几张、有没有参考风格」。
+>
+> **四问答复**：① 用途与画幅 = **内页题图 · 3:4 竖版 1200×1600（沿用 plate-set 母版）** ② 张数 = **12 张** ③ 参考风格 = **沿用站内线描墨稿风（母版逐字复用）** ④ 题材范围 = **人物 + 主题混合（各占一半）**。
+
+> - **文件**：site/static/images/plate-line-13-jinjiaodawang.webp、site/static/images/plate-line-14-yinjiaodawang.webp、site/static/images/plate-line-15-huangmeidawang.webp、site/static/images/plate-line-16-heixiongjing.webp、site/static/images/plate-line-17-tuota-lijing.webp、site/static/images/plate-line-18-yutujing.webp、site/static/images/plate-line-19-nvziguo-topic.webp、site/static/images/plate-line-20-chelingguo-topic.webp、site/static/images/plate-line-21-shituoling-topic.webp、site/static/images/plate-line-22-tonghehe-topic.webp、site/static/images/plate-line-23-pansidong-topic.webp、site/static/images/plate-line-24-wudidong-topic.webp、assets/promo/plate-set/plate-line-13-jinjiaodawang.png、assets/promo/plate-set/plate-line-14-yinjiaodawang.png、assets/promo/plate-set/plate-line-15-huangmeidawang.png、assets/promo/plate-set/plate-line-16-heixiongjing.png、assets/promo/plate-set/plate-line-17-tuota-lijing.png、assets/promo/plate-set/plate-line-18-yutujing.png、assets/promo/plate-set/plate-line-19-nvziguo-topic.png、assets/promo/plate-set/plate-line-20-chelingguo-topic.png、assets/promo/plate-set/plate-line-21-shituoling-topic.png、assets/promo/plate-set/plate-line-22-tonghehe-topic.png、assets/promo/plate-set/plate-line-23-pansidong-topic.png、assets/promo/plate-set/plate-line-24-wudidong-topic.png、assets/promo/plate-set/plate-line-13-jinjiaodawang.webp、assets/promo/plate-set/plate-line-14-yinjiaodawang.webp、assets/promo/plate-set/plate-line-15-huangmeidawang.webp、assets/promo/plate-set/plate-line-16-heixiongjing.webp、assets/promo/plate-set/plate-line-17-tuota-lijing.webp、assets/promo/plate-set/plate-line-18-yutujing.webp、assets/promo/plate-set/plate-line-19-nvziguo-topic.webp、assets/promo/plate-set/plate-line-20-chelingguo-topic.webp、assets/promo/plate-set/plate-line-21-shituoling-topic.webp、assets/promo/plate-set/plate-line-22-tonghehe-topic.webp、assets/promo/plate-set/plate-line-23-pansidong-topic.webp、assets/promo/plate-set/plate-line-24-wudidong-topic.webp、site/reader/people/金角银角深化专题.html、site/reader/people/银角大王.html、site/reader/people/黄眉老佛外传.html、site/reader/people/黑熊精.html、site/reader/people/托塔李天王外传.html、site/reader/people/玉兔精.html、site/reader/people/女儿国国王.html、site/reader/people/车迟国三国师外传.html、site/reader/people/狮驼岭三魔-方向二深化.html、site/reader/people/老鼋外传.html、site/reader/people/蜘蛛精.html、site/reader/people/老鼠精.html、scripts/_w974_claim_row.py、scripts/_w974_make_prompts.py、scripts/_w974_make_retry.py、scripts/_w974_merge_retry.py、scripts/_w974_download.py、scripts/_w974_prepare.py、scripts/_w974_zoom.py、scripts/_w974_sheet_full.py、scripts/_w974_insert_plates.py、scripts/_w974_stats.py、scripts/_w974_update_readme.py、scripts/_w974_probe_top.py、scripts/_w974_probe_top2.py、scripts/_w974_probe_clusters.py、scripts/_w974_probe_subjtop.py、scripts/_w974_negative_sample.py、scripts/_w974_cascade.py、scripts/_w974_backfill_stage.py、scripts/_w974_final_check.py、scripts/output/_w974_batch1.json、scripts/output/_w974_batch2.json、scripts/output/_w974_batch3.json、scripts/output/_w974_batch34.json、scripts/output/_w974_retry15.json、scripts/output/_w974_stats.json、scripts/output/_w974_negative_sample.png、scripts/output/_w974_probe_top_zoom.png、scripts/output/_w974_urls_a.json、scripts/output/_w974_urls_b.json、scripts/output/_w974_urls_c.json、docs/11-方案报告/计划方案/执行前计划-T29-内页题图成套批第三组.md、docs/11-方案报告/计划方案/T29-任务计划执行与经验沉淀报告-2026-10-27.md、assets/promo/plate-set/README.md、assets/promo/plate-set/index.md、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp、assets/promo/plate-set/zoom-w974/、assets/promo/plate-set/raw/round11/、scripts/output/_cascade_files_W974.txt、scripts/output/file-index.md、CHANGELOG.md、README.md、HANDOVER.md、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md
+
+**母版逐字复用**：直接读 W953 的 `_w953_batch1.json` 取母版（**249 字符**）拼本批 SUBJECT 段 ⇒ 跨三批（W952 / W953 / W974）风格同族由**构造**保证；脚本断言「批内 12 条母版逐字一致」+「与 W953 母版逐字相同」+「stem 与既有母版零冲突（含负样本自证）」。
+
+**出图与返工**：首轮 batch1 **3/4 成功**（04 黑熊精 err_code 451「The result is unavailable」⇒ 补出）；**选题调整 1 处**——原定「虎力大仙」在 people 库无独立页面（只有「车迟国三国师」页）⇒ 改为**玉兔精**（有独立页且无题图），原图弃用；**重出 1 张**——人眼放大复核抓出 **15 黄眉大王的金铙被画成圆环**（读作手镯）⇒ 改措辞为「倒扣的金钵 · 半圆盘 · 钵面一圈回纹 · 绝不是圆环或手镯」后达标。
+
+**站点版「主体顶」抗噪口径修正（本批实质工程贡献）**：现行 `ink_top()` 取**整图墨迹 bbox 顶**，会被**孤立噪点**污染——实测 `plate-line-24-wudidong-topic` 顶部第 18 行仅 **3 个像素**（差值 41），放大取证显示 0–260 px 为纯宣纸底、零主体笔触 ⇒ 裁切线失真（站点版 1588 px ≈ 母版高）。⇒ 改为「**主体顶 = 面积 ≥ 200 px² 的墨迹连通簇的最小顶**」（滤孤立噪点、保留真实稀疏顶部如冠尖）。全目录 52 张复算：两种口径**仅 4 张不同**（本批 24 号 +419 px；既有 03 大闹天宫 +188 / 05 混世四猴 +113 / 11 金箍棒重量 +4 px）⇒ 既有 3 张属**存量欠账**（需人眼判定后再处置），本批**不重写既有资产**。
+
+**判据可证伪性**：合成多维负样本（1200×1600·下部纯黑块 + 四边 6 px 贯穿暗框 + 左侧 300 px 纯白竖带）⇒ 同一判据**同时抓出 J2 / J3 / J6 / J8** 四条；J10 另经独立探针实测 9.333 > 阈值 5.0 ⇒ 可证伪。
+
+**接入**：沿用站内 `chapter-plate` 范式（420 px 居中 + 描述性 alt + 浅底图暗色模式隐藏），幂等脚本 `_w974_insert_plates.py`；**浏览器实跑 2 页**（黑熊精 / 车迟国三国师）确认标题紧贴主体、无冗余留白、宣纸底与页面底色无色边、console 0 错误。
+
+**并发纪律**：共享面按内容粒度**精确暂存**（`git update-index --cacheinfo`·HEAD 为基底叠加本批段）⇒ 不把对方在途内容带进本批提交。
+
+> - **验证**：母版判据 J1–J10 **52/52 PASS**（`_w945_plates_verify.py`·目录扫描一次覆盖 52 张）· 站点版验算 **52/52 PASS**（`_w951_check_crop.py`：主体顶未切 + 主体底未切 + 下部地面留白 > 0）· 人眼 J8 题材与形制逐张放大核（据此重出 15 黄眉大王·金铙形制两次修正）· 负样本合成自证：J2 / J3 / J6 / J8 四条同时抓出（J10 另经独立探针实测 9.333 > 阈值 5.0）· 浏览器实跑 2 页（黑熊精 / 车迟国三国师）· console 0 错误 · 第 31 与第 45 门禁 0 FAIL · CSP 0 漂移 · lint_links 0 broken · 既有 40 张母版与站点版**零改动**（逐 blob 与 HEAD 比对）
+> - **状态**：已收官（`6ebc6fea`·**并发纪律**：本批共享面按内容粒度**精确暂存**——以 `HEAD:<file>` 为基底叠加本批段、`git update-index --cacheinfo` 写入索引、工作树保持原样 ⇒ 对方在途内容既不入我的提交也不被我抹掉；提交后已 `git log --oneline -1 -- <本站点版文件>` 核实归属）
 
 ### W973（2026-10-26）：HANDOVER 五区清理批（只进不出区治理·用户令走并问责查全）
 
