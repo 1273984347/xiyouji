@@ -537,7 +537,7 @@
    }
   },
   "data/search.html": {
-   "sha1": "db38aa5cc50b6206af1b1fc2c5128eb8d3c4e6cb",
+   "sha1": "0ce81c71f3850692ea9a5bf1e282466eb2bdc0c3",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1399,7 +1399,7 @@
    }
   },
   "en/search.html": {
-   "sha1": "1e9baf88886f316d98cab1b0cb54109718bd627f",
+   "sha1": "4b76e9491cd295a64e4048017718ce91438d161d",
    "counts": {
     "button.vt-btn": 1
    }
@@ -1489,5 +1489,5 @@
    }
   }
  },
- "generated_at": "2026-10-26T20:48:57.254Z"
+ "generated_at": "2026-10-26T20:55:54.056Z"
 }
