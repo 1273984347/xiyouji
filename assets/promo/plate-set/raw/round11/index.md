@@ -1,0 +1,33 @@
+# 文件索引 · round11
+
+> 生成来源：`scripts/gen_folder_docs.py`@W779
+> 生成日期：2026-10-18
+> 文件角色：逐文件索引（机器可读·与 README.md 分工：本文件列清单、README 讲用途约定）
+
+> 本文件逐条列出 `assets/promo/plate-set/raw/round11/` 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
+> 全仓目录用途见根目录 `STRUCTURE.md`。
+
+## 子目录（0）
+
+- （无）
+
+## 文件（12）
+
+### 样式与资源
+
+- `plate-line-13-jinjiaodawang.jpg`
+- `plate-line-14-yinjiaodawang.jpg`
+- `plate-line-15-huangmeidawang.jpg`
+- `plate-line-16-heixiongjing.jpg`
+- `plate-line-17-tuota-lijing.jpg`
+- `plate-line-18-yutujing.jpg`
+- `plate-line-19-nvziguo-topic.jpg`
+- `plate-line-20-chelingguo-topic.jpg`
+- `plate-line-21-shituoling-topic.jpg`
+- `plate-line-22-tonghehe-topic.jpg`
+- `plate-line-23-pansidong-topic.jpg`
+- `plate-line-24-wudidong-topic.jpg`
+
+---
+
+> 生成时点：2026-10-18 · 由 `python scripts/gen_folder_docs.py` 重跑刷新（文件数随磁盘变动·不作文档间同步口径）。

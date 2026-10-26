@@ -7,14 +7,15 @@
 > 本文件逐条列出 `assets/promo/plate-set/` 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
 > 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。
 
-## 子目录（4）
+## 子目录（5）
 
 - `raw/`
 - `zoom-w948/`
 - `zoom-w952/`
 - `zoom-w953/`
+- `zoom-w974/`
 
-## 文件（86）
+## 文件（110）
 
 ### 样式与资源
 
@@ -98,6 +99,30 @@
 - `plate-line-12-qiwu-zhuanji.webp`
 - `plate-line-12-wuzi-jing-topic.png`
 - `plate-line-12-wuzi-jing-topic.webp`
+- `plate-line-13-jinjiaodawang.png`
+- `plate-line-13-jinjiaodawang.webp`
+- `plate-line-14-yinjiaodawang.png`
+- `plate-line-14-yinjiaodawang.webp`
+- `plate-line-15-huangmeidawang.png`
+- `plate-line-15-huangmeidawang.webp`
+- `plate-line-16-heixiongjing.png`
+- `plate-line-16-heixiongjing.webp`
+- `plate-line-17-tuota-lijing.png`
+- `plate-line-17-tuota-lijing.webp`
+- `plate-line-18-yutujing.png`
+- `plate-line-18-yutujing.webp`
+- `plate-line-19-nvziguo-topic.png`
+- `plate-line-19-nvziguo-topic.webp`
+- `plate-line-20-chelingguo-topic.png`
+- `plate-line-20-chelingguo-topic.webp`
+- `plate-line-21-shituoling-topic.png`
+- `plate-line-21-shituoling-topic.webp`
+- `plate-line-22-tonghehe-topic.png`
+- `plate-line-22-tonghehe-topic.webp`
+- `plate-line-23-pansidong-topic.png`
+- `plate-line-23-pansidong-topic.webp`
+- `plate-line-24-wudidong-topic.png`
+- `plate-line-24-wudidong-topic.webp`
 - `preview-contact-sheet.png`
 - `preview-contact-sheet.webp`
 - `preview-detail-sheet.png`
