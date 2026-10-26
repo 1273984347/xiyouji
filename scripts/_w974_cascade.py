@@ -48,7 +48,8 @@ SCRIPTS = [
     "scripts/_w974_stats.py", "scripts/_w974_update_readme.py", "scripts/_w974_probe_top.py",
     "scripts/_w974_probe_top2.py", "scripts/_w974_probe_clusters.py", "scripts/_w974_probe_subjtop.py",
     "scripts/_w974_negative_sample.py", "scripts/_w974_cascade.py", "scripts/_w974_backfill_stage.py",
-    "scripts/_w974_final_check.py",
+    "scripts/_w974_final_check.py", "scripts/_w974_register_report.py",
+    "scripts/_w974_sync_stats_marks.py", "scripts/_w974_sync_version_faces.py",
 ]
 BATCH_OUTPUTS = ["scripts/output/_w974_batch1.json", "scripts/output/_w974_batch2.json",
                  "scripts/output/_w974_batch3.json", "scripts/output/_w974_batch34.json",

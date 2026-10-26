@@ -65,6 +65,9 @@ scripts/_w974_negative_sample.py
 scripts/_w974_cascade.py
 scripts/_w974_backfill_stage.py
 scripts/_w974_final_check.py
+scripts/_w974_register_report.py
+scripts/_w974_sync_stats_marks.py
+scripts/_w974_sync_version_faces.py
 scripts/output/_w974_batch1.json
 scripts/output/_w974_batch2.json
 scripts/output/_w974_batch3.json
