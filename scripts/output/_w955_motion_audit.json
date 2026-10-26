@@ -108,7 +108,7 @@
     "page_total": 857,
     "js_reveal_ratio": 0.3886,
     "inline_js_blocks_total": 863,
-    "inline_js_chars_total": 7806078,
+    "inline_js_chars_total": 7805684,
     "conclusion": "W471 规划的公共载体未落地；滚动显现实现为逐页内联复制（js-reveal 钩子 333/857 页）"
   },
   "F9_bare_ease_scan": {
