@@ -1,0 +1,33 @@
+{
+ "batch": "W982",
+ "date": "2026-10-27",
+ "title": "W982 手搓绕过级联治理批（三层方案②③落地·①缓建裁决）",
+ "desc": "手搓绕过级联治理批：版本面契约判据与开工劝导两项落地，文件锁按登记顾虑缓建",
+ "head_entry": "2026-10-27（W982 手搓绕过级联治理批）",
+ "head_sentence": "手搓绕过级联治理批：版本面契约判据与开工劝导落地，文件锁缓建",
+ "changelog_body": "\n\n\n\n> **来源**：用户 2026-10-27 令「做」（第 44 篇复盘移交的最后一件·W956 立项候选）。\n\n> - **文件**：scripts/check_doc_size_budget.py、scripts/preflight_check.py、tests/unit/test_doc_size_budget.py、HANDOVER.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w982_spec.json、scripts/output/_cascade_files_W982.txt。\n\n**三层方案落地（评审口径 ②最薄优先）**：② **C7 版本面契约**（check_doc_size_budget.collect 新增·挂 verify 体积窗口槽 + preflight 开工判据双面）——三文档版本行锚尾（README ·A1-A6 / STRUCTURE —A1-A6 / 项目说明 ·详细变更见）+ HANDOVER 当前 HEAD 句形态 + 更新链条目 ≤3 + 概要块 >6 判红；实现中两处修正（尾链行「创建于 2026-07-25」同 line 误计→只数最后更新：之后·单测断言空格差）。③ **preflight 手搓前置劝导**——工作树含级联面未提交改动即 NOTE 提示走 batch_cascade（只提示不拦截 W822·quotePath=false 二次取数防中文转义漏配·实弹验证注入/还原）。① **文件锁缓建裁决**：级联临时索引写与并行台账认领互斥未解，②③实证不足再启。\n\n**验证**：C7 单测 2 例（良构零 FAIL/三破坏 FAIL 锁）+ 既有 50 例全过 · 实盘 C7 零 FAIL · 劝导实弹注入/还原 · ruff 0 · 全量 verify + pytest 见状态行。\n\n> - **状态**：在途（认领登记 W982·收官回填随批尾提交补 hash）\n",
+ "milestone_block": "- **W982 手搓绕过级联治理批**（三层方案②③落地）：\n  - C7 版本面契约挂 verify+开工双面（三面锚尾/HEAD 句/链条≤3/概要块>6）\n  - preflight 手搓劝导（实弹验证）· ①文件锁缓建裁决",
+ "agents_note": "2026-10-27（W982）把挂了二十几批的手搓治理立项清了：版本行的锚尾、交接文档的头链句、更新链条数、里程碑块数这四样全部进了开工与门禁双面判据——手搓删一个锚尾下批就动不了工；开工自检还会在工作树里瞧见级联面的未提交改动并劝一句走正路。文件锁那一层按登记的顾虑缓建，等前两层实证不够再启。",
+ "file_index_rows": [
+  "| scripts/check_doc_size_budget.py | W982 | C7 版本面契约（三层方案②）：三面锚尾/HEAD 句/链条≤3（排除创建于误计）/概要块>6 判红·挂 verify+开工双面",
+  "| scripts/preflight_check.py | W982 | ③手搓前置劝导：级联面脏件 NOTE（quotePath=false 二次取数·实弹验证过）",
+  "| tests/unit/test_doc_size_budget.py | W982 | C7 单测 2 例（良构零 FAIL/三破坏 FAIL 锁）",
+  "| HANDOVER.md | W982 | 候选条目标记 W982 落地（①文件锁缓建裁决）+ 级联头尾链与里程碑块",
+  "| docs/00-导读/W批次编号对账表.md | W982 | W982 认领行与收官回填",
+  "| CHANGELOG.md | W982 | W982 段",
+  "| README.md | W982 | 当前批次版本行",
+  "| STRUCTURE.md | W982 | 当前批次版本行",
+  "| docs/00-导读/项目说明.md | W982 | 当前批次版本行",
+  "| .github/workflows/README.md | W982 | 工作流层版本面推进 W982",
+  "| site/index.html | W982 | 页脚批次链插入 W982",
+  "| site/data/cross-time-danmaku.html | W982 | 页脚批次链插入 W982",
+  "| site/data/tag-cloud.html | W982 | 页脚批次链插入 W982",
+  "| site/dukou-engine.html | W982 | 页脚批次链插入 W982",
+  "| AGENTS.md | W982 | 版本脚注条目",
+  "| archive/docs/AGENTS-ARCHIVE.md | W982 | 脚注滚动迁入的最老条目",
+  "| CITATION.cff | W982 | version 同步为 W982",
+  "| scripts/output/file-index.md | W982 | W982 段插入",
+  "| scripts/output/_w982_spec.json | W982 | 本批级联 spec",
+  "| scripts/output/_cascade_files_W982.txt | W982 | 级联落盘清单"
+ ]
+}
