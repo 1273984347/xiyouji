@@ -11,6 +11,32 @@
 ---
 
 
+## W978 第 44 篇工作复盘批（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-27.md | W978 | 第 44 篇工作复盘（W955-W977 区间·触发清单与周期栏带入）
+| scripts/_w978_review_evidence.py | W978 | 复盘取证脚本（全篇数字唯一源头·复算入口）
+| scripts/output/_w978_review_evidence.json | W978 | 取证产物（92 提交 / 21 段 / 23 行 / T3）
+| docs/11-方案报告/README.md | W978 | §五 登记行 26（第 44 篇）
+| docs/00-导读/W批次编号对账表.md | W978 | W978 认领行与收官回填
+| CHANGELOG.md | W978 | W978 段
+| HANDOVER.md | W978 | 级联头尾链与里程碑块
+| README.md | W978 | 当前批次版本行
+| STRUCTURE.md | W978 | 当前批次版本行
+| docs/00-导读/项目说明.md | W978 | 当前批次版本行
+| .github/workflows/README.md | W978 | 工作流层版本面推进 W978
+| site/index.html | W978 | 页脚批次链插入 W978
+| site/data/cross-time-danmaku.html | W978 | 页脚批次链插入 W978
+| site/data/tag-cloud.html | W978 | 页脚批次链插入 W978
+| site/dukou-engine.html | W978 | 页脚批次链插入 W978
+| AGENTS.md | W978 | 版本脚注条目
+| archive/docs/AGENTS-ARCHIVE.md | W978 | 脚注滚动迁入的最老条目
+| CITATION.cff | W978 | version 同步为 W978
+| scripts/output/file-index.md | W978 | W978 段插入
+| scripts/output/_w978_spec.json | W978 | 本批级联 spec
+| scripts/output/_cascade_files_W978.txt | W978 | 级联落盘清单
+
 ## W977 一次性件批量退役批（2026-10-27）
 
 | 文件 | W | 说明 |
