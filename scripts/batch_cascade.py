@@ -16,6 +16,7 @@ import json
 import os
 import re
 import sys
+import time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 _root = os.path.realpath(ROOT)
@@ -541,13 +542,29 @@ def main():
         return 0
     _apply_pend(ctx.pend, ctx.batch)
     selfcheck = _post_check(ctx.pend, ctx.batch)
-    # W960：治理文档体积提示位（每批收官报一次·判据本体在 preflight 开工面）
+    _close_hints()
+    print(f"[APPLY] 级联完成：{ctx.batch} / {ctx.new_rule}，共 {len(ctx.pend)} 个文件；写后自检 {'发现 %d 项' % len(selfcheck) if selfcheck else '全部通过'}")
+    return 0
+
+
+def _close_hints():
+    """收官提示位集合（W960 建·W979 扩展·全部只输出不改判定与退出码——W822 语义）。
+
+    - [SIZE]    治理文档体积窗口（判据本体 check_doc_size_budget·开工面硬判据）
+                + 超窗提示行（P-44-01：级联每批插入一段·回窗是每批常态动作而非异常）
+    - [TMPE]    tmpe 批次桶计数 + _shot/_inbox TTL 超龄报数（P-44-02：删除须主人确认+回收站）
+    - [SCRIPTS] scripts 顶层 `_` 件跟踪态计数（P-44-03：>20 提示退役扫描·W977 先例）
+    """
     try:
         import check_doc_size_budget as _dsb
 
         _dsb_counts, _dsb_lines, _dsb_extra = _dsb.collect()
         for _line in _dsb_lines:
             print("[SIZE]", _line)
+        _fails = _dsb.evaluate(_dsb_counts)
+        if _fails:
+            print("[SIZE] 超窗 %d 项——级联每批插入一段属常态·按上行 FAIL 行内指引跑"
+                  "对应归档工具回窗（段式=archive_segments.py·台账行=archive_ledger_rows.py）" % len(_fails))
     except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"[SIZE] 体积提示位不可用（{_exc}）")
     # W976：tmpe 临时区处置提示位（每批收官报一次·防「只进不出」复发——清理闭环
@@ -559,10 +576,42 @@ def main():
                      if os.path.isdir(os.path.join(_tt.TMPE, d)) and re.match(r"^w\d{3,4}$", d)]
         print("[TMPE] 批次桶 %d 个在 tmpe（政策=批收官经主人确认整桶清·删走回收站）·"
               "沉淀扫描=py -3 scripts/tmpe_tidy.py --tool-candidates" % len(_wbuckets))
+        _stale = []
+        for _bucket in ("_shot", "_inbox"):
+            _ttl = _tt.load_policy().get("ttl_days", {}).get(_bucket)
+            if not _ttl:
+                continue
+            _n = _mb = 0
+            for _dp, _dn, _fn in os.walk(os.path.join(_tt.TMPE, _bucket)):
+                for _f in _fn:
+                    try:
+                        _st = os.stat(os.path.join(_dp, _f))
+                    except OSError:
+                        continue
+                    if time.time() - _st.st_mtime > _ttl * 86400:
+                        _n += 1
+                        _mb += _st.st_size
+            _stale.append("%s 超龄 %d 件 %.0fMB(TTL%dd)" % (_bucket, _n, _mb / 1048576, _ttl))
+        if _stale:
+            print("[TMPE] " + "·".join(_stale) + "——到期列清单经主人确认走回收站"
+                  "（tmpe_tidy.py --plan --older N）")
     except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"[TMPE] 提示位不可用（{_exc}）")
-    print(f"[APPLY] 级联完成：{ctx.batch} / {ctx.new_rule}，共 {len(ctx.pend)} 个文件；写后自检 {'发现 %d 项' % len(selfcheck) if selfcheck else '全部通过'}")
-    return 0
+    # P-44-03：scripts 顶层 `_` 件防再积（W977 先例 286 件入库·跟踪态阈值 20）
+    try:
+        import subprocess as _sp
+
+        _r = _sp.run(["git", "ls-files", "scripts/_*"], capture_output=True, text=True,
+                     encoding="utf-8", errors="replace", cwd=ROOT)
+        _tracked = len([x for x in _r.stdout.splitlines() if "/" not in x.replace("scripts/", "", 1)])
+        _on_disk = len([f for f in os.listdir(os.path.join(ROOT, "scripts"))
+                        if f.startswith("_") and os.path.isfile(os.path.join(ROOT, "scripts", f))])
+        _msg = "[SCRIPTS] 顶层 `_` 件跟踪态 %d 个（盘上 %d 含 gitignore 本地件）" % (_tracked, _on_disk)
+        if _tracked > 20:
+            _msg += "——超阈值 20：跑退役扫描（语料级引用剔除·W977 先例 tmpe/_w977_scan.py 形态）"
+        print(_msg)
+    except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"[SCRIPTS] 提示位不可用（{_exc}）")
 
 
 if __name__ == "__main__":

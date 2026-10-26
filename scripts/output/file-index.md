@@ -11,6 +11,29 @@
 ---
 
 
+## W979 收官提示位扩展批（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_cascade.py | W979 | 收官提示位集合化 _close_hints()：[SIZE] 超窗回窗提示 + [TMPE] TTL 超龄报数 + [SCRIPTS] 顶层下划线件计数（P-44-01/02/03）
+| docs/00-导读/W批次编号对账表.md | W979 | W979 认领行与收官回填
+| CHANGELOG.md | W979 | W979 段
+| HANDOVER.md | W979 | 级联头尾链与里程碑块
+| README.md | W979 | 当前批次版本行
+| STRUCTURE.md | W979 | 当前批次版本行
+| docs/00-导读/项目说明.md | W979 | 当前批次版本行
+| .github/workflows/README.md | W979 | 工作流层版本面推进 W979
+| site/index.html | W979 | 页脚批次链插入 W979
+| site/data/cross-time-danmaku.html | W979 | 页脚批次链插入 W979
+| site/data/tag-cloud.html | W979 | 页脚批次链插入 W979
+| site/dukou-engine.html | W979 | 页脚批次链插入 W979
+| AGENTS.md | W979 | 版本脚注条目
+| archive/docs/AGENTS-ARCHIVE.md | W979 | 脚注滚动迁入的最老条目
+| CITATION.cff | W979 | version 同步为 W979
+| scripts/output/file-index.md | W979 | W979 段插入
+| scripts/output/_w979_spec.json | W979 | 本批级联 spec
+| scripts/output/_cascade_files_W979.txt | W979 | 级联落盘清单
+
 ## W978 第 44 篇工作复盘批（2026-10-27）
 
 | 文件 | W | 说明 |
@@ -3209,28 +3232,5 @@
 | scripts/output/_w862_diff_review.json | W862 | 新增：B1 迁移 diff 归渠审查产物 |
 | scripts/output/_w862_spec.json | W862 | 本批 spec 十字段 |
 | docs/00-导读/W批次编号对账表.md | W862 | 认领行与收官回填 |
-
-
-## W861 设计资产归档收尾批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| assets/design/alternatives/ | W861 | 新增：四个未选定方向的图形标矢量源 4 件 |
-| assets/design/screenshots/ | W861 | 新增：过程截图 13 张（拼版/特写/实拍/预览页） |
-| assets/design/process/RECEIPT-W855.md | W861 | 新增：跨会话回执底稿 |
-| assets/design/README.md | W861 | 索引更新（三块新增登记） |
-| docs/00-导读/W批次编号对账表.md | W861 | 认领行与补段批回填 |
-
-
-## W860 计划方案合规门禁挂槽批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_plan_template.py | W860 | 新增：第 48 门禁「计划方案合规」的增量判定入口（--gate 门禁模式 / --self-test 7 例负样本） |
-| scripts/_w857_plan_template_review.py | W860 | 改：抽出 judge()/fail_set() 纯函数供门禁复用；新增「执行摘要」等效形式识别 |
-| scripts/verify_delivery.py | W860 | 改：挂载第 48 槽（_StrictGate）+ EXPECTED_SECTION_NAMES 与 SCOPE_DOCS_SECTIONS 同步（门禁段 52→53） |
-| tests/unit/test_check_plan_template.py | W860 | 新增：第 48 槽单测 4 例（纯逻辑面·git 端到端用例不入 pytest） |
-| AGENTS.md · docs/agent/gates.md · README.md · pytest.ini · HANDOVER.md | W860 | 改：门数口径四处同步（47→48 槽 + gate_count 标记 + pytest_collected 标记 + 交接块） |
-| scripts/output/stats.json | W860 | 改：gate_count 47→48 · pytest_collected 818→823（stats.py --w W860 实测刷新） |
 
 

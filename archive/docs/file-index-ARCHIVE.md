@@ -2,7 +2,7 @@
 
 > 本文件归档 file-index.md 中 W031-W087（v2.0.4-v2.0.60）的早期反向索引条目。
 > 现役索引见 [file-index.md](file-index.md)。
-> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859）
+> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861）
  + 2026-10-26（W960 迁入 W843-W845）
  + 2026-10-26（W960 迁入 W700-W842）
 
@@ -9224,3 +9224,24 @@
 | site/data/search.html、site/en/search.html | W858 | 搜索索引重建 + CSP 哈希重算 |
 | scripts/output/stats.json、stats-index.md、stats-changelog.json | W858 | 报告计数与会话统计刷新 |
 | docs/00-导读/W批次编号对账表.md | W858 | 认领行与补段批回填 |
+## W861 设计资产归档收尾批（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| assets/design/alternatives/ | W861 | 新增：四个未选定方向的图形标矢量源 4 件 |
+| assets/design/screenshots/ | W861 | 新增：过程截图 13 张（拼版/特写/实拍/预览页） |
+| assets/design/process/RECEIPT-W855.md | W861 | 新增：跨会话回执底稿 |
+| assets/design/README.md | W861 | 索引更新（三块新增登记） |
+| docs/00-导读/W批次编号对账表.md | W861 | 认领行与补段批回填 |
+
+
+## W860 计划方案合规门禁挂槽批（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_plan_template.py | W860 | 新增：第 48 门禁「计划方案合规」的增量判定入口（--gate 门禁模式 / --self-test 7 例负样本） |
+| scripts/_w857_plan_template_review.py | W860 | 改：抽出 judge()/fail_set() 纯函数供门禁复用；新增「执行摘要」等效形式识别 |
+| scripts/verify_delivery.py | W860 | 改：挂载第 48 槽（_StrictGate）+ EXPECTED_SECTION_NAMES 与 SCOPE_DOCS_SECTIONS 同步（门禁段 52→53） |
+| tests/unit/test_check_plan_template.py | W860 | 新增：第 48 槽单测 4 例（纯逻辑面·git 端到端用例不入 pytest） |
+| AGENTS.md · docs/agent/gates.md · README.md · pytest.ini · HANDOVER.md | W860 | 改：门数口径四处同步（47→48 槽 + gate_count 标记 + pytest_collected 标记 + 交接块） |
+| scripts/output/stats.json | W860 | 改：gate_count 47→48 · pytest_collected 818→823（stats.py --w W860 实测刷新） |
