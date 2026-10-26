@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W976），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W977），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,22 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W977（2026-10-27）：一次性件批量退役批（454 候选·286 入档·16 现役硬保留·152 S4 本地件不入仓）
+
+
+
+> **来源**：用户 2026-10-27 引用体检收官报告「scripts/ 一次性件已积 384 个，archive/scripts/ 有 51 件退役先例，可择机批量清」令即办（实盘盘点为 454 件顶层 `_` 件·含 W977 当日新增计入口径）。
+
+> - **文件**：archive/README.md、scripts/index.md、scripts/output/index.md、archive/scripts/batches/README.md、archive/scripts/batches/index.md、archive/scripts/batches/misc/README.md、archive/scripts/batches/misc/index.md、archive/scripts/batches/w6xx/README.md、archive/scripts/batches/w6xx/index.md、archive/scripts/batches/w7xx/README.md、archive/scripts/batches/w7xx/index.md、archive/scripts/batches/w8xx/README.md、archive/scripts/batches/w8xx/index.md、archive/scripts/batches/w9xx/README.md、archive/scripts/batches/w9xx/index.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w977_spec.json、scripts/output/_cascade_files_W977.txt + **286 件 git mv 改名（scripts/_* → archive/scripts/batches/{misc,w6xx,w7xx,w8xx,w9xx}/·逐件不入本行·组行见 archive/README.md 台账）**。
+
+**方法（同契约·规模适配）**：archive_file.py 为「单件/小批」设计（逐件全仓 grep 在 439 件规模下不可行），按 archive/README.md「大批量批处理手动登记」条款走同契约实现——① 语料级引用剔除（tmpe/_w977_scan.py·活引用面=门禁/工具/测试/治理文档/CI/Makefile 一次载入逐 stem 匹配）；② 批量 git mv（失败即停·幂等续跑）；③ 组行台账登记（5 组）。**引用分级结果：454 候选 → 16 件现役硬保留**（`__init__.py`、`_cite_probe.py`[坑表+CLAUDE+check_claude_md 三面引用]、`_check_pipeline_consistency.py`[铁律 13]、`_gen_search_index.py`[第 46 门禁+单测]、`_w851_j1_name_audit.py`/`_w851_visual_regression_probe.py`[单测 import]、`_w857_plan_template_review.py`[第 48 门禁]、`_w864_accent_audit.py`/`_w876_site_audit.py`[朱砂门禁族]、`_w818_file_protocol_probe.py`[check_page_admission]、`_w933_mutation_test.py`[Makefile]、`_w939_scan_targets.py`/`_w946_icon_probe.js`[check_emoji_icons]、`_w950_refresh_icon_paths.py`[坑表]、`_audit_render_states.js`[暗色门禁+CI]·`_w954_review_evidence.py`[复盘取证锚点+lint_links 实锤活链接]）**+ 287 件退役入库**（misc 60 + w6xx 2 + w7xx 31 + w8xx 42 + w9xx 151·1 件 _w954_review_evidence 复盘取证锚点复位留用）**+ 152 件 S4 本地件原地不动**（.gitignore:159 `scripts/_s4_*` 双盲纪律·从未入仓）。
+
+**防复发裁决两件**：① `_check_json_copies.py` 目标冲突暴露其正是 **W842 从 archive 恢复的现役字节级自检工具**（W735 误归档→回灌盲区根因）——追加硬保留，杜绝二次误归档；② 归档件冷存储语义（W836 实证 ROOT 上溯失效）——本批入档件均为一次性使命终结件，无现役调用面。
+
+**验证**：迁移后 `git status` scripts/ 零未跟踪（152 件为 gitignore 屏蔽态）；gen_folder_docs --refresh 后 scripts/index.md 与 output/index.md 零僵尸行（output/ 自有 _w7xx 件与 spec 属在位实件）；ruff 豁免面核实（pyproject `**/_*.py` + `archive/` W400 前例）；全量 verify + pytest + ruff 见验证行。
+
+> - **状态**：在途（认领登记 W977·收官回填随批尾提交补 hash）
 
 ### W976（2026-10-27）：工具链体检修复批（台账修剪器 A5 + C3 修路指引 + preflight 自撞 + 三窗回窗 + 坑表沉淀）
 
@@ -1742,23 +1758,4 @@
 > - **状态**：门禁已挂载；补齐既有计划文档属后续施工批（框架号 T-06·施工批号待定）。
 > **状态**：**已收官**（W860 42b3d245·git 反填·共 3 笔·W971 存量回填）
 
-
-### W859（2026-10-22）：设计资产归档批（AI 概念稿 18 张 + Logo 源文件 + 可复算工具链 → assets/design/）
-
-> **来源**：Logo 设计资产此前只存在于临时区 tmpe/_reports/（`_shot` 桶 TTL 7 天），到期即清、无正式留档位置。本批把有长期价值的资产移入仓内 `assets/design/` 单独存档。
-> - **文件**：assets/design/logo/（10 件）、assets/design/ai-concepts/（18 张 + 逐张判定表）、assets/design/tools/（可复算工具链）、assets/design/README.md、docs/00-导读/W批次编号对账表.md。
-> - **为什么放 assets/ 而非 site/static/**：`site/` 是站点构建面（桌面端把整个 site/ 打进安装包），设计源资产（概念稿与工具链）不进站点；`assets/` 是仓级素材区，与 fonts / images / maps 并列。
-> - **目录**：`logo/` 10 件——矢量图形标与组合标 SVG、icon-192/512/maskable-512、favicon-16/32/48 与 favicon.ico（站点在用版本在 site/static/icons/，同批产出两处一致）；`ai-concepts/` 18 张——AI 纯图形概念稿（两批），附逐张「母题 / 判定 / 说明」表；`tools/` 可复算工具链。
-> - **纪律**：只新增 assets/ 下素材与登记，不改任何页面与门禁件；版段不落（随补段批 W863 按号序回写）。
-> **状态**：**已收官**（W859 9bafb5f3·git 反填·共 3 笔·W971 存量回填）
-
-### W858（2026-10-21）：站点交互流程审查报告批（857 页 / 2876 控件全量审查·只审查不改代码）
-
-> **来源**：用户令「审一遍我网站的交互流程：页面跳转路径、按钮与状态反馈、表单填写与出错提示、空状态和异常分支是否合理，按影响用户的程度排序给改进建议」；同日追加《任务计划、执行与经验沉淀系统提示词（AI Agent 专用版）》框架与「模板必须落进项目文件夹内 docs/11-方案报告/计划方案」的长期要求。
-> - **文件**：docs/11-方案报告/计划方案/T07-任务计划执行与经验沉淀报告-2026-10-21.md、docs/11-方案报告/README.md、docs/00-导读/文档规范.md、docs/00-导读/W批次编号对账表.md、CLAUDE.md、STRUCTURE.md、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md、docs/INDEX.md、scripts/output/stats.json、scripts/output/stats-index.md、scripts/output/stats-changelog.json、site/data/search.html、site/en/search.html。
-> - **产出**：公共站 857 页 / 2876 控件全量交互审查——**3 条 P0**（中文版渡口页 4 按钮 + 输入框 + 夜读钮全失效·根因 W780 模板重建覆盖 306 行页级脚本·线上同款已生效 / 访客「问」浮窗必得「请在终端运行 rag_server.py」且兜底链接指向失效页致闭环死路 / 主导航被 ESC 与 resize 永久隐藏·运行时已复现）+ 8 条 P1/P2/P3 + Web Agent 6 条（独立应用·另批）；含后续施工批 10 步 / 11 条 AC / 7 项风险 / 6 条决策 / 6 条经验。
-> - **纪律固化**：`docs/00-导读/文档规范.md` §4.9 增「框架类交付物必须落进仓内目录并登记索引」，CLAUDE.md 增第 11 条指针。
-> - **登记与索引**：docs/11-方案报告/README.md §二「计划方案」8→9 篇；report_docs 42→43（stats.py 实算）；docs/INDEX.md 重建；搜索索引与 CSP 哈希随生成器重算。
-> - **纪律**：只审查不改代码；版段不落（随补段批 W863 按号序回写）。
-> **状态**：**已收官**（W858 e74286c6·git 反填·共 2 笔·W971 存量回填）
 

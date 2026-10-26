@@ -1,0 +1,175 @@
+# 文件索引 · w9xx
+
+> 生成来源：`scripts/gen_folder_docs.py`@W779
+> 生成日期：2026-10-18
+> 文件角色：逐文件索引（机器可读·与 README.md 分工：本文件列清单、README 讲用途约定）
+
+> 本文件逐条列出 `archive/scripts/batches/w9xx/` 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
+> 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。
+
+## 子目录（0）
+
+- （无）
+
+## 文件（151）
+
+### Python 脚本
+
+- `_w926_fix_report.py`
+- `_w926_fix_report2.py`
+- `_w926_ia_audit.py`
+- `_w926_ia_extract.py`
+- `_w926_mutation_test.py`
+- `_w926_verify_numbers.py`
+- `_w926_visible_leak.py`
+- `_w929_gen_args.py`
+- `_w929_gen_args_v2.py`
+- `_w929_gen_args_v3.py`
+- `_w929_ledger_close.py`
+- `_w929_ledger_spec.py`
+- `_w929_process.py`
+- `_w929_seal_normalize.py`
+- `_w929_stats_sync.py`
+- `_w929_verify.py`
+- `_w930_claim_row.py`
+- `_w930_layout_attr.py`
+- `_w930_layout_detail.py`
+- `_w930_layout_diff.py`
+- `_w930_layout_residual.py`
+- `_w930_layout_static.py`
+- `_w930_rename_prefix.py`
+- `_w930_report_normalize.py`
+- `_w930_spec_build.py`
+- `_w931_changelog_seg.py`
+- `_w931_claim_row.py`
+- `_w931_file_index_seg.py`
+- `_w931_hero_fit.py`
+- `_w931_hero_verify.py`
+- `_w931_sync_stats_marks.py`
+- `_w936_cascade.py`
+- `_w936_insert_plates.py`
+- `_w937_cascade.py`
+- `_w937_move_plates.py`
+- `_w938_apply_home.py`
+- `_w938_cascade.py`
+- `_w938_paper_normalize.py`
+- `_w939_emoji_to_svg.py`
+- `_w939_gen_icons.py`
+- `_w939_make_spec.py`
+- `_w940_cascade.py`
+- `_w942_cascade.py`
+- `_w943_cascade.py`
+- `_w944_cascade.py`
+- `_w945_archive_round1.py`
+- `_w945_cascade.py`
+- `_w945_check_prompts.py`
+- `_w945_cleanup.py`
+- `_w945_detail_sheet.py`
+- `_w945_download.py`
+- `_w945_insert_plates.py`
+- `_w945_make_frame_sample.py`
+- `_w945_plates_verify.py`
+- `_w945_prepare.py`
+- `_w945_probe_changelog.py`
+- `_w945_probe_handover.py`
+- `_w945_probe_sizes.py`
+- `_w945_zoom.py`
+- `_w945_zoom2.py`
+- `_w945_zoom3.py`
+- `_w946_apply_timeline_icons.py`
+- `_w946_gen_timeline_icons.py`
+- `_w946_make_spec.py`
+- `_w947_add_icons.py`
+- `_w948_cascade.py`
+- `_w948_insert_plates.py`
+- `_w948_make_prompts.py`
+- `_w948_zoom.py`
+- `_w949_allowlist.py`
+- `_w949_fix_dataset.py`
+- `_w950_normalize.py`
+- `_w951_backfill_stage.py`
+- `_w951_cascade.py`
+- `_w951_check_crop.py`
+- `_w951_site_sheet.py`
+- `_w952_backfill_stage.py`
+- `_w952_cascade.py`
+- `_w952_fix_backfill.py`
+- `_w952_fix_c6.py`
+- `_w952_fix_c6b.py`
+- `_w952_fix_c6c.py`
+- `_w952_fix_j10.py`
+- `_w952_insert_plates.py`
+- `_w952_make_backfill.py`
+- `_w952_make_edge_sample.py`
+- `_w952_make_prompts.py`
+- `_w952_update_readme.py`
+- `_w952_zoom.py`
+- `_w953_backfill_stage.py`
+- `_w953_cascade.py`
+- `_w953_fix_cascade.py`
+- `_w953_fix_file_line.py`
+- `_w953_insert_plates.py`
+- `_w953_make_insert.py`
+- `_w953_make_prompts.py`
+- `_w953_patch_backfill.py`
+- `_w953_prep_raws.py`
+- `_w953_prep_raws2.py`
+- `_w953_prep_raws3.py`
+- `_w953_update_readme.py`
+- `_w953_zoom.py`
+- `_w954_closeout.py`
+- `_w954_fileindex_backfill.py`
+- `_w954_ledger_backfill.py`
+- `_w954_register_surfaces.py`
+- `_w954_selfcheck.py`
+- `_w954_version_sync.py`
+- `_w955_ledger_claim.py`
+- `_w955_motion_audit.py`
+- `_w955_version_sync.py`
+- `_w956_pilot_pick.py`
+- `_w957_ledger_claim.py`
+- `_w957_motion_probe.py`
+- `_w957_version_sync.py`
+- `_w957_wire_pilot.py`
+- `_w959_t10_v11.py`
+- `_w959_version_sync.py`
+- `_w960_pilot_shots.py`
+- `_w961_version_sync.py`
+- `_w962_wire_entry.py`
+- `_w963_version_sync.py`
+- `_w974_backfill_stage.py`
+- `_w974_cascade.py`
+- `_w974_claim_row.py`
+- `_w974_download.py`
+- `_w974_final_check.py`
+- `_w974_insert_plates.py`
+- `_w974_make_prompts.py`
+- `_w974_make_retry.py`
+- `_w974_merge_retry.py`
+- `_w974_negative_sample.py`
+- `_w974_prepare.py`
+- `_w974_probe_clusters.py`
+- `_w974_probe_subjtop.py`
+- `_w974_probe_top.py`
+- `_w974_probe_top2.py`
+- `_w974_register_proxy_commit.py`
+- `_w974_register_report.py`
+- `_w974_sheet_full.py`
+- `_w974_stats.py`
+- `_w974_sync_stats_marks.py`
+- `_w974_sync_version_faces.py`
+- `_w974_update_readme.py`
+- `_w974_zoom.py`
+- `_w975_backfill.py`
+- `_w975_cascade.py`
+- `_w975_sink_experience.py`
+- `_w975_tweak.py`
+
+### JavaScript / TypeScript
+
+- `_w930_layout_probe.mjs`
+- `_w930_layout_probe_app.mjs`
+
+---
+
+> 生成时点：2026-10-18 · 由 `python scripts/gen_folder_docs.py` 重跑刷新（文件数随磁盘变动·不作文档间同步口径）。

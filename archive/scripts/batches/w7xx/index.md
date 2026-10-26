@@ -11,10 +11,11 @@
 
 - （无）
 
-## 文件（70）
+## 文件（101）
 
 ### Python 脚本
 
+- `_s7_w727_make_spec.py`
 - `_w702_edits.py`
 - `_w703_docsync.py`
 - `_w704_docsync.py`
@@ -22,6 +23,10 @@
 - `_w706_vscan.py`
 - `_w707_contracts.py`
 - `_w709_migrate.py`
+- `_w712_fingerprint.py`
+- `_w757_footer_bump.py`
+- `_w757_negative_check.py`
+- `_w757_rename_cascade.py`
 - `fix_quotes.py`
 - `fix_quotes2.py`
 - `fix_quotes3.py`
@@ -61,6 +66,32 @@
 - `_cascade_files_W725.txt`
 - `_cascade_files_W726.txt`
 - `_cascade_files_W727.txt`
+- `_s7_w713_msg.txt`
+- `_s7_w713_spec.json`
+- `_s7_w716_msg.txt`
+- `_s7_w716_spec.json`
+- `_s7_w717_msg.txt`
+- `_s7_w717_spec.json`
+- `_s7_w718_msg.txt`
+- `_s7_w718_spec.json`
+- `_s7_w719_msg.txt`
+- `_s7_w719_spec.json`
+- `_s7_w720_msg.txt`
+- `_s7_w720_spec.json`
+- `_s7_w721_msg.txt`
+- `_s7_w721_spec.json`
+- `_s7_w722_msg.txt`
+- `_s7_w722_spec.json`
+- `_s7_w723_msg.txt`
+- `_s7_w723_spec.json`
+- `_s7_w724_msg.txt`
+- `_s7_w724_spec.json`
+- `_s7_w725_msg.txt`
+- `_s7_w725_spec.json`
+- `_s7_w726_msg.txt`
+- `_s7_w726_spec.json`
+- `_s7_w727_msg.txt`
+- `_s7_w727_spec.json`
 - `_w700_cascade_spec.json`
 - `_w701_cascade_spec.json`
 - `_w702_cascade_spec.json`
