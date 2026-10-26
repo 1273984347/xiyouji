@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W978），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W979），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,28 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W979（2026-10-27）：收官提示位扩展批（P-44-01/02/03 落地 + P-44-04 活面零残留裁定免迁）
+
+
+
+> **来源**：用户 2026-10-27 引用第 44 篇复盘移交清单（P-44-01~04）令即办（下一自由号）。
+
+> - **文件**：scripts/batch_cascade.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w979_spec.json、scripts/output/_cascade_files_W979.txt。
+
+**P-44-01（回窗提示化）**：batch_cascade 收官提示位抽为 `_close_hints()` 集合函数（全部维持 W822「只输出不拦截」语义·fail-open 留痕），[SIZE] 块在 evaluate 有 FAIL 时输出「超窗——按 FAIL 行内指引跑对应归档工具回窗（段式/台账行分治）」提示行——级联每批插入一段、回窗自此从「异常」变「每批常态动作提示」。
+
+**P-44-02（TTL 报数）**：[TMPE] 块新增 `_shot`/`_inbox` 超龄报数（按 policy.yml ttl_days=7·首跑实测 _shot 3828 件 251MB + _inbox 163 件 215MB 均超龄且已过 48h 冻结窗）——到期列清单经主人确认走回收站；`_misc`（TTL 90d）零超龄。
+
+**P-44-03（防再积）**：新增 [SCRIPTS] 行——顶层 `_` 件跟踪态计数（git ls-files 过滤顶层·首跑 18 个，盘上 169 含 gitignore 本地件），超阈值 20 提示语料级退役扫描（W977 先例）。
+
+**P-44-04（三位号残留裁定：免迁）**：宽口径复扫活面（scripts/*.py|js|mjs + tests/unit 全部正则形态 `W\d{3}`/`w\d{3}`/`W[0-9]{3}`）**零残留**——W969 的 69 处升位已覆盖全部活面；余量均在历史冻结段（CHANGELOG 归档/台账行·禁改）与冷存储入档件（无前向兼容需求）⇒ **登记结案，W1000 兼容无需再迁**。
+
+**P-44-02 待主人确认项**：`_shot` 3828 件 251MB + `_inbox` 163 件 215MB 超龄删除候选（回收站通道·确认后执行）。
+
+**验证**：`_close_hints()` 直测输出三段齐全 + ruff 过 + 级联单测 5 过；[SIZE] 超窗提示在本批级联后实况自证（CHANGELOG 111/110 → 提示行出现 → archive_segments 回窗 110）。
+
+> - **状态**：在途（认领登记 W979·收官回填随批尾提交补 hash）
 
 ### W978（2026-10-27）：第 44 篇工作复盘批（触发器 T3 首触发·W955-W977 区间·P-44 四改进项登记）
 
@@ -1751,29 +1773,4 @@
 > - **工具三件**：`_w862_tokenize_spacing.py`（值保留式令牌化·dry-run 先行·跳过 INLINED 块防循环定义）、`_w862_accent_text_audit.py`（朱砂文字落点机器分类·按计算样式解析有效背景链）、`_w862_diff_review.py`（全量 diff 归渠聚合·探针内置 20 条上限不够迁移审查用）。
 > - **范围纪律**：只动 site/ 根 8 页（`_template.html` 按 §6 不迁移）；不改 site/tokens.css 与 system.css（金丝雀 13 页 0 diff 即证）；CSP 只哈希内联脚本且本批无脚本改动。
 > **状态**：**已收官**（W862 e561ae95·git 反填·共 2 笔·W971 存量回填）
-
-### W861（2026-10-22）：设计资产归档收尾批（过程截图 13 张 + 4 个未选定方向备选 SVG + 跨会话回执底件）
-
-> **来源**：W859 把 Logo 源文件、18 张概念稿与可复算工具链归档进 assets/design/ 后，临时区 tmpe/_reports/ 下仍留有过程材料。本批把其中**有留档价值**的部分移入仓内，其余（工具脚本、门禁输出、提交信息、已入库的资产副本）随临时区一并清空。
-> - **文件**：assets/design/alternatives/（4 件）、assets/design/screenshots/（13 张）、assets/design/process/RECEIPT-W855.md（1 件）、assets/design/README.md、docs/00-导读/W批次编号对账表.md。
-> - **新增三块**：`alternatives/` 4 件——四个未选定方向的图形标矢量源（棒《取经录》/ 幡《问津》/ 卷《拾遗》/ 图《十万八千里》），与定稿共用同一套笔触引擎与配色令牌，改方向不必重画；`screenshots/` 13 张——视觉留档（五方向 × 深浅底拼版、两批概念稿拼版、四方向分区呈现、落地图标三档实测、组合标预览、方向 I 特写、站点实拍、预览页整页）；`process/` 1 件——跨会话回执底稿 RECEIPT-W855.md。
-> - **附修**：19 条死链 hotfix（临时区文件搬走后引用路径失效，随批修正）。
-> - **纪律**：只新增 assets/ 下素材与引用修正，不改任何页面行为与门禁判据；版段不落（随补段批 W863 按号序回写）。
-> **状态**：**已收官**（W861 9f3723e6·git 反填·共 3 笔·W971 存量回填）
-
-### W860（2026-10-22）：计划方案合规门禁挂槽批（第 48 槽·用户明令「探针进门禁」·既有计划方案先不做）
-
-> **来源**：用户 2026-10-22 会话指令「探针进门禁，计划方案先不做」——前半句批准把 W857 复核批的模板符合性探针接成常驻门禁槽，后半句明确**既有计划文档本批不动**（补齐属后续施工批）。本批为管控件改动（`scripts/verify_delivery.py` 属管控文件），经用户明示批准。
-> - **文件**：scripts/check_plan_template.py、scripts/_w857_plan_template_review.py、scripts/verify_delivery.py、tests/unit/test_check_plan_template.py、AGENTS.md、docs/agent/gates.md、README.md、pytest.ini、HANDOVER.md、scripts/output/stats.json、scripts/index.md、scripts/output/index.md、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md。
-> - **落地口径**：第 48 槽「计划方案合规」挂进 `verify_delivery.py`（`_StrictGate`·crash 即拦 + 汇总行防静默跳过）；门禁段 52→53；`EXPECTED_SECTION_NAMES` 与 `SCOPE_DOCS_SECTIONS` 同步；判据表（32 项结构判据）复用 W857 的 `_w857_plan_template_review.py`，本批只加增量判定层。
-> - **增量口径（核心设计）**：新增文件全项判（任一「不符合」判红）；修改文件取 HEAD 版本同判据求差集（**只判本次引入的新不符合项**·存量不符合项只 NOTE 提示）；未变更文件不看。**为何必须增量**：W857 实测存量 8 份里最弱的仅 6/13 判据符合，若整量判红则本槽上线即全红、形同虚设。
-> - **判据三处校准（继承 W857·先质疑判据再质疑产物）**：① 模板 §12 要求「一份交付物含十项」，仓内惯例拆《执行前计划》+《执行记录报告》两件落库 → 判据按件型分流（不适用项判 N/A·不计不符合）+ 另判两件并集覆盖度；② 「执行摘要/本章结论/待确认事项」认等效形式（「0. 任务背景」「本批不做」「待验证」「待用户」）；③ 模糊词扫描排除文档自证行与引文块（否则自命中假红）。
-> - **负样本自证 7 例（--self-test，全过）**：新增合规→绿 / 新增缺项→必红 / 存量缺项仅改别处→不误判红 / 存量合规改出缺项→必红 / 补齐→恢复必绿 / git 端到端（未跟踪缺项文件进变更集→必红）/ 清理后不再命中；另 pytest 单测 4 例（纯逻辑面·git 级用例不进 pytest 避免 CI 里往仓内写文件）。
-> - **端到端实跑（负样本真拦）**：在 计划方案/ 内造一份缺整节文档 → 第 48 槽 FAIL → `verify_delivery.py --scope docs` exit=1 阻断提交 → 撤除后复跑 exit=0 转绿。
-> - **口径同步四处**：AGENTS.md §4.2（新增第 48 条 + 两处「47 槽」→48 槽）、docs/agent/gates.md（标题 47→48 槽 + 第 48 槽全量定义 + 根级脚本数 103→118 实数）、README.md 与 系统架构方案 的 `<!--stats:gate_count-->` 标记（47→48，架构方案另同步 17 处裸「47 槽」字面量）、stats.json（gate_count 47→48·pytest_collected 818→823）+ pytest.ini 标记（818→823·实测值非 +1：新脚本被根级脚本覆盖测试参数化自动纳入 +1、新单测 +4）。
-> - **本批边界**：**既有计划文档 0 处改动**（用户令「计划方案先不做」）；不落段（CHANGELOG 顶段不变·指针面零改动）；不改门禁脚本的其他判据。
-> - **验证**：全量档 `verify_delivery.py --scope full` exit=0（52→53 段·第 48 槽 0 FAIL）；`check_doc_sync.py` 0 FAIL；`check_folder_docs.py` 0 FAIL；`stats.py --check` 17 键零差异；pytest 新增 4 例全过 + 脚本自证 7/7。
-> - **状态**：门禁已挂载；补齐既有计划文档属后续施工批（框架号 T-06·施工批号待定）。
-> **状态**：**已收官**（W860 42b3d245·git 反填·共 3 笔·W971 存量回填）
-
 

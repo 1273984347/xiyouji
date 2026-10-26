@@ -1,0 +1,31 @@
+{
+ "batch": "W979",
+ "date": "2026-10-27",
+ "title": "W979 收官提示位扩展批（P-44-01/02/03 落地 + P-44-04 活面零残留裁定免迁）",
+ "desc": "收官提示位扩展批：体积窗超窗回窗提示，临时区超龄报数，脚本顶层下划线件计数，三位号活面零残留裁定免迁",
+ "head_entry": "2026-10-27（W979 收官提示位扩展批）",
+ "head_sentence": "收官提示位扩展批：超窗回窗提示、临时区超龄报数、下划线件计数三项落地，三位号裁定免迁",
+ "changelog_body": "\n\n\n\n> **来源**：用户 2026-10-27 引用第 44 篇复盘移交清单（P-44-01~04）令即办（下一自由号）。\n\n> - **文件**：scripts/batch_cascade.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w979_spec.json、scripts/output/_cascade_files_W979.txt。\n\n**P-44-01（回窗提示化）**：batch_cascade 收官提示位抽为 `_close_hints()` 集合函数（全部维持 W822「只输出不拦截」语义·fail-open 留痕），[SIZE] 块在 evaluate 有 FAIL 时输出「超窗——按 FAIL 行内指引跑对应归档工具回窗（段式/台账行分治）」提示行——级联每批插入一段、回窗自此从「异常」变「每批常态动作提示」。\n\n**P-44-02（TTL 报数）**：[TMPE] 块新增 `_shot`/`_inbox` 超龄报数（按 policy.yml ttl_days=7·首跑实测 _shot 3828 件 251MB + _inbox 163 件 215MB 均超龄且已过 48h 冻结窗）——到期列清单经主人确认走回收站；`_misc`（TTL 90d）零超龄。\n\n**P-44-03（防再积）**：新增 [SCRIPTS] 行——顶层 `_` 件跟踪态计数（git ls-files 过滤顶层·首跑 18 个，盘上 169 含 gitignore 本地件），超阈值 20 提示语料级退役扫描（W977 先例）。\n\n**P-44-04（三位号残留裁定：免迁）**：宽口径复扫活面（scripts/*.py|js|mjs + tests/unit 全部正则形态 `W\\d{3}`/`w\\d{3}`/`W[0-9]{3}`）**零残留**——W969 的 69 处升位已覆盖全部活面；余量均在历史冻结段（CHANGELOG 归档/台账行·禁改）与冷存储入档件（无前向兼容需求）⇒ **登记结案，W1000 兼容无需再迁**。\n\n**P-44-02 待主人确认项**：`_shot` 3828 件 251MB + `_inbox` 163 件 215MB 超龄删除候选（回收站通道·确认后执行）。\n\n**验证**：`_close_hints()` 直测输出三段齐全 + ruff 过 + 级联单测 5 过；[SIZE] 超窗提示在本批级联后实况自证（CHANGELOG 111/110 → 提示行出现 → archive_segments 回窗 110）。\n\n> - **状态**：在途（认领登记 W979·收官回填随批尾提交补 hash）\n",
+ "milestone_block": "- **W979 收官提示位扩展批**（P-44 四件收口）：\n  - _close_hints() 集合化：[SIZE] 超窗回窗提示 + [TMPE] TTL 超龄报数（_shot 251MB/_inbox 215MB 待主人确认）+ [SCRIPTS] 防再积计数位\n  - P-44-04 裁定免迁：三位号活面零残留（宽口径复扫实证·余量在冻结段与冷存储）\n  - 全部维持只输出不拦截语义（W822）",
+ "agents_note": "2026-10-27（W979）把上期复盘登记的四件改进一次清完。级联收官的提示位抽成一个函数集：体积窗超窗会直接提醒跑哪个归档工具，临时区会报两个桶的超龄体量等主人确认，脚本目录的下划线件有了防再积计数。三位号迁移这件复查后裁定免迁——活着的代码里一个残留都没有，剩下的都在不许改的历史段和已经入档的死件里。",
+ "file_index_rows": [
+  "| scripts/batch_cascade.py | W979 | 收官提示位集合化 _close_hints()：[SIZE] 超窗回窗提示 + [TMPE] TTL 超龄报数 + [SCRIPTS] 顶层下划线件计数（P-44-01/02/03）",
+  "| docs/00-导读/W批次编号对账表.md | W979 | W979 认领行与收官回填",
+  "| CHANGELOG.md | W979 | W979 段",
+  "| HANDOVER.md | W979 | 级联头尾链与里程碑块",
+  "| README.md | W979 | 当前批次版本行",
+  "| STRUCTURE.md | W979 | 当前批次版本行",
+  "| docs/00-导读/项目说明.md | W979 | 当前批次版本行",
+  "| .github/workflows/README.md | W979 | 工作流层版本面推进 W979",
+  "| site/index.html | W979 | 页脚批次链插入 W979",
+  "| site/data/cross-time-danmaku.html | W979 | 页脚批次链插入 W979",
+  "| site/data/tag-cloud.html | W979 | 页脚批次链插入 W979",
+  "| site/dukou-engine.html | W979 | 页脚批次链插入 W979",
+  "| AGENTS.md | W979 | 版本脚注条目",
+  "| archive/docs/AGENTS-ARCHIVE.md | W979 | 脚注滚动迁入的最老条目",
+  "| CITATION.cff | W979 | version 同步为 W979",
+  "| scripts/output/file-index.md | W979 | W979 段插入",
+  "| scripts/output/_w979_spec.json | W979 | 本批级联 spec",
+  "| scripts/output/_cascade_files_W979.txt | W979 | 级联落盘清单"
+ ]
+}
