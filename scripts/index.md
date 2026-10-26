@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（431）
+## 文件（434）
 
 ### Markdown 文档
 
@@ -303,9 +303,12 @@
 - `_w974_probe_subjtop.py`
 - `_w974_probe_top.py`
 - `_w974_probe_top2.py`
+- `_w974_register_proxy_commit.py`
 - `_w974_register_report.py`
 - `_w974_sheet_full.py`
 - `_w974_stats.py`
+- `_w974_sync_stats_marks.py`
+- `_w974_sync_version_faces.py`
 - `_w974_update_readme.py`
 - `_w974_zoom.py`
 - `a11y_audit.py`
