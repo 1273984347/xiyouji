@@ -23,6 +23,7 @@ CHANGELOG_REL = "CHANGELOG.md"
 FILE_INDEX_REL = "scripts/output/file-index.md"
 README_REL = "README.md"
 HANDOVER_REL = "HANDOVER.md"
+CITATION_REL = "CITATION.cff"
 
 # (stem, 主体, 落位页相对路径, 类别)
 PLATES = [
@@ -63,10 +64,17 @@ EXTRA = [
     "assets/promo/plate-set/README.md", "assets/promo/plate-set/index.md",
     "assets/promo/plate-set/preview-contact-sheet.png",
     "assets/promo/plate-set/preview-contact-sheet.webp",
-    "assets/promo/plate-set/zoom-w974/", "assets/promo/plate-set/raw/round11/",
     "scripts/output/_cascade_files_W974.txt", "scripts/output/file-index.md",
     "CHANGELOG.md", "README.md", "HANDOVER.md", LEDGER_REL,
     "docs/11-方案报告/README.md",
+]
+
+# 目录条目（级联面）——**展开为具体文件路径**：
+# 第 31 门禁 C4-e 判据 = 「HEAD 树 ∪ staged ⊇ 当批 _cascade_files 清单」，逐行做**确切路径**比对
+# ⇒ 清单里写目录路径（带尾斜杠）永远不在文件集合里 ⇒ 必然判红（本批实证）。
+EXPAND_DIRS = [
+    "assets/promo/plate-set/zoom-w974",
+    "assets/promo/plate-set/raw/round11",
 ]
 
 SITE_FILES = ["site/static/images/plate-line-%s.webp" % s for s, _n, _p, _c in PLATES]
@@ -74,6 +82,19 @@ MASTER_FILES = ([os.path.join("assets", "promo", "plate-set", "plate-line-%s.png
                 + [os.path.join("assets", "promo", "plate-set", "plate-line-%s.webp" % s).replace("\\", "/") for s, _n, _p, _c in PLATES])
 PAGE_FILES = [p for _s, _n, p, _c in PLATES]
 FILE_LIST = SITE_FILES + MASTER_FILES + PAGE_FILES + SCRIPTS + BATCH_OUTPUTS + DOCS + EXTRA
+
+# 展开目录条目为具体文件（门禁 C4-e 要求清单每行都是确切路径）
+_expanded = []
+for _d in EXPAND_DIRS:
+    _abs = os.path.join(REPO, _d.replace("/", os.sep))
+    if not os.path.isdir(_abs):
+        raise SystemExit("FATAL 目录不存在：%s" % _d)
+    for _root, _dirs, _files in os.walk(_abs):
+        for _f in sorted(_files):
+            _p = os.path.join(_root, _f)
+            _expanded.append(os.path.relpath(_p, REPO).replace("\\", "/"))
+_expanded.sort()
+FILE_LIST += _expanded
 
 FILE_LINE = "> - **文件**：" + "、".join(FILE_LIST)
 
@@ -197,9 +218,17 @@ def t_handover(t):
         out.append(ln)
     t = "\n".join(out)
     t = re.sub(r"> 最后更新：\d{4}-\d{2}-\d{2}[^\n]*", HANDOVER_LINE, t, count=1)
+    # 「当前 HEAD = W###（…）」治理契约字段（W711 形态·须与 CHANGELOG 最新段一致）
+    t = re.sub(r"当前 HEAD = (?:v[\d.]+\s+)?W\d+（[^）]*）",
+               "当前 HEAD = W974（内页题图成套批·第三组）", t, count=1)
     t = re.sub(r"每次完成新 W### 后更新。最后更新：[^\n]*",
                "每次完成新 W### 后更新。最后更新：2026-10-27（W974 内页题图成套批·第三组）", t, count=1)
     return t
+
+
+def t_citation(t):
+    """CITATION.cff 的批次号形态 version（W711 方案 D·非 SemVer）——只改第一个 version 字段"""
+    return re.sub(r'(?m)^version: "W\d+"', 'version: "W974"', t, count=1)
 
 
 TARGETS = [
@@ -208,6 +237,7 @@ TARGETS = [
     (FILE_INDEX_REL, t_file_index),
     (README_REL, t_readme),
     (HANDOVER_REL, t_handover),
+    (CITATION_REL, t_citation),
 ]
 
 
