@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（43）
+## 文件（44）
 
 ### Python 脚本
 
@@ -49,6 +49,7 @@
 - `test_review_trigger.py`
 - `test_security_scan.py`
 - `test_slice_screenshots.py`
+- `test_stats_sync.py`
 - `test_tmpe_tidy.py`
 - `test_tool_scripts_cli.py`
 - `test_tracked_files.py`
