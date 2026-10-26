@@ -21,7 +21,7 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-REPORT = ROOT / "docs" / "10-方法论沉淀" / "读者数据复盘.md"
+REPORT = ROOT / "docs" / "11-方案报告" / "调研与数据复盘" / "读者数据复盘.md"  # W981：随 W737 目录分区修正（文件 2026-10-13 迁 11-方案报告·旧路径 --report 静默不落盘）
 
 UV7_THRESHOLD = 100
 UV30_DISTRIBUTE = 200
