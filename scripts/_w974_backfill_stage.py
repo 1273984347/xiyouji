@@ -104,8 +104,14 @@ def main() -> int:
     status = STATUS.replace("REPLACE_HASH", h)
     cstatus = CHANGELOG_STATUS.replace("REPLACE_HASH", h)
 
-    # ---- 台账（基底 = HEAD）----
-    head = git_show("HEAD:" + LEDGER_REL)
+    # ---- 台账（基底 = **索引版**：认领行已由 _w974_claim_row.py --stage-head 精确暂存进索引，
+    #      HEAD 版尚无 W974 行 ⇒ 若以 HEAD 为底则 ledger_backfill 找不到该行）----
+    head = subprocess.run(["git", "show", ":" + LEDGER_REL], cwd=REPO,
+                          capture_output=True).stdout.decode("utf-8")
+    if not head or "| W974 |" not in head:
+        head = git_show("HEAD:" + LEDGER_REL)
+    if "| W974 |" not in head:
+        raise SystemExit("FATAL 台账基底无 W974 行（索引与 HEAD 均无）")
     tmp = os.path.join(tempfile.gettempdir(), "w974_ledger_head.md")
     io.open(tmp, "w", encoding="utf-8", newline="").write(head)
     cmd = [sys.executable, os.path.join(REPO, "scripts", "ledger_backfill.py"),
