@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（410）
+## 文件（431）
 
 ### Markdown 文档
 
@@ -288,6 +288,26 @@
 - `_w961_version_sync.py`
 - `_w962_wire_entry.py`
 - `_w963_version_sync.py`
+- `_w974_backfill_stage.py`
+- `_w974_cascade.py`
+- `_w974_claim_row.py`
+- `_w974_download.py`
+- `_w974_final_check.py`
+- `_w974_insert_plates.py`
+- `_w974_make_prompts.py`
+- `_w974_make_retry.py`
+- `_w974_merge_retry.py`
+- `_w974_negative_sample.py`
+- `_w974_prepare.py`
+- `_w974_probe_clusters.py`
+- `_w974_probe_subjtop.py`
+- `_w974_probe_top.py`
+- `_w974_probe_top2.py`
+- `_w974_register_report.py`
+- `_w974_sheet_full.py`
+- `_w974_stats.py`
+- `_w974_update_readme.py`
+- `_w974_zoom.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
@@ -310,6 +330,7 @@
 - `check_citations.py`
 - `check_claude_md.py`
 - `check_content_consistency.py`
+- `check_content_hygiene.py`
 - `check_corruption.py`
 - `check_css_decl_separators.py`
 - `check_css_orphan_selectors.py`
