@@ -46,3 +46,4 @@ check_gsap_motion.py  # ②批收尾会话直跑门禁（GSAP 动效写法机检
 check_parser_anchor_coverage.py  # ②批收尾会话直跑扫描（解析器锚点覆盖面·W964 双虫探针常驻化·W965 建）
 check_gov_doc_claims.py  # ②批收尾会话直跑对账（治理文档数字断言·preflight 提示位接线·W967 建）
 archive_ledger_rows.py  # ②批收尾会话直跑归档（台账行号序切分·C5 窗口修法·W970 建）
+check_content_hygiene.py  # ②批收尾会话直跑扫描（全仓内容卫生·角色分类·W973 建）
