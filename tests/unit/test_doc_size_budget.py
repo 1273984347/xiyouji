@@ -40,6 +40,15 @@ def test_evaluate_missing_file_fails_closed():
     assert dsb.evaluate({}) != []
 
 
+def test_evaluate_ledger_hint_points_to_ledger_tool():
+    """台账超窗的修法指引必须指向台账行归档工具（W976）——段式 archive_segments.py
+    不管台账，旧统一文案对 C3 是死路指引（超窗期恰逢台账修剪器 A5 崩溃=双重断链）。"""
+    counts = {"CHANGELOG.md": 110, "scripts/output/file-index.md": 110,
+              "docs/00-导读/W批次编号对账表.md": 61}
+    out = dsb.evaluate(counts)
+    assert len(out) == 1 and "61" in out[0] and "archive_ledger_rows" in out[0]
+
+
 def test_real_files_within_window():
     """现网树必须在窗内（归档批后 109+级联=110）+ 脚注 ≤4KB——防回退锚。"""
     counts, _, extra_fails = dsb.collect()

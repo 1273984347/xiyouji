@@ -550,6 +550,17 @@ def main():
             print("[SIZE]", _line)
     except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"[SIZE] 体积提示位不可用（{_exc}）")
+    # W976：tmpe 临时区处置提示位（每批收官报一次·防「只进不出」复发——清理闭环
+    # 自 W738 建制到 W976 只运转过一次，批次桶 699MB 堆积实证）。判据与工具本体在 tmpe_tidy。
+    try:
+        import tmpe_tidy as _tt
+
+        _wbuckets = [d for d in os.listdir(_tt.TMPE)
+                     if os.path.isdir(os.path.join(_tt.TMPE, d)) and re.match(r"^w\d{3,4}$", d)]
+        print("[TMPE] 批次桶 %d 个在 tmpe（政策=批收官经主人确认整桶清·删走回收站）·"
+              "沉淀扫描=py -3 scripts/tmpe_tidy.py --tool-candidates" % len(_wbuckets))
+    except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"[TMPE] 提示位不可用（{_exc}）")
     print(f"[APPLY] 级联完成：{ctx.batch} / {ctx.new_rule}，共 {len(ctx.pend)} 个文件；写后自检 {'发现 %d 项' % len(selfcheck) if selfcheck else '全部通过'}")
     return 0
 

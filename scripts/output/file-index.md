@@ -11,6 +11,38 @@
 ---
 
 
+## W976 工具链体检修复批（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/archive_ledger_rows.py | W976 | A5 断言修复（归档块保持源相对顺序·不再要求号升序）+ move 参数化 + 自测重写走 move() 全链路（升序/降序穿插/无迁出三形态）
+| scripts/check_doc_size_budget.py | W976 | 修法指引按文件种类分治（台账指向 archive_ledger_rows·段式工具不管台账）+ 自测补台账案例
+| scripts/preflight_check.py | W976 | rejection_pairs 纯函数 + 主流程拒绝集排除本批自身（认领后复跑不再自撞）
+| scripts/batch_cascade.py | W976 | 收官 [TMPE] 提示位（批次桶计数 + 沉淀扫描指引·防只进不出复发）
+| tests/unit/test_doc_size_budget.py | W976 | 新增台账修法指引单测（C3 死路指引回归锁）
+| tests/unit/test_preflight_touches.py | W976 | 新增 self 排除单测（认领后自撞回归锁）
+| docs/agent/pitfalls.md | W976 | 数据/内容可信度 +1 条（自测样本必须覆盖判据会失败的最小形态·8→9 条）
+| AGENTS.md | W976 | 坑位数 63→64（阅读契约与主题视图两处·数据类 8→9）+ 版本脚注条目
+| HANDOVER.md | W976 | 坑位数指针 63→64 两处 + 级联头尾链与里程碑块
+| docs/00-导读/W批次编号对账表.md | W976 | W962 伪阻塞闭环回填 + W976 认领行 + 修剪迁出 W914-W916（61→59 回窗）
+| archive/docs/W批次编号对账表-ARCHIVE.md | W976 | 台账修剪迁入 W914-W916 三行（号序切分）
+| archive/docs/CHANGELOG-ARCHIVE.md | W976 | 段式归档迁入 W856-W857 两段
+| archive/docs/file-index-ARCHIVE.md | W976 | 段式归档迁入 W856-W857 两段
+| CHANGELOG.md | W976 | W976 段（现役 111→109 回窗后立新段）
+| README.md | W976 | 当前批次版本行
+| STRUCTURE.md | W976 | 当前批次版本行
+| docs/00-导读/项目说明.md | W976 | 当前批次版本行
+| .github/workflows/README.md | W976 | 工作流层版本面推进 W976
+| site/index.html | W976 | 页脚批次链插入 W976
+| site/data/cross-time-danmaku.html | W976 | 页脚批次链插入 W976
+| site/data/tag-cloud.html | W976 | 页脚批次链插入 W976
+| site/dukou-engine.html | W976 | 页脚批次链插入 W976
+| CITATION.cff | W976 | version 同步为 W976
+| scripts/output/file-index.md | W976 | W976 段插入
+| scripts/output/_w976_spec.json | W976 | 本批级联 spec
+| scripts/output/_cascade_files_W976.txt | W976 | 级联落盘清单
+| scripts/output/_vermilion_solid_cache.json | W976 | 朱砂门禁缓存补随批入库（W975 末笔搜索刷新后再生成·上批漏提）
+
 ## W975 跨 Agent 经验沉淀入仓批（2026-10-27）
 
 | 文件 | W | 说明 |
@@ -204,7 +236,7 @@
 | scripts/batch_cascade.py | W960 | 落盘后体积提示位（每批收官报四文件体积态） |
 | docs/00-导读/文档规范.md | W960 | §8 重标：窗口制替代 50KB/500 行旧线（两制打架消除） |
 | archive/docs/CHANGELOG-ARCHIVE.md | W960 | 迁入 38 段（W803-W842·插顶） |
-| archive/docs/FILE-INDEX-ARCHIVE.md | W960 | 迁入 140 段（W700-W842·尾追+归档时间链） |
+| archive/docs/file-index-ARCHIVE.md | W960 | 迁入 140 段（W700-W842·尾追+归档时间链） |
 | tests/unit/test_doc_size_budget.py | W960 | 体积门禁单测 4 例（含现网防回退锚） |
 | tests/unit/test_archive_segments.py | W960 | 搬段工具单测 4 例（三种段形态解析与负样本） |
 | pytest.ini · 系统架构方案v2 | W960 | pytest_collected 标记归一 910（并行竞态三数字拼接修复） |
@@ -3162,29 +3194,5 @@
 | site/data/search.html、site/en/search.html | W858 | 搜索索引重建 + CSP 哈希重算 |
 | scripts/output/stats.json、stats-index.md、stats-changelog.json | W858 | 报告计数与会话统计刷新 |
 | docs/00-导读/W批次编号对账表.md | W858 | 认领行与补段批回填 |
-
-
-## W857 计划方案模板符合性复核批（2026-10-21）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_w857_plan_template_review.py | W857 | 新增：计划方案对模板的结构符合性复核探针（32 项结构判据 + 配对并集 §12 十项覆盖 + 编号体系 + 模糊词；纯标准库·一次性诊断件·不入 CI） |
-| scripts/output/_w857_plan_template_review.json | W857 | 新增：8 份文档 × 32 判据的机器可读矩阵 + 3 组配对并集判定（复核证据原始数据） |
-| scripts/output/_w857_spec.json | W857 | 新增：本批 CHANGELOG 版段素材（10 键齐·供 backfill_changelog.py 按号序补段） |
-
-
-## W856 Logo 定稿落地批（2026-10-21）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/icons/ | W856 | icon-192/512/maskable-512 重做 + logo-mark-light.svg + logo-lockup-light.svg |
-| site/index.html | W856 | 六处元信息 + 页眉 seal→图形标 + hero h1 + 页脚品牌位（《取经录》） |
-| site/system.css | W856 | 新增 .brand-mark 纯加法规则（.seal 保留·其余 857 页零影响） |
-| site/manifest.webmanifest | W856 | name / short_name → 取经录 |
-| site/rss.xml | W856 | 随生成脚本重出（RSS 标题同步） |
-| site/static/img/og-cover.png | W856 | 随生成脚本重出 |
-| xiyouji-desktop/ | W856 | 桌面端应用名同步 |
-| README.md、CITATION.cff | W856 | 品牌名与项目名同步 |
-| docs/00-导读/W批次编号对账表.md | W856 | 认领行与补段批回填 |
 
 
