@@ -34,7 +34,7 @@
 
 **验证**：单测 4/4 · ruff 0 · stats.py --w 实跑 sweep 跟随 2 处 + C5b 0 FAIL · check_doc_sync 0 FAIL · 全量 verify + pytest 见状态行。
 
-> - **状态**：在途（认领登记 W980·收官回填随批尾提交补 hash）
+> - **状态**：已收官（`6d3fba13`·verify 全量 rc=0 + 单测 4/4 + C5b 0 FAIL·sweep 首跑跟随 2 处）
 
 ### W979（2026-10-27）：收官提示位扩展批（P-44-01/02/03 落地 + P-44-04 活面零残留裁定免迁）
 
