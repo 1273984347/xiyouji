@@ -22,7 +22,7 @@
 
 ## 六主题坑位（原文全量·内容零改动）
 
-### CSS / 视觉渲染（10 条）
+### CSS / 视觉渲染（12 条）
 
 - **批量正则改 CSS/JS 后必须验证括号/引号平衡**（`check_structure.py`）。
 - **批量关键字扫描/门禁必须穷尽同义变体**（W550）：可视化缺陷扫描的关键字要覆盖同义写法（如 饼图/环形图/圆环图/Pie Chart/Donut Chart）——「圆环图」变体曾致漏网；命中后以「可见措辞 × 实现签名（d3.arc/pie/treemap 计数）」双条件定错配，禁止单关键字定性。
@@ -35,6 +35,8 @@
 - **d3.select 静态快照空选区族**（W575）：`d3.select('#x')` 在元素声明前执行、元素根本不存在、或把选区方法调在自建门面对象（仅 show/hide）上，均为永久空选区/静默 no-op——tooltip 类功能**桌面鼠标同样失效**且常无报错（一报错反而是 `node().offsetWidth` 型 TypeError）；修法三态=惰性取用/按 W460 形态补元素（必须置于捕获脚本之前）/门面补齐缺失方法。静态扫描「select 行号 vs 元素 id 行号」即可穷尽（W575 四例三型，81-hardships/ecology/global-pattern/cross-time-danmaku）。
 - **触屏 tooltip e2e 三坑**（W575）：① tooltip 显隐多带 CSS transition，合成派发后同步读 `getComputedStyle().opacity` 恒为过渡起始值——探针以「预清空 tip 内容→派发→内容非空」同步信号判定，并 stash/restore 防污染页面；快照键不可含显隐态 class（visible 翻转致键漂移跨快照失配），用 id 或顶层序号；② Chrome 在 touchend 后把 hover 同步回真实鼠标位置并补发 mouseout——e2e 中一旦先动过真实鼠标，后续 tap 的 compat mouseout 会杀掉 tooltip 显示态（浏览器行为非页面缺陷），触屏断言序列须全部先于鼠标动作完成；③ 泛选择器 `[class*="tip"]` 会误伤 `small-multiple`（子串撞车）与 tooltip 内层元素（容器 opacity:0 隐藏时内层 computed opacity 仍 1）——精确化（tooltip 子串/tip 结尾）+ 顶层容器过滤；常显换内容型面板（prismTooltip 类）无隐藏态，隐藏断言以「触屏≡鼠标」经验对照替代硬编码 hidden 期望；④（W581）d3.drag 的 touchstarted 会 stopImmediatePropagation——document 冒泡层 touch 委托收不到可拖拽节点的触摸事件，注入须挂 document 捕获阶段（capture:true·先于目标阶段·免疫下游拦截）；⑤（W581）touchscreen.tap 的 tooltip 显隐在 Playwright 由 compat 事件随机承载（注入派发与断言错位·tap 式 PASS 可能是 compat 代劳）——断言改合成 TouchEvent 与取点同 tick 派发（兼顾力导向节点漂移），并以事件流取证甄别派发真身。
 - **力导向图的边渲染在 canvas 层·SVG line 只是样式载体**（W551 族图谱 36 页实证·W902 自 Agent 记忆固化入仓）：力导向关系图「边看不见」先查 svg 背景是否不透明/边是否 zero-opacity——真正的命中判定画在 canvas 覆盖层，SVG line 元素仅承载 hover 样式与事件代理；改边视觉若只动 SVG 属性则画面不变。排查口：devtools 里 canvas 元素与 svg 元素并存且同 bbox 即此架构。
+- **素材出图 prompt 里器物的「形状类别」比「数量计数」更要紧**（W974 实证·E-07/D-10）：写「金铙」二字 ⇒ 模型画成**圆环**（读作手镯/环）——形状类别错会**误读成别的题材**（须重出）；改写成「**倒扣的金钵 · 半圆盘 · 钵面一圈回纹 · 绝不是圆环或手镯**」一次画对。⇒ 描述器物必须给**几何形状 + 排除项**（「是 A·不是 B」），禁只给器物名；数量级偏差（星点数/环数）不误读则记取舍不重出（承 W942 紧箍儿九倒刺、W948 芭蕉扇叶形两先例）。
+- **素材选题前先验「落位页存在且尚无题图」**（W974 实证·E-08）：原定「虎力大仙」在 people 库**无独立页面**（只有「车迟国三国师」这类合并页）⇒ 出图完成后才发现无处可放，浪费一次生成。⇒ 开工前做「题材 × 落位页」双向核对（存在 + 无题图）；同一 stem 只能对应一个母版，禁两套提示词。
 
 ### JS / CSP / 运行时（6 条）
 
@@ -45,7 +47,7 @@
 - **ruff --fix 的 isort 会改坏「ST 先于 torch」顺序**（W746）：isort 排序规则把 plain import（`import torch`）排到 from-import（`from sentence_transformers import ...`）之前——正是本机段错误坑的关键顺序，铁则注释写在旁边也会被改坏（实证：--fix 后 CLI 静默 139）。修复：**ML 脚本的 ST import 块必须加 `# noqa: I001` 防守**（`scripts/rag/page_router.py` `_load_model` 范式），并复跑该脚本确认可跑。
 - **CSP 哈希链「只读绿 ≠ 写路径健康」**（W536 实证·W902 自 Agent 记忆固化入仓）：generate_csp 的 --check 只走读路径，守卫对根目录的误算曾令重生成自阻（写路径损坏而校验恒绿）；凡改 generate_csp/守卫逻辑，验收必须真跑一次写入（注入或重算）再 --check，禁以 --check 单绿收工。
 
-### git / 提交 / 并发（18 条）
+### git / 提交 / 并发（19 条）
 
 - **批量改 md 一律 Python `open(encoding='utf-8')`，禁用 PowerShell `Set-Content`**（后者默认写 UTF-8 BOM，项目 W427 曾全库清 BOM；`Add-Content` 同理慎用）。
 - **同文件多个 Edit 必须串行执行**（并行 Edit 基于同一原始内容计算 diff，后写覆盖先写——W505 复现 4 次：金角银角「唐僧肉」/CHANGELOG W506 段/项目说明头部/交接文档标题均丢失）；并行批次后必须 Grep 验证所有修改点。
@@ -67,6 +69,7 @@
 - **PowerShell 管道会给行文本加 BOM**（W836 实证）：`Get-Content x | py -3 script.py` 传入的行首带 U+FEFF ⇒ 写入台账后该行成为 `U+FEFF| W836 | …` ⇒ 第 31 门禁 C4 的登记正则 `^\|\s*W(\d{3})\s*\|` 不匹配 ⇒ 判「该 W 号未在对账表登记」红——而**明面完全看不见**（编辑器不显示行首 BOM）。纪律：**登记行必须以文件直写传入**（`open(..., encoding="utf-8")`），禁经管道；写入后核 `git show HEAD:<file>` 的行首。
 - **守卫不能把自己判红**（W836 实证）：扫描被禁字面量的守卫若①在注释里写出字面量、②在自检样本里硬编码字面量，①会被自己命中、②入库后即自指违规 ⇒ 字面量以 **base64 存储·运行时解码**（明文扫描仍为 0 而守卫仍能检出回归）；自检的**正例探针由解码结果在运行时派生**（`pat` / `pat.upper()` / `pat.capitalize()` / 词内嵌形态），只有反例才硬编码。守卫上线后先跑自身扫描——它会当场报出你刚写下的字面量。
 - **并发保护会被自身的登记欠账阻塞**（W954 实证·W956 修·E-26 上移）：touches 交集拒绝若纯以登记面判「在途」，历史陈旧行会把新批次**恒红拒绝**——W954 开工即 8 条 FAIL（8 个陈旧「在途」批次的 touches 与新批交集 CHANGELOG/file-index 非空·实为 7 批已落库 + 1 批已停止）。修法 = 在途判定加 git 条件（见级联组「登记面不是事实源」条）：登记滞后降级为告警不拒绝，真在途（git 无提交）照旧拒绝；git 读取失败时退化回纯登记面口径（从严保护）。教训泛化：**防护机制的输入数据自身欠账时，机制会先于真实冲突失效**——先清历史欠账或让判据以事实源为准，二选一。
+- **写既有文件必须「临时文件 + 原子替换」——`open(path,"wb")` 在 write 之前就截断原文件**（W974 实证·E-03）：本批把一份 28,936 B 的 README 写成 **0 字节**（TypeError 发生在 write 阶段）⇒ 靠 `git checkout HEAD -- <path>` 恢复。⇒ 批改既有文件一律 `io.open(p+".tmp","wb")` 写完再 `os.replace(tmp, p)`；改完立刻 `git diff --numstat` 核对增删比（≠1:1 且非新增文件 ⇒ 立即查行尾）。
 
 ### 级联 / CHANGELOG（8 条）
 
@@ -80,7 +83,7 @@
 - **归档面与现役面必须合看**（W954 实证·W956 上移 E-27 并修工具）：CHANGELOG 自 W921 瘦身起把百段级老段移入 `archive/docs/CHANGELOG-ARCHIVE.md`，只读现役文件会把已归档段误判「不存在」——第 43 篇复盘首轮取证 141 段实为 149（漏 W795–W802 共 8 段）；backfill_changelog 的待补清单同期误报 74 段（W728-W802 全是归档段假阳性）。凡跨区间统计/立段判定一律两面合扫；工具侧已修（collect_pending 合并归档面·补段另用 `--only` 限域）。
 - **段状态串行错位**（W954 实证·W956 上移 E-28 并建防线）：收官回填按写顺序推进时会把上一批的状态文案写进下一批的段（W941 段曾写「认领登记 W940」——段号与状态所述批次错位）。两个段状态写入点（batch_cascade `_face_changelog` / backfill_changelog 补段）已断言状态文本「认领登记 W###」== 本段号，错位即 AssertionError（P-43-05）；状态文本引用别批（承接 / 让号落点）不受限——只锁自我指称形态。
 
-### 数据 / 内容可信度（6 条）
+### 数据 / 内容可信度（8 条）
 
 - **CHANGELOG/方案档验收数字必须当批现测**（W496 铁律）：写 M 指标/内联字节数等数字前先跑 `python scripts/acceptance_snapshot.py` 从输出抄，禁止从上一批 CHANGELOG 复制（W493「28385B」跨批复制曾掩盖全站 INLINED 清空事故）。
 - **写 `> 原文引文` 行前先跑 `python scripts/_cite_probe.py --kw <关键词> --chap <回目>`** 从 text-search.json 提取候选，禁止凭记忆编造（W503 门禁只拦截"写入后未命中"，无法拦截"恰好像原文的编造"）；新文档（非基线豁免）用变体称谓（行者/唐僧/圣僧等）必须同时含 canonical（孙悟空/玄奘），写作前 Grep `dataset/glossary.json` 称谓组。
@@ -89,12 +92,14 @@
 
 - **双源互锁在「两侧都停在旧值」时必然假绿**（W842 实证 · pytest 收集数 785 虚挂两批）：`check_doc_sync` 的 C5b 比对 `pytest.ini` 标记 vs `stats.json` 值，C5d 才是 `stats.json` vs 磁盘实算。W839 收官刷新少记一例（该批正文写「783→785」而实算 786），C5b 因为 `pytest.ini` 与 `stats.json` **两边都是 785** 而一路绿——直到 W842 跑 `stats.py --w` 触发 C5d（换源头实算）才照出来。教训：**标记↔缓存的对账只能证明两者彼此一致，不能证明它们与事实一致**；任何「X 抄自 Y」的互锁都必须配一条「Y 由 Z 实算」的独立支路，否则同源污染会静默通过。同族检查面 = `report_docs` 标记、A4/A1-A6 计数、`stats.json` 各键——凡存在实算源，就必须让实算支路常驻门禁（C5d 即这条）。
 - **暗色/站点审计须先起 site 根 http 服务·否则探针全 404 假 0**（W621 实证·W902 自 Agent 记忆固化入仓）：审计探针直击 file:// 或错误根路径时拿到的 0 命中会被当成「无问题」——先 `python -m http.server` 起 site 根再跑；且「探针报 0」必须配内容在位断言（已知应有的样本数 >0）才可信，双保险防「0=好」与「0=没跑成」混淆。
+- **图像裁切/对齐：「整图包围盒顶」≠「主体顶」——孤立噪点会把裁切线拉歪**（W974 实证·E-01/E-02）：实测一张图顶部第 18 行仅 **3 个孤立像素**（差值 41）就把 bbox 顶从 437 拉到 18 ⇒ 站点版几乎没裁、标题与主体间仍多留约 160 px 空白（肉眼像「图缺了一块」），而**机器判据全绿**（顶部留白墨量确实≈0）。⇒ 主体顶 = **面积 ≥ 200 px² 的墨迹连通簇的最小顶**（噪点被滤掉、真实稀疏顶部如冠尖属大簇不受影响）；反向坑：**按行内墨迹像素数设阈值过粗**，会切掉主体稀疏顶部 ⇒ 整目录复算差异清单留档，既有资产**人眼判定后再决定是否批量改**，禁自动化批量改。
+- **校验/自检代码必须自证：检查脚本可能恒真，负样本自检函数本身可能漏覆盖**（W974 实证·E-05/E-06）：① 本批 stem 冲突检查因**前缀不匹配**（裸 stem vs `plate-line-` 前缀）而**从未生效**，却每次打印「12/12 无冲突」⇒ 检查须带**负样本自证**（把本批 key 塞进假想既有集合，必须报冲突，否则 fail-closed 中止）；② 判据脚本的 `negative_check()` 只覆盖 J1/J2/J3/J4/J6/J8，**J5/J7/J9/J10 从未被自检** ⇒「自检通过」≠「其余判据可证伪」（J10 实测 9.333 > 阈值 5.0 完全可证伪，只是没被函数覆盖）⇒ 自合成多维负样本（实心黑块 + 贯穿暗框 + 纯白竖带 ⇒ 一次踩中多条判据）。
 
-### 流程 / 协作 / 取证（9 条）
+### 流程 / 协作 / 取证（10 条）
 
 - **门禁「建置即红」检测法**（W757 实证·D1）：凡门禁脚本依赖外部运行时（Playwright 浏览器 / Node 包 / 系统工具），**必须核对其 CI job 是否安装该依赖**——脚本本地有依赖所以本地全绿，CI 无依赖则 `require` 抛 `MODULE_NOT_FOUND` → fail-closed 分支打印 FAIL → 整条 `verify_delivery` 红。实证：`check_chart_values.js:904` 硬依赖 `require('playwright')`，而 `ci.yml` 的 verify-delivery job 只装 Python+Node（`scripts/node_modules` 被 gitignore），故第 43 门禁自 W753 建置起在 CI 中**必红**；且因本地 HEAD 领先公开 main 63 提交，长期无人发现（违反 E36-E42 铁则②「门禁建置即绿」）。查法：① 列脚本的 `require`/`import` 外部依赖；② 在对应 job 的 `run:` 块内查安装步骤；③ 缺失即缺陷。
 - **接线回归断言必须锚 `run:` 块，禁字符串存在性**（W757 实证·E-02）：断言「CI 是否执行 X」时，若只做 `"X" in ci_yml`，会被**步骤名/注释**骗过——负样本实测：把 `run: npm run test:server` 改成 `run: echo skipped` 后，`test:server` 仍在 `- name:` 里，断言**假绿**。正确做法：提取 job 正文的 `run:` 命令体（单行 `run: <cmd>` + `run: |` 多行块），只在该文本内匹配。同理，新增防回归测试必须用「摘除接线」负样本证明其会红，否则是假防线（本批 4/4 真防线验证）。
-- **共享机制必须写入仓库内文件（git tracked）**：任何要让其他 Agent 读到的机制/规则/经验，一律写仓库内公共载体（AGENTS.md / 交接文档 / skills/ / docs/10-方法论沉淀/），**禁止只写全局路径**（如 `c:\Users\...\.trae-cn\skills\`）——其他 Agent 在项目 session 读的是仓库版，且 `sync_skills.py --sync` 为仓库→全局单向（全局修改会被覆盖）。改 skills/ 下任何 skill 必须改仓库版后 `python scripts/sync_skills.py --sync` 同步全局（W516 教训：上移机制曾误写全局版，被用户指出载体错误）。（W562：skills/ 目录已退役，本条 sync 指引仅存历史——用户级 `~/.本地工具目录/skills/` 的 4 个通用会话技能为 junction，指向 `D:\open-source\`，与仓库无关。）
+- **共享机制必须写入仓库内文件（git tracked）**：任何要让其他 Agent 读到的机制/规则/经验，一律写仓库内公共载体（AGENTS.md / 交接文档 / skills/ / docs/10-方法论沉淀/），**禁止只写全局路径**（如 `c:\Users\...\.trae-cn\skills\`）——其他 Agent 在项目 session 读的是仓库版，且 `sync_skills.py --sync` 为仓库→全局单向（全局修改会被覆盖）。改 skills/ 下任何 skill 必须改仓库版后 `python scripts/sync_skills.py --sync` 同步全局（W516 教训：上移机制曾误写全局版，被用户指出载体错误）。（W562：skills/ 目录已退役，本条 sync 指引仅存历史——用户级 `~/.本地工具目录/skills/` 的 4 个通用会话技能为 junction，指向 `D:\open-source\`，与仓库无关。）（W974 复发实证：W974 批的经验只沉淀进 Agent 私有 Memory 而未入仓 ⇒ 仓内其他 Agent 读不到，用户当场纠正「你不能只沉淀进你自己的 Memory 文件，本项目是多 Agent 协作的项目所以需要你同样沉淀进本项目内」⇒ 沉淀载体分工：规则类→AGENTS.md / 批次经验→HANDOVER「三」/ 深度篇→docs/10-方法论沉淀/ / 工具→scripts/。）
 - **W 批次收尾七步清单**（W543-W548 六批 dogfood 后 W563-W566 四批延续实证，沉淀自 2026-09-06 报告 S-A）：① 内容改动 → 专项门禁（改内联脚本/样式必跑 generate_csp + --check）；② 新增/修改 Python 脚本 → `python -m ruff check scripts/`（推送前本地预检，CI 红灯历史三类均为本地可拦截）；③ verify_delivery 核心全绿；④ batch_cascade dry-run → apply（自检通过即登记，无人工修复步骤）；⑤ Write 临时提交信息文件 + `git commit -F`（禁 heredoc）；⑥ `git push` → `gh run list` 确认（CI 与 Screenshot Review 为准）；⑦ 记忆/交接文档状态同步。**数据面扩展先查计数钉（W691 CI 红灯实证）**：扩追踪集/数据集（如 aliases 加人）先 grep tests/ 的 `assert len ==` 计数断言并同步；七步中的 pytest 须本地全量跑（W691 只跑单文件漏掉两例计数钉）。
 - **取证枚举四陷阱**（W563-W566 三犯沉淀 · ④ W649 补录）：① 站点/全仓级枚举一律 Python `glob(recursive=True)`，禁 shell 单层 glob（顶层扫描曾漏 scripts/B_人物/ 子目录生成器）；② `grep -n` 行号前缀输出不得与其他命令输出混读（行号曾被误读为 git ls-files 内容致 F17 假阳性方案项）；③ 判定 ugrep 循环失真时改用 Python 重扫（同会话三犯）；④ **判定"文件是否在仓库内"必须核 `git ls-files`，磁盘存在 ≠ 跟踪**——W649 实证：摸底阶段见 `docs/S4-学术投稿/` 目录在磁盘即判"投稿包滞留 public 仓库待出库"，实际 W620 已 untrack+gitignore 出库（`git ls-files` 返回 0），失真前提污染了三份分析产物并经 ICE 打分放大到榜首，经用户复核才纠正。
 - **子代理显式派发三类场景**（W671）：①独立取证扇出（外部评审/外部分析每主张一代理并行对仓取证——判例在仓库文件里，子代理冷启动不丢判例）；②只读调研（风险面普查/影响面盘点等与主线无共享写的任务，可与级联/CI 并行）；③长等待空档（等 CI/等长命令期间显式派发，禁纯 sleep）。主 context 保留三类内容=裁决与冻结史、串行变更链（单工作树+pre-commit+段计数锁为共享可变状态·并发写违反「同文件 Edit 串行」铁律）、跨步骤即时发现（发现会改变下一步，无法预先写进子代理指令）。**机器门禁优先于 agent review**：可复算的防线（自洽锁/负样本/doc-sync）先建，review 型代理只补机器判不了的面。子代理产出落仓库公共载体（本条即 W517 载体铁律的自我适用·私有记忆仅作镜像）。
@@ -102,4 +107,5 @@
 
 - **把 subprocess 输出解析改成 fail-closed 前，先识别 scope 跳过的伪造结果**（W834 引入 · W839 修复 · W838 收官两度被拦实证）：`_GateContext` 把全局 `subprocess.run` 猴补为 `_scoped_run`，`--scope` 不覆盖某段时返回 `_SkipResult`（**rc=0**、`stdout` 只有「（--scope X 跳过）」这句提示串，跳过消息已由它自己打印）。W834 把 a11y 段由 fail-open 改 fail-closed 后，该提示串被送进 `json.loads` → `Expecting value: line 1 column 1` → 判「输出不可解析」→ **docs 档提交必红、全量档却全绿**（同形 subprocess 手动复跑两次均正常，故极易误判为瞬态）。识别判据：① 同一次 `--scope auto` 里同一段打出「OK 跳过」+「FAIL 判红」双消息；② 绕过 monkeypatch 手动复跑正常。修法 = rc 检查前加 `isinstance(r, _SkipResult)` 守卫直接 return——**跳过 ≠ 判据不可执行**，不进 FAIL 也不重复上报；回归锁 2 例（跳过结果 fail/ok/warn 三桶全空 + 简单委托段跳过不判红）。**同族口径**：凡 bespoke 段自行 parse `subprocess` 输出（json / 正则 / 结构），改 fail-closed 时必须先过这道守卫。
 - **素材出图的人工关必须前置为逐张自检表**（W940/W942/W953 三批实证·W956 上移 E-31·P-43-04 载体）：机器判据（尺寸/留白/墨量/伪文字/裁切）抓不了「题材是否属于西游」与「形制对不对」——W953 十二张里机器抓 2 张、人眼另抓 2 张 ⇒ 重出 6 张；W942 两处形制偏差（紧箍儿缺九个倒刺钩 / 芭蕉扇画成正圆团扇）纯人眼发现。落地口径：出图前逐张写明「靠哪个西游元素认出 + 形制关键特征是什么」（判据 J8 形制级自检表·`assets/promo/hero-set/README.md` 有样例），重出时逐条对照；且图形同步器（`_w950_refresh_icon_paths.py`·复合键 d/transform/fill 对账）必须**前置到每次出图批**而非等打磨批才补——资产落盘而页面没同步是静默分叉（W949 堵的数据源回归漏洞同族）。
+- **本地验收起服务：「端口被另一个进程占着」是假故障**（W974 实证·E-09）：`netstat` 显示 LISTENING + 大量 TIME_WAIT（说明确实连过），但 curl / Python urllib / 浏览器**全部失败或超时** ⇒ 根因 = 之前起的 `http.server` 没退干净、**两个进程抢同一端口**（Windows SO_REUSEADDR 允许）。⇒ 起步先 `Get-NetTCPConnection -LocalPort <port> -State Listen | % { Stop-Process -Id $_.OwningProcess -Force }` 清干净；起服务用 `Start-Process` 独立进程 + 重定向日志（**禁**在管道后接 `Select-Object -First N`，那会关掉 stdout 管道把服务打挂）。
 

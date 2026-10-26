@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W974），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W975），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,23 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W975（2026-10-27）：跨 Agent 经验沉淀入仓批（坑表 57 → 63 条 + 深度篇 1 篇 + 计数链同步）
+
+> **来源**：用户 2026-10-27 纠正「你不能只沉淀进你自己的 Memory 文件，本项目是多 Agent 协作的项目所以需要你同样沉淀进本项目内」。
+>
+> **问题定性**：W974 批的 9 条经验只写进 Agent 私有 Memory ⇒ **仓内其他 Agent 读不到** ⇒ 正是坑表既有条目「共享机制必须写入仓库内文件（git tracked）」的**复发实证**（该条目本批已补注复发）。
+
+> - **文件**：docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、docs/10-方法论沉淀/README.md、docs/10-方法论沉淀/素材批处理与判据自证方法论.md、scripts/_w975_sink_experience.py、scripts/_w975_cascade.py、scripts/_w975_tweak.py、scripts/output/_cascade_files_W975.txt、scripts/output/file-index.md、CHANGELOG.md、README.md、docs/00-导读/W批次编号对账表.md
+
+**入仓面（四处载体）**：① 坑表 `docs/agent/pitfalls.md` **6 条新条目**（CSS/视觉渲染 +2「器物形状类别 > 数量计数」「落位页先验」· git/提交/并发 +1「写既有文件须临时文件 + 原子替换」· 数据/内容可信度 +2「bbox 顶 ≠ 主体顶」「校验/自检代码必须自证」· 流程/协作/取证 +1「端口占用是假故障」）+ 4 处节标题条数 + 共享机制条目补 W974 复发注；② **深度篇**《素材批处理与判据自证方法论.md》（`docs/10-方法论沉淀/` 编号 26·含问题背景/方法论/复现案例/修复策略/关联文档五段）；③ `AGENTS.md` §4.3 主题视图与计数声明；④ `HANDOVER.md` 两处指针。
+
+**计数链同步**：坑位 **57 → 63 条**（AGENTS §4.3 与 HANDOVER 的条数声明同批订正·门禁 N4 核对「AGENTS 声明 == pitfalls 实数」⇒ 复验一致）。
+
+**纪律**：共享面按内容粒度精确暂存（`git update-index --cacheinfo`·基底为索引版以叠加本批前几次改动）⇒ 并行会话在途内容既不入本批提交、也不被抹掉。
+
+> - **验证**：（见本批脚本输出与对账表回填）
+> - **状态**：在途（认领登记 W975·待提交入库）
 
 ### W974（2026-10-27）：内页题图成套批·第三组（12 张·人物 6 + 主题 6·站内线描题图累计 52 张）
 
