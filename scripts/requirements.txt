@@ -8,7 +8,7 @@ Pillow==13.0.0
 markdown==3.10.2
 
 # dev dependencies
-ruff==0.16.9
+ruff==0.17.2
 pytest==9.1.1
 # W813：PyYAML 登记——tests/unit/test_ci_wiring.py 的 YAML 可解析性守卫 J3
 # （PyYAML 全量解析）依赖该包。原实现为「PyYAML 不可用即静默跳过」，
