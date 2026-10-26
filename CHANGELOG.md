@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W977），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W978），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,24 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W978（2026-10-27）：第 44 篇工作复盘批（触发器 T3 首触发·W955-W977 区间·P-44 四改进项登记）
+
+
+
+> **来源**：复盘触发器 T3 首次触发（W956 建·check_review_trigger 实跑：上篇复盘后提交 92 ≥ 80·距今 1.19 天）——「触发清单与周期栏带入报告」闭环首件产物；用户 2026-10-27 引用体检收官报告附带登记项令即办（W977 退役批 + 本篇复盘批连续执行）。
+
+> - **文件**：docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-27.md、scripts/_w978_review_evidence.py、scripts/output/_w978_review_evidence.json、docs/11-方案报告/README.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w978_spec.json、scripts/output/_cascade_files_W978.txt。
+
+**区间与体量**：第 43 篇收官（W954·2026-10-26）至 W977 收官后——**28.7 小时 · W955–W977 共 21 段（两面合看）· 对账表 23 行 · 提交 92 笔**（docs 36 / chore 23 / feat 18 / fix 15·10-26: 74 / 10-27: 18）。合规零提交 2（W958 让号留痕 / W962 并号闭环·经状态列核实）。
+
+**核心发现（四条）**：① 上篇 P-43 五项改进当期闭环 **5/5**（P-43-01/02/05 由 W956 机器化：preflight lagged 二分 / check_review_trigger 触发器 / _assert_status_wnum 段状态防线；P-43-03 由 W971 完成 102 段回填；P-43-04 由 W974 落地判据自证）——「复盘→改进→机器化」首次走通一整圈；② **体积窗口制建置 17 批后首次实战咬合**：W960 建窗 → W968 拆分 → W970 台账行归档工具 → W976 三窗齐超窗实拦且修剪回路三缺陷（A5 断言/修路指引/自撞）当场暴露当场修复 → 段式回窗成每批固定节奏；③ **沉淀通道机器化切换完成**：W975 坑表 57→63 → W976 64 条 + [TMPE] 收官提示位 → W977 一次性件 454 候选分级退役（286 入档/16 现役硬保留/152 S4 本地件不入仓）+ tmpe 工具晋升机制定性（历史零达标·沉淀主通道=坑表/方法论篇）；④ **tmpe 清理闭环 13 天首次走通**（主人「全清」31 项约 860MB 回收站·保护面 0 命中·分批验证留痕）。
+
+**改进项 P-44-01~04**：段式回窗并入级联收官自动提示 / tmpe `_shot`+`_inbox` 7 天 TTL 清理管线化（269MB+253MB 超龄）/ scripts 顶层 `_` 件计数提示位 / W1000 存量段 36 批随批顺带。风险面与可行性自评见报告 §10。
+
+**验证**：取证脚本 `_w978_review_evidence.py` 单源产出全部统计（附录 A 可复算）· check_review_trigger 实跑 T3 面板值入报告 · 21 段标题一手核对 · verify 全量 rc=0 + pytest 全绿 + ruff 0 见状态行。
+
+> - **状态**：在途（认领登记 W978·收官回填随批尾提交补 hash）
 
 ### W977（2026-10-27）：一次性件批量退役批（454 候选·286 入档·16 现役硬保留·152 S4 本地件不入仓）
 
