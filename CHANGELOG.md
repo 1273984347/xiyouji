@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W986），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W987），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,20 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W987（2026-10-27）：水墨意境卡族启用批（33 张 1:1 水墨插画·6 张上回目页场景位）
+
+
+
+> **来源**：用户 2026-10-27 20:50 问「浓墨渲染图可以用在哪里？」→ 20:53 令「开工」（采纳建议顺序：① 归族登记 ② 启用为回目页场景插图）。
+>
+> - **文件**：site/reader/ch007.html、site/reader/ch014.html、site/reader/ch015.html、site/reader/ch023.html、site/reader/ch027.html、site/reader/ch030.html、assets/promo/README.md、docs/11-方案报告/计划方案/T33-任务计划执行与经验沉淀报告-2026-10-27.md、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md、docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、scripts/output/file-index.md、scripts/_w987_family_scan.py、scripts/_w987_insert_scenes.py、scripts/output/_w987_family_scan.json、scripts/output/_w987_spec.json、scripts/output/_cascade_files_W987.txt。
+
+**本批要点**：① **实读发现**——站内 `card-*` 27 张 + `chap-*` 6 张 = **33 张 1:1（1200×1200）水墨意境插画全部 0 引用**（同族两套命名：按回目 / 按角色场景 ⇒ 极易被误当题图用，W984 批即踩过），**闲置规模比用户感知大 5.5 倍**；② **归族登记**——`assets/promo/README.md` 新增「水墨意境卡族」节：成员表 + **规范边界表**（画幅 1:1 / 画风水墨晕染 / **可带印章** / **不得填进 `.chapter-plate`** / 暗色模式同样隐藏 / alt 描述画面）+ 引用状态 + 投放位置建议 + 维护约定；③ **启用 6 张**——6 个回目页（ch007 / ch014 / ch015 / ch023 / ch027 / ch030）新增 `.chapter-scene` 场景图：**首屏仍留题图**（角色立像），场景图下沉到**正文首个 `<h2>` 之前**（限宽 520px·题图 420px）⇒ 同回形成「角色立像 + 水墨意境」双层节奏；④ **其余 27 张 `card-*` 本批不启用**（题材各异·投放位置需逐张判断·另批），登记待定。
+
+**验证**：族成员实读 33 张（全部 1200×1200·引用 0）· 6 页接入成功且幂等复跑 6/6 SKIP · 同页题图 1 + 场景图 1 且类名不混 6/6 · `.chapter-scene` 样式与**暗色模式隐藏规则**齐备 6/6 · alt 均真实描述画面 6/6 · 6 个场景图 URL HTTP 200 `image/webp` · 浏览器实跑渲染正常（ch007：首屏题图 → 元信息 → 正文入口场景图 → 原文回目·两图分隔清晰）· 第 48 门禁 0 FAIL · 全量门禁 55/55 段全绿。
+
+> - **状态**：已收官（内容批与登记面同批落地·母版族 76 张与 6 个浓墨版源文件均未改动）
 
 ### W986（2026-10-27）：回目页 6 张线描版换主体重出批（用户观感反馈回炉·同名 stem 覆盖）
 
@@ -1801,27 +1815,4 @@
 > - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 175 处·philosophy 46 / text-evolution 39 / cultural-misreading 21 为最多三页）。
 > - **验收**：J2 大 before + 本批 after 双主题对拍 + 全量归渠。**判词：PASS——260 处 diff 全部归渠零剩余**：顶条 36 处 + `.seal` 220 处 + 标签重判连带 4 处（text-evolution 2 个 SVG 标签 9→10px）。D 266 处零 diff；元素数双采无异常。
 > **状态**：**已收官**（W870 c000e406·git 反填·共 2 笔·W971 存量回填）
-
-### W869（2026-10-22）：设计迁移 B6 叙事学 10 页（容器令牌化·朱砂实底合规·间距令牌化）
-
-> **来源**：用户令「B5–B10 一次做完」，六批连做第二片。W869 = W826 §6 迁移清单第六片（叙事学 10 页）。
-> - **文件**：site/data/narrative-experiment.html、site/data/narrative-rhythm-curve.html、site/data/narratology-12d-network.html、site/data/narratology-16d-network.html、site/data/intertextuality-network.html、site/data/deconstruction.html、site/data/six-senses-narratology-network.html、site/data/poetry-rhythm-analysis.html、site/data/music-structure.html、site/data/language-style-radar.html、scripts/output/_w869_spec.json、scripts/output/_w869_accent_audit.json、scripts/output/_w869_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
-> - **A 容器**：十页 1320px 令牌化（零视觉变化·本片无 1280 归并）。
-> - **B 朱砂实底**：KPI 顶条收敛九页（5/6/6/6/4/6/5/1/5→1）；**narrative-experiment 的 12 张 narr-card 网格顶条按裁决 2 收敛**（`.narr-card ~ .narr-card` 降 1px 线——12 张全同色是装饰网格、非数据编码，判据见豁免登记簿 W867 分册注释）；`.seal` 徽章九页转淡底。**50 处语义色片进豁免登记簿 W869 分册**：sc-chip ×4 / sc-cat / gh-tag / hc-owner ×2 / tag ×5（deconstruction）/ **tag ×35（music-structure 曲牌分类）** / progress-fill / 主行动 btn。
-> - **D 间距**：211 处精确等值字面量 → `var(--space-N)`（值保留）。
-> - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 128 处·为六批最多——music-structure 65 处、narrative-experiment 37 处）。
-> - **验收**：J2 大 before + 本批 after 双主题对拍 + diff 全量归渠。**判词：PASS——446 处 diff 全部归渠零剩余**：顶条收敛 222 处（KPI 九页 47 张非首卡 + narr-card 网格 11 张 × 2 属性 × 双主题·同组聚合）+ `.seal` 220 处（10 页 × 2 元素 × 6 属性 × 双主题）+ 标签重判连带 4 处（deconstruction 2 个 SVG 标签 9→10px·顶条回流后修复器重判）。**D 211 处零 diff**；元素数双采无异常。
-> **状态**：**已收官**（W869 118618fc·git 反填·共 2 笔·W971 存量回填）
-
-### W868（2026-10-22）：设计迁移 B5 取经与行迹 10 页（容器令牌化·朱砂实底合规·间距令牌化）
-
-> **来源**：用户令「B5–B10 一次做完」，六批连做第一片。W868 = W826 §6 迁移清单第五片（取经与行迹 10 页）。
-> - **文件**：site/data/guanyin-six-roles-network.html、site/data/pilgrim-team-dynamic-network.html、site/data/pilgrim-team-psychology-arc.html、site/data/journey-route.html、site/data/journey-geo-3d.html、site/data/journey-geo-semiotics.html、site/data/journey-map-interactive.html、site/data/journey-spacetime.html、site/data/customs-pass-route.html、site/data/cave-estate.html、scripts/output/_w868_spec.json、scripts/output/_w868_accent_audit.json、scripts/output/_w868_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
-> - **A 容器**：十页 1320px 字面量 → `var(--container-wide)`（零视觉变化·本片无 1280 归并）。
-> - **B 朱砂实底**：KPI 顶条收敛六页（guanyin 6→1 · dynamic 5→1 · psychology 5→1 · route 4→1 · map-interactive 5→1 · spacetime 4→1 · customs 4→1 · cave-estate 4→1）；`.seal` 徽章十页转淡底。**26 处语义变体进豁免登记簿 W868 分册**：role-card 角色条 / swatch-bar 图例 / ctrl-btn.active / phase-card.active / progress-fill ×2（进度数值） / 主行动 btn / **tag.king ×19（妖王分类色片·与 B2 的 .tag 同型）**。
-> - **冻结解除**：journey-geo-semiotics——W851 审计发现其预支 `var(--space-N)` 且回退值与终稿刻度不符，当时冻结为字面值；本批作为迁移批正式消费 v4 令牌（mech-card 单条不超限未动）。
-> - **D 间距**：166 处精确等值字面量 → `var(--space-N)`（值保留）。
-> - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 64 处）。
-> - **验收**：J2 探针（大 before 68 页同源 + 本批 after 10 页）双主题对拍 + diff 全量归渠。**判词：PASS——360 处 diff 全部归渠零剩余**：KPI 顶条 116（58 张非首卡 × 2 属性 × 双主题）+ `.seal` 220 + 顶条回流连带 24（cave-estate 16 + journey-route 8：SVG 标签 font-size 9↔10 / 11.2→9px 重判）。D 166 处零 diff；元素数双采无异常。
-> **状态**：**已收官**（W868 aa8e97c5·git 反填·共 2 笔·W971 存量回填）
 

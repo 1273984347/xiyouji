@@ -10,6 +10,29 @@
 > **W921 一级归档（2026-10-24）**：W700-W802 段自 CHANGELOG.md 迁入（B-W855-05 主动瘦身·文档规范 §5 归档规则·CHANGELOG 679KB 超基线 11%+）。
 
 
+### W869（2026-10-22）：设计迁移 B6 叙事学 10 页（容器令牌化·朱砂实底合规·间距令牌化）
+
+> **来源**：用户令「B5–B10 一次做完」，六批连做第二片。W869 = W826 §6 迁移清单第六片（叙事学 10 页）。
+> - **文件**：site/data/narrative-experiment.html、site/data/narrative-rhythm-curve.html、site/data/narratology-12d-network.html、site/data/narratology-16d-network.html、site/data/intertextuality-network.html、site/data/deconstruction.html、site/data/six-senses-narratology-network.html、site/data/poetry-rhythm-analysis.html、site/data/music-structure.html、site/data/language-style-radar.html、scripts/output/_w869_spec.json、scripts/output/_w869_accent_audit.json、scripts/output/_w869_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
+> - **A 容器**：十页 1320px 令牌化（零视觉变化·本片无 1280 归并）。
+> - **B 朱砂实底**：KPI 顶条收敛九页（5/6/6/6/4/6/5/1/5→1）；**narrative-experiment 的 12 张 narr-card 网格顶条按裁决 2 收敛**（`.narr-card ~ .narr-card` 降 1px 线——12 张全同色是装饰网格、非数据编码，判据见豁免登记簿 W867 分册注释）；`.seal` 徽章九页转淡底。**50 处语义色片进豁免登记簿 W869 分册**：sc-chip ×4 / sc-cat / gh-tag / hc-owner ×2 / tag ×5（deconstruction）/ **tag ×35（music-structure 曲牌分类）** / progress-fill / 主行动 btn。
+> - **D 间距**：211 处精确等值字面量 → `var(--space-N)`（值保留）。
+> - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 128 处·为六批最多——music-structure 65 处、narrative-experiment 37 处）。
+> - **验收**：J2 大 before + 本批 after 双主题对拍 + diff 全量归渠。**判词：PASS——446 处 diff 全部归渠零剩余**：顶条收敛 222 处（KPI 九页 47 张非首卡 + narr-card 网格 11 张 × 2 属性 × 双主题·同组聚合）+ `.seal` 220 处（10 页 × 2 元素 × 6 属性 × 双主题）+ 标签重判连带 4 处（deconstruction 2 个 SVG 标签 9→10px·顶条回流后修复器重判）。**D 211 处零 diff**；元素数双采无异常。
+> **状态**：**已收官**（W869 118618fc·git 反填·共 2 笔·W971 存量回填）
+
+### W868（2026-10-22）：设计迁移 B5 取经与行迹 10 页（容器令牌化·朱砂实底合规·间距令牌化）
+
+> **来源**：用户令「B5–B10 一次做完」，六批连做第一片。W868 = W826 §6 迁移清单第五片（取经与行迹 10 页）。
+> - **文件**：site/data/guanyin-six-roles-network.html、site/data/pilgrim-team-dynamic-network.html、site/data/pilgrim-team-psychology-arc.html、site/data/journey-route.html、site/data/journey-geo-3d.html、site/data/journey-geo-semiotics.html、site/data/journey-map-interactive.html、site/data/journey-spacetime.html、site/data/customs-pass-route.html、site/data/cave-estate.html、scripts/output/_w868_spec.json、scripts/output/_w868_accent_audit.json、scripts/output/_w868_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
+> - **A 容器**：十页 1320px 字面量 → `var(--container-wide)`（零视觉变化·本片无 1280 归并）。
+> - **B 朱砂实底**：KPI 顶条收敛六页（guanyin 6→1 · dynamic 5→1 · psychology 5→1 · route 4→1 · map-interactive 5→1 · spacetime 4→1 · customs 4→1 · cave-estate 4→1）；`.seal` 徽章十页转淡底。**26 处语义变体进豁免登记簿 W868 分册**：role-card 角色条 / swatch-bar 图例 / ctrl-btn.active / phase-card.active / progress-fill ×2（进度数值） / 主行动 btn / **tag.king ×19（妖王分类色片·与 B2 的 .tag 同型）**。
+> - **冻结解除**：journey-geo-semiotics——W851 审计发现其预支 `var(--space-N)` 且回退值与终稿刻度不符，当时冻结为字面值；本批作为迁移批正式消费 v4 令牌（mech-card 单条不超限未动）。
+> - **D 间距**：166 处精确等值字面量 → `var(--space-N)`（值保留）。
+> - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 64 处）。
+> - **验收**：J2 探针（大 before 68 页同源 + 本批 after 10 页）双主题对拍 + diff 全量归渠。**判词：PASS——360 处 diff 全部归渠零剩余**：KPI 顶条 116（58 张非首卡 × 2 属性 × 双主题）+ `.seal` 220 + 顶条回流连带 24（cave-estate 16 + journey-route 8：SVG 标签 font-size 9↔10 / 11.2→9px 重判）。D 166 处零 diff；元素数双采无异常。
+> **状态**：**已收官**（W868 aa8e97c5·git 反填·共 2 笔·W971 存量回填）
+
 ### W867（2026-10-22）：设计迁移 B4 妖怪与神力 10 页（容器归并·朱砂实底合规·间距令牌化）
 
 > **来源**：用户令「开始」，接 W866（B3）之后。W867 = W826 §6 迁移清单第四片（妖怪与神力 10 页）。

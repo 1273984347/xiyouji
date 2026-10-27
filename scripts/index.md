@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（180）
+## 文件（183）
 
 ### Markdown 文档
 
@@ -100,6 +100,9 @@
 - `_w984_zoom.py`
 - `_w986_make_prompts.py`
 - `_w986_make_spec.py`
+- `_w987_family_scan.py`
+- `_w987_insert_scenes.py`
+- `_w987_make_spec.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`

@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（592）
+## 文件（598）
 
 ### Markdown 文档
 
@@ -225,6 +225,7 @@
 - `_cascade_files_W984.txt`
 - `_cascade_files_W985.txt`
 - `_cascade_files_W986.txt`
+- `_cascade_files_W987.txt`
 - `_sync_analysis_manifest.json`
 - `_vermilion_solid_cache.json`
 - `_vermilion_solid_report.json`
@@ -578,6 +579,8 @@
 - `_w986_batch1.json`
 - `_w986_gen.json`
 - `_w986_spec.json`
+- `_w987_family_scan.json`
+- `_w987_spec.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`
@@ -618,10 +621,13 @@
 - `_w983_zoom.png`
 - `_w984_sheet.png`
 - `_w984_zoom.png`
+- `_w986_chap_sheet.png`
+- `_w986_family_sheet.png`
 - `_w986_sheet.png`
 
 ### 其他
 
+- `_w987_serve.err`
 - `neo4j_seed.cypher`
 
 ---
