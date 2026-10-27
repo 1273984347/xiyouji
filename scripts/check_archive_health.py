@@ -89,7 +89,7 @@ def t3_cold_warning(readme_text):
     return any(m in readme_text for m in COLD_MARKS)
 
 
-def run(strict=False):
+def run(strict=False, prefix=""):
     import tracked_files as tf
 
     lines, problems = [], []
@@ -110,12 +110,17 @@ def run(strict=False):
         lines.append("T1  %-38s %8s%s" % (name, _kb(size), mark))
     # T1b：tier2 容器体积报告（§11.2 无 tier-3 形态·>1MB 打「登记观察」浮出待政策）
     for name in sorted(os.listdir(os.path.join(arch, "docs"))):
-        if not name.endswith("-tier2.md"):
-            continue
+        if "-tier2" not in name or not name.endswith(".md"):
+            continue  # 容器=基名 -tier2.md + 范围件 -tier2-W<lo>-W<hi>.md（W995 拆分约定）
         p = os.path.join(arch, "docs", name)
         size = os.path.getsize(p)
-        note = "  ⚠ 破 1MB——§11.2 无 tier-3 形态·登记观察（容器只增不删·待政策定夺）" if size > LIMIT else ""
-        lines.append("T1b %-38s %8s%s" % (name, _kb(size), note))
+        # W995 升格：拆分约定落地后 tier2 单件 ≤1MB 可执行（archive_tier2 容量判断自动开新范围件）
+        # → 破线从「登记观察」升为 problem（strict 判红·修法=按 W 段拆分）
+        if size > LIMIT:
+            problems.append("T1b %s %s 破线——修法=按 W 段拆分为范围命名件" % (name, _kb(size)))
+            lines.append("T1b %-38s %8s  ⚠ 破 1MB——修法=按 W 段拆分为范围命名件（W995 约定）" % (name, _kb(size)))
+        else:
+            lines.append("T1b %-38s %8s" % (name, _kb(size)))
 
     # T2
     tracked = sorted(r.replace(os.sep, "/") for r in tf.tracked_files()
@@ -154,7 +159,7 @@ def run(strict=False):
     lines.append("T4  归档区合计 %s（tracked %d 件·archive/scripts 下）" % (_kb(total), len(tracked)))
 
     for ln in lines:
-        print(ln)
+        print(prefix + ln)
     print("---- 归档健康探针：%d 项待办（报告型·修法见各行）----" % len(problems))
     if strict and problems:
         return 1
