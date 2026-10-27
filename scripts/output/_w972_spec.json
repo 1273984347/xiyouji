@@ -1,0 +1,15 @@
+{
+  "batch": "W972",
+  "date": "2026-10-26",
+  "title": "W972 CodeQL 三高危修复批（PR #66 检查红项清偿）",
+  "desc": "CodeQL 三高危修复批（审计器自身正则与转义加固）",
+  "head_entry": "2026-10-26（W972 CodeQL 三高危修复批）",
+  "head_sentence": "审计器自身正则与转义加固",
+  "changelog_body": "\n\n> **来源**：PR #66 的 CodeQL 检查报 1 high——本 PR 引入的三个审计工具自身有三处可绕过/可出错形态。\n> **摘要**：① **py/bad-tag-filter ×2**——W955 动效审计与 W912 交互绑定门禁的内联脚本块正则「</script>」不匹配「</script >」等空白变体（混淆标签可绕过审计）；放宽为「</script\\s*>」。② **js/incomplete-sanitization ×1**——数据漂移工具的引号转义未先转反斜杠（内容含 \\ 时生成错误转义序列）；改为先转 \\ 再转引号（顺序正确性）。③ 三工具功能自测全过（含 JS 工具真实数据跑通）。\n> **文件**：scripts/_w955_motion_audit.py · scripts/check_interaction_binding.py · scripts/check_data_drift.js\n> **验证**：node --check + JS 工具真实数据自测跑通（副本对账 47 项）+ py 工具 0 FAIL + pytest 全量 919 passed + ruff 清零。\n> **状态**：在途（认领登记 W972·待提交入库）",
+  "milestone_block": "- **W972 CodeQL 三高危修复批**：bad-tag-filter ×2（</script 空白变体宽容）+ incomplete-sanitization（转义先反斜杠）——审计器自身加固",
+  "agents_note": "2026-10-26（W972）CodeQL 三高危修复：bad-tag-filter ×2 + 转义顺序修正——审计器自身加固",
+  "file_index_rows": [
+    "| scripts/_w955_motion_audit.py · scripts/check_interaction_binding.py | W972 | 内联脚本块正则宽容空白变体 |",
+    "| scripts/check_data_drift.js | W972 | 转义先反斜杠后引号（顺序正确性） |"
+  ]
+}

@@ -11,11 +11,13 @@
 
 - （无）
 
-## 文件（37）
+## 文件（45）
 
 ### Python 脚本
 
 - `test_a11y_audit.py`
+- `test_archive_segments.py`
+- `test_batch_cascade_status_wnum.py`
 - `test_check_data_copy_chain.py`
 - `test_check_db_schema.py`
 - `test_check_interaction_binding.py`
@@ -27,10 +29,13 @@
 - `test_ci_sim.py`
 - `test_ci_wiring.py`
 - `test_d3_data_processors.py`
+- `test_doc_size_budget.py`
 - `test_docs_index.py`
 - `test_embed_json.py`
 - `test_folder_docs_gate.py`
+- `test_four_digit_wnum.py`
 - `test_lint_links_refactor.py`
+- `test_milestone_block_regex.py`
 - `test_new_page.py`
 - `test_obs_sample.py`
 - `test_page_router.py`
@@ -41,10 +46,13 @@
 - `test_rag_enhance.py`
 - `test_rag_fusion.py`
 - `test_release_prep.py`
+- `test_review_trigger.py`
 - `test_security_scan.py`
 - `test_slice_screenshots.py`
+- `test_stats_sync.py`
 - `test_tmpe_tidy.py`
 - `test_tool_scripts_cli.py`
+- `test_tools_inventory.py`
 - `test_tracked_files.py`
 - `test_verify_failclosed.py`
 - `test_verify_registry.py`

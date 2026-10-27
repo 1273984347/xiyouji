@@ -20,6 +20,8 @@
 
 <script src="../../js/theme-init.js"></script>
 <script src="../../js/reader-enhance.js" defer></script>
+<script defer src="../../static/js/gsap.min.js"></script><script defer src="../../static/js/ScrollTrigger.min.js"></script><script defer src="../../static/js/motion-gsap.js"></script>
+
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="../../system.css">
 <style>
@@ -87,7 +89,7 @@
 </style>
 </head>
 <body>
-<main class="reader-wrap">
+<main class="reader-wrap"> data-gsap="cards" data-gsap-target=".reader-idx a"
 <h1 style="font-size:26px;">主题专题</h1>
 <ul class="reader-idx">
 <li><a href="../themes/不可靠叙述专题.html">不可靠叙述专题</a></li>

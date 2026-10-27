@@ -17,13 +17,13 @@
 | a6_docs | 13 | docs/05-诗词歌赋/*.md（排除 README） | W904 | W904 |
 | cognition_docs | 3 | docs/08-提升认知/*.md（排除 README） | W904 | W904 |
 | csp_covered | 856 | html_total − _template.html（generate_csp TEMPLATE_EXCLUDE） | W459 | W459 |
-| gate_count | 49 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | W883 |
+| gate_count | 50 | scripts/verify_delivery.py「第 N 槽/门禁」max | W493 | W961 |
 | html_total | 857 | site/**/*.html（递归全站） | W459 | W459 |
 | inline_css_pages | 330 | site 全树含 INLINED 标记页 | W459 | W894 |
 | learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W904 |
-| methodology_docs | 24 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W755 |
-| pytest_collected | 876 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W920 |
-| report_docs | 56 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W908 |
+| methodology_docs | 25 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | 975 |
+| pytest_collected | 938 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | 990 |
+| report_docs | 85 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | 988 |
 | scan_files | 855 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W459 |
 | script_classes | 34 | scripts/[A-Z]_* 类目录数 | W528 | W528 |
 | seo_scanned | 855 | html_total − 两模板壳（check_seo_head SEO_EXCLUDE） | W591 | W591 |
@@ -35,6 +35,119 @@
 | visualization_pages | 87 | site/data_html − _shell.html | W459 | W459 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### 990（2026-10-27 22:38:06）
+- pytest_collected: 937 → 938
+
+### 988（2026-10-27 21:49:35）
+- report_docs: 84 → 85
+
+### 987（2026-10-27 20:58:16）
+- report_docs: 83 → 84
+
+### 986（2026-10-27 13:06:10）
+- report_docs: 82 → 83
+
+### 985（2026-10-27 12:44:27）
+- pytest_collected: 931 → 937
+
+### 984（2026-10-27 09:11:54）
+- report_docs: 81 → 82
+
+### 984（2026-10-27 08:36:45）
+- report_docs: 80 → 81
+
+### 983（2026-10-27 08:09:33）
+- report_docs: 78 → 80
+
+### 982（2026-10-27 07:23:38）
+- pytest_collected: 929 → 931
+
+### 980（2026-10-27 06:37:15）
+- pytest_collected: 925 → 929
+
+### 978（2026-10-27 04:51:07）
+- report_docs: 77 → 78
+
+### 976（2026-10-27 03:40:13）
+- pytest_collected: 923 → 925
+
+### 975（2026-10-27 02:28:39）
+- methodology_docs: 24 → 25
+
+### 974（2026-10-27 02:08:39）
+- report_docs: 75 → 77
+
+### W973（2026-10-26 08:21:23）
+- pytest_collected: 922 → 923
+
+### W970（2026-10-26 06:46:22）
+- pytest_collected: 917 → 922
+
+### W967（2026-10-26 05:53:49）
+- pytest_collected: 916 → 917
+
+### W965（2026-10-26 05:20:43）
+- pytest_collected: 915 → 916
+
+### W964（2026-10-26 05:11:12）
+- pytest_collected: 911 → 915
+
+### W964（2026-10-26 05:03:34）
+- pytest_collected: 910 → 911
+
+### W961（2026-10-26 04:03:41）
+- pytest_collected: 902 → 910
+
+### W961（2026-10-26 04:01:31）
+- gate_count: 49 → 50
+- pytest_collected: 900 → 902
+
+### W957（2026-10-26 03:42:46）
+- report_docs: 74 → 75
+
+### W957（2026-10-26 03:42:21）
+- pytest_collected: 899 → 900
+
+### W956（2026-10-26 02:18:43）
+- pytest_collected: 880 → 899
+
+### W955（2026-10-26 01:55:08）
+- report_docs: 73 → 74
+
+### （未记 W）（2026-10-26 01:03:36）
+- report_docs: 70 → 73
+
+### W949（2026-10-25 22:46:54）
+- pytest_collected: 879 → 880
+
+### W946（2026-10-25 22:11:05）
+- pytest_collected: 878 → 879
+
+### W940（2026-10-25 21:12:23）
+- report_docs: 68 → 70
+
+### W935（2026-10-25 20:11:27）
+- report_docs: 67 → 68
+
+### W933（2026-10-25 18:03:48）
+- report_docs: 65 → 67
+
+### W931（2026-10-25 17:45:18）
+- report_docs: 64 → 65
+
+### W932（2026-10-25 17:26:01）
+- pytest_collected: 876 → 878
+- report_docs: 62 → 64
+
+### W927（2026-10-25 16:03:23）
+- report_docs: 60 → 62
+
+### （未记 W）（2026-10-25 14:34:37）
+- report_docs: 59 → 60
+
+### W925（2026-10-25 14:13:01）
+- report_docs: 56 → 59
 
 ### W920（2026-10-24 22:58:42）
 - pytest_collected: 873 → 876

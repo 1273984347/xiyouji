@@ -1,0 +1,66 @@
+# 文件索引 · ui
+
+> 生成来源：`scripts/gen_folder_docs.py`@W779
+> 生成日期：2026-10-18
+> 文件角色：逐文件索引（机器可读·与 README.md 分工：本文件列清单、README 讲用途约定）
+
+> 本文件逐条列出 `site/static/icons/ui/` 的直属文件与子目录，供检索与盘点使用（自动生成·勿手改）。
+> 目录导读与维护约定见同目录 `README.md`；全仓目录用途见根目录 `STRUCTURE.md`。
+
+## 子目录（0）
+
+- （无）
+
+## 文件（45）
+
+### 样式与资源
+
+- `alchemy.svg`
+- `book-open.svg`
+- `book.svg`
+- `cap.svg`
+- `chart.svg`
+- `check.svg`
+- `child.svg`
+- `close.svg`
+- `cross.svg`
+- `globe.svg`
+- `inspect.svg`
+- `link.svg`
+- `menu.svg`
+- `note.svg`
+- `pause.svg`
+- `pen.svg`
+- `pin.svg`
+- `play.svg`
+- `quote.svg`
+- `radio.svg`
+- `schoolbag.svg`
+- `scroll.svg`
+- `search.svg`
+- `sprout.svg`
+- `star-solid.svg`
+- `star.svg`
+- `thumb-down.svg`
+- `thumb-up.svg`
+- `tl-brush-comment.svg`
+- `tl-codex.svg`
+- `tl-comic.svg`
+- `tl-critical-edition.svg`
+- `tl-database.svg`
+- `tl-film.svg`
+- `tl-gamepad.svg`
+- `tl-mask.svg`
+- `tl-newyear-print.svg`
+- `tl-pencil.svg`
+- `tl-pilgrim.svg`
+- `tl-punctuation.svg`
+- `tl-scroll.svg`
+- `tl-star-spark.svg`
+- `tl-taiji.svg`
+- `tl-tv.svg`
+- `warn.svg`
+
+---
+
+> 生成时点：2026-10-18 · 由 `python scripts/gen_folder_docs.py` 重跑刷新（文件数随磁盘变动·不作文档间同步口径）。

@@ -1,0 +1,171 @@
+{
+  "family": {
+    "card_count": 27,
+    "chap_count": 6,
+    "total": 33,
+    "size_distribution": {
+      "1200x1200": 33
+    },
+    "referenced_files": 6,
+    "referenced_count": 6
+  },
+  "members": [
+    "card-01-huoshan.webp",
+    "card-02-tongtianhe.webp",
+    "card-03-shituoling.webp",
+    "card-04-dushuangxuejiang.webp",
+    "card-05-mingyuesongjian.webp",
+    "card-06-yunshenzhibu.webp",
+    "card-07-baiyao.webp",
+    "card-08-zhuowuquan.webp",
+    "card-09-sanyao.webp",
+    "card-10-gusichenzhong.webp",
+    "card-11-songyunshitan.webp",
+    "card-12-shuyuanxingtantan.webp",
+    "card-13-bajie-yuexia.webp",
+    "card-14-bajie-choupa.webp",
+    "card-15-bajie-zuoxie.webp",
+    "card-16-bajie-yunzhong.webp",
+    "card-17-bajie-denggao.webp",
+    "card-18-bajie-daodan.webp",
+    "card-19-shaseng-dujiang.webp",
+    "card-20-shaseng-zhenshui.webp",
+    "card-21-shaseng-shouye.webp",
+    "card-22-shaseng-fuzhong.webp",
+    "card-23-shixiong-bingli.webp",
+    "card-24-shixiong-shanmen.webp",
+    "card-25-santiebaigujing.webp",
+    "card-26-wukong-jingu.webp",
+    "card-27-rejiao-fenxi.webp",
+    "chap-07.webp",
+    "chap-14.webp",
+    "chap-15.webp",
+    "chap-23.webp",
+    "chap-27.webp",
+    "chap-30.webp"
+  ],
+  "references": {
+    "chap-07.webp": [
+      "site/reader/ch007.html"
+    ],
+    "chap-14.webp": [
+      "site/reader/ch014.html"
+    ],
+    "chap-15.webp": [
+      "site/reader/ch015.html"
+    ],
+    "chap-23.webp": [
+      "site/reader/ch023.html"
+    ],
+    "chap-27.webp": [
+      "site/reader/ch027.html"
+    ],
+    "chap-30.webp": [
+      "site/reader/ch030.html"
+    ]
+  },
+  "insert_points": [
+    {
+      "page": "ch007",
+      "h1": [
+        1421
+      ],
+      "chapter_plate": [
+        1422
+      ],
+      "chapter_scene": [
+        1440
+      ],
+      "first_h2": [
+        1444
+      ],
+      "h2_count": 5,
+      "insert_before_line": 1444
+    },
+    {
+      "page": "ch014",
+      "h1": [
+        1419
+      ],
+      "chapter_plate": [
+        1420
+      ],
+      "chapter_scene": [
+        1438
+      ],
+      "first_h2": [
+        1442
+      ],
+      "h2_count": 5,
+      "insert_before_line": 1442
+    },
+    {
+      "page": "ch015",
+      "h1": [
+        1419
+      ],
+      "chapter_plate": [
+        1420
+      ],
+      "chapter_scene": [
+        1438
+      ],
+      "first_h2": [
+        1442
+      ],
+      "h2_count": 5,
+      "insert_before_line": 1442
+    },
+    {
+      "page": "ch023",
+      "h1": [
+        1419
+      ],
+      "chapter_plate": [
+        1420
+      ],
+      "chapter_scene": [
+        1438
+      ],
+      "first_h2": [
+        1442
+      ],
+      "h2_count": 5,
+      "insert_before_line": 1442
+    },
+    {
+      "page": "ch027",
+      "h1": [
+        1419
+      ],
+      "chapter_plate": [
+        1420
+      ],
+      "chapter_scene": [
+        1438
+      ],
+      "first_h2": [
+        1442
+      ],
+      "h2_count": 5,
+      "insert_before_line": 1442
+    },
+    {
+      "page": "ch030",
+      "h1": [
+        1419
+      ],
+      "chapter_plate": [
+        1420
+      ],
+      "chapter_scene": [
+        1438
+      ],
+      "first_h2": [
+        1442
+      ],
+      "h2_count": 5,
+      "insert_before_line": 1442
+    }
+  ]
+}

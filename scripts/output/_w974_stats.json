@@ -1,0 +1,233 @@
+{
+  "batch_stems": [
+    "plate-line-13-jinjiaodawang",
+    "plate-line-14-yinjiaodawang",
+    "plate-line-15-huangmeidawang",
+    "plate-line-16-heixiongjing",
+    "plate-line-17-tuota-lijing",
+    "plate-line-18-yutujing",
+    "plate-line-19-nvziguo-topic",
+    "plate-line-20-chelingguo-topic",
+    "plate-line-21-shituoling-topic",
+    "plate-line-22-tonghehe-topic",
+    "plate-line-23-pansidong-topic",
+    "plate-line-24-wudidong-topic"
+  ],
+  "batch_count": 12,
+  "all_masters": 52,
+  "batch_metrics": {
+    "top_ink": [
+      0.0,
+      0.0
+    ],
+    "whole_ink": [
+      0.0293,
+      0.0826
+    ],
+    "lower_ink": [
+      0.0395,
+      0.1141
+    ],
+    "verm_px": [
+      2282,
+      12864
+    ],
+    "dense": [
+      0.116,
+      0.449
+    ],
+    "paper_resid": [
+      0.1,
+      0.52
+    ],
+    "bg_diff": [
+      0.03,
+      1.44
+    ]
+  },
+  "all_metrics": {
+    "top_ink": [
+      0.0,
+      0.0
+    ],
+    "whole_ink": [
+      0.0293,
+      0.0939
+    ],
+    "lower_ink": [
+      0.0395,
+      0.1285
+    ],
+    "verm_px": [
+      451,
+      45508
+    ],
+    "dense": [
+      0.116,
+      0.449
+    ],
+    "paper_resid": [
+      0.1,
+      0.6
+    ],
+    "bg_diff": [
+      0.0,
+      2.21
+    ]
+  },
+  "batch_site_h": [
+    1030,
+    1301
+  ],
+  "all_site_h": [
+    955,
+    1458
+  ],
+  "reader_pages_with_plate": 63,
+  "batch_rows": [
+    {
+      "stem": "plate-line-13-jinjiaodawang",
+      "size": "1200x1600",
+      "top_ink": 0.0,
+      "whole_ink": 0.0321,
+      "lower_ink": 0.0444,
+      "verm_px": 5342,
+      "dense": 0.207,
+      "paper_resid": 0.41,
+      "bg_diff": 0.1,
+      "site_h": 1185
+    },
+    {
+      "stem": "plate-line-14-yinjiaodawang",
+      "size": "1200x1600",
+      "top_ink": 0.0,
+      "whole_ink": 0.0421,
+      "lower_ink": 0.0562,
+      "verm_px": 6648,
+      "dense": 0.221,
+      "paper_resid": 0.52,
+      "bg_diff": 0.46,
+      "site_h": 1237
+    },
+    {
+      "stem": "plate-line-15-huangmeidawang",
+      "size": "1200x1600",
+      "top_ink": 0.0,
+      "whole_ink": 0.0625,
+      "lower_ink": 0.084,
+      "verm_px": 11546,
+      "dense": 0.294,
+      "paper_resid": 0.1,
+      "bg_diff": 0.25,
+      "site_h": 1262
+    },
+    {
+      "stem": "plate-line-16-heixiongjing",
+      "size": "1200x1600",
+      "top_ink": 0.0,
+      "whole_ink": 0.0574,
+      "lower_ink": 0.0798,
+      "verm_px": 2528,
+      "dense": 0.233,
+      "paper_resid": 0.45,
+      "bg_diff": 0.03,
+      "site_h": 1158
+    },
+    {
+      "stem": "plate-line-17-tuota-lijing",
+      "size": "1200x1600",
+      "top_ink": 0.0,
+      "whole_ink": 0.0826,
+      "lower_ink": 0.1141,
+      "verm_px": 9084,
+      "dense": 0.449,
+      "paper_resid": 0.25,
+      "bg_diff": 0.12,
+      "site_h": 1201
+    },
+    {
+      "stem": "plate-line-18-yutujing",
+      "size": "1200x1600",
+      "top_ink": 0.0,
+      "whole_ink": 0.0293,
+      "lower_ink": 0.0395,
+      "verm_px": 3006,
+      "dense": 0.161,
+      "paper_resid": 0.35,
+      "bg_diff": 0.08,
+      "site_h": 1246
+    },
+    {
+      "stem": "plate-line-19-nvziguo-topic",
+      "size": "1200x1600",
+      "top_ink": 0.0,
+      "whole_ink": 0.0561,
+      "lower_ink": 0.0714,
+      "verm_px": 4208,
+      "dense": 0.167,
+      "paper_resid": 0.29,
+      "bg_diff": 0.69,
+      "site_h": 1301
+    },
+    {
+      "stem": "plate-line-20-chelingguo-topic",
+      "size": "1200x1600",
+      "top_ink": 0.0,
+      "whole_ink": 0.0703,
+      "lower_ink": 0.0971,
+      "verm_px": 2506,
+      "dense": 0.244,
+      "paper_resid": 0.48,
+      "bg_diff": 0.08,
+      "site_h": 1202
+    },
+    {
+      "stem": "plate-line-21-shituoling-topic",
+      "size": "1200x1600",
+      "top_ink": 0.0,
+      "whole_ink": 0.0504,
+      "lower_ink": 0.07,
+      "verm_px": 2282,
+      "dense": 0.302,
+      "paper_resid": 0.28,
+      "bg_diff": 0.11,
+      "site_h": 1047
+    },
+    {
+      "stem": "plate-line-22-tonghehe-topic",
+      "size": "1200x1600",
+      "top_ink": 0.0,
+      "whole_ink": 0.0644,
+      "lower_ink": 0.0894,
+      "verm_px": 2325,
+      "dense": 0.303,
+      "paper_resid": 0.27,
+      "bg_diff": 0.09,
+      "site_h": 1030
+    },
+    {
+      "stem": "plate-line-23-pansidong-topic",
+      "size": "1200x1600",
+      "top_ink": 0.0,
+      "whole_ink": 0.0363,
+      "lower_ink": 0.0429,
+      "verm_px": 5007,
+      "dense": 0.135,
+      "paper_resid": 0.36,
+      "bg_diff": 0.61,
+      "site_h": 1283
+    },
+    {
+      "stem": "plate-line-24-wudidong-topic",
+      "size": "1200x1600",
+      "top_ink": 0.0,
+      "whole_ink": 0.0463,
+      "lower_ink": 0.0642,
+      "verm_px": 12864,
+      "dense": 0.116,
+      "paper_resid": 0.44,
+      "bg_diff": 1.44,
+      "site_h": 1169
+    }
+  ]
+}

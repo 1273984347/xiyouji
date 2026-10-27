@@ -85,9 +85,9 @@ def bump_version_line(c, old_ver, new_ver, w, note, desc=None):
         # 主描述替换（W417 增强）：把行首 "：W### 旧描述（…）" 换成新 W + desc（剥离 desc 的 W 前缀防重复）。
         # 仅匹配首个括号（[^）\n] 禁跨括号嵌套），且不带 \s*· 后缀——避免吞掉 "）— A1-A6 共 611 篇（…201 篇）·" 等后续内容（W417 实测修复）
         if desc and w not in line and not is_secondary:
-            desc_clean = re.sub(r"^W\d{3}\s*", "", desc).strip()
+            desc_clean = re.sub(r"^W\d{3,4}\s*", "", desc).strip()
             line = re.sub(
-                r"([：:])\s*W\d{3}[^\n]*?（[^）\n]*?）",
+                r"([：:])\s*W\d{3,4}[^\n]*?（[^）\n]*?）",
                 lambda m2: m2.group(1) + " " + w + " " + desc_clean,
                 line,
                 count=1,
@@ -156,9 +156,9 @@ def main():
         c2 = c
         # W001-W### 现役范围声明替换（W417 增强）：仅命中精确现役锚点，
         # 绝不触碰历史描述（"W001-W087 已归档"/"W001-W099 对应"/W414 段内旧范围）
-        c2 = re.sub(r"W### ID（W001-W\d{3}）", "W### ID（W001-" + w + "）", c2)      # CHANGELOG 编号规则 + README 双索引
-        c2 = re.sub(r"# 更新日志（W001-W\d{3}）", "# 更新日志（W001-" + w + "）", c2)  # README 目录树
-        c2 = re.sub(r"正向时间线，W001-W\d{3}；", "正向时间线，W001-" + w + "；", c2)  # 交接文档 CHANGELOG 范围
+        c2 = re.sub(r"W### ID（W001-W\d{3,4}）", "W### ID（W001-" + w + "）", c2)      # CHANGELOG 编号规则 + README 双索引
+        c2 = re.sub(r"# 更新日志（W001-W\d{3,4}）", "# 更新日志（W001-" + w + "）", c2)  # README 目录树
+        c2 = re.sub(r"正向时间线，W001-W\d{3,4}；", "正向时间线，W001-" + w + "；", c2)  # 交接文档 CHANGELOG 范围
         # 页脚简单格式（index/cross-time-danmaku/tag-cloud）：v2.3.30 · W415
         c2 = re.sub(r"v" + re.escape(old_ver) + r"\s*·\s*W" + old_w,
                     "v" + new_ver + " · " + w, c2)

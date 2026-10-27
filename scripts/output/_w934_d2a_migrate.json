@@ -1,0 +1,65 @@
+{
+  "generated_at": "2026-10-25T09:53:31.855Z",
+  "source_sqlite": "D:\\xiyouji\\xiyouji-agent-web\\data\\chat.db",
+  "target": "127.0.0.1:5432/xiyouji（user=xiyouji_app）",
+  "dry_run": false,
+  "migrations": [
+    {
+      "version": 1,
+      "name": "0001_baseline",
+      "action": "skipped(已记账)"
+    },
+    {
+      "version": 2,
+      "name": "0002_app_tables",
+      "action": "skipped(已记账)"
+    }
+  ],
+  "written": {
+    "sessions": 0,
+    "messages": 0,
+    "feedback": 0
+  },
+  "reconciliation": [
+    {
+      "table": "sessions",
+      "source_rows": 70,
+      "target_rows": 70,
+      "rows_equal": true,
+      "pk_sets_equal": true,
+      "content_equal": true,
+      "pk_only_in_source": [],
+      "pk_only_in_target": [],
+      "content_mismatch_sample": [],
+      "timestamp_raw_equal_sampled": 140,
+      "timestamp_raw_equal_total": 140
+    },
+    {
+      "table": "messages",
+      "source_rows": 134,
+      "target_rows": 134,
+      "rows_equal": true,
+      "pk_sets_equal": true,
+      "content_equal": true,
+      "pk_only_in_source": [],
+      "pk_only_in_target": [],
+      "content_mismatch_sample": [],
+      "timestamp_raw_equal_sampled": 134,
+      "timestamp_raw_equal_total": 134
+    },
+    {
+      "table": "feedback",
+      "source_rows": 4,
+      "target_rows": 4,
+      "rows_equal": true,
+      "pk_sets_equal": true,
+      "content_equal": true,
+      "pk_only_in_source": [],
+      "pk_only_in_target": [],
+      "content_mismatch_sample": [],
+      "timestamp_raw_equal_sampled": 4,
+      "timestamp_raw_equal_total": 4
+    }
+  ],
+  "all_equal": true
+}

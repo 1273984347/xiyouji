@@ -7,7 +7,9 @@
   2. origin/main 顶部 —— 提交哈希 + 标题（供撞号判定）
   3. 对账表取号 —— 已认领最大 W 号 + 现势下一自由号（二者不衔接时告警）
   4. touches 在途盘点 + 交集拒绝 —— W739 建：在途批次 touches 列盘点；
-     传 --touches 声明本批手工共享面，与在途批次有交集 → FAIL（拒绝并行·等对方收官）
+     传 --touches 声明本批手工共享面，与在途批次有交集 → FAIL（拒绝并行·等对方收官）；
+     W956 起（P-43-01）「在途」加 git 条件：台账标在途而 git 已有该 W 提交 = 登记滞后，
+     告警不拒绝（并发保护不再被自身历史欠账卡死——W954 开工 8 条 FAIL 实证）
   5. 工作树态 —— staged / 未暂存 / 未跟踪 简表
   6. 环境 —— 仓库根校验 + python/pytest/ruff 可用性
 
@@ -53,11 +55,11 @@ def parse_ledger(text):
     rows=[{w, status, touches}]——touches 列自 W739 起（历史行空·空集不参与交集判定）；
     兼容缺列旧格式（无第 7 列时 touches=空集）与历史不齐行（W687/W688 补空列后同为 7 列）。
     """
-    rows_table = [int(x) for x in re.findall(r"^\|\s*W(\d{3})\s*\|", text, re.M)]
-    bullets = re.findall(r"\*\*W(\d{3})\*\*：现势下一自由号", text)
+    rows_table = [int(x) for x in re.findall(r"^\|\s*W(\d{3,4})\s*\|", text, re.M)]
+    bullets = re.findall(r"\*\*W(\d{3,4})\*\*：现势下一自由号", text)
     rows = []
     for line in text.splitlines():
-        m = re.match(r"^\|\s*W(\d{3})\s*\|", line)
+        m = re.match(r"^\|\s*W(\d{3,4})\s*\|", line)
         if not m:
             continue
         cells = [c.strip() for c in line.strip().strip("|").split("|")]
@@ -105,24 +107,40 @@ def _locate_status(cells):
 
 
 def _split_touches(text):
-    """touches 串切分（**多分隔符兼容**·W897 修）+ 尾注归一（W903 修）。
+    """touches 串切分（多分隔符兼容·W897 修）+ 尾注归一（W903 修）+ 反引号包裹解析（W934 修）。
 
     病根（实测 W896）：本函数与命令行解析**都只按逗号切分**，而台账的 touches 列
     自 W739 起实际用「**·**」（中点）分隔 ⇒ 整串被当成**一个** touches ⇒
     **交集检查恒空假绿**⇒「PREFLIGHT PASS·无交集」是无效结论，撞面防护形同虚设。
-
-    兼容分隔符：逗号 `,` / 中文逗号 `，` / 顿号 `、` / 中点 `·` / 项目符号 `•`
-    （**不含空白**——仓内文件名不含空格·避免把文件名本身切碎）。
 
     尾注归一（W903·机制审查报告 F1）：台账元素常带说明性尾注（如
     ``docs/11-方案报告/**（22 文件移动）``、``scripts/x.py（管控件·已批）``）——
     **全角括号内不切分且整段丢弃**（注记内常含中点·先切后剥必碎·W903 实现首版
     即踩此坑由负样本测试暴露）。安全性前提：仓内路径零全角括号（W903
     `git ls-files` 实证）；新文件名引入全角括号即破坏此前提。
+
+    反引号包裹解析（W934·架构会话实测报出）：台账 touches 列的路径**常被反引号包裹**
+    （`` `docs/00-导读/W批次编号对账表.md` ``），且反引号内可能用「/」并列多个文件
+    （`` `a.py` / `b.py` ``）⇒ 旧实现把整段当成**一个** token（还带着反引号）⇒
+    与命令行传入的**无反引号**路径字面不等 ⇒ `touches_conflict` 恒返空 ⇒
+    「PREFLIGHT PASS·无交集」在**真实撞面时假绿**。
+    本版：**反引号内内容整体取一个 token**（内部分隔符不切），反引号外按分隔符切。
     """
     out: set[str] = set()
     buf: list[str] = []
-    depth = 0
+    depth = 0        # 全角括号注记深度
+    in_code = False  # 是否在反引号内
+
+    def flush() -> None:
+        tok = "".join(buf).strip()
+        buf.clear()
+        if not tok:
+            return
+        # 反引号段之间的连接残渣（如 " / "）不是路径 ⇒ 丢弃
+        if not tok.strip("/ "):
+            return
+        out.add(tok)
+
     for ch in text or "":
         if ch == "（":
             depth += 1
@@ -132,16 +150,18 @@ def _split_touches(text):
             continue
         if depth > 0:
             continue  # 注记内容整体丢弃
+        if ch == "`":
+            flush()              # 反引号段切换前先收尾外层内容
+            in_code = not in_code
+            continue
+        if in_code:
+            buf.append(ch)       # 反引号内：分隔符一律不切
+            continue
         if ch in ",，、·•":
-            tok = "".join(buf).strip()
-            buf = []
-            if tok:
-                out.add(tok)
+            flush()
             continue
         buf.append(ch)
-    tok = "".join(buf).strip()
-    if tok:
-        out.add(tok)
+    flush()
     return out
 
 
@@ -152,6 +172,37 @@ def _dir_base(tok):
     if tok.endswith("/") and len(tok) > 1:
         return tok[:-1]
     return None
+
+
+# W935 判据 E：登记类共享面（台账认领行 + 方案报告 README 登记行）——**天然并发**，不得参与
+#   touches 交集拒绝。病根：每个批次都要写这两面（登记自己那行）⇒ 交集检查对它们**恒红**
+#   ⇒ 纪律在**准入阶段**被架空（实测 W930/W931/W934 三方在途时，任何新批次都撞台账）。
+#   保障改由「纯追加 + 精确暂存（update-index --cacheinfo）+ 回填行指纹校验」承担
+#   （规范 §11.0 规则二）；硬冲突（其它共享面）仍照旧拒绝。
+_REGISTER_SURFACES = ("docs/00-导读/W批次编号对账表.md", "docs/11-方案报告/README.md")
+
+
+def _is_register_surface(tok: str) -> bool:
+    """该 touches token 是否属于登记类共享面（台账 / 方案报告 README）。"""
+    t = (tok or "").strip().strip("`")
+    return any(t == s or t.startswith(s + "/") for s in _REGISTER_SURFACES)
+
+
+def duplicate_wnums(rows: list[dict]) -> list[int]:
+    """台账中**同一 W 号出现多行**的号列表（W935 判据 A1 · 撞号的机器特征）。
+
+    病根与修正（原判据 A 假定「登记顺序 = 号顺序」）：
+      · 真撞号的**可机检特征**是「同一个号被登记了两行」（两方各写一行）；
+      · 「本批登记前被更晚的号插队」属**插队**（可接受：先落地者保留·后补登记），
+        不是撞号 ⇒ 旧判据把它判 FAIL 会误伤后补登记。
+    ⇒ 撞号检测改为「同号多行」；插队改为 NOTE 提醒。
+    """
+    seen: dict[int, int] = {}
+    for r in rows:
+        w = r.get("w")
+        if isinstance(w, int):
+            seen[w] = seen.get(w, 0) + 1
+    return sorted(w for w, n in seen.items() if n > 1)
 
 
 def _locate_touches(cells):
@@ -191,8 +242,58 @@ def is_inflight(status):
     任何强调/空白变体都不影响判定（回归形态见 test_inflight_with_bold_status 族）。
     W681 式「进行中（剩余=真端点联调待用户三键）」判在途——但其 touches 为空（历史行），
     空集与任何清单交集为空，天然不挡路（旧在途批次无害化）。
+
+    W956 起（P-43-01）本函数只答「登记面语义」；**是否参与 touches 交集拒绝**由
+    main() 里的 git 条件二分（split_inflight_lagged）裁定——登记面说在途而 git 已有
+    该 W 提交的行是「登记滞后」，告警不拒绝（W954 实证：8 个陈旧在途行曾把开工恒红卡死）。
     """
     return not re.sub(r"[\s*]+", "", status).startswith(DONE_PREFIXES)
+
+
+# W956（P-43-01·WF-08-a）：登记面自愈——「在途」判定加 git 条件。
+# 病根（W954 复盘报告 FAM-40 实证）：台账状态列是**声明**不是事实源——8 个陈旧「在途」
+# 批次（实为 7 批已落库 + 1 批已停止）的 touches 与新批次交集非空 ⇒ preflight 被**自身的
+# 历史欠账**恒红拒绝（并发保护被欠账卡死·本系列第一次开工即 8 条 FAIL）。
+# 修法：参与交集拒绝的「在途」须同时满足「台账标在途 AND git 无该 W 提交」；
+# 台账标在途但 git 已有提交 ⇒ **登记滞后**——告警不拒绝（不改退出码语义），
+# 由该批自己按收官流程回填状态列（ledger_backfill.py --from-git 支持脚本反填）。
+# 口径：git 提交识别只认 subject 的批次标签形态 ``type(w###):``（仓内提交信息统一形态·
+# 大小写不敏感）——正文/散文里提及别批号（「承接 W###」「W### 教训」）**不计**，
+# 防止引用性提及误降真在途批次的 touches 防护。
+_RE_COMMIT_TAG = re.compile(r"\((w\d{3,4})\)", re.IGNORECASE)
+
+
+def wnum_commit_index(subjects):
+    """git log ``%h %s`` 行列表 → {W 号(int): [提交数, 首笔短 hash]}。
+
+    只认 subject 内批次标签 ``type(w###):`` 形态（见 _RE_COMMIT_TAG 注释·防散文引用误计）；
+    一笔提交含多个批次标签时各号各计一笔（跨批提交对每个被标签批次都是事实存在）。
+    """
+    idx = {}
+    for line in subjects or []:
+        m = _RE_COMMIT_TAG.search(line)
+        if not m:
+            continue
+        rec = idx.setdefault(int(m.group(1)[1:]), [0, ""])
+        rec[0] += 1
+        if not rec[1]:
+            rec[1] = line.split(" ", 1)[0]  # 首列 = %h 短 hash
+    return idx
+
+
+def split_inflight_lagged(inflight_all, committed, self_num=None):
+    """登记面在途行二分为 (真在途, 登记滞后)——P-43-01 纯函数形态（供单测直接断言）。
+
+    committed = wnum_commit_index 产物；self 行永不入 lagged（自己的在途行在主流程里
+    本就排除出交集检查，lagged 告警只指向**他方**陈旧行）。
+    """
+    truly, lagged = [], []
+    for r in inflight_all:
+        if r["w"] != self_num and r["w"] in committed:
+            lagged.append(r)
+        else:
+            truly.append(r)
+    return truly, lagged
 
 
 def touches_conflict(inflight_touches, mine):
@@ -220,6 +321,23 @@ def touches_conflict(inflight_touches, mine):
             if bb is not None and (a == bb or a.startswith(bb + "/")):
                 hits.update((a, b))
     return sorted(hits)
+
+
+def rejection_pairs(inflight, mine_hard, self_num=None):
+    """纯函数：交集拒绝集——排除本批自身（W976 修）。
+
+    旧病根：认领行先入台账后，preflight 复跑时自己的在途行照进拒绝循环，必然
+    自撞 FAIL——docstring 与 NOTE 文案都声称「本批自己·交集检查已排除」，代码却
+    未排除（W976 实证：认领 W976 后自查即红）。
+    """
+    bad = []
+    for r in inflight:
+        if r["w"] == self_num:
+            continue
+        c = touches_conflict(r["touches"], mine_hard)
+        if c:
+            bad.append((r["w"], c))
+    return bad
 
 
 def summarize_porcelain(text):
@@ -336,29 +454,109 @@ def main():
         print("FAIL  取号解析失败（未找到 W 行）")
         problems.append("取号异常")
 
-    # 3.5) touches 在途盘点 + 交集拒绝（W739）
+    # 3.4) W931 新增：共享面串行化机制 · 判据 A（撞号检测）+ 判据 B'（台账脏行提示）
+    #   A 撞号检测（W935 修订）：**同一 W 号在台账里出现多行** = 撞号的机器特征
+    #     （两方各登记一行）⇒ FAIL 并要求人工裁决。
+    #     「本批登记前被更晚的号插队」属**插队**而非撞号（先落地者保留·后补登记合法）
+    #     ⇒ 只出 NOTE（旧判据在此误伤后补登记）。
+    #     未登记时出 NOTE 提示「先登记认领行并提交·再复跑本脚本」。
+    #   B' 台账脏行提示：台账工作树有未提交改动时，提交必须**精确暂存**（禁整文件 git add），
+    #     否则会把他方在途行代提交（lost update 族）。
+    #     **只出 NOTE 不 FAIL**：台账的「纯追加认领行」行级独立、可并发，
+    #     强行 FAIL 会卡死合法批次（W930 实证：台账脏但实为合法在途）。
+    #     真正的互斥放在回填工具 scripts/ledger_backfill.py 的**行指纹校验**里。
+    _sn = args.self_w.strip().lstrip("Ww")
+    _self_num = int(_sn) if _sn.isdigit() else None
+    if ledger.get("rows"):
+        _dups = duplicate_wnums(ledger["rows"])
+        if _dups:
+            print(f"FAIL  撞号检测：台账中同一 W 号出现多行 {_dups}——"
+                  "同一个号被两方各登记一行（撞号）·请人工裁决（先落地者保留·另一方让号）")
+            problems.append(f"撞号：台账中 W{_dups} 出现多行")
+        else:
+            print("OK    撞号检测：台账无同号多行（未被两方重复登记）")
+    if _self_num is not None and ledger.get("rows"):
+        _self_row = next((r for r in ledger["rows"] if r["w"] == _self_num), None)
+        if _self_row is None:
+            print(f"NOTE  取号校验：本批 W{_self_num} 的认领行尚未登记——"
+                  "按新规则应「先登记认领行并提交·再复跑本脚本」")
+        elif ledger["max_w"] == _self_num:
+            print(f"OK    取号校验：W{_self_num} 是台账最新登记号（无更晚登记）")
+        else:
+            _later = sorted(r["w"] for r in ledger["rows"] if r["w"] > _self_num)
+            print(f"NOTE  取号校验：W{_self_num} 之后有更晚的登记号 {_later}——"
+                  "本批属**后补登记**（先落地者保留·非撞号）·后续批次请以 max+1 为准")
+    _r_led = run([git, "status", "--porcelain", "--", LEDGER])
+    if _r_led.returncode == 0 and _r_led.stdout.strip():
+        print(f"NOTE  台账工作树有未提交改动（{_r_led.stdout.strip()[:70]}）——"
+              "提交时**勿整文件 git add**（会把他方在途行代提交）："
+              "用 git update-index --cacheinfo 精确暂存本批行，或用 scripts/ledger_backfill.py 回填")
+
+    # 3.5) touches 在途盘点 + 交集拒绝（W739）+ git 条件二分（W956·P-43-01）
     self_norm = args.self_w.strip().lstrip("Ww")
     self_num = int(self_norm) if self_norm.isdigit() else None
     inflight_all = [r for r in ledger.get("rows", []) if is_inflight(r["status"]) and r["touches"]]
-    inflight = [r for r in inflight_all if self_num is None or r["w"] != self_num]
+    _r_log = run([git, "log", "--all", "--format=%h %s"])
+    if _r_log.returncode == 0 and _r_log.stdout.strip():
+        committed = wnum_commit_index(_r_log.stdout.splitlines())
+    else:
+        committed = {}
+        print("WARN  git 提交面读取失败（rc=%s）——登记滞后判定退化：全部按真在途从严保护" % _r_log.returncode)
+    inflight, lagged = split_inflight_lagged(inflight_all, committed, self_num)
+    for lr in lagged:
+        _n, _first = committed[lr["w"]]
+        print(f"WARN  登记滞后 W{lr['w']}：台账标在途·git 已有 {_n} 笔提交（首笔 {_first}）——"
+              "不计入在途拒绝（P-43-01·告警不拒绝）·请按收官流程回填状态列"
+              "（ledger_backfill.py --from-git 可脚本反填）")
     if inflight_all:
         for r in inflight_all:
             print(f"NOTE  在途批次 W{r['w']} touches：{', '.join(sorted(r['touches']))}"
-                  + ("（本批自己·交集检查已排除）" if r["w"] == self_num else ""))
+                  + ("（本批自己·交集检查已排除）" if r["w"] == self_num else "")
+                  + ("（登记滞后·已退出拒绝集）" if any(lr is r for lr in lagged) else ""))
     else:
         print("OK    touches：无在途批次声明 touches（级联面由 batch_cascade 单写路径保护·无需声明）")
     if args.touches:
         mine = _split_touches(args.touches)
-        bad = [(r["w"], touches_conflict(r["touches"], mine)) for r in inflight]
-        bad = [(w, c) for w, c in bad if c]
+        # W935 判据 E：登记类共享面（台账 / 方案报告 README）**排除**出交集拒绝——
+        #   每个批次都要写这两面（登记自己那行）⇒ 交集对它们恒红 ⇒ 纪律在准入阶段被架空。
+        #   并发保障改由「纯追加 + 精确暂存 + 回填行指纹」承担（规范 §11.0 规则二）。
+        mine_hard = {t for t in mine if not _is_register_surface(t)}
+        mine_reg = {t for t in mine if _is_register_surface(t)}
+        inflight_others = [r for r in inflight if r["w"] != self_num]
+        reg_hits = []
+        for r in inflight_others:
+            c = touches_conflict(r["touches"], mine_reg)
+            if c:
+                reg_hits.append((r["w"], sorted(c)))
+        bad = rejection_pairs(inflight, mine_hard, self_num)
         for w, c in bad:
             print(f"FAIL  touches 交集（在途 W{w}）：{', '.join(c)}——共享文件并行写风险·等对方收官或人工裁决")
             problems.append(f"touches 与在途批次 W{w} 冲突：{', '.join(c)}")
+        if reg_hits:
+            print("NOTE  登记类共享面命中（台账 / 方案报告 README）："
+                  + "；".join("W%d×%s" % (w, ",".join(c)) for w, c in reg_hits)
+                  + "——按 §11.0 规则二并发写保障：纯追加 + 精确暂存（update-index --cacheinfo）"
+                    "+ 回填行指纹（scripts/ledger_backfill.py）·不计入拒绝")
         # W821：触发③（preflight 交集拒绝）——真触发才提示登记 §8 干扰日志
         if bad:
             print(interference_log_hint("preflight 交集拒绝"))
         if not bad:
-            print(f"OK    touches 交集检查：本批声明 {len(mine)} 项·与在途批次（{len(inflight)} 个声明方）无交集")
+            print(f"OK    touches 交集检查：本批声明 {len(mine)} 项·与在途批次（{len(inflight_others)} 个声明方）无交集")
+
+    # 3.6) 级联运行锁状态（W991·①层重启）：活动锁=他方级联写序列进行中——共享面读会撞中态
+    # （混行尾假红/锚点对拍假红族），开工与门禁解读都应知悉。只提示不拦截。
+    try:
+        import cascade_lock
+
+        _held, _lock_info = cascade_lock.status()
+        if _held:
+            import time as _t
+
+            print("WARN  级联运行锁活动：%s@%s（%.0f 秒）——共享面正被级联写·此刻的 verify/preflight 读数可能撞中态"
+                  % (_lock_info.get("holder"), _lock_info.get("batch"),
+                     _t.time() - _lock_info.get("ts", 0)))
+    except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"WARN  级联锁状态不可读（{_exc}）")
 
     # 4) 工作树态
     r = run([git, "status", "--porcelain", "-z"])
@@ -366,6 +564,23 @@ def main():
     print(f"OK    工作树：staged={tree['staged']} 未暂存={tree['unstaged']} 未跟踪={tree['untracked']}")
     for status, path in tree["items"][:8]:
         print(f"       [{status}] {path}")
+    # W982 三层方案③：手搓前置劝导——工作树含级联面未提交改动即提示走 batch_cascade
+    # （只提示不拦截·W822 语义；中文路径经 core.quotepath=false 二次取数防转义漏配）
+    try:
+        _faces = ("CHANGELOG.md", "HANDOVER.md", "README.md", "STRUCTURE.md",
+                  "docs/00-导读/项目说明.md", ".github/workflows/README.md",
+                  "site/index.html", "site/data/cross-time-danmaku.html",
+                  "site/data/tag-cloud.html", "site/dukou-engine.html",
+                  "AGENTS.md", "CITATION.cff", "scripts/output/file-index.md")
+        _r2 = run([git, "-c", "core.quotepath=false", "status", "--porcelain", "-z"])
+        _dirty = {it[1] for it in summarize_porcelain(_r2.stdout)["items"] if it[0] != "??"}
+        _hit = sorted(_dirty & set(_faces))
+        if _hit:
+            print("NOTE  手搓劝导：工作树含级联面未提交改动 "
+                  + ", ".join(_hit[:3]) + ("…共 %d 项" % len(_hit) if len(_hit) > 3 else "")
+                  + "——版本面请走 batch_cascade 级联（手搓破坏锚点实证 W955/W961/W963·C7 门禁已在开工面把守）")
+    except Exception as _exc:  # noqa: BLE001 — 劝导故障留痕不阻断（W822 语义）
+        print(f"NOTE  手搓劝导不可用（{_exc}）")
     if len(tree["items"]) > 8:
         print(f"       ……另 {len(tree['items']) - 8} 项")
     # W821 注：原拟的「触发①（开工 git status 发现非本会话变更）」已按用户裁决删除
@@ -381,6 +596,42 @@ def main():
         print(("OK    " if env_ok else "WARN  ") + line)
     if not env_ok:
         problems.append("环境缺件（pytest/ruff）")
+
+    # 5.5) 复盘触发器提示位（W956·P-43-02）：只提示不拦截（W822「只输出提示行·不改任何
+    # 判定与退出码」语义）——触发清单由 scripts/check_review_trigger.py 产出；提示位故障
+    # 降级为 WARN 不阻断开工，但**禁静默跳过**（必须留下不可用痕迹）。
+    try:
+        import check_review_trigger as _crt
+
+        for _line in _crt.notice_lines(git):
+            print(("WARN  " if _line.startswith("⚠") else "NOTE  ") + _line)
+    except Exception as _exc:  # noqa: BLE001 — 提示位兜底（W822 语义）
+        print(f"WARN  复盘触发器不可用（{_exc}）——本回合跳过复盘周期提示")
+
+    # 5.6) 治理文档体积窗口（W960·文档规范 §8 机器化）——硬判据：超窗 FAIL 拦截开工。
+    # 修法唯一 = scripts/archive_segments.py 归档（守恒断言五道）；门禁故障降级 WARN 禁静默跳过。
+    try:
+        import check_doc_size_budget as _dsb
+
+        _dsb_fails, _dsb_lines = _dsb.gate_lines()
+        for _line in _dsb_lines:
+            print(("FAIL  " if "超窗!" in _line else "NOTE  ") + _line)
+        for _f in _dsb_fails:
+            problems.append(_f)
+    except Exception as _exc:  # noqa: BLE001 — 判据不可执行须留痕（W809 fail-closed 族）
+        print(f"WARN  体积窗口门禁不可用（{_exc}）——本回合跳过（禁静默·W960 建置纪律）")
+
+    # 5.7) 治理文档数字断言对账提示位（W967·报告型 WARN 不拦截·挂 verify 槽需另行批准）
+    try:
+        import check_gov_doc_claims as _gdc
+
+        _gdc_lines, _gdc_fails = _gdc.check()
+        for _line in _gdc_lines:
+            print("NOTE  " + _line)
+        for _f in _gdc_fails:
+            print("WARN  " + _f)
+    except Exception as _exc2:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"WARN  数字断言对账器不可用（{_exc2}）——本回合跳过（禁静默）")
 
     print("== 结论 ==")
     if problems:

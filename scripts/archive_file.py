@@ -54,7 +54,7 @@ def classify(path, to=None):
         target_dir = os.path.join(ROOT, to)
     else:
         ext = os.path.splitext(name)[1].lower()
-        m = re.search(r"[_\-\s]w(\d{3})", name, re.IGNORECASE)
+        m = re.search(r"[_\-\s]w(\d{3,4})", name, re.IGNORECASE)
         if ext in DOC_EXT:
             target_dir = os.path.join(ROOT, "archive", "docs")
         elif m:

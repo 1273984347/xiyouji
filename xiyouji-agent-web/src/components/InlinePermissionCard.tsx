@@ -1,4 +1,5 @@
 import { Button } from 'tdesign-react';
+import { WarnIcon } from './UiIcons';
 import { 
   TerminalIcon, 
   FileIcon, 
@@ -105,7 +106,7 @@ export function InlinePermissionCard({ request, onAllow, onDeny }: InlinePermiss
             color: '#e34d59'
           }}
         >
-          ⚠️ 危险操作
+          <WarnIcon /> 危险操作
         </span>
       )}
       

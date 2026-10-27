@@ -106,6 +106,7 @@ EXPECTED_SECTION_NAMES = [
     "性能影子",
     "计划方案合规",
     "朱砂实底",
+    "GSAP写法",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
@@ -135,7 +136,7 @@ SCOPE_SITE_SECTIONS = {
 }
 _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·旁文档/A4/A1-A6/学术/A1导航/sitemap/内嵌回退 7 段不在任何 scope 集=自洽锁盲区）
     "期望版本", "dukou页脚", "六文档同步", "旁文档同步", "范围漂移",
-    "A4计数", "A1-A6计数", "学术引用", "A1导航", "sitemap覆盖", "内嵌回退",
+    "A4计数", "A1-A6计数", "学术引用", "A1导航", "sitemap覆盖", "内嵌回退", "GSAP写法",
 }
 # _GATE_SUMMARY_MARKERS 已由 _STRICT_GATES 元组派生（W781 R-1·见 _STRICT_GATES 定义后），
 # 手工字典删除——挂槽漏登记即启动期断言红（W780 实证：漏登记会在 --scope 跳过路径爆「缺汇总行」假红）
@@ -627,6 +628,16 @@ _STRICT_GATES = [
                 fail_msg="朱砂实底限额违规（有页面非豁免实底 >3 处·收敛或补登记豁免后重跑）",
                 marker_msg="朱砂实底槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
                 ok_msg="朱砂实底限额门禁通过（%s）", ok_line=-1),
+    # W960（用户 2026-10-26 批准）：GSAP 动效写法门禁挂第 50 槽——
+    # site/static/js/ 下的自有 JS 原不在任何静态门禁扫描域内（check_motion_ban 只扫 HTML + 两份 CSS；
+    # check_js_syntax 只扫 HTML 内联脚本）⇒ 载体写坏（回弹缓动 / 超时长 / 大角度旋转 / 视差字面量）时
+    # 全站门禁全绿。判据自带负样本自测（8/8），豁免只对写法类规则（J3/J4/J7）开放且逐条打印不静默。
+    _StrictGate(section="GSAP写法", script="check_gsap_motion.py", args=("--gate",), timeout=120,
+                marker="---- 第 50 门禁 GSAP 写法：",
+                crash_msg="GSAP 写法槽执行异常（第 50 槽·crash 即拦）: %s",
+                fail_msg="GSAP 动效写法违例（时长 / 缓动白名单 / 禁旋转 / 禁循环 / 布局属性·详见脚本输出）",
+                marker_msg="GSAP 写法槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+                ok_msg="GSAP 动效写法门禁通过（%s）", ok_line=-1),
 ]
 
 # ---- 注册表派生与一致性防线（W781 R-1·挂槽「五处同改」收敛）----
@@ -753,11 +764,11 @@ def _gate_dukou_footer(ctx):
     html = _read(HTML)
     if not html:
         ctx.rep.fail("找不到 %s（未生成或被忽略）" % HTML)
-    html_w = [int(x) for x in re.findall(r"W(\d{3})", html)]
+    html_w = [int(x) for x in re.findall(r"W(\d{3,4})", html)]
     ctx.max_w_html = max(html_w) if html_w else 0
 
     # W711：footer 标签内联正则（页面正文含治理文档版本链引用·宽锚会误命中——锚定 <footer> 标签内首链目）
-    m_f = re.search(r"<footer>.{0,200}?(?:v([\d.]+)\s+)?W(\d{3})", html, re.S)
+    m_f = re.search(r"<footer>.{0,200}?(?:v([\d.]+)\s+)?W(\d{3,4})", html, re.S)
     fver, fwnum = (m_f.group(1), m_f.group(2)) if m_f else (None, None)
     if fwnum:  # W711：fver 可 None（W-only 新条目）·批次键比对
         if ctx.wnum and int(fwnum) < int(ctx.wnum):
@@ -820,7 +831,7 @@ def _gate_side_docs(ctx):
                            % (("v%s " % wf_v) if wf_v else "", wf_w))
         else:
             ctx.rep.fail(".github/workflows/README.md 未解析出头部版本标记（W### 或历史 vX.Y.Z W###）")
-        mw = re.search(r"W450-W(\d{3})", wf)
+        mw = re.search(r"W450-W(\d{3,4})", wf)
         if mw:
             if ctx.wnum and mw.group(1) != ctx.wnum:
                 ctx.rep.fail(".github/workflows/README.md 里程碑行上限 W%s != 现役 W%s（里程碑滞后）"
@@ -835,9 +846,9 @@ def _gate_side_docs(ctx):
 def _gate_scope_drift(ctx):
     """范围漂移检测：html 引用 W### 不得超出六文档+归档已记录范围（W417 归档纳入扫描）。"""
     ctx.section("范围漂移")
-    doc_w = [int(x) for x in re.findall(r"W(\d{3})", ctx.doc_all)]
+    doc_w = [int(x) for x in re.findall(r"W(\d{3,4})", ctx.doc_all)]
     for a in ARCHIVE_DOCS:
-        doc_w += [int(x) for x in re.findall(r"W(\d{3})", _read(os.path.join(ROOT, a)))]
+        doc_w += [int(x) for x in re.findall(r"W(\d{3,4})", _read(os.path.join(ROOT, a)))]
     max_w_doc = max(doc_w) if doc_w else 0
     if ctx.max_w_html > max_w_doc:
         ctx.rep.fail("范围漂移：%s 引用到 W%d，但六文档+归档最高仅记到 W%d（疑似未记录的改动，需补记或回退）"

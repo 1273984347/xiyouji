@@ -27,7 +27,7 @@
 - `xiyouji-agent-web/`
 - `xiyouji-desktop/`
 
-## 文件（21）
+## 文件（24）
 
 ### Markdown 文档
 
@@ -42,6 +42,10 @@
 - `README.en.md`
 - `SECURITY.md`
 - `新Agent启动Prompt.md`
+
+### Python 脚本
+
+- `_tmp_chap_sheet.py`
 
 ### JavaScript / TypeScript
 
@@ -58,6 +62,8 @@
 ### 其他
 
 - `.env.example`
+- `.git-blame-ignore-revs`
+- `.gitattributes`
 - `.gitignore`
 - `LICENSE`
 - `Makefile`

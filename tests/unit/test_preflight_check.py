@@ -249,3 +249,57 @@ def test_parse_ledger_normal_row_unchanged():
     w735 = [r for r in got["rows"] if r["w"] == 735][0]
     assert w735["status"] == "已收官"
     assert w735["touches"] == set()
+
+
+# ---------------------------------------------------------------------------
+# W956 / P-43-01：在途判定加 git 条件（登记滞后 = 告警不拒绝）
+# ---------------------------------------------------------------------------
+
+
+def test_wnum_commit_index_counts_tagged_subjects():
+    """只认 type(w###): 批次标签形态；同一号多笔合并计数并记首笔短 hash。"""
+    idx = preflight_check.wnum_commit_index([
+        "d093bf64 docs(w955): GSAP 计划子批",
+        "e5b262e7 docs(w884): 审计落盘",
+        "92175003 chore(w884): 收官回填",
+        "10dc5d75 docs(w954): 收官回填",
+    ])
+    assert idx[884] == [2, "e5b262e7"]
+    assert idx[955] == [1, "d093bf64"]
+    assert 954 in idx
+
+
+def test_wnum_commit_index_ignores_prose_mentions():
+    """负样本：散文提及别批号（承接/教训/引用）不得计入——防误降真在途批的 touches 防护。"""
+    idx = preflight_check.wnum_commit_index([
+        "chore(w950): 承接 W940 题材关修正后的打磨",
+        "docs: 复盘引用 W954 报告实例",
+        "feat(w951): 正常批次标签",
+    ])
+    assert 940 not in idx and 954 not in idx
+    assert 951 in idx
+
+
+def test_wnum_commit_index_empty_and_case():
+    """空输入安全 + 大小写不敏感（历史提交存在大写 W 形态）。"""
+    assert preflight_check.wnum_commit_index([]) == {}
+    assert preflight_check.wnum_commit_index(["abc1234 FIX(W123): x"]) == {123: [1, "abc1234"]}
+
+
+def test_split_inflight_lagged_basic():
+    """git 已有提交的登记面在途行 → lagged（退出拒绝集）；无提交的保留真在途。"""
+    rows = [
+        {"w": 931, "status": "在途（认领·未收官）", "touches": {"a.py"}},
+        {"w": 936, "status": "在途（认领·未收官）", "touches": {"b.py"}},
+    ]
+    committed = {931: [3, "da1e3d6e"]}
+    truly, lagged = preflight_check.split_inflight_lagged(rows, committed)
+    assert [r["w"] for r in truly] == [936]
+    assert [r["w"] for r in lagged] == [931]
+
+
+def test_split_inflight_lagged_self_never_lagged():
+    """本批自己的在途行（无提交）不得入 lagged——自己的行由交集检查按 self 排除。"""
+    rows = [{"w": 956, "status": "在途（认领·未收官）", "touches": {"a.py"}}]
+    truly, lagged = preflight_check.split_inflight_lagged(rows, {}, self_num=956)
+    assert truly == rows and lagged == []

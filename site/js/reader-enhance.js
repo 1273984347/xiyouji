@@ -125,7 +125,10 @@
     if (!markBtn) return;
     var on = isMarked();
     markBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
-    markBtn.textContent = on ? '★ 已收藏' : '☆ 收藏本页';
+    var baseIcon = markBtn.querySelector('svg');
+markBtn.innerHTML = (baseIcon ? baseIcon.outerHTML : '') + (on ? '已收藏' : '收藏本页');
+var mkPath = markBtn.querySelector('svg path');
+    if (mkPath) { if (on) { mkPath.setAttribute('fill', 'currentColor'); } else { mkPath.removeAttribute('fill'); } }
   }
 
   renderMark();

@@ -1,0 +1,570 @@
+[
+ {
+  "file": "site/data/ai-dialogue.html",
+  "line": 1800,
+  "field": "avatar",
+  "chars": "🧑‍🎓",
+  "reason": "名人头像位·「人物 + 身份」组合符（如 🧑‍🎓）表达人物专属身份·通用图标集无法替代·待设计专属头像族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/ai-dialogue.html",
+  "line": 1830,
+  "field": "avatar",
+  "chars": "🧓",
+  "reason": "名人头像位·「人物 + 身份」组合符（如 🧑‍🎓）表达人物专属身份·通用图标集无法替代·待设计专属头像族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/ai-dialogue.html",
+  "line": 1860,
+  "field": "avatar",
+  "chars": "🧑‍✈️",
+  "reason": "名人头像位·「人物 + 身份」组合符（如 🧑‍🎓）表达人物专属身份·通用图标集无法替代·待设计专属头像族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/ai-dialogue.html",
+  "line": 1890,
+  "field": "avatar",
+  "chars": "🧑‍🎨",
+  "reason": "名人头像位·「人物 + 身份」组合符（如 🧑‍🎓）表达人物专属身份·通用图标集无法替代·待设计专属头像族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/ai-dialogue.html",
+  "line": 1920,
+  "field": "avatar",
+  "chars": "🧑‍🏫",
+  "reason": "名人头像位·「人物 + 身份」组合符（如 🧑‍🎓）表达人物专属身份·通用图标集无法替代·待设计专属头像族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/ai-dialogue.html",
+  "line": 1950,
+  "field": "avatar",
+  "chars": "🧑‍🎤",
+  "reason": "名人头像位·「人物 + 身份」组合符（如 🧑‍🎓）表达人物专属身份·通用图标集无法替代·待设计专属头像族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/chart-design.html",
+  "line": 2246,
+  "field": "stage",
+  "chars": "⛰️",
+  "reason": "螺旋阶段符号位·阶段专属象征（山/骷髅/耳/扇/莲）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/chart-design.html",
+  "line": 2246,
+  "field": "stage",
+  "chars": "💀",
+  "reason": "螺旋阶段符号位·阶段专属象征（山/骷髅/耳/扇/莲）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/chart-design.html",
+  "line": 2246,
+  "field": "stage",
+  "chars": "👂",
+  "reason": "螺旋阶段符号位·阶段专属象征（山/骷髅/耳/扇/莲）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/chart-design.html",
+  "line": 2246,
+  "field": "stage",
+  "chars": "🪭",
+  "reason": "螺旋阶段符号位·阶段专属象征（山/骷髅/耳/扇/莲）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/chart-design.html",
+  "line": 2246,
+  "field": "stage",
+  "chars": "🪷",
+  "reason": "螺旋阶段符号位·阶段专属象征（山/骷髅/耳/扇/莲）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/cross-time-danmaku.html",
+  "line": 1815,
+  "field": "flag",
+  "chars": "🇺🇸",
+  "reason": "国籍标识位·国旗是复杂旗帜图案（线性图标集无法表达）·待裁决：改文字国名 or 自绘国旗族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/cross-time-danmaku.html",
+  "line": 1819,
+  "field": "flag",
+  "chars": "🇦🇷",
+  "reason": "国籍标识位·国旗是复杂旗帜图案（线性图标集无法表达）·待裁决：改文字国名 or 自绘国旗族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/cross-time-danmaku.html",
+  "line": 1823,
+  "field": "flag",
+  "chars": "🇯🇵",
+  "reason": "国籍标识位·国旗是复杂旗帜图案（线性图标集无法表达）·待裁决：改文字国名 or 自绘国旗族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/cross-time-danmaku.html",
+  "line": 1830,
+  "field": "flag",
+  "chars": "🇰🇷",
+  "reason": "国籍标识位·国旗是复杂旗帜图案（线性图标集无法表达）·待裁决：改文字国名 or 自绘国旗族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/methodology-matrix.html",
+  "line": 2303,
+  "field": "icon",
+  "chars": "⚡",
+  "reason": "情景卡图标位·情景专属象征（闪电/戒指/公文包/火箭）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/methodology-matrix.html",
+  "line": 2304,
+  "field": "icon",
+  "chars": "💍",
+  "reason": "情景卡图标位·情景专属象征（闪电/戒指/公文包/火箭）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/methodology-matrix.html",
+  "line": 2305,
+  "field": "icon",
+  "chars": "💼",
+  "reason": "情景卡图标位·情景专属象征（闪电/戒指/公文包/火箭）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/methodology-matrix.html",
+  "line": 2306,
+  "field": "icon",
+  "chars": "🚀",
+  "reason": "情景卡图标位·情景专属象征（闪电/戒指/公文包/火箭）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/narrative-experiment.html",
+  "line": 2282,
+  "field": "avatar",
+  "chars": "🪷",
+  "reason": "剧本角色头像位·角色专属象征（莲/叶/水晶/冠）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/narrative-experiment.html",
+  "line": 2292,
+  "field": "avatar",
+  "chars": "🍃",
+  "reason": "剧本角色头像位·角色专属象征（莲/叶/水晶/冠）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/narrative-experiment.html",
+  "line": 2302,
+  "field": "avatar",
+  "chars": "🔮",
+  "reason": "剧本角色头像位·角色专属象征（莲/叶/水晶/冠）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/narrative-experiment.html",
+  "line": 2312,
+  "field": "avatar",
+  "chars": "👑",
+  "reason": "剧本角色头像位·角色专属象征（莲/叶/水晶/冠）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/narrative-experiment.html",
+  "line": 2360,
+  "field": "icon",
+  "chars": "✅",
+  "reason": "指标卡图标位·指标专属象征（成功/收视/曝光/回报）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/narrative-experiment.html",
+  "line": 2361,
+  "field": "icon",
+  "chars": "📺",
+  "reason": "指标卡图标位·指标专属象征（成功/收视/曝光/回报）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/narrative-experiment.html",
+  "line": 2362,
+  "field": "icon",
+  "chars": "🎯",
+  "reason": "指标卡图标位·指标专属象征（成功/收视/曝光/回报）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/narrative-experiment.html",
+  "line": 2363,
+  "field": "icon",
+  "chars": "💰",
+  "reason": "指标卡图标位·指标专属象征（成功/收视/曝光/回报）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/data/narrative-experiment.html",
+  "line": 2728,
+  "field": "icon",
+  "chars": "★",
+  "reason": "指标卡图标位·指标专属象征（成功/收视/曝光/回报）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/ai-dialogue.html",
+  "line": 1773,
+  "field": "avatar",
+  "chars": "🧑‍🎓",
+  "reason": "名人头像位·「人物 + 身份」组合符（如 🧑‍🎓）表达人物专属身份·通用图标集无法替代·待设计专属头像族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/ai-dialogue.html",
+  "line": 1803,
+  "field": "avatar",
+  "chars": "🧓",
+  "reason": "名人头像位·「人物 + 身份」组合符（如 🧑‍🎓）表达人物专属身份·通用图标集无法替代·待设计专属头像族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/ai-dialogue.html",
+  "line": 1833,
+  "field": "avatar",
+  "chars": "🧑‍✈️",
+  "reason": "名人头像位·「人物 + 身份」组合符（如 🧑‍🎓）表达人物专属身份·通用图标集无法替代·待设计专属头像族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/ai-dialogue.html",
+  "line": 1863,
+  "field": "avatar",
+  "chars": "🧑‍🎨",
+  "reason": "名人头像位·「人物 + 身份」组合符（如 🧑‍🎓）表达人物专属身份·通用图标集无法替代·待设计专属头像族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/ai-dialogue.html",
+  "line": 1893,
+  "field": "avatar",
+  "chars": "🧑‍🏫",
+  "reason": "名人头像位·「人物 + 身份」组合符（如 🧑‍🎓）表达人物专属身份·通用图标集无法替代·待设计专属头像族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/ai-dialogue.html",
+  "line": 1923,
+  "field": "avatar",
+  "chars": "🧑‍🎤",
+  "reason": "名人头像位·「人物 + 身份」组合符（如 🧑‍🎓）表达人物专属身份·通用图标集无法替代·待设计专属头像族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/chart-design.html",
+  "line": 2219,
+  "field": "stage",
+  "chars": "⛰️",
+  "reason": "螺旋阶段符号位·阶段专属象征（山/骷髅/耳/扇/莲）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/chart-design.html",
+  "line": 2219,
+  "field": "stage",
+  "chars": "💀",
+  "reason": "螺旋阶段符号位·阶段专属象征（山/骷髅/耳/扇/莲）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/chart-design.html",
+  "line": 2219,
+  "field": "stage",
+  "chars": "👂",
+  "reason": "螺旋阶段符号位·阶段专属象征（山/骷髅/耳/扇/莲）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/chart-design.html",
+  "line": 2219,
+  "field": "stage",
+  "chars": "🪭",
+  "reason": "螺旋阶段符号位·阶段专属象征（山/骷髅/耳/扇/莲）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/chart-design.html",
+  "line": 2219,
+  "field": "stage",
+  "chars": "🪷",
+  "reason": "螺旋阶段符号位·阶段专属象征（山/骷髅/耳/扇/莲）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/cross-time-danmaku.html",
+  "line": 1792,
+  "field": "flag",
+  "chars": "🇺🇸",
+  "reason": "国籍标识位·国旗是复杂旗帜图案（线性图标集无法表达）·待裁决：改文字国名 or 自绘国旗族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/cross-time-danmaku.html",
+  "line": 1796,
+  "field": "flag",
+  "chars": "🇦🇷",
+  "reason": "国籍标识位·国旗是复杂旗帜图案（线性图标集无法表达）·待裁决：改文字国名 or 自绘国旗族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/cross-time-danmaku.html",
+  "line": 1800,
+  "field": "flag",
+  "chars": "🇯🇵",
+  "reason": "国籍标识位·国旗是复杂旗帜图案（线性图标集无法表达）·待裁决：改文字国名 or 自绘国旗族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/cross-time-danmaku.html",
+  "line": 1807,
+  "field": "flag",
+  "chars": "🇰🇷",
+  "reason": "国籍标识位·国旗是复杂旗帜图案（线性图标集无法表达）·待裁决：改文字国名 or 自绘国旗族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/json/rescue_roi.json",
+  "line": 214,
+  "field": "icon",
+  "chars": "⚡",
+  "reason": "待归类",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/json/rescue_roi.json",
+  "line": 219,
+  "field": "icon",
+  "chars": "💍",
+  "reason": "待归类",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/json/rescue_roi.json",
+  "line": 224,
+  "field": "icon",
+  "chars": "💼",
+  "reason": "待归类",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/json/rescue_roi.json",
+  "line": 229,
+  "field": "icon",
+  "chars": "🚀",
+  "reason": "待归类",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/methodology-matrix.html",
+  "line": 2281,
+  "field": "icon",
+  "chars": "⚡",
+  "reason": "情景卡图标位·情景专属象征（闪电/戒指/公文包/火箭）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/methodology-matrix.html",
+  "line": 2282,
+  "field": "icon",
+  "chars": "💍",
+  "reason": "情景卡图标位·情景专属象征（闪电/戒指/公文包/火箭）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/methodology-matrix.html",
+  "line": 2283,
+  "field": "icon",
+  "chars": "💼",
+  "reason": "情景卡图标位·情景专属象征（闪电/戒指/公文包/火箭）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/methodology-matrix.html",
+  "line": 2284,
+  "field": "icon",
+  "chars": "🚀",
+  "reason": "情景卡图标位·情景专属象征（闪电/戒指/公文包/火箭）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/methodology-matrix.html",
+  "line": 3059,
+  "field": "icon",
+  "chars": "📌",
+  "reason": "情景卡图标位·情景专属象征（闪电/戒指/公文包/火箭）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/narrative-experiment.html",
+  "line": 2253,
+  "field": "avatar",
+  "chars": "🪷",
+  "reason": "剧本角色头像位·角色专属象征（莲/叶/水晶/冠）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/narrative-experiment.html",
+  "line": 2263,
+  "field": "avatar",
+  "chars": "🍃",
+  "reason": "剧本角色头像位·角色专属象征（莲/叶/水晶/冠）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/narrative-experiment.html",
+  "line": 2273,
+  "field": "avatar",
+  "chars": "🔮",
+  "reason": "剧本角色头像位·角色专属象征（莲/叶/水晶/冠）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/narrative-experiment.html",
+  "line": 2283,
+  "field": "avatar",
+  "chars": "👑",
+  "reason": "剧本角色头像位·角色专属象征（莲/叶/水晶/冠）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/narrative-experiment.html",
+  "line": 2331,
+  "field": "icon",
+  "chars": "✅",
+  "reason": "指标卡图标位·指标专属象征（成功/收视/曝光/回报）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/narrative-experiment.html",
+  "line": 2332,
+  "field": "icon",
+  "chars": "📺",
+  "reason": "指标卡图标位·指标专属象征（成功/收视/曝光/回报）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/narrative-experiment.html",
+  "line": 2333,
+  "field": "icon",
+  "chars": "🎯",
+  "reason": "指标卡图标位·指标专属象征（成功/收视/曝光/回报）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/narrative-experiment.html",
+  "line": 2334,
+  "field": "icon",
+  "chars": "💰",
+  "reason": "指标卡图标位·指标专属象征（成功/收视/曝光/回报）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "site/en/narrative-experiment.html",
+  "line": 2699,
+  "field": "icon",
+  "chars": "★",
+  "reason": "指标卡图标位·指标专属象征（成功/收视/曝光/回报）·待设计专属图标族",
+  "owner": "W950"
+ },
+ {
+  "file": "dataset/ai-dialogue.json",
+  "line": 7,
+  "field": "avatar",
+  "chars": "🧑‍🎓",
+  "reason": "待归类",
+  "owner": "W950"
+ },
+ {
+  "file": "dataset/ai-dialogue.json",
+  "line": 117,
+  "field": "avatar",
+  "chars": "🧓",
+  "reason": "待归类",
+  "owner": "W950"
+ },
+ {
+  "file": "dataset/ai-dialogue.json",
+  "line": 227,
+  "field": "avatar",
+  "chars": "🧑‍✈️",
+  "reason": "待归类",
+  "owner": "W950"
+ },
+ {
+  "file": "dataset/ai-dialogue.json",
+  "line": 337,
+  "field": "avatar",
+  "chars": "🧑‍🎨",
+  "reason": "待归类",
+  "owner": "W950"
+ },
+ {
+  "file": "dataset/ai-dialogue.json",
+  "line": 447,
+  "field": "avatar",
+  "chars": "🧑‍🏫",
+  "reason": "待归类",
+  "owner": "W950"
+ },
+ {
+  "file": "dataset/ai-dialogue.json",
+  "line": 557,
+  "field": "avatar",
+  "chars": "🧑‍🎤",
+  "reason": "待归类",
+  "owner": "W950"
+ },
+ {
+  "file": "dataset/cross-time-danmaku.json",
+  "line": 266,
+  "field": "flag",
+  "chars": "🇺🇸",
+  "reason": "国籍标识位·国旗是复杂旗帜图案（线性图标集无法表达）·待裁决：改文字国名 or 自绘国旗族·数据源",
+  "owner": "W950"
+ },
+ {
+  "file": "dataset/cross-time-danmaku.json",
+  "line": 275,
+  "field": "flag",
+  "chars": "🇦🇷",
+  "reason": "国籍标识位·国旗是复杂旗帜图案（线性图标集无法表达）·待裁决：改文字国名 or 自绘国旗族·数据源",
+  "owner": "W950"
+ },
+ {
+  "file": "dataset/cross-time-danmaku.json",
+  "line": 284,
+  "field": "flag",
+  "chars": "🇯🇵",
+  "reason": "国籍标识位·国旗是复杂旗帜图案（线性图标集无法表达）·待裁决：改文字国名 or 自绘国旗族·数据源",
+  "owner": "W950"
+ },
+ {
+  "file": "dataset/cross-time-danmaku.json",
+  "line": 301,
+  "field": "flag",
+  "chars": "🇰🇷",
+  "reason": "国籍标识位·国旗是复杂旗帜图案（线性图标集无法表达）·待裁决：改文字国名 or 自绘国旗族·数据源",
+  "owner": "W950"
+ }
+]

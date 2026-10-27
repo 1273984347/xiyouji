@@ -1,0 +1,16 @@
+CHANGELOG.md
+README.md
+HANDOVER.md
+STRUCTURE.md
+docs/00-导读/W批次编号对账表.md
+docs/11-方案报告/README.md
+docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-26.md
+docs/11-方案报告/计划方案/执行前计划-T27-第43篇工作复盘批.md
+docs/11-方案报告/计划方案/T27-任务计划执行与经验沉淀报告-2026-10-26.md
+docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md
+docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md
+scripts/_w954_review_evidence.py
+scripts/_w954_ledger_backfill.py
+scripts/_w954_register_surfaces.py
+scripts/output/_w954_review_evidence.json
+scripts/output/file-index.md

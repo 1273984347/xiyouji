@@ -1,0 +1,17 @@
+{
+  "batch": "W968",
+  "date": "2026-10-26",
+  "title": "W968 台账对账表窗口制拆分批（用户令「拆分一下文件储存大小太大」）",
+  "desc": "台账对账表窗口制拆分批（正本 446.6 至 150.3KB 窗口 60 行硬判据）",
+  "head_entry": "2026-10-26（W968 台账对账表窗口制拆分批）",
+  "head_sentence": "台账对账表窗口制拆分落地",
+  "changelog_body": "\n\n> **来源**：用户令「台账拆分一下，文件储存大小太大」——446.6KB/315 行（行均 1.3KB·最大 5KB）。\n> **摘要**：① **号序切分**（非位置切分——行序实测 52 处穿插，W940/W942 等行插在文件前部）——正本留 W≥908 共 60 行（活跃区 W908-W968），其余 256 行（W648-W907）整行迁 archive/docs/W批次编号对账表-ARCHIVE.md 新容器（追加式+迁档注记），正本 446.6→150.3 KB（-296KB）。② **守恒断言五道**——行数守恒（315=60+256）/迁出行逐条字节入档/正本非行内容逐字节不动（表头规则、现势停用块、ASCII 纪律段）/parse_ledger 语义不变（max W、撞号检测、在途行集合三者前后一致）/号区间不交叠（迁出最大 < 留存最小）。③ **ASCII 纪律段补迁档注记**（号占用留痕以正本+归档合看为准）。④ **体积门禁 C5 台账 60 行窗硬判据**（与 CHANGELOG/file-index 同族——超窗即红·修法指向后续台账归档工具化）；本批认领行 +1 后恰 60 满窗。⑤ **M5 探针合看归档**（正本+归档 316/316 全覆盖）。⑥ **消费方核验**——preflight/ledger_backfill/check_doc_sync C4（近 15 提交 ⊆ 窗口）/check_review_trigger/agent_start/batch_cascade 全部只吃近期行·无需改动；ledger_close_check 注册集合语义在归档头注声明合看。⑦ CHANGELOG/file-index 随批回窗（111→109）。\n> **文件**：docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md · scripts/check_doc_size_budget.py · scripts/check_parser_anchor_coverage.py · tests/unit/test_doc_size_budget.py · CHANGELOG.md · scripts/output/file-index.md · archive/docs/CHANGELOG-ARCHIVE.md · archive/docs/file-index-ARCHIVE.md\n> **验证**：迁移守恒断言五道全过 + parse_ledger 前后对拍（max=W967 不变·在途集合不变）+ 体积门禁三窗全绿（109/110·109/110·60/60）+ M5 316/316 + pytest 全量 914 passed + ruff 清零。\n> **状态**：在途（认领登记 W968·待提交入库）",
+  "milestone_block": "- **W968 台账对账表窗口制拆分批**：正本 446.6→150.3KB（号序切分·60 行窗 W908-W968）+ 256 行迁新归档容器（守恒五道·parse_ledger 语义不变）+ 体积门禁 C5 台账 60 行窗 + M5 探针合看（316/316）+ ASCII 纪律段迁档注记",
+  "agents_note": "2026-10-26（W968）台账对账表窗口制拆分：正本 446.6→150.3KB（号序切分·60 行窗）+ 256 行迁归档容器（守恒五道）+ 体积门禁 C5 台账窗 + M5 合看",
+  "file_index_rows": [
+    "| docs/00-导读/W批次编号对账表.md | W968 | 窗口制拆分：446.6→150.3KB（留 60 行 W908-W968·ASCII 段迁档注记） |",
+    "| archive/docs/W批次编号对账表-ARCHIVE.md | W968 | 新容器：迁入 256 行（W648-W907·号占用留痕合看为准） |",
+    "| scripts/check_doc_size_budget.py | W968 | C5 台账 60 行窗硬判据（ledger 计数形态） |",
+    "| scripts/check_parser_anchor_coverage.py | W968 | M5 台账探针合看归档（316/316） |"
+  ]
+}

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qMNKn/HBOJ/gf4W/ox0wpCdTlFoT1+y8eBTF0/hIpMU=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-wOveiI8wMYDqQ6OFyBhWDdHb3gnMgU2qyjSSHM73rts=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>交互式时间线 · 详解西游记</title>
@@ -24,7 +24,7 @@
     <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -1297,6 +1297,26 @@ td.num, th.num {
 html[data-theme="dark"] .viz-illustration {
     display: none;
 }
+
+/* ===== W939 图标系统 · 东方线描（24×24 网格 / 1.5px 描边 / currentColor 随主题） =====
+   用途：替代以 emoji 表情充当图标的做法（图标位一律用矢量图形）。
+   形态：内联 svg 元素（HTML 结构位·class 属性取 ico / ico-t）+ mask-image（同源 SVG·CSS content 位）。
+   图形资产：site/static/icons/ui/*.svg（单一事实源·scripts/_w939_gen_icons.py 生成）。
+   风格：与既有 .icon-moon / .icon-sun 同族（同为 24×24 线描 · stroke 1.5 · currentColor）。
+   色彩：描边走 currentColor ⇒ 跟随所在文字色，暗色模式自动适配，无需第二套配色。
+   尺寸：以 em 为单位 ⇒ 跟随宿主 font-size（.es-icon 2rem / .pc-emoji 22px 等）。
+   间距：ico 本身无外边距（供纯图标位）；「图标 + 文字」处加 ico-t 补 0.32em。 */
+.ico {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.14em;
+    flex: none;
+}
+
+.ico-t {
+    margin-right: 0.32em;
+}
     </style>
 <style>
         /* e-track-exempt: chart-data-colors 1 处 */
@@ -1718,6 +1738,26 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </footer>
 
 <script>
+// W946 · 时间线专属图标映射（由 scripts/_w946_gen_timeline_icons.py 生成·勿手改）
+var TL_ICO = {
+  'tl-pilgrim': '<svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.6 6.6a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM8.6 10.6v4.6l-1.8 5.4M8.6 15.2l2.2 5.4M10.2 10.4c1.9.3 3.1 1.4 3.6 3.2M10.2 10.4l3.6 1.2-1 2.9-3.6-1.2zM14.4 9.8v9.4M17.6 6.4a2.1 2.1 0 1 0 .01 0M19.8 12.6l2.4-1.6M15 12.6l-2.2-1.4" transform="translate(-4.7442 -3.6977) scale(1.1628)"/></svg>',
+  'tl-scroll': '<svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.2 3.6h11.6a1.6 1.6 0 0 1 0 3.2H6.2a1.6 1.6 0 0 1 0-3.2zM6.2 17.2h11.6a1.6 1.6 0 0 1 0 3.2H6.2a1.6 1.6 0 0 1 0-3.2zM8.2 6.8h7.6v10.4H8.2zM9.8 9.4h4.4M9.8 12h4.4M9.8 14.6h2.8" transform="translate(-1.0435 -1.0435) scale(1.087)"/></svg>',
+  'tl-star-spark': '<svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2l1.5 4.6 4.6 1.5-4.6 1.5L12 15.4l-1.5-4.6L5.9 9.3l4.6-1.5zM18.4 15.2l.7 2.1 2.1.7-2.1.7-.7 2.1-.7-2.1-2.1-.7 2.1-.7z" transform="translate(-2.1146 -0.5) scale(1.0417)"/></svg>',
+  'tl-mask': '<svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.4c4.4 0 7.4 2.7 7.4 7.3 0 5.3-3.3 9.9-7.4 9.9s-7.4-4.6-7.4-9.9c0-4.6 3-7.3 7.4-7.3zM9 7.6c.9-.7 2-.7 2.9 0M12.1 7.6c.9-.7 2-.7 2.9 0M8.2 10.6c.5 1.4 1.6 2.3 3.1 2.6M15.8 10.6c-.5 1.4-1.6 2.3-3.1 2.6M9.6 16.4c1.5 1 3.3 1 4.8 0" transform="translate(-0.766 -0.766) scale(1.0638)"/></svg>',
+  'tl-codex': '<svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.4 3.6h9.2a2 2 0 0 1 2 2v14.8H8.4a2 2 0 0 1-2-2zM17.6 7.2h1.8a.8.8 0 0 1 .8.8v10.4a1.6 1.6 0 0 1-1.6 1.6H8.4M12 6.4h2.2v3.6H12z" transform="translate(-2.4565 -1.0435) scale(1.087)"/></svg>',
+  'tl-taiji': '<svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.4a8.6 8.6 0 1 0 0 17.2 8.6 8.6 0 0 0 0-17.2zM12 3.4a4.3 4.3 0 0 1 0 8.6 4.3 4.3 0 0 0 0 8.6M12 12h.01" transform="translate(-0.766 -0.766) scale(1.0638)"/></svg>',
+  'tl-critical-edition': '<svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 5.2h7.2v13.6H6.6a2 2 0 0 1-2-2zM11.8 5.2h7.2v13.6h-5.2a2 2 0 0 1-2-2zM19 5.2h.4v13.6H19M7 9.4h2.4M7 13h2.4M14.2 9.4h2.6M14.2 13h2.6" transform="translate(-2.6341 -2.6341) scale(1.2195)"/></svg>',
+  'tl-brush-comment': '<svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.4 19.4l1.1-3.9L14.4 6.6a1.8 1.8 0 0 1 2.6 2.6L8.1 18.3zM13.6 7.4l3 3M7.4 21h4.6M17 13.4h.01M19.6 16.6h.01M16.4 19.8h.01" transform="translate(-2.2857 -4.131) scale(1.1905)"/></svg>',
+  'tl-punctuation': '<svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 10.8c1.1 0 1.8.7 1.8 1.7 0 1-.9 1.8-2 2.2M13.6 14.6a1.1 1.1 0 1 0 .01 0M18.4 8.2v4.4M21 8.2v4.4" transform="translate(-4.9136 -3.4321) scale(1.2346)"/></svg>',
+  'tl-pencil': '<svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.4 16.4l1-3.6 9.4-9.4a1.8 1.8 0 0 1 2.6 2.6L8 15.4zM13.2 5l2.6 2.6M4.4 16.4l3.6-1M9 20.6h10.4M9 17.8h10.4M9 15h6.4" transform="translate(-0.3316 -0.1762) scale(1.0363)"/></svg>',
+  'tl-database': '<svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.4c3.9 0 7 1.2 7 2.6s-3.1 2.6-7 2.6-7-1.2-7-2.6 3.1-2.6 7-2.6zM5 6v12c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6M5 12c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6" transform="translate(-0.766 -0.766) scale(1.0638)"/></svg>',
+  'tl-comic': '<svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.6 6.4h7.2v6.2H3.6zM13.2 6.4h7.2v6.2h-7.2zM3.6 15.2h7.2v4.4H3.6zM13.2 15.2h7.2v4.4h-7.2z" transform="translate(-1.0435 -2.1304) scale(1.087)"/></svg>',
+  'tl-newyear-print': '<svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 2.8h10.8v18.4H6.6zM9 2.8v2.4M15 2.8v2.4M8.6 19.4h6.8M12 6.4a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM9.4 14.6c.8-1.2 1.7-1.8 2.6-1.8s1.8.6 2.6 1.8" transform="translate(0.0 0.0) scale(1.0)"/></svg>',
+  'tl-film': '<svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.6 5.4h16.8v13.2H3.6zM3.6 9.2h16.8M3.6 14.8h16.8M7.6 5.4v3.8M12 5.4v3.8M16.4 5.4v3.8M7.6 14.8v3.8M12 14.8v3.8M16.4 14.8v3.8" transform="translate(-1.0435 -1.0435) scale(1.087)"/></svg>',
+  'tl-tv': '<svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.6 7.4h16.8v10.2H3.6zM8.4 20.4h7.2M12 17.6v2.8M8.4 10.8h7.2v3.6H8.4zM8.4 7.4l3.6-4M15.6 7.4l-3.6-4" transform="translate(-0.9032 -0.7957) scale(1.0753)"/></svg>',
+  'tl-gamepad': '<svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.4 8.4h9.2a4.6 4.6 0 0 1 4.5 5.6l-.6 3a2.2 2.2 0 0 1-4 .6l-1.6-2.4H9.1l-1.6 2.4a2.2 2.2 0 0 1-4-.6l-.6-3a4.6 4.6 0 0 1 4.5-5.6zM8 11.4v4M6 13.4h4M15 12.4v.01M17.2 14.4v.01" transform="translate(0.0 -1.5) scale(1.0)"/></svg>',
+};
+
     /* ==========================================================
        时代与轴定义
        ========================================================== */
@@ -1754,32 +1794,32 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     const EMBEDDED_DATA = {
         timeline: [
             // 成书史 composition（7）
-            { year: 629,  axis: 'composition', title: '玄奘西行',           icon: '📖', desc: '贞观三年，玄奘法师自长安出发，历时十七年西行天竺求法，行程五万里，为后世取经故事奠定历史原型。' },
-            { year: 645,  axis: 'composition', title: '大唐西域记',         icon: '📜', desc: '玄奘归唐后口述西行见闻，由辩机笔录成《大唐西域记》十二卷，记载百余国风土，成为取经叙事的纪实底本。' },
-            { year: 1208, axis: 'composition', title: '取经诗话',           icon: '✨', desc: '南宋刊《大唐三藏取经诗话》为现存最早取经文学化文本，猴行者首次登场，奠定取经团队雏形。' },
-            { year: 1340, axis: 'composition', title: '杂剧西游记',         icon: '🎭', desc: '元杨景贤《西游记》杂剧六本二十四折，孙悟空形象定型，沙僧、猪八戒角色齐备，叙事趋于完整。' },
-            { year: 1592, axis: 'composition', title: '世德堂本定稿',       icon: '📕', desc: '明万历二十年金陵世德堂百回本《西游记》刊行，作者题华阳洞天主人，标志百回小说体裁最终定型。' },
-            { year: 1663, axis: 'composition', title: '西游证道书',         icon: '☯️', desc: '清初汪象旭评《西游证道书》以丹道解西游，开清代评点先河，将小说纳入内丹学阐释体系。' },
-            { year: 1955, axis: 'composition', title: '现代整理本',         icon: '📚', desc: '人民文学出版社出版黄肃秋整理校注本，以世德堂本为底本参校明清诸本，成为现代通行底本。' },
+            { year: 629,  axis: 'composition', title: '玄奘西行',           icon: 'tl-pilgrim', desc: '贞观三年，玄奘法师自长安出发，历时十七年西行天竺求法，行程五万里，为后世取经故事奠定历史原型。' },
+            { year: 645,  axis: 'composition', title: '大唐西域记',         icon: 'tl-scroll', desc: '玄奘归唐后口述西行见闻，由辩机笔录成《大唐西域记》十二卷，记载百余国风土，成为取经叙事的纪实底本。' },
+            { year: 1208, axis: 'composition', title: '取经诗话',           icon: 'tl-star-spark', desc: '南宋刊《大唐三藏取经诗话》为现存最早取经文学化文本，猴行者首次登场，奠定取经团队雏形。' },
+            { year: 1340, axis: 'composition', title: '杂剧西游记',         icon: 'tl-mask', desc: '元杨景贤《西游记》杂剧六本二十四折，孙悟空形象定型，沙僧、猪八戒角色齐备，叙事趋于完整。' },
+            { year: 1592, axis: 'composition', title: '世德堂本定稿',       icon: 'tl-codex', desc: '明万历二十年金陵世德堂百回本《西游记》刊行，作者题华阳洞天主人，标志百回小说体裁最终定型。' },
+            { year: 1663, axis: 'composition', title: '西游证道书',         icon: 'tl-taiji', desc: '清初汪象旭评《西游证道书》以丹道解西游，开清代评点先河，将小说纳入内丹学阐释体系。' },
+            { year: 1955, axis: 'composition', title: '现代整理本',         icon: 'tl-critical-edition', desc: '人民文学出版社出版黄肃秋整理校注本，以世德堂本为底本参校明清诸本，成为现代通行底本。' },
 
             // 版本演变 version（7）
-            { year: 1592, axis: 'version', title: '世德堂百回本',     icon: '📕', desc: '明万历金陵世德堂刻本二十卷一百回，现存最早百回本，后世版本之祖本，藏日本天理图书馆。' },
-            { year: 1663, axis: 'version', title: '证道书本',         icon: '☯️', desc: '清康熙二年汪象旭笺评本，删节世德堂本附丹道评点，开清代删评本一系。' },
-            { year: 1718, axis: 'version', title: '西游真诠',         icon: '✒️', desc: '清康熙五十七年陈士斌评《西游真诠》一百回，引禅宗、丹道互证，清代最流行评本之一。' },
-            { year: 1920, axis: 'version', title: '亚东排印本',       icon: '📰', desc: '民国亚东图书馆汪原放标点排印《西游记》，新式标点首开风气，推动古典小说现代阅读。' },
-            { year: 1955, axis: 'version', title: '人文社整理本',     icon: '📚', desc: '人民文学出版社黄肃秋校注整理本，以世德堂本为底本参校，半个世纪通行底本。' },
-            { year: 1980, axis: 'version', title: '新校注本',         icon: '✏️', desc: '人民文学出版社黄肃秋新校注本修订再版，增补注释与校记，学术性更强。' },
-            { year: 2020, axis: 'version', title: '数字化版本',       icon: '💾', desc: '古籍数字化全文检索与多版本对校系统上线，支持世德堂、证道书、真诠本并读比对。' },
+            { year: 1592, axis: 'version', title: '世德堂百回本',     icon: 'tl-codex', desc: '明万历金陵世德堂刻本二十卷一百回，现存最早百回本，后世版本之祖本，藏日本天理图书馆。' },
+            { year: 1663, axis: 'version', title: '证道书本',         icon: 'tl-taiji', desc: '清康熙二年汪象旭笺评本，删节世德堂本附丹道评点，开清代删评本一系。' },
+            { year: 1718, axis: 'version', title: '西游真诠',         icon: 'tl-brush-comment', desc: '清康熙五十七年陈士斌评《西游真诠》一百回，引禅宗、丹道互证，清代最流行评本之一。' },
+            { year: 1920, axis: 'version', title: '亚东排印本',       icon: 'tl-punctuation', desc: '民国亚东图书馆汪原放标点排印《西游记》，新式标点首开风气，推动古典小说现代阅读。' },
+            { year: 1955, axis: 'version', title: '人文社整理本',     icon: 'tl-critical-edition', desc: '人民文学出版社黄肃秋校注整理本，以世德堂本为底本参校，半个世纪通行底本。' },
+            { year: 1980, axis: 'version', title: '新校注本',         icon: 'tl-pencil', desc: '人民文学出版社黄肃秋新校注本修订再版，增补注释与校记，学术性更强。' },
+            { year: 2020, axis: 'version', title: '数字化版本',       icon: 'tl-database', desc: '古籍数字化全文检索与多版本对校系统上线，支持世德堂、证道书、真诠本并读比对。' },
 
             // 文化影响 influence（8）
-            { year: 1600, axis: 'influence', title: '明代戏曲改编',   icon: '🎭', desc: '明代民间戏曲敷演西游故事，宫廷与民间班社皆有目连、取经剧目，西游 IP 戏曲化起步。' },
-            { year: 1800, axis: 'influence', title: '清代年画',       icon: '🖼️', desc: '杨柳青、武强等年画作坊大量印制西游题材年画，猴王、取经图进入民间节庆视觉。' },
-            { year: 1927, axis: 'influence', title: '连环画普及',     icon: '📖', desc: '上海世界书局《连环图画西游记》出版，西游故事借连环画大规模进入儿童与市民阅读。' },
-            { year: 1941, axis: 'influence', title: '铁扇公主动画',   icon: '🎬', desc: '万氏兄弟《铁扇公主》中国首部动画长片上映，亚洲动画先驱，西游题材登上银幕。' },
-            { year: 1986, axis: 'influence', title: '央视西游记',     icon: '📺', desc: '央视版电视剧《西游记》六小龄童主演，二十五集重播千余次，国民级西游影像记忆。' },
-            { year: 1995, axis: 'influence', title: '大话西游',       icon: '🎭', desc: '周星驰《大话西游》上下集上映，后现代解构西游，互联网时代亚文化经典。' },
-            { year: 2013, axis: 'influence', title: '西游降魔篇',     icon: '🎬', desc: '周星驰执导《西游·降魔篇》春节档票房冠军，重启西游商业大片系列。' },
-            { year: 2020, axis: 'influence', title: '游戏与网文',     icon: '🎮', desc: '《黑神话：悟空》预告引爆全球，西游题材网文与跨媒介改编持续产出，IP 再生。' }
+            { year: 1600, axis: 'influence', title: '明代戏曲改编',   icon: 'tl-mask', desc: '明代民间戏曲敷演西游故事，宫廷与民间班社皆有目连、取经剧目，西游 IP 戏曲化起步。' },
+            { year: 1800, axis: 'influence', title: '清代年画',       icon: 'tl-newyear-print', desc: '杨柳青、武强等年画作坊大量印制西游题材年画，猴王、取经图进入民间节庆视觉。' },
+            { year: 1927, axis: 'influence', title: '连环画普及',     icon: 'tl-comic', desc: '上海世界书局《连环图画西游记》出版，西游故事借连环画大规模进入儿童与市民阅读。' },
+            { year: 1941, axis: 'influence', title: '铁扇公主动画',   icon: 'tl-film', desc: '万氏兄弟《铁扇公主》中国首部动画长片上映，亚洲动画先驱，西游题材登上银幕。' },
+            { year: 1986, axis: 'influence', title: '央视西游记',     icon: 'tl-tv', desc: '央视版电视剧《西游记》六小龄童主演，二十五集重播千余次，国民级西游影像记忆。' },
+            { year: 1995, axis: 'influence', title: '大话西游',       icon: 'tl-mask', desc: '周星驰《大话西游》上下集上映，后现代解构西游，互联网时代亚文化经典。' },
+            { year: 2013, axis: 'influence', title: '西游降魔篇',     icon: 'tl-film', desc: '周星驰执导《西游·降魔篇》春节档票房冠军，重启西游商业大片系列。' },
+            { year: 2020, axis: 'influence', title: '游戏与网文',     icon: 'tl-gamepad', desc: '《黑神话：悟空》预告引爆全球，西游题材网文与跨媒介改编持续产出，IP 再生。' }
         ]
     };
 
@@ -2096,7 +2136,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const d = state.data[idx];
         const era = yearToEra(d.year);
         const body = box.append('div').attr('class', 'detail-body');
-        body.append('div').attr('class', 'detail-icon').text(d.icon);
+        body.append('div').attr('class', 'detail-icon').html(TL_ICO[d.icon] || '');
         const info = body.append('div');
         const meta = info.append('div').attr('class', 'detail-meta');
         meta.append('span').attr('class', 'badge badge-year').text(d.year);
@@ -2137,7 +2177,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 }
             });
         const head = cards.append('div').attr('class', 'ec-head');
-        head.append('div').attr('class', 'ec-icon').text(d => d.icon);
+        head.append('div').attr('class', 'ec-icon').html(d => TL_ICO[d.icon] || '');
         head.append('div').attr('class', 'ec-title').text(d => d.title);
         cards.append('div').attr('class', 'ec-meta').each(function (d) {
             const sel = d3.select(this);
