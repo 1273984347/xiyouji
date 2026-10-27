@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W994），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W995），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,26 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W995（2026-10-28）：tier2 按W段拆分批（政策落地·archive_tier2 自持闭环·提示位扩展）
+
+
+
+> **来源**：主人 2026-10-28 授权「按 W 段拆分文件」（tier2 容器 1044KB 破 1MB 的政策裁决）+ W994 延后的提示位扩展（W992 校准提交 27281553 落地后错峰补上）。
+
+> - **文件**：archive/docs/CHANGELOG-ARCHIVE-tier2.md、archive/docs/CHANGELOG-ARCHIVE-tier2-W400-W559.md、scripts/archive_tier2.py、scripts/check_archive_health.py、scripts/batch_cascade.py、scripts/verify_delivery.py、archive/README.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w995_spec.json、scripts/output/_cascade_files_W995.txt。
+
+**tier2 按 W 段拆分（政策落地）**：CHANGELOG-ARCHIVE-tier2.md 1044KB→**746KB**（W001-W399·210 段留存）+ 新建范围件 **CHANGELOG-ARCHIVE-tier2-W400-W559.md**（299KB·144 段·范围命名约定首件）——拆分脚本守恒三道+号域断言（留存全 <400·迁出全 ≥400）零落盘前置。**约定定形**：tier2 容器范围命名 `*-tier2-W<lo>-W<hi>.md`·单件 ≤1MB。
+
+**archive_tier2 追加逻辑升级（自持闭环）**：追加前容量判断——容器现体积+本次迁出 >1MB → 自动开范围命名新件（合规头部生成），tier-2 递增不再破线；LIMIT 常量化。
+
+**探针 T1b 升格**：tier2 破线从「登记观察」升为 problem（strict 判红——拆分约定落地后已可执行）+ glob 扩至范围命名件 + run(prefix) 参数（供级联提示位复用）。
+
+**提示位扩展（W994 延后件）**：batch_cascade 收官提示位独立尾部块新增——[ARCHIVE] 归档健康行（探针 T1-T4·prefix 复用）+ [TMPE] 上次清理活动日期（.journal 最新落笔·清理节奏可见性）。verify_delivery ARCHIVE_DOCS 登记 +2（§11.2「tier2 须登记」条款）；archive/README 台账 2 行 + 结构树。
+
+**验证**：拆分守恒断言 + archive_tier2/check_archive_health --self-test 双过 + 单测 5/5 + 探针 strict rc=0（三件 tier2 全 ≤1MB）+ 提示位直测（[ARCHIVE] 前缀行与清理日期行在位）+ 全量 verify rc=0 见状态行。
+
+> - **状态**：已收官（`71a1add4`·verify 全量 rc=0 + 单测 5/5 + 自测双过·tier2 三件全 ≤1MB·提示位四件齐）
 
 ### W994（2026-10-28）：归档系统打磨批（tier-2 规则机器化：探针+常驻工具+双件实跑回线）
 
