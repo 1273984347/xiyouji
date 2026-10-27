@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W985），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W986），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,22 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W986（2026-10-27）：回目页 6 张线描版换主体重出批（用户观感反馈回炉·同名 stem 覆盖）
+
+
+
+> **来源**：用户 2026-10-27 12:26 对 W984 批回目页 6 张线描版的观感反馈「一般算不上好看」+ 12:35 裁决「换主体重出一版」。
+>
+> **让号留痕**：取号时 **W985 已被并行会话占用**（工具文档三件批·在途未提交·占 CHANGELOG / AGENTS / HANDOVER / 台账等共享面）⇒ 按「先落地者保留」让号 **W986**；共享面待 W985 收官后补登记。
+>
+> - **文件**：docs/11-方案报告/计划方案/T32-任务计划执行与经验沉淀报告-2026-10-27.md、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/README.md、docs/agent/pitfalls.md、docs/10-方法论沉淀/素材批处理与判据自证方法论.md、AGENTS.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、scripts/output/file-index.md、scripts/output/_w986_spec.json、scripts/output/_cascade_files_W986.txt。（**资产面已由 `9841c05d` 落地**：6 张母版 png/webp 同名覆盖 + 6 份原件 + 6 个站点版 webp + 全目录拼图 + 6 页 alt 文本更新 + `assets/promo/plate-set/README.md` 口径更新）
+
+**本批要点**：① **根因**——同角色 + 同画幅 + 同母版段 + 同构图范式的第二张图 ⇒ 观感必然重复，而 **J1–J10 全绿、缩略拼图也看不出**（坑表 E-05）⇒ 只有用户目视能判定；② **处置**——6 张**同名 stem 覆盖**（`plate-line-37..42`），主体全换此前未画过的角色（巨灵神 / 六贼头目 / 惠岸行者木叉 / 黎山老母 / 巡河夜叉 / 御马监丞），角色·体型·道具·姿态各异 ⇒ **页面图源路径不变、只换 alt 文本**；③ **6 个浓墨渲染版文件原样保留**（用户 2026-10-27 08:25 明令）⇒ 页面只用线描版，浓墨版作可回退存量；④ 登记面补齐时遇 **W985 在途** ⇒ 共享面等其收官后写；且实测**部分提交（pathspec）在共享面有在途批次时必被 C4-f 判红**（临时索引缺在途批次的收官内容）⇒ 改全量提交并声明代提（W932 先例）⇒ 坑表 +2 条（75 → 77）。
+
+**验证**：母版判据 J1–J10 **76/76 FAIL 0** · 站点版裁切验算 **76/76 FAIL 0**（6 张新主体主体顶余量 6 px·地面留白 93–141 px）· 负样本自检可证伪（坏样本被 J1 抓出）· 纸色归一残差 ≤ 0.5/255 · 母版段 249 字符逐字复用 · 同名覆盖前提断言 6/6 · 人眼逐张复核 6/6 · 6 页 alt 文本全部更新 · **6 个浓墨版文件逐个核验仍在** · 计划方案合规门禁 0 FAIL · 全量门禁 55/55 段全绿。
+
+> - **状态**：已收官（内容批 `9841c05d`·verify 全量 55/55 段全绿·母版判据 76/76 FAIL 0·裁切验算 76/76 FAIL 0·6 个浓墨版原文件保留未删·reader 有题图页仍 81 页）
 
 ### W985（2026-10-27）：工具文档三件批（场景路由表 + 指针化修数 + 机器清单 171 件挂刷新链）
 
