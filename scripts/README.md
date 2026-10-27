@@ -17,6 +17,8 @@
 | 收官自检（段状态 vs git 事实） | `ledger_close_check.py` | 现役段 0 未收官 = 收官干净 |
 | CHANGELOG / file-index 超窗回窗 | `archive_segments.py --apply` | 判据=体积窗 C1/C2（110 段）；级联收官 [SIZE] 提示位会点名 |
 | 台账对账表超窗修剪 | `archive_ledger_rows.py --apply` | 判据=C3（60 行）；号序切分·守恒五道 |
+| **归档件超 1MB 二级归档** | `archive_tier2.py --file changelog\|file-index --apply` | 判据=§11.2 1MB 线（check_archive_health T1·W994 实测双破线首跑回线）；守恒五道 |
+| 归档区健康体检（体积/台账对账/冷存储警告） | `check_archive_health.py` | 报告型（`--strict` 门禁候选）；级联收官 [ARCHIVE] 提示位 |
 | 单件/小批退役归档 | `archive_file.py` | `--dry-run` 先行；**大批量**按 archive/README「手动组行」条款（W977 先例：语料级引用剔除→批量 git mv→组行） |
 | tmpe 临时区盘点 / 清理 / 沉淀扫描 | `tmpe_tidy.py` | 默认盘点 / `--plan --older N` / `--tool-candidates`；删除须主人确认+回收站 |
 | 统计口径刷新（含标记自动跟随） | `stats.py --w <批号>` | C5b 对账面 `<!--stats:KEY-->` 标记由 sweep 自动刷——**禁手工刷标记** |

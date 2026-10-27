@@ -4,15 +4,16 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-27 23:38
+生成时间：2026-10-28 05:24
 
-共 **194** 件（门禁与校验 64 · 批次与登记 10 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 47 · 一次性（下划线前缀） 63）
+共 **196** 件（门禁与校验 65 · 批次与登记 11 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 47 · 一次性（下划线前缀） 63）
 
-## 门禁与校验（64）
+## 门禁与校验（65）
 
 | 脚本 | 用途 |
 |:---|:---|
 | `check_agents_layers.py` | AGENTS 分层完整性门禁（第 41 槽 · W709）——L1 摘要层与 L2 主题层的结构防线。 |
+| `check_archive_health.py` | check_archive_health.py — 归档区健康探针（W994 建·报告型 exit 0）。 |
 | `check_chapter_stats_sync.py` | check_chapter_stats_sync.py — chapter_stats 双源同步校验（S-24 家族化首对·W699）。 |
 | `check_chart_colorblind.py` | check_chart_colorblind.py — 第 29 门禁 · 图表配色色盲安全（PD-1a · W653） |
 | `check_chart_data.py` | check_chart_data.py — 图表静态自洽门禁（W551 挂载·verify_delivery 第 24 门禁）。 |
@@ -77,13 +78,14 @@
 | `verify_delivery.py` | verify_delivery.py — 零依赖交付校验门禁（Senior Developer 设立） |
 | `verify_v2_pages.js` | v2.0 新功能验证：dashboard 全站搜索浮层 + 3 新页面加载 + console 错误检查 |
 
-## 批次与登记（10）
+## 批次与登记（11）
 
 | 脚本 | 用途 |
 |:---|:---|
 | `archive_file.py` | archive_file.py — 项目归档工具（W735 建·文档规范 §5 配套执行器）。 |
 | `archive_ledger_rows.py` | archive_ledger_rows.py — 台账对账表行归档常驻工具（W970 建·W968 一次性拆分的工具化）。 |
 | `archive_segments.py` | archive_segments.py — 治理文档版段滚动归档常驻工具（W960 建 · W921 三道守恒断言沉淀）。 |
+| `archive_tier2.py` | archive_tier2.py — 归档件二级归档工具（W994 建·文档规范 §11.2 tier-2 条款执行器）。 |
 | `batch_cascade.py` | batch_cascade.py — W 批次文档级联常驻脚本（W542 新建·AGENTS §4.3 三新规④配套）。 |
 | `check_review_trigger.py` | check_review_trigger.py — 复盘触发器（W956 建 · W954 复盘报告 P-43-02 / WF-08-b）。 |
 | `ledger_backfill.py` | ledger_backfill.py — 台账登记行的**独占回填**工具（W931 共享面串行化机制·层 2 判据 B） |

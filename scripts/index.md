@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（200）
+## 文件（202）
 
 ### Markdown 文档
 
@@ -126,6 +126,7 @@
 - `archive_file.py`
 - `archive_ledger_rows.py`
 - `archive_segments.py`
+- `archive_tier2.py`
 - `backfill_changelog.py`
 - `baseline_snapshot.py`
 - `batch_cascade.py`
@@ -134,6 +135,7 @@
 - `bump_version.py`
 - `cascade_lock.py`
 - `check_agents_layers.py`
+- `check_archive_health.py`
 - `check_chapter_stats_sync.py`
 - `check_chart_colorblind.py`
 - `check_chart_data.py`
