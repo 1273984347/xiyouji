@@ -72,6 +72,12 @@ archive/
 | `archive/scripts/batches/w9xx/`（+151 件） | scripts/ 顶层 `_` 一次性件（引用剔除后本组 151 件·含 1 件 _w954_review_evidence 复盘取证锚点复位） | W977 | 2026-10-27 | 一次性/诊断件批量退役（体检登记项·语料级引用剔除后 287 件入库·15 件现役硬保留·152 件 S4 本地件不入仓） |
 
 ---
+| `archive/scripts/batches/w9xx/_w988_close.py` | `scripts/_w988_close.py` | W992 | 2026-10-27 | W988 并行批遗留一次性件·零引用·W992 定向退役 |
+| `archive/scripts/batches/w9xx/_w988_pitfalls2.py` | `scripts/_w988_pitfalls2.py` | W992 | 2026-10-27 | W988 并行批遗留一次性件·零引用·W992 定向退役 |
+| `archive/scripts/batches/w9xx/_w988_record_adoption.py` | `scripts/_w988_record_adoption.py` | W992 | 2026-10-27 | W988 并行批遗留一次性件·零引用·W992 定向退役 |
+| `archive/scripts/batches/w9xx/_w988_sync_87.py` | `scripts/_w988_sync_87.py` | W992 | 2026-10-27 | W988 并行批遗留一次性件·零引用·W992 定向退役 |
+
+---
 
 ## 三、引用与检索约定
 
