@@ -41,6 +41,13 @@ OG_ZH_ALLOWED = {OG_IMAGE_ZH} | {
     for i, kw in enumerate(
         ["kongkong", "tangseng", "bailongma", "jingubang", "bajiaoshan", "jingping",
          "qujingchuanshan", "hequshiqiao", "shankouguanai", "canjuan", "gudeng", "tongjing"], 1)
+} | {
+    # W988（依用户 2026-10-27 指令「分回次 og:image」授权改管控件·W922「用户裁决批准改管控件」先例）：
+    # og:image 分章化后，中文站页的 og:image 取「该页首屏第一张配图」的专属裁切版
+    # （site/static/images/og-*.webp）⇒ 白名单改为**目录派生式**，后续新增专属分享图不必再改门禁。
+    # en 页维持单值（英文封面·见 og_image_ok）。
+    BASE + "static/images/" + p.name
+    for p in (SITE / "static" / "images").glob("og-*.webp")
 }
 # 两个排除面语义不同：SEO 注入面=855 页（只排模板壳，W771 现役实测）；
 # sitemap 收录面=851 页（与 verify_delivery 现役 sitemap 门禁期望集一致：另排本地工具页两页 + 两个 data/-view 辅助页；404.html 按门禁要求收录）

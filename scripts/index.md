@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（183）
+## 文件（199）
 
 ### Markdown 文档
 
@@ -103,6 +103,22 @@
 - `_w987_family_scan.py`
 - `_w987_insert_scenes.py`
 - `_w987_make_spec.py`
+- `_w988_card_sheet.py`
+- `_w988_docs.py`
+- `_w988_fix_cascade.py`
+- `_w988_fix_eol.py`
+- `_w988_fix_gates.py`
+- `_w988_insert.py`
+- `_w988_inventory.py`
+- `_w988_make_assets.py`
+- `_w988_make_spec.py`
+- `_w988_match.py`
+- `_w988_pitfalls.py`
+- `_w988_plan.py`
+- `_w988_precheck.py`
+- `_w988_sheet.py`
+- `_w988_subject.py`
+- `_w988_verify.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
