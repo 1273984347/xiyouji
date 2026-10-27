@@ -1,0 +1,26 @@
+# Normalize all text files to LF in the repository and working tree (W993).
+# Rationale: mixed EOL (CRLF blobs + autocrlf worktrees) caused a whack-a-mole series
+# of failures — bare-LF injections by tooling into CRLF files, mixed-EOL fail-closed
+# trips in batch_cascade, and \n-anchored patches failing on \r\n files (W971-W989 era).
+# From W993 on: blobs are LF, worktrees are LF, tools build with \n unconditionally.
+* text=auto eol=lf
+
+# Binary assets (explicit — never normalize)
+*.png -text
+*.webp -text
+*.jpg -text
+*.jpeg -text
+*.gif -text
+*.ico -text
+*.woff -text
+*.woff2 -text
+*.ttf -text
+*.eot -text
+*.otf -text
+*.pdf -text
+*.zip -text
+*.mp3 -text
+*.mp4 -text
+*.webm -text
+*.psd -text
+*.ai -text
