@@ -36,7 +36,7 @@
 
 **验证**：gen_tools_inventory --self-test 过 + --check 零差异 + 单测 5/5 + ruff 0 + lint_links scripts 面 0 broken + pytest 全量见状态行。
 
-> - **状态**：在途（认领登记 W985·收官回填随批尾提交补 hash）
+> - **状态**：已收官（`4f62bf68`·verify 全量 rc=0 + 单测 934 过 + ruff 0 + lint_links scripts 面 0 broken·清单 171 件）
 
 ### W984（2026-10-27）：内页题图成套批·第五组（12 张·回目页线描重出 6 + 四库扩量 6·站内线描题图累计 76 张）
 
