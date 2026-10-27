@@ -643,6 +643,15 @@ def main() -> int:
         for rel_target, etype in failed:
             print("  FAIL  %s（%s）" % (rel_target, etype))
         return 3
+    # W985：工具清单机器生成（登记面跟手工较劲的最后一块——随目录文档刷新链同刷）
+    if not args.dry_run:
+        try:
+            import gen_tools_inventory as _gti
+
+            _n = _gti.regen()
+            print("  TOOLS  scripts/output/tools-inventory.md（%d 件）" % _n)
+        except Exception as _exc:  # noqa: BLE001 — 生成失败留痕不阻断目录文档刷新
+            print("  TOOLS  工具清单生成失败（%s）" % _exc)
     if args.dry_run:
         for w in written:
             print("  DRY  " + w)

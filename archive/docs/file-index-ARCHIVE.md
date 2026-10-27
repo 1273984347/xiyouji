@@ -2,7 +2,7 @@
 
 > 本文件归档 file-index.md 中 W031-W087（v2.0.4-v2.0.60）的早期反向索引条目。
 > 现役索引见 [file-index.md](file-index.md)。
-> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865）
+> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867）
  + 2026-10-26（W960 迁入 W843-W845）
  + 2026-10-26（W960 迁入 W700-W842）
 
@@ -9310,3 +9310,42 @@
 | scripts/output/_w864_accent_exemptions.json | W864 | 新增：裁决 2 豁免清单首批（数据语义色片 + 选中态实底） |
 | scripts/output/_w864_spec.json | W864 | 本批 spec 十字段 |
 | docs/00-导读/W批次编号对账表.md | W864 | 认领行与收官回填 |
+## W867 设计迁移 B4 妖怪与神力 10 页（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/monster-background.html | W867 | B4 迁移：容器 + 页脚两处 1280→1120 归并 + seal 淡底 + 间距令牌化 |
+| site/data/monster-capability-radar.html | W867 | B4 迁移：容器令牌化 + KPI 顶条 4→1 + seal 淡底 + 间距令牌化 |
+| site/data/monster-ecology-network.html | W867 | B4 迁移：容器令牌化 + seal 淡底 + 间距令牌化（tab-btn active 进豁免） |
+| site/data/monster-female-network.html | W867 | B4 迁移：容器令牌化 + KPI 顶条 6→1 + seal 淡底 + 间距令牌化 |
+| site/data/monster-hierarchy-network.html | W867 | B4 迁移：容器令牌化 + KPI 顶条按行收敛 + seal 淡底 + 间距令牌化 |
+| site/data/monster-sociology.html | W867 | B4 迁移：容器令牌化 + seal 淡底 + 间距令牌化（signal-card 三态进豁免） |
+| site/data/monster-victims-network.html | W867 | B4 迁移：容器令牌化 + KPI 顶条 6→1 + seal 淡底 + 间距令牌化（victim-card/swatch-bar 进豁免） |
+| site/data/ecology.html | W867 | B4 迁移：容器令牌化 + seal 淡底 + 间距令牌化（damage-pill ×9 / compare-card 进豁免） |
+| site/data/heaven-power-network.html | W867 | B4 迁移：容器令牌化 + KPI 顶条按行收敛 + seal 淡底 + 间距令牌化（role-card.r-king 进豁免） |
+| site/data/underworld-power-network.html | W867 | B4 迁移：容器令牌化 + KPI 顶条按行收敛 + seal 淡底 + 间距令牌化（role-card.r-king 进豁免） |
+| scripts/output/_w867_accent_audit.json | W867 | 新增：B4 朱砂落点审计（文字 54 处·实底逐页定性） |
+| scripts/output/_w867_diff_review.json | W867 | 新增：B4 diff 归渠审查产物 |
+| scripts/output/_w864_accent_exemptions.json | W867 | 登记簿增 W867 分册（语义变体条 18 处·七类） |
+| scripts/output/_w867_spec.json | W867 | 本批 spec 十字段 |
+| docs/00-导读/W批次编号对账表.md | W867 | 认领行与收官回填 |
+
+
+## W866 设计迁移 B3 人物主线 9 页（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/character-appearance.html | W866 | B3 迁移：容器令牌化 + KPI 顶条 4→1 + seal 淡底 + 间距 12 处 |
+| site/data/character-presence-timeline.html | W866 | B3 迁移：容器令牌化 + seal 淡底 + 间距 9 处（顶条已合规） |
+| site/data/character-semantic-network.html | W866 | B3 迁移：容器 1280→1120 归并 + 顶条 6→1 + seal 淡底 + 间距 21 处 |
+| site/data/character-dynamic-network.html | W866 | B3 迁移：容器令牌化 + 顶条 4→1 + seal 淡底 + 间距 18 处 |
+| site/data/character-sentiment-arc.html | W866 | B3 迁移：容器令牌化 + seal 淡底 + 间距 15 处 |
+| site/data/character-relationship-3d.html | W866 | B3 迁移：容器令牌化 + 顶条 5→1 + seal 淡底 + 间距 14 处 |
+| site/data/character-relationship-3d-view.html | W866 | B3 迁移：容器令牌化 + seal 淡底 + 间距 18 处 |
+| site/data/dialogue-sentiment.html | W866 | B3 迁移：容器令牌化 + seal 淡底 + 间距 21 处 |
+| site/data/ai-dialogue.html | W866 | B3 迁移：容器令牌化 + seal 淡底 + step-num 徽章 ×4 淡底 + 间距 21 处 |
+| scripts/output/_w866_accent_audit.json | W866 | 新增：B3 朱砂落点审计（文字 58 处·实底逐页定性） |
+| scripts/output/_w866_diff_review.json | W866 | 新增：B3 diff 归渠审查产物 |
+| scripts/output/_w864_accent_exemptions.json | W866 | 升级多批登记簿 + W866 增补（选中态 4·负向指示 1·主行动 1） |
+| scripts/output/_w866_spec.json | W866 | 本批 spec 十字段 |
+| docs/00-导读/W批次编号对账表.md | W866 | 认领行与收官回填 |

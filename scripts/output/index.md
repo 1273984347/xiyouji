@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（584）
+## 文件（590）
 
 ### Markdown 文档
 
@@ -21,6 +21,7 @@
 - `file-index.md`
 - `rag_eval_report.md`
 - `stats-index.md`
+- `tools-inventory.md`
 - `观测基线快照.md`
 
 ### Python 脚本
@@ -222,6 +223,7 @@
 - `_cascade_files_W982.txt`
 - `_cascade_files_W983.txt`
 - `_cascade_files_W984.txt`
+- `_cascade_files_W985.txt`
 - `_sync_analysis_manifest.json`
 - `_vermilion_solid_cache.json`
 - `_vermilion_solid_report.json`
@@ -571,6 +573,9 @@
 - `_w984_retry_43-luoshanv.json`
 - `_w984_retry_map.json`
 - `_w984_spec.json`
+- `_w985_spec.json`
+- `_w986_batch1.json`
+- `_w986_gen.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`
@@ -611,6 +616,7 @@
 - `_w983_zoom.png`
 - `_w984_sheet.png`
 - `_w984_zoom.png`
+- `_w986_sheet.png`
 
 ### 其他
 

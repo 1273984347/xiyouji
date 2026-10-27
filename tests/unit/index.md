@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（44）
+## 文件（45）
 
 ### Python 脚本
 
@@ -52,6 +52,7 @@
 - `test_stats_sync.py`
 - `test_tmpe_tidy.py`
 - `test_tool_scripts_cli.py`
+- `test_tools_inventory.py`
 - `test_tracked_files.py`
 - `test_verify_failclosed.py`
 - `test_verify_registry.py`

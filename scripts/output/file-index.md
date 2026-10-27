@@ -11,6 +11,33 @@
 ---
 
 
+## W985 工具文档三件批（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/README.md | W985 | 场景速查路由表（15 场景→工具）+ 归档计数指针化（45 个→历次治理台账指针）+ 全量清单指针 + docs_index 321 篇字面量指针化
+| scripts/gen_tools_inventory.py | W985 | 新建：顶层工具清单机器生成器（tracked 顶层逐件·docstring 提取·分类规则·--check 对账·--self-test）
+| scripts/output/tools-inventory.md | W985 | 机器生成清单首版（171 件·七类分节·禁手改·随刷新链更新）
+| scripts/gen_folder_docs.py | W985 | --refresh 刷新链挂载工具清单再生成（失败留痕不阻断）
+| tests/unit/test_tools_inventory.py | W985 | 单测 5 例（分类优先级/用途提取/分节渲染/check 漂移判据/实盘行数回归锁）
+| docs/00-导读/W批次编号对账表.md | W985 | W985 认领行与收官回填
+| CHANGELOG.md | W985 | W985 段
+| HANDOVER.md | W985 | 级联头尾链与里程碑块
+| README.md | W985 | 当前批次版本行
+| STRUCTURE.md | W985 | 当前批次版本行
+| docs/00-导读/项目说明.md | W985 | 当前批次版本行
+| .github/workflows/README.md | W985 | 工作流层版本面推进 W985
+| site/index.html | W985 | 页脚批次链插入 W985
+| site/data/cross-time-danmaku.html | W985 | 页脚批次链插入 W985
+| site/data/tag-cloud.html | W985 | 页脚批次链插入 W985
+| site/dukou-engine.html | W985 | 页脚批次链插入 W985
+| AGENTS.md | W985 | 版本脚注条目
+| archive/docs/AGENTS-ARCHIVE.md | W985 | 脚注滚动迁入的最老条目
+| CITATION.cff | W985 | version 同步为 W985
+| scripts/output/file-index.md | W985 | W985 段插入
+| scripts/output/_w985_spec.json | W985 | 本批级联 spec
+| scripts/output/_cascade_files_W985.txt | W985 | 级联落盘清单
+
 ## W984 内页题图成套批·第四组（2026-10-27）
 
 | 文件 | W | 说明 |
@@ -3338,46 +3365,5 @@
 | scripts/output/_w864_accent_exemptions.json | W868 | 登记簿增 W868 分册（语义变体 26 处） |
 | scripts/output/_w868_spec.json | W868 | 本批 spec 十字段 |
 | docs/00-导读/W批次编号对账表.md | W868 | 认领行与收官回填 |
-
-
-## W867 设计迁移 B4 妖怪与神力 10 页（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/monster-background.html | W867 | B4 迁移：容器 + 页脚两处 1280→1120 归并 + seal 淡底 + 间距令牌化 |
-| site/data/monster-capability-radar.html | W867 | B4 迁移：容器令牌化 + KPI 顶条 4→1 + seal 淡底 + 间距令牌化 |
-| site/data/monster-ecology-network.html | W867 | B4 迁移：容器令牌化 + seal 淡底 + 间距令牌化（tab-btn active 进豁免） |
-| site/data/monster-female-network.html | W867 | B4 迁移：容器令牌化 + KPI 顶条 6→1 + seal 淡底 + 间距令牌化 |
-| site/data/monster-hierarchy-network.html | W867 | B4 迁移：容器令牌化 + KPI 顶条按行收敛 + seal 淡底 + 间距令牌化 |
-| site/data/monster-sociology.html | W867 | B4 迁移：容器令牌化 + seal 淡底 + 间距令牌化（signal-card 三态进豁免） |
-| site/data/monster-victims-network.html | W867 | B4 迁移：容器令牌化 + KPI 顶条 6→1 + seal 淡底 + 间距令牌化（victim-card/swatch-bar 进豁免） |
-| site/data/ecology.html | W867 | B4 迁移：容器令牌化 + seal 淡底 + 间距令牌化（damage-pill ×9 / compare-card 进豁免） |
-| site/data/heaven-power-network.html | W867 | B4 迁移：容器令牌化 + KPI 顶条按行收敛 + seal 淡底 + 间距令牌化（role-card.r-king 进豁免） |
-| site/data/underworld-power-network.html | W867 | B4 迁移：容器令牌化 + KPI 顶条按行收敛 + seal 淡底 + 间距令牌化（role-card.r-king 进豁免） |
-| scripts/output/_w867_accent_audit.json | W867 | 新增：B4 朱砂落点审计（文字 54 处·实底逐页定性） |
-| scripts/output/_w867_diff_review.json | W867 | 新增：B4 diff 归渠审查产物 |
-| scripts/output/_w864_accent_exemptions.json | W867 | 登记簿增 W867 分册（语义变体条 18 处·七类） |
-| scripts/output/_w867_spec.json | W867 | 本批 spec 十字段 |
-| docs/00-导读/W批次编号对账表.md | W867 | 认领行与收官回填 |
-
-
-## W866 设计迁移 B3 人物主线 9 页（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/character-appearance.html | W866 | B3 迁移：容器令牌化 + KPI 顶条 4→1 + seal 淡底 + 间距 12 处 |
-| site/data/character-presence-timeline.html | W866 | B3 迁移：容器令牌化 + seal 淡底 + 间距 9 处（顶条已合规） |
-| site/data/character-semantic-network.html | W866 | B3 迁移：容器 1280→1120 归并 + 顶条 6→1 + seal 淡底 + 间距 21 处 |
-| site/data/character-dynamic-network.html | W866 | B3 迁移：容器令牌化 + 顶条 4→1 + seal 淡底 + 间距 18 处 |
-| site/data/character-sentiment-arc.html | W866 | B3 迁移：容器令牌化 + seal 淡底 + 间距 15 处 |
-| site/data/character-relationship-3d.html | W866 | B3 迁移：容器令牌化 + 顶条 5→1 + seal 淡底 + 间距 14 处 |
-| site/data/character-relationship-3d-view.html | W866 | B3 迁移：容器令牌化 + seal 淡底 + 间距 18 处 |
-| site/data/dialogue-sentiment.html | W866 | B3 迁移：容器令牌化 + seal 淡底 + 间距 21 处 |
-| site/data/ai-dialogue.html | W866 | B3 迁移：容器令牌化 + seal 淡底 + step-num 徽章 ×4 淡底 + 间距 21 处 |
-| scripts/output/_w866_accent_audit.json | W866 | 新增：B3 朱砂落点审计（文字 58 处·实底逐页定性） |
-| scripts/output/_w866_diff_review.json | W866 | 新增：B3 diff 归渠审查产物 |
-| scripts/output/_w864_accent_exemptions.json | W866 | 升级多批登记簿 + W866 增补（选中态 4·负向指示 1·主行动 1） |
-| scripts/output/_w866_spec.json | W866 | 本批 spec 十字段 |
-| docs/00-导读/W批次编号对账表.md | W866 | 认领行与收官回填 |
 
 
