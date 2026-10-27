@@ -2,7 +2,7 @@
 
 > 本文件归档 file-index.md 中 W031-W087（v2.0.4-v2.0.60）的早期反向索引条目。
 > 现役索引见 [file-index.md](file-index.md)。
-> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875）
+> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878）
  + 2026-10-26（W960 迁入 W843-W845）
  + 2026-10-26（W960 迁入 W700-W842）
 
@@ -7910,3 +7910,71 @@
 | scripts/output/_w864_accent_exemptions.json | W873 | 登记簿增 W873 分册（语义色片 15 处） |
 | scripts/output/_w873_spec.json | W873 | 本批 spec 十字段 |
 | docs/00-导读/W批次编号对账表.md | W873 | 认领行与收官回填 |
+## W878 OG 分享缩略图素材成套批（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/og-01-kongkong.webp | W878 | 新增：OG 分享图 01/12·悟空（猴相背影+金箍棒+红绦·净空带 222px·二版） |
+| site/static/images/og-02-tangseng.webp | W878 | 新增：OG 分享图 02/12·唐僧（僧影+锡杖+背光晕·净空带 185px） |
+| site/static/images/og-03-bailongma.webp | W878 | 新增：OG 分享图 03/12·白龙马（白马回首·鬃如云·朱砂鞍鞯·净空带 294px） |
+| site/static/images/og-04-jingubang.webp | W878 | 新增：OG 分享图 04/12·金箍棒（棒身金环+朱砂缠绳·净空带 163px） |
+| site/static/images/og-05-bajiaoshan.webp | W878 | 新增：OG 分享图 05/12·芭蕉扇（半展大叶·朱砂扇柄结·净空带 198px） |
+| site/static/images/og-06-jingping.webp | W878 | 新增：OG 分享图 06/12·净瓶（白玉瓶+柳枝+朱砂丝绦·净空带 204px·二版） |
+| site/static/images/og-07-qujingchuanshan.webp | W878 | 新增：OG 分享图 07/12·曲径穿山（远峰层叠+朱砂小旗·净空带 187px·二版） |
+| site/static/images/og-08-hequshiqiao.webp | W878 | 新增：OG 分享图 08/12·河曲石桥（石桥+舟+朱砂小灯·净空带 182px·二版） |
+| site/static/images/og-09-shankouguanai.webp | W878 | 新增：OG 分享图 09/12·山口关隘（断崖石阶+孤塔+朱砂崖印·净空带 222px·二版） |
+| site/static/images/og-10-canjuan.webp | W878 | 新增：OG 分享图 10/12·半展残卷（空卷+轴头+朱砂签条·净空带 222px·二版） |
+| site/static/images/og-11-gudeng.webp | W878 | 新增：OG 分享图 11/12·孤灯（铜台灯+灯焰光晕+浓墨夜色·净空带 195px） |
+| site/static/images/og-12-tongjing.webp | W878 | 新增：OG 分享图 12/12·铜镜（古镜+淡影+朱砂小印·净空带 252px） |
+| scripts/output/_w878_spec.json | W878 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
+| docs/00-导读/W批次编号对账表.md | W878 | 认领行与收官回填 |
+
+
+## W877 计划方案未落地项核查批（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/计划方案/T09-任务计划执行与经验沉淀报告-2026-10-22.md | W877 | 计划方案未落地项核查 + 模板符合性复核报告（217 项核销 · 32 判据矩阵） |
+| docs/11-方案报告/README.md | W877 | §二 登记 T-09（计数 10→12 篇 + 编号列订正 1–12）+ 新增 §四 交付物模板规范（强制） |
+| docs/INDEX.md | W877 | 文档索引重建（736 → 737 篇） |
+| scripts/output/_w877_spec.json | W877 | 本批 spec 十字段（供补段批按号序回写 W875–W877） |
+| scripts/output/_w877_template_matrix.json | W877 | 11 份计划件 × 32 项判据符合性矩阵 |
+| scripts/output/colorblind-baseline.txt | W877 | 色盲安全存量基线重冻（17417 → 17430 对·代做 W876 阶段 5 机检门禁） |
+| scripts/output/stats.json | W877 | report_docs 45→46 刷新（stats.py --w W877） |
+| scripts/output/stats-changelog.json | W877 | 同批 stats 变更史刷新 |
+| scripts/output/stats-index.md | W877 | 同批 stats 索引刷新 |
+| site/data/search.html | W877 | 站内搜索索引重生成（新增 T-09 条目·zh 840 / en 882） |
+| site/en/search.html | W877 | 英文站搜索索引重生成 + CSP 哈希重算（2 页·856 页零漂移） |
+| STRUCTURE.md | W877 | report_docs 标记 45→46 同步 |
+| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W877 | report_docs 标记 45→46 同步（连带面） |
+| docs/00-导读/W批次编号对账表.md | W877 | W877 认领行 + 递延版段豁免 bullet + W858/W860/W865 三行收官回填 |
+
+
+## W876 对比度专项批·C 渠与值切换（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/tokens.css | W876 | --chart-3 #C9A063→#B38F58 · 暗色 --accent #E0604F→#E46250 |
+| site/data/（63 页） | W876 | C 渠规则级换色 173 条 color 规则（--accent→--accent-text） |
+| site/en/ site/reader/（326 页） | W876 | INLINED 副本两处令牌值靶向同步（不走 regenerate·保迁移成果） |
+| site/dukou-engine.html | W876 | 根级 INLINED 页两处令牌值靶向修复（inline_css 根级 skip 绕过） |
+| scripts/_w876_c_text_swap.py | W876 | C 渠规则级换色器（类名+标签双模式·--audit 指定审计） |
+| scripts/_w876_value_check.py | W876 | 值切换计算样式锚点校验（搜索式断言·重建版·四组锚点） |
+| scripts/_w876_site_audit.py | W876 | 新增：C 渠+朱砂实底审计器（原审计器未入库·按产物校准复现 1087/457） |
+| scripts/_w876_diff_audit.py | W876 | 新增：静态 diff 分类审计（三类之外与 HEAD 逐字节一致·负向查视） |
+| scripts/_w876_baseline_probe.py | W876 | 新增：24 页前后计算样式对拍（只现三类预期变迁） |
+| scripts/_w876_backfill_w875.py | W876 | 新增：W875 单段补数驱动（补段工具无筛选·防误补 W877-W881） |
+| scripts/output/_w876_site_audit.json | W876 | 前置审计（1,087 处落 bg·64 页） |
+| scripts/output/_w876_site_audit_final.json | W876 | 终态审计（253 处·27 页·复评清单 6 页） |
+| scripts/output/_w876_site_audit_head.json | W876 | HEAD 快照校准审计（精确复现 1,087/64·验证快照=审计输入态） |
+| scripts/output/_w876_baseline_before.json | W876 | 24 页 before 计算样式快照（HEAD 树·双主题） |
+| scripts/output/_w876_baseline_after.json | W876 | 24 页 after 计算样式快照（重建树·双主题） |
+| scripts/output/_w876_baseline_diff.json | W876 | 对拍分类结果（2,195 处差异零未预期·T1-T4 四类） |
+| scripts/output/_w876_c_swap_report.json | W876 | 换色报告（63 页·173 规则·复评清单） |
+| scripts/output/_w876_spec.json | W876 | 本批 spec 十字段 |
+| docs/00-导读/design.md | W876 | 设计文档令牌表（两处值切换同步） |
+| scripts/output/design-tokens.json | W876 | 令牌导出版（两处值切换同步） |
+| scripts/index.md | W876 | 脚本册（+4 个 _w876 脚本） |
+| scripts/output/index.md | W876 | 产物册（+4 个 _w876 JSON） |
+| scripts/output/README.md | W876 | 产物目录说明（计数同步） |
+| docs/00-导读/W批次编号对账表.md | W876 | 认领行与收官回填 + BL-33 登记 |
