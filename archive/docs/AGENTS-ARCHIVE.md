@@ -603,3 +603,8 @@
 ```text
 2026-10-27（W991）级联运行锁与提交隔离批：cascade_lock 运行锁（五态自测）+ batch_cascade 接线 + preflight WARN + safe_commit 无 pathspec 拒绝守卫
 ```
+以下为 AGENTS.md 版本脚注早期条目（W993-W993）段的原文（单行沿革链·W998 起级联自动滚动迁入·grep 查勿通读）：
+
+```text
+2026-10-27（W993）全仓行尾定形批：.gitattributes eol=lf + renormalize + 工作树重写 4688 文件全 LF——CRLF 时代终结
+```
