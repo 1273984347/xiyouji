@@ -11,6 +11,24 @@
 ---
 
 
+## W993 全仓行尾定形批（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .gitattributes | W993 | text=auto eol=lf + 二进制显式排除 |
+| .git-blame-ignore-revs | W993 | 登记定形提交 84cce358 |
+| docs/agent/pitfalls.md | W993 | 行尾定形时代结束条目（CRLF 锚定作废） |
+| AGENTS.md | W993 | 坑位计数 88→89 两处同步 |
+
+
+## W992 一次性件定向退役与提示位口径校准批（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| archive/scripts/batches/w9xx/ | W992 | 迁入 4 件（_w988 族·零引用） |
+| scripts/batch_cascade.py | W992 | [SCRIPTS] 提示位口径校准 |
+
+
 ## W991 级联运行锁与提交隔离批（2026-10-27）
 
 | 文件 | W | 说明 |
