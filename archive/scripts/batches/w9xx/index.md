@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（151）
+## 文件（155）
 
 ### Python 脚本
 
@@ -164,6 +164,10 @@
 - `_w975_cascade.py`
 - `_w975_sink_experience.py`
 - `_w975_tweak.py`
+- `_w988_close.py`
+- `_w988_pitfalls2.py`
+- `_w988_record_adoption.py`
+- `_w988_sync_87.py`
 
 ### JavaScript / TypeScript
 
