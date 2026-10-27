@@ -535,6 +535,14 @@ def render(abs_dir: str, kind: str, disk: bool = False) -> str:
     """
     body = (build_index(abs_dir, disk=disk) if kind == "index.md"
             else build_readme(abs_dir, disk=disk))
+    # W994：冷存储目录的禁运行警告**在生成模板级注入**——手工写入会被 --refresh 覆写（W994 实证：
+    # batches/README.md 为生成物所有，警告落盘一轮即被刷没），模板级才可存活
+    norm_dir = abs_dir.replace(os.sep, "/")
+    if kind == "README.md" and norm_dir.endswith("archive/scripts/batches"):
+        body = body.rstrip("\n") + (
+            "\n\n> **⚠ 冷存储警告（W994）**：本目录全部文件为**冷存储退役件**——使命已终结，**禁直接运行**。\n"
+            "> 归档件内的路径假设（ROOT 上溯等）在归档位下全部失效（W836 实证）且不参与 ruff/测试维护；\n"
+            "> 查历史实现用 `git show <归档提交>:<路径>`。健康对账见 `scripts/check_archive_health.py`。\n")
     role = ("逐文件索引（机器可读·与 README.md 分工：本文件列清单、README 讲用途约定）"
             if kind == "index.md" else
             "目录导读（人读·与 index.md 分工：本文件讲用途约定、index.md 列清单）")

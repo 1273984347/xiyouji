@@ -11,6 +11,39 @@
 ---
 
 
+## W994 归档系统打磨批（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_archive_health.py | W994 | 新建：归档区健康探针（T1 tier-2 判距/T2 台账组行计数对账/T3 冷存储警告在位/T4 汇总·报告型 --strict 门禁候选·--self-test）
+| scripts/archive_tier2.py | W994 | 新建：二级归档常驻工具（键序前缀切分·守恒五道·§11.2 1MB 线执行器·--self-test）
+| tests/unit/test_archive_health.py | W994 | 单测 5 例（T1 三态/T2 语义含 batches 门面件排除/切分前缀/混层键 0）
+| archive/docs/CHANGELOG-ARCHIVE.md | W994 | tier-2 实跑回线：1198KB→900KB（迁出 144 段 W400-W559 至 tier2·指针行入头部链）
+| archive/docs/CHANGELOG-ARCHIVE-tier2.md | W994 | 承接 144 段（W400-W559·298KB）
+| archive/docs/file-index-ARCHIVE.md | W994 | tier-2 实跑回线：1070KB→816KB（迁出 10 目录节至 tier2·指针行入头部链）
+| archive/docs/file-index-ARCHIVE-tier2.md | W994 | 新建（§11.2 二级归档层·首批 10 节 254KB）
+| archive/README.md | W994 | 存量组行补登记 3 条（顶层 47 件/w4xx 11 件/w5xx 149 件·此前仅结构树目录级提及·探针 T2 对账基线）
+| archive/scripts/batches/README.md | W994 | 冷存储警告补入（W836 ROOT 上溯失效·禁直接运行·T3 判据标的）
+| scripts/README.md | W994 | 场景速查 +2 行（二级归档/健康体检路由）
+| docs/00-导读/W批次编号对账表.md | W994 | W994 认领行与收官回填
+| CHANGELOG.md | W994 | W994 段
+| HANDOVER.md | W994 | 级联头尾链与里程碑块
+| README.md | W994 | 当前批次版本行
+| STRUCTURE.md | W994 | 当前批次版本行
+| docs/00-导读/项目说明.md | W994 | 当前批次版本行
+| .github/workflows/README.md | W994 | 工作流层版本面推进 W994
+| site/index.html | W994 | 页脚批次链插入 W994
+| site/data/cross-time-danmaku.html | W994 | 页脚批次链插入 W994
+| site/data/tag-cloud.html | W994 | 页脚批次链插入 W994
+| site/dukou-engine.html | W994 | 页脚批次链插入 W994
+| AGENTS.md | W994 | 版本脚注条目
+| archive/docs/AGENTS-ARCHIVE.md | W994 | 脚注滚动迁入的最老条目
+| CITATION.cff | W994 | version 同步为 W994
+| scripts/output/file-index.md | W994 | W994 段插入
+| scripts/output/_w994_spec.json | W994 | 本批级联 spec
+| scripts/output/_cascade_files_W994.txt | W994 | 级联落盘清单
+| scripts/gen_folder_docs.py | W994 | 冷存储警告模板级注入（archive/scripts/batches README·防 refresh 覆写） |
+
 ## W993 全仓行尾定形批（2026-10-27）
 
 | 文件 | W | 说明 |
