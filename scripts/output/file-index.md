@@ -11,6 +11,35 @@
 ---
 
 
+## W995 tier2 按W段拆分批（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| archive/docs/CHANGELOG-ARCHIVE-tier2.md | W995 | 拆分：1044KB→746KB（W001-W399·210 段留存·范围件 W400-W559 抽出）
+| archive/docs/CHANGELOG-ARCHIVE-tier2-W400-W559.md | W995 | 新建范围件（W400-W559·144 段 299KB·范围命名约定首件）
+| scripts/archive_tier2.py | W995 | 追加逻辑升级：容量判断（容器+迁出 >1MB → 自动开范围命名新件·合规头部生成）+ LIMIT 常量
+| scripts/check_archive_health.py | W995 | T1b 升格：tier2 破线从登记观察升为 problem（拆分约定后可执行）+ glob 扩范围件 + run(prefix) 参数
+| scripts/batch_cascade.py | W995 | 收官提示位扩展（W994 延后件·W992 校准提交后落）：[ARCHIVE] 健康行 + [TMPE] 上次清理活动日期（独立尾部块）
+| scripts/verify_delivery.py | W995 | ARCHIVE_DOCS 登记 +2（file-index-ARCHIVE-tier2.md·CHANGELOG-ARCHIVE-tier2-W400-W559.md·§11.2 tier2 须登记条款）
+| archive/README.md | W995 | 台账 2 行（范围件/file-index-tier2）+ 结构树补范围件
+| docs/00-导读/W批次编号对账表.md | W995 | W995 认领行与收官回填
+| CHANGELOG.md | W995 | W995 段
+| HANDOVER.md | W995 | 级联头尾链与里程碑块
+| README.md | W995 | 当前批次版本行
+| STRUCTURE.md | W995 | 当前批次版本行
+| docs/00-导读/项目说明.md | W995 | 当前批次版本行
+| .github/workflows/README.md | W995 | 工作流层版本面推进 W995
+| site/index.html | W995 | 页脚批次链插入 W995
+| site/data/cross-time-danmaku.html | W995 | 页脚批次链插入 W995
+| site/data/tag-cloud.html | W995 | 页脚批次链插入 W995
+| site/dukou-engine.html | W995 | 页脚批次链插入 W995
+| AGENTS.md | W995 | 版本脚注条目
+| archive/docs/AGENTS-ARCHIVE.md | W995 | 脚注滚动迁入的最老条目
+| CITATION.cff | W995 | version 同步为 W995
+| scripts/output/file-index.md | W995 | W995 段插入
+| scripts/output/_w995_spec.json | W995 | 本批级联 spec（补建）
+| scripts/output/_cascade_files_W995.txt | W995 | 级联落盘清单
+
 ## W994 归档系统打磨批（2026-10-28）
 
 | 文件 | W | 说明 |
