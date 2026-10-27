@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（203）
+## 文件（204）
 
 ### Markdown 文档
 
@@ -136,6 +136,7 @@
 - `build_reader.py`
 - `bump_footer_version.py`
 - `bump_version.py`
+- `cascade_lock.py`
 - `check_agents_layers.py`
 - `check_chapter_stats_sync.py`
 - `check_chart_colorblind.py`

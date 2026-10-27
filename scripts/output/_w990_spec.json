@@ -1,0 +1,30 @@
+{
+ "batch": "W990",
+ "date": "2026-10-27",
+ "title": "W990 内联纪律收口批（查坑表补报错原文 + 工作树吸收条目·88 条）",
+ "desc": "内联纪律收口批：报错原文入查坑表，新增工作树吸收条目，计数链四处同步",
+ "head_entry": "2026-10-27（W990 内联纪律收口批）",
+ "head_sentence": "内联纪律收口批：报错原文入查坑表，新增工作树吸收条目",
+ "changelog_body": "\n\n\n\n> **来源**：用户 2026-10-27 问「其他 Agent 下次还会出现类似问题吗」——评估发现两个可修缺口后令「做」。\n\n> - **文件**：docs/agent/pitfalls.md、AGENTS.md、HANDOVER.md、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、scripts/output/file-index.md、scripts/output/_w990_spec.json、scripts/output/_cascade_files_W990.txt。\n\n**缺口一（撞错检索路走不通）**：查坑表「Python 字符串层转义」行补报错原文 literal——`truncated \\xXX escape` / `unicodeescape` / `invalid escape sequence`——Agent 撞错后 grep 原文即命中本行（此前只有中文描述·按原文检索会漏）。\n\n**缺口二（更大的：静默丢工作）**：新增条目「并行会话在场的未提交工作树编辑会被吸收或覆盖——只有已提交状态是安全停车位」（git/提交/并发 21→22·总数 87→88·计数链四处同步 N4 88=88）。四连环实证：① 未提交编辑被对方重 add 吸收进暂存快照（W985 pitfalls 编辑被 W988 卷入·内联署名保住溯源）；② restore/清偿扫过即覆盖（同批险情：worktree diff 一度归零）；③ 纪律=并行在场禁 `git add -A`（按名单精确暂存）+ 跨批次内容立即提交或留字据——工作树不是停车位；④ 被他方在途件卡门禁（C4-f 假红）按 W932/W984 先例核成色后代提（W988「登记并行 W989 代提事实」双向留痕口径），成色不够则等。\n\n**验证**：N4 88=88 · E1 抽查（literal 与条目各在位）· 全量 verify + pytest 见状态行。\n\n> - **状态**：在途（认领登记 W990·收官回填随批尾提交补 hash）\n",
+ "milestone_block": "- **W990 内联纪律收口批**（两缺口清偿）：\n  - 查坑表补报错原文 literal（grep 原文即中·撞错自愈路打通）\n  - 新条目「工作树编辑会被吸收或覆盖」：并行在场禁 add -A·工作树不是停车位·C4-f 假红代提双向留痕（88 条）",
+ "agents_note": "2026-10-27（W990）补上两块实测量出的防线缺口：转义报错的原文进查坑表，撞错照报错搜索即可命中处方；更毒的一课是多会话共用工作树时未提交编辑会被卷走或覆盖，只有提交进仓的状态才安全，禁全量暂存、代提须双向留痕。",
+ "file_index_rows": [
+  "| docs/agent/pitfalls.md | W990 | 查坑表补报错原文 literal（truncated \\xXX escape/unicodeescape/invalid escape sequence·撞错 grep 即中）+ 新增条目「并行会话在场的未提交工作树编辑会被吸收或覆盖」（git 节 21→22·总数 87→88）",
+  "| AGENTS.md | W990 | 坑位数 87→88（阅读契约+主题视图·git 节 21→22·W990 校）+ 版本脚注条目",
+  "| HANDOVER.md | W990 | 坑位数指针 87→88 两处 + 级联头尾链与里程碑块",
+  "| docs/00-导读/W批次编号对账表.md | W990 | W990 认领行与收官回填",
+  "| CHANGELOG.md | W990 | W990 段",
+  "| README.md | W990 | 当前批次版本行",
+  "| STRUCTURE.md | W990 | 当前批次版本行",
+  "| docs/00-导读/项目说明.md | W990 | 当前批次版本行",
+  "| .github/workflows/README.md | W990 | 工作流层版本面推进 W990",
+  "| site/index.html | W990 | 页脚批次链插入 W990",
+  "| site/data/cross-time-danmaku.html | W990 | 页脚批次链插入 W990",
+  "| site/data/tag-cloud.html | W990 | 页脚批次链插入 W990",
+  "| site/dukou-engine.html | W990 | 页脚批次链插入 W990",
+  "| CITATION.cff | W990 | version 同步为 W990",
+  "| scripts/output/file-index.md | W990 | W990 段插入",
+  "| scripts/output/_w990_spec.json | W990 | 本批级联 spec",
+  "| scripts/output/_cascade_files_W990.txt | W990 | 级联落盘清单"
+ ]
+}
