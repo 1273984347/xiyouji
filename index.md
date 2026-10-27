@@ -27,7 +27,7 @@
 - `xiyouji-agent-web/`
 - `xiyouji-desktop/`
 
-## 文件（22）
+## 文件（24）
 
 ### Markdown 文档
 
@@ -62,6 +62,8 @@
 ### 其他
 
 - `.env.example`
+- `.git-blame-ignore-revs`
+- `.gitattributes`
 - `.gitignore`
 - `LICENSE`
 - `Makefile`
