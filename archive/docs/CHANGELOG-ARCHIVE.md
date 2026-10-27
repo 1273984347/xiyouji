@@ -10,6 +10,31 @@
 > **W921 一级归档（2026-10-24）**：W700-W802 段自 CHANGELOG.md 迁入（B-W855-05 主动瘦身·文档规范 §5 归档规则·CHANGELOG 679KB 超基线 11%+）。
 
 
+### W865（2026-10-22）：首页三任务区重组 + 目录页检索动线批（接 W854 审计的 D1/D2 裁决）
+
+> **来源**：用户 2026-10-22 00:39「按你的建议来」（W854 界面布局审计的 D1/D2 裁决获批）+ 02:45「现在做」（开工授权）；框架交付物 T-08。
+> - **文件**：site/index.html、site/reader/**（622 页中 101 页 INLINED 块同步 + 总目录页新功能）、site/js/reader-enhance.js、site/data/search.html、site/en/search.html、scripts/build_reader.py、scripts/_w865_layout_probe.mjs、scripts/output/_w865_layout_metrics.json、scripts/output/_w865_spec.json、scripts/index.md、scripts/output/index.md、scripts/output/stats.json、docs/11-方案报告/计划方案/T08-任务计划执行与经验沉淀报告-2026-10-22.md、docs/11-方案报告/README.md、docs/INDEX.md、STRUCTURE.md、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md、docs/00-导读/W批次编号对账表.md。
+> - **D1 首页**（接 W854 审计 S1/S2/S3/S4）：按「读 / 查 / 看」三任务区重组——① 顶层块 9 → 6（masthead / 读区 / 装饰 SVG 转场 / 查资料区 / 开篇诗转场 / 看数据与工具区）；② 三区各恰 1 个 h2（从哪一回读起 / 查资料 / 看数据与工具）；③ 站内搜索由首屏英雄区降为「查资料」区内的工具条（h2 → 工具级标题，治「占满首屏的标题比内容标题小 12px」的层级倒挂）；④ 装饰 SVG 与开篇诗移出首屏（转场位）；⑤ stats 收进「看数据与工具」区；⑥ ≤768 档 mega 数字降为紧凑计量（桌面保留品牌大字）。**实测**（无头 Chrome·375/768/1440）：顶层块 6 · 首屏可见 h2 = 1（内容类·「从哪一回读起」）· 首屏可见内容入口链接 4 / 5 / 2（改前 0）· 首屏内容起点 497 / 550 / 564px（改前 857 / 1102）· @375 下 h2−h3 字号差 4px（改前 0px·同 20px）。
+> - **D2 目录页**（接 W854 审计 S8/S9）：加检索工具条——即时过滤 + 回号直达 + 6 组跳转锚点 + 命中计数。**目录页是生成产物**（`scripts/build_reader.py` 写）→ 改生成器不手改页面；逻辑落 `site/js/reader-enhance.js` 并以 DOM 守卫（`[data-catalog-tools]`）只对总目录页生效 → 其余 621 页行为零变化，且不写 inline script（守 CSP `script-src 'self'`）。**实测**：输入「42」命中 1 / 615 条 ·「孙悟空」命中 8 条 · 重置回 615 条 · 回号直达「100」定位到 `ch100.html`「第 100回 径回东土五圣成真」（到达第 100 回 = 1 次输入 + 1 次回车 = 2 次操作·原为滚 37 屏）。
+> - **重建纪律（关键）**：全量重建对现役 622 页产生 128,254 行漂移（超 T04 计划立的 2,000 行阈值）→ 漂移源是**后处理链注入**（CSP meta / SEO 块 / INLINED CSS 块）不在生成器输出里；实测 `inject_seo_head.py` + `inline_css.py` + `generate_csp.py` **幂等**（重跑 site/ 零变化）→ 「重建 + 三条链回注」后 621 页逐字节一致，101 页顺带同步了此前陈旧的 INLINED 块（缺 W856 的 `.brand-mark` 样式）·总 diff **1,063 行**（+955 / −108）在阈值内。
+> - **两次翻车与判据修正（留痕）**：① 首跑把 `/^\\d{1,3}$/` 写成双反斜杠 → 回号直达整条链路静默失效（过滤仍「看起来正常」·数字路径单独失效）；② 探针把 href **值**拿去匹配 `href="` 模式 → 首屏内容链接误报 0。两处都是**判据/实现层的转义错误**，不是产品缺陷——修法：正则一律单反斜杠 + 探针对属性值用 `^` 锚定。
+> - **本批边界**：既有计划方案文档 **0 处改动**（用户 2026-10-22 明令「计划方案先不做」）；不碰 `site/data/**`（并行 W864 在途·D4 另批）；不落段（CHANGELOG 顶段不变·指针面零改动·素材交 backfill 按号序补）。
+> - **验证**：无头 Chrome CDP 探针 `scripts/_w865_layout_probe.mjs` 实测双页面 5 组（首页 1440/768/375 + 目录页 1440/375）·度量落 `scripts/output/_w865_layout_metrics.json`；`generate_csp.py --check` 0 漂移；`check_structure.py` 结构平衡通过；全量档 `verify_delivery.py` 核心全部通过。
+> - **状态**：D1/D2 施工完成并经实测；D3（移动端卡片 1 列）/ D4（可视化页 KPI 降级·撞 W864 在途）/ D5（应用响应式）/ D6（死令牌清理）四批待另起。
+> **状态**：**已收官**（W865 1dd17a7c·git 反填·共 1 笔·W971 存量回填）
+
+
+### W864（2026-10-22）：设计迁移 B2 结构页 10 页（容器令牌化·朱砂实底合规·间距令牌化）
+
+> **来源**：用户「可以」批准 `--chart-3` 拆专批方案后启动。W864 = W826 §6 迁移清单第二片（结构页 10 页）。
+> - **文件**：site/data/chapter-structure-graph.html、site/data/chapter-stats.html、site/data/story-timeline.html、site/data/timeline.html、site/data/relationships.html、site/data/81-hardships.html、site/data/81-hardships-view.html、site/data/hardship-heatmap.html、site/data/hardship-difficulty-heatmap.html、site/data/methodology-matrix.html、scripts/_w864_migrate.py、scripts/_w864_accent_audit.py、scripts/output/_w864_accent_audit.json、scripts/output/_w864_accent_exemptions.json、scripts/output/_w864_spec.json、docs/00-导读/W批次编号对账表.md。
+> - **A 容器**：十页均现役 1320px（= 目标档），`max-width: 1320px` 字面量换 `var(--container-wide)`，零视觉变化。
+> - **B 朱砂实底**：机检按计算样式量（背景色 == 朱砂且面积 >400px²，或 top 边框色 == 朱砂且 ≥2px 且面积 >400px²）。**KPI 顶条收敛**——八页 `.kpi-row` 的 3px 朱砂顶条按裁决 2「整页仅首屏首卡可带」收敛为：首卡保留 3px 朱砂，其余非 alt 变体卡片降 1px 线（alt-2/3/4 非朱砂不动）；`.seal` 徽章实底（40×40 朱砂块）转 `--accent-tint` 淡底 + 朱砂字（十页同款）。**数据语义色片进豁免清单**（`scripts/output/_w864_accent_exemptions.json`·首批）：81-hardships 的 90 个 `.tag`（cause/ending/difficulty 分类编码）、relationships 的 5 个 `.role-tag.primary`（阵营编码）、methodology 的 8 个 quad/phase 徽章、以及选中态实底（组件卡③明定 `--accent` 底）——白名单「图表语义不属界面装饰」的落地形态。
+> - **D 间距**：216 处精确等值字面量 → `var(--space-N)`（值保留·零视觉变化）。
+> - **C 渠与 chart-3 defer**：数据页的 117 处朱砂文字跨 12 条 scoped 规则（`.design-purpose strong` / `td.num` / `.ec-axis` / `.ibox-label`…），且存在 tint 背景第三态（裁决的两态口径未覆盖），逐规则核对成本与风险高于本批价值——**拆「对比度专项批」**，与 `--chart-3` 值切换（42 消费页）同批，用全站审计 + 专属对拍面一次 proof。
+> - **验收**：J2 探针 24 页（10 页 + 14 页金丝雀）浅暗双主题前后对拍 + 全量 diff 归渠。**判词：PASS——302 处 diff 全部归渠零剩余**：KPI 顶条收敛 96 处（25 张非首卡 × 2 属性 × 双主题）+ `.seal` 徽章 198 处（8 页 × 2 个 seal 元素 × 6 属性 × 双主题）+ **顶条回流连带 8 处**（hardship-heatmap 2 个 SVG 标签 font-size 9→10px：顶条 3px→1px 让布局回流 2px，chart-audit 修复器重判后不再压缩——复采确定性已验证）。A（容器令牌化）与 D（间距 216 处）**零 diff**——值保留实证。金丝雀 13 页 0 diff。**施工中抓到一个 CSP 级事故**：令牌化改动了内联脚本里模板字面量的 CSS（`margin-top:4px` → `margin-top:var(--space-2)`），脚本哈希变化而 CSP 未重算 → 采集时脚本被拦、两页元素数塌陷（905→176/76→52）；并行会话随后重算哈希，本批重采 10 页并合并后归零。**教训：动到内联脚本文本（哪怕只是模板里的 CSS 值）必须同批重算 CSP 哈希**。另：timeline 的 accent-2/3/4 彩条属非朱砂顶条，首轮通用规则压平了它——按「限额只针对朱砂」回退（彩条恢复）。
+> **状态**：**已收官**（W864 3b3d77fb·git 反填·共 2 笔·W971 存量回填）
+
 ### W863（2026-10-22）：递延版段补写批（W852-W862 十一段回写·号序链重新接上）
 
 > **来源**：用户令「你决定，继续」。决定先清 CHANGELOG 号序链欠账再进 B2：`batch_cascade` 的 `assert batch == W顶段+1` 是段序保护，但 W852 起十一个批因并行在途全部递延，顶段停在 W851——每立一个新批的段都会被这条断言拦住，B2 也过不去。

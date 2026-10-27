@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（556）
+## 文件（571）
 
 ### Markdown 文档
 
@@ -220,6 +220,7 @@
 - `_cascade_files_W980.txt`
 - `_cascade_files_W981.txt`
 - `_cascade_files_W982.txt`
+- `_cascade_files_W983.txt`
 - `_sync_analysis_manifest.json`
 - `_vermilion_solid_cache.json`
 - `_vermilion_solid_report.json`
@@ -547,6 +548,18 @@
 - `_w980_spec.json`
 - `_w981_spec.json`
 - `_w982_spec.json`
+- `_w983_batch1.json`
+- `_w983_batch2.json`
+- `_w983_batch3.json`
+- `_w983_gen.json`
+- `_w983_precheck.json`
+- `_w983_retry27.json`
+- `_w983_retry27_map.json`
+- `_w983_retry_26-yudi.json`
+- `_w983_retry_26-yudi_map.json`
+- `_w983_retry_36-ch004-bimawen.json`
+- `_w983_retry_36-ch004-bimawen_map.json`
+- `_w983_spec.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`
@@ -583,6 +596,8 @@
 - `_w851_tokens_prelanding.css`
 - `_w974_negative_sample.png`
 - `_w974_probe_top_zoom.png`
+- `_w983_sheet.png`
+- `_w983_zoom.png`
 
 ### 其他
 

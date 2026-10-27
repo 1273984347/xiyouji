@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（153）
+## 文件（166）
 
 ### Markdown 文档
 
@@ -71,9 +71,22 @@
 - `_w876_site_audit.py`
 - `_w933_mutation_test.py`
 - `_w939_scan_targets.py`
+- `_w945_plates_verify.py`
 - `_w950_refresh_icon_paths.py`
+- `_w951_check_crop.py`
 - `_w954_review_evidence.py`
 - `_w978_review_evidence.py`
+- `_w983_derive.py`
+- `_w983_download.py`
+- `_w983_insert_plates.py`
+- `_w983_make_prompts.py`
+- `_w983_make_spec.py`
+- `_w983_precheck_pages.py`
+- `_w983_prepare.py`
+- `_w983_retry.py`
+- `_w983_serve.py`
+- `_w983_sheet.py`
+- `_w983_zoom.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
