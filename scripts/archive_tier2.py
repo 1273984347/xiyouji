@@ -31,6 +31,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 DEFAULT_TARGET = 900 * 1024  # 迁到 1MB 线内且留判距余量（探针 WARN=800KB 之下尽量）
+LIMIT = 1024 * 1024          # §11.2 1MB 线（W995 起 tier2 追加前容量判断用）
 DATE = datetime.date.today().isoformat()
 
 KINDS = {
@@ -110,10 +111,21 @@ def migrate(kind, target, apply):
         return 0
     keys = [k for k, _s, _e in moved]
     moved_bytes = sum(len(text[s:e].encode()) for _k, s, e in moved)
+    # W995 拆分约定：追加目标=现有 tier2 容器，除非「容器现体积+本次迁出」会破 1MB——
+    # 此时开**范围命名新件** `<stem>-tier2-W<lo>-W<hi>.md`（单件 ≤1MB·check_archive_health T1b 监视）
+    tier2_p = os.path.join(ROOT, cfg["tier2"])
+    tier2_size = os.path.getsize(tier2_p) if os.path.exists(tier2_p) else 0
+    if tier2_size + moved_bytes > LIMIT:
+        stem = os.path.splitext(os.path.basename(cfg["tier2"]))[0]  # CHANGELOG-ARCHIVE-tier2
+        tier2_p = os.path.join(os.path.dirname(cfg["tier2"]),
+                               "%s-W%d-W%d.md" % (stem, min(k for k, _s, _e in moved),
+                                                  max(k for k, _s, _e in moved)))
+        tier2_size = 0  # 新件
+    tier2_p = os.path.join(ROOT, tier2_p) if not os.path.isabs(tier2_p) else tier2_p
     kr = ("目录节(最老)" if keys[0] == 0 else "W%d" % keys[0],
           "目录节" if keys[-1] == 0 else "W%d" % keys[-1])
     print("[TIER2] %s：迁出 %d 段（%s-%s·%d KB）→ %s ·一级留存（%d KB）"
-          % (kind, len(moved), kr[0], kr[1], moved_bytes // 1024, os.path.basename(cfg["tier2"]),
+          % (kind, len(moved), kr[0], kr[1], moved_bytes // 1024, os.path.basename(tier2_p),
              (len(text.encode()) - moved_bytes) // 1024))
     if not apply:
         print("[DRY-RUN] 未落盘。加 --apply 执行。")
@@ -137,7 +149,17 @@ def migrate(kind, target, apply):
 
     # 守恒断言（零落盘前置）
     assert len(moved) + len(kept) == len(parse_segments(text, cfg["block"], kind)), "A1 段数守恒"
-    tier2_old = open(tier2_p, encoding="utf-8", newline="").read() if os.path.exists(tier2_p) else cfg["tier2_header"]
+    if os.path.exists(tier2_p):
+        tier2_old = open(tier2_p, encoding="utf-8", newline="").read()
+    else:
+        # 新容器（含 W995 范围命名新件）：生成合规头部
+        stem = os.path.splitext(os.path.basename(tier2_p))[0]
+        tier2_old = (
+            "# %s（二级归档容器·范围件）\n\n"
+            "> **📖 阅读契约（W707）**：禁通读——本文件为 %s 的二级归档层（文档规范 §11.2·W513 先例）。\n"
+            "> 拆分约定（W995）：范围命名 `*-tier2-W<lo>-W<hi>.md`·单件 ≤1MB（check_archive_health T1b 监视）。\n"
+            "> 归档时间：%s（%s 首建）\n\n" % (stem, cfg["primary"], DATE, "W995")
+        )
     marker = "\n> 归档追加：%s（%s 迁入 %s-%s）\n" % (DATE, "W994", kr[0], kr[1])
     seg_text = "".join(text[s:e] for s, e in moved_spans)
     tier2_new = tier2_old.rstrip("\n") + "\n" + marker + "\n" + seg_text

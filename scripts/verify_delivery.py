@@ -214,7 +214,10 @@ EXPECT_A4 = "209 篇"  # 真实计数（W342 199→201 起步，W400 后实际 2
 ARCHIVE_DOCS = [
     os.path.join("archive", "docs", "CHANGELOG-ARCHIVE.md"),
     os.path.join("archive", "docs", "CHANGELOG-ARCHIVE-tier2.md"),
+    # W995：tier2 按 W 段拆分约定（主人授权）——范围命名件逐件登记（§11.2 tier2 须登记条款）
+    os.path.join("archive", "docs", "CHANGELOG-ARCHIVE-tier2-W400-W559.md"),
     os.path.join("archive", "docs", "file-index-ARCHIVE.md"),
+    os.path.join("archive", "docs", "file-index-ARCHIVE-tier2.md"),
     os.path.join("archive", "docs", "HANDOVER-ARCHIVE.md"),
 ]
 

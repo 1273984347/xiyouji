@@ -654,6 +654,25 @@ def _close_hints():
         print(_msg)
     except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"[SCRIPTS] 提示位不可用（{_exc}）")
+    # W995：归档健康提示位（check_archive_health T1-T4·独立尾部块——与 W992 校准块最小碰撞面）
+    try:
+        import check_archive_health as _cah
+
+        _cah.run(strict=False, prefix="[ARCHIVE] ")
+    except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"[ARCHIVE] 提示位不可用（{_exc}）")
+    # W995：tmpe 上次清理活动日期（.journal 最新落笔——清理节奏可见性，建制 13 天才首清的教训）
+    try:
+        import datetime as _dt
+
+        _jdir = os.path.join(_tt.TMPE, ".journal")
+        _journals = [os.path.join(_jdir, f) for f in os.listdir(_jdir)] if os.path.isdir(_jdir) else []
+        if _journals:
+            _last = max(os.path.getmtime(j) for j in _journals)
+            print("[TMPE] 上次清理活动 %s（%.0f 天前·journal %d 份）"
+                  % (_dt.date.fromtimestamp(_last), (time.time() - _last) / 86400, len(_journals)))
+    except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"[TMPE] 日期提示不可用（{_exc}）")
 
 
 if __name__ == "__main__":

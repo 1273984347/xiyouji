@@ -14,7 +14,8 @@ archive/
 ├── README.md                    ← 本文件（总索引 + 台账）
 ├── docs/                        ← 文档类（.md/.txt 等）
 │   ├── CHANGELOG-ARCHIVE.md         CHANGELOG 历史段（一级归档）
-│   ├── CHANGELOG-ARCHIVE-tier2.md   超 1MB 二级归档
+│   ├── CHANGELOG-ARCHIVE-tier2.md
+│   ├── CHANGELOG-ARCHIVE-tier2-W400-W559.md   范围件（W400-W559·W995 拆分定形）   超 1MB 二级归档
 │   ├── HANDOVER-ARCHIVE.md          交接文档滚动淘汰的历史里程碑块
 │   ├── file-index-ARCHIVE.md        文件索引历史段
 │   ├── AGENTS-ARCHIVE.md            AGENTS.md 脚注沿革
@@ -81,6 +82,10 @@ archive/
 | `archive/scripts/`（顶层存量 +47 件） | scripts/ 顶层工具与一次性件（W735 大归档直接落顶层·非批次段·含 w286 禁重跑族与目录 README/index） | W735·W994 补登记 | 2026-10-28 | 存量组行补登记（W994 归档健康探针 T2 对账基线·此前仅结构树目录级提及） |
 | `archive/scripts/batches/w4xx/`（+11 件） | scripts/ 顶层 `_` 一次性件（W400 段·W735 迁入） | W735·W994 补登记 | 2026-10-28 | 存量组行补登记（W994 归档健康探针 T2 对账基线·此前仅结构树目录级提及） |
 | `archive/scripts/batches/w5xx/`（+149 件） | scripts/ 顶层 `_` 一次性件（W500 段·W735 迁入） | W735·W994 补登记 | 2026-10-28 | 存量组行补登记（W994 归档健康探针 T2 对账基线·此前仅结构树目录级提及） |
+
+---
+| `archive/docs/CHANGELOG-ARCHIVE-tier2-W400-W559.md` | CHANGELOG-ARCHIVE-tier2.md 拆分范围件（W400-W559·144 段·W994 迁入） | W994 迁入 · W995 拆分定形 | 2026-10-28 | tier-2 容器 1044KB 破 1MB·按 W 段拆分（主人授权） |
+| `archive/docs/file-index-ARCHIVE-tier2.md` | file-index-ARCHIVE.md 二级归档（目录节 W031-W048 时代·10 节） | W994 建 | 2026-10-28 | tier-2 容器 1070KB 破 1MB 首建 |
 
 ---
 
