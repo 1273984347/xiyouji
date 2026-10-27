@@ -1,0 +1,17 @@
+{
+  "batch": "W993",
+  "date": "2026-10-27",
+  "title": "W993 全仓行尾定形批（CRLF 时代终结·用户问责「为什么不解决」）",
+  "desc": "全仓行尾定形批（gitattributes 落地与工作树重写）",
+  "head_entry": "2026-10-27（W993 全仓行尾定形批）",
+  "head_sentence": "gitattributes 落地与工作树重写",
+  "changelog_body": "\n\n> **来源**：用户问责「CRLF 老问题你为什么不解决呢」——W971-W989 期间六次地鼠（裸 LF 注入/混行尾 fail-closed/CRLF 锚补丁）全部就地修未治系统，本批根治。\n> **摘要**：① **.gitattributes 落地**——text=auto eol=lf + 21 类二进制显式排除；② **renormalize**——22 个 i/crlf 烤死 blob + 混行尾面归 LF（纯机械提交 84cce358·入 .git-blame-ignore-revs 防 blame 污染）；③ **工作树重写**——git 内容比对（CRLF 经 clean=LF≈索引）致 reset --hard 不生效，按标准配方删跟踪件重 checkout：4688 文件全 i/lf w/lf·零 CRLF·零 mixed·工作树零漂移；④ **语义收口**——pitfalls 新条目「行尾定形时代结束」（补丁串按 CRLF 锚定作废·一律 \n；旧条目留作历史）；AGENTS 坑位计数 88→89 两处同步；⑤ 自此工具以 \n 构建无分歧、混行尾防线（load fail-closed）保留作最后防线。\n> **文件**：.gitattributes · .git-blame-ignore-revs · docs/agent/pitfalls.md · AGENTS.md · CHANGELOG.md · scripts/output/file-index.md · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md\n> **验证**：行尾普查 4688 全 i/lf w/lf（renormalize 前 22 i/crlf + 10 mixed 清零）+ pytest 全量 934 passed + verify docs rc=0 + 数字断言 N4 一致 + 体积四窗全绿。\n> **状态**：在途（认领登记 W993·待提交入库）",
+  "milestone_block": "- **W993 全仓行尾定形批**：.gitattributes eol=lf + renormalize（22 blob 归 LF·blame-ignore）+ 工作树重写 4688 文件全 LF（零 CRLF 零 mixed）+ pitfalls「行尾地鼠时代结束」条目——CRLF 时代终结",
+  "agents_note": "2026-10-27（W993）全仓行尾定形批：.gitattributes eol=lf + renormalize + 工作树重写 4688 文件全 LF——CRLF 时代终结",
+  "file_index_rows": [
+    "| .gitattributes | W993 | text=auto eol=lf + 二进制显式排除 |",
+    "| .git-blame-ignore-revs | W993 | 登记定形提交 84cce358 |",
+    "| docs/agent/pitfalls.md | W993 | 行尾定形时代结束条目（CRLF 锚定作废） |",
+    "| AGENTS.md | W993 | 坑位计数 88→89 两处同步 |"
+  ]
+}
