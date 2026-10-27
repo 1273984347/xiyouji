@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（168）
+## 文件（177）
 
 ### Markdown 文档
 
@@ -87,8 +87,17 @@
 - `_w983_serve.py`
 - `_w983_sheet.py`
 - `_w983_zoom.py`
+- `_w984_derive.py`
+- `_w984_download.py`
+- `_w984_insert_plates.py`
 - `_w984_make_prompts.py`
+- `_w984_make_spec.py`
 - `_w984_precheck_pages.py`
+- `_w984_prepare.py`
+- `_w984_retry.py`
+- `_w984_serve.py`
+- `_w984_sheet.py`
+- `_w984_zoom.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
