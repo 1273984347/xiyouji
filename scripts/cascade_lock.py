@@ -47,9 +47,19 @@ def acquire(batch, holder="cascade", force=False):
         return True, data
     except FileExistsError:
         pass
-    held = _read()
-    if held is None:  # 损坏锁文件（空/非 JSON）→ 视同陈旧夺锁
-        os.remove(LOCK)
+    # W999 P1-2：文件存在但空/半写 = 他方正在创建（O_EXCL 与 write 之间的窗口）——
+    # 短重试等他方写完，绝不夺新鲜创建中的锁（夺了=双持锁·互斥静默击穿）。
+    for _ in range(10):
+        held = _read()
+        if held is not None:
+            break
+        time.sleep(0.1)
+    if held is None:  # 重试后仍不可解析 → 真损坏（非创建中）→ 夺锁
+        print("[LOCK] 锁文件持续不可解析——判损坏夺锁")
+        try:
+            os.remove(LOCK)
+        except FileNotFoundError:
+            pass
         return acquire(batch, holder, force)
     age = now - held.get("ts", 0)
     if age >= TTL or force:
@@ -84,6 +94,7 @@ def status():
 
 
 def _read():
+    """读锁文件 → dict；不存在/空/半写/损坏 → None（调用方 acquire 短重试后再判损坏）。"""
     try:
         with open(LOCK, encoding="utf-8") as f:
             return json.load(f)
@@ -150,6 +161,7 @@ def main() -> int:
     ap.add_argument("--batch", default="?", help="持锁批次号（acquire 用）")
     ap.add_argument("--holder", default="cascade", help="持锁会话标识")
     ap.add_argument("--force", action="store_true", help="强行夺锁")
+    ap.add_argument("--pid", type=int, default=None, help="release 时校验持锁 pid（默认不限·人工处置用）")
     args = ap.parse_args()
     if args.self_test:
         return _self_test()
@@ -162,8 +174,8 @@ def main() -> int:
               % (info.get("holder"), info.get("batch"), time.time() - info.get("ts", 0)))
         return 1
     if args.release:
-        ok = release()
-        print("[LOCK] 已释放" if ok else "[LOCK] 无锁或非本会话锁")
+        ok = release(pid=args.pid)
+        print("[LOCK] 已释放" if ok else "[LOCK] 无锁或 pid 不匹配（未删）")
         return 0
     held, info = status()
     if held:

@@ -556,7 +556,7 @@ def main():
         _close_hints()
         print(f"[APPLY] 级联完成：{ctx.batch} / {ctx.new_rule}，共 {len(ctx.pend)} 个文件；写后自检 {'发现 %d 项' % len(selfcheck) if selfcheck else '全部通过'}")
     finally:
-        cascade_lock.release()
+        cascade_lock.release(pid=os.getpid())  # W999 P2-1：pid 匹配才删·防 TTL 夺锁后误删他方新鲜锁
         print("[LOCK] 已释放")
     return 0
 
