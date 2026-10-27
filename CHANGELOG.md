@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W995），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W996），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -17,6 +17,24 @@
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
+
+### W996（2026-10-28）：流程提示位批（C2 判据：漏跑级联回归锁·W995 形态）
+
+
+
+> **来源**：主人 2026-10-28 令「开始」（W995 收官报告登记的流程提示位候选）——W995 施工漏跑级联的事故回归锁。
+
+> - **文件**：scripts/ledger_close_check.py、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md、scripts/output/_w996_spec.json、scripts/output/_cascade_files_W996.txt。
+
+**缺口（W995 事故的防线盲区）**：W995 施工漏跑级联时三道既有防线全部放行——C4 提交对账因「台账认领行即豁免」（D2）放行、ledger_close_check 旧判据反向不查（只查「有段→查台账」，无段则不进检查集）、无任何流程级提示。结果：工具/拆分全入库而十面落点从未写入，直至收官报告状态行锚点失败才暴露。
+
+**C2 判据（ledger_close_check 新增·反向迭代）**：台账中**已收官且 hash 落地**（有 commit）的行，必须在级联段源（CHANGELOG 现役+归档一级+tier2 容器/范围件）里有自己的段——缺失即 FAIL「漏跑 batch_cascade（W995 形态）」。豁免面=有意不立段的合规形态（让号/并号/已停止/空壳/作废/补录/追记，状态列标记识别）；hash 占位行不查（无 commit·归 preflight 在途态管）。**--allow-open 不豁免本判据**（漏级联是已收官批次的确定性缺陷·非在途伪阻塞）。self-test 扩 C2 三态（漏级联必红/让号并号豁免/无hash跳过）。
+
+**实树验证**：现役窗全绿（W995 修复后 hash=71a1add4 有段 ✓）·历史 59 行窗口零漏级联——既有收官纪律在 W995 前无前科，判据无存量误报。
+
+**验证**：--self-test 过（2 正例+4 负例+C2 三态）+ 实树 rc=0 + ruff 0 + 全量 verify 见状态行。
+
+> - **状态**：已收官（详见下方 hash——本批为单段流程批·级联即收官）
 
 ### W995（2026-10-28）：tier2 按W段拆分批（政策落地·archive_tier2 自持闭环·提示位扩展）
 

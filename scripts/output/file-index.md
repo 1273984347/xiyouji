@@ -11,6 +11,29 @@
 ---
 
 
+## W996 流程提示位批（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/ledger_close_check.py | W996 | C2 判据：反向迭代台账——已收官+hash 落地+无级联段（现役+归档两面）=漏跑 batch_cascade；豁免让号/并号/已停止/空壳/作废/补录/追记；--allow-open 不豁免本判据；self-test 扩 C2 三态
+| docs/00-导读/W批次编号对账表.md | W996 | W996 认领行与收官回填
+| CHANGELOG.md | W996 | W996 段
+| HANDOVER.md | W996 | 级联头尾链与里程碑块
+| README.md | W996 | 当前批次版本行
+| STRUCTURE.md | W996 | 当前批次版本行
+| docs/00-导读/项目说明.md | W996 | 当前批次版本行
+| .github/workflows/README.md | W996 | 工作流层版本面推进 W996
+| site/index.html | W996 | 页脚批次链插入 W996
+| site/data/cross-time-danmaku.html | W996 | 页脚批次链插入 W996
+| site/data/tag-cloud.html | W996 | 页脚批次链插入 W996
+| site/dukou-engine.html | W996 | 页脚批次链插入 W996
+| AGENTS.md | W996 | 版本脚注条目
+| archive/docs/AGENTS-ARCHIVE.md | W996 | 脚注滚动迁入的最老条目
+| CITATION.cff | W996 | version 同步为 W996
+| scripts/output/file-index.md | W996 | W996 段插入
+| scripts/output/_w996_spec.json | W996 | 本批级联 spec
+| scripts/output/_cascade_files_W996.txt | W996 | 级联落盘清单
+
 ## W995 tier2 按W段拆分批（2026-10-28）
 
 | 文件 | W | 说明 |
