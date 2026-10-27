@@ -26,7 +26,7 @@ def run(args):
 def main() -> int:
     apply = "--apply" in sys.argv
     # ① hash 列：从 git 反填（找 subject 含 W988 的提交）
-    rc, out = run(["--w", "988", "--from-git"] + (["--apply"] if apply else []))
+    rc, out = run(["--w", "988", "--from-git"])
     if rc != 0:
         print("hash 列反填失败（rc=%d）" % rc)
         return rc
@@ -38,14 +38,14 @@ def main() -> int:
     status = ("**已收官**（主体内容由并行 W989 提交 %s 代提入库 + 收官补齐 %s·"
               "27 张 card-* 全落位·102 页 og:image 换专属 1200×630·判据 V1-V9 全 PASS·负样本 4/4·"
               "全量门禁 55/55 段全绿）" % (ADOPTED, mine or "本笔"))
-    rc, out = run(["--w", "988", "--status", status] + (["--apply"] if apply else []))
+    rc, out = run(["--w", "988", "--status", status])
     if rc != 0:
         return rc
 
     # ③ 指纹复核
     m2 = re.search(r"([0-9a-f]{16,})", out)
     if m2:
-        run(["--w", "988", "--verify", m2.group(1)] + (["--apply"] if apply else []))
+        run(["--w", "988", "--verify", m2.group(1)])
     return 0
 
 
