@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（177）
+## 文件（179）
 
 ### Markdown 文档
 
@@ -98,6 +98,7 @@
 - `_w984_serve.py`
 - `_w984_sheet.py`
 - `_w984_zoom.py`
+- `_w986_make_prompts.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
@@ -177,6 +178,7 @@
 - `gen_og_cover.py`
 - `gen_rss.py`
 - `gen_sitemap.py`
+- `gen_tools_inventory.py`
 - `generate_csp.py`
 - `inject_chart_a11y.py`
 - `inject_descriptions.py`

@@ -10,6 +10,29 @@
 > **W921 一级归档（2026-10-24）**：W700-W802 段自 CHANGELOG.md 迁入（B-W855-05 主动瘦身·文档规范 §5 归档规则·CHANGELOG 679KB 超基线 11%+）。
 
 
+### W867（2026-10-22）：设计迁移 B4 妖怪与神力 10 页（容器归并·朱砂实底合规·间距令牌化）
+
+> **来源**：用户令「开始」，接 W866（B3）之后。W867 = W826 §6 迁移清单第四片（妖怪与神力 10 页）。
+> - **文件**：site/data/monster-background.html、site/data/monster-capability-radar.html、site/data/monster-ecology-network.html、site/data/monster-female-network.html、site/data/monster-hierarchy-network.html、site/data/monster-sociology.html、site/data/monster-victims-network.html、site/data/ecology.html、site/data/heaven-power-network.html、site/data/underworld-power-network.html、scripts/output/_w867_spec.json、scripts/output/_w867_accent_audit.json、scripts/output/_w867_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
+> - **A 容器**：九页 1320px 令牌化；**monster-background 的 `.container` 与 `footer` 两处 1280 → `var(--container-content)` 1120**——§3.3「data 三页 1280」的第二户，页脚随容器对齐一并归并（否则页脚比正文宽 160px）。
+> - **B 朱砂实底**：KPI 顶条收敛六页（capability-radar 4→1 · female 6→1 · hierarchy 4→每行首卡保留 · victims 6→1 · heaven 4→每行首卡 · underworld 4→每行首卡）；`.seal` 徽章十页转淡底。**语义变体条进豁免登记簿**（`_w864_accent_exemptions.json` 的 W867 分册·18 处）：`.signal-card.s-active`（状态三态之一）、`.compare-card.invasive`（入侵态）、`.role-card.r-king`（角色编码·用 `--chart-1` 调色板）、`.victim-card`（高亮标记）、`.swatch-bar`（图例色块）、`.tab-btn.active`（选中态）、`.damage-pill.damage-high`（伤害等级编码 ×9）。
+> - **发现一处跨批线索**：`role-card.r-judge` 用 `var(--chart-3)` 编码觐官角色——**图表调色板被 UI 消费**，chart-3 值切换专项批须连带审计这类点（不只 SVG 图表）。
+> - **D 间距**：219 处精确等值字面量 → `var(--space-N)`（值保留·零视觉变化）。
+> - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 54 处）。
+> - **验收**：J2 探针 23 页（10 + 13 金丝雀·index 已由 W865 提交、回归金丝雀位）双主题前后对拍 + diff 全量归渠；金丝雀零 diff；令牌化后先 `generate_csp.py` 再采集。**判词：PASS——372 处 diff 全部归渠零剩余**：KPI 顶条收敛 140 处（70 张非首卡 × 2 属性 × 双主题） + `.seal` 徽章 220 处（10 页 × 元素 × 6 属性 × 双主题）+ 容器归并连带 8 处（monster-background 页脚 1280→1120 后居中 margin 0→80px = (1280−1120)/2 精确对账）+ 顶条回流连带 4 处（capability-radar 2 个 SVG 标签 font-size 10→9px：顶条降 2px 后 chart-audit 重判为需压缩）。**D 间距 219 处零 diff**（值保留实证）；金丝雀 13 页 0 diff；元素数双采一致（25,410 == 25,410）。
+> **状态**：**已收官**（W867 66274869·git 反填·共 2 笔·W971 存量回填）
+
+### W866（2026-10-22）：设计迁移 B3 人物主线 9 页（容器归并·朱砂实底合规·间距令牌化）
+
+> **来源**：用户令「开始」，接 W864（B2）之后。W866 = W826 §6 迁移清单第三片（人物主线 9 页）。
+> - **文件**：site/data/character-appearance.html、site/data/character-presence-timeline.html、site/data/character-semantic-network.html、site/data/character-dynamic-network.html、site/data/character-sentiment-arc.html、site/data/character-relationship-3d.html、site/data/character-relationship-3d-view.html、site/data/dialogue-sentiment.html、site/data/ai-dialogue.html、scripts/output/_w866_spec.json、scripts/output/_w866_accent_audit.json、scripts/output/_w866_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
+> - **A 容器**：八页 1320px 字面量 → `var(--container-wide)`（零视觉变化）；**character-semantic-network 的 `.container` 1280 → `var(--container-content)` 1120**——§3.3 枚举的「data 三页 1280 归并」之一，本批唯一有视觉位移的容器改动（−160px 居中）。
+> - **B 朱砂实底**：KPI 顶条收敛四页（appearance 4→1 · semantic-network 6→1 · dynamic-network 4→1 · relationship-3d 5→1，非首卡降 1px 线）；`.seal` 徽章八页有效（第九页 character-relationship-3d-view 的规则无 DOM 消费者）转 `--accent-tint` 淡底 + 朱砂字；**ai-dialogue 的 4 个 step-num 编号徽章**（24×24 圆·朱砂底白字）转淡底 + 朱砂字（裁决 2 徽章实底规则）。豁免登记簿升级为多批结构并增补 W866 条目（选中态 4 处·负向指示 1 处·主行动按钮 1 处）。
+> - **D 间距**：149 处精确等值字面量 → `var(--space-N)`（值保留·零视觉变化）。
+> - **C 渠与 `--chart-3` 值切换继续 defer** 至「对比度专项批」（本批文字落 bg 共 58 处·跨多规则·同 W864 口径）。
+> - **验收**：J2 探针 23 页（9 + 14 金丝雀·index.html 因 W865 并行在途剔出）双主题前后对拍 + diff 全量归渠；金丝雀零 diff。**施工纪律（W864 教训）**：令牌化可能改到内联脚本模板字面量里的 CSS，采集前必先 `generate_csp.py` 重算哈希。**判词：PASS——296 处 diff 全部归渠零剩余**：KPI 顶条收敛 68 处（17 张非首卡 × 2 属性 × 双主题） + `.seal` 徽章 204 处（8 页有效 × 2 元素 × 6 属性 × 双主题·character-relationship-3d-view 的 .seal 为死规则无 DOM 消费者） + ai-dialogue step-num 徽章 20 处（字色 white→accent 及 currentColor 边框连带）+ character-semantic-network 容器居中位移 4 处（1280→1120 后 margin 0→3.2px·A 渠唯一真实位移）。**D 间距 149 处零 diff**（值保留实证）；金丝雀 14 页 0 diff；元素数双采完全一致（24,996 == 24,996）——CSP 先重算再采集的纪律生效。
+> **状态**：**已收官**（W866 89432726·git 反填·共 2 笔·W971 存量回填）
+
 ### W865（2026-10-22）：首页三任务区重组 + 目录页检索动线批（接 W854 审计的 D1/D2 裁决）
 
 > **来源**：用户 2026-10-22 00:39「按你的建议来」（W854 界面布局审计的 D1/D2 裁决获批）+ 02:45「现在做」（开工授权）；框架交付物 T-08。

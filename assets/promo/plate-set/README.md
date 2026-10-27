@@ -121,12 +121,12 @@ people / themes / essays / poetry / culture 五库绝大部分页面无题图。
 
 | 文件（去扩展名） | 主体 | 独占标志物 / 场景元素 | 接入页 |
 | --- | --- | --- | --- |
-| `plate-line-37-ch007-bagua-lu` | 悟空（八卦炉） | 三足圆筒八卦炉（卦纹）+ 山 + 两道铁链 | `reader/ch007.html`（**替换**浓墨版） |
-| `plate-line-38-ch014-liubei` | 悟空（剪径山中） | 朴刀 + 山贼头巾 + 古树 | `reader/ch014.html`（**替换**浓墨版） |
-| `plate-line-39-ch015-yingchou` | 白龙马 | 缰绳盘两圈 + 枯松 + 三道涧水纹 | `reader/ch015.html`（**替换**浓墨版） |
-| `plate-line-40-ch023-sichan` | 唐僧 + 宫装妇人 | 禅杖 + 绣鞋 + 香炉 | `reader/ch023.html`（**替换**浓墨版） |
-| `plate-line-41-ch027-bailong` | 白龙出水 + 岸上唐僧 | 鳞片龙身 + 三道水纹 + 石岸 | `reader/ch027.html`（**替换**浓墨版） |
-| `plate-line-42-ch030-sancha` | 沙僧 + 三股叉 | 月牙铲 + 扁担 + 三道风纹 | `reader/ch030.html`（**替换**浓墨版） |
+| `plate-line-37-ch007-bagua-lu` | **巨灵神**（W986 换主体重出） | 宣花双面斧 + 金盔 + 玄色重甲 | `reader/ch007.html` |
+| `plate-line-38-ch014-liubei` | **六贼头目**（W986 换主体重出） | 朴刀 + 歪布头巾 + 敞口包袱 | `reader/ch014.html` |
+| `plate-line-39-ch015-yingchou` | **惠岸行者木叉**（W986 换主体重出） | 白玉净瓶插柳 + 九环锡杖 + 戒疤 | `reader/ch015.html` |
+| `plate-line-40-ch023-sichan` | **黎山老母**（W986 换主体重出） | 雕花拐杖 + 佛珠 + 发髻花簪 | `reader/ch023.html` |
+| `plate-line-41-ch027-bailong` | **巡河夜叉**（W986 换主体重出） | 三齿钢叉 + 鱼鳞纹 + 水纹水花 | `reader/ch027.html` |
+| `plate-line-42-ch030-sancha` | **御马监丞**（W986 换主体重出） | 留白方官印 + 齐天大圣旗 + 天马 | `reader/ch030.html` |
 | `plate-line-43-luoshanv` | 罗刹女 | 三尖两刃刀 + 素白小口葫芦（颈系朱红封带） | `reader/people/罗刹女外传.html` |
 | `plate-line-44-kuimulang` | 奎木狼 | 狼首 + 铁盔 + 方头铜锤 | `reader/people/奎木狼外传.html` |
 | `plate-line-45-zhaoan-topic` | 招安场景 | 留白诏书卷 + 留白官印 | `reader/themes/招安的两种结局专题.html` |
@@ -150,6 +150,8 @@ people / themes / essays / poetry / culture 五库绝大部分页面无题图。
 | `site/static/images/chap-30.webp` | `reader/ch030.html` | 页面改用 `plate-line-42-ch030-sancha.webp`；**本文件保留** |
 
 **为什么保留而不删**：用户 2026-10-27 08:25 裁决「这六张我认为还可以」⇒ 保留为可回退的存量资产（若日后想恢复浓墨版，仅需改回 6 个 `img src`）。**注意**：这 6 个文件目前**不被任何页面引用**（孤儿资产），删除它们不影响站点运行，但会失去回退能力 ⇒ 处置需用户批准。
+
+**后续演进（2026-10-27 12:26）**：用户对 W984 的回目页线描重出版反馈「一般算不上好看」⇒ 裁决「换主体重出一版」⇒ **W986 批把 6 张同名 stem（plate-line-37..42）整体换成此前未画过的角色**（巨灵神 / 六贼头目 / 惠岸行者木叉 / 黎山老母 / 巡河夜叉 / 御马监丞），页面只换 alt 文本、图源路径不变；**浓墨渲染版 6 个文件仍原样保留在仓内**（用户可随时改回 6 个 `img src` 回退）。根因与复用口径见方法论篇 §2.8 与坑表 E-05（同角色同范式的第二张图观感必然重复·机器判据查不出）。
 
 **替换时同步改的可访问性属性**：存量图为装饰图（`aria-hidden="true"` + 空 `alt`）；线描版带真实 `alt` 文本 ⇒ 替换时**移除 `aria-hidden`**，否则读屏用户永远听不到题图内容。
 
