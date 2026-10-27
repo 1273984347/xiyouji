@@ -64,7 +64,7 @@
 - **ruff --fix 的 isort 会改坏「ST 先于 torch」顺序**（W746）：isort 排序规则把 plain import（`import torch`）排到 from-import（`from sentence_transformers import ...`）之前——正是本机段错误坑的关键顺序，铁则注释写在旁边也会被改坏（实证：--fix 后 CLI 静默 139）。修复：**ML 脚本的 ST import 块必须加 `# noqa: I001` 防守**（`scripts/rag/page_router.py` `_load_model` 范式），并复跑该脚本确认可跑。
 - **CSP 哈希链「只读绿 ≠ 写路径健康」**（W536 实证·W902 自 Agent 记忆固化入仓）：generate_csp 的 --check 只走读路径，守卫对根目录的误算曾令重生成自阻（写路径损坏而校验恒绿）；凡改 generate_csp/守卫逻辑，验收必须真跑一次写入（注入或重算）再 --check，禁以 --check 单绿收工。
 
-### git / 提交 / 并发（20 条）
+### git / 提交 / 并发（21 条）
 
 - **批量改 md 一律 Python `open(encoding='utf-8')`，禁用 PowerShell `Set-Content`**（后者默认写 UTF-8 BOM，项目 W427 曾全库清 BOM；`Add-Content` 同理慎用）。
 - **同文件多个 Edit 必须串行执行**（并行 Edit 基于同一原始内容计算 diff，后写覆盖先写——W505 复现 4 次：金角银角「唐僧肉」/CHANGELOG W506 段/项目说明头部/交接文档标题均丢失）；并行批次后必须 Grep 验证所有修改点。
@@ -89,6 +89,7 @@
 - **写既有文件必须「临时文件 + 原子替换」——`open(path,"wb")` 在 write 之前就截断原文件**（W974 实证·E-03）：本批把一份 28,936 B 的 README 写成 **0 字节**（TypeError 发生在 write 阶段）⇒ 靠 `git checkout HEAD -- <path>` 恢复。⇒ 批改既有文件一律 `io.open(p+".tmp","wb")` 写完再 `os.replace(tmp, p)`；改完立刻 `git diff --numstat` 核对增删比（≠1:1 且非新增文件 ⇒ 立即查行尾）。
 
 - **写盘行尾二次替换 ⇒ CRLF 变 CRCRLF（批量污染但 diff 静音）**（W988 实证·E-11）：Windows + `core.autocrlf=true` 的仓里，**工作区文件是 CRLF、仓库存 LF**；批量脚本若写盘时做 `text.replace("\n", "\r\n")` ⇒ 读入文本本身已含 CRLF ⇒ **每个换行多一个 CR**（CRLF→CRCRLF），同一文件被改两次还进一步变成 CRCRCRLF。⇒ 危害：① 行尾被整批污染；② `git diff --numstat` 出现「增删比 ≈ 2:1 但非空行数不变」的噪音，**只看「内容对不对」完全看不出问题**。⇒ 修法：① 读入时原样保留换行（`raw.decode()`）；② 写回**原样写字节**（`io.open(tmp,"wb").write(text.encode())`），**禁**对全文做换行替换；③ 插入内容时用探测到的真实行尾拼接；④ 改完跑「CRCRLF 计数 = 0」断言（字节级循环 `replace(b"\r\r\n", b"\r\n")` 直至收敛）。本批实测污染 102 个页面。
+- **级联 spec 的「本批新增」判定不能用 git 索引，且级联不能重跑**（W988 实证·E-17）：批量新增文件（资产/页面）后再生成级联 spec 时，若用 `git ls-files`（**索引**）判定「本批新增」，已被 `git add -A` 的新文件会被误判为既有 ⇒ 「文件」行与 file-index 段**漏列**（本批实测漏 115 个资产文件）。⇒ 修法：① 判定用 **HEAD 树**（`git ls-tree -r --name-only HEAD <dir>`）而非索引；② 注意 `batch_cascade` 有**幂等保护**（重跑时断言「批次号应为 W+1」）⇒ 段已写入后**不能重跑级联**，只能做**段内定向订正**（限定在该批段范围内替换「文件」行与 file-index 段表格）；③ 订正脚本本身必须**最后**执行且其后再 `git add`，否则第 31 门禁 C4-f「文件清单有工作树未提交残留」判红（本批实测连续三轮红）。
 ### 级联 / CHANGELOG（8 条）
 
 - **bump_version.py** 一键补齐辅助 4 文档版本行（W576 起恢复可用：W536 写路径守卫根目录曾误算为 scripts/ 致任何调用必误判越界，经用户批准修复为项目根——与 W550 修复的 generate_csp 同款；其「全文件 W001-W### 范围替换」覆盖 batch_cascade 不触及的 README 目录树/交接 CHANGELOG 范围行等存量漂移面，整文件 text-mode 重写兼带孤立 \r 损伤归一）；**三个已知坑（①②多次复现 W524 扩证·③W528 实证）**：① 全局替换会污染 file-index 历史段（生成「WXXX WXXX」重复标题的空壳段、登记表为空，需手工补全当批文件表）；② `--desc` 与 `--note` **均会**往 STRUCTURE.md 头部 / docs/00-导读/项目说明.md 的上一版本行**追加**「 + WXYY(...)」而非替换主描述（W523 实测 `--note` 同样触发——此前仅登记 `--desc` 单触发面）；③ 三简单页脚（index/cross-time-danmaku/tag-cloud）同步为替换式、只匹配"链首 == 解析版本"的条目，页脚一旦滞后就永不被命中（W528 实证停在 W453 脱节 74 批）——跑完必须 Grep 校验版本行三处 + 三页脚版本实际前进并手工净化。

@@ -117,128 +117,13 @@
 | site/reader/themes/蟠桃园-体制内的秘密.html | W988 | og:image 换专属 1200×630 裁切版 |
 | site/reader/themes/西游与死亡研究专题.html | W988 | og:image 换专属 1200×630 裁切版 |
 | site/reader/themes/金箍棒的重量-一万三千五百斤的秘密.html | W988 | og:image 换专属 1200×630 裁切版 |
-| site/static/images/banner-card-13-bajie-yuexia.webp | W988 | 新增角色页顶部横幅（1:1 源裁 1200×500 宽幅） |
-| site/static/images/banner-card-14-bajie-choupa.webp | W988 | 新增角色页顶部横幅（1:1 源裁 1200×500 宽幅） |
-| site/static/images/banner-card-15-bajie-zuoxie.webp | W988 | 新增角色页顶部横幅（1:1 源裁 1200×500 宽幅） |
-| site/static/images/banner-card-16-bajie-yunzhong.webp | W988 | 新增角色页顶部横幅（1:1 源裁 1200×500 宽幅） |
-| site/static/images/banner-card-17-bajie-denggao.webp | W988 | 新增角色页顶部横幅（1:1 源裁 1200×500 宽幅） |
-| site/static/images/banner-card-18-bajie-daodan.webp | W988 | 新增角色页顶部横幅（1:1 源裁 1200×500 宽幅） |
-| site/static/images/banner-card-19-shaseng-dujiang.webp | W988 | 新增角色页顶部横幅（1:1 源裁 1200×500 宽幅） |
-| site/static/images/banner-card-20-shaseng-zhenshui.webp | W988 | 新增角色页顶部横幅（1:1 源裁 1200×500 宽幅） |
-| site/static/images/banner-card-21-shaseng-shouye.webp | W988 | 新增角色页顶部横幅（1:1 源裁 1200×500 宽幅） |
-| site/static/images/banner-card-22-shaseng-fuzhong.webp | W988 | 新增角色页顶部横幅（1:1 源裁 1200×500 宽幅） |
-| site/static/images/banner-card-23-shixiong-bingli.webp | W988 | 新增角色页顶部横幅（1:1 源裁 1200×500 宽幅） |
-| site/static/images/banner-card-24-shixiong-shanmen.webp | W988 | 新增角色页顶部横幅（1:1 源裁 1200×500 宽幅） |
-| site/static/images/banner-card-26-wukong-jingu.webp | W988 | 新增角色页顶部横幅（1:1 源裁 1200×500 宽幅） |
-| site/static/images/og-banner-card-13-bajie-yuexia.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-banner-card-15-bajie-zuoxie.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-banner-card-16-bajie-yunzhong.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-banner-card-17-bajie-denggao.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-banner-card-18-bajie-daodan.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-banner-card-19-shaseng-dujiang.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-banner-card-21-shaseng-shouye.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-banner-card-22-shaseng-fuzhong.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-banner-card-23-shixiong-bingli.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-banner-card-24-shixiong-shanmen.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-banner-card-26-wukong-jingu.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-donghai-longgong.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-jingu-jingangchui.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-01-bailongma.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-01-jinjiao.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-01-wukong.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-01-zhenjia-meihouwang.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-02-dujiao-shengwang.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-02-niumowang.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-02-pantao-yuan.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-02-tangseng.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-03-bajie.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-03-danaotian-gong.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-03-linggan.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-03-tieshanggongzhu.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-04-huangfengguai.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-04-shaseng.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-04-shuilandong.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-04-xiezi.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-05-guanyin.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-05-huangpaoguai.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-05-hunshi-sihou.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-05-saitaisui.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-06-bingqi-xiuyang.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-06-erlangshen.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-06-jiuLingyuansheng.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-06-zhenyuan.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-07-baigujing.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-07-dapeng.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-07-ershiba-xingsu.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-07-nezha.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-08-angrixingguan.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-08-honghaier.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-08-sizhi-gongcao.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-08-taishanglaojun.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-09-jingu-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-09-wufang-jiedi.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-10-jindouyun-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-10-liuding-liujia.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-11-fabao-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-11-jingubang-zhongliang.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-12-qiwu-zhuanji.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-12-wuzi-jing-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-13-jinjiaodawang.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-14-yinjiaodawang.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-15-huangmeidawang.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-16-heixiongjing.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-17-tuota-lijing.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-18-yutujing.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-19-nvziguo-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-20-chelingguo-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-21-shituoling-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-22-tonghehe-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-23-pansidong-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-24-wudidong-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-25-rulai.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-26-yudi.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-27-baiyan-mojun.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-28-change.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-29-shenxue-ganyu-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-30-lujing-ditu-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-31-mima-pan-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-32-minsu-taofu-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-33-yixiang-puxi-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-34-keju-zhidu-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-35-ch010-weizheng.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-36-ch004-bimawen.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-37-ch007-bagua-lu.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-38-ch014-liubei.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-39-ch015-yingchou.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-40-ch023-sichan.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-41-ch027-bailong.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-42-ch030-sancha.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-43-luoshanv.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-44-kuimulang.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-45-zhaoan-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-46-fushi-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-47-jingwu-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-line-48-xuanzang-topic.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-liudao-lunhui.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-mingfu-panwang.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-plate-wujingshan-liangjie.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-scene-card-01-huoshan.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-scene-card-04-dushuangxuejiang.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-scene-card-06-yunshenzhibu.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-scene-card-07-baiyao.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-scene-card-09-sanyao.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-scene-card-10-gusichenzhong.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-scene-card-11-songyunshitan.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-scene-card-12-shuyuanxingtantan.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-scene-card-25-santiebaigujing.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
-| site/static/images/og-scene-card-27-rejiao-fenxi.webp | W988 | 新增 og:image 专属裁切版（1200×630） |
 | docs/11-方案报告/计划方案/T34-任务计划执行与经验沉淀报告-2026-10-27.md | W988 | 终稿报告件（计划 + 执行合一·含 27 张落位表） |
 | docs/11-方案报告/README.md | W988 | §六 计划方案补登记 3 行（序号 41/42/43·T-18 / T-21 / T-34）· 件数 43 → 44 |
-| docs/agent/pitfalls.md | W988 | 坑表 +6 条（80 → 86：行尾二次替换 / 设备像素当 CSS 像素 / 主体检测排除朱砂赭金 / 关键词法双重失效 / 主体顶裁前提 / 判据自身缺陷） |
+| docs/agent/pitfalls.md | W988 | 坑表 +7 条（80 → 87：行尾二次替换 / 设备像素当 CSS 像素 / 主体检测排除朱砂赭金 / 关键词法双重失效 / 主体顶裁前提 / 判据自身缺陷） |
 | docs/10-方法论沉淀/素材批处理与判据自证方法论.md | W988 | 新增 §2.9「既有资产投放：落位表先行 + 三族资产三套类名 + 派生裁切的主体检测」 |
 | docs/00-导读/W批次编号对账表.md | W988 | W988 认领行 + 收官状态 |
-| AGENTS.md | W988 | 坑位条数声明 80 → 86 |
-| HANDOVER.md | W988 | 坑位条数指针 80 → 86 |
+| AGENTS.md | W988 | 坑位条数声明 80 → 87 |
+| HANDOVER.md | W988 | 坑位条数指针 80 → 87 |
 | CHANGELOG.md | W988 | W988 段 |
 | README.md | W988 | 当前批次版本行 |
 | STRUCTURE.md | W988 | 当前批次版本行 |
