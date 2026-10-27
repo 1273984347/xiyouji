@@ -146,7 +146,11 @@ def collect():
                     extra_fails.append(
                         "体积窗口 C6: HANDOVER.md %.1f KB > 45 KB——五区只进不出复发"
                         "（W973 契约·修法=已完成条目清除+叙事迁 HANDOVER-ARCHIVE+指针化）" % hkb)
-                    # W965 C4：逐条定形判据（比聚合 4KB 更细——五条各 290 字的脚注可绕过 C3）
+            if "AGENTS" in rel:
+                # W965 C4：逐条定形判据（比聚合 4KB 更细——五条各 290 字的脚注可绕过 C3）
+                # W999 修：原嵌在 HANDOVER>45KB 分支内——死门控（HANDOVER 瘦身后 C4 永不执行）
+                # 且 fline 跨迭代引用可 NameError（subagent 审查 P1-1 实证复现）
+                if fs >= 0:
                     bad = []
                     for e in re.split(r"；(?=20\d{2}-\d{2}-\d{2}（)", fline)[1:]:
                         if not re.match(r"^20\d{2}-\d{2}-\d{2}（W\d{3,4}）", e):

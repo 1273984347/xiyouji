@@ -6,18 +6,25 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W997），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W998），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
 > **方案 D 形态切换（W711 生效）**：自 W711 段起，CHANGELOG 段标题去 v 号（新形态 `### W###（日期）：标题`）；W001-W710 段保留 `### vX.Y.Z（日期）：W###` 历史形态不改写；v 号降格为阶段标签（v2.3·无 patch）；CITATION.cff version 改批次号形态（"W###"·CFF free string）；file-index 历史条目保留 v 引用、新增条目 W only。
 >
-> **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](archive/docs/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W736 再归档 v2.3.250-v2.3.293（W650-W699）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)（源文件超 50KB/500 行阈值）。本文件仅保留 W700+ 段（W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
+> **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](archive/docs/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W736 再归档 v2.3.250-v2.3.293（W650-W699）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)（源文件超 50KB/500 行阈值）。本文件正本按 110 段窗滚动（W960 窗口制·正本最老段随批推进·早期形态：W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
 >
 > **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 857<!--stats:html_total--> 页（site/data 88<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 9<!--stats:site_root_html--> + site/reader 622<!--stats:site_reader_html-->）；CSP 覆盖 856<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 855<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 855<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 330<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 87<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 
+### W998（2026-10-28）：对抗式审查修复批（subagent P1×2/P2×4/P3 清偿）
+
+> **来源**：用户令「派发一个 subagent 严格审查一遍整个」——subagent 对抗式审查（迁移守恒/门禁实跑/代码缺陷/三层一致/同族残留全查）报 P1×2/P2×4/P3×6。
+> **摘要**：① **P1-1 C4 死门控**——脚注逐条判据误嵌 HANDOVER>45KB 分支内（HANDOVER 瘦身后 C4 永不执行·且 fline 跨迭代引用可 NameError·subagent 纯内存 monkeypatch 实证复现）；移回 AGENTS 分支独立执行。② **P1-2 锁竞态双持**——O_EXCL 创建与 write 之间空文件窗口，他方 _read 得 None 误判损坏并夺锁=互斥静默击穿；改「创建中」短重试（10×0.1s）后仍不可解析才判损坏夺锁。③ **P2-1 release 无 pid 校验**——batch_cascade finally 传 pid（防 TTL 夺锁后误删他方新鲜锁）+ CLI --pid。④ **P2-2**——三份 spec json 工作树 CRLF 回归归 LF。⑤ **P2-3**——pitfalls 子节标题计数滞后（级联 8→9·流程 19→20·AGENTS 侧早已同步的自相矛盾）。⑥ **P2-4**——CHANGELOG/file-index 头部「仅保留 W700+」过期窗界声明改窗口制措辞 + 叠标点。⑦ **P3-3**——W997 台账回填口径统一（feat 主锚）。
+> **文件**：scripts/check_doc_size_budget.py · scripts/cascade_lock.py · scripts/batch_cascade.py · scripts/archive_ledger_rows.py · docs/agent/pitfalls.md · CHANGELOG.md · scripts/output/file-index.md · scripts/output/_w992_spec.json · scripts/output/_w993_spec.json · scripts/output/_w997_spec.json · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md
+> **验证**：C4 负样本（AGENTS 长条目+HANDOVER 瘦→C4 必红·修复后语义）+ 锁五态自测 + 守卫三态 + pytest 全量 942 passed + ruff 清零 + 数字断言/体积窗全绿。
+> **状态**：**已收官**（W998 git 反填·C4 死门控与锁竞态根治·含对抗式审查全程）
 ### W997（2026-10-27）：协作纪律入库批（修实例必修根·用户问责「为什么只写你自己的记忆文件」）
 
 > **来源**：用户双重问责——「修实例必修根」（CRLF 六次地鼠/W967 查圈打折/tmpe 积压三案实证）+「为什么只写你自己的记忆文件」（把跨会话教训只落私有记忆·W516 载体铁则二犯）。

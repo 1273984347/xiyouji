@@ -4,12 +4,21 @@
 > W### 编号规则见 CHANGELOG.md 顶部。
 > 创建于 2026-07-22（v0.8 双索引改造）
 >
-> **历史归档**：W031-W087（v2.0.4-v2.0.60）site/data/ 部分已迁移至 [file-index-ARCHIVE.md](../../archive/docs/file-index-ARCHIVE.md)；W422 再归档 W393-W416 段；W511 归档 W417-W448 段 + W449-W463 损坏区尾部清理。；W736 归档 W449-W699 段（与 CHANGELOG 现役边界统一至 W700）。本文件仅保留 W700+ 现役索引。
+> **历史归档**：W031-W087（v2.0.4-v2.0.60）site/data/ 部分已迁移至 [file-index-ARCHIVE.md](../../archive/docs/file-index-ARCHIVE.md)；W422 再归档 W393-W416 段；W511 归档 W417-W448 段 + W449-W463 损坏区尾部清理。W736 归档 W449-W699 段（与 CHANGELOG 现役边界统一至 W700）。本文件正本按 110 段窗滚动（W960 窗口制·正本最老段随批推进）。
 >
 > **维护契约**：本索引按 W 追加登记（每文件 1 行 + 一句摘要），历史段禁改；新增/变更文件必须先有 CHANGELOG 对应 W 段再登记（双索引铁律），禁止无 W 段单独登记。
 
 ---
 
+
+## W998 对抗式审查修复批（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_size_budget.py | W998 | C4 移出 HANDOVER 门控（死门控+fline NameError 修复） |
+| scripts/cascade_lock.py | W998 | 创建中短重试防双持 + CLI --pid |
+| scripts/batch_cascade.py | W998 | finally release 传 pid + [SCRIPTS] 口径随 W992 |
+| docs/agent/pitfalls.md | W997 | 子节标题计数校准（级联 9·流程 20） |
 
 ## W997 协作纪律入库批（2026-10-27）
 
