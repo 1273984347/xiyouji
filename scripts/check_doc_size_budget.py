@@ -151,8 +151,8 @@ def collect():
                     for e in re.split(r"；(?=20\d{2}-\d{2}-\d{2}（)", fline)[1:]:
                         if not re.match(r"^20\d{2}-\d{2}-\d{2}（W\d{3,4}）", e):
                             bad.append("条目头非阿拉伯形态：" + e[:24])
-                        elif len(e) > 300:
-                            bad.append("条目 %d 字 > 300：%s…" % (len(e), e[:24]))
+                        elif len(e) > 120:
+                            bad.append("条目 %d 字 > 120：%s…" % (len(e), e[:24]))
                     if bad:
                         extra_fails.append(
                             "体积窗口 C4: AGENTS.md 脚注 %d 条违规定形（W965 逐条判据）：%s"

@@ -76,8 +76,8 @@ def precheck(spec):
     if not re.match(r"^20\d{2}-\d{2}-\d{2}（W\d{3,4}）", _note):
         issues.append("spec.agents_note 未以「阿拉伯日期（W###）」条目头开场（W964 定形契约·"
                       "中文数字日期会让滚动器失明）：%r" % _note[:40])
-    if len(_note) > 300:
-        issues.append("spec.agents_note 长 %d 字 > 300 上限（W964 定形契约·脚注是索引不是摘要·"
+    if len(_note) > 120:
+        issues.append("spec.agents_note 长 %d 字 > 120 上限（W964 定形·W989 收紧·脚注是索引不是摘要·"
                       "细节归 CHANGELOG）" % len(_note))
     return issues
 

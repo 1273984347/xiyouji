@@ -11,6 +11,14 @@
 ---
 
 
+## W989 脚注定形收紧批（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_doc_size_budget.py · scripts/batch_cascade.py | W989 | C4 300→120 双写点收紧 |
+| AGENTS.md | W989 | 五条脚注重写为索引体（55-65 字）·头注 ≤120 |
+| scripts/archive_ledger_rows.py | W989 | 台账回窗 61→59 |
+
 ## W988 水墨卡族投放批（2026-10-27）
 
 | 文件 | W | 说明 |
