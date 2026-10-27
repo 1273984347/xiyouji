@@ -371,7 +371,7 @@ def _face_agents(ctx):
     tail = "。如与上述权威文档冲突，以权威文档为准。*"
     assert s.count(tail) == 1, "AGENTS 脚注尾锚点异常"
     _sep = "" if s[: s.index(tail)].rstrip().endswith("；") else "；"
-    s = s.replace(tail, _sep + "{}。如与上述权威文档冲突，以权威文档为准。*".format(ctx.spec["agents_note"]), 1)
+    s = s.replace(tail, _sep + "{}。如与上述权威文档冲突，以权威文档为准。*".format(ctx.spec["agents_note"].rstrip("。")), 1)  # W972 修：尾句号不剥会拼出「。。」
     # W721 根修（S-29·FAM-14 闭环·W719 R1 制度破约教训）：脚注滚动内建——条目 >5 时最老条迁
     # ARCHIVE 尾块（第 12 面），指针上界同步；制度自此有执行机制，不再依赖手工 trim（W713/W719 两度）。
     _fs = s.find("*本文件由")
