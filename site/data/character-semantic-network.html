@@ -1787,7 +1787,9 @@ function renderHeatmap() {
   const maxWeight = d3.max(data, d => d.weight);
 
   const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
-  const colorScale = d3.scaleSequential(d3.interpolateYlOrRd).domain([0, maxWeight]); // W674 WP-3.8：修二次归一化（原 accessor 已除 maxWeight 再叠 domain 压缩）
+  const dark = document.documentElement.dataset.theme === 'dark';
+  const ramp = dark ? d3.interpolateRgbBasis(['#5a8b8c', '#7d99a9', '#a9b8c4', '#cfc6b3']) /* W993：暗底换冷纸色渐变——YlOrRd 深红端 rgb(163,1,38) L=0.081 暗底不可见（暗色门禁实证） */ : d3.interpolateYlOrRd;
+  const colorScale = d3.scaleSequential(ramp).domain([0, maxWeight]); // W674 WP-3.8：修二次归一化（保留）
 
   data.forEach(d => {
     const i = networks.indexOf(d.from);
