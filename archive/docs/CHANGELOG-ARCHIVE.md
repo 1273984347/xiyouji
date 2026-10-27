@@ -10,6 +10,36 @@
 > **W921 一级归档（2026-10-24）**：W700-W802 段自 CHANGELOG.md 迁入（B-W855-05 主动瘦身·文档规范 §5 归档规则·CHANGELOG 679KB 超基线 11%+）。
 
 
+### W875（2026-10-22）：设计迁移 B11 阅读页 622 页（生成端一处改动·STYLE 补丁·CSP 重算）
+
+> **来源**：用户令「按建议走」第二步。W875 = W826 §6 第十一片（阅读页 622 页）——站点 73% 的页量，生成端一处改动。
+> - **文件**：scripts/build_reader.py、site/reader/（622 页重生成：100 章回 + 216 人物 + 210 主题 + 35 文化 + 14 诗词 + 45 延伸 + 板块目录/hub）、scripts/output/_w875_spec.json、docs/00-导读/W批次编号对账表.md。
+> - **改动**：`STYLE` 常量 18 处补丁——① `.reader-wrap` 的 `max-width: 760px` → `var(--container-read)`（§3.3 阅读页档 760 本就正确·去字面量）；② 11 处精确等值间距 → `var(--space-N)`（12/20/24/32/8px·值保留）；③ 7 处文本色 `--accent` → `--accent-text`（2.1 R1 两值互换·裁决 1 在生成端的落地）：topnav/body/pn/idx hover/toolbar hover/toolbar pressed/feedback hover——3px 竖线与 ▸ 图标不动。
+> - **为什么不逐页改**：622 页逐页改需 622 次 HTML 手术 + 622 行 diff，生成器一处补丁改完即全站生效，`build_reader.py` 重跑即是他日再生的同一份产物。CSP 在重生成后统一重算。
+> - **验收**：抽样 12 页（六板块×2）全量对拍 + 3 金丝雀零 diff。**判词：PASS——695 处 diff 全部归渠零剩余**：7 处文本色 `--accent`→`--accent-text` 的互换（#C8463A→#C7463A·199,70,58）在 12 个抽样页上共触达 ~22 个元素/页（color 及其 currentColor 传播的 4 边框）——正是 2.1 R1 两值互换的落地；间距 11 处值保留、容器 760 不变，**均零 diff**；3 金丝雀（index/dukou/timeline）零 diff；元素数双采一致（6077 == 6077）。**施工中发现并修复两处架构缺口**：① 重生成丢了 reader 的内联 CSS（`inline_css.py` 的 link 正则只认 `../`，reader 子目录 `../../` 永远同步不到）——脚本已打深度感知补丁；② reader 是混合架构（102 章回页内联 + 520 专题/索引页外链），通扫会误把外链页也内联——已按 HEAD 逐页分类恢复。
+> **状态**：**已收官**（W875 54419721·git 反填·共 2 笔·W971 存量回填）
+
+### W874（2026-10-22）：递延版段补写批（W865-W873 九段回写·号序链重新接上）
+
+> **来源**：用户令「按建议走」，选「补段批先做」——W865（首页三任务区重组）与 B5-B10 六批全部递延，顶段停在 W864，`batch_cascade` 的「顶段+1」断言会拦住 B11。
+> - **文件**：CHANGELOG.md、scripts/output/file-index.md、scripts/output/_w874_spec.json、docs/00-导读/W批次编号对账表.md。
+> - **做法**：`backfill_changelog.py`（W842 建）第三次上岗。待补九段（W865-W873）——九批 spec 全部在位，无需新建补位 spec；工具按号序把每段插到「第一个号小于自己的段」之前，file-index 同批回写，规则行 W001-W864 → W001-W873。
+> - **本批自身**：顶段推进到 W873 后，本批经 `batch_cascade` 正常立 W874 段并把「当前态六面」统一推进到 W874。
+> - **不改历史**：只插入、不清洗、不重排、不改写既有段任何字符；不动页面与门禁判据。
+> - **判词**：CHANGELOG 162→171 段 + 本批 W874 段（共 172）· file-index 同批 162→171 · 号序降序完好 · 九批的豁免区登记与对账表状态同步翻转。
+> **状态**：**已收官**（W874 6e24428e·git 反填·共 2 笔·W971 存量回填）
+
+### W873（2026-10-22）：设计迁移 B10 工具与检索 8 页（容器归并·朱砂实底合规·间距令牌化）
+
+> **来源**：用户令「B5–B10 一次做完」，六批连做末片。W873 = W826 §6 第十片（工具与检索 8 页）——**数据+根 95 页迁移清单至此收口**。
+> - **文件**：site/data/data-explorer.html、site/data/graph-explorer.html、site/data/search.html、site/data/material-archaeology.html、site/data/ming-political-thought-comparison.html、site/data/power-resources.html、site/data/magic-system.html、site/data/theological-intervention-network.html、scripts/output/_w873_spec.json、scripts/output/_w873_accent_audit.json、scripts/output/_w873_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
+> - **A 容器**：七页 1320px 令牌化；**theological-intervention-network 的 `.container` 1280 → `var(--container-content)` 1120**——§3.3「data 三页 1280」第三户（三户至此全部归并：semantic-network W866 / monster-background W867 / 本页）。
+> - **B 朱砂实底**：KPI 顶条收敛四页（material 4→1 · ming 6→1 · theological 5→1）；**material-archaeology 的 8 张 artifact-card 网格顶条按裁决 2 收敛**（d3 生成·8 张全同色=装饰网格）；`.seal` 五页转淡底。**15 处语义色片进豁免登记簿 W873 分册**：rank-badge rank-S+ ×5（法术等级）· tag.palace ×3 · vt-btn/keytab.active ×4 · a.active ×2 · faction-card ×1。
+> - **D 间距**：186 处（值保留）。
+> - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 135 处·material 48 / magic-system 43 / power-resources 38）。
+> - **验收**：J2 大 before + 本批 after 双主题对拍 + 全量归渠。**判词：PASS——216 处 diff 全部归渠零剩余**（5 页有 diff·data-explorer / graph-explorer / search 纯豁免与零变化令牌化故 0 diff）：顶条 88 处 + `.seal` 110 处 + 标签重判连带 10 处（material / theological）+ **容器归并连带 8 处**（theological 居中 margin 0→3.2px）。D 186 处零 diff；元素数双采无异常。
+> **状态**：**已收官**（W873 0b56990b·git 反填·共 2 笔·W971 存量回填）
+
 ### W872（2026-10-22）：设计迁移 B9 视觉与叙事实验 10 页（容器令牌化·朱砂实底合规·间距令牌化）
 
 > **来源**：用户令「B5–B10 一次做完」，六批连做第五片。W872 = W826 §6 第九片（视觉与叙事实验 10 页）。
