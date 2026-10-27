@@ -543,6 +543,21 @@ def main():
         if not bad:
             print(f"OK    touches 交集检查：本批声明 {len(mine)} 项·与在途批次（{len(inflight_others)} 个声明方）无交集")
 
+    # 3.6) 级联运行锁状态（W991·①层重启）：活动锁=他方级联写序列进行中——共享面读会撞中态
+    # （混行尾假红/锚点对拍假红族），开工与门禁解读都应知悉。只提示不拦截。
+    try:
+        import cascade_lock
+
+        _held, _lock_info = cascade_lock.status()
+        if _held:
+            import time as _t
+
+            print("WARN  级联运行锁活动：%s@%s（%.0f 秒）——共享面正被级联写·此刻的 verify/preflight 读数可能撞中态"
+                  % (_lock_info.get("holder"), _lock_info.get("batch"),
+                     _t.time() - _lock_info.get("ts", 0)))
+    except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"WARN  级联锁状态不可读（{_exc}）")
+
     # 4) 工作树态
     r = run([git, "status", "--porcelain", "-z"])
     tree = summarize_porcelain(r.stdout)

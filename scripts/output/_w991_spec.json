@@ -1,0 +1,17 @@
+{
+  "batch": "W991",
+  "date": "2026-10-27",
+  "title": "W991 级联运行锁与提交隔离批（①层重启 + safe_commit 守卫·用户两问令）",
+  "desc": "级联运行锁与提交隔离批（运行锁常驻化与无 pathspec 拒绝）",
+  "head_entry": "2026-10-27（W991 级联运行锁与提交隔离批）",
+  "head_sentence": "级联运行锁常驻化与无 pathspec 拒绝",
+  "changelog_body": "\n\n> **来源**：用户两问——「重启设计」（W982 缓建的级联文件锁①层）+「提交总是混入并行会话的暂存件怎么解决」（W989 认领提交 1fb1b14f 扫入他方暂存级联面实证）。\n> **摘要**：① **cascade_lock.py 级联运行锁**——.git/cascade.lock 原子创建（O_EXCL·批次/持有会话/时间戳），batch_cascade --apply 全程持有（finally 必释放），preflight 检测活动锁即 WARN（共享面正被级联写·此刻 verify/preflight 读数可能撞中态）；陈旧锁（≥600 秒）与损坏锁自动夺；与 W982 缓建理由对照：锁做**运行期互斥**而非索引锁，级联自身不重入。② **safe_commit 无 pathspec 守卫**——索引含暂存件而未指 pathspec 即拒绝并逐件列名（pathspec 形态走临时索引只取声明路径 worktree 态·他方暂存件天然隔离）；守卫纯函数三态负样本验证。③ 自测：锁五态（原子创建/拒绝/幂等释放/陈旧夺/损坏夺）。④ 建置实录：锁自测首版「重复释放应 False」是语义错（finally 安全要求幂等 True·改测试不改代码）。\n> **文件**：scripts/cascade_lock.py · scripts/batch_cascade.py · scripts/preflight_check.py · scripts/safe_commit.py · scripts/output/script-coverage-baseline.txt · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md\n> **验证**：锁 --self-test 五态全过 + 守卫三态负样本 + pytest 全量 935 passed + ruff 清零 + 体积四窗全绿。\n> **状态**：在途（认领登记 W991·待提交入库）",
+  "milestone_block": "- **W991 级联运行锁与提交隔离批**：cascade_lock.py（原子创建/陈旧夺/损坏夺·batch_cascade 全程持有·preflight WARN 接线）+ safe_commit 无 pathspec 守卫（索引有暂存件即拒·逐件列名）——W982 缓建①层重启落地",
+  "agents_note": "2026-10-27（W991）级联运行锁与提交隔离批：cascade_lock 运行锁（五态自测）+ batch_cascade 接线 + preflight WARN + safe_commit 无 pathspec 拒绝守卫",
+  "file_index_rows": [
+    "| scripts/cascade_lock.py | W991 | 新建级联运行锁（O_EXCL·陈旧夺·损坏夺·五态自测） |",
+    "| scripts/batch_cascade.py | W991 | --apply 全程持锁（finally 必释放） |",
+    "| scripts/preflight_check.py | W991 | 活动锁 WARN 接线（共享面中态警示） |",
+    "| scripts/safe_commit.py | W991 | 无 pathspec+有暂存即拒（守卫纯函数三态） |"
+  ]
+}

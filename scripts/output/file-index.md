@@ -11,6 +11,37 @@
 ---
 
 
+## W991 级联运行锁与提交隔离批（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/cascade_lock.py | W991 | 新建级联运行锁（O_EXCL·陈旧夺·损坏夺·五态自测） |
+| scripts/batch_cascade.py | W991 | --apply 全程持锁（finally 必释放） |
+| scripts/preflight_check.py | W991 | 活动锁 WARN 接线（共享面中态警示） |
+| scripts/safe_commit.py | W991 | 无 pathspec+有暂存即拒（守卫纯函数三态） |
+
+## W990 内联纪律收口批（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/agent/pitfalls.md | W990 | 查坑表补报错原文 literal（truncated \xXX escape/unicodeescape/invalid escape sequence·撞错 grep 即中）+ 新增条目「并行会话在场的未提交工作树编辑会被吸收或覆盖」（git 节 21→22·总数 87→88）
+| AGENTS.md | W990 | 坑位数 87→88（阅读契约+主题视图·git 节 21→22·W990 校）+ 版本脚注条目
+| HANDOVER.md | W990 | 坑位数指针 87→88 两处 + 级联头尾链与里程碑块
+| docs/00-导读/W批次编号对账表.md | W990 | W990 认领行与收官回填
+| CHANGELOG.md | W990 | W990 段
+| README.md | W990 | 当前批次版本行
+| STRUCTURE.md | W990 | 当前批次版本行
+| docs/00-导读/项目说明.md | W990 | 当前批次版本行
+| .github/workflows/README.md | W990 | 工作流层版本面推进 W990
+| site/index.html | W990 | 页脚批次链插入 W990
+| site/data/cross-time-danmaku.html | W990 | 页脚批次链插入 W990
+| site/data/tag-cloud.html | W990 | 页脚批次链插入 W990
+| site/dukou-engine.html | W990 | 页脚批次链插入 W990
+| CITATION.cff | W990 | version 同步为 W990
+| scripts/output/file-index.md | W990 | W990 段插入
+| scripts/output/_w990_spec.json | W990 | 本批级联 spec
+| scripts/output/_cascade_files_W990.txt | W990 | 级联落盘清单
+
 ## W989 脚注定形收紧批（2026-10-27）
 
 | 文件 | W | 说明 |
@@ -3492,68 +3523,5 @@ docs/11-方案报告/README.md
 | scripts/output/_w864_accent_exemptions.json | W873 | 登记簿增 W873 分册（语义色片 15 处） |
 | scripts/output/_w873_spec.json | W873 | 本批 spec 十字段 |
 | docs/00-导读/W批次编号对账表.md | W873 | 认领行与收官回填 |
-
-
-## W872 设计迁移 B9 视觉与叙事实验 10 页（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/aesthetics.html | W872 | B9 迁移：容器令牌化 + KPI 顶条 4→1 + seal 淡底（热力条 ×4 进豁免） |
-| site/data/visual-art.html | W872 | B9 迁移：容器令牌化 + seal 淡底（sc-cat ×5 进豁免） |
-| site/data/cross-time-danmaku.html | W872 | B9 迁移：容器令牌化 + seal 淡底（级联页脚面·只动 CSS） |
-| site/data/emotional-heatmap.html | W872 | B9 迁移：容器令牌化 + seal 淡底（scholar-card 进豁免） |
-| site/data/chart-design.html | W872 | B9 迁移：容器令牌化 + KPI 顶条 5→1 + seal 淡底（domino ×7 进豁免） |
-| site/data/perf-canvas-rendering.html | W872 | B9 迁移：容器令牌化 + seal 淡底（主行动 btn 进豁免） |
-| site/data/global-pattern.html | W872 | B9 迁移：容器令牌化 + KPI 顶条 4→1 + seal 淡底（p-country 进豁免） |
-| site/data/four-dimensional-research-network.html | W872 | B9 迁移：容器令牌化 + seal 淡底（badge 进豁免） |
-| site/data/four-heavenly-kings-artifacts.html | W872 | B9 迁移：容器令牌化 + KPI 顶条 5→1 + seal 淡底（king-card 进豁免） |
-| site/data/tag-cloud.html | W872 | B9 迁移：容器令牌化 + seal 淡底（rc-size ×5 / tab-btn 进豁免·级联页脚面） |
-| scripts/output/_w872_accent_audit.json | W872 | 新增：B9 朱砂落点审计 |
-| scripts/output/_w872_diff_review.json | W872 | 新增：B9 diff 归渠审查产物 |
-| scripts/output/_w864_accent_exemptions.json | W872 | 登记簿增 W872 分册（语义色片 29 处） |
-| scripts/output/_w872_spec.json | W872 | 本批 spec 十字段 |
-| docs/00-导读/W批次编号对账表.md | W872 | 认领行与收官回填 |
-
-
-## W871 设计迁移 B8 跨学科与实验 10 页（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/cognitive-psychology.html | W871 | B8 迁移：容器令牌化 + seal 淡底 + 间距（char-card 进豁免） |
-| site/data/social-media.html | W871 | B8 迁移：容器令牌化 + KPI 顶条 4→1 + seal 淡底（platform-badge 进豁免） |
-| site/data/business-model.html | W871 | B8 迁移：容器令牌化 + seal 淡底（monster-card 进豁免） |
-| site/data/game-webnovel.html | W871 | B8 迁移：容器令牌化 + KPI 顶条 5→1 + seal 淡底（cc-stat-fill ×10 进豁免） |
-| site/data/mbti-evolution.html | W871 | B8 迁移：容器令牌化 + KPI 顶条 4→1 + seal 淡底（stage-btn 进豁免） |
-| site/data/risk-project.html | W871 | B8 迁移：容器令牌化 + seal 淡底（char-card c-tang 进豁免） |
-| site/data/concept-device.html | W871 | B8 迁移：容器令牌化 + seal 淡底（cipher-back ×5 / idev ×5 进豁免） |
-| site/data/workplace.html | W871 | B8 迁移：容器令牌化 + KPI 顶条 4→1 + seal 淡底（alert-badge ×7 进豁免） |
-| site/data/ethics-consumption.html | W871 | B8 迁移：容器令牌化 + KPI 顶条 5→1 + seal 淡底（ipo-outcome ×5 / veg-badge ×4 进豁免） |
-| site/data/criticism-history.html | W871 | B8 迁移：容器令牌化 + seal 淡底（candidate-card main 进豁免） |
-| scripts/output/_w871_accent_audit.json | W871 | 新增：B8 朱砂落点审计 |
-| scripts/output/_w871_diff_review.json | W871 | 新增：B8 diff 归渠审查产物 |
-| scripts/output/_w864_accent_exemptions.json | W871 | 登记簿增 W871 分册（语义色片 42 处） |
-| scripts/output/_w871_spec.json | W871 | 本批 spec 十字段 |
-| docs/00-导读/W批次编号对账表.md | W871 | 认领行与收官回填 |
-
-
-## W870 设计迁移 B7 文本与思想 10 页（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/text-evolution.html | W870 | B7 迁移：容器令牌化 + seal 淡底 + 间距（evo-step.first ×6 进豁免） |
-| site/data/text-search.html | W870 | B7 迁移：容器令牌化 + seal 淡底 |
-| site/data/linguistics.html | W870 | B7 迁移：容器令牌化 + KPI 顶条 3→1 + seal 淡底（色片/教派卡进豁免） |
-| site/data/famous-time-travel.html | W870 | B7 迁移：容器令牌化 + seal 淡底 |
-| site/data/cultural-misreading.html | W870 | B7 迁移：容器令牌化 + KPI 顶条 4→1 + seal 淡底 |
-| site/data/century-dialogue.html | W870 | B7 迁移：容器令牌化 + seal 淡底（speech-bubble 整改后 3 处在限额内） |
-| site/data/counterfactual.html | W870 | B7 迁移：容器令牌化 + seal 淡底（validity 等级 ×7 进豁免） |
-| site/data/philosophy.html | W870 | B7 迁移：容器令牌化 + seal 淡底 |
-| site/data/jurisprudence.html | W870 | B7 迁移：容器令牌化 + seal 淡底（severity ×8 + artifact 分类 ×2 进豁免） |
-| site/data/karma-reincarnation.html | W870 | B7 迁移：容器令牌化 + seal 淡底（轮回道分类卡进豁免） |
-| scripts/output/_w870_accent_audit.json | W870 | 新增：B7 朱砂落点审计 |
-| scripts/output/_w870_diff_review.json | W870 | 新增：B7 diff 归渠审查产物 |
-| scripts/output/_w864_accent_exemptions.json | W870 | 登记簿增 W870 分册（语义色片 33 处） |
-| scripts/output/_w870_spec.json | W870 | 本批 spec 十字段 |
-| docs/00-导读/W批次编号对账表.md | W870 | 认领行与收官回填 |
 
 

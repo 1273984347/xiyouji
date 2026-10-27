@@ -540,10 +540,24 @@ def main():
     if not args.apply:
         print(f"[DRY-RUN] 10 个面断言与改写全部通过：{ctx.batch}（规则 {ctx.new_rule}）。加 --apply 落盘。")
         return 0
-    _apply_pend(ctx.pend, ctx.batch)
-    selfcheck = _post_check(ctx.pend, ctx.batch)
-    _close_hints()
-    print(f"[APPLY] 级联完成：{ctx.batch} / {ctx.new_rule}，共 {len(ctx.pend)} 个文件；写后自检 {'发现 %d 项' % len(selfcheck) if selfcheck else '全部通过'}")
+    import cascade_lock  # W991：级联运行锁（①层重启·防并行读中态——W971-W989 混行尾假红族根治）
+
+    _lock_ok, _lock_info = cascade_lock.acquire(ctx.batch, holder="batch_cascade")
+    if not _lock_ok:
+        import time as _t
+
+        raise AssertionError(
+            "级联运行锁被 %s@%s 持有（%.0f 秒）——等级联完成或 scripts/cascade_lock.py --force"
+            % (_lock_info.get("holder"), _lock_info.get("batch"),
+               _t.time() - _lock_info.get("ts", 0)))
+    try:
+        _apply_pend(ctx.pend, ctx.batch)
+        selfcheck = _post_check(ctx.pend, ctx.batch)
+        _close_hints()
+        print(f"[APPLY] 级联完成：{ctx.batch} / {ctx.new_rule}，共 {len(ctx.pend)} 个文件；写后自检 {'发现 %d 项' % len(selfcheck) if selfcheck else '全部通过'}")
+    finally:
+        cascade_lock.release()
+        print("[LOCK] 已释放")
     return 0
 
 

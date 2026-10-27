@@ -10,6 +10,39 @@
 > **W921 一级归档（2026-10-24）**：W700-W802 段自 CHANGELOG.md 迁入（B-W855-05 主动瘦身·文档规范 §5 归档规则·CHANGELOG 679KB 超基线 11%+）。
 
 
+### W872（2026-10-22）：设计迁移 B9 视觉与叙事实验 10 页（容器令牌化·朱砂实底合规·间距令牌化）
+
+> **来源**：用户令「B5–B10 一次做完」，六批连做第五片。W872 = W826 §6 第九片（视觉与叙事实验 10 页）。
+> - **文件**：site/data/aesthetics.html、site/data/visual-art.html、site/data/cross-time-danmaku.html、site/data/emotional-heatmap.html、site/data/chart-design.html、site/data/perf-canvas-rendering.html、site/data/global-pattern.html、site/data/four-dimensional-research-network.html、site/data/four-heavenly-kings-artifacts.html、site/data/tag-cloud.html、scripts/output/_w872_spec.json、scripts/output/_w872_accent_audit.json、scripts/output/_w872_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
+> - **A 容器**：十页 1320px 令牌化（含 cross-time-danmaku 与 tag-cloud 两个级联页脚面页·只动 CSS 不动页脚）。
+> - **B 朱砂实底**：KPI 顶条收敛六页（aesthetics 4→1 · chart-design 5→1 · global 4→1 · four-heavenly 5→1）；`.seal` 十页转淡底。**29 处语义色片进豁免登记簿 W872 分册**：scene-bar ×4（热力图行内数据条）· sc-cat ×5 · rc-size ×5（字号档位图例）· domino-card ×4（连锁隐喻展示卡·非列表网格）· domino-hardship ×3 · 分类卡徽章 ×4 · 选中态 ×2 · 主行动按钮 ×2。
+> - **D 间距**：233 处（值保留）。
+> - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 111 处·chart-design 与 emotional-heatmap 各 30 处）。
+> - **验收**：J2 大 before + 本批 after 双主题对拍 + 全量归渠。**判词：PASS——344 处 diff 全部归渠零剩余**：顶条 108 处 + `.seal` 220 处 + 标签重判连带 16 处（global-pattern / four-dimensional 各 2 个 SVG 标签 9↔10px）。D 233 处零 diff；元素数双采无异常。
+> **状态**：**已收官**（W872 5cb1b8b2·git 反填·共 2 笔·W971 存量回填）
+
+### W871（2026-10-22）：设计迁移 B8 跨学科与实验 10 页（容器令牌化·朱砂实底合规·间距令牌化）
+
+> **来源**：用户令「B5–B10 一次做完」，六批连做第四片。W871 = W826 §6 第八片（跨学科与实验 10 页）。
+> - **文件**：site/data/cognitive-psychology.html、site/data/social-media.html、site/data/business-model.html、site/data/game-webnovel.html、site/data/mbti-evolution.html、site/data/risk-project.html、site/data/concept-device.html、site/data/workplace.html、site/data/ethics-consumption.html、site/data/criticism-history.html、scripts/output/_w871_spec.json、scripts/output/_w871_accent_audit.json、scripts/output/_w871_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
+> - **A 容器**：十页 1320px 令牌化。
+> - **B 朱砂实底**：KPI 顶条收敛六页（social 4→1 · business 1 · game 5→1 · mbti 4→1 · workplace 4→1 · ethics 5→1）；`.seal` 十页转淡底。**42 处语义色片进豁免登记簿 W871 分册**：cc-stat-fill ×10（数值进度条）· alert-badge ×7 · ipo-outcome ×5 · cipher-back ×5（翻卡背面皮肤·非网格顶条）· idev ×5 · veg-badge ×4 · 分类卡 ×3 · platform-badge ×1 · stage-btn.active ×1。
+> - **D 间距**：350 处（值保留·六批最多）。
+> - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 259 处）。
+> - **验收**：J2 大 before + 本批 after 双主题对拍 + 全量归渠。**判词：PASS——308 处 diff 全部归渠零剩余**：顶条 80 处 + `.seal` 220 处 + 标签重判连带 8 处（social-media / workplace 各 2 个 SVG 标签 9→10px）。D 350 处零 diff；元素数双采无异常。
+> **状态**：**已收官**（W871 f1197e31·git 反填·共 2 笔·W971 存量回填）
+
+### W870（2026-10-22）：设计迁移 B7 文本与思想 10 页（容器令牌化·朱砂实底合规·间距令牌化）
+
+> **来源**：用户令「B5–B10 一次做完」，六批连做第三片。W870 = W826 §6 第七片（文本与思想 10 页）。
+> - **文件**：site/data/text-evolution.html、site/data/text-search.html、site/data/linguistics.html、site/data/famous-time-travel.html、site/data/cultural-misreading.html、site/data/century-dialogue.html、site/data/counterfactual.html、site/data/philosophy.html、site/data/jurisprudence.html、site/data/karma-reincarnation.html、scripts/output/_w870_spec.json、scripts/output/_w870_accent_audit.json、scripts/output/_w870_diff_review.json、scripts/output/_w864_accent_exemptions.json、docs/00-导读/W批次编号对账表.md。
+> - **A 容器**：十页 1320px 令牌化。
+> - **B 朱砂实底**：KPI 顶条收敛四页（evolution 1 · linguistics 3→1 · misreading 4→1 · counterfactual 1 · karma 1）；`.seal` 十页转淡底。**33 处语义色片进豁免登记簿 W870 分册**：evo-step.first ×6（演化链条首步·位置编码）· linguistics 无类名色片 ×5 + mbti-card ×1 + char-card.c-buddhist ×3 · counterfactual validity-high ×7 · jurisprudence severity-pill ×8 + artifact-card.c-low ×2 · karma char-card.c-chusheng ×1。
+> - **D 间距**：266 处（值保留）。
+> - **C 渠与 `--chart-3` 值切换继续 defer** 至对比度专项批（本批文字落 bg 175 处·philosophy 46 / text-evolution 39 / cultural-misreading 21 为最多三页）。
+> - **验收**：J2 大 before + 本批 after 双主题对拍 + 全量归渠。**判词：PASS——260 处 diff 全部归渠零剩余**：顶条 36 处 + `.seal` 220 处 + 标签重判连带 4 处（text-evolution 2 个 SVG 标签 9→10px）。D 266 处零 diff；元素数双采无异常。
+> **状态**：**已收官**（W870 c000e406·git 反填·共 2 笔·W971 存量回填）
+
 ### W869（2026-10-22）：设计迁移 B6 叙事学 10 页（容器令牌化·朱砂实底合规·间距令牌化）
 
 > **来源**：用户令「B5–B10 一次做完」，六批连做第二片。W869 = W826 §6 迁移清单第六片（叙事学 10 页）。
