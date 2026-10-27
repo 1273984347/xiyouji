@@ -1,0 +1,95 @@
+{
+  "candidates": [
+    {
+      "page": "site/reader/people/如来.html",
+      "stem": "plate-line-25-rulai",
+      "name": "如来",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/people/玉帝.html",
+      "stem": "plate-line-26-yudi",
+      "name": "玉帝",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/people/百眼魔君.html",
+      "stem": "plate-line-27-baiyan-mojun",
+      "name": "百眼魔君",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/people/嫦娥外传.html",
+      "stem": "plate-line-28-change",
+      "name": "嫦娥",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/themes/神学干预机制专题.html",
+      "stem": "plate-line-29-shenxue-ganyu-topic",
+      "name": "神学干预机制",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/themes/取经路径地理符号学专题.html",
+      "stem": "plate-line-30-lujing-ditu-topic",
+      "name": "取经路径地理符号学",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/themes/取经密码学专题.html",
+      "stem": "plate-line-31-mima-pan-topic",
+      "name": "取经密码学",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/essays/西游与民俗学.html",
+      "stem": "plate-line-32-minsu-taofu-topic",
+      "name": "西游与民俗学",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/poetry/西游诗词意象谱系专题.html",
+      "stem": "plate-line-33-yixiang-puxi-topic",
+      "name": "西游诗词意象谱系",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/culture/明代科举制度对照专题.html",
+      "stem": "plate-line-34-keju-zhidu-topic",
+      "name": "明代科举制度对照",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/ch010.html",
+      "stem": "plate-line-35-ch010-weizheng",
+      "name": "第 010 回 魏征斩龙",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/ch004.html",
+      "stem": "plate-line-36-ch004-bimawen",
+      "name": "第 004 回 官封弼马",
+      "ok": true,
+      "reasons": []
+    }
+  ],
+  "negative_sample": {
+    "page": "site/reader/ch030.html",
+    "ok": false,
+    "reasons": [
+      "已有题图容器 chapter-plate"
+    ]
+  }
+}

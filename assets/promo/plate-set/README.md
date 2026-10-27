@@ -1,11 +1,11 @@
-# plate-set · 内页专题题图（线描立像 · 52 张成套）
+# plate-set · 内页专题题图（线描立像 · 64 张成套）
 
-> 生成来源：人工撰写（Agent 起草）·生成模型：MiniMax 图像生成（mcode-tools · `connector__matrix__generate_image`）·生成日期：2026-10-25·**2026-10-27 补记**·核验状态：已核验（52/52 机器判据 PASS · 52/52 逐张放大人眼核过题材与形制 · 负样本自检判据可证伪）
+> 生成来源：人工撰写（Agent 起草）·生成模型：MiniMax 图像生成（mcode-tools · `connector__matrix__generate_image`）·生成日期：2026-10-25·**2026-10-27 补记**·核验状态：已核验（64/64 机器判据 PASS · 64/64 逐张放大人眼核过题材与形制 · 负样本自检判据可证伪）
 > 文件角色：目录导读（人读·与 index.md 分工：本文件讲规格与接入约定，index.md 列逐文件清单）
 
 ## 这个目录装什么
 
-《取经录》**读者页专题题图**成套素材——**52 张**线描立像（人物 30 + 主题 22），画幅统一 `1200×1600`（3:4 竖版），
+《取经录》**读者页专题题图**成套素材——**64 张**线描立像（人物 34 + 主题 28 + 回目页场景 2），画幅统一 `1200×1600`（3:4 竖版），
 按站内既有 `chapter-plate` 范式插在专题页标题下方（420 px 居中）。
 
 与站内同族素材的分工：
@@ -16,7 +16,7 @@
 | `assets/promo/plate-set/`（本目录） | 1200×1600（3:4） | 线描**立像** 52 张 | 内页专题题图 |
 
 **背景缺口**：站内 `site/reader/` 共 622 页，本套接入前**只有 11 页有题图**（6 个回目页 + 5 个专题页）；
-people / themes / essays / poetry / culture 五库绝大部分页面无题图。**现覆盖 63 页**（11 存量 + 52 本套；W974 批再接入 12 个 people 库人物/专题页）。
+people / themes / essays / poetry / culture 五库绝大部分页面无题图。**现覆盖 75 页**（11 存量 + 52 本套 + W974 批 12 + W983 批 12·四库混合：people 4 / themes 3 / essays·poetry·culture 3 / 回目页 2）。
 
 **一览预览**：`preview-contact-sheet.png`（52 张缩略拼图·验成套一致性）；
 `preview-detail-sheet.png`（主体包围盒放大·验题材形制）；`preview-zoom-final.png`（关键部位 3 倍核形制）。
@@ -100,6 +100,23 @@ people / themes / essays / poetry / culture 五库绝大部分页面无题图。
 | `plate-line-23-pansidong-topic` | 盘丝洞主题 | 濯垢泉池 + 放射状蛛丝（末端小圆点） | `reader/people/蜘蛛精.html` |
 | `plate-line-24-wudidong-topic` | 无底洞主题 | 金鼻白毛鼠精（鼻头朱砂）+ 细钢钎 + 地洞石壁 | `reader/people/老鼠精.html` |
 
+### 第六组 · 四库混合覆盖（编号 25–36 · W983 新增）
+
+| 文件（去扩展名） | 主体 | 独占标志物 / 核心物 | 接入页 |
+| --- | --- | --- | --- |
+| `plate-line-25-rulai` | 如来 | 螺髻 + 莲花宝座 + 胸前结印 | `reader/people/如来.html` |
+| `plate-line-26-yudi` | 玉皇大帝 | 冕旒十二串珠 + 玄色帝服 + 白玉笏 | `reader/people/玉帝.html` |
+| `plate-line-27-baiyan-mojun` | 百眼魔君 | 额间千眼巨目 + 降妖杵 | `reader/people/百眼魔君.html` |
+| `plate-line-28-change` | 嫦娥 | 广袖宫装 + 玉兔 + 桂枝 + 满月 | `reader/people/嫦娥外传.html` |
+| `plate-line-29-shenxue-ganyu-topic` | 神学干预机制主题 | 如来翻掌压五行山（山体 + 两道铁链）+ 观音净瓶插柳 | `reader/themes/神学干预机制专题.html` |
+| `plate-line-30-lujing-ditu-topic` | 取经路径地理符号学主题 | 行者平举展开的舆图（赭金路线 + 驿站圆点） | `reader/themes/取经路径地理符号学专题.html` |
+| `plate-line-31-mima-pan-topic` | 取经密码学主题 | 道袍天机士 + 青铜密码转盘（放射刻痕 + 四枚方孔）+ 竹简 | `reader/themes/取经密码学专题.html` |
+| `plate-line-32-minsu-taofu-topic` | 西游与民俗学主题 | 门神（盔冠 + 甲胄 + 佩剑）+ 桃符木牌 + 爆竹 | `reader/essays/西游与民俗学.html` |
+| `plate-line-33-yixiang-puxi-topic` | 西游诗词意象谱系主题 | 唐僧望月 + 念珠 + 诗笺 | `reader/poetry/西游诗词意象谱系专题.html` |
+| `plate-line-34-keju-zhidu-topic` | 明代科举制度对照主题 | 青衫书生 + 儒巾 + 考卷 + 砚台 | `reader/culture/明代科举制度对照专题.html` |
+| `plate-line-35-ch010-weizheng` | 魏征斩龙（回目场景） | 幞头官服 + 长剑 + 三爪盘龙 | `reader/ch010.html`（第 010 回） |
+| `plate-line-36-ch004-bimawen` | 官封弼马（回目场景） | 猴相 + 乌纱官帽 + 齐天大圣旗 + 方官印 | `reader/ch004.html`（第 004 回） |
+
 每张有 `.png`（无损母版·1200×1600）与 `.webp`（站点用·q90）两个版本，文件名仅扩展名不同。
 
 ## 统一规格（成套一致性的硬约束）
@@ -120,7 +137,7 @@ people / themes / essays / poetry / culture 五库绝大部分页面无题图。
 | 位置 | 内容 | 尺寸 | 用途 |
 |---|---|---|---|
 | `assets/promo/plate-set/plate-line-*.png` / `.webp` | **完整母版**（含上部 28% 留白） | 1200×1600 | 卡片叠字 / 分享图裁切 / 二次加工的**源** |
-| `site/static/images/plate-line-*.webp` | **站点版**（只裁掉上部留白） | 1200×955–1458（全目录实测·随主体顶浮动；W974 本批 1030–1301） | 内页专题题图（页面实际呈现） |
+| `site/static/images/plate-line-*.webp` | **站点版**（只裁掉上部留白） | 1200×955–1458（全目录实测·随主体顶浮动；W974 本批 1030–1301；W983 本批 1147–1415） | 内页专题题图（页面实际呈现） |
 
 **为什么站点版要裁**：出图规格要求「上部 28% 纯纸面留白（供叠字）」，而内页版式里页面标题 `<h1>` 本就在图的**外面上方**
 ⇒ 标题与画面主体之间会多出约 190 px 冗余空白（浏览器实跑 1280 视口量得），第一眼像「图缺了一块」。

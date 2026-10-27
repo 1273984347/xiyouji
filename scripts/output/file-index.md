@@ -11,6 +11,74 @@
 ---
 
 
+## W983 内页题图成套批·第四组（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/plate-line-25-rulai.webp | W983 | 新增·站点版（25-rulai） |
+| site/static/images/plate-line-26-yudi.webp | W983 | 新增·站点版（26-yudi） |
+| site/static/images/plate-line-27-baiyan-mojun.webp | W983 | 新增·站点版（27-baiyan-mojun） |
+| site/static/images/plate-line-28-change.webp | W983 | 新增·站点版（28-change） |
+| site/static/images/plate-line-29-shenxue-ganyu-topic.webp | W983 | 新增·站点版（29-shenxue-ganyu-topic） |
+| site/static/images/plate-line-30-lujing-ditu-topic.webp | W983 | 新增·站点版（30-lujing-ditu-topic） |
+| site/static/images/plate-line-31-mima-pan-topic.webp | W983 | 新增·站点版（31-mima-pan-topic） |
+| site/static/images/plate-line-32-minsu-taofu-topic.webp | W983 | 新增·站点版（32-minsu-taofu-topic） |
+| site/static/images/plate-line-33-yixiang-puxi-topic.webp | W983 | 新增·站点版（33-yixiang-puxi-topic） |
+| site/static/images/plate-line-34-keju-zhidu-topic.webp | W983 | 新增·站点版（34-keju-zhidu-topic） |
+| site/static/images/plate-line-35-ch010-weizheng.webp | W983 | 新增·站点版（35-ch010-weizheng） |
+| site/static/images/plate-line-36-ch004-bimawen.webp | W983 | 新增·站点版（36-ch004-bimawen） |
+| site/reader/people/如来.html | W983 | 接入题图（如来（人物）） |
+| site/reader/people/玉帝.html | W983 | 接入题图（玉帝（人物）） |
+| site/reader/people/百眼魔君.html | W983 | 接入题图（百眼魔君（人物）） |
+| site/reader/people/嫦娥外传.html | W983 | 接入题图（嫦娥（人物）） |
+| site/reader/themes/神学干预机制专题.html | W983 | 接入题图（神学干预机制（主题）） |
+| site/reader/themes/取经路径地理符号学专题.html | W983 | 接入题图（取经路径地理符号学（主题）） |
+| site/reader/themes/取经密码学专题.html | W983 | 接入题图（取经密码学（主题）） |
+| site/reader/essays/西游与民俗学.html | W983 | 接入题图（西游与民俗学（跨学科）） |
+| site/reader/poetry/西游诗词意象谱系专题.html | W983 | 接入题图（西游诗词意象谱系（跨学科）） |
+| site/reader/culture/明代科举制度对照专题.html | W983 | 接入题图（明代科举制度对照（跨学科）） |
+| site/reader/ch010.html | W983 | 接入题图（第 010 回 魏征斩龙（回目页）） |
+| site/reader/ch004.html | W983 | 接入题图（第 004 回 官封弼马（回目页）） |
+| assets/promo/plate-set/plate-line-25~36-*.png/.webp | W983 | 新增 12 张母版（1200×1600·线描墨稿·含 3 张重出生效件） |
+| assets/promo/plate-set/raw/round12/ | W983 | 出图原件 12 份（含 #26/#27/#36 三张重出生效件） |
+| assets/promo/plate-set/preview-contact-sheet.png/.webp | W983 | 全目录 64 张缩略拼图（刷新） |
+| assets/promo/plate-set/README.md | W983 | 口径更新（52→64 张·第六组清单·本批已知取舍） |
+| scripts/_w983_make_spec.py | W983 | 级联 spec 生成器（文件清单从磁盘实算·不手抄） |
+| scripts/_w983_make_prompts.py | W983 | 母版复用生成器（249 字符母版逐字复用·四条断言·stem 冲突负样本自证） |
+| scripts/_w983_precheck_pages.py | W983 | 落位页先验（存在 + 无题图 + 结构锚点·负样本自证） |
+| scripts/_w983_derive.py | W983 | 施工脚本程序化派生器（替换表 + 残留硬编码断言） |
+| scripts/_w983_prepare.py | W983 | 成品派生（裁 3:4 → 缩放 → 纸色归一 → 母版/站点版 → 拼图·作用域限 raw/round12） |
+| scripts/_w983_download.py | W983 | 出图原件下载（node_id → 短链 → 落盘·按 node_id↔文件名映射） |
+| scripts/_w983_insert_plates.py | W983 | 12 页 chapter-plate 接入（幂等） |
+| scripts/_w983_retry.py | W983 | 单张重出修正器（行内短锚点替换 + 重建 batch + 断言修正点入 prompt） |
+| scripts/_w983_sheet.py | W983 | 本批 12 张核对拼图生成器 |
+| scripts/_w983_zoom.py | W983 | 关键部位放大核对图生成器 |
+| scripts/_w983_serve.py | W983 | 本地验收静态服务（补 webp/js/css MIME） |
+| scripts/_w945_plates_verify.py | W983 | 素材成套判据 J1–J10（自归档恢复为现役·判据逻辑逐字未改） |
+| scripts/_w951_check_crop.py | W983 | 站点版裁切验算（自归档恢复为现役·判据逻辑逐字未改） |
+| docs/11-方案报告/计划方案/执行前计划-T30-内页题图成套批第四组.md | W983 | 执行前计划件（框架号 T-30） |
+| docs/11-方案报告/计划方案/T30-任务计划执行与经验沉淀报告-2026-10-27.md | W983 | 终稿报告件（执行记录/验收/复盘/经验沉淀） |
+| docs/11-方案报告/README.md | W983 | §六 计划方案登记（+2 行·件数十 37→39） |
+| docs/agent/pitfalls.md | W983 | 坑表 +6 条（64→70·视觉渲染 12→15 / 流程 10→13） |
+| docs/10-方法论沉淀/素材批处理与判据自证方法论.md | W983 | 新增 §2.7 判据覆盖面的边界 + 4 条复现案例 |
+| docs/00-导读/W批次编号对账表.md | W983 | W983 认领行 + W982 行 git 反填 |
+| site/data/search.html | W983 | 搜索索引重建（新文档入索引）+ CSP 哈希同步 |
+| site/en/search.html | W983 | 搜索索引重建（新文档入索引）+ CSP 哈希同步 |
+| CHANGELOG.md | W983 | W983 段 |
+| docs/00-导读/W批次编号对账表.md | W983 | W983 认领行 |
+| README.md | W983 | 当前批次版本行 |
+| STRUCTURE.md | W983 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W983 | 当前批次版本行 |
+| .github/workflows/README.md | W983 | 工作流层版本面推进 W983 |
+| site/index.html | W983 | 页脚批次链插入 W983 |
+| site/data/cross-time-danmaku.html | W983 | 页脚批次链插入 W983 |
+| site/data/tag-cloud.html | W983 | 页脚批次链插入 W983 |
+| site/dukou-engine.html | W983 | 页脚批次链插入 W983 |
+| AGENTS.md | W983 | 版本脚注条目 + 坑位条数声明 64→70 |
+| archive/docs/AGENTS-ARCHIVE.md | W983 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W983 | version 同步为 W983 |
+| scripts/output/file-index.md | W983 | W983 段插入 |
+
 ## W982 手搓绕过级联治理批（2026-10-27）
 
 | 文件 | W | 说明 |
@@ -3245,38 +3313,4 @@
 | scripts/output/_w866_spec.json | W866 | 本批 spec 十字段 |
 | docs/00-导读/W批次编号对账表.md | W866 | 认领行与收官回填 |
 
-
-## W865 首页三任务区重组 + 目录页检索动线批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/index.html | W865 | 改：首页三任务区重组（顶层块 9→6·三区各 1 个 h2·搜索降为工具条·装饰 SVG 与开篇诗移出首屏·stats 收进看数据区·移动端 mega 降为紧凑计量） |
-| site/reader/index.html | W865 | 改：总目录页加检索工具条（即时过滤 + 回号直达 + 6 组跳转锚点 + 命中计数·由生成器产出） |
-| site/reader/**（101 页） | W865 | 改：INLINED CSS 块回注同步（此前陈旧·缺 W856 的 .brand-mark 样式）·内容零变化 |
-| site/js/reader-enhance.js | W865 | 改：加总目录页检索逻辑（DOM 守卫·其余 621 页行为零变化·零外域·file:// 可用） |
-| scripts/build_reader.py | W865 | 改：_render_root_index 出检索工具条 + 分组锚点（生成器是真源·产物与生成器同源） |
-| scripts/_w865_layout_probe.mjs | W865 | 新增：双页面布局与交互探针（无头 Chrome CDP·首页层级/首屏入口 + 目录页过滤与回号直达实测） |
-| scripts/output/_w865_layout_metrics.json | W865 | 新增：5 组实测度量（首页 1440/768/375 + 目录页 1440/375） |
-
-
-## W864 设计迁移 B2 结构页 10 页（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/chapter-structure-graph.html | W864 | B2 迁移：容器令牌化 + KPI 顶条收敛 + seal 淡底 + 间距令牌化 9 处 |
-| site/data/chapter-stats.html | W864 | B2 迁移：同上（间距 8 处） |
-| site/data/story-timeline.html | W864 | B2 迁移：同上（间距 7 处） |
-| site/data/timeline.html | W864 | B2 迁移：容器令牌化 + seal 淡底 + 间距 23 处（顶条已合规） |
-| site/data/relationships.html | W864 | B2 迁移：容器令牌化 + 顶条收敛（alt 变体不动）+ seal 淡底 + 间距 45 处 |
-| site/data/81-hardships.html | W864 | B2 迁移：容器令牌化 + seal 淡底 + 间距 16 处（90 tag 进豁免清单） |
-| site/data/81-hardships-view.html | W864 | B2 迁移：容器令牌化 + 顶条收敛 + seal 淡底 + 间距 18 处 |
-| site/data/hardship-heatmap.html | W864 | B2 迁移：容器令牌化 + 顶条收敛 + seal 淡底 + 间距 23 处 |
-| site/data/hardship-difficulty-heatmap.html | W864 | B2 迁移：容器令牌化 + 顶条收敛 + seal 淡底 + 间距 20 处 |
-| site/data/methodology-matrix.html | W864 | B2 迁移：容器令牌化 + 顶条收敛 + seal 淡底 + 间距 47 处 |
-| scripts/_w864_migrate.py | W864 | 新增：B2 施工件（A 容器 + B 顶条规则 + B seal·块扫描·dry-run） |
-| scripts/_w864_accent_audit.py | W864 | 新增：朱砂落点审计（文字 + 实底双尺子·计算样式） |
-| scripts/output/_w864_accent_audit.json | W864 | 新增：审计产物（10 页文字与实底落点） |
-| scripts/output/_w864_accent_exemptions.json | W864 | 新增：裁决 2 豁免清单首批（数据语义色片 + 选中态实底） |
-| scripts/output/_w864_spec.json | W864 | 本批 spec 十字段 |
-| docs/00-导读/W批次编号对账表.md | W864 | 认领行与收官回填 |
 

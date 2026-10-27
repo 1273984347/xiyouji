@@ -2,7 +2,7 @@
 
 > 本文件归档 file-index.md 中 W031-W087（v2.0.4-v2.0.60）的早期反向索引条目。
 > 现役索引见 [file-index.md](file-index.md)。
-> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863）
+> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865）
  + 2026-10-26（W960 迁入 W843-W845）
  + 2026-10-26（W960 迁入 W700-W842）
 
@@ -9277,3 +9277,36 @@
 | scripts/output/_w862_diff_review.json | W862 | 新增：B1 迁移 diff 归渠审查产物 |
 | scripts/output/_w862_spec.json | W862 | 本批 spec 十字段 |
 | docs/00-导读/W批次编号对账表.md | W862 | 认领行与收官回填 |
+## W865 首页三任务区重组 + 目录页检索动线批（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/index.html | W865 | 改：首页三任务区重组（顶层块 9→6·三区各 1 个 h2·搜索降为工具条·装饰 SVG 与开篇诗移出首屏·stats 收进看数据区·移动端 mega 降为紧凑计量） |
+| site/reader/index.html | W865 | 改：总目录页加检索工具条（即时过滤 + 回号直达 + 6 组跳转锚点 + 命中计数·由生成器产出） |
+| site/reader/**（101 页） | W865 | 改：INLINED CSS 块回注同步（此前陈旧·缺 W856 的 .brand-mark 样式）·内容零变化 |
+| site/js/reader-enhance.js | W865 | 改：加总目录页检索逻辑（DOM 守卫·其余 621 页行为零变化·零外域·file:// 可用） |
+| scripts/build_reader.py | W865 | 改：_render_root_index 出检索工具条 + 分组锚点（生成器是真源·产物与生成器同源） |
+| scripts/_w865_layout_probe.mjs | W865 | 新增：双页面布局与交互探针（无头 Chrome CDP·首页层级/首屏入口 + 目录页过滤与回号直达实测） |
+| scripts/output/_w865_layout_metrics.json | W865 | 新增：5 组实测度量（首页 1440/768/375 + 目录页 1440/375） |
+
+
+## W864 设计迁移 B2 结构页 10 页（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/chapter-structure-graph.html | W864 | B2 迁移：容器令牌化 + KPI 顶条收敛 + seal 淡底 + 间距令牌化 9 处 |
+| site/data/chapter-stats.html | W864 | B2 迁移：同上（间距 8 处） |
+| site/data/story-timeline.html | W864 | B2 迁移：同上（间距 7 处） |
+| site/data/timeline.html | W864 | B2 迁移：容器令牌化 + seal 淡底 + 间距 23 处（顶条已合规） |
+| site/data/relationships.html | W864 | B2 迁移：容器令牌化 + 顶条收敛（alt 变体不动）+ seal 淡底 + 间距 45 处 |
+| site/data/81-hardships.html | W864 | B2 迁移：容器令牌化 + seal 淡底 + 间距 16 处（90 tag 进豁免清单） |
+| site/data/81-hardships-view.html | W864 | B2 迁移：容器令牌化 + 顶条收敛 + seal 淡底 + 间距 18 处 |
+| site/data/hardship-heatmap.html | W864 | B2 迁移：容器令牌化 + 顶条收敛 + seal 淡底 + 间距 23 处 |
+| site/data/hardship-difficulty-heatmap.html | W864 | B2 迁移：容器令牌化 + 顶条收敛 + seal 淡底 + 间距 20 处 |
+| site/data/methodology-matrix.html | W864 | B2 迁移：容器令牌化 + 顶条收敛 + seal 淡底 + 间距 47 处 |
+| scripts/_w864_migrate.py | W864 | 新增：B2 施工件（A 容器 + B 顶条规则 + B seal·块扫描·dry-run） |
+| scripts/_w864_accent_audit.py | W864 | 新增：朱砂落点审计（文字 + 实底双尺子·计算样式） |
+| scripts/output/_w864_accent_audit.json | W864 | 新增：审计产物（10 页文字与实底落点） |
+| scripts/output/_w864_accent_exemptions.json | W864 | 新增：裁决 2 豁免清单首批（数据语义色片 + 选中态实底） |
+| scripts/output/_w864_spec.json | W864 | 本批 spec 十字段 |
+| docs/00-导读/W批次编号对账表.md | W864 | 认领行与收官回填 |
