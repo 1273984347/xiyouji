@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-27 20:58
+生成时间：2026-10-27 22:01
 
-共 **177** 件（门禁与校验 64 · 批次与登记 10 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 46 · 一次性（下划线前缀） 47）
+共 **193** 件（门禁与校验 64 · 批次与登记 10 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 46 · 一次性（下划线前缀） 63）
 
 ## 门禁与校验（64）
 
@@ -168,7 +168,7 @@
 | `tracked_files.py` | tracked_files.py — 目标提交树文件集合（W894 批·门禁实算口径的单一事实源） |
 | `worktree_rehearse.py` | worktree_rehearse.py — worktree 预演法工具化（W701·S-26·用户圈选开工）。 |
 
-## 一次性（下划线前缀）（47）
+## 一次性（下划线前缀）（63）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -219,3 +219,19 @@
 | `_w987_family_scan.py` | _w987_family_scan.py — W987 水墨意境卡族盘点 + 回目页插入点实测 |
 | `_w987_insert_scenes.py` | _w987_insert_scenes.py — W987：把 6 张水墨意境图接入回目页「场景插图」位 |
 | `_w987_make_spec.py` | _w987_make_spec.py — W987 级联 spec 生成（水墨意境卡族启用批） |
+| `_w988_card_sheet.py` | _w988_card_sheet.py — 27 张 card-* 水墨卡总拼图（4 列 × 7 行·逐张定题材用） |
+| `_w988_docs.py` | _w988_docs.py — W988 登记面：README §六 补登记 + 方法论篇 §2.9 |
+| `_w988_fix_cascade.py` | _w988_fix_cascade.py — W988 级联后定向订正（「文件」行 / file-index 段补齐 115 个新资产） |
+| `_w988_fix_eol.py` | _w988_fix_eol.py — W988 修复 W988 批写盘污染的行尾（CRCRLF → CRLF） |
+| `_w988_fix_gates.py` | _w988_fix_gates.py — W988 门禁两项 FAIL 的定向修复 |
+| `_w988_insert.py` | _w988_insert.py — W988 接入：27 张水墨卡上站 + 102 页 og:image 换专属图 |
+| `_w988_inventory.py` | _w988_inventory.py — W988 前置盘点（只读·不改任何文件） |
+| `_w988_make_assets.py` | _w988_make_assets.py — W988 派生两类资产（不碰页面·只写图） |
+| `_w988_make_spec.py` | _w988_make_spec.py — W988 级联 spec 生成（水墨卡族投放批） |
+| `_w988_match.py` | _w988_match.py — W988 落位候选页语义盘点（只读） |
+| `_w988_pitfalls.py` | _w988_pitfalls.py — W988 坑表 +6 条与计数链同步（原子替换·保行尾） |
+| `_w988_plan.py` | _w988_plan.py — W988 落位定案表（单一事实源·供预检/接入/og派生三处共用） |
+| `_w988_precheck.py` | _w988_precheck.py — W988 接入前预检（只读·不写盘） |
+| `_w988_sheet.py` | _w988_sheet.py — W988 拼图（核验用·不改页面） |
+| `_w988_subject.py` | _w988_subject.py — W988 共用：主体检测与派生裁切（不写盘·纯函数） |
+| `_w988_verify.py` | _w988_verify.py — W988 验收判据（可复算·含负样本自证） |

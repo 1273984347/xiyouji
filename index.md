@@ -27,7 +27,7 @@
 - `xiyouji-agent-web/`
 - `xiyouji-desktop/`
 
-## 文件（25）
+## 文件（22）
 
 ### Markdown 文档
 
@@ -46,9 +46,6 @@
 ### Python 脚本
 
 - `_tmp_chap_sheet.py`
-- `_tmp_family_sheet.py`
-- `_tmp_probe_scenes.py`
-- `_tmp_w987_register.py`
 
 ### JavaScript / TypeScript
 
