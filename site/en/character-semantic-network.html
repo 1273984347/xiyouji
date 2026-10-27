@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qs+poalD+B70ZLEimbNXweBZu1fvC+u+567cGY0VkqI=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-LSTLK4d97uMbKXHZopf6B3qlMTxso7EeaDzMt7bz0jo=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-RkxYKvRFU9s1BxdkFdj7joMugyb0d1+nh4Mb23t7MPM=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-LSTLK4d97uMbKXHZopf6B3qlMTxso7EeaDzMt7bz0jo=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Character Semantic Network · 详解西游记</title>
@@ -22,7 +22,7 @@
     <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
-                                                                                                                                                                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -303,7 +303,6 @@ html[data-theme="dark"]:not(:has(#audit-halo)) svg tspan { fill: var(--ink) !imp
   html[data-theme="dark"] svg [fill="#8b0000" i] { fill: #c5857c !important; }  /* ×2 */
   html[data-theme="dark"] svg [fill="rgb(190, 24, 39)" i] { fill: #d67b7c !important; }  /* ×1 */
   html[data-theme="dark"] svg [fill="rgb(128, 0, 38)" i] { fill: #c1858d !important; }  /* ×82 */
-  html[data-theme="dark"] svg [fill="rgb(163, 1, 38)" i] { fill: #ce7e88 !important; }  /* ×1 L<0.16 */
   html[data-theme="dark"] svg [fill="rgb(165, 0, 38)" i] { fill: #ce7e88 !important; }  /* ×42 */
   html[data-theme="dark"] svg [fill="rgb(175, 2, 37)" i] { fill: #d27c85 !important; }  /* ×32 */
   html[data-theme="dark"] svg [fill="rgb(211, 17, 33)" i] { fill: #e17576 !important; }  /* ×30 */
@@ -1296,6 +1295,33 @@ td.num, th.num {
 html[data-theme="dark"] .viz-illustration {
     display: none;
 }
+
+/* ===== W939 图标系统 · 东方线描（24×24 网格 / 1.5px 描边 / currentColor 随主题） =====
+   用途：替代以 emoji 表情充当图标的做法（图标位一律用矢量图形）。
+   形态：内联 svg 元素（HTML 结构位·class 属性取 ico / ico-t）+ mask-image（同源 SVG·CSS content 位）。
+   图形资产：site/static/icons/ui/*.svg（单一事实源·scripts/_w939_gen_icons.py 生成）。
+   风格：与既有 .icon-moon / .icon-sun 同族（同为 24×24 线描 · stroke 1.5 · currentColor）。
+   色彩：描边走 currentColor ⇒ 跟随所在文字色，暗色模式自动适配，无需第二套配色。
+   尺寸：以 em 为单位 ⇒ 跟随宿主 font-size（.es-icon 2rem / .pc-emoji 22px 等）。
+   间距：ico 本身无外边距（供纯图标位）；「图标 + 文字」处加 ico-t 补 0.32em。 */
+.ico {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.14em;
+    flex: none;
+    /* 描边参数写在 CSS 而非 SVG 属性：CSS 优先级高于 presentation attribute，
+       可压过站内既有 svg 规则（tokens.css 的图表着色族）⇒ 图标必为线描而非黑块。 */
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.ico-t {
+    margin-right: 0.32em;
+}
     </style>
 <style>
         /* e-track-exempt: chart-data-colors 1 处 */
@@ -1748,7 +1774,9 @@ function renderHeatmap() {
   const maxWeight = d3.max(data, d => d.weight);
 
   const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
-  const colorScale = d3.scaleSequential(d3.interpolateYlOrRd).domain([0, maxWeight]); // W674 WP-3.8: fix double normalization (accessor already divided by maxWeight, domain compressed again)
+  const dark = document.documentElement.dataset.theme === 'dark';
+  const ramp = dark ? d3.interpolateRgbBasis(['#5a8b8c', '#7d99a9', '#a9b8c4', '#cfc6b3']) /* W993：暗底换冷纸色渐变——YlOrRd 深红端 rgb(163,1,38) L=0.081 暗底不可见（暗色门禁实证） */ : d3.interpolateYlOrRd;
+  const colorScale = d3.scaleSequential(ramp).domain([0, maxWeight]); // W674 WP-3.8: fix double normalization preserved
 
   data.forEach(d => {
     const i = networks.indexOf(d.from);

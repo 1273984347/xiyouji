@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-KgVuoNpocFGzOqUnZn+9J0s11wyUxLGWCgCu+TTRwRY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1gK2vbrCgVylWNR7w106o8BbtlI1iY4S0e1Eh4pTdws=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Cognitive Psychology · Annotated Journey to the West</title>
@@ -22,7 +22,7 @@
     <noscript><p style="color:#C8463A;padding:var(--space-4);">This page requires JavaScript to render its charts.</p></noscript>
     
     
-                                                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -1295,6 +1295,33 @@ td.num, th.num {
 html[data-theme="dark"] .viz-illustration {
     display: none;
 }
+
+/* ===== W939 图标系统 · 东方线描（24×24 网格 / 1.5px 描边 / currentColor 随主题） =====
+   用途：替代以 emoji 表情充当图标的做法（图标位一律用矢量图形）。
+   形态：内联 svg 元素（HTML 结构位·class 属性取 ico / ico-t）+ mask-image（同源 SVG·CSS content 位）。
+   图形资产：site/static/icons/ui/*.svg（单一事实源·scripts/_w939_gen_icons.py 生成）。
+   风格：与既有 .icon-moon / .icon-sun 同族（同为 24×24 线描 · stroke 1.5 · currentColor）。
+   色彩：描边走 currentColor ⇒ 跟随所在文字色，暗色模式自动适配，无需第二套配色。
+   尺寸：以 em 为单位 ⇒ 跟随宿主 font-size（.es-icon 2rem / .pc-emoji 22px 等）。
+   间距：ico 本身无外边距（供纯图标位）；「图标 + 文字」处加 ico-t 补 0.32em。 */
+.ico {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.14em;
+    flex: none;
+    /* 描边参数写在 CSS 而非 SVG 属性：CSS 优先级高于 presentation attribute，
+       可压过站内既有 svg 规则（tokens.css 的图表着色族）⇒ 图标必为线描而非黑块。 */
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.ico-t {
+    margin-right: 0.32em;
+}
     </style>
 <style>
         /* e-track-exempt: chart-data-colors 6 处 */
@@ -2343,8 +2370,8 @@ table.data-table th, table.data-table td { white-space: nowrap; }
         rows.append('td').text(d => d.actual);
         rows.append('td').text(d => d.wukong_judgment);
         rows.append('td').html(d => d.judgment_correct
-            ? '<span class="icon-correct">✓</span>'
-            : '<span class="icon-wrong">✗</span>');
+            ? '<span class="icon-correct"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.8 12.4l4.7 4.9L19.2 6.8" transform="translate(-3.0 -3.0625) scale(1.25)"/></svg></span>'
+            : '<span class="icon-wrong"><svg class="ico" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 6.4l11.2 11.2M17.6 6.4L6.4 17.6" transform="translate(-6.75 -6.75) scale(1.5625)"/></svg></span>');
         rows.append('td').text(d => d.cognitive_error);
         rows.append('td').text(d => d.consequence);
     }

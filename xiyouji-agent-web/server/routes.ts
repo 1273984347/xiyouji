@@ -67,21 +67,26 @@ interface LoginStatusResponse {
 }
 
 /** 会话与消息列表（含 messageCount；tool_calls 由 JSON 文本解析回数组）。 */
-function listSessionsWithCount(limit = 50): Array<Record<string, unknown>> {
+async function listSessionsWithCount(limit = 50): Promise<Array<Record<string, unknown>>> {
   // W919 B-DB-02：N+1 改写——单 SQL 子查询（原 getAllSessions().map(getMessagesBySession.length) 每会话一查）
   const capped = Math.min(Math.max(1, limit), 200); // 上限 200（W823 §7.2 契约）
-  const rows = db.listSessionsWithMessageCount(capped) as Array<Record<string, unknown>>;
+  // W934：存储层抽象后为异步（PG 是网络库）——SQLite 后端实现体仍是同步调用
+  const rows = await db.listSessionsWithMessageCount(capped);
   return rows;
 }
 
 /**
  * 数据库可达性探针（W808 新增）：供 /api/ready 使用。
- * 语义：执行一条最小查询（SELECT 1）确认 SQLite 连接可用。
+ * 语义：执行一条最小查询确认存储后端可用。
+ *
+ * W934：改为走抽象层的 healthCheck()——SQLite 是进程内探针，PG 是 `SELECT 1` 往返。
  */
-function checkDatabase(): { status: "ok" | "error"; detail?: string } {
+async function checkDatabase(): Promise<{ status: "ok" | "error"; detail?: string }> {
   try {
-    db.getAllSessions();
-    return { status: "ok" };
+    const health = await db.healthCheck();
+    if (health.ok) return { status: "ok" };
+    logger.error("数据库可达性探针失败", { error: health.detail });
+    return { status: "error", detail: "数据库不可用" };
   } catch (error) {
     // W829：不回显底层异常原文（含 SQLite 库文件绝对路径）——形状不变·取值固定·原文进日志
     logger.error("数据库可达性探针失败", {
@@ -94,11 +99,11 @@ function checkDatabase(): { status: "ok" | "error"; detail?: string } {
 /** 注册所有非流式 /api 路由。 */
 export function registerApiRoutes(app: Express, permissions: PendingPermissionStore): void {
   // 健康检查（W600 反馈闭环起，本路由即 W791 集成测试的探活点）
-  app.post("/api/feedback", (req, res) => {
+  app.post("/api/feedback", async (req, res) => {
     // W808：入参经 Zod 校验；失败保持既有契约 `400 invalid body`（状态码与文案逐字不变·
     // feedback.test.mjs 第 3 项断言即钉此契约），字段级明细仅进日志不进响应体。
     const body = parseBody(feedbackBodySchema, req.body, { statusCode: 400, message: "invalid body" });
-    const inserted = db.insertFeedback({
+    const inserted = await db.insertFeedback({
       id: uuidv4(),
       session_id: body.sessionId,
       message_id: body.messageId,
@@ -108,8 +113,8 @@ export function registerApiRoutes(app: Express, permissions: PendingPermissionSt
     res.json({ ok: true, inserted });
   });
 
-  app.get("/api/feedback/summary", (_req, res) => {
-    res.json({ ok: true, ...db.feedbackSummary(30) });
+  app.get("/api/feedback/summary", async (_req, res) => {
+    res.json({ ok: true, ...(await db.feedbackSummary(30)) });
   });
 
   app.get("/api/health", (req, res) => {
@@ -118,8 +123,8 @@ export function registerApiRoutes(app: Express, permissions: PendingPermissionSt
 
   // W808 新增：就绪探针（与 /api/health 的分工——health 只证明进程活着，ready 证明依赖可用）。
   // 任一依赖不可用返回 503（供容器编排判定「暂不可接流量」）。
-  app.get("/api/ready", (_req, res) => {
-    const checks = { database: checkDatabase() };
+  app.get("/api/ready", async (_req, res) => {
+    const checks = { database: await checkDatabase() };
     const ok = Object.values(checks).every((c) => c.status === "ok");
     res.status(ok ? 200 : 503).json({ status: ok ? "ok" : "degraded", checks });
   });
@@ -192,20 +197,20 @@ export function registerApiRoutes(app: Express, permissions: PendingPermissionSt
  */
 function registerSessionRoutes(app: Express): void {
   // 获取所有会话（包含消息数量）
-  app.get("/api/sessions", (_req, res) => {
-    res.json({ sessions: listSessionsWithCount() });
+  app.get("/api/sessions", async (_req, res) => {
+    res.json({ sessions: await listSessionsWithCount() });
   });
 
   // 获取单个会话及其消息
-  app.get("/api/sessions/:sessionId", (req, res) => {
+  app.get("/api/sessions/:sessionId", async (req, res) => {
     const { sessionId } = req.params;
-    const session = db.getSession(sessionId);
+    const session = await db.getSession(sessionId);
 
     if (!session) {
       throw new NotFoundError("会话", sessionId);
     }
 
-    const messages = db.getMessagesBySession(sessionId);
+    const messages = await db.getMessagesBySession(sessionId);
 
     // 解析 tool_calls JSON
     const parsedMessages = messages.map((msg) => ({
@@ -218,11 +223,11 @@ function registerSessionRoutes(app: Express): void {
   });
 
   // 创建新会话
-  app.post("/api/sessions", (req, res) => {
+  app.post("/api/sessions", async (req, res) => {
     const body = parseBody(createSessionBodySchema, req.body);
     const now = new Date().toISOString();
 
-    const session = db.createSession({
+    const session = await db.createSession({
       id: uuidv4(),
       title: body.title ?? "新对话",
       model: body.model ?? defaultModel,
@@ -235,11 +240,11 @@ function registerSessionRoutes(app: Express): void {
   });
 
   // 更新会话
-  app.patch("/api/sessions/:sessionId", (req, res) => {
+  app.patch("/api/sessions/:sessionId", async (req, res) => {
     const { sessionId } = req.params;
     const body = parseBody(updateSessionBodySchema, req.body);
 
-    const success = db.updateSession(sessionId, { title: body.title, model: body.model });
+    const success = await db.updateSession(sessionId, { title: body.title, model: body.model });
 
     if (!success) {
       throw new NotFoundError("会话", sessionId);
@@ -249,9 +254,9 @@ function registerSessionRoutes(app: Express): void {
   });
 
   // 删除会话
-  app.delete("/api/sessions/:sessionId", (req, res) => {
+  app.delete("/api/sessions/:sessionId", async (req, res) => {
     const { sessionId } = req.params;
-    const success = db.deleteSession(sessionId);
+    const success = await db.deleteSession(sessionId);
 
     if (!success) {
       throw new NotFoundError("会话", sessionId);

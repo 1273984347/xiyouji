@@ -66,7 +66,7 @@ function normalizeJsStringLiterals(raw) {
       }
       if (j >= raw.length) return null;
       flushCode();
-      out += '"' + content.replace(/"/g, '\\"') + '"';
+      out += '"' + content.replace(/[\\"]/g, function (c) { return c === '\\' ? '\\\\' : '\"'; }) + '"';
       i = j + 1;
       continue;
     }

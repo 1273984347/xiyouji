@@ -1,0 +1,123 @@
+{
+  "candidates": [
+    {
+      "page": "site/reader/ch007.html",
+      "action": "REPLACE",
+      "stem": "plate-line-37-ch007-bagua-lu",
+      "name": "第 007 回 八卦炉与五行山",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/ch014.html",
+      "action": "REPLACE",
+      "stem": "plate-line-38-ch014-liubei",
+      "name": "第 014 回 六贼剪径",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/ch015.html",
+      "action": "REPLACE",
+      "stem": "plate-line-39-ch015-yingchou",
+      "name": "第 015 回 鹰愁涧意马收缰",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/ch023.html",
+      "action": "REPLACE",
+      "stem": "plate-line-40-ch023-sichan",
+      "name": "第 023 回 四圣试禅心",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/ch027.html",
+      "action": "REPLACE",
+      "stem": "plate-line-41-ch027-bailong",
+      "name": "第 027 回 白龙归水",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/ch030.html",
+      "action": "REPLACE",
+      "stem": "plate-line-42-ch030-sancha",
+      "name": "第 030 回 邪魔侵正法",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/people/罗刹女外传.html",
+      "action": "INSERT",
+      "stem": "plate-line-43-luoshanv",
+      "name": "罗刹女",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/people/奎木狼外传.html",
+      "action": "INSERT",
+      "stem": "plate-line-44-kuimulang",
+      "name": "奎木狼",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/themes/招安的两种结局专题.html",
+      "action": "INSERT",
+      "stem": "plate-line-45-zhaoan-topic",
+      "name": "招安的两种结局",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/essays/西游与服饰学.html",
+      "action": "INSERT",
+      "stem": "plate-line-46-fushi-topic",
+      "name": "西游与服饰学",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/poetry/原著景物诗分类赏析专题.html",
+      "action": "INSERT",
+      "stem": "plate-line-47-jingwu-topic",
+      "name": "原著景物诗分类赏析",
+      "ok": true,
+      "reasons": []
+    },
+    {
+      "page": "site/reader/culture/历史玄奘与小说玄奘专题.html",
+      "action": "INSERT",
+      "stem": "plate-line-48-xuanzang-topic",
+      "name": "历史玄奘与小说玄奘",
+      "ok": true,
+      "reasons": []
+    }
+  ],
+  "negative_samples": {
+    "insert": {
+      "page": "site/reader/ch030.html",
+      "ok": false,
+      "reasons": [
+        "已有题图容器 chapter-plate"
+      ]
+    },
+    "replace_not_chap": {
+      "page": "site/reader/people/如来.html",
+      "ok": false,
+      "reasons": [
+        "既有题图非浓墨渲染版（chap-*.webp）"
+      ]
+    },
+    "replace_no_plate": {
+      "page": "site/reader/people/如意真仙外传.html",
+      "ok": false,
+      "reasons": [
+        "无既有题图可替换"
+      ]
+    }
+  }
+}

@@ -1,0 +1,126 @@
+# W927 D-1 实跑证据（真实 PostgreSQL 16.4 实例）
+# 生成时间：2026-10-25 · 环境：Windows 11 + PostgreSQL 16.4 免安装二进制（官方 EDB zip · 解压即用 · 无 Docker）
+# 实例数据目录 = $env:LOCALAPPDATA\pg16\data（C:）· WAL 归档 = $env:LOCALAPPDATA\pg16\archive（C:）· 备份 = D:\pg16backup（**与数据分盘 · C: vs D:**）
+# 说明：本文件是**机器证据**（脚本实跑原始输出）；基线文件在 xiyouji-agent-web/deploy/pg/，校验器与反向验证见同目录 bin/
+
+########## 平台适配说明（本次验证跑特有 · 产品基线保持 Linux 形态） ##########
+# · archive_command：Windows 由 cmd.exe 执行 ⇒ 验证跑用 cmd 等价式；产品基线仍为 POSIX 	est ! -f ... && cp",
+
+# · restore_command：Windows 走薄包装批处理（cmd 的 copy 与 PG 的 %p 正斜杠路径需要适配）
+# · unix_socket_directories：Windows 版 PG 不支持 ⇒ 仅真类 Unix 设置（git-bash 的 uname -s 是 MINGW64_NT… 不是 Windows！）
+
+
+========== ⓪ 环境自检 ==========
+  psql: /c/Users/12739/AppData/Local/pg16/pgsql/bin/psql
+  pg_basebackup: OK
+  server=PostgreSQL 16.4, compiled by Visual C++ build 1940, 64-bit
+
+========== ① TLS 握手核验（ssl_is_used 应为 on） ==========
+  ssl=true
+
+========== ② initdb-bootstrap.sh 第一次（建角色/库/权限/迁移记账表） ==========
+  [bootstrap] PG 版本检查通过：server_version_num=160004
+  [bootstrap] 角色已存在，跳过创建：xiyouji_app
+  [bootstrap] 角色已存在，跳过创建：xiyouji_ro
+  [bootstrap] 只读角色权限收紧：xiyouji_ro
+  [bootstrap] 数据库已存在，跳过创建：xiyouji
+  [bootstrap] 只读数据库已存在，跳过创建：xiyouji_ro
+  NOTICE:  relation "schema_migrations" already exists, skipping
+  [bootstrap] 迁移序列表就绪：schema_migrations
+  [bootstrap] 权限矩阵就绪（§12.2 缺口 2 对应：应用层账号与超级用户分离）
+  [bootstrap] 只读视角就绪：xiyouji_ro@xiyouji_ro
+  [bootstrap] 完成。public schema 表数 = 5（含 schema_migrations）
+  [bootstrap] 下一步：跑 migrations/ 下的迁移序列（见 migrations/README.md）
+
+========== ③ initdb-bootstrap.sh 第二次（幂等性：应全部「已存在，跳过创建」） ==========
+  [bootstrap] PG 版本检查通过：server_version_num=160004
+  [bootstrap] 角色已存在，跳过创建：xiyouji_app
+  [bootstrap] 角色已存在，跳过创建：xiyouji_ro
+  [bootstrap] 只读角色权限收紧：xiyouji_ro
+  [bootstrap] 数据库已存在，跳过创建：xiyouji
+  [bootstrap] 只读数据库已存在，跳过创建：xiyouji_ro
+  NOTICE:  relation "schema_migrations" already exists, skipping
+  [bootstrap] 迁移序列表就绪：schema_migrations
+  [bootstrap] 权限矩阵就绪（§12.2 缺口 2 对应：应用层账号与超级用户分离）
+  [bootstrap] 只读视角就绪：xiyouji_ro@xiyouji_ro
+  [bootstrap] 完成。public schema 表数 = 5（含 schema_migrations）
+  [bootstrap] 下一步：跑 migrations/ 下的迁移序列（见 migrations/README.md）
+
+========== ④ 迁移序列 0001_baseline.sql ==========
+  BEGIN
+  psql:D:/xiyouji/xiyouji-agent-web/deploy/pg/migrations/0001_baseline.sql:31: NOTICE:  relation "schema_migrations" already exists, skipping
+  CREATE TABLE
+  COMMENT
+  psql:D:/xiyouji/xiyouji-agent-web/deploy/pg/migrations/0001_baseline.sql:38: NOTICE:  relation "idx_schema_migrations_applied_at" already exists, skipping
+  CREATE INDEX
+  psql:D:/xiyouji/xiyouji-agent-web/deploy/pg/migrations/0001_baseline.sql:55: NOTICE:  relation "audit_archive" already exists, skipping
+  CREATE TABLE
+  COMMENT
+  psql:D:/xiyouji/xiyouji-agent-web/deploy/pg/migrations/0001_baseline.sql:60: NOTICE:  relation "idx_audit_archive_ts" already exists, skipping
+  CREATE INDEX
+  psql:D:/xiyouji/xiyouji-agent-web/deploy/pg/migrations/0001_baseline.sql:61: NOTICE:  relation "idx_audit_archive_data_class" already exists, skipping
+  CREATE INDEX
+  psql:D:/xiyouji/xiyouji-agent-web/deploy/pg/migrations/0001_baseline.sql:62: NOTICE:  relation "idx_audit_archive_trace" already exists, skipping
+  CREATE INDEX
+  COMMIT
+
+========== ⑤ 灌入可断言的数据（模拟会话/消息/反馈三表 + 迁移记账） ==========
+  NOTICE:  relation "sessions" already exists, skipping
+  CREATE TABLE
+  NOTICE:  relation "messages" already exists, skipping
+  CREATE TABLE
+  NOTICE:  relation "feedback" already exists, skipping
+  CREATE TABLE
+  INSERT 0 0
+  INSERT 0 0
+  INSERT 0 0
+  INSERT 0 0
+
+========== ⑥ 源库行数（恢复演练的比对基准） ==========
+  sessions=6 messages=50 feedback=20 migrations=1
+
+========== ⑦ 强制产生 WAL 段（验证归档链） ==========
+  归档目录段数: 37
+
+========== ⑧ backup.sh（每日全量备份） ==========
+  [backup] 分盘检查通过：PGDATA=/c BACKUP=/d
+  [backup] 开始全量备份 → /d/pg16backup/full_20261025T085230Z（用户 postgres·主机 127.0.0.1）
+  [backup]   NOTICE:  all required WAL segments have been archived
+  [backup] 全量备份完成：/d/pg16backup/full_20261025T085230Z
+  [backup] 可读性自检通过（backup_label + postgresql.conf + base/ 均在位）
+  [backup] 轮转：删除最旧 1 份全量备份（保留 7 份）
+  [backup]   删除：full_20261025T083957Z
+  [backup] WAL 归档轮转完成：39 → 39 段（保留 14 天）
+  [backup] 完成。元信息：/d/pg16backup/full_20261025T085230Z/BACKUP_META.txt
+  [backup] 下一步：跑 bash bin/restore-drill.sh 做恢复演练（§9.4 要求每月一次）
+
+========== ⑨ restore-drill.sh（恢复演练 · 关键证据） ==========
+  [drill] 选定备份：/d/pg16backup/full_20261025T085230Z
+  [drill] 恢复备份到演练目录：/c/Users/12739/AppData/Local/pg16/drill/drill_20261025T085234Z
+  [drill] 移除 standby.signal（避免进入持续恢复等待 WAL）
+  [drill] WAL 归档接入：C:/Users/12739/AppData/Local/pg16/archive
+  [drill] restore_command = call "C:\\Users\\12739\\AppData\\Local\\pg16\\drill\\drill_20261025T085234Z\\restore_wal.bat" "%f" "%p"
+  [drill] 演练实例配置写入完毕（端口 55432·回环监听·归档关闭·unix_socket=0·auto.conf 已重写）
+  [drill] 启动演练实例
+  [drill] 业务库 xiyouji 的 public schema 表数 = 5
+  [drill] 迁移记账行数 = 1
+  [drill]   表 sessions：列数=3 行数=6
+  [drill]   表 messages：列数=5 行数=50
+  [drill]   表 feedback：列数=4 行数=20
+  [drill] 源库可连（127.0.0.1:5432/xiyouji）⇒ 执行行数一致比对
+  [drill]   表 sessions：源=6 恢复=6
+  [drill]   表 messages：源=50 恢复=50
+  [drill]   表 feedback：源=20 恢复=20
+  [drill]   表 schema_migrations：源=1 恢复=1
+  [drill] 行数一致断言通过（源库 == 恢复实例）
+  [drill] 恢复演练通过：备份可恢复、关键表可读、行数可断言
+  [drill] （对应 §9.4：PG 数据目录 · RTO ≤ 30 min · RPO ≤ 5 min · 每月演练一次）
+  [drill] 停止演练实例
+  [drill] 已清理演练目录：/c/Users/12739/AppData/Local/pg16/drill/drill_20261025T085234Z
+
+========== ⑩ 演练后自检：源库未被演练影响 + 演练目录已清理 ==========
+  源库 sessions=6 messages=50
+  演练目录残留: 0 个
+  备份目录: 7 份
+
+========== 实跑序列结束 ==========

@@ -1,0 +1,18 @@
+{
+  "batch": "W884",
+  "date": "2026-10-22",
+  "title": "W884 Playwright 历史问题全谱审计（T-10 落盘）",
+  "desc": "Playwright 历史问题全谱审计批（T-10 报告落盘·25 项 8 族全谱）",
+  "head_entry": "2026-10-22（W884 Playwright 全谱审计落盘）",
+  "head_sentence": "Playwright 历史问题全谱审计落盘",
+  "changelog_body": "\n\n> **来源**：用户令对全仓 Playwright 引用做历史问题全谱审计（T-10 任务）。\n> **摘要**：全仓 256 处 Playwright 引用逐项取证 → 25 项 / 8 族问题全谱（环境依赖 7 · file:// 协议 4 · 断言可信度 6 · 触屏模拟 5 · 产物资源 3 · 门禁成本 1 · 平台分歧 2 · 依赖浮版 3），每项带「文件:行号」或批次号锚点并标状态三态（已修复 22 / 仍开放 3）。核心实证三处对评审初判的修正：① package-lock.json 已入库并钉死 playwright 1.63.0 ⇒「浮版解析漂移」初判不成立；② 真漂移面是 ci.yml 的 npm install playwright（无版本约束·绕过 lockfile）⇒ 同一 CI run 并存两个 Playwright；③ 截图审查已有三档 scope ⇒ 真实缺口是「映射停在目录级」而非「没有影响面概念」。另新发现 pages-smoke job 安装 Playwright 与 chromium 但从不调用浏览器（全 job 零浏览器调用）。\n> **文件**：docs/11-方案报告/计划方案/T10-任务计划执行与经验沉淀报告-2026-10-22.md · docs/11-方案报告/README.md · docs/00-导读/W批次编号对账表.md · scripts/output/stats.json · scripts/output/stats-changelog.json · scripts/output/stats-index.md · STRUCTURE.md · docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md · docs/INDEX.md · site/data/search.html · site/en/search.html\n> **验证**：第 48 门禁 0 FAIL（新增文件全项符合·32/32 判据）·lint_links 5466 链接 0 broken·check_index_health 通过·generate_csp --check 856 页 0 漂移。\n> **状态**：**已收官**（e5b262e7 内容批 + 92175003 收官回填 + 5266741c 报告正文回填实测值 + 1af88bb3 台账提交号补全·台账行早已收官；本段系 W956/P-43-03 按台账「有行无段」欠账以补位 spec 补立——**补位 spec**·非原会话叙事·正文以提交信息与报告原文为准）",
+  "milestone_block": "- **W884 Playwright 历史问题全谱审计（T-10）**：256 处引用逐项取证 → 25 项 8 族全谱（已修复 22 / 仍开放 3），报告落盘第 48 门禁 32/32 判据符合；段系 W956 补位立段（台账有行无段欠账）",
+  "agents_note": "2026-10-22（W884）Playwright 历史问题全谱审计（T-10 落盘·W956 补位立段）",
+  "file_index_rows": [
+    "| docs/11-方案报告/计划方案/T10-任务计划执行与经验沉淀报告-2026-10-22.md | W884 | Playwright 历史问题全谱审计报告（T-10·25 项 8 族·已修复 22 仍开放 3） |",
+    "| docs/00-导读/W批次编号对账表.md | W884 | 认领行 + 收官回填 + 提交号补全 |",
+    "| scripts/output/stats.json | W884 | report_docs 计数 46→47（连带 stats-changelog/stats-index/STRUCTURE 标记同步） |",
+    "| docs/INDEX.md | W884 | 重建（737→738 篇·13 板块） |",
+    "| site/data/search.html · site/en/search.html | W884 | 站内搜索索引刷新（+T-10 条目） |"
+  ]
+}

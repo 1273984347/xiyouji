@@ -32,6 +32,15 @@ import sys
 # W894：目标提交树口径（git ls-files）——同目录模块·无需 sys.path 调整
 import tracked_files as tf
 
+RE_STAT_MARK = re.compile(r"(?P<num>\d+)\s*[页项篇个类]?\s*(?P<mark><!--stats:(?P<key>[a-z_0-9]+)-->)")  # 与 check_doc_sync.RE_STATS_MARK 同源（W704·key 含数字 a1_a6_docs 形态）
+
+# P-44-05 主叙述面（与 check_doc_sync.C5_DOC_NAMES 同源·六文件 + CHANGELOG 口径块）
+C5_MAIN_FILES = (
+    "README.md", "STRUCTURE.md", "AGENTS.md", "CONTRIBUTING.md",
+    os.path.join("docs", "00-导读", "项目说明.md"),
+    os.path.join("docs", "00-导读", "统计口径说明.md"),
+)
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 OUT = os.path.join(HERE, "output", "stats.json")
@@ -253,6 +262,56 @@ def render_index(hist, entities):
         f.write("\n".join(lines))
 
 
+def sweep_markers(values, files=None):
+    """P-44-05：C5b 对账面 stats 标记自动跟随实算源——登记面零手工。
+
+    面 = check_doc_sync 权威面：C5_DOC_NAMES 六文件 + CHANGELOG 口径块 + c5b_extra_surfaces()
+    （pytest.ini / site/index.html / docs/11-方案报告 递归排除 计划方案）。只更新**本批重算键**
+    的前置数字；历史冻结面天然不在面上。CHANGELOG 特殊约束：只扫首个「### W」段之前的
+    口径块——历史段含字面标记叙述（W913 段「615<!--stats:a1_a6_docs-->」实证），整文件扫必污染。
+
+    返回 (更新数, 明细行)。
+    """
+    import check_doc_sync as _cds  # 同目录·取权威面定义（面漂移=门禁与跟随同源漂移）
+
+    if files is None:
+        files = [os.path.join(ROOT, rel) for rel in C5_MAIN_FILES]
+        files.append(os.path.join(ROOT, "CHANGELOG.md"))
+        files += _cds.c5b_extra_surfaces()
+    updated, details = 0, []
+    for fp in files:
+        if not os.path.isfile(fp):
+            continue
+        with open(fp, encoding="utf-8", newline="") as fh:
+            text = fh.read()
+        if os.path.basename(fp) == "CHANGELOG.md":
+            cut = text.find("\n### ")
+            text, tail = (text[:cut], text[cut:]) if cut != -1 else (text, "")
+        else:
+            tail = ""
+        hits = []
+
+        def _sub(m, _hits=hits):
+            key = m.group("key")
+            want = values.get(key)
+            if want is None or str(want) == m.group("num"):
+                return m.group(0)
+            _hits.append("%s %s→%s" % (key, m.group("num"), want))
+            return "%s%s" % (want, m.group("mark"))
+
+        new_text = RE_STAT_MARK.sub(_sub, text) + tail
+        if hits:
+            with open(fp, "w", encoding="utf-8", newline="") as fh:
+                fh.write(new_text)
+            updated += len(hits)
+            try:
+                disp = os.path.relpath(fp, ROOT)
+            except ValueError:  # 跨盘（pytest tmp 在别盘）——显示用绝对路径
+                disp = fp
+            details.append("%s：%s" % (disp, "；".join(hits[:6])))
+    return updated, details
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--w", help="本批 W 号（记入变更史；缺省记 null 并提示）")
@@ -312,10 +371,15 @@ def main():
         f.write("\n")
     render_index(hist, entities)
 
+    sw_n, sw_details = sweep_markers(values)  # P-44-05：标记面跟随实算（C5b 绿由构造保证）
+    for d in sw_details:
+        print("MARK  %s" % d)
+
     for k in sorted(values):
         mark = " *" if any(c["key"] == k for c in changes) else ""
         print("%s = %s%s" % (k, values[k], mark))
     print("OK    -> %s%s" % (os.path.relpath(OUT, ROOT), "（变更 %d 键→changelog+index 已更新）" % len(changes) if changes else "（无变更）"))
+    print("OK    标记面跟随 %d 处（C5b 对账面·P-44-05）" % sw_n)
     return 0
 
 

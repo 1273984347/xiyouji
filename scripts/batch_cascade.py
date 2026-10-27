@@ -16,6 +16,7 @@ import json
 import os
 import re
 import sys
+import time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 _root = os.path.realpath(ROOT)
@@ -66,9 +67,37 @@ def precheck(spec):
     if not str(spec.get("title", "")).startswith(str(spec.get("batch", ""))):
         issues.append("spec.title 未以 batch 号领衔（现役段解析取标题首个 W###·合并段场景必须显式领衔）")
     if "**文件**：" not in str(spec.get("changelog_body", "")):
-        issues.append("spec.changelog_body 缺「**文件**：」行（四件套必填·W723 起第 31 门禁 C4-f 据其对账手工件入库·"
+        issues.append("spec.changelog_body 缺「**文件**」行（四件套必填·W723 起第 31 门禁 C4-f 据其对账手工件入库·"
                       "路径须写 repo 相对路径·见 pitfalls git 类）")
+    # W964 定形契约：脚注条目头必须是「阿拉伯日期（W###）」——中文数字日期形态对滚动切分器
+    # 不可见（实证 52 条二〇二六形态条目黏成 67.1KB 巨段使「保留 5 条」契约名存实亡·AGENTS.md
+    # 被撑到 110KB）；条目是索引不是摘要，长度一并封顶。
+    _note = str(spec.get("agents_note", ""))
+    if not re.match(r"^20\d{2}-\d{2}-\d{2}（W\d{3,4}）", _note):
+        issues.append("spec.agents_note 未以「阿拉伯日期（W###）」条目头开场（W964 定形契约·"
+                      "中文数字日期会让滚动器失明）：%r" % _note[:40])
+    if len(_note) > 120:
+        issues.append("spec.agents_note 长 %d 字 > 120 上限（W964 定形·W989 收紧·脚注是索引不是摘要·"
+                      "细节归 CHANGELOG）" % len(_note))
     return issues
+
+
+def _assert_status_wnum(spec, batch):
+    """段内「状态」字段的认领登记 W 号必须等于本段号（W956 建 · E-28 段状态串行错位防线）。
+
+    病根（W954 复盘报告实例 4）：收官回填按写顺序推进时，W941 段的状态字段曾写成
+    「在途（认领登记 W940·待提交入库）」——段号与状态所述批次错位（后已被订正）。
+    凡**写入段内状态字段**的动作（正常级联 _face_changelog 与递延补段 backfill_changelog
+    两个写入点共用本断言），断言状态文本里「认领登记 W###」这一自我指称形态所指的
+    W 号 == 本段号；状态文本引用别批（承接 / 让号最终落点 / 回填锚注等）不受限——
+    只锁「认领登记」形态，防错位不防合法引用。
+    """
+    m = re.search(r"认领登记\s*W(\d+)", str(spec.get("changelog_body", "")))
+    if m:
+        assert int(m.group(1)) == int(str(batch)[1:]), (
+            "spec.changelog_body 状态字段写「认领登记 W%s」≠ 本段号 %s——E-28 段状态串行错位"
+            "（段号与状态所述批次必须同批·W956/P-43-05 防线）" % (m.group(1), batch)
+        )
 
 
 class _Ctx:
@@ -161,7 +190,7 @@ def _handover_rotate_oldest(s, ctx, nl, h1pos):
     assert pm, "未找到历史概要指针"
     oldest_w = pm.group(1)
     # W713 双形态 + 窗口限定进度段内（防后文待办/方法论区 bullet 误入旋转窗）
-    blocks_all = [b for b in re.finditer(r"- \*\*(?:v[\d.]+ )?(W\d+)[^*]*\*+：", s) if b.start() > h1pos]
+    blocks_all = [b for b in re.finditer(r"- \*\*(?:v[\d.]+ )?(W\d+)[^*]*\*+[^\r\n:*]{0,30}：", s) if b.start() > h1pos]
     # W913：窗口不足 2 块不滚动（契约「只留最近 5 版」——不足时无盈可滚；原无条件滚动在
     # 单块窗口必致空窗异常·阻断后续一切级联·W912/W913 两批连续实证）
     if len(blocks_all) < 2:
@@ -192,7 +221,7 @@ def _handover_rotate_oldest(s, ctx, nl, h1pos):
     # W713 旋转语义修正：pm ← 淘汰后窗口剩余最老块（W534 滚动窗口意图——原实现 pm←new_w
     # 使下一批淘汰上批最新块、更老块永不滚动，W710→W711 实证行为）
     _win = s[h1pos:s.find("> 历史概要（W")]
-    _remain = [int(x[1:]) for x in re.findall(r"- \*\*(?:v[\d.]+ )?(W\d+)[^*]*\*+：", _win)]
+    _remain = [int(x[1:]) for x in re.findall(r"- \*\*(?:v[\d.]+ )?(W\d+)[^*]*\*+[^\r\n:*]{0,30}：", _win)]
     assert _remain, "淘汰后里程碑窗口为空（异常）"
     s = s.replace(f"> 历史概要（W{oldest_w} 及更早）的详细记录见",
                   f"> 历史概要（W{min(_remain)} 及更早）的详细记录见", 1)
@@ -286,7 +315,7 @@ def _face_workflows(ctx):
 # 落 token 中间（「v2.3.28W722」粘连实证）。根修=完整 footer 节点内定位首 token·纯前插不回写·
 # 插入后批次段裁剪至 12 条+尾注（链长治理落地·历史权威在 CHANGELOG 零信息损失）·去重断言。
 _FOOT_RE = re.compile(r"<footer[^>]*>")
-_FOOT_TOKEN = re.compile(r"(?:v[\d.]+(?:\s*·\s*)?)?W\d{3}")
+_FOOT_TOKEN = re.compile(r"(?:v[\d.]+(?:\s*·\s*)?)?W\d{3,4}")
 _FOOT_MAX = 12
 
 def _foot_insert(s_html, new_token):
@@ -301,14 +330,14 @@ def _foot_insert(s_html, new_token):
     n_end = s_html.find("<", mm.start())
     node = s_html[n_start:n_end]
     parts = node.split(" · ")
-    first = next(i for i, seg in enumerate(parts) if re.search(r"W\d{3}", seg))
+    first = next(i for i, seg in enumerate(parts) if re.search(r"W\d{3,4}", seg))
     batch = [new_token] + parts[first:]
     if len(batch) > _FOOT_MAX:
         batch = batch[:_FOOT_MAX] + ["…更早批次详见 CHANGELOG.md"]
     elif len(batch) == _FOOT_MAX:
         batch = batch + ["…更早批次详见 CHANGELOG.md"]
     new_node = " · ".join(parts[:first] + batch)
-    _wns = re.findall(r"W\d{3}", new_node)
+    _wns = re.findall(r"W\d{3,4}", new_node)
     assert len(_wns) == len(set(_wns)), "页脚链 token 重复（W724 防线）"
     return s_html[:n_start] + new_node + s_html[n_start + len(node):]
 
@@ -317,7 +346,7 @@ def _face_footers(ctx):
     """四页脚批次链插入（W717 锚定·W724 双重缺陷根修+链长治理·W781 防御性剥离前导批次号）。"""
     # W781 R-2：desc 以 W### 开头会叠成「W779 W779…」双 token（W779 四页实证·存量缺陷
     # 由 W780 顺修）——插入前无条件剥离，与 release_prep 的 spec 时点校验构成双防线。
-    desc = re.sub(r"^W\d{3}\s*", "", ctx.desc)
+    desc = re.sub(r"^W\d{3,4}\s*", "", ctx.desc)
     for p in ["site/index.html", "site/data/cross-time-danmaku.html", "site/data/tag-cloud.html"]:
         s, _ = load(p)
         ctx.pend.append((p, _foot_insert(s, f"{ctx.batch} {desc}"), None))
@@ -329,7 +358,7 @@ def _face_footers(ctx):
 
 def _agents_entry_wn(part):
     """解析脚注条目批次号（W### 形态）·W721 滚动切分用。"""
-    m = re.search(r"（(?:v[\d.]+ )?W(\d{3})）", part)
+    m = re.search(r"（(?:v[\d.]+ )?W(\d{3,4})）", part)
     assert m, "脚注条目批次号解析失败: " + part[:40]
     return int(m.group(1))
 
@@ -342,12 +371,17 @@ def _face_agents(ctx):
     tail = "。如与上述权威文档冲突，以权威文档为准。*"
     assert s.count(tail) == 1, "AGENTS 脚注尾锚点异常"
     _sep = "" if s[: s.index(tail)].rstrip().endswith("；") else "；"
-    s = s.replace(tail, _sep + "{}。如与上述权威文档冲突，以权威文档为准。*".format(ctx.spec["agents_note"]), 1)
+    s = s.replace(tail, _sep + "{}。如与上述权威文档冲突，以权威文档为准。*".format(ctx.spec["agents_note"].rstrip("。")), 1)  # W972 修：尾句号不剥会拼出「。。」
     # W721 根修（S-29·FAM-14 闭环·W719 R1 制度破约教训）：脚注滚动内建——条目 >5 时最老条迁
     # ARCHIVE 尾块（第 12 面），指针上界同步；制度自此有执行机制，不再依赖手工 trim（W713/W719 两度）。
     _fs = s.find("*本文件由")
     _fline = s[_fs:].split(nl, 1)[0]
-    _segs = re.split(r"；(?=20\d{2}-\d{2}-\d{2}（)", _fline)
+    # W964：切分器双日期形态——阿拉伯（20\d\d-\d\d-\d\d）与中文数字（二〇二六年十月二十日）。
+    # 病根实证：仅认阿拉伯形态时，52 条中文日期条目黏进相邻条目成 67.1KB 巨段，
+    # 切分器恒报 5 条 ⇒ 滚动永不触发（5 不大于 5）⇒「保留最近 5 条」名存实亡。
+    _segs = re.split(
+        r"；(?=(?:20\d{2}-\d{2}-\d{2}|二〇[一二三四五六七八九〇零十廿卅]+年[一二三四五六七八九〇零十廿卅]+月[一二三四五六七八九〇零十廿卅]+日)[（])",
+        _fline)
     assert _fline.rstrip().endswith(tail) and len(_segs) >= 3, "脚注段解析异常（head/pointer/条目）"
     _entries = list(_segs[1:])
     _entries[-1] = _entries[-1][: -len(tail)]
@@ -376,8 +410,8 @@ def _face_agents(ctx):
         # 「W719 续迁 W708-W714·」回插，而现役脚注前缀已漂移为 W713 形态→回插静默失新；
         # 就地替换 token 保持「仅留最新区间」语义，无 token 时锚「脚注保留最近 5 条」前插）
         _note = "W%d-W%d 级联自动滚动·" % (_lo, _hi)
-        if re.search(r"W\d{3}-W\d{3} 级联自动滚动·", _newline):
-            _newline = re.sub(r"(?:W\d{3}-W\d{3} 级联自动滚动·)+", _note, _newline, count=1)
+        if re.search(r"W\d{3,4}-W\d{3,4} 级联自动滚动·", _newline):
+            _newline = re.sub(r"(?:W\d{3,4}-W\d{3,4} 级联自动滚动·)+", _note, _newline, count=1)
         else:
             assert "脚注保留最近 5 条" in _newline, "指针注记缺位且无插入锚点"
             _newline = _newline.replace("脚注保留最近 5 条", _note + "脚注保留最近 5 条", 1)
@@ -493,6 +527,7 @@ def main():
     assert "（" not in ctx.spec["head_sentence"] and "）" not in ctx.spec["head_sentence"], (
         "head_sentence 禁含全角括号——会破坏下一批「当前 HEAD 句」断言的 [^）]* 匹配（W649 实证：W648 嵌套括号致本批断言 FAIL，交接文档已手工修复）"
     )
+    _assert_status_wnum(spec, ctx.batch)  # W956/P-43-05：段状态认领登记 W 号 == 本段号（E-28 防线）
     _face_changelog(ctx)
     _face_three_docs(ctx)
     _face_handover(ctx)
@@ -505,10 +540,120 @@ def main():
     if not args.apply:
         print(f"[DRY-RUN] 10 个面断言与改写全部通过：{ctx.batch}（规则 {ctx.new_rule}）。加 --apply 落盘。")
         return 0
-    _apply_pend(ctx.pend, ctx.batch)
-    selfcheck = _post_check(ctx.pend, ctx.batch)
-    print(f"[APPLY] 级联完成：{ctx.batch} / {ctx.new_rule}，共 {len(ctx.pend)} 个文件；写后自检 {'发现 %d 项' % len(selfcheck) if selfcheck else '全部通过'}")
+    import cascade_lock  # W991：级联运行锁（①层重启·防并行读中态——W971-W989 混行尾假红族根治）
+
+    _lock_ok, _lock_info = cascade_lock.acquire(ctx.batch, holder="batch_cascade")
+    if not _lock_ok:
+        import time as _t
+
+        raise AssertionError(
+            "级联运行锁被 %s@%s 持有（%.0f 秒）——等级联完成或 scripts/cascade_lock.py --force"
+            % (_lock_info.get("holder"), _lock_info.get("batch"),
+               _t.time() - _lock_info.get("ts", 0)))
+    try:
+        _apply_pend(ctx.pend, ctx.batch)
+        selfcheck = _post_check(ctx.pend, ctx.batch)
+        _close_hints()
+        print(f"[APPLY] 级联完成：{ctx.batch} / {ctx.new_rule}，共 {len(ctx.pend)} 个文件；写后自检 {'发现 %d 项' % len(selfcheck) if selfcheck else '全部通过'}")
+    finally:
+        cascade_lock.release()
+        print("[LOCK] 已释放")
     return 0
+
+
+def _close_hints():
+    """收官提示位集合（W960 建·W979 扩展·全部只输出不改判定与退出码——W822 语义）。
+
+    - [SIZE]    治理文档体积窗口（判据本体 check_doc_size_budget·开工面硬判据）
+                + 超窗提示行（P-44-01：级联每批插入一段·回窗是每批常态动作而非异常）
+    - [TMPE]    tmpe 批次桶计数 + _shot/_inbox TTL 超龄报数（P-44-02：删除须主人确认+回收站）
+    - [SCRIPTS] scripts 顶层 `_` 件跟踪态计数（P-44-03：>20 提示退役扫描·W977 先例）
+    """
+    try:
+        import check_doc_size_budget as _dsb
+
+        _dsb_counts, _dsb_lines, _dsb_extra = _dsb.collect()
+        for _line in _dsb_lines:
+            print("[SIZE]", _line)
+        _fails = _dsb.evaluate(_dsb_counts)
+        if _fails:
+            print("[SIZE] 超窗 %d 项——级联每批插入一段属常态·按上行 FAIL 行内指引跑"
+                  "对应归档工具回窗（段式=archive_segments.py·台账行=archive_ledger_rows.py）" % len(_fails))
+    except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"[SIZE] 体积提示位不可用（{_exc}）")
+    # W976：tmpe 临时区处置提示位（每批收官报一次·防「只进不出」复发——清理闭环
+    # 自 W738 建制到 W976 只运转过一次，批次桶 699MB 堆积实证）。判据与工具本体在 tmpe_tidy。
+    try:
+        import tmpe_tidy as _tt
+
+        _wbuckets = [d for d in os.listdir(_tt.TMPE)
+                     if os.path.isdir(os.path.join(_tt.TMPE, d)) and re.match(r"^w\d{3,4}$", d)]
+        print("[TMPE] 批次桶 %d 个在 tmpe（政策=批收官经主人确认整桶清·删走回收站）·"
+              "沉淀扫描=py -3 scripts/tmpe_tidy.py --tool-candidates" % len(_wbuckets))
+        _stale = []
+        for _bucket in ("_shot", "_inbox"):
+            _ttl = _tt.load_policy().get("ttl_days", {}).get(_bucket)
+            if not _ttl:
+                continue
+            _n = _mb = 0
+            for _dp, _dn, _fn in os.walk(os.path.join(_tt.TMPE, _bucket)):
+                for _f in _fn:
+                    try:
+                        _st = os.stat(os.path.join(_dp, _f))
+                    except OSError:
+                        continue
+                    if time.time() - _st.st_mtime > _ttl * 86400:
+                        _n += 1
+                        _mb += _st.st_size
+            _stale.append("%s 超龄 %d 件 %.0fMB(TTL%dd)" % (_bucket, _n, _mb / 1048576, _ttl))
+        if _stale:
+            print("[TMPE] " + "·".join(_stale) + "——到期列清单经主人确认走回收站"
+                  "（tmpe_tidy.py --plan --older N）")
+    except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"[TMPE] 提示位不可用（{_exc}）")
+    # P-44-03：scripts 顶层 `_` 件防再积（W977 先例 286 件入库·跟踪态阈值 20）
+    try:
+        import subprocess as _sp
+
+        _r = _sp.run(["git", "ls-files", "scripts/_*"], capture_output=True, text=True,
+                     encoding="utf-8", errors="replace", cwd=ROOT)
+        _tracked = len([x for x in _r.stdout.splitlines() if "/" not in x.replace("scripts/", "", 1)])
+        _on_disk = len([f for f in os.listdir(os.path.join(ROOT, "scripts"))
+                        if f.startswith("_") and os.path.isfile(os.path.join(ROOT, "scripts", f))])
+        # W992 口径校准：跟踪数含近批证据锚（CHANGELOG 110 段窗内被引用·合法驻留），
+        # 裸计数恒超 20 变常驻噪声——改报「零引用退役候选数」（可行动数）作阈值判据。
+        _zero_ref = 0
+        try:
+            _corpus = ["CHANGELOG.md"]
+            for _d in ("tests", "docs/agent", "docs/00-导读"):
+                _rr = _sp.run(["git", "-c", "core.quotePath=false", "ls-files", _d],
+                              capture_output=True, text=True,
+                              encoding="utf-8", errors="replace", cwd=ROOT)
+                _corpus.extend(x for x in _rr.stdout.splitlines() if x.strip())
+            _texts = {}
+            for _c in _corpus:
+                try:
+                    _texts[_c] = open(os.path.join(ROOT, _c.replace("/", os.sep)),
+                                      encoding="utf-8", errors="ignore").read()
+                except OSError:
+                    pass
+            _cl_tail = _texts.get("CHANGELOG.md", "")[-200000:]
+            for _f in _r.stdout.splitlines():
+                _name = _f.replace("scripts/", "", 1)
+                if not _name.startswith("_"):
+                    continue
+                if _name in _cl_tail or any(_name in _tx for _tx in _texts.values()):
+                    continue
+                _zero_ref += 1
+        except Exception:
+            _zero_ref = -1
+        _msg = "[SCRIPTS] 顶层 `_` 件跟踪态 %d 个（盘上 %d）·零引用退役候选 %s 个" % (
+            _tracked, _on_disk, _zero_ref)
+        if _zero_ref > 20:
+            _msg += "——超阈值 20：跑退役扫描（archive_file.py 语料级引用剔除·W977/W992 先例）"
+        print(_msg)
+    except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"[SCRIPTS] 提示位不可用（{_exc}）")
 
 
 if __name__ == "__main__":

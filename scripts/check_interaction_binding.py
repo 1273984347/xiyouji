@@ -37,7 +37,7 @@ KNOWN_CONTROLS: dict[str, list[str]] = {
     "site/guide.html": ["nav-toggle"],
 }
 
-SCRIPT_RE = re.compile(r"<script[^>]*>(.*?)</script>", re.S | re.I)
+SCRIPT_RE = re.compile(r"<script[^>]*>(.*?)</script[^>]*>", re.S | re.I)
 
 
 def page_scripts(rel: str) -> str:

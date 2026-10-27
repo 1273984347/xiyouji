@@ -1,0 +1,141 @@
+{
+  "batch": "W955",
+  "generated_by": "scripts/_w955_motion_audit.py",
+  "generated_at_local": "2026-10-26",
+  "note": "本 JSON 为《执行前计划-T28》全部统计数字的唯一源头；报告与计划不得出现无来源数字",
+  "F1_pages": {
+    "total": 857,
+    "by_dir": {
+      "reader/people": 216,
+      "reader/themes": 210,
+      "en": 138,
+      "reader": 102,
+      "data": 88,
+      "reader/essays": 45,
+      "reader/culture": 35,
+      "reader/poetry": 14,
+      "(root)": 9
+    }
+  },
+  "F2_animation_stock": {
+    "pages_with_keyframes": 331,
+    "keyframes_total": 1337,
+    "private_keyframes": {
+      "danmakuFly": 4,
+      "bladeCut": 2,
+      "crackOpen": 2,
+      "fadeInUp": 2,
+      "heart-breath": 2,
+      "pulse": 2,
+      "wordFloat": 2,
+      "cardFadeIn": 1
+    },
+    "private_keyframes_distinct": 8,
+    "pages_with_reveal_in": 333,
+    "pages_with_js_reveal_hook": 333,
+    "animation_declarations": 1995,
+    "transition_declarations": 6000
+  },
+  "F3_reduced_motion": {
+    "pages_with_rm_guard": 334,
+    "ratio": 0.3897,
+    "design_ref": "DESIGN.md §5.3 reduced-motion 双守卫（强制）"
+  },
+  "F4_motion_ban_baseline": {
+    "patterns": [
+      [
+        "cubic-bezier 负值（回弹）",
+        "cubic-bezier\\([^)]*-\\d"
+      ],
+      [
+        "360°/720° 旋转",
+        "rotate\\(36\\d|rotate\\(72\\d"
+      ],
+      [
+        "无限循环动画",
+        "animation\\s*:\\s*[^;]*infinite"
+      ],
+      [
+        "parallax 视差",
+        "parallax"
+      ]
+    ],
+    "hits_by_rule": {},
+    "files_by_rule": {},
+    "total_hits": 0,
+    "note": "判据复用 scripts/check_motion_ban.py 的正则与块级白名单逻辑；本节为基线快照，非门禁结论"
+  },
+  "F5_d3_duration_gt600": {
+    "pages": 0,
+    "occurrences": 0,
+    "design_ref": "DESIGN.md §5.1 全站硬指标 .duration(N) N ≤ 600"
+  },
+  "F6_size_budget": {
+    "system_css": {
+      "file": "site/system.css",
+      "bytes": 29660,
+      "limit_bytes": 25497,
+      "headroom_bytes": -4163,
+      "over_budget": true,
+      "basis": "DESIGN.md §4A.8 system ≤ +6KB（18.9→≤24.9KB）"
+    },
+    "tokens_css": {
+      "file": "site/tokens.css",
+      "bytes": 23039,
+      "limit_bytes": 23799,
+      "headroom_bytes": 760,
+      "over_budget": false,
+      "basis": "DESIGN.md §4A.8 tokens 上限 23,799 B（W851 上调 +3KB）"
+    }
+  },
+  "F7_gsap_payload": {
+    "version": "3.12.5",
+    "source": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/（本批实测下载·2026-10-26）",
+    "files_bytes": {
+      "gsap.min.js": 72214,
+      "ScrollTrigger.min.js": 43380
+    },
+    "total_bytes": 115594,
+    "if_external_all_pages_bytes": 101983,
+    "if_inlined_all_pages_bytes": 99064058,
+    "script_tag_bytes_each_page": 119,
+    "note": "外链=每页仅标签字节·内联=每页全量库字节；两者差 971.4 倍"
+  },
+  "F8_carrier_gap": {
+    "motion_js_planned_at": "W471（Phase 3·EN 站 JS 级动效对齐·条件分支「若共性率 ≥ 80% 抽 site/static/js/motion.js」）",
+    "motion_js_exists": false,
+    "js_reveal_pages": 333,
+    "page_total": 857,
+    "js_reveal_ratio": 0.3886,
+    "inline_js_blocks_total": 863,
+    "inline_js_chars_total": 7805684,
+    "conclusion": "W471 规划的公共载体未落地；滚动显现实现为逐页内联复制（js-reveal 钩子 333/857 页）"
+  },
+  "F9_bare_ease_scan": {
+    "hits": 49,
+    "files": 25,
+    "sample_files": [
+      "site/dashboard.html",
+      "site/data/81-hardships-view.html",
+      "site/data/character-relationship-3d-view.html",
+      "site/data/chart-design.html",
+      "site/data/concept-device.html",
+      "site/data/data-explorer.html",
+      "site/data/deconstruction.html",
+      "site/data/game-webnovel.html",
+      "site/data/journey-route.html",
+      "site/data/perf-canvas-rendering.html",
+      "site/data/social-media.html",
+      "site/en/81-hardships-view.html",
+      "site/en/character-relationship-3d-view.html",
+      "site/en/chart-design.html",
+      "site/en/concept-device.html",
+      "site/en/data-explorer.html",
+      "site/en/deconstruction.html",
+      "site/en/game-webnovel.html",
+      "site/en/guide.html",
+      "site/en/index.html"
+    ],
+    "design_ref": "DESIGN.md §5.2 禁止裸 ease/linear 新增使用"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "batch": "W956",
+  "date": "2026-10-26",
+  "title": "W956 登记面治理批（W954 复盘报告 P-43 五项落地）",
+  "desc": "登记面治理批（preflight 在途判定加 git 条件与复盘触发器落地）",
+  "head_entry": "2026-10-26（W956 登记面治理批）",
+  "head_sentence": "preflight 在途判定加 git 条件与复盘触发器落地",
+  "changelog_body": "\n\n> **来源**：W954 第 43 篇《工作复盘与优化分析报告》§7.1/§8 登记的下一治理批（用户令「现在做完，然后进行推送」·P-43-01/02/03/05 本批全落地·P-43-04 载体为下一出图批、其建制面随 E-31 入坑表）。\n> **摘要**：① **preflight 在途判定加 git 条件**（P-43-01/WF-08-a）——「在途」参与 touches 拒绝须满足「台账标在途 AND git 无该 W 提交」；台账标在途但 git 已有提交 = **登记滞后**（告警不拒绝·消 W954 开工 8 条 FAIL 的历史欠账误阻）；git 识别只认提交 subject 的 type(w###): 批次标签形态，散文提及别批号不计（防引用性提及误降真在途防护）；git 读取失败退化纯登记面口径从严保护。② **ledger_backfill 新增 --from-git**——收官状态列由脚本从 git 反填（「已收官（首笔hash·git 反填·共 N 笔）」），不再人工手写。③ **复盘触发器**（P-43-02/WF-08-b）——新建 scripts/check_review_trigger.py：距上篇复盘 ≥3 天 / 后续台账批次 ≥30（排除让号留痕与已停止）/ 后续提交 ≥80 三判据任一触发即输出触发清单；preflight 提示位接线（只提示不拦截·故障降级 WARN 禁静默跳过）；触发器不持台账写面（检查器写共享面风险，W820 教训）。④ **段状态 W 号一致性断言**（P-43-05/WF-08-c）——batch_cascade 与 backfill_changelog 两个段状态写入点断言状态文本「认领登记 W###」== 本段号（E-28 段状态串行错位防线·W941 实例形态）；引用别批形态不锁。⑤ **空壳号清账**（P-43-03）——W884（有 4 笔提交而两面无段）以补位 spec 补立 CHANGELOG/file-index 段（Playwright 全谱审计·按 W863 先例标注补位）；W907/908/910/911/929 经三面取证定性为**合规让号留痕**（工作分别改号 W909/W912 落库·非登记空壳，订正 W954 报告的分类），W908/W910/W939 的遗留 spec 判定不立段；backfill_changelog 同批修 E-27（归档面合看·原实现把 67 个已归档段误报待补）并新增 --only 限域。⑥ **复盘经验上移**——E-25/26/27/28/31 五条入 docs/agent/pitfalls.md（级联 5→8·git 17→18·流程 8→9·总数 52→57）+ AGENTS §4.3 计数链追记；E-31 载体即 P-43-04 建制面（素材出图人工关前置为逐张自检表 + 图形同步器前置到每次出图批）。\n> **文件**：scripts/preflight_check.py · scripts/check_review_trigger.py · scripts/ledger_backfill.py · scripts/batch_cascade.py · scripts/backfill_changelog.py · scripts/output/_w884_spec.json · scripts/output/_w956_spec.json · tests/unit/test_preflight_check.py · tests/unit/test_review_trigger.py · tests/unit/test_batch_cascade_status_wnum.py · docs/agent/pitfalls.md · AGENTS.md · docs/00-导读/W批次编号对账表.md · CHANGELOG.md · scripts/output/file-index.md · HANDOVER.md · README.md · STRUCTURE.md · docs/00-导读/项目说明.md · .github/workflows/README.md · CITATION.cff · site/index.html · site/data/cross-time-danmaku.html · site/data/tag-cloud.html · site/dukou-engine.html · pytest.ini · docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md · scripts/output/stats.json · scripts/output/stats-changelog.json · scripts/output/stats-index.md · scripts/check_db_schema.py · scripts/check_emoji_icons.py · tests/unit/test_check_data_copy_chain.py · tests/unit/test_check_db_schema.py · tests/unit/test_check_interaction_binding.py · tests/unit/test_check_page_admission.py\n⑦ **顺带修复（并行批遗留·本批开工实跑暴露）**——ruff 全仓清理 11 处（W949 门禁脚本与四个 W912/W917/W920 测试文件·机械修复不改语义）+ check_db_schema 门禁路径跟上 W934 存储层门面化（P1-P3 目标 db.ts→storage/sqlite.ts·自 W934 起全量 pytest 本地挂红的假红·不变量实测健在·自测 3/3·负样本保留）+ 第 42 门禁基线补登记 2 条（check_emoji_icons/check_icon_fields·W949 图标门禁族会话直跑类·四面无引用孤儿）\n> **验证**：三工具 --self-test 全过（触发器 12 断言 / ledger 反填 10 例 / 级联断言 4 例）+ 新增单测 18 例（preflight 5 · 触发器 9 · 段状态断言 4）全绿；pytest 全量通过（收集 880→899·stats 与 pytest.ini/架构方案 v2 标记三方同步）；verify_delivery 全量零 FAIL；preflight 带 touches 放行；backfill_changelog 补段断言全过（143→144 段降序完好）。\n> **状态**：在途（认领登记 W956·待提交入库）",
+  "milestone_block": "- **W956 登记面治理批**：preflight 在途判定加 git 条件（登记滞后告警不拒绝·消 8 行陈旧欠账误阻）+ ledger 状态 git 反填 + 复盘触发器三判据接线 preflight + 段状态认领登记 W 号断言（级联/补段双写入点）+ W884 补位立段与让号 spec 定性 + 复盘经验五条上移坑表（总数 52→57）",
+  "agents_note": "2026-10-26（W956）登记面治理批：preflight 在途判定加 git 条件（登记滞后告警不拒绝）+ 复盘触发器 + 段状态 W 号断言（级联/补段双写入点）+ W884 补位立段与让号定性 + ledger 状态 git 反填 + 复盘经验五条上移坑表（52→57）",
+  "file_index_rows": [
+    "| scripts/preflight_check.py | W956 | 在途判定加 git 条件（登记滞后告警不拒绝·P-43-01）+ 复盘触发器提示位接线 |",
+    "| scripts/check_review_trigger.py | W956 | 新建复盘触发器（天数/批次/提交三判据任一触发即提示·preflight 接线·不持台账写面） |",
+    "| scripts/ledger_backfill.py | W956 | --from-git 收官状态 git 反填（P-43-01 后半·显式值可覆盖） |",
+    "| scripts/batch_cascade.py | W956 | 段状态认领登记 W 号一致性断言（E-28/P-43-05 防线） |",
+    "| scripts/backfill_changelog.py | W956 | 归档面合看修复（E-27·原实现 67 归档段误报待补）+ --only 限域 + 同款段状态断言 |",
+    "| scripts/output/_w884_spec.json | W956 | W884 补位 spec（Playwright 全谱审计·按 W863 先例标补位） |",
+    "| tests/unit/test_preflight_check.py | W956 | 提交索引与在途二分单测 5 例 |",
+    "| tests/unit/test_review_trigger.py | W956 | 复盘触发器单测 9 例（含负样本） |",
+    "| tests/unit/test_batch_cascade_status_wnum.py | W956 | 段状态断言单测 4 例（含 E-28 实形态负样本） |",
+    "| docs/agent/pitfalls.md | W956 | 复盘经验五条上移（级联 5→8·git 17→18·流程 8→9·总数 52→57） |",
+    "| AGENTS.md | W956 | §4.3 坑位计数链追记（总数 52→57） |",
+    "| scripts/check_db_schema.py | W956 | 门禁路径跟上 W934 存储层门面化（P1-P3 db.ts→storage/sqlite.ts·假红修复） |",
+    "| scripts/check_emoji_icons.py | W956 | ruff 机械清理（死赋值移除·UP009/I001/F841） |"
+  ]
+}

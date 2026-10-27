@@ -1,0 +1,16 @@
+{
+  "batch": "W973",
+  "date": "2026-10-26",
+  "title": "W973 HANDOVER 五区清理批（只进不出区治理·用户令走并问责查全）",
+  "desc": "HANDOVER 五区清理批（历史归档与指针化落地）",
+  "head_entry": "2026-10-26（W973 HANDOVER 五区清理批）",
+  "head_sentence": "历史归档与指针化落地",
+  "changelog_body": "\n\n> **来源**：用户问「为什么 HANDOVER 文件里面还是有那么多东西」+ 问责「是不是告诉过你查所有文件」——W967 只扫治理文档圈的自认缺口，本批治 HANDOVER 并接续全仓内容扫描。\n> **摘要**：① **五区清理**——零、当前阻塞已处置历史迁档（「当前阻塞」标题下挂着 W419-W424 时代已处置长段）；候选清单两遍清除已完成/划线条目 28 条；三、方法论沉淀真指针化（152 行叙事迁档·权威在 pitfalls/gates L2）；四、待办清已完成 15 条；八、已知雷区指针化（101 行叙事迁档·权威在 pitfalls）。② HANDOVER 87.2→40.6 KB（-53%）·445 行。③ **体积门禁 C6**——HANDOVER 整文件 >45KB 即红（五区只进不出复发的常驻哨）。④ 迁移守恒：迁出块逐块入 HANDOVER-ARCHIVE（追加式）。\n> **文件**：HANDOVER.md · archive/docs/HANDOVER-ARCHIVE.md · scripts/check_doc_size_budget.py\n> **验证**：锚定段序断言过（此前 find 诊断被散文提及误报）+ C6 现网 40.6/45 绿 + check_doc_sync 0 FAIL。\n> **状态**：在途（认领登记 W973·待提交入库）",
+  "milestone_block": "- **W973 HANDOVER 五区清理批**：五区只进不出治理（零阻塞已处置迁档+候选已完成清除 28 条+方法论指针化 152 行+雷区指针化 101 行+待办清 15 条）·87.2→40.6KB + 体积门禁 C6 45KB 硬判据",
+  "agents_note": "2026-10-26（W973）HANDOVER 五区清理批：五区只进不出治理（历史迁档+指针化）·87.2→40.6KB + C6 45KB 门禁 + 接续全仓内容扫描",
+  "file_index_rows": [
+    "| HANDOVER.md | W973 | 五区清理：87.2→40.6KB（历史迁档+指针化） |",
+    "| archive/docs/HANDOVER-ARCHIVE.md | W973 | 迁入五区历史（零阻塞+候选+方法论+雷区+待办） |",
+    "| scripts/check_doc_size_budget.py | W973 | C6 HANDOVER 45KB 硬判据 |"
+  ]
+}

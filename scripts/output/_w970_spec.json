@@ -1,0 +1,16 @@
+{
+  "batch": "W970",
+  "date": "2026-10-26",
+  "title": "W970 台账归档行工具批（archive_ledger_rows.py·建议序③）",
+  "desc": "台账归档行工具批（号序切分常驻化与首跑回窗）",
+  "head_entry": "2026-10-26（W970 台账归档行工具批）",
+  "head_sentence": "台账行号序切分归档常驻化",
+  "changelog_body": "\n\n> **来源**：W968 拆分批登记的「台账归档工具化」议题（建议序③·用户令走）——C5 台账 60 行窗按并行节奏约 20 批触顶，archive_segments.py 段式不认台账行格式。\n> **摘要**：① **archive_ledger_rows.py 常驻工具**——号序切分（行序实测 52 处穿插不可位置切）+ 守恒断言五道（与 W968 迁移同款：行数守恒/迁出行逐条入档/正本非行内容逐字节不动/parse_ledger 语义不变含在途集合/归档行相对顺序）+ 自测穿插形态。② **首跑回窗**——61 行（W969 认领 +1 触顶）→59 行，迁出 W908/W909 入归档容器。③ 基线 ② 类登记。④ 建置过程实录：首版 E741×6 与 %04d 零填充显示（W908 排成 W0908）两处缺陷在 ruff/自查现形后整文件重写清零。\n> **文件**：scripts/archive_ledger_rows.py · scripts/output/script-coverage-baseline.txt · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md\n> **验证**：--self-test 过（穿插形态号序切分正确）+ 首跑守恒断言全过 + C5 现网 59/60 绿 + pytest 全量 919 passed + ruff 清零。\n> **状态**：在途（认领登记 W970·待提交入库）",
+  "milestone_block": "- **W970 台账归档行工具批**：archive_ledger_rows.py 常驻化（号序切分+守恒五道+穿插形态自测）+ 首跑回窗 61→59（W908/W909 迁档）+ 基线登记",
+  "agents_note": "2026-10-26（W970）台账归档行工具批：archive_ledger_rows.py 常驻化（号序切分·守恒五道）+ 首跑回窗 61→59 + 基线登记",
+  "file_index_rows": [
+    "| scripts/archive_ledger_rows.py | W970 | 新建台账行归档工具（号序切分·守恒五道·C5 修法） |",
+    "| docs/00-导读/W批次编号对账表.md | W970 | 首跑回窗 61→59（W908/W909 迁档） |",
+    "| archive/docs/W批次编号对账表-ARCHIVE.md | W970 | 迁入 2 行 + 迁入注记 |"
+  ]
+}

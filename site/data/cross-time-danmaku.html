@@ -23,7 +23,7 @@
     <noscript><p style="color:#C8463A;padding:var(--space-4);">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-                                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                                                                                                                                                                                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -523,6 +523,14 @@ h4 { font-size: 18px; font-weight: 500; }
     text-align: center;
     flex-shrink: 0;
 }
+/* W856 新品牌图形标（方向 H「山·门槛」·SVG 于 static/icons/logo-mark-light.svg）
+   —— 纯加法：.seal 保留，其余页面的旧印面标识不受影响 */
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: block;
+    flex-shrink: 0;
+}
 .wordmark {
     font-family: var(--font-serif);
     font-weight: 600;
@@ -706,8 +714,10 @@ h4 { font-size: 18px; font-weight: 500; }
                 transform var(--dur-base) var(--ease-out-quart),
                 box-shadow var(--dur-base) var(--ease-out-quart);
 }
-        /* W872 B9 裁决 2：朱砂顶条收敛——整页仅首屏首卡可带（alt-2/3/4 非朱砂不动） */
-        .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+/* BL-33 收敛（W895）：KPI 顶条按行收敛——同排首个 kpi-card 保顶条、其余转细线
+   （原 W864-W873 逐页写入内联副本·此处升为 system.css 单一事实源·防 inline_css --force 回吞） */
+.kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
+
 .kpi-card:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
@@ -1251,41 +1261,69 @@ td.num, th.num {
         max-width: 220px;
     }
 }
-    
-/* W885：页头装饰插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
+
+/* W885：数据页/可视化页页头装饰插画（深底直显版·浅底宣纸图贴在暗色 hero 上会成亮斑） */
+.hero-ornament {
+    position: absolute;
+    right: clamp(var(--space-6), 5vw, var(--space-12));
+    bottom: clamp(var(--space-5), 4vw, var(--space-9));
+    width: clamp(140px, 18vw, 240px);
+    height: auto;
+    opacity: .9;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+
     .hero-ornament {
-        position: absolute;
-        right: clamp(var(--space-6), 5vw, var(--space-12));
-        bottom: clamp(var(--space-5), 4vw, var(--space-9));
-        width: clamp(140px, 18vw, 240px);
-        height: auto;
-        opacity: .9;
-        pointer-events: none;
-    }
-
-    @media (max-width: 768px) {
-
-        .hero-ornament {
-            display: none;
-        }
-    }
-/* W888：数据页卷末插画定位（与 site/system.css 同源·内联副本因 file:// 下 CSP 拦外链而必须自带） */
-    .viz-illustration {
-        margin: clamp(32px, 5vw, 64px) auto 0;
-        max-width: 420px;
-    }
-
-    .viz-illustration img {
-        width: 100%;
-        height: auto;
-        display: block;
-        opacity: .92;
-    }
-
-    html[data-theme="dark"] .viz-illustration {
         display: none;
     }
-</style>
+}
+
+/* W888：数据页卷末插画（浅底宣纸版·暗色模式下隐藏——浅底图贴深底会成亮斑） */
+.viz-illustration {
+    margin: clamp(32px, 5vw, 64px) auto 0;
+    max-width: 420px;
+}
+
+.viz-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: .92;
+}
+
+html[data-theme="dark"] .viz-illustration {
+    display: none;
+}
+
+/* ===== W939 图标系统 · 东方线描（24×24 网格 / 1.5px 描边 / currentColor 随主题） =====
+   用途：替代以 emoji 表情充当图标的做法（图标位一律用矢量图形）。
+   形态：内联 svg 元素（HTML 结构位·class 属性取 ico / ico-t）+ mask-image（同源 SVG·CSS content 位）。
+   图形资产：site/static/icons/ui/*.svg（单一事实源·scripts/_w939_gen_icons.py 生成）。
+   风格：与既有 .icon-moon / .icon-sun 同族（同为 24×24 线描 · stroke 1.5 · currentColor）。
+   色彩：描边走 currentColor ⇒ 跟随所在文字色，暗色模式自动适配，无需第二套配色。
+   尺寸：以 em 为单位 ⇒ 跟随宿主 font-size（.es-icon 2rem / .pc-emoji 22px 等）。
+   间距：ico 本身无外边距（供纯图标位）；「图标 + 文字」处加 ico-t 补 0.32em。 */
+.ico {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.14em;
+    flex: none;
+    /* 描边参数写在 CSS 而非 SVG 属性：CSS 优先级高于 presentation attribute，
+       可压过站内既有 svg 规则（tokens.css 的图表着色族）⇒ 图标必为线描而非黑块。 */
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.ico-t {
+    margin-right: 0.32em;
+}
+    </style>
 <style>
         /* e-track-exempt: chart-data-colors 2 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
@@ -1607,10 +1645,10 @@ main { overflow-x: clip; }
     <section class="device">
         <h2 class="device-title">四层全年龄弹幕墙</h2>
         <div class="age-tabs">
-            <div class="age-tab active" data-age="幼儿/小学" role="button" tabindex="0">👶 幼儿/小学</div>
-            <div class="age-tab" data-age="初中" role="button" tabindex="0">🎒 初中</div>
-            <div class="age-tab" data-age="高中" role="button" tabindex="0">📚 高中</div>
-            <div class="age-tab" data-age="大学" role="button" tabindex="0">🎓 大学</div>
+            <div class="age-tab active" data-age="幼儿/小学" role="button" tabindex="0"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.4a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM8.2 20.4c0-2.7 1.7-4.6 3.8-4.6s3.8 1.9 3.8 4.6M6.4 12.4l2.4 1.6M17.6 12.4l-2.4 1.6" transform="translate(-1.6364 -2.0909) scale(1.1364)"/></svg>幼儿/小学</div>
+            <div class="age-tab" data-age="初中" role="button" tabindex="0"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 9.6h11.2a1.6 1.6 0 0 1 1.6 1.6v8a1.6 1.6 0 0 1-1.6 1.6H6.4a1.6 1.6 0 0 1-1.6-1.6v-8a1.6 1.6 0 0 1 1.6-1.6zM9.2 9.6V7.8a2.8 2.8 0 0 1 5.6 0v1.8M7.6 14.6h8.8" transform="translate(-1.7931 -2.8276) scale(1.1494)"/></svg>初中</div>
+            <div class="age-tab" data-age="高中" role="button" tabindex="0"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 4.6h10.4a2.4 2.4 0 0 1 2.4 2.4v12.4H7.6a2.4 2.4 0 0 1-2.4-2.4zM18 19.4V7M8.4 8.8h6.6M8.4 12.2h6.6" transform="translate(-2.1463 -2.6341) scale(1.2195)"/></svg>高中</div>
+            <div class="age-tab" data-age="大学" role="button" tabindex="0"><svg class="ico ico-t" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.8 9.3L12 4.6l9.2 4.7-9.2 4.7zM6.8 11.9v4.6c0 1.5 2.3 2.7 5.2 2.7s5.2-1.2 5.2-2.7v-4.6M20.6 10.4v4.6" transform="translate(0.0 0.1) scale(1.0)"/></svg>大学</div>
         </div>
         <div id="danmaku-grid" class="danmaku-grid"></div>
     </section>
@@ -1656,7 +1694,7 @@ main { overflow-x: clip; }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">W924 性能三指标分治落地：页体积双层门槛升格判红，首屏归并既有防线，首 token 挂解冻条件 · W923 复审让号行幻影在途与前缀修复，跳号补登记，十一项实抽全过 · W922 十二项裁决落地：四件工程当场做掉，八项方向性结论登记在案，清单全闭环 · W921 变更日志百零二段迁一级归档，体积回基线以下，守恒断言全程护航 · W920 副本链值级对账门禁建置，存量漂移基线冻结防增量，新漂移判红 · W919 数据库迁移框架建置记账执行，四索引与单SQL会话列表，脏数据降级，D1 真债首项清偿 · W918 LLM 上游不可达时问答链路降级说明替代裸错误，波二小项全部清偿 · W917 数据库四项高危正确性修复落地，四不变量静态门禁锁定并接入 CI 预演 · W916 准入门禁静态版建置并接入 CI 预演，双铁律上锁，波二余件排续批 · W915 判据文档时点数字剥离归产物文件，404 页补 v4 间距令牌等值迁移 · W914 新增英文版 README：完整对照翻译、双向语言互链、站内链接指向英文站 · W913 波二小项四件清偿：计划头订正，测试需求随工具停用关闭，依赖钉版，站点数字修正并纳入对账 · …更早批次详见 CHANGELOG.md</div>
+            <div class="footer-meta">W993 全仓行尾定形批（gitattributes 落地与工作树重写） · W991 级联运行锁与提交隔离批（运行锁常驻化与无 pathspec 拒绝） · W990 内联纪律收口批：报错原文入查坑表，新增工作树吸收条目，计数链四处同步 · W989 脚注定形收紧批（C4 收紧至 120 与现网五条索引化） · W988 水墨卡族投放：27 张 card-* 逐张定落位并接入（13 横幅 + 14 场景图），另给 102 页换上专属 1200×630 og:image · W987 水墨意境卡族启用：归族登记 33 张从未上线的 1:1 水墨插画并立下规范边界，另启用 6 张为回目页场景插图，首屏仍留题图 · W986 回目页 6 张线描版换主体重出：根因是同角色同范式的第二张图观感必然重复而机器判据查不出，处置为同名 stem 覆盖换角色，浓墨渲染原稿保留不删 · W985 工具文档三件批：场景速查路由表，计数指针化，机器生成全量工具清单并挂刷新链 · W984 内页题图成套批第五组：回目页 6 张线描重出加四库扩量 6 张，reader 有题图页 75 增至 81，原浓墨版保留归档 · W983 内页题图成套批第四组：四库混合覆盖 12 张，reader 有题图页 63 增至 75，3 张因人眼关重出（判据盲区实证） · W982 手搓绕过级联治理批：版本面契约判据与开工劝导两项落地，文件锁按登记顾虑缓建 · W981 数据链恢复重判批：取数路径修复与判定落盘，账号重启实证，三处登记面订正，中间态维持二选一 · …更早批次详见 CHANGELOG.md</div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../index.html">首页</a>

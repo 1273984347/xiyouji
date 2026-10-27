@@ -1,0 +1,2270 @@
+{
+ "cards": [
+  {
+   "card": "card-14-bajie-choupa",
+   "target": "site/reader/people/猪八戒.html",
+   "slot": "banner",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 173,
+   "subject_bottom": 800,
+   "subject_px": 86680,
+   "subject": "猪八戒正面立像·双手横持九齿钉耙",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     143,
+     643
+    ],
+    "subject_top": 173,
+    "subject_bottom": 800,
+    "head_room": 30,
+    "span": 627,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     172,
+     802
+    ],
+    "subject_top": 173,
+    "subject_bottom": 800,
+    "head_room": 1,
+    "span": 627,
+    "mode": "og",
+    "subject_bottom_kept": true
+   }
+  },
+  {
+   "card": "card-13-bajie-yuexia",
+   "target": "site/reader/themes/猪八戒-不愿承认的自己.html",
+   "slot": "banner",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 277,
+   "subject_bottom": 763,
+   "subject_px": 43139,
+   "subject": "猪八戒月下扛耙行走·身后一轮满月",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     247,
+     747
+    ],
+    "subject_top": 277,
+    "subject_bottom": 763,
+    "head_room": 30,
+    "span": 486,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     205,
+     835
+    ],
+    "subject_top": 277,
+    "subject_bottom": 763,
+    "head_room": 72,
+    "span": 486,
+    "mode": "og",
+    "subject_bottom_kept": true
+   }
+  },
+  {
+   "card": "card-15-bajie-zuoxie",
+   "target": "site/reader/people/猪八戒-方向二深化.html",
+   "slot": "banner",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 151,
+   "subject_bottom": 788,
+   "subject_px": 86742,
+   "subject": "猪八戒坐歇·钉耙横置于身侧",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     121,
+     621
+    ],
+    "subject_top": 151,
+    "subject_bottom": 788,
+    "head_room": 30,
+    "span": 637,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     121,
+     751
+    ],
+    "subject_top": 151,
+    "subject_bottom": 788,
+    "head_room": 30,
+    "span": 637,
+    "mode": "og",
+    "subject_bottom_kept": false
+   }
+  },
+  {
+   "card": "card-16-bajie-yunzhong",
+   "target": "site/reader/people/猪八戒深化专题.html",
+   "slot": "banner",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 182,
+   "subject_bottom": 855,
+   "subject_px": 77968,
+   "subject": "猪八戒戴斗笠挑担行路·担上货箱",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     152,
+     652
+    ],
+    "subject_top": 182,
+    "subject_bottom": 855,
+    "head_room": 30,
+    "span": 673,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     152,
+     782
+    ],
+    "subject_top": 182,
+    "subject_bottom": 855,
+    "head_room": 30,
+    "span": 673,
+    "mode": "og",
+    "subject_bottom_kept": false
+   }
+  },
+  {
+   "card": "card-17-bajie-denggao",
+   "target": "site/reader/ch019.html",
+   "slot": "banner",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 148,
+   "subject_bottom": 951,
+   "subject_px": 161106,
+   "subject": "猪八戒登高远望·崖下远处一点朱红",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     118,
+     618
+    ],
+    "subject_top": 148,
+    "subject_bottom": 951,
+    "head_room": 30,
+    "span": 803,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     118,
+     748
+    ],
+    "subject_top": 148,
+    "subject_bottom": 951,
+    "head_room": 30,
+    "span": 803,
+    "mode": "og",
+    "subject_bottom_kept": false
+   }
+  },
+  {
+   "card": "card-18-bajie-daodan",
+   "target": "site/reader/ch031.html",
+   "slot": "banner",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 170,
+   "subject_bottom": 798,
+   "subject_px": 89452,
+   "subject": "猪八戒挑担走在山路·身后是开阔的群山",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     140,
+     640
+    ],
+    "subject_top": 170,
+    "subject_bottom": 798,
+    "head_room": 30,
+    "span": 628,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     169,
+     799
+    ],
+    "subject_top": 170,
+    "subject_bottom": 798,
+    "head_room": 1,
+    "span": 628,
+    "mode": "og",
+    "subject_bottom_kept": true
+   }
+  },
+  {
+   "card": "card-19-shaseng-dujiang",
+   "target": "site/reader/people/沙僧.html",
+   "slot": "banner",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 71,
+   "subject_bottom": 800,
+   "subject_px": 98212,
+   "subject": "沙僧立像·肩扛月牙刃降妖宝杖",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     41,
+     541
+    ],
+    "subject_top": 71,
+    "subject_bottom": 800,
+    "head_room": 30,
+    "span": 729,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     41,
+     671
+    ],
+    "subject_top": 71,
+    "subject_bottom": 800,
+    "head_room": 30,
+    "span": 729,
+    "mode": "og",
+    "subject_bottom_kept": false
+   }
+  },
+  {
+   "card": "card-20-shaseng-zhenshui",
+   "target": "site/reader/themes/沙僧-沉默者的智慧.html",
+   "slot": "banner",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 52,
+   "subject_bottom": 790,
+   "subject_px": 110485,
+   "subject": "沙僧执杖立于水纹之上·周身水痕",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     22,
+     522
+    ],
+    "subject_top": 52,
+    "subject_bottom": 790,
+    "head_room": 30,
+    "span": 738,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     22,
+     652
+    ],
+    "subject_top": 52,
+    "subject_bottom": 790,
+    "head_room": 30,
+    "span": 738,
+    "mode": "og",
+    "subject_bottom_kept": false
+   }
+  },
+  {
+   "card": "card-21-shaseng-shouye",
+   "target": "site/reader/people/沙僧-方向二深化.html",
+   "slot": "banner",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 116,
+   "subject_bottom": 790,
+   "subject_px": 69683,
+   "subject": "沙僧守夜·盘坐于灯前·身侧一盏灯火",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     86,
+     586
+    ],
+    "subject_top": 116,
+    "subject_bottom": 790,
+    "head_room": 30,
+    "span": 674,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     86,
+     716
+    ],
+    "subject_top": 116,
+    "subject_bottom": 790,
+    "head_room": 30,
+    "span": 674,
+    "mode": "og",
+    "subject_bottom_kept": false
+   }
+  },
+  {
+   "card": "card-22-shaseng-fuzhong",
+   "target": "site/reader/people/沙僧外传.html",
+   "slot": "banner",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 131,
+   "subject_bottom": 900,
+   "subject_px": 214237,
+   "subject": "沙僧背负大包袱行于山间石阶",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     101,
+     601
+    ],
+    "subject_top": 131,
+    "subject_bottom": 900,
+    "head_room": 30,
+    "span": 769,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     101,
+     731
+    ],
+    "subject_top": 131,
+    "subject_bottom": 900,
+    "head_room": 30,
+    "span": 769,
+    "mode": "og",
+    "subject_bottom_kept": false
+   }
+  },
+  {
+   "card": "card-26-wukong-jingu",
+   "target": "site/reader/people/孙悟空.html",
+   "slot": "banner",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 95,
+   "subject_bottom": 772,
+   "subject_px": 97712,
+   "subject": "悟空背影·手握金箍棒立于山崖",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     65,
+     565
+    ],
+    "subject_top": 95,
+    "subject_bottom": 772,
+    "head_room": 30,
+    "span": 677,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     65,
+     695
+    ],
+    "subject_top": 95,
+    "subject_bottom": 772,
+    "head_room": 30,
+    "span": 677,
+    "mode": "og",
+    "subject_bottom_kept": false
+   }
+  },
+  {
+   "card": "card-23-shixiong-bingli",
+   "target": "site/reader/themes/取经团队-凭什么走到西天.html",
+   "slot": "banner",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 232,
+   "subject_bottom": 858,
+   "subject_px": 61552,
+   "subject": "师兄弟三人并立山路·悟空执棒在前",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     202,
+     702
+    ],
+    "subject_top": 232,
+    "subject_bottom": 858,
+    "head_room": 30,
+    "span": 626,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     230,
+     860
+    ],
+    "subject_top": 232,
+    "subject_bottom": 858,
+    "head_room": 2,
+    "span": 626,
+    "mode": "og",
+    "subject_bottom_kept": true
+   }
+  },
+  {
+   "card": "card-24-shixiong-shanmen",
+   "target": "site/reader/people/取经团队动力学深化专题.html",
+   "slot": "banner",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 0,
+   "subject_bottom": 889,
+   "subject_px": 305526,
+   "subject": "师兄弟立于山门之前·背影远望",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     0,
+     500
+    ],
+    "subject_top": 0,
+    "subject_bottom": 889,
+    "head_room": 0,
+    "span": 889,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     0,
+     630
+    ],
+    "subject_top": 0,
+    "subject_bottom": 889,
+    "head_room": 0,
+    "span": 889,
+    "mode": "og",
+    "subject_bottom_kept": false
+   }
+  },
+  {
+   "card": "card-01-huoshan",
+   "target": "site/reader/people/火焰山土地外传.html",
+   "slot": "scene",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 394,
+   "subject_bottom": 767,
+   "subject_px": 11396,
+   "subject": "火焰山远景·山口赤焰与熔岩河",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     364,
+     864
+    ],
+    "subject_top": 394,
+    "subject_bottom": 767,
+    "head_room": 30,
+    "span": 373,
+    "mode": "banner",
+    "subject_bottom_kept": true
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     266,
+     896
+    ],
+    "subject_top": 394,
+    "subject_bottom": 767,
+    "head_room": 128,
+    "span": 373,
+    "mode": "og",
+    "subject_bottom_kept": true
+   }
+  },
+  {
+   "card": "card-02-tongtianhe",
+   "target": "site/reader/themes/无字真经专题.html",
+   "slot": "scene",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 220,
+   "subject_bottom": 876,
+   "subject_px": 93227,
+   "subject": "通天河渡口·冰裂纹水面与横舟",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     190,
+     690
+    ],
+    "subject_top": 220,
+    "subject_bottom": 876,
+    "head_room": 30,
+    "span": 656,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     190,
+     820
+    ],
+    "subject_top": 220,
+    "subject_bottom": 876,
+    "head_room": 30,
+    "span": 656,
+    "mode": "og",
+    "subject_bottom_kept": false
+   }
+  },
+  {
+   "card": "card-03-shituoling",
+   "target": "site/reader/people/狮驼岭三魔-方向二深化.html",
+   "slot": "scene",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 100,
+   "subject_bottom": 710,
+   "subject_px": 89249,
+   "subject": "狮驼岭峰顶三魔剪影·云海翻涌",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     70,
+     570
+    ],
+    "subject_top": 100,
+    "subject_bottom": 710,
+    "head_room": 30,
+    "span": 610,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     90,
+     720
+    ],
+    "subject_top": 100,
+    "subject_bottom": 710,
+    "head_room": 10,
+    "span": 610,
+    "mode": "og",
+    "subject_bottom_kept": true
+   }
+  },
+  {
+   "card": "card-04-dushuangxuejiang",
+   "target": "site/reader/poetry/原著景物诗赏析专题.html",
+   "slot": "scene",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 295,
+   "subject_bottom": 549,
+   "subject_px": 8414,
+   "subject": "雪江独钓·一叶孤舟横于寒水",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     265,
+     765
+    ],
+    "subject_top": 295,
+    "subject_bottom": 549,
+    "head_room": 30,
+    "span": 254,
+    "mode": "banner",
+    "subject_bottom_kept": true
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     107,
+     737
+    ],
+    "subject_top": 295,
+    "subject_bottom": 549,
+    "head_room": 188,
+    "span": 254,
+    "mode": "og",
+    "subject_bottom_kept": true
+   }
+  },
+  {
+   "card": "card-05-mingyuesongjian",
+   "target": "site/reader/poetry/原著景物诗分类赏析专题.html",
+   "slot": "scene",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 0,
+   "subject_bottom": 776,
+   "subject_px": 118943,
+   "subject": "明月松间·一轮赭金满月与松枝云气",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     0,
+     500
+    ],
+    "subject_top": 0,
+    "subject_bottom": 776,
+    "head_room": 0,
+    "span": 776,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     0,
+     630
+    ],
+    "subject_top": 0,
+    "subject_bottom": 776,
+    "head_room": 0,
+    "span": 776,
+    "mode": "og",
+    "subject_bottom_kept": false
+   }
+  },
+  {
+   "card": "card-06-yunshenzhibu",
+   "target": "site/reader/themes/空间叙事学专题.html",
+   "slot": "scene",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 365,
+   "subject_bottom": 677,
+   "subject_px": 60283,
+   "subject": "云深山远·层峦叠嶂间一条小径",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     335,
+     835
+    ],
+    "subject_top": 365,
+    "subject_bottom": 677,
+    "head_room": 30,
+    "span": 312,
+    "mode": "banner",
+    "subject_bottom_kept": true
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     206,
+     836
+    ],
+    "subject_top": 365,
+    "subject_bottom": 677,
+    "head_room": 159,
+    "span": 312,
+    "mode": "og",
+    "subject_bottom_kept": true
+   }
+  },
+  {
+   "card": "card-07-baiyao",
+   "target": "site/reader/themes/小妖生命史专题.html",
+   "slot": "scene",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 213,
+   "subject_bottom": 757,
+   "subject_px": 45336,
+   "subject": "百妖列阵·虫豸狮象各据一方",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     183,
+     683
+    ],
+    "subject_top": 213,
+    "subject_bottom": 757,
+    "head_room": 30,
+    "span": 544,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     170,
+     800
+    ],
+    "subject_top": 213,
+    "subject_bottom": 757,
+    "head_room": 43,
+    "span": 544,
+    "mode": "og",
+    "subject_bottom_kept": true
+   }
+  },
+  {
+   "card": "card-08-zhuowuquan",
+   "target": "site/reader/people/蜘蛛精.html",
+   "slot": "scene",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 85,
+   "subject_bottom": 648,
+   "subject_px": 17430,
+   "subject": "濯垢泉·石拱洞内一道垂瀑",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     55,
+     555
+    ],
+    "subject_top": 85,
+    "subject_bottom": 648,
+    "head_room": 30,
+    "span": 563,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     52,
+     682
+    ],
+    "subject_top": 85,
+    "subject_bottom": 648,
+    "head_room": 33,
+    "span": 563,
+    "mode": "og",
+    "subject_bottom_kept": true
+   }
+  },
+  {
+   "card": "card-09-sanyao",
+   "target": "site/reader/people/白鹿精-方向二深化.html",
+   "slot": "scene",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 86,
+   "subject_bottom": 839,
+   "subject_px": 50274,
+   "subject": "三妖之一·白鹿立于旗与牌坊之下",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     56,
+     556
+    ],
+    "subject_top": 86,
+    "subject_bottom": 839,
+    "head_room": 30,
+    "span": 753,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     56,
+     686
+    ],
+    "subject_top": 86,
+    "subject_bottom": 839,
+    "head_room": 30,
+    "span": 753,
+    "mode": "og",
+    "subject_bottom_kept": false
+   }
+  },
+  {
+   "card": "card-10-gusichenzhong",
+   "target": "site/reader/culture/西游与佛教禅宗专题.html",
+   "slot": "scene",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 307,
+   "subject_bottom": 799,
+   "subject_px": 67808,
+   "subject": "古寺晨钟·苍松掩映的殿宇与石亭",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     277,
+     777
+    ],
+    "subject_top": 307,
+    "subject_bottom": 799,
+    "head_room": 30,
+    "span": 492,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     238,
+     868
+    ],
+    "subject_top": 307,
+    "subject_bottom": 799,
+    "head_room": 69,
+    "span": 492,
+    "mode": "og",
+    "subject_bottom_kept": true
+   }
+  },
+  {
+   "card": "card-11-songyunshitan",
+   "target": "site/reader/themes/水帘洞-瀑布门的世界.html",
+   "slot": "scene",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 107,
+   "subject_bottom": 900,
+   "subject_px": 40200,
+   "subject": "松云石坛·孤松倚石与云气回旋",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     77,
+     577
+    ],
+    "subject_top": 107,
+    "subject_bottom": 900,
+    "head_room": 30,
+    "span": 793,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     77,
+     707
+    ],
+    "subject_top": 107,
+    "subject_bottom": 900,
+    "head_room": 30,
+    "span": 793,
+    "mode": "og",
+    "subject_bottom_kept": false
+   }
+  },
+  {
+   "card": "card-12-shuyuanxingtantan",
+   "target": "site/reader/themes/取经教育学专题.html",
+   "slot": "scene",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 148,
+   "subject_bottom": 900,
+   "subject_px": 41998,
+   "subject": "书院杏坛·杏花枝下的讲堂与讲席",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     118,
+     618
+    ],
+    "subject_top": 148,
+    "subject_bottom": 900,
+    "head_room": 30,
+    "span": 752,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     118,
+     748
+    ],
+    "subject_top": 148,
+    "subject_bottom": 900,
+    "head_room": 30,
+    "span": 752,
+    "mode": "og",
+    "subject_bottom_kept": false
+   }
+  },
+  {
+   "card": "card-25-santiebaigujing",
+   "target": "site/reader/people/白骨精外传.html",
+   "slot": "scene",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 92,
+   "subject_bottom": 724,
+   "subject_px": 51416,
+   "subject": "洞中白骨堆与一条朱红蛇影",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     62,
+     562
+    ],
+    "subject_top": 92,
+    "subject_bottom": 724,
+    "head_room": 30,
+    "span": 632,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     62,
+     692
+    ],
+    "subject_top": 92,
+    "subject_bottom": 724,
+    "head_room": 30,
+    "span": 632,
+    "mode": "og",
+    "subject_bottom_kept": false
+   }
+  },
+  {
+   "card": "card-27-rejiao-fenxi",
+   "target": "site/reader/themes/佛学AI西游三维语义映射表.html",
+   "slot": "scene",
+   "src_size": [
+    1200,
+    1200
+   ],
+   "subject_top": 115,
+   "subject_bottom": 702,
+   "subject_px": 55451,
+   "subject": "点阵分布图·黑点矩阵中一簇朱红高亮",
+   "banner_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     85,
+     585
+    ],
+    "subject_top": 115,
+    "subject_bottom": 702,
+    "head_room": 30,
+    "span": 587,
+    "mode": "banner",
+    "subject_bottom_kept": false
+   },
+   "og_crop": {
+    "src_size": [
+     1200,
+     1200
+    ],
+    "crop_y": [
+     94,
+     724
+    ],
+    "subject_top": 115,
+    "subject_bottom": 702,
+    "head_room": 21,
+    "span": 587,
+    "mode": "og",
+    "subject_bottom_kept": true
+   }
+  }
+ ],
+ "pages": [
+  {
+   "target": "site/reader/people/猪八戒.html",
+   "slot": "banner",
+   "card": "card-14-bajie-choupa",
+   "has_plate": true,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": true,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<figure class=\"chapter-plate\">\n<img src=\"../../static/images/plate-line-03-bajie.webp\" alt=\"猪八戒线描立像：蒲扇耳前垂、外突猪鼻与獠牙，双手持横梁上",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/themes/猪八戒-不愿承认的自己.html",
+   "slot": "banner",
+   "card": "card-13-bajie-yuexia",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<blockquote>\n<p>W286（git 创建提交溯源 · W424 回填）\n核验状态：未核验</p>\n</blockquote>\n<p>如果《西游记》只有孙悟空和唐僧，它会是一部伟大的英雄史诗，但不会是一部伟大的小说。</p>\n<",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/people/猪八戒-方向二深化.html",
+   "slot": "banner",
+   "card": "card-15-bajie-zuoxie",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": false,
+   "after_h1": "<blockquote>\n<p>轨标：个人创作\n来源：人物二.txt 章节 \"猪八戒：那个随时准备散伙的人\"\n双索引链接：\n- 正向：<a href=\"https://github.com/1273984347/xiyouji/blob/m",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/people/猪八戒深化专题.html",
+   "slot": "banner",
+   "card": "card-16-bajie-yunzhong",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<blockquote>\n<p>W157·A3 方向第 11 个深化专题（取经五众深化系列第 2 篇）\n基于猪八戒欲望政治变迁素材\n创建于 2026-07-28（v2.2.9 取经五众深化系列第二篇）\n与 W156 孙悟空深化形成\"心猿+木",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/ch019.html",
+   "slot": "banner",
+   "card": "card-17-bajie-denggao",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<blockquote>\n<blockquote>\n<p>生成来源：初始批量导入（W602 溯源回填·首次提交 2026-07-30）\n生成模型：未记录\n生成日期：2026-07-30\n核验状态：未核验</p>\n</blockquote>\n",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 3
+  },
+  {
+   "target": "site/reader/ch031.html",
+   "slot": "banner",
+   "card": "card-18-bajie-daodan",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<blockquote>\n<blockquote>\n<p>生成来源：初始批量导入（W602 溯源回填·首次提交 2026-07-30）\n生成模型：未记录\n生成日期：2026-07-30\n核验状态：未核验</p>\n</blockquote>\n",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 3
+  },
+  {
+   "target": "site/reader/people/沙僧.html",
+   "slot": "banner",
+   "card": "card-19-shaseng-dujiang",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<blockquote>\n<p>轨标：教学讲解\n人物类别：取经团队 · 三弟子\n数据指标：出场 ~78 回（全书，第 8/22-100 回），总提及 ~1000 次（待全量数据验证）\n核验状态：未核验</p>\n</blockquote>\n<",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/themes/沙僧-沉默者的智慧.html",
+   "slot": "banner",
+   "card": "card-20-shaseng-zhenshui",
+   "has_plate": true,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": true,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<figure class=\"chapter-plate\">\n<img src=\"../../static/images/plate-line-04-shaseng.webp\" alt=\"沙悟净线描立像：络腮胡卷发，颈挂骷髅头骨项链，双手持",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/people/沙僧-方向二深化.html",
+   "slot": "banner",
+   "card": "card-21-shaseng-shouye",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": false,
+   "after_h1": "<blockquote>\n<p>轨标：个人创作\n来源：人物二.txt 章节 \"沙僧：从不惹事的人\"\n双索引链接：\n- 正向：<a href=\"https://github.com/1273984347/xiyouji/blob/main/d",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/people/沙僧外传.html",
+   "slot": "banner",
+   "card": "card-22-shaseng-fuzhong",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<blockquote>\n<p>轨标：个人创作\n来源：人物四.txt 章节 \"沙僧·外传：吃师父的人\"\n双索引链接：\n- 正向：<a href=\"https://github.com/1273984347/xiyouji/blob/main",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/people/孙悟空.html",
+   "slot": "banner",
+   "card": "card-26-wukong-jingu",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<blockquote>\n<p>轨标：教学讲解\n人物类别：取经团队 · 第一大弟子\n数据指标：出场 100 回（全书），总提及 ~5000 次（待全量数据验证）\n核验状态：未核验</p>\n</blockquote>\n<h2>一、出处与身世<",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/themes/取经团队-凭什么走到西天.html",
+   "slot": "banner",
+   "card": "card-23-shixiong-bingli",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<blockquote>\n<p>W286（git 创建提交溯源 · W424 回填）\n核验状态：未核验</p>\n</blockquote>\n<p>一个凡人带着四个问题儿童，走了一万里，走了十四年。</p>\n<p>这个团队放在任何一个现代组织",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/people/取经团队动力学深化专题.html",
+   "slot": "banner",
+   "card": "card-24-shixiong-shanmen",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<blockquote>\n<p>轨标：学术研究\n引用：本文引用的论文 / 专著 / 版本见 <a href=\"https://github.com/1273984347/xiyouji/blob/main/docs/source/引用与网络",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/people/火焰山土地外传.html",
+   "slot": "scene",
+   "card": "card-01-huoshan",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<blockquote>\n<p>轨标：个人创作\n来源：人物四.txt 章节 \"火焰山土地：那场火不是我放的，但我守了一辈子\"\n双索引链接：\n- 正向：<a href=\"https://github.com/1273984347/xiyouj",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/themes/无字真经专题.html",
+   "slot": "scene",
+   "card": "card-02-tongtianhe",
+   "has_plate": true,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": true,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<figure class=\"chapter-plate\">\n<img src=\"../../static/images/plate-line-12-wuzi-jing-topic.webp\" alt=\"无字真经主题线描立像：比丘僧人双手捧",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/people/狮驼岭三魔-方向二深化.html",
+   "slot": "scene",
+   "card": "card-03-shituoling",
+   "has_plate": true,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": true,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": false,
+   "after_h1": "<figure class=\"chapter-plate\">\n<img src=\"../../static/images/plate-line-21-shituoling-topic.webp\" alt=\"狮驼岭主题线描立像：青狮、白象、金",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/poetry/原著景物诗赏析专题.html",
+   "slot": "scene",
+   "card": "card-04-dushuangxuejiang",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<blockquote>\n<p>轨标：教学讲解\n主题类别：诗词歌赋\n数据来源：原著诗词（回前引诗·回中状物·回末收束诗）\n核验状态：未核验</p>\n<p>W194·A6 方向第 4 个专题·v2.2.17 A6 诗词歌赋 Batch 2+ ",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/poetry/原著景物诗分类赏析专题.html",
+   "slot": "scene",
+   "card": "card-05-mingyuesongjian",
+   "has_plate": true,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": true,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<figure class=\"chapter-plate\">\n<img src=\"../../static/images/plate-line-47-jingwu-topic.webp\" alt=\"西游诗词意象谱系主题线描立像：披发诗僧立于",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/themes/空间叙事学专题.html",
+   "slot": "scene",
+   "card": "card-06-yunshenzhibu",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<blockquote>\n<p>轨标：学术研究\n引用：本文引用的论文 / 专著 / 版本见 <a href=\"https://github.com/1273984347/xiyouji/blob/main/docs/source/引用与网络",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/themes/小妖生命史专题.html",
+   "slot": "scene",
+   "card": "card-07-baiyao",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<blockquote>\n<p>W149·A4 方向第 35 个新维度\n基于人物三.txt + 人物七.txt + 人物二.txt 小妖素材\n创建于 2026-07-28（v2.2.7 多方向并行批次第七次落地）\n与 W137 底层叙事学 ",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/people/蜘蛛精.html",
+   "slot": "scene",
+   "card": "card-08-zhuowuquan",
+   "has_plate": true,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": true,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<figure class=\"chapter-plate\">\n<img src=\"../../static/images/plate-line-23-pansidong-topic.webp\" alt=\"盘丝洞主题线描立像：唐僧身前是濯垢泉",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/people/白鹿精-方向二深化.html",
+   "slot": "scene",
+   "card": "card-09-sanyao",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": false,
+   "after_h1": "<blockquote>\n<p>轨标：个人创作\n来源：人物二.txt 章节 \"白鹿精：一千一百一十一个心洞\"\n双索引链接：\n- 正向：<a href=\"https://github.com/1273984347/xiyouji/blob/m",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/culture/西游与佛教禅宗专题.html",
+   "slot": "scene",
+   "card": "card-10-gusichenzhong",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<blockquote>\n<p>轨标：学术研究\n引用：本文引用的论文 / 专著 / 版本见 <a href=\"https://github.com/1273984347/xiyouji/blob/main/docs/source/引用与网络",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/themes/水帘洞-瀑布门的世界.html",
+   "slot": "scene",
+   "card": "card-11-songyunshitan",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<blockquote>\n<p>W286（git 创建提交溯源 · W424 回填）\n核验状态：未核验</p>\n</blockquote>\n<p>《西游记》第一回，石猴勇闯瀑布，发现了水帘洞。</p>\n<p>这个情节太过经典，以至于我们常常",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/themes/取经教育学专题.html",
+   "slot": "scene",
+   "card": "card-12-shuyuanxingtantan",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<blockquote>\n<p>轨标：跨界趣谈\n<strong>W128 A4 多方向并行批次第三次第 1 个新维度</strong>·七段式·基于 W083 八十一难结构学 + W091 取经团队心理学 + W101 身体地理学 + W1",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/people/白骨精外传.html",
+   "slot": "scene",
+   "card": "card-25-santiebaigujing",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": false,
+   "after_h1": "<blockquote>\n<p>轨标：个人创作\n来源：人物七.txt 章节 \"白骨精·外传：那具白骨在遇见取经人之前\"\n双索引链接：\n- 正向：<a href=\"https://github.com/1273984347/xiyouji/b",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  },
+  {
+   "target": "site/reader/themes/佛学AI西游三维语义映射表.html",
+   "slot": "scene",
+   "card": "card-27-rejiao-fenxi",
+   "has_plate": false,
+   "has_scene": false,
+   "has_banner": false,
+   "css_plate": false,
+   "css_scene": false,
+   "css_banner": false,
+   "h1_found": true,
+   "h2_found": true,
+   "after_h1": "<blockquote>\n<p>W326·A4 方向跨学科开拓·唯识AI篇·工程化\n本篇将\"佛法=AI\"框架从比喻层推进到工程层：把佛学概念、AI 机制、西游实体三域的对应关系，落为可直接喂入图数据库（Neo4j）的节点-关系-属性模型\n创",
+   "og_now": "https://1273984347.github.io/xiyouji/static/img/og-cover-ink-zh.jpg",
+   "style_blocks": 1
+  }
+ ],
+ "og_plan": [
+  {
+   "page": "site/reader/ch004.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-36-ch004-bimawen.webp",
+   "out": "og-plate-line-36-ch004-bimawen.webp"
+  },
+  {
+   "page": "site/reader/ch007.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-37-ch007-bagua-lu.webp",
+   "out": "og-plate-line-37-ch007-bagua-lu.webp"
+  },
+  {
+   "page": "site/reader/ch010.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-35-ch010-weizheng.webp",
+   "out": "og-plate-line-35-ch010-weizheng.webp"
+  },
+  {
+   "page": "site/reader/ch014.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-38-ch014-liubei.webp",
+   "out": "og-plate-line-38-ch014-liubei.webp"
+  },
+  {
+   "page": "site/reader/ch015.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-39-ch015-yingchou.webp",
+   "out": "og-plate-line-39-ch015-yingchou.webp"
+  },
+  {
+   "page": "site/reader/ch019.html",
+   "kind": "banner",
+   "card": "card-17-bajie-denggao",
+   "out": "og-banner-card-17-bajie-denggao.webp"
+  },
+  {
+   "page": "site/reader/ch023.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-40-ch023-sichan.webp",
+   "out": "og-plate-line-40-ch023-sichan.webp"
+  },
+  {
+   "page": "site/reader/ch027.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-41-ch027-bailong.webp",
+   "out": "og-plate-line-41-ch027-bailong.webp"
+  },
+  {
+   "page": "site/reader/ch030.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-42-ch030-sancha.webp",
+   "out": "og-plate-line-42-ch030-sancha.webp"
+  },
+  {
+   "page": "site/reader/ch031.html",
+   "kind": "banner",
+   "card": "card-18-bajie-daodan",
+   "out": "og-banner-card-18-bajie-daodan.webp"
+  },
+  {
+   "page": "site/reader/culture/历史玄奘与小说玄奘专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-48-xuanzang-topic.webp",
+   "out": "og-plate-line-48-xuanzang-topic.webp"
+  },
+  {
+   "page": "site/reader/culture/明代科举制度对照专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-34-keju-zhidu-topic.webp",
+   "out": "og-plate-line-34-keju-zhidu-topic.webp"
+  },
+  {
+   "page": "site/reader/culture/西游与佛教禅宗专题.html",
+   "kind": "scene",
+   "card": "card-10-gusichenzhong",
+   "out": "og-scene-card-10-gusichenzhong.webp"
+  },
+  {
+   "page": "site/reader/essays/西游与服饰学.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-46-fushi-topic.webp",
+   "out": "og-plate-line-46-fushi-topic.webp"
+  },
+  {
+   "page": "site/reader/essays/西游与民俗学.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-32-minsu-taofu-topic.webp",
+   "out": "og-plate-line-32-minsu-taofu-topic.webp"
+  },
+  {
+   "page": "site/reader/people/九灵元圣-方向二深化.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-06-jiuLingyuansheng.webp",
+   "out": "og-plate-line-06-jiuLingyuansheng.webp"
+  },
+  {
+   "page": "site/reader/people/二郎神.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-06-erlangshen.webp",
+   "out": "og-plate-line-06-erlangshen.webp"
+  },
+  {
+   "page": "site/reader/people/取经团队动力学深化专题.html",
+   "kind": "banner",
+   "card": "card-24-shixiong-shanmen",
+   "out": "og-banner-card-24-shixiong-shanmen.webp"
+  },
+  {
+   "page": "site/reader/people/哪吒.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-07-nezha.webp",
+   "out": "og-plate-line-07-nezha.webp"
+  },
+  {
+   "page": "site/reader/people/地府体系深化专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-mingfu-panwang.webp",
+   "out": "og-plate-mingfu-panwang.webp"
+  },
+  {
+   "page": "site/reader/people/大鹏金翅雕.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-07-dapeng.webp",
+   "out": "og-plate-line-07-dapeng.webp"
+  },
+  {
+   "page": "site/reader/people/太上老君.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-08-taishanglaojun.webp",
+   "out": "og-plate-line-08-taishanglaojun.webp"
+  },
+  {
+   "page": "site/reader/people/奎木狼外传.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-44-kuimulang.webp",
+   "out": "og-plate-line-44-kuimulang.webp"
+  },
+  {
+   "page": "site/reader/people/女儿国国王.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-19-nvziguo-topic.webp",
+   "out": "og-plate-line-19-nvziguo-topic.webp"
+  },
+  {
+   "page": "site/reader/people/如来.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-25-rulai.webp",
+   "out": "og-plate-line-25-rulai.webp"
+  },
+  {
+   "page": "site/reader/people/嫦娥外传.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-28-change.webp",
+   "out": "og-plate-line-28-change.webp"
+  },
+  {
+   "page": "site/reader/people/孙悟空.html",
+   "kind": "banner",
+   "card": "card-26-wukong-jingu",
+   "out": "og-banner-card-26-wukong-jingu.webp"
+  },
+  {
+   "page": "site/reader/people/托塔李天王外传.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-17-tuota-lijing.webp",
+   "out": "og-plate-line-17-tuota-lijing.webp"
+  },
+  {
+   "page": "site/reader/people/昴日星官.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-08-angrixingguan.webp",
+   "out": "og-plate-line-08-angrixingguan.webp"
+  },
+  {
+   "page": "site/reader/people/沙僧-方向二深化.html",
+   "kind": "banner",
+   "card": "card-21-shaseng-shouye",
+   "out": "og-banner-card-21-shaseng-shouye.webp"
+  },
+  {
+   "page": "site/reader/people/沙僧.html",
+   "kind": "banner",
+   "card": "card-19-shaseng-dujiang",
+   "out": "og-banner-card-19-shaseng-dujiang.webp"
+  },
+  {
+   "page": "site/reader/people/沙僧外传.html",
+   "kind": "banner",
+   "card": "card-22-shaseng-fuzhong",
+   "out": "og-banner-card-22-shaseng-fuzhong.webp"
+  },
+  {
+   "page": "site/reader/people/火焰山土地外传.html",
+   "kind": "scene",
+   "card": "card-01-huoshan",
+   "out": "og-scene-card-01-huoshan.webp"
+  },
+  {
+   "page": "site/reader/people/灵感大王.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-03-linggan.webp",
+   "out": "og-plate-line-03-linggan.webp"
+  },
+  {
+   "page": "site/reader/people/灵感大王外传.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-donghai-longgong.webp",
+   "out": "og-plate-donghai-longgong.webp"
+  },
+  {
+   "page": "site/reader/people/牛魔王.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-02-niumowang.webp",
+   "out": "og-plate-line-02-niumowang.webp"
+  },
+  {
+   "page": "site/reader/people/独角兕大王.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-02-dujiao-shengwang.webp",
+   "out": "og-plate-line-02-dujiao-shengwang.webp"
+  },
+  {
+   "page": "site/reader/people/狮驼岭三魔-方向二深化.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-21-shituoling-topic.webp",
+   "out": "og-plate-line-21-shituoling-topic.webp"
+  },
+  {
+   "page": "site/reader/people/猪八戒-方向二深化.html",
+   "kind": "banner",
+   "card": "card-15-bajie-zuoxie",
+   "out": "og-banner-card-15-bajie-zuoxie.webp"
+  },
+  {
+   "page": "site/reader/people/猪八戒.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-03-bajie.webp",
+   "out": "og-plate-line-03-bajie.webp"
+  },
+  {
+   "page": "site/reader/people/猪八戒深化专题.html",
+   "kind": "banner",
+   "card": "card-16-bajie-yunzhong",
+   "out": "og-banner-card-16-bajie-yunzhong.webp"
+  },
+  {
+   "page": "site/reader/people/玉兔精.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-18-yutujing.webp",
+   "out": "og-plate-line-18-yutujing.webp"
+  },
+  {
+   "page": "site/reader/people/玉帝.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-26-yudi.webp",
+   "out": "og-plate-line-26-yudi.webp"
+  },
+  {
+   "page": "site/reader/people/白骨精.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-07-baigujing.webp",
+   "out": "og-plate-line-07-baigujing.webp"
+  },
+  {
+   "page": "site/reader/people/白骨精外传.html",
+   "kind": "scene",
+   "card": "card-25-santiebaigujing",
+   "out": "og-scene-card-25-santiebaigujing.webp"
+  },
+  {
+   "page": "site/reader/people/白鹿精-方向二深化.html",
+   "kind": "scene",
+   "card": "card-09-sanyao",
+   "out": "og-scene-card-09-sanyao.webp"
+  },
+  {
+   "page": "site/reader/people/白龙马.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-01-bailongma.webp",
+   "out": "og-plate-line-01-bailongma.webp"
+  },
+  {
+   "page": "site/reader/people/百眼魔君.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-27-baiyan-mojun.webp",
+   "out": "og-plate-line-27-baiyan-mojun.webp"
+  },
+  {
+   "page": "site/reader/people/紧箍儿的内侧-器物传记.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-jingu-jingangchui.webp",
+   "out": "og-plate-jingu-jingangchui.webp"
+  },
+  {
+   "page": "site/reader/people/红孩儿.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-08-honghaier.webp",
+   "out": "og-plate-line-08-honghaier.webp"
+  },
+  {
+   "page": "site/reader/people/罗刹女外传.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-43-luoshanv.webp",
+   "out": "og-plate-line-43-luoshanv.webp"
+  },
+  {
+   "page": "site/reader/people/老鼋外传.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-22-tonghehe-topic.webp",
+   "out": "og-plate-line-22-tonghehe-topic.webp"
+  },
+  {
+   "page": "site/reader/people/老鼠精.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-24-wudidong-topic.webp",
+   "out": "og-plate-line-24-wudidong-topic.webp"
+  },
+  {
+   "page": "site/reader/people/蜘蛛精.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-23-pansidong-topic.webp",
+   "out": "og-plate-line-23-pansidong-topic.webp"
+  },
+  {
+   "page": "site/reader/people/蝎子精.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-04-xiezi.webp",
+   "out": "og-plate-line-04-xiezi.webp"
+  },
+  {
+   "page": "site/reader/people/观音.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-05-guanyin.webp",
+   "out": "og-plate-line-05-guanyin.webp"
+  },
+  {
+   "page": "site/reader/people/赛太岁.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-05-saitaisui.webp",
+   "out": "og-plate-line-05-saitaisui.webp"
+  },
+  {
+   "page": "site/reader/people/车迟国三国师外传.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-20-chelingguo-topic.webp",
+   "out": "og-plate-line-20-chelingguo-topic.webp"
+  },
+  {
+   "page": "site/reader/people/金角大王.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-01-jinjiao.webp",
+   "out": "og-plate-line-01-jinjiao.webp"
+  },
+  {
+   "page": "site/reader/people/金角银角深化专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-13-jinjiaodawang.webp",
+   "out": "og-plate-line-13-jinjiaodawang.webp"
+  },
+  {
+   "page": "site/reader/people/铁扇公主.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-03-tieshanggongzhu.webp",
+   "out": "og-plate-line-03-tieshanggongzhu.webp"
+  },
+  {
+   "page": "site/reader/people/银角大王.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-14-yinjiaodawang.webp",
+   "out": "og-plate-line-14-yinjiaodawang.webp"
+  },
+  {
+   "page": "site/reader/people/镇元大仙.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-06-zhenyuan.webp",
+   "out": "og-plate-line-06-zhenyuan.webp"
+  },
+  {
+   "page": "site/reader/people/黄眉老佛外传.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-15-huangmeidawang.webp",
+   "out": "og-plate-line-15-huangmeidawang.webp"
+  },
+  {
+   "page": "site/reader/people/黄袍怪.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-05-huangpaoguai.webp",
+   "out": "og-plate-line-05-huangpaoguai.webp"
+  },
+  {
+   "page": "site/reader/people/黄风怪外传.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-04-huangfengguai.webp",
+   "out": "og-plate-line-04-huangfengguai.webp"
+  },
+  {
+   "page": "site/reader/people/黑熊精.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-16-heixiongjing.webp",
+   "out": "og-plate-line-16-heixiongjing.webp"
+  },
+  {
+   "page": "site/reader/poetry/原著景物诗分类赏析专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-47-jingwu-topic.webp",
+   "out": "og-plate-line-47-jingwu-topic.webp"
+  },
+  {
+   "page": "site/reader/poetry/原著景物诗赏析专题.html",
+   "kind": "scene",
+   "card": "card-04-dushuangxuejiang",
+   "out": "og-scene-card-04-dushuangxuejiang.webp"
+  },
+  {
+   "page": "site/reader/poetry/西游诗词意象谱系专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-33-yixiang-puxi-topic.webp",
+   "out": "og-plate-line-33-yixiang-puxi-topic.webp"
+  },
+  {
+   "page": "site/reader/themes/二十八星宿专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-07-ershiba-xingsu.webp",
+   "out": "og-plate-line-07-ershiba-xingsu.webp"
+  },
+  {
+   "page": "site/reader/themes/五方揭谛专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-09-wufang-jiedi.webp",
+   "out": "og-plate-line-09-wufang-jiedi.webp"
+  },
+  {
+   "page": "site/reader/themes/佛学AI西游三维语义映射表.html",
+   "kind": "scene",
+   "card": "card-27-rejiao-fenxi",
+   "out": "og-scene-card-27-rejiao-fenxi.webp"
+  },
+  {
+   "page": "site/reader/themes/六丁六甲专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-10-liuding-liujia.webp",
+   "out": "og-plate-line-10-liuding-liujia.webp"
+  },
+  {
+   "page": "site/reader/themes/兵器的自我修养专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-06-bingqi-xiuyang.webp",
+   "out": "og-plate-line-06-bingqi-xiuyang.webp"
+  },
+  {
+   "page": "site/reader/themes/取经团队-凭什么走到西天.html",
+   "kind": "banner",
+   "card": "card-23-shixiong-bingli",
+   "out": "og-banner-card-23-shixiong-bingli.webp"
+  },
+  {
+   "page": "site/reader/themes/取经密码学专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-31-mima-pan-topic.webp",
+   "out": "og-plate-line-31-mima-pan-topic.webp"
+  },
+  {
+   "page": "site/reader/themes/取经教育学专题.html",
+   "kind": "scene",
+   "card": "card-12-shuyuanxingtantan",
+   "out": "og-scene-card-12-shuyuanxingtantan.webp"
+  },
+  {
+   "page": "site/reader/themes/取经路径地理符号学专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-30-lujing-ditu-topic.webp",
+   "out": "og-plate-line-30-lujing-ditu-topic.webp"
+  },
+  {
+   "page": "site/reader/themes/取经路线地理专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-wujingshan-liangjie.webp",
+   "out": "og-plate-wujingshan-liangjie.webp"
+  },
+  {
+   "page": "site/reader/themes/唐僧-凡躯圣心.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-02-tangseng.webp",
+   "out": "og-plate-line-02-tangseng.webp"
+  },
+  {
+   "page": "site/reader/themes/器物传记学专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-12-qiwu-zhuanji.webp",
+   "out": "og-plate-line-12-qiwu-zhuanji.webp"
+  },
+  {
+   "page": "site/reader/themes/四值功曹专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-08-sizhi-gongcao.webp",
+   "out": "og-plate-line-08-sizhi-gongcao.webp"
+  },
+  {
+   "page": "site/reader/themes/大闹天宫-英雄还是悲剧.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-03-danaotian-gong.webp",
+   "out": "og-plate-line-03-danaotian-gong.webp"
+  },
+  {
+   "page": "site/reader/themes/小妖生命史专题.html",
+   "kind": "scene",
+   "card": "card-07-baiyao",
+   "out": "og-scene-card-07-baiyao.webp"
+  },
+  {
+   "page": "site/reader/themes/招安的两种结局专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-45-zhaoan-topic.webp",
+   "out": "og-plate-line-45-zhaoan-topic.webp"
+  },
+  {
+   "page": "site/reader/themes/无字真经专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-12-wuzi-jing-topic.webp",
+   "out": "og-plate-line-12-wuzi-jing-topic.webp"
+  },
+  {
+   "page": "site/reader/themes/水帘洞-瀑布门的世界.html",
+   "kind": "scene",
+   "card": "card-11-songyunshitan",
+   "out": "og-scene-card-11-songyunshitan.webp"
+  },
+  {
+   "page": "site/reader/themes/水帘洞专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-04-shuilandong.webp",
+   "out": "og-plate-line-04-shuilandong.webp"
+  },
+  {
+   "page": "site/reader/themes/沙僧-沉默者的智慧.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-04-shaseng.webp",
+   "out": "og-plate-line-04-shaseng.webp"
+  },
+  {
+   "page": "site/reader/themes/法宝系统专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-11-fabao-topic.webp",
+   "out": "og-plate-line-11-fabao-topic.webp"
+  },
+  {
+   "page": "site/reader/themes/混世四猴专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-05-hunshi-sihou.webp",
+   "out": "og-plate-line-05-hunshi-sihou.webp"
+  },
+  {
+   "page": "site/reader/themes/猪八戒-不愿承认的自己.html",
+   "kind": "banner",
+   "card": "card-13-bajie-yuexia",
+   "out": "og-banner-card-13-bajie-yuexia.webp"
+  },
+  {
+   "page": "site/reader/themes/猴王到行者-五次蜕变.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-01-wukong.webp",
+   "out": "og-plate-line-01-wukong.webp"
+  },
+  {
+   "page": "site/reader/themes/真假美猴王专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-01-zhenjia-meihouwang.webp",
+   "out": "og-plate-line-01-zhenjia-meihouwang.webp"
+  },
+  {
+   "page": "site/reader/themes/神学干预机制专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-29-shenxue-ganyu-topic.webp",
+   "out": "og-plate-line-29-shenxue-ganyu-topic.webp"
+  },
+  {
+   "page": "site/reader/themes/空间叙事学专题.html",
+   "kind": "scene",
+   "card": "card-06-yunshenzhibu",
+   "out": "og-scene-card-06-yunshenzhibu.webp"
+  },
+  {
+   "page": "site/reader/themes/筋斗云专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-10-jindouyun-topic.webp",
+   "out": "og-plate-line-10-jindouyun-topic.webp"
+  },
+  {
+   "page": "site/reader/themes/紧箍咒专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-09-jingu-topic.webp",
+   "out": "og-plate-line-09-jingu-topic.webp"
+  },
+  {
+   "page": "site/reader/themes/蟠桃园-体制内的秘密.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-02-pantao-yuan.webp",
+   "out": "og-plate-line-02-pantao-yuan.webp"
+  },
+  {
+   "page": "site/reader/themes/西游与死亡研究专题.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-liudao-lunhui.webp",
+   "out": "og-plate-liudao-lunhui.webp"
+  },
+  {
+   "page": "site/reader/themes/金箍棒的重量-一万三千五百斤的秘密.html",
+   "kind": "plate",
+   "src": "D:\\xiyouji\\site\\static\\images\\plate-line-11-jingubang-zhongliang.webp",
+   "out": "og-plate-line-11-jingubang-zhongliang.webp"
+  }
+ ],
+ "errors": [],
+ "plate_pages": 81,
+ "og_pages": 102
+}

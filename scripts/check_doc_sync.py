@@ -51,9 +51,9 @@ RE_README_HEAD = re.compile(r"当前(?:版本\s*v\d+\.\d+\.\d+|批次\s*W(\d+))�
 RE_JIAOJIE_HEAD = re.compile(r"^-\s*\*\*(?:v\d+\.\d+\.\d+\s+)?W(\d+)", re.M)  # W711 双形态（ver 可选·wnum 捕获）
 RE_AGENTS_ITEM = re.compile(r"^(\d+)\.\s\*\*", re.M)
 RE_VERIFY_SLOT = re.compile(r"第\s*(\d+)\s*(?:槽|门禁)")
-RE_COMMIT_W = re.compile(r"(?<![A-Za-z0-9])[Ww](\d{3})(?!\d)")
-RE_TABLE_ROW_W = re.compile(r"^\|\s*W(\d{3})\s*\|", re.M)
-RE_TABLE_DEFER = re.compile(r"^-\s*\*\*((?:W\d{3})(?:\s*/\s*W\d{3})*)\*\*", re.M)
+RE_COMMIT_W = re.compile(r"(?<![A-Za-z0-9])[Ww](\d{3,4})(?!\d)")
+RE_TABLE_ROW_W = re.compile(r"^\|\s*W(\d{3,4})\s*\|", re.M)
+RE_TABLE_DEFER = re.compile(r"^-\s*\*\*((?:W\d{3,4})(?:\s*/\s*W\d{3,4})*)\*\*", re.M)
 RE_STATS_PATTERNS = [  # (正则, (键...), 语境词[None=无·小写包含判定]) —— 键值与 scripts/output/stats.json 对账
     (re.compile(r"HTML 共 (\d+) 页"), ("html_total",), None),
     (re.compile(r"site/data (\d+) \+ site/en (\d+) \+ site 根 (\d+) \+ site/reader (\d+)"),
@@ -77,7 +77,7 @@ RE_STATS_PATTERNS = [  # (正则, (键...), 语境词[None=无·小写包含判�
 ]
 RE_CHANGELOG_SCOPE = re.compile(r"^> \*\*全站页数口径\*\*.*$", re.M)  # CHANGELOG 扫描域=口径块行
 RE_FILE_LIST_LINE = re.compile(r"^> - \*\*文件\*\*：(.+)$", re.M)  # W723 C4-f：四件套「文件」行
-RE_BATCH_REGISTRY_ROW = re.compile(r"^\| W\d{3} ")  # W906 C4-f 三态：他方批次登记行形态
+RE_BATCH_REGISTRY_ROW = re.compile(r"^\| W\d{3,4} ")  # W906 C4-f 三态：他方批次登记行形态
 RE_FILE_TOKEN = re.compile(
     r"^(?:CHANGELOG|README|STRUCTURE|AGENTS|CLAUDE|CONTRIBUTING|CITATION)\.cff?$"
     r"|.+\.(?:py|js|mjs|cjs|ts|tsx|jsx|md|json|jsonl|cff|txt|html|css|xml|yml|yaml|toml|ini|cfg|sh|ps1|csv|svg|example)$"
@@ -365,7 +365,7 @@ def _check_c4_commit_ledger(inp, issues, notes):
             reg |= changelog_section_ws(open(p, encoding="utf-8").read())
     reg |= table_registered_ws(inp["table"])
     for s in inp["subjects"]:
-        s2 = re.sub(r"W\d{3}\s*[-–—]\s*W\d{3}", "", s)  # W711：区间形态（W001-W710 等）下限非实体号·剔除后再提取
+        s2 = re.sub(r"W\d{3,4}\s*[-–—]\s*W\d{3,4}", "", s)  # W711：区间形态（W001-W710 等）下限非实体号·剔除后再提取
         for w in RE_COMMIT_W.findall(s2):
             if w not in reg:
                 issues.append("C4: 提交「%s」的 W%s 无 CHANGELOG 版段且未在对账表登记" % (s[:60], w))

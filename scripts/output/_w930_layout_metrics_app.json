@@ -1,0 +1,584 @@
+[
+ {
+  "vw": 1440,
+  "vh": 900,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "overflowX": false,
+  "bodyOverflow": "hidden",
+  "aside": {
+   "sel": "aside",
+   "x": 0,
+   "y": 0,
+   "w": 260,
+   "h": 900,
+   "display": "flex",
+   "overflowX": "hidden"
+  },
+  "header": {
+   "sel": "header",
+   "x": 260,
+   "y": 0,
+   "w": 1180,
+   "h": 56,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "main": {
+   "sel": "main",
+   "x": 260,
+   "y": 0,
+   "w": 1180,
+   "h": 900,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "cols": [
+   {
+    "tag": "div",
+    "cls": "w-full max-w-lg",
+    "maxw": "512px",
+    "w": 512
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 470
+   },
+   {
+    "tag": "div",
+    "cls": "max-w-3xl mx-auto",
+    "maxw": "768px",
+    "w": 768
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 120
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 48
+   }
+  ],
+  "tooWide": [],
+  "interactive": 9,
+  "smallTargets": 4,
+  "smallSample": [
+   {
+    "tag": "button",
+    "cls": "",
+    "w": 28,
+    "h": 20
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 470,
+    "h": 22
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 120,
+    "h": 20
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 48,
+    "h": 20
+   }
+  ],
+  "clickableDivs": 0,
+  "clickableDivSample": [],
+  "text": "西\n西游记·渡口问津\n新对话\n设置\n西游记·渡口问津\n服务端出错，请稍后重试\n重试\n西\n西游记·渡口问津\n\n选择一个 Agent 开始对话\n\n选择 Agent\n西游记·渡口问津\n详解西游记（xiyouji）项目专属助手：解读、检索、运行分析脚本、撰写文档\n工作目录 (可选)\n\n指定 Agent 的工作目录，用于文件操作等\n\n西游记·渡口问津\n\n你是「详解西游记」项目的专属智能助手，代号「渡口问津」（本地工程工具）。 【项目背景】 本项目（仓库根目录，由后端自动解析）是一座关于《西游记》的混合型解读知识库，以「一源多",
+  "url": "/",
+  "width": 1440,
+  "height": 900,
+  "tag": "app",
+  "consoleErrors": [
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)"
+  ],
+  "shot": "app-home-1440.png"
+ },
+ {
+  "vw": 1024,
+  "vh": 768,
+  "scrollW": 1024,
+  "clientW": 1024,
+  "overflowX": false,
+  "bodyOverflow": "hidden",
+  "aside": {
+   "sel": "aside",
+   "x": 0,
+   "y": 0,
+   "w": 260,
+   "h": 768,
+   "display": "flex",
+   "overflowX": "hidden"
+  },
+  "header": {
+   "sel": "header",
+   "x": 260,
+   "y": 0,
+   "w": 764,
+   "h": 56,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "main": {
+   "sel": "main",
+   "x": 260,
+   "y": 0,
+   "w": 764,
+   "h": 768,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "cols": [
+   {
+    "tag": "div",
+    "cls": "w-full max-w-lg",
+    "maxw": "512px",
+    "w": 512
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 470
+   },
+   {
+    "tag": "div",
+    "cls": "max-w-3xl mx-auto",
+    "maxw": "768px",
+    "w": 764
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 120
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 48
+   }
+  ],
+  "tooWide": [],
+  "interactive": 9,
+  "smallTargets": 4,
+  "smallSample": [
+   {
+    "tag": "button",
+    "cls": "",
+    "w": 28,
+    "h": 20
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 470,
+    "h": 22
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 120,
+    "h": 20
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 48,
+    "h": 20
+   }
+  ],
+  "clickableDivs": 0,
+  "clickableDivSample": [],
+  "text": "西\n西游记·渡口问津\n新对话\n设置\n西游记·渡口问津\n服务端出错，请稍后重试\n重试\n西\n西游记·渡口问津\n\n选择一个 Agent 开始对话\n\n选择 Agent\n西游记·渡口问津\n详解西游记（xiyouji）项目专属助手：解读、检索、运行分析脚本、撰写文档\n工作目录 (可选)\n\n指定 Agent 的工作目录，用于文件操作等\n\n西游记·渡口问津\n\n你是「详解西游记」项目的专属智能助手，代号「渡口问津」（本地工程工具）。 【项目背景】 本项目（仓库根目录，由后端自动解析）是一座关于《西游记》的混合型解读知识库，以「一源多",
+  "url": "/",
+  "width": 1024,
+  "height": 768,
+  "tag": "app",
+  "consoleErrors": [
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)"
+  ],
+  "shot": "app-home-1024.png"
+ },
+ {
+  "vw": 768,
+  "vh": 1024,
+  "scrollW": 768,
+  "clientW": 768,
+  "overflowX": false,
+  "bodyOverflow": "hidden",
+  "aside": {
+   "sel": "aside",
+   "x": 0,
+   "y": 0,
+   "w": 260,
+   "h": 1024,
+   "display": "flex",
+   "overflowX": "hidden"
+  },
+  "header": {
+   "sel": "header",
+   "x": 260,
+   "y": 0,
+   "w": 508,
+   "h": 56,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "main": {
+   "sel": "main",
+   "x": 260,
+   "y": 0,
+   "w": 508,
+   "h": 1024,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "cols": [
+   {
+    "tag": "div",
+    "cls": "w-full max-w-lg",
+    "maxw": "512px",
+    "w": 508
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 466
+   },
+   {
+    "tag": "div",
+    "cls": "max-w-3xl mx-auto",
+    "maxw": "768px",
+    "w": 508
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 120
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 48
+   }
+  ],
+  "tooWide": [],
+  "interactive": 9,
+  "smallTargets": 4,
+  "smallSample": [
+   {
+    "tag": "button",
+    "cls": "",
+    "w": 28,
+    "h": 20
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 466,
+    "h": 22
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 120,
+    "h": 20
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 48,
+    "h": 20
+   }
+  ],
+  "clickableDivs": 0,
+  "clickableDivSample": [],
+  "text": "西\n西游记·渡口问津\n新对话\n设置\n西游记·渡口问津\n服务端出错，请稍后重试\n重试\n西\n西游记·渡口问津\n\n选择一个 Agent 开始对话\n\n选择 Agent\n西游记·渡口问津\n详解西游记（xiyouji）项目专属助手：解读、检索、运行分析脚本、撰写文档\n工作目录 (可选)\n\n指定 Agent 的工作目录，用于文件操作等\n\n西游记·渡口问津\n\n你是「详解西游记」项目的专属智能助手，代号「渡口问津」（本地工程工具）。 【项目背景】 本项目（仓库根目录，由后端自动解析）是一座关于《西游记》的混合型解读知识库，以「一源多",
+  "url": "/",
+  "width": 768,
+  "height": 1024,
+  "tag": "app",
+  "consoleErrors": [
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)"
+  ],
+  "shot": "app-home-768.png"
+ },
+ {
+  "vw": 375,
+  "vh": 812,
+  "scrollW": 375,
+  "clientW": 375,
+  "overflowX": false,
+  "bodyOverflow": "hidden",
+  "aside": {
+   "sel": "aside",
+   "x": 0,
+   "y": 0,
+   "w": 260,
+   "h": 812,
+   "display": "flex",
+   "overflowX": "hidden"
+  },
+  "header": {
+   "sel": "header",
+   "x": 260,
+   "y": 0,
+   "w": 115,
+   "h": 56,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "main": {
+   "sel": "main",
+   "x": 260,
+   "y": 0,
+   "w": 115,
+   "h": 812,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "cols": [
+   {
+    "tag": "div",
+    "cls": "w-full max-w-lg",
+    "maxw": "512px",
+    "w": 115
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 73
+   },
+   {
+    "tag": "div",
+    "cls": "max-w-3xl mx-auto",
+    "maxw": "768px",
+    "w": 115
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 120
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "maxw": "100%",
+    "w": 48
+   }
+  ],
+  "tooWide": [],
+  "interactive": 9,
+  "smallTargets": 5,
+  "smallSample": [
+   {
+    "tag": "button",
+    "cls": "t-button t-button--theme-d",
+    "w": 14,
+    "h": 32
+   },
+   {
+    "tag": "button",
+    "cls": "",
+    "w": 16,
+    "h": 40
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 73,
+    "h": 22
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 120,
+    "h": 20
+   },
+   {
+    "tag": "input",
+    "cls": "t-input__inner",
+    "w": 48,
+    "h": 20
+   }
+  ],
+  "clickableDivs": 0,
+  "clickableDivSample": [],
+  "text": "西\n西游记·渡口问津\n新对话\n设置\n西游记·渡口问津\n服务端出错，请稍后重试\n重试\n西\n西游记·渡口问津\n\n选择一个 Agent 开始对话\n\n选择 Agent\n西游记·渡口问津\n详解西游记（xiyouji）项目专属助手：解读、检索、运行分析脚本、撰写文档\n工作目录 (可选)\n\n指定 Agent 的工作目录，用于文件操作等\n\n西游记·渡口问津\n\n你是「详解西游记」项目的专属智能助手，代号「渡口问津」（本地工程工具）。 【项目背景】 本项目（仓库根目录，由后端自动解析）是一座关于《西游记》的混合型解读知识库，以「一源多",
+  "url": "/",
+  "width": 375,
+  "height": 812,
+  "tag": "app",
+  "consoleErrors": [
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)"
+  ],
+  "shot": "app-home-375.png"
+ },
+ {
+  "vw": 1440,
+  "vh": 900,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "overflowX": false,
+  "bodyOverflow": "hidden",
+  "aside": {
+   "sel": "aside",
+   "x": 0,
+   "y": 0,
+   "w": 260,
+   "h": 900,
+   "display": "flex",
+   "overflowX": "hidden"
+  },
+  "header": {
+   "sel": "header",
+   "x": 260,
+   "y": 0,
+   "w": 1180,
+   "h": 56,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "main": {
+   "sel": "main",
+   "x": 260,
+   "y": 0,
+   "w": 1180,
+   "h": 900,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "cols": [
+   {
+    "tag": "div",
+    "cls": "max-w-3xl mx-auto space-y-8",
+    "maxw": "768px",
+    "w": 768
+   }
+  ],
+  "tooWide": [],
+  "interactive": 7,
+  "smallTargets": 1,
+  "smallSample": [
+   {
+    "tag": "button",
+    "cls": "",
+    "w": 28,
+    "h": 20
+   }
+  ],
+  "clickableDivs": 0,
+  "clickableDivSample": [],
+  "text": "西\n西游记·渡口问津\n新对话\n设置\n设置\n服务端出错，请稍后重试\n重试\n设置\n\n管理登录配置和自定义 Agent\n\n引擎配置\n\n兼容所有主流大模型（GLM/DeepSeek/Kimi/Qwen/OpenAI/Gemini/ollama 等 OpenAI-compatible 端点）\n\n刷新\n未配置\n在服务端 .env 配置以下三项后重启生效：\nLLM_API_BASE —— 端点地址（如 https://open.bigmodel.cn/api/paas/v4）\nLLM_API_KEY —— 端点 API Key\n",
+  "url": "/settings",
+  "width": 1440,
+  "height": 900,
+  "tag": "appset",
+  "consoleErrors": [
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)"
+  ],
+  "shot": "appset-settings-1440.png"
+ },
+ {
+  "vw": 375,
+  "vh": 812,
+  "scrollW": 375,
+  "clientW": 375,
+  "overflowX": false,
+  "bodyOverflow": "hidden",
+  "aside": {
+   "sel": "aside",
+   "x": 0,
+   "y": 0,
+   "w": 260,
+   "h": 812,
+   "display": "flex",
+   "overflowX": "hidden"
+  },
+  "header": {
+   "sel": "header",
+   "x": 260,
+   "y": 0,
+   "w": 115,
+   "h": 56,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "main": {
+   "sel": "main",
+   "x": 260,
+   "y": 0,
+   "w": 115,
+   "h": 812,
+   "display": "flex",
+   "overflowX": "visible"
+  },
+  "cols": [
+   {
+    "tag": "div",
+    "cls": "max-w-3xl mx-auto space-y-8",
+    "maxw": "768px",
+    "w": 115
+   }
+  ],
+  "tooWide": [],
+  "interactive": 7,
+  "smallTargets": 1,
+  "smallSample": [
+   {
+    "tag": "button",
+    "cls": "",
+    "w": 16,
+    "h": 40
+   }
+  ],
+  "clickableDivs": 0,
+  "clickableDivSample": [],
+  "text": "西\n西游记·渡口问津\n新对话\n设置\n设置\n服务端出错，请稍后重试\n重试\n设置\n\n管理登录配置和自定义 Agent\n\n引擎配置\n\n兼容所有主流大模型（GLM/DeepSeek/Kimi/Qwen/OpenAI/Gemini/ollama 等 OpenAI-compatible 端点）\n\n刷新\n未配置\n在服务端 .env 配置以下三项后重启生效：\nLLM_API_BASE —— 端点地址（如 https://open.bigmodel.cn/api/paas/v4）\nLLM_API_KEY —— 端点 API Key\n",
+  "url": "/settings",
+  "width": 375,
+  "height": 812,
+  "tag": "appset",
+  "consoleErrors": [
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+   "Failed to load resource: the server responded with a status of 502 (Bad Gateway)"
+  ],
+  "shot": "appset-settings-375.png"
+ }
+]

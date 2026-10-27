@@ -75,7 +75,7 @@ jobs:
   screenshot-review:
     name: Screenshot Review (Playwright + Slice + Table Scan)
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45 # W993：页数增长后 25 分钟被自身超时取消（cancelled 非 verdict·与 dark gate 同族）
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -292,7 +292,7 @@ jobs:
   dark-state-gate:
     name: Dark-state gate (S2 chart pages, only-increase blocks)
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60 # W993：页数涨至 782 后审计+契约烟测超 30 分钟被 job 超时掐断（两次实证·cancel 非 verdict）
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7

@@ -36,6 +36,11 @@ RE_SEG = re.compile(r"^### (?:v[\d.]+（[^）]*）：W(\d+)|W(\d+)（[^）]*）�
 RE_FI_SEG = re.compile(r"^## (W\d+) ", re.M)
 RE_RULE = re.compile(r"（W001-W(\d+)）")
 
+# W956/E-27：归档面与现役面必须合看——CHANGELOG 自 W921 瘦身起把百段级老段移入归档文件，
+# 本工具原先只读现役面 ⇒ 已归档段被误判「未立段」（实测待补 74 段假清单·W728-W802 全是
+# 归档段假阳性）。立段判定自此两面合扫；**插入目标仍只有现役面**（归档文件禁写）。
+ARCHIVE_CHANGELOG = os.path.join("archive", "docs", "CHANGELOG-ARCHIVE.md")
+
 SPEC_KEYS = ("batch", "date", "title", "desc", "head_entry", "head_sentence",
              "changelog_body", "milestone_block", "agents_note", "file_index_rows")
 
@@ -88,9 +93,13 @@ def insert_fi(text, w, block):
 
 
 def collect_pending():
-    """扫 spec，筛出「未立段」的（已立段的不重复补）。"""
+    """扫 spec，筛出「未立段」的（现役+归档两面合看·已立段的不重复补）。"""
     cl, _ = load("CHANGELOG.md")
     established = {w for w, _ in segments(cl)}
+    arc_p = os.path.join(ROOT, ARCHIVE_CHANGELOG)
+    if os.path.exists(arc_p):
+        arc, _ = load(ARCHIVE_CHANGELOG)
+        established |= {w for w, _ in segments(arc)}
     out = []
     for p in sorted(glob.glob(os.path.join(ROOT, "scripts", "output", "_w*_spec.json"))):
         spec = json.load(open(p, encoding="utf-8"))
@@ -156,6 +165,9 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--refresh-current", action="store_true",
                     help="把 README/STRUCTURE/项目说明/交接/AGENTS/CITATION/页脚推进到最高已立段")
+    ap.add_argument("--only", default="",
+                    help="只补指定 W 号（逗号分隔·W956 新增）——其余「未立段」spec 属让号遗留"
+                         "（工作已改号落库·如 W908/W910→W912·W939→W941）不立段，留档不动")
     args = ap.parse_args()
     if not (args.apply or args.dry_run):
         ap.error("必须指定 --dry-run 或 --apply")
@@ -164,6 +176,12 @@ def main():
         return refresh_current(apply=args.apply)
 
     pending, established = collect_pending()
+    if args.only:
+        only = {int(x.strip().lstrip("Ww")) for x in args.only.split(",") if x.strip()}
+        known = {w for w, _ in pending}
+        unknown = sorted(only - known)
+        assert not unknown, "--only 指定号 %s 不在待补清单（或 spec 缺失/已立段）" % unknown
+        pending = [(w, s) for w, s in pending if w in only]
     if not pending:
         print("[BACKFILL] 无待补段（所有 spec 均已在 CHANGELOG 有对应段）")
         return 0
@@ -178,6 +196,9 @@ def main():
     max_w = max(max(established), max(w for w, _ in pending))
 
     for w, spec in pending:
+        # W956/P-43-05：与 batch_cascade 同款段状态断言（两个段状态写入点共用判据·E-28 防线）
+        import batch_cascade as _bc
+        _bc._assert_status_wnum(spec, spec["batch"])
         cl, anchor = insert_before_smaller(cl, w, changelog_block(spec))
         fi = insert_fi(fi, w, file_index_block(spec))
         print("  + W%-3d 插在 W%d 段之前" % (w, anchor))

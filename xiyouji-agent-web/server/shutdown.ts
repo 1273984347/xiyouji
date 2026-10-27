@@ -21,8 +21,9 @@ import type { Server } from "node:http";
 export interface GracefulShutdownDeps {
   /** HTTP server（用于停止接收新连接并等待在途请求）。 */
   server: Pick<Server, "close">;
-  /** 关闭数据库连接（SQLite WAL checkpoint + close）。 */
-  closeDatabase: () => void;
+  /** 关闭数据库连接（SQLite：WAL checkpoint + close；PG：连接池关闭）。
+   *  W934：存储层抽象后可为异步（PG 池关闭是 Promise）⇒ 类型放宽并 await。 */
+  closeDatabase: () => void | Promise<void>;
   /** 记录关闭过程的日志出口。 */
   log: (level: "info" | "error", message: string, fields?: Record<string, unknown>) => void;
   /** 退出码回调（默认 process.exit·单测可替身化）。 */
@@ -66,7 +67,8 @@ export async function gracefulShutdown(
       server.close((err) => (err ? reject(err) : resolve()));
     });
     // 关闭数据库连接（WAL 模式需 checkpoint，避免留下未落盘的 WAL）
-    closeDatabase();
+    // W934：可能是 Promise（PG 池关闭）⇒ 必须 await，否则进程会在池关闭前就 exit
+    await closeDatabase();
     log("info", "优雅关闭完成", { signal });
     clearTimeout(forceTimer);
     exit(0);

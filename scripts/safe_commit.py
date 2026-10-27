@@ -67,7 +67,34 @@ def _plan_retry(err_text, old, new, pathspecs):
     return True, "并行增量与本次 pathspec 无交集，可安全重试"
 
 
+def _guard_staged(staged_names, pathspecs):
+    """W991 守卫：无 pathspec 且索引有暂存件 → 拒绝（防扫入他方暂存·W989 实证）。
+
+    pathspec 形态提交走临时索引（HEAD+worktree·W649 口径），只取声明路径的
+    worktree 态——他方已暂存未提交的件天然隔离在外。
+    """
+    if pathspecs:
+        return True, ""
+    if not staged_names:
+        return True, ""
+    return False, (
+        "[safe_commit] 拒绝：索引含 %d 个暂存件且未指 pathspec——无 pathspec 提交会扫入全部暂存件"
+        "（含并行会话的·W989 实证混入级联十四面）。改用：safe_commit -F <msg> -- <逐文件路径>" % len(staged_names))
+
+
 def commit(msg_args, pathspecs, max_retry=1):
+    staged = []
+    r = subprocess.run(["git", "diff", "--cached", "--name-only"], capture_output=True, text=True)
+    if r.returncode == 0:
+        staged = [x for x in r.stdout.split("\n") if x.strip()]
+    ok, why = _guard_staged(staged, pathspecs)
+    if not ok:
+        print(why)
+        for name in staged[:8]:
+            print("      staged: " + name)
+        if len(staged) > 8:
+            print("      …另 %d 件" % (len(staged) - 8))
+        return 1
     attempted = 0
     while True:
         attempted += 1

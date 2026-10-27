@@ -33,7 +33,7 @@ RULES = [
         "globs": ["README.md", "STRUCTURE.md", "CLAUDE.md", "docs/00-导读/项目说明.md",
                   "docs/00-导读/文档规范.md", "HANDOVER.md", "AGENTS.md", ".github/workflows/README.md"],
         "path_exclude": None,
-        "line_exclude": r"W\d{3}",  # 含历史批次号的行=沿革叙述，合法
+        "line_exclude": r"W\d{3,4}",  # 含历史批次号的行=沿革叙述，合法
     },
     {
         "id": "R3", "cls": "已勘误事实断言",

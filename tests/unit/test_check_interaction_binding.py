@@ -27,7 +27,7 @@ def test_self_test_green():
 def test_registry_anchors_exist_on_pages():
     """注册表的每个信号须在对应页面 HTML 出现（防页面改版后注册表指向幽灵控件）。"""
     for rel, signals in cib.KNOWN_CONTROLS.items():
-        html = io.open(os.path.join(ROOT, rel), encoding="utf-8", errors="ignore").read()
+        html = open(os.path.join(ROOT, rel), encoding="utf-8", errors="ignore").read()
         for sig in signals:
             needle = sig.lstrip(".")
             assert needle in html, "%s 注册信号 %s 不在页面 HTML（改版须同批改注册表）" % (rel, sig)
