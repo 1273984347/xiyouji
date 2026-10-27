@@ -27,7 +27,7 @@
 - `xiyouji-agent-web/`
 - `xiyouji-desktop/`
 
-## 文件（21）
+## 文件（25）
 
 ### Markdown 文档
 
@@ -42,6 +42,13 @@
 - `README.en.md`
 - `SECURITY.md`
 - `新Agent启动Prompt.md`
+
+### Python 脚本
+
+- `_tmp_chap_sheet.py`
+- `_tmp_family_sheet.py`
+- `_tmp_probe_scenes.py`
+- `_tmp_w987_register.py`
 
 ### JavaScript / TypeScript
 

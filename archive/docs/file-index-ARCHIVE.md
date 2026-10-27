@@ -2,7 +2,7 @@
 
 > 本文件归档 file-index.md 中 W031-W087（v2.0.4-v2.0.60）的早期反向索引条目。
 > 现役索引见 [file-index.md](file-index.md)。
-> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867）
+> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869）
  + 2026-10-26（W960 迁入 W843-W845）
  + 2026-10-26（W960 迁入 W700-W842）
 
@@ -9349,3 +9349,43 @@
 | scripts/output/_w864_accent_exemptions.json | W866 | 升级多批登记簿 + W866 增补（选中态 4·负向指示 1·主行动 1） |
 | scripts/output/_w866_spec.json | W866 | 本批 spec 十字段 |
 | docs/00-导读/W批次编号对账表.md | W866 | 认领行与收官回填 |
+## W869 设计迁移 B6 叙事学 10 页（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/narrative-experiment.html | W869 | B6 迁移：容器令牌化 + narr-card 顶条 12→1 收敛 + 间距令牌化（chips/owner 进豁免） |
+| site/data/narrative-rhythm-curve.html | W869 | B6 迁移：容器令牌化 + KPI 顶条 5→1 + seal 淡底（主行动 btn 进豁免） |
+| site/data/narratology-12d-network.html | W869 | B6 迁移：容器令牌化 + KPI 顶条 6→1 + seal 淡底 |
+| site/data/narratology-16d-network.html | W869 | B6 迁移：容器令牌化 + KPI 顶条 6→1 + seal 淡底 |
+| site/data/intertextuality-network.html | W869 | B6 迁移：容器令牌化 + KPI 顶条 6→1 + seal 淡底 |
+| site/data/deconstruction.html | W869 | B6 迁移：容器令牌化 + KPI 顶条 4→1 + seal 淡底（tag ×5 进豁免） |
+| site/data/six-senses-narratology-network.html | W869 | B6 迁移：容器令牌化 + KPI 顶条 6→1 + seal 淡底 |
+| site/data/poetry-rhythm-analysis.html | W869 | B6 迁移：容器令牌化 + KPI 顶条 5→1 + seal 淡底（progress-fill 进豁免） |
+| site/data/music-structure.html | W869 | B6 迁移：容器令牌化 + seal 淡底（tag ×35 进豁免） |
+| site/data/language-style-radar.html | W869 | B6 迁移：容器令牌化 + KPI 顶条 5→1 + seal 淡底 |
+| scripts/output/_w869_accent_audit.json | W869 | 新增：B6 朱砂落点审计 |
+| scripts/output/_w869_diff_review.json | W869 | 新增：B6 diff 归渠审查产物 |
+| scripts/output/_w864_accent_exemptions.json | W869 | 登记簿增 W869 分册（语义色片 50 处） |
+| scripts/output/_w869_spec.json | W869 | 本批 spec 十字段 |
+| docs/00-导读/W批次编号对账表.md | W869 | 认领行与收官回填 |
+
+
+## W868 设计迁移 B5 取经与行迹 10 页（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/guanyin-six-roles-network.html | W868 | B5 迁移：容器令牌化 + KPI 顶条 6→1 + seal 淡底 + 间距令牌化 |
+| site/data/pilgrim-team-dynamic-network.html | W868 | B5 迁移：同上（顶条 5→1·ctrl-btn/phase-card 进豁免） |
+| site/data/pilgrim-team-psychology-arc.html | W868 | B5 迁移：同上（顶条 5→1·progress-fill 进豁免） |
+| site/data/journey-route.html | W868 | B5 迁移：同上（顶条 4→1·标签重判连带 8） |
+| site/data/journey-geo-3d.html | W868 | B5 迁移：容器令牌化 + seal 淡底 |
+| site/data/journey-geo-semiotics.html | W868 | B5 迁移：冻结解除·正式消费 v4 令牌 |
+| site/data/journey-map-interactive.html | W868 | B5 迁移：容器令牌化 + 顶条 5→1 + seal 淡底（主行动 btn 进豁免） |
+| site/data/journey-spacetime.html | W868 | B5 迁移：容器令牌化 + 顶条 4→1 + seal 淡底（progress-fill 进豁免） |
+| site/data/customs-pass-route.html | W868 | B5 迁移：容器令牌化 + 顶条 4→1 + seal 淡底 |
+| site/data/cave-estate.html | W868 | B5 迁移：容器令牌化 + 顶条 4→1 + seal 淡底 + 间距（tag.king ×19 进豁免·标签重判连带 16） |
+| scripts/output/_w868_accent_audit.json | W868 | 新增：B5 朱砂落点审计 |
+| scripts/output/_w868_diff_review.json | W868 | 新增：B5 diff 归渠审查产物 |
+| scripts/output/_w864_accent_exemptions.json | W868 | 登记簿增 W868 分册（语义变体 26 处） |
+| scripts/output/_w868_spec.json | W868 | 本批 spec 十字段 |
+| docs/00-导读/W批次编号对账表.md | W868 | 认领行与收官回填 |

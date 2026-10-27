@@ -11,6 +11,41 @@
 ---
 
 
+## W987 水墨意境卡族启用批（2026-10-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/reader/ch007.html | W987 | 新增场景图（`.chapter-scene`·第 007 回八卦炉意境图） |
+| site/reader/ch014.html | W987 | 新增场景图（第 014 回猴形剪影意境图） |
+| site/reader/ch015.html | W987 | 新增场景图（第 015 回白马崖意境图） |
+| site/reader/ch023.html | W987 | 新增场景图（第 023 回静坐烛影意境图） |
+| site/reader/ch027.html | W987 | 新增场景图（第 027 回三背影茅屋意境图） |
+| site/reader/ch030.html | W987 | 新增场景图（第 030 回黑虎洞穴意境图） |
+| assets/promo/README.md | W987 | 新增「水墨意境卡族」节（成员 33 张·规范边界表·投放位置建议·维护约定） |
+| docs/11-方案报告/计划方案/T33-任务计划执行与经验沉淀报告-2026-10-27.md | W987 | 终稿报告件（计划 + 执行合一） |
+| docs/00-导读/W批次编号对账表.md | W987 | W987 认领行 + 收官状态 |
+| docs/11-方案报告/README.md | W987 | §六 计划方案登记 +1 行（序号 40·T-33）· 件数 42 → 43 |
+| docs/agent/pitfalls.md | W987 | 坑表 +3 条（77 → 80：资产族归族登记 / 类名隔开规范 / 同页两图首屏留主资产） |
+| AGENTS.md | W987 | 坑位条数声明 77 → 80 |
+| HANDOVER.md | W987 | 坑位条数指针 77 → 80 |
+| CHANGELOG.md | W987 | W987 段 |
+| README.md | W987 | 当前批次版本行 |
+| STRUCTURE.md | W987 | 当前批次版本行 |
+| docs/00-导读/项目说明.md | W987 | 当前批次版本行 |
+| .github/workflows/README.md | W987 | 工作流层版本面推进 W987 |
+| site/index.html | W987 | 页脚批次链插入 W987 |
+| site/data/cross-time-danmaku.html | W987 | 页脚批次链插入 W987 |
+| site/data/tag-cloud.html | W987 | 页脚批次链插入 W987 |
+| site/dukou-engine.html | W987 | 页脚批次链插入 W987 |
+| archive/docs/AGENTS-ARCHIVE.md | W987 | 脚注滚动迁入的最老条目 |
+| CITATION.cff | W987 | version 同步为 W987 |
+| scripts/output/file-index.md | W987 | W987 段插入 |
+| scripts/_w987_family_scan.py | W987 | 族盘点 + 插入点实测（成员/尺寸/引用/行号） |
+| scripts/_w987_insert_scenes.py | W987 | 6 页场景图接入（`.chapter-scene`·幂等） |
+| scripts/output/_w987_family_scan.json | W987 | 族盘点报告 |
+| scripts/output/_w987_spec.json | W987 | 本批级联 spec |
+| scripts/output/_cascade_files_W987.txt | W987 | 级联落盘清单 |
+
 ## W986 回目页 6 张线描版换主体重出批（2026-10-27）
 
 | 文件 | W | 说明 |
@@ -3358,47 +3393,5 @@ docs/11-方案报告/README.md
 | scripts/output/_w864_accent_exemptions.json | W870 | 登记簿增 W870 分册（语义色片 33 处） |
 | scripts/output/_w870_spec.json | W870 | 本批 spec 十字段 |
 | docs/00-导读/W批次编号对账表.md | W870 | 认领行与收官回填 |
-
-
-## W869 设计迁移 B6 叙事学 10 页（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/narrative-experiment.html | W869 | B6 迁移：容器令牌化 + narr-card 顶条 12→1 收敛 + 间距令牌化（chips/owner 进豁免） |
-| site/data/narrative-rhythm-curve.html | W869 | B6 迁移：容器令牌化 + KPI 顶条 5→1 + seal 淡底（主行动 btn 进豁免） |
-| site/data/narratology-12d-network.html | W869 | B6 迁移：容器令牌化 + KPI 顶条 6→1 + seal 淡底 |
-| site/data/narratology-16d-network.html | W869 | B6 迁移：容器令牌化 + KPI 顶条 6→1 + seal 淡底 |
-| site/data/intertextuality-network.html | W869 | B6 迁移：容器令牌化 + KPI 顶条 6→1 + seal 淡底 |
-| site/data/deconstruction.html | W869 | B6 迁移：容器令牌化 + KPI 顶条 4→1 + seal 淡底（tag ×5 进豁免） |
-| site/data/six-senses-narratology-network.html | W869 | B6 迁移：容器令牌化 + KPI 顶条 6→1 + seal 淡底 |
-| site/data/poetry-rhythm-analysis.html | W869 | B6 迁移：容器令牌化 + KPI 顶条 5→1 + seal 淡底（progress-fill 进豁免） |
-| site/data/music-structure.html | W869 | B6 迁移：容器令牌化 + seal 淡底（tag ×35 进豁免） |
-| site/data/language-style-radar.html | W869 | B6 迁移：容器令牌化 + KPI 顶条 5→1 + seal 淡底 |
-| scripts/output/_w869_accent_audit.json | W869 | 新增：B6 朱砂落点审计 |
-| scripts/output/_w869_diff_review.json | W869 | 新增：B6 diff 归渠审查产物 |
-| scripts/output/_w864_accent_exemptions.json | W869 | 登记簿增 W869 分册（语义色片 50 处） |
-| scripts/output/_w869_spec.json | W869 | 本批 spec 十字段 |
-| docs/00-导读/W批次编号对账表.md | W869 | 认领行与收官回填 |
-
-
-## W868 设计迁移 B5 取经与行迹 10 页（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/guanyin-six-roles-network.html | W868 | B5 迁移：容器令牌化 + KPI 顶条 6→1 + seal 淡底 + 间距令牌化 |
-| site/data/pilgrim-team-dynamic-network.html | W868 | B5 迁移：同上（顶条 5→1·ctrl-btn/phase-card 进豁免） |
-| site/data/pilgrim-team-psychology-arc.html | W868 | B5 迁移：同上（顶条 5→1·progress-fill 进豁免） |
-| site/data/journey-route.html | W868 | B5 迁移：同上（顶条 4→1·标签重判连带 8） |
-| site/data/journey-geo-3d.html | W868 | B5 迁移：容器令牌化 + seal 淡底 |
-| site/data/journey-geo-semiotics.html | W868 | B5 迁移：冻结解除·正式消费 v4 令牌 |
-| site/data/journey-map-interactive.html | W868 | B5 迁移：容器令牌化 + 顶条 5→1 + seal 淡底（主行动 btn 进豁免） |
-| site/data/journey-spacetime.html | W868 | B5 迁移：容器令牌化 + 顶条 4→1 + seal 淡底（progress-fill 进豁免） |
-| site/data/customs-pass-route.html | W868 | B5 迁移：容器令牌化 + 顶条 4→1 + seal 淡底 |
-| site/data/cave-estate.html | W868 | B5 迁移：容器令牌化 + 顶条 4→1 + seal 淡底 + 间距（tag.king ×19 进豁免·标签重判连带 16） |
-| scripts/output/_w868_accent_audit.json | W868 | 新增：B5 朱砂落点审计 |
-| scripts/output/_w868_diff_review.json | W868 | 新增：B5 diff 归渠审查产物 |
-| scripts/output/_w864_accent_exemptions.json | W868 | 登记簿增 W868 分册（语义变体 26 处） |
-| scripts/output/_w868_spec.json | W868 | 本批 spec 十字段 |
-| docs/00-导读/W批次编号对账表.md | W868 | 认领行与收官回填 |
 
 
