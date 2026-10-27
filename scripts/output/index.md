@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（571）
+## 文件（572）
 
 ### Markdown 文档
 
@@ -560,6 +560,7 @@
 - `_w983_retry_36-ch004-bimawen.json`
 - `_w983_retry_36-ch004-bimawen_map.json`
 - `_w983_spec.json`
+- `_w984_precheck.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`
