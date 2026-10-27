@@ -1,11 +1,11 @@
-# plate-set · 内页专题题图（线描立像 · 64 张成套）
+# plate-set · 内页专题题图（线描立像 · 76 张成套）
 
-> 生成来源：人工撰写（Agent 起草）·生成模型：MiniMax 图像生成（mcode-tools · `connector__matrix__generate_image`）·生成日期：2026-10-25·**2026-10-27 补记**·核验状态：已核验（64/64 机器判据 PASS · 64/64 逐张放大人眼核过题材与形制 · 负样本自检判据可证伪）
+> 生成来源：人工撰写（Agent 起草）·生成模型：MiniMax 图像生成（mcode-tools · `connector__matrix__generate_image`）·生成日期：2026-10-25·**2026-10-27 补记**·核验状态：已核验（76/76 机器判据 PASS · 76/76 逐张放大人眼核过题材与形制 · 负样本自检判据可证伪）
 > 文件角色：目录导读（人读·与 index.md 分工：本文件讲规格与接入约定，index.md 列逐文件清单）
 
 ## 这个目录装什么
 
-《取经录》**读者页专题题图**成套素材——**64 张**线描立像（人物 34 + 主题 28 + 回目页场景 2），画幅统一 `1200×1600`（3:4 竖版），
+《取经录》**读者页专题题图**成套素材——**76 张**线描立像（人物 36 + 主题 29 + 跨学科 3 + 回目页场景 8），画幅统一 `1200×1600`（3:4 竖版），
 按站内既有 `chapter-plate` 范式插在专题页标题下方（420 px 居中）。
 
 与站内同族素材的分工：
@@ -16,7 +16,7 @@
 | `assets/promo/plate-set/`（本目录） | 1200×1600（3:4） | 线描**立像** 52 张 | 内页专题题图 |
 
 **背景缺口**：站内 `site/reader/` 共 622 页，本套接入前**只有 11 页有题图**（6 个回目页 + 5 个专题页）；
-people / themes / essays / poetry / culture 五库绝大部分页面无题图。**现覆盖 75 页**（11 存量 + 52 本套 + W974 批 12 + W983 批 12·四库混合：people 4 / themes 3 / essays·poetry·culture 3 / 回目页 2）。
+people / themes / essays / poetry / culture 五库绝大部分页面无题图。**现覆盖 81 页**（11 存量 + 52 本套 + W974 批 12 + W983 批 12 + W984 批 6 新增·另 6 张为回目页图源替换·原浓墨版文件保留）；回目页 100 页中已有题图 14 页（浓墨 6 + W983 新增 2 + W984 线描重出 6）。
 
 **一览预览**：`preview-contact-sheet.png`（52 张缩略拼图·验成套一致性）；
 `preview-detail-sheet.png`（主体包围盒放大·验题材形制）；`preview-zoom-final.png`（关键部位 3 倍核形制）。
@@ -117,7 +117,41 @@ people / themes / essays / poetry / culture 五库绝大部分页面无题图。
 | `plate-line-35-ch010-weizheng` | 魏征斩龙（回目场景） | 幞头官服 + 长剑 + 三爪盘龙 | `reader/ch010.html`（第 010 回） |
 | `plate-line-36-ch004-bimawen` | 官封弼马（回目场景） | 猴相 + 乌纱官帽 + 齐天大圣旗 + 方官印 | `reader/ch004.html`（第 004 回） |
 
+### 第七组 · 回目页线描重出 6 + 四库扩量 6（编号 37–48 · W984 新增）
+
+| 文件（去扩展名） | 主体 | 独占标志物 / 场景元素 | 接入页 |
+| --- | --- | --- | --- |
+| `plate-line-37-ch007-bagua-lu` | 悟空（八卦炉） | 三足圆筒八卦炉（卦纹）+ 山 + 两道铁链 | `reader/ch007.html`（**替换**浓墨版） |
+| `plate-line-38-ch014-liubei` | 悟空（剪径山中） | 朴刀 + 山贼头巾 + 古树 | `reader/ch014.html`（**替换**浓墨版） |
+| `plate-line-39-ch015-yingchou` | 白龙马 | 缰绳盘两圈 + 枯松 + 三道涧水纹 | `reader/ch015.html`（**替换**浓墨版） |
+| `plate-line-40-ch023-sichan` | 唐僧 + 宫装妇人 | 禅杖 + 绣鞋 + 香炉 | `reader/ch023.html`（**替换**浓墨版） |
+| `plate-line-41-ch027-bailong` | 白龙出水 + 岸上唐僧 | 鳞片龙身 + 三道水纹 + 石岸 | `reader/ch027.html`（**替换**浓墨版） |
+| `plate-line-42-ch030-sancha` | 沙僧 + 三股叉 | 月牙铲 + 扁担 + 三道风纹 | `reader/ch030.html`（**替换**浓墨版） |
+| `plate-line-43-luoshanv` | 罗刹女 | 三尖两刃刀 + 素白小口葫芦（颈系朱红封带） | `reader/people/罗刹女外传.html` |
+| `plate-line-44-kuimulang` | 奎木狼 | 狼首 + 铁盔 + 方头铜锤 | `reader/people/奎木狼外传.html` |
+| `plate-line-45-zhaoan-topic` | 招安场景 | 留白诏书卷 + 留白官印 | `reader/themes/招安的两种结局专题.html` |
+| `plate-line-46-fushi-topic` | 明代冠服 | 乌纱帽 + 禽兽补纹补服 + 玉带 | `reader/essays/西游与服饰学.html` |
+| `plate-line-47-jingwu-topic` | 山水禅心 | 斗笠诗僧 + 孤舟 + 圆月 + 两峰 | `reader/poetry/原著景物诗分类赏析专题.html` |
+| `plate-line-48-xuanzang-topic` | 负笈玄奘 | 竹制经箱 + 竹杖 + 长安城垣 + 留白旌旗 | `reader/culture/历史玄奘与小说玄奘专题.html` |
+
 每张有 `.png`（无损母版·1200×1600）与 `.webp`（站点用·q90）两个版本，文件名仅扩展名不同。
+
+### 存量归档 · 浓墨渲染题图（页面已改用线描版·**文件保留不删**）
+
+回目页早期有 6 张「浓墨渲染型方图」（1:1 · 1200×1200），随 2026-07-30 初始批量导入进仓：
+
+| 文件 | 原接入页 | 处置（2026-10-27 W984·用户裁定） |
+| --- | --- | --- |
+| `site/static/images/chap-07.webp` | `reader/ch007.html` | 页面改用 `plate-line-37-ch007-bagua-lu.webp`；**本文件保留在仓内**（不再被页面引用） |
+| `site/static/images/chap-14.webp` | `reader/ch014.html` | 页面改用 `plate-line-38-ch014-liubei.webp`；**本文件保留** |
+| `site/static/images/chap-15.webp` | `reader/ch015.html` | 页面改用 `plate-line-39-ch015-yingchou.webp`；**本文件保留** |
+| `site/static/images/chap-23.webp` | `reader/ch023.html` | 页面改用 `plate-line-40-ch023-sichan.webp`；**本文件保留** |
+| `site/static/images/chap-27.webp` | `reader/ch027.html` | 页面改用 `plate-line-41-ch027-bailong.webp`；**本文件保留** |
+| `site/static/images/chap-30.webp` | `reader/ch030.html` | 页面改用 `plate-line-42-ch030-sancha.webp`；**本文件保留** |
+
+**为什么保留而不删**：用户 2026-10-27 08:25 裁决「这六张我认为还可以」⇒ 保留为可回退的存量资产（若日后想恢复浓墨版，仅需改回 6 个 `img src`）。**注意**：这 6 个文件目前**不被任何页面引用**（孤儿资产），删除它们不影响站点运行，但会失去回退能力 ⇒ 处置需用户批准。
+
+**替换时同步改的可访问性属性**：存量图为装饰图（`aria-hidden="true"` + 空 `alt`）；线描版带真实 `alt` 文本 ⇒ 替换时**移除 `aria-hidden`**，否则读屏用户永远听不到题图内容。
 
 ## 统一规格（成套一致性的硬约束）
 

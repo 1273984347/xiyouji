@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（572）
+## 文件（585）
 
 ### Markdown 文档
 
@@ -221,6 +221,7 @@
 - `_cascade_files_W981.txt`
 - `_cascade_files_W982.txt`
 - `_cascade_files_W983.txt`
+- `_cascade_files_W984.txt`
 - `_sync_analysis_manifest.json`
 - `_vermilion_solid_cache.json`
 - `_vermilion_solid_report.json`
@@ -560,7 +561,16 @@
 - `_w983_retry_36-ch004-bimawen.json`
 - `_w983_retry_36-ch004-bimawen_map.json`
 - `_w983_spec.json`
+- `_w984_batch1.json`
+- `_w984_batch2.json`
+- `_w984_batch3.json`
+- `_w984_gen.json`
 - `_w984_precheck.json`
+- `_w984_retry_38-ch014-liubei.json`
+- `_w984_retry_40-ch023-sichan.json`
+- `_w984_retry_43-luoshanv.json`
+- `_w984_retry_map.json`
+- `_w984_spec.json`
 - `chart-values-baseline.txt`
 - `chart-values-report.json`
 - `citability-baseline.txt`
@@ -599,9 +609,12 @@
 - `_w974_probe_top_zoom.png`
 - `_w983_sheet.png`
 - `_w983_zoom.png`
+- `_w984_sheet.png`
+- `_w984_zoom.png`
 
 ### 其他
 
+- `_w984_serve.err`
 - `neo4j_seed.cypher`
 
 ---
