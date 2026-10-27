@@ -104,9 +104,18 @@ def run(strict=False):
             mark = "  ⚠ 破 1MB 线——修法=py -3 scripts/archive_tier2.py"
             problems.append("T1 %s %s 破线" % (name, _kb(size)))
         elif warn:
+            # 判距预警只标记不入 problems——W994 review 修正：回线后两件常驻 800KB+ 预警带，
+            # strict 若判红则门禁候选永红（语义对齐 docstring「破线/缺标注 exit 1」）
             mark = "  (判距预警 ≥800KB)"
-            problems.append("T1 %s %s 判距预警" % (name, _kb(size)))
         lines.append("T1  %-38s %8s%s" % (name, _kb(size), mark))
+    # T1b：tier2 容器体积报告（§11.2 无 tier-3 形态·>1MB 打「登记观察」浮出待政策）
+    for name in sorted(os.listdir(os.path.join(arch, "docs"))):
+        if not name.endswith("-tier2.md"):
+            continue
+        p = os.path.join(arch, "docs", name)
+        size = os.path.getsize(p)
+        note = "  ⚠ 破 1MB——§11.2 无 tier-3 形态·登记观察（容器只增不删·待政策定夺）" if size > LIMIT else ""
+        lines.append("T1b %-38s %8s%s" % (name, _kb(size), note))
 
     # T2
     tracked = sorted(r.replace(os.sep, "/") for r in tf.tracked_files()

@@ -38,7 +38,6 @@ KINDS = {
         "primary": os.path.join("archive", "docs", "CHANGELOG-ARCHIVE.md"),
         "tier2": os.path.join("archive", "docs", "CHANGELOG-ARCHIVE-tier2.md"),
         "block": re.compile(r"(?m)^### ", re.M),
-        "wpat": re.compile(r"W(\d{3,4})"),
         "tier2_header": None,  # 已存在
     },
     "file-index": {
@@ -56,8 +55,8 @@ KINDS = {
 }
 
 
-def key_from_heading(kind, heading):
-    """段排序键：changelog=标题行首个 W 数字；file-index=首个 W 数字（目录节无 W 号取 0=最老）。"""
+def key_from_heading(heading):
+    """段排序键：标题行首个 W 数字；无 W 号（file-index 早期目录节）取 0=排最老。"""
     m = re.search(r"W(\d{3,4})", heading)
     return int(m.group(1)) if m else 0
 
@@ -70,7 +69,7 @@ def parse_segments(text, block_re, kind):
         end = marks[i + 1][0] if i + 1 < len(marks) else len(text)
         nl = text.find("\n", s)
         heading = text[s:nl if nl != -1 else end]
-        segs.append((key_from_heading(kind, heading), s, end))
+        segs.append((key_from_heading(heading), s, end))
     return segs
 
 
@@ -94,9 +93,6 @@ def plan(text, block_re, kind, target):
             break
         moved_bytes += len(text[s:e].encode())
         moved.append((k, s, e))
-    if moved and len({k for k, _s, _e in segs}) != len(segs):
-        # 键可重复（file-index 目录节同键 0）——前缀切分按 (key,pos) 仍安全·此处仅记账
-        pass
     kept = [t for t in segs if t not in set(moved)]
     if moved and kept:
         assert max((k, s) for k, s, _e in moved) < min((k, s) for k, s, _e in kept), "A4 键序前缀（构造性保证·断言兜底）"
