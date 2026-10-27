@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（585）
+## 文件（584）
 
 ### Markdown 文档
 
@@ -614,7 +614,6 @@
 
 ### 其他
 
-- `_w984_serve.err`
 - `neo4j_seed.cypher`
 
 ---
