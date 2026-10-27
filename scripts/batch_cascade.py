@@ -620,9 +620,37 @@ def _close_hints():
         _tracked = len([x for x in _r.stdout.splitlines() if "/" not in x.replace("scripts/", "", 1)])
         _on_disk = len([f for f in os.listdir(os.path.join(ROOT, "scripts"))
                         if f.startswith("_") and os.path.isfile(os.path.join(ROOT, "scripts", f))])
-        _msg = "[SCRIPTS] 顶层 `_` 件跟踪态 %d 个（盘上 %d 含 gitignore 本地件）" % (_tracked, _on_disk)
-        if _tracked > 20:
-            _msg += "——超阈值 20：跑退役扫描（语料级引用剔除·W977 先例 tmpe/_w977_scan.py 形态）"
+        # W992 口径校准：跟踪数含近批证据锚（CHANGELOG 110 段窗内被引用·合法驻留），
+        # 裸计数恒超 20 变常驻噪声——改报「零引用退役候选数」（可行动数）作阈值判据。
+        _zero_ref = 0
+        try:
+            _corpus = ["CHANGELOG.md"]
+            for _d in ("tests", "docs/agent", "docs/00-导读"):
+                _rr = _sp.run(["git", "-c", "core.quotePath=false", "ls-files", _d],
+                              capture_output=True, text=True,
+                              encoding="utf-8", errors="replace", cwd=ROOT)
+                _corpus.extend(x for x in _rr.stdout.splitlines() if x.strip())
+            _texts = {}
+            for _c in _corpus:
+                try:
+                    _texts[_c] = open(os.path.join(ROOT, _c.replace("/", os.sep)),
+                                      encoding="utf-8", errors="ignore").read()
+                except OSError:
+                    pass
+            _cl_tail = _texts.get("CHANGELOG.md", "")[-200000:]
+            for _f in _r.stdout.splitlines():
+                _name = _f.replace("scripts/", "", 1)
+                if not _name.startswith("_"):
+                    continue
+                if _name in _cl_tail or any(_name in _tx for _tx in _texts.values()):
+                    continue
+                _zero_ref += 1
+        except Exception:
+            _zero_ref = -1
+        _msg = "[SCRIPTS] 顶层 `_` 件跟踪态 %d 个（盘上 %d）·零引用退役候选 %s 个" % (
+            _tracked, _on_disk, _zero_ref)
+        if _zero_ref > 20:
+            _msg += "——超阈值 20：跑退役扫描（archive_file.py 语料级引用剔除·W977/W992 先例）"
         print(_msg)
     except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"[SCRIPTS] 提示位不可用（{_exc}）")
