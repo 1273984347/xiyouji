@@ -48,3 +48,4 @@ check_gov_doc_claims.py  # ②批收尾会话直跑对账（治理文档数字�
 archive_ledger_rows.py  # ②批收尾会话直跑归档（台账行号序切分·C5 窗口修法·W970 建）
 check_content_hygiene.py  # ②批收尾会话直跑扫描（全仓内容卫生·角色分类·W973 建）
 cascade_lock.py  # ②批收尾会话直跑工具（级联运行锁·--acquire/--release/--status·W991 建）
+check_audit_trigger.py  # ②批收尾会话直跑触发器（对抗式审查 ≥20 批点名·W1000 建）

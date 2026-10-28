@@ -633,6 +633,15 @@ def main():
     except Exception as _exc2:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"WARN  数字断言对账器不可用（{_exc2}）——本回合跳过（禁静默）")
 
+    # 5.75) 对抗式审查触发器（W1000）：≥20 批未派发即提示（只提示不拦截·模板见 docs/agent/adversarial-audit-prompt.md）
+    try:
+        import check_audit_trigger as _cat
+
+        for _line in _cat.notice_lines():
+            print(("WARN  " if _line.startswith("⚠") else "NOTE  ") + _line)
+    except Exception as _exc3:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"WARN  对抗审查触发器不可用（{_exc3}）——本回合跳过（禁静默）")
+
     print("== 结论 ==")
     if problems:
         for p in problems:

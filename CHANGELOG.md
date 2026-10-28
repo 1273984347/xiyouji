@@ -6,7 +6,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W998），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1000），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -18,6 +18,20 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
 
+### W1000（2026-10-28）：对抗式审查常驻化批（四位号首批·用户令「立项」）
+
+> **来源**：用户令「立项」——W998 subagent 对抗式审查一次抓出 P1×2/P2×4，证明「写哨兵的人也需要被哨兵盯」，按建议常驻化。
+> **摘要**：① **check_audit_trigger.py 触发器**——台账最新含「对抗式审查」认领行距 max(W) ≥20 批即提示派发（preflight 接线·只提示不拦截）；找不到登记行按「从未审查」直接触发（fail-closed 宁假警不漏警）；自测四态（触发/未触发/从未/散文豁免）。② **模板落盘 docs/agent/adversarial-audit-prompt.md**——W998 实战 prompt 沉淀（范围声明+A-G 必查清单+P0-P3 输出分级+派发会话收尾义务+成本参考），任何会话可持之派发。③ **四位号 W1000 全链实战验证**——parse_ledger max=1000、ledger_backfill find_row、认领行四位解析、级联断言「批次号应为 W1000」字符串比对、W969 迁移 {3,4} 正则全部经受实战。④ 顺带：搜索索引随批刷新（并行 T-35 新文档）+ CSP 两页重算 + 台账回窗。
+> **文件**：scripts/check_audit_trigger.py · scripts/preflight_check.py · docs/agent/adversarial-audit-prompt.md · scripts/output/script-coverage-baseline.txt · docs/00-导读/W批次编号对账表.md · archive/docs/W批次编号对账表-ARCHIVE.md · site/data/search.html · site/en/search.html
+> **验证**：触发器 --self-test 四态 + 现网未触发（距 W1000 基线 0 批）+ 四位号四组件实战验证 + pytest 全量 943 passed + ruff 清零 + CSP 零漂移 + 体积四窗全绿。
+> **状态**：**已收官**（W1000 git 反填·触发器与模板落地·四位号实战全过）
+### W999（2026-10-28）：必守纪律晋升批（惰性层→必载层·用户问责「pitfalls 优先级低导致惰性读取」）
+
+> **来源**：用户问责「pitfalls.md 优先级太低导致惰性读取」——三层取证：CLAUDE 必载层无此纪律、AGENTS 铁律 13 条无此条、唯一落点是按需查表的 pitfalls（检索触发器在写教训场景设计上不响）。
+> **摘要**：① **AGENTS §6 铁律 14**「修实例必修根」（同族风险同批或次批根治禁等排期 + 检查按委托字面范围 + 跨会话教训权威落坑表与本节·私有记忆仅镜像）——权威落点。② **CLAUDE.md 速查第 12 行**一行版+指针（必载层每会话在场·行数 49/60·第 32 门禁四查过）。③ 脚注同名条目改指向铁律 14（滚动层只留索引）。按 CLAUDE 契约流程：权威先落 §6 再登记速查行。
+> **文件**：AGENTS.md · CLAUDE.md
+> **验证**：铁律 14 在 §6、CLAUDE 第 12 条指向 AGENTS §6-14、第 32 门禁 0 FAIL、verify docs rc=0。
+> **状态**：**已收官**（W999 git 反填·纪律晋升三层落地）
 ### W998（2026-10-28）：对抗式审查修复批（subagent P1×2/P2×4/P3 清偿）
 
 > **来源**：用户令「派发一个 subagent 严格审查一遍整个」——subagent 对抗式审查（迁移守恒/门禁实跑/代码缺陷/三层一致/同族残留全查）报 P1×2/P2×4/P3×6。
@@ -1818,31 +1832,4 @@
 > - **范围纪律**：只新增 12 件素材图 + 两个检测/修复脚本 + 修复 3 件历史资产，不改任何页面与门禁件，不推送远端。
 > - **CHANGELOG 版段递延**：现役顶段 W874，W875–W880 段待补且 W876 在途 → batch_cascade 断言「批次号应为顶段+1」不成立，按仓内现行节奏递延，spec 已入库，待补段批按号序一并回写。
 > **状态**：**已收官**（W881 bbbb070e·git 反填·共 3 笔·W971 存量回填）
-
-### W880（2026-10-22）：分语言 og:image 接线批（855 页改指新 URL·中文 og-09 山口关隘 / 英文 og-03 白龙马·生成端与判据端同步）
-
-> **来源**：用户就 W879 批报告的遗留项「分语言 og:image 接线（改 855 页引用 + 门禁常量）」回「批准」——即 CLAUDE.md 第 10 条要求的「管控件改动须经用户批准」已获授权。
-> - **文件**：scripts/_w880_og_image_split.py、scripts/check_seo_head.py、scripts/inject_seo_head.py、scripts/build_reader.py、scripts/gen_og_cover.py、site/（855 页的 og:image 一行）、site/static/img/og-cover.png、scripts/output/_w880_spec.json、docs/00-导读/W批次编号对账表.md。
-> - **做了什么**：全站 **855 页**的 og:image 改指**新 URL**——中文 717 页 → `static/img/og-cover-ink-zh.jpg`（取 og-09 山口关隘），英文 138 页（en/ 前缀）→ `static/img/og-cover-ink-en.jpg`（取 og-03 白龙马）。页内旧 URL 的**全部出现处**一并替换（含内联 JSON-LD 的 image 字段，避免同页两处指向不同图），行尾原样保留。
-> - **顺带清掉 W879 的两个遗留**：① **缓存**——URL 变更后社交平台按 URL 缓存的旧卡即刻失效，「新图滞后于平台缓存过期」不再是问题；② **生成物被手改**——`site/static/img/og-cover.png` 是 `scripts/gen_og_cover.py` 的生成物，W879 的原地替换会被下一次生成冲掉（生成副本被重生成抹除），本批把它**恢复为生成物版本**（可复现，49,490 B），现行分享图移到两个**非生成物**新文件上，生成物与手工资产就此分离；`gen_og_cover.py` 的文档字符串同步注明其产出已降级为旧版留档。
-> - **判据端同步（管控件·用户已批准）**：`scripts/check_seo_head.py` 的 R1 逐页期望值由单一 URL 改为**分语言**（新增 `og_image_for(rel)`·en/ 前缀为英文站），R4 由校一张 og-cover 改为**校两张现役图**（存在 + 尺寸 1200×630 + 体积 ≤300KB·旧排版卡保留存在性与体积校）。判据语义未放宽——仍是「每页必须有正确的 og:image」，只是期望值按语言分流。
-> - **生成端同步（避免下次重建被抹）**：`scripts/build_reader.py`（reader 生成器仅产出中文页 → 取中文图）与 `scripts/inject_seo_head.py`（全站 SEO 注入器 → 按 is_en 分流）——改写产物必须同步改生成器，否则下一次重建/再注入即回退。一次性脚本 `scripts/_w880_og_image_split.py` 的产出与生成器一致 ⇒ 后续重建不回退。
-> - **验收**：SEO head 门禁实跑通过（855 页 · 配对 89 · sitemap 集合一致 · JSON-LD 内联有效）；三个脚本 `py_compile` 通过；全量门禁 53 段核心全部通过。
-> - **范围纪律**：只动 855 页的 og:image 一行 + 四个脚本 + 一个一次性脚本 + 恢复旧 og-cover，不改任何页面结构、正文、样式与门禁判据语义，不推送远端。
-> - **CHANGELOG 版段递延**：现役顶段 W874，W875–W879 段待补且 W876 在途中 → batch_cascade 断言「批次号应为顶段+1」不成立，按仓内现行节奏递延，spec 已入库，待补段批按号序一并回写。
-> **状态**：**已收官**（W880 2446f94e·git 反填·共 2 笔·W971 存量回填）
-
-### W879（2026-10-22）：暗底/夜读适配水墨素材批（四张 1792×1024·浅底浓墨显影版三张 + 深底浅墨直显一张 + 全站分享图换水墨）
-
-> **来源**：用户就「素材图还缺什么」清单令「按顺序开始做」，并就第 1+2 项四问已定：分段交付·**新生成深底水墨图**·**4 张 1792×1024**（多一张夜读模式专用）·**允许改中英文两站 meta og:image**。
-> - **文件**：site/static/images/ink-mountains-hero.webp、site/static/images/ink-mountains-path.webp、site/static/images/ink-mountains-pine.webp、site/static/images/ink-mountains-night.webp、site/static/img/og-cover.png、site/static/img/og-cover-ink-zh.jpg、site/static/img/og-cover-ink-zh.png、site/static/img/og-cover-ink-en.jpg、site/static/img/og-cover-ink-en.png、scripts/output/_w879_spec.json、docs/00-导读/W批次编号对账表.md。
-> - **根因实测（先质疑判据再动手·不是「图不够好看」）**：`.hero` 在 reader 与 data 页是同一套合成（`background: var(--dark)` #221D16 + `background-image: ink-mountains-hero.webp` + `background-blend-mode: soft-light`），**848 个页面共用一张**。按 soft-light 数学（背板 b=0.115<0.5 时 result=b−(1−2b)·b·(1−s)）：**源越暗越显影、源越亮越隐形**。现有那张「浅底淡墨」（纸 s≈0.93、山 s≈0.85）合成后亮度跨度仅 **0.0080** ⇒ 肉眼几乎不可见——这才是「叠完看不见」的机制性根因。
-> - **据此修正做法**：诗段底图必须是「**浅/亮底 + 浓墨山影**」（源 p05 落到 0.081–0.160、p50 仍 0.96 的大面积浅纸），深墨区才会在合成后显影为剪影；用户所选「深底浅墨」款则留给**夜读模式直显**场景（不做合成），保留为第 4 张。
-> - **显影度验收（合成模拟·可复算）**：把成品按 soft-light 叠到 #221D16 后量输出亮度跨度——基线 0.0080 → 新三张 **0.0718 / 0.0768 / 0.0789（×9.0 / ×9.6 / ×9.9）**；深底直显版自身对比度 0.5205。
-> - **交付形态**：第 1 张**原地替换** `ink-mountains-hero.webp`（同文件名同尺寸 1792×1024）⇒ **848 页零页面改动即同时改善**，旧图存于 git 历史；其余三张新增待后续接线。
-> - **第 2 项 og 分享图（按仓内契约调整了做法·据实记账）**：原计划是「中英文两站各改一行 meta og:image 指向自己的水墨图」，实测被第 33/SEO head 门禁否掉——`scripts/check_seo_head.py` 的 `OG_IMAGE = BASE + "static/img/og-cover.png"` 是硬编码常量，R1 逐页要求 head 里含**完全相同**的 og:image 绝对 URL（全站 855 页一条 URL），R4 另要求该文件 ≤300KB。改 URL 即红，且改门禁常量属管控件（CLAUDE.md 第 10 条须用户批准）⇒ **本批改为共享资产原地替换**：`site/static/img/og-cover.png` 换成水墨图（取 og-09 山口关隘，PNG-8 256 色 143.0 KB，目视无色带、朱砂印准确），**全站 855 页一次性换水墨分享图，URL 不变故 R1/R4 全绿**。分语言版（中文 og-09/英文 og-03 的 JPG 与 PNG）**已备好但未接线**——按页分语言需改 855 页引用（含 reader 生成器）且动门禁常量，须用户批准后另批。**遗留说明**：URL 不变，社交平台按 URL 缓存 og:image，新图生效可能滞后于平台缓存过期。
-> - **一处自我更正（据实记账）**：W878 批里我按磁盘实算刷新的 `inline_css_pages` 当时读到 850，那是并行会话重跑 `inline_css.py --force` 的中途瞬时值；该重生成落定后全站含 INLINED 标记页数 HEAD 与工作树一致为 328/330（与 W875 批自述「约 225 至 330 页」吻合），**850 才是异常值**。本批一并更正：stats.json 刷新为 330（磁盘实算零差异），两处实体标记同步回 330（CHANGELOG 顶部「全站页数口径」块及其键值枚举、架构方案 §113「内联 CSS 覆盖页」表行），变更史如实留痕（W878 记 330→850、W879 记 850→330）。
-> - **范围纪律**：只动 4 张底图 + 4 个分语言 OG 文件 + 1 个共享 og-cover + 目录索引刷新件 + 口径标记更正，不改任何页面结构、样式、生成器与门禁件，不推送远端。
-> - **CHANGELOG 版段递延**：现役顶段 W874，W875–W878 段待补且 W876 在途中 → batch_cascade 断言「批次号应为顶段+1」不成立，按仓内现行节奏递延，spec 已入库，待补段批按号序一并回写。
-> **状态**：**已收官**（W879 40a0ef23·git 反填·共 2 笔·W971 存量回填）
 

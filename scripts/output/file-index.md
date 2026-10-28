@@ -11,6 +11,22 @@
 ---
 
 
+## W1000 对抗式审查常驻化批（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_audit_trigger.py | W1000 | 新建对抗式审查触发器（台账即事实源·四态自测） |
+| docs/agent/adversarial-audit-prompt.md | W1000 | 派发 prompt 模板（W998 实战沉淀·收尾义务四条） |
+| scripts/preflight_check.py | W1000 | 触发器提示位接线 |
+
+## W999 必守纪律晋升批（2026-10-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W999 | §6 铁律 14 修实例必修根（权威落点） |
+| CLAUDE.md | W999 | 速查第 12 行（指向 §6-14 与 pitfalls 流程组） |
+
+
 ## W998 对抗式审查修复批（2026-10-28）
 
 | 文件 | W | 说明 |
@@ -3498,42 +3514,5 @@ docs/11-方案报告/README.md
 | scripts/_w881_fix_rule_line.py | W881 | 新增：横贯硬线定点修复器（规则行块＋向下并入洗边暗行→逐列垂直渐变回填） |
 | scripts/output/_w881_spec.json | W881 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
 | docs/00-导读/W批次编号对账表.md | W881 | 认领行与收官回填 |
-
-
-## W880 分语言 og:image 接线批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_w880_og_image_split.py | W880 | 新增：一次性批处理脚本·全站 855 页 og:image 分语言改指新 URL（页内旧 URL 全出现处一并替换·含内联 JSON-LD·行尾原样保留） |
-| scripts/check_seo_head.py | W880 | 改（管控件·用户已批准）：R1 逐页期望值改分语言（og_image_for(rel)·en/ 前缀为英文站）+ R4 改校两张现役分享图（旧排版卡保留存在性与体积校） |
-| scripts/inject_seo_head.py | W880 | 改：全站 SEO 注入器按 is_en 分流 og:image（生成端同步·防下次再注入回退） |
-| scripts/build_reader.py | W880 | 改：reader 生成器（仅产出中文页）og:image 取中文站分享图（生成端同步·防下次重建回退） |
-| scripts/gen_og_cover.py | W880 | 改：文档字符串注明其产出（排版卡）已降级为旧版留档·现行分享图为两张水墨图·切勿再手改生成物 |
-| site/static/img/og-cover.png | W880 | 改：恢复为 gen_og_cover.py 的生成物版本（49,490 B·可复现）——W879 的手工水墨图被移至非生成物的新文件 |
-| site/（855 页） | W880 | 改：og:image 一行分语言改指新 URL（中文 717 页 → og-cover-ink-zh.jpg·英文 138 页 → og-cover-ink-en.jpg）·含内联 JSON-LD 的 image 字段 |
-| scripts/output/_w880_spec.json | W880 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
-| docs/00-导读/W批次编号对账表.md | W880 | 认领行与收官回填 |
-
-
-## W879 暗底/夜读适配水墨素材批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/ink-mountains-hero.webp | W879 | 改：现役 848 页共用的暗色诗段底图·原地替换为「浅底浓墨」显影版（合成后亮度跨度 0.0080→0.0789·×9.9） |
-| site/static/images/ink-mountains-path.webp | W879 | 新增：暗底适配底图 02/04·长路入山（浓墨林影+朱砂灯点·显影跨度 0.0768·×9.6） |
-| site/static/images/ink-mountains-pine.webp | W879 | 新增：暗底适配底图 03/04·松崖孤塔（浓墨崖松+朱砂崖印·显影跨度 0.0718·×9.0） |
-| site/static/images/ink-mountains-night.webp | W879 | 新增：暗底适配底图 04/04·深底浅墨直显版（夜读模式专用·自身对比度 0.5205） |
-| site/static/img/og-cover.png | W879 | 改：全站 855 页共用的 og 分享图·原地替换为水墨图（取 og-09 山口关隘·PNG-8 256 色 143.0KB·门禁 R4 上限 300KB·URL 不变故 R1 全绿） |
-| site/static/img/og-cover-ink-zh.jpg | W879 | 新增：分语言版分享图（中文·取 og-09 山口关隘·JPG 129.6KB·微信与 Facebook 不吃 webp 故出 JPG·备而未接线） |
-| site/static/img/og-cover-ink-en.jpg | W879 | 新增：分语言版分享图（英文·取 og-03 白龙马·JPG 53.1KB·备而未接线） |
-| site/static/img/og-cover-ink-zh.png | W879 | 新增：分语言版分享图无损母版（中文·PNG 497.2KB） |
-| site/static/img/og-cover-ink-en.png | W879 | 新增：分语言版分享图无损母版（英文·PNG 162.7KB） |
-| scripts/output/stats.json | W879 | 改：inline_css_pages 850→330（更正 W878 刷入的并行重生成中途瞬时值·磁盘实算零差异） |
-| scripts/output/stats-changelog.json | W879 | 改：随 stats 刷新的变更史追加一条 |
-| scripts/output/stats-index.md | W879 | 改：随 stats 刷新的反向索引重渲染 |
-| CHANGELOG.md | W879 | 改：顶部「全站页数口径」块与键值枚举的 inline_css_pages 标记 850→330 |
-| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W879 | 改：§113「内联 CSS 覆盖页」表行标记 850→330 |
-| scripts/output/_w879_spec.json | W879 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
-| docs/00-导读/W批次编号对账表.md | W879 | 认领行与收官回填 |
 
 
