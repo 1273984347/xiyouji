@@ -11,10 +11,11 @@
 
 - （无）
 
-## 文件（3）
+## 文件（4）
 
 ### Markdown 文档
 
+- `adversarial-audit-prompt.md`
 - `agent-web.md`
 - `gates.md`
 - `pitfalls.md`
