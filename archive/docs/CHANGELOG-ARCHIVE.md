@@ -13,6 +13,28 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W886（2026-10-22）：en 迁移批 1·入口与结构 28 页（C 渠换色 + 实底机械收敛 + 四类豁免·④ 首批）
+
+> **来源**：用户令「继续」。④ en 138 页迁移首批（5 批拆分：core 76 / character 12 / myth 14 / essay 36·按字母序确定性切批）。
+> - **文件**：site/en/ 28 页、scripts/_w886_en_audit.py、scripts/_w886_en_migrate.py、scripts/output/_w886_en_audit.json、scripts/output/_w886_en_audit_b1.json、scripts/output/_w886_en_audit_b1_after.json、scripts/output/_w864_accent_exemptions.json（W886 分册 25 条）、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md。
+> - **en 全量现状审计（先量后切）**：138 页四渠测量——C 渠落 bg 朱砂文字 **1,084 处 / 62 页**（与 zh 数据页 1,087 处同量级）；朱砂实底 **767 处 / 135 页**（zh 同口径 457 处 / 89 页·en 从未进迁移面）；令牌旧值 **0 页**（W876 的 326 页同步已顺带覆盖 en 138 页）；容器字面量 164 处（A 渠道属另一笔迁移欠账·本批不动并如实记账）。
+> - **批 1（28 页·core 前 28）**：C 渠规则级换色 **49 条规则 / 14 页**（--accent→--accent-text·复用 W876 换色器与批内审计子集）；B 渠机械化两步——`.seal` 实底→淡底 **28 页**（v4 §3.2 徽章条款·background→--accent-tint、白字→--accent）与 KPI 顶条按行收敛规则 **+16 页**（同排首卡保顶条·口径同 zh 页 W870 逐字规则·插页尾 style 保级联序）；余量按四类口径登记 **W886 分册 25 条豁免**（数据语义色片 15 条 / 首卡顶条 5 条 / 功能交互 5 条·全簿累计 121 条）。
+> - **验收**：实底 259→205（−54）·C 渠 275→38（−237·残留为 JS 内联样式元素·与 zh 的 253 同族）；28 页非豁免全部 ≤3（第 49 槽 judgePage 同款判据实算）；CSP 856 页 0 漂移。
+> - **注**：第 49 槽门禁范围本批不扩 en（未迁移的 110 页会红）——第 5 批收口时统一扩至全 en 并按批递减豁免。
+> - **段链**：W885 递延段由本批补段回写（顶段 W885）；W884 为无 spec 空洞（并行批未落 spec·如实记账）。
+> **状态**：**已收官**（W886 36dd0ccd·git 反填·共 2 笔·W971 存量回填）
+
+### W885（2026-10-22）：素材接线批（213 页页头装饰插画 + 首页水墨底图 + 4 张深底直显版插画·源与内联副本双写）
+
+> **来源**：用户就「素材图还缺什么」清单令「按顺序开始做」，在第 1–6 项素材做完、并列出「接线到页面」这一项后，用户于 2026-10-22 22:50「继续」、23:24 催办，本批执行第 6 项：把已入库的水墨素材真正接到站面上。
+> - **文件**：site/data/*.html（87）、site/en/*.html（126）共 213 页、site/system.css、site/index.html、site/static/images/viz-dark-01-network.webp、site/static/images/viz-dark-02-heatmap.webp、site/static/images/viz-dark-03-radar.webp、site/static/images/viz-dark-04-timeline.webp、site/static/images/README.md、site/static/images/index.md、scripts/_w885_wire.py、scripts/_w885_viz_alpha.py、scripts/_w885_index_revert.py、scripts/output/_w885_spec.json、docs/00-导读/W批次编号对账表.md。
+> - **接了什么**：① **213 页**（site/data 87 + site/en 126）在 `.hero` 暗色带内挂一张**深底直显版**装饰插画，按页名映射四类母题（network/relationships/social-media→根须网、heatmap→墨点阵、radar→放射线、timeline→刻痕序列，其余默认墨点阵）；② **首页 site/index.html** 的浅色 `.masthead` 铺 hero-01 山河云海横幅（文字正落在图底部特意留出的空白带上）；③ 另出 **4 张深底直显版** viz 插画（640×640·viz-dark-01..04）供暗带使用——浅底宣纸图贴在暗色带上会成一块亮斑，故暗带必须用深底版。
+> - **两条实测结论（据实记账·都不是猜的）**：① **file:// 下 CSP 的 `style-src 'self'` 会拦掉外链样式表**，页面样式实际全部来自每页的内联副本（inline_css.py 从 site/system.css 注入的那份·每页约 55 KB）⇒ 新规则必须**源与内联副本双写**：源（site/system.css）保证下次 inline_css 重跑时仍被继承，内联副本保证当前即生效。首轮只改源 ⇒ 规则在页面上完全不生效，浏览器实拍见装饰图撑成 990 px 方块盖住整页（截图存证）。② 深底方图贴在暖褐 hero 上有色差、可见方框 ⇒ 按亮度把深底映射为 alpha 渐变（近底色→透明、笔触→不透明），插画变成**悬浮的米白笔触层**，无方框且不依赖具体底色。
+> - **验收（浏览器实拍·两页）**：数据页确认装饰插画为 240 px 角饰、落在右下不压标题不压文字，W879 的 soft-light 山形底图在暗带上显影为剪影；首页确认水墨底图铺满首屏、kicker 与「取经录」与英文副题全部落在图的留白带上完全可读、「100 回」与山脊相映。**搜索索引**按「他方在途条目按 HEAD 版回退」处理：重跑 `_gen_search_index.py` 后逐条比对，差异仅他方在途的 docs/agent/gates.md 一条 → 已回退，两个索引文件恢复 HEAD 版（我方改动不改变任何页面条目）；**CSP 重算 0 页更新**（未触及内联脚本·零漂移）。
+> - **范围纪律**：只动 213 页的一条装饰 img + 各自内联副本的一条规则 + 首页三条背景 + system.css 一条规则 + 4 张新图 + 3 个脚本，不改任何页面结构、正文与门禁判据，不推送远端。
+> - **CHANGELOG 版段递延**：现役顶段 W874（W851 已落段），W875–W884 段待补且 W883 在途中 → batch_cascade 断言「批次号应为顶段+1」不成立，按仓内现行节奏递延，spec 已入库，待补段批按号序一并回写。
+> **状态**：**已收官**（W885 dcfc348a·git 反填·共 3 笔·W971 存量回填）
+
 ### W884（2026-10-22）：Playwright 历史问题全谱审计（T-10 落盘）
 
 > **来源**：用户令对全仓 Playwright 引用做历史问题全谱审计（T-10 任务）。

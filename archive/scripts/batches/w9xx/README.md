@@ -9,7 +9,7 @@
 
 ## 这个目录装什么
 
-生成时点含 228 个直属文件（JavaScript / TypeScript、Python 脚本）。详见同目录 `index.md` 的逐文件清单。
+生成时点含 227 个直属文件（JavaScript / TypeScript、Python 脚本）。详见同目录 `index.md` 的逐文件清单。
 
 ## 维护约定
 

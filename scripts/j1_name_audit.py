@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""_w851_j1_name_audit.py — J1 命名冲突审计（W851·设计迁移阶段 1 验收件）
+"""j1_name_audit.py — J1 命名冲突审计（W851·设计迁移阶段 1 验收件）
 
 ## 为什么需要它
 
@@ -26,9 +26,9 @@ pre-flight 对「已知撞名的 defer 组」必须报撞（defer 复证），ve
 
 ## 用法
 
-    py -3 scripts/_w851_j1_name_audit.py                  # 落地前：新名 ∩ 现役 == ∅ 且 var() 消费为 0
-    py -3 scripts/_w851_j1_name_audit.py --verify-landed  # 落地后：新名 ⊆ tokens.css（含暗色组同名处）
-    py -3 scripts/_w851_j1_name_audit.py --tokens PATH    # 指定 tokens.css 副本（如 git show 出的落地前版本）
+    py -3 scripts/j1_name_audit.py                  # 落地前：新名 ∩ 现役 == ∅ 且 var() 消费为 0
+    py -3 scripts/j1_name_audit.py --verify-landed  # 落地后：新名 ⊆ tokens.css（含暗色组同名处）
+    py -3 scripts/j1_name_audit.py --tokens PATH    # 指定 tokens.css 副本（如 git show 出的落地前版本）
 
 退出码：0 过 / 1 有冲突或复验不齐。
 """

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""_w876_site_audit.py — C 渠（朱砂文字落 --bg）+ 朱砂实底审计器（W876 重建件）。
+"""site_audit.py — C 渠（朱砂文字落 --bg）+ 朱砂实底审计器（W876 重建件）。
 
 **为什么重建**：W876 原审计器未随批入库（只有产物 JSON·复现缺口）——本脚本按
 committed 产物（_w876_site_audit.json：1087 处 / 64 页 + fill 457 处 / 89 页）
@@ -15,14 +15,14 @@ committed 产物（_w876_site_audit.json：1087 处 / 64 页 + fill 457 处 / 89
 - fill（朱砂实底·阶段 5 门禁同款测量）：元素**自身** background-color = --accent
   且盒面积 > 400px²（kind=background），或自身 border-top-color = --accent、
   border-top-width **≥ 2px** 且**条带面积**（宽 × 边框宽）> 400px²（kind=border-top·
-  KPI 顶条族·口径与 _w864_accent_audit.py 及豁免登记簿 criterion 逐字对齐）；
+  KPI 顶条族·口径与 accent_audit.py 及豁免登记簿 criterion 逐字对齐）；
 -  settle：networkidle + 2s 地板（chart-audit.js 修复波最远 14s·但其只动尺寸/避让
   不动色·2s 足以覆盖首波；对拍场景另用 15s 地板的 W851 探针）。
 
 **用法**：
-    py -3 scripts/_w876_site_audit.py                     # 审计在役站（site/）
-    py -3 scripts/_w876_site_audit.py --root <dir>/site   # 审计指定树（如 HEAD 快照）
-    py -3 scripts/_w876_site_audit.py --out <path.json>   # 指定产物路径
+    py -3 scripts/site_audit.py                     # 审计在役站（site/）
+    py -3 scripts/site_audit.py --root <dir>/site   # 审计指定树（如 HEAD 快照）
+    py -3 scripts/site_audit.py --out <path.json>   # 指定产物路径
 产物：scripts/output/_w876_site_audit_<tag>.json（tag 默认 live·快照传 --tag head）
 """
 

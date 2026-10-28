@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-29 04:56
+生成时间：2026-10-29 05:07
 
-共 **160** 件（门禁与校验 67 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 58 · 一次性（下划线前缀） 13）
+共 **163** 件（门禁与校验 67 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 58 · 一次性（下划线前缀） 16）
 
 ## 门禁与校验（67）
 
@@ -185,7 +185,7 @@
 | `visual_regression_probe.py` | visual_regression_probe.py — J2 视觉回归探针（W851 建·设计迁移阶段 1 验收件） |
 | `worktree_rehearse.py` | worktree_rehearse.py — worktree 预演法工具化（W701·S-26·用户圈选开工）。 |
 
-## 一次性（下划线前缀）（13）
+## 一次性（下划线前缀）（16）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -195,10 +195,13 @@
 | `_check_pipeline_consistency.py` | 创意三明治管线一致性轻量校验（P3-7，W508 沉淀）。 |
 | `_cite_probe.py` | 引文候选提取探针（E-A 沉淀，W507 永久化）。 |
 | `_gen_search_index.py` | W594：标题关键词数组（中文 jieba 切词、英文按词干拆分），供前端 +4 加权，≤12 个。 |
+| `_w1005_fix_c6.py` | _w1005_fix_c6.py — 修 C6：项目说明.md 两处版本行的 desc 含「·」 |
 | `_w1005_fix_head_sentence.py` | _w1005_fix_head_sentence.py — 修 HANDOVER 的「当前 HEAD = W###」句（治理契约判据 C4） |
 | `_w1005_handover_line.py` | _w1005_handover_line.py — 代并行 W1004 补 HANDOVER §一 里程碑链首行 |
 | `_w1005_heroes.py` | _w1005_heroes.py — W1005：两张 hero 水墨图重出（人数修正为「4 人形 + 1 匹白马」） |
 | `_w1005_probe_faces.py` | — |
 | `_w1005_probe_head.py` | — |
+| `_w1005_probe_readme.py` | — |
+| `_w1005_render_flyer.py` | _w1005_render_flyer.py — 重渲染宣传单页 A4 正面 PNG（中英各一） |
 | `_w1005_serve.py` | _w1005_serve.py — W1005 本地验收静态服务（webp/js/css MIME + no-store） |
 | `_w1005_sync_faces.py` | _w1005_sync_faces.py — 补并行 W1004 批的版本面欠账（2 处）+ 定位 HANDOVER HEAD 行 |

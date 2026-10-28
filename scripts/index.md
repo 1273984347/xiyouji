@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（166）
+## 文件（169）
 
 ### Markdown 文档
 
@@ -63,11 +63,14 @@
 - `_check_pipeline_consistency.py`
 - `_cite_probe.py`
 - `_gen_search_index.py`
+- `_w1005_fix_c6.py`
 - `_w1005_fix_head_sentence.py`
 - `_w1005_handover_line.py`
 - `_w1005_heroes.py`
 - `_w1005_probe_faces.py`
 - `_w1005_probe_head.py`
+- `_w1005_probe_readme.py`
+- `_w1005_render_flyer.py`
 - `_w1005_serve.py`
 - `_w1005_sync_faces.py`
 - `a11y_audit.py`

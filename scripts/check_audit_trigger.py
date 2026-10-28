@@ -6,11 +6,18 @@ P1×2/P2×4——证明「写哨兵的人也需要被哨兵盯」。本触发器
 变成「每 ≥20 批机器点名」。条款与触发点双件套（W824 纪律·防干扰日志断档模式复发）。
 
 判据（单一·台账即事实源）：
-  A1 台账最新含「对抗式审查」的认领行距当前 max(W) ≥ 20 批 → 触发。
-  找不到登记行 → 按「从未审查」处理，直接触发（fail-closed·宁假警不漏警）。
+  A1 台账含**事件 token「对抗审查已派发」**的认领行，其**最大 W 号**距当前 max(W) ≥ 20 批 → 触发。
+  找不到 token 行 → 按「从未审查」处理，直接触发（fail-closed·宁假警不漏警）。
+  含泛词「对抗式审查」但**无 token** 的行只出 NOTE（疑似未打标·不重置计数）——W1003 修（B1）。
+
+口径两条铁则（W1003 定）：
+  · **字样 ≠ 事件**：泛词会出现在「修复审查发现的问题」「审查常驻化批」等非派发行里，
+    以字样当事件会被无关批次**静默重置计数**（漏警实证：41 批未真审仍判未触发）⇒ 必须用 token。
+  · **max 而非文件序**：台账允许后补登记/让号（W931/W935），低号行可能排在末尾 ⇒
+    取文件末条会把 gap 算错（实证：真实 24 批报 28 批）⇒ 取含 token 行的最大 W 号。
 
 只提示不拦截：exit 恒 0；派发动作 = 会话按 docs/agent/adversarial-audit-prompt.md
-模板派发 subagent，修复与审查登记同批或次批落台账（desc 含「对抗式审查」即被本器认得）。
+模板派发 subagent，登记行须写 token「对抗审查已派发」才被本器认得。
 
 用法：
   py -3 scripts/check_audit_trigger.py            # 打印状态（exit 0）
@@ -27,33 +34,56 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import preflight_check as pf  # noqa: E402 — 复用台账路径与行解析
 
 THRESHOLD = 20
-MARK = "对抗式审查"
+TOKEN = "对抗审查已派发"     # 事件 token（派发会话登记时写入认领行任意格）
+LEGACY_WORD = "对抗式审查"   # 泛词——只用于「疑似未打标」提示，不计为事件
+
+
+def scan_rows(ledger_text):
+    """→ (有 token 的 W 号列表, 只含泛词的 W 号列表)。行首须为台账行（散文不计）。"""
+    token_ws, legacy_ws = [], []
+    for ln in ledger_text.split("\n"):
+        m = re.match(r"^\|\s*W(\d{3,4})\s*\|", ln)
+        if not m:
+            continue
+        w = int(m.group(1))
+        if TOKEN in ln:
+            token_ws.append(w)
+        elif LEGACY_WORD in ln:
+            legacy_ws.append(w)
+    return token_ws, legacy_ws
 
 
 def last_audit_batch(ledger_text):
-    """台账最新含「对抗式审查」的认领行 W 号；无 → None。"""
-    found = None
-    for ln in ledger_text.split("\n"):
-        m = re.match(r"^\|\s*W(\d{3,4})\s*\|", ln)
-        if m and MARK in ln:
-            found = int(m.group(1))
-    return found
+    """最近一次「已派发」事件的批次号 = 含 token 行的**最大 W 号**；无 → None。
+
+    max 而非文件序：台账允许后补登记/让号，低号行可能追加在末尾（W931/W935 明确合法），
+    文件序会把 gap 算歪（W1003 B2 实证：真实 24 批报 28 批）。
+    """
+    token_ws, _legacy = scan_rows(ledger_text)
+    return max(token_ws) if token_ws else None
 
 
 def evaluate(ledger_text):
     """→ (触发?, 提示行)。纯逻辑入口供单测。"""
     max_w = pf.parse_ledger(ledger_text)["max_w"]
-    last = last_audit_batch(ledger_text)
+    token_ws, legacy_ws = scan_rows(ledger_text)
+    last = max(token_ws) if token_ws else None
+    suspect = sorted(w for w in legacy_ws if w not in token_ws)
+    notes = []
+    if suspect:
+        notes.append("疑似未打标：W%s 提到「%s」但无 token「%s」——不重置计数；若确为审查批请补 token"
+                     % ("/W".join(str(w) for w in suspect[-3:]), LEGACY_WORD, TOKEN))
     if max_w is None:
-        return True, ["⚠ 对抗审查触发器不可判定：台账无 W 行（fail-closed）"]
+        return True, ["⚠ 对抗审查触发器不可判定：台账无 W 行（fail-closed）"] + notes
     if last is None:
-        return True, ["⚠ 对抗审查触发：台账从未登记对抗式审查批——按模板派发（docs/agent/adversarial-audit-prompt.md）"]
+        return True, ["⚠ 对抗审查触发：台账无「%s」登记行（按从未审查处理·fail-closed）——按模板派发"
+                      "（docs/agent/adversarial-audit-prompt.md）" % TOKEN] + notes
     gap = max_w - last
     if gap >= THRESHOLD:
-        return True, ["⚠ 对抗审查触发：距上次对抗式审查（W%d）已 %d 批 ≥ %d"
-                      "——按 docs/agent/adversarial-audit-prompt.md 模板派发 subagent，登记行 desc 含「对抗式审查」"
-                      % (last, gap, THRESHOLD)]
-    return False, ["对抗审查触发器：距上次（W%d）%d 批 < %d——未触发" % (last, gap, THRESHOLD)]
+        return True, ["⚠ 对抗审查触发：距上次对抗审查（W%d·已派发）已 %d 批 ≥ %d"
+                      "——按 docs/agent/adversarial-audit-prompt.md 模板派发 subagent，登记行须写 token「%s」"
+                      % (last, gap, THRESHOLD, TOKEN)] + notes
+    return False, ["对抗审查触发器：距上次（W%d）%d 批 < %d——未触发" % (last, gap, THRESHOLD)] + notes
 
 
 def notice_lines():
@@ -67,41 +97,68 @@ def notice_lines():
 
 
 def _self_test() -> int:
+    """七态自证：阈值两侧 / 不可判定 / 散文豁免 / B1 字样不重置 / B2 取 max 不取文件序 / 疑似提示。"""
     fails = []
-    rows = "\n".join(
-        ["| W1000 | 对抗式审查常驻化批 | a | b | 已收官 | s | x |"]
-        + ["| W%03d | 常规批 | a | b | 已收官 | s | y |" % w for w in range(1001, 1022)]
-    )
-    # 21 批间隔 → 触发
-    ok, lines = evaluate(rows)
+
+    def rows(token_at=None, upto=1021, start=1001, extra=None):
+        out = []
+        for w in range(start, upto + 1):
+            body = "常规批"
+            if token_at and w == token_at:
+                body = "对抗审查已派发（subagent 派发·P1×2/P2×4 清偿）"
+            out.append("| W%d | %s | a | b | 已收官 | s | x |" % (w, body))
+        if extra:
+            out.extend(extra)
+        return "\n".join(out)
+
+    # T1 21 批间隔（token 在 W1000）→ 触发
+    ok, lines = evaluate(rows(token_at=1000, start=1000))
     if not ok or not lines[0].startswith("⚠"):
-        fails.append("21 批间隔应触发")
-    # 5 批间隔 → 不触发
-    rows5 = "\n".join([
-        "| W1000 | 对抗式审查常驻化批 | a | b | 已收官 | s | x |",
-        "| W1001 | 常规批 | a | b | 已收官 | s | y |",
-        "| W1002 | 常规批 | a | b | 已收官 | s | z |",
-        "| W1003 | 常规批 | a | b | 已收官 | s | w |",
-        "| W1004 | 常规批 | a | b | 已收官 | s | v |",
-        "| W1005 | 常规批 | a | b | 已收官 | s | u |",
-    ])
-    ok5, lines5 = evaluate(rows5)
-    if ok5 or not lines5[0].endswith("未触发"):
-        fails.append("5 批间隔不应触发：%s" % lines5)
-    # 从未审查 → 触发（fail-closed）
-    ok0, lines0 = evaluate("| W1005 | 常规批 | a | b | 已收官 | s | x |")
-    if not ok0:
-        fails.append("从未审查应触发（fail-closed）")
-    # 描述列散文提及「对抗式审查」不算登记行（须在认领行任意格——实现为整行 grep，
-    # 但行首必须是台账行；非台账行不算）
-    ok9, _ = evaluate("散文里提对抗式审查但不是台账行\n| W1005 | 常规批 | a | b | 已收官 | s | x |")
-    if not ok9:
-        fails.append("非台账行提及不应计为登记")
+        fails.append("T1 21 批间隔应触发")
+
+    # T2 5 批间隔 → 不触发
+    ok5, lines5 = evaluate(rows(token_at=1000, upto=1005, start=1000))
+    if ok5 or not any("未触发" in x for x in lines5):
+        fails.append("T2 5 批间隔不应触发：%s" % lines5)
+
+    # T3 无台账行 → 不可判定（fail-closed）
+    ok3, _ = evaluate("")
+    if not ok3:
+        fails.append("T3 空台账应 fail-closed 触发")
+
+    # T4 散文提及不算登记行 → 仍触发
+    ok4, _ = evaluate("散文里提对抗审查已派发但不是台账行\n| W1005 | 常规批 | a | b | 已收官 | s | x |")
+    if not ok4:
+        fails.append("T4 非台账行提及不应计为登记")
+
+    # T5（B1 回归）41 批未真审，末行只提泛词「对抗式审查」→ 必须触发（旧实现被静默重置）
+    b1 = rows(token_at=None, upto=1040, start=1001,
+              extra=["| W1041 | 修 W998 对抗式审查遗留问题 | a | b | 已收官 | s | q |"])
+    ok5b, lines5b = evaluate(b1)
+    if not ok5b:
+        fails.append("T5 B1 回归：泛词行不得重置计数（应触发）")
+    if not any("疑似未打标" in x for x in lines5b):
+        fails.append("T5 B1 回归：应给出「疑似未打标」提示")
+
+    # T6（B2 回归）token 在 W1000、max=1024、末尾追加低号 token 补登记行 W996 → last 必须取 1000
+    b2 = rows(token_at=1000, upto=1024, start=1000,
+              extra=["| W996 | 补登记：对抗审查已派发（欠账补齐） | a | b | 已收官 | s | z |"])
+    ok6, lines6 = evaluate(b2)
+    if not ok6:
+        fails.append("T6 B2 回归：24 批应触发")
+    elif not any("W1000" in x and "24 批" in x for x in lines6):
+        fails.append("T6 B2 回归：应报「W1000…24 批」而非按文件序算 28 批：%s" % lines6)
+
+    # T7 当前批等于 token 批（gap 0）→ 不触发
+    ok7, _ = evaluate("| W1005 | 对抗审查已派发 | a | b | 已收官 | s | x |")
+    if ok7:
+        fails.append("T7 同批派发不应触发")
+
     print()
     if fails:
         print("自测 %d 项不一致：%s" % (len(fails), fails))
         return 1
-    print("自测通过：触发/未触发/从未审查/散文豁免 四态（判据可证伪）")
+    print("自测通过：阈值两侧/不可判定/散文豁免/B1 字样不重置/B2 取 max/疑似提示 七态（判据可证伪）")
     return 0
 
 
