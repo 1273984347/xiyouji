@@ -11,6 +11,74 @@
 ---
 
 
+## W1005 hero 水墨图人数修正（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| "archive/docs/W\346\211\271\346\254\241\347\274\226\345\217\267\345\257\271\350\264\246\350\241\250-ARCHIVE.md" | W1005 | 本批改动 |
+| "docs/00-\345\257\274\350\257\273/\351\241\271\347\233\256\350\257\264\346\230\216.md" | W1005 | 本批改动 |
+| "docs/11-\346\226\271\346\241\210\346\212\245\345\221\212/\350\256\276\350\256\241\344\270\216\346\236\266\346\236\204\346\226\271\346\241\210/\347\263\273\347\273\237\346\236\266\346\236\204\346\226\271\346\241\210v2-\347\233\256\346\240\207\346\200\201\344\270\216\350\220\275\345\234\260\350\267\257\347\272\277-2026-10-25.md" | W1005 | 本批改动 |
+| DESIGN.md | W1005 | 本批改动 |
+| archive/README.md | W1005 | 本批改动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1005 | 本批改动 |
+| archive/docs/file-index-ARCHIVE.md | W1005 | 本批改动 |
+| archive/scripts/batches/w9xx/README.md | W1005 | 本批改动 |
+| archive/scripts/batches/w9xx/index.md | W1005 | 本批改动 |
+| assets/promo/hero-set/raw/index.md | W1005 | 本批改动 |
+| assets/promo/hero-set/raw/round-w1005/README.md | W1005 | 本批改动 |
+| assets/promo/hero-set/raw/round-w1005/hero-01-xihai-yunhai.jpg | W1005 | 本批改动 |
+| assets/promo/hero-set/raw/round-w1005/index.md | W1005 | 本批改动 |
+| assets/promo/hero-set/raw/round-w1005/ink-mountains-hero.jpg | W1005 | 本批改动 |
+| assets/promo/output/xiyouji-flyer-a4-en-front.png | W1005 | flyer A4 正面 PNG 重渲染（静态快照同步新图） |
+| assets/promo/output/xiyouji-flyer-a4-front.png | W1005 | flyer A4 正面 PNG 重渲染（静态快照同步新图） |
+| docs/agent/adversarial-audit-prompt.md | W1005 | 登记面 |
+| docs/agent/gates.md | W1005 | 登记面 |
+| docs/agent/pitfalls.md | W1005 | 登记面 |
+| pytest.ini | W1005 | 本批改动 |
+| scripts/_w1005_fix_c6.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_fix_head_sentence.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_handover_line.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_heroes.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_probe_faces.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_probe_head.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_probe_readme.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_render_flyer.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_serve.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_spec.py | W1005 | 本批工具/产物 |
+| scripts/_w1005_sync_faces.py | W1005 | 本批工具/产物 |
+| scripts/accent_audit.py | W1005 | 本批工具/产物 |
+| scripts/check_audit_trigger.py | W1005 | 本批工具/产物 |
+| scripts/check_crop.py | W1005 | 本批工具/产物 |
+| scripts/check_emoji_icons.py | W1005 | 本批工具/产物 |
+| scripts/check_page_admission.py | W1005 | 本批工具/产物 |
+| scripts/check_script_coverage.py | W1005 | 本批工具/产物 |
+| scripts/check_vermilion_solid.js | W1005 | 本批工具/产物 |
+| scripts/file_protocol_probe.py | W1005 | 本批工具/产物 |
+| scripts/icon_probe.js | W1005 | 本批工具/产物 |
+| scripts/index.md | W1005 | 本批工具/产物 |
+| scripts/j1_name_audit.py | W1005 | 本批工具/产物 |
+| scripts/output/README.md | W1005 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1005 | 本批工具/产物 |
+| scripts/output/_w1004_spec.json | W1005 | 本批工具/产物 |
+| scripts/output/_w1005_batch.json | W1005 | 本批工具/产物 |
+| scripts/output/_w1005_heroes.json | W1005 | 本批工具/产物 |
+| scripts/output/_w1005_map.json | W1005 | 本批工具/产物 |
+| scripts/output/_w1005_spec.json | W1005 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1005 | 本批工具/产物 |
+| scripts/refresh_icon_paths.py | W1005 | 本批工具/产物 |
+| scripts/scan_targets.py | W1005 | 本批工具/产物 |
+| scripts/site_audit.py | W1005 | 本批工具/产物 |
+| scripts/subject_band.py | W1005 | 本批工具/产物 |
+| scripts/visual_regression_probe.py | W1005 | 本批工具/产物 |
+| site/static/images/hero-01-xihai-yunhai.webp | W1005 | 原地替换（人数修正·4 人形 + 1 匹白马） |
+| site/static/images/ink-mountains-hero.webp | W1005 | 原地替换（人数修正·4 人形 + 1 匹白马） |
+| tests/unit/README.md | W1005 | 本批改动 |
+| tests/unit/index.md | W1005 | 本批改动 |
+| tests/unit/test_audit_trigger.py | W1005 | 本批改动 |
+| tests/unit/test_script_hygiene.py | W1005 | 本批改动 |
+| tests/unit/test_w851_j1_name_audit.py | W1005 | 本批改动 |
+| tests/unit/test_w851_visual_regression_probe.py | W1005 | 本批改动 |
+
 ## W1004 转正清零 + 审查触发器判据修正批（B1 字样≠事件 / B2 max / B4 台账归位）（2026-10-29）
 
 | 文件 | W | 说明 |

@@ -17,6 +17,7 @@
 
 门禁挂载：scripts/verify_delivery.py 第 48 槽（_StrictGate·crash 即拦 + 汇总行防静默跳过）。
 """
+import io
 import os
 import subprocess
 import sys
@@ -64,7 +65,7 @@ def judge_file(rel_path):
     """返回 (verdict, detail_dict)：verdict ∈ {'PASS','FAIL'}；detail 含新增缺项与存量缺项"""
     full = os.path.join(ROOT, rel_path)
     try:
-        new_text = R.io.open(full, encoding='utf-8').read()
+        new_text = io.open(full, encoding='utf-8').read()
     except OSError as e:
         return 'FAIL', {'error': '读取失败：%s' % e, 'new_fail': [], 'old_fail': []}
     name = os.path.basename(rel_path)

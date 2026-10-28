@@ -157,30 +157,55 @@ def _face_changelog(ctx):
 
 
 def _face_three_docs(ctx):
-    """README / STRUCTURE / 项目说明 三文档批头版本行。"""
+    """README / STRUCTURE / 项目说明 三文档批头版本行。
+
+    W1005 行锚定化（根因修复·本批实证）：四个正则的 desc 匹配段原为 `[^·]*` / `[^—]*`。
+    Python 字符类 `[^X]` **匹配换行符** ⇒ 匹配区间可跨行；而 re.sub 替换的是**整个匹配区间**，
+    跨行匹配即等于静默删掉中间行的内容。
+
+    实证（W1005）：项目说明.md「当前版本」列表行的正则**无尾锚点** ⇒ 旧 desc 行内无「·」时
+    `[^·]*` 一路吞到下一处「·」之前，匹配区间 1143..1342 跨 1 行，re.sub 后该文件 103 行→102 行，
+    第 49 行「当前阶段」行首（87 页可视化 + Phase 7 逐回解读…）被静默删掉。
+
+    反直觉点（值得单独记住）：旧 desc **含**「·」时反而**安全**——`[^·]*` 止于行内；
+    而 desc **无**「·」（正是 C6 判据 W841 要求的形态）才触发跨行吞并。
+    ⇒ C6 与本面旧正则在列表行上互为镜像：一个把「·」清掉，另一个靠「·」才不越界。
+
+    修法（本批）：① 四个 desc 匹配段一律行锚定（`[^\\n\\r·]` / `[^\\n\\r—]` / `[^\\n\\r]`）；
+    ② 空白量一律 `[ \\t]`（`\\s` 亦匹配换行）；③ 每个改写面补「替换前后行数不变」断言
+    ——吞并一旦复发当场 FAIL，而非静默落盘；④ 列表行由 `[^·]*` 改 `[^\n\r]*`（整行替换）
+    ⇒ 顺带根治「旧 desc 尾部残留」（历史实证：旧 desc 含「·」时匹配止于「·」，其尾部残留行尾）。
+
+    只读面（`[^*]*` / `[^；]*` 等）跨行匹配只会导致断言 FAIL（fail-closed 误报），不产生破坏，
+    故本批不动——同族风险只锁定「改写面」。
+    """
     # ---------- README / STRUCTURE / 项目说明 ----------
     p = "README.md"
     s, nl = load(p)
-    out = re.sub(r"> \*\*当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）\*\*：\s*(?:v[\d.]+\s+)?(?:W\d+\s+)?[^·]*·A1-A6",
-                 f"> **当前批次 {ctx.batch}（{ctx.date}）**：{ctx.desc}·A1-A6", s, count=1)  # W711 方案 D 新抬头·W712 锚点兼容 desc 直连形态
+    out = re.sub(r"> \*\*当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）\*\*：[ \t]*(?:v[\d.]+[ \t]+)?(?:W\d+[ \t]+)?[^\n\r·]*·A1-A6",
+                 f"> **当前批次 {ctx.batch}（{ctx.date}）**：{ctx.desc}·A1-A6", s, count=1)  # W711 方案 D 新抬头·W712 锚点兼容 desc 直连形态·W1005 行锚定化
     assert out != s, "README 版本行未变化"
+    assert out.count("\n") == s.count("\n"), "README 版本行替换吞行（行锚定失效·W1005 跨行吞并防线）"
     ctx.pend.append((p, out, nl))
 
     p = "STRUCTURE.md"
     s, nl = load(p)
-    out = re.sub(r"> 当前(?:版本：v[\d.]+|批次：W\d+)（[^）]*）— (?:v[\d.]+\s+)?(?:W\d+\s+)?[^—]*—\s*A1-A6",
-                 f"> 当前批次：{ctx.batch}（{ctx.date}）— {ctx.desc}—A1-A6", s, count=1)  # W712 锚点兼容 desc 直连
+    out = re.sub(r"> 当前(?:版本：v[\d.]+|批次：W\d+)（[^）]*）—[ \t]*(?:v[\d.]+[ \t]+)?(?:W\d+[ \t]+)?[^\n\r—]*—[ \t]*A1-A6",
+                 f"> 当前批次：{ctx.batch}（{ctx.date}）— {ctx.desc}—A1-A6", s, count=1)  # W712 锚点兼容 desc 直连·W1005 行锚定化
     assert out != s, "STRUCTURE 版本行未变化"
+    assert out.count("\n") == s.count("\n"), "STRUCTURE 版本行替换吞行（行锚定失效·W1005 跨行吞并防线）"
     ctx.pend.append((p, out, nl))
 
     p = "docs/00-导读/项目说明.md"
     s, nl = load(p)
-    out = re.sub(r"> 当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）：(?:v[\d.]+\s+)?(?:W\d+\s+)?[^·]*·详细变更见",
-                 f"> 当前批次 {ctx.batch}（{ctx.date}）：{ctx.desc}·详细变更见", s, count=1)  # W712 锚点兼容 desc 直连
+    out = re.sub(r"> 当前(?:版本 v[\d.]+|批次 W\d+)（[^）]*）：[ \t]*(?:v[\d.]+[ \t]+)?(?:W\d+[ \t]+)?[^\n\r·]*·详细变更见",
+                 f"> 当前批次 {ctx.batch}（{ctx.date}）：{ctx.desc}·详细变更见", s, count=1)  # W712 锚点兼容 desc 直连·W1005 行锚定化
     assert out != s, "项目说明头部版本行未变化"
-    out2 = re.sub(r"(\*\*当前(?:版本|批次)\*\*：)(?:v[\d.]+|W\d+)（[^）]*）— (?:v[\d.]+\s+)?(?:W\d+\s+)?[^·]*",
+    assert out.count("\n") == s.count("\n"), "项目说明头部版本行替换吞行（行锚定失效·W1005 跨行吞并防线）"
+    out2 = re.sub(r"(\*\*当前(?:版本|批次)\*\*：)(?:v[\d.]+|W\d+)（[^）]*）—[ \t]*(?:v[\d.]+[ \t]+)?(?:W\d+[ \t]+)?[^\n\r]*",
                   rf"\g<1>{ctx.batch}（{ctx.date}）— {ctx.desc}", out, count=1)
     assert out2 != out, "项目说明「当前版本」列表行未变化（正则失配·fail-closed——W711 起 desc 直连形态实证·W713 补断言）"
+    assert out2.count("\n") == out.count("\n"), "项目说明「当前版本」列表行替换吞行（W1005 跨行吞并防线）"
     ctx.pend.append((p, out2, nl))
 
 
