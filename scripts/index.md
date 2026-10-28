@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（162）
+## 文件（163）
 
 ### Markdown 文档
 
@@ -128,6 +128,7 @@
 - `check_parser_anchor_coverage.py`
 - `check_perf_shadow.py`
 - `check_plan_template.py`
+- `check_repo_layout.py`
 - `check_review_trigger.py`
 - `check_script_coverage.py`
 - `check_search_index_fresh.py`

@@ -51,7 +51,7 @@ def footer_freshness_issues(handoff_text, newest_wnum):
 def main():
     issues = []
 
-    prompt = read_rel("新Agent启动Prompt.md")
+    prompt = read_rel("docs/00-导读/新Agent启动Prompt.md")
     handoff = read_rel("HANDOVER.md")
     changelog = read_rel("CHANGELOG.md")
 
@@ -96,7 +96,7 @@ def main():
 
     # 6. §11.5 登记的 10 份治理文档均含维护契约
     gov_docs = [
-        "新Agent启动Prompt.md", "HANDOVER.md", "AGENTS.md", "STRUCTURE.md",
+        "docs/00-导读/新Agent启动Prompt.md", "HANDOVER.md", "AGENTS.md", "STRUCTURE.md",
         "CHANGELOG.md", "DESIGN.md", "README.md", "docs/00-导读/项目说明.md",
         "scripts/output/file-index.md", "docs/10-方法论沉淀/README.md",
     ]

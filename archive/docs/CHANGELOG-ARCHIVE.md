@@ -13,6 +13,17 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W892（2026-10-23）：宣传单页批（A4 双面·HTML 源 + PDF + PNG 三件套）
+
+> **来源**：用户令「帮我做一套宣传单页：卖点提炼与信息层级、版式栅格、配图与图标、联系方式区块都规划好，正反面内容分工清晰」+ 四问拍板（投放场景 / 成品形态 / 配图来源 / 联系方式区块）。
+> - **文件**：assets/promo/xiyouji-flyer-a4.html、assets/promo/hero-main-visual.png、assets/promo/output/xiyouji-flyer-a4.pdf、assets/promo/output/xiyouji-flyer-a4-front.png、assets/promo/output/xiyouji-flyer-a4-back.png、assets/promo/README.md、assets/promo/index.md、assets/promo/output/index.md、scripts/_w892_export_flyer.mjs、scripts/_w892_probe.mjs、docs/11-方案报告/计划方案/T15-任务计划执行与经验沉淀报告-2026-10-23.md、docs/11-方案报告/README.md、STRUCTURE.md、docs/00-导读/W批次编号对账表.md。
+> - **正反分工**：正面走大众读者路径（品牌 → 主视觉 → 一句话主张 → 4 个 KPI → 3 条卖点 → CTA），背面走学术与机构路径（四条硬资产：可引用 / 可核验 / 可复现 / 可复核 → 内容地图 → 联系与引用格式 → 透明与许可小字块）——双轨在同一套两页内以分层实现，不另出第二套印刷品。
+> - **版式栅格**：A4 竖版 210×297mm，页边 14mm，统一 12 栏基准，栏距 4mm，槽宽 11.5mm，正反两页共用同一套栅格；色板取站令牌（宣纸底 #FAF7F0 / 墨 #23201A / 朱砂 #C8463A），朱砂只作单点强调。
+> - **配图与图标**：复用站内 logo 与两张横向墨山图；本批新生成 1 张专属主视觉（宣纸底浓墨山影 + 朱砂钤记，色归一化到页面底色后零色差）；10 枚图标全部手写内联 SVG，零外域依赖。二维码按用户问卷未圈选故不做。
+> - **验收**：两页版面溢出均 0px（探针判据：末子元素底边减内容底边）；导出过程外域请求 0 个；思源宋体真加载（document.fonts.check 断言）；PDF 实测 2 页 A4（MediaBox 594.96×841.92 pt，含子集嵌入 STSong）；PNG 1240×1754（150dpi）；主视觉朱砂占比 0.153%；单页数字与链接 8/8 条与仓库实况相符。
+> - **踩坑记录**：三条实测教训已沉淀为 T-15 §九 经验（CSS Grid 的 1fr 轨道下限是 min-content，长 URL 会把邻栏挤成 40px 窄条；flex 子项默认收缩会把固定高主视觉压扁到 118px；判溢出不能用子块高度合计或 scrollHeight，二者分别漏算 margin 与混算 padding，真实溢出 39px 与 42px）。
+> **状态**：**已收官**（W892 8137c8fd·git 反填·共 7 笔·W971 存量回填）
+
 ### W891（2026-10-23）：en 收尾批（A 渠容器归并 11 页 + nav-back 样式统一 49 页 + 间距令牌化 3,353 处）
 
 > **来源**：用户令「继续」（引 W887 收官报告的欠账清单）。W891 = en 的 A/D 两道渠道 + nav-back 样式统一三笔欠账一次清。

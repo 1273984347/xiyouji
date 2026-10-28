@@ -71,7 +71,7 @@
 
 ### 📥 桌面版下载（可安装 · 自动更新）
 
-**无需 Node/Python**，安装后离线阅读全部内容（87<!--stats:visualization_pages--> 个可视化页 + 615<!--stats:a1_a6_docs--> 篇解读内置）👉 [**前往 Releases 下载最新版**](https://github.com/1273984347/xiyouji/releases/latest)
+**无需 Node/Python**，安装后离线阅读全部内容（87<!--stats:visualization_pages--> 个可视化页 + 616<!--stats:a1_a6_docs--> 篇解读内置）👉 [**前往 Releases 下载最新版**](https://github.com/1273984347/xiyouji/releases/latest)
 
 | 平台 | 下载文件 | 说明 |
 | --- | --- | --- |
@@ -119,9 +119,9 @@
 
 - **大众读者**：从本文档「在线体验」直达，或 `docs/00-导读/` 与 `site/` 之间穿梭
 - **逐回解读读者**：`docs/01-全书逐回解读/` 100 回全覆盖（开篇·学艺·龙宫借宝·闹天宫·取经启动·组建·团队集结·决裂·中段斗法·整合·火焰山·狮驼岭·后期识魔·终回 + 批 1-13 补全）
-- **学术研究者**：重点看 `docs/02-04/` 与 `references/`；如对研究有帮助，请按 [CITATION.cff](CITATION.cff) 引用
+- **学术研究者**：重点看 `docs/02-04/` 与 `docs/10-方法论沉淀/`；如对研究有帮助，请按 [CITATION.cff](CITATION.cff) 引用
 - **批评史研究者**：[criticism-history.html](site/data/criticism-history.html) 学术长卷（500 年解读流变·9 批评家·三教争辩·内丹密码）+ [concept-device.html](site/data/concept-device.html) 观念装置（三棱镜/收音机/莫比乌斯环/密码卡/弹幕重映/侦探墙）
-- **教学者**：参考 `docs/01-全书逐回解读/` 与 `timeline/`
+- **教学者**：参考 `docs/01-全书逐回解读/` 与 `docs/04-文化与历史背景/`
 - **同好创作者**：在 `docs/05-诗词歌赋/` 与 `docs/06-个人随笔/` 自由发挥
 - **数据可视化爱好者**：`site/data/` 87<!--stats:visualization_pages--> 个可视化页（含 V3 标签云全站导航 W313）
 - **跨学科研究者**：重点看 V-AH 13 类<!--doc-sync:exempt-->（认知心理/生态学/法理经济/物质考古/语言学等）
@@ -135,7 +135,7 @@
 
 > **📖 阅读契约（W707）**：普通读者通读「普通读者专区」；Agent/开发者只读「开发者/维护者专区」与「AI 生成说明」。先读「是什么/为什么」（下一行），再按路径深入。
 >
-> **当前批次 W1010（2026-10-29）**：级联收尾链改为 落盘→回窗→stats（窗口常量 110 段/60 行，失败返回 2）并补单测 2 例·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->
+> **当前批次 W1011（2026-10-29）**：五项归位（根临时脚本、空壳三目录、入口文档）+ 第 52 槽布局门禁（根文件白名单、顶层目录角色、白名单陈腐）+ 连带修 12 处断链·A1-A6<!--doc-sync:exempt--><!--doc-sync:exempt-->
 >
 > **版本号说明（W711 方案 D 起）**：本项目的批次编号为 **W###**（单调递增·永不复用·唯一对账键），`v2.3` 为内容阶段标签（定性·无 patch 位·不适用 SemVer）；W710 及更早的历史版本号 `vX.Y.Z` 保留原文。判断「这批改了什么」看 [CHANGELOG.md](CHANGELOG.md) 顶段。
 >
@@ -180,10 +180,7 @@ xiyouji/
 ├── source/                # 原著与引用（原文/分回 + 学术论文索引/网络解读精选）
 ├── site/                  # 可浏览的 HTML 站点（D3.js 驱动·index/dashboard/chapters/characters/themes/data/static）
 ├── scripts/               # Python 文本分析脚本（按 A-AH 34 类组织 + utils + output）
-├── timeline/              # 时间线专题（取经路线、大事年表、人物时间线）
 ├── assets/                # 字体源、图片等静态资源
-├── references/            # 参考文献
-├── tools/                 # 辅助工具（章节切分等）
 ├── hyperframes/           # HTML 视频实验产物（W200 遗留·待清理决策）
 ├── mcp-server/            # MCP 服务（xiyouji_drl_spotcheck 等工具）
 ├── tests/                 # pytest 测试 + Playwright E2E
@@ -265,7 +262,7 @@ python detect_unwrapped_tables.py   # 静态表格扫描（双轨之二）
 
 - **生成方式**：文档与数据由 AI 代理在文档骨架、术语规范与轨标约束下产出初稿或整理建议，维护者逐篇审定后入库；各篇的生成来源、生成模型、生成日期与核验状态见文首元信息块（未记录处如实标注「未记录」）。
 - **引文核验**：所有 `> 原文引文（第N回）` 格式的引用行均经脚本对《西游记》原著全文数据集逐字匹配验证，未命中即阻断提交，防止 AI 幻觉引文。
-- **门禁体系**：每次提交需通过 51<!--stats:gate_count--> 项自动化门禁（术语一致性、内容一致性、CSP、可访问性等），协作流程与验证标准见 [CONTRIBUTING.md](CONTRIBUTING.md)，门禁清单见 [AGENTS.md](AGENTS.md)。
+- **门禁体系**：每次提交需通过 52<!--stats:gate_count--> 项自动化门禁（术语一致性、内容一致性、CSP、可访问性等），协作流程与验证标准见 [CONTRIBUTING.md](CONTRIBUTING.md)，门禁清单见 [AGENTS.md](AGENTS.md)。
 - **责任边界**：AI 参与初稿与整理，内容的取舍、核实与最终责任由维护者承担。
 - **门禁边界（保真不保质）**：自动化门禁保障的是**可机器判定的形式面**——引文真实（逐字对原文）、结构一致（六文档同源）、术语规范、可达性与安全；**不保障**内容判断——论点是否平庸、论证是否扎实、阐释是否有生命体验，这些由作者审读承担，且不同篇目深浅不一。**门禁数量不是学术质量的背书**：它证明「没有编造」，不证明「值得读」。
 

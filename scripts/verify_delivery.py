@@ -107,6 +107,7 @@ EXPECTED_SECTION_NAMES = [
     "计划方案合规",
     "朱砂实底",
     "GSAP写法",
+    "仓库布局",
     "提交范围",
 ]
 
@@ -114,7 +115,7 @@ EXPECTED_SECTION_NAMES = [
 # 四态：full=全量（缺省·CI verify-delivery job·批收尾七步③恒为 full）；docs=文档轨子集；
 # site=页面轨+级联相关文档段；auto=按变更路径白名单分类（任何越界文件保守回退 full）。
 # 12 个恒跑段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区·W1007 加「提交范围」）恒跑不跳；跳过只作用于
-# 39 个 subprocess 委托段（56 段 - 17 内联/bespoke·W781 注册表派生与 EXPECTED 补齐第 45 槽段名后校数）：_scoped_run 统一短路，
+# 40 个 subprocess 委托段（57 段 - 17 内联/bespoke·W781 注册表派生与 EXPECTED 补齐第 45 槽段名后校数）：_scoped_run 统一短路，
 # _GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
 # 校验（fake stdout 含段标记，wrapper 不会误判「缺汇总行」）；段自洽锁按 scope 断言子集。
 _DOC_FILES_RE = re.compile(
@@ -138,6 +139,7 @@ SCOPE_SITE_SECTIONS = {
 _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·旁文档/A4/A1-A6/学术/A1导航/sitemap/内嵌回退 7 段不在任何 scope 集=自洽锁盲区）
     "期望版本", "dukou页脚", "六文档同步", "旁文档同步", "范围漂移",
     "A4计数", "A1-A6计数", "学术引用", "A1导航", "sitemap覆盖", "内嵌回退", "GSAP写法",
+    "仓库布局",  # W1011：毫秒级、与 scope 无关
     "提交范围",  # W1007：必须恒跑——代提可能发生在任何 scope 的提交里（docs 提交也能夹带）
 }
 # _GATE_SUMMARY_MARKERS 已由 _STRICT_GATES 元组派生（W781 R-1·见 _STRICT_GATES 定义后），
@@ -646,6 +648,14 @@ _STRICT_GATES = [
     # W1007：提交范围门禁挂第 51 槽——代提三次（W989/W1002/W1004）同一处方：一份提交混进另一批在途件。
     # safe_commit --expect-spec 只在走它时生效（`git commit` 直提可绕），本槽把它挪进唯一硬门禁入口，
     # 任何提交路径都绕不过。归属判定看索引 CHANGELOG 顶段（新增段=本批；否则 HEAD 现役段=回填）。
+    # W1011：仓库布局门禁挂第 52 槽——用户「整理分类」的长期形态：把「哪个目录装什么」变成判据，
+    # 否则一次性搬家三个月后又长出错位文件（本批在根目录逮到 _tmp_chap_sheet.py 与三个空壳目录）。
+    _StrictGate(section="仓库布局", script="check_repo_layout.py", args=("--gate",), timeout=120,
+                marker="---- 第 52 门禁 仓库布局：",
+                crash_msg="仓库布局槽执行异常（第 52 槽·crash 即拦）: %s",
+                fail_msg="仓库布局违规（根目录出现未声明文件 / 顶层出现未声明目录 / 白名单陈腐·见脚本输出）",
+                marker_msg="仓库布局槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+                ok_msg="仓库布局门禁通过（%s）", ok_line=-1),
     _StrictGate(section="提交范围", script="check_commit_scope.py", args=("--gate",), timeout=120,
                 marker="---- 第 51 门禁 提交范围：",
                 crash_msg="提交范围槽执行异常（第 51 槽·crash 即拦）: %s",

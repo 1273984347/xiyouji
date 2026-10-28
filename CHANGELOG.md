@@ -1,3 +1,21 @@
+### W1011（2026-10-29）：仓库整理分类批（五项归位 + 第 52 槽布局门禁）
+
+> **来源**：用户 2026-10-29「对项目的所有文件进行整理分类」→ 我给出盘点与三档方案 → 用户「全都做」。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、_tmp_chap_sheet.py、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/scripts/batches/misc/README.md、archive/scripts/batches/misc/_tmp_chap_sheet.py、archive/scripts/batches/misc/index.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/index.md、docs/00-导读/协议边界速查.md、docs/00-导读/文档规范.md、docs/00-导读/新Agent启动Prompt.md、docs/00-导读/统计口径说明.md、docs/00-导读/项目说明.md、docs/04-文化与历史背景/西游记大事年表.md、docs/10-方法论沉淀/例-佛法AI框架原始对话.txt、docs/INDEX.md、docs/agent/gates.md、index.md、references/.gitkeep、references/README.md、references/index.md、references/例-佛法AI框架原始对话.txt、scripts/A_文本基础/README.md、scripts/A_文本基础/index.md、scripts/A_文本基础/章节切分.py、scripts/check_gov_doc_claims.py、scripts/check_governance_docs.py、scripts/check_repo_layout.py、scripts/check_w_range_literal.py、scripts/index.md、scripts/output/README.md、scripts/output/_cascade_files_W1011.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1011_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、scripts/verify_delivery.py、site/data/cross-time-danmaku.html、site/data/search.html、site/data/tag-cloud.html、site/dukou-engine.html、site/en/search.html、site/index.html、site/reader/ch001.html、site/reader/ch003.html、site/reader/ch009.html、site/reader/ch011.html、site/reader/ch022.html、site/reader/ch028.html、site/reader/ch047.html、site/reader/ch063.html、site/reader/ch066.html、site/reader/ch079.html、site/reader/ch089.html、site/reader/ch093.html、tests/unit/README.md、tests/unit/index.md、tests/unit/test_repo_layout.py、timeline/.gitkeep、timeline/README.md、timeline/index.md、timeline/西游记大事年表.md、tools/.gitkeep、tools/README.md、tools/index.md、tools/章节切分.py、新Agent启动Prompt.md。
+>
+**要点**：
+① **盘点**：8743 文件 / 2.8 GB，24 个顶层目录。七类职责（治理/内容/站点/素材/代码/归档/临时）本已成立，真错位只有 5 个——大搬家收益是「看起来整齐」，代价是 5567 条链接与全部生成器路径，故不做。
+② **五项归位**：根目录 `_tmp_chap_sheet.py` → `archive/scripts/batches/misc/`；`tools/章节切分.py` → `scripts/A_文本基础/`；`references/例-佛法AI框架原始对话.txt` → `docs/10-方法论沉淀/`；`timeline/西游记大事年表.md` → `docs/04-文化与历史背景/`（+ 补元信息块 v2）；`新Agent启动Prompt.md` → `docs/00-导读/`（相对链接改 `../../`）。空壳目录 `tools/` `references/` `timeline/` 整体删除。
+③ **三判据改路径**：`check_gov_doc_claims`（N5）/`check_governance_docs`/`check_w_range_literal` 里的 Prompt 路径；《协议边界速查》A5 板块 34 → 35 篇。
+④ **第 52 槽布局门禁** `check_repo_layout.py`：L1 根目录只放治理与配置（白名单+去向提示）、L2 顶层目录须已声明角色、L3 白名单不得陈腐；按 **git 视角**判定（ignore 的本地件不算）；毫秒级登记 `_SCOPE_CORE` 恒跑；自测 5 例 + `--report`。
+⑤ **连带修 12 处断链**：`site/reader/ch001|003|009|011|022|028|047|063|066|079|089|093.html` 的 plate-line 图片写成`../../static/images/`（从 site/reader 出发应为 `../static/`）——W1001 起就断，`--scope auto` 只跑 docs 轨所以一直没暴露；本批 full lint 14943 链接扫出 12 broken，已全部修正。
+⑥ 数值级联：槽 51→52（AGENTS 三处措辞 + §4.2 第 52 条）、段 56→57（文档规范）。
+
+**验证**：`check_repo_layout --self-test` 5/5 · 单测 7 passed · full `lint_links` 14943 链接 **0 broken** · `check_gov_doc_claims` N1-N5 0 FAIL · `check_frontmatter` 通过（年表已补元信息块）· `docs_index` 重建 780 篇 · 第 52 槽实跑「全部在声明内」· 全量 verify 核心全过。
+
+> - **状态**：已收官（布局从「一次性搬家」变成「可执行判据」）
+
 ### W1010（2026-10-29）：级联自动回窗批
 
 > **来源**：W1009 收官后自查发现同一病根第三次——级联插入段/行必然把正本顶过窗口，然后**下一批开工前**才被 preflight 判红；W1008 就是专门为此手工回窗的一批。人手记的这一步必须交给机器。
@@ -147,9 +165,9 @@
 >
 > - **文件**：site/reader/ch001.html、site/reader/ch003.html、site/reader/ch009.html、site/reader/ch011.html、site/reader/ch022.html、site/reader/ch028.html、site/reader/ch047.html、site/reader/ch063.html、site/reader/ch066.html、site/reader/ch079.html、site/reader/ch089.html、site/reader/ch093.html、assets/promo/plate-set/plate-line-49-ch001-xianshi.png、assets/promo/plate-set/plate-line-49-ch001-xianshi.webp、assets/promo/plate-set/plate-line-50-ch003-aoguang.png、assets/promo/plate-set/plate-line-50-ch003-aoguang.webp、assets/promo/plate-set/plate-line-51-ch009-yuanshoucheng.png、assets/promo/plate-set/plate-line-51-ch009-yuanshoucheng.webp、assets/promo/plate-set/plate-line-52-ch011-xiaoyu.png、assets/promo/plate-set/plate-line-52-ch011-xiaoyu.webp、assets/promo/plate-set/plate-line-53-ch022-liushahe.png、assets/promo/plate-set/plate-line-53-ch022-liushahe.webp、assets/promo/plate-set/plate-line-54-ch028-qunyao.png、assets/promo/plate-set/plate-line-54-ch028-qunyao.webp、assets/promo/plate-set/plate-line-55-ch047-tongtianhe.png、assets/promo/plate-set/plate-line-55-ch047-tongtianhe.webp、assets/promo/plate-set/plate-line-56-ch063-jiutou.png、assets/promo/plate-set/plate-line-56-ch063-jiutou.webp、assets/promo/plate-set/plate-line-57-ch066-mile.png、assets/promo/plate-set/plate-line-57-ch066-mile.webp、assets/promo/plate-set/plate-line-58-ch079-nanpo.png、assets/promo/plate-set/plate-line-58-ch079-nanpo.webp、assets/promo/plate-set/plate-line-59-ch089-huangshi.png、assets/promo/plate-set/plate-line-59-ch089-huangshi.webp、assets/promo/plate-set/plate-line-60-ch093-geigu.png、assets/promo/plate-set/plate-line-60-ch093-geigu.webp、site/static/images/plate-line-49-ch001-xianshi.webp、site/static/images/og-plate-line-49-ch001-xianshi.webp、site/static/images/plate-line-50-ch003-aoguang.webp、site/static/images/og-plate-line-50-ch003-aoguang.webp、site/static/images/plate-line-51-ch009-yuanshoucheng.webp、site/static/images/og-plate-line-51-ch009-yuanshoucheng.webp、site/static/images/plate-line-52-ch011-xiaoyu.webp、site/static/images/og-plate-line-52-ch011-xiaoyu.webp、site/static/images/plate-line-53-ch022-liushahe.webp、site/static/images/og-plate-line-53-ch022-liushahe.webp、site/static/images/plate-line-54-ch028-qunyao.webp、site/static/images/og-plate-line-54-ch028-qunyao.webp、site/static/images/plate-line-55-ch047-tongtianhe.webp、site/static/images/og-plate-line-55-ch047-tongtianhe.webp、site/static/images/plate-line-56-ch063-jiutou.webp、site/static/images/og-plate-line-56-ch063-jiutou.webp、site/static/images/plate-line-57-ch066-mile.webp、site/static/images/og-plate-line-57-ch066-mile.webp、site/static/images/plate-line-58-ch079-nanpo.webp、site/static/images/og-plate-line-58-ch079-nanpo.webp、site/static/images/plate-line-59-ch089-huangshi.webp、site/static/images/og-plate-line-59-ch089-huangshi.webp、site/static/images/plate-line-60-ch093-geigu.webp、site/static/images/og-plate-line-60-ch093-geigu.webp、site/static/images/og-plate-line-40-ch023-sichan.webp、site/static/images/og-plate-line-41-ch027-bailong.webp、site/static/images/og-plate-line-42-ch030-sancha.webp、site/static/images/og-plate-line-43-luoshanv.webp、site/static/images/og-plate-line-44-kuimulang.webp、site/static/images/og-plate-line-45-zhaoan-topic.webp、site/static/images/og-plate-line-46-fushi-topic.webp、site/static/images/og-plate-line-47-jingwu-topic.webp、site/static/images/og-plate-line-48-xuanzang-topic.webp、assets/promo/plate-set/raw/round14/README.md、assets/promo/plate-set/raw/round14/index.md、assets/promo/plate-set/raw/round14/plate-line-49-ch001-xianshi.jpg、assets/promo/plate-set/raw/round14/plate-line-50-ch003-aoguang.jpg、assets/promo/plate-set/raw/round14/plate-line-51-ch009-yuanshoucheng.jpg、assets/promo/plate-set/raw/round14/plate-line-52-ch011-xiaoyu.jpg、assets/promo/plate-set/raw/round14/plate-line-53-ch022-liushahe.jpg、assets/promo/plate-set/raw/round14/plate-line-54-ch028-qunyao.jpg、assets/promo/plate-set/raw/round14/plate-line-55-ch047-tongtianhe.jpg、assets/promo/plate-set/raw/round14/plate-line-56-ch063-jiutou.jpg、assets/promo/plate-set/raw/round14/plate-line-57-ch066-mile.jpg、assets/promo/plate-set/raw/round14/plate-line-58-ch079-nanpo.jpg、assets/promo/plate-set/raw/round14/plate-line-59-ch089-huangshi.jpg、assets/promo/plate-set/raw/round14/plate-line-60-ch093-geigu.jpg、scripts/_w990_og_gap.py、scripts/_w990_roster.py、scripts/_w990_read.py、scripts/_w990_master.py、scripts/_w990_map.py、scripts/_w990_split.py、scripts/_w951_check_crop.py、scripts/_w999_derive_prepare.py、scripts/_w999_insert.py、scripts/_w999_make_spec.py、scripts/_w999_prepare.py、scripts/_w999_rebuild_missing_og.py、scripts/_w999_redo.py、scripts/_w999_redo2.py、scripts/_w999_sheet.py、scripts/_w999_verify.py、scripts/_w999_closeout.py、docs/11-方案报告/计划方案/T35-任务计划执行与经验沉淀报告-2026-10-28.md、docs/11-方案报告/README.md、docs/agent/pitfalls.md、docs/10-方法论沉淀/素材批处理与判据自证方法论.md、dAGENTS.md、HANDOVER.md、CREADME.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、CITATION.cff、archive/docs/AGENTS-ARCHIVE.md、sassets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp。
 
-**本批要点**：① **缺口实读修正**——100 个回目页中**仅 8 回有配图**，真实缺口 **80 回**（初查 92 系盘点正则过严所致·已按宽松匹配复核）；② **母版段派两个变体**——立像段**逐字复用 249 字符**，场面段**仅改 3 处**（环境暗示 / 主体体例 / 点睛主语）⇒ 同族一致由构造保证（母版段原含「无背景场景」，与场面型直接冲突）；③ **12 张试点**（6 立像 + 6 场面）主体**全部避开 plate-set 已出的 34 个角色**（敖广/袁守诚/萧瑀/弥勒/南极仙翁/给孤独长者 + 流沙河对峙/群妖聚义/通天河护童/龙宫夺珠/钉钯宴）；④ **12 页接入**（题图位 + 专属 1200×630 og:image）⇒ 回目页覆盖 8 → 20 回；⑤ **5 张重出**（1 张判据红 + 4 张人眼抓）· ⑥ **裁切判据改口径**——全图墨迹 bbox 会把朱砂/赭金装饰算成主体 ⇒ 假红（ch089 报「主体顶被切」但主体完整）⇒ 改用连通簇（**阈值与三条不变量一字未改**）。
+**本批要点**：① **缺口实读修正**——100 个回目页中**仅 8 回有配图**，真实缺口 **80 回**（初查 92 系盘点正则过严所致·已按宽松匹配复核）；② **母版段派两个变体**——立像段**逐字复用 249 字符**，场面段**仅改 3 处**（环境暗示 / 主体体例 / 点睛主语）⇒ 同族一致由构造保证（母版段原含「无背景场景」，与场面型直接冲突）；③ **12 张试点**（6 立像 + 6 场面）主体**全部避开 plate-set 已出的 34 个角色**（敖广/袁守诚/萧瑀/弥勒/南极仙翁/给孤独长者 + 流沙河对峙/群妖聚义/通天河护童/龙宫夺珠/钉钯宴）；④ **12 处接入**（题图位 + 专属 1200×630 og:image）⇒ 回目页覆盖 8 → 20 回；⑤ **5 张重出**（1 张判据红 + 4 张人眼抓）· ⑥ **裁切判据改口径**——全图墨迹 bbox 会把朱砂/赭金装饰算成主体 ⇒ 假红（ch089 报「主体顶被切」但主体完整）⇒ 改用连通簇（**阈值与三条不变量一字未改**）。
 
-**验证**：母版判据 J1–J10 **88/88 PASS** · 裁切验算 **88/88 PASS**（新口径）· 负样本自证 3/3 各自命中 · 接入验收判据 V1–V6 **全 PASS**（含「未覆盖页 78 个零回归」）· 幂等复跑 12/12 SKIP · 12 页 + 12 母版 + 12 og 全 HTTP 200 · 浏览器实跑渲染正常（ch001 仙石 / ch022 流沙河对峙）· 第 48 门禁 0 FAIL · 全量门禁 55/55 段全绿。
+**验证**：母版判据 J1–J10 **88/88 PASS** · 裁切验算 **88/88 PASS**（新口径）· 负样本自证 3/3 各自命中 · 接入验收判据 V1–V6 **全 PASS**（含「未覆盖页 78 个零回归」）· 幂等复跑 12/12 SKIP · 12 处 + 12 母版 + 12 og 全 HTTP 200 · 浏览器实跑渲染正常（ch001 仙石 / ch022 流沙河对峙）· 第 48 门禁 0 FAIL · 全量门禁 55/55 段全绿。
 
 > - **状态**：已收官（**本批主体内容由并行 W1000 提交 `5870ec32` 代提入库**——该提交为全量提交且时点晚于本批 `git add -A`；本笔为登记面补齐。12 张试点落地·母版族 76 → 88 张·既有 76 张母版与站点版零改动·其余 78 个无配图回目页的 og:image 仍为通用图·未误改）
 
@@ -161,7 +179,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1010），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1011），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -380,7 +398,7 @@
 
 **本批要点**：① **首次引入「替换既有题图源」动作**——回目页 6 张（ch007 / ch014 / ch015 / ch023 / ch027 / ch030）改用同一套宣纸线描立像，**原浓墨渲染版 `chap-07/14/15/23/27/30.webp` 保留不删**（用户 2026-10-27 08:25 裁定「这六张我认为还可以」）并登记为存量归档；另 6 张为四库扩量（people 2 罗刹女 / 奎木狼 + themes 1 招安的两种结局 + essays·poetry·culture 各 1 西游与服饰学 / 原著景物诗分类赏析 / 历史玄奘与小说玄奘）⇒ 站内线描题图累计 **64 → 76 张**、reader 有题图页 **75 → 81 页**；② **替换页同步移除 `aria-hidden` 并写真实 alt**（存量浓墨图是装饰语义 ⇒ 换图源必换可访问性语义）；③ **落位页先验按动作分支建模**（INSERT 6 + REPLACE 6·三个拒绝分支各配一个负样本·3/3 自证通过）；④ **3 张重出**（#38 古树两处朱砂 / #40 贯穿竖线 + 顶天立地⇒裁切验算判红 / #43 葫芦整体实心红⇒J6 只查暗块逃逸）⇒ 坑表 **+4 条（70 → 74）** + 方法论篇新增 §2.8「判据按接入动作分支建模」；⑤ **本地验收服务加 `Cache-Control: no-store`** 根治「改了页面却看不到变化」的缓存误判。
 
-**验证**：母版判据 J1–J10 **76/76 FAIL 0** · 站点版裁切验算 **76/76 FAIL 0**（主体顶余量 5–7 px·下部地面留白 44–134 px）· 负样本自检可证伪（坏样本被 J1 抓出）· 纸色归一残差 ≤ 0.6/255 · 落位页先验 12/12（INSERT 6 + REPLACE 6·三负样本自证通过）· 接入幂等复跑 12/12 SKIP · 12/12 页面探针 HTTP 200 + 含本批图名 + 含真实 alt + 无残留 aria-hidden · 浏览器实跑 2 页渲染正常（替换型 / 新增型）· **6 个浓墨版文件逐个核验仍在**（用户明令保留）· 计划方案合规门禁 0 FAIL · 全量门禁 55/55 段全绿（核心全部通过）。
+**验证**：母版判据 J1–J10 **76/76 FAIL 0** · 站点版裁切验算 **76/76 FAIL 0**（主体顶余量 5–7 px·下部地面留白 44–134 px）· 负样本自检可证伪（坏样本被 J1 抓出）· 纸色归一残差 ≤ 0.6/255 · 落位页先验 12/12（INSERT 6 + REPLACE 6·三负样本自证通过）· 接入幂等复跑 12/12 SKIP · 12/12 处面探针 HTTP 200 + 含本批图名 + 含真实 alt + 无残留 aria-hidden · 浏览器实跑 2 页渲染正常（替换型 / 新增型）· **6 个浓墨版文件逐个核验仍在**（用户明令保留）· 计划方案合规门禁 0 FAIL · 全量门禁 55/55 段全绿（核心全部通过）。
 
 > - **状态**：已收官（`d97d6754`·verify 全量 55/55 段全绿·母版判据 76/76 FAIL 0·裁切验算 76/76 FAIL 0·6 个浓墨版原文件保留未删·reader 有题图页 75 → 81）· **用户观感反馈（2026-10-27 12:26）：回目页 6 张线描重出版「一般算不上好看」⇒ ASM-06 否证**（同角色同范式第二张图观感重复·机器判据与拼图趋势均查不出）· 待裁决回退浓墨版或换主体重出
 
@@ -1418,11 +1436,11 @@
 > - **文件**：site/static/js/rag-chat.js、docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md、scripts/preflight_check.py、scripts/check_seo_head.py、site/index.html、site/reader/index.html、site/curated.html、site/data/ 十页（og 接线）、docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w922_spec.json、scripts/output/_cascade_files_W922.txt（逐件行见 file-index W922 段）。
 > **状态**：**已收官**（W922 a8b974a6·git 反填·共 4 笔·W971 存量回填）
 
-**四件工程落地**：① 浮窗文案订正（生成式问答指向桌面版渡口问津）；② 干扰日志窗口收官归档（15 行封档·机器触发点常驻·preflight 提示常量同步）；③ og:image 判据白名单化（现役两图 + W893 十二张主题图·管控件经裁决批准）并按主题接线 12 页（index/reader 总目/curated + 九个 data 页）；④ NOTE 毕业盘点复核——C5c 已毕业（W904）、余 C7 与色盲 WARN 均为合法常驻说明，**无待毕业项**。
+**四件工程落地**：① 浮窗文案订正（生成式问答指向桌面版渡口问津）；② 干扰日志窗口收官归档（15 行封档·机器触发点常驻·preflight 提示常量同步）；③ og:image 判据白名单化（现役两图 + W893 十二张主题图·管控件经裁决批准）并按主题接线 12 处（index/reader 总目/curated + 九个 data 页）；④ NOTE 毕业盘点复核——C5c 已毕业（W904）、余 C7 与色盲 WARN 均为合法常驻说明，**无待毕业项**。
 
 **八项登记性裁决**落 T-18 E 档：Phase-1 选 ONNX（随批执行）/ agent-web 三项与 PD 套件随 D2 冻结（UV≥30 复议）/ 仓外编制位缓 / BL 维持登记 / S2·S4 待用户定时点 / 计划补齐维持冻结 / Q2 等满 10 批。
 
-**验证**：check_seo_head 855 页全过（含 12 页新图白名单）·交互门禁 0 FAIL·preflight 单测 19/19·ruff 过。
+**验证**：check_seo_head 855 页全过（含 12 处新图白名单）·交互门禁 0 FAIL·preflight 单测 19/19·ruff 过。
 
 
 ### W921（2026-10-24）：CHANGELOG 主动瘦身批（B-W855-05 清偿·102 段迁一级归档·D1 全清）
@@ -1847,15 +1865,4 @@
 > - **范围纪律**：只新增 site/static/images/ 下十二个素材文件 + 三个脚本 + 一份 spec + 报告与索引面；**不接线任何页面、不改门禁件、不推送远端**（级联仅触及页脚版本行·各 1 行·仓内标准行为）。
 > - **共享面与归属声明**：① docs/11-方案报告/README.md 的 T-16 登记行（§二 表格行 19 + §二 抬头补登记段）已被并行 W892 批的提交 76945671 带走——内容完整无损·不重做不回退·以 HEAD 版为准；② 并行提交对台账的改动是 **+3/-1（替换而非追加）** ⇒ 本批 W893 认领行被覆盖消失 ⇒ 按 git 实证补回（第 31 门禁 C4 判红 → 转绿）；③ W854/W857 状态列由「已交付」订正为「已收官」（git log --grep 实证两批已落库·台账陈滞致假在途锁死共享面）；④ **交底一处门禁判据缺陷**——`preflight_check.py:111` 的 touches 解析只按英文逗号切分，而台账实际用中文间隔号「·」分隔 ⇒ 在途批次 touches 整串被当成一个集合元素 ⇒ **交集检查恒为空、恒判「无冲突」（假绿）**；该文件属管控件，依 CLAUDE.md 第 10 条**未擅改**，已留痕待批。
 > **状态**：**已收官**（W893 a06e27b6·git 反填·共 2 笔·W971 存量回填）
-
-### W892（2026-10-23）：宣传单页批（A4 双面·HTML 源 + PDF + PNG 三件套）
-
-> **来源**：用户令「帮我做一套宣传单页：卖点提炼与信息层级、版式栅格、配图与图标、联系方式区块都规划好，正反面内容分工清晰」+ 四问拍板（投放场景 / 成品形态 / 配图来源 / 联系方式区块）。
-> - **文件**：assets/promo/xiyouji-flyer-a4.html、assets/promo/hero-main-visual.png、assets/promo/output/xiyouji-flyer-a4.pdf、assets/promo/output/xiyouji-flyer-a4-front.png、assets/promo/output/xiyouji-flyer-a4-back.png、assets/promo/README.md、assets/promo/index.md、assets/promo/output/index.md、scripts/_w892_export_flyer.mjs、scripts/_w892_probe.mjs、docs/11-方案报告/计划方案/T15-任务计划执行与经验沉淀报告-2026-10-23.md、docs/11-方案报告/README.md、STRUCTURE.md、docs/00-导读/W批次编号对账表.md。
-> - **正反分工**：正面走大众读者路径（品牌 → 主视觉 → 一句话主张 → 4 个 KPI → 3 条卖点 → CTA），背面走学术与机构路径（四条硬资产：可引用 / 可核验 / 可复现 / 可复核 → 内容地图 → 联系与引用格式 → 透明与许可小字块）——双轨在同一套两页内以分层实现，不另出第二套印刷品。
-> - **版式栅格**：A4 竖版 210×297mm，页边 14mm，统一 12 栏基准，栏距 4mm，槽宽 11.5mm，正反两页共用同一套栅格；色板取站令牌（宣纸底 #FAF7F0 / 墨 #23201A / 朱砂 #C8463A），朱砂只作单点强调。
-> - **配图与图标**：复用站内 logo 与两张横向墨山图；本批新生成 1 张专属主视觉（宣纸底浓墨山影 + 朱砂钤记，色归一化到页面底色后零色差）；10 枚图标全部手写内联 SVG，零外域依赖。二维码按用户问卷未圈选故不做。
-> - **验收**：两页版面溢出均 0px（探针判据：末子元素底边减内容底边）；导出过程外域请求 0 个；思源宋体真加载（document.fonts.check 断言）；PDF 实测 2 页 A4（MediaBox 594.96×841.92 pt，含子集嵌入 STSong）；PNG 1240×1754（150dpi）；主视觉朱砂占比 0.153%；单页数字与链接 8/8 条与仓库实况相符。
-> - **踩坑记录**：三条实测教训已沉淀为 T-15 §九 经验（CSS Grid 的 1fr 轨道下限是 min-content，长 URL 会把邻栏挤成 40px 窄条；flex 子项默认收缩会把固定高主视觉压扁到 118px；判溢出不能用子块高度合计或 scrollHeight，二者分别漏算 margin 与混算 padding，真实溢出 39px 与 42px）。
-> **状态**：**已收官**（W892 8137c8fd·git 反填·共 7 笔·W971 存量回填）
 

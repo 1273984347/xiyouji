@@ -11,6 +11,53 @@
 ---
 
 
+## W1011 仓库整理分类批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| README.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| STRUCTURE.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| archive/scripts/batches/misc/_tmp_chap_sheet.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/00-导读/W批次编号对账表.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/00-导读/协议边界速查.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/00-导读/文档规范.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/00-导读/新Agent启动Prompt.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/04-文化与历史背景/西游记大事年表.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/10-方法论沉淀/例-佛法AI框架原始对话.txt | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/INDEX.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| docs/agent/gates.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| references/.gitkeep | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| references/README.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| references/index.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/A_文本基础/章节切分.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/check_gov_doc_claims.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/check_governance_docs.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/check_repo_layout.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/check_w_range_literal.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/output/_vermilion_solid_cache.json | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/output/tools-inventory.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| scripts/verify_delivery.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch001.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch003.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch009.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch011.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch022.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch028.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch047.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch063.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch066.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch079.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch089.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| site/reader/ch093.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| tests/unit/test_repo_layout.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| timeline/.gitkeep | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| timeline/README.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| timeline/index.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| tools/.gitkeep | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| tools/README.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+| tools/index.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
+
 ## W1010 级联自动回窗批（2026-10-29）
 
 | 文件 | W | 说明 |
@@ -3858,23 +3905,4 @@ docs/11-方案报告/README.md
 | scripts/output/_w893_spec.json | W893 | 本批 spec 十字段（CHANGELOG 版段递延·待顶段推进后补写） |
 | docs/11-方案报告/计划方案/T16-任务计划执行与经验沉淀报告-2026-10-23.md | W893 | 新增：T-16 框架报告（四画幅素材图成套批） |
 | docs/00-导读/W批次编号对账表.md | W893 | 认领行与收官回填 |
-
-## W892 宣传单页批（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| assets/promo/xiyouji-flyer-a4.html | W892 | 宣传单页唯一真源（A4 双面·12 栏栅格·10 枚内联 SVG·零外域） |
-| assets/promo/hero-main-visual.png | W892 | 本批新生成专属主视觉（宣纸浓墨山影 + 朱砂钤记·色归一化到 #FAF7F0） |
-| assets/promo/output/xiyouji-flyer-a4.pdf | W892 | 双面 PDF（2 页 A4·子集嵌入思源宋体） |
-| assets/promo/output/xiyouji-flyer-a4-front.png | W892 | 正面 PNG（1240×1754·150dpi） |
-| assets/promo/output/xiyouji-flyer-a4-back.png | W892 | 背面 PNG（1240×1754·150dpi） |
-| assets/promo/README.md | W892 | 目录导读（真源说明 + 复算命令 + 数字口径警示） |
-| scripts/_w892_export_flyer.mjs | W892 | 三件套导出（内置静态服务器 + 字体/外域/溢出三探针） |
-| scripts/_w892_probe.mjs | W892 | 版式判据探针（末块底边 vs 内容底边·两页须 0px 溢出） |
-| docs/11-方案报告/计划方案/T15-任务计划执行与经验沉淀报告-2026-10-23.md | W892 | 框架第十五次执行（规划五表 + AC 验收 + 5 条经验） |
-| docs/11-方案报告/README.md | W892 | §二 补登记 T-15（篇数 17→18） |
-| STRUCTURE.md | W892 | assets 段新增 promo/ 登记 + report_docs 标记同步 |
-| docs/00-导读/W批次编号对账表.md | W892 | 认领行与收官回填 |
-| CHANGELOG.md | W892 | W892 段 |
-| scripts/output/file-index.md | W892 | 同批段回写 |
 
