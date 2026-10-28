@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（158）
+## 文件（166）
 
 ### Markdown 文档
 
@@ -63,14 +63,15 @@
 - `_check_pipeline_consistency.py`
 - `_cite_probe.py`
 - `_gen_search_index.py`
-- `_w818_file_protocol_probe.py`
-- `_w851_j1_name_audit.py`
-- `_w851_visual_regression_probe.py`
-- `_w864_accent_audit.py`
-- `_w876_site_audit.py`
-- `_w939_scan_targets.py`
-- `_w950_refresh_icon_paths.py`
+- `_w1005_fix_head_sentence.py`
+- `_w1005_handover_line.py`
+- `_w1005_heroes.py`
+- `_w1005_probe_faces.py`
+- `_w1005_probe_head.py`
+- `_w1005_serve.py`
+- `_w1005_sync_faces.py`
 - `a11y_audit.py`
+- `accent_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
 - `agg_entities.py`
@@ -150,6 +151,7 @@
 - `export_design_tokens.py`
 - `extract_strings.py`
 - `fetch_gate_stats.py`
+- `file_protocol_probe.py`
 - `gen_folder_docs.py`
 - `gen_og_cover.py`
 - `gen_rss.py`
@@ -162,6 +164,7 @@
 - `inject_seo_head.py`
 - `inject_visit_log.py`
 - `inline_css.py`
+- `j1_name_audit.py`
 - `judge_gate.py`
 - `ledger_backfill.py`
 - `ledger_close_check.py`
@@ -178,28 +181,32 @@
 - `pre-commit-validate.py`
 - `pre_release_screenshot.py`
 - `preflight_check.py`
+- `refresh_icon_paths.py`
 - `release.py`
 - `release_prep.py`
 - `review_sweep.py`
 - `run_all.py`
 - `safe_commit.py`
+- `scan_targets.py`
 - `security_scan.py`
+- `site_audit.py`
 - `slice_screenshots.py`
 - `source_collate.py`
 - `spot_check_nlp.py`
 - `stats.py`
+- `subject_band.py`
 - `sync_data_json.py`
 - `tmpe_tidy.py`
 - `tracked_files.py`
 - `validate_en.py`
 - `verify_chapters.py`
 - `verify_delivery.py`
+- `visual_regression_probe.py`
 - `worktree_rehearse.py`
 
 ### JavaScript / TypeScript
 
 - `_audit_render_states.js`
-- `_w946_icon_probe.js`
 - `batch_screenshots.js`
 - `check_chart_values.js`
 - `check_contract_smoke.js`
@@ -211,6 +218,7 @@
 - `debug_page.js`
 - `diagnose_overflow.js`
 - `extract_datasets.js`
+- `icon_probe.js`
 - `render_check.js`
 - `verify_v2_pages.js`
 

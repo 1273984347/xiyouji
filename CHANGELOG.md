@@ -1,3 +1,25 @@
+### W1004（2026-10-29）：转正清零 + 审查触发器判据修正批（B1 字样≠事件 / B2 max / B4 台账归位）
+
+> **来源**：用户 2026-10-29 三令收口——①「8 件转正清零」②「B1/B2/B4 开始做」③「只写进你自己的记忆文件和工作日志没用，这个项目是多 Agent 共同协作的项目，还是会再次出现同样错误」。第三令是本批的纲：教训的**权威载体是仓内坑表**，私有记忆只作镜像（铁律 14 / CLAUDE 第 12 条早已写明，W1002 却把审查结论只写进 `.workbuddy/memory/`）⇒ 本批把结论与判据一起落进仓。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、DESIGN.md、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/agent/adversarial-audit-prompt.md、docs/agent/gates.md、docs/agent/pitfalls.md、scripts/accent_audit.py、scripts/check_audit_trigger.py、scripts/check_emoji_icons.py、scripts/check_page_admission.py、scripts/check_script_coverage.py、scripts/check_vermilion_solid.js、scripts/file_protocol_probe.py、scripts/icon_probe.js、scripts/j1_name_audit.py、scripts/output/_cascade_files_W1003.txt、scripts/output/_w1003_spec.json、scripts/output/file-index.md、scripts/refresh_icon_paths.py、scripts/scan_targets.py、scripts/site_audit.py、scripts/visual_regression_probe.py、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html、tests/unit/test_audit_trigger.py、tests/unit/test_script_hygiene.py、tests/unit/test_w851_j1_name_audit.py、tests/unit/test_w851_visual_regression_probe.py、xiyouji-agent-web/e2e/chat.e2e.mjs、xiyouji-agent-web/package-lock.json、xiyouji-agent-web/package.json
+>
+**要点**：
+① **8 件转正清零**——W977「硬保留」名单最后 8 件去 `_wNNN_` 前缀：`file_protocol_probe.py` / `j1_name_audit.py` / `visual_regression_probe.py` / `accent_audit.py` / `site_audit.py` / `scan_targets.py` / `icon_probe.js` / `refresh_icon_paths.py`；引用方（第 50 门禁 JS 探针路径、两份单测 import、DESIGN/gates/pitfalls）同步改名。第 42 门禁 C4 配额 **8 → 0**（棘轮到底）。
+② **B1 字样 ≠ 事件**——触发器改认专用 token `对抗审查已派发`；含泛词「对抗式审查」但无 token 的行只出 「疑似未打标」NOTE、**不重置计数**（旧实现被「修审查遗留问题」这类行静默重置，实测 41 批漏警）。
+③ **B2 max 而非文件序**——`last_audit_batch()` 改为取含 token 行的最大 W 号（旧实现取文件末条，后补登记/让号下把 gap 算歪：真实 24 批报 28 批）。
+④ **B4 台账 W998 行归位**——原行是 W998 首次认领的「必守纪律晋升批」内容（该批实际以 W999 落库），与 CHANGELOG §W998「对抗式审查修复批」冲突 ⇒ 以 CHANGELOG 为准改写、状态回填已收官、并写入事件 token（触发器基线上移到 W998）。
+⑤ **补幽灵测试文件**——台账 W1000 行 touches 曾声明 `tests/unit/test_audit_trigger.py` 但从未创建；本批补齐 8 例（阈值 20/21、空台账 fail-closed、散文豁免、B1/B2 回归、同批不触发、CLI 自测）。
+⑥ **口径入库（本批纲）**——pitfalls +2 条：『判据把字样当事件/文件序当集合』『教训必须落仓内载体·私有记忆只是镜像』（95 → 97 条·数据 9→10 / 流程 22→23）；派发模板改为「登记行必须写 token」。
+
+**验证**：`check_audit_trigger.py --self-test` 七态 7/7 · `pytest tests/unit/test_audit_trigger.py` 8 passed · `pytest tests/unit/test_script_hygiene.py` 7 passed · 第 42 门禁 0 FAIL（C4 无 NOTE·配额 0）· `check_gov_doc_claims` N3/N4 一致（50 槽 / 97 条）· 触发器实跑「距上次（W998）5 批·未触发」· 全量 verify 核心全过。
+
+> - **状态**：已收官（8 件转正清零 · B1/B2/B4 修复 · 教训与判据同批入仓）
+
+### W1003（2026-10-29）：agent-web chat 集成验证与死重清退批（用户令「做」·审计轮建议前提过时转验证）
+> **来源**：组件库盘点审计轮收尾建议「在 agent-web 装 @tdesign-react/chat 起对话页原型接 SSE」→ 用户令「做」→ 动工前磁盘重验发现**前提过时**：该包 W401 已入库、W808 起实战在用（ChatSender 输入区 + ChatMarkdown 渲染 + 自研 SSE 八事件客户端），「起原型」转为「验证在役集成 + 清退死重」。
+> **摘要**：① **验证三链全绿**——build（tsc -b + vite·1.4s）·test:client 51/51（含 useChat 流式 4 例）·三层 E2E 11/11（真实浏览器 + 构建产物 + 后端 + SQLite·唯一替身 mock LLM；流式渲染/会话落库/反馈落库/控制台零错误全过）。② **死重清退**——@tdesign-react/aigc@0.1.0-alpha.15（W401 随源码首批带入）src/e2e/evals/CI/docs 全零引用、npm 树仅根挂点，npm uninstall 同步 package.json + lock。③ **e2e 端口修根**——FRONTEND_PORT 4232→4600：4232 落 Windows WinNAT 保留段 4138-4237（netsh excludedportrange 实测 3732-4537 连片），vite preview listen EACCES——W975「端口占用是假故障」保留段形态复发实证，此前本机三层 E2E 因此从未能启动；迁出后 11/11 全过。
+> **文件**：xiyouji-agent-web/package.json · xiyouji-agent-web/package-lock.json · xiyouji-agent-web/e2e/chat.e2e.mjs · scripts/output/_w1003_spec.json
 ### W1002（2026-10-29）：脚本三档归位批（81 件归档 + 4 件转正 + 第 42 门禁 C4 哨兵）
 
 > **来源**：用户 2026-10-29 三问收口——「一次性脚本的储存方式难道不是应该放在临时文件系统里面吗？」→ 三档提案（探索→临时区 / 批次可重放→归档桶 / 引用或跨批→转正）经用户令「全部做完」落地。本批把 W977 人工清扫一次的做法变成**常驻判据**：W977 归档 287 件后，W983–W1001 又堆回 81 件，证明「靠人记得归档」不成立。
@@ -39,7 +61,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1002），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1004），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1796,26 +1818,4 @@
 > - **验收**：W887 110 页实底 **508→313（−195）**·C 渠 **809→213（−596）**；en 138 页迁移后合计实底 518（原 767）·C 渠残留 251（原 1,084·与 zh 253 同族·JS 内联样式类）；**全 en 138 页非豁免全部 ≤3**（第 49 槽 judgePage 同款判据逐页实算）+ 门禁全量 234 页 0 FAIL + 自检 14/14。
 > - **A 渠欠账（如实记账）**：en 页容器字面量 164 处（1320px/1536px/1024px）与 D 渠间距令牌化未在本批范围（属 v4 §6 四渠道迁移的 A/D 两道·另批）。
 > **状态**：**已收官**（W887 14366f23·git 反填·共 2 笔·W971 存量回填）
-
-### W886（2026-10-22）：en 迁移批 1·入口与结构 28 页（C 渠换色 + 实底机械收敛 + 四类豁免·④ 首批）
-
-> **来源**：用户令「继续」。④ en 138 页迁移首批（5 批拆分：core 76 / character 12 / myth 14 / essay 36·按字母序确定性切批）。
-> - **文件**：site/en/ 28 页、scripts/_w886_en_audit.py、scripts/_w886_en_migrate.py、scripts/output/_w886_en_audit.json、scripts/output/_w886_en_audit_b1.json、scripts/output/_w886_en_audit_b1_after.json、scripts/output/_w864_accent_exemptions.json（W886 分册 25 条）、docs/00-导读/W批次编号对账表.md、CHANGELOG.md、scripts/output/file-index.md。
-> - **en 全量现状审计（先量后切）**：138 页四渠测量——C 渠落 bg 朱砂文字 **1,084 处 / 62 页**（与 zh 数据页 1,087 处同量级）；朱砂实底 **767 处 / 135 页**（zh 同口径 457 处 / 89 页·en 从未进迁移面）；令牌旧值 **0 页**（W876 的 326 页同步已顺带覆盖 en 138 页）；容器字面量 164 处（A 渠道属另一笔迁移欠账·本批不动并如实记账）。
-> - **批 1（28 页·core 前 28）**：C 渠规则级换色 **49 条规则 / 14 页**（--accent→--accent-text·复用 W876 换色器与批内审计子集）；B 渠机械化两步——`.seal` 实底→淡底 **28 页**（v4 §3.2 徽章条款·background→--accent-tint、白字→--accent）与 KPI 顶条按行收敛规则 **+16 页**（同排首卡保顶条·口径同 zh 页 W870 逐字规则·插页尾 style 保级联序）；余量按四类口径登记 **W886 分册 25 条豁免**（数据语义色片 15 条 / 首卡顶条 5 条 / 功能交互 5 条·全簿累计 121 条）。
-> - **验收**：实底 259→205（−54）·C 渠 275→38（−237·残留为 JS 内联样式元素·与 zh 的 253 同族）；28 页非豁免全部 ≤3（第 49 槽 judgePage 同款判据实算）；CSP 856 页 0 漂移。
-> - **注**：第 49 槽门禁范围本批不扩 en（未迁移的 110 页会红）——第 5 批收口时统一扩至全 en 并按批递减豁免。
-> - **段链**：W885 递延段由本批补段回写（顶段 W885）；W884 为无 spec 空洞（并行批未落 spec·如实记账）。
-> **状态**：**已收官**（W886 36dd0ccd·git 反填·共 2 笔·W971 存量回填）
-
-### W885（2026-10-22）：素材接线批（213 页页头装饰插画 + 首页水墨底图 + 4 张深底直显版插画·源与内联副本双写）
-
-> **来源**：用户就「素材图还缺什么」清单令「按顺序开始做」，在第 1–6 项素材做完、并列出「接线到页面」这一项后，用户于 2026-10-22 22:50「继续」、23:24 催办，本批执行第 6 项：把已入库的水墨素材真正接到站面上。
-> - **文件**：site/data/*.html（87）、site/en/*.html（126）共 213 页、site/system.css、site/index.html、site/static/images/viz-dark-01-network.webp、site/static/images/viz-dark-02-heatmap.webp、site/static/images/viz-dark-03-radar.webp、site/static/images/viz-dark-04-timeline.webp、site/static/images/README.md、site/static/images/index.md、scripts/_w885_wire.py、scripts/_w885_viz_alpha.py、scripts/_w885_index_revert.py、scripts/output/_w885_spec.json、docs/00-导读/W批次编号对账表.md。
-> - **接了什么**：① **213 页**（site/data 87 + site/en 126）在 `.hero` 暗色带内挂一张**深底直显版**装饰插画，按页名映射四类母题（network/relationships/social-media→根须网、heatmap→墨点阵、radar→放射线、timeline→刻痕序列，其余默认墨点阵）；② **首页 site/index.html** 的浅色 `.masthead` 铺 hero-01 山河云海横幅（文字正落在图底部特意留出的空白带上）；③ 另出 **4 张深底直显版** viz 插画（640×640·viz-dark-01..04）供暗带使用——浅底宣纸图贴在暗色带上会成一块亮斑，故暗带必须用深底版。
-> - **两条实测结论（据实记账·都不是猜的）**：① **file:// 下 CSP 的 `style-src 'self'` 会拦掉外链样式表**，页面样式实际全部来自每页的内联副本（inline_css.py 从 site/system.css 注入的那份·每页约 55 KB）⇒ 新规则必须**源与内联副本双写**：源（site/system.css）保证下次 inline_css 重跑时仍被继承，内联副本保证当前即生效。首轮只改源 ⇒ 规则在页面上完全不生效，浏览器实拍见装饰图撑成 990 px 方块盖住整页（截图存证）。② 深底方图贴在暖褐 hero 上有色差、可见方框 ⇒ 按亮度把深底映射为 alpha 渐变（近底色→透明、笔触→不透明），插画变成**悬浮的米白笔触层**，无方框且不依赖具体底色。
-> - **验收（浏览器实拍·两页）**：数据页确认装饰插画为 240 px 角饰、落在右下不压标题不压文字，W879 的 soft-light 山形底图在暗带上显影为剪影；首页确认水墨底图铺满首屏、kicker 与「取经录」与英文副题全部落在图的留白带上完全可读、「100 回」与山脊相映。**搜索索引**按「他方在途条目按 HEAD 版回退」处理：重跑 `_gen_search_index.py` 后逐条比对，差异仅他方在途的 docs/agent/gates.md 一条 → 已回退，两个索引文件恢复 HEAD 版（我方改动不改变任何页面条目）；**CSP 重算 0 页更新**（未触及内联脚本·零漂移）。
-> - **范围纪律**：只动 213 页的一条装饰 img + 各自内联副本的一条规则 + 首页三条背景 + system.css 一条规则 + 4 张新图 + 3 个脚本，不改任何页面结构、正文与门禁判据，不推送远端。
-> - **CHANGELOG 版段递延**：现役顶段 W874（W851 已落段），W875–W884 段待补且 W883 在途中 → batch_cascade 断言「批次号应为顶段+1」不成立，按仓内现行节奏递延，spec 已入库，待补段批按号序一并回写。
-> **状态**：**已收官**（W885 dcfc348a·git 反填·共 3 笔·W971 存量回填）
 

@@ -11,6 +11,60 @@
 ---
 
 
+## W1004 转正清零 + 审查触发器判据修正批（B1 字样≠事件 / B2 max / B4 台账归位）（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1004 | 本批新增/修改 |
+| AGENTS.md | W1004 | §4.3 坑位计数与主题视图同步（97 条） |
+| CHANGELOG.md | W1004 | 本段 |
+| CITATION.cff | W1004 | 本批新增/修改 |
+| DESIGN.md | W1004 | 转正件改名引用 |
+| HANDOVER.md | W1004 | 本批新增/修改 |
+| README.md | W1004 | 本批新增/修改 |
+| STRUCTURE.md | W1004 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1004 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1004 | W1003 认领行 + W998 行按 CHANGELOG 修正并补事件 token（B4） |
+| docs/00-导读/项目说明.md | W1004 | 本批新增/修改 |
+| docs/agent/adversarial-audit-prompt.md | W1004 | 派发模板：登记行必须写事件 token |
+| docs/agent/gates.md | W1004 | 转正件改名引用 |
+| docs/agent/pitfalls.md | W1004 | 坑表 +2 条（字样≠事件/记教训必落仓内载体）·95→97 |
+| scripts/accent_audit.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
+| scripts/check_audit_trigger.py | W1004 | B1 事件 token + B2 取 max + 七态自测（原四态） |
+| scripts/check_emoji_icons.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
+| scripts/check_page_admission.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
+| scripts/check_script_coverage.py | W1004 | C4 配额 8 → 0（W977 硬保留全部转正） |
+| scripts/check_vermilion_solid.js | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
+| scripts/file_protocol_probe.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
+| scripts/icon_probe.js | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
+| scripts/j1_name_audit.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
+| scripts/output/_cascade_files_W1003.txt | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
+| scripts/output/_w1003_spec.json | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
+| scripts/output/file-index.md | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
+| scripts/refresh_icon_paths.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
+| scripts/scan_targets.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
+| scripts/site_audit.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
+| scripts/visual_regression_probe.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
+| site/data/cross-time-danmaku.html | W1004 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1004 | 本批新增/修改 |
+| site/dukou-engine.html | W1004 | 本批新增/修改 |
+| site/index.html | W1004 | 本批新增/修改 |
+| tests/unit/test_audit_trigger.py | W1004 | 触发器单测 8 例（含 B1/B2 回归）——补齐 W1000 台账声明过的幽灵文件 |
+| tests/unit/test_script_hygiene.py | W1004 | 补 W1003 转正件可加载性 + 配额=0 断言 |
+| tests/unit/test_w851_j1_name_audit.py | W1004 | 引用改名 |
+| tests/unit/test_w851_visual_regression_probe.py | W1004 | 引用改名 |
+| xiyouji-agent-web/e2e/chat.e2e.mjs | W1004 | 本批新增/修改 |
+| xiyouji-agent-web/package-lock.json | W1004 | 本批新增/修改 |
+| xiyouji-agent-web/package.json | W1004 | 本批新增/修改 |
+
+## W1003 agent-web chat 集成验证与死重清退批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/package.json | W1003 | 移除零引用死重依赖 @tdesign-react/aigc（W401 带入） |
+| xiyouji-agent-web/package-lock.json | W1003 | 随 aigc 清退同步重锁 |
+| xiyouji-agent-web/e2e/chat.e2e.mjs | W1003 | 前端端口 4232→4600（迁出 WinNAT 保留段 4138-4237·EACCES 假故障修根） |
+
 ## W1002 脚本三档归位批（2026-10-29）
 
 | 文件 | W | 说明 |
@@ -3663,38 +3717,4 @@ docs/11-方案报告/README.md
 | docs/00-导读/W批次编号对账表.md | W887 | 认领行与收官回填 |
 | CHANGELOG.md | W887 | W887 段 |
 | scripts/output/file-index.md | W887 | 同批段回写 |
-
-## W886 en 迁移批 1·入口与结构 28 页（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/_w886_en_audit.py | W886 | 新增：en 四渠现状审计（C/实底 浏览器实测 + 令牌旧值/容器字面量静态） |
-| scripts/_w886_en_migrate.py | W886 | 新增：en B 渠机械化驱动（seal→淡底 + KPI 顶条按行规则 + 批审计子集导出） |
-| scripts/output/_w886_en_audit.json | W886 | en 全量审计（C 1,084/62 页·实底 767/135 页） |
-| scripts/output/_w886_en_audit_b1.json | W886 | 批 1 前置审计子集（C 275·实底 259） |
-| scripts/output/_w886_en_audit_b1_after.json | W886 | 批 1 迁移后审计（C 38·实底 205） |
-| site/en/（28 页） | W886 | C 渠 49 条规则 + seal 淡底 28 页 + KPI 顶条规则 16 页 |
-| scripts/output/_w864_accent_exemptions.json | W886 | W886 分册 25 条（四类口径·全簿 121 条） |
-| docs/00-导读/W批次编号对账表.md | W886 | 认领行与收官回填 + W885 段状态翻转 |
-| CHANGELOG.md | W886 | W886 段 + W885 段回补 |
-| scripts/output/file-index.md | W886 | 同批两段回写 |
-
-## W885 素材接线批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/*.html（87 页） | W885 | 改：`.hero` 暗带接入深底直显版装饰插画 img + 内联副本补 .hero-ornament 规则（按页名映射四类母题） |
-| site/en/*.html（126 页） | W885 | 改：同 site/data（英文侧同款装饰插画与规则） |
-| site/system.css | W885 | 改：追加 .hero-ornament 规则（源·下次 inline_css 重跑继承） |
-| site/index.html | W885 | 改：浅色 .masthead 铺 hero-01 山河云海横幅（文字落在图底部留白带） |
-| site/static/images/viz-dark-01-network.webp | W885 | 新增：深底直显版装饰插画 01/04·根须网（640×640·深底映射为 alpha 渐变） |
-| site/static/images/viz-dark-02-heatmap.webp | W885 | 新增：深底直显版装饰插画 02/04·疏密墨点阵（640×640·默认母题） |
-| site/static/images/viz-dark-03-radar.webp | W885 | 新增：深底直显版装饰插画 03/04·放射线（640×640） |
-| site/static/images/viz-dark-04-timeline.webp | W885 | 新增：深底直显版装饰插画 04/04·纵向刻痕序列（640×640） |
-| scripts/_w885_wire.py | W885 | 新增：接线批处理脚本（system.css 规则 + 213 页装饰 img + 内联副本补规则 + 首页底图·幂等） |
-| scripts/_w885_viz_alpha.py | W885 | 新增：深底插画 alpha 化脚本（按亮度把深底映射为透明渐变·消除方框） |
-| scripts/_w885_index_revert.py | W885 | 新增：搜索索引他方在途条目回退器（逐条比对·源文件未入库者按 HEAD 版回退） |
-| scripts/output/_w885_spec.json | W885 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
-| docs/00-导读/W批次编号对账表.md | W885 | 认领行与收官回填 |
-
 

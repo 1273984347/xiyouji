@@ -142,7 +142,9 @@ function check(name, condition, detail = "") {
 // ==================== 主流程 ====================
 
 const BACKEND_PORT = 3231;
-const FRONTEND_PORT = 4232;
+// 前端端口须避开 Windows WinNAT 保留段（本机实存 3732-4537 连片）——4232 落 4138-4237 内，
+// vite preview listen 直接 EACCES（「端口占用是假故障」的保留段形态·pitfalls W975）。
+const FRONTEND_PORT = 4600;
 const REPLY = "《西游记》测试回复：这是 mock LLM 产出的确定性文本。";
 
 // W829：E2E 必须跑在**临时库**上。

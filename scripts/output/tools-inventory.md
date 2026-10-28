@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-29 03:52
+生成时间：2026-10-29 04:56
 
-共 **152** 件（门禁与校验 67 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 49 · 一次性（下划线前缀） 14）
+共 **160** 件（门禁与校验 67 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 58 · 一次性（下划线前缀） 13）
 
 ## 门禁与校验（67）
 
@@ -122,11 +122,12 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（49）
+## 工具（58）
 
 | 脚本 | 用途 |
 |:---|:---|
 | `a11y_audit.py` | a11y_audit.py - 全站可访问性审查脚本 |
+| `accent_audit.py` | accent_audit.py — W864 B2 朱砂落点审计（朱砂文字 + 朱砂实底·一次性件）。 |
 | `acceptance_snapshot.py` | acceptance_snapshot.py — W496 转正工具：验收数字当批现测速览。 |
 | `agent_start.py` | Agent 开局状态摘要 agent_start（W705 建·W707 加 --task）——把「读文档的负担」转移到系统。 |
 | `agg_entities.py` | agg_entities.py — B-5 聚合器先行（W651 启动·读 100 回 chapter-meta 出 entities 两类） |
@@ -148,12 +149,15 @@
 | `export_design_tokens.py` | export_design_tokens.py — 设计令牌机器可读导出（PD-5 · W652） |
 | `extract_datasets.js` | extract_datasets.js — 从 site/data/*.html 提取 EMBEDDED_DATA 为 dataset/*.js |
 | `extract_strings.py` | Dump every chrome text node and every CJK-bearing script literal from a  |
+| `file_protocol_probe.py` | file_protocol_probe.py — `file://` 协议三判据 + 构建产物对照探针（W818 取证脚本·一次性诊断件·不入  |
+| `icon_probe.js` | — |
 | `inject_chart_a11y.py` | inject_chart_a11y.py — 可视化页 a11y 模块加载器注入器（W701·BL-20·W773 加 --dir）。 |
 | `inject_descriptions.py` | inject_descriptions.py — 全站 meta description 注入 + title 清理（W641）。 |
 | `inject_rum.py` | W390 · P0 埋点注入脚本 |
 | `inject_seo_head.py` | inject_seo_head.py — 全站 SEO head 注入器（W591 SEO 清零·幂等）。 |
 | `inject_visit_log.py` | W403 · 本地访问记录注入脚本（localStorage 自建基线） |
 | `inline_css.py` | inline_css.py — 将数据页的外部 ../tokens.css + ../system.css <link> 标签 |
+| `j1_name_audit.py` | j1_name_audit.py — J1 命名冲突审计（W851·设计迁移阶段 1 验收件） |
 | `new_page.py` | new_page.py — 可视化页面脚手架 |
 | `obs_sample.py` | obs_sample.py — OBS-10/11/14 逐批采样件（W850 建·Q2 裁决的取数入口）。 |
 | `optimize-html-size.py` | W230 E3 · HTML 文件体积优化脚本 |
@@ -164,19 +168,24 @@
 | `plates_verify.py` | _w945_plates_verify.py — 内页专题题图成套的机器判据（尺寸 / 顶部留白 / 墨量 / 朱砂 / 实心块 / 边框 /  |
 | `pre-commit-validate.py` | pre-commit-validate.py — E3 收尾文档同步铁律·自动化校验门禁 |
 | `pre_release_screenshot.py` | pre_release_screenshot.py — 迭代发布前增强版截图审查集成脚本 |
+| `refresh_icon_paths.py` | W950 · 图标图形刷新器（把打磨后的新图形同步到全仓已内联的 SVG） |
 | `render_check.js` | W701：file:// 下 @font-face 以 origin 'null' 加载站内字体触发 CORS 策略提示， |
 | `review_sweep.py` | review_sweep.py — 全变动复审扫荡器（S-25·W699）。 |
 | `run_all.py` | run_all.py — 批量运行 A-AH 34 类分析脚本 |
 | `safe_commit.py` | safe_commit.py — 并行会话 ref-lock 竞争安全提交（W698·P2-2） |
+| `scan_targets.py` | W941 · UI 图标位 emoji 基准扫描器（机检判据·独立于替换逻辑） |
 | `security_scan.py` | W268 E8 安全深化·本地安全扫描工具 |
+| `site_audit.py` | site_audit.py — C 渠（朱砂文字落 --bg）+ 朱砂实底审计器（W876 重建件）。 |
 | `slice_screenshots.py` | Slice full-page screenshots into fixed-height chunks for pixel-level rev |
 | `source_collate.py` | source_collate.py — 原文考据三方对拍器（S-23·W699）。 |
 | `spot_check_nlp.py` | spot-check character_nlp.py 输出数据。 |
+| `subject_band.py` | subject_band.py — 主体检测与派生裁切（不写盘·纯函数·W988 建·W1004 由归档桶转正） |
 | `sync_data_json.py` | W678 WP-6.1：dataset 生成器输出 → site/data/json 部署副本 单向同步（清单制）。 |
 | `tracked_files.py` | tracked_files.py — 目标提交树文件集合（W894 批·门禁实算口径的单一事实源） |
+| `visual_regression_probe.py` | visual_regression_probe.py — J2 视觉回归探针（W851 建·设计迁移阶段 1 验收件） |
 | `worktree_rehearse.py` | worktree_rehearse.py — worktree 预演法工具化（W701·S-26·用户圈选开工）。 |
 
-## 一次性（下划线前缀）（14）
+## 一次性（下划线前缀）（13）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -186,11 +195,10 @@
 | `_check_pipeline_consistency.py` | 创意三明治管线一致性轻量校验（P3-7，W508 沉淀）。 |
 | `_cite_probe.py` | 引文候选提取探针（E-A 沉淀，W507 永久化）。 |
 | `_gen_search_index.py` | W594：标题关键词数组（中文 jieba 切词、英文按词干拆分），供前端 +4 加权，≤12 个。 |
-| `_w818_file_protocol_probe.py` | _w818_file_protocol_probe.py — `file://` 协议三判据 + 构建产物对照探针（W818 取证脚本·一次性诊 |
-| `_w851_j1_name_audit.py` | _w851_j1_name_audit.py — J1 命名冲突审计（W851·设计迁移阶段 1 验收件） |
-| `_w851_visual_regression_probe.py` | _w851_visual_regression_probe.py — J2 视觉回归探针（W851 建·设计迁移阶段 1 验收件） |
-| `_w864_accent_audit.py` | _w864_accent_audit.py — W864 B2 朱砂落点审计（朱砂文字 + 朱砂实底·一次性件）。 |
-| `_w876_site_audit.py` | _w876_site_audit.py — C 渠（朱砂文字落 --bg）+ 朱砂实底审计器（W876 重建件）。 |
-| `_w939_scan_targets.py` | W941 · UI 图标位 emoji 基准扫描器（机检判据·独立于替换逻辑） |
-| `_w946_icon_probe.js` | — |
-| `_w950_refresh_icon_paths.py` | W950 · 图标图形刷新器（把打磨后的新图形同步到全仓已内联的 SVG） |
+| `_w1005_fix_head_sentence.py` | _w1005_fix_head_sentence.py — 修 HANDOVER 的「当前 HEAD = W###」句（治理契约判据 C4） |
+| `_w1005_handover_line.py` | _w1005_handover_line.py — 代并行 W1004 补 HANDOVER §一 里程碑链首行 |
+| `_w1005_heroes.py` | _w1005_heroes.py — W1005：两张 hero 水墨图重出（人数修正为「4 人形 + 1 匹白马」） |
+| `_w1005_probe_faces.py` | — |
+| `_w1005_probe_head.py` | — |
+| `_w1005_serve.py` | _w1005_serve.py — W1005 本地验收静态服务（webp/js/css MIME + no-store） |
+| `_w1005_sync_faces.py` | _w1005_sync_faces.py — 补并行 W1004 批的版本面欠账（2 处）+ 定位 HANDOVER HEAD 行 |
