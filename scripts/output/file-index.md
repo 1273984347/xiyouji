@@ -11,6 +11,31 @@
 ---
 
 
+## W1010 级联自动回窗批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1010 | 级联自动回窗 |
+| CHANGELOG.md | W1010 | 级联自动回窗 |
+| CITATION.cff | W1010 | 级联自动回窗 |
+| HANDOVER.md | W1010 | 级联自动回窗 |
+| README.md | W1010 | 级联自动回窗 |
+| STRUCTURE.md | W1010 | 级联自动回窗 |
+| .github/workflows/README.md | W1010 | 级联自动回窗 |
+| docs/00-导读/项目说明.md | W1010 | 级联自动回窗 |
+| docs/00-导读/W批次编号对账表.md | W1010 | 级联自动回窗 |
+| scripts/batch_cascade.py | W1010 | 级联自动回窗 |
+| tests/unit/test_batch_spec.py | W1010 | 级联自动回窗 |
+| archive/docs/AGENTS-ARCHIVE.md | W1010 | 级联自动回窗 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1010 | 级联自动回窗 |
+| archive/docs/FILE-INDEX-ARCHIVE.md | W1010 | 级联自动回窗 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1010 | 级联自动回窗 |
+| scripts/output/file-index.md | W1010 | 级联自动回窗 |
+| scripts/output/tools-inventory.md | W1010 | 级联自动回窗 |
+| scripts/output/_w1010_spec.json | W1010 | 级联自动回窗 |
+| scripts/output/_cascade_files_W1010.txt | W1010 | 级联自动回窗 |
+| scripts/output/_vermilion_solid_cache.json | W1010 | 级联自动回窗 |
+
 ## W1009 流程收口批（2026-10-29）
 
 | 文件 | W | 说明 |
@@ -3852,32 +3877,4 @@ docs/11-方案报告/README.md
 | docs/00-导读/W批次编号对账表.md | W892 | 认领行与收官回填 |
 | CHANGELOG.md | W892 | W892 段 |
 | scripts/output/file-index.md | W892 | 同批段回写 |
-
-## W891 en 收尾批（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/en/（138 页） | W891 | A 渠 15 处容器归并 + nav-back 49 页文字态 + 间距令牌化 3,353 处 |
-| scripts/_w891_en_survey.py | W891 | en 收尾前置盘点（容器值/断点/nav-back 变体/间距量） |
-| scripts/_w891_en_migrate.py | W891 | A 渠 + nav-back 迁移驱动（INLINED 跳过·@media 占位保护） |
-| scripts/output/_w864_accent_exemptions.json | W891 | W887 分册 −46 条 nav-back（随批递减·全簿 256） |
-| docs/00-导读/W批次编号对账表.md | W891 | 认领行与收官回填 |
-| CHANGELOG.md | W891 | W891 段 |
-| scripts/output/file-index.md | W891 | 同批段回写 |
-
-## W890 CI 阻塞项清偿批（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| `tests/unit/test_vermilion_solid.py` | W890 | scope 断言改判为新契约（zh 审计面 ∪ en 全量·W887 扩范围后） |
-| `scripts/_w851_j1_name_audit.py` | W890 | DEFER_HOLD_CHECKS 收敛为 1 条（删 W876 已改值的两项·原值未动契约对已落地项不适用） |
-| `scripts/tmpe_tidy.py` | W890 | 新增 `_pid_alive()` 跨平台存活探针（Windows 用 OpenProcess+GetExitCodeProcess·非终止式）+ RunLock 默认参数改运行时解析 |
-| `scripts/check_no_brand_refs.py` | W890 | ruff 四项清零（UP009 删 encoding 声明 / UP015 删冗余 mode / F841 删死变量 args / B007 循环变量改名） |
-| `scripts/check_plan_template.py` | W890 | ruff 两项清零（UP009 删 encoding 声明 / E741 歧义变量名改名） |
-| `scripts/requirements.txt` | W890 | Pillow 12.3.0→13.0.0（清 25 个 CVE·含 GHSA-78g4-xqwv-q3g8） |
-| `docs/11-方案报告/计划方案/T14-任务计划执行与经验沉淀报告-2026-10-23.md` | W890 | 本批框架交付物（取证 / 修复 / 验收 / 复盘） |
-| `docs/00-导读/W批次编号对账表.md` | W890 | W890 认领行 + 收官回填 |
-| `docs/11-方案报告/README.md` | W890 | 计划方案目录索引登记 |
-| `scripts/output/_w890_spec.json` | W890 | 本批级联 spec（10 键） |
-| `scripts/output/_cascade_files_W890.txt` | W890 | 本批级联落盘清单 |
 

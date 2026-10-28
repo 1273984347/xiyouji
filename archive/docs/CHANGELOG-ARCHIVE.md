@@ -13,6 +13,31 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W891（2026-10-23）：en 收尾批（A 渠容器归并 11 页 + nav-back 样式统一 49 页 + 间距令牌化 3,353 处）
+
+> **来源**：用户令「继续」（引 W887 收官报告的欠账清单）。W891 = en 的 A/D 两道渠道 + nav-back 样式统一三笔欠账一次清。
+> - **文件**：site/en/（138 页）、scripts/_w891_en_survey.py、scripts/_w891_en_migrate.py、scripts/output/_w864_accent_exemptions.json（W887 分册 −46 条）、dCscripts/output/file-index.md。
+> - **A 渠（v4 §3.3 裁决 3）**：`max-width: 1024px / 1280px`（容器用法）→ `var(--container-content)`（1120）——**11 页 15 处**；@media 断点先占位保护后还原（768/640/480 等断点与小固定宽一律不动）；`1320px` 字面量在 INLINED 块内（页级 0 处）→ 归 BL-33 的 system.css 同步处理（不在此批动内联块·防再造漂移）。
+> - **nav-back 样式统一**：49 页同款 `.nav-back`（实底 `var(--accent)` + 白字 `--paper-warm`）→ 透明底 + `var(--accent-text)` 朱砂字（落 bg 4.5:1·白名单「朱砂文字（字色）」内）+ hover `--rebel` 实底 → `--accent-tint` 淡底；padding/圆角保留（可点击形状不变）。**W887 分册 46 条 nav-back 豁免随批递减移除**（全簿 302→256 条）。
+> - **D 渠间距令牌化**：复用 `_w862_tokenize_spacing.py`（值保留·跳过 INLINED 块·只认 padding/margin 家族）——138 页 **3,353 处**刻度内等值 → `var(--space-N)`（预盘点 3,149 + 内联 style 属性）。
+> - **验收**：CSP 856 页 0 漂移（3,272 处值等替换·差值即 token 写法长度）· nav-back 计算样式实测（transparent / rgb(199,70,58) / padding 8px 16px）· 门禁 234 页 0 FAIL（nav-back 实底消失后无新超限）· en a11y 无回归。
+> - **踩坑记录**：Git Bash heredoc 会把 Python 正则的 `\s`/`\d` 反向转义成 `/s`/`/d`（MSYS 路径转换）——本次两次「0 命中」假象即此坑；凡含正则的多行 Python 一律用 Write 工具落文件，不走 heredoc（W514 铁则的复发实证）。
+> **状态**：**已收官**（W891 4042f448·git 反填·共 2 笔·W971 存量回填）
+
+### W890（2026-10-23）：CI 阻塞项清偿批（过期断言同步 / ruff 清零 / 跨平台探针 / 依赖漏洞）
+
+> **来源**：承接 W889 展示面复位批合 main 时的 CI 实证——`Unit Tests (pytest)` 2 failed（required check·阻塞合并）、`Code Quality (ruff + black)` 6 errors、`pip audit` 25 漏洞。三类红项**均非 W889 引入**，而是 W836/W860/W876/W887 四批的成果未同步判据/测试留下的欠账。
+> - **文件**：tests/unit/test_vermilion_solid.py、scripts/_w851_j1_name_audit.py、scripts/tmpe_tidy.py、scripts/check_no_brand_refs.py、scripts/check_plan_template.py、scripts/requirements.txt、README.md、ddocs/11-方案报告/README.md、docs/11-方案报告/计划方案/T14-任务计划执行与经验沉淀报告-2026-10-23.md、scripts/output/_w890_spec.json、scripts/output/_cascade_files_W890.txt、scripts/output/_w851_j1_name_audit.json、CSTRUCTURE.md、docs/00-导读/项目说明.md、HANDOVER.md、AGENTS.md、CITATION.cff、.github/workflows/README.md、ssite/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html。
+> - **过期断言同步①（required check 阻塞项）**：`test_scope_matches_audit_surface` 断言「门禁范围 == zh 审计面 96 页」，而 W887 已**有意**把第 49 槽 `scopePages` 并入 `site/en` 138 页（en 侧豁免由 W886/W887 分册承接）→ 按新契约改判为「范围 == zh 审计面 ∪ en 全量」，并保留「zh 审计面必须被完整覆盖」这条原前提。
+> - **过期断言同步②（required check 阻塞项）**：`DEFER_HOLD_CHECKS` 的「浅色 --chart-3 未改值 #C9A063」与「暗色 --accent 未改值 #E0604F」两条，被 W876 的值切换（浅色 chart-3 → #B38F58、暗色 accent → #E46250）**有意**打破——「原值未动」契约对已落地项不再适用 → 收敛为仅剩尚未改值的「浅色 --accent-soft 未改值 #E9B885」（实测 tokens.css 仍为该值）。
+> - **跨平台存活探针修复**：`scripts/tmpe_tidy.py` 的 `os.kill(pid, 0)` 在 Windows 上等价 TerminateProcess（**会杀掉调用方自己**）→ pytest 跑到 `test_tmpe_tidy` 的 RunLock 复验时读到锁里的当前 pytest pid 即自杀，表现为「静默退出·零输出·exit 1」的本地红/CI 绿分歧族（CI 跑 ubuntu-latest 走 POSIX 分支）。修法=新增 `_pid_alive()`：POSIX 用 `os.kill(pid,0)`+ProcessLookupError/PermissionError 分支；Windows 用 OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION)+GetExitCodeProcess 的**非终止式**存在性查询。
+> - **测试隔离缺陷修复**：`RunLock.__init__(self, path=RUN_LOCK)` 的默认参数在**类定义时**求值 → `monkeypatch.setattr(tt, "RUN_LOCK", ...)` 对已绑定默认值无效 → 测试构造 `RunLock()` 落到**真**锁路径（读写仓库真实 tmpe/.locks/）→ 改为 `path=None` 运行时解析，monkeypatch 恢复生效。
+> - **ruff 六项清零**：`check_no_brand_refs.py` UP009（删 encoding 声明）/UP015（删冗余 mode）/F841（删未使用的死变量 `args`）/B007（未用循环变量 `pat` → `_pat`）+ `check_plan_template.py` UP009/E741（歧义变量名 `l` → `ln`）→ `ruff check scripts/` 从 6 errors 归零（全仓口径·非增量）。
+> - **依赖漏洞清零**：`pip-audit -r scripts/requirements.txt --strict` 实测 25 个 CVE 全为 Pillow 12.3.0（fix 13.0.0·含 GHSA-78g4-xqwv-q3g8）→ Pillow 升 13.0.0（与 W412 当年 11.3.0→12.3.0 同型复发·上游新版本→旧版本出现新 CVE）。
+> - **验证**：pytest 全量 **831 passed / 3 skipped**（含 test_vermilion_solid 与 test_w851_j1_name_audit 与 test_tmpe_tidy 三处原红面）+ Pillow 13.0.0 下 `test_slice_screenshots` 12 例切片面全绿 + 第 33 门禁 head 内容链路读图正常 + `ruff check scripts/` All checks passed + pip-audit 0 漏洞 + 全量交付门禁 54 段核心全部通过。
+> - **状态**：本批已收官。
+> **状态**：**已收官**（W890 654a289c·git 反填·共 1 笔·W971 存量回填）
+
 ### W889（2026-10-23）：展示面复位批（GitHub 主页载体 / 首屏 / 时间三层）
 
 > **来源**：用户 2026-10-23 三轮问答拍板——「那我的展示面怎么做呢」→ ① `.github/README.md` 改名 `README-internal.md` ② 推 dev 走 PR 合 main ③ 根 README 首屏整体重排 + 增补「30 秒上手」速览块。
