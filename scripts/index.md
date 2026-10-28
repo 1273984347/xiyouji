@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（160）
+## 文件（161）
 
 ### Markdown 文档
 
@@ -90,6 +90,7 @@
 - `check_citability.py`
 - `check_citations.py`
 - `check_claude_md.py`
+- `check_commit_scope.py`
 - `check_content_consistency.py`
 - `check_content_hygiene.py`
 - `check_corruption.py`

@@ -11,6 +11,31 @@
 ---
 
 
+## W1007 提交范围门禁批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1007 | 提交范围门禁（第 51 槽） |
+| CHANGELOG.md | W1007 | 提交范围门禁（第 51 槽） |
+| CITATION.cff | W1007 | 提交范围门禁（第 51 槽） |
+| HANDOVER.md | W1007 | 提交范围门禁（第 51 槽） |
+| README.md | W1007 | 提交范围门禁（第 51 槽） |
+| STRUCTURE.md | W1007 | 提交范围门禁（第 51 槽） |
+| .github/workflows/README.md | W1007 | 提交范围门禁（第 51 槽） |
+| docs/00-导读/项目说明.md | W1007 | 提交范围门禁（第 51 槽） |
+| docs/00-导读/W批次编号对账表.md | W1007 | 提交范围门禁（第 51 槽） |
+| docs/00-导读/文档规范.md | W1007 | 提交范围门禁（第 51 槽） |
+| docs/agent/gates.md | W1007 | 提交范围门禁（第 51 槽） |
+| docs/agent/pitfalls.md | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/check_commit_scope.py | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/verify_delivery.py | W1007 | 提交范围门禁（第 51 槽） |
+| tests/unit/test_commit_scope.py | W1007 | 提交范围门禁（第 51 槽） |
+| archive/docs/AGENTS-ARCHIVE.md | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/output/file-index.md | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/output/tools-inventory.md | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/output/_w1007_spec.json | W1007 | 提交范围门禁（第 51 槽） |
+| scripts/output/_cascade_files_W1007.txt | W1007 | 提交范围门禁（第 51 槽） |
+
 ## W1006 防代提硬拦批（safe_commit --expect-spec）（2026-10-29）
 
 | 文件 | W | 说明 |

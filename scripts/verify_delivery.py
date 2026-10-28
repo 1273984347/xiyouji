@@ -107,13 +107,14 @@ EXPECTED_SECTION_NAMES = [
     "计划方案合规",
     "朱砂实底",
     "GSAP写法",
+    "提交范围",
 ]
 
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
 # 四态：full=全量（缺省·CI verify-delivery job·批收尾七步③恒为 full）；docs=文档轨子集；
 # site=页面轨+级联相关文档段；auto=按变更路径白名单分类（任何越界文件保守回退 full）。
-# 11 个内联廉价段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区）恒跑不跳；跳过只作用于
-# 38 个 subprocess 委托段（50 段 - 12 内联/bespoke·W781 注册表派生与 EXPECTED 补齐第 45 槽段名后校数）：_scoped_run 统一短路，
+# 12 个恒跑段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区·W1007 加「提交范围」）恒跑不跳；跳过只作用于
+# 39 个 subprocess 委托段（56 段 - 17 内联/bespoke·W781 注册表派生与 EXPECTED 补齐第 45 槽段名后校数）：_scoped_run 统一短路，
 # _GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
 # 校验（fake stdout 含段标记，wrapper 不会误判「缺汇总行」）；段自洽锁按 scope 断言子集。
 _DOC_FILES_RE = re.compile(
@@ -137,6 +138,7 @@ SCOPE_SITE_SECTIONS = {
 _SCOPE_CORE = {  # W713：11 个内联廉价段全集入 core（原仅 4 段·旁文档/A4/A1-A6/学术/A1导航/sitemap/内嵌回退 7 段不在任何 scope 集=自洽锁盲区）
     "期望版本", "dukou页脚", "六文档同步", "旁文档同步", "范围漂移",
     "A4计数", "A1-A6计数", "学术引用", "A1导航", "sitemap覆盖", "内嵌回退", "GSAP写法",
+    "提交范围",  # W1007：必须恒跑——代提可能发生在任何 scope 的提交里（docs 提交也能夹带）
 }
 # _GATE_SUMMARY_MARKERS 已由 _STRICT_GATES 元组派生（W781 R-1·见 _STRICT_GATES 定义后），
 # 手工字典删除——挂槽漏登记即启动期断言红（W780 实证：漏登记会在 --scope 跳过路径爆「缺汇总行」假红）
@@ -641,6 +643,15 @@ _STRICT_GATES = [
                 fail_msg="GSAP 动效写法违例（时长 / 缓动白名单 / 禁旋转 / 禁循环 / 布局属性·详见脚本输出）",
                 marker_msg="GSAP 写法槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
                 ok_msg="GSAP 动效写法门禁通过（%s）", ok_line=-1),
+    # W1007：提交范围门禁挂第 51 槽——代提三次（W989/W1002/W1004）同一处方：一份提交混进另一批在途件。
+    # safe_commit --expect-spec 只在走它时生效（`git commit` 直提可绕），本槽把它挪进唯一硬门禁入口，
+    # 任何提交路径都绕不过。归属判定看索引 CHANGELOG 顶段（新增段=本批；否则 HEAD 现役段=回填）。
+    _StrictGate(section="提交范围", script="check_commit_scope.py", args=("--gate",), timeout=120,
+                marker="---- 第 51 门禁 提交范围：",
+                crash_msg="提交范围槽执行异常（第 51 槽·crash 即拦）: %s",
+                fail_msg="提交范围越界（索引含本批 spec 之外的文件＝代提风险·摘出他方在途件后重跑）",
+                marker_msg="提交范围槽输出缺汇总行（疑似未真正执行·防静默跳过）：%r",
+                ok_msg="提交范围门禁通过（%s）", ok_line=-1),
 ]
 
 # ---- 注册表派生与一致性防线（W781 R-1·挂槽「五处同改」收敛）----

@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（50）
+## 文件（51）
 
 ### Python 脚本
 
@@ -31,6 +31,7 @@
 - `test_check_search_index_fresh.py`
 - `test_ci_sim.py`
 - `test_ci_wiring.py`
+- `test_commit_scope.py`
 - `test_d3_data_processors.py`
 - `test_doc_size_budget.py`
 - `test_docs_index.py`
