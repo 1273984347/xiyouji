@@ -15,18 +15,14 @@
 
 | 文件 | W | 说明 |
 |---|---|---|
-| site/reader/ch001.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
-| site/reader/ch003.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
-| site/reader/ch009.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
-| site/reader/ch011.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
-| site/reader/ch022.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
-| site/reader/ch028.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
-| site/reader/ch047.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
-| site/reader/ch063.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
-| site/reader/ch066.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
-| site/reader/ch079.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
-| site/reader/ch089.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
-| site/reader/ch093.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| .github/workflows/README.md | W1001 | 本批新增/修改 |
+| AGENTS.md | W1001 | 本批新增/修改 |
+| CHANGELOG.md | W1001 | 本批新增/修改 |
+| CITATION.cff | W1001 | 本批新增/修改 |
+| HANDOVER.md | W1001 | 本批新增/修改 |
+| README.md | W1001 | 本批新增/修改 |
+| STRUCTURE.md | W1001 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1001 | 本批新增/修改 |
 | assets/promo/plate-set/plate-line-49-ch001-xianshi.png | W1001 | 新增母版（1200×1600） |
 | assets/promo/plate-set/plate-line-49-ch001-xianshi.webp | W1001 | 新增母版（1200×1600） |
 | assets/promo/plate-set/plate-line-50-ch003-aoguang.png | W1001 | 新增母版（1200×1600） |
@@ -51,39 +47,8 @@
 | assets/promo/plate-set/plate-line-59-ch089-huangshi.webp | W1001 | 新增母版（1200×1600） |
 | assets/promo/plate-set/plate-line-60-ch093-geigu.png | W1001 | 新增母版（1200×1600） |
 | assets/promo/plate-set/plate-line-60-ch093-geigu.webp | W1001 | 新增母版（1200×1600） |
-| site/static/images/plate-line-49-ch001-xianshi.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
-| site/static/images/og-plate-line-49-ch001-xianshi.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/plate-line-50-ch003-aoguang.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
-| site/static/images/og-plate-line-50-ch003-aoguang.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/plate-line-51-ch009-yuanshoucheng.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
-| site/static/images/og-plate-line-51-ch009-yuanshoucheng.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/plate-line-52-ch011-xiaoyu.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
-| site/static/images/og-plate-line-52-ch011-xiaoyu.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/plate-line-53-ch022-liushahe.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
-| site/static/images/og-plate-line-53-ch022-liushahe.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/plate-line-54-ch028-qunyao.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
-| site/static/images/og-plate-line-54-ch028-qunyao.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/plate-line-55-ch047-tongtianhe.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
-| site/static/images/og-plate-line-55-ch047-tongtianhe.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/plate-line-56-ch063-jiutou.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
-| site/static/images/og-plate-line-56-ch063-jiutou.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/plate-line-57-ch066-mile.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
-| site/static/images/og-plate-line-57-ch066-mile.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/plate-line-58-ch079-nanpo.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
-| site/static/images/og-plate-line-58-ch079-nanpo.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/plate-line-59-ch089-huangshi.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
-| site/static/images/og-plate-line-59-ch089-huangshi.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/plate-line-60-ch093-geigu.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
-| site/static/images/og-plate-line-60-ch093-geigu.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/og-plate-line-40-ch023-sichan.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/og-plate-line-41-ch027-bailong.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/og-plate-line-42-ch030-sancha.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/og-plate-line-43-luoshanv.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/og-plate-line-44-kuimulang.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/og-plate-line-45-zhaoan-topic.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/og-plate-line-46-fushi-topic.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/og-plate-line-47-jingwu-topic.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
-| site/static/images/og-plate-line-48-xuanzang-topic.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| assets/promo/plate-set/preview-contact-sheet.png | W1001 | 本批新增/修改 |
+| assets/promo/plate-set/preview-contact-sheet.webp | W1001 | 本批新增/修改 |
 | assets/promo/plate-set/raw/round14/README.md | W1001 | 出图原件（12 张·含重出） |
 | assets/promo/plate-set/raw/round14/index.md | W1001 | 出图原件（12 张·含重出） |
 | assets/promo/plate-set/raw/round14/plate-line-49-ch001-xianshi.jpg | W1001 | 出图原件（12 张·含重出） |
@@ -98,13 +63,21 @@
 | assets/promo/plate-set/raw/round14/plate-line-58-ch079-nanpo.jpg | W1001 | 出图原件（12 张·含重出） |
 | assets/promo/plate-set/raw/round14/plate-line-59-ch089-huangshi.jpg | W1001 | 出图原件（12 张·含重出） |
 | assets/promo/plate-set/raw/round14/plate-line-60-ch093-geigu.jpg | W1001 | 出图原件（12 张·含重出） |
-| scripts/_w990_og_gap.py | W1001 | 本批工具/产物 |
-| scripts/_w990_roster.py | W1001 | 本批工具/产物 |
-| scripts/_w990_read.py | W1001 | 本批工具/产物 |
-| scripts/_w990_master.py | W1001 | 本批工具/产物 |
-| scripts/_w990_map.py | W1001 | 本批工具/产物 |
-| scripts/_w990_split.py | W1001 | 本批工具/产物 |
+| docs/00-导读/W批次编号对账表.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| docs/00-导读/项目说明.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| docs/10-方法论沉淀/素材批处理与判据自证方法论.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| docs/11-方案报告/README.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| docs/11-方案报告/计划方案/T35-任务计划执行与经验沉淀报告-2026-10-28.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| docs/agent/pitfalls.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
+| scripts/_w1001_stage.py | W1001 | 本批工具/产物 |
 | scripts/_w951_check_crop.py | W1001 | 本批工具/产物 |
+| scripts/_w990_map.py | W1001 | 本批工具/产物 |
+| scripts/_w990_master.py | W1001 | 本批工具/产物 |
+| scripts/_w990_og_gap.py | W1001 | 本批工具/产物 |
+| scripts/_w990_read.py | W1001 | 本批工具/产物 |
+| scripts/_w990_roster.py | W1001 | 本批工具/产物 |
+| scripts/_w990_split.py | W1001 | 本批工具/产物 |
+| scripts/_w999_closeout.py | W1001 | 本批工具/产物 |
 | scripts/_w999_derive_prepare.py | W1001 | 本批工具/产物 |
 | scripts/_w999_insert.py | W1001 | 本批工具/产物 |
 | scripts/_w999_make_spec.py | W1001 | 本批工具/产物 |
@@ -114,28 +87,57 @@
 | scripts/_w999_redo2.py | W1001 | 本批工具/产物 |
 | scripts/_w999_sheet.py | W1001 | 本批工具/产物 |
 | scripts/_w999_verify.py | W1001 | 本批工具/产物 |
-| scripts/_w999_closeout.py | W1001 | 本批工具/产物 |
-| docs/11-方案报告/计划方案/T35-任务计划执行与经验沉淀报告-2026-10-28.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
-| docs/11-方案报告/README.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
-| docs/agent/pitfalls.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
-| docs/10-方法论沉淀/素材批处理与判据自证方法论.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
-| docs/00-导读/W批次编号对账表.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
-| AGENTS.md | W1001 | 本批新增/修改 |
-| HANDOVER.md | W1001 | 本批新增/修改 |
-| CHANGELOG.md | W1001 | 本批新增/修改 |
-| README.md | W1001 | 本批新增/修改 |
-| STRUCTURE.md | W1001 | 本批新增/修改 |
-| docs/00-导读/项目说明.md | W1001 | 登记面（报告/坑表/计数链/方法论/台账） |
-| .github/workflows/README.md | W1001 | 本批新增/修改 |
-| site/index.html | W1001 | 本批新增/修改 |
+| scripts/output/_w1001_spec.json | W1001 | 本批工具/产物 |
+| scripts/output/file-index.md | W1001 | 本批工具/产物 |
 | site/data/cross-time-danmaku.html | W1001 | 本批新增/修改 |
 | site/data/tag-cloud.html | W1001 | 本批新增/修改 |
 | site/dukou-engine.html | W1001 | 本批新增/修改 |
-| CITATION.cff | W1001 | 本批新增/修改 |
-| archive/docs/AGENTS-ARCHIVE.md | W1001 | 本批新增/修改 |
-| scripts/output/file-index.md | W1001 | 本批工具/产物 |
-| assets/promo/plate-set/preview-contact-sheet.png | W1001 | 本批新增/修改 |
-| assets/promo/plate-set/preview-contact-sheet.webp | W1001 | 本批新增/修改 |
+| site/index.html | W1001 | 本批新增/修改 |
+| site/reader/ch001.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch003.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch009.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch011.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch022.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch028.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch047.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch063.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch066.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch079.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch089.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch093.html | W1001 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/static/images/og-plate-line-40-ch023-sichan.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-41-ch027-bailong.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-42-ch030-sancha.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-43-luoshanv.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-44-kuimulang.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-45-zhaoan-topic.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-46-fushi-topic.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-47-jingwu-topic.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-48-xuanzang-topic.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-49-ch001-xianshi.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-50-ch003-aoguang.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-51-ch009-yuanshoucheng.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-52-ch011-xiaoyu.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-53-ch022-liushahe.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-54-ch028-qunyao.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-55-ch047-tongtianhe.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-56-ch063-jiutou.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-57-ch066-mile.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-58-ch079-nanpo.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-59-ch089-huangshi.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-60-ch093-geigu.webp | W1001 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/plate-line-49-ch001-xianshi.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-50-ch003-aoguang.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-51-ch009-yuanshoucheng.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-52-ch011-xiaoyu.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-53-ch022-liushahe.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-54-ch028-qunyao.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-55-ch047-tongtianhe.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-56-ch063-jiutou.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-57-ch066-mile.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-58-ch079-nanpo.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-59-ch089-huangshi.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-60-ch093-geigu.webp | W1001 | 站点版（母版裁切·只裁上部留白） |
 
 ## W1000 对抗式审查常驻化批（2026-10-28）
 

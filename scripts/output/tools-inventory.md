@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-29 00:21
+生成时间：2026-10-29 00:58
 
-共 **221** 件（门禁与校验 66 · 批次与登记 11 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 47 · 一次性（下划线前缀） 87）
+共 **233** 件（门禁与校验 66 · 批次与登记 11 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 47 · 一次性（下划线前缀） 99）
 
 ## 门禁与校验（66）
 
@@ -172,7 +172,7 @@
 | `tracked_files.py` | tracked_files.py — 目标提交树文件集合（W894 批·门禁实算口径的单一事实源） |
 | `worktree_rehearse.py` | worktree_rehearse.py — worktree 预演法工具化（W701·S-26·用户圈选开工）。 |
 
-## 一次性（下划线前缀）（87）
+## 一次性（下划线前缀）（99）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -182,6 +182,14 @@
 | `_check_pipeline_consistency.py` | 创意三明治管线一致性轻量校验（P3-7，W508 沉淀）。 |
 | `_cite_probe.py` | 引文候选提取探针（E-A 沉淀，W507 永久化）。 |
 | `_gen_search_index.py` | W594：标题关键词数组（中文 jieba 切词、英文按词干拆分），供前端 +4 加权，≤12 个。 |
+| `_w1001_clean_locks.py` | — |
+| `_w1001_final.py` | _w1001_final.py — W1001 收尾：refresh → 门禁 → 提交 → 台账回填 → 收官笔 |
+| `_w1001_finish_faces.py` | _w1001_finish_faces.py — 手工补齐 W1001 的剩余版本面（级联超时留下的半完成态） |
+| `_w1001_fix_index.py` | _w1001_fix_index.py — 补 file-index 的 W1001 段 + 修 CHANGELOG 编号规则的嵌套双括号 |
+| `_w1001_fix_rule_anchor.py` | — |
+| `_w1001_probe_faces.py` | — |
+| `_w1001_restore_changelog_head.py` | _w1001_restore_changelog_head.py — 恢复被并行批次级联覆盖丢失的 CHANGELOG 头部 |
+| `_w1001_stage.py` | _w1001_stage.py — W1001 级联准备：移除手工插入的临时段 + 生成 W1001 spec |
 | `_w818_file_protocol_probe.py` | _w818_file_protocol_probe.py — `file://` 协议三判据 + 构建产物对照探针（W818 取证脚本·一次性诊 |
 | `_w851_j1_name_audit.py` | _w851_j1_name_audit.py — J1 命名冲突审计（W851·设计迁移阶段 1 验收件） |
 | `_w851_visual_regression_probe.py` | _w851_visual_regression_probe.py — J2 视觉回归探针（W851 建·设计迁移阶段 1 验收件） |
@@ -246,11 +254,14 @@
 | `_w990_read.py` | — |
 | `_w990_roster.py` | — |
 | `_w990_split.py` | — |
+| `_w999_closeout.py` | _w999_closeout.py — W999 收官补齐（被并行 W1000 提交代提后的登记面补写） |
 | `_w999_crop_recheck.py` | _w999_crop_recheck.py — 裁切验算·**主体簇口径**复算（全目录 88 张） |
 | `_w999_derive_prepare.py` | _w999_prepare.py — 由 `_w984_prepare.py` **程序化派生**（W999 批成品处理） |
 | `_w999_diag.py` | _w999_diag.py — W999 两处诊断：ch089 主体顶真伪 + 回目页真实覆盖口径 |
 | `_w999_fix_t35.py` | — |
+| `_w999_fix_wnum.py` | _w999_fix_wnum.py — W999 段号订正 + 插入本批 W999 段 |
 | `_w999_insert.py` | _w999_insert.py — W999 接入：12 个回目页题图 + 专属 1200×630 og:image |
+| `_w999_ledger_fill.py` | _w999_ledger_fill.py — 台账补登记 W999 行（必守纪律晋升批·其段已入库但台账缺行） |
 | `_w999_make_spec.py` | _w999_make_spec.py — W999 级联 spec 生成 |
 | `_w999_prepare.py` | _w999_prepare.py — W999 成品处理（**只处理 raw/round14 的本批 12 张**） |
 | `_w999_probe.py` | — |
@@ -260,6 +271,7 @@
 | `_w999_redo2.py` | _w999_redo2.py — W999 ch001 第三次重出（母版段不动·只改主体段） |
 | `_w999_redo_map.py` | — |
 | `_w999_register.py` | _w999_register.py — W999 登记面：坑表 +4 条（87 → 91）+ 计数链 + 方法论 §2.10 + README  |
+| `_w999_renumber.py` | _w999_renumber.py — W999 → W1001 再让号（段号与台账行一一对应） |
 | `_w999_sheet.py` | — |
 | `_w999_sync_counts.py` | _w999_sync_counts.py — 坑表计数链**按实算**同步（稳健版·不依赖固定文本） |
 | `_w999_verify.py` | _w999_verify.py — W999 接入验收判据（可复算·含负样本自证） |
