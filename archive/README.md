@@ -51,7 +51,7 @@ archive/
 | `archive/docs/file-index-ARCHIVE.md` | file-index.md 历史段（W031-W699 区间） | W511 · W422 · W736 滚动 | 滚动 | 索引反向滚动 |
 | `archive/docs/AGENTS-ARCHIVE.md` | AGENTS.md 脚注沿革（W458-W700 起） | 滚动（W709 起） | 滚动 | AGENTS 分层滚动淘汰 |
 | `archive/docs/STRUCTURE-ARCHIVE.md` | STRUCTURE.md 历史详细清单 | 历史滚动 | 滚动 | 结构文档瘦身 |
-| `archive/scripts/batches/w9xx/`（72 件增量） | `scripts/_w9xx_*.py` 一次性/诊断脚本 | W1002 | 2026-10-29 | 批次收官归档（三档归位定式·第 42 门禁 C4 起判） |
+| `archive/scripts/batches/w9xx/`（71 件·W1002 入 72·W1004 转正迁出 `_w988_subject.py`） | `scripts/_w9xx_*.py` 一次性/诊断脚本 | W1002 | 2026-10-29 | 批次收官归档（三档归位定式·第 42 门禁 C4 起判） |
 | `archive/scripts/batches/w10xx/`（8 件·新桶） | `scripts/_w10xx_*.py` 一次性/诊断脚本（四位号首批） | W1002 | 2026-10-29 | 批次收官归档（同上·新段桶建立） |
 | `docs/w550-shot-review/`（11 件） | W550 五轮截图审查会话产物 | W550 后整组归档 | 滚动 | 批次完结·来源成组 |
 | `docs/复盘报告/`（9 件） | docs/10-方法论沉淀 复盘报告（5 件 09-05~09-16 滚动 + 4 件 10-01~10-06 W735 迁入） | 滚动 · W735 | 滚动 | 时点性报告·间隔归档 |

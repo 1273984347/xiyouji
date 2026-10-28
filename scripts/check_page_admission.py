@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """check_page_admission.py — 新建页准入门禁（W916 建置·C-W818-01 清偿·静态版）。
 
-背景（W818 档 0）：「新建页准入检查」长期只有取证探针（_w818_file_protocol_probe.py·
+背景（W818 档 0）：「新建页准入检查」长期只有取证探针（file_protocol_probe.py·
 一次性诊断件）而无常驻防线——file:// 双击直开两铁律（禁 type=module·零外域 script src）
 靠纪律维持，全站现状为零违例但回归无门禁锁定。
 

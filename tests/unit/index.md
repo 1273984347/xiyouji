@@ -11,13 +11,14 @@
 
 - （无）
 
-## 文件（47）
+## 文件（48）
 
 ### Python 脚本
 
 - `test_a11y_audit.py`
 - `test_archive_health.py`
 - `test_archive_segments.py`
+- `test_audit_trigger.py`
 - `test_batch_cascade_status_wnum.py`
 - `test_check_data_copy_chain.py`
 - `test_check_db_schema.py`

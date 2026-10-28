@@ -34,11 +34,11 @@ def ink_bbox(im, tol=26):
     ⇒ 实测 `plate-line-59-ch089-huangshi` 报「主体顶被切（bbox 顶 = 0 px）」，
     但主体簇法复核显示主体**完整**（192..1153 · 地面留白 118 px）⇒ **判据假红**
     （与 W974「bbox 顶 ≠ 主体顶」同族：孤立噪点/装饰色把 bbox 顶拉到画布边）。
-    ⇒ 改用与 `_w988_subject.py` 同口径：连通簇（面积 ≥ 200 px²）+ 排除朱砂（r−g ≥ 35）
+    ⇒ 改用与 `scripts/subject_band.py` 同口径（W1004 由归档桶转正）：连通簇（面积 ≥ 200 px²）+ 排除朱砂（r−g ≥ 35）
     与赭金（luma ≥ 90）。**判据阈值与三条不变量一字未改**，只换「主体」的计算口径。
     （W999 批实测：全目录 88 张按新口径复算，仅满幅场景的 ch001 仍 FAIL ⇒ 未掩盖真缺陷。）
     """
-    from _w988_subject import subject_band
+    from subject_band import subject_band
 
     top, bottom, _ = subject_band(im)
     if top is None:

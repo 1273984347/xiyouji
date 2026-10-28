@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""_w818_file_protocol_probe.py — `file://` 协议三判据 + 构建产物对照探针（W818 取证脚本·一次性诊断件·不入 CI）。
+"""file_protocol_probe.py — `file://` 协议三判据 + 构建产物对照探针（W818 取证脚本·一次性诊断件·不入 CI）。
 
 用途：验证本仓「file:// 双击直开 + 零外域依赖」铁律（AGENTS.md §6-5 第 5 条）在各类前端产物下的成立性，
       为《静态站前端框架化选型对比》报告 §6 提供可复算证据。
@@ -11,7 +11,7 @@
   C) file:// 下 fetch('./x.json')            → 预期失败（URL scheme "file" is not supported）
 
 产物对照（§6.2·可选）：传入已构建产物目录，探针会打开其中 index.html / react.html 并报是否可直开。
-  例：py -3 scripts/_w818_file_protocol_probe.py --dist <dir>
+  例：py -3 scripts/file_protocol_probe.py --dist <dir>
 
 依赖：Playwright（仓库已有）+ Chromium。缺依赖时明确报错退出（不静默跳过）。
 探针产物与临时文件全部落系统 TEMP，不写仓内任何文件。

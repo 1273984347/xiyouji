@@ -20,6 +20,11 @@ if str(SCRIPTS_DIR) not in sys.path:
 import check_script_coverage as cov  # noqa: E402
 
 PROMOTED = ["plan_template_review", "plates_verify", "check_crop"]
+# W1003：W977「硬保留」名单全部转正（C4 配额归零）——按新名逐一钉住可加载性
+PROMOTED_W1003 = ["file_protocol_probe", "j1_name_audit", "visual_regression_probe",
+                  "accent_audit", "site_audit", "scan_targets", "refresh_icon_paths",
+                  "subject_band"]  # subject_band：W1004 从归档桶转正的共用纯函数
+PROMOTED_JS = ["icon_probe.js"]
 
 
 def test_c4_stray_vs_promote_classification():
@@ -37,15 +42,27 @@ def test_c4_ledger_unreadable_does_not_fake_red():
 
 
 def test_c4_quota_is_ratchet():
-    """棘轮常量必须存在且为正——配额被无端调高等于关掉判据。"""
+    """棘轮常量必须存在且不得回升——W1003 起为 0（历史批 `_` 件必须清零）。"""
     assert isinstance(cov.MAX_RETAINED_UNDERSCORE, int)
-    assert 0 < cov.MAX_RETAINED_UNDERSCORE <= 8
+    assert cov.MAX_RETAINED_UNDERSCORE == 0
 
 
 def test_promoted_scripts_importable():
     """转正件按新名字可 import（ROOT 上溯式路径不受影响）。"""
     for mod in PROMOTED:
         assert importlib.import_module(mod) is not None
+
+
+def test_w1003_promoted_scripts_importable():
+    """W1003 转正的 7 个 py 件按新名可 import（无残留 `_wNNN_` 旧名）。"""
+    for mod in PROMOTED_W1003:
+        assert importlib.import_module(mod) is not None
+
+
+def test_w1003_promoted_js_present():
+    """JS 探针件在位（由第 50 门禁 check_emoji_icons.py 调用）。"""
+    for name in PROMOTED_JS:
+        assert (SCRIPTS_DIR / name).is_file(), name
 
 
 def test_script_coverage_self_test_passes():

@@ -1,4 +1,4 @@
-"""_w851_j1_name_audit.py 命名审计测试（W851·设计迁移阶段 1 验收件）。
+"""j1_name_audit.py 命名审计测试（W851·设计迁移阶段 1 验收件）。
 
 背景：W826 §4 令牌稿自称纯加法但稿内 4 组撞名；W851 只落零消费新名、撞名项
 defer。本测试锁死审计的**双向可失败**口径——W851 实证的首版 bug：`_DEF_RE`
@@ -25,7 +25,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 SCRIPTS = ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 
-import _w851_j1_name_audit as audit  # noqa: E402
+import j1_name_audit as audit  # noqa: E402
 
 TOKENS_CSS = ROOT / "site" / "tokens.css"
 

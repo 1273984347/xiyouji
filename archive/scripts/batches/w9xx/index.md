@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（228）
+## 文件（227）
 
 ### Python 脚本
 
@@ -210,7 +210,6 @@
 - `_w988_precheck.py`
 - `_w988_record_adoption.py`
 - `_w988_sheet.py`
-- `_w988_subject.py`
 - `_w988_sync_87.py`
 - `_w988_verify.py`
 - `_w990_map.py`

@@ -16,7 +16,7 @@
 
 「具象字符」定义：emoji 表情码位 + 几何/dingbat 图形（★☆✓✗⚠❝▶⏸☰✕）
 ★ 排除箭头 ←→↔↺↑↓⇒ 与 VS16（箭头承担正文流程语义·非图标）
-用法：py -3 scripts/_w939_scan_targets.py [--json <out>]
+用法：py -3 scripts/scan_targets.py [--json <out>]
 """
 from __future__ import annotations
 

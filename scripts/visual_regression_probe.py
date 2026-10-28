@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""_w851_visual_regression_probe.py — J2 视觉回归探针（W851 建·设计迁移阶段 1 验收件）
+"""visual_regression_probe.py — J2 视觉回归探针（W851 建·设计迁移阶段 1 验收件）
 
 ## 为什么需要它
 
@@ -34,10 +34,10 @@ W827 是另一批·P0-01 阅读入口打通）。
 
 ## 用法
 
-    py -3 scripts/_w851_visual_regression_probe.py capture --out before.json
-    py -3 scripts/_w851_visual_regression_probe.py capture --out after.json --theme dark
-    py -3 scripts/_w851_visual_regression_probe.py diff before.json after.json
-    py -3 scripts/_w851_visual_regression_probe.py --self-test
+    py -3 scripts/visual_regression_probe.py capture --out before.json
+    py -3 scripts/visual_regression_probe.py capture --out after.json --theme dark
+    py -3 scripts/visual_regression_probe.py diff before.json after.json
+    py -3 scripts/visual_regression_probe.py --self-test
 
 退出码：capture 0（异常 1）· diff 0=零差异 / 1=有差异或对拍面不齐 · self-test 全过 0。
 """

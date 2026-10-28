@@ -6,7 +6,7 @@
 （scroll/tl-scroll、star/star-solid、thumb-up/thumb-down）⇒ 必须带 transform 与 fill 区分。
 
 同步面：A 通用集内联 SVG · B timeline 的 TL_ICO 映射块 · C agent-web UiIcons.tsx
-用法：py -3 scripts/_w950_refresh_icon_paths.py [--dry]
+用法：py -3 scripts/refresh_icon_paths.py [--dry]
 """
 from __future__ import annotations
 

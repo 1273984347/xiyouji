@@ -28,8 +28,9 @@ CI workflow ∪ Makefile 四面引用），结论 **46/101 无任何引用**—�
   防「正则失效导致全量误红/全量豁免」的空真）。
 - C4 **一次性脚本归位**（W1002 建·「脚本三档归位」的机器哨兵）：历史批（W 号 < 台账 max）的
   `_w####_*.py|js` 仍在 `scripts/` 根 = FAIL（应随批收官移入 `archive/scripts/batches/wNNN/`）。
-  被四面引用的历史 `_` 件判为「转正候选」，允许 ≤ `MAX_RETAINED_UNDERSCORE` 件（棘轮·只降不升），
-  超配额 = FAIL（防硬保留名单膨胀成第二个垃圾场）。台账不可读时 C4 跳过并打印 WARN（禁静默）。
+  被四面引用的历史 `_` 件判为「转正候选」，允许 ≤ `MAX_RETAINED_UNDERSCORE` 件（棘轮·只降不升；
+  W1003 起为 0——W977 的「硬保留 16 件」已全部转正或归档，不再有合法滞留）。超配额 = FAIL。
+  台账不可读时 C4 跳过并打印 WARN（禁静默）。
 
 ## 豁免登记（scripts/output/script-coverage-baseline.txt）
 
@@ -65,8 +66,9 @@ MAKEFILE = os.path.join(ROOT, "Makefile")
 MIN_SCRIPTS = 50
 MIN_COVERED = 15
 MIN_BASELINE = 10
-# C4 棘轮：被四面引用的历史批 `_` 件「转正候选」上限（只降不升·W1002 实测 8 件）
-MAX_RETAINED_UNDERSCORE = 8
+# C4 棘轮：被四面引用的历史批 `_` 件「转正候选」上限（只降不升）
+# W1002 建时实测 8 件 → W1003 全部转正清零，配额随之收到 0（任何历史批 `_` 件留在根即红）
+MAX_RETAINED_UNDERSCORE = 0
 LEDGER = os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md")
 
 
