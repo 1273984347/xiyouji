@@ -11,6 +11,28 @@
 ---
 
 
+## W1006 防代提硬拦批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| CHANGELOG.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| CITATION.cff | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| HANDOVER.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| README.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| STRUCTURE.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| .github/workflows/README.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| docs/00-导读/项目说明.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| docs/00-导读/W批次编号对账表.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| docs/agent/pitfalls.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/safe_commit.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| tests/unit/test_safe_commit_expect_spec.py | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| archive/docs/AGENTS-ARCHIVE.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/file-index.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/tools-inventory.md | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/_w1006_spec.json | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+| scripts/output/_cascade_files_W1006.txt | W1006 | 防代提硬拦（--expect-spec）+ 口径入仓 |
+
 ## W1005 hero 水墨图人数修正（2026-10-29）
 
 | 文件 | W | 说明 |

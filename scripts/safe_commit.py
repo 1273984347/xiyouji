@@ -9,7 +9,14 @@
 
     python scripts/safe_commit.py -F <msgfile> [--] <pathspec...>
     python scripts/safe_commit.py -m "message" <pathspec...>
+    python scripts/safe_commit.py -F <msgfile> --expect-spec scripts/output/_w####_spec.json
     python scripts/safe_commit.py --self-test
+
+--expect-spec（W1006·防代提硬拦）：提交前把**索引态路径集**与本批 spec 的
+`file_index_rows` 求差，出现 spec 之外的文件即拒绝提交（并列出前若干项与改法）。
+语义：spec 是「本批应该动哪些文件」的声明，差集非空就说明索引里混进了他方在途件
+（W989 / W1002 / W1004 三次代提实证）。给 `--expect-spec` 时可省略 pathspec
+（索引态提交，前提是索引 ⊆ spec）。
 
 重试安全规则：重试前核对 old..HEAD 并行增量与本次 pathspec 的文件交集——
 无交集（对方没碰我要提交的文件）才重试一次；有交集则放弃并打印分析，
@@ -67,13 +74,33 @@ def _plan_retry(err_text, old, new, pathspecs):
     return True, "并行增量与本次 pathspec 无交集，可安全重试"
 
 
-def _guard_staged(staged_names, pathspecs):
+def _spec_paths(spec):
+    """从级联 spec 取「本批应动文件」全集（file_index_rows 第 2 列）。"""
+    rows = spec.get("file_index_rows") or []
+    out = []
+    for row in rows:
+        cells = [c.strip() for c in str(row).strip().strip("|").split("|")]
+        if cells and cells[0] and cells[0] != "文件":
+            out.append(cells[0])
+    return sorted(set(out))
+
+
+def _plan_spec(staged, spec_paths):
+    """纯逻辑：索引态 ⊆ spec？返回 (ok, extra, missing)。供 --self-test 与单测。"""
+    staged_set = {p.replace("\\", "/") for p in staged}
+    spec_set = {p.replace("\\", "/") for p in spec_paths}
+    extra = sorted(staged_set - spec_set)
+    missing = sorted(spec_set - staged_set)
+    return (not extra and bool(spec_set)), extra, missing
+
+
+def _guard_staged(staged_names, pathspecs, expect_spec=None):
     """W991 守卫：无 pathspec 且索引有暂存件 → 拒绝（防扫入他方暂存·W989 实证）。
 
     pathspec 形态提交走临时索引（HEAD+worktree·W649 口径），只取声明路径的
     worktree 态——他方已暂存未提交的件天然隔离在外。
     """
-    if pathspecs:
+    if pathspecs or expect_spec:
         return True, ""
     if not staged_names:
         return True, ""
@@ -82,12 +109,39 @@ def _guard_staged(staged_names, pathspecs):
         "（含并行会话的·W989 实证混入级联十四面）。改用：safe_commit -F <msg> -- <逐文件路径>" % len(staged_names))
 
 
-def commit(msg_args, pathspecs, max_retry=1):
+def commit(msg_args, pathspecs, max_retry=1, expect_spec=None):
     staged = []
-    r = subprocess.run(["git", "diff", "--cached", "--name-only"], capture_output=True, text=True)
+    r = subprocess.run(["git", "-c", "core.quotePath=false", "-c", "diff.renames=false",
+                        "diff", "--cached", "--name-only"],
+                       capture_output=True, text=True, encoding="utf-8", errors="replace")
     if r.returncode == 0:
-        staged = [x for x in r.stdout.split("\n") if x.strip()]
-    ok, why = _guard_staged(staged, pathspecs)
+        staged = [x.strip().replace("\\", "/") for x in r.stdout.split("\n") if x.strip()]
+    spec_paths = None
+    if expect_spec:
+        import json
+        try:
+            spec = json.load(open(expect_spec, encoding="utf-8"))
+        except (OSError, ValueError) as e:
+            print("[safe_commit] 拒绝：--expect-spec 读不出（%s）：%s" % (expect_spec, e))
+            return 1
+        spec_paths = _spec_paths(spec)
+        ok_spec, extra, missing = _plan_spec(staged, spec_paths)
+        if not spec_paths:
+            print("[safe_commit] 拒绝：spec 的 file_index_rows 为空（判据不可执行·fail-closed）")
+            return 1
+        if extra:
+            print("[safe_commit] 拒绝：索引含 %d 个 **spec 之外** 的文件（代提风险·W989/W1002/W1004 三次实证）"
+                  % len(extra))
+            for name in extra[:10]:
+                print("      extra: " + name)
+            if len(extra) > 10:
+                print("      …另 %d 件" % (len(extra) - 10))
+            print("      改法：git restore --staged <路径> 摘出；或把该件写入本批 spec 后再提交")
+            return 1
+        if missing:
+            print("[safe_commit] NOTE：spec 声明了 %d 件但索引里没有（可能已入库/无需改）：%s%s"
+                  % (len(missing), ", ".join(missing[:5]), " …" if len(missing) > 5 else ""))
+    ok, why = _guard_staged(staged, pathspecs, expect_spec)
     if not ok:
         print(why)
         for name in staged[:8]:
@@ -148,6 +202,19 @@ def _self_test():
             print("%s  case%d expect=%s got=%s（%s | %s）" % (mark, i, expect, got, note, reason))
     finally:
         globals()["_range_files"] = orig
+    # --expect-spec 判据（W1006）：4 例纯逻辑
+    spec_cases = [
+        ("索引 ⊆ spec", ["a.py", "b.md"], ["a.py", "b.md", "c.md"], True),
+        ("索引多出他方件", ["a.py", "other.py"], ["a.py"], False),
+        ("spec 空（fail-closed）", ["a.py"], [], False),
+        ("索引为空但 spec 非空（缺件只提示）", [], ["a.py"], True),
+    ]
+    for name, staged, spec, expect in spec_cases:
+        ok_spec, extra, missing = _plan_spec(staged, spec)
+        mark = "OK " if (ok_spec if extra or spec else False) == expect else "FAIL"
+        fails += 0 if mark == "OK " else 1
+        cases += 1
+        print("%s  spec：%s（extra=%s missing=%s）" % (mark, name, extra, missing))
     print("self-test: %d/%d 通过" % (cases - fails, cases))
     return 1 if fails else 0
 
@@ -158,6 +225,7 @@ def main():
         return _self_test()
     msg_args = []
     pathspecs = []
+    expect_spec = None
     i = 0
     while i < len(argv):
         a = argv[i]
@@ -167,11 +235,17 @@ def main():
         elif a == "-m" and i + 1 < len(argv):
             msg_args = ["-m", argv[i + 1]]
             i += 2
+        elif a == "--expect-spec" and i + 1 < len(argv):
+            expect_spec = argv[i + 1]
+            i += 2
+        elif a.startswith("--expect-spec="):
+            expect_spec = a.split("=", 1)[1]
+            i += 1
         elif a == "--":
             pathspecs.extend(argv[i + 1:])
             break
         elif a.startswith("-"):
-            print("[safe_commit] 不支持的参数: %s（仅支持 -F/-m/-- 与 pathspec）" % a)
+            print("[safe_commit] 不支持的参数: %s（仅支持 -F/-m/--expect-spec/-- 与 pathspec）" % a)
             return 1
         else:
             pathspecs.append(a)
@@ -179,7 +253,7 @@ def main():
     if not msg_args:
         print("[safe_commit] 缺提交信息（-F <file> 或 -m \"msg\"；多行信息按 AGENTS §4.3 走 -F）")
         return 1
-    return commit(msg_args, pathspecs)
+    return commit(msg_args, pathspecs, expect_spec=expect_spec)
 
 
 if __name__ == "__main__":

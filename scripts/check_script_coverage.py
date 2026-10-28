@@ -70,6 +70,7 @@ MIN_BASELINE = 10
 # W1002 建时实测 8 件 → W1003 全部转正清零，配额随之收到 0（任何历史批 `_` 件留在根即红）
 MAX_RETAINED_UNDERSCORE = 0
 LEDGER = os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md")
+DONE_PREFIXES = ("已收官", "已闭环")
 
 
 def rd(p):
@@ -181,7 +182,31 @@ def ledger_max_w(path=None):
     return max(ws) if ws else None
 
 
-def stray_batch_scripts(names, max_w, covered):
+def inflight_wnums(path=None):
+    """台账里**未收官**（在途）批号的集合——在途批的脚本留在根是合法的，C4 不判。
+
+    为什么需要（W1006 实证）：后批一旦认领（max 前移），前批「还没收官」的脚本
+    立即变成「历史批滞留」→ C4 误红，把合法在途当违规。判据必须以**状态列**为准，
+    而不是只比 W 号大小。
+    """
+    p = path or LEDGER
+    try:
+        text = rd(p)
+    except OSError:
+        return set()
+    out = set()
+    for ln in text.split("\n"):
+        m = re.match(r"^\|\s*W(\d{3,4})\s*\|", ln)
+        if not m:
+            continue
+        cells = [re.sub(r"[\s*]+", "", c) for c in ln.strip().strip("|").split("|")]
+        status = next((c for c in reversed(cells) if c.startswith(DONE_PREFIXES)), "")
+        if not status.startswith(DONE_PREFIXES):
+            out.add(int(m.group(1)))
+    return out
+
+
+def stray_batch_scripts(names, max_w, covered, inflight=frozenset()):
     """C4 分流：历史批（W < max_w）滞留件 → (必归档, 转正候选)。
 
     max_w 为 None（台账不可读）时返回空——判据不可执行不伪造红（由调用方打 WARN 留痕）。
@@ -194,7 +219,7 @@ def stray_batch_scripts(names, max_w, covered):
         if not m:
             continue
         w = int(m.group(1))
-        if w >= max_w:
+        if w >= max_w or w in inflight:
             continue
         (promote if n in covered else must_archive).append((n, w))
     return must_archive, promote
@@ -256,7 +281,8 @@ def evaluate(inp):
     under = inp.get("underscore", [])
     if under:
         covered_under = covered_set(under, inp.get("c4_corpus_text") or corpus)
-        must_archive, promote = stray_batch_scripts(under, inp.get("max_w"), covered_under)
+        must_archive, promote = stray_batch_scripts(under, inp.get("max_w"), covered_under,
+                                                    inp.get("inflight", frozenset()))
         for n, w in must_archive:
             issues.append("C4: 历史批脚本滞留 scripts/ 根 %s（W%d < 台账 max W%s）——"
                           "按「脚本三档归位」移入 archive/scripts/batches/w%dxx/（无四面引用 ⇒ 非跨批判据）"
@@ -273,6 +299,7 @@ def gather():
     raw = rd(BASELINE) if os.path.exists(BASELINE) else ""
     return {"scripts": scripts, "corpus_text": reference_corpus(), "baseline_raw": raw,
             "underscore": list_underscore_scripts(), "max_w": ledger_max_w(),
+            "inflight": inflight_wnums(),
             "c4_corpus_text": c4_corpus()}
 
 
@@ -285,7 +312,8 @@ def run_check():
         print("WARN  C4 跳过：台账不可读（%s）——归位判据本回合不可执行" % os.path.relpath(LEDGER, ROOT))
     elif inp.get("underscore"):
         covered_under = covered_set(inp["underscore"], inp.get("c4_corpus_text") or inp["corpus_text"])
-        _must, promote = stray_batch_scripts(inp["underscore"], inp["max_w"], covered_under)
+        _must, promote = stray_batch_scripts(inp["underscore"], inp["max_w"], covered_under,
+                                             inp.get("inflight", frozenset()))
         if promote:
             print("NOTE  C4 转正候选（%d/%d）：%s——被四面引用，建议去 `_` 前缀转正"
                   % (len(promote), MAX_RETAINED_UNDERSCORE,
@@ -339,6 +367,8 @@ def run_self_test():
     cases.append(("T8 当前批 `_` 件放行（C4 好样本）",
                   dict(clean, underscore=["_w1001_diag.py"], max_w=1001), None))
     nine = ["_w0901_p%d.py" % i for i in range(MAX_RETAINED_UNDERSCORE + 1)]
+    cases.append(("T10 在途批脚本放行（C4 不误红合法在途）",
+                  dict(clean, underscore=["_w1005_diag.py"], max_w=1006, inflight={1005}), None))
     cases.append(("T9 转正候选超配额必红（C4 棘轮）",
                   dict(clean, underscore=nine, max_w=1002, corpus_text=dummy_corpus + "\n" + "\n".join(nine)), "C4"))
 
