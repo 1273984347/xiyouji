@@ -29,8 +29,8 @@ archive/
     ├── （45 件）                    历史一次性脚本（早期迁移）
     ├── audit/                       早期 W051-W102 验证脚本（10 件·含自身 README）
     ├── attic/                       原 scripts/_attic 整迁（32 件·自含 README）
-    ├── batches/                     批次一次性产物（540 件·W735 迁入·按 W 段分桶）
-    │   ├── w4xx/ w5xx/ w6xx/ w7xx/  各 W 段：spec / 级联清单 / 一次性脚本 / 中间产物
+    ├── batches/                     批次一次性产物（W735 迁入起·按 W 段分桶）
+    │   ├── w4xx/ w5xx/ w6xx/ w7xx/ w8xx/ w9xx/ w10xx/   各 W 段：spec / 级联清单 / 一次性脚本 / 中间产物
     │   └── misc/                    无 W 号件（早期 fix/audit/diag 等 90 件）
     └── review-pass3/                W557 三轮全站审查产物（105 件·含 prompts/）
 ```
@@ -51,6 +51,8 @@ archive/
 | `archive/docs/file-index-ARCHIVE.md` | file-index.md 历史段（W031-W699 区间） | W511 · W422 · W736 滚动 | 滚动 | 索引反向滚动 |
 | `archive/docs/AGENTS-ARCHIVE.md` | AGENTS.md 脚注沿革（W458-W700 起） | 滚动（W709 起） | 滚动 | AGENTS 分层滚动淘汰 |
 | `archive/docs/STRUCTURE-ARCHIVE.md` | STRUCTURE.md 历史详细清单 | 历史滚动 | 滚动 | 结构文档瘦身 |
+| `archive/scripts/batches/w9xx/`（72 件增量） | `scripts/_w9xx_*.py` 一次性/诊断脚本 | W1002 | 2026-10-29 | 批次收官归档（三档归位定式·第 42 门禁 C4 起判） |
+| `archive/scripts/batches/w10xx/`（8 件·新桶） | `scripts/_w10xx_*.py` 一次性/诊断脚本（四位号首批） | W1002 | 2026-10-29 | 批次收官归档（同上·新段桶建立） |
 | `docs/w550-shot-review/`（11 件） | W550 五轮截图审查会话产物 | W550 后整组归档 | 滚动 | 批次完结·来源成组 |
 | `docs/复盘报告/`（9 件） | docs/10-方法论沉淀 复盘报告（5 件 09-05~09-16 滚动 + 4 件 10-01~10-06 W735 迁入） | 滚动 · W735 | 滚动 | 时点性报告·间隔归档 |
 | `scripts/`（45 件） | 原 scripts/archive 整体迁入 | W734 迁入 | 2026-10-13 | 历史一次性脚本存档 |

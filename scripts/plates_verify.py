@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 _w945_plates_verify.py — 内页专题题图成套的机器判据（尺寸 / 顶部留白 / 墨量 / 朱砂 / 实心块 / 边框 / 纸色）
 
@@ -162,7 +161,7 @@ def paper_residual(im: Image.Image):
         bright = [p for p in px if sum(p) / 3 > 225]
     if not bright:
         return 999.0
-    avg = tuple(sum(c) / len(bright) for c in zip(*bright))
+    avg = tuple(sum(c) / len(bright) for c in zip(*bright, strict=False))
     return max(abs(avg[i] - PAPER[i]) for i in range(3))
 
 

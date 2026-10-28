@@ -11,6 +11,145 @@
 ---
 
 
+## W1002 脚本三档归位批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1002 | §3 目录注释改写 + §4.3 坑位计数同步（95 条·git 节 23） |
+| Makefile | W1002 | ledger 目标改 `scripts/ledger_mutation_test.py` |
+| archive/README.md | W1002 | 归档结构补 w8xx/w9xx/w10xx 桶 + 归档台账追加 W1002 组行 |
+| archive/scripts/batches/w10xx/README.md | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_clean_locks.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_final.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_finish_faces.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_fix_index.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_fix_rule_anchor.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_probe_faces.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_restore_changelog_head.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/_w1001_stage.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w10xx/index.md | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w954_review_evidence.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w978_review_evidence.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_derive.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_download.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_insert_plates.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_make_prompts.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_precheck_pages.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_prepare.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_retry.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_serve.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_sheet.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w983_zoom.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_derive.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_download.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_insert_plates.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_make_prompts.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_precheck_pages.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_prepare.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_retry.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_serve.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_sheet.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w984_zoom.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w986_make_prompts.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w986_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w987_family_scan.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w987_insert_scenes.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w987_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_card_sheet.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_docs.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_fix_cascade.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_fix_eol.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_fix_gates.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_insert.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_inventory.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_make_assets.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_match.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_pitfalls.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_plan.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_precheck.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_sheet.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_subject.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w988_verify.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_map.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_master.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_og_gap.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_pick.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_read.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_roster.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w990_split.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_closeout.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_crop_recheck.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_derive_prepare.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_diag.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_fix_t35.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_fix_wnum.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_insert.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_ledger_fill.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_make_spec.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_prepare.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_probe.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_probe_h1.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_rebuild_missing_og.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_redo.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_redo2.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_redo_map.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_register.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_renumber.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_sheet.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_sync_counts.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| archive/scripts/batches/w9xx/_w999_verify.py | W1002 | 一次性/批次脚本移入归档桶（三档归位·第 42 门禁 C4 起判） |
+| assets/promo/plate-set/README.md | W1002 | 验算脚本改转正名 + 逐批 prep 路径死链修正 |
+| docs/00-导读/文档规范.md | W1002 | §5 归档新增「脚本三档归位（W1002 定式）」条款 |
+| docs/11-方案报告/README.md | W1002 | 判据表路径改转正名 `plan_template_review.py` |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-26.md | W1002 | 取证脚本链接改归档路径（lint_links 活链校正） |
+| docs/agent/pitfalls.md | W1002 | 坑表：「`_` 前缀=一次性」口径改写为「脚本三档归位」（94→95 条）+ E-05/E-19 转正名 |
+| scripts/check_crop.py | W1002 | 转正：去 `_` 前缀（跨批裁切判据）+ 仓根硬编码改 `dirname(dirname(__file__))` |
+| scripts/check_plan_template.py | W1002 | import 与 docstring 改转正名 |
+| scripts/check_script_coverage.py | W1002 | 第 42 门禁新增 C4（历史批滞留必红 + 转正候选棘轮 8 件）+ 自测 6→9 例 |
+| scripts/ledger_mutation_test.py | W1002 | 转正：去 `_` 前缀（Makefile ledger 目标调用·W933 建） |
+| scripts/output/tools-inventory.md | W1002 | 重生成（152 件） |
+| scripts/plan_template_review.py | W1002 | 转正：去 `_` 前缀（第 48 门禁判据表·W857 建） |
+| scripts/plates_verify.py | W1002 | 转正：去 `_` 前缀（跨批素材判据 J1–J10·W945 建） |
+| tests/unit/test_script_hygiene.py | W1002 | C4 判据纯函数 + 转正件加载性 + 门禁自测端到端（5 例） |
+| .github/workflows/README.md | W1002 | 本批新增/修改 |
+| CHANGELOG.md | W1002 | 本批新增/修改 |
+| CITATION.cff | W1002 | 本批新增/修改 |
+| HANDOVER.md | W1002 | 本批新增/修改 |
+| README.md | W1002 | 本批新增/修改 |
+| STRUCTURE.md | W1002 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1002 | 滚动归档回窗（4 段/2 行迁出） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1002 | 滚动归档回窗（4 段/2 行迁出） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1002 | 滚动归档回窗（4 段/2 行迁出） |
+| archive/docs/file-index-ARCHIVE.md | W1002 | 滚动归档回窗（4 段/2 行迁出） |
+| archive/scripts/batches/README.md | W1002 | 一次性/批次脚本移入归档桶（三档归位） |
+| archive/scripts/batches/index.md | W1002 | 一次性/批次脚本移入归档桶（三档归位） |
+| archive/scripts/batches/w9xx/README.md | W1002 | 一次性/批次脚本移入归档桶（三档归位） |
+| archive/scripts/batches/w9xx/index.md | W1002 | 一次性/批次脚本移入归档桶（三档归位） |
+| docs/00-导读/W批次编号对账表.md | W1002 | 台账认领行 + 行归档回窗（W942-W943 迁出） |
+| docs/00-导读/项目说明.md | W1002 | 本批新增/修改 |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-27.md | W1002 | 取证脚本链接改归档路径（lint_links 活链校正） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1002 | 本批新增/修改 |
+| pytest.ini | W1002 | 本批新增/修改 |
+| scripts/index.md | W1002 | 目录索引重生成（scripts/ 根减 84 件） |
+| scripts/output/_cascade_files_W1002.txt | W1002 | 本批新增/修改 |
+| scripts/output/_vermilion_solid_cache.json | W1002 | 本批新增/修改 |
+| scripts/output/_w1002_spec.json | W1002 | 本批级联 spec |
+| scripts/output/file-index.md | W1002 | 本批新增/修改 |
+| scripts/output/stats-changelog.json | W1002 | 本批新增/修改 |
+| scripts/output/stats-index.md | W1002 | 本批新增/修改 |
+| scripts/output/stats.json | W1002 | C5d 实算对账刷新（--w W1002） |
+| site/data/cross-time-danmaku.html | W1002 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1002 | 本批新增/修改 |
+| site/dukou-engine.html | W1002 | 本批新增/修改 |
+| site/index.html | W1002 | 本批新增/修改 |
+| scripts/output/README.md | W1002 | 本批新增/修改 |
+| scripts/output/index.md | W1002 | 本批新增/修改 |
+| tests/unit/README.md | W1002 | 本批新增/修改 |
+| tests/unit/index.md | W1002 | 本批新增/修改 |
+
 ## W1001 回次 og:image 全覆盖批·第一轮试点（2026-10-28）
 
 | 文件 | W | 说明 |
@@ -3557,90 +3696,5 @@ docs/11-方案报告/README.md
 | scripts/_w885_index_revert.py | W885 | 新增：搜索索引他方在途条目回退器（逐条比对·源文件未入库者按 HEAD 版回退） |
 | scripts/output/_w885_spec.json | W885 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
 | docs/00-导读/W批次编号对账表.md | W885 | 认领行与收官回填 |
-
-
-## W884 Playwright 历史问题全谱审计（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/计划方案/T10-任务计划执行与经验沉淀报告-2026-10-22.md | W884 | Playwright 历史问题全谱审计报告（T-10·25 项 8 族·已修复 22 仍开放 3） |
-| docs/00-导读/W批次编号对账表.md | W884 | 认领行 + 收官回填 + 提交号补全 |
-| scripts/output/stats.json | W884 | report_docs 计数 46→47（连带 stats-changelog/stats-index/STRUCTURE 标记同步） |
-| docs/INDEX.md | W884 | 重建（737→738 篇·13 板块） |
-| site/data/search.html · site/en/search.html | W884 | 站内搜索索引刷新（+T-10 条目） |
-
-
-## W883 阶段 5 机检门禁批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_vermilion_solid.js | W883 | 新增：第 49 门禁朱砂实底限额（浏览器实测+豁免登记簿+增量缓存+自检 14 例） |
-| tests/unit/test_vermilion_solid.py | W883 | 新增：第 49 门禁单测（自检/纯逻辑/接线/范围 11 例） |
-| scripts/verify_delivery.py | W883 | 第 49 槽 StrictGate 接线（段名+scope+gate 定义） |
-| scripts/output/_w864_accent_exemptions.json | W883 | W883 分册 24 条（四类存量裁决·全簿 96 条） |
-| scripts/output/_vermilion_solid_cache.json | W883 | 新增：增量缓存（96 页 sha1+分类计数·随批入库） |
-| scripts/output/_vermilion_solid_report.json | W883 | 新增：门禁报告（每页实测/豁免/非豁免/状态） |
-| site/dashboard.html | W883 | .seal 徽章实底→淡底（v4 §3.2·与 W864 批 .seal 转换同模式） |
-| scripts/_w876_site_audit.py | W883 | fill 口径校正（≥3px/盒面积 → ≥2px/条带面积） |
-| scripts/output/_w876_site_audit_head.json | W883 | 校正复跑（HEAD 快照·fill 457/89 与原审计一致） |
-| scripts/output/_w876_site_audit_final.json | W883 | 校正复跑（终态·457/89） |
-| AGENTS.md | W883 | §4.2 48→49 槽 + 第 49 槽条目 + 组号范围 |
-| docs/agent/gates.md | W883 | 49 槽标题/速查表/第 49 槽完整定义 |
-| README.md STRUCTURE.md docs/00-导读/项目说明.md | W883 | 版本行与门禁计数（48→49） |
-| pytest.ini | W883 | collected 计数 823→834（+11 例） |
-| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W883 | gate_count 48→49 |
-| scripts/output/stats.json | W883 | 刷新（gate_count 49·2 键） |
-| site/data/search.html | W883 | 搜索索引刷新（gates.md 标题变更·CSP 重算） |
-| docs/00-导读/W批次编号对账表.md | W883 | 认领行与收官回填 + W877-W882 六行段状态翻转 + W877 豁免划销 |
-| CHANGELOG.md | W883 | W883 段 + W877-W882 六段按号序回补（174→180 段） |
-| scripts/output/file-index.md | W883 | 同批七段回写（174→180） |
-
-## W882 缺口第 4–6 项合并批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/post-01-wukong.webp | W882 | 新增：竖版海报 01/06·悟空（3:4 1200×1600·背身持棒·净空带 438px） |
-| site/static/images/post-02-tangseng.webp | W882 | 新增：竖版海报 02/06·唐僧（3:4·僧影锡杖背光·净空带 514px） |
-| site/static/images/post-03-bajie.webp | W882 | 新增：竖版海报 03/06·八戒（3:4·长耳钉耙虎纹裙·净空带 438px） |
-| site/static/images/post-04-shaseng.webp | W882 | 新增：竖版海报 04/06·沙僧（3:4·卷发深须宝杖·净空带 437px） |
-| site/static/images/post-05-bailongma.webp | W882 | 新增：竖版海报 05/06·白龙马（3:4·白马回首·朱砂鞍鞯·净空带 503px） |
-| site/static/images/post-06-changlu.webp | W882 | 新增：竖版海报 06/06·西行长路（3:4·远山长路·朱砂小旗·净空带 545px） |
-| site/static/images/chap-07.webp | W882 | 新增：百回母版 01/06·回 07 八卦炉（同一母版·丹炉火光·净空带 423px） |
-| site/static/images/chap-14.webp | W882 | 新增：百回母版 02/06·回 14 心猿归正（同一母版·断树猿影·净空带 376px） |
-| site/static/images/chap-15.webp | W882 | 新增：百回母版 03/06·回 15 蛇盘山（同一母版·蛇形长脊·净空带 384px） |
-| site/static/images/chap-23.webp | W882 | 新增：百回母版 04/06·回 23 试禅心（同一母版·寺门菩提·净空带 450px） |
-| site/static/images/chap-27.webp | W882 | 新增：百回母版 05/06·回 27 三打白骨精（同一母版·月下破寺白影·净空带 364px） |
-| site/static/images/chap-30.webp | W882 | 新增：百回母版 06/06·回 30 宝象国（同一母版·宫室屋脊白马·净空带 427px） |
-| site/static/images/viz-01-network.webp | W882 | 新增：可视化插画 01/04·网络图页（根须网·朱砂结点·640×640） |
-| site/static/images/viz-02-heatmap.webp | W882 | 新增：可视化插画 02/04·热力图页（疏密墨点阵·640×640） |
-| site/static/images/viz-03-radar.webp | W882 | 新增：可视化插画 03/04·雷达图页（放射线·朱砂端点·640×640） |
-| site/static/images/viz-04-timeline.webp | W882 | 新增：可视化插画 04/04·时间线页（纵向刻痕序列·640×640） |
-| scripts/output/_w882_spec.json | W882 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
-| docs/00-导读/W批次编号对账表.md | W882 | 认领行与收官回填 |
-
-
-## W881 人物补位素材批（2026-10-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/images/card-13-bajie-yuexia.webp | W881 | 新增：人物方图 13/24·八戒月下负囊（背身·长耳·赭金虎纹裙·净空带 349px） |
-| site/static/images/card-14-bajie-choupa.webp | W881 | 新增：人物方图 14/24·八戒持耙守关（九齿钉耙·朱砂缨·净空带 400px） |
-| site/static/images/card-15-bajie-zuoxie.webp | W881 | 新增：人物方图 15/24·八戒坐歇担前（杖横膝·朱砂结·净空带 395px·横贯硬线已程序化修复） |
-| site/static/images/card-16-bajie-yunzhong.webp | W881 | 新增：人物方图 16/24·八戒雨中奔行（斗笠遮面·湿笔雨丝·净空带 344px） |
-| site/static/images/card-17-bajie-denggao.webp | W881 | 新增：人物方图 17/24·八戒登高远眺（崖边背身·云海·朱砂小旗·净空带 249px） |
-| site/static/images/card-18-bajie-daodan.webp | W881 | 新增：人物方图 18/24·八戒挑担赶路（侧身·担挑双囊·净空带 401px） |
-| site/static/images/card-19-shaseng-dujiang.webp | W881 | 新增：人物方图 19/24·沙僧负杖渡江（卷发深须·降妖宝杖·朱砂佛珠·净空带 400px） |
-| site/static/images/card-20-shaseng-zhenshui.webp | W881 | 新增：人物方图 20/24·沙僧宝杖镇水（杖立水中·涟漪·净空带 301px） |
-| site/static/images/card-21-shaseng-shouye.webp | W881 | 新增：人物方图 21/24·沙僧守夜（石上独坐·孤灯光晕·净空带 407px） |
-| site/static/images/card-22-shaseng-fuzhong.webp | W881 | 新增：人物方图 22/24·沙僧负重前行（负囊登阶·雨中·净空带 300px） |
-| site/static/images/card-23-shixiong-bingli.webp | W881 | 新增：人物方图 23/24·师徒山径并肩（八戒在前挑担·沙僧持杖在后·朱砂小旗·净空带 341px） |
-| site/static/images/card-24-shixiong-shanmen.webp | W881 | 新增：人物方图 24/24·师徒山门前对峙（八戒持耙在前·沙僧持杖在后·朱砂门印·净空带 310px） |
-| site/static/images/og-03-bailongma.webp | W881 | 修：白龙马 OG 图的横贯硬线伪影（提示词字面化产物）·程序化渐变回填修复 |
-| site/static/img/og-cover-ink-en.jpg | W881 | 修：英文站 og:image 的横贯硬线伪影（该图即英文站每次分享的封面）·程序化渐变回填修复 |
-| site/static/img/og-cover-ink-en.png | W881 | 修：英文站 og:image 无损母版的横贯硬线伪影·程序化渐变回填修复 |
-| scripts/_w881_rule_line_scan.py | W881 | 新增：横贯硬线伪影检测器（按行暗像素占比 ≥65% 且邻行骤降判定·可复算） |
-| scripts/_w881_fix_rule_line.py | W881 | 新增：横贯硬线定点修复器（规则行块＋向下并入洗边暗行→逐列垂直渐变回填） |
-| scripts/output/_w881_spec.json | W881 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
-| docs/00-导读/W批次编号对账表.md | W881 | 认领行与收官回填 |
 
 

@@ -3,7 +3,7 @@
 
 判据：`docs/11-方案报告/计划方案/*.md` 对《任务计划、执行与经验沉淀系统提示词（AI Agent 专用版）》
 的结构符合性。判据表（32 项结构判据 + 件型分流 + 等效形式识别 + 自指/引文排除）复用
-`scripts/_w857_plan_template_review.py`，本脚本只做**增量判定**与**门禁协议**。
+`scripts/plan_template_review.py`（W857 建·W1002 转正去 `_` 前缀），本脚本只做**增量判定**与**门禁协议**。
 
 增量口径（避免存量 8 份不合规文档一上线即全红）：
   · 新增文件（HEAD 无此路径）：全部适用判据须符合 → 任一「不符合」判红；
@@ -22,7 +22,7 @@ import subprocess
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import _w857_plan_template_review as R  # noqa: E402
+import plan_template_review as R  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PLAN_REL = 'docs/11-方案报告/计划方案'

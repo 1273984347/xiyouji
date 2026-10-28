@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（46）
+## 文件（47）
 
 ### Python 脚本
 
@@ -48,6 +48,7 @@
 - `test_rag_fusion.py`
 - `test_release_prep.py`
 - `test_review_trigger.py`
+- `test_script_hygiene.py`
 - `test_security_scan.py`
 - `test_slice_screenshots.py`
 - `test_stats_sync.py`

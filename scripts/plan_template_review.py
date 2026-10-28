@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """_w857_plan_template_review.py — 计划方案对《任务计划、执行与经验沉淀系统提示词》模板的符合性复核探针
 
 用途：对 docs/11-方案报告/计划方案/ 下的 8 份文档，按模板（用户 2026-10-21 23:44 提供）
@@ -22,7 +21,6 @@
 一次性诊断件·不入 CI。
 """
 import argparse
-import io
 import json
 import os
 import re
@@ -112,7 +110,7 @@ QUOTE_HINT = ('模糊表述', '必须替换为', '模糊词替换', '替换为')
 
 
 def load(path):
-    return io.open(path, encoding='utf-8').read()
+    return open(path, encoding='utf-8').read()
 
 
 def in_table_row(line, token):
@@ -245,7 +243,7 @@ def review(path):
     res['banned'], res['banned_ctx'] = banned_hits(lines)
     res['banned_total'] = sum(res['banned'].values())
     # 章结论覆盖：统计 '## ' 级标题数 vs 结论标记数
-    h2 = len([l for l in lines if re.match(r'^##\s+\S', l)])
+    h2 = len([ln for ln in lines if re.match(r'^##\s+\S', ln)])
     res['chapters'] = {'h2': h2, 'conclusion_marks': text.count('本章结论'),
                        'pending_marks': text.count('待确认事项')}
     return res
@@ -310,7 +308,7 @@ def main():
                 it['item'], it['verdict'], it['ok'], it['need'], it['partial']))
 
     if args.json:
-        io.open(args.json, 'w', encoding='utf-8', newline='').write(
+        open(args.json, 'w', encoding='utf-8', newline='').write(
             json.dumps({'docs': results, 'pairs': pair_check(results)}, ensure_ascii=False, indent=1))
         print('\nJSON -> %s' % args.json)
     return 0

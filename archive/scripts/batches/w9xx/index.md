@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（155）
+## 文件（228）
 
 ### Python 脚本
 
@@ -121,6 +121,7 @@
 - `_w954_fileindex_backfill.py`
 - `_w954_ledger_backfill.py`
 - `_w954_register_surfaces.py`
+- `_w954_review_evidence.py`
 - `_w954_selfcheck.py`
 - `_w954_version_sync.py`
 - `_w955_ledger_claim.py`
@@ -164,10 +165,82 @@
 - `_w975_cascade.py`
 - `_w975_sink_experience.py`
 - `_w975_tweak.py`
+- `_w978_review_evidence.py`
+- `_w983_derive.py`
+- `_w983_download.py`
+- `_w983_insert_plates.py`
+- `_w983_make_prompts.py`
+- `_w983_make_spec.py`
+- `_w983_precheck_pages.py`
+- `_w983_prepare.py`
+- `_w983_retry.py`
+- `_w983_serve.py`
+- `_w983_sheet.py`
+- `_w983_zoom.py`
+- `_w984_derive.py`
+- `_w984_download.py`
+- `_w984_insert_plates.py`
+- `_w984_make_prompts.py`
+- `_w984_make_spec.py`
+- `_w984_precheck_pages.py`
+- `_w984_prepare.py`
+- `_w984_retry.py`
+- `_w984_serve.py`
+- `_w984_sheet.py`
+- `_w984_zoom.py`
+- `_w986_make_prompts.py`
+- `_w986_make_spec.py`
+- `_w987_family_scan.py`
+- `_w987_insert_scenes.py`
+- `_w987_make_spec.py`
+- `_w988_card_sheet.py`
 - `_w988_close.py`
+- `_w988_docs.py`
+- `_w988_fix_cascade.py`
+- `_w988_fix_eol.py`
+- `_w988_fix_gates.py`
+- `_w988_insert.py`
+- `_w988_inventory.py`
+- `_w988_make_assets.py`
+- `_w988_make_spec.py`
+- `_w988_match.py`
+- `_w988_pitfalls.py`
 - `_w988_pitfalls2.py`
+- `_w988_plan.py`
+- `_w988_precheck.py`
 - `_w988_record_adoption.py`
+- `_w988_sheet.py`
+- `_w988_subject.py`
 - `_w988_sync_87.py`
+- `_w988_verify.py`
+- `_w990_map.py`
+- `_w990_master.py`
+- `_w990_og_gap.py`
+- `_w990_pick.py`
+- `_w990_read.py`
+- `_w990_roster.py`
+- `_w990_split.py`
+- `_w999_closeout.py`
+- `_w999_crop_recheck.py`
+- `_w999_derive_prepare.py`
+- `_w999_diag.py`
+- `_w999_fix_t35.py`
+- `_w999_fix_wnum.py`
+- `_w999_insert.py`
+- `_w999_ledger_fill.py`
+- `_w999_make_spec.py`
+- `_w999_prepare.py`
+- `_w999_probe.py`
+- `_w999_probe_h1.py`
+- `_w999_rebuild_missing_og.py`
+- `_w999_redo.py`
+- `_w999_redo2.py`
+- `_w999_redo_map.py`
+- `_w999_register.py`
+- `_w999_renumber.py`
+- `_w999_sheet.py`
+- `_w999_sync_counts.py`
+- `_w999_verify.py`
 
 ### JavaScript / TypeScript
 
