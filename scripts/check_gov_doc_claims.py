@@ -127,7 +127,7 @@ def check():
         lines.append("N4 坑位数（pitfalls 实数 %d）：一致" % pn)
 
     # N5 新Agent启动Prompt 三个统计键
-    t = _read("新Agent启动Prompt.md")
+    t = _read("docs/00-导读/新Agent启动Prompt.md")
     pairs = [(r"内容板块（(\d+) 篇）", "a1_a6_docs"),
              (r"可视化页 (\d+)（", "visualization_pages"),
              (r"共 (\d+) 个 HTML", "site_data_html")]
