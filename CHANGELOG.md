@@ -1,3 +1,20 @@
+### W1006（2026-10-29）：防代提硬拦批（safe_commit --expect-spec）
+
+> **来源**：用户 2026-10-29 令「做」——承接 W1004 报告末句「要不要把 `--expect-spec` 硬拦也做了？那是唯一能真正止住第三次、第四次的改法」。当日已发生三次代提（W989 级联十四面 / W1002 审查 B3 / W1004 被 W1005 全量提交带走），纪律层已写「并行在场禁 `git add -A`」却仍复发 ⇒ 本轮把它变成硬拦。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/scripts/batches/w10xx/README.md、archive/scripts/batches/w10xx/_w1005_fix_c6.py、archive/scripts/batches/w10xx/_w1005_fix_head_sentence.py、archive/scripts/batches/w10xx/_w1005_fix_tail_sep.py、archive/scripts/batches/w10xx/_w1005_handover_line.py、archive/scripts/batches/w10xx/_w1005_heroes.py、archive/scripts/batches/w10xx/_w1005_patch_changelog_files.py、archive/scripts/batches/w10xx/_w1005_probe_asset_sizes.py、archive/scripts/batches/w10xx/_w1005_probe_cascade_line.py、archive/scripts/batches/w10xx/_w1005_probe_changelog_files.py、archive/scripts/batches/w10xx/_w1005_probe_faces.py、archive/scripts/batches/w10xx/_w1005_probe_head.py、archive/scripts/batches/w10xx/_w1005_probe_readme.py、archive/scripts/batches/w10xx/_w1005_render_flyer.py、archive/scripts/batches/w10xx/_w1005_serve.py、archive/scripts/batches/w10xx/_w1005_spec.py、archive/scripts/batches/w10xx/_w1005_sync_faces.py、archive/scripts/batches/w10xx/index.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/agent/pitfalls.md、scripts/_w1005_fix_c6.py、scripts/_w1005_fix_head_sentence.py、scripts/_w1005_fix_tail_sep.py、scripts/_w1005_handover_line.py、scripts/_w1005_heroes.py、scripts/_w1005_patch_changelog_files.py、scripts/_w1005_probe_asset_sizes.py、scripts/_w1005_probe_cascade_line.py、scripts/_w1005_probe_changelog_files.py、scripts/_w1005_probe_faces.py、scripts/_w1005_probe_head.py、scripts/_w1005_probe_readme.py、scripts/_w1005_render_flyer.py、scripts/_w1005_serve.py、scripts/_w1005_spec.py、scripts/_w1005_sync_faces.py、scripts/check_script_coverage.py、scripts/index.md、scripts/output/README.md、scripts/output/_cascade_files_W1006.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1006_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、scripts/safe_commit.py、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html、tests/unit/README.md、tests/unit/index.md、tests/unit/test_safe_commit_expect_spec.py。
+>
+**要点**：
+① `safe_commit.py` 新增 `--expect-spec <本批 spec>`：提交前取**索引态路径集**（`diff --cached` + `diff.renames=false` 取全集），与本批 spec 的 `file_index_rows` 求差；**出现 spec 之外的文件即拒绝**（列前 10 项 + 改法：`git restore --staged <路径>` 或补进 spec）；spec 为空 **fail-closed**；索引里缺 spec 声明的件只出 NOTE（可能已入库/无需改）。给 `--expect-spec` 时可省 pathspec。
+② 自测 4 → 8 例：子集放行 / 多出必拒 / 空 spec 拒 / 空索引只提示。
+③ 新增 `tests/unit/test_safe_commit_expect_spec.py` 7 例，含**临时仓端到端**：拦住 extra（提交数不变）与放行 subset（提交落地）——不是纯函数自证，是真跑 git。
+④ 口径入仓：pitfalls「并行会话工作树」条补硬拦段落（点明三次代提同一处方）；AGENTS §4.3 最高频铁则加「批次收官提交一律 `--expect-spec`」。
+⑤ 本批自身即 dogfood：收官提交用 `--expect-spec scripts/output/_w1006_spec.json`。
+
+**验证**：`safe_commit.py --self-test` 8/8 · `pytest tests/unit/test_safe_commit_expect_spec.py` 7 passed · 本批提交由 `--expect-spec` 校验通过（索引 ⊆ spec）· 全量 verify 核心全过。
+
+> - **状态**：已收官（代提从「纪律」升级为「提交前硬拦」；残留：他方在途件仍需各自登记）
+
 ### W1005（2026-10-29）：hero 水墨图人数修正（取经五人组·4 人形 + 1 匹白马）· 两张原地替换 + flyer A4 快照重渲染
 
 
@@ -77,7 +94,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1005），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1006），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

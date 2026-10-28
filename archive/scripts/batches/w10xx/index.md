@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（8）
+## 文件（24）
 
 ### Python 脚本
 
@@ -23,6 +23,22 @@
 - `_w1001_probe_faces.py`
 - `_w1001_restore_changelog_head.py`
 - `_w1001_stage.py`
+- `_w1005_fix_c6.py`
+- `_w1005_fix_head_sentence.py`
+- `_w1005_fix_tail_sep.py`
+- `_w1005_handover_line.py`
+- `_w1005_heroes.py`
+- `_w1005_patch_changelog_files.py`
+- `_w1005_probe_asset_sizes.py`
+- `_w1005_probe_cascade_line.py`
+- `_w1005_probe_changelog_files.py`
+- `_w1005_probe_faces.py`
+- `_w1005_probe_head.py`
+- `_w1005_probe_readme.py`
+- `_w1005_render_flyer.py`
+- `_w1005_serve.py`
+- `_w1005_spec.py`
+- `_w1005_sync_faces.py`
 
 ---
 

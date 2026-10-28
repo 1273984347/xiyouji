@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（49）
+## 文件（50）
 
 ### Python 脚本
 
@@ -50,6 +50,7 @@
 - `test_rag_fusion.py`
 - `test_release_prep.py`
 - `test_review_trigger.py`
+- `test_safe_commit_expect_spec.py`
 - `test_script_hygiene.py`
 - `test_security_scan.py`
 - `test_slice_screenshots.py`
