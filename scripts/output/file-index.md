@@ -11,6 +11,31 @@
 ---
 
 
+## W1008 回窗 + 触发器归档盲区批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1008 | 回窗 / 归档盲区修复 |
+| CHANGELOG.md | W1008 | 回窗 / 归档盲区修复 |
+| CITATION.cff | W1008 | 回窗 / 归档盲区修复 |
+| HANDOVER.md | W1008 | 回窗 / 归档盲区修复 |
+| README.md | W1008 | 回窗 / 归档盲区修复 |
+| STRUCTURE.md | W1008 | 回窗 / 归档盲区修复 |
+| .github/workflows/README.md | W1008 | 回窗 / 归档盲区修复 |
+| docs/00-导读/项目说明.md | W1008 | 回窗 / 归档盲区修复 |
+| docs/00-导读/W批次编号对账表.md | W1008 | 回窗 / 归档盲区修复 |
+| docs/agent/pitfalls.md | W1008 | 回窗 / 归档盲区修复 |
+| scripts/check_audit_trigger.py | W1008 | 回窗 / 归档盲区修复 |
+| tests/unit/test_audit_trigger.py | W1008 | 回窗 / 归档盲区修复 |
+| archive/docs/AGENTS-ARCHIVE.md | W1008 | 回窗 / 归档盲区修复 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1008 | 回窗 / 归档盲区修复 |
+| archive/docs/FILE-INDEX-ARCHIVE.md | W1008 | 回窗 / 归档盲区修复 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1008 | 回窗 / 归档盲区修复 |
+| scripts/output/file-index.md | W1008 | 回窗 / 归档盲区修复 |
+| scripts/output/tools-inventory.md | W1008 | 回窗 / 归档盲区修复 |
+| scripts/output/_w1008_spec.json | W1008 | 回窗 / 归档盲区修复 |
+| scripts/output/_cascade_files_W1008.txt | W1008 | 回窗 / 归档盲区修复 |
+
 ## W1007 提交范围门禁批（2026-10-29）
 
 | 文件 | W | 说明 |
@@ -3830,51 +3855,4 @@ docs/11-方案报告/README.md
 | `docs/11-方案报告/README.md` | W890 | 计划方案目录索引登记 |
 | `scripts/output/_w890_spec.json` | W890 | 本批级联 spec（10 键） |
 | `scripts/output/_cascade_files_W890.txt` | W890 | 本批级联落盘清单 |
-
-## W889 展示面复位批（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| `.github/README.md` → `.github/README-internal.md` | W889 | 目录导读改名让位——原名会抢占 GitHub 仓库主页展示位（优先级 `.github/` > 根目录 > `docs/`）·转人工维护件（去生成来源标记） |
-| `.github/index.md` | W889 | 目录清单刷新（文件 2→3 项·导读指针自适应指向 README-internal.md） |
-| `scripts/gen_folder_docs.py` | W889 | 新增「主页展示位保护」常量与判定（精确单文件排除·不排整个 .github 树）+ index.md 导读指针自适应 |
-| `scripts/check_folder_docs.py` | W889 | 第 45 门禁 C1 豁免与生成器同源（共用 gen.showcase_guarded） |
-| `scripts/check_doc_sync.py` | W889 | 第 31 门禁新增 C7 断言（根 README 在位时 .github/README.md 必须不存在·self-test 增至 26 例） |
-| `README.md` | W889 | 首屏整体重排 + 30 秒上手速览块 + 抬头四行降噪入开发者专区 |
-| `docs/11-方案报告/计划方案/T13-任务计划执行与经验沉淀报告-2026-10-23.md` | W889 | 本批框架交付物（计划 / 决策 / 验收 / 复盘） |
-| `docs/00-导读/W批次编号对账表.md` | W889 | W889 认领行登记（touches 12 项） |
-| `docs/11-方案报告/README.md` | W889 | 计划方案目录索引登记 |
-| `scripts/output/stats.json` | W889 | stats 实算刷新 |
-| `scripts/output/_w889_spec.json` | W889 | 本批级联 spec（10 键） |
-
-## W888 剩余素材接线批·两路（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/（83 页） | W888 | 路 A：viz 4 张浅底图接中文数据页卷末位（插入锚点在 `</main>` 之前·不触碰图表容器与正文） |
-| site/reader/（6 页：ch007/014/015/023/027/030） | W888 | 路 B：chap 1:1 百回母版接对应回目页页头（回目 H1 之后·配图位非封面位） |
-| site/system.css | W888 | `.viz-illustration` / `.chapter-plate` 规则源（与各页内联副本双写·file:// 下 CSP 拦外链样式表） |
-| scripts/build_reader.py | W888 | 生成器条件化（STYLE 常量 + CHAPTER_PLATES 映射 + `_render_one_page` 条件化插入） |
-| scripts/_w888_wire.py | W888 | 路 A 接线脚本（母题映射 + 内联副本补规则 + 暗色模式隐藏） |
-| scripts/_w888_chapter_plate.py | W888 | 路 B 母版接线脚本 |
-| scripts/_w888_index_revert.py | W888 | 索引回退脚本 |
-| scripts/output/_w888_spec.json | W888 | 本批级联 spec |
-| docs/11-方案报告/计划方案/T12-任务计划执行与经验沉淀报告-2026-10-23.md | W888 | 本批框架交付物（消费位侦察先行 + 四类不做留证） |
-| docs/11-方案报告/README.md | W888 | 计划方案目录索引登记 |
-
-## W887 en 迁移批 2·收口批（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/en/（110 页） | W887 | C 渠 126 条规则 + seal 淡底 110 页 + KPI 顶条规则 57 页 |
-| scripts/_w886_en_migrate.py | W887 | 批 6 合并定义（批 2-5 合一） |
-| scripts/output/_w886_en_audit_b6.json | W887 | 批 6 前置审计子集（C 809·实底 508） |
-| scripts/output/_w886_en_audit_b6_after.json | W887 | 批 6 迁移后审计（C 213·实底 313） |
-| scripts/output/_w887_needed.json | W887 | 待登记豁免清单（181 条·生成输入） |
-| scripts/output/_w864_accent_exemptions.json | W887 | W887 分册 181 条（语义 64/功能 61/首卡 56·全簿 302） |
-| scripts/check_vermilion_solid.js | W887 | scopePages 并入 en（范围 96→234 页） |
-| scripts/output/_vermilion_solid_cache.json | W887 | 缓存重建（234 页） |
-| docs/00-导读/W批次编号对账表.md | W887 | 认领行与收官回填 |
-| CHANGELOG.md | W887 | W887 段 |
-| scripts/output/file-index.md | W887 | 同批段回写 |
 

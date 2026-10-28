@@ -16,6 +16,9 @@ P1×2/P2×4——证明「写哨兵的人也需要被哨兵盯」。本触发器
     且 token **只在状态列认**（整行 grep 会被「描述 token 本身」的行命中·W1004 自伤实证）。
   · **max 而非文件序**：台账允许后补登记/让号（W931/W935），低号行可能排在末尾 ⇒
     取文件末条会把 gap 算错（实证：真实 24 批报 28 批）⇒ 取含 token 行的最大 W 号。
+  · **归档同扫**（W1008 补 I2）：台账行按 60 行窗滚动归档到
+    `archive/docs/W批次编号对账表-ARCHIVE.md` ⇒ 只读正本会让「审查行已归档」被误判成
+    「从未审查」（假警）。判据 = 正本 ∪ 归档 的 token 行取 max。
 
 只提示不拦截：exit 恒 0；派发动作 = 会话按 docs/agent/adversarial-audit-prompt.md
 模板派发 subagent，登记行须在**状态列**写 token「对抗审查已派发」才被本器认得。
@@ -35,6 +38,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import preflight_check as pf  # noqa: E402 — 复用台账路径与行解析
 
 THRESHOLD = 20
+ARCHIVE_LEDGER = os.path.join("archive", "docs", "W批次编号对账表-ARCHIVE.md")
 TOKEN = "对抗审查已派发"     # 事件 token（派发会话登记时写入认领行任意格）
 LEGACY_WORD = "对抗式审查"   # 泛词——只用于「疑似未打标」提示，不计为事件
 
@@ -66,10 +70,15 @@ def last_audit_batch(ledger_text):
     return max(token_ws) if token_ws else None
 
 
-def evaluate(ledger_text):
-    """→ (触发?, 提示行)。纯逻辑入口供单测。"""
+def evaluate(ledger_text, archive_text=""):
+    """→ (触发?, 提示行)。纯逻辑入口供单测。
+
+    archive_text：归档台账（行窗滚动迁出的旧行）——与正本合并后取 token max，
+    否则「审查行被归档」会退化成「从未审查」假警（W1008 I2）。
+    """
     max_w = pf.parse_ledger(ledger_text)["max_w"]
-    token_ws, legacy_ws = scan_rows(ledger_text)
+    merged = ledger_text + "\n" + (archive_text or "")
+    token_ws, legacy_ws = scan_rows(merged)
     last = max(token_ws) if token_ws else None
     suspect = sorted(w for w in legacy_ws if w not in token_ws)
     notes = []
@@ -95,7 +104,11 @@ def notice_lines():
         text = open(os.path.join(pf.ROOT, pf.LEDGER), encoding="utf-8", newline="").read()
     except OSError as e:
         return ["⚠ 对抗审查触发器不可读台账（%s）——fail-closed 按已触发处理" % e]
-    _, lines = evaluate(text)
+    try:
+        archived = open(os.path.join(pf.ROOT, ARCHIVE_LEDGER), encoding="utf-8", newline="").read()
+    except OSError:
+        archived = ""   # 归档缺失不阻断：正本判据仍成立，只是少了历史行
+    _, lines = evaluate(text, archived)
     return lines
 
 
@@ -157,6 +170,12 @@ def _self_test() -> int:
     if not ok6b:
         fails.append("T6b 主题列提及 token 不应计为派发（应触发）")
 
+    # T8（I2 回归）正本无 token、归档有 token → 不得退化成「从未审查」
+    ok8, lines8 = evaluate("| W1005 | 常规批 | a | b | 已收官 | s | x |",
+                           archive_text="| W990 | 常规批 | a | b | 已收官（对抗审查已派发） | s | y |")
+    if ok8 or not any("W990" in x and "未触发" in x for x in lines8):
+        fails.append("T8 归档 token 应被计入（应判「距上次 W990 未触发」·不得报「从未审查」）：%s" % lines8)
+
     # T7 当前批等于 token 批（gap 0）→ 不触发
     ok7, _ = evaluate("| W1005 | 常规批 | a | b | 已收官（对抗审查已派发） | s | x |")
     if ok7:
@@ -166,7 +185,7 @@ def _self_test() -> int:
     if fails:
         print("自测 %d 项不一致：%s" % (len(fails), fails))
         return 1
-    print("自测通过：阈值两侧/不可判定/散文豁免/B1 字样不重置/B2 取 max/疑似提示 七态（判据可证伪）")
+    print("自测通过：阈值两侧/不可判定/散文豁免/B1 字样不重置/B1b 主题列不算/B2 取 max/归档同扫/同批 八态（判据可证伪）")
     return 0
 
 

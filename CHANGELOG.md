@@ -1,3 +1,20 @@
+### W1008（2026-10-29）：回窗 + 触发器归档盲区批
+
+> **来源**：用户 2026-10-29 一句「然后呢」——W1005→W1007 三批连发后仓库进不了开工态：preflight 体积窗口 3 项红（CHANGELOG/file-index 112 段 > 110·台账 61 行 > 60）。先回窗，再把早先审查列的 I2 补掉。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/agent/pitfalls.md、scripts/check_audit_trigger.py、scripts/output/README.md、scripts/output/_cascade_files_W1008.txt、scripts/output/_w1008_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html、tests/unit/test_audit_trigger.py、tests/unit/test_check_script_coverage.py、tests/unit/test_script_hygiene.py。
+>
+**要点**：
+① **回窗**：`archive_segments.py --target both`（CHANGELOG / file-index 各迁出 3 段 W887-W889 至 archive）+ `archive_ledger_rows.py`（迁 2 行 W947-W948）⇒ 体积窗口 0 FAIL，恢复可开工。
+② **I2 归档盲区**（审查项遗留）：触发器只读正本台账，而台账行按 60 行窗滚动——审查行一旦被迁进 `archive/docs/W批次编号对账表-ARCHIVE.md`，判据就会把「已审查」读成「从未审查」（假警）。修法：判据读取面改成**正本 ∪ 归档**取 token max；归档缺失不阻断（正本判据仍成立）。
+③ **测试**：触发器 `--self-test` 7 → 8 态（T8 归档 token 计入）；单测加 `test_archive_ledger_token_counts`（现 10 例）。
+④ **口径入仓**：pitfalls「判据把字样当事件」条补「读取面＝正本 ∪ 归档」——判据读的**源**会滚动，这和判据读的**面**（字样/位置）是两件事。
+⑤ **全量回归抓到两处自过期测试**：`test_script_hygiene.py` 把门禁自测例数写死 `9/9`，W1006 加 T10 后变 10/10 ⇒ 假红。改为「满/缺对比」不写死例数——同型两处（`test_script_hygiene` 的 `9/9`、`test_check_script_coverage` 的 `6/6`）。**测试自己过期属假红族**，与「判据读空当无段」同一处方：断言不写死会随判据演进的计数。
+
+**验证**：`check_doc_size_budget` 0 FAIL · `check_audit_trigger --self-test` 8/8 · `pytest tests/unit/test_audit_trigger.py` 10 passed · 全量 pytest 回归通过 · 第 51 槽自判（归属 W1008·索引 ⊆ spec）· 全量 verify 核心全过。
+
+> - **状态**：已收官（回窗恢复开工态 + 触发器归档盲区补齐）
+
 ### W1007（2026-10-29）：提交范围门禁批（第 51 槽·索引 ⊆ 本批 spec）
 
 > **来源**：用户 2026-10-29 令「现在做」——W1006 收官时明写「硬拦只在走 `safe_commit` 时生效，`git commit` 直提绕得过；要彻底封死，得搬进 `verify_delivery.py`（加槽＝50→51 级联）」。本批就是那条级联。
@@ -111,7 +128,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1007），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1008），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1833,39 +1850,4 @@
 > - **验证**：pytest 全量 **831 passed / 3 skipped**（含 test_vermilion_solid 与 test_w851_j1_name_audit 与 test_tmpe_tidy 三处原红面）+ Pillow 13.0.0 下 `test_slice_screenshots` 12 例切片面全绿 + 第 33 门禁 head 内容链路读图正常 + `ruff check scripts/` All checks passed + pip-audit 0 漏洞 + 全量交付门禁 54 段核心全部通过。
 > - **状态**：本批已收官。
 > **状态**：**已收官**（W890 654a289c·git 反填·共 1 笔·W971 存量回填）
-
-### W889（2026-10-23）：展示面复位批（GitHub 主页载体 / 首屏 / 时间三层）
-
-> **来源**：用户 2026-10-23 三轮问答拍板——「那我的展示面怎么做呢」→ ① `.github/README.md` 改名 `README-internal.md` ② 推 dev 走 PR 合 main ③ 根 README 首屏整体重排 + 增补「30 秒上手」速览块。
-> - **根因**：GitHub 仓库主页 README 查找优先级为 `.github/` > 根目录 > `docs/`（抓线上渲染 HTML 实证：主页渲染的是 .github 目录导读而非项目门面）；而 `scripts/gen_folder_docs.py` 的排除规则「排除全部点开头顶层目录」唯独给 `.github` 开了例外（W779 批生成所致）→ 真实门面根 README 从未上主页。展示层另有时间错位：Pages 部署源为 main 分支 site/ 目录，而 main 停在 W794、展示落后开发 94 个批次。
-> - **文件**：.github/README.md（改名 .github/README-internal.md）、.github/index.md、scripts/gen_folder_docs.py、scripts/check_folder_docs.py、scripts/check_doc_sync.py、README.md、docs/11-方案报告/计划方案/T13-任务计划执行与经验沉淀报告-2026-10-23.md、ddocs/11-方案报告/README.md、scripts/output/stats.json、scripts/output/_w889_spec.json。
-> - **载体复位**：目录导读改名让位 + 生成器「主页展示位保护」精确单文件排除（只排该文件不排整个 .github 树·保住 workflows 索引刷新与级联面）+ 门禁 45 同源豁免（共用 gen.showcase_guarded）+ 第 31 门禁新增 C7 断言（根 README 在位时 .github/README.md 必须不存在·self-test 26/26）。
-> - **首屏重排**：抬头四行（阅读契约 / 当前批次 / 版本号说明 / 维护契约）降噪入开发者专区（版本行整行原样搬运·C1 门禁与 C6 形态检查与级联锚点三处实测仍命中）；首屏新序 = 30 秒上手 → 项目定位 → 在线体验 → 桌面版下载 → 目录导航。
-> - **元数据**：topics 10 个（digital-humanities / chinese-classics / visualization / data-visualization / d3js / threejs / nlp / static-site / javascript / python）+ description 改读者向 + contactLinks 重排（REST PATCH 的 contact_links 字段被 GitHub 忽略·响应 null 且值不变·留证待 UI 补）。
-> - **验证**：gen_folder_docs --refresh 后 .github/README.md 仍不存在且 .github/index.md 已刷新（342 件重写零漂移·仅 1 件 diff）；门禁 45 目录文档新鲜度 0 FAIL / 186 目录；第 31 门禁 self-test 26/26；全量交付门禁 0 FAIL；抓线上主页 HTML 复核展示位已让位。
-> - **状态**：本批已收官。
-> **状态**：**已收官**（W889 5b156543·git 反填·共 1 笔·W971 存量回填）
-
-### W888（2026-10-23）：剩余素材接线批·两路（viz 卷末插画 85 页 + 百回母版 6 个回目页）
-
-> **来源**：用户令「继续」（承接 W885 接线批后的 63 件未接线素材）。侦察先行再定范围——全站 `<img>` 213 处全属 W885 页头装饰插画、其余页面零配图；`aspect-ratio` 全站 0 命中、3:4 竖版容器 0 个、卡片网格 9 类全无图位、8 个根页首屏全是浅色纯文字带——71 件素材里能直接接的只有 10 件，故本批只接两路，其余四类逐条留证不做。
-> - **文件**：site/data/（83 页）、site/reader/（6 页）、site/system.css、scripts/build_reader.py、scripts/_w888_wire.py、scripts/_w888_chapter_plate.py、scripts/_w888_index_revert.py、scripts/output/_w888_spec.json、docs/11-方案报告/计划方案/T12-任务计划执行与经验沉淀报告-2026-10-23.md、docs/11-方案报告/README.md。
-> - **路 A**：viz 4 张（浅底 640×640）接中文数据页卷末位（85 页·其中 2 页随并行 W887 批 66641736 入库）；插入锚点在 `</main>` 之前、最后一个 section 之后（古籍卷末题跋位·不触碰图表容器与正文）；规则源与内联副本双写（file:// 下 CSP `style-src self` 拦外链样式表·页面样式实际只认内联副本）；暗色模式隐藏（浅底宣纸图贴暗底会成亮斑）。
-> - **路 B**：chap 6 张（1:1 百回母版）接对应回目页页头（ch007/014/015/023/027/030·插在回目 H1 之后·配图位非封面位）；改生成器 `scripts/build_reader.py` 条件化 + 精准注入 6 页——不跑全量重生成（实测 reader 622 页全量重生成漂移 132,812 行·且其处理范围含 site/en 138 页与在途批写面冲突）。
-> - **验证**：目标 6 页母版 markup 与规则段与生成器输出逐字节一致（剥离 INLINED CSS 块与 CSP meta 后残留仅 4 行 inline_css 空行留痕·非目标页残留差异集合与目标页同构）；第 48 槽 32/32 判据符合；模糊词 0 命中；门禁 54 段核心 0 FAIL；CSP 856 页 0 漂移；浏览器实拍两页通过。
-> - **本批三处自造 bug 被自身探针抓出并全部修复**：注入代码的「字符串内换行」误写真换行（`py_compile` 当场拦下·未落到任何页面）；生成器输出的图片相对路径少一层 `../`（逐字节对拍抓出·注入是对的、生成器是错的）；注入端与生成器端 CSS 规则注释措辞不一致（同批抓出·会在全量重生成时造成一次无意义漂移）。另踩行尾不匹配——`scripts/build_reader.py` 是 CRLF 而 `site/` 产物全 LF，脚本改为按目标文件字节判定行尾并自适应构造锚点。
-> - **状态**：已收官（提交 3f04aaa3·内容批 97 文件 +2619/−5）。
-> **状态**：**已收官**（W888 76d3adba·git 反填·共 2 笔·W971 存量回填）
-
-
-### W887（2026-10-23）：en 迁移批 2·收口批（110 页合并四批·第 49 槽范围扩至全 en 138 页）
-
-> **来源**：用户令「合成一批做完，别拖」。W887 = ④ 剩余四批（core 28-56 · core 余 20 + character 12 · myth 14 · essay 36）合并为一批一次做完。
-> - **文件**：site/en/（110 页）、scripts/_w886_en_migrate.py（批 6 合并定义）、scripts/output/_w886_en_audit_b6.json、scripts/output/_w886_en_audit_b6_after.json、scripts/output/_w887_needed.json、scripts/output/_w864_accent_exemptions.json（W887 分册 181 条·全簿 302）、scripts/check_vermilion_solid.js（scope 扩 en）、scripts/output/_vermilion_solid_cache.json、scripts/output/_vermilion_solid_report.json、dCscripts/output/file-index.md。
-> - **迁移**：C 渠规则级换色 **126 条规则 / 48 页**（复用换色器 + 批审计子集）；`.seal` 实底→淡底 **110 页**；KPI 顶条按行收敛规则 **+57 页**（同排首卡保顶条）。
-> - **四类口径豁免 181 条**（W887 分册·全簿 302）：数据语义色片 64 / 功能交互实底 61（含 en 专有 `a.nav-back` 返回导航 ×46·zh 页无此组件·样式统一候选另批）/ KPI 首卡顶条 56。
-> - **第 49 槽范围收口**：`scopePages` 并入 site/en/*.html → 门禁范围 96→**234 页**（全 en 138 + zh 96）；en 豁免由 W886/W887 两分册承接；缓存随批重建（增量恢复秒级）。
-> - **验收**：W887 110 页实底 **508→313（−195）**·C 渠 **809→213（−596）**；en 138 页迁移后合计实底 518（原 767）·C 渠残留 251（原 1,084·与 zh 253 同族·JS 内联样式类）；**全 en 138 页非豁免全部 ≤3**（第 49 槽 judgePage 同款判据逐页实算）+ 门禁全量 234 页 0 FAIL + 自检 14/14。
-> - **A 渠欠账（如实记账）**：en 页容器字面量 164 处（1320px/1536px/1024px）与 D 渠间距令牌化未在本批范围（属 v4 §6 四渠道迁移的 A/D 两道·另批）。
-> **状态**：**已收官**（W887 14366f23·git 反填·共 2 笔·W971 存量回填）
 
