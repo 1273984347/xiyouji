@@ -79,6 +79,14 @@ def test_token_in_topic_cell_does_not_count():
     assert ok is True
 
 
+def test_archive_ledger_token_counts():
+    """I2 回归（W1008）：审查行被行窗归档后，判据仍要从归档台账认得它——不得退化成「从未审查」。"""
+    ok, lines = cat.evaluate("| W1005 | 常规批 | a | b | 已收官 | s | x |",
+                             archive_text="| W990 | 常规批 | a | b | 已收官（%s） | s | y |" % TOKEN)
+    assert ok is False, lines
+    assert any("W990" in x and "未触发" in x for x in lines), lines
+
+
 def test_self_test_cli_passes():
     import subprocess
     r = subprocess.run([sys.executable, str(SCRIPTS_DIR / "check_audit_trigger.py"), "--self-test"],

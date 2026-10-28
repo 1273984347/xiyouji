@@ -66,8 +66,14 @@ def test_w1003_promoted_js_present():
 
 
 def test_script_coverage_self_test_passes():
-    """门禁自测 9 例全过（含 C1–C4 负样本）——放进 pytest 才进 CI。"""
+    """门禁自测全过（含 C1–C4 负样本）——放进 pytest 才进 CI。
+
+    断言不写死例数（W1008 修正）：满/缺对比，新增用例不会造成假红——原写 "9/9" 在 C4 加 T10 后
+    变 10/10 就红了，属于「测试自己过期」型假红。
+    """
+    import re
     r = subprocess.run([sys.executable, str(SCRIPTS_DIR / "check_script_coverage.py"), "--self-test"],
                        capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120)
     assert r.returncode == 0, r.stdout + r.stderr
-    assert "9/9 通过" in r.stdout
+    m = re.search(r"(\d+)/(\d+) 通过", r.stdout)
+    assert m and m.group(1) == m.group(2), r.stdout[-300:]
