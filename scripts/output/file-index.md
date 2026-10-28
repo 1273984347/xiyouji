@@ -83,47 +83,60 @@
 
 | 文件 | W | 说明 |
 |---|---|---|
-| .github/workflows/README.md | W1004 | 本批新增/修改 |
-| AGENTS.md | W1004 | §4.3 坑位计数与主题视图同步（97 条） |
-| CHANGELOG.md | W1004 | 本段 |
-| CITATION.cff | W1004 | 本批新增/修改 |
-| DESIGN.md | W1004 | 转正件改名引用 |
-| HANDOVER.md | W1004 | 本批新增/修改 |
-| README.md | W1004 | 本批新增/修改 |
-| STRUCTURE.md | W1004 | 本批新增/修改 |
-| archive/docs/AGENTS-ARCHIVE.md | W1004 | 本批新增/修改 |
-| docs/00-导读/W批次编号对账表.md | W1004 | W1003 认领行 + W998 行按 CHANGELOG 修正并补事件 token（B4） |
-| docs/00-导读/项目说明.md | W1004 | 本批新增/修改 |
-| docs/agent/adversarial-audit-prompt.md | W1004 | 派发模板：登记行必须写事件 token |
-| docs/agent/gates.md | W1004 | 转正件改名引用 |
-| docs/agent/pitfalls.md | W1004 | 坑表 +2 条（字样≠事件/记教训必落仓内载体）·95→97 |
-| scripts/accent_audit.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
-| scripts/check_audit_trigger.py | W1004 | B1 事件 token + B2 取 max + 七态自测（原四态） |
-| scripts/check_emoji_icons.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
-| scripts/check_page_admission.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
-| scripts/check_script_coverage.py | W1004 | C4 配额 8 → 0（W977 硬保留全部转正） |
-| scripts/check_vermilion_solid.js | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
-| scripts/file_protocol_probe.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
-| scripts/icon_probe.js | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
-| scripts/j1_name_audit.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
-| scripts/output/_cascade_files_W1003.txt | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
-| scripts/output/_w1003_spec.json | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
-| scripts/output/file-index.md | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
-| scripts/refresh_icon_paths.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
-| scripts/scan_targets.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
-| scripts/site_audit.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
-| scripts/visual_regression_probe.py | W1004 | 转正（去 `_wNNN_` 前缀）或引用改名 |
-| site/data/cross-time-danmaku.html | W1004 | 本批新增/修改 |
-| site/data/tag-cloud.html | W1004 | 本批新增/修改 |
-| site/dukou-engine.html | W1004 | 本批新增/修改 |
-| site/index.html | W1004 | 本批新增/修改 |
-| tests/unit/test_audit_trigger.py | W1004 | 触发器单测 8 例（含 B1/B2 回归）——补齐 W1000 台账声明过的幽灵文件 |
-| tests/unit/test_script_hygiene.py | W1004 | 补 W1003 转正件可加载性 + 配额=0 断言 |
-| tests/unit/test_w851_j1_name_audit.py | W1004 | 引用改名 |
-| tests/unit/test_w851_visual_regression_probe.py | W1004 | 引用改名 |
-| xiyouji-agent-web/e2e/chat.e2e.mjs | W1004 | 本批新增/修改 |
-| xiyouji-agent-web/package-lock.json | W1004 | 本批新增/修改 |
-| xiyouji-agent-web/package.json | W1004 | 本批新增/修改 |
+| .github/workflows/README.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| AGENTS.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| CHANGELOG.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| CITATION.cff | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| DESIGN.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| HANDOVER.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| README.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| STRUCTURE.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/README.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/docs/AGENTS-ARCHIVE.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/docs/file-index-ARCHIVE.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/scripts/batches/w9xx/README.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| archive/scripts/batches/w9xx/index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| assets/promo/hero-set/raw/index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| assets/promo/hero-set/raw/round-w1005/README.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| assets/promo/hero-set/raw/round-w1005/hero-01-xihai-yunhai.jpg | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| assets/promo/hero-set/raw/round-w1005/index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| assets/promo/hero-set/raw/round-w1005/ink-mountains-hero.jpg | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| docs/00-导读/W批次编号对账表.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| docs/00-导读/项目说明.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| docs/agent/adversarial-audit-prompt.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| docs/agent/gates.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| docs/agent/pitfalls.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/AD_认知心理/index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/accent_audit.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_audit_trigger.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_crop.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_emoji_icons.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_page_admission.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_script_coverage.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/check_vermilion_solid.js | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/file_protocol_probe.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/icon_probe.js | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/j1_name_audit.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/_cascade_files_W1003.txt | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/_vermilion_solid_cache.json | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/_w1003_spec.json | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/_w1004_spec.json | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/file-index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/stats-changelog.json | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/stats-index.md | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/output/stats.json | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/refresh_icon_paths.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/scan_targets.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/site_audit.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/subject_band.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| scripts/visual_regression_probe.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| tests/unit/test_audit_trigger.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| tests/unit/test_script_hygiene.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| tests/unit/test_w851_j1_name_audit.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
+| tests/unit/test_w851_visual_regression_probe.py | W1004 | 本批新增/修改（09146cf1 代提入库·收口补登） |
 
 ## W1003 agent-web chat 集成验证与死重清退批（2026-10-29）
 

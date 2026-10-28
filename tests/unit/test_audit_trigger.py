@@ -20,10 +20,11 @@ TOKEN = cat.TOKEN
 
 
 def ledger(token_at=None, start=1001, upto=1021, extra=()):
+    """token 只写在**状态列**（第 5 格）——W1004 起的位置判定。"""
     rows = []
     for w in range(start, upto + 1):
-        body = "对抗审查已派发（subagent·P1 清偿）" if w == token_at else "常规批"
-        rows.append("| W%d | %s | a | b | 已收官 | s | x |" % (w, body))
+        status = "已收官（对抗审查已派发·subagent 派发）" if w == token_at else "已收官"
+        rows.append("| W%d | 常规批 | a | b | %s | s | x |" % (w, status))
     rows.extend(extra)
     return "\n".join(rows)
 
@@ -52,7 +53,7 @@ def test_prose_mention_not_counted():
 
 def test_b1_generic_word_does_not_reset_clock():
     """B1 回归：41 批未派发 + 末行只提泛词 → 仍触发，且给出「疑似未打标」提示。"""
-    text = ledger(upto=1040, extra=["| W1041 | 修 W998 对抗式审查遗留问题 | a | b | 已收官 | s | q |"])
+    text = ledger(upto=1040, extra=["| W1041 | 修 W998 遗留问题 | a | b | 已收官（对抗式审查修复批·未打 token） | s | q |"])
     ok, lines = cat.evaluate(text)
     assert ok is True
     assert any("疑似未打标" in x for x in lines)
@@ -61,15 +62,21 @@ def test_b1_generic_word_does_not_reset_clock():
 def test_b2_backfilled_lower_row_does_not_shift_last():
     """B2 回归：末尾补登记低号 token 行 → last 取 max（W1000），gap 报 24 而非 28。"""
     text = ledger(token_at=1000, start=1000, upto=1024,
-                  extra=["| W996 | 补登记：%s（欠账补齐） | a | b | 已收官 | s | z |" % TOKEN])
+                  extra=["| W996 | 补登记（欠账补齐） | a | b | 已收官（%s） | s | z |" % TOKEN])
     ok, lines = cat.evaluate(text)
     assert ok is True
     assert any("W1000" in x and "24 批" in x for x in lines), lines
 
 
 def test_same_batch_no_trigger():
-    ok, _ = cat.evaluate("| W1005 | %s | a | b | 已收官 | s | x |" % TOKEN)
+    ok, _ = cat.evaluate("| W1005 | 常规批 | a | b | 已收官（%s） | s | x |" % TOKEN)
     assert ok is False
+
+
+def test_token_in_topic_cell_does_not_count():
+    """W1004 自伤回归：主题/摘要列写 token（如台账行描述本机制）不得判为一次派发。"""
+    ok, _ = cat.evaluate("| W1005 | 触发器改认事件 token「%s」 | a | b | 已收官 | s | x |" % TOKEN)
+    assert ok is True
 
 
 def test_self_test_cli_passes():
