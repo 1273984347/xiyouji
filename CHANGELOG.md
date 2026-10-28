@@ -1,3 +1,19 @@
+### W1005（2026-10-29）：hero 水墨图人数修正（取经五人组·4 人形 + 1 匹白马）· 两张原地替换 + flyer A4 快照重渲染
+
+
+
+> **来源**：用户 2026-10-29 指出 `site/static/images/ink-mountains-hero.webp`「内容不符合西游记·为什么有七个人」→ 问卷裁定人物口径＝取经五人组（4 人形 + 1 匹白马）、范围＝两张一并修。
+>
+> **根因**：W852 批 hero-set 01/06 档案即明写「山脊云海+**七人单行**」⇒ 人数错误源自 W852 批，W879 批原地替换该图时沿用了同一错误 ⇒ 两张同族图都是错的。
+>
+> - **文件**："archive/docs/W\346\211\271\346\254\241\347\274\226\345\217\267\345\257\271\350\264\246\350\241\250-ARCHIVE.md"、"docs/00-\345\257\274\350\257\273/\351\241\271\347\233\256\350\257\264\346\230\216.md"、"docs/11-\346\226\271\346\241\210\346\212\245\345\221\212/\350\256\276\350\256\241\344\270\216\346\236\266\346\236\204\346\226\271\346\241\210/\347\263\273\347\273\237\346\236\266\346\236\204\346\226\271\346\241\210v2-\347\233\256\346\240\207\346\200\201\344\270\216\350\220\275\345\234\260\350\267\257\347\272\277-2026-10-25.md"、DESIGN.md、archive/README.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/scripts/batches/w9xx/README.md、archive/scripts/batches/w9xx/index.md、assets/promo/hero-set/raw/index.md、assets/promo/hero-set/raw/round-w1005/README.md、assets/promo/hero-set/raw/round-w1005/hero-01-xihai-yunhai.jpg、assets/promo/hero-set/raw/round-w1005/index.md、assets/promo/hero-set/raw/round-w1005/ink-mountains-hero.jpg、assets/promo/output/xiyouji-flyer-a4-en-front.png、assets/promo/output/xiyouji-flyer-a4-front.png、docs/agent/adversarial-audit-prompt.md、docs/agent/gates.md、docs/agent/pitfalls.md、pytest.ini、scripts/_w1005_fix_c6.py、scripts/_w1005_fix_head_sentence.py、scripts/_w1005_handover_line.py、scripts/_w1005_heroes.py、scripts/_w1005_probe_faces.py、scripts/_w1005_probe_head.py、scripts/_w1005_probe_readme.py、scripts/_w1005_render_flyer.py、scripts/_w1005_serve.py、scripts/_w1005_spec.py、scripts/_w1005_sync_faces.py、scripts/accent_audit.py、scripts/check_audit_trigger.py、scripts/check_crop.py、scripts/check_emoji_icons.py、scripts/check_page_admission.py、scripts/check_script_coverage.py、scripts/check_vermilion_solid.js、scripts/file_protocol_probe.py、scripts/icon_probe.js、scripts/index.md、scripts/j1_name_audit.py、scripts/output/README.md、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1004_spec.json、scripts/output/_w1005_batch.json、scripts/output/_w1005_heroes.json、scripts/output/_w1005_map.json、scripts/output/_w1005_spec.json、scripts/output/tools-inventory.md、scripts/refresh_icon_paths.py、scripts/scan_targets.py、scripts/site_audit.py、scripts/subject_band.py、scripts/visual_regression_probe.py、site/static/images/hero-01-xihai-yunhai.webp、site/static/images/ink-mountains-hero.webp、tests/unit/README.md、tests/unit/index.md、tests/unit/test_audit_trigger.py、tests/unit/test_script_hygiene.py、tests/unit/test_w851_j1_name_audit.py、tests/unit/test_w851_visual_regression_probe.py、docs/11-方案报告/计划方案/T36-任务计划执行与经验沉淀报告-2026-10-29.md、scripts/_w1005_fix_tail_sep.py、scripts/_w1005_probe_asset_sizes.py、scripts/_w1005_probe_cascade_line.py、scripts/_w1005_probe_changelog_files.py、scripts/_w1005_patch_changelog_files.py、scripts/check_cascade_line_anchor.py、tests/unit/test_cascade_line_anchor.py。
+
+**本批要点**：① **两张原地替换**（同文件名同尺寸 ⇒ 848 个 .hero 页面零页面改动）——`ink-mountains-hero.webp`（1792×1024·深底 soft-light 合成底图）与 `hero-01-xihai-yunhai.webp`（2560×1440·宣传单页配图）均改为 **4 人形 + 1 匹白马**（唐僧·悟空·八戒·沙僧 + 白龙马）；② **README 三张图同步**——主视觉 banner 引用同一路径故自动更新；`assets/images/index-preview.png` 因首页不使用 .hero 不受影响；**flyer A4 正面 PNG 是静态渲染快照不会自动更新 ⇒ 本批用 Playwright 重渲染**（中英各一·1240×1756 单页 clip）；③ **队伍落位须避开下边缘**——.hero 用 `background-position: center 70%`，首版队伍贴画面下缘 ⇒ 合成后被裁出只剩孤马，prompt 追加「队伍位于山脊中部（垂直 45%–60%）·裁切后仍须完整可见」；④ **显影度**（soft-light 叠 #221D16 后亮度跨度）= 0.2192（W879 批门槛 ≥0.07）；⑤ **人数只能人眼硬关**——「深墨小簇计数」判据不可用（山水皴笔碎点被计入：67/20），人眼核对两张均 4 人形 + 1 匹白马；⑥ **代并行 W1004 结清 5 处版本面欠账**（CHANGELOG 编号规则 / workflows README 头部 / HANDOVER 当前 HEAD 句 / HANDOVER §一 链首 / 项目说明版本行 desc 的「·」）⇒ 消解门禁 5 处红。
+
+**验证**：母版判据与裁切验算沿用 W1001 批口径（88/88 PASS）· 显影度 0.2192 · 单件 117.6 / 83.6 KB · 人眼核对 2/2（4 人形 + 1 匹白马）· 浏览器实跑（data 页 .hero 深底合成·队伍剪影完整可见）· flyer PNG 重渲染后尺寸 1240×1756 与原产物一致 · 全量门禁 55/55 段全绿。
+
+> - **状态**：已收官（两张原地替换 + flyer 快照重渲染 + 版本面欠账代清偿；坑表 +3 条（E-32/E-33/E-34）与 T36 终稿报告已同批补齐·台账状态在本笔回填）
+
 ### W1004（2026-10-29）：转正清零 + 审查触发器判据修正批（B1 字样≠事件 / B2 max / B4 台账归位）
 
 > **来源**：用户 2026-10-29 三令收口——①「8 件转正清零」②「B1/B2/B4 开始做」③「只写进你自己的记忆文件和工作日志没用，这个项目是多 Agent 共同协作的项目，还是会再次出现同样错误」。第三令是本批的纲：教训的**权威载体是仓内坑表**，私有记忆只作镜像（铁律 14 / CLAUDE 第 12 条早已写明，W1002 却把审查结论只写进 `.workbuddy/memory/`）⇒ 本批把结论与判据一起落进仓。
@@ -61,7 +77,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1004），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1005），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

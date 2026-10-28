@@ -4,17 +4,18 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-29 05:07
+生成时间：2026-10-29 05:40
 
-共 **163** 件（门禁与校验 67 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 58 · 一次性（下划线前缀） 16）
+共 **170** 件（门禁与校验 68 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 58 · 一次性（下划线前缀） 22）
 
-## 门禁与校验（67）
+## 门禁与校验（68）
 
 | 脚本 | 用途 |
 |:---|:---|
 | `check_agents_layers.py` | AGENTS 分层完整性门禁（第 41 槽 · W709）——L1 摘要层与 L2 主题层的结构防线。 |
 | `check_archive_health.py` | check_archive_health.py — 归档区健康探针（W994 建·报告型 exit 0）。 |
 | `check_audit_trigger.py` | check_audit_trigger.py — 对抗式审查触发器（W1000 建·与复盘触发器同族的第三哨）。 |
+| `check_cascade_line_anchor.py` | check_cascade_line_anchor.py — 级联三文档面「行锚定」不变量自证（跨批复用判据 · W1005 建） |
 | `check_chapter_stats_sync.py` | check_chapter_stats_sync.py — chapter_stats 双源同步校验（S-24 家族化首对·W699）。 |
 | `check_chart_colorblind.py` | check_chart_colorblind.py — 第 29 门禁 · 图表配色色盲安全（PD-1a · W653） |
 | `check_chart_data.py` | check_chart_data.py — 图表静态自洽门禁（W551 挂载·verify_delivery 第 24 门禁）。 |
@@ -185,7 +186,7 @@
 | `visual_regression_probe.py` | visual_regression_probe.py — J2 视觉回归探针（W851 建·设计迁移阶段 1 验收件） |
 | `worktree_rehearse.py` | worktree_rehearse.py — worktree 预演法工具化（W701·S-26·用户圈选开工）。 |
 
-## 一次性（下划线前缀）（16）
+## 一次性（下划线前缀）（22）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -197,11 +198,17 @@
 | `_gen_search_index.py` | W594：标题关键词数组（中文 jieba 切词、英文按词干拆分），供前端 +4 加权，≤12 个。 |
 | `_w1005_fix_c6.py` | _w1005_fix_c6.py — 修 C6：项目说明.md 两处版本行的 desc 含「·」 |
 | `_w1005_fix_head_sentence.py` | _w1005_fix_head_sentence.py — 修 HANDOVER 的「当前 HEAD = W###」句（治理契约判据 C4） |
+| `_w1005_fix_tail_sep.py` | _w1005_fix_tail_sep.py — F2：恢复项目说明.md 头部版本行的**结构性尾缀**分隔符「·」 |
 | `_w1005_handover_line.py` | _w1005_handover_line.py — 代并行 W1004 补 HANDOVER §一 里程碑链首行 |
 | `_w1005_heroes.py` | _w1005_heroes.py — W1005：两张 hero 水墨图重出（人数修正为「4 人形 + 1 匹白马」） |
+| `_w1005_patch_changelog_files.py` | _w1005_patch_changelog_files.py — W1005 段「**文件**」行定向订正（补本批新增件） |
+| `_w1005_probe_asset_sizes.py` | _w1005_probe_asset_sizes.py — W1005 终稿报告用的资产实测（尺寸/字节/页面口径） |
+| `_w1005_probe_cascade_line.py` | _w1005_probe_cascade_line.py — 探针：级联 _face_three_docs 第二个正则（项目说明「当前版本」列表 |
+| `_w1005_probe_changelog_files.py` | _w1005_probe_changelog_files.py — 解码 CHANGELOG W1005 段的「**文件**」行并核对提交树存在 |
 | `_w1005_probe_faces.py` | — |
 | `_w1005_probe_head.py` | — |
 | `_w1005_probe_readme.py` | — |
 | `_w1005_render_flyer.py` | _w1005_render_flyer.py — 重渲染宣传单页 A4 正面 PNG（中英各一） |
 | `_w1005_serve.py` | _w1005_serve.py — W1005 本地验收静态服务（webp/js/css MIME + no-store） |
+| `_w1005_spec.py` | _w1005_spec.py — W1005 级联 spec 生成（CHANGELOG 段 + 14 面版本面推进） |
 | `_w1005_sync_faces.py` | _w1005_sync_faces.py — 补并行 W1004 批的版本面欠账（2 处）+ 定位 HANDOVER HEAD 行 |
