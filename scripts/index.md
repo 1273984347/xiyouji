@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（227）
+## 文件（239）
 
 ### Markdown 文档
 
@@ -63,6 +63,14 @@
 - `_check_pipeline_consistency.py`
 - `_cite_probe.py`
 - `_gen_search_index.py`
+- `_w1001_clean_locks.py`
+- `_w1001_final.py`
+- `_w1001_finish_faces.py`
+- `_w1001_fix_index.py`
+- `_w1001_fix_rule_anchor.py`
+- `_w1001_probe_faces.py`
+- `_w1001_restore_changelog_head.py`
+- `_w1001_stage.py`
 - `_w818_file_protocol_probe.py`
 - `_w851_j1_name_audit.py`
 - `_w851_visual_regression_probe.py`
@@ -126,11 +134,14 @@
 - `_w990_read.py`
 - `_w990_roster.py`
 - `_w990_split.py`
+- `_w999_closeout.py`
 - `_w999_crop_recheck.py`
 - `_w999_derive_prepare.py`
 - `_w999_diag.py`
 - `_w999_fix_t35.py`
+- `_w999_fix_wnum.py`
 - `_w999_insert.py`
+- `_w999_ledger_fill.py`
 - `_w999_make_spec.py`
 - `_w999_prepare.py`
 - `_w999_probe.py`
@@ -140,6 +151,7 @@
 - `_w999_redo2.py`
 - `_w999_redo_map.py`
 - `_w999_register.py`
+- `_w999_renumber.py`
 - `_w999_sheet.py`
 - `_w999_sync_counts.py`
 - `_w999_verify.py`
