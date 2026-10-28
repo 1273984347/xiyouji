@@ -1,6 +1,6 @@
 # AGENTS.md — 《详解西游记》项目 Agent 指南
 
-> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 50 槽门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
+> **📖 阅读契约（W707）**：索引型——不要线性通读。先跑 `python scripts/agent_start.py --task` 拿「本次任务相关」清单按需读节；§4.2 全 51 槽门禁与 §4.3 全部坑位属按需查表（L2 已拆分落地：docs/agent/gates.md · pitfalls.md · agent-web.md·W709）；§1-§3/§6 铁律/§7 必读。
 >
 > 本文件面向进入本仓库工作的 AI Agent（及新接手的人类维护者），提供项目的用途、技术栈、目录结构、关键模块、依赖关系、构建运行方式与必须遵守的铁律。动手前按 §7 路径按需读节；更细的规则以文末「权威文档」为准。
 >
@@ -103,9 +103,9 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 
 ### 4.2 交付门禁体系（verify_delivery.py，pre-commit 强制 · 摘要层）
 
-> **📖 阅读契约（W709）**：索引型——本节=50 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
+> **📖 阅读契约（W709）**：索引型——本节=51 槽摘要；完整定义（口径/豁免/历史实证）→ [docs/agent/gates.md](docs/agent/gates.md)；失败排查时按编号查 gates.md。
 
-verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 50 槽，五组：
+verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本·W698 起本地传 `--scope auto` 分级，CI 与批收尾恒全量，核心 FAIL 返回非 0 阻断）。内含 51 槽，五组：
 
 **内容与同步类（1-5）**：
 1. **六文档同步**
@@ -166,6 +166,7 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 48. **计划方案合规槽**（check_plan_template.py·W860·增量口径·只判本次变更引入的新缺项）
 49. **朱砂实底限额**（check_vermilion_solid.js·W883·v4 规格 §3.2 阶段 5 落地·浏览器计算样式实测·每页非豁免 >3 处 FAIL·豁免读 _w864_accent_exemptions.json·增量缓存按页 hash）
 50. **GSAP 动效写法槽**（check_gsap_motion.py·W961·site/static/js/ 自有 JS 动效判据——时长 ≤600ms/缓动白名单/禁大角度旋转与无限循环/只动 transform+opacity·J2 宪法级禁词不可豁免）
+51. **提交范围槽**（check_commit_scope.py·W1007·代提三次同一处方）——归属批次取索引态 CHANGELOG 顶段（新增段=本批，否则 HEAD 现役段=回填），该批 `scripts/output/_w####_spec.json` 的 `file_index_rows` 即应动全集；索引态路径集多出即 FAIL（＝一份提交夹带他方在途件）。恒跑（_SCOPE_CORE·docs/site 提交也判）；无暂存件 NOTE 放行、spec 缺失 WARN 放行（不伪造红）。
 
 **完整定义 → [docs/agent/gates.md](docs/agent/gates.md)**（原文全量·五组分节·内容零改动）。
 
@@ -294,4 +295,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1001-W1001 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-10-29（W1002）脚本三档归位：探索进 tmpe/、批次件随收官进 archive/scripts/batches/、被引用或跨批的转正；第 42 门禁 C4 判滞留；2026-10-29（W1003）agent-web chat 集成验证与死重清退：验证三链全绿 + aigc 死重清退 + e2e 端口迁出保留段（本机 E2E 首次可跑）；2026-10-29（W1004）转正清零 + 触发器判据修正：8 件硬保留全转正（C4 配额 0）·触发器认 token 与 max·台账 W998 归位；2026-10-29（W1005）用户指出 hero 图有七个人、不合西游记；查档发现错源自 W852 批。两张改为四人加一白马，flyer A4 静态快照用 Playwright 重渲染。代并行 W1004 结清五处版本面欠账；2026-10-29（W1006）批次收官提交带 --expect-spec：索引只许含本批 spec 内文件，混入他方在途件即拒。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1002-W1002 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-10-29（W1003）agent-web chat 集成验证与死重清退：验证三链全绿 + aigc 死重清退 + e2e 端口迁出保留段（本机 E2E 首次可跑）；2026-10-29（W1004）转正清零 + 触发器判据修正：8 件硬保留全转正（C4 配额 0）·触发器认 token 与 max·台账 W998 归位；2026-10-29（W1005）用户指出 hero 图有七个人、不合西游记；查档发现错源自 W852 批。两张改为四人加一白马，flyer A4 静态快照用 Playwright 重渲染。代并行 W1004 结清五处版本面欠账；2026-10-29（W1006）批次收官提交带 --expect-spec：索引只许含本批 spec 内文件，混入他方在途件即拒；2026-10-29（W1007）提交范围进第 51 槽：索引里混入本批 spec 之外的文件即 FAIL，任何提交路径都绕不过。如与上述权威文档冲突，以权威文档为准。*

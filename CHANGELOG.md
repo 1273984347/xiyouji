@@ -1,3 +1,20 @@
+### W1007（2026-10-29）：提交范围门禁批（第 51 槽·索引 ⊆ 本批 spec）
+
+> **来源**：用户 2026-10-29 令「现在做」——W1006 收官时明写「硬拦只在走 `safe_commit` 时生效，`git commit` 直提绕得过；要彻底封死，得搬进 `verify_delivery.py`（加槽＝50→51 级联）」。本批就是那条级联。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/文档规范.md、docs/00-导读/项目说明.md、docs/agent/gates.md、docs/agent/pitfalls.md、scripts/check_commit_scope.py、scripts/index.md、scripts/output/README.md、scripts/output/_cascade_files_W1007.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1007_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、scripts/verify_delivery.py、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html、tests/unit/README.md、tests/unit/index.md、tests/unit/test_commit_scope.py。
+>
+**要点**：
+① **判据**（`check_commit_scope.py`）：归属批次取**索引态** `CHANGELOG.md` 顶段 W 号（与 HEAD 顶段不同＝本提交正在新增该段），否则取 HEAD 现役段（回填/补账类）；该批 `scripts/output/_w####_spec.json` 的 `file_index_rows` 即「应动全集」；索引态路径集（`diff --cached` + `diff.renames=false`·rename 两侧都在）多出即 **FAIL**，列前 10 项 + 改法。
+② **恒跑**：挂第 51 槽并登记 `_SCOPE_CORE`——`--scope docs` / `site` 的提交同样判（代提不分轨），堵死 W1006 遗留的「`git commit` 绕过 safe_commit」缺口。
+③ **不伪造红**：索引无暂存件 → NOTE 放行（非提交动作）；spec 缺失 → WARN 放行（判据不可执行）。
+④ **数值级联**：AGENTS §4.2 第 51 条 + 三处「50 槽→51 槽」、gates.md 第 51 条、文档规范「现役 55→56 段」、`EXPECTED_SECTION_NAMES` 与 `_SCOPE_CORE` 同步、verify 注释计数（56 段 / 39 委托段）。
+⑤ **测试**：`--self-test` 6 例 + `--report` 模式；`tests/unit/test_commit_scope.py` 8 例（含端点契约：汇总行必为末行）。
+
+**验证**：`check_commit_scope --self-test` 6/6 · 单测 8 passed · 本文提交由第 51 槽自判（归属 W1007·索引 ⊆ spec）· N2 56 段 / N3 51 槽一致 · 全量 verify 核心全过。
+
+> - **状态**：已收官（代提防线从「工具」升级为「门禁」·任何提交路径都绕不过）
+
 ### W1006（2026-10-29）：防代提硬拦批（safe_commit --expect-spec）
 
 > **来源**：用户 2026-10-29 令「做」——承接 W1004 报告末句「要不要把 `--expect-spec` 硬拦也做了？那是唯一能真正止住第三次、第四次的改法」。当日已发生三次代提（W989 级联十四面 / W1002 审查 B3 / W1004 被 W1005 全量提交带走），纪律层已写「并行在场禁 `git add -A`」却仍复发 ⇒ 本轮把它变成硬拦。
@@ -94,7 +111,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1006），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1007），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
