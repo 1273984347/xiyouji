@@ -13,8 +13,9 @@
 
 ## W1011 仓库整理分类批（2026-10-29）
 
-| 文件 | W | 说明 |
 |---|---|---|
+
+| 文件 | W | 说明 |
 | AGENTS.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
 | README.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
 | STRUCTURE.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
@@ -27,9 +28,6 @@
 | docs/10-方法论沉淀/例-佛法AI框架原始对话.txt | W1011 | 整理分类（归位/布局门禁/断链修复） |
 | docs/INDEX.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
 | docs/agent/gates.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
-| references/.gitkeep | W1011 | 整理分类（归位/布局门禁/断链修复） |
-| references/README.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
-| references/index.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
 | scripts/A_文本基础/章节切分.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
 | scripts/check_gov_doc_claims.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
 | scripts/check_governance_docs.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
@@ -51,12 +49,6 @@
 | site/reader/ch089.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
 | site/reader/ch093.html | W1011 | 整理分类（归位/布局门禁/断链修复） |
 | tests/unit/test_repo_layout.py | W1011 | 整理分类（归位/布局门禁/断链修复） |
-| timeline/.gitkeep | W1011 | 整理分类（归位/布局门禁/断链修复） |
-| timeline/README.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
-| timeline/index.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
-| tools/.gitkeep | W1011 | 整理分类（归位/布局门禁/断链修复） |
-| tools/README.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
-| tools/index.md | W1011 | 整理分类（归位/布局门禁/断链修复） |
 
 ## W1010 级联自动回窗批（2026-10-29）
 
