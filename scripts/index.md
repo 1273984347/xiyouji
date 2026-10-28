@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（202）
+## 文件（227）
 
 ### Markdown 文档
 
@@ -119,6 +119,30 @@
 - `_w988_sheet.py`
 - `_w988_subject.py`
 - `_w988_verify.py`
+- `_w990_map.py`
+- `_w990_master.py`
+- `_w990_og_gap.py`
+- `_w990_pick.py`
+- `_w990_read.py`
+- `_w990_roster.py`
+- `_w990_split.py`
+- `_w999_crop_recheck.py`
+- `_w999_derive_prepare.py`
+- `_w999_diag.py`
+- `_w999_fix_t35.py`
+- `_w999_insert.py`
+- `_w999_make_spec.py`
+- `_w999_prepare.py`
+- `_w999_probe.py`
+- `_w999_probe_h1.py`
+- `_w999_rebuild_missing_og.py`
+- `_w999_redo.py`
+- `_w999_redo2.py`
+- `_w999_redo_map.py`
+- `_w999_register.py`
+- `_w999_sheet.py`
+- `_w999_sync_counts.py`
+- `_w999_verify.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
@@ -136,6 +160,7 @@
 - `cascade_lock.py`
 - `check_agents_layers.py`
 - `check_archive_health.py`
+- `check_audit_trigger.py`
 - `check_chapter_stats_sync.py`
 - `check_chart_colorblind.py`
 - `check_chart_data.py`

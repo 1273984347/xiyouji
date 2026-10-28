@@ -4,16 +4,17 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-28 23:58
+生成时间：2026-10-29 00:21
 
-共 **196** 件（门禁与校验 65 · 批次与登记 11 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 47 · 一次性（下划线前缀） 63）
+共 **221** 件（门禁与校验 66 · 批次与登记 11 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 47 · 一次性（下划线前缀） 87）
 
-## 门禁与校验（65）
+## 门禁与校验（66）
 
 | 脚本 | 用途 |
 |:---|:---|
 | `check_agents_layers.py` | AGENTS 分层完整性门禁（第 41 槽 · W709）——L1 摘要层与 L2 主题层的结构防线。 |
 | `check_archive_health.py` | check_archive_health.py — 归档区健康探针（W994 建·报告型 exit 0）。 |
+| `check_audit_trigger.py` | check_audit_trigger.py — 对抗式审查触发器（W1000 建·与复盘触发器同族的第三哨）。 |
 | `check_chapter_stats_sync.py` | check_chapter_stats_sync.py — chapter_stats 双源同步校验（S-24 家族化首对·W699）。 |
 | `check_chart_colorblind.py` | check_chart_colorblind.py — 第 29 门禁 · 图表配色色盲安全（PD-1a · W653） |
 | `check_chart_data.py` | check_chart_data.py — 图表静态自洽门禁（W551 挂载·verify_delivery 第 24 门禁）。 |
@@ -171,7 +172,7 @@
 | `tracked_files.py` | tracked_files.py — 目标提交树文件集合（W894 批·门禁实算口径的单一事实源） |
 | `worktree_rehearse.py` | worktree_rehearse.py — worktree 预演法工具化（W701·S-26·用户圈选开工）。 |
 
-## 一次性（下划线前缀）（63）
+## 一次性（下划线前缀）（87）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -238,3 +239,27 @@
 | `_w988_sheet.py` | _w988_sheet.py — W988 拼图（核验用·不改页面） |
 | `_w988_subject.py` | _w988_subject.py — W988 共用：主体检测与派生裁切（不写盘·纯函数） |
 | `_w988_verify.py` | _w988_verify.py — W988 验收判据（可复算·含负样本自证） |
+| `_w990_map.py` | — |
+| `_w990_master.py` | _w990_master.py — W999 母版段两变体 + 12 张出图批次生成 |
+| `_w990_og_gap.py` | — |
+| `_w990_pick.py` | — |
+| `_w990_read.py` | — |
+| `_w990_roster.py` | — |
+| `_w990_split.py` | — |
+| `_w999_crop_recheck.py` | _w999_crop_recheck.py — 裁切验算·**主体簇口径**复算（全目录 88 张） |
+| `_w999_derive_prepare.py` | _w999_prepare.py — 由 `_w984_prepare.py` **程序化派生**（W999 批成品处理） |
+| `_w999_diag.py` | _w999_diag.py — W999 两处诊断：ch089 主体顶真伪 + 回目页真实覆盖口径 |
+| `_w999_fix_t35.py` | — |
+| `_w999_insert.py` | _w999_insert.py — W999 接入：12 个回目页题图 + 专属 1200×630 og:image |
+| `_w999_make_spec.py` | _w999_make_spec.py — W999 级联 spec 生成 |
+| `_w999_prepare.py` | _w999_prepare.py — W999 成品处理（**只处理 raw/round14 的本批 12 张**） |
+| `_w999_probe.py` | — |
+| `_w999_probe_h1.py` | — |
+| `_w999_rebuild_missing_og.py` | _w999_rebuild_missing_og.py — 重建全站缺失的 og 版（通用·按页面 og:image 反查） |
+| `_w999_redo.py` | _w999_redo.py — W999 重出 5 张（母版段不动·只强化主体段） |
+| `_w999_redo2.py` | _w999_redo2.py — W999 ch001 第三次重出（母版段不动·只改主体段） |
+| `_w999_redo_map.py` | — |
+| `_w999_register.py` | _w999_register.py — W999 登记面：坑表 +4 条（87 → 91）+ 计数链 + 方法论 §2.10 + README  |
+| `_w999_sheet.py` | — |
+| `_w999_sync_counts.py` | _w999_sync_counts.py — 坑表计数链**按实算**同步（稳健版·不依赖固定文本） |
+| `_w999_verify.py` | _w999_verify.py — W999 接入验收判据（可复算·含负样本自证） |

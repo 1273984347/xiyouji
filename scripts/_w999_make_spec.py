@@ -29,6 +29,10 @@ def git(*args):
 
 
 def main():
+    st_out = git("status", "--porcelain")
+    df_out = git("diff", "--name-only", "HEAD")
+    print("DEBUG git status 行数=%d · git diff 行数=%d · REPO=%s"
+          % (len(st_out.splitlines()), len(df_out.splitlines()), REPO))
     new = set()
     for ln in git("status", "--porcelain").splitlines():
         st = ln[:2]
@@ -39,11 +43,7 @@ def main():
 
     files = sorted(new | mod)
     files = [f for f in files if not any(f.endswith(s) or s in f for s in EXCLUDE_SUFFIX)]
-    # 去掉本批明确不提交的中间产物（一次性诊断脚本）
-    drop = {"scripts/_w999_probe.py", "scripts/_w999_probe_h1.py", "scripts/_w999_diag.py",
-            "scripts/_w999_crop_recheck.py", "scripts/_w999_fix_t35.py",
-            "scripts/_w999_register.py", "scripts/_w999_sync_counts.py"}
-    files = [f for f in files if f not in drop]
+    files = [f for f in files if f not in DROP]
 
     title = "W999 回次 og:image 全覆盖批·第一轮试点（12 张线描立像/场面）"
     body = (
@@ -115,3 +115,22 @@ def main():
         print("   ", f)
     if len(files) > 14:
         print("    ... 共 %d 项" % len(files))
+
+
+# 并行 W1000 批的在途件（不是本批内容·不列进「文件」行·提交时会被代提并另行声明）
+DROP = {
+    "docs/agent/adversarial-audit-prompt.md",
+    "scripts/check_audit_trigger.py",
+    "scripts/output/_w1000_spec.json",
+    "scripts/output/_cascade_files_W1000.txt",
+    # 本批一次性诊断脚本（不保留入库）
+    "scripts/_w999_probe.py", "scripts/_w999_probe_h1.py", "scripts/_w999_diag.py",
+    "scripts/_w999_crop_recheck.py", "scripts/_w999_fix_t35.py",
+    "scripts/_w999_register.py", "scripts/_w999_sync_counts.py",
+    "scripts/_w990_pick.py", "scripts/_w999_redo_map.py", "scripts/_w999_redo2_map.py",
+}
+
+
+if __name__ == "__main__":
+    main()
+
