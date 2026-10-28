@@ -578,18 +578,54 @@ def main():
     try:
         _apply_pend(ctx.pend, ctx.batch)
         selfcheck = _post_check(ctx.pend, ctx.batch)
+        window_ok = _refresh_window()
         stats_ok = _refresh_stats(ctx.batch)
         _close_hints()
         print(f"[APPLY] 级联完成：{ctx.batch} / {ctx.new_rule}，共 {len(ctx.pend)} 个文件；"
               f"写后自检 {'发现 %d 项' % len(selfcheck) if selfcheck else '全部通过'}；"
-              f"stats {'已刷新' if stats_ok else '刷新失败'}")
+              f"回窗 {'OK' if window_ok else 'FAIL'}；stats {'已刷新' if stats_ok else '刷新失败'}")
     finally:
         cascade_lock.release(pid=os.getpid())  # W999 P2-1：pid 匹配才删·防 TTL 夺锁后误删他方新鲜锁
         print("[LOCK] 已释放")
+    if not window_ok:
+        print("[APPLY] 回窗失败——先修 archive_segments/archive_ledger_rows 再重跑"
+              "（否则下一批 preflight 体积窗口必红·开不了工）")
+        return 2
     if not stats_ok:
         print("[APPLY] stats 刷新失败——先修 stats.py 再重跑级联（否则 verify 第 31 槽 C5d 必红）")
         return 2
     return 0
+
+
+# 体积窗口（文档规范 §8·W960 立窗）：CHANGELOG / file-index 各 110 段、台账 60 行。
+WIN_SEGMENTS = 110
+WIN_LEDGER = 60
+_WINDOW_RUNNER = lambda cmd: __import__("subprocess").run(  # noqa: E731 — 单测注入点
+    cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
+
+
+def _refresh_window():
+    """W1010：级联收尾自动回窗（段滚动归档 + 台账行归档）。
+
+    为什么必须机器做：每批插入一段/一行，正本必然 +1 越过窗口，然后 **下一批开工前**
+    才被 preflight 判红拦下——W1008/W1009 两批都是「先超窗、再手工回窗」。人手记的那一步
+    迟早漏，且漏了表现为「下一个人开不了工」。级联是唯一知道「段已插入」的时点。
+    """
+    here = os.path.dirname(os.path.abspath(__file__))
+    steps = [
+        ("segments", [sys.executable, os.path.join(here, "archive_segments.py"),
+                      "--target", "both", "--keep", str(WIN_SEGMENTS), "--apply"]),
+        ("ledger", [sys.executable, os.path.join(here, "archive_ledger_rows.py"),
+                    "--keep", str(WIN_LEDGER), "--apply"]),
+    ]
+    ok = True
+    for label, cmd in steps:
+        r = _WINDOW_RUNNER(cmd)
+        tail = [x for x in ((r.stdout or "") + (r.stderr or "")).splitlines() if x.strip()][-1:]
+        good = r.returncode == 0
+        ok = ok and good
+        print("[WINDOW] %-8s %s（%s）" % (label, "OK" if good else "FAIL", " / ".join(tail)))
+    return ok
 
 
 _STATS_RUNNER = lambda cmd: __import__("subprocess").run(  # noqa: E731 — 单测注入点
