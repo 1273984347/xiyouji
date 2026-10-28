@@ -578,12 +578,41 @@ def main():
     try:
         _apply_pend(ctx.pend, ctx.batch)
         selfcheck = _post_check(ctx.pend, ctx.batch)
+        stats_ok = _refresh_stats(ctx.batch)
         _close_hints()
-        print(f"[APPLY] 级联完成：{ctx.batch} / {ctx.new_rule}，共 {len(ctx.pend)} 个文件；写后自检 {'发现 %d 项' % len(selfcheck) if selfcheck else '全部通过'}")
+        print(f"[APPLY] 级联完成：{ctx.batch} / {ctx.new_rule}，共 {len(ctx.pend)} 个文件；"
+              f"写后自检 {'发现 %d 项' % len(selfcheck) if selfcheck else '全部通过'}；"
+              f"stats {'已刷新' if stats_ok else '刷新失败'}")
     finally:
         cascade_lock.release(pid=os.getpid())  # W999 P2-1：pid 匹配才删·防 TTL 夺锁后误删他方新鲜锁
         print("[LOCK] 已释放")
+    if not stats_ok:
+        print("[APPLY] stats 刷新失败——先修 stats.py 再重跑级联（否则 verify 第 31 槽 C5d 必红）")
+        return 2
     return 0
+
+
+_STATS_RUNNER = lambda cmd: __import__("subprocess").run(  # noqa: E731 — 单测注入点
+    cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
+
+
+def _refresh_stats(batch):
+    """W1009：级联收尾自动刷 stats（`stats.py --w <num>`）。
+
+    为什么要机器做：C5d（stats 与磁盘实算漂移）在 W1006/W1007/W1008 三批各假红一次，
+    每次都要人记得先跑 `stats.py --w ####`——「记得做」迟早漏，且漏了要到 verify 才暴露。
+    级联是唯一知道「本批号 + 已落盘」的时点，就在这儿刷。
+
+    失败不静默：打印 FAIL + 末两行输出，并让 main 返回非 0（会话能立刻看到）。
+    """
+    import subprocess
+    num = str(batch).lstrip("W")
+    r = _STATS_RUNNER([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), "stats.py"),
+                       "--w", num])
+    tail = [x for x in ((r.stdout or "") + (r.stderr or "")).splitlines() if x.strip()][-2:]
+    ok = r.returncode == 0
+    print("[STATS] %s（%s）" % ("OK" if ok else "FAIL", " / ".join(tail)))
+    return ok
 
 
 def _close_hints():

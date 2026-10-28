@@ -1,3 +1,20 @@
+### W1009（2026-10-29）：流程收口批（级联自动刷 stats + spec 解析单一入口）
+
+> **来源**：用户 2026-10-29 令「做」——W1008 报告荐条 1（stats 刷新接进级联）+ 荐条 2（两处 spec 解析合并）。两条都指向同一类问题：**同一动作靠人记、同一判据两处写**。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/agent/pitfalls.md、scripts/batch_cascade.py、scripts/batch_spec.py、scripts/check_commit_scope.py、scripts/index.md、scripts/output/README.md、scripts/output/_cascade_files_W1009.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1009_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、scripts/safe_commit.py、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html、tests/unit/README.md、tests/unit/index.md、tests/unit/test_batch_spec.py。
+>
+**要点**：
+① **级联收尾自动刷 stats**：C5d（stats 与磁盘实算漂移）在 W1006/W1007/W1008 三批各假红一次，每次都要人记得先跑 `stats.py --w ####`。改为 `batch_cascade` 落盘后自跑；runner 可注入（单测可桩），失败打印 `[STATS] FAIL` + 末两行并让级联 `return 2`——不静默、不半成品。
+② **spec 解析收敛单一入口** `scripts/batch_spec.py`：`safe_commit._spec_paths` 与 `check_commit_scope.spec_paths_for` 曾各写一份，W1007 踩到一处 `cells[0]`、一处 `cells[1]` ⇒ 收敛为一份实现，两处只调用。顺带补上「markdown 分隔行 `|---|---|` 必须跳过」——这条是新单测第一跑就抓出来的。
+③ **测试** 7 例：首格即路径 / 表头与分隔行跳过 / 去重与路径归一 / 空 spec / 读文件 / 「两处必须给同一答案」/ stats runner OK 与 FAIL 两态。
+④ **口径入仓**：pitfalls 补「同一判据禁两处实现」（解析/取数部分收敛单一入口，两处只调用不重写）。
+⑤ **本批即 live 验证**：本批级联走的就是新收尾——`[STATS] OK` 由级联自己打出，不再是手跑。
+
+**验证**：`pytest tests/unit/test_batch_spec.py` 7 passed · 三组相关单测 22 passed · 级联输出含 `[STATS] OK` · 第 51 槽自判（归属 W1009·索引 ⊆ spec）· 第 31/42/45 槽 0 FAIL · 全量 verify 核心全过。
+
+> - **状态**：已收官（stats 刷新与 spec 解析都从「人记」变「机器做·单点维护」）
+
 ### W1008（2026-10-29）：回窗 + 触发器归档盲区批
 
 > **来源**：用户 2026-10-29 一句「然后呢」——W1005→W1007 三批连发后仓库进不了开工态：preflight 体积窗口 3 项红（CHANGELOG/file-index 112 段 > 110·台账 61 行 > 60）。先回窗，再把早先审查列的 I2 补掉。
@@ -128,7 +145,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1008），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1009），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

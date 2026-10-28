@@ -75,15 +75,12 @@ def _plan_retry(err_text, old, new, pathspecs):
 
 
 def _spec_paths(spec):
-    """从级联 spec 取「本批应动文件」全集（file_index_rows 第 2 列）。"""
-    rows = spec.get("file_index_rows") or []
-    out = []
-    for row in rows:
-        cells = [c.strip() for c in str(row).strip().strip("|").split("|")]
-        if cells and cells[0] and cells[0] != "文件":
-            out.append(cells[0])
-    return sorted(set(out))
+    """从级联 spec 取「本批应动文件」全集——**统一走 batch_spec**（W1009 合并重复实现）。
 
+    W1007 踩过：两处各自解析 spec 行，一处取 cells[0] 一处取 cells[1]，改一处另一处还错。
+    """
+    import batch_spec
+    return batch_spec.spec_paths_from_spec(spec)
 
 def _plan_spec(staged, spec_paths):
     """纯逻辑：索引态 ⊆ spec？返回 (ok, extra, missing)。供 --self-test 与单测。"""

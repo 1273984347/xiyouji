@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-29 06:51
+生成时间：2026-10-29 07:05
 
-共 **155** 件（门禁与校验 69 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 58 · 一次性（下划线前缀） 6）
+共 **156** 件（门禁与校验 69 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 59 · 一次性（下划线前缀） 6）
 
 ## 门禁与校验（69）
 
@@ -124,7 +124,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（58）
+## 工具（59）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -136,6 +136,7 @@
 | `backfill_changelog.py` | CHANGELOG / file-index 递延段补写器（W842）。 |
 | `baseline_snapshot.py` | baseline_snapshot.py — W464 Phase 3 观测基线快照生成器（入库脚本） |
 | `batch_screenshots.js` | Default top-level pages to screenshot beyond site/data/*.html. |
+| `batch_spec.py` | batch_spec.py — 级联 spec 的唯一解析入口（W1009·两处重复实现合并） |
 | `build_reader.py` | build_reader.py — 站内阅读器渲染器（W593 单板块 → W660 多板块映射驱动） |
 | `bump_footer_version.py` | 将站点 footer 版本印章从旧版本升到新版本（默认 v2.3.8 W357 -> v2.3.9 W358，可 --from/--to 指定） |
 | `bump_version.py` | bump_version.py — 降级六文档同步（W393）的辅助同步工具 |

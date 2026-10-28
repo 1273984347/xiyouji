@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（51）
+## 文件（52）
 
 ### Python 脚本
 
@@ -20,6 +20,7 @@
 - `test_archive_segments.py`
 - `test_audit_trigger.py`
 - `test_batch_cascade_status_wnum.py`
+- `test_batch_spec.py`
 - `test_cascade_line_anchor.py`
 - `test_check_data_copy_chain.py`
 - `test_check_db_schema.py`
