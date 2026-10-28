@@ -11,6 +11,31 @@
 ---
 
 
+## W1009 流程收口批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| CHANGELOG.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| CITATION.cff | W1009 | 流程收口（stats 自动 + spec 单点） |
+| HANDOVER.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| README.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| STRUCTURE.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| .github/workflows/README.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| docs/00-导读/项目说明.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| docs/00-导读/W批次编号对账表.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| docs/agent/pitfalls.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/batch_spec.py | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/batch_cascade.py | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/safe_commit.py | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/check_commit_scope.py | W1009 | 流程收口（stats 自动 + spec 单点） |
+| tests/unit/test_batch_spec.py | W1009 | 流程收口（stats 自动 + spec 单点） |
+| archive/docs/AGENTS-ARCHIVE.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/output/file-index.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/output/tools-inventory.md | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/output/_w1009_spec.json | W1009 | 流程收口（stats 自动 + spec 单点） |
+| scripts/output/_cascade_files_W1009.txt | W1009 | 流程收口（stats 自动 + spec 单点） |
+
 ## W1008 回窗 + 触发器归档盲区批（2026-10-29）
 
 | 文件 | W | 说明 |

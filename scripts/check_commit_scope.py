@@ -74,22 +74,20 @@ def pick_target(index_text, head_text):
 
 
 def spec_paths_for(w):
-    """本批 spec 的应动全集；spec 缺失 → None。"""
+    """本批 spec 的应动全集；spec 缺失/不可读 → None（判据不可执行·不伪造红）。
+
+    解析统一走 `batch_spec`（W1009）：与 safe_commit 共用一份实现，防一处修好另一处还错。
+    """
     if w is None:
         return None
     p = os.path.join(SPEC_DIR, "_w%d_spec.json" % w)
     if not os.path.exists(p):
         return None
     try:
-        spec = json.load(open(p, encoding="utf-8"))
+        import batch_spec
+        return batch_spec.spec_paths(p)
     except (OSError, ValueError):
         return None
-    out = []
-    for row in spec.get("file_index_rows") or []:
-        cells = [c.strip() for c in str(row).strip().strip("|").split("|")]
-        if cells and cells[0] and cells[0] != "文件":
-            out.append(cells[0])
-    return sorted(set(out))
 
 
 def staged_paths():
