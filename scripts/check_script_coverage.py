@@ -26,6 +26,10 @@ CI workflow ∪ Makefile 四面引用），结论 **46/101 无任何引用**—�
   （防「脚本已删却仍挂豁免」的僵尸条目）。
 - C3 **判据面非空**：根级脚本数 ≥ 50 · 覆盖集 ≥ 15 · 豁免集 ≥ 10（解析面塌陷 fail-closed，
   防「正则失效导致全量误红/全量豁免」的空真）。
+- C4 **一次性脚本归位**（W1002 建·「脚本三档归位」的机器哨兵）：历史批（W 号 < 台账 max）的
+  `_w####_*.py|js` 仍在 `scripts/` 根 = FAIL（应随批收官移入 `archive/scripts/batches/wNNN/`）。
+  被四面引用的历史 `_` 件判为「转正候选」，允许 ≤ `MAX_RETAINED_UNDERSCORE` 件（棘轮·只降不升），
+  超配额 = FAIL（防硬保留名单膨胀成第二个垃圾场）。台账不可读时 C4 跳过并打印 WARN（禁静默）。
 
 ## 豁免登记（scripts/output/script-coverage-baseline.txt）
 
@@ -61,6 +65,9 @@ MAKEFILE = os.path.join(ROOT, "Makefile")
 MIN_SCRIPTS = 50
 MIN_COVERED = 15
 MIN_BASELINE = 10
+# C4 棘轮：被四面引用的历史批 `_` 件「转正候选」上限（只降不升·W1002 实测 8 件）
+MAX_RETAINED_UNDERSCORE = 8
+LEDGER = os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md")
 
 
 def rd(p):
@@ -149,6 +156,71 @@ def baseline_set(raw, scripts):
     return declared, stale
 
 
+def list_underscore_scripts():
+    """根级 `_w####_` 一次性/批次脚本（C4 判据面·与 list_scripts 的排除口径互补）。"""
+    out = []
+    for name in sorted(os.listdir(SCRIPTS)):
+        p = os.path.join(SCRIPTS, name)
+        if not os.path.isfile(p) or os.path.splitext(name)[1] not in {".py", ".js"}:
+            continue
+        if re.match(r"^_w\d{3,4}_", name):
+            out.append(name)
+    return out
+
+
+def ledger_max_w(path=None):
+    """台账 max(W)——取号权威=表内 max（与 preflight.parse_ledger 同口径）。不可读 → None。"""
+    p = path or LEDGER
+    try:
+        text = rd(p)
+    except OSError:
+        return None
+    ws = [int(m) for m in re.findall(r"^\|\s*W(\d{3,4})\s*\|", text, re.M)]
+    return max(ws) if ws else None
+
+
+def stray_batch_scripts(names, max_w, covered):
+    """C4 分流：历史批（W < max_w）滞留件 → (必归档, 转正候选)。
+
+    max_w 为 None（台账不可读）时返回空——判据不可执行不伪造红（由调用方打 WARN 留痕）。
+    """
+    if max_w is None:
+        return [], []
+    must_archive, promote = [], []
+    for n in names:
+        m = re.match(r"^_w(\d{3,4})_", n)
+        if not m:
+            continue
+        w = int(m.group(1))
+        if w >= max_w:
+            continue
+        (promote if n in covered else must_archive).append((n, w))
+    return must_archive, promote
+
+
+def c4_corpus():
+    """C4 专用引用面：四面 ∪ 全部非 `_` 脚本 ∪ 治理文档（AGENTS/CLAUDE/docs/agent）。
+
+    与 C1 的四面口径**故意不同**：C1 问「有没有测试/门禁/CI/Make 入口」，C4 问「是不是
+    跨批/被治理面引用的活件」。被其它门禁脚本调用的 `_` 件（如 `check_page_admission.py`
+    → `_w818_file_protocol_probe.py`）四面口径看不见，但确实是活件 ⇒ 判「转正候选」而非「死件归档」。
+    """
+    parts = [reference_corpus()]
+    for name in sorted(os.listdir(SCRIPTS)):
+        p = os.path.join(SCRIPTS, name)
+        if os.path.isfile(p) and not name.startswith("_") and name.endswith((".py", ".js")):
+            parts.append(rd(p))
+    for p in [os.path.join(ROOT, "AGENTS.md"), os.path.join(ROOT, "CLAUDE.md")]:
+        if os.path.exists(p):
+            parts.append(rd(p))
+    agent_dir = os.path.join(ROOT, "docs", "agent")
+    if os.path.isdir(agent_dir):
+        for f in sorted(os.listdir(agent_dir)):
+            if f.endswith(".md"):
+                parts.append(rd(os.path.join(agent_dir, f)))
+    return "\n".join(parts)
+
+
 def evaluate(inp):
     """纯函数判据（gather 注入实测 / self-test 注入构造），返回 issues 列表。"""
     issues = []
@@ -177,13 +249,29 @@ def evaluate(inp):
         issues.append("C2: 豁免清单重复行 %s" % d)
     for s in stale:
         issues.append("C2: 豁免清单陈腐行 %s（scripts/ 下无此文件·删行或改回原名）" % s)
+
+    # C4 一次性脚本归位（W1002）：历史批 `_w####_` 件不得滞留 scripts/ 根
+    under = inp.get("underscore", [])
+    if under:
+        covered_under = covered_set(under, inp.get("c4_corpus_text") or corpus)
+        must_archive, promote = stray_batch_scripts(under, inp.get("max_w"), covered_under)
+        for n, w in must_archive:
+            issues.append("C4: 历史批脚本滞留 scripts/ 根 %s（W%d < 台账 max W%s）——"
+                          "按「脚本三档归位」移入 archive/scripts/batches/w%dxx/（无四面引用 ⇒ 非跨批判据）"
+                          % (n, w, inp.get("max_w"), w // 100))
+        if len(promote) > MAX_RETAINED_UNDERSCORE:
+            issues.append("C4: 转正候选 %d 件 > 上限 %d（棘轮只降不升）——%s"
+                          % (len(promote), MAX_RETAINED_UNDERSCORE,
+                             ", ".join(sorted(n for n, _w in promote))))
     return issues
 
 
 def gather():
     scripts = list_scripts()
     raw = rd(BASELINE) if os.path.exists(BASELINE) else ""
-    return {"scripts": scripts, "corpus_text": reference_corpus(), "baseline_raw": raw}
+    return {"scripts": scripts, "corpus_text": reference_corpus(), "baseline_raw": raw,
+            "underscore": list_underscore_scripts(), "max_w": ledger_max_w(),
+            "c4_corpus_text": c4_corpus()}
 
 
 def run_check():
@@ -191,6 +279,15 @@ def run_check():
     issues = evaluate(inp)
     for it in issues:
         print("FAIL  " + it)
+    if inp.get("max_w") is None:
+        print("WARN  C4 跳过：台账不可读（%s）——归位判据本回合不可执行" % os.path.relpath(LEDGER, ROOT))
+    elif inp.get("underscore"):
+        covered_under = covered_set(inp["underscore"], inp.get("c4_corpus_text") or inp["corpus_text"])
+        _must, promote = stray_batch_scripts(inp["underscore"], inp["max_w"], covered_under)
+        if promote:
+            print("NOTE  C4 转正候选（%d/%d）：%s——被四面引用，建议去 `_` 前缀转正"
+                  % (len(promote), MAX_RETAINED_UNDERSCORE,
+                     ", ".join(sorted(n for n, _w in promote))))
     print("---- 第 42 门禁 根级脚本覆盖：%d FAIL ----" % len(issues))
     return 1 if issues else 0
 
@@ -234,6 +331,14 @@ def run_self_test():
     cases.append(("T5 有引用脚本放行（好样本）", dict(clean, baseline_raw=dummy_declared), None))
     cases.append(("T6 带行内注释的登记行必须被正确解析（W751 自伤回归）",
                   dict(clean, baseline_raw="\n".join(["fill00.py  # ②会话直接执行"] + ["fill%02d.py" % i for i in range(1, MIN_BASELINE)])), None))
+    # C4 一次性脚本归位（W1002）：历史批滞留 / 转正候选配额 / 当前批放行
+    cases.append(("T7 历史批 `_` 件无引用滞留必红（C4）",
+                  dict(clean, underscore=["_w0901_diag.py"], max_w=1002), "C4"))
+    cases.append(("T8 当前批 `_` 件放行（C4 好样本）",
+                  dict(clean, underscore=["_w1001_diag.py"], max_w=1001), None))
+    nine = ["_w0901_p%d.py" % i for i in range(MAX_RETAINED_UNDERSCORE + 1)]
+    cases.append(("T9 转正候选超配额必红（C4 棘轮）",
+                  dict(clean, underscore=nine, max_w=1002, corpus_text=dummy_corpus + "\n" + "\n".join(nine)), "C4"))
 
     fails = 0
     for name, inp, expect in cases:

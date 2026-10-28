@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-"""_w951_check_crop.py — 验站点版「只裁上部留白」没有切坏主体
+"""check_crop.py — 验站点版「只裁上部留白」没有切坏主体
 
 站点版做法：**只**裁掉主体上方的留白（cut = 该张主体顶 − 6 px），**保留下部空白**
 （那是画师留的「地面留白」·裁掉会把人物从地面上「拔起来」⇒ 破坏构图关系·W951 实测教训）。
@@ -10,16 +9,17 @@
   ③ **主体底没被切**：站点版墨迹包围盒底 < 站点版高（人物与地面留白都在）
 另输出「下部留白高度」= 站点版高 − 主体底（画师的地面留白·应 > 0）。
 
-用法：py -3 scripts/_w951_check_crop.py
-（W983 批从 archive 恢复为现役·跨批通用判据·判据逻辑逐字未改）
+用法：py -3 scripts/check_crop.py
+（W983 批从 archive 恢复为现役·跨批通用判据·判据逻辑逐字未改；W1002 转正去 `_` 前缀，
+ 硬编码仓根改为 `dirname(dirname(__file__))`——原来写死 `D:/xiyouji` 换机即失效。）
 """
 import glob
 import os
 import sys
 
-from PIL import Image, ImageChops
+from PIL import Image
 
-REPO = r"D:\xiyouji"
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SET_DIR = os.path.join(REPO, "assets", "promo", "plate-set")
 SITE_IMG = os.path.join(REPO, "site", "static", "images")
 PAPER = (250, 247, 240)

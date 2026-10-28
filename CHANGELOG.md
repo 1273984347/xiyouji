@@ -1,3 +1,20 @@
+### W1002（2026-10-29）：脚本三档归位批（81 件归档 + 4 件转正 + 第 42 门禁 C4 哨兵）
+
+> **来源**：用户 2026-10-29 三问收口——「一次性脚本的储存方式难道不是应该放在临时文件系统里面吗？」→ 三档提案（探索→临时区 / 批次可重放→归档桶 / 引用或跨批→转正）经用户令「全部做完」落地。本批把 W977 人工清扫一次的做法变成**常驻判据**：W977 归档 287 件后，W983–W1001 又堆回 81 件，证明「靠人记得归档」不成立。
+>
+> - **文件**：AGENTS.md、Makefile、archive/README.md、archive/scripts/batches/w10xx/README.md、archive/scripts/batches/w10xx/_w1001_clean_locks.py、archive/scripts/batches/w10xx/_w1001_final.py、archive/scripts/batches/w10xx/_w1001_finish_faces.py、archive/scripts/batches/w10xx/_w1001_fix_index.py、archive/scripts/batches/w10xx/_w1001_fix_rule_anchor.py、archive/scripts/batches/w10xx/_w1001_probe_faces.py、archive/scripts/batches/w10xx/_w1001_restore_changelog_head.py、archive/scripts/batches/w10xx/_w1001_stage.py、archive/scripts/batches/w10xx/index.md、archive/scripts/batches/w9xx/_w954_review_evidence.py、archive/scripts/batches/w9xx/_w978_review_evidence.py、archive/scripts/batches/w9xx/_w983_derive.py、archive/scripts/batches/w9xx/_w983_download.py、archive/scripts/batches/w9xx/_w983_insert_plates.py、archive/scripts/batches/w9xx/_w983_make_prompts.py、archive/scripts/batches/w9xx/_w983_make_spec.py、archive/scripts/batches/w9xx/_w983_precheck_pages.py、archive/scripts/batches/w9xx/_w983_prepare.py、archive/scripts/batches/w9xx/_w983_retry.py、archive/scripts/batches/w9xx/_w983_serve.py、archive/scripts/batches/w9xx/_w983_sheet.py、archive/scripts/batches/w9xx/_w983_zoom.py、archive/scripts/batches/w9xx/_w984_derive.py、archive/scripts/batches/w9xx/_w984_download.py、archive/scripts/batches/w9xx/_w984_insert_plates.py、archive/scripts/batches/w9xx/_w984_make_prompts.py、archive/scripts/batches/w9xx/_w984_make_spec.py、archive/scripts/batches/w9xx/_w984_precheck_pages.py、archive/scripts/batches/w9xx/_w984_prepare.py、archive/scripts/batches/w9xx/_w984_retry.py、archive/scripts/batches/w9xx/_w984_serve.py、archive/scripts/batches/w9xx/_w984_sheet.py、archive/scripts/batches/w9xx/_w984_zoom.py、archive/scripts/batches/w9xx/_w986_make_prompts.py、archive/scripts/batches/w9xx/_w986_make_spec.py、archive/scripts/batches/w9xx/_w987_family_scan.py、archive/scripts/batches/w9xx/_w987_insert_scenes.py、archive/scripts/batches/w9xx/_w987_make_spec.py、archive/scripts/batches/w9xx/_w988_card_sheet.py、archive/scripts/batches/w9xx/_w988_docs.py、archive/scripts/batches/w9xx/_w988_fix_cascade.py、archive/scripts/batches/w9xx/_w988_fix_eol.py、archive/scripts/batches/w9xx/_w988_fix_gates.py、archive/scripts/batches/w9xx/_w988_insert.py、archive/scripts/batches/w9xx/_w988_inventory.py、archive/scripts/batches/w9xx/_w988_make_assets.py、archive/scripts/batches/w9xx/_w988_make_spec.py、archive/scripts/batches/w9xx/_w988_match.py、archive/scripts/batches/w9xx/_w988_pitfalls.py、archive/scripts/batches/w9xx/_w988_plan.py、archive/scripts/batches/w9xx/_w988_precheck.py、archive/scripts/batches/w9xx/_w988_sheet.py、archive/scripts/batches/w9xx/_w988_subject.py、archive/scripts/batches/w9xx/_w988_verify.py、archive/scripts/batches/w9xx/_w990_map.py、archive/scripts/batches/w9xx/_w990_master.py、archive/scripts/batches/w9xx/_w990_og_gap.py、archive/scripts/batches/w9xx/_w990_pick.py、archive/scripts/batches/w9xx/_w990_read.py、archive/scripts/batches/w9xx/_w990_roster.py、archive/scripts/batches/w9xx/_w990_split.py、archive/scripts/batches/w9xx/_w999_closeout.py、archive/scripts/batches/w9xx/_w999_crop_recheck.py、archive/scripts/batches/w9xx/_w999_derive_prepare.py、archive/scripts/batches/w9xx/_w999_diag.py、archive/scripts/batches/w9xx/_w999_fix_t35.py、archive/scripts/batches/w9xx/_w999_fix_wnum.py、archive/scripts/batches/w9xx/_w999_insert.py、archive/scripts/batches/w9xx/_w999_ledger_fill.py、archive/scripts/batches/w9xx/_w999_make_spec.py、archive/scripts/batches/w9xx/_w999_prepare.py、archive/scripts/batches/w9xx/_w999_probe.py、archive/scripts/batches/w9xx/_w999_probe_h1.py、archive/scripts/batches/w9xx/_w999_rebuild_missing_og.py、archive/scripts/batches/w9xx/_w999_redo.py、archive/scripts/batches/w9xx/_w999_redo2.py、archive/scripts/batches/w9xx/_w999_redo_map.py、archive/scripts/batches/w9xx/_w999_register.py、archive/scripts/batches/w9xx/_w999_renumber.py、archive/scripts/batches/w9xx/_w999_sheet.py、archive/scripts/batches/w9xx/_w999_sync_counts.py、archive/scripts/batches/w9xx/_w999_verify.py、assets/promo/plate-set/README.md、docs/00-导读/文档规范.md、docs/11-方案报告/README.md、docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-26.md、docs/agent/pitfalls.md、scripts/check_crop.py、scripts/check_plan_template.py、scripts/check_script_coverage.py、scripts/ledger_mutation_test.py、scripts/output/tools-inventory.md、scripts/plan_template_review.py、scripts/plates_verify.py、tests/unit/test_script_hygiene.py、.github/workflows/README.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/scripts/batches/README.md、archive/scripts/batches/index.md、archive/scripts/batches/w9xx/README.md、archive/scripts/batches/w9xx/index.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-10-27.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、pytest.ini、scripts/index.md、scripts/output/_cascade_files_W1002.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1002_spec.json、scripts/output/file-index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html、scripts/output/README.md、scripts/output/index.md、tests/unit/README.md、tests/unit/index.md。
+>
+**要点**：
+① **存量归位 81 件**——按 W977 方法（活引用面 = 门禁/测试/CI/Makefile/治理文档，历史记录面不计）分级后 `git mv` 入 `archive/scripts/batches/w9xx|w10xx/`；`w10xx` 为新桶（四位号首批一次性件）。
+② **转正 4 件**——被门禁/Makefile 引用或跨批复用的判据脚本去 `_` 前缀：`plan_template_review.py`（第 48 门禁判据表）、`ledger_mutation_test.py`（Makefile ledger）、`plates_verify.py` / `check_crop.py`（跨批素材与裁切判据）。后者正是 pitfalls E-05 的反面：**跨批判据归档会算错 ROOT**，故只能转正、不能归档——`check_crop.py` 顺带修掉写死的 `D:/xiyouji` 仓根。
+③ **机器哨兵 C4**——第 42 门禁新增判据：历史批（W < 台账 max）`_w####_*.py|js` 仍在 `scripts/` 根 = FAIL；被四面/治理面引用的判为「转正候选」，配额 **8 件**（现役实测 8 件·棘轮只降不升，超配额即红）；台账不可读时跳过并 WARN（禁静默）。自测 6 → 9 例（T7 滞留必红 / T8 当前批放行 / T9 超配额必红）。
+④ **口径成文**——pitfalls「`_` 前缀=一次性」条目改写为三档（94→95 条·git 节 22→23）；文档规范 §5 增「脚本三档归位」条款；AGENTS §3 目录注释与计数同步；archive/README 结构补 w10xx 桶 + 台账组行。
+⑤ **连带修正**——`assets/promo/plate-set/README.md` 三处死链（指向已归档的逐批 prep）、复盘报告的取证脚本链接改归档路径（lint_links 活链）、`docs/11-方案报告/README.md` 判据表路径。
+
+**验证**：第 42 门禁 0 FAIL（C4 NOTE 列 8 件转正候选）· 自测 9/9 通过 · `pytest tests/unit/test_script_hygiene.py` 5 passed · 转正件 import 冒烟通过（含 `check_crop.py` 转义错误被单测当场抓出并修）· `gen_folder_docs.py` 生成 w10xx 桶目录文档 · `gen_tools_inventory.py` 重生成 152 件 · `scripts/` 根 `_w*` 件 99 → 8（余 8 件为转正候选·已入棘轮）。
+
+> - **状态**：已收官（81 件归档 + 4 件转正 + C4 判据常驻·`scripts/` 根一次性件清零待下一批清偿 8 件转正欠账）
+
 ### W1001（2026-10-28）：回次 og:image 全覆盖批·第一轮试点（12 张线描立像/场面）
 
 
@@ -22,7 +39,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1001），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1002），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1801,50 +1818,4 @@
 > - **范围纪律**：只动 213 页的一条装饰 img + 各自内联副本的一条规则 + 首页三条背景 + system.css 一条规则 + 4 张新图 + 3 个脚本，不改任何页面结构、正文与门禁判据，不推送远端。
 > - **CHANGELOG 版段递延**：现役顶段 W874（W851 已落段），W875–W884 段待补且 W883 在途中 → batch_cascade 断言「批次号应为顶段+1」不成立，按仓内现行节奏递延，spec 已入库，待补段批按号序一并回写。
 > **状态**：**已收官**（W885 dcfc348a·git 反填·共 3 笔·W971 存量回填）
-
-### W884（2026-10-22）：Playwright 历史问题全谱审计（T-10 落盘）
-
-> **来源**：用户令对全仓 Playwright 引用做历史问题全谱审计（T-10 任务）。
-> **摘要**：全仓 256 处 Playwright 引用逐项取证 → 25 项 / 8 族问题全谱（环境依赖 7 · file:// 协议 4 · 断言可信度 6 · 触屏模拟 5 · 产物资源 3 · 门禁成本 1 · 平台分歧 2 · 依赖浮版 3），每项带「文件:行号」或批次号锚点并标状态三态（已修复 22 / 仍开放 3）。核心实证三处对评审初判的修正：① package-lock.json 已入库并钉死 playwright 1.63.0 ⇒「浮版解析漂移」初判不成立；② 真漂移面是 ci.yml 的 npm install playwright（无版本约束·绕过 lockfile）⇒ 同一 CI run 并存两个 Playwright；③ 截图审查已有三档 scope ⇒ 真实缺口是「映射停在目录级」而非「没有影响面概念」。另新发现 pages-smoke job 安装 Playwright 与 chromium 但从不调用浏览器（全 job 零浏览器调用）。
-> **文件**：docs/11-方案报告/计划方案/T10-任务计划执行与经验沉淀报告-2026-10-22.md · docs/11-方案报告/README.md · docs/00-导读/W批次编号对账表.md · scripts/output/stats.json · scripts/output/stats-changelog.json · scripts/output/stats-index.md · STRUCTURE.md · docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md · docs/INDEX.md · site/data/search.html · site/en/search.html
-> **验证**：第 48 门禁 0 FAIL（新增文件全项符合·32/32 判据）·lint_links 5466 链接 0 broken·check_index_health 通过·generate_csp --check 856 页 0 漂移。
-> **状态**：**已收官**（W884 e5b262e7 内容批 + 92175003 收官回填 + 5266741c 报告正文回填实测值 + 1af88bb3 台账提交号补全·台账行早已收官；本段系 W956/P-43-03 按台账「有行无段」欠账以补位 spec 补立——**补位 spec**·非原会话叙事·正文以提交信息与报告原文为准）
-
-### W883（2026-10-22）：阶段 5 机检门禁批（朱砂实底常驻门禁第 49 槽 + 四类存量豁免裁决 + W877-W882 六段回补）
-
-> **来源**：用户令「继续」。W883 = v4 规格 §3.2「机检口径（阶段 5 门禁落地）」的兑现——W826 裁决 2（朱砂实底每页 ≤3 处）自 W864 起只有一次性收敛、无常驻防线。
-> - **文件**：scripts/check_vermilion_solid.js、tests/unit/test_vermilion_solid.py、scripts/verify_delivery.py、AGENTS.md、docs/agent/gates.md、scripts/output/_w864_accent_exemptions.json（W883 分册 24 条）、scripts/output/_vermilion_solid_cache.json、scripts/output/_vermilion_solid_report.json、site/dashboard.html（seal 淡底）、scripts/_w876_site_audit.py、scripts/output/_w876_site_audit_head.json、scripts/output/_w876_site_audit_final.json、scripts/output/stats.json、site/data/search.html（搜索索引刷新）、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、pytest.ini、docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md、scripts/index.md、scripts/output/index.md、scripts/output/README.md、CHANGELOG.md、scripts/output/file-index.md。
-> - **门禁本体（第 49 槽·StrictGate）**：浏览器计算样式实测（浅色·file:// 直开）——元素自身 background-color == --accent 且盒面积 >400px²，或 border-top-color == --accent 且 border-top-width ≥2px 且**条带面积**（宽×边框宽）>400px²；**每页非豁免计数 >3 → FAIL**。豁免读 `_w864_accent_exemptions.json`，跨批次分册按 (page, tag.class) 求和扣减；**复合键族合计**（如「span.tag / span.tag.palace」）按实测量贪婪分配、**批注键**（如「span（无类名色片）」）剥批注匹配、**缺 reason 直接抛错**（防无据豁免）。**增量缓存**：按页内容 sha1 只重扫变页（hash 先于探针计算·防并行改动竞态·损坏自动回退全量·--full 强制全量）——96 页全量约 4.5 分钟，增量秒级，浏览器门禁的全站成本由此可控。fail-closed：探针异常该页即 FAIL；playwright 缺失 exit 2 不出 marker。
-> - **建置即绿的实证路径**：首跑 7 页 FAIL → 复合键/批注键匹配修复救回 material-archaeology → 6 页存量超限 → 四类例外口径裁决（24 条入 W883 分册）+ dashboard `.seal` 按 v4 §3.2「徽章实底改为朱砂字 + 8% 淡底」修复（页面级规则·与 W864 批系统性 .seal 转换同模式）→ **0 FAIL**。
-> - **四类存量口径（④ en 迁移直接复用）**：① **数据语义色片**（零和/严重度/文化元素/场景标签等编码·图表语义非装饰·W864 起登记的同一族）；② **KPI 首卡顶条**（v4「卡片顶条保留（1 处/卡）」条款·linguistics 3 行各 1 处的「整页仅首屏首卡可带」张力已在豁免 reason 里如实注明·待后续收敛批裁决）；③ **功能交互实底**（导出按钮/筛选选中态/问津悬浮钮·v4 §5.2 组件规格设计态）；④ **区块标识横条**（route-strip 节标）。第 ⑤ 类**徽章实底不予放宽**——按 v4 修复而非豁免。
-> - **W876 审计器口径校正**：`_w876_site_audit.py` fill 判据由「≥3px / 盒面积」校正为「≥2px / 条带面积」（与 `_w864_accent_audit.py` 及豁免登记簿 criterion 逐字对齐）——HEAD 快照复跑 **457 处 / 89 页**，与原审计分毫不差（此前差 9 处 2px 顶条即此口径差）；终态复跑 457/89（实底零变动）。
-> - **W877-W882 六段回补**：按 W874 补段批先例，六段 spec 按号序一次回写（CHANGELOG 174→180 段·规则行 W001-W882），对账表六行段状态翻「W883 补段批回写」、W877 豁免条目划销。
-> - **验收**：门禁自检 14/14 · pytest tests/unit/test_vermilion_solid.py 11 passed · 门禁实跑 96 页 0 FAIL · verify 54 段自洽锁全绿 · CSP 856 页 0 漂移。**判词：PASS**。
-> **状态**：**已收官**（W883 e750a047·git 反填·共 2 笔·W971 存量回填）
-
-### W882（2026-10-22）：缺口第 4–6 项合并批（竖版海报 3:4 六张 + 百回体系化封面六张 + 可视化页插画四张·构图句改写）
-
-> **来源**：用户就缺口清单令「继续」并就本批三问已定：第 4–6 项三项全做·**16 张**·沿用前三批宣纸水墨锚点·构图句改写。
-> - **文件**：site/static/images/post-01 至 post-06（竖版）、chap-07/14/15/23/27/30（百回母版）、viz-01 至 viz-04（可视化插画），scripts/output/_w882_spec.json、docs/00-导读/W批次编号对账表.md。
-> - **三组构成**：① **竖版海报 3:4 六张**（1200×1600）——悟空/唐僧/八戒/沙僧/白龙马五人物竖像 + 西行长路一景；② **百回体系化封面六张**（1:1 1200×1200）——**同一母版**：旅人背影立于中轴偏下、层叠远山、通宽淡天、淡墨坡地贯通左右，仅换主体符号（回 07 丹炉火 / 回 14 断树猿影 / 回 15 蛇形长脊 / 回 23 寺门菩提 / 回 27 月下破寺白影 / 回 30 宫室屋脊白马），用以验证「可参数化母版」能否批量铺一百回；③ **可视化页插画四张**（1:1 640×640）——网络/热力/雷达/时间线四页型的墨意母题（根须网 / 疏密墨点阵 / 放射线 / 纵向刻痕序列）。
-> - **构图句改写（本批的核心修复·承上一批伪影根因）**：删掉正面的「clear horizontal composition boundary」类**正面几何描述词**，改为纯否定式表述（"the subject sits in the upper two thirds … the lower third is completely empty warm rice-paper"），并在禁项补 "ruled line, horizon line, border, frame"。**只查证：正面描述会被字面执行、否定式禁项不会**（上批 "no border" 从未画出边框）。**效果可复算**：本批 16 张生成后全库 67 件素材的规则线扫描 **0 命中**（上批为 3 件 5.9%）。
-> - **量化验收**（脚本量测·非目视断言）：竖版组净空带 437 至 545 px（27.3% 至 34.1%）·主体墨量 15.6% 至 46.9%·严格朱砂 0.01% 至 0.07%·单件 45.8 至 103.6 KB；百回组净空带 364 至 450 px（30.3% 至 37.5%）·主体墨量 30.7% 至 49.6%·严格朱砂 0.02% 至 0.10%·单件 39.2 至 54.2 KB；插画组净空带 157 至 269 px（24.5% 至 42.0%）·主体墨量 16.0% 至 52.0%·严格朱砂 0.04% 至 0.27%·单件 10.7 至 42.0 KB；主底色 14 值全落 #F4EBDF 至 #FCF8F0 暖白同族；零文字、零水印、零落款、零印章。
-> - **竖版裁切纪律**：源图 1792×2400（比例 0.7467）与 3:4（0.7500）差 0.4%，**纵向只裁 11px**（0.46%）——主体不被切优先于比例精确，形象变 ≤0.01%。
-> - **锚点其余部分逐字复用**（art direction 段、松散枯笔湿染笔触句、配色五色）⇒ 五批累计 59 张跨批严格成套。
-> - **范围纪律**：只新增 site/static/images/ 下十六个素材文件，不改任何页面与门禁件，不推送远端。
-> - **CHANGELOG 版段递延**：现役顶段 W874（W851 已落段），W875–W881 段待补且 W876 在途 → batch_cascade 断言「批次号应为顶段+1」不成立，按仓内现行节奏递延，spec 已入库，待补段批按号序一并回写。
-> **状态**：**已收官**（W882 25bfa5d1·git 反填·共 2 笔·W971 存量回填）
-
-### W881（2026-10-22）：人物补位素材批（十二张 1:1 方图·八戒 6 + 沙僧 4 + 师徒同框 2·沿用前三批宣纸水墨锚点）
-
-> **来源**：用户就「素材图还缺什么」清单令「按顺序开始做」，并就本项三问已定：先做人物补位·**12 张**·1:1 方图·沿用前三批宣纸水墨锚点·题材取「混合题材＋聚焦单一题材＋同题材多角度」三种取向全要。
-> - **文件**：site/static/images/card-13 至 card-24 共 12 件、site/static/images/og-03-bailongma.webp、site/static/img/og-cover-ink-en.jpg、site/static/img/og-cover-ink-en.png、scripts/_w881_rule_line_scan.py、scripts/_w881_fix_rule_line.py、scripts/output/_w881_spec.json、docs/00-导读/W批次编号对账表.md。
-> - **十二张怎么铺**：**八戒 6 张**（月下负囊/持耙守关/坐歇担前/雨中奔行/登高远眺/挑担赶路）、**沙僧 4 张**（负杖渡江/宝杖镇水/守夜/负重前行）、**师徒同框 2 张**（山径并肩/山门前对峙）——一次覆盖三种题材取向：混合题材试调性、单一主体做透（八戒与沙僧各自成组）、同主体多角度（每人多个景别与情境）。
-> - **锚点逐字复用 W852/W853**：art direction 段（宣纸 #FAF7F0 纸底 / 玄墨 #221D16 墨线 / 淡墨 #6B6455 / 单一朱砂 #C8463A 强调 / 赭金 #E9B885 点彩）、松散枯笔湿染笔触句、禁项清单、1:1 方幅构图规则一字不改，仅换主体描述 ⇒ 四批累计 43 张素材图跨批严格成套。
-> - **人物识别锚点**：八戒＝长耳宽口＋九齿钉耙＋赭金虎纹裙；沙僧＝卷发深须＋降妖宝杖＋玄色衣袍。**面部不做卡通化**（禁大眼与笑脸，多取背身与侧身），每张仍只留一处朱砂点（红绦/红结/红缨/红珠/红幡/灯芯）。
-> - **量化验收**（脚本量测·非目视断言）：成品 1200×1200 精确 1:1（源 2048×2048 等比缩放·不裁切）；底部净空带 249 至 407 px（20.8% 至 33.9%）；上 66% 主体墨量 28.9% 至 76.6%；严格朱砂 0.01% 至 0.10%（暖色总量 0.47% 至 4.81% 单列）；主底色 10 值全落 #F4E6D3 至 #FBF6EC 暖白同族；单件 50.0 至 137.3 KB；零文字、零水印、零落款。
-> - **顺带修掉一处提示词字面化伪影（跨批）**：art direction 构图句里的 "ending at a clear horizontal composition boundary" 被模型**字面执行**——在画面上画出贯穿全幅的 1 至 2 px 规则线（与「无边框/无框架」禁项自相矛盾）。自写扫描器 `scripts/_w881_rule_line_scan.py`（判据：某行暗像素占比 ≥65% 且邻行骤降）扫全库 51 件素材，命中 3 件 5.9%：**og-03-bailongma.webp** 与由它导出的 **og-cover-ink-en.jpg/.png**（后者是英文站现行 og:image ⇒ 每次英文分享都带这条线）、以及本批的 **card-15-bajie-zuoxie.webp**。修法 `scripts/_w881_fix_rule_line.py`：定位规则行块并向下并入紧邻的洗边暗行，再逐列用「块上/块下两行颜色」做垂直渐变回填 ⇒ 硬线化为自然淡墨过渡，画面其余部分零改动；复扫 51 件 **0 命中**，且两图已无任何行亮度突降 >18 的硬边。**后续批次的构图句须改写**（把「clear horizontal composition boundary」换成不含「boundary/rule/line」字样的表述，并在禁项补 "no ruled line, no horizon rule"）——本批为保持与前三批锚点同源而未改写，故以程序化修复收口。
-> - **范围纪律**：只新增 12 件素材图 + 两个检测/修复脚本 + 修复 3 件历史资产，不改任何页面与门禁件，不推送远端。
-> - **CHANGELOG 版段递延**：现役顶段 W874，W875–W880 段待补且 W876 在途 → batch_cascade 断言「批次号应为顶段+1」不成立，按仓内现行节奏递延，spec 已入库，待补段批按号序一并回写。
-> **状态**：**已收官**（W881 bbbb070e·git 反填·共 3 笔·W971 存量回填）
 

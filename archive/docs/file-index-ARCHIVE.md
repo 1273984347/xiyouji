@@ -2,7 +2,7 @@
 
 > 本文件归档 file-index.md 中 W031-W087（v2.0.4-v2.0.60）的早期反向索引条目。
 > 现役索引见 [file-index.md](file-index.md)。
-> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880）
+> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880） + 2026-10-29（W960 迁入 W881-W884）
  + 2026-10-26（W960 迁入 W843-W845）
  + 2026-10-26（W960 迁入 W700-W842）
 
@@ -8013,3 +8013,86 @@
 | docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W879 | 改：§113「内联 CSS 覆盖页」表行标记 850→330 |
 | scripts/output/_w879_spec.json | W879 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
 | docs/00-导读/W批次编号对账表.md | W879 | 认领行与收官回填 |
+## W884 Playwright 历史问题全谱审计（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/计划方案/T10-任务计划执行与经验沉淀报告-2026-10-22.md | W884 | Playwright 历史问题全谱审计报告（T-10·25 项 8 族·已修复 22 仍开放 3） |
+| docs/00-导读/W批次编号对账表.md | W884 | 认领行 + 收官回填 + 提交号补全 |
+| scripts/output/stats.json | W884 | report_docs 计数 46→47（连带 stats-changelog/stats-index/STRUCTURE 标记同步） |
+| docs/INDEX.md | W884 | 重建（737→738 篇·13 板块） |
+| site/data/search.html · site/en/search.html | W884 | 站内搜索索引刷新（+T-10 条目） |
+
+
+## W883 阶段 5 机检门禁批（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_vermilion_solid.js | W883 | 新增：第 49 门禁朱砂实底限额（浏览器实测+豁免登记簿+增量缓存+自检 14 例） |
+| tests/unit/test_vermilion_solid.py | W883 | 新增：第 49 门禁单测（自检/纯逻辑/接线/范围 11 例） |
+| scripts/verify_delivery.py | W883 | 第 49 槽 StrictGate 接线（段名+scope+gate 定义） |
+| scripts/output/_w864_accent_exemptions.json | W883 | W883 分册 24 条（四类存量裁决·全簿 96 条） |
+| scripts/output/_vermilion_solid_cache.json | W883 | 新增：增量缓存（96 页 sha1+分类计数·随批入库） |
+| scripts/output/_vermilion_solid_report.json | W883 | 新增：门禁报告（每页实测/豁免/非豁免/状态） |
+| site/dashboard.html | W883 | .seal 徽章实底→淡底（v4 §3.2·与 W864 批 .seal 转换同模式） |
+| scripts/_w876_site_audit.py | W883 | fill 口径校正（≥3px/盒面积 → ≥2px/条带面积） |
+| scripts/output/_w876_site_audit_head.json | W883 | 校正复跑（HEAD 快照·fill 457/89 与原审计一致） |
+| scripts/output/_w876_site_audit_final.json | W883 | 校正复跑（终态·457/89） |
+| AGENTS.md | W883 | §4.2 48→49 槽 + 第 49 槽条目 + 组号范围 |
+| docs/agent/gates.md | W883 | 49 槽标题/速查表/第 49 槽完整定义 |
+| README.md STRUCTURE.md docs/00-导读/项目说明.md | W883 | 版本行与门禁计数（48→49） |
+| pytest.ini | W883 | collected 计数 823→834（+11 例） |
+| docs/11-方案报告/系统架构方案-分层模块与部署-2026-10-20.md | W883 | gate_count 48→49 |
+| scripts/output/stats.json | W883 | 刷新（gate_count 49·2 键） |
+| site/data/search.html | W883 | 搜索索引刷新（gates.md 标题变更·CSP 重算） |
+| docs/00-导读/W批次编号对账表.md | W883 | 认领行与收官回填 + W877-W882 六行段状态翻转 + W877 豁免划销 |
+| CHANGELOG.md | W883 | W883 段 + W877-W882 六段按号序回补（174→180 段） |
+| scripts/output/file-index.md | W883 | 同批七段回写（174→180） |
+
+## W882 缺口第 4–6 项合并批（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/post-01-wukong.webp | W882 | 新增：竖版海报 01/06·悟空（3:4 1200×1600·背身持棒·净空带 438px） |
+| site/static/images/post-02-tangseng.webp | W882 | 新增：竖版海报 02/06·唐僧（3:4·僧影锡杖背光·净空带 514px） |
+| site/static/images/post-03-bajie.webp | W882 | 新增：竖版海报 03/06·八戒（3:4·长耳钉耙虎纹裙·净空带 438px） |
+| site/static/images/post-04-shaseng.webp | W882 | 新增：竖版海报 04/06·沙僧（3:4·卷发深须宝杖·净空带 437px） |
+| site/static/images/post-05-bailongma.webp | W882 | 新增：竖版海报 05/06·白龙马（3:4·白马回首·朱砂鞍鞯·净空带 503px） |
+| site/static/images/post-06-changlu.webp | W882 | 新增：竖版海报 06/06·西行长路（3:4·远山长路·朱砂小旗·净空带 545px） |
+| site/static/images/chap-07.webp | W882 | 新增：百回母版 01/06·回 07 八卦炉（同一母版·丹炉火光·净空带 423px） |
+| site/static/images/chap-14.webp | W882 | 新增：百回母版 02/06·回 14 心猿归正（同一母版·断树猿影·净空带 376px） |
+| site/static/images/chap-15.webp | W882 | 新增：百回母版 03/06·回 15 蛇盘山（同一母版·蛇形长脊·净空带 384px） |
+| site/static/images/chap-23.webp | W882 | 新增：百回母版 04/06·回 23 试禅心（同一母版·寺门菩提·净空带 450px） |
+| site/static/images/chap-27.webp | W882 | 新增：百回母版 05/06·回 27 三打白骨精（同一母版·月下破寺白影·净空带 364px） |
+| site/static/images/chap-30.webp | W882 | 新增：百回母版 06/06·回 30 宝象国（同一母版·宫室屋脊白马·净空带 427px） |
+| site/static/images/viz-01-network.webp | W882 | 新增：可视化插画 01/04·网络图页（根须网·朱砂结点·640×640） |
+| site/static/images/viz-02-heatmap.webp | W882 | 新增：可视化插画 02/04·热力图页（疏密墨点阵·640×640） |
+| site/static/images/viz-03-radar.webp | W882 | 新增：可视化插画 03/04·雷达图页（放射线·朱砂端点·640×640） |
+| site/static/images/viz-04-timeline.webp | W882 | 新增：可视化插画 04/04·时间线页（纵向刻痕序列·640×640） |
+| scripts/output/_w882_spec.json | W882 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
+| docs/00-导读/W批次编号对账表.md | W882 | 认领行与收官回填 |
+
+
+## W881 人物补位素材批（2026-10-22）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/images/card-13-bajie-yuexia.webp | W881 | 新增：人物方图 13/24·八戒月下负囊（背身·长耳·赭金虎纹裙·净空带 349px） |
+| site/static/images/card-14-bajie-choupa.webp | W881 | 新增：人物方图 14/24·八戒持耙守关（九齿钉耙·朱砂缨·净空带 400px） |
+| site/static/images/card-15-bajie-zuoxie.webp | W881 | 新增：人物方图 15/24·八戒坐歇担前（杖横膝·朱砂结·净空带 395px·横贯硬线已程序化修复） |
+| site/static/images/card-16-bajie-yunzhong.webp | W881 | 新增：人物方图 16/24·八戒雨中奔行（斗笠遮面·湿笔雨丝·净空带 344px） |
+| site/static/images/card-17-bajie-denggao.webp | W881 | 新增：人物方图 17/24·八戒登高远眺（崖边背身·云海·朱砂小旗·净空带 249px） |
+| site/static/images/card-18-bajie-daodan.webp | W881 | 新增：人物方图 18/24·八戒挑担赶路（侧身·担挑双囊·净空带 401px） |
+| site/static/images/card-19-shaseng-dujiang.webp | W881 | 新增：人物方图 19/24·沙僧负杖渡江（卷发深须·降妖宝杖·朱砂佛珠·净空带 400px） |
+| site/static/images/card-20-shaseng-zhenshui.webp | W881 | 新增：人物方图 20/24·沙僧宝杖镇水（杖立水中·涟漪·净空带 301px） |
+| site/static/images/card-21-shaseng-shouye.webp | W881 | 新增：人物方图 21/24·沙僧守夜（石上独坐·孤灯光晕·净空带 407px） |
+| site/static/images/card-22-shaseng-fuzhong.webp | W881 | 新增：人物方图 22/24·沙僧负重前行（负囊登阶·雨中·净空带 300px） |
+| site/static/images/card-23-shixiong-bingli.webp | W881 | 新增：人物方图 23/24·师徒山径并肩（八戒在前挑担·沙僧持杖在后·朱砂小旗·净空带 341px） |
+| site/static/images/card-24-shixiong-shanmen.webp | W881 | 新增：人物方图 24/24·师徒山门前对峙（八戒持耙在前·沙僧持杖在后·朱砂门印·净空带 310px） |
+| site/static/images/og-03-bailongma.webp | W881 | 修：白龙马 OG 图的横贯硬线伪影（提示词字面化产物）·程序化渐变回填修复 |
+| site/static/img/og-cover-ink-en.jpg | W881 | 修：英文站 og:image 的横贯硬线伪影（该图即英文站每次分享的封面）·程序化渐变回填修复 |
+| site/static/img/og-cover-ink-en.png | W881 | 修：英文站 og:image 无损母版的横贯硬线伪影·程序化渐变回填修复 |
+| scripts/_w881_rule_line_scan.py | W881 | 新增：横贯硬线伪影检测器（按行暗像素占比 ≥65% 且邻行骤降判定·可复算） |
+| scripts/_w881_fix_rule_line.py | W881 | 新增：横贯硬线定点修复器（规则行块＋向下并入洗边暗行→逐列垂直渐变回填） |
+| scripts/output/_w881_spec.json | W881 | 本批 spec 十字段（CHANGELOG 版段递延·待补段批按号序回写） |
+| docs/00-导读/W批次编号对账表.md | W881 | 认领行与收官回填 |

@@ -92,7 +92,7 @@ ledger: ## 共享面串行化机制自测（台账回填独占 + 收官回填体
 	@echo "==> ledger: 台账工具自测 + 三判据可证伪性验证"
 	python scripts/ledger_backfill.py --self-test
 	python scripts/ledger_close_check.py --self-test
-	python scripts/_w933_mutation_test.py
+	python scripts/ledger_mutation_test.py
 	@echo "==> ledger 完成"
 	@echo "==> ci 完成"
 

@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-29 00:58
+生成时间：2026-10-29 03:52
 
-共 **233** 件（门禁与校验 66 · 批次与登记 11 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 47 · 一次性（下划线前缀） 99）
+共 **152** 件（门禁与校验 67 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 49 · 一次性（下划线前缀） 14）
 
-## 门禁与校验（66）
+## 门禁与校验（67）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -27,6 +27,7 @@
 | `check_content_hygiene.py` | check_content_hygiene.py — 全仓内容卫生扫描（W973 沉淀·W967 问责的全仓版探针）。 |
 | `check_contract_smoke.js` | scripts/check_contract_smoke.js — W583：契约冒烟门禁（O3·file:// EMBEDDED 路径） |
 | `check_corruption.py` | check_corruption.py — 机械腐蚀与插件引用静态门禁（W424 复盘沉淀） |
+| `check_crop.py` | check_crop.py — 验站点版「只裁上部留白」没有切坏主体 |
 | `check_css_decl_separators.py` | 声明分隔门禁（第 35 门禁 · W673/WP-2.6）——防 CSS 缺分号静默吞声明。 |
 | `check_css_orphan_selectors.py` | 孤立选择器门禁（第 36 门禁 · W673/WP-2.6）——防选择器残缀/裸标签残缺行。 |
 | `check_css_var_refs.py` | CSS 变量引用门禁（第 34 门禁 · W672/WP-1.4）——防 style 块引用未定义 CSS 变量。 |
@@ -79,7 +80,7 @@
 | `verify_delivery.py` | verify_delivery.py — 零依赖交付校验门禁（Senior Developer 设立） |
 | `verify_v2_pages.js` | v2.0 新功能验证：dashboard 全站搜索浮层 + 3 新页面加载 + console 错误检查 |
 
-## 批次与登记（11）
+## 批次与登记（12）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -91,6 +92,7 @@
 | `check_review_trigger.py` | check_review_trigger.py — 复盘触发器（W956 建 · W954 复盘报告 P-43-02 / WF-08-b）。 |
 | `ledger_backfill.py` | ledger_backfill.py — 台账登记行的**独占回填**工具（W931 共享面串行化机制·层 2 判据 B） |
 | `ledger_close_check.py` | ledger_close_check.py — 台账**收官回填**自检（W931 共享面串行化机制·层 2 判据 C） |
+| `ledger_mutation_test.py` | _w933_mutation_test.py — W933 三个新判据的**可证伪性**验证（反向验证） |
 | `preflight_check.py` | preflight_check.py — 批次开工前置核验器（S-33 落地 · W736 建 · 复盘第 38 篇 §3）。 |
 | `release.py` | release.py — 版本发布一致性助手 |
 | `release_prep.py` | release_prep.py — 批次发布预检器（S-31 落地 · W736 建 · 复盘第 38 篇 §3）。 |
@@ -120,7 +122,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（47）
+## 工具（49）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -158,6 +160,8 @@
 | `package_analysis_sync.py` | package_analysis_sync.py — B-7：把 scripts/ A-H 类目分析脚本同步进 pip 包 analyses/ |
 | `perf_monitor.py` | W267 E6 性能监控深化·Core Web Vitals 持续监控 + RUM + 警报 + 趋势 + 预算 |
 | `perf_optimize.py` | perf_optimize.py - 全站性能优化脚本 |
+| `plan_template_review.py` | _w857_plan_template_review.py — 计划方案对《任务计划、执行与经验沉淀系统提示词》模板的符合性复核探针 |
+| `plates_verify.py` | _w945_plates_verify.py — 内页专题题图成套的机器判据（尺寸 / 顶部留白 / 墨量 / 朱砂 / 实心块 / 边框 /  |
 | `pre-commit-validate.py` | pre-commit-validate.py — E3 收尾文档同步铁律·自动化校验门禁 |
 | `pre_release_screenshot.py` | pre_release_screenshot.py — 迭代发布前增强版截图审查集成脚本 |
 | `render_check.js` | W701：file:// 下 @font-face 以 origin 'null' 加载站内字体触发 CORS 策略提示， |
@@ -172,7 +176,7 @@
 | `tracked_files.py` | tracked_files.py — 目标提交树文件集合（W894 批·门禁实算口径的单一事实源） |
 | `worktree_rehearse.py` | worktree_rehearse.py — worktree 预演法工具化（W701·S-26·用户圈选开工）。 |
 
-## 一次性（下划线前缀）（99）
+## 一次性（下划线前缀）（14）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -182,96 +186,11 @@
 | `_check_pipeline_consistency.py` | 创意三明治管线一致性轻量校验（P3-7，W508 沉淀）。 |
 | `_cite_probe.py` | 引文候选提取探针（E-A 沉淀，W507 永久化）。 |
 | `_gen_search_index.py` | W594：标题关键词数组（中文 jieba 切词、英文按词干拆分），供前端 +4 加权，≤12 个。 |
-| `_w1001_clean_locks.py` | — |
-| `_w1001_final.py` | _w1001_final.py — W1001 收尾：refresh → 门禁 → 提交 → 台账回填 → 收官笔 |
-| `_w1001_finish_faces.py` | _w1001_finish_faces.py — 手工补齐 W1001 的剩余版本面（级联超时留下的半完成态） |
-| `_w1001_fix_index.py` | _w1001_fix_index.py — 补 file-index 的 W1001 段 + 修 CHANGELOG 编号规则的嵌套双括号 |
-| `_w1001_fix_rule_anchor.py` | — |
-| `_w1001_probe_faces.py` | — |
-| `_w1001_restore_changelog_head.py` | _w1001_restore_changelog_head.py — 恢复被并行批次级联覆盖丢失的 CHANGELOG 头部 |
-| `_w1001_stage.py` | _w1001_stage.py — W1001 级联准备：移除手工插入的临时段 + 生成 W1001 spec |
 | `_w818_file_protocol_probe.py` | _w818_file_protocol_probe.py — `file://` 协议三判据 + 构建产物对照探针（W818 取证脚本·一次性诊 |
 | `_w851_j1_name_audit.py` | _w851_j1_name_audit.py — J1 命名冲突审计（W851·设计迁移阶段 1 验收件） |
 | `_w851_visual_regression_probe.py` | _w851_visual_regression_probe.py — J2 视觉回归探针（W851 建·设计迁移阶段 1 验收件） |
-| `_w857_plan_template_review.py` | _w857_plan_template_review.py — 计划方案对《任务计划、执行与经验沉淀系统提示词》模板的符合性复核探针 |
 | `_w864_accent_audit.py` | _w864_accent_audit.py — W864 B2 朱砂落点审计（朱砂文字 + 朱砂实底·一次性件）。 |
 | `_w876_site_audit.py` | _w876_site_audit.py — C 渠（朱砂文字落 --bg）+ 朱砂实底审计器（W876 重建件）。 |
-| `_w933_mutation_test.py` | _w933_mutation_test.py — W933 三个新判据的**可证伪性**验证（反向验证） |
 | `_w939_scan_targets.py` | W941 · UI 图标位 emoji 基准扫描器（机检判据·独立于替换逻辑） |
-| `_w945_plates_verify.py` | _w945_plates_verify.py — 内页专题题图成套的机器判据（尺寸 / 顶部留白 / 墨量 / 朱砂 / 实心块 / 边框 /  |
 | `_w946_icon_probe.js` | — |
 | `_w950_refresh_icon_paths.py` | W950 · 图标图形刷新器（把打磨后的新图形同步到全仓已内联的 SVG） |
-| `_w951_check_crop.py` | _w951_check_crop.py — 验站点版「只裁上部留白」没有切坏主体 |
-| `_w954_review_evidence.py` | W954 第 43 篇工作复盘 · 三源取证脚本（区间 W795–W953） |
-| `_w978_review_evidence.py` | _w978_review_evidence.py — 第 44 篇工作复盘取证脚本（W978）。 |
-| `_w983_derive.py` | _w983_derive.py — 从归档件**程序化派生** W983 施工脚本（避免手抄漏改硬编码） |
-| `_w983_download.py` | _w983_download.py — W983 出图原件下载（node_id → 本地 raw/round12/） |
-| `_w983_insert_plates.py` | _w983_insert_plates.py — W983：把 12 张线描题图按站内既有 chapter-plate 范式接入 12 个 re |
-| `_w983_make_prompts.py` | _w983_make_prompts.py — W983 出图参数生成（母版跨批逐字复用·只换 SUBJECT 段） |
-| `_w983_make_spec.py` | _w983_make_spec.py — W983 级联 spec 生成（**文件清单从磁盘实算**·不手抄） |
-| `_w983_precheck_pages.py` | _w983_precheck_pages.py — W983 落位页先验（选题前必须过·防「画完才发现无处可放」） |
-| `_w983_prepare.py` | _w983_prepare.py — W983 成品处理（**只处理 raw/round12 的本批 12 张**） |
-| `_w983_retry.py` | _w983_retry.py — W983 单张重出修正器（通用·可复用） |
-| `_w983_serve.py` | _w983_serve.py — W983 本地验收用静态服务（补 webp/js/css MIME·避免浏览器拒渲染） |
-| `_w983_sheet.py` | _w983_sheet.py — W983 本批 12 张母版的核对拼图（大图·供人眼复核题材与形制） |
-| `_w983_zoom.py` | _w983_zoom.py — W983 指定张的关键部位放大核对图（上半身裁切·3 张并排） |
-| `_w984_derive.py` | _w984_derive.py — 从 W983 脚本**程序化派生** W984 施工脚本（替换表 + 残留硬编码断言） |
-| `_w984_download.py` | _w984_download.py — W984 出图原件下载（node_id → 本地 raw/round13/） |
-| `_w984_insert_plates.py` | _w984_insert_plates.py — W984：12 页接入（6 替换 + 6 新增·幂等） |
-| `_w984_make_prompts.py` | _w984_make_prompts.py — W984 出图参数生成（母版跨批逐字复用·只换 SUBJECT 段） |
-| `_w984_make_spec.py` | _w984_make_spec.py — W984 级联 spec 生成（**文件清单从磁盘实算**·不手抄） |
-| `_w984_precheck_pages.py` | _w984_precheck_pages.py — W984 落位页先验（两种动作·各带负样本自证） |
-| `_w984_prepare.py` | _w984_prepare.py — W984 成品处理（**只处理 raw/round13 的本批 12 张**） |
-| `_w984_retry.py` | _w984_retry.py — W984 单张重出修正器（通用·可复用） |
-| `_w984_serve.py` | _w984_serve.py — W983 本地验收用静态服务（补 webp/js/css MIME·避免浏览器拒渲染） |
-| `_w984_sheet.py` | _w984_sheet.py — W984 本批 12 张母版的核对拼图（大图·供人眼复核题材与形制） |
-| `_w984_zoom.py` | _w984_zoom.py — W984 指定张的关键部位放大核对图（上半身裁切·3 张并排） |
-| `_w986_make_prompts.py` | _w986_make_prompts.py — W986 出图参数生成（回目页 6 张**换主体重出**·同 stem 覆盖） |
-| `_w986_make_spec.py` | _w986_make_spec.py — W986 级联 spec 生成（登记面补齐批） |
-| `_w987_family_scan.py` | _w987_family_scan.py — W987 水墨意境卡族盘点 + 回目页插入点实测 |
-| `_w987_insert_scenes.py` | _w987_insert_scenes.py — W987：把 6 张水墨意境图接入回目页「场景插图」位 |
-| `_w987_make_spec.py` | _w987_make_spec.py — W987 级联 spec 生成（水墨意境卡族启用批） |
-| `_w988_card_sheet.py` | _w988_card_sheet.py — 27 张 card-* 水墨卡总拼图（4 列 × 7 行·逐张定题材用） |
-| `_w988_docs.py` | _w988_docs.py — W988 登记面：README §六 补登记 + 方法论篇 §2.9 |
-| `_w988_fix_cascade.py` | _w988_fix_cascade.py — W988 级联后定向订正（「文件」行 / file-index 段补齐 115 个新资产） |
-| `_w988_fix_eol.py` | _w988_fix_eol.py — W988 修复 W988 批写盘污染的行尾（CRCRLF → CRLF） |
-| `_w988_fix_gates.py` | _w988_fix_gates.py — W988 门禁两项 FAIL 的定向修复 |
-| `_w988_insert.py` | _w988_insert.py — W988 接入：27 张水墨卡上站 + 102 页 og:image 换专属图 |
-| `_w988_inventory.py` | _w988_inventory.py — W988 前置盘点（只读·不改任何文件） |
-| `_w988_make_assets.py` | _w988_make_assets.py — W988 派生两类资产（不碰页面·只写图） |
-| `_w988_make_spec.py` | _w988_make_spec.py — W988 级联 spec 生成（水墨卡族投放批） |
-| `_w988_match.py` | _w988_match.py — W988 落位候选页语义盘点（只读） |
-| `_w988_pitfalls.py` | _w988_pitfalls.py — W988 坑表 +6 条与计数链同步（原子替换·保行尾） |
-| `_w988_plan.py` | _w988_plan.py — W988 落位定案表（单一事实源·供预检/接入/og派生三处共用） |
-| `_w988_precheck.py` | _w988_precheck.py — W988 接入前预检（只读·不写盘） |
-| `_w988_sheet.py` | _w988_sheet.py — W988 拼图（核验用·不改页面） |
-| `_w988_subject.py` | _w988_subject.py — W988 共用：主体检测与派生裁切（不写盘·纯函数） |
-| `_w988_verify.py` | _w988_verify.py — W988 验收判据（可复算·含负样本自证） |
-| `_w990_map.py` | — |
-| `_w990_master.py` | _w990_master.py — W999 母版段两变体 + 12 张出图批次生成 |
-| `_w990_og_gap.py` | — |
-| `_w990_pick.py` | — |
-| `_w990_read.py` | — |
-| `_w990_roster.py` | — |
-| `_w990_split.py` | — |
-| `_w999_closeout.py` | _w999_closeout.py — W999 收官补齐（被并行 W1000 提交代提后的登记面补写） |
-| `_w999_crop_recheck.py` | _w999_crop_recheck.py — 裁切验算·**主体簇口径**复算（全目录 88 张） |
-| `_w999_derive_prepare.py` | _w999_prepare.py — 由 `_w984_prepare.py` **程序化派生**（W999 批成品处理） |
-| `_w999_diag.py` | _w999_diag.py — W999 两处诊断：ch089 主体顶真伪 + 回目页真实覆盖口径 |
-| `_w999_fix_t35.py` | — |
-| `_w999_fix_wnum.py` | _w999_fix_wnum.py — W999 段号订正 + 插入本批 W999 段 |
-| `_w999_insert.py` | _w999_insert.py — W999 接入：12 个回目页题图 + 专属 1200×630 og:image |
-| `_w999_ledger_fill.py` | _w999_ledger_fill.py — 台账补登记 W999 行（必守纪律晋升批·其段已入库但台账缺行） |
-| `_w999_make_spec.py` | _w999_make_spec.py — W999 级联 spec 生成 |
-| `_w999_prepare.py` | _w999_prepare.py — W999 成品处理（**只处理 raw/round14 的本批 12 张**） |
-| `_w999_probe.py` | — |
-| `_w999_probe_h1.py` | — |
-| `_w999_rebuild_missing_og.py` | _w999_rebuild_missing_og.py — 重建全站缺失的 og 版（通用·按页面 og:image 反查） |
-| `_w999_redo.py` | _w999_redo.py — W999 重出 5 张（母版段不动·只强化主体段） |
-| `_w999_redo2.py` | _w999_redo2.py — W999 ch001 第三次重出（母版段不动·只改主体段） |
-| `_w999_redo_map.py` | — |
-| `_w999_register.py` | _w999_register.py — W999 登记面：坑表 +4 条（87 → 91）+ 计数链 + 方法论 §2.10 + README  |
-| `_w999_renumber.py` | _w999_renumber.py — W999 → W1001 再让号（段号与台账行一一对应） |
-| `_w999_sheet.py` | — |
-| `_w999_sync_counts.py` | _w999_sync_counts.py — 坑表计数链**按实算**同步（稳健版·不依赖固定文本） |
-| `_w999_verify.py` | _w999_verify.py — W999 接入验收判据（可复算·含负样本自证） |
