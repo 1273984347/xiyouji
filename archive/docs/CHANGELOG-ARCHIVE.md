@@ -13,6 +13,19 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W918（2026-10-24）：检索降级批（B-ARCH-01 清偿·波二九件全清）
+
+
+
+> **来源**：用户 2026-10-24 令「继续」——T-18 C 档波二第四件（B-ARCH-01·波二至此九件全清）。
+
+> - **文件**：xiyouji-agent-web/server/chat.ts、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w918_spec.json、scripts/output/_cascade_files_W918.txt（逐件行见 file-index W918 段）。
+> **状态**：**已收官**（W918 73c95f49·git 反填·共 2 笔·W971 存量回填）
+
+**B-ARCH-01 检索降级落地**：chat 路由 catch 分流——LLM 上游不可达（`LLM API 5xx/429`·ECONNREFUSED/ETIMEDOUT/ENOTFOUND/EAI_AGAIN·fetch failed）时，SSE 以降级说明 text + done 收尾（声明模式切换·本轮已送达的 tool_result 检索引用仍有效·不重复推送防半截重放），仅其余异常维持 W829 固定文案路径。W821 架构方案「容灾主战场是降级可用」在问答链路的落点闭合。
+
+**验证**：tsc --noEmit 零错·test:server 97 passed 零挂·test:integration 19 passed 零挂·test:client 51 passed 零挂（5 文件）。
+
 ### W917（2026-10-24）：DB 正确性包一（B-DB-01 四 P0 落地 + B-DB-05 schema 门禁建置）
 
 

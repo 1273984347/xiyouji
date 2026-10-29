@@ -1,3 +1,21 @@
+### W1032（2026-10-30）：编制表环境依赖纠错（mavis 假设撤回）
+
+> **来源**：用户 2026-10-30 追问「为什么需要 mavis？」——这一问直接推翻了我上一批的结论。
+>
+> **我错在哪**：上一批说「连接器与 Agent 清单待有 `mavis` 环境时重核」。事实是 `mavis` 是 **2026-10-20 那套环境的 CLI**（T05 计划里写的 `mavis mcp create`），**现环境不需要它**——我把旧文档的依赖假设当成了现状汇报，没先问一句「现在有什么工具」。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md、docs/agent/pitfalls.md、scripts/output/_w1032_spec.json、scripts/output/file-index.md、site/index.html
+
+**实测（现环境）**：`list_installed_plugins` → **No connectors installed（连接器 0 个）**；`skill_management list` → **用户级技能 2 个**（`dev-god` / `karpathy-guidelines`）。
+对照编制表记载的「16 个 App 工具 + 12 项技能」——这不是「数据过期」，是**环境换代**。
+
+**处置**：① 编制表 §4 加「环境差异声明」——表内 `mavis-doctor` / `superpowers:*` / `browser-use:*` / `code-review` / `diagram-design` / `deep-research` 等标注**属旧环境·现不可用**；「16 个 App 工具」标为旧环境快照。② **保留挂位方法论**：哪类能力该落哪个位（器具→器物官、检索→千里眼、验证→谛听）这条映射**跨环境不变**，变的只是具体工具名——照抄名字必踩空，按位找当下工具才有效。
+
+**坑表补第 123 条**（总 122→123·流程主题 34→35）：**文档里的操作步骤绑定当时的工具环境，环境一换步骤即失效，而文档不会自己告诉你**。⇒ 引用旧文档的步骤前，先确认它依赖的工具在当前环境是否存在；写「待某工具重核」这类结论前，先搜一遍当前可用的等效接口。
+
+**验证**：C5e 坑表分项对账（26/6/26/19/11/35 = 123）通过 · 全量门禁 57 段核心全绿。
+
+> - **状态**：已收官（环境差异声明入表·坑表第 123 条入库；`mavis` 依赖结论已撤回）
 ### W1031（2026-10-30）：取经编制表数据重核（时效与修订触发入表）
 
 > **来源**：用户 2026-10-30 引用 `执行前计划-T05-取经编制表落库与编制位补全.md` 令「重新设计优化」，选定 A 方案（更新数据 + 精简结构 + 加修订触发）。T05 是 W831 批的执行前计划，W831 已归档收官，但产物《取经编制表》作为**活文档**其数据停在 10-20。
@@ -549,7 +567,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1031），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1032），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1859,19 +1877,5 @@
 **测试对齐**：反馈集成测试从虚构 ID 时代（无外键约束的写法）改为先落真实 session/message 底数——外键正确拒绝虚构引用正是 W917 修复本体的回归证明。
 
 **验证**：tsc 零错·test:server 97 passed 零挂·test:integration 19 passed 零挂·test:client 51 passed 零挂。
-
-
-### W918（2026-10-24）：检索降级批（B-ARCH-01 清偿·波二九件全清）
-
-
-
-> **来源**：用户 2026-10-24 令「继续」——T-18 C 档波二第四件（B-ARCH-01·波二至此九件全清）。
-
-> - **文件**：xiyouji-agent-web/server/chat.ts、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w918_spec.json、scripts/output/_cascade_files_W918.txt（逐件行见 file-index W918 段）。
-> **状态**：**已收官**（W918 73c95f49·git 反填·共 2 笔·W971 存量回填）
-
-**B-ARCH-01 检索降级落地**：chat 路由 catch 分流——LLM 上游不可达（`LLM API 5xx/429`·ECONNREFUSED/ETIMEDOUT/ENOTFOUND/EAI_AGAIN·fetch failed）时，SSE 以降级说明 text + done 收尾（声明模式切换·本轮已送达的 tool_result 检索引用仍有效·不重复推送防半截重放），仅其余异常维持 W829 固定文案路径。W821 架构方案「容灾主战场是降级可用」在问答链路的落点闭合。
-
-**验证**：tsc --noEmit 零错·test:server 97 passed 零挂·test:integration 19 passed 零挂·test:client 51 passed 零挂（5 文件）。
 
 
