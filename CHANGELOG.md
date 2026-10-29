@@ -1,3 +1,20 @@
+### W1026（2026-10-30）：HANDOVER 已完成内容归档 + 归档机制诊断
+
+> **来源**：用户 2026-10-30 三问——「为什么文件内已做完的内容还存在交接文档内 / 已完成的方案报告为何没移入归档 / 对整个项目所有文件的文字内容审查去除过期重复冗长废话」。
+>
+> **诊断（回答前两问）**：不是没做归档，是**归档机制覆盖不全**。六类治理文档各有归档容器（CHANGELOG / HANDOVER / STRUCTURE / AGENTS / 台账 / file-index），但：① HANDOVER 内只有**里程碑块**有滚动窗口（保留最近 6 个），而「二、下一步方向候选清单」是**累积型区段、无任何归档机制**——已完成叙述随批只增不减；② `docs/11-方案报告/` 85 件报告**从来没有归档机制**（README 只有索引，无状态列、无迁出动作）。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/HANDOVER-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、scripts/output/_w1026_spec.json、scripts/output/file-index.md、site/index.html
+
+**本批处置（Q1）**：重构 HANDOVER「二」段——把已完成叙述全文迁 `archive/docs/HANDOVER-ARCHIVE.md`（W402 战略转型 3 条删除线已完成项、A2 系列收束、A3/A4/A5 各方向「已完成 WXXX-WXXX」批次史、E1-E8、S 卡裁决、优先级建议），现役只留 **13 条未完成项**；并**补回一条仍在生效的策略约束**（停止模板化扩容·A3 冻结 215 篇·A4 W342 放宽为「非批量补篇」）——删归档时若不辨认「策略决定 vs 已完成叙述」，会把活约束一起埋掉。**HANDOVER 43.5 → 29.9 KB（-32%），387 行**。
+
+**Q2 诊断（未处置·需另批）**：`docs/11-方案报告/` 85 件（审查与评审 13 / 工作复盘 15 / 治理与核查 3 / 计划方案 51 / 设计与架构 10 / 调研与数据 3）。「已完成且已沉淀」的判据须逐件读（是否有结论、是否已被后续批次引用），不能按文件名批量判断——51 件「计划方案」里既有执行前计划（已过期）也有任务执行报告（已成沉淀），混在一起。拟建 `archive/docs/方案报告-ARCHIVE/` + README 加「状态」列（在役 / 已沉淀），逐件判后迁出。
+
+**Q3 规模（未处置·需分档）**：全仓 **2940 个 md / 47.6 MB**（不含 node_modules/archive/desktop）。按 `D:/open-source/slop-scan`（只诊断）与 `slop-clean`（只删不加·四条硬边界）口径，一轮清完不现实。拟分三档：A 治理与导读（HANDOVER/AGENTS/README/项目说明/文档规范，约 6 件）→ B 方案报告 85 件 → C docs 正文与 site 文案（其余约 2800 件，随批次自然更新，不专项清）。
+
+**验证**：体积窗 0 FAIL（HANDOVER 29.6KB）· 文档口径体检除「HANDOVER 未提交残留」外 0 FAIL（提交后消）· A4 stats 标记「209 篇」随行保留（未破坏 C5 对账）· 归档容器 344KB（追加式·不改写）。
+
+> - **状态**：Q1 已收官；Q2/Q3 已给判据与分档，待用户定范围后另批执行
 ### W1025（2026-10-30）：坑表计数升机器判据（C5e）+ 新 Agent 入口
 
 > **来源**：用户 2026-10-30 令「做」——落实 W1024 结项时提的两条建议：① HANDOVER 顶部加「新 Agent 必读三件套」；② 坑表分项计数升机器判据（W1024 实证：AGENTS 分项停在 `25/25/15/10/28=109` 长期无人核，而总数声明已到 118；我手算 121、实算 122）。
@@ -404,7 +421,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1025），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1026），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1815,31 +1832,5 @@
 **四件清偿**：① **D-W830-02** T-04 计划头「施工未动工」陈旧状态订正为已收官（W827+W845-847·原文备档行内）；② **D-W757-02** bump_version 专项测试——**登记关闭**：工具已随 W711 方案 D 停用（本批实读 --help 实证 STOP 提示），测试需求随工具退役失效；③ **D-W792-02** ci.yml E2E 依赖钉版：`npm install playwright`（无约束·绕过 lockfile）→ 钉 1.63.0 对齐 scripts/package-lock.json（T-10 实证的真漂移面）；④ **B-W855-01** 站点聚合数字失真：site/index.html「全站 772 篇」订正为「615<!--stats:a1_a6_docs--> 篇（A1-A6）」+ **C5b 扩展面纳入 site/index.html**——站点聚合数字从此有标记对账防线（数字+防线两半边齐）。
 
 **验证**：check_doc_sync self-test 33/33·新扩展面实跑零红（615 标记对账生效）·lint_links site 14785 链接 0 broken·pytest 全量·ruff 过。
-
-
-### W912（2026-10-24）：未落地任务首波清偿（T-18 全量盘点 + 站内交互债整包：渡口脚本考古回灌 + 抽屉修复 + 交互门禁建置）
-
-
-
-> **来源**：用户 2026-10-24 令「docs/11-方案报告 把这个文件里面所有没做的任务全部列出来按照模板排一下今天做掉」——T-18 计划件（全量盘点）+ 本批为首波施工。
-
-> - **文件**：site/dukou-engine.html、site/index.html、site/curated.html、site/dashboard.html、site/guide.html、site/sw.js、site/data/text-search.html、site/data/cross-time-danmaku.html、site/404.html、scripts/check_interaction_binding.py、tests/unit/test_check_interaction_binding.py、tests/unit/test_preflight_touches.py、scripts/preflight_check.py、scripts/ci_sim.py、docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md、pytest.ini、scripts/output/stats.json、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/data/tag-cloud.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w912_spec.json、scripts/output/_cascade_files_W912.txt（逐件行见 file-index W912 段）。
-> **状态**：**已收官**（W912 f33d185a·git 反填·共 2 笔·W971 存量回填）
-
-**① T-18 全量盘点件**（落 计划方案/·32 判据全项过）：以 T-09 四簇 217 项为基线 × 10-24 机器复核——8 项已被 W876–W906 核销（A 档留档）；余项分 **B 今日（本批）/ C 近日波二（站点数字门禁·gates 判据收敛·bump 测试·404 补迁移·DB 包一等九项）/ D1 真债大项（按依赖排）/ D2 零受众冻结（显式不排期·解冻条件=judge_gate 重判 UV≥30——把「报告承诺」重排为「价值驱动」的结构性优化）/ E 待用户裁决十二项集中清单**。
-
-**② 渡口页根修（W858 P0·线上交互全失效）**：考古发现主脚本在 W333 后某批被整段剥离（历史各版均有 5 处绑定·当前页零监听）——**自 git 历史（9a1c0306·W333）提取原装 10.4KB 主脚本回灌**（优于重写：本地 RAG 8777 + 零依赖 SVG 力导向 + 渡口知识库全对版），另补 themeToggle 绑定（历史原装即缺·与全站 xy-theme 键一致）；CSP 重算 860 哈希零漂移。
-
-**③ 四根页抽屉桌面误隐修复**：close() 的 350ms 延迟置 none 改为仅移动端（≤768）生效、桌面清内联回 CSS 默认——resize/ESC 不再永久隐藏桌面导航（index/curated/dashboard/guide 四页）。
-
-**④ 小项五连**：sw.js 预缓存死链（mobile-index 两处）清理；text-search 注入失败加可见错误条（role=alert）；假 LIVE 文案改真实口径（「LIVE 弹幕」→「弹幕回放」·aria 同步）；ask-chip 键盘可达（tabindex+Enter/Space 委托）；404 页补夜读防 FOUC。P-06 弹幕表单复核不成立（无 HTML 级禁用）、P-11 FAB 已消失（零元素）、P-09 归并 B-W855-01——定性留档 T-18 件。
-
-**⑤ 交互绑定门禁建置**（A-T07-05）：`check_interaction_binding.py`——注册控件对账 P1（页面脚本区须有控件引用·缺一即红）+ 泛化 NOTE P2（起步策略·W904 C5c 同款治理路径）+ fail-closed + self-test 3/3 + 专项单测 3 例（注册表锚点防漂）；**接 ci_sim 第 8 项**（每 PR 干净检出实跑·挂 verify 槽位涉五处对账另批处理——D-06 披露）。
-
-**⑥ preflight 状态列定位根修**：`_STATUS_CELL_RE` 由单层括号紧匹配放宽为前缀匹配——原形态拒识「已收官（hash·自测 33/33（嵌套）·…）」长尾格→回退固定下标→被含转义竖线碎行击穿（本批认领被误拦一次的实测根因·W825 修法 ① 的残余缺口）；单测 +2 锁定（19/19）。
-
-**协作事件**：本批原拟之号两度被同日并行会话先落地占用（README 专业化批与其后续批·页脚署名在 HEAD 为证），按「先落地者保留」连续让号（T-06 让号同款·T-18 D-04 留档）。
-
-**验证**：交互门禁 self-test 3/3 + 主判据 0 FAIL（渡口全控件达标）·pytest 全量 867 collected 864 passed 3 skipped·preflight 单测 19/19·ruff All checks passed·CSP 860 哈希零漂移·verify 全量核心全绿·第 48 门禁 32 判据过（新增件全项）。
 
 

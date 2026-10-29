@@ -11,6 +11,26 @@
 ---
 
 
+## W1026 HANDOVER 已完成内容归档 + 归档机制诊断（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1026 | 本批新增/修改 |
+| AGENTS.md | W1026 | 本批新增/修改 |
+| CHANGELOG.md | W1026 | 本批新增/修改 |
+| CITATION.cff | W1026 | 本批新增/修改 |
+| HANDOVER.md | W1026 | 本批新增/修改 |
+| README.md | W1026 | 本批新增/修改 |
+| STRUCTURE.md | W1026 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1026 | 本批新增/修改 |
+| archive/docs/HANDOVER-ARCHIVE.md | W1026 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1026 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1026 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1026 | 本批新增/修改 |
+| scripts/output/_w1026_spec.json | W1026 | 本批新增/修改 |
+| scripts/output/file-index.md | W1026 | 本批新增/修改 |
+| site/index.html | W1026 | 本批新增/修改 |
+
 ## W1025 坑表计数升机器判据（2026-10-30）
 
 | 文件 | W | 说明 |
@@ -4712,43 +4732,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W913 | W913 段插入
 | scripts/output/_w913_spec.json | W913 | 本批级联 spec
 | scripts/output/_cascade_files_W913.txt | W913 | 级联落盘清单
-
-## W912 未落地任务首波清偿（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/dukou-engine.html | W912 | 渡口页主脚本考古回灌（W333 原装 10.4KB 自 git 历史提取·W333 后某批剥离致交互全失效的根修）+ 补 themeToggle 绑定（历史原装即缺）+ CSP 重算
-| site/index.html | W912 | 抽屉桌面 display:none 副作用修复（close 仅移动端置 none）+ ask-chip 键盘可达（tabindex+Enter/Space 委托）
-| site/curated.html | W912 | 同款抽屉修复
-| site/dashboard.html | W912 | 同款抽屉修复
-| site/guide.html | W912 | 同款抽屉修复
-| site/sw.js | W912 | 预缓存死链清理（mobile-index.html 两处）
-| site/data/text-search.html | W912 | 注入失败可见错误条（role=alert·非仅 console.warn）
-| site/data/cross-time-danmaku.html | W912 | 假 LIVE 文案改真实口径（LIVE 弹幕→弹幕回放·aria 同步）
-| site/404.html | W912 | 补夜读防 FOUC theme-init（与全站 W488 同款）
-| scripts/check_interaction_binding.py | W912 | 新增：交互绑定门禁（注册控件对账 P1 + 泛化 NOTE P2·fail-closed·self-test 3/3）·接 ci_sim 第 8 项（每 PR 实跑·挂 verify 槽另批）
-| tests/unit/test_check_interaction_binding.py | W912 | 新增：门禁专项单测 3 例（self-test 绿/注册表锚点防漂/HEAD 实跑）
-| tests/unit/test_preflight_touches.py | W912 | +2 例：嵌套括号长尾收官格识别 / 碎行下右起定位（19/19）
-| scripts/preflight_check.py | W912 | _STATUS_CELL_RE 放宽为前缀匹配（原单层括号紧匹配拒识长尾收官格→回退固定下标被碎行击穿·W912 认领拦截实测根修）
-| scripts/ci_sim.py | W912 | GATES 清单 +交互绑定（第 8 项）
-| docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md | W912 | 新增：未落地任务全量盘点（T-09 基线×现势复核·A–E 五档含价值筛选 D2 冻结档）+ 本批计划（32 判据全项）
-| pytest.ini | W912 | pytest_collected 861→867
-| scripts/output/stats.json | W912 | --w W912 刷新
-| docs/00-导读/W批次编号对账表.md | W912 | W912 认领行（两度让号并行批）与收官回填
-| CHANGELOG.md | W912 | W912 段
-| HANDOVER.md | W912 | 级联头尾链与里程碑块
-| README.md | W912 | 当前批次版本行（同日并行在途首屏改动正交·按清单携带）
-| STRUCTURE.md | W912 | 当前批次版本行
-| docs/00-导读/项目说明.md | W912 | 当前批次版本行
-| .github/workflows/README.md | W912 | 工作流层区间与里程碑尾标记
-| site/index.html（页脚批次链） | W912 | 页脚批次链插入 W912
-| site/data/cross-time-danmaku.html（页脚批次链） | W912 | 页脚批次链插入 W912
-| site/data/tag-cloud.html | W912 | 页脚批次链插入 W912
-| site/dukou-engine.html（页脚批次链） | W912 | 页脚批次链插入 W912
-| AGENTS.md | W912 | 版本脚注条目
-| archive/docs/AGENTS-ARCHIVE.md | W912 | 脚注滚动迁入的最老条目
-| CITATION.cff | W912 | version 同步为 W912
-| scripts/output/file-index.md | W912 | W912 段插入
-| scripts/output/_w912_spec.json | W912 | 本批级联 spec
-| scripts/output/_cascade_files_W912.txt | W912 | 级联落盘清单
 
