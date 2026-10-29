@@ -1,3 +1,18 @@
+### W1012（2026-10-29）：产物目录瘦身 + 在途收口批
+
+> **来源**：用户 2026-10-29 令「做」——承接分类报告两荐条：产物目录里的 33MB 一次性基线归档、并行会话收尾件代收（用户确认「都做完了」）。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/README.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/scripts/batches/w8xx/README.md、archive/scripts/batches/w8xx/_w851_visual_snapshot_after.json、archive/scripts/batches/w8xx/_w851_visual_snapshot_before.json、archive/scripts/batches/w8xx/_w876_baseline_after.json、archive/scripts/batches/w8xx/_w876_baseline_before.json、archive/scripts/batches/w8xx/index.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、scripts/output/README.md、scripts/output/_cascade_files_W1012.txt、scripts/output/_w1012_spec.json、scripts/output/_w851_visual_snapshot_after.json、scripts/output/_w851_visual_snapshot_before.json、scripts/output/_w876_baseline_after.json、scripts/output/_w876_baseline_before.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/index.html。
+>
+**要点**：
+① **产物目录瘦身**：`scripts/output/` 是「活产物」目录（file-index/stats/tools-inventory/spec），却躺着 W851/W876 的一次性基线快照 4 件 ≈33MB——全仓 grep 仅被各自**归档 spec** 提及，活代码与测试零消费 ⇒ 迁 `archive/scripts/batches/w8xx/`。这是分类报告里唯一的硬错位。
+② **并行会话收尾件代收**（用户确认其工作「都做完了」但未提交）：`pytest.ini` pytest 计数 979→1016（stats 标记）、两份系统架构方案 md、`tools-inventory.md` 时间戳刷新。
+③ 分类总览报告落 `tmpe/`（8743 文件盘点·七类职责·目录内错位清单），不入库（tmpe 为临时区）。
+
+**验证**：`check_repo_layout`（第 52 槽）0 FAIL · `check_doc_size_budget` 0 FAIL · full `lint_links` 0 broken · 全量 pytest 1013 passed · 全量 verify 核心全过。
+
+> - **状态**：已收官（产物目录回归「活产物」单一职责）
+
 ### W1011（2026-10-29）：仓库整理分类批（五项归位 + 第 52 槽布局门禁）
 
 > **来源**：用户 2026-10-29「对项目的所有文件进行整理分类」→ 我给出盘点与三档方案 → 用户「全都做」。
@@ -179,7 +194,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1011），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1012），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1848,21 +1863,4 @@
 > - **验收**：内联块集合差 **226/226 data+en 零差异（0 缺 0 多）**·reader 102 页 +4,386/−408 行（同源增量）·520 外链 reader 页**零触碰**·CSP 856 页 0 漂移·第 49 槽门禁 **234 页 0 FAIL**·a11y data/en 双目录无 P0·豁免簿按新实测保守核查（4 条复合/批注键对不上者保留·余 256 条）。
 > - **踩坑记录**：首跑 `--force` 未加护栏前把 622 个 reader 页全部内联（66.7 万行）——按 W875 先例整目录 `git checkout HEAD -- site/reader` 恢复后，再在护栏下精确重跑（102 个本就 INLINED 的双容器页补上同源增量，520 个外链页保持原形态）。
 > **状态**：**已收官**（W895 03d60c61·git 反填·共 2 笔·W971 存量回填）
-
-### W893（2026-10-23）：四画幅素材图成套批（十二张·16:9/1:1/3:4/1200×630 各三张·拉丁方主题·沿用 W882 改写锚点）
-
-
-> **来源**：用户第四回令「再帮我做几张素材图」，开工前同样先问三事；本会话按用户选择（数量=12 张、参考=无参考由本会话按项目气质定一版、主题=数据可视化插画/通用意象/回目场景/主要人物四类全要、画幅=每种都要按平均分每种三张、范围=只出图交付到 site/static/images/ 不接线）执行。
-> - **文件**：site/static/images/ 下十二个素材文件、scripts/_w893_gen_args.py、scripts/_w893_finalize.py、scripts/_w893_verify.py、scripts/output/_w893_spec.json、scripts/output/_cascade_files_W893.txt、docs/11-方案报告/计划方案/T16-任务计划执行与经验沉淀报告-2026-10-23.md、docs/00-导读/W批次编号对账表.md。
-> - **取号与认领**：台账 max(W#)=W892 → 本批取 W893（表头 max+1 规则）；`preflight_check.py --touches` 跑通；**W892 段已由并行批立段·顶段推进 ⇒ 本批 W893 正常立段**（原按 W852/W853/W878 先例预备的「版段递延」解除）。
-> - **开工前的反问与应答**：用户第一次问卷反问「我现在都有哪些素材是可以用的、都可以用在哪」→ 先做**磁盘实算 + 引用实算**双口径盘点：站内 71 件素材（images 66 + img 5），**已接线仅 8 组覆盖 856 处引用、闲置 50 件 0 引用**；两个真实缺口＝① 102 个 reader 回目页中 96 页无专属封面（chap 仅 6 页有）② 全站 855 页 og:image 共用 static/img/ 的 2 张图（images/og-01~12 实为 0 引用孤儿）。用户据此拍板「每种都要、按平均分每种三张」。
-> - **四画幅各三张 + 四主题各三张（拉丁方）**：16:9 Hero ×3 + 1:1 卡片 ×3 + 3:4 竖版 ×3 + 1200×630 分享图 ×3 = 12 张；每画幅内三张主题互不相同、每主题跨 3 画幅出现（脚本自检 `{'16:9': 3, '1:1': 3, '3:4': 3, '630': 3}`）。
-> - **锚点沿用 W882 改写版（非 W852 原版）**：art direction 段（宣纸 #FAF7F0 纸底 / 玄墨 #221D16 墨线 / 淡墨 #6B6455 / 单一朱砂 #C8463A 强调 / 赭金 #E9B885 点彩）、松散枯笔湿染笔触句、禁项清单逐字复用；**构图句取 W882 的纯否定式改写版**（删掉「clear horizontal composition boundary」类正面几何描述词，改为「主体坐于上方三分之二 + 下三分之一为空白宣纸」+ 禁项补 ruled line/horizon line/border/frame）——依 W881 实证「正面描述会被字面执行、否定式禁项不会」。**锚点原文在 tmpe/_misc/（不在 scripts/output/）**。
-> - **四画幅并存仍成套**：画幅差异全部在交付端机械处理（源图按生成器支持比例出图 → 覆盖缩放到目标 → 按「顶部深墨是否溢出画幅上沿」分流裁顶/裁底），提示词锚点四批完全同源，不靠事后调色凑一致。
-> - **量化验收**（脚本量测·非目视断言·12/12 PASS）：尺寸精确（2560×1440 / 1200×1200 / 1200×1600 / 1200×630）·底部净空带 **169 至 534 px**（26.8% 至 41.9%）·上 72% 主体墨量 **15.32% 至 62.44%**·严格朱砂 **0.00% 至 2.32%**（暖色总量口径单列 0.16% 至 6.60%）·**规则线扫描 0 命中**（W881 判据）·主底色 11 值全落暖白同族·单件 26.5 至 277.1 KB。目视复核：**零文字、零水印、零落款、零印章**。
-> - **交付端两个自造 bug 被自己的探针抓出**：① 缩放方向错（按「缩放到宽度」得 2560×1428·高度不足 12px ⇒ 底部补出纸色边带）→ 改覆盖缩放 `max(tw/w, th/h)`；② `over_y == 0` 被误判为高度不足（1:1 档 2048×2048 恰好命中目标）→ 拆分为 `< 0` 才补纸、`== 0` 直接裁到目标宽。
-> - **无文字纪律**：十二张均无文字、落款、印章与水印；每张至多一处朱砂点强调。
-> - **范围纪律**：只新增 site/static/images/ 下十二个素材文件 + 三个脚本 + 一份 spec + 报告与索引面；**不接线任何页面、不改门禁件、不推送远端**（级联仅触及页脚版本行·各 1 行·仓内标准行为）。
-> - **共享面与归属声明**：① docs/11-方案报告/README.md 的 T-16 登记行（§二 表格行 19 + §二 抬头补登记段）已被并行 W892 批的提交 76945671 带走——内容完整无损·不重做不回退·以 HEAD 版为准；② 并行提交对台账的改动是 **+3/-1（替换而非追加）** ⇒ 本批 W893 认领行被覆盖消失 ⇒ 按 git 实证补回（第 31 门禁 C4 判红 → 转绿）；③ W854/W857 状态列由「已交付」订正为「已收官」（git log --grep 实证两批已落库·台账陈滞致假在途锁死共享面）；④ **交底一处门禁判据缺陷**——`preflight_check.py:111` 的 touches 解析只按英文逗号切分，而台账实际用中文间隔号「·」分隔 ⇒ 在途批次 touches 整串被当成一个集合元素 ⇒ **交集检查恒为空、恒判「无冲突」（假绿）**；该文件属管控件，依 CLAUDE.md 第 10 条**未擅改**，已留痕待批。
-> **状态**：**已收官**（W893 a06e27b6·git 反填·共 2 笔·W971 存量回填）
 
