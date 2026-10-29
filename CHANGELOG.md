@@ -1,3 +1,25 @@
+### W1038（2026-10-30）：a11y 性能优化（去冗余 lower·收益 5.7%）
+
+> **来源**：用户 2026-10-30 令「做」——承接 W1037 测出的单段瓶颈（a11y对比 73.33s / 52.8%）。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、scripts/a11y_audit.py、scripts/output/_w1038_spec.json、scripts/output/file-index.md、site/index.html
+
+**profile 定位**：`parse_starttag` 被调 **579 万次**、`str.lower` **4863 万次**（tottime 7.3s）。
+病根在 `A11yElement.__init__`——对每个元素全量执行 `tag.lower()` 与 `{k.lower(): v for ...}`。
+
+**改法（实证后动手）**：先验证 CPython 行为——`<DIV CLASS="A">` 经 `html.parser` 解析即得 `tag='div'`、`attrs=[('class','A')]`，**属性键与标签名在进入 handle_starttag 前已被小写化**。⇒ 6 处 `lower()` 纯冗余，去掉。
+
+**语义等价验证（关键）**：改前改后各跑一次，`findings` **13023 条逐条比对，0 处差异**；字节数同为 4,212,724（sha 差异仅来自 `generated_at` 时间戳，非内容）。
+
+**收益：73.9s → 69.7s，仅 5.7%。**
+
+**这个数字说明什么（重要）**：瓶颈**不在冗余 lower**，而在**标准库 `HTMLParser` 的纯 Python 状态机本身**——profile 里 `goahead` cumtime 149s、`parse_starttag` 69s，都是解析器内部开销。去掉 4863 万次 lower 只省 4 秒，说明该方向已挖到底。
+
+**再要大幅提速的唯一路径**：换解析器（`lxml.html` 或 `selectolax`，通常快 10–50 倍）。代价是**引入第三方依赖**，而本项目目前零硬依赖（`policy.yml` 用 JSON 兼容语法、yaml 兜底即是此风格）。**这个取舍应由用户决定，不在本批擅自动手。**
+
+**验证**：findings 逐条一致 · 全量门禁 57 段核心全绿（a11y 段 E2-2 P0/P1=0 未变）。
+
+> - **状态**：已收官（冗余 lower 清除·语义等价已证）；**收益低于预期，已如实标注**；换解析器待裁决
 ### W1037（2026-10-30）：门禁耗时剖析（--profile·实测推翻旧假设）
 
 > **来源**：用户 2026-10-30 令「都做」（A 加剖析 / B 段级缓存 / C 站点段并行）。先做 A——**没有耗时数据，B 和 C 都是瞎打**。
@@ -679,7 +701,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1037），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1038），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1893,23 +1915,5 @@
 **执行中最大发现**：逐图语义核对——6 图中 3 张在代码审读阶段判「通过」，经读图发现语义错误（PG 直连浏览器 / 箭头落进空隙 / 连线穿组）⇒ 修正 3 处（E-01~E-03 经验沉淀）。
 
 **未验证项（6 条 · 显式声明）**：DAU/MAU 与 QPS 为行业经验区间推算（非本站实测）；**PG 性能与备份流程未实跑**（本机无 psql/pg_ctl）；等保条款按通用口径书写未核对本单位备案方案；HTML 图未做多浏览器交叉核对；10 台拓扑未压测；W821「≈ 1 批工作量」估计未复核。
-
-
-### W924（2026-10-24）：Q2 裁决落地批（OBS-10 升双层判红 + OBS-11 归并 LHCI + OBS-14 挂解冻条件）
-
-
-
-> **来源**：用户 2026-10-24 对 Q2 三指标分治建议裁决「好」——W850 建的采样机制（15 批样本）兑现为门槛。
-
-> - **文件**：scripts/check_perf_shadow.py、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、scripts/output/obs_samples.json、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w924_spec.json、scripts/output/_cascade_files_W924.txt（逐件行见 file-index W924 段）。
-> **状态**：**已收官**（W924 f58cd86f·git 反填·共 2 笔·W971 存量回填）
-
-**Q2 裁决落地（三指标分治）**：
-- **OBS-10 页体积升双层制**：第 47 槽（W849 影子槽·设计即预留「满 10 批后裁决」）新增 C2 全站扫描——硬上限 500KB/页判红（现役最大约 405KB·留 21% 余量·今天升今天绿·只拦新增劣化）+ 软预算 200KB 维持 WARN 观察清单（现役 10 页·构成 en 内联双份 ×4 / reader 全文页 ×4 / dialogue-sentiment ×2·根治随 BL-33 CSS 物化改革）；自测 5→9 例（双层正负样本）；实跑零红。
-- **OBS-11 归并既有 LHCI**：perf.yml 每 push 已硬拦 LCP（含 3D 分档）——1.5s SLO 定为记录值·执法由 LHCI 承担·原「攒满 10 批」动作取消（更强防线在岗）。
-- **OBS-14 挂解冻条件**：UV≥30 或 agent-web 真实使用后重议——/api/metrics 滚动窗口零访客=零数据·2s SLO 维持告警级。
-- 数据支撑：15 批样本（W850-W875）静态口径稳定（max 403-413KB·超限 9-10 页·零恶化）+ 本批现势补采；§12.2 Q2 行与 §11.5 三行状态回填系统架构方案。
-
-**验证**：check_perf_shadow 自测 9/9·实跑 C2 零红（10 页观察清单）·verify 全量核心全绿。
 
 
