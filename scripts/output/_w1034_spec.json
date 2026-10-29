@@ -9,31 +9,8 @@
  "milestone_block": "- **W1034 授业官位补全（项目级避坑 skill）**：\n  - `.agent/skills/xiyouji-guard/SKILL.md`：15 条最高频硬判据，四组分类，指向 pitfalls 全表\n  - 分层设计：skill 只放速查，完整 123 条留 pitfalls，不重复维护\n  - 顺带修 gitignore：`.agent/` → `.agent/*` + 放行 skills（父目录整体忽略时子路径 `!` 无效）\n  - 如实标注：该路径不会自动加载，靠 AGENTS 指针生效",
  "agents_note": "2026-10-30（W1034）授业官位补全：15 条硬判据做成项目级 skill。速查在 skill，详查仍在坑表。",
  "file_index_rows": [
-  "| .agent/skills/xiyouji-guard/SKILL.md | W1034 | 本批新增/修改 |",
-  "| .github/workflows/README.md | W1034 | 本批新增/修改 |",
-  "| .gitignore | W1034 | 本批新增/修改 |",
-  "| AGENTS.md | W1034 | 本批新增/修改 |",
-  "| CHANGELOG.md | W1034 | 本批新增/修改 |",
-  "| CITATION.cff | W1034 | 本批新增/修改 |",
-  "| HANDOVER.md | W1034 | 本批新增/修改 |",
-  "| README.md | W1034 | 本批新增/修改 |",
-  "| STRUCTURE.md | W1034 | 本批新增/修改 |",
-  "| archive/docs/AGENTS-ARCHIVE.md | W1034 | 本批新增/修改 |",
-  "| archive/docs/CHANGELOG-ARCHIVE.md | W1034 | 本批新增/修改 |",
-  "| archive/docs/W批次编号对账表-ARCHIVE.md | W1034 | 本批新增/修改 |",
-  "| archive/docs/file-index-ARCHIVE.md | W1034 | 本批新增/修改 |",
   "| docs/00-导读/W批次编号对账表.md | W1034 | 本批新增/修改 |",
-  "| docs/00-导读/项目说明.md | W1034 | 本批新增/修改 |",
-  "| scripts/output/README.md | W1034 | 本批新增/修改 |",
-  "| scripts/output/_cascade_files_W1034.txt | W1034 | 本批新增/修改 |",
-  "| scripts/output/_w1034_spec.json | W1034 | 本批新增/修改 |",
-  "| scripts/output/file-index.md | W1034 | 本批新增/修改 |",
-  "| scripts/output/index.md | W1034 | 本批新增/修改 |",
-  "| scripts/output/stats.json | W1034 | 本批新增/修改 |",
-  "| scripts/output/tools-inventory.md | W1034 | 本批新增/修改 |",
-  "| site/data/cross-time-danmaku.html | W1034 | 本批新增/修改 |",
-  "| site/data/tag-cloud.html | W1034 | 本批新增/修改 |",
-  "| site/dukou-engine.html | W1034 | 本批新增/修改 |",
-  "| site/index.html | W1034 | 本批新增/修改 |"
+  "| scripts/output/_vermilion_solid_cache.json | W1034 | 本批新增/修改 |",
+  "| scripts/output/_w1034_spec.json | W1034 | 本批新增/修改 |"
  ]
 }
