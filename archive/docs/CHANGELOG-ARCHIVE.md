@@ -13,6 +13,21 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W915（2026-10-24）：波二余件一·二批（gates.md 时点快照收敛 + 404 页令牌补迁移）
+
+
+
+> **来源**：用户 2026-10-24 令「按顺序全部都做了」——T-18 C 档波二余项顺序执行（本批第 1-2 件）。
+
+> - **文件**：docs/agent/gates.md、site/404.html、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w914_spec.json、scripts/output/_cascade_files_W915.txt（逐件行见 file-index W915 段）。
+> **状态**：**已收官**（W915 ec6cf06a·git 反填·共 2 笔·W971 存量回填）
+
+**A-T02-01 gates.md 判据收敛**：第 43 槽描述内嵌的 W753 时点快照数字（缺口 V3/V4/V2 三数·首跑耗时·另一处 770 计数）全部剥离，改为指向 chart-values-report.json 与基线文件——判据文档只留判据与阈值（p00=0.82 阈值语义保留），时点值归报告与产物文件，杜绝「判据文档养快照数字必漂移」。
+
+**C-B02 404 页补迁移**：B1 唯一漏页——:root 补 v4 间距令牌页内副本（--space-6/8/9·与 tokens.css 同值·404 为自含小页不参与 inline_css 分发），24px/48px 40px 两处等值替换；非刻度值（9px/18px/16px 等）按 W891 等值替换纪律保留字面量。
+
+**验证**：check_js_syntax 855 文件过·check_structure 1412 块平衡过·var(--space- 命中 0→3。
+
 ### W914（2026-10-24）：英文版 README（完整对照版 + 双向语言互链）
 
 
