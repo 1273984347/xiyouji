@@ -1,3 +1,22 @@
+### W1016（2026-10-29）：教训固化批
+
+> **来源**：用户 2026-10-29 三问「这次任务中遇到的问题都解决了吗·以后还会再犯错吗·多 Agent 项目其他 Agent 后续能了解到吗」——直指 W1014 的**载体缺口**：缺陷代码修了，但教训未落 `docs/agent/pitfalls.md` ⇒ 违反 §6-14「跨会话教训权威落坑表与本节，私有记忆仅作镜像」。故本批不新增功能，只做**教训固化**。
+>
+> - **文件**：AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/项目说明.md、docs/00-导读/新Agent启动Prompt.md、docs/00-导读/W批次编号对账表.md、docs/agent/pitfalls.md、scripts/batch_cascade.py、scripts/check_doc_sync.py、scripts/output/file-index.md、tests/unit/test_cascade_precheck.py、tests/unit/test_status_z_parse.py
+>
+**要点**：
+① **先核后补（不重复登记）**：逐条 grep 验证 W1014 实踩的 12 类问题哪些已在坑表——`E-17`「级联不能重跑 + 段内定向订正」**已覆盖**（W1014 正是照它做的），`W523`「git 输出路径要加 `core.quotePath=false`」**只覆盖 git diff** ⇒ 缺 `status --porcelain` 半边。据此补 **7 条真缺口**（102→109 条）。
+② **git 组 +2**：`E-37` `status --porcelain` 不受 `quotePath=false` 影响（中文路径仍八进制转义）+ `-z` 的 rename 两条记录次条无 `XY` 前缀 + dirty 须只收 Y 位非空；`E-38` 并行会话撞号（对方新件 docstring 自称我方批号）与生成器产物连带改的归属判断法。
+③ **级联组 +2**：`E-39` spec 四字段硬性形态与「desc 写进版本抬头行」的连带后果（W1014 连撞 4 次）；`E-40` 回窗工具把「未超窗」误报成失败（正常态被断言当异常）。
+④ **流程组 +3**：`E-41` 沙箱三类假缺陷识别法（EPERM/存根 python/锁权限，判据＝完全权限下复跑是否仍红）；`E-42` 报告登记编号取全局 max 且分区篇数须等于行数；`E-43` 「死门控」——配置项或分支位置让判据永不可达（W999 同族泛化）。
+⑤ **可机检者升硬守卫**：`batch_cascade.precheck` 新增拒 spec `desc`/`head_sentence` 裸聚合数字（原只能落盘后被第 31 门禁 C5c 抓、而级联不可重跑 ⇒ 只能手工订正）——本批实测该守卫当场拦下自己的 spec 草稿。
+⑥ **补缺失自测**：`check_doc_sync._parse_status_z` 抽为纯函数 + `tests/unit/test_status_z_parse.py` 5 例（W1014 修此 bug 却没加测试）；`tests/unit/test_cascade_precheck.py` 13 例锁 precheck 全规则。
+⑦ **顺带根治常驻红**：`check_gov_doc_claims` N5「`新Agent启动Prompt` a1_a6=615 ≠ stats 616」自 W1011 起常驻报红（W1011 使 A5 34→35、总数 615→616 未随改）⇒ 订正该文档两处 + AGENTS §1 分项 A5 34→35（原分项合计 615 与总数标记 616 自相矛盾）⇒ 数字断言对账 **0 FAIL**。
+
+**验证**：`check_gov_doc_claims` N1-N5 全一致（0 FAIL）· N4 坑位数 109 == pitfalls 实数 · ruff 全仓 0 债 · 新增 18 例单测全过 · precheck 自测含裸数字正/负样本 · 全量 verify 核心全过。
+
+> - **状态**：已收官（教训落载体 + 可机检者升硬守卫）
+
 ### W1014（2026-10-29）：工具链体检整改批
 
 > **来源**：用户 2026-10-29 令「检查项目所有的工具、脚本、探针、门禁有没有问题是否需要优化；临时文件系统和归档系统现在是否需要修改优化；对所有文件目录进行整理分类；该进归档系统的进归档系统，该进临时文件系统的进临时文件系统」→ 三决策（全修含门禁本体 / 待 W1013 收官开本批 / 全部接线升格）。
@@ -226,7 +245,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1014），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1016），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1862,15 +1881,4 @@
 **复验**：造 1 个未跟踪文件 + 1 个未跟踪目录时第 45 门禁 **0 FAIL**（核心目标达成）·self-test 7/7 ·ruff **0 error** ·16 项单测全过。
 > - **踩坑记录**：EN 版第一轮溢出 270px/266px（英文长句叠行）⇒ 修法不是继续压字号而是先修**宽度根因**（页眉 tagline 的 `white-space: nowrap` 使整列溢出 82px）；第二轮仍高 57/131px ⇒ 再逐档收紧到零溢出。教训：**先分「宽度溢出」与「高度溢出」两类**，宽度问题不修则高度怎么压都不对。
 > **状态**：**已收官**（W898 b2334ad8·git 反填·共 6 笔·W971 存量回填）
-
-### W897（2026-10-23）：协作防护修复（preflight touches 分隔符根修 + ci_sim 接进 CI）
-
-> **来源**：用户 2026-10-23 批准「A 修 preflight 的 touches 分隔符 bug」+「C 把 ci_sim.py 接进 CI workflow」。
-> - **文件**：scripts/preflight_check.py、tests/unit/test_preflight_touches.py、.github/workflows/ci-sim.yml、.github/workflows/README.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、pytest.ini、docs/00-导读/W批次编号对账表.md。
-> - **病根（实测）**：`preflight_check.py` 的台账 touches 列解析与命令行 `--touches` 解析**都只按逗号切分**，而台账自 W739 起实际用「·」分隔 ⇒ 整串被当成一项 ⇒ **交集检查恒空假绿** ⇒ W896 批实测的「PREFLIGHT PASS·无交集」是**无效结论**，那两次撞面实为人工核对发现而非机器拦住。
-> - **修法**：新增 `_split_touches()` 统一切分，兼容 `,` `，` `、` `·` `•` 五种分隔符（**不含空白**——仓内文件名不含空格，避免把文件名切碎）；台账列解析与命令行解析**同源**走该函数。
-> - **配套单测**：新增 `tests/unit/test_preflight_touches.py`（11 例）锁定多分隔符切分 / 台账列解析 / 占位符归一 / 交集真能报出且不误报。
-> - **ci_sim 接进 CI**：新增 `.github/workflows/ci-sim.yml`（PR 与 push dev 触发·干净检出跑 `scripts/ci_sim.py` 的 7 项关键门禁·纯 Python 不需浏览器与 node_modules·fetch-depth 0 取全量历史）⇒ 「本地红 vs CI 绿」从人工推理变成机器结论。
-> - **验收**：修复后 preflight 的 NOTE 行能把本批 touches 正确切成 5 项（修复前整串当 1 项）·单测 11 例全过 ·第 42 门禁根级脚本覆盖 0 FAIL（两个新脚本各有测试面引用）。
-> **状态**：**已停止**（W897 零提交·git 事实标注·W971 存量回填）
 

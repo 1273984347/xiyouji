@@ -11,6 +11,19 @@
 ---
 
 
+## W1016 教训固化批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1016 | 教训固化 |
+| docs/00-导读/W批次编号对账表.md | W1016 | 教训固化 |
+| docs/00-导读/新Agent启动Prompt.md | W1016 | 教训固化 |
+| docs/agent/pitfalls.md | W1016 | 教训固化 |
+| scripts/batch_cascade.py | W1016 | 教训固化 |
+| scripts/check_doc_sync.py | W1016 | 教训固化 |
+| tests/unit/test_cascade_precheck.py | W1016 | 教训固化 |
+| tests/unit/test_status_z_parse.py | W1016 | 教训固化 |
+
 ## W1014 工具链体检整改批（2026-10-29）
 
 | 文件 | W | 说明 |
@@ -4034,18 +4047,4 @@ docs/11-方案报告/README.md
 | docs/00-导读/W批次编号对账表.md | W898 | 认领行与收官回填 |
 | CHANGELOG.md | W898 | W898 段 |
 | scripts/output/file-index.md | W898 | 同批段回写 |
-
-## W897 协作防护修复（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/preflight_check.py | W897 | touches 分隔符根修（`_split_touches` 兼容五种分隔符·台账与命令行同源） |
-| tests/unit/test_preflight_touches.py | W897 | 新增单测 11 例（多分隔符 / 台账列解析 / 占位符归一 / 交集判定） |
-| .github/workflows/ci-sim.yml | W897 | CI 侧预演 workflow（PR + push dev·干净检出跑 7 项关键门禁） |
-| .github/workflows/README.md | W897 | 里程碑行上限随现役号同步 |
-| scripts/output/stats.json | W897 | pytest_collected 随新增单测刷新 |
-| pytest.ini | W897 | pytest_collected 标记同步 |
-| docs/00-导读/W批次编号对账表.md | W897 | 认领行与收官回填 |
-| CHANGELOG.md | W897 | W897 段 |
-| scripts/output/file-index.md | W897 | 同批段回写 |
 

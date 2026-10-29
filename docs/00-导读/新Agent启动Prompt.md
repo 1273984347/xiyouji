@@ -13,7 +13,7 @@
 
 【第 1 步 · 定位现状（必读 3 份）】
 1. HANDOVER.md →「零、当前阻塞」+「一、当前进度」：当前 HEAD（vX.Y.Z W###）、下一 W 编号、遗留阻塞/待办
-2. README.md → 项目全貌：A1–A6 内容板块（615 篇）、可视化页 87（site/data 共 88 个 HTML，「87」不含模板壳 _shell.html）、在线站点、双协议授权
+2. README.md → 项目全貌：A1–A6 内容板块（616 篇）、可视化页 87（site/data 共 88 个 HTML，「87」不含模板壳 _shell.html）、在线站点、双协议授权
 3. docs/00-导读/项目说明.md → 项目状态、轨标、关键产出
 
 【第 2 步 · 文件管控（动手前必读）】
@@ -44,7 +44,7 @@
 - 提交流程：每完成一个 W 按 §11.4 勾选清单同步文档 → `python scripts/verify_delivery.py` 全绿 → 提交 → push → 确认 CI / Security / Deploy Pages / Screenshot Review 全绿 → 状态行收尾
 
 【第 5 步 · 现役口径（唯一版本，勿信旧速记）】
-- A4 计数：**209 篇**（EXPECT_A4 断言按字面量核查 README/STRUCTURE/项目说明/交接文档 四文件，该字样禁删）；A1–A6 真实计数：**615 篇**（门禁算法＝六板块目录顶层 .md 磁盘计数 == README「共 N 篇」声明值；W505 起 611→615）
+- A4 计数：**209 篇**（EXPECT_A4 断言按字面量核查 README/STRUCTURE/项目说明/交接文档 四文件，该字样禁删）；A1–A6 真实计数：**616 篇**（门禁算法＝六板块目录顶层 .md 磁盘计数 == README「共 N 篇」声明值；W505 起 611→615）
 - LHCI 硬门禁：**LCP < 5000ms · CLS < 0.3 · TBT < 300ms**（W424 实测校准）
 - 性能预算：`scripts/output/perf-budget.json`（total 921600 bytes）
 - CSP：233 页 · `script-src-attr 'none'` · 哈希总数当批现测（勿引用历史速记值作验收阈值；W513 时点实测 1189）

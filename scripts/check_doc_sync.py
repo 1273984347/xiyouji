@@ -542,6 +542,24 @@ def _load_stats():
         return None
 
 
+def _parse_status_z(raw):
+    """纯函数：解析 `git status --porcelain -z` 原始串 → 工作树脏件路径列表（W1016 抽出供测）。
+
+    -z 格式：记录以 NUL 分隔；正常件为 `XY<space>path`；rename/copy 为**两条**记录
+    （首条带 `XY ` 状态位 = new path，次条**无状态位前缀** = old path）。
+    只收 **Y 位非空**（工作树态有改动）者——dirty 语义是「工作树有未暂存改动」，已暂存件
+    （`M `·Y 位为空）不算（原实现用 `ln[1] != " "` 表达，-z 版须等价保留）。
+    """
+    recs = [x for x in (raw or "").split("\0") if x.strip()]
+    out = []
+    for rec in recs:
+        # 判据须用「前两字符是合法状态码」而非「rec[1] != 空格」——后者会把 old path 的
+        # 首两字符（sc/ma/do…）误判为状态位 ⇒ 收进 "ipts/_w1013_*.py" 这类截断路径（实测）。
+        if len(rec) > 3 and rec[:2] in _GIT_STATUS_CODES and rec[1] != " ":
+            out.append(rec[3:])
+    return out
+
+
 def _git_status_z():
     """`git status --porcelain -z` 的**未转义原路径**记录列表（W1014 中文路径修）。
 
@@ -558,20 +576,7 @@ def _git_status_z():
         return None
     if r.returncode != 0:
         return None
-    recs = [x for x in r.stdout.split("\0") if x.strip()]
-    out = []
-    for rec in recs:
-        # -z 模式下 rename/copy 输出**两条**记录：首条带 `XY ` 状态位（new path）、
-        # 次条**无状态位前缀**（old path·纯路径）。判据须用「前两字符是合法状态码」
-        # 而非「rec[1] != 空格」——后者会把 old path 的首两字符（sc/ma/do…）误判为状态位
-        # ⇒ 收进 "ipts/_w1013_*.py" 这类截断路径（实测）。
-        #
-        # 且只收 **Y 位非空**（工作树态有改动）者：dirty 的语义是「工作树有未暂存改动」，
-        # 已暂存件（`M `·Y 位为空）不算 dirty——原实现用 ln[1] != " " 表达此语义，
-        # -z 版须等价保留（否则已 add 的件被误判「漏 add」·实测 78 件全误判）。
-        if len(rec) > 3 and rec[:2] in _GIT_STATUS_CODES and rec[1] != " ":
-            out.append(rec[3:])
-    return out
+    return _parse_status_z(r.stdout)
 
 
 def _git_output_lines(args, strip=True, timeout=30):
