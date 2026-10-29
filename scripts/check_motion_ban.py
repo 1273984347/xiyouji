@@ -21,7 +21,7 @@ import re
 import sys
 from pathlib import Path
 
-from utils.gate_common import iter_private_style_blocks
+from utils.gate_common import STYLE_BLOCK_RE, iter_private_style_blocks
 
 ROOT = Path(__file__).resolve().parent.parent
 BAN = [
@@ -61,7 +61,12 @@ def main():
         s = f.read_text(encoding="utf-8", errors="ignore")
         rest = s
         private = {body for body, _ in iter_private_style_blocks(s)}
-        for st in re.findall(r"<style>(.*?)</style>", s, re.S):
+        # W1022 修（审查 P2-4）：块枚举必须与 `iter_private_style_blocks` 用同一正则形态。
+        # 原用精确 `<style>` 字面量 ⇒ 168 个含属性页（`<style id="audit-halo">` 等）的私有块
+        # 既不进 private 集合、也没被 rest.replace 摘除 ⇒ 落到「剩余文本」路径且失去白名单剥离
+        # ⇒ 一旦禁用动效落进带属性块即假红（当前 0 命中，属潜伏）。
+        for _m in STYLE_BLOCK_RE.finditer(s):
+            st = _m.group(1)
             rest = rest.replace(st, "", 1)
             if st not in private:  # INLINED 副本跳过（共享 CSS 已在源文件扫过）
                 continue

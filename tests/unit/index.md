@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（60）
+## 文件（61）
 
 ### Python 脚本
 
@@ -65,6 +65,7 @@
 - `test_slice_screenshots.py`
 - `test_stats_sync.py`
 - `test_status_z_parse.py`
+- `test_style_block_judgement.py`
 - `test_tmpe_tidy.py`
 - `test_tool_scripts_cli.py`
 - `test_tools_inventory.py`

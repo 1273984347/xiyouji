@@ -52,6 +52,12 @@ def scan_rows(ledger_text):
     token_ws, legacy_ws = [], []
     for row in pf.parse_ledger(ledger_text)["rows"]:
         status = row.get("status") or ""
+        # W1022 修（审查 P1-3·fail-open）：**在途行不计事件**。原实现只认 token 字样，
+        # 而认领行在派发时就写「在途（对抗审查已派发·审查中）」⇒ 写一行在途登记即可把
+        # 本哨清零，审查中断/丢弃后再不报警（实测 W1022 在途行把「W998 已 23 批」压回 0）。
+        # 语义：token 标记的是「已派发这一事实」，但**事件完结**才应重置计数。
+        if status.startswith("在途"):
+            continue
         if TOKEN in status:
             token_ws.append(row["w"])
         elif LEGACY_WORD in status:
@@ -179,6 +185,13 @@ def _self_test() -> int:
     ok7, _ = evaluate("| W1005 | 常规批 | a | b | 已收官（对抗审查已派发） | s | x |")
     if ok7:
         fails.append("T7 同批派发不应触发")
+
+    # T9（W1022 P1-3 回归·fail-open）在途行即使写了 token 也**不得重置计数**——
+    # 原实现只认字样，写一行在途登记即可永久压制本哨（实测把「W998 已 23 批」压回 0）。
+    ok9, lines9 = evaluate(rows(token_at=1000, upto=1024, start=1000,
+                                extra=["| W1025 | 在途审查 | a | b | 在途（对抗审查已派发·审查中） | s | x |"]))
+    if not ok9 or not any("W1000" in y and "25 批" in y for y in lines9):
+        fails.append("T9 在途行不得重置计数（应以 W1000 计 25 批触发）：%s" % lines9)
 
     print()
     if fails:

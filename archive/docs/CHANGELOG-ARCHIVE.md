@@ -13,6 +13,30 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W904（2026-10-24）：C5c 裸聚合收敛（74 处清零·判据转 FAIL·stats 增 7 板块键·后置精确豁免）
+
+
+
+> **来源**：用户 2026-10-24 引用 W902 审查报告 F4 遗留项「C5c 裸聚合 74 处收敛债」令处理——W703 建槽时「起步策略·收敛后转 FAIL」设计终态的执行批。
+
+> - **文件**：scripts/stats.py、scripts/check_doc_sync.py、README.md、STRUCTURE.md、AGENTS.md、docs/00-导读/项目说明.md、CONTRIBUTING.md、docs/00-导读/统计口径说明.md、docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md、docs/11-方案报告/README.md、scripts/output/stats.json、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w904_spec.json、scripts/output/_cascade_files_W904.txt（逐件行见 file-index W904 段）。
+> **状态**：**已收官**（W904 69ae9e89·git 反填·共 2 笔·W971 存量回填）
+
+**① stats.py 增 7 板块键**：a2/a3/a5/a6/learn/cognition/spirit（口径对齐 a4_docs——板块顶层 .md 排 README·Git 索引实算），首刷值 44/215/34/13/4/3/4。
+
+**② check_doc_sync 判据四升级（管控件·F4 处理令）**：
+- **C5c 由 NOTE 转 FAIL**（W703 终态·防回退）；
+- **命中后置精确豁免**：裸命中后紧跟 `<!--doc-sync:exempt-->` 只豁免该命中，同行句式/标记对账照跑（供「既有 stats 标记又含常量」的混排行）；
+- **整行豁免收紧为行首形态**——原「行内含即整行跳过」会吞掉后置豁免行上的标记对账（T30 负样本实证·现存零使用零迁移）；
+- **RE_BARE_AGG 词边界** `(?<![A-Za-z])`——「S1 项目」「A2 个人随笔」「S3 项目」类编号假阳性不计（实测 3 处）。
+- self-test 增 T27-T31 五例（先红后绿·含假阳性防回归）·31/31。
+
+**③ 存量 74 处三分治清零（C5c 实测 74 → 0）**：实体化 24 处（13 个键位）/ 后置豁免 44 处（常量·历史时点·功能描述）/ 改写去漂移数 2 处。**两处陈旧值随批纠正**：STRUCTURE「A5 已建 4 篇」实数 34（无对账期漂移的实锤案例）；「docs/INDEX 321 篇」陈旧计数改写为不带数表述。README「docs 18 个板块」同改描述式。
+
+**④ F4 状态收口**：审查报告状态行/遗留盘点表/README 登记行 34 同步订正。
+
+**验证**：check_doc_sync self-test 31/31·主判据 C5c 0 处·ruff scripts/ All checks passed·pytest 858 passed 3 skipped·verify 全量核心全绿。
+
 ### W903（2026-10-24）：审查发现修复（preflight touches 语义归一 + 门禁 45 提示语补序）
 
 

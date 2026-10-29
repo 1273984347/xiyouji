@@ -14,9 +14,9 @@ inline_css.py — 将数据页的外部 ../tokens.css + ../system.css <link> 标
 - 幂等：已内联（带 INLINED CSS 标记）的页面默认跳过；--force 重新同步。
 
 用法：
-    python scripts/inline_css.py                 # 内联所有未处理的页面
-    python scripts/inline_css.py --force         # 强制重新同步**已内联页**（不再顺带把外链页转内联）
-    python scripts/inline_css.py --force --inline-links  # 显式把外链页也转为内联（大动作·W895 护栏）
+    python scripts/inline_css.py                 # 无操作（已内联页 skip-inlined、外链页 skip-external）
+    python scripts/inline_css.py --force         # 重同步已内联页（传播 CSS 改动用这个·外链页仍不动）
+    python scripts/inline_css.py --inline-links  # 显式把外链页也转为内联（大动作·W895 护栏）
     python scripts/inline_css.py --dry           # 仅统计，不写文件
 """
 import os
@@ -81,14 +81,18 @@ def process(path, force, dry, inline_links=False):
         return "skip-no-link"   # 根级页面用 tokens.css（无 ../ 且无标记），无需处理
     if already and not force:
         return "skip-inlined"
-    # W895 护栏（BL-33）：--force 只重同步已内联页；外链页转内联会把整站样式的
-    # 维护形态从「外链」换成「内联」（W875/W895 两次实证 66 万行格式抖动），
-    # 必须显式加 --inline-links 才做，避免通扫误伤 520+ 外链 reader 页。
-    if force and not already and not inline_links:
+    # W895 护栏（BL-33）：外链页转内联会把整站样式的维护形态从「外链」换成「内联」
+    # （W875/W895 两次实证 66 万行格式抖动），必须显式加 --inline-links 才做。
+    # W1022 修：原判据只在 `force` 分支生效 ⇒ **裸跑无参**（照 docstring「内联所有未处理
+    # 页面」）会一次把 526 个外链页全转内联（审查 P2-1 实测 inlined 526）——护栏必须
+    # 覆盖默认路径，否则防的是 `--force` 而漏的是更常见的裸命令。
+    if not already and not inline_links:
         return "skip-external"
     if already and force:
-        # 移除旧内联块（从标记注释到对应 </style>）
-        html = re.sub(r"<!-- %s.*?-->\s*<style>.*?</style>\s*" % re.escape(MARKER),
+        # 移除旧内联块（从标记注释到对应 </style>）。
+        # W1022 修：前导 `[ \t]*` 必须一并吃掉——否则插入点的行首缩进每轮留一份，
+        # 与新一轮写入的 4 空格叠加，重同步**不幂等**（审查 P3 实测每轮 +4B）。
+        html = re.sub(r"[ \t]*<!-- %s.*?-->\s*<style>.*?</style>\s*" % re.escape(MARKER),
                       "", html, flags=re.S)
 
     with open(TOKENS, encoding="utf-8") as f:
@@ -120,7 +124,11 @@ def process(path, force, dry, inline_links=False):
         html = html.replace("</head>", inlined + "</head>", 1)
 
     if not dry:
-        with _w536_guard_open(path, "w", encoding="utf-8") as f:
+        # W1022 修（审查 P2-2）：默认文本模式写盘在 Windows 上会把每个 `\n` 落成 `\r\n`
+        # ⇒ 330 个内联页工作树全成 CRLF，与 .gitattributes `text=auto eol=lf` 契约背离
+        # （`git ls-files --eol` 显示 i/lf w/crlf），「逐字节一致」只在 universal-newline
+        # 读法下成立、二进制口径每页多 1558 B。newline="" 保证按内存原样（LF）写出。
+        with _w536_guard_open(path, "w", encoding="utf-8", newline="") as f:
             f.write(html)
     return "inlined" if not already else "re-synced"
 
