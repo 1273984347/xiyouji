@@ -1,3 +1,31 @@
+### W1018（2026-10-29）：回次 og:image 全覆盖批·第三轮（12 张线描立像/场面）
+
+
+
+> **来源**：用户 2026-10-29 令「同族扫描 + 第 48 门禁补覆盖 做完再继续剩余 68 回扩量」⇒ 沿用 W1001/W1013 批已过目的口径（线描立像族·母版段两变体·按题材定主体·12 张一批）。
+>
+> **连带登记**：本笔同时落 **W1015 工具链稳健性补强①** 的登记面——① 跨行改写扫描器（`scripts/check_cross_line_rewrite.py`：改写面正则「`[^X]*` 无尾锚点 ⇒ 匹配段可跨行 ⇒ `re.sub` 整段替换 = 静默删行」；全仓 scripts/ 全树实扫 **高危 0 处**，另 43 处可疑 + 184 处只读面；判据自带 4 例负样本自证；接线 `ci_sim.py` 第 8 项）② 第 48 门禁补覆盖（`judge_file()` 的**读盘路径**此前零覆盖 ⇒ W1005 批 `R.io` 类 AttributeError 潜伏到首个新增件才引爆；现补 self_test 第⑧例 + 4 例 pytest）。W1015 提交 = `7771c9d3`（让号·台账行精确暂存·未代提并行批在途件）。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、assets/promo/plate-set/index.md、assets/promo/plate-set/plate-line-73-ch020-huxianfeng.png、assets/promo/plate-set/plate-line-73-ch020-huxianfeng.webp、assets/promo/plate-set/plate-line-74-ch024-qingfeng.png、assets/promo/plate-set/plate-line-74-ch024-qingfeng.webp、assets/promo/plate-set/plate-line-75-ch034-bashanhu.png、assets/promo/plate-set/plate-line-75-ch034-bashanhu.webp、assets/promo/plate-set/plate-line-76-ch043-tuolong.png、assets/promo/plate-set/plate-line-76-ch043-tuolong.webp、assets/promo/plate-set/plate-line-77-ch044-yangli.png、assets/promo/plate-set/plate-line-77-ch044-yangli.webp、assets/promo/plate-set/plate-line-78-ch049-laoyuan.png、assets/promo/plate-set/plate-line-78-ch049-laoyuan.webp、assets/promo/plate-set/plate-line-79-ch051-qingniu.png、assets/promo/plate-set/plate-line-79-ch051-qingniu.webp、assets/promo/plate-set/plate-line-80-ch064-xingxian.png、assets/promo/plate-set/plate-line-80-ch064-xingxian.webp、assets/promo/plate-set/plate-line-81-ch074-qingshi.png、assets/promo/plate-set/plate-line-81-ch074-qingshi.webp、assets/promo/plate-set/plate-line-82-ch091-bidun.png、assets/promo/plate-set/plate-line-82-ch091-bidun.webp、assets/promo/plate-set/plate-line-83-ch096-kouyuanwai.png、assets/promo/plate-set/plate-line-83-ch096-kouyuanwai.webp、assets/promo/plate-set/plate-line-84-ch008-jinding.png、assets/promo/plate-set/plate-line-84-ch008-jinding.webp、assets/promo/plate-set/preview-contact-sheet.png、assets/promo/plate-set/preview-contact-sheet.webp、assets/promo/plate-set/preview-w1018-sheet.png、assets/promo/plate-set/raw/README.md、assets/promo/plate-set/raw/index.md、assets/promo/plate-set/raw/round16/README.md、assets/promo/plate-set/raw/round16/index.md、assets/promo/plate-set/raw/round16/plate-line-73-ch020-huxianfeng.jpg、assets/promo/plate-set/raw/round16/plate-line-74-ch024-qingfeng.jpg、assets/promo/plate-set/raw/round16/plate-line-75-ch034-bashanhu.jpg、assets/promo/plate-set/raw/round16/plate-line-76-ch043-tuolong.jpg、assets/promo/plate-set/raw/round16/plate-line-77-ch044-yangli.jpg、assets/promo/plate-set/raw/round16/plate-line-78-ch049-laoyuan.jpg、assets/promo/plate-set/raw/round16/plate-line-79-ch051-qingniu.jpg、assets/promo/plate-set/raw/round16/plate-line-80-ch064-xingxian.jpg、assets/promo/plate-set/raw/round16/plate-line-81-ch074-qingshi.jpg、assets/promo/plate-set/raw/round16/plate-line-82-ch091-bidun.png、assets/promo/plate-set/raw/round16/plate-line-83-ch096-kouyuanwai.jpg、assets/promo/plate-set/raw/round16/plate-line-84-ch008-jinding.jpg、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/README.md、docs/11-方案报告/计划方案/T38-任务计划执行与经验沉淀报告-2026-10-29.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/INDEX.md、docs/agent/pitfalls.md、scripts/_w1018_closeout_faces.py、scripts/_w1018_derive_prepare.py、scripts/_w1018_derive_stage.py、scripts/_w1018_derive_verify.py、scripts/_w1018_download.py、scripts/_w1018_fix_index_order.py、scripts/_w1018_fix_names_order.py、scripts/_w1018_fix_refs.py、scripts/_w1018_fix_round16.py、scripts/_w1018_make_spec.py、scripts/_w1018_master.py、scripts/_w1018_pick2.py、scripts/_w1018_prepare.py、scripts/_w1018_probe_covered.py、scripts/_w1018_retry.py、scripts/_w1018_sheet.py、scripts/_w1018_stage.py、scripts/_w1018_verify.py、scripts/index.md、scripts/output/README.md、scripts/output/_cascade_files_W1018.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1016_batch.json、scripts/output/_w1016_batch_a.json、scripts/output/_w1016_batch_b.json、scripts/output/_w1016_manifest.json、scripts/output/_w1016_retry.json、scripts/output/_w1018_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、site/data/cross-time-danmaku.html、site/data/search.html、site/data/tag-cloud.html、site/dukou-engine.html、site/en/search.html、site/index.html、site/reader/ch008.html、site/reader/ch020.html、site/reader/ch024.html、site/reader/ch034.html、site/reader/ch043.html、site/reader/ch044.html、site/reader/ch049.html、site/reader/ch051.html、site/reader/ch064.html、site/reader/ch074.html、site/reader/ch091.html、site/reader/ch096.html、site/static/images/README.md、site/static/images/index.md、site/static/images/og-plate-line-73-ch020-huxianfeng.webp、site/static/images/og-plate-line-74-ch024-qingfeng.webp、site/static/images/og-plate-line-75-ch034-bashanhu.webp、site/static/images/og-plate-line-76-ch043-tuolong.webp、site/static/images/og-plate-line-77-ch044-yangli.webp、site/static/images/og-plate-line-78-ch049-laoyuan.webp、site/static/images/og-plate-line-79-ch051-qingniu.webp、site/static/images/og-plate-line-80-ch064-xingxian.webp、site/static/images/og-plate-line-81-ch074-qingshi.webp、site/static/images/og-plate-line-82-ch091-bidun.webp、site/static/images/og-plate-line-83-ch096-kouyuanwai.webp、site/static/images/og-plate-line-84-ch008-jinding.webp、site/static/images/plate-line-73-ch020-huxianfeng.webp、site/static/images/plate-line-74-ch024-qingfeng.webp、site/static/images/plate-line-75-ch034-bashanhu.webp、site/static/images/plate-line-76-ch043-tuolong.webp、site/static/images/plate-line-77-ch044-yangli.webp、site/static/images/plate-line-78-ch049-laoyuan.webp、site/static/images/plate-line-79-ch051-qingniu.webp、site/static/images/plate-line-80-ch064-xingxian.webp、site/static/images/plate-line-81-ch074-qingshi.webp、site/static/images/plate-line-82-ch091-bidun.webp、site/static/images/plate-line-83-ch096-kouyuanwai.webp、site/static/images/plate-line-84-ch008-jinding.webp。
+
+**本批要点**：① **缺口全量角色谱扫描**——缺口 68 回逐回统计角色出现次数并打上下文片段；② **已出主体全表避重**——plate-set 实为 **88→100 个母版 / 100 个唯一 slug**（编号 1–12 被四个批次族复用 ⇒ 编号 max≠主体数）⇒ 12 个主体与已出全表**零冲突**；③ **母版段两变体**——立像段**逐字复用 249 字符**（6 张），场面段**仅改 3 处**（6 张）；④ **3 张重出**——① 画面出现桌案器物（违反母版段「不画器物细节」）② 主体过小过淡（下部墨 0.0217 < 0.03）③ 左右大面积黑边 + 主体触顶触底（3×3 窗口暗占比 0.761 / 判据值 200.08）；⑤ **落位 12 页** ⇒ 回目覆盖 **32 → 44 回**、缺口 **68 → 56 回**；⑥ **未覆盖页零回归**——缺口 56 页中 54 页仍为通用 og-cover-ink-zh.jpg、2 页保留既有 card-* 专属图。
+
+**验证**：母版判据 J1–J10 **112 张 · FAIL 0**（重出后）· 裁切验算 **112 张 · FAIL 0**（重出后）· 落位验收 **0 FAIL**（12 页题图 + og + alt + 暗色隐藏 + 未覆盖页零回归）· 跨行改写扫描器 **高危 0 处** · 第 48 门禁自测 **9/9** · 全量门禁见收官提交。
+
+> - **状态**：已收官（12 张落地·母版族 100 → 112 张·既有 100 张母版与站点版零改动·其余 56 个无配图回目页的 og:image 未误改·坑表 +2 条·待用户目视）
+
+### W1015（2026-10-29）：工具链稳健性补强①（跨行改写扫描器 + 第 48 门禁读盘路径覆盖）
+
+> **来源**：用户 2026-10-29 令「同族扫描 + 第 48 门禁补覆盖 做完再继续剩余 68 回扩量」。
+>
+> - **文件**：scripts/check_cross_line_rewrite.py、scripts/check_plan_template.py、scripts/ci_sim.py、tests/unit/test_cross_line_rewrite.py、tests/unit/test_plan_template_read_disk.py、docs/00-导读/W批次编号对账表.md。
+>
+> **本批要点**：① **跨行改写扫描器**（新增）——病根：「`[^X]*` 无尾锚点 ⇒ 匹配段可跨行 ⇒ `re.sub` 整段替换 = 静默删行」（W1005 实证）。全仓 scripts/ 全树实扫 ⇒ **改写面高危 0 处**（另 43 处可疑 + 184 处只读面）；判据自带 **4 例负样本自证**（含「排除符含 `\n` ⇒ 必不报」）；接线 `ci_sim.py` 第 8 项（避门禁本体·§11.2 禁擅改）。② **第 48 门禁读盘路径补覆盖**——`judge_file()` 的读盘面此前**零覆盖**（自测 ①~⑤ 全走纯函数 `R.judge`）⇒ W1005 批在首个新增计划方案件进仓时崩在 `AttributeError: module 'plan_template_review' has no attribute 'io'` ⇒ 潜伏到真实新增件才引爆；现补 self_test ⑧ 例 + 4 例 pytest。
+>
+> **验证**：扫描器 `--self-test` 4/4 · `--gate` 0 FAIL（高危 0 处）· 第 48 门禁 `--self-test` 9/9 · pytest 9 passed。
+>
+> - **状态**：已收官（让号留痕：并行 W1014「工具链体检整改批」先落地 ⇒ 本会话让号 **W1015**；台账行用 `update-index --cacheinfo` 精确暂存·未代提他方在途件）
+
 ### W1017（2026-10-29）：产物目录归位 + 临时区清理批
 
 > **来源**：用户 2026-10-29 回复「A+B」（承接上一轮三问后的取证提议）：A＝产物目录瘦身、B＝`tmpe` 深度清理（并明确授权删除 `_trash` 超期件与 `node_modules`）。
@@ -263,7 +291,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1017），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1018），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1870,19 +1898,4 @@
 
 **顺手修正**：HANDOVER 零段「复盘存档」反引号路径仍指向 W757 改名前的 `docs/11-报告复盘/`（陈旧纯文本·非链接）订正为新址；STRUCTURE.md 目录构成散文行按分区后实况改写（54 总数与 stats 标记不变）。
 
-
-### W899（2026-10-23）：合并后收尾修正（output 目录计数口径订正 + 朱砂门禁增量缓存重建）
-
-
-
-> **来源**：用户 2026-10-23 批准「B 推送 dev 并开 PR 合 main」，主会话在合并落地核对中自查发现两处入库件与实况不符，本批为合并后收尾修正。
-
-> - **文件**：assets/promo/output/README.md、scripts/output/_vermilion_solid_cache.json、scripts/output/_w899_spec.json、scripts/output/_cascade_files_W899.txt、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md。
-
-> - **执行**：① **output 目录计数口径订正**——`assets/promo/output/README.md` 的「生成时点含 N 个直属文件」由 3 订正为 6（W898 落地英文版 3 件产物时只刷新了 `index.md` 清单，README 散文计数行未同步 ⇒ main 上出现「声明 3 实况 6」的自相矛盾）；② **朱砂门禁增量缓存重建**——W898 级联改写四页脚后未重扫第 49 槽，缓存中 3 页 sha1 与当前页面字节不一致（缓存不自愈 ⇒ 每轮 CI 白扫这 3 页），本批按 `scripts/check_vermilion_solid.js` 的 `sha1File` 同口径重建并全量对账；③ **级联面随批同步**——按仓库规约走 `scripts/batch_cascade.py` 立 W899 段（CHANGELOG 与 README 与 STRUCTURE 与项目说明与 HANDOVER 与 AGENTS 与 workflows README 与四页脚与 file-index 与 CITATION.cff 共 10 面）。
-
-> - **验证**：缓存全量对账 234 条 → 命中 234 · 陈旧 0 · 幽灵 0（对账脚本 `tmpe/_w899_cache_audit.py`·口径与门禁 `sha1File` 一致）；单测 27 passed（`tests/unit/test_vermilion_solid.py` 11 例 + `tests/unit/test_folder_docs_gate.py` 16 例）；CI 侧预演 `scripts/ci_sim.py` 7/7 PASS；PR #56 required checks 全绿后已合 main（merge commit 21f04ee8·main 上中英双份物料与投放接线逐条核对落地）。
-
-> - **状态**：已收官（合并后收尾修正·两处入库件与实况对齐）。
-> **状态**：**已收官**（W899 68f1a7bf·git 反填·共 2 笔·W971 存量回填）
 

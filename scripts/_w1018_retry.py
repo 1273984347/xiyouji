@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""_w1016_retry.py — W1016 重出批次（3 张：77 羊力大仙 / 80 杏仙 / 84 金顶大仙）
+"""_w1018_retry.py — W1016 重出批次（3 张：77 羊力大仙 / 80 杏仙 / 84 金顶大仙）
 
 重出依据（人眼硬关 + 机器判据，2/3 为机器抓到的）：
   77 ch044 羊力大仙 —— 画面中出现了**桌案器物**（母版段场面变体禁「器物细节」）⇒ 违反母版段
@@ -12,8 +12,8 @@
   ② 主体放大：「主体占画面高度约五成以上·人物清晰完整·不画远景山石与地面」
   ③ 禁黑边：「画面四周为纯宣纸底色·不画黑色边框、黑色底色或任何色块背景」
 
-输出：scripts/output/_w1016_retry.json（3 条·覆盖 round16 同名原件）
-用法：py -3 scripts/_w1016_retry.py
+输出：scripts/output/_w1018_retry.json（3 条·覆盖 round16 同名原件）
+用法：py -3 scripts/_w1018_retry.py
 """
 import io
 import json
@@ -72,7 +72,7 @@ for ch, kind, slug, num, subject in RETRY:
     requests.append({"prompt": base + "主体：" + subject, "aspect_ratio": "3:4", "resolution": "2K",
                      "output_file": "assets/promo/plate-set/raw/round16/plate-line-%s-%s-%s.png" % (num, ch, slug)})
 
-p = os.path.join(OUT, "_w1016_retry.json")
+p = os.path.join(OUT, "_w1018_retry.json")
 io.open(p, "w", encoding="utf-8", newline="\n").write(json.dumps({"requests": requests}, ensure_ascii=False, indent=1))
 print("重出批次写出:", os.path.relpath(p, REPO).replace("\\", "/"), "· %d 条" % len(requests))
 for r in requests:

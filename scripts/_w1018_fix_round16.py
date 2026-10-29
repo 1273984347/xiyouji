@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""_w1016_fix_round16.py — W1016 一次修：下载器 DEST round15→round16 + 迁移误落原件 + 成品处理
+"""_w1018_fix_round16.py — W1016 一次修：下载器 DEST round15→round16 + 迁移误落原件 + 成品处理
 
 首测踩坑：派生下载器时只改了 manifest 名与批号串，**漏改 DEST 目录**（仍指向 round15）
 ⇒ 12 张原件全部误落 round15 ⇒ prepare 报「round16 下无出图原件」。
@@ -19,7 +19,7 @@ PY = sys.executable
 
 def main() -> int:
     # ① 修下载器 DEST（round15 → round16）
-    p = os.path.join(REPO, "scripts", "_w1016_download.py")
+    p = os.path.join(REPO, "scripts", "_w1018_download.py")
     s = io.open(p, encoding="utf-8").read()
     if "round15" in s:
         s = s.replace("round15", "round16")
@@ -44,7 +44,7 @@ def main() -> int:
     print("OK   迁移 %d 件 → round16（现有 %d 件）" % (moved, len(os.listdir(D16))))
 
     # ③ 成品处理
-    r = subprocess.run([PY, os.path.join(REPO, "scripts", "_w1016_prepare.py")],
+    r = subprocess.run([PY, os.path.join(REPO, "scripts", "_w1018_prepare.py")],
                        cwd=REPO, capture_output=True, text=True, encoding="utf-8")
     out = (r.stdout or "") + (r.stderr or "")
     for ln in out.splitlines():

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""_w1016_derive_prepare.py — 由归档 `w10xx/_w1013_prepare.py` **程序化派生** W1016 成品处理脚本
+"""_w1018_derive_prepare.py — 由归档 `w10xx/_w1013_prepare.py` **程序化派生** W1016 成品处理脚本
 
 纪律（承 W952/W983/W999/W1013 批）：派生必须**程序化 + 残留断言**（手抄改常量会漏改）。
 
@@ -10,7 +10,7 @@
   ④ 拼图输出名不变（全库拼图 · 随母版数增长）
 
 残留断言：产物里不得出现 `round15` / `W1013` / `_w1013_`（源批次痕迹）。
-输出：scripts/_w1016_prepare.py
+输出：scripts/_w1018_prepare.py
 """
 import io
 import os
@@ -18,7 +18,7 @@ import re
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(REPO, "archive", "scripts", "batches", "w10xx", "_w1013_prepare.py")
-DST = os.path.join(REPO, "scripts", "_w1016_prepare.py")
+DST = os.path.join(REPO, "scripts", "_w1018_prepare.py")
 
 s = io.open(SRC, encoding="utf-8").read()
 orig_len = len(s)
@@ -33,12 +33,12 @@ s = s.replace("既有 88 + 本批 12", "既有 100 + 本批 12")
 s = s.replace("既有 88 张不重写", "既有 100 张不重写")
 
 head = ('# -*- coding: utf-8 -*-\n'
-        '"""_w1016_prepare.py — W1016 成品处理（**只处理 raw/round16 的本批 12 张**）\n\n'
+        '"""_w1018_prepare.py — W1016 成品处理（**只处理 raw/round16 的本批 12 张**）\n\n'
         '由归档区上一批成品处理脚本**程序化派生**（程序化派生纪律：派生必须程序化 + 残留断言·\n'
         '手抄改常量会漏改）。作用域限定 `raw/round16`（本批 12 张线描图·编号 73–84）\n'
         '⇒ 既有 100 张母版与站点版零改动。\n\n'
         '每一步都幂等，可在同一批原件上反复重跑。\n\n'
-        '用法：py -3 scripts/_w1016_prepare.py [--dry-run]\n"""\n')
+        '用法：py -3 scripts/_w1018_prepare.py [--dry-run]\n"""\n')
 s = re.sub(r'^# -\*- coding: utf-8 -\*-\n""".*?"""\n', head, s, count=1, flags=re.S)
 
 # ---------- 残留断言 ----------

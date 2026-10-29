@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""_w1016_stage.py — W1016 落位：12 个回目页接入题图 + 换专属 og:image
+"""_w1018_stage.py — W1016 落位：12 个回目页接入题图 + 换专属 og:image
 
 口径来源（实读现役页 ch003.html 确认·非记忆）：
   og:image base = https://1273984347.github.io/xiyouji/static/images/og-<stem>.webp
@@ -15,7 +15,7 @@ og 派生：`subject_band.crop_band(im, 1200, 630, "og")`（主体跨高 ≤630 
 写回：临时文件 + os.replace（原子）·newline='' 保留原行尾。
 只碰本批 12 个页面 ⇒ 其余 68 个无配图回目页的 og:image 零改动。
 
-用法：py -3 scripts/_w1016_stage.py [--dry-run]
+用法：py -3 scripts/_w1018_stage.py [--dry-run]
 """
 from __future__ import annotations
 

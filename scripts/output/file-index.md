@@ -11,6 +11,163 @@
 ---
 
 
+## W1018 回次 og:image 全覆盖批·第三轮（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1018 | 本批新增/修改 |
+| AGENTS.md | W1018 | 本批新增/修改 |
+| CHANGELOG.md | W1018 | 本批新增/修改 |
+| CITATION.cff | W1018 | 本批新增/修改 |
+| HANDOVER.md | W1018 | 本批新增/修改 |
+| README.md | W1018 | 本批新增/修改 |
+| STRUCTURE.md | W1018 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1018 | 本批新增/修改 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1018 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1018 | 本批新增/修改 |
+| archive/docs/file-index-ARCHIVE.md | W1018 | 本批新增/修改 |
+| assets/promo/plate-set/index.md | W1018 | 本批新增/修改 |
+| assets/promo/plate-set/plate-line-73-ch020-huxianfeng.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-73-ch020-huxianfeng.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-74-ch024-qingfeng.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-74-ch024-qingfeng.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-75-ch034-bashanhu.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-75-ch034-bashanhu.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-76-ch043-tuolong.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-76-ch043-tuolong.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-77-ch044-yangli.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-77-ch044-yangli.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-78-ch049-laoyuan.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-78-ch049-laoyuan.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-79-ch051-qingniu.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-79-ch051-qingniu.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-80-ch064-xingxian.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-80-ch064-xingxian.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-81-ch074-qingshi.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-81-ch074-qingshi.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-82-ch091-bidun.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-82-ch091-bidun.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-83-ch096-kouyuanwai.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-83-ch096-kouyuanwai.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-84-ch008-jinding.png | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-84-ch008-jinding.webp | W1018 | 新增母版（1200×1600） |
+| assets/promo/plate-set/preview-contact-sheet.png | W1018 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-contact-sheet.webp | W1018 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-w1018-sheet.png | W1018 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/raw/README.md | W1018 | 出图原件目录清单（索引/说明） |
+| assets/promo/plate-set/raw/index.md | W1018 | 出图原件目录清单（索引/说明） |
+| assets/promo/plate-set/raw/round16/README.md | W1018 | 出图原件目录清单（索引/说明） |
+| assets/promo/plate-set/raw/round16/index.md | W1018 | 出图原件目录清单（索引/说明） |
+| assets/promo/plate-set/raw/round16/plate-line-73-ch020-huxianfeng.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-74-ch024-qingfeng.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-75-ch034-bashanhu.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-76-ch043-tuolong.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-77-ch044-yangli.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-78-ch049-laoyuan.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-79-ch051-qingniu.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-80-ch064-xingxian.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-81-ch074-qingshi.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-82-ch091-bidun.png | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-83-ch096-kouyuanwai.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| assets/promo/plate-set/raw/round16/plate-line-84-ch008-jinding.jpg | W1018 | 出图原件（12 张·含 3 张重出） |
+| docs/00-导读/W批次编号对账表.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/00-导读/项目说明.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/README.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/计划方案/T38-任务计划执行与经验沉淀报告-2026-10-29.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/INDEX.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| docs/agent/pitfalls.md | W1018 | 登记面（报告/坑表/计数链/台账） |
+| scripts/_w1018_closeout_faces.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_derive_prepare.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_derive_stage.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_derive_verify.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_download.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_fix_index_order.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_fix_names_order.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_fix_refs.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_fix_round16.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_make_spec.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_master.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_pick2.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_prepare.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_probe_covered.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_retry.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_sheet.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_stage.py | W1018 | 本批工具/产物 |
+| scripts/_w1018_verify.py | W1018 | 本批工具/产物 |
+| scripts/index.md | W1018 | 本批工具/产物 |
+| scripts/output/README.md | W1018 | 本批工具/产物 |
+| scripts/output/_cascade_files_W1018.txt | W1018 | 本批工具/产物 |
+| scripts/output/_vermilion_solid_cache.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1016_batch.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1016_batch_a.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1016_batch_b.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1016_manifest.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1016_retry.json | W1018 | 本批工具/产物 |
+| scripts/output/_w1018_spec.json | W1018 | 本批工具/产物 |
+| scripts/output/file-index.md | W1018 | 本批工具/产物 |
+| scripts/output/index.md | W1018 | 本批工具/产物 |
+| scripts/output/stats-changelog.json | W1018 | 本批工具/产物 |
+| scripts/output/stats-index.md | W1018 | 本批工具/产物 |
+| scripts/output/stats.json | W1018 | 本批工具/产物 |
+| scripts/output/tools-inventory.md | W1018 | 本批工具/产物 |
+| site/data/cross-time-danmaku.html | W1018 | 本批新增/修改 |
+| site/data/search.html | W1018 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1018 | 本批新增/修改 |
+| site/dukou-engine.html | W1018 | 本批新增/修改 |
+| site/en/search.html | W1018 | 本批新增/修改 |
+| site/index.html | W1018 | 本批新增/修改 |
+| site/reader/ch008.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch020.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch024.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch034.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch043.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch044.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch049.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch051.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch064.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch074.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch091.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch096.html | W1018 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/static/images/README.md | W1018 | 本批新增/修改 |
+| site/static/images/index.md | W1018 | 本批新增/修改 |
+| site/static/images/og-plate-line-73-ch020-huxianfeng.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-74-ch024-qingfeng.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-75-ch034-bashanhu.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-76-ch043-tuolong.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-77-ch044-yangli.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-78-ch049-laoyuan.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-79-ch051-qingniu.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-80-ch064-xingxian.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-81-ch074-qingshi.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-82-ch091-bidun.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-83-ch096-kouyuanwai.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-84-ch008-jinding.webp | W1018 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/plate-line-73-ch020-huxianfeng.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-74-ch024-qingfeng.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-75-ch034-bashanhu.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-76-ch043-tuolong.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-77-ch044-yangli.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-78-ch049-laoyuan.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-79-ch051-qingniu.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-80-ch064-xingxian.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-81-ch074-qingshi.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-82-ch091-bidun.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-83-ch096-kouyuanwai.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-84-ch008-jinding.webp | W1018 | 站点版（母版裁切·只裁上部留白） |
+| assets/promo/plate-set/preview-w1016-sheet.png | W1018 | 本批改名·旧名（已由 assets/promo/plate-set/preview-w1018-sheet.png 取代） |
+| scripts/_w1016_derive_prepare.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_derive_prepare.py 取代） |
+| scripts/_w1016_derive_stage.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_derive_stage.py 取代） |
+| scripts/_w1016_download.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_download.py 取代） |
+| scripts/_w1016_fix_round16.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_fix_round16.py 取代） |
+| scripts/_w1016_master.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_master.py 取代） |
+| scripts/_w1016_pick2.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_pick2.py 取代） |
+| scripts/_w1016_prepare.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_prepare.py 取代） |
+| scripts/_w1016_retry.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_retry.py 取代） |
+| scripts/_w1016_sheet.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_sheet.py 取代） |
+| scripts/_w1016_stage.py | W1018 | 本批改名·旧名（已由 scripts/_w1018_stage.py 取代） |
+
 ## W1017 产物目录归位 + 临时区清理批（2026-10-29）
 
 | 文件 | W | 说明 |
@@ -32,6 +189,17 @@
 | scripts/check_doc_sync.py | W1016 | 教训固化 |
 | tests/unit/test_cascade_precheck.py | W1016 | 教训固化 |
 | tests/unit/test_status_z_parse.py | W1016 | 教训固化 |
+
+## W1015 工具链稳健性补强①（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_cross_line_rewrite.py | W1015 | 跨行改写扫描器（改写面高危 0 处·自带 4 例负样本自证） |
+| scripts/check_plan_template.py | W1015 | 第 48 门禁读盘路径补覆盖（self_test 第 ⑧ 例） |
+| scripts/ci_sim.py | W1015 | CI 侧预演接线（新增第 8 项跨行扫描） |
+| tests/unit/test_cross_line_rewrite.py | W1015 | 扫描器单测 5 例 |
+| tests/unit/test_plan_template_read_disk.py | W1015 | 读盘路径单测 4 例 |
+| docs/00-导读/W批次编号对账表.md | W1015 | 台账认领行（精确暂存·未代提他方在途件） |
 
 ## W1014 工具链体检整改批（2026-10-29）
 
@@ -4015,28 +4183,4 @@ docs/11-方案报告/README.md
 | scripts/_w950_refresh_icon_paths.py | W950 | 新增：图标图形同步刷新器（资产 → 内联 SVG·复合键反查） |
 | scripts/output/_w950_icon_normalize.json | W950 | 新增：45 枚图标的光学尺寸归一参数 |
 | scripts/output/_cascade_files_W950.txt | W950 | 新增：本批级联清单 |
-
-## W899 合并后收尾修正（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| assets/promo/output/README.md | W899 | output 目录导读计数订正为实况 6 件 |
-| scripts/output/_vermilion_solid_cache.json | W899 | 增量缓存重建（3 页 sha1 对齐当前页面字节） |
-| scripts/output/_w899_spec.json | W899 | 本批级联 spec（10 面改写参数） |
-| scripts/output/_cascade_files_W899.txt | W899 | 级联落盘清单 |
-| docs/00-导读/W批次编号对账表.md | W899 | 认领行与收官回填 |
-| CHANGELOG.md | W899 | W899 段 |
-| HANDOVER.md | W899 | 头尾链与里程碑块 |
-| README.md | W899 | 当前批次版本行 |
-| STRUCTURE.md | W899 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W899 | 当前批次版本行 |
-| .github/workflows/README.md | W899 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W899 | 页脚批次链插入 W899 |
-| site/data/cross-time-danmaku.html | W899 | 页脚批次链插入 W899 |
-| site/data/tag-cloud.html | W899 | 页脚批次链插入 W899 |
-| site/dukou-engine.html | W899 | 页脚批次链插入 W899 |
-| AGENTS.md | W899 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W899 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W899 | version 同步为 W899 |
-| scripts/output/file-index.md | W899 | W899 段插入 |
 

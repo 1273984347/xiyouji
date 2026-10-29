@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-29 13:27
+生成时间：2026-10-29 23:48
 
-共 **158** 件（门禁与校验 71 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 59 · 一次性（下划线前缀） 6）
+共 **176** 件（门禁与校验 71 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 59 · 一次性（下划线前缀） 24）
 
 ## 门禁与校验（71）
 
@@ -190,7 +190,7 @@
 | `visual_regression_probe.py` | visual_regression_probe.py — J2 视觉回归探针（W851 建·设计迁移阶段 1 验收件） |
 | `worktree_rehearse.py` | worktree_rehearse.py — worktree 预演法工具化（W701·S-26·用户圈选开工）。 |
 
-## 一次性（下划线前缀）（6）
+## 一次性（下划线前缀）（24）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -200,3 +200,21 @@
 | `_check_pipeline_consistency.py` | 创意三明治管线一致性轻量校验（P3-7，W508 沉淀）。 |
 | `_cite_probe.py` | 引文候选提取探针（E-A 沉淀，W507 永久化）。 |
 | `_gen_search_index.py` | W594：标题关键词数组（中文 jieba 切词、英文按词干拆分），供前端 +4 加权，≤12 个。 |
+| `_w1018_closeout_faces.py` | _w1018_closeout_faces.py — W1015 + W1018 两批的登记面一次性落盘 |
+| `_w1018_derive_prepare.py` | _w1018_derive_prepare.py — 由归档 `w10xx/_w1013_prepare.py` **程序化派生** W1016 |
+| `_w1018_derive_stage.py` | _w1018_derive_stage.py — 由归档 `w10xx/_w1013_stage.py` **程序化派生** W1016 落位脚 |
+| `_w1018_derive_verify.py` | _w1018_derive_verify.py — 由归档 `w10xx/_w1013_verify.py` **程序化派生** W1018 落 |
+| `_w1018_download.py` | _w1018_download.py — W1016 出图下载器（node_id → 母版落盘） |
+| `_w1018_fix_index_order.py` | _w1018_fix_index_order.py — 三处收口修根因 |
+| `_w1018_fix_names_order.py` | _w1018_fix_names_order.py — W1018 批两处修根因 |
+| `_w1018_fix_refs.py` | _w1018_fix_refs.py — 脚本改名后的引用同步（scripts/index.md 清单 + T38 报告 + spec/file |
+| `_w1018_fix_round16.py` | _w1018_fix_round16.py — W1016 一次修：下载器 DEST round15→round16 + 迁移误落原件 + 成品 |
+| `_w1018_make_spec.py` | _w1018_make_spec.py — W1018 级联 spec 生成（结构照 w10xx/_w1013_make_spec.py·文案换 |
+| `_w1018_master.py` | _w1018_master.py — W1016 母版段两变体 + 12 张出图批次生成（编号 73–84） |
+| `_w1018_pick2.py` | _w1018_pick2.py — W1016 选材第二轮：只扫「候选新角色」词（补词典·避开已出 100 slug） |
+| `_w1018_prepare.py` | _w1018_prepare.py — W1016 成品处理（**只处理 raw/round16 的本批 12 张**） |
+| `_w1018_probe_covered.py` | _w1018_probe_covered.py — 查当前有配图的回目页与归属（本批 12 vs 其他） |
+| `_w1018_retry.py` | _w1018_retry.py — W1016 重出批次（3 张：77 羊力大仙 / 80 杏仙 / 84 金顶大仙） |
+| `_w1018_sheet.py` | _w1018_sheet.py — W1018 本批 12 张母版拼图（人眼复核用·3 列 × 4 行·每格 400×533） |
+| `_w1018_stage.py` | _w1018_stage.py — W1016 落位：12 个回目页接入题图 + 换专属 og:image |
+| `_w1018_verify.py` | _w1018_verify.py — W1018 落位验收（AC-03~AC-11 的机器侧复核） |

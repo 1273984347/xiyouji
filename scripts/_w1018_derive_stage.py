@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-"""_w1016_derive_stage.py — 由归档 `w10xx/_w1013_stage.py` **程序化派生** W1016 落位脚本
+"""_w1018_derive_stage.py — 由归档 `w10xx/_w1013_stage.py` **程序化派生** W1016 落位脚本
 
 派生点（3 类）：
-  ① 批号/文件名：_w1013_stage.py → _w1016_stage.py
+  ① 批号/文件名：_w1013_stage.py → _w1018_stage.py
   ② JOBS 块：换成本批 12 个回目页 + 站点版名 + alt（逐条替换整块，其余逻辑逐字继承）
   ③ 文档字符串：W1013 → W1016
 
 残留断言：产物里不得出现 `w1013`（源批次痕迹）。
-输出：scripts/_w1016_stage.py
+输出：scripts/_w1018_stage.py
 """
 import io
 import os
@@ -15,7 +15,7 @@ import re
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(REPO, "archive", "scripts", "batches", "w10xx", "_w1013_stage.py")
-DST = os.path.join(REPO, "scripts", "_w1016_stage.py")
+DST = os.path.join(REPO, "scripts", "_w1018_stage.py")
 
 JOBS_NEW = '''JOBS = [
     ("ch020", "plate-line-73-ch020-huxianfeng.webp",
@@ -52,10 +52,10 @@ s2, n = re.subn(r"JOBS = \[.*?\n\]", JOBS_NEW, s, count=1, flags=re.S)
 assert n == 1, "未定位到 JOBS 块（派生中止）"
 s = s2
 # ① 批号/文件名
-s = s.replace("_w1013_stage.py", "_w1016_stage.py").replace("W1013", "W1016")
-s = s.replace("W1013 批", "W1016 批")
+s = s.replace("_w1013_stage.py", "_w1018_stage.py").replace("W1013", "W1016")
+s = s.replace("W1013 批", "W1018 批")
 # 文档字符串首行
-s = s.replace('"""_w1013_stage.py', '"""_w1016_stage.py')
+s = s.replace('"""_w1013_stage.py', '"""_w1018_stage.py')
 
 # ---------- 残留断言 ----------
 for bad in ("_w1013_", "W1013"):

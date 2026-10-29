@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""_w1016_prepare.py — W1016 成品处理（**只处理 raw/round16 的本批 12 张**）
+"""_w1018_prepare.py — W1016 成品处理（**只处理 raw/round16 的本批 12 张**）
 
 由归档区上一批成品处理脚本**程序化派生**（程序化派生纪律：派生必须程序化 + 残留断言·
 手抄改常量会漏改）。作用域限定 `raw/round16`（本批 12 张线描图·编号 73–84）
@@ -7,7 +7,7 @@
 
 每一步都幂等，可在同一批原件上反复重跑。
 
-用法：py -3 scripts/_w1016_prepare.py [--dry-run]
+用法：py -3 scripts/_w1018_prepare.py [--dry-run]
 """
 from __future__ import annotations
 
