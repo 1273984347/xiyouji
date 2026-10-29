@@ -13,6 +13,19 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W920（2026-10-24）：副本链值级对账门禁批（B-W855-04 清偿·基线冻结 24 件存量）
+
+
+
+> **来源**：用户 2026-10-24 令「继续」——T-18 D1 真债第二件（B-W855-04 副本链值级对账门禁）。
+
+> - **文件**：scripts/check_data_copy_chain.py、scripts/output/data-copy-chain-baseline.json、tests/unit/test_check_data_copy_chain.py、scripts/ci_sim.py、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w920_spec.json、scripts/output/_cascade_files_W920.txt（逐件行见 file-index W920 段）。
+> **状态**：**已收官**（W920 a85018d7·git 反填·共 2 笔·W971 存量回填）
+
+**B-W855-04 副本链值级对账门禁建置**：实测漂移定性——47 个入库副本中 24 个与生成器产物**值级真漂移**（非格式差异·三年无防线）。方向未定（入库副本为页面消费的生效真源·生成器产物 gitignored 本地）——翻旧账需逐个比对消费方（另批定性），本门禁按第 43 槽基线冻结模式**先防增量**：JSON 深度相等对账·存量 24 件入基线登记·基线外新漂移判红·恢复一致 NOTE 除名·源目录缺（CI 态）NOTE 放行（W716 json_count 键移除同因登记）。self-test 5/5（首版 T4 例自身逻辑错被复跑抓出修正——负样本测试再立功）·接 ci_sim 第 11 项。
+
+**验证**：self-test 5/5·主判据 0 FAIL（24 件全在基线内）·专项单测 2 例·第 42 门禁覆盖 0 FAIL·ruff All checks passed。
+
 ### W919（2026-10-24）：DB 三包批（B-DB-04 迁移框架 + B-DB-02 索引查询 + B-DB-03 约束降级）
 
 
