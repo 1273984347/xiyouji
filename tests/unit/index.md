@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（53）
+## 文件（57）
 
 ### Python 脚本
 
@@ -22,6 +22,7 @@
 - `test_batch_cascade_status_wnum.py`
 - `test_batch_spec.py`
 - `test_cascade_line_anchor.py`
+- `test_cascade_precheck.py`
 - `test_check_data_copy_chain.py`
 - `test_check_db_schema.py`
 - `test_check_interaction_binding.py`
@@ -33,6 +34,7 @@
 - `test_ci_sim.py`
 - `test_ci_wiring.py`
 - `test_commit_scope.py`
+- `test_cross_line_rewrite.py`
 - `test_d3_data_processors.py`
 - `test_doc_size_budget.py`
 - `test_docs_index.py`
@@ -46,6 +48,7 @@
 - `test_page_router.py`
 - `test_path_guard.py`
 - `test_perf_optimize.py`
+- `test_plan_template_read_disk.py`
 - `test_preflight_check.py`
 - `test_preflight_touches.py`
 - `test_rag_enhance.py`
@@ -58,6 +61,7 @@
 - `test_security_scan.py`
 - `test_slice_screenshots.py`
 - `test_stats_sync.py`
+- `test_status_z_parse.py`
 - `test_tmpe_tidy.py`
 - `test_tool_scripts_cli.py`
 - `test_tools_inventory.py`

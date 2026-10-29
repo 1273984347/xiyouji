@@ -13,6 +13,17 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W897（2026-10-23）：协作防护修复（preflight touches 分隔符根修 + ci_sim 接进 CI）
+
+> **来源**：用户 2026-10-23 批准「A 修 preflight 的 touches 分隔符 bug」+「C 把 ci_sim.py 接进 CI workflow」。
+> - **文件**：scripts/preflight_check.py、tests/unit/test_preflight_touches.py、.github/workflows/ci-sim.yml、.github/workflows/README.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、pytest.ini、docs/00-导读/W批次编号对账表.md。
+> - **病根（实测）**：`preflight_check.py` 的台账 touches 列解析与命令行 `--touches` 解析**都只按逗号切分**，而台账自 W739 起实际用「·」分隔 ⇒ 整串被当成一项 ⇒ **交集检查恒空假绿** ⇒ W896 批实测的「PREFLIGHT PASS·无交集」是**无效结论**，那两次撞面实为人工核对发现而非机器拦住。
+> - **修法**：新增 `_split_touches()` 统一切分，兼容 `,` `，` `、` `·` `•` 五种分隔符（**不含空白**——仓内文件名不含空格，避免把文件名切碎）；台账列解析与命令行解析**同源**走该函数。
+> - **配套单测**：新增 `tests/unit/test_preflight_touches.py`（11 例）锁定多分隔符切分 / 台账列解析 / 占位符归一 / 交集真能报出且不误报。
+> - **ci_sim 接进 CI**：新增 `.github/workflows/ci-sim.yml`（PR 与 push dev 触发·干净检出跑 `scripts/ci_sim.py` 的 7 项关键门禁·纯 Python 不需浏览器与 node_modules·fetch-depth 0 取全量历史）⇒ 「本地红 vs CI 绿」从人工推理变成机器结论。
+> - **验收**：修复后 preflight 的 NOTE 行能把本批 touches 正确切成 5 项（修复前整串当 1 项）·单测 11 例全过 ·第 42 门禁根级脚本覆盖 0 FAIL（两个新脚本各有测试面引用）。
+> **状态**：**已停止**（W897 零提交·git 事实标注·W971 存量回填）
+
 ### W896（2026-10-23）：门禁实算口径改造（磁盘扫描 → Git 索引·目标提交树）+ ci_sim 预演工具
 
 > **来源**：用户 2026-10-23「批准」——指认 T-15 §十 提出的两条根修方案（① 门禁实算按目标提交树 ② 新增 `scripts/ci_sim.py`）。本批为该根修的施工批（**原拟 W894·因并行 W895 先落地·按「先落地者保留」让号为 W896**）。

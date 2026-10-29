@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（24）
+## 文件（40）
 
 ### Python 脚本
 
@@ -39,6 +39,22 @@
 - `_w1005_serve.py`
 - `_w1005_spec.py`
 - `_w1005_sync_faces.py`
+- `_w1013_align_files.py`
+- `_w1013_derive_prepare.py`
+- `_w1013_download.py`
+- `_w1013_fix_desc.py`
+- `_w1013_inventory.py`
+- `_w1013_make_spec.py`
+- `_w1013_master.py`
+- `_w1013_prepare.py`
+- `_w1013_read.py`
+- `_w1013_retry.py`
+- `_w1013_retry2.py`
+- `_w1013_roster_check.py`
+- `_w1013_sheet.py`
+- `_w1013_shot.py`
+- `_w1013_stage.py`
+- `_w1013_verify.py`
 
 ---
 

@@ -17,7 +17,7 @@
 - **数据可视化**：87<!--stats:visualization_pages--> 个 D3.js / Three.js 可视化页（site/data/ 共 88<!--stats:site_data_html--> 个 HTML，「87」不含模板壳 _shell.html），覆盖 133 个<!--doc-sync:exempt--> 数据维度（章节统计、人物关系网络、八十一难热力图、取经路线、情感热力图、AI 对话等 34<!--stats:script_classes--> 类主题 A–AH）。
 - **可问询入口**：Web Agent「西游记·渡口问津」（xiyouji-agent-web/）——自研 OpenAI-compatible 引擎（server/engine/·W680·全主流大模型端点适配），可对话、检索 docs/source、跑脚本。
 
-**核心内容规模**：A1–A6 内容板块共 616<!--stats:a1_a6_docs--> 篇（A1 逐回 100 / A2 随笔 44 / A3 人物 215 / A4 主题 209 / A5 文化 34 / A6 诗词 13；算法与边界见 docs/00-导读/统计口径说明.md；W505 起 611→615）；英文站 site/en/ 138<!--stats:site_en_html--> 页已全量英文化。
+**核心内容规模**：A1–A6 内容板块共 616<!--stats:a1_a6_docs--> 篇（A1 逐回 100 / A2 随笔 44 / A3 人物 215 / A4 主题 209 / A5 文化 35 / A6 诗词 13；算法与边界见 docs/00-导读/统计口径说明.md；W505 起 611→616）；英文站 site/en/ 138<!--stats:site_en_html--> 页已全量英文化。
 
 **设计方向**：锁定「新中式·数字雅集」（宣纸底/墨文/朱砂点缀/零外域依赖）；**页面动效是强制契约**——时长三档预算（≤150/250/600ms）、reduced-motion 双守卫、tooltip 统一 `.chart-tooltip`、count-up fail-open 等，详见 DESIGN.md（视觉 §1-4、**动效 §5**）。
 
@@ -173,13 +173,13 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 ### 4.3 工具链要点（摘要层 · 坑位全量已迁 L2）
 
-> **📖 阅读契约（W709）**：索引型——102 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
+> **📖 阅读契约（W709）**：索引型——109 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
 
 **主题视图（W706·按需查坑·正文按批次序不动）**：CSS 类=W557 基类丢失/W558 缺分号/W673 三门禁/W571 inline_css 分发/W582-W589 暗色族；JS 类=W575 空选区与触屏坑/W568 Express close 语义/W674 defer 时序/W656 audit 单模块；git 提交类=W649 级联清单与并行互斥/W698 scope+safe_commit/W537 三新规/W514 heredoc/W509 BOM 禁；级联类=W553 CRLF 翻倍/W664 desc 分隔符/W663 跳号手工先例/W679 日期串误报/W705 插入保留锚点/W1005 跨行吞并+尾缀白名单；数据类=W691 计数钉与旧值扫描/W693 残留标记门禁/W565 部署态冒烟/W703-704 stats 对账；文档类=W520 字面量禁/W496 数字现测/W663 doc-sync/W706 元规则与标识符禁令；Windows 类=W509 BOM/W514 heredoc/W535 路径实参/W706 终端编码兜底；视觉渲染类另含素材出图规格（W974 三条：bbox 顶≠主体顶·出图器物形状类别>数量计数·落位页先验）。
 
 **最高频铁则（全文见 pitfalls.md）**：改内联脚本必跑 generate_csp.py；批量改 CSS/JS 验括号平衡；多行逻辑禁 shell heredoc 落 Python 文件；同文件 Edit 串行；级联后按清单 git add；认领批次登记 touches·动工前 `preflight_check.py --touches <清单> --self W###` 查在途交集（跨 Agent 版「同文件串行」）；批次收官提交一律 `safe_commit.py --expect-spec scripts/output/_w###_spec.json`（索引只许含本批件·防代提硬拦 W1006）。
 
-**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS / 视觉渲染（25）·JS / CSP / 运行时（6）·git / 提交 / 并发（23）·级联 / CHANGELOG（10）·数据 / 内容可信度（10）·流程 / 协作 / 取证（23）
+**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS / 视觉渲染（25）·JS / CSP / 运行时（6）·git / 提交 / 并发（25）·级联 / CHANGELOG（15）·数据 / 内容可信度（10）·流程 / 协作 / 取证（28）
 
 **本机环境事实（Windows 单机·机器相关不入 L2·随实测滚动更新）**：
 - `make` 未安装：Makefile 目标不可用，直调 `python scripts/<对应脚本>`（映射见 Makefile 注释）。
@@ -296,4 +296,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1009-W1009 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-10-29（W1010）级联落盘后自动回窗（110 段/60 行）+ 刷 stats，失败即 return 2；2026-10-29（W1011）整理分类：五项归位 + 第 52 槽布局门禁（根只放治理配置、顶层目录须声明角色）；2026-10-29（W1012）scripts/output 回归活产物单一职责：33MB 一次性基线归档 w8xx；并行会话收尾件代收；2026-10-29（W1013）给回目页补 og:image，出了第二轮 12 张。按 slug 全表避开已出的 88 个主体；母版段只改三处派生场面段。5 张重出：朱砂成大块、钢鞭多钩、主体底被切、杖脱手——判据全 PASS，得靠人眼；2026-10-29（W1014）工具链体检整改：15 项真缺陷修（含 4 处门禁本体：doc-sync 自测解耦、verify 注释订正、归档双向对账、第 42 基线反向查）；tmpe 路由根修加锁健壮化；ruff 债清零；归档台账回写。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1010-W1010 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-10-29（W1011）整理分类：五项归位 + 第 52 槽布局门禁（根只放治理配置、顶层目录须声明角色）；2026-10-29（W1012）scripts/output 回归活产物单一职责：33MB 一次性基线归档 w8xx；并行会话收尾件代收；2026-10-29（W1013）给回目页补 og:image，出了第二轮 12 张。按 slug 全表避开已出的 88 个主体；母版段只改三处派生场面段。5 张重出：朱砂成大块、钢鞭多钩、主体底被切、杖脱手——判据全 PASS，得靠人眼；2026-10-29（W1014）工具链体检整改：15 项真缺陷修（含 4 处门禁本体：doc-sync 自测解耦、verify 注释订正、归档双向对账、第 42 基线反向查）；tmpe 路由根修加锁健壮化；ruff 债清零；归档台账回写；2026-10-29（W1016）教训固化：体检期实踩而坑表未覆盖者补入（porcelain 中文路径·spec 字段·死门控等），可机检者升硬守卫，补缺失自测，订正计数陈腐值。如与上述权威文档冲突，以权威文档为准。*

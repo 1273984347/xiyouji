@@ -79,6 +79,16 @@ def precheck(spec):
     if len(_note) > 120:
         issues.append("spec.agents_note 长 %d 字 > 120 上限（W964 定形·W989 收紧·脚注是索引不是摘要·"
                       "细节归 CHANGELOG）" % len(_note))
+    # W1016 硬守卫：desc / head_sentence 禁裸聚合数字（`N 项/篇/页/个/类`）。
+    # 病根：两字段逐字写入 README/STRUCTURE/项目说明的**版本抬头行**，而第 31 门禁 C5c
+    # 对抬头行也查裸聚合数字（`<!--doc-sync:exempt-->` 在行尾、不紧跟命中 ⇒ 后置豁免不命中）
+    # ⇒ 落盘后必然 C5c 判红，只能段内定向订正（级联不可重跑·E-17）。W1014 实测连撞 4 次
+    # （「15 项真缺陷」四处抬头行全红）。前置拦截成本≈0，故升硬守卫。
+    for field in ("desc", "head_sentence"):
+        _hit = re.findall(r"\d+\s*(?:项|篇|页|个|类)", str(spec.get(field, "")))
+        if _hit:
+            issues.append("spec.%s 含裸聚合数字 %s（会写入版本抬头行 ⇒ 第 31 门禁 C5c 必红·"
+                          "改无量词表达如「一批真缺陷」或加实体标记）" % (field, _hit))
     return issues
 
 
