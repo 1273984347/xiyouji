@@ -12,7 +12,7 @@
 - `data/`
 - `figures/`
 
-## 文件（668）
+## 文件（666）
 
 ### Markdown 文档
 
@@ -48,6 +48,7 @@
 - `_cascade_files_W1009.txt`
 - `_cascade_files_W1010.txt`
 - `_cascade_files_W1011.txt`
+- `_cascade_files_W1012.txt`
 - `_cascade_files_W728.txt`
 - `_cascade_files_W729.txt`
 - `_cascade_files_W730.txt`
@@ -265,6 +266,7 @@
 - `_w1009_spec.json`
 - `_w1010_spec.json`
 - `_w1011_spec.json`
+- `_w1012_spec.json`
 - `_w728_spec.json`
 - `_w729_spec.json`
 - `_w730_spec.json`
@@ -392,8 +394,6 @@
 - `_w851_j1_name_audit.json`
 - `_w851_j2_evidence.json`
 - `_w851_spec.json`
-- `_w851_visual_snapshot_after.json`
-- `_w851_visual_snapshot_before.json`
 - `_w851_visual_snapshot_freeze_after.json`
 - `_w851_visual_snapshot_freeze_before.json`
 - `_w852_spec.json`
@@ -447,8 +447,6 @@
 - `_w874_spec.json`
 - `_w875_diff_review.json`
 - `_w875_spec.json`
-- `_w876_baseline_after.json`
-- `_w876_baseline_before.json`
 - `_w876_baseline_diff.json`
 - `_w876_c_swap_report.json`
 - `_w876_site_audit.json`

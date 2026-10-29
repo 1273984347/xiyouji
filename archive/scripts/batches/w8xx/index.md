@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（42）
+## 文件（46）
 
 ### Python 脚本
 
@@ -60,6 +60,13 @@
 - `_w865_layout_probe.mjs`
 - `_w892_export_flyer.mjs`
 - `_w892_probe.mjs`
+
+### 数据与配置
+
+- `_w851_visual_snapshot_after.json`
+- `_w851_visual_snapshot_before.json`
+- `_w876_baseline_after.json`
+- `_w876_baseline_before.json`
 
 ---
 
