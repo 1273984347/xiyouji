@@ -13,6 +13,29 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W909（2026-10-24）：README 专业化改版（结构层级 + 配图 + 头部与文案修正）
+
+
+
+> **来源**：用户 2026-10-24 令（本批原拟 W907·并行会话先落地认领 W907 ⇒ 让号；让至 W908 后双方仍同号 ⇒ 再让一次·本批最终取 W909）「把 README 优化一下看起来专业一点·顺便你看看有哪些图片是可以添加进的」。
+
+> - **文件**：README.md、dscripts/output/_w909_spec.json、scripts/output/_cascade_files_W909.txt、scripts/output/_vermilion_solid_cache.json、sCHANDOVER.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、site/data/search.html、site/en/search.html、AGENTS.md、CITATION.cff。
+
+> - **结构层级**：单一 H1 + 两个 H2 分区（普通读者 / 开发者维护者），其下子标题统一降 H3——GitHub 仓库首页此前三个 H1 并列，锚点与大纲都不专业；仓内无 README 锚点引用（已 grep 全仓确认）⇒ 降级零影响。
+
+> - **配图（本次核心）**：顶部加主视觉 banner（`site/static/images/ink-mountains-hero.webp`·水墨山景·轻量）；新增「📊 可视化样例」小节（浅色四张 `viz-*.webp` + 暗色两张 `viz-dark-*.webp`·并排居中·宽度受控）；宣传单页小节补正面预览图（`assets/promo/output/xiyouji-flyer-a4-front.png`）。选图原则：只用仓内已有资产·零外域依赖·控制体积（新增图片合计约 1.4 MB 以内）·alt 全中文描述。
+
+> - **头部与文案**：三枚徽章并为一行 + 补一枚 CI 门禁徽章；项目定位收尾表述去内部叫法（「新功能三页面」→「工具页」）；删末尾指向旧批次的陈旧收尾行（与顶部现役批次行矛盾·且 README 禁写批次细节）；「AI 生成说明」孤立 bullet 归并回列表。
+
+> - **顺带修台账两处结构损坏**：W892 行尾重复粘连的 W893 整段（W896 批同类残留·本批补清）+ W764 与 W906 描述列内未转义管道符导致的列错位（仅加转义符·不改文字语义）——全表未转义管道符体检复检为零异常。
+
+> - **增行预算说明**：README 常规增行预算为 0（文档规范 §1 表）——本批属用户明示授权的一次性结构优化·净增 14 行·后续批次仍守 0 行预算。
+
+> - **验证**：全仓链接校验 20763 条 0 broken（含新增图片路径）·C5c 裸聚合数字判红面零新增（新增文字与 alt 均避「数字+量词」形态）·搜索索引与 CSP 内联脚本哈希已同批刷新（zh 272743 B / en 292765 B·856 页零漂移）·`verify_delivery.py --scope auto` 核心全部通过（54 段自洽锁绿）·pre-commit 钩子同判据通过。
+
+> - **状态**：已收官（README 门面改版完成·台账结构归位·门禁全绿）。
+> **状态**：**已收官**（W909 e8697fcd·git 反填·共 3 笔·W971 存量回填）
+
 ### W906（2026-10-24）：C4-f 三态化（并行批次登记行纯追加残留放行·多 Agent 误拦根修）
 
 
