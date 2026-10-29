@@ -11,6 +11,32 @@
 ---
 
 
+## W1021 Backlog 对账触发器常驻化（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1021 | 本批新增/修改 |
+| AGENTS.md | W1021 | 本批新增/修改 |
+| CHANGELOG.md | W1021 | 本批新增/修改 |
+| CITATION.cff | W1021 | 本批新增/修改 |
+| HANDOVER.md | W1021 | 本批新增/修改 |
+| README.md | W1021 | 本批新增/修改 |
+| STRUCTURE.md | W1021 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1021 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1021 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1021 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1021 | 本批新增/修改 |
+| pytest.ini | W1021 | 本批新增/修改 |
+| scripts/check_backlog_review.py | W1021 | 本批新增/修改 |
+| scripts/output/_w1021_spec.json | W1021 | 本批新增/修改 |
+| scripts/output/file-index.md | W1021 | 本批新增/修改 |
+| scripts/output/stats-changelog.json | W1021 | 本批新增/修改 |
+| scripts/output/stats-index.md | W1021 | 本批新增/修改 |
+| scripts/output/stats.json | W1021 | 本批新增/修改 |
+| scripts/preflight_check.py | W1021 | 本批新增/修改 |
+| site/index.html | W1021 | 本批新增/修改 |
+| tests/unit/test_backlog_review.py | W1021 | 本批新增/修改 |
+
 ## W1020 Backlog 登记面对账批（2026-10-30）
 
 | 文件 | W | 说明 |

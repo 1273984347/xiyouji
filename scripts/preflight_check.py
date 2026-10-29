@@ -643,6 +643,17 @@ def main():
     except Exception as _exc3:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"WARN  对抗审查触发器不可用（{_exc3}）——本回合跳过（禁静默）")
 
+    # 5.8) Backlog 登记面对账触发器（W1021）：≥25 批未对账即提示（只提示不拦截）。
+    # 起因：W1019 连中两条「已做完仍挂待办」，W1020 全量对账实测滞后率 41%（12/29）。
+    # 判据与对抗审查触发器同族（token 认状态列 / 取 max 不取文件序 / 归档同扫）。
+    try:
+        import check_backlog_review as _cbr
+
+        for _line in _cbr.notice_lines():
+            print(("WARN  " if _line.startswith("⚠") else "NOTE  ") + _line)
+    except Exception as _exc4:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"WARN  Backlog 对账触发器不可用（{_exc4}）——本回合跳过（禁静默）")
+
     print("== 结论 ==")
     if problems:
         for p in problems:

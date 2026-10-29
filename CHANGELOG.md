@@ -1,3 +1,17 @@
+### W1021（2026-10-30）：Backlog 对账触发器常驻化（preflight 批数告警）
+
+> **来源**：用户 2026-10-30 令「做」——采纳 W1020 结项建议中的 **preflight 批数计数告警**方案（另一候选「CHANGELOG 季度提醒」判为不主用：BL-21 写了 2027-01 季度点仍无人跟进，实证写进文档的提醒会被忘）。
+>
+> **连带登记**：W1020 台账行的状态列补事件 token「Backlog 对账已执行」——否则本器首跑即判「从未对账」假警（fail-closed 的必然副作用）。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、pytest.ini、scripts/check_backlog_review.py、scripts/output/_w1021_spec.json、scripts/output/file-index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/preflight_check.py、site/index.html、tests/unit/test_backlog_review.py
+
+**本批要点**：① **新增第四哨** `scripts/check_backlog_review.py`——台账状态列含 token「Backlog 对账已执行」的最大 W 号距当前 max ≥ **25 批**即提示（只提示不拦截，exit 恒 0）。② **三条铁则沿用对抗审查触发器**（同一病同一防法）：token 只认**状态列**（防主题列提及 token 的行把自己判成一次对账·W1004 同族自伤）、取 **max 不取文件序**（防末尾低号补登记行把 last 拉低）、**正本与归档同扫**（防对账行被行窗归档后退化成「从未对账」假警）。③ **只做批数阈值不做天数阈值**：台账日期只存在于认领会话列且位置不固定（主题含裸竖线会整体右移·见 parse_ledger W825），另引 CHANGELOG 段解析面收益不抵复杂度；且项目节拍本就是 W### 批次——W691 一批闭环 5 条 BL 却零回写，说明滞后由「改动发生」驱动而非日历。
+④ **接线** preflight 5.8 项（与 5.75 对抗审查并列）；内置八态自测 + `tests/unit/test_backlog_review.py` 7 例。
+
+**验证**：八态自测通过（阈值两侧/不可判定/非台账行豁免/泛词不重置/取 max/主题列不算/同批/归档同扫）·pytest 7 例全过 · preflight 实跑输出「距上次（W1020）0 批 < 25 未触发」·计数 1069→1077 两处同步 · `stats.py --check` 24 键零差异。
+
+> - **状态**：已收官（Backlog 对账自此每 25 批被机器点名一次）
 ### W1020（2026-10-30）：Backlog 登记面对账批（逐条核 git 与测试实况）
 
 > **来源**：用户 2026-10-30 令「开一个 Backlog 对账批；不只要写入长期记忆也要写入项目内；开始」。起因是 W1019 连续命中两条「已做完却仍挂待办」的 Backlog（BL-29、BL-33）。
@@ -317,7 +331,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1020），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1021），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
