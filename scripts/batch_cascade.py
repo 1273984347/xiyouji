@@ -641,7 +641,6 @@ def _refresh_stats(batch):
 
     失败不静默：打印 FAIL + 末两行输出，并让 main 返回非 0（会话能立刻看到）。
     """
-    import subprocess
     num = str(batch).lstrip("W")
     r = _STATS_RUNNER([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), "stats.py"),
                        "--w", num])
@@ -751,6 +750,23 @@ def _close_hints():
         _cah.run(strict=False, prefix="[ARCHIVE] ")
     except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
         print(f"[ARCHIVE] 提示位不可用（{_exc}）")
+    # W1014 接线升格：3 支原「零代码调用者·靠人记得跑」报告型探针接入收尾浮出（用户裁决
+    # 「全部接线升格」）。不硬挂 verify 槽——它们恒返 0 且指标为「人工甄别后清」类
+    # （content_hygiene 标记密度嫌疑 / parser_anchor 盲区），硬判会制造常驻噪声或永绿假门禁
+    # （§11.2 门禁弱化根）。此处每批自动跑并浮出末行可行动数，替代「没人记得跑」。
+    try:
+        import subprocess as _sp2
+
+        for _tag, _probe in (("卫生", "check_content_hygiene.py"),
+                             ("双源", "check_dual_source_scan.py"),
+                             ("锚点", "check_parser_anchor_coverage.py")):
+            _pr = _sp2.run([sys.executable, os.path.join(ROOT, "scripts", _probe)],
+                           capture_output=True, text=True, encoding="utf-8",
+                           errors="replace", cwd=ROOT, timeout=180)
+            _tail = next((ln for ln in reversed(_pr.stdout.splitlines()) if ln.strip()), "")
+            print(f"[HYGIENE] {_tag} {_probe} → {_tail.strip()[:80]}")
+    except Exception as _exc:  # noqa: BLE001 — 提示位故障留痕不阻断
+        print(f"[HYGIENE] 提示位不可用（{_exc}）")
     # W995：tmpe 上次清理活动日期（.journal 最新落笔——清理节奏可见性，建制 13 天才首清的教训）
     try:
         import datetime as _dt

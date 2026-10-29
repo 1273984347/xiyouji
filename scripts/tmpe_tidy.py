@@ -41,6 +41,9 @@ RUN_LOCK = os.path.join(LOCK_DIR, "tmpe_tidy.lock")
 JOURNAL_DIR = os.path.join(TMPE, ".journal")
 REPORT_DIR = os.path.join(TMPE, "_reports")
 PROTECTED_DB = os.path.join(TMPE, ".protected.json")
+# W1014 R1：运行锁陈旧接管阈值（小时）——pid 存活但锁龄超此值判陈旧（原实现只看 pid 存活、
+# 从不看年龄，一台机器上 pid 恰被复用即让工具永久不可用·审计探针实测 361 天仍拦）
+LOCK_MAX_AGE_H = 24.0
 
 STDLIB_HINT = set("""os sys re json time argparse datetime hashlib shutil pathlib collections itertools
 math random subprocess typing dataclasses enum functools io csv sqlite3 urllib http socket threading
@@ -150,6 +153,12 @@ def scan(policy, freeze_hours=None):
     now = time.time()
     exclude = set(policy.get("exclude", []))
     protect_res = [re.compile(g, re.IGNORECASE) for g in policy.get("protect_globs", [])]
+    # W1014：批号正则源=policy.yml classify_rules 里名为 w_batch 的 match（规则唯一权威源·
+    # 本工具不硬编码分类判断的铁则）；缺失回退默认。原 ④ 分支硬编码 ^w\d{3,4} 与 policy 里的
+    # w_batch 规则两处实现且互不读取（policy 那条因 standard_bucket 先于 classify 永不被查）。
+    _wb = next((r["match"] for r in policy.get("classify_rules", []) if r.get("name") == "w_batch"),
+               r"^_?w\d{3,4}")
+    _wbatch_res = re.compile(_wb, re.IGNORECASE)
     locks = read_active_locks(policy)
     rows = []
     for name in sorted(os.listdir(TMPE)):
@@ -173,7 +182,7 @@ def scan(policy, freeze_hours=None):
         elif (now - newest) < fh * 3600:  # ③ freeze
             row.update(bucket="_hold", rule="freeze", action="FREEZE",
                        note=f"{fh}h 内有写入（并行/本地在用）")
-        elif re.match(r"^w\d{3,4}", name, re.IGNORECASE):  # ④ standard_bucket
+        elif _wbatch_res.match(name):  # ④ standard_bucket（W1014：正则源=policy.yml w_batch·含下划线形态 _wNNNN_ 批号工作件·原硬编码 ^w 认不出致全落 _misc）
             row.update(bucket="w###", rule="w_batch", action="MOVE", note="批次桶")
         else:  # ⑤ classify_rule → ⑥ fallback _inbox
             hit = _match_classify_rule(name, os.path.splitext(name)[1].lower(), is_dir, policy)
@@ -187,6 +196,20 @@ def scan(policy, freeze_hours=None):
 
 # ---------- 计划与执行 ----------
 
+def batch_bucket_dest(name, dest):
+    """批号工作件按批号归子目录：`_wNNNN_*` 散件 → `w###/wNNNN/`（W1014 单一判据源）。
+
+    build_plan（清单显示）与 resolve_dest（实际落地）共用，杜绝「显示 w###/ 实际落
+    w###/w960/」的口径分歧。无下划线前缀的批号目录（如 `w607_docxgen`）保持平铺
+    （本身即批次工作目录·整体 MOVE·见 test_apply_and_undo_roundtrip 契约）。
+    """
+    if dest.rstrip("/") == "w###" and name.startswith("_"):
+        m = re.match(r"^_?[wW](\d{3,4})_?", name)
+        if m:
+            return f"w###/w{m.group(1)}/"
+    return dest
+
+
 def build_plan(rows, older_days=None):
     now = time.time()
     actions = []
@@ -195,13 +218,20 @@ def build_plan(rows, older_days=None):
             continue
         if older_days is not None and (now - r["mtime"]) < older_days * 86400:
             continue
-        actions.append({"action": "MOVE", "name": r["name"], "dest": r["bucket"] + "/", "rule": r["rule"]})
+        dest = batch_bucket_dest(r["name"], r["bucket"] + "/")  # W1014：显示与实际同源
+        actions.append({"action": "MOVE", "name": r["name"], "dest": dest, "rule": r["rule"]})
     return actions
 
 
 def resolve_dest(root, name, dest, policy):
-    """目标冲突加时间戳后缀（禁覆盖）。"""
-    dst_dir = os.path.join(root, dest)
+    """目标冲突加时间戳后缀（禁覆盖）。
+
+    W1014：批号散件的子目录展开走 batch_bucket_dest（与 build_plan 同一判据源）——
+    `_wNNNN_*` 落 `w###/wNNNN/<name>`，使批次桶成组而非平铺（审计实证 w### 半桶：
+    155 条目里 130 散件未按批号成目录）。
+    """
+    dest = batch_bucket_dest(name, dest)
+    dst_dir = os.path.normpath(os.path.join(root, dest))  # 归一多级 dest 分隔符
     dst = os.path.join(dst_dir, name)
     if not os.path.exists(dst):
         return dst
@@ -260,6 +290,18 @@ def _pid_alive(pid: int) -> bool:
         return False
 
 
+class _NullLock:
+    """空锁：--no-lock 只读盘点时用（受限环境无法建锁目录也不阻断·W1014 R2）。"""
+
+    acquired = False
+
+    def acquire(self):
+        return None
+
+    def release(self):
+        return None
+
+
 class RunLock:
     """运行锁：防两个会话同时归桶。stale 锁（pid 死）自动接管。
 
@@ -270,29 +312,89 @@ class RunLock:
     既污染真实锁又让测试与真实状态耦合（本次即因此触发 os.kill 自杀）。
     """
 
-    def __init__(self, path=None):
+    def __init__(self, path=None, max_age_hours=None, allow_degrade=True):
         self.path = path if path is not None else RUN_LOCK
+        self.max_age_hours = LOCK_MAX_AGE_H if max_age_hours is None else max_age_hours
+        self.allow_degrade = allow_degrade  # --no-lock：写锁失败降级为无锁运行（不抛 traceback）
         self.acquired = False
 
+    def _read_lock(self):
+        """安全读锁内容（with 关句柄·W1014 修 ResourceWarning/Windows 持柄他方无法删）。"""
+        with open(self.path, encoding="utf-8") as fh:
+            return json.load(fh)
+
     def acquire(self):
-        os.makedirs(os.path.dirname(self.path), exist_ok=True)
+        try:
+            os.makedirs(os.path.dirname(self.path), exist_ok=True)
+        except OSError as e:
+            if self.allow_degrade:
+                print(f"WARN 运行锁目录不可建（{e.__class__.__name__}: {e}）⇒ 降级为无锁运行")
+                return
+            raise
         if os.path.exists(self.path):
+            data = {}
             try:
-                data = json.load(open(self.path, encoding="utf-8"))
-                if _pid_alive(int(data.get("pid", -1))):
-                    raise SystemExit(
-                        f"FAIL 运行锁被占用：pid={data.get('pid')} since={data.get('ts')}（另会话在跑）")
+                data = self._read_lock()
             except SystemExit:
                 raise
             except (ValueError, OSError):
-                pass  # pid 已死或锁损坏 → 接管
-        with open(self.path, "w", encoding="utf-8") as fh:
-            json.dump({"pid": os.getpid(), "ts": datetime.datetime.now().isoformat(timespec="seconds")}, fh)
+                data = {}  # 锁损坏 → 按 stale 接管
+            pid = int(data.get("pid", -1))
+            ts = data.get("ts")
+            age_h = None
+            if ts:
+                try:
+                    age_h = (time.time() - datetime.datetime.fromisoformat(ts).timestamp()) / 3600.0
+                except ValueError:
+                    age_h = None
+            if pid == os.getpid():
+                raise SystemExit(f"FAIL 运行锁 pid 与本进程相同（{pid}·疑似残留自锁）")
+            if _pid_alive(pid) and age_h is not None and age_h <= self.max_age_hours:
+                raise SystemExit(
+                    f"FAIL 运行锁被占用：pid={pid} since={ts}（另会话在跑·锁龄 {age_h:.1f}h ≤ {self.max_age_hours}h）")
+            if _pid_alive(pid) and (age_h is None or age_h > self.max_age_hours):
+                # W1014 R1：pid 存活但锁超龄（或 ts 不可解析）→ 判陈旧接管（原实现只看 pid
+                # 存活、从不看年龄 ⇒ 一台机器上 pid 恰被复用即永久不可用·探针实测 361 天仍拦）
+                print(f"NOTE 锁 pid={pid} 存活但锁龄超阈值（{ts}·>{self.max_age_hours}h）⇒ 判陈旧接管")
+            # pid 已死 / 锁损坏 / 陈旧超龄 → 接管：W1014 R3 需先移除旧锁（否则 O_EXCL 永远失败）
+            try:
+                os.remove(self.path)
+            except OSError as e:
+                if self.allow_degrade:
+                    print(f"WARN 陈旧锁无法移除（{e.__class__.__name__}: {e}）⇒ 降级为无锁运行")
+                    return
+                raise SystemExit(f"FAIL 锁文件存在且无法移除（{e}）——用 --no-lock 跳过（仅只读模式可）") from None
+        # W1014 R3：原子创建（O_CREAT|O_EXCL·他方抢到即 FileExistsError，不互覆写）
+        try:
+            fd = os.open(self.path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o644)
+        except FileExistsError:
+            if self.allow_degrade:
+                print("WARN 运行锁竞争（他进程刚创建）⇒ 降级为无锁运行（只读扫描无害）")
+                return
+            raise SystemExit("FAIL 运行锁竞争（他进程刚创建）——请稍后重跑") from None
+        except OSError as e:
+            if self.allow_degrade:
+                print(f"WARN 运行锁不可写（{e.__class__.__name__}: {e}）⇒ 降级为无锁运行")
+                return
+            raise
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as fh:
+                json.dump({"pid": os.getpid(), "host": os.environ.get("COMPUTERNAME", ""),
+                           "ts": datetime.datetime.now().isoformat(timespec="seconds")}, fh)
+        except OSError as e:
+            if self.allow_degrade:
+                print(f"WARN 运行锁写入失败（{e}）⇒ 降级为无锁运行")
+                return
+            raise
         self.acquired = True
 
     def release(self):
+        # W1014 R4：删除失败只告警不抛（避免 --apply 中途异常叠成「自锁死」链）
         if self.acquired and os.path.exists(self.path):
-            os.remove(self.path)
+            try:
+                os.remove(self.path)
+            except OSError as e:
+                print(f"WARN 运行锁释放失败（残留 {self.path}）：{e}")
             self.acquired = False
 
 
@@ -554,10 +656,22 @@ def write_report(rows, policy):
             md.append(f"| {r['name']} | {'D' if r['is_dir'] else 'F'} | {human_size(r['size'])} | {r['files']} | {when} | {r['rule']} | {r['action']} |")
         md.append("")
     lim = policy.get("limits", {})
-    misc = agg.get("_misc", [])
-    if len(misc) > lim.get("_misc_warn_files", 100) or sum(i["size"] for i in misc) > lim.get("_misc_warn_mb", 5) * 1048576:
-        md.append(f"⚠ **_misc 超额告警**：{len(misc)} 项 / {human_size(sum(i['size'] for i in misc))}"
-                  f"（阈值 {lim.get('_misc_warn_files')} 项 / {lim.get('_misc_warn_mb')}MB）——需分流 _trash 或评估归档")
+    # W1014 修死代码：`_misc` 在 policy.exclude 内 ⇒ scan() 恒跳过 ⇒ agg.get("_misc") 恒空
+    # ⇒ 原超额告警永不触发（本次 93 件误入 _misc 至 555 件/9.8MB 破阈值却零告警的根因）。
+    # 改为直接磁盘统计 _misc 桶实况（files + size），与阈值对账。
+    misc_dir = os.path.join(TMPE, "_misc")
+    misc_files = misc_bytes = 0
+    if os.path.isdir(misc_dir):
+        for _dp, _dn, fs in os.walk(misc_dir):
+            for f in fs:
+                misc_files += 1
+                try:
+                    misc_bytes += os.path.getsize(os.path.join(_dp, f))
+                except OSError:
+                    pass
+    if misc_files > lim.get("_misc_warn_files", 100) or misc_bytes > lim.get("_misc_warn_mb", 5) * 1048576:
+        md.append(f"⚠ **_misc 超额告警**：{misc_files} 件 / {human_size(misc_bytes)}"
+                  f"（阈值 {lim.get('_misc_warn_files')} 件 / {lim.get('_misc_warn_mb')}MB）——需分流 _trash 或评估归档")
         md.append("")
     md_path, _json_path = _write_report_pair(
         "tmpe-report", md, {"stamp": stamp, "total_bytes": total, "rows": rows}, stamp)
@@ -649,6 +763,8 @@ def main():
     ap.add_argument("--tool-candidates", action="store_true", help="工具晋升候选评估（只读·禁自动晋升）")
     ap.add_argument("--older", type=int, default=None, metavar="N", help="只处置 N 天前写入的项")
     ap.add_argument("--freeze-hours", type=int, default=None, help="覆盖 policy 冻结窗（小时）")
+    ap.add_argument("--no-lock", action="store_true",
+                    help="跳过运行锁（受限环境只读盘点用·--apply/--report 禁用此项）")
     args = ap.parse_args()
     if not os.path.isdir(TMPE):
         print("FAIL tmpe/ 不存在")
@@ -659,7 +775,12 @@ def main():
         undo_journal(args.undo, TMPE)
         return 0
 
-    lock = RunLock()
+    # W1014 R2：只读模式写锁失败可降级（不 traceback）；--apply/--report 必须持锁（fail-closed·防并行双写）
+    mutating = args.apply or args.report
+    if args.no_lock and not mutating:
+        lock = _NullLock()
+    else:
+        lock = RunLock(allow_degrade=not mutating)
     lock.acquire()
     try:
         if args.tool_candidates:

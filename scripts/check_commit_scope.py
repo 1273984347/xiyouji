@@ -26,7 +26,6 @@ W1006 先在 `safe_commit.py` 加了 `--expect-spec` 硬拦，但那只在**走 
 """
 from __future__ import annotations
 
-import json
 import os
 import re
 import subprocess

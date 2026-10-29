@@ -248,6 +248,19 @@ def c4_corpus():
     return "\n".join(parts)
 
 
+def gate_mounted_set():
+    """verify_delivery.py 里以 `script="xxx"` 字面挂载的脚本名集合（C2 反向查用）。
+
+    fail-safe：读不到门禁本体返回空集（反向查不触发·绝不误伤）。仅认门禁硬挂载，
+    不含 Makefile / preflight / 单测覆盖者——那些仍属「人跑轨」，留豁免合法。
+    """
+    try:
+        text = rd(GATE_FILE)
+    except OSError:
+        return frozenset()
+    return frozenset(re.findall(r'script="([^"]+)"', text))
+
+
 def evaluate(inp):
     """纯函数判据（gather 注入实测 / self-test 注入构造），返回 issues 列表。"""
     issues = []
@@ -276,6 +289,14 @@ def evaluate(inp):
         issues.append("C2: 豁免清单重复行 %s" % d)
     for s in stale:
         issues.append("C2: 豁免清单陈腐行 %s（scripts/ 下无此文件·删行或改回原名）" % s)
+    # C2 反向查（W1014 接线升格）：已挂 verify 门禁槽的脚本不得仍留豁免——
+    # 豁免表语义=「四面无引用·只能靠人记得跑」（文件头自述），挂槽即每次提交真跑，
+    # 继续豁免会让登记面腐化（实证：check_gsap_motion.py W961 已挂第 50 槽，基线仍写
+    # 「未挂 verify 槽」，原 C2 只拦「脚本已删」拦不住这类漂移）。仅取 verify 挂载集，
+    # 不取整个覆盖集（Makefile/preflight 覆盖者仍属人跑轨，留豁免合法）。
+    mounted = inp.get("gate_mounted", frozenset())
+    for m in sorted(set(declared) & set(mounted)):
+        issues.append("C2: 豁免清单与门禁挂载冲突 %s（已挂 verify 槽却仍豁免·删该行）" % m)
 
     # C4 一次性脚本归位（W1002）：历史批 `_w####_` 件不得滞留 scripts/ 根
     under = inp.get("underscore", [])
@@ -299,7 +320,7 @@ def gather():
     raw = rd(BASELINE) if os.path.exists(BASELINE) else ""
     return {"scripts": scripts, "corpus_text": reference_corpus(), "baseline_raw": raw,
             "underscore": list_underscore_scripts(), "max_w": ledger_max_w(),
-            "inflight": inflight_wnums(),
+            "inflight": inflight_wnums(), "gate_mounted": gate_mounted_set(),
             "c4_corpus_text": c4_corpus()}
 
 
@@ -371,6 +392,11 @@ def run_self_test():
                   dict(clean, underscore=["_w1005_diag.py"], max_w=1006, inflight={1005}), None))
     cases.append(("T9 转正候选超配额必红（C4 棘轮）",
                   dict(clean, underscore=nine, max_w=1002, corpus_text=dummy_corpus + "\n" + "\n".join(nine)), "C4"))
+    # C2 反向查（W1014）：已挂 verify 槽却仍豁免必红；仅 Makefile/引用覆盖者留豁免不误伤
+    cases.append(("T11 已挂门禁槽却仍豁免必红（C2 反向查）",
+                  dict(clean, gate_mounted={"fill00.py"}), "C2"))
+    cases.append(("T12 覆盖但非门禁挂载者留豁免放行（C2 不误伤）",
+                  dict(clean, gate_mounted={"alpha.py"}), None))
 
     fails = 0
     for name, inp, expect in cases:

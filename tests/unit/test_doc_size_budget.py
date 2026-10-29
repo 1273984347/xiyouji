@@ -65,6 +65,50 @@ def test_footnote_cap_fail_closed(tmp_path, monkeypatch):
     assert any("C3" in f and "4 KB" in f for f in extra)
 
 
+# ---- W1014 C4 口径对齐（剥固定尾句家具·与写入侧 batch_cascade agents_note≤120 同计量对象）----
+
+TAIL = "。如与上述权威文档冲突，以权威文档为准。*"
+
+
+def test_c4_footnote_shape_furniture_not_counted():
+    """正样本：120 字 note 本体 + 家具（原始 141+ 字）→ 合规（W1013 首踩场景回归锁）。"""
+    note = "2026-10-29（W1013）" + "x" * 103  # 本体恰 120 字（上界放行）
+    line = "*本文件由 头部" + "；" + note + TAIL + "\n"
+    assert dsb.check_footnote_shape(line) == []
+
+
+def test_c4_footnote_shape_long_body_still_caught():
+    """负样本：note 本体 121 字（恰超 120）→ 必须抓（剥家具不得弱化门禁）。"""
+    note = "2026-10-29（W1013）" + "x" * 104  # 前缀 17 + 104 = 121 字
+    line = "*本文件由 头部" + "；" + note + TAIL + "\n"
+    bad = dsb.check_footnote_shape(line)
+    assert len(bad) == 1 and "121 字" in bad[0]
+    # 边界锁：120 字本体放行（不出现 off-by-one 收紧/放松）
+    ok = "*本文件由 头部；" + "2026-10-29（W1013）" + "x" * 103 + TAIL + "\n"
+    assert dsb.check_footnote_shape(ok) == []
+
+
+def test_c4_footnote_shape_bad_wnum_form_caught():
+    """负样本：W 号位数非法（W90）→ 条目头判据抓。
+
+    注：中文数字日期形态（二〇二六…）本分支抓不到——split lookahead 要求段首为阿拉伯
+    日期，中文形态整段留在 [0]（head 段）不被逐条审；该病根由 W964 定形契约在**写入侧**
+    batch_cascade 拦 + C3 聚合 4 KB 兜巨段（双防线·见 AGENTS 脚注契约）。本测如实锁现状语义。
+    """
+    line = "*本文件由 头部；2026-10-29（W90）位数非法条目" + TAIL + "\n"
+    bad = dsb.check_footnote_shape(line)
+    assert len(bad) == 1 and "非阿拉伯形态" in bad[0]
+
+
+def test_c4_real_agents_head_zero_fail():
+    """真盘回归：现役 AGENTS.md 脚注（W1013 141 字含家具场景）必须 0 FAIL。"""
+    text = (SCRIPTS_DIR.parent / "AGENTS.md").read_text(encoding="utf-8")
+    fs = text.rfind("*本文件由")
+    assert fs >= 0, "AGENTS 脚注锚点缺失（判据本体会静默跳过 C4）"
+    segs = text[fs:].splitlines()[0]
+    assert dsb.check_footnote_shape(segs) == []
+
+
 # ---- W982 C7 版本面契约（三层方案②）----
 
 def _c7_fixtures():

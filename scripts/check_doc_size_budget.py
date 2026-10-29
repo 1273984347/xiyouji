@@ -32,6 +32,29 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RE_CL_SEG = re.compile(r"^### (?:v[\d.]+（[^）]*）：W(\d+)|W(\d+)（[^）]*）：)", re.M)
 RE_FI_SEG = re.compile(r"^## (W\d+) ", re.M)
 RE_HANDOVER_BLOCK = re.compile(r"^- \*\*(?:v[\d.]+ )?W\d+[^*]*\*+：", re.M)
+# W1014：AGENTS 脚注固定尾句家具（写入侧 batch_cascade.py:396 `tail = "。如与上述权威文档
+# 冲突，以权威文档为准。*"` 逐字对齐）——C4 逐条计量前剥它，使判据口径与写入侧「量 note 本体」
+# 一致；否则末条 = note + 家具被合并计数，任何 97–120 字注记皆「级联绿 / 门禁红」（W1013 首踩）
+_FOOTNOTE_TAIL_RE = re.compile(r"。?如与上述权威文档冲突，以权威文档为准。?\*+\s*$")
+
+
+def check_footnote_shape(footnote_line, cap=120):
+    r"""AGENTS 版本脚注逐条定形判据（W965 C4·W1014 口径对齐）→ 违规描述列表（空 = 合规）。
+
+    计量对象 = **剥去固定尾句家具后的条目本体**，与写入侧 batch_cascade 的
+    `spec.agents_note 长 > 120` 守卫同一口径。家具是文档级免责句（非任何一批的注记），
+    原实现把它并进末条计数 ⇒ 97–120 字注记「级联绿 / 门禁红」（W1013 首踩：117 字被算 141）。
+    剥离只影响末条的家具部分，条目本体超长照样抓（见 _self_test 负样本）。
+    """
+    bad = []
+    for e in re.split(r"；(?=20\d{2}-\d{2}-\d{2}（)", footnote_line)[1:]:
+        if not re.match(r"^20\d{2}-\d{2}-\d{2}（W\d{3,4}）", e):
+            bad.append("条目头非阿拉伯形态：" + e[:24])
+            continue
+        body = _FOOTNOTE_TAIL_RE.sub("", e)
+        if len(body) > cap:
+            bad.append("条目 %d 字 > %d：%s…" % (len(body), cap, body[:24]))
+    return bad
 
 # 正本窗口（文档规范 §8·W960 立窗）
 WINDOWS = {
@@ -150,16 +173,12 @@ def collect():
                 # W965 C4：逐条定形判据（比聚合 4KB 更细——五条各 290 字的脚注可绕过 C3）
                 # W999 修：原嵌在 HANDOVER>45KB 分支内——死门控（HANDOVER 瘦身后 C4 永不执行）
                 # 且 fline 跨迭代引用可 NameError（subagent 审查 P1-1 实证复现）
+                # W1014：判据抽出为 check_footnote_shape（纯函数·供单测证伪），口径与写入侧对齐
                 if fs >= 0:
-                    bad = []
-                    for e in re.split(r"；(?=20\d{2}-\d{2}-\d{2}（)", fline)[1:]:
-                        if not re.match(r"^20\d{2}-\d{2}-\d{2}（W\d{3,4}）", e):
-                            bad.append("条目头非阿拉伯形态：" + e[:24])
-                        elif len(e) > 120:
-                            bad.append("条目 %d 字 > 120：%s…" % (len(e), e[:24]))
+                    bad = check_footnote_shape(fline)
                     if bad:
                         extra_fails.append(
-                            "体积窗口 C4: AGENTS.md 脚注 %d 条违规定形（W965 逐条判据）：%s"
+                            "体积窗口 C4: AGENTS.md 脚注 %d 条违规定形（W965 逐条判据·W1014 剥固定尾句后计）：%s"
                             % (len(bad), "；".join(bad[:3])))
             lines.append("体积报告  %-38s %7.1f KB %6d 行%s" % (rel, kb, nlines, extra))
 

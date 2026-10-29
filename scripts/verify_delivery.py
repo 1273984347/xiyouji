@@ -30,8 +30,8 @@ fail-closed 委派语义（W831·用户批准修 B1/B2·CLAUDE.md 第 10 条授�
 
 结构（W728 重构：原 905 行单体 main() 拆为五层·行为与输出逐字节不变）：
   模块级常量 → scope 分级工具 → 版本解析工具 → _Reporter/_GateContext（上报与执行态）
-  → 门禁参数表（_SimpleGate×18 / _StrictGate×16）→ 通用 runner×2 → 13 个段函数
-  → 收尾三函数 → main() 编排（52 段执行序 == EXPECTED_SECTION_NAMES 声明序·段自洽锁对账）。
+  → 门禁参数表（_SimpleGate×18 / _StrictGate×26·委托合计 44）→ 通用 runner×2 → 13 个段函数
+  → 收尾三函数 → main() 编排（57 段执行序 == EXPECTED_SECTION_NAMES 声明序·段自洽锁对账）。
 """
 
 import json
@@ -114,8 +114,8 @@ EXPECTED_SECTION_NAMES = [
 # ---- scope 分级（W698·用户裁决「动工」，P2-2 落地）：pre-commit 按变更路径跑受影响门禁子集 ----
 # 四态：full=全量（缺省·CI verify-delivery job·批收尾七步③恒为 full）；docs=文档轨子集；
 # site=页面轨+级联相关文档段；auto=按变更路径白名单分类（任何越界文件保守回退 full）。
-# 12 个恒跑段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区·W1007 加「提交范围」）恒跑不跳；跳过只作用于
-# 40 个 subprocess 委托段（57 段 - 17 内联/bespoke·W781 注册表派生与 EXPECTED 补齐第 45 槽段名后校数）：_scoped_run 统一短路，
+# 14 个恒跑段（= _SCOPE_CORE 全集·W713 补齐原漏 7 段的自洽锁盲区·W1007 加「提交范围」·W1011 加「仓库布局」·W1014 实核=14）恒跑不跳；跳过只作用于
+# 44 个 subprocess 委托段（57 段 - 13 内联/bespoke·W1014 实核：_SIMPLE×18+_STRICT×26 注册表派生·W781 校数口径随批更新）：_scoped_run 统一短路，
 # _GATE_SUMMARY_MARKERS 兜住防静默跳过 wrapper 的汇总行
 # 校验（fake stdout 含段标记，wrapper 不会误判「缺汇总行」）；段自洽锁按 scope 断言子集。
 _DOC_FILES_RE = re.compile(
@@ -399,7 +399,7 @@ class _SimpleGate(NamedTuple):
 
 
 class _StrictGate(NamedTuple):
-    """严格委托门禁参数行（15 段·crash 即拦 + 汇总行防静默跳过·W650 同款四段式）。
+    """严格委托门禁参数行（_STRICT_GATES 共 26 段·crash 即拦 + 汇总行防静默跳过·W650 同款四段式）。
 
     与简单段差异：① 执行异常直接 FAIL（不静默放过）；② 退出码 0 还须校验 stdout 含
     marker 汇总行（防 wrapper 假绿）；③ ok 详情取 stdout 指定行（ok_line=-1 末行/

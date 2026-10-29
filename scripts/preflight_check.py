@@ -25,7 +25,6 @@ import argparse
 import json
 import os
 import re
-import shutil
 import subprocess
 import sys
 import urllib.request
@@ -382,7 +381,9 @@ def step_env():
     lines = []
     ok = True
     lines.append(f"python（本脚本）={sys.version.split()[0]}")
-    launcher = "py" if shutil.which("py") else sys.executable
+    # W1014：统一 sys.executable——上方报的是本脚本解释器版本，pytest/ruff 必须用**同一**
+    # 解释器测才自洽（原 `py` if which 属「按 PATH 形状挑」·且可能与 sys.version 不同体·AGENTS §4.3）
+    launcher = sys.executable
     for name, cmd in (("pytest", [launcher, "-m", "pytest", "--version"]),
                       ("ruff", [launcher, "-m", "ruff", "--version"])):
         try:

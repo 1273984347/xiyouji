@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """W941 · UI 图标位 emoji 基准扫描器（机检判据·独立于替换逻辑）
 
 产出 scripts/output/_w939_targets.json：

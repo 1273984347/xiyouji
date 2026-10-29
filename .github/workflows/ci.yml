@@ -263,7 +263,10 @@ jobs:
           cache-dependency-path: scripts/requirements.txt
 
       - name: Install ruff, black, mypy
-        run: pip install ruff black mypy
+        # W1014：ruff 版本从 scripts/requirements.txt 派生（单一事实源·原 `pip install ruff`
+        # 不钉版致「本机 0.16.7 / requirements 钉 0.16.9 / CI 不钉」三重漂移·本地绿≠CI 绿）；
+        # 上方 cache-dependency-path 已指向该文件，版本随其浮动。black 自 W400 不再运行仅遗留安装。
+        run: pip install "$(grep '^ruff==' scripts/requirements.txt)" black mypy
 
       - name: Run ruff check
         uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4

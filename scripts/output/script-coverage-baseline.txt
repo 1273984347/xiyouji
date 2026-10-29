@@ -42,7 +42,6 @@ worktree_rehearse.py  # ②worktree 预演
 # 佐证：check_emoji_icons.py 自带正负样本运行形态；check_icon_fields.py 同族；登记类别=②会话直接执行类
 check_emoji_icons.py  # ②批收尾会话直跑门禁（UI 图标位 emoji 残留·W941-W950 族·W956 补登记）
 check_icon_fields.py  # ②批收尾会话直跑门禁（图标资产字段完整性·W949 族·W956 补登记）
-check_gsap_motion.py  # ②批收尾会话直跑门禁（GSAP 动效写法机检·W957 批·W958 补登记）
 check_parser_anchor_coverage.py  # ②批收尾会话直跑扫描（解析器锚点覆盖面·W964 双虫探针常驻化·W965 建）
 check_gov_doc_claims.py  # ②批收尾会话直跑对账（治理文档数字断言·preflight 提示位接线·W967 建）
 archive_ledger_rows.py  # ②批收尾会话直跑归档（台账行号序切分·C5 窗口修法·W970 建）

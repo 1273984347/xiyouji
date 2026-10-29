@@ -19,13 +19,9 @@ repos:
 
   - repo: local
     hooks:
-      - id: sync-docs
-        name: 6 文件文档一致性校验 (sync_docs.py)
-        entry: python scripts/sync_docs.py
-        language: system
-        pass_filenames: false
-        always_run: true
-        # 仅在 commit 时检查；如需自动修复用 `python scripts/sync_docs.py --fix`
+      # W1014：删除原 sync-docs 钩子——它 `entry: python scripts/sync_docs.py` 指向
+      # W793 已退役的不存在件（sync_docs.py 退休替换为现役门禁），休眠配置里潜伏，
+      # 一旦 `pre-commit install` + commit 即卡在缺失脚本（正是 AGENTS §4.3 警告的后果）。
 
       - id: verify-delivery
         name: 交付校验门禁 (verify_delivery.py)
@@ -60,4 +56,4 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
-        stages: [commit]
+        stages: [pre-commit]  # W1014: 原 [commit] 为废弃 stage 名（validate-config 告警·migrate-config 同款）

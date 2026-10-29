@@ -5,15 +5,17 @@
 #   make <target>    执行指定目标
 #
 # 约定:
-#   - Windows 兼容：使用 python（非 python3），npm 通过 `cd scripts && npm` 调用
+#   - 解释器：目标内 `python`/`pytest` 为可移植形态（AGENTS §4.3·CI/Unix 通用）；本机
+#     PowerShell 侧 `python` 是应用执行存根（调用即 exit 9009），本机跑请改 `py -3` 前缀
+#     直调对应脚本；现代 Linux 常只有 `python3` 无 `python`——本 Makefile 面向 Unix/WSL/CI。
 #   - 跨平台命令：test/clean/lint 目标使用 Python 子shell 替代 bash 语法
 #   - 任一命令失败即整体退出（makefile 默认行为）
 #   - 目标注释 `## ` 由 help 目标自动解析
 
-.PHONY: help analyze analyze-list analyze-only screenshots slice audit lint links test ci clean release data-validate docs-index validate-en
+.PHONY: help analyze analyze-list analyze-only screenshots slice audit lint links test ci clean release data-validate docs-index validate-en ledger
 
 help: ## 显示所有目标
-	@python -c "import re; lines=open(__file__,encoding='utf-8').read().splitlines(); print('\n用法:\n  make <target>\n\n目标:'); [print(f'  {m.group(1):<15} {m.group(2)}') for l in lines for m in [re.match(r'^([a-zA-Z_-]+):.*?##\s*(.*)', l)] if m]; print('')"
+	@python -c "import re; lines=open('Makefile',encoding='utf-8').read().splitlines(); print('\n用法:\n  make <target>\n\n目标:'); [print(f'  {m.group(1):<15} {m.group(2)}') for l in lines for m in [re.match(r'^([a-zA-Z_-]+):.*?##\s*(.*)', l)] if m]; print('')"
 
 analyze: ## 运行 A-AH 34 类分析脚本（自动发现，批量调度）
 	@echo "==> analyze: 批量运行 A-AH 34 类分析脚本"
@@ -77,8 +79,8 @@ test: ## pytest（python -m pytest tests/）— 跨平台兼容
 	@python -c "from pathlib import Path; import subprocess, sys; sys.exit(subprocess.run([sys.executable, '-m', 'pytest', 'tests/', '-q']).returncode if Path('tests').is_dir() else (print('  [skip] tests/ 目录不存在'), 0)[1])"
 	@echo "==> test 完成"
 
-ci: ## CI 本地预跑 = lint + test + audit + links + data-validate + docs-index + validate-en
-	@echo "==> ci: lint + test + audit + links + data + docs + validate-en"
+ci: ## CI 本地预跑 = lint + test + audit + links + data-validate + docs-index + validate-en + cross-line
+	@echo "==> ci: lint + test + audit + links + data + docs + validate-en + cross-line"
 	$(MAKE) lint
 	$(MAKE) test
 	$(MAKE) audit
@@ -87,6 +89,7 @@ ci: ## CI 本地预跑 = lint + test + audit + links + data-validate + docs-inde
 	$(MAKE) docs-index
 	$(MAKE) validate-en
 	$(MAKE) ledger
+	$(MAKE) cross-line
 
 ledger: ## 共享面串行化机制自测（台账回填独占 + 收官回填体检 + 三判据可证伪性·W933）
 	@echo "==> ledger: 台账工具自测 + 三判据可证伪性验证"
@@ -94,6 +97,11 @@ ledger: ## 共享面串行化机制自测（台账回填独占 + 收官回填体
 	python scripts/ledger_close_check.py --self-test
 	python scripts/ledger_mutation_test.py
 	@echo "==> ledger 完成"
+
+cross-line: ## 跨行改写门禁（改写面正则不得跨行吞内容·W1014）
+	@echo "==> cross-line: 改写面正则跨行吞并扫描（高危必须 0 处）"
+	python scripts/check_cross_line_rewrite.py --gate
+	@echo "==> cross-line 完成"
 	@echo "==> ci 完成"
 
 release: ## 版本发布前体检（doc-sync + git 状态 + pytest + checklist）

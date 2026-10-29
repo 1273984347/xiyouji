@@ -35,7 +35,9 @@ T1_FILES = (
     "W批次编号对账表-ARCHIVE.md",
 )
 COLD_MARKS = ("冷存储", "禁运行", "不可直接运行", "ROOT 上溯")
-BATCHES_SEG = ("misc", "w4xx", "w5xx", "w6xx", "w7xx", "w8xx", "w9xx")
+# W1014 接线升格：原为死常量（定义即弃·且漏 w10xx）——现作段全集权威源，T2 用它与磁盘
+# batches/<段>/ 双向对账，「新桶未在 _STRICT 枚举 / 枚举了但磁盘无」即报，堵死桶漂移盲区。
+BATCHES_SEG = ("misc", "w4xx", "w5xx", "w6xx", "w7xx", "w8xx", "w9xx", "w10xx")
 
 
 def _kb(n: int) -> str:
@@ -52,7 +54,7 @@ def t1_sizes(arch_dir):
     return rows
 
 
-def t2_coverage(tracked, readme_text):
+def t2_coverage(tracked, readme_text, batches_seg=None):
     r"""T2：归档 scripts 台账对账（纯函数·W994 语义：组行/计数对账而非逐件行——
     W735 存量 200+ 件从未逐件登记是既定形态，逐件检查会误报风暴）。
 
@@ -62,7 +64,10 @@ def t2_coverage(tracked, readme_text):
          且 N == 磁盘实数（计数漂移即报）；
       ② 子目录（attic/audit/review-pass3 等）：README 须提及 `archive/scripts/<dir>`；
       ③ batches/<段>/：README 须有 `archive/scripts/batches/<段>` 组行或结构树提及。
-    返回 dict(top_disk, top_row, subdirs_missing, segs_missing)。
+      ④ （W1014 接线升格）段全集双向对账：磁盘 batches 段 ⊆ BATCHES_SEG（声明全集·新桶
+         未入枚举即报）∪ 枚举段须存在于磁盘 tracked（防声明陈腐·同第 52 槽 L3 语义）。
+         batches_seg=None 时跳过（保持纯函数既有调用面兼容·自测用默认档）。
+    返回 dict(top_disk, top_row, subdirs_missing, segs_missing, segs_unlisted, segs_stale)。
     """
     top, subdirs, segs = [], set(), set()
     for rel in tracked:
@@ -81,8 +86,15 @@ def t2_coverage(tracked, readme_text):
                              and ("archive/scripts/%s" % d) not in readme_text)
     segs_missing = sorted(s for s in segs
                           if ("batches/%s" % s) not in readme_text)
+    # ④ W1014 接线升格：BATCHES_SEG 由死常量上岗为「段全集权威源」——双向对账
+    segs_unlisted = segs_stale = []
+    if batches_seg is not None:
+        declared = set(batches_seg)
+        segs_unlisted = sorted(s for s in segs if s not in declared)
+        segs_stale = sorted(s for s in declared if s not in segs)
     return {"top_disk": len(top), "top_row": top_row,
-            "subdirs_missing": subdirs_missing, "segs_missing": segs_missing}
+            "subdirs_missing": subdirs_missing, "segs_missing": segs_missing,
+            "segs_unlisted": segs_unlisted, "segs_stale": segs_stale}
 
 
 def t3_cold_warning(readme_text):
@@ -127,7 +139,7 @@ def run(strict=False, prefix=""):
                      if r.replace(os.sep, "/").startswith("archive/scripts/"))
     readme_p = os.path.join(arch, "README.md")
     readme = open(readme_p, encoding="utf-8", errors="replace").read() if os.path.exists(readme_p) else ""
-    cov = t2_coverage(tracked, readme)
+    cov = t2_coverage(tracked, readme, batches_seg=BATCHES_SEG)
     if cov["top_row"] is None:
         problems.append("T2 顶层存量组行缺失")
         lines.append("T2  ⚠ 顶层存量组行缺失（磁盘 %d 件）——修法=archive/README.md 台账补 `archive/scripts/`（顶层存量 +N 件）行" % cov["top_disk"])
@@ -143,6 +155,13 @@ def run(strict=False, prefix=""):
     if cov["segs_missing"]:
         problems.append("T2 段目录缺组行：%s" % cov["segs_missing"])
         lines.append("T2  ⚠ 段目录缺组行：%s" % "、".join(cov["segs_missing"]))
+    # W1014 接线升格：段全集双向对账（BATCHES_SEG 上岗·堵死新桶漂移与声明陈腐盲区）
+    if cov["segs_unlisted"]:
+        problems.append("T2 磁盘新桶未入 BATCHES_SEG 枚举：%s" % cov["segs_unlisted"])
+        lines.append("T2  ⚠ 磁盘 batches 段未入 BATCHES_SEG：%s——修法=本行枚举补该段" % "、".join(cov["segs_unlisted"]))
+    if cov["segs_stale"]:
+        problems.append("T2 BATCHES_SEG 声明了但磁盘无：%s" % cov["segs_stale"])
+        lines.append("T2  ⚠ BATCHES_SEG 陈腐（声明段磁盘不存在）：%s——修法=删枚举或补建" % "、".join(cov["segs_stale"]))
 
     # T3
     batches_readme = os.path.join(arch, "scripts", "batches", "README.md")
@@ -191,6 +210,20 @@ def _self_test() -> int:
     cov3 = t2_coverage(tracked, readme.replace("batches/w9xx", "batches/w8xx"))
     if cov3["segs_missing"] != ["w9xx"]:
         fails.append("T2 段缺组行判定错：%s" % cov3)
+    # cov4：W1014 接线升格——段全集双向对账可证伪（磁盘新桶未入枚举 / 枚举陈腐）
+    seg_enum = ("w9xx",)  # 只枚举 w9xx
+    # ① tracked 有 w10xx 但枚举无 → segs_unlisted 抓到（正是本仓 W1006 前 BATCHES_SEG 漏 w10xx 的盲区）
+    t_unlisted = tracked + ["archive/scripts/batches/w10xx/_c.py"]
+    c4 = t2_coverage(t_unlisted, readme + " batches/w10xx", batches_seg=seg_enum)
+    if c4["segs_unlisted"] != ["w10xx"]:
+        fails.append("T2 cov4 新桶未入枚举应抓到 w10xx：%s" % c4["segs_unlisted"])
+    # ② 枚举有 w5xx 但磁盘无 → segs_stale 抓到（声明陈腐）
+    c5 = t2_coverage(tracked, readme + " batches/w9xx", batches_seg=("w5xx", "w9xx"))
+    if c5["segs_stale"] != ["w5xx"] or c5["segs_unlisted"]:
+        fails.append("T2 cov5 枚举陈腐应抓到 w5xx 且 unlisted 空：%s" % c5)
+    # ③ 默认档（batches_seg=None）双向键均空——保持既有调用面兼容
+    if t2_coverage(t_unlisted, readme + " batches/w10xx")["segs_unlisted"]:
+        fails.append("T2 cov6 batches_seg=None 不应触发对账")
     # t3
     if t3_cold_warning("无警告文本") or not t3_cold_warning("本目录为冷存储·禁运行"):
         fails.append("T3 判定错")

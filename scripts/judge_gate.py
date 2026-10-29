@@ -1,7 +1,15 @@
 """W465 决策闸门判定脚本（Phase 3 路线图 v7 · W530 落地）。
 
-输入 7 日 UV 与 30 日 UV（GoatCounter 后台实测值），按路线图 §1.2 阈值输出
+输入 7 日 UV 与 30 日 UV（**人工输入**），按路线图 §1.2 阈值输出
 分发 / 归档 / 中间态 三选一分支，可复算（输入 + 阈值 + 分支 + 时间全记录）。
+
+数据源现状（W1014 语义订正·E1 声明≠落地）：原 W535 曾配套 `fetch_gate_stats.py`
+走 GoatCounter API 自动取数，但 GoatCounter 已于 **W806 彻底退役**并被 CI 硬守卫
+`check_no_goatcounter.py` 禁止回归，仓内**无可用服务端 UV 源**（`inject_visit_log.py`
+仅写 localStorage·本浏览器可见·不能跨访客聚合）。故本脚本不作自动接线（伪造接不通的
+源＝违 fail-closed），保留为人工输入复算器：UV 值须从当时的统计后台/快照人工读取代入。
+W626 决策闸门已据当时实测（7 日 UV=1 / 30 日 UV=24）判定「归档」并冻结内容扩容批；
+本脚本保留供未来若有新统计源时按同阈值复算同一结论。
 
 判定优先级（v7 定案，消除两条件冲突歧义）：
   1. uv30 < 30                -> 归档   （止损优先：30 日口径稳定，
@@ -49,8 +57,8 @@ def render_record(uv7: int, uv30: int, branch: str) -> str:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="W465 决策闸门判定（Phase 3 路线图 §1.2）")
-    ap.add_argument("--uv7", type=int, required=True, help="GoatCounter 后台 7 日 UV 实测值")
-    ap.add_argument("--uv30", type=int, required=True, help="GoatCounter 后台 30 日 UV 实测值")
+    ap.add_argument("--uv7", type=int, required=True, help="7 日 UV（人工从统计后台/快照取代入·GoatCounter 已 W806 退役）")
+    ap.add_argument("--uv30", type=int, required=True, help="30 日 UV（同上·人工取代入）")
     ap.add_argument("--report", action="store_true", help="追加判定记录到 读者数据复盘.md")
     args = ap.parse_args()
 

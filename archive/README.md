@@ -24,6 +24,7 @@ archive/
 │   ├── specs/                       早期设计稿（8 件·W735 迁入）
 │   ├── _dev/                        开发草稿区（10 件·W735 迁入·含来源子目录）
 │   ├── w550-shot-review/            W550 截图审查产物（11 件·来源成组）
+│   ├── templates/                   历史模板归馆（3 件·W797·采用率 0%·W1014 补声明）
 │   └── 复盘报告/                    工作复盘报告（9 件·滚动归档）
 └── scripts/                     ← 脚本类（.py/.js/.json/.txt 等）
     ├── （45 件）                    历史一次性脚本（早期迁移）
@@ -31,7 +32,7 @@ archive/
     ├── attic/                       原 scripts/_attic 整迁（32 件·自含 README）
     ├── batches/                     批次一次性产物（W735 迁入起·按 W 段分桶）
     │   ├── w4xx/ w5xx/ w6xx/ w7xx/ w8xx/ w9xx/ w10xx/   各 W 段：spec / 级联清单 / 一次性脚本 / 中间产物
-    │   └── misc/                    无 W 号件（早期 fix/audit/diag 等 90 件）
+    │   └── misc/                    无 W 号件（早期 fix/audit/diag 89 + W977 批量 +60 + W1011 归位 +1 = 内容 150·计数见台账组行）
     └── review-pass3/                W557 三轮全站审查产物（105 件·含 prompts/）
 ```
 
@@ -88,6 +89,16 @@ archive/
 ---
 | `archive/docs/CHANGELOG-ARCHIVE-tier2-W400-W559.md` | CHANGELOG-ARCHIVE-tier2.md 拆分范围件（W400-W559·144 段·W994 迁入） | W994 迁入 · W995 拆分定形 | 2026-10-28 | tier-2 容器 1044KB 破 1MB·按 W 段拆分（主人授权） |
 | `archive/docs/file-index-ARCHIVE-tier2.md` | file-index-ARCHIVE.md 二级归档（目录节 W031-W048 时代·10 节） | W994 建 | 2026-10-28 | tier-2 容器 1070KB 破 1MB 首建 |
+
+---
+| `archive/scripts/batches/w10xx/_w1005_*.py`（16 件·补登记） | `scripts/_w1005_*.py` 一次性/诊断脚本 | W1006（提交 cf1f1946） | 2026-10-29 | 批次收官归档·**W1014 补登记**（W1006 入库时未追加台账组行·正是 `check_archive_health` T2 只验「段是否被提及」不核段级计数的漏检面·该行已随 W1014 上岗双向对账） |
+| `archive/scripts/batches/w10xx/_w1013_*.py`（16 件·代收） | `scripts/_w1013_*.py` og-image 第二轮工作件（inventory/master/read/roster_check/derive_prepare/download/prepare/retry/retry2/sheet/stage/verify/make_spec/align_files/fix_desc 等） | W1013 主体在 2feba57c | 2026-10-29 | 脚本三档归位②·**W1014 代收**（W1013 已收官·登记 W1014 后台账 max 前移使这 16 件降为「历史批滞留」·第 42 门禁 C4 哨兵判红即本行为所补·与 W1012 并行收尾件代收先例同型） |
+| `archive/scripts/batches/w10xx/`（累计 40 件 = w1001×8 + w1005×16 + w1013×16） | 同上三位号首批桶 | W1002 建 · W1006/W1014 增 | 2026-10-29 | 段级计数补正声明（原组行「8 件」为 W1002 建桶时口径·后续批次增量随上两行登记·不再回填历史行） |
+
+---
+| `archive/docs/templates/`（3 件：article-template / handoff-checklist / validation-checklist） | `docs/_templates/` 未被采用的历史模板 | W797（提交 32f37255） | 2026-10-26 | 历史模板归馆（采用率 0%）·**W1014 补登记**（该批只写 STRUCTURE.md 叙述未追加本台账行·结构树亦缺该目录） |
+| `archive/docs/W批次编号对账表-ARCHIVE.md` | 对账表正本行窗滚动淘汰的历史行（W908 前） | W968（提交 08a92a7f） | 2026-10-26 | 台账窗口制拆分新容器（正本 446.6→150.3KB）·**W1014 补登记**（此前仅 `archive/docs/index.md` 生成物列出·台账无行；亦为 `check_archive_health` T1 监控对象） |
+| `archive/docs/w-b-critique.md` | W735 大归档期 docs 侧评论草稿 | W735（提交 1fd372b4） | 2026-10-13 | 批次完结归档·**W1014 补登记**（W735 组行按目录登记·此单件未入目录） |
 
 ---
 

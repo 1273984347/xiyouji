@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """subject_band.py — 主体检测与派生裁切（不写盘·纯函数·W988 建·W1004 由归档桶转正）
 
 为什么不用整幅墨迹 bbox（W974 实证的两个坑都在这里）：

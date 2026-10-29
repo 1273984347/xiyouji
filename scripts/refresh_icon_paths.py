@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """W950 · 图标图形刷新器（把打磨后的新图形同步到全仓已内联的 SVG）
 
 匹配键 = (d, transform, fill) 复合键——单靠 d 有三组歧义
@@ -85,7 +84,7 @@ def main() -> int:
         orig = text
         cnt = [0]
 
-        def repl(m):
+        def repl(m, _cnt=cnt):  # W1014: 默认参绑定消除 B023 延迟绑定告警（同列表对象·计数语义不变）
             d = m.group(1)
             tr = m.group(2) or ""
             trm = re.search(r'transform="([^"]+)"', tr)
@@ -94,7 +93,7 @@ def main() -> int:
             name = old_map.get(k)
             if not name:
                 return m.group(0)
-            cnt[0] += 1
+            _cnt[0] += 1
             nd, ntr, nfl = new_by_name[name]
             tr_out = f' transform="{ntr}"' if ntr else ""
             fl_out = f' fill="{nfl}"' if nfl else ""
@@ -165,7 +164,7 @@ def main() -> int:
 if __name__ == "__main__":
     try:
         sys.exit(main())
-    except Exception as e:
+    except Exception:
         import traceback
         traceback.print_exc()
         sys.exit(2)
