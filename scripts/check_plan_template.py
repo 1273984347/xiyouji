@@ -17,7 +17,6 @@
 
 门禁挂载：scripts/verify_delivery.py 第 48 槽（_StrictGate·crash 即拦 + 汇总行防静默跳过）。
 """
-import io
 import os
 import subprocess
 import sys
@@ -65,7 +64,7 @@ def judge_file(rel_path):
     """返回 (verdict, detail_dict)：verdict ∈ {'PASS','FAIL'}；detail 含新增缺项与存量缺项"""
     full = os.path.join(ROOT, rel_path)
     try:
-        new_text = io.open(full, encoding='utf-8').read()
+        new_text = open(full, encoding='utf-8').read()
     except OSError as e:
         return 'FAIL', {'error': '读取失败：%s' % e, 'new_fail': [], 'old_fail': []}
     name = os.path.basename(rel_path)
@@ -241,6 +240,27 @@ def self_test(include_git=True):
         add('⑦ 端到端：清理后不再命中',
             not any('T_tmp_probe' in f or '_self_test_tmp_probe' in f for f in after),
             'after=%s' % after)
+
+        # ⑧ **judge_file() 读盘路径**（W1014 补覆盖）
+        # 病根：W1005 批在**首个新增计划方案件**进仓时，本槽崩在
+        # `AttributeError: module 'plan_template_review' has no attribute 'io'`——
+        # 读盘面此前**无任何自测覆盖**（①~⑤ 全走纯函数 `R.judge(text)`），潜伏到真实新增件才引爆。
+        # ⇒ 本例造一个**合规**件与一个**缺项**件，走 judge_file() 的真实读盘路径各判一次。
+        for label, content, want_fail in (('合规', GOOD, False), ('缺项', BAD, True)):
+            p2 = os.path.join(ROOT, PLAN_REL, '_self_test_read_disk_%s.md' % label)
+            try:
+                with open(p2, 'w', encoding='utf-8') as f:
+                    f.write(content)
+                v2, d2 = judge_file('%s/_self_test_read_disk_%s.md' % (PLAN_REL, label))
+                ok2 = (v2 == 'FAIL') if want_fail else (v2 == 'PASS')
+                add('⑧ 读盘路径：%s件 → 判%s' % (label, '红' if want_fail else '绿'),
+                    ok2, 'verdict=%s new_fail=%s' % (v2, d2.get('new_fail')))
+            except OSError as e:
+                add('⑧ 读盘路径：%s件 → 判%s' % (label, '红' if want_fail else '绿'),
+                    False, '写临时件失败：%r' % (e,))
+            finally:
+                if os.path.exists(p2):
+                    os.remove(p2)
 
     ok = True
     for name, passed, detail in cases:
