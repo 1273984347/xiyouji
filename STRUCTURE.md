@@ -8,7 +8,7 @@
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
 
-> 当前批次：W1016（2026-10-29）— 体检期实踩而坑表未覆盖的教训补入坑表加可机检者升硬守卫加补缺失自测加订正记账陈腐值—A1-A6
+> 当前批次：W1017（2026-10-29）— 产物目录回归活产物单一职责，历史批次一次性件按批号归档，临时区授权清理并保留个人稿—A1-A6
 
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
@@ -490,6 +490,8 @@
 | **工具** | `utils/text_loader.py` | 文本加载与编码处理 |
 
 | **输出** | `output/figures/`、`output/data/` | 静态图（PNG/SVG）、数据（JSON/CSV）·data/ 系 gitignored 本地产物（.gitignore:59·每次 `make analyze` 重新生成·不入 tracked 基准·W716 注）·data_validate.py 校验完整性 |
+
+| **输出目录边界（W1017 立）** | `output/` 只放**活产物**（file-index / stats / tools-inventory / 各门禁缓存 / data/ 可视化源） | 历史批次一次性件（级联清单 `_cascade_files_W*.txt`、批次规格 `_w*_spec.json`、审图 PNG、一次性脚本与 `.err` 运行日志）**一律不入 output**——按批号归 `archive/scripts/batches/<段>/`（W1012 立原则·W1017 完成全量归位 366 件，跟踪件 689→323）。例外与理由：`_w*_spec.json` 保留在 output（`backfill_changelog.py` 全量 glob 用于补段·搬走即断能力）；门禁缓存 `_vermilion_solid_cache.json`/`_w864_accent_exemptions.json` 保留（活门禁读） |
 
 | **DRL 产物** | `output/drl-r1-findings.md`、`output/audit-baseline.md`、`output/v08-data-check.md`、`output/v08-embedded-data.js`、`output/drl-screenshot-review.md` | v0.7 baseline 审查 + v0.8 DRL R1→R4 收敛记录 + B1 数据检查 + EMBEDDED_DATA 统一命名 + W010.2 截图审查 DRL 收敛记录 |
 

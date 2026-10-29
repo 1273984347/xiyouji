@@ -50,8 +50,10 @@ def test_rename_second_record_not_collected_as_dirty():
 
 
 def test_untracked_and_modified_both_collected():
-    raw = "\0".join([_rec("??", "scripts/_w1016_pick.py"), _rec("MM", "scripts/d.py"), ""])
-    assert cds._parse_status_z(raw) == ["scripts/_w1016_pick.py", "scripts/d.py"]
+    # 夹具用刻意不存在的中性路径——禁引用真实在途件（否则会让第 42 门禁把该件误判
+    # 「被四面引用的转正候选」·W1017 实测踩到：夹具引了真实 `_w1016_pick.py` 致 C4 红）
+    raw = "\0".join([_rec("??", "scripts/_zzz_fixture_pick.py"), _rec("MM", "scripts/d.py"), ""])
+    assert cds._parse_status_z(raw) == ["scripts/_zzz_fixture_pick.py", "scripts/d.py"]
 
 
 def test_empty_and_none_input_safe():
