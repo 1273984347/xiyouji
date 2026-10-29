@@ -1,3 +1,20 @@
+### W1033（2026-10-30）：T05 计划状态校正（历史正文不改·只改时效标注）
+
+> **来源**：用户 2026-10-30 追问「那你为什么不改计划呢」——上一批我改了编制表（产物），却没动 T05（计划）。
+>
+> **为什么不当场改正文**：T05 是 W831 批的**执行前计划**，按项目规矩**历史段不改写**（改了就无法追溯「当初怎么打算、为什么这么排」）。这是克制，不是遗漏。
+>
+> **但有一处必须改，而且我漏了**：T05 第 11 行状态写「**执行中**（施工进行中·非已收官）」，而台账里 **W831 早已归档收官**——两处打架，属「登记面 vs 实况」同族背离。读者按状态行判断会以为整批在途。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/计划方案/执行前计划-T05-取经编制表落库与编制位补全.md、scripts/output/_w1033_spec.json、scripts/output/file-index.md、site/index.html
+
+**处置**：① 状态行校正为「**仓内已收官 · 仓外三项未执行**」——ST-01~09 随 W831 归档，ST-10~ST-12（仓外动作）从未执行；② 5.5 表前加**失效声明**：ST-10~12 的 `pip install fastmcp` / `mavis mcp create` / `mavis agent create` 绑定旧环境，**不可照抄**，续做须按现环境重写步骤（指向《取经编制表》§4 环境差异声明）；③ **步骤正文一字未改**——保留「当时怎么打算的」原始记录。
+
+**这条的通用判据**：历史文件该改的是**状态与时效标注**，不是**内容与步骤**。把失效的步骤改写成「现在能用的样子」，历史就变成了假的——后人会以为当年就是这么做的。
+
+**验证**：全量门禁 57 段核心全绿。
+
+> - **状态**：已收官（T05 状态与台账对齐·失效步骤已标注·正文保持原样）
 ### W1032（2026-10-30）：编制表环境依赖纠错（mavis 假设撤回）
 
 > **来源**：用户 2026-10-30 追问「为什么需要 mavis？」——这一问直接推翻了我上一批的结论。
@@ -567,7 +584,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1032），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1033），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1857,25 +1874,5 @@
 **B-W855-04 副本链值级对账门禁建置**：实测漂移定性——47 个入库副本中 24 个与生成器产物**值级真漂移**（非格式差异·三年无防线）。方向未定（入库副本为页面消费的生效真源·生成器产物 gitignored 本地）——翻旧账需逐个比对消费方（另批定性），本门禁按第 43 槽基线冻结模式**先防增量**：JSON 深度相等对账·存量 24 件入基线登记·基线外新漂移判红·恢复一致 NOTE 除名·源目录缺（CI 态）NOTE 放行（W716 json_count 键移除同因登记）。self-test 5/5（首版 T4 例自身逻辑错被复跑抓出修正——负样本测试再立功）·接 ci_sim 第 11 项。
 
 **验证**：self-test 5/5·主判据 0 FAIL（24 件全在基线内）·专项单测 2 例·第 42 门禁覆盖 0 FAIL·ruff All checks passed。
-
-
-### W919（2026-10-24）：DB 三包批（B-DB-04 迁移框架 + B-DB-02 索引查询 + B-DB-03 约束降级）
-
-
-
-> **来源**：用户 2026-10-24 令「继续」——T-18 D1 真债首项（B-DB-02/03/04 三包·承接 W917 包一）。
-
-> - **文件**：xiyouji-agent-web/server/db.ts、xiyouji-agent-web/server/routes.ts、xiyouji-agent-web/server/api.integration.test.ts、docs/agent/agent-web.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w919_spec.json、scripts/output/_cascade_files_W919.txt（逐件行见 file-index W919 段）。
-> **状态**：**已收官**（W919 4f5e2157·git 反填·共 2 笔·W971 存量回填）
-
-**B-DB-04 迁移框架**：`MIGRATIONS[]` version 单调 + 事务执行 + user_version 记账（v1 吸收原 try/catch 手写探测迁移——W823 判定的静默吞错反模式退役；v2 包二四索引；v3 feedback 表重建——存量库补外键引用/message_id 单维唯一索引/created_at CHECK·重建期外键 OFF 后复位）。「改表定义对已有库无效」规范固化进 docs/agent/agent-web.md。实现期一真缺陷被集成测试当场抓出：v3 DROP TABLE 连带删索引、迁移漏重建致 ON CONFLICT 无约束可撞——补建后转绿。
-
-**B-DB-02 索引与查询**：sessions(updated_at)/messages(session,created)/feedback 两索引落位；会话列表 N+1 改写为单 SQL 子查询（limit 默认 50·上限 200·keyset 前端取页留应用批——当前会话量无截断·披露）。
-
-**B-DB-03 约束降级**：tool_calls JSON.parse 脏数据降级 null（原裸 parse 单行脏数据让整会话不可读）。
-
-**测试对齐**：反馈集成测试从虚构 ID 时代（无外键约束的写法）改为先落真实 session/message 底数——外键正确拒绝虚构引用正是 W917 修复本体的回归证明。
-
-**验证**：tsc 零错·test:server 97 passed 零挂·test:integration 19 passed 零挂·test:client 51 passed 零挂。
 
 

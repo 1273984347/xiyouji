@@ -367,3 +367,5 @@
 | W971 | 存量段状态回填批（建议序④·用户令「现在就可以做完」）：CHANGELOG 段状态字段仍在途的存量批次按 git 事实源批量反填为已收官（首笔 hash+笔数）——W954 量化的 91 批滞后存量清偿；git 无提交的段保留原状并留报告；守恒断言（段数不变/仅状态行改动/状态 W 号==段号 P-43-05 纪律） | 7823d7c8 | —（待回填） | **已收官**（7823d7c8·git 反填·共 2 笔·P-43-01） | 本地 Agent 会话 2026-10-26（用户令现在做完） | CHANGELOG.md |
 - 2026-10-30（修剪迁入 1 行·W972-W972·号序切分）
 | W972 | CodeQL 三高危修复批（PR #66 检查红项清偿）：py/bad-tag-filter ×2（</script 宽容空白变体——审计器自身正则可被混淆标签绕过）+ js/incomplete-sanitization ×1（转义先反斜杠后引号·顺序正确） | baee9103 | —（待回填） | **已收官**（baee9103·git 反填·共 1 笔·P-43-01） | 本地 Agent 会话 2026-10-26（PR #66 检查清偿） | scripts/_w955_motion_audit.py · scripts/check_interaction_binding.py · scripts/check_data_drift.js |
+- 2026-10-30（修剪迁入 1 行·W973-W973·号序切分）
+| W973 | HANDOVER 五区清理批（用户令走·并问责 W967 未查全仓——本批后接全仓内容文件同族扫描）：① 零、当前阻塞只留未解决（已处置历史迁 HANDOVER-ARCHIVE）② 候选清单清除划线与已完成条目 ③ 方法论沉淀真指针化（叙事迁归档）④ 待办清已完成 ⑤ 雷区与 pitfalls 去重指针化 ⑥ 体积门禁 C6 HANDOVER 整文件 40KB 硬判据 | 7760fe31 | —（待回填） | **已收官**（7760fe31·git 反填·共 2 笔·P-43-01） | 本地 Agent 会话 2026-10-26（用户令走并问责查全） | HANDOVER.md · archive/docs/HANDOVER-ARCHIVE.md · scripts/check_doc_size_budget.py · tests/unit/test_doc_size_budget.py |

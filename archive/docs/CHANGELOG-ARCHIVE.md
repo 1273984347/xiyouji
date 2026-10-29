@@ -13,6 +13,25 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W919（2026-10-24）：DB 三包批（B-DB-04 迁移框架 + B-DB-02 索引查询 + B-DB-03 约束降级）
+
+
+
+> **来源**：用户 2026-10-24 令「继续」——T-18 D1 真债首项（B-DB-02/03/04 三包·承接 W917 包一）。
+
+> - **文件**：xiyouji-agent-web/server/db.ts、xiyouji-agent-web/server/routes.ts、xiyouji-agent-web/server/api.integration.test.ts、docs/agent/agent-web.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w919_spec.json、scripts/output/_cascade_files_W919.txt（逐件行见 file-index W919 段）。
+> **状态**：**已收官**（W919 4f5e2157·git 反填·共 2 笔·W971 存量回填）
+
+**B-DB-04 迁移框架**：`MIGRATIONS[]` version 单调 + 事务执行 + user_version 记账（v1 吸收原 try/catch 手写探测迁移——W823 判定的静默吞错反模式退役；v2 包二四索引；v3 feedback 表重建——存量库补外键引用/message_id 单维唯一索引/created_at CHECK·重建期外键 OFF 后复位）。「改表定义对已有库无效」规范固化进 docs/agent/agent-web.md。实现期一真缺陷被集成测试当场抓出：v3 DROP TABLE 连带删索引、迁移漏重建致 ON CONFLICT 无约束可撞——补建后转绿。
+
+**B-DB-02 索引与查询**：sessions(updated_at)/messages(session,created)/feedback 两索引落位；会话列表 N+1 改写为单 SQL 子查询（limit 默认 50·上限 200·keyset 前端取页留应用批——当前会话量无截断·披露）。
+
+**B-DB-03 约束降级**：tool_calls JSON.parse 脏数据降级 null（原裸 parse 单行脏数据让整会话不可读）。
+
+**测试对齐**：反馈集成测试从虚构 ID 时代（无外键约束的写法）改为先落真实 session/message 底数——外键正确拒绝虚构引用正是 W917 修复本体的回归证明。
+
+**验证**：tsc 零错·test:server 97 passed 零挂·test:integration 19 passed 零挂·test:client 51 passed 零挂。
+
 ### W918（2026-10-24）：检索降级批（B-ARCH-01 清偿·波二九件全清）
 
 

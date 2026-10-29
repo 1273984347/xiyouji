@@ -11,6 +11,25 @@
 ---
 
 
+## W1033 T05 计划状态校正（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1033 | 本批新增/修改 |
+| AGENTS.md | W1033 | 本批新增/修改 |
+| CHANGELOG.md | W1033 | 本批新增/修改 |
+| CITATION.cff | W1033 | 本批新增/修改 |
+| HANDOVER.md | W1033 | 本批新增/修改 |
+| README.md | W1033 | 本批新增/修改 |
+| STRUCTURE.md | W1033 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1033 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1033 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1033 | 本批新增/修改 |
+| docs/11-方案报告/计划方案/执行前计划-T05-取经编制表落库与编制位补全.md | W1033 | 本批新增/修改 |
+| scripts/output/_w1033_spec.json | W1033 | 本批新增/修改 |
+| scripts/output/file-index.md | W1033 | 本批新增/修改 |
+| site/index.html | W1033 | 本批新增/修改 |
+
 ## W1032 编制表环境依赖纠错（2026-10-30）
 
 | 文件 | W | 说明 |
@@ -4671,30 +4690,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W920 | W920 段插入 |
 | scripts/output/_w920_spec.json | W920 | 本批级联 spec |
 | scripts/output/_cascade_files_W920.txt | W920 | 级联落盘清单 |
-
-## W919 DB 三包批（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| xiyouji-agent-web/server/db.ts | W919 | B-DB-04 迁移框架（MIGRATIONS v1-v3 单调记账·删 try/catch 手写探测迁移）+ B-DB-02 四查询索引 + v3 feedback 表重建（旧库补外键/单维唯一索引/CHECK·含索引重建修复）+ listSessionsWithMessageCount 单 SQL 版
-| xiyouji-agent-web/server/routes.ts | W919 | B-DB-02 N+1 改写（子查询·limit 默认 50 上限 200）+ B-DB-03 JSON.parse 脏数据降级 null
-| xiyouji-agent-web/server/api.integration.test.ts | W919 | 反馈集成测试对齐外键时代（先落真实 session/message 底数·断言与清理同步）
-| docs/agent/agent-web.md | W919 | schema 变更规范固化（改表定义对旧库无效·一律走 MIGRATIONS·禁探测式迁移）
-| docs/00-导读/W批次编号对账表.md | W919 | W919 认领行与收官回填 |
-| CHANGELOG.md | W919 | W919 段 |
-| HANDOVER.md | W919 | 级联头尾链与里程碑块 |
-| README.md | W919 | 当前批次版本行 |
-| STRUCTURE.md | W919 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W919 | 当前批次版本行 |
-| .github/workflows/README.md | W919 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W919 | 页脚批次链插入 W919 |
-| site/data/cross-time-danmaku.html | W919 | 页脚批次链插入 W919 |
-| site/data/tag-cloud.html | W919 | 页脚批次链插入 W919 |
-| site/dukou-engine.html | W919 | 页脚批次链插入 W919 |
-| AGENTS.md | W919 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W919 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W919 | version 同步为 W919 |
-| scripts/output/file-index.md | W919 | W919 段插入 |
-| scripts/output/_w919_spec.json | W919 | 本批级联 spec |
-| scripts/output/_cascade_files_W919.txt | W919 | 级联落盘清单 |
 
