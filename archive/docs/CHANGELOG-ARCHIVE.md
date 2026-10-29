@@ -13,6 +13,21 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W899（2026-10-23）：合并后收尾修正（output 目录计数口径订正 + 朱砂门禁增量缓存重建）
+
+
+
+> **来源**：用户 2026-10-23 批准「B 推送 dev 并开 PR 合 main」，主会话在合并落地核对中自查发现两处入库件与实况不符，本批为合并后收尾修正。
+
+> - **文件**：assets/promo/output/README.md、scripts/output/_vermilion_solid_cache.json、scripts/output/_w899_spec.json、scripts/output/_cascade_files_W899.txt、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、scripts/output/file-index.md。
+
+> - **执行**：① **output 目录计数口径订正**——`assets/promo/output/README.md` 的「生成时点含 N 个直属文件」由 3 订正为 6（W898 落地英文版 3 件产物时只刷新了 `index.md` 清单，README 散文计数行未同步 ⇒ main 上出现「声明 3 实况 6」的自相矛盾）；② **朱砂门禁增量缓存重建**——W898 级联改写四页脚后未重扫第 49 槽，缓存中 3 页 sha1 与当前页面字节不一致（缓存不自愈 ⇒ 每轮 CI 白扫这 3 页），本批按 `scripts/check_vermilion_solid.js` 的 `sha1File` 同口径重建并全量对账；③ **级联面随批同步**——按仓库规约走 `scripts/batch_cascade.py` 立 W899 段（CHANGELOG 与 README 与 STRUCTURE 与项目说明与 HANDOVER 与 AGENTS 与 workflows README 与四页脚与 file-index 与 CITATION.cff 共 10 面）。
+
+> - **验证**：缓存全量对账 234 条 → 命中 234 · 陈旧 0 · 幽灵 0（对账脚本 `tmpe/_w899_cache_audit.py`·口径与门禁 `sha1File` 一致）；单测 27 passed（`tests/unit/test_vermilion_solid.py` 11 例 + `tests/unit/test_folder_docs_gate.py` 16 例）；CI 侧预演 `scripts/ci_sim.py` 7/7 PASS；PR #56 required checks 全绿后已合 main（merge commit 21f04ee8·main 上中英双份物料与投放接线逐条核对落地）。
+
+> - **状态**：已收官（合并后收尾修正·两处入库件与实况对齐）。
+> **状态**：**已收官**（W899 68f1a7bf·git 反填·共 2 笔·W971 存量回填）
+
 ### W898（2026-10-23）：宣传物料投放接线与派生（README 物料小节 + 站内入口 + 英文版单页 + 社媒分享图指引 + 规范受管资产登记）
 
 > **来源**：用户 2026-10-23 批准「D 宣传单页投放接线（README 物料说明 / 站内入口 / 英文版 / 社媒长图）」。

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-"""_w1016_sheet.py — W1016 本批 12 张母版拼图（人眼复核用·3 列 × 4 行·每格 400×533）
+"""_w1018_sheet.py — W1018 本批 12 张母版拼图（人眼复核用·3 列 × 4 行·每格 400×533）
 
 沿用 W1013 批 `_w1013_sheet.py` 形态：坑表 E-18「缩略拼图只判趋势·缺陷结论必须回单图」⇒
 本拼图作**初筛**用，标出的疑点必须回单张确认。
 
-用法：py -3 scripts/_w1016_sheet.py
-输出：assets/promo/plate-set/preview-w1016-sheet.png
+用法：py -3 scripts/_w1018_sheet.py
+输出：assets/promo/plate-set/preview-w1018-sheet.png
 """
 import os
 
@@ -37,7 +37,7 @@ def main() -> int:
         sheet.paste(Image.open(p).convert("RGB").resize((tw, th), Image.LANCZOS), (x, y))
         dr.rectangle([x, y, x + tw - 1, y + th - 1], outline=(170, 162, 146))
         dr.text((x + 4, y + th + 8), stem.replace("plate-line-", ""), fill=(50, 45, 38))
-    out = os.path.join(SET, "preview-w1016-sheet.png")
+    out = os.path.join(SET, "preview-w1018-sheet.png")
     sheet.save(out, "PNG", optimize=True)
     print("写出 %s（%dx%d·%d 张）" % (os.path.relpath(out, REPO).replace("\\", "/"),
                                    sheet.size[0], sheet.size[1], len(STEMS)))

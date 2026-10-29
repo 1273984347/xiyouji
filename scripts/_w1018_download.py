@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-"""_w1016_download.py — W1016 出图下载器（node_id → 母版落盘）
+"""_w1018_download.py — W1016 出图下载器（node_id → 母版落盘）
 
 流程（沿用 W1005 批做法）：
-  ① 读 `scripts/output/_w1016_manifest.json`（出图返回的 node_id + file_name 清单）；
+  ① 读 `scripts/output/_w1018_manifest.json`（出图返回的 node_id + file_name 清单）；
   ② 对每条跑 `mcode-tools get_asset_url <node_id>` 拿短效下载 URL；
   ③ Python urllib 下载到 `assets/promo/plate-set/raw/round16/<file_name>`；
   ④ 写后自检：文件存在 + 字节数 > 阈值 + PNG/JPEG 头可解析 + 尺寸为 3:4。
 
-用法：py -3 scripts/_w1016_download.py
+用法：py -3 scripts/_w1018_download.py
 """
 import io
 import json
@@ -19,7 +19,7 @@ import sys
 import urllib.request
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MANIFEST = os.path.join(REPO, "scripts", "output", "_w1016_manifest.json")
+MANIFEST = os.path.join(REPO, "scripts", "output", "_w1018_manifest.json")
 DEST = os.path.join(REPO, "assets", "promo", "plate-set", "raw", "round16")
 MIN_BYTES = 20000
 # mcode-tools 是宿主注入 PATH 的 .cmd 包装（不在系统 PATH）⇒ Python subprocess 取不到

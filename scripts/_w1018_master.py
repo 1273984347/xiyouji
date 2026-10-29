@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-"""_w1016_master.py — W1016 母版段两变体 + 12 张出图批次生成（编号 73–84）
+"""_w1018_master.py — W1016 母版段两变体 + 12 张出图批次生成（编号 73–84）
 
 母版段口径与 W1001/W1013 批**逐字一致**（读 `scripts/output/_w953_batch1.json` 首条 prompt 截
 「主体：」前 249 字符；场面段仅 3 处替换）⇒ 同族一致由构造保证。
 
-选材（W1016 第三轮·12 张·全部避开已出 **100** 个 plate-line slug）：
+选材（W1018 第三轮·12 张·全部避开已出 **100** 个 plate-line slug）：
   立像 6：ch020 虎先锋 / ch024 清风童子 / ch049 老鼋 / ch064 杏仙 / ch096 寇员外 / ch008 金顶大仙
   场面 6：ch034 巴山虎与倚海龙 / ch043 鼍龙与摩昂 / ch044 羊力大仙与悟空 / ch051 青牛精与悟空
           / ch074 青狮与白象 / ch091 辟尘大王与悟空
@@ -12,8 +12,8 @@
   金顶大仙×1 · 巴山虎×7/倚海龙×15 · 鼍龙×52/摩昂×29 · 羊力×4 · 青牛×21 · 青狮×12/白象×13 ·
   辟尘×14 ⇒ 全部落「已出 100 slug」之外。
 
-输出：scripts/output/_w1016_batch.json（出图批次）·母版落 assets/promo/plate-set/raw/round16/
-用法：py -3 scripts/_w1016_master.py
+输出：scripts/output/_w1018_batch.json（出图批次）·母版落 assets/promo/plate-set/raw/round16/
+用法：py -3 scripts/_w1018_master.py
 """
 import io
 import json
@@ -126,7 +126,7 @@ for ch, kind, slug, num, subject in JOBS:
                      "output_file": "assets/promo/plate-set/raw/round16/plate-line-%s-%s-%s.png" % (num, ch, slug)})
 
 batch = {"requests": requests}
-p = os.path.join(OUT, "_w1016_batch.json")
+p = os.path.join(OUT, "_w1018_batch.json")
 io.open(p, "w", encoding="utf-8", newline="\n").write(json.dumps(batch, ensure_ascii=False, indent=1))
 
 n_port = sum(1 for r in requests if r["prompt"].startswith(MASTER))
