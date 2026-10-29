@@ -13,6 +13,23 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W924（2026-10-24）：Q2 裁决落地批（OBS-10 升双层判红 + OBS-11 归并 LHCI + OBS-14 挂解冻条件）
+
+
+
+> **来源**：用户 2026-10-24 对 Q2 三指标分治建议裁决「好」——W850 建的采样机制（15 批样本）兑现为门槛。
+
+> - **文件**：scripts/check_perf_shadow.py、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、scripts/output/obs_samples.json、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w924_spec.json、scripts/output/_cascade_files_W924.txt（逐件行见 file-index W924 段）。
+> **状态**：**已收官**（W924 f58cd86f·git 反填·共 2 笔·W971 存量回填）
+
+**Q2 裁决落地（三指标分治）**：
+- **OBS-10 页体积升双层制**：第 47 槽（W849 影子槽·设计即预留「满 10 批后裁决」）新增 C2 全站扫描——硬上限 500KB/页判红（现役最大约 405KB·留 21% 余量·今天升今天绿·只拦新增劣化）+ 软预算 200KB 维持 WARN 观察清单（现役 10 页·构成 en 内联双份 ×4 / reader 全文页 ×4 / dialogue-sentiment ×2·根治随 BL-33 CSS 物化改革）；自测 5→9 例（双层正负样本）；实跑零红。
+- **OBS-11 归并既有 LHCI**：perf.yml 每 push 已硬拦 LCP（含 3D 分档）——1.5s SLO 定为记录值·执法由 LHCI 承担·原「攒满 10 批」动作取消（更强防线在岗）。
+- **OBS-14 挂解冻条件**：UV≥30 或 agent-web 真实使用后重议——/api/metrics 滚动窗口零访客=零数据·2s SLO 维持告警级。
+- 数据支撑：15 批样本（W850-W875）静态口径稳定（max 403-413KB·超限 9-10 页·零恶化）+ 本批现势补采；§12.2 Q2 行与 §11.5 三行状态回填系统架构方案。
+
+**验证**：check_perf_shadow 自测 9/9·实跑 C2 零红（10 页观察清单）·verify 全量核心全绿。
+
 ### W923（2026-10-24）：review 修复批（PR #63 复审两处低危登记缺陷）
 
 
