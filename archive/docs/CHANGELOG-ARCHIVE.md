@@ -13,6 +13,21 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W916（2026-10-24）：波二第三件批（新建页准入门禁建置·C-W818-01 清偿）
+
+
+
+> **来源**：用户 2026-10-24 令「按顺序全部都做了」——T-18 C 档波二第三件。
+
+> - **文件**：scripts/check_page_admission.py、tests/unit/test_check_page_admission.py、scripts/ci_sim.py、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w916_spec.json、scripts/output/_cascade_files_W916.txt（逐件行见 file-index W916 段）。
+> **状态**：**已收官**（W916 ed3b55ec·git 反填·共 2 笔·W971 存量回填）
+
+**C-W818-01 准入门禁建置（静态版）**：file:// 两铁律（禁 type=module·零外域 script src）此前只有 W818 取证探针无常驻防线——新建 `check_page_admission.py`（857 页静态扫描·秒级·fail-closed·self-test 3/3 + 专项单测 2 例），接 ci_sim 第 9 项每 PR 实跑；浏览器级三判据仍归探针（取证件定位不变）。现状实测 857 页 0 FAIL（零 module·零外域——纪律现状即达标，本批给现状上锁）。
+
+**波二余项状态**：第三件完成；第四件（B-ARCH-01 检索降级）与第五件（B-DB-01+05 数据正确性包）为 agent-web 中大型工程，连同 D1 大项排续批（保质优先于赶量）。
+
+**验证**：self-test 3/3·857 页 0 FAIL·第 42 门禁覆盖 0 FAIL·pytest 单测 2 例过。
+
 ### W915（2026-10-24）：波二余件一·二批（gates.md 时点快照收敛 + 404 页令牌补迁移）
 
 

@@ -1,3 +1,25 @@
+### W1030（2026-10-30）：方案报告抽查 + 归档覆盖口径入规范
+
+> **来源**：用户 2026-10-30 两问——「抽查验证（34 件方案报告）」「归档机制和临时文件机制为什么不是全覆盖整个项目」。
+>
+> **抽查结论**：三个分区各抽 1 件，全部证据型——`审查与评审/全量对抗审查报告`（带审查基准五可标准 + HEAD `5725389d` + 证据脚本一键复跑）、`工作复盘报告`（带生成时间/周期/模型/来源）、`设计与架构`（md + 配套 html 预览与 png 架构图）。
+非 md 共 **14 件全为配套件**（架构图 6 png / 设计预览 2 html / 数据截图），每件都有对应 md 母件。
+⇒ 34 件方案报告**无 AI 腔、无过期件**，「证据型」判断成立。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/文档规范.md、docs/00-导读/项目说明.md、scripts/output/_w1030_spec.json、scripts/output/file-index.md、site/index.html
+
+**机制口径（本批核心·已写入 `文档规范.md` §8）**：**归档只解「纵向增长」，不解「横向堆积」**。
+
+| 形态 | 特征 | 机制 | 项目覆盖 |
+|---|---|---|---|
+| **纵向** | 单文件无限追加（一个文件里越积越多的段/行） | 必然撞体积窗（45KB / 110 段 / 60 行）→ **窗口 + 滚动迁出** | 六类治理文档**全部覆盖** |
+| **横向** | 独立文件堆积（每件大小恒定） | 不会撞窗 → 需要的是**生命周期状态**（在役/已沉淀/可弃），不是归档器 | 以「README 分区口径 + 索引登记」承担，未建状态列 |
+
+**所以不是遗漏，是两类问题被混为一谈。** `docs/` 正文 2800 篇与方案报告 85 件属横向——给它们配归档器＝用错工具：W1029 已实测，14 件过期计划仅 404 KB，迁走要改 115 处引用，收益是全仓 **0.85%** 的整洁度。**问「为什么不给 X 建归档」之前，先问 X 是纵向还是横向。**
+
+**验证**：全量门禁 57 段核心全绿 · docs 链接 0 broken · 体积窗 0 FAIL。
+
+> - **状态**：已收官（抽查验证通过·机制判据入规范，以后同类问题不必再解释）
 ### W1029（2026-10-30）：方案报告归档判断（裁决不迁 + 留口径）
 
 > **来源**：用户 2026-10-30 令「B 档合并 Q2」——方案报告逐件判「已完成且已沉淀」的同时清文字，一遍读两件事。
@@ -502,7 +524,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1029），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1030），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1846,21 +1868,5 @@
 **B-DB-05 schema 门禁建置**：`check_db_schema.py` 静态锁定四不变量（摘任一必红·self-test 3/3 + 专项单测 2 例）·接 ci_sim 第 10 项每 PR 实跑。
 
 **验证**：agent-web `tsc --noEmit` 零错·test:server 97 passed（skip 1）·test:integration 19 passed（skip 1）零挂·ruff All checks passed·第 42 门禁覆盖 0 FAIL。
-
-
-### W916（2026-10-24）：波二第三件批（新建页准入门禁建置·C-W818-01 清偿）
-
-
-
-> **来源**：用户 2026-10-24 令「按顺序全部都做了」——T-18 C 档波二第三件。
-
-> - **文件**：scripts/check_page_admission.py、tests/unit/test_check_page_admission.py、scripts/ci_sim.py、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w916_spec.json、scripts/output/_cascade_files_W916.txt（逐件行见 file-index W916 段）。
-> **状态**：**已收官**（W916 ed3b55ec·git 反填·共 2 笔·W971 存量回填）
-
-**C-W818-01 准入门禁建置（静态版）**：file:// 两铁律（禁 type=module·零外域 script src）此前只有 W818 取证探针无常驻防线——新建 `check_page_admission.py`（857 页静态扫描·秒级·fail-closed·self-test 3/3 + 专项单测 2 例），接 ci_sim 第 9 项每 PR 实跑；浏览器级三判据仍归探针（取证件定位不变）。现状实测 857 页 0 FAIL（零 module·零外域——纪律现状即达标，本批给现状上锁）。
-
-**波二余项状态**：第三件完成；第四件（B-ARCH-01 检索降级）与第五件（B-DB-01+05 数据正确性包）为 agent-web 中大型工程，连同 D1 大项排续批（保质优先于赶量）。
-
-**验证**：self-test 3/3·857 页 0 FAIL·第 42 门禁覆盖 0 FAIL·pytest 单测 2 例过。
 
 
