@@ -11,6 +11,364 @@
 ---
 
 
+## W1019 BL-33/BL-29 收官批（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1019 | 本批新增/修改 |
+| AGENTS.md | W1019 | 本批新增/修改 |
+| CHANGELOG.md | W1019 | 本批新增/修改 |
+| CITATION.cff | W1019 | 本批新增/修改 |
+| DESIGN.md | W1019 | 本批新增/修改 |
+| HANDOVER.md | W1019 | 本批新增/修改 |
+| README.md | W1019 | 本批新增/修改 |
+| STRUCTURE.md | W1019 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1019 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1019 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1019 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1019 | 本批新增/修改 |
+| pytest.ini | W1019 | 本批新增/修改 |
+| scripts/inline_css.py | W1019 | 本批新增/修改 |
+| scripts/output/_vermilion_solid_cache.json | W1019 | 本批新增/修改 |
+| scripts/output/file-index.md | W1019 | 本批新增/修改 |
+| scripts/output/stats-changelog.json | W1019 | 本批新增/修改 |
+| scripts/output/stats-index.md | W1019 | 本批新增/修改 |
+| scripts/output/stats.json | W1019 | 本批新增/修改 |
+| site/_template.html | W1019 | 本批新增/修改 |
+| site/data/81-hardships-view.html | W1019 | 本批新增/修改 |
+| site/data/81-hardships.html | W1019 | 本批新增/修改 |
+| site/data/_shell.html | W1019 | 本批新增/修改 |
+| site/data/aesthetics.html | W1019 | 本批新增/修改 |
+| site/data/ai-dialogue.html | W1019 | 本批新增/修改 |
+| site/data/business-model.html | W1019 | 本批新增/修改 |
+| site/data/cave-estate.html | W1019 | 本批新增/修改 |
+| site/data/century-dialogue.html | W1019 | 本批新增/修改 |
+| site/data/chapter-stats.html | W1019 | 本批新增/修改 |
+| site/data/chapter-structure-graph.html | W1019 | 本批新增/修改 |
+| site/data/character-appearance.html | W1019 | 本批新增/修改 |
+| site/data/character-dynamic-network.html | W1019 | 本批新增/修改 |
+| site/data/character-presence-timeline.html | W1019 | 本批新增/修改 |
+| site/data/character-relationship-3d-view.html | W1019 | 本批新增/修改 |
+| site/data/character-relationship-3d.html | W1019 | 本批新增/修改 |
+| site/data/character-semantic-network.html | W1019 | 本批新增/修改 |
+| site/data/character-sentiment-arc.html | W1019 | 本批新增/修改 |
+| site/data/chart-design.html | W1019 | 本批新增/修改 |
+| site/data/cognitive-psychology.html | W1019 | 本批新增/修改 |
+| site/data/concept-device.html | W1019 | 本批新增/修改 |
+| site/data/counterfactual.html | W1019 | 本批新增/修改 |
+| site/data/criticism-history.html | W1019 | 本批新增/修改 |
+| site/data/cross-time-danmaku.html | W1019 | 本批新增/修改 |
+| site/data/cultural-misreading.html | W1019 | 本批新增/修改 |
+| site/data/customs-pass-route.html | W1019 | 本批新增/修改 |
+| site/data/data-explorer.html | W1019 | 本批新增/修改 |
+| site/data/deconstruction.html | W1019 | 本批新增/修改 |
+| site/data/dialogue-sentiment.html | W1019 | 本批新增/修改 |
+| site/data/ecology.html | W1019 | 本批新增/修改 |
+| site/data/emotional-heatmap.html | W1019 | 本批新增/修改 |
+| site/data/ethics-consumption.html | W1019 | 本批新增/修改 |
+| site/data/famous-time-travel.html | W1019 | 本批新增/修改 |
+| site/data/four-dimensional-research-network.html | W1019 | 本批新增/修改 |
+| site/data/four-heavenly-kings-artifacts.html | W1019 | 本批新增/修改 |
+| site/data/game-webnovel.html | W1019 | 本批新增/修改 |
+| site/data/global-pattern.html | W1019 | 本批新增/修改 |
+| site/data/graph-explorer.html | W1019 | 本批新增/修改 |
+| site/data/guanyin-six-roles-network.html | W1019 | 本批新增/修改 |
+| site/data/hardship-difficulty-heatmap.html | W1019 | 本批新增/修改 |
+| site/data/hardship-heatmap.html | W1019 | 本批新增/修改 |
+| site/data/heaven-power-network.html | W1019 | 本批新增/修改 |
+| site/data/intertextuality-network.html | W1019 | 本批新增/修改 |
+| site/data/journey-geo-3d.html | W1019 | 本批新增/修改 |
+| site/data/journey-geo-semiotics.html | W1019 | 本批新增/修改 |
+| site/data/journey-map-interactive.html | W1019 | 本批新增/修改 |
+| site/data/journey-route.html | W1019 | 本批新增/修改 |
+| site/data/journey-spacetime.html | W1019 | 本批新增/修改 |
+| site/data/jurisprudence.html | W1019 | 本批新增/修改 |
+| site/data/karma-reincarnation.html | W1019 | 本批新增/修改 |
+| site/data/language-style-radar.html | W1019 | 本批新增/修改 |
+| site/data/linguistics.html | W1019 | 本批新增/修改 |
+| site/data/magic-system.html | W1019 | 本批新增/修改 |
+| site/data/material-archaeology.html | W1019 | 本批新增/修改 |
+| site/data/mbti-evolution.html | W1019 | 本批新增/修改 |
+| site/data/methodology-matrix.html | W1019 | 本批新增/修改 |
+| site/data/ming-political-thought-comparison.html | W1019 | 本批新增/修改 |
+| site/data/monster-background.html | W1019 | 本批新增/修改 |
+| site/data/monster-capability-radar.html | W1019 | 本批新增/修改 |
+| site/data/monster-ecology-network.html | W1019 | 本批新增/修改 |
+| site/data/monster-female-network.html | W1019 | 本批新增/修改 |
+| site/data/monster-hierarchy-network.html | W1019 | 本批新增/修改 |
+| site/data/monster-sociology.html | W1019 | 本批新增/修改 |
+| site/data/monster-victims-network.html | W1019 | 本批新增/修改 |
+| site/data/music-structure.html | W1019 | 本批新增/修改 |
+| site/data/narrative-experiment.html | W1019 | 本批新增/修改 |
+| site/data/narrative-rhythm-curve.html | W1019 | 本批新增/修改 |
+| site/data/narratology-12d-network.html | W1019 | 本批新增/修改 |
+| site/data/narratology-16d-network.html | W1019 | 本批新增/修改 |
+| site/data/perf-canvas-rendering.html | W1019 | 本批新增/修改 |
+| site/data/philosophy.html | W1019 | 本批新增/修改 |
+| site/data/pilgrim-team-dynamic-network.html | W1019 | 本批新增/修改 |
+| site/data/pilgrim-team-psychology-arc.html | W1019 | 本批新增/修改 |
+| site/data/poetry-rhythm-analysis.html | W1019 | 本批新增/修改 |
+| site/data/power-resources.html | W1019 | 本批新增/修改 |
+| site/data/relationships.html | W1019 | 本批新增/修改 |
+| site/data/risk-project.html | W1019 | 本批新增/修改 |
+| site/data/search.html | W1019 | 本批新增/修改 |
+| site/data/six-senses-narratology-network.html | W1019 | 本批新增/修改 |
+| site/data/social-media.html | W1019 | 本批新增/修改 |
+| site/data/story-timeline.html | W1019 | 本批新增/修改 |
+| site/data/tag-cloud.html | W1019 | 本批新增/修改 |
+| site/data/text-evolution.html | W1019 | 本批新增/修改 |
+| site/data/text-search.html | W1019 | 本批新增/修改 |
+| site/data/theological-intervention-network.html | W1019 | 本批新增/修改 |
+| site/data/timeline.html | W1019 | 本批新增/修改 |
+| site/data/underworld-power-network.html | W1019 | 本批新增/修改 |
+| site/data/visual-art.html | W1019 | 本批新增/修改 |
+| site/data/workplace.html | W1019 | 本批新增/修改 |
+| site/dukou-engine.html | W1019 | 本批新增/修改 |
+| site/en/81-hardships-view.html | W1019 | 本批新增/修改 |
+| site/en/81-hardships.html | W1019 | 本批新增/修改 |
+| site/en/academic-papers.html | W1019 | 本批新增/修改 |
+| site/en/aesthetics.html | W1019 | 本批新增/修改 |
+| site/en/ai-dialogue.html | W1019 | 本批新增/修改 |
+| site/en/bestiary.html | W1019 | 本批新增/修改 |
+| site/en/business-model.html | W1019 | 本批新增/修改 |
+| site/en/cave-estate.html | W1019 | 本批新增/修改 |
+| site/en/century-dialogue.html | W1019 | 本批新增/修改 |
+| site/en/chapter-stats.html | W1019 | 本批新增/修改 |
+| site/en/chapter-structure-graph.html | W1019 | 本批新增/修改 |
+| site/en/chapters-map.html | W1019 | 本批新增/修改 |
+| site/en/character-appearance.html | W1019 | 本批新增/修改 |
+| site/en/character-bailongma.html | W1019 | 本批新增/修改 |
+| site/en/character-bajie.html | W1019 | 本批新增/修改 |
+| site/en/character-dynamic-network.html | W1019 | 本批新增/修改 |
+| site/en/character-presence-timeline.html | W1019 | 本批新增/修改 |
+| site/en/character-relationship-3d-view.html | W1019 | 本批新增/修改 |
+| site/en/character-relationship-3d.html | W1019 | 本批新增/修改 |
+| site/en/character-semantic-network.html | W1019 | 本批新增/修改 |
+| site/en/character-sentiment-arc.html | W1019 | 本批新增/修改 |
+| site/en/character-shaseng.html | W1019 | 本批新增/修改 |
+| site/en/character-tangseng.html | W1019 | 本批新增/修改 |
+| site/en/character-wukong.html | W1019 | 本批新增/修改 |
+| site/en/characters.html | W1019 | 本批新增/修改 |
+| site/en/chart-design.html | W1019 | 本批新增/修改 |
+| site/en/cognitive-psychology.html | W1019 | 本批新增/修改 |
+| site/en/concept-device.html | W1019 | 本批新增/修改 |
+| site/en/counterfactual.html | W1019 | 本批新增/修改 |
+| site/en/criticism-history.html | W1019 | 本批新增/修改 |
+| site/en/cross-time-danmaku.html | W1019 | 本批新增/修改 |
+| site/en/cultural-misreading.html | W1019 | 本批新增/修改 |
+| site/en/customs-pass-route.html | W1019 | 本批新增/修改 |
+| site/en/dashboard.html | W1019 | 本批新增/修改 |
+| site/en/data-explorer.html | W1019 | 本批新增/修改 |
+| site/en/deconstruction.html | W1019 | 本批新增/修改 |
+| site/en/dialogue-sentiment.html | W1019 | 本批新增/修改 |
+| site/en/dukou-engine.html | W1019 | 本批新增/修改 |
+| site/en/ecology.html | W1019 | 本批新增/修改 |
+| site/en/emotional-heatmap.html | W1019 | 本批新增/修改 |
+| site/en/essay-ai-era.html | W1019 | 本批新增/修改 |
+| site/en/essay-buddhist-chan.html | W1019 | 本批新增/修改 |
+| site/en/essay-chapter-couplets.html | W1019 | 本批新增/修改 |
+| site/en/essay-character-fu.html | W1019 | 本批新增/修改 |
+| site/en/essay-cipai-linjiangxian.html | W1019 | 本批新增/修改 |
+| site/en/essay-cipai-mantingfang.html | W1019 | 本批新增/修改 |
+| site/en/essay-cipai-shuidiaogetou.html | W1019 | 本批新增/修改 |
+| site/en/essay-cipai-xijiangyue.html | W1019 | 本批新增/修改 |
+| site/en/essay-composition-origins.html | W1019 | 本批新增/修改 |
+| site/en/essay-divine-bureaucracy.html | W1019 | 本批新增/修改 |
+| site/en/essay-folk-belief.html | W1019 | 本批新增/修改 |
+| site/en/essay-historical-xuanzang.html | W1019 | 本批新增/修改 |
+| site/en/essay-information-cocoon.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-economy.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-examination.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-garrison.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-intellectual-history.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-judiciary.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-literary-thought.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-maritime-ban.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-metaphor.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-military.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-politics.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-religion.html | W1019 | 本批新增/修改 |
+| site/en/essay-ming-social-customs.html | W1019 | 本批新增/修改 |
+| site/en/essay-modern-management.html | W1019 | 本批新增/修改 |
+| site/en/essay-original-poetry.html | W1019 | 本批新增/修改 |
+| site/en/essay-poetry-imagery.html | W1019 | 本批新增/修改 |
+| site/en/essay-poetry-opening.html | W1019 | 本批新增/修改 |
+| site/en/essay-quanzhen-daoism.html | W1019 | 本批新增/修改 |
+| site/en/essay-rhythm-analysis.html | W1019 | 本批新增/修改 |
+| site/en/essay-scenery-poems.html | W1019 | 本批新增/修改 |
+| site/en/essay-thematic-poetry.html | W1019 | 本批新增/修改 |
+| site/en/essay-three-teachings.html | W1019 | 本批新增/修改 |
+| site/en/essay-version-evolution.html | W1019 | 本批新增/修改 |
+| site/en/essay-zen-koan-vs-neidan.html | W1019 | 本批新增/修改 |
+| site/en/ethics-consumption.html | W1019 | 本批新增/修改 |
+| site/en/famous-time-travel.html | W1019 | 本批新增/修改 |
+| site/en/four-dimensional-research-network.html | W1019 | 本批新增/修改 |
+| site/en/four-heavenly-kings-artifacts.html | W1019 | 本批新增/修改 |
+| site/en/game-webnovel.html | W1019 | 本批新增/修改 |
+| site/en/global-pattern.html | W1019 | 本批新增/修改 |
+| site/en/graph-explorer.html | W1019 | 本批新增/修改 |
+| site/en/guanyin-six-roles-network.html | W1019 | 本批新增/修改 |
+| site/en/guide.html | W1019 | 本批新增/修改 |
+| site/en/hardship-difficulty-heatmap.html | W1019 | 本批新增/修改 |
+| site/en/hardship-heatmap.html | W1019 | 本批新增/修改 |
+| site/en/heaven-power-network.html | W1019 | 本批新增/修改 |
+| site/en/index.html | W1019 | 本批新增/修改 |
+| site/en/intertextuality-network.html | W1019 | 本批新增/修改 |
+| site/en/journey-geo-semiotics.html | W1019 | 本批新增/修改 |
+| site/en/journey-map-interactive.html | W1019 | 本批新增/修改 |
+| site/en/journey-route.html | W1019 | 本批新增/修改 |
+| site/en/journey-spacetime.html | W1019 | 本批新增/修改 |
+| site/en/jurisprudence.html | W1019 | 本批新增/修改 |
+| site/en/karma-reincarnation.html | W1019 | 本批新增/修改 |
+| site/en/language-style-radar.html | W1019 | 本批新增/修改 |
+| site/en/linguistics.html | W1019 | 本批新增/修改 |
+| site/en/magic-system.html | W1019 | 本批新增/修改 |
+| site/en/material-archaeology.html | W1019 | 本批新增/修改 |
+| site/en/mbti-evolution.html | W1019 | 本批新增/修改 |
+| site/en/methodology-matrix.html | W1019 | 本批新增/修改 |
+| site/en/methodology.html | W1019 | 本批新增/修改 |
+| site/en/ming-political-thought-comparison.html | W1019 | 本批新增/修改 |
+| site/en/monster-background.html | W1019 | 本批新增/修改 |
+| site/en/monster-capability-radar.html | W1019 | 本批新增/修改 |
+| site/en/monster-ecology-network.html | W1019 | 本批新增/修改 |
+| site/en/monster-female-network.html | W1019 | 本批新增/修改 |
+| site/en/monster-hierarchy-network.html | W1019 | 本批新增/修改 |
+| site/en/monster-sociology.html | W1019 | 本批新增/修改 |
+| site/en/monster-victims-network.html | W1019 | 本批新增/修改 |
+| site/en/music-structure.html | W1019 | 本批新增/修改 |
+| site/en/narrative-experiment.html | W1019 | 本批新增/修改 |
+| site/en/narrative-rhythm-curve.html | W1019 | 本批新增/修改 |
+| site/en/narratology-12d-network.html | W1019 | 本批新增/修改 |
+| site/en/narratology-16d-network.html | W1019 | 本批新增/修改 |
+| site/en/perf-canvas-rendering.html | W1019 | 本批新增/修改 |
+| site/en/philosophy.html | W1019 | 本批新增/修改 |
+| site/en/pilgrim-team-dynamic-network.html | W1019 | 本批新增/修改 |
+| site/en/pilgrim-team-psychology-arc.html | W1019 | 本批新增/修改 |
+| site/en/poetry-rhythm-analysis.html | W1019 | 本批新增/修改 |
+| site/en/power-resources.html | W1019 | 本批新增/修改 |
+| site/en/relationships.html | W1019 | 本批新增/修改 |
+| site/en/risk-project.html | W1019 | 本批新增/修改 |
+| site/en/search.html | W1019 | 本批新增/修改 |
+| site/en/site-map.html | W1019 | 本批新增/修改 |
+| site/en/six-senses-narratology-network.html | W1019 | 本批新增/修改 |
+| site/en/social-media.html | W1019 | 本批新增/修改 |
+| site/en/tag-cloud.html | W1019 | 本批新增/修改 |
+| site/en/text-evolution.html | W1019 | 本批新增/修改 |
+| site/en/text-search.html | W1019 | 本批新增/修改 |
+| site/en/theological-intervention-network.html | W1019 | 本批新增/修改 |
+| site/en/timeline.html | W1019 | 本批新增/修改 |
+| site/en/tribulations.html | W1019 | 本批新增/修改 |
+| site/en/underworld-power-network.html | W1019 | 本批新增/修改 |
+| site/en/visual-art.html | W1019 | 本批新增/修改 |
+| site/en/visualizations.html | W1019 | 本批新增/修改 |
+| site/en/workplace.html | W1019 | 本批新增/修改 |
+| site/index.html | W1019 | 本批新增/修改 |
+| site/reader/ch001.html | W1019 | 本批新增/修改 |
+| site/reader/ch002.html | W1019 | 本批新增/修改 |
+| site/reader/ch003.html | W1019 | 本批新增/修改 |
+| site/reader/ch004.html | W1019 | 本批新增/修改 |
+| site/reader/ch005.html | W1019 | 本批新增/修改 |
+| site/reader/ch006.html | W1019 | 本批新增/修改 |
+| site/reader/ch007.html | W1019 | 本批新增/修改 |
+| site/reader/ch008.html | W1019 | 本批新增/修改 |
+| site/reader/ch009.html | W1019 | 本批新增/修改 |
+| site/reader/ch010.html | W1019 | 本批新增/修改 |
+| site/reader/ch011.html | W1019 | 本批新增/修改 |
+| site/reader/ch012.html | W1019 | 本批新增/修改 |
+| site/reader/ch013.html | W1019 | 本批新增/修改 |
+| site/reader/ch014.html | W1019 | 本批新增/修改 |
+| site/reader/ch015.html | W1019 | 本批新增/修改 |
+| site/reader/ch016.html | W1019 | 本批新增/修改 |
+| site/reader/ch017.html | W1019 | 本批新增/修改 |
+| site/reader/ch018.html | W1019 | 本批新增/修改 |
+| site/reader/ch019.html | W1019 | 本批新增/修改 |
+| site/reader/ch020.html | W1019 | 本批新增/修改 |
+| site/reader/ch021.html | W1019 | 本批新增/修改 |
+| site/reader/ch022.html | W1019 | 本批新增/修改 |
+| site/reader/ch023.html | W1019 | 本批新增/修改 |
+| site/reader/ch024.html | W1019 | 本批新增/修改 |
+| site/reader/ch025.html | W1019 | 本批新增/修改 |
+| site/reader/ch026.html | W1019 | 本批新增/修改 |
+| site/reader/ch027.html | W1019 | 本批新增/修改 |
+| site/reader/ch028.html | W1019 | 本批新增/修改 |
+| site/reader/ch029.html | W1019 | 本批新增/修改 |
+| site/reader/ch030.html | W1019 | 本批新增/修改 |
+| site/reader/ch031.html | W1019 | 本批新增/修改 |
+| site/reader/ch032.html | W1019 | 本批新增/修改 |
+| site/reader/ch033.html | W1019 | 本批新增/修改 |
+| site/reader/ch034.html | W1019 | 本批新增/修改 |
+| site/reader/ch035.html | W1019 | 本批新增/修改 |
+| site/reader/ch036.html | W1019 | 本批新增/修改 |
+| site/reader/ch037.html | W1019 | 本批新增/修改 |
+| site/reader/ch038.html | W1019 | 本批新增/修改 |
+| site/reader/ch039.html | W1019 | 本批新增/修改 |
+| site/reader/ch040.html | W1019 | 本批新增/修改 |
+| site/reader/ch041.html | W1019 | 本批新增/修改 |
+| site/reader/ch042.html | W1019 | 本批新增/修改 |
+| site/reader/ch043.html | W1019 | 本批新增/修改 |
+| site/reader/ch044.html | W1019 | 本批新增/修改 |
+| site/reader/ch045.html | W1019 | 本批新增/修改 |
+| site/reader/ch046.html | W1019 | 本批新增/修改 |
+| site/reader/ch047.html | W1019 | 本批新增/修改 |
+| site/reader/ch048.html | W1019 | 本批新增/修改 |
+| site/reader/ch049.html | W1019 | 本批新增/修改 |
+| site/reader/ch050.html | W1019 | 本批新增/修改 |
+| site/reader/ch051.html | W1019 | 本批新增/修改 |
+| site/reader/ch052.html | W1019 | 本批新增/修改 |
+| site/reader/ch053.html | W1019 | 本批新增/修改 |
+| site/reader/ch054.html | W1019 | 本批新增/修改 |
+| site/reader/ch055.html | W1019 | 本批新增/修改 |
+| site/reader/ch056.html | W1019 | 本批新增/修改 |
+| site/reader/ch057.html | W1019 | 本批新增/修改 |
+| site/reader/ch058.html | W1019 | 本批新增/修改 |
+| site/reader/ch059.html | W1019 | 本批新增/修改 |
+| site/reader/ch060.html | W1019 | 本批新增/修改 |
+| site/reader/ch061.html | W1019 | 本批新增/修改 |
+| site/reader/ch062.html | W1019 | 本批新增/修改 |
+| site/reader/ch063.html | W1019 | 本批新增/修改 |
+| site/reader/ch064.html | W1019 | 本批新增/修改 |
+| site/reader/ch065.html | W1019 | 本批新增/修改 |
+| site/reader/ch066.html | W1019 | 本批新增/修改 |
+| site/reader/ch067.html | W1019 | 本批新增/修改 |
+| site/reader/ch068.html | W1019 | 本批新增/修改 |
+| site/reader/ch069.html | W1019 | 本批新增/修改 |
+| site/reader/ch070.html | W1019 | 本批新增/修改 |
+| site/reader/ch071.html | W1019 | 本批新增/修改 |
+| site/reader/ch072.html | W1019 | 本批新增/修改 |
+| site/reader/ch073.html | W1019 | 本批新增/修改 |
+| site/reader/ch074.html | W1019 | 本批新增/修改 |
+| site/reader/ch075.html | W1019 | 本批新增/修改 |
+| site/reader/ch076.html | W1019 | 本批新增/修改 |
+| site/reader/ch077.html | W1019 | 本批新增/修改 |
+| site/reader/ch078.html | W1019 | 本批新增/修改 |
+| site/reader/ch079.html | W1019 | 本批新增/修改 |
+| site/reader/ch080.html | W1019 | 本批新增/修改 |
+| site/reader/ch081.html | W1019 | 本批新增/修改 |
+| site/reader/ch082.html | W1019 | 本批新增/修改 |
+| site/reader/ch083.html | W1019 | 本批新增/修改 |
+| site/reader/ch084.html | W1019 | 本批新增/修改 |
+| site/reader/ch085.html | W1019 | 本批新增/修改 |
+| site/reader/ch086.html | W1019 | 本批新增/修改 |
+| site/reader/ch087.html | W1019 | 本批新增/修改 |
+| site/reader/ch088.html | W1019 | 本批新增/修改 |
+| site/reader/ch089.html | W1019 | 本批新增/修改 |
+| site/reader/ch090.html | W1019 | 本批新增/修改 |
+| site/reader/ch091.html | W1019 | 本批新增/修改 |
+| site/reader/ch092.html | W1019 | 本批新增/修改 |
+| site/reader/ch093.html | W1019 | 本批新增/修改 |
+| site/reader/ch094.html | W1019 | 本批新增/修改 |
+| site/reader/ch095.html | W1019 | 本批新增/修改 |
+| site/reader/ch096.html | W1019 | 本批新增/修改 |
+| site/reader/ch097.html | W1019 | 本批新增/修改 |
+| site/reader/ch098.html | W1019 | 本批新增/修改 |
+| site/reader/ch099.html | W1019 | 本批新增/修改 |
+| site/reader/ch100.html | W1019 | 本批新增/修改 |
+| site/reader/index.html | W1019 | 本批新增/修改 |
+| site/reader/themes-hub.html | W1019 | 本批新增/修改 |
+| site/system.css | W1019 | 本批新增/修改 |
+| tests/unit/test_inline_css_resync.py | W1019 | 本批新增/修改 |
+| tests/unit/test_rag_server_clamp.py | W1019 | 本批新增/修改 |
+
 ## W1018 回次 og:image 全覆盖批·第三轮（2026-10-29）
 
 | 文件 | W | 说明 |
@@ -4060,127 +4418,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W903 | W903 段插入 |
 | scripts/output/_w903_spec.json | W903 | 本批级联 spec |
 | scripts/output/_cascade_files_W903.txt | W903 | 级联落盘清单 |
-
-## W902 机制脚本门禁全量审查与记忆固化入仓（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md | W902 | 新增：机制层全量审查（三层面·四发现·记忆固化迁移清单·遗留盘点） |
-| docs/11-方案报告/README.md | W902 | 审查报告登记行 34 + 维护契约 ① 补「唯一落盘位」常设指令句 |
-| docs/agent/pitfalls.md | W902 | 记忆固化 +3 条（canvas 边层 / CSP 写路径盲区 / 暗色审计 http 前置假 0）+ 三节计数 9→10·5→6·5→6 |
-| AGENTS.md | W902 | 六主题计数同步（49→52）+ §4.3 本机环境事实补 4 条（curl --ssl-no-revoke / /tmp 不可见 / Europe PMC 兜底 / gh api -f） |
-| docs/00-导读/文档规范.md | W902 | §11.1 管控表新增「常设指令」行：方案/审查/调研/复盘/计划类交付物唯一落盘位 = docs/11-方案报告/ |
-| CLAUDE.md | W902 | 速查层新增「报告落位」条目（46 行·预算 60 内） |
-| docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md | W902 | §8 干扰日志补 2 行延迟登记（W825/W893 覆盖事件·考古补·如实标注） |
-| docs/00-导读/W批次编号对账表.md | W902 | W902 认领行与收官回填 |
-| CHANGELOG.md | W902 | W902 段 |
-| HANDOVER.md | W902 | 级联头尾链与里程碑块 |
-| README.md | W902 | 当前批次版本行 |
-| STRUCTURE.md | W902 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W902 | 当前批次版本行 |
-| .github/workflows/README.md | W902 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W902 | 页脚批次链插入 W902 |
-| site/data/cross-time-danmaku.html | W902 | 页脚批次链插入 W902 |
-| site/data/tag-cloud.html | W902 | 页脚批次链插入 W902 |
-| site/dukou-engine.html | W902 | 页脚批次链插入 W902 |
-| AGENTS.md（版本脚注） | W902 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W902 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W902 | version 同步为 W902 |
-| scripts/output/file-index.md | W902 | W902 段插入 |
-| scripts/output/_w902_spec.json | W902 | 本批级联 spec |
-| scripts/output/_cascade_files_W902.txt | W902 | 级联落盘清单 |
-
-## W901 C5b 对账面恢复 + W900 披露项清偿（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_doc_sync.py | W901 | C5b 扩展面 glob 根层改递归（管控件·用户 2026-10-24 批准；计划方案/ 时点快照豁免原样保留——实测该子目录 8 件带冻结 stats 标记·入面即假红） |
-| docs/11-方案报告/README.md | W901 | T-16/T-17 两件补登计划方案表（W893/W896 遗留登记缺口）+ 节头计数订正 + C5b 提示行更新为已恢复口径 + 登记缺口披露行撤除 |
-| CHANGELOG.md | W901 | W757 段 1 条审计报告链接随批准改指新址（仅地址不改叙事）+ W901 段 |
-| docs/00-导读/W批次编号对账表.md | W901 | W901 认领行与收官回填 |
-| HANDOVER.md | W901 | 级联头尾链与里程碑块 |
-| README.md | W901 | 当前批次版本行 |
-| STRUCTURE.md | W901 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W901 | 当前批次版本行 |
-| .github/workflows/README.md | W901 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W901 | 页脚批次链插入 W901 |
-| site/data/cross-time-danmaku.html | W901 | 页脚批次链插入 W901 |
-| site/data/tag-cloud.html | W901 | 页脚批次链插入 W901 |
-| site/dukou-engine.html | W901 | 页脚批次链插入 W901 |
-| AGENTS.md | W901 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W901 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W901 | version 同步为 W901 |
-| scripts/output/file-index.md | W901 | W901 段插入 |
-| scripts/output/_w901_spec.json | W901 | 本批级联 spec |
-| scripts/output/_cascade_files_W901.txt | W901 | 级联落盘清单 |
-
-## W900 11-方案报告目录分类重组（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/审查与评审/对抗性审查报告-2026-10-14.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/全量对抗审查报告-2026-10-16.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/工程基础设施薄弱点审计报告-2026-10-16.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/外部评审回应与逐项核查报告-2026-10-17.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/外部评审回应与逐项核查报告-2026-10-18.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/计划方案三性审查报告-2026-10-20.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/架构评审报告-2026-10-21.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/界面布局审计报告-2026-10-21.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/数据库表设计审查报告-2026-10-20.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/审查与评审/难簿序与dataset对拍报告-2026-10-11.md | W900 | 根层迁入分类子目录「审查与评审」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/设计与架构方案/界面视觉重设计方向-v4-2026-10-20.md | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/设计与架构方案/界面视觉重设计细化规格-v4-2026-10-20.md | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/设计与架构方案/v4-design-language-preview.html | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/设计与架构方案/静态站前端框架化选型对比-2026-10-20.md | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.html | W900 | 根层迁入分类子目录「设计与架构方案」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/治理与核查/W761工具链可维护性重构报告-2026-10-16.md | W900 | 根层迁入分类子目录「治理与核查」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/治理与核查/多Agent干扰治理评估与实施记录-2026-10-14.md | W900 | 根层迁入分类子目录「治理与核查」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/治理与核查/全仓待办计划方案状态核查报告-2026-10-18.md | W900 | 根层迁入分类子目录「治理与核查」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/调研与数据复盘/项目GitHub参考调研报告.md | W900 | 根层迁入分类子目录「调研与数据复盘」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/调研与数据复盘/读者数据复盘.md | W900 | 根层迁入分类子目录「调研与数据复盘」（链接面同步见 README/INDEX/搜索索引行） |
-| docs/11-方案报告/调研与数据复盘/读者数据截图/dashboard-pages-2026-09-30.png | W900 | 随读者数据复盘迁入「调研与数据复盘」 |
-| docs/11-方案报告/调研与数据复盘/读者数据截图/dashboard-top-2026-09-30.png | W900 | 随读者数据复盘迁入「调研与数据复盘」 |
-| docs/11-方案报告/调研与数据复盘/读者数据截图/dashboard-top-2026-10-02.png | W900 | 随读者数据复盘迁入「调研与数据复盘」 |
-| docs/11-方案报告/调研与数据复盘/读者数据截图/dashboard-topref-2026-10-02.png | W900 | 随读者数据复盘迁入「调研与数据复盘」 |
-| docs/11-方案报告/调研与数据复盘/读者数据截图/uv-curve-2026-09.svg | W900 | 随读者数据复盘迁入「调研与数据复盘」 |
-| docs/11-方案报告/README.md | W900 | 唯一索引分区重构（目录树 + 33 行总表机械分五区编号不重排 + 计划方案游离行合并 + T-16/T-17 登记缺口披露 + C5b 覆盖提示） |
-| docs/10-方法论沉淀/多Agent干扰治理与touches纪律.md | W900 | 2 条入链随迁修正（多 Agent 干扰治理评估全文新址） |
-| docs/INDEX.md | W900 | 再生成（20 行路径随迁） |
-| site/data/search.html | W900 | 站内搜索索引再生成（zh 848 条）+ CSP 哈希重算 |
-| site/en/search.html | W900 | 站内搜索索引再生成（en 890 条）+ CSP 哈希重算 |
-| HANDOVER.md | W900 | 零段「复盘存档」陈旧路径（W757 改名前旧址）订正 + 级联头尾链与里程碑块 |
-| STRUCTURE.md | W900 | §11 构成散文行按分区实况改写（54 总数不变）+ 版本行 |
-| docs/00-导读/W批次编号对账表.md | W900 | W900 认领行与收官回填 |
-| CHANGELOG.md | W900 | W900 段 |
-| README.md | W900 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W900 | 当前批次版本行 |
-| .github/workflows/README.md | W900 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W900 | 页脚批次链插入 W900 |
-| site/data/cross-time-danmaku.html | W900 | 页脚批次链插入 W900 |
-| site/data/tag-cloud.html | W900 | 页脚批次链插入 W900 |
-| site/dukou-engine.html | W900 | 页脚批次链插入 W900 |
-| AGENTS.md | W900 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W900 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W900 | version 同步为 W900 |
-| scripts/output/file-index.md | W900 | W900 段插入 |
-| scripts/output/_w900_spec.json | W900 | 本批级联 spec |
-| scripts/output/_cascade_files_W900.txt | W900 | 级联落盘清单 |
-| site/static/icons/ui/note.svg | W947 | 新增：便签与文档图标（折角纸页·替 📝） |
-| site/static/icons/ui/link.svg | W947 | 新增：双环链条图标（替 🔗） |
-| xiyouji-agent-web/src/components/UiIcons.tsx | W947 | 新增：agent-web 内联 SVG 图标组件（WarnIcon / NoteIcon / LinkIcon·与静态站资产同源） |
-| xiyouji-agent-web/src/components/PermissionDialog.tsx | W947 | ⚠️📝 纯图标位 → 内联 SVG 组件（W947） |
-| xiyouji-agent-web/src/components/InlinePermissionCard.tsx | W947 | ⚠️ 图标位 → 内联 SVG 组件（W947） |
-| scripts/_w947_add_icons.py | W947 | 新增：通用图标集补 2 枚（note / link） |
-| dataset/timeline.json | W949 | 数据源：22 个 icon 字段 emoji → 语义专属图标名（与中英页面逐位对拍·堵回归漏洞） |
-| scripts/_w949_fix_dataset.py | W949 | 新增：数据源 icon 字段治理器（含与页面副本逐位对拍） |
-| scripts/_w949_allowlist.py | W949 | 新增：字段图标位白名单重建器（扫描器实测产出 + 程序附理由） |
-| scripts/check_icon_fields.py | W949 | 新增：字段图标位判据（avatar/icon/flag/stage·与白名单逐条比对） |
-| scripts/check_emoji_icons.py | W949 | 第 50 门禁新增 A2 段（挂入字段图标位判据） |
-| scripts/output/_w949_icon_field_allowlist.json | W949 | 新增：字段图标位白名单（71 条·扫描器实测产出） |
-| scripts/_w950_normalize.py | W950 | 新增：图标光学尺寸归一器（量墨色外接框 → 统一边长 + 居中） |
-| scripts/_w950_refresh_icon_paths.py | W950 | 新增：图标图形同步刷新器（资产 → 内联 SVG·复合键反查） |
-| scripts/output/_w950_icon_normalize.json | W950 | 新增：45 枚图标的光学尺寸归一参数 |
-| scripts/output/_cascade_files_W950.txt | W950 | 新增：本批级联清单 |
 

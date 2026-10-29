@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（47）
+## 文件（65）
 
 ### Python 脚本
 
@@ -56,6 +56,24 @@
 - `_w1013_stage.py`
 - `_w1013_verify.py`
 - `_w1016_pick.py`
+- `_w1018_closeout_faces.py`
+- `_w1018_derive_prepare.py`
+- `_w1018_derive_stage.py`
+- `_w1018_derive_verify.py`
+- `_w1018_download.py`
+- `_w1018_fix_index_order.py`
+- `_w1018_fix_names_order.py`
+- `_w1018_fix_refs.py`
+- `_w1018_fix_round16.py`
+- `_w1018_make_spec.py`
+- `_w1018_master.py`
+- `_w1018_pick2.py`
+- `_w1018_prepare.py`
+- `_w1018_probe_covered.py`
+- `_w1018_retry.py`
+- `_w1018_sheet.py`
+- `_w1018_stage.py`
+- `_w1018_verify.py`
 
 ### 数据与配置
 

@@ -13,6 +13,75 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W902（2026-10-24）：机制脚本门禁全量审查与记忆固化入仓（四发现 + pitfalls/AGENTS/文档规范增补）
+
+
+
+> **来源**：用户 2026-10-24 两令——「顺便再审查一遍之前所有批次的机制、脚本、门禁有没有问题」+「本项目是多 Agent 协作，写入 Agent 私有记忆文件作用有限，写入项目文件才真实可靠·盘点记忆文件需入仓内容」。
+
+> - **文件**：docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md（新增）、docs/11-方案报告/README.md、docs/agent/pitfalls.md、AGENTS.md、docs/00-导读/文档规范.md、CLAUDE.md、docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w902_spec.json、scripts/output/_cascade_files_W902.txt（逐件行见 file-index W902 段）。
+> **状态**：**已收官**（W902 82bb8ff7·git 反填·共 2 笔·W971 存量回填）
+
+**① 机制层全量审查（报告落 审查与评审/·登记行 34）**：三层审查——机器面（26 个带自测门禁 `--self-test` 全绿·verify 54 段·pytest 852 passed·`ci_sim.py` 干净检出 7/7 PASS 含全仓 20761 链接 0 broken·CSP 856 页零漂移）+ 代码面（preflight/batch_cascade/check_folder_docs/check_doc_sync 语义审计）+ 流程面（干扰日志考古对拍）。**四发现**：
+
+- **F1【中高·假绿族】preflight touches 交集为字面字符串比对**——`docs/11-方案报告/**（注记）` 这类通配/带注记声明与对方具体文件声明**字面不等恒不命中**（W900 认领行实证）·W897 修分隔符后同族的语义面残余·两起真实撞面（W825/W893）均未被机器拦下；修法（剥注记 + `X/**` 前缀展开 + 双向对称 + 负样本单测）**待批**（管控件）。
+- **F2【低】第 45 门禁 FAIL 提示语缺「先 git add 再 refresh」顺序**——W896 生成器按 Git 索引收集·refresh 先于 add 必漏新件·W900/W901 连踩；一行文案修法**待批**（管控件）。
+- **F3【流程·本批闭合】§8 干扰日志窗口内两起覆盖事件漏登**（W825 解析层修复被并行提交覆盖·W893 台账认领行被替换）——事件路径不经过 W822 两触发点·与断档同源；本批补 2 行延迟登记（如实标注·机制不擅改）。
+- **F4【在账】C5c 裸聚合 74 处 NOTE 未推进**（W703 起步策略·列入遗留盘点）。
+
+**② 记忆固化入仓（用户指令执行·报告 §3 全清单）**：文档规范 §11.1 立**常设指令行**「方案/审查/调研/复盘/计划类交付物唯一落盘位 = docs/11-方案报告/」+ 11-方案报告 README 维护契约与 CLAUDE.md 速查层同源指针；AGENTS §4.3 本机环境事实补 4 条（curl `--ssl-no-revoke`·`/tmp` 对 Windows Python 不可见·PMC→Europe PMC 兜底·`gh api` 中文 `-f`）；pitfalls.md 补 3 条（力导向 canvas 边层·CSP 写路径 `--check` 盲区·暗色审计 http 前置假 0）·三节计数同步（CSS 9→10·JS 5→6·数据 5→6·总数 49→52·AGENTS 六主题句同批订正）。逐条盘点 22 项记忆：8 项入仓 / 11 项仓内已覆盖（grep 实证）/ 3 类刻意不入（S4 双盲·他仓·宿主层）；保真度 22 犯模板与图表判定三教训列「建议后续批」。
+
+**验证**：verify 全量 54 段核心全绿（含第 32 门禁 CLAUDE.md 速查层 46 行过）·lint_links docs 5481 链接 0 broken·pytest 852 passed 3 skipped·ruff scripts/ 口径过·ci_sim 7/7 PASS。
+
+
+### W901（2026-10-24）：C5b 对账面恢复 + W900 披露项清偿（递归 glob / W757 链接新址 / T-16·T-17 补登）
+
+
+
+> **来源**：用户 2026-10-24 对 W900 批披露项裁决「批准；改。落库」——三件披露项/遗留项随批清偿；管控件改动（check_doc_sync.py）经用户明示批准。
+
+> - **文件**：scripts/check_doc_sync.py、docs/11-方案报告/README.md、CdHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w901_spec.json、scripts/output/_cascade_files_W901.txt（逐件行见 file-index W901 段）。
+> **状态**：**已收官**（W901 25b27066·git 反填·共 2 笔·W971 存量回填）
+
+**① C5b 对账面恢复（管控件·已批）**：`check_doc_sync.py` 的 `c5b_extra_surfaces()` 第二面由「`docs/11-方案报告/*.md` 根层非递归 glob」改为「`**/*.md` 递归收集、`计划方案/` 子目录除外」——W900 目录分区把带 stats 实体标记的《系统架构方案》《取经编制表》移入子目录后根层 glob 失明（W900 段披露的对账面缩水），本批经用户批准恢复覆盖；**计划方案豁免条款原样保留并补实证**：该子目录实测 8 件计划档带冻结 stats 标记（时点快照纪律·同 CHANGELOG 历史段），入面对账即假红，docstring 与文件头描述同步更新。
+
+**② W757 段链接改指新址（历史段改动·经用户明示批准）**：CHANGELOG W757 段内 1 条工程基础设施审计报告链接由旧址改指 `docs/11-方案报告/审查与评审/工程基础设施薄弱点审计报告-2026-10-16.md`——仅地址订正，叙事零改动；该链接为 CHANGELOG 全文唯一指向本目录的真实链接，改后无断链（lint 复验 5480 链接 0 broken）。
+
+**③ T-16/T-17 补登**：README 计划方案表补第 19/20 行（摘要据两件自述与 W893/W896 台账行提炼），节头「表格登记 18 行」订正为 20 件全登记，W900 的登记缺口披露行撤除、按补登记惯例（W858/W884 同式）在节首注记区留 W901 补登记注记；README §二 C5b 提示行由「待批」更新为「W901 恢复」口径。
+
+**验证**：check_doc_sync 实跑 C5b 递归新面零 FAIL（系统架构方案/取经编制表恢复对账·README 内占位标记串不受影响）；ruff（CI 口径 `ruff check scripts/`）All checks passed；pytest 全量 852 passed 3 skipped；lint_links --dir docs 5480 链接 0 broken。
+
+
+### W900（2026-10-24）：11-方案报告目录分类重组（根层归四区 + 索引重构 + 链接与派生面全量同步）
+
+
+
+> **来源**：用户 2026-10-24 令「docs/11-方案报告 重新给文件夹整理分类下，现在看着太乱了」——该目录根层此前 20 文件平铺（审查/方案/调研/治理混置），本批为目录分类重组。
+
+> - **文件**：docs/11-方案报告/审查与评审/（10 件迁入）、docs/11-方案报告/设计与架构方案/（7 件迁入）、docs/11-方案报告/治理与核查/（3 件迁入）、docs/11-方案报告/调研与数据复盘/（2 件 + 读者数据截图 5 件迁入）、docs/11-方案报告/README.md、docs/10-方法论沉淀/多Agent干扰治理与touches纪律.md、docs/INDEX.md、site/data/search.html、site/en/search.html、HANDOVER.md、STRUCTURE.md、dCREADME.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w900_spec.json、scripts/output/_cascade_files_W900.txt（逐件行见 file-index W900 段）。
+> **状态**：**已收官**（W900 568ca457·git 反填·共 2 笔·W971 存量回填）
+
+**根层分类重组（22 文件 + 截图 5 件归入 4 个新子目录）**：
+
+- `审查与评审/`（10 篇）：对抗性审查、全量对抗审查、工程基础设施薄弱点审计、外部评审回应（17/18 两篇）、计划方案三性审查、架构评审、界面布局审计、数据库表设计审查、难簿序与 dataset 对拍
+- `设计与架构方案/`（7 件·含 2 件 HTML 预览页）：界面视觉重设计方向与细化规格（v4）、v4 预览页、系统架构方案、静态站前端框架化选型对比、取经编制表（md + html）
+- `治理与核查/`（3 篇）：W761 工具链可维护性重构报告、多 Agent 干扰治理评估与实施记录、全仓待办计划方案状态核查
+- `调研与数据复盘/`（2 篇 + 读者数据截图 5 件）：项目 GitHub 参考调研报告、读者数据复盘
+- 既有 `工作复盘与优化分析报告/`（13 篇）与 `计划方案/`（20 件）不动；**根层仅留 README**（report_docs 递归口径计数 54 不变）
+
+**索引与链接全量同步**：
+
+- **README 唯一索引分区重构**：目录树 + 原「现役报告」33 行总表按链接目标机械分为五区（编号沿用入库时间序不重排）+ 计划方案节 5 条游离单行表（14-18 行）合并回主表 + T-16/T-17 两件已入库未及登记行的缺口披露
+- **40 对带期望次数断言的精确子串替换**（all-or-nothing）：目录内互链与上溯链（`../../CHANGELOG.md` 等加深一层）、方法论沉淀入链 ×2、工作复盘 2026-10-19 入链 ×2；修复后 `lint_links --dir docs` 实测 **5478 链接 0 broken**
+- **派生面再生成**：`docs/INDEX.md`（20 行路径随迁·第 17 门禁字节级对拍）+ 站内搜索索引两页（zh 848 / en 890 条·第 46 槽对拍通过）+ 两页 CSP 哈希重算（856 页零漂移）
+
+**两处随动影响披露（均未随批擅改·留待裁决）**：
+
+- **C5b 根层对账面缩水**：系统架构方案与取经编制表两篇含 `<!--stats:*-->` 实体标记，移出根层后 `check_doc_sync.py` 的 `docs/11-方案报告/*.md` 非递归 glob 不再覆盖二者——门禁不判红但防线缩水；该脚本属管控件，glob 扩为递归的一行改动待用户批准（README §二已留提示行）
+- **CHANGELOG W757 段 1 条链接旧址**：历史段内工程基础设施审计报告链接因移动指向旧址，按「历史段禁改」未就地改写，新址为 `docs/11-方案报告/审查与评审/工程基础设施薄弱点审计报告-2026-10-16.md`；另全站约 850 页 CSS 来源注释（v4 令牌出处标注）中的旧路径为注释性文本非链接，按 W757「历史性叙述不改写」先例保留
+
+**顺手修正**：HANDOVER 零段「复盘存档」反引号路径仍指向 W757 改名前的 `docs/11-报告复盘/`（陈旧纯文本·非链接）订正为新址；STRUCTURE.md 目录构成散文行按分区后实况改写（54 总数与 stats 标记不变）。
+
 ### W899（2026-10-23）：合并后收尾修正（output 目录计数口径订正 + 朱砂门禁增量缓存重建）
 
 

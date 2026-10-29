@@ -66,6 +66,12 @@ def precheck(spec):
                               % (field, sep))
     if not str(spec.get("title", "")).startswith(str(spec.get("batch", ""))):
         issues.append("spec.title 未以 batch 号领衔（现役段解析取标题首个 W###·合并段场景必须显式领衔）")
+    # W1019 硬守卫：段正文必须以空行开场。病根：级联把标题行与 changelog_body 直接拼接，
+    # body 若无前导空行 ⇒ 新段标题行与「> **来源**」挤在同一行（与既有段形态不符·只能
+    # 段内定向订正，级联不可重跑 E-17）。W1018 spec 实测以 \n\n\n\n 开场，本批漏写即粘连。
+    if not str(spec.get("changelog_body", "")).startswith("\n\n"):
+        issues.append("spec.changelog_body 未以空行（\\n\\n）开场（级联会把段标题行与正文粘成同一行·"
+                      "W1019 实证·首元素前必须留空行）")
     if "**文件**：" not in str(spec.get("changelog_body", "")):
         issues.append("spec.changelog_body 缺「**文件**」行（四件套必填·W723 起第 31 门禁 C4-f 据其对账手工件入库·"
                       "路径须写 repo 相对路径·见 pitfalls git 类）")
