@@ -33,7 +33,10 @@
 - [ ] 再 `python scripts/gen_folder_docs.py --refresh`（生成器按 Git 索引收集，顺序反了必漏新件）
 - [ ] 再 `git add -A`（把生成结果收进索引）
 
-## 6. 计数与统计
+## 6. 计数、统计与文档连锁
+- [ ] **若本批新增/修改了 `docs/**.md`**（顺序不能反，W1022/W1023 连踩两次）：
+      `python scripts/_gen_search_index.py` → `python scripts/generate_csp.py`
+      ——前者不做第 46 槽报条目数不符；后者不做第 20 槽报 CSP 漂移（索引里含内联脚本，哈希会变）
 - [ ] 新增测试会改 `pytest_collected`：实测 `pytest --collect-only -q` 末行，
       同步 `pytest.ini` 与 `docs/11-方案报告/…/系统架构方案v2…md` 两处 `<!--stats:pytest_collected-->`
 - [ ] `python scripts/stats.py --w W####` 刷新，再 `--check` 求 24 键零差异
@@ -47,7 +50,7 @@
 - [ ] 台账回填 commit 号与状态 → 第二笔 `docs(w####): 台账回填…`
 
 ## 9. 收官后
-- [ ] 坑表：本次是否踩了**新形态**的坑？就地并入对应主题（禁追加尾部段落），同步四处计数
+- [ ] 坑表：本次是否踩了**新形态**的坑？**改完必须实算分项**——`grep -c '^- \*\*'` 按主题逐段数，别手算（W1024 实证：六主题 26/6/26/19/11/34 之和是 122，我手算成 121 并写进 AGENTS/HANDOVER，而 AGENTS 的分项行当时还停在 25/25/15/10/28=109 的旧值上、长期无人核）⇒ 同步四处：`docs/agent/pitfalls.md` 各段标题 + AGENTS 总数 + AGENTS 分项行 + HANDOVER 两处就地并入对应主题（禁追加尾部段落），同步四处计数
 - [ ] 若本次产生了「应回写模板」的新检查项 → 回写 `docs/agent/*-template.md` 并更新其校准戳
 - [ ] 工作区记忆：追加当日日志（只写有跨会话价值的东西，不记临时路径与搜索过程）
 

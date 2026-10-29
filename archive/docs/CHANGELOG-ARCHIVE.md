@@ -13,6 +13,21 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W906（2026-10-24）：C4-f 三态化（并行批次登记行纯追加残留放行·多 Agent 误拦根修）
+
+
+
+> **来源**：用户 2026-10-24 对「C4-f 三态化（多 Agent 并行误拦根修）」建议裁决「可以」——W904 收官提交被并行 W905 会话的台账认领行（未暂存）拦停一次的实录驱动。
+
+> - **文件**：scripts/check_doc_sync.py、docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w906_spec.json、scripts/output/_cascade_files_W906.txt（逐件行见 file-index W906 段）。
+> **状态**：**已收官**（W906 831b5436·git 反填·共 2 笔·W971 存量回填）
+
+**C4-f 三态化（并行在途与漏 add 分流）**：declared 文件的工作树残留，原二态判「漏 add」必红；现若该文件未暂存 diff 为**纯追加**（零删改行 + 新增行全部 `| WNNN ` 批次登记行形态）→ 降 NOTE 放行（他方在途·以 HEAD 为准不重做）——与 W896「未跟踪在途件容忍」同族收口。**在位编辑（如状态列收官回填）含删改行照旧必红**，判据无弱化。实现：`_foreign_append_only()` 在 build_inputs 逐 dirty 文件 `git diff` 判形（git 探测不可用则该文件不计入·保守回退原 FAIL·fail-closed 方向）；self-test 增 T32（纯追加放行）/T33（非追加仍红）双向锁，33/33；主判据实跑在本批未暂存认领行在场时出 NOTE 零红——修复目标当场实证。
+
+**审查报告增 F5 节**：C4-f 并行误拦的实录（含 package.json 混入暂存的处置）、根因（二态盲区）、修复与配套操作纪律（按清单 add / 他方件只移暂存不动磁盘 / 他方认领行随批携带标注归属）；遗留盘点表 F1 行订正为已修、新增本项已落地行。
+
+**验证**：self-test 33/33·主判据 C4-f 三态 NOTE 实证·ruff scripts/ All checks passed·pytest 858 passed 3 skipped·verify 全量核心全绿。
+
 ### W905（2026-10-24）：两项存量红项清理（暗色门禁补色 + npm 依赖漏洞清偿）
 
 
