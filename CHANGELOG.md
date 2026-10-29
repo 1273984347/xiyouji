@@ -4,7 +4,7 @@
 >
 > **定位**：《取经编制表》§2 丙组 · **菩提祖师 · 授业官**（回目锚点 1）——「教完本事，不留姓名，不受香火；留下的是本事，不是人设」。编制表对本位的挂载写的正是「固化为 Skill（`skill-creator`）」、状态「当前位空」。
 >
-> - **文件**：.agent/skills/puti-shouye/SKILL.md、.agent/skills/xiyouji-guard/SKILL.md、.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1036_spec.json、scripts/output/file-index.md、site/index.html
+> - **文件**：.agent/skills/puti-shouye/SKILL.md、.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1036_spec.json、scripts/output/file-index.md、site/index.html
 
 **改名理由**：`xiyouji-guard` → **`puti-shouye`**（菩提授业）。不叫 guard 是因为：**守卫是挡在门外，授业是把本事交到你手上**。本 skill 不拦人，只在你动手前提醒一遍——该记得的都在这儿，要细节去查坑表。
 
