@@ -11,6 +11,116 @@
 ---
 
 
+## W1013 回次 og:image 全覆盖批·第二轮（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1013 | 本批新增/修改 |
+| HANDOVER.md | W1013 | 本批新增/修改 |
+| assets/promo/plate-set/plate-line-61-ch002-puti.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-61-ch002-puti.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-62-ch012-jinchanzi.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-62-ch012-jinchanzi.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-63-ch013-taibaixingxing.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-63-ch013-taibaixingxing.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-64-ch021-lingji.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-64-ch021-lingji.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-65-ch038-wujiguowang.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-65-ch038-wujiguowang.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-66-ch045-huli.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-66-ch045-huli.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-67-ch078-zhizhujing.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-67-ch078-zhizhujing.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-68-ch082-bailujing.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-68-ch082-bailujing.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-69-ch083-laoshujing.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-69-ch083-laoshujing.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-70-ch086-bichandawang.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-70-ch086-bichandawang.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-71-ch087-yuhuawang.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-71-ch087-yuhuawang.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-72-ch092-dizang.png | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/plate-line-72-ch092-dizang.webp | W1013 | 新增母版（1200×1600） |
+| assets/promo/plate-set/preview-contact-sheet.png | W1013 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-contact-sheet.webp | W1013 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/preview-w1013-sheet.png | W1013 | 拼图预览（含本批 12 张） |
+| assets/promo/plate-set/raw/round15/plate-line-61-ch002-puti.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-62-ch012-jinchanzi.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-63-ch013-taibaixingxing.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-64-ch021-lingji.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-65-ch038-wujiguowang.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-66-ch045-huli.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-67-ch078-zhizhujing.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-68-ch082-bailujing.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-69-ch083-laoshujing.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-70-ch086-bichandawang.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-71-ch087-yuhuawang.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| assets/promo/plate-set/raw/round15/plate-line-72-ch092-dizang.jpg | W1013 | 出图原件（12 张·含 5 张重出） |
+| docs/11-方案报告/README.md | W1013 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/计划方案/T37-任务计划执行与经验沉淀报告-2026-10-29.md | W1013 | 登记面（报告/坑表/计数链/台账） |
+| docs/11-方案报告/计划方案/执行前计划-T32-回次ogimage全覆盖第二轮.md | W1013 | 登记面（报告/坑表/计数链/台账） |
+| docs/agent/pitfalls.md | W1013 | 登记面（报告/坑表/计数链/台账） |
+| scripts/_w1013_derive_prepare.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_download.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_inventory.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_make_spec.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_master.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_prepare.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_read.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_retry.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_retry2.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_roster_check.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_sheet.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_shot.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_stage.py | W1013 | 本批工具/产物 |
+| scripts/_w1013_verify.py | W1013 | 本批工具/产物 |
+| scripts/check_js_syntax.py | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_batch.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_batch_a.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_batch_b.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_inventory.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_manifest.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_read.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_retry.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_retry2.json | W1013 | 本批工具/产物 |
+| scripts/output/_w1013_spec.json | W1013 | 本批工具/产物 |
+| site/reader/ch002.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch012.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch013.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch021.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch038.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch045.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch078.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch082.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch083.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch086.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch087.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/reader/ch092.html | W1013 | 回目页接入题图 + 换专属 1200×630 og:image |
+| site/static/images/og-plate-line-61-ch002-puti.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-62-ch012-jinchanzi.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-63-ch013-taibaixingxing.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-64-ch021-lingji.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-65-ch038-wujiguowang.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-66-ch045-huli.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-67-ch078-zhizhujing.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-68-ch082-bailujing.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-69-ch083-laoshujing.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-70-ch086-bichandawang.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-71-ch087-yuhuawang.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/og-plate-line-72-ch092-dizang.webp | W1013 | 专属 og:image（1200×630·由母版裁切） |
+| site/static/images/plate-line-61-ch002-puti.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-62-ch012-jinchanzi.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-63-ch013-taibaixingxing.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-64-ch021-lingji.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-65-ch038-wujiguowang.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-66-ch045-huli.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-67-ch078-zhizhujing.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-68-ch082-bailujing.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-69-ch083-laoshujing.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-70-ch086-bichandawang.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-71-ch087-yuhuawang.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+| site/static/images/plate-line-72-ch092-dizang.webp | W1013 | 站点版（母版裁切·只裁上部留白） |
+
 ## W1012 产物目录瘦身 + 在途收口批（2026-10-29）
 
 | 文件 | W | 说明 |
@@ -3879,24 +3989,4 @@ docs/11-方案报告/README.md
 | docs/00-导读/W批次编号对账表.md | W897 | 认领行与收官回填 |
 | CHANGELOG.md | W897 | W897 段 |
 | scripts/output/file-index.md | W897 | 同批段回写 |
-
-## W896 门禁实算口径改造（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/tracked_files.py | W896 | 目标提交树口径单一事实源（tracked_files / tracked_in_dir / tracked_subdirs / is_tracked） |
-| scripts/ci_sim.py | W896 | CI 侧预演工具（worktree 干净检出 + 关键门禁 + 自动清理·只读零风险） |
-| scripts/check_folder_docs.py | W896 | 第 45 槽实算改索引口径 + 三态判据 + 计数自洽 + 口径开关 |
-| scripts/gen_folder_docs.py | W896 | 生成器同步改索引口径 + 磁盘口径平行实现（自测与降级用） |
-| scripts/stats.py | W896 | 全部 glob 计数改索引口径（目标提交树实算） |
-| scripts/docs_index.py | W896 | scan_docs 默认 tracked_only（写盘与门禁比对共用同一函数） |
-| scripts/output/stats.json | W896 | report_docs 53→54·pytest_collected 835→836·inline_css_pages 归实况 330 |
-| scripts/output/stats-changelog.json | W896 | W896 变更史登记 |
-| scripts/output/stats-index.md | W896 | 反向索引同步 |
-| scripts/index.md | W896 | 目录清单同步（新增两脚本） |
-| docs/INDEX.md | W896 | 文档索引重建（745 篇·索引口径） |
-| docs/11-方案报告/计划方案/T17-任务计划执行与经验沉淀报告-2026-10-23.md | W896 | 框架第十七次执行（口径改造 + AC 表 + 3 条经验） |
-| docs/00-导读/W批次编号对账表.md | W896 | 认领行与收官回填 |
-| CHANGELOG.md | W896 | W896 段 |
-| scripts/output/file-index.md | W896 | 同批段回写 |
 

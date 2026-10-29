@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-29 08:20
+生成时间：2026-10-29 10:28
 
-共 **157** 件（门禁与校验 70 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 59 · 一次性（下划线前缀） 6）
+共 **173** 件（门禁与校验 70 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 59 · 一次性（下划线前缀） 22）
 
 ## 门禁与校验（70）
 
@@ -189,7 +189,7 @@
 | `visual_regression_probe.py` | visual_regression_probe.py — J2 视觉回归探针（W851 建·设计迁移阶段 1 验收件） |
 | `worktree_rehearse.py` | worktree_rehearse.py — worktree 预演法工具化（W701·S-26·用户圈选开工）。 |
 
-## 一次性（下划线前缀）（6）
+## 一次性（下划线前缀）（22）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -199,3 +199,19 @@
 | `_check_pipeline_consistency.py` | 创意三明治管线一致性轻量校验（P3-7，W508 沉淀）。 |
 | `_cite_probe.py` | 引文候选提取探针（E-A 沉淀，W507 永久化）。 |
 | `_gen_search_index.py` | W594：标题关键词数组（中文 jieba 切词、英文按词干拆分），供前端 +4 加权，≤12 个。 |
+| `_w1013_align_files.py` | _w1013_align_files.py — W1013 文件清单对齐（spec.file_index_rows ⇔ CHANGELOG 段「 |
+| `_w1013_derive_prepare.py` | _w1013_derive_prepare.py — 由归档 `w9xx/_w999_prepare.py` **程序化派生** W1013 成 |
+| `_w1013_download.py` | _w1013_download.py — W1013 出图下载器（node_id → 母版落盘） |
+| `_w1013_fix_desc.py` | _w1013_fix_desc.py — W1013 版本行 desc 定向订正（避 C5c 裸聚合数字） |
+| `_w1013_inventory.py` | _w1013_inventory.py — W1013 批盘点：回目页配图缺口 + 已出主体清单 + og:image 覆盖现状 |
+| `_w1013_make_spec.py` | _w1013_make_spec.py — W1013 级联 spec 生成（文件行按 git 现状全量列出） |
+| `_w1013_master.py` | _w1013_master.py — W1013 母版段两变体 + 12 张出图批次生成（编号 61–72） |
+| `_w1013_prepare.py` | _w1013_prepare.py — W1013 成品处理（**只处理 raw/round15 的本批 12 张**） |
+| `_w1013_read.py` | _w1013_read.py — W1013 批 12 回原文实读（选材证据） |
+| `_w1013_retry.py` | _w1013_retry.py — W1013 重出批次（3 张：64 灵吉菩萨 / 66 虎力大仙 / 67 蜘蛛精） |
+| `_w1013_retry2.py` | _w1013_retry2.py — W1013 重出第 2 轮（2 张：70 辟寒辟暑 / 71 玉华州三王子） |
+| `_w1013_roster_check.py` | _w1013_roster_check.py — W1013 主体去重硬判据（V-02）：候选主体 × 已出母版全表 |
+| `_w1013_sheet.py` | _w1013_sheet.py — 本批 12 张母版拼图（人眼复核用·3 列 × 4 行·每格 400×533） |
+| `_w1013_shot.py` | _w1013_shot.py — W1013 浏览器实跑（本地 HTTP + Playwright·AC-12） |
+| `_w1013_stage.py` | _w1013_stage.py — W1013 落位：12 个回目页接入题图 + 换专属 og:image |
+| `_w1013_verify.py` | _w1013_verify.py — W1013 落位验收（AC-03~AC-11 的机器侧复核） |

@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（314）
+## 文件（338）
 
 ### 样式与资源
 
@@ -206,6 +206,18 @@
 - `og-plate-line-58-ch079-nanpo.webp`
 - `og-plate-line-59-ch089-huangshi.webp`
 - `og-plate-line-60-ch093-geigu.webp`
+- `og-plate-line-61-ch002-puti.webp`
+- `og-plate-line-62-ch012-jinchanzi.webp`
+- `og-plate-line-63-ch013-taibaixingxing.webp`
+- `og-plate-line-64-ch021-lingji.webp`
+- `og-plate-line-65-ch038-wujiguowang.webp`
+- `og-plate-line-66-ch045-huli.webp`
+- `og-plate-line-67-ch078-zhizhujing.webp`
+- `og-plate-line-68-ch082-bailujing.webp`
+- `og-plate-line-69-ch083-laoshujing.webp`
+- `og-plate-line-70-ch086-bichandawang.webp`
+- `og-plate-line-71-ch087-yuhuawang.webp`
+- `og-plate-line-72-ch092-dizang.webp`
 - `og-plate-liudao-lunhui.webp`
 - `og-plate-mingfu-panwang.webp`
 - `og-plate-wujingshan-liangjie.webp`
@@ -309,6 +321,18 @@
 - `plate-line-58-ch079-nanpo.webp`
 - `plate-line-59-ch089-huangshi.webp`
 - `plate-line-60-ch093-geigu.webp`
+- `plate-line-61-ch002-puti.webp`
+- `plate-line-62-ch012-jinchanzi.webp`
+- `plate-line-63-ch013-taibaixingxing.webp`
+- `plate-line-64-ch021-lingji.webp`
+- `plate-line-65-ch038-wujiguowang.webp`
+- `plate-line-66-ch045-huli.webp`
+- `plate-line-67-ch078-zhizhujing.webp`
+- `plate-line-68-ch082-bailujing.webp`
+- `plate-line-69-ch083-laoshujing.webp`
+- `plate-line-70-ch086-bichandawang.webp`
+- `plate-line-71-ch087-yuhuawang.webp`
+- `plate-line-72-ch092-dizang.webp`
 - `plate-liudao-lunhui.webp`
 - `plate-mingfu-panwang.webp`
 - `plate-wujingshan-liangjie.webp`

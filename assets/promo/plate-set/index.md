@@ -15,7 +15,7 @@
 - `zoom-w953/`
 - `zoom-w974/`
 
-## 文件（182）
+## 文件（207）
 
 ### 样式与资源
 
@@ -195,11 +195,36 @@
 - `plate-line-59-ch089-huangshi.webp`
 - `plate-line-60-ch093-geigu.png`
 - `plate-line-60-ch093-geigu.webp`
+- `plate-line-61-ch002-puti.png`
+- `plate-line-61-ch002-puti.webp`
+- `plate-line-62-ch012-jinchanzi.png`
+- `plate-line-62-ch012-jinchanzi.webp`
+- `plate-line-63-ch013-taibaixingxing.png`
+- `plate-line-63-ch013-taibaixingxing.webp`
+- `plate-line-64-ch021-lingji.png`
+- `plate-line-64-ch021-lingji.webp`
+- `plate-line-65-ch038-wujiguowang.png`
+- `plate-line-65-ch038-wujiguowang.webp`
+- `plate-line-66-ch045-huli.png`
+- `plate-line-66-ch045-huli.webp`
+- `plate-line-67-ch078-zhizhujing.png`
+- `plate-line-67-ch078-zhizhujing.webp`
+- `plate-line-68-ch082-bailujing.png`
+- `plate-line-68-ch082-bailujing.webp`
+- `plate-line-69-ch083-laoshujing.png`
+- `plate-line-69-ch083-laoshujing.webp`
+- `plate-line-70-ch086-bichandawang.png`
+- `plate-line-70-ch086-bichandawang.webp`
+- `plate-line-71-ch087-yuhuawang.png`
+- `plate-line-71-ch087-yuhuawang.webp`
+- `plate-line-72-ch092-dizang.png`
+- `plate-line-72-ch092-dizang.webp`
 - `preview-contact-sheet.png`
 - `preview-contact-sheet.webp`
 - `preview-detail-sheet.png`
 - `preview-site-sheet.png`
 - `preview-site-sheet.webp`
+- `preview-w1013-sheet.png`
 - `preview-zoom-final.png`
 
 ---
