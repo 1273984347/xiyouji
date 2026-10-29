@@ -525,6 +525,39 @@ def _check_c5_aggregate_stats(inp, issues, notes):
                 _check_stats_marker(m, "%s:%d" % (rel, i), stats, issues)
 
 
+
+    # C5e 坑表分项计数三向一致（W1025·W1024 实证）
+    # 病根：坑表各主题标题写「（N 条）」、AGENTS 有总数与分项行、HANDOVER 有两处总数——
+    # 四处全靠手改。实证 AGENTS 分项停在 25/25/15/10/28=109 长期无人核（总数声明已到 118），
+    # 而 W1024 手算 118+4=121、实算为 122。此类「分项之和 vs 总数」偏差机器可查，不该靠人核。
+    try:
+        _pf = os.path.join(ROOT, "docs", "agent", "pitfalls.md")
+        _t = open(_pf, encoding="utf-8").read()
+        _declared, _actual = {}, {}
+        for _seg in re.split(r"(?m)^### ", _t)[1:]:
+            _head, _, _rest = _seg.partition("\n")
+            _m = re.search(r"^(.*?)（(\d+) 条）", _head)
+            if not _m:
+                continue
+            _name = _m.group(1).strip()
+            _body = re.split(r"(?m)^## ", _rest)[0]
+            _declared[_name] = int(_m.group(2))
+            _actual[_name] = len([_l for _l in _body.split("\n") if _l.startswith("- **")])
+        _sum_decl = sum(_declared.values())
+        _sum_act = sum(_actual.values())
+        for _k, _v in _declared.items():
+            if _v != _actual.get(_k, 0):
+                issues.append("C5e: 坑表主题「%s」声明 %d 条 ≠ 实测 %d 条（改完坑表须实算分项·W1024 实证）"
+                              % (_k, _v, _actual.get(_k, 0)))
+        if _sum_decl != _sum_act:
+            issues.append("C5e: 坑表分项声明之和 %d ≠ 实测条目之和 %d" % (_sum_decl, _sum_act))
+        for _f, _pat in (("AGENTS.md", r"(\d+) 条坑位"), ("HANDOVER.md", r"（(\d+) 条·六主题）")):
+            for _mm in re.finditer(_pat, open(os.path.join(ROOT, _f), encoding="utf-8").read()):
+                if int(_mm.group(1)) != _sum_act:
+                    issues.append("C5e: %s 声明 %d 条 ≠ 坑表实测 %d 条" % (_f, int(_mm.group(1)), _sum_act))
+    except OSError as _e:
+        issues.append("C5e: 坑表分项对账不可读（%s）——fail-closed" % _e)
+
 def _check_c5d_stats_recheck(inp, issues):
     """C5d：stats.py --check（stats.json vs 磁盘实算）零差异背书（W718）。W730 提取。"""
     if not inp.get("stats_check_ok", False):
@@ -702,7 +735,7 @@ def run_check():
     for nt in notes:
         print("NOTE  " + nt)
     print(
-        "---- 第 31 门禁 文档口径体检：%d FAIL · %d NOTE（C1 README 抬头 / C2 交接头链 / C3 门禁清单上限 / C4 提交-版段对账 / C5 聚合数字对账 / C5d stats 实算对账）----"
+        "---- 第 31 门禁 文档口径体检：%d FAIL · %d NOTE（C1 README 抬头 / C2 交接头链 / C3 门禁清单上限 / C4 提交-版段对账 / C5 聚合数字对账 / C5d stats 实算对账 / C5e 坑表分项）----"
         % (len(issues), len(notes))
     )
     return (1 if issues else 0), issues, notes

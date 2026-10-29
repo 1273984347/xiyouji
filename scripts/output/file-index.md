@@ -11,6 +11,24 @@
 ---
 
 
+## W1025 坑表计数升机器判据（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1025 | 本批新增/修改 |
+| AGENTS.md | W1025 | 本批新增/修改 |
+| CHANGELOG.md | W1025 | 本批新增/修改 |
+| CITATION.cff | W1025 | 本批新增/修改 |
+| HANDOVER.md | W1025 | 本批新增/修改 |
+| README.md | W1025 | 本批新增/修改 |
+| STRUCTURE.md | W1025 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1025 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1025 | 本批新增/修改 |
+| scripts/check_doc_sync.py | W1025 | 本批新增/修改 |
+| scripts/output/_w1025_spec.json | W1025 | 本批新增/修改 |
+| scripts/output/file-index.md | W1025 | 本批新增/修改 |
+| site/index.html | W1025 | 本批新增/修改 |
+
 ## W1024 本次任务教训固化对账（2026-10-30）
 
 | 文件 | W | 说明 |
@@ -4733,28 +4751,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W912 | W912 段插入
 | scripts/output/_w912_spec.json | W912 | 本批级联 spec
 | scripts/output/_cascade_files_W912.txt | W912 | 级联落盘清单
-
-## W909 README 专业化改版（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| README.md | W909 | README 专业化改版（单一 H1 + 两个 H2 分区 + 顶部主视觉 banner + 可视化样例小节 + 宣传单页预览图 + 徽章并行 + 文案修正） |
-| docs/00-导读/W批次编号对账表.md | W909 | W909 认领行与收官回填 + 顺带修三处表格结构损坏（W892 粘连段 · W764/W906 未转义管道符） |
-| scripts/output/_w909_spec.json | W909 | 本批级联 spec（10 面改写参数） |
-| scripts/output/_cascade_files_W909.txt | W909 | 级联落盘清单 |
-| scripts/output/_vermilion_solid_cache.json | W909 | 朱砂门禁增量缓存刷新（本批级联改四页脚后按 sha1 重扫对齐） |
-| CHANGELOG.md | W909 | W909 段 |
-| HANDOVER.md | W909 | 头尾链与里程碑块 |
-| STRUCTURE.md | W909 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W909 | 当前批次版本行 |
-| .github/workflows/README.md | W909 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W909 | 页脚批次链插入 W909 |
-| site/data/cross-time-danmaku.html | W909 | 页脚批次链插入 W909 |
-| site/data/tag-cloud.html | W909 | 页脚批次链插入 W909 |
-| site/dukou-engine.html | W909 | 页脚批次链插入 W909 |
-| AGENTS.md | W909 | 版本脚注条目 |
-| CITATION.cff | W909 | version 同步为 W909 |
-| scripts/output/file-index.md | W909 | W909 段插入 |
-| site/data/search.html | W909 | 站内搜索索引内嵌刷新（zh） |
-| site/en/search.html | W909 | 站内搜索索引内嵌刷新（en） |
 
