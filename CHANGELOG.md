@@ -1,3 +1,35 @@
+### W1027（2026-10-30）：治理文档文字审查 A 档（结论：零可删）
+
+> **来源**：用户 2026-10-30 令「按这个走」——A 档治理文档文字审查现在做，B 档与方案报告归档合并，C 档放弃专项清理。
+>
+> **口径**：`D:/open-source/slop-scan`（只诊断·每条例须引原文）+ `slop-clean`（只删不加·四条硬边界·必附改动清单）。
+> **规则按体裁筛过**：原表针对散文/论文（AI 腔、升华结尾、学术防御性写作），而本批是工程文档；
+> 其中「被动语态」「弱化限定」「解释性铺垫」属必要成分（硬边界 4），不列入清理项。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、scripts/output/_w1027_spec.json、scripts/output/file-index.md、site/index.html
+
+**扫描结果（6 件 · 138 KB）**：
+
+| 判据 | 结果 |
+|---|---|
+| TIER-1 AI 腔特征词（综上所述/赋能/抓手/深耕/保驾护航/值得注意的是/让我们一起/不仅…更…等 20 词） | **0 命中** |
+| 过期表述（「当前/目前」后接陈旧数据） | **0 处** |
+| 元叙述（本节/以下将/如上所述） | 14 处「本节」——全为导航语（「本节说明…」），必要保留 |
+| 超长句（正文 >150 字，已排除表格行与代码） | 54 处，**逐条核后 0 处可删** |
+| 文件内重复句 | 3 组——HANDOVER「项目根目录」与「与其他文档关系」两处列同名链接（用途不同：查位置 vs 查关系），属有意重复 |
+
+**为什么零可删**：54 处超长句逐条核过，全部是**清单 / 批次记录 / 规则条文**——
+如「88 个可视化页面（含 graph-explorer·A-AH 34 类 + Q+ 双联 + …）」、「W422 全量治理已处置：perf.yml 补 push 触发·…·…」、
+「框架类交付物必须落进仓内目录并登记索引（W858）：凡…必须…」。每项都是独立事实，压短必丢信息；
+这属于 slop-clean 硬边界 1「信息守恒」与硬边界 4「必要限定保留」的管辖范围，删了就是错。
+
+**结论**：A 档**无可删内容**——这批文档是「证据型工程文档」（批次号 + 命令 + 实测数字），天然不含 AI 腔。
+**对 B 档的启示**：真正的废话风险在**计划类文档**（`docs/11-方案报告/计划方案/` 51 件）——「执行前计划」含大量
+目标/原则/预期收益式表述，那才是 slop-clean 的战场；`审查与评审/`、`工作复盘/` 属证据型，预计同样少见。
+
+**验证**：全量门禁 57 段核心全绿 · 体积窗 0 FAIL · 台账 60 行达窗口上限（下批先归档）。
+
+> - **状态**：A 档收官（零改动·结论入库）；B 档待与方案报告归档合并执行；C 档按裁决放弃专项清理
 ### W1026（2026-10-30）：HANDOVER 已完成内容归档 + 归档机制诊断
 
 > **来源**：用户 2026-10-30 三问——「为什么文件内已做完的内容还存在交接文档内 / 已完成的方案报告为何没移入归档 / 对整个项目所有文件的文字内容审查去除过期重复冗长废话」。
@@ -421,7 +453,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1026），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1027），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1819,18 +1851,4 @@
 
 > - **状态**：已收官（英文版 README 入库·双链互通）。
 > **状态**：**已收官**（W914 64cfb290·git 反填·共 2 笔·W971 存量回填）
-
-### W913（2026-10-24）：波二小项四件批（T04 头订正 + bump 测试关闭 + E2E 钉版 + 站点数字失真修正与对账面扩展）
-
-
-
-> **来源**：用户 2026-10-24 问「全都做完了吗」——按「今天做掉」总令续清 T-18 C 档波二可执行小项（四件批）。
-
-> - **文件**：docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md、.github/workflows/ci.yml、site/index.html、scripts/check_doc_sync.py、docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w913_spec.json、scripts/output/_cascade_files_W913.txt（逐件行见 file-index W913 段）。
-> **状态**：**已收官**（W913 e164819d·git 反填·共 2 笔·W971 存量回填）
-
-**四件清偿**：① **D-W830-02** T-04 计划头「施工未动工」陈旧状态订正为已收官（W827+W845-847·原文备档行内）；② **D-W757-02** bump_version 专项测试——**登记关闭**：工具已随 W711 方案 D 停用（本批实读 --help 实证 STOP 提示），测试需求随工具退役失效；③ **D-W792-02** ci.yml E2E 依赖钉版：`npm install playwright`（无约束·绕过 lockfile）→ 钉 1.63.0 对齐 scripts/package-lock.json（T-10 实证的真漂移面）；④ **B-W855-01** 站点聚合数字失真：site/index.html「全站 772 篇」订正为「615<!--stats:a1_a6_docs--> 篇（A1-A6）」+ **C5b 扩展面纳入 site/index.html**——站点聚合数字从此有标记对账防线（数字+防线两半边齐）。
-
-**验证**：check_doc_sync self-test 33/33·新扩展面实跑零红（615 标记对账生效）·lint_links site 14785 链接 0 broken·pytest 全量·ruff 过。
-
 

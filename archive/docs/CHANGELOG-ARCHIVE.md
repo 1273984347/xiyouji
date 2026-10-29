@@ -13,6 +13,19 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W913（2026-10-24）：波二小项四件批（T04 头订正 + bump 测试关闭 + E2E 钉版 + 站点数字失真修正与对账面扩展）
+
+
+
+> **来源**：用户 2026-10-24 问「全都做完了吗」——按「今天做掉」总令续清 T-18 C 档波二可执行小项（四件批）。
+
+> - **文件**：docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md、.github/workflows/ci.yml、site/index.html、scripts/check_doc_sync.py、docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w913_spec.json、scripts/output/_cascade_files_W913.txt（逐件行见 file-index W913 段）。
+> **状态**：**已收官**（W913 e164819d·git 反填·共 2 笔·W971 存量回填）
+
+**四件清偿**：① **D-W830-02** T-04 计划头「施工未动工」陈旧状态订正为已收官（W827+W845-847·原文备档行内）；② **D-W757-02** bump_version 专项测试——**登记关闭**：工具已随 W711 方案 D 停用（本批实读 --help 实证 STOP 提示），测试需求随工具退役失效；③ **D-W792-02** ci.yml E2E 依赖钉版：`npm install playwright`（无约束·绕过 lockfile）→ 钉 1.63.0 对齐 scripts/package-lock.json（T-10 实证的真漂移面）；④ **B-W855-01** 站点聚合数字失真：site/index.html「全站 772 篇」订正为「615<!--stats:a1_a6_docs--> 篇（A1-A6）」+ **C5b 扩展面纳入 site/index.html**——站点聚合数字从此有标记对账防线（数字+防线两半边齐）。
+
+**验证**：check_doc_sync self-test 33/33·新扩展面实跑零红（615 标记对账生效）·lint_links site 14785 链接 0 broken·pytest 全量·ruff 过。
+
 ### W912（2026-10-24）：未落地任务首波清偿（T-18 全量盘点 + 站内交互债整包：渡口脚本考古回灌 + 抽屉修复 + 交互门禁建置）
 
 
