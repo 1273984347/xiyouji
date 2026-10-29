@@ -11,6 +11,25 @@
 ---
 
 
+## W1039 用户级记忆五则入项目铁律（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1039 | 本批新增/修改 |
+| AGENTS.md | W1039 | 本批新增/修改 |
+| CHANGELOG.md | W1039 | 本批新增/修改 |
+| CITATION.cff | W1039 | 本批新增/修改 |
+| HANDOVER.md | W1039 | 本批新增/修改 |
+| README.md | W1039 | 本批新增/修改 |
+| STRUCTURE.md | W1039 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1039 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1039 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1039 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1039 | 本批新增/修改 |
+| scripts/output/_w1039_spec.json | W1039 | 本批新增/修改 |
+| scripts/output/file-index.md | W1039 | 本批新增/修改 |
+| site/index.html | W1039 | 本批新增/修改 |
+
 ## W1038 a11y 性能优化（2026-10-30）
 
 | 文件 | W | 说明 |
@@ -4638,37 +4657,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W926 | W926 段插入 |
 | scripts/output/_w926_spec.json | W926 | 本批级联 spec |
 | scripts/output/_cascade_files_W926.txt | W926 | 级联落盘清单 |
-
-## W925 系统架构方案 v2（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W925 | 架构方案 v2 正文（八维 + 存储裁定修订 + 等保合规横切面 + 6 处 Mermaid 源码为图件事实源） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-架构图-2026-10-25.html | W925 | 零外域架构图可视化页（手写内联 SVG·file:// 直开·6 图） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-架构图/（6 张 PNG） | W925 | 架构图 PNG 导出产物（Playwright 实测渲染·外域请求数 = 0） |
-| docs/11-方案报告/计划方案/执行前计划-T19-系统架构方案v2.md | W925 | T-19 框架件·执行前计划（11 AC + 20 ASM + 15 ST + 12 V + 8 风险 + 8 决策 + 14 自检） |
-| docs/11-方案报告/计划方案/T19-任务计划执行与经验沉淀报告-2026-10-25.md | W925 | T-19 框架件·执行报告（15 步执行记录 + 18 条验收 + 10 条经验 + 6 条偏差 + 6 条未验证项） |
-| docs/11-方案报告/README.md | W925 | §二 设计与架构方案 +1 行（篇数 5→6）· §六 计划方案 +2 行（篇数 20→22） |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W925 | report_docs 实体标记随 stats.json 刷新（56→59·C5b 对账） |
-| scripts/_render_arch_png.mjs | W925 | 架构图 PNG 导出脚本（Playwright ESM·零外域请求断言 + --check 模式） |
-| docs/INDEX.md | W925 | 文档索引重建（750 篇·13 板块） |
-| scripts/index.md | W925 | 脚本索引刷新 |
-| STRUCTURE.md | W925 | report_docs 标记刷新 + 六子目录篇数同步（设计与架构方案 5→6·计划方案 20→22） |
-| scripts/output/stats.json | W925 | report_docs 56→59 |
-| docs/00-导读/W批次编号对账表.md | W925 | W925 认领行与收官回填 |
-| CHANGELOG.md | W925 | W925 段 |
-| HANDOVER.md | W925 | 级联头尾链与里程碑块 |
-| README.md | W925 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W925 | 当前批次版本行 |
-| .github/workflows/README.md | W925 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W925 | 页脚批次链插入 W925 |
-| site/data/cross-time-danmaku.html | W925 | 页脚批次链插入 W925 |
-| site/data/tag-cloud.html | W925 | 页脚批次链插入 W925 |
-| site/dukou-engine.html | W925 | 页脚批次链插入 W925 |
-| AGENTS.md | W925 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W925 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W925 | version 同步为 W925 |
-| scripts/output/file-index.md | W925 | W925 段插入 |
-| scripts/output/_w925_spec.json | W925 | 本批级联 spec |
-| scripts/output/_cascade_files_W925.txt | W925 | 级联落盘清单 |
 
