@@ -13,6 +13,18 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W896（2026-10-23）：门禁实算口径改造（磁盘扫描 → Git 索引·目标提交树）+ ci_sim 预演工具
+
+> **来源**：用户 2026-10-23「批准」——指认 T-15 §十 提出的两条根修方案（① 门禁实算按目标提交树 ② 新增 `scripts/ci_sim.py`）。本批为该根修的施工批（**原拟 W894·因并行 W895 先落地·按「先落地者保留」让号为 W896**）。
+> - **文件**：scripts/tracked_files.py（新增·口径单一事实源）、scripts/ci_sim.py（新增·CI 侧预演）、scripts/check_folder_docs.py（第 45 槽）、scripts/gen_folder_docs.py（生成器）、scripts/stats.py、scripts/docs_index.py、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/index.md、docs/INDEX.md、docs/11-方案报告/计划方案/T17-任务计划执行与经验沉淀报告-2026-10-23.md、docs/00-导读/W批次编号对账表.md。
+> - **核心判断**：**提交门禁的实算对象应是「将要提交的内容」，不是「物理工作树现状」**——Git 索引（`git ls-files`）= 已跟踪 + 已暂存新增 = 将要入库的内容；并行批的未落库件（未跟踪）因此不再污染判据 ⇒ 本地不再「他方在途红」、pre-commit 不必被绕过、CI 与本地口径一致。
+> - **三处实算同步改造**：① 第 45 门禁（目录清单对拍）② `stats.py`（全部 glob 计数）③ `docs_index.py`（文档索引扫描·`tracked_only` 默认开启·写盘与门禁比对共用同一函数⇒逐字节一致）。**生成器 `gen_folder_docs.py` 同步改口径**——否则刷新出的清单会列未跟踪文件 ⇒ 提交后 CI 侧判「幽灵预引」红 ⇒ 改造不彻底。
+> - **三态判据**（不是一律红/一律绿）：索引有清单无 ⇒ 红（已入库漏登记·真问题）；清单有索引无**且磁盘也无** ⇒ 红（幽灵预引·CI 侧必红）；清单有索引无**但磁盘有** ⇒ 容忍（未跟踪在途件）；清单计数与条目数不符 ⇒ 红（截断）。另保留「清单计数自洽」判据与 `_USE_TRACKED` 口径开关（self-test 走磁盘口径·合成树不在索引内）。
+> - **`scripts/ci_sim.py`（新增）**：CI 侧预演一条命令（worktree 干净检出 + 7 项关键门禁 + 自动清理·只读零风险）·`--ref`/`--full`/`--keep` 三档；把「本地红 vs CI 红」从人工推理变成可执行判据。
+> - **验收**：造 1 个未跟踪文件后第 45 门禁仍 **0 FAIL**（旧口径此处红「盘上多 1 项」）·第 45 门禁 self-test **7/7** 全过 ·实跑 0 FAIL / 188 目录 ·索引口径与磁盘口径对拍 site html **857 = 857**（含内联标记 330 = 330）·索引健康门禁 PASS（docs/INDEX.md 产物级一致 745 篇）·CSP 856 页 0 漂移 ·全仓链接 0 broken ·门禁 54 段编排未动（段数不变）。
+> - **踩坑记录**：① 生成器改口径后 self-test 的合成树不在索引内 ⇒ 必须保留磁盘口径平行实现（`list_files_disk`/`render(disk=True)`），否则自测「全绿但毫无意义」；② `inline_css_pages` 的 850→330 曾被误判为「并行批在途漂移」——实为 **stats.json 陈旧**（CI-HEAD 实况本就是 330·文档侧早已写 330）⇒ 按「以 CI-HEAD 实况为准」修正；③ 写 `scripts/output/` 下文件遇 `OSError: [Errno 22]`（并行会话占用）⇒ 写盘带重试。
+> **状态**：**已收官**（W896 93108fad·git 反填·共 10 笔·W971 存量回填）
+
 ### W895（2026-10-23）：BL-33 收敛批（system.css 单一事实源 + inline_css 护栏 + 330 内联页按源重生成）
 
 > **来源**：用户令「继续」（W891 收官报告的唯一剩余欠账 BL-33）。
