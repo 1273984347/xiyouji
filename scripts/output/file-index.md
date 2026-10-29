@@ -11,6 +11,28 @@
 ---
 
 
+## W1036 授业官 skill 按编制定名（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1036 | 本批新增/修改 |
+| .agent/skills/xiyouji-guard/SKILL.md | W1036 | 本批新增/修改 |
+| .github/workflows/README.md | W1036 | 本批新增/修改 |
+| AGENTS.md | W1036 | 本批新增/修改 |
+| CHANGELOG.md | W1036 | 本批新增/修改 |
+| CITATION.cff | W1036 | 本批新增/修改 |
+| HANDOVER.md | W1036 | 本批新增/修改 |
+| README.md | W1036 | 本批新增/修改 |
+| STRUCTURE.md | W1036 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1036 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1036 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1036 | 本批新增/修改 |
+| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md | W1036 | 本批新增/修改 |
+| scripts/output/_vermilion_solid_cache.json | W1036 | 本批新增/修改 |
+| scripts/output/_w1036_spec.json | W1036 | 本批新增/修改 |
+| scripts/output/file-index.md | W1036 | 本批新增/修改 |
+| site/index.html | W1036 | 本批新增/修改 |
+
 ## W1035 三份职责书（2026-10-30）
 
 | 文件 | W | 说明 |
@@ -4658,31 +4680,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W923 | W923 段插入 |
 | scripts/output/_w923_spec.json | W923 | 本批级联 spec |
 | scripts/output/_cascade_files_W923.txt | W923 | 级联落盘清单 |
-
-## W922 E 裁决落地批（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/static/js/rag-chat.js | W922 | 裁决①浮窗文案：生成式问答指向桌面版渡口问津（本地检索预期说对）
-| docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md | W922 | 裁决⑧干扰日志窗口收官归档（15 行封档·机器触发点常驻·新事件改登对账表）
-| scripts/preflight_check.py | W922 | 触发点提示常量随窗口收官更新
-| scripts/check_seo_head.py | W922 | 裁决⑨og:image 判据白名单化（现役+12 张主题图·管控件经用户裁决批准）
-| site/index.html 等 12 页 | W922 | og:image 主题接线（og-01..12 按页分配·855 页 SEO 门禁全过）
-| docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md | W922 | 裁决⑫项全部登记（四件落地+八项结论）
-| docs/00-导读/W批次编号对账表.md | W922 | W922 认领行与收官回填 |
-| CHANGELOG.md | W922 | W922 段 |
-| HANDOVER.md | W922 | 级联头尾链与里程碑块 |
-| README.md | W922 | 当前批次版本行 |
-| STRUCTURE.md | W922 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W922 | 当前批次版本行 |
-| .github/workflows/README.md | W922 | 工作流层区间与里程碑尾标记 |
-| site/data/cross-time-danmaku.html | W922 | 页脚批次链插入 W922 |
-| site/data/tag-cloud.html | W922 | 页脚批次链插入 W922 |
-| site/dukou-engine.html | W922 | 页脚批次链插入 W922 |
-| AGENTS.md | W922 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W922 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W922 | version 同步为 W922 |
-| scripts/output/file-index.md | W922 | W922 段插入 |
-| scripts/output/_w922_spec.json | W922 | 本批级联 spec |
-| scripts/output/_cascade_files_W922.txt | W922 | 级联落盘清单 |
 

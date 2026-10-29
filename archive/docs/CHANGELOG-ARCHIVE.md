@@ -13,6 +13,21 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W922（2026-10-24）：E 裁决落地批（12 项闭环：浮窗文案+日志收官+og 白名单接线+NOTE 盘点+八项登记）
+
+
+
+> **来源**：用户 2026-10-24 对 T-18 E 档 12 项裁决「全部按建议」——W922 落地批（四件工程 + 八项登记）。
+
+> - **文件**：site/static/js/rag-chat.js、docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md、scripts/preflight_check.py、scripts/check_seo_head.py、site/index.html、site/reader/index.html、site/curated.html、site/data/ 十页（og 接线）、docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w922_spec.json、scripts/output/_cascade_files_W922.txt（逐件行见 file-index W922 段）。
+> **状态**：**已收官**（W922 a8b974a6·git 反填·共 4 笔·W971 存量回填）
+
+**四件工程落地**：① 浮窗文案订正（生成式问答指向桌面版渡口问津）；② 干扰日志窗口收官归档（15 行封档·机器触发点常驻·preflight 提示常量同步）；③ og:image 判据白名单化（现役两图 + W893 十二张主题图·管控件经裁决批准）并按主题接线 12 处（index/reader 总目/curated + 九个 data 页）；④ NOTE 毕业盘点复核——C5c 已毕业（W904）、余 C7 与色盲 WARN 均为合法常驻说明，**无待毕业项**。
+
+**八项登记性裁决**落 T-18 E 档：Phase-1 选 ONNX（随批执行）/ agent-web 三项与 PD 套件随 D2 冻结（UV≥30 复议）/ 仓外编制位缓 / BL 维持登记 / S2·S4 待用户定时点 / 计划补齐维持冻结 / Q2 等满 10 批。
+
+**验证**：check_seo_head 855 页全过（含 12 处新图白名单）·交互门禁 0 FAIL·preflight 单测 19/19·ruff 过。
+
 ### W921（2026-10-24）：CHANGELOG 主动瘦身批（B-W855-05 清偿·102 段迁一级归档·D1 全清）
 
 

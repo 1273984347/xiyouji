@@ -1,5 +1,5 @@
 ---
-name: xiyouji-guard
+name: puti-shouye
 description: |
   详解西游记项目的避坑判据速查（15 条硬判据）。当在本仓库动手改文件、写批次 spec、
   跑门禁遇红、做归档或迁移、处理「已完成/过期」判断时使用。每条一句话 + 指向
@@ -9,10 +9,18 @@ license: MIT
 compatibility: any-agent
 ---
 
-# 西游记项目 · 避坑判据速查
+# 菩提授业 · 避坑判据速查
 
-> 本 skill 是 `docs/agent/pitfalls.md`（123 条·六主题）的**高频子集**。
-> 15 条硬判据先过一遍能避开本项目 90% 的返工；要细节按编号 grep 全表。
+> **编制位出处**：《取经编制表》§2 丙组 · **菩提祖师 · 授业官**（回目锚点 1）。
+> 「那洞中有一个神仙，称名须菩提祖师。」（第 1 回）——**教完本事，不留姓名，不受香火**；
+> 留下的是本事，不是人设。
+> 编制表对本位的约束：**「技能内容仍以仓内 `pitfalls.md` 为唯一权威源，避免双源漂移」**——
+> 所以本 skill 只放速查子集，完整条目永远在坑表里。
+
+## 这个名字的意思
+
+`puti-shouye` = 菩提授业。不叫 `guard` 是因为：守卫是挡在门外，授业是把本事交到你手上。
+本 skill 不拦人，它只在你动手前提醒一遍——**该记得的都在这儿，要细节去查坑表**。
 
 ## 一、批次收官（最容易白跑门禁的地方）
 
@@ -54,7 +62,10 @@ grep -n "关键词" docs/agent/pitfalls.md     # 六主题：CSS / JS·CSP / git
 | 载体 | 管什么 |
 |---|---|
 | 本 skill | **动手前扫一眼**的 15 条最高频硬判据 |
-| `docs/agent/pitfalls.md` | 123 条完整教训（要细节按编号查） |
+| `docs/agent/pitfalls.md` | 123 条完整教训（**唯一权威源**——本位约束：避免双源漂移） |
 | `docs/agent/gates.md` | 每一道门禁判什么（判据定义） |
 | `docs/agent/gate-triage-template.md` | 门禁红了**怎么查**（五步法） |
 | `docs/agent/batch-closeout-checklist.md` | 批次收官**按什么顺序做**（9 步） |
+| `docs/agent/closeout-agent-prompt.md` | 沙悟净·收官官（可派发职责书） |
+| `docs/agent/reconcile-agent-prompt.md` | 谛听·对账官（可派发职责书） |
+| `docs/agent/text-audit-agent-prompt.md` | 千里眼·文字取证官（可派发职责书） |
