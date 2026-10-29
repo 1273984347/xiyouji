@@ -13,6 +13,16 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W895（2026-10-23）：BL-33 收敛批（system.css 单一事实源 + inline_css 护栏 + 330 内联页按源重生成）
+
+> **来源**：用户令「继续」（W891 收官报告的唯一剩余欠账 BL-33）。
+> - **文件**：site/system.css、scripts/inline_css.py、site/data/（88）、site/en/（138）、site/reader/（102 个已内联页）、site/dukou-engine.html、site/_template.html、scripts/_w895_bl33_inventory.py、scripts/_w895_regen_preview.py、scripts/_w895_verify_blocks.py、scripts/output/_w864_accent_exemptions.json、dCscripts/output/file-index.md。
+> - **根因（BL-33·双向漂移实证）**：system.css 自 W856 起停更，W864-W891 各迁移批把组件改动（`.seal` 淡底、KPI 顶条按行规则、`.page-wrap` 容器令牌）只写进**页内联副本**——于是单一事实源落后于页面，而页面又缺 system.css 后加的块（W856 品牌标、W885 页头插画、W888 卷末插画）。任何 `inline_css --force` 通扫都会把迁移成果反向冲掉（W875 已实证一次）。
+> - **处置三步**：① **system.css 补齐三处**（`.page-wrap` 1320px→`var(--container-wide)`、`.seal` 实底→`--accent-tint` 底 + `--accent` 字、KPI 顶条按行规则升为全局）；② **inline_css.py 护栏**——`--force` 只重同步**已内联页**，外链页转内联须显式 `--inline-links`（W875/W895 两次实证通扫会把 520 个外链 reader 页全部转内联·66.7 万行抖动）；③ **按源重生成 330 个内联页**（88 data + 138 en + 102 reader 双容器页 + 2 根页）。重生成前先跑 `_w895_regen_preview.py` 预演（证明未 sync 时重生成会反冲三处迁移成果）、重生成后用 `_w895_verify_blocks.py` 集合差校验。
+> - **验收**：内联块集合差 **226/226 data+en 零差异（0 缺 0 多）**·reader 102 页 +4,386/−408 行（同源增量）·520 外链 reader 页**零触碰**·CSP 856 页 0 漂移·第 49 槽门禁 **234 页 0 FAIL**·a11y data/en 双目录无 P0·豁免簿按新实测保守核查（4 条复合/批注键对不上者保留·余 256 条）。
+> - **踩坑记录**：首跑 `--force` 未加护栏前把 622 个 reader 页全部内联（66.7 万行）——按 W875 先例整目录 `git checkout HEAD -- site/reader` 恢复后，再在护栏下精确重跑（102 个本就 INLINED 的双容器页补上同源增量，520 个外链页保持原形态）。
+> **状态**：**已收官**（W895 03d60c61·git 反填·共 2 笔·W971 存量回填）
+
 ### W893（2026-10-23）：四画幅素材图成套批（十二张·16:9/1:1/3:4/1200×630 各三张·拉丁方主题·沿用 W882 改写锚点）
 
 
