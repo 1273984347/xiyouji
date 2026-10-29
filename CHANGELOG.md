@@ -1,3 +1,20 @@
+### W1036（2026-10-30）：授业官 skill 按编制定名（puti-shouye）
+
+> **来源**：用户 2026-10-30 令「`.agent/skills/xiyouji-guard` 这个也要按照编制来定角色」。
+>
+> **定位**：《取经编制表》§2 丙组 · **菩提祖师 · 授业官**（回目锚点 1）——「教完本事，不留姓名，不受香火；留下的是本事，不是人设」。编制表对本位的挂载写的正是「固化为 Skill（`skill-creator`）」、状态「当前位空」。
+>
+> - **文件**：.agent/skills/puti-shouye/SKILL.md、.agent/skills/xiyouji-guard/SKILL.md、.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1036_spec.json、scripts/output/file-index.md、site/index.html
+
+**改名理由**：`xiyouji-guard` → **`puti-shouye`**（菩提授业）。不叫 guard 是因为：**守卫是挡在门外，授业是把本事交到你手上**。本 skill 不拦人，只在你动手前提醒一遍——该记得的都在这儿，要细节去查坑表。
+
+**改了四处**：① SKILL.md 顶部加**编制位出处**（回目锚点 + 那句评语 + 编制表对本位的约束「技能内容仍以 `pitfalls.md` 为唯一权威源，避免双源漂移」）；② 加「这个名字的意思」段；③ 编制表 §3.1 第 3 行由「位空」改为「**已补（W1034 建 / W1036 定名）**」，并**保留原判据「模型改文件前不会主动加载」仍成立**——该路径确实不自动加载，靠 AGENTS 指针；④ AGENTS 指针路径同步。
+
+**过程记录（安全边界）**：改写既有 SKILL.md 被安全策略拒，理由「建立 Agent 技能可执行配置内容」——与改 pre-commit 钩子同类。由用户删除旧件后**新建**放行。这条边界合理：skill 是会被自动加载的可执行配置，不该由 AI 随口改写。
+
+**验证**：`.agent/skills/` 下现仅 `puti-shouye`；AGENTS 指针指向新路径；编制表三位空缺状态已全部结清。
+
+> - **状态**：已收官（授业官位完成定名与出处标注；器物官按收益不做、收官官与对账官已由 W1035 职责书承接）
 ### W1035（2026-10-30）：三份职责书（收官官 / 对账官 / 文字取证官）
 
 > **来源**：用户 2026-10-30 令「三项一起」，并追问「不是按西游记里面的人物角色设定来吗」——三份模板全部按《取经编制表》的人物位命名与叙述。
@@ -626,7 +643,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1035），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1036），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1872,21 +1889,5 @@
 **复审结论（十一项实抽全过 + 两处低危发现）**：渡口绑定/交互门禁/og 十二页图实体/C5c 零/迁移段可寻性（W750-W802 全在 ARCHIVE）/e2e 诊断零残留/降级正则写入正确/真实会话库迁移健康（user_version=3·外键与 CHECK 在位·零孤儿行·70 会话 134 消息 4 反馈数据完整）/listSessions SQL 形态实测（messageCount 键在·总数 70 对上）/W914 spec 恢复一致/CI 34/34。
 
 **两处发现修复**：① W907 让号登记行状态列无「已收官」前缀 → preflight 永真幻影在途（W825 修复过的同族·让号行状态须无害化）——补前缀后在途清单归零；② W910/W911 号在连环让号中跳过且无登记行（违反「跳号须登记」字典规则）——补两行让号登记行。
-
-
-### W922（2026-10-24）：E 裁决落地批（12 项闭环：浮窗文案+日志收官+og 白名单接线+NOTE 盘点+八项登记）
-
-
-
-> **来源**：用户 2026-10-24 对 T-18 E 档 12 项裁决「全部按建议」——W922 落地批（四件工程 + 八项登记）。
-
-> - **文件**：site/static/js/rag-chat.js、docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md、scripts/preflight_check.py、scripts/check_seo_head.py、site/index.html、site/reader/index.html、site/curated.html、site/data/ 十页（og 接线）、docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w922_spec.json、scripts/output/_cascade_files_W922.txt（逐件行见 file-index W922 段）。
-> **状态**：**已收官**（W922 a8b974a6·git 反填·共 4 笔·W971 存量回填）
-
-**四件工程落地**：① 浮窗文案订正（生成式问答指向桌面版渡口问津）；② 干扰日志窗口收官归档（15 行封档·机器触发点常驻·preflight 提示常量同步）；③ og:image 判据白名单化（现役两图 + W893 十二张主题图·管控件经裁决批准）并按主题接线 12 处（index/reader 总目/curated + 九个 data 页）；④ NOTE 毕业盘点复核——C5c 已毕业（W904）、余 C7 与色盲 WARN 均为合法常驻说明，**无待毕业项**。
-
-**八项登记性裁决**落 T-18 E 档：Phase-1 选 ONNX（随批执行）/ agent-web 三项与 PD 套件随 D2 冻结（UV≥30 复议）/ 仓外编制位缓 / BL 维持登记 / S2·S4 待用户定时点 / 计划补齐维持冻结 / Q2 等满 10 批。
-
-**验证**：check_seo_head 855 页全过（含 12 处新图白名单）·交互门禁 0 FAIL·preflight 单测 19/19·ruff 过。
 
 
