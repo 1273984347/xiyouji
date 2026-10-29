@@ -13,6 +13,23 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W903（2026-10-24）：审查发现修复（preflight touches 语义归一 + 门禁 45 提示语补序）
+
+
+
+> **来源**：用户 2026-10-24 对机制审查报告（W902）F1/F2 两项管控件修复裁决「批准」。
+
+> - **文件**：scripts/preflight_check.py、scripts/verify_delivery.py、tests/unit/test_preflight_touches.py、docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md、docs/11-方案报告/README.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w903_spec.json、scripts/output/_cascade_files_W903.txt（逐件行见 file-index W903 段）。
+> **状态**：**已收官**（W903 941fe414·git 反填·共 2 笔·W971 存量回填）
+
+**F1 preflight touches 语义归一（假绿闭口）**：`_split_touches` 改扫描式 tokenizer——**全角括号内不切分且注记整段丢弃**（注记内常含中点·先切后剥必碎·本批实现首版即踩此坑由负样本测试暴露后改扫描式）；`touches_conflict` 由字面集合交集扩为**对称目录前缀匹配**（`X/**` 与 `X/` 归一到 `X`·对方任一元素等于 `X` 或以 `X/` 开头即命中·双向·前缀锚定整段防兄弟路径误报）——W900 认领行的通配+注记形态与并行批具体文件声明从此能真撞真报。**先红后绿**：新增单测 6 例（注记剥离 / 通配 vs 文件内 / 斜杠目录形态 / 双向 / 兄弟路径不误报 / W900 行原文回放）旧码下 5 例红实证、新码 17/17 绿；实现期两个真 bug（注记内中点切碎、`/**` 剥位少一）均被自己的负样本当场抓出——「建置即红检测法」再次闭环。安全性前提入档：仓内路径零全角括号（git ls-files 实证）。
+
+**F2 第 45 门禁提示语补序**：verify_delivery gate-45 fail_msg 由「重跑 refresh 刷新」扩为「**先 git add 本批新件再重跑 refresh**（生成器按 Git 索引收集·W896 口径·W900/W901 连踩）」——一行文案闭掉连续两批踩中的操作顺序坑。
+
+**随批订正**：审查报告状态行与 README 登记行 34 的 F1/F2「待批」改「已由 W903 修复」。
+
+**验证**：单测 17/17（先红后绿留证）·pytest 全量 858 passed 3 skipped·ruff scripts/+tests/ All checks passed·verify 全量 54 段核心全绿。
+
 ### W902（2026-10-24）：机制脚本门禁全量审查与记忆固化入仓（四发现 + pitfalls/AGENTS/文档规范增补）
 
 

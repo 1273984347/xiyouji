@@ -1,3 +1,16 @@
+### W1020（2026-10-30）：Backlog 登记面对账批（逐条核 git 与测试实况）
+
+> **来源**：用户 2026-10-30 令「开一个 Backlog 对账批；不只要写入长期记忆也要写入项目内；开始」。起因是 W1019 连续命中两条「已做完却仍挂待办」的 Backlog（BL-29、BL-33）。
+>
+> **连带登记**：对账中另发现登记面残留三处（`scripts/README.md` 幽灵条目、`统计口径说明.md` 仍写 BL-19 未决、数据集两份副本不同步），同批修掉。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/统计口径说明.md、docs/00-导读/项目说明.md、docs/agent/pitfalls.md、scripts/README.md、scripts/output/_w1020_spec.json、scripts/output/file-index.md、site/index.html
+
+**本批要点**：① **全量对账**——29 条 Backlog 逐条拿 git 与测试实况核，不采信条目自述。② **关闭并移出 12 条**（滞后率 41%）：BL-8/BL-9 以性质与时点口径注记闭环、BL-11 稀柿衕用字全站统一且有门禁反写防线、BL-14/BL-15 章节与阶段口径已注记一致、BL-18 第 9/10/11 回归属语缺口已闭合、BL-19 两真源分歧已被`check_citations.py` 语料保真判据消解、BL-21/BL-25 已执行、BL-29 测试与 CI 早已落地、BL-31 脚本已退休、BL-33 治本已收官。③ **订正保留 17 条**：5 条未动、8 条部分完成、3 条留档、1 条未过时，每条按实测数字改写现状（如 BL-1 实测 EMBEDDED 52 页对 EMBEDDED_DATA 92 页、登记「26 vs 41」失真）。④ **体积窗顺带解掉**：HANDOVER 由 45.3KB 回落至 42.5KB（上限 45KB）——已完成条目**整条移出**而非加标记，否则只进不出必然复发。
+
+**验证**：`preflight_check` 体积窗口 C6 由 FAIL 转通过 · 坑表计数 115→117 条四处同步 · `stats.py --check` 24 键零差异 · 全量门禁 57 段核心全绿。
+
+> - **状态**：已收官（对账结论与证据入 CHANGELOG 本段与坑表；Backlog 建议按季度或大版本段周期性对账）
 ### W1019（2026-10-30）：BL-33/BL-29 收官批（CSS 单一事实源治本 + 内联净重口径）
 
 > **来源**：用户 2026-10-30 令「做 BL-33 治本」+「BL-29 这个也做了」+「C + 收官」。
@@ -304,7 +317,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1019），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1020），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1822,23 +1835,5 @@
 **④ F4 状态收口**：审查报告状态行/遗留盘点表/README 登记行 34 同步订正。
 
 **验证**：check_doc_sync self-test 31/31·主判据 C5c 0 处·ruff scripts/ All checks passed·pytest 858 passed 3 skipped·verify 全量核心全绿。
-
-
-### W903（2026-10-24）：审查发现修复（preflight touches 语义归一 + 门禁 45 提示语补序）
-
-
-
-> **来源**：用户 2026-10-24 对机制审查报告（W902）F1/F2 两项管控件修复裁决「批准」。
-
-> - **文件**：scripts/preflight_check.py、scripts/verify_delivery.py、tests/unit/test_preflight_touches.py、docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md、docs/11-方案报告/README.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w903_spec.json、scripts/output/_cascade_files_W903.txt（逐件行见 file-index W903 段）。
-> **状态**：**已收官**（W903 941fe414·git 反填·共 2 笔·W971 存量回填）
-
-**F1 preflight touches 语义归一（假绿闭口）**：`_split_touches` 改扫描式 tokenizer——**全角括号内不切分且注记整段丢弃**（注记内常含中点·先切后剥必碎·本批实现首版即踩此坑由负样本测试暴露后改扫描式）；`touches_conflict` 由字面集合交集扩为**对称目录前缀匹配**（`X/**` 与 `X/` 归一到 `X`·对方任一元素等于 `X` 或以 `X/` 开头即命中·双向·前缀锚定整段防兄弟路径误报）——W900 认领行的通配+注记形态与并行批具体文件声明从此能真撞真报。**先红后绿**：新增单测 6 例（注记剥离 / 通配 vs 文件内 / 斜杠目录形态 / 双向 / 兄弟路径不误报 / W900 行原文回放）旧码下 5 例红实证、新码 17/17 绿；实现期两个真 bug（注记内中点切碎、`/**` 剥位少一）均被自己的负样本当场抓出——「建置即红检测法」再次闭环。安全性前提入档：仓内路径零全角括号（git ls-files 实证）。
-
-**F2 第 45 门禁提示语补序**：verify_delivery gate-45 fail_msg 由「重跑 refresh 刷新」扩为「**先 git add 本批新件再重跑 refresh**（生成器按 Git 索引收集·W896 口径·W900/W901 连踩）」——一行文案闭掉连续两批踩中的操作顺序坑。
-
-**随批订正**：审查报告状态行与 README 登记行 34 的 F1/F2「待批」改「已由 W903 修复」。
-
-**验证**：单测 17/17（先红后绿留证）·pytest 全量 858 passed 3 skipped·ruff scripts/+tests/ All checks passed·verify 全量 54 段核心全绿。
 
 
