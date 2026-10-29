@@ -573,6 +573,25 @@ def main() -> int:
 
     global _GITIGNORED_DIRS
     _GITIGNORED_DIRS = _build_gitignored_dirs()
+    # W1022（用户令「检查生成器是否需优化」）：清单按 **Git 索引**收集（W894 口径），
+    # 未跟踪新件不会进清单——这条注意事项原先只写在 `list_files` docstring 里，运行时看不见，
+    # 实测「先 refresh 后 add」会让第 45 槽报「索引有清单无」却不给原因。
+    # 修法：把注意事项变成运行时提示（不改收集口径——索引口径本身是对的：
+    # 它让并行批的在途件不误红、CI 与本地同口径）。
+    if (args.refresh or args.force) and not args.dry_run:
+        try:
+            _st = subprocess.run(["git", "-C", ROOT, "status", "--porcelain", "-uall"],
+                                 capture_output=True, text=True, timeout=120).stdout
+            _untracked = [ln[3:] for ln in _st.splitlines() if ln.startswith("?? ")]
+        except (OSError, subprocess.SubprocessError):
+            _untracked = []
+        if _untracked:
+            print("NOTE  工作树有 %d 个未跟踪文件——清单按 Git 索引收集，**不会列出它们**；"
+                  "若含本批新件请先 `git add` 再重跑本脚本（W894 口径）" % len(_untracked))
+            for _u in _untracked[:5]:
+                print("        ?? " + _u)
+            if len(_untracked) > 5:
+                print("        … 另 %d 件" % (len(_untracked) - 5))
     dirs_all = scan_dirs()
     # 大小写冲突目录全模式跳过（INDEX.md 等变体在盘·NTFS 覆写守卫·见 case_collides）
     dirs = [d for d in dirs_all if not case_collides(d)]

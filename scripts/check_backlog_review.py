@@ -44,6 +44,8 @@ THRESHOLD = 25
 ARCHIVE_LEDGER = os.path.join("archive", "docs", "W批次编号对账表-ARCHIVE.md")
 TOKEN = "Backlog 对账已执行"   # 事件 token（对账批在状态列登记）
 LEGACY_WORD = "Backlog 对账"   # 泛词——只用于「疑似未打标」提示，不计为事件
+# 否定词窗口：状态里同时出现这些词时，token 视为**反义用法**（如「已执行（未完成）」），不计事件
+_NEGATIONS = ("未完成", "待完成", "中止", "取消", "作废")
 
 
 def scan_rows(ledger_text):
@@ -55,7 +57,14 @@ def scan_rows(ledger_text):
     token_ws, legacy_ws = [], []
     for row in pf.parse_ledger(ledger_text)["rows"]:
         status = row.get("status") or ""
-        if TOKEN in status:
+        # W1022 修（审查 P1-3 同族）：**在途行不计事件**——否则写一行「在途（…已执行）」
+        # 就能把计数清零，任务中断后再不报警。
+        if status.startswith("在途"):
+            continue
+        # W1022 修（审查 P2-5）：纯子串匹配会被**反义串**骗过——
+        # 「Backlog 对账已执行（未完成）」含 token 字样但语义相反，会把一次没做完的对账
+        # 计成事件并重置计数。加否定词窗口（同 W1004「字样≠事件」的镜像方向）。
+        if TOKEN in status and not any(neg in status for neg in _NEGATIONS):
             token_ws.append(row["w"])
         elif LEGACY_WORD in status:
             legacy_ws.append(row["w"])
@@ -122,7 +131,8 @@ def _rows(token_at=None, upto=1050, start=1001, extra=None):
 
 
 def _self_test() -> int:
-    """七态自证：阈值两侧 / 不可判定 / 非台账行豁免 / 泛词不重置 / 取 max 不取文件序 / 归档同扫 / 同批。"""
+    """十一态自证：阈值两侧 / 不可判定 / 非台账行豁免 / 泛词不重置 / 取 max 不取文件序 /
+    归档同扫 / 同批 / 反义串不计 / 在途不计。"""
     fails = []
 
     # T1 间隔 25 批 → 触发
@@ -173,11 +183,21 @@ def _self_test() -> int:
     if ok8 or not any("W990" in x and "未触发" in x for x in lines8):
         fails.append("T8 归档 token 应被计入（不得报「从未对账」）：%s" % lines8)
 
+    # T9（W1022 P2-5 回归）**反义串**含 token 字样但语义相反 → 不得计为事件
+    ok9, lines9 = evaluate(_row(1005, status="已收官（Backlog 对账已执行（未完成））"))
+    if not ok9:
+        fails.append("T9 反义串「已执行（未完成）」不得计为事件（应触发）")
+
+    # T10（W1022 P1-3 同族）在途行写 token → 不计事件（防写一行在途即永久压制）
+    ok10, lines10 = evaluate(_row(1005, status="在途（Backlog 对账已执行·对账中）"))
+    if not ok10:
+        fails.append("T10 在途行不得计为事件（应触发）")
+
     print()
     if fails:
         print("自测 %d 项不一致：%s" % (len(fails), fails))
         return 1
-    print("自测通过：阈值两侧/不可判定/非台账行豁免/泛词不重置/取 max/主题列不算/同批/归档同扫 八态（判据可证伪）")
+    print("自测通过：阈值两侧/不可判定/非台账行豁免/泛词不重置/取 max/主题列不算/同批/归档同扫/反义串不计/在途不计 十一态（判据可证伪）")
     return 0
 
 

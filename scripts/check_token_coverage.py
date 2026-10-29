@@ -2,7 +2,10 @@
 """check_token_coverage.py — Phase E E6 转正门禁（M2/M3：页面私有 <style> 令牌覆盖率）
 
 口径：
-- 只扫页面**私有 <style> 块**（跳过 INLINED tokens/system 副本：块内含 "tokens.css —" 注释特征）。
+- 只扫页面**私有 <style> 块**（跳过 INLINED tokens/system 副本：按 `<!-- INLINED CSS … -->`
+  标记与紧随 `<style>` 的**配对**识别，见 `utils/gate_common.iter_private_style_blocks`）。
+  W1022 订正：原文写「块内含 "tokens.css —" 注释特征」是 W1019 已废掉的脆弱判据——
+  剥注释即失效（228 页误判实证），文档与实现必须同口径。
 - UI 裸色 = background/border/box-shadow/color/outline 属性值中的裸 hex/rgba/hsl（排除 var()/color-mix 派生）。
 - 图表数据色豁免：页面 <style> 顶部 `/* e-track-exempt: chart-data-colors N 处 */` 注释登记 N。
   - 无注释页：UI 裸色必须 = 0。

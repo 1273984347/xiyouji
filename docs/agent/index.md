@@ -11,13 +11,16 @@
 
 - （无）
 
-## 文件（4）
+## 文件（7）
 
 ### Markdown 文档
 
 - `adversarial-audit-prompt.md`
 - `agent-web.md`
+- `batch-closeout-checklist.md`
+- `gate-triage-template.md`
 - `gates.md`
+- `parallel-evidence-template.md`
 - `pitfalls.md`
 
 ---
