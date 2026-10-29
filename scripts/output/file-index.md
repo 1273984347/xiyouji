@@ -11,6 +11,25 @@
 ---
 
 
+## W1037 门禁耗时剖析（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1037 | 本批新增/修改 |
+| AGENTS.md | W1037 | 本批新增/修改 |
+| CHANGELOG.md | W1037 | 本批新增/修改 |
+| CITATION.cff | W1037 | 本批新增/修改 |
+| HANDOVER.md | W1037 | 本批新增/修改 |
+| README.md | W1037 | 本批新增/修改 |
+| STRUCTURE.md | W1037 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1037 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1037 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1037 | 本批新增/修改 |
+| scripts/output/_w1037_spec.json | W1037 | 本批新增/修改 |
+| scripts/output/file-index.md | W1037 | 本批新增/修改 |
+| scripts/verify_delivery.py | W1037 | 本批新增/修改 |
+| site/index.html | W1037 | 本批新增/修改 |
+
 ## W1036 授业官 skill 按编制定名（2026-10-30）
 
 | 文件 | W | 说明 |
@@ -4658,26 +4677,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W924 | W924 段插入 |
 | scripts/output/_w924_spec.json | W924 | 本批级联 spec |
 | scripts/output/_cascade_files_W924.txt | W924 | 级联落盘清单 |
-
-## W923 review 修复批（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/00-导读/W批次编号对账表.md | W923 | review 修复：W907 让号行状态前缀消幻影在途 + W910/W911 补让号登记行（跳号须登记字典规则） |
-| CHANGELOG.md | W923 | W923 段 |
-| HANDOVER.md | W923 | 级联头尾链与里程碑块 |
-| README.md | W923 | 当前批次版本行 |
-| STRUCTURE.md | W923 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W923 | 当前批次版本行 |
-| .github/workflows/README.md | W923 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W923 | 页脚批次链插入 W923 |
-| site/data/cross-time-danmaku.html | W923 | 页脚批次链插入 W923 |
-| site/data/tag-cloud.html | W923 | 页脚批次链插入 W923 |
-| site/dukou-engine.html | W923 | 页脚批次链插入 W923 |
-| AGENTS.md | W923 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W923 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W923 | version 同步为 W923 |
-| scripts/output/file-index.md | W923 | W923 段插入 |
-| scripts/output/_w923_spec.json | W923 | 本批级联 spec |
-| scripts/output/_cascade_files_W923.txt | W923 | 级联落盘清单 |
 

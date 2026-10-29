@@ -1,3 +1,39 @@
+### W1037（2026-10-30）：门禁耗时剖析（--profile·实测推翻旧假设）
+
+> **来源**：用户 2026-10-30 令「都做」（A 加剖析 / B 段级缓存 / C 站点段并行）。先做 A——**没有耗时数据，B 和 C 都是瞎打**。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、scripts/output/_w1037_spec.json、scripts/output/file-index.md、scripts/verify_delivery.py、site/index.html
+
+**改动**：`verify_delivery.py` 加 `--profile`——`_scoped_run` 里段级计时（同段内多次 subprocess 累加），
+`_print_summary` 结束时输出 TOP12 耗时排行（含百分比与条形），`--profile` 开关控制不影响默认输出。
+
+**实测结果（full 档·2026-10-30）**：
+
+```
+合计 138.9s（2 分 19 秒）
+  a11y对比      73.33s  52.8%
+  可视化数据     21.46s  15.4%
+  色盲安全        5.51s   4.0%
+  动效禁令        5.09s   3.7%
+  内嵌残留        4.05s   2.9%
+  …其余 34 段    12.51s   9.0%
+```
+
+**这个数据推翻了两个此前的判断**：
+
+① **「pre-commit 要跑 13 分钟」是错的** —— 实测 2 分 19 秒。此前那个印象可能来自系统负载高的某次，
+或某个已修掉的慢段；**我基于错误前提设计了整轮优化方案**。
+② **「35 个站点段都慢」是错的** —— 两段吃掉 68%（a11y 一段占一半），其余 49 段合计 29 秒。
+
+**因此 B / C 的结论**：
+- **C（站点段并行）收益有限**：瓶颈是单段 73s，并行后最慢段仍是 73s，天花板就在那。
+- **B（段级缓存）也对不上**：a11y 依赖 CSS/页面改动，而这类改动恰恰是最常见的，缓存常失效。
+- **真正的解是优化 a11y 那一段本身**：73s 扫 235 页 ≈ 每页 0.31s——若有重复解析/重复计算，
+在段内优化比搭缓存架构简单十倍。这条留作下一批（需先读 `a11y_audit.py` 找重复工作）。
+
+**验证**：`--scope docs --profile` 与 full 两档均实测跑通、核心全通过；默认输出未变（不加 `--profile` 无排行）。
+
+> - **状态**：A 已收官（剖析能力入库·数据已推翻旧假设）；B/C **按数据判断不做**，改指向 a11y 段内优化
 ### W1036（2026-10-30）：授业官 skill 按编制定名（puti-shouye）
 
 > **来源**：用户 2026-10-30 令「`.agent/skills/xiyouji-guard` 这个也要按照编制来定角色」。
@@ -643,7 +679,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1036），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1037），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1875,19 +1911,5 @@
 - 数据支撑：15 批样本（W850-W875）静态口径稳定（max 403-413KB·超限 9-10 页·零恶化）+ 本批现势补采；§12.2 Q2 行与 §11.5 三行状态回填系统架构方案。
 
 **验证**：check_perf_shadow 自测 9/9·实跑 C2 零红（10 页观察清单）·verify 全量核心全绿。
-
-
-### W923（2026-10-24）：review 修复批（PR #63 复审两处低危登记缺陷）
-
-
-
-> **来源**：用户 2026-10-24 令「review 一遍」——PR #63（W900-W922）合并后独立复审发现两处低危登记缺陷，本批修复。
-
-> - **文件**：dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w923_spec.json、scripts/output/_cascade_files_W923.txt（逐件行见 file-index W923 段）。
-> **状态**：**已收官**（W923 1503c9c4·git 反填·共 2 笔·W971 存量回填）
-
-**复审结论（十一项实抽全过 + 两处低危发现）**：渡口绑定/交互门禁/og 十二页图实体/C5c 零/迁移段可寻性（W750-W802 全在 ARCHIVE）/e2e 诊断零残留/降级正则写入正确/真实会话库迁移健康（user_version=3·外键与 CHECK 在位·零孤儿行·70 会话 134 消息 4 反馈数据完整）/listSessions SQL 形态实测（messageCount 键在·总数 70 对上）/W914 spec 恢复一致/CI 34/34。
-
-**两处发现修复**：① W907 让号登记行状态列无「已收官」前缀 → preflight 永真幻影在途（W825 修复过的同族·让号行状态须无害化）——补前缀后在途清单归零；② W910/W911 号在连环让号中跳过且无登记行（违反「跳号须登记」字典规则）——补两行让号登记行。
 
 

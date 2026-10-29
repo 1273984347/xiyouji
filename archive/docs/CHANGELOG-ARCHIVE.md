@@ -13,6 +13,19 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W923（2026-10-24）：review 修复批（PR #63 复审两处低危登记缺陷）
+
+
+
+> **来源**：用户 2026-10-24 令「review 一遍」——PR #63（W900-W922）合并后独立复审发现两处低危登记缺陷，本批修复。
+
+> - **文件**：dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w923_spec.json、scripts/output/_cascade_files_W923.txt（逐件行见 file-index W923 段）。
+> **状态**：**已收官**（W923 1503c9c4·git 反填·共 2 笔·W971 存量回填）
+
+**复审结论（十一项实抽全过 + 两处低危发现）**：渡口绑定/交互门禁/og 十二页图实体/C5c 零/迁移段可寻性（W750-W802 全在 ARCHIVE）/e2e 诊断零残留/降级正则写入正确/真实会话库迁移健康（user_version=3·外键与 CHECK 在位·零孤儿行·70 会话 134 消息 4 反馈数据完整）/listSessions SQL 形态实测（messageCount 键在·总数 70 对上）/W914 spec 恢复一致/CI 34/34。
+
+**两处发现修复**：① W907 让号登记行状态列无「已收官」前缀 → preflight 永真幻影在途（W825 修复过的同族·让号行状态须无害化）——补前缀后在途清单归零；② W910/W911 号在连环让号中跳过且无登记行（违反「跳号须登记」字典规则）——补两行让号登记行。
+
 ### W922（2026-10-24）：E 裁决落地批（12 项闭环：浮窗文案+日志收官+og 白名单接线+NOTE 盘点+八项登记）
 
 

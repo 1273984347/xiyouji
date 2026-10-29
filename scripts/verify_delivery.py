@@ -39,6 +39,7 @@ import os
 import re
 import subprocess
 import sys
+import time
 import urllib.request
 from typing import NamedTuple
 
@@ -289,6 +290,7 @@ class _Reporter:
     def __init__(self):
         self.fails = 0
         self.warns = 0
+        self.timings = {}   # W1037：段级耗时（--profile 输出）
 
     def fail(self, msg):
         self.fails += 1
@@ -360,7 +362,12 @@ class _GateContext:
         if self.scope != "full" and cur not in self.active_sections:
             self.rep.ok("跳过 [%s]（--scope %s 未覆盖）" % (cur, self.scope))
             return _SkipResult(cur, self.scope)
-        return self._real_run(cmd, *args, **kwargs)
+        # W1037：段级计时（同一段内多次 subprocess 累加）——供 --profile 出耗时排行
+        _t0 = time.perf_counter()
+        try:
+            return self._real_run(cmd, *args, **kwargs)
+        finally:
+            self.rep.timings[cur] = self.rep.timings.get(cur, 0.0) + (time.perf_counter() - _t0)
 
 
 # ---------------------------------------------------------------------------
@@ -1143,8 +1150,18 @@ def _check_section_lock(ctx):
                    % (len(ran_set), len(expected_sections), ctx.scope))
 
 
-def _print_summary(rep):
+def _print_summary(rep, profile=False):
     """汇总与退出码：核心 FAIL>0 → 1；仅辅助 WARN → 0。"""
+    if profile and getattr(rep, "timings", None):
+        tot = sum(rep.timings.values())
+        rows = sorted(rep.timings.items(), key=lambda kv: -kv[1])
+        print("\n==== 段耗时排行（--profile·合计 %.1fs）====" % tot)
+        for name, sec in rows[:12]:
+            pct = (sec / tot * 100) if tot else 0
+            print("  %-16s %7.2fs  %5.1f%%  %s" % (name, sec, pct, "#" * max(1, int(pct / 2))))
+        if len(rows) > 12:
+            rest = sum(v for _, v in rows[12:])
+            print("  %-16s %7.2fs  %5.1f%%  （其余 %d 段）" % ("…其余", rest, rest / tot * 100 if tot else 0, len(rows) - 12))
     print("\n==== 交付校验汇总 ====")
     if rep.fails == 0:
         print("核心全部通过 ✅" + ("（%d 项辅助 WARN，不阻断）" % rep.warns if rep.warns else ""))
@@ -1186,7 +1203,7 @@ def main():
     # —— 收尾 ----
     _probe_health(rep)
     _check_section_lock(ctx)
-    return _print_summary(rep)
+    return _print_summary(rep, profile=("--profile" in sys.argv))
 
 
 if __name__ == "__main__":
