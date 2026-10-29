@@ -1,3 +1,25 @@
+### W1028（2026-10-30）：归档系统与临时文件系统诊断
+
+> **来源**：用户 2026-10-30 令「做归档系统和临时文件系统的问题」。
+>
+> **诊断结论（两套系统都是「制度齐备、缺定期执行」）**：
+> ① `tmpe/` 有 policy.yml 六条分类规则 + `tmpe_tidy.py` 的 plan/apply/confirm/undo/from-plan 全套；
+> ② `archive/README.md` 有归档台账（34 条路径引用，31 条真实路径**全部存在**，另 3 条为通配写法非缺失）。
+> **两套系统的问题都不是设计缺陷，是没人按期跑。**
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/agent/batch-closeout-checklist.md、scripts/output/_w1028_spec.json、scripts/output/file-index.md、site/index.html
+
+**本批处置**：① 跑 `tmpe_tidy.py --apply --confirm`——**归桶 29 件 / 零删除**（顶层散件 186 → 157；
+余 140 件在**冻结期内**不迁，属设计防并行会话误动，过期自然归桶）；journal 已留，`--undo` 可悔。
+② 收官 checklist 新增「临时区」一项：**每 10 批或 `tmpe/` 超 150MB 跑一次归桶**，并明确
+**`_trash/` 清空不在自动范围**（个人文件安全铁律：列清单 → 主人确认 → 回收站）。
+
+**未处置（待用户确认）**：`tmpe/_trash/w993-clean` **81 MB / 709 件**——W993 批清理时的回收件
+（2026-09-27 至 10-27），已进回收站但从未清空。**清空=二次删除，需单独确认**；本次只诊断不动手。
+
+**验证**：tmpe 顶层散件 186→157（-29）· 归档台账 31/31 真实路径存在 · 全量门禁 57 段核心全绿。
+
+> - **状态**：诊断与机制补强已收官；`_trash` 清空待用户一句话
 ### W1027（2026-10-30）：治理文档文字审查 A 档（结论：零可删）
 
 > **来源**：用户 2026-10-30 令「按这个走」——A 档治理文档文字审查现在做，B 档与方案报告归档合并，C 档放弃专项清理。
@@ -453,7 +475,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1027），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1028），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1830,25 +1852,4 @@
 
 **验证**：check_js_syntax 855 文件过·check_structure 1412 块平衡过·var(--space- 命中 0→3。
 
-
-### W914（2026-10-24）：英文版 README（完整对照版 + 双向语言互链）
-
-
-
-> **来源**：用户 2026-10-24 令「增加一个英文版的 README」（本批原拟 W911·并行会话本地连立 W912/W913·为免与在途号段冲突，改取下一号 W914）。
-
-> - **文件**：README.en.md、README.md、dscripts/output/_w914_spec.json、scripts/output/_cascade_files_W914.txt、scripts/output/_vermilion_solid_cache.json、sCHANDOVER.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff。
-
-> - **交付形态**：完整对照版（非精简摘要）——与中文 README 逐段对应，标题沿用英文站官方名「Journey to the West · Annotated」。
-
-> - **三条设计决策**：① **零版本号**——英文版不写「当前批次 W###」行（该字段由级联单写），改指 CHANGELOG 顶段 ⇒ 英文版不必随批次逐次维护、不会漂移；② **语言边界如实标注**——站内英文版是完整版（`/en/`），但 `docs/` 长文仍为中文，英文版开头直接写明；③ **站内链接指向英文站**——在线体验与宣传单页预览均指向 `/en/` 与 `-en` 资产。
-
-> - **配图**：沿用中文版同款（复用仓内已有资产·零外域依赖）——顶部水墨山景 banner + 「📊 Visualization Samples」浅色四张（关系网络/热力图/雷达图/时间线）+ 暗色两张 + 宣传单页英文版正面预览；alt 全英文描述。
-
-> - **双向互链**：中文 README 顶部加 `[English](README.en.md) | 简体中文` 语言切换行，目录树补 `README.en.md` 一行；英文版顶部反向互链。
-
-> - **验证**：全仓链接校验 20814 条 0 broken（英文版新增 51 条链接全有效）·英文版本地渲染逐屏核对（标题/语言切换/banner/四枚徽章/可视化样例组/单页预览/开发者区折叠块）全部正常 ·英文版内数字沿用 `<!--stats:*-->` 实体化标记（与中文版同键）⇒ 数据变更时同源。
-
-> - **状态**：已收官（英文版 README 入库·双链互通）。
-> **状态**：**已收官**（W914 64cfb290·git 反填·共 2 笔·W971 存量回填）
 
