@@ -11,6 +11,25 @@
 ---
 
 
+## W1029 方案报告归档判断（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1029 | 本批新增/修改 |
+| AGENTS.md | W1029 | 本批新增/修改 |
+| CHANGELOG.md | W1029 | 本批新增/修改 |
+| CITATION.cff | W1029 | 本批新增/修改 |
+| HANDOVER.md | W1029 | 本批新增/修改 |
+| README.md | W1029 | 本批新增/修改 |
+| STRUCTURE.md | W1029 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1029 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1029 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1029 | 本批新增/修改 |
+| docs/11-方案报告/README.md | W1029 | 本批新增/修改 |
+| scripts/output/_w1029_spec.json | W1029 | 本批新增/修改 |
+| scripts/output/file-index.md | W1029 | 本批新增/修改 |
+| site/index.html | W1029 | 本批新增/修改 |
+
 ## W1028 归档系统与临时文件系统诊断（2026-10-30）
 
 | 文件 | W | 说明 |
@@ -4695,28 +4714,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W916 | W916 段插入 |
 | scripts/output/_w916_spec.json | W916 | 本批级联 spec |
 | scripts/output/_cascade_files_W916.txt | W916 | 级联落盘清单 |
-
-## W915 波二余件一·二批（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/agent/gates.md | W915 | 第 43 槽去时点快照数字（缺口三数/耗时/770→指向报告与基线文件·时点快照不入判据文档）——A-T02-01 清偿
-| site/404.html | W915 | v4 间距令牌迁移（:root 页内副本 + 24/48/40 等值替换 var(--space-6/9/8)·非刻度值按 W891 等值纪律保留）——C-B02 清偿
-| docs/00-导读/W批次编号对账表.md | W915 | W915 认领行与收官回填 |
-| CHANGELOG.md | W915 | W915 段 |
-| HANDOVER.md | W915 | 级联头尾链与里程碑块 |
-| README.md | W915 | 当前批次版本行 |
-| STRUCTURE.md | W915 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W915 | 当前批次版本行 |
-| .github/workflows/README.md | W915 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W915 | 页脚批次链插入 W915 |
-| site/data/cross-time-danmaku.html | W915 | 页脚批次链插入 W915 |
-| site/data/tag-cloud.html | W915 | 页脚批次链插入 W915 |
-| site/dukou-engine.html | W915 | 页脚批次链插入 W915 |
-| AGENTS.md | W915 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W915 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W915 | version 同步为 W915 |
-| scripts/output/file-index.md | W915 | W915 段插入 |
-| scripts/output/_w914_spec.json | W915 | 本批级联 spec |
-| scripts/output/_cascade_files_W915.txt | W915 | 级联落盘清单 |
 
