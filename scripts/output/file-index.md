@@ -11,6 +11,27 @@
 ---
 
 
+## W1023 提示词库派发骨架补齐（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1023 | 本批新增/修改 |
+| AGENTS.md | W1023 | 本批新增/修改 |
+| CHANGELOG.md | W1023 | 本批新增/修改 |
+| CITATION.cff | W1023 | 本批新增/修改 |
+| HANDOVER.md | W1023 | 本批新增/修改 |
+| README.md | W1023 | 本批新增/修改 |
+| STRUCTURE.md | W1023 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1023 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1023 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1023 | 本批新增/修改 |
+| docs/12-提示词库/03-工作复盘提示词.md | W1023 | 本批新增/修改 |
+| docs/12-提示词库/05-项目审查任务书.md | W1023 | 本批新增/修改 |
+| docs/12-提示词库/09-导师提问流程.md | W1023 | 本批新增/修改 |
+| scripts/output/_w1023_spec.json | W1023 | 本批新增/修改 |
+| scripts/output/file-index.md | W1023 | 本批新增/修改 |
+| site/index.html | W1023 | 本批新增/修改 |
+
 ## W1022 对抗式审查批（2026-10-30）
 
 | 文件 | W | 说明 |
@@ -4740,30 +4761,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W906 | W906 段插入 |
 | scripts/output/_w906_spec.json | W906 | 本批级联 spec |
 | scripts/output/_cascade_files_W906.txt | W906 | 级联落盘清单 |
-
-## W905 两项存量红项清理（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/data/character-semantic-network.html | W905 | 暗色态补色规则（rgb(163, 1, 38) → #ce7e88·修 W674 色阶变更遗留的 invisible 缺陷） |
-| site/en/character-semantic-network.html | W905 | 暗色态补色规则（同上·英文版同步） |
-| xiyouji-agent-web/package.json | W905 | 依赖升级（dompurify ^3.4.17）+ overrides 抬版（markdown-it ^14.3.3 / zod ^4.6.7 / vite ^8.3.5） |
-| xiyouji-agent-web/package-lock.json | W905 | 锁文件同步（4 包版本推进·lock 变更最小化） |
-| scripts/output/_vermilion_solid_cache.json | W905 | 朱砂门禁增量缓存刷新（本批级联改四页脚后按 sha1 重扫对齐） |
-| scripts/output/_w905_spec.json | W905 | 本批级联 spec（10 面改写参数） |
-| scripts/output/_cascade_files_W905.txt | W905 | 级联落盘清单 |
-| docs/00-导读/W批次编号对账表.md | W905 | 认领行与收官回填 |
-| CHANGELOG.md | W905 | W905 段 |
-| HANDOVER.md | W905 | 头尾链与里程碑块 |
-| README.md | W905 | 当前批次版本行 |
-| STRUCTURE.md | W905 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W905 | 当前批次版本行 |
-| .github/workflows/README.md | W905 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W905 | 页脚批次链插入 W905 |
-| site/data/cross-time-danmaku.html | W905 | 页脚批次链插入 W905 |
-| site/data/tag-cloud.html | W905 | 页脚批次链插入 W905 |
-| site/dukou-engine.html | W905 | 页脚批次链插入 W905 |
-| AGENTS.md | W905 | 版本脚注条目 |
-| CITATION.cff | W905 | version 同步为 W905 |
-| scripts/output/file-index.md | W905 | W905 段插入 |
 

@@ -13,6 +13,23 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W905（2026-10-24）：两项存量红项清理（暗色门禁补色 + npm 依赖漏洞清偿）
+
+
+
+> **来源**：用户 2026-10-24 令「清」——清 CI 上两项非 required 的存量红项（npm audit 依赖漏洞 / Dark-state gate 暗色门禁）。
+
+> - **文件**：site/data/character-semantic-network.html、site/en/character-semantic-network.html、xiyouji-agent-web/package.json、xiyouji-agent-web/package-lock.json、scripts/output/_vermilion_solid_cache.json、scripts/output/_w905_spec.json、scripts/output/_cascade_files_W905.txt、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、scripts/output/file-index.md。
+
+> - **暗色门禁根修（补色规则而非改判据）**：红项仅 2 条——中英两版 `character-semantic-network.html` 的热力图各有 1 个 `invisible` 形状（`rgb(163, 1, 38)`·亮度 0.0795 < 0.16）。取证链：页面暗色态用**枚举式**提亮清单（`html[data-theme="dark"] svg [fill="rgb(128, 0, 38)" i] { fill: #c1858d !important; }` 等 16 条）覆盖深色填充，而 **W674（88431cee）修正热力图色阶二次归一化**（`d3.scaleSequential(d => d3.interpolateYlOrRd(d / maxWeight)).domain([0, maxWeight])` → `d3.scaleSequential(d3.interpolateYlOrRd).domain([0, maxWeight])`）后色阶满映射，新增中间值 `rgb(163, 1, 38)` 不在枚举清单内 ⇒ 漏网变暗。**修法**：两页各补 1 条同族提亮规则（`rgb(163, 1, 38)` → `#ce7e88`·亮度 0.2982），与既有 16 条同构，不改判据、不改基线、不改色阶语义。
+
+> - **npm 依赖漏洞清偿（4 包）**：`dompurify` 3.4.16→3.4.17（critical·SAFE_FOR_TEMPLATES 绕过 / IN_PLACE 分离子树 / XHTML SMIL 三则公告）、`markdown-it` 14.3.2→14.3.3（high·两次二次时间 DoS·经 cherry-markdown 传递引入·用 `overrides` 抬版）、`body-parser` 2.3.0→2.4.0（high·压缩体尾字节 DoS·经 express 传递）、`vite` 8.3.1→8.3.5（high·dev 侧 6 则公告·launch-editor 命令注入与 fs.allow 绕过）；另加 `overrides` 强制 `zod` 4.6.7（`@tdesign-react/chat` 声明 zod ^3.24.2·漏洞范围 `zod <4.6.6` 覆盖全部 v3 且 v3 已 EOL 无修复版·而顶层 zod 4.6.7 才是运行时校验实际所用·override 后编译与测试均无回归）。
+
+> - **验收**：暗色门禁判据权威脚本复验——164 页全量 S2-desktop-dark 审计（`node scripts/_audit_render_states.js --states S2-desktop-dark --scope charts` + `node scripts/check_dark_state_gate.js`）→「OK 同页同类型缺陷数零新增，暗色门禁通过」（修前同一命令判红 2 项）；`npm audit --omit=dev --audit-level=high` → `found 0 vulnerabilities`（CI 口径·exit 0），全量口径（含 dev）亦 0；`npm run build`（tsc -b && vite build）exit 0；`npm run test:all` exit 0（集成 19 passed / 1 skipped·Windows 无 SIGTERM 语义属 CI 实跑项；客户端 5 文件 51 tests passed）。
+
+> - **状态**：已收官（两项存量红项均已消除·判据与基线未改·依赖升级零回归）。
+> **状态**：**已收官**（W905 8c18b31f·git 反填·共 2 笔·W971 存量回填）
+
 ### W904（2026-10-24）：C5c 裸聚合收敛（74 处清零·判据转 FAIL·stats 增 7 板块键·后置精确豁免）
 
 

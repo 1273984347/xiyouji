@@ -1,3 +1,17 @@
+### W1023（2026-10-30）：提示词库派发骨架补齐（3 项）
+
+> **来源**：用户 2026-10-30 令「补完」——接续 W1022 结项时登记的余 3 项提示词模板。
+>
+> **做法**：按 W1022 立下的「就地并入·不另立补充篇」原则，把骨架补进各自文件末尾，
+> 不新增平行文件（避免第二事实源）。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/12-提示词库/03-工作复盘提示词.md、docs/12-提示词库/05-项目审查任务书.md、docs/12-提示词库/09-导师提问流程.md、scripts/output/_w1023_spec.json、scripts/output/file-index.md、site/index.html
+
+**本批要点**：① **05 项目审查任务书**补「派发骨架」——把七类审查（R-1~R-7）划成 6 个派发单元，标明并行性（U5 设计**不可并行**·审美判断无法机械汇总；U6 已完成工作**必须收尾**，是前序单元的汇总裁决），并给出通用 prompt 骨架（范围 / 证据要求 / 分级 / 输出四段）；同时厘清与对抗审查的分工——本任务书是**全面体检**（面越宽越好），对抗审查是**声明对拍**（判据是实况），混做两头不讨好。② **03 工作复盘**补「单批复盘最小 prompt」——完整版 441 行是给里程碑/季度复盘的；单批若整份丢给 subagent，篇幅会被耗在填满 10 个章节上，真正要的「差异 / 坑 / 可复用」被稀释 ⇒ 裁到必答六项（声称 / 实际 / 差异 / 新形态坑 / 可复用落点 / 下批建议），并明确禁止复述 CHANGELOG 与写评价性套话。③ **09 导师提问**补「场景化提问清单」——按五类场景（新功能 / 修 bug / 重构 / 设计 / 内容）给出可直接照问的序列，每场景 ≤7 问，并附两条通用追问（「能给一个具体例子吗」「什么情况下这个做法会失效」）。
+
+**验证**：全量门禁 57 段核心全绿 · 三份文件章节序正确（03 的「7. 派发骨架」置于「6. 最终交付物」之后）· code fence 内的 `##` 结构标记未被结构化检查误判。
+
+> - **状态**：已收官（W1022 登记的余 3 项提示词模板全部补齐，暂无遗留）
 ### W1022（2026-10-30）：对抗式审查批（A–G 全项·P1×3 + P2×5 当批修）
 
 > **来源**：preflight 报「距上次对抗审查（W998）已 23 批 ≥ 20」+ 用户 2026-10-30 令「可以做」；按 `docs/agent/adversarial-audit-prompt.md` 模板派发 subagent 做 A–G 全项**只读**审查（审查与修复分离），被审对象为 W1019（CSS 治本 + 净重口径 + 门禁判据改稳定契约）、W1020（Backlog 对账）、W1021（第四哨）。
@@ -362,7 +376,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1022），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1023），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1839,21 +1853,4 @@
 
 **验证**：self-test 33/33·主判据 C4-f 三态 NOTE 实证·ruff scripts/ All checks passed·pytest 858 passed 3 skipped·verify 全量核心全绿。
 
-
-### W905（2026-10-24）：两项存量红项清理（暗色门禁补色 + npm 依赖漏洞清偿）
-
-
-
-> **来源**：用户 2026-10-24 令「清」——清 CI 上两项非 required 的存量红项（npm audit 依赖漏洞 / Dark-state gate 暗色门禁）。
-
-> - **文件**：site/data/character-semantic-network.html、site/en/character-semantic-network.html、xiyouji-agent-web/package.json、xiyouji-agent-web/package-lock.json、scripts/output/_vermilion_solid_cache.json、scripts/output/_w905_spec.json、scripts/output/_cascade_files_W905.txt、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff、scripts/output/file-index.md。
-
-> - **暗色门禁根修（补色规则而非改判据）**：红项仅 2 条——中英两版 `character-semantic-network.html` 的热力图各有 1 个 `invisible` 形状（`rgb(163, 1, 38)`·亮度 0.0795 < 0.16）。取证链：页面暗色态用**枚举式**提亮清单（`html[data-theme="dark"] svg [fill="rgb(128, 0, 38)" i] { fill: #c1858d !important; }` 等 16 条）覆盖深色填充，而 **W674（88431cee）修正热力图色阶二次归一化**（`d3.scaleSequential(d => d3.interpolateYlOrRd(d / maxWeight)).domain([0, maxWeight])` → `d3.scaleSequential(d3.interpolateYlOrRd).domain([0, maxWeight])`）后色阶满映射，新增中间值 `rgb(163, 1, 38)` 不在枚举清单内 ⇒ 漏网变暗。**修法**：两页各补 1 条同族提亮规则（`rgb(163, 1, 38)` → `#ce7e88`·亮度 0.2982），与既有 16 条同构，不改判据、不改基线、不改色阶语义。
-
-> - **npm 依赖漏洞清偿（4 包）**：`dompurify` 3.4.16→3.4.17（critical·SAFE_FOR_TEMPLATES 绕过 / IN_PLACE 分离子树 / XHTML SMIL 三则公告）、`markdown-it` 14.3.2→14.3.3（high·两次二次时间 DoS·经 cherry-markdown 传递引入·用 `overrides` 抬版）、`body-parser` 2.3.0→2.4.0（high·压缩体尾字节 DoS·经 express 传递）、`vite` 8.3.1→8.3.5（high·dev 侧 6 则公告·launch-editor 命令注入与 fs.allow 绕过）；另加 `overrides` 强制 `zod` 4.6.7（`@tdesign-react/chat` 声明 zod ^3.24.2·漏洞范围 `zod <4.6.6` 覆盖全部 v3 且 v3 已 EOL 无修复版·而顶层 zod 4.6.7 才是运行时校验实际所用·override 后编译与测试均无回归）。
-
-> - **验收**：暗色门禁判据权威脚本复验——164 页全量 S2-desktop-dark 审计（`node scripts/_audit_render_states.js --states S2-desktop-dark --scope charts` + `node scripts/check_dark_state_gate.js`）→「OK 同页同类型缺陷数零新增，暗色门禁通过」（修前同一命令判红 2 项）；`npm audit --omit=dev --audit-level=high` → `found 0 vulnerabilities`（CI 口径·exit 0），全量口径（含 dev）亦 0；`npm run build`（tsc -b && vite build）exit 0；`npm run test:all` exit 0（集成 19 passed / 1 skipped·Windows 无 SIGTERM 语义属 CI 实跑项；客户端 5 文件 51 tests passed）。
-
-> - **状态**：已收官（两项存量红项均已消除·判据与基线未改·依赖升级零回归）。
-> **状态**：**已收官**（W905 8c18b31f·git 反填·共 2 笔·W971 存量回填）
 
