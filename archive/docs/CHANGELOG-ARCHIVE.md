@@ -13,6 +13,27 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W914（2026-10-24）：英文版 README（完整对照版 + 双向语言互链）
+
+
+
+> **来源**：用户 2026-10-24 令「增加一个英文版的 README」（本批原拟 W911·并行会话本地连立 W912/W913·为免与在途号段冲突，改取下一号 W914）。
+
+> - **文件**：README.en.md、README.md、dscripts/output/_w914_spec.json、scripts/output/_cascade_files_W914.txt、scripts/output/_vermilion_solid_cache.json、sCHANDOVER.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、CITATION.cff。
+
+> - **交付形态**：完整对照版（非精简摘要）——与中文 README 逐段对应，标题沿用英文站官方名「Journey to the West · Annotated」。
+
+> - **三条设计决策**：① **零版本号**——英文版不写「当前批次 W###」行（该字段由级联单写），改指 CHANGELOG 顶段 ⇒ 英文版不必随批次逐次维护、不会漂移；② **语言边界如实标注**——站内英文版是完整版（`/en/`），但 `docs/` 长文仍为中文，英文版开头直接写明；③ **站内链接指向英文站**——在线体验与宣传单页预览均指向 `/en/` 与 `-en` 资产。
+
+> - **配图**：沿用中文版同款（复用仓内已有资产·零外域依赖）——顶部水墨山景 banner + 「📊 Visualization Samples」浅色四张（关系网络/热力图/雷达图/时间线）+ 暗色两张 + 宣传单页英文版正面预览；alt 全英文描述。
+
+> - **双向互链**：中文 README 顶部加 `[English](README.en.md) | 简体中文` 语言切换行，目录树补 `README.en.md` 一行；英文版顶部反向互链。
+
+> - **验证**：全仓链接校验 20814 条 0 broken（英文版新增 51 条链接全有效）·英文版本地渲染逐屏核对（标题/语言切换/banner/四枚徽章/可视化样例组/单页预览/开发者区折叠块）全部正常 ·英文版内数字沿用 `<!--stats:*-->` 实体化标记（与中文版同键）⇒ 数据变更时同源。
+
+> - **状态**：已收官（英文版 README 入库·双链互通）。
+> **状态**：**已收官**（W914 64cfb290·git 反填·共 2 笔·W971 存量回填）
+
 ### W913（2026-10-24）：波二小项四件批（T04 头订正 + bump 测试关闭 + E2E 钉版 + 站点数字失真修正与对账面扩展）
 
 

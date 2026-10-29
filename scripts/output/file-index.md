@@ -11,6 +11,25 @@
 ---
 
 
+## W1028 归档系统与临时文件系统诊断（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1028 | 本批新增/修改 |
+| AGENTS.md | W1028 | 本批新增/修改 |
+| CHANGELOG.md | W1028 | 本批新增/修改 |
+| CITATION.cff | W1028 | 本批新增/修改 |
+| HANDOVER.md | W1028 | 本批新增/修改 |
+| README.md | W1028 | 本批新增/修改 |
+| STRUCTURE.md | W1028 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1028 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1028 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1028 | 本批新增/修改 |
+| docs/agent/batch-closeout-checklist.md | W1028 | 本批新增/修改 |
+| scripts/output/_w1028_spec.json | W1028 | 本批新增/修改 |
+| scripts/output/file-index.md | W1028 | 本批新增/修改 |
+| site/index.html | W1028 | 本批新增/修改 |
+
 ## W1027 治理文档文字审查 A 档（2026-10-30）
 
 | 文件 | W | 说明 |
@@ -4700,27 +4719,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W915 | W915 段插入 |
 | scripts/output/_w914_spec.json | W915 | 本批级联 spec |
 | scripts/output/_cascade_files_W915.txt | W915 | 级联落盘清单 |
-
-## W914 英文版 README（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| README.en.md | W914 | 英文版 README（完整对照版·零版本号·站内链接指向 /en/·同款配图） |
-| README.md | W914 | 顶部加语言切换行 + 目录树补 README.en.md 一行 |
-| docs/00-导读/W批次编号对账表.md | W914 | W914 认领行与收官回填 |
-| scripts/output/_w914_spec.json | W914 | 本批级联 spec（10 面改写参数） |
-| scripts/output/_cascade_files_W914.txt | W914 | 级联落盘清单 |
-| scripts/output/_vermilion_solid_cache.json | W914 | 朱砂门禁增量缓存刷新（本批级联改四页脚后按 sha1 重扫对齐） |
-| CHANGELOG.md | W914 | W914 段 |
-| HANDOVER.md | W914 | 头尾链与里程碑块 |
-| STRUCTURE.md | W914 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W914 | 当前批次版本行 |
-| .github/workflows/README.md | W914 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W914 | 页脚批次链插入 W914 |
-| site/data/cross-time-danmaku.html | W914 | 页脚批次链插入 W914 |
-| site/data/tag-cloud.html | W914 | 页脚批次链插入 W914 |
-| site/dukou-engine.html | W914 | 页脚批次链插入 W914 |
-| AGENTS.md | W914 | 版本脚注条目 |
-| CITATION.cff | W914 | version 同步为 W914 |
-| scripts/output/file-index.md | W914 | W914 段插入 |
 
