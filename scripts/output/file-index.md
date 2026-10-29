@@ -15,20 +15,41 @@
 
 | 文件 | W | 说明 |
 |---|---|---|
+| .github/workflows/README.md | W1012 | 产物瘦身 / 在途收口 |
+| AGENTS.md | W1012 | 产物瘦身 / 在途收口 |
+| CHANGELOG.md | W1012 | 产物瘦身 / 在途收口 |
+| CITATION.cff | W1012 | 产物瘦身 / 在途收口 |
+| HANDOVER.md | W1012 | 产物瘦身 / 在途收口 |
+| README.md | W1012 | 产物瘦身 / 在途收口 |
+| STRUCTURE.md | W1012 | 产物瘦身 / 在途收口 |
 | archive/README.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/docs/AGENTS-ARCHIVE.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/docs/file-index-ARCHIVE.md | W1012 | 产物瘦身 / 在途收口 |
+| archive/scripts/batches/w8xx/README.md | W1012 | 产物瘦身 / 在途收口 |
 | archive/scripts/batches/w8xx/_w851_visual_snapshot_after.json | W1012 | 产物瘦身 / 在途收口 |
 | archive/scripts/batches/w8xx/_w851_visual_snapshot_before.json | W1012 | 产物瘦身 / 在途收口 |
 | archive/scripts/batches/w8xx/_w876_baseline_after.json | W1012 | 产物瘦身 / 在途收口 |
 | archive/scripts/batches/w8xx/_w876_baseline_before.json | W1012 | 产物瘦身 / 在途收口 |
+| archive/scripts/batches/w8xx/index.md | W1012 | 产物瘦身 / 在途收口 |
 | docs/00-导读/W批次编号对账表.md | W1012 | 产物瘦身 / 在途收口 |
+| docs/00-导读/项目说明.md | W1012 | 产物瘦身 / 在途收口 |
 | docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1012 | 产物瘦身 / 在途收口 |
 | docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1012 | 产物瘦身 / 在途收口 |
 | pytest.ini | W1012 | 产物瘦身 / 在途收口 |
-| scripts/output/_w851_visual_snapshot_after.json | W1012 | 产物瘦身 / 在途收口 |
-| scripts/output/_w851_visual_snapshot_before.json | W1012 | 产物瘦身 / 在途收口 |
-| scripts/output/_w876_baseline_after.json | W1012 | 产物瘦身 / 在途收口 |
-| scripts/output/_w876_baseline_before.json | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/README.md | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/_cascade_files_W1012.txt | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/_vermilion_solid_cache.json | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/_w1012_spec.json | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/file-index.md | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/index.md | W1012 | 产物瘦身 / 在途收口 |
+| scripts/output/stats.json | W1012 | 产物瘦身 / 在途收口 |
 | scripts/output/tools-inventory.md | W1012 | 产物瘦身 / 在途收口 |
+| site/data/cross-time-danmaku.html | W1012 | 产物瘦身 / 在途收口 |
+| site/data/tag-cloud.html | W1012 | 产物瘦身 / 在途收口 |
+| site/dukou-engine.html | W1012 | 产物瘦身 / 在途收口 |
+| site/index.html | W1012 | 产物瘦身 / 在途收口 |
 
 ## W1011 仓库整理分类批（2026-10-29）
 
