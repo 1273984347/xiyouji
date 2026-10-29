@@ -1,3 +1,20 @@
+### W1034（2026-10-30）：授业官位补全（项目级避坑 skill）
+
+> **来源**：用户 2026-10-30 选定 A（做授业官），并指定位置「`D://xiyouji//.agent` 内新建 skills 目录」。这是 T05（W831 批）中 **ST-11 授业官**这一步在现环境的落地。
+>
+> - **文件**：.agent/skills/xiyouji-guard/SKILL.md、.github/workflows/README.md、.gitignore、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、scripts/output/_w1034_spec.json、scripts/output/file-index.md、site/index.html
+
+**产物**：`.agent/skills/xiyouji-guard/SKILL.md`——**15 条最高频硬判据**，分四组：批次收官 4 条（先 add 再 refresh / refresh 后再同步 spec / git mv 两端 / changelog_body 前导空行）、判据与门禁 4 条（禁脆弱特征 / 先读原文与源码 / 禁豁免压绿 / token 在途不算事件）、历史与时效 4 条（历史段不改写 / 辨策略决定与已完成 / 步骤绑定旧环境 / 归档只解纵向）、人机协作 3 条（命令禁省略号 / 零引用不能按 .class 搜 / 改 md 连锁索引与 CSP）。每条一句话并指向 pitfalls 全表。
+
+**分层设计（为什么不是 123 条全塞进来）**：pitfalls 已 94 KB，全量做成 skill 会挤占上下文。skill 只放**速查**（15 条 + 查表命令 + 载体分工表），完整条目仍留 `docs/agent/pitfalls.md`——两者是「速查 → 详查」关系，不重复维护。
+
+**顺手解决的两个坑**：
+① **`.agent/` 原被 gitignore 整体忽略**（第 214 行），放进去的 skill 不进 git、别的 Agent 拿不到。改为 `.agent/*` + `!.agent/skills/` + `!.agent/skills/**` 放行——**父目录整体忽略时子路径 `!` 无效**，必须用 `dir/*` 形式才能例外。
+② **自动加载的路径差异（如实标注）**：系统自动加载只认 `.workbuddy/skills/`，本 skill 在 `.agent/skills/` 下**不会自动加载**。已在 `AGENTS.md` 加显式指针（「⚡ 速查 skill」一行），靠指针 + 主动查阅生效；要自动加载需另放一份到 `.workbuddy/skills/`，会形成双份维护，暂不做。
+
+**验证**：第 45 槽目录文档 0 FAIL（`.agent` 属隐藏目录不在在管扫描面）· 第 52 槽仓库布局 0 FAIL · 全量门禁 57 段核心全绿。
+
+> - **状态**：已收官（授业官位载体建成；ST-10 器物官按收益判断不做，ST-12 收官官现环境无接口）
 ### W1033（2026-10-30）：T05 计划状态校正（历史正文不改·只改时效标注）
 
 > **来源**：用户 2026-10-30 追问「那你为什么不改计划呢」——上一批我改了编制表（产物），却没动 T05（计划）。
@@ -584,7 +601,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1033），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1034），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1860,19 +1877,5 @@
 **B-W855-05 CHANGELOG 主动瘦身**：679KB（201 段现役·W711 审计时已超基线 11%+ 后继续涨至超基线 35%）——按文档规范 §5 归档规则执行 W736 同款一级迁移：**W700-W802 共 102 段迁 archive/docs/CHANGELOG-ARCHIVE.md**（迁后 CHANGELOG 363KB·低于 503KB 基线达标；ARCHIVE 978KB 未触 1MB tier2 阈·滚动分支零启用）。迁移脚本全断言（三文件段 W 号并集守恒 693 / 全局无重号 / 迁后倒序）·任一不符零落盘——首版 tier2 滚动分支缺陷即被守恒断言当场拦下（零落盘）后收缩窗口绕开。段内容零改动（纯位置迁移·历史段禁改纪律保持）。
 
 **验证**：第 17 门禁索引健康全过（段完整性/倒序/编号上限）·第 31 门禁 C4 仅批内在途残留。
-
-
-### W920（2026-10-24）：副本链值级对账门禁批（B-W855-04 清偿·基线冻结 24 件存量）
-
-
-
-> **来源**：用户 2026-10-24 令「继续」——T-18 D1 真债第二件（B-W855-04 副本链值级对账门禁）。
-
-> - **文件**：scripts/check_data_copy_chain.py、scripts/output/data-copy-chain-baseline.json、tests/unit/test_check_data_copy_chain.py、scripts/ci_sim.py、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w920_spec.json、scripts/output/_cascade_files_W920.txt（逐件行见 file-index W920 段）。
-> **状态**：**已收官**（W920 a85018d7·git 反填·共 2 笔·W971 存量回填）
-
-**B-W855-04 副本链值级对账门禁建置**：实测漂移定性——47 个入库副本中 24 个与生成器产物**值级真漂移**（非格式差异·三年无防线）。方向未定（入库副本为页面消费的生效真源·生成器产物 gitignored 本地）——翻旧账需逐个比对消费方（另批定性），本门禁按第 43 槽基线冻结模式**先防增量**：JSON 深度相等对账·存量 24 件入基线登记·基线外新漂移判红·恢复一致 NOTE 除名·源目录缺（CI 态）NOTE 放行（W716 json_count 键移除同因登记）。self-test 5/5（首版 T4 例自身逻辑错被复跑抓出修正——负样本测试再立功）·接 ci_sim 第 11 项。
-
-**验证**：self-test 5/5·主判据 0 FAIL（24 件全在基线内）·专项单测 2 例·第 42 门禁覆盖 0 FAIL·ruff All checks passed。
 
 

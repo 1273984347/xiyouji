@@ -11,6 +11,26 @@
 ---
 
 
+## W1034 授业官位补全（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/xiyouji-guard/SKILL.md | W1034 | 本批新增/修改 |
+| .github/workflows/README.md | W1034 | 本批新增/修改 |
+| .gitignore | W1034 | 本批新增/修改 |
+| AGENTS.md | W1034 | 本批新增/修改 |
+| CHANGELOG.md | W1034 | 本批新增/修改 |
+| CITATION.cff | W1034 | 本批新增/修改 |
+| HANDOVER.md | W1034 | 本批新增/修改 |
+| README.md | W1034 | 本批新增/修改 |
+| STRUCTURE.md | W1034 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1034 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1034 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1034 | 本批新增/修改 |
+| scripts/output/_w1034_spec.json | W1034 | 本批新增/修改 |
+| scripts/output/file-index.md | W1034 | 本批新增/修改 |
+| site/index.html | W1034 | 本批新增/修改 |
+
 ## W1033 T05 计划状态校正（2026-10-30）
 
 | 文件 | W | 说明 |
@@ -4664,30 +4684,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W921 | W921 段插入 |
 | scripts/output/_w921_spec.json | W921 | 本批级联 spec |
 | scripts/output/_cascade_files_W921.txt | W921 | 级联落盘清单 |
-
-## W920 副本链值级对账门禁批（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_data_copy_chain.py | W920 | 新增：数据副本链值级对账门禁（JSON 深度相等·基线冻结防增量·CI 态 NOTE 登记·self-test 5/5）——B-W855-04 清偿
-| scripts/output/data-copy-chain-baseline.json | W920 | 存量漂移基线（24 件登记态·方向定性另批）
-| tests/unit/test_check_data_copy_chain.py | W920 | 新增：门禁专项单测 2 例
-| scripts/ci_sim.py | W920 | GATES 清单 +副本链对账（第 11 项）
-| docs/00-导读/W批次编号对账表.md | W920 | W920 认领行与收官回填 |
-| CHANGELOG.md | W920 | W920 段 |
-| HANDOVER.md | W920 | 级联头尾链与里程碑块 |
-| README.md | W920 | 当前批次版本行 |
-| STRUCTURE.md | W920 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W920 | 当前批次版本行 |
-| .github/workflows/README.md | W920 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W920 | 页脚批次链插入 W920 |
-| site/data/cross-time-danmaku.html | W920 | 页脚批次链插入 W920 |
-| site/data/tag-cloud.html | W920 | 页脚批次链插入 W920 |
-| site/dukou-engine.html | W920 | 页脚批次链插入 W920 |
-| AGENTS.md | W920 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W920 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W920 | version 同步为 W920 |
-| scripts/output/file-index.md | W920 | W920 段插入 |
-| scripts/output/_w920_spec.json | W920 | 本批级联 spec |
-| scripts/output/_cascade_files_W920.txt | W920 | 级联落盘清单 |
 
