@@ -9,30 +9,8 @@
  "milestone_block": "- **W1031 取经编制表数据重核**（A 方案）：\n  - 核实三处编制位：器物官脚本在、授业官载体在、本地技能目录存在（与 10-20 记载相反）\n  - 头部加「数据时效 / 修订触发」：60 天到期 + 生态变动即重核，防「旧数据当现状」\n  - §3 辨析「空缺=未挂载非未写代码」；§4.1 标数据过期并给重核命令\n  - 结构未砍：§2 编制卡是核心价值（怎么用/不能做），删即砍内容",
  "agents_note": "2026-10-30（W1031）编制表重核：数据时效与修订触发入表。空缺指未挂载，不是未写代码。",
  "file_index_rows": [
-  "| .github/workflows/README.md | W1031 | 本批新增/修改 |",
-  "| AGENTS.md | W1031 | 本批新增/修改 |",
-  "| CHANGELOG.md | W1031 | 本批新增/修改 |",
-  "| CITATION.cff | W1031 | 本批新增/修改 |",
-  "| HANDOVER.md | W1031 | 本批新增/修改 |",
-  "| README.md | W1031 | 本批新增/修改 |",
-  "| STRUCTURE.md | W1031 | 本批新增/修改 |",
-  "| archive/docs/AGENTS-ARCHIVE.md | W1031 | 本批新增/修改 |",
-  "| archive/docs/CHANGELOG-ARCHIVE.md | W1031 | 本批新增/修改 |",
-  "| archive/docs/W批次编号对账表-ARCHIVE.md | W1031 | 本批新增/修改 |",
-  "| archive/docs/file-index-ARCHIVE.md | W1031 | 本批新增/修改 |",
   "| docs/00-导读/W批次编号对账表.md | W1031 | 本批新增/修改 |",
-  "| docs/00-导读/项目说明.md | W1031 | 本批新增/修改 |",
-  "| docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md | W1031 | 本批新增/修改 |",
-  "| scripts/output/README.md | W1031 | 本批新增/修改 |",
-  "| scripts/output/_cascade_files_W1031.txt | W1031 | 本批新增/修改 |",
-  "| scripts/output/_w1031_spec.json | W1031 | 本批新增/修改 |",
-  "| scripts/output/file-index.md | W1031 | 本批新增/修改 |",
-  "| scripts/output/index.md | W1031 | 本批新增/修改 |",
-  "| scripts/output/stats.json | W1031 | 本批新增/修改 |",
-  "| scripts/output/tools-inventory.md | W1031 | 本批新增/修改 |",
-  "| site/data/cross-time-danmaku.html | W1031 | 本批新增/修改 |",
-  "| site/data/tag-cloud.html | W1031 | 本批新增/修改 |",
-  "| site/dukou-engine.html | W1031 | 本批新增/修改 |",
-  "| site/index.html | W1031 | 本批新增/修改 |"
+  "| scripts/output/_vermilion_solid_cache.json | W1031 | 本批新增/修改 |",
+  "| scripts/output/_w1031_spec.json | W1031 | 本批新增/修改 |"
  ]
 }
