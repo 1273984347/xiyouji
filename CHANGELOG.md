@@ -1,3 +1,18 @@
+### W1024（2026-10-30）：本次任务教训固化对账（补 4 条坑 + 计数订正）
+
+> **来源**：用户 2026-10-30 三问——「这次任务中遇到过的问题都在任务中解决了吗 / 以后还会再次犯错吗 / 其他 Agent 在后续工作中能够了解吗」。这是教训固化审计，不是功能批。
+>
+> **做法**：把 W1019–W1023 踩过的 19 类问题逐条对账两个维度——**是否已机器化**（有门禁/守卫/自测能自动拦住）、**是否入坑表**（其他 Agent 检索得到）。查出 4 条真缺口（已修代码但没写教训，或压根没写），本批补齐。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/agent/batch-closeout-checklist.md、docs/agent/pitfalls.md、scripts/output/_w1024_spec.json、scripts/output/file-index.md、site/index.html
+
+**补的 4 条坑（均为「代码修了但教训未落载体」）**：① **「零引用」判定不能按 `.class` 搜**——HTML 写的是 `class="btn"`（不带点），W1019 初版 grep `\.btn` 判出 78 个「零引用」类，实则全在用（含 `.btn`/`.badge`/`.kpi-grid`），差点整批删除；② **`git mv` 删除侧旧路径也要进 spec**——`file_index_rows` 只写新路径会让第 51 槽判「代提他方件」；③ **护栏要覆盖默认路径不只 `--force`**——`inline_css` 裸跑会一次内联 526 个外链页，正是护栏想防的事；④ **改/加 md 连锁触发搜索索引与 CSP**——W1022/W1023 连踩两次（改 md → 索引条目不符 → 重算 CSP → 又红一次），已把「改 md → 重建索引 → 重算 CSP → 跑门禁」固定进收官 checklist。
+
+**顺带查出的计数腐坏**：AGENTS 的六主题分项行停在 `25/25/15/10/28=109` 的旧值上长期无人核（实测应为 `26/6/26/19/11/34`），而我手算总数得 121、实算为 **122** ⇒ 已订正四处，并在 checklist 加「改坑表必须实算分项」（这条属于**机器查不出、只能靠 checklist** 的类别，如实标注）。
+
+**验证**：坑表 118→122 条（CSS 26 / JS 6 / git 26 / 级联 19 / 数据 11 / 流程 34，分项之各与总数均与实测一致）· AGENTS/HANDOVER 四处计数同步 · 收官 checklist 补 2 个 checkbox · 全量门禁 57 段核心全绿。
+
+> - **状态**：已收官（19 类问题对账完毕：15 类已机器化 + 4 类本轮补入载体；剩余不可机器化项列入 checklist）
 ### W1023（2026-10-30）：提示词库派发骨架补齐（3 项）
 
 > **来源**：用户 2026-10-30 令「补完」——接续 W1022 结项时登记的余 3 项提示词模板。
@@ -376,7 +391,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1023），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1024），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1837,20 +1852,4 @@
 
 > - **状态**：已收官（README 门面改版完成·台账结构归位·门禁全绿）。
 > **状态**：**已收官**（W909 e8697fcd·git 反填·共 3 笔·W971 存量回填）
-
-### W906（2026-10-24）：C4-f 三态化（并行批次登记行纯追加残留放行·多 Agent 误拦根修）
-
-
-
-> **来源**：用户 2026-10-24 对「C4-f 三态化（多 Agent 并行误拦根修）」建议裁决「可以」——W904 收官提交被并行 W905 会话的台账认领行（未暂存）拦停一次的实录驱动。
-
-> - **文件**：scripts/check_doc_sync.py、docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w906_spec.json、scripts/output/_cascade_files_W906.txt（逐件行见 file-index W906 段）。
-> **状态**：**已收官**（W906 831b5436·git 反填·共 2 笔·W971 存量回填）
-
-**C4-f 三态化（并行在途与漏 add 分流）**：declared 文件的工作树残留，原二态判「漏 add」必红；现若该文件未暂存 diff 为**纯追加**（零删改行 + 新增行全部 `| WNNN ` 批次登记行形态）→ 降 NOTE 放行（他方在途·以 HEAD 为准不重做）——与 W896「未跟踪在途件容忍」同族收口。**在位编辑（如状态列收官回填）含删改行照旧必红**，判据无弱化。实现：`_foreign_append_only()` 在 build_inputs 逐 dirty 文件 `git diff` 判形（git 探测不可用则该文件不计入·保守回退原 FAIL·fail-closed 方向）；self-test 增 T32（纯追加放行）/T33（非追加仍红）双向锁，33/33；主判据实跑在本批未暂存认领行在场时出 NOTE 零红——修复目标当场实证。
-
-**审查报告增 F5 节**：C4-f 并行误拦的实录（含 package.json 混入暂存的处置）、根因（二态盲区）、修复与配套操作纪律（按清单 add / 他方件只移暂存不动磁盘 / 他方认领行随批携带标注归属）；遗留盘点表 F1 行订正为已修、新增本项已落地行。
-
-**验证**：self-test 33/33·主判据 C4-f 三态 NOTE 实证·ruff scripts/ All checks passed·pytest 858 passed 3 skipped·verify 全量核心全绿。
-
 

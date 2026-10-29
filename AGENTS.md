@@ -173,13 +173,13 @@ verify_delivery.py 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` �
 
 ### 4.3 工具链要点（摘要层 · 坑位全量已迁 L2）
 
-> **📖 阅读契约（W709）**：索引型——118 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
+> **📖 阅读契约（W709）**：索引型——122 条坑位按六主题迁 [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（含 shell 场景查坑表）；本节保留主题视图与高频铁则。
 
 **主题视图（W706·按需查坑·正文按批次序不动）**：CSS 类=W557 基类丢失/W558 缺分号/W673 三门禁/W571 inline_css 分发/W582-W589 暗色族；JS 类=W575 空选区与触屏坑/W568 Express close 语义/W674 defer 时序/W656 audit 单模块；git 提交类=W649 级联清单与并行互斥/W698 scope+safe_commit/W537 三新规/W514 heredoc/W509 BOM 禁；级联类=W553 CRLF 翻倍/W664 desc 分隔符/W663 跳号手工先例/W679 日期串误报/W705 插入保留锚点/W1005 跨行吞并+尾缀白名单；数据类=W691 计数钉与旧值扫描/W693 残留标记门禁/W565 部署态冒烟/W703-704 stats 对账；文档类=W520 字面量禁/W496 数字现测/W663 doc-sync/W706 元规则与标识符禁令；Windows 类=W509 BOM/W514 heredoc/W535 路径实参/W706 终端编码兜底；视觉渲染类另含素材出图规格（W974 三条：bbox 顶≠主体顶·出图器物形状类别>数量计数·落位页先验）。
 
 **最高频铁则（全文见 pitfalls.md）**：改内联脚本必跑 generate_csp.py；批量改 CSS/JS 验括号平衡；多行逻辑禁 shell heredoc 落 Python 文件；同文件 Edit 串行；级联后按清单 git add；认领批次登记 touches·动工前 `preflight_check.py --touches <清单> --self W###` 查在途交集（跨 Agent 版「同文件串行」）；批次收官提交一律 `safe_commit.py --expect-spec scripts/output/_w###_spec.json`（索引只许含本批件·防代提硬拦 W1006）。
 
-**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS / 视觉渲染（25）·JS / CSP / 运行时（6）·git / 提交 / 并发（25）·级联 / CHANGELOG（15）·数据 / 内容可信度（10）·流程 / 协作 / 取证（28）
+**六主题目录 → [docs/agent/pitfalls.md](docs/agent/pitfalls.md)**：CSS / 视觉渲染（26）·JS / CSP / 运行时（6）·git / 提交 / 并发（26）·级联 / CHANGELOG（19）·数据 / 内容可信度（11）·流程 / 协作 / 取证（34）
 
 **本机环境事实（Windows 单机·机器相关不入 L2·随实测滚动更新）**：
 - `make` 未安装：Makefile 目标不可用，直调 `python scripts/<对应脚本>`（映射见 Makefile 注释）。
@@ -296,4 +296,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1018-W1018 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-10-30（W1019）收 BL-33 与 BL-29：两条 Backlog 登记面均滞后于实况，动手前先核 git 与测试实况再决定做不做，别照登记盲干；2026-10-30（W1020）Backlog 对账：29 条里 12 条已解决却仍挂待办。判据是 git 与测试实况，不是条目自述；已完成条目整条移出；2026-10-30（W1021）Backlog 对账触发器：≥25 批未对账由 preflight 点名。判据是台账事件 token，不是条目自述；2026-10-30（W1022）对抗审查：审查与修复分离。抓出 fail-open 假绿与 eol 契约背离，判据补回归锁；2026-10-30（W1023）补完提示词库余三项：派发骨架就地并入原文件，不另立补充篇。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 BL-23 建·W713 续迁 W701-W707·W719 续迁 W708-W714·W1019-W1019 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字（W989 收紧）·日期一律阿拉伯形态（W964 定形契约·中文数字形态曾致滚动器失明）·grep 查勿通读）；2026-10-30（W1020）Backlog 对账：29 条里 12 条已解决却仍挂待办。判据是 git 与测试实况，不是条目自述；已完成条目整条移出；2026-10-30（W1021）Backlog 对账触发器：≥25 批未对账由 preflight 点名。判据是台账事件 token，不是条目自述；2026-10-30（W1022）对抗审查：审查与修复分离。抓出 fail-open 假绿与 eol 契约背离，判据补回归锁；2026-10-30（W1023）补完提示词库余三项：派发骨架就地并入原文件，不另立补充篇；2026-10-30（W1024）教训对账：19 类问题中 4 类只修了代码没落载体，已补坑并订正腐坏计数。如与上述权威文档冲突，以权威文档为准。*

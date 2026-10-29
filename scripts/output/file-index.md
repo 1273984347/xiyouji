@@ -11,6 +11,26 @@
 ---
 
 
+## W1024 本次任务教训固化对账（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1024 | 本批新增/修改 |
+| AGENTS.md | W1024 | 本批新增/修改 |
+| CHANGELOG.md | W1024 | 本批新增/修改 |
+| CITATION.cff | W1024 | 本批新增/修改 |
+| HANDOVER.md | W1024 | 本批新增/修改 |
+| README.md | W1024 | 本批新增/修改 |
+| STRUCTURE.md | W1024 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1024 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1024 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1024 | 本批新增/修改 |
+| docs/agent/batch-closeout-checklist.md | W1024 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1024 | 本批新增/修改 |
+| scripts/output/_w1024_spec.json | W1024 | 本批新增/修改 |
+| scripts/output/file-index.md | W1024 | 本批新增/修改 |
+| site/index.html | W1024 | 本批新增/修改 |
+
 ## W1023 提示词库派发骨架补齐（2026-10-30）
 
 | 文件 | W | 说明 |
@@ -4737,28 +4757,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W909 | W909 段插入 |
 | site/data/search.html | W909 | 站内搜索索引内嵌刷新（zh） |
 | site/en/search.html | W909 | 站内搜索索引内嵌刷新（en） |
-
-## W906 C4-f 三态化（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/check_doc_sync.py | W906 | C4-f 三态化（管控件·用户批准）：declared 文件残留为「他方批次登记行纯追加」（零删改+全 | WNNN 形态）降 NOTE 放行·在位编辑仍红；新增 _foreign_append_only 探测（git diff 逐 dirty 文件）+ RE_BATCH_REGISTRY_ROW + self-test T32/T33（33/33） |
-| docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md | W906 | 新增 F5 节（C4-f 并行误拦实录与修复）+ 遗留盘点表两行更新（F1 已修/W906 落地） |
-| docs/00-导读/W批次编号对账表.md | W906 | W906 认领行与收官回填 |
-| CHANGELOG.md | W906 | W906 段 |
-| HANDOVER.md | W906 | 级联头尾链与里程碑块 |
-| README.md | W906 | 当前批次版本行 |
-| STRUCTURE.md | W906 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W906 | 当前批次版本行 |
-| .github/workflows/README.md | W906 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W906 | 页脚批次链插入 W906 |
-| site/data/cross-time-danmaku.html | W906 | 页脚批次链插入 W906 |
-| site/data/tag-cloud.html | W906 | 页脚批次链插入 W906 |
-| site/dukou-engine.html | W906 | 页脚批次链插入 W906 |
-| AGENTS.md | W906 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W906 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W906 | version 同步为 W906 |
-| scripts/output/file-index.md | W906 | W906 段插入 |
-| scripts/output/_w906_spec.json | W906 | 本批级联 spec |
-| scripts/output/_cascade_files_W906.txt | W906 | 级联落盘清单 |
 
