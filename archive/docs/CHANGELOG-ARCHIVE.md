@@ -13,6 +13,20 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W898（2026-10-23）：宣传物料投放接线与派生（README 物料小节 + 站内入口 + 英文版单页 + 社媒分享图指引 + 规范受管资产登记）
+
+> **来源**：用户 2026-10-23 批准「D 宣传单页投放接线（README 物料说明 / 站内入口 / 英文版 / 社媒长图）」。
+> - **文件**：assets/promo/xiyouji-flyer-a4-en.html、assets/promo/output/xiyouji-flyer-a4-en.pdf、assets/promo/output/xiyouji-flyer-a4-en-front.png、assets/promo/output/xiyouji-flyer-a4-en-back.png、assets/promo/README.md、assets/promo/index.md、assets/promo/output/index.md、scripts/_w892_export_flyer.mjs、README.md、site/index.html、docs/00-导读/文档规范.md、docs/00-导读/W批次编号对账表.md。
+> - **README 物料小节**：新增「📄 宣传单页（A4 双面 · 可打印可转发）」——中英双份的 PDF 打印稿 / 分享图 / 可编辑源三列表 + 重出命令 + 社媒分享图指引（站内已有 15 张 1200×630 分享图 `og-*.webp` 可直接取用）。
+> - **站内入口**：`site/index.html` 的「看数据与工具」区新增一行指向**仓库**物料目录的链接——Pages 只发布 `site/` 目录，站内不可用相对路径，故走 GitHub 仓 URL；纯 HTML 改动不动内联脚本 ⇒ CSP 哈希零漂移。
+> - **英文版单页**：新增 `xiyouji-flyer-a4-en.html` + 双面 PDF + 正反 PNG；导出脚本加 `--en` 档（同一脚本同一栅格，仅换文案）。英文词长、字面比中文长约 30%，中文版字号在英文版必溢出 ⇒ 单独一段 EN 版排版微调（四轮收紧：页眉 tagline 改可换行限宽、卖点卡与资产卡字号行高逐档收紧、内容地图与联系区行距压缩）⇒ **两页 0px 溢出**；并做三处本地化修正：纯图形 logo 替中文字标、KPI 去中文单位（615 essays / 87 visualisations / 133 dimensions / 34 analysis scripts）、两张配图 alt 全译。
+> - **规范受管资产登记**：`docs/00-导读/文档规范.md` §11.2 受管文件清单新增 `assets/promo/` 一行（禁止删除/重命名·删除后 README 与站内入口变死链）。
+> - **验收**：中文版与英文版**两页均 0px 溢出**（探针：末子元素底边 − 内容底边）·导出零外域请求 ·思源宋体真加载 ·PDF 实测 2 页 A4（中文版 6.27 MB / 英文版 4.69 MB）·PNG 1240×1754（150dpi）·CSP 856 页 0 漂移 ·全仓链接 20759 个 0 broken ·CSS 结构平衡通过。
+> - **CI 收尾修正（推送后 CI 实证）**：① `ci-sim.yml` 首跑红——CI 环境**未装 pytest**，而 `stats.py` 的 `pytest_collected` 键是 fail-closed 实测（无 pytest 即判红）⇒ 连带第 31 门禁 C5d 假红⇒ workflow 补装 pytest；② **ruff 24 项**（含本批引入的 5 项 + 存量 19 项）⇒ 机械清理至 **0 error**（`stats.py` 删未用 import/变量并把 `tracked_files` 导入移到文件头、三个脚本同款、`tracked_files.py` 补 `stacklevel`、tests/ 存量 19 项同步清理·零行为变更）；③ **第 45 门禁既有单测 7 项失败**（`tests/unit/test_folder_docs_gate.py`）——根因是门禁新口径只认 git 索引，而测试用的**合成树在仓库外**⇒ 补「**仓库外目录回退磁盘口径**」（真实仓库根判定·合成树/临时目录走磁盘口径）⇒ 16 项全过；④ 进一步把**在管目录集**也改索引口径（`gen.tracked_dirs()`）——并行批**在途的新目录**（全部文件未跟踪）不进集 ⇒ 不再被判「C1 缺 README.md」；已入库目录缺文档仍判红。⑤ **全量 pytest 11 项失败**（`test_docs_index.py` / `unit/test_docs_index.py`）——与 ③ 同根因：`docs_index.scan_docs` 默认走索引口径，而其单测同样用**仓库外合成树** ⇒ 补同款「仓库外 ⇒ 磁盘扫描」回退 ⇒ 30/30 过；⑥ **品牌字面量门禁命中 3 处**——某**会话运行态目录**（每会话重建·本不该入库）此前被误 `add` 进仓 ⇒ `git rm --cached` 移出索引 + `.gitignore` 补排除规则（**该字面量本身受禁·故规则用通配符写、注释亦不点名**）⇒ 品牌门禁 **0 命中**。
+**复验**：造 1 个未跟踪文件 + 1 个未跟踪目录时第 45 门禁 **0 FAIL**（核心目标达成）·self-test 7/7 ·ruff **0 error** ·16 项单测全过。
+> - **踩坑记录**：EN 版第一轮溢出 270px/266px（英文长句叠行）⇒ 修法不是继续压字号而是先修**宽度根因**（页眉 tagline 的 `white-space: nowrap` 使整列溢出 82px）；第二轮仍高 57/131px ⇒ 再逐档收紧到零溢出。教训：**先分「宽度溢出」与「高度溢出」两类**，宽度问题不修则高度怎么压都不对。
+> **状态**：**已收官**（W898 b2334ad8·git 反填·共 6 笔·W971 存量回填）
+
 ### W897（2026-10-23）：协作防护修复（preflight touches 分隔符根修 + ci_sim 接进 CI）
 
 > **来源**：用户 2026-10-23 批准「A 修 preflight 的 touches 分隔符 bug」+「C 把 ci_sim.py 接进 CI workflow」。

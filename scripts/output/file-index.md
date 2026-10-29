@@ -11,6 +11,15 @@
 ---
 
 
+## W1017 产物目录归位 + 临时区清理批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CHANGELOG.md | W1017 | 产物目录归位 / 临时区清理 |
+| STRUCTURE.md | W1017 | 产物目录归位 / 临时区清理 |
+| archive/README.md | W1017 | 产物目录归位 / 临时区清理 |
+| docs/00-导读/W批次编号对账表.md | W1017 | 产物目录归位 / 临时区清理 |
+
 ## W1016 教训固化批（2026-10-29）
 
 | 文件 | W | 说明 |
@@ -4030,21 +4039,4 @@ docs/11-方案报告/README.md
 | archive/docs/AGENTS-ARCHIVE.md | W899 | 脚注滚动迁入的最老条目 |
 | CITATION.cff | W899 | version 同步为 W899 |
 | scripts/output/file-index.md | W899 | W899 段插入 |
-
-## W898 宣传物料投放接线与派生（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| assets/promo/xiyouji-flyer-a4-en.html | W898 | 英文版单页（同一栅格·EN 版专属排版微调·两页 0px 溢出） |
-| assets/promo/output/xiyouji-flyer-a4-en.pdf | W898 | 英文版双面 PDF（2 页 A4） |
-| assets/promo/output/xiyouji-flyer-a4-en-front.png | W898 | 英文版正面 PNG（1240×1754） |
-| assets/promo/output/xiyouji-flyer-a4-en-back.png | W898 | 英文版背面 PNG（1240×1754） |
-| assets/promo/README.md | W898 | 目录导读补英文版与投放接线说明 |
-| scripts/_w892_export_flyer.mjs | W898 | 导出脚本加 `--en` 档（英文版 PDF + PNG） |
-| README.md | W898 | 新增「📄 宣传单页（A4 双面）」物料小节 |
-| site/index.html | W898 | 「看数据与工具」区新增宣传单页入口（指向仓库物料目录） |
-| docs/00-导读/文档规范.md | W898 | §11.2 受管资产表新增 assets/promo/ 一行 |
-| docs/00-导读/W批次编号对账表.md | W898 | 认领行与收官回填 |
-| CHANGELOG.md | W898 | W898 段 |
-| scripts/output/file-index.md | W898 | 同批段回写 |
 

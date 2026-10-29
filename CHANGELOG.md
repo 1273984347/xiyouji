@@ -1,3 +1,21 @@
+### W1017（2026-10-29）：产物目录归位 + 临时区清理批
+
+> **来源**：用户 2026-10-29 回复「A+B」（承接上一轮三问后的取证提议）：A＝产物目录瘦身、B＝`tmpe` 深度清理（并明确授权删除 `_trash` 超期件与 `node_modules`）。
+>
+> - **文件**：CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/README.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、scripts/output/file-index.md、scripts/output/README.md、scripts/output/index.md、scripts/output/stats.json、scripts/output/tools-inventory.md（另 366 件历史产物按批号迁 `archive/scripts/batches/w7xx|w8xx|w9xx|w10xx/`，逐项见 file-index W1017 段与归档台账）
+>
+**要点**：
+① **四面对照扫描定去留**（不凭体积拍脑袋）：对 `scripts/output` 全部 689 件受跟踪件，逐件在四面对照面——活代码 `scripts/`（非 archive）、`tests/`、`.github/`+`mcp-server/`、现役 `docs/` 与根治理文档——做 basename 全仓检索（排除 archive 与 tmpe 这两个冷存储面）。结果：**366 件零引用**（w7xx 139 / w8xx 146 / w9xx 75 / w10xx 6；含 208 json + 147 txt + 4 py + 3 png 4.6MB + 3 err + 1 css）→ `git mv` 入 `archive/scripts/batches/<段>/`；**323 件有引用一律保留**。
+② **两处「看着像垃圾但不能搬」**：`_w*_spec.json` 248 件被 `backfill_changelog.py` 全量 glob 用于给未立段批次补 CHANGELOG 段——搬走等于断掉补段能力（W1015 正是缺段的在途批），故**全部保留**；门禁缓存 `_vermilion_solid_cache.json`（第 49 槽按页 hash 增量）与 `_w864_accent_exemptions.json`（朱砂豁免表）被活门禁读，亦保留。
+③ **产物目录边界立规**：`STRUCTURE.md` 新增「输出目录边界」行——output 只放活产物；历史一次性件按批号入档（W1012 立原则，本批完成全量归位）。
+④ **tmpe 授权清理（本次唯一删除动作）**：严格走契约——先列清单落 `tmpe/_reports/purge-<时间戳>.txt`，再经 PowerShell `Microsoft.VisualBasic.FileIO.FileSystem` 的 `SendToRecycleBin` **移入回收站**（禁 `rm -rf`/`del /S /Q`）。清 `_trash` 超 7 天非保护件 64 件 + `w607_docxgen/node_modules` = 53.4MB。
+⑤ **个人稿保护实证生效**：`protect_globs`（匿名稿/装饰投稿版/投稿/mqxs_anon/mqxs_submission/hallmark/papercheck/audit_.*_paper_data）之外，本批另按「匿名/投稿/适配版」保守补强——**36 件个人投稿稿 19.1MB 全部保留未删**（含 `设计方向-南艺适配版（匿名）.docx` 系列），与契约 §3「个人文件安全铁律」一致。
+⑥ 效果：`scripts/output` 跟踪件 **689→323**；`tmpe` 总量 **173.4→112.2MB**（`_trash` 122.4→78MB）；归档区 tracked 1166→1532 件。
+
+**验证**：四处引用扫描输出可复核（`tmpe/_w1017_move.tsv` 366 行·归位后自检 0 失败）· `check_archive_health` 0 项待办（段级双向对账绿）· 归档台账追加 5 行（含段级计数声明：w7xx 240 / w8xx 192 / w9xx 302 / w10xx 46 内容件，元数据 README+index 不计）· 全量 verify 核心全过。
+
+> - **状态**：已收官（产物目录回归活产物单一职责 + 临时区授权清理）
+
 ### W1016（2026-10-29）：教训固化批
 
 > **来源**：用户 2026-10-29 三问「这次任务中遇到的问题都解决了吗·以后还会再犯错吗·多 Agent 项目其他 Agent 后续能了解到吗」——直指 W1014 的**载体缺口**：缺陷代码修了，但教训未落 `docs/agent/pitfalls.md` ⇒ 违反 §6-14「跨会话教训权威落坑表与本节，私有记忆仅作镜像」。故本批不新增功能，只做**教训固化**。
@@ -245,7 +263,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1016），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1017），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1867,18 +1885,4 @@
 
 > - **状态**：已收官（合并后收尾修正·两处入库件与实况对齐）。
 > **状态**：**已收官**（W899 68f1a7bf·git 反填·共 2 笔·W971 存量回填）
-
-### W898（2026-10-23）：宣传物料投放接线与派生（README 物料小节 + 站内入口 + 英文版单页 + 社媒分享图指引 + 规范受管资产登记）
-
-> **来源**：用户 2026-10-23 批准「D 宣传单页投放接线（README 物料说明 / 站内入口 / 英文版 / 社媒长图）」。
-> - **文件**：assets/promo/xiyouji-flyer-a4-en.html、assets/promo/output/xiyouji-flyer-a4-en.pdf、assets/promo/output/xiyouji-flyer-a4-en-front.png、assets/promo/output/xiyouji-flyer-a4-en-back.png、assets/promo/README.md、assets/promo/index.md、assets/promo/output/index.md、scripts/_w892_export_flyer.mjs、README.md、site/index.html、docs/00-导读/文档规范.md、docs/00-导读/W批次编号对账表.md。
-> - **README 物料小节**：新增「📄 宣传单页（A4 双面 · 可打印可转发）」——中英双份的 PDF 打印稿 / 分享图 / 可编辑源三列表 + 重出命令 + 社媒分享图指引（站内已有 15 张 1200×630 分享图 `og-*.webp` 可直接取用）。
-> - **站内入口**：`site/index.html` 的「看数据与工具」区新增一行指向**仓库**物料目录的链接——Pages 只发布 `site/` 目录，站内不可用相对路径，故走 GitHub 仓 URL；纯 HTML 改动不动内联脚本 ⇒ CSP 哈希零漂移。
-> - **英文版单页**：新增 `xiyouji-flyer-a4-en.html` + 双面 PDF + 正反 PNG；导出脚本加 `--en` 档（同一脚本同一栅格，仅换文案）。英文词长、字面比中文长约 30%，中文版字号在英文版必溢出 ⇒ 单独一段 EN 版排版微调（四轮收紧：页眉 tagline 改可换行限宽、卖点卡与资产卡字号行高逐档收紧、内容地图与联系区行距压缩）⇒ **两页 0px 溢出**；并做三处本地化修正：纯图形 logo 替中文字标、KPI 去中文单位（615 essays / 87 visualisations / 133 dimensions / 34 analysis scripts）、两张配图 alt 全译。
-> - **规范受管资产登记**：`docs/00-导读/文档规范.md` §11.2 受管文件清单新增 `assets/promo/` 一行（禁止删除/重命名·删除后 README 与站内入口变死链）。
-> - **验收**：中文版与英文版**两页均 0px 溢出**（探针：末子元素底边 − 内容底边）·导出零外域请求 ·思源宋体真加载 ·PDF 实测 2 页 A4（中文版 6.27 MB / 英文版 4.69 MB）·PNG 1240×1754（150dpi）·CSP 856 页 0 漂移 ·全仓链接 20759 个 0 broken ·CSS 结构平衡通过。
-> - **CI 收尾修正（推送后 CI 实证）**：① `ci-sim.yml` 首跑红——CI 环境**未装 pytest**，而 `stats.py` 的 `pytest_collected` 键是 fail-closed 实测（无 pytest 即判红）⇒ 连带第 31 门禁 C5d 假红⇒ workflow 补装 pytest；② **ruff 24 项**（含本批引入的 5 项 + 存量 19 项）⇒ 机械清理至 **0 error**（`stats.py` 删未用 import/变量并把 `tracked_files` 导入移到文件头、三个脚本同款、`tracked_files.py` 补 `stacklevel`、tests/ 存量 19 项同步清理·零行为变更）；③ **第 45 门禁既有单测 7 项失败**（`tests/unit/test_folder_docs_gate.py`）——根因是门禁新口径只认 git 索引，而测试用的**合成树在仓库外**⇒ 补「**仓库外目录回退磁盘口径**」（真实仓库根判定·合成树/临时目录走磁盘口径）⇒ 16 项全过；④ 进一步把**在管目录集**也改索引口径（`gen.tracked_dirs()`）——并行批**在途的新目录**（全部文件未跟踪）不进集 ⇒ 不再被判「C1 缺 README.md」；已入库目录缺文档仍判红。⑤ **全量 pytest 11 项失败**（`test_docs_index.py` / `unit/test_docs_index.py`）——与 ③ 同根因：`docs_index.scan_docs` 默认走索引口径，而其单测同样用**仓库外合成树** ⇒ 补同款「仓库外 ⇒ 磁盘扫描」回退 ⇒ 30/30 过；⑥ **品牌字面量门禁命中 3 处**——某**会话运行态目录**（每会话重建·本不该入库）此前被误 `add` 进仓 ⇒ `git rm --cached` 移出索引 + `.gitignore` 补排除规则（**该字面量本身受禁·故规则用通配符写、注释亦不点名**）⇒ 品牌门禁 **0 命中**。
-**复验**：造 1 个未跟踪文件 + 1 个未跟踪目录时第 45 门禁 **0 FAIL**（核心目标达成）·self-test 7/7 ·ruff **0 error** ·16 项单测全过。
-> - **踩坑记录**：EN 版第一轮溢出 270px/266px（英文长句叠行）⇒ 修法不是继续压字号而是先修**宽度根因**（页眉 tagline 的 `white-space: nowrap` 使整列溢出 82px）；第二轮仍高 57/131px ⇒ 再逐档收紧到零溢出。教训：**先分「宽度溢出」与「高度溢出」两类**，宽度问题不修则高度怎么压都不对。
-> **状态**：**已收官**（W898 b2334ad8·git 反填·共 6 笔·W971 存量回填）
 

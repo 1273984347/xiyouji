@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（40）
+## 文件（47）
 
 ### Python 脚本
 
@@ -55,6 +55,16 @@
 - `_w1013_shot.py`
 - `_w1013_stage.py`
 - `_w1013_verify.py`
+- `_w1016_pick.py`
+
+### 数据与配置
+
+- `_cascade_files_W1000.txt`
+- `_cascade_files_W1001.txt`
+- `_cascade_files_W1014.txt`
+- `_w1000_spec.json`
+- `_w1001_spec.json`
+- `_w1014_spec.json`
 
 ---
 

@@ -101,6 +101,16 @@ archive/
 | `archive/docs/w-b-critique.md` | W735 大归档期 docs 侧评论草稿 | W735（提交 1fd372b4） | 2026-10-13 | 批次完结归档·**W1014 补登记**（W735 组行按目录登记·此单件未入目录） |
 
 ---
+| `archive/scripts/batches/w7xx/`（+139 件·W1017 归档） | `scripts/output/` 历史级联清单/批次规格/一次性脚本与审图件（W701-W799 段·四处零引用扫描确认） | W1017 | 2026-10-29 | 产物目录回归「活产物单一职责」（续 W1012）：`scripts/output` 跟踪件 689→323，历史件按批号入段 |
+| `archive/scripts/batches/w8xx/`（+146 件·W1017 归档） | `scripts/output/` 历史件（W800-W899 段·同上扫描口径） | W1017 | 2026-10-29 | 同上；本段含 `_w851_tokens_prelanding.css`、`_w876_*` 等一次性产物 |
+| `archive/scripts/batches/w9xx/`（+75 件·W1017 归档） | `scripts/output/` 历史件（W900-W999 段·同上扫描口径） | W1017 | 2026-10-29 | 同上；本段含 3 张审图 PNG（`_w999_sheet` 3.18MB / `_w986_chap_sheet` / `_w986_family_sheet`）与 `_w9xx_serve.err` 运行日志 |
+| `archive/scripts/batches/w10xx/`（+6 件·W1017 归档） | `scripts/output/` 历史件（W1000-W1015 段·同上扫描口径） | W1017 | 2026-10-29 | 同上；**保留** W1010+ 的 `_cascade_files_W*.txt` 与全部 `_w*_spec.json`（前者被 CHANGELOG 文件行引用、后者被 `backfill_changelog.py` 全量 glob） |
+| `archive/scripts/batches/w7xx|w8xx|w9xx|w10xx/`（合计 +366 件·W1017） | `scripts/output/` 历史产物 | W1017 | 2026-10-29 | 段级计数声明：归档后 w7xx 240 内容件 / w8xx 192 / w9xx 302 / w10xx 46（元数据 README.md+index.md 各 +2 不计入 N 件） |
+
+---
+| rchive/scripts/batches/w10xx/_w1016_pick.py（1 件·代收） | scripts/_w1016_pick.py（缺口 68 回角色谱选材一次性件） | W1017 代收 | 2026-10-29 | 并行会话遗留（随 7771c9d3 入库·自称 W1016 而本会话已占该号）；登记 W1017 后其降为历史批滞留，第 42 门禁 C4 判「被四面引用的转正候选超配额」即此件——按 W1013 代收先例入档，其产出 scripts/output/_w1016_pick.json 保留原处（对方数据不丢） |
+
+---
 
 ## 三、引用与检索约定
 
