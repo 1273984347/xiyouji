@@ -13,6 +13,25 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W917（2026-10-24）：DB 正确性包一（B-DB-01 四 P0 落地 + B-DB-05 schema 门禁建置）
+
+
+
+> **来源**：用户 2026-10-24 令「继续」——T-18 C 档第五件（B-DB-01+05·agent-web SQLite 数据正确性包一 + schema 门禁）。
+
+> - **文件**：xiyouji-agent-web/server/db.ts、xiyouji-agent-web/server/chat.ts、scripts/check_db_schema.py、tests/unit/test_check_db_schema.py、scripts/ci_sim.py、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w917_spec.json、scripts/output/_cascade_files_W917.txt（逐件行见 file-index W917 段）。
+> **状态**：**已收官**（W917 a63e5a21·git 反填·共 2 笔·W971 存量回填）
+
+**B-DB-01 数据正确性四 P0 落地**（W823 审查定性「随数据量增长不可逆」的高危面）：
+- **外键强制**：`pragma('foreign_keys = ON')`——DDL 里的 FOREIGN KEY 声明自建库起从未生效（级联删除空转）；
+- **清库补 feedback**：clearAllData 三表按依赖序全清（此前反馈表跨「清空全部」存活）；
+- **反馈唯一索引单维**：`(message_id, verdict)`→`(message_id)`——原维度允许同一消息赞踩两条矛盾记录并存；写路径同步 INSERT OR IGNORE→ON CONFLICT(message_id) DO UPDATE（改判为覆盖而非并存）；
+- **会话主键服务端生成**：`id: sessionId || uuidv4()`→`id: uuidv4()`——客户端可控主键是 W823 实测「旧会话正文泄漏进新建同名会话」串档路径，真值经响应 session_id 返回前端。
+
+**B-DB-05 schema 门禁建置**：`check_db_schema.py` 静态锁定四不变量（摘任一必红·self-test 3/3 + 专项单测 2 例）·接 ci_sim 第 10 项每 PR 实跑。
+
+**验证**：agent-web `tsc --noEmit` 零错·test:server 97 passed（skip 1）·test:integration 19 passed（skip 1）零挂·ruff All checks passed·第 42 门禁覆盖 0 FAIL。
+
 ### W916（2026-10-24）：波二第三件批（新建页准入门禁建置·C-W818-01 清偿）
 
 

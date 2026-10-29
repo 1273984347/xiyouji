@@ -1,3 +1,28 @@
+### W1031（2026-10-30）：取经编制表数据重核（时效与修订触发入表）
+
+> **来源**：用户 2026-10-30 引用 `执行前计划-T05-取经编制表落库与编制位补全.md` 令「重新设计优化」，选定 A 方案（更新数据 + 精简结构 + 加修订触发）。T05 是 W831 批的执行前计划，W831 已归档收官，但产物《取经编制表》作为**活文档**其数据停在 10-20。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/取经编制表-工具与技能挂位-2026-10-20.md、scripts/output/_w1031_spec.json、scripts/output/file-index.md、site/index.html
+
+**核实结果（10-30 现状 vs 10-20 记载）**：
+
+| 编制位 | 10-20 记载 | 10-30 实测 |
+|---|---|---|
+| 太上老君·器物官 | MCP 服务器 0 个 | 载体 `mcp-server/xiyouji_mcp.py` **在**（29.5 KB）；是否已挂载未核 |
+| 沙悟净·收官官 | 无专职 Agent | 未核（依赖 `mavis agent list`） |
+| 菩提祖师·授业官 | 本地技能目录**空** | 目录 **存在且非空**（`~/.workbuddy/skills`）——与记载相反 |
+
+**本批处置**：头部加「数据时效」「修订触发」两行（重核日期 + 60 天到期 + 生态变动即重核）；
+§3 补一句辨析——**「空缺」指未挂载，不是未写代码**（三处的载体今天都在，缺的是挂载那一层）；
+§4.1 标题与首段明确标「数据已过期」并给重核命令，防止再被当现状引用。
+
+**结构未砍（判断说明）**：§2 编制卡占 16.7 KB（37%），核对后确认它**不是重复叙述**——总表只给六列，
+卡片讲的是「怎么用 / 不能做」（孙悟空不做顺手改、猪八戒不能边审边改），这是本文档的核心价值。
+按 slop-clean 硬边界「信息守恒」，删它就是砍内容。**本批做的是准确性，不是瘦身**（44.9 → 46.2 KB）。
+
+**验证**：全量门禁 57 段核心全绿 · 编制表 HTML 母件未动（md 为其事实源）。
+
+> - **状态**：已收官（数据时效与修订触发入表；连接器/Agent 清单待有 `mavis` 环境时重核）
 ### W1030（2026-10-30）：方案报告抽查 + 归档覆盖口径入规范
 
 > **来源**：用户 2026-10-30 两问——「抽查验证（34 件方案报告）」「归档机制和临时文件机制为什么不是全覆盖整个项目」。
@@ -524,7 +549,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1030），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1031），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1848,25 +1873,5 @@
 **B-ARCH-01 检索降级落地**：chat 路由 catch 分流——LLM 上游不可达（`LLM API 5xx/429`·ECONNREFUSED/ETIMEDOUT/ENOTFOUND/EAI_AGAIN·fetch failed）时，SSE 以降级说明 text + done 收尾（声明模式切换·本轮已送达的 tool_result 检索引用仍有效·不重复推送防半截重放），仅其余异常维持 W829 固定文案路径。W821 架构方案「容灾主战场是降级可用」在问答链路的落点闭合。
 
 **验证**：tsc --noEmit 零错·test:server 97 passed 零挂·test:integration 19 passed 零挂·test:client 51 passed 零挂（5 文件）。
-
-
-### W917（2026-10-24）：DB 正确性包一（B-DB-01 四 P0 落地 + B-DB-05 schema 门禁建置）
-
-
-
-> **来源**：用户 2026-10-24 令「继续」——T-18 C 档第五件（B-DB-01+05·agent-web SQLite 数据正确性包一 + schema 门禁）。
-
-> - **文件**：xiyouji-agent-web/server/db.ts、xiyouji-agent-web/server/chat.ts、scripts/check_db_schema.py、tests/unit/test_check_db_schema.py、scripts/ci_sim.py、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w917_spec.json、scripts/output/_cascade_files_W917.txt（逐件行见 file-index W917 段）。
-> **状态**：**已收官**（W917 a63e5a21·git 反填·共 2 笔·W971 存量回填）
-
-**B-DB-01 数据正确性四 P0 落地**（W823 审查定性「随数据量增长不可逆」的高危面）：
-- **外键强制**：`pragma('foreign_keys = ON')`——DDL 里的 FOREIGN KEY 声明自建库起从未生效（级联删除空转）；
-- **清库补 feedback**：clearAllData 三表按依赖序全清（此前反馈表跨「清空全部」存活）；
-- **反馈唯一索引单维**：`(message_id, verdict)`→`(message_id)`——原维度允许同一消息赞踩两条矛盾记录并存；写路径同步 INSERT OR IGNORE→ON CONFLICT(message_id) DO UPDATE（改判为覆盖而非并存）；
-- **会话主键服务端生成**：`id: sessionId || uuidv4()`→`id: uuidv4()`——客户端可控主键是 W823 实测「旧会话正文泄漏进新建同名会话」串档路径，真值经响应 session_id 返回前端。
-
-**B-DB-05 schema 门禁建置**：`check_db_schema.py` 静态锁定四不变量（摘任一必红·self-test 3/3 + 专项单测 2 例）·接 ci_sim 第 10 项每 PR 实跑。
-
-**验证**：agent-web `tsc --noEmit` 零错·test:server 97 passed（skip 1）·test:integration 19 passed（skip 1）零挂·ruff All checks passed·第 42 门禁覆盖 0 FAIL。
 
 
