@@ -1,3 +1,20 @@
+### W1014（2026-10-29）：工具链体检整改批
+
+> **来源**：用户 2026-10-29 令「检查项目所有的工具、脚本、探针、门禁有没有问题是否需要优化；临时文件系统和归档系统现在是否需要修改优化；对所有文件目录进行整理分类；该进归档系统的进归档系统，该进临时文件系统的进临时文件系统」→ 三决策（全修含门禁本体 / 待 W1013 收官开本批 / 全部接线升格）。
+>
+> - **文件**：.github/workflows/ci.yml、.pre-commit-config.yaml、AGENTS.md、Makefile、archive/README.md、archive/scripts/batches/w10xx/_w1013_align_files.py、archive/scripts/batches/w10xx/_w1013_derive_prepare.py、archive/scripts/batches/w10xx/_w1013_download.py、archive/scripts/batches/w10xx/_w1013_fix_desc.py、archive/scripts/batches/w10xx/_w1013_inventory.py、archive/scripts/batches/w10xx/_w1013_make_spec.py、archive/scripts/batches/w10xx/_w1013_master.py、archive/scripts/batches/w10xx/_w1013_prepare.py、archive/scripts/batches/w10xx/_w1013_read.py、archive/scripts/batches/w10xx/_w1013_retry.py、archive/scripts/batches/w10xx/_w1013_retry2.py、archive/scripts/batches/w10xx/_w1013_roster_check.py、archive/scripts/batches/w10xx/_w1013_sheet.py、archive/scripts/batches/w10xx/_w1013_shot.py、archive/scripts/batches/w10xx/_w1013_stage.py、archive/scripts/batches/w10xx/_w1013_verify.py、docs/00-导读/W批次编号对账表.md、docs/11-方案报告/审查与评审/工具脚本门禁体检与临时归档审计-2026-10-29.md、docs/11-方案报告/README.md、scripts/A_文本基础/章节切分.py、scripts/batch_cascade.py、scripts/batch_screenshots.js、scripts/check_archive_health.py、scripts/check_audit_trigger.py、scripts/check_chart_values.js、scripts/check_commit_scope.py、scripts/check_doc_size_budget.py、scripts/check_doc_sync.py、scripts/check_emoji_icons.py、scripts/check_plan_template.py、scripts/check_script_coverage.py、scripts/file_protocol_probe.py、scripts/judge_gate.py、scripts/lib/py_launch.js、scripts/output/script-coverage-baseline.txt、scripts/preflight_check.py、scripts/rag/build_vectors.py、scripts/refresh_icon_paths.py、scripts/scan_targets.py、scripts/security_scan.py、scripts/site_audit.py、scripts/subject_band.py、scripts/tmpe_tidy.py、scripts/verify_delivery.py、tests/unit/test_cascade_line_anchor.py、tests/unit/test_doc_size_budget.py、tests/unit/test_milestone_block_regex.py、tests/unit/test_tmpe_tidy.py、tmpe/policy.yml
+>
+**要点**：
+① **门禁本体 4 处根修**（用户批准）：`check_doc_sync` self-test T4 去磁盘依赖（负样本号 W777 被 W921 归档迁移撞成已登记 ⇒ C4 可证伪性失效·归档文本改经 inp 注入·33/33 过）；`verify_delivery` 注释 5 处陈旧数字订正为实数（57 段/委托 44/内联 13/恒跑 14·行为不变）；`check_archive_health` 的 `BATCHES_SEG` 死常量上岗为段全集权威源（新增双向对账·W1006 批 16 件漏登记的假绿根因）；第 42 基线陈旧行清 + C2 加「已挂槽仍豁免」反向查（12/12 过）。
+② **AGENTS 脚注 C4 口径缺陷根修**：写入侧量 note 本体 ≤120、判据侧连固定尾句家具一起量 ⇒ 97–120 字注记「级联绿/门禁红」（W1013 首踩 117 字被算 141·阻塞开工）⇒ 判据抽纯函数并剥家具·4 新单测证明未弱化门禁。
+③ **tmpe 临时系统根修**：批号路由正则认不出下划线形态 ⇒ 批号工作件永远进不了 w### 桶（全落 _misc）⇒ 改读 policy.yml 单一权威源 + 按批号归子目录；`_misc` 超额告警死代码修（exclude 使其永不触发）；锁 R1-R4（过期抢占/写锁降级/O_EXCL 原子/释放兜底·23/23 测）；归位执行 93 + 285 件按批号归位（journal 可回溯·零删除·避让在途与个人稿）。
+④ **其余真缺陷**：batch_screenshots 硬编码 python + 静默 fail-open → 抽 `lib/py_launch.js` 共享候选表并fail-closed；`make help` 恒 NameError 修（+ledger 补 .PHONY）；ruff 13 项存量债清零（dev→main 即 CI 红）；judge_gate 输入源 GoatCounter 已退役 ⇒ 语义订正为人工复算器（不伪造接不通的自动源）；check_emoji_icons 自称门禁未挂槽 ⇒ 订正为报告型探针；3 支孤儿探针接线升格为级联收尾浮出。
+⑤ **归档系统**：结构健康·无新硬错位（_s4/_s5 160 件为学术轨活跃线·不归档）；台账补 4 组登记 + 3 项孤儿件补登（templates/对账表-ARCHIVE/w-b-critique）+ 结构树补 templates；W1013 已收官的 16 件按三档归位②代收入档。
+
+**验证**：ruff 全仓 0 债 · 5 支门禁自测全绿（33/33·12/12·4/4·4/4·12/12）· 新增单测 23+12 全过 · 第 43 槽自检 12/12 · 归档健康 0 待办 · 目录文档/搜索索引/布局/提交范围 0 FAIL · 报告落 docs/11-方案报告/审查与评审/（编号 48 登记）。
+
+> - **状态**：已收官（工具链体检整改 + 临时系统路由根修 + 归档台账回写）
+
 ### W1013（2026-10-29）：回次 og:image 全覆盖批·第二轮（12 张线描立像/场面）
 
 
@@ -209,7 +226,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1013），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1014），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -532,7 +549,7 @@
 
 **区间与体量**：第 43 篇收官（W954·2026-10-26）至 W977 收官后——**28.7 小时 · W955–W977 共 21 段（两面合看）· 对账表 23 行 · 提交 92 笔**（docs 36 / chore 23 / feat 18 / fix 15·10-26: 74 / 10-27: 18）。合规零提交 2（W958 让号留痕 / W962 并号闭环·经状态列核实）。
 
-**核心发现（四条）**：① 上篇 P-43 五项改进当期闭环 **5/5**（P-43-01/02/05 由 W956 机器化：preflight lagged 二分 / check_review_trigger 触发器 / _assert_status_wnum 段状态防线；P-43-03 由 W971 完成 102 段回填；P-43-04 由 W974 落地判据自证）——「复盘→改进→机器化」首次走通一整圈；② **体积窗口制建置 17 批后首次实战咬合**：W960 建窗 → W968 拆分 → W970 台账行归档工具 → W976 三窗齐超窗实拦且修剪回路三缺陷（A5 断言/修路指引/自撞）当场暴露当场修复 → 段式回窗成每批固定节奏；③ **沉淀通道机器化切换完成**：W975 坑表 57→63 → W976 64 条 + [TMPE] 收官提示位 → W977 一次性件 454 候选分级退役（286 入档/16 现役硬保留/152 S4 本地件不入仓）+ tmpe 工具晋升机制定性（历史零达标·沉淀主通道=坑表/方法论篇）；④ **tmpe 清理闭环 13 天首次走通**（主人「全清」31 项约 860MB 回收站·保护面 0 命中·分批验证留痕）。
+**核心发现（四条）**：① 上篇 P-43 五项改进当期闭环 **5/5**（P-43-01/02/05 由 W956 机器化：preflight lagged 二分 / check_review_trigger 触发器 / _assert_status_wnum 段状态防线；P-43-03 由 W971 完成 102 段回填；P-43-04 由 W974 落地判据自证）——「复盘→改进→机器化」首次走通一整圈；② **体积窗口制建置 17 批后首次实战咬合**：W960 建窗 → W968 拆分 → W970 台账行归档工具 → W976 三窗齐超窗实拦且修剪回路三缺陷（A5 断言/修路指引/自撞）当场暴露当场修复 → 段式回窗成每批固定节奏；③ **沉淀通道机器化切换完成**：W975 坑表 57→63 → W976 64 条 + [TMPE] 收官提示位 → W977 一次性件 454 候选分级退役（286 入档/16 现役硬保留j S4 本地件不入仓）+ tmpe 工具晋升机制定性（历史零达标·沉淀主通道=坑表/方法论篇）；④ **tmpe 清理闭环 13 天首次走通**（主人「全清」31 项约 860MB 回收站·保护面 0 命中·分批验证留痕）。
 
 **改进项 P-44-01~04**：段式回窗并入级联收官自动提示 / tmpe `_shot`+`_inbox` 7 天 TTL 清理管线化（269MB+253MB 超龄）/ scripts 顶层 `_` 件计数提示位 / W1000 存量段 36 批随批顺带。风险面与可行性自评见报告 §10。
 

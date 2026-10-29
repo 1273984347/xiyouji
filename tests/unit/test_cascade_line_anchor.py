@@ -62,7 +62,7 @@ def test_line_anchor_invariant_three_faces():
 def test_real_file_line_count_unchanged():
     """④ 真实文件侧复核——对仓内真实项目说明.md 跑被测实现，行数不变。"""
     assert REAL_XIANGMU.exists(), "真实项目说明.md 不存在：%s" % REAL_XIANGMU
-    real_text = io.open(str(REAL_XIANGMU), encoding="utf-8").read()
+    real_text = open(str(REAL_XIANGMU), encoding="utf-8").read()
     real_nl = "\r\n" if "\r\n" in real_text else "\n"
 
     def _load(path):

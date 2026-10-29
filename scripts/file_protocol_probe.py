@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """file_protocol_probe.py — `file://` 协议三判据 + 构建产物对照探针（W818 取证脚本·一次性诊断件·不入 CI）。
 
 用途：验证本仓「file:// 双击直开 + 零外域依赖」铁律（AGENTS.md §6-5 第 5 条）在各类前端产物下的成立性，
@@ -18,7 +17,6 @@
 """
 import argparse
 import json
-import os
 import sys
 import tempfile
 from pathlib import Path

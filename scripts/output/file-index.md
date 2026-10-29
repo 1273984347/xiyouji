@@ -11,6 +11,65 @@
 ---
 
 
+## W1014 工具链体检整改批（2026-10-29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/ci.yml | W1014 | 工具链体检整改 |
+| .pre-commit-config.yaml | W1014 | 工具链体检整改 |
+| AGENTS.md | W1014 | 工具链体检整改 |
+| Makefile | W1014 | 工具链体检整改 |
+| archive/README.md | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_align_files.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_derive_prepare.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_download.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_fix_desc.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_inventory.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_make_spec.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_master.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_prepare.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_read.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_retry.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_retry2.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_roster_check.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_sheet.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_shot.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_stage.py | W1014 | 工具链体检整改 |
+| archive/scripts/batches/w10xx/_w1013_verify.py | W1014 | 工具链体检整改 |
+| docs/00-/345/257/274/350/257/273/W/346/211/271/346/254/241/347/274/226/345/217/267/345/257/271/350/264/246/350/241/250.md | W1014 | 工具链体检整改 |
+| docs/11-/346/226/271/346/241/210/346/212/245/345/221/212//345/256/241/346/237/245/344/270/216/350/257/204/345/256/241//345/267/245/345/205/267/350/204/232/346/234/254/351/227/250/347/246/201/344/275/223/346/243/200/344/270/216/344/270/264/346/227/266/345/275/222/346/241/243/345/256/241/350/256/241-2026-10-29.md | W1014 | 工具链体检整改 |
+| docs/11-/346/226/271/346/241/210/346/212/245/345/221/212/README.md | W1014 | 工具链体检整改 |
+| scripts/A_/346/226/207/346/234/254/345/237/272/347/241/200//347/253/240/350/212/202/345/210/207/345/210/206.py | W1014 | 工具链体检整改 |
+| scripts/batch_cascade.py | W1014 | 工具链体检整改 |
+| scripts/batch_screenshots.js | W1014 | 工具链体检整改 |
+| scripts/check_archive_health.py | W1014 | 工具链体检整改 |
+| scripts/check_audit_trigger.py | W1014 | 工具链体检整改 |
+| scripts/check_chart_values.js | W1014 | 工具链体检整改 |
+| scripts/check_commit_scope.py | W1014 | 工具链体检整改 |
+| scripts/check_doc_size_budget.py | W1014 | 工具链体检整改 |
+| scripts/check_doc_sync.py | W1014 | 工具链体检整改 |
+| scripts/check_emoji_icons.py | W1014 | 工具链体检整改 |
+| scripts/check_plan_template.py | W1014 | 工具链体检整改 |
+| scripts/check_script_coverage.py | W1014 | 工具链体检整改 |
+| scripts/file_protocol_probe.py | W1014 | 工具链体检整改 |
+| scripts/judge_gate.py | W1014 | 工具链体检整改 |
+| scripts/lib/py_launch.js | W1014 | 工具链体检整改 |
+| scripts/output/script-coverage-baseline.txt | W1014 | 工具链体检整改 |
+| scripts/preflight_check.py | W1014 | 工具链体检整改 |
+| scripts/rag/build_vectors.py | W1014 | 工具链体检整改 |
+| scripts/refresh_icon_paths.py | W1014 | 工具链体检整改 |
+| scripts/scan_targets.py | W1014 | 工具链体检整改 |
+| scripts/security_scan.py | W1014 | 工具链体检整改 |
+| scripts/site_audit.py | W1014 | 工具链体检整改 |
+| scripts/subject_band.py | W1014 | 工具链体检整改 |
+| scripts/tmpe_tidy.py | W1014 | 工具链体检整改 |
+| scripts/verify_delivery.py | W1014 | 工具链体检整改 |
+| tests/unit/test_cascade_line_anchor.py | W1014 | 工具链体检整改 |
+| tests/unit/test_doc_size_budget.py | W1014 | 工具链体检整改 |
+| tests/unit/test_milestone_block_regex.py | W1014 | 工具链体检整改 |
+| tests/unit/test_tmpe_tidy.py | W1014 | 工具链体检整改 |
+| tmpe/policy.yml | W1014 | 工具链体检整改 |
+
 ## W1013 回次 og:image 全覆盖批·第二轮（2026-10-29）
 
 | 文件 | W | 说明 |

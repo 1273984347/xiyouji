@@ -357,16 +357,28 @@ async function main() {
 
   // Slice full-page screenshots into fixed-height chunks for pixel-level review.
   // W536 安全加固：切片子进程仅在默认输出目录下运行（argv 全字面量，无外部值进入解释器）
+  // W1014 修 fail-open：原实现硬编码 `execFileSync('python', …)` 且异常只 console.error——
+  //   本机 PowerShell 语境 `python` 是应用执行存根（exit 9009），切片静默失败但整链仍报成功，
+  //   审查侧拿到缺 slices/ 的产物却无人知晓。现改：① 走共享候选表 resolvePython()
+  //   （scripts/lib/py_launch.js·与第 43 门禁同源）；② 解析不到解释器或切片非零退出即
+  //   fail-closed 退出 1（对齐 W831 门禁 fail-closed 语义·禁伪装成功）。
   const SLICE_OUT = path.resolve(ROOT, 'scripts', 'output', 'screenshots');
   if (path.resolve(ROOT, config.outputDir) !== SLICE_OUT) {
     console.error('[slice] skipped: outputDir is not the default screenshooter output dir');
   } else {
-  const { execFileSync } = require('child_process');
-  try {
-    execFileSync('python', ['scripts/slice_screenshots.py', '--output-dir', 'scripts/output/screenshots'], { cwd: ROOT, stdio: 'inherit' });
-  } catch (e) {
-    console.error('Screenshot slicing failed:', e.message);
-  }
+    const { execFileSync } = require('child_process');
+    const { resolvePython } = require('./lib/py_launch');
+    const py = resolvePython();
+    if (!py) {
+      console.error('::error::[slice] FAIL 未找到可用 Python3（PYTHON/py -3/python3/python 全不可用）⇒ 切片未执行');
+      process.exit(1);
+    }
+    try {
+      execFileSync(py.cmd, py.args.concat(['scripts/slice_screenshots.py', '--output-dir', 'scripts/output/screenshots']), { cwd: ROOT, stdio: 'inherit' });
+    } catch (e) {
+      console.error(`::error::[slice] FAIL 切片子进程失败（${py.cmd} ${py.args.join(' ')}）：${e.message} ⇒ 截图链判红（不再静默放行）`);
+      process.exit(1);
+    }
   }
 
   // Generate markdown summary

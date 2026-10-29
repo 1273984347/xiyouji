@@ -884,23 +884,9 @@ function baselineLines(judged, snapshot, census) {
 }
 
 // ---------------- 第 28 门禁口径复用（V5） ----------------
-function resolvePython() {
-  const cands = [];
-  if (process.env.PYTHON) cands.push([process.env.PYTHON, []]);
-  cands.push(['py', ['-3']], ['python3', []], ['python', []]);
-  for (const [cmd, args] of cands) {
-    try {
-      const o = execFileSync(cmd, args.concat(['-c', 'import sys;print(sys.version_info[0])']), {
-        stdio: 'pipe',
-        timeout: 15000,
-      })
-        .toString()
-        .trim();
-      if (o.startsWith('3')) return { cmd, args };
-    } catch {}
-  }
-  return null;
-}
+// W1014：resolvePython 提取到 scripts/lib/py_launch.js（同一判据禁两处实现·与
+// batch_screenshots.js 共用候选表）；此处只调用不重写。
+const { resolvePython } = require('./lib/py_launch');
 
 function loadCitability() {
   const py = resolvePython();

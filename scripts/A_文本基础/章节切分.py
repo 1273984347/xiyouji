@@ -127,7 +127,7 @@ def find_chapters(text: str) -> list[tuple[int, str, str]]:
 
     # 切分每回正文：从该回标记结尾到下一回标记开始
     chapters = []
-    for i, (start, end, num, title) in enumerate(matches):
+    for i, (_start, end, num, title) in enumerate(matches):  # W1014: _start 未用（切分自该回标记结尾 end 起）
         body_start = end
         body_end = matches[i + 1][0] if i + 1 < len(matches) else len(text)
         body = text[body_start:body_end].strip()

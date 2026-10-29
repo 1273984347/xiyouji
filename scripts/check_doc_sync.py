@@ -78,6 +78,13 @@ RE_STATS_PATTERNS = [  # (正则, (键...), 语境词[None=无·小写包含判�
 RE_CHANGELOG_SCOPE = re.compile(r"^> \*\*全站页数口径\*\*.*$", re.M)  # CHANGELOG 扫描域=口径块行
 RE_FILE_LIST_LINE = re.compile(r"^> - \*\*文件\*\*：(.+)$", re.M)  # W723 C4-f：四件套「文件」行
 RE_BATCH_REGISTRY_ROW = re.compile(r"^\| W\d{3,4} ")  # W906 C4-f 三态：他方批次登记行形态
+# W1014：git status 的合法状态位组合（X=索引态·Y=工作树态）——用于 -z 模式下严格判别
+# 「带状态位的脏件记录」与「rename/copy 的 old path 记录（无状态位前缀）」。
+_GIT_STATUS_CODES = frozenset(
+    c1 + c2
+    for c1 in (" ", "M", "A", "D", "R", "C", "U", "?", "!")
+    for c2 in (" ", "M", "A", "D", "R", "C", "U", "?", "!")
+)
 RE_FILE_TOKEN = re.compile(
     r"^(?:CHANGELOG|README|STRUCTURE|AGENTS|CLAUDE|CONTRIBUTING|CITATION)\.cff?$"
     r"|.+\.(?:py|js|mjs|cjs|ts|tsx|jsx|md|json|jsonl|cff|txt|html|css|xml|yml|yaml|toml|ini|cfg|sh|ps1|csv|svg|example)$"
@@ -360,9 +367,12 @@ def _check_c4_commit_ledger(inp, issues, notes):
         notes.append("C4: 浅克隆环境（.git/shallow），提交对账跳过（pre-commit 本地为主执行点）")
         return
     reg = changelog_section_ws(inp["changelog"])
-    for p in ARCHIVE_CHANGELOGS:
-        if os.path.exists(p):
-            reg |= changelog_section_ws(open(p, encoding="utf-8").read())
+    # W1014 hermetic 修：归档登记文本经 inp 注入（真实轨 gather 读盘·自测轨注入空文本）。
+    # 原实现在此处 open(ARCHIVE_CHANGELOGS) 直读磁盘，使「未登记 W 必红」负样本一旦被
+    # CHANGELOG 瘦身批迁进归档（W777 由 4ab32ad1/W921 迁入）即从「未登记」变「已登记」，
+    # T4 自测被内容迁移悄悄蚀坏、C4 可证伪性失效——判据的读取源不该与被测输入耦合。
+    for text in inp.get("archive_changelogs_text", []):
+        reg |= changelog_section_ws(text)
     reg |= table_registered_ws(inp["table"])
     for s in inp["subjects"]:
         s2 = re.sub(r"W\d{3,4}\s*[-–—]\s*W\d{3,4}", "", s)  # W711：区间形态（W001-W710 等）下限非实体号·剔除后再提取
@@ -532,6 +542,38 @@ def _load_stats():
         return None
 
 
+def _git_status_z():
+    """`git status --porcelain -z` 的**未转义原路径**记录列表（W1014 中文路径修）。
+
+    为什么另起一个函数：`_git_output_lines` 按**行**拆分（splitlines），而 -z 模式是
+    **NUL** 分隔——共用函数会把整串当一行。且 porcelain 对非 ASCII 路径即便加
+    `core.quotePath=false` 仍输出带引号的八进制转义（实测 "docs/00-\\345\\257…"），
+    非 -z 模式无法还原真路径 ⇒ 中文路径件被 C4-f 误判「漏 add」。
+    """
+    try:
+        r = subprocess.run(["git", "-c", "core.quotePath=false", "status", "--porcelain", "-z"],
+                           cwd=ROOT, capture_output=True, text=True,
+                           encoding="utf-8", errors="ignore", timeout=30)
+    except Exception:  # noqa: BLE001
+        return None
+    if r.returncode != 0:
+        return None
+    recs = [x for x in r.stdout.split("\0") if x.strip()]
+    out = []
+    for rec in recs:
+        # -z 模式下 rename/copy 输出**两条**记录：首条带 `XY ` 状态位（new path）、
+        # 次条**无状态位前缀**（old path·纯路径）。判据须用「前两字符是合法状态码」
+        # 而非「rec[1] != 空格」——后者会把 old path 的首两字符（sc/ma/do…）误判为状态位
+        # ⇒ 收进 "ipts/_w1013_*.py" 这类截断路径（实测）。
+        #
+        # 且只收 **Y 位非空**（工作树态有改动）者：dirty 的语义是「工作树有未暂存改动」，
+        # 已暂存件（`M `·Y 位为空）不算 dirty——原实现用 ln[1] != " " 表达此语义，
+        # -z 版须等价保留（否则已 add 的件被误判「漏 add」·实测 78 件全误判）。
+        if len(rec) > 3 and rec[:2] in _GIT_STATUS_CODES and rec[1] != " ":
+            out.append(rec[3:])
+    return out
+
+
 def _git_output_lines(args, strip=True, timeout=30):
     """运行 git 命令并返回 stdout 行列表（strip=True 逐行剥空/去空行；False 原样保留）；
     非零退出或异常返回 None（W730 提取：gather 内三处同构 subprocess 块合一）。"""
@@ -563,6 +605,10 @@ def gather():
         "contributing": rd(os.path.join(ROOT, "CONTRIBUTING.md")),
         "koujing": rd(os.path.join(ROOT, "docs", "00-导读", "统计口径说明.md")),
         "verify_src": rd(os.path.join(HERE, "verify_delivery.py")),
+        # W1014：归档登记文本在此读盘注入（判据与读取源解耦·见 _check_c4_commit_ledger）
+        "archive_changelogs_text": [
+            rd(p) for p in ARCHIVE_CHANGELOGS if os.path.exists(p)
+        ],
         "stats": _load_stats(),
         "table": rd(os.path.join(ROOT, "docs", "00-导读", "W批次编号对账表.md")),
         # W830：C5b 扩展面（pytest.ini + 11-方案报告根层·只跑标记对账·见 c5b_extra_surfaces）
@@ -613,7 +659,14 @@ def gather():
         for ln in raw_status:
             if len(ln) > 3 and (ln[1] != " " or ln[:2] == "??"):
                 _dirty.append(ln[3:].strip().strip('"'))
-    inputs["dirty"] = _dirty
+    # W1014 修中文路径乱码（C4-f 误判「未入提交树/漏 add」）：porcelain 对**非 ASCII** 路径
+    # 输出带引号 + 八进制转义（"docs/00-\345\257…"）⇒ 上面 strip('"') 后仍是转义串，路径永
+    # 匹配不上 ⇒ 中文路径件被误判漏 add。改用 -z 模式取未转义原路径（见 _git_status_z）。
+    _dz = _git_status_z()
+    if _dz is not None:
+        inputs["dirty"] = _dz
+    else:
+        inputs["dirty"] = _dirty
     # W906 C4-f 三态：dirty 文件中未暂存 diff 为「他方批次登记行纯追加」者单列——
     # 并行会话在台账落认领行属他方在途（W904 收官提交被此形态拦停的实录），非本方漏 add
     inputs["foreign_append_only"] = _foreign_append_only(_dirty)
@@ -658,6 +711,7 @@ def run_self_test():
         "jiaojie": "- **W999 自测链首**：\n",
         "agents": "### 4.2 交付门禁\n\n30. **甲门**\n31. **乙门**\n\n### 4.3 其他\n",
         "verify_src": "# ---- 第 30 槽 ----\n# ---- 第 31 槽 ----\n",
+        "archive_changelogs_text": [],  # W1014：自测注入空归档文本（hermetic·不读磁盘）
         "subjects": ["feat(w999): 自测提交"],
         "table": "| W999 | x | y | z | s | c |\n- **W659 / W660**：递延登记\n",
         "structure": "",

@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-29 10:34
+生成时间：2026-10-29 12:38
 
-共 **173** 件（门禁与校验 70 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 59 · 一次性（下划线前缀） 22）
+共 **159** 件（门禁与校验 71 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 59 · 一次性（下划线前缀） 7）
 
-## 门禁与校验（70）
+## 门禁与校验（71）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -30,6 +30,7 @@
 | `check_contract_smoke.js` | scripts/check_contract_smoke.js — W583：契约冒烟门禁（O3·file:// EMBEDDED 路径） |
 | `check_corruption.py` | check_corruption.py — 机械腐蚀与插件引用静态门禁（W424 复盘沉淀） |
 | `check_crop.py` | check_crop.py — 验站点版「只裁上部留白」没有切坏主体 |
+| `check_cross_line_rewrite.py` | check_cross_line_rewrite.py — 同族扫描：改写面正则的「跨行静默删内容」风险清单 |
 | `check_css_decl_separators.py` | 声明分隔门禁（第 35 门禁 · W673/WP-2.6）——防 CSS 缺分号静默吞声明。 |
 | `check_css_orphan_selectors.py` | 孤立选择器门禁（第 36 门禁 · W673/WP-2.6）——防选择器残缀/裸标签残缺行。 |
 | `check_css_var_refs.py` | CSS 变量引用门禁（第 34 门禁 · W672/WP-1.4）——防 style 块引用未定义 CSS 变量。 |
@@ -43,7 +44,7 @@
 | `check_dual_source_scan.py` | check_dual_source_scan.py — 双源对发现器（S-24·W699）。 |
 | `check_dynamic_links.py` | check_dynamic_links.py — JS 动态链接存在性门禁（补 lint_links 静态扫描盲区）。 |
 | `check_embedded_stale_markers.py` | 第 38 门禁：页面内嵌残留标记（W693·W692 报告 A-01 用户裁决挂载）。 |
-| `check_emoji_icons.py` | W949 · 第 50 门禁：UI 图标位 emoji 残留 + 图标渲染正确性 |
+| `check_emoji_icons.py` | W949 · 报告型探针：UI 图标位 emoji 残留 + 图标渲染正确性 |
 | `check_folder_docs.py` | check_folder_docs.py — 目录文档新鲜度门禁（W780 建立·verify_delivery 第 45 槽）。 |
 | `check_frontmatter.py` | 元信息块 v2 门禁（W501 第 18 门禁）：校验 docs/01-06 新文件含血缘 + 核验状态 4 字段。 |
 | `check_glossary.py` | 术语一致性门禁（W502 第 19 门禁）：术语表.md ↔ dataset/glossary.json 双向同步 + 规范词锚定。 |
@@ -189,7 +190,7 @@
 | `visual_regression_probe.py` | visual_regression_probe.py — J2 视觉回归探针（W851 建·设计迁移阶段 1 验收件） |
 | `worktree_rehearse.py` | worktree_rehearse.py — worktree 预演法工具化（W701·S-26·用户圈选开工）。 |
 
-## 一次性（下划线前缀）（22）
+## 一次性（下划线前缀）（7）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -199,19 +200,4 @@
 | `_check_pipeline_consistency.py` | 创意三明治管线一致性轻量校验（P3-7，W508 沉淀）。 |
 | `_cite_probe.py` | 引文候选提取探针（E-A 沉淀，W507 永久化）。 |
 | `_gen_search_index.py` | W594：标题关键词数组（中文 jieba 切词、英文按词干拆分），供前端 +4 加权，≤12 个。 |
-| `_w1013_align_files.py` | _w1013_align_files.py — W1013 文件清单对齐（spec.file_index_rows ⇔ CHANGELOG 段「 |
-| `_w1013_derive_prepare.py` | _w1013_derive_prepare.py — 由归档 `w9xx/_w999_prepare.py` **程序化派生** W1013 成 |
-| `_w1013_download.py` | _w1013_download.py — W1013 出图下载器（node_id → 母版落盘） |
-| `_w1013_fix_desc.py` | _w1013_fix_desc.py — W1013 版本行 desc 定向订正（避 C5c 裸聚合数字） |
-| `_w1013_inventory.py` | _w1013_inventory.py — W1013 批盘点：回目页配图缺口 + 已出主体清单 + og:image 覆盖现状 |
-| `_w1013_make_spec.py` | _w1013_make_spec.py — W1013 级联 spec 生成（文件行按 git 现状全量列出） |
-| `_w1013_master.py` | _w1013_master.py — W1013 母版段两变体 + 12 张出图批次生成（编号 61–72） |
-| `_w1013_prepare.py` | _w1013_prepare.py — W1013 成品处理（**只处理 raw/round15 的本批 12 张**） |
-| `_w1013_read.py` | _w1013_read.py — W1013 批 12 回原文实读（选材证据） |
-| `_w1013_retry.py` | _w1013_retry.py — W1013 重出批次（3 张：64 灵吉菩萨 / 66 虎力大仙 / 67 蜘蛛精） |
-| `_w1013_retry2.py` | _w1013_retry2.py — W1013 重出第 2 轮（2 张：70 辟寒辟暑 / 71 玉华州三王子） |
-| `_w1013_roster_check.py` | _w1013_roster_check.py — W1013 主体去重硬判据（V-02）：候选主体 × 已出母版全表 |
-| `_w1013_sheet.py` | _w1013_sheet.py — 本批 12 张母版拼图（人眼复核用·3 列 × 4 行·每格 400×533） |
-| `_w1013_shot.py` | _w1013_shot.py — W1013 浏览器实跑（本地 HTTP + Playwright·AC-12） |
-| `_w1013_stage.py` | _w1013_stage.py — W1013 落位：12 个回目页接入题图 + 换专属 og:image |
-| `_w1013_verify.py` | _w1013_verify.py — W1013 落位验收（AC-03~AC-11 的机器侧复核） |
+| `_w1016_pick.py` | _w1016_pick.py — W1016 选材：缺口 68 回全量角色谱扫描 × 已出 100 主体对照 |

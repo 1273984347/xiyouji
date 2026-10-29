@@ -470,8 +470,10 @@ def run_pip_audit():
 
 def _find_pip_audit():
     """检测 pip-audit 可执行命令，返回 cmd 列表或 None。"""
-    # 优先尝试 py -m pip_audit（Windows 多版本 Python 兼容）
-    for cmd in (["py", "-m", "pip_audit"], ["python", "-m", "pip_audit"],
+    # W1014：sys.executable 置首——唯一对本进程解释器恒成立的候选
+    # （AGENTS §4.3「不按 PATH 上的 python/python3 形状挑选」·原 py/python 序为 Windows 中心）
+    for cmd in ([sys.executable, "-m", "pip_audit"],
+                ["py", "-m", "pip_audit"], ["python", "-m", "pip_audit"],
                 ["pip-audit"], ["pip_audit"]):
         try:
             proc = subprocess.run(
