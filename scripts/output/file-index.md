@@ -3900,18 +3900,3 @@ docs/11-方案报告/README.md
 | CHANGELOG.md | W896 | W896 段 |
 | scripts/output/file-index.md | W896 | 同批段回写 |
 
-## W895 BL-33 收敛批（2026-10-23）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/system.css | W895 | BL-33 收敛：page-wrap 令牌 / seal 淡底 / kpi-row 规则升全局 |
-| scripts/inline_css.py | W895 | 护栏：--force 只重同步已内联页·外链转内联须 --inline-links |
-| site/data/（88）site/en/（138）site/reader/（102） | W895 | 内联块按源重生成（集合差零差异） |
-| scripts/_w895_bl33_inventory.py | W895 | 新增：内联块与事实源差异盘点 |
-| scripts/_w895_regen_preview.py | W895 | 新增：重生成预演（sync 前证明反冲风险） |
-| scripts/_w895_verify_blocks.py | W895 | 新增：重生成后集合差校验（226/226 零差异） |
-| scripts/output/_w864_accent_exemptions.json | W895 | 按新实测保守核查（余 256 条） |
-| docs/00-导读/W批次编号对账表.md | W895 | 认领行与收官回填 |
-| CHANGELOG.md | W895 | W895 段 |
-| scripts/output/file-index.md | W895 | 同批段回写 |
-
