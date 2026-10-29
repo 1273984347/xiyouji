@@ -1,18 +1,9 @@
 {
  "chapters_total": 100,
- "with_plate_or_scene": 20,
- "gap_total": 80,
- "gap_still_generic_og": 78,
+ "with_plate_or_scene": 32,
+ "gap_total": 68,
+ "gap_still_generic_og": 66,
  "gap": [
-  {
-   "page": "site/reader/ch002.html",
-   "ch": "002",
-   "title": "第 002回 悟彻菩提真妙理 断魔归本合元神",
-   "plate": null,
-   "scene": null,
-   "og": "og-cover-ink-zh.jpg",
-   "og_is_generic": true
-  },
   {
    "page": "site/reader/ch005.html",
    "ch": "005",
@@ -35,24 +26,6 @@
    "page": "site/reader/ch008.html",
    "ch": "008",
    "title": "第008回 我佛造经传极乐 观音奉旨上长安",
-   "plate": null,
-   "scene": null,
-   "og": "og-cover-ink-zh.jpg",
-   "og_is_generic": true
-  },
-  {
-   "page": "site/reader/ch012.html",
-   "ch": "012",
-   "title": "第012回 玄奘秉诚建大会 观音显象化金蝉",
-   "plate": null,
-   "scene": null,
-   "og": "og-cover-ink-zh.jpg",
-   "og_is_generic": true
-  },
-  {
-   "page": "site/reader/ch013.html",
-   "ch": "013",
-   "title": "第013回 陷虎穴金星解厄 双叉岭伯钦留僧",
    "plate": null,
    "scene": null,
    "og": "og-cover-ink-zh.jpg",
@@ -98,15 +71,6 @@
    "page": "site/reader/ch020.html",
    "ch": "020",
    "title": "第020回 黄风岭唐僧有难 半山中八戒争先",
-   "plate": null,
-   "scene": null,
-   "og": "og-cover-ink-zh.jpg",
-   "og_is_generic": true
-  },
-  {
-   "page": "site/reader/ch021.html",
-   "ch": "021",
-   "title": "第021回 护法设庄留大圣 须弥灵吉定风魔",
    "plate": null,
    "scene": null,
    "og": "og-cover-ink-zh.jpg",
@@ -212,15 +176,6 @@
    "og_is_generic": true
   },
   {
-   "page": "site/reader/ch038.html",
-   "ch": "038",
-   "title": "第038回 婴儿问母知邪正 金木参玄见假真",
-   "plate": null,
-   "scene": null,
-   "og": "og-cover-ink-zh.jpg",
-   "og_is_generic": true
-  },
-  {
    "page": "site/reader/ch039.html",
    "ch": "039",
    "title": "第039回 一粒金丹天上得 三年故主世间生",
@@ -269,15 +224,6 @@
    "page": "site/reader/ch044.html",
    "ch": "044",
    "title": "第044回 法身元运逢车力 心正妖邪度脊关",
-   "plate": null,
-   "scene": null,
-   "og": "og-cover-ink-zh.jpg",
-   "og_is_generic": true
-  },
-  {
-   "page": "site/reader/ch045.html",
-   "ch": "045",
-   "title": "第045回 三清观大圣留名 车迟国猴王显法",
    "plate": null,
    "scene": null,
    "og": "og-cover-ink-zh.jpg",
@@ -545,15 +491,6 @@
    "og_is_generic": true
   },
   {
-   "page": "site/reader/ch078.html",
-   "ch": "078",
-   "title": "第078回 比丘怜子遣阴神 金殿识魔谈道德",
-   "plate": null,
-   "scene": null,
-   "og": "og-cover-ink-zh.jpg",
-   "og_is_generic": true
-  },
-  {
    "page": "site/reader/ch080.html",
    "ch": "080",
    "title": "第080回 姹女育阳求配偶 心猿护主识妖邪",
@@ -572,24 +509,6 @@
    "og_is_generic": true
   },
   {
-   "page": "site/reader/ch082.html",
-   "ch": "082",
-   "title": "第082回 姹女求阳 元神护道",
-   "plate": null,
-   "scene": null,
-   "og": "og-cover-ink-zh.jpg",
-   "og_is_generic": true
-  },
-  {
-   "page": "site/reader/ch083.html",
-   "ch": "083",
-   "title": "第083回 心猿识得丹头 姹女还归本性",
-   "plate": null,
-   "scene": null,
-   "og": "og-cover-ink-zh.jpg",
-   "og_is_generic": true
-  },
-  {
    "page": "site/reader/ch084.html",
    "ch": "084",
    "title": "第八十四回 难灭伽持圆大觉 法王成正体天然",
@@ -602,24 +521,6 @@
    "page": "site/reader/ch085.html",
    "ch": "085",
    "title": "第085回 心猿妒木母 魔主计吞禅",
-   "plate": null,
-   "scene": null,
-   "og": "og-cover-ink-zh.jpg",
-   "og_is_generic": true
-  },
-  {
-   "page": "site/reader/ch086.html",
-   "ch": "086",
-   "title": "第086回 木母助威征怪物 金公施法灭妖邪",
-   "plate": null,
-   "scene": null,
-   "og": "og-cover-ink-zh.jpg",
-   "og_is_generic": true
-  },
-  {
-   "page": "site/reader/ch087.html",
-   "ch": "087",
-   "title": "第087回 凤仙郡冒天止雨 孙大圣劝善施霖",
    "plate": null,
    "scene": null,
    "og": "og-cover-ink-zh.jpg",
@@ -647,15 +548,6 @@
    "page": "site/reader/ch091.html",
    "ch": "091",
    "title": "第091回 金平府元夜观灯 玄英洞唐僧供状",
-   "plate": null,
-   "scene": null,
-   "og": "og-cover-ink-zh.jpg",
-   "og_is_generic": true
-  },
-  {
-   "page": "site/reader/ch092.html",
-   "ch": "092",
-   "title": "第092回 三僧大战青龙山 四星挟捉犀牛怪",
    "plate": null,
    "scene": null,
    "og": "og-cover-ink-zh.jpg",
@@ -736,6 +628,15 @@
    "og_is_generic": false
   },
   {
+   "page": "site/reader/ch002.html",
+   "ch": "002",
+   "title": "第 002回 悟彻菩提真妙理 断魔归本合元神",
+   "plate": "plate-line-61-ch002-puti.webp",
+   "scene": null,
+   "og": "og-plate-line-61-ch002-puti.webp",
+   "og_is_generic": false
+  },
+  {
    "page": "site/reader/ch003.html",
    "ch": "003",
    "title": "第003回 四海千山皆拱伏 九幽十类尽除名",
@@ -790,6 +691,24 @@
    "og_is_generic": false
   },
   {
+   "page": "site/reader/ch012.html",
+   "ch": "012",
+   "title": "第012回 玄奘秉诚建大会 观音显象化金蝉",
+   "plate": "plate-line-62-ch012-jinchanzi.webp",
+   "scene": null,
+   "og": "og-plate-line-62-ch012-jinchanzi.webp",
+   "og_is_generic": false
+  },
+  {
+   "page": "site/reader/ch013.html",
+   "ch": "013",
+   "title": "第013回 陷虎穴金星解厄 双叉岭伯钦留僧",
+   "plate": "plate-line-63-ch013-taibaixingxing.webp",
+   "scene": null,
+   "og": "og-plate-line-63-ch013-taibaixingxing.webp",
+   "og_is_generic": false
+  },
+  {
    "page": "site/reader/ch014.html",
    "ch": "014",
    "title": "第014回 心猿归正 六贼无踪",
@@ -805,6 +724,15 @@
    "plate": "plate-line-39-ch015-yingchou.webp",
    "scene": "chap-15.webp",
    "og": "og-plate-line-39-ch015-yingchou.webp",
+   "og_is_generic": false
+  },
+  {
+   "page": "site/reader/ch021.html",
+   "ch": "021",
+   "title": "第021回 护法设庄留大圣 须弥灵吉定风魔",
+   "plate": "plate-line-64-ch021-lingji.webp",
+   "scene": null,
+   "og": "og-plate-line-64-ch021-lingji.webp",
    "og_is_generic": false
   },
   {
@@ -853,6 +781,24 @@
    "og_is_generic": false
   },
   {
+   "page": "site/reader/ch038.html",
+   "ch": "038",
+   "title": "第038回 婴儿问母知邪正 金木参玄见假真",
+   "plate": "plate-line-65-ch038-wujiguowang.webp",
+   "scene": null,
+   "og": "og-plate-line-65-ch038-wujiguowang.webp",
+   "og_is_generic": false
+  },
+  {
+   "page": "site/reader/ch045.html",
+   "ch": "045",
+   "title": "第045回 三清观大圣留名 车迟国猴王显法",
+   "plate": "plate-line-66-ch045-huli.webp",
+   "scene": null,
+   "og": "og-plate-line-66-ch045-huli.webp",
+   "og_is_generic": false
+  },
+  {
    "page": "site/reader/ch047.html",
    "ch": "047",
    "title": "第047回 圣僧夜阻通天水 金木垂慈救小童",
@@ -880,6 +826,15 @@
    "og_is_generic": false
   },
   {
+   "page": "site/reader/ch078.html",
+   "ch": "078",
+   "title": "第078回 比丘怜子遣阴神 金殿识魔谈道德",
+   "plate": "plate-line-67-ch078-zhizhujing.webp",
+   "scene": null,
+   "og": "og-plate-line-67-ch078-zhizhujing.webp",
+   "og_is_generic": false
+  },
+  {
    "page": "site/reader/ch079.html",
    "ch": "079",
    "title": "第079回 寻洞擒妖逢老寿 当朝正主救婴儿",
@@ -889,12 +844,57 @@
    "og_is_generic": false
   },
   {
+   "page": "site/reader/ch082.html",
+   "ch": "082",
+   "title": "第082回 姹女求阳 元神护道",
+   "plate": "plate-line-68-ch082-bailujing.webp",
+   "scene": null,
+   "og": "og-plate-line-68-ch082-bailujing.webp",
+   "og_is_generic": false
+  },
+  {
+   "page": "site/reader/ch083.html",
+   "ch": "083",
+   "title": "第083回 心猿识得丹头 姹女还归本性",
+   "plate": "plate-line-69-ch083-laoshujing.webp",
+   "scene": null,
+   "og": "og-plate-line-69-ch083-laoshujing.webp",
+   "og_is_generic": false
+  },
+  {
+   "page": "site/reader/ch086.html",
+   "ch": "086",
+   "title": "第086回 木母助威征怪物 金公施法灭妖邪",
+   "plate": "plate-line-70-ch086-bichandawang.webp",
+   "scene": null,
+   "og": "og-plate-line-70-ch086-bichandawang.webp",
+   "og_is_generic": false
+  },
+  {
+   "page": "site/reader/ch087.html",
+   "ch": "087",
+   "title": "第087回 凤仙郡冒天止雨 孙大圣劝善施霖",
+   "plate": "plate-line-71-ch087-yuhuawang.webp",
+   "scene": null,
+   "og": "og-plate-line-71-ch087-yuhuawang.webp",
+   "og_is_generic": false
+  },
+  {
    "page": "site/reader/ch089.html",
    "ch": "089",
    "title": "第089回 黄狮精虚设钉钯宴 金木土计闹豹头山",
    "plate": "plate-line-59-ch089-huangshi.webp",
    "scene": null,
    "og": "og-plate-line-59-ch089-huangshi.webp",
+   "og_is_generic": false
+  },
+  {
+   "page": "site/reader/ch092.html",
+   "ch": "092",
+   "title": "第092回 三僧大战青龙山 四星挟捉犀牛怪",
+   "plate": "plate-line-72-ch092-dizang.webp",
+   "scene": null,
+   "og": "og-plate-line-72-ch092-dizang.webp",
    "og_is_generic": false
   },
   {
