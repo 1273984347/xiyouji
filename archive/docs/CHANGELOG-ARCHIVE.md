@@ -13,6 +13,19 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W921（2026-10-24）：CHANGELOG 主动瘦身批（B-W855-05 清偿·102 段迁一级归档·D1 全清）
+
+
+
+> **来源**：用户 2026-10-24 令「继续」——T-18 D1 真债第三件（B-W855-05 治理文档瘦身）。
+
+> - **文件**：Carchive/docs/CHANGELOG-ARCHIVE.md、dHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w921_spec.json、scripts/output/_cascade_files_W921.txt（逐件行见 file-index W921 段）。
+> **状态**：**已收官**（W921 072000af·git 反填·共 2 笔·W971 存量回填）
+
+**B-W855-05 CHANGELOG 主动瘦身**：679KB（201 段现役·W711 审计时已超基线 11%+ 后继续涨至超基线 35%）——按文档规范 §5 归档规则执行 W736 同款一级迁移：**W700-W802 共 102 段迁 archive/docs/CHANGELOG-ARCHIVE.md**（迁后 CHANGELOG 363KB·低于 503KB 基线达标；ARCHIVE 978KB 未触 1MB tier2 阈·滚动分支零启用）。迁移脚本全断言（三文件段 W 号并集守恒 693 / 全局无重号 / 迁后倒序）·任一不符零落盘——首版 tier2 滚动分支缺陷即被守恒断言当场拦下（零落盘）后收缩窗口绕开。段内容零改动（纯位置迁移·历史段禁改纪律保持）。
+
+**验证**：第 17 门禁索引健康全过（段完整性/倒序/编号上限）·第 31 门禁 C4 仅批内在途残留。
+
 ### W920（2026-10-24）：副本链值级对账门禁批（B-W855-04 清偿·基线冻结 24 件存量）
 
 

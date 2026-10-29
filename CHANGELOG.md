@@ -1,3 +1,28 @@
+### W1035（2026-10-30）：三份职责书（收官官 / 对账官 / 文字取证官）
+
+> **来源**：用户 2026-10-30 令「三项一起」，并追问「不是按西游记里面的人物角色设定来吗」——三份模板全部按《取经编制表》的人物位命名与叙述。
+>
+> **共同设计**：现环境没有「自建 Agent」接口，但 `Agent` 工具可派发内置角色 ⇒ 把常驻角色**降级为可派发的职责书**。这比建常驻更干净：不占资源、边界清晰、用完即弃。代价是需要有人记得派，故登记在目录索引与 AGENTS 指针里。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/agent/README.md、docs/agent/closeout-agent-prompt.md、docs/agent/index.md、docs/agent/reconcile-agent-prompt.md、docs/agent/text-audit-agent-prompt.md、scripts/output/_w1035_spec.json、scripts/output/file-index.md、scripts/output/tools-inventory.md、site/index.html
+
+**三份职责书（按人物位）**：
+
+| 位 | 文件 | 职责 | 关键约束 |
+|---|---|---|---|
+| **沙悟净 · 收官官** | `closeout-agent-prompt.md` | 把批次收干净：跑全量门禁 / 核指针面 / 核计数 / 核台账 / 核体积窗 | **只做验与补，不碰内容**（不施工·不 commit） |
+| **谛听 · 只验证** | `reconcile-agent-prompt.md` | 核对登记面 vs 实况（Backlog / 台账 / 文档声明） | **不采信自述**·五判定·每条必带证据·附滞后率 |
+| **千里眼 · 取证官** | `text-audit-agent-prompt.md` | 文字只读诊断（过期/重复/冗长/废话） | **先按体裁筛规则**·核心产出是「可压/不可压」分类 |
+
+**为什么是这三处**：编制表里它们都是「有明确职责但无专属载体」的位——沙悟净卡在「无专职 Agent」、谛听直接标着**「当前位空」**、千里眼挂了 `explore` 但缺成文的取证纪律。
+
+**谛听位是这次额外发现的**：T05 只记了三处空缺（器物官/授业官/收官官），但编制表 §2 里谛听位的状态写的是「**当前位空**（MCP 未接）」——第四处空缺，本批补上。器物官（MCP 注册）经成本判断不做：其 5 个工具对应的脚本本就能跑，接 MCP 只是换调用方式。
+
+**每份都写了「不该做什么」**：收官官不施工、对账官不修条目、取证官不改一个字。审查与施工分离这条铁律，在这三处各落实一次。
+
+**验证**：新增 3 md 后搜索索引与 CSP 已重建 · 目录索引 405 件已刷新 · 全量门禁 57 段核心全绿。
+
+> - **状态**：已收官（三处「有职责无载体」的位补齐；器物官按收益不做，已在 W1032 说明）
 ### W1034（2026-10-30）：授业官位补全（项目级避坑 skill）
 
 > **来源**：用户 2026-10-30 选定 A（做授业官），并指定位置「`D://xiyouji//.agent` 内新建 skills 目录」。这是 T05（W831 批）中 **ST-11 授业官**这一步在现环境的落地。
@@ -601,7 +626,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1034），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1035），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1863,19 +1888,5 @@
 **八项登记性裁决**落 T-18 E 档：Phase-1 选 ONNX（随批执行）/ agent-web 三项与 PD 套件随 D2 冻结（UV≥30 复议）/ 仓外编制位缓 / BL 维持登记 / S2·S4 待用户定时点 / 计划补齐维持冻结 / Q2 等满 10 批。
 
 **验证**：check_seo_head 855 页全过（含 12 处新图白名单）·交互门禁 0 FAIL·preflight 单测 19/19·ruff 过。
-
-
-### W921（2026-10-24）：CHANGELOG 主动瘦身批（B-W855-05 清偿·102 段迁一级归档·D1 全清）
-
-
-
-> **来源**：用户 2026-10-24 令「继续」——T-18 D1 真债第三件（B-W855-05 治理文档瘦身）。
-
-> - **文件**：Carchive/docs/CHANGELOG-ARCHIVE.md、dHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w921_spec.json、scripts/output/_cascade_files_W921.txt（逐件行见 file-index W921 段）。
-> **状态**：**已收官**（W921 072000af·git 反填·共 2 笔·W971 存量回填）
-
-**B-W855-05 CHANGELOG 主动瘦身**：679KB（201 段现役·W711 审计时已超基线 11%+ 后继续涨至超基线 35%）——按文档规范 §5 归档规则执行 W736 同款一级迁移：**W700-W802 共 102 段迁 archive/docs/CHANGELOG-ARCHIVE.md**（迁后 CHANGELOG 363KB·低于 503KB 基线达标；ARCHIVE 978KB 未触 1MB tier2 阈·滚动分支零启用）。迁移脚本全断言（三文件段 W 号并集守恒 693 / 全局无重号 / 迁后倒序）·任一不符零落盘——首版 tier2 滚动分支缺陷即被守恒断言当场拦下（零落盘）后收缩窗口绕开。段内容零改动（纯位置迁移·历史段禁改纪律保持）。
-
-**验证**：第 17 门禁索引健康全过（段完整性/倒序/编号上限）·第 31 门禁 C4 仅批内在途残留。
 
 
