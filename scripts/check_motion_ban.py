@@ -21,6 +21,8 @@ import re
 import sys
 from pathlib import Path
 
+from utils.gate_common import iter_private_style_blocks
+
 ROOT = Path(__file__).resolve().parent.parent
 BAN = [
     (re.compile(r"cubic-bezier\([^)]*-\d"), "cubic-bezier 负值（回弹）"),
@@ -58,9 +60,10 @@ def main():
         rel = str(f.relative_to(ROOT))
         s = f.read_text(encoding="utf-8", errors="ignore")
         rest = s
+        private = {body for body, _ in iter_private_style_blocks(s)}
         for st in re.findall(r"<style>(.*?)</style>", s, re.S):
             rest = rest.replace(st, "", 1)
-            if "tokens.css —" in st:  # INLINED 副本跳过（共享 CSS 已在源文件扫过）
+            if st not in private:  # INLINED 副本跳过（共享 CSS 已在源文件扫过）
                 continue
             scan_css(st, rel, fails)
         # 剔除白名单上下文行后再扫其余文本（内联 JS 等）

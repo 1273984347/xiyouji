@@ -5,7 +5,7 @@
 > 轨标：教学讲解
 > 本文件用于跨 session 交接，记录当前进度、下一步可推进方向、方法论沉淀与待办事项。
 > 创建于 2026-07-25（v2.0.41 W068 后）
-> 最后更新：2026-10-29（W1018 回次 og:image 全覆盖第三轮 12 张）·2026-10-29（W1017 产物目录归位 + 临时区清理批）·2026-10-29（W1016 教训固化批）·（W1001 及更早批次详见 CHANGELOG.md）
+> 最后更新：2026-10-30（W1019 CSS 单一事实源治本与内联净重口径）·2026-10-29（W1018 回次 og:image 全覆盖第三轮 12 张）·2026-10-29（W1017 产物目录归位 + 临时区清理批）·（W1001 及更早批次详见 CHANGELOG.md）
 > 与 [CHANGELOG.md](CHANGELOG.md)（变更日志）/ [STRUCTURE.md](STRUCTURE.md)（目录结构）/ [README.md](README.md)（项目说明）/ [docs/00-导读/项目说明.md](docs/00-导读/项目说明.md)（项目状态）配套使用。
 > **维护契约（防乱写）**：本文件是项目进度中枢，只允许结构性编辑——① 保持「零 / 一 / 二 / 三」四段骨架不变；②「最后更新」行只写最新 1–3 批摘要（每批 ≤ 1 行），**禁止把历史批次堆进该行**（历史已归档 / 在 CHANGELOG）；③ 每批详细记录只写 CHANGELOG + 归档（历史段禁改）；④ 任何「当前 HEAD / 当前版本」表述必须与 `git rev-parse --short HEAD` 核对后更新；⑤ 本文件是状态快照，与 CHANGELOG（时间线）冲突时以 CHANGELOG 为准。
 > **历史归档**：v2.0.39-v2.2.49（W066-W280）段的详细进度记录已迁移至 [archive/docs/HANDOVER-ARCHIVE.md](archive/docs/HANDOVER-ARCHIVE.md)。本文件仅保留 v2.2.50+（W277）现役记录与全局概要。
@@ -20,10 +20,16 @@
 
 
 
-**原唯一长期阻塞「档 B 真实生成需 LLM_API_KEY」已于 W402 解除**（provider 化 Base URL·渡口问津生成式问答·LLM_API_KEY 配于本地 .env 已 gitignore）。**访问数据基线已接入（W403·localStorage 自建·仅本浏览器可见）**，**S2 分发完成（W404 精选 27 篇发布版 + 合集页 curated.html + W405 第二批 27 篇随笔发布版·44 篇随笔全发布）**，**GoatCounter 已接入并完成自托管修复（W425 注册接入 + W426 gc.zgo.at 大陆 DNS 污染 → count.js 本地自托管·计数回传 goatcounter.com·线上实测 HTTP 200）**；**真实跨访客读者量仍待回传验证**（部署生效后观察后台数据）；有流量则继续分发（S4 学术投稿等），无流量则停止内容生产。另存在平行入口 `xiyouji-agent-web`（OpenAI-compatible 自研引擎·引擎三键配于服务端 .env·W680 起·`PROJECT_CWD`=仓库根（自动解析·W596）直接对话/检索/跑脚本），与 scripts/rag 档B 二选一或并行。**安全审计 P0-1/P1-1 已处置（W411）**：Web Agent 默认权限改 acceptEdits + 可选 AGENT_WEB_TOKEN 认证 + 权限/工作目录白名单 + 仅回环监听 127.0.0.1·MCP 4 工具路径白名单拒越界。**安全审计剩余项已处置（W412）**：P0-2 禁运行时覆盖引擎凭证/端点键（前端表单移除·仅服务端 .env·W680 起=LLM_* 三键）·P1-2 静态站 XSS 转义 6 页·P2 RAG 参数钳制/LLM 端点校验/SSE 超时与断开清理/DOMPurify 消毒/依赖锁定·P3 日志收敛/CORS 白名单/死代码/版本漂移；密钥吊销轮换需用户在 DeepSeek 控制台操作（P1-3 仅告知）。**W424 对抗性审查修正与全仓整理已处置**：A4 门禁校准 209（verify EXPECT_A4 201→209）·3D 页 defer 修复·EN 页 Ch. 腐蚀修复·security 依赖审计修复（只扫仓库 requirements.txt·high 103→0）·新Agent启动Prompt/workflows README/DESIGN 同步·全仓清理（截图 416MB + 过期报告 14 + 原始审计 JSON 4）·RAG 索引重建。**W424 SRI/CSP 已处置**：95 外部脚本标签 SRI（SHA-384）·159 页 meta CSP（680 内联脚本哈希·script-src-attr none）·EN 腐蚀第二波（""X"" 32 处 + 反引号 4 处）·6 页 sankey 漏引修复·复盘沉淀批次（腐蚀/插件引用门禁 + 方法论新增 + 内容同步）。**W417 文档健康治理已处置**：CHANGELOG/file-index/交接文档归档精简降达标·verify_delivery 新增 A1-A6 真实计数校验（611==611）·actions 升级消除 Node 20 deprecation·RAG 索引重建演练通过·bump_version 增强（--desc/W 范围锚点/页脚同步）·LICENSE 双协议边界补强·sitemap 补全 154 页。**W418 内容质量深化已处置**：全站死链巡检（site/en/ 29 broken 链接修复——EN 版存在指向同目录/无 EN 版回退中文原版 ../data/*.html 加 lang="zh-CN" 标注·docs/ 全量 4784 链接 0 broken）+ A1 逐回解读 23 回补 `> 导航：` 引用行（100 回导航全覆盖 100/100）。**W419 修复 A1 深度解读 SD 错位已处置**：22 篇 SD（SD038-052/056-062）编号≠真实回号归位（根因 W286 合并脚本只读源第一行·元数据在第三行→fallback 按编号放置）·按正文真实回号范围式复制 40-72 回全覆盖（原 63-72 十连回空白消除）·源文件 24 篇元数据/H1/正文内嵌/关联行修正·第 56 回补写 SD101。**W420 A1 内容质量深化已处置**：A1 深度解读 100/100 补全（第038/039回新增 SD102/SD103·source 切片 101→103）+ 56 回「对应原著/数据指标」结构化元数据补齐 + 99 回导航上一回/下一回错链修复（此前约 60 回指向非相邻回）+ 10 回 sd-crossref 关联块死链修复（66 处·docs/01 1715 链接 0 broken）。**W421 Screenshot Review 提速优化已处置**：screenshot-review.yml 新增改动范围判定（页脚/文档-only 跳过·site/data 变更定向截图·static/脚本/workflow 变更全量·schedule/dispatch 全量）+ batch_screenshots.js --only-pages 定向截图 + Playwright 浏览器缓存 + checkout fetch-depth 0。**W422 全量治理已处置**：perf.yml 补 push 触发（LHCI 预算门禁首次在真实发布路径运行）·verify_delivery 新增 4 项门禁（A1 导航相邻性/docs/01 链接/sitemap 覆盖/site/data 回退模式）·文档健康归档（CHANGELOG 83 行·file-index 127 行·交接文档 556 行）·双索引规则校准（新文档执行 + 存量以 file-index 追溯）·README 命令修正 + JS 检查进 CI·认知总览计数校准（756/611/211/209）·Dependabot/mypy report-only/a11y 口径/artifact 瘦身/_DEBRIS 清理。**W459 V2 审查收尾已处置**：D2 回目跳转死链修复（方案错误约定 `第NNN回-回目摘要.md` → A1_DOC_MAP 内嵌 100 条真实文件名映射·路径深度 ../→../../）+ check_dynamic_links.py 动态链接门禁挂 verify_delivery（补 lint_links 静态盲区·首跑抓出 tag-cloud dashboard 死链 + EN source_doc 虚构路径并同批修复）+ V2 方案文档回写 + 首页精选补 geo-3d 入口；W456-W458 积压改动同批基线提交（de8047a）。当前 HEAD = W1018（回次 og:image 全覆盖第三轮：十二张线描立像与场面接入对应回目页并换专属 og:image；详见 CHANGELOG）。**W530 遗留待办已部分解除（W535）**：取数环节不再需要人工登后台——新增 `scripts/fetch_gate_stats.py`（零第三方依赖·GoatCounter API v0 拉近 7/30 日页面 UV·`--self-test` 负样本 14/14 + `--fixture` 离线端到端），仅剩「生成 API 令牌写入 `.env`」一次性动作，随后即可跑 `judge_gate.py` 正式判定。**W590 需求侧优化主计划已入库**（`docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md`·13 工作包约 14 批·WP-A 取数自测 14/14 过·正式裁决仅待 `.env` 配 `GOATCOUNTER_API_TOKEN` 后跑 judge_gate）。**W530 决策闸门已正式判定（W626·2026-09-30）**：GoatCounter API 令牌已配置（浏览器 UI 生成·Read statistics 权限·剪贴板提取直写 `.env` 已 gitignore），`fetch_gate_stats.py` 实测 **7 日 UV=1 / 30 日 UV=24**，`judge_gate.py` 判定输出分支 **归档**（30 日 UV<30 阈值）——**冻结 WP-D2 及一切内容扩容批，仅推进 P0/P1 工程批**（WP-C SEO 根治层等）；WP-B-ALT 维持冻结预案；复盘存档 `docs/11-方案报告/调研与数据复盘/读者数据复盘.md`（作者侧待办：UV 曲线/来源占比后台截图人工核）。
+**原唯一长期阻塞「档 B 真实生成需 LLM_API_KEY」已于 W402 解除**（provider 化 Base URL·渡口问津生成式问答·LLM_API_KEY 配于本地 .env 已 gitignore）。**访问数据基线已接入（W403·localStorage 自建·仅本浏览器可见）**，**S2 分发完成（W404 精选 27 篇发布版 + 合集页 curated.html + W405 第二批 27 篇随笔发布版·44 篇随笔全发布）**，**GoatCounter 已接入并完成自托管修复（W425 注册接入 + W426 gc.zgo.at 大陆 DNS 污染 → count.js 本地自托管·计数回传 goatcounter.com·线上实测 HTTP 200）**；**真实跨访客读者量仍待回传验证**（部署生效后观察后台数据）；有流量则继续分发（S4 学术投稿等），无流量则停止内容生产。另存在平行入口 `xiyouji-agent-web`（OpenAI-compatible 自研引擎·引擎三键配于服务端 .env·W680 起·`PROJECT_CWD`=仓库根（自动解析·W596）直接对话/检索/跑脚本），与 scripts/rag 档B 二选一或并行。**安全审计 P0-1/P1-1 已处置（W411）**：Web Agent 默认权限改 acceptEdits + 可选 AGENT_WEB_TOKEN 认证 + 权限/工作目录白名单 + 仅回环监听 127.0.0.1·MCP 4 工具路径白名单拒越界。**安全审计剩余项已处置（W412）**：P0-2 禁运行时覆盖引擎凭证/端点键（前端表单移除·仅服务端 .env·W680 起=LLM_* 三键）·P1-2 静态站 XSS 转义 6 页·P2 RAG 参数钳制/LLM 端点校验/SSE 超时与断开清理/DOMPurify 消毒/依赖锁定·P3 日志收敛/CORS 白名单/死代码/版本漂移；密钥吊销轮换需用户在 DeepSeek 控制台操作（P1-3 仅告知）。**W424 对抗性审查修正与全仓整理已处置**：A4 门禁校准 209（verify EXPECT_A4 201→209）·3D 页 defer 修复·EN 页 Ch. 腐蚀修复·security 依赖审计修复（只扫仓库 requirements.txt·high 103→0）·新Agent启动Prompt/workflows README/DESIGN 同步·全仓清理（截图 416MB + 过期报告 14 + 原始审计 JSON 4）·RAG 索引重建。**W424 SRI/CSP 已处置**：95 外部脚本标签 SRI（SHA-384）·159 页 meta CSP（680 内联脚本哈希·script-src-attr none）·EN 腐蚀第二波（""X"" 32 处 + 反引号 4 处）·6 页 sankey 漏引修复·复盘沉淀批次（腐蚀/插件引用门禁 + 方法论新增 + 内容同步）。**W417 文档健康治理已处置**：CHANGELOG/file-index/交接文档归档精简降达标·verify_delivery 新增 A1-A6 真实计数校验（611==611）·actions 升级消除 Node 20 deprecation·RAG 索引重建演练通过·bump_version 增强（--desc/W 范围锚点/页脚同步）·LICENSE 双协议边界补强·sitemap 补全 154 页。**W418 内容质量深化已处置**：全站死链巡检（site/en/ 29 broken 链接修复——EN 版存在指向同目录/无 EN 版回退中文原版 ../data/*.html 加 lang="zh-CN" 标注·docs/ 全量 4784 链接 0 broken）+ A1 逐回解读 23 回补 `> 导航：` 引用行（100 回导航全覆盖 100/100）。**W419 修复 A1 深度解读 SD 错位已处置**：22 篇 SD（SD038-052/056-062）编号≠真实回号归位（根因 W286 合并脚本只读源第一行·元数据在第三行→fallback 按编号放置）·按正文真实回号范围式复制 40-72 回全覆盖（原 63-72 十连回空白消除）·源文件 24 篇元数据/H1/正文内嵌/关联行修正·第 56 回补写 SD101。**W420 A1 内容质量深化已处置**：A1 深度解读 100/100 补全（第038/039回新增 SD102/SD103·source 切片 101→103）+ 56 回「对应原著/数据指标」结构化元数据补齐 + 99 回导航上一回/下一回错链修复（此前约 60 回指向非相邻回）+ 10 回 sd-crossref 关联块死链修复（66 处·docs/01 1715 链接 0 broken）。**W421 Screenshot Review 提速优化已处置**：screenshot-review.yml 新增改动范围判定（页脚/文档-only 跳过·site/data 变更定向截图·static/脚本/workflow 变更全量·schedule/dispatch 全量）+ batch_screenshots.js --only-pages 定向截图 + Playwright 浏览器缓存 + checkout fetch-depth 0。**W422 全量治理已处置**：perf.yml 补 push 触发（LHCI 预算门禁首次在真实发布路径运行）·verify_delivery 新增 4 项门禁（A1 导航相邻性/docs/01 链接/sitemap 覆盖/site/data 回退模式）·文档健康归档（CHANGELOG 83 行·file-index 127 行·交接文档 556 行）·双索引规则校准（新文档执行 + 存量以 file-index 追溯）·README 命令修正 + JS 检查进 CI·认知总览计数校准（756/611/211/209）·Dependabot/mypy report-only/a11y 口径/artifact 瘦身/_DEBRIS 清理。**W459 V2 审查收尾已处置**：D2 回目跳转死链修复（方案错误约定 `第NNN回-回目摘要.md` → A1_DOC_MAP 内嵌 100 条真实文件名映射·路径深度 ../→../../）+ check_dynamic_links.py 动态链接门禁挂 verify_delivery（补 lint_links 静态盲区·首跑抓出 tag-cloud dashboard 死链 + EN source_doc 虚构路径并同批修复）+ V2 方案文档回写 + 首页精选补 geo-3d 入口；W456-W458 积压改动同批基线提交（de8047a）。当前 HEAD = W1019（CSS 单一事实源治本：内联块与源逐字节对齐零漂移，内联副本剥离注释使单页内联块由 51,504 B 降至 39,323 B；详见 CHANGELOG）。**W530 遗留待办已部分解除（W535）**：取数环节不再需要人工登后台——新增 `scripts/fetch_gate_stats.py`（零第三方依赖·GoatCounter API v0 拉近 7/30 日页面 UV·`--self-test` 负样本 14/14 + `--fixture` 离线端到端），仅剩「生成 API 令牌写入 `.env`」一次性动作，随后即可跑 `judge_gate.py` 正式判定。**W590 需求侧优化主计划已入库**（`docs/superpowers/plans/2026-09-21-demand-side-optimization-master-plan.md`·13 工作包约 14 批·WP-A 取数自测 14/14 过·正式裁决仅待 `.env` 配 `GOATCOUNTER_API_TOKEN` 后跑 judge_gate）。**W530 决策闸门已正式判定（W626·2026-09-30）**：GoatCounter API 令牌已配置（浏览器 UI 生成·Read statistics 权限·剪贴板提取直写 `.env` 已 gitignore），`fetch_gate_stats.py` 实测 **7 日 UV=1 / 30 日 UV=24**，`judge_gate.py` 判定输出分支 **归档**（30 日 UV<30 阈值）——**冻结 WP-D2 及一切内容扩容批，仅推进 P0/P1 工程批**（WP-C SEO 根治层等）；WP-B-ALT 维持冻结预案；复盘存档 `docs/11-方案报告/调研与数据复盘/读者数据复盘.md`（作者侧待办：UV 曲线/来源占比后台截图人工核）。
 
 **冻结适用范围（W793 立·单一权威表述）**：内容扩容维持 W626 归档裁决冻结（2026-09-30 起判归档；**2026-10-27 重判=中间态**——账号 10-01 重启、数据链恢复、30 日 UV=78，归档线已脱离但分发线 200 未达·W793 二选一维持；详见 docs/11-方案报告/调研与数据复盘/读者数据复盘.md W981 订正注）；已点名解冻项（WP-D2/E、B-5/B-6 第二步、B-7）均已全部收官，不再另议；工程/治理/门禁批不受限（W626 原文即「仅推进 P0/P1 工程批」）；新增内容扩容批须二选一：**用户点名**，或 **judge_gate 重判为「继续分发」**（30 日 UV≥30）。
-## 一、当前进度（W1018 回次 og:image 全覆盖第三轮：十二张线描立像与场面接入对应回目页并换专属 og:image；更早批次详见 CHANGELOG.md）
+## 一、当前进度（W1019 CSS 单一事实源治本收敛漂移并以内联净重口径压住每页体积，补 Python 侧参数钳制负向测试；更早批次详见 CHANGELOG.md）
+- **W1019 BL-33/BL-29 收官批**（CSS 单一事实源治本 + 内联净重口径）：
+  - 漂移实测：330 内联页逐字节比对 ⇒ 300 一致 / 30 漂移（A 题图 26 页 / B timeline 2 页 / C 根级 2 页）
+  - 根因：`inline_css.py` 的 `depth==0` 无条件早退（W875）堵死根级已内联页重同步 ⇒ 撤除，改由「无外链且未内联」判据接管
+  - 治本：`.chapter-plate` 归并三轮题图批写回 `system.css`；砍零引用微交互工具类 787 B（29,228 → 28,441 B）
+  - 净重口径：源保留注释、`inline_css` 传播时剥离 ⇒ 单页内联块 51,504 → 39,323 B（全站约 4.0MB），第 15 槽余量 96%
+  - BL-29：主体 W791 已完成（22 例全绿 + CI 接线），本批补 Python 侧 `rag_server.py` 参数钳制负向测试 14 例
 - **W1018 回次 og:image 全覆盖批·第三轮**（12 张线描立像/场面）：
   - 缺口实读 68 回 · 已出 100 主体 slug 全表避重 · 回目覆盖 32 → 44 回（余 56 回）
   - 母版段两变体：立像段逐字 249 字符（6 张）+ 场面段仅改 3 处（6 张）
@@ -43,11 +49,6 @@
   - 15 项真缺陷 P1/P2 全修（含 4 处门禁本体：doc-sync 自测 T4 解耦、verify 注释订正、归档段级双向对账、第 42 基线反向查）
   - tmpe 路由根修（批号件归 w###/wNNN/）+ 锁 R1-R4 + _misc 告警死代码修 + 归位 93/285 件
   - ruff 13 项存量债清零 + batch_screenshots fail-open 修 + make help 修 + 归档台账补登记
-- **W1013 回次 og:image 全覆盖批·第二轮**（12 张线描立像/场面）：
-  - 缺口实读 80 回 · 回目覆盖 20 → 32 回（余 68 回）
-  - 母版段两变体：立像段逐字 249 字符 + 场面段仅改 3 处
-  - 12 张主体全部避开已出的 88 个 plate-line 主体（slug 全表核对）· 5 张重出（两轮）
-  - 坑表 +2 条（冒号路径落盘 0 字节 / 编号 max 不等于主体数）
 
 - **W1001**（并行会话）
 - **W988 水墨卡族投放批**（27 张 `card-*` 逐张定投放位置 + 分回次 og:image）：
@@ -194,7 +195,7 @@
 
 
 
-> 历史概要（W1013 及更早）的详细记录见 [CHANGELOG.md](CHANGELOG.md)（W534 裁剪：里程碑概要按维护契约只留最近 5 版，删前逐批断言 CHANGELOG 有段·信息零丢失·W713 归位=指针须指窗口最老可见块）。
+> 历史概要（W1014 及更早）的详细记录见 [CHANGELOG.md](CHANGELOG.md)（W534 裁剪：里程碑概要按维护契约只留最近 5 版，删前逐批断言 CHANGELOG 有段·信息零丢失·W713 归位=指针须指窗口最老可见块）。
 ## 二、下一步方向候选清单
 
 
@@ -297,11 +298,11 @@ docs/05-诗词歌赋/ 中文专题已齐备，**英文站译介（site/en/ E6/E3
 - **BL-26 内容质量方差（AI 平庸化）**（外部评审机制层批评①·2026-10-17·报告 §5.1 判定**成立**）：门禁保真不保质——「论点是否平庸/论证是否扎实/情感阐释是否有共鸣」是门禁的结构性盲区，属人审战场。**处置**：markdown写作规范 §4 增 5 条 AI 内容生产特有反模式（情节复述+主题套话/平庸安全结论/情感空转/流畅权威体/引文真推论假·W776 落地）+ 对抗性审查批持续抽检（W737/W760 先例）；**不设工程关闭项**（质量是过程属性非一次性缺陷）。
 - **BL-27 工程化 overhead 可持续性**（外部评审机制层批评②·2026-10-17·报告 §5.2 判定**成立·主动权衡**）：W### 双索引 + 49 段门禁的首要目的是**断点可恢复性**（一人多线现实约束），不是表演；代价=贡献者曲线陡峭、维护者精力转移即停摆（评审引「赛博好人」前车之鉴）。**处置**：记录在案；每次新增门禁/机制前自问「是否为可恢复性服务」（E36-E42 铁则同款）；**不设工程关闭项**。
 - **BL-28 单点故障**（外部评审机制层批评③·2026-10-17·报告 §5.3 判定**成立·无解已缓解**）：项目存续系于单一维护者；数字人文个人项目常见失败模式（机构支持短期化/劳动不被晋升路径承认/人员变动致项目偏移）全中。**处置**：缓解=公开仓库+CI+全文档化到「新 Agent 可接管」程度（HANDOVER/对账表/门禁体系即为此设计）；无可执行工程项，**不设关闭项**——记录在案作为一切工程决策的约束背景。
-- **BL-29 agent-web 攻击面负向测试缺口**（外部评审第三轮 §4.4·2026-10-18·W790 报告）：CORS 预检绕过、超大 RAG top_k、SSE 超时未清理三类负向测试在 agent-web 测试面不存在（关键词实证·38 个 node --test 用例仅覆盖工具权限/audit/citationGuard）；W411/W412 修复无回归固化，重构回退风险真实存在。**处置**：补负向测试 + CI 接线，列为下个 agent-web 触及批伴随项（同 W787 停止 churn 纪律·不单独开批）。
+- **BL-29 agent-web 攻击面负向测试缺口**（外部评审第三轮 §4.4·2026-10-18·W790 报告）：CORS 预检绕过、超大 RAG top_k、SSE 超时未清理三类负向测试在 agent-web 测试面不存在（关键词实证·38 个 node --test 用例仅覆盖工具权限/audit/citationGuard）；W411/W412 修复无回归固化，重构回退风险真实存在。**处置**：补负向测试 + CI 接线，列为下个 agent-web 触及批伴随项（同 W787 停止 churn 纪律·不单独开批）。**〔W1019 核实：主体已于 W791 落地〕**——`xiyouji-agent-web/server/security.test.ts` 22 例实跑全绿（23.8s）且 `ci.yml:429` 已接线 `npm --prefix xiyouji-agent-web run test:server`，三类攻击面按 agent-web 真实防护模型映射覆盖；**残余缺口**仅「超大 RAG top_k」所指的 Python 侧 `scripts/rag/rag_server.py` 参数钳制长期零测试，已补 `tests/unit/test_rag_server_clamp.py` 14 例 ⇒ **本条关闭**。
 - **BL-30 依赖卫生两小项**（外部评审第三轮 §4.1·2026-10-18·W790 报告）：① E2E job `npm install playwright @playwright/test`（ci.yml:47）未钉版，与 scripts/package.json ^1.63.0 不一致，浏览器版本随 CI 日期浮动（10 个视觉基线长期稳定·容差内未见影响）；② 依赖清单分散三处（scripts//agent-web//site 零依赖）无根级指针。**处置**：钉版对齐 + README/CONTRIBUTING 加一行索引；低优先·随依赖变动批顺带。
 - **BL-31 sync_docs.py 状态处置**（外部评审第三轮 §4.7·2026-10-18·W790 报告）：该脚本为校验器（6 文档一致性）非 CI 接线（仅 Makefile release·本机无 make）、存量 exit=1 失败态未清（W787 对拍记录）、无单测；活跃同职责门禁 check_doc_sync（第 31 槽·18 负样本）健康度不受影响。**处置**：退休/接线/修复三选一·用户裁决时机。
 - **BL-32 截图审查触发粒度**（外部评审第三轮 §4.3 附带观察·2026-10-18·W790 报告）：纯页脚链路文本改动（如批次级联插 token）触发 9 分钟截图审查全量；可评估 paths 过滤细化或宽容档。**处置**：低优先·下次改 screenshot-review.yml 时评估。
-- **BL-33 system.css 与页面内联块漂移（inline_css --force 回吞迁移成果·W876 实证·2026-10-22）**：W862-W875 设计迁移只改页面文件（含 INLINED 副本）未写回 `site/system.css`（自 W856 停更）——任何一次 `inline_css.py --force` 都会把迁进内联块的规则整段冲掉（`.page-wrap` 容器令牌化→1320px 字面量·`.seal` 淡底→实底·朱砂实底审计 457→710 即现形；W876 中途一次全量 --force 已污染 328 页暂存区·修复=自 HEAD 重建 + 靶向替换令牌值 + 静态 diff 审计证「三类之外逐字节一致」）。附伤：W875 给 inline_css 加的「根级页面直接 skip」早退把根级 INLINED 页（dukou-engine）重同步路径堵了（W876 已手工靶向修复）。**处置**：后续迁移批二选一——① 迁移同步写回 system.css（治本·推荐）② 禁全量 --force 改靶向同步（治标）；inline_css 根级 skip 早退修条件（有 INLINED 标记的根级页应放行）；W879 阶段 5 门禁批顺带评估接线。
+- **BL-33 system.css 与页面内联块漂移（inline_css --force 回吞迁移成果·W876 实证·2026-10-22）**：W862-W875 设计迁移只改页面文件（含 INLINED 副本）未写回 `site/system.css`（自 W856 停更）——任何一次 `inline_css.py --force` 都会把迁进内联块的规则整段冲掉（`.page-wrap` 容器令牌化→1320px 字面量·`.seal` 淡底→实底·朱砂实底审计 457→710 即现形；W876 中途一次全量 --force 已污染 328 页暂存区·修复=自 HEAD 重建 + 靶向替换令牌值 + 静态 diff 审计证「三类之外逐字节一致」）。附伤：W875 给 inline_css 加的「根级页面直接 skip」早退把根级 INLINED 页（dukou-engine）重同步路径堵了（W876 已手工靶向修复）。**处置**：后续迁移批二选一——① 迁移同步写回 system.css（治本·推荐）② 禁全量 --force 改靶向同步（治标）；inline_css 根级 skip 早退修条件（有 INLINED 标记的根级页应放行）；W879 阶段 5 门禁批顺带评估接线。**〔W1019 核实并关闭〕**——实况比登记更进一步：W895 已做过一轮收敛（system.css 补三处 + `--inline-links` 护栏 + 330 页按源重生成），本批补完治本：① 撤除 `inline_css.py` 的 `depth==0` 无条件早退（根级已内联页重同步被堵的真根因），早退条件按原设计修好；② `.chapter-plate` 归并 W983/W1013/W1016 三轮题图批写回 `system.css`；③ 体积改走**净重口径**（源保留注释、`inline_css` 传播时剥离块注释 ⇒ 单页内联块 51,504→39,323 B），`DESIGN.md` §4A.8 已改写为双口径判据；④ 砍零引用微交互工具类 787 B。迁移批纪律随之更新：**改页面内联块时同步写回 `system.css`**（治本已具备条件）。
 
 
 **S 卡拍板记录（W693·2026-10-10 用户裁决）**：候选三卡 S-16 残留扫**吸收为第 38 门禁**（check_embedded_stale_markers.py·本批挂载）；S-17 内嵌重灌器/S-18 契约冒烟精化**登记为工具化排期项**（下个数据面批次顺带）；存量 S-04~S-15 十二张**全部关闭不建置**（skills/ 已 W562 退役——其可行能力已被既有载体吸收：S-04→test_site_quality 断言、S-05→断言式脚本模式（AGENTS §4.3）、S-06→e2e 探针规约、S-07→S4 docx 工具链（A-05 本批复用）、S-08→sync_data_json.py（W678）、S-09→派发边界（AGENTS §4.3 W671）、S-10→engine.smoke 十二断言（W680）、S-11→告警裁决两账实证（W681/W690）、S-12→手工级联模板两代（_w676/_w691）、S-13→渠道要求落夹（W687）、S-14→第 21 动态链接门禁、S-15→S2 分发冻结无触发。）
@@ -316,7 +317,7 @@ docs/05-诗词歌赋/ 中文专题已齐备，**英文站译介（site/en/ E6/E3
 ## 三、方法论沉淀
 
 > **经验总入口（W755 指针化·W973 真指针化收口）**：现役坑位与门禁读
-> [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（112 条·六主题）与 [docs/agent/gates.md](docs/agent/gates.md)（50 槽）；
+> [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（115 条·六主题）与 [docs/agent/gates.md](docs/agent/gates.md)（50 槽）；
 > 诊断 SOP 读 [docs/10-方法论沉淀/](docs/10-方法论沉淀/README.md)；
 > 本区历史叙事全文已迁 archive/docs/HANDOVER-ARCHIVE.md（W973·grep 查）。
 ## 四、待办事项（短期）
@@ -447,7 +448,7 @@ python detect_unwrapped_tables.py  # 表格溢出扫描
 ---
 ## 八、已知雷区
 
-> **雷区权威 = [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（112 条·六主题·含 shell 场景查坑表）**；
+> **雷区权威 = [docs/agent/pitfalls.md](docs/agent/pitfalls.md)（115 条·六主题·含 shell 场景查坑表）**；
 > 本区历史雷区叙事已迁 archive/docs/HANDOVER-ARCHIVE.md（W973·grep 查勿通读）。
 ## 九、使用说明
 
@@ -474,4 +475,4 @@ python detect_unwrapped_tables.py  # 表格溢出扫描
 
 ---
 
-> 本文件创建于 2026-07-25（v2.0.41 W068 后），用于跨 session 交接。每次完成新 W### 后更新。最后更新：2026-10-29（W1018 回次 og:image 全覆盖第三轮 12 张）；2026-10-29（W1017 产物目录归位 + 临时区清理批）；2026-10-29（W1016 教训固化批）
+> 本文件创建于 2026-07-25（v2.0.41 W068 后），用于跨 session 交接。每次完成新 W### 后更新。最后更新：2026-10-30（W1019 CSS 单一事实源治本与内联净重口径）；2026-10-29（W1018 回次 og:image 全覆盖第三轮 12 张）；2026-10-29（W1017 产物目录归位 + 临时区清理批）

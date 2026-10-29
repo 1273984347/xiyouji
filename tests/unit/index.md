@@ -11,7 +11,7 @@
 
 - （无）
 
-## 文件（57）
+## 文件（59）
 
 ### Python 脚本
 
@@ -41,6 +41,7 @@
 - `test_embed_json.py`
 - `test_folder_docs_gate.py`
 - `test_four_digit_wnum.py`
+- `test_inline_css_resync.py`
 - `test_lint_links_refactor.py`
 - `test_milestone_block_regex.py`
 - `test_new_page.py`
@@ -53,6 +54,7 @@
 - `test_preflight_touches.py`
 - `test_rag_enhance.py`
 - `test_rag_fusion.py`
+- `test_rag_server_clamp.py`
 - `test_release_prep.py`
 - `test_repo_layout.py`
 - `test_review_trigger.py`

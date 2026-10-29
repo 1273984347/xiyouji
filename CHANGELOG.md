@@ -1,3 +1,16 @@
+### W1019（2026-10-30）：BL-33/BL-29 收官批（CSS 单一事实源治本 + 内联净重口径）
+
+> **来源**：用户 2026-10-30 令「做 BL-33 治本」+「BL-29 这个也做了」+「C + 收官」。
+>
+> **连带登记**：BL-29 主体经实跑核实已于 W791 完成（`server/security.test.ts` 22 例全绿 + `ci.yml:429` 接线）⇒ 本批只补其残余缺口（Python 侧参数钳制长期零测试）；BL-33 经核实 W895 已做过一轮收敛，本批补完治本部分。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、DESIGN.md、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、pytest.ini、scripts/inline_css.py、scripts/output/_vermilion_solid_cache.json、scripts/output/file-index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、site/_template.html、site/data/81-hardships-view.html、site/data/81-hardships.html、site/data/_shell.html、site/data/aesthetics.html、site/data/ai-dialogue.html、site/data/business-model.html、site/data/cave-estate.html、site/data/century-dialogue.html、site/data/chapter-stats.html、site/data/chapter-structure-graph.html、site/data/character-appearance.html、site/data/character-dynamic-network.html、site/data/character-presence-timeline.html、site/data/character-relationship-3d-view.html、site/data/character-relationship-3d.html、site/data/character-semantic-network.html、site/data/character-sentiment-arc.html、site/data/chart-design.html、site/data/cognitive-psychology.html、site/data/concept-device.html、site/data/counterfactual.html、site/data/criticism-history.html、site/data/cross-time-danmaku.html、site/data/cultural-misreading.html、site/data/customs-pass-route.html、site/data/data-explorer.html、site/data/deconstruction.html、site/data/dialogue-sentiment.html、site/data/ecology.html、site/data/emotional-heatmap.html、site/data/ethics-consumption.html、site/data/famous-time-travel.html、site/data/four-dimensional-research-network.html、site/data/four-heavenly-kings-artifacts.html、site/data/game-webnovel.html、site/data/global-pattern.html、site/data/graph-explorer.html、site/data/guanyin-six-roles-network.html、site/data/hardship-difficulty-heatmap.html、site/data/hardship-heatmap.html、site/data/heaven-power-network.html、site/data/intertextuality-network.html、site/data/journey-geo-3d.html、site/data/journey-geo-semiotics.html、site/data/journey-map-interactive.html、site/data/journey-route.html、site/data/journey-spacetime.html、site/data/jurisprudence.html、site/data/karma-reincarnation.html、site/data/language-style-radar.html、site/data/linguistics.html、site/data/magic-system.html、site/data/material-archaeology.html、site/data/mbti-evolution.html、site/data/methodology-matrix.html、site/data/ming-political-thought-comparison.html、site/data/monster-background.html、site/data/monster-capability-radar.html、site/data/monster-ecology-network.html、site/data/monster-female-network.html、site/data/monster-hierarchy-network.html、site/data/monster-sociology.html、site/data/monster-victims-network.html、site/data/music-structure.html、site/data/narrative-experiment.html、site/data/narrative-rhythm-curve.html、site/data/narratology-12d-network.html、site/data/narratology-16d-network.html、site/data/perf-canvas-rendering.html、site/data/philosophy.html、site/data/pilgrim-team-dynamic-network.html、site/data/pilgrim-team-psychology-arc.html、site/data/poetry-rhythm-analysis.html、site/data/power-resources.html、site/data/relationships.html、site/data/risk-project.html、site/data/search.html、site/data/six-senses-narratology-network.html、site/data/social-media.html、site/data/story-timeline.html、site/data/tag-cloud.html、site/data/text-evolution.html、site/data/text-search.html、site/data/theological-intervention-network.html、site/data/timeline.html、site/data/underworld-power-network.html、site/data/visual-art.html、site/data/workplace.html、site/dukou-engine.html、site/en/81-hardships-view.html、site/en/81-hardships.html、site/en/academic-papers.html、site/en/aesthetics.html、site/en/ai-dialogue.html、site/en/bestiary.html、site/en/business-model.html、site/en/cave-estate.html、site/en/century-dialogue.html、site/en/chapter-stats.html、site/en/chapter-structure-graph.html、site/en/chapters-map.html、site/en/character-appearance.html、site/en/character-bailongma.html、site/en/character-bajie.html、site/en/character-dynamic-network.html、site/en/character-presence-timeline.html、site/en/character-relationship-3d-view.html、site/en/character-relationship-3d.html、site/en/character-semantic-network.html、site/en/character-sentiment-arc.html、site/en/character-shaseng.html、site/en/character-tangseng.html、site/en/character-wukong.html、site/en/characters.html、site/en/chart-design.html、site/en/cognitive-psychology.html、site/en/concept-device.html、site/en/counterfactual.html、site/en/criticism-history.html、site/en/cross-time-danmaku.html、site/en/cultural-misreading.html、site/en/customs-pass-route.html、site/en/dashboard.html、site/en/data-explorer.html、site/en/deconstruction.html、site/en/dialogue-sentiment.html、site/en/dukou-engine.html、site/en/ecology.html、site/en/emotional-heatmap.html、site/en/essay-ai-era.html、site/en/essay-buddhist-chan.html、site/en/essay-chapter-couplets.html、site/en/essay-character-fu.html、site/en/essay-cipai-linjiangxian.html、site/en/essay-cipai-mantingfang.html、site/en/essay-cipai-shuidiaogetou.html、site/en/essay-cipai-xijiangyue.html、site/en/essay-composition-origins.html、site/en/essay-divine-bureaucracy.html、site/en/essay-folk-belief.html、site/en/essay-historical-xuanzang.html、site/en/essay-information-cocoon.html、site/en/essay-ming-economy.html、site/en/essay-ming-examination.html、site/en/essay-ming-garrison.html、site/en/essay-ming-intellectual-history.html、site/en/essay-ming-judiciary.html、site/en/essay-ming-literary-thought.html、site/en/essay-ming-maritime-ban.html、site/en/essay-ming-metaphor.html、site/en/essay-ming-military.html、site/en/essay-ming-politics.html、site/en/essay-ming-religion.html、site/en/essay-ming-social-customs.html、site/en/essay-modern-management.html、site/en/essay-original-poetry.html、site/en/essay-poetry-imagery.html、site/en/essay-poetry-opening.html、site/en/essay-quanzhen-daoism.html、site/en/essay-rhythm-analysis.html、site/en/essay-scenery-poems.html、site/en/essay-thematic-poetry.html、site/en/essay-three-teachings.html、site/en/essay-version-evolution.html、site/en/essay-zen-koan-vs-neidan.html、site/en/ethics-consumption.html、site/en/famous-time-travel.html、site/en/four-dimensional-research-network.html、site/en/four-heavenly-kings-artifacts.html、site/en/game-webnovel.html、site/en/global-pattern.html、site/en/graph-explorer.html、site/en/guanyin-six-roles-network.html、site/en/guide.html、site/en/hardship-difficulty-heatmap.html、site/en/hardship-heatmap.html、site/en/heaven-power-network.html、site/en/index.html、site/en/intertextuality-network.html、site/en/journey-geo-semiotics.html、site/en/journey-map-interactive.html、site/en/journey-route.html、site/en/journey-spacetime.html、site/en/jurisprudence.html、site/en/karma-reincarnation.html、site/en/language-style-radar.html、site/en/linguistics.html、site/en/magic-system.html、site/en/material-archaeology.html、site/en/mbti-evolution.html、site/en/methodology-matrix.html、site/en/methodology.html、site/en/ming-political-thought-comparison.html、site/en/monster-background.html、site/en/monster-capability-radar.html、site/en/monster-ecology-network.html、site/en/monster-female-network.html、site/en/monster-hierarchy-network.html、site/en/monster-sociology.html、site/en/monster-victims-network.html、site/en/music-structure.html、site/en/narrative-experiment.html、site/en/narrative-rhythm-curve.html、site/en/narratology-12d-network.html、site/en/narratology-16d-network.html、site/en/perf-canvas-rendering.html、site/en/philosophy.html、site/en/pilgrim-team-dynamic-network.html、site/en/pilgrim-team-psychology-arc.html、site/en/poetry-rhythm-analysis.html、site/en/power-resources.html、site/en/relationships.html、site/en/risk-project.html、site/en/search.html、site/en/site-map.html、site/en/six-senses-narratology-network.html、site/en/social-media.html、site/en/tag-cloud.html、site/en/text-evolution.html、site/en/text-search.html、site/en/theological-intervention-network.html、site/en/timeline.html、site/en/tribulations.html、site/en/underworld-power-network.html、site/en/visual-art.html、site/en/visualizations.html、site/en/workplace.html、site/index.html、site/reader/ch001.html、site/reader/ch002.html、site/reader/ch003.html、site/reader/ch004.html、site/reader/ch005.html、site/reader/ch006.html、site/reader/ch007.html、site/reader/ch008.html、site/reader/ch009.html、site/reader/ch010.html、site/reader/ch011.html、site/reader/ch012.html、site/reader/ch013.html、site/reader/ch014.html、site/reader/ch015.html、site/reader/ch016.html、site/reader/ch017.html、site/reader/ch018.html、site/reader/ch019.html、site/reader/ch020.html、site/reader/ch021.html、site/reader/ch022.html、site/reader/ch023.html、site/reader/ch024.html、site/reader/ch025.html、site/reader/ch026.html、site/reader/ch027.html、site/reader/ch028.html、site/reader/ch029.html、site/reader/ch030.html、site/reader/ch031.html、site/reader/ch032.html、site/reader/ch033.html、site/reader/ch034.html、site/reader/ch035.html、site/reader/ch036.html、site/reader/ch037.html、site/reader/ch038.html、site/reader/ch039.html、site/reader/ch040.html、site/reader/ch041.html、site/reader/ch042.html、site/reader/ch043.html、site/reader/ch044.html、site/reader/ch045.html、site/reader/ch046.html、site/reader/ch047.html、site/reader/ch048.html、site/reader/ch049.html、site/reader/ch050.html、site/reader/ch051.html、site/reader/ch052.html、site/reader/ch053.html、site/reader/ch054.html、site/reader/ch055.html、site/reader/ch056.html、site/reader/ch057.html、site/reader/ch058.html、site/reader/ch059.html、site/reader/ch060.html、site/reader/ch061.html、site/reader/ch062.html、site/reader/ch063.html、site/reader/ch064.html、site/reader/ch065.html、site/reader/ch066.html、site/reader/ch067.html、site/reader/ch068.html、site/reader/ch069.html、site/reader/ch070.html、site/reader/ch071.html、site/reader/ch072.html、site/reader/ch073.html、site/reader/ch074.html、site/reader/ch075.html、site/reader/ch076.html、site/reader/ch077.html、site/reader/ch078.html、site/reader/ch079.html、site/reader/ch080.html、site/reader/ch081.html、site/reader/ch082.html、site/reader/ch083.html、site/reader/ch084.html、site/reader/ch085.html、site/reader/ch086.html、site/reader/ch087.html、site/reader/ch088.html、site/reader/ch089.html、site/reader/ch090.html、site/reader/ch091.html、site/reader/ch092.html、site/reader/ch093.html、site/reader/ch094.html、site/reader/ch095.html、site/reader/ch096.html、site/reader/ch097.html、site/reader/ch098.html、site/reader/ch099.html、site/reader/ch100.html、site/reader/index.html、site/reader/themes-hub.html、site/system.css、tests/unit/test_inline_css_resync.py、tests/unit/test_rag_server_clamp.py
+
+**本批要点**：① **漂移全量实测**——330 个内联页与源逐字节比对，300 一致 / 30 漂移，三类归集：A 题图规则 26 页（W983/W1013/W1016 三轮逐页写入·源缺失）、B timeline 2 页（源有页缺）、C 根级 2 页（源有页缺 74 至 79 行且残留旧值）。② **根因是脚本早退**——`inline_css.py` 的 `depth==0` 无条件早退（W875 加）把根级已内联页的重同步一并堵死，W876 只能手工靶向修 ⇒ 早退撤除，改由「无外链且未内联」判据接管，外链页仍受 W895 `--inline-links` 护栏保护。③ **题图规则写回源**——`.chapter-plate` 三规则归并进 `system.css`，26 页不再只活在副本里。④ **体积改走净重口径**——源文件保留注释供追溯，`inline_css.py` 只在传播为内联副本时剥离块注释，单页内联块 51,504 降至 39,323 B（负 23.7%）；另砍零引用微交互工具类 787 B。
+
+**验证**：内联块与源（净重口径）**330/330 一致 · 漂移 0**（原 30）· 根级两页补齐 brand-mark/kpi-row/hero-ornament/ico/chapter-plate · 旧值残留扫描 **0** · 新增回归锁 **17 例全过**（inline_css 重同步 3 + rag 参数钳制 14）· 第 15 槽单页内联块 39,323 B 远高于下限 20,000 B · CSS 类门禁（第 11/34/35/36/49 槽）**0 违例** · `stats.py --check` 24 键零差异。
+
+> - **状态**：已收官（BL-33 治本 + 净重口径 + BL-29 残余缺口；BL-29/BL-33 登记面已核实并待关闭）
 ### W1018（2026-10-29）：回次 og:image 全覆盖批·第三轮（12 张线描立像/场面）
 
 
@@ -13,18 +26,6 @@
 **验证**：母版判据 J1–J10 **112 张 · FAIL 0**（重出后）· 裁切验算 **112 张 · FAIL 0**（重出后）· 落位验收 **0 FAIL**（12 页题图 + og + alt + 暗色隐藏 + 未覆盖页零回归）· 跨行改写扫描器 **高危 0 处** · 第 48 门禁自测 **9/9** · 全量门禁见收官提交。
 
 > - **状态**：已收官（12 张落地·母版族 100 → 112 张·既有 100 张母版与站点版零改动·其余 56 个无配图回目页的 og:image 未误改·坑表 +2 条·待用户目视）
-
-### W1015（2026-10-29）：工具链稳健性补强①（跨行改写扫描器 + 第 48 门禁读盘路径覆盖）
-
-> **来源**：用户 2026-10-29 令「同族扫描 + 第 48 门禁补覆盖 做完再继续剩余 68 回扩量」。
->
-> - **文件**：scripts/check_cross_line_rewrite.py、scripts/check_plan_template.py、scripts/ci_sim.py、tests/unit/test_cross_line_rewrite.py、tests/unit/test_plan_template_read_disk.py、docs/00-导读/W批次编号对账表.md。
->
-> **本批要点**：① **跨行改写扫描器**（新增）——病根：「`[^X]*` 无尾锚点 ⇒ 匹配段可跨行 ⇒ `re.sub` 整段替换 = 静默删行」（W1005 实证）。全仓 scripts/ 全树实扫 ⇒ **改写面高危 0 处**（另 43 处可疑 + 184 处只读面）；判据自带 **4 例负样本自证**（含「排除符含 `\n` ⇒ 必不报」）；接线 `ci_sim.py` 第 8 项（避门禁本体·§11.2 禁擅改）。② **第 48 门禁读盘路径补覆盖**——`judge_file()` 的读盘面此前**零覆盖**（自测 ①~⑤ 全走纯函数 `R.judge`）⇒ W1005 批在首个新增计划方案件进仓时崩在 `AttributeError: module 'plan_template_review' has no attribute 'io'` ⇒ 潜伏到真实新增件才引爆；现补 self_test ⑧ 例 + 4 例 pytest。
->
-> **验证**：扫描器 `--self-test` 4/4 · `--gate` 0 FAIL（高危 0 处）· 第 48 门禁 `--self-test` 9/9 · pytest 9 passed。
->
-> - **状态**：已收官（让号留痕：并行 W1014「工具链体检整改批」先落地 ⇒ 本会话让号 **W1015**；台账行用 `update-index --cacheinfo` 精确暂存·未代提他方在途件）
 
 ### W1017（2026-10-29）：产物目录归位 + 临时区清理批
 
@@ -62,6 +63,18 @@
 **验证**：`check_gov_doc_claims` N1-N5 全一致（0 FAIL）· N4 坑位数 109 == pitfalls 实数 · ruff 全仓 0 债 · 新增 18 例单测全过 · precheck 自测含裸数字正/负样本 · 全量 verify 核心全过。
 
 > - **状态**：已收官（教训落载体 + 可机检者升硬守卫）
+
+### W1015（2026-10-29）：工具链稳健性补强①（跨行改写扫描器 + 第 48 门禁读盘路径覆盖）
+
+> **来源**：用户 2026-10-29 令「同族扫描 + 第 48 门禁补覆盖 做完再继续剩余 68 回扩量」。
+>
+> - **文件**：scripts/check_cross_line_rewrite.py、scripts/check_plan_template.py、scripts/ci_sim.py、tests/unit/test_cross_line_rewrite.py、tests/unit/test_plan_template_read_disk.py、docs/00-导读/W批次编号对账表.md。
+>
+> **本批要点**：① **跨行改写扫描器**（新增）——病根：「`[^X]*` 无尾锚点 ⇒ 匹配段可跨行 ⇒ `re.sub` 整段替换 = 静默删行」（W1005 实证）。全仓 scripts/ 全树实扫 ⇒ **改写面高危 0 处**（另 43 处可疑 + 184 处只读面）；判据自带 **4 例负样本自证**（含「排除符含 `\n` ⇒ 必不报」）；接线 `ci_sim.py` 第 8 项（避门禁本体·§11.2 禁擅改）。② **第 48 门禁读盘路径补覆盖**——`judge_file()` 的读盘面此前**零覆盖**（自测 ①~⑤ 全走纯函数 `R.judge`）⇒ W1005 批在首个新增计划方案件进仓时崩在 `AttributeError: module 'plan_template_review' has no attribute 'io'` ⇒ 潜伏到真实新增件才引爆；现补 self_test ⑧ 例 + 4 例 pytest。
+>
+> **验证**：扫描器 `--self-test` 4/4 · `--gate` 0 FAIL（高危 0 处）· 第 48 门禁 `--self-test` 9/9 · pytest 9 passed。
+>
+> - **状态**：已收官（让号留痕：并行 W1014「工具链体检整改批」先落地 ⇒ 本会话让号 **W1015**；台账行用 `update-index --cacheinfo` 精确暂存·未代提他方在途件）
 
 ### W1014（2026-10-29）：工具链体检整改批
 
@@ -291,7 +304,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1018），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1019），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1827,75 +1840,5 @@
 **随批订正**：审查报告状态行与 README 登记行 34 的 F1/F2「待批」改「已由 W903 修复」。
 
 **验证**：单测 17/17（先红后绿留证）·pytest 全量 858 passed 3 skipped·ruff scripts/+tests/ All checks passed·verify 全量 54 段核心全绿。
-
-
-### W902（2026-10-24）：机制脚本门禁全量审查与记忆固化入仓（四发现 + pitfalls/AGENTS/文档规范增补）
-
-
-
-> **来源**：用户 2026-10-24 两令——「顺便再审查一遍之前所有批次的机制、脚本、门禁有没有问题」+「本项目是多 Agent 协作，写入 Agent 私有记忆文件作用有限，写入项目文件才真实可靠·盘点记忆文件需入仓内容」。
-
-> - **文件**：docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md（新增）、docs/11-方案报告/README.md、docs/agent/pitfalls.md、AGENTS.md、docs/00-导读/文档规范.md、CLAUDE.md、docs/superpowers/plans/2026-10-14-interference-governance-roadmap.md、dCHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w902_spec.json、scripts/output/_cascade_files_W902.txt（逐件行见 file-index W902 段）。
-> **状态**：**已收官**（W902 82bb8ff7·git 反填·共 2 笔·W971 存量回填）
-
-**① 机制层全量审查（报告落 审查与评审/·登记行 34）**：三层审查——机器面（26 个带自测门禁 `--self-test` 全绿·verify 54 段·pytest 852 passed·`ci_sim.py` 干净检出 7/7 PASS 含全仓 20761 链接 0 broken·CSP 856 页零漂移）+ 代码面（preflight/batch_cascade/check_folder_docs/check_doc_sync 语义审计）+ 流程面（干扰日志考古对拍）。**四发现**：
-
-- **F1【中高·假绿族】preflight touches 交集为字面字符串比对**——`docs/11-方案报告/**（注记）` 这类通配/带注记声明与对方具体文件声明**字面不等恒不命中**（W900 认领行实证）·W897 修分隔符后同族的语义面残余·两起真实撞面（W825/W893）均未被机器拦下；修法（剥注记 + `X/**` 前缀展开 + 双向对称 + 负样本单测）**待批**（管控件）。
-- **F2【低】第 45 门禁 FAIL 提示语缺「先 git add 再 refresh」顺序**——W896 生成器按 Git 索引收集·refresh 先于 add 必漏新件·W900/W901 连踩；一行文案修法**待批**（管控件）。
-- **F3【流程·本批闭合】§8 干扰日志窗口内两起覆盖事件漏登**（W825 解析层修复被并行提交覆盖·W893 台账认领行被替换）——事件路径不经过 W822 两触发点·与断档同源；本批补 2 行延迟登记（如实标注·机制不擅改）。
-- **F4【在账】C5c 裸聚合 74 处 NOTE 未推进**（W703 起步策略·列入遗留盘点）。
-
-**② 记忆固化入仓（用户指令执行·报告 §3 全清单）**：文档规范 §11.1 立**常设指令行**「方案/审查/调研/复盘/计划类交付物唯一落盘位 = docs/11-方案报告/」+ 11-方案报告 README 维护契约与 CLAUDE.md 速查层同源指针；AGENTS §4.3 本机环境事实补 4 条（curl `--ssl-no-revoke`·`/tmp` 对 Windows Python 不可见·PMC→Europe PMC 兜底·`gh api` 中文 `-f`）；pitfalls.md 补 3 条（力导向 canvas 边层·CSP 写路径 `--check` 盲区·暗色审计 http 前置假 0）·三节计数同步（CSS 9→10·JS 5→6·数据 5→6·总数 49→52·AGENTS 六主题句同批订正）。逐条盘点 22 项记忆：8 项入仓 / 11 项仓内已覆盖（grep 实证）/ 3 类刻意不入（S4 双盲·他仓·宿主层）；保真度 22 犯模板与图表判定三教训列「建议后续批」。
-
-**验证**：verify 全量 54 段核心全绿（含第 32 门禁 CLAUDE.md 速查层 46 行过）·lint_links docs 5481 链接 0 broken·pytest 852 passed 3 skipped·ruff scripts/ 口径过·ci_sim 7/7 PASS。
-
-
-### W901（2026-10-24）：C5b 对账面恢复 + W900 披露项清偿（递归 glob / W757 链接新址 / T-16·T-17 补登）
-
-
-
-> **来源**：用户 2026-10-24 对 W900 批披露项裁决「批准；改。落库」——三件披露项/遗留项随批清偿；管控件改动（check_doc_sync.py）经用户明示批准。
-
-> - **文件**：scripts/check_doc_sync.py、docs/11-方案报告/README.md、CdHANDOVER.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w901_spec.json、scripts/output/_cascade_files_W901.txt（逐件行见 file-index W901 段）。
-> **状态**：**已收官**（W901 25b27066·git 反填·共 2 笔·W971 存量回填）
-
-**① C5b 对账面恢复（管控件·已批）**：`check_doc_sync.py` 的 `c5b_extra_surfaces()` 第二面由「`docs/11-方案报告/*.md` 根层非递归 glob」改为「`**/*.md` 递归收集、`计划方案/` 子目录除外」——W900 目录分区把带 stats 实体标记的《系统架构方案》《取经编制表》移入子目录后根层 glob 失明（W900 段披露的对账面缩水），本批经用户批准恢复覆盖；**计划方案豁免条款原样保留并补实证**：该子目录实测 8 件计划档带冻结 stats 标记（时点快照纪律·同 CHANGELOG 历史段），入面对账即假红，docstring 与文件头描述同步更新。
-
-**② W757 段链接改指新址（历史段改动·经用户明示批准）**：CHANGELOG W757 段内 1 条工程基础设施审计报告链接由旧址改指 `docs/11-方案报告/审查与评审/工程基础设施薄弱点审计报告-2026-10-16.md`——仅地址订正，叙事零改动；该链接为 CHANGELOG 全文唯一指向本目录的真实链接，改后无断链（lint 复验 5480 链接 0 broken）。
-
-**③ T-16/T-17 补登**：README 计划方案表补第 19/20 行（摘要据两件自述与 W893/W896 台账行提炼），节头「表格登记 18 行」订正为 20 件全登记，W900 的登记缺口披露行撤除、按补登记惯例（W858/W884 同式）在节首注记区留 W901 补登记注记；README §二 C5b 提示行由「待批」更新为「W901 恢复」口径。
-
-**验证**：check_doc_sync 实跑 C5b 递归新面零 FAIL（系统架构方案/取经编制表恢复对账·README 内占位标记串不受影响）；ruff（CI 口径 `ruff check scripts/`）All checks passed；pytest 全量 852 passed 3 skipped；lint_links --dir docs 5480 链接 0 broken。
-
-
-### W900（2026-10-24）：11-方案报告目录分类重组（根层归四区 + 索引重构 + 链接与派生面全量同步）
-
-
-
-> **来源**：用户 2026-10-24 令「docs/11-方案报告 重新给文件夹整理分类下，现在看着太乱了」——该目录根层此前 20 文件平铺（审查/方案/调研/治理混置），本批为目录分类重组。
-
-> - **文件**：docs/11-方案报告/审查与评审/（10 件迁入）、docs/11-方案报告/设计与架构方案/（7 件迁入）、docs/11-方案报告/治理与核查/（3 件迁入）、docs/11-方案报告/调研与数据复盘/（2 件 + 读者数据截图 5 件迁入）、docs/11-方案报告/README.md、docs/10-方法论沉淀/多Agent干扰治理与touches纪律.md、docs/INDEX.md、site/data/search.html、site/en/search.html、HANDOVER.md、STRUCTURE.md、dCREADME.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w900_spec.json、scripts/output/_cascade_files_W900.txt（逐件行见 file-index W900 段）。
-> **状态**：**已收官**（W900 568ca457·git 反填·共 2 笔·W971 存量回填）
-
-**根层分类重组（22 文件 + 截图 5 件归入 4 个新子目录）**：
-
-- `审查与评审/`（10 篇）：对抗性审查、全量对抗审查、工程基础设施薄弱点审计、外部评审回应（17/18 两篇）、计划方案三性审查、架构评审、界面布局审计、数据库表设计审查、难簿序与 dataset 对拍
-- `设计与架构方案/`（7 件·含 2 件 HTML 预览页）：界面视觉重设计方向与细化规格（v4）、v4 预览页、系统架构方案、静态站前端框架化选型对比、取经编制表（md + html）
-- `治理与核查/`（3 篇）：W761 工具链可维护性重构报告、多 Agent 干扰治理评估与实施记录、全仓待办计划方案状态核查
-- `调研与数据复盘/`（2 篇 + 读者数据截图 5 件）：项目 GitHub 参考调研报告、读者数据复盘
-- 既有 `工作复盘与优化分析报告/`（13 篇）与 `计划方案/`（20 件）不动；**根层仅留 README**（report_docs 递归口径计数 54 不变）
-
-**索引与链接全量同步**：
-
-- **README 唯一索引分区重构**：目录树 + 原「现役报告」33 行总表按链接目标机械分为五区（编号沿用入库时间序不重排）+ 计划方案节 5 条游离单行表（14-18 行）合并回主表 + T-16/T-17 两件已入库未及登记行的缺口披露
-- **40 对带期望次数断言的精确子串替换**（all-or-nothing）：目录内互链与上溯链（`../../CHANGELOG.md` 等加深一层）、方法论沉淀入链 ×2、工作复盘 2026-10-19 入链 ×2；修复后 `lint_links --dir docs` 实测 **5478 链接 0 broken**
-- **派生面再生成**：`docs/INDEX.md`（20 行路径随迁·第 17 门禁字节级对拍）+ 站内搜索索引两页（zh 848 / en 890 条·第 46 槽对拍通过）+ 两页 CSP 哈希重算（856 页零漂移）
-
-**两处随动影响披露（均未随批擅改·留待裁决）**：
-
-- **C5b 根层对账面缩水**：系统架构方案与取经编制表两篇含 `<!--stats:*-->` 实体标记，移出根层后 `check_doc_sync.py` 的 `docs/11-方案报告/*.md` 非递归 glob 不再覆盖二者——门禁不判红但防线缩水；该脚本属管控件，glob 扩为递归的一行改动待用户批准（README §二已留提示行）
-- **CHANGELOG W757 段 1 条链接旧址**：历史段内工程基础设施审计报告链接因移动指向旧址，按「历史段禁改」未就地改写，新址为 `docs/11-方案报告/审查与评审/工程基础设施薄弱点审计报告-2026-10-16.md`；另全站约 850 页 CSS 来源注释（v4 令牌出处标注）中的旧路径为注释性文本非链接，按 W757「历史性叙述不改写」先例保留
-
-**顺手修正**：HANDOVER 零段「复盘存档」反引号路径仍指向 W757 改名前的 `docs/11-报告复盘/`（陈旧纯文本·非链接）订正为新址；STRUCTURE.md 目录构成散文行按分区后实况改写（54 总数与 stats 标记不变）。
 
 

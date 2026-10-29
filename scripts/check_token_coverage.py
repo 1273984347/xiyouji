@@ -16,6 +16,8 @@ import re
 import sys
 from pathlib import Path
 
+from utils.gate_common import iter_private_style_blocks
+
 ROOT = Path(__file__).resolve().parent.parent
 
 # W803: 强制使用统一站点页面枚举；实现简化且与现役全版（834+ 页）相符。避免每个脚本重复写同一套 `glob(site/*.html) + glob(site/data/*.html) + glob(site/en/*.html)`。
@@ -30,9 +32,7 @@ EXEMPT = re.compile(r"e-track-exempt: chart-data-colors (\d+) 处")
 def check_page(path: Path):
     s = path.read_text(encoding="utf-8", errors="ignore")
     ui_n, shadow_n = 0, 0
-    for st in re.findall(r"<style>(.*?)</style>", s, re.S):
-        if "tokens.css —" in st:  # INLINED 副本跳过
-            continue
+    for st, _ln in iter_private_style_blocks(s):  # 跳过 INLINED 副本（按标记配对判定）
         for m in UI_ATTR.finditer(st):
             v = m.group(2)
             if re.match(r"var\(|color-mix", v):
