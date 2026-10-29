@@ -11,6 +11,28 @@
 ---
 
 
+## W1020 Backlog 登记面对账批（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1020 | 本批新增/修改 |
+| AGENTS.md | W1020 | 本批新增/修改 |
+| CHANGELOG.md | W1020 | 本批新增/修改 |
+| CITATION.cff | W1020 | 本批新增/修改 |
+| HANDOVER.md | W1020 | 本批新增/修改 |
+| README.md | W1020 | 本批新增/修改 |
+| STRUCTURE.md | W1020 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1020 | 本批新增/修改 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1020 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1020 | 本批新增/修改 |
+| docs/00-导读/统计口径说明.md | W1020 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1020 | 本批新增/修改 |
+| docs/agent/pitfalls.md | W1020 | 本批新增/修改 |
+| scripts/README.md | W1020 | 本批新增/修改 |
+| scripts/output/_w1020_spec.json | W1020 | 本批新增/修改 |
+| scripts/output/file-index.md | W1020 | 本批新增/修改 |
+| site/index.html | W1020 | 本批新增/修改 |
+
 ## W1019 BL-33/BL-29 收官批（2026-10-30）
 
 | 文件 | W | 说明 |
@@ -4391,31 +4413,4 @@ docs/11-方案报告/README.md
 | scripts/output/file-index.md | W904 | W904 段插入 |
 | scripts/output/_w904_spec.json | W904 | 本批级联 spec |
 | scripts/output/_cascade_files_W904.txt | W904 | 级联落盘清单 |
-
-## W903 审查发现修复（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/preflight_check.py | W903 | F1 修复（管控件·用户批准）：_split_touches 注记归一（全角括号内不切且整段丢弃·扫描式 tokenizer）+ touches_conflict 对称目录前缀匹配（X/** 与 X/ 形态）——通配/带注记声明不再恒不命中假绿 |
-| scripts/verify_delivery.py | W903 | F2 修复（管控件·用户批准）：第 45 门禁 fail_msg 补「先 git add 本批新件再 refresh」顺序（生成器按 Git 索引收集·W896 口径·W900/W901 连踩） |
-| tests/unit/test_preflight_touches.py | W903 | 新增语义归一族单测 6 例（先红后绿：旧码下 5 例红实证·新码 17/17 绿） |
-| docs/11-方案报告/审查与评审/机制脚本门禁审查报告-2026-10-24.md | W903 | 状态行 F1/F2「待批」订正为已落地 |
-| docs/11-方案报告/README.md | W903 | 登记行 34 的 F1/F2 状态订正为已由 W903 修复 |
-| docs/00-导读/W批次编号对账表.md | W903 | W903 认领行与收官回填 |
-| CHANGELOG.md | W903 | W903 段 |
-| HANDOVER.md | W903 | 级联头尾链与里程碑块 |
-| README.md | W903 | 当前批次版本行 |
-| STRUCTURE.md | W903 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W903 | 当前批次版本行 |
-| .github/workflows/README.md | W903 | 工作流层区间与里程碑尾标记 |
-| site/index.html | W903 | 页脚批次链插入 W903 |
-| site/data/cross-time-danmaku.html | W903 | 页脚批次链插入 W903 |
-| site/data/tag-cloud.html | W903 | 页脚批次链插入 W903 |
-| site/dukou-engine.html | W903 | 页脚批次链插入 W903 |
-| AGENTS.md | W903 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W903 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W903 | version 同步为 W903 |
-| scripts/output/file-index.md | W903 | W903 段插入 |
-| scripts/output/_w903_spec.json | W903 | 本批级联 spec |
-| scripts/output/_cascade_files_W903.txt | W903 | 级联落盘清单 |
 
