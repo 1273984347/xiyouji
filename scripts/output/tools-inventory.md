@@ -4,17 +4,18 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-30 02:35
+生成时间：2026-10-30 02:52
 
-共 **158** 件（门禁与校验 71 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 59 · 一次性（下划线前缀） 6）
+共 **159** 件（门禁与校验 72 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 59 · 一次性（下划线前缀） 6）
 
-## 门禁与校验（71）
+## 门禁与校验（72）
 
 | 脚本 | 用途 |
 |:---|:---|
 | `check_agents_layers.py` | AGENTS 分层完整性门禁（第 41 槽 · W709）——L1 摘要层与 L2 主题层的结构防线。 |
 | `check_archive_health.py` | check_archive_health.py — 归档区健康探针（W994 建·报告型 exit 0）。 |
 | `check_audit_trigger.py` | check_audit_trigger.py — 对抗式审查触发器（W1000 建·与复盘触发器同族的第三哨）。 |
+| `check_backlog_review.py` | check_backlog_review.py — Backlog 登记面对账触发器（W1021 建·与对抗审查触发器同族第四哨）。 |
 | `check_cascade_line_anchor.py` | check_cascade_line_anchor.py — 级联三文档面「行锚定」不变量自证（跨批复用判据 · W1005 建） |
 | `check_chapter_stats_sync.py` | check_chapter_stats_sync.py — chapter_stats 双源同步校验（S-24 家族化首对·W699）。 |
 | `check_chart_colorblind.py` | check_chart_colorblind.py — 第 29 门禁 · 图表配色色盲安全（PD-1a · W653） |
