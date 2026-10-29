@@ -11,6 +11,24 @@
 ---
 
 
+## W1027 治理文档文字审查 A 档（2026-10-30）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1027 | 本批新增/修改 |
+| AGENTS.md | W1027 | 本批新增/修改 |
+| CHANGELOG.md | W1027 | 本批新增/修改 |
+| CITATION.cff | W1027 | 本批新增/修改 |
+| HANDOVER.md | W1027 | 本批新增/修改 |
+| README.md | W1027 | 本批新增/修改 |
+| STRUCTURE.md | W1027 | 本批新增/修改 |
+| archive/docs/AGENTS-ARCHIVE.md | W1027 | 本批新增/修改 |
+| docs/00-导读/W批次编号对账表.md | W1027 | 本批新增/修改 |
+| docs/00-导读/项目说明.md | W1027 | 本批新增/修改 |
+| scripts/output/_w1027_spec.json | W1027 | 本批新增/修改 |
+| scripts/output/file-index.md | W1027 | 本批新增/修改 |
+| site/index.html | W1027 | 本批新增/修改 |
+
 ## W1026 HANDOVER 已完成内容归档 + 归档机制诊断（2026-10-30）
 
 | 文件 | W | 说明 |
@@ -4705,31 +4723,4 @@ docs/11-方案报告/README.md
 | AGENTS.md | W914 | 版本脚注条目 |
 | CITATION.cff | W914 | version 同步为 W914 |
 | scripts/output/file-index.md | W914 | W914 段插入 |
-
-## W913 波二小项四件批（2026-10-24）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/计划方案/执行前计划-T04-站内阅读入口打通与阅读页体验封装.md | W913 | 头状态行订正：施工未动工→已收官（W827 入口 + W845-847 阅读页·原文备档）——D-W830-02 清偿
-| .github/workflows/ci.yml | W913 | E2E 依赖钉版：playwright 无约束安装→钉 1.63.0 对齐 scripts/package-lock.json（T10 实证真漂移面）——D-W792-02 清偿
-| site/index.html | W913 | 站点聚合数字失真修正：「全站 772 篇」→「615<!--stats:a1_a6_docs--> 篇（A1-A6）」——B-W855-01 数字半边
-| scripts/check_doc_sync.py | W913 | C5b 扩展面纳入 site/index.html（站点聚合数字从此有标记对账防线·防回退半边）——B-W855-01 防线半边
-| docs/11-方案报告/计划方案/执行前计划-T18-站内交互债整包.md | W913 | C 档波二状态更新（四项完成/关闭·余五项在列）
-| docs/00-导读/W批次编号对账表.md | W913 | W913 认领行与收官回填
-| CHANGELOG.md | W913 | W913 段
-| HANDOVER.md | W913 | 级联头尾链与里程碑块
-| README.md | W913 | 当前批次版本行
-| STRUCTURE.md | W913 | 当前批次版本行
-| docs/00-导读/项目说明.md | W913 | 当前批次版本行
-| .github/workflows/README.md | W913 | 工作流层区间与里程碑尾标记
-| site/index.html（页脚批次链） | W913 | 页脚批次链插入 W913
-| site/data/cross-time-danmaku.html | W913 | 页脚批次链插入 W913
-| site/data/tag-cloud.html | W913 | 页脚批次链插入 W913
-| site/dukou-engine.html | W913 | 页脚批次链插入 W913
-| AGENTS.md | W913 | 版本脚注条目
-| archive/docs/AGENTS-ARCHIVE.md | W913 | 脚注滚动迁入的最老条目
-| CITATION.cff | W913 | version 同步为 W913
-| scripts/output/file-index.md | W913 | W913 段插入
-| scripts/output/_w913_spec.json | W913 | 本批级联 spec
-| scripts/output/_cascade_files_W913.txt | W913 | 级联落盘清单
 
