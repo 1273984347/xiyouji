@@ -9,30 +9,8 @@
  "milestone_block": "- **W1033 T05 计划状态校正**：\n  - 矛盾：T05 写「执行中」而台账 W831 已归档收官 → 状态行校正为「仓内已收官·仓外三项未执行」\n  - ST-10~12（mavis 命令）加失效声明，续做须按新环境重写\n  - 步骤正文不改：历史文件该改状态与时效标注，不该把失效步骤改写成「现在能用的样子」",
  "agents_note": "2026-10-30（W1033）T05 状态校正。历史文件该改状态与时效标注，不该把失效步骤改写成现在能用的样子。",
  "file_index_rows": [
-  "| .github/workflows/README.md | W1033 | 本批新增/修改 |",
-  "| AGENTS.md | W1033 | 本批新增/修改 |",
-  "| CHANGELOG.md | W1033 | 本批新增/修改 |",
-  "| CITATION.cff | W1033 | 本批新增/修改 |",
-  "| HANDOVER.md | W1033 | 本批新增/修改 |",
-  "| README.md | W1033 | 本批新增/修改 |",
-  "| STRUCTURE.md | W1033 | 本批新增/修改 |",
-  "| archive/docs/AGENTS-ARCHIVE.md | W1033 | 本批新增/修改 |",
-  "| archive/docs/CHANGELOG-ARCHIVE.md | W1033 | 本批新增/修改 |",
-  "| archive/docs/W批次编号对账表-ARCHIVE.md | W1033 | 本批新增/修改 |",
-  "| archive/docs/file-index-ARCHIVE.md | W1033 | 本批新增/修改 |",
   "| docs/00-导读/W批次编号对账表.md | W1033 | 本批新增/修改 |",
-  "| docs/00-导读/项目说明.md | W1033 | 本批新增/修改 |",
-  "| docs/11-方案报告/计划方案/执行前计划-T05-取经编制表落库与编制位补全.md | W1033 | 本批新增/修改 |",
-  "| scripts/output/README.md | W1033 | 本批新增/修改 |",
-  "| scripts/output/_cascade_files_W1033.txt | W1033 | 本批新增/修改 |",
-  "| scripts/output/_w1033_spec.json | W1033 | 本批新增/修改 |",
-  "| scripts/output/file-index.md | W1033 | 本批新增/修改 |",
-  "| scripts/output/index.md | W1033 | 本批新增/修改 |",
-  "| scripts/output/stats.json | W1033 | 本批新增/修改 |",
-  "| scripts/output/tools-inventory.md | W1033 | 本批新增/修改 |",
-  "| site/data/cross-time-danmaku.html | W1033 | 本批新增/修改 |",
-  "| site/data/tag-cloud.html | W1033 | 本批新增/修改 |",
-  "| site/dukou-engine.html | W1033 | 本批新增/修改 |",
-  "| site/index.html | W1033 | 本批新增/修改 |"
+  "| scripts/output/_vermilion_solid_cache.json | W1033 | 本批新增/修改 |",
+  "| scripts/output/_w1033_spec.json | W1033 | 本批新增/修改 |"
  ]
 }
