@@ -10,6 +10,43 @@
 
 ---
 
+## W1052 补丁治理实施第一批（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1052 | 本批新增/修改（G-01 双写去重 + 分项 55 + 级联脚注） |
+| scripts/check_doc_sync.py | W1052 | 本批新增/修改（C8 同段重复判据 + T30/T31 自测 + 覆盖面先前已收 gates.md） |
+| scripts/reserve_w.py | W1052 | 本批新增/修改（G-07 占号支撑检测 + self_test 三例 + UP009/E702 微修） |
+| docs/agent/pitfalls.md | W1052 | 本批新增/修改（+1 条占号逃避形态·145·流程组 55） |
+| HANDOVER.md | W1052 | 本批新增/修改（坑表计数链 145 + 级联面） |
+| docs/11-方案报告/计划方案/执行前计划-W1046-补丁治理与门禁判据加固.md | W1052 | 本批新增/修改（方案钉订正：批准项计数 9→11） |
+| docs/00-导读/W批次编号对账表.md | W1052 | 台账（W992 滞留状态回填 + W1052 行新增） |
+| CHANGELOG.md | W1052 | 收官面（顶段 W1052） |
+| README.md | W1052 | 级联面（版本行） |
+| STRUCTURE.md | W1052 | 级联面（版本行） |
+| CITATION.cff | W1052 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1052 | 级联面（当前版本行） |
+| docs/INDEX.md | W1052 | 登记面（docs 索引） |
+| index.md | W1052 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1052 | 级联归档滚动 |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1052 | 级联归档滚动（体积窗若触发） |
+| archive/docs/file-index-ARCHIVE.md | W1052 | 级联归档滚动（体积窗若触发） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1052 | 级联归档滚动（体积窗若触发） |
+| .github/workflows/README.md | W1052 | 级联面（里程碑行同步） |
+| site/index.html | W1052 | 级联面（页脚批次链插入） |
+| site/data/cross-time-danmaku.html | W1052 | 级联面（页脚批次链插入） |
+| site/data/tag-cloud.html | W1052 | 级联面（页脚批次链插入） |
+| site/dukou-engine.html | W1052 | 级联面（页脚批次链插入·含 head_sentence） |
+| scripts/output/stats.json | W1052 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1052 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1052 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1052 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1052 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1052 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1052 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1052.txt | W1052 | 级联清单（本批产物） |
+| scripts/output/_w1052_spec.json | W1052 | 本批 spec |
+
 ## W1051 复盘触发器口径根修（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -4996,16 +5033,4 @@ docs/11-方案报告/README.md
 | scripts/_w938_cascade.py | W938 | 三面级联登记脚本（认领行 + CHANGELOG 段 + file-index 段·含段序断言） |
 | CHANGELOG.md | W938 | W938 版段（四件套） |
 | docs/00-导读/W批次编号对账表.md | W938 | W938 认领行 |
-
-## W937 首屏版式修正——「100 回」数据块移入左侧文字区（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| site/index.html | W937 | 「100 回」数据块由右侧巨型块移入左侧文字区做横排一行（数字降档 clamp 44–64px）·删纸色渐变遮罩 · 移动端 mega 尺寸规则改作用域形式 · 删 `.masthead-mega` 死规则 |
-| CHANGELOG.md | W937 | W937 版段（四件套） |
-| docs/00-导读/W批次编号对账表.md | W937 | W937 认领行 |
-| scripts/_w937_cascade.py | W937 | 三面级联登记脚本（认领行 + CHANGELOG 段 + file-index 段·含段序断言） |
-| site/reader/themes/取经路线地理专题.html | W937 | 题图落位修正：五行山与两界山（原在「取经地理学专题」——地理学理论页·题材不贴） |
-| site/reader/people/灵感大王外传.html | W937 | 题图落位修正：东海龙宫水殿（原在「四海龙王：下雨的人」——讲降雨职能·题材不贴） |
-| scripts/_w937_move_plates.py | W937 | 题图移动脚本（旧页移除 figure 与 chapter-plate CSS·不留死规则） |
 

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """reserve_w.py — 批次号预约（防并行会话撞号·W1041 立）
 
 问题：台账是「事后登记」，两个并行会话各自从自己看到的台账 max 取号，
@@ -94,6 +93,7 @@ def session_id():
 
 
 def reserve():
+    warn_unclaimed()
     base = max(ledger_max(), changelog_max())
     taken = set(int(w.lstrip("W")) for w in active_res())
     cand = base + 1
@@ -106,7 +106,41 @@ def reserve():
     print("W%d" % cand)
 
 
+def unclaimed_in_ledger(ledger_text, reservations):
+    """注入式判定：台账「在途（认领·未收官）」行中不被有效预约支撑的号集合。
+
+    台账行形态：| W### | 描述 | hash | 级联 | 状态 | 会话 | touches |——状态列=split("|")[5]。
+    """
+    out = set()
+    for ln in ledger_text.splitlines():
+        m = re.match(r"^\|\s*W(\d{3,4})\s*\|", ln)
+        if not m:
+            continue
+        cells = ln.split("|")
+        status = cells[5].strip() if len(cells) > 5 else ""
+        if "在途" not in status:
+            continue
+        w = "W%s" % m.group(1)
+        if w not in reservations:
+            out.add(w)
+    return out
+
+
+def warn_unclaimed():
+    """reserve/list 时顺带检测：台账在途认领行无占号支撑 ⇒ WARN（提醒不阻断——
+    铁律 17 逃避形态·W1050 撞号复盘的机器化教训：占号面与认领面是两套机制，必须对拍）。"""
+    try:
+        txt = open(LEDGER, encoding="utf-8").read()
+    except OSError:
+        return
+    ghost = unclaimed_in_ledger(txt, active_res())
+    for w in sorted(ghost):
+        print("WARN  台账 %s 在途认领行无占号支撑（未跑 reserve_w 先登记＝绕过铁律 17）——"
+              "请补占号或改状态列" % w)
+
+
 def list_res():
+    warn_unclaimed()
     res = active_res()
     if not res:
         print("（无有效预约）")
@@ -126,13 +160,34 @@ def release(w):
         print("%s 不在预约表中" % w)
 
 
+def self_test():
+    """三例：无支撑在途行必中 / 已占号在途行放行 / 已收官行放行。"""
+    led = (
+        "| W901 | 甲批 | h1 | — | **已收官**（h1） | s | t |\n"
+        "| W902 | 乙批 | — | — | 在途（认领·未收官） | s | t |\n"
+        "| W903 | 丙批 | — | — | 在途（认领·未收官） | s | t |\n"
+    )
+    res = {"W903": {"session": "x", "ts": time.time(), "status": "reserved"}}
+    ghost = unclaimed_in_ledger(led, res)
+    ok1 = ghost == {"W902"}
+    print("%s  T1 在途无占号支撑必中（G-07）" % ("PASS" if ok1 else "FAIL"))
+    ok2 = not unclaimed_in_ledger(led, {"W902": {}, "W903": {}})
+    print("%s  T2 已占号在途行放行（G-07）" % ("PASS" if ok2 else "FAIL"))
+    ok3 = "W901" not in unclaimed_in_ledger(led, {})
+    print("%s  T3 已收官行放行（G-07）" % ("PASS" if ok3 else "FAIL"))
+    return 0 if (ok1 and ok2 and ok3) else 1
+
+
 def main():
+    if "--self-test" in sys.argv:
+        return self_test()
     mode = sys.argv[1] if len(sys.argv) > 1 else "reserve"
     if mode == "list":
         list_res()
     elif mode == "release":
         if len(sys.argv) < 3:
-            print("用法: reserve_w.py release <W号>"); sys.exit(2)
+            print("用法: reserve_w.py release <W号>")
+            sys.exit(2)
         release(sys.argv[2])
     elif mode == "reserve":
         reserve()
