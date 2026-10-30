@@ -13,6 +13,37 @@
 
 > **2026-10-28（W994 迁出 144 段·W400-W559 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W927（2026-10-25）：架构方案 v2 裁决落档 + D-1 离线施工件 + W926 交叉对账
+
+
+
+> **来源**：用户 2026-10-25 问「然后呢」后经三项裁决（O-1 接受「修订 W821 存储裁定」按 v2 档 2 施工 / D-1 先立离线施工件 / O-2·O-3·O-4 三项全按建议定稿）。
+
+> - **文件**：xiyouji-agent-web/deploy/pg/README.md、xiyouji-agent-web/deploy/pg/postgresql.conf.base、xiyouji-agent-web/deploy/pg/pg_hba.conf.base、xiyouji-agent-web/deploy/pg/bin/initdb-bootstrap.sh、xiyouji-agent-web/deploy/pg/bin/backup.sh、xiyouji-agent-web/deploy/pg/bin/restore-drill.sh、xiyouji-agent-web/deploy/pg/bin/verify-baseline.py、xiyouji-agent-web/deploy/pg/bin/_mutation_test.py、xiyouji-agent-web/deploy/pg/migrations/0001_baseline.sql、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/11-方案报告/计划方案/执行前计划-T20-裁决落档与D1施工件.md、docs/11-方案报告/计划方案/T20-任务计划执行与经验沉淀报告-2026-10-25.md、docs/11-方案报告/README.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、STRUCTURE.md、scripts/output/_w927_pg_baseline.json、dCHANDOVER.md、README.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w927_spec.json、scripts/output/_cascade_files_W927.txt（逐件行见 file-index W927 段）。
+> **状态**：**已收官**（W927 51f4c2ca·git 反填·共 2 笔·W971 存量回填）
+
+**三项裁决落档（O-1 ~ O-4）**：
+- **O-1 接受**「修订 W821 存储裁定」⇒ §7.1 S4 改判「已采纳」· §8.2 档 2 由「触发式演进」改「**已启动**」· 施工拆 D-1/D-2/D-3 三批（先备份后迁移、先有审计载体后打标，顺序不可颠倒）。
+- **O-2** 审计留存期取「≥ 180 天」通用口径，**最终以本单位定级备案与测评方案为准**（D-3 批按备案方案复核后可收紧）。
+- **O-3** 私有化推理端点允许内网端点或公网 API；若选公网 API **必须显式登记「与「禁外域依赖」硬约束冲突」**这一例外。
+- **O-4** 检索层接入 `scripts/rag/`，纳入档 2 范围（施工排 **D-2**，不排 D-1）。
+
+**D-1 离线施工件（PG 16 自建单机）**：新增 `xiyouji-agent-web/deploy/pg/`——服务端配置基线（WAL 归档 / TLS / 内存 / 日志 / 编码，禁 `listen_addresses='*'`）、认证基线（最小权限 + 兜底 reject，禁 trust）、幂等初始化（建角色/库/权限/迁移记账表）、每日 `pg_basebackup` 备份（保留 7 份 + WAL 14 天 + 空壳备份自检 + 备份/归档**分盘校验**）、恢复演练（独立端口临时实例 + 表数/列数/行数断言 + trap 清理）、迁移序列骨架（`schema_migrations` 记账 + `audit_archive` 带 `data_class` CHECK L1–L4）。**机器背书**：静态校验器 **66/66 通过** + **反向验证 11/11 变异可证伪** + 三脚本 `bash -n` 3/3（证据 `scripts/output/_w927_pg_baseline.json`）。
+
+**诚实性边界（显式声明）**：**PG 运行时完全未验证**（本机无 `psql`/`pg_ctl`，Docker daemon 未启动）⇒ 待实跑清单 **9 项**逐条写明验收判据与计划批次（初始化幂等性 / 真实备份 / **恢复演练行数一致** / WAL 归档连续性 / 分盘拦截 / TLS 实握手 / 迁移器端到端 / 容量实测 / 审计留存与销毁留证）。静态背书只覆盖「配置与脚本的静态不变量 + Shell 语法 + 断言自身可证伪性」，**不构成运行时证据**。
+
+**与 W926 交互审查的交叉对账（净发现 v2 自身一处设计遗漏）**：
+- **R-01（P0）**「问」浮窗硬编码 `http://127.0.0.1:8777`（线上实抓一致）⇒ 静态产物内嵌了**部署期事实**，私有化部署的拓扑被构建期锁死 ⇒ **新增 §10.6「客户端侧服务地址配置面」+ 契约 C-8 + 禁止依赖形态 #8**（禁在 L2 静态产物里硬编码 L3 地址；`127.0.0.1` 只允许开发者本机专用构建且须显式标记）。
+- **R-02/R-05** 批次号裸露 6,827 处 ⇒ 属「产物反向成为事实源」，**本批级联亦贡献其中 4 处**（结构性来源）⇒ 登记为 §10.3 已知对外副作用，实际改动由 W926 B2 批承担，不重复施工。
+- **R-06** 「检索真实语料」按钮实为**异源降级**（模板引擎生成文）⇒ 与 §9.2 F1 假设的同源降级（只检索）语义不同 ⇒ §9.2 补注两种降级形态须区分，列为 D-3 批前置确认项。
+- **R-03/R-04** hub 不可达与双 hub 并存 ⇒ 产物层 URL 唯一性问题，归 W926 B3 批，v2 侧仅登记。
+
+**两处工具自证（过程要点）**：静态校验器首跑 **7 FAIL 全是工具自身缺陷**（行尾注释未剥 + bash 探针被 WSL 坏转发器劫持）；反向验证首跑 **9/11**，两条断言因只匹配裸词（`pg_basebackup` / `backup_label` 在注释与元数据行先命中）而恒真 ⇒ 断言改为锚定代码构造 + 补禁形态后 11/11。
+
+**验证**：静态校验 66/66 · 反向验证 11/11 · `bash -n` 3/3 · 方案计数自洽（mermaid 6 / 契约 C- 8 / AC- 21 / §13.1~13.4 连续）· check_plan_template 2/2 全项符合 · verify_delivery 全量核心 0 FAIL。
+
+**未改**：xiyouji-agent-web 的 server/ 与 src/（应用代码一行未动）· site/ 任何页面 · 任何管控脚本。
+
 ### W926（2026-10-25）：站点交互流程审查复核报告批（857 页全量复核 + 当前状态排序建议·只审查不改代码）
 
 

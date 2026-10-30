@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（165）
+## 文件（166）
 
 ### Markdown 文档
 
@@ -183,6 +183,7 @@
 - `refresh_icon_paths.py`
 - `release.py`
 - `release_prep.py`
+- `reserve_w.py`
 - `review_sweep.py`
 - `run_all.py`
 - `safe_commit.py`

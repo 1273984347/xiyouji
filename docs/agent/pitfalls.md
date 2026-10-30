@@ -100,7 +100,7 @@
 - **`git status --porcelain` 的中文路径：`core.quotePath=false` 不管用，且 rename 是两条记录**（W1014 实证·E-37）：W523 已记「git 输出路径要加 `-c core.quotePath=false`」但只覆盖 **diff 家族**；`status --porcelain` 是**例外**——它仍把非 ASCII 路径输出为带引号的八进制转义（`"docs/00-\345\257\274…"`），传了该参数也不变 ⇒ 任何「用 status 输出做路径比对」的判据都会把中文路径件误判（W1014 第 31 门禁 C4-f 报「文件清单未入提交树」37 条·根因即此）。修法：改用 **`-z`** 模式（NUL 分隔·无引号无转义）取原路径，并用**合法状态码集**（`M/A/D/R/C/U/?/!` 两两组合）判定「带状态位的脏件记录」。配套两个暗坑：① `-z` 的 rename/copy 是**两条**记录，次条 old path **无 `XY ` 前缀** ⇒ 用「`rec[1] != 空格`」判脏会把 old path 首两字符（`sc/ma/do…`）误当状态位、收进 `ipts/…` 这类截断路径（实测）；② dirty 语义是「工作树有未暂存改动」⇒ 必须只收 **Y 位非空**，否则已 `git add` 的件（`M `）会被误判「漏 add」（实测 78 件全误判）。回归锁：`tests/unit/test_status_z_parse.py`（5 例·合成 porcelain -z 串）。
 
 - **并行会话会撞号也会撞生成器产物——提交前必须逐件判归属**（W1014 实证·E-38）：① **号段撞车**：并行会话按「台账 max+1」取号时可能撞上你刚登记的认领行（W1014 期实测对方新件 docstring 自称「W1014」而实际占 W1015）⇒ 以**台账认领行先登记者为准**，动工前重读 max，收尾用 `safe_commit --expect-spec` 硬隔离（索引 ⊄ 本批 spec 即拒）；② **生成器产物被对方连带改**：`docs/11-方案报告/设计与架构方案/系统架构方案*.md` 的 `pytest_collected` 计数会随对方新增测试自动变（1016→1034）——这类件**不属本批**，`git add` 前须看 diff 归属（改的是计数而非你的内容 ⇒ 摘出 `git restore --staged`）；③ 同一文件双方都改时先判**互补还是冲突**：W1014 的 UP020 修复（`io.open`→`open`）恰是对方测试所锁病灶的**前置条件**（互补）⇒ 保留并在 spec 登记；若是冲突则按「同文件串行」让位给对方批次。
-### 级联 / CHANGELOG（19 条）
+### 级联 / CHANGELOG（20 条）
 
 - **bump_version.py** 一键补齐辅助 4 文档版本行（W576 起恢复可用：W536 写路径守卫根目录曾误算为 scripts/ 致任何调用必误判越界，经用户批准修复为项目根——与 W550 修复的 generate_csp 同款；其「全文件 W001-W### 范围替换」覆盖 batch_cascade 不触及的 README 目录树/交接 CHANGELOG 范围行等存量漂移面，整文件 text-mode 重写兼带孤立 \r 损伤归一）；**三个已知坑（①②多次复现 W524 扩证·③W528 实证）**：① 全局替换会污染 file-index 历史段（生成「WXXX WXXX」重复标题的空壳段、登记表为空，需手工补全当批文件表）；② `--desc` 与 `--note` **均会**往 STRUCTURE.md 头部 / docs/00-导读/项目说明.md 的上一版本行**追加**「 + WXYY(...)」而非替换主描述（W523 实测 `--note` 同样触发——此前仅登记 `--desc` 单触发面）；③ 三简单页脚（index/cross-time-danmaku/tag-cloud）同步为替换式、只匹配"链首 == 解析版本"的条目，页脚一旦滞后就永不被命中（W528 实证停在 W453 脱节 74 批）——跑完必须 Grep 校验版本行三处 + 三页脚版本实际前进并手工净化。
 - **CHANGELOG 多版段插入/重排只用脚本 + 结构断言**（锚点唯一性 + 版段 order 校验），手工 Edit 大段会吞相邻版段标题；**新批版本号先 Grep 现役段取 max+1 再写**（防撞号）。
@@ -128,6 +128,8 @@
 - **级联插入新段会把标题行与 `changelog_body` 粘连**（W1019 实证）：spec 的 `changelog_body` 首元素若直接以 `> **来源**` 开头，级联拼装后标题行与它挤在同一行（缺空行），与既有段的「标题 + 空行 + 引用块」形态不符。⇒ 修法：spec 的 `changelog_body` **首行前留空行**；apply 后自查新段标题行是否独立成行。
 
 - **CHANGELOG 段序乱序会让回窗归档直接抛错**（W1019 实证）：`archive_segments.py` 的 `plan()` 有「正本段序非严格降序」硬断言，只要有一段插错位置（实证 HEAD 版本即 [1018, 1015, 1017, 1016…]，W1015 段错位），回窗就 AssertionError ⇒ 级联收尾报「回窗 FAIL」并提示下一批 preflight 开不了工。⇒ 修法：按段号排序重排该段（脚本移动整段，勿手工 Edit 大段）；**回窗是每批常态动作**（`archive_segments.py` + `archive_ledger_rows.py` 两面都跑），不是异常。
+- **并行会话撞批次号：台账是事后登记，须开批先预约**（W1039/W1040 实战）：两个并行会话各自从自己看到的台账 max 取号，同时动手必撞（2026-10-30 撞 W1039，对方续占 W1040，本批顺延 W1041）。⇒ 修法：新增 `scripts/reserve_w.py` + 铁律 17——开批第一步跑 `python scripts/reserve_w.py` 占号（写 `tmpe/_w_reservations.json`，24h TTL 防占而不交），stdout 即本批 W 号；candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1。仅同一工作树内有效；不同 clone 不共享 reservation 文件，仍靠 git log + 台账兜底。
+
 ### 数据 / 内容可信度（11 条）
 
 - **同一数据集的两份副本会各自演进到不同步**（W1020 实证）：`scripts/output/data/` 与 `site/data/json/` 是同一批数据的两份落盘，但只有后者会随后续裁决批更新——实测 `journey_route.json` 与 `team_effectiveness.json` 的 output 副本**缺 W691 口径注记**（site 副本有）。⇒ 以哪份为准须写死（现役口径：**site/data/json 为页面消费源、取权威以它为准**），对账/取证时若读到 output 副本会得出「未处置」的错误结论。

@@ -1,3 +1,25 @@
+### W1041（2026-10-30）：批次号预约机制（开批先占号·reserve_w.py + 铁律 17）
+
+> **来源**：用户 2026-10-30 令「做」——承接其问「并行会话之间没有批次号预约机制那怎么做？」。
+>
+> **背景**：今天的 W1039 撞号实战暴露——台账是「事后登记」，两个并行会话各自从自己看到的台账 max 取号，同时动手必撞（本批即撞 W1039，对方续占 W1040，本批顺延 W1041）。
+>
+> - **文件**：.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/agent/pitfalls.md、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1041_spec.json、scripts/output/file-index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/tools-inventory.md、scripts/reserve_w.py、site/index.html
+
+**根因**：批次号缺乏预约环节。台账认领是事后登记，无法在动手前可见地占号，多会话必然撞。
+
+**交付**：
+
+① **`scripts/reserve_w.py`（开批占号助手）**：三模式——`reserve`（占号，stdout 仅打印 W 号）、`list`（列有效预约）、`release <W号>`（收官释放）。
+candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 `tmpe/_w_reservations.json`（已被 .gitignore，同一工作树内多会话共享），**24h TTL 防占而不交**，写文件用「临时文件 + os.replace」保证原子性。
+② **铁律 17「开批先预约号」**（AGENTS.md）：开批第一步必须跑 `python scripts/reserve_w.py` 占号，**未占号不动手**。
+③ **坑表加 W1039/W1040 撞号案例**（docs/agent/pitfalls.md）：记录根因与修法，使下个会话检索得到。
+
+**边界（重要）**：此机制仅同一工作树内的并行会话有效；两会话在**不同 clone** 时 reservation 文件不共享，仍须退回 git log + 台账兜底。本项目并行基本在同一工作树，覆盖主场景。
+
+**验证**：脚本自测——占号得 `W1041`、列表单 W 无重复前缀、字节编译通过（`py_compile` OK）；门禁全绿（核心 0 FAIL）。
+
+> - **状态**：已收官（预约机制入库·铁律 17 立·撞号案例入坑表）
 ### W1040（2026-10-30）：任务分级协议入库（跨项目协作协议移植·重放）
 
 > **来源**：用户 2026-10-30 提供《任务计划、执行与经验沉淀系统提示词》全文并裁决「装」入两项目治理文件；Anthropic 锚定侧已同日入库（wiki/task-protocol.md·74a13cf），本仓侧按 W507 映射以深度篇入 docs/10-方法论沉淀/。前稿四度撞号（W1035/W1036/W1038 被并行消费·W1039 被按裁决 A 收回），材料经全链验证后以 W1040 重放。
@@ -741,7 +763,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1040），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1041），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1882,38 +1904,6 @@
 **仍待实跑（3 项 · 不得当作已验证）**：迁移器端到端（D-2）· 容量实测（D-2）· 审计留存与销毁留证（D-3）。
 
 **机器证据**：`scripts/output/_w927_pg_runtime_evidence.txt`（111 行原始输出）。
-
-**未改**：xiyouji-agent-web 的 server/ 与 src/（应用代码一行未动）· site/ 任何页面 · 任何管控脚本。
-
-
-### W927（2026-10-25）：架构方案 v2 裁决落档 + D-1 离线施工件 + W926 交叉对账
-
-
-
-> **来源**：用户 2026-10-25 问「然后呢」后经三项裁决（O-1 接受「修订 W821 存储裁定」按 v2 档 2 施工 / D-1 先立离线施工件 / O-2·O-3·O-4 三项全按建议定稿）。
-
-> - **文件**：xiyouji-agent-web/deploy/pg/README.md、xiyouji-agent-web/deploy/pg/postgresql.conf.base、xiyouji-agent-web/deploy/pg/pg_hba.conf.base、xiyouji-agent-web/deploy/pg/bin/initdb-bootstrap.sh、xiyouji-agent-web/deploy/pg/bin/backup.sh、xiyouji-agent-web/deploy/pg/bin/restore-drill.sh、xiyouji-agent-web/deploy/pg/bin/verify-baseline.py、xiyouji-agent-web/deploy/pg/bin/_mutation_test.py、xiyouji-agent-web/deploy/pg/migrations/0001_baseline.sql、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、docs/11-方案报告/计划方案/执行前计划-T20-裁决落档与D1施工件.md、docs/11-方案报告/计划方案/T20-任务计划执行与经验沉淀报告-2026-10-25.md、docs/11-方案报告/README.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、STRUCTURE.md、scripts/output/_w927_pg_baseline.json、dCHANDOVER.md、README.md、docs/00-导读/项目说明.md、.github/workflows/README.md、site/index.html、site/data/cross-time-danmaku.html、site/data/tag-cloud.html、site/dukou-engine.html、AGENTS.md、archive/docs/AGENTS-ARCHIVE.md、CITATION.cff、sscripts/output/_w927_spec.json、scripts/output/_cascade_files_W927.txt（逐件行见 file-index W927 段）。
-> **状态**：**已收官**（W927 51f4c2ca·git 反填·共 2 笔·W971 存量回填）
-
-**三项裁决落档（O-1 ~ O-4）**：
-- **O-1 接受**「修订 W821 存储裁定」⇒ §7.1 S4 改判「已采纳」· §8.2 档 2 由「触发式演进」改「**已启动**」· 施工拆 D-1/D-2/D-3 三批（先备份后迁移、先有审计载体后打标，顺序不可颠倒）。
-- **O-2** 审计留存期取「≥ 180 天」通用口径，**最终以本单位定级备案与测评方案为准**（D-3 批按备案方案复核后可收紧）。
-- **O-3** 私有化推理端点允许内网端点或公网 API；若选公网 API **必须显式登记「与「禁外域依赖」硬约束冲突」**这一例外。
-- **O-4** 检索层接入 `scripts/rag/`，纳入档 2 范围（施工排 **D-2**，不排 D-1）。
-
-**D-1 离线施工件（PG 16 自建单机）**：新增 `xiyouji-agent-web/deploy/pg/`——服务端配置基线（WAL 归档 / TLS / 内存 / 日志 / 编码，禁 `listen_addresses='*'`）、认证基线（最小权限 + 兜底 reject，禁 trust）、幂等初始化（建角色/库/权限/迁移记账表）、每日 `pg_basebackup` 备份（保留 7 份 + WAL 14 天 + 空壳备份自检 + 备份/归档**分盘校验**）、恢复演练（独立端口临时实例 + 表数/列数/行数断言 + trap 清理）、迁移序列骨架（`schema_migrations` 记账 + `audit_archive` 带 `data_class` CHECK L1–L4）。**机器背书**：静态校验器 **66/66 通过** + **反向验证 11/11 变异可证伪** + 三脚本 `bash -n` 3/3（证据 `scripts/output/_w927_pg_baseline.json`）。
-
-**诚实性边界（显式声明）**：**PG 运行时完全未验证**（本机无 `psql`/`pg_ctl`，Docker daemon 未启动）⇒ 待实跑清单 **9 项**逐条写明验收判据与计划批次（初始化幂等性 / 真实备份 / **恢复演练行数一致** / WAL 归档连续性 / 分盘拦截 / TLS 实握手 / 迁移器端到端 / 容量实测 / 审计留存与销毁留证）。静态背书只覆盖「配置与脚本的静态不变量 + Shell 语法 + 断言自身可证伪性」，**不构成运行时证据**。
-
-**与 W926 交互审查的交叉对账（净发现 v2 自身一处设计遗漏）**：
-- **R-01（P0）**「问」浮窗硬编码 `http://127.0.0.1:8777`（线上实抓一致）⇒ 静态产物内嵌了**部署期事实**，私有化部署的拓扑被构建期锁死 ⇒ **新增 §10.6「客户端侧服务地址配置面」+ 契约 C-8 + 禁止依赖形态 #8**（禁在 L2 静态产物里硬编码 L3 地址；`127.0.0.1` 只允许开发者本机专用构建且须显式标记）。
-- **R-02/R-05** 批次号裸露 6,827 处 ⇒ 属「产物反向成为事实源」，**本批级联亦贡献其中 4 处**（结构性来源）⇒ 登记为 §10.3 已知对外副作用，实际改动由 W926 B2 批承担，不重复施工。
-- **R-06** 「检索真实语料」按钮实为**异源降级**（模板引擎生成文）⇒ 与 §9.2 F1 假设的同源降级（只检索）语义不同 ⇒ §9.2 补注两种降级形态须区分，列为 D-3 批前置确认项。
-- **R-03/R-04** hub 不可达与双 hub 并存 ⇒ 产物层 URL 唯一性问题，归 W926 B3 批，v2 侧仅登记。
-
-**两处工具自证（过程要点）**：静态校验器首跑 **7 FAIL 全是工具自身缺陷**（行尾注释未剥 + bash 探针被 WSL 坏转发器劫持）；反向验证首跑 **9/11**，两条断言因只匹配裸词（`pg_basebackup` / `backup_label` 在注释与元数据行先命中）而恒真 ⇒ 断言改为锚定代码构造 + 补禁形态后 11/11。
-
-**验证**：静态校验 66/66 · 反向验证 11/11 · `bash -n` 3/3 · 方案计数自洽（mermaid 6 / 契约 C- 8 / AC- 21 / §13.1~13.4 连续）· check_plan_template 2/2 全项符合 · verify_delivery 全量核心 0 FAIL。
 
 **未改**：xiyouji-agent-web 的 server/ 与 src/（应用代码一行未动）· site/ 任何页面 · 任何管控脚本。
 

@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-30 07:55
+生成时间：2026-10-30 08:25
 
-共 **159** 件（门禁与校验 72 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 59 · 一次性（下划线前缀） 6）
+共 **160** 件（门禁与校验 72 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 60 · 一次性（下划线前缀） 6）
 
 ## 门禁与校验（72）
 
@@ -127,7 +127,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（59）
+## 工具（60）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -176,6 +176,7 @@
 | `pre_release_screenshot.py` | pre_release_screenshot.py — 迭代发布前增强版截图审查集成脚本 |
 | `refresh_icon_paths.py` | W950 · 图标图形刷新器（把打磨后的新图形同步到全仓已内联的 SVG） |
 | `render_check.js` | W701：file:// 下 @font-face 以 origin 'null' 加载站内字体触发 CORS 策略提示， |
+| `reserve_w.py` | reserve_w.py — 批次号预约（防并行会话撞号·W1041 立） |
 | `review_sweep.py` | review_sweep.py — 全变动复审扫荡器（S-25·W699）。 |
 | `run_all.py` | run_all.py — 批量运行 A-AH 34 类分析脚本 |
 | `safe_commit.py` | safe_commit.py — 并行会话 ref-lock 竞争安全提交（W698·P2-2） |
