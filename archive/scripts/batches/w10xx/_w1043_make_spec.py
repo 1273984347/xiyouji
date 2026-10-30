@@ -110,8 +110,10 @@ def main() -> int:
             return "站点版（母版裁切·只裁上部留白）"
         if f.startswith("site/reader/"):
             return "缺口回目页接入题图 + 换专属 og:image"
-        if f.startswith("docs/11-"):
+        if f.startswith("docs/11-方案报告/计划方案/"):
             return "方案报告（执行前计划件）"
+        if f.startswith("docs/11-方案报告/"):
+            return "方案报告（索引/架构方案）"
         if f == "docs/agent/pitfalls.md":
             return "坑表（+1 条·判据脆性）"
         if f.startswith("docs/00-"):

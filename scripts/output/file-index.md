@@ -11,6 +11,51 @@
 ---
 
 
+## W1048 P2 治理与孤儿批收编（2026-10-31）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CLAUDE.md | W1048 | 本批新增/修改（P2·补铁律 15/16/17 速查行·49/60 行） |
+| docs/agent/gates.md | W1048 | 本批新增/修改（P2·计数旧值 615→616·四源印证） |
+| scripts/check_doc_sync.py | W1048 | W1044 收编（C5e 坑表六主题分项逐项对拍·fail-closed） |
+| scripts/check_plan_template.py | W1048 | W1044 收编（计划目录卫生判据·拦无 .md 扩展名/0 字节坏件） |
+| pytest.ini | W1048 | W1044 收编（pytest_collected 1085→1087 标记跟随） |
+| scripts/output/_vermilion_solid_cache.json | W1048 | 登记面产物（第 49 槽机器缓存自跟随） |
+| archive/scripts/batches/w10xx/_w1013_download.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1018_download.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_download.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_make_spec.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_master.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_pick.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_prepare.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1043_verify.py | W1048 | W1044 收编（minimax 回退清除·铁律 16③） |
+| archive/scripts/batches/w10xx/_w1044_make_spec.py | W1048 | W1044 收编（本批 spec 生成器归档） |
+| docs/11-方案报告/计划方案/执行前计划-W1043-回次og-image全覆盖第四轮.md | W1048 | W1043 收官口径订正（slug 111→112·随本批入库） |
+| docs/11-方案报告/计划方案/执行前计划-W1046-补丁治理与门禁判据加固.md | W1048 | W1046 收编（方案件入库·只出方案不实施·待用户审批） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1048 | 登记面产物（stats 标记自动跟随·W1047 收官余波随本批入库） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1048 | 登记面产物（stats 标记自动跟随·W1047 收官余波随本批入库） |
+| CHANGELOG.md | W1048 | 收官面（顶段 W1048·含 W1047 段订正注） |
+| HANDOVER.md | W1048 | 收官面（最后更新/一、当前进度/四、待办正式登记） |
+| README.md | W1048 | 级联面（版本行） |
+| STRUCTURE.md | W1048 | 级联面（版本行） |
+| AGENTS.md | W1048 | 级联面（脚注滚动） |
+| CITATION.cff | W1048 | 级联面（版本同步） |
+| docs/00-导读/项目说明.md | W1048 | 级联面（当前版本行） |
+| docs/00-导读/W批次编号对账表.md | W1048 | 台账（W1044 行补·W1046 行回填·W1048 行新增） |
+| docs/INDEX.md | W1048 | 登记面（docs 索引） |
+| index.md | W1048 | 登记面（根索引） |
+| archive/docs/AGENTS-ARCHIVE.md | W1048 | 级联归档滚动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1048 | 级联归档滚动 |
+| scripts/output/stats.json | W1048 | 登记面产物（stats 实体） |
+| scripts/output/stats-changelog.json | W1048 | 登记面产物（变更史） |
+| scripts/output/stats-index.md | W1048 | 登记面产物（统计索引） |
+| scripts/output/file-index.md | W1048 | 登记面产物（反向索引） |
+| scripts/output/index.md | W1048 | 登记面产物（output 索引） |
+| scripts/output/tools-inventory.md | W1048 | 登记面产物（工具清单） |
+| scripts/output/README.md | W1048 | 登记面产物（output 说明） |
+| scripts/output/_cascade_files_W1048.txt | W1048 | 级联清单（本批产物） |
+| scripts/output/_w1048_spec.json | W1048 | 本批 spec |
+
 ## W1047 图表判据剥标签根修（2026-10-31）
 
 | 文件 | W | 说明 |
@@ -4828,30 +4873,4 @@ docs/11-方案报告/README.md
 | archive/docs/AGENTS-ARCHIVE.md | W934 | 脚注滚动迁入的最老条目 |
 | CITATION.cff | W934 | version 同步为 W934 |
 | scripts/output/file-index.md | W934 | W934 段插入 |
-
-## W933 共享面串行化机制批（2026-10-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/11-方案报告/计划方案/T22-任务计划执行与经验沉淀报告-2026-10-25.md | W933 | 共享面串行化机制交付报告（计划/执行/验收/复盘/经验沉淀·32/32 判据符合） |
-| docs/00-导读/文档规范.md | W933 | §11.0 共享面并发纪律（认领即占号 / 回填独占 / 收官回填三件套） |
-| scripts/preflight_check.py | W933 | 判据 A 撞号检测（台账同号多行）+ B′ 台账脏行提示 + D 反引号剥离 + E 登记类共享面排除 |
-| scripts/ledger_backfill.py | W933 | 判据 B 独占回填工具（--expect 基线指纹 / --verify 提交前复核 / --append-claim 纯追加认领） |
-| scripts/ledger_close_check.py | W933 | 判据 C 收官回填体检（现役段 W 号须 hash 非占位 + 状态以已收官开头·不挂 verify_delivery 阻塞段） |
-| scripts/_w933_mutation_test.py | W933 | 四判据可证伪性验证（4 组突变 + 4 组对照） |
-| Makefile | W933 | 新增 ledger 目标并接进 ci（第 42 门禁四面引用口径） |
-| scripts/output/_w933_spec.json | W933 | 本批级联 spec |
-| docs/00-导读/W批次编号对账表.md | W933 | W933 认领行与收官回填 |
-| docs/11-方案报告/README.md | W933 | 计划方案分区登记（第 26 行·T-22） |
-| CHANGELOG.md | W933 | W933 段 |
-| HANDOVER.md | W933 | 级联头尾链与里程碑块 |
-| README.md | W933 | 当前批次版本行 |
-| STRUCTURE.md | W933 | 当前批次版本行 |
-| docs/00-导读/项目说明.md | W933 | 当前批次版本行 |
-| site/index.html | W933 | 页脚批次链插入 W933 |
-| site/dukou-engine.html | W933 | 页脚批次链插入 W933 |
-| AGENTS.md | W933 | 版本脚注条目 |
-| archive/docs/AGENTS-ARCHIVE.md | W933 | 脚注滚动迁入的最老条目 |
-| CITATION.cff | W933 | version 同步为 W933 |
-| scripts/output/file-index.md | W933 | W933 段插入 |
 

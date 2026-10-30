@@ -6,7 +6,7 @@
   ② 12 页 og:image 均指向专属 og-<stem>.webp（不再是通用图）
   ③ 12 个 og 版尺寸 == 1200×630 且 ≤300KB
   ④ 缺口复算：100 回中已有配图 44→55 回、缺口 56→45 回
-  ⑤ **未覆盖页未回归**：其余 45 页的 og:image 仍为落位前的取值（66 通用图 + 2 张既有 card-* 专属）
+  ⑤ **未覆盖页未回归**：其余 45 页的 og:image 仍为落位前的取值（43 通用图 + 2 张既有 card-* 专属）
   ⑥ 12 页均含暗色模式隐藏规则 html[data-theme="dark"] .chapter-plate { display: none; }
 
 用法：py -3 scripts/_w1043_verify.py

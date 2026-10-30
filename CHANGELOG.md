@@ -1,3 +1,14 @@
+### W1048（2026-10-31）：P2 治理与孤儿批收编（gates.md 计数订正·CLAUDE 速查补行·W1044 判据件与 minimax 清除·W1046 方案件入库）
+
+> **来源**：2026-10-31 只读基线诊断产出的 P2 治理微批（用户裁决「一笔收编」）——诊断实证 HEAD 三处文档漂移（AGENTS 铁律双写 / gates.md 计数旧值 / CLAUDE 速查漏登）与死会话（ROGSTRIX·已被用户关闭）孤儿暂存，本批一次收编收官。
+>
+> - **文件**：CLAUDE.md、docs/agent/gates.md、scripts/check_doc_sync.py、scripts/check_plan_template.py、pytest.ini、scripts/output/_vermilion_solid_cache.json、archive/scripts/batches/w10xx/_w1013_download.py、archive/scripts/batches/w10xx/_w1018_download.py、archive/scripts/batches/w10xx/_w1043_download.py、archive/scripts/batches/w10xx/_w1043_make_spec.py、archive/scripts/batches/w10xx/_w1043_master.py、archive/scripts/batches/w10xx/_w1043_pick.py、archive/scripts/batches/w10xx/_w1043_prepare.py、archive/scripts/batches/w10xx/_w1043_verify.py、archive/scripts/batches/w10xx/_w1044_make_spec.py、docs/11-方案报告/计划方案/执行前计划-W1043-回次og-image全覆盖第四轮.md、docs/11-方案报告/计划方案/执行前计划-W1046-补丁治理与门禁判据加固.md、docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md、docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md、CHANGELOG.md、HANDOVER.md、README.md、STRUCTURE.md、AGENTS.md、CITATION.cff、docs/00-导读/项目说明.md、docs/00-导读/W批次编号对账表.md、docs/INDEX.md、index.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、scripts/output/stats.json、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/file-index.md、scripts/output/index.md、scripts/output/tools-inventory.md、scripts/output/README.md、scripts/output/_cascade_files_W1048.txt、scripts/output/_w1048_spec.json。
+
+**本批要点**：① **P2 治理**——`docs/agent/gates.md:26` 计数旧值 615→616（四源印证·根因 = sweep_markers 覆盖面不含 gates.md·stats.py:277-280 文件清单实证·覆盖面修复登记次批强制项）+ CLAUDE.md 补第 13 条速查（铁律 15/16/17·49/60 行·C2 锚点三对全写）；② **收编 W1044 孤儿**（原会话终止后无主·自测 33/33 与 9/9 全绿）——check_doc_sync.py 补坑表六主题**分项**逐项对拍（原只核总数·分项陈旧门禁不可见·fail-closed）、check_plan_template.py 补计划目录卫生判据（拦无 .md 扩展名/0 字节坏件）、pytest.ini pytest_collected 1085→1087 标记跟随、archive 7 批脚本清除 `~/.minimax` 硬编码回退改 fail-closed（执行铁律 16③）；③ **收编 W1046 方案件入库**——《补丁治理与门禁判据加固改造方案》39KB（只出方案不实施·**待用户审批**）；④ **W1047 段订正**——已提交 W1047 段的「本批要点/验证/状态」三栏误为 W1045 段内容之复制（生成侧事故），该批实际内容以其「来源」行与 check_chart_data.py diff 为准（剥标签两处根因修复 + 2 例可证伪锁 + 857 页影子对照修复 5 页误吞零漏剥）；历史段不改写，在此订正。
+
+**验证**：check_doc_sync --self-test 33/33 · check_plan_template --self-test 9/9 · stats --check 零差异（24 键）· 收编前全量门禁第 31/32/46/52 槽绿（4 FAIL→1 FAIL·余项为 W1044 在途索引占用随本批清空）· 全量门禁见收官提交。
+
+> - **状态**：已收官（P2 治理落地 + 孤儿批收编 + W1047 段订正·W1046 方案待用户审批）
 ### W1047（2026-10-31）：图表判据剥标签根修（标签语法约束 + 剥离顺序修正）
 
 
@@ -825,7 +836,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1047），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1048），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1863,19 +1874,5 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 **机器证据**：`scripts/output/_w934_d2a_migrate.json`（迁移对账）· `_w934_d2a_residue_before.txt`（清理前演练残留快照）· `_w934_d2a_grants.txt`（授权模型实查）。
 
 **未改**：site/ 任何页面的**内容**（仅级联页脚批次链为全批标准机制）· 任何管控脚本（verify_delivery.py / bump_version.py / batch_cascade.py / preflight_check.py 等）。
-
-
-### W933（2026-10-25）：共享面串行化机制批（规则三条 + 五个机检判据·把台账与 CHANGELOG 的写顺序从自律变成机制）
-
-
-
-> **来源**：W926 站点交互流程审查批收官复盘时，我方主动指出「号段已分开，但台账与 CHANGELOG 的写顺序仍是串行资源——目前靠各方『先登记认领行、后立段』的自律维持，没有机制保证」，并请用户裁决；用户 2026-10-25 答「按你推荐」并选定：**落地上限＝层 1 + 层 2**（规则三条 + 3 个机检判据）、**开工时点＝立即开工并由我方取号**。
-> - **文件**：docs/00-导读/文档规范.md（§11.0 规则三条）、scripts/preflight_check.py（判据 A/B′/D/E）、scripts/ledger_backfill.py（判据 B）、scripts/ledger_close_check.py（判据 C）、scripts/_w933_mutation_test.py（四判据可证伪性）、scripts/output/_w933_spec.json、docs/11-方案报告/计划方案/T22-任务计划执行与经验沉淀报告-2026-10-25.md、ddocs/11-方案报告/README.md。
-> - **产出**：① **层 1 规则三条**（写入 docs/00-导读/文档规范.md §11.0）——**认领即占号**（登记认领行并单独提交后再施工，登记后复跑 preflight 做乐观并发校验）、**回填独占**（回填既有行必须走行指纹校验，禁整文件 git add 台账）、**收官回填三件套**（hash 列非占位 + 状态列以「已收官/已闭环」开头 + touches 列为终值，缺一即视为在途）；② **层 2 五个机检判据**——**A 撞号检测**（台账同一 W 号出现多行 = 撞号，机器可检；插队仅出 NOTE 因后补登记合法）、**B 回填独占**（scripts/ledger_backfill.py：--expect 基线指纹不符即拒写、--verify 提交前复核、--append-claim 纯追加认领）、**C 收官回填体检**（scripts/ledger_close_check.py：现役段 W 号须 hash 非占位且状态以「已收官/已闭环」开头；**不挂 verify_delivery 阻塞段**，避免把伪阻塞从 preflight 挪到门禁）、**D 反引号剥离**（_split_touches 具反引号感知）、**E 登记类共享面排除**（台账与方案报告 README 天然并发，不计入并行写拒绝）；③ **Makefile 新增 ledger 目标并接进 ci**（第 42 门禁四面引用口径）；④ **可证伪性证明**：三工具自测 5 正例 + 8 负例 + 四判据突变 4/4 按预期。
-> - **本批自证出并当场修复的两处机制缺陷**：**D 假绿**——架构会话（W934 批）实测报出「_split_touches 不剥反引号，而台账 touches 列的路径带反引号 ⇒ 与命令行传入的无反引号路径字面不等 ⇒ touches_conflict 恒返空 ⇒『PREFLIGHT PASS·无交集』在真实撞面时假绿」；**E 恒红**——修复 D 后本批立即实跑，发现交集拒绝把「台账认领行」与「方案报告 README 登记行」当普通共享面 ⇒ 每个批次都要写这两面 ⇒ 交集在准入阶段恒红 ⇒ 纪律被架空 ⇒ 改为登记类共享面排除出拒绝，并发保障改由「纯追加 + 精确暂存（update-index --cacheinfo）+ 回填行指纹」承担。**判据 A 的初版语义亦被本批自身实战证伪**（把「并发插队」当「撞号」会误伤合法的后补登记 ⇒ 修订为「同号多行 = 撞号」+ 插队仅 NOTE，见 T22 报告 E-06）。
-> - **交付**：docs/11-方案报告/计划方案/T22-任务计划执行与经验沉淀报告-2026-10-25.md（框架第二十二次执行·32/32 判据符合·模糊词 0·含 §2 号段协调实录与 §4 可行性自评与 §5 六条经验）。
-> - **纪律**：本批 0 处 site/ 与应用代码改动；未改 verify_delivery.py 等禁擅改管控文件（判据改走 Makefile 编排面）；不代改他方台账行与 CHANGELOG 历史段。
-> - **状态**：已落地（本地）。
-> **状态**：**已收官**（W933 a6306896·git 反填·共 3 笔·W971 存量回填）
 
 

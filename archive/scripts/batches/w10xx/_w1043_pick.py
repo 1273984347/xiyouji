@@ -49,7 +49,9 @@ print("已落位专属 og = %d 回 · card 专属 = %d 回 · 缺口 = %d 回" %
 # ---- 已出 slug 全表 ----
 slugs = set()
 for fn in os.listdir(SET):
-    m = re.match(r"plate-line-(\d+)(?:-ch(\d+))?-([a-z0-9-]+)\.png$", fn)
+    # W1044 订正：原正则 `[a-z0-9-]` 大小写敏感 ⇒ 漏掉唯一带大写的存量 slug
+    # `plate-line-06-jiuLingyuansheng` ⇒ 唯一数被少算 1（111 而非 112·W1043 实误）。
+    m = re.match(r"plate-line-(\d+)(?:-ch(\d+))?-([A-Za-z0-9-]+)\.png$", fn)
     if m:
         slugs.add((m.group(2), m.group(3)))
 print("已出母版 = %d 张 · 唯一 slug = %d 个" % (

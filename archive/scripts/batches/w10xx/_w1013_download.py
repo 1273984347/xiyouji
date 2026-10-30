@@ -24,7 +24,7 @@ DEST = os.path.join(REPO, "assets", "promo", "plate-set", "raw", "round15")
 MIN_BYTES = 20000
 # mcode-tools 是宿主注入 PATH 的 .cmd 包装（不在系统 PATH）⇒ Python subprocess 取不到
 # ⇒ 回退到宿主 bin 目录的绝对路径，并对 .cmd 走 shell=True（Windows 下直接 CreateProcess 失败）
-CLI = shutil.which("mcode-tools") or r"C:\Users\12739\.minimax\bin\mcode-tools.cmd"
+CLI = shutil.which("mcode-tools") or "mcode-tools"   # W1044：禁 ~/.minimax 回退（铁律 16③）·缺工具即 fail-closed
 
 
 def jpeg_size(b):

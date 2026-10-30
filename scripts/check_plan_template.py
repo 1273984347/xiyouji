@@ -91,6 +91,25 @@ def run_gate():
     fails = 0
     notes = 0
     lines = []
+    # W1044 补：目录卫生（原判据只扫 *.md ⇒ 无扩展名/0 字节坏件天然免检·W1043 实证）。
+    plan_dir = os.path.join(ROOT, PLAN_REL)
+    try:
+        bad = []
+        for name in sorted(os.listdir(plan_dir)):
+            p = os.path.join(plan_dir, name)
+            if not os.path.isfile(p):
+                continue
+            if not name.endswith('.md'):
+                bad.append((name, '无 .md 扩展名'))
+            elif os.path.getsize(p) == 0:
+                bad.append((name, '0 字节'))
+        for name, why in bad:
+            fails += 1
+            lines.append('  FAIL %s/%s：%s（计划件坏件·W1044 补目录卫生判据）'
+                         % (PLAN_REL, name, why))
+    except OSError as e:
+        fails += 1
+        lines.append('  FAIL %s：目录不可读（%s·fail-closed）' % (PLAN_REL, e))
     for rel in files:
         verdict, d = judge_file(rel)
         if d.get('error'):
