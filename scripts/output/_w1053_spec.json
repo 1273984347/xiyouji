@@ -63,6 +63,8 @@
   "| docs/00-导读/W批次编号对账表.md | W1053 | 台账（W1053 行新增） |",
   "| scripts/output/script-coverage-baseline.txt | W1053 | 登记面（M-01 patch_ratio.py 影子豁免登记） |",
   "| pytest.ini | W1053 | 登记面产物（pytest_collected 标记 sweep 跟随） |",
-  "| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1053 | 登记面产物（report_docs 标记 sweep 跟随） |"
+  "| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1053 | 登记面产物（report_docs 标记 sweep 跟随） |",
+  "| scripts/index.md | W1053 | 登记面（scripts 目录索引·M-01 新脚本登记） |",
+  "| scripts/output/_vermilion_solid_cache.json | W1053 | 登记面产物（第 49 槽机器缓存自跟随） |"
  ]
 }

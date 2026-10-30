@@ -50,7 +50,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（167）
+## 文件（168）
 
 ### Markdown 文档
 
@@ -173,6 +173,7 @@
 - `obs_sample.py`
 - `optimize-html-size.py`
 - `package_analysis_sync.py`
+- `patch_ratio.py`
 - `perf_monitor.py`
 - `perf_optimize.py`
 - `plan_template_review.py`
