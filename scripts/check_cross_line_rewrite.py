@@ -57,10 +57,14 @@ def _can_cross_line(pat):
 
     关键判定：字符类的**排除符**里若含 `\\n` / `\\r`（转义形式），该类**不匹配换行** ⇒ 安全。
     ⇒ `[^\n]*` / `[^\r\n]*` **不会跨行**（首测把 `//[^\n]*` 误报为高危即源于此）。
+
+    W1045 修（archive 域 129 处复核的判据盲区）：**`\\s` 也排除换行**（`\\s` = 空格 + 制表 +
+    换行 + 回车 + 换页 + 垂直制表）⇒ 排除符含 `\\s` 的字符类同样**不跨行**。
+    原实现未识别 ⇒ `_w616_zhuangshi_folder.py:92` 被误判为可跨行（实测不可跨行）。
     """
     for m in RE_NEGCLASS_STAR.finditer(pat):
         excl = m.group(1)
-        if "\\n" in excl or "\\r" in excl:
+        if "\\n" in excl or "\\r" in excl or "\\s" in excl:
             continue          # 该字符类排除换行 ⇒ 整条模式不跨行（就此段而言）
         return True
     return False
@@ -76,7 +80,7 @@ def _has_tail_anchor(pat):
     """
     for m in RE_NEGCLASS_STAR.finditer(pat):
         excl = m.group(1)
-        if "\\n" in excl or "\\r" in excl:
+        if "\\n" in excl or "\\r" in excl or "\\s" in excl:
             continue
         tail = pat[m.end():]
         if tail and RE_LITERAL_ANCHOR.search(tail[:2]):
@@ -108,16 +112,25 @@ BASELINE_PATH = os.path.join(ROOT, "scripts", "cross_line_baseline.json")
 
 
 def _item_key(item):
-    """基线键 = **内容指纹**（文件 + 模式 + 替换语义 ⇒ 内容哈希），**不含行号**。
+    """基线键 = sha256(文件 + **完整模式** + **完整替换串** + 行号)，前 12 位。
 
-    W1043 对抗审查 P1-2 实测：原键为「文件:行」⇒ ① 该行**原地**被改成危险删除型
-    （行号不变）② 上方增删行导致行号位移 ⇒ 两种情形键都不变 ⇒ 新危险候选被**静默
-    豁免**（门禁仍 PASS）⇒ 恰是它要防的场景。
-    ⇒ 改用内容指纹：源码一改（模式/替换语义变）⇒ 键必变 ⇒ 门禁判红。
+    W1043 轮改过一次（行号 → 内容指纹）⇒ **堵死**了「原地改写/行号位移静默豁免」，
+    但 W1045 轮对抗审查**实测出三类新残余豁免**（仓外沙箱 A/B 实证）：
+      ① 同文件**新增同模式调用点** ⇒ 纯内容指纹碰撞 ⇒ 漏拦；
+      ② 替换串**语义变更**（`""` → `"REPLACED"`）而 `repl` 三分类不变 ⇒ 键不变 ⇒ 漏拦；
+      ③ 模式 >160 字符被**截断**后参与计算 ⇒ 不同模式可能撞键。
+
+    ⇒ 本版把「键的四个输入」定为：文件 + 完整模式 + 完整替换串 + 行号：
+      · 原地改写 ⇒ 模式/替换串变 ⇒ 换键 ✓
+      · 替换串语义变更 ⇒ 换键 ✓
+      · 模式超长 ⇒ **不截断**（截断只用于显示）⇒ 不撞键 ✓
+      · 同文件新增同模式调用点 ⇒ 行号不同 ⇒ 换键 ✓
+      · 行号漂移（上方增删行）⇒ 换键 ⇒ **报「基线外新增」**（宁可多报·安全侧：
+        人来确认一次，比静默豁免真缺陷便宜得多）
     """
     sig = hashlib.sha256(
-        ("%s|%s|%s" % (item["file"], item["pattern"], item["repl"])).encode("utf-8")
-    ).hexdigest()[:12]
+        ("%s|%s|%s|%d" % (item["file"], item["pattern_full"], item["repl_full"], item["line"]))
+        .encode("utf-8")).hexdigest()[:12]
     return "%s#%s" % (item["file"], sig)
 
 
@@ -132,10 +145,19 @@ def _load_baseline():
 
 
 def _write_baseline(keys):
-    """写基线（**不写生成时间戳**——否则每次跑都变·门禁跑完须 add 还不收敛）。"""
+    """写基线（**不写生成时间戳**——否则每次跑都变·门禁跑完须 add 还不收敛）。
+
+    键口径（W1045 订正）：`文件#sha256(完整模式|完整替换串|行号)` 前 12 位 ⇒
+    原地改写 / 替换串语义变更 / 同文件新增同模式调用点 / 模式超长截断 **四类漏拦
+    路径全部换键**；行号漂移亦换键 ⇒ 报「基线外新增」（宁可多报·安全侧）。
+    """
     payload = {
-        "note": "已人工复核确认「跨行匹配但无害」的候选清单（键 = 文件:行）。"
-                "危害性取决于替换结果是否真被消费，静态判据无法判定 ⇒ 以复核结论为准。",
+        "note": "已人工复核确认「跨行匹配但无害」的候选清单（键 = 文件#内容指纹）。"
+                "危害性取决于替换结果是否真被消费（写回磁盘 / 返回给调用方并被后续使用 / "
+                "仅用于检查），静态判据到不了这一轴 ⇒ 以复核结论为准。"
+                "键口径：sha256(完整模式|完整替换串|行号) 前 12 位——"
+                "原地改写、替换串语义变更、同文件新增同模式调用点、模式超长截断 四类漏拦路径均换键；"
+                "行号漂移亦换键 ⇒ 报「基线外新增」（宁可多报·安全侧）。",
         "confirmed": sorted(keys),
     }
     txt = json.dumps(payload, ensure_ascii=False, indent=1) + "\n"
@@ -202,8 +224,13 @@ def scan():
                     if not RE_NEGCLASS_STAR.search(pat):
                         continue
                     cross = _can_cross_line(pat)
+                    _rep = _replacement_of(node)
                     item = {"file": rel, "line": node.lineno,
                             "func": fn_name, "pattern": pat[:160],
+                            # 键计算用**未截断**的模式与替换串（W1045 对抗审查 P2-2：
+                            # 显示截断参与计算 ⇒ 不同模式撞键 ⇒ 漏拦）
+                            "pattern_full": pat,
+                            "repl_full": _rep if _rep is not None else "<fstring-or-unknown>",
                             "cross": cross, "anchor": _has_tail_anchor(pat),
                             "repl": _replacement_kind(node)}
                     if fn_name in ("sub", "subn"):
@@ -286,6 +313,12 @@ def _self_test():
         _repl_kind_of_call('re.sub(r"<[^>]+>", r"\\g<0>", text)') == "backref")
     add("⑪ AST 级：repl 为函数 ⇒ unknown（静态不可判）",
         _repl_kind_of_call('re.sub(r"<[^>]+>", lambda m: m.group(0), text)') == "unknown")
+
+    # ⑫ 排除符含 `\s` ⇒ `\s` 亦排除换行 ⇒ **不跨行**（W1045 archive 域 129 处复核的判据盲区：
+    #     原实现未识别 `\s` ⇒ `_w616_zhuangshi_folder.py:92` 被误判可跨行·实测不可跨行）
+    add("⑫ 排除符含 `\\s` ⇒ 判不跨行（`\\s` 亦排除换行）",
+        not _can_cross_line(r"[^\s]*"),
+        "cross=%s" % _can_cross_line(r"[^\s]*"))
 
     ok = True
     for name, passed, detail in cases:

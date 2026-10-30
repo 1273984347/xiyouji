@@ -1,3 +1,19 @@
+### W1045（2026-10-31）：改写面候选逐处复核 + 存量陈旧清理 + og 切头 A+ 修复
+
+
+
+> **来源**：用户 2026-10-30「先做这两个再继续剩余 42 回扩量」——① mid 桶 112 处 + archive 域 97 处 YELL 候选逐处复核 ② 存量陈旧（`gates.md`「50 槽」实为 52 + 跨行基线失效项清理）；同日用户裁决 og 社交卡切头修复范围取 **A+**（只修真被切者·不做存量版式统一）。
+>
+> **基线实读**：候选清单实扫 167 处（scripts 域 38 = RED 23 + YELL 15；archive 域 129 = RED 32 + YELL 97）· 逐处结论 167 条（真缺陷 13 · 假阳 124 · 只读 30）· 坑表 133 → 138 条 · 槽位实算 gates.md 正文 1–52 无缺号 · og 顶边墨迹逐张实算 124 张。
+>
+> - **文件**：.agent/skills/puti-shouye/SKILL.md、.github/workflows/README.md、AGENTS.md、CHANGELOG.md、CITATION.cff、HANDOVER.md、README.md、STRUCTURE.md、archive/docs/AGENTS-ARCHIVE.md、archive/docs/CHANGELOG-ARCHIVE.md、archive/docs/W批次编号对账表-ARCHIVE.md、archive/docs/file-index-ARCHIVE.md、archive/scripts/batches/w10xx/README.md、archive/scripts/batches/w10xx/_w1042_make_spec.py、archive/scripts/batches/w10xx/_w1045_make_spec.py、archive/scripts/batches/w10xx/index.md、archive/scripts/batches/w6xx/_w661_close_cascade.py、archive/scripts/batches/w6xx/_w662_close_cascade.py、archive/scripts/batches/w6xx/_w663_close_cascade.py、archive/scripts/batches/w6xx/_w666_close_cascade.py、archive/scripts/batches/w6xx/_w667_close_cascade.py、archive/scripts/batches/w6xx/_w668_close_cascade.py、archive/scripts/batches/w6xx/_w669_close_cascade.py、archive/scripts/batches/w6xx/_w670_close_cascade.py、archive/scripts/batches/w6xx/_w671_close_cascade.py、archive/scripts/batches/w6xx/_w676_close_cascade.py、archive/scripts/batches/w6xx/_w679_close_cascade.py、archive/scripts/batches/w6xx/_w684_close_cascade.py、archive/scripts/batches/w6xx/_w691_close_cascade.py、docs/00-导读/W批次编号对账表.md、docs/00-导读/项目说明.md、docs/11-方案报告/README.md、docs/11-方案报告/审查与评审/改写面候选逐处复核与存量陈旧清理报告-W1045.md、docs/11-方案报告/计划方案/执行前计划-W1045-改写面候选逐处复核与存量陈旧清理.md、docs/INDEX.md、docs/agent/gates.md、docs/agent/pitfalls.md、index.md、scripts/README.md、scripts/batch_cascade.py、scripts/check_crop.py、scripts/check_cross_line_rewrite.py、scripts/cross_line_baseline.json、scripts/output/README.md、scripts/output/_cascade_files_W1045.txt、scripts/output/_vermilion_solid_cache.json、scripts/output/_w1043_batch_a.json、scripts/output/_w1045_spec.json、scripts/output/file-index.md、scripts/output/index.md、scripts/output/stats-changelog.json、scripts/output/stats-index.md、scripts/output/stats.json、scripts/output/tools-inventory.md、scripts/subject_band.py、site/data/cross-time-danmaku.html、site/data/search.html、site/data/tag-cloud.html、site/dukou-engine.html、site/en/search.html、site/index.html、site/static/images/og-plate-line-59-ch089-huangshi.webp、site/static/images/og-plate-line-81-ch074-qingshi.webp、site/static/images/og-plate-line-85-ch053-ruyizhenxian.webp、site/static/images/og-plate-line-87-ch094-taiyinxingjun.webp、site/static/images/og-plate-line-88-ch073-duomuguai.webp、site/static/images/og-plate-line-90-ch090-yijiukutianzun.webp、site/static/images/og-plate-line-91-ch071-jiuling-shiba.webp、site/static/images/og-plate-line-92-ch086-bihan-bishu.webp、site/static/images/og-plate-line-93-ch095-yumian.webp、site/static/images/og-plate-line-94-ch029-bengpo-baboren.webp、site/static/images/og-plate-line-95-ch085-diyongfuren.webp、site/static/images/og-plate-line-96-ch097-xiniu.webp、tests/unit/test_cross_line_rewrite.py。
+
+**本批要点**：① **两路逐处复核 167 处候选**——scripts 域 38 处（真缺陷 **0** · 假阳 18 · 只读 20）· archive 域 129 处（真缺陷 **13** · 假阳 106 · 只读 10）；② **真缺陷 13 处**同族同形态（close_cascade 家族「项目说明列表行」正则末尾 `[^·]*` 无尾锚点 ⇒ 替换时静默吞掉「当前版本」行之下的「当前阶段」「关键产出」两行·构造实验行数 5 → 2）⇒ **两处**排除符都补 `\n\r`（只补末尾一处时扫描器仍判可跨行）· 行为中性；③ **判据升级**——基线键由内容指纹升为**四输入**（文件|完整模式|完整替换串|行号）⇒ 堵死三类残余豁免（同文件新增同模式调用点 / 替换串语义变更 / 超长模式显示截断撞键）；跨行判定补 `\s` 盲区（`\s` 亦排除换行）· 自测 11 → 12 例；④ **存量陈旧清理**——槽数三处统一 **52**（gates.md 标题 / HANDOVER 指针 / scripts/README）· 基线失效项清理（50 → 44）· `docs/11-方案报告/README.md` 4 条登记行由末尾游离表迁回各分区表尾 + §五 15 → 16 / §六 51 → 54（按磁盘实算）；⑤ **og 切头 A+ 修复**——按用户裁决「缺陷修复与版式统一分开记账」：回退 **99** 张无缺陷存量的版式改写、保留 **13** 张（本批 12 张中 5 张真被切 + 存量同类 2 张）⇒ 保留张顶边留白 27–31px、**0 张被切**·落位验收仍 0 FAIL；⑥ **坑表 +5 条**（133 → 138）· 治理声明对账 0 FAIL。
+
+**验证**：逐处结论 167/167 · 真缺陷修复 13/13 · 扫描器自测 12/12 · 扫描器单测 9 passed · 跨行门禁 0 FAIL（基线外新增 0 处）· 治理声明对账 0 FAIL（坑表 138）· og 保留张顶边 27–31px（0 张被切）· 母版判据 124/0 · 裁切验算 124/0 · 落位验收 0 FAIL · 全量门禁见收官提交。
+
+> - **状态**：已收官（复核 167 处 + 真缺陷 13 处已修 + 判据升四输入 + 存量陈旧清理 + og A+ 修复 + 坑表 +5 条·待用户裁决 check_chart_data 剥标签取舍）
+
 ### W1043（2026-10-31）：回次 og:image 全覆盖批·第四轮（12 张线描立像/场面）
 
 
@@ -795,7 +811,7 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1043），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1045），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -1847,36 +1863,5 @@ candidate = max(台账 max W, CHANGELOG 顶段 W, 已预约集合) + 1；写入 
 > - **纪律**：本批 0 处 site/ 与应用代码改动；未改 verify_delivery.py 等禁擅改管控文件（判据改走 Makefile 编排面）；不代改他方台账行与 CHANGELOG 历史段。
 > - **状态**：已落地（本地）。
 > **状态**：**已收官**（W933 a6306896·git 反填·共 3 笔·W971 存量回填）
-
-
-### W932（2026-10-25）：站点 Hero 素材图成套批（六张 16:9 浓墨剪影·锚点复用成熟段·底部净空带供叠字）
-
-> **来源**：用户 2026-10-25 令「帮我做几张素材图」并要求「用途与画幅、风格与配色统一、主体清晰、留好放文字的空间都考虑到，成套出图保证风格一致」，且明令「开始前先问我：素材用在哪里、需要几张、有没有参考风格」；本会话按问卷答复（用途=站点 Hero 横幅 16:9 · 数量=6 张 · 参考=沿用 `assets/promo/hero-main-visual.png` 主视觉「宣纸底浓墨剪影+朱砂钤记」· 主题=人物叙事/法器符号/世界观场景/学术概念四类全覆盖）执行。
-> - **文件**：site/static/images/hero-10-mingfu-panwang.webp、hero-11-chiping-boshan.webp、hero-12-jingu-jingangchui.webp、hero-13-wujingshan-liangjie.webp、hero-14-donghai-longgong.webp、hero-15-liudao-lunhui.webp、site/static/images/index.md、scripts/_w929_gen_args.py、scripts/_w929_gen_args_v2.py、scripts/_w929_gen_args_v3.py、scripts/_w929_process.py、scripts/_w929_seal_normalize.py、scripts/_w929_verify.py、scripts/output/_w932_spec.json、scripts/output/_cascade_files_W932.txt、dCHANGELOG.md。
-> - **锚点纪律**：art direction 段（宣纸 #FAF7F0 / 玄墨 #221D16 / 淡墨 #6B6455 / 单一朱砂 #C8463A / 赭金 #E9B885 五色锁死）与「松散枯笔湿染」笔触句、16:9 构图句（主体止于上 2/3 + 下三分之一完全空白宣纸）——**逐字复用 W893**，本批只改两处并逐条留痕：① 笔触段由「淡彩湿染」加强为「浓墨剪影为主、淡墨为辅」对齐主视觉观感；② 禁项清单移除 seal stamp，改写为「唯一允许的印记 = 右上角极小朱砂方印（抽象笔画·不可辨识字符）」——用户点名的参考风格含「朱砂钤记」。
-> - **六张主题分配**：人物叙事 2（冥府判官队列 / 持瓶菩萨立像）+ 法器符号 1（紧箍与金刚杵静物）+ 世界观场景 2（五行山两界山 / 东海龙宫水殿）+ 学术概念 1（六道轮回轮抽象水墨）· 编号接续既有 hero-01 至 hero-09 · 题材全部避开既有 9 张 hero 与 27 张 card 撞车。
-> - **量化验收**（脚本量测·非目视断言）：成品 2560×1440 = 精确 16:9（源 2752×1536 实为 1.7917 → 裁宽 21px 居中 → LANCZOS 缩放）；底部净空带 282 至 557 px（19.6% 至 40.8%）；上 72% 主体墨量 11.92% 至 77.82%；严格朱砂 0.11% 至 1.52%（上限 8%）；主底色 5 值同落 #FAF2E7 / #FAF5EC / #FAF6EA / #FBF5EB / #FCF6ED 暖白族；规则线扫描 0 命中；单件 64.2 至 346.9 KB。
-> - **三轮返工（逐轮病因不同）**：v1 量化全绿但**目视**抳出钤印形态漂移（hero-10 竖长条印 / hero-12 椭圆印 / 其余四方）→ v2 把形态写死为正方形后**印面被画成清晰篆字形**（伪汉字观感·撞零文字纪律）→ v3 把印面限定为纯朱砂色块+不规则留白后 hero-10 / hero-12 达成，另四张改走**交付端印面归一**（`scripts/_w929_seal_normalize.py`：只重绘右上角那枚小印的印面·主体与留白分毫不动）⇒ 五张印面归一为同一程序质感、零可读文字；**一处如实保留差异**：hero-10 的模型原版印是「朱红块 + 带白斑」两段结构（自动扩张会框成 225×174 巨块·实测涂坏画面）⇒ 保留模型原印，其斑驳浓艳质感与其余五张略异，网页 Hero 显示尺度（约 30 px）下不可辨。
-> - **两处工具自身缺陷（先红后绿）**：① 窄朱砂阈值（R-B>45）在朱文印（红字白底）上只框到印的一角（hero-15 实测偏到右下角）→ 改数据驱动定框（宽松阈值取初始 bbox + 向四边迭代扩张吸附朱砂分布边界）；② 宽松阈值定得太松时**赭金 #E9B885（R-B=100）被误判为朱砂**（W853 已记过的赭金误判坑）致扩张跑飞涂到画幅边缘 → 收紧为 R-B>40 且 G<130 并限制最大外扩量。
-> - **无文字纪律**：六张均无文字、无落款、无水印，钤印印面为抽象笔画/颜料斑驳，无任何可辨识字符。
-> - **接入提示（本地裁切实测·非推断）**：按现网 `.hero` 的 `background-size: cover` + `background-position: center bottom` 做本地裁切模拟（容器 1440×520）——**本批六张主体清晰落在可见区、下方约四成是空白叠字带**；同参数下现有 `hero-01-xihai-yunhai.webp` 的主体反而几乎被裁没（只剩山脊一条）⇒ 本批可直接作首屏 cover 背景接入。若后续容器更矮或改 `center top`，需重新裁切复核。改动仅涉 `site/index.html` 一行样式，本批**未擅自改**（站点接入交由用户决定）。
-> - **范围纪律**：只新增 `site/static/images/` 下六个素材文件 + 本批脚本与 spec，不改任何页面（站点接入交由用户决定）、不改门禁件、不推送远端。
-> **状态**：**已停止**（W932 零提交·git 事实标注·W971 存量回填）
-
-### W931（2026-10-25）：首页 Hero 横幅素材图成套批（线描版 8 张 · 2400×1017 · 左半留白供叠字）
-
-> **来源**：用户 2026-10-25 令「帮我做几张素材图：用途与画幅、风格与配色统一、主体清晰、留好放文字的空间都考虑到，成套出图保证风格一致」+ 明文要求「开始前先问我：素材用在哪里、需要几张、有没有参考风格」；问卷答复 = 首页 Hero 横幅 **2400×1017** · **8 张** · 沿用 `assets/design/ai-concepts/` 的 c2 线描概念图 + 现有色板。
-
-> - **文件**：assets/promo/hero-set/hero-line-01~08.{png,webp}、assets/promo/hero-set/preview-contact-sheet.{png,webp}、assets/promo/hero-set/raw/hero-0X-*.jpg、assets/promo/hero-set/README.md、assets/promo/hero-set/index.md、assets/promo/hero-set/raw/README.md、assets/promo/hero-set/raw/index.md、assets/promo/index.md、STRUCTURE.md
-
-**规格与机器判据**：8 张共用同一条逐字风格母版（宣纸 `#FAF7F0` · 墨 `#23201A` · 赭金 `#8A6D3B` · 单点朱砂 `#C8463A` + 纯墨线无实心填充 + 禁文字禁印章禁水印 + 左侧 46% 纯留白）⇒ 成套一致性由「同母版」保证。画幅 `2400×1017`（`21:9` 出图后按 `2400/1017` 精确裁切·不拉伸）；**左侧 46% 文字安全区墨量实测 0.0000–0.0014（8/8 达标）**·主体墨量落右半区（整图 2.11%–8.11%）。
-
-**一处返工留证**：07 芭蕉扇首版扇面被画成**黑色实心块**（主体墨量 26.2%·与其余 7 张 3%~8% 断层）⇒ 判破套并重出，复测 7.72% 回到套内；**AI 伪文字人工放大 2× 复核**（04 司南盘面字符状符号验明为回纹刻纹非乱码·06 九环锡杖同验）——机器判据抓不到伪文字，只能放大看。
-
-**落位与接入**：新目录 `assets/promo/hero-set/`（8×PNG 母版 + 8×WebP 站点版 + 成套一览拼图 + 8 张出图原件 `raw/` + README/index ×2）·站点 Pages 只发布 `site/`，接入前须复制到 `site/static/images/`，方法写在该目录 README（背景图 + `background-position: right center` 保住「主体在右·文字在左」版面约定）·**未改 `site/index.html`**。与并行 **W932** 素材批（渲染型浓墨剪影 `hero-10~15` · 2560×1440 · 落 `site/static/images/`）路径零重叠，两套视觉语言并存、接入由用户决定。
-
-> - **验证**：8/8 出图成功（批量 `generate_image` 零失败）·2400×1017 尺寸 8/8 实测一致 ·左侧留白区墨量 0.0000–0.0014（8/8 达标）·AI 伪文字人工放大复核 2 张（04/06）·成套一览拼图逐张目视复核全过
-> - **状态**：在途（素材已落盘并暂存·认领登记 W931·站点接入待用户决定）
-> **状态**：**已收官**（W931 08f1f927·git 反填·共 2 笔·W971 存量回填）
 
 

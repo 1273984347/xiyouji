@@ -4,7 +4,7 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-10-31 01:09
+生成时间：2026-10-31 02:10
 
 共 **160** 件（门禁与校验 72 · 批次与登记 12 · 统计与对账 3 · 生成与索引 6 · 运维与临时区 1 · 工具 60 · 一次性（下划线前缀） 6）
 
@@ -30,7 +30,7 @@
 | `check_content_hygiene.py` | check_content_hygiene.py — 全仓内容卫生扫描（W973 沉淀·W967 问责的全仓版探针）。 |
 | `check_contract_smoke.js` | scripts/check_contract_smoke.js — W583：契约冒烟门禁（O3·file:// EMBEDDED 路径） |
 | `check_corruption.py` | check_corruption.py — 机械腐蚀与插件引用静态门禁（W424 复盘沉淀） |
-| `check_crop.py` | check_crop.py — 验站点版「只裁上部留白」没有切坏主体 |
+| `check_crop.py` | check_crop.py — 验站点版与 og 卡「裁切没有切坏主体」 |
 | `check_cross_line_rewrite.py` | check_cross_line_rewrite.py — 同族扫描：改写面正则的「跨行静默删内容」风险清单 |
 | `check_css_decl_separators.py` | 声明分隔门禁（第 35 门禁 · W673/WP-2.6）——防 CSS 缺分号静默吞声明。 |
 | `check_css_orphan_selectors.py` | 孤立选择器门禁（第 36 门禁 · W673/WP-2.6）——防选择器残缀/裸标签残缺行。 |

@@ -466,9 +466,13 @@ def _face_citation(ctx):
     # ---------- CITATION.cff（W628 起第 10 面：version/date-released 随批同步——第 27 门禁 R2 面） ----------
     p = "CITATION.cff"
     s, nl = load(p)
-    out = re.sub(r'(?m)^version:\s*"[^"]+"', f'version: "{ctx.batch}"', s, count=1)
-    out = re.sub(r'(?m)^date-released:\s*"[^"]+"', f'date-released: "{ctx.date}"', out, count=1)
+    # W1045 加固（子代理复核建议·零行为变化）：`\s*` 含换行 ⇒ 理论上可跨行匹配
+    # ⇒ 改为 `[ \t]*`（只匹配行内空白）并补「替换前后行数不变」断言——
+    # 本组 6 处里唯一无行数断言的面（其余 5 面 W1005 已行锚定化并带行数断言）。
+    out = re.sub(r'(?m)^version:[ \t]*"[^"]+"', f'version: "{ctx.batch}"', s, count=1)
+    out = re.sub(r'(?m)^date-released:[ \t]*"[^"]+"', f'date-released: "{ctx.date}"', out, count=1)
     assert out != s, "CITATION.cff 版本/日期行未变化"
+    assert out.count("\n") == s.count("\n"), "CITATION.cff 替换前后行数不一致（跨行匹配吞内容）"
     ctx.pend.append((p, out, nl))
 
 
@@ -554,6 +558,10 @@ def main():
     ap.add_argument("--apply", action="store_true")
     ap.add_argument("--allow-gap", default="",
                     help="允许的在途缺口 W 号（逗号分隔·须台账有认领行且 CHANGELOG 无段·W895 新增）")
+    ap.add_argument("--skip-changelog", action="store_true",
+                    help="跳过 CHANGELOG 面（段改由 backfill_changelog.py 按号序补·"
+                         "用于「并行批次占号未立段」的号段缺口；此时 --allow-gap 的号"
+                         "**不要求**台账有认领行·只要求 CHANGELOG 无该段）")
     args = ap.parse_args()
     spec = json.load(open(args.spec, encoding="utf-8"))
     pre_issues = precheck(spec)
@@ -569,7 +577,25 @@ def main():
         "head_sentence 禁含全角括号——会破坏下一批「当前 HEAD 句」断言的 [^）]* 匹配（W649 实证：W648 嵌套括号致本批断言 FAIL，交接文档已手工修复）"
     )
     _assert_status_wnum(spec, ctx.batch)  # W956/P-43-05：段状态认领登记 W 号 == 本段号（E-28 防线）
-    _face_changelog(ctx)
+    if args.skip_changelog:
+        # 跳过 CHANGELOG 面（W1045 新增）：段由 `backfill_changelog.py --only <W号>` 按号序补
+        # （场景：并行批次占号未立段 ⇒ 号段出现缺口·正常级联的「段号必须 == 顶段+1」断言
+        #  无法通过）。此处仍需算出 new_w/new_rule 供其余 9 个「当前态」面使用。
+        _cs = open(os.path.join(ROOT, "CHANGELOG.md"), encoding="utf-8").read()
+        _cm = re.search(r"^### (?:v[\d.]+（[^）]*）：W(\d+)|W(\d+)（[^）]*）：)", _cs, re.M)
+        assert _cm, "CHANGELOG 未找到现役段"
+        _cur_w = int(_cm.group(1) or _cm.group(2))
+        ctx.cl_src = _cs
+        ctx.new_w = _cur_w + 1 + len(ctx.allow_gap)
+        ctx.new_rule = "（W001-W%d）" % ctx.new_w
+        assert ctx.batch == "W" + str(ctx.new_w), (
+            "批次号应为 W%d（现役段 W%d + 在途缺口 %s）" % (ctx.new_w, _cur_w, ctx.allow_gap))
+        for _g in ctx.allow_gap:
+            assert "### " + _g not in _cs, "缺口 %s 已有段（无需允许）" % _g
+        print("[SKIP-CHANGELOG] 段由 backfill 补·new_w=W%d（在途缺口 %s）"
+              % (ctx.new_w, "、".join(ctx.allow_gap) or "无"))
+    else:
+        _face_changelog(ctx)
     _face_three_docs(ctx)
     _face_handover(ctx)
     _face_workflows(ctx)
